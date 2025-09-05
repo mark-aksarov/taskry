@@ -18,16 +18,14 @@ const TestBottomSheet = (
   return (
     <>
       <Button {...triggerProps} label="Open Bottom Sheet" />
-      {state.isOpen && (
-        <BottomSheet {...props} state={state}>
-          <Dialog>
-            <DialogHeader>Bottom sheet title</DialogHeader>
-            <DialogBody>
-              <TextField label="Name" placeholder="Start typing ..." />
-            </DialogBody>
-          </Dialog>
-        </BottomSheet>
-      )}
+      <BottomSheet {...props} state={state}>
+        <Dialog>
+          <DialogHeader>Bottom sheet title</DialogHeader>
+          <DialogBody>
+            <TextField label="Name" placeholder="Start typing ..." />
+          </DialogBody>
+        </Dialog>
+      </BottomSheet>
     </>
   );
 };
@@ -85,7 +83,8 @@ describe("BottomSheet", () => {
     expect(bottomSheet).toBeInTheDocument();
 
     await user.keyboard("[Escape]");
-    expect(bottomSheet).not.toBeInTheDocument();
+
+    waitFor(() => expect(bottomSheet).not.toBeInTheDocument());
   });
 
   test("should close the bottom sheet when the close button is clicked", async () => {
@@ -100,7 +99,9 @@ describe("BottomSheet", () => {
 
     const closeButton = screen.getByRole("button", { name: "Close" });
     await user.click(closeButton);
-    expect(bottomSheet).not.toBeInTheDocument();
+    await waitFor(() => {
+      expect(bottomSheet).not.toBeInTheDocument();
+    });
   });
 
   test("should close the bottom sheet when clicked outside", async () => {

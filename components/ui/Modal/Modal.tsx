@@ -12,13 +12,13 @@ export type ModalProps = ModalOverlayProps &
   React.RefAttributes<HTMLDivElement>;
 
 const modalStyles = tv({
-  base: "w-[490px] overflow-hidden rounded-xl border border-gray-300 bg-white dark:border-gray-600 dark:bg-gray-800",
+  base: "w-[490px] overflow-hidden rounded-xl border border-gray-300 bg-white transition duration-150 dark:border-gray-600 dark:bg-gray-800",
   variants: {
     isEntering: {
-      true: "",
+      true: "scale-95 opacity-0",
     },
     isExiting: {
-      true: "",
+      true: "scale-95 opacity-0",
     },
   },
 });

@@ -2,6 +2,7 @@ import clsx from "clsx";
 import React, { useMemo } from "react";
 import { mergeRefs } from "@react-aria/utils";
 import { OverlayTriggerState } from "react-stately";
+import { AnimatePresence, motion } from "motion/react";
 import { OverlayTriggerStateContext } from "react-aria-components";
 import { AriaModalOverlayProps, Overlay, useModalOverlay } from "react-aria";
 
@@ -15,15 +16,39 @@ export type BottomSheetProps = AriaModalOverlayProps &
   BottomSheetOwnProps &
   React.RefAttributes<HTMLDivElement>;
 
-export const BottomSheet = ({
+const motionVariants = {
+  hidden: { translateY: "100%" },
+  visible: { translateY: 0 },
+};
+
+export const BottomSheet = ({ state, ...props }: BottomSheetProps) => {
+  return (
+    <AnimatePresence>
+      {state.isOpen && (
+        <MotionBottomSheet
+          variants={motionVariants}
+          initial="hidden"
+          animate="visible"
+          exit="hidden"
+          transition={{ duration: 0.15 }}
+          state={state}
+          {...props}
+        />
+      )}
+    </AnimatePresence>
+  );
+};
+
+const BottomSheetInner = ({
   state,
   className,
   children,
+  ref,
   ...props
 }: BottomSheetProps) => {
-  const ref = React.useRef(null);
-  const { modalProps, underlayProps } = useModalOverlay(props, state, ref);
-  const mergedRefs = useMemo(() => mergeRefs(props.ref, ref), [props.ref, ref]);
+  const innerRef = React.useRef(null);
+  const { modalProps, underlayProps } = useModalOverlay(props, state, innerRef);
+  const mergedRefs = useMemo(() => mergeRefs(ref, innerRef), [ref, innerRef]);
 
   return (
     <OverlayTriggerStateContext.Provider value={state}>
@@ -49,3 +74,5 @@ export const BottomSheet = ({
     </OverlayTriggerStateContext.Provider>
   );
 };
+
+const MotionBottomSheet = motion.create(BottomSheetInner);

@@ -41,7 +41,6 @@ const meta = {
     className: "max-w-[400px]",
     overlayClassName: "w-[var(--trigger-width)]",
     isDisabled: false,
-    isDissmissible: true,
   },
   render: ({ locale, ...args }) => (
     <I18nProvider locale={locale}>

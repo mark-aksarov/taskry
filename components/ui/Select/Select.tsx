@@ -81,9 +81,7 @@ export const Select = <T extends object = any>({
       >
         {props.label}
       </span>
-
       <HiddenSelect {...hiddenSelectProps} />
-
       <SelectButton
         {...triggerProps}
         ref={triggerRef}
@@ -92,7 +90,6 @@ export const Select = <T extends object = any>({
         state={state}
         validation={validation}
       />
-
       {validation.isInvalid && props.errorMessage && (
         <span className={fieldErrorStyles()}>
           {typeof props.errorMessage === "function"
@@ -100,27 +97,29 @@ export const Select = <T extends object = any>({
             : props.errorMessage}
         </span>
       )}
-
-      {state.isOpen &&
-        (overlayType === "bottomsheet" ? (
-          <BottomSheet state={state} className={overlayClassName}>
-            <Dialog aria-labelledby={menuProps["aria-labelledby"]}>
-              <SelectListBox {...listBoxProps} />
-            </Dialog>
-          </BottomSheet>
-        ) : (
-          <Popover
-            state={state}
-            triggerRef={triggerRef}
-            placement="bottom start"
-            className={overlayClassName}
-            style={{ "--trigger-width": buttonWidth } as React.CSSProperties}
-          >
-            <Dialog aria-labelledby={menuProps["aria-labelledby"]}>
-              <SelectListBox {...listBoxProps} />
-            </Dialog>
-          </Popover>
-        ))}
+      {overlayType === "bottomsheet" ? (
+        <BottomSheet
+          isDismissable={true}
+          state={state}
+          className={overlayClassName}
+        >
+          <Dialog aria-labelledby={menuProps["aria-labelledby"]}>
+            <SelectListBox {...listBoxProps} />
+          </Dialog>
+        </BottomSheet>
+      ) : (
+        <Popover
+          state={state}
+          triggerRef={triggerRef}
+          placement="bottom left"
+          className={overlayClassName}
+          style={{ "--trigger-width": buttonWidth } as React.CSSProperties}
+        >
+          <Dialog aria-labelledby={menuProps["aria-labelledby"]}>
+            <SelectListBox {...listBoxProps} />
+          </Dialog>
+        </Popover>
+      )}
     </div>
   );
 };

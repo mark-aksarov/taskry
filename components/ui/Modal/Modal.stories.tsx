@@ -10,6 +10,9 @@ const meta: Meta<typeof Modal> = {
   title: "Components/Modal",
   component: Modal,
   tags: ["autodocs"],
+  args: {
+    isDismissable: true,
+  },
 } satisfies Meta<typeof Modal>;
 
 export default meta;

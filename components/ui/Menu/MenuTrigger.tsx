@@ -1,12 +1,12 @@
 import React from "react";
 import { Menu } from "./Menu";
 import { Dialog } from "../Dialog";
-import { Popover } from "../Popover";
 import { BottomSheet } from "../BottomSheet";
+import { Placement, Popover } from "../Popover";
 import { useMenuTriggerState } from "react-stately";
 import type { MenuTriggerProps as RACMenuTriggerProps } from "react-stately";
 import { PressResponder } from "@react-aria/interactions";
-import { AriaMenuProps, Placement, useMenuTrigger } from "react-aria";
+import { AriaMenuProps, useMenuTrigger } from "react-aria";
 import { Button } from "../Button";
 
 export type MenuTriggerOwnProps = {
@@ -21,7 +21,7 @@ export type MenuTriggerProps<T extends object = any> = AriaMenuProps<T> &
 
 export const MenuTrigger = <T extends object>({
   overlayType,
-  placement = "bottom start",
+  placement = "bottom left",
   renderButton,
   ...props
 }: MenuTriggerProps<T>) => {
@@ -36,21 +36,21 @@ export const MenuTrigger = <T extends object>({
         {renderButton ? renderButton() : <Button label="Menu" />}
       </PressResponder>
 
-      {state.isOpen &&
-        (overlayType === "bottomsheet" ? (
-          <BottomSheet
-            state={state}
-            aria-labelledby={menuProps["aria-labelledby"]}
-          >
+      {overlayType === "bottomsheet" ? (
+        <BottomSheet
+          isDismissable={true}
+          state={state}
+          aria-labelledby={menuProps["aria-labelledby"]}
+        >
+          <Menu {...props} {...menuProps} />
+        </BottomSheet>
+      ) : (
+        <Popover state={state} triggerRef={ref} placement={placement}>
+          <Dialog aria-labelledby={menuProps["aria-labelledby"]}>
             <Menu {...props} {...menuProps} />
-          </BottomSheet>
-        ) : (
-          <Popover state={state} triggerRef={ref} placement={placement}>
-            <Dialog aria-labelledby={menuProps["aria-labelledby"]}>
-              <Menu {...props} {...menuProps} />
-            </Dialog>
-          </Popover>
-        ))}
+          </Dialog>
+        </Popover>
+      )}
     </>
   );
 };

@@ -24,13 +24,13 @@ export const itemStyles = tv({
 });
 
 export const overlayStyles = tv({
-  base: "fixed top-0 left-0 z-100 flex h-(--visual-viewport-height) w-full items-center justify-center bg-black/20 dark:bg-black/50",
+  base: "fixed top-0 left-0 z-100 flex h-(--visual-viewport-height) w-full items-center justify-center bg-black/20 transition duration-150 dark:bg-black/50",
   variants: {
     isEntering: {
-      true: "",
+      true: "opacity-0",
     },
     isExiting: {
-      true: "",
+      true: "opacity-0",
     },
   },
 });

@@ -59,6 +59,17 @@ export const Default: Story = {
   ...SelectTemplate,
 };
 
+export const WithSheet: Story = {
+  ...SelectTemplate,
+  args: {
+    ...SelectTemplate.args,
+    overlayType: "bottomsheet",
+  },
+  globals: {
+    viewport: { value: "iphone6", isRotated: false },
+  },
+};
+
 export const Invalid: Story = {
   ...SelectTemplate,
   args: {

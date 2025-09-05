@@ -29,7 +29,6 @@ export interface DatePickerOwnProps {
   overlayType?: "popover" | "bottomsheet";
   className?: string;
   overlayClassName?: string;
-  isDissmissible?: boolean;
 }
 
 /**
@@ -97,7 +96,6 @@ export const DatePicker = <T extends DateValue>({
   overlayType,
   className,
   overlayClassName,
-  isDissmissible,
   ...props
 }: DatePickerProps<T>) => {
   const validationBehavior = props.validationBehavior ?? "native";
@@ -197,36 +195,31 @@ export const DatePicker = <T extends DateValue>({
           </span>
         )}
 
-        {state.isOpen &&
-          (overlayType === "bottomsheet" ? (
-            <BottomSheet
-              state={state}
-              className="p-4"
-              isDismissable={isDissmissible}
-            >
-              <Dialog {...dialogProps}>
-                <Calendar
-                  {...calendarProps}
-                  firstDayOfWeek={props.firstDayOfWeek}
-                />
-              </Dialog>
-            </BottomSheet>
-          ) : (
-            <Popover
-              state={state}
-              triggerRef={groupRef}
-              placement="bottom start"
-              className={clsx("p-4", overlayClassName)}
-              style={{ "--trigger-width": groupWidth } as React.CSSProperties}
-            >
-              <Dialog {...dialogProps}>
-                <Calendar
-                  {...calendarProps}
-                  firstDayOfWeek={props.firstDayOfWeek}
-                />
-              </Dialog>
-            </Popover>
-          ))}
+        {overlayType === "bottomsheet" ? (
+          <BottomSheet state={state} className="p-4" isDismissable={true}>
+            <Dialog {...dialogProps}>
+              <Calendar
+                {...calendarProps}
+                firstDayOfWeek={props.firstDayOfWeek}
+              />
+            </Dialog>
+          </BottomSheet>
+        ) : (
+          <Popover
+            state={state}
+            triggerRef={groupRef}
+            placement="bottom left"
+            className={clsx("p-4", overlayClassName)}
+            style={{ "--trigger-width": groupWidth } as React.CSSProperties}
+          >
+            <Dialog {...dialogProps}>
+              <Calendar
+                {...calendarProps}
+                firstDayOfWeek={props.firstDayOfWeek}
+              />
+            </Dialog>
+          </Popover>
+        )}
       </div>
     </DateFieldContext>
   );

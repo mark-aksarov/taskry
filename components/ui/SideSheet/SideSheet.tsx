@@ -13,13 +13,13 @@ export type SideSheetProps = ModalOverlayProps &
   React.RefAttributes<HTMLDivElement>;
 
 const sideSheetStyles = tv({
-  base: "h-full w-[355px] overflow-hidden border-l-1 border-gray-300 bg-white dark:border-gray-600 dark:bg-gray-800",
+  base: "h-full w-[355px] overflow-hidden border-l-1 border-gray-300 bg-white transition duration-150 dark:border-gray-600 dark:bg-gray-800",
   variants: {
     isEntering: {
-      true: "",
+      true: "translate-x-full",
     },
     isExiting: {
-      true: "",
+      true: "translate-x-full",
     },
   },
 });

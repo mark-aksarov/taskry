@@ -1,26 +1,83 @@
 import clsx from "clsx";
-import React from "react";
+import React, { useMemo } from "react";
+import { mergeRefs } from "@react-aria/utils";
 import type { AriaPopoverProps } from "react-aria";
+import { AnimatePresence, motion } from "motion/react";
 import type { OverlayTriggerState } from "react-stately";
 import { DismissButton, Overlay, usePopover } from "react-aria";
+
+export type Placement = "left top" | "bottom left";
 
 interface PopoverOwnProps {
   children: React.ReactNode;
   state: OverlayTriggerState;
   className?: string;
   style?: React.CSSProperties;
+  placement?: Placement;
 }
 
-type PopoverProps = Omit<AriaPopoverProps, "popoverRef"> & PopoverOwnProps;
+type PopoverProps = Omit<AriaPopoverProps, "popoverRef" | "placement"> &
+  React.RefAttributes<HTMLDivElement> &
+  PopoverOwnProps;
 
-export const Popover = ({
+const motionVariants = {
+  leftTop: {
+    hidden: {
+      opacity: 0,
+      translateX: 5,
+    },
+    visible: {
+      opacity: 1,
+      translateX: 0,
+    },
+  },
+  bottomLeft: {
+    hidden: {
+      opacity: 0,
+      translateY: -5,
+    },
+    visible: {
+      opacity: 1,
+      translateY: 0,
+    },
+  },
+};
+
+export const Popover = ({ state, ...props }: PopoverProps) => {
+  return (
+    <AnimatePresence custom={props.placement}>
+      {state.isOpen && (
+        <MotionPopover
+          variants={
+            props.placement === "left top"
+              ? motionVariants.leftTop
+              : motionVariants.bottomLeft
+          }
+          initial="hidden"
+          animate="visible"
+          exit="hidden"
+          transition={{ duration: 0.1 }}
+          state={state}
+          {...props}
+        />
+      )}
+    </AnimatePresence>
+  );
+};
+
+const PopoverInner = ({
   children,
   state,
   className,
   style,
+  ref,
   ...props
 }: PopoverProps) => {
   const popoverRef = React.useRef(null);
+  const mergedRefs = useMemo(
+    () => mergeRefs(popoverRef, ref),
+    [popoverRef, ref],
+  );
   const { popoverProps, underlayProps } = usePopover(
     {
       ...props,
@@ -35,7 +92,7 @@ export const Popover = ({
       <div {...underlayProps} style={{ position: "fixed", inset: 0 }} />
       <div
         {...popoverProps}
-        ref={popoverRef}
+        ref={mergedRefs}
         style={{
           ...popoverProps.style,
           ...style,
@@ -53,3 +110,5 @@ export const Popover = ({
     </Overlay>
   );
 };
+
+const MotionPopover = motion.create(PopoverInner);

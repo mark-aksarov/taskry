@@ -54,6 +54,20 @@ export const Default: Story = {
   ...MenuTemplate,
 };
 
+export const TopLeftPlacement: Story = {
+  ...MenuTemplate,
+  args: {
+    placement: "left top",
+  },
+  decorators: [
+    (Story) => (
+      <div className="flex justify-end">
+        <Story />
+      </div>
+    ),
+  ],
+};
+
 export const WithSheet: Story = {
   ...MenuTemplate,
   args: {

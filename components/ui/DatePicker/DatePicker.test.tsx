@@ -2,7 +2,7 @@ import "@testing-library/jest-dom";
 
 import React from "react";
 import { DatePicker } from "./DatePicker";
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { Form } from "react-aria-components";
 import { Button } from "../Button";
@@ -141,7 +141,10 @@ describe("DatePicker", () => {
     });
     expect(dateButton).toBeInTheDocument();
     await user.click(dateButton);
-    expect(popover).not.toBeInTheDocument();
+
+    await waitFor(() => {
+      expect(popover).not.toBeInTheDocument();
+    });
 
     const segments = screen.getAllByRole("spinbutton");
     const monthSegment = segments[0];

@@ -32,11 +32,9 @@ const BottomSheetTemplate = ({
   return (
     <>
       <Button {...triggerProps} label="Open Bottom Sheet" />
-      {state.isOpen && (
-        <BottomSheet {...props} state={state}>
-          {children}
-        </BottomSheet>
-      )}
+      <BottomSheet {...props} state={state}>
+        {children}
+      </BottomSheet>
     </>
   );
 };
