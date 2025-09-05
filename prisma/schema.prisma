@@ -1,0 +1,478 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Attachments
+
+model Attachment {
+  id      Int    @id @default(autoincrement())
+  fileUrl String
+
+  ProjectAttachment        ProjectAttachment[]
+  ProjectCommentAttachment ProjectCommentAttachment[]
+  TaskAttachment           TaskAttachment[]
+  TaskCommentAttachment    TaskCommentAttachment[]
+  MessageAttachment        MessageAttachment[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("attachment")
+}
+
+//Company
+
+model Company {
+  id          Int    @id @default(autoincrement())
+  name        String
+  description String
+
+  customers Customer[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("company")
+}
+
+// Customer
+
+model Customer {
+  id             Int     @id @default(autoincrement())
+  fullName       String
+  bio            String
+  avatarImageUrl String?
+  email          String
+  phoneNumber    String
+  publicLink     String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  companyId Int
+
+  company Company @relation(fields: [companyId], references: [id])
+
+  projects Project[]
+
+  @@map("customer")
+}
+
+// Project
+
+model Project {
+  id              Int      @id @default(autoincrement())
+  title           String
+  description     String
+  previewImageUrl String?
+  deadline        DateTime
+
+  creatorId  String
+  customerId Int
+  categoryId Int
+  statusId   Int
+
+  creator  User            @relation(fields: [creatorId], references: [id])
+  customer Customer        @relation(fields: [customerId], references: [id])
+  category ProjectCategory @relation(fields: [categoryId], references: [id])
+  status   ProjectStatus   @relation(fields: [statusId], references: [id])
+
+  members         ProjectMember[]
+  attachments     ProjectAttachment[]
+  tasks           Task[]
+  projectComments ProjectComment[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("project")
+}
+
+model ProjectCategory {
+  id   Int    @id @default(autoincrement())
+  name String
+
+  projects     Project[]
+  TaskCategory TaskCategory[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("project_category")
+}
+
+model ProjectStatus {
+  id     Int    @id @default(autoincrement())
+  nameEn String
+  nameRu String
+
+  projects Project[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("project_status")
+}
+
+model ProjectMember {
+  projectId Int
+  userId    String
+
+  project Project @relation(fields: [projectId], references: [id])
+  user    User    @relation(fields: [userId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@id([projectId, userId])
+  @@map("project_member")
+}
+
+model ProjectAttachment {
+  attachmentId Int
+  projectId    Int
+
+  attachment Attachment @relation(fields: [attachmentId], references: [id])
+  project    Project    @relation(fields: [projectId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@id([attachmentId, projectId])
+  @@map("project_attachment")
+}
+
+model ProjectComment {
+  id      Int    @id @default(autoincrement())
+  content String
+
+  projectId Int
+  senderId  String
+
+  project Project @relation(fields: [projectId], references: [id])
+  sender  User    @relation(fields: [senderId], references: [id])
+
+  attachments ProjectCommentAttachment[]
+  userStates  ProjectCommentUserState[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("project_comment")
+}
+
+model ProjectCommentUserState {
+  projectCommentId Int
+  userId           String
+  isRead           Boolean
+
+  projectComment ProjectComment @relation(fields: [projectCommentId], references: [id])
+  user           User           @relation(fields: [userId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@id([projectCommentId, userId])
+  @@map("project_comment_user")
+}
+
+model ProjectCommentAttachment {
+  attachmentId     Int
+  projectCommentId Int
+
+  attachment     Attachment     @relation(fields: [attachmentId], references: [id])
+  projectComment ProjectComment @relation(fields: [projectCommentId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@id([attachmentId, projectCommentId])
+  @@map("project_comment_attachment")
+}
+
+// Task
+
+model Task {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String
+  deadline    DateTime
+
+  statusId   Int
+  projectId  Int
+  categoryId Int
+  creatorId  String
+
+  status   TaskStatus   @relation(fields: [statusId], references: [id])
+  project  Project      @relation(fields: [projectId], references: [id])
+  category TaskCategory @relation(fields: [categoryId], references: [id])
+  creator  User         @relation(fields: [creatorId], references: [id])
+
+  checklist    ChecklistItem[]
+  attachments  TaskAttachment[]
+  taskComments TaskComment[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("task")
+}
+
+model TaskCategory {
+  id   Int    @id @default(autoincrement())
+  name String
+
+  projectCategoryId Int
+
+  projectCategory ProjectCategory @relation(fields: [projectCategoryId], references: [id])
+
+  tasks Task[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("task_category")
+}
+
+model TaskStatus {
+  id     Int    @id @default(autoincrement())
+  nameEn String
+  nameRu String
+
+  tasks Task[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("task_status")
+}
+
+model ChecklistItem {
+  id     Int     @id @default(autoincrement())
+  name   String
+  isDone Boolean
+
+  taskId Int
+
+  task Task @relation(fields: [taskId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("subtask")
+}
+
+model TaskAttachment {
+  attachmentId Int
+  taskId       Int
+
+  attachment Attachment @relation(fields: [attachmentId], references: [id])
+  task       Task       @relation(fields: [taskId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@id([attachmentId, taskId])
+  @@map("task_attachment")
+}
+
+model TaskComment {
+  id      Int    @id @default(autoincrement())
+  content String
+
+  taskId   Int
+  senderId String
+
+  task   Task @relation(fields: [taskId], references: [id])
+  sender User @relation(fields: [senderId], references: [id])
+
+  attachments TaskCommentAttachment[]
+  userStates  TaskCommentUserState[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("task_comment")
+}
+
+model TaskCommentUserState {
+  taskCommentId Int
+  userId        String
+  isRead        Boolean
+
+  taskComment TaskComment @relation(fields: [taskCommentId], references: [id])
+  user        User        @relation(fields: [userId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@id([taskCommentId, userId])
+  @@map("task_comment_user")
+}
+
+model TaskCommentAttachment {
+  attachmentId  Int
+  taskCommentId Int
+
+  attachment  Attachment  @relation(fields: [attachmentId], references: [id])
+  taskComment TaskComment @relation(fields: [taskCommentId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@id([attachmentId, taskCommentId])
+  @@map("task_comment_attachment")
+}
+
+// Inbox
+
+model MessageThread {
+  id     Int     @id @default(autoincrement())
+  isRead Boolean
+
+  messages Message[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("message_thread")
+}
+
+model MessageAttachment {
+  attachmentId Int
+  messageId    Int
+
+  attachment Attachment @relation(fields: [attachmentId], references: [id])
+  message    Message    @relation(fields: [messageId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@id([attachmentId, messageId])
+  @@map("message_attachment")
+}
+
+model Message {
+  id     Int           @id @default(autoincrement())
+  body   String
+  thread MessageThread @relation(fields: [messageThreadId], references: [id])
+
+  senderId   String
+  receiverId String
+
+  sender   User @relation("Sender", fields: [senderId], references: [id])
+  receiver User @relation("Receiver", fields: [receiverId], references: [id])
+
+  attachments     MessageAttachment[]
+  messageThreadId Int
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("message")
+}
+
+// User
+
+model Position {
+  id     Int    @id @default(autoincrement())
+  nameEn String
+  nameRu String
+
+  users User[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("position")
+}
+
+model User {
+  id            String  @id
+  name          String
+  email         String
+  emailVerified Boolean
+  image         String?
+  phone         String?
+  publicLink    String?
+
+  positionId Int?
+
+  position Position? @relation(fields: [positionId], references: [id])
+
+  projectMembers   ProjectMember[]
+  projects         Project[]
+  tasks            Task[]
+  messagesSent     Message[]       @relation("Sender")
+  messagesReceived Message[]       @relation("Receiver")
+  sessions         Session[]
+  accounts         Account[]
+
+  projectComments          ProjectComment[]
+  projectCommentUserStates ProjectCommentUserState[]
+  taskComments             TaskComment[]
+  taskCommentUserStates    TaskCommentUserState[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([email])
+  @@map("user")
+}
+
+model Session {
+  id        String   @id
+  expiresAt DateTime
+  token     String
+  ipAddress String?
+  userAgent String?
+
+  userId String
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([token])
+  @@map("session")
+}
+
+model Account {
+  id                    String    @id
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  accessToken           String?
+  refreshToken          String?
+  idToken               String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?
+  password              String?
+
+  accountId  String
+  providerId String
+  userId     String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("account")
+}
+
+model Verification {
+  id         String   @id
+  identifier String
+  value      String
+  expiresAt  DateTime
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("verification")
+}

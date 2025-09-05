@@ -1,0 +1,35 @@
+@import "tailwindcss";
+@plugin "tailwindcss-react-aria-components";
+
+body {
+  @apply dark:bg-gray-900 dark:text-white;
+}
+
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+
+@theme inline {
+  --font-sans: var(--font-nunito-sans);
+}
+
+@theme {
+  --text-*: initial;
+
+  --text-xs: 0.75rem;
+  --text-xs--line-height: calc(1 / 0.75);
+  --text-sm: 0.875rem;
+  --text-sm--line-height: calc(1.375 / 0.875);
+  --text-base: 1rem;
+  --text-base--line-height: calc(1.5 / 1);
+  --text-lg: 1.125rem;
+  --text-lg--line-height: calc(1.4375 / 1.125);
+  --text-xl: 1.25rem;
+  --text-xl--line-height: calc(1.625 / 1.25);
+  --text-2xl: 1.5rem;
+  --text-2xl--line-height: calc(1.875 / 1.5);
+  --text-3xl: 1.75rem;
+  --text-3xl--line-height: calc(2.25 / 1.75);
+  --text-4xl: 2.125rem;
+  --text-4xl--line-height: calc(2.75 / 2.125);
+  --text-5xl: 2.625rem;
+  --text-5xl--line-height: calc(3.5 / 2.625);
+}

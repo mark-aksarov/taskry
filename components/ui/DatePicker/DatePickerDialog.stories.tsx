@@ -1,0 +1,109 @@
+import { DatePicker } from "../DatePicker";
+import { fn } from "storybook/test";
+import { DateValue, I18nProvider } from "react-aria";
+import type { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { today, getLocalTimeZone } from "@internationalized/date";
+import { Form } from "react-aria-components";
+import { Button } from "../Button";
+
+type DatePickerPropsWithLocaleArgs = React.ComponentProps<typeof DatePicker> & {
+  locale: string;
+};
+
+const meta = {
+  title: "Components/DatePicker",
+  component: DatePicker,
+  tags: ["autodocs"],
+  argTypes: {
+    locale: {
+      control: "select",
+      options: [
+        "en-US",
+        "en-GB",
+        "es-ES",
+        "fr-FR",
+        "de-DE",
+        "pt-BR",
+        "ru-RU",
+        "zh-CN",
+        "zh-TW",
+        "ja-JP",
+        "ko-KR",
+        "ar-AE",
+      ],
+    },
+  },
+  args: {
+    onChange: fn(),
+    locale: "en-US",
+    errorMessage: "Error message",
+    label: "Label",
+    className: "max-w-[400px]",
+    overlayClassName: "w-[var(--trigger-width)]",
+    isDisabled: false,
+    isDissmissible: true,
+  },
+  render: ({ locale, ...args }) => (
+    <I18nProvider locale={locale}>
+      <DatePicker {...args} />
+    </I18nProvider>
+  ),
+} satisfies Meta<DatePickerPropsWithLocaleArgs>;
+
+export default meta;
+type Story = StoryObj<typeof meta>;
+
+export const Default = {} satisfies Story;
+
+export const WithSheet = {
+  globals: {
+    viewport: { value: "iphone6", isRotated: false },
+  },
+  args: {
+    overlayType: "bottomsheet",
+  },
+} satisfies Story;
+
+export const WithMinMaxValue = {
+  args: {
+    minValue: today(getLocalTimeZone()),
+  },
+} satisfies Story;
+
+export const WithUnavailableDates = {
+  args: {
+    isDateUnavailable: (date: DateValue) => date < today(getLocalTimeZone()),
+  },
+} satisfies Story;
+
+export const Invalid: Story = {
+  args: {
+    isInvalid: true,
+  },
+} satisfies Story;
+
+export const Disabled: Story = {
+  args: {
+    isDisabled: true,
+  },
+} satisfies Story;
+
+export const Validation: Story = {
+  args: {
+    isRequired: true,
+    className: "w-full",
+    name: "text-field",
+  },
+  decorators: [
+    (Story) => (
+      <Form className="flex max-w-[400px] flex-col items-start gap-4">
+        <Story />
+        <Button
+          type="submit"
+          label="Submit"
+          className="w-full justify-center"
+        />
+      </Form>
+    ),
+  ],
+};
