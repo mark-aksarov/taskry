@@ -1,4 +1,5 @@
-import clsx from "clsx";
+"use client";
+
 import React, { useContext } from "react";
 import { X } from "lucide-react";
 import { Button } from "../Button";
@@ -7,12 +8,14 @@ import {
   DialogProps as RACDialogProps,
   Heading,
   OverlayTriggerStateContext,
+  PressEvent,
 } from "react-aria-components";
+import { twMerge } from "tailwind-merge";
 
 export const Dialog = ({ children, className, ...props }: RACDialogProps) => {
   return (
     <RACDialog
-      className={clsx("flex h-full flex-col outline-none", className)}
+      className={twMerge("flex h-full flex-col outline-none", className)}
       {...props}
     >
       {children}
@@ -20,30 +23,33 @@ export const Dialog = ({ children, className, ...props }: RACDialogProps) => {
   );
 };
 
+export interface DialogProps extends React.ComponentPropsWithRef<"div"> {
+  titleClassName?: string;
+}
+
 export const DialogHeader = ({
   className,
+  titleClassName,
   children,
   ...props
-}: React.ComponentPropsWithRef<"div">) => {
-  const { close } = useContext(OverlayTriggerStateContext)!;
-
-  const classes = clsx(
-    className,
+}: DialogProps) => {
+  const classes = twMerge(
     "flex items-center justify-between border-b-1 border-gray-300 dark:border-gray-600 px-5 py-4",
+    className,
   );
 
   return (
     <div className={classes} {...props}>
-      <Heading slot="title" className="text-lg font-bold">
+      <Heading
+        slot="title"
+        className={twMerge(
+          "text-lg font-bold text-black dark:text-white",
+          titleClassName,
+        )}
+      >
         {children}
       </Heading>
-      <Button
-        variant="ghost"
-        iconLeft={<X size={16} strokeWidth={1.5} absoluteStrokeWidth />}
-        onClick={close}
-        className="-mr-2 rounded-full!"
-        aria-label="Close"
-      />
+      <DialogCloseButton />
     </div>
   );
 };
@@ -53,11 +59,34 @@ export const DialogBody = ({
   className,
   ...props
 }: React.ComponentPropsWithRef<"div">) => {
-  const classes = clsx(className, "h-full shrink-1 overflow-auto p-5");
+  const classes = twMerge("h-full shrink-1 overflow-auto p-5", className);
 
   return (
     <div className={classes} {...props}>
       {children}
     </div>
+  );
+};
+
+export const DialogCloseButton = ({
+  onPress,
+}: {
+  onPress?: (e: PressEvent) => void;
+}) => {
+  const state = useContext(OverlayTriggerStateContext);
+
+  function handlePress(e: PressEvent) {
+    if (state) state.close();
+    onPress?.(e);
+  }
+
+  return (
+    <Button
+      variant="ghost"
+      iconLeft={<X size={16} strokeWidth={1.5} absoluteStrokeWidth />}
+      onPress={handlePress}
+      className="-mr-2 rounded-full hover:bg-gray-100 active:bg-gray-200 dark:hover:bg-gray-600 dark:active:bg-gray-700"
+      aria-label="Close"
+    />
   );
 };

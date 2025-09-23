@@ -1,10 +1,12 @@
-import clsx from "clsx";
+"use client";
+
 import React, { useMemo } from "react";
 import { mergeRefs } from "@react-aria/utils";
 import { OverlayTriggerState } from "react-stately";
 import { AnimatePresence, motion } from "motion/react";
 import { OverlayTriggerStateContext } from "react-aria-components";
 import { AriaModalOverlayProps, Overlay, useModalOverlay } from "react-aria";
+import { twMerge } from "tailwind-merge";
 
 export type BottomSheetOwnProps = {
   state: OverlayTriggerState;
@@ -61,8 +63,8 @@ const BottomSheetInner = ({
           <div
             {...modalProps}
             ref={mergedRefs}
-            className={clsx(
-              "absolute bottom-0 left-0 w-full overflow-hidden rounded-t-2xl bg-white shadow-lg dark:bg-gray-800",
+            className={twMerge(
+              "absolute bottom-0 left-0 w-full overflow-hidden rounded-t-2xl bg-white shadow-lg will-change-transform dark:bg-gray-800",
               className,
             )}
             data-testid="bottom-sheet"

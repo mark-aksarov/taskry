@@ -6,7 +6,7 @@ import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { Dialog, DialogBody, DialogHeader } from "../Dialog";
 
 const meta: Meta<typeof SideSheet> = {
-  title: "Components/SideSheet",
+  title: "Components/ui/SideSheet",
   component: SideSheet,
   tags: ["autodocs"],
 } satisfies Meta<typeof SideSheet>;
@@ -23,13 +23,31 @@ const SideSheetTemplate = ({ children, ...props }: SideSheetProps) => {
   );
 };
 
-export const Default = {
+export const Right = {
   render: (args) => {
     return (
       <SideSheetTemplate {...args}>
-        <Dialog>
+        <Dialog className="w-[360px]">
           <DialogHeader>Side Sheet Header</DialogHeader>
           <DialogBody>content</DialogBody>
+        </Dialog>
+      </SideSheetTemplate>
+    );
+  },
+} satisfies Story;
+
+export const Left = {
+  args: {
+    side: "left",
+  },
+  render: (args) => {
+    return (
+      <SideSheetTemplate {...args} side="left">
+        <Dialog className="w-[360px]">
+          <DialogHeader>Side Sheet Header</DialogHeader>
+          <DialogBody className="text-black dark:text-white">
+            content
+          </DialogBody>
         </Dialog>
       </SideSheetTemplate>
     );
@@ -40,9 +58,9 @@ export const WithLongContent = {
   render: (args) => {
     return (
       <SideSheetTemplate {...args}>
-        <Dialog>
+        <Dialog className="w-[360px]">
           <DialogHeader>Side Sheet Header</DialogHeader>
-          <DialogBody>
+          <DialogBody className="text-black dark:text-white">
             <h3>The standard Lorem Ipsum passage, used since the 1500s</h3>
             <p>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do

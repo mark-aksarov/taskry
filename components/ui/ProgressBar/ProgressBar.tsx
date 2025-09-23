@@ -1,19 +1,30 @@
-import clsx from "clsx";
+"use client";
+
 import type { ProgressBarProps as RACProgressBarProps } from "react-aria-components";
-import { ProgressBar as RACProgressBar, Label } from "react-aria-components";
+import {
+  ProgressBar as RACProgressBar,
+  Label,
+  composeRenderProps,
+} from "react-aria-components";
+import { twMerge } from "tailwind-merge";
 
 interface ProgressBarProps extends RACProgressBarProps {
   label: React.ReactNode;
+  textClassName?: string;
 }
 
 export const ProgressBar = ({
   label,
   className,
+  textClassName,
   ...props
 }: ProgressBarProps) => {
-  const classes = clsx(className, "flex flex-col gap-1");
-  const textClasses = clsx(
+  const classes = composeRenderProps(className, (className) =>
+    twMerge(className, "flex flex-col gap-1"),
+  );
+  const textClasses = twMerge(
     "text-xs font-medium text-gray-500 dark:text-gray-400",
+    textClassName,
   );
 
   return (
@@ -27,7 +38,7 @@ export const ProgressBar = ({
           <div className="h-2 overflow-hidden rounded-full bg-gray-200 dark:bg-gray-700">
             <div
               data-testid="progressbar-fill"
-              className={clsx(
+              className={twMerge(
                 "h-full rounded-full",
                 percentage &&
                   (percentage < 33

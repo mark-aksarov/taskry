@@ -1,8 +1,8 @@
-import clsx from "clsx";
 import React from "react";
 import { itemStyles } from "../styles";
 import { Node, TreeState } from "react-stately";
 import { mergeProps, useHover, useMenuItem } from "react-aria";
+import { twMerge } from "tailwind-merge";
 
 interface MenuItemProps<T extends object = any>
   extends React.HTMLAttributes<HTMLLIElement> {
@@ -24,7 +24,7 @@ export const MenuItem = ({
   );
   const { hoverProps, isHovered } = useHover({});
 
-  const classes = clsx(
+  const classes = twMerge(
     className,
     itemStyles({ isHovered, isFocused: states.isFocused }),
   );

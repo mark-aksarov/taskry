@@ -1,6 +1,14 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import { Nunito_Sans } from "next/font/google";
+import {
+  AppSidebar,
+  AppSidebarBody,
+  AppSidebarHeader,
+  AppSidebarHeading,
+} from "@/components/layout/AppSidebar";
+import { AppHeader } from "@/components/layout/AppHeader";
+import { AppNavigation } from "@/components/layout/AppNavigation";
 
 const geistSans = Nunito_Sans({
   variable: "--font-nunito-sans",
@@ -19,11 +27,29 @@ export default async function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} antialiased`}
-      >
-        {children}
+      <body className={`${geistSans.variable} antialiased`}>
+        <Layout>{children}</Layout>
       </body>
     </html>
+  );
+}
+
+export async function Layout({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="flex min-h-screen w-full bg-gray-100 dark:bg-gray-900">
+      <AppSidebar className="sticky top-0 h-screen shrink-0 max-xl:hidden">
+        <AppSidebarHeader>
+          <AppSidebarHeading />
+        </AppSidebarHeader>
+        <AppSidebarBody>
+          <AppNavigation />
+        </AppSidebarBody>
+      </AppSidebar>
+
+      <div className="flex w-full flex-col">
+        <AppHeader title="Dashboard" />
+        <main className="max-md:p-4 md:max-xl:p-6 xl:p-7.5">{children}</main>
+      </div>
+    </div>
   );
 }

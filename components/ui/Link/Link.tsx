@@ -5,7 +5,6 @@ import {
 } from "react-aria-components";
 import { tv } from "tailwind-variants";
 import { focusRing } from "../styles";
-import clsx from "clsx";
 
 const styles = tv({
   extend: focusRing,
@@ -17,7 +16,7 @@ export const Link = ({
   ...props
 }: LinkProps & React.RefAttributes<HTMLAnchorElement>) => {
   const classes = composeRenderProps(className, (className, renderProps) =>
-    clsx(styles({ ...renderProps }), className),
+    styles({ ...renderProps, className }),
   );
 
   return <ReactAriaLink {...props} className={classes} />;

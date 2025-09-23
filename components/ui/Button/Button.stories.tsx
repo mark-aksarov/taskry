@@ -14,7 +14,7 @@ const icons = {
 };
 
 const meta = {
-  title: "Components/Button",
+  title: "Components/ui/Button",
   component: Button,
   tags: ["autodocs"],
   argTypes: {
@@ -50,14 +50,14 @@ const meta = {
     },
   },
   args: {
-    onClick: fn(),
+    onPress: fn(),
   },
 } satisfies Meta<typeof Button>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
+export const Default = {
   args: {
     label: "Button",
   },
@@ -66,7 +66,7 @@ export const Default: Story = {
 export const Variant = {
   tags: ["!test"],
   render: (args) => {
-    const textClasses = "text-sm font-semibold";
+    const textClasses = "text-sm font-semibold text-black dark:text-white";
 
     return (
       <div className="grid max-w-[20rem] grid-cols-3 justify-center gap-4">

@@ -16,7 +16,6 @@ import {
 import { Popover } from "../Popover";
 import { Calendar } from "./Calendar";
 import { tv } from "tailwind-variants";
-import clsx from "clsx";
 import { CalendarIcon } from "lucide-react";
 import { focusRing } from "../styles";
 import { BottomSheet } from "../BottomSheet";
@@ -24,6 +23,7 @@ import { buttonStyles } from "../Select/SelectButton";
 import { useResizeObserver } from "@react-aria/utils";
 import { DateSegment } from "react-aria-components";
 import { Dialog } from "../Dialog";
+import { twMerge } from "tailwind-merge";
 
 export interface DatePickerOwnProps {
   overlayType?: "popover" | "bottomsheet";
@@ -64,6 +64,12 @@ export const groupStyles = tv({
 const button = tv({
   extend: focusRing,
   base: "cursor-pointer rounded-xs",
+  compoundVariants: [
+    {
+      isDisabled: false,
+      className: "text-black dark:text-white",
+    },
+  ],
 });
 
 const segmentStyles = tv({
@@ -152,7 +158,7 @@ export const DatePicker = <T extends DateValue>({
         {...focusProps}
         data-testid="datepicker"
         ref={props.ref}
-        className={clsx(fieldStyles(), className)}
+        className={fieldStyles({ className })}
       >
         <span {...labelProps} className={fieldLabelStyles()}>
           {props.label}
@@ -209,7 +215,7 @@ export const DatePicker = <T extends DateValue>({
             state={state}
             triggerRef={groupRef}
             placement="bottom left"
-            className={clsx("p-4", overlayClassName)}
+            className={twMerge("p-4", overlayClassName)}
             style={{ "--trigger-width": groupWidth } as React.CSSProperties}
           >
             <Dialog {...dialogProps}>

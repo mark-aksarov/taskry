@@ -1,19 +1,41 @@
 import {
+  composeRenderProps,
   ToggleButtonGroup as RACToggleButtonGroup,
-  ToggleButtonGroupProps,
+  ToggleButtonGroupProps as RACToggleButtonGroupProps,
 } from "react-aria-components";
 import { tv } from "tailwind-variants";
+import { ToggleButtonVariantContext } from "./ToggleButtonVariantContext";
+
+export type ToggleButtonVariant = "primary" | "contrast";
+
+export interface ToggleButtonGroupProps extends RACToggleButtonGroupProps {
+  variant?: ToggleButtonVariant;
+}
 
 const styles = tv({
-  base: "inline-flex rounded-lg",
+  base: "inline-flex gap-1 rounded-lg",
   variants: {
-    isDisabled: {
-      false: "bg-white dark:bg-gray-800",
-      true: "bg-gray-100 dark:bg-gray-800",
+    direction: {
+      horizontal: "flex-row",
+      vertical: "flex-col",
     },
   },
 });
 
-export const ToggleButtonGroup = (props: ToggleButtonGroupProps) => {
-  return <RACToggleButtonGroup {...props} className={styles} />;
+export const ToggleButtonGroup = ({
+  variant = "primary",
+  ...props
+}: ToggleButtonGroupProps) => {
+  return (
+    <ToggleButtonVariantContext.Provider value={variant}>
+      <RACToggleButtonGroup
+        {...props}
+        className={composeRenderProps(
+          props.className,
+          (className, renderProps) =>
+            styles({ ...renderProps, direction: props.orientation, className }),
+        )}
+      />
+    </ToggleButtonVariantContext.Provider>
+  );
 };

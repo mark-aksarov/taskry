@@ -1,12 +1,16 @@
-import clsx from "clsx";
 import React, { useMemo } from "react";
 import { mergeRefs } from "@react-aria/utils";
 import type { AriaPopoverProps } from "react-aria";
 import { AnimatePresence, motion } from "motion/react";
 import type { OverlayTriggerState } from "react-stately";
 import { DismissButton, Overlay, usePopover } from "react-aria";
+import { twMerge } from "tailwind-merge";
 
-export type Placement = "left top" | "bottom left";
+export type Placement =
+  | "left top"
+  | "left bottom"
+  | "bottom left"
+  | "bottom right";
 
 interface PopoverOwnProps {
   children: React.ReactNode;
@@ -21,7 +25,7 @@ type PopoverProps = Omit<AriaPopoverProps, "popoverRef" | "placement"> &
   PopoverOwnProps;
 
 const motionVariants = {
-  leftTop: {
+  left: {
     hidden: {
       opacity: 0,
       translateX: 5,
@@ -31,7 +35,7 @@ const motionVariants = {
       translateX: 0,
     },
   },
-  bottomLeft: {
+  bottom: {
     hidden: {
       opacity: 0,
       translateY: -5,
@@ -49,9 +53,9 @@ export const Popover = ({ state, ...props }: PopoverProps) => {
       {state.isOpen && (
         <MotionPopover
           variants={
-            props.placement === "left top"
-              ? motionVariants.leftTop
-              : motionVariants.bottomLeft
+            props.placement === "left top" || props.placement === "left bottom"
+              ? motionVariants.left
+              : motionVariants.bottom
           }
           initial="hidden"
           animate="visible"
@@ -97,8 +101,8 @@ const PopoverInner = ({
           ...popoverProps.style,
           ...style,
         }}
-        className={clsx(
-          "overflow-hidden rounded-xl border border-gray-300 bg-white shadow-lg dark:border-gray-600 dark:bg-gray-800",
+        className={twMerge(
+          "overflow-hidden rounded-xl border border-gray-300 bg-white shadow-lg will-change-transform dark:border-gray-600 dark:bg-gray-800",
           className,
         )}
         data-testid="popover"

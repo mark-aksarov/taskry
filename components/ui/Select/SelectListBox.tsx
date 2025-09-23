@@ -1,9 +1,9 @@
-import clsx from "clsx";
 import React from "react";
 import { itemStyles } from "../styles";
 import { ListState, Node } from "react-stately";
 import { ListBoxProps } from "react-aria-components";
 import { mergeProps, useHover, useListBox, useOption } from "react-aria";
+import { twMerge } from "tailwind-merge";
 
 export type SelectListBoxProps<T extends object = any> = Omit<
   ListBoxProps<T>,
@@ -25,7 +25,7 @@ export const SelectListBox = <T extends object>({
     <ul
       {...listBoxProps}
       ref={ref}
-      className={clsx(props.className, "outline-hidden")}
+      className={twMerge(props.className, "outline-hidden")}
     >
       {[...state.collection].map((item) => (
         <Option
@@ -55,10 +55,11 @@ export const Option = <T extends object>({
   const { optionProps, ...states } = useOption({ key: item.key }, state, ref);
   const { hoverProps, isHovered } = useHover({});
 
-  const classes = clsx(
+  const classes = itemStyles({
+    isHovered,
+    isFocused: states.isFocused,
     className,
-    itemStyles({ isHovered, isFocused: states.isFocused }),
-  );
+  });
 
   return (
     <li

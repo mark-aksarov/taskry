@@ -11,14 +11,14 @@ export const focusRing = tv({
 });
 
 export const itemStyles = tv({
-  base: "inline-flex w-full cursor-pointer items-center gap-4 px-4 py-3 text-sm outline-none active:bg-gray-200 dark:active:bg-gray-800",
+  base: "inline-flex w-full cursor-pointer items-center gap-4 px-4 py-3 text-sm text-black outline-none active:bg-gray-200 dark:text-white dark:active:bg-gray-700",
   variants: {
     isHovered: {
       false: "bg-white dark:bg-gray-800",
-      true: "bg-gray-100 dark:bg-gray-700",
+      true: "bg-gray-100 dark:bg-gray-600",
     },
     isFocused: {
-      true: "bg-gray-100 dark:bg-gray-700",
+      true: "bg-gray-100 dark:bg-gray-600",
     },
   },
 });

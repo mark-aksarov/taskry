@@ -9,19 +9,18 @@ import {
 } from "react-aria-components";
 import { FieldError, fieldStyles, Label } from "../Field";
 import { Search } from "lucide-react";
-import clsx from "clsx";
 import { fieldInputStyles } from "../TextField";
 import { tv } from "tailwind-variants";
 
 type SearchFieldProps = RACSearchFieldProps &
   React.RefAttributes<HTMLDivElement> & {
-    label: string;
+    label?: string;
     errorMessage?: string | ((validation: ValidationResult) => string);
     placeholder?: string;
-    inputClassName?: string;
+    inputClassName?: string | ((values: any) => string);
   };
 
-const searchInputStyles = tv({
+export const searchInputStyles = tv({
   extend: fieldInputStyles,
   base: "peer pr-[calc(var(--spacing)*5+18px)] [&::-webkit-search-cancel-button]:hidden",
 });
@@ -35,22 +34,27 @@ export const SearchField = ({
   ...props
 }: SearchFieldProps) => {
   return (
-    <RACSearchField {...props} className={clsx(fieldStyles(), className)}>
-      <Label>{label}</Label>
+    <RACSearchField
+      {...props}
+      className={composeRenderProps(className, (className) =>
+        fieldStyles({ className }),
+      )}
+    >
+      {label && <Label>{label}</Label>}
       <div className="relative">
         <Input
           placeholder={placeholder}
           className={composeRenderProps(
             inputClassName,
             (className, renderProps) =>
-              clsx(className, searchInputStyles({ ...renderProps })),
+              searchInputStyles({ ...renderProps, className }),
           )}
         />
         <Search
           size={18}
           strokeWidth={1.5}
           absoluteStrokeWidth
-          className="pointer-events-none absolute top-1/2 right-5 -translate-y-1/2 peer-disabled:text-gray-400 dark:peer-disabled:text-gray-500"
+          className="pointer-events-none absolute top-1/2 right-5 -translate-y-1/2 text-black peer-disabled:text-gray-400 dark:text-white dark:peer-disabled:text-gray-500"
         />
       </div>
       <FieldError>{errorMessage}</FieldError>

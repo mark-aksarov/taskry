@@ -3,11 +3,20 @@ import { ToggleButtonGroup } from "../ToggleButtonGroup";
 import { ToggleButton } from "./ToggleButton";
 
 const meta: Meta<typeof ToggleButtonGroup> = {
-  title: "Components/ToggleButtonGroup",
+  title: "Components/ui/ToggleButtonGroup",
   component: ToggleButtonGroup,
   tags: ["autodocs"],
+  argTypes: {
+    orientation: {
+      options: ["horizontal", "vertical"],
+      control: { type: "radio" },
+    },
+  },
   args: {
+    isDisabled: false,
+    orientation: "horizontal",
     defaultSelectedKeys: ["apple"],
+    variant: "contrast",
   },
 };
 
@@ -22,15 +31,30 @@ const ToggleButtonGroupTemplate: Story = {
       <ToggleButton id="oranges">Oranges</ToggleButton>
     </ToggleButtonGroup>
   ),
-};
+} satisfies Story;
 
-export const Default: Story = {
+export const Contast = {
   ...ToggleButtonGroupTemplate,
-};
+} satisfies Story;
 
-export const Disabled: Story = {
+export const Primary = {
+  ...ToggleButtonGroupTemplate,
+  args: {
+    ...ToggleButtonGroupTemplate.args,
+    variant: "primary",
+  },
+} satisfies Story;
+
+export const Disabled = {
   ...ToggleButtonGroupTemplate,
   args: {
     isDisabled: true,
   },
-};
+} satisfies Story;
+
+export const Vertical: Story = {
+  ...ToggleButtonGroupTemplate,
+  args: {
+    orientation: "vertical",
+  },
+} satisfies Story;

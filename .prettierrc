@@ -1,4 +1,12 @@
 {
   "plugins": ["prettier-plugin-tailwindcss"],
-  "tailwindFunctions": ["tv"]
+  "tailwindFunctions": ["tv"],
+  "overrides": [
+    {
+      "files": "prisma/seed.ts",
+      "options": {
+        "printWidth": 1000
+      }
+    }
+  ]
 }

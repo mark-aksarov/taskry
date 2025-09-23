@@ -9,7 +9,6 @@ import {
 } from "react-aria-components";
 import { tv } from "tailwind-variants";
 import { focusRing } from "../styles";
-import clsx from "clsx";
 
 type ElementType = "button" | "a";
 
@@ -39,7 +38,7 @@ export type ButtonBaseProps<T extends ElementType> = T extends "a"
 export type ButtonProps<T extends ElementType = "button"> = ButtonOwnProps<T> &
   Omit<ButtonBaseProps<T>, keyof ButtonOwnProps<T>>;
 
-export const baseButton = tv({
+export const baseButtonStyles = tv({
   extend: focusRing,
   base: "inline-flex cursor-pointer items-center gap-x-1.5 rounded-lg font-bold",
   variants: {
@@ -47,13 +46,13 @@ export const baseButton = tv({
       primary:
         "hover:bg-blue-500 active:bg-blue-700 dark:hover:bg-blue-600 dark:active:bg-blue-800",
       secondary:
-        "hover:bg-blue-100 active:bg-blue-200 dark:hover:bg-blue-300 dark:active:bg-blue-400",
+        "hover:bg-blue-200 active:bg-blue-300 dark:hover:bg-blue-300 dark:active:bg-blue-400",
       ghost:
-        "hover:bg-gray-100 active:bg-gray-200 dark:hover:bg-gray-700 dark:active:bg-gray-800",
+        "hover:bg-gray-200 active:bg-gray-300 dark:hover:bg-gray-700 dark:active:bg-gray-800",
       outlined:
-        "hover:bg-gray-100 active:bg-gray-200 dark:hover:bg-gray-700 dark:active:bg-gray-800",
+        "hover:bg-gray-200 active:bg-gray-300 dark:hover:bg-gray-700 dark:active:bg-gray-800",
       contrast:
-        "hover:bg-gray-900 active:bg-gray-800 dark:hover:bg-gray-100 dark:active:bg-gray-200",
+        "hover:bg-gray-900 active:bg-gray-800 dark:hover:bg-gray-200 dark:active:bg-gray-300",
     },
     size: {
       small: "text-xs",
@@ -104,8 +103,8 @@ export const baseButton = tv({
   ],
 });
 
-const button = tv({
-  extend: baseButton,
+export const buttonStyles = tv({
+  extend: baseButtonStyles,
   variants: {
     size: {
       small: "px-3 py-2",
@@ -135,8 +134,8 @@ const button = tv({
   ],
 });
 
-const iconButton = tv({
-  extend: baseButton,
+export const iconButtonStyles = tv({
+  extend: baseButtonStyles,
 
   variants: {
     size: {
@@ -184,8 +183,8 @@ export const Button = <T extends ElementType = "button">({
     string
   >(className, (className, renderProps) =>
     label
-      ? clsx(className, button({ ...renderProps, variant, size }))
-      : clsx(className, iconButton({ ...renderProps, variant, size })),
+      ? buttonStyles({ ...renderProps, variant, size, className })
+      : iconButtonStyles({ ...renderProps, variant, size, className }),
   );
 
   if (as === "a") {

@@ -35,7 +35,10 @@ export const Calendar = <T extends DateValue>(props: AriaCalendarProps<T>) => {
     useCalendar(props, state);
 
   return (
-    <div {...calendarProps} className="flex flex-col gap-4">
+    <div
+      {...calendarProps}
+      className="flex flex-col gap-4 text-black dark:text-white"
+    >
       <div className="flex items-center justify-between">
         <Button
           {...prevButtonProps}
@@ -85,7 +88,7 @@ export const CalendarGrid = ({ state, ...props }: CalendarGridProps) => {
         <tr>
           {weekDays.map((day, index) => (
             <th className="text-center" key={index}>
-              <span className="inline-flex h-8! w-8! items-center justify-center text-sm font-bold">
+              <span className="inline-flex h-8 w-8 items-center justify-center text-sm font-bold">
                 {day}
               </span>
             </th>
@@ -131,7 +134,7 @@ type CalendarCellProps = AriaCalendarCellProps & {
 
 const calendarCell = tv({
   extend: focusRing,
-  base: "inline-flex h-8! w-8! cursor-default items-center justify-center rounded-lg text-sm font-normal",
+  base: "inline-flex h-8 w-8 cursor-default items-center justify-center rounded-lg text-sm font-normal",
   variants: {
     isSelected: {
       true: "bg-blue-700 text-white dark:bg-blue-800",

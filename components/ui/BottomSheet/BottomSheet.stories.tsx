@@ -8,7 +8,7 @@ import { TextField } from "@/components/ui/TextField";
 import { Dialog, DialogBody, DialogHeader } from "../Dialog";
 
 const meta: Meta<typeof BottomSheet> = {
-  title: "Components/BottomSheet",
+  title: "Components/ui/BottomSheet",
   component: BottomSheet,
   tags: ["autodocs"],
   globals: {
@@ -72,8 +72,8 @@ export const WithForm: Story = {
 export const WithLongContent: Story = {
   render: (args) => (
     <BottomSheetTemplate aria-label="Bottom sheet" {...args}>
-      <Dialog className="max-h-[calc(100vh-64px)]">
-        <DialogBody>
+      <Dialog className="max-h-[calc(100dvh-64px)]">
+        <DialogBody className="text-black dark:text-white">
           <h3>The standard Lorem Ipsum passage, used since the 1500s</h3>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do

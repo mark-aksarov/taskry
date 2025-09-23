@@ -1,8 +1,8 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { Link } from "../Link";
 
-const meta: Meta<typeof Link> = {
-  title: "Components/Link",
+const meta = {
+  title: "Components/ui/Link",
   component: Link,
   tags: ["autodocs"],
   args: {

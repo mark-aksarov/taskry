@@ -3,7 +3,7 @@ import { ProgressBar } from "../ProgressBar";
 import { CheckCheck } from "lucide-react";
 
 const meta: Meta<typeof ProgressBar> = {
-  title: "Components/ProgressBar",
+  title: "Components/ui/ProgressBar",
   component: ProgressBar,
   tags: ["autodocs"],
   args: {

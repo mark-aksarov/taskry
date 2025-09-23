@@ -154,15 +154,15 @@ describe("Button", () => {
     expect(ref.current).toBe(button);
   });
 
-  test("should trigger onClick handler", async () => {
-    const handleClick = jest.fn();
+  test("should trigger onPress handler", async () => {
+    const handlePress = jest.fn();
 
-    render(<Button label="Button" onClick={handleClick} />);
+    render(<Button label="Button" onPress={handlePress} />);
 
     const button = screen.getByRole("button");
     const user = userEvent.setup();
 
     await user.click(button);
-    expect(handleClick).toHaveBeenCalledTimes(1);
+    expect(handlePress).toHaveBeenCalledTimes(1);
   });
 });

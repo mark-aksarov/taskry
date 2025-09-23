@@ -6,44 +6,84 @@ import {
   composeRenderProps,
 } from "react-aria-components";
 import { tv } from "tailwind-variants";
-import clsx from "clsx";
 import { overlayStyles } from "../styles";
 
+export type SideSheetSide = "left" | "right";
+
 export type SideSheetProps = ModalOverlayProps &
-  React.RefAttributes<HTMLDivElement>;
+  React.RefAttributes<HTMLDivElement> & {
+    side?: SideSheetSide;
+  };
 
 const sideSheetStyles = tv({
-  base: "h-full w-[355px] overflow-hidden border-l-1 border-gray-300 bg-white transition duration-150 dark:border-gray-600 dark:bg-gray-800",
+  base: "h-full overflow-hidden border-gray-300 bg-white transition duration-150 dark:border-gray-600 dark:bg-gray-800",
   variants: {
+    side: {
+      left: "",
+      right: "",
+    },
     isEntering: {
-      true: "translate-x-full",
+      true: "",
     },
     isExiting: {
-      true: "translate-x-full",
+      true: "",
     },
   },
+  compoundVariants: [
+    {
+      isEntering: true,
+      side: "left",
+      className: "-translate-x-full",
+    },
+    {
+      isExiting: true,
+      side: "left",
+      className: "-translate-x-full",
+    },
+
+    {
+      isEntering: true,
+      side: "right",
+      className: "translate-x-full",
+    },
+    {
+      isExiting: true,
+      side: "right",
+      className: "translate-x-full",
+    },
+  ],
 });
 
 const sideSheetOverlayStyles = tv({
   extend: overlayStyles,
-  base: "justify-end",
+  variants: {
+    side: {
+      left: "justify-start",
+      right: "justify-end",
+    },
+  },
 });
 
 export const SideSheet = ({
   children,
   className,
+  side = "right",
   ...props
 }: SideSheetProps) => {
   return (
-    <ModalOverlay {...props} className={sideSheetOverlayStyles}>
+    <ModalOverlay
+      {...props}
+      className={composeRenderProps(className, (className, renderProps) =>
+        sideSheetOverlayStyles({ ...renderProps, className, side }),
+      )}
+    >
       <RACModal
         className={composeRenderProps(className, (className, renderProps) =>
-          clsx(
-            sideSheetStyles({
-              ...renderProps,
-              className,
-            }),
-          ),
+          sideSheetStyles({
+            side,
+            ...renderProps,
+            className,
+          }),
         )}
       >
         {children}

@@ -5,7 +5,7 @@ import { Button } from "../Button";
 import { fn } from "storybook/test";
 
 const meta: Meta<typeof SearchField> = {
-  title: "Components/SearchField",
+  title: "Components/ui/SearchField",
   component: SearchField,
   tags: ["autodocs"],
   args: {

@@ -1,18 +1,19 @@
 import React from "react";
 import { Menu } from "./Menu";
 import { Dialog } from "../Dialog";
+import { Button } from "../Button";
 import { BottomSheet } from "../BottomSheet";
 import { Placement, Popover } from "../Popover";
 import { useMenuTriggerState } from "react-stately";
-import type { MenuTriggerProps as RACMenuTriggerProps } from "react-stately";
 import { PressResponder } from "@react-aria/interactions";
 import { AriaMenuProps, useMenuTrigger } from "react-aria";
-import { Button } from "../Button";
+import type { MenuTriggerProps as RACMenuTriggerProps } from "react-stately";
 
 export type MenuTriggerOwnProps = {
   overlayType?: "popover" | "bottomsheet";
   placement?: Placement;
   renderButton?: () => React.ReactNode;
+  renderDialogHeader?: () => React.ReactNode;
 };
 
 export type MenuTriggerProps<T extends object = any> = AriaMenuProps<T> &
@@ -23,6 +24,7 @@ export const MenuTrigger = <T extends object>({
   overlayType,
   placement = "bottom left",
   renderButton,
+  renderDialogHeader,
   ...props
 }: MenuTriggerProps<T>) => {
   const state = useMenuTriggerState(props);
@@ -37,12 +39,11 @@ export const MenuTrigger = <T extends object>({
       </PressResponder>
 
       {overlayType === "bottomsheet" ? (
-        <BottomSheet
-          isDismissable={true}
-          state={state}
-          aria-labelledby={menuProps["aria-labelledby"]}
-        >
-          <Menu {...props} {...menuProps} />
+        <BottomSheet isDismissable={true} state={state}>
+          <Dialog aria-labelledby={menuProps["aria-labelledby"]}>
+            {renderDialogHeader && renderDialogHeader()}
+            <Menu {...props} {...menuProps} />
+          </Dialog>
         </BottomSheet>
       ) : (
         <Popover state={state} triggerRef={ref} placement={placement}>

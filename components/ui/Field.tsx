@@ -32,7 +32,7 @@ export const fieldStyles = tv({
 });
 
 export const fieldLabelStyles = tv({
-  base: "text-xs font-bold",
+  base: "text-xs font-bold text-black dark:text-white",
 });
 
 export const fieldErrorStyles = tv({

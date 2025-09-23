@@ -7,7 +7,7 @@ import { Dialog, DialogBody, DialogHeader } from "../Dialog";
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 
 const meta: Meta<typeof Modal> = {
-  title: "Components/Modal",
+  title: "Components/ui/Modal",
   component: Modal,
   tags: ["autodocs"],
   args: {
@@ -65,7 +65,7 @@ export const WithLongContent = {
       <ModalTemplate {...args}>
         <Dialog className="max-h-[calc(100dvh-var(--spacing)*5)]">
           <DialogHeader>Modal title</DialogHeader>
-          <DialogBody>
+          <DialogBody className="text-black dark:text-white">
             <h3>The standard Lorem Ipsum passage, used since the 1500s</h3>
             <p>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do

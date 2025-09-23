@@ -7,7 +7,7 @@ import { Form } from "react-aria-components";
 import { Button } from "../Button";
 
 const meta: Meta<typeof Select> = {
-  title: "Components/Select",
+  title: "Components/ui/Select",
   component: Select,
   tags: ["autodocs"],
   args: {

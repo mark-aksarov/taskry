@@ -1,10 +1,6 @@
 @import "tailwindcss";
 @plugin "tailwindcss-react-aria-components";
 
-body {
-  @apply dark:bg-gray-900 dark:text-white;
-}
-
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
 @theme inline {

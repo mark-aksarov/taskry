@@ -1,4 +1,3 @@
-import clsx from "clsx";
 import { tv } from "tailwind-variants";
 import type {
   TextFieldProps as RACTextFieldProps,
@@ -25,6 +24,9 @@ type TextFieldProps = RACTextFieldProps &
 export const fieldInputStyles = tv({
   extend: fieldGroupStyles,
   variants: {
+    multiline: {
+      true: "resize-none",
+    },
     isFocused: {
       true: "border-blue-500 dark:border-blue-800",
     },
@@ -55,19 +57,19 @@ export const TextField = ({
   inputClassName,
   ...props
 }: TextFieldProps) => {
-  const textFieldClasses = clsx(fieldStyles(), className);
   const inputClasses = composeRenderProps<string | undefined, any, string>(
     inputClassName,
     (className, renderProps) =>
-      clsx(
-        multiline && "resize-none",
-        className,
-        fieldInputStyles({ ...renderProps }),
-      ),
+      fieldInputStyles({ ...renderProps, className, multiline }),
   );
 
   return (
-    <RACTextField {...props} className={textFieldClasses}>
+    <RACTextField
+      {...props}
+      className={composeRenderProps(className, (className) =>
+        fieldStyles({ className }),
+      )}
+    >
       <Label>{label}</Label>
       {multiline ? (
         <TextArea placeholder={placeholder} className={inputClasses} />

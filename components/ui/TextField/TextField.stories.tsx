@@ -6,10 +6,9 @@ import { Button } from "@/components/ui/Button";
 import { fn } from "storybook/test";
 
 const meta = {
-  title: "Components/TextField",
+  title: "Components/ui/TextField",
   component: TextField,
   tags: ["autodocs"],
-
   argTypes: {
     type: {
       options: ["text", "password"],

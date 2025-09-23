@@ -3,7 +3,6 @@ import { Popover } from "../Popover";
 import { SelectListBox } from "./SelectListBox";
 import { useSelectState } from "react-stately";
 import { HiddenSelect, useSelect, type AriaSelectProps } from "react-aria";
-import clsx from "clsx";
 import { fieldStyles, fieldLabelStyles, fieldErrorStyles } from "../Field";
 import { BottomSheet } from "../BottomSheet";
 import { SelectButton } from "./SelectButton";
@@ -72,7 +71,7 @@ export const Select = <T extends object = any>({
     <div
       data-testid="select"
       ref={props.ref}
-      className={clsx(fieldStyles(), className)}
+      className={fieldStyles({ className })}
     >
       <span
         data-testid="select-label"
