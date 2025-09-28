@@ -1,2 +1,2 @@
 export { TaskList } from "./TaskList";
-export { mockedTasks } from "./mockedTasks";
+export { tasksMock } from "./tasksMock";

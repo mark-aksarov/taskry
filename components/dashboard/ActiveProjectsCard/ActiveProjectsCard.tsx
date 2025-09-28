@@ -4,9 +4,10 @@ import {
   DashboardCardIcon,
   DashboardCardStat,
   DashboardCardValue,
-} from "./DashboardCard";
-import { getActiveProjects, getTotalProjects } from "../../lib/queries/project";
-import { CardHeading } from "../common/Card";
+} from "../DashboardCard";
+import { getActiveProjects, getTotalProjects } from "@/lib/queries/project";
+import { CardHeading } from "@/components/common/Card";
+import { Skeleton } from "@/components/ui/Skeleton";
 
 export const ActiveProjectsCard = async () => {
   const activeProjectsPromise = getActiveProjects();
@@ -53,3 +54,17 @@ export const ActiveProjectsCard = async () => {
     />
   );
 };
+
+export const ActiveProjectsCardSkeleton = () => (
+  <DashboardCard
+    className="w-full"
+    heading={<CardHeading>Active Projects</CardHeading>}
+    icon={
+      <DashboardCardIcon color="blue">
+        <FolderClosed size={30} strokeWidth={2} absoluteStrokeWidth />
+      </DashboardCardIcon>
+    }
+    value={<Skeleton className="w-[3rem] text-3xl" />}
+    stat={<Skeleton className="w-[10rem] text-base" />}
+  />
+);

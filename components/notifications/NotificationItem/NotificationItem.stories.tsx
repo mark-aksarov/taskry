@@ -2,7 +2,7 @@ import { Meta, StoryObj } from "@storybook/react";
 import { NotificationItem } from "./NotificationItem";
 import { NotificationRecipientWithRelations } from "@/lib/queries/types";
 
-const notificationRecipientMock: NotificationRecipientWithRelations = {
+const notificationMock: NotificationRecipientWithRelations = {
   notificationId: 1,
   userId: "1",
   isRead: true,
@@ -38,7 +38,10 @@ const meta = {
   component: NotificationItem,
   tags: ["autodocs"],
   args: {
-    notificationRecipient: notificationRecipientMock,
+    notification: notificationMock,
+  },
+  parameters: {
+    layout: "fullscreen",
   },
 } satisfies Meta<typeof NotificationItem>;
 
@@ -46,6 +49,24 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {};
+
+export const WithoutCreator: Story = {
+  args: {
+    notification: {
+      ...notificationMock,
+      notification: {
+        ...notificationMock.notification,
+        actor: null,
+      },
+    },
+  },
+};
+
+export const Skeleton: Story = {
+  args: {
+    notification: undefined,
+  },
+};
 
 export const OnMobile: Story = {
   globals: {

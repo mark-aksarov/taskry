@@ -4,6 +4,7 @@ export type TaskPreview = Prisma.TaskGetPayload<{
   include: {
     creator: {
       select: {
+        name: true;
         imageUrl: true;
       };
     };

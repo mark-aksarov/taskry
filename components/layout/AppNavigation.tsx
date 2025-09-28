@@ -17,7 +17,7 @@ import { twMerge } from "tailwind-merge";
 import { tv } from "tailwind-variants";
 import { Button, Link } from "react-aria-components";
 import { Divider } from "@/components/ui/Divider";
-import { LangMenuTriggerWithBottomSheet } from "./LangMenuTrigger";
+import { LangMenuBottomSheetTrigger } from "./LangMenuTrigger";
 
 interface AppNavigationProps {
   className?: string;
@@ -26,7 +26,7 @@ interface AppNavigationProps {
 
 export const navLinkStyle = tv({
   extend: toggleButtonStyles,
-  base: "w-full gap-4 px-4 py-3 text-sm font-semibold",
+  base: "w-full gap-4 px-4 py-3 text-sm font-bold",
 });
 
 export const AppNavigation = ({ className }: AppNavigationProps) => {
@@ -136,7 +136,7 @@ export const AppNavigation = ({ className }: AppNavigationProps) => {
       <Divider />
 
       <div className="flex flex-col gap-2.5 md:hidden">
-        <LangMenuTriggerWithBottomSheet />
+        <LangMenuBottomSheetTrigger />
 
         <Button className={navLinkStyle}>
           <Sun size={18} strokeWidth={1.5} absoluteStrokeWidth />

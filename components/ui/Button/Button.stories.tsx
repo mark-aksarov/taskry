@@ -66,7 +66,7 @@ export const Default = {
 export const Variant = {
   tags: ["!test"],
   render: (args) => {
-    const textClasses = "text-sm font-semibold text-black dark:text-white";
+    const textClasses = "text-sm font-bold text-black dark:text-white";
 
     return (
       <div className="grid max-w-[20rem] grid-cols-3 justify-center gap-4">

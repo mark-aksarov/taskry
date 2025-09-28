@@ -5,9 +5,16 @@ import { StorageLimitCard } from "@/components/dashboard/StorageLimitCard";
 import { Card, CardHeading } from "@/components/common/Card";
 import { TaskList } from "@/components/tasks/TaskList";
 import { Suspense } from "react";
-import { Pagination } from "@/components/common/Pagination";
-import { TaskCommentList } from "@/components/tasks/TaskCommentList/TaskCommentList";
+import { Pagination, PaginationSkeleton } from "@/components/common/Pagination";
 import { twMerge } from "tailwind-merge";
+import { UserList } from "@/components/users/UserList";
+import { ListSkeleton } from "@/components/common/ListSkeleton";
+import { TaskItem } from "@/components/tasks/TaskItem";
+import { UserItem } from "@/components/users/UserItem";
+import { ActiveProjectsCardSkeleton } from "@/components/dashboard/ActiveProjectsCard/ActiveProjectsCard";
+import { ActiveTasksCardSkeleton } from "@/components/dashboard/ActiveTasksCard/ActiveTasksCard";
+import { TasksDoneCardSkeleton } from "@/components/dashboard/TasksDoneCard/TasksDoneCard";
+import { StorageLimitCardSkeleton } from "@/components/dashboard/StorageLimitCard/StorageLimitCard";
 
 export default async function DashboardPage() {
   return (
@@ -20,19 +27,36 @@ export default async function DashboardPage() {
         )}
       >
         <h2 className="text-xl font-bold md:hidden">Dashboard</h2>
-        <ActiveProjectsCard />
-        <ActiveTasksCard />
-        <TasksDoneCard />
-        <StorageLimitCard />
+        <Suspense fallback={<ActiveProjectsCardSkeleton />}>
+          <ActiveProjectsCard />
+        </Suspense>
+
+        <Suspense fallback={<ActiveTasksCardSkeleton />}>
+          <ActiveTasksCard />
+        </Suspense>
+
+        <Suspense fallback={<TasksDoneCardSkeleton />}>
+          <TasksDoneCard />
+        </Suspense>
+
+        <Suspense fallback={<StorageLimitCardSkeleton />}>
+          <StorageLimitCard />
+        </Suspense>
 
         <div className="max-lg:col-start-1 max-lg:col-end-3 lg:col-start-1 lg:col-end-3 lg:row-start-2 lg:row-end-4">
           <Card>
             <div className="flex flex-col gap-4">
               <CardHeading>Tasks</CardHeading>
-              <Suspense fallback={<div>Loading</div>}>
+              <Suspense
+                fallback={
+                  <>
+                    <ListSkeleton items={10} renderItem={() => <TaskItem />} />
+                    <PaginationSkeleton />
+                  </>
+                }
+              >
                 <TaskList />
               </Suspense>
-              <Pagination />
             </div>
           </Card>
         </div>
@@ -40,11 +64,17 @@ export default async function DashboardPage() {
         <div className="max-lg:col-start-1 max-lg:col-end-3">
           <Card>
             <div className="flex flex-col gap-4">
-              <CardHeading>Task comments</CardHeading>
-              <Suspense fallback={<div>Loading</div>}>
-                <TaskCommentList />
+              <CardHeading>Team</CardHeading>
+              <Suspense
+                fallback={
+                  <>
+                    <ListSkeleton items={10} renderItem={() => <UserItem />} />
+                    <PaginationSkeleton />
+                  </>
+                }
+              >
+                <UserList />
               </Suspense>
-              <Pagination />
             </div>
           </Card>
         </div>

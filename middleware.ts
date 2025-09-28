@@ -4,14 +4,15 @@ import { getSessionCookie } from "better-auth/cookies";
 const PROTECTED_ROUTES = ["/"];
 
 const AUTH_ROUTES = new Set([
-	"/sign-in",
-	"/sign-up",
-	"/reset-password",
-	"/verify-email",
-	"/forgot-password",
+  "/sign-in",
+  "/sign-up",
+  "/reset-password",
+  "/verify-email",
+  "/forgot-password",
 ]);
 
 export async function middleware(request: NextRequest) {
+  /*
 	const session = getSessionCookie(request);
 	const pathname = request.nextUrl.pathname;
 
@@ -25,18 +26,18 @@ export async function middleware(request: NextRequest) {
 
 	if (session && isAuthRoute) {
 		return NextResponse.redirect(new URL("/", request.url));
-	}
+	}*/
 
-	return NextResponse.next();
+  return NextResponse.next();
 }
 
 export const config = {
-	matcher: [
-		"/",
-		"/sign-in",
-		"/sign-up",
-		"/reset-password",
-		"/verify-email",
-		"/forgot-password",
-	],
+  matcher: [
+    "/",
+    "/sign-in",
+    "/sign-up",
+    "/reset-password",
+    "/verify-email",
+    "/forgot-password",
+  ],
 };

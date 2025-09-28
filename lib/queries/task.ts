@@ -1,6 +1,6 @@
 import { cache } from "react";
 import prisma from "../prisma";
-import { TaskCommentPreview, TaskPreview } from "./types";
+import { TaskPreview } from "./types";
 import { ACTIVE_TASK_STATUS_ID, DONE_TASK_STATUS_ID } from "./constants";
 
 export const getTask = cache(async (id: number) => {
@@ -14,6 +14,7 @@ export const getTasks = cache(async (): Promise<TaskPreview[]> => {
     include: {
       creator: {
         select: {
+          name: true,
           imageUrl: true,
         },
       },
@@ -63,39 +64,3 @@ export const getTasksDone = cache(async () => {
     where: { statusId: DONE_TASK_STATUS_ID },
   });
 });
-
-export const getUnreadTaskComments = cache(
-  async (userId: string): Promise<TaskCommentPreview[]> => {
-    const unreadComments = await prisma.taskComment.findMany({
-      where: {
-        // Only comments that the user has NOT read
-        NOT: {
-          reads: {
-            some: {
-              userId,
-            },
-          },
-        },
-      },
-      include: {
-        sender: {
-          select: {
-            name: true,
-            imageUrl: true,
-          },
-        },
-        task: {
-          select: {
-            title: true,
-          },
-        },
-      },
-      orderBy: {
-        createdAt: "desc",
-      },
-      take: 10,
-    });
-
-    return unreadComments;
-  },
-);

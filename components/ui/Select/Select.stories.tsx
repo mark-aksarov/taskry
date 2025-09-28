@@ -27,7 +27,7 @@ type Story = StoryObj<typeof meta>;
 
 const SelectTemplate: Story = {
   args: {
-    optionClassName: "font-semibold",
+    optionClassName: "font-bold",
   },
   render: (args) => {
     const itemClasses = "flex items-center gap-4";
@@ -64,6 +64,7 @@ export const WithSheet: Story = {
   args: {
     ...SelectTemplate.args,
     overlayType: "bottomsheet",
+    overlayClassName: "",
   },
   globals: {
     viewport: { value: "iphone6", isRotated: false },

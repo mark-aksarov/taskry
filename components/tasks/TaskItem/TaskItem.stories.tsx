@@ -32,12 +32,30 @@ const meta = {
   args: {
     task: taskMock,
   },
+  parameters: {
+    layout: "fullscreen",
+  },
 } satisfies Meta<typeof TaskItem>;
 
 export default meta;
 type Story = StoryObj<typeof TaskItem>;
 
 export const Default: Story = {};
+
+export const WithoutCreator: Story = {
+  args: {
+    task: {
+      ...taskMock,
+      creator: null,
+    },
+  },
+};
+
+export const Skeleton: Story = {
+  args: {
+    task: undefined,
+  },
+};
 
 export const OnMobile: Story = {
   globals: {

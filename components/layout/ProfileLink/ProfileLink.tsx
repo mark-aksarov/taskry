@@ -11,14 +11,10 @@ const styles = tv({
 export const ProfileLink = () => {
   return (
     <Link href="/profile" className={styles}>
-      <Image
-        src="/man.jpg"
-        alt="user avatar"
-        width={32}
-        height={32}
-        className="rounded-full"
-      />
-      <span className="font-semibold text-black max-md:text-xs md:text-lg dark:text-white">
+      <div className="h-8 w-8 overflow-hidden rounded-full bg-gray-300">
+        <Image src="/man.jpg" alt="user avatar" width={32} height={32} />
+      </div>
+      <span className="font-bold text-black max-md:text-sm md:text-lg dark:text-white">
         Adam Smith
       </span>
     </Link>

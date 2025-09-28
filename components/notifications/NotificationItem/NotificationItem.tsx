@@ -1,7 +1,10 @@
+"use client";
+
 import { BaseItem } from "@/components/common/BaseItem";
 import { Button } from "@/components/ui/Button";
 import { DialogHeader } from "@/components/ui/Dialog";
 import { MenuTrigger } from "@/components/ui/Menu";
+import { Skeleton } from "@/components/ui/Skeleton";
 import { NotificationRecipientWithRelations } from "@/lib/queries/types";
 import { Ellipsis, ListCheck, Trash } from "lucide-react";
 import Image from "next/image";
@@ -11,20 +14,22 @@ import { Item } from "react-stately";
 import { twMerge } from "tailwind-merge";
 
 interface NotificationItemProps {
-  notificationRecipient: NotificationRecipientWithRelations;
+  notification?: NotificationRecipientWithRelations;
   className?: string;
 }
 
 export const NotificationItem = ({
-  notificationRecipient,
+  notification,
   className,
 }: NotificationItemProps) => {
-  const {
-    isRead,
-    notification: { actor, type, createdAt: date, target, targetName },
-  } = notificationRecipient;
-
   const locale = "en-GB";
+
+  const isRead = notification?.isRead;
+  const date = notification?.notification?.createdAt;
+  const type = notification?.notification?.type;
+  const target = notification?.notification?.target;
+  const targetName = notification?.notification?.targetName;
+  const actor = notification?.notification?.actor;
 
   const formattedDate = useMemo(() => {
     if (!date) return "";
@@ -45,7 +50,7 @@ export const NotificationItem = ({
     match.toUpperCase(),
   );
 
-  const itemClasses = "flex items-center gap-4 font-semibold";
+  const itemClasses = "flex items-center gap-4 font-bold";
   const secondaryText = "text-gray-500 dark:text-gray-400";
   const primaryText = "text-black dark:text-white";
 
@@ -202,32 +207,61 @@ export const NotificationItem = ({
   }
 
   return (
-    <BaseItem className={twMerge("w-full items-start gap-3", className)}>
+    <BaseItem
+      className={twMerge(
+        "w-full items-start gap-3 px-4",
+        notification && !isRead && "bg-gray-100 dark:bg-gray-900",
+        className,
+      )}
+    >
       <div className="relative shrink-0">
-        <Image
-          src={actor?.imageUrl!}
-          alt={actor?.name!}
-          width={40}
-          height={40}
-          className="rounded-full"
-        />
-        {!isRead && (
-          <div className="absolute top-0 right-0 h-[10px] w-[10px] rounded-full border-1 border-white bg-green-700 dark:bg-green-800" />
+        {notification ? (
+          <div className="h-10 w-10 overflow-hidden rounded-full bg-gray-200">
+            {actor && actor.imageUrl && (
+              <Image
+                src={actor.imageUrl}
+                alt={actor.name}
+                width={40}
+                height={40}
+              />
+            )}
+          </div>
+        ) : (
+          <Skeleton className="h-10 w-10" />
         )}
       </div>
       <div className="flex flex-col gap-1 overflow-hidden">
-        <span className="text-sm">
-          <span className={`${primaryText} font-semibold`}>{actor?.name!}</span>
-          <span className={`${secondaryText} font-normal`}>
-            &nbsp;{getActionText()}&nbsp;
-          </span>
-          <span className={`${primaryText} font-semibold`}>{getTarget()}</span>
-        </span>
-        <span className={`${secondaryText} text-xs font-medium`}>
-          {formattedUpper}
-        </span>
+        {notification ? (
+          <>
+            <span className="text-sm">
+              <h4 className={`${primaryText} inline font-bold`}>
+                <>{actor ? actor.name : "Unknown User"}</>
+              </h4>
+              <span className={`${secondaryText} font-normal`}>
+                &nbsp;{getActionText()}&nbsp;
+              </span>
+              <span className={`${primaryText} font-bold`}>{getTarget()}</span>
+            </span>
+            <span className={`${secondaryText} text-xs font-medium`}>
+              {formattedUpper}
+            </span>
+          </>
+        ) : (
+          <>
+            <Skeleton className="w-[12rem] text-sm" />
+            <Skeleton className="w-[7rem] text-xs" />
+          </>
+        )}
       </div>
-      <div className="ml-auto">{actionsMenu}</div>
+      <div className="ml-auto">
+        {notification ? (
+          actionsMenu
+        ) : (
+          <div className="p-2">
+            <Skeleton className="h-1 w-4" />
+          </div>
+        )}
+      </div>
     </BaseItem>
   );
 };

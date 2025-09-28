@@ -6,6 +6,7 @@ import { User } from "@react-aria/test-utils";
 import userEvent from "@testing-library/user-event";
 import { render, screen } from "@testing-library/react";
 import { MenuTrigger, MenuTriggerProps } from "./MenuTrigger";
+import { DialogHeader } from "../Dialog";
 
 const TestMenu = (props: Partial<MenuTriggerProps>) => (
   <MenuTrigger {...props}>
@@ -72,6 +73,23 @@ describe("Menu", () => {
     await user.click(button);
     const bottomSheet = screen.getByTestId("bottom-sheet");
     expect(bottomSheet).toBeInTheDocument();
+  });
+
+  test("should render dialog header when renderDialogHeader is provided", async () => {
+    render(
+      <TestMenu
+        overlayType="bottomsheet"
+        renderDialogHeader={() => <DialogHeader>Header</DialogHeader>}
+      />,
+    );
+
+    const user = userEvent.setup();
+    const button = screen.getByRole("button");
+    await user.click(button);
+    const bottomSheet = screen.getByTestId("bottom-sheet");
+    expect(bottomSheet).toBeInTheDocument();
+    const header = screen.getByText("Header");
+    expect(header).toBeInTheDocument();
   });
 
   test("should select an option via keyboard", async () => {

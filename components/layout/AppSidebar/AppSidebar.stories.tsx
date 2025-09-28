@@ -8,6 +8,7 @@ import { DialogCloseButton } from "@/components/ui/Dialog/Dialog";
 import { AppSidebarHeader } from "./AppSidebarHeader";
 import { AppSidebarBody } from "./AppSidebarBody";
 import { AppSidebarHeading } from "./AppSidebarHeading";
+import { AppNavigation } from "../AppNavigation";
 
 const meta = {
   title: "Components/layout/AppSidebar",
@@ -30,7 +31,9 @@ export const Default = {
       <AppSidebarHeader>
         <AppSidebarHeading />
       </AppSidebarHeader>
-      <AppSidebarBody />
+      <AppSidebarBody>
+        <AppNavigation />
+      </AppSidebarBody>
     </AppSidebar>
   ),
 } satisfies Story;
@@ -59,7 +62,9 @@ export const WrapWithSheet = {
             <DialogCloseButton />
           </div>
         </AppSidebarHeader>
-        <AppSidebarBody />
+        <AppSidebarBody>
+          <AppNavigation />
+        </AppSidebarBody>
       </AppSidebar>
     );
   },

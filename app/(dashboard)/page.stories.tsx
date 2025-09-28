@@ -8,10 +8,12 @@ import {
   getTasks,
   getTasksDone,
   getTotalTasks,
-  getUnreadTaskComments,
 } from "@/lib/queries/task";
-import { mockedTasks } from "@/components/tasks/TaskList";
-import { mockedTaskComments } from "@/components/tasks/TaskCommentList";
+import { tasksMock } from "@/components/tasks/TaskList";
+import { getNotifications } from "@/lib/queries/notification";
+import { notificationsMock } from "@/components/notifications/NotificationList";
+import { getUsers } from "@/lib/queries/user";
+import { usersMock } from "@/components/users/UserList/usersMock";
 
 const meta = {
   title: "components/pages/Dashboard",
@@ -43,10 +45,11 @@ const meta = {
     mocked(getTotalTasks).mockImplementation(
       () => new Promise((res) => res((lastTotalTasks += lastTotalTasks * 0.1))),
     );
-    mocked(getTasks).mockReturnValue(new Promise((res) => res(mockedTasks)));
-    mocked(getUnreadTaskComments).mockReturnValue(
-      new Promise((res) => res(mockedTaskComments)),
+    mocked(getTasks).mockReturnValue(new Promise((res) => res(tasksMock)));
+    mocked(getNotifications).mockReturnValue(
+      new Promise((res) => res(notificationsMock.slice(0, 5))),
     );
+    mocked(getUsers).mockReturnValue(new Promise((res) => res(usersMock)));
   },
 } satisfies Meta<typeof DashboardPage>;
 
@@ -54,6 +57,13 @@ export default meta;
 type Story = StoryObj<typeof DashboardPage>;
 
 export const Default: Story = {};
+
+export const WithNoTasksAndUsers = {
+  beforeEach: () => {
+    mocked(getTasks).mockReturnValue(new Promise((res) => res([])));
+    mocked(getUsers).mockReturnValue(new Promise((res) => res([])));
+  },
+} satisfies Story;
 
 export const Tablet: Story = {
   globals: {

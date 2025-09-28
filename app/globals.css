@@ -3,11 +3,9 @@
 
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
-@theme inline {
-  --font-sans: var(--font-nunito-sans);
-}
-
 @theme {
+  --font-sans: "Nunito Sans", sans-serif;
+
   --text-*: initial;
 
   --text-xs: 0.75rem;

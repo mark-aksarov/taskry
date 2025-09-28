@@ -1,6 +1,6 @@
 import { NotificationRecipientWithRelations } from "@/lib/queries/types";
 
-export const mockedNotifications: NotificationRecipientWithRelations[] = [
+export const notificationsMock: NotificationRecipientWithRelations[] = [
   {
     notificationId: 1,
     userId: "user-1",
@@ -36,7 +36,7 @@ export const mockedNotifications: NotificationRecipientWithRelations[] = [
       targetName: "Website Redesign",
       createdAt: new Date("2025-09-22T09:30:00Z"),
       updatedAt: new Date("2025-09-22T09:45:00Z"),
-      actor: { id: "user-3", name: "Bob Smith", imageUrl: "/man.jpg" },
+      actor: { id: "user-2", name: "Alice Johnson", imageUrl: null },
       target: {
         id: 2,
         project: { id: 10, title: "Website Redesign" },
@@ -59,7 +59,7 @@ export const mockedNotifications: NotificationRecipientWithRelations[] = [
       targetName: "Hello!",
       createdAt: new Date("2025-09-21T08:30:00Z"),
       updatedAt: new Date("2025-09-21T08:30:00Z"),
-      actor: { id: "user-2", name: "Alice Johnson", imageUrl: "/woman.jpg" },
+      actor: null,
       target: {
         id: 3,
         project: null,

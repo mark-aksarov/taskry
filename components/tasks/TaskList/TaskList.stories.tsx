@@ -3,7 +3,7 @@ import { TaskList } from "./TaskList";
 import { Suspense } from "react";
 import { mocked } from "storybook/test";
 import { getTasks } from "@/lib/queries/task";
-import { mockedTasks } from "./mockedTasks";
+import { tasksMock } from "./tasksMock";
 
 const meta = {
   title: "Components/tasks/TaskList",
@@ -17,7 +17,10 @@ const meta = {
     ),
   ],
   beforeEach: () => {
-    mocked(getTasks).mockReturnValue(new Promise((res) => res(mockedTasks)));
+    mocked(getTasks).mockReturnValue(new Promise((res) => res(tasksMock)));
+  },
+  parameters: {
+    layout: "fullscreen",
   },
 } satisfies Meta<typeof TaskList>;
 

@@ -23,12 +23,18 @@ import { Item } from "react-stately";
 import { twMerge } from "tailwind-merge";
 import { BaseItem } from "@/components/common/BaseItem";
 import { DialogHeader } from "@/components/ui/Dialog";
+import { Skeleton } from "@/components/ui/Skeleton";
 
-export const TaskItem = ({ task }: { task: TaskPreview }) => {
+const baseOverflow = "overflow-hidden text-nowrap overflow-ellipsis";
+const detailsClasses = "flex shrink-0 grow-0 flex-col gap-1";
+const titleClasses = `${baseOverflow} text-sm font-bold text-black dark:text-white`;
+const descriptionClasses = `${baseOverflow} text-xs font-medium text-gray-500 dark:text-gray-400`;
+
+const TaskDetails = ({ task }: { task?: TaskPreview }) => {
   const locale = "en-GB";
 
   const formattedDeadline = useMemo(() => {
-    if (!task.deadline) return "";
+    if (!task?.deadline) return "";
 
     const date = new Date(task.deadline);
 
@@ -37,33 +43,60 @@ export const TaskItem = ({ task }: { task: TaskPreview }) => {
       month: "short",
       year: "numeric",
     });
-  }, [task.deadline, locale]);
+  }, [task?.deadline, locale]);
 
-  const subtasksDone = task.subtasks.filter((subtask) => subtask.isDone).length;
+  const classes = twMerge("w-[10rem]", detailsClasses);
 
-  const baseOverflow = "overflow-hidden text-nowrap overflow-ellipsis";
-  const itemClasses = "flex items-center gap-4 font-semibold";
-  const detailsClasses = "flex shrink-0 grow-0 flex-col gap-1";
-  const titleClasses = `${baseOverflow} text-sm font-semibold text-black dark:text-white`;
-  const descriptionClasses = `${baseOverflow} text-xs font-medium text-gray-500 dark:text-gray-400`;
+  if (!task) {
+    return (
+      <div className={classes}>
+        <Skeleton className="text-sm" />
+        <Skeleton className="w-75/100 text-xs" />
+      </div>
+    );
+  }
 
-  const taskDetails = (
-    <div className={twMerge("w-[10rem]", detailsClasses)}>
+  return (
+    <div className={classes}>
       <h4 className={titleClasses}>{task.title}</h4>
       <span className={descriptionClasses}>
         Deadline on {formattedDeadline}
       </span>
     </div>
   );
+};
 
-  const categoryDetails = (
-    <div className={twMerge("w-[7rem] @max-2xl:hidden", detailsClasses)}>
+const TaskCategory = ({ task }: { task?: TaskPreview }) => {
+  const classes = twMerge("w-[7rem] @max-2xl:hidden", detailsClasses);
+
+  if (!task) {
+    return (
+      <div className={classes}>
+        <Skeleton className="text-sm" />
+        <Skeleton className="w-75/100 text-xs" />
+      </div>
+    );
+  }
+
+  return (
+    <div className={classes}>
       <h4 className={titleClasses}>Category</h4>
       <span className={descriptionClasses}>{task.category.name}</span>
     </div>
   );
+};
 
-  const progressBar = (
+const TaskProgress = ({ task }: { task?: TaskPreview }) => {
+  const classes =
+    "w-[calc(9.25rem + 10cqw)] max-w-[13.25rem] shrink-1 grow-1 @max-md:hidden";
+
+  if (!task) {
+    return <Skeleton className={twMerge(classes, "text-xs")} />;
+  }
+
+  const subtasksDone = task.subtasks.filter((subtask) => subtask.isDone).length;
+
+  return (
     <ProgressBar
       value={(subtasksDone / task.subtasks.length) * 100}
       label={
@@ -72,35 +105,12 @@ export const TaskItem = ({ task }: { task: TaskPreview }) => {
           {subtasksDone}/{task.subtasks.length}
         </div>
       }
-      className="w-[calc(9.25rem + 10cqw)] max-w-[13.25rem] shrink-1 grow-1 @max-md:hidden"
+      className={classes}
     />
   );
+};
 
-  const statusBadge = (
-    <Badge
-      color={
-        task.statusId === PENDING_TASK_STATUS_ID
-          ? "orange"
-          : task.statusId === ACTIVE_TASK_STATUS_ID
-            ? "green"
-            : "blue"
-      }
-      className="w-[5.5rem] shrink-0 grow-0 @max-xl:hidden"
-    >
-      {task.status.nameEn}
-    </Badge>
-  );
-
-  const creatorImage = task.creator?.imageUrl && (
-    <Image
-      width={32}
-      height={32}
-      src={task.creator.imageUrl}
-      alt=""
-      className="h-8 w-8 shrink-0 grow-0 rounded-full"
-    />
-  );
-
+const TaskActionMenu = ({ task }: { task?: TaskPreview }) => {
   const renderButton = (className?: string) => (
     <Button
       aria-label="task item menu"
@@ -109,6 +119,8 @@ export const TaskItem = ({ task }: { task: TaskPreview }) => {
       className={twMerge("shrink-0 grow-0 rounded-full", className)}
     />
   );
+
+  const itemClasses = "flex items-center gap-4 font-bold";
 
   const menuItems = [
     <Item textValue="Delete" key="delete">
@@ -135,7 +147,15 @@ export const TaskItem = ({ task }: { task: TaskPreview }) => {
     </Item>,
   ];
 
-  const actionsMenu = (
+  if (!task) {
+    return (
+      <div className="p-2">
+        <Skeleton className="h-1 w-4" />
+      </div>
+    );
+  }
+
+  return (
     <>
       <MenuTrigger
         overlayType="bottomsheet"
@@ -156,17 +176,64 @@ export const TaskItem = ({ task }: { task: TaskPreview }) => {
       </MenuTrigger>
     </>
   );
+};
+
+const TaskStatusBadge = ({ task }: { task?: TaskPreview }) => {
+  const classes = "w-[5.5rem] shrink-0 grow-0 @max-xl:hidden";
+
+  if (!task) {
+    return <Skeleton className={twMerge(classes, "h-[1.75rem]")} />;
+  }
 
   return (
+    <Badge
+      color={
+        task.statusId === PENDING_TASK_STATUS_ID
+          ? "orange"
+          : task.statusId === ACTIVE_TASK_STATUS_ID
+            ? "green"
+            : "blue"
+      }
+      className={classes}
+    >
+      {task.status.nameEn}
+    </Badge>
+  );
+};
+
+const TaskCreatorImage = ({ task }: { task?: TaskPreview }) => {
+  const classes =
+    "h-8 w-8 shrink-0 grow-0 bg-gray-200 rounded-full  overflow-hidden";
+
+  if (!task) {
+    return <Skeleton className={classes} />;
+  }
+
+  return (
+    <div className={classes}>
+      {task.creator && task.creator.imageUrl && (
+        <Image
+          width={32}
+          height={32}
+          src={task.creator.imageUrl}
+          alt={task.creator.name}
+        />
+      )}
+    </div>
+  );
+};
+
+export const TaskItem = ({ task }: { task?: TaskPreview }) => {
+  return (
     <BaseItem className="justify-between gap-8">
-      {taskDetails}
-      {categoryDetails}
-      {progressBar}
+      <TaskDetails task={task} />
+      <TaskCategory task={task} />
+      <TaskProgress task={task} />
       <div className="flex items-center gap-8">
-        {statusBadge}
+        <TaskStatusBadge task={task} />
         <div className="flex items-center gap-2">
-          {creatorImage}
-          {actionsMenu}
+          <TaskCreatorImage task={task} />
+          <TaskActionMenu task={task} />
         </div>
       </div>
     </BaseItem>

@@ -21,9 +21,9 @@ describe("Button", () => {
 
   test.each<[ButtonVariant, string]>([
     ["primary", "hover:bg-blue-500"],
-    ["secondary", "hover:bg-blue-100"],
-    ["ghost", "hover:bg-gray-100"],
-    ["outlined", "hover:bg-gray-100"],
+    ["secondary", "hover:bg-blue-200"],
+    ["ghost", "hover:bg-gray-200"],
+    ["outlined", "hover:bg-gray-200"],
     ["contrast", "hover:bg-gray-900"],
   ])("applies '%s' variant styles", (variant, expectedClass) => {
     render(<Button label="Button" variant={variant} />);

@@ -16,7 +16,7 @@ export const DashboardCardStat = ({
   return (
     <div
       className={twMerge(
-        "flex items-center gap-2",
+        "flex items-center gap-2 text-base",
         direction === "up" && "text-green-700 dark:text-green-500",
         direction === "down" && "text-red-600 dark:text-red-400",
       )}

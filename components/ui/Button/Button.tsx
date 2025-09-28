@@ -1,3 +1,5 @@
+"use client";
+
 import {
   LinkProps as ReactAriaLinkProps,
   Link as ReactAriaLink,
@@ -44,15 +46,15 @@ export const baseButtonStyles = tv({
   variants: {
     variant: {
       primary:
-        "hover:bg-blue-500 active:bg-blue-700 dark:hover:bg-blue-600 dark:active:bg-blue-800",
+        "pressed:bg-blue-700 dark:pressed:bg-blue-800 hover:bg-blue-500 dark:hover:bg-blue-600",
       secondary:
-        "hover:bg-blue-200 active:bg-blue-300 dark:hover:bg-blue-300 dark:active:bg-blue-400",
+        "pressed:bg-blue-300 dark:pressed:bg-blue-400 hover:bg-blue-200 dark:hover:bg-blue-300",
       ghost:
-        "hover:bg-gray-200 active:bg-gray-300 dark:hover:bg-gray-700 dark:active:bg-gray-800",
+        "pressed:bg-gray-300 dark:pressed:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700",
       outlined:
-        "hover:bg-gray-200 active:bg-gray-300 dark:hover:bg-gray-700 dark:active:bg-gray-800",
+        "pressed:bg-gray-300 dark:pressed:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700",
       contrast:
-        "hover:bg-gray-900 active:bg-gray-800 dark:hover:bg-gray-200 dark:active:bg-gray-300",
+        "pressed:bg-gray-800 dark:pressed:bg-gray-300 hover:bg-gray-900 dark:hover:bg-gray-200",
     },
     size: {
       small: "text-xs",

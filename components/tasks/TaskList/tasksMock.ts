@@ -5,7 +5,7 @@ import {
   PENDING_TASK_STATUS_ID,
 } from "@/lib/queries/constants";
 
-export const mockedTasks: TaskPreview[] = [
+export const tasksMock: TaskPreview[] = [
   {
     id: 1,
     title: "Design landing page",
@@ -46,7 +46,7 @@ export const mockedTasks: TaskPreview[] = [
     createdAt: new Date("2025-09-02"),
     updatedAt: new Date("2025-09-16"),
 
-    creator: { imageUrl: "/man.jpg" },
+    creator: null,
     status: {
       id: ACTIVE_TASK_STATUS_ID,
       nameEn: "Active",
@@ -78,7 +78,7 @@ export const mockedTasks: TaskPreview[] = [
     createdAt: new Date("2025-09-03"),
     updatedAt: new Date("2025-09-17"),
 
-    creator: { imageUrl: "/man.jpg" },
+    creator: { imageUrl: null },
     status: {
       id: DONE_TASK_STATUS_ID,
       nameEn: "Done",
@@ -276,7 +276,7 @@ export const mockedTasks: TaskPreview[] = [
     createdAt: new Date("2025-09-09"),
     updatedAt: new Date("2025-09-19"),
 
-    creator: { imageUrl: "/man.jpg" },
+    creator: { imageUrl: null },
     status: {
       id: PENDING_TASK_STATUS_ID,
       nameEn: "Pending",
@@ -305,7 +305,7 @@ export const mockedTasks: TaskPreview[] = [
     createdAt: new Date("2025-09-10"),
     updatedAt: new Date("2025-09-20"),
 
-    creator: { imageUrl: "/man.jpg" },
+    creator: null,
     status: {
       id: DONE_TASK_STATUS_ID,
       nameEn: "Done",

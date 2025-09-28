@@ -7,7 +7,7 @@ import { navLinkStyle } from "./AppNavigation";
 import { useOverlayTrigger } from "react-aria";
 import { Button } from "../ui/Button";
 
-const itemClasses = "flex items-center gap-4 font-semibold";
+const itemClasses = "flex items-center gap-4 font-bold";
 
 const menuItems = [
   <Item textValue="Delete" key="delete">
@@ -32,7 +32,7 @@ const menuItems = [
   </Item>,
 ];
 
-export const LangMenuTriggerWithBottomSheet = () => {
+export const LangMenuBottomSheetTrigger = () => {
   return (
     <MenuTrigger
       overlayType="bottomsheet"
@@ -53,7 +53,7 @@ export const LangMenuTriggerWithBottomSheet = () => {
   );
 };
 
-export const LangMenuTriggerWithPopover = () => {
+export const LangMenuPopoverTrigger = () => {
   const state = useOverlayTriggerState({});
   const { triggerProps } = useOverlayTrigger({ type: "dialog" }, state);
 

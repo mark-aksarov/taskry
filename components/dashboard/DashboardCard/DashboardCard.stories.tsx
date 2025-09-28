@@ -12,7 +12,7 @@ const meta = {
   component: DashboardCard,
   tags: ["autodocs"],
   args: {
-    className: "h-[160px] w-[400px]",
+    className: "w-[400px]",
   },
 } satisfies Meta<typeof DashboardCard>;
 

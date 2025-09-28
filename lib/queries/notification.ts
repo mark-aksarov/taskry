@@ -76,6 +76,8 @@ export const getNotifications = cache(
           },
         },
       },
+
+      take: 5,
     });
   },
 );

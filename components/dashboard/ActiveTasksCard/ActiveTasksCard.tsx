@@ -4,9 +4,10 @@ import {
   DashboardCardIcon,
   DashboardCardStat,
   DashboardCardValue,
-} from "./DashboardCard";
+} from "../DashboardCard";
 import { getActiveTasks, getTotalTasks } from "@/lib/queries/task";
-import { CardHeading } from "../common/Card";
+import { CardHeading } from "@/components/common/Card";
+import { Skeleton } from "@/components/ui/Skeleton";
 
 export const ActiveTasksCard = async () => {
   const activeTasksPromise = getActiveTasks();
@@ -45,3 +46,17 @@ export const ActiveTasksCard = async () => {
     />
   );
 };
+
+export const ActiveTasksCardSkeleton = () => (
+  <DashboardCard
+    className="w-full"
+    heading={<CardHeading>Active Tasks</CardHeading>}
+    icon={
+      <DashboardCardIcon color="orange">
+        <CalendarCheck size={30} strokeWidth={2} absoluteStrokeWidth />
+      </DashboardCardIcon>
+    }
+    value={<Skeleton className="w-[3rem] text-3xl" />}
+    stat={<Skeleton className="w-[10rem] text-base" />}
+  />
+);

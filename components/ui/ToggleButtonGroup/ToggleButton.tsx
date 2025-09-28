@@ -21,7 +21,7 @@ export const toggleButtonStyles = tv({
     },
     isSelected: {
       false:
-        "hover:bg-gray-100 active:bg-gray-200 dark:hover:bg-gray-600 dark:active:bg-gray-700",
+        "pressed:bg-gray-200 dark:pressed:bg-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600",
     },
     isDisabled: {
       true: "pointer-events-none bg-gray-100 text-gray-400 dark:bg-gray-800 dark:text-gray-500",

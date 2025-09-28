@@ -2,26 +2,19 @@ import "../app/globals.css";
 
 import type { Preview, ReactRenderer } from "@storybook/nextjs-vite";
 import { withThemeByDataAttribute } from "@storybook/addon-themes";
-import { Nunito_Sans } from "next/font/google";
 import { INITIAL_VIEWPORTS } from "storybook/viewport";
 import { sb } from "storybook/test";
 
 sb.mock(import("../lib/prisma"));
 sb.mock(import("../lib/queries/project"));
 sb.mock(import("../lib/queries/task"));
-sb.mock(import("../lib/queries/notifications"));
-
-const geistSans = Nunito_Sans({
-  variable: "--font-nunito-sans",
-  subsets: ["latin"],
-});
+sb.mock(import("../lib/queries/notification"));
+sb.mock(import("../lib/queries/user"));
 
 const preview: Preview = {
   decorators: [
     (Story) => (
-      <div
-        className={`${geistSans.className} bg-white antialiased dark:bg-gray-900`}
-      >
+      <div className="bg-white dark:bg-gray-900">
         <Story />
       </div>
     ),

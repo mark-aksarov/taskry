@@ -1,4 +1,5 @@
 import "./globals.css";
+import { Suspense } from "react";
 import type { Metadata } from "next";
 import { Nunito_Sans } from "next/font/google";
 import {
@@ -9,8 +10,16 @@ import {
 } from "@/components/layout/AppSidebar";
 import { AppHeader } from "@/components/layout/AppHeader";
 import { AppNavigation } from "@/components/layout/AppNavigation";
+import { NotificationList } from "@/components/notifications/NotificationList";
+import { NotificationPopoverTrigger } from "@/components/notifications/NotificationPopoverTrigger";
+import { NotificationSheetTrigger } from "@/components/notifications/NotificationSheetTrigger";
+import { AppBottomSheetTrigger } from "@/components/layout/AppBottomSheetTrigger";
+import { AppSidebarSheetTrigger } from "@/components/layout/AppSidebarSheetTrigger";
+import { ListSkeleton } from "@/components/common/ListSkeleton";
+import { NotificationItem } from "@/components/notifications/NotificationItem";
+import { ViewAllButton } from "@/components/notifications/ViewAllButton";
 
-const geistSans = Nunito_Sans({
+const nunitoSans = Nunito_Sans({
   variable: "--font-nunito-sans",
   subsets: ["latin"],
 });
@@ -27,7 +36,7 @@ export default async function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} antialiased`}>
+      <body className={`${nunitoSans.className} antialiased`}>
         <Layout>{children}</Layout>
       </body>
     </html>
@@ -35,6 +44,10 @@ export default async function RootLayout({
 }
 
 export async function Layout({ children }: { children: React.ReactNode }) {
+  const notificationListSkeleton = (
+    <ListSkeleton items={7} renderItem={() => <NotificationItem />} />
+  );
+
   return (
     <div className="flex min-h-screen w-full bg-gray-100 dark:bg-gray-900">
       <AppSidebar className="sticky top-0 h-screen shrink-0 max-xl:hidden">
@@ -47,7 +60,35 @@ export async function Layout({ children }: { children: React.ReactNode }) {
       </AppSidebar>
 
       <div className="flex w-full flex-col">
-        <AppHeader title="Dashboard" />
+        <AppHeader
+          title="Dashboard"
+          notificationPopoverTrigger={
+            <NotificationPopoverTrigger
+              notificationList={
+                <Suspense fallback={notificationListSkeleton}>
+                  <>
+                    <NotificationList />
+                    <ViewAllButton />
+                  </>
+                </Suspense>
+              }
+            />
+          }
+          notificationSheetTrigger={
+            <NotificationSheetTrigger
+              notificationList={
+                <Suspense fallback={notificationListSkeleton}>
+                  <>
+                    <NotificationList />
+                    <ViewAllButton />
+                  </>
+                </Suspense>
+              }
+            />
+          }
+          appBottomSheetTrigger={<AppBottomSheetTrigger />}
+          appSidebarSheetTrigger={<AppSidebarSheetTrigger />}
+        />
         <main className="max-md:p-4 md:max-xl:p-6 xl:p-7.5">{children}</main>
       </div>
     </div>
