@@ -44,8 +44,8 @@ export const StorageLimitCardSkeleton = () => {
           <Database size={30} strokeWidth={2} absoluteStrokeWidth />
         </DashboardCardIcon>
       }
-      value={<Skeleton className="w-[3rem] text-3xl" />}
-      stat={<Skeleton className="w-full text-base" />}
+      value={<Skeleton className="w-[3rem]" size="3xl" />}
+      stat={<Skeleton className="w-full" size="base" />}
     />
   );
 };

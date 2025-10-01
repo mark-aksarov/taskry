@@ -91,8 +91,8 @@ export function UserItem({ user }: { user?: User }) {
             </>
           ) : (
             <>
-              <Skeleton className="w-[7rem] text-sm" />
-              <Skeleton className="w-75/100 text-xs" />
+              <Skeleton className="w-[7rem]" size="sm" />
+              <Skeleton className="w-75/100" size="xs" />
             </>
           )}
         </div>

@@ -64,7 +64,7 @@ export const ActiveProjectsCardSkeleton = () => (
         <FolderClosed size={30} strokeWidth={2} absoluteStrokeWidth />
       </DashboardCardIcon>
     }
-    value={<Skeleton className="w-[3rem] text-3xl" />}
-    stat={<Skeleton className="w-[10rem] text-base" />}
+    value={<Skeleton className="w-[3rem]" size="3xl" />}
+    stat={<Skeleton className="w-[10rem]" size="base" />}
   />
 );

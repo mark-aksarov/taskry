@@ -50,8 +50,8 @@ const TaskDetails = ({ task }: { task?: TaskPreview }) => {
   if (!task) {
     return (
       <div className={classes}>
-        <Skeleton className="text-sm" />
-        <Skeleton className="w-75/100 text-xs" />
+        <Skeleton size="sm" />
+        <Skeleton className="w-75/100" size="xs" />
       </div>
     );
   }
@@ -72,8 +72,8 @@ const TaskCategory = ({ task }: { task?: TaskPreview }) => {
   if (!task) {
     return (
       <div className={classes}>
-        <Skeleton className="text-sm" />
-        <Skeleton className="w-75/100 text-xs" />
+        <Skeleton size="sm" />
+        <Skeleton className="w-75/100" size="xs" />
       </div>
     );
   }
@@ -91,7 +91,7 @@ const TaskProgress = ({ task }: { task?: TaskPreview }) => {
     "w-[calc(9.25rem + 10cqw)] max-w-[13.25rem] shrink-1 grow-1 @max-md:hidden";
 
   if (!task) {
-    return <Skeleton className={twMerge(classes, "text-xs")} />;
+    return <Skeleton className={classes} size="xs" />;
   }
 
   const subtasksDone = task.subtasks.filter((subtask) => subtask.isDone).length;

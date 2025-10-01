@@ -17,13 +17,15 @@ export const TextSize: Story = {
   render: (args) => {
     return (
       <div className="flex flex-col gap-4">
-        <Skeleton className="text-xs" {...args} />
-        <Skeleton className="text-sm" {...args} />
-        <Skeleton className="text-md" {...args} />
-        <Skeleton className="text-lg" {...args} />
-        <Skeleton className="text-xl" {...args} />
-        <Skeleton className="text-2xl" {...args} />
-        <Skeleton className="text-3xl" {...args} />
+        <Skeleton size="xs" {...args} />
+        <Skeleton size="sm" {...args} />
+        <Skeleton size="base" {...args} />
+        <Skeleton size="lg" {...args} />
+        <Skeleton size="xl" {...args} />
+        <Skeleton size="2xl" {...args} />
+        <Skeleton size="3xl" {...args} />
+        <Skeleton size="4xl" {...args} />
+        <Skeleton size="5xl" {...args} />
       </div>
     );
   },

@@ -248,8 +248,8 @@ export const NotificationItem = ({
           </>
         ) : (
           <>
-            <Skeleton className="w-[12rem] text-sm" />
-            <Skeleton className="w-[7rem] text-xs" />
+            <Skeleton className="w-[12rem]" size="sm" />
+            <Skeleton className="w-[7rem]" size="xs" />
           </>
         )}
       </div>
