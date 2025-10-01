@@ -1,10 +1,9 @@
 import { Button as RACButton } from "react-aria-components";
-import { Item, useOverlayTriggerState } from "react-stately";
+import { Item } from "react-stately";
 import { Languages } from "lucide-react";
 import { MenuTrigger } from "../ui/Menu";
 import { DialogHeader } from "../ui/Dialog";
 import { navLinkStyle } from "./AppNavigation";
-import { useOverlayTrigger } from "react-aria";
 import { Button } from "../ui/Button";
 
 const itemClasses = "flex items-center gap-4 font-bold";
@@ -54,14 +53,10 @@ export const LangMenuBottomSheetTrigger = () => {
 };
 
 export const LangMenuPopoverTrigger = () => {
-  const state = useOverlayTriggerState({});
-  const { triggerProps } = useOverlayTrigger({ type: "dialog" }, state);
-
   return (
     <MenuTrigger
       renderButton={() => (
         <Button
-          {...triggerProps}
           aria-label="language"
           variant="ghost"
           iconLeft={

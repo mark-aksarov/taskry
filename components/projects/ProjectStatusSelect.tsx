@@ -1,6 +1,6 @@
 import { Item } from "react-stately";
-import { Select } from "@/components/ui/Select";
 import { getProjectCategories } from "@/lib/queries/project";
+import { ResponsiveSelect } from "../common/ResponsiveSelect";
 
 export async function ProjectStatusSelect() {
   const categories = await getProjectCategories(1);
@@ -10,7 +10,7 @@ export async function ProjectStatusSelect() {
   }
 
   return (
-    <Select
+    <ResponsiveSelect
       label="Status"
       overlayClassName="w-[var(--trigger-width)]"
       defaultSelectedKey={"all"}
@@ -27,6 +27,6 @@ export async function ProjectStatusSelect() {
       <Item textValue="completed" key="completed">
         Completed
       </Item>
-    </Select>
+    </ResponsiveSelect>
   );
 }

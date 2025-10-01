@@ -1,9 +1,9 @@
 "use client";
 
 import { BaseItem } from "@/components/common/BaseItem";
+import { ResponsiveMenuTrigger } from "@/components/common/ResponsiveMenuTrigger";
 import { Button } from "@/components/ui/Button";
 import { DialogHeader } from "@/components/ui/Dialog";
-import { MenuTrigger } from "@/components/ui/Menu";
 import { Skeleton } from "@/components/ui/Skeleton";
 import { NotificationRecipientWithRelations } from "@/lib/queries/types";
 import { Ellipsis, ListCheck, Trash } from "lucide-react";
@@ -54,25 +54,24 @@ export const NotificationItem = ({
   const secondaryText = "text-gray-500 dark:text-gray-400";
   const primaryText = "text-black dark:text-white";
 
-  const renderButton = (className?: string) => (
-    <Button
-      aria-label="task item menu"
-      variant="ghost"
-      iconLeft={<Ellipsis size={16} strokeWidth={1.5} absoluteStrokeWidth />}
-      className={twMerge("shrink-0 grow-0 rounded-full", className)}
-    />
-  );
-
   const actionsMenu = (
     <>
-      <MenuTrigger
-        overlayType="bottomsheet"
+      <ResponsiveMenuTrigger
         renderDialogHeader={() => (
           <DialogHeader className="px-4 py-3" titleClassName="text-base">
             Actions
           </DialogHeader>
         )}
-        renderButton={() => renderButton("md:hidden")}
+        renderButton={() => (
+          <Button
+            aria-label="task item menu"
+            variant="ghost"
+            iconLeft={
+              <Ellipsis size={16} strokeWidth={1.5} absoluteStrokeWidth />
+            }
+            className="shrink-0 grow-0 rounded-full"
+          />
+        )}
       >
         <>
           {!isRead && (
@@ -89,27 +88,7 @@ export const NotificationItem = ({
             <Trash size={16} strokeWidth={1.5} absoluteStrokeWidth /> Delete
           </div>
         </Item>
-      </MenuTrigger>
-      <MenuTrigger
-        renderButton={() => renderButton("max-md:hidden")}
-        placement="bottom right"
-      >
-        <>
-          {!isRead && (
-            <Item textValue="Mark as Read" key="read">
-              <div className={itemClasses}>
-                <ListCheck size={16} strokeWidth={1.5} absoluteStrokeWidth />{" "}
-                Mark as Read
-              </div>
-            </Item>
-          )}
-        </>
-        <Item textValue="Delete" key="delete">
-          <div className={itemClasses}>
-            <Trash size={16} strokeWidth={1.5} absoluteStrokeWidth /> Delete
-          </div>
-        </Item>
-      </MenuTrigger>
+      </ResponsiveMenuTrigger>
     </>
   );
 

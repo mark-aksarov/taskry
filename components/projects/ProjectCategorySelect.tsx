@@ -1,6 +1,8 @@
-import { Select } from "@/components/ui/Select";
-import { getProjectCategories } from "@/lib/queries/project";
+"use client";
+
 import { Item } from "react-stately";
+import { getProjectCategories } from "@/lib/queries/project";
+import { ResponsiveSelect } from "../common/ResponsiveSelect";
 
 export async function ProjectCategorySelect() {
   const categories = await getProjectCategories(1);
@@ -11,7 +13,7 @@ export async function ProjectCategorySelect() {
   }
 
   return (
-    <Select
+    <ResponsiveSelect
       label="Category"
       overlayClassName="w-[var(--trigger-width)]"
       defaultSelectedKey={"all"}
@@ -22,6 +24,6 @@ export async function ProjectCategorySelect() {
           <div className={itemClasses}>{item.name}</div>
         </Item>
       )}
-    </Select>
+    </ResponsiveSelect>
   );
 }

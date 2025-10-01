@@ -17,13 +17,13 @@ import {
   PENDING_TASK_STATUS_ID,
 } from "@/lib/queries/constants";
 import Image from "next/image";
-import { MenuTrigger } from "@/components/ui/Menu";
 import { Button } from "@/components/ui/Button";
 import { Item } from "react-stately";
 import { twMerge } from "tailwind-merge";
 import { BaseItem } from "@/components/common/BaseItem";
 import { DialogHeader } from "@/components/ui/Dialog";
 import { Skeleton } from "@/components/ui/Skeleton";
+import { ResponsiveMenuTrigger } from "@/components/common/ResponsiveMenuTrigger";
 
 const baseOverflow = "overflow-hidden text-nowrap overflow-ellipsis";
 const detailsClasses = "flex shrink-0 grow-0 flex-col gap-1";
@@ -111,41 +111,7 @@ const TaskProgress = ({ task }: { task?: TaskPreview }) => {
 };
 
 const TaskActionMenu = ({ task }: { task?: TaskPreview }) => {
-  const renderButton = (className?: string) => (
-    <Button
-      aria-label="task item menu"
-      variant="ghost"
-      iconLeft={<Ellipsis size={16} strokeWidth={1.5} absoluteStrokeWidth />}
-      className={twMerge("shrink-0 grow-0 rounded-full", className)}
-    />
-  );
-
   const itemClasses = "flex items-center gap-4 font-bold";
-
-  const menuItems = [
-    <Item textValue="Delete" key="delete">
-      <div className={itemClasses}>
-        <Trash size={16} /> Delete
-      </div>
-    </Item>,
-    <Item textValue="Mark as Pending" key="pending">
-      <div className={itemClasses}>
-        <CircleEllipsis size={16} /> Mark as Pending
-      </div>
-    </Item>,
-    <Item textValue="Mark as Done" key="done">
-      <div className={itemClasses}>
-        <Check size={16} />
-        Mark as Done
-      </div>
-    </Item>,
-    <Item textValue="Mark as Active" key="active">
-      <div className={itemClasses}>
-        <Clock size={16} />
-        Mark as Active
-      </div>
-    </Item>,
-  ];
 
   if (!task) {
     return (
@@ -156,25 +122,47 @@ const TaskActionMenu = ({ task }: { task?: TaskPreview }) => {
   }
 
   return (
-    <>
-      <MenuTrigger
-        overlayType="bottomsheet"
-        renderDialogHeader={() => (
-          <DialogHeader className="px-4 py-3" titleClassName="text-base">
-            Actions
-          </DialogHeader>
-        )}
-        renderButton={() => renderButton("md:hidden")}
-      >
-        {menuItems}
-      </MenuTrigger>
-      <MenuTrigger
-        renderButton={() => renderButton("max-md:hidden")}
-        placement="bottom right"
-      >
-        {menuItems}
-      </MenuTrigger>
-    </>
+    <ResponsiveMenuTrigger
+      placement="bottom right"
+      renderDialogHeader={() => (
+        <DialogHeader className="px-4 py-3" titleClassName="text-base">
+          Actions
+        </DialogHeader>
+      )}
+      renderButton={() => (
+        <Button
+          aria-label="task item menu"
+          variant="ghost"
+          iconLeft={
+            <Ellipsis size={16} strokeWidth={1.5} absoluteStrokeWidth />
+          }
+          className="shrink-0 grow-0 rounded-full"
+        />
+      )}
+    >
+      <Item textValue="Delete" key="delete">
+        <div className={itemClasses}>
+          <Trash size={16} /> Delete
+        </div>
+      </Item>
+      <Item textValue="Mark as Pending" key="pending">
+        <div className={itemClasses}>
+          <CircleEllipsis size={16} /> Mark as Pending
+        </div>
+      </Item>
+      <Item textValue="Mark as Done" key="done">
+        <div className={itemClasses}>
+          <Check size={16} />
+          Mark as Done
+        </div>
+      </Item>
+      <Item textValue="Mark as Active" key="active">
+        <div className={itemClasses}>
+          <Clock size={16} />
+          Mark as Active
+        </div>
+      </Item>
+    </ResponsiveMenuTrigger>
   );
 };
 

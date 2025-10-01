@@ -1,10 +1,10 @@
-import { DatePicker } from "@/components/ui/DatePicker";
+import { ResponsiveDatePicker } from "../common/ResponsiveDatePicker";
 
 export function ProjectDeadline() {
   return (
     <div className="flex flex-col gap-4">
-      <DatePicker label="Deadline from" />
-      <DatePicker label="Deadline to" />
+      <ResponsiveDatePicker label="Deadline from" />
+      <ResponsiveDatePicker label="Deadline to" />
     </div>
   );
 }

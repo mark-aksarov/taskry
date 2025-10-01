@@ -6,58 +6,15 @@ import { DialogHeader } from "@/components/ui/Dialog";
 import { MenuTrigger } from "@/components/ui/Menu";
 import { Skeleton } from "@/components/ui/Skeleton";
 import { User } from "@/generated/prisma";
+import { useResponsiveOverlayType } from "@/lib/hooks/useResponsiveOverlayType";
 import { Ellipsis, Pencil, Trash } from "lucide-react";
 import Image from "next/image";
 import { Item } from "react-stately";
-import { twMerge } from "tailwind-merge";
 
 export function UserItem({ user }: { user?: User }) {
   const itemClasses = "flex items-center gap-4 font-bold";
 
-  const renderButton = (className?: string) => (
-    <Button
-      aria-label="task item menu"
-      variant="ghost"
-      iconLeft={<Ellipsis size={16} strokeWidth={1.5} absoluteStrokeWidth />}
-      className={twMerge("shrink-0 grow-0 rounded-full", className)}
-    />
-  );
-
-  const menuItems = [
-    <Item textValue="Edit" key="pending">
-      <div className={itemClasses}>
-        <Pencil size={16} /> Edit
-      </div>
-    </Item>,
-    <Item textValue="Delete" key="done">
-      <div className={itemClasses}>
-        <Trash size={16} />
-        Delete
-      </div>
-    </Item>,
-  ];
-
-  const actionsMenu = (
-    <>
-      <MenuTrigger
-        overlayType="bottomsheet"
-        renderDialogHeader={() => (
-          <DialogHeader className="px-4 py-3" titleClassName="text-base">
-            Actions
-          </DialogHeader>
-        )}
-        renderButton={() => renderButton("md:hidden")}
-      >
-        {menuItems}
-      </MenuTrigger>
-      <MenuTrigger
-        renderButton={() => renderButton("max-md:hidden")}
-        placement="bottom right"
-      >
-        {menuItems}
-      </MenuTrigger>
-    </>
-  );
+  const overlayType = useResponsiveOverlayType();
 
   const imageClasses =
     "h-9 w-9 shrink-0 grow-0 rounded-full bg-gray-200 overflow-hidden";
@@ -98,7 +55,37 @@ export function UserItem({ user }: { user?: User }) {
         </div>
       </div>
       {user ? (
-        actionsMenu
+        <MenuTrigger
+          overlayType={overlayType}
+          placement="bottom right"
+          renderDialogHeader={() => (
+            <DialogHeader className="px-4 py-3" titleClassName="text-base">
+              Actions
+            </DialogHeader>
+          )}
+          renderButton={() => (
+            <Button
+              aria-label="task item menu"
+              variant="ghost"
+              iconLeft={
+                <Ellipsis size={16} strokeWidth={1.5} absoluteStrokeWidth />
+              }
+              className="shrink-0 grow-0 rounded-full"
+            />
+          )}
+        >
+          <Item textValue="Edit" key="pending">
+            <div className={itemClasses}>
+              <Pencil size={16} /> Edit
+            </div>
+          </Item>
+          <Item textValue="Delete" key="done">
+            <div className={itemClasses}>
+              <Trash size={16} />
+              Delete
+            </div>
+          </Item>
+        </MenuTrigger>
       ) : (
         <div className="p-2">
           <Skeleton className="h-1 w-4" />

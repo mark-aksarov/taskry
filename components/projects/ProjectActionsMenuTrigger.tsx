@@ -1,8 +1,10 @@
 import { useOverlayTrigger } from "react-aria";
+import { Check, CircleEllipsis, Clock, Ellipsis, Trash } from "lucide-react";
+import { Button } from "@/components/ui/Button";
+import { DialogHeader } from "@/components/ui/Dialog";
 import { Item, useOverlayTriggerState } from "react-stately";
-import { MenuTrigger } from "../ui/Menu";
-import { Button } from "../ui/Button";
-import { Ellipsis, Trash } from "lucide-react";
+import { useResponsiveOverlayType } from "@/lib/hooks/useResponsiveOverlayType";
+import { ResponsiveMenuTrigger } from "@/components/common/ResponsiveMenuTrigger";
 
 export const ProjectActionsMenuTrigger = () => {
   const state = useOverlayTriggerState({});
@@ -10,30 +12,25 @@ export const ProjectActionsMenuTrigger = () => {
 
   const itemClasses = "flex items-center gap-4 font-bold";
 
+  const overlayType = useResponsiveOverlayType();
+
   return (
-    <MenuTrigger
+    <ResponsiveMenuTrigger
+      renderDialogHeader={() => (
+        <DialogHeader className="px-4 py-3" titleClassName="text-base">
+          Actions
+        </DialogHeader>
+      )}
       renderButton={() => (
-        <>
-          <Button
-            {...triggerProps}
-            aria-label="actions"
-            variant="outlined"
-            iconLeft={
-              <Ellipsis size={16} strokeWidth={1.5} absoluteStrokeWidth />
-            }
-            className="md:hidden"
-          />
-          <Button
-            {...triggerProps}
-            aria-label="actions"
-            label="Actions"
-            variant="outlined"
-            iconLeft={
-              <Ellipsis size={16} strokeWidth={1.5} absoluteStrokeWidth />
-            }
-            className="max-md:hidden"
-          />
-        </>
+        <Button
+          {...triggerProps}
+          aria-label="actions"
+          label={overlayType === "popover" ? "Actions" : null}
+          variant="outlined"
+          iconLeft={
+            <Ellipsis size={16} strokeWidth={1.5} absoluteStrokeWidth />
+          }
+        />
       )}
       placement="bottom right"
     >
@@ -43,6 +40,24 @@ export const ProjectActionsMenuTrigger = () => {
           Remove
         </div>
       </Item>
-    </MenuTrigger>
+      <Item textValue="Mark as Pending" key="pending">
+        <div className={itemClasses}>
+          <CircleEllipsis size={16} strokeWidth={1.5} absoluteStrokeWidth />{" "}
+          Mark as Pending
+        </div>
+      </Item>
+      <Item textValue="Mark as Active" key="active">
+        <div className={itemClasses}>
+          <Check size={16} strokeWidth={1.5} absoluteStrokeWidth />
+          Mark as Active
+        </div>
+      </Item>
+      <Item textValue="Mark as Completed" key="completed">
+        <div className={itemClasses}>
+          <Clock size={16} strokeWidth={1.5} absoluteStrokeWidth />
+          Mark as Completed
+        </div>
+      </Item>
+    </ResponsiveMenuTrigger>
   );
 };

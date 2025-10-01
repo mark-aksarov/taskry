@@ -1,6 +1,6 @@
-import { Select } from "../ui/Select";
 import { Item } from "react-stately";
 import { getUsers } from "@/lib/queries/user";
+import { ResponsiveSelect } from "../common/ResponsiveSelect";
 
 export async function UserSelect() {
   const users = await getUsers(1);
@@ -11,7 +11,7 @@ export async function UserSelect() {
   }
 
   return (
-    <Select
+    <ResponsiveSelect
       label="Creator"
       overlayClassName="w-[var(--trigger-width)]"
       defaultSelectedKey={"all"}
@@ -22,6 +22,6 @@ export async function UserSelect() {
           <div className={itemClasses}>{item.name}</div>
         </Item>
       )}
-    </Select>
+    </ResponsiveSelect>
   );
 }

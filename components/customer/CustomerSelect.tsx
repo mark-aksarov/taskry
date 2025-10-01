@@ -1,6 +1,6 @@
-import { getCustomers } from "@/lib/queries/customers";
-import { Select } from "../ui/Select";
 import { Item } from "react-stately";
+import { getCustomers } from "@/lib/queries/customers";
+import { ResponsiveSelect } from "../common/ResponsiveSelect";
 
 export async function CustomerSelect() {
   const customers = await getCustomers(1);
@@ -11,7 +11,7 @@ export async function CustomerSelect() {
   }
 
   return (
-    <Select
+    <ResponsiveSelect
       label="Customer"
       overlayClassName="w-[var(--trigger-width)]"
       defaultSelectedKey={"all"}
@@ -22,6 +22,6 @@ export async function CustomerSelect() {
           <div className={itemClasses}>{item.fullName}</div>
         </Item>
       )}
-    </Select>
+    </ResponsiveSelect>
   );
 }
