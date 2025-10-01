@@ -1,3 +1,5 @@
+import "server-only";
+
 import { cache } from "react";
 
 export const getStorageUsage = cache(async () => {

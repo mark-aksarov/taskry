@@ -1,3 +1,5 @@
+import "server-only";
+
 import prisma from "@/lib/prisma";
 import { betterAuth } from "better-auth";
 import { redirect } from "next/navigation";
