@@ -26,7 +26,7 @@ export default async function DashboardPage() {
           "md:max-lg:grid md:max-lg:grid-cols-[1fr_1fr] md:max-lg:grid-rows-[10rem_10rem_auto] md:max-lg:gap-6",
         )}
       >
-        <h2 className="text-xl font-bold md:hidden">Dashboard</h2>
+        <h2 className="text-xl font-extrabold md:hidden">Dashboard</h2>
         <Suspense fallback={<ActiveProjectsCardSkeleton />}>
           <ActiveProjectsCard />
         </Suspense>

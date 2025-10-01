@@ -160,9 +160,11 @@ export const DatePicker = <T extends DateValue>({
         ref={props.ref}
         className={fieldStyles({ className })}
       >
-        <span {...labelProps} className={fieldLabelStyles()}>
-          {props.label}
-        </span>
+        {props.label && (
+          <span {...labelProps} className={fieldLabelStyles()}>
+            {props.label}
+          </span>
+        )}
 
         <div
           ref={groupRef}

@@ -16,11 +16,7 @@ interface SkeletonProps extends React.ComponentPropsWithRef<"div"> {
   className?: string;
 }
 
-export const Skeleton = ({
-  className,
-  size = "base",
-  ...props
-}: SkeletonProps) => {
+export const Skeleton = ({ className, size, ...props }: SkeletonProps) => {
   return (
     <div
       className={twMerge(

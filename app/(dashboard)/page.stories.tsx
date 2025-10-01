@@ -13,7 +13,8 @@ import { tasksMock } from "@/components/tasks/TaskList";
 import { getNotifications } from "@/lib/queries/notification";
 import { notificationsMock } from "@/components/notifications/NotificationList";
 import { getUsers } from "@/lib/queries/user";
-import { usersMock } from "@/components/users/UserList/usersMock";
+import { usersMock } from "@/components/users/usersMock";
+import { getStorageUsage } from "@/lib/queries/storage";
 
 const meta = {
   title: "components/pages/Dashboard",
@@ -50,6 +51,14 @@ const meta = {
       new Promise((res) => res(notificationsMock.slice(0, 5))),
     );
     mocked(getUsers).mockReturnValue(new Promise((res) => res(usersMock)));
+    mocked(getStorageUsage).mockReturnValue(
+      new Promise((res) =>
+        res({
+          limit: 1000,
+          used: 500,
+        }),
+      ),
+    );
   },
 } satisfies Meta<typeof DashboardPage>;
 

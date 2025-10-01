@@ -1,0 +1,48 @@
+import ProjectsPage from "./page";
+import { mocked } from "storybook/test";
+import { getUsers } from "@/lib/queries/user";
+import { getCustomers } from "@/lib/queries/customers";
+import { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { PageDecorator } from "@/.storybook/decorators";
+import { usersMock } from "@/components/users/usersMock";
+import { getProjectCategories } from "@/lib/queries/project";
+import { getNotifications } from "@/lib/queries/notification";
+import { customersMock } from "@/components/customer/customersMock";
+import { notificationsMock } from "@/components/notifications/NotificationList";
+import { projectCategoriesMock } from "@/components/projects/projectCategoriesMock";
+
+const meta = {
+  title: "components/pages/Projects",
+  component: ProjectsPage,
+  parameters: { layout: "fullscreen" },
+  decorators: [PageDecorator],
+  beforeEach: () => {
+    mocked(getProjectCategories).mockReturnValue(
+      new Promise((res) => res(projectCategoriesMock)),
+    );
+    mocked(getCustomers).mockReturnValue(
+      new Promise((res) => res(customersMock)),
+    );
+    mocked(getUsers).mockReturnValue(new Promise((res) => res(usersMock)));
+    mocked(getNotifications).mockReturnValue(
+      new Promise((res) => res(notificationsMock.slice(0, 5))),
+    );
+  },
+} satisfies Meta<typeof ProjectsPage>;
+
+export default meta;
+type Story = StoryObj<typeof ProjectsPage>;
+
+export const Default: Story = {};
+
+export const Tablet: Story = {
+  globals: {
+    viewport: { value: "ipad", isRotated: true },
+  },
+};
+
+export const Mobile = {
+  globals: {
+    viewport: { value: "iphone6", isRotated: false },
+  },
+} satisfies Story;

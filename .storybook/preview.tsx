@@ -10,6 +10,8 @@ sb.mock(import("../lib/queries/project"));
 sb.mock(import("../lib/queries/task"));
 sb.mock(import("../lib/queries/notification"));
 sb.mock(import("../lib/queries/user"));
+sb.mock(import("../lib/queries/customers"));
+sb.mock(import("../lib/queries/storage"));
 
 const preview: Preview = {
   decorators: [

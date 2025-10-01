@@ -1,5 +1,7 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { StorageLimitCard, StorageLimitCardSkeleton } from "./StorageLimitCard";
+import { mocked } from "storybook/internal/test";
+import { getStorageUsage } from "@/lib/queries/storage";
 
 const meta = {
   title: "Components/dashboard/StorageLimitCard",
@@ -12,6 +14,16 @@ const meta = {
       </div>
     ),
   ],
+  beforeEach: () => {
+    mocked(getStorageUsage).mockReturnValue(
+      new Promise((res) =>
+        res({
+          limit: 1000,
+          used: 500,
+        }),
+      ),
+    );
+  },
 } satisfies Meta<typeof StorageLimitCard>;
 
 export default meta;

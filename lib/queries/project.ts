@@ -27,3 +27,13 @@ export const getActiveProjects = cache(async () => {
     where: { statusId: ACTIVE_PROJECT_STATUS_ID },
   });
 });
+
+export const getProjectCategories = cache(async (workspaceId: number) => {
+  return prisma.projectCategory.findMany({
+    where: { workspaceId },
+  });
+});
+
+export const getProjectStatuses = cache(async () => {
+  return prisma.projectStatus.findMany();
+});

@@ -11,6 +11,7 @@ import type { MenuTriggerProps as RACMenuTriggerProps } from "react-stately";
 
 export type MenuTriggerOwnProps = {
   overlayType?: "popover" | "bottomsheet";
+  overlayClassName?: string;
   placement?: Placement;
   renderButton?: () => React.ReactNode;
   renderDialogHeader?: () => React.ReactNode;
@@ -22,6 +23,7 @@ export type MenuTriggerProps<T extends object = any> = AriaMenuProps<T> &
 
 export const MenuTrigger = <T extends object>({
   overlayType,
+  overlayClassName,
   placement = "bottom left",
   renderButton,
   renderDialogHeader,
@@ -39,14 +41,23 @@ export const MenuTrigger = <T extends object>({
       </PressResponder>
 
       {overlayType === "bottomsheet" ? (
-        <BottomSheet isDismissable={true} state={state}>
+        <BottomSheet
+          isDismissable={true}
+          state={state}
+          className={overlayClassName}
+        >
           <Dialog aria-labelledby={menuProps["aria-labelledby"]}>
             {renderDialogHeader && renderDialogHeader()}
             <Menu {...props} {...menuProps} />
           </Dialog>
         </BottomSheet>
       ) : (
-        <Popover state={state} triggerRef={ref} placement={placement}>
+        <Popover
+          state={state}
+          triggerRef={ref}
+          placement={placement}
+          className={overlayClassName}
+        >
           <Dialog aria-labelledby={menuProps["aria-labelledby"]}>
             <Menu {...props} {...menuProps} />
           </Dialog>

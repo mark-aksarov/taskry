@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { UserList } from "./UserList";
 import { Suspense } from "react";
-import { usersMock } from "./usersMock";
+import { usersMock } from "../usersMock";
 import { getUsers } from "@/lib/queries/user";
 import { mocked } from "storybook/internal/test";
 
