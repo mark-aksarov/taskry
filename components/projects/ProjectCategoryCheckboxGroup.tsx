@@ -1,13 +1,17 @@
 "use client";
 
-import { getProjectCategories } from "@/lib/queries/project";
 import { CheckboxGroup } from "react-aria-components";
 import { fieldStyles, Label } from "../ui/Field";
 import { Checkbox } from "../ui/Checkbox";
+import { ProjectCategory } from "@/generated/prisma";
+import { use } from "react";
 
-export async function ProjectCategoryFilter() {
-  const categories = await getProjectCategories(1);
-  const itemClasses = "capitalize font-normal";
+export function ProjectCategoryCheckboxGroup({
+  categoriesPromise,
+}: {
+  categoriesPromise: Promise<ProjectCategory[]>;
+}) {
+  const categories = use(categoriesPromise);
 
   if (!categories.length) {
     return null;
@@ -17,7 +21,11 @@ export async function ProjectCategoryFilter() {
     <CheckboxGroup className={fieldStyles()}>
       <Label>Category</Label>
       {categories.map((item) => (
-        <Checkbox value={item.id.toString()} className={itemClasses}>
+        <Checkbox
+          key={item.id}
+          value={item.id.toString()}
+          className="font-normal capitalize"
+        >
           {item.name}
         </Checkbox>
       ))}

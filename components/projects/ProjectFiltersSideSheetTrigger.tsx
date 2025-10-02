@@ -1,9 +1,9 @@
-import { Suspense } from "react";
+"use client";
+
 import { SideSheet } from "../ui/SideSheet";
 import { Button } from "@/components/ui/Button";
 import { SlidersHorizontal } from "lucide-react";
 import { DialogTrigger } from "react-aria-components";
-import { ProjectFilters, ProjectFiltersSkeleton } from "./ProjectFilters";
 import {
   Dialog,
   DialogBody,
@@ -12,7 +12,11 @@ import {
   DialogHeading,
 } from "@/components/ui/Dialog";
 
-export function ProjectFiltersSideSheetTrigger() {
+export function ProjectFiltersSideSheetTrigger({
+  projectFiltersForm,
+}: {
+  projectFiltersForm: React.ReactNode;
+}) {
   return (
     <DialogTrigger>
       <Button
@@ -29,9 +33,7 @@ export function ProjectFiltersSideSheetTrigger() {
             <DialogCloseButton iconSize={20} />
           </DialogHeader>
           <DialogBody className="text-black dark:text-white">
-            <Suspense fallback={<ProjectFiltersSkeleton />}>
-              <ProjectFilters />
-            </Suspense>
+            {projectFiltersForm}
           </DialogBody>
         </Dialog>
       </SideSheet>

@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useCallback, useState } from "react";
 import { Popover } from "../Popover";
 import { SelectListBox } from "./SelectListBox";

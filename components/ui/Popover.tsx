@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useMemo } from "react";
 import { mergeRefs } from "@react-aria/utils";
 import type { AriaPopoverProps } from "react-aria";

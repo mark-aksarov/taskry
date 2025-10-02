@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { BottomSheet, BottomSheetProps } from "../BottomSheet";
-import { Form } from "react-aria-components";
+import { Form } from "@/components/ui/Form";
 import { Button } from "@/components/ui/Button";
 import { useOverlayTriggerState } from "react-stately";
 import { useOverlayTrigger } from "react-aria";

@@ -1,3 +1,5 @@
+"use client";
+
 import { BottomSheet } from "@/components/ui/BottomSheet";
 import { Button } from "@/components/ui/Button";
 import {
@@ -8,12 +10,15 @@ import {
   DialogHeading,
 } from "@/components/ui/Dialog";
 import { SlidersHorizontal } from "lucide-react";
-import { Suspense, useRef } from "react";
+import { useRef } from "react";
 import { useOverlayTrigger } from "react-aria";
 import { useOverlayTriggerState } from "react-stately";
-import { ProjectFilters, ProjectFiltersSkeleton } from "./ProjectFilters";
 
-export function ProjectFiltersBottomSheetTrigger() {
+export function ProjectFiltersBottomSheetTrigger({
+  projectFiltersForm,
+}: {
+  projectFiltersForm: React.ReactNode;
+}) {
   const triggerRef = useRef<HTMLButtonElement>(null);
   const state = useOverlayTriggerState({});
   const { triggerProps } = useOverlayTrigger({ type: "dialog" }, state);
@@ -39,11 +44,7 @@ export function ProjectFiltersBottomSheetTrigger() {
             <DialogHeading className="text-base">Filters</DialogHeading>
             <DialogCloseButton />
           </DialogHeader>
-          <DialogBody>
-            <Suspense fallback={<ProjectFiltersSkeleton />}>
-              <ProjectFilters />
-            </Suspense>
-          </DialogBody>
+          <DialogBody>{projectFiltersForm}</DialogBody>
         </Dialog>
       </BottomSheet>
     </>

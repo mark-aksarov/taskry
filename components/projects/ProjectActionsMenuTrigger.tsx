@@ -1,3 +1,5 @@
+"use client";
+
 import { useOverlayTrigger } from "react-aria";
 import { Check, CircleEllipsis, Clock, Ellipsis, Trash } from "lucide-react";
 import { Button } from "@/components/ui/Button";

@@ -1,3 +1,5 @@
+"use client";
+
 import { tv } from "tailwind-variants";
 import type {
   TextFieldProps as RACTextFieldProps,
@@ -34,8 +36,7 @@ export const fieldInputStyles = tv({
       true: "border-red-300 dark:border-red-800",
     },
     isDisabled: {
-      false:
-        "text-black placeholder:text-gray-500 dark:text-white dark:placeholder:text-gray-400",
+      false: "placeholder:text-gray-500 dark:placeholder:text-gray-400",
       true: "border-gray-100 bg-gray-100 text-gray-400 placeholder:text-gray-400 dark:border-gray-800 dark:bg-gray-800 dark:text-gray-500 dark:placeholder:text-gray-500",
     },
   },

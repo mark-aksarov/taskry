@@ -1,10 +1,17 @@
-import { getUsers } from "@/lib/queries/user";
+"use client";
+
 import { CheckboxGroup } from "react-aria-components";
 import { fieldStyles, Label } from "../ui/Field";
 import { Checkbox } from "../ui/Checkbox";
+import { User } from "@/generated/prisma";
+import { use } from "react";
 
-export async function UserFilter() {
-  const users = await getUsers(1);
+export function UserCheckboxGroup({
+  usersPromise,
+}: {
+  usersPromise: Promise<User[]>;
+}) {
+  const users = use(usersPromise);
   const itemClasses = "capitalize font-normal";
 
   if (!users.length) {

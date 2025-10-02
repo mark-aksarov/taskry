@@ -1,11 +1,17 @@
-import type { CheckboxProps as RACCheckboxProps } from "react-aria-components";
+"use client";
+
 import {
+  CheckboxProps as RACCheckboxProps,
+  CheckboxGroupProps as RACCheckboxGroupProps,
   composeRenderProps,
   Checkbox as RACCheckbox,
+  CheckboxGroup as RACCheckboxGroup,
 } from "react-aria-components";
 import { tv } from "tailwind-variants";
 import { focusRing } from "../styles";
 import { Check } from "lucide-react";
+import { fieldStyles, Label } from "../Field";
+import { twMerge } from "tailwind-merge";
 
 type CheckboxProps = Omit<RACCheckboxProps, "children"> &
   React.RefAttributes<HTMLLabelElement> & {

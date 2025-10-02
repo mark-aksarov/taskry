@@ -1,8 +1,10 @@
+"use client";
+
 import { CheckboxGroup } from "react-aria-components";
 import { fieldStyles, Label } from "../ui/Field";
 import { Checkbox } from "../ui/Checkbox";
 
-export function ProjectStatusFilter() {
+export function ProjectStatusCheckboxGroup() {
   return (
     <CheckboxGroup className={fieldStyles()}>
       <Label>Status</Label>
