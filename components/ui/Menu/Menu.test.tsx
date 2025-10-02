@@ -6,7 +6,7 @@ import { User } from "@react-aria/test-utils";
 import userEvent from "@testing-library/user-event";
 import { render, screen } from "@testing-library/react";
 import { MenuTrigger, MenuTriggerProps } from "./MenuTrigger";
-import { DialogHeader } from "../Dialog";
+import { DialogCloseButton, DialogHeader, DialogHeading } from "../Dialog";
 
 const TestMenu = (props: Partial<MenuTriggerProps>) => (
   <MenuTrigger {...props}>
@@ -79,7 +79,12 @@ describe("Menu", () => {
     render(
       <TestMenu
         overlayType="bottomsheet"
-        renderDialogHeader={() => <DialogHeader>Header</DialogHeader>}
+        renderDialogHeader={() => (
+          <DialogHeader>
+            <DialogHeading className="text-base">Header</DialogHeading>
+            <DialogCloseButton />
+          </DialogHeader>
+        )}
       />,
     );
 

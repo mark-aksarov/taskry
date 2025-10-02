@@ -4,7 +4,7 @@ import { Item } from "react-stately";
 import { MenuTrigger } from "./MenuTrigger";
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { Check, CircleEllipsis, Clock, Trash } from "lucide-react";
-import { DialogHeader } from "../Dialog";
+import { DialogCloseButton, DialogHeader, DialogHeading } from "../Dialog";
 
 const meta: Meta<typeof MenuTrigger> = {
   title: "Components/ui/Menu",
@@ -108,8 +108,9 @@ export const WithSheetAndHeader = {
     return (
       <MenuTrigger
         renderDialogHeader={() => (
-          <DialogHeader className="px-4 py-3" titleClassName="text-base">
-            Actions
+          <DialogHeader className="px-4 py-3">
+            <DialogHeading className="text-base">Actions</DialogHeading>
+            <DialogCloseButton />
           </DialogHeader>
         )}
         renderButton={() => <Button label="Actions" />}

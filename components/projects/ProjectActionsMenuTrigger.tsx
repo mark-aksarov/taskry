@@ -1,7 +1,11 @@
 import { useOverlayTrigger } from "react-aria";
 import { Check, CircleEllipsis, Clock, Ellipsis, Trash } from "lucide-react";
 import { Button } from "@/components/ui/Button";
-import { DialogHeader } from "@/components/ui/Dialog";
+import {
+  DialogCloseButton,
+  DialogHeader,
+  DialogHeading,
+} from "@/components/ui/Dialog";
 import { Item, useOverlayTriggerState } from "react-stately";
 import { useResponsiveOverlayType } from "@/lib/hooks/useResponsiveOverlayType";
 import { ResponsiveMenuTrigger } from "@/components/common/ResponsiveMenuTrigger";
@@ -17,8 +21,9 @@ export const ProjectActionsMenuTrigger = () => {
   return (
     <ResponsiveMenuTrigger
       renderDialogHeader={() => (
-        <DialogHeader className="px-4 py-3" titleClassName="text-base">
-          Actions
+        <DialogHeader className="px-4 py-3">
+          <DialogHeading className="text-base">Actions</DialogHeading>
+          <DialogCloseButton />
         </DialogHeader>
       )}
       renderButton={() => (

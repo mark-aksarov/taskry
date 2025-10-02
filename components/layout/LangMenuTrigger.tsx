@@ -5,6 +5,7 @@ import { MenuTrigger } from "../ui/Menu";
 import { DialogHeader } from "../ui/Dialog";
 import { navLinkStyle } from "./AppNavigation";
 import { Button } from "../ui/Button";
+import { DialogCloseButton, DialogHeading } from "../ui/Dialog";
 
 const itemClasses = "flex items-center gap-4 font-bold";
 
@@ -36,8 +37,9 @@ export const LangMenuBottomSheetTrigger = () => {
     <MenuTrigger
       overlayType="bottomsheet"
       renderDialogHeader={() => (
-        <DialogHeader className="px-4 py-3" titleClassName="text-base">
-          Language
+        <DialogHeader className="px-4 py-3">
+          <DialogHeading className="text-base">Language</DialogHeading>
+          <DialogCloseButton />
         </DialogHeader>
       )}
       renderButton={() => (

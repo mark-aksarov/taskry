@@ -3,7 +3,11 @@
 import { BaseItem } from "@/components/common/BaseItem";
 import { ResponsiveMenuTrigger } from "@/components/common/ResponsiveMenuTrigger";
 import { Button } from "@/components/ui/Button";
-import { DialogHeader } from "@/components/ui/Dialog";
+import {
+  DialogCloseButton,
+  DialogHeader,
+  DialogHeading,
+} from "@/components/ui/Dialog";
 import { Skeleton } from "@/components/ui/Skeleton";
 import { NotificationRecipientWithRelations } from "@/lib/queries/types";
 import { Ellipsis, ListCheck, Trash } from "lucide-react";
@@ -58,8 +62,9 @@ export const NotificationItem = ({
     <>
       <ResponsiveMenuTrigger
         renderDialogHeader={() => (
-          <DialogHeader className="px-4 py-3" titleClassName="text-base">
-            Actions
+          <DialogHeader className="px-4 py-3">
+            <DialogHeading className="text-base">Actions</DialogHeading>
+            <DialogCloseButton />
           </DialogHeader>
         )}
         renderButton={() => (

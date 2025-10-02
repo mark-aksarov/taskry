@@ -21,7 +21,11 @@ import { Button } from "@/components/ui/Button";
 import { Item } from "react-stately";
 import { twMerge } from "tailwind-merge";
 import { BaseItem } from "@/components/common/BaseItem";
-import { DialogHeader } from "@/components/ui/Dialog";
+import {
+  DialogCloseButton,
+  DialogHeader,
+  DialogHeading,
+} from "@/components/ui/Dialog";
 import { Skeleton } from "@/components/ui/Skeleton";
 import { ResponsiveMenuTrigger } from "@/components/common/ResponsiveMenuTrigger";
 
@@ -125,8 +129,9 @@ const TaskActionMenu = ({ task }: { task?: TaskPreview }) => {
     <ResponsiveMenuTrigger
       placement="bottom right"
       renderDialogHeader={() => (
-        <DialogHeader className="px-4 py-3" titleClassName="text-base">
-          Actions
+        <DialogHeader className="px-4 py-3">
+          <DialogHeading className="text-base">Actions</DialogHeading>
+          <DialogCloseButton />
         </DialogHeader>
       )}
       renderButton={() => (

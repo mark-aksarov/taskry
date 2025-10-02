@@ -41,7 +41,10 @@ export function AppSidebarSheetTrigger() {
                 <Heading slot="title" level={2} className={headingStyles}>
                   Taskry
                 </Heading>
-                <DialogCloseButton onPress={() => setOpen(false)} />
+                <DialogCloseButton
+                  iconSize={20}
+                  onPress={() => setOpen(false)}
+                />
               </div>
             </AppSidebarHeader>
             <AppSidebarBody>

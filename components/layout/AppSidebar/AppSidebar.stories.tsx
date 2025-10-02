@@ -59,7 +59,7 @@ export const WrapWithSheet = {
         <AppSidebarHeader>
           <div className="flex items-center justify-between">
             <AppSidebarHeading />
-            <DialogCloseButton />
+            <DialogCloseButton iconSize={20} />
           </div>
         </AppSidebarHeader>
         <AppSidebarBody>

@@ -4,7 +4,13 @@ import { Button } from "../Button";
 import { useOverlayTrigger } from "react-aria";
 import { useOverlayTriggerState } from "react-stately";
 import { render, screen, waitFor } from "@testing-library/react";
-import { Dialog, DialogBody, DialogHeader } from "../Dialog";
+import {
+  Dialog,
+  DialogBody,
+  DialogCloseButton,
+  DialogHeader,
+  DialogHeading,
+} from "../Dialog";
 import { BottomSheet, BottomSheetProps } from "./BottomSheet";
 import userEvent from "@testing-library/user-event";
 import { TextField } from "../TextField";
@@ -20,7 +26,12 @@ const TestBottomSheet = (
       <Button {...triggerProps} label="Open Bottom Sheet" />
       <BottomSheet {...props} state={state}>
         <Dialog>
-          <DialogHeader>Bottom sheet title</DialogHeader>
+          <DialogHeader>
+            <DialogHeading className="text-base">
+              Bottom sheet title
+            </DialogHeading>
+            <DialogCloseButton />
+          </DialogHeader>
           <DialogBody>
             <TextField label="Name" placeholder="Start typing ..." />
           </DialogBody>

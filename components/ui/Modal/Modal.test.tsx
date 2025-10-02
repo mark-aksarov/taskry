@@ -5,7 +5,13 @@ import { Modal, ModalProps } from "./Modal";
 import userEvent from "@testing-library/user-event";
 import { DialogTrigger } from "react-aria-components";
 import { render, screen, waitFor } from "@testing-library/react";
-import { Dialog, DialogBody, DialogHeader } from "../Dialog";
+import {
+  Dialog,
+  DialogBody,
+  DialogCloseButton,
+  DialogHeader,
+  DialogHeading,
+} from "../Dialog";
 import { TextField } from "../TextField";
 
 const TestModal = (props: Omit<ModalProps, "children">) => {
@@ -14,7 +20,10 @@ const TestModal = (props: Omit<ModalProps, "children">) => {
       <Button label="Open modal" />
       <Modal {...props}>
         <Dialog>
-          <DialogHeader>Modal title</DialogHeader>
+          <DialogHeader>
+            <DialogHeading>Modal title</DialogHeading>
+            <DialogCloseButton />
+          </DialogHeader>
           <DialogBody>
             <TextField label="Name" placeholder="Start typing ..." />
           </DialogBody>

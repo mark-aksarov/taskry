@@ -6,7 +6,13 @@ import { useOverlayTrigger } from "react-aria";
 import { Button } from "@/components/ui/Button";
 import { BottomSheet } from "../ui/BottomSheet";
 import { useOverlayTriggerState } from "react-stately";
-import { Dialog, DialogBody, DialogHeader } from "../ui/Dialog";
+import {
+  Dialog,
+  DialogBody,
+  DialogCloseButton,
+  DialogHeader,
+  DialogHeading,
+} from "../ui/Dialog";
 
 export function NotificationSheetTrigger({
   notificationList,
@@ -33,7 +39,10 @@ export function NotificationSheetTrigger({
           aria-label="App navigation"
           className="max-h-[calc(100dvh-64px)]"
         >
-          <DialogHeader>Notifications</DialogHeader>
+          <DialogHeader>
+            <DialogHeading className="text-base">Notifications</DialogHeading>
+            <DialogCloseButton />
+          </DialogHeader>
           <DialogBody className="p-0">{notificationList}</DialogBody>
         </Dialog>
       </BottomSheet>

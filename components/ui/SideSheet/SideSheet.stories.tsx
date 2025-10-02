@@ -3,7 +3,13 @@ import { Button } from "@/components/ui/Button";
 import { DialogTrigger } from "react-aria-components";
 import { SideSheet, SideSheetProps } from "../SideSheet";
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { Dialog, DialogBody, DialogHeader } from "../Dialog";
+import {
+  Dialog,
+  DialogBody,
+  DialogCloseButton,
+  DialogHeader,
+  DialogHeading,
+} from "../Dialog";
 
 const meta: Meta<typeof SideSheet> = {
   title: "Components/ui/SideSheet",
@@ -28,7 +34,10 @@ export const Right = {
     return (
       <SideSheetTemplate {...args}>
         <Dialog className="w-[360px]">
-          <DialogHeader>Side Sheet Header</DialogHeader>
+          <DialogHeader>
+            <DialogHeading>Side Sheet Header</DialogHeading>
+            <DialogCloseButton iconSize={20} />
+          </DialogHeader>
           <DialogBody>content</DialogBody>
         </Dialog>
       </SideSheetTemplate>
@@ -44,7 +53,10 @@ export const Left = {
     return (
       <SideSheetTemplate {...args} side="left">
         <Dialog className="w-[360px]">
-          <DialogHeader>Side Sheet Header</DialogHeader>
+          <DialogHeader>
+            <DialogHeading>Side Sheet Header</DialogHeading>
+            <DialogCloseButton iconSize={20} />
+          </DialogHeader>
           <DialogBody className="text-black dark:text-white">
             content
           </DialogBody>
@@ -59,7 +71,10 @@ export const WithLongContent = {
     return (
       <SideSheetTemplate {...args}>
         <Dialog className="w-[360px]">
-          <DialogHeader>Side Sheet Header</DialogHeader>
+          <DialogHeader>
+            <DialogHeading>Side Sheet Header</DialogHeading>
+            <DialogCloseButton iconSize={20} />
+          </DialogHeader>
           <DialogBody className="text-black dark:text-white">
             <h3>The standard Lorem Ipsum passage, used since the 1500s</h3>
             <p>

@@ -1,6 +1,12 @@
 import { BottomSheet } from "@/components/ui/BottomSheet";
 import { Button } from "@/components/ui/Button";
-import { Dialog, DialogBody, DialogHeader } from "@/components/ui/Dialog";
+import {
+  Dialog,
+  DialogBody,
+  DialogCloseButton,
+  DialogHeader,
+  DialogHeading,
+} from "@/components/ui/Dialog";
 import { SlidersHorizontal } from "lucide-react";
 import { Suspense, useRef } from "react";
 import { useOverlayTrigger } from "react-aria";
@@ -29,7 +35,10 @@ export function ProjectFiltersBottomSheetTrigger() {
           aria-label="App navigation"
           className="max-h-[calc(100dvh-64px)]"
         >
-          <DialogHeader>Filters</DialogHeader>
+          <DialogHeader>
+            <DialogHeading className="text-base">Filters</DialogHeading>
+            <DialogCloseButton />
+          </DialogHeader>
           <DialogBody>
             <Suspense fallback={<ProjectFiltersSkeleton />}>
               <ProjectFilters />

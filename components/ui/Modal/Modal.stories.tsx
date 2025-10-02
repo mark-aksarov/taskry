@@ -3,7 +3,13 @@ import { Modal, ModalProps } from "../Modal";
 import { Button } from "@/components/ui/Button";
 import { TextField } from "@/components/ui/TextField";
 import { DialogTrigger, Form } from "react-aria-components";
-import { Dialog, DialogBody, DialogHeader } from "../Dialog";
+import {
+  Dialog,
+  DialogBody,
+  DialogCloseButton,
+  DialogHeader,
+  DialogHeading,
+} from "../Dialog";
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 
 const meta: Meta<typeof Modal> = {
@@ -32,7 +38,10 @@ export const Default = {
     return (
       <ModalTemplate {...args}>
         <Dialog>
-          <DialogHeader>Modal title</DialogHeader>
+          <DialogHeader>
+            <DialogHeading>Modal title</DialogHeading>
+            <DialogCloseButton iconSize={20} />
+          </DialogHeader>
           <DialogBody>
             <Form>
               <div className="flex flex-col gap-6">
@@ -64,7 +73,10 @@ export const WithLongContent = {
     return (
       <ModalTemplate {...args}>
         <Dialog className="max-h-[calc(100dvh-var(--spacing)*5)]">
-          <DialogHeader>Modal title</DialogHeader>
+          <DialogHeader>
+            <DialogHeading>Modal title</DialogHeading>
+            <DialogCloseButton iconSize={20} />
+          </DialogHeader>
           <DialogBody className="text-black dark:text-white">
             <h3>The standard Lorem Ipsum passage, used since the 1500s</h3>
             <p>

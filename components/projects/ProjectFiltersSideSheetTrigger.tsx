@@ -4,7 +4,13 @@ import { Button } from "@/components/ui/Button";
 import { SlidersHorizontal } from "lucide-react";
 import { DialogTrigger } from "react-aria-components";
 import { ProjectFilters, ProjectFiltersSkeleton } from "./ProjectFilters";
-import { Dialog, DialogBody, DialogHeader } from "@/components/ui/Dialog";
+import {
+  Dialog,
+  DialogBody,
+  DialogCloseButton,
+  DialogHeader,
+  DialogHeading,
+} from "@/components/ui/Dialog";
 
 export function ProjectFiltersSideSheetTrigger() {
   return (
@@ -18,7 +24,10 @@ export function ProjectFiltersSideSheetTrigger() {
       />
       <SideSheet isDismissable>
         <Dialog className="w-[360px]">
-          <DialogHeader>Filters</DialogHeader>
+          <DialogHeader>
+            <DialogHeading>Filters</DialogHeading>
+            <DialogCloseButton iconSize={20} />
+          </DialogHeader>
           <DialogBody className="text-black dark:text-white">
             <Suspense fallback={<ProjectFiltersSkeleton />}>
               <ProjectFilters />
