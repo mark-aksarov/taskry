@@ -63,13 +63,15 @@ const BottomSheetInner = ({
           <div
             {...modalProps}
             ref={mergedRefs}
-            className={twMerge(
-              "absolute bottom-0 left-0 w-full will-change-transform",
-              className,
-            )}
+            className="absolute bottom-0 left-0 w-full will-change-transform"
             data-testid="bottom-sheet"
           >
-            <div className="h-full overflow-hidden rounded-t-2xl border-gray-300 bg-white shadow-lg dark:border-gray-600 dark:bg-gray-800">
+            <div
+              className={twMerge(
+                "h-full overflow-hidden rounded-t-2xl border-gray-300 bg-white shadow-lg dark:border-gray-600 dark:bg-gray-800",
+                className,
+              )}
+            >
               {children}
             </div>
           </div>

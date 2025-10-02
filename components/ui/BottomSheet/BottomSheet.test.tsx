@@ -67,7 +67,7 @@ describe("BottomSheet", () => {
     await user.click(button);
 
     const bottomSheet = screen.getByTestId("bottom-sheet");
-    expect(bottomSheet).toHaveClass("custom-class");
+    expect(bottomSheet.children[0]).toHaveClass("custom-class");
   });
 
   test("should use the provided ref for the component", async () => {
