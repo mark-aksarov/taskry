@@ -31,7 +31,7 @@ describe("ToggleButtonGroup", () => {
     render(<TestToggleButtonGroup selectedKeys={["apple"]} />);
 
     const button = screen.getByRole("radio", { name: "Banana" });
-    expect(button).toHaveClass("hover:bg-gray-100 dark:hover:bg-gray-600");
+    expect(button).toHaveClass("hover:bg-gray-200 dark:hover:bg-gray-600");
   });
 
   test("applies disabled styles", () => {
