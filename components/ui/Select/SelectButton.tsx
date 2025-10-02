@@ -39,6 +39,11 @@ export const buttonStyles = tv({
       isPlaceholder: true,
       className: "text-gray-500 dark:text-gray-400",
     },
+    {
+      isDisabled: false,
+      isPlaceholder: false,
+      className: "text-black dark:text-white",
+    },
   ],
 });
 
