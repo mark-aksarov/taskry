@@ -1,23 +1,24 @@
 import { Form } from "react-aria-components";
 import { TextField } from "@/components/ui/TextField";
-import { ProjectCategorySelect } from "../ProjectCategorySelect";
-import { ProjectStatusSelect } from "../ProjectStatusSelect";
-import { CustomerSelect } from "@/components/customer/CustomerSelect";
-import { UserSelect } from "@/components/users/UserSelect";
+import { ProjectCategoryFilter } from "../ProjectCategoryFilter";
+import { ProjectStatusFilter } from "../ProjectStatusFilter";
+import { CustomerFilter } from "@/components/customer/CustomerFilter";
+import { UserFilter } from "@/components/users/UserFilter";
 import { FieldSkeleton } from "@/components/common/FieldSkeleton";
 import { Button } from "@/components/ui/Button";
 import { Skeleton } from "@/components/ui/Skeleton";
 import { ProjectDeadline } from "../ProjectDeadline";
+import { CheckboxGroupSkeleton } from "@/components/common/CheckboxGroupSkeleton";
 
 export function ProjectFilters() {
   return (
     <Form className="flex flex-col gap-8">
       <div className="flex flex-col gap-4">
         <TextField label="Title" placeholder="Title" />
-        <ProjectStatusSelect />
-        <ProjectCategorySelect />
-        <CustomerSelect />
-        <UserSelect />
+        <ProjectStatusFilter />
+        <ProjectCategoryFilter />
+        <CustomerFilter />
+        <UserFilter />
         <ProjectDeadline />
       </div>
       <Button
@@ -35,10 +36,10 @@ export function ProjectFiltersSkeleton() {
     <div className="flex flex-col gap-8">
       <div className="flex flex-col gap-4">
         <FieldSkeleton />
-        <FieldSkeleton />
-        <FieldSkeleton />
-        <FieldSkeleton />
-        <FieldSkeleton />
+        <CheckboxGroupSkeleton />
+        <CheckboxGroupSkeleton />
+        <CheckboxGroupSkeleton />
+        <CheckboxGroupSkeleton />
         <FieldSkeleton />
         <FieldSkeleton />
       </div>

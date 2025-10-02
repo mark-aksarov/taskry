@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { ProjectFilters } from "./ProjectFilters";
+import { ProjectFilters, ProjectFiltersSkeleton } from "./ProjectFilters";
 import { mocked } from "storybook/internal/test";
 import { getProjectCategories } from "@/lib/queries/project";
 import { getCustomers } from "@/lib/queries/customers";
@@ -27,3 +27,7 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {};
+
+export const Skeleton: Story = {
+  render: () => <ProjectFiltersSkeleton />,
+};
