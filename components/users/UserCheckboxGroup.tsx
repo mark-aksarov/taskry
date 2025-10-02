@@ -22,7 +22,11 @@ export function UserCheckboxGroup({
     <CheckboxGroup className={fieldStyles()}>
       <Label>Creator</Label>
       {users.map((user) => (
-        <Checkbox value={user.id.toString()} className={itemClasses}>
+        <Checkbox
+          key={user.id}
+          value={user.id.toString()}
+          className={itemClasses}
+        >
           {user.name}
         </Checkbox>
       ))}

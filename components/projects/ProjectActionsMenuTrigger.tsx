@@ -9,7 +9,6 @@ import {
   DialogHeading,
 } from "@/components/ui/Dialog";
 import { Item, useOverlayTriggerState } from "react-stately";
-import { useResponsiveOverlayType } from "@/lib/hooks/useResponsiveOverlayType";
 import { ResponsiveMenuTrigger } from "@/components/common/ResponsiveMenuTrigger";
 
 export const ProjectActionsMenuTrigger = () => {
@@ -17,8 +16,6 @@ export const ProjectActionsMenuTrigger = () => {
   const { triggerProps } = useOverlayTrigger({ type: "dialog" }, state);
 
   const itemClasses = "flex items-center gap-4 font-bold";
-
-  const overlayType = useResponsiveOverlayType();
 
   return (
     <ResponsiveMenuTrigger
@@ -29,15 +26,27 @@ export const ProjectActionsMenuTrigger = () => {
         </DialogHeader>
       )}
       renderButton={() => (
-        <Button
-          {...triggerProps}
-          aria-label="actions"
-          label={overlayType === "popover" ? "Actions" : null}
-          variant="outlined"
-          iconLeft={
-            <Ellipsis size={16} strokeWidth={1.5} absoluteStrokeWidth />
-          }
-        />
+        <>
+          <Button
+            {...triggerProps}
+            aria-label="actions"
+            variant="outlined"
+            iconLeft={
+              <Ellipsis size={16} strokeWidth={1.5} absoluteStrokeWidth />
+            }
+            className="md:hidden"
+          />
+          <Button
+            {...triggerProps}
+            aria-label="actions"
+            variant="outlined"
+            label="Actions"
+            iconLeft={
+              <Ellipsis size={16} strokeWidth={1.5} absoluteStrokeWidth />
+            }
+            className="max-md:hidden"
+          />
+        </>
       )}
       placement="bottom right"
     >

@@ -58,18 +58,20 @@ const BottomSheetInner = ({
         <div
           data-testid="overlay"
           {...underlayProps}
-          className="fixed inset-0 z-10 bg-black/20"
+          className="fixed inset-0 z-10 bg-black/20 dark:bg-black/50"
         >
           <div
             {...modalProps}
             ref={mergedRefs}
             className={twMerge(
-              "absolute bottom-0 left-0 w-full overflow-hidden rounded-t-2xl bg-white shadow-lg will-change-transform dark:bg-gray-800",
+              "absolute bottom-0 left-0 w-full will-change-transform",
               className,
             )}
             data-testid="bottom-sheet"
           >
-            {children}
+            <div className="h-full overflow-hidden rounded-t-2xl border-gray-300 bg-white shadow-lg dark:border-gray-600 dark:bg-gray-800">
+              {children}
+            </div>
           </div>
         </div>
       </Overlay>
