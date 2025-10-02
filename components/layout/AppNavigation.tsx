@@ -11,126 +11,70 @@ import {
   Sun,
   Users,
 } from "lucide-react";
-import { toggleButtonStyles } from "../ui/ToggleButtonGroup";
 import { Badge } from "../ui/Badge";
 import { twMerge } from "tailwind-merge";
-import { tv } from "tailwind-variants";
-import { Button, Link } from "react-aria-components";
+import { Button } from "react-aria-components";
 import { Divider } from "@/components/ui/Divider";
 import { LangMenuBottomSheetTrigger } from "./LangMenuTrigger";
+import { usePathname } from "next/navigation";
+import Link from "next/link";
+import { AppNavigationLink, navLinkStyle } from "./AppNavigationLink";
 
 interface AppNavigationProps {
   className?: string;
   buttonClassName?: string;
 }
 
-export const navLinkStyle = tv({
-  extend: toggleButtonStyles,
-  base: "w-full gap-4 px-4 py-3 text-sm font-bold",
-});
-
 export const AppNavigation = ({ className }: AppNavigationProps) => {
+  const pathname = usePathname();
+
   return (
     <div className="flex flex-col gap-2.5">
       <nav className={twMerge("flex flex-col gap-2.5", className)}>
-        <Link
-          href="#"
-          className={(renderProps) =>
-            navLinkStyle({
-              ...renderProps,
-              variant: "primary",
-              isSelected: true,
-            })
-          }
-        >
+        <AppNavigationLink href="/" isSelected={pathname === "/"}>
           <LayoutDashboard size={18} strokeWidth={1.5} absoluteStrokeWidth />
           Dashboard
-        </Link>
+        </AppNavigationLink>
 
-        <Link
-          href="#"
-          className={(renderProps) =>
-            navLinkStyle({
-              ...renderProps,
-              variant: "primary",
-              isSelected: false,
-            })
-          }
+        <AppNavigationLink
+          href="/projects"
+          isSelected={pathname === "/projects"}
         >
           <FolderClosed size={18} strokeWidth={1.5} absoluteStrokeWidth />
           Projects
-        </Link>
+        </AppNavigationLink>
 
-        <Link
-          href="#"
-          className={(renderProps) =>
-            navLinkStyle({
-              ...renderProps,
-              variant: "primary",
-              isSelected: false,
-            })
-          }
-        >
+        <AppNavigationLink href="/tasks" isSelected={pathname === "/tasks"}>
           <CalendarCheck2 size={18} strokeWidth={1.5} absoluteStrokeWidth />
           Tasks
-        </Link>
+        </AppNavigationLink>
 
-        <Link
-          href="#"
-          className={(renderProps) =>
-            navLinkStyle({
-              ...renderProps,
-              variant: "primary",
-              isSelected: false,
-            })
-          }
-        >
+        <AppNavigationLink href="/team" isSelected={pathname === "/team"}>
           <Users size={18} strokeWidth={1.5} absoluteStrokeWidth />
           Team
-        </Link>
+        </AppNavigationLink>
 
-        <Link
-          href="#"
-          className={(renderProps) =>
-            navLinkStyle({
-              ...renderProps,
-              variant: "primary",
-              isSelected: false,
-            })
-          }
+        <AppNavigationLink
+          href="/customers"
+          isSelected={pathname === "/customers"}
         >
           <Contact size={18} strokeWidth={1.5} absoluteStrokeWidth />
           Customers
-        </Link>
+        </AppNavigationLink>
 
-        <Link
-          href="#"
-          className={(renderProps) =>
-            navLinkStyle({
-              ...renderProps,
-              variant: "primary",
-              isSelected: false,
-            })
-          }
-        >
+        <AppNavigationLink href="/inbox" isSelected={pathname === "/inbox"}>
           <Mail size={18} strokeWidth={1.5} absoluteStrokeWidth />
           Inbox
           <Badge className="ml-auto rounded-xl px-1.5! py-0.5!">28</Badge>
-        </Link>
+        </AppNavigationLink>
 
-        <Link
-          href="#"
-          className={(renderProps) =>
-            navLinkStyle({
-              ...renderProps,
-              variant: "primary",
-              isSelected: false,
-            })
-          }
+        <AppNavigationLink
+          href="/settings"
+          isSelected={pathname === "/settings"}
         >
           <Settings size={18} strokeWidth={1.5} absoluteStrokeWidth />
           Settings
-        </Link>
+        </AppNavigationLink>
       </nav>
 
       <Divider />
@@ -146,7 +90,7 @@ export const AppNavigation = ({ className }: AppNavigationProps) => {
         <Divider />
       </div>
 
-      <Link href="#" className={navLinkStyle}>
+      <Link href="#" className={navLinkStyle()}>
         <LogOut size={18} strokeWidth={1.5} absoluteStrokeWidth />
         Logout
       </Link>

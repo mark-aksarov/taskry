@@ -15,6 +15,7 @@ import { notificationsMock } from "@/components/notifications/NotificationList";
 import { getUsers } from "@/lib/queries/user";
 import { usersMock } from "@/components/users/usersMock";
 import { getStorageUsage } from "@/lib/queries/storage";
+import { usePathname } from "next/navigation";
 
 const meta = {
   title: "components/pages/Dashboard",

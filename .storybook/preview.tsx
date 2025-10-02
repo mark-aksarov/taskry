@@ -3,7 +3,8 @@ import "../app/globals.css";
 import type { Preview, ReactRenderer } from "@storybook/nextjs-vite";
 import { withThemeByDataAttribute } from "@storybook/addon-themes";
 import { INITIAL_VIEWPORTS } from "storybook/viewport";
-import { sb } from "storybook/test";
+import { mocked, sb } from "storybook/test";
+import { usePathname } from "next/navigation";
 
 sb.mock(import("../lib/prisma"));
 sb.mock(import("../lib/queries/project"));
@@ -12,8 +13,13 @@ sb.mock(import("../lib/queries/notification"));
 sb.mock(import("../lib/queries/user"));
 sb.mock(import("../lib/queries/customers"));
 sb.mock(import("../lib/queries/storage"));
+sb.mock(import("next/navigation"));
 
 const preview: Preview = {
+  beforeEach: () => {
+    mocked(usePathname).mockReturnValue("/");
+  },
+
   decorators: [
     (Story) => (
       <div className="bg-white dark:bg-gray-900">

@@ -3,9 +3,9 @@ import { Item } from "react-stately";
 import { Languages } from "lucide-react";
 import { MenuTrigger } from "../ui/Menu";
 import { DialogHeader } from "../ui/Dialog";
-import { navLinkStyle } from "./AppNavigation";
 import { Button } from "../ui/Button";
 import { DialogCloseButton, DialogHeading } from "../ui/Dialog";
+import { navLinkStyle } from "./AppNavigationLink";
 
 const itemClasses = "flex items-center gap-4 font-bold";
 
