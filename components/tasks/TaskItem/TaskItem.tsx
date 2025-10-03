@@ -38,11 +38,12 @@ const TaskDetails = ({
 
   return (
     <div className="flex flex-1 gap-4">
-      {showCheckbox && <Checkbox aria-label="task checkbox" />}
+      {task && showCheckbox && <Checkbox aria-label="task checkbox" />}
       <BaseItemDetails
         skeleton={!task}
         title={task?.title ?? ""}
         value={task ? `Deadline on ${formattedDeadline}` : ""}
+        className="w-full"
       />
     </div>
   );
@@ -67,7 +68,7 @@ const TaskProject = ({ task }: { task?: TaskPreview }) => (
 );
 
 const TaskProgress = ({ task }: { task?: TaskPreview }) => {
-  const classes = "w-[10rem] shrink-0 @max-md:hidden";
+  const classes = "w-[10rem] @max-md:hidden";
 
   const subtasksDone =
     task?.subtasks.filter((subtask) => subtask.isDone).length ?? 0;

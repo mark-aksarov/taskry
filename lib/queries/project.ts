@@ -2,10 +2,49 @@ import "server-only";
 
 import { cache } from "react";
 import prisma from "../prisma";
+import { ProjectPreview } from "./types";
+import { ACTIVE_PROJECT_STATUS_ID } from "./constants";
 
-export const PENDING_PROJECT_STATUS_ID = 1;
-export const ACTIVE_PROJECT_STATUS_ID = 2;
-export const COMPLETED_PROJECT_STATUS_ID = 3;
+export const getProjects = cache(async (): Promise<ProjectPreview[]> => {
+  return await prisma.project.findMany({
+    include: {
+      creator: {
+        select: {
+          name: true,
+          imageUrl: true,
+        },
+      },
+      status: {
+        select: {
+          id: true,
+          nameEn: true,
+          nameRu: true,
+        },
+      },
+      category: {
+        select: {
+          name: true,
+        },
+      },
+      customer: {
+        select: {
+          fullName: true,
+          company: {
+            select: {
+              name: true,
+            },
+          },
+        },
+      },
+      tasks: {
+        select: {
+          statusId: true,
+        },
+      },
+    },
+    take: 10,
+  });
+});
 
 export const getTotalProjects = cache(
   async (fromDate?: Date, toDate?: Date) => {

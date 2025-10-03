@@ -52,6 +52,12 @@ export const WithoutCreator: Story = {
   },
 };
 
+export const WithCheckbox: Story = {
+  args: {
+    showCheckbox: true,
+  },
+};
+
 export const Skeleton: Story = {
   args: {
     task: undefined,

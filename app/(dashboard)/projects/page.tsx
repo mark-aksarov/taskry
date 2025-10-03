@@ -18,8 +18,8 @@ import { UserCheckboxGroup } from "@/components/users/UserCheckboxGroup";
 import { Card, CardHeading } from "@/components/common/Card";
 import { ListSkeleton } from "@/components/common/ListSkeleton";
 import { PaginationSkeleton } from "@/components/common/Pagination";
-import { TaskItem } from "@/components/tasks/TaskItem";
-import { TaskList } from "@/components/tasks/TaskList";
+import { ProjectList } from "@/components/projects/ProjectList";
+import { ProjectItem } from "@/components/projects/ProjectItem";
 
 export default async function ProjectsPage() {
   const categoriesPromise = getProjectCategories(1);
@@ -87,23 +87,21 @@ export default async function ProjectsPage() {
         </div>
       </div>
 
-      <div className="max-lg:col-start-1 max-lg:col-end-3 lg:col-start-1 lg:col-end-3 lg:row-start-2 lg:row-end-4">
-        <Card>
-          <div className="flex flex-col gap-4">
-            <CardHeading>Tasks</CardHeading>
-            <Suspense
-              fallback={
-                <>
-                  <ListSkeleton items={10} renderItem={() => <TaskItem />} />
-                  <PaginationSkeleton />
-                </>
-              }
-            >
-              <TaskList />
-            </Suspense>
-          </div>
-        </Card>
-      </div>
+      <Card>
+        <div className="flex flex-col gap-4">
+          <CardHeading>Projects</CardHeading>
+          <Suspense
+            fallback={
+              <>
+                <ListSkeleton items={10} renderItem={() => <ProjectItem />} />
+                <PaginationSkeleton />
+              </>
+            }
+          >
+            <ProjectList />
+          </Suspense>
+        </div>
+      </Card>
     </div>
   );
 }

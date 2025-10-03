@@ -83,3 +83,41 @@ export type NotificationRecipientWithRelations =
       };
     };
   }>;
+
+export type ProjectPreview = Prisma.ProjectGetPayload<{
+  include: {
+    creator: {
+      select: {
+        name: true;
+        imageUrl: true;
+      };
+    };
+    status: {
+      select: {
+        id: true;
+        nameEn: true;
+        nameRu: true;
+      };
+    };
+    category: {
+      select: {
+        name: true;
+      };
+    };
+    customer: {
+      select: {
+        fullName: true;
+        company: {
+          select: {
+            name: true;
+          };
+        };
+      };
+    };
+    tasks: {
+      select: {
+        statusId: true;
+      };
+    };
+  };
+}>;

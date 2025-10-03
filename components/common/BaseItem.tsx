@@ -48,7 +48,7 @@ export const BaseItemProgress = ({
   skeleton,
   ...props
 }: ProgressBarProps & { skeleton?: boolean }) => {
-  const classes = "w-[10rem] shrink-0 @max-md:hidden";
+  const classes = "w-[10rem] @max-md:hidden";
 
   if (skeleton) {
     return <Skeleton className={classes} size="xs" />;
@@ -105,7 +105,7 @@ export const BaseItemStatusBadge = ({
   text?: string;
   skeleton: boolean;
 }) => {
-  const classes = "w-[5.5rem] shrink-0 grow-0 @max-xl:hidden";
+  const classes = "w-[5.5rem] px-0 @max-xl:hidden";
 
   if (skeleton) {
     return <Skeleton className={twMerge(classes, "h-[1.75rem]")} />;
@@ -127,8 +127,7 @@ export const BaseItemImage = ({
   alt: string;
   skeleton: boolean;
 }) => {
-  const classes =
-    "h-8 w-8 shrink-0 grow-0 bg-gray-200 rounded-full overflow-hidden";
+  const classes = "h-8 w-8 bg-gray-200 rounded-full overflow-hidden";
 
   if (skeleton) {
     return <Skeleton className={classes} />;

@@ -16,12 +16,12 @@ export const Badge = ({
     <span
       role="presentation"
       className={twMerge(
-        className,
         "rounded-lg px-5 py-1.5 text-center text-xs font-medium text-white",
         color === "blue" && "bg-blue-600 dark:bg-blue-700",
         color === "green" && "bg-green-700 dark:bg-green-800",
         color === "red" && "bg-red-600 dark:bg-red-700",
         color === "orange" && "bg-orange-700 dark:bg-orange-800",
+        className,
       )}
       {...props}
     >
