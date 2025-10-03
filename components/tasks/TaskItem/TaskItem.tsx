@@ -3,14 +3,7 @@
 import { useMemo } from "react";
 import { TaskPreview } from "@/lib/queries/types";
 import { ProgressBar } from "@/components/ui/ProgressBar";
-import {
-  Check,
-  CheckCheck,
-  CircleEllipsis,
-  Clock,
-  Ellipsis,
-  Trash,
-} from "lucide-react";
+import { Check, CircleEllipsis, Clock, Ellipsis, Trash } from "lucide-react";
 import { Badge } from "@/components/ui/Badge";
 import {
   ACTIVE_TASK_STATUS_ID,
@@ -28,71 +21,94 @@ import {
 } from "@/components/ui/Dialog";
 import { Skeleton } from "@/components/ui/Skeleton";
 import { ResponsiveMenuTrigger } from "@/components/common/ResponsiveMenuTrigger";
+import { Checkbox } from "@/components/ui/Checkbox";
 
 const baseOverflow = "overflow-hidden text-nowrap overflow-ellipsis";
-const detailsClasses = "flex shrink-0 grow-0 flex-col gap-1";
 const titleClasses = `${baseOverflow} text-sm font-bold text-black dark:text-white`;
 const descriptionClasses = `${baseOverflow} text-xs font-medium text-gray-500 dark:text-gray-400`;
 
-const TaskDetails = ({ task }: { task?: TaskPreview }) => {
+type TaskDetailBlockProps = {
+  task?: TaskPreview;
+  title: string;
+  value?: string;
+  className?: string;
+};
+
+const TaskDetailBlock = ({
+  task,
+  title,
+  value,
+  className,
+}: TaskDetailBlockProps) => {
+  const classes = twMerge("flex flex-col gap-1", className);
+
+  if (!task) {
+    return (
+      <div className={classes}>
+        <Skeleton className="w-50/100" size="sm" />
+        <Skeleton className="w-35/100" size="xs" />
+      </div>
+    );
+  }
+
+  return (
+    <div className={classes}>
+      <h4 className={titleClasses}>{title}</h4>
+      <span className={descriptionClasses}>{value}</span>
+    </div>
+  );
+};
+
+const TaskDetails = ({
+  task,
+  showCheckbox,
+}: {
+  task?: TaskPreview;
+  showCheckbox?: boolean;
+}) => {
   const locale = "en-GB";
 
   const formattedDeadline = useMemo(() => {
     if (!task?.deadline) return "";
-
-    const date = new Date(task.deadline);
-
-    return date.toLocaleDateString(locale, {
+    return new Date(task.deadline).toLocaleDateString(locale, {
       day: "2-digit",
       month: "short",
       year: "numeric",
     });
   }, [task?.deadline, locale]);
 
-  const classes = twMerge("w-[10rem]", detailsClasses);
-
-  if (!task) {
-    return (
-      <div className={classes}>
-        <Skeleton size="sm" />
-        <Skeleton className="w-75/100" size="xs" />
-      </div>
-    );
-  }
-
   return (
-    <div className={classes}>
-      <h4 className={titleClasses}>{task.title}</h4>
-      <span className={descriptionClasses}>
-        Deadline on {formattedDeadline}
-      </span>
+    <div className="flex flex-1 gap-4">
+      {showCheckbox && <Checkbox aria-label="task checkbox" />}
+      <TaskDetailBlock
+        task={task}
+        title={task?.title ?? ""}
+        value={task ? `Deadline on ${formattedDeadline}` : ""}
+      />
     </div>
   );
 };
 
-const TaskCategory = ({ task }: { task?: TaskPreview }) => {
-  const classes = twMerge("w-[7rem] @max-2xl:hidden", detailsClasses);
+const TaskCategory = ({ task }: { task?: TaskPreview }) => (
+  <TaskDetailBlock
+    task={task}
+    title="Category"
+    value={task?.category?.name}
+    className="min-w-[10rem] flex-1 @max-3xl:hidden"
+  />
+);
 
-  if (!task) {
-    return (
-      <div className={classes}>
-        <Skeleton size="sm" />
-        <Skeleton className="w-75/100" size="xs" />
-      </div>
-    );
-  }
-
-  return (
-    <div className={classes}>
-      <h4 className={titleClasses}>Category</h4>
-      <span className={descriptionClasses}>{task.category.name}</span>
-    </div>
-  );
-};
+const TaskProject = ({ task }: { task?: TaskPreview }) => (
+  <TaskDetailBlock
+    task={task}
+    title="Project"
+    value={task?.project?.title}
+    className="min-w-[10rem] flex-1 @max-5xl:hidden"
+  />
+);
 
 const TaskProgress = ({ task }: { task?: TaskPreview }) => {
-  const classes =
-    "w-[calc(9.25rem + 10cqw)] max-w-[13.25rem] shrink-1 grow-1 @max-md:hidden";
+  const classes = "w-[10rem] shrink-0 @max-md:hidden";
 
   if (!task) {
     return <Skeleton className={classes} size="xs" />;
@@ -103,12 +119,8 @@ const TaskProgress = ({ task }: { task?: TaskPreview }) => {
   return (
     <ProgressBar
       value={(subtasksDone / task.subtasks.length) * 100}
-      label={
-        <div className="flex items-center gap-1">
-          <CheckCheck size={16} strokeWidth={1.5} absoluteStrokeWidth />
-          {subtasksDone}/{task.subtasks.length}
-        </div>
-      }
+      showValueText={false}
+      aria-label="task progress"
       className={classes}
     />
   );
@@ -196,7 +208,7 @@ const TaskStatusBadge = ({ task }: { task?: TaskPreview }) => {
 
 const TaskCreatorImage = ({ task }: { task?: TaskPreview }) => {
   const classes =
-    "h-8 w-8 shrink-0 grow-0 bg-gray-200 rounded-full  overflow-hidden";
+    "h-8 w-8 shrink-0 grow-0 bg-gray-200 rounded-full overflow-hidden";
 
   if (!task) {
     return <Skeleton className={classes} />;
@@ -216,13 +228,20 @@ const TaskCreatorImage = ({ task }: { task?: TaskPreview }) => {
   );
 };
 
-export const TaskItem = ({ task }: { task?: TaskPreview }) => {
+export const TaskItem = ({
+  task,
+  showCheckbox,
+}: {
+  task?: TaskPreview;
+  showCheckbox?: boolean;
+}) => {
   return (
-    <BaseItem className="justify-between gap-8">
-      <TaskDetails task={task} />
+    <BaseItem className="gap-8">
+      <TaskDetails task={task} showCheckbox={showCheckbox} />
       <TaskCategory task={task} />
-      <TaskProgress task={task} />
-      <div className="flex items-center gap-8">
+      <TaskProject task={task} />
+      <div className="flex flex-none items-center justify-end gap-8">
+        <TaskProgress task={task} />
         <TaskStatusBadge task={task} />
         <div className="flex items-center gap-2">
           <TaskCreatorImage task={task} />

@@ -15,6 +15,11 @@ import { getCustomers } from "@/lib/queries/customers";
 import { CustomerCheckboxGroup } from "@/components/customer/CustomerCheckboxGroup";
 import { getUsers } from "@/lib/queries/user";
 import { UserCheckboxGroup } from "@/components/users/UserCheckboxGroup";
+import { Card, CardHeading } from "@/components/common/Card";
+import { ListSkeleton } from "@/components/common/ListSkeleton";
+import { PaginationSkeleton } from "@/components/common/Pagination";
+import { TaskItem } from "@/components/tasks/TaskItem";
+import { TaskList } from "@/components/tasks/TaskList";
 
 export default async function ProjectsPage() {
   const categoriesPromise = getProjectCategories(1);
@@ -34,30 +39,11 @@ export default async function ProjectsPage() {
   );
 
   return (
-    <div>
-      <div className="flex items-center justify-between max-md:hidden">
-        <div className="flex w-full gap-4">
-          <ProjectFiltersSideSheetTrigger
-            projectFiltersForm={
-              <Suspense fallback={<ProjectFiltersFormSkeleton />}>
-                {projectFiltersForm}
-              </Suspense>
-            }
-          />
-          <ProjectActionsMenuTrigger />
-          <ViewToggle className="ml-auto" />
-          <Button
-            label="New Project"
-            iconLeft={<Plus size={16} strokeWidth={1.5} absoluteStrokeWidth />}
-          />
-        </div>
-      </div>
-
-      <div className="flex flex-col gap-5 md:hidden">
-        <div className="flex items-center justify-between">
-          <h2 className="text-xl font-extrabold">Projects</h2>
-          <div className="flex items-center gap-2">
-            <ProjectFiltersBottomSheetTrigger
+    <div className="flex flex-col gap-5">
+      <div>
+        <div className="flex items-center justify-between max-md:hidden">
+          <div className="flex w-full gap-4">
+            <ProjectFiltersSideSheetTrigger
               projectFiltersForm={
                 <Suspense fallback={<ProjectFiltersFormSkeleton />}>
                   {projectFiltersForm}
@@ -65,15 +51,58 @@ export default async function ProjectsPage() {
               }
             />
             <ProjectActionsMenuTrigger />
+            <ViewToggle className="ml-auto" />
+            <Button
+              label="New Project"
+              iconLeft={
+                <Plus size={16} strokeWidth={1.5} absoluteStrokeWidth />
+              }
+            />
           </div>
         </div>
-        <div className="flex items-center justify-between">
-          <ViewToggle />
-          <Button
-            label="New Project"
-            iconLeft={<Plus size={16} strokeWidth={1.5} absoluteStrokeWidth />}
-          />
+
+        <div className="flex flex-col gap-5 md:hidden">
+          <div className="flex items-center justify-between">
+            <h2 className="text-xl font-extrabold">Projects</h2>
+            <div className="flex items-center gap-2">
+              <ProjectFiltersBottomSheetTrigger
+                projectFiltersForm={
+                  <Suspense fallback={<ProjectFiltersFormSkeleton />}>
+                    {projectFiltersForm}
+                  </Suspense>
+                }
+              />
+              <ProjectActionsMenuTrigger />
+            </div>
+          </div>
+          <div className="flex items-center justify-between">
+            <ViewToggle />
+            <Button
+              label="New Project"
+              iconLeft={
+                <Plus size={16} strokeWidth={1.5} absoluteStrokeWidth />
+              }
+            />
+          </div>
         </div>
+      </div>
+
+      <div className="max-lg:col-start-1 max-lg:col-end-3 lg:col-start-1 lg:col-end-3 lg:row-start-2 lg:row-end-4">
+        <Card>
+          <div className="flex flex-col gap-4">
+            <CardHeading>Tasks</CardHeading>
+            <Suspense
+              fallback={
+                <>
+                  <ListSkeleton items={10} renderItem={() => <TaskItem />} />
+                  <PaginationSkeleton />
+                </>
+              }
+            >
+              <TaskList />
+            </Suspense>
+          </div>
+        </Card>
       </div>
     </div>
   );

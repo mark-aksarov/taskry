@@ -17,6 +17,7 @@ export const tasksMock: TaskPreview[] = [
     statusId: PENDING_TASK_STATUS_ID,
     createdAt: new Date("2025-09-01"),
     updatedAt: new Date("2025-09-15"),
+    project: { title: "Website Redesign", id: 1 },
 
     creator: { imageUrl: "/man.jpg", name: "John Doe" },
     status: {
@@ -39,12 +40,13 @@ export const tasksMock: TaskPreview[] = [
     title: "Implement login system",
     description: "Add email and password login with validation",
     deadline: new Date("2025-10-05"),
-    projectId: 1,
+    projectId: 2,
     creatorId: "user2",
     categoryId: 2,
     statusId: ACTIVE_TASK_STATUS_ID,
     createdAt: new Date("2025-09-02"),
     updatedAt: new Date("2025-09-16"),
+    project: { title: "Authentication Module", id: 2 },
 
     creator: null,
     status: {
@@ -71,12 +73,13 @@ export const tasksMock: TaskPreview[] = [
     title: "Database schema migration",
     description: "Prepare migration scripts for PostgreSQL",
     deadline: new Date("2025-10-10"),
-    projectId: 2,
+    projectId: 3,
     creatorId: "user3",
     categoryId: 3,
     statusId: DONE_TASK_STATUS_ID,
     createdAt: new Date("2025-09-03"),
     updatedAt: new Date("2025-09-17"),
+    project: { title: "Core Database Upgrade", id: 3 },
 
     creator: { imageUrl: null, name: "Jane Doe" },
     status: {
@@ -101,12 +104,13 @@ export const tasksMock: TaskPreview[] = [
     title: "Write unit tests",
     description: "Ensure code coverage for critical modules",
     deadline: new Date("2025-10-12"),
-    projectId: 2,
+    projectId: 4,
     creatorId: "user4",
     categoryId: 4,
     statusId: PENDING_TASK_STATUS_ID,
     createdAt: new Date("2025-09-04"),
     updatedAt: new Date("2025-09-17"),
+    project: { title: "Quality Assurance Suite", id: 4 },
 
     creator: { imageUrl: "/man.jpg", name: "John Doe" },
     status: {
@@ -135,12 +139,13 @@ export const tasksMock: TaskPreview[] = [
     title: "Prepare deployment pipeline",
     description: "Set up CI/CD with GitHub Actions",
     deadline: new Date("2025-10-15"),
-    projectId: 2,
+    projectId: 5,
     creatorId: "user5",
     categoryId: 5,
     statusId: ACTIVE_TASK_STATUS_ID,
     createdAt: new Date("2025-09-05"),
     updatedAt: new Date("2025-09-18"),
+    project: { title: "CI/CD Automation", id: 5 },
 
     creator: { imageUrl: "/man.jpg", name: "John Doe" },
     status: {
@@ -178,12 +183,13 @@ export const tasksMock: TaskPreview[] = [
     title: "Set up staging environment",
     description: "Deploy staging server for testing",
     deadline: new Date("2025-10-18"),
-    projectId: 2,
+    projectId: 6,
     creatorId: "user6",
     categoryId: 6,
     statusId: DONE_TASK_STATUS_ID,
     createdAt: new Date("2025-09-06"),
     updatedAt: new Date("2025-09-18"),
+    project: { title: "Infrastructure Setup", id: 6 },
 
     creator: { imageUrl: "/man.jpg", name: "John Doe" },
     status: {
@@ -211,12 +217,13 @@ export const tasksMock: TaskPreview[] = [
     title: "Create onboarding flow",
     description: "Implement user onboarding screens",
     deadline: new Date("2025-10-20"),
-    projectId: 3,
+    projectId: 7,
     creatorId: "user7",
     categoryId: 7,
     statusId: DONE_TASK_STATUS_ID,
     createdAt: new Date("2025-09-07"),
     updatedAt: new Date("2025-09-19"),
+    project: { title: "User Experience Improvements", id: 7 },
 
     creator: { imageUrl: "/man.jpg", name: "John Doe" },
     status: {
@@ -240,12 +247,13 @@ export const tasksMock: TaskPreview[] = [
     title: "Fix payment bug",
     description: "Resolve payment gateway error on checkout",
     deadline: new Date("2025-10-22"),
-    projectId: 3,
+    projectId: 8,
     creatorId: "user8",
     categoryId: 8,
     statusId: ACTIVE_TASK_STATUS_ID,
     createdAt: new Date("2025-09-08"),
     updatedAt: new Date("2025-09-19"),
+    project: { title: "E-commerce Platform", id: 8 },
 
     creator: { imageUrl: "/man.jpg", name: "John Doe" },
     status: {
@@ -269,12 +277,13 @@ export const tasksMock: TaskPreview[] = [
     title: "Optimize image loading",
     description: "Use lazy-loading and compression",
     deadline: new Date("2025-10-25"),
-    projectId: 3,
+    projectId: 9,
     creatorId: "user9",
     categoryId: 9,
     statusId: PENDING_TASK_STATUS_ID,
     createdAt: new Date("2025-09-09"),
     updatedAt: new Date("2025-09-19"),
+    project: { title: "Performance Optimization", id: 9 },
 
     creator: { imageUrl: null, name: "Jane Doe" },
     status: {
@@ -298,12 +307,13 @@ export const tasksMock: TaskPreview[] = [
     title: "Refactor auth middleware",
     description: "Simplify authentication logic",
     deadline: new Date("2025-10-28"),
-    projectId: 3,
+    projectId: 10,
     creatorId: "user10",
     categoryId: 3,
     statusId: DONE_TASK_STATUS_ID,
     createdAt: new Date("2025-09-10"),
     updatedAt: new Date("2025-09-20"),
+    project: { title: "Backend Refactoring", id: 10 },
 
     creator: null,
     status: {

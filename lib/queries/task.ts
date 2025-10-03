@@ -27,6 +27,12 @@ export const getTasks = cache(async (): Promise<TaskPreview[]> => {
           nameRu: true,
         },
       },
+      project: {
+        select: {
+          id: true,
+          title: true,
+        },
+      },
       category: {
         select: {
           name: true,

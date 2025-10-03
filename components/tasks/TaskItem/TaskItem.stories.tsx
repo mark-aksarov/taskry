@@ -14,6 +14,7 @@ const taskMock: TaskPreview = {
   statusId: 2,
   createdAt: new Date("2025-09-20"),
   updatedAt: new Date("2025-09-24"),
+  project: { title: "User Research Initiative", id: 1 },
 
   creator: { imageUrl: "/woman.jpg", name: "Alice Johnson" },
   status: {

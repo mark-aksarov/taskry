@@ -15,6 +15,12 @@ export type TaskPreview = Prisma.TaskGetPayload<{
         nameRu: true;
       };
     };
+    project: {
+      select: {
+        id: true;
+        title: true;
+      };
+    };
     category: {
       select: {
         name: true;
