@@ -15,7 +15,7 @@ const taskMock: TaskPreview = {
   createdAt: new Date("2025-09-20"),
   updatedAt: new Date("2025-09-24"),
 
-  creator: { imageUrl: "/woman.jpg" },
+  creator: { imageUrl: "/woman.jpg", name: "Alice Johnson" },
   status: {
     id: ACTIVE_TASK_STATUS_ID,
     nameEn: "Active",

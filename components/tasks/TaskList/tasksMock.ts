@@ -18,7 +18,7 @@ export const tasksMock: TaskPreview[] = [
     createdAt: new Date("2025-09-01"),
     updatedAt: new Date("2025-09-15"),
 
-    creator: { imageUrl: "/man.jpg" },
+    creator: { imageUrl: "/man.jpg", name: "John Doe" },
     status: {
       id: PENDING_TASK_STATUS_ID,
       nameEn: "Pending",
@@ -78,7 +78,7 @@ export const tasksMock: TaskPreview[] = [
     createdAt: new Date("2025-09-03"),
     updatedAt: new Date("2025-09-17"),
 
-    creator: { imageUrl: null },
+    creator: { imageUrl: null, name: "Jane Doe" },
     status: {
       id: DONE_TASK_STATUS_ID,
       nameEn: "Done",
@@ -108,7 +108,7 @@ export const tasksMock: TaskPreview[] = [
     createdAt: new Date("2025-09-04"),
     updatedAt: new Date("2025-09-17"),
 
-    creator: { imageUrl: "/man.jpg" },
+    creator: { imageUrl: "/man.jpg", name: "John Doe" },
     status: {
       id: PENDING_TASK_STATUS_ID,
       nameEn: "Pending",
@@ -142,7 +142,7 @@ export const tasksMock: TaskPreview[] = [
     createdAt: new Date("2025-09-05"),
     updatedAt: new Date("2025-09-18"),
 
-    creator: { imageUrl: "/man.jpg" },
+    creator: { imageUrl: "/man.jpg", name: "John Doe" },
     status: {
       id: ACTIVE_TASK_STATUS_ID,
       nameEn: "Active",
@@ -185,7 +185,7 @@ export const tasksMock: TaskPreview[] = [
     createdAt: new Date("2025-09-06"),
     updatedAt: new Date("2025-09-18"),
 
-    creator: { imageUrl: "/man.jpg" },
+    creator: { imageUrl: "/man.jpg", name: "John Doe" },
     status: {
       id: DONE_TASK_STATUS_ID,
       nameEn: "Done",
@@ -218,7 +218,7 @@ export const tasksMock: TaskPreview[] = [
     createdAt: new Date("2025-09-07"),
     updatedAt: new Date("2025-09-19"),
 
-    creator: { imageUrl: "/man.jpg" },
+    creator: { imageUrl: "/man.jpg", name: "John Doe" },
     status: {
       id: DONE_TASK_STATUS_ID,
       nameEn: "Done",
@@ -247,7 +247,7 @@ export const tasksMock: TaskPreview[] = [
     createdAt: new Date("2025-09-08"),
     updatedAt: new Date("2025-09-19"),
 
-    creator: { imageUrl: "/man.jpg" },
+    creator: { imageUrl: "/man.jpg", name: "John Doe" },
     status: {
       id: ACTIVE_TASK_STATUS_ID,
       nameEn: "Active",
@@ -276,7 +276,7 @@ export const tasksMock: TaskPreview[] = [
     createdAt: new Date("2025-09-09"),
     updatedAt: new Date("2025-09-19"),
 
-    creator: { imageUrl: null },
+    creator: { imageUrl: null, name: "Jane Doe" },
     status: {
       id: PENDING_TASK_STATUS_ID,
       nameEn: "Pending",
