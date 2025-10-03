@@ -8,7 +8,7 @@ import {
 } from "react-aria-components";
 import { twMerge } from "tailwind-merge";
 
-interface ProgressBarProps extends RACProgressBarProps {
+export interface ProgressBarProps extends RACProgressBarProps {
   label?: React.ReactNode;
   textClassName?: string;
   showValueText?: boolean;
