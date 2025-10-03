@@ -3,17 +3,32 @@ import { ProgressBar } from "./ProgressBar";
 import { render, screen } from "@testing-library/react";
 
 describe("ProgressBar", () => {
-  test("renders with label and value", () => {
-    render(<ProgressBar label="Label" />);
+  test("renders only label when showValueText is false", () => {
+    render(<ProgressBar label="Label" value={40} />);
 
-    const progressBar = screen.getByRole("progressbar");
-    expect(progressBar).toBeInTheDocument();
+    expect(screen.getByText("Label")).toBeInTheDocument();
+    expect(screen.queryByText("40%")).not.toBeInTheDocument();
+  });
 
-    const label = screen.getByText("Label");
-    expect(label).toBeInTheDocument();
+  test("renders only value text when label is not provided but showValueText is true", () => {
+    render(<ProgressBar aria-label="Label" showValueText value={70} />);
 
-    const value = screen.getByText("0%");
-    expect(value).toBeInTheDocument();
+    expect(screen.queryByText("Label")).not.toBeInTheDocument();
+    expect(screen.getByText("70%")).toBeInTheDocument();
+  });
+
+  test("renders nothing when neither label nor showValueText are provided", () => {
+    render(<ProgressBar aria-label="Label" value={20} />);
+
+    expect(screen.queryByText("20%")).not.toBeInTheDocument();
+    expect(screen.queryByText("Label")).not.toBeInTheDocument();
+  });
+
+  test("renders both label and value text when both are provided", () => {
+    render(<ProgressBar label="Label" showValueText value={50} />);
+
+    expect(screen.getByText("Label")).toBeInTheDocument();
+    expect(screen.getByText("50%")).toBeInTheDocument();
   });
 
   test("renders red fill when percentage is less than 33", () => {

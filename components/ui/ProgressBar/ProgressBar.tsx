@@ -9,14 +9,16 @@ import {
 import { twMerge } from "tailwind-merge";
 
 interface ProgressBarProps extends RACProgressBarProps {
-  label: React.ReactNode;
+  label?: React.ReactNode;
   textClassName?: string;
+  showValueText?: boolean;
 }
 
 export const ProgressBar = ({
   label,
   className,
   textClassName,
+  showValueText = true,
   ...props
 }: ProgressBarProps) => {
   const classes = composeRenderProps(className, (className) =>
@@ -31,10 +33,14 @@ export const ProgressBar = ({
     <RACProgressBar {...props} className={classes}>
       {({ percentage, valueText }) => (
         <>
-          <div className="flex justify-between gap-2">
-            <Label className={textClasses}>{label}</Label>
-            <span className={textClasses}>{valueText}</span>
-          </div>
+          {(label || showValueText) && (
+            <div className="flex justify-between gap-2">
+              {label && <Label className={textClasses}>{label}</Label>}
+              {showValueText && (
+                <span className={textClasses}>{valueText}</span>
+              )}
+            </div>
+          )}
           <div className="h-2 overflow-hidden rounded-full bg-gray-200 dark:bg-gray-700">
             <div
               data-testid="progressbar-fill"
