@@ -5,11 +5,12 @@ import { getCustomers } from "@/lib/queries/customers";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { PageDecorator } from "@/.storybook/decorators";
 import { usersMock } from "@/components/users/usersMock";
-import { getProjectCategories } from "@/lib/queries/project";
+import { getProjectCategories, getProjects } from "@/lib/queries/project";
 import { getNotifications } from "@/lib/queries/notification";
 import { customersMock } from "@/components/customer/customersMock";
 import { notificationsMock } from "@/components/notifications/NotificationList";
 import { projectCategoriesMock } from "@/components/projects/projectCategoriesMock";
+import { projectsMock } from "@/components/projects/ProjectList";
 
 const meta = {
   title: "components/pages/Projects",
@@ -26,6 +27,9 @@ const meta = {
     mocked(getUsers).mockReturnValue(new Promise((res) => res(usersMock)));
     mocked(getNotifications).mockReturnValue(
       new Promise((res) => res(notificationsMock.slice(0, 5))),
+    );
+    mocked(getProjects).mockReturnValue(
+      new Promise((res) => res(projectsMock)),
     );
   },
 } satisfies Meta<typeof ProjectsPage>;

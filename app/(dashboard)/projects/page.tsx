@@ -20,6 +20,7 @@ import { ListSkeleton } from "@/components/common/ListSkeleton";
 import { PaginationSkeleton } from "@/components/common/Pagination";
 import { ProjectList } from "@/components/projects/ProjectList";
 import { ProjectItem } from "@/components/projects/ProjectItem";
+import { ProjectGrid } from "@/components/projects/ProjectGrid/ProjectGrid";
 
 export default async function ProjectsPage() {
   const categoriesPromise = getProjectCategories(1);
@@ -87,7 +88,7 @@ export default async function ProjectsPage() {
         </div>
       </div>
 
-      <Card>
+      <Card className="hidden">
         <div className="flex flex-col gap-4">
           <CardHeading>Projects</CardHeading>
           <Suspense
@@ -102,6 +103,17 @@ export default async function ProjectsPage() {
           </Suspense>
         </div>
       </Card>
+
+      <Suspense
+        fallback={
+          <>
+            <ListSkeleton items={10} renderItem={() => <ProjectItem />} />
+            <PaginationSkeleton />
+          </>
+        }
+      >
+        <ProjectGrid />
+      </Suspense>
     </div>
   );
 }

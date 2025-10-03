@@ -45,7 +45,7 @@ const ProjectDetails = ({
     });
   }, [project?.deadline, locale]);
 
-  const classes = "flex min-w-[10rem] flex-1 gap-4";
+  const classes = "flex min-w-[10rem] flex-1 gap-4 overflow-hidden";
 
   if (!project) {
     return (
@@ -62,7 +62,7 @@ const ProjectDetails = ({
     <div className={classes}>
       {project && showCheckbox && <Checkbox aria-label="project checkbox" />}
 
-      <div className="flex flex-col gap-1">
+      <div className="flex flex-col gap-1 overflow-hidden">
         <h4 className={titleClasses}>{project.title}</h4>
         <span
           className={descriptionClasses}
@@ -73,7 +73,7 @@ const ProjectDetails = ({
 };
 
 const ProjectCategory = ({ project }: { project?: ProjectPreview }) => {
-  const classes = "min-w-[10rem] flex-1 @max-3xl:hidden";
+  const classes = "min-w-[10rem] flex-1 @max-3xl:hidden overflow-hidden";
 
   if (!project) {
     return (
@@ -88,7 +88,7 @@ const ProjectCategory = ({ project }: { project?: ProjectPreview }) => {
 
   return (
     <div className={classes}>
-      <div className="flex flex-col gap-1">
+      <div className="flex flex-col gap-1 overflow-hidden">
         <h4 className={titleClasses}>Category</h4>
         <span className={descriptionClasses}>{project.category.name}</span>
       </div>
@@ -97,7 +97,7 @@ const ProjectCategory = ({ project }: { project?: ProjectPreview }) => {
 };
 
 const ProjectCustomer = ({ project }: { project?: ProjectPreview }) => {
-  const classes = "min-w-[10rem] flex-1 @max-5xl:hidden";
+  const classes = "min-w-[10rem] flex-1 @max-5xl:hidden overflow-hidden";
 
   if (!project) {
     return (
@@ -112,7 +112,7 @@ const ProjectCustomer = ({ project }: { project?: ProjectPreview }) => {
 
   return (
     <div className={classes}>
-      <div className="flex flex-col gap-1">
+      <div className="flex flex-col gap-1 overflow-hidden">
         <h4 className={titleClasses}>Customer</h4>
         <span className={descriptionClasses}>
           {project.customer ? project.customer.fullName : "Unknown customer"}
@@ -123,7 +123,7 @@ const ProjectCustomer = ({ project }: { project?: ProjectPreview }) => {
 };
 
 const ProjectCustomerCompany = ({ project }: { project?: ProjectPreview }) => {
-  const classes = "min-w-[10rem] flex-1 @max-7xl:hidden";
+  const classes = "min-w-[10rem] flex-1 @max-7xl:hidden overflow-hidden";
 
   if (!project) {
     return (
@@ -138,7 +138,7 @@ const ProjectCustomerCompany = ({ project }: { project?: ProjectPreview }) => {
 
   return (
     <div className={classes}>
-      <div className="flex flex-col gap-1">
+      <div className="flex flex-col gap-1 overflow-hidden">
         <h4 className={titleClasses}>Customer company</h4>
         <span className={descriptionClasses}>
           {project.customer

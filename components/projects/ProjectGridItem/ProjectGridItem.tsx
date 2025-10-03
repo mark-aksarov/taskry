@@ -17,13 +17,14 @@ import { useMemo } from "react";
 import Image from "next/image";
 import { ProgressBar } from "@/components/ui/ProgressBar";
 import { DONE_TASK_STATUS_ID } from "@/lib/queries/constants";
-
-const baseOverflow = "overflow-hidden text-nowrap overflow-ellipsis";
-const titleClasses = `${baseOverflow} text-sm font-bold text-black dark:text-white`;
-const descriptionClasses = `${baseOverflow} text-xs font-medium text-gray-500 dark:text-gray-400`;
+import { twMerge } from "tailwind-merge";
 
 const ProjectDetails = ({ project }: { project?: ProjectPreview }) => {
   const locale = "en-GB";
+
+  const baseOverflow = "overflow-hidden text-nowrap overflow-ellipsis";
+  const titleClasses = `${baseOverflow} text-sm font-bold text-black dark:text-white max-sm:text-center`;
+  const descriptionClasses = `${baseOverflow} text-xs font-medium text-gray-500 dark:text-gray-400 max-sm:text-center`;
 
   const formattedDeadline = useMemo(() => {
     if (!project?.deadline) return "";
@@ -34,12 +35,12 @@ const ProjectDetails = ({ project }: { project?: ProjectPreview }) => {
     });
   }, [project?.deadline, locale]);
 
-  const classes = "flex w-full flex-1 gap-4";
+  const classes = "flex w-full flex-1 gap-4 overflow-hidden";
 
   if (!project) {
     return (
-      <div className={classes}>
-        <div className="flex w-full flex-col gap-1">
+      <div className={twMerge(classes, "max-sm:w-full")}>
+        <div className="flex w-full flex-col gap-1 max-sm:items-center">
           <Skeleton className="w-50/100" size="sm" />
           <Skeleton className="w-35/100" size="xs" />
         </div>
@@ -49,7 +50,7 @@ const ProjectDetails = ({ project }: { project?: ProjectPreview }) => {
 
   return (
     <div className={classes}>
-      <div className="flex flex-col gap-1">
+      <div className="flex w-full flex-col gap-1 overflow-hidden">
         <h4 className={titleClasses}>{project.title}</h4>
         <span
           className={descriptionClasses}
@@ -117,7 +118,8 @@ const ProjectActionMenu = ({ project }: { project?: ProjectPreview }) => {
 };
 
 const ProjectCreatorImage = ({ project }: { project?: ProjectPreview }) => {
-  const classes = "h-9 w-9 bg-gray-200 rounded-full overflow-hidden relative";
+  const classes =
+    "h-9 w-9 bg-gray-200 rounded-full overflow-hidden relative shrink-0";
 
   if (!project) {
     return <Skeleton className={classes} />;
@@ -162,9 +164,9 @@ const ProjectProgress = ({ project }: { project?: ProjectPreview }) => {
 
 export function ProjectGridItem({ project }: { project?: ProjectPreview }) {
   return (
-    <Card className="rounded-md">
+    <Card className="w-auto rounded-md">
       <div className="flex flex-col gap-4">
-        <div className={"flex items-center justify-between"}>
+        <div className="flex items-center justify-between">
           {project ? (
             <Checkbox aria-label="project checkbox" />
           ) : (
@@ -172,7 +174,7 @@ export function ProjectGridItem({ project }: { project?: ProjectPreview }) {
           )}
           <ProjectActionMenu project={project} />
         </div>
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between max-sm:flex-col max-sm:gap-4">
           <ProjectDetails project={project} />
           <ProjectCreatorImage project={project} />
         </div>

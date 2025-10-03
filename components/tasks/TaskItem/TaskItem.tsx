@@ -44,7 +44,7 @@ const TaskDetails = ({
     });
   }, [task?.deadline, locale]);
 
-  const classes = "flex min-w-[10rem] flex-1 gap-4";
+  const classes = "flex min-w-[10rem] flex-1 gap-4 overflow-hidden";
 
   if (!task) {
     return (
@@ -61,7 +61,7 @@ const TaskDetails = ({
     <div className={classes}>
       {task && showCheckbox && <Checkbox aria-label="project checkbox" />}
 
-      <div className="flex flex-col gap-1">
+      <div className="flex flex-col gap-1 overflow-hidden">
         <h4 className={titleClasses}>{task.title}</h4>
         <span
           className={descriptionClasses}
@@ -72,7 +72,7 @@ const TaskDetails = ({
 };
 
 const TaskCategory = ({ task }: { task?: TaskPreview }) => {
-  const classes = "min-w-[10rem] flex-1 @max-3xl:hidden";
+  const classes = "min-w-[10rem] flex-1 @max-3xl:hidden overflow-hidden";
 
   if (!task) {
     return (
@@ -87,7 +87,7 @@ const TaskCategory = ({ task }: { task?: TaskPreview }) => {
 
   return (
     <div className={classes}>
-      <div className="flex flex-col gap-1">
+      <div className="flex flex-col gap-1 overflow-hidden">
         <h4 className={titleClasses}>Category</h4>
         <span className={descriptionClasses}>{task.category.name}</span>
       </div>
@@ -96,7 +96,7 @@ const TaskCategory = ({ task }: { task?: TaskPreview }) => {
 };
 
 const TaskProject = ({ task }: { task?: TaskPreview }) => {
-  const classes = "min-w-[10rem] flex-1 @max-5xl:hidden";
+  const classes = "min-w-[10rem] flex-1 @max-5xl:hidden overflow-hidden";
 
   if (!task) {
     return (
@@ -111,7 +111,7 @@ const TaskProject = ({ task }: { task?: TaskPreview }) => {
 
   return (
     <div className={classes}>
-      <div className="flex flex-col gap-1">
+      <div className="flex flex-col gap-1 overflow-hidden">
         <h4 className={titleClasses}>Project</h4>
         <span className={descriptionClasses}>{task.project.title}</span>
       </div>
