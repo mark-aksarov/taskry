@@ -1,6 +1,5 @@
 "use client";
 
-import { BaseItem } from "@/components/common/BaseItem";
 import { ResponsiveMenuTrigger } from "@/components/common/ResponsiveMenuTrigger";
 import { Button } from "@/components/ui/Button";
 import {
@@ -191,9 +190,9 @@ export const NotificationItem = ({
   }
 
   return (
-    <BaseItem
+    <div
       className={twMerge(
-        "w-full items-start gap-3 px-4",
+        "@container flex w-full items-start gap-3 border-gray-300 bg-white px-4 py-3 not-last:border-b-1 dark:border-gray-600 dark:bg-gray-800",
         notification && !isRead && "bg-gray-100 dark:bg-gray-900",
         className,
       )}
@@ -246,6 +245,6 @@ export const NotificationItem = ({
           </div>
         )}
       </div>
-    </BaseItem>
+    </div>
   );
 };

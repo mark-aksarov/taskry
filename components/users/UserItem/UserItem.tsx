@@ -1,6 +1,5 @@
 "use client";
 
-import { BaseItem } from "@/components/common/BaseItem";
 import { Button } from "@/components/ui/Button";
 import {
   DialogCloseButton,
@@ -24,7 +23,7 @@ export function UserItem({ user }: { user?: User }) {
     "h-9 w-9 shrink-0 grow-0 rounded-full bg-gray-200 overflow-hidden";
 
   return (
-    <BaseItem className="justify-between gap-3">
+    <div className="@container flex w-full items-center justify-between gap-3 border-gray-300 bg-white py-3 not-last:border-b-1 dark:border-gray-600 dark:bg-gray-800">
       <div className="flex items-center justify-between gap-3">
         {user ? (
           <div className={imageClasses}>
@@ -96,6 +95,6 @@ export function UserItem({ user }: { user?: User }) {
           <Skeleton className="h-1 w-4" />
         </div>
       )}
-    </BaseItem>
+    </div>
   );
 }
