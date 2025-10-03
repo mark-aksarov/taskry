@@ -1,3 +1,5 @@
+"use client";
+
 import { fieldStyles } from "../ui/Field";
 import { Skeleton } from "../ui/Skeleton";
 

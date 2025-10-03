@@ -1,3 +1,5 @@
+"use client";
+
 import { Skeleton } from "@/components/ui/Skeleton";
 import { fieldGroupStyles, fieldStyles } from "@/components/ui/Field";
 
