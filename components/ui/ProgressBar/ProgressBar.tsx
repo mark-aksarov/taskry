@@ -22,7 +22,7 @@ export const ProgressBar = ({
   ...props
 }: ProgressBarProps) => {
   const classes = composeRenderProps(className, (className) =>
-    twMerge(className, "flex flex-col gap-1"),
+    twMerge("flex flex-col gap-1", className),
   );
   const textClasses = twMerge(
     "text-xs font-medium text-gray-500 dark:text-gray-400",
