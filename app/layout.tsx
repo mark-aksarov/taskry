@@ -89,7 +89,7 @@ export async function Layout({ children }: { children: React.ReactNode }) {
           appBottomSheetTrigger={<AppBottomSheetTrigger />}
           appSidebarSheetTrigger={<AppSidebarSheetTrigger />}
         />
-        <main className="max-md:p-4 md:p-6">{children}</main>
+        <main className="flex-1 max-md:p-4 md:p-6">{children}</main>
       </div>
     </div>
   );

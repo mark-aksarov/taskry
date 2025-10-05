@@ -12,10 +12,7 @@ import {
 import { tasksMock } from "@/components/tasks/TaskList";
 import { getNotifications } from "@/lib/queries/notification";
 import { notificationsMock } from "@/components/notifications/NotificationList";
-import { getUsers } from "@/lib/queries/user";
-import { usersMock } from "@/components/users/usersMock";
 import { getStorageUsage } from "@/lib/queries/storage";
-import { usePathname } from "next/navigation";
 
 const meta = {
   title: "components/pages/Dashboard",
@@ -51,7 +48,6 @@ const meta = {
     mocked(getNotifications).mockReturnValue(
       new Promise((res) => res(notificationsMock.slice(0, 5))),
     );
-    mocked(getUsers).mockReturnValue(new Promise((res) => res(usersMock)));
     mocked(getStorageUsage).mockReturnValue(
       new Promise((res) =>
         res({
@@ -71,7 +67,6 @@ export const Default: Story = {};
 export const WithNoTasksAndUsers = {
   beforeEach: () => {
     mocked(getTasks).mockReturnValue(new Promise((res) => res([])));
-    mocked(getUsers).mockReturnValue(new Promise((res) => res([])));
   },
 } satisfies Story;
 

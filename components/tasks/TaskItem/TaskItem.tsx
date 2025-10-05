@@ -227,7 +227,8 @@ const TaskStatusBadge = ({ task }: { task?: TaskPreview }) => {
 };
 
 const TaskCreatorImage = ({ task }: { task?: TaskPreview }) => {
-  const classes = "h-8 w-8 bg-gray-200 rounded-full overflow-hidden relative";
+  const classes =
+    "h-8 w-8 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden relative";
 
   if (!task) {
     return <Skeleton className={classes} />;
@@ -251,7 +252,7 @@ export const TaskItem = ({
 }) => {
   return (
     <Card className="rounded-md py-3">
-      <div className="@container flex w-full items-center gap-8 bg-white">
+      <div className="@container flex w-full items-center gap-8">
         <TaskDetails task={task} showCheckbox={showCheckbox} />
         <TaskCategory task={task} />
         <TaskProject task={task} />

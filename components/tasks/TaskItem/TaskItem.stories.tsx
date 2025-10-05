@@ -33,9 +33,6 @@ const meta = {
   args: {
     task: taskMock,
   },
-  parameters: {
-    layout: "fullscreen",
-  },
 } satisfies Meta<typeof TaskItem>;
 
 export default meta;

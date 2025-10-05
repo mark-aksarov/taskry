@@ -32,9 +32,6 @@ const meta = {
   args: {
     project: projectMock,
   },
-  parameters: {
-    layout: "fullscreen",
-  },
 } satisfies Meta<typeof ProjectItem>;
 
 export default meta;

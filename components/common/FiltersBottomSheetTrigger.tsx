@@ -14,10 +14,10 @@ import { useRef } from "react";
 import { useOverlayTrigger } from "react-aria";
 import { useOverlayTriggerState } from "react-stately";
 
-export function ProjectFiltersBottomSheetTrigger({
-  projectFiltersForm,
+export function FiltersBottomSheetTrigger({
+  filtersForm,
 }: {
-  projectFiltersForm: React.ReactNode;
+  filtersForm: React.ReactNode;
 }) {
   const triggerRef = useRef<HTMLButtonElement>(null);
   const state = useOverlayTriggerState({});
@@ -44,7 +44,7 @@ export function ProjectFiltersBottomSheetTrigger({
             <DialogHeading className="text-base">Filters</DialogHeading>
             <DialogCloseButton />
           </DialogHeader>
-          <DialogBody>{projectFiltersForm}</DialogBody>
+          <DialogBody>{filtersForm}</DialogBody>
         </Dialog>
       </BottomSheet>
     </>

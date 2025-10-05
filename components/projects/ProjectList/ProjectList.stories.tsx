@@ -1,28 +1,13 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { ProjectList } from "./ProjectList";
-import { Suspense } from "react";
-import { mocked } from "storybook/test";
 import { projectsMock } from "./projectsMock";
-import { getProjects } from "@/lib/queries/project";
 
 const meta = {
   title: "Components/projects/ProjectList",
   component: ProjectList,
   tags: ["autodocs"],
-  decorators: [
-    (Story) => (
-      <Suspense>
-        <Story />
-      </Suspense>
-    ),
-  ],
-  beforeEach: () => {
-    mocked(getProjects).mockReturnValue(
-      new Promise((res) => res(projectsMock)),
-    );
-  },
-  parameters: {
-    layout: "fullscreen",
+  args: {
+    projects: projectsMock,
   },
 } satisfies Meta<typeof ProjectList>;
 

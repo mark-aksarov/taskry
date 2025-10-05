@@ -39,6 +39,12 @@ type Story = StoryObj<typeof ProjectsPage>;
 
 export const Default: Story = {};
 
+export const WithNoTasksAndUsers = {
+  beforeEach: () => {
+    mocked(getProjects).mockReturnValue(new Promise((res) => res([])));
+  },
+} satisfies Story;
+
 export const Tablet: Story = {
   globals: {
     viewport: { value: "ipad", isRotated: true },

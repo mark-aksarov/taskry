@@ -1,31 +1,37 @@
-import { Suspense } from "react";
-import { Plus } from "lucide-react";
-import { Button } from "@/components/ui/Button";
-import { ViewToggle } from "@/components/common/ViewToggle";
-import { ProjectActionsMenuTrigger } from "@/components/projects/ProjectActionsMenuTrigger";
-import {
-  ProjectFiltersForm,
-  ProjectFiltersFormSkeleton,
-} from "@/components/projects/ProjectFiltersForm";
-import { ProjectFiltersSideSheetTrigger } from "@/components/projects/ProjectFiltersSideSheetTrigger";
-import { ProjectFiltersBottomSheetTrigger } from "@/components/projects/ProjectFiltersBottomSheetTrigger";
-import { getProjectCategories } from "@/lib/queries/project";
+import { FiltersSideSheetTrigger } from "@/components/common/FiltersSideSheetTrigger";
+import { ToolbarDesktop } from "@/components/common/ToolbarDesktop";
+import { ProjectFiltersFormSkeleton } from "@/components/projects/ProjectFiltersForm";
+import { ProjectFiltersForm } from "@/components/projects/ProjectFiltersForm";
+import { getProjectCategories, getProjects } from "@/lib/queries/project";
 import { ProjectCategoryCheckboxGroup } from "@/components/projects/ProjectCategoryCheckboxGroup";
 import { getCustomers } from "@/lib/queries/customers";
 import { CustomerCheckboxGroup } from "@/components/customer/CustomerCheckboxGroup";
 import { getUsers } from "@/lib/queries/user";
 import { UserCheckboxGroup } from "@/components/users/UserCheckboxGroup";
-import { Card, CardHeading } from "@/components/common/Card";
-import { ListSkeleton } from "@/components/common/ListSkeleton";
-import { PaginationSkeleton } from "@/components/common/Pagination";
+import { Suspense } from "react";
+import { ProjectActionsMenuTrigger } from "@/components/projects/ProjectActionsMenuTrigger";
+import { ViewToggle } from "@/components/common/ViewToggle";
+import { Button } from "@/components/ui/Button";
+import { Plus } from "lucide-react";
+import { ToolbarMobileTop } from "@/components/common/ToolbarMobileTop";
+import { ToolbarMobileHeading } from "@/components/common/ToolbarMobileHeading";
+import { FiltersBottomSheetTrigger } from "@/components/common/FiltersBottomSheetTrigger";
+import { ToolbarMobileBottom } from "@/components/common/ToolbarMobileBottom";
 import { ProjectList } from "@/components/projects/ProjectList";
-import { ProjectItem } from "@/components/projects/ProjectItem";
-import { ProjectGrid } from "@/components/projects/ProjectGrid/ProjectGrid";
+import {
+  EmptySection,
+  EmptySectionDescription,
+  EmptySectionLink,
+  EmptySectionHeading,
+} from "@/components/common/EmptySection";
+import { PageGrid } from "@/components/common/PageGrid";
+import { PageCentered } from "@/components/common/PageCentered";
 
 export default async function ProjectsPage() {
   const categoriesPromise = getProjectCategories(1);
   const customersPromise = getCustomers(1);
   const usersPromise = getUsers(1);
+  const projects = await getProjects();
 
   const projectFiltersForm = (
     <ProjectFiltersForm
@@ -39,72 +45,59 @@ export default async function ProjectsPage() {
     />
   );
 
+  if (!projects.length) {
+    return (
+      <PageCentered>
+        <EmptySection>
+          <EmptySectionHeading>No projects yet</EmptySectionHeading>
+          <EmptySectionDescription>
+            Create a new project to keep track of your work
+          </EmptySectionDescription>
+          <EmptySectionLink href="#">New Project</EmptySectionLink>
+        </EmptySection>
+      </PageCentered>
+    );
+  }
+
   return (
-    <div className="flex flex-col max-md:gap-4 md:gap-6">
-      <div className="flex items-center justify-between max-md:hidden">
-        <div className="flex w-full gap-4">
-          <ProjectFiltersSideSheetTrigger
-            projectFiltersForm={
-              <Suspense fallback={<ProjectFiltersFormSkeleton />}>
-                {projectFiltersForm}
-              </Suspense>
-            }
-          />
-          <ProjectActionsMenuTrigger />
-          <ViewToggle className="ml-auto" />
-          <Button
-            label="New Project"
-            iconLeft={<Plus size={16} strokeWidth={1.5} absoluteStrokeWidth />}
-          />
-        </div>
-      </div>
+    <PageGrid>
+      <ToolbarDesktop>
+        <FiltersSideSheetTrigger
+          filtersForm={
+            <Suspense fallback={<ProjectFiltersFormSkeleton />}>
+              {projectFiltersForm}
+            </Suspense>
+          }
+        />
+        <ProjectActionsMenuTrigger />
+        <ViewToggle className="ml-auto" />
+        <Button
+          label="New Project"
+          iconLeft={<Plus size={16} strokeWidth={1.5} absoluteStrokeWidth />}
+        />
+      </ToolbarDesktop>
 
-      <div className="flex flex-col gap-4 md:hidden">
-        <div className="flex items-center justify-between">
-          <h2 className="text-xl font-extrabold">Projects</h2>
-          <div className="flex items-center gap-2">
-            <ProjectFiltersBottomSheetTrigger
-              projectFiltersForm={
-                <Suspense fallback={<ProjectFiltersFormSkeleton />}>
-                  {projectFiltersForm}
-                </Suspense>
-              }
-            />
-            <ProjectActionsMenuTrigger />
-          </div>
-        </div>
-        <div className="flex items-center justify-between">
-          <ViewToggle />
-          <Button
-            label="New Project"
-            iconLeft={<Plus size={16} strokeWidth={1.5} absoluteStrokeWidth />}
-          />
-        </div>
-      </div>
+      <ToolbarMobileTop>
+        <ToolbarMobileHeading>Projects</ToolbarMobileHeading>
+        <FiltersBottomSheetTrigger
+          filtersForm={
+            <Suspense fallback={<ProjectFiltersFormSkeleton />}>
+              {projectFiltersForm}
+            </Suspense>
+          }
+        />
+        <ProjectActionsMenuTrigger />
+      </ToolbarMobileTop>
 
-      <Suspense
-        fallback={
-          <>
-            <ListSkeleton items={10} renderItem={() => <ProjectItem />} />
-            <PaginationSkeleton />
-          </>
-        }
-      >
-        <ProjectList />
-      </Suspense>
+      <ToolbarMobileBottom>
+        <ViewToggle />
+        <Button
+          label="New Project"
+          iconLeft={<Plus size={16} strokeWidth={1.5} absoluteStrokeWidth />}
+        />
+      </ToolbarMobileBottom>
 
-      {/*
-      <Suspense
-        fallback={
-          <>
-            <ListSkeleton items={10} renderItem={() => <ProjectItem />} />
-            <PaginationSkeleton />
-          </>
-        }
-      >
-        <ProjectGrid />
-      </Suspense>
-    */}
-    </div>
+      <ProjectList projects={projects} />
+    </PageGrid>
   );
 }

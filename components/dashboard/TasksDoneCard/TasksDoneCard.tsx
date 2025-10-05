@@ -10,7 +10,7 @@ import { CardHeading } from "../../common/Card";
 import { Skeleton } from "@/components/ui/Skeleton";
 
 export const TasksDoneCard = async () => {
-  const tasksDonePromise = await getTasksDone();
+  const tasksDonePromise = getTasksDone();
   const activeTasksPromise = getActiveTasks();
 
   const [tasksDone, activeTasks] = await Promise.all([

@@ -29,6 +29,15 @@ export const Skeleton: Story = {
   },
 };
 
+export const WithoutCreator: Story = {
+  args: {
+    project: {
+      ...projectsMock[0],
+      creator: null,
+    },
+  },
+};
+
 export const OnMobile: Story = {
   globals: {
     viewport: { value: "iphone6", isRotated: false },

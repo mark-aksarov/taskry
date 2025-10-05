@@ -119,7 +119,7 @@ const ProjectActionMenu = ({ project }: { project?: ProjectPreview }) => {
 
 const ProjectCreatorImage = ({ project }: { project?: ProjectPreview }) => {
   const classes =
-    "h-9 w-9 bg-gray-200 rounded-full overflow-hidden relative shrink-0";
+    "h-9 w-9 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden relative shrink-0";
 
   if (!project) {
     return <Skeleton className={classes} />;

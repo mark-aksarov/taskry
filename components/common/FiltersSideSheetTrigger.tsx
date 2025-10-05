@@ -12,10 +12,10 @@ import {
   DialogHeading,
 } from "@/components/ui/Dialog";
 
-export function ProjectFiltersSideSheetTrigger({
-  projectFiltersForm,
+export function FiltersSideSheetTrigger({
+  filtersForm,
 }: {
-  projectFiltersForm: React.ReactNode;
+  filtersForm: React.ReactNode;
 }) {
   return (
     <DialogTrigger>
@@ -33,7 +33,7 @@ export function ProjectFiltersSideSheetTrigger({
             <DialogCloseButton iconSize={20} />
           </DialogHeader>
           <DialogBody className="text-black dark:text-white">
-            {projectFiltersForm}
+            {filtersForm}
           </DialogBody>
         </Dialog>
       </SideSheet>

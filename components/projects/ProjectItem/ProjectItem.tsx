@@ -260,7 +260,8 @@ const ProjectStatusBadge = ({ project }: { project?: ProjectPreview }) => {
 };
 
 const ProjectCreatorImage = ({ project }: { project?: ProjectPreview }) => {
-  const classes = "h-8 w-8 bg-gray-200 rounded-full overflow-hidden relative";
+  const classes =
+    "h-8 w-8 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden relative";
 
   if (!project) {
     return <Skeleton className={classes} />;
@@ -284,7 +285,7 @@ export const ProjectItem = ({
 }) => {
   return (
     <Card className="rounded-md py-3">
-      <div className="@container flex w-full items-center gap-8 bg-white">
+      <div className="@container flex w-full items-center gap-8">
         <ProjectDetails project={project} showCheckbox={showCheckbox} />
         <ProjectCategory project={project} />
         <ProjectCustomer project={project} />

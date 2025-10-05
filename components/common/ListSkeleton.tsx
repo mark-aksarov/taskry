@@ -7,7 +7,7 @@ interface ListSkeletonProps {
 
 export function ListSkeleton({ items = 10, renderItem }: ListSkeletonProps) {
   return (
-    <div>
+    <div className="flex flex-col gap-2">
       {Array.from({ length: items }, (_, index) => index).map((_, index) => (
         <Fragment key={index}>{renderItem()}</Fragment>
       ))}
