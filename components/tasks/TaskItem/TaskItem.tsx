@@ -21,6 +21,7 @@ import {
 import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
 import Image from "next/image";
+import { Card } from "@/components/common/Card";
 
 const baseOverflow = "overflow-hidden text-nowrap overflow-ellipsis";
 const titleClasses = `${baseOverflow} text-sm font-bold text-black dark:text-white`;
@@ -249,18 +250,20 @@ export const TaskItem = ({
   showCheckbox?: boolean;
 }) => {
   return (
-    <div className="@container flex w-full items-center gap-8 border-gray-300 bg-white py-3 not-last:border-b-1 dark:border-gray-600 dark:bg-gray-800">
-      <TaskDetails task={task} showCheckbox={showCheckbox} />
-      <TaskCategory task={task} />
-      <TaskProject task={task} />
-      <div className="flex flex-none items-center justify-end gap-8">
-        <TaskProgress task={task} />
-        <TaskStatusBadge task={task} />
-        <div className="flex items-center gap-2">
-          <TaskCreatorImage task={task} />
-          <TaskActionMenu task={task} />
+    <Card className="rounded-md py-3">
+      <div className="@container flex w-full items-center gap-8 bg-white">
+        <TaskDetails task={task} showCheckbox={showCheckbox} />
+        <TaskCategory task={task} />
+        <TaskProject task={task} />
+        <div className="flex flex-none items-center justify-end gap-8">
+          <TaskProgress task={task} />
+          <TaskStatusBadge task={task} />
+          <div className="flex items-center gap-2">
+            <TaskCreatorImage task={task} />
+            <TaskActionMenu task={task} />
+          </div>
         </div>
       </div>
-    </div>
+    </Card>
   );
 };

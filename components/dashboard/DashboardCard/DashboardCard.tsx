@@ -19,10 +19,10 @@ export const DashboardCard = ({
   className,
 }: DashboardCardProps) => {
   return (
-    <Card className={twMerge(className, "h-[10rem]")}>
+    <Card className={twMerge(className, "h-[9rem]")}>
       <div className="flex h-full flex-col justify-between">
         <div className="flex items-start justify-between">
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-3">
             {heading}
             {value}
           </div>

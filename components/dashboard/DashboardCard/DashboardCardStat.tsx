@@ -16,15 +16,15 @@ export const DashboardCardStat = ({
   return (
     <div
       className={twMerge(
-        "flex items-center gap-2 text-base",
+        "flex items-center gap-2 text-sm",
         direction === "up" && "text-green-700 dark:text-green-500",
         direction === "down" && "text-red-600 dark:text-red-400",
       )}
     >
       {direction === "up" ? (
-        <TrendingUp size={24} strokeWidth={1.5} absoluteStrokeWidth />
+        <TrendingUp size={16} strokeWidth={1.5} absoluteStrokeWidth />
       ) : (
-        <TrendingDown size={24} strokeWidth={1.5} absoluteStrokeWidth />
+        <TrendingDown size={16} strokeWidth={1.5} absoluteStrokeWidth />
       )}
       <div>
         {Math.round(percentage)}%&nbsp;

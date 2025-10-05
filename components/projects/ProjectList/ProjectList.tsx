@@ -1,6 +1,5 @@
 import { ProjectItem } from "../ProjectItem";
 import { getProjects } from "@/lib/queries/project";
-import { Pagination } from "@/components/common/Pagination";
 import {
   EmptyView,
   EmptyViewDescription,
@@ -26,13 +25,10 @@ export async function ProjectList() {
   }
 
   return (
-    <div className="flex flex-col gap-4">
-      <div>
-        {projects.map((project) => (
-          <ProjectItem key={project.id} project={project} showCheckbox />
-        ))}
-      </div>
-      <Pagination />
+    <div className="flex flex-col gap-2">
+      {projects.map((project) => (
+        <ProjectItem key={project.id} project={project} showCheckbox />
+      ))}
     </div>
   );
 }

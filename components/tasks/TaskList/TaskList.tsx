@@ -1,6 +1,5 @@
 import { TaskItem } from "../TaskItem";
 import { getTasks } from "@/lib/queries/task";
-import { Pagination } from "@/components/common/Pagination";
 import {
   EmptyView,
   EmptyViewDescription,
@@ -26,13 +25,10 @@ export async function TaskList() {
   }
 
   return (
-    <div className="flex flex-col gap-4">
-      <div>
-        {tasks.map((task) => (
-          <TaskItem key={task.id} task={task} />
-        ))}
-      </div>
-      <Pagination />
+    <div className="flex flex-col gap-2">
+      {tasks.map((task) => (
+        <TaskItem key={task.id} task={task} />
+      ))}
     </div>
   );
 }

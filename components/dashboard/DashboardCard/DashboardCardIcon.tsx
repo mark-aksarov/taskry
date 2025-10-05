@@ -14,7 +14,7 @@ export const DashboardCardIcon = ({
   return (
     <div
       className={twMerge(
-        "rounded-2xl p-4",
+        "rounded-xl p-3",
         color === "blue" &&
           "bg-blue-100 text-blue-500 dark:bg-blue-700 dark:text-blue-100",
         color === "orange" &&

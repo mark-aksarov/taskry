@@ -22,6 +22,7 @@ import {
 import { Button } from "@/components/ui/Button";
 import Image from "next/image";
 import { Badge } from "@/components/ui/Badge";
+import { Card } from "@/components/common/Card";
 
 const baseOverflow = "overflow-hidden text-nowrap overflow-ellipsis";
 const titleClasses = `${baseOverflow} text-sm font-bold text-black dark:text-white`;
@@ -282,19 +283,21 @@ export const ProjectItem = ({
   showCheckbox?: boolean;
 }) => {
   return (
-    <div className="@container flex w-full items-center gap-8 border-gray-300 bg-white py-3 not-last:border-b-1 dark:border-gray-600 dark:bg-gray-800">
-      <ProjectDetails project={project} showCheckbox={showCheckbox} />
-      <ProjectCategory project={project} />
-      <ProjectCustomer project={project} />
-      <ProjectCustomerCompany project={project} />
-      <div className="flex flex-none items-center justify-end gap-8">
-        <ProjectProgress project={project} />
-        <ProjectStatusBadge project={project} />
-        <div className="flex items-center gap-2">
-          <ProjectCreatorImage project={project} />
-          <ProjectActionMenu project={project} />
+    <Card className="rounded-md py-3">
+      <div className="@container flex w-full items-center gap-8 bg-white">
+        <ProjectDetails project={project} showCheckbox={showCheckbox} />
+        <ProjectCategory project={project} />
+        <ProjectCustomer project={project} />
+        <ProjectCustomerCompany project={project} />
+        <div className="flex flex-none items-center justify-end gap-8">
+          <ProjectProgress project={project} />
+          <ProjectStatusBadge project={project} />
+          <div className="flex items-center gap-2">
+            <ProjectCreatorImage project={project} />
+            <ProjectActionMenu project={project} />
+          </div>
         </div>
       </div>
-    </div>
+    </Card>
   );
 };

@@ -40,11 +40,30 @@ export default async function ProjectsPage() {
   );
 
   return (
-    <div className="flex flex-col gap-5">
-      <div>
-        <div className="flex items-center justify-between max-md:hidden">
-          <div className="flex w-full gap-4">
-            <ProjectFiltersSideSheetTrigger
+    <div className="flex flex-col max-md:gap-4 md:gap-6">
+      <div className="flex items-center justify-between max-md:hidden">
+        <div className="flex w-full gap-4">
+          <ProjectFiltersSideSheetTrigger
+            projectFiltersForm={
+              <Suspense fallback={<ProjectFiltersFormSkeleton />}>
+                {projectFiltersForm}
+              </Suspense>
+            }
+          />
+          <ProjectActionsMenuTrigger />
+          <ViewToggle className="ml-auto" />
+          <Button
+            label="New Project"
+            iconLeft={<Plus size={16} strokeWidth={1.5} absoluteStrokeWidth />}
+          />
+        </div>
+      </div>
+
+      <div className="flex flex-col gap-4 md:hidden">
+        <div className="flex items-center justify-between">
+          <h2 className="text-xl font-extrabold">Projects</h2>
+          <div className="flex items-center gap-2">
+            <ProjectFiltersBottomSheetTrigger
               projectFiltersForm={
                 <Suspense fallback={<ProjectFiltersFormSkeleton />}>
                   {projectFiltersForm}
@@ -52,58 +71,29 @@ export default async function ProjectsPage() {
               }
             />
             <ProjectActionsMenuTrigger />
-            <ViewToggle className="ml-auto" />
-            <Button
-              label="New Project"
-              iconLeft={
-                <Plus size={16} strokeWidth={1.5} absoluteStrokeWidth />
-              }
-            />
           </div>
         </div>
-
-        <div className="flex flex-col gap-5 md:hidden">
-          <div className="flex items-center justify-between">
-            <h2 className="text-xl font-extrabold">Projects</h2>
-            <div className="flex items-center gap-2">
-              <ProjectFiltersBottomSheetTrigger
-                projectFiltersForm={
-                  <Suspense fallback={<ProjectFiltersFormSkeleton />}>
-                    {projectFiltersForm}
-                  </Suspense>
-                }
-              />
-              <ProjectActionsMenuTrigger />
-            </div>
-          </div>
-          <div className="flex items-center justify-between">
-            <ViewToggle />
-            <Button
-              label="New Project"
-              iconLeft={
-                <Plus size={16} strokeWidth={1.5} absoluteStrokeWidth />
-              }
-            />
-          </div>
+        <div className="flex items-center justify-between">
+          <ViewToggle />
+          <Button
+            label="New Project"
+            iconLeft={<Plus size={16} strokeWidth={1.5} absoluteStrokeWidth />}
+          />
         </div>
       </div>
 
-      <Card className="hidden">
-        <div className="flex flex-col gap-4">
-          <CardHeading>Projects</CardHeading>
-          <Suspense
-            fallback={
-              <>
-                <ListSkeleton items={10} renderItem={() => <ProjectItem />} />
-                <PaginationSkeleton />
-              </>
-            }
-          >
-            <ProjectList />
-          </Suspense>
-        </div>
-      </Card>
+      <Suspense
+        fallback={
+          <>
+            <ListSkeleton items={10} renderItem={() => <ProjectItem />} />
+            <PaginationSkeleton />
+          </>
+        }
+      >
+        <ProjectList />
+      </Suspense>
 
+      {/*
       <Suspense
         fallback={
           <>
@@ -114,6 +104,7 @@ export default async function ProjectsPage() {
       >
         <ProjectGrid />
       </Suspense>
+    */}
     </div>
   );
 }
