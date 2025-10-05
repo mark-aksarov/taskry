@@ -50,7 +50,7 @@ export async function Layout({ children }: { children: React.ReactNode }) {
 
   return (
     <div className="flex min-h-screen w-full bg-gray-100 dark:bg-gray-900">
-      <AppSidebar className="sticky top-0 h-screen shrink-0 max-xl:hidden">
+      <AppSidebar className="sticky top-0 z-2 h-screen shrink-0 shadow-lg max-xl:hidden">
         <AppSidebarHeader>
           <AppSidebarHeading />
         </AppSidebarHeader>
