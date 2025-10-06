@@ -1,5 +1,9 @@
 import { PageGrid } from "@/components/common/PageGrid";
 import {
+  ToolbarMobileHeading,
+  ToolbarMobileTop,
+} from "@/components/common/Toolbar";
+import {
   ActiveProjectsCard,
   ActiveProjectsCardSkeleton,
 } from "@/components/dashboard/ActiveProjectsCard";
@@ -21,7 +25,9 @@ import { Suspense } from "react";
 export default function DashboardPage() {
   return (
     <PageGrid>
-      <h2 className="text-xl font-extrabold md:hidden">Dashboard</h2>
+      <ToolbarMobileTop>
+        <ToolbarMobileHeading>Dashboard</ToolbarMobileHeading>
+      </ToolbarMobileTop>
       <div className="grid max-md:grid-cols-1 max-md:gap-4 md:gap-6 md:max-xl:grid-cols-2 xl:grid-cols-4">
         <Suspense fallback={<ActiveProjectsCardSkeleton />}>
           <ActiveProjectsCard />

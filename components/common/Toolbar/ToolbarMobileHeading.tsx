@@ -3,5 +3,9 @@ interface ToolbarMobileHeadingProps {
 }
 
 export function ToolbarMobileHeading({ children }: ToolbarMobileHeadingProps) {
-  return <h2 className="mr-auto text-xl font-extrabold">{children}</h2>;
+  return (
+    <h2 className="mr-auto text-xl font-extrabold text-black dark:text-white">
+      {children}
+    </h2>
+  );
 }

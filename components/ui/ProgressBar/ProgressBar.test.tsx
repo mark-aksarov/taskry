@@ -4,21 +4,21 @@ import { render, screen } from "@testing-library/react";
 
 describe("ProgressBar", () => {
   test("renders only label when showValueText is false", () => {
-    render(<ProgressBar label="Label" value={40} />);
+    render(<ProgressBar label="Label" showValueText={false} value={40} />);
 
     expect(screen.getByText("Label")).toBeInTheDocument();
     expect(screen.queryByText("40%")).not.toBeInTheDocument();
   });
 
   test("renders only value text when label is not provided but showValueText is true", () => {
-    render(<ProgressBar aria-label="Label" showValueText value={70} />);
+    render(<ProgressBar aria-label="Label" value={70} />);
 
     expect(screen.queryByText("Label")).not.toBeInTheDocument();
     expect(screen.getByText("70%")).toBeInTheDocument();
   });
 
   test("renders nothing when neither label nor showValueText are provided", () => {
-    render(<ProgressBar aria-label="Label" value={20} />);
+    render(<ProgressBar showValueText={false} aria-label="Label" value={20} />);
 
     expect(screen.queryByText("20%")).not.toBeInTheDocument();
     expect(screen.queryByText("Label")).not.toBeInTheDocument();

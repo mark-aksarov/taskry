@@ -6,8 +6,6 @@ import {
   EmptySectionLink,
 } from "@/components/common/EmptySection";
 import { Repeat } from "@/components/common/Repeat";
-import { PageSection } from "@/components/common/PageSection";
-import { PageSectionHeading } from "@/components/common/PageSectionHeading";
 import { getTasks } from "@/lib/queries/task";
 import { Suspense } from "react";
 import { TaskList } from "../TaskList";
