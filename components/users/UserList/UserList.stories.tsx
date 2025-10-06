@@ -19,9 +19,6 @@ const meta: Meta<typeof UserList> = {
   beforeEach: () => {
     mocked(getUsers).mockReturnValue(new Promise((res) => res(usersMock)));
   },
-  parameters: {
-    layout: "fullscreen",
-  },
 } satisfies Meta<typeof UserList>;
 
 export default meta;

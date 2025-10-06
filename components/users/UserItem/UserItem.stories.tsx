@@ -1,8 +1,8 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { UserItem } from "./UserItem";
-import { User } from "@/generated/prisma";
+import { UserPreview } from "@/lib/queries/types";
 
-const userMock: User = {
+const userMock: UserPreview = {
   id: "user1",
   name: "John Doe",
   email: "L7L2u@example.com",
@@ -14,6 +14,10 @@ const userMock: User = {
   role: "Admin",
   publicLink: "https://example.com",
   positionId: 1,
+  position: {
+    name: "Admin",
+    workspaceId: 1,
+  },
 };
 
 const meta: Meta<typeof UserItem> = {
@@ -22,9 +26,6 @@ const meta: Meta<typeof UserItem> = {
   tags: ["autodocs"],
   args: {
     user: userMock,
-  },
-  parameters: {
-    layout: "fullscreen",
   },
 } satisfies Meta<typeof UserItem>;
 

@@ -2,17 +2,20 @@ import "server-only";
 
 import { cache } from "react";
 import prisma from "../prisma";
-import { User } from "@/generated/prisma";
+import { UserPreview } from "./types";
 
-export const getUsers = cache(async (workspaceId: number): Promise<User[]> => {
-  return await prisma.user.findMany({
-    where: { position: { workspaceId } },
-    include: {
-      position: {
-        select: {
-          workspaceId: true,
+export const getUsers = cache(
+  async (workspaceId: number): Promise<UserPreview[]> => {
+    return await prisma.user.findMany({
+      where: { position: { workspaceId } },
+      include: {
+        position: {
+          select: {
+            name: true,
+            workspaceId: true,
+          },
         },
       },
-    },
-  });
-});
+    });
+  },
+);

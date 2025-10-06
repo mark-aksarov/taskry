@@ -121,3 +121,14 @@ export type ProjectPreview = Prisma.ProjectGetPayload<{
     };
   };
 }>;
+
+export type UserPreview = Prisma.UserGetPayload<{
+  include: {
+    position: {
+      select: {
+        name: true;
+        workspaceId: true;
+      };
+    };
+  };
+}>;

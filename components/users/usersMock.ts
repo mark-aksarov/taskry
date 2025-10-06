@@ -1,6 +1,6 @@
-import { User } from "@/generated/prisma";
+import { UserPreview } from "@/lib/queries/types";
 
-export const usersMock: User[] = [
+export const usersMock: UserPreview[] = [
   {
     id: "user1",
     name: "John Doe",
@@ -13,6 +13,10 @@ export const usersMock: User[] = [
     role: "Admin",
     publicLink: "https://example.com/user1",
     positionId: 1,
+    position: {
+      name: "Developer",
+      workspaceId: 1,
+    },
   },
   {
     id: "user2",
@@ -26,6 +30,10 @@ export const usersMock: User[] = [
     role: "User",
     publicLink: "https://example.com/user2",
     positionId: 2,
+    position: {
+      name: "Designer",
+      workspaceId: 1,
+    },
   },
   {
     id: "user3",
@@ -39,6 +47,10 @@ export const usersMock: User[] = [
     role: "Manager",
     publicLink: "https://example.com/user3",
     positionId: 3,
+    position: {
+      name: "Product Manager",
+      workspaceId: 1,
+    },
   },
   {
     id: "user4",
@@ -52,6 +64,10 @@ export const usersMock: User[] = [
     role: "User",
     publicLink: "https://example.com/user4",
     positionId: 4,
+    position: {
+      name: "Product Manager",
+      workspaceId: 1,
+    },
   },
   {
     id: "user5",
@@ -65,6 +81,10 @@ export const usersMock: User[] = [
     role: "User",
     publicLink: "https://example.com/user5",
     positionId: 5,
+    position: {
+      name: "Product Manager",
+      workspaceId: 1,
+    },
   },
   {
     id: "user6",
@@ -78,6 +98,10 @@ export const usersMock: User[] = [
     role: "Admin",
     publicLink: "https://example.com/user6",
     positionId: 6,
+    position: {
+      name: "Designer",
+      workspaceId: 1,
+    },
   },
   {
     id: "user7",
@@ -91,6 +115,10 @@ export const usersMock: User[] = [
     role: "Manager",
     publicLink: "https://example.com/user7",
     positionId: 7,
+    position: {
+      name: "Designer",
+      workspaceId: 1,
+    },
   },
   {
     id: "user8",
@@ -104,6 +132,10 @@ export const usersMock: User[] = [
     role: "User",
     publicLink: "https://example.com/user8",
     positionId: 8,
+    position: {
+      name: "Developer",
+      workspaceId: 1,
+    },
   },
   {
     id: "user9",
@@ -117,6 +149,10 @@ export const usersMock: User[] = [
     role: "User",
     publicLink: "https://example.com/user9",
     positionId: 9,
+    position: {
+      name: "Developer",
+      workspaceId: 1,
+    },
   },
   {
     id: "user10",
@@ -130,5 +166,9 @@ export const usersMock: User[] = [
     role: "Manager",
     publicLink: "https://example.com/user10",
     positionId: 10,
+    position: {
+      name: "Developer",
+      workspaceId: 1,
+    },
   },
 ];
