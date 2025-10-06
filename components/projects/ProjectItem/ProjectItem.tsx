@@ -9,9 +9,7 @@ import {
   PENDING_PROJECT_STATUS_ID,
 } from "@/lib/queries/constants";
 import { Item } from "react-stately";
-import { Checkbox } from "@/components/ui/Checkbox";
-import { ResponsiveMenuTrigger } from "@/components/common/ResponsiveMenuTrigger";
-import { Button } from "@/components/ui/Button";
+import { Checkbox, Button } from "@/components/ui";
 import Image from "next/image";
 import {
   ItemCard,
@@ -29,6 +27,7 @@ import {
   ItemCardProgress,
   ItemCardProgressSkeleton,
 } from "@/components/common/ItemCard";
+import { ResponsiveMenuTrigger } from "@/components/common/ResponsiveMenuTrigger";
 
 export const ProjectItem = ({
   project,

@@ -1,13 +1,12 @@
 import { CheckCheck } from "lucide-react";
+import { ProgressBar, Skeleton } from "@/components/ui";
+import { getActiveTasks, getTasksDone } from "@/lib/queries/task";
 import {
   DashboardCard,
   DashboardCardIcon,
   DashboardCardValue,
 } from "../DashboardCard";
-import { ProgressBar } from "../../ui/ProgressBar";
-import { getActiveTasks, getTasksDone } from "@/lib/queries/task";
-import { CardHeading } from "../../common/Card";
-import { Skeleton } from "@/components/ui/Skeleton";
+import { CardHeading } from "@/components/common/Card";
 
 export const TasksDoneCard = async () => {
   const tasksDonePromise = getTasksDone();

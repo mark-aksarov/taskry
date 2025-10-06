@@ -1,10 +1,13 @@
 "use client";
 
-import { CheckboxGroup } from "react-aria-components";
-import { fieldStyles, Label } from "../ui/Field";
-import { Checkbox } from "../ui/Checkbox";
-import { User } from "@/generated/prisma";
+import {
+  Checkbox,
+  fieldStyles,
+  Label,
+  RACCheckboxGroup,
+} from "@/components/ui";
 import { use } from "react";
+import { User } from "@/generated/prisma";
 
 export function UserCheckboxGroup({
   usersPromise,
@@ -19,7 +22,7 @@ export function UserCheckboxGroup({
   }
 
   return (
-    <CheckboxGroup className={fieldStyles()}>
+    <RACCheckboxGroup className={fieldStyles()}>
       <Label>Creator</Label>
       {users.map((user) => (
         <Checkbox
@@ -30,6 +33,6 @@ export function UserCheckboxGroup({
           {user.name}
         </Checkbox>
       ))}
-    </CheckboxGroup>
+    </RACCheckboxGroup>
   );
 }

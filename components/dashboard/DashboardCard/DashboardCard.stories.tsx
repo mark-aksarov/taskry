@@ -1,11 +1,11 @@
 import { Heart } from "lucide-react";
+import { ProgressBar } from "@/components/ui";
+import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { DashboardCard } from "./DashboardCard";
 import { CardHeading } from "@/components/common/Card";
-import { DashboardCardStat } from "./DashboardCardStat";
 import { DashboardCardIcon } from "./DashboardCardIcon";
 import { DashboardCardValue } from "./DashboardCardValue";
-import { ProgressBar } from "@/components/ui/ProgressBar";
-import type { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { DashboardCardStat } from "./DashboardCardStat";
 
 const meta = {
   title: "Components/common/DashboardCard",

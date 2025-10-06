@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { ActiveTasksCard, ActiveTasksCardSkeleton } from "./ActiveTasksCard";
 import { mocked } from "storybook/test";
+import { ActiveTasksCard, ActiveTasksCardSkeleton } from "./ActiveTasksCard";
 import {
   getActiveTasks,
   getTasksDone,

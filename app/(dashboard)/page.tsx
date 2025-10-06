@@ -1,14 +1,22 @@
-import { ActiveProjectsCard } from "@/components/dashboard/ActiveProjectsCard";
-import { ActiveTasksCard } from "@/components/dashboard/ActiveTasksCard";
-import { TasksDoneCard } from "@/components/dashboard/TasksDoneCard";
-import { StorageLimitCard } from "@/components/dashboard/StorageLimitCard";
-import { Suspense } from "react";
-import { ActiveProjectsCardSkeleton } from "@/components/dashboard/ActiveProjectsCard/ActiveProjectsCard";
-import { ActiveTasksCardSkeleton } from "@/components/dashboard/ActiveTasksCard/ActiveTasksCard";
-import { TasksDoneCardSkeleton } from "@/components/dashboard/TasksDoneCard/TasksDoneCard";
-import { StorageLimitCardSkeleton } from "@/components/dashboard/StorageLimitCard/StorageLimitCard";
 import { PageGrid } from "@/components/common/PageGrid";
+import {
+  ActiveProjectsCard,
+  ActiveProjectsCardSkeleton,
+} from "@/components/dashboard/ActiveProjectsCard";
+import {
+  ActiveTasksCard,
+  ActiveTasksCardSkeleton,
+} from "@/components/dashboard/ActiveTasksCard";
+import {
+  StorageLimitCard,
+  StorageLimitCardSkeleton,
+} from "@/components/dashboard/StorageLimitCard";
+import {
+  TasksDoneCard,
+  TasksDoneCardSkeleton,
+} from "@/components/dashboard/TasksDoneCard";
 import { AssignedTasks } from "@/components/tasks/AssignedTasks";
+import { Suspense } from "react";
 
 export default function DashboardPage() {
   return (

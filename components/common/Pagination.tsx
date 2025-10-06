@@ -1,8 +1,5 @@
-"use client";
-
-import { Button } from "@/components/ui/Button";
+import { Button, Skeleton } from "@/components/ui";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { Skeleton } from "../ui/Skeleton";
 
 const classes = "flex items-center justify-end gap-4 max-md:justify-between";
 

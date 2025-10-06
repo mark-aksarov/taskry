@@ -1,17 +1,12 @@
 "use client";
 
-import { useMemo } from "react";
-import { TaskPreview } from "@/lib/queries/types";
-import { Check, CircleEllipsis, Clock, Ellipsis, Trash } from "lucide-react";
-import {
-  ACTIVE_TASK_STATUS_ID,
-  PENDING_TASK_STATUS_ID,
-} from "@/lib/queries/constants";
-import { Item } from "react-stately";
-import { Checkbox } from "@/components/ui/Checkbox";
-import { ResponsiveMenuTrigger } from "@/components/common/ResponsiveMenuTrigger";
-import { Button } from "@/components/ui/Button";
 import Image from "next/image";
+import { useMemo } from "react";
+import { Item } from "react-stately";
+import { Check, CircleEllipsis, Clock, Ellipsis, Trash } from "lucide-react";
+
+import { Button, Checkbox } from "@/components/ui";
+
 import {
   ItemCard,
   ItemCardActionMenuDialogHeader,
@@ -28,6 +23,13 @@ import {
   ItemCardBadge,
   ItemCardBadgeSkeleton,
 } from "@/components/common/ItemCard";
+
+import {
+  ACTIVE_TASK_STATUS_ID,
+  PENDING_TASK_STATUS_ID,
+} from "@/lib/queries/constants";
+import { TaskPreview } from "@/lib/queries/types";
+import { ResponsiveMenuTrigger } from "@/components/common/ResponsiveMenuTrigger";
 
 export const TaskItem = ({
   task,

@@ -1,8 +1,10 @@
+"use client";
+
 import {
+  RACForm,
   SearchField,
   searchInputStyles as baseSearchInputStyles,
-} from "@/components/ui/SearchField";
-import { Form } from "react-aria-components";
+} from "@/components/ui";
 import { tv } from "tailwind-variants";
 
 const searchInputStyles = tv({
@@ -26,13 +28,13 @@ export const SearchForm = () => {
   };
 
   return (
-    <Form onSubmit={handleSubmit} className="w-full max-w-[360px] shrink-1">
+    <RACForm onSubmit={handleSubmit} className="w-full max-w-[360px] shrink-1">
       <SearchField
         aria-label="Search"
         placeholder="Search"
         name="search"
         inputClassName={searchInputStyles}
       />
-    </Form>
+    </RACForm>
   );
 };

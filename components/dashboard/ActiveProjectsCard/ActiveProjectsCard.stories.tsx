@@ -1,9 +1,9 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { mocked } from "storybook/test";
 import {
   ActiveProjectsCard,
   ActiveProjectsCardSkeleton,
 } from "./ActiveProjectsCard";
-import { mocked } from "storybook/test";
 import { getActiveProjects, getTotalProjects } from "@/lib/queries/project";
 
 const meta = {

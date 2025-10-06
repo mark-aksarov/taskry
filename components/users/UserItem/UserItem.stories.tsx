@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from "@storybook/react";
-import { UserItem } from "./UserItem";
 import { UserPreview } from "@/lib/queries/types";
+import { UserItem } from "./UserItem";
 
 const userMock: UserPreview = {
   id: "user1",

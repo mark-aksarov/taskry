@@ -1,8 +1,8 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { AssignedTasks } from "./AssignedTasks";
 import { mocked } from "storybook/test";
-import { tasksMock } from "../TaskList";
+import { AssignedTasks } from "./AssignedTasks";
 import { getTasks } from "@/lib/queries/task";
+import { tasksMock } from "../TaskList";
 
 const meta = {
   title: "Components/tasks/AssignedTasks",

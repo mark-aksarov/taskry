@@ -3,11 +3,9 @@
 import { useRef } from "react";
 import { Menu } from "lucide-react";
 import { useOverlayTrigger } from "react-aria";
-import { Button } from "@/components/ui/Button";
-import { BottomSheet } from "../ui/BottomSheet";
-import { AppNavigation } from "./AppNavigation";
-import { Dialog, DialogBody } from "../ui/Dialog";
 import { useOverlayTriggerState } from "react-stately";
+import { Button, BottomSheet, Dialog, DialogBody } from "@/components/ui";
+import { AppNavigation } from "./AppNavigation";
 
 export function AppBottomSheetTrigger() {
   const triggerRef = useRef<HTMLButtonElement>(null);

@@ -1,8 +1,8 @@
 "use client";
 
 import { DateValue } from "react-aria";
-import { DatePicker, DatePickerProps } from "../ui/DatePicker";
-import { useResponsiveOverlayType } from "@/lib/hooks/useResponsiveOverlayType";
+import { DatePicker, DatePickerProps } from "@/components/ui";
+import { useResponsiveOverlayType } from "@/lib/hooks";
 
 export const ResponsiveDatePicker = <T extends DateValue>(
   props: DatePickerProps<T>,

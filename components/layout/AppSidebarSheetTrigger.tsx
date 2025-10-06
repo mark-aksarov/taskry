@@ -1,18 +1,18 @@
 "use client";
 
-import { Menu } from "lucide-react";
-import { Button } from "@/components/ui/Button";
 import { useState } from "react";
-import { SideSheet } from "../ui/SideSheet";
-import { Dialog } from "../ui/Dialog";
+import { Menu } from "lucide-react";
 import {
-  AppSidebar,
-  AppSidebarBody,
-  AppSidebarHeader,
-  headingStyles,
-} from "./AppSidebar";
-import { Heading } from "react-aria-components";
-import { DialogCloseButton } from "../ui/Dialog/Dialog";
+  Button,
+  SideSheet,
+  Dialog,
+  RACHeading,
+  DialogCloseButton,
+} from "@/components/ui";
+import { AppSidebar } from "./AppSidebar/AppSidebar";
+import { AppSidebarHeader } from "./AppSidebar/AppSidebarHeader";
+import { headingStyles } from "./AppSidebar/AppSidebarHeading";
+import { AppSidebarBody } from "./AppSidebar/AppSidebarBody";
 import { AppNavigation } from "./AppNavigation";
 
 export function AppSidebarSheetTrigger() {
@@ -38,9 +38,9 @@ export function AppSidebarSheetTrigger() {
           <AppSidebar>
             <AppSidebarHeader>
               <div className="flex items-center justify-between">
-                <Heading slot="title" level={2} className={headingStyles}>
+                <RACHeading slot="title" level={2} className={headingStyles}>
                   Taskry
-                </Heading>
+                </RACHeading>
                 <DialogCloseButton
                   iconSize={20}
                   onPress={() => setOpen(false)}

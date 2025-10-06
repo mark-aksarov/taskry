@@ -1,17 +1,17 @@
 "use client";
 
-import { BottomSheet } from "@/components/ui/BottomSheet";
-import { Button } from "@/components/ui/Button";
 import {
+  Button,
+  BottomSheet,
   Dialog,
   DialogBody,
   DialogCloseButton,
   DialogHeader,
   DialogHeading,
-} from "@/components/ui/Dialog";
-import { SlidersHorizontal } from "lucide-react";
+} from "@/components/ui";
 import { useRef } from "react";
 import { useOverlayTrigger } from "react-aria";
+import { SlidersHorizontal } from "lucide-react";
 import { useOverlayTriggerState } from "react-stately";
 
 export function FiltersBottomSheetTrigger({

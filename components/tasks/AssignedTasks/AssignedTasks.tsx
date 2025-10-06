@@ -1,16 +1,16 @@
-import { Card } from "../../common/Card";
-import { getTasks } from "@/lib/queries/task";
-import { PageSection } from "../../common/PageSection";
-import { PageSectionHeading } from "../../common/PageSectionHeading";
+import { Card } from "@/components/common/Card";
 import {
   EmptySection,
   EmptySectionDescription,
   EmptySectionHeading,
   EmptySectionLink,
-} from "../../common/EmptySection";
+} from "@/components/common/EmptySection";
+import { ListSkeleton } from "@/components/common/ListSkeleton";
+import { PageSection } from "@/components/common/PageSection";
+import { PageSectionHeading } from "@/components/common/PageSectionHeading";
+import { getTasks } from "@/lib/queries/task";
 import { Suspense } from "react";
 import { TaskList } from "../TaskList";
-import { ListSkeleton } from "../../common/ListSkeleton";
 import { TaskItem } from "../TaskItem";
 
 export async function AssignedTasks() {

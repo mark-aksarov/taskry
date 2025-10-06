@@ -1,4 +1,4 @@
-import { ToggleButton, ToggleButtonGroup } from "../ui/ToggleButtonGroup";
+import { ToggleButton, ToggleButtonGroup } from "@/components/ui";
 
 export const ViewToggle = ({ className }: { className?: string }) => {
   return (

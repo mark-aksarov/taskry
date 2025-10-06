@@ -1,13 +1,13 @@
 import { CalendarCheck } from "lucide-react";
+import { Skeleton } from "@/components/ui";
+import { getActiveTasks, getTotalTasks } from "@/lib/queries/task";
 import {
   DashboardCard,
   DashboardCardIcon,
   DashboardCardStat,
   DashboardCardValue,
 } from "../DashboardCard";
-import { getActiveTasks, getTotalTasks } from "@/lib/queries/task";
 import { CardHeading } from "@/components/common/Card";
-import { Skeleton } from "@/components/ui/Skeleton";
 
 export const ActiveTasksCard = async () => {
   const activeTasksPromise = getActiveTasks();

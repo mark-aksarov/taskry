@@ -1,10 +1,9 @@
 "use client";
 
 import { Form } from "react-aria-components";
-import { Button } from "@/components/ui/Button";
-import { ProjectDeadline } from "../ProjectDeadline";
-import { TextField } from "@/components/ui/TextField";
+import { Button, TextField } from "@/components/ui";
 import { ProjectStatusCheckboxGroup } from "../ProjectStatusCheckboxGroup";
+import { ProjectDeadline } from "../ProjectDeadline";
 
 interface ProjectFiltersFormProps {
   projectCategoryCheckboxGroup: React.ReactNode;

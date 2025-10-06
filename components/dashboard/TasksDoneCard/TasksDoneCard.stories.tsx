@@ -1,6 +1,6 @@
+import { mocked } from "storybook/test";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { TasksDoneCard, TasksDoneCardSkeleton } from "./TasksDoneCard";
-import { mocked } from "storybook/test";
 import { getActiveTasks, getTasksDone } from "@/lib/queries/task";
 
 const meta = {

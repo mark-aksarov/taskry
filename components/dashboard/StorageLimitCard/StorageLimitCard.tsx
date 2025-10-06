@@ -1,13 +1,12 @@
 import { Database } from "lucide-react";
+import { ProgressBar, Skeleton } from "@/components/ui";
+import { getStorageUsage } from "@/lib/queries/storage";
 import {
   DashboardCard,
   DashboardCardIcon,
   DashboardCardValue,
 } from "../DashboardCard";
-import { ProgressBar } from "@/components/ui/ProgressBar";
 import { CardHeading } from "@/components/common/Card";
-import { Skeleton } from "@/components/ui/Skeleton";
-import { getStorageUsage } from "@/lib/queries/storage";
 
 export const StorageLimitCard = async () => {
   const storage = await getStorageUsage();

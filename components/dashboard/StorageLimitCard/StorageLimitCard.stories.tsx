@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { StorageLimitCard, StorageLimitCardSkeleton } from "./StorageLimitCard";
 import { mocked } from "storybook/internal/test";
+import { StorageLimitCard, StorageLimitCardSkeleton } from "./StorageLimitCard";
 import { getStorageUsage } from "@/lib/queries/storage";
 
 const meta = {

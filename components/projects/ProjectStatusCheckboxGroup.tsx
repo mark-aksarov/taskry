@@ -1,12 +1,13 @@
-"use client";
-
-import { CheckboxGroup } from "react-aria-components";
-import { fieldStyles, Label } from "../ui/Field";
-import { Checkbox } from "../ui/Checkbox";
+import {
+  fieldStyles,
+  Label,
+  Checkbox,
+  RACCheckboxGroup,
+} from "@/components/ui";
 
 export function ProjectStatusCheckboxGroup() {
   return (
-    <CheckboxGroup className={fieldStyles()}>
+    <RACCheckboxGroup className={fieldStyles()}>
       <Label>Status</Label>
       <Checkbox value="pending" className="font-normal">
         Pending
@@ -17,6 +18,6 @@ export function ProjectStatusCheckboxGroup() {
       <Checkbox value="completed" className="font-normal">
         Completed
       </Checkbox>
-    </CheckboxGroup>
+    </RACCheckboxGroup>
   );
 }

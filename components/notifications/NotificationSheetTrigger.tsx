@@ -3,16 +3,16 @@
 import { useRef } from "react";
 import { Bell } from "lucide-react";
 import { useOverlayTrigger } from "react-aria";
-import { Button } from "@/components/ui/Button";
-import { BottomSheet } from "../ui/BottomSheet";
-import { useOverlayTriggerState } from "react-stately";
 import {
+  Button,
+  BottomSheet,
   Dialog,
   DialogBody,
   DialogCloseButton,
   DialogHeader,
   DialogHeading,
-} from "../ui/Dialog";
+} from "@/components/ui";
+import { useOverlayTriggerState } from "react-stately";
 
 export function NotificationSheetTrigger({
   notificationList,

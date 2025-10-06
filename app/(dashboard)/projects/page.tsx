@@ -1,31 +1,36 @@
-import { FiltersSideSheetTrigger } from "@/components/common/FiltersSideSheetTrigger";
-import { ToolbarDesktop } from "@/components/common/ToolbarDesktop";
-import { ProjectFiltersFormSkeleton } from "@/components/projects/ProjectFiltersForm";
-import { ProjectFiltersForm } from "@/components/projects/ProjectFiltersForm";
-import { getProjectCategories, getProjects } from "@/lib/queries/project";
-import { ProjectCategoryCheckboxGroup } from "@/components/projects/ProjectCategoryCheckboxGroup";
-import { getCustomers } from "@/lib/queries/customers";
-import { CustomerCheckboxGroup } from "@/components/customer/CustomerCheckboxGroup";
-import { getUsers } from "@/lib/queries/user";
-import { UserCheckboxGroup } from "@/components/users/UserCheckboxGroup";
 import { Suspense } from "react";
-import { ProjectActionsMenuTrigger } from "@/components/projects/ProjectActionsMenuTrigger";
-import { ViewToggle } from "@/components/common/ViewToggle";
-import { Button } from "@/components/ui/Button";
 import { Plus } from "lucide-react";
-import { ToolbarMobileTop } from "@/components/common/ToolbarMobileTop";
-import { ToolbarMobileHeading } from "@/components/common/ToolbarMobileHeading";
-import { FiltersBottomSheetTrigger } from "@/components/common/FiltersBottomSheetTrigger";
-import { ToolbarMobileBottom } from "@/components/common/ToolbarMobileBottom";
-import { ProjectList } from "@/components/projects/ProjectList";
+import { Button } from "@/components/ui";
+
+import { PageCentered } from "@/components/common/PageCentered";
 import {
   EmptySection,
   EmptySectionDescription,
-  EmptySectionLink,
   EmptySectionHeading,
+  EmptySectionLink,
 } from "@/components/common/EmptySection";
 import { PageGrid } from "@/components/common/PageGrid";
-import { PageCentered } from "@/components/common/PageCentered";
+import { ViewToggle } from "@/components/common/ViewToggle";
+import {
+  ToolbarDesktop,
+  ToolbarMobileBottom,
+  ToolbarMobileHeading,
+  ToolbarMobileTop,
+} from "@/components/common/Toolbar";
+import { FiltersSideSheetTrigger } from "@/components/common/FiltersSideSheetTrigger";
+import { FiltersBottomSheetTrigger } from "@/components/common/FiltersBottomSheetTrigger";
+import {
+  ProjectFiltersForm,
+  ProjectFiltersFormSkeleton,
+} from "@/components/projects/ProjectFiltersForm";
+import { ProjectCategoryCheckboxGroup } from "@/components/projects/ProjectCategoryCheckboxGroup";
+import { CustomerCheckboxGroup } from "@/components/customer/CustomerCheckboxGroup";
+import { ProjectActionsMenuTrigger } from "@/components/projects/ProjectActionsMenuTrigger";
+import { ProjectList } from "@/components/projects/ProjectList";
+import { getProjectCategories, getProjects } from "@/lib/queries/project";
+import { getCustomers } from "@/lib/queries/customers";
+import { getUsers } from "@/lib/queries/user";
+import { UserCheckboxGroup } from "@/components/users/UserCheckboxGroup";
 
 export default async function ProjectsPage() {
   const categoriesPromise = getProjectCategories(1);

@@ -1,9 +1,9 @@
+import { Suspense } from "react";
+import { mocked } from "storybook/test";
 import { Meta, StoryObj } from "@storybook/react";
 import { UserList } from "./UserList";
-import { Suspense } from "react";
-import { usersMock } from "../usersMock";
 import { getUsers } from "@/lib/queries/user";
-import { mocked } from "storybook/internal/test";
+import { usersMock } from "../usersMock";
 
 const meta: Meta<typeof UserList> = {
   title: "Components/users/UserList",

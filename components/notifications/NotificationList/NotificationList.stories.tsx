@@ -1,9 +1,9 @@
 import { Suspense } from "react";
 import { mocked } from "storybook/test";
 import { Meta, StoryObj } from "@storybook/react";
+import { getNotifications } from "@/lib/queries/notification";
 import { NotificationList } from "./NotificationList";
 import { notificationsMock } from "./notificationsMock";
-import { getNotifications } from "@/lib/queries/notification";
 
 const meta = {
   title: "Components/notifications/NotificationList",

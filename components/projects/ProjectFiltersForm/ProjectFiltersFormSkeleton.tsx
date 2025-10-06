@@ -1,6 +1,6 @@
-import { Skeleton } from "@/components/ui/Skeleton";
-import { FieldSkeleton } from "@/components/common/FieldSkeleton";
 import { CheckboxGroupSkeleton } from "@/components/common/CheckboxGroupSkeleton";
+import { FieldSkeleton } from "@/components/common/FieldSkeleton";
+import { Skeleton } from "@/components/ui";
 
 export function ProjectFiltersFormSkeleton() {
   return (

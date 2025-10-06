@@ -1,11 +1,13 @@
-import { ListSkeleton } from "@/components/common/ListSkeleton";
+import { Skeleton } from "@/components/ui";
 import { PageGrid } from "@/components/common/PageGrid";
-import { ToolbarDesktop } from "@/components/common/ToolbarDesktop";
-import { ToolbarMobileBottom } from "@/components/common/ToolbarMobileBottom";
-import { ToolbarMobileHeading } from "@/components/common/ToolbarMobileHeading";
-import { ToolbarMobileTop } from "@/components/common/ToolbarMobileTop";
+import {
+  ToolbarDesktop,
+  ToolbarMobileBottom,
+  ToolbarMobileHeading,
+  ToolbarMobileTop,
+} from "@/components/common/Toolbar";
+import { ListSkeleton } from "@/components/common/ListSkeleton";
 import { ProjectItem } from "@/components/projects/ProjectItem";
-import { Skeleton } from "@/components/ui/Skeleton";
 
 export default function Loading() {
   return (

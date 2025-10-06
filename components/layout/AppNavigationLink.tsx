@@ -1,7 +1,6 @@
-import { tv } from "tailwind-variants";
-import { focusRing } from "../ui/styles";
-import { baseButtonStyles } from "../ui/Button";
 import Link from "next/link";
+import { tv } from "tailwind-variants";
+import { focusRing, baseButtonStyles } from "@/components/ui";
 
 export const navLinkStyle = tv({
   extend: focusRing,

@@ -1,5 +1,11 @@
 "use client";
 
+import { Ellipsis, Pencil, Trash } from "lucide-react";
+import Image from "next/image";
+import { Item } from "react-stately";
+
+import { Button, Checkbox } from "@/components/ui";
+
 import {
   ItemCard,
   ItemCardActionMenuDialogHeader,
@@ -12,13 +18,9 @@ import {
   ItemCardImageField,
   ItemCardImageFieldSkeleton,
 } from "@/components/common/ItemCard";
-import { ResponsiveMenuTrigger } from "@/components/common/ResponsiveMenuTrigger";
-import { Button } from "@/components/ui/Button";
-import { Checkbox } from "@/components/ui/Checkbox";
+
 import { UserPreview } from "@/lib/queries/types";
-import { Ellipsis, Pencil, Trash } from "lucide-react";
-import Image from "next/image";
-import { Item } from "react-stately";
+import { ResponsiveMenuTrigger } from "@/components/common/ResponsiveMenuTrigger";
 
 export function UserItem({
   user,

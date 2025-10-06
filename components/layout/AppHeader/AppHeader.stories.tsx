@@ -1,16 +1,16 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { AppHeader } from "./AppHeader";
-import {
-  notificationsMock,
-  NotificationList,
-} from "../../notifications/NotificationList";
-import { mocked } from "storybook/test";
-import { getNotifications } from "@/lib/queries/notification";
-import { NotificationPopoverTrigger } from "@/components/notifications/NotificationPopoverTrigger";
 import { Suspense } from "react";
+import { mocked } from "storybook/test";
+import { NotificationPopoverTrigger } from "@/components/notifications/NotificationPopoverTrigger";
+import {
+  NotificationList,
+  notificationsMock,
+} from "@/components/notifications/NotificationList";
 import { NotificationSheetTrigger } from "@/components/notifications/NotificationSheetTrigger";
 import { AppBottomSheetTrigger } from "../AppBottomSheetTrigger";
 import { AppSidebarSheetTrigger } from "../AppSidebarSheetTrigger";
+import { getNotifications } from "@/lib/queries/notification";
 
 const meta = {
   title: "Components/layout/AppHeader",

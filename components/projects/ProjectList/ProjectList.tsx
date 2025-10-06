@@ -1,5 +1,5 @@
-import { ProjectItem } from "../ProjectItem";
 import { ProjectPreview } from "@/lib/queries/types";
+import { ProjectItem } from "../ProjectItem";
 
 export function ProjectList({ projects }: { projects: ProjectPreview[] }) {
   return (

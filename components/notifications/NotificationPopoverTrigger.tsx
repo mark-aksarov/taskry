@@ -3,10 +3,8 @@
 import { useRef } from "react";
 import { Bell } from "lucide-react";
 import { useOverlayTrigger } from "react-aria";
-import { Button } from "@/components/ui/Button";
 import { useOverlayTriggerState } from "react-stately";
-import { Popover } from "@/components/ui/Popover";
-import { Dialog, DialogBody } from "@/components/ui/Dialog";
+import { Button, Popover, Dialog, DialogBody } from "@/components/ui";
 
 export function NotificationPopoverTrigger({
   notificationList,

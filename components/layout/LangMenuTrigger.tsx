@@ -1,10 +1,15 @@
-import { Button as RACButton } from "react-aria-components";
+"use client";
+
 import { Item } from "react-stately";
 import { Languages } from "lucide-react";
-import { MenuTrigger } from "../ui/Menu";
-import { DialogHeader } from "../ui/Dialog";
-import { Button } from "../ui/Button";
-import { DialogCloseButton, DialogHeading } from "../ui/Dialog";
+import {
+  MenuTrigger,
+  Button,
+  RACButton,
+  DialogCloseButton,
+  DialogHeading,
+  DialogHeader,
+} from "@/components/ui";
 import { navLinkStyle } from "./AppNavigationLink";
 
 const itemClasses = "flex items-center gap-4 font-bold";

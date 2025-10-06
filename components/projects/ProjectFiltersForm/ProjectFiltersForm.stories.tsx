@@ -1,16 +1,16 @@
+import { mocked } from "storybook/test";
+import { getCustomers } from "@/lib/queries/customers";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { ProjectFiltersForm } from "./ProjectFiltersForm";
-import { mocked } from "storybook/internal/test";
 import { getProjectCategories } from "@/lib/queries/project";
-import { getCustomers } from "@/lib/queries/customers";
 import { projectCategoriesMock } from "../projectCategoriesMock";
 import { customersMock } from "@/components/customer/customersMock";
-import { getUsers } from "@/lib/queries/user";
 import { usersMock } from "@/components/users/usersMock";
-import { ProjectFiltersFormSkeleton } from "./ProjectFiltersFormSkeleton";
+import { getUsers } from "@/lib/queries/user";
 import { ProjectCategoryCheckboxGroup } from "../ProjectCategoryCheckboxGroup";
 import { CustomerCheckboxGroup } from "@/components/customer/CustomerCheckboxGroup";
 import { UserCheckboxGroup } from "@/components/users/UserCheckboxGroup";
+import { ProjectFiltersFormSkeleton } from "./ProjectFiltersFormSkeleton";
 
 const meta: Meta<typeof ProjectFiltersForm> = {
   title: "Components/projects/ProjectFiltersForm",

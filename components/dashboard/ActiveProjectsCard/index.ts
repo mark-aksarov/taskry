@@ -1,1 +1,4 @@
-export { ActiveProjectsCard } from "./ActiveProjectsCard";
+export {
+  ActiveProjectsCard,
+  ActiveProjectsCardSkeleton,
+} from "./ActiveProjectsCard";

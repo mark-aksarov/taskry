@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from "@storybook/react";
-import { NotificationItem } from "./NotificationItem";
 import { NotificationRecipientWithRelations } from "@/lib/queries/types";
+import { NotificationItem } from "./NotificationItem";
 
 const notificationMock: NotificationRecipientWithRelations = {
   notificationId: 1,

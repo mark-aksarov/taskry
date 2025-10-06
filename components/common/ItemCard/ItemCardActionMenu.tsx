@@ -2,8 +2,8 @@ import {
   DialogCloseButton,
   DialogHeader,
   DialogHeading,
-} from "@/components/ui/Dialog";
-import { Skeleton } from "@/components/ui/Skeleton";
+  Skeleton,
+} from "@/components/ui";
 
 export function ItemCardActionMenuSkeleton() {
   return (

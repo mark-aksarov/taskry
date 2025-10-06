@@ -1,5 +1,4 @@
-import { ProgressBar, ProgressBarProps } from "@/components/ui/ProgressBar";
-import { Skeleton } from "@/components/ui/Skeleton";
+import { ProgressBar, ProgressBarProps, Skeleton } from "@/components/ui";
 import { twMerge } from "tailwind-merge";
 
 const progressStyles = "w-[10rem] @max-md:hidden";

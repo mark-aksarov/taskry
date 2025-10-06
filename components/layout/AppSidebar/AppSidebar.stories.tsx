@@ -1,13 +1,16 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { AppSidebar } from "./AppSidebar";
-import { SideSheet } from "@/components/ui/SideSheet";
-import { Button } from "@/components/ui/Button";
-import { DialogTrigger } from "react-aria-components";
-import { Dialog } from "@/components/ui/Dialog";
-import { DialogCloseButton } from "@/components/ui/Dialog/Dialog";
+
+import {
+  SideSheet,
+  Button,
+  RACDialogTrigger,
+  Dialog,
+  DialogCloseButton,
+} from "@/components/ui";
 import { AppSidebarHeader } from "./AppSidebarHeader";
-import { AppSidebarBody } from "./AppSidebarBody";
 import { AppSidebarHeading } from "./AppSidebarHeading";
+import { AppSidebarBody } from "./AppSidebarBody";
 import { AppNavigation } from "../AppNavigation";
 
 const meta = {
@@ -42,14 +45,14 @@ export const WrapWithSheet = {
   decorators: [
     (Story) => {
       return (
-        <DialogTrigger>
+        <RACDialogTrigger>
           <Button label="Open sheet" />
           <SideSheet side="left" isDismissable>
             <Dialog>
               <Story />
             </Dialog>
           </SideSheet>
-        </DialogTrigger>
+        </RACDialogTrigger>
       );
     },
   ],

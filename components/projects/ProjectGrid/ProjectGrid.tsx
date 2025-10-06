@@ -1,5 +1,5 @@
 import { getProjects } from "@/lib/queries/project";
-import { ProjectGridItem } from "../ProjectGridItem/ProjectGridItem";
+import { ProjectGridItem } from "../ProjectGridItem";
 
 export async function ProjectGrid() {
   const projects = await getProjects();

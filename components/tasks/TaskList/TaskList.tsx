@@ -1,5 +1,5 @@
-import { TaskItem } from "../TaskItem";
 import { TaskPreview } from "@/lib/queries/types";
+import { TaskItem } from "../TaskItem";
 
 export async function TaskList({ tasks }: { tasks: TaskPreview[] }) {
   return (

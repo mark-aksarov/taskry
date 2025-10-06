@@ -1,15 +1,15 @@
 import ProjectsPage from "./page";
 import { mocked } from "storybook/test";
-import { getUsers } from "@/lib/queries/user";
-import { getCustomers } from "@/lib/queries/customers";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { PageDecorator } from "@/.storybook/decorators";
-import { usersMock } from "@/components/users/usersMock";
 import { getProjectCategories, getProjects } from "@/lib/queries/project";
-import { getNotifications } from "@/lib/queries/notification";
-import { customersMock } from "@/components/customer/customersMock";
-import { notificationsMock } from "@/components/notifications/NotificationList";
 import { projectCategoriesMock } from "@/components/projects/projectCategoriesMock";
+import { customersMock } from "@/components/customer/customersMock";
+import { getCustomers } from "@/lib/queries/customers";
+import { getUsers } from "@/lib/queries/user";
+import { usersMock } from "@/components/users/usersMock";
+import { getNotifications } from "@/lib/queries/notification";
+import { notificationsMock } from "@/components/notifications/NotificationList";
 import { projectsMock } from "@/components/projects/ProjectList";
 
 const meta = {

@@ -1,1 +1,1 @@
-export { TasksDoneCard } from "./TasksDoneCard";
+export { TasksDoneCard, TasksDoneCardSkeleton } from "./TasksDoneCard";

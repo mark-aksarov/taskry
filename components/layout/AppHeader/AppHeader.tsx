@@ -1,10 +1,8 @@
-"use client";
-
 import { Search, Sun } from "lucide-react";
+import { Button } from "@/components/ui";
 import { SearchForm } from "../SearchForm";
-import { ProfileLink } from "../ProfileLink";
-import { Button } from "@/components/ui/Button";
 import { LangMenuPopoverTrigger } from "../LangMenuTrigger";
+import { ProfileLink } from "../ProfileLink";
 
 interface AppHeaderProps {
   title: string;

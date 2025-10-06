@@ -1,23 +1,24 @@
 import "./globals.css";
+
 import { Suspense } from "react";
 import type { Metadata } from "next";
 import { Nunito_Sans } from "next/font/google";
+import { ListSkeleton } from "@/components/common/ListSkeleton";
 import {
   AppSidebar,
   AppSidebarBody,
   AppSidebarHeader,
   AppSidebarHeading,
 } from "@/components/layout/AppSidebar";
-import { AppHeader } from "@/components/layout/AppHeader";
 import { AppNavigation } from "@/components/layout/AppNavigation";
-import { NotificationList } from "@/components/notifications/NotificationList";
+import { AppHeader } from "@/components/layout/AppHeader";
 import { NotificationPopoverTrigger } from "@/components/notifications/NotificationPopoverTrigger";
+import { NotificationList } from "@/components/notifications/NotificationList";
+import { ViewAllButton } from "@/components/notifications/ViewAllButton";
 import { NotificationSheetTrigger } from "@/components/notifications/NotificationSheetTrigger";
 import { AppBottomSheetTrigger } from "@/components/layout/AppBottomSheetTrigger";
 import { AppSidebarSheetTrigger } from "@/components/layout/AppSidebarSheetTrigger";
-import { ListSkeleton } from "@/components/common/ListSkeleton";
 import { NotificationItem } from "@/components/notifications/NotificationItem";
-import { ViewAllButton } from "@/components/notifications/ViewAllButton";
 
 const nunitoSans = Nunito_Sans({
   variable: "--font-nunito-sans",

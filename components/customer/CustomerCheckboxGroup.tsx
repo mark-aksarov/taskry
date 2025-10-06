@@ -1,10 +1,13 @@
 "use client";
 
-import { CheckboxGroup } from "react-aria-components";
-import { fieldStyles, Label } from "../ui/Field";
-import { Checkbox } from "../ui/Checkbox";
-import { Customer } from "@/generated/prisma";
 import { use } from "react";
+import { Customer } from "@/generated/prisma";
+import {
+  fieldStyles,
+  Label,
+  Checkbox,
+  RACCheckboxGroup,
+} from "@/components/ui";
 
 export function CustomerCheckboxGroup({
   customersPromise,
@@ -19,7 +22,7 @@ export function CustomerCheckboxGroup({
   }
 
   return (
-    <CheckboxGroup className={fieldStyles()}>
+    <RACCheckboxGroup className={fieldStyles()}>
       <Label>Customer</Label>
       {customers.map((customer) => (
         <Checkbox
@@ -30,6 +33,6 @@ export function CustomerCheckboxGroup({
           {customer.fullName}
         </Checkbox>
       ))}
-    </CheckboxGroup>
+    </RACCheckboxGroup>
   );
 }

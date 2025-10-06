@@ -1,23 +1,23 @@
 "use client";
 
-import { Card } from "@/components/common/Card";
-import { Checkbox } from "@/components/ui/Checkbox";
-import { ProjectPreview } from "@/lib/queries/types";
-import { Skeleton } from "@/components/ui/Skeleton";
-import { ResponsiveMenuTrigger } from "@/components/common/ResponsiveMenuTrigger";
 import {
+  Checkbox,
+  Skeleton,
   DialogCloseButton,
   DialogHeader,
   DialogHeading,
-} from "@/components/ui/Dialog";
-import { Button } from "@/components/ui/Button";
-import { Check, CircleEllipsis, Clock, Ellipsis, Trash } from "lucide-react";
-import { Item } from "react-stately";
-import { useMemo } from "react";
+  Button,
+  ProgressBar,
+} from "@/components/ui";
 import Image from "next/image";
-import { ProgressBar } from "@/components/ui/ProgressBar";
-import { DONE_TASK_STATUS_ID } from "@/lib/queries/constants";
+import { useMemo } from "react";
+import { Item } from "react-stately";
 import { twMerge } from "tailwind-merge";
+import { ProjectPreview } from "@/lib/queries/types";
+import { DONE_TASK_STATUS_ID } from "@/lib/queries/constants";
+import { Check, CircleEllipsis, Clock, Ellipsis, Trash } from "lucide-react";
+import { ResponsiveMenuTrigger } from "@/components/common/ResponsiveMenuTrigger";
+import { Card } from "@/components/common/Card";
 
 const ProjectDetails = ({ project }: { project?: ProjectPreview }) => {
   const locale = "en-GB";

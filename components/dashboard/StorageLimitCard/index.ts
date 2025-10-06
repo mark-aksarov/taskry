@@ -1,1 +1,1 @@
-export { StorageLimitCard } from "./StorageLimitCard";
+export { StorageLimitCard, StorageLimitCardSkeleton } from "./StorageLimitCard";

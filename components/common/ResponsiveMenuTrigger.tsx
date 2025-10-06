@@ -1,7 +1,7 @@
 "use client";
 
-import { MenuTrigger, MenuTriggerProps } from "../ui/Menu";
-import { useResponsiveOverlayType } from "@/lib/hooks/useResponsiveOverlayType";
+import { MenuTrigger, MenuTriggerProps } from "@/components/ui/Menu";
+import { useResponsiveOverlayType } from "@/lib/hooks";
 
 export const ResponsiveMenuTrigger = <T extends object = any>(
   props: MenuTriggerProps<T>,

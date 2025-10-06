@@ -1,13 +1,13 @@
 import { FolderClosed } from "lucide-react";
+import { Skeleton } from "@/components/ui";
+import { getActiveProjects, getTotalProjects } from "@/lib/queries/project";
 import {
   DashboardCard,
   DashboardCardIcon,
   DashboardCardStat,
   DashboardCardValue,
 } from "../DashboardCard";
-import { getActiveProjects, getTotalProjects } from "@/lib/queries/project";
 import { CardHeading } from "@/components/common/Card";
-import { Skeleton } from "@/components/ui/Skeleton";
 
 export const ActiveProjectsCard = async () => {
   const activeProjectsPromise = getActiveProjects();

@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { ProjectGrid } from "./ProjectGrid";
 import { Suspense } from "react";
 import { mocked } from "storybook/test";
+import { ProjectGrid } from "./ProjectGrid";
 import { getProjects } from "@/lib/queries/project";
 import { projectsMock } from "../ProjectList";
 

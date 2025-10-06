@@ -11,14 +11,13 @@ import {
   Sun,
   Users,
 } from "lucide-react";
-import { Badge } from "../ui/Badge";
-import { twMerge } from "tailwind-merge";
-import { Button } from "react-aria-components";
-import { Divider } from "@/components/ui/Divider";
-import { LangMenuBottomSheetTrigger } from "./LangMenuTrigger";
-import { usePathname } from "next/navigation";
+
 import Link from "next/link";
+import { twMerge } from "tailwind-merge";
+import { usePathname } from "next/navigation";
+import { Badge, RACButton, Divider } from "@/components/ui";
 import { AppNavigationLink, navLinkStyle } from "./AppNavigationLink";
+import { LangMenuBottomSheetTrigger } from "./LangMenuTrigger";
 
 interface AppNavigationProps {
   className?: string;
@@ -82,10 +81,10 @@ export const AppNavigation = ({ className }: AppNavigationProps) => {
       <div className="flex flex-col gap-2.5 md:hidden">
         <LangMenuBottomSheetTrigger />
 
-        <Button className={navLinkStyle}>
+        <RACButton className={navLinkStyle}>
           <Sun size={18} strokeWidth={1.5} absoluteStrokeWidth />
           Light
-        </Button>
+        </RACButton>
 
         <Divider />
       </div>

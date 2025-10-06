@@ -2,14 +2,14 @@
 
 import { useOverlayTrigger } from "react-aria";
 import { Check, CircleEllipsis, Clock, Ellipsis, Trash } from "lucide-react";
-import { Button } from "@/components/ui/Button";
 import {
+  Button,
   DialogCloseButton,
   DialogHeader,
   DialogHeading,
-} from "@/components/ui/Dialog";
+} from "@/components/ui";
 import { Item, useOverlayTriggerState } from "react-stately";
-import { ResponsiveMenuTrigger } from "@/components/common/ResponsiveMenuTrigger";
+import { ResponsiveMenuTrigger } from "../common/ResponsiveMenuTrigger";
 
 export const ProjectActionsMenuTrigger = () => {
   const state = useOverlayTriggerState({});

@@ -1,20 +1,22 @@
 "use client";
 
-import { ResponsiveMenuTrigger } from "@/components/common/ResponsiveMenuTrigger";
-import { Button } from "@/components/ui/Button";
-import {
-  DialogCloseButton,
-  DialogHeader,
-  DialogHeading,
-} from "@/components/ui/Dialog";
-import { Skeleton } from "@/components/ui/Skeleton";
-import { NotificationRecipientWithRelations } from "@/lib/queries/types";
-import { Ellipsis, ListCheck, Trash } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useMemo } from "react";
 import { Item } from "react-stately";
 import { twMerge } from "tailwind-merge";
+
+import { Ellipsis, ListCheck, Trash } from "lucide-react";
+
+import {
+  Button,
+  DialogCloseButton,
+  DialogHeader,
+  DialogHeading,
+  Skeleton,
+} from "@/components/ui";
+import { NotificationRecipientWithRelations } from "@/lib/queries/types";
+import { ResponsiveMenuTrigger } from "@/components/common/ResponsiveMenuTrigger";
 
 interface NotificationItemProps {
   notification?: NotificationRecipientWithRelations;

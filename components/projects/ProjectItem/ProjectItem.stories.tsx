@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { ProjectItem } from "./ProjectItem";
 import { ProjectPreview } from "@/lib/queries/types";
 import { ACTIVE_PROJECT_STATUS_ID } from "@/lib/queries/constants";
+import { ProjectItem } from "./ProjectItem";
 
 const projectMock: ProjectPreview = {
   id: 1,

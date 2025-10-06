@@ -1,5 +1,4 @@
-import { Badge, BadgeProps } from "@/components/ui/Badge";
-import { Skeleton } from "@/components/ui/Skeleton";
+import { Badge, BadgeProps, Skeleton } from "@/components/ui";
 import { twMerge } from "tailwind-merge";
 
 const badgeStyles = "w-[5.5rem] px-0 @max-xl:hidden";

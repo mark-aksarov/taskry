@@ -1,7 +1,4 @@
-"use client";
-
-import { Skeleton } from "@/components/ui/Skeleton";
-import { fieldGroupStyles, fieldStyles } from "@/components/ui/Field";
+import { Skeleton, fieldGroupStyles, fieldStyles } from "@/components/ui";
 
 export function FieldSkeleton() {
   return (
