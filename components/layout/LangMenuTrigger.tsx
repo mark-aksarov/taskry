@@ -5,12 +5,11 @@ import { Languages } from "lucide-react";
 import {
   MenuTrigger,
   Button,
-  RACButton,
   DialogCloseButton,
   DialogHeading,
   DialogHeader,
 } from "@/components/ui";
-import { navLinkStyle } from "./AppNavigationLink";
+import { AppNavigationItem } from "./AppNavigation";
 
 const itemClasses = "flex items-center gap-4 font-bold";
 
@@ -48,10 +47,10 @@ export const LangMenuBottomSheetTrigger = () => {
         </DialogHeader>
       )}
       renderButton={() => (
-        <RACButton className={navLinkStyle}>
+        <AppNavigationItem>
           <Languages size={18} strokeWidth={1.5} absoluteStrokeWidth />
           English
-        </RACButton>
+        </AppNavigationItem>
       )}
     >
       {menuItems}
