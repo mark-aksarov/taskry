@@ -1,10 +1,10 @@
 import { ReactNode } from "react";
 
-interface PageCenteredProps {
+interface CenteredProps {
   children: ReactNode;
 }
 
-export const PageCentered = ({ children }: PageCenteredProps) => {
+export const Centered = ({ children }: CenteredProps) => {
   return (
     <div className="flex h-full w-full items-center justify-center">
       {children}

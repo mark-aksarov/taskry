@@ -38,13 +38,15 @@ export async function AssignedTasks() {
   }
 
   return (
-    <PageSection>
-      <PageSectionHeading>Assigned Tasks</PageSectionHeading>
+    <section className="flex flex-col gap-4">
+      <h2 className="text-base font-bold text-black dark:text-white">
+        Assigned Tasks
+      </h2>
       <Suspense
         fallback={<Repeat items={10} renderItem={() => <TaskItem />} />}
       >
         <TaskList tasks={tasks} />
       </Suspense>
-    </PageSection>
+    </section>
   );
 }

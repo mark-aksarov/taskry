@@ -2,7 +2,7 @@ import { Suspense } from "react";
 import { Plus } from "lucide-react";
 import { Button } from "@/components/ui";
 
-import { PageCentered } from "@/components/common/PageCentered";
+import { Centered } from "@/components/common/Centered";
 import {
   EmptySection,
   EmptySectionDescription,
@@ -52,7 +52,7 @@ export default async function ProjectsPage() {
 
   if (!projects.length) {
     return (
-      <PageCentered>
+      <Centered>
         <EmptySection>
           <EmptySectionHeading>No projects yet</EmptySectionHeading>
           <EmptySectionDescription>
@@ -60,7 +60,7 @@ export default async function ProjectsPage() {
           </EmptySectionDescription>
           <EmptySectionLink href="#">New Project</EmptySectionLink>
         </EmptySection>
-      </PageCentered>
+      </Centered>
     );
   }
 
