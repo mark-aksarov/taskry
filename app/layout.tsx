@@ -3,7 +3,6 @@ import "./globals.css";
 import { Suspense } from "react";
 import type { Metadata } from "next";
 import { Nunito_Sans } from "next/font/google";
-import { ListSkeleton } from "@/components/common/ListSkeleton";
 import {
   AppSidebar,
   AppSidebarBody,
@@ -19,6 +18,7 @@ import { NotificationSheetTrigger } from "@/components/notifications/Notificatio
 import { AppBottomSheetTrigger } from "@/components/layout/AppBottomSheetTrigger";
 import { AppSidebarSheetTrigger } from "@/components/layout/AppSidebarSheetTrigger";
 import { NotificationItem } from "@/components/notifications/NotificationItem";
+import { Repeat } from "@/components/common/Repeat";
 
 const nunitoSans = Nunito_Sans({
   variable: "--font-nunito-sans",
@@ -46,7 +46,7 @@ export default async function RootLayout({
 
 export async function Layout({ children }: { children: React.ReactNode }) {
   const notificationListSkeleton = (
-    <ListSkeleton items={7} renderItem={() => <NotificationItem />} />
+    <Repeat items={7} renderItem={() => <NotificationItem />} />
   );
 
   return (

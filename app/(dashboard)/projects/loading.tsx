@@ -6,7 +6,7 @@ import {
   ToolbarMobileHeading,
   ToolbarMobileTop,
 } from "@/components/common/Toolbar";
-import { ListSkeleton } from "@/components/common/ListSkeleton";
+import { Repeat } from "@/components/common/Repeat";
 import { ProjectItem } from "@/components/projects/ProjectItem";
 
 export default function Loading() {
@@ -29,7 +29,7 @@ export default function Loading() {
         <Skeleton className="h-8 w-[5rem] rounded-lg" />
         <Skeleton className="ml-auto h-8 w-[5rem] rounded-lg" />
       </ToolbarMobileBottom>
-      <ListSkeleton items={10} renderItem={() => <ProjectItem />} />
+      <Repeat items={10} renderItem={() => <ProjectItem />} />
     </PageGrid>
   );
 }

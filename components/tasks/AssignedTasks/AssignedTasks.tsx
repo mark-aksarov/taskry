@@ -5,7 +5,7 @@ import {
   EmptySectionHeading,
   EmptySectionLink,
 } from "@/components/common/EmptySection";
-import { ListSkeleton } from "@/components/common/ListSkeleton";
+import { Repeat } from "@/components/common/Repeat";
 import { PageSection } from "@/components/common/PageSection";
 import { PageSectionHeading } from "@/components/common/PageSectionHeading";
 import { getTasks } from "@/lib/queries/task";
@@ -41,7 +41,7 @@ export async function AssignedTasks() {
     <PageSection>
       <PageSectionHeading>Assigned Tasks</PageSectionHeading>
       <Suspense
-        fallback={<ListSkeleton items={10} renderItem={() => <TaskItem />} />}
+        fallback={<Repeat items={10} renderItem={() => <TaskItem />} />}
       >
         <TaskList tasks={tasks} />
       </Suspense>
