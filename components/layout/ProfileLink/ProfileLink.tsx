@@ -9,7 +9,7 @@ const styles = tv({
 
 export const ProfileLink = () => {
   return (
-    <RACLink href="/profile" className={styles()}>
+    <RACLink href="/profile" className={styles}>
       <div className="h-8 w-8 overflow-hidden rounded-full bg-gray-300">
         <Image src="/man.jpg" alt="user avatar" width={32} height={32} />
       </div>
