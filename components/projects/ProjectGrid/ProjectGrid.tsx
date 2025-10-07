@@ -1,8 +1,13 @@
-import { getProjects } from "@/lib/queries/project";
-import { ProjectGridItem } from "../ProjectGridItem";
+"use client";
 
-export async function ProjectGrid() {
-  const projects = await getProjects();
+import { useViewMode } from "@/components/common/ViewMode";
+import { ProjectGridItem } from "../ProjectGridItem";
+import { ProjectPreview } from "@/lib/queries/types";
+
+export function ProjectGrid({ projects }: { projects: ProjectPreview[] }) {
+  const { viewMode } = useViewMode();
+
+  if (viewMode !== "grid") return null;
 
   return (
     <div className="@container">

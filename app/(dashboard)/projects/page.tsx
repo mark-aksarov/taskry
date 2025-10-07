@@ -10,7 +10,7 @@ import {
   EmptySectionLink,
 } from "@/components/common/EmptySection";
 import { PageGrid } from "@/components/common/PageGrid";
-import { ViewToggle } from "@/components/common/ViewToggle";
+import { ViewModeToggleButtonGroup } from "@/components/common/ViewMode";
 import {
   ToolbarDesktop,
   ToolbarMobileBottom,
@@ -31,6 +31,8 @@ import { getProjectCategories, getProjects } from "@/lib/queries/project";
 import { getCustomers } from "@/lib/queries/customers";
 import { getUsers } from "@/lib/queries/user";
 import { UserCheckboxGroup } from "@/components/users/UserCheckboxGroup";
+import { ViewModeProvider } from "@/components/common/ViewMode";
+import { ProjectGrid } from "@/components/projects/ProjectGrid";
 
 export default async function ProjectsPage() {
   const categoriesPromise = getProjectCategories(1);
@@ -66,43 +68,45 @@ export default async function ProjectsPage() {
 
   return (
     <PageGrid>
-      <ToolbarDesktop>
-        <FiltersSideSheetTrigger
-          filtersForm={
-            <Suspense fallback={<ProjectFiltersFormSkeleton />}>
-              {projectFiltersForm}
-            </Suspense>
-          }
-        />
-        <ProjectActionsMenuTrigger />
-        <ViewToggle className="ml-auto" />
-        <Button
-          label="New Project"
-          iconLeft={<Plus size={16} strokeWidth={1.5} absoluteStrokeWidth />}
-        />
-      </ToolbarDesktop>
+      <ViewModeProvider>
+        <ToolbarDesktop>
+          <FiltersSideSheetTrigger
+            filtersForm={
+              <Suspense fallback={<ProjectFiltersFormSkeleton />}>
+                {projectFiltersForm}
+              </Suspense>
+            }
+          />
+          <ProjectActionsMenuTrigger />
+          <ViewModeToggleButtonGroup className="ml-auto" />
+          <Button
+            label="New Project"
+            iconLeft={<Plus size={16} strokeWidth={1.5} absoluteStrokeWidth />}
+          />
+        </ToolbarDesktop>
 
-      <ToolbarMobileTop>
-        <ToolbarMobileHeading>Projects</ToolbarMobileHeading>
-        <FiltersBottomSheetTrigger
-          filtersForm={
-            <Suspense fallback={<ProjectFiltersFormSkeleton />}>
-              {projectFiltersForm}
-            </Suspense>
-          }
-        />
-        <ProjectActionsMenuTrigger />
-      </ToolbarMobileTop>
+        <ToolbarMobileTop>
+          <ToolbarMobileHeading>Projects</ToolbarMobileHeading>
+          <FiltersBottomSheetTrigger
+            filtersForm={
+              <Suspense fallback={<ProjectFiltersFormSkeleton />}>
+                {projectFiltersForm}
+              </Suspense>
+            }
+          />
+          <ProjectActionsMenuTrigger />
+        </ToolbarMobileTop>
 
-      <ToolbarMobileBottom>
-        <ViewToggle />
-        <Button
-          label="New Project"
-          iconLeft={<Plus size={16} strokeWidth={1.5} absoluteStrokeWidth />}
-        />
-      </ToolbarMobileBottom>
-
-      <ProjectList projects={projects} />
+        <ToolbarMobileBottom>
+          <ViewModeToggleButtonGroup />
+          <Button
+            label="New Project"
+            iconLeft={<Plus size={16} strokeWidth={1.5} absoluteStrokeWidth />}
+          />
+        </ToolbarMobileBottom>
+        <ProjectList projects={projects} />
+        <ProjectGrid projects={projects} />
+      </ViewModeProvider>
     </PageGrid>
   );
 }
