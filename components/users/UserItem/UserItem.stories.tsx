@@ -1,31 +1,13 @@
-import { Meta, StoryObj } from "@storybook/react";
-import { UserPreview } from "@/lib/queries/types";
+import { usersMock } from "../usersMock";
 import { UserItem } from "./UserItem";
-
-const userMock: UserPreview = {
-  id: "user1",
-  name: "John Doe",
-  email: "L7L2u@example.com",
-  imageUrl: "/man.jpg",
-  emailVerified: true,
-  phone: "+380999999999",
-  createdAt: new Date(),
-  updatedAt: new Date(),
-  role: "Admin",
-  publicLink: "https://example.com",
-  positionId: 1,
-  position: {
-    name: "Admin",
-    workspaceId: 1,
-  },
-};
+import { Meta, StoryObj } from "@storybook/react";
 
 const meta: Meta<typeof UserItem> = {
   title: "Components/users/UserItem",
   component: UserItem,
   tags: ["autodocs"],
   args: {
-    user: userMock,
+    user: usersMock[0],
   },
 } satisfies Meta<typeof UserItem>;
 

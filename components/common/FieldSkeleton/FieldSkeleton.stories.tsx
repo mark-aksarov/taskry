@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { FieldSkeleton } from "./FieldSkeleton";
+import { FieldGroupSkeleton, FieldSkeleton } from "./FieldSkeleton";
 
 const meta = {
   title: "Components/common/FieldSkeleton",
@@ -11,5 +11,9 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
-  args: {},
+  render: () => (
+    <FieldSkeleton>
+      <FieldGroupSkeleton />
+    </FieldSkeleton>
+  ),
 };
