@@ -1,1 +1,1 @@
-export { FieldSkeleton } from "./FieldSkeleton";
+export { FieldSkeleton, FieldGroupSkeleton } from "./FieldSkeleton";
