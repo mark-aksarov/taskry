@@ -16,6 +16,7 @@ export const getTasks = cache(async (): Promise<TaskPreview[]> => {
     include: {
       creator: {
         select: {
+          id: true,
           name: true,
           imageUrl: true,
         },
@@ -35,6 +36,7 @@ export const getTasks = cache(async (): Promise<TaskPreview[]> => {
       },
       category: {
         select: {
+          id: true,
           name: true,
         },
       },

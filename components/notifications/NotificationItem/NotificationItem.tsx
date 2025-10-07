@@ -1,9 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { useMemo } from "react";
 import { Item } from "react-stately";
+import { Link } from "@/components/ui";
 import { twMerge } from "tailwind-merge";
 
 import { Ellipsis, ListCheck, Trash } from "lucide-react";
@@ -146,7 +146,9 @@ export const NotificationItem = ({
       case "TASK_UPDATED":
       case "TASK_COMMENTED":
         return (
-          <Link href={`/tasks/${target?.task?.id}`}>{target?.task?.title}</Link>
+          <Link href={`/tasks/${target?.task?.id}`} className={primaryText}>
+            {target?.task?.title}
+          </Link>
         );
       case "TASK_DELETED":
         return targetName;
@@ -155,7 +157,10 @@ export const NotificationItem = ({
       case "PROJECT_UPDATED":
       case "PROJECT_COMMENTED":
         return (
-          <Link href={`/projects/${target?.project?.id}`}>
+          <Link
+            href={`/projects/${target?.project?.id}`}
+            className={primaryText}
+          >
             {target?.project?.title}
           </Link>
         );
@@ -166,7 +171,9 @@ export const NotificationItem = ({
       case "USER_ADDED":
       case "USER_UPDATED":
         return (
-          <Link href={`/users/${target?.user?.id}`}>{target?.user?.name}</Link>
+          <Link href={`/users/${target?.user?.id}`} className={primaryText}>
+            {target?.user?.name}
+          </Link>
         );
 
       case "USER_DELETED":
@@ -175,7 +182,10 @@ export const NotificationItem = ({
       case "CUSTOMER_ADDED":
       case "CUSTOMER_UPDATED":
         return (
-          <Link href={`/customers/${target?.customer?.id}`}>
+          <Link
+            href={`/customers/${target?.customer?.id}`}
+            className={primaryText}
+          >
             {target?.customer?.fullName}
           </Link>
         );
@@ -184,7 +194,14 @@ export const NotificationItem = ({
         return targetName;
 
       case "MESSAGE_SENDED":
-        return <Link href={`/messages/${target?.message?.id}`}>message</Link>;
+        return (
+          <Link
+            href={`/messages/${target?.message?.id}`}
+            className={primaryText}
+          >
+            message
+          </Link>
+        );
 
       default:
         throw new Error("Invalid notification type");
@@ -215,18 +232,26 @@ export const NotificationItem = ({
           <Skeleton className="h-10 w-10" />
         )}
       </div>
-      <div className="flex flex-col gap-1 overflow-hidden">
+      <div className="flex flex-col gap-1">
         {notification ? (
           <>
-            <span className="text-sm">
+            <div className="text-sm">
               <h4 className={`${primaryText} inline font-bold`}>
-                <>{actor ? actor.name : "Unknown User"}</>
+                <>
+                  {actor ? (
+                    <Link href={`/users/${actor.id}`} className={primaryText}>
+                      {actor.name}
+                    </Link>
+                  ) : (
+                    "Unknown User"
+                  )}
+                </>
               </h4>
               <span className={`${secondaryText} font-normal`}>
                 &nbsp;{getActionText()}&nbsp;
               </span>
               <span className={`${primaryText} font-bold`}>{getTarget()}</span>
-            </span>
+            </div>
             <span className={`${secondaryText} text-xs font-medium`}>
               {formattedUpper}
             </span>

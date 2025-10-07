@@ -19,13 +19,13 @@ export const tasksMock: TaskPreview[] = [
     updatedAt: new Date("2025-09-15"),
     project: { title: "Website Redesign", id: 1 },
 
-    creator: { imageUrl: "/man.jpg", name: "John Doe" },
+    creator: { id: "user1", imageUrl: "/man.jpg", name: "John Doe" },
     status: {
       id: PENDING_TASK_STATUS_ID,
       nameEn: "Pending",
       nameRu: "Ожидает",
     },
-    category: { name: "Design" },
+    category: { id: 1, name: "Design" },
     subtasks: [
       { isDone: false },
       { isDone: true },
@@ -41,7 +41,7 @@ export const tasksMock: TaskPreview[] = [
     description: "Add email and password login with validation",
     deadline: new Date("2025-10-05"),
     projectId: 2,
-    creatorId: "user2",
+    creatorId: null,
     categoryId: 2,
     statusId: ACTIVE_TASK_STATUS_ID,
     createdAt: new Date("2025-09-02"),
@@ -54,7 +54,7 @@ export const tasksMock: TaskPreview[] = [
       nameEn: "Active",
       nameRu: "Активно",
     },
-    category: { name: "Development" },
+    category: { id: 2, name: "Development" },
     subtasks: [
       { isDone: false },
       { isDone: true },
@@ -81,13 +81,13 @@ export const tasksMock: TaskPreview[] = [
     updatedAt: new Date("2025-09-17"),
     project: { title: "Core Database Upgrade", id: 3 },
 
-    creator: { imageUrl: null, name: "Jane Doe" },
+    creator: { id: "user3", imageUrl: null, name: "Jane Doe" },
     status: {
       id: DONE_TASK_STATUS_ID,
       nameEn: "Done",
       nameRu: "Выполнено",
     },
-    category: { name: "Backend" },
+    category: { id: 3, name: "Backend" },
     subtasks: [
       { isDone: false },
       { isDone: true },
@@ -112,13 +112,13 @@ export const tasksMock: TaskPreview[] = [
     updatedAt: new Date("2025-09-17"),
     project: { title: "Quality Assurance Suite", id: 4 },
 
-    creator: { imageUrl: "/man.jpg", name: "John Doe" },
+    creator: { id: "user4", imageUrl: "/man.jpg", name: "John Doe" },
     status: {
       id: PENDING_TASK_STATUS_ID,
       nameEn: "Pending",
       nameRu: "Ожидает",
     },
-    category: { name: "Testing" },
+    category: { id: 4, name: "Testing" },
     subtasks: [
       { isDone: false },
       { isDone: true },
@@ -147,13 +147,13 @@ export const tasksMock: TaskPreview[] = [
     updatedAt: new Date("2025-09-18"),
     project: { title: "CI/CD Automation", id: 5 },
 
-    creator: { imageUrl: "/man.jpg", name: "John Doe" },
+    creator: { id: "user5", imageUrl: "/man.jpg", name: "John Doe" },
     status: {
       id: ACTIVE_TASK_STATUS_ID,
       nameEn: "Active",
       nameRu: "Активно",
     },
-    category: { name: "DevOps" },
+    category: { id: 5, name: "DevOps" },
     subtasks: [
       { isDone: false },
       { isDone: true },
@@ -191,13 +191,13 @@ export const tasksMock: TaskPreview[] = [
     updatedAt: new Date("2025-09-18"),
     project: { title: "Infrastructure Setup", id: 6 },
 
-    creator: { imageUrl: "/man.jpg", name: "John Doe" },
+    creator: { id: "user6", imageUrl: "/man.jpg", name: "John Doe" },
     status: {
       id: DONE_TASK_STATUS_ID,
       nameEn: "Done",
       nameRu: "Выполнено",
     },
-    category: { name: "Infrastructure" },
+    category: { id: 6, name: "Infrastructure" },
     subtasks: [
       { isDone: false },
       { isDone: true },
@@ -225,13 +225,13 @@ export const tasksMock: TaskPreview[] = [
     updatedAt: new Date("2025-09-19"),
     project: { title: "User Experience Improvements", id: 7 },
 
-    creator: { imageUrl: "/man.jpg", name: "John Doe" },
+    creator: { id: "user7", imageUrl: "/man.jpg", name: "John Doe" },
     status: {
       id: DONE_TASK_STATUS_ID,
       nameEn: "Done",
       nameRu: "Выполнено",
     },
-    category: { name: "UX" },
+    category: { id: 7, name: "UX" },
     subtasks: [
       { isDone: true },
       { isDone: true },
@@ -255,13 +255,13 @@ export const tasksMock: TaskPreview[] = [
     updatedAt: new Date("2025-09-19"),
     project: { title: "E-commerce Platform", id: 8 },
 
-    creator: { imageUrl: "/man.jpg", name: "John Doe" },
+    creator: { id: "user8", imageUrl: "/man.jpg", name: "John Doe" },
     status: {
       id: ACTIVE_TASK_STATUS_ID,
       nameEn: "Active",
       nameRu: "Активно",
     },
-    category: { name: "Bugfix" },
+    category: { id: 8, name: "Bugfix" },
     subtasks: [
       { isDone: true },
       { isDone: true },
@@ -285,13 +285,13 @@ export const tasksMock: TaskPreview[] = [
     updatedAt: new Date("2025-09-19"),
     project: { title: "Performance Optimization", id: 9 },
 
-    creator: { imageUrl: null, name: "Jane Doe" },
+    creator: { id: "user9", imageUrl: null, name: "Jane Doe" },
     status: {
       id: PENDING_TASK_STATUS_ID,
       nameEn: "Pending",
       nameRu: "Ожидает",
     },
-    category: { name: "Performance" },
+    category: { id: 9, name: "Performance" },
     subtasks: [
       { isDone: true },
       { isDone: true },
@@ -308,7 +308,7 @@ export const tasksMock: TaskPreview[] = [
     description: "Simplify authentication logic",
     deadline: new Date("2025-10-28"),
     projectId: 10,
-    creatorId: "user10",
+    creatorId: null,
     categoryId: 3,
     statusId: DONE_TASK_STATUS_ID,
     createdAt: new Date("2025-09-10"),
@@ -321,7 +321,7 @@ export const tasksMock: TaskPreview[] = [
       nameEn: "Done",
       nameRu: "Выполнено",
     },
-    category: { name: "Backend" },
+    category: { id: 3, name: "Backend" },
     subtasks: [
       { isDone: false },
       { isDone: true },

@@ -4,7 +4,7 @@ import { Ellipsis, Pencil, Trash } from "lucide-react";
 import Image from "next/image";
 import { Item } from "react-stately";
 
-import { Button, Checkbox } from "@/components/ui";
+import { Button, Checkbox, Link } from "@/components/ui";
 
 import {
   ItemCard,
@@ -12,6 +12,8 @@ import {
   itemCardActionMenuItemStyles,
   ItemCardActionMenuSkeleton,
   ItemCardField,
+  ItemCardFieldBox,
+  ItemCardFieldLink,
   ItemCardFieldSkeleton,
   ItemCardFieldText,
   ItemCardFieldTitle,
@@ -35,11 +37,15 @@ export function UserItem({
       {user && showCheckbox && <Checkbox aria-label="user checkbox" />}
 
       {!user ? (
-        <ItemCardImageFieldSkeleton className="h-9 w-9" />
+        <ItemCardImageFieldSkeleton />
+      ) : user.imageUrl ? (
+        <Link href={`/users/${user.id}`}>
+          <ItemCardImageField>
+            <Image fill src={user.imageUrl} alt={user.name} />
+          </ItemCardImageField>
+        </Link>
       ) : (
-        <ItemCardImageField className="h-9 w-9">
-          {user.imageUrl && <Image fill src={user.imageUrl} alt={user.name} />}
-        </ItemCardImageField>
+        <ItemCardImageField />
       )}
 
       {/* --- User Details --- */}
@@ -47,8 +53,21 @@ export function UserItem({
         <ItemCardFieldSkeleton />
       ) : (
         <ItemCardField>
-          <ItemCardFieldTitle>{user.name}</ItemCardFieldTitle>
-          <ItemCardFieldText>{user.email}</ItemCardFieldText>
+          <ItemCardFieldBox>
+            <ItemCardFieldTitle>
+              <ItemCardFieldLink href={`/users/${user.id}`}>
+                {user.name}
+              </ItemCardFieldLink>
+            </ItemCardFieldTitle>
+          </ItemCardFieldBox>
+
+          <ItemCardFieldBox>
+            <ItemCardFieldText>
+              <ItemCardFieldLink href={`mailto:${user.email}`}>
+                {user.email}
+              </ItemCardFieldLink>
+            </ItemCardFieldText>
+          </ItemCardFieldBox>
         </ItemCardField>
       )}
 
@@ -57,8 +76,13 @@ export function UserItem({
         <ItemCardFieldSkeleton className="@max-lg:hidden" />
       ) : (
         <ItemCardField className="@max-lg:hidden">
-          <ItemCardFieldTitle>Phone number</ItemCardFieldTitle>
-          <ItemCardFieldText>{user.phone}</ItemCardFieldText>
+          <ItemCardFieldBox>
+            <ItemCardFieldTitle>Phone number</ItemCardFieldTitle>
+          </ItemCardFieldBox>
+
+          <ItemCardFieldBox>
+            <ItemCardFieldText>{user.phone}</ItemCardFieldText>
+          </ItemCardFieldBox>
         </ItemCardField>
       )}
 
@@ -67,8 +91,21 @@ export function UserItem({
         <ItemCardFieldSkeleton className="@max-2xl:hidden" />
       ) : (
         <ItemCardField className="@max-2xl:hidden">
-          <ItemCardFieldTitle>Public link</ItemCardFieldTitle>
-          <ItemCardFieldText>{user.publicLink}</ItemCardFieldText>
+          <ItemCardFieldBox>
+            <ItemCardFieldTitle>Public link</ItemCardFieldTitle>
+          </ItemCardFieldBox>
+
+          <ItemCardFieldBox>
+            <ItemCardFieldText>
+              {user.publicLink ? (
+                <ItemCardFieldLink href={user.publicLink}>
+                  {user.publicLink}
+                </ItemCardFieldLink>
+              ) : (
+                "Link is not provided"
+              )}
+            </ItemCardFieldText>
+          </ItemCardFieldBox>
         </ItemCardField>
       )}
 

@@ -6,7 +6,8 @@ interface ItemCardFieldProps {
   children: React.ReactNode;
 }
 
-const fieldStyles = "flex-1 overflow-hidden flex flex-col gap-1";
+const fieldStyles =
+  "flex-1 items-start overflow-hidden flex flex-col gap-1 -m-1 p-1";
 
 export function ItemCardField({ className, children }: ItemCardFieldProps) {
   return <div className={twMerge(fieldStyles, className)}>{children}</div>;

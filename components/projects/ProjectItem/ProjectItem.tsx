@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo } from "react";
+import { Link } from "@/components/ui";
 import { ProjectPreview } from "@/lib/queries/types";
 import { Check, CircleEllipsis, Clock, Ellipsis, Trash } from "lucide-react";
 import {
@@ -19,6 +20,8 @@ import {
   ItemCardBadge,
   ItemCardBadgeSkeleton,
   ItemCardField,
+  ItemCardFieldBox,
+  ItemCardFieldLink,
   ItemCardFieldSkeleton,
   ItemCardFieldText,
   ItemCardFieldTitle,
@@ -64,8 +67,17 @@ export const ProjectItem = ({
         <ItemCardFieldSkeleton />
       ) : (
         <ItemCardField>
-          <ItemCardFieldTitle>{project.title}</ItemCardFieldTitle>
-          <ItemCardFieldText>{`Deadline on ${formattedDeadline}`}</ItemCardFieldText>
+          <ItemCardFieldBox>
+            <ItemCardFieldTitle>
+              <ItemCardFieldLink href={`/projects/${project.id}`}>
+                {project.title}
+              </ItemCardFieldLink>
+            </ItemCardFieldTitle>
+          </ItemCardFieldBox>
+
+          <ItemCardFieldBox>
+            <ItemCardFieldText>{`Deadline on ${formattedDeadline}`}</ItemCardFieldText>
+          </ItemCardFieldBox>
         </ItemCardField>
       )}
 
@@ -74,8 +86,17 @@ export const ProjectItem = ({
         <ItemCardFieldSkeleton className="@max-3xl:hidden" />
       ) : (
         <ItemCardField className="@max-3xl:hidden">
-          <ItemCardFieldTitle>Category</ItemCardFieldTitle>
-          <ItemCardFieldText>{project.category.name}</ItemCardFieldText>
+          <ItemCardFieldBox>
+            <ItemCardFieldTitle>Category</ItemCardFieldTitle>
+          </ItemCardFieldBox>
+
+          <ItemCardFieldBox>
+            <ItemCardFieldText>
+              <ItemCardFieldLink href={`/categories=${project.category.id}`}>
+                {project.category.name}
+              </ItemCardFieldLink>
+            </ItemCardFieldText>
+          </ItemCardFieldBox>
         </ItemCardField>
       )}
 
@@ -84,10 +105,23 @@ export const ProjectItem = ({
         <ItemCardFieldSkeleton className="@max-5xl:hidden" />
       ) : (
         <ItemCardField className="@max-5xl:hidden">
-          <ItemCardFieldTitle>Customer</ItemCardFieldTitle>
-          <ItemCardFieldText>
-            {project.customer ? project.customer.fullName : "Unknown customer"}
-          </ItemCardFieldText>
+          <ItemCardFieldBox>
+            <ItemCardFieldTitle>Customer</ItemCardFieldTitle>
+          </ItemCardFieldBox>
+
+          {project.customer ? (
+            <ItemCardFieldBox>
+              <ItemCardFieldText>
+                <ItemCardFieldLink href={`/customers=${project.customer.id}`}>
+                  {project.customer.fullName}
+                </ItemCardFieldLink>
+              </ItemCardFieldText>
+            </ItemCardFieldBox>
+          ) : (
+            <ItemCardFieldBox>
+              <ItemCardFieldText>Unknown customer</ItemCardFieldText>
+            </ItemCardFieldBox>
+          )}
         </ItemCardField>
       )}
 
@@ -96,12 +130,17 @@ export const ProjectItem = ({
         <ItemCardFieldSkeleton className="@max-5xl:hidden" />
       ) : (
         <ItemCardField className="@max-5xl:hidden">
-          <ItemCardFieldTitle>Customer company</ItemCardFieldTitle>
-          <ItemCardFieldText>
-            {project.customer
-              ? project.customer.company.name
-              : "Unknown company"}
-          </ItemCardFieldText>
+          <ItemCardFieldBox>
+            <ItemCardFieldTitle>Customer company</ItemCardFieldTitle>
+          </ItemCardFieldBox>
+
+          <ItemCardFieldBox>
+            <ItemCardFieldText>
+              {project.customer
+                ? project.customer.company.name
+                : "Unknown company"}
+            </ItemCardFieldText>
+          </ItemCardFieldBox>
         </ItemCardField>
       )}
 
@@ -139,16 +178,18 @@ export const ProjectItem = ({
         <div className="flex items-center gap-2">
           {!project ? (
             <ItemCardImageFieldSkeleton />
-          ) : (
-            <ItemCardImageField>
-              {project.creator?.imageUrl && (
+          ) : project.creator?.imageUrl ? (
+            <Link href={`/users/${project.creator.id}`}>
+              <ItemCardImageField>
                 <Image
                   fill
                   src={project.creator.imageUrl}
                   alt={project.creator.name}
                 />
-              )}
-            </ItemCardImageField>
+              </ItemCardImageField>
+            </Link>
+          ) : (
+            <ItemCardImageField />
           )}
 
           {!project ? (

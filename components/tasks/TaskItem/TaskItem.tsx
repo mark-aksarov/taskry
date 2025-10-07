@@ -22,6 +22,8 @@ import {
   ItemCardProgressSkeleton,
   ItemCardBadge,
   ItemCardBadgeSkeleton,
+  ItemCardFieldLink,
+  ItemCardFieldBox,
 } from "@/components/common/ItemCard";
 
 import {
@@ -30,6 +32,7 @@ import {
 } from "@/lib/queries/constants";
 import { TaskPreview } from "@/lib/queries/types";
 import { ResponsiveMenuTrigger } from "@/components/common/ResponsiveMenuTrigger";
+import { Link } from "@/components/ui";
 
 export const TaskItem = ({
   task,
@@ -64,8 +67,17 @@ export const TaskItem = ({
         <ItemCardFieldSkeleton />
       ) : (
         <ItemCardField>
-          <ItemCardFieldTitle>{task.title}</ItemCardFieldTitle>
-          <ItemCardFieldText>{`Deadline on ${formattedDeadline}`}</ItemCardFieldText>
+          <ItemCardFieldBox>
+            <ItemCardFieldTitle>
+              <ItemCardFieldLink href={`/tasks/${task.id}`}>
+                {task.title}
+              </ItemCardFieldLink>
+            </ItemCardFieldTitle>
+          </ItemCardFieldBox>
+
+          <ItemCardFieldBox>
+            <ItemCardFieldText>{`Deadline on ${formattedDeadline}`}</ItemCardFieldText>
+          </ItemCardFieldBox>
         </ItemCardField>
       )}
 
@@ -74,8 +86,17 @@ export const TaskItem = ({
         <ItemCardFieldSkeleton className="@max-3xl:hidden" />
       ) : (
         <ItemCardField className="@max-3xl:hidden">
-          <ItemCardFieldTitle>Category</ItemCardFieldTitle>
-          <ItemCardFieldText>{task.category.name}</ItemCardFieldText>
+          <ItemCardFieldBox>
+            <ItemCardFieldTitle>Category</ItemCardFieldTitle>
+          </ItemCardFieldBox>
+
+          <ItemCardFieldBox>
+            <ItemCardFieldText>
+              <ItemCardFieldLink href={`/categories/${task.category.id}`}>
+                {task.category.name}
+              </ItemCardFieldLink>
+            </ItemCardFieldText>
+          </ItemCardFieldBox>
         </ItemCardField>
       )}
 
@@ -84,8 +105,17 @@ export const TaskItem = ({
         <ItemCardFieldSkeleton className="@max-5xl:hidden" />
       ) : (
         <ItemCardField className="@max-5xl:hidden">
-          <ItemCardFieldTitle>Project</ItemCardFieldTitle>
-          <ItemCardFieldText>{task.project.title}</ItemCardFieldText>
+          <ItemCardFieldBox>
+            <ItemCardFieldTitle>Project</ItemCardFieldTitle>
+          </ItemCardFieldBox>
+
+          <ItemCardFieldBox>
+            <ItemCardFieldText>
+              <ItemCardFieldLink href={`/projects/${task.project.id}`}>
+                {task.project.title}
+              </ItemCardFieldLink>
+            </ItemCardFieldText>
+          </ItemCardFieldBox>
         </ItemCardField>
       )}
 
@@ -123,16 +153,18 @@ export const TaskItem = ({
         <div className="flex items-center gap-2">
           {!task ? (
             <ItemCardImageFieldSkeleton />
-          ) : (
-            <ItemCardImageField>
-              {task.creator?.imageUrl && (
+          ) : task.creator?.imageUrl ? (
+            <Link href={`/users/${task.creator.id}`}>
+              <ItemCardImageField>
                 <Image
                   fill
                   src={task.creator.imageUrl}
                   alt={task.creator.name}
                 />
-              )}
-            </ItemCardImageField>
+              </ItemCardImageField>
+            </Link>
+          ) : (
+            <ItemCardImageField />
           )}
 
           {!task ? (

@@ -10,6 +10,7 @@ export const getProjects = cache(async (): Promise<ProjectPreview[]> => {
     include: {
       creator: {
         select: {
+          id: true,
           name: true,
           imageUrl: true,
         },
@@ -23,11 +24,13 @@ export const getProjects = cache(async (): Promise<ProjectPreview[]> => {
       },
       category: {
         select: {
+          id: true,
           name: true,
         },
       },
       customer: {
         select: {
+          id: true,
           fullName: true,
           company: {
             select: {

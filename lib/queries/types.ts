@@ -4,6 +4,7 @@ export type TaskPreview = Prisma.TaskGetPayload<{
   include: {
     creator: {
       select: {
+        id: true;
         name: true;
         imageUrl: true;
       };
@@ -23,6 +24,7 @@ export type TaskPreview = Prisma.TaskGetPayload<{
     };
     category: {
       select: {
+        id: true;
         name: true;
       };
     };
@@ -88,6 +90,7 @@ export type ProjectPreview = Prisma.ProjectGetPayload<{
   include: {
     creator: {
       select: {
+        id: true;
         name: true;
         imageUrl: true;
       };
@@ -101,11 +104,13 @@ export type ProjectPreview = Prisma.ProjectGetPayload<{
     };
     category: {
       select: {
+        id: true;
         name: true;
       };
     };
     customer: {
       select: {
+        id: true;
         fullName: true;
         company: {
           select: {
