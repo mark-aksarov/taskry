@@ -1,11 +1,6 @@
 import { use } from "react";
 import { ProjectCategory } from "@/generated/prisma";
-import {
-  fieldStyles,
-  Label,
-  RACCheckboxGroup,
-  Checkbox,
-} from "@/components/ui";
+import { CheckboxGroup, Checkbox } from "@/components/ui";
 
 export function ProjectCategoryCheckboxGroup({
   categoriesPromise,
@@ -19,8 +14,7 @@ export function ProjectCategoryCheckboxGroup({
   }
 
   return (
-    <RACCheckboxGroup className={fieldStyles()}>
-      <Label>Category</Label>
+    <CheckboxGroup label="Category">
       {categories.map((item) => (
         <Checkbox
           key={item.id}
@@ -30,6 +24,6 @@ export function ProjectCategoryCheckboxGroup({
           {item.name}
         </Checkbox>
       ))}
-    </RACCheckboxGroup>
+    </CheckboxGroup>
   );
 }

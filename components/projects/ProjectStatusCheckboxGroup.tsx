@@ -1,14 +1,8 @@
-import {
-  fieldStyles,
-  Label,
-  Checkbox,
-  RACCheckboxGroup,
-} from "@/components/ui";
+import { Checkbox, CheckboxGroup } from "@/components/ui";
 
 export function ProjectStatusCheckboxGroup() {
   return (
-    <RACCheckboxGroup className={fieldStyles()}>
-      <Label>Status</Label>
+    <CheckboxGroup label="Status">
       <Checkbox value="pending" className="font-normal">
         Pending
       </Checkbox>
@@ -18,6 +12,6 @@ export function ProjectStatusCheckboxGroup() {
       <Checkbox value="completed" className="font-normal">
         Completed
       </Checkbox>
-    </RACCheckboxGroup>
+    </CheckboxGroup>
   );
 }

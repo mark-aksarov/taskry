@@ -3,7 +3,6 @@
 export {
   Link as RACLink,
   Button as RACButton,
-  CheckboxGroup as RACCheckboxGroup,
   DialogTrigger as RACDialogTrigger,
   Form as RACForm,
   Heading as RACHeading,
@@ -18,6 +17,7 @@ export {
   iconButtonStyles,
 } from "./Button";
 export { Checkbox } from "./Checkbox";
+export { CheckboxGroup } from "./CheckboxGroup";
 export { DatePicker } from "./DatePicker";
 export {
   Dialog,

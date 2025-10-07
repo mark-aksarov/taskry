@@ -1,0 +1,32 @@
+import { fieldStyles, Label } from "../Field";
+import {
+  composeRenderProps,
+  CheckboxGroup as RACCheckboxGroup,
+} from "react-aria-components";
+import type { CheckboxGroupProps as RACCheckboxGroupProps } from "react-aria-components";
+
+type CheckboxGroupProps = RACCheckboxGroupProps &
+  React.RefAttributes<HTMLDivElement> & {
+    label: string;
+  };
+
+export function CheckboxGroup({
+  label,
+  className,
+  children,
+  ...props
+}: CheckboxGroupProps) {
+  return (
+    <RACCheckboxGroup
+      {...props}
+      className={composeRenderProps(className, (className, renderProps) =>
+        fieldStyles({ ...renderProps, className }),
+      )}
+    >
+      <>
+        <Label>{label}</Label>
+        {children}
+      </>
+    </RACCheckboxGroup>
+  );
+}

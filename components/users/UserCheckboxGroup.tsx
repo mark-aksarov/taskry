@@ -1,13 +1,8 @@
 "use client";
 
-import {
-  Checkbox,
-  fieldStyles,
-  Label,
-  RACCheckboxGroup,
-} from "@/components/ui";
 import { use } from "react";
 import { User } from "@/generated/prisma";
+import { Checkbox, CheckboxGroup } from "@/components/ui";
 
 export function UserCheckboxGroup({
   usersPromise,
@@ -22,8 +17,7 @@ export function UserCheckboxGroup({
   }
 
   return (
-    <RACCheckboxGroup className={fieldStyles()}>
-      <Label>Creator</Label>
+    <CheckboxGroup label="Creator">
       {users.map((user) => (
         <Checkbox
           key={user.id}
@@ -33,6 +27,6 @@ export function UserCheckboxGroup({
           {user.name}
         </Checkbox>
       ))}
-    </RACCheckboxGroup>
+    </CheckboxGroup>
   );
 }
