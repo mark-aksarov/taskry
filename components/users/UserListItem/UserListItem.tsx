@@ -81,7 +81,11 @@ export function UserListItem({
           </ListItemEllipsisWrapper>
 
           <ListItemEllipsisWrapper>
-            <ListItemText>{user.phone}</ListItemText>
+            <ListItemText>
+              <ListItemLink href={`tel:${user.phone}`}>
+                {user.phone}
+              </ListItemLink>
+            </ListItemText>
           </ListItemEllipsisWrapper>
         </ListItemInfo>
       )}
