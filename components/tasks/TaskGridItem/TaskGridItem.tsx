@@ -1,13 +1,3 @@
-"use client";
-
-import { Checkbox, Button, Link } from "@/components/ui";
-import Image from "next/image";
-import { useMemo } from "react";
-import { Item } from "react-stately";
-import { ProjectPreview } from "@/lib/queries/types";
-import { DONE_TASK_STATUS_ID } from "@/lib/queries/constants";
-import { Check, CircleEllipsis, Clock, Ellipsis, Trash } from "lucide-react";
-import { ResponsiveMenuTrigger } from "@/components/common/ResponsiveMenuTrigger";
 import {
   GridItem,
   gridItemActionMenuItemStyles,
@@ -26,35 +16,42 @@ import {
   GridItemLink,
 } from "@/components/common/Grid";
 
-export function ProjectGridItem({ project }: { project: ProjectPreview }) {
+import { Item } from "react-stately";
+import { Check, CircleEllipsis, Clock, Ellipsis, Trash } from "lucide-react";
+import { ResponsiveMenuTrigger } from "@/components/common/ResponsiveMenuTrigger";
+
+import { TaskPreview } from "@/lib/queries/types";
+import { useMemo } from "react";
+import { Button, Link, Checkbox } from "@/components/ui";
+import Image from "next/image";
+
+export function TaskGridItem({ task }: { task?: TaskPreview }) {
   const locale = "en-GB";
 
   const formattedDeadline = useMemo(() => {
-    if (!project?.deadline) return "";
-    return new Date(project.deadline).toLocaleDateString(locale, {
+    if (!task?.deadline) return "";
+    return new Date(task.deadline).toLocaleDateString(locale, {
       day: "2-digit",
       month: "short",
       year: "numeric",
     });
-  }, [project?.deadline, locale]);
+  }, [task?.deadline, locale]);
 
   const progressValue = useMemo(() => {
-    if (!project || project.tasks.length === 0) return 0;
-    const tasksDone = project.tasks.filter(
-      (task) => task.statusId === DONE_TASK_STATUS_ID,
-    ).length;
-    return (tasksDone / project.tasks.length) * 100;
-  }, [project]);
+    if (!task || task.subtasks.length === 0) return 0;
+    const subtasksDone = task.subtasks.filter((s) => s.isDone).length;
+    return (subtasksDone / task.subtasks.length) * 100;
+  }, [task]);
 
   return (
     <GridItem>
       {/* --- Checkbox & Menu --- */}
       <GridItemTop>
-        {!project ? (
+        {!task ? (
           <GridItemActionMenuSkeleton />
         ) : (
           <>
-            <Checkbox aria-label={project.title} />
+            <Checkbox aria-label={task.title} />
             <ResponsiveMenuTrigger
               placement="bottom right"
               renderDialogHeader={() => <GridItemActionMenuDialogHeader />}
@@ -79,10 +76,10 @@ export function ProjectGridItem({ project }: { project: ProjectPreview }) {
                   <CircleEllipsis size={16} /> Mark as Pending
                 </div>
               </Item>
-              <Item textValue="Mark as Competed" key="competed">
+              <Item textValue="Mark as Done" key="done">
                 <div className={gridItemActionMenuItemStyles}>
                   <Check size={16} />
-                  Mark as Competed
+                  Mark as Done
                 </div>
               </Item>
               <Item textValue="Mark as Active" key="active">
@@ -96,15 +93,15 @@ export function ProjectGridItem({ project }: { project: ProjectPreview }) {
         )}
       </GridItemTop>
       <div className="flex items-center justify-between max-sm:flex-col-reverse max-sm:gap-4">
-        {/* --- Project Details --- */}
-        {!project ? (
+        {/* --- Task Details --- */}
+        {!task ? (
           <GridItemInfoSkeleton className="max-sm:w-full max-sm:items-center" />
         ) : (
           <GridItemInfo className="max-sm:w-full max-sm:items-center sm:flex-1">
             <GridItemEllipsisWrapper>
               <GridItemTitle>
-                <GridItemLink href={`/projects/${project.id}`}>
-                  {project.title}
+                <GridItemLink href={`/tasks/${task.id}`}>
+                  {task.title}
                 </GridItemLink>
               </GridItemTitle>
             </GridItemEllipsisWrapper>
@@ -115,16 +112,12 @@ export function ProjectGridItem({ project }: { project: ProjectPreview }) {
         )}
 
         {/* --- Creator Image --- */}
-        {!project ? (
+        {!task ? (
           <GridItemImageContainerSkeleton />
-        ) : project.creator?.imageUrl ? (
-          <Link href={`/users/${project.creator.id}`}>
+        ) : task.creator?.imageUrl ? (
+          <Link href={`/users/${task.creator.id}`}>
             <GridItemImageContainer>
-              <Image
-                fill
-                src={project.creator.imageUrl}
-                alt={project.creator.name}
-              />
+              <Image fill src={task.creator.imageUrl} alt={task.creator.name} />
             </GridItemImageContainer>
           </Link>
         ) : (
@@ -133,13 +126,13 @@ export function ProjectGridItem({ project }: { project: ProjectPreview }) {
       </div>
 
       {/* --- Progress --- */}
-      {!project ? (
+      {!task ? (
         <GridItemProgressSkeleton />
       ) : (
         <GridItemProgress
           value={progressValue}
           showValueText={false}
-          aria-label="project progress"
+          aria-label="task progress"
         />
       )}
     </GridItem>

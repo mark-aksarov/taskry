@@ -50,6 +50,12 @@ export const getTasks = cache(async (): Promise<TaskPreview[]> => {
   });
 });
 
+export const getTaskCategories = cache(async (workspaceId: number) => {
+  return prisma.taskCategory.findMany({
+    where: { workspaceId },
+  });
+});
+
 export const getTotalTasks = cache(async (fromDate?: Date, toDate?: Date) => {
   const where: any = {};
 

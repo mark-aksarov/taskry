@@ -1,14 +1,15 @@
 import { getUsers } from "@/lib/queries/user";
-import { UserItem } from "../UserItem";
+import { UserListItem } from "../UserListItem";
+import { List } from "@/components/common/List";
 
 export async function UserList() {
   const users = await getUsers(1);
 
   return (
-    <div className="flex flex-col gap-2">
+    <List>
       {users.map((user) => (
-        <UserItem key={user.id} user={user} />
+        <UserListItem key={user.id} user={user} />
       ))}
-    </div>
+    </List>
   );
 }

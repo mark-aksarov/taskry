@@ -1,12 +1,18 @@
+import { TaskListItem } from "../TaskListItem";
 import { TaskPreview } from "@/lib/queries/types";
-import { TaskItem } from "../TaskItem";
+import { List } from "@/components/common/List";
+import { useViewMode } from "@/components/common/ViewMode";
 
-export async function TaskList({ tasks }: { tasks: TaskPreview[] }) {
+export function TaskList({ tasks }: { tasks: TaskPreview[] }) {
+  const { viewMode } = useViewMode();
+
+  if (viewMode !== "list") return null;
+
   return (
-    <div className="flex flex-col gap-2">
+    <List>
       {tasks.map((task) => (
-        <TaskItem key={task.id} task={task} />
+        <TaskListItem key={task.id} task={task} showCheckbox />
       ))}
-    </div>
+    </List>
   );
 }

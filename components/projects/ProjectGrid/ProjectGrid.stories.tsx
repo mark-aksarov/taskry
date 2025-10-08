@@ -1,26 +1,22 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { Suspense } from "react";
-import { mocked } from "storybook/test";
 import { ProjectGrid } from "./ProjectGrid";
-import { getProjects } from "@/lib/queries/project";
 import { projectsMock } from "../ProjectList";
+import { ViewModeProvider } from "@/components/common/ViewMode";
 
 const meta = {
   title: "Components/projects/ProjectGrid",
   component: ProjectGrid,
   tags: ["autodocs"],
+  args: {
+    projects: projectsMock,
+  },
   decorators: [
     (Story) => (
-      <Suspense>
+      <ViewModeProvider initialValue="grid">
         <Story />
-      </Suspense>
+      </ViewModeProvider>
     ),
   ],
-  beforeEach: () => {
-    mocked(getProjects).mockReturnValue(
-      new Promise((res) => res(projectsMock)),
-    );
-  },
 } satisfies Meta<typeof ProjectGrid>;
 
 export default meta;

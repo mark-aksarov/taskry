@@ -1,6 +1,6 @@
 "use client";
 
-import { Form } from "react-aria-components";
+import { RACForm } from "@/components/ui";
 import { Button, TextField } from "@/components/ui";
 import { ProjectStatusCheckboxGroup } from "../ProjectStatusCheckboxGroup";
 import { ProjectDeadline } from "../ProjectDeadline";
@@ -17,7 +17,7 @@ export function ProjectFiltersForm({
   userCheckboxGroup,
 }: ProjectFiltersFormProps) {
   return (
-    <Form className="flex flex-col gap-8">
+    <RACForm className="flex flex-col gap-8">
       <div className="flex flex-col gap-4">
         <TextField label="Title" placeholder="Title" />
         <ProjectStatusCheckboxGroup />
@@ -32,6 +32,6 @@ export function ProjectFiltersForm({
         label="Apply Filters"
         className="justify-center"
       />
-    </Form>
+    </RACForm>
   );
 }

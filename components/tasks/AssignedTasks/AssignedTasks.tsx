@@ -9,7 +9,7 @@ import { Repeat } from "@/components/common/Repeat";
 import { getTasks } from "@/lib/queries/task";
 import { Suspense } from "react";
 import { TaskList } from "../TaskList";
-import { TaskItem } from "../TaskItem";
+import { TaskListItem } from "../TaskListItem";
 
 export async function AssignedTasks() {
   const tasks = await getTasks();
@@ -41,7 +41,7 @@ export async function AssignedTasks() {
         Assigned Tasks
       </h2>
       <Suspense
-        fallback={<Repeat items={10} renderItem={() => <TaskItem />} />}
+        fallback={<Repeat items={10} renderItem={() => <TaskListItem />} />}
       >
         <TaskList tasks={tasks} />
       </Suspense>

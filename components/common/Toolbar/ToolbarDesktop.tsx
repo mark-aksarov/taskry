@@ -1,3 +1,5 @@
+import { Skeleton } from "@/components/ui";
+
 interface ToolbarProps {
   children: React.ReactNode;
 }

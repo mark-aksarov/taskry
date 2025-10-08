@@ -3,6 +3,7 @@
 import { useViewMode } from "@/components/common/ViewMode";
 import { ProjectGridItem } from "../ProjectGridItem";
 import { ProjectPreview } from "@/lib/queries/types";
+import { Grid } from "@/components/common/Grid/Grid";
 
 export function ProjectGrid({ projects }: { projects: ProjectPreview[] }) {
   const { viewMode } = useViewMode();
@@ -10,12 +11,10 @@ export function ProjectGrid({ projects }: { projects: ProjectPreview[] }) {
   if (viewMode !== "grid") return null;
 
   return (
-    <div className="@container">
-      <div className="grid gap-4 @max-3xl:grid-cols-2 @3xl:@max-5xl:grid-cols-3 @5xl:@max-7xl:grid-cols-4 @7xl:grid-cols-5">
-        {projects.map((project) => (
-          <ProjectGridItem key={project.id} project={project} />
-        ))}
-      </div>
-    </div>
+    <Grid>
+      {projects.map((project) => (
+        <ProjectGridItem key={project.id} project={project} />
+      ))}
+    </Grid>
   );
 }

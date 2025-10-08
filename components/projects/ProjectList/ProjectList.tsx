@@ -1,8 +1,9 @@
 "use client";
 
 import { ProjectPreview } from "@/lib/queries/types";
-import { ProjectItem } from "../ProjectItem";
+import { ProjectListItem } from "../ProjectListItem";
 import { useViewMode } from "@/components/common/ViewMode";
+import { List } from "@/components/common/List";
 
 export function ProjectList({ projects }: { projects: ProjectPreview[] }) {
   const { viewMode } = useViewMode();
@@ -10,10 +11,10 @@ export function ProjectList({ projects }: { projects: ProjectPreview[] }) {
   if (viewMode !== "list") return null;
 
   return (
-    <div className="flex flex-col gap-2">
+    <List>
       {projects.map((project) => (
-        <ProjectItem key={project.id} project={project} showCheckbox />
+        <ProjectListItem key={project.id} project={project} showCheckbox />
       ))}
-    </div>
+    </List>
   );
 }

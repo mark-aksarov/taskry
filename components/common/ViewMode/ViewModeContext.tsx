@@ -11,8 +11,14 @@ interface ViewModeContextType {
 
 const ViewModeContext = createContext<ViewModeContextType | null>(null);
 
-export function ViewModeProvider({ children }: { children: React.ReactNode }) {
-  const [viewMode, setViewMode] = useState<ViewMode>("list");
+export function ViewModeProvider({
+  initialValue = "list",
+  children,
+}: {
+  initialValue?: ViewMode;
+  children: React.ReactNode;
+}) {
+  const [viewMode, setViewMode] = useState<ViewMode>(initialValue);
 
   const contextValue = useMemo(
     () => ({

@@ -1,26 +1,26 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { ProjectList } from "./ProjectList";
-import { projectsMock } from "./projectsMock";
+import { TaskGrid } from "./TaskGrid";
+import { tasksMock } from "../TaskList";
 import { ViewModeProvider } from "@/components/common/ViewMode";
 
 const meta = {
-  title: "Components/projects/ProjectList",
-  component: ProjectList,
+  title: "Components/tasks/TaskGrid",
+  component: TaskGrid,
   tags: ["autodocs"],
   args: {
-    projects: projectsMock,
+    tasks: tasksMock,
   },
   decorators: [
     (Story) => (
-      <ViewModeProvider>
+      <ViewModeProvider initialValue="grid">
         <Story />
       </ViewModeProvider>
     ),
   ],
-} satisfies Meta<typeof ProjectList>;
+} satisfies Meta<typeof TaskGrid>;
 
 export default meta;
-type Story = StoryObj<typeof ProjectList>;
+type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {};
 
