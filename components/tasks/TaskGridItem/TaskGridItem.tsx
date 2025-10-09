@@ -3,7 +3,6 @@
 import {
   GridItem,
   gridItemActionMenuItemStyles,
-  GridItemEllipsisWrapper,
   GridItemImageContainer,
   GridItemInfo,
   GridItemProgress,
@@ -100,16 +99,13 @@ export function TaskGridItem({ task }: { task?: TaskPreview }) {
           <GridItemInfoSkeleton className="max-sm:w-full max-sm:items-center" />
         ) : (
           <GridItemInfo className="max-sm:w-full max-sm:items-center sm:flex-1">
-            <GridItemEllipsisWrapper>
-              <GridItemTitle>
-                <GridItemLink href={`/tasks/${task.id}`}>
-                  {task.title}
-                </GridItemLink>
-              </GridItemTitle>
-            </GridItemEllipsisWrapper>
-            <GridItemEllipsisWrapper>
-              <GridItemText>{`Deadline on ${formattedDeadline}`}</GridItemText>
-            </GridItemEllipsisWrapper>
+            <GridItemTitle>
+              <GridItemLink href={`/tasks/${task.id}`}>
+                {task.title}
+              </GridItemLink>
+            </GridItemTitle>
+
+            <GridItemText>{`Deadline on ${formattedDeadline}`}</GridItemText>
           </GridItemInfo>
         )}
 

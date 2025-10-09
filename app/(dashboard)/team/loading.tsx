@@ -21,7 +21,7 @@ export default function Loading() {
       </ToolbarDesktop>
 
       <ToolbarMobileTop>
-        <ToolbarMobileHeading>Tasks</ToolbarMobileHeading>
+        <ToolbarMobileHeading>Users</ToolbarMobileHeading>
         <Skeleton className="h-8 w-8 rounded-lg" />
         <Skeleton className="h-8 w-8 rounded-lg" />
       </ToolbarMobileTop>

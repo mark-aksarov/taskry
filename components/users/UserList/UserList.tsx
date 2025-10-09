@@ -1,10 +1,8 @@
-import { getUsers } from "@/lib/queries/user";
 import { UserListItem } from "../UserListItem";
 import { List } from "@/components/common/List";
+import { UserPreview } from "@/lib/queries/types";
 
-export async function UserList() {
-  const users = await getUsers(1);
-
+export function UserList({ users }: { users: UserPreview[] }) {
   return (
     <List>
       {users.map((user) => (

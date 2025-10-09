@@ -12,7 +12,6 @@ import {
   listItemActionMenuItemStyles,
   ListItemActionMenuSkeleton,
   ListItemInfo,
-  ListItemEllipsisWrapper,
   ListItemLink,
   ListItemInfoSkeleton,
   ListItemText,
@@ -53,72 +52,57 @@ export function UserListItem({
         <ListItemInfoSkeleton />
       ) : (
         <ListItemInfo>
-          <ListItemEllipsisWrapper>
-            <ListItemTitle>
-              <ListItemLink href={`/users/${user.id}`}>
-                {user.name}
-              </ListItemLink>
-            </ListItemTitle>
-          </ListItemEllipsisWrapper>
+          <ListItemTitle>
+            <ListItemLink href={`/users/${user.id}`}>{user.name}</ListItemLink>
+          </ListItemTitle>
 
-          <ListItemEllipsisWrapper>
-            <ListItemText>
-              <ListItemLink href={`mailto:${user.email}`}>
-                {user.email}
-              </ListItemLink>
-            </ListItemText>
-          </ListItemEllipsisWrapper>
+          <ListItemText>
+            <ListItemLink href={`mailto:${user.email}`}>
+              {user.email}
+            </ListItemLink>
+          </ListItemText>
         </ListItemInfo>
       )}
 
       {/* --- User Phone --- */}
       {!user ? (
-        <ListItemInfoSkeleton className="@max-lg:hidden" />
+        <ListItemInfoSkeleton className="@max-lg:hidden1" />
       ) : (
-        <ListItemInfo className="@max-lg:hidden">
-          <ListItemEllipsisWrapper>
-            <ListItemTitle>Phone number</ListItemTitle>
-          </ListItemEllipsisWrapper>
+        <ListItemInfo className="@max-lg:hidden1">
+          <ListItemTitle>Phone number</ListItemTitle>
 
-          <ListItemEllipsisWrapper>
-            <ListItemText>
-              <ListItemLink href={`tel:${user.phone}`}>
-                {user.phone}
-              </ListItemLink>
-            </ListItemText>
-          </ListItemEllipsisWrapper>
+          <ListItemText>
+            <ListItemLink href={`tel:${user.phone}`}>{user.phone}</ListItemLink>
+          </ListItemText>
         </ListItemInfo>
       )}
 
       {/* --- User Public link --- */}
       {!user ? (
-        <ListItemInfoSkeleton className="@max-2xl:hidden" />
+        <ListItemInfoSkeleton className="@max-2xl:hidden1" />
       ) : (
-        <ListItemInfo className="@max-2xl:hidden">
-          <ListItemEllipsisWrapper>
-            <ListItemTitle>Public link</ListItemTitle>
-          </ListItemEllipsisWrapper>
+        <ListItemInfo className="@max-2xl:hidden1">
+          <ListItemTitle>Public link</ListItemTitle>
 
-          <ListItemEllipsisWrapper>
-            <ListItemText>
-              {user.publicLink ? (
-                <ListItemLink href={user.publicLink}>
-                  {user.publicLink}
-                </ListItemLink>
-              ) : (
-                "Link is not provided"
-              )}
-            </ListItemText>
-          </ListItemEllipsisWrapper>
+          <ListItemText>
+            {user.publicLink ? (
+              <ListItemLink href={user.publicLink}>
+                {user.publicLink}
+              </ListItemLink>
+            ) : (
+              "Link is not provided"
+            )}
+          </ListItemText>
         </ListItemInfo>
       )}
 
       {/* --- User Position --- */}
       {!user ? (
-        <ListItemInfoSkeleton className="@max-4xl:hidden" />
+        <ListItemInfoSkeleton className="@max-4xl:hidden1" />
       ) : (
-        <ListItemInfo className="@max-4xl:hidden">
+        <ListItemInfo className="@max-4xl:hidden1">
           <ListItemTitle>Position</ListItemTitle>
+
           <ListItemText>
             {user.position ? user.position.name : "Unknown position"}
           </ListItemText>

@@ -23,7 +23,6 @@ import {
   ListItemBadge,
   ListItemBadgeSkeleton,
   ListItemLink,
-  ListItemEllipsisWrapper,
 } from "@/components/common/List";
 
 import {
@@ -67,17 +66,11 @@ export const TaskListItem = ({
         <ListItemInfoSkeleton />
       ) : (
         <ListItemInfo>
-          <ListItemEllipsisWrapper>
-            <ListItemTitle>
-              <ListItemLink href={`/tasks/${task.id}`}>
-                {task.title}
-              </ListItemLink>
-            </ListItemTitle>
-          </ListItemEllipsisWrapper>
+          <ListItemTitle>
+            <ListItemLink href={`/tasks/${task.id}`}>{task.title}</ListItemLink>
+          </ListItemTitle>
 
-          <ListItemEllipsisWrapper>
-            <ListItemText>{`Deadline on ${formattedDeadline}`}</ListItemText>
-          </ListItemEllipsisWrapper>
+          <ListItemText>{`Deadline on ${formattedDeadline}`}</ListItemText>
         </ListItemInfo>
       )}
 
@@ -86,17 +79,13 @@ export const TaskListItem = ({
         <ListItemInfoSkeleton className="@max-3xl:hidden" />
       ) : (
         <ListItemInfo className="@max-3xl:hidden">
-          <ListItemEllipsisWrapper>
-            <ListItemTitle>Category</ListItemTitle>
-          </ListItemEllipsisWrapper>
+          <ListItemTitle>Category</ListItemTitle>
 
-          <ListItemEllipsisWrapper>
-            <ListItemText>
-              <ListItemLink href={`/categories/${task.category.id}`}>
-                {task.category.name}
-              </ListItemLink>
-            </ListItemText>
-          </ListItemEllipsisWrapper>
+          <ListItemText>
+            <ListItemLink href={`/categories/${task.category.id}`}>
+              {task.category.name}
+            </ListItemLink>
+          </ListItemText>
         </ListItemInfo>
       )}
 
@@ -105,17 +94,13 @@ export const TaskListItem = ({
         <ListItemInfoSkeleton className="@max-5xl:hidden" />
       ) : (
         <ListItemInfo className="@max-5xl:hidden">
-          <ListItemEllipsisWrapper>
-            <ListItemTitle>Project</ListItemTitle>
-          </ListItemEllipsisWrapper>
+          <ListItemTitle>Project</ListItemTitle>
 
-          <ListItemEllipsisWrapper>
-            <ListItemText>
-              <ListItemLink href={`/projects/${task.project.id}`}>
-                {task.project.title}
-              </ListItemLink>
-            </ListItemText>
-          </ListItemEllipsisWrapper>
+          <ListItemText>
+            <ListItemLink href={`/projects/${task.project.id}`}>
+              {task.project.title}
+            </ListItemLink>
+          </ListItemText>
         </ListItemInfo>
       )}
 

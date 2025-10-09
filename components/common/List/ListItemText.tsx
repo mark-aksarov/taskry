@@ -1,4 +1,5 @@
-const styles = "text-xs font-medium text-gray-500 dark:text-gray-400";
+const styles =
+  "overflow-hidden max-w-full p-1 -m-1 text-nowrap overflow-ellipsis text-xs font-medium text-gray-500 dark:text-gray-400";
 
 interface ListItemTextProps {
   children: React.ReactNode;

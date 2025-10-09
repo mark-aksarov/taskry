@@ -20,7 +20,6 @@ import {
   ListItemBadge,
   ListItemBadgeSkeleton,
   ListItemInfo,
-  ListItemEllipsisWrapper,
   ListItemLink,
   ListItemInfoSkeleton,
   ListItemText,
@@ -67,17 +66,13 @@ export const ProjectListItem = ({
         <ListItemInfoSkeleton />
       ) : (
         <ListItemInfo>
-          <ListItemEllipsisWrapper>
-            <ListItemTitle>
-              <ListItemLink href={`/projects/${project.id}`}>
-                {project.title}
-              </ListItemLink>
-            </ListItemTitle>
-          </ListItemEllipsisWrapper>
+          <ListItemTitle>
+            <ListItemLink href={`/projects/${project.id}`}>
+              {project.title}
+            </ListItemLink>
+          </ListItemTitle>
 
-          <ListItemEllipsisWrapper>
-            <ListItemText>{`Deadline on ${formattedDeadline}`}</ListItemText>
-          </ListItemEllipsisWrapper>
+          <ListItemText>{`Deadline on ${formattedDeadline}`}</ListItemText>
         </ListItemInfo>
       )}
 
@@ -86,17 +81,13 @@ export const ProjectListItem = ({
         <ListItemInfoSkeleton className="@max-3xl:hidden" />
       ) : (
         <ListItemInfo className="@max-3xl:hidden">
-          <ListItemEllipsisWrapper>
-            <ListItemTitle>Category</ListItemTitle>
-          </ListItemEllipsisWrapper>
+          <ListItemTitle>Category</ListItemTitle>
 
-          <ListItemEllipsisWrapper>
-            <ListItemText>
-              <ListItemLink href={`/categories=${project.category.id}`}>
-                {project.category.name}
-              </ListItemLink>
-            </ListItemText>
-          </ListItemEllipsisWrapper>
+          <ListItemText>
+            <ListItemLink href={`/categories=${project.category.id}`}>
+              {project.category.name}
+            </ListItemLink>
+          </ListItemText>
         </ListItemInfo>
       )}
 
@@ -105,22 +96,16 @@ export const ProjectListItem = ({
         <ListItemInfoSkeleton className="@max-5xl:hidden" />
       ) : (
         <ListItemInfo className="@max-5xl:hidden">
-          <ListItemEllipsisWrapper>
-            <ListItemTitle>Customer</ListItemTitle>
-          </ListItemEllipsisWrapper>
+          <ListItemTitle>Customer</ListItemTitle>
 
           {project.customer ? (
-            <ListItemEllipsisWrapper>
-              <ListItemText>
-                <ListItemLink href={`/customers=${project.customer.id}`}>
-                  {project.customer.fullName}
-                </ListItemLink>
-              </ListItemText>
-            </ListItemEllipsisWrapper>
+            <ListItemText>
+              <ListItemLink href={`/customers=${project.customer.id}`}>
+                {project.customer.fullName}
+              </ListItemLink>
+            </ListItemText>
           ) : (
-            <ListItemEllipsisWrapper>
-              <ListItemText>Unknown customer</ListItemText>
-            </ListItemEllipsisWrapper>
+            <ListItemText>Unknown customer</ListItemText>
           )}
         </ListItemInfo>
       )}
@@ -130,17 +115,13 @@ export const ProjectListItem = ({
         <ListItemInfoSkeleton className="@max-5xl:hidden" />
       ) : (
         <ListItemInfo className="@max-5xl:hidden">
-          <ListItemEllipsisWrapper>
-            <ListItemTitle>Customer company</ListItemTitle>
-          </ListItemEllipsisWrapper>
+          <ListItemTitle>Customer company</ListItemTitle>
 
-          <ListItemEllipsisWrapper>
-            <ListItemText>
-              {project.customer
-                ? project.customer.company.name
-                : "Unknown company"}
-            </ListItemText>
-          </ListItemEllipsisWrapper>
+          <ListItemText>
+            {project.customer
+              ? project.customer.company.name
+              : "Unknown company"}
+          </ListItemText>
         </ListItemInfo>
       )}
 

@@ -1,5 +1,5 @@
 export const titleStyles =
-  "text-sm font-bold text-black dark:text-white inline";
+  "overflow-hidden max-w-full p-1 -m-1 text-nowrap overflow-ellipsis text-sm font-bold text-black dark:text-white inline";
 
 interface ListItemTitleProps {
   children: React.ReactNode;

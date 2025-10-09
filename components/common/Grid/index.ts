@@ -7,7 +7,6 @@ export {
   GridItemActionMenuSkeleton,
   gridItemActionMenuItemStyles,
 } from "./GridItemActionMenu";
-export { GridItemEllipsisWrapper } from "./GridItemEllipsisWrapper";
 export { GridItemTitle } from "./GridItemTitle";
 export { GridItemText } from "./GridItemText";
 export { GridItemLink } from "./GridItemLink";
@@ -16,3 +15,11 @@ export {
   GridItemImageContainerSkeleton,
 } from "./GridItemImageContainer";
 export { GridItemProgress, GridItemProgressSkeleton } from "./GridItemProgress";
+export { GridItemContact } from "./GridItemContact";
+export {
+  GridItemContactList,
+  GridItemContactListSkeleton,
+} from "./GridItemContactList";
+export { GridItemContactLink } from "./GridItemContactLink";
+export { GridItemContactText } from "./GridItemContactText";
+export { GridItemContactIconWrapper } from "./GridItemContactIconWrapper";

@@ -19,3 +19,9 @@ export const getUsers = cache(
     });
   },
 );
+
+export const getPositions = cache(async (workspaceId: number) => {
+  return await prisma.position.findMany({
+    where: { workspaceId },
+  });
+});
