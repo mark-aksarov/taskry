@@ -11,7 +11,7 @@ import {
 } from "@/lib/queries/task";
 import { tasksMock } from "@/components/tasks/TaskList";
 import { getNotifications } from "@/lib/queries/notification";
-import { notificationsMock } from "@/components/notifications/NotificationList";
+import { notificationsMock } from "@/components/notifications/NotificationOverlayList";
 import { getStorageUsage } from "@/lib/queries/storage";
 
 const meta = {

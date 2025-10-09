@@ -1,7 +1,7 @@
 import { getNotifications } from "@/lib/queries/notification";
-import { NotificationItem } from "../NotificationItem";
+import { NotificationOverlayItem } from "../NotificationOverlayItem";
 
-export async function NotificationList() {
+export async function NotificationOverlayList() {
   const notifications = await getNotifications(
     "BKs42HvVDEZFoaJUmTqf1gTN0K8pUFjI",
     1,
@@ -10,7 +10,10 @@ export async function NotificationList() {
   return (
     <div>
       {notifications.map((task) => (
-        <NotificationItem key={task.notificationId} notification={task} />
+        <NotificationOverlayItem
+          key={task.notificationId}
+          notification={task}
+        />
       ))}
     </div>
   );

@@ -17,16 +17,26 @@ import {
 } from "@/components/ui";
 import { NotificationRecipientWithRelations } from "@/lib/queries/types";
 import { ResponsiveMenuTrigger } from "@/components/common/ResponsiveMenuTrigger";
+import {
+  NotificationOverlayItemImageContainer,
+  NotificationOverlayItemImageContainerSkeleton,
+} from "./NotificationOverlayItemImageContainer";
+import { NotificationOverlayItemActor } from "./NotificationOverlayItemActor";
+import { NotificationOverlayItemLink } from "./NotificationOverlayItemLink";
+import { NotificationOverlayItemActionText } from "./NotificationOverlayItemActionText";
+import { NotificationOverlayItemDate } from "./NotificationOverlayItemDate";
+import { NotificationOverlayItemTarget } from "./NotificationOverlayItemTarget";
+import { NotificationOverlayItemInfoSkeleton } from "./NotificationOverlayItemInfo";
 
-interface NotificationItemProps {
+interface NotificationOverlayItemProps {
   notification?: NotificationRecipientWithRelations;
   className?: string;
 }
 
-export const NotificationItem = ({
+export const NotificationOverlayItem = ({
   notification,
   className,
-}: NotificationItemProps) => {
+}: NotificationOverlayItemProps) => {
   const locale = "en-GB";
 
   const isRead = notification?.isRead;
@@ -56,47 +66,6 @@ export const NotificationItem = ({
   );
 
   const itemClasses = "flex items-center gap-4 font-bold";
-  const secondaryText = "text-gray-500 dark:text-gray-400";
-  const primaryText = "text-black dark:text-white";
-
-  const actionsMenu = (
-    <>
-      <ResponsiveMenuTrigger
-        renderDialogHeader={() => (
-          <DialogHeader className="px-4 py-3">
-            <DialogHeading className="text-base">Actions</DialogHeading>
-            <DialogCloseButton />
-          </DialogHeader>
-        )}
-        renderButton={() => (
-          <Button
-            aria-label="task item menu"
-            variant="ghost"
-            iconLeft={
-              <Ellipsis size={16} strokeWidth={1.5} absoluteStrokeWidth />
-            }
-            className="shrink-0 grow-0 rounded-full"
-          />
-        )}
-      >
-        <>
-          {!isRead && (
-            <Item textValue="Mark as Read" key="read">
-              <div className={itemClasses}>
-                <ListCheck size={16} strokeWidth={1.5} absoluteStrokeWidth />{" "}
-                Mark as Read
-              </div>
-            </Item>
-          )}
-        </>
-        <Item textValue="Delete" key="delete">
-          <div className={itemClasses}>
-            <Trash size={16} strokeWidth={1.5} absoluteStrokeWidth /> Delete
-          </div>
-        </Item>
-      </ResponsiveMenuTrigger>
-    </>
-  );
 
   function getActionText() {
     switch (type) {
@@ -146,9 +115,9 @@ export const NotificationItem = ({
       case "TASK_UPDATED":
       case "TASK_COMMENTED":
         return (
-          <Link href={`/tasks/${target?.task?.id}`} className={primaryText}>
+          <NotificationOverlayItemLink href={`/tasks/${target?.task?.id}`}>
             {target?.task?.title}
-          </Link>
+          </NotificationOverlayItemLink>
         );
       case "TASK_DELETED":
         return targetName;
@@ -157,12 +126,11 @@ export const NotificationItem = ({
       case "PROJECT_UPDATED":
       case "PROJECT_COMMENTED":
         return (
-          <Link
+          <NotificationOverlayItemLink
             href={`/projects/${target?.project?.id}`}
-            className={primaryText}
           >
             {target?.project?.title}
-          </Link>
+          </NotificationOverlayItemLink>
         );
 
       case "PROJECT_DELETED":
@@ -171,9 +139,9 @@ export const NotificationItem = ({
       case "USER_ADDED":
       case "USER_UPDATED":
         return (
-          <Link href={`/users/${target?.user?.id}`} className={primaryText}>
+          <NotificationOverlayItemLink href={`/users/${target?.user?.id}`}>
             {target?.user?.name}
-          </Link>
+          </NotificationOverlayItemLink>
         );
 
       case "USER_DELETED":
@@ -182,12 +150,11 @@ export const NotificationItem = ({
       case "CUSTOMER_ADDED":
       case "CUSTOMER_UPDATED":
         return (
-          <Link
+          <NotificationOverlayItemLink
             href={`/customers/${target?.customer?.id}`}
-            className={primaryText}
           >
             {target?.customer?.fullName}
-          </Link>
+          </NotificationOverlayItemLink>
         );
 
       case "CUSTOMER_DELETED":
@@ -195,12 +162,11 @@ export const NotificationItem = ({
 
       case "MESSAGE_SENDED":
         return (
-          <Link
+          <NotificationOverlayItemLink
             href={`/messages/${target?.message?.id}`}
-            className={primaryText}
           >
             message
-          </Link>
+          </NotificationOverlayItemLink>
         );
 
       default:
@@ -211,63 +177,94 @@ export const NotificationItem = ({
   return (
     <div
       className={twMerge(
-        "@container flex w-full items-start gap-3 border-gray-300 bg-white px-4 py-3 not-last:border-b-1 dark:border-gray-600 dark:bg-gray-800",
+        "flex w-full items-start gap-3 border-gray-300 bg-white px-4 py-3 not-last:border-b-1 dark:border-gray-600 dark:bg-gray-800",
         notification && !isRead && "bg-gray-100 dark:bg-gray-900",
         className,
       )}
     >
-      <div className="relative shrink-0">
-        {notification ? (
-          <div className="h-10 w-10 overflow-hidden rounded-full bg-gray-200">
-            {actor && actor.imageUrl && (
-              <Image
-                src={actor.imageUrl}
-                alt={actor.name}
-                width={40}
-                height={40}
-              />
-            )}
-          </div>
-        ) : (
-          <Skeleton className="h-10 w-10" />
-        )}
-      </div>
+      {!notification ? (
+        <NotificationOverlayItemImageContainerSkeleton />
+      ) : actor?.imageUrl ? (
+        <Link href={`/users/${actor.id}`}>
+          <NotificationOverlayItemImageContainer>
+            <Image fill src={actor.imageUrl} alt={actor.name} />
+          </NotificationOverlayItemImageContainer>
+        </Link>
+      ) : (
+        <NotificationOverlayItemImageContainer />
+      )}
       <div className="flex flex-col gap-1">
         {notification ? (
           <>
-            <div className="text-sm">
-              <h4 className={`${primaryText} inline font-bold`}>
+            <span className="inline leading-none">
+              <NotificationOverlayItemActor>
                 <>
                   {actor ? (
-                    <Link href={`/users/${actor.id}`} className={primaryText}>
+                    <NotificationOverlayItemLink href={`/users/${actor.id}`}>
                       {actor.name}
-                    </Link>
+                    </NotificationOverlayItemLink>
                   ) : (
                     "Unknown User"
                   )}
                 </>
-              </h4>
-              <span className={`${secondaryText} font-normal`}>
+              </NotificationOverlayItemActor>
+              <NotificationOverlayItemActionText>
                 &nbsp;{getActionText()}&nbsp;
-              </span>
-              <span className={`${primaryText} font-bold`}>{getTarget()}</span>
-            </div>
-            <span className={`${secondaryText} text-xs font-medium`}>
-              {formattedUpper}
+              </NotificationOverlayItemActionText>
+              <NotificationOverlayItemTarget>
+                {getTarget()}
+              </NotificationOverlayItemTarget>
             </span>
+            <NotificationOverlayItemDate>
+              {formattedUpper}
+            </NotificationOverlayItemDate>
           </>
         ) : (
-          <>
-            <Skeleton className="w-[12rem]" size="sm" />
-            <Skeleton className="w-[7rem]" size="xs" />
-          </>
+          <NotificationOverlayItemInfoSkeleton />
         )}
       </div>
       <div className="ml-auto">
         {notification ? (
-          actionsMenu
+          <ResponsiveMenuTrigger
+            renderDialogHeader={() => (
+              <DialogHeader className="px-4 py-3">
+                <DialogHeading className="text-base">Actions</DialogHeading>
+                <DialogCloseButton />
+              </DialogHeader>
+            )}
+            renderButton={() => (
+              <Button
+                aria-label="task item menu"
+                variant="ghost"
+                iconLeft={
+                  <Ellipsis size={16} strokeWidth={1.5} absoluteStrokeWidth />
+                }
+                className="shrink-0 grow-0 rounded-full"
+              />
+            )}
+          >
+            <>
+              {!isRead && (
+                <Item textValue="Mark as Read" key="read">
+                  <div className={itemClasses}>
+                    <ListCheck
+                      size={16}
+                      strokeWidth={1.5}
+                      absoluteStrokeWidth
+                    />{" "}
+                    Mark as Read
+                  </div>
+                </Item>
+              )}
+            </>
+            <Item textValue="Delete" key="delete">
+              <div className={itemClasses}>
+                <Trash size={16} strokeWidth={1.5} absoluteStrokeWidth /> Delete
+              </div>
+            </Item>
+          </ResponsiveMenuTrigger>
         ) : (
-          <div className="p-2">
+          <div className="flex h-8 w-8 items-center justify-center">
             <Skeleton className="h-1 w-4" />
           </div>
         )}

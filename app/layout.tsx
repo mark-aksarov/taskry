@@ -12,12 +12,12 @@ import {
 import { AppNavigation } from "@/components/layout/AppNavigation";
 import { AppHeader } from "@/components/layout/AppHeader";
 import { NotificationPopoverTrigger } from "@/components/notifications/NotificationPopoverTrigger";
-import { NotificationList } from "@/components/notifications/NotificationList";
+import { NotificationOverlayList } from "@/components/notifications/NotificationOverlayList";
 import { ViewAllButton } from "@/components/notifications/ViewAllButton";
 import { NotificationSheetTrigger } from "@/components/notifications/NotificationSheetTrigger";
 import { AppBottomSheetTrigger } from "@/components/layout/AppBottomSheetTrigger";
 import { AppSidebarSheetTrigger } from "@/components/layout/AppSidebarSheetTrigger";
-import { NotificationItem } from "@/components/notifications/NotificationItem";
+import { NotificationOverlayItem } from "@/components/notifications/NotificationOverlayItem";
 import { Repeat } from "@/components/common/Repeat";
 
 const nunitoSans = Nunito_Sans({
@@ -46,7 +46,7 @@ export default async function RootLayout({
 
 export async function Layout({ children }: { children: React.ReactNode }) {
   const notificationListSkeleton = (
-    <Repeat items={7} renderItem={() => <NotificationItem />} />
+    <Repeat items={7} renderItem={() => <NotificationOverlayItem />} />
   );
 
   return (
@@ -68,7 +68,7 @@ export async function Layout({ children }: { children: React.ReactNode }) {
               notificationList={
                 <Suspense fallback={notificationListSkeleton}>
                   <>
-                    <NotificationList />
+                    <NotificationOverlayList />
                     <ViewAllButton />
                   </>
                 </Suspense>
@@ -80,7 +80,7 @@ export async function Layout({ children }: { children: React.ReactNode }) {
               notificationList={
                 <Suspense fallback={notificationListSkeleton}>
                   <>
-                    <NotificationList />
+                    <NotificationOverlayList />
                     <ViewAllButton />
                   </>
                 </Suspense>

@@ -33,7 +33,7 @@ import { ProjectCheckboxGroup } from "@/components/projects/ProjectCheckboxGroup
 import { getProjects } from "@/lib/queries/project";
 import { TaskActionsMenuTrigger } from "@/components/tasks/TaskActionsMenuTrigger";
 import { TaskList } from "@/components/tasks/TaskList";
-import { TaskGrid } from "@/components/tasks/TaskGrid/TaskGrid";
+import { TaskGrid } from "@/components/tasks/TaskGrid";
 
 export default async function TasksPage() {
   const categoriesPromise = getTaskCategories(1);

@@ -4,9 +4,9 @@ import { Suspense } from "react";
 import { mocked } from "storybook/test";
 import { NotificationPopoverTrigger } from "@/components/notifications/NotificationPopoverTrigger";
 import {
-  NotificationList,
+  NotificationOverlayList,
   notificationsMock,
-} from "@/components/notifications/NotificationList";
+} from "@/components/notifications/NotificationOverlayList";
 import { NotificationSheetTrigger } from "@/components/notifications/NotificationSheetTrigger";
 import { AppBottomSheetTrigger } from "../AppBottomSheetTrigger";
 import { AppSidebarSheetTrigger } from "../AppSidebarSheetTrigger";
@@ -29,7 +29,7 @@ const meta = {
         <NotificationPopoverTrigger
           notificationList={
             <Suspense>
-              <NotificationList />
+              <NotificationOverlayList />
             </Suspense>
           }
         />
@@ -38,7 +38,7 @@ const meta = {
         <NotificationSheetTrigger
           notificationList={
             <Suspense>
-              <NotificationList />
+              <NotificationOverlayList />
             </Suspense>
           }
         />

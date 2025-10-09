@@ -1,5 +1,5 @@
 const wrapperStyles =
-  "overflow-hidden max-w-full text-nowrap overflow-ellipsis p-1 -m-1 leading-0";
+  "overflow-hidden max-w-full text-nowrap overflow-ellipsis p-1 -m-1 inline leading-none";
 
 interface GridItemEllipsisWrapperProps {
   children: React.ReactNode;

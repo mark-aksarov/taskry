@@ -9,7 +9,7 @@ import { getCustomers } from "@/lib/queries/customers";
 import { getUsers } from "@/lib/queries/user";
 import { usersMock } from "@/components/users/usersMock";
 import { getNotifications } from "@/lib/queries/notification";
-import { notificationsMock } from "@/components/notifications/NotificationList";
+import { notificationsMock } from "@/components/notifications/NotificationOverlayList";
 import { projectsMock } from "@/components/projects/ProjectList";
 
 const meta = {

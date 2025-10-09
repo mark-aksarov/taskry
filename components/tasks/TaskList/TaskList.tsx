@@ -1,3 +1,5 @@
+"use client";
+
 import { TaskListItem } from "../TaskListItem";
 import { TaskPreview } from "@/lib/queries/types";
 import { List } from "@/components/common/List";

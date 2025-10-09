@@ -2,12 +2,12 @@ import { Suspense } from "react";
 import { mocked } from "storybook/test";
 import { Meta, StoryObj } from "@storybook/react";
 import { getNotifications } from "@/lib/queries/notification";
-import { NotificationList } from "./NotificationList";
+import { NotificationOverlayList } from "./NotificationOverlayList";
 import { notificationsMock } from "./notificationsMock";
 
 const meta = {
-  title: "Components/notifications/NotificationList",
-  component: NotificationList,
+  title: "Components/notifications/NotificationOverlayList",
+  component: NotificationOverlayList,
   tags: ["autodocs"],
   decorators: [
     (Story) => (
@@ -24,10 +24,10 @@ const meta = {
   parameters: {
     layout: "fullscreen",
   },
-} satisfies Meta<typeof NotificationList>;
+} satisfies Meta<typeof NotificationOverlayList>;
 
 export default meta;
-type Story = StoryObj<typeof NotificationList>;
+type Story = StoryObj<typeof NotificationOverlayList>;
 
 export const Default: Story = {
   args: {

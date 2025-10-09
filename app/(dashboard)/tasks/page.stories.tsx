@@ -9,7 +9,7 @@ import { getCustomers } from "@/lib/queries/customers";
 import { getUsers } from "@/lib/queries/user";
 import { usersMock } from "@/components/users/usersMock";
 import { getNotifications } from "@/lib/queries/notification";
-import { notificationsMock } from "@/components/notifications/NotificationList";
+import { notificationsMock } from "@/components/notifications/NotificationOverlayList";
 import { getTaskCategories, getTasks } from "@/lib/queries/task";
 import { tasksMock } from "@/components/tasks/TaskList";
 import { taskCategoriesMock } from "@/components/tasks/taskCategoriesMock";
