@@ -4,3 +4,4 @@ export {
   ViewModeProvider,
   type ViewMode,
 } from "./ViewModeContext";
+export { ViewModeContainer } from "./ViewModeContainer";

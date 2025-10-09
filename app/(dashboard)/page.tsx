@@ -1,4 +1,6 @@
+import { List } from "@/components/common/List";
 import { PageGrid } from "@/components/common/PageGrid";
+import { Repeat } from "@/components/common/Repeat";
 import {
   ToolbarMobileHeading,
   ToolbarMobileTop,
@@ -20,6 +22,9 @@ import {
   TasksDoneCardSkeleton,
 } from "@/components/dashboard/TasksDoneCard";
 import { AssignedTasks } from "@/components/tasks/AssignedTasks";
+import { AssignedTasksSection } from "@/components/tasks/AssignedTasks/AssignedTasksSection";
+import { AssignedTasksSectionHeading } from "@/components/tasks/AssignedTasks/AssignedTasksSectionHeading";
+import { TaskListItem } from "@/components/tasks/TaskListItem";
 import { Suspense } from "react";
 
 export default function DashboardPage() {
@@ -46,7 +51,18 @@ export default function DashboardPage() {
         </Suspense>
       </div>
 
-      <AssignedTasks />
+      <Suspense
+        fallback={
+          <AssignedTasksSection>
+            <AssignedTasksSectionHeading />
+            <List>
+              <Repeat items={10} renderItem={() => <TaskListItem />} />
+            </List>
+          </AssignedTasksSection>
+        }
+      >
+        <AssignedTasks />
+      </Suspense>
     </PageGrid>
   );
 }

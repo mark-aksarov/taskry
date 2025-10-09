@@ -1,50 +1,20 @@
-import { Card } from "@/components/common/Card";
-import {
-  EmptySection,
-  EmptySectionDescription,
-  EmptySectionHeading,
-  EmptySectionLink,
-} from "@/components/common/EmptySection";
-import { Repeat } from "@/components/common/Repeat";
 import { getTasks } from "@/lib/queries/task";
-import { Suspense } from "react";
 import { TaskList } from "../TaskList";
-import { TaskListItem } from "../TaskListItem";
+import { AssignedTasksSection } from "./AssignedTasksSection";
+import { AssignedTasksSectionHeading } from "./AssignedTasksSectionHeading";
+import { AssignedTasksEmptyCard } from "./AssignedTasksEmptyCard";
 
 export async function AssignedTasks() {
   const tasks = await getTasks();
 
   if (!tasks.length) {
-    return (
-      <Card className="md:relative md:flex-1">
-        <div className="flex w-full items-center justify-center p-8 md:absolute md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2">
-          <EmptySection>
-            <EmptySectionHeading
-              tag="h2"
-              className="max-md:text-3xl md:text-4xl"
-            >
-              No tasks yet
-            </EmptySectionHeading>
-            <EmptySectionDescription>
-              Create a new task to keep track of your work
-            </EmptySectionDescription>
-            <EmptySectionLink href="#">New Task</EmptySectionLink>
-          </EmptySection>
-        </div>
-      </Card>
-    );
+    return <AssignedTasksEmptyCard />;
   }
 
   return (
-    <section className="flex flex-col gap-4">
-      <h2 className="text-base font-bold text-black dark:text-white">
-        Assigned Tasks
-      </h2>
-      <Suspense
-        fallback={<Repeat items={10} renderItem={() => <TaskListItem />} />}
-      >
-        <TaskList tasks={tasks} />
-      </Suspense>
-    </section>
+    <AssignedTasksSection>
+      <AssignedTasksSectionHeading />
+      <TaskList tasks={tasks} />
+    </AssignedTasksSection>
   );
 }

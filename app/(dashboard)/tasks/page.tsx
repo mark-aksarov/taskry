@@ -10,7 +10,10 @@ import {
   EmptySectionLink,
 } from "@/components/common/EmptySection";
 import { PageGrid } from "@/components/common/PageGrid";
-import { ViewModeToggleButtonGroup } from "@/components/common/ViewMode";
+import {
+  ViewModeContainer,
+  ViewModeToggleButtonGroup,
+} from "@/components/common/ViewMode";
 import {
   ToolbarDesktop,
   ToolbarMobileBottom,
@@ -105,8 +108,10 @@ export default async function TasksPage() {
             iconLeft={<Plus size={16} strokeWidth={1.5} absoluteStrokeWidth />}
           />
         </ToolbarMobileBottom>
-        <TaskList tasks={tasks} />
-        <TaskGrid tasks={tasks} />
+        <ViewModeContainer
+          list={<TaskList tasks={tasks} />}
+          grid={<TaskGrid tasks={tasks} />}
+        />
       </ViewModeProvider>
     </PageGrid>
   );
