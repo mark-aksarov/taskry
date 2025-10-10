@@ -1,5 +1,5 @@
 import { CustomerGrid } from "./CustomerGrid";
-import { customersMock } from "../customersMock";
+import { customersMock } from "../../../lib/data/__mocks__/customers";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { ViewModeProvider } from "@/components/common/ViewMode";
 

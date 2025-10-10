@@ -2,7 +2,7 @@ import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { CustomerFiltersForm } from "./CustomerFiltersForm";
 import { mocked } from "storybook/internal/test";
 import { getCompanies } from "@/lib/queries/companies";
-import { companiesMock } from "@/components/companies/companiesMock";
+import { companiesMock } from "@/lib/data/__mocks__/companies";
 import { CompanyCheckboxGroup } from "@/components/companies/CompanyCheckboxGroup";
 
 const meta: Meta<typeof CustomerFiltersForm> = {

@@ -1,4 +1,4 @@
-import { customersMock } from "../customersMock";
+import { customersMock } from "../../../lib/data/__mocks__/customers";
 import { CustomerListItem } from "./CustomerListItem";
 import { Meta, StoryObj } from "@storybook/react";
 

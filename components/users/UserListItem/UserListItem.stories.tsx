@@ -1,4 +1,4 @@
-import { usersMock } from "../usersMock";
+import { usersMock } from "../../../lib/data/__mocks__/users";
 import { UserListItem } from "./UserListItem";
 import { Meta, StoryObj } from "@storybook/react";
 

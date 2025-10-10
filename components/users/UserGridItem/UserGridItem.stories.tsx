@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { UserGridItem } from "./UserGridItem";
-import { usersMock } from "../usersMock";
+import { usersMock } from "../../../lib/data/__mocks__/users";
 
 const meta = {
   title: "Components/users/UserGridItem",

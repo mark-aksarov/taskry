@@ -3,16 +3,16 @@ import { mocked } from "storybook/test";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { PageDecorator } from "@/.storybook/decorators";
 import { getProjectCategories, getProjects } from "@/lib/queries/project";
-import { projectCategoriesMock } from "@/components/projects/projectCategoriesMock";
-import { customersMock } from "@/components/customer/customersMock";
+import { projectCategoriesMock } from "@/lib/data/__mocks__/projectCategories";
+import { customersMock } from "@/lib/data/__mocks__/customers";
 import { getCustomers } from "@/lib/queries/customers";
 import { getUsers } from "@/lib/queries/user";
-import { usersMock } from "@/components/users/usersMock";
+import { usersMock } from "@/lib/data/__mocks__/users";
 import { getNotifications } from "@/lib/queries/notification";
 import { notificationsMock } from "@/components/notifications/NotificationOverlayList";
 import { getTaskCategories, getTasks } from "@/lib/queries/task";
 import { tasksMock } from "@/components/tasks/TaskList";
-import { taskCategoriesMock } from "@/components/tasks/taskCategoriesMock";
+import { taskCategoriesMock } from "@/lib/data/__mocks__/taskCategories";
 import { projectsMock } from "@/components/projects/ProjectList";
 
 const meta = {

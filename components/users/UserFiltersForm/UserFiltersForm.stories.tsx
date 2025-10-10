@@ -2,7 +2,7 @@ import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { UserFiltersForm } from "./UserFiltersForm";
 import { mocked } from "storybook/test";
 import { getPositions } from "@/lib/queries/user";
-import { positionsMock } from "../positionsMock";
+import { positionsMock } from "../../../lib/data/__mocks__/positions";
 import { PositionCheckboxGroup } from "../PositionCheckboxGroup";
 
 const meta: Meta<typeof UserFiltersForm> = {

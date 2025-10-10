@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { UserList } from "./UserList";
-import { usersMock } from "../usersMock";
+import { usersMock } from "../../../lib/data/__mocks__/users";
 
 const meta: Meta<typeof UserList> = {
   title: "Components/users/UserList",

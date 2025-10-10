@@ -3,13 +3,13 @@ import { mocked } from "storybook/test";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { PageDecorator } from "@/.storybook/decorators";
 import { getUsers } from "@/lib/queries/user";
-import { usersMock } from "@/components/users/usersMock";
+import { usersMock } from "@/lib/data/__mocks__/users";
 import { getNotifications } from "@/lib/queries/notification";
 import { notificationsMock } from "@/components/notifications/NotificationOverlayList";
 import { getCompanies } from "@/lib/queries/companies";
 import { getCustomers } from "@/lib/queries/customers";
-import { customersMock } from "@/components/customer/customersMock";
-import { companiesMock } from "@/components/companies/companiesMock";
+import { customersMock } from "@/lib/data/__mocks__/customers";
+import { companiesMock } from "@/lib/data/__mocks__/companies";
 
 const meta = {
   title: "components/pages/Customers",

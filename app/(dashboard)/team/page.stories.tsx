@@ -3,10 +3,10 @@ import { mocked } from "storybook/test";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { PageDecorator } from "@/.storybook/decorators";
 import { getPositions, getUsers } from "@/lib/queries/user";
-import { usersMock } from "@/components/users/usersMock";
+import { usersMock } from "@/lib/data/__mocks__/users";
 import { getNotifications } from "@/lib/queries/notification";
 import { notificationsMock } from "@/components/notifications/NotificationOverlayList";
-import { positionsMock } from "@/components/users/positionsMock";
+import { positionsMock } from "@/lib/data/__mocks__/positions";
 
 const meta = {
   title: "components/pages/Team",
