@@ -12,6 +12,7 @@ sb.mock(import("../lib/queries/task"));
 sb.mock(import("../lib/queries/notification"));
 sb.mock(import("../lib/queries/user"));
 sb.mock(import("../lib/queries/customers"));
+sb.mock(import("../lib/queries/companies"));
 sb.mock(import("../lib/queries/storage"));
 sb.mock(import("next/navigation"));
 

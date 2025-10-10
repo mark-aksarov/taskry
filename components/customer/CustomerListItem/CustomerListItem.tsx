@@ -20,61 +20,57 @@ import {
   ListItemImageContainerSkeleton,
 } from "@/components/common/List";
 
-import { UserPreview } from "@/lib/queries/types";
+import { CustomerPreview } from "@/lib/queries/types";
 import { ResponsiveMenuTrigger } from "@/components/common/ResponsiveMenuTrigger";
 
-export function UserListItem({
-  user,
-  showCheckbox,
-}: {
-  user?: UserPreview;
-  showCheckbox?: boolean;
-}) {
+export function CustomerListItem({ customer }: { customer?: CustomerPreview }) {
   return (
     <ListItem>
-      {/* --- Creator Image & Menu --- */}
-      {user && showCheckbox && <Checkbox aria-label="user checkbox" />}
+      {/* --- Creator Image --- */}
+      {customer && <Checkbox aria-label="customer checkbox" />}
 
-      {!user ? (
+      {!customer ? (
         <ListItemImageContainerSkeleton className="h-9 w-9" />
-      ) : user.imageUrl ? (
-        <Link href={`/users/${user.id}`}>
+      ) : customer.imageUrl ? (
+        <Link href={`/customers/${customer.id}`}>
           <ListItemImageContainer className="h-9 w-9">
-            <Image fill src={user.imageUrl} alt={user.name} />
+            <Image fill src={customer.imageUrl} alt={customer.fullName} />
           </ListItemImageContainer>
         </Link>
       ) : (
         <ListItemImageContainer className="h-9 w-9" />
       )}
 
-      {/* --- User Details --- */}
-      {!user ? (
+      {/* --- Customer Details --- */}
+      {!customer ? (
         <ListItemInfoSkeleton />
       ) : (
         <ListItemInfo>
           <ListItemTitle>
-            <ListItemLink href={`/users/${user.id}`}>{user.name}</ListItemLink>
+            <ListItemLink href={`/customers/${customer.id}`}>
+              {customer.fullName}
+            </ListItemLink>
           </ListItemTitle>
 
           <ListItemText>
-            <ListItemLink href={`mailto:${user.email}`}>
-              {user.email}
+            <ListItemLink href={`mailto:${customer.email}`}>
+              {customer.email}
             </ListItemLink>
           </ListItemText>
         </ListItemInfo>
       )}
 
-      {/* --- User Phone --- */}
-      {!user ? (
+      {/* --- Customer Phone --- */}
+      {!customer ? (
         <ListItemInfoSkeleton className="@max-lg:hidden" />
       ) : (
         <ListItemInfo className="@max-lg:hidden">
           <ListItemTitle>Phone number</ListItemTitle>
 
           <ListItemText>
-            {user.phone ? (
-              <ListItemLink href={`tel:${user.phone}`}>
-                {user.phone}
+            {customer.phoneNumber ? (
+              <ListItemLink href={`tel:${customer.phoneNumber}`}>
+                {customer.phoneNumber}
               </ListItemLink>
             ) : (
               "Phone number is not provided"
@@ -83,17 +79,17 @@ export function UserListItem({
         </ListItemInfo>
       )}
 
-      {/* --- User Public link --- */}
-      {!user ? (
+      {/* --- Customer Public link --- */}
+      {!customer ? (
         <ListItemInfoSkeleton className="@max-2xl:hidden" />
       ) : (
         <ListItemInfo className="@max-2xl:hidden">
           <ListItemTitle>Public link</ListItemTitle>
 
           <ListItemText>
-            {user.publicLink ? (
-              <ListItemLink href={user.publicLink}>
-                {user.publicLink}
+            {customer.publicLink ? (
+              <ListItemLink href={customer.publicLink}>
+                {customer.publicLink}
               </ListItemLink>
             ) : (
               "Link is not provided"
@@ -102,20 +98,18 @@ export function UserListItem({
         </ListItemInfo>
       )}
 
-      {/* --- User Position --- */}
-      {!user ? (
+      {/* --- Customer Company --- */}
+      {!customer ? (
         <ListItemInfoSkeleton className="@max-4xl:hidden" />
       ) : (
         <ListItemInfo className="@max-4xl:hidden">
-          <ListItemTitle>Position</ListItemTitle>
+          <ListItemTitle>Company</ListItemTitle>
 
-          <ListItemText>
-            {user.position ? user.position.name : "Unknown position"}
-          </ListItemText>
+          <ListItemText>{customer.company.name}</ListItemText>
         </ListItemInfo>
       )}
 
-      {!user ? (
+      {!customer ? (
         <ListItemActionMenuSkeleton />
       ) : (
         <ResponsiveMenuTrigger
@@ -123,7 +117,7 @@ export function UserListItem({
           renderDialogHeader={() => <ListItemActionMenuDialogHeader />}
           renderButton={() => (
             <Button
-              aria-label="user menu"
+              aria-label="customer menu"
               variant="ghost"
               iconLeft={
                 <Ellipsis size={16} strokeWidth={1.5} absoluteStrokeWidth />

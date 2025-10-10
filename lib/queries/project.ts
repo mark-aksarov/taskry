@@ -45,7 +45,6 @@ export const getProjects = cache(async (): Promise<ProjectPreview[]> => {
         },
       },
     },
-    take: 10,
   });
 });
 

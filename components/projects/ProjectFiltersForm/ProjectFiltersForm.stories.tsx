@@ -10,7 +10,6 @@ import { getUsers } from "@/lib/queries/user";
 import { ProjectCategoryCheckboxGroup } from "../ProjectCategoryCheckboxGroup";
 import { CustomerCheckboxGroup } from "@/components/customer/CustomerCheckboxGroup";
 import { UserCheckboxGroup } from "@/components/users/UserCheckboxGroup";
-import { ProjectFiltersFormSkeleton } from "./ProjectFiltersFormSkeleton";
 
 const meta: Meta<typeof ProjectFiltersForm> = {
   title: "Components/projects/ProjectFiltersForm",
@@ -49,7 +48,3 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {};
-
-export const Skeleton: Story = {
-  render: () => <ProjectFiltersFormSkeleton />,
-};

@@ -24,12 +24,12 @@ import { FiltersSideSheetTrigger } from "@/components/common/FiltersSideSheetTri
 import { FiltersBottomSheetTrigger } from "@/components/common/FiltersBottomSheetTrigger";
 import { getPositions, getUsers } from "@/lib/queries/user";
 import { ViewModeProvider } from "@/components/common/ViewMode";
-import { TaskFiltersFormSkeleton } from "@/components/tasks/TaskFiltersForm";
 import { UserActionsMenuTrigger } from "@/components/users/UserActionsMenuTrigger";
 import { UserFiltersForm } from "@/components/users/UserFiltersForm";
 import { PositionCheckboxGroup } from "@/components/users/PositionCheckboxGroup";
 import { UserList } from "@/components/users/UserList";
 import { UserGrid } from "@/components/users/UserGrid";
+import { FiltersFormSkeleton } from "@/components/common/FiltersFormSkeleton";
 
 export default async function TeamPage() {
   const positionsPromise = getPositions(1);
@@ -63,7 +63,7 @@ export default async function TeamPage() {
         <ToolbarDesktop>
           <FiltersSideSheetTrigger
             filtersForm={
-              <Suspense fallback={<TaskFiltersFormSkeleton />}>
+              <Suspense fallback={<FiltersFormSkeleton />}>
                 {usersFiltersForm}
               </Suspense>
             }
@@ -80,7 +80,7 @@ export default async function TeamPage() {
           <ToolbarMobileHeading>Users</ToolbarMobileHeading>
           <FiltersBottomSheetTrigger
             filtersForm={
-              <Suspense fallback={<TaskFiltersFormSkeleton />}>
+              <Suspense fallback={<FiltersFormSkeleton />}>
                 {usersFiltersForm}
               </Suspense>
             }

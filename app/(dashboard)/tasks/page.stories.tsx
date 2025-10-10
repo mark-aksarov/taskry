@@ -39,7 +39,6 @@ const meta = {
     mocked(getProjects).mockReturnValue(
       new Promise((res) => res(projectsMock)),
     );
-    mocked(getUsers).mockReturnValue(new Promise((res) => res(usersMock)));
   },
 } satisfies Meta<typeof TasksPage>;
 
@@ -48,7 +47,7 @@ type Story = StoryObj<typeof TasksPage>;
 
 export const Default: Story = {};
 
-export const WithNoTasksAndUsers = {
+export const WithNoTasks = {
   beforeEach: () => {
     mocked(getTasks).mockReturnValue(new Promise((res) => res([])));
   },

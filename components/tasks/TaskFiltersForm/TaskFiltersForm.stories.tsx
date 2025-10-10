@@ -6,7 +6,6 @@ import { taskCategoriesMock } from "../taskCategoriesMock";
 import { usersMock } from "@/components/users/usersMock";
 import { getUsers } from "@/lib/queries/user";
 import { UserCheckboxGroup } from "@/components/users/UserCheckboxGroup";
-import { TaskFiltersFormSkeleton } from "./TaskFiltersFormSkeleton";
 import { TaskCategoryCheckboxGroup } from "../TaskCategoryCheckboxGroup";
 import { getTaskCategories } from "@/lib/queries/task";
 import { projectsMock } from "@/components/projects/ProjectList";
@@ -49,7 +48,3 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {};
-
-export const Skeleton: Story = {
-  render: () => <TaskFiltersFormSkeleton />,
-};

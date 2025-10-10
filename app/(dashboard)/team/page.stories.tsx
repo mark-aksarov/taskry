@@ -6,7 +6,6 @@ import { getPositions, getUsers } from "@/lib/queries/user";
 import { usersMock } from "@/components/users/usersMock";
 import { getNotifications } from "@/lib/queries/notification";
 import { notificationsMock } from "@/components/notifications/NotificationOverlayList";
-import { getTasks } from "@/lib/queries/task";
 import { positionsMock } from "@/components/users/positionsMock";
 
 const meta = {
@@ -15,7 +14,6 @@ const meta = {
   parameters: { layout: "fullscreen" },
   decorators: [PageDecorator],
   beforeEach: () => {
-    mocked(getUsers).mockReturnValue(new Promise((res) => res(usersMock)));
     mocked(getNotifications).mockReturnValue(
       new Promise((res) => res(notificationsMock.slice(0, 5))),
     );
@@ -31,9 +29,9 @@ type Story = StoryObj<typeof TeamPage>;
 
 export const Default: Story = {};
 
-export const WithNoTasksAndUsers = {
+export const WithNoUsers = {
   beforeEach: () => {
-    mocked(getTasks).mockReturnValue(new Promise((res) => res([])));
+    mocked(getUsers).mockReturnValue(new Promise((res) => res([])));
   },
 } satisfies Story;
 

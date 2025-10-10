@@ -22,10 +22,7 @@ import {
 } from "@/components/common/Toolbar";
 import { FiltersSideSheetTrigger } from "@/components/common/FiltersSideSheetTrigger";
 import { FiltersBottomSheetTrigger } from "@/components/common/FiltersBottomSheetTrigger";
-import {
-  ProjectFiltersForm,
-  ProjectFiltersFormSkeleton,
-} from "@/components/projects/ProjectFiltersForm";
+import { ProjectFiltersForm } from "@/components/projects/ProjectFiltersForm";
 import { ProjectCategoryCheckboxGroup } from "@/components/projects/ProjectCategoryCheckboxGroup";
 import { CustomerCheckboxGroup } from "@/components/customer/CustomerCheckboxGroup";
 import { ProjectActionsMenuTrigger } from "@/components/projects/ProjectActionsMenuTrigger";
@@ -36,6 +33,7 @@ import { getUsers } from "@/lib/queries/user";
 import { UserCheckboxGroup } from "@/components/users/UserCheckboxGroup";
 import { ViewModeProvider } from "@/components/common/ViewMode";
 import { ProjectGrid } from "@/components/projects/ProjectGrid";
+import { FiltersFormSkeleton } from "@/components/common/FiltersFormSkeleton";
 
 export default async function ProjectsPage() {
   const categoriesPromise = getProjectCategories(1);
@@ -75,7 +73,7 @@ export default async function ProjectsPage() {
         <ToolbarDesktop>
           <FiltersSideSheetTrigger
             filtersForm={
-              <Suspense fallback={<ProjectFiltersFormSkeleton />}>
+              <Suspense fallback={<FiltersFormSkeleton />}>
                 {projectFiltersForm}
               </Suspense>
             }
@@ -92,7 +90,7 @@ export default async function ProjectsPage() {
           <ToolbarMobileHeading>Projects</ToolbarMobileHeading>
           <FiltersBottomSheetTrigger
             filtersForm={
-              <Suspense fallback={<ProjectFiltersFormSkeleton />}>
+              <Suspense fallback={<FiltersFormSkeleton />}>
                 {projectFiltersForm}
               </Suspense>
             }

@@ -137,3 +137,14 @@ export type UserPreview = Prisma.UserGetPayload<{
     };
   };
 }>;
+
+export type CustomerPreview = Prisma.CustomerGetPayload<{
+  include: {
+    company: {
+      select: {
+        name: true;
+        workspaceId: true;
+      };
+    };
+  };
+}>;

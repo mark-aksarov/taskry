@@ -22,47 +22,37 @@ import {
 } from "@/components/common/Toolbar";
 import { FiltersSideSheetTrigger } from "@/components/common/FiltersSideSheetTrigger";
 import { FiltersBottomSheetTrigger } from "@/components/common/FiltersBottomSheetTrigger";
-import { getTaskCategories } from "@/lib/queries/task";
-import { getUsers } from "@/lib/queries/user";
-import { UserCheckboxGroup } from "@/components/users/UserCheckboxGroup";
 import { ViewModeProvider } from "@/components/common/ViewMode";
-import { getTasks } from "@/lib/queries/task";
-import { TaskFiltersForm } from "@/components/tasks/TaskFiltersForm";
-import { TaskCategoryCheckboxGroup } from "@/components/tasks/TaskCategoryCheckboxGroup";
-import { ProjectCheckboxGroup } from "@/components/projects/ProjectCheckboxGroup";
-import { getProjects } from "@/lib/queries/project";
-import { TaskActionsMenuTrigger } from "@/components/tasks/TaskActionsMenuTrigger";
-import { TaskList } from "@/components/tasks/TaskList";
-import { TaskGrid } from "@/components/tasks/TaskGrid";
+import { getCompanies } from "@/lib/queries/companies";
+import { CompanyCheckboxGroup } from "@/components/companies/CompanyCheckboxGroup";
+import { getCustomers } from "@/lib/queries/customers";
+import { CustomerList } from "@/components/customer/CustomerList";
+import { CustomerGrid } from "@/components/customer/CustomerGrid";
 import { FiltersFormSkeleton } from "@/components/common/FiltersFormSkeleton";
+import { CustomerFiltersForm } from "@/components/customer/CustomerFiltersForm";
+import { CustomerActionsMenuTrigger } from "@/components/customer/CustomerActionsMenuTrigger";
 
-export default async function TasksPage() {
-  const categoriesPromise = getTaskCategories(1);
-  const projectsPromise = getProjects();
-  const usersPromise = getUsers(1);
-  const tasks = await getTasks();
+export default async function CustomersPage() {
+  const companiesPromise = getCompanies(1);
+  const customers = await getCustomers(1);
 
-  const tasksFiltersForm = (
-    <TaskFiltersForm
-      categoryCheckboxGroup={
-        <TaskCategoryCheckboxGroup categoriesPromise={categoriesPromise} />
+  const customersFiltersForm = (
+    <CustomerFiltersForm
+      companyCheckboxGroup={
+        <CompanyCheckboxGroup companiesPromise={companiesPromise} />
       }
-      projectCheckboxGroup={
-        <ProjectCheckboxGroup projectsPromise={projectsPromise} />
-      }
-      creatorCheckboxGroup={<UserCheckboxGroup usersPromise={usersPromise} />}
     />
   );
 
-  if (!tasks.length) {
+  if (!customers.length) {
     return (
       <Centered>
         <EmptySection>
-          <EmptySectionHeading>No tasks yet</EmptySectionHeading>
+          <EmptySectionHeading>No Customers yet</EmptySectionHeading>
           <EmptySectionDescription>
-            Create a new task to keep track of your work
+            Add a new customer to start growing your client base
           </EmptySectionDescription>
-          <EmptySectionLink href="#">New Task</EmptySectionLink>
+          <EmptySectionLink href="#">New Customer</EmptySectionLink>
         </EmptySection>
       </Centered>
     );
@@ -75,40 +65,40 @@ export default async function TasksPage() {
           <FiltersSideSheetTrigger
             filtersForm={
               <Suspense fallback={<FiltersFormSkeleton />}>
-                {tasksFiltersForm}
+                {customersFiltersForm}
               </Suspense>
             }
           />
-          <TaskActionsMenuTrigger />
+          <CustomerActionsMenuTrigger />
           <ViewModeToggleButtonGroup className="ml-auto" />
           <Button
-            label="New Task"
+            label="New User"
             iconLeft={<Plus size={16} strokeWidth={1.5} absoluteStrokeWidth />}
           />
         </ToolbarDesktop>
 
         <ToolbarMobileTop>
-          <ToolbarMobileHeading>Tasks</ToolbarMobileHeading>
+          <ToolbarMobileHeading>Users</ToolbarMobileHeading>
           <FiltersBottomSheetTrigger
             filtersForm={
               <Suspense fallback={<FiltersFormSkeleton />}>
-                {tasksFiltersForm}
+                {customersFiltersForm}
               </Suspense>
             }
           />
-          <TaskActionsMenuTrigger />
+          <CustomerActionsMenuTrigger />
         </ToolbarMobileTop>
 
         <ToolbarMobileBottom>
           <ViewModeToggleButtonGroup />
           <Button
-            label="New Task"
+            label="New User"
             iconLeft={<Plus size={16} strokeWidth={1.5} absoluteStrokeWidth />}
           />
         </ToolbarMobileBottom>
         <ViewModeContainer
-          list={<TaskList tasks={tasks} />}
-          grid={<TaskGrid tasks={tasks} />}
+          list={<CustomerList customers={customers} />}
+          grid={<CustomerGrid customers={customers} />}
         />
       </ViewModeProvider>
     </PageGrid>

@@ -1,47 +1,43 @@
-import ProjectsPage from "./page";
+import CustomersPage from "./page";
 import { mocked } from "storybook/test";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { PageDecorator } from "@/.storybook/decorators";
-import { getProjectCategories, getProjects } from "@/lib/queries/project";
-import { projectCategoriesMock } from "@/components/projects/projectCategoriesMock";
-import { customersMock } from "@/components/customer/customersMock";
-import { getCustomers } from "@/lib/queries/customers";
 import { getUsers } from "@/lib/queries/user";
 import { usersMock } from "@/components/users/usersMock";
 import { getNotifications } from "@/lib/queries/notification";
 import { notificationsMock } from "@/components/notifications/NotificationOverlayList";
-import { projectsMock } from "@/components/projects/ProjectList";
+import { getCompanies } from "@/lib/queries/companies";
+import { getCustomers } from "@/lib/queries/customers";
+import { customersMock } from "@/components/customer/customersMock";
+import { companiesMock } from "@/components/companies/companiesMock";
 
 const meta = {
-  title: "components/pages/Projects",
-  component: ProjectsPage,
+  title: "components/pages/Customers",
+  component: CustomersPage,
   parameters: { layout: "fullscreen" },
   decorators: [PageDecorator],
   beforeEach: () => {
-    mocked(getProjectCategories).mockReturnValue(
-      new Promise((res) => res(projectCategoriesMock)),
-    );
-    mocked(getCustomers).mockReturnValue(
-      new Promise((res) => res(customersMock)),
-    );
     mocked(getUsers).mockReturnValue(new Promise((res) => res(usersMock)));
     mocked(getNotifications).mockReturnValue(
       new Promise((res) => res(notificationsMock.slice(0, 5))),
     );
-    mocked(getProjects).mockReturnValue(
-      new Promise((res) => res(projectsMock)),
+    mocked(getCustomers).mockReturnValue(
+      new Promise((res) => res(customersMock)),
+    );
+    mocked(getCompanies).mockReturnValue(
+      new Promise((res) => res(companiesMock)),
     );
   },
-} satisfies Meta<typeof ProjectsPage>;
+} satisfies Meta<typeof CustomersPage>;
 
 export default meta;
-type Story = StoryObj<typeof ProjectsPage>;
+type Story = StoryObj<typeof CustomersPage>;
 
 export const Default: Story = {};
 
-export const WithNoProjects = {
+export const WithNoCustomers = {
   beforeEach: () => {
-    mocked(getProjects).mockReturnValue(new Promise((res) => res([])));
+    mocked(getCustomers).mockReturnValue(new Promise((res) => res([])));
   },
 } satisfies Story;
 

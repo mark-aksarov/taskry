@@ -46,7 +46,6 @@ export const getTasks = cache(async (): Promise<TaskPreview[]> => {
         },
       },
     },
-    take: 10,
   });
 });
 
