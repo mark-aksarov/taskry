@@ -6,6 +6,7 @@ import {
   LogOut,
   Mail,
   Settings,
+  UserRound,
   Users,
 } from "lucide-react";
 
@@ -54,9 +55,9 @@ export const AppNavigation = ({ className }: AppNavigationProps) => {
           <Badge className="ml-auto rounded-xl px-1.5! py-0.5!">28</Badge>
         </AppNavigationItem>
 
-        <AppNavigationItem href="/settings">
-          <Settings size={18} strokeWidth={1.5} absoluteStrokeWidth />
-          Settings
+        <AppNavigationItem href="/profile">
+          <UserRound size={18} strokeWidth={1.5} absoluteStrokeWidth />
+          Profile
         </AppNavigationItem>
       </nav>
 

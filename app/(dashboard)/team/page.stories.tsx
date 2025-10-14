@@ -7,6 +7,7 @@ import { usersMock } from "@/lib/data/__mocks__/users";
 import { getNotifications } from "@/lib/queries/notification";
 import { notificationsMock } from "@/components/notifications/NotificationOverlayList";
 import { positionsMock } from "@/lib/data/__mocks__/positions";
+import { useSelectedLayoutSegments } from "next/navigation";
 
 const meta = {
   title: "components/pages/Team",
@@ -21,6 +22,7 @@ const meta = {
     mocked(getPositions).mockReturnValue(
       new Promise((res) => res(positionsMock)),
     );
+    mocked(useSelectedLayoutSegments).mockReturnValue(["(dashboard)", "team"]);
   },
 } satisfies Meta<typeof TeamPage>;
 

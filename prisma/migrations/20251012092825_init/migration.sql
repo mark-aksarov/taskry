@@ -16,8 +16,36 @@ CREATE TABLE "public"."attachment" (
     "fileUrl" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
+    "commentId" INTEGER,
+    "messageId" INTEGER,
+    "projectId" INTEGER,
+    "taskId" INTEGER,
 
     CONSTRAINT "attachment_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "public"."comment" (
+    "id" SERIAL NOT NULL,
+    "content" TEXT NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "senderId" TEXT NOT NULL,
+    "projectId" INTEGER,
+    "taskId" INTEGER,
+
+    CONSTRAINT "comment_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "public"."read" (
+    "id" SERIAL NOT NULL,
+    "commentId" INTEGER,
+    "messageId" INTEGER,
+    "userId" TEXT NOT NULL,
+    "readAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT "read_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -86,57 +114,6 @@ CREATE TABLE "public"."project_status" (
 );
 
 -- CreateTable
-CREATE TABLE "public"."project_member" (
-    "projectId" INTEGER NOT NULL,
-    "userId" TEXT NOT NULL,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL,
-
-    CONSTRAINT "project_member_pkey" PRIMARY KEY ("projectId","userId")
-);
-
--- CreateTable
-CREATE TABLE "public"."project_attachment" (
-    "attachmentId" INTEGER NOT NULL,
-    "projectId" INTEGER NOT NULL,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL,
-
-    CONSTRAINT "project_attachment_pkey" PRIMARY KEY ("attachmentId","projectId")
-);
-
--- CreateTable
-CREATE TABLE "public"."project_comment" (
-    "id" SERIAL NOT NULL,
-    "content" TEXT NOT NULL,
-    "projectId" INTEGER NOT NULL,
-    "senderId" TEXT NOT NULL,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL,
-
-    CONSTRAINT "project_comment_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
-CREATE TABLE "public"."project_comment_user" (
-    "projectCommentId" INTEGER NOT NULL,
-    "userId" TEXT NOT NULL,
-    "readAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-
-    CONSTRAINT "project_comment_user_pkey" PRIMARY KEY ("projectCommentId","userId")
-);
-
--- CreateTable
-CREATE TABLE "public"."project_comment_attachment" (
-    "attachmentId" INTEGER NOT NULL,
-    "projectCommentId" INTEGER NOT NULL,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL,
-
-    CONSTRAINT "project_comment_attachment_pkey" PRIMARY KEY ("attachmentId","projectCommentId")
-);
-
--- CreateTable
 CREATE TABLE "public"."task" (
     "id" SERIAL NOT NULL,
     "title" VARCHAR(255) NOT NULL,
@@ -187,47 +164,6 @@ CREATE TABLE "public"."subtask" (
 );
 
 -- CreateTable
-CREATE TABLE "public"."task_attachment" (
-    "attachmentId" INTEGER NOT NULL,
-    "taskId" INTEGER NOT NULL,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL,
-
-    CONSTRAINT "task_attachment_pkey" PRIMARY KEY ("attachmentId","taskId")
-);
-
--- CreateTable
-CREATE TABLE "public"."task_comment" (
-    "id" SERIAL NOT NULL,
-    "content" TEXT NOT NULL,
-    "taskId" INTEGER NOT NULL,
-    "senderId" TEXT NOT NULL,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL,
-
-    CONSTRAINT "task_comment_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
-CREATE TABLE "public"."task_comment_user" (
-    "taskCommentId" INTEGER NOT NULL,
-    "userId" TEXT NOT NULL,
-    "readAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-
-    CONSTRAINT "task_comment_user_pkey" PRIMARY KEY ("taskCommentId","userId")
-);
-
--- CreateTable
-CREATE TABLE "public"."task_comment_attachment" (
-    "attachmentId" INTEGER NOT NULL,
-    "taskCommentId" INTEGER NOT NULL,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL,
-
-    CONSTRAINT "task_comment_attachment_pkey" PRIMARY KEY ("attachmentId","taskCommentId")
-);
-
--- CreateTable
 CREATE TABLE "public"."message_thread" (
     "id" SERIAL NOT NULL,
     "workspaceId" INTEGER NOT NULL,
@@ -248,25 +184,6 @@ CREATE TABLE "public"."message" (
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "message_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
-CREATE TABLE "public"."message_attachment" (
-    "attachmentId" INTEGER NOT NULL,
-    "messageId" INTEGER NOT NULL,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL,
-
-    CONSTRAINT "message_attachment_pkey" PRIMARY KEY ("attachmentId","messageId")
-);
-
--- CreateTable
-CREATE TABLE "public"."message_read" (
-    "messageId" INTEGER NOT NULL,
-    "userId" TEXT NOT NULL,
-    "readAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-
-    CONSTRAINT "message_read_pkey" PRIMARY KEY ("messageId","userId")
 );
 
 -- CreateTable
@@ -320,12 +237,15 @@ CREATE TABLE "public"."position" (
 -- CreateTable
 CREATE TABLE "public"."user" (
     "id" TEXT NOT NULL,
-    "name" VARCHAR(100) NOT NULL,
+    "fullName" VARCHAR(100) NOT NULL,
+    "bio" VARCHAR(5000),
+    "address" VARCHAR(255),
+    "birthdate" TIMESTAMP(3),
     "role" VARCHAR(50),
     "email" VARCHAR(100) NOT NULL,
     "emailVerified" BOOLEAN NOT NULL DEFAULT false,
     "imageUrl" TEXT,
-    "phone" VARCHAR(20),
+    "phoneNumber" VARCHAR(20),
     "publicLink" TEXT,
     "positionId" INTEGER,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -380,16 +300,22 @@ CREATE TABLE "public"."verification" (
 );
 
 -- CreateIndex
+CREATE INDEX "comment_projectId_idx" ON "public"."comment"("projectId");
+
+-- CreateIndex
+CREATE INDEX "comment_taskId_idx" ON "public"."comment"("taskId");
+
+-- CreateIndex
 CREATE INDEX "company_workspaceId_idx" ON "public"."company"("workspaceId");
 
 -- CreateIndex
 CREATE INDEX "customer_companyId_idx" ON "public"."customer"("companyId");
 
 -- CreateIndex
-CREATE INDEX "project_customerId_idx" ON "public"."project"("customerId");
+CREATE INDEX "project_creatorId_idx" ON "public"."project"("creatorId");
 
 -- CreateIndex
-CREATE INDEX "project_creatorId_idx" ON "public"."project"("creatorId");
+CREATE INDEX "project_customerId_idx" ON "public"."project"("customerId");
 
 -- CreateIndex
 CREATE INDEX "project_categoryId_idx" ON "public"."project"("categoryId");
@@ -417,9 +343,6 @@ CREATE INDEX "task_category_workspaceId_idx" ON "public"."task_category"("worksp
 
 -- CreateIndex
 CREATE INDEX "message_thread_workspaceId_idx" ON "public"."message_thread"("workspaceId");
-
--- CreateIndex
-CREATE INDEX "message_read_messageId_userId_idx" ON "public"."message_read"("messageId", "userId");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "notification_targetId_key" ON "public"."notification"("targetId");
@@ -452,6 +375,36 @@ CREATE UNIQUE INDEX "user_email_key" ON "public"."user"("email");
 CREATE UNIQUE INDEX "session_token_key" ON "public"."session"("token");
 
 -- AddForeignKey
+ALTER TABLE "public"."attachment" ADD CONSTRAINT "attachment_commentId_fkey" FOREIGN KEY ("commentId") REFERENCES "public"."comment"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "public"."attachment" ADD CONSTRAINT "attachment_messageId_fkey" FOREIGN KEY ("messageId") REFERENCES "public"."message"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "public"."attachment" ADD CONSTRAINT "attachment_projectId_fkey" FOREIGN KEY ("projectId") REFERENCES "public"."project"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "public"."attachment" ADD CONSTRAINT "attachment_taskId_fkey" FOREIGN KEY ("taskId") REFERENCES "public"."task"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "public"."comment" ADD CONSTRAINT "comment_senderId_fkey" FOREIGN KEY ("senderId") REFERENCES "public"."user"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "public"."comment" ADD CONSTRAINT "comment_projectId_fkey" FOREIGN KEY ("projectId") REFERENCES "public"."project"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "public"."comment" ADD CONSTRAINT "comment_taskId_fkey" FOREIGN KEY ("taskId") REFERENCES "public"."task"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "public"."read" ADD CONSTRAINT "read_commentId_fkey" FOREIGN KEY ("commentId") REFERENCES "public"."comment"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "public"."read" ADD CONSTRAINT "read_messageId_fkey" FOREIGN KEY ("messageId") REFERENCES "public"."message"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "public"."read" ADD CONSTRAINT "read_userId_fkey" FOREIGN KEY ("userId") REFERENCES "public"."user"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
 ALTER TABLE "public"."company" ADD CONSTRAINT "company_workspaceId_fkey" FOREIGN KEY ("workspaceId") REFERENCES "public"."workspace"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
@@ -473,36 +426,6 @@ ALTER TABLE "public"."project" ADD CONSTRAINT "project_statusId_fkey" FOREIGN KE
 ALTER TABLE "public"."project_category" ADD CONSTRAINT "project_category_workspaceId_fkey" FOREIGN KEY ("workspaceId") REFERENCES "public"."workspace"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "public"."project_member" ADD CONSTRAINT "project_member_projectId_fkey" FOREIGN KEY ("projectId") REFERENCES "public"."project"("id") ON DELETE CASCADE ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "public"."project_member" ADD CONSTRAINT "project_member_userId_fkey" FOREIGN KEY ("userId") REFERENCES "public"."user"("id") ON DELETE CASCADE ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "public"."project_attachment" ADD CONSTRAINT "project_attachment_attachmentId_fkey" FOREIGN KEY ("attachmentId") REFERENCES "public"."attachment"("id") ON DELETE CASCADE ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "public"."project_attachment" ADD CONSTRAINT "project_attachment_projectId_fkey" FOREIGN KEY ("projectId") REFERENCES "public"."project"("id") ON DELETE CASCADE ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "public"."project_comment" ADD CONSTRAINT "project_comment_projectId_fkey" FOREIGN KEY ("projectId") REFERENCES "public"."project"("id") ON DELETE CASCADE ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "public"."project_comment" ADD CONSTRAINT "project_comment_senderId_fkey" FOREIGN KEY ("senderId") REFERENCES "public"."user"("id") ON DELETE CASCADE ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "public"."project_comment_user" ADD CONSTRAINT "project_comment_user_projectCommentId_fkey" FOREIGN KEY ("projectCommentId") REFERENCES "public"."project_comment"("id") ON DELETE CASCADE ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "public"."project_comment_user" ADD CONSTRAINT "project_comment_user_userId_fkey" FOREIGN KEY ("userId") REFERENCES "public"."user"("id") ON DELETE CASCADE ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "public"."project_comment_attachment" ADD CONSTRAINT "project_comment_attachment_attachmentId_fkey" FOREIGN KEY ("attachmentId") REFERENCES "public"."attachment"("id") ON DELETE CASCADE ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "public"."project_comment_attachment" ADD CONSTRAINT "project_comment_attachment_projectCommentId_fkey" FOREIGN KEY ("projectCommentId") REFERENCES "public"."project_comment"("id") ON DELETE CASCADE ON UPDATE CASCADE;
-
--- AddForeignKey
 ALTER TABLE "public"."task" ADD CONSTRAINT "task_projectId_fkey" FOREIGN KEY ("projectId") REFERENCES "public"."project"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
@@ -521,30 +444,6 @@ ALTER TABLE "public"."task_category" ADD CONSTRAINT "task_category_workspaceId_f
 ALTER TABLE "public"."subtask" ADD CONSTRAINT "subtask_taskId_fkey" FOREIGN KEY ("taskId") REFERENCES "public"."task"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "public"."task_attachment" ADD CONSTRAINT "task_attachment_attachmentId_fkey" FOREIGN KEY ("attachmentId") REFERENCES "public"."attachment"("id") ON DELETE CASCADE ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "public"."task_attachment" ADD CONSTRAINT "task_attachment_taskId_fkey" FOREIGN KEY ("taskId") REFERENCES "public"."task"("id") ON DELETE CASCADE ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "public"."task_comment" ADD CONSTRAINT "task_comment_taskId_fkey" FOREIGN KEY ("taskId") REFERENCES "public"."task"("id") ON DELETE CASCADE ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "public"."task_comment" ADD CONSTRAINT "task_comment_senderId_fkey" FOREIGN KEY ("senderId") REFERENCES "public"."user"("id") ON DELETE CASCADE ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "public"."task_comment_user" ADD CONSTRAINT "task_comment_user_taskCommentId_fkey" FOREIGN KEY ("taskCommentId") REFERENCES "public"."task_comment"("id") ON DELETE CASCADE ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "public"."task_comment_user" ADD CONSTRAINT "task_comment_user_userId_fkey" FOREIGN KEY ("userId") REFERENCES "public"."user"("id") ON DELETE CASCADE ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "public"."task_comment_attachment" ADD CONSTRAINT "task_comment_attachment_attachmentId_fkey" FOREIGN KEY ("attachmentId") REFERENCES "public"."attachment"("id") ON DELETE CASCADE ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "public"."task_comment_attachment" ADD CONSTRAINT "task_comment_attachment_taskCommentId_fkey" FOREIGN KEY ("taskCommentId") REFERENCES "public"."task_comment"("id") ON DELETE CASCADE ON UPDATE CASCADE;
-
--- AddForeignKey
 ALTER TABLE "public"."message_thread" ADD CONSTRAINT "message_thread_workspaceId_fkey" FOREIGN KEY ("workspaceId") REFERENCES "public"."workspace"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
@@ -555,18 +454,6 @@ ALTER TABLE "public"."message" ADD CONSTRAINT "message_senderId_fkey" FOREIGN KE
 
 -- AddForeignKey
 ALTER TABLE "public"."message" ADD CONSTRAINT "message_receiverId_fkey" FOREIGN KEY ("receiverId") REFERENCES "public"."user"("id") ON DELETE CASCADE ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "public"."message_attachment" ADD CONSTRAINT "message_attachment_attachmentId_fkey" FOREIGN KEY ("attachmentId") REFERENCES "public"."attachment"("id") ON DELETE CASCADE ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "public"."message_attachment" ADD CONSTRAINT "message_attachment_messageId_fkey" FOREIGN KEY ("messageId") REFERENCES "public"."message"("id") ON DELETE CASCADE ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "public"."message_read" ADD CONSTRAINT "message_read_messageId_fkey" FOREIGN KEY ("messageId") REFERENCES "public"."message"("id") ON DELETE CASCADE ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "public"."message_read" ADD CONSTRAINT "message_read_userId_fkey" FOREIGN KEY ("userId") REFERENCES "public"."user"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "public"."notification" ADD CONSTRAINT "notification_actorId_fkey" FOREIGN KEY ("actorId") REFERENCES "public"."user"("id") ON DELETE SET NULL ON UPDATE CASCADE;

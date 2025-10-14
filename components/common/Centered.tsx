@@ -6,7 +6,7 @@ interface CenteredProps {
 
 export const Centered = ({ children }: CenteredProps) => {
   return (
-    <div className="flex h-full w-full items-center justify-center">
+    <div className="flex h-full w-full flex-1 items-center justify-center">
       {children}
     </div>
   );

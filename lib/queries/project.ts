@@ -5,48 +5,55 @@ import prisma from "../prisma";
 import { ProjectPreview } from "./types";
 import { ACTIVE_PROJECT_STATUS_ID } from "./constants";
 
-export const getProjects = cache(async (): Promise<ProjectPreview[]> => {
-  return await prisma.project.findMany({
-    include: {
-      creator: {
-        select: {
-          id: true,
-          name: true,
-          imageUrl: true,
+export const getProjects = cache(
+  async (creatorId?: string): Promise<ProjectPreview[]> => {
+    return await prisma.project.findMany({
+      where: creatorId
+        ? {
+            creatorId,
+          }
+        : undefined,
+      include: {
+        creator: {
+          select: {
+            id: true,
+            fullName: true,
+            imageUrl: true,
+          },
         },
-      },
-      status: {
-        select: {
-          id: true,
-          nameEn: true,
-          nameRu: true,
+        status: {
+          select: {
+            id: true,
+            nameEn: true,
+            nameRu: true,
+          },
         },
-      },
-      category: {
-        select: {
-          id: true,
-          name: true,
+        category: {
+          select: {
+            id: true,
+            name: true,
+          },
         },
-      },
-      customer: {
-        select: {
-          id: true,
-          fullName: true,
-          company: {
-            select: {
-              name: true,
+        customer: {
+          select: {
+            id: true,
+            fullName: true,
+            company: {
+              select: {
+                name: true,
+              },
             },
           },
         },
-      },
-      tasks: {
-        select: {
-          statusId: true,
+        tasks: {
+          select: {
+            statusId: true,
+          },
         },
       },
-    },
-  });
-});
+    });
+  },
+);
 
 export const getTotalProjects = cache(
   async (fromDate?: Date, toDate?: Date) => {

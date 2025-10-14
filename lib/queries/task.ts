@@ -11,43 +11,50 @@ export const getTask = cache(async (id: number) => {
   });
 });
 
-export const getTasks = cache(async (): Promise<TaskPreview[]> => {
-  return await prisma.task.findMany({
-    include: {
-      creator: {
-        select: {
-          id: true,
-          name: true,
-          imageUrl: true,
+export const getTasks = cache(
+  async (creatorId?: string): Promise<TaskPreview[]> => {
+    return await prisma.task.findMany({
+      where: creatorId
+        ? {
+            creatorId,
+          }
+        : undefined,
+      include: {
+        creator: {
+          select: {
+            id: true,
+            fullName: true,
+            imageUrl: true,
+          },
+        },
+        status: {
+          select: {
+            id: true,
+            nameEn: true,
+            nameRu: true,
+          },
+        },
+        project: {
+          select: {
+            id: true,
+            title: true,
+          },
+        },
+        category: {
+          select: {
+            id: true,
+            name: true,
+          },
+        },
+        subtasks: {
+          select: {
+            isDone: true,
+          },
         },
       },
-      status: {
-        select: {
-          id: true,
-          nameEn: true,
-          nameRu: true,
-        },
-      },
-      project: {
-        select: {
-          id: true,
-          title: true,
-        },
-      },
-      category: {
-        select: {
-          id: true,
-          name: true,
-        },
-      },
-      subtasks: {
-        select: {
-          isDone: true,
-        },
-      },
-    },
-  });
-});
+    });
+  },
+);
 
 export const getTaskCategories = cache(async (workspaceId: number) => {
   return prisma.taskCategory.findMany({

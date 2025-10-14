@@ -3,7 +3,7 @@
 import { focusRing } from "../styles";
 import { tv } from "tailwind-variants";
 import { baseButtonStyles } from "../Button";
-import type { ToggleButtonProps } from "react-aria-components";
+import type { ToggleButtonProps as RACToggleButtonProps } from "react-aria-components";
 import {
   composeRenderProps,
   ToggleButton as RACToggleButton,
@@ -42,6 +42,8 @@ export const toggleButtonStyles = tv({
     },
   ],
 });
+
+export interface ToggleButtonProps extends RACToggleButtonProps {}
 
 export const ToggleButton = (props: ToggleButtonProps) => {
   const variant = useContext(ToggleButtonVariantContext);

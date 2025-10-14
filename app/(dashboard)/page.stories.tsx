@@ -13,6 +13,7 @@ import { tasksMock } from "@/components/tasks/TaskList";
 import { getNotifications } from "@/lib/queries/notification";
 import { notificationsMock } from "@/components/notifications/NotificationOverlayList";
 import { getStorageUsage } from "@/lib/queries/storage";
+import { useSelectedLayoutSegments } from "next/navigation";
 
 const meta = {
   title: "components/pages/Dashboard",
@@ -56,6 +57,7 @@ const meta = {
         }),
       ),
     );
+    mocked(useSelectedLayoutSegments).mockReturnValue(["(dashboard)"]);
   },
 } satisfies Meta<typeof DashboardPage>;
 

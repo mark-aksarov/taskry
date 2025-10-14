@@ -1,10 +1,8 @@
 import { focusRing } from "@/components/ui";
 import Link from "next/link";
-import { default as NextLink } from "next/link";
 import { tv } from "tailwind-variants";
 
-interface GridItemContactLinkProps
-  extends React.ComponentProps<typeof NextLink> {
+interface GridItemContactLinkProps extends React.ComponentProps<typeof Link> {
   children: React.ReactNode;
 }
 const styles = tv({

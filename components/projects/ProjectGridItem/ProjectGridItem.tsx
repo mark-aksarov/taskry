@@ -118,7 +118,7 @@ export function ProjectGridItem({ project }: { project: ProjectPreview }) {
               <Image
                 fill
                 src={project.creator.imageUrl}
-                alt={project.creator.name}
+                alt={project.creator.fullName}
               />
             </GridItemImageContainer>
           </Link>

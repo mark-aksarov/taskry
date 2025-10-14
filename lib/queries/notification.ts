@@ -35,7 +35,7 @@ export const getNotifications = cache(
             actor: {
               select: {
                 id: true,
-                name: true,
+                fullName: true,
                 imageUrl: true,
               },
             },
@@ -64,7 +64,7 @@ export const getNotifications = cache(
                 user: {
                   select: {
                     id: true,
-                    name: true,
+                    fullName: true,
                   },
                 },
                 customer: {

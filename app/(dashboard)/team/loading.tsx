@@ -8,7 +8,7 @@ import {
 } from "@/components/common/Toolbar";
 import { Repeat } from "@/components/common/Repeat";
 import { List } from "@/components/common/List";
-import { TaskListItem } from "@/components/tasks/TaskListItem";
+import { UserListItem } from "@/components/users/UserListItem";
 
 export default function Loading() {
   return (
@@ -32,7 +32,7 @@ export default function Loading() {
       </ToolbarMobileBottom>
 
       <List>
-        <Repeat items={10} renderItem={() => <TaskListItem />} />
+        <Repeat items={10} renderItem={() => <UserListItem />} />
       </List>
     </PageGrid>
   );

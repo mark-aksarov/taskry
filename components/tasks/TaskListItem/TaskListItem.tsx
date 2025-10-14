@@ -144,7 +144,7 @@ export const TaskListItem = ({
                 <Image
                   fill
                   src={task.creator.imageUrl}
-                  alt={task.creator.name}
+                  alt={task.creator.fullName}
                 />
               </ListItemImageContainer>
             </Link>

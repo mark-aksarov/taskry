@@ -38,7 +38,7 @@ export function UserGridItem({ user }: { user?: UserPreview }) {
           <GridItemActionMenuSkeleton />
         ) : (
           <>
-            <Checkbox aria-label={`${user.name} checkbox`} />
+            <Checkbox aria-label={`${user.fullName} checkbox`} />
             <ResponsiveMenuTrigger
               placement="bottom right"
               renderDialogHeader={() => <GridItemActionMenuDialogHeader />}
@@ -70,7 +70,7 @@ export function UserGridItem({ user }: { user?: UserPreview }) {
         ) : user.imageUrl ? (
           <Link href={`/users/${user.id}`}>
             <GridItemImageContainer className="h-20 w-20">
-              <Image fill src={user.imageUrl} alt={user.name} />
+              <Image fill src={user.imageUrl} alt={user.fullName} />
             </GridItemImageContainer>
           </Link>
         ) : (
@@ -84,7 +84,7 @@ export function UserGridItem({ user }: { user?: UserPreview }) {
           <GridItemInfo className="w-full items-center">
             <GridItemTitle>
               <GridItemLink href={`/tasks/${user.id}`}>
-                {user.name}
+                {user.fullName}
               </GridItemLink>
             </GridItemTitle>
 
@@ -105,13 +105,13 @@ export function UserGridItem({ user }: { user?: UserPreview }) {
         <>
           <Divider />
           <GridItemContactList>
-            {user.phone ? (
+            {user.phoneNumber ? (
               <GridItemContact>
-                <GridItemContactLink href={`tel:${user.phone}`}>
+                <GridItemContactLink href={`tel:${user.phoneNumber}`}>
                   <GridItemContactIconWrapper>
                     <Phone size={16} strokeWidth={1.5} absoluteStrokeWidth />
                   </GridItemContactIconWrapper>
-                  <GridItemContactText>{user.phone}</GridItemContactText>
+                  <GridItemContactText>{user.phoneNumber}</GridItemContactText>
                 </GridItemContactLink>
               </GridItemContact>
             ) : (

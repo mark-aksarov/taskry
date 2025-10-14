@@ -115,7 +115,11 @@ export function TaskGridItem({ task }: { task?: TaskPreview }) {
         ) : task.creator?.imageUrl ? (
           <Link href={`/users/${task.creator.id}`}>
             <GridItemImageContainer>
-              <Image fill src={task.creator.imageUrl} alt={task.creator.name} />
+              <Image
+                fill
+                src={task.creator.imageUrl}
+                alt={task.creator.fullName}
+              />
             </GridItemImageContainer>
           </Link>
         ) : (

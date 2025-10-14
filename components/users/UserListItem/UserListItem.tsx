@@ -40,7 +40,7 @@ export function UserListItem({
       ) : user.imageUrl ? (
         <Link href={`/users/${user.id}`}>
           <ListItemImageContainer className="h-9 w-9">
-            <Image fill src={user.imageUrl} alt={user.name} />
+            <Image fill src={user.imageUrl} alt={user.fullName} />
           </ListItemImageContainer>
         </Link>
       ) : (
@@ -53,7 +53,9 @@ export function UserListItem({
       ) : (
         <ListItemInfo>
           <ListItemTitle>
-            <ListItemLink href={`/users/${user.id}`}>{user.name}</ListItemLink>
+            <ListItemLink href={`/users/${user.id}`}>
+              {user.fullName}
+            </ListItemLink>
           </ListItemTitle>
 
           <ListItemText>
@@ -72,9 +74,9 @@ export function UserListItem({
           <ListItemTitle>Phone number</ListItemTitle>
 
           <ListItemText>
-            {user.phone ? (
-              <ListItemLink href={`tel:${user.phone}`}>
-                {user.phone}
+            {user.phoneNumber ? (
+              <ListItemLink href={`tel:${user.phoneNumber}`}>
+                {user.phoneNumber}
               </ListItemLink>
             ) : (
               "Phone number is not provided"

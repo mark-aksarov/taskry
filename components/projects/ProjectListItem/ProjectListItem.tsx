@@ -165,7 +165,7 @@ export const ProjectListItem = ({
                 <Image
                   fill
                   src={project.creator.imageUrl}
-                  alt={project.creator.name}
+                  alt={project.creator.fullName}
                 />
               </ListItemImageContainer>
             </Link>

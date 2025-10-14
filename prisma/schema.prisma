@@ -29,19 +29,84 @@ model Workspace {
 // Attachments
 
 model Attachment {
-  id      Int    @id @default(autoincrement())
-  fileUrl String
-
-  projectAttachments        ProjectAttachment[]
-  projectCommentAttachments ProjectCommentAttachment[]
-  taskAttachments           TaskAttachment[]
-  taskCommentAttachments    TaskCommentAttachment[]
-  messageAttachments        MessageAttachment[]
-
+  id        Int      @id @default(autoincrement())
+  fileUrl   String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
+  commentId Int?
+  messageId Int?
+  projectId Int?
+  taskId    Int?
+
+  Comment Comment? @relation(fields: [commentId], references: [id])
+  Message Message? @relation(fields: [messageId], references: [id])
+  Project Project? @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  Task    Task?    @relation(fields: [taskId], references: [id], onDelete: Cascade)
+
   @@map("attachment")
+}
+
+// Comments
+
+model Comment {
+  id        Int      @id @default(autoincrement())
+  content   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  senderId  String
+  projectId Int?
+  taskId    Int?
+  parentId  Int?
+
+  sender  User      @relation(fields: [senderId], references: [id], onDelete: Cascade)
+  project Project?  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  task    Task?     @relation(fields: [taskId], references: [id], onDelete: Cascade)
+  parent  Comment?  @relation("CommentReplies", fields: [parentId], references: [id], onDelete: Cascade)
+  replies Comment[] @relation("CommentReplies")
+
+  attachments Attachment[]
+  reads       Read[]
+  likes       CommentLike[]
+
+  @@index([projectId])
+  @@index([taskId])
+  @@index([parentId])
+  @@map("comment")
+}
+
+model CommentLike {
+  id        Int      @id @default(autoincrement())
+  commentId Int
+  userId    String
+  createdAt DateTime @default(now())
+
+  comment    Comment   @relation(fields: [commentId], references: [id], onDelete: Cascade)
+  user       User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  Position   Position? @relation(fields: [positionId], references: [id])
+  positionId Int?
+
+  @@unique([commentId, userId])
+  @@map("comment_like")
+}
+
+// Read
+
+model Read {
+  id Int @id @default(autoincrement())
+
+  commentId Int?
+  messageId Int?
+  userId    String
+
+  comment Comment? @relation(fields: [commentId], references: [id], onDelete: Cascade)
+  message Message? @relation(fields: [messageId], references: [id])
+  user    User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  readAt DateTime @default(now())
+
+  @@map("read")
 }
 
 //Company
@@ -106,17 +171,16 @@ model Project {
   category ProjectCategory @relation(fields: [categoryId], references: [id], onDelete: Cascade)
   status   ProjectStatus   @relation(fields: [statusId], references: [id], onDelete: Cascade)
 
-  members             ProjectMember[]
-  attachments         ProjectAttachment[]
+  attachments         Attachment[]
   tasks               Task[]
-  projectComments     ProjectComment[]
+  comments            Comment[]
   notificationTargets NotificationTarget[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  @@index([customerId])
   @@index([creatorId])
+  @@index([customerId])
   @@index([categoryId])
   @@index([statusId])
   @@map("project")
@@ -152,80 +216,6 @@ model ProjectStatus {
   @@map("project_status")
 }
 
-model ProjectMember {
-  projectId Int
-  userId    String
-
-  project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
-  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  @@id([projectId, userId])
-  @@map("project_member")
-}
-
-model ProjectAttachment {
-  attachmentId Int
-  projectId    Int
-
-  attachment Attachment @relation(fields: [attachmentId], references: [id], onDelete: Cascade)
-  project    Project    @relation(fields: [projectId], references: [id], onDelete: Cascade)
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  @@id([attachmentId, projectId])
-  @@map("project_attachment")
-}
-
-model ProjectComment {
-  id      Int    @id @default(autoincrement())
-  content String
-
-  projectId Int
-  senderId  String
-
-  project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
-  sender  User    @relation(fields: [senderId], references: [id], onDelete: Cascade)
-
-  attachments ProjectCommentAttachment[]
-  reads       ProjectCommentRead[]
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  @@map("project_comment")
-}
-
-model ProjectCommentRead {
-  projectCommentId Int
-  userId           String
-
-  projectComment ProjectComment @relation(fields: [projectCommentId], references: [id], onDelete: Cascade)
-  user           User           @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  readAt DateTime @default(now())
-
-  @@id([projectCommentId, userId])
-  @@map("project_comment_user")
-}
-
-model ProjectCommentAttachment {
-  attachmentId     Int
-  projectCommentId Int
-
-  attachment     Attachment     @relation(fields: [attachmentId], references: [id], onDelete: Cascade)
-  projectComment ProjectComment @relation(fields: [projectCommentId], references: [id], onDelete: Cascade)
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  @@id([attachmentId, projectCommentId])
-  @@map("project_comment_attachment")
-}
-
 // Task
 
 model Task {
@@ -245,8 +235,8 @@ model Task {
   status   TaskStatus   @relation(fields: [statusId], references: [id], onDelete: Cascade)
 
   subtasks            Subtask[]
-  attachments         TaskAttachment[]
-  taskComments        TaskComment[]
+  attachments         Attachment[]
+  comments            Comment[]
   notificationTargets NotificationTarget[]
 
   createdAt DateTime @default(now())
@@ -304,66 +294,6 @@ model Subtask {
   @@map("subtask")
 }
 
-model TaskAttachment {
-  attachmentId Int
-  taskId       Int
-
-  attachment Attachment @relation(fields: [attachmentId], references: [id], onDelete: Cascade)
-  task       Task       @relation(fields: [taskId], references: [id], onDelete: Cascade)
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  @@id([attachmentId, taskId])
-  @@map("task_attachment")
-}
-
-model TaskComment {
-  id      Int    @id @default(autoincrement())
-  content String
-
-  taskId   Int
-  senderId String
-
-  task   Task @relation(fields: [taskId], references: [id], onDelete: Cascade)
-  sender User @relation(fields: [senderId], references: [id], onDelete: Cascade)
-
-  attachments TaskCommentAttachment[]
-  reads       TaskCommentRead[]
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  @@map("task_comment")
-}
-
-model TaskCommentRead {
-  taskCommentId Int
-  userId        String
-
-  taskComment TaskComment @relation(fields: [taskCommentId], references: [id], onDelete: Cascade)
-  user        User        @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  readAt DateTime @default(now())
-
-  @@id([taskCommentId, userId])
-  @@map("task_comment_user")
-}
-
-model TaskCommentAttachment {
-  attachmentId  Int
-  taskCommentId Int
-
-  attachment  Attachment  @relation(fields: [attachmentId], references: [id], onDelete: Cascade)
-  taskComment TaskComment @relation(fields: [taskCommentId], references: [id], onDelete: Cascade)
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  @@id([attachmentId, taskCommentId])
-  @@map("task_comment_attachment")
-}
-
 // Inbox
 
 model MessageThread {
@@ -393,42 +323,14 @@ model Message {
   sender   User          @relation("Sender", fields: [senderId], references: [id], onDelete: Cascade)
   receiver User          @relation("Receiver", fields: [receiverId], references: [id], onDelete: Cascade)
 
-  attachments         MessageAttachment[]
-  reads               MessageRead[]
+  attachments         Attachment[]
+  reads               Read[]
   notificationTargets NotificationTarget[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   @@map("message")
-}
-
-model MessageAttachment {
-  attachmentId Int
-  messageId    Int
-
-  attachment Attachment @relation(fields: [attachmentId], references: [id], onDelete: Cascade)
-  message    Message    @relation(fields: [messageId], references: [id], onDelete: Cascade)
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  @@id([attachmentId, messageId])
-  @@map("message_attachment")
-}
-
-model MessageRead {
-  messageId Int
-  userId    String
-
-  message Message @relation(fields: [messageId], references: [id], onDelete: Cascade)
-  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  readAt DateTime @default(now())
-
-  @@id([messageId, userId])
-  @@index([messageId, userId])
-  @@map("message_read")
 }
 
 // Notifications
@@ -522,7 +424,8 @@ model Position {
 
   workspace Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
 
-  users User[]
+  users        User[]
+  commentLikes CommentLike[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -532,38 +435,38 @@ model Position {
 }
 
 model User {
-  id            String  @id
-  name          String  @db.VarChar(100)
-  role          String? @db.VarChar(50)
-  email         String  @db.VarChar(100)
-  emailVerified Boolean @default(false)
+  id            String    @id
+  fullName      String    @db.VarChar(100)
+  bio           String?   @db.VarChar(5000)
+  address       String?   @db.VarChar(255)
+  birthdate     DateTime?
+  role          String?   @db.VarChar(50)
+  email         String    @db.VarChar(100)
+  emailVerified Boolean   @default(false)
   imageUrl      String?
-  phone         String? @db.VarChar(20)
+  phoneNumber   String?   @db.VarChar(20)
   publicLink    String?
 
   positionId Int?
 
   position Position? @relation(fields: [positionId], references: [id], onDelete: SetNull)
 
-  projectMembers   ProjectMember[]
   projects         Project[]
   tasks            Task[]
-  messagesSent     Message[]       @relation("Sender")
-  messagesReceived Message[]       @relation("Receiver")
+  messagesSent     Message[] @relation("Sender")
+  messagesReceived Message[] @relation("Receiver")
   sessions         Session[]
   accounts         Account[]
 
-  projectComments        ProjectComment[]
-  projectCommentReads    ProjectCommentRead[]
-  taskComments           TaskComment[]
-  taskCommentReads       TaskCommentRead[]
-  messageReads           MessageRead[]
+  comments               Comment[]
+  reads                  Read[]
   notificationRecipients NotificationRecipient[]
   notifications          Notification[]
   notificationTargets    NotificationTarget[]
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  CommentLike CommentLike[]
 
   @@unique([email])
   @@map("user")

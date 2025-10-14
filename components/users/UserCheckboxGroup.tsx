@@ -24,7 +24,7 @@ export function UserCheckboxGroup({
           value={user.id.toString()}
           className={itemClasses}
         >
-          {user.name}
+          {user.fullName}
         </Checkbox>
       ))}
     </CheckboxGroup>

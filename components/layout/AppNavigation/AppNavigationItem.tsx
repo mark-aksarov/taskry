@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { tv } from "tailwind-variants";
-import { usePathname } from "next/navigation";
+import { useSelectedLayoutSegments } from "next/navigation";
 import { baseButtonStyles, focusRing, RACButton } from "@/components/ui";
 
 export const styles = tv({
@@ -31,14 +31,16 @@ export const AppNavigationItem = ({
   onPress,
   children,
 }: AppNavItemProps) => {
-  const pathname = usePathname();
+  const segments = useSelectedLayoutSegments();
 
   if (href) {
     return (
       <Link
         href={href}
         className={styles({
-          isSelected: pathname === href,
+          isSelected:
+            segments[1] === href.replace("/", "") ||
+            (segments.length === 1 && href === "/"),
         })}
       >
         {children}

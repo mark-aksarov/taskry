@@ -5,7 +5,7 @@ export type TaskPreview = Prisma.TaskGetPayload<{
     creator: {
       select: {
         id: true;
-        name: true;
+        fullName: true;
         imageUrl: true;
       };
     };
@@ -36,22 +36,6 @@ export type TaskPreview = Prisma.TaskGetPayload<{
   };
 }>;
 
-export type TaskCommentPreview = Prisma.TaskCommentGetPayload<{
-  include: {
-    sender: {
-      select: {
-        name: true;
-        imageUrl: true;
-      };
-    };
-    task: {
-      select: {
-        title: true;
-      };
-    };
-  };
-}>;
-
 export type NotificationRecipientWithRelations =
   Prisma.NotificationRecipientGetPayload<{
     include: {
@@ -66,7 +50,7 @@ export type NotificationRecipientWithRelations =
           actor: {
             select: {
               id: true;
-              name: true;
+              fullName: true;
               imageUrl: true;
             };
           };
@@ -77,7 +61,7 @@ export type NotificationRecipientWithRelations =
               project: { select: { id: true; title: true } };
               task: { select: { id: true; title: true } };
               message: { select: { id: true; body: true } };
-              user: { select: { id: true; name: true } };
+              user: { select: { id: true; fullName: true } };
               customer: { select: { id: true; fullName: true } };
             };
           };
@@ -91,7 +75,7 @@ export type ProjectPreview = Prisma.ProjectGetPayload<{
     creator: {
       select: {
         id: true;
-        name: true;
+        fullName: true;
         imageUrl: true;
       };
     };
@@ -144,6 +128,18 @@ export type CustomerPreview = Prisma.CustomerGetPayload<{
       select: {
         name: true;
         workspaceId: true;
+      };
+    };
+  };
+}>;
+
+export type Comment = Prisma.CommentGetPayload<{
+  include: {
+    sender: {
+      select: {
+        id: true;
+        fullName: true;
+        imageUrl: true;
       };
     };
   };

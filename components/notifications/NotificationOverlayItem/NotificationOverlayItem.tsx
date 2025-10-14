@@ -140,7 +140,7 @@ export const NotificationOverlayItem = ({
       case "USER_UPDATED":
         return (
           <NotificationOverlayItemLink href={`/users/${target?.user?.id}`}>
-            {target?.user?.name}
+            {target?.user?.fullName}
           </NotificationOverlayItemLink>
         );
 
@@ -187,7 +187,7 @@ export const NotificationOverlayItem = ({
       ) : actor?.imageUrl ? (
         <Link href={`/users/${actor.id}`}>
           <NotificationOverlayItemImageContainer>
-            <Image fill src={actor.imageUrl} alt={actor.name} />
+            <Image fill src={actor.imageUrl} alt={actor.fullName} />
           </NotificationOverlayItemImageContainer>
         </Link>
       ) : (
@@ -201,7 +201,7 @@ export const NotificationOverlayItem = ({
                 <>
                   {actor ? (
                     <NotificationOverlayItemLink href={`/users/${actor.id}`}>
-                      {actor.name}
+                      {actor.fullName}
                     </NotificationOverlayItemLink>
                   ) : (
                     "Unknown User"
