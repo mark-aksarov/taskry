@@ -4,14 +4,16 @@ import {
   EntitySummaryInfo,
   EntitySummaryTitle,
   EntitySummaryText,
-  EntitySummaryImageContainer,
-  EntitySummaryImageContainerSkeleton,
   EntitySummaryInfoSkeleton,
 } from "@/components/common/Entity";
 import { getUserById } from "@/lib/queries/user";
 import { Button, Divider, Skeleton } from "@/components/ui";
 import { UserPreview } from "@/lib/queries/types";
 import { twMerge } from "tailwind-merge";
+import {
+  ImageContainer,
+  ImageContainerSkeleton,
+} from "@/components/common/ImageContainer";
 
 export async function ProfileSummaryCard() {
   const user = await getUserById("BKs42HvVDEZFoaJUmTqf1gTN0K8pUFjI");
@@ -30,13 +32,13 @@ function ProfileSummaryCardInner({ user }: { user?: UserPreview }) {
     <EntityCard>
       <div className="flex gap-4 max-md:flex-col max-md:items-center md:items-start">
         {!user ? (
-          <EntitySummaryImageContainerSkeleton />
+          <ImageContainerSkeleton className="h-15 w-15" />
         ) : user.imageUrl ? (
-          <EntitySummaryImageContainer>
+          <ImageContainer className="h-15 w-15">
             <Image fill src={user.imageUrl} alt={user.fullName} />
-          </EntitySummaryImageContainer>
+          </ImageContainer>
         ) : (
-          <EntitySummaryImageContainer />
+          <ImageContainer className="h-15 w-15" />
         )}
 
         {!user ? (

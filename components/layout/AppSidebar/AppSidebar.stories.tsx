@@ -8,15 +8,20 @@ import {
   Dialog,
   DialogCloseButton,
 } from "@/components/ui";
+import { mocked } from "storybook/test";
 import { AppSidebarHeader } from "./AppSidebarHeader";
 import { AppSidebarHeading } from "./AppSidebarHeading";
 import { AppSidebarBody } from "./AppSidebarBody";
 import { AppNavigation } from "../AppNavigation";
+import { useSelectedLayoutSegments } from "next/navigation";
 
 const meta = {
   title: "Components/layout/AppSidebar",
   component: AppSidebar,
   tags: ["autodocs"],
+  beforeEach: () => {
+    mocked(useSelectedLayoutSegments).mockReturnValue(["(dashboard)"]);
+  },
 } satisfies Meta<typeof AppSidebar>;
 
 export default meta;

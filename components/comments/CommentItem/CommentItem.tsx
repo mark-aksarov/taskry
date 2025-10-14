@@ -7,9 +7,9 @@ import { CommentItemText, CommentItemTextSkeleton } from "./CommentItemText";
 import { CommentItemInfo, CommentItemInfoSkeleton } from "./CommentItemInfo";
 import { CommentItemTitle } from "./CommentItemTitle";
 import {
-  CommentItemImageContainer,
-  CommentItemImageContainerSkeleton,
-} from "./CommentItemImageContainer";
+  ImageContainer,
+  ImageContainerSkeleton,
+} from "@/components/common/ImageContainer";
 import { ResponsiveMenuTrigger } from "@/components/common/ResponsiveMenuTrigger";
 import {
   CommentItemActionMenuDialogHeader,
@@ -41,17 +41,17 @@ export function CommentItem({ comment }: { comment?: Comment }) {
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
           {!comment ? (
-            <CommentItemImageContainerSkeleton />
+            <ImageContainerSkeleton className="h-9 w-9" />
           ) : comment.sender?.imageUrl ? (
-            <CommentItemImageContainer>
+            <ImageContainer className="h-9 w-9">
               <Image
                 src={comment.sender.imageUrl}
                 alt={comment.sender.fullName}
                 fill
               />
-            </CommentItemImageContainer>
+            </ImageContainer>
           ) : (
-            <CommentItemImageContainer />
+            <ImageContainer className="h-9 w-9" />
           )}
 
           {!comment ? (

@@ -11,6 +11,7 @@ import { NotificationSheetTrigger } from "@/components/notifications/Notificatio
 import { AppBottomSheetTrigger } from "../AppBottomSheetTrigger";
 import { AppSidebarSheetTrigger } from "../AppSidebarSheetTrigger";
 import { getNotifications } from "@/lib/queries/notification";
+import { useSelectedLayoutSegments } from "next/navigation";
 
 const meta = {
   title: "Components/layout/AppHeader",
@@ -51,6 +52,7 @@ const meta = {
     mocked(getNotifications).mockReturnValue(
       new Promise((res) => res(notificationsMock.slice(0, 5))),
     );
+    mocked(useSelectedLayoutSegments).mockReturnValue(["(dashboard)"]);
   },
 } satisfies Meta<typeof AppHeader>;
 

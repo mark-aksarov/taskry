@@ -1,17 +1,14 @@
 import { Skeleton } from "@/components/ui";
 import { twMerge } from "tailwind-merge";
 
-const styles = "h-9 w-9 rounded-full overflow-hidden relative";
+const styles = "rounded-full overflow-hidden relative shrink-0";
 
-interface CommentItemImageContainerProps {
+interface ImageContainerProps {
   className?: string;
   children?: React.ReactNode;
 }
 
-export function CommentItemImageContainer({
-  className,
-  children,
-}: CommentItemImageContainerProps) {
+export function ImageContainer({ className, children }: ImageContainerProps) {
   return (
     <div className={twMerge(styles, "bg-gray-200 dark:bg-gray-700", className)}>
       {children}
@@ -19,10 +16,6 @@ export function CommentItemImageContainer({
   );
 }
 
-export function CommentItemImageContainerSkeleton({
-  className,
-}: {
-  className?: string;
-}) {
+export function ImageContainerSkeleton({ className }: { className?: string }) {
   return <Skeleton className={twMerge(styles, className)} />;
 }

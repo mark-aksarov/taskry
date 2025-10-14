@@ -16,8 +16,6 @@ import {
   ListItemInfoSkeleton,
   ListItemText,
   ListItemTitle,
-  ListItemImageContainer,
-  ListItemImageContainerSkeleton,
   ListItemProgress,
   ListItemProgressSkeleton,
   ListItemBadge,
@@ -32,6 +30,10 @@ import {
 import { TaskPreview } from "@/lib/queries/types";
 import { ResponsiveMenuTrigger } from "@/components/common/ResponsiveMenuTrigger";
 import { Link } from "@/components/ui";
+import {
+  ImageContainer,
+  ImageContainerSkeleton,
+} from "@/components/common/ImageContainer";
 
 export const TaskListItem = ({
   task,
@@ -137,19 +139,19 @@ export const TaskListItem = ({
         {/* --- Creator Image & Menu --- */}
         <div className="flex items-center gap-2">
           {!task ? (
-            <ListItemImageContainerSkeleton />
+            <ImageContainerSkeleton className="h-8 w-8" />
           ) : task.creator?.imageUrl ? (
             <Link href={`/users/${task.creator.id}`}>
-              <ListItemImageContainer>
+              <ImageContainer className="h-8 w-8">
                 <Image
                   fill
                   src={task.creator.imageUrl}
                   alt={task.creator.fullName}
                 />
-              </ListItemImageContainer>
+              </ImageContainer>
             </Link>
           ) : (
-            <ListItemImageContainer />
+            <ImageContainer className="h-8 w-8" />
           )}
 
           {!task ? (

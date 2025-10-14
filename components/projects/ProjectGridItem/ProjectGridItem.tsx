@@ -11,19 +11,21 @@ import { ResponsiveMenuTrigger } from "@/components/common/ResponsiveMenuTrigger
 import {
   GridItem,
   gridItemActionMenuItemStyles,
-  GridItemImageContainer,
   GridItemInfo,
   GridItemProgress,
   GridItemText,
   GridItemTitle,
   GridItemTop,
   GridItemInfoSkeleton,
-  GridItemImageContainerSkeleton,
   GridItemActionMenuDialogHeader,
   GridItemActionMenuSkeleton,
   GridItemProgressSkeleton,
   GridItemLink,
 } from "@/components/common/Grid";
+import {
+  ImageContainer,
+  ImageContainerSkeleton,
+} from "@/components/common/ImageContainer";
 
 export function ProjectGridItem({ project }: { project: ProjectPreview }) {
   const locale = "en-GB";
@@ -111,19 +113,19 @@ export function ProjectGridItem({ project }: { project: ProjectPreview }) {
 
         {/* --- Creator Image --- */}
         {!project ? (
-          <GridItemImageContainerSkeleton />
+          <ImageContainerSkeleton className="h-9 w-9" />
         ) : project.creator?.imageUrl ? (
           <Link href={`/users/${project.creator.id}`}>
-            <GridItemImageContainer>
+            <ImageContainer className="h-9 w-9">
               <Image
                 fill
                 src={project.creator.imageUrl}
                 alt={project.creator.fullName}
               />
-            </GridItemImageContainer>
+            </ImageContainer>
           </Link>
         ) : (
-          <GridItemImageContainer />
+          <ImageContainer className="h-9 w-9" />
         )}
       </div>
 

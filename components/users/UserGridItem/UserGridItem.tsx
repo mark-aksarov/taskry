@@ -3,13 +3,11 @@
 import {
   GridItem,
   gridItemActionMenuItemStyles,
-  GridItemImageContainer,
   GridItemInfo,
   GridItemText,
   GridItemTitle,
   GridItemTop,
   GridItemInfoSkeleton,
-  GridItemImageContainerSkeleton,
   GridItemActionMenuDialogHeader,
   GridItemActionMenuSkeleton,
   GridItemLink,
@@ -28,6 +26,10 @@ import { ResponsiveMenuTrigger } from "@/components/common/ResponsiveMenuTrigger
 import { UserPreview } from "@/lib/queries/types";
 import { Button, Link, Checkbox, Divider, Skeleton } from "@/components/ui";
 import Image from "next/image";
+import {
+  ImageContainer,
+  ImageContainerSkeleton,
+} from "@/components/common/ImageContainer";
 
 export function UserGridItem({ user }: { user?: UserPreview }) {
   return (
@@ -66,15 +68,15 @@ export function UserGridItem({ user }: { user?: UserPreview }) {
       <div className="flex flex-col items-center justify-between gap-4">
         {/* --- User Image --- */}
         {!user ? (
-          <GridItemImageContainerSkeleton className="h-20 w-20" />
+          <ImageContainerSkeleton className="h-20 w-20" />
         ) : user.imageUrl ? (
           <Link href={`/users/${user.id}`}>
-            <GridItemImageContainer className="h-20 w-20">
+            <ImageContainer className="h-20 w-20">
               <Image fill src={user.imageUrl} alt={user.fullName} />
-            </GridItemImageContainer>
+            </ImageContainer>
           </Link>
         ) : (
-          <GridItemImageContainer className="h-20 w-20" />
+          <ImageContainer className="h-20 w-20" />
         )}
 
         {/* --- User Details --- */}

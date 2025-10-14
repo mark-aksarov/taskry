@@ -24,12 +24,14 @@ import {
   ListItemInfoSkeleton,
   ListItemText,
   ListItemTitle,
-  ListItemImageContainer,
-  ListItemImageContainerSkeleton,
   ListItemProgress,
   ListItemProgressSkeleton,
 } from "@/components/common/List/index";
 import { ResponsiveMenuTrigger } from "@/components/common/ResponsiveMenuTrigger";
+import {
+  ImageContainer,
+  ImageContainerSkeleton,
+} from "@/components/common/ImageContainer";
 
 export const ProjectListItem = ({
   project,
@@ -158,19 +160,19 @@ export const ProjectListItem = ({
         {/* --- Creator Image & Menu --- */}
         <div className="flex items-center gap-2">
           {!project ? (
-            <ListItemImageContainerSkeleton />
+            <ImageContainerSkeleton className="h-8 w-8" />
           ) : project.creator?.imageUrl ? (
             <Link href={`/users/${project.creator.id}`}>
-              <ListItemImageContainer>
+              <ImageContainer className="h-8 w-8">
                 <Image
                   fill
                   src={project.creator.imageUrl}
                   alt={project.creator.fullName}
                 />
-              </ListItemImageContainer>
+              </ImageContainer>
             </Link>
           ) : (
-            <ListItemImageContainer />
+            <ImageContainer className="h-8 w-8" />
           )}
 
           {!project ? (

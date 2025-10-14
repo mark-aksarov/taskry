@@ -12,7 +12,3 @@ export {
 } from "./EntitySummaryInfo";
 export { EntitySummaryText } from "./EntitySummaryText";
 export { EntitySummaryTitle } from "./EntitySummaryTitle";
-export {
-  EntitySummaryImageContainer,
-  EntitySummaryImageContainerSkeleton,
-} from "./EntitySummaryImageContainer";

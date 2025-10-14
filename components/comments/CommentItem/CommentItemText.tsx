@@ -14,7 +14,7 @@ export function CommentItemText({ children }: CommentItemTextProps) {
 
 export function CommentItemTextSkeleton() {
   return (
-    <div className="ml-12 flex flex-col gap-1">
+    <div className="ml-12 flex flex-col">
       <Skeleton size="sm" />
       <Skeleton size="sm" />
       <Skeleton size="sm" />

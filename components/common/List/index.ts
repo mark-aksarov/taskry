@@ -6,10 +6,6 @@ export { ListItemLink } from "./ListItemLink";
 export { ListItemText } from "./ListItemText";
 export { ListItemBadge, ListItemBadgeSkeleton } from "./ListItemBadge";
 export {
-  ListItemImageContainer,
-  ListItemImageContainerSkeleton,
-} from "./ListItemImageContainer";
-export {
   ListItemActionMenuDialogHeader,
   listItemActionMenuItemStyles,
   ListItemActionMenuSkeleton,

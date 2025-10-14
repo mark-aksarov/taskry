@@ -16,9 +16,12 @@ import {
   ListItemInfoSkeleton,
   ListItemText,
   ListItemTitle,
-  ListItemImageContainer,
-  ListItemImageContainerSkeleton,
 } from "@/components/common/List";
+
+import {
+  ImageContainer,
+  ImageContainerSkeleton,
+} from "@/components/common/ImageContainer";
 
 import { CustomerPreview } from "@/lib/queries/types";
 import { ResponsiveMenuTrigger } from "@/components/common/ResponsiveMenuTrigger";
@@ -30,15 +33,15 @@ export function CustomerListItem({ customer }: { customer?: CustomerPreview }) {
       {customer && <Checkbox aria-label="customer checkbox" />}
 
       {!customer ? (
-        <ListItemImageContainerSkeleton className="h-9 w-9" />
+        <ImageContainerSkeleton className="h-9 w-9" />
       ) : customer.imageUrl ? (
         <Link href={`/customers/${customer.id}`}>
-          <ListItemImageContainer className="h-9 w-9">
+          <ImageContainer className="h-9 w-9">
             <Image fill src={customer.imageUrl} alt={customer.fullName} />
-          </ListItemImageContainer>
+          </ImageContainer>
         </Link>
       ) : (
-        <ListItemImageContainer className="h-9 w-9" />
+        <ImageContainer className="h-9 w-9" />
       )}
 
       {/* --- Customer Details --- */}

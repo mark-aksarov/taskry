@@ -3,13 +3,11 @@
 import {
   GridItem,
   gridItemActionMenuItemStyles,
-  GridItemImageContainer,
   GridItemInfo,
   GridItemText,
   GridItemTitle,
   GridItemTop,
   GridItemInfoSkeleton,
-  GridItemImageContainerSkeleton,
   GridItemActionMenuDialogHeader,
   GridItemActionMenuSkeleton,
   GridItemLink,
@@ -20,6 +18,11 @@ import {
   GridItemContactText,
   GridItemContactListSkeleton,
 } from "@/components/common/Grid";
+
+import {
+  ImageContainer,
+  ImageContainerSkeleton,
+} from "@/components/common/ImageContainer";
 
 import { Item } from "react-stately";
 import { Ellipsis, Link2, Mail, Phone, Trash } from "lucide-react";
@@ -66,15 +69,15 @@ export function CustomerGridItem({ customer }: { customer?: CustomerPreview }) {
       <div className="flex flex-col items-center justify-between gap-4">
         {/* --- Customer Image --- */}
         {!customer ? (
-          <GridItemImageContainerSkeleton className="h-20 w-20" />
+          <ImageContainerSkeleton className="h-20 w-20" />
         ) : customer.imageUrl ? (
           <Link href={`/customers/${customer.id}`}>
-            <GridItemImageContainer className="h-20 w-20">
+            <ImageContainer className="h-20 w-20">
               <Image fill src={customer.imageUrl} alt={customer.fullName} />
-            </GridItemImageContainer>
+            </ImageContainer>
           </Link>
         ) : (
-          <GridItemImageContainer className="h-20 w-20" />
+          <ImageContainer className="h-20 w-20" />
         )}
 
         {/* --- Customer Details --- */}

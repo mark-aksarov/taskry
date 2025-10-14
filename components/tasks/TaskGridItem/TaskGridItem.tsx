@@ -3,14 +3,12 @@
 import {
   GridItem,
   gridItemActionMenuItemStyles,
-  GridItemImageContainer,
   GridItemInfo,
   GridItemProgress,
   GridItemText,
   GridItemTitle,
   GridItemTop,
   GridItemInfoSkeleton,
-  GridItemImageContainerSkeleton,
   GridItemActionMenuDialogHeader,
   GridItemActionMenuSkeleton,
   GridItemProgressSkeleton,
@@ -25,6 +23,10 @@ import { TaskPreview } from "@/lib/queries/types";
 import { useMemo } from "react";
 import { Button, Link, Checkbox } from "@/components/ui";
 import Image from "next/image";
+import {
+  ImageContainer,
+  ImageContainerSkeleton,
+} from "@/components/common/ImageContainer";
 
 export function TaskGridItem({ task }: { task?: TaskPreview }) {
   const locale = "en-GB";
@@ -111,19 +113,19 @@ export function TaskGridItem({ task }: { task?: TaskPreview }) {
 
         {/* --- Creator Image --- */}
         {!task ? (
-          <GridItemImageContainerSkeleton />
+          <ImageContainerSkeleton className="h-9 w-9" />
         ) : task.creator?.imageUrl ? (
           <Link href={`/users/${task.creator.id}`}>
-            <GridItemImageContainer>
+            <ImageContainer className="h-9 w-9">
               <Image
                 fill
                 src={task.creator.imageUrl}
                 alt={task.creator.fullName}
               />
-            </GridItemImageContainer>
+            </ImageContainer>
           </Link>
         ) : (
-          <GridItemImageContainer />
+          <ImageContainer className="h-9 w-9" />
         )}
       </div>
 

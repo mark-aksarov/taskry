@@ -18,9 +18,9 @@ import {
 import { NotificationRecipientWithRelations } from "@/lib/queries/types";
 import { ResponsiveMenuTrigger } from "@/components/common/ResponsiveMenuTrigger";
 import {
-  NotificationOverlayItemImageContainer,
-  NotificationOverlayItemImageContainerSkeleton,
-} from "./NotificationOverlayItemImageContainer";
+  ImageContainer,
+  ImageContainerSkeleton,
+} from "@/components/common/ImageContainer";
 import { NotificationOverlayItemActor } from "./NotificationOverlayItemActor";
 import { NotificationOverlayItemLink } from "./NotificationOverlayItemLink";
 import { NotificationOverlayItemActionText } from "./NotificationOverlayItemActionText";
@@ -183,15 +183,15 @@ export const NotificationOverlayItem = ({
       )}
     >
       {!notification ? (
-        <NotificationOverlayItemImageContainerSkeleton />
+        <ImageContainerSkeleton className="h-10 w-10" />
       ) : actor?.imageUrl ? (
         <Link href={`/users/${actor.id}`}>
-          <NotificationOverlayItemImageContainer>
+          <ImageContainer className="h-10 w-10">
             <Image fill src={actor.imageUrl} alt={actor.fullName} />
-          </NotificationOverlayItemImageContainer>
+          </ImageContainer>
         </Link>
       ) : (
-        <NotificationOverlayItemImageContainer />
+        <ImageContainer className="h-10 w-10" />
       )}
       <div className="flex flex-col gap-1">
         {notification ? (

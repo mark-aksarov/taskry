@@ -16,12 +16,14 @@ import {
   ListItemInfoSkeleton,
   ListItemText,
   ListItemTitle,
-  ListItemImageContainer,
-  ListItemImageContainerSkeleton,
 } from "@/components/common/List";
 
 import { UserPreview } from "@/lib/queries/types";
 import { ResponsiveMenuTrigger } from "@/components/common/ResponsiveMenuTrigger";
+import {
+  ImageContainer,
+  ImageContainerSkeleton,
+} from "@/components/common/ImageContainer";
 
 export function UserListItem({
   user,
@@ -36,15 +38,15 @@ export function UserListItem({
       {user && showCheckbox && <Checkbox aria-label="user checkbox" />}
 
       {!user ? (
-        <ListItemImageContainerSkeleton className="h-9 w-9" />
+        <ImageContainerSkeleton className="h-9 w-9" />
       ) : user.imageUrl ? (
         <Link href={`/users/${user.id}`}>
-          <ListItemImageContainer className="h-9 w-9">
+          <ImageContainer className="h-9 w-9">
             <Image fill src={user.imageUrl} alt={user.fullName} />
-          </ListItemImageContainer>
+          </ImageContainer>
         </Link>
       ) : (
-        <ListItemImageContainer className="h-9 w-9" />
+        <ImageContainer className="h-9 w-9" />
       )}
 
       {/* --- User Details --- */}

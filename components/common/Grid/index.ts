@@ -10,10 +10,6 @@ export {
 export { GridItemTitle } from "./GridItemTitle";
 export { GridItemText } from "./GridItemText";
 export { GridItemLink } from "./GridItemLink";
-export {
-  GridItemImageContainer,
-  GridItemImageContainerSkeleton,
-} from "./GridItemImageContainer";
 export { GridItemProgress, GridItemProgressSkeleton } from "./GridItemProgress";
 export { GridItemContact } from "./GridItemContact";
 export {
