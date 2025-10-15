@@ -14,6 +14,7 @@ sb.mock(import("../lib/queries/user"));
 sb.mock(import("../lib/queries/customers"));
 sb.mock(import("../lib/queries/companies"));
 sb.mock(import("../lib/queries/storage"));
+sb.mock(import("../lib/queries/comments"));
 sb.mock(import("next/navigation"));
 
 const preview: Preview = {

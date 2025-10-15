@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import { Card } from "@/components/common/Card";
 import { CommentItemDate } from "./CommentItemDate";
 import { CommentItemText, CommentItemTextSkeleton } from "./CommentItemText";
 import { CommentItemInfo, CommentItemInfoSkeleton } from "./CommentItemInfo";
@@ -10,19 +9,16 @@ import {
   ImageContainer,
   ImageContainerSkeleton,
 } from "@/components/common/ImageContainer";
-import { ResponsiveMenuTrigger } from "@/components/common/ResponsiveMenuTrigger";
-import {
-  CommentItemActionMenuDialogHeader,
-  commentItemActionMenuItemStyles,
-  CommentItemActionMenuSkeleton,
-} from "./CommentItemActionMenu";
-import { Button } from "@/components/ui";
-import { Ellipsis, Pencil, Trash } from "lucide-react";
-import { Item } from "react-stately";
 import { Comment } from "@/lib/queries/types";
 import { useMemo } from "react";
+import { CommentItemContent } from "./CommentItemContent";
 
-export function CommentItem({ comment }: { comment?: Comment }) {
+interface CommentItemProps {
+  comment?: Comment;
+  renderActions: () => React.ReactNode;
+}
+
+export function CommentItem({ comment, renderActions }: CommentItemProps) {
   const formattedDate = useMemo(() => {
     if (!comment) return null;
 
@@ -37,7 +33,7 @@ export function CommentItem({ comment }: { comment?: Comment }) {
   }, [comment]);
 
   return (
-    <Card className="flex w-full flex-col gap-4 rounded-xl">
+    <>
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
           {!comment ? (
@@ -63,42 +59,18 @@ export function CommentItem({ comment }: { comment?: Comment }) {
             </CommentItemInfo>
           )}
         </div>
-        {!comment ? (
-          <CommentItemActionMenuSkeleton />
-        ) : (
-          <ResponsiveMenuTrigger
-            placement="bottom right"
-            renderDialogHeader={() => <CommentItemActionMenuDialogHeader />}
-            renderButton={() => (
-              <Button
-                aria-label="project menu"
-                variant="ghost"
-                iconLeft={
-                  <Ellipsis size={16} strokeWidth={1.5} absoluteStrokeWidth />
-                }
-                className="rounded-full"
-              />
-            )}
-          >
-            <Item textValue="Edit" key="delete">
-              <div className={commentItemActionMenuItemStyles}>
-                <Pencil size={16} /> Edit
-              </div>
-            </Item>
-            <Item textValue="Delete" key="delete">
-              <div className={commentItemActionMenuItemStyles}>
-                <Trash size={16} /> Delete
-              </div>
-            </Item>
-          </ResponsiveMenuTrigger>
-        )}
       </div>
 
-      {!comment ? (
-        <CommentItemTextSkeleton />
-      ) : (
-        <CommentItemText>{comment.content}</CommentItemText>
-      )}
-    </Card>
+      <CommentItemContent>
+        {!comment ? (
+          <CommentItemTextSkeleton />
+        ) : (
+          <>
+            <CommentItemText>{comment.content}</CommentItemText>
+            {renderActions()}
+          </>
+        )}
+      </CommentItemContent>
+    </>
   );
 }

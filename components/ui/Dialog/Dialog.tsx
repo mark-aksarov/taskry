@@ -74,6 +74,23 @@ export const DialogBody = ({
   );
 };
 
+export const DialogFooter = ({
+  className,
+  children,
+  ...props
+}: React.ComponentPropsWithRef<"div">) => {
+  const classes = twMerge(
+    "flex items-center justify-between border-t-1 border-gray-300 dark:border-gray-600 px-5 py-4",
+    className,
+  );
+
+  return (
+    <div className={classes} {...props}>
+      {children}
+    </div>
+  );
+};
+
 interface DialogCloseButtonProps {
   iconSize?: number;
   onPress?: (e: PressEvent) => void;

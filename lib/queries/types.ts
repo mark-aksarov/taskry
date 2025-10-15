@@ -142,5 +142,70 @@ export type Comment = Prisma.CommentGetPayload<{
         imageUrl: true;
       };
     };
+    _count: {
+      select: {
+        likes: true;
+        replies: true;
+      };
+    };
+    likes: {
+      where?: {
+        userId: string;
+      };
+      select: {
+        userId: true;
+      };
+    };
+  };
+}>;
+
+export type CommentWithReplies = Prisma.CommentGetPayload<{
+  include: {
+    sender: {
+      select: {
+        id: true;
+        fullName: true;
+        imageUrl: true;
+      };
+    };
+    _count: {
+      select: {
+        likes: true;
+        replies: true;
+      };
+    };
+    likes: {
+      where?: {
+        userId: string;
+      };
+      select: {
+        userId: true;
+      };
+    };
+    replies: {
+      include: {
+        sender: {
+          select: {
+            id: true;
+            fullName: true;
+            imageUrl: true;
+          };
+        };
+        _count: {
+          select: {
+            likes: true;
+            replies: true;
+          };
+        };
+        likes: {
+          where?: {
+            userId: string;
+          };
+          select: {
+            userId: true;
+          };
+        };
+      };
+    };
   };
 }>;

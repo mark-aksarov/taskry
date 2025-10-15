@@ -68,6 +68,27 @@ export const Default = {
   },
 } satisfies Story;
 
+export const Fullscreen = {
+  globals: {
+    viewport: { value: "iphone6", isRotated: false },
+  },
+  render: (args) => {
+    return (
+      <ModalTemplate {...args} fullscreen>
+        <Dialog>
+          <DialogHeader>
+            <DialogHeading>Modal title</DialogHeading>
+            <DialogCloseButton iconSize={20} />
+          </DialogHeader>
+          <DialogBody className="text-black dark:text-white">
+            Content
+          </DialogBody>
+        </Dialog>
+      </ModalTemplate>
+    );
+  },
+} satisfies Story;
+
 export const WithLongContent = {
   render: (args) => {
     return (

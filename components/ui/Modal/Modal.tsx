@@ -10,7 +10,12 @@ import {
 import { tv } from "tailwind-variants";
 import { overlayStyles } from "../styles";
 
-export type ModalProps = ModalOverlayProps &
+interface ModalOwnProps {
+  fullscreen?: boolean;
+}
+
+export type ModalProps = ModalOwnProps &
+  ModalOverlayProps &
   React.RefAttributes<HTMLDivElement>;
 
 const modalStyles = tv({
@@ -22,15 +27,31 @@ const modalStyles = tv({
     isExiting: {
       true: "scale-95 opacity-0",
     },
+    fullscreen: {
+      true: "h-screen w-screen rounded-none border-none",
+    },
   },
 });
 
-export const Modal = ({ children, className, ...props }: ModalProps) => {
+export const Modal = ({
+  fullscreen = false,
+  children,
+  className,
+  ...props
+}: ModalProps) => {
   return (
-    <ModalOverlay {...props} className={overlayStyles}>
+    <ModalOverlay
+      {...props}
+      className={(renderProps) =>
+        overlayStyles({
+          ...renderProps,
+          className: fullscreen ? "bg-transparent" : null,
+        })
+      }
+    >
       <RACModal
         className={composeRenderProps(className, (className, renderProps) =>
-          modalStyles({ ...renderProps, className }),
+          modalStyles({ ...renderProps, className, fullscreen }),
         )}
       >
         {children}

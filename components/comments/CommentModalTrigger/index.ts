@@ -1,0 +1,1 @@
+export { CommentModalTrigger } from "./CommentModalTrigger";

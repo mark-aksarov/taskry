@@ -1,20 +1,27 @@
 import { Skeleton } from "@/components/ui";
+import { twMerge } from "tailwind-merge";
 
 interface CommentItemTextProps {
+  className?: string;
   children: React.ReactNode;
 }
 
-export function CommentItemText({ children }: CommentItemTextProps) {
+export function CommentItemText({ className, children }: CommentItemTextProps) {
   return (
-    <span className="ml-12 text-sm font-normal text-black dark:text-white">
+    <span
+      className={twMerge(
+        "text-sm font-normal text-black dark:text-white",
+        className,
+      )}
+    >
       {children}
     </span>
   );
 }
 
-export function CommentItemTextSkeleton() {
+export function CommentItemTextSkeleton({ className }: { className?: string }) {
   return (
-    <div className="ml-12 flex flex-col">
+    <div className={twMerge("flex flex-col", className)}>
       <Skeleton size="sm" />
       <Skeleton size="sm" />
       <Skeleton size="sm" />
