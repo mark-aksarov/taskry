@@ -20,7 +20,6 @@ import {
   GridItemActionMenuDialogHeader,
   GridItemActionMenuSkeleton,
   GridItemProgressSkeleton,
-  GridItemLink,
 } from "@/components/common/Grid";
 import {
   ImageContainer,
@@ -103,9 +102,7 @@ export function ProjectGridItem({ project }: { project: ProjectPreview }) {
         ) : (
           <GridItemInfo className="max-sm:w-full max-sm:items-center sm:flex-1">
             <GridItemTitle>
-              <GridItemLink href={`/projects/${project.id}`}>
-                {project.title}
-              </GridItemLink>
+              <Link href={`/projects/${project.id}`}>{project.title}</Link>
             </GridItemTitle>
             <GridItemText>{`Deadline on ${formattedDeadline}`}</GridItemText>
           </GridItemInfo>

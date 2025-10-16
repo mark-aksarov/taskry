@@ -15,6 +15,16 @@ export const commentWithRepliesMock: CommentWithReplies = {
     fullName: "Alice Johnson",
     imageUrl: "/woman.jpg",
   },
+  attachments: [
+    {
+      id: 1,
+      fileUrl: "/placeholder.jpg",
+    },
+    {
+      id: 2,
+      fileUrl: "/placeholder.jpg",
+    },
+  ],
   likes: [
     {
       userId: "user_1",
@@ -40,6 +50,7 @@ export const commentWithRepliesMock: CommentWithReplies = {
         fullName: "Michael Lee",
         imageUrl: "/man.jpg",
       },
+      attachments: [],
       likes: [],
       _count: {
         likes: 7,
@@ -61,6 +72,7 @@ export const commentWithRepliesMock: CommentWithReplies = {
         fullName: "Sophia Carter",
         imageUrl: "/woman.jpg",
       },
+      attachments: [],
       likes: [
         {
           userId: "user_1",
@@ -86,6 +98,16 @@ export const commentWithRepliesMock: CommentWithReplies = {
         fullName: "Daniel Kim",
         imageUrl: "/man.jpg",
       },
+      attachments: [
+        {
+          id: 1,
+          fileUrl: "/placeholder.jpg",
+        },
+        {
+          id: 2,
+          fileUrl: "/placeholder.jpg",
+        },
+      ],
       likes: [
         {
           userId: "user_4",
@@ -111,6 +133,7 @@ export const commentWithRepliesMock: CommentWithReplies = {
         fullName: "Emma Brown",
         imageUrl: "/woman.jpg",
       },
+      attachments: [],
       likes: [],
       _count: {
         likes: 0,
@@ -136,6 +159,16 @@ export const commentsMock: Comment[] = [
       fullName: "Alice Johnson",
       imageUrl: "/woman.jpg",
     },
+    attachments: [
+      {
+        id: 1,
+        fileUrl: "/placeholder.jpg",
+      },
+      {
+        id: 2,
+        fileUrl: "/placeholder.jpg",
+      },
+    ],
     likes: [
       {
         userId: "user_1",
@@ -161,6 +194,16 @@ export const commentsMock: Comment[] = [
       fullName: "Michael Lee",
       imageUrl: "/man.jpg",
     },
+    attachments: [
+      {
+        id: 1,
+        fileUrl: "/placeholder.jpg",
+      },
+      {
+        id: 2,
+        fileUrl: "/placeholder.jpg",
+      },
+    ],
     likes: [],
     _count: {
       likes: 7,
@@ -182,6 +225,7 @@ export const commentsMock: Comment[] = [
       fullName: "Sophia Carter",
       imageUrl: "/woman.jpg",
     },
+    attachments: [],
     likes: [
       {
         userId: "user_1",
@@ -207,6 +251,7 @@ export const commentsMock: Comment[] = [
       fullName: "Daniel Kim",
       imageUrl: "/man.jpg",
     },
+    attachments: [],
     likes: [
       {
         userId: "user_4",
@@ -232,6 +277,7 @@ export const commentsMock: Comment[] = [
       fullName: "Emma Brown",
       imageUrl: "/woman.jpg",
     },
+    attachments: [],
     likes: [],
     _count: {
       likes: 0,

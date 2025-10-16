@@ -12,7 +12,6 @@ import {
   GridItemActionMenuDialogHeader,
   GridItemActionMenuSkeleton,
   GridItemProgressSkeleton,
-  GridItemLink,
 } from "@/components/common/Grid";
 
 import { Item } from "react-stately";
@@ -102,9 +101,7 @@ export function TaskGridItem({ task }: { task?: TaskPreview }) {
         ) : (
           <GridItemInfo className="max-sm:w-full max-sm:items-center sm:flex-1">
             <GridItemTitle>
-              <GridItemLink href={`/tasks/${task.id}`}>
-                {task.title}
-              </GridItemLink>
+              <Link href={`/tasks/${task.id}`}>{task.title}</Link>
             </GridItemTitle>
 
             <GridItemText>{`Deadline on ${formattedDeadline}`}</GridItemText>

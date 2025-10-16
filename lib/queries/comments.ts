@@ -18,6 +18,12 @@ export const getCommentsByUser = cache(
             imageUrl: true,
           },
         },
+        attachments: {
+          select: {
+            id: true,
+            fileUrl: true,
+          },
+        },
         _count: {
           select: {
             likes: true,
@@ -49,6 +55,12 @@ export const getCommentWithReplies = cache(
             imageUrl: true,
           },
         },
+        attachments: {
+          select: {
+            id: true,
+            fileUrl: true,
+          },
+        },
         _count: {
           select: {
             likes: true,
@@ -66,6 +78,12 @@ export const getCommentWithReplies = cache(
                 id: true,
                 fullName: true,
                 imageUrl: true,
+              },
+            },
+            attachments: {
+              select: {
+                id: true,
+                fileUrl: true,
               },
             },
             _count: {

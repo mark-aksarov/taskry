@@ -12,6 +12,8 @@ import {
 import { Comment } from "@/lib/queries/types";
 import { useMemo } from "react";
 import { CommentItemContent } from "./CommentItemContent";
+import { Attachment, Attachments } from "@/components/common/Attachments";
+import { Link } from "@/components/ui";
 
 interface CommentItemProps {
   comment?: Comment;
@@ -54,7 +56,11 @@ export function CommentItem({ comment, renderActions }: CommentItemProps) {
             <CommentItemInfoSkeleton />
           ) : (
             <CommentItemInfo>
-              <CommentItemTitle>{comment.sender.fullName}</CommentItemTitle>
+              <CommentItemTitle>
+                <Link href={`/users/${comment.sender.id}`}>
+                  {comment.sender.fullName}
+                </Link>
+              </CommentItemTitle>
               <CommentItemDate>{formattedDate}</CommentItemDate>
             </CommentItemInfo>
           )}
@@ -67,6 +73,20 @@ export function CommentItem({ comment, renderActions }: CommentItemProps) {
         ) : (
           <>
             <CommentItemText>{comment.content}</CommentItemText>
+            {comment.attachments.length > 0 && (
+              <Attachments>
+                {comment.attachments.map((attachment) => (
+                  <Attachment key={attachment.id}>
+                    <Image
+                      src={attachment.fileUrl}
+                      alt=""
+                      fill
+                      className="object-cover"
+                    />
+                  </Attachment>
+                ))}
+              </Attachments>
+            )}
             {renderActions()}
           </>
         )}

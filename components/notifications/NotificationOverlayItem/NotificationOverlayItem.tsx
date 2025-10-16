@@ -22,7 +22,6 @@ import {
   ImageContainerSkeleton,
 } from "@/components/common/ImageContainer";
 import { NotificationOverlayItemActor } from "./NotificationOverlayItemActor";
-import { NotificationOverlayItemLink } from "./NotificationOverlayItemLink";
 import { NotificationOverlayItemActionText } from "./NotificationOverlayItemActionText";
 import { NotificationOverlayItemDate } from "./NotificationOverlayItemDate";
 import { NotificationOverlayItemTarget } from "./NotificationOverlayItemTarget";
@@ -115,9 +114,7 @@ export const NotificationOverlayItem = ({
       case "TASK_UPDATED":
       case "TASK_COMMENTED":
         return (
-          <NotificationOverlayItemLink href={`/tasks/${target?.task?.id}`}>
-            {target?.task?.title}
-          </NotificationOverlayItemLink>
+          <Link href={`/tasks/${target?.task?.id}`}>{target?.task?.title}</Link>
         );
       case "TASK_DELETED":
         return targetName;
@@ -126,11 +123,9 @@ export const NotificationOverlayItem = ({
       case "PROJECT_UPDATED":
       case "PROJECT_COMMENTED":
         return (
-          <NotificationOverlayItemLink
-            href={`/projects/${target?.project?.id}`}
-          >
+          <Link href={`/projects/${target?.project?.id}`}>
             {target?.project?.title}
-          </NotificationOverlayItemLink>
+          </Link>
         );
 
       case "PROJECT_DELETED":
@@ -139,9 +134,9 @@ export const NotificationOverlayItem = ({
       case "USER_ADDED":
       case "USER_UPDATED":
         return (
-          <NotificationOverlayItemLink href={`/users/${target?.user?.id}`}>
+          <Link href={`/users/${target?.user?.id}`}>
             {target?.user?.fullName}
-          </NotificationOverlayItemLink>
+          </Link>
         );
 
       case "USER_DELETED":
@@ -150,24 +145,16 @@ export const NotificationOverlayItem = ({
       case "CUSTOMER_ADDED":
       case "CUSTOMER_UPDATED":
         return (
-          <NotificationOverlayItemLink
-            href={`/customers/${target?.customer?.id}`}
-          >
+          <Link href={`/customers/${target?.customer?.id}`}>
             {target?.customer?.fullName}
-          </NotificationOverlayItemLink>
+          </Link>
         );
 
       case "CUSTOMER_DELETED":
         return targetName;
 
       case "MESSAGE_SENDED":
-        return (
-          <NotificationOverlayItemLink
-            href={`/messages/${target?.message?.id}`}
-          >
-            message
-          </NotificationOverlayItemLink>
-        );
+        return <Link href={`/messages/${target?.message?.id}`}>message</Link>;
 
       default:
         throw new Error("Invalid notification type");
@@ -200,9 +187,7 @@ export const NotificationOverlayItem = ({
               <NotificationOverlayItemActor>
                 <>
                   {actor ? (
-                    <NotificationOverlayItemLink href={`/users/${actor.id}`}>
-                      {actor.fullName}
-                    </NotificationOverlayItemLink>
+                    <Link href={`/users/${actor.id}`}>{actor.fullName}</Link>
                   ) : (
                     "Unknown User"
                   )}

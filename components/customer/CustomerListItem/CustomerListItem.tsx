@@ -12,7 +12,6 @@ import {
   listItemActionMenuItemStyles,
   ListItemActionMenuSkeleton,
   ListItemInfo,
-  ListItemLink,
   ListItemInfoSkeleton,
   ListItemText,
   ListItemTitle,
@@ -50,15 +49,11 @@ export function CustomerListItem({ customer }: { customer?: CustomerPreview }) {
       ) : (
         <ListItemInfo>
           <ListItemTitle>
-            <ListItemLink href={`/customers/${customer.id}`}>
-              {customer.fullName}
-            </ListItemLink>
+            <Link href={`/customers/${customer.id}`}>{customer.fullName}</Link>
           </ListItemTitle>
 
           <ListItemText>
-            <ListItemLink href={`mailto:${customer.email}`}>
-              {customer.email}
-            </ListItemLink>
+            <Link href={`mailto:${customer.email}`}>{customer.email}</Link>
           </ListItemText>
         </ListItemInfo>
       )}
@@ -72,9 +67,9 @@ export function CustomerListItem({ customer }: { customer?: CustomerPreview }) {
 
           <ListItemText>
             {customer.phoneNumber ? (
-              <ListItemLink href={`tel:${customer.phoneNumber}`}>
+              <Link href={`tel:${customer.phoneNumber}`}>
                 {customer.phoneNumber}
-              </ListItemLink>
+              </Link>
             ) : (
               "Phone number is not provided"
             )}
@@ -91,9 +86,7 @@ export function CustomerListItem({ customer }: { customer?: CustomerPreview }) {
 
           <ListItemText>
             {customer.publicLink ? (
-              <ListItemLink href={customer.publicLink}>
-                {customer.publicLink}
-              </ListItemLink>
+              <Link href={customer.publicLink}>{customer.publicLink}</Link>
             ) : (
               "Link is not provided"
             )}

@@ -8,6 +8,7 @@ import {
   Modal,
   RACDialogTrigger,
 } from "@/components/ui";
+import { Fragment } from "react";
 import { CommentItem, CommentItemActions } from "../CommentItem";
 import { CommentButton } from "../CommentButton/CommentButton";
 import { Heart, MessageSquare, Reply } from "lucide-react";
@@ -71,7 +72,7 @@ export async function CommentModalTrigger({
                 const isLiked = reply.likes.length > 0;
 
                 return (
-                  <>
+                  <Fragment key={reply.id}>
                     <CommentItem
                       key={reply.id}
                       comment={reply}
@@ -106,7 +107,7 @@ export async function CommentModalTrigger({
                       }}
                     />
                     {index !== comment.replies.length - 1 && <Divider />}
-                  </>
+                  </Fragment>
                 );
               })}
             </div>

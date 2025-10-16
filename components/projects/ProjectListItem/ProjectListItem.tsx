@@ -20,7 +20,6 @@ import {
   ListItemBadge,
   ListItemBadgeSkeleton,
   ListItemInfo,
-  ListItemLink,
   ListItemInfoSkeleton,
   ListItemText,
   ListItemTitle,
@@ -69,9 +68,7 @@ export const ProjectListItem = ({
       ) : (
         <ListItemInfo>
           <ListItemTitle>
-            <ListItemLink href={`/projects/${project.id}`}>
-              {project.title}
-            </ListItemLink>
+            <Link href={`/projects/${project.id}`}>{project.title}</Link>
           </ListItemTitle>
 
           <ListItemText>{`Deadline on ${formattedDeadline}`}</ListItemText>
@@ -86,9 +83,9 @@ export const ProjectListItem = ({
           <ListItemTitle>Category</ListItemTitle>
 
           <ListItemText>
-            <ListItemLink href={`/categories=${project.category.id}`}>
+            <Link href={`/categories=${project.category.id}`}>
               {project.category.name}
-            </ListItemLink>
+            </Link>
           </ListItemText>
         </ListItemInfo>
       )}
@@ -102,9 +99,9 @@ export const ProjectListItem = ({
 
           {project.customer ? (
             <ListItemText>
-              <ListItemLink href={`/customers=${project.customer.id}`}>
+              <Link href={`/customers=${project.customer.id}`}>
                 {project.customer.fullName}
-              </ListItemLink>
+              </Link>
             </ListItemText>
           ) : (
             <ListItemText>Unknown customer</ListItemText>

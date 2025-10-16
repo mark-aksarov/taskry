@@ -10,8 +10,6 @@ import {
   GridItemInfoSkeleton,
   GridItemActionMenuDialogHeader,
   GridItemActionMenuSkeleton,
-  GridItemLink,
-  GridItemContactLink,
   GridItemContactList,
   GridItemContact,
   GridItemContactIconWrapper,
@@ -86,9 +84,9 @@ export function CustomerGridItem({ customer }: { customer?: CustomerPreview }) {
         ) : (
           <GridItemInfo className="w-full items-center">
             <GridItemTitle>
-              <GridItemLink href={`/customers/${customer.id}`}>
+              <Link href={`/customers/${customer.id}`}>
                 {customer.fullName}
-              </GridItemLink>
+              </Link>
             </GridItemTitle>
 
             <GridItemText>{customer.company.name}</GridItemText>
@@ -108,14 +106,14 @@ export function CustomerGridItem({ customer }: { customer?: CustomerPreview }) {
           <GridItemContactList>
             {customer.phoneNumber ? (
               <GridItemContact>
-                <GridItemContactLink href={`tel:${customer.phoneNumber}`}>
+                <Link href={`tel:${customer.phoneNumber}`} className="contents">
                   <GridItemContactIconWrapper>
                     <Phone size={16} strokeWidth={1.5} absoluteStrokeWidth />
                   </GridItemContactIconWrapper>
                   <GridItemContactText>
                     {customer.phoneNumber}
                   </GridItemContactText>
-                </GridItemContactLink>
+                </Link>
               </GridItemContact>
             ) : (
               <GridItemContact>
@@ -128,14 +126,14 @@ export function CustomerGridItem({ customer }: { customer?: CustomerPreview }) {
 
             {customer.publicLink ? (
               <GridItemContact>
-                <GridItemContactLink href={customer.publicLink}>
+                <Link href={customer.publicLink} className="contents">
                   <GridItemContactIconWrapper>
                     <Link2 size={16} strokeWidth={1.5} absoluteStrokeWidth />
                   </GridItemContactIconWrapper>
                   <GridItemContactText>
                     {customer.publicLink}
                   </GridItemContactText>
-                </GridItemContactLink>
+                </Link>
               </GridItemContact>
             ) : (
               <GridItemContact>
@@ -147,12 +145,12 @@ export function CustomerGridItem({ customer }: { customer?: CustomerPreview }) {
             )}
 
             <GridItemContact>
-              <GridItemContactLink href={`mailto:${customer.email}`}>
+              <Link href={`mailto:${customer.email}`} className="contents">
                 <GridItemContactIconWrapper>
                   <Mail size={16} strokeWidth={1.5} absoluteStrokeWidth />
                 </GridItemContactIconWrapper>
                 <GridItemContactText>{customer.email}</GridItemContactText>
-              </GridItemContactLink>
+              </Link>
             </GridItemContact>
           </GridItemContactList>
         </>

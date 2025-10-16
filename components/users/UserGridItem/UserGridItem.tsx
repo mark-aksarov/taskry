@@ -10,8 +10,6 @@ import {
   GridItemInfoSkeleton,
   GridItemActionMenuDialogHeader,
   GridItemActionMenuSkeleton,
-  GridItemLink,
-  GridItemContactLink,
   GridItemContactList,
   GridItemContact,
   GridItemContactIconWrapper,
@@ -85,9 +83,7 @@ export function UserGridItem({ user }: { user?: UserPreview }) {
         ) : (
           <GridItemInfo className="w-full items-center">
             <GridItemTitle>
-              <GridItemLink href={`/tasks/${user.id}`}>
-                {user.fullName}
-              </GridItemLink>
+              <Link href={`/tasks/${user.id}`}>{user.fullName}</Link>
             </GridItemTitle>
 
             <GridItemText>
@@ -109,12 +105,12 @@ export function UserGridItem({ user }: { user?: UserPreview }) {
           <GridItemContactList>
             {user.phoneNumber ? (
               <GridItemContact>
-                <GridItemContactLink href={`tel:${user.phoneNumber}`}>
+                <Link href={`tel:${user.phoneNumber}`} className="contents">
                   <GridItemContactIconWrapper>
                     <Phone size={16} strokeWidth={1.5} absoluteStrokeWidth />
                   </GridItemContactIconWrapper>
                   <GridItemContactText>{user.phoneNumber}</GridItemContactText>
-                </GridItemContactLink>
+                </Link>
               </GridItemContact>
             ) : (
               <GridItemContact>
@@ -127,12 +123,12 @@ export function UserGridItem({ user }: { user?: UserPreview }) {
 
             {user.publicLink ? (
               <GridItemContact>
-                <GridItemContactLink href={user.publicLink}>
+                <Link href={user.publicLink} className="contents">
                   <GridItemContactIconWrapper>
                     <Link2 size={16} strokeWidth={1.5} absoluteStrokeWidth />
                   </GridItemContactIconWrapper>
                   <GridItemContactText>{user.publicLink}</GridItemContactText>
-                </GridItemContactLink>
+                </Link>
               </GridItemContact>
             ) : (
               <GridItemContact>
@@ -144,12 +140,12 @@ export function UserGridItem({ user }: { user?: UserPreview }) {
             )}
 
             <GridItemContact>
-              <GridItemContactLink href={`mailto:${user.email}`}>
+              <Link href={`mailto:${user.email}`} className="contents">
                 <GridItemContactIconWrapper>
                   <Mail size={16} strokeWidth={1.5} absoluteStrokeWidth />
                 </GridItemContactIconWrapper>
                 <GridItemContactText>{user.email}</GridItemContactText>
-              </GridItemContactLink>
+              </Link>
             </GridItemContact>
           </GridItemContactList>
         </>

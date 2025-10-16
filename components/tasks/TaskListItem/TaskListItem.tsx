@@ -20,7 +20,6 @@ import {
   ListItemProgressSkeleton,
   ListItemBadge,
   ListItemBadgeSkeleton,
-  ListItemLink,
 } from "@/components/common/List";
 
 import {
@@ -69,7 +68,7 @@ export const TaskListItem = ({
       ) : (
         <ListItemInfo>
           <ListItemTitle>
-            <ListItemLink href={`/tasks/${task.id}`}>{task.title}</ListItemLink>
+            <Link href={`/tasks/${task.id}`}>{task.title}</Link>
           </ListItemTitle>
 
           <ListItemText>{`Deadline on ${formattedDeadline}`}</ListItemText>
@@ -84,9 +83,9 @@ export const TaskListItem = ({
           <ListItemTitle>Category</ListItemTitle>
 
           <ListItemText>
-            <ListItemLink href={`/categories/${task.category.id}`}>
+            <Link href={`/categories/${task.category.id}`}>
               {task.category.name}
-            </ListItemLink>
+            </Link>
           </ListItemText>
         </ListItemInfo>
       )}
@@ -99,9 +98,9 @@ export const TaskListItem = ({
           <ListItemTitle>Project</ListItemTitle>
 
           <ListItemText>
-            <ListItemLink href={`/projects/${task.project.id}`}>
+            <Link href={`/projects/${task.project.id}`}>
               {task.project.title}
-            </ListItemLink>
+            </Link>
           </ListItemText>
         </ListItemInfo>
       )}

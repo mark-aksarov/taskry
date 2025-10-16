@@ -12,7 +12,6 @@ import {
   listItemActionMenuItemStyles,
   ListItemActionMenuSkeleton,
   ListItemInfo,
-  ListItemLink,
   ListItemInfoSkeleton,
   ListItemText,
   ListItemTitle,
@@ -55,15 +54,11 @@ export function UserListItem({
       ) : (
         <ListItemInfo>
           <ListItemTitle>
-            <ListItemLink href={`/users/${user.id}`}>
-              {user.fullName}
-            </ListItemLink>
+            <Link href={`/users/${user.id}`}>{user.fullName}</Link>
           </ListItemTitle>
 
           <ListItemText>
-            <ListItemLink href={`mailto:${user.email}`}>
-              {user.email}
-            </ListItemLink>
+            <Link href={`mailto:${user.email}`}>{user.email}</Link>
           </ListItemText>
         </ListItemInfo>
       )}
@@ -77,9 +72,7 @@ export function UserListItem({
 
           <ListItemText>
             {user.phoneNumber ? (
-              <ListItemLink href={`tel:${user.phoneNumber}`}>
-                {user.phoneNumber}
-              </ListItemLink>
+              <Link href={`tel:${user.phoneNumber}`}>{user.phoneNumber}</Link>
             ) : (
               "Phone number is not provided"
             )}
@@ -96,9 +89,7 @@ export function UserListItem({
 
           <ListItemText>
             {user.publicLink ? (
-              <ListItemLink href={user.publicLink}>
-                {user.publicLink}
-              </ListItemLink>
+              <Link href={user.publicLink}>{user.publicLink}</Link>
             ) : (
               "Link is not provided"
             )}

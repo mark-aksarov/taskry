@@ -142,6 +142,12 @@ export type Comment = Prisma.CommentGetPayload<{
         imageUrl: true;
       };
     };
+    attachments: {
+      select: {
+        id: true;
+        fileUrl: true;
+      };
+    };
     _count: {
       select: {
         likes: true;
@@ -168,6 +174,12 @@ export type CommentWithReplies = Prisma.CommentGetPayload<{
         imageUrl: true;
       };
     };
+    attachments: {
+      select: {
+        id: true;
+        fileUrl: true;
+      };
+    };
     _count: {
       select: {
         likes: true;
@@ -189,6 +201,12 @@ export type CommentWithReplies = Prisma.CommentGetPayload<{
             id: true;
             fullName: true;
             imageUrl: true;
+          };
+        };
+        attachments: {
+          select: {
+            id: true;
+            fileUrl: true;
           };
         };
         _count: {
