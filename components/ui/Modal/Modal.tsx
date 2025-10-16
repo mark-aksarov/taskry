@@ -28,7 +28,7 @@ const modalStyles = tv({
       true: "scale-95 opacity-0",
     },
     fullscreen: {
-      true: "h-screen w-screen rounded-none border-none",
+      true: "h-[100dvh] w-screen rounded-none border-none",
     },
   },
 });

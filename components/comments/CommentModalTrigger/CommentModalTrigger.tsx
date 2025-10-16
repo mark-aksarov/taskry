@@ -13,6 +13,8 @@ import { CommentItem, CommentItemActions } from "../CommentItem";
 import { CommentButton } from "../CommentButton/CommentButton";
 import { Heart, MessageSquare, Reply } from "lucide-react";
 import { getCommentWithReplies } from "@/lib/queries/comments";
+import { DialogFooter } from "@/components/ui/Dialog/Dialog";
+import { CommentModalInput } from "../CommentModalInput";
 
 interface CommentModalProps {
   fullscreen?: boolean;
@@ -38,7 +40,7 @@ export async function CommentModalTrigger({
       <Modal isDismissable fullscreen={fullscreen}>
         <Dialog className={!fullscreen ? "max-h-[calc(100dvh-64px)]" : ""}>
           <DialogHeader>
-            <DialogHeading>Modal title</DialogHeading>
+            <DialogHeading>All comments</DialogHeading>
             <DialogCloseButton iconSize={20} />
           </DialogHeader>
           <DialogBody className="flex flex-col gap-4">
@@ -112,6 +114,9 @@ export async function CommentModalTrigger({
               })}
             </div>
           </DialogBody>
+          <DialogFooter className="px-4 py-3">
+            <CommentModalInput />
+          </DialogFooter>
         </Dialog>
       </Modal>
     </RACDialogTrigger>
