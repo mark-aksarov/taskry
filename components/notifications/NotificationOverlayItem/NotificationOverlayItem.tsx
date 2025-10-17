@@ -165,7 +165,7 @@ export const NotificationOverlayItem = ({
     <div
       className={twMerge(
         "flex w-full items-start gap-3 border-gray-300 bg-white px-4 py-3 not-last:border-b-1 dark:border-gray-600 dark:bg-gray-800",
-        notification && !isRead && "bg-gray-100 dark:bg-gray-900",
+        notification && !isRead && "bg-gray-100/70 dark:bg-gray-900",
         className,
       )}
     >

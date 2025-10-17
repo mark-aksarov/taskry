@@ -1,5 +1,5 @@
 import { TaskList } from "./TaskList";
-import { tasksMock } from "./tasksMock";
+import { tasksMock } from "../../../lib/data/__mocks__/tasks";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 
 const meta = {

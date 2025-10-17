@@ -6,5 +6,5 @@ interface CommentItemTitleProps {
 }
 
 export function CommentItemTitle({ children }: CommentItemTitleProps) {
-  return <h4 className={styles}>{children}</h4>;
+  return <h3 className={styles}>{children}</h3>;
 }

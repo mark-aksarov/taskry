@@ -1,44 +1,13 @@
 import { Meta, StoryObj } from "@storybook/react";
-import { NotificationRecipientWithRelations } from "@/lib/queries/types";
 import { NotificationOverlayItem } from "./NotificationOverlayItem";
-
-const notificationMock: NotificationRecipientWithRelations = {
-  notificationId: 1,
-  userId: "1",
-  isRead: true,
-  readAt: null,
-  workspaceId: 1,
-
-  notification: {
-    id: 1,
-    type: "PROJECT_ADDED",
-    targetName: null,
-    createdAt: new Date(),
-    updatedAt: new Date(),
-
-    actor: {
-      id: "1",
-      name: "John Doe",
-      imageUrl: "/man.jpg",
-    },
-
-    target: {
-      id: 1,
-      project: { id: 1, title: "Project Title" },
-      task: null,
-      message: null,
-      user: null,
-      customer: null,
-    },
-  },
-};
+import { notificationsMock } from "../NotificationOverlayList";
 
 const meta = {
   title: "Components/notifications/NotificationOverlayItem",
   component: NotificationOverlayItem,
   tags: ["autodocs"],
   args: {
-    notification: notificationMock,
+    notification: notificationsMock[0],
   },
   parameters: {
     layout: "fullscreen",
@@ -53,9 +22,9 @@ export const Default: Story = {};
 export const WithoutCreator: Story = {
   args: {
     notification: {
-      ...notificationMock,
+      ...notificationsMock[0],
       notification: {
-        ...notificationMock.notification,
+        ...notificationsMock[0].notification,
         actor: null,
       },
     },

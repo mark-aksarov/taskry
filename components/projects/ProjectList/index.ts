@@ -1,2 +1,2 @@
 export { ProjectList } from "./ProjectList";
-export { projectsMock } from "./projectsMock";
+export { projectsMock } from "../../../lib/data/__mocks__/projects";

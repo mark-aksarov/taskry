@@ -6,7 +6,7 @@ import { tv } from "tailwind-variants";
 
 export const linkStyles = tv({
   extend: focusRing,
-  base: "not:focus-visible:outline-0 focus-visible:outline-2",
+  base: "not:focus-visible:outline-0 text-black focus-visible:outline-2 dark:text-white",
 });
 
 export const Link = ({

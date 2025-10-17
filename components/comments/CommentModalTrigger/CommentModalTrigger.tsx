@@ -37,7 +37,7 @@ export async function CommentModalTrigger({
         label={comment._count.replies}
         aria-label="Show replies"
       />
-      <Modal isDismissable fullscreen={fullscreen}>
+      <Modal isDismissable fullscreen={fullscreen} className="w-[750px]">
         <Dialog className={!fullscreen ? "max-h-[calc(100dvh-64px)]" : ""}>
           <DialogHeader>
             <DialogHeading>All comments</DialogHeading>

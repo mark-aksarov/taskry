@@ -17,7 +17,7 @@ export const projectsMock: ProjectPreview[] = [
     createdAt: new Date("2025-01-10"),
     updatedAt: new Date("2025-02-05"),
     deadline: new Date("2025-06-30"),
-    creator: { id: "user1", name: "Alice Smith", imageUrl: "/woman.jpg" },
+    creator: { id: "user1", fullName: "Alice Smith", imageUrl: "/woman.jpg" },
     status: {
       id: ACTIVE_PROJECT_STATUS_ID,
       nameEn: "Active",
@@ -38,7 +38,7 @@ export const projectsMock: ProjectPreview[] = [
     createdAt: new Date("2025-03-01"),
     updatedAt: new Date("2025-03-15"),
     deadline: new Date("2025-08-15"),
-    creator: { id: "user2", name: "Bob Johnson", imageUrl: "/man.jpg" },
+    creator: { id: "user2", fullName: "Bob Johnson", imageUrl: "/man.jpg" },
     status: {
       id: PENDING_PROJECT_STATUS_ID,
       nameEn: "Pending",
@@ -65,7 +65,7 @@ export const projectsMock: ProjectPreview[] = [
     createdAt: new Date("2025-02-10"),
     updatedAt: new Date("2025-04-01"),
     deadline: new Date("2025-05-31"),
-    creator: { id: "user3", name: "Carol White", imageUrl: "/woman.jpg" },
+    creator: { id: "user3", fullName: "Carol White", imageUrl: "/woman.jpg" },
     status: {
       id: COMPLETED_PROJECT_STATUS_ID,
       nameEn: "Completed",
@@ -86,7 +86,7 @@ export const projectsMock: ProjectPreview[] = [
     createdAt: new Date("2025-01-20"),
     updatedAt: new Date("2025-03-10"),
     deadline: new Date("2025-07-15"),
-    creator: { id: "user4", name: "David Green", imageUrl: "/man.jpg" },
+    creator: { id: "user4", fullName: "David Green", imageUrl: "/man.jpg" },
     status: {
       id: ACTIVE_PROJECT_STATUS_ID,
       nameEn: "Active",
@@ -118,7 +118,7 @@ export const projectsMock: ProjectPreview[] = [
     createdAt: new Date("2025-02-15"),
     updatedAt: new Date("2025-03-05"),
     deadline: new Date("2025-06-01"),
-    creator: { id: "user5", name: "Eva Black", imageUrl: "/woman.jpg" },
+    creator: { id: "user5", fullName: "Eva Black", imageUrl: "/woman.jpg" },
     status: {
       id: PENDING_PROJECT_STATUS_ID,
       nameEn: "Pending",
@@ -143,7 +143,7 @@ export const projectsMock: ProjectPreview[] = [
     createdAt: new Date("2025-01-25"),
     updatedAt: new Date("2025-03-20"),
     deadline: new Date("2025-09-01"),
-    creator: { id: "user6", name: "Frank Moore", imageUrl: "/man.jpg" },
+    creator: { id: "user6", fullName: "Frank Moore", imageUrl: "/man.jpg" },
     status: {
       id: ACTIVE_PROJECT_STATUS_ID,
       nameEn: "Active",
@@ -176,7 +176,7 @@ export const projectsMock: ProjectPreview[] = [
     createdAt: new Date("2025-01-05"),
     updatedAt: new Date("2025-02-28"),
     deadline: new Date("2025-03-20"),
-    creator: { id: "user7", name: "Grace Hall", imageUrl: "/woman.jpg" },
+    creator: { id: "user7", fullName: "Grace Hall", imageUrl: "/woman.jpg" },
     status: {
       id: COMPLETED_PROJECT_STATUS_ID,
       nameEn: "Completed",
@@ -201,7 +201,7 @@ export const projectsMock: ProjectPreview[] = [
     createdAt: new Date("2025-03-10"),
     updatedAt: new Date("2025-03-25"),
     deadline: new Date("2025-07-10"),
-    creator: { id: "user8", name: "Henry Young", imageUrl: "/man.jpg" },
+    creator: { id: "user8", fullName: "Henry Young", imageUrl: "/man.jpg" },
     status: {
       id: ACTIVE_PROJECT_STATUS_ID,
       nameEn: "Active",
@@ -233,7 +233,7 @@ export const projectsMock: ProjectPreview[] = [
     createdAt: new Date("2025-02-20"),
     updatedAt: new Date("2025-03-15"),
     deadline: new Date("2025-08-05"),
-    creator: { id: "user9", name: "Ivy Adams", imageUrl: "/woman.jpg" },
+    creator: { id: "user9", fullName: "Ivy Adams", imageUrl: "/woman.jpg" },
     status: {
       id: PENDING_PROJECT_STATUS_ID,
       nameEn: "Pending",
@@ -258,7 +258,7 @@ export const projectsMock: ProjectPreview[] = [
     createdAt: new Date("2025-01-15"),
     updatedAt: new Date("2025-04-10"),
     deadline: new Date("2025-05-31"),
-    creator: { id: "user10", name: "Jack Carter", imageUrl: "/man.jpg" },
+    creator: { id: "user10", fullName: "Jack Carter", imageUrl: "/man.jpg" },
     status: {
       id: COMPLETED_PROJECT_STATUS_ID,
       nameEn: "Completed",

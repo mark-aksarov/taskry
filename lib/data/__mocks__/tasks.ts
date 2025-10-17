@@ -19,7 +19,7 @@ export const tasksMock: TaskPreview[] = [
     updatedAt: new Date("2025-09-15"),
     project: { title: "Website Redesign", id: 1 },
 
-    creator: { id: "user1", imageUrl: "/man.jpg", name: "John Doe" },
+    creator: { id: "user1", imageUrl: "/man.jpg", fullName: "John Doe" },
     status: {
       id: PENDING_TASK_STATUS_ID,
       nameEn: "Pending",
@@ -81,7 +81,7 @@ export const tasksMock: TaskPreview[] = [
     updatedAt: new Date("2025-09-17"),
     project: { title: "Core Database Upgrade", id: 3 },
 
-    creator: { id: "user3", imageUrl: null, name: "Jane Doe" },
+    creator: { id: "user3", imageUrl: null, fullName: "Jane Doe" },
     status: {
       id: DONE_TASK_STATUS_ID,
       nameEn: "Done",
@@ -112,7 +112,7 @@ export const tasksMock: TaskPreview[] = [
     updatedAt: new Date("2025-09-17"),
     project: { title: "Quality Assurance Suite", id: 4 },
 
-    creator: { id: "user4", imageUrl: "/man.jpg", name: "John Doe" },
+    creator: { id: "user4", imageUrl: "/man.jpg", fullName: "John Doe" },
     status: {
       id: PENDING_TASK_STATUS_ID,
       nameEn: "Pending",
@@ -147,7 +147,7 @@ export const tasksMock: TaskPreview[] = [
     updatedAt: new Date("2025-09-18"),
     project: { title: "CI/CD Automation", id: 5 },
 
-    creator: { id: "user5", imageUrl: "/man.jpg", name: "John Doe" },
+    creator: { id: "user5", imageUrl: "/man.jpg", fullName: "John Doe" },
     status: {
       id: ACTIVE_TASK_STATUS_ID,
       nameEn: "Active",
@@ -191,7 +191,7 @@ export const tasksMock: TaskPreview[] = [
     updatedAt: new Date("2025-09-18"),
     project: { title: "Infrastructure Setup", id: 6 },
 
-    creator: { id: "user6", imageUrl: "/man.jpg", name: "John Doe" },
+    creator: { id: "user6", imageUrl: "/man.jpg", fullName: "John Doe" },
     status: {
       id: DONE_TASK_STATUS_ID,
       nameEn: "Done",
@@ -225,7 +225,7 @@ export const tasksMock: TaskPreview[] = [
     updatedAt: new Date("2025-09-19"),
     project: { title: "User Experience Improvements", id: 7 },
 
-    creator: { id: "user7", imageUrl: "/man.jpg", name: "John Doe" },
+    creator: { id: "user7", imageUrl: "/man.jpg", fullName: "John Doe" },
     status: {
       id: DONE_TASK_STATUS_ID,
       nameEn: "Done",
@@ -255,7 +255,7 @@ export const tasksMock: TaskPreview[] = [
     updatedAt: new Date("2025-09-19"),
     project: { title: "E-commerce Platform", id: 8 },
 
-    creator: { id: "user8", imageUrl: "/man.jpg", name: "John Doe" },
+    creator: { id: "user8", imageUrl: "/man.jpg", fullName: "John Doe" },
     status: {
       id: ACTIVE_TASK_STATUS_ID,
       nameEn: "Active",
@@ -285,7 +285,7 @@ export const tasksMock: TaskPreview[] = [
     updatedAt: new Date("2025-09-19"),
     project: { title: "Performance Optimization", id: 9 },
 
-    creator: { id: "user9", imageUrl: null, name: "Jane Doe" },
+    creator: { id: "user9", imageUrl: null, fullName: "Jane Doe" },
     status: {
       id: PENDING_TASK_STATUS_ID,
       nameEn: "Pending",

@@ -38,7 +38,9 @@ export const Right = {
             <DialogHeading>Side Sheet Header</DialogHeading>
             <DialogCloseButton iconSize={20} />
           </DialogHeader>
-          <DialogBody>content</DialogBody>
+          <DialogBody className="text-black dark:text-white">
+            content
+          </DialogBody>
         </Dialog>
       </SideSheetTemplate>
     );

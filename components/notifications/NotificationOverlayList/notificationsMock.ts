@@ -13,7 +13,11 @@ export const notificationsMock: NotificationRecipientWithRelations[] = [
       targetName: "Create Landing Page",
       createdAt: new Date("2025-09-23T08:00:00Z"),
       updatedAt: new Date("2025-09-23T08:00:00Z"),
-      actor: { id: "user-2", name: "Alice Johnson", imageUrl: "/woman.jpg" },
+      actor: {
+        id: "user-2",
+        fullName: "Alice Johnson",
+        imageUrl: "/woman.jpg",
+      },
       target: {
         id: 1,
         project: { id: 10, title: "Website Redesign" },
@@ -36,7 +40,7 @@ export const notificationsMock: NotificationRecipientWithRelations[] = [
       targetName: "Website Redesign",
       createdAt: new Date("2025-09-22T09:30:00Z"),
       updatedAt: new Date("2025-09-22T09:45:00Z"),
-      actor: { id: "user-2", name: "Alice Johnson", imageUrl: null },
+      actor: { id: "user-2", fullName: "Alice Johnson", imageUrl: null },
       target: {
         id: 2,
         project: { id: 10, title: "Website Redesign" },
@@ -82,7 +86,7 @@ export const notificationsMock: NotificationRecipientWithRelations[] = [
       targetName: "Landing Page Task",
       createdAt: new Date("2025-09-20T09:00:00Z"),
       updatedAt: new Date("2025-09-20T09:00:00Z"),
-      actor: { id: "user-4", name: "Carol White", imageUrl: "/woman.jpg" },
+      actor: { id: "user-4", fullName: "Carol White", imageUrl: "/woman.jpg" },
       target: {
         id: 4,
         project: null,
@@ -105,7 +109,7 @@ export const notificationsMock: NotificationRecipientWithRelations[] = [
       targetName: "Website Redesign",
       createdAt: new Date("2025-09-19T11:00:00Z"),
       updatedAt: new Date("2025-09-19T11:15:00Z"),
-      actor: { id: "user-3", name: "Bob Smith", imageUrl: "/man.jpg" },
+      actor: { id: "user-3", fullName: "Bob Smith", imageUrl: "/man.jpg" },
       target: {
         id: 5,
         project: { id: 10, title: "Website Redesign" },
@@ -128,13 +132,13 @@ export const notificationsMock: NotificationRecipientWithRelations[] = [
       targetName: "David King",
       createdAt: new Date("2025-09-18T10:00:00Z"),
       updatedAt: new Date("2025-09-18T10:00:00Z"),
-      actor: { id: "user-5", name: "Eve Black", imageUrl: "/woman.jpg" },
+      actor: { id: "user-5", fullName: "Eve Black", imageUrl: "/woman.jpg" },
       target: {
         id: 6,
         project: null,
         task: null,
         message: null,
-        user: { id: "user-6", name: "David King" },
+        user: { id: "user-6", fullName: "David King" },
         customer: null,
       },
     },
@@ -151,7 +155,11 @@ export const notificationsMock: NotificationRecipientWithRelations[] = [
       targetName: "Acme Corp",
       createdAt: new Date("2025-09-17T10:30:00Z"),
       updatedAt: new Date("2025-09-17T10:30:00Z"),
-      actor: { id: "user-2", name: "Alice Johnson", imageUrl: "/woman.jpg" },
+      actor: {
+        id: "user-2",
+        fullName: "Alice Johnson",
+        imageUrl: "/woman.jpg",
+      },
       target: {
         id: 7,
         project: null,
@@ -174,7 +182,7 @@ export const notificationsMock: NotificationRecipientWithRelations[] = [
       targetName: "Old Task",
       createdAt: new Date("2025-09-16T13:00:00Z"),
       updatedAt: new Date("2025-09-16T13:15:00Z"),
-      actor: { id: "user-3", name: "Bob Smith", imageUrl: "/man.jpg" },
+      actor: { id: "user-3", fullName: "Bob Smith", imageUrl: "/man.jpg" },
       target: {
         id: 8,
         project: null,
@@ -197,13 +205,13 @@ export const notificationsMock: NotificationRecipientWithRelations[] = [
       targetName: "Alice Johnson",
       createdAt: new Date("2025-09-15T11:00:00Z"),
       updatedAt: new Date("2025-09-15T11:05:00Z"),
-      actor: { id: "user-5", name: "Eve Black", imageUrl: "/woman.jpg" },
+      actor: { id: "user-5", fullName: "Eve Black", imageUrl: "/woman.jpg" },
       target: {
         id: 9,
         project: null,
         task: null,
         message: null,
-        user: { id: "user-2", name: "Alice Johnson" },
+        user: { id: "user-2", fullName: "Alice Johnson" },
         customer: null,
       },
     },
@@ -220,7 +228,7 @@ export const notificationsMock: NotificationRecipientWithRelations[] = [
       targetName: "Weekly Update",
       createdAt: new Date("2025-09-14T15:30:00Z"),
       updatedAt: new Date("2025-09-14T15:30:00Z"),
-      actor: { id: "user-4", name: "Carol White", imageUrl: "/woman.jpg" },
+      actor: { id: "user-4", fullName: "Carol White", imageUrl: "/woman.jpg" },
       target: {
         id: 10,
         project: null,

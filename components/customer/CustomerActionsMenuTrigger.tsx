@@ -48,7 +48,7 @@ export const CustomerActionsMenuTrigger = () => {
           />
         </>
       )}
-      placement="bottom right"
+      placement="bottom left"
     >
       <Item textValue="Delete" key="delete">
         <div className={itemClasses}>

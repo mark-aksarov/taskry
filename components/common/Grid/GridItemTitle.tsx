@@ -6,5 +6,5 @@ interface GridItemTitleProps {
 }
 
 export function GridItemTitle({ children }: GridItemTitleProps) {
-  return <h4 className={titleStyles}>{children}</h4>;
+  return <h3 className={titleStyles}>{children}</h3>;
 }
