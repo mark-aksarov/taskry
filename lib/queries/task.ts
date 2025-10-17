@@ -5,9 +5,42 @@ import prisma from "../prisma";
 import { TaskPreview } from "./types";
 import { ACTIVE_TASK_STATUS_ID, DONE_TASK_STATUS_ID } from "./constants";
 
-export const getTask = cache(async (id: number) => {
-  return await prisma.task.findUnique({
+export const getTask = cache(async (id: number): Promise<TaskPreview> => {
+  return await prisma.task.findUniqueOrThrow({
     where: { id },
+    include: {
+      creator: {
+        select: {
+          id: true,
+          fullName: true,
+          imageUrl: true,
+        },
+      },
+      status: {
+        select: {
+          id: true,
+          nameEn: true,
+          nameRu: true,
+        },
+      },
+      project: {
+        select: {
+          id: true,
+          title: true,
+        },
+      },
+      category: {
+        select: {
+          id: true,
+          name: true,
+        },
+      },
+      subtasks: {
+        select: {
+          isDone: true,
+        },
+      },
+    },
   });
 });
 

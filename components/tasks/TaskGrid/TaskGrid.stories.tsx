@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { TaskGrid } from "./TaskGrid";
-import { tasksMock } from "../TaskList";
+import { tasksMock } from "@/lib/data/__mocks__/tasks";
 import { ViewModeProvider } from "@/components/common/ViewMode";
 
 const meta = {

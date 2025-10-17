@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { ProjectGrid } from "./ProjectGrid";
-import { projectsMock } from "../ProjectList";
+import { projectsMock } from "@/lib/data/__mocks__/projects";
 import { ViewModeProvider } from "@/components/common/ViewMode";
 
 const meta = {

@@ -3,6 +3,7 @@
 import { tv } from "tailwind-variants";
 import type { TextFieldProps as RACTextFieldProps } from "react-aria-components";
 import {
+  composeRenderProps,
   FileTrigger,
   TextField as RACTextField,
   TextArea,
@@ -21,6 +22,7 @@ type MessageInputProps = RACTextFieldProps &
     placeholder?: string;
     acceptedFileTypes?: string[];
     onFilesSelect: (files: FileList) => void;
+    inputClassName?: string;
   };
 
 export const fieldInputStyles = tv({
@@ -38,6 +40,7 @@ export const MessageInput = ({
   placeholder,
   acceptedFileTypes,
   onFilesSelect,
+  inputClassName,
   ...props
 }: MessageInputProps) => {
   const buttonClasses = "absolute top-[1.75rem] -translate-y-1/2 rounded-full";
@@ -63,7 +66,14 @@ export const MessageInput = ({
       </FileTrigger>
 
       <RACTextField {...props} className={fieldStyles}>
-        <TextArea placeholder={placeholder} className={fieldInputStyles} />
+        <TextArea
+          placeholder={placeholder}
+          className={composeRenderProps(
+            inputClassName,
+            (className, renderProps) =>
+              fieldInputStyles({ ...renderProps, className }),
+          )}
+        />
       </RACTextField>
 
       <Button

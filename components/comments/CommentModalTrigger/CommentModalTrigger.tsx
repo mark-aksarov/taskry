@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Dialog,
   DialogBody,
@@ -5,30 +7,27 @@ import {
   DialogHeader,
   DialogHeading,
   Divider,
-  Modal,
   RACDialogTrigger,
 } from "@/components/ui";
 import { Fragment } from "react";
 import { CommentItem, CommentItemActions } from "../CommentItem";
 import { CommentButton } from "../CommentButton/CommentButton";
 import { Heart, MessageSquare, Reply } from "lucide-react";
-import { getCommentWithReplies } from "@/lib/queries/comments";
+//import { getCommentWithReplies } from "@/lib/queries/comments";
 import { DialogFooter } from "@/components/ui/Dialog/Dialog";
 import { CommentModalInput } from "../CommentModalInput";
+import { commentWithRepliesMock } from "@/lib/data/__mocks__/comments";
+import { ResponsiveModal } from "@/components/common/ResponsiveModal";
+import { useMediaQuery } from "react-responsive";
 
 interface CommentModalProps {
-  fullscreen?: boolean;
   commentId: number;
 }
 
-export async function CommentModalTrigger({
-  fullscreen,
-  commentId,
-}: CommentModalProps) {
-  const comment = await getCommentWithReplies(
-    commentId,
-    "BKs42HvVDEZFoaJUmTqf1gTN0K8pUFjI",
-  );
+export function CommentModalTrigger({ commentId }: CommentModalProps) {
+  const comment = commentWithRepliesMock;
+
+  const isMd = useMediaQuery({ query: "(max-width: 48rem)" });
 
   return (
     <RACDialogTrigger>
@@ -37,8 +36,8 @@ export async function CommentModalTrigger({
         label={comment._count.replies}
         aria-label="Show replies"
       />
-      <Modal isDismissable fullscreen={fullscreen} className="w-[750px]">
-        <Dialog className={!fullscreen ? "max-h-[calc(100dvh-64px)]" : ""}>
+      <ResponsiveModal isDismissable className="w-[750px]">
+        <Dialog className={!isMd ? "max-h-[calc(100dvh-64px)]" : ""}>
           <DialogHeader>
             <DialogHeading>All comments</DialogHeading>
             <DialogCloseButton iconSize={20} />
@@ -118,7 +117,7 @@ export async function CommentModalTrigger({
             <CommentModalInput />
           </DialogFooter>
         </Dialog>
-      </Modal>
+      </ResponsiveModal>
     </RACDialogTrigger>
   );
 }

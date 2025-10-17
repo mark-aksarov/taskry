@@ -42,10 +42,12 @@ function ProfileSummaryCardInner({ user }: { user?: UserPreview }) {
         )}
 
         {!user ? (
-          <EntitySummaryInfoSkeleton />
+          <EntitySummaryInfoSkeleton className="w-full max-md:items-center" />
         ) : (
           <EntitySummaryInfo>
-            <EntitySummaryTitle>{user?.fullName}</EntitySummaryTitle>
+            <EntitySummaryTitle className="max-md:text-center">
+              {user?.fullName}
+            </EntitySummaryTitle>
             <EntitySummaryText>{user?.bio}</EntitySummaryText>
           </EntitySummaryInfo>
         )}

@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { TaskGridItem } from "./TaskGridItem";
-import { tasksMock } from "../TaskList";
+import { tasksMock } from "@/lib/data/__mocks__/tasks";
 
 const meta = {
   title: "Components/tasks/TaskGridItem",

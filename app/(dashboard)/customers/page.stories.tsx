@@ -5,7 +5,7 @@ import { PageDecorator } from "@/.storybook/decorators";
 import { getUsers } from "@/lib/queries/user";
 import { usersMock } from "@/lib/data/__mocks__/users";
 import { getNotifications } from "@/lib/queries/notification";
-import { notificationsMock } from "@/components/notifications/NotificationOverlayList";
+import { notificationsMock } from "@/lib/data/__mocks__/notifications";
 import { getCompanies } from "@/lib/queries/companies";
 import { getCustomers } from "@/lib/queries/customers";
 import { customersMock } from "@/lib/data/__mocks__/customers";

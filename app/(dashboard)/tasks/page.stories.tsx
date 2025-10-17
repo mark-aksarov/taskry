@@ -9,11 +9,11 @@ import { getCustomers } from "@/lib/queries/customers";
 import { getUsers } from "@/lib/queries/user";
 import { usersMock } from "@/lib/data/__mocks__/users";
 import { getNotifications } from "@/lib/queries/notification";
-import { notificationsMock } from "@/components/notifications/NotificationOverlayList";
+import { notificationsMock } from "@/lib/data/__mocks__/notifications";
 import { getTaskCategories, getTasks } from "@/lib/queries/task";
-import { tasksMock } from "@/components/tasks/TaskList";
+import { tasksMock } from "@/lib/data/__mocks__/tasks";
 import { taskCategoriesMock } from "@/lib/data/__mocks__/taskCategories";
-import { projectsMock } from "@/components/projects/ProjectList";
+import { projectsMock } from "@/lib/data/__mocks__/projects";
 import { useSelectedLayoutSegments } from "next/navigation";
 
 const meta = {

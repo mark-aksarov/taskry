@@ -1,59 +1,51 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import ProfileTasksPage from "./page";
-import { mocked } from "storybook/test";
-import { usePathname, useSelectedLayoutSegments } from "next/navigation";
-import { getUserById } from "@/lib/queries/user";
-import { usersMock } from "@/lib/data/__mocks__/users";
+import TaskPage from "./page";
 import { Suspense } from "react";
+import TaskLayout from "./layout";
+import { mocked } from "storybook/test";
+import { getTask } from "@/lib/queries/task";
 import { Layout as RootLayout } from "@/app/layout";
-import ProfileLayout from "../layout";
-import { getTasks } from "@/lib/queries/task";
 import { tasksMock } from "@/lib/data/__mocks__/tasks";
 import { getNotifications } from "@/lib/queries/notification";
 import { notificationsMock } from "@/lib/data/__mocks__/notifications";
+import { usePathname, useSelectedLayoutSegments } from "next/navigation";
 
-const meta: Meta<typeof ProfileTasksPage> = {
-  title: "components/pages/ProfileTasks",
-  component: ProfileTasksPage,
+const meta = {
+  title: "components/pages/Task",
+  component: TaskPage,
   parameters: { layout: "fullscreen" },
   decorators: [
     (Story) => (
       <Suspense>
         <RootLayout>
-          <ProfileLayout>
+          <TaskLayout params={new Promise((resolve) => resolve({ id: "1" }))}>
             <Story />
-          </ProfileLayout>
+          </TaskLayout>
         </RootLayout>
       </Suspense>
     ),
   ],
   beforeEach: () => {
-    mocked(getTasks).mockReturnValue(new Promise((res) => res(tasksMock)));
-    mocked(getUserById).mockReturnValue(
-      new Promise((res) => res(usersMock[0])),
-    );
+    mocked(getTask).mockReturnValue(new Promise((res) => res(tasksMock[0])));
     mocked(getNotifications).mockReturnValue(
       new Promise((res) => res(notificationsMock.slice(0, 5))),
     );
-    mocked(usePathname).mockReturnValue("/profile/tasks");
+    mocked(usePathname).mockReturnValue("/tasks/1");
     mocked(useSelectedLayoutSegments).mockReturnValue([
       "(dashboard)",
-      "profile",
       "tasks",
+      "1",
     ]);
   },
-};
+  args: {
+    params: new Promise((resolve) => resolve({ id: "1" })),
+  },
+} satisfies Meta<typeof TaskPage>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {};
-
-export const WithNoTasks = {
-  beforeEach: () => {
-    mocked(getTasks).mockReturnValue(new Promise((res) => res([])));
-  },
-} satisfies Story;
 
 export const Tablet: Story = {
   globals: {

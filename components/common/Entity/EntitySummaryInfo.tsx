@@ -7,9 +7,13 @@ export function EntitySummaryInfo({ children }: { children: React.ReactNode }) {
   return <div className={styles}>{children}</div>;
 }
 
-export function EntitySummaryInfoSkeleton() {
+export function EntitySummaryInfoSkeleton({
+  className,
+}: {
+  className?: string;
+}) {
   return (
-    <div className={twMerge(styles, "w-full max-md:items-center")}>
+    <div className={twMerge(styles, className)}>
       <Skeleton className="w-[8rem]" size="xl" />
       <div className="flex w-full flex-col">
         <Skeleton size="sm" />

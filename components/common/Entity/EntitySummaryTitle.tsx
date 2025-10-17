@@ -1,10 +1,15 @@
-export const titleStyles =
-  "text-xl font-extrabold text-black dark:text-white max-md:text-center";
+import { twMerge } from "tailwind-merge";
+
+export const titleStyles = "text-xl font-extrabold text-black dark:text-white";
 
 interface EntitySummaryTitleProps {
+  className?: string;
   children: React.ReactNode;
 }
 
-export function EntitySummaryTitle({ children }: EntitySummaryTitleProps) {
-  return <h2 className={titleStyles}>{children}</h2>;
+export function EntitySummaryTitle({
+  className,
+  children,
+}: EntitySummaryTitleProps) {
+  return <h2 className={twMerge(titleStyles, className)}>{children}</h2>;
 }

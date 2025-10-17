@@ -8,7 +8,7 @@ import { getUsers } from "@/lib/queries/user";
 import { UserCheckboxGroup } from "@/components/users/UserCheckboxGroup";
 import { TaskCategoryCheckboxGroup } from "../TaskCategoryCheckboxGroup";
 import { getTaskCategories } from "@/lib/queries/task";
-import { projectsMock } from "@/components/projects/ProjectList";
+import { projectsMock } from "@/lib/data/__mocks__/projects";
 import { ProjectCheckboxGroup } from "@/components/projects/ProjectCheckboxGroup";
 
 const meta: Meta<typeof TaskFiltersForm> = {

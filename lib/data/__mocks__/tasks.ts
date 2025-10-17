@@ -9,7 +9,8 @@ export const tasksMock: TaskPreview[] = [
   {
     id: 1,
     title: "Design landing page",
-    description: "Create the main landing page UI",
+    description:
+      "Create a fully responsive and visually appealing landing page for the main product website. The design should follow the existing brand guidelines, include clear call-to-action buttons, and be optimized for both desktop and mobile devices. Focus on accessibility, clean typography, and visual hierarchy. Include hero section, feature highlights, testimonials, and a contact form section. Coordinate with the product and marketing teams to ensure the content and visual tone align with campaign goals.",
     deadline: new Date("2025-09-30"),
     projectId: 1,
     creatorId: "user1",
@@ -18,7 +19,6 @@ export const tasksMock: TaskPreview[] = [
     createdAt: new Date("2025-09-01"),
     updatedAt: new Date("2025-09-15"),
     project: { title: "Website Redesign", id: 1 },
-
     creator: { id: "user1", imageUrl: "/man.jpg", fullName: "John Doe" },
     status: {
       id: PENDING_TASK_STATUS_ID,
@@ -38,7 +38,8 @@ export const tasksMock: TaskPreview[] = [
   {
     id: 2,
     title: "Implement login system",
-    description: "Add email and password login with validation",
+    description:
+      "Develop a secure login system using email and password authentication. Include input validation, error handling, and password hashing. Integrate with the backend authentication API and ensure smooth navigation between login, registration, and password reset screens. Add client-side form validation to improve user experience and prevent incorrect submissions. Make sure the design matches UI specifications and test thoroughly on all supported browsers and devices.",
     deadline: new Date("2025-10-05"),
     projectId: 2,
     creatorId: null,
@@ -47,7 +48,6 @@ export const tasksMock: TaskPreview[] = [
     createdAt: new Date("2025-09-02"),
     updatedAt: new Date("2025-09-16"),
     project: { title: "Authentication Module", id: 2 },
-
     creator: null,
     status: {
       id: ACTIVE_TASK_STATUS_ID,
@@ -71,7 +71,8 @@ export const tasksMock: TaskPreview[] = [
   {
     id: 3,
     title: "Database schema migration",
-    description: "Prepare migration scripts for PostgreSQL",
+    description:
+      "Plan and implement the migration scripts required for transitioning the PostgreSQL database schema to the new structure. This includes creating migration files, ensuring backward compatibility, testing data integrity, and documenting the process. The migration must handle new relationships and indexes efficiently while maintaining minimal downtime. Coordinate with backend developers to validate ORM models and run test migrations in a staging environment.",
     deadline: new Date("2025-10-10"),
     projectId: 3,
     creatorId: "user3",
@@ -80,7 +81,6 @@ export const tasksMock: TaskPreview[] = [
     createdAt: new Date("2025-09-03"),
     updatedAt: new Date("2025-09-17"),
     project: { title: "Core Database Upgrade", id: 3 },
-
     creator: { id: "user3", imageUrl: null, fullName: "Jane Doe" },
     status: {
       id: DONE_TASK_STATUS_ID,
@@ -102,7 +102,8 @@ export const tasksMock: TaskPreview[] = [
   {
     id: 4,
     title: "Write unit tests",
-    description: "Ensure code coverage for critical modules",
+    description:
+      "Develop a comprehensive set of unit tests to ensure code reliability and maintainability for critical modules. Focus on achieving at least 80% coverage across utility functions, API calls, and key business logic. Use Jest as the primary testing framework and mock external dependencies where applicable. Document test cases and include CI integration to automatically run tests on every commit. Collaborate with the QA team to identify high-risk areas that require additional testing coverage.",
     deadline: new Date("2025-10-12"),
     projectId: 4,
     creatorId: "user4",
@@ -111,7 +112,6 @@ export const tasksMock: TaskPreview[] = [
     createdAt: new Date("2025-09-04"),
     updatedAt: new Date("2025-09-17"),
     project: { title: "Quality Assurance Suite", id: 4 },
-
     creator: { id: "user4", imageUrl: "/man.jpg", fullName: "John Doe" },
     status: {
       id: PENDING_TASK_STATUS_ID,
@@ -137,7 +137,8 @@ export const tasksMock: TaskPreview[] = [
   {
     id: 5,
     title: "Prepare deployment pipeline",
-    description: "Set up CI/CD with GitHub Actions",
+    description:
+      "Configure a CI/CD pipeline using GitHub Actions to automate build, test, and deployment workflows. Define environment variables securely, integrate linting and testing steps, and ensure deployment to staging and production environments is reliable. Document the workflow and create a rollback strategy in case of failed deployments. Collaborate with DevOps and QA teams to validate that all automated checks are functional and efficient. Optimize build times using caching and parallel execution.",
     deadline: new Date("2025-10-15"),
     projectId: 5,
     creatorId: "user5",
@@ -146,7 +147,6 @@ export const tasksMock: TaskPreview[] = [
     createdAt: new Date("2025-09-05"),
     updatedAt: new Date("2025-09-18"),
     project: { title: "CI/CD Automation", id: 5 },
-
     creator: { id: "user5", imageUrl: "/man.jpg", fullName: "John Doe" },
     status: {
       id: ACTIVE_TASK_STATUS_ID,
@@ -181,7 +181,8 @@ export const tasksMock: TaskPreview[] = [
   {
     id: 6,
     title: "Set up staging environment",
-    description: "Deploy staging server for testing",
+    description:
+      "Deploy and configure a fully functional staging environment that mirrors the production setup. Use infrastructure-as-code principles to define resources and automate provisioning using Terraform. Configure database connections, API endpoints, and environment variables. Implement monitoring tools for uptime and performance tracking. Ensure developers and QA testers have access and document deployment and rollback procedures for consistency and reliability.",
     deadline: new Date("2025-10-18"),
     projectId: 6,
     creatorId: "user6",
@@ -190,7 +191,6 @@ export const tasksMock: TaskPreview[] = [
     createdAt: new Date("2025-09-06"),
     updatedAt: new Date("2025-09-18"),
     project: { title: "Infrastructure Setup", id: 6 },
-
     creator: { id: "user6", imageUrl: "/man.jpg", fullName: "John Doe" },
     status: {
       id: DONE_TASK_STATUS_ID,
@@ -215,7 +215,8 @@ export const tasksMock: TaskPreview[] = [
   {
     id: 7,
     title: "Create onboarding flow",
-    description: "Implement user onboarding screens",
+    description:
+      "Design and develop a user onboarding flow that introduces new users to the product’s main features in a friendly and interactive way. Include welcome screens, progress indicators, and optional tutorial hints. Implement analytics tracking to measure completion rates and drop-offs. Ensure animations are smooth and performance optimized. The flow should be mobile-first and consistent with existing design components.",
     deadline: new Date("2025-10-20"),
     projectId: 7,
     creatorId: "user7",
@@ -224,7 +225,6 @@ export const tasksMock: TaskPreview[] = [
     createdAt: new Date("2025-09-07"),
     updatedAt: new Date("2025-09-19"),
     project: { title: "User Experience Improvements", id: 7 },
-
     creator: { id: "user7", imageUrl: "/man.jpg", fullName: "John Doe" },
     status: {
       id: DONE_TASK_STATUS_ID,
@@ -245,7 +245,8 @@ export const tasksMock: TaskPreview[] = [
   {
     id: 8,
     title: "Fix payment bug",
-    description: "Resolve payment gateway error on checkout",
+    description:
+      "Investigate and resolve the recurring payment gateway error occurring during the checkout process. Analyze server logs, reproduce the issue locally, and identify the root cause. Ensure the fix does not break other payment methods or coupon logic. Add integration tests to prevent regression. Work closely with QA to verify successful transactions in both sandbox and production environments.",
     deadline: new Date("2025-10-22"),
     projectId: 8,
     creatorId: "user8",
@@ -254,7 +255,6 @@ export const tasksMock: TaskPreview[] = [
     createdAt: new Date("2025-09-08"),
     updatedAt: new Date("2025-09-19"),
     project: { title: "E-commerce Platform", id: 8 },
-
     creator: { id: "user8", imageUrl: "/man.jpg", fullName: "John Doe" },
     status: {
       id: ACTIVE_TASK_STATUS_ID,
@@ -275,7 +275,8 @@ export const tasksMock: TaskPreview[] = [
   {
     id: 9,
     title: "Optimize image loading",
-    description: "Use lazy-loading and compression",
+    description:
+      "Implement lazy-loading for images across the application to improve performance and page speed scores. Compress large assets using modern formats like WebP or AVIF. Set up responsive image sources and caching headers. Test the implementation with performance auditing tools such as Lighthouse and WebPageTest. Ensure visual quality remains acceptable after compression, especially for marketing materials.",
     deadline: new Date("2025-10-25"),
     projectId: 9,
     creatorId: "user9",
@@ -284,7 +285,6 @@ export const tasksMock: TaskPreview[] = [
     createdAt: new Date("2025-09-09"),
     updatedAt: new Date("2025-09-19"),
     project: { title: "Performance Optimization", id: 9 },
-
     creator: { id: "user9", imageUrl: null, fullName: "Jane Doe" },
     status: {
       id: PENDING_TASK_STATUS_ID,
@@ -305,7 +305,8 @@ export const tasksMock: TaskPreview[] = [
   {
     id: 10,
     title: "Refactor auth middleware",
-    description: "Simplify authentication logic",
+    description:
+      "Simplify and optimize the existing authentication middleware to reduce complexity and improve maintainability. Replace nested conditional logic with modular validation steps and better error messages. Ensure compatibility with both session and token-based authentication methods. Add unit and integration tests for edge cases such as expired tokens and invalid sessions. Update documentation and review security implications with the backend team.",
     deadline: new Date("2025-10-28"),
     projectId: 10,
     creatorId: null,
@@ -314,7 +315,6 @@ export const tasksMock: TaskPreview[] = [
     createdAt: new Date("2025-09-10"),
     updatedAt: new Date("2025-09-20"),
     project: { title: "Backend Refactoring", id: 10 },
-
     creator: null,
     status: {
       id: DONE_TASK_STATUS_ID,

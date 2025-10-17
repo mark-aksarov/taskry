@@ -5,7 +5,7 @@ import { PageDecorator } from "@/.storybook/decorators";
 import { getPositions, getUsers } from "@/lib/queries/user";
 import { usersMock } from "@/lib/data/__mocks__/users";
 import { getNotifications } from "@/lib/queries/notification";
-import { notificationsMock } from "@/components/notifications/NotificationOverlayList";
+import { notificationsMock } from "@/lib/data/__mocks__/notifications";
 import { positionsMock } from "@/lib/data/__mocks__/positions";
 import { useSelectedLayoutSegments } from "next/navigation";
 

@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { NotificationOverlayItem } from "./NotificationOverlayItem";
-import { notificationsMock } from "../NotificationOverlayList";
+import { notificationsMock } from "@/lib/data/__mocks__/notifications";
 
 const meta = {
   title: "Components/notifications/NotificationOverlayItem",

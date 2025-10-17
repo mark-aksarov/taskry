@@ -3,7 +3,7 @@ import { mocked } from "storybook/test";
 import { Meta, StoryObj } from "@storybook/react";
 import { getNotifications } from "@/lib/queries/notification";
 import { NotificationOverlayList } from "./NotificationOverlayList";
-import { notificationsMock } from "./notificationsMock";
+import { notificationsMock } from "@/lib/data/__mocks__/notifications";
 
 const meta = {
   title: "Components/notifications/NotificationOverlayList",

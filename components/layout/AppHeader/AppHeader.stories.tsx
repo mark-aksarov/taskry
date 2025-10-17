@@ -3,15 +3,13 @@ import { AppHeader } from "./AppHeader";
 import { Suspense } from "react";
 import { mocked } from "storybook/test";
 import { NotificationPopoverTrigger } from "@/components/notifications/NotificationPopoverTrigger";
-import {
-  NotificationOverlayList,
-  notificationsMock,
-} from "@/components/notifications/NotificationOverlayList";
+import { NotificationOverlayList } from "@/components/notifications/NotificationOverlayList";
 import { NotificationSheetTrigger } from "@/components/notifications/NotificationSheetTrigger";
 import { AppBottomSheetTrigger } from "../AppBottomSheetTrigger";
 import { AppSidebarSheetTrigger } from "../AppSidebarSheetTrigger";
 import { getNotifications } from "@/lib/queries/notification";
 import { useSelectedLayoutSegments } from "next/navigation";
+import { notificationsMock } from "@/lib/data/__mocks__/notifications";
 
 const meta = {
   title: "Components/layout/AppHeader",

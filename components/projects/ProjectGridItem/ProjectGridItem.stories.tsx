@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { ProjectGridItem } from "./ProjectGridItem";
-import { projectsMock } from "../ProjectList";
+import { projectsMock } from "@/lib/data/__mocks__/projects";
 
 const meta = {
   title: "Components/projects/ProjectGridItem",

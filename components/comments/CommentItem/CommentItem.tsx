@@ -17,7 +17,7 @@ import { Link } from "@/components/ui";
 
 interface CommentItemProps {
   comment?: Comment;
-  renderActions: () => React.ReactNode;
+  renderActions?: () => React.ReactNode;
 }
 
 export function CommentItem({ comment, renderActions }: CommentItemProps) {
@@ -87,7 +87,7 @@ export function CommentItem({ comment, renderActions }: CommentItemProps) {
                 ))}
               </Attachments>
             )}
-            {renderActions()}
+            {renderActions && renderActions()}
           </>
         )}
       </CommentItemContent>

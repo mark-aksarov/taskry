@@ -9,9 +9,9 @@ import {
   getTasksDone,
   getTotalTasks,
 } from "@/lib/queries/task";
-import { tasksMock } from "@/components/tasks/TaskList";
+import { tasksMock } from "@/lib/data/__mocks__/tasks";
 import { getNotifications } from "@/lib/queries/notification";
-import { notificationsMock } from "@/components/notifications/NotificationOverlayList";
+import { notificationsMock } from "@/lib/data/__mocks__/notifications";
 import { getStorageUsage } from "@/lib/queries/storage";
 import { useSelectedLayoutSegments } from "next/navigation";
 

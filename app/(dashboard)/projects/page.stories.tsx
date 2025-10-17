@@ -9,8 +9,8 @@ import { getCustomers } from "@/lib/queries/customers";
 import { getUsers } from "@/lib/queries/user";
 import { usersMock } from "@/lib/data/__mocks__/users";
 import { getNotifications } from "@/lib/queries/notification";
-import { notificationsMock } from "@/components/notifications/NotificationOverlayList";
-import { projectsMock } from "@/components/projects/ProjectList";
+import { notificationsMock } from "@/lib/data/__mocks__/notifications";
+import { projectsMock } from "@/lib/data/__mocks__/projects";
 import { useSelectedLayoutSegments } from "next/navigation";
 
 const meta = {

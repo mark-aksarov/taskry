@@ -8,9 +8,9 @@ import { Suspense } from "react";
 import { Layout as RootLayout } from "@/app/layout";
 import ProfileLayout from "../layout";
 import { getProjects } from "@/lib/queries/project";
-import { projectsMock } from "@/components/projects/ProjectList";
+import { projectsMock } from "@/lib/data/__mocks__/projects";
 import { getNotifications } from "@/lib/queries/notification";
-import { notificationsMock } from "@/components/notifications/NotificationOverlayList";
+import { notificationsMock } from "@/lib/data/__mocks__/notifications";
 
 const meta: Meta<typeof ProfileProjectsPage> = {
   title: "components/pages/ProfileProjects",
