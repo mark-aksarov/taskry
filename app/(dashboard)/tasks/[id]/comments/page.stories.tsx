@@ -49,3 +49,21 @@ export default meta;
 export type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {};
+
+export const WithNoComments = {
+  beforeEach: () => {
+    mocked(getCommentsByTask).mockReturnValue(new Promise((res) => res([])));
+  },
+} satisfies Story;
+
+export const Tablet: Story = {
+  globals: {
+    viewport: { value: "ipad", isRotated: true },
+  },
+};
+
+export const Mobile = {
+  globals: {
+    viewport: { value: "iphone6", isRotated: false },
+  },
+} satisfies Story;
