@@ -8,9 +8,6 @@ import { Button, Checkbox, Link } from "@/components/ui";
 
 import {
   ListItem,
-  ListItemActionMenuDialogHeader,
-  listItemActionMenuItemStyles,
-  ListItemActionMenuSkeleton,
   ListItemInfo,
   ListItemInfoSkeleton,
   ListItemText,
@@ -24,6 +21,8 @@ import {
 
 import { CustomerPreview } from "@/lib/queries/types";
 import { ResponsiveMenuTrigger } from "@/components/common/ResponsiveMenuTrigger";
+import { MenuTriggerSkeleton } from "@/components/common/MenuTriggerSkeleton";
+import { MenuDialogHeader } from "@/components/common/MenuDialogHeader";
 
 export function CustomerListItem({ customer }: { customer?: CustomerPreview }) {
   return (
@@ -106,11 +105,11 @@ export function CustomerListItem({ customer }: { customer?: CustomerPreview }) {
       )}
 
       {!customer ? (
-        <ListItemActionMenuSkeleton />
+        <MenuTriggerSkeleton />
       ) : (
         <ResponsiveMenuTrigger
           placement="bottom right"
-          renderDialogHeader={() => <ListItemActionMenuDialogHeader />}
+          renderDialogHeader={() => <MenuDialogHeader heading="Actions" />}
           renderButton={() => (
             <Button
               aria-label="customer menu"
@@ -123,14 +122,10 @@ export function CustomerListItem({ customer }: { customer?: CustomerPreview }) {
           )}
         >
           <Item textValue="Edit" key="edit">
-            <div className={listItemActionMenuItemStyles}>
-              <Pencil size={16} /> Edit
-            </div>
+            <Pencil size={16} /> Edit
           </Item>
           <Item textValue="Delete" key="delete">
-            <div className={listItemActionMenuItemStyles}>
-              <Trash size={16} /> Delete
-            </div>
+            <Trash size={16} /> Delete
           </Item>
         </ResponsiveMenuTrigger>
       )}

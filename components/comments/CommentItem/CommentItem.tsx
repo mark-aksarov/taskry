@@ -12,7 +12,7 @@ import {
 import { Comment } from "@/lib/queries/types";
 import { useMemo } from "react";
 import { CommentItemContent } from "./CommentItemContent";
-import { Attachment, Attachments } from "@/components/common/Attachments";
+import { Attachment, Attachments } from "@/components/attachments/Attachments";
 import { Link } from "@/components/ui";
 
 interface CommentItemProps {

@@ -6,7 +6,6 @@ import { Comment, CommentWithReplies } from "@/lib/queries/types";
 
 export const getCommentsByTask = cache(
   async (taskId: number, userId: string): Promise<Comment[]> => {
-    await new Promise((res) => setTimeout(res, 3000));
     return await prisma.comment.findMany({
       where: {
         taskId,

@@ -10,21 +10,20 @@ import { Check, CircleEllipsis, Clock, Ellipsis, Trash } from "lucide-react";
 import { ResponsiveMenuTrigger } from "@/components/common/ResponsiveMenuTrigger";
 import {
   GridItem,
-  gridItemActionMenuItemStyles,
   GridItemInfo,
   GridItemProgress,
   GridItemText,
   GridItemTitle,
   GridItemTop,
   GridItemInfoSkeleton,
-  GridItemActionMenuDialogHeader,
-  GridItemActionMenuSkeleton,
   GridItemProgressSkeleton,
 } from "@/components/common/Grid";
 import {
   ImageContainer,
   ImageContainerSkeleton,
 } from "@/components/common/ImageContainer";
+import { MenuTriggerSkeleton } from "@/components/common/MenuTriggerSkeleton";
+import { MenuDialogHeader } from "@/components/common/MenuDialogHeader";
 
 export function ProjectGridItem({ project }: { project: ProjectPreview }) {
   const locale = "en-GB";
@@ -51,13 +50,13 @@ export function ProjectGridItem({ project }: { project: ProjectPreview }) {
       {/* --- Checkbox & Menu --- */}
       <GridItemTop>
         {!project ? (
-          <GridItemActionMenuSkeleton />
+          <MenuTriggerSkeleton className="-mr-2 ml-auto" />
         ) : (
           <>
             <Checkbox aria-label={project.title} />
             <ResponsiveMenuTrigger
               placement="bottom right"
-              renderDialogHeader={() => <GridItemActionMenuDialogHeader />}
+              renderDialogHeader={() => <MenuDialogHeader heading="Actions" />}
               renderButton={() => (
                 <Button
                   aria-label="project menu"
@@ -70,26 +69,18 @@ export function ProjectGridItem({ project }: { project: ProjectPreview }) {
               )}
             >
               <Item textValue="Delete" key="delete">
-                <div className={gridItemActionMenuItemStyles}>
-                  <Trash size={16} /> Delete
-                </div>
+                <Trash size={16} /> Delete
               </Item>
               <Item textValue="Mark as Pending" key="pending">
-                <div className={gridItemActionMenuItemStyles}>
-                  <CircleEllipsis size={16} /> Mark as Pending
-                </div>
+                <CircleEllipsis size={16} /> Mark as Pending
               </Item>
               <Item textValue="Mark as Competed" key="competed">
-                <div className={gridItemActionMenuItemStyles}>
-                  <Check size={16} />
-                  Mark as Competed
-                </div>
+                <Check size={16} />
+                Mark as Competed
               </Item>
               <Item textValue="Mark as Active" key="active">
-                <div className={gridItemActionMenuItemStyles}>
-                  <Clock size={16} />
-                  Mark as Active
-                </div>
+                <Clock size={16} />
+                Mark as Active
               </Item>
             </ResponsiveMenuTrigger>
           </>

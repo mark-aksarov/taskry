@@ -5,6 +5,12 @@ import prisma from "../prisma";
 import { TaskPreview } from "./types";
 import { ACTIVE_TASK_STATUS_ID, DONE_TASK_STATUS_ID } from "./constants";
 
+export const getSubtasksByTask = cache(async (id: number) => {
+  return await prisma.subtask.findMany({
+    where: { taskId: id },
+  });
+});
+
 export const getTask = cache(async (id: number): Promise<TaskPreview> => {
   return await prisma.task.findUniqueOrThrow({
     where: { id },

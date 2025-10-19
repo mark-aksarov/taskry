@@ -8,9 +8,6 @@ import { Button, Checkbox, Link } from "@/components/ui";
 
 import {
   ListItem,
-  ListItemActionMenuDialogHeader,
-  listItemActionMenuItemStyles,
-  ListItemActionMenuSkeleton,
   ListItemInfo,
   ListItemInfoSkeleton,
   ListItemText,
@@ -23,6 +20,8 @@ import {
   ImageContainer,
   ImageContainerSkeleton,
 } from "@/components/common/ImageContainer";
+import { MenuDialogHeader } from "@/components/common/MenuDialogHeader";
+import { MenuTriggerSkeleton } from "@/components/common/MenuTriggerSkeleton";
 
 export function UserListItem({
   user,
@@ -111,11 +110,11 @@ export function UserListItem({
       )}
 
       {!user ? (
-        <ListItemActionMenuSkeleton />
+        <MenuTriggerSkeleton />
       ) : (
         <ResponsiveMenuTrigger
           placement="bottom right"
-          renderDialogHeader={() => <ListItemActionMenuDialogHeader />}
+          renderDialogHeader={() => <MenuDialogHeader heading="Actions" />}
           renderButton={() => (
             <Button
               aria-label="user menu"
@@ -128,14 +127,10 @@ export function UserListItem({
           )}
         >
           <Item textValue="Edit" key="edit">
-            <div className={listItemActionMenuItemStyles}>
-              <Pencil size={16} /> Edit
-            </div>
+            <Pencil size={16} /> Edit
           </Item>
           <Item textValue="Delete" key="delete">
-            <div className={listItemActionMenuItemStyles}>
-              <Trash size={16} /> Delete
-            </div>
+            <Trash size={16} /> Delete
           </Item>
         </ResponsiveMenuTrigger>
       )}

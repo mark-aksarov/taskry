@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { MessageInput } from "./MessageInput";
 import { useState } from "react";
-import { Attachment, Attachments } from "../Attachments";
+import { Attachment, Attachments } from "../../attachments/Attachments";
 import Image from "next/image";
 import { fn } from "storybook/test";
 

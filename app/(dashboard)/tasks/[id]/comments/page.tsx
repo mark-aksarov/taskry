@@ -6,7 +6,15 @@ import {
   EmptySectionHeading,
   EmptySectionLink,
 } from "@/components/common/EmptySection";
+import { PageGrid } from "@/components/common/PageGrid";
+import {
+  ToolbarDesktop,
+  ToolbarMobileBottom,
+  ToolbarMobileHeading,
+  ToolbarMobileTop,
+} from "@/components/common/Toolbar";
 import { TaskCommentsMessageInput } from "@/components/tasks/TaskCommentsMessageInput";
+import { TaskPageTabs } from "@/components/tasks/TaskPageTabs";
 import { getCommentsByTask } from "@/lib/queries/comments";
 
 export default async function TaskCommentsPage({
@@ -22,22 +30,44 @@ export default async function TaskCommentsPage({
 
   if (!comments.length) {
     return (
-      <Centered>
-        <EmptySection>
-          <EmptySectionHeading>No comments yet</EmptySectionHeading>
-          <EmptySectionDescription>
-            Start the conversation by adding your first comment
-          </EmptySectionDescription>
-          <EmptySectionLink href="#">Add Comment</EmptySectionLink>
-        </EmptySection>
-      </Centered>
+      <PageGrid>
+        <ToolbarDesktop>
+          <TaskPageTabs />
+        </ToolbarDesktop>
+        <ToolbarMobileTop>
+          <ToolbarMobileHeading>Comments</ToolbarMobileHeading>
+        </ToolbarMobileTop>
+        <ToolbarMobileBottom>
+          <TaskPageTabs />
+        </ToolbarMobileBottom>
+        <Centered>
+          <EmptySection>
+            <EmptySectionHeading>No comments yet</EmptySectionHeading>
+            <EmptySectionDescription>
+              Start the conversation by adding your first comment
+            </EmptySectionDescription>
+            <EmptySectionLink href="#">Add Comment</EmptySectionLink>
+          </EmptySection>
+        </Centered>
+      </PageGrid>
     );
   }
 
   return (
-    <div className="flex flex-col gap-4">
-      <TaskCommentsMessageInput />
-      <CommentList comments={comments} />
-    </div>
+    <PageGrid>
+      <ToolbarDesktop>
+        <TaskPageTabs />
+      </ToolbarDesktop>
+      <ToolbarMobileTop>
+        <ToolbarMobileHeading>Comments</ToolbarMobileHeading>
+      </ToolbarMobileTop>
+      <ToolbarMobileBottom>
+        <TaskPageTabs />
+      </ToolbarMobileBottom>
+      <div className="flex flex-col gap-4">
+        <TaskCommentsMessageInput />
+        <CommentList comments={comments} />
+      </div>
+    </PageGrid>
   );
 }

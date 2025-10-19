@@ -2,29 +2,18 @@
 
 import { useOverlayTrigger } from "react-aria";
 import { Check, CircleEllipsis, Clock, Ellipsis, Trash } from "lucide-react";
-import {
-  Button,
-  DialogCloseButton,
-  DialogHeader,
-  DialogHeading,
-} from "@/components/ui";
+import { Button } from "@/components/ui";
 import { Item, useOverlayTriggerState } from "react-stately";
 import { ResponsiveMenuTrigger } from "../common/ResponsiveMenuTrigger";
+import { MenuDialogHeader } from "../common/MenuDialogHeader";
 
 export const ProjectActionsMenuTrigger = () => {
   const state = useOverlayTriggerState({});
   const { triggerProps } = useOverlayTrigger({ type: "dialog" }, state);
 
-  const itemClasses = "flex items-center gap-4 font-bold";
-
   return (
     <ResponsiveMenuTrigger
-      renderDialogHeader={() => (
-        <DialogHeader className="px-4 py-3">
-          <DialogHeading className="text-base">Actions</DialogHeading>
-          <DialogCloseButton />
-        </DialogHeader>
-      )}
+      renderDialogHeader={() => <MenuDialogHeader heading="Actions" />}
       renderButton={() => (
         <>
           <Button
@@ -51,28 +40,20 @@ export const ProjectActionsMenuTrigger = () => {
       placement="bottom left"
     >
       <Item textValue="Delete" key="delete">
-        <div className={itemClasses}>
-          <Trash size={16} strokeWidth={1.5} absoluteStrokeWidth />
-          Remove
-        </div>
+        <Trash size={16} strokeWidth={1.5} absoluteStrokeWidth />
+        Remove
       </Item>
       <Item textValue="Mark as Pending" key="pending">
-        <div className={itemClasses}>
-          <CircleEllipsis size={16} strokeWidth={1.5} absoluteStrokeWidth />{" "}
-          Mark as Pending
-        </div>
+        <CircleEllipsis size={16} strokeWidth={1.5} absoluteStrokeWidth /> Mark
+        as Pending
       </Item>
       <Item textValue="Mark as Active" key="active">
-        <div className={itemClasses}>
-          <Check size={16} strokeWidth={1.5} absoluteStrokeWidth />
-          Mark as Active
-        </div>
+        <Check size={16} strokeWidth={1.5} absoluteStrokeWidth />
+        Mark as Active
       </Item>
       <Item textValue="Mark as Completed" key="completed">
-        <div className={itemClasses}>
-          <Clock size={16} strokeWidth={1.5} absoluteStrokeWidth />
-          Mark as Completed
-        </div>
+        <Clock size={16} strokeWidth={1.5} absoluteStrokeWidth />
+        Mark as Completed
       </Item>
     </ResponsiveMenuTrigger>
   );

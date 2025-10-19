@@ -1,30 +1,22 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import TaskPage from "./page";
-import { Suspense } from "react";
-import TaskLayout from "./layout";
 import { mocked } from "storybook/test";
 import { getTask } from "@/lib/queries/task";
-import { Layout as RootLayout } from "@/app/layout";
 import { tasksMock } from "@/lib/data/__mocks__/tasks";
 import { getNotifications } from "@/lib/queries/notification";
 import { notificationsMock } from "@/lib/data/__mocks__/notifications";
-import { usePathname, useSelectedLayoutSegments } from "next/navigation";
+import {
+  useParams,
+  usePathname,
+  useSelectedLayoutSegments,
+} from "next/navigation";
+import { PageDecorator } from "@/.storybook/decorators";
 
 const meta = {
   title: "components/pages/Task",
   component: TaskPage,
   parameters: { layout: "fullscreen" },
-  decorators: [
-    (Story) => (
-      <Suspense>
-        <RootLayout>
-          <TaskLayout params={new Promise((resolve) => resolve({ id: "1" }))}>
-            <Story />
-          </TaskLayout>
-        </RootLayout>
-      </Suspense>
-    ),
-  ],
+  decorators: [PageDecorator],
   beforeEach: () => {
     mocked(getTask).mockReturnValue(new Promise((res) => res(tasksMock[0])));
     mocked(getNotifications).mockReturnValue(
@@ -36,6 +28,7 @@ const meta = {
       "tasks",
       "1",
     ]);
+    mocked(useParams).mockReturnValue({ id: "1" });
   },
   args: {
     params: new Promise((resolve) => resolve({ id: "1" })),

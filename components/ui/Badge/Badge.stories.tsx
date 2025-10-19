@@ -23,17 +23,3 @@ export const Green = {
     children: "Badge",
   },
 } satisfies Story;
-
-export const Red = {
-  args: {
-    color: "red",
-    children: "Badge",
-  },
-} satisfies Story;
-
-export const Orange = {
-  args: {
-    color: "orange",
-    children: "Badge",
-  },
-} satisfies Story;

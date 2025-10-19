@@ -8,13 +8,7 @@ import { twMerge } from "tailwind-merge";
 
 import { Ellipsis, ListCheck, Trash } from "lucide-react";
 
-import {
-  Button,
-  DialogCloseButton,
-  DialogHeader,
-  DialogHeading,
-  Skeleton,
-} from "@/components/ui";
+import { Button, Skeleton } from "@/components/ui";
 import { NotificationRecipientWithRelations } from "@/lib/queries/types";
 import { ResponsiveMenuTrigger } from "@/components/common/ResponsiveMenuTrigger";
 import {
@@ -26,6 +20,7 @@ import { NotificationOverlayItemActionText } from "./NotificationOverlayItemActi
 import { NotificationOverlayItemDate } from "./NotificationOverlayItemDate";
 import { NotificationOverlayItemTarget } from "./NotificationOverlayItemTarget";
 import { NotificationOverlayItemInfoSkeleton } from "./NotificationOverlayItemInfo";
+import { MenuDialogHeader } from "@/components/common/MenuDialogHeader";
 
 interface NotificationOverlayItemProps {
   notification?: NotificationRecipientWithRelations;
@@ -63,8 +58,6 @@ export const NotificationOverlayItem = ({
   const formattedUpper = formattedDate.replace(/([ap]m)$/i, (match) =>
     match.toUpperCase(),
   );
-
-  const itemClasses = "flex items-center gap-4 font-bold";
 
   function getActionText() {
     switch (type) {
@@ -164,7 +157,7 @@ export const NotificationOverlayItem = ({
   return (
     <div
       className={twMerge(
-        "flex w-full items-start gap-3 border-gray-300 bg-white px-4 py-3 not-last:border-b-1 dark:border-gray-600 dark:bg-gray-800",
+        "flex w-full items-start gap-3 border-gray-300 bg-white py-3 pr-2 pl-4 not-last:border-b-1 dark:border-gray-600 dark:bg-gray-800",
         notification && !isRead && "bg-gray-100/70 dark:bg-gray-900",
         className,
       )}
@@ -211,12 +204,7 @@ export const NotificationOverlayItem = ({
       <div className="ml-auto">
         {notification ? (
           <ResponsiveMenuTrigger
-            renderDialogHeader={() => (
-              <DialogHeader className="px-4 py-3">
-                <DialogHeading className="text-base">Actions</DialogHeading>
-                <DialogCloseButton />
-              </DialogHeader>
-            )}
+            renderDialogHeader={() => <MenuDialogHeader heading="Actions" />}
             renderButton={() => (
               <Button
                 aria-label="task item menu"
@@ -231,21 +219,13 @@ export const NotificationOverlayItem = ({
             <>
               {!isRead && (
                 <Item textValue="Mark as Read" key="read">
-                  <div className={itemClasses}>
-                    <ListCheck
-                      size={16}
-                      strokeWidth={1.5}
-                      absoluteStrokeWidth
-                    />{" "}
-                    Mark as Read
-                  </div>
+                  <ListCheck size={16} strokeWidth={1.5} absoluteStrokeWidth />{" "}
+                  Mark as Read
                 </Item>
               )}
             </>
             <Item textValue="Delete" key="delete">
-              <div className={itemClasses}>
-                <Trash size={16} strokeWidth={1.5} absoluteStrokeWidth /> Delete
-              </div>
+              <Trash size={16} strokeWidth={1.5} absoluteStrokeWidth /> Delete
             </Item>
           </ResponsiveMenuTrigger>
         ) : (

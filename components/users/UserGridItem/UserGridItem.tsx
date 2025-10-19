@@ -2,14 +2,11 @@
 
 import {
   GridItem,
-  gridItemActionMenuItemStyles,
   GridItemInfo,
   GridItemText,
   GridItemTitle,
   GridItemTop,
   GridItemInfoSkeleton,
-  GridItemActionMenuDialogHeader,
-  GridItemActionMenuSkeleton,
   GridItemContactList,
   GridItemContact,
   GridItemContactIconWrapper,
@@ -18,7 +15,7 @@ import {
 } from "@/components/common/Grid";
 
 import { Item } from "react-stately";
-import { Ellipsis, Link2, Mail, Phone, Trash } from "lucide-react";
+import { Ellipsis, Link2, Mail, Pencil, Phone, Trash } from "lucide-react";
 import { ResponsiveMenuTrigger } from "@/components/common/ResponsiveMenuTrigger";
 
 import { UserPreview } from "@/lib/queries/types";
@@ -28,6 +25,8 @@ import {
   ImageContainer,
   ImageContainerSkeleton,
 } from "@/components/common/ImageContainer";
+import { MenuDialogHeader } from "@/components/common/MenuDialogHeader";
+import { MenuTriggerSkeleton } from "@/components/common/MenuTriggerSkeleton";
 
 export function UserGridItem({ user }: { user?: UserPreview }) {
   return (
@@ -35,13 +34,13 @@ export function UserGridItem({ user }: { user?: UserPreview }) {
       {/* --- Checkbox & Menu --- */}
       <GridItemTop>
         {!user ? (
-          <GridItemActionMenuSkeleton />
+          <MenuTriggerSkeleton className="-mr-2 ml-auto" />
         ) : (
           <>
             <Checkbox aria-label={`${user.fullName} checkbox`} />
             <ResponsiveMenuTrigger
               placement="bottom right"
-              renderDialogHeader={() => <GridItemActionMenuDialogHeader />}
+              renderDialogHeader={() => <MenuDialogHeader heading="Actions" />}
               renderButton={() => (
                 <Button
                   aria-label="user menu"
@@ -53,10 +52,11 @@ export function UserGridItem({ user }: { user?: UserPreview }) {
                 />
               )}
             >
+              <Item textValue="Edit" key="edit">
+                <Pencil size={16} /> Edit
+              </Item>
               <Item textValue="Delete" key="delete">
-                <div className={gridItemActionMenuItemStyles}>
-                  <Trash size={16} /> Delete
-                </div>
+                <Trash size={16} /> Delete
               </Item>
             </ResponsiveMenuTrigger>
           </>

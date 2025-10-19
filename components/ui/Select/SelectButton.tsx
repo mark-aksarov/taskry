@@ -8,7 +8,7 @@ import { ValidationResult } from "react-aria-components";
 
 export const buttonStyles = tv({
   extend: fieldGroupStyles,
-  base: "cursor-pointer items-center justify-between",
+  base: "flex cursor-pointer items-center justify-between",
   variants: {
     isFocusVisible: {
       true: "border-blue-500 dark:border-blue-800",
@@ -82,6 +82,7 @@ export const SelectButton = ({
         {...valueProps}
         data-placeholder={!state.selectedItem}
         data-a11y-ignore-contrast={!state.selectedItem ? "true" : undefined}
+        className="flex items-center gap-4"
       >
         {state.selectedItem ? state.selectedItem.rendered : placeholder}
       </span>

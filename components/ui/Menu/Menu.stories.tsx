@@ -22,30 +22,20 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 function getItems() {
-  const itemClasses = "flex items-center gap-4";
-
   const items = [
     <Item textValue="Delete" key="delete">
-      <div className={itemClasses}>
-        <Trash size={16} /> Delete
-      </div>
+      <Trash size={16} /> Delete
     </Item>,
     <Item textValue="Mark as Pending" key="pending">
-      <div className={itemClasses}>
-        <CircleEllipsis size={16} /> Mark as Pending
-      </div>
+      <CircleEllipsis size={16} /> Mark as Pending
     </Item>,
     <Item textValue="Mark as Done" key="done">
-      <div className={itemClasses}>
-        <Check size={16} />
-        Mark as Done
-      </div>
+      <Check size={16} />
+      Mark as Done
     </Item>,
     <Item textValue="Mark as In Progress" key="progress">
-      <div className={itemClasses}>
-        <Clock size={16} />
-        Mark as In Progress
-      </div>
+      <Clock size={16} />
+      Mark as In Progress
     </Item>,
   ];
 

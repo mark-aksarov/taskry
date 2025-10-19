@@ -26,29 +26,18 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 const SelectTemplate: Story = {
-  args: {
-    optionClassName: "font-bold",
-  },
   render: (args) => {
-    const itemClasses = "flex items-center gap-4";
-
     return (
       <Select {...args}>
         <Item textValue="Apple" key="apple">
-          <div className={itemClasses}>
-            <Apple size={16} /> Apple
-          </div>
+          <Apple size={16} /> Apple
         </Item>
         <Item textValue="Banana" key="banana">
-          <div className={itemClasses}>
-            <Banana size={16} /> Banana
-          </div>
+          <Banana size={16} /> Banana
         </Item>
         <Item textValue="Orange" key="orange">
-          <div className={itemClasses}>
-            <Citrus size={16} />
-            Orange
-          </div>
+          <Citrus size={16} />
+          Orange
         </Item>
       </Select>
     );

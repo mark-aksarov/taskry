@@ -4,27 +4,15 @@ import { mocked } from "storybook/test";
 import { usePathname, useSelectedLayoutSegments } from "next/navigation";
 import { getUserById } from "@/lib/queries/user";
 import { usersMock } from "@/lib/data/__mocks__/users";
-import { Suspense } from "react";
-import { Layout as RootLayout } from "@/app/layout";
-import ProfileLayout from "./layout";
 import { getNotifications } from "@/lib/queries/notification";
 import { notificationsMock } from "@/lib/data/__mocks__/notifications";
+import { PageDecorator } from "@/.storybook/decorators";
 
 const meta: Meta<typeof ProfilePage> = {
   title: "components/pages/Profile",
   component: ProfilePage,
   parameters: { layout: "fullscreen" },
-  decorators: [
-    (Story) => (
-      <Suspense>
-        <RootLayout>
-          <ProfileLayout>
-            <Story />
-          </ProfileLayout>
-        </RootLayout>
-      </Suspense>
-    ),
-  ],
+  decorators: [PageDecorator],
   beforeEach: () => {
     mocked(getUserById).mockReturnValue(
       new Promise((res) => res(usersMock[0])),

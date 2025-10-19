@@ -2,14 +2,11 @@
 
 import {
   GridItem,
-  gridItemActionMenuItemStyles,
   GridItemInfo,
   GridItemText,
   GridItemTitle,
   GridItemTop,
   GridItemInfoSkeleton,
-  GridItemActionMenuDialogHeader,
-  GridItemActionMenuSkeleton,
   GridItemContactList,
   GridItemContact,
   GridItemContactIconWrapper,
@@ -29,6 +26,8 @@ import { ResponsiveMenuTrigger } from "@/components/common/ResponsiveMenuTrigger
 import { CustomerPreview } from "@/lib/queries/types";
 import { Button, Link, Checkbox, Divider, Skeleton } from "@/components/ui";
 import Image from "next/image";
+import { MenuTriggerSkeleton } from "@/components/common/MenuTriggerSkeleton";
+import { MenuDialogHeader } from "@/components/common/MenuDialogHeader";
 
 export function CustomerGridItem({ customer }: { customer?: CustomerPreview }) {
   return (
@@ -36,13 +35,13 @@ export function CustomerGridItem({ customer }: { customer?: CustomerPreview }) {
       {/* --- Checkbox --- */}
       <GridItemTop>
         {!customer ? (
-          <GridItemActionMenuSkeleton />
+          <MenuTriggerSkeleton className="-mr-2 ml-auto" />
         ) : (
           <>
             <Checkbox aria-label={`${customer.fullName} checkbox`} />
             <ResponsiveMenuTrigger
               placement="bottom right"
-              renderDialogHeader={() => <GridItemActionMenuDialogHeader />}
+              renderDialogHeader={() => <MenuDialogHeader heading="Actions" />}
               renderButton={() => (
                 <Button
                   aria-label="user menu"
@@ -55,9 +54,7 @@ export function CustomerGridItem({ customer }: { customer?: CustomerPreview }) {
               )}
             >
               <Item textValue="Delete" key="delete">
-                <div className={gridItemActionMenuItemStyles}>
-                  <Trash size={16} /> Delete
-                </div>
+                <Trash size={16} /> Delete
               </Item>
             </ResponsiveMenuTrigger>
           </>

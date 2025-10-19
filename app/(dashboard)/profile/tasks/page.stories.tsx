@@ -4,29 +4,17 @@ import { mocked } from "storybook/test";
 import { usePathname, useSelectedLayoutSegments } from "next/navigation";
 import { getUserById } from "@/lib/queries/user";
 import { usersMock } from "@/lib/data/__mocks__/users";
-import { Suspense } from "react";
-import { Layout as RootLayout } from "@/app/layout";
-import ProfileLayout from "../layout";
 import { getTasks } from "@/lib/queries/task";
 import { tasksMock } from "@/lib/data/__mocks__/tasks";
 import { getNotifications } from "@/lib/queries/notification";
 import { notificationsMock } from "@/lib/data/__mocks__/notifications";
+import { PageDecorator } from "@/.storybook/decorators";
 
 const meta: Meta<typeof ProfileTasksPage> = {
   title: "components/pages/ProfileTasks",
   component: ProfileTasksPage,
   parameters: { layout: "fullscreen" },
-  decorators: [
-    (Story) => (
-      <Suspense>
-        <RootLayout>
-          <ProfileLayout>
-            <Story />
-          </ProfileLayout>
-        </RootLayout>
-      </Suspense>
-    ),
-  ],
+  decorators: [PageDecorator],
   beforeEach: () => {
     mocked(getTasks).mockReturnValue(new Promise((res) => res(tasksMock)));
     mocked(getUserById).mockReturnValue(

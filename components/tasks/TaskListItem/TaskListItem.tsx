@@ -9,23 +9,14 @@ import { Button, Checkbox } from "@/components/ui";
 
 import {
   ListItem,
-  ListItemActionMenuDialogHeader,
-  listItemActionMenuItemStyles,
-  ListItemActionMenuSkeleton,
   ListItemInfo,
   ListItemInfoSkeleton,
   ListItemText,
   ListItemTitle,
   ListItemProgress,
   ListItemProgressSkeleton,
-  ListItemBadge,
-  ListItemBadgeSkeleton,
 } from "@/components/common/List";
 
-import {
-  ACTIVE_TASK_STATUS_ID,
-  PENDING_TASK_STATUS_ID,
-} from "@/lib/queries/constants";
 import { TaskPreview } from "@/lib/queries/types";
 import { ResponsiveMenuTrigger } from "@/components/common/ResponsiveMenuTrigger";
 import { Link } from "@/components/ui";
@@ -33,6 +24,8 @@ import {
   ImageContainer,
   ImageContainerSkeleton,
 } from "@/components/common/ImageContainer";
+import { MenuTriggerSkeleton } from "@/components/common/MenuTriggerSkeleton";
+import { MenuDialogHeader } from "@/components/common/MenuDialogHeader";
 
 export const TaskListItem = ({
   task,
@@ -147,11 +140,11 @@ export const TaskListItem = ({
           )}
 
           {!task ? (
-            <ListItemActionMenuSkeleton />
+            <MenuTriggerSkeleton />
           ) : (
             <ResponsiveMenuTrigger
               placement="bottom right"
-              renderDialogHeader={() => <ListItemActionMenuDialogHeader />}
+              renderDialogHeader={() => <MenuDialogHeader heading="Actions" />}
               renderButton={() => (
                 <Button
                   aria-label="task menu"
@@ -164,26 +157,18 @@ export const TaskListItem = ({
               )}
             >
               <Item textValue="Delete" key="delete">
-                <div className={listItemActionMenuItemStyles}>
-                  <Trash size={16} /> Delete
-                </div>
+                <Trash size={16} /> Delete
               </Item>
               <Item textValue="Mark as Pending" key="pending">
-                <div className={listItemActionMenuItemStyles}>
-                  <CircleEllipsis size={16} /> Mark as Pending
-                </div>
+                <CircleEllipsis size={16} /> Mark as Pending
               </Item>
               <Item textValue="Mark as Done" key="done">
-                <div className={listItemActionMenuItemStyles}>
-                  <Check size={16} />
-                  Mark as Done
-                </div>
+                <Check size={16} />
+                Mark as Done
               </Item>
               <Item textValue="Mark as Active" key="active">
-                <div className={listItemActionMenuItemStyles}>
-                  <Clock size={16} />
-                  Mark as Active
-                </div>
+                <Clock size={16} />
+                Mark as Active
               </Item>
             </ResponsiveMenuTrigger>
           )}

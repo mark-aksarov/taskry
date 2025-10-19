@@ -1,7 +1,15 @@
+import { PageGrid } from "@/components/common/PageGrid";
+import {
+  ToolbarDesktop,
+  ToolbarMobileBottom,
+  ToolbarMobileHeading,
+  ToolbarMobileTop,
+} from "@/components/common/Toolbar";
 import {
   TaskDetailsCard,
   TaskDetailsCardSkeleton,
 } from "@/components/tasks/TaskDetailsCard";
+import { TaskPageTabs } from "@/components/tasks/TaskPageTabs";
 import {
   TaskSummaryCard,
   TaskSummaryCardSkeleton,
@@ -18,16 +26,30 @@ export default async function TaskPage({
   const taskPromise = getTask(+id);
 
   return (
-    <Suspense
-      fallback={
-        <>
-          <TaskSummaryCardSkeleton />
-          <TaskDetailsCardSkeleton />
-        </>
-      }
-    >
-      <TaskSummaryCard id={+id} />
-      <TaskDetailsCard taskPromise={taskPromise} />
-    </Suspense>
+    <PageGrid>
+      <ToolbarDesktop>
+        <TaskPageTabs />
+      </ToolbarDesktop>
+
+      <ToolbarMobileTop>
+        <ToolbarMobileHeading>Task Information</ToolbarMobileHeading>
+      </ToolbarMobileTop>
+
+      <ToolbarMobileBottom>
+        <TaskPageTabs />
+      </ToolbarMobileBottom>
+
+      <Suspense
+        fallback={
+          <>
+            <TaskSummaryCardSkeleton />
+            <TaskDetailsCardSkeleton />
+          </>
+        }
+      >
+        <TaskSummaryCard id={+id} />
+        <TaskDetailsCard taskPromise={taskPromise} />
+      </Suspense>
+    </PageGrid>
   );
 }

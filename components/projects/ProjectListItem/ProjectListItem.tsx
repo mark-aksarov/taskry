@@ -10,9 +10,6 @@ import { Checkbox, Button } from "@/components/ui";
 import Image from "next/image";
 import {
   ListItem,
-  ListItemActionMenuDialogHeader,
-  listItemActionMenuItemStyles,
-  ListItemActionMenuSkeleton,
   ListItemInfo,
   ListItemInfoSkeleton,
   ListItemText,
@@ -25,6 +22,8 @@ import {
   ImageContainer,
   ImageContainerSkeleton,
 } from "@/components/common/ImageContainer";
+import { MenuTriggerSkeleton } from "@/components/common/MenuTriggerSkeleton";
+import { MenuDialogHeader } from "@/components/common/MenuDialogHeader";
 
 export const ProjectListItem = ({
   project,
@@ -71,9 +70,9 @@ export const ProjectListItem = ({
 
       {/* --- Category --- */}
       {!project ? (
-        <ListItemInfoSkeleton className="@max-2xl:hidden" />
+        <ListItemInfoSkeleton className="@max-3xl:hidden" />
       ) : (
-        <ListItemInfo className="@max-2xl:hidden">
+        <ListItemInfo className="@max-3xl:hidden">
           <ListItemTitle>Category</ListItemTitle>
 
           <ListItemText>
@@ -86,9 +85,9 @@ export const ProjectListItem = ({
 
       {/* --- Customer --- */}
       {!project ? (
-        <ListItemInfoSkeleton className="@max-3xl:hidden" />
+        <ListItemInfoSkeleton className="@max-4xl:hidden" />
       ) : (
-        <ListItemInfo className="@max-3xl:hidden">
+        <ListItemInfo className="@max-4xl:hidden">
           <ListItemTitle>Customer</ListItemTitle>
 
           {project.customer ? (
@@ -105,9 +104,9 @@ export const ProjectListItem = ({
 
       {/* --- Customer company --- */}
       {!project ? (
-        <ListItemInfoSkeleton className="@max-4xl:hidden" />
+        <ListItemInfoSkeleton className="@max-5xl:hidden" />
       ) : (
-        <ListItemInfo className="@max-4xl:hidden">
+        <ListItemInfo className="@max-5xl:hidden">
           <ListItemTitle>Customer company</ListItemTitle>
 
           <ListItemText>
@@ -120,9 +119,9 @@ export const ProjectListItem = ({
 
       {/* --- Status --- */}
       {!project ? (
-        <ListItemInfoSkeleton className="@max-5xl:hidden" />
+        <ListItemInfoSkeleton className="@max-6xl:hidden" />
       ) : (
-        <ListItemInfo className="@max-5xl:hidden">
+        <ListItemInfo className="@max-6xl:hidden">
           <ListItemTitle>Status</ListItemTitle>
           <ListItemText>{project.status.nameEn}</ListItemText>
         </ListItemInfo>
@@ -160,11 +159,11 @@ export const ProjectListItem = ({
           )}
 
           {!project ? (
-            <ListItemActionMenuSkeleton />
+            <MenuTriggerSkeleton />
           ) : (
             <ResponsiveMenuTrigger
               placement="bottom right"
-              renderDialogHeader={() => <ListItemActionMenuDialogHeader />}
+              renderDialogHeader={() => <MenuDialogHeader heading="Actions" />}
               renderButton={() => (
                 <Button
                   aria-label="project menu"
@@ -177,26 +176,18 @@ export const ProjectListItem = ({
               )}
             >
               <Item textValue="Delete" key="delete">
-                <div className={listItemActionMenuItemStyles}>
-                  <Trash size={16} /> Delete
-                </div>
+                <Trash size={16} /> Delete
               </Item>
               <Item textValue="Mark as Pending" key="pending">
-                <div className={listItemActionMenuItemStyles}>
-                  <CircleEllipsis size={16} /> Mark as Pending
-                </div>
+                <CircleEllipsis size={16} /> Mark as Pending
               </Item>
               <Item textValue="Mark as Competed" key="competed">
-                <div className={listItemActionMenuItemStyles}>
-                  <Check size={16} />
-                  Mark as Competed
-                </div>
+                <Check size={16} />
+                Mark as Competed
               </Item>
               <Item textValue="Mark as Active" key="active">
-                <div className={listItemActionMenuItemStyles}>
-                  <Clock size={16} />
-                  Mark as Active
-                </div>
+                <Clock size={16} />
+                Mark as Active
               </Item>
             </ResponsiveMenuTrigger>
           )}

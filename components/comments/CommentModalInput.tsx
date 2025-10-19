@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Attachment, Attachments } from "../common/Attachments";
+import { Attachment, Attachments } from "../attachments/Attachments";
 import Image from "next/image";
 import { MessageInput } from "../common/MessageInput";
 

@@ -2,15 +2,12 @@
 
 import {
   GridItem,
-  gridItemActionMenuItemStyles,
   GridItemInfo,
   GridItemProgress,
   GridItemText,
   GridItemTitle,
   GridItemTop,
   GridItemInfoSkeleton,
-  GridItemActionMenuDialogHeader,
-  GridItemActionMenuSkeleton,
   GridItemProgressSkeleton,
 } from "@/components/common/Grid";
 
@@ -26,6 +23,8 @@ import {
   ImageContainer,
   ImageContainerSkeleton,
 } from "@/components/common/ImageContainer";
+import { MenuDialogHeader } from "@/components/common/MenuDialogHeader";
+import { MenuTriggerSkeleton } from "@/components/common/MenuTriggerSkeleton";
 
 export function TaskGridItem({ task }: { task?: TaskPreview }) {
   const locale = "en-GB";
@@ -50,13 +49,13 @@ export function TaskGridItem({ task }: { task?: TaskPreview }) {
       {/* --- Checkbox & Menu --- */}
       <GridItemTop>
         {!task ? (
-          <GridItemActionMenuSkeleton />
+          <MenuTriggerSkeleton className="-mr-2 ml-auto" />
         ) : (
           <>
             <Checkbox aria-label={task.title} />
             <ResponsiveMenuTrigger
               placement="bottom right"
-              renderDialogHeader={() => <GridItemActionMenuDialogHeader />}
+              renderDialogHeader={() => <MenuDialogHeader heading="Actions" />}
               renderButton={() => (
                 <Button
                   aria-label="project menu"
@@ -69,26 +68,18 @@ export function TaskGridItem({ task }: { task?: TaskPreview }) {
               )}
             >
               <Item textValue="Delete" key="delete">
-                <div className={gridItemActionMenuItemStyles}>
-                  <Trash size={16} /> Delete
-                </div>
+                <Trash size={16} /> Delete
               </Item>
               <Item textValue="Mark as Pending" key="pending">
-                <div className={gridItemActionMenuItemStyles}>
-                  <CircleEllipsis size={16} /> Mark as Pending
-                </div>
+                <CircleEllipsis size={16} /> Mark as Pending
               </Item>
               <Item textValue="Mark as Done" key="done">
-                <div className={gridItemActionMenuItemStyles}>
-                  <Check size={16} />
-                  Mark as Done
-                </div>
+                <Check size={16} />
+                Mark as Done
               </Item>
               <Item textValue="Mark as Active" key="active">
-                <div className={gridItemActionMenuItemStyles}>
-                  <Clock size={16} />
-                  Mark as Active
-                </div>
+                <Clock size={16} />
+                Mark as Active
               </Item>
             </ResponsiveMenuTrigger>
           </>
