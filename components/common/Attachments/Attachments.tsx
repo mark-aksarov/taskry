@@ -8,7 +8,7 @@ export function Attachments({
   children: React.ReactNode;
 }) {
   return (
-    <div className={twMerge("flex w-full flex-wrap gap-3", className)}>
+    <div className={twMerge("flex w-full gap-3 overflow-x-auto", className)}>
       {children}
     </div>
   );

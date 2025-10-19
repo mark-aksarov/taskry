@@ -4,11 +4,7 @@ import { useMemo } from "react";
 import { Link } from "@/components/ui";
 import { ProjectPreview } from "@/lib/queries/types";
 import { Check, CircleEllipsis, Clock, Ellipsis, Trash } from "lucide-react";
-import {
-  ACTIVE_PROJECT_STATUS_ID,
-  DONE_TASK_STATUS_ID,
-  PENDING_PROJECT_STATUS_ID,
-} from "@/lib/queries/constants";
+import { DONE_TASK_STATUS_ID } from "@/lib/queries/constants";
 import { Item } from "react-stately";
 import { Checkbox, Button } from "@/components/ui";
 import Image from "next/image";
@@ -17,8 +13,6 @@ import {
   ListItemActionMenuDialogHeader,
   listItemActionMenuItemStyles,
   ListItemActionMenuSkeleton,
-  ListItemBadge,
-  ListItemBadgeSkeleton,
   ListItemInfo,
   ListItemInfoSkeleton,
   ListItemText,
@@ -77,9 +71,9 @@ export const ProjectListItem = ({
 
       {/* --- Category --- */}
       {!project ? (
-        <ListItemInfoSkeleton className="@max-3xl:hidden" />
+        <ListItemInfoSkeleton className="@max-2xl:hidden" />
       ) : (
-        <ListItemInfo className="@max-3xl:hidden">
+        <ListItemInfo className="@max-2xl:hidden">
           <ListItemTitle>Category</ListItemTitle>
 
           <ListItemText>
@@ -92,9 +86,9 @@ export const ProjectListItem = ({
 
       {/* --- Customer --- */}
       {!project ? (
-        <ListItemInfoSkeleton className="@max-5xl:hidden" />
+        <ListItemInfoSkeleton className="@max-3xl:hidden" />
       ) : (
-        <ListItemInfo className="@max-5xl:hidden">
+        <ListItemInfo className="@max-3xl:hidden">
           <ListItemTitle>Customer</ListItemTitle>
 
           {project.customer ? (
@@ -111,9 +105,9 @@ export const ProjectListItem = ({
 
       {/* --- Customer company --- */}
       {!project ? (
-        <ListItemInfoSkeleton className="@max-5xl:hidden" />
+        <ListItemInfoSkeleton className="@max-4xl:hidden" />
       ) : (
-        <ListItemInfo className="@max-5xl:hidden">
+        <ListItemInfo className="@max-4xl:hidden">
           <ListItemTitle>Customer company</ListItemTitle>
 
           <ListItemText>
@@ -124,7 +118,17 @@ export const ProjectListItem = ({
         </ListItemInfo>
       )}
 
-      {/* --- Right side (progress, status, creator, menu) --- */}
+      {/* --- Status --- */}
+      {!project ? (
+        <ListItemInfoSkeleton className="@max-5xl:hidden" />
+      ) : (
+        <ListItemInfo className="@max-5xl:hidden">
+          <ListItemTitle>Status</ListItemTitle>
+          <ListItemText>{project.status.nameEn}</ListItemText>
+        </ListItemInfo>
+      )}
+
+      {/* --- Right side (progress, creator, menu) --- */}
       <div className="flex flex-none items-center justify-end gap-4">
         {/* --- Progress --- */}
         {!project ? (
@@ -135,23 +139,6 @@ export const ProjectListItem = ({
             showValueText={false}
             aria-label="project progress"
           />
-        )}
-
-        {/* --- Status Badge --- */}
-        {!project ? (
-          <ListItemBadgeSkeleton />
-        ) : (
-          <ListItemBadge
-            color={
-              project.statusId === PENDING_PROJECT_STATUS_ID
-                ? "orange"
-                : project.statusId === ACTIVE_PROJECT_STATUS_ID
-                  ? "green"
-                  : "blue"
-            }
-          >
-            {project.status.nameEn}
-          </ListItemBadge>
         )}
 
         {/* --- Creator Image & Menu --- */}

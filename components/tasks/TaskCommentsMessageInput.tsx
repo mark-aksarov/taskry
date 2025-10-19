@@ -20,8 +20,8 @@ export function TaskCommentsMessageInput() {
 
       {files && (
         <>
-          <Divider />
-          <Attachments className="px-4 py-3">
+          <Divider className="mx-4" />
+          <Attachments className="p-4">
             {Array.from(files).map((file, index) => (
               <Attachment key={index}>
                 <Image

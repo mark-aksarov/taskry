@@ -92,9 +92,9 @@ export const TaskListItem = ({
 
       {/* --- Project --- */}
       {!task ? (
-        <ListItemInfoSkeleton className="@max-5xl:hidden" />
+        <ListItemInfoSkeleton className="@max-4xl:hidden" />
       ) : (
-        <ListItemInfo className="@max-5xl:hidden">
+        <ListItemInfo className="@max-4xl:hidden">
           <ListItemTitle>Project</ListItemTitle>
 
           <ListItemText>
@@ -105,7 +105,17 @@ export const TaskListItem = ({
         </ListItemInfo>
       )}
 
-      {/* --- Right side (progress, status, creator, menu) --- */}
+      {/* --- Status --- */}
+      {!task ? (
+        <ListItemInfoSkeleton className="@max-5xl:hidden" />
+      ) : (
+        <ListItemInfo className="@max-5xl:hidden">
+          <ListItemTitle>Status</ListItemTitle>
+          <ListItemText>{task.status.nameEn}</ListItemText>
+        </ListItemInfo>
+      )}
+
+      {/* --- Right side (progress, creator, menu) --- */}
       <div className="flex flex-none items-center justify-end gap-4">
         {/* --- Progress --- */}
         {!task ? (
@@ -116,23 +126,6 @@ export const TaskListItem = ({
             showValueText={false}
             aria-label="task progress"
           />
-        )}
-
-        {/* --- Status Badge --- */}
-        {!task ? (
-          <ListItemBadgeSkeleton />
-        ) : (
-          <ListItemBadge
-            color={
-              task.statusId === PENDING_TASK_STATUS_ID
-                ? "orange"
-                : task.statusId === ACTIVE_TASK_STATUS_ID
-                  ? "green"
-                  : "blue"
-            }
-          >
-            {task.status.nameEn}
-          </ListItemBadge>
         )}
 
         {/* --- Creator Image & Menu --- */}

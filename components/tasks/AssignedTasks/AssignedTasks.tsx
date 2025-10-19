@@ -14,7 +14,7 @@ export async function AssignedTasks() {
   return (
     <AssignedTasksSection>
       <AssignedTasksSectionHeading />
-      <TaskList tasks={tasks} />
+      <TaskList tasks={tasks} showCheckbox={false} />
     </AssignedTasksSection>
   );
 }
