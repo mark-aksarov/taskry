@@ -28,7 +28,7 @@ type MessageInputProps = RACTextFieldProps &
 export const fieldInputStyles = tv({
   base: [
     focusRing.base,
-    "peer h-[3.5rem] w-full resize-none rounded-xl bg-gray-100 px-[2.875rem] py-4 text-sm text-black dark:bg-gray-900 dark:text-white",
+    "peer h-[3.5rem] w-full resize-none rounded-xl bg-gray-100 px-[2.875rem] py-4 text-sm text-black dark:bg-gray-700 dark:text-white",
   ],
   variants: {
     isFocused: focusRing.variants.isFocusVisible,

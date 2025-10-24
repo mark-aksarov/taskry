@@ -14,6 +14,7 @@ import { useMemo } from "react";
 import { CommentItemContent } from "./CommentItemContent";
 import { Attachment, Attachments } from "@/components/attachments/Attachments";
 import { Link } from "@/components/ui";
+import { Card } from "@/components/common/Card";
 
 interface CommentItemProps {
   comment?: Comment;
@@ -35,7 +36,7 @@ export function CommentItem({ comment, renderActions }: CommentItemProps) {
   }, [comment]);
 
   return (
-    <>
+    <Card className="flex w-full flex-col gap-4 border-gray-300 max-md:rounded-xl md:rounded-none md:px-0 md:shadow-none md:not-last:border-b-1 dark:border-gray-600">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
           {!comment ? (
@@ -91,6 +92,6 @@ export function CommentItem({ comment, renderActions }: CommentItemProps) {
           </>
         )}
       </CommentItemContent>
-    </>
+    </Card>
   );
 }

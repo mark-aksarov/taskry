@@ -34,6 +34,7 @@ export const tasksMock: TaskPreview[] = [
       { isDone: false },
       { isDone: true },
     ],
+    _count: { comments: 10, subtasks: 6 },
   },
   {
     id: 2,
@@ -67,6 +68,7 @@ export const tasksMock: TaskPreview[] = [
       { isDone: false },
       { isDone: true },
     ],
+    _count: { comments: 22, subtasks: 16 },
   },
   {
     id: 3,
@@ -98,6 +100,7 @@ export const tasksMock: TaskPreview[] = [
       { isDone: false },
       { isDone: true },
     ],
+    _count: { comments: 2, subtasks: 2 },
   },
   {
     id: 4,
@@ -133,6 +136,7 @@ export const tasksMock: TaskPreview[] = [
       { isDone: false },
       { isDone: true },
     ],
+    _count: { comments: 12, subtasks: 32 },
   },
   {
     id: 5,
@@ -177,6 +181,7 @@ export const tasksMock: TaskPreview[] = [
       { isDone: false },
       { isDone: true },
     ],
+    _count: { comments: 15, subtasks: 8 },
   },
   {
     id: 6,
@@ -211,6 +216,7 @@ export const tasksMock: TaskPreview[] = [
       { isDone: true },
       { isDone: true },
     ],
+    _count: { comments: 9, subtasks: 16 },
   },
   {
     id: 7,
@@ -241,6 +247,7 @@ export const tasksMock: TaskPreview[] = [
       { isDone: true },
       { isDone: true },
     ],
+    _count: { comments: 12, subtasks: 22 },
   },
   {
     id: 8,
@@ -271,6 +278,7 @@ export const tasksMock: TaskPreview[] = [
       { isDone: false },
       { isDone: false },
     ],
+    _count: { comments: 10, subtasks: 6 },
   },
   {
     id: 9,
@@ -301,6 +309,7 @@ export const tasksMock: TaskPreview[] = [
       { isDone: false },
       { isDone: false },
     ],
+    _count: { comments: 23, subtasks: 12 },
   },
   {
     id: 10,
@@ -345,5 +354,6 @@ export const tasksMock: TaskPreview[] = [
       { isDone: false },
       { isDone: true },
     ],
+    _count: { comments: 13, subtasks: 23 },
   },
 ];

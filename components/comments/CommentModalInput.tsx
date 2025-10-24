@@ -9,7 +9,7 @@ export function CommentModalInput() {
   let [files, setFiles] = useState<FileList | null>(null);
 
   return (
-    <div className="flex w-full flex-col gap-4">
+    <div className="flex w-full flex-col rounded-lg">
       {files && (
         <Attachments>
           {Array.from(files).map((file, index) => (

@@ -11,6 +11,8 @@ import {
   useSelectedLayoutSegments,
 } from "next/navigation";
 import { PageDecorator } from "@/.storybook/decorators";
+import { getTask } from "@/lib/queries/task";
+import { tasksMock } from "@/lib/data/__mocks__/tasks";
 
 const meta = {
   title: "components/pages/TaskComments",
@@ -21,6 +23,7 @@ const meta = {
   },
   decorators: [PageDecorator],
   beforeEach: () => {
+    mocked(getTask).mockReturnValue(new Promise((res) => res(tasksMock[0])));
     mocked(getCommentsByTask).mockReturnValue(
       new Promise((res) => res(commentsMock)),
     );
@@ -43,20 +46,19 @@ export type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {};
 
-export const WithNoComments = {
+export const Loading: Story = {
   beforeEach: () => {
-    mocked(getCommentsByTask).mockReturnValue(new Promise((res) => res([])));
-  },
-} satisfies Story;
-
-export const Tablet: Story = {
-  globals: {
-    viewport: { value: "ipad", isRotated: true },
+    mocked(getTask).mockReturnValue(
+      new Promise((res) => setTimeout(() => res(tasksMock[0]), 2000)),
+    );
+    mocked(getCommentsByTask).mockReturnValue(
+      new Promise((res) => setTimeout(() => res(commentsMock), 2000)),
+    );
   },
 };
 
-export const Mobile = {
-  globals: {
-    viewport: { value: "iphone6", isRotated: false },
+export const WithNoComments = {
+  beforeEach: () => {
+    mocked(getCommentsByTask).mockReturnValue(new Promise((res) => res([])));
   },
 } satisfies Story;

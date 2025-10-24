@@ -6,6 +6,7 @@ const meta = {
   title: "Components/attachments/AttachmentListItem",
   component: AttachmentListItem,
   tags: ["autodocs"],
+  parameters: { layout: "fullscreen" },
   args: {
     attachment: attachmentsMock[0],
   },

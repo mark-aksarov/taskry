@@ -8,7 +8,7 @@ interface TaskListProps {
 
 export function SubtaskList({ subtasks }: TaskListProps) {
   return (
-    <List>
+    <List className="md:gap-0">
       {subtasks.map((subtask) => (
         <SubtaskListItem key={subtask.id} subtask={subtask} />
       ))}

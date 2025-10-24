@@ -1,3 +1,5 @@
+"use client";
+
 import {
   CalendarCheck2,
   Contact,
@@ -5,74 +7,77 @@ import {
   LayoutDashboard,
   LogOut,
   Mail,
-  Settings,
   UserRound,
   Users,
 } from "lucide-react";
 
-import { twMerge } from "tailwind-merge";
 import { Badge, Divider } from "@/components/ui";
 import { ThemeToggleButton } from "./ThemeToggleButton";
-import { AppNavigationItem } from "./AppNavigationItem";
+import { NavigationButton } from "@/components/common/NavigationButton";
 import { LangMenuBottomSheetTrigger } from "../LangMenuTrigger";
+import { usePathname } from "next/navigation";
 
-interface AppNavigationProps {
-  className?: string;
-}
+export const AppNavigation = () => {
+  const pathname = usePathname();
 
-export const AppNavigation = ({ className }: AppNavigationProps) => {
   return (
-    <div className="flex flex-col gap-2.5">
-      <nav className={twMerge("flex flex-col gap-2.5", className)}>
-        <AppNavigationItem href="/">
-          <LayoutDashboard size={18} strokeWidth={1.5} absoluteStrokeWidth />
-          Dashboard
-        </AppNavigationItem>
+    <nav className="flex flex-col gap-2.5">
+      <NavigationButton href="/" isActive={pathname === "/"}>
+        <LayoutDashboard size={18} strokeWidth={1.5} absoluteStrokeWidth />
+        Dashboard
+      </NavigationButton>
 
-        <AppNavigationItem href="/projects">
-          <FolderClosed size={18} strokeWidth={1.5} absoluteStrokeWidth />
-          Projects
-        </AppNavigationItem>
+      <NavigationButton
+        href="/projects"
+        isActive={pathname.startsWith("/projects")}
+      >
+        <FolderClosed size={18} strokeWidth={1.5} absoluteStrokeWidth />
+        Projects
+      </NavigationButton>
 
-        <AppNavigationItem href="/tasks">
-          <CalendarCheck2 size={18} strokeWidth={1.5} absoluteStrokeWidth />
-          Tasks
-        </AppNavigationItem>
+      <NavigationButton href="/tasks" isActive={pathname.startsWith("/tasks")}>
+        <CalendarCheck2 size={18} strokeWidth={1.5} absoluteStrokeWidth />
+        Tasks
+      </NavigationButton>
 
-        <AppNavigationItem href="/team">
-          <Users size={18} strokeWidth={1.5} absoluteStrokeWidth />
-          Team
-        </AppNavigationItem>
+      <NavigationButton href="/team" isActive={pathname.startsWith("/team")}>
+        <Users size={18} strokeWidth={1.5} absoluteStrokeWidth />
+        Team
+      </NavigationButton>
 
-        <AppNavigationItem href="/customers">
-          <Contact size={18} strokeWidth={1.5} absoluteStrokeWidth />
-          Customers
-        </AppNavigationItem>
+      <NavigationButton
+        href="/customers"
+        isActive={pathname.startsWith("/customers")}
+      >
+        <Contact size={18} strokeWidth={1.5} absoluteStrokeWidth />
+        Customers
+      </NavigationButton>
 
-        <AppNavigationItem href="/inbox">
-          <Mail size={18} strokeWidth={1.5} absoluteStrokeWidth />
-          Inbox
-          <Badge className="ml-auto rounded-xl px-1.5! py-0.5!">28</Badge>
-        </AppNavigationItem>
+      <NavigationButton href="/inbox" isActive={pathname.startsWith("/inbox")}>
+        <Mail size={18} strokeWidth={1.5} absoluteStrokeWidth />
+        Inbox
+        <Badge className="ml-auto rounded-xl px-1.5! py-0.5!">28</Badge>
+      </NavigationButton>
 
-        <AppNavigationItem href="/profile">
-          <UserRound size={18} strokeWidth={1.5} absoluteStrokeWidth />
-          Profile
-        </AppNavigationItem>
-      </nav>
+      <NavigationButton
+        href="/profile"
+        isActive={pathname.startsWith("/profile")}
+      >
+        <UserRound size={18} strokeWidth={1.5} absoluteStrokeWidth />
+        Profile
+      </NavigationButton>
 
       <Divider />
 
       <div className="flex flex-col gap-2.5 md:hidden">
         <LangMenuBottomSheetTrigger />
         <ThemeToggleButton />
-        <Divider />
       </div>
 
-      <AppNavigationItem href="#">
+      <NavigationButton href="#">
         <LogOut size={18} strokeWidth={1.5} absoluteStrokeWidth />
         Logout
-      </AppNavigationItem>
-    </div>
+      </NavigationButton>
+    </nav>
   );
 };

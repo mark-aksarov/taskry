@@ -22,12 +22,3 @@ export default meta;
 export type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {};
-
-export const Mobile: Story = {
-  globals: {
-    viewport: { value: "iphone6", isRotated: false },
-  },
-  args: {
-    fullscreen: true,
-  },
-};

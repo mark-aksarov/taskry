@@ -19,25 +19,15 @@ export const AttachmentActionsMenuTrigger = () => {
           <Button
             {...triggerProps}
             aria-label="actions"
-            variant="outlined"
+            variant="ghost"
+            className="rounded-full"
             iconLeft={
               <Ellipsis size={16} strokeWidth={1.5} absoluteStrokeWidth />
             }
-            className="md:hidden"
-          />
-          <Button
-            {...triggerProps}
-            aria-label="actions"
-            variant="outlined"
-            label="Actions"
-            iconLeft={
-              <Ellipsis size={16} strokeWidth={1.5} absoluteStrokeWidth />
-            }
-            className="max-md:hidden"
           />
         </>
       )}
-      placement="bottom left"
+      placement="bottom right"
     >
       <Item textValue="Download" key="download">
         <Download size={16} /> Download

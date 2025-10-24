@@ -10,7 +10,7 @@ import { getCompanies } from "@/lib/queries/companies";
 import { getCustomers } from "@/lib/queries/customers";
 import { customersMock } from "@/lib/data/__mocks__/customers";
 import { companiesMock } from "@/lib/data/__mocks__/companies";
-import { useSelectedLayoutSegments } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 const meta = {
   title: "components/pages/Customers",
@@ -28,10 +28,7 @@ const meta = {
     mocked(getCompanies).mockReturnValue(
       new Promise((res) => res(companiesMock)),
     );
-    mocked(useSelectedLayoutSegments).mockReturnValue([
-      "(dashboard)",
-      "customers",
-    ]);
+    mocked(usePathname).mockReturnValue("/customers");
   },
 } satisfies Meta<typeof CustomersPage>;
 

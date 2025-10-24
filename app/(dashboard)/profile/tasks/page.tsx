@@ -1,66 +1,70 @@
-import { Centered } from "@/components/common/Centered";
 import {
-  EmptySection,
-  EmptySectionDescription,
-  EmptySectionHeading,
-  EmptySectionLink,
-} from "@/components/common/EmptySection";
-import { TaskList } from "@/components/tasks/TaskList";
-import { getTasks } from "@/lib/queries/task";
+  DetailCard,
+  DetailCardHeader,
+  DetailCardLeft,
+  DetailCardTitle,
+} from "@/components/common/Detail";
+import { Suspense } from "react";
+import { DetailPanel } from "@/components/common/DetailPanel";
+import {
+  ProfileDetailPanelHeader,
+  ProfileDetailPanelHeaderSkeleton,
+} from "@/components/profile/ProfileDetailPanelHeader";
+import { ProfileDetailNavigation } from "@/components/profile/ProfileDetailNavigation";
 import { PageGrid } from "@/components/common/PageGrid";
 import {
-  ToolbarDesktop,
-  ToolbarMobileBottom,
   ToolbarMobileHeading,
   ToolbarMobileTop,
 } from "@/components/common/Toolbar";
-import { ProjectActionsMenuTrigger } from "@/components/projects/ProjectActionsMenuTrigger";
-import { ProfilePageTabs } from "@/components/profile/ProfilePageTabs";
+import { ProfileTasks } from "@/components/profile/ProfileTasks";
+import { List } from "@/components/common/List";
+import { Repeat } from "@/components/common/Repeat";
+import { ProfileTaskListItem } from "@/components/profile/ProfileTaskListItem";
 
 export default async function ProfileTasksPage() {
-  const tasks = await getTasks("BKs42HvVDEZFoaJUmTqf1gTN0K8pUFjI");
-
-  if (!tasks.length) {
-    return (
-      <PageGrid>
-        <ToolbarDesktop>
-          <ProfilePageTabs />
-        </ToolbarDesktop>
-        <ToolbarMobileTop>
-          <ToolbarMobileHeading>Tasks</ToolbarMobileHeading>
-        </ToolbarMobileTop>
-        <ToolbarMobileBottom>
-          <ProfilePageTabs />
-        </ToolbarMobileBottom>
-        <Centered>
-          <EmptySection>
-            <EmptySectionHeading>No tasks yet</EmptySectionHeading>
-            <EmptySectionDescription>
-              Create a new task to keep track of your work
-            </EmptySectionDescription>
-            <EmptySectionLink href="#">New Task</EmptySectionLink>
-          </EmptySection>
-        </Centered>
-      </PageGrid>
-    );
-  }
-
   return (
-    <PageGrid>
-      <ToolbarDesktop>
-        <ProfilePageTabs />
-        <ProjectActionsMenuTrigger />
-      </ToolbarDesktop>
+    <>
+      <DetailCard className="max-md:hidden">
+        <DetailCardLeft>
+          <DetailCardHeader>
+            <DetailCardTitle>Assigned tasks</DetailCardTitle>
+          </DetailCardHeader>
+          <Suspense
+            fallback={
+              <List className="gap-0">
+                <Repeat items={10} renderItem={() => <ProfileTaskListItem />} />
+              </List>
+            }
+          >
+            <ProfileTasks />
+          </Suspense>
+        </DetailCardLeft>
 
-      <ToolbarMobileTop>
-        <ToolbarMobileHeading>Tasks</ToolbarMobileHeading>
-        <ProjectActionsMenuTrigger />
-      </ToolbarMobileTop>
+        <DetailPanel>
+          <Suspense fallback={<ProfileDetailPanelHeaderSkeleton />}>
+            <ProfileDetailPanelHeader />
+          </Suspense>
+          <ProfileDetailNavigation />
+        </DetailPanel>
+      </DetailCard>
 
-      <ToolbarMobileBottom>
-        <ProfilePageTabs />
-      </ToolbarMobileBottom>
-      <TaskList tasks={tasks} />
-    </PageGrid>
+      <div className="md:hidden">
+        <PageGrid>
+          <ToolbarMobileTop>
+            <ToolbarMobileHeading>Assigned tasks</ToolbarMobileHeading>
+          </ToolbarMobileTop>
+
+          <Suspense
+            fallback={
+              <List className="gap-0">
+                <Repeat items={10} renderItem={() => <ProfileTaskListItem />} />
+              </List>
+            }
+          >
+            <ProfileTasks />
+          </Suspense>
+        </PageGrid>
+      </div>
+    </>
   );
 }

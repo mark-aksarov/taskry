@@ -1,13 +1,13 @@
 "use client";
 
 import { Sun } from "lucide-react";
-import { AppNavigationItem } from "./AppNavigationItem";
+import { NavigationButton } from "@/components/common/NavigationButton";
 
 export function ThemeToggleButton() {
   return (
-    <AppNavigationItem onPress={() => {}}>
+    <NavigationButton onPress={() => {}}>
       <Sun size={18} strokeWidth={1.5} absoluteStrokeWidth />
       Light
-    </AppNavigationItem>
+    </NavigationButton>
   );
 }

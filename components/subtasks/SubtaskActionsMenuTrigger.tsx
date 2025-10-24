@@ -15,29 +15,17 @@ export const SubtaskActionsMenuTrigger = () => {
     <ResponsiveMenuTrigger
       renderDialogHeader={() => <MenuDialogHeader heading="Actions" />}
       renderButton={() => (
-        <>
-          <Button
-            {...triggerProps}
-            aria-label="actions"
-            variant="outlined"
-            iconLeft={
-              <Ellipsis size={16} strokeWidth={1.5} absoluteStrokeWidth />
-            }
-            className="md:hidden"
-          />
-          <Button
-            {...triggerProps}
-            aria-label="actions"
-            variant="outlined"
-            label="Actions"
-            iconLeft={
-              <Ellipsis size={16} strokeWidth={1.5} absoluteStrokeWidth />
-            }
-            className="max-md:hidden"
-          />
-        </>
+        <Button
+          {...triggerProps}
+          aria-label="actions"
+          variant="ghost"
+          className="rounded-full"
+          iconLeft={
+            <Ellipsis size={16} strokeWidth={1.5} absoluteStrokeWidth />
+          }
+        />
       )}
-      placement="bottom left"
+      placement="bottom right"
     >
       <Item textValue="Delete" key="delete">
         <Trash size={16} strokeWidth={1.5} absoluteStrokeWidth />

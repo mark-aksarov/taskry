@@ -2,9 +2,9 @@
 
 import { useMemo } from "react";
 import { Item } from "react-stately";
-import { Check, CircleEllipsis, Clock, Ellipsis, Trash } from "lucide-react";
+import { Check, Clock, Ellipsis, Trash } from "lucide-react";
 
-import { Button, Badge, Skeleton, Checkbox } from "@/components/ui";
+import { Button, Checkbox } from "@/components/ui";
 
 import {
   ListItem,
@@ -18,7 +18,6 @@ import { ResponsiveMenuTrigger } from "@/components/common/ResponsiveMenuTrigger
 import { MenuTriggerSkeleton } from "@/components/common/MenuTriggerSkeleton";
 import { MenuDialogHeader } from "@/components/common/MenuDialogHeader";
 import { Subtask } from "@/generated/prisma";
-import { twMerge } from "tailwind-merge";
 
 export const SubtaskListItem = ({ subtask }: { subtask?: Subtask }) => {
   const locale = "en-GB";
@@ -32,10 +31,8 @@ export const SubtaskListItem = ({ subtask }: { subtask?: Subtask }) => {
     });
   }, [subtask?.deadline, locale]);
 
-  const badgeStyles = "w-[5.5rem] px-0 @max-md:hidden";
-
   return (
-    <ListItem>
+    <ListItem className="border-gray-300 md:rounded-none md:pr-4 md:pl-6 md:shadow-none md:not-last:border-b-1 dark:border-gray-600">
       {subtask && <Checkbox aria-label="subtask checkbox" />}
 
       {/* --- Subtask Details --- */}
@@ -48,53 +45,36 @@ export const SubtaskListItem = ({ subtask }: { subtask?: Subtask }) => {
         </ListItemInfo>
       )}
 
-      {/* --- Right side (menu) --- */}
-      <div className="flex flex-none items-center justify-end gap-2">
-        {/* --- Subtask Status --- */}
-        {!subtask ? (
-          <Skeleton className={twMerge(badgeStyles, "h-[1.75rem]")} />
-        ) : (
-          <Badge
-            color={subtask.isDone ? "blue" : "green"}
-            className={badgeStyles}
-          >
-            {subtask.isDone ? "Done" : "Active"}
-          </Badge>
-        )}
-        {!subtask ? (
-          <MenuTriggerSkeleton />
-        ) : (
-          <ResponsiveMenuTrigger
-            placement="bottom right"
-            renderDialogHeader={() => <MenuDialogHeader heading="Actions" />}
-            renderButton={() => (
-              <Button
-                aria-label="subtask menu"
-                variant="ghost"
-                iconLeft={
-                  <Ellipsis size={16} strokeWidth={1.5} absoluteStrokeWidth />
-                }
-                className="rounded-full"
-              />
-            )}
-          >
-            <Item textValue="Delete" key="delete">
-              <Trash size={16} /> Delete
-            </Item>
-            <Item textValue="Mark as Pending" key="pending">
-              <CircleEllipsis size={16} /> Mark as Pending
-            </Item>
-            <Item textValue="Mark as Done" key="done">
-              <Check size={16} />
-              Mark as Done
-            </Item>
-            <Item textValue="Mark as Active" key="active">
-              <Clock size={16} />
-              Mark as Active
-            </Item>
-          </ResponsiveMenuTrigger>
-        )}
-      </div>
+      {!subtask ? (
+        <MenuTriggerSkeleton />
+      ) : (
+        <ResponsiveMenuTrigger
+          placement="bottom right"
+          renderDialogHeader={() => <MenuDialogHeader heading="Actions" />}
+          renderButton={() => (
+            <Button
+              aria-label="subtask menu"
+              variant="ghost"
+              iconLeft={
+                <Ellipsis size={16} strokeWidth={1.5} absoluteStrokeWidth />
+              }
+              className="rounded-full"
+            />
+          )}
+        >
+          <Item textValue="Delete" key="delete">
+            <Trash size={16} /> Delete
+          </Item>
+          <Item textValue="Mark as Done" key="done">
+            <Check size={16} />
+            Mark as Done
+          </Item>
+          <Item textValue="Mark as Active" key="active">
+            <Clock size={16} />
+            Mark as Active
+          </Item>
+        </ResponsiveMenuTrigger>
+      )}
     </ListItem>
   );
 };

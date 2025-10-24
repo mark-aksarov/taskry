@@ -1,8 +1,19 @@
+import { twMerge } from "tailwind-merge";
 import { Card } from "../Card";
 
-export function ListItem({ children }: { children: React.ReactNode }) {
+interface ListItemProps {
+  className?: string;
+  children: React.ReactNode;
+}
+
+export function ListItem({ className, children }: ListItemProps) {
   return (
-    <Card className="@container flex w-full items-center gap-4 rounded-md py-3 pr-2">
+    <Card
+      className={twMerge(
+        "@container flex w-full items-center gap-4 rounded-md py-3 pr-2",
+        className,
+      )}
+    >
       {children}
     </Card>
   );

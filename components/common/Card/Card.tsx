@@ -13,5 +13,5 @@ export const Card = ({
 };
 
 export const cardStyles = tv({
-  base: "rounded-2xl bg-white p-4 shadow-lg dark:bg-gray-800",
+  base: "overflow-hidden rounded-2xl bg-white p-4 shadow-lg dark:bg-gray-800",
 });

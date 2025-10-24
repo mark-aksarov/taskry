@@ -2,8 +2,8 @@ import "../app/globals.css";
 
 import type { Preview, ReactRenderer } from "@storybook/nextjs-vite";
 import { withThemeByDataAttribute } from "@storybook/addon-themes";
-import { INITIAL_VIEWPORTS } from "storybook/viewport";
-import { fn, mocked, sb } from "storybook/test";
+import { INITIAL_VIEWPORTS, MINIMAL_VIEWPORTS } from "storybook/viewport";
+import { mocked, sb } from "storybook/test";
 import { useParams, usePathname, useRouter } from "next/navigation";
 
 sb.mock(import("../lib/prisma"));
@@ -66,7 +66,7 @@ const preview: Preview = {
 
     viewport: {
       //👇 Set available viewports for every story in the file
-      options: INITIAL_VIEWPORTS,
+      options: MINIMAL_VIEWPORTS,
     },
 
     a11y: {

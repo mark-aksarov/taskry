@@ -46,6 +46,12 @@ export const getTask = cache(async (id: number): Promise<TaskPreview> => {
           isDone: true,
         },
       },
+      _count: {
+        select: {
+          comments: true,
+          subtasks: true,
+        },
+      },
     },
   });
 });
@@ -88,6 +94,12 @@ export const getTasks = cache(
         subtasks: {
           select: {
             isDone: true,
+          },
+        },
+        _count: {
+          select: {
+            comments: true,
+            subtasks: true,
           },
         },
       },

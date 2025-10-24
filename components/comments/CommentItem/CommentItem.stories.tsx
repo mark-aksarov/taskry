@@ -1,5 +1,4 @@
 import { CommentItem } from "./CommentItem";
-import { CommentItemCard } from "./CommentItemCard";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import {
   commentsMock,
@@ -16,13 +15,6 @@ const meta = {
   title: "Components/comments/CommentItem",
   component: CommentItem,
   tags: ["autodocs"],
-  decorators: [
-    (Story) => (
-      <CommentItemCard>
-        <Story />
-      </CommentItemCard>
-    ),
-  ],
   args: {
     comment: commentsMock[0],
     renderActions: () => null,

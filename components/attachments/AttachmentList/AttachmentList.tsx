@@ -8,7 +8,7 @@ interface TaskListProps {
 
 export function AttachmentList({ attachments }: TaskListProps) {
   return (
-    <List>
+    <List className="md:gap-0">
       {attachments.map((attachment) => (
         <AttachmentListItem key={attachment.id} attachment={attachment} />
       ))}

@@ -3,7 +3,7 @@
 import { Item } from "react-stately";
 import { Languages } from "lucide-react";
 import { MenuTrigger, Button } from "@/components/ui";
-import { AppNavigationItem } from "./AppNavigation";
+import { NavigationButton } from "../common/NavigationButton";
 import { MenuDialogHeader } from "../common/MenuDialogHeader";
 
 const menuItems = [
@@ -31,10 +31,10 @@ export const LangMenuBottomSheetTrigger = () => {
       overlayType="bottomsheet"
       renderDialogHeader={() => <MenuDialogHeader heading="Language" />}
       renderButton={() => (
-        <AppNavigationItem>
+        <NavigationButton>
           <Languages size={18} strokeWidth={1.5} absoluteStrokeWidth />
           English
-        </AppNavigationItem>
+        </NavigationButton>
       )}
     >
       {menuItems}

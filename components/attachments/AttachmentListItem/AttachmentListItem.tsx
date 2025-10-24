@@ -21,8 +21,8 @@ export function AttachmentListItem({
   attachment?: Attachment;
 }) {
   return (
-    <ListItem>
-      {attachment && <Checkbox aria-label="subtask checkbox" />}
+    <ListItem className="border-gray-300 md:rounded-none md:pr-4 md:pl-6 md:shadow-none md:not-last:border-b-1 dark:border-gray-600">
+      {attachment && <Checkbox aria-label="attachment checkbox" />}
 
       {/* --- Attachment Details --- */}
       {!attachment ? (

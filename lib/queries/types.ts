@@ -33,6 +33,12 @@ export type TaskPreview = Prisma.TaskGetPayload<{
         isDone: true;
       };
     };
+    _count: {
+      select: {
+        comments: true;
+        subtasks: true;
+      };
+    };
   };
 }>;
 

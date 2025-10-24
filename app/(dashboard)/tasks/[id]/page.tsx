@@ -1,20 +1,16 @@
+import { Card } from "@/components/common/Card";
+import { DetailPanel } from "@/components/common/DetailPanel";
 import { PageGrid } from "@/components/common/PageGrid";
 import {
-  ToolbarDesktop,
-  ToolbarMobileBottom,
   ToolbarMobileHeading,
   ToolbarMobileTop,
 } from "@/components/common/Toolbar";
+import { TaskDetailCard } from "@/components/tasks/TaskDetailCard";
+import { TaskDetailNavigation } from "@/components/tasks/TaskDetailNavigation";
 import {
-  TaskDetailsCard,
-  TaskDetailsCardSkeleton,
-} from "@/components/tasks/TaskDetailsCard";
-import { TaskPageTabs } from "@/components/tasks/TaskPageTabs";
-import {
-  TaskSummaryCard,
-  TaskSummaryCardSkeleton,
-} from "@/components/tasks/TaskSummaryCard";
-import { getTask } from "@/lib/queries/task";
+  TaskDetailPanelHeader,
+  TaskDetailPanelHeaderSkeleton,
+} from "@/components/tasks/TaskDetailPanelHeader";
 import { Suspense } from "react";
 
 export default async function TaskPage({
@@ -23,33 +19,26 @@ export default async function TaskPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const taskPromise = getTask(+id);
 
   return (
-    <PageGrid>
-      <ToolbarDesktop>
-        <TaskPageTabs />
-      </ToolbarDesktop>
+    <>
+      <TaskDetailCard id={+id} />
 
-      <ToolbarMobileTop>
-        <ToolbarMobileHeading>Task Information</ToolbarMobileHeading>
-      </ToolbarMobileTop>
-
-      <ToolbarMobileBottom>
-        <TaskPageTabs />
-      </ToolbarMobileBottom>
-
-      <Suspense
-        fallback={
-          <>
-            <TaskSummaryCardSkeleton />
-            <TaskDetailsCardSkeleton />
-          </>
-        }
-      >
-        <TaskSummaryCard id={+id} />
-        <TaskDetailsCard taskPromise={taskPromise} />
-      </Suspense>
-    </PageGrid>
+      <div className="md:hidden">
+        <PageGrid>
+          <ToolbarMobileTop>
+            <ToolbarMobileHeading>Task Settings</ToolbarMobileHeading>
+          </ToolbarMobileTop>
+          <Card>
+            <DetailPanel>
+              <Suspense fallback={<TaskDetailPanelHeaderSkeleton />}>
+                <TaskDetailPanelHeader id={+id} />
+              </Suspense>
+              <TaskDetailNavigation />
+            </DetailPanel>
+          </Card>
+        </PageGrid>
+      </div>
+    </>
   );
 }

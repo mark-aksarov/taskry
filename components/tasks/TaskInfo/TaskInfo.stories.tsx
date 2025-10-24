@@ -1,0 +1,17 @@
+import { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { TaskInfo } from "./TaskInfo";
+import { tasksMock } from "@/lib/data/__mocks__/tasks";
+
+const meta = {
+  title: "components/tasks/TaskInfo",
+  component: TaskInfo,
+  tags: ["autodocs"],
+  args: {
+    taskPromise: new Promise((resolve) => resolve(tasksMock[0])),
+  },
+} satisfies Meta<typeof TaskInfo>;
+
+export default meta;
+type Story = StoryObj<typeof meta>;
+
+export const Default: Story = {};

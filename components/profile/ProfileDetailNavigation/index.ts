@@ -1,0 +1,1 @@
+export { ProfileDetailNavigation } from "./ProfileDetailNavigation";

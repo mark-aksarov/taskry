@@ -1,50 +1,38 @@
 import { Suspense } from "react";
-import { getUserById } from "@/lib/queries/user";
 import {
-  ProfileSummaryCard,
-  ProfileSummaryCardSkeleton,
-} from "@/components/profile/ProfileSummaryCard";
-import {
-  ProfileDetailsCard,
-  ProfileDetailsCardSkeleton,
-} from "@/components/profile/ProfileDetailsCard";
+  ProfileDetailPanelHeader,
+  ProfileDetailPanelHeaderSkeleton,
+} from "@/components/profile/ProfileDetailPanelHeader";
+import { DetailPanel } from "@/components/common/DetailPanel";
+import { ProfileDetailNavigation } from "@/components/profile/ProfileDetailNavigation";
+import { Card } from "@/components/common/Card";
 import { PageGrid } from "@/components/common/PageGrid";
 import {
-  ToolbarDesktop,
-  ToolbarMobileBottom,
   ToolbarMobileHeading,
   ToolbarMobileTop,
 } from "@/components/common/Toolbar";
-import { ProfilePageTabs } from "@/components/profile/ProfilePageTabs";
+import { ProfileDetailCard } from "@/components/profile/ProfileDetailCard";
 
 export default async function ProfilePage() {
-  const userPromise = getUserById("BKs42HvVDEZFoaJUmTqf1gTN0K8pUFjI");
-
   return (
-    <PageGrid>
-      <ToolbarDesktop>
-        <ProfilePageTabs />
-      </ToolbarDesktop>
+    <>
+      <ProfileDetailCard />
 
-      <ToolbarMobileTop>
-        <ToolbarMobileHeading>Profile</ToolbarMobileHeading>
-      </ToolbarMobileTop>
-
-      <ToolbarMobileBottom>
-        <ProfilePageTabs />
-      </ToolbarMobileBottom>
-
-      <Suspense
-        fallback={
-          <>
-            <ProfileSummaryCardSkeleton />
-            <ProfileDetailsCardSkeleton />
-          </>
-        }
-      >
-        <ProfileSummaryCard />
-        <ProfileDetailsCard userPromise={userPromise} />
-      </Suspense>
-    </PageGrid>
+      <div className="md:hidden">
+        <PageGrid>
+          <ToolbarMobileTop>
+            <ToolbarMobileHeading>Profile Settings</ToolbarMobileHeading>
+          </ToolbarMobileTop>
+          <Card>
+            <DetailPanel>
+              <Suspense fallback={<ProfileDetailPanelHeaderSkeleton />}>
+                <ProfileDetailPanelHeader />
+              </Suspense>
+              <ProfileDetailNavigation />
+            </DetailPanel>
+          </Card>
+        </PageGrid>
+      </div>
+    </>
   );
 }

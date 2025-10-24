@@ -6,6 +6,7 @@ const meta = {
   title: "Components/subtasks/SubtaskListItem",
   component: SubtaskListItem,
   tags: ["autodocs"],
+  parameters: { layout: "fullscreen" },
   args: {
     subtask: subtasksMock[0],
   },
@@ -19,11 +20,5 @@ export const Default: Story = {};
 export const Skeleton: Story = {
   args: {
     subtask: undefined,
-  },
-};
-
-export const OnMobile: Story = {
-  globals: {
-    viewport: { value: "iphone6", isRotated: false },
   },
 };

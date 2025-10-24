@@ -6,6 +6,7 @@ const meta = {
   title: "Components/subtasks/SubtaskList",
   component: SubtaskList,
   tags: ["autodocs"],
+  parameters: { layout: "fullscreen" },
   args: {
     subtasks: subtasksMock,
   },
@@ -15,9 +16,3 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {};
-
-export const OnMobile: Story = {
-  globals: {
-    viewport: { value: "iphone6", isRotated: false },
-  },
-};

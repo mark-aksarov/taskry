@@ -1,21 +1,26 @@
-import { CommentList } from "@/components/comments/CommentList";
-import { Centered } from "@/components/common/Centered";
+import { CommentItem } from "@/components/comments/CommentItem";
 import {
-  EmptySection,
-  EmptySectionDescription,
-  EmptySectionHeading,
-  EmptySectionLink,
-} from "@/components/common/EmptySection";
+  DetailCard,
+  DetailCardHeader,
+  DetailCardLeft,
+  DetailCardTitle,
+} from "@/components/common/Detail";
+import { DetailPanel } from "@/components/common/DetailPanel";
+import { List } from "@/components/common/List";
 import { PageGrid } from "@/components/common/PageGrid";
+import { Repeat } from "@/components/common/Repeat";
 import {
-  ToolbarDesktop,
-  ToolbarMobileBottom,
   ToolbarMobileHeading,
   ToolbarMobileTop,
 } from "@/components/common/Toolbar";
+import { TaskComments } from "@/components/tasks/TaskComments/TaskComments";
 import { TaskCommentsMessageInput } from "@/components/tasks/TaskCommentsMessageInput";
-import { TaskPageTabs } from "@/components/tasks/TaskPageTabs";
-import { getCommentsByTask } from "@/lib/queries/comments";
+import { TaskDetailNavigation } from "@/components/tasks/TaskDetailNavigation";
+import {
+  TaskDetailPanelHeader,
+  TaskDetailPanelHeaderSkeleton,
+} from "@/components/tasks/TaskDetailPanelHeader";
+import { Suspense } from "react";
 
 export default async function TaskCommentsPage({
   params,
@@ -23,51 +28,53 @@ export default async function TaskCommentsPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const comments = await getCommentsByTask(
-    +id,
-    "BKs42HvVDEZFoaJUmTqf1gTN0K8pUFjI",
-  );
-
-  if (!comments.length) {
-    return (
-      <PageGrid>
-        <ToolbarDesktop>
-          <TaskPageTabs />
-        </ToolbarDesktop>
-        <ToolbarMobileTop>
-          <ToolbarMobileHeading>Comments</ToolbarMobileHeading>
-        </ToolbarMobileTop>
-        <ToolbarMobileBottom>
-          <TaskPageTabs />
-        </ToolbarMobileBottom>
-        <Centered>
-          <EmptySection>
-            <EmptySectionHeading>No comments yet</EmptySectionHeading>
-            <EmptySectionDescription>
-              Start the conversation by adding your first comment
-            </EmptySectionDescription>
-            <EmptySectionLink href="#">Add Comment</EmptySectionLink>
-          </EmptySection>
-        </Centered>
-      </PageGrid>
-    );
-  }
 
   return (
-    <PageGrid>
-      <ToolbarDesktop>
-        <TaskPageTabs />
-      </ToolbarDesktop>
-      <ToolbarMobileTop>
-        <ToolbarMobileHeading>Comments</ToolbarMobileHeading>
-      </ToolbarMobileTop>
-      <ToolbarMobileBottom>
-        <TaskPageTabs />
-      </ToolbarMobileBottom>
-      <div className="flex flex-col gap-4">
-        <TaskCommentsMessageInput />
-        <CommentList comments={comments} />
+    <>
+      <DetailCard className="max-md:hidden">
+        <DetailCardLeft>
+          <DetailCardHeader>
+            <DetailCardTitle>Task comments</DetailCardTitle>
+          </DetailCardHeader>
+          <div className="p-6 pb-2">
+            <TaskCommentsMessageInput />
+            <Suspense
+              fallback={
+                <List className="gap-0">
+                  <Repeat items={10} renderItem={() => <CommentItem />} />
+                </List>
+              }
+            >
+              <TaskComments taskId={+id} />
+            </Suspense>
+          </div>
+        </DetailCardLeft>
+
+        <DetailPanel>
+          <Suspense fallback={<TaskDetailPanelHeaderSkeleton />}>
+            <TaskDetailPanelHeader id={+id} />
+          </Suspense>
+          <TaskDetailNavigation />
+        </DetailPanel>
+      </DetailCard>
+
+      <div className="md:hidden">
+        <PageGrid>
+          <ToolbarMobileTop>
+            <ToolbarMobileHeading>Task comments</ToolbarMobileHeading>
+          </ToolbarMobileTop>
+          <TaskCommentsMessageInput />
+          <Suspense
+            fallback={
+              <List className="gap-4">
+                <Repeat items={10} renderItem={() => <CommentItem />} />
+              </List>
+            }
+          >
+            <TaskComments taskId={+id} />
+          </Suspense>
+        </PageGrid>
       </div>
-    </PageGrid>
+    </>
   );
 }

@@ -3,14 +3,11 @@ import TaskSubtasksPage from "./page";
 import { mocked } from "storybook/internal/test";
 import { getNotifications } from "@/lib/queries/notification";
 import { notificationsMock } from "@/lib/data/__mocks__/notifications";
-import {
-  useParams,
-  usePathname,
-  useSelectedLayoutSegments,
-} from "next/navigation";
-import { getSubtasksByTask } from "@/lib/queries/task";
+import { useParams, usePathname } from "next/navigation";
+import { getSubtasksByTask, getTask } from "@/lib/queries/task";
 import { subtasksMock } from "@/lib/data/__mocks__/subtasks";
 import { PageDecorator } from "@/.storybook/decorators";
+import { tasksMock } from "@/lib/data/__mocks__/tasks";
 
 const meta = {
   title: "components/pages/TaskSubtasks",
@@ -21,6 +18,7 @@ const meta = {
   },
   decorators: [PageDecorator],
   beforeEach: () => {
+    mocked(getTask).mockReturnValue(new Promise((res) => res(tasksMock[0])));
     mocked(getSubtasksByTask).mockReturnValue(
       new Promise((res) => res(subtasksMock)),
     );
@@ -28,12 +26,6 @@ const meta = {
       new Promise((res) => res(notificationsMock.slice(0, 5))),
     );
     mocked(usePathname).mockReturnValue("/tasks/1/subtasks");
-    mocked(useSelectedLayoutSegments).mockReturnValue([
-      "(dashboard)",
-      "tasks",
-      "1",
-      "subtasks",
-    ]);
     mocked(useParams).mockReturnValue({ id: "1" });
   },
 } satisfies Meta<typeof TaskSubtasksPage>;
@@ -43,20 +35,19 @@ export type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {};
 
-export const WithNoComments = {
+export const Loading: Story = {
   beforeEach: () => {
-    mocked(getSubtasksByTask).mockReturnValue(new Promise((res) => res([])));
-  },
-} satisfies Story;
-
-export const Tablet: Story = {
-  globals: {
-    viewport: { value: "ipad", isRotated: true },
+    mocked(getTask).mockReturnValue(
+      new Promise((res) => setTimeout(() => res(tasksMock[0]), 2000)),
+    );
+    mocked(getSubtasksByTask).mockReturnValue(
+      new Promise((res) => setTimeout(() => res(subtasksMock), 2000)),
+    );
   },
 };
 
-export const Mobile = {
-  globals: {
-    viewport: { value: "iphone6", isRotated: false },
+export const WithNoSubtasks = {
+  beforeEach: () => {
+    mocked(getSubtasksByTask).mockReturnValue(new Promise((res) => res([])));
   },
 } satisfies Story;

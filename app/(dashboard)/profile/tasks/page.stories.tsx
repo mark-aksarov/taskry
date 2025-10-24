@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import ProfileTasksPage from "./page";
 import { mocked } from "storybook/test";
-import { usePathname, useSelectedLayoutSegments } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { getUserById } from "@/lib/queries/user";
 import { usersMock } from "@/lib/data/__mocks__/users";
 import { getTasks } from "@/lib/queries/task";
@@ -24,11 +24,6 @@ const meta: Meta<typeof ProfileTasksPage> = {
       new Promise((res) => res(notificationsMock.slice(0, 5))),
     );
     mocked(usePathname).mockReturnValue("/profile/tasks");
-    mocked(useSelectedLayoutSegments).mockReturnValue([
-      "(dashboard)",
-      "profile",
-      "tasks",
-    ]);
   },
 };
 
@@ -37,20 +32,16 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {};
 
-export const WithNoTasks = {
+export const Loading: Story = {
   beforeEach: () => {
-    mocked(getTasks).mockReturnValue(new Promise((res) => res([])));
-  },
-} satisfies Story;
-
-export const Tablet: Story = {
-  globals: {
-    viewport: { value: "ipad", isRotated: true },
+    mocked(getTasks).mockReturnValue(
+      new Promise((res) => setTimeout(() => res(tasksMock), 2000)),
+    );
   },
 };
 
-export const Mobile = {
-  globals: {
-    viewport: { value: "iphone6", isRotated: false },
+export const WithNoTasks = {
+  beforeEach: () => {
+    mocked(getTasks).mockReturnValue(new Promise((res) => res([])));
   },
 } satisfies Story;

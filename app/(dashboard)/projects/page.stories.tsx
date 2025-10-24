@@ -11,7 +11,7 @@ import { usersMock } from "@/lib/data/__mocks__/users";
 import { getNotifications } from "@/lib/queries/notification";
 import { notificationsMock } from "@/lib/data/__mocks__/notifications";
 import { projectsMock } from "@/lib/data/__mocks__/projects";
-import { useSelectedLayoutSegments } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 const meta = {
   title: "components/pages/Projects",
@@ -32,10 +32,7 @@ const meta = {
     mocked(getProjects).mockReturnValue(
       new Promise((res) => res(projectsMock)),
     );
-    mocked(useSelectedLayoutSegments).mockReturnValue([
-      "(dashboard)",
-      "projects",
-    ]);
+    mocked(usePathname).mockReturnValue("/projects");
   },
 } satisfies Meta<typeof ProjectsPage>;
 

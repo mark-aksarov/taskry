@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import ProfilePage from "./page";
 import { mocked } from "storybook/test";
-import { usePathname, useSelectedLayoutSegments } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { getUserById } from "@/lib/queries/user";
 import { usersMock } from "@/lib/data/__mocks__/users";
 import { getNotifications } from "@/lib/queries/notification";
@@ -21,10 +21,6 @@ const meta: Meta<typeof ProfilePage> = {
       new Promise((res) => res(notificationsMock.slice(0, 5))),
     );
     mocked(usePathname).mockReturnValue("/profile");
-    mocked(useSelectedLayoutSegments).mockReturnValue([
-      "(dashboard)",
-      "profile",
-    ]);
   },
 };
 
@@ -33,14 +29,10 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {};
 
-export const Tablet: Story = {
-  globals: {
-    viewport: { value: "ipad", isRotated: true },
+export const Loading: Story = {
+  beforeEach: () => {
+    mocked(getUserById).mockReturnValue(
+      new Promise((res) => setTimeout(() => res(usersMock[0]), 2000)),
+    );
   },
 };
-
-export const Mobile = {
-  globals: {
-    viewport: { value: "iphone6", isRotated: false },
-  },
-} satisfies Story;

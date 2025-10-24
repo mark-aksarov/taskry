@@ -1,21 +1,26 @@
-import { getSubtasksByTask } from "@/lib/queries/task";
-import { SubtaskList } from "@/components/subtasks/SubtaskList";
-import { Centered } from "@/components/common/Centered";
 import {
-  EmptySection,
-  EmptySectionDescription,
-  EmptySectionHeading,
-  EmptySectionLink,
-} from "@/components/common/EmptySection";
+  DetailCard,
+  DetailCardHeader,
+  DetailCardLeft,
+  DetailCardTitle,
+} from "@/components/common/Detail";
+import { DetailPanel } from "@/components/common/DetailPanel";
+import { List } from "@/components/common/List";
 import { PageGrid } from "@/components/common/PageGrid";
+import { Repeat } from "@/components/common/Repeat";
 import {
-  ToolbarDesktop,
-  ToolbarMobileBottom,
   ToolbarMobileHeading,
   ToolbarMobileTop,
 } from "@/components/common/Toolbar";
-import { TaskPageTabs } from "@/components/tasks/TaskPageTabs";
 import { SubtaskActionsMenuTrigger } from "@/components/subtasks/SubtaskActionsMenuTrigger";
+import { SubtaskListItem } from "@/components/subtasks/SubtaskListItem";
+import { TaskDetailNavigation } from "@/components/tasks/TaskDetailNavigation";
+import {
+  TaskDetailPanelHeader,
+  TaskDetailPanelHeaderSkeleton,
+} from "@/components/tasks/TaskDetailPanelHeader";
+import { TaskSubtasks } from "@/components/tasks/TaskSubtasks";
+import { Suspense } from "react";
 
 export default async function TaskSubtasksPage({
   params,
@@ -23,47 +28,52 @@ export default async function TaskSubtasksPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const subtasks = await getSubtasksByTask(+id);
-
-  if (!subtasks.length) {
-    return (
-      <PageGrid>
-        <ToolbarDesktop>
-          <TaskPageTabs />
-        </ToolbarDesktop>
-        <ToolbarMobileTop>
-          <ToolbarMobileHeading>Subtasks</ToolbarMobileHeading>
-        </ToolbarMobileTop>
-        <ToolbarMobileBottom>
-          <TaskPageTabs />
-        </ToolbarMobileBottom>
-        <Centered>
-          <EmptySection>
-            <EmptySectionHeading>No subtasks yet</EmptySectionHeading>
-            <EmptySectionDescription>
-              Create a subtask to break this task into smaller steps
-            </EmptySectionDescription>
-            <EmptySectionLink href="#">Add Subtask</EmptySectionLink>
-          </EmptySection>
-        </Centered>
-      </PageGrid>
-    );
-  }
 
   return (
-    <PageGrid>
-      <ToolbarDesktop>
-        <TaskPageTabs />
-        <SubtaskActionsMenuTrigger />
-      </ToolbarDesktop>
-      <ToolbarMobileTop>
-        <ToolbarMobileHeading>Subtasks</ToolbarMobileHeading>
-        <SubtaskActionsMenuTrigger />
-      </ToolbarMobileTop>
-      <ToolbarMobileBottom>
-        <TaskPageTabs />
-      </ToolbarMobileBottom>
-      <SubtaskList subtasks={subtasks} />
-    </PageGrid>
+    <>
+      <DetailCard className="max-md:hidden">
+        <DetailCardLeft>
+          <DetailCardHeader className="pr-4">
+            <DetailCardTitle>Subtasks</DetailCardTitle>
+            <SubtaskActionsMenuTrigger />
+          </DetailCardHeader>
+          <Suspense
+            fallback={
+              <List className="gap-0">
+                <Repeat items={10} renderItem={() => <SubtaskListItem />} />
+              </List>
+            }
+          >
+            <TaskSubtasks taskId={+id} />
+          </Suspense>
+        </DetailCardLeft>
+
+        <DetailPanel>
+          <Suspense fallback={<TaskDetailPanelHeaderSkeleton />}>
+            <TaskDetailPanelHeader id={+id} />
+          </Suspense>
+          <TaskDetailNavigation />
+        </DetailPanel>
+      </DetailCard>
+
+      <div className="md:hidden">
+        <PageGrid>
+          <ToolbarMobileTop>
+            <ToolbarMobileHeading>Subtasks</ToolbarMobileHeading>
+            <SubtaskActionsMenuTrigger />
+          </ToolbarMobileTop>
+
+          <Suspense
+            fallback={
+              <List>
+                <Repeat items={10} renderItem={() => <SubtaskListItem />} />
+              </List>
+            }
+          >
+            <TaskSubtasks taskId={+id} />
+          </Suspense>
+        </PageGrid>
+      </div>
+    </>
   );
 }

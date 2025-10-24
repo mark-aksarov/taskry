@@ -7,7 +7,7 @@ interface EmptySectionHeadingProps {
 }
 
 export function EmptySectionHeading({
-  tag: Tag = "h1",
+  tag: Tag = "h2",
   className,
   children,
 }: EmptySectionHeadingProps) {

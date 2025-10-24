@@ -14,7 +14,7 @@ import { getTaskCategories, getTasks } from "@/lib/queries/task";
 import { tasksMock } from "@/lib/data/__mocks__/tasks";
 import { taskCategoriesMock } from "@/lib/data/__mocks__/taskCategories";
 import { projectsMock } from "@/lib/data/__mocks__/projects";
-import { useSelectedLayoutSegments } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 const meta = {
   title: "components/pages/Tasks",
@@ -40,7 +40,7 @@ const meta = {
     mocked(getProjects).mockReturnValue(
       new Promise((res) => res(projectsMock)),
     );
-    mocked(useSelectedLayoutSegments).mockReturnValue(["(dashboard)", "tasks"]);
+    mocked(usePathname).mockReturnValue("/tasks");
   },
 } satisfies Meta<typeof TasksPage>;
 

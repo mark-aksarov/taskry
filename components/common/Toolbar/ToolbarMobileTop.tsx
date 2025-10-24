@@ -1,6 +1,3 @@
-import { Skeleton } from "@/components/ui";
-import { ToolbarMobileHeading } from "./ToolbarMobileHeading";
-
 interface ToolbarMobileTopProps {
   children: React.ReactNode;
 }
