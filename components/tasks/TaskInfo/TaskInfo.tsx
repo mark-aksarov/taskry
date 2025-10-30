@@ -1,11 +1,11 @@
 import { use, useMemo } from "react";
-import { TaskPreview } from "@/lib/queries/types";
+import { TaskDetail } from "@/lib/queries/types";
 import { TaskInfoInner } from "./TaskInfoInner";
 
 export function TaskInfo({
   taskPromise,
 }: {
-  taskPromise: Promise<TaskPreview>;
+  taskPromise: Promise<TaskDetail>;
 }) {
   const task = use(taskPromise);
 

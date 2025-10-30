@@ -1,9 +1,70 @@
-import { TaskPreview } from "@/lib/queries/types";
+import { TaskDetail, TaskPreview } from "@/lib/queries/types";
 import {
   ACTIVE_TASK_STATUS_ID,
   DONE_TASK_STATUS_ID,
   PENDING_TASK_STATUS_ID,
 } from "@/lib/queries/constants";
+
+export const taskDetailMock: TaskDetail = {
+  id: 1,
+  title: "Design landing page",
+  description:
+    "Create a fully responsive and visually appealing landing page for the main product website. The design should follow the existing brand guidelines, include clear call-to-action buttons, and be optimized for both desktop and mobile devices. Focus on accessibility, clean typography, and visual hierarchy. Include hero section, feature highlights, testimonials, and a contact form section. Coordinate with the product and marketing teams to ensure the content and visual tone align with campaign goals.",
+  deadline: new Date("2025-09-30"),
+  projectId: 1,
+  creatorId: "user1",
+  categoryId: 1,
+  statusId: PENDING_TASK_STATUS_ID,
+  createdAt: new Date("2025-09-01"),
+  updatedAt: new Date("2025-09-15"),
+  project: { title: "Website Redesign", id: 1 },
+  creator: { id: "user1", imageUrl: "/man.jpg", fullName: "John Doe" },
+  status: {
+    id: PENDING_TASK_STATUS_ID,
+    nameEn: "Pending",
+    nameRu: "Ожидает",
+  },
+  category: { id: 1, name: "Design" },
+  subtasks: [
+    {
+      id: 1,
+      name: "Create hero section",
+      isDone: false,
+    },
+    {
+      id: 2,
+      name: "Design navigation menu",
+      isDone: false,
+    },
+    {
+      id: 3,
+      name: "Wireframe hero section",
+      isDone: false,
+    },
+    {
+      id: 4,
+      name: "Wireframe product showcase section",
+      isDone: false,
+    },
+    {
+      id: 5,
+      name: "Wireframe footer section",
+      isDone: false,
+    },
+  ],
+  attachments: [
+    {
+      id: 1,
+      fileName: "test1.jpg",
+      fileUrl: "/placeholder.jpg",
+    },
+    {
+      id: 2,
+      fileName: "test2.jpg",
+      fileUrl: "/placeholder.jpg",
+    },
+  ],
+};
 
 export const tasksMock: TaskPreview[] = [
   {

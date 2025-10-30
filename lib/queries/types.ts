@@ -42,6 +42,51 @@ export type TaskPreview = Prisma.TaskGetPayload<{
   };
 }>;
 
+export type TaskDetail = Prisma.TaskGetPayload<{
+  include: {
+    creator: {
+      select: {
+        id: true;
+        fullName: true;
+        imageUrl: true;
+      };
+    };
+    status: {
+      select: {
+        id: true;
+        nameEn: true;
+        nameRu: true;
+      };
+    };
+    project: {
+      select: {
+        id: true;
+        title: true;
+      };
+    };
+    category: {
+      select: {
+        id: true;
+        name: true;
+      };
+    };
+    subtasks: {
+      select: {
+        id: true;
+        name: true;
+        isDone: true;
+      };
+    };
+    attachments: {
+      select: {
+        id: true;
+        fileUrl: true;
+        fileName: true;
+      };
+    };
+  };
+}>;
+
 export type NotificationRecipientWithRelations =
   Prisma.NotificationRecipientGetPayload<{
     include: {
