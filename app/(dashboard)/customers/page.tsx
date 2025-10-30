@@ -19,7 +19,7 @@ import {
   ToolbarMobileHeading,
   ToolbarMobileTop,
 } from "@/components/common/Toolbar";
-import { FiltersSideSheetTrigger } from "@/components/common/FiltersSideSheetTrigger";
+import { FiltersModalTrigger } from "@/components/common/FiltersModalTrigger";
 import { FiltersBottomSheetTrigger } from "@/components/common/FiltersBottomSheetTrigger";
 import { ViewModeProvider } from "@/components/common/ViewMode";
 import { getCompanies } from "@/lib/queries/companies";
@@ -63,7 +63,7 @@ export default async function CustomersPage() {
       <PageGrid>
         <ViewModeProvider>
           <ToolbarDesktop>
-            <FiltersSideSheetTrigger
+            <FiltersModalTrigger
               filtersForm={
                 <Suspense fallback={<FiltersFormSkeleton />}>
                   {customersFiltersForm}

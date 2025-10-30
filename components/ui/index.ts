@@ -22,6 +22,7 @@ export { DatePicker } from "./DatePicker";
 export {
   Dialog,
   DialogHeader,
+  DialogFooter,
   DialogHeading,
   DialogBody,
   DialogCloseButton,

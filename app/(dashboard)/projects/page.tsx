@@ -19,7 +19,7 @@ import {
   ToolbarMobileHeading,
   ToolbarMobileTop,
 } from "@/components/common/Toolbar";
-import { FiltersSideSheetTrigger } from "@/components/common/FiltersSideSheetTrigger";
+import { FiltersModalTrigger } from "@/components/common/FiltersModalTrigger";
 import { FiltersBottomSheetTrigger } from "@/components/common/FiltersBottomSheetTrigger";
 import { ProjectFiltersForm } from "@/components/projects/ProjectFiltersForm";
 import { ProjectCategoryCheckboxGroup } from "@/components/projects/ProjectCategoryCheckboxGroup";
@@ -72,7 +72,7 @@ export default async function ProjectsPage() {
       <PageGrid>
         <ViewModeProvider>
           <ToolbarDesktop>
-            <FiltersSideSheetTrigger
+            <FiltersModalTrigger
               filtersForm={
                 <Suspense fallback={<FiltersFormSkeleton />}>
                   {projectFiltersForm}

@@ -19,7 +19,7 @@ import {
   ToolbarMobileHeading,
   ToolbarMobileTop,
 } from "@/components/common/Toolbar";
-import { FiltersSideSheetTrigger } from "@/components/common/FiltersSideSheetTrigger";
+import { FiltersModalTrigger } from "@/components/common/FiltersModalTrigger";
 import { FiltersBottomSheetTrigger } from "@/components/common/FiltersBottomSheetTrigger";
 import { getTaskCategories } from "@/lib/queries/task";
 import { getUsers } from "@/lib/queries/user";
@@ -73,7 +73,7 @@ export default async function TasksPage() {
       <PageGrid>
         <ViewModeProvider>
           <ToolbarDesktop>
-            <FiltersSideSheetTrigger
+            <FiltersModalTrigger
               filtersForm={
                 <Suspense fallback={<FiltersFormSkeleton />}>
                   {tasksFiltersForm}

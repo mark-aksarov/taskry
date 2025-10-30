@@ -1,7 +1,7 @@
 "use client";
 
 import { RACForm } from "@/components/ui";
-import { Button, TextField } from "@/components/ui";
+import { TextField } from "@/components/ui";
 import { ProjectStatusCheckboxGroup } from "../ProjectStatusCheckboxGroup";
 import { ProjectDeadline } from "../ProjectDeadline";
 
@@ -17,21 +17,15 @@ export function ProjectFiltersForm({
   userCheckboxGroup,
 }: ProjectFiltersFormProps) {
   return (
-    <RACForm className="flex flex-col gap-8">
+    <RACForm>
       <div className="flex flex-col gap-4">
         <TextField label="Title" placeholder="Title" />
+        <ProjectDeadline />
         <ProjectStatusCheckboxGroup />
         {projectCategoryCheckboxGroup}
         {customerCheckboxGroup}
         {userCheckboxGroup}
-        <ProjectDeadline />
       </div>
-      <Button
-        variant="primary"
-        size="medium"
-        label="Apply Filters"
-        className="justify-center"
-      />
     </RACForm>
   );
 }

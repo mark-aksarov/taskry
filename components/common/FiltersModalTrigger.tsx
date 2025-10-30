@@ -1,6 +1,5 @@
 "use client";
 
-import { SideSheet } from "../ui/SideSheet";
 import { Button } from "@/components/ui/Button";
 import { SlidersHorizontal } from "lucide-react";
 import { DialogTrigger } from "react-aria-components";
@@ -9,10 +8,12 @@ import {
   DialogBody,
   DialogCloseButton,
   DialogHeader,
+  DialogFooter,
   DialogHeading,
-} from "@/components/ui/Dialog";
+  Modal,
+} from "@/components/ui";
 
-export function FiltersSideSheetTrigger({
+export function FiltersModalTrigger({
   filtersForm,
 }: {
   filtersForm: React.ReactNode;
@@ -26,8 +27,8 @@ export function FiltersSideSheetTrigger({
           <SlidersHorizontal size={16} strokeWidth={1.5} absoluteStrokeWidth />
         }
       />
-      <SideSheet isDismissable>
-        <Dialog className="w-[360px]">
+      <Modal isDismissable className="w-[460px]">
+        <Dialog className="max-h-[calc(100dvh-64px)]">
           <DialogHeader>
             <DialogHeading>Filters</DialogHeading>
             <DialogCloseButton iconSize={20} />
@@ -35,8 +36,16 @@ export function FiltersSideSheetTrigger({
           <DialogBody className="text-black dark:text-white">
             {filtersForm}
           </DialogBody>
+          <DialogFooter>
+            <Button
+              variant="primary"
+              size="medium"
+              label="Apply Filters"
+              className="w-full justify-center"
+            />
+          </DialogFooter>
         </Dialog>
-      </SideSheet>
+      </Modal>
     </DialogTrigger>
   );
 }

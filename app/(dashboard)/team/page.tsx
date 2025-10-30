@@ -19,7 +19,7 @@ import {
   ToolbarMobileHeading,
   ToolbarMobileTop,
 } from "@/components/common/Toolbar";
-import { FiltersSideSheetTrigger } from "@/components/common/FiltersSideSheetTrigger";
+import { FiltersModalTrigger } from "@/components/common/FiltersModalTrigger";
 import { FiltersBottomSheetTrigger } from "@/components/common/FiltersBottomSheetTrigger";
 import { getPositions, getUsers } from "@/lib/queries/user";
 import { ViewModeProvider } from "@/components/common/ViewMode";
@@ -62,7 +62,7 @@ export default async function TeamPage() {
       <PageGrid>
         <ViewModeProvider>
           <ToolbarDesktop>
-            <FiltersSideSheetTrigger
+            <FiltersModalTrigger
               filtersForm={
                 <Suspense fallback={<FiltersFormSkeleton />}>
                   {usersFiltersForm}

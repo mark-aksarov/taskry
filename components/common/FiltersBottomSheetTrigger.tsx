@@ -5,6 +5,7 @@ import {
   BottomSheet,
   Dialog,
   DialogBody,
+  DialogFooter,
   DialogCloseButton,
   DialogHeader,
   DialogHeading,
@@ -38,13 +39,21 @@ export function FiltersBottomSheetTrigger({
       <BottomSheet isDismissable state={state} className="md:hidden">
         <Dialog
           aria-label="App navigation"
-          className="max-h-[calc(100dvh-64px)]"
+          className="max-h-[calc(100dvh-6.25rem)]"
         >
           <DialogHeader>
             <DialogHeading className="text-base">Filters</DialogHeading>
             <DialogCloseButton />
           </DialogHeader>
           <DialogBody>{filtersForm}</DialogBody>
+          <DialogFooter>
+            <Button
+              variant="primary"
+              size="medium"
+              label="Apply Filters"
+              className="w-full justify-center"
+            />
+          </DialogFooter>
         </Dialog>
       </BottomSheet>
     </>
