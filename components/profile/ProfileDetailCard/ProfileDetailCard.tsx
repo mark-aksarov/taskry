@@ -21,7 +21,7 @@ export async function ProfileDetailCard() {
   const userPromise = getUserById("BKs42HvVDEZFoaJUmTqf1gTN0K8pUFjI");
 
   return (
-    <DetailCard className="h-full max-md:hidden">
+    <DetailCard className="max-md:hidden">
       <DetailCardLeft>
         <DetailCardHeader>
           <DetailCardTitle>Profile Information</DetailCardTitle>

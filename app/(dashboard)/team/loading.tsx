@@ -9,31 +9,34 @@ import {
 import { Repeat } from "@/components/common/Repeat";
 import { List } from "@/components/common/List";
 import { UserListItem } from "@/components/users/UserListItem";
+import { PageContainer } from "@/components/common/PageContainer";
 
 export default function Loading() {
   return (
-    <PageGrid>
-      <ToolbarDesktop>
-        <Skeleton className="h-8 w-[5rem] rounded-lg" />
-        <Skeleton className="h-8 w-[5rem] rounded-lg" />
-        <Skeleton className="ml-auto h-8 w-[5rem] rounded-lg" />
-        <Skeleton className="h-8 w-[5rem] rounded-lg" />
-      </ToolbarDesktop>
+    <PageContainer>
+      <PageGrid>
+        <ToolbarDesktop>
+          <Skeleton className="h-8 w-[5rem] rounded-lg" />
+          <Skeleton className="h-8 w-[5rem] rounded-lg" />
+          <Skeleton className="ml-auto h-8 w-[5rem] rounded-lg" />
+          <Skeleton className="h-8 w-[5rem] rounded-lg" />
+        </ToolbarDesktop>
 
-      <ToolbarMobileTop>
-        <ToolbarMobileHeading>Users</ToolbarMobileHeading>
-        <Skeleton className="h-8 w-8 rounded-lg" />
-        <Skeleton className="h-8 w-8 rounded-lg" />
-      </ToolbarMobileTop>
+        <ToolbarMobileTop>
+          <ToolbarMobileHeading>Users</ToolbarMobileHeading>
+          <Skeleton className="h-8 w-8 rounded-lg" />
+          <Skeleton className="h-8 w-8 rounded-lg" />
+        </ToolbarMobileTop>
 
-      <ToolbarMobileBottom>
-        <Skeleton className="h-8 w-[5rem] rounded-lg" />
-        <Skeleton className="ml-auto h-8 w-[5rem] rounded-lg" />
-      </ToolbarMobileBottom>
+        <ToolbarMobileBottom>
+          <Skeleton className="h-8 w-[5rem] rounded-lg" />
+          <Skeleton className="ml-auto h-8 w-[5rem] rounded-lg" />
+        </ToolbarMobileBottom>
 
-      <List>
-        <Repeat items={10} renderItem={() => <UserListItem />} />
-      </List>
-    </PageGrid>
+        <List>
+          <Repeat items={10} renderItem={() => <UserListItem />} />
+        </List>
+      </PageGrid>
+    </PageContainer>
   );
 }

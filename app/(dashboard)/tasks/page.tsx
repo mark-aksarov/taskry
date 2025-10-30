@@ -2,7 +2,6 @@ import { Suspense } from "react";
 import { Plus } from "lucide-react";
 import { Button } from "@/components/ui";
 
-import { Centered } from "@/components/common/Centered";
 import {
   EmptySection,
   EmptySectionDescription,
@@ -35,6 +34,7 @@ import { TaskActionsMenuTrigger } from "@/components/tasks/TaskActionsMenuTrigge
 import { TaskList } from "@/components/tasks/TaskList";
 import { TaskGrid } from "@/components/tasks/TaskGrid";
 import { FiltersFormSkeleton } from "@/components/common/FiltersFormSkeleton";
+import { PageContainer } from "@/components/common/PageContainer";
 
 export default async function TasksPage() {
   const categoriesPromise = getTaskCategories(1);
@@ -56,7 +56,7 @@ export default async function TasksPage() {
 
   if (!tasks.length) {
     return (
-      <Centered>
+      <PageContainer fullscreen centered>
         <EmptySection>
           <EmptySectionHeading>No tasks yet</EmptySectionHeading>
           <EmptySectionDescription>
@@ -64,53 +64,59 @@ export default async function TasksPage() {
           </EmptySectionDescription>
           <EmptySectionLink href="#">New Task</EmptySectionLink>
         </EmptySection>
-      </Centered>
+      </PageContainer>
     );
   }
 
   return (
-    <PageGrid>
-      <ViewModeProvider>
-        <ToolbarDesktop>
-          <FiltersSideSheetTrigger
-            filtersForm={
-              <Suspense fallback={<FiltersFormSkeleton />}>
-                {tasksFiltersForm}
-              </Suspense>
-            }
-          />
-          <TaskActionsMenuTrigger />
-          <ViewModeToggleButtonGroup className="ml-auto" />
-          <Button
-            label="New Task"
-            iconLeft={<Plus size={16} strokeWidth={1.5} absoluteStrokeWidth />}
-          />
-        </ToolbarDesktop>
+    <PageContainer>
+      <PageGrid>
+        <ViewModeProvider>
+          <ToolbarDesktop>
+            <FiltersSideSheetTrigger
+              filtersForm={
+                <Suspense fallback={<FiltersFormSkeleton />}>
+                  {tasksFiltersForm}
+                </Suspense>
+              }
+            />
+            <TaskActionsMenuTrigger />
+            <ViewModeToggleButtonGroup className="ml-auto" />
+            <Button
+              label="New Task"
+              iconLeft={
+                <Plus size={16} strokeWidth={1.5} absoluteStrokeWidth />
+              }
+            />
+          </ToolbarDesktop>
 
-        <ToolbarMobileTop>
-          <ToolbarMobileHeading>Tasks</ToolbarMobileHeading>
-          <FiltersBottomSheetTrigger
-            filtersForm={
-              <Suspense fallback={<FiltersFormSkeleton />}>
-                {tasksFiltersForm}
-              </Suspense>
-            }
-          />
-          <TaskActionsMenuTrigger />
-        </ToolbarMobileTop>
+          <ToolbarMobileTop>
+            <ToolbarMobileHeading>Tasks</ToolbarMobileHeading>
+            <FiltersBottomSheetTrigger
+              filtersForm={
+                <Suspense fallback={<FiltersFormSkeleton />}>
+                  {tasksFiltersForm}
+                </Suspense>
+              }
+            />
+            <TaskActionsMenuTrigger />
+          </ToolbarMobileTop>
 
-        <ToolbarMobileBottom>
-          <ViewModeToggleButtonGroup />
-          <Button
-            label="New Task"
-            iconLeft={<Plus size={16} strokeWidth={1.5} absoluteStrokeWidth />}
+          <ToolbarMobileBottom>
+            <ViewModeToggleButtonGroup />
+            <Button
+              label="New Task"
+              iconLeft={
+                <Plus size={16} strokeWidth={1.5} absoluteStrokeWidth />
+              }
+            />
+          </ToolbarMobileBottom>
+          <ViewModeContainer
+            list={<TaskList tasks={tasks} />}
+            grid={<TaskGrid tasks={tasks} />}
           />
-        </ToolbarMobileBottom>
-        <ViewModeContainer
-          list={<TaskList tasks={tasks} />}
-          grid={<TaskGrid tasks={tasks} />}
-        />
-      </ViewModeProvider>
-    </PageGrid>
+        </ViewModeProvider>
+      </PageGrid>
+    </PageContainer>
   );
 }

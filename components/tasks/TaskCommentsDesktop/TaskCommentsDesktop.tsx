@@ -1,14 +1,12 @@
 import { CommentList } from "@/components/comments/CommentList";
-import { Centered } from "@/components/common/Centered";
 import {
   EmptySection,
   EmptySectionDescription,
   EmptySectionHeading,
-  EmptySectionLink,
 } from "@/components/common/EmptySection";
 import { getCommentsByTask } from "@/lib/queries/comments";
 
-export async function TaskComments({ taskId }: { taskId: number }) {
+export async function TaskCommentsDesktop({ taskId }: { taskId: number }) {
   const comments = await getCommentsByTask(
     taskId,
     "BKs42HvVDEZFoaJUmTqf1gTN0K8pUFjI",
@@ -16,7 +14,7 @@ export async function TaskComments({ taskId }: { taskId: number }) {
 
   if (!comments.length) {
     return (
-      <Centered>
+      <div className="flex flex-auto items-center justify-center">
         <EmptySection>
           <EmptySectionHeading className="max-md:text-3xl md:text-4xl">
             No comments yet
@@ -24,9 +22,8 @@ export async function TaskComments({ taskId }: { taskId: number }) {
           <EmptySectionDescription>
             Start the conversation by adding your first comment
           </EmptySectionDescription>
-          <EmptySectionLink href="#">Add Comment</EmptySectionLink>
         </EmptySection>
-      </Centered>
+      </div>
     );
   }
 

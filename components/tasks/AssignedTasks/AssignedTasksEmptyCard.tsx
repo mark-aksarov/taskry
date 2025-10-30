@@ -8,8 +8,8 @@ import {
 
 export function AssignedTasksEmptyCard() {
   return (
-    <Card className="md:relative md:flex-1">
-      <div className="flex w-full items-center justify-center p-8 md:absolute md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2">
+    <Card>
+      <div className="flex items-center justify-center p-8 max-md:w-[17rem] md:h-[25rem]">
         <EmptySection>
           <EmptySectionHeading className="max-md:text-3xl md:text-4xl">
             No tasks yet

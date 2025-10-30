@@ -2,7 +2,6 @@ import { Suspense } from "react";
 import { Plus } from "lucide-react";
 import { Button } from "@/components/ui";
 
-import { Centered } from "@/components/common/Centered";
 import {
   EmptySection,
   EmptySectionDescription,
@@ -30,6 +29,7 @@ import { PositionCheckboxGroup } from "@/components/users/PositionCheckboxGroup"
 import { UserList } from "@/components/users/UserList";
 import { UserGrid } from "@/components/users/UserGrid";
 import { FiltersFormSkeleton } from "@/components/common/FiltersFormSkeleton";
+import { PageContainer } from "@/components/common/PageContainer";
 
 export default async function TeamPage() {
   const positionsPromise = getPositions(1);
@@ -45,7 +45,7 @@ export default async function TeamPage() {
 
   if (!users.length) {
     return (
-      <Centered>
+      <PageContainer fullscreen centered>
         <EmptySection>
           <EmptySectionHeading>No Users yet</EmptySectionHeading>
           <EmptySectionDescription>
@@ -53,53 +53,59 @@ export default async function TeamPage() {
           </EmptySectionDescription>
           <EmptySectionLink href="#">New User</EmptySectionLink>
         </EmptySection>
-      </Centered>
+      </PageContainer>
     );
   }
 
   return (
-    <PageGrid>
-      <ViewModeProvider>
-        <ToolbarDesktop>
-          <FiltersSideSheetTrigger
-            filtersForm={
-              <Suspense fallback={<FiltersFormSkeleton />}>
-                {usersFiltersForm}
-              </Suspense>
-            }
-          />
-          <UserActionsMenuTrigger />
-          <ViewModeToggleButtonGroup className="ml-auto" />
-          <Button
-            label="New User"
-            iconLeft={<Plus size={16} strokeWidth={1.5} absoluteStrokeWidth />}
-          />
-        </ToolbarDesktop>
+    <PageContainer>
+      <PageGrid>
+        <ViewModeProvider>
+          <ToolbarDesktop>
+            <FiltersSideSheetTrigger
+              filtersForm={
+                <Suspense fallback={<FiltersFormSkeleton />}>
+                  {usersFiltersForm}
+                </Suspense>
+              }
+            />
+            <UserActionsMenuTrigger />
+            <ViewModeToggleButtonGroup className="ml-auto" />
+            <Button
+              label="New User"
+              iconLeft={
+                <Plus size={16} strokeWidth={1.5} absoluteStrokeWidth />
+              }
+            />
+          </ToolbarDesktop>
 
-        <ToolbarMobileTop>
-          <ToolbarMobileHeading>Users</ToolbarMobileHeading>
-          <FiltersBottomSheetTrigger
-            filtersForm={
-              <Suspense fallback={<FiltersFormSkeleton />}>
-                {usersFiltersForm}
-              </Suspense>
-            }
-          />
-          <UserActionsMenuTrigger />
-        </ToolbarMobileTop>
+          <ToolbarMobileTop>
+            <ToolbarMobileHeading>Users</ToolbarMobileHeading>
+            <FiltersBottomSheetTrigger
+              filtersForm={
+                <Suspense fallback={<FiltersFormSkeleton />}>
+                  {usersFiltersForm}
+                </Suspense>
+              }
+            />
+            <UserActionsMenuTrigger />
+          </ToolbarMobileTop>
 
-        <ToolbarMobileBottom>
-          <ViewModeToggleButtonGroup />
-          <Button
-            label="New User"
-            iconLeft={<Plus size={16} strokeWidth={1.5} absoluteStrokeWidth />}
+          <ToolbarMobileBottom>
+            <ViewModeToggleButtonGroup />
+            <Button
+              label="New User"
+              iconLeft={
+                <Plus size={16} strokeWidth={1.5} absoluteStrokeWidth />
+              }
+            />
+          </ToolbarMobileBottom>
+          <ViewModeContainer
+            list={<UserList users={users} />}
+            grid={<UserGrid users={users} />}
           />
-        </ToolbarMobileBottom>
-        <ViewModeContainer
-          list={<UserList users={users} />}
-          grid={<UserGrid users={users} />}
-        />
-      </ViewModeProvider>
-    </PageGrid>
+        </ViewModeProvider>
+      </PageGrid>
+    </PageContainer>
   );
 }

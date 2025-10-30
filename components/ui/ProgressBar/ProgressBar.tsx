@@ -41,7 +41,7 @@ export const ProgressBar = ({
               )}
             </div>
           )}
-          <div className="h-2 overflow-hidden rounded-full bg-gray-200 dark:bg-gray-700">
+          <div className="h-1.5 overflow-hidden rounded-full bg-gray-200 dark:bg-gray-700">
             <div
               data-testid="progressbar-fill"
               className={twMerge(

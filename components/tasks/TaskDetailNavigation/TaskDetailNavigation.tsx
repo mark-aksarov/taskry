@@ -42,7 +42,7 @@ export function TaskDetailNavigation() {
         <NavigationButton
           isActive={infoPattern.test(pathname) || basePattern.test(pathname)}
           variant="secondary"
-          href="/tasks/1/info"
+          href="/tasks/1"
         >
           <Info size={18} strokeWidth={1.5} absoluteStrokeWidth />
           Task information
@@ -81,7 +81,7 @@ export function TaskDetailNavigation() {
       </DetailNavigation>
 
       <DetailNavigation className="md:hidden">
-        <NavigationButton variant="secondary" href="/profile/info">
+        <NavigationButton variant="secondary" href="/tasks/1/info">
           <Info size={18} strokeWidth={1.5} absoluteStrokeWidth />
           Task Information
           <ChevronRight
@@ -91,7 +91,7 @@ export function TaskDetailNavigation() {
             absoluteStrokeWidth
           />
         </NavigationButton>
-        <NavigationButton variant="secondary" href="/profile/tasks">
+        <NavigationButton variant="secondary" href="/tasks/1/comments">
           <Mail size={18} strokeWidth={1.5} absoluteStrokeWidth />
           Comments
           <ChevronRight
@@ -101,7 +101,7 @@ export function TaskDetailNavigation() {
             absoluteStrokeWidth
           />
         </NavigationButton>
-        <NavigationButton variant="secondary" href="/profile/notifications">
+        <NavigationButton variant="secondary" href="/tasks/1/subtasks">
           <CalendarCheck size={18} strokeWidth={1.5} absoluteStrokeWidth />
           Subtasks
           <ChevronRight
@@ -111,7 +111,7 @@ export function TaskDetailNavigation() {
             absoluteStrokeWidth
           />
         </NavigationButton>
-        <NavigationButton variant="secondary" href="/profile/notifications">
+        <NavigationButton variant="secondary" href="/tasks/1/attachments">
           <FileText size={18} strokeWidth={1.5} absoluteStrokeWidth />
           Attachments
           <ChevronRight

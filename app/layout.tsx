@@ -41,7 +41,9 @@ export default async function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${nunitoSans.className} antialiased`}>
+      <body
+        className={`${nunitoSans.className} bg-gray-100 antialiased dark:bg-gray-900`}
+      >
         <Layout>{children}</Layout>
       </body>
     </html>
@@ -54,8 +56,8 @@ export async function Layout({ children }: { children: React.ReactNode }) {
   );
 
   return (
-    <div className="flex min-h-screen w-full bg-gray-100 dark:bg-gray-900">
-      <AppSidebar className="sticky top-0 z-2 h-screen shrink-0 shadow-lg max-xl:hidden">
+    <div className="flex">
+      <AppSidebar className="sticky top-0 z-2 h-screen flex-none shadow-lg max-xl:hidden">
         <AppSidebarHeader>
           <AppSidebarHeading />
         </AppSidebarHeader>
@@ -64,7 +66,7 @@ export async function Layout({ children }: { children: React.ReactNode }) {
         </AppSidebarBody>
       </AppSidebar>
 
-      <div className="flex w-full flex-col">
+      <div className="flex flex-auto flex-col">
         <AppHeader
           title="Dashboard"
           notificationPopoverTrigger={
@@ -94,7 +96,7 @@ export async function Layout({ children }: { children: React.ReactNode }) {
           appBottomSheetTrigger={<AppBottomSheetTrigger />}
           appSidebarSheetTrigger={<AppSidebarSheetTrigger />}
         />
-        <main className="flex-1 max-md:p-4 md:p-6">{children}</main>
+        <main>{children}</main>
       </div>
     </div>
   );

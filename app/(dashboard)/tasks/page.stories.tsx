@@ -15,6 +15,7 @@ import { tasksMock } from "@/lib/data/__mocks__/tasks";
 import { taskCategoriesMock } from "@/lib/data/__mocks__/taskCategories";
 import { projectsMock } from "@/lib/data/__mocks__/projects";
 import { usePathname } from "next/navigation";
+import { default as PageLoading } from "./loading";
 
 const meta = {
   title: "components/pages/Tasks",
@@ -49,20 +50,12 @@ type Story = StoryObj<typeof TasksPage>;
 
 export const Default: Story = {};
 
+export const Loading: Story = {
+  render: () => <PageLoading />,
+};
+
 export const WithNoTasks = {
   beforeEach: () => {
     mocked(getTasks).mockReturnValue(new Promise((res) => res([])));
-  },
-} satisfies Story;
-
-export const Tablet: Story = {
-  globals: {
-    viewport: { value: "ipad", isRotated: true },
-  },
-};
-
-export const Mobile = {
-  globals: {
-    viewport: { value: "iphone6", isRotated: false },
   },
 } satisfies Story;

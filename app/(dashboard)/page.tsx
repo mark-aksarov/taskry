@@ -1,4 +1,5 @@
 import { List } from "@/components/common/List";
+import { PageContainer } from "@/components/common/PageContainer";
 import { PageGrid } from "@/components/common/PageGrid";
 import { Repeat } from "@/components/common/Repeat";
 import {
@@ -29,40 +30,42 @@ import { Suspense } from "react";
 
 export default function DashboardPage() {
   return (
-    <PageGrid>
-      <ToolbarMobileTop>
-        <ToolbarMobileHeading>Dashboard</ToolbarMobileHeading>
-      </ToolbarMobileTop>
-      <div className="grid max-md:grid-cols-1 max-md:gap-4 md:gap-6 md:max-xl:grid-cols-2 xl:grid-cols-4">
-        <Suspense fallback={<ActiveProjectsCardSkeleton />}>
-          <ActiveProjectsCard />
-        </Suspense>
+    <PageContainer>
+      <PageGrid>
+        <ToolbarMobileTop>
+          <ToolbarMobileHeading>Dashboard</ToolbarMobileHeading>
+        </ToolbarMobileTop>
+        <div className="grid max-md:grid-cols-1 max-md:gap-4 md:gap-6 md:max-xl:grid-cols-2 xl:grid-cols-4">
+          <Suspense fallback={<ActiveProjectsCardSkeleton />}>
+            <ActiveProjectsCard />
+          </Suspense>
 
-        <Suspense fallback={<ActiveTasksCardSkeleton />}>
-          <ActiveTasksCard />
-        </Suspense>
+          <Suspense fallback={<ActiveTasksCardSkeleton />}>
+            <ActiveTasksCard />
+          </Suspense>
 
-        <Suspense fallback={<TasksDoneCardSkeleton />}>
-          <TasksDoneCard />
-        </Suspense>
+          <Suspense fallback={<TasksDoneCardSkeleton />}>
+            <TasksDoneCard />
+          </Suspense>
 
-        <Suspense fallback={<StorageLimitCardSkeleton />}>
-          <StorageLimitCard />
-        </Suspense>
-      </div>
+          <Suspense fallback={<StorageLimitCardSkeleton />}>
+            <StorageLimitCard />
+          </Suspense>
+        </div>
 
-      <Suspense
-        fallback={
-          <AssignedTasksSection>
-            <AssignedTasksSectionHeading />
-            <List>
-              <Repeat items={10} renderItem={() => <TaskListItem />} />
-            </List>
-          </AssignedTasksSection>
-        }
-      >
-        <AssignedTasks />
-      </Suspense>
-    </PageGrid>
+        <Suspense
+          fallback={
+            <AssignedTasksSection>
+              <AssignedTasksSectionHeading />
+              <List>
+                <Repeat items={10} renderItem={() => <TaskListItem />} />
+              </List>
+            </AssignedTasksSection>
+          }
+        >
+          <AssignedTasks />
+        </Suspense>
+      </PageGrid>
+    </PageContainer>
   );
 }

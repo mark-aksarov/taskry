@@ -2,7 +2,6 @@ import { Suspense } from "react";
 import { Plus } from "lucide-react";
 import { Button } from "@/components/ui";
 
-import { Centered } from "@/components/common/Centered";
 import {
   EmptySection,
   EmptySectionDescription,
@@ -34,6 +33,7 @@ import { UserCheckboxGroup } from "@/components/users/UserCheckboxGroup";
 import { ViewModeProvider } from "@/components/common/ViewMode";
 import { ProjectGrid } from "@/components/projects/ProjectGrid";
 import { FiltersFormSkeleton } from "@/components/common/FiltersFormSkeleton";
+import { PageContainer } from "@/components/common/PageContainer";
 
 export default async function ProjectsPage() {
   const categoriesPromise = getProjectCategories(1);
@@ -55,7 +55,7 @@ export default async function ProjectsPage() {
 
   if (!projects.length) {
     return (
-      <Centered>
+      <PageContainer fullscreen centered>
         <EmptySection>
           <EmptySectionHeading>No projects yet</EmptySectionHeading>
           <EmptySectionDescription>
@@ -63,53 +63,59 @@ export default async function ProjectsPage() {
           </EmptySectionDescription>
           <EmptySectionLink href="#">New Project</EmptySectionLink>
         </EmptySection>
-      </Centered>
+      </PageContainer>
     );
   }
 
   return (
-    <PageGrid>
-      <ViewModeProvider>
-        <ToolbarDesktop>
-          <FiltersSideSheetTrigger
-            filtersForm={
-              <Suspense fallback={<FiltersFormSkeleton />}>
-                {projectFiltersForm}
-              </Suspense>
-            }
-          />
-          <ProjectActionsMenuTrigger />
-          <ViewModeToggleButtonGroup className="ml-auto" />
-          <Button
-            label="New Project"
-            iconLeft={<Plus size={16} strokeWidth={1.5} absoluteStrokeWidth />}
-          />
-        </ToolbarDesktop>
+    <PageContainer>
+      <PageGrid>
+        <ViewModeProvider>
+          <ToolbarDesktop>
+            <FiltersSideSheetTrigger
+              filtersForm={
+                <Suspense fallback={<FiltersFormSkeleton />}>
+                  {projectFiltersForm}
+                </Suspense>
+              }
+            />
+            <ProjectActionsMenuTrigger />
+            <ViewModeToggleButtonGroup className="ml-auto" />
+            <Button
+              label="New Project"
+              iconLeft={
+                <Plus size={16} strokeWidth={1.5} absoluteStrokeWidth />
+              }
+            />
+          </ToolbarDesktop>
 
-        <ToolbarMobileTop>
-          <ToolbarMobileHeading>Projects</ToolbarMobileHeading>
-          <FiltersBottomSheetTrigger
-            filtersForm={
-              <Suspense fallback={<FiltersFormSkeleton />}>
-                {projectFiltersForm}
-              </Suspense>
-            }
-          />
-          <ProjectActionsMenuTrigger />
-        </ToolbarMobileTop>
+          <ToolbarMobileTop>
+            <ToolbarMobileHeading>Projects</ToolbarMobileHeading>
+            <FiltersBottomSheetTrigger
+              filtersForm={
+                <Suspense fallback={<FiltersFormSkeleton />}>
+                  {projectFiltersForm}
+                </Suspense>
+              }
+            />
+            <ProjectActionsMenuTrigger />
+          </ToolbarMobileTop>
 
-        <ToolbarMobileBottom>
-          <ViewModeToggleButtonGroup />
-          <Button
-            label="New Project"
-            iconLeft={<Plus size={16} strokeWidth={1.5} absoluteStrokeWidth />}
+          <ToolbarMobileBottom>
+            <ViewModeToggleButtonGroup />
+            <Button
+              label="New Project"
+              iconLeft={
+                <Plus size={16} strokeWidth={1.5} absoluteStrokeWidth />
+              }
+            />
+          </ToolbarMobileBottom>
+          <ViewModeContainer
+            list={<ProjectList projects={projects} />}
+            grid={<ProjectGrid projects={projects} />}
           />
-        </ToolbarMobileBottom>
-        <ViewModeContainer
-          list={<ProjectList projects={projects} />}
-          grid={<ProjectGrid projects={projects} />}
-        />
-      </ViewModeProvider>
-    </PageGrid>
+        </ViewModeProvider>
+      </PageGrid>
+    </PageContainer>
   );
 }

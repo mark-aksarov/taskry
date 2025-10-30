@@ -1,6 +1,13 @@
-export function PageGrid({ children }: { children: React.ReactNode }) {
+import { twMerge } from "tailwind-merge";
+
+interface PageGridProps {
+  className?: string;
+  children: React.ReactNode;
+}
+
+export function PageGrid({ className, children }: PageGridProps) {
   return (
-    <div className="flex min-h-full flex-col max-md:gap-4 md:gap-6">
+    <div className={twMerge("flex flex-col max-md:gap-4 md:gap-6", className)}>
       {children}
     </div>
   );

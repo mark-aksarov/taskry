@@ -6,7 +6,7 @@ export async function ProfileTaskList() {
   const tasks = await getTasks("BKs42HvVDEZFoaJUmTqf1gTN0K8pUFjI");
 
   return (
-    <List className="md:gap-0">
+    <List className="md:gap-0 md:px-6">
       {tasks.map((task) => (
         <ProfileTaskListItem key={task.id} task={task} />
       ))}

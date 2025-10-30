@@ -8,7 +8,7 @@ export const styles = tv({
   extend: focusRing,
   base: [
     baseButtonStyles.base,
-    "not:focus-visible:outline-0 w-full gap-4 px-4 py-3 text-sm font-bold text-black focus-visible:outline-2 dark:text-white",
+    "not:focus-visible:outline-0 gap-4 px-4 py-3 text-sm font-bold text-black focus-visible:outline-2 dark:text-white",
   ],
   variants: {
     variant: {

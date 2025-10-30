@@ -8,6 +8,7 @@ import { getNotifications } from "@/lib/queries/notification";
 import { notificationsMock } from "@/lib/data/__mocks__/notifications";
 import { positionsMock } from "@/lib/data/__mocks__/positions";
 import { usePathname } from "next/navigation";
+import { default as PageLoading } from "./loading";
 
 const meta = {
   title: "components/pages/Team",
@@ -31,20 +32,12 @@ type Story = StoryObj<typeof TeamPage>;
 
 export const Default: Story = {};
 
+export const Loading: Story = {
+  render: () => <PageLoading />,
+};
+
 export const WithNoUsers = {
   beforeEach: () => {
     mocked(getUsers).mockReturnValue(new Promise((res) => res([])));
-  },
-} satisfies Story;
-
-export const Tablet: Story = {
-  globals: {
-    viewport: { value: "ipad", isRotated: true },
-  },
-};
-
-export const Mobile = {
-  globals: {
-    viewport: { value: "iphone6", isRotated: false },
   },
 } satisfies Story;

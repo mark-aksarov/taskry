@@ -1,6 +1,5 @@
 import { getTasks } from "@/lib/queries/task";
 import { ProfileTaskList } from "../ProfileTaskList";
-import { Centered } from "@/components/common/Centered";
 import {
   EmptySection,
   EmptySectionDescription,
@@ -8,12 +7,12 @@ import {
   EmptySectionLink,
 } from "@/components/common/EmptySection";
 
-export async function ProfileTasks() {
+export async function ProfileTasksDesktop() {
   const tasks = await getTasks("BKs42HvVDEZFoaJUmTqf1gTN0K8pUFjI");
 
   if (!tasks.length) {
     return (
-      <Centered>
+      <div className="flex flex-auto items-center justify-center">
         <EmptySection>
           <EmptySectionHeading className="max-md:text-3xl md:text-4xl">
             No tasks yet
@@ -23,13 +22,9 @@ export async function ProfileTasks() {
           </EmptySectionDescription>
           <EmptySectionLink href="#">New Task</EmptySectionLink>
         </EmptySection>
-      </Centered>
+      </div>
     );
   }
 
-  return (
-    <>
-      <ProfileTaskList />
-    </>
-  );
+  return <ProfileTaskList />;
 }

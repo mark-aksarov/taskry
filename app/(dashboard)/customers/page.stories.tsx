@@ -11,6 +11,7 @@ import { getCustomers } from "@/lib/queries/customers";
 import { customersMock } from "@/lib/data/__mocks__/customers";
 import { companiesMock } from "@/lib/data/__mocks__/companies";
 import { usePathname } from "next/navigation";
+import { default as PageLoading } from "./loading";
 
 const meta = {
   title: "components/pages/Customers",
@@ -37,20 +38,12 @@ type Story = StoryObj<typeof CustomersPage>;
 
 export const Default: Story = {};
 
+export const Loading: Story = {
+  render: () => <PageLoading />,
+};
+
 export const WithNoCustomers = {
   beforeEach: () => {
     mocked(getCustomers).mockReturnValue(new Promise((res) => res([])));
-  },
-} satisfies Story;
-
-export const Tablet: Story = {
-  globals: {
-    viewport: { value: "ipad", isRotated: true },
-  },
-};
-
-export const Mobile = {
-  globals: {
-    viewport: { value: "iphone6", isRotated: false },
   },
 } satisfies Story;

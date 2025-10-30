@@ -6,7 +6,7 @@ import { focusRing, RACLink } from "@/components/ui";
 
 const styles = tv({
   extend: focusRing,
-  base: "flex shrink-0 items-center gap-2.5",
+  base: "flex items-center gap-2.5",
 });
 
 export const ProfileLink = () => {

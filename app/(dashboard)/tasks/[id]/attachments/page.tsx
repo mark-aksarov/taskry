@@ -8,13 +8,15 @@ import {
 } from "@/components/common/Detail";
 import { DetailPanel } from "@/components/common/DetailPanel";
 import { List } from "@/components/common/List";
+import { PageContainer } from "@/components/common/PageContainer";
 import { PageGrid } from "@/components/common/PageGrid";
 import { Repeat } from "@/components/common/Repeat";
 import {
   ToolbarMobileHeading,
   ToolbarMobileTop,
 } from "@/components/common/Toolbar";
-import { TaskAttachments } from "@/components/tasks/TaskAttachments";
+import { TaskAttachmentsDesktop } from "@/components/tasks/TaskAttachmentsDesktop";
+import { TaskAttachmentsMobile } from "@/components/tasks/TaskAttachmentsMobile";
 import { TaskDetailNavigation } from "@/components/tasks/TaskDetailNavigation";
 import {
   TaskDetailPanelHeader,
@@ -31,49 +33,52 @@ export default async function TaskAttachmentsPage({
 
   return (
     <>
-      <DetailCard className="max-md:hidden">
-        <DetailCardLeft>
-          <DetailCardHeader className="pr-4">
-            <DetailCardTitle>Attachments</DetailCardTitle>
-            <AttachmentActionsMenuTrigger />
-          </DetailCardHeader>
-          <Suspense
-            fallback={
-              <List className="gap-0">
-                <Repeat items={10} renderItem={() => <AttachmentListItem />} />
-              </List>
-            }
-          >
-            <TaskAttachments taskId={+id} />
-          </Suspense>
-        </DetailCardLeft>
+      <PageContainer className="max-md:hidden">
+        <DetailCard>
+          <DetailCardLeft>
+            <DetailCardHeader className="pr-4">
+              <DetailCardTitle>Attachments</DetailCardTitle>
+              <AttachmentActionsMenuTrigger />
+            </DetailCardHeader>
+            <Suspense
+              fallback={
+                <List className="gap-0">
+                  <Repeat
+                    items={10}
+                    renderItem={() => <AttachmentListItem />}
+                  />
+                </List>
+              }
+            >
+              <TaskAttachmentsDesktop taskId={+id} />
+            </Suspense>
+          </DetailCardLeft>
 
-        <DetailPanel>
-          <Suspense fallback={<TaskDetailPanelHeaderSkeleton />}>
-            <TaskDetailPanelHeader id={+id} />
-          </Suspense>
-          <TaskDetailNavigation />
-        </DetailPanel>
-      </DetailCard>
+          <DetailPanel>
+            <Suspense fallback={<TaskDetailPanelHeaderSkeleton />}>
+              <TaskDetailPanelHeader id={+id} />
+            </Suspense>
+            <TaskDetailNavigation />
+          </DetailPanel>
+        </DetailCard>
+      </PageContainer>
 
-      <div className="md:hidden">
-        <PageGrid>
-          <ToolbarMobileTop>
-            <ToolbarMobileHeading>Subtasks</ToolbarMobileHeading>
-            <AttachmentActionsMenuTrigger />
-          </ToolbarMobileTop>
-
-          <Suspense
-            fallback={
+      <Suspense
+        fallback={
+          <PageContainer className="md:hidden">
+            <PageGrid>
+              <ToolbarMobileTop>
+                <ToolbarMobileHeading>Assigned tasks</ToolbarMobileHeading>
+              </ToolbarMobileTop>
               <List>
                 <Repeat items={10} renderItem={() => <AttachmentListItem />} />
               </List>
-            }
-          >
-            <TaskAttachments taskId={+id} />
-          </Suspense>
-        </PageGrid>
-      </div>
+            </PageGrid>
+          </PageContainer>
+        }
+      >
+        <TaskAttachmentsMobile taskId={+id} />
+      </Suspense>
     </>
   );
 }

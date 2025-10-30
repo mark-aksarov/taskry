@@ -28,7 +28,7 @@ export const SearchForm = () => {
   };
 
   return (
-    <RACForm onSubmit={handleSubmit} className="w-full max-w-[360px] shrink-1">
+    <RACForm onSubmit={handleSubmit} className="max-w-[360px] flex-auto">
       <SearchField
         aria-label="Search"
         placeholder="Search"

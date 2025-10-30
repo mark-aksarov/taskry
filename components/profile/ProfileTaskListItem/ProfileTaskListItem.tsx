@@ -41,7 +41,7 @@ export const ProfileTaskListItem = ({ task }: { task?: TaskPreview }) => {
   }, [task?.deadline, locale]);
 
   return (
-    <ListItem className="border-gray-300 md:rounded-none md:pr-4 md:pl-6 md:shadow-none md:not-last:border-b-1 dark:border-gray-600">
+    <ListItem className="border-gray-300 md:rounded-none md:px-0 md:py-4 md:shadow-none md:not-last:border-b-1 dark:border-gray-600">
       {task && <Checkbox aria-label="task checkbox" />}
 
       {/* --- Task Details --- */}
@@ -60,9 +60,12 @@ export const ProfileTaskListItem = ({ task }: { task?: TaskPreview }) => {
       <div className="flex items-center gap-2">
         {/* --- Comments --- */}
         {!task ? (
-          <Skeleton className="w-[3.5rem] @max-md:hidden" />
+          <Skeleton className="w-[3.75rem] @max-md:hidden" />
         ) : (
-          <Badge color="gray" className="px-3 py-1.5 @max-md:hidden">
+          <Badge
+            color="gray"
+            className="w-[3.75rem] px-3 py-1.5 @max-md:hidden"
+          >
             <MessagesSquare size={16} strokeWidth={1.5} absoluteStrokeWidth />
             {task._count.comments}
           </Badge>
@@ -71,9 +74,12 @@ export const ProfileTaskListItem = ({ task }: { task?: TaskPreview }) => {
         <div className="flex items-center gap-1">
           {/* --- Subtasks --- */}
           {!task ? (
-            <Skeleton className="w-[3.5rem] @max-md:hidden" />
+            <Skeleton className="w-[3.75rem] @max-md:hidden" />
           ) : (
-            <Badge color="gray" className="px-3 py-1.5 @max-md:hidden">
+            <Badge
+              color="gray"
+              className="w-[3.75rem] px-3 py-1.5 @max-md:hidden"
+            >
               <ListTodo size={16} strokeWidth={1.5} absoluteStrokeWidth />
               {task._count.subtasks}
             </Badge>

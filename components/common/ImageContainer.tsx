@@ -1,7 +1,7 @@
 import { Skeleton } from "@/components/ui";
 import { twMerge } from "tailwind-merge";
 
-const styles = "rounded-full overflow-hidden relative shrink-0";
+const styles = "rounded-full overflow-hidden relative flex-none";
 
 interface ImageContainerProps {
   className?: string;

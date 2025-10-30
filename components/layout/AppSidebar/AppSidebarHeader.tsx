@@ -3,5 +3,5 @@ export const AppSidebarHeader = ({
 }: {
   children: React.ReactNode;
 }) => {
-  return <div className="p-4 pl-8">{children}</div>;
+  return <div className="p-4 pb-2 pl-8">{children}</div>;
 };

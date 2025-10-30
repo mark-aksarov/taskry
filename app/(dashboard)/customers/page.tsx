@@ -2,7 +2,6 @@ import { Suspense } from "react";
 import { Plus } from "lucide-react";
 import { Button } from "@/components/ui";
 
-import { Centered } from "@/components/common/Centered";
 import {
   EmptySection,
   EmptySectionDescription,
@@ -31,6 +30,7 @@ import { CustomerGrid } from "@/components/customer/CustomerGrid";
 import { FiltersFormSkeleton } from "@/components/common/FiltersFormSkeleton";
 import { CustomerFiltersForm } from "@/components/customer/CustomerFiltersForm";
 import { CustomerActionsMenuTrigger } from "@/components/customer/CustomerActionsMenuTrigger";
+import { PageContainer } from "@/components/common/PageContainer";
 
 export default async function CustomersPage() {
   const companiesPromise = getCompanies(1);
@@ -46,7 +46,7 @@ export default async function CustomersPage() {
 
   if (!customers.length) {
     return (
-      <Centered>
+      <PageContainer fullscreen centered>
         <EmptySection>
           <EmptySectionHeading>No Customers yet</EmptySectionHeading>
           <EmptySectionDescription>
@@ -54,53 +54,59 @@ export default async function CustomersPage() {
           </EmptySectionDescription>
           <EmptySectionLink href="#">New Customer</EmptySectionLink>
         </EmptySection>
-      </Centered>
+      </PageContainer>
     );
   }
 
   return (
-    <PageGrid>
-      <ViewModeProvider>
-        <ToolbarDesktop>
-          <FiltersSideSheetTrigger
-            filtersForm={
-              <Suspense fallback={<FiltersFormSkeleton />}>
-                {customersFiltersForm}
-              </Suspense>
-            }
-          />
-          <CustomerActionsMenuTrigger />
-          <ViewModeToggleButtonGroup className="ml-auto" />
-          <Button
-            label="New User"
-            iconLeft={<Plus size={16} strokeWidth={1.5} absoluteStrokeWidth />}
-          />
-        </ToolbarDesktop>
+    <PageContainer>
+      <PageGrid>
+        <ViewModeProvider>
+          <ToolbarDesktop>
+            <FiltersSideSheetTrigger
+              filtersForm={
+                <Suspense fallback={<FiltersFormSkeleton />}>
+                  {customersFiltersForm}
+                </Suspense>
+              }
+            />
+            <CustomerActionsMenuTrigger />
+            <ViewModeToggleButtonGroup className="ml-auto" />
+            <Button
+              label="New User"
+              iconLeft={
+                <Plus size={16} strokeWidth={1.5} absoluteStrokeWidth />
+              }
+            />
+          </ToolbarDesktop>
 
-        <ToolbarMobileTop>
-          <ToolbarMobileHeading>Users</ToolbarMobileHeading>
-          <FiltersBottomSheetTrigger
-            filtersForm={
-              <Suspense fallback={<FiltersFormSkeleton />}>
-                {customersFiltersForm}
-              </Suspense>
-            }
-          />
-          <CustomerActionsMenuTrigger />
-        </ToolbarMobileTop>
+          <ToolbarMobileTop>
+            <ToolbarMobileHeading>Users</ToolbarMobileHeading>
+            <FiltersBottomSheetTrigger
+              filtersForm={
+                <Suspense fallback={<FiltersFormSkeleton />}>
+                  {customersFiltersForm}
+                </Suspense>
+              }
+            />
+            <CustomerActionsMenuTrigger />
+          </ToolbarMobileTop>
 
-        <ToolbarMobileBottom>
-          <ViewModeToggleButtonGroup />
-          <Button
-            label="New User"
-            iconLeft={<Plus size={16} strokeWidth={1.5} absoluteStrokeWidth />}
+          <ToolbarMobileBottom>
+            <ViewModeToggleButtonGroup />
+            <Button
+              label="New User"
+              iconLeft={
+                <Plus size={16} strokeWidth={1.5} absoluteStrokeWidth />
+              }
+            />
+          </ToolbarMobileBottom>
+          <ViewModeContainer
+            list={<CustomerList customers={customers} />}
+            grid={<CustomerGrid customers={customers} />}
           />
-        </ToolbarMobileBottom>
-        <ViewModeContainer
-          list={<CustomerList customers={customers} />}
-          grid={<CustomerGrid customers={customers} />}
-        />
-      </ViewModeProvider>
-    </PageGrid>
+        </ViewModeProvider>
+      </PageGrid>
+    </PageContainer>
   );
 }

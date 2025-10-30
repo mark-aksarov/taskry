@@ -13,14 +13,17 @@ import {
   ToolbarMobileHeading,
   ToolbarMobileTop,
 } from "@/components/common/Toolbar";
-import { TaskComments } from "@/components/tasks/TaskComments/TaskComments";
-import { TaskCommentsMessageInput } from "@/components/tasks/TaskCommentsMessageInput";
+import { TaskCommentsMessageInputDesktop } from "@/components/tasks/TaskCommentsMessageInputDesktop";
 import { TaskDetailNavigation } from "@/components/tasks/TaskDetailNavigation";
 import {
   TaskDetailPanelHeader,
   TaskDetailPanelHeaderSkeleton,
 } from "@/components/tasks/TaskDetailPanelHeader";
 import { Suspense } from "react";
+import { PageContainer } from "@/components/common/PageContainer";
+import { TaskCommentsDesktop } from "@/components/tasks/TaskCommentsDesktop";
+import { TaskCommentsMobile } from "@/components/tasks/TaskCommentsMobile/TaskCommentsMobile";
+import { TaskCommentsMessageInputMobile } from "@/components/tasks/TaskCommentsMessageInputMobile";
 
 export default async function TaskCommentsPage({
   params,
@@ -31,50 +34,51 @@ export default async function TaskCommentsPage({
 
   return (
     <>
-      <DetailCard className="max-md:hidden">
-        <DetailCardLeft>
-          <DetailCardHeader>
-            <DetailCardTitle>Task comments</DetailCardTitle>
-          </DetailCardHeader>
-          <div className="p-6 pb-2">
-            <TaskCommentsMessageInput />
-            <Suspense
-              fallback={
-                <List className="gap-0">
-                  <Repeat items={10} renderItem={() => <CommentItem />} />
-                </List>
-              }
-            >
-              <TaskComments taskId={+id} />
+      <PageContainer className="max-md:hidden">
+        <DetailCard>
+          <DetailCardLeft>
+            <DetailCardHeader>
+              <DetailCardTitle>Task comments</DetailCardTitle>
+            </DetailCardHeader>
+            <div className="flex flex-auto flex-col p-6 pb-2">
+              <TaskCommentsMessageInputDesktop />
+              <Suspense
+                fallback={
+                  <List className="gap-0">
+                    <Repeat items={10} renderItem={() => <CommentItem />} />
+                  </List>
+                }
+              >
+                <TaskCommentsDesktop taskId={+id} />
+              </Suspense>
+            </div>
+          </DetailCardLeft>
+
+          <DetailPanel>
+            <Suspense fallback={<TaskDetailPanelHeaderSkeleton />}>
+              <TaskDetailPanelHeader id={+id} />
             </Suspense>
-          </div>
-        </DetailCardLeft>
+            <TaskDetailNavigation />
+          </DetailPanel>
+        </DetailCard>
+      </PageContainer>
 
-        <DetailPanel>
-          <Suspense fallback={<TaskDetailPanelHeaderSkeleton />}>
-            <TaskDetailPanelHeader id={+id} />
-          </Suspense>
-          <TaskDetailNavigation />
-        </DetailPanel>
-      </DetailCard>
-
-      <div className="md:hidden">
-        <PageGrid>
-          <ToolbarMobileTop>
-            <ToolbarMobileHeading>Task comments</ToolbarMobileHeading>
-          </ToolbarMobileTop>
-          <TaskCommentsMessageInput />
-          <Suspense
-            fallback={
-              <List className="gap-4">
+      <Suspense
+        fallback={
+          <PageContainer className="md:hidden">
+            <PageGrid>
+              <ToolbarMobileTop>
+                <ToolbarMobileHeading>Task comments</ToolbarMobileHeading>
+              </ToolbarMobileTop>
+              <List>
                 <Repeat items={10} renderItem={() => <CommentItem />} />
               </List>
-            }
-          >
-            <TaskComments taskId={+id} />
-          </Suspense>
-        </PageGrid>
-      </div>
+            </PageGrid>
+          </PageContainer>
+        }
+      >
+        <TaskCommentsMobile taskId={+id} />
+      </Suspense>
     </>
   );
 }

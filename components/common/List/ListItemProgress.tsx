@@ -1,7 +1,7 @@
 import { ProgressBar, ProgressBarProps, Skeleton } from "@/components/ui";
 import { twMerge } from "tailwind-merge";
 
-const progressStyles = "w-[10rem] @max-md:hidden";
+const progressStyles = "w-[8rem] @max-md:hidden";
 
 interface ListItemProgressProps extends Omit<ProgressBarProps, "className"> {
   className?: string;

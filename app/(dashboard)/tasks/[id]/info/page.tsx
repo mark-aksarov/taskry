@@ -8,6 +8,8 @@ import {
 } from "@/components/common/Toolbar";
 import { TaskDetailCard } from "@/components/tasks/TaskDetailCard";
 import { getTask } from "@/lib/queries/task";
+import { PageContainer } from "@/components/common/PageContainer";
+import { TaskDetailPanelHeader } from "@/components/tasks/TaskDetailPanelHeader";
 
 export default async function TaskInfoPage({
   params,
@@ -18,21 +20,20 @@ export default async function TaskInfoPage({
   const taskPromise = getTask(+id);
 
   return (
-    <>
+    <PageContainer>
       <TaskDetailCard id={+id} />
 
-      <div className="md:hidden">
-        <PageGrid>
-          <ToolbarMobileTop>
-            <ToolbarMobileHeading>Task Information</ToolbarMobileHeading>
-          </ToolbarMobileTop>
-          <Card>
-            <Suspense fallback={<TaskInfoSkeleton />}>
-              <TaskInfo taskPromise={taskPromise} />
-            </Suspense>
-          </Card>
-        </PageGrid>
-      </div>
-    </>
+      <PageGrid className="md:hidden">
+        <ToolbarMobileTop>
+          <ToolbarMobileHeading>Task Information</ToolbarMobileHeading>
+        </ToolbarMobileTop>
+        <Card className="flex flex-col gap-4">
+          <TaskDetailPanelHeader id={+id} />
+          <Suspense fallback={<TaskInfoSkeleton />}>
+            <TaskInfo taskPromise={taskPromise} />
+          </Suspense>
+        </Card>
+      </PageGrid>
+    </PageContainer>
   );
 }

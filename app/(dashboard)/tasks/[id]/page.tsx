@@ -1,5 +1,6 @@
 import { Card } from "@/components/common/Card";
 import { DetailPanel } from "@/components/common/DetailPanel";
+import { PageContainer } from "@/components/common/PageContainer";
 import { PageGrid } from "@/components/common/PageGrid";
 import {
   ToolbarMobileHeading,
@@ -21,24 +22,22 @@ export default async function TaskPage({
   const { id } = await params;
 
   return (
-    <>
+    <PageContainer>
       <TaskDetailCard id={+id} />
 
-      <div className="md:hidden">
-        <PageGrid>
-          <ToolbarMobileTop>
-            <ToolbarMobileHeading>Task Settings</ToolbarMobileHeading>
-          </ToolbarMobileTop>
-          <Card>
-            <DetailPanel>
-              <Suspense fallback={<TaskDetailPanelHeaderSkeleton />}>
-                <TaskDetailPanelHeader id={+id} />
-              </Suspense>
-              <TaskDetailNavigation />
-            </DetailPanel>
-          </Card>
-        </PageGrid>
-      </div>
-    </>
+      <PageGrid className="md:hidden">
+        <ToolbarMobileTop>
+          <ToolbarMobileHeading>Task Settings</ToolbarMobileHeading>
+        </ToolbarMobileTop>
+        <Card>
+          <DetailPanel>
+            <Suspense fallback={<TaskDetailPanelHeaderSkeleton />}>
+              <TaskDetailPanelHeader id={+id} />
+            </Suspense>
+            <TaskDetailNavigation />
+          </DetailPanel>
+        </Card>
+      </PageGrid>
+    </PageContainer>
   );
 }

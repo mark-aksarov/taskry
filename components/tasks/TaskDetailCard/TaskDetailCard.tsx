@@ -18,7 +18,7 @@ export async function TaskDetailCard({ id }: { id: number }) {
   const taskPromise = getTask(id);
 
   return (
-    <DetailCard className="h-full max-md:hidden">
+    <DetailCard className="max-md:hidden">
       <DetailCardLeft>
         <DetailCardHeader>
           <DetailCardTitle>Task Information</DetailCardTitle>

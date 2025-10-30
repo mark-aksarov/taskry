@@ -34,7 +34,6 @@ export const ActiveTasksCard = async () => {
 
   return (
     <DashboardCard
-      className="w-full"
       heading={<CardHeading>Active Tasks</CardHeading>}
       icon={
         <DashboardCardIcon color="orange">
@@ -49,7 +48,6 @@ export const ActiveTasksCard = async () => {
 
 export const ActiveTasksCardSkeleton = () => (
   <DashboardCard
-    className="w-full"
     heading={<CardHeading>Active Tasks</CardHeading>}
     icon={
       <DashboardCardIcon color="orange">

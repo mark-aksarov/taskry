@@ -6,6 +6,7 @@ import {
 } from "@/components/common/Detail";
 import { DetailPanel } from "@/components/common/DetailPanel";
 import { List } from "@/components/common/List";
+import { PageContainer } from "@/components/common/PageContainer";
 import { PageGrid } from "@/components/common/PageGrid";
 import { Repeat } from "@/components/common/Repeat";
 import {
@@ -19,7 +20,8 @@ import {
   TaskDetailPanelHeader,
   TaskDetailPanelHeaderSkeleton,
 } from "@/components/tasks/TaskDetailPanelHeader";
-import { TaskSubtasks } from "@/components/tasks/TaskSubtasks";
+import { TaskSubtasksDesktop } from "@/components/tasks/TaskSubtasksDesktop";
+import { TaskSubtasksMobile } from "@/components/tasks/TaskSubtasksMobile";
 import { Suspense } from "react";
 
 export default async function TaskSubtasksPage({
@@ -31,49 +33,49 @@ export default async function TaskSubtasksPage({
 
   return (
     <>
-      <DetailCard className="max-md:hidden">
-        <DetailCardLeft>
-          <DetailCardHeader className="pr-4">
-            <DetailCardTitle>Subtasks</DetailCardTitle>
-            <SubtaskActionsMenuTrigger />
-          </DetailCardHeader>
-          <Suspense
-            fallback={
-              <List className="gap-0">
-                <Repeat items={10} renderItem={() => <SubtaskListItem />} />
-              </List>
-            }
-          >
-            <TaskSubtasks taskId={+id} />
-          </Suspense>
-        </DetailCardLeft>
+      <PageContainer className="max-md:hidden">
+        <DetailCard>
+          <DetailCardLeft>
+            <DetailCardHeader className="pr-4">
+              <DetailCardTitle>Subtasks</DetailCardTitle>
+              <SubtaskActionsMenuTrigger />
+            </DetailCardHeader>
+            <Suspense
+              fallback={
+                <List className="gap-0">
+                  <Repeat items={10} renderItem={() => <SubtaskListItem />} />
+                </List>
+              }
+            >
+              <TaskSubtasksDesktop taskId={+id} />
+            </Suspense>
+          </DetailCardLeft>
 
-        <DetailPanel>
-          <Suspense fallback={<TaskDetailPanelHeaderSkeleton />}>
-            <TaskDetailPanelHeader id={+id} />
-          </Suspense>
-          <TaskDetailNavigation />
-        </DetailPanel>
-      </DetailCard>
+          <DetailPanel>
+            <Suspense fallback={<TaskDetailPanelHeaderSkeleton />}>
+              <TaskDetailPanelHeader id={+id} />
+            </Suspense>
+            <TaskDetailNavigation />
+          </DetailPanel>
+        </DetailCard>
+      </PageContainer>
 
-      <div className="md:hidden">
-        <PageGrid>
-          <ToolbarMobileTop>
-            <ToolbarMobileHeading>Subtasks</ToolbarMobileHeading>
-            <SubtaskActionsMenuTrigger />
-          </ToolbarMobileTop>
-
-          <Suspense
-            fallback={
+      <Suspense
+        fallback={
+          <PageContainer className="md:hidden">
+            <PageGrid>
+              <ToolbarMobileTop>
+                <ToolbarMobileHeading>Assigned tasks</ToolbarMobileHeading>
+              </ToolbarMobileTop>
               <List>
                 <Repeat items={10} renderItem={() => <SubtaskListItem />} />
               </List>
-            }
-          >
-            <TaskSubtasks taskId={+id} />
-          </Suspense>
-        </PageGrid>
-      </div>
+            </PageGrid>
+          </PageContainer>
+        }
+      >
+        <TaskSubtasksMobile taskId={+id} />
+      </Suspense>
     </>
   );
 }

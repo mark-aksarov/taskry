@@ -37,7 +37,6 @@ export const ActiveProjectsCard = async () => {
 
   return (
     <DashboardCard
-      className="w-full"
       heading={<CardHeading>Active Projects</CardHeading>}
       icon={
         <DashboardCardIcon color="blue">
@@ -57,7 +56,6 @@ export const ActiveProjectsCard = async () => {
 
 export const ActiveProjectsCardSkeleton = () => (
   <DashboardCard
-    className="w-full"
     heading={<CardHeading>Active Projects</CardHeading>}
     icon={
       <DashboardCardIcon color="blue">

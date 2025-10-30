@@ -90,7 +90,7 @@ export function TaskGridItem({ task }: { task?: TaskPreview }) {
         {!task ? (
           <GridItemInfoSkeleton className="max-sm:w-full max-sm:items-center" />
         ) : (
-          <GridItemInfo className="max-sm:w-full max-sm:items-center sm:flex-1">
+          <GridItemInfo className="max-sm:w-full max-sm:items-center sm:flex-auto">
             <GridItemTitle>
               <Link href={`/tasks/${task.id}`}>{task.title}</Link>
             </GridItemTitle>

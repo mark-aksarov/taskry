@@ -34,7 +34,7 @@ const preview: Preview = {
 
   decorators: [
     (Story) => (
-      <div className="bg-white dark:bg-gray-900">
+      <div className="bg-gray-100 dark:bg-gray-900">
         <Story />
       </div>
     ),

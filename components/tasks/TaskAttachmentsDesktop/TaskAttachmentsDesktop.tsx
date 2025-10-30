@@ -1,4 +1,3 @@
-import { Centered } from "@/components/common/Centered";
 import {
   EmptySection,
   EmptySectionDescription,
@@ -8,12 +7,12 @@ import {
 import { AttachmentList } from "@/components/attachments/AttachmentList";
 import { getAttachmentsByTask } from "@/lib/queries/attachments";
 
-export async function TaskAttachments({ taskId }: { taskId: number }) {
+export async function TaskAttachmentsDesktop({ taskId }: { taskId: number }) {
   const attachments = await getAttachmentsByTask(taskId);
 
   if (!attachments.length) {
     return (
-      <Centered>
+      <div className="flex flex-auto items-center justify-center">
         <EmptySection>
           <EmptySectionHeading className="max-md:text-3xl md:text-4xl">
             No attachments yet
@@ -23,7 +22,7 @@ export async function TaskAttachments({ taskId }: { taskId: number }) {
           </EmptySectionDescription>
           <EmptySectionLink href="#">Add Attachment</EmptySectionLink>
         </EmptySection>
-      </Centered>
+      </div>
     );
   }
 

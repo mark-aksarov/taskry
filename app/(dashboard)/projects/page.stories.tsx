@@ -12,6 +12,7 @@ import { getNotifications } from "@/lib/queries/notification";
 import { notificationsMock } from "@/lib/data/__mocks__/notifications";
 import { projectsMock } from "@/lib/data/__mocks__/projects";
 import { usePathname } from "next/navigation";
+import { default as PageLoading } from "./loading";
 
 const meta = {
   title: "components/pages/Projects",
@@ -41,20 +42,12 @@ type Story = StoryObj<typeof ProjectsPage>;
 
 export const Default: Story = {};
 
+export const Loading: Story = {
+  render: () => <PageLoading />,
+};
+
 export const WithNoProjects = {
   beforeEach: () => {
     mocked(getProjects).mockReturnValue(new Promise((res) => res([])));
-  },
-} satisfies Story;
-
-export const Tablet: Story = {
-  globals: {
-    viewport: { value: "ipad", isRotated: true },
-  },
-};
-
-export const Mobile = {
-  globals: {
-    viewport: { value: "iphone6", isRotated: false },
   },
 } satisfies Story;

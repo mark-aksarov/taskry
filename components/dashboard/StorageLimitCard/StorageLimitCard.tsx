@@ -14,7 +14,6 @@ export const StorageLimitCard = async () => {
 
   return (
     <DashboardCard
-      className="w-full"
       heading={<CardHeading>Storage Limit</CardHeading>}
       icon={
         <DashboardCardIcon color="green">
@@ -36,7 +35,6 @@ export const StorageLimitCard = async () => {
 export const StorageLimitCardSkeleton = () => {
   return (
     <DashboardCard
-      className="w-full"
       heading={<CardHeading>Storage Limit</CardHeading>}
       icon={
         <DashboardCardIcon color="green">

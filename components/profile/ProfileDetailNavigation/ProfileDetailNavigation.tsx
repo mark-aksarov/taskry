@@ -40,7 +40,7 @@ export function ProfileDetailNavigation() {
         <NavigationButton
           isActive={pathname === "/profile/info" || pathname === "/profile"}
           variant="secondary"
-          href="/profile/info"
+          href="/profile"
         >
           <Info size={18} strokeWidth={1.5} absoluteStrokeWidth />
           Profile Information
