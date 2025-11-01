@@ -11,7 +11,7 @@ export const focusRing = tv({
 });
 
 export const itemStyles = tv({
-  base: "flex inline-flex w-full cursor-pointer items-center gap-4 px-4 py-3 text-sm text-black outline-none active:bg-gray-200 dark:text-white dark:active:bg-gray-700",
+  base: "inline-flex w-full cursor-pointer items-center gap-4 px-4 py-3 text-sm text-black outline-none active:bg-gray-200 dark:text-white dark:active:bg-gray-700",
   variants: {
     isHovered: {
       false: "bg-white dark:bg-gray-800",

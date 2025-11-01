@@ -2,7 +2,7 @@ import "server-only";
 
 import { cache } from "react";
 import prisma from "../prisma";
-import { TaskPreview } from "./types";
+import { TaskDetail, TaskPreview } from "./types";
 import { ACTIVE_TASK_STATUS_ID, DONE_TASK_STATUS_ID } from "./constants";
 
 export const getSubtasksByTask = cache(async (id: number) => {
@@ -11,7 +11,7 @@ export const getSubtasksByTask = cache(async (id: number) => {
   });
 });
 
-export const getTask = cache(async (id: number): Promise<TaskPreview> => {
+export const getTask = cache(async (id: number): Promise<TaskDetail> => {
   return await prisma.task.findUniqueOrThrow({
     where: { id },
     include: {
@@ -43,13 +43,16 @@ export const getTask = cache(async (id: number): Promise<TaskPreview> => {
       },
       subtasks: {
         select: {
+          id: true,
+          name: true,
           isDone: true,
         },
       },
-      _count: {
+      attachments: {
         select: {
-          comments: true,
-          subtasks: true,
+          id: true,
+          fileUrl: true,
+          fileName: true,
         },
       },
     },

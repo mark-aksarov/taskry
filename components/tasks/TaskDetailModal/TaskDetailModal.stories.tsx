@@ -1,7 +1,5 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { TaskDetailModal } from "./TaskDetailModal";
-import { TaskInfo } from "../TaskInfo";
-import { taskDetailMock } from "@/lib/data/__mocks__/tasks";
 import { Button, RACDialogTrigger } from "@/components/ui";
 
 const meta = {
@@ -17,11 +15,7 @@ const meta = {
     ),
   ],
   args: {
-    children: (
-      <TaskInfo
-        taskPromise={new Promise((resolve) => resolve(taskDetailMock))}
-      />
-    ),
+    taskId: 1,
   },
 } satisfies Meta<typeof TaskDetailModal>;
 

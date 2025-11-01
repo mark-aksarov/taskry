@@ -2,7 +2,6 @@ import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { DetailCard } from "./DetailCard";
 import { DetailCardHeader } from "./DetailCardHeader";
 import { DetailCardTitle } from "./DetailCardTitle";
-import { DetailCardBody } from "./DetailCardBody";
 import { DetailPanel } from "../DetailPanel";
 import { DetailCardLeft } from "./DetailCardLeft";
 
@@ -25,9 +24,7 @@ export const Default: Story = {
         <DetailCardHeader>
           <DetailCardTitle>Detail Card</DetailCardTitle>
         </DetailCardHeader>
-        <DetailCardBody className="flex flex-col gap-4 text-black dark:text-white">
-          Detail Card Body
-        </DetailCardBody>
+        <div className="p-6 text-black dark:text-white">Detail Card Body</div>
       </DetailCardLeft>
       <DetailPanel>
         <div className="text-black dark:text-white">Detail Panel</div>

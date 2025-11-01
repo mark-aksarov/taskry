@@ -13,15 +13,16 @@ import { Comment } from "@/lib/queries/types";
 import { useMemo } from "react";
 import { CommentItemContent } from "./CommentItemContent";
 import { Attachment, Attachments } from "@/components/attachments/Attachments";
-import { Link } from "@/components/ui";
-import { Card } from "@/components/common/Card";
+import { Link, Skeleton } from "@/components/ui";
+import { CommentItemActions } from "./CommentItemActions";
+import { CommentButton } from "../CommentButton";
+import { Heart, Reply } from "lucide-react";
 
 interface CommentItemProps {
   comment?: Comment;
-  renderActions?: () => React.ReactNode;
 }
 
-export function CommentItem({ comment, renderActions }: CommentItemProps) {
+export function CommentItem({ comment }: CommentItemProps) {
   const formattedDate = useMemo(() => {
     if (!comment) return null;
 
@@ -35,8 +36,10 @@ export function CommentItem({ comment, renderActions }: CommentItemProps) {
     });
   }, [comment]);
 
+  const isLiked = comment ? comment.likes.length > 0 : false;
+
   return (
-    <Card className="flex w-full flex-col gap-4 border-gray-300 max-md:rounded-xl md:rounded-none md:px-0 md:shadow-none md:not-last:border-b-1 dark:border-gray-600">
+    <div className="flex flex-col gap-4 border-gray-300 not-last:border-b-1 not-last:pb-4 dark:border-gray-600">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
           {!comment ? (
@@ -88,10 +91,35 @@ export function CommentItem({ comment, renderActions }: CommentItemProps) {
                 ))}
               </Attachments>
             )}
-            {renderActions && renderActions()}
+            <CommentItemActions>
+              {!comment ? (
+                <>
+                  <Skeleton className="h-[1rem] w-[3.5rem]" />
+                  <Skeleton className="h-[1rem] w-[2.25rem]" />
+                </>
+              ) : (
+                <>
+                  <CommentButton
+                    icon={
+                      <Reply size={16} strokeWidth={1.5} absoluteStrokeWidth />
+                    }
+                    label="Reply"
+                  />
+                  <CommentButton
+                    icon={
+                      <Heart size={16} strokeWidth={1.5} absoluteStrokeWidth />
+                    }
+                    label={comment._count.likes}
+                    aria-label="Like comment"
+                    color={isLiked ? "red" : "default"}
+                    fill={isLiked}
+                  />
+                </>
+              )}
+            </CommentItemActions>
           </>
         )}
       </CommentItemContent>
-    </Card>
+    </div>
   );
 }

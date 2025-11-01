@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { CommentButton } from "./CommentButton";
-import { Heart, MessageSquare } from "lucide-react";
+import { Heart, MessageSquare, Reply } from "lucide-react";
 import React from "react";
 
 const iconOptions = ["Message", "Heart"];
@@ -23,8 +23,8 @@ const meta = {
     },
   },
   args: {
-    icon: <MessageSquare size={16} strokeWidth={1.5} absoluteStrokeWidth />,
-    label: 12,
+    icon: <Reply size={16} strokeWidth={1.5} absoluteStrokeWidth />,
+    label: "Reply",
     "aria-label": "Comment Button",
   },
 } satisfies Meta<typeof CommentButton>;
@@ -36,7 +36,7 @@ export const Default: Story = {};
 
 export const DefaultFill: Story = {
   args: {
-    icon: <MessageSquare size={16} strokeWidth={1.5} absoluteStrokeWidth />,
+    icon: <Heart size={16} strokeWidth={1.5} absoluteStrokeWidth />,
     fill: true,
   },
 };
@@ -58,12 +58,14 @@ export const RedFill: Story = {
 
 export const Disabled: Story = {
   args: {
+    icon: <Heart size={16} strokeWidth={1.5} absoluteStrokeWidth />,
     isDisabled: true,
   },
 };
 
 export const DisabledFill: Story = {
   args: {
+    icon: <Heart size={16} strokeWidth={1.5} absoluteStrokeWidth />,
     isDisabled: true,
     fill: true,
   },

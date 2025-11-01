@@ -73,7 +73,7 @@ export default async function CustomersPage() {
             <CustomerActionsMenuTrigger />
             <ViewModeToggleButtonGroup className="ml-auto" />
             <Button
-              label="New User"
+              label="New Customer"
               iconLeft={
                 <Plus size={16} strokeWidth={1.5} absoluteStrokeWidth />
               }
@@ -81,7 +81,7 @@ export default async function CustomersPage() {
           </ToolbarDesktop>
 
           <ToolbarMobileTop>
-            <ToolbarMobileHeading>Users</ToolbarMobileHeading>
+            <ToolbarMobileHeading>Customers</ToolbarMobileHeading>
             <FiltersBottomSheetTrigger
               filtersForm={
                 <Suspense fallback={<FiltersFormSkeleton />}>
@@ -95,7 +95,7 @@ export default async function CustomersPage() {
           <ToolbarMobileBottom>
             <ViewModeToggleButtonGroup />
             <Button
-              label="New User"
+              label="New Customer"
               iconLeft={
                 <Plus size={16} strokeWidth={1.5} absoluteStrokeWidth />
               }

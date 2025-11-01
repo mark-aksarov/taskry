@@ -1,4 +1,5 @@
 import {
+  BottomSheet,
   Button,
   Dialog,
   DialogBody,
@@ -6,17 +7,26 @@ import {
   DialogFooter,
   DialogHeader,
   DialogHeading,
-  Modal,
 } from "@/components/ui";
+import { OverlayTriggerState } from "react-stately";
 import { TaskDetail } from "../TaskDetail";
 
-export function TaskDetailModal({ taskId }: { taskId: number }) {
+export function TaskDetailBottomSheet({
+  taskId,
+  state,
+}: {
+  taskId: number;
+  state: OverlayTriggerState;
+}) {
   return (
-    <Modal isDismissable className="w-[460px]">
-      <Dialog className="max-h-[calc(100dvh-64px)]">
+    <BottomSheet isDismissable state={state} className="md:hidden">
+      <Dialog
+        aria-label="App navigation"
+        className="max-h-[calc(100dvh-6.25rem)]"
+      >
         <DialogHeader>
-          <DialogHeading>Task Details</DialogHeading>
-          <DialogCloseButton iconSize={20} />
+          <DialogHeading className="text-base">Task Details</DialogHeading>
+          <DialogCloseButton />
         </DialogHeader>
         <DialogBody>
           <TaskDetail taskId={taskId} />
@@ -30,6 +40,6 @@ export function TaskDetailModal({ taskId }: { taskId: number }) {
           />
         </DialogFooter>
       </Dialog>
-    </Modal>
+    </BottomSheet>
   );
 }

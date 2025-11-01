@@ -17,7 +17,14 @@ import { ResponsiveMenuTrigger } from "@/components/common/ResponsiveMenuTrigger
 
 import { TaskPreview } from "@/lib/queries/types";
 import { useMemo } from "react";
-import { Button, Link, Checkbox } from "@/components/ui";
+import {
+  Button,
+  Link,
+  Checkbox,
+  RACButton,
+  focusRing,
+  RACDialogTrigger,
+} from "@/components/ui";
 import Image from "next/image";
 import {
   ImageContainer,
@@ -25,6 +32,7 @@ import {
 } from "@/components/common/ImageContainer";
 import { MenuDialogHeader } from "@/components/common/MenuDialogHeader";
 import { MenuTriggerSkeleton } from "@/components/common/MenuTriggerSkeleton";
+import { TaskDetailModal } from "../TaskDetailModal";
 
 export function TaskGridItem({ task }: { task?: TaskPreview }) {
   const locale = "en-GB";
@@ -92,7 +100,16 @@ export function TaskGridItem({ task }: { task?: TaskPreview }) {
         ) : (
           <GridItemInfo className="max-sm:w-full max-sm:items-center sm:flex-auto">
             <GridItemTitle>
-              <Link href={`/tasks/${task.id}`}>{task.title}</Link>
+              <RACDialogTrigger>
+                <RACButton
+                  className={(renderProps) =>
+                    focusRing({ ...renderProps, className: "cursor-pointer" })
+                  }
+                >
+                  {task.title}
+                </RACButton>
+                <TaskDetailModal taskId={task.id} />
+              </RACDialogTrigger>
             </GridItemTitle>
 
             <GridItemText>{`Deadline on ${formattedDeadline}`}</GridItemText>
