@@ -5,7 +5,7 @@ import {
   commentWithRepliesMock,
 } from "@/lib/data/__mocks__/comments";
 import { CommentItemActions } from "./CommentItemActions";
-import { CommentButton } from "../CommentButton";
+import { CommentButton } from "../LikeButton";
 import { Heart } from "lucide-react";
 import { mocked } from "storybook/test";
 import { getCommentWithReplies } from "@/lib/queries/comments";

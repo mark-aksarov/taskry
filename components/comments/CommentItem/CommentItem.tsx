@@ -15,7 +15,7 @@ import { CommentItemContent } from "./CommentItemContent";
 import { Attachment, Attachments } from "@/components/attachments/Attachments";
 import { Link, Skeleton } from "@/components/ui";
 import { CommentItemActions } from "./CommentItemActions";
-import { CommentButton } from "../CommentButton";
+import { CommentButton } from "../LikeButton";
 import { Heart, Reply } from "lucide-react";
 
 interface CommentItemProps {
