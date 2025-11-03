@@ -2,13 +2,10 @@ import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import DashboardPage from "./page";
 import { PageDecorator } from "@/.storybook/decorators";
 import { mocked } from "storybook/test";
-import { getActiveProjects, getTotalProjects } from "@/lib/queries/project";
-import {
-  getActiveTasks,
-  getTasks,
-  getTasksDone,
-  getTotalTasks,
-} from "@/lib/queries/task";
+import { getTotalProjects } from "@/lib/queries/project";
+import { getTasks, getTotalTasks } from "@/lib/queries/task";
+import { getTotalUsers } from "@/lib/queries/user";
+import { getTotalCustomers } from "@/lib/queries/customers";
 import { tasksMock } from "@/lib/data/__mocks__/tasks";
 import { getNotifications } from "@/lib/queries/notification";
 import { notificationsMock } from "@/lib/data/__mocks__/notifications";
@@ -21,29 +18,17 @@ const meta = {
   parameters: { layout: "fullscreen" },
   decorators: [PageDecorator],
   beforeEach: () => {
-    const activeProjects = 10;
-    let lastTotalProjects = 100;
-
-    mocked(getActiveProjects).mockReturnValue(
-      new Promise((res) => res(activeProjects)),
-    );
     mocked(getTotalProjects).mockImplementation(
-      () =>
-        new Promise((res) =>
-          res((lastTotalProjects -= lastTotalProjects * 0.1)),
-        ),
+      () => new Promise((res) => res(100)),
     );
-
-    const activeTasks = 25;
-    const tasksDone = 15;
-    let lastTotalTasks = 10;
-
-    mocked(getActiveTasks).mockReturnValue(
-      new Promise((res) => res(activeTasks)),
-    );
-    mocked(getTasksDone).mockReturnValue(new Promise((res) => res(tasksDone)));
     mocked(getTotalTasks).mockImplementation(
-      () => new Promise((res) => res((lastTotalTasks += lastTotalTasks * 0.1))),
+      () => new Promise((res) => res(600)),
+    );
+    mocked(getTotalUsers).mockImplementation(
+      () => new Promise((res) => res(20)),
+    );
+    mocked(getTotalCustomers).mockImplementation(
+      () => new Promise((res) => res(15)),
     );
     mocked(getTasks).mockReturnValue(new Promise((res) => res(tasksMock)));
     mocked(getNotifications).mockReturnValue(
