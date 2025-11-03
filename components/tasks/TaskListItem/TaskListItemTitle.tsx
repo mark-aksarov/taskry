@@ -1,3 +1,5 @@
+"use client";
+
 import { useOverlayTrigger } from "react-aria";
 import { TaskDetailModal } from "../TaskDetailModal";
 import { useOverlayTriggerState } from "react-stately";

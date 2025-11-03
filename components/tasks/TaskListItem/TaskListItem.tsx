@@ -5,13 +5,7 @@ import { useMemo } from "react";
 import { Item } from "react-stately";
 import { Check, CircleEllipsis, Clock, Ellipsis, Trash } from "lucide-react";
 
-import {
-  Button,
-  Checkbox,
-  focusRing,
-  RACButton,
-  RACDialogTrigger,
-} from "@/components/ui";
+import { Button, Checkbox } from "@/components/ui";
 
 import {
   ListItem,
@@ -32,7 +26,6 @@ import {
 } from "@/components/common/ImageContainer";
 import { MenuTriggerSkeleton } from "@/components/common/MenuTriggerSkeleton";
 import { MenuDialogHeader } from "@/components/common/MenuDialogHeader";
-import { TaskDetailModal } from "../TaskDetailModal";
 import { TaskListItemTitle } from "./TaskListItemTitle";
 
 export const TaskListItem = ({

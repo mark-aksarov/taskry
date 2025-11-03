@@ -15,8 +15,8 @@ import { CommentItemContent } from "./CommentItemContent";
 import { Attachment, Attachments } from "@/components/attachments/Attachments";
 import { Link, Skeleton } from "@/components/ui";
 import { CommentItemActions } from "./CommentItemActions";
-import { CommentButton } from "../LikeButton";
-import { Heart, Reply } from "lucide-react";
+import { ReplyButton } from "../ReplyButton";
+import { LikeButton } from "../LikeButton";
 
 interface CommentItemProps {
   comment?: Comment;
@@ -99,21 +99,8 @@ export function CommentItem({ comment }: CommentItemProps) {
                 </>
               ) : (
                 <>
-                  <CommentButton
-                    icon={
-                      <Reply size={16} strokeWidth={1.5} absoluteStrokeWidth />
-                    }
-                    label="Reply"
-                  />
-                  <CommentButton
-                    icon={
-                      <Heart size={16} strokeWidth={1.5} absoluteStrokeWidth />
-                    }
-                    label={comment._count.likes}
-                    aria-label="Like comment"
-                    color={isLiked ? "red" : "default"}
-                    fill={isLiked}
-                  />
+                  <ReplyButton />
+                  <LikeButton value={comment._count.likes} fill={isLiked} />
                 </>
               )}
             </CommentItemActions>

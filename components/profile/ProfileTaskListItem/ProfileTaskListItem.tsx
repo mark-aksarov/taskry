@@ -8,7 +8,6 @@ import {
   Clock,
   Ellipsis,
   ListTodo,
-  MessagesSquare,
   Trash,
 } from "lucide-react";
 
@@ -19,14 +18,14 @@ import {
   ListItemInfo,
   ListItemInfoSkeleton,
   ListItemText,
-  ListItemTitle,
 } from "@/components/common/List";
 
 import { TaskPreview } from "@/lib/queries/types";
 import { ResponsiveMenuTrigger } from "@/components/common/ResponsiveMenuTrigger";
-import { Link } from "@/components/ui";
 import { MenuTriggerSkeleton } from "@/components/common/MenuTriggerSkeleton";
 import { MenuDialogHeader } from "@/components/common/MenuDialogHeader";
+import { TaskListItemTitle } from "@/components/tasks/TaskListItem";
+import { TaskCommentsModalTrigger } from "@/components/tasks/TaskCommentsModalTrigger";
 
 export const ProfileTaskListItem = ({ task }: { task?: TaskPreview }) => {
   const locale = "en-GB";
@@ -51,10 +50,7 @@ export const ProfileTaskListItem = ({ task }: { task?: TaskPreview }) => {
         <ListItemInfoSkeleton />
       ) : (
         <ListItemInfo>
-          <ListItemTitle>
-            <Link href={`/tasks/${task.id}`}>{task.title}</Link>
-          </ListItemTitle>
-
+          <TaskListItemTitle task={task} />
           <ListItemText>{`Deadline on ${formattedDeadline}`}</ListItemText>
         </ListItemInfo>
       )}
@@ -62,15 +58,11 @@ export const ProfileTaskListItem = ({ task }: { task?: TaskPreview }) => {
       <div className="flex items-center gap-2">
         {/* --- Comments --- */}
         {!task ? (
-          <Skeleton className="h-[2rem] w-[3.75rem] @max-md:hidden" />
+          <Skeleton className="h-8 w-[3.75rem]" />
         ) : (
-          <Button
-            variant="outlined"
-            iconLeft={
-              <MessagesSquare size={16} strokeWidth={1.5} absoluteStrokeWidth />
-            }
-            label={task._count.comments}
-            className={buttonStyles}
+          <TaskCommentsModalTrigger
+            commentCount={task._count.comments}
+            taskId={task.id}
           />
         )}
 

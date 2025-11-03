@@ -11,7 +11,7 @@ import { FieldSkeleton } from "@/components/common/FieldSkeleton";
 import { Checkbox, CheckboxGroup, Skeleton } from "@/components/ui";
 import { TaskDetailStatusMenuTrigger } from "./TaskDetailStatusMenuTrigger";
 import { Attachment, Attachments } from "@/components/attachments/Attachments";
-import { TaskCommentsModalTrigger } from "../TaskCommentsModalTrigger/TaskCommentsModalTrigger";
+import { TaskCommentsModalTrigger } from "../TaskCommentsModalTrigger";
 
 export function TaskDetailInner({
   task,
