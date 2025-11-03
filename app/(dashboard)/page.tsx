@@ -1,32 +1,32 @@
+import { Suspense } from "react";
 import { List } from "@/components/common/List";
-import { PageContainer } from "@/components/common/PageContainer";
-import { PageGrid } from "@/components/common/PageGrid";
 import { Repeat } from "@/components/common/Repeat";
+import { PageGrid } from "@/components/common/PageGrid";
+import { PageContainer } from "@/components/common/PageContainer";
 import {
   ToolbarMobileHeading,
   ToolbarMobileTop,
 } from "@/components/common/Toolbar";
 import {
-  ActiveProjectsCard,
-  ActiveProjectsCardSkeleton,
-} from "@/components/dashboard/ActiveProjectsCard";
+  TotalProjectsCard,
+  TotalProjectsCardSkeleton,
+} from "@/components/dashboard/TotalProjectsCard";
 import {
-  ActiveTasksCard,
-  ActiveTasksCardSkeleton,
-} from "@/components/dashboard/ActiveTasksCard";
+  TotalTasksCard,
+  TotalTasksCardSkeleton,
+} from "@/components/dashboard/TotalTasksCard";
 import {
-  StorageLimitCard,
-  StorageLimitCardSkeleton,
-} from "@/components/dashboard/StorageLimitCard";
+  TotalCustomersCard,
+  TotalCustomersCardSkeleton,
+} from "@/components/dashboard/TotalCustomersCard";
 import {
-  TasksDoneCard,
-  TasksDoneCardSkeleton,
-} from "@/components/dashboard/TasksDoneCard";
+  TotalUsersCard,
+  TotalUsersCardSkeleton,
+} from "@/components/dashboard/TotalUsersCard";
+import { TaskListItem } from "@/components/tasks/TaskListItem";
 import { AssignedTasks } from "@/components/tasks/AssignedTasks";
 import { AssignedTasksSection } from "@/components/tasks/AssignedTasks/AssignedTasksSection";
 import { AssignedTasksSectionHeading } from "@/components/tasks/AssignedTasks/AssignedTasksSectionHeading";
-import { TaskListItem } from "@/components/tasks/TaskListItem";
-import { Suspense } from "react";
 
 export default function DashboardPage() {
   return (
@@ -36,20 +36,20 @@ export default function DashboardPage() {
           <ToolbarMobileHeading>Dashboard</ToolbarMobileHeading>
         </ToolbarMobileTop>
         <div className="grid max-md:grid-cols-1 max-md:gap-4 md:gap-6 md:max-xl:grid-cols-2 xl:grid-cols-4">
-          <Suspense fallback={<ActiveProjectsCardSkeleton />}>
-            <ActiveProjectsCard />
+          <Suspense fallback={<TotalProjectsCardSkeleton />}>
+            <TotalProjectsCard />
           </Suspense>
 
-          <Suspense fallback={<ActiveTasksCardSkeleton />}>
-            <ActiveTasksCard />
+          <Suspense fallback={<TotalTasksCardSkeleton />}>
+            <TotalTasksCard />
           </Suspense>
 
-          <Suspense fallback={<TasksDoneCardSkeleton />}>
-            <TasksDoneCard />
+          <Suspense fallback={<TotalCustomersCardSkeleton />}>
+            <TotalCustomersCard />
           </Suspense>
 
-          <Suspense fallback={<StorageLimitCardSkeleton />}>
-            <StorageLimitCard />
+          <Suspense fallback={<TotalUsersCardSkeleton />}>
+            <TotalUsersCard />
           </Suspense>
         </div>
 

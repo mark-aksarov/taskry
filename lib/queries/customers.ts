@@ -24,3 +24,7 @@ export const getCustomers = cache(
     });
   },
 );
+
+export const getTotalCustomers = cache(async () => {
+  return prisma.customer.count();
+});

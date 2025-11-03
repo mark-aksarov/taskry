@@ -1,35 +1,20 @@
 import { Card } from "@/components/common/Card";
-import { twMerge } from "tailwind-merge";
 
 interface DashboardCardProps {
-  heading?: React.ReactNode;
   icon?: React.ReactNode;
   value?: React.ReactNode;
-  stat?: React.ReactNode;
-  progress?: React.ReactNode;
-  className?: string;
+  text?: React.ReactNode;
 }
 
-export const DashboardCard = ({
-  heading,
-  icon,
-  value,
-  stat,
-  progress,
-  className,
-}: DashboardCardProps) => {
+export const DashboardCard = ({ icon, value, text }: DashboardCardProps) => {
   return (
-    <Card className={twMerge(className, "h-[9rem]")}>
-      <div className="flex h-full flex-col justify-between">
-        <div className="flex items-start justify-between">
-          <div className="flex flex-col gap-3">
-            {heading}
-            {value}
-          </div>
-          {icon}
+    <Card className="p-6">
+      <div className="flex items-center gap-6">
+        {icon}
+        <div className="flex flex-col gap-1.5">
+          {value}
+          {text}
         </div>
-        {stat}
-        {progress}
       </div>
     </Card>
   );

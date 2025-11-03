@@ -41,3 +41,7 @@ export const getPositions = cache(async (workspaceId: number) => {
     where: { workspaceId },
   });
 });
+
+export const getTotalUsers = cache(async () => {
+  return prisma.user.count();
+});

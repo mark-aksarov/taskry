@@ -116,27 +116,6 @@ export const getTaskCategories = cache(async (workspaceId: number) => {
   });
 });
 
-export const getTotalTasks = cache(async (fromDate?: Date, toDate?: Date) => {
-  const where: any = {};
-
-  if (fromDate && toDate) {
-    where.deadline = {
-      gte: fromDate,
-      lte: toDate,
-    };
-  }
-
-  return prisma.task.count({ where });
-});
-
-export const getActiveTasks = cache(async () => {
-  return prisma.task.count({
-    where: { statusId: ACTIVE_TASK_STATUS_ID },
-  });
-});
-
-export const getTasksDone = cache(async () => {
-  return prisma.task.count({
-    where: { statusId: DONE_TASK_STATUS_ID },
-  });
+export const getTotalTasks = cache(async () => {
+  return prisma.task.count();
 });

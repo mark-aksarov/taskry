@@ -2,14 +2,13 @@ import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { AppHeader } from "./AppHeader";
 import { Suspense } from "react";
 import { mocked } from "storybook/test";
-import { NotificationPopoverTrigger } from "@/components/notifications/NotificationPopoverTrigger";
-import { NotificationList } from "@/components/notifications/NotificationList";
-import { NotificationSheetTrigger } from "@/components/notifications/NotificationSheetTrigger";
+import { NotificationModalTrigger } from "@/components/notifications/NotificationModalTrigger";
 import { AppBottomSheetTrigger } from "../AppBottomSheetTrigger";
 import { AppSidebarSheetTrigger } from "../AppSidebarSheetTrigger";
 import { getNotifications } from "@/lib/queries/notification";
 import { useSelectedLayoutSegments } from "next/navigation";
 import { notificationsMock } from "@/lib/data/__mocks__/notifications";
+import { Notifications } from "@/components/notifications/Notifications";
 
 const meta = {
   title: "Components/layout/AppHeader",
@@ -24,20 +23,11 @@ const meta = {
   render: (args) => (
     <AppHeader
       {...args}
-      notificationPopoverTrigger={
-        <NotificationPopoverTrigger
-          notificationList={
+      notificationModalTrigger={
+        <NotificationModalTrigger
+          notifications={
             <Suspense>
-              <NotificationList />
-            </Suspense>
-          }
-        />
-      }
-      notificationSheetTrigger={
-        <NotificationSheetTrigger
-          notificationList={
-            <Suspense>
-              <NotificationList />
+              <Notifications />
             </Suspense>
           }
         />
