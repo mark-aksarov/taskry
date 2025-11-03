@@ -8,15 +8,15 @@ const styles = tv({
   base: "not:focus-visible:outline-0 focus-visible:outline-2",
 });
 
-interface NotificationOverlayItemLinkProps
+interface NotificationListItemLinkProps
   extends React.ComponentProps<typeof NextLink> {
   children: React.ReactNode;
 }
 
-export function NotificationOverlayItemLink({
+export function NotificationListItemLink({
   children,
   ...props
-}: NotificationOverlayItemLinkProps) {
+}: NotificationListItemLinkProps) {
   return (
     <Link {...props} className={styles()}>
       {children}

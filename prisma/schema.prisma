@@ -67,9 +67,10 @@ model Comment {
   parent  Comment?  @relation("CommentReplies", fields: [parentId], references: [id], onDelete: Cascade)
   replies Comment[] @relation("CommentReplies")
 
-  attachments Attachment[]
-  reads       Read[]
-  likes       CommentLike[]
+  attachments         Attachment[]
+  reads               Read[]
+  likes               CommentLike[]
+  notificationTargets NotificationTarget[]
 
   @@index([projectId])
   @@index([taskId])
@@ -341,12 +342,10 @@ enum NotificationType {
   TASK_ADDED
   TASK_DELETED
   TASK_UPDATED
-  TASK_COMMENTED
 
   PROJECT_ADDED
   PROJECT_DELETED
   PROJECT_UPDATED
-  PROJECT_COMMENTED
 
   USER_ADDED
   USER_DELETED
@@ -356,7 +355,9 @@ enum NotificationType {
   CUSTOMER_DELETED
   CUSTOMER_UPDATED
 
-  MESSAGE_SENDED
+  MESSAGE_SENT
+  COMMENT_REPLIED
+  COMMENT_ADDED
 }
 
 model Notification {
@@ -386,12 +387,14 @@ model NotificationTarget {
   projectId  Int?    @unique
   taskId     Int?    @unique
   messageId  Int?    @unique
+  commentId  Int?    @unique
 
   project  Project?  @relation(fields: [projectId], references: [id], onDelete: Cascade)
   task     Task?     @relation(fields: [taskId], references: [id], onDelete: Cascade)
   message  Message?  @relation(fields: [messageId], references: [id], onDelete: Cascade)
   user     User?     @relation(fields: [userId], references: [id], onDelete: Cascade)
   customer Customer? @relation(fields: [customerId], references: [id], onDelete: Cascade)
+  comment  Comment?  @relation(fields: [commentId], references: [id], onDelete: Cascade)
 
   notification Notification? @relation
 

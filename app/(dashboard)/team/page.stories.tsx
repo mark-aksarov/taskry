@@ -17,7 +17,7 @@ const meta = {
   decorators: [PageDecorator],
   beforeEach: () => {
     mocked(getNotifications).mockReturnValue(
-      new Promise((res) => res(notificationsMock.slice(0, 5))),
+      new Promise((res) => res(notificationsMock)),
     );
     mocked(getUsers).mockReturnValue(new Promise((res) => res(usersMock)));
     mocked(getPositions).mockReturnValue(

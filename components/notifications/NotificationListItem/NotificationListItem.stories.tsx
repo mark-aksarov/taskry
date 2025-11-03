@@ -1,10 +1,10 @@
 import { Meta, StoryObj } from "@storybook/react";
-import { NotificationOverlayItem } from "./NotificationOverlayItem";
+import { NotificationListItem } from "./NotificationListItem";
 import { notificationsMock } from "@/lib/data/__mocks__/notifications";
 
 const meta = {
-  title: "Components/notifications/NotificationOverlayItem",
-  component: NotificationOverlayItem,
+  title: "Components/notifications/NotificationListItem",
+  component: NotificationListItem,
   tags: ["autodocs"],
   args: {
     notification: notificationsMock[0],
@@ -12,7 +12,7 @@ const meta = {
   parameters: {
     layout: "fullscreen",
   },
-} satisfies Meta<typeof NotificationOverlayItem>;
+} satisfies Meta<typeof NotificationListItem>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;

@@ -3,7 +3,7 @@ import { AppHeader } from "./AppHeader";
 import { Suspense } from "react";
 import { mocked } from "storybook/test";
 import { NotificationPopoverTrigger } from "@/components/notifications/NotificationPopoverTrigger";
-import { NotificationOverlayList } from "@/components/notifications/NotificationOverlayList";
+import { NotificationList } from "@/components/notifications/NotificationList";
 import { NotificationSheetTrigger } from "@/components/notifications/NotificationSheetTrigger";
 import { AppBottomSheetTrigger } from "../AppBottomSheetTrigger";
 import { AppSidebarSheetTrigger } from "../AppSidebarSheetTrigger";
@@ -28,7 +28,7 @@ const meta = {
         <NotificationPopoverTrigger
           notificationList={
             <Suspense>
-              <NotificationOverlayList />
+              <NotificationList />
             </Suspense>
           }
         />
@@ -37,7 +37,7 @@ const meta = {
         <NotificationSheetTrigger
           notificationList={
             <Suspense>
-              <NotificationOverlayList />
+              <NotificationList />
             </Suspense>
           }
         />
@@ -48,7 +48,7 @@ const meta = {
   ),
   beforeEach: () => {
     mocked(getNotifications).mockReturnValue(
-      new Promise((res) => res(notificationsMock.slice(0, 5))),
+      new Promise((res) => res(notificationsMock)),
     );
     mocked(useSelectedLayoutSegments).mockReturnValue(["(dashboard)"]);
   },

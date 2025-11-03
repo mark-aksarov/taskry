@@ -1,21 +1,21 @@
 import { twMerge } from "tailwind-merge";
 import { Skeleton } from "@/components/ui";
 
-interface NotificationOverlayItemInfoProps {
+interface NotificationListItemInfoProps {
   className?: string;
   children: React.ReactNode;
 }
 
 const styles = "flex flex-col gap-1";
 
-export function NotificationOverlayItemInfo({
+export function NotificationListItemInfo({
   className,
   children,
-}: NotificationOverlayItemInfoProps) {
+}: NotificationListItemInfoProps) {
   return <div className={twMerge(styles, className)}>{children}</div>;
 }
 
-export function NotificationOverlayItemInfoSkeleton({
+export function NotificationListItemInfoSkeleton({
   className,
 }: {
   className?: string;

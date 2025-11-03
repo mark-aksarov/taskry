@@ -1752,7 +1752,7 @@ async function main() {
       },
       {
         id: 3,
-        taskId: 3,
+        commentId: 45,
       },
       {
         id: 4,
@@ -1764,7 +1764,7 @@ async function main() {
       },
       {
         id: 6,
-        projectId: 3,
+        commentId: 1,
       },
       {
         id: 7,
@@ -1814,7 +1814,7 @@ async function main() {
       },
       {
         id: 4,
-        type: "TASK_COMMENTED",
+        type: "COMMENT_ADDED",
         actorId: "VQmrwbFoX834fHEb1q1qo7CmKVV6NLF9",
         targetId: 3,
         createdAt: new Date(2025, 8, 4),
@@ -1842,7 +1842,7 @@ async function main() {
       },
       {
         id: 8,
-        type: "PROJECT_COMMENTED",
+        type: "COMMENT_ADDED",
         actorId: "VQmrwbFoX834fHEb1q1qo7CmKVV6NLF9",
         targetId: 6,
         createdAt: new Date(2025, 8, 8),
@@ -1891,7 +1891,7 @@ async function main() {
       },
       {
         id: 15,
-        type: "MESSAGE_SENDED",
+        type: "MESSAGE_SENT",
         actorId: "W9OZkgMnF12FNBlys4frkj1Lj5de5Nj3",
         targetId: 11,
         createdAt: new Date(2025, 8, 15),

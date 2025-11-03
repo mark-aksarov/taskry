@@ -21,7 +21,7 @@ const meta: Meta<typeof ProfileTasksPage> = {
       new Promise((res) => res(usersMock[0])),
     );
     mocked(getNotifications).mockReturnValue(
-      new Promise((res) => res(notificationsMock.slice(0, 5))),
+      new Promise((res) => res(notificationsMock)),
     );
     mocked(usePathname).mockReturnValue("/profile/tasks");
   },

@@ -11,13 +11,11 @@ import {
 } from "@/components/layout/AppSidebar";
 import { AppNavigation } from "@/components/layout/AppNavigation";
 import { AppHeader } from "@/components/layout/AppHeader";
-import { NotificationPopoverTrigger } from "@/components/notifications/NotificationPopoverTrigger";
-import { NotificationOverlayList } from "@/components/notifications/NotificationOverlayList";
-import { ViewAllButton } from "@/components/notifications/ViewAllButton";
-import { NotificationSheetTrigger } from "@/components/notifications/NotificationSheetTrigger";
+import { Notifications } from "@/components/notifications/Notifications";
+import { NotificationModalTrigger } from "@/components/notifications/NotificationModalTrigger";
 import { AppBottomSheetTrigger } from "@/components/layout/AppBottomSheetTrigger";
 import { AppSidebarSheetTrigger } from "@/components/layout/AppSidebarSheetTrigger";
-import { NotificationOverlayItem } from "@/components/notifications/NotificationOverlayItem";
+import { NotificationListItem } from "@/components/notifications/NotificationListItem";
 import { Repeat } from "@/components/common/Repeat";
 
 const nunitoSans = Nunito_Sans({
@@ -52,7 +50,7 @@ export default async function RootLayout({
 
 export async function Layout({ children }: { children: React.ReactNode }) {
   const notificationListSkeleton = (
-    <Repeat items={7} renderItem={() => <NotificationOverlayItem />} />
+    <Repeat items={7} renderItem={() => <NotificationListItem />} />
   );
 
   return (
@@ -69,25 +67,12 @@ export async function Layout({ children }: { children: React.ReactNode }) {
       <div className="flex flex-auto flex-col">
         <AppHeader
           title="Dashboard"
-          notificationPopoverTrigger={
-            <NotificationPopoverTrigger
-              notificationList={
+          notificationModalTrigger={
+            <NotificationModalTrigger
+              notifications={
                 <Suspense fallback={notificationListSkeleton}>
                   <>
-                    <NotificationOverlayList />
-                    <ViewAllButton />
-                  </>
-                </Suspense>
-              }
-            />
-          }
-          notificationSheetTrigger={
-            <NotificationSheetTrigger
-              notificationList={
-                <Suspense fallback={notificationListSkeleton}>
-                  <>
-                    <NotificationOverlayList />
-                    <ViewAllButton />
+                    <Notifications />
                   </>
                 </Suspense>
               }

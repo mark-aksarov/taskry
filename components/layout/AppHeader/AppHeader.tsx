@@ -6,16 +6,14 @@ import { ProfileLink } from "../ProfileLink";
 
 interface AppHeaderProps {
   title: string;
-  notificationPopoverTrigger: React.ReactNode;
-  notificationSheetTrigger: React.ReactNode;
+  notificationModalTrigger: React.ReactNode;
   appBottomSheetTrigger: React.ReactNode;
   appSidebarSheetTrigger: React.ReactNode;
 }
 
 export const AppHeader = ({
   title,
-  notificationPopoverTrigger,
-  notificationSheetTrigger,
+  notificationModalTrigger,
   appBottomSheetTrigger,
   appSidebarSheetTrigger,
 }: AppHeaderProps) => {
@@ -33,7 +31,7 @@ export const AppHeader = ({
           }
           <div className="flex flex-auto items-center justify-end gap-4">
             <SearchForm />
-            {notificationPopoverTrigger}
+            {notificationModalTrigger}
             <Button
               aria-label="theme"
               variant="ghost"
@@ -56,7 +54,7 @@ export const AppHeader = ({
               }
               className={buttonClasses}
             />
-            {notificationSheetTrigger}
+            {notificationModalTrigger}
             {appBottomSheetTrigger}
           </div>
         </div>

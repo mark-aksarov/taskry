@@ -73,13 +73,51 @@ export const getNotifications = cache(
                     fullName: true,
                   },
                 },
+                comment: {
+                  select: {
+                    id: true,
+                    content: true,
+                    createdAt: true,
+                    attachments: {
+                      select: {
+                        id: true,
+                        fileUrl: true,
+                      },
+                    },
+                    project: {
+                      select: {
+                        id: true,
+                        title: true,
+                      },
+                    },
+                    task: {
+                      select: {
+                        id: true,
+                        title: true,
+                      },
+                    },
+                    _count: {
+                      select: {
+                        likes: true,
+                        replies: true,
+                      },
+                    },
+
+                    likes: {
+                      where: {
+                        userId,
+                      },
+                      select: {
+                        userId: true,
+                      },
+                    },
+                  },
+                },
               },
             },
           },
         },
       },
-
-      take: 5,
     });
   },
 );

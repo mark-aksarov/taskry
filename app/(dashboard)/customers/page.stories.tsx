@@ -21,7 +21,7 @@ const meta = {
   beforeEach: () => {
     mocked(getUsers).mockReturnValue(new Promise((res) => res(usersMock)));
     mocked(getNotifications).mockReturnValue(
-      new Promise((res) => res(notificationsMock.slice(0, 5))),
+      new Promise((res) => res(notificationsMock)),
     );
     mocked(getCustomers).mockReturnValue(
       new Promise((res) => res(customersMock)),

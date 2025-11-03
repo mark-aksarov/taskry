@@ -1,11 +1,11 @@
 const styles = "text-gray-500 dark:text-gray-400 text-xs font-medium";
 
-interface NotificationOverlayItemDateProps {
+interface NotificationListItemDateProps {
   children: React.ReactNode;
 }
 
-export function NotificationOverlayItemDate({
+export function NotificationListItemDate({
   children,
-}: NotificationOverlayItemDateProps) {
+}: NotificationListItemDateProps) {
   return <span className={styles}>{children}</span>;
 }
