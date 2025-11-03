@@ -56,7 +56,7 @@ export const WithSheet: Story = {
     overlayClassName: "",
   },
   globals: {
-    viewport: { value: "iphone6", isRotated: false },
+    viewport: { value: "mobile2", isRotated: false },
   },
 };
 

@@ -70,7 +70,7 @@ export const Default = {
 
 export const Fullscreen = {
   globals: {
-    viewport: { value: "iphone6", isRotated: false },
+    viewport: { value: "mobile2", isRotated: false },
   },
   render: (args) => {
     return (

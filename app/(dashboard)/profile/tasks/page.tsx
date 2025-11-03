@@ -1,16 +1,16 @@
 import {
-  DetailCard,
-  DetailCardHeader,
-  DetailCardLeft,
-  DetailCardTitle,
-} from "@/components/common/Detail";
+  ProfileCard,
+  ProfileCardHeader,
+  ProfileCardLeft,
+  ProfileCardRight,
+  ProfileCardTitle,
+} from "@/components/profile/ProfileCard";
 import { Suspense } from "react";
-import { DetailPanel } from "@/components/common/DetailPanel";
 import {
-  ProfileDetailPanelHeader,
-  ProfileDetailPanelHeaderSkeleton,
-} from "@/components/profile/ProfileDetailPanelHeader";
-import { ProfileDetailNavigation } from "@/components/profile/ProfileDetailNavigation";
+  ProfileHeader,
+  ProfileHeaderSkeleton,
+} from "@/components/profile/ProfileHeader";
+import { ProfileNavigationDesktop } from "@/components/profile/ProfileNavigationDesktop";
 import { PageGrid } from "@/components/common/PageGrid";
 import {
   ToolbarMobileHeading,
@@ -27,11 +27,11 @@ export default async function ProfileTasksPage() {
   return (
     <>
       <PageContainer className="max-md:hidden">
-        <DetailCard>
-          <DetailCardLeft>
-            <DetailCardHeader>
-              <DetailCardTitle>Assigned tasks</DetailCardTitle>
-            </DetailCardHeader>
+        <ProfileCard>
+          <ProfileCardLeft>
+            <ProfileCardHeader>
+              <ProfileCardTitle>Assigned tasks</ProfileCardTitle>
+            </ProfileCardHeader>
             <Suspense
               fallback={
                 <List className="gap-0 px-6">
@@ -44,15 +44,15 @@ export default async function ProfileTasksPage() {
             >
               <ProfileTasksDesktop />
             </Suspense>
-          </DetailCardLeft>
+          </ProfileCardLeft>
 
-          <DetailPanel>
-            <Suspense fallback={<ProfileDetailPanelHeaderSkeleton />}>
-              <ProfileDetailPanelHeader />
+          <ProfileCardRight>
+            <Suspense fallback={<ProfileHeaderSkeleton />}>
+              <ProfileHeader />
             </Suspense>
-            <ProfileDetailNavigation />
-          </DetailPanel>
-        </DetailCard>
+            <ProfileNavigationDesktop />
+          </ProfileCardRight>
+        </ProfileCard>
       </PageContainer>
 
       <Suspense

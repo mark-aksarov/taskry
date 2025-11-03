@@ -5,7 +5,6 @@ import { usersMock } from "@/lib/data/__mocks__/users";
 const meta = {
   title: "components/profile/ProfileInfo",
   component: ProfileInfo,
-  tags: ["autodocs"],
   args: {
     userPromise: new Promise((resolve) => resolve(usersMock[0])),
   },

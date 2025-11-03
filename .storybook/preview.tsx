@@ -2,7 +2,7 @@ import "../app/globals.css";
 
 import type { Preview, ReactRenderer } from "@storybook/nextjs-vite";
 import { withThemeByDataAttribute } from "@storybook/addon-themes";
-import { INITIAL_VIEWPORTS, MINIMAL_VIEWPORTS } from "storybook/viewport";
+import { MINIMAL_VIEWPORTS } from "storybook/viewport";
 import { mocked, sb } from "storybook/test";
 import { useParams, usePathname, useRouter } from "next/navigation";
 

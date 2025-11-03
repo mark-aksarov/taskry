@@ -83,7 +83,7 @@ export const WithSheet = {
     overlayType: "bottomsheet",
   },
   globals: {
-    viewport: { value: "iphone6", isRotated: false },
+    viewport: { value: "mobile2", isRotated: false },
   },
 } satisfies Story;
 
@@ -92,7 +92,7 @@ export const WithSheetAndHeader = {
     overlayType: "bottomsheet",
   },
   globals: {
-    viewport: { value: "iphone6", isRotated: false },
+    viewport: { value: "mobile2", isRotated: false },
   },
   render: (args) => {
     return (

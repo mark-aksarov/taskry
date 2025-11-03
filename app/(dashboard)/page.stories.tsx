@@ -80,6 +80,6 @@ export const Tablet: Story = {
 
 export const Mobile = {
   globals: {
-    viewport: { value: "iphone6", isRotated: false },
+    viewport: { value: "mobile2", isRotated: false },
   },
 } satisfies Story;

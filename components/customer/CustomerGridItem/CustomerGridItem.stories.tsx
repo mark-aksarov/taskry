@@ -40,6 +40,6 @@ export const WithoutImage: Story = {
 
 export const OnMobile: Story = {
   globals: {
-    viewport: { value: "iphone6", isRotated: false },
+    viewport: { value: "mobile2", isRotated: false },
   },
 };

@@ -12,7 +12,7 @@ import {
   Trash,
 } from "lucide-react";
 
-import { Badge, Button, Checkbox, Skeleton } from "@/components/ui";
+import { Button, Checkbox, Skeleton } from "@/components/ui";
 
 import {
   ListItem,
@@ -40,6 +40,8 @@ export const ProfileTaskListItem = ({ task }: { task?: TaskPreview }) => {
     });
   }, [task?.deadline, locale]);
 
+  const buttonStyles = "w-[3.75rem] justify-center rounded-full @max-md:hidden";
+
   return (
     <ListItem className="border-gray-300 md:rounded-none md:px-0 md:py-4 md:shadow-none md:not-last:border-b-1 dark:border-gray-600">
       {task && <Checkbox aria-label="task checkbox" />}
@@ -60,29 +62,31 @@ export const ProfileTaskListItem = ({ task }: { task?: TaskPreview }) => {
       <div className="flex items-center gap-2">
         {/* --- Comments --- */}
         {!task ? (
-          <Skeleton className="w-[3.75rem] @max-md:hidden" />
+          <Skeleton className="h-[2rem] w-[3.75rem] @max-md:hidden" />
         ) : (
-          <Badge
-            color="gray"
-            className="w-[3.75rem] px-3 py-1.5 @max-md:hidden"
-          >
-            <MessagesSquare size={16} strokeWidth={1.5} absoluteStrokeWidth />
-            {task._count.comments}
-          </Badge>
+          <Button
+            variant="outlined"
+            iconLeft={
+              <MessagesSquare size={16} strokeWidth={1.5} absoluteStrokeWidth />
+            }
+            label={task._count.comments}
+            className={buttonStyles}
+          />
         )}
 
         <div className="flex items-center gap-1">
           {/* --- Subtasks --- */}
           {!task ? (
-            <Skeleton className="w-[3.75rem] @max-md:hidden" />
+            <Skeleton className="h-[2rem] w-[3.75rem] @max-md:hidden" />
           ) : (
-            <Badge
-              color="gray"
-              className="w-[3.75rem] px-3 py-1.5 @max-md:hidden"
-            >
-              <ListTodo size={16} strokeWidth={1.5} absoluteStrokeWidth />
-              {task._count.subtasks}
-            </Badge>
+            <Button
+              variant="outlined"
+              iconLeft={
+                <ListTodo size={16} strokeWidth={1.5} absoluteStrokeWidth />
+              }
+              label={task._count.subtasks}
+              className={buttonStyles}
+            />
           )}
 
           {/* --- Menu --- */}

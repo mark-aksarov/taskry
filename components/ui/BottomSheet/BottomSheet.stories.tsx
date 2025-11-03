@@ -18,7 +18,7 @@ const meta: Meta<typeof BottomSheet> = {
   component: BottomSheet,
   tags: ["autodocs"],
   globals: {
-    viewport: { value: "iphone6", isRotated: false },
+    viewport: { value: "mobile2", isRotated: false },
   },
   args: {
     isDismissable: true,

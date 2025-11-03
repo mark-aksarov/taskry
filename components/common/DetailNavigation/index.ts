@@ -1,1 +1,0 @@
-export { DetailNavigation } from "./DetailNavigation";

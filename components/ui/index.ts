@@ -6,6 +6,7 @@ export {
   DialogTrigger as RACDialogTrigger,
   Form as RACForm,
   Heading as RACHeading,
+  type LinkProps as RACLinkProps,
 } from "react-aria-components";
 
 export { Badge } from "./Badge";

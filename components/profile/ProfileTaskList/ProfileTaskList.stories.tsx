@@ -1,3 +1,5 @@
+import { mocked } from "storybook/test";
+import { getTasks } from "@/lib/queries/task";
 import { ProfileTaskList } from "./ProfileTaskList";
 import { tasksMock } from "@/lib/data/__mocks__/tasks";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
@@ -5,10 +7,9 @@ import { Meta, StoryObj } from "@storybook/nextjs-vite";
 const meta = {
   title: "Components/profile/ProfileTaskList",
   component: ProfileTaskList,
-  tags: ["autodocs"],
   parameters: { layout: "fullscreen" },
-  args: {
-    tasks: tasksMock,
+  beforeEach: () => {
+    mocked(getTasks).mockReturnValue(new Promise((res) => res(tasksMock)));
   },
 } satisfies Meta<typeof ProfileTaskList>;
 
