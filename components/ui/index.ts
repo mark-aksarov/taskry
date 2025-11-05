@@ -39,7 +39,7 @@ export { SearchField, searchInputStyles } from "./SearchField";
 export { Select, SelectListBox, Option } from "./Select";
 export { SideSheet } from "./SideSheet";
 export { Skeleton } from "./Skeleton";
-export { TextField, fieldInputStyles } from "./TextField";
+export { TextField, type TextFieldProps, fieldInputStyles } from "./TextField";
 export {
   ToggleButton,
   ToggleButtonGroup,

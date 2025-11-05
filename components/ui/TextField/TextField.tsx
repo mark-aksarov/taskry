@@ -14,7 +14,7 @@ import {
 import { fieldGroupStyles, fieldStyles, Label } from "../Field";
 import { FieldError } from "../Field";
 
-type TextFieldProps = RACTextFieldProps &
+export type TextFieldProps = RACTextFieldProps &
   React.RefAttributes<HTMLDivElement> & {
     label: string;
     errorMessage?: string | ((validation: ValidationResult) => string);

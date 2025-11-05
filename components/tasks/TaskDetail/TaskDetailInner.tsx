@@ -8,12 +8,14 @@ import {
 import Image from "next/image";
 import { TaskDetail } from "@/lib/queries/types";
 import { FieldSkeleton } from "@/components/common/FieldSkeleton";
-import { RACLink, Skeleton } from "@/components/ui";
+import { RACDialogTrigger, Skeleton } from "@/components/ui";
 import { TaskDetailStatusMenuTrigger } from "./TaskDetailStatusMenuTrigger";
 import { Attachment, Attachments } from "@/components/attachments/Attachments";
 import { TaskCommentsModalTrigger } from "../TaskCommentsModalTrigger";
 import { SubtasksCheckboxGroup } from "@/components/subtasks/SubtasksCheckboxGroup";
 import { UpdateSubtasksButton } from "@/components/subtasks/UpdateSubtasksButton";
+import { UpdateSubtasksModal } from "@/components/subtasks/UpdateSubtasksModal/UpdateSubtasksModal";
+import { UpdateSubtasksForm } from "@/components/subtasks/UpdateSubtasksForm";
 
 export function TaskDetailInner({
   task,
@@ -139,7 +141,14 @@ export function TaskDetailInner({
             <DetailInfo>
               <div className="relative">
                 <SubtasksCheckboxGroup subtasks={task.subtasks} />
-                <UpdateSubtasksButton className="absolute top-0 right-0" />
+                <RACDialogTrigger>
+                  <UpdateSubtasksButton className="absolute top-0 right-0" />
+                  <UpdateSubtasksModal
+                    updateSubtasksForm={
+                      <UpdateSubtasksForm initialSubtasks={task.subtasks} />
+                    }
+                  />
+                </RACDialogTrigger>
               </div>
             </DetailInfo>
           )}
