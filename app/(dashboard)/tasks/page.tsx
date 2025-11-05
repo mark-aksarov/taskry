@@ -1,12 +1,12 @@
 import { Suspense } from "react";
 import { Plus } from "lucide-react";
-import { Button } from "@/components/ui";
+import { Button, RACDialogTrigger, Skeleton } from "@/components/ui";
 
 import {
   EmptySection,
   EmptySectionDescription,
   EmptySectionHeading,
-  EmptySectionLink,
+  EmptySectionButton,
 } from "@/components/common/EmptySection";
 import { PageGrid } from "@/components/common/PageGrid";
 import {
@@ -35,6 +35,11 @@ import { TaskList } from "@/components/tasks/TaskList";
 import { TaskGrid } from "@/components/tasks/TaskGrid";
 import { FiltersFormSkeleton } from "@/components/common/FiltersFormSkeleton";
 import { PageContainer } from "@/components/common/PageContainer";
+import { NewTaskModal } from "@/components/tasks/NewTaskModal/NewTaskModal";
+import { NewTaskForm } from "@/components/tasks/NewTaskForm";
+import { TaskCategorySelect } from "@/components/tasks/TaskCategorySelect";
+import { ProjectSelect } from "@/components/projects/ProjectSelect";
+import { UserSelect } from "@/components/users/UserSelect";
 
 export default async function TasksPage() {
   const categoriesPromise = getTaskCategories(1);
@@ -54,6 +59,16 @@ export default async function TasksPage() {
     />
   );
 
+  const newTaskForm = (
+    <NewTaskForm
+      taskCategorySelect={
+        <TaskCategorySelect categoriesPromise={categoriesPromise} />
+      }
+      projectSelect={<ProjectSelect projectsPromise={projectsPromise} />}
+      assigneeSelect={<UserSelect usersPromise={usersPromise} />}
+    />
+  );
+
   if (!tasks.length) {
     return (
       <PageContainer fullscreen centered>
@@ -62,7 +77,7 @@ export default async function TasksPage() {
           <EmptySectionDescription>
             Create a new task to keep track of your work
           </EmptySectionDescription>
-          <EmptySectionLink href="#">New Task</EmptySectionLink>
+          <EmptySectionButton href="#">New Task</EmptySectionButton>
         </EmptySection>
       </PageContainer>
     );
@@ -82,12 +97,19 @@ export default async function TasksPage() {
             />
             <TaskActionsMenuTrigger />
             <ViewModeToggleButtonGroup className="ml-auto" />
-            <Button
-              label="New Task"
-              iconLeft={
-                <Plus size={16} strokeWidth={1.5} absoluteStrokeWidth />
-              }
-            />
+            <RACDialogTrigger>
+              <Button
+                label="New Task"
+                iconLeft={
+                  <Plus size={16} strokeWidth={1.5} absoluteStrokeWidth />
+                }
+              />
+              <NewTaskModal
+                newTaskForm={
+                  <Suspense fallback={<Skeleton />}>{newTaskForm}</Suspense>
+                }
+              />
+            </RACDialogTrigger>
           </ToolbarDesktop>
 
           <ToolbarMobileTop>
@@ -104,12 +126,20 @@ export default async function TasksPage() {
 
           <ToolbarMobileBottom>
             <ViewModeToggleButtonGroup />
-            <Button
-              label="New Task"
-              iconLeft={
-                <Plus size={16} strokeWidth={1.5} absoluteStrokeWidth />
-              }
-            />
+
+            <RACDialogTrigger>
+              <Button
+                label="New Task"
+                iconLeft={
+                  <Plus size={16} strokeWidth={1.5} absoluteStrokeWidth />
+                }
+              />
+              <NewTaskModal
+                newTaskForm={
+                  <Suspense fallback={<Skeleton />}>{newTaskForm}</Suspense>
+                }
+              />
+            </RACDialogTrigger>
           </ToolbarMobileBottom>
           <ViewModeContainer
             list={<TaskList tasks={tasks} />}

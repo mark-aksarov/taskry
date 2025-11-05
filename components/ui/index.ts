@@ -6,6 +6,7 @@ export {
   DialogTrigger as RACDialogTrigger,
   Form as RACForm,
   Heading as RACHeading,
+  type ButtonProps as RACButtonProps,
   type LinkProps as RACLinkProps,
 } from "react-aria-components";
 
@@ -28,7 +29,8 @@ export {
   DialogBody,
   DialogCloseButton,
 } from "./Dialog";
-export { Link } from "./Link";
+export { DropZone } from "./DropZone";
+export { Link, linkStyles } from "./Link";
 export { Menu } from "./Menu";
 export { MenuItem, MenuTrigger } from "./Menu";
 export { Modal } from "./Modal";

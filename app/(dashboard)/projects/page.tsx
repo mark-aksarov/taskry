@@ -6,7 +6,7 @@ import {
   EmptySection,
   EmptySectionDescription,
   EmptySectionHeading,
-  EmptySectionLink,
+  EmptySectionButton,
 } from "@/components/common/EmptySection";
 import { PageGrid } from "@/components/common/PageGrid";
 import {
@@ -61,7 +61,7 @@ export default async function ProjectsPage() {
           <EmptySectionDescription>
             Create a new project to keep track of your work
           </EmptySectionDescription>
-          <EmptySectionLink href="#">New Project</EmptySectionLink>
+          <EmptySectionButton href="#">New Project</EmptySectionButton>
         </EmptySection>
       </PageContainer>
     );

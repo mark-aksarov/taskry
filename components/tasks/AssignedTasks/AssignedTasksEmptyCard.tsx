@@ -3,7 +3,7 @@ import {
   EmptySection,
   EmptySectionDescription,
   EmptySectionHeading,
-  EmptySectionLink,
+  EmptySectionButton,
 } from "@/components/common/EmptySection";
 
 export function AssignedTasksEmptyCard() {
@@ -17,7 +17,7 @@ export function AssignedTasksEmptyCard() {
           <EmptySectionDescription>
             Create a new task to keep track of your work
           </EmptySectionDescription>
-          <EmptySectionLink href="#">New Task</EmptySectionLink>
+          <EmptySectionButton href="#">New Task</EmptySectionButton>
         </EmptySection>
       </div>
     </Card>

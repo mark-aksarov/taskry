@@ -2,7 +2,7 @@ import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { EmptySection } from "./EmptySection";
 import { EmptySectionHeading } from "./EmptySectionHeading";
 import { EmptySectionDescription } from "./EmptySectionDescription";
-import { EmptySectionLink } from "./EmptySectionLink";
+import { EmptySectionButton } from "./EmptySectionButton";
 
 const meta = {
   title: "Components/common/EmptySection",
@@ -14,7 +14,7 @@ const meta = {
       <EmptySectionDescription>
         Create a new task to keep track of your work
       </EmptySectionDescription>
-      <EmptySectionLink href="#">New Task</EmptySectionLink>
+      <EmptySectionButton href="#">New Task</EmptySectionButton>
     </EmptySection>
   ),
 } satisfies Meta<typeof EmptySection>;

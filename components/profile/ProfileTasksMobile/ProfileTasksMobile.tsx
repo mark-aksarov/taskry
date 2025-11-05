@@ -2,7 +2,7 @@ import {
   EmptySection,
   EmptySectionDescription,
   EmptySectionHeading,
-  EmptySectionLink,
+  EmptySectionButton,
 } from "@/components/common/EmptySection";
 import { PageContainer } from "@/components/common/PageContainer";
 import { PageGrid } from "@/components/common/PageGrid";
@@ -26,7 +26,7 @@ export async function ProfileTasksMobile() {
           <EmptySectionDescription>
             Create a new task to keep track of your work
           </EmptySectionDescription>
-          <EmptySectionLink href="#">New Task</EmptySectionLink>
+          <EmptySectionButton href="#">New Task</EmptySectionButton>
         </EmptySection>
       </PageContainer>
     );

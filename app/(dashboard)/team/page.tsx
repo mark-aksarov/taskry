@@ -6,7 +6,7 @@ import {
   EmptySection,
   EmptySectionDescription,
   EmptySectionHeading,
-  EmptySectionLink,
+  EmptySectionButton,
 } from "@/components/common/EmptySection";
 import { PageGrid } from "@/components/common/PageGrid";
 import {
@@ -51,7 +51,7 @@ export default async function TeamPage() {
           <EmptySectionDescription>
             Add a new user to start building your team
           </EmptySectionDescription>
-          <EmptySectionLink href="#">New User</EmptySectionLink>
+          <EmptySectionButton href="#">New User</EmptySectionButton>
         </EmptySection>
       </PageContainer>
     );

@@ -6,7 +6,7 @@ import {
   EmptySection,
   EmptySectionDescription,
   EmptySectionHeading,
-  EmptySectionLink,
+  EmptySectionButton,
 } from "@/components/common/EmptySection";
 import { PageGrid } from "@/components/common/PageGrid";
 import {
@@ -52,7 +52,7 @@ export default async function CustomersPage() {
           <EmptySectionDescription>
             Add a new customer to start growing your client base
           </EmptySectionDescription>
-          <EmptySectionLink href="#">New Customer</EmptySectionLink>
+          <EmptySectionButton href="#">New Customer</EmptySectionButton>
         </EmptySection>
       </PageContainer>
     );

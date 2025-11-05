@@ -24,23 +24,20 @@ const meta: Meta<typeof TaskFiltersForm> = {
     );
     mocked(getUsers).mockReturnValue(new Promise((res) => res(usersMock)));
   },
-  render: (args) => {
-    const categoriesPromise = getTaskCategories(1);
-    const projectsPromise = getProjects();
-    const usersPromise = getUsers(1);
-
-    return (
-      <TaskFiltersForm
-        {...args}
-        categoryCheckboxGroup={
-          <TaskCategoryCheckboxGroup categoriesPromise={categoriesPromise} />
-        }
-        projectCheckboxGroup={
-          <ProjectCheckboxGroup projectsPromise={projectsPromise} />
-        }
-        creatorCheckboxGroup={<UserCheckboxGroup usersPromise={usersPromise} />}
+  args: {
+    categoryCheckboxGroup: (
+      <TaskCategoryCheckboxGroup
+        categoriesPromise={new Promise((res) => res(taskCategoriesMock))}
       />
-    );
+    ),
+    projectCheckboxGroup: (
+      <ProjectCheckboxGroup
+        projectsPromise={new Promise((res) => res(projectsMock))}
+      />
+    ),
+    creatorCheckboxGroup: (
+      <UserCheckboxGroup usersPromise={new Promise((res) => res(usersMock))} />
+    ),
   },
 } satisfies Meta<typeof TaskFiltersForm>;
 

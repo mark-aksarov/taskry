@@ -4,7 +4,7 @@ import {
   EmptySection,
   EmptySectionDescription,
   EmptySectionHeading,
-  EmptySectionLink,
+  EmptySectionButton,
 } from "@/components/common/EmptySection";
 
 export async function ProfileTasksDesktop() {
@@ -20,7 +20,7 @@ export async function ProfileTasksDesktop() {
           <EmptySectionDescription>
             Create a new task to keep track of your work
           </EmptySectionDescription>
-          <EmptySectionLink href="#">New Task</EmptySectionLink>
+          <EmptySectionButton href="#">New Task</EmptySectionButton>
         </EmptySection>
       </div>
     );

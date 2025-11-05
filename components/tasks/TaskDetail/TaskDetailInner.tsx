@@ -8,10 +8,12 @@ import {
 import Image from "next/image";
 import { TaskDetail } from "@/lib/queries/types";
 import { FieldSkeleton } from "@/components/common/FieldSkeleton";
-import { Checkbox, CheckboxGroup, Skeleton } from "@/components/ui";
+import { RACLink, Skeleton } from "@/components/ui";
 import { TaskDetailStatusMenuTrigger } from "./TaskDetailStatusMenuTrigger";
 import { Attachment, Attachments } from "@/components/attachments/Attachments";
 import { TaskCommentsModalTrigger } from "../TaskCommentsModalTrigger";
+import { SubtasksCheckboxGroup } from "@/components/subtasks/SubtasksCheckboxGroup";
+import { UpdateSubtasksButton } from "@/components/subtasks/UpdateSubtasksButton";
 
 export function TaskDetailInner({
   task,
@@ -21,7 +23,6 @@ export function TaskDetailInner({
   formattedDeadline?: string;
 }) {
   const rowStyles = "max-lg:flex-col max-lg:gap-4";
-  const itemClasses = "capitalize font-normal";
 
   return (
     <div className="flex flex-col gap-6">
@@ -136,17 +137,10 @@ export function TaskDetailInner({
             </DetailInfo>
           ) : (
             <DetailInfo>
-              <CheckboxGroup label="Subtasks">
-                {task.subtasks.map((subtask) => (
-                  <Checkbox
-                    key={subtask.id}
-                    value={subtask.id.toString()}
-                    className={itemClasses}
-                  >
-                    {subtask.name}
-                  </Checkbox>
-                ))}
-              </CheckboxGroup>
+              <div className="relative">
+                <SubtasksCheckboxGroup subtasks={task.subtasks} />
+                <UpdateSubtasksButton className="absolute top-0 right-0" />
+              </div>
             </DetailInfo>
           )}
         </DetailRow>

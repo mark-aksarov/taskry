@@ -2,7 +2,7 @@ import { Skeleton } from "@/components/ui";
 import { twMerge } from "tailwind-merge";
 
 const styles =
-  "flex flex-1 flex-col gap-1.5 border-b-1 border-gray-300 pb-4 dark:border-gray-600";
+  "flex flex-1 flex-col gap-3 border-b-1 border-gray-300 pb-4 dark:border-gray-600";
 
 interface DetailInfoProps {
   className?: string;

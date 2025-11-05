@@ -3,7 +3,7 @@
 import { RACForm } from "@/components/ui";
 import { TextField } from "@/components/ui";
 import { TaskStatusCheckboxGroup } from "../TaskStatusCheckboxGroup";
-import { TaskDeadline } from "../TaskDeadline";
+import { TaskFiltersDeadline } from "../TaskFiltersDeadline";
 
 interface TaskFiltersFormProps {
   categoryCheckboxGroup: React.ReactNode;
@@ -20,7 +20,7 @@ export function TaskFiltersForm({
     <RACForm>
       <div className="flex flex-col gap-4">
         <TextField label="Title" placeholder="Title" />
-        <TaskDeadline />
+        <TaskFiltersDeadline />
         <TaskStatusCheckboxGroup />
         {categoryCheckboxGroup}
         {projectCheckboxGroup}

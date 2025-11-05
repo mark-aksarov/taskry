@@ -29,12 +29,12 @@ export const taskDetailMock: TaskDetail = {
     {
       id: 1,
       name: "Create hero section",
-      isDone: false,
+      isDone: true,
     },
     {
       id: 2,
       name: "Design navigation menu",
-      isDone: false,
+      isDone: true,
     },
     {
       id: 3,
