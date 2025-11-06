@@ -6,12 +6,11 @@ import {
   FolderClosed,
   LayoutDashboard,
   LogOut,
-  Mail,
   UserRound,
   Users,
 } from "lucide-react";
 
-import { Badge, Divider } from "@/components/ui";
+import { Divider } from "@/components/ui";
 import { ThemeToggleButton } from "./ThemeToggleButton";
 import { NavigationButton } from "@/components/common/NavigationButton";
 import { LangMenuBottomSheetTrigger } from "../LangMenuTrigger";
@@ -51,12 +50,6 @@ export const AppNavigation = () => {
       >
         <Contact size={18} strokeWidth={1.5} absoluteStrokeWidth />
         Customers
-      </NavigationButton>
-
-      <NavigationButton href="/inbox" isActive={pathname.startsWith("/inbox")}>
-        <Mail size={18} strokeWidth={1.5} absoluteStrokeWidth />
-        Inbox
-        <Badge className="ml-auto rounded-xl px-1.5! py-0.5!">28</Badge>
       </NavigationButton>
 
       <NavigationButton

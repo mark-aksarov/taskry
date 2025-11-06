@@ -6,7 +6,7 @@ export function UpdateSubtasksFormLegend({
   children: React.ReactNode;
 }) {
   return (
-    <legend className={fieldLabelStyles({ className: "px-1" })}>
+    <legend className={fieldLabelStyles({ className: "-ml-1 px-1" })}>
       {children}
     </legend>
   );
