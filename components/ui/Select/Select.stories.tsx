@@ -5,6 +5,10 @@ import { Apple, Banana, Citrus } from "lucide-react";
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { Form } from "react-aria-components";
 import { Button } from "../Button";
+import {
+  withBackgroundVariant,
+  withContainerWidth,
+} from "@/.storybook/decorators";
 
 const meta: Meta<typeof Select> = {
   title: "Components/ui/Select",
@@ -20,6 +24,7 @@ const meta: Meta<typeof Select> = {
     onSelectionChange: fn(),
     isDisabled: false,
   },
+  decorators: [withContainerWidth(), withBackgroundVariant({ variant: "alt" })],
 } satisfies Meta<typeof Select>;
 
 export default meta;
@@ -44,11 +49,11 @@ const SelectTemplate: Story = {
   },
 };
 
-export const Default: Story = {
+export const Default = {
   ...SelectTemplate,
-};
+} satisfies Story;
 
-export const WithSheet: Story = {
+export const WithSheet = {
   ...SelectTemplate,
   args: {
     ...SelectTemplate.args,
@@ -58,15 +63,15 @@ export const WithSheet: Story = {
   globals: {
     viewport: { value: "mobile2", isRotated: false },
   },
-};
+} satisfies Story;
 
-export const Invalid: Story = {
+export const Invalid = {
   ...SelectTemplate,
   args: {
     ...SelectTemplate.args,
     isInvalid: true,
   },
-};
+} satisfies Story;
 
 export const Disabled: Story = {
   ...SelectTemplate,
@@ -74,7 +79,7 @@ export const Disabled: Story = {
     ...SelectTemplate.args,
     isDisabled: true,
   },
-};
+} satisfies Story;
 
 export const Validation: Story = {
   ...SelectTemplate,
@@ -96,4 +101,4 @@ export const Validation: Story = {
       </Form>
     ),
   ],
-};
+} satisfies Story;

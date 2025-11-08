@@ -5,6 +5,7 @@ import { MenuTrigger } from "./MenuTrigger";
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { Check, CircleEllipsis, Clock, Trash } from "lucide-react";
 import { DialogCloseButton, DialogHeader, DialogHeading } from "../Dialog";
+import { withBackgroundVariant } from "@/.storybook/decorators";
 
 const meta: Meta<typeof MenuTrigger> = {
   title: "Components/ui/Menu",
@@ -16,6 +17,7 @@ const meta: Meta<typeof MenuTrigger> = {
   parameters: {
     layout: "centered",
   },
+  decorators: [withBackgroundVariant()],
 };
 
 export default meta;

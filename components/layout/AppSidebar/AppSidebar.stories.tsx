@@ -8,42 +8,39 @@ import {
   Dialog,
   DialogCloseButton,
 } from "@/components/ui";
-import { mocked } from "storybook/test";
 import { AppSidebarHeader } from "./AppSidebarHeader";
 import { AppSidebarHeading } from "./AppSidebarHeading";
 import { AppSidebarBody } from "./AppSidebarBody";
 import { AppNavigation } from "../AppNavigation";
-import { useSelectedLayoutSegments } from "next/navigation";
+import { withBackgroundVariant } from "@/.storybook/decorators";
 
 const meta = {
   title: "Components/layout/AppSidebar",
   component: AppSidebar,
   tags: ["autodocs"],
-  beforeEach: () => {
-    mocked(useSelectedLayoutSegments).mockReturnValue(["(dashboard)"]);
-  },
+  decorators: [withBackgroundVariant()],
 } satisfies Meta<typeof AppSidebar>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default = {
-  args: {
-    className: "h-screen",
-  },
   parameters: {
     layout: "fullscreen",
   },
-  render: (args) => (
-    <AppSidebar {...args}>
-      <AppSidebarHeader>
-        <AppSidebarHeading />
-      </AppSidebarHeader>
-      <AppSidebarBody>
-        <AppNavigation />
-      </AppSidebarBody>
-    </AppSidebar>
-  ),
+  args: {
+    className: "h-screen",
+    children: (
+      <>
+        <AppSidebarHeader>
+          <AppSidebarHeading />
+        </AppSidebarHeader>
+        <AppSidebarBody>
+          <AppNavigation />
+        </AppSidebarBody>
+      </>
+    ),
+  },
 } satisfies Story;
 
 export const WrapWithSheet = {
@@ -61,9 +58,9 @@ export const WrapWithSheet = {
       );
     },
   ],
-  render: (args) => {
-    return (
-      <AppSidebar {...args}>
+  args: {
+    children: (
+      <>
         <AppSidebarHeader>
           <div className="flex items-center justify-between">
             <AppSidebarHeading />
@@ -73,7 +70,7 @@ export const WrapWithSheet = {
         <AppSidebarBody>
           <AppNavigation />
         </AppSidebarBody>
-      </AppSidebar>
-    );
+      </>
+    ),
   },
 } satisfies Story;

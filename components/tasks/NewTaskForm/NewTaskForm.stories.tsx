@@ -1,37 +1,32 @@
-import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { NewTaskForm } from "./NewTaskForm";
-import { TaskCategorySelect } from "../TaskCategorySelect";
-import { taskCategoriesMock } from "@/lib/data/__mocks__/taskCategories";
-import { ProjectSelect } from "@/components/projects/ProjectSelect";
-import { projectsMock } from "@/lib/data/__mocks__/projects";
+import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { UserSelect } from "@/components/users/UserSelect";
-import { usersMock } from "@/lib/data/__mocks__/users";
+import { TaskCategorySelect } from "../TaskCategorySelect";
+import { ProjectSelect } from "@/components/projects/ProjectSelect";
+import {
+  withContainerWidth,
+  withBackgroundVariant,
+} from "@/.storybook/decorators";
+import { Default as ProjectSelectStory } from "@/components/projects/ProjectSelect/ProjectSelect.stories";
+import { Default as TaskCategorySelectStory } from "../TaskCategorySelect/TaskCategorySelect.stories";
+import { Default as UserSelectStory } from "@/components/users/UserSelect/UserSelect.stories";
 
 const meta = {
   title: "components/tasks/NewTaskForm",
   component: NewTaskForm,
   tags: ["autodocs"],
-  args: {
-    taskCategorySelect: (
-      <TaskCategorySelect
-        categoriesPromise={Promise.resolve(taskCategoriesMock)}
-      />
-    ),
-    projectSelect: (
-      <ProjectSelect projectsPromise={Promise.resolve(projectsMock)} />
-    ),
-    assigneeSelect: <UserSelect usersPromise={Promise.resolve(usersMock)} />,
-  },
-  decorators: [
-    (Story) => (
-      <div className="w-[460px] max-w-full">
-        <Story />
-      </div>
-    ),
-  ],
+  decorators: [withContainerWidth(), withBackgroundVariant({ variant: "alt" })],
 } satisfies Meta<typeof NewTaskForm>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
+export const Default = {
+  args: {
+    taskCategorySelect: (
+      <TaskCategorySelect {...TaskCategorySelectStory.args} />
+    ),
+    projectSelect: <ProjectSelect {...ProjectSelectStory.args} />,
+    assigneeSelect: <UserSelect {...UserSelectStory.args} />,
+  },
+} satisfies Story;

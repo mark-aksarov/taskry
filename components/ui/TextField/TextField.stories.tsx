@@ -4,6 +4,10 @@ import { TextField } from "../TextField";
 import { Form } from "react-aria-components";
 import { Button } from "@/components/ui/Button";
 import { fn } from "storybook/test";
+import {
+  withContainerWidth,
+  withBackgroundVariant,
+} from "@/.storybook/decorators";
 
 const meta = {
   title: "Components/ui/TextField",
@@ -26,6 +30,8 @@ const meta = {
     isDisabled: false,
     onChange: fn(),
   },
+
+  decorators: [withContainerWidth(), withBackgroundVariant({ variant: "alt" })],
 } satisfies Meta<typeof TextField>;
 
 export default meta;

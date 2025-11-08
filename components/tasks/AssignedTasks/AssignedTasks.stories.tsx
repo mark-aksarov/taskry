@@ -1,31 +1,23 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { mocked } from "storybook/test";
 import { AssignedTasks } from "./AssignedTasks";
-import { getTasks } from "@/lib/queries/task";
-import { tasksMock } from "@/lib/data/__mocks__/tasks";
+import { Default as TaskListStory } from "../TaskList/TaskList.stories";
+import { withBackgroundVariant } from "@/.storybook/decorators";
 
 const meta = {
   title: "Components/tasks/AssignedTasks",
   component: AssignedTasks,
-  beforeEach: () => {
-    mocked(getTasks).mockReturnValue(new Promise((res) => res(tasksMock)));
-  },
+  decorators: [withBackgroundVariant()],
 } satisfies Meta<typeof AssignedTasks>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
+export const Default = {
+  args: TaskListStory.args,
+} satisfies Story;
 
-export const WithNoTasks: Story = {
-  decorators: [
-    (Story) => (
-      <div className="flex h-[500px]">
-        <Story />
-      </div>
-    ),
-  ],
-  beforeEach: () => {
-    mocked(getTasks).mockReturnValue(new Promise((res) => res([])));
+export const Loading = {
+  args: {
+    tasks: undefined,
   },
-};
+} satisfies Story;

@@ -1,5 +1,5 @@
-import { ProfileInfoInner } from "./ProfileInfoInner";
+import { ProfileInfo } from "./ProfileInfo";
 
 export function ProfileInfoSkeleton() {
-  return <ProfileInfoInner />;
+  return <ProfileInfo />;
 }

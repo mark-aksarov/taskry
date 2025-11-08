@@ -1,4 +1,3 @@
-export {
-  TotalCustomersCard,
-  TotalCustomersCardSkeleton,
-} from "./TotalCustomersCard";
+export { TotalCustomersCard } from "./TotalCustomersCard";
+export { TotalCustomersCardSkeleton } from "./TotalCustomersCardSkeleton";
+export { TotalCustomersCardContainer } from "./TotalCustomersCardContainer";

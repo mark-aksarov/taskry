@@ -2,6 +2,10 @@ import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { DropZone } from "./DropZone";
 import { fn } from "storybook/test";
 import { useState } from "react";
+import {
+  withBackgroundVariant,
+  withContainerWidth,
+} from "@/.storybook/decorators";
 
 const meta = {
   title: "Components/ui/DropZone",
@@ -29,16 +33,7 @@ const meta = {
       </div>
     );
   },
-  parameters: {
-    layout: "fullscreen",
-  },
-  decorators: [
-    (Story) => (
-      <div className="h-screen bg-white p-4 dark:bg-gray-800">
-        <Story />
-      </div>
-    ),
-  ],
+  decorators: [withContainerWidth(), withBackgroundVariant({ variant: "alt" })],
 } satisfies Meta<typeof DropZone>;
 
 export default meta;

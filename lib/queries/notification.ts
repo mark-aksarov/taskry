@@ -2,13 +2,9 @@ import "server-only";
 
 import { cache } from "react";
 import prisma from "../prisma";
-import { NotificationRecipientWithRelations } from "./types";
 
 export const getNotifications = cache(
-  async (
-    userId: string,
-    workspaceId: number,
-  ): Promise<NotificationRecipientWithRelations[]> => {
+  async (userId: string, workspaceId: number) => {
     return prisma.notificationRecipient.findMany({
       where: {
         userId,

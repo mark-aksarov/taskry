@@ -1,10 +1,9 @@
 "use client";
 
-import { Checkbox, Button, Link } from "@/components/ui";
 import Image from "next/image";
 import { useMemo } from "react";
 import { Item } from "react-stately";
-import { ProjectPreview } from "@/lib/queries/types";
+import { Checkbox, Button, Link } from "@/components/ui";
 import { DONE_TASK_STATUS_ID } from "@/lib/queries/constants";
 import { Check, CircleEllipsis, Clock, Ellipsis, Trash } from "lucide-react";
 import { ResponsiveMenuTrigger } from "@/components/common/ResponsiveMenuTrigger";
@@ -25,7 +24,25 @@ import {
 import { MenuTriggerSkeleton } from "@/components/common/MenuTriggerSkeleton";
 import { MenuDialogHeader } from "@/components/common/MenuDialogHeader";
 
-export function ProjectGridItem({ project }: { project: ProjectPreview }) {
+export interface ProjectGridItemType {
+  id: number;
+  title: string;
+  deadline?: string | Date | null;
+  creator?: {
+    id: string;
+    fullName: string;
+    imageUrl?: string | null;
+  } | null;
+  tasks: {
+    statusId: number;
+  }[];
+}
+
+export interface ProjectGridItemProps {
+  project?: ProjectGridItemType | null;
+}
+
+export function ProjectGridItem({ project }: ProjectGridItemProps) {
   const locale = "en-GB";
 
   const formattedDeadline = useMemo(() => {

@@ -1,1 +1,3 @@
-export { TotalTasksCard, TotalTasksCardSkeleton } from "./TotalTasksCard";
+export { TotalTasksCard } from "./TotalTasksCard";
+export { TotalTasksCardSkeleton } from "./TotalTasksCardSkeleton";
+export { TotalTasksCardContainer } from "./TotalTasksCardContainer";

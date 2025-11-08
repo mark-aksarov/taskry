@@ -1,8 +1,7 @@
-import { ProjectGridItem } from "../ProjectGridItem";
-import { ProjectPreview } from "@/lib/queries/types";
-import { Grid } from "@/components/common/Grid/Grid";
+import { Grid } from "@/components/common/Grid";
+import { ProjectGridItem, ProjectGridItemType } from "../ProjectGridItem";
 
-export function ProjectGrid({ projects }: { projects: ProjectPreview[] }) {
+export function ProjectGrid({ projects }: { projects: ProjectGridItemType[] }) {
   return (
     <Grid>
       {projects.map((project) => (

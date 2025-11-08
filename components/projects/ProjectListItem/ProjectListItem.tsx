@@ -2,7 +2,6 @@
 
 import { useMemo } from "react";
 import { Link } from "@/components/ui";
-import { ProjectPreview } from "@/lib/queries/types";
 import { Check, CircleEllipsis, Clock, Ellipsis, Trash } from "lucide-react";
 import { DONE_TASK_STATUS_ID } from "@/lib/queries/constants";
 import { Item } from "react-stately";
@@ -25,13 +24,43 @@ import {
 import { MenuTriggerSkeleton } from "@/components/common/MenuTriggerSkeleton";
 import { MenuDialogHeader } from "@/components/common/MenuDialogHeader";
 
+export interface ProjectItemType {
+  id: number;
+  title: string;
+  deadline?: string | Date | null;
+  category: {
+    id: number;
+    name: string;
+  };
+  customer?: {
+    id: number;
+    fullName: string;
+    company: {
+      name: string;
+    };
+  } | null;
+  status: {
+    nameEn: string;
+  };
+  creator?: {
+    id: string;
+    fullName: string;
+    imageUrl?: string | null;
+  } | null;
+  tasks: {
+    statusId: number;
+  }[];
+}
+
+export interface ProjectListItemProps {
+  project?: ProjectItemType | null;
+  showCheckbox?: boolean;
+}
+
 export const ProjectListItem = ({
   project,
   showCheckbox,
-}: {
-  project?: ProjectPreview;
-  showCheckbox?: boolean;
-}) => {
+}: ProjectListItemProps) => {
   const locale = "en-GB";
 
   const formattedDeadline = useMemo(() => {

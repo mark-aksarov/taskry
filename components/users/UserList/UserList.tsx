@@ -1,9 +1,8 @@
-import { UserListItem } from "../UserListItem";
+import { UserListItem, UserListItemType } from "../UserListItem";
 import { List } from "@/components/common/List";
-import { UserPreview } from "@/lib/queries/types";
 
 interface UserListProps {
-  users: UserPreview[];
+  users: UserListItemType[];
   showCheckbox?: boolean;
 }
 

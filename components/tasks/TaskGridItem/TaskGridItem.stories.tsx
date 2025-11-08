@@ -1,45 +1,43 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { TaskGridItem } from "./TaskGridItem";
-import { tasksMock } from "@/lib/data/__mocks__/tasks";
+import {
+  withBackgroundVariant,
+  withContainerWidth,
+} from "@/.storybook/decorators";
 
 const meta = {
   title: "Components/tasks/TaskGridItem",
   component: TaskGridItem,
   tags: ["autodocs"],
-  decorators: [
-    (Story) => (
-      <div className="w-[250px]">
-        <Story />
-      </div>
-    ),
-  ],
-  args: {
-    task: tasksMock[0],
-  },
+  decorators: [withContainerWidth("250px"), withBackgroundVariant()],
 } satisfies Meta<typeof TaskGridItem>;
 
 export default meta;
 type Story = StoryObj<typeof TaskGridItem>;
 
-export const Default: Story = {};
+export const Default = {
+  args: {
+    task: {
+      id: 1,
+      title: "Design homepage",
+      deadline: new Date("2025-09-28"),
+      creator: { id: "user1", imageUrl: "/man.jpg", fullName: "Liam Turner" },
+      subtasks: [{ isDone: false }, { isDone: true }, { isDone: false }],
+    },
+  },
+} satisfies Story;
 
-export const Skeleton: Story = {
+export const Skeleton = {
   args: {
     task: undefined,
   },
-};
+} satisfies Story;
 
-export const WithoutCreator: Story = {
+export const WithoutCreator = {
   args: {
     task: {
-      ...tasksMock[0],
+      ...Default.args.task,
       creator: null,
     },
   },
-};
-
-export const OnMobile: Story = {
-  globals: {
-    viewport: { value: "mobile2", isRotated: false },
-  },
-};
+} satisfies Story;

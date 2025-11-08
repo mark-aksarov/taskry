@@ -9,7 +9,6 @@ import {
   ImageContainer,
   ImageContainerSkeleton,
 } from "@/components/common/ImageContainer";
-import { Comment } from "@/lib/queries/types";
 import { useMemo } from "react";
 import { CommentItemContent } from "./CommentItemContent";
 import { Attachment, Attachments } from "@/components/attachments/Attachments";
@@ -18,8 +17,18 @@ import { CommentItemActions } from "./CommentItemActions";
 import { ReplyButton } from "../ReplyButton";
 import { LikeButton } from "../LikeButton";
 
+export interface CommentItemType {
+  id: number;
+  content: string;
+  createdAt: Date;
+  attachments: { id: number; fileUrl: string }[];
+  likes: { userId: string }[];
+  _count: { likes: number };
+  sender: { id: string; fullName: string; imageUrl?: string | null };
+}
+
 interface CommentItemProps {
-  comment?: Comment;
+  comment?: CommentItemType;
 }
 
 export function CommentItem({ comment }: CommentItemProps) {

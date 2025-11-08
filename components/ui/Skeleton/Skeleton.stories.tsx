@@ -1,10 +1,15 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { Skeleton } from "./Skeleton";
+import {
+  withContainerWidth,
+  withBackgroundVariant,
+} from "@/.storybook/decorators";
 
 const meta: Meta<typeof Skeleton> = {
   title: "Components/ui/Skeleton",
   component: Skeleton,
   tags: ["autodocs"],
+  decorators: [withContainerWidth(), withBackgroundVariant({ variant: "alt" })],
 } satisfies Meta<typeof Skeleton>;
 
 export default meta;

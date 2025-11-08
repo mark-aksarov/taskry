@@ -4,6 +4,7 @@ import { fn } from "storybook/test";
 
 import { Button } from "./Button";
 import { Clock, Download, Heart } from "lucide-react";
+import { withBackgroundVariant } from "@/.storybook/decorators";
 
 const iconOptions = ["None", "Clock", "Heart", "Download"];
 const icons = {
@@ -52,6 +53,7 @@ const meta = {
   args: {
     onPress: fn(),
   },
+  decorators: [withBackgroundVariant()],
 } satisfies Meta<typeof Button>;
 
 export default meta;

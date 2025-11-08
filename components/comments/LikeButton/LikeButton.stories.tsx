@@ -1,3 +1,4 @@
+import { withBackgroundVariant } from "@/.storybook/decorators";
 import { LikeButton } from "./LikeButton";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 
@@ -8,6 +9,7 @@ const meta = {
   args: {
     value: 10,
   },
+  decorators: [withBackgroundVariant()],
 } satisfies Meta<typeof LikeButton>;
 
 export default meta;

@@ -1,45 +1,50 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { NavigationButton } from "./NavigationButton";
+import {
+  withContainerWidth,
+  withBackgroundVariant,
+} from "@/.storybook/decorators";
 
 const meta = {
   title: "Components/common/NavigationButton",
   component: NavigationButton,
   tags: ["autodocs"],
+  decorators: [withContainerWidth(), withBackgroundVariant({ variant: "alt" })],
 } satisfies Meta<typeof NavigationButton>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Primary: Story = {
+export const Primary = {
   args: {
     href: "/projects",
     variant: "primary",
     children: "Navigation Item",
   },
-};
+} satisfies Story;
 
-export const PrimaryActive: Story = {
+export const PrimaryActive = {
   args: {
     href: "/",
     variant: "primary",
     children: "Navigation Item",
     isActive: true,
   },
-};
+} satisfies Story;
 
-export const Secondary: Story = {
+export const Secondary = {
   args: {
     href: "/projects",
     variant: "secondary",
     children: "Navigation Item",
   },
-};
+} satisfies Story;
 
-export const SecondaryActive: Story = {
+export const SecondaryActive = {
   args: {
     href: "/",
     variant: "secondary",
     children: "Navigation Item",
     isActive: true,
   },
-};
+} satisfies Story;

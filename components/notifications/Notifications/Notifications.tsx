@@ -1,13 +1,12 @@
-import { ToggleButton, ToggleButtonGroup } from "@/components/ui";
-import { getNotifications } from "@/lib/queries/notification";
 import { NotificationList } from "../NotificationList";
+import { ToggleButton, ToggleButtonGroup } from "@/components/ui";
+import { NotificationListItemType } from "../NotificationListItem";
 
-export async function Notifications() {
-  const notifications = await getNotifications(
-    "BKs42HvVDEZFoaJUmTqf1gTN0K8pUFjI",
-    1,
-  );
-
+export function Notifications({
+  notifications,
+}: {
+  notifications: NotificationListItemType[];
+}) {
   const unreadCount = notifications.filter((n) => !n.isRead).length;
 
   return (

@@ -2,18 +2,21 @@ import "server-only";
 
 import { cache } from "react";
 import prisma from "../prisma";
-import { ProjectPreview } from "./types";
-import { ACTIVE_PROJECT_STATUS_ID } from "./constants";
+import { ProjectItem } from "@/components/projects/types";
 
 export const getProjects = cache(
-  async (creatorId?: string): Promise<ProjectPreview[]> => {
+  async (creatorId?: string): Promise<ProjectItem[]> => {
     return await prisma.project.findMany({
       where: creatorId
         ? {
             creatorId,
           }
         : undefined,
-      include: {
+      select: {
+        id: true,
+        title: true,
+        deadline: true,
+
         creator: {
           select: {
             id: true,
@@ -54,34 +57,3 @@ export const getProjects = cache(
     });
   },
 );
-
-export const getTotalProjects = cache(
-  async (fromDate?: Date, toDate?: Date) => {
-    const where: any = {};
-
-    if (fromDate && toDate) {
-      where.deadline = {
-        gte: fromDate,
-        lte: toDate,
-      };
-    }
-
-    return prisma.project.count({ where });
-  },
-);
-
-export const getActiveProjects = cache(async () => {
-  return prisma.project.count({
-    where: { statusId: ACTIVE_PROJECT_STATUS_ID },
-  });
-});
-
-export const getProjectCategories = cache(async (workspaceId: number) => {
-  return prisma.projectCategory.findMany({
-    where: { workspaceId },
-  });
-});
-
-export const getProjectStatuses = cache(async () => {
-  return prisma.projectStatus.findMany();
-});

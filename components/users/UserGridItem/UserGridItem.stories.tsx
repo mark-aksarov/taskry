@@ -1,54 +1,50 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { UserGridItem } from "./UserGridItem";
-import { usersMock } from "../../../lib/data/__mocks__/users";
+import {
+  withBackgroundVariant,
+  withContainerWidth,
+} from "@/.storybook/decorators";
 
 const meta = {
   title: "Components/users/UserGridItem",
   component: UserGridItem,
   tags: ["autodocs"],
-  decorators: [
-    (Story) => (
-      <div className="w-[250px]">
-        <Story />
-      </div>
-    ),
-  ],
-  args: {
-    user: usersMock[0],
-  },
+  decorators: [withContainerWidth("250px"), withBackgroundVariant()],
 } satisfies Meta<typeof UserGridItem>;
 
 export default meta;
 type Story = StoryObj<typeof UserGridItem>;
 
-export const Default: Story = {};
+export const Default = {
+  args: {
+    user: {
+      id: "user1",
+      fullName: "Liam Anderson",
+      email: "liam.anderson@example.com",
+      imageUrl: "/man.jpg",
+      phoneNumber: "+380990001001",
+      publicLink: "https://example.com/liam",
+      position: {
+        name: "Developer",
+      },
+    },
+  },
+} satisfies Story;
+
+export const WithoutImagePositionPhoneAndLink = {
+  args: {
+    user: {
+      ...Default.args.user,
+      imageUrl: null,
+      position: null,
+      phoneNumber: null,
+      publicLink: null,
+    },
+  },
+} satisfies Story;
 
 export const Skeleton: Story = {
   args: {
     user: undefined,
   },
-};
-
-export const WithoutImage: Story = {
-  args: {
-    user: {
-      ...usersMock[0],
-      imageUrl: null,
-    },
-  },
-};
-
-export const WithoutPosition: Story = {
-  args: {
-    user: {
-      ...usersMock[0],
-      position: null,
-    },
-  },
-};
-
-export const OnMobile: Story = {
-  globals: {
-    viewport: { value: "mobile2", isRotated: false },
-  },
-};
+} satisfies Story;

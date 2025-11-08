@@ -10,11 +10,13 @@ import {
   DialogHeader,
   DialogHeading,
 } from "../Dialog";
+import { withBackgroundVariant } from "@/.storybook/decorators";
 
 const meta: Meta<typeof SideSheet> = {
   title: "Components/ui/SideSheet",
   component: SideSheet,
   tags: ["autodocs"],
+  decorators: [withBackgroundVariant()],
 } satisfies Meta<typeof SideSheet>;
 
 export default meta;

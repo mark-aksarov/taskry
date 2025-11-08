@@ -1,44 +1,56 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { NotificationListItem } from "./NotificationListItem";
-import { notificationsMock } from "@/lib/data/__mocks__/notifications";
+import { withBackgroundVariant } from "@/.storybook/decorators";
 
 const meta = {
   title: "Components/notifications/NotificationListItem",
   component: NotificationListItem,
   tags: ["autodocs"],
-  args: {
-    notification: notificationsMock[0],
-  },
   parameters: {
     layout: "fullscreen",
   },
+  decorators: [withBackgroundVariant({ variant: "alt" })],
 } satisfies Meta<typeof NotificationListItem>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
-
-export const WithoutCreator: Story = {
+export const Default = {
   args: {
     notification: {
-      ...notificationsMock[0],
+      notificationId: 1,
+      isRead: false,
       notification: {
-        ...notificationsMock[0].notification,
-        actor: null,
+        type: "TASK_ADDED",
+        targetName: "Create Landing Page",
+        createdAt: new Date("2025-09-23T08:00:00Z"),
+        actor: {
+          id: "user-2",
+          fullName: "Alice Johnson",
+          imageUrl: "/woman.jpg",
+        },
+        target: {
+          project: { id: 10, title: "Website Redesign" },
+        },
       },
     },
   },
-};
+} satisfies Story;
 
-export const Skeleton: Story = {
+export const WithoutCreator = {
+  args: {
+    notification: {
+      ...Default.args.notification,
+      notification: {
+        ...Default.args.notification.notification,
+        actor: undefined,
+      },
+    },
+  },
+} satisfies Story;
+
+export const Skeleton = {
   args: {
     notification: undefined,
   },
-};
-
-export const OnMobile: Story = {
-  globals: {
-    viewport: { value: "mobile2", isRotated: false },
-  },
-};
+} satisfies Story;

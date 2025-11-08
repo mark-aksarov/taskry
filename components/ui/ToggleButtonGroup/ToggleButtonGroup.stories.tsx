@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { ToggleButtonGroup } from "../ToggleButtonGroup";
 import { ToggleButton } from "./ToggleButton";
+import { withBackgroundVariant } from "@/.storybook/decorators";
 
 const meta: Meta<typeof ToggleButtonGroup> = {
   title: "Components/ui/ToggleButtonGroup",
@@ -18,6 +19,7 @@ const meta: Meta<typeof ToggleButtonGroup> = {
     defaultSelectedKeys: ["apple"],
     variant: "contrast",
   },
+  decorators: [withBackgroundVariant()],
 };
 
 export default meta;

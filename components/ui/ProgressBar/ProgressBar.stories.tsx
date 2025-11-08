@@ -1,14 +1,16 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { ProgressBar } from "../ProgressBar";
 import { CheckCheck } from "lucide-react";
+import {
+  withContainerWidth,
+  withBackgroundVariant,
+} from "@/.storybook/decorators";
 
 const meta: Meta<typeof ProgressBar> = {
   title: "Components/ui/ProgressBar",
   component: ProgressBar,
   tags: ["autodocs"],
-  args: {
-    className: "max-w-[400px]",
-  },
+  decorators: [withContainerWidth(), withBackgroundVariant({ variant: "alt" })],
 } satisfies Meta<typeof ProgressBar>;
 
 export default meta;

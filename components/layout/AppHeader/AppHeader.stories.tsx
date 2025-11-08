@@ -1,14 +1,11 @@
-import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { AppHeader } from "./AppHeader";
-import { Suspense } from "react";
-import { mocked } from "storybook/test";
-import { NotificationModalTrigger } from "@/components/notifications/NotificationModalTrigger";
+import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { AppBottomSheetTrigger } from "../AppBottomSheetTrigger";
 import { AppSidebarSheetTrigger } from "../AppSidebarSheetTrigger";
-import { getNotifications } from "@/lib/queries/notification";
-import { useSelectedLayoutSegments } from "next/navigation";
-import { notificationsMock } from "@/lib/data/__mocks__/notifications";
 import { Notifications } from "@/components/notifications/Notifications";
+//import { Default as NotificationListStory } from "@/components/notifications/NotificationList/NotificationList.stories";
+import { NotificationModalTrigger } from "@/components/notifications/NotificationModalTrigger";
+import { withBackgroundVariant } from "@/.storybook/decorators";
 
 const meta = {
   title: "Components/layout/AppHeader",
@@ -17,40 +14,263 @@ const meta = {
   parameters: {
     layout: "fullscreen",
   },
-  args: {
-    title: "Dashboard",
-  },
-  render: (args) => (
-    <AppHeader
-      {...args}
-      notificationModalTrigger={
-        <NotificationModalTrigger
-          notifications={
-            <Suspense>
-              <Notifications />
-            </Suspense>
-          }
-        />
-      }
-      appBottomSheetTrigger={<AppBottomSheetTrigger />}
-      appSidebarSheetTrigger={<AppSidebarSheetTrigger />}
-    />
-  ),
-  beforeEach: () => {
-    mocked(getNotifications).mockReturnValue(
-      new Promise((res) => res(notificationsMock)),
-    );
-    mocked(useSelectedLayoutSegments).mockReturnValue(["(dashboard)"]);
-  },
+  decorators: [withBackgroundVariant()],
 } satisfies Meta<typeof AppHeader>;
 
 export default meta;
 type Story = StoryObj<typeof AppHeader>;
 
-export const Desktop = {} satisfies Story;
-
-export const Mobile = {
-  globals: {
-    viewport: { value: "mobile2", isRotated: false },
+export const Default = {
+  args: {
+    title: "Dashboard",
+    notificationModalTrigger: (
+      <NotificationModalTrigger
+        notifications={
+          <Notifications
+            notifications={[
+              {
+                notificationId: 1,
+                isRead: false,
+                notification: {
+                  type: "TASK_ADDED",
+                  targetName: "Create Landing Page",
+                  createdAt: new Date("2025-09-23T08:00:00Z"),
+                  actor: {
+                    id: "user-2",
+                    fullName: "Alice Johnson",
+                    imageUrl: "/woman.jpg",
+                  },
+                  target: {
+                    task: { id: 10, title: "Website Redesign" },
+                  },
+                },
+              },
+              {
+                notificationId: 2,
+                isRead: true,
+                notification: {
+                  type: "PROJECT_UPDATED",
+                  targetName: "Website Redesign",
+                  createdAt: new Date("2025-09-22T09:30:00Z"),
+                  actor: {
+                    id: "user-2",
+                    fullName: "Alice Johnson",
+                    imageUrl: null,
+                  },
+                  target: {
+                    project: { id: 10, title: "Website Redesign" },
+                  },
+                },
+              },
+              {
+                notificationId: 3,
+                isRead: false,
+                notification: {
+                  type: "MESSAGE_SENT",
+                  targetName: "Hello!",
+                  createdAt: new Date("2025-09-21T08:30:00Z"),
+                },
+              },
+              {
+                notificationId: 4,
+                isRead: false,
+                notification: {
+                  type: "COMMENT_ADDED",
+                  targetName: "Landing Page Task",
+                  createdAt: new Date("2025-09-20T09:00:00Z"),
+                  actor: {
+                    id: "user-4",
+                    fullName: "Carol White",
+                    imageUrl: "/woman.jpg",
+                  },
+                  target: {
+                    comment: {
+                      id: 1,
+                      content: "Great job! Keep up the good work.",
+                      project: {
+                        title: "Website Redesign",
+                      },
+                      attachments: [],
+                      likes: [],
+                      _count: {
+                        likes: 13,
+                      },
+                    },
+                  },
+                },
+              },
+              {
+                notificationId: 5,
+                isRead: true,
+                notification: {
+                  type: "COMMENT_ADDED",
+                  targetName: "Website Redesign",
+                  createdAt: new Date("2025-09-19T11:00:00Z"),
+                  actor: {
+                    id: "user-3",
+                    fullName: "Bob Smith",
+                    imageUrl: "/man.jpg",
+                  },
+                  target: {
+                    comment: {
+                      id: 2,
+                      content:
+                        "I totally agree with Alice. The performance improvements are noticeable, especially in larger datasets. One suggestion though: it might be helpful to include a loading indicator when switching between tabs, since the delay can confuse first-time users.",
+                      task: {
+                        title: "Design landing page",
+                      },
+                      attachments: [
+                        {
+                          id: 1,
+                          fileUrl: "/placeholder.jpg",
+                        },
+                        {
+                          id: 2,
+                          fileUrl: "/placeholder.jpg",
+                        },
+                      ],
+                      likes: [
+                        {
+                          userId: "user_1",
+                        },
+                      ],
+                      _count: {
+                        likes: 25,
+                      },
+                    },
+                  },
+                },
+              },
+              {
+                notificationId: 6,
+                isRead: false,
+                notification: {
+                  type: "USER_ADDED",
+                  targetName: "David King",
+                  createdAt: new Date("2025-09-18T10:00:00Z"),
+                  actor: {
+                    id: "user-5",
+                    fullName: "Eve Black",
+                    imageUrl: "/woman.jpg",
+                  },
+                  target: {
+                    user: { id: "user-6", fullName: "David King" },
+                  },
+                },
+              },
+              {
+                notificationId: 7,
+                isRead: false,
+                notification: {
+                  type: "CUSTOMER_ADDED",
+                  targetName: "Acme Corp",
+                  createdAt: new Date("2025-09-17T10:30:00Z"),
+                  actor: {
+                    id: "user-2",
+                    fullName: "Alice Johnson",
+                    imageUrl: "/woman.jpg",
+                  },
+                  target: {
+                    customer: { id: 300, fullName: "Acme Corp" },
+                  },
+                },
+              },
+              {
+                notificationId: 8,
+                isRead: true,
+                notification: {
+                  type: "TASK_DELETED",
+                  targetName: "Old Task",
+                  createdAt: new Date("2025-09-16T13:00:00Z"),
+                  actor: {
+                    id: "user-3",
+                    fullName: "Bob Smith",
+                    imageUrl: "/man.jpg",
+                  },
+                  target: {
+                    task: { id: 101, title: "Old Task" },
+                  },
+                },
+              },
+              {
+                notificationId: 9,
+                isRead: false,
+                notification: {
+                  type: "USER_UPDATED",
+                  targetName: "Alice Johnson",
+                  createdAt: new Date("2025-09-15T11:00:00Z"),
+                  actor: {
+                    id: "user-5",
+                    fullName: "Eve Black",
+                    imageUrl: "/woman.jpg",
+                  },
+                  target: {
+                    user: { id: "user-2", fullName: "Alice Johnson" },
+                  },
+                },
+              },
+              {
+                notificationId: 10,
+                isRead: true,
+                notification: {
+                  type: "MESSAGE_SENT",
+                  targetName: "Weekly Update",
+                  createdAt: new Date("2025-09-14T15:30:00Z"),
+                  actor: {
+                    id: "user-4",
+                    fullName: "Carol White",
+                    imageUrl: "/woman.jpg",
+                  },
+                },
+              },
+              {
+                notificationId: 11,
+                isRead: true,
+                notification: {
+                  type: "COMMENT_REPLIED",
+                  targetName: "Implement login system",
+                  createdAt: new Date("2025-09-19T11:00:00Z"),
+                  actor: {
+                    id: "user-3",
+                    fullName: "Bob Smith",
+                    imageUrl: "/man.jpg",
+                  },
+                  target: {
+                    comment: {
+                      id: 2,
+                      content:
+                        "I totally agree with Alice. The performance improvements are noticeable, especially in larger datasets. One suggestion though: it might be helpful to include a loading indicator when switching between tabs, since the delay can confuse first-time users.",
+                      task: {
+                        title: "Design landing page",
+                      },
+                      attachments: [
+                        {
+                          id: 1,
+                          fileUrl: "/placeholder.jpg",
+                        },
+                        {
+                          id: 2,
+                          fileUrl: "/placeholder.jpg",
+                        },
+                      ],
+                      likes: [
+                        {
+                          userId: "user_1",
+                        },
+                      ],
+                      _count: {
+                        likes: 13,
+                      },
+                    },
+                  },
+                },
+              },
+            ]}
+          />
+        }
+      />
+    ),
+    appBottomSheetTrigger: <AppBottomSheetTrigger />,
+    appSidebarSheetTrigger: <AppSidebarSheetTrigger />,
   },
 } satisfies Story;

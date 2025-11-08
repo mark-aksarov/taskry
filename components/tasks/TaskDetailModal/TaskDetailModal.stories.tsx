@@ -1,6 +1,7 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { TaskDetailModal } from "./TaskDetailModal";
 import { Button, RACDialogTrigger } from "@/components/ui";
+import { withBackgroundVariant } from "@/.storybook/decorators";
 
 const meta = {
   title: "components/tasks/TaskDetailModal",
@@ -13,6 +14,7 @@ const meta = {
         <Story />
       </RACDialogTrigger>
     ),
+    withBackgroundVariant(),
   ],
   args: {
     taskId: 1,
@@ -22,4 +24,4 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
+export const Default = {} satisfies Story;

@@ -1,21 +1,21 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { ProfileTaskListItem } from "./ProfileTaskListItem";
-import { tasksMock } from "@/lib/data/__mocks__/tasks";
+import { withBackgroundVariant } from "@/.storybook/decorators";
 
 const meta = {
   title: "components/profile/ProfileTaskListItem",
   component: ProfileTaskListItem,
   tags: ["autodocs"],
   parameters: { layout: "fullscreen" },
-  args: {
-    task: tasksMock[0],
-  },
+  decorators: [withBackgroundVariant()],
 } satisfies Meta<typeof ProfileTaskListItem>;
 
 export default meta;
 type Story = StoryObj<typeof ProfileTaskListItem>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  args: {},
+};
 
 export const Skeleton: Story = {
   ...Default,

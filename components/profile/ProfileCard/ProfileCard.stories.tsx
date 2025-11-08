@@ -4,6 +4,7 @@ import { ProfileCardLeft } from "./ProfileCardLeft";
 import { ProfileCardHeader } from "./ProfileCardHeader";
 import { ProfileCardTitle } from "./ProfileCardTitle";
 import { ProfileCardRight } from "./ProfileCardRight";
+import { withBackgroundVariant } from "@/.storybook/decorators";
 
 const meta = {
   title: "components/profile/ProfileCard",
@@ -15,15 +16,20 @@ const meta = {
           <ProfileCardHeader>
             <ProfileCardTitle>Title</ProfileCardTitle>
           </ProfileCardHeader>
-          <div className="p-6">Content Left</div>
+          <div className="p-6">
+            <span className="text-black dark:text-white">Content Left</span>
+          </div>
         </ProfileCardLeft>
-        <ProfileCardRight>Content Right</ProfileCardRight>
+        <ProfileCardRight>
+          <span className="text-black dark:text-white">Content Right</span>
+        </ProfileCardRight>
       </>
     ),
   },
+  decorators: [withBackgroundVariant()],
 } satisfies Meta<typeof ProfileCard>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
+export const Default = {} satisfies Story;

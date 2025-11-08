@@ -1,1 +1,1 @@
-export { UserGridItem } from "./UserGridItem";
+export { UserGridItem, type UserGridItemType } from "./UserGridItem";

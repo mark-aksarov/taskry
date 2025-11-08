@@ -5,7 +5,7 @@ import { useMemo } from "react";
 import { Item } from "react-stately";
 import { Check, CircleEllipsis, Clock, Ellipsis, Trash } from "lucide-react";
 
-import { Button, Checkbox } from "@/components/ui";
+import { Button, Checkbox, Link } from "@/components/ui";
 
 import {
   ListItem,
@@ -17,24 +17,51 @@ import {
   ListItemProgressSkeleton,
 } from "@/components/common/List";
 
-import { TaskPreview } from "@/lib/queries/types";
-import { ResponsiveMenuTrigger } from "@/components/common/ResponsiveMenuTrigger";
-import { Link } from "@/components/ui";
 import {
   ImageContainer,
   ImageContainerSkeleton,
 } from "@/components/common/ImageContainer";
-import { MenuTriggerSkeleton } from "@/components/common/MenuTriggerSkeleton";
-import { MenuDialogHeader } from "@/components/common/MenuDialogHeader";
-import { TaskListItemTitle } from "./TaskListItemTitle";
 
-export const TaskListItem = ({
-  task,
-  showCheckbox,
-}: {
-  task?: TaskPreview;
+import { TaskListItemTitle } from "./TaskListItemTitle";
+import { MenuDialogHeader } from "@/components/common/MenuDialogHeader";
+import { MenuTriggerSkeleton } from "@/components/common/MenuTriggerSkeleton";
+import { ResponsiveMenuTrigger } from "@/components/common/ResponsiveMenuTrigger";
+
+export interface TaskListItemType {
+  id: number;
+  title: string;
+  deadline?: Date | null;
+  subtasks: { isDone: boolean }[];
+  creator?: {
+    id: string;
+    imageUrl?: string | null;
+    fullName: string;
+  } | null;
+  category: {
+    id: number;
+    name: string;
+  };
+  project: {
+    id: number;
+    title: string;
+  };
+  status: {
+    id: number;
+    nameEn: string;
+    nameRu: string;
+  };
+  _count: {
+    comments: number;
+    subtasks: number;
+  };
+}
+
+interface TaskListItemProps {
+  task?: TaskListItemType;
   showCheckbox?: boolean;
-}) => {
+}
+
+export const TaskListItem = ({ task, showCheckbox }: TaskListItemProps) => {
   const locale = "en-GB";
 
   const formattedDeadline = useMemo(() => {

@@ -1,1 +1,1 @@
-export { ProjectListItem } from "./ProjectListItem";
+export { ProjectListItem, type ProjectItemType } from "./ProjectListItem";

@@ -1,21 +1,12 @@
 import "../app/globals.css";
 
-import type { Preview, ReactRenderer } from "@storybook/nextjs-vite";
+import type { Preview } from "@storybook/nextjs-vite";
 import { withThemeByDataAttribute } from "@storybook/addon-themes";
 import { MINIMAL_VIEWPORTS } from "storybook/viewport";
 import { mocked, sb } from "storybook/test";
 import { useParams, usePathname, useRouter } from "next/navigation";
 
 sb.mock(import("../lib/prisma"));
-sb.mock(import("../lib/queries/attachments"));
-sb.mock(import("../lib/queries/project"));
-sb.mock(import("../lib/queries/task"));
-sb.mock(import("../lib/queries/notification"));
-sb.mock(import("../lib/queries/user"));
-sb.mock(import("../lib/queries/customers"));
-sb.mock(import("../lib/queries/companies"));
-sb.mock(import("../lib/queries/storage"));
-sb.mock(import("../lib/queries/comments"));
 sb.mock(import("next/navigation"));
 
 const preview: Preview = {
@@ -33,13 +24,7 @@ const preview: Preview = {
   },
 
   decorators: [
-    (Story) => (
-      <div className="bg-gray-100 dark:bg-gray-900">
-        <Story />
-      </div>
-    ),
-
-    withThemeByDataAttribute<ReactRenderer>({
+    withThemeByDataAttribute({
       themes: {
         light: "light",
         dark: "dark",
@@ -50,17 +35,18 @@ const preview: Preview = {
   ],
 
   parameters: {
-    backgrounds: {
-      options: {
-        dark: { name: "Dark", value: "#000" },
-        light: { name: "Light", value: "#fff" },
-      },
-    },
-
     controls: {
       matchers: {
         color: /(background|color)$/i,
         date: /Date$/i,
+      },
+    },
+
+    backgrounds: { disable: true },
+
+    initialGlobals: {
+      backgrounds: {
+        value: "light/dark",
       },
     },
 

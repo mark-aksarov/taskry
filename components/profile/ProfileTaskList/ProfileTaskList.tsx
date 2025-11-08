@@ -1,12 +1,18 @@
-import { getTasks } from "@/lib/queries/task";
-import { ProfileTaskListItem } from "../ProfileTaskListItem";
 import { List } from "@/components/common/List";
+import {
+  ProfileTaskListItem,
+  ProfileTaskListItemType,
+} from "../ProfileTaskListItem";
 
-export async function ProfileTaskList() {
-  const tasks = await getTasks("BKs42HvVDEZFoaJUmTqf1gTN0K8pUFjI");
-
+export function ProfileTaskList({
+  tasks,
+  className,
+}: {
+  tasks: ProfileTaskListItemType[];
+  className?: string;
+}) {
   return (
-    <List className="md:gap-0 md:px-6">
+    <List className={className}>
       {tasks.map((task) => (
         <ProfileTaskListItem key={task.id} task={task} />
       ))}

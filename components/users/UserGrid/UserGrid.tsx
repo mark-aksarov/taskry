@@ -1,8 +1,7 @@
-import { UserGridItem } from "../UserGridItem";
-import { UserPreview } from "@/lib/queries/types";
-import { Grid } from "@/components/common/Grid/Grid";
+import { Grid } from "@/components/common/Grid";
+import { UserGridItem, UserGridItemType } from "../UserGridItem";
 
-export function UserGrid({ users }: { users: UserPreview[] }) {
+export function UserGrid({ users }: { users: UserGridItemType[] }) {
   return (
     <Grid>
       {users.map((user) => (

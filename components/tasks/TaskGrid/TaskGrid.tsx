@@ -1,8 +1,7 @@
-import { TaskGridItem } from "../TaskGridItem";
-import { TaskPreview } from "@/lib/queries/types";
+import { TaskGridItem, TaskGridItemType } from "../TaskGridItem";
 import { Grid } from "@/components/common/Grid/Grid";
 
-export function TaskGrid({ tasks }: { tasks: TaskPreview[] }) {
+export function TaskGrid({ tasks }: { tasks: TaskGridItemType[] }) {
   return (
     <Grid>
       {tasks.map((task) => (

@@ -1,14 +1,7 @@
 import { Card } from "@/components/common/Card";
 import { ProfileNavigationDesktop } from "@/components/profile/ProfileNavigationDesktop";
-import {
-  ProfileHeader,
-  ProfileHeaderSkeleton,
-} from "@/components/profile/ProfileHeader";
-import {
-  ProfileInfo,
-  ProfileInfoSkeleton,
-} from "@/components/profile/ProfileInfo";
-import { getUserById } from "@/lib/queries/user";
+import { ProfileHeaderSkeleton } from "@/components/profile/ProfileHeader";
+import { ProfileInfoSkeleton } from "@/components/profile/ProfileInfo";
 import { Suspense } from "react";
 import {
   ProfileCardLeft,
@@ -17,9 +10,13 @@ import {
   ProfileCardRight,
 } from "../ProfileCard";
 
-export async function ProfileInfoCard() {
-  const userPromise = getUserById("BKs42HvVDEZFoaJUmTqf1gTN0K8pUFjI");
-
+export function ProfileInfoCard({
+  ProfileHeaderContainer,
+  ProfileInfoContainer,
+}: {
+  ProfileHeaderContainer: React.ComponentType;
+  ProfileInfoContainer: React.ComponentType;
+}) {
   return (
     <Card className="flex p-0 max-md:hidden">
       <ProfileCardLeft>
@@ -28,14 +25,14 @@ export async function ProfileInfoCard() {
         </ProfileCardHeader>
         <div className="p-6">
           <Suspense fallback={<ProfileInfoSkeleton />}>
-            <ProfileInfo userPromise={userPromise} />
+            <ProfileInfoContainer />
           </Suspense>
         </div>
       </ProfileCardLeft>
 
       <ProfileCardRight>
         <Suspense fallback={<ProfileHeaderSkeleton />}>
-          <ProfileHeader />
+          <ProfileHeaderContainer />
         </Suspense>
         <ProfileNavigationDesktop />
       </ProfileCardRight>

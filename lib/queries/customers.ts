@@ -2,29 +2,29 @@ import "server-only";
 
 import { cache } from "react";
 import prisma from "../prisma";
-import { CustomerPreview } from "./types";
 
-export const getCustomers = cache(
-  async (workspaceId: number): Promise<CustomerPreview[]> => {
-    return await prisma.customer.findMany({
-      where: {
-        company: {
-          workspaceId,
+export const getCustomers = cache(async (workspaceId: number) => {
+  return await prisma.customer.findMany({
+    where: {
+      company: {
+        workspaceId,
+      },
+    },
+    select: {
+      id: true,
+      fullName: true,
+      email: true,
+      phoneNumber: true,
+      publicLink: true,
+      imageUrl: true,
+
+      company: {
+        select: {
+          id: true,
+          name: true,
+          workspaceId: true,
         },
       },
-      include: {
-        company: {
-          select: {
-            id: true,
-            name: true,
-            workspaceId: true,
-          },
-        },
-      },
-    });
-  },
-);
-
-export const getTotalCustomers = cache(async () => {
-  return prisma.customer.count();
+    },
+  });
 });

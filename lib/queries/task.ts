@@ -1,15 +1,9 @@
 import "server-only";
 
-import { cache } from "react";
 import prisma from "../prisma";
-import { TaskDetail, TaskPreview } from "./types";
-import { ACTIVE_TASK_STATUS_ID, DONE_TASK_STATUS_ID } from "./constants";
-
-export const getSubtasksByTask = cache(async (id: number) => {
-  return await prisma.subtask.findMany({
-    where: { taskId: id },
-  });
-});
+import { cache } from "react";
+import { TaskDetail } from "./types";
+import { TaskItem } from "@/components/tasks/types";
 
 export const getTask = cache(async (id: number): Promise<TaskDetail> => {
   return await prisma.task.findUniqueOrThrow({
@@ -60,14 +54,18 @@ export const getTask = cache(async (id: number): Promise<TaskDetail> => {
 });
 
 export const getTasks = cache(
-  async (creatorId?: string): Promise<TaskPreview[]> => {
+  async (creatorId?: string): Promise<TaskItem[]> => {
     return await prisma.task.findMany({
       where: creatorId
         ? {
             creatorId,
           }
         : undefined,
-      include: {
+      select: {
+        id: true,
+        title: true,
+        deadline: true,
+
         creator: {
           select: {
             id: true,

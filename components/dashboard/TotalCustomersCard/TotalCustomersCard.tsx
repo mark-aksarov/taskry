@@ -6,11 +6,12 @@ import {
   DashboardCardValue,
 } from "../DashboardCard";
 import { IconlyUser3 } from "@/components/icons/IconlyUser3";
-import { getTotalCustomers } from "@/lib/queries/customers";
 
-export const TotalCustomersCard = async () => {
-  const totalCustomers = getTotalCustomers();
-
+export const TotalCustomersCard = ({
+  totalCustomers,
+}: {
+  totalCustomers?: number;
+}) => {
   return (
     <DashboardCard
       text={<DashboardCardText>Total Customers</DashboardCardText>}
@@ -19,19 +20,13 @@ export const TotalCustomersCard = async () => {
           <IconlyUser3 size={24} />
         </DashboardCardIcon>
       }
-      value={<DashboardCardValue>{totalCustomers}</DashboardCardValue>}
+      value={
+        totalCustomers === undefined ? (
+          <Skeleton className="w-[3rem]" size="xl" />
+        ) : (
+          <DashboardCardValue>{totalCustomers}</DashboardCardValue>
+        )
+      }
     />
   );
 };
-
-export const TotalCustomersCardSkeleton = () => (
-  <DashboardCard
-    text={<DashboardCardText>Total Customers</DashboardCardText>}
-    icon={
-      <DashboardCardIcon color="green">
-        <IconlyUser3 size={24} />
-      </DashboardCardIcon>
-    }
-    value={<Skeleton className="w-[3rem]" size="xl" />}
-  />
-);

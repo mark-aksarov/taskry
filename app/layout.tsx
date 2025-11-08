@@ -11,7 +11,7 @@ import {
 } from "@/components/layout/AppSidebar";
 import { AppNavigation } from "@/components/layout/AppNavigation";
 import { AppHeader } from "@/components/layout/AppHeader";
-import { Notifications } from "@/components/notifications/Notifications";
+import { NotificationsContainer } from "@/components/notifications/Notifications";
 import { NotificationModalTrigger } from "@/components/notifications/NotificationModalTrigger";
 import { AppBottomSheetTrigger } from "@/components/layout/AppBottomSheetTrigger";
 import { AppSidebarSheetTrigger } from "@/components/layout/AppSidebarSheetTrigger";
@@ -42,13 +42,21 @@ export default async function RootLayout({
       <body
         className={`${nunitoSans.className} bg-gray-100 antialiased dark:bg-gray-900`}
       >
-        <Layout>{children}</Layout>
+        <Layout NotificationsContainer={NotificationsContainer}>
+          {children}
+        </Layout>
       </body>
     </html>
   );
 }
 
-export async function Layout({ children }: { children: React.ReactNode }) {
+export function Layout({
+  NotificationsContainer,
+  children,
+}: {
+  NotificationsContainer: React.ComponentType;
+  children: React.ReactNode;
+}) {
   const notificationListSkeleton = (
     <Repeat items={7} renderItem={() => <NotificationListItem />} />
   );
@@ -71,9 +79,7 @@ export async function Layout({ children }: { children: React.ReactNode }) {
             <NotificationModalTrigger
               notifications={
                 <Suspense fallback={notificationListSkeleton}>
-                  <>
-                    <Notifications />
-                  </>
+                  <NotificationsContainer />
                 </Suspense>
               }
             />

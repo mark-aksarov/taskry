@@ -23,13 +23,29 @@ import { Item } from "react-stately";
 import { Ellipsis, Link2, Mail, Phone, Trash } from "lucide-react";
 import { ResponsiveMenuTrigger } from "@/components/common/ResponsiveMenuTrigger";
 
-import { CustomerPreview } from "@/lib/queries/types";
 import { Button, Link, Checkbox, Divider, Skeleton } from "@/components/ui";
 import Image from "next/image";
 import { MenuTriggerSkeleton } from "@/components/common/MenuTriggerSkeleton";
 import { MenuDialogHeader } from "@/components/common/MenuDialogHeader";
 
-export function CustomerGridItem({ customer }: { customer?: CustomerPreview }) {
+export interface CustomerGridItemType {
+  id: number | string;
+  fullName: string;
+  email: string;
+  phoneNumber?: string | null;
+  publicLink?: string | null;
+  imageUrl?: string | null;
+  company: {
+    id: number | string;
+    name: string;
+  };
+}
+
+interface CustomerGridItemProps {
+  customer?: CustomerGridItemType;
+}
+
+export function CustomerGridItem({ customer }: CustomerGridItemProps) {
   return (
     <GridItem>
       {/* --- Checkbox --- */}

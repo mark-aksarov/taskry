@@ -1,8 +1,11 @@
-import { CustomerListItem } from "../CustomerListItem";
 import { List } from "@/components/common/List";
-import { CustomerPreview } from "@/lib/queries/types";
+import { CustomerListItem, CustomerListItemType } from "../CustomerListItem";
 
-export function CustomerList({ customers }: { customers: CustomerPreview[] }) {
+export function CustomerList({
+  customers,
+}: {
+  customers: CustomerListItemType[];
+}) {
   return (
     <List>
       {customers.map((customer) => (

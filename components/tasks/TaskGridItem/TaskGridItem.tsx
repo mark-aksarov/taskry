@@ -15,7 +15,6 @@ import { Item } from "react-stately";
 import { Check, CircleEllipsis, Clock, Ellipsis, Trash } from "lucide-react";
 import { ResponsiveMenuTrigger } from "@/components/common/ResponsiveMenuTrigger";
 
-import { TaskPreview } from "@/lib/queries/types";
 import { useMemo } from "react";
 import {
   Button,
@@ -34,7 +33,25 @@ import { MenuDialogHeader } from "@/components/common/MenuDialogHeader";
 import { MenuTriggerSkeleton } from "@/components/common/MenuTriggerSkeleton";
 import { TaskDetailModal } from "../TaskDetailModal";
 
-export function TaskGridItem({ task }: { task?: TaskPreview }) {
+export interface TaskGridItemType {
+  id: number;
+  title: string;
+  deadline?: Date | null;
+  subtasks: {
+    isDone: boolean;
+  }[];
+  creator?: {
+    id: string;
+    imageUrl?: string | null;
+    fullName: string;
+  } | null;
+}
+
+export interface TaskGridItemProps {
+  task?: TaskGridItemType;
+}
+
+export function TaskGridItem({ task }: TaskGridItemProps) {
   const locale = "en-GB";
 
   const formattedDeadline = useMemo(() => {

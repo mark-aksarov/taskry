@@ -1,34 +1,26 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { UserFiltersForm } from "./UserFiltersForm";
-import { mocked } from "storybook/test";
-import { getPositions } from "@/lib/queries/user";
-import { positionsMock } from "../../../lib/data/__mocks__/positions";
 import { PositionCheckboxGroup } from "../PositionCheckboxGroup";
+import { Default as PositionCheckboxGroupStory } from "@/components/users/PositionCheckboxGroup/PositionCheckboxGroup.stories";
+import {
+  withContainerWidth,
+  withBackgroundVariant,
+} from "@/.storybook/decorators";
 
 const meta: Meta<typeof UserFiltersForm> = {
   title: "Components/users/UserFiltersForm",
   component: UserFiltersForm,
   tags: ["autodocs"],
-  beforeEach: () => {
-    mocked(getPositions).mockReturnValue(
-      new Promise((res) => res(positionsMock)),
-    );
-  },
-  render: (args) => {
-    const positionsPromise = getPositions(1);
-
-    return (
-      <UserFiltersForm
-        {...args}
-        positionCheckboxGroup={
-          <PositionCheckboxGroup positionsPromise={positionsPromise} />
-        }
-      />
-    );
-  },
+  decorators: [withContainerWidth(), withBackgroundVariant({ variant: "alt" })],
 } satisfies Meta<typeof UserFiltersForm>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
+export const Default = {
+  args: {
+    positionCheckboxGroup: (
+      <PositionCheckboxGroup {...PositionCheckboxGroupStory.args} />
+    ),
+  },
+} satisfies Story;

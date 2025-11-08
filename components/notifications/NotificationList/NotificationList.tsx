@@ -1,10 +1,12 @@
-import { NotificationListItem } from "../NotificationListItem";
-import { NotificationRecipientWithRelations } from "@/lib/queries/types";
+import {
+  NotificationListItem,
+  NotificationListItemType,
+} from "../NotificationListItem";
 
-export async function NotificationList({
+export function NotificationList({
   notifications,
 }: {
-  notifications: NotificationRecipientWithRelations[];
+  notifications: NotificationListItemType[];
 }) {
   return (
     <div>

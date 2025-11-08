@@ -4,21 +4,16 @@ import { useState } from "react";
 import { Attachment, Attachments } from "../../attachments/Attachments";
 import Image from "next/image";
 import { fn } from "storybook/test";
+import {
+  withContainerWidth,
+  withBackgroundVariant,
+} from "@/.storybook/decorators";
 
 const meta = {
   title: "Components/common/MessageInput",
   component: MessageInput,
   tags: ["autodocs"],
-  decorators: [
-    (Story) => (
-      <div className="h-screen w-screen bg-white p-4 dark:bg-gray-800">
-        <Story />
-      </div>
-    ),
-  ],
-  parameters: {
-    layout: "fullscreen",
-  },
+  decorators: [withContainerWidth(), withBackgroundVariant({ variant: "alt" })],
   args: {
     onFilesSelect: fn(),
     placeholder: "Placeholder",
@@ -28,7 +23,7 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-const MessageInputTemplate: Story = {
+const MessageInputTemplate = {
   args: {},
   render: (args) => {
     let [files, setFiles] = useState<FileList | null>(null);
@@ -54,15 +49,15 @@ const MessageInputTemplate: Story = {
       </div>
     );
   },
-};
+} satisfies Story;
 
-export const Default: Story = {
+export const Default = {
   ...MessageInputTemplate,
-};
+} satisfies Story;
 
 export const Disabled = {
   ...MessageInputTemplate,
   args: {
     isDisabled: true,
   },
-};
+} satisfies Story;

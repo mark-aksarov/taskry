@@ -1,8 +1,11 @@
-import { CustomerGridItem } from "../CustomerGridItem";
-import { CustomerPreview } from "@/lib/queries/types";
 import { Grid } from "@/components/common/Grid/Grid";
+import { CustomerGridItem, CustomerGridItemType } from "../CustomerGridItem";
 
-export function CustomerGrid({ customers }: { customers: CustomerPreview[] }) {
+export function CustomerGrid({
+  customers,
+}: {
+  customers: CustomerGridItemType[];
+}) {
   return (
     <Grid>
       {customers.map((customer) => (

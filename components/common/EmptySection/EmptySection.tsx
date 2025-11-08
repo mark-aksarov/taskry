@@ -7,7 +7,9 @@ interface EmptySectionProps {
 
 export function EmptySection({ className, children }: EmptySectionProps) {
   return (
-    <section className={twMerge("flex flex-col items-center gap-4", className)}>
+    <section
+      className={twMerge("inline-flex flex-col items-center gap-4", className)}
+    >
       {children}
     </section>
   );

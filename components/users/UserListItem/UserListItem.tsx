@@ -14,7 +14,6 @@ import {
   ListItemTitle,
 } from "@/components/common/List";
 
-import { UserPreview } from "@/lib/queries/types";
 import { ResponsiveMenuTrigger } from "@/components/common/ResponsiveMenuTrigger";
 import {
   ImageContainer,
@@ -23,13 +22,24 @@ import {
 import { MenuDialogHeader } from "@/components/common/MenuDialogHeader";
 import { MenuTriggerSkeleton } from "@/components/common/MenuTriggerSkeleton";
 
-export function UserListItem({
-  user,
-  showCheckbox,
-}: {
-  user?: UserPreview;
+export interface UserListItemType {
+  id: string;
+  fullName: string;
+  imageUrl?: string | null;
+  email: string;
+  phoneNumber?: string | null;
+  publicLink?: string | null;
+  position?: {
+    name: string;
+  } | null;
+}
+
+export interface UserListItemProps {
+  user?: UserListItemType | null;
   showCheckbox?: boolean;
-}) {
+}
+
+export function UserListItem({ user, showCheckbox }: UserListItemProps) {
   return (
     <ListItem>
       {/* --- Creator Image & Menu --- */}

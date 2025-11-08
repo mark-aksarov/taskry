@@ -1,5 +1,4 @@
 import { Skeleton } from "@/components/ui";
-import { getTotalProjects } from "@/lib/queries/project";
 import {
   DashboardCard,
   DashboardCardIcon,
@@ -8,9 +7,11 @@ import {
 import { IconlyWork } from "@/components/icons/IconlyWork";
 import { DashboardCardText } from "../DashboardCard";
 
-export const TotalProjectsCard = async () => {
-  const totalProjects = await getTotalProjects();
-
+export const TotalProjectsCard = ({
+  totalProjects,
+}: {
+  totalProjects?: number;
+}) => {
   return (
     <DashboardCard
       text={<DashboardCardText>Total Projects</DashboardCardText>}
@@ -19,19 +20,13 @@ export const TotalProjectsCard = async () => {
           <IconlyWork size={24} />
         </DashboardCardIcon>
       }
-      value={<DashboardCardValue>{totalProjects}</DashboardCardValue>}
+      value={
+        totalProjects === undefined ? (
+          <Skeleton className="w-[3rem]" size="xl" />
+        ) : (
+          <DashboardCardValue>{totalProjects}</DashboardCardValue>
+        )
+      }
     />
   );
 };
-
-export const TotalProjectsCardSkeleton = () => (
-  <DashboardCard
-    text={<DashboardCardText>Total Projects</DashboardCardText>}
-    icon={
-      <DashboardCardIcon color="blue">
-        <IconlyWork size={24} />
-      </DashboardCardIcon>
-    }
-    value={<Skeleton className="w-[3rem]" size="xl" />}
-  />
-);

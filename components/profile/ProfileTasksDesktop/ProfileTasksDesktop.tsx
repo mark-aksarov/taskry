@@ -1,30 +1,22 @@
-import { getTasks } from "@/lib/queries/task";
 import { ProfileTaskList } from "../ProfileTaskList";
+import { List } from "@/components/common/List";
+import { Repeat } from "@/components/common/Repeat";
 import {
-  EmptySection,
-  EmptySectionDescription,
-  EmptySectionHeading,
-  EmptySectionButton,
-} from "@/components/common/EmptySection";
+  ProfileTaskListItem,
+  type ProfileTaskListItemType,
+} from "../ProfileTaskListItem";
 
-export async function ProfileTasksDesktop() {
-  const tasks = await getTasks("BKs42HvVDEZFoaJUmTqf1gTN0K8pUFjI");
-
-  if (!tasks.length) {
+export function ProfileTasksDesktop({
+  tasks,
+}: {
+  tasks?: ProfileTaskListItemType[];
+}) {
+  if (!tasks)
     return (
-      <div className="flex flex-auto items-center justify-center">
-        <EmptySection>
-          <EmptySectionHeading className="max-md:text-3xl md:text-4xl">
-            No tasks yet
-          </EmptySectionHeading>
-          <EmptySectionDescription>
-            Create a new task to keep track of your work
-          </EmptySectionDescription>
-          <EmptySectionButton href="#">New Task</EmptySectionButton>
-        </EmptySection>
-      </div>
+      <List className="gap-0 px-6">
+        <Repeat items={10} renderItem={() => <ProfileTaskListItem />} />
+      </List>
     );
-  }
 
-  return <ProfileTaskList />;
+  return <ProfileTaskList tasks={tasks} className="gap-0 px-6 max-md:hidden" />;
 }

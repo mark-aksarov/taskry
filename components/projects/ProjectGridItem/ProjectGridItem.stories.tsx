@@ -1,45 +1,48 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { ProjectGridItem } from "./ProjectGridItem";
-import { projectsMock } from "@/lib/data/__mocks__/projects";
+import {
+  withBackgroundVariant,
+  withContainerWidth,
+} from "@/.storybook/decorators";
 
 const meta = {
   title: "Components/projects/ProjectGridItem",
   component: ProjectGridItem,
   tags: ["autodocs"],
-  decorators: [
-    (Story) => (
-      <div className="w-[250px]">
-        <Story />
-      </div>
-    ),
-  ],
-  args: {
-    project: projectsMock[0],
-  },
+  decorators: [withContainerWidth("250px"), withBackgroundVariant()],
 } satisfies Meta<typeof ProjectGridItem>;
 
 export default meta;
 type Story = StoryObj<typeof ProjectGridItem>;
 
-export const Default: Story = {};
+export const Default = {
+  args: {
+    project: {
+      id: 1,
+      title: "Website Revamp",
+      deadline: new Date("2025-06-25"),
+      creator: { id: "user1", fullName: "Liam Turner", imageUrl: "/man.jpg" },
+      tasks: [
+        { statusId: 1 },
+        { statusId: 1 },
+        { statusId: 2 },
+        { statusId: 3 },
+      ],
+    },
+  },
+} satisfies Story;
 
-export const Skeleton: Story = {
+export const Skeleton = {
   args: {
     project: undefined,
   },
-};
+} satisfies Story;
 
-export const WithoutCreator: Story = {
+export const WithoutCreator = {
   args: {
     project: {
-      ...projectsMock[0],
+      ...Default.args.project,
       creator: null,
     },
   },
-};
-
-export const OnMobile: Story = {
-  globals: {
-    viewport: { value: "mobile2", isRotated: false },
-  },
-};
+} satisfies Story;

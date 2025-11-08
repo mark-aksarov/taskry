@@ -1,5 +1,6 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { Link } from "../Link";
+import { withBackgroundVariant } from "@/.storybook/decorators";
 
 const meta = {
   title: "Components/ui/Link",
@@ -9,6 +10,7 @@ const meta = {
     href: "#",
     children: "Link",
   },
+  decorators: [withBackgroundVariant()],
 } satisfies Meta<typeof Link>;
 
 export default meta;

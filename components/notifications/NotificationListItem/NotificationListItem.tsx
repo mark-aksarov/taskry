@@ -9,7 +9,6 @@ import { twMerge } from "tailwind-merge";
 import { Ellipsis, ListCheck, Trash } from "lucide-react";
 
 import { Button, Skeleton } from "@/components/ui";
-import { NotificationRecipientWithRelations } from "@/lib/queries/types";
 import { ResponsiveMenuTrigger } from "@/components/common/ResponsiveMenuTrigger";
 import {
   ImageContainer,
@@ -30,8 +29,50 @@ import { Attachment, Attachments } from "@/components/attachments/Attachments";
 import { ReplyButton } from "@/components/comments/ReplyButton";
 import { LikeButton } from "@/components/comments/LikeButton";
 
+export interface NotificationListItemType {
+  notificationId: number;
+  isRead: boolean;
+  notification: {
+    createdAt: string | Date;
+    type:
+      | "TASK_ADDED"
+      | "TASK_DELETED"
+      | "TASK_UPDATED"
+      | "PROJECT_ADDED"
+      | "PROJECT_DELETED"
+      | "PROJECT_UPDATED"
+      | "USER_ADDED"
+      | "USER_DELETED"
+      | "USER_UPDATED"
+      | "CUSTOMER_ADDED"
+      | "CUSTOMER_DELETED"
+      | "CUSTOMER_UPDATED"
+      | "COMMENT_REPLIED"
+      | "COMMENT_ADDED"
+      | "MESSAGE_SENT";
+    target?: {
+      user?: { id: string; fullName: string } | null;
+      customer?: { id: number; fullName: string } | null;
+      project?: { id: number; title: string } | null;
+      task?: { id: number; title: string } | null;
+      comment?: {
+        id: number;
+        content: string;
+        attachments: { id: number; fileUrl: string }[];
+        _count: { likes: number };
+        likes: unknown[];
+        project?: { title: string } | null;
+        task?: { title: string } | null;
+      } | null;
+      message?: { id: number; body: string } | null;
+    } | null;
+    targetName?: string | null;
+    actor?: { id: string; fullName: string; imageUrl?: string | null } | null;
+  };
+}
+
 interface NotificationListItemProps {
-  notification?: NotificationRecipientWithRelations;
+  notification?: NotificationListItemType;
   className?: string;
 }
 
@@ -113,11 +154,19 @@ export const NotificationListItem = ({
     switch (type) {
       case "TASK_ADDED":
       case "TASK_UPDATED":
+        return (
+          <Link href={`/users/${target?.task?.id}`}>{target?.task?.title}</Link>
+        );
       case "TASK_DELETED":
         return targetName;
 
       case "PROJECT_ADDED":
       case "PROJECT_UPDATED":
+        return (
+          <Link href={`/users/${target?.project?.id}`}>
+            {target?.project?.title}
+          </Link>
+        );
       case "PROJECT_DELETED":
         return targetName;
 

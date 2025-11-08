@@ -1,1 +1,1 @@
-export { UserListItem } from "./UserListItem";
+export { UserListItem, type UserListItemType } from "./UserListItem";

@@ -1,17 +1,16 @@
 "use client";
 
-import { Plus, X } from "lucide-react";
-import { Button, Checkbox, RACForm } from "@/components/ui";
-import { SubtaskTextField } from "../SubtaskTextField";
-import { Subtask } from "@/generated/prisma";
 import { useState } from "react";
+import { Plus, X } from "lucide-react";
+import { SubtaskTextField } from "../SubtaskTextField";
+import { Button, Checkbox, RACForm } from "@/components/ui";
 import { UpdateSubtasksFormFieldset } from "./UpdateSubtasksFormFieldset";
 import { UpdateSubtasksFormLegend } from "./UpdateSubtasksFormLegend";
 
 export function UpdateSubtasksForm({
   initialSubtasks,
 }: {
-  initialSubtasks: Pick<Subtask, "id" | "name" | "isDone">[];
+  initialSubtasks: { id: number; name: string; isDone: boolean }[];
 }) {
   const [subtasks, setSubtasks] = useState(initialSubtasks);
 

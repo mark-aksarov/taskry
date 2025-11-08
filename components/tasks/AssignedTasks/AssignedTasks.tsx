@@ -1,20 +1,21 @@
-import { getTasks } from "@/lib/queries/task";
 import { TaskList } from "../TaskList";
 import { AssignedTasksSection } from "./AssignedTasksSection";
 import { AssignedTasksSectionHeading } from "./AssignedTasksSectionHeading";
-import { AssignedTasksEmptyCard } from "./AssignedTasksEmptyCard";
+import { List } from "@/components/common/List";
+import { Repeat } from "@/components/common/Repeat";
+import { TaskListItem, TaskListItemType } from "../TaskListItem";
 
-export async function AssignedTasks() {
-  const tasks = await getTasks();
-
-  if (!tasks.length) {
-    return <AssignedTasksEmptyCard />;
-  }
-
+export async function AssignedTasks({ tasks }: { tasks?: TaskListItemType[] }) {
   return (
     <AssignedTasksSection>
       <AssignedTasksSectionHeading />
-      <TaskList tasks={tasks} showCheckbox={false} />
+      {!tasks ? (
+        <List>
+          <Repeat items={10} renderItem={() => <TaskListItem />} />
+        </List>
+      ) : (
+        <TaskList tasks={tasks} showCheckbox={false} />
+      )}
     </AssignedTasksSection>
   );
 }

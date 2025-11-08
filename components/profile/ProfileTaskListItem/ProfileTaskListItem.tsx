@@ -20,14 +20,28 @@ import {
   ListItemText,
 } from "@/components/common/List";
 
-import { TaskPreview } from "@/lib/queries/types";
 import { ResponsiveMenuTrigger } from "@/components/common/ResponsiveMenuTrigger";
 import { MenuTriggerSkeleton } from "@/components/common/MenuTriggerSkeleton";
 import { MenuDialogHeader } from "@/components/common/MenuDialogHeader";
 import { TaskListItemTitle } from "@/components/tasks/TaskListItem";
 import { TaskCommentsModalTrigger } from "@/components/tasks/TaskCommentsModalTrigger";
 
-export const ProfileTaskListItem = ({ task }: { task?: TaskPreview }) => {
+export interface ProfileTaskListItemType {
+  id: number;
+  title: string;
+  deadline?: Date | null;
+  _count: {
+    comments: number;
+    subtasks: number;
+  };
+  subtasks?: { isDone: boolean }[];
+}
+
+export interface ProfileTaskListItemProps {
+  task?: ProfileTaskListItemType;
+}
+
+export const ProfileTaskListItem = ({ task }: ProfileTaskListItemProps) => {
   const locale = "en-GB";
 
   const formattedDeadline = useMemo(() => {

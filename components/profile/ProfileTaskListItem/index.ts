@@ -1,1 +1,4 @@
-export { ProfileTaskListItem } from "./ProfileTaskListItem";
+export {
+  ProfileTaskListItem,
+  type ProfileTaskListItemType,
+} from "./ProfileTaskListItem";

@@ -1,5 +1,5 @@
-import { ProfileHeaderInner } from "./ProfileHeaderInner";
+import { ProfileHeader } from "./ProfileHeader";
 
 export function ProfileHeaderSkeleton() {
-  return <ProfileHeaderInner />;
+  return <ProfileHeader />;
 }

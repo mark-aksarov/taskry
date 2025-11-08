@@ -3,23 +3,28 @@ import { EmptySection } from "./EmptySection";
 import { EmptySectionHeading } from "./EmptySectionHeading";
 import { EmptySectionDescription } from "./EmptySectionDescription";
 import { EmptySectionButton } from "./EmptySectionButton";
+import { withBackgroundVariant } from "@/.storybook/decorators";
 
 const meta = {
   title: "Components/common/EmptySection",
   component: EmptySection,
   tags: ["autodocs"],
-  render: (args) => (
-    <EmptySection {...args}>
-      <EmptySectionHeading>No tasks yet</EmptySectionHeading>
-      <EmptySectionDescription>
-        Create a new task to keep track of your work
-      </EmptySectionDescription>
-      <EmptySectionButton href="#">New Task</EmptySectionButton>
-    </EmptySection>
-  ),
+  decorators: [withBackgroundVariant({ variant: "alt" })],
 } satisfies Meta<typeof EmptySection>;
 
 export default meta;
 type Story = StoryObj<typeof EmptySection>;
 
-export const Default: Story = {};
+export const Default = {
+  args: {
+    children: (
+      <>
+        <EmptySectionHeading>No tasks yet</EmptySectionHeading>
+        <EmptySectionDescription>
+          Create a new task to keep track of your work
+        </EmptySectionDescription>
+        <EmptySectionButton href="#">New Task</EmptySectionButton>
+      </>
+    ),
+  },
+} satisfies Story;

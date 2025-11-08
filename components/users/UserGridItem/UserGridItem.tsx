@@ -18,7 +18,6 @@ import { Item } from "react-stately";
 import { Ellipsis, Link2, Mail, Pencil, Phone, Trash } from "lucide-react";
 import { ResponsiveMenuTrigger } from "@/components/common/ResponsiveMenuTrigger";
 
-import { UserPreview } from "@/lib/queries/types";
 import { Button, Link, Checkbox, Divider, Skeleton } from "@/components/ui";
 import Image from "next/image";
 import {
@@ -28,7 +27,23 @@ import {
 import { MenuDialogHeader } from "@/components/common/MenuDialogHeader";
 import { MenuTriggerSkeleton } from "@/components/common/MenuTriggerSkeleton";
 
-export function UserGridItem({ user }: { user?: UserPreview }) {
+export interface UserGridItemType {
+  id: string;
+  fullName: string;
+  imageUrl?: string | null;
+  position?: {
+    name: string;
+  } | null;
+  phoneNumber?: string | null;
+  publicLink?: string | null;
+  email: string;
+}
+
+export interface UserGridItemProps {
+  user?: UserGridItemType | null;
+}
+
+export function UserGridItem({ user }: UserGridItemProps) {
   return (
     <GridItem>
       {/* --- Checkbox & Menu --- */}

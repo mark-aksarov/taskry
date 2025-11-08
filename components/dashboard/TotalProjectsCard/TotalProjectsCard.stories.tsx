@@ -1,34 +1,21 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { mocked } from "storybook/test";
+import { TotalProjectsCard } from "./TotalProjectsCard";
 import {
-  TotalProjectsCard,
-  TotalProjectsCardSkeleton,
-} from "./TotalProjectsCard";
-import { getTotalProjects } from "@/lib/queries/project";
+  withBackgroundVariant,
+  withContainerWidth,
+} from "@/.storybook/decorators";
 
 const meta = {
   title: "Components/dashboard/TotalProjectsCard",
   component: TotalProjectsCard,
   tags: ["autodocs"],
-  decorators: [
-    (Story) => (
-      <div className="w-[400px]">
-        <Story />
-      </div>
-    ),
-  ],
-  beforeEach: () => {
-    mocked(getTotalProjects).mockImplementation(
-      () => new Promise((res) => res(100)),
-    );
+  decorators: [withContainerWidth(), withBackgroundVariant()],
+  args: {
+    totalProjects: 50,
   },
 } satisfies Meta<typeof TotalProjectsCard>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
-
-export const Skeleton: Story = {
-  render: () => <TotalProjectsCardSkeleton />,
-};
+export const Default = {} satisfies Story;

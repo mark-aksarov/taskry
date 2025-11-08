@@ -1,9 +1,8 @@
-import { ProjectPreview } from "@/lib/queries/types";
-import { ProjectListItem } from "../ProjectListItem";
+import { ProjectItemType, ProjectListItem } from "../ProjectListItem";
 import { List } from "@/components/common/List";
 
 interface ProjectListProps {
-  projects: ProjectPreview[];
+  projects: ProjectItemType[];
   showCheckbox?: boolean;
 }
 

@@ -19,12 +19,28 @@ import {
   ImageContainerSkeleton,
 } from "@/components/common/ImageContainer";
 
-import { CustomerPreview } from "@/lib/queries/types";
 import { ResponsiveMenuTrigger } from "@/components/common/ResponsiveMenuTrigger";
 import { MenuTriggerSkeleton } from "@/components/common/MenuTriggerSkeleton";
 import { MenuDialogHeader } from "@/components/common/MenuDialogHeader";
 
-export function CustomerListItem({ customer }: { customer?: CustomerPreview }) {
+export interface CustomerListItemType {
+  id: number;
+  fullName: string;
+  email: string;
+  phoneNumber?: string | null;
+  publicLink?: string | null;
+  imageUrl?: string | null;
+  company: {
+    id: number;
+    name: string;
+  };
+}
+
+export type CustomerListItemProps = {
+  customer?: CustomerListItemType;
+};
+
+export function CustomerListItem({ customer }: CustomerListItemProps) {
   return (
     <ListItem>
       {/* --- Creator Image --- */}

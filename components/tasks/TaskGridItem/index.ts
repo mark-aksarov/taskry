@@ -1,1 +1,1 @@
-export { TaskGridItem } from "./TaskGridItem";
+export { TaskGridItem, type TaskGridItemType } from "./TaskGridItem";

@@ -1,9 +1,11 @@
+import { Suspense } from "react";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { UpdateSubtasksModal } from "./UpdateSubtasksModal";
 import { RACDialogTrigger, Skeleton } from "@/components/ui";
-import { Suspense } from "react";
 import { UpdateSubtasksForm } from "../UpdateSubtasksForm";
 import { UpdateSubtasksButton } from "../UpdateSubtasksButton";
+import { Default as UpdateSubtasksFormStory } from "@/components/subtasks/UpdateSubtasksForm/UpdateSubtasksForm.stories";
+import { withBackgroundVariant } from "@/.storybook/decorators";
 
 const meta = {
   title: "Components/subtasks/UpdateSubtasksModal",
@@ -12,35 +14,7 @@ const meta = {
   args: {
     updateSubtasksForm: (
       <Suspense fallback={<Skeleton />}>
-        <UpdateSubtasksForm
-          initialSubtasks={[
-            {
-              id: 1,
-              name: "Set up project structure",
-              isDone: true,
-            },
-            {
-              id: 2,
-              name: "Configure server environment",
-              isDone: false,
-            },
-            {
-              id: 3,
-              name: "Implement authentication endpoints",
-              isDone: true,
-            },
-            {
-              id: 4,
-              name: "Create user management APIs",
-              isDone: false,
-            },
-            {
-              id: 5,
-              name: "Develop product CRUD endpoints",
-              isDone: false,
-            },
-          ]}
-        />
+        <UpdateSubtasksForm {...UpdateSubtasksFormStory.args} />
       </Suspense>
     ),
   },
@@ -53,6 +27,7 @@ const meta = {
         </Suspense>
       </RACDialogTrigger>
     ),
+    withBackgroundVariant(),
   ],
 } satisfies Meta<typeof UpdateSubtasksModal>;
 
