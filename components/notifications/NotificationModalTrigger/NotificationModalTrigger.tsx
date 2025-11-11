@@ -11,9 +11,9 @@ import {
 import { Bell } from "lucide-react";
 
 export function NotificationModalTrigger({
-  notifications,
+  children,
 }: {
-  notifications: React.ReactNode;
+  children: React.ReactNode;
 }) {
   return (
     <RACDialogTrigger>
@@ -30,7 +30,7 @@ export function NotificationModalTrigger({
             <DialogHeading>Notifications</DialogHeading>
             <DialogCloseButton iconSize={20} />
           </DialogHeader>
-          <DialogBody className="p-0">{notifications}</DialogBody>
+          <DialogBody className="p-0">{children}</DialogBody>
         </Dialog>
       </ResponsiveModal>
     </RACDialogTrigger>

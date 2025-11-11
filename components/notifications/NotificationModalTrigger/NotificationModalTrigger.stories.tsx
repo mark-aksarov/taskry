@@ -1,8 +1,8 @@
-import { Notifications } from "../Notifications";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { NotificationModalTrigger } from "./NotificationModalTrigger";
-import { Default as NotificationListStory } from "../NotificationList/NotificationList.stories";
 import { withBackgroundVariant } from "@/.storybook/decorators";
+import { NotificationModalTrigger } from "./NotificationModalTrigger";
+import { NotificationModalContent } from "../NotificationModalContent";
+import { Default as NotificationModalContentStory } from "../NotificationModalContent/NotificationModalContent.stories";
 
 const meta = {
   title: "Components/notifications/NotificationModalTrigger",
@@ -16,10 +16,10 @@ export type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    notifications: (
-      <Notifications
-        notifications={NotificationListStory.args?.notifications}
-      />
+    children: (
+      <NotificationModalTrigger>
+        <NotificationModalContent {...NotificationModalContentStory.args} />
+      </NotificationModalTrigger>
     ),
   },
 } satisfies Story;

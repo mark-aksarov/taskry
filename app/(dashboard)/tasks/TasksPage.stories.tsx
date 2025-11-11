@@ -4,7 +4,8 @@ import { TaskCategoryCheckboxGroup } from "@/components/tasks/TaskCategoryCheckb
 import { ProjectCheckboxGroup } from "@/components/projects/ProjectCheckboxGroup";
 import { UserCheckboxGroup } from "@/components/users/UserCheckboxGroup";
 import { ViewModeContainer } from "@/components/common/ViewMode";
-import { PageDecorator, withBackgroundVariant } from "@/.storybook/decorators";
+import { withBackgroundVariant } from "@/.storybook/decorators";
+import { PageDecorator } from "@/.storybook/PageDecorator";
 import { mocked } from "storybook/test";
 import { usePathname } from "next/navigation";
 import { TaskList } from "@/components/tasks/TaskList";

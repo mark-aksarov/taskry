@@ -11,7 +11,7 @@ import {
 } from "@/components/layout/AppSidebar";
 import { AppNavigation } from "@/components/layout/AppNavigation";
 import { AppHeader } from "@/components/layout/AppHeader";
-import { NotificationsContainer } from "@/components/notifications/Notifications";
+import { NotificationModalContentContainer } from "@/components/notifications/NotificationModalContent";
 import { NotificationModalTrigger } from "@/components/notifications/NotificationModalTrigger";
 import { AppBottomSheetTrigger } from "@/components/layout/AppBottomSheetTrigger";
 import { AppSidebarSheetTrigger } from "@/components/layout/AppSidebarSheetTrigger";
@@ -42,7 +42,9 @@ export default async function RootLayout({
       <body
         className={`${nunitoSans.className} bg-gray-100 antialiased dark:bg-gray-900`}
       >
-        <Layout NotificationsContainer={NotificationsContainer}>
+        <Layout
+          NotificationModalContentContainer={NotificationModalContentContainer}
+        >
           {children}
         </Layout>
       </body>
@@ -51,10 +53,10 @@ export default async function RootLayout({
 }
 
 export function Layout({
-  NotificationsContainer,
+  NotificationModalContentContainer,
   children,
 }: {
-  NotificationsContainer: React.ComponentType;
+  NotificationModalContentContainer: React.ComponentType;
   children: React.ReactNode;
 }) {
   const notificationListSkeleton = (
@@ -76,13 +78,11 @@ export function Layout({
         <AppHeader
           title="Dashboard"
           notificationModalTrigger={
-            <NotificationModalTrigger
-              notifications={
-                <Suspense fallback={notificationListSkeleton}>
-                  <NotificationsContainer />
-                </Suspense>
-              }
-            />
+            <NotificationModalTrigger>
+              <Suspense fallback={notificationListSkeleton}>
+                <NotificationModalContentContainer />
+              </Suspense>
+            </NotificationModalTrigger>
           }
           appBottomSheetTrigger={<AppBottomSheetTrigger />}
           appSidebarSheetTrigger={<AppSidebarSheetTrigger />}

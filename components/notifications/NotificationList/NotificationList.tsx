@@ -1,18 +1,3 @@
-import {
-  NotificationListItem,
-  NotificationListItemType,
-} from "../NotificationListItem";
-
-export function NotificationList({
-  notifications,
-}: {
-  notifications: NotificationListItemType[];
-}) {
-  return (
-    <div>
-      {notifications.map((task) => (
-        <NotificationListItem key={task.notificationId} notification={task} />
-      ))}
-    </div>
-  );
+export function NotificationList({ children }: { children: React.ReactNode }) {
+  return <div className="flex flex-col">{children}</div>;
 }

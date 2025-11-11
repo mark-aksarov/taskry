@@ -1701,43 +1701,6 @@ async function main() {
     ],
   });
 
-  // ----------------- Message threads -----------------
-
-  await prisma.messageThread.createMany({
-    data: [
-      { id: 1, workspaceId: 1 }, // John Doe - Alice
-      { id: 2, workspaceId: 1 }, // John Doe - Fred
-      { id: 3, workspaceId: 1 }, // John Doe - Kate
-    ],
-  });
-
-  // ----------------- Messages -----------------
-
-  await prisma.message.createMany({
-    data: [
-      // --- Thread 1: John - Alice ---
-      { id: 1, body: "Hi Alice, how are you?", messageThreadId: 1, senderId: "BKs42HvVDEZFoaJUmTqf1gTN0K8pUFjI", receiverId: "MNCCPei6KJZiRuIkPbdDxhhJWEoxnUlp" },
-      { id: 2, body: "Hey John, I'm good! How about you?", messageThreadId: 1, senderId: "MNCCPei6KJZiRuIkPbdDxhhJWEoxnUlp", receiverId: "BKs42HvVDEZFoaJUmTqf1gTN0K8pUFjI" },
-      { id: 3, body: "All good, thanks. Did you finish the report?", messageThreadId: 1, senderId: "BKs42HvVDEZFoaJUmTqf1gTN0K8pUFjI", receiverId: "MNCCPei6KJZiRuIkPbdDxhhJWEoxnUlp" },
-      { id: 4, body: "Yes, sent it this morning.", messageThreadId: 1, senderId: "MNCCPei6KJZiRuIkPbdDxhhJWEoxnUlp", receiverId: "BKs42HvVDEZFoaJUmTqf1gTN0K8pUFjI" },
-      { id: 5, body: "Perfect, thanks!", messageThreadId: 1, senderId: "BKs42HvVDEZFoaJUmTqf1gTN0K8pUFjI", receiverId: "MNCCPei6KJZiRuIkPbdDxhhJWEoxnUlp" },
-
-      // --- Thread 2: John - Fred ---
-      { id: 6, body: "Hey Fred, did you check the server logs?", messageThreadId: 2, senderId: "BKs42HvVDEZFoaJUmTqf1gTN0K8pUFjI", receiverId: "W9OZkgMnF12FNBlys4frkj1Lj5de5Nj3" },
-      { id: 7, body: "Yes John, everything looks fine.", messageThreadId: 2, senderId: "W9OZkgMnF12FNBlys4frkj1Lj5de5Nj3", receiverId: "BKs42HvVDEZFoaJUmTqf1gTN0K8pUFjI" },
-      { id: 8, body: "Great! Can you prepare the report?", messageThreadId: 2, senderId: "BKs42HvVDEZFoaJUmTqf1gTN0K8pUFjI", receiverId: "W9OZkgMnF12FNBlys4frkj1Lj5de5Nj3" },
-      { id: 9, body: "Will do by today evening.", messageThreadId: 2, senderId: "W9OZkgMnF12FNBlys4frkj1Lj5de5Nj3", receiverId: "BKs42HvVDEZFoaJUmTqf1gTN0K8pUFjI" },
-      { id: 10, body: "Thanks Fred!", messageThreadId: 2, senderId: "BKs42HvVDEZFoaJUmTqf1gTN0K8pUFjI", receiverId: "W9OZkgMnF12FNBlys4frkj1Lj5de5Nj3" },
-
-      // --- Thread 3: John - Kate ---
-      { id: 11, body: "Hi Kate, are you available for a quick call?", messageThreadId: 3, senderId: "BKs42HvVDEZFoaJUmTqf1gTN0K8pUFjI", receiverId: "VQmrwbFoX834fHEb1q1qo7CmKVV6NLF9" },
-      { id: 12, body: "Sure John, give me 10 minutes.", messageThreadId: 3, senderId: "VQmrwbFoX834fHEb1q1qo7CmKVV6NLF9", receiverId: "BKs42HvVDEZFoaJUmTqf1gTN0K8pUFjI" },
-      { id: 13, body: "Perfect, calling you then.", messageThreadId: 3, senderId: "BKs42HvVDEZFoaJUmTqf1gTN0K8pUFjI", receiverId: "VQmrwbFoX834fHEb1q1qo7CmKVV6NLF9" },
-      { id: 14, body: "Got it, waiting for your call.", messageThreadId: 3, senderId: "VQmrwbFoX834fHEb1q1qo7CmKVV6NLF9", receiverId: "BKs42HvVDEZFoaJUmTqf1gTN0K8pUFjI" },
-      { id: 15, body: "Call completed, thanks!", messageThreadId: 3, senderId: "BKs42HvVDEZFoaJUmTqf1gTN0K8pUFjI", receiverId: "VQmrwbFoX834fHEb1q1qo7CmKVV6NLF9" },
-    ],
-  });
-
   // ----------------- Notifications -----------------
 
   await prisma.notificationTarget.createMany({
@@ -1782,10 +1745,6 @@ async function main() {
         id: 10,
         customerId: 2,
       },
-      {
-        id: 11,
-        messageId: 1,
-      },
     ],
   });
 
@@ -1794,197 +1753,142 @@ async function main() {
       {
         id: 1,
         type: "TASK_ADDED",
-        actorId: "BKs42HvVDEZFoaJUmTqf1gTN0K8pUFjI",
+        actorId: "MNCCPei6KJZiRuIkPbdDxhhJWEoxnUlp",
+        recipientId: "BKs42HvVDEZFoaJUmTqf1gTN0K8pUFjI",
+        workspaceId: 1,
         targetId: 1,
         createdAt: new Date(2025, 8, 1),
+        isRead: true,
       },
       {
         id: 2,
         type: "TASK_DELETED",
         actorId: "MNCCPei6KJZiRuIkPbdDxhhJWEoxnUlp",
+        recipientId: "BKs42HvVDEZFoaJUmTqf1gTN0K8pUFjI",
+        workspaceId: 1,
         targetName: "Task setup completed.",
         createdAt: new Date(2025, 8, 2),
+        isRead: false,
       },
       {
         id: 3,
         type: "TASK_UPDATED",
         actorId: "W9OZkgMnF12FNBlys4frkj1Lj5de5Nj3",
+        recipientId: "BKs42HvVDEZFoaJUmTqf1gTN0K8pUFjI",
+        workspaceId: 1,
         targetId: 2,
         createdAt: new Date(2025, 8, 3),
+        isRead: false,
       },
       {
         id: 4,
         type: "COMMENT_ADDED",
         actorId: "VQmrwbFoX834fHEb1q1qo7CmKVV6NLF9",
+        recipientId: "BKs42HvVDEZFoaJUmTqf1gTN0K8pUFjI",
+        workspaceId: 1,
         targetId: 3,
         createdAt: new Date(2025, 8, 4),
+        isRead: true,
       },
       {
         id: 5,
         type: "PROJECT_ADDED",
-        actorId: "BKs42HvVDEZFoaJUmTqf1gTN0K8pUFjI",
+        actorId: "VQmrwbFoX834fHEb1q1qo7CmKVV6NLF9",
+        recipientId: "BKs42HvVDEZFoaJUmTqf1gTN0K8pUFjI",
+        workspaceId: 1,
         targetId: 4,
         createdAt: new Date(2025, 8, 5),
+        isRead: false,
       },
       {
         id: 6,
         type: "PROJECT_DELETED",
         actorId: "MNCCPei6KJZiRuIkPbdDxhhJWEoxnUlp",
+        recipientId: "BKs42HvVDEZFoaJUmTqf1gTN0K8pUFjI",
+        workspaceId: 1,
         targetName: "Performance Monitoring",
         createdAt: new Date(2025, 8, 6),
+        isRead: false,
       },
       {
         id: 7,
         type: "PROJECT_UPDATED",
         actorId: "W9OZkgMnF12FNBlys4frkj1Lj5de5Nj3",
+        recipientId: "BKs42HvVDEZFoaJUmTqf1gTN0K8pUFjI",
+        workspaceId: 1,
         targetId: 5,
         createdAt: new Date(2025, 8, 7),
+        isRead: false,
       },
       {
         id: 8,
         type: "COMMENT_ADDED",
         actorId: "VQmrwbFoX834fHEb1q1qo7CmKVV6NLF9",
+        recipientId: "BKs42HvVDEZFoaJUmTqf1gTN0K8pUFjI",
+        workspaceId: 1,
         targetId: 6,
         createdAt: new Date(2025, 8, 8),
+        isRead: false,
       },
       {
         id: 9,
         type: "USER_ADDED",
-        actorId: "BKs42HvVDEZFoaJUmTqf1gTN0K8pUFjI",
+        actorId: "W9OZkgMnF12FNBlys4frkj1Lj5de5Nj3",
+        recipientId: "BKs42HvVDEZFoaJUmTqf1gTN0K8pUFjI",
+        workspaceId: 1,
         targetId: 7,
         createdAt: new Date(2025, 8, 9),
+        isRead: false,
       },
       {
         id: 10,
         type: "USER_DELETED",
         actorId: "MNCCPei6KJZiRuIkPbdDxhhJWEoxnUlp",
+        recipientId: "BKs42HvVDEZFoaJUmTqf1gTN0K8pUFjI",
+        workspaceId: 1,
         targetName: "Alice Smith",
         createdAt: new Date(2025, 8, 10),
+        isRead: true,
       },
       {
         id: 11,
         type: "USER_UPDATED",
         actorId: "W9OZkgMnF12FNBlys4frkj1Lj5de5Nj3",
+        recipientId: "BKs42HvVDEZFoaJUmTqf1gTN0K8pUFjI",
+        workspaceId: 1,
         targetId: 8,
         createdAt: new Date(2025, 8, 11),
+        isRead: true,
       },
       {
         id: 12,
         type: "CUSTOMER_ADDED",
         actorId: "VQmrwbFoX834fHEb1q1qo7CmKVV6NLF9",
+        recipientId: "BKs42HvVDEZFoaJUmTqf1gTN0K8pUFjI",
+        workspaceId: 1,
         targetId: 9,
         createdAt: new Date(2025, 8, 12),
+        isRead: false,
       },
       {
         id: 13,
         type: "CUSTOMER_DELETED",
-        actorId: "BKs42HvVDEZFoaJUmTqf1gTN0K8pUFjI",
+        actorId: "VQmrwbFoX834fHEb1q1qo7CmKVV6NLF9",
+        recipientId: "BKs42HvVDEZFoaJUmTqf1gTN0K8pUFjI",
+        workspaceId: 1,
         targetName: "Mike Johnson",
         createdAt: new Date(2025, 8, 13),
+        isRead: false,
       },
       {
         id: 14,
         type: "CUSTOMER_UPDATED",
         actorId: "MNCCPei6KJZiRuIkPbdDxhhJWEoxnUlp",
+        recipientId: "BKs42HvVDEZFoaJUmTqf1gTN0K8pUFjI",
+        workspaceId: 1,
         targetId: 10,
         createdAt: new Date(2025, 8, 14),
-      },
-      {
-        id: 15,
-        type: "MESSAGE_SENT",
-        actorId: "W9OZkgMnF12FNBlys4frkj1Lj5de5Nj3",
-        targetId: 11,
-        createdAt: new Date(2025, 8, 15),
-      },
-    ],
-  });
-
-  await prisma.notificationRecipient.createMany({
-    data: [
-      {
-        notificationId: 1,
-        isRead: true,
-        userId: "BKs42HvVDEZFoaJUmTqf1gTN0K8pUFjI",
-        workspaceId: 1,
-      },
-      {
-        notificationId: 2,
-        userId: "BKs42HvVDEZFoaJUmTqf1gTN0K8pUFjI",
-        workspaceId: 1,
-      },
-      {
-        notificationId: 3,
-        isRead: true,
-        userId: "BKs42HvVDEZFoaJUmTqf1gTN0K8pUFjI",
-        workspaceId: 1,
-      },
-      {
-        notificationId: 4,
-        userId: "BKs42HvVDEZFoaJUmTqf1gTN0K8pUFjI",
-        workspaceId: 1,
-      },
-      {
-        notificationId: 5,
-        isRead: true,
-        userId: "BKs42HvVDEZFoaJUmTqf1gTN0K8pUFjI",
-        workspaceId: 1,
-      },
-      {
-        notificationId: 6,
-        isRead: true,
-        userId: "BKs42HvVDEZFoaJUmTqf1gTN0K8pUFjI",
-        workspaceId: 1,
-      },
-      {
-        notificationId: 7,
-        isRead: true,
-        userId: "BKs42HvVDEZFoaJUmTqf1gTN0K8pUFjI",
-        workspaceId: 1,
-      },
-      {
-        notificationId: 8,
-        userId: "BKs42HvVDEZFoaJUmTqf1gTN0K8pUFjI",
-        workspaceId: 1,
-      },
-      {
-        notificationId: 9,
-        userId: "BKs42HvVDEZFoaJUmTqf1gTN0K8pUFjI",
-        workspaceId: 1,
-      },
-      {
-        notificationId: 10,
-        isRead: true,
-        userId: "BKs42HvVDEZFoaJUmTqf1gTN0K8pUFjI",
-        workspaceId: 1,
-      },
-      {
-        notificationId: 11,
-        isRead: true,
-        userId: "BKs42HvVDEZFoaJUmTqf1gTN0K8pUFjI",
-        workspaceId: 1,
-      },
-      {
-        notificationId: 12,
-        userId: "BKs42HvVDEZFoaJUmTqf1gTN0K8pUFjI",
-        workspaceId: 1,
-      },
-      {
-        notificationId: 13,
-        isRead: true,
-        userId: "BKs42HvVDEZFoaJUmTqf1gTN0K8pUFjI",
-        workspaceId: 1,
-      },
-      {
-        notificationId: 14,
-        isRead: true,
-        userId: "BKs42HvVDEZFoaJUmTqf1gTN0K8pUFjI",
-        workspaceId: 1,
-      },
-      {
-        notificationId: 15,
-        isRead: true,
-        userId: "BKs42HvVDEZFoaJUmTqf1gTN0K8pUFjI",
-        workspaceId: 1,
+        isRead: false,
       },
     ],
   });

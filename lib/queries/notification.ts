@@ -2,43 +2,78 @@ import "server-only";
 
 import { cache } from "react";
 import prisma from "../prisma";
+import { ThenArg } from "./types";
+
+export type GetNotificationsType = ThenArg<ReturnType<typeof getNotifications>>;
 
 export const getNotifications = cache(
   async (userId: string, workspaceId: number) => {
-    return prisma.notificationRecipient.findMany({
+    return prisma.notification.findMany({
       where: {
-        userId,
         workspaceId,
       },
 
       orderBy: [
         {
-          notification: {
-            createdAt: "desc",
-          },
+          createdAt: "desc",
         },
       ],
 
-      include: {
-        notification: {
+      select: {
+        id: true,
+        type: true,
+        targetName: true,
+        createdAt: true,
+        updatedAt: true,
+        isRead: true,
+
+        actor: {
           select: {
             id: true,
-            type: true,
-            targetName: true,
-            createdAt: true,
-            updatedAt: true,
+            fullName: true,
+            imageUrl: true,
+          },
+        },
 
-            actor: {
+        target: {
+          select: {
+            id: true,
+            project: {
+              select: {
+                id: true,
+                title: true,
+              },
+            },
+            task: {
+              select: {
+                id: true,
+                title: true,
+              },
+            },
+            user: {
               select: {
                 id: true,
                 fullName: true,
-                imageUrl: true,
               },
             },
-
-            target: {
+            customer: {
               select: {
                 id: true,
+                fullName: true,
+              },
+            },
+            comment: {
+              select: {
+                id: true,
+                content: true,
+                createdAt: true,
+                attachments: {
+                  select: {
+                    id: true,
+                    fileUrl: true,
+                    fileName: true,
+                  },
+                },
                 project: {
                   select: {
                     id: true,
@@ -51,62 +86,19 @@ export const getNotifications = cache(
                     title: true,
                   },
                 },
-                message: {
+                _count: {
                   select: {
-                    id: true,
-                    body: true,
+                    likes: true,
+                    replies: true,
                   },
                 },
-                user: {
-                  select: {
-                    id: true,
-                    fullName: true,
-                  },
-                },
-                customer: {
-                  select: {
-                    id: true,
-                    fullName: true,
-                  },
-                },
-                comment: {
-                  select: {
-                    id: true,
-                    content: true,
-                    createdAt: true,
-                    attachments: {
-                      select: {
-                        id: true,
-                        fileUrl: true,
-                      },
-                    },
-                    project: {
-                      select: {
-                        id: true,
-                        title: true,
-                      },
-                    },
-                    task: {
-                      select: {
-                        id: true,
-                        title: true,
-                      },
-                    },
-                    _count: {
-                      select: {
-                        likes: true,
-                        replies: true,
-                      },
-                    },
 
-                    likes: {
-                      where: {
-                        userId,
-                      },
-                      select: {
-                        userId: true,
-                      },
-                    },
+                likes: {
+                  where: {
+                    userId,
+                  },
+                  select: {
+                    userId: true,
                   },
                 },
               },

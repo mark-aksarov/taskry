@@ -1,11 +1,12 @@
+import { Link } from "@/components/ui";
 import { Meta, StoryObj } from "@storybook/react";
 import { NotificationList } from "./NotificationList";
 import { withBackgroundVariant } from "@/.storybook/decorators";
+import { NotificationListItem } from "../NotificationListItem";
 
 const meta = {
   title: "Components/notifications/NotificationList",
   component: NotificationList,
-  tags: ["autodocs"],
   parameters: {
     layout: "fullscreen",
   },
@@ -17,228 +18,135 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    notifications: [
-      {
-        notificationId: 1,
-        isRead: false,
-        notification: {
-          type: "TASK_ADDED",
-          targetName: "Create Landing Page",
-          createdAt: new Date("2025-09-23T08:00:00Z"),
-          actor: {
-            id: "user-2",
+    children: (
+      <>
+        <NotificationListItem
+          isRead={false}
+          date={new Date()}
+          actor={{
+            id: "user-1",
             fullName: "Alice Johnson",
             imageUrl: "/woman.jpg",
-          },
-          target: {
-            task: { id: 10, title: "Website Redesign" },
-          },
-        },
-      },
-      {
-        notificationId: 2,
-        isRead: true,
-        notification: {
-          type: "PROJECT_UPDATED",
-          targetName: "Website Redesign",
-          createdAt: new Date("2025-09-22T09:30:00Z"),
-          actor: { id: "user-2", fullName: "Alice Johnson", imageUrl: null },
-          target: {
-            project: { id: 10, title: "Website Redesign" },
-          },
-        },
-      },
-      {
-        notificationId: 3,
-        isRead: false,
-        notification: {
-          type: "MESSAGE_SENT",
-          targetName: "Hello!",
-          createdAt: new Date("2025-09-21T08:30:00Z"),
-        },
-      },
-      {
-        notificationId: 4,
-        isRead: false,
-        notification: {
-          type: "COMMENT_ADDED",
-          targetName: "Landing Page Task",
-          createdAt: new Date("2025-09-20T09:00:00Z"),
-          actor: {
-            id: "user-4",
-            fullName: "Carol White",
-            imageUrl: "/woman.jpg",
-          },
-          target: {
-            comment: {
-              id: 1,
-              content: "Great job! Keep up the good work.",
-              project: {
-                title: "Website Redesign",
-              },
-              attachments: [],
-              likes: [],
-              _count: {
-                likes: 13,
-              },
-            },
-          },
-        },
-      },
-      {
-        notificationId: 5,
-        isRead: true,
-        notification: {
-          type: "COMMENT_ADDED",
-          targetName: "Website Redesign",
-          createdAt: new Date("2025-09-19T11:00:00Z"),
-          actor: { id: "user-3", fullName: "Bob Smith", imageUrl: "/man.jpg" },
-          target: {
-            comment: {
-              id: 2,
-              content:
-                "I totally agree with Alice. The performance improvements are noticeable, especially in larger datasets. One suggestion though: it might be helpful to include a loading indicator when switching between tabs, since the delay can confuse first-time users.",
-              task: {
-                title: "Design landing page",
-              },
-              attachments: [
-                {
-                  id: 1,
-                  fileUrl: "/placeholder.jpg",
-                },
-                {
-                  id: 2,
-                  fileUrl: "/placeholder.jpg",
-                },
-              ],
-              likes: [
-                {
-                  userId: "user_1",
-                },
-              ],
-              _count: {
-                likes: 25,
-              },
-            },
-          },
-        },
-      },
-      {
-        notificationId: 6,
-        isRead: false,
-        notification: {
-          type: "USER_ADDED",
-          targetName: "David King",
-          createdAt: new Date("2025-09-18T10:00:00Z"),
-          actor: {
-            id: "user-5",
-            fullName: "Eve Black",
-            imageUrl: "/woman.jpg",
-          },
-          target: {
-            user: { id: "user-6", fullName: "David King" },
-          },
-        },
-      },
-      {
-        notificationId: 7,
-        isRead: false,
-        notification: {
-          type: "CUSTOMER_ADDED",
-          targetName: "Acme Corp",
-          createdAt: new Date("2025-09-17T10:30:00Z"),
-          actor: {
+          }}
+          actionText="added a new task"
+          target={<Link href="#">Create Landing Page</Link>}
+        />
+
+        <NotificationListItem
+          isRead={true}
+          date={new Date()}
+          actor={{
             id: "user-2",
-            fullName: "Alice Johnson",
+            fullName: "Bob Smith",
+            imageUrl: "/man.jpg",
+          }}
+          comment={{
+            content:
+              "I totally agree with Alice. The performance improvements are noticeable, especially in larger datasets. One suggestion though: it might be helpful to include a loading indicator when switching between tabs, since the delay can confuse first-time users.",
+            likes: 15,
+            likedByMe: true,
+            attachments: [],
+          }}
+          actionText="updated a project"
+          target={<Link href="#">Website Redesign</Link>}
+        />
+
+        <NotificationListItem
+          isRead={true}
+          date={new Date()}
+          actor={{
+            id: "user-3",
+            fullName: "Emma Brown",
             imageUrl: "/woman.jpg",
-          },
-          target: {
-            customer: { id: 300, fullName: "Acme Corp" },
-          },
-        },
-      },
-      {
-        notificationId: 8,
-        isRead: true,
-        notification: {
-          type: "TASK_DELETED",
-          targetName: "Old Task",
-          createdAt: new Date("2025-09-16T13:00:00Z"),
-          actor: { id: "user-3", fullName: "Bob Smith", imageUrl: "/man.jpg" },
-          target: {
-            task: { id: 101, title: "Old Task" },
-          },
-        },
-      },
-      {
-        notificationId: 9,
-        isRead: false,
-        notification: {
-          type: "USER_UPDATED",
-          targetName: "Alice Johnson",
-          createdAt: new Date("2025-09-15T11:00:00Z"),
-          actor: {
-            id: "user-5",
-            fullName: "Eve Black",
-            imageUrl: "/woman.jpg",
-          },
-          target: {
-            user: { id: "user-2", fullName: "Alice Johnson" },
-          },
-        },
-      },
-      {
-        notificationId: 10,
-        isRead: true,
-        notification: {
-          type: "MESSAGE_SENT",
-          targetName: "Weekly Update",
-          createdAt: new Date("2025-09-14T15:30:00Z"),
-          actor: {
+          }}
+          actionText="added a comment to"
+          target={<Link href="#">Optimize SEO</Link>}
+        />
+
+        <NotificationListItem
+          isRead={false}
+          date={new Date()}
+          actor={{
             id: "user-4",
-            fullName: "Carol White",
+            fullName: "John Doe",
+            imageUrl: "/man.jpg",
+          }}
+          actionText="added a new user"
+          target={<Link href="#">Michael Scott</Link>}
+        />
+
+        <NotificationListItem
+          isRead={true}
+          date={new Date()}
+          actor={{
+            id: "user-5",
+            fullName: "Pam Beesly",
             imageUrl: "/woman.jpg",
-          },
-        },
-      },
-      {
-        notificationId: 11,
-        isRead: true,
-        notification: {
-          type: "COMMENT_REPLIED",
-          targetName: "Implement login system",
-          createdAt: new Date("2025-09-19T11:00:00Z"),
-          actor: { id: "user-3", fullName: "Bob Smith", imageUrl: "/man.jpg" },
-          target: {
-            comment: {
-              id: 2,
-              content:
-                "I totally agree with Alice. The performance improvements are noticeable, especially in larger datasets. One suggestion though: it might be helpful to include a loading indicator when switching between tabs, since the delay can confuse first-time users.",
-              task: {
-                title: "Design landing page",
-              },
-              attachments: [
-                {
-                  id: 1,
-                  fileUrl: "/placeholder.jpg",
-                },
-                {
-                  id: 2,
-                  fileUrl: "/placeholder.jpg",
-                },
-              ],
-              likes: [
-                {
-                  userId: "user_1",
-                },
-              ],
-              _count: {
-                likes: 13,
-              },
-            },
-          },
-        },
-      },
-    ],
+          }}
+          actionText="updated a customer"
+          target={<Link href="#">Dunder Mifflin Inc.</Link>}
+        />
+
+        <NotificationListItem
+          isRead={true}
+          date={new Date()}
+          actor={{
+            id: "user-6",
+            fullName: "Kevin Malone",
+            imageUrl: "/man.jpg",
+          }}
+          actionText="deleted a task"
+          target="Weekly Report"
+        />
+
+        <NotificationListItem
+          isRead={true}
+          date={new Date()}
+          actor={{
+            id: "user-7",
+            fullName: "Dwight Schrute",
+            imageUrl: "/man.jpg",
+          }}
+          actionText="deleted a project"
+          target="Sales Dashboard"
+        />
+
+        <NotificationListItem
+          isRead={true}
+          date={new Date()}
+          actor={{
+            id: "user-8",
+            fullName: "Angela Martin",
+            imageUrl: "/woman.jpg",
+          }}
+          actionText="updated a task"
+          target={<Link href="#">Budget Review</Link>}
+        />
+
+        <NotificationListItem
+          isRead={true}
+          date={new Date()}
+          actor={{
+            id: "user-9",
+            fullName: "Stanley Hudson",
+            imageUrl: "/man.jpg",
+          }}
+          actionText="replied to a comment in"
+          target={<Link href="#">Mobile App Launch</Link>}
+        />
+
+        <NotificationListItem
+          isRead={true}
+          date={new Date()}
+          actor={{
+            id: "user-10",
+            fullName: "Jim Halpert",
+            imageUrl: "/man.jpg",
+          }}
+          actionText="updated a user"
+          target={<Link href="#">Alice Johnson</Link>}
+        />
+      </>
+    ),
   },
 } satisfies Story;

@@ -17,7 +17,6 @@ import { withBackgroundVariant } from "@/.storybook/decorators";
 const meta = {
   title: "Components/layout/AppSidebar",
   component: AppSidebar,
-  tags: ["autodocs"],
   decorators: [withBackgroundVariant()],
 } satisfies Meta<typeof AppSidebar>;
 

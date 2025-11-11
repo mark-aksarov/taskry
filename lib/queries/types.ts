@@ -1,5 +1,7 @@
 import { Prisma } from "@/generated/prisma";
 
+export type ThenArg<T> = T extends PromiseLike<infer U> ? U : T;
+
 export type TaskPreview = Prisma.TaskGetPayload<{
   include: {
     creator: {

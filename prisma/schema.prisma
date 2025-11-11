@@ -13,12 +13,11 @@ datasource db {
 model Workspace {
   id Int @id @default(autoincrement())
 
-  companies              Company[]
-  projectCategories      ProjectCategory[]
-  taskCategories         TaskCategory[]
-  positions              Position[]
-  messageThreads         MessageThread[]
-  notificationRecipients NotificationRecipient[]
+  companies         Company[]
+  projectCategories ProjectCategory[]
+  taskCategories    TaskCategory[]
+  positions         Position[]
+  notifications     Notification[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -36,12 +35,10 @@ model Attachment {
   updatedAt DateTime @updatedAt
 
   commentId Int?
-  messageId Int?
   projectId Int?
   taskId    Int?
 
   Comment Comment? @relation(fields: [commentId], references: [id])
-  Message Message? @relation(fields: [messageId], references: [id])
   Project Project? @relation(fields: [projectId], references: [id], onDelete: Cascade)
   Task    Task?    @relation(fields: [taskId], references: [id], onDelete: Cascade)
 
@@ -68,7 +65,6 @@ model Comment {
   replies Comment[] @relation("CommentReplies")
 
   attachments         Attachment[]
-  reads               Read[]
   likes               CommentLike[]
   notificationTargets NotificationTarget[]
 
@@ -91,24 +87,6 @@ model CommentLike {
 
   @@unique([commentId, userId])
   @@map("comment_like")
-}
-
-// Read
-
-model Read {
-  id Int @id @default(autoincrement())
-
-  commentId Int?
-  messageId Int?
-  userId    String
-
-  comment Comment? @relation(fields: [commentId], references: [id], onDelete: Cascade)
-  message Message? @relation(fields: [messageId], references: [id])
-  user    User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  readAt DateTime @default(now())
-
-  @@map("read")
 }
 
 //Company
@@ -297,45 +275,6 @@ model Subtask {
   @@map("subtask")
 }
 
-// Inbox
-
-model MessageThread {
-  id          Int @id @default(autoincrement())
-  workspaceId Int
-
-  workspace Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
-
-  messages Message[]
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  @@index([workspaceId])
-  @@map("message_thread")
-}
-
-model Message {
-  id   Int    @id @default(autoincrement())
-  body String
-
-  messageThreadId Int
-  senderId        String
-  receiverId      String
-
-  thread   MessageThread @relation(fields: [messageThreadId], references: [id], onDelete: Cascade)
-  sender   User          @relation("Sender", fields: [senderId], references: [id], onDelete: Cascade)
-  receiver User          @relation("Receiver", fields: [receiverId], references: [id], onDelete: Cascade)
-
-  attachments         Attachment[]
-  reads               Read[]
-  notificationTargets NotificationTarget[]
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  @@map("message")
-}
-
 // Notifications
 
 enum NotificationType {
@@ -355,7 +294,6 @@ enum NotificationType {
   CUSTOMER_DELETED
   CUSTOMER_UPDATED
 
-  MESSAGE_SENT
   COMMENT_REPLIED
   COMMENT_ADDED
 }
@@ -364,18 +302,25 @@ model Notification {
   id   Int              @id @default(autoincrement())
   type NotificationType
 
+  isRead Boolean @default(false)
+
   actorId String?
-  actor   User?   @relation(fields: [actorId], references: [id], onDelete: SetNull)
+  actor   User?   @relation("Actor", fields: [actorId], references: [id], onDelete: SetNull)
+
+  recipientId String?
+  recipient   User?   @relation("Recipient", fields: [recipientId], references: [id], onDelete: SetNull)
 
   targetId   Int?                @unique
   target     NotificationTarget? @relation(fields: [targetId], references: [id], onDelete: Cascade)
   targetName String?
 
-  recipients NotificationRecipient[]
+  workspaceId Int
+  workspace   Workspace @relation(fields: [workspaceId], references: [id])
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
+  @@index([workspaceId])
   @@map("notification")
 }
 
@@ -386,12 +331,10 @@ model NotificationTarget {
   customerId Int?    @unique
   projectId  Int?    @unique
   taskId     Int?    @unique
-  messageId  Int?    @unique
   commentId  Int?    @unique
 
   project  Project?  @relation(fields: [projectId], references: [id], onDelete: Cascade)
   task     Task?     @relation(fields: [taskId], references: [id], onDelete: Cascade)
-  message  Message?  @relation(fields: [messageId], references: [id], onDelete: Cascade)
   user     User?     @relation(fields: [userId], references: [id], onDelete: Cascade)
   customer Customer? @relation(fields: [customerId], references: [id], onDelete: Cascade)
   comment  Comment?  @relation(fields: [commentId], references: [id], onDelete: Cascade)
@@ -401,22 +344,6 @@ model NotificationTarget {
   createdAt DateTime @default(now())
 
   @@map("notification_target")
-}
-
-model NotificationRecipient {
-  notificationId Int
-  userId         String
-  isRead         Boolean   @default(false)
-  readAt         DateTime?
-
-  notification Notification @relation(fields: [notificationId], references: [id], onDelete: Cascade)
-  user         User         @relation(fields: [userId], references: [id], onDelete: Cascade)
-  Workspace    Workspace    @relation(fields: [workspaceId], references: [id])
-  workspaceId  Int
-
-  @@id([notificationId, userId])
-  @@index([workspaceId])
-  @@map("notification_recipient")
 }
 
 // User
@@ -456,18 +383,15 @@ model User {
 
   position Position? @relation(fields: [positionId], references: [id], onDelete: SetNull)
 
-  projects         Project[]
-  tasks            Task[]
-  messagesSent     Message[] @relation("Sender")
-  messagesReceived Message[] @relation("Receiver")
-  sessions         Session[]
-  accounts         Account[]
+  projects Project[]
+  tasks    Task[]
+  sessions Session[]
+  accounts Account[]
 
-  comments               Comment[]
-  reads                  Read[]
-  notificationRecipients NotificationRecipient[]
-  notifications          Notification[]
-  notificationTargets    NotificationTarget[]
+  comments              Comment[]
+  notificationsCreated  Notification[]       @relation("Actor")
+  notificationsReceived Notification[]       @relation("Recipient")
+  notificationTargets   NotificationTarget[]
 
   createdAt   DateTime      @default(now())
   updatedAt   DateTime      @updatedAt
