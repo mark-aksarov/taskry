@@ -8,17 +8,13 @@ import { twMerge } from "tailwind-merge";
 
 import { Ellipsis, ListCheck, Trash } from "lucide-react";
 
-import { Button, Skeleton } from "@/components/ui";
+import { Button } from "@/components/ui";
 import { ResponsiveMenuTrigger } from "@/components/common/ResponsiveMenuTrigger";
-import {
-  ImageContainer,
-  ImageContainerSkeleton,
-} from "@/components/common/ImageContainer";
+import { ImageContainer } from "@/components/common/ImageContainer";
 import { NotificationListItemActor } from "./NotificationListItemActor";
 import { NotificationListItemActionText } from "./NotificationListItemActionText";
 import { NotificationListItemDate } from "./NotificationListItemDate";
 import { NotificationListItemTarget } from "./NotificationListItemTarget";
-import { NotificationListItemInfoSkeleton } from "./NotificationListItemInfo";
 import { MenuDialogHeader } from "@/components/common/MenuDialogHeader";
 import {
   CommentItemActions,
@@ -30,16 +26,15 @@ import { ReplyButton } from "@/components/comments/ReplyButton";
 import { LikeButton } from "@/components/comments/LikeButton";
 
 interface NotificationListItemProps {
-  showSkeleton?: boolean;
-  date?: Date;
-  isRead?: boolean;
+  date: Date;
+  isRead: boolean;
   actor?: {
     id: string;
     fullName: string;
     imageUrl?: string;
   };
-  actionText?: string;
-  target?: React.ReactNode;
+  actionText: string;
+  target: React.ReactNode;
   comment?: {
     content: string;
     likes: number;
@@ -53,8 +48,10 @@ interface NotificationListItemProps {
   className?: string;
 }
 
+export const notificationListItemStyles =
+  "flex items-start gap-3 border-gray-300 bg-white p-4 pr-2 not-last:border-b-1 dark:border-gray-600 dark:bg-gray-800";
+
 export const NotificationListItem = ({
-  showSkeleton = false,
   date,
   isRead,
   actor,
@@ -87,14 +84,12 @@ export const NotificationListItem = ({
   return (
     <div
       className={twMerge(
-        "flex items-start gap-3 border-gray-300 bg-white p-4 pr-2 not-last:border-b-1 dark:border-gray-600 dark:bg-gray-800",
-        !showSkeleton && !isRead && "bg-gray-100/70 dark:bg-gray-700/70",
+        notificationListItemStyles,
+        !isRead && "bg-gray-100/70 dark:bg-gray-700/70",
         className,
       )}
     >
-      {showSkeleton ? (
-        <ImageContainerSkeleton className="h-10 w-10" />
-      ) : !actor || !actor.imageUrl ? (
+      {!actor || !actor.imageUrl ? (
         <ImageContainer className="h-10 w-10" />
       ) : (
         <Link href={`/users/${actor.id}`}>
@@ -104,89 +99,77 @@ export const NotificationListItem = ({
         </Link>
       )}
 
-      {showSkeleton ? (
-        <NotificationListItemInfoSkeleton />
-      ) : (
-        <div className="flex flex-col gap-4">
-          <div className="flex flex-col gap-1">
-            <span className="inline leading-none">
-              <NotificationListItemActor>
-                <>
-                  {actor ? (
-                    <Link href={`/users/${actor.id}`}>{actor.fullName}</Link>
-                  ) : (
-                    "Unknown User"
-                  )}
-                </>
-              </NotificationListItemActor>
-              <NotificationListItemActionText>
-                &nbsp;{actionText}&nbsp;
-              </NotificationListItemActionText>
-              <NotificationListItemTarget>{target}</NotificationListItemTarget>
-            </span>
-            <NotificationListItemDate>
-              {formattedUpper}
-            </NotificationListItemDate>
-          </div>
-
-          {comment && (
-            <CommentItemContent className="ml-0">
-              <CommentItemText>{comment.content}</CommentItemText>
-              {comment.attachments.length > 0 && (
-                <Attachments>
-                  {comment.attachments.map((attachment) => (
-                    <Attachment key={attachment.id}>
-                      <Image
-                        src={attachment.fileUrl}
-                        alt=""
-                        fill
-                        className="object-cover"
-                      />
-                    </Attachment>
-                  ))}
-                </Attachments>
-              )}
-              <CommentItemActions>
-                <ReplyButton />
-                <LikeButton value={comment.likes} fill={comment.likedByMe} />
-              </CommentItemActions>
-            </CommentItemContent>
-          )}
+      <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-1">
+          <span className="inline leading-none">
+            <NotificationListItemActor>
+              <>
+                {actor ? (
+                  <Link href={`/users/${actor.id}`}>{actor.fullName}</Link>
+                ) : (
+                  "Unknown User"
+                )}
+              </>
+            </NotificationListItemActor>
+            <NotificationListItemActionText>
+              &nbsp;{actionText}&nbsp;
+            </NotificationListItemActionText>
+            <NotificationListItemTarget>{target}</NotificationListItemTarget>
+          </span>
+          <NotificationListItemDate>{formattedUpper}</NotificationListItemDate>
         </div>
-      )}
+
+        {comment && (
+          <CommentItemContent className="ml-0">
+            <CommentItemText>{comment.content}</CommentItemText>
+            {comment.attachments.length > 0 && (
+              <Attachments>
+                {comment.attachments.map((attachment) => (
+                  <Attachment key={attachment.id}>
+                    <Image
+                      src={attachment.fileUrl}
+                      alt=""
+                      fill
+                      className="object-cover"
+                    />
+                  </Attachment>
+                ))}
+              </Attachments>
+            )}
+            <CommentItemActions>
+              <ReplyButton />
+              <LikeButton value={comment.likes} fill={comment.likedByMe} />
+            </CommentItemActions>
+          </CommentItemContent>
+        )}
+      </div>
 
       <div className="ml-auto">
-        {showSkeleton ? (
-          <div className="flex h-8 w-8 items-center justify-center">
-            <Skeleton className="h-1 w-4" />
-          </div>
-        ) : (
-          <ResponsiveMenuTrigger
-            renderDialogHeader={() => <MenuDialogHeader heading="Actions" />}
-            renderButton={() => (
-              <Button
-                aria-label="task item menu"
-                variant="ghost"
-                iconLeft={
-                  <Ellipsis size={16} strokeWidth={1.5} absoluteStrokeWidth />
-                }
-                className="shrink-0 grow-0 rounded-full"
-              />
+        <ResponsiveMenuTrigger
+          renderDialogHeader={() => <MenuDialogHeader heading="Actions" />}
+          renderButton={() => (
+            <Button
+              aria-label="task item menu"
+              variant="ghost"
+              iconLeft={
+                <Ellipsis size={16} strokeWidth={1.5} absoluteStrokeWidth />
+              }
+              className="shrink-0 grow-0 rounded-full"
+            />
+          )}
+        >
+          <>
+            {!isRead && (
+              <Item textValue="Mark as Read" key="read">
+                <ListCheck size={16} strokeWidth={1.5} absoluteStrokeWidth />{" "}
+                Mark as Read
+              </Item>
             )}
-          >
-            <>
-              {!isRead && (
-                <Item textValue="Mark as Read" key="read">
-                  <ListCheck size={16} strokeWidth={1.5} absoluteStrokeWidth />{" "}
-                  Mark as Read
-                </Item>
-              )}
-            </>
-            <Item textValue="Delete" key="delete">
-              <Trash size={16} strokeWidth={1.5} absoluteStrokeWidth /> Delete
-            </Item>
-          </ResponsiveMenuTrigger>
-        )}
+          </>
+          <Item textValue="Delete" key="delete">
+            <Trash size={16} strokeWidth={1.5} absoluteStrokeWidth /> Delete
+          </Item>
+        </ResponsiveMenuTrigger>
       </div>
     </div>
   );

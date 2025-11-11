@@ -77,9 +77,3 @@ export const WithAttachements = {
     },
   },
 } satisfies Story;
-
-export const Skeleton = {
-  args: {
-    showSkeleton: true,
-  },
-} satisfies Story;
