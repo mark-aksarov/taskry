@@ -10,33 +10,30 @@ import { Button, Checkbox, Link } from "@/components/ui";
 import {
   ListItem,
   ListItemInfo,
-  ListItemInfoSkeleton,
   ListItemText,
   ListItemTitle,
   ListItemProgress,
-  ListItemProgressSkeleton,
 } from "@/components/common/List";
 
-import {
-  ImageContainer,
-  ImageContainerSkeleton,
-} from "@/components/common/ImageContainer";
+import { ImageContainer } from "@/components/common/ImageContainer";
 
 import { TaskListItemTitle } from "./TaskListItemTitle";
 import { MenuDialogHeader } from "@/components/common/MenuDialogHeader";
-import { MenuTriggerSkeleton } from "@/components/common/MenuTriggerSkeleton";
 import { ResponsiveMenuTrigger } from "@/components/common/ResponsiveMenuTrigger";
 
-export interface TaskListItemType {
+interface TaskListItemProps {
   id: number;
   title: string;
-  deadline?: Date | null;
-  subtasks: { isDone: boolean }[];
+  deadline?: Date;
+
+  totalSubtasks?: number;
+  subtasksDone?: number;
+
   creator?: {
     id: string;
-    imageUrl?: string | null;
+    imageUrl?: string;
     fullName: string;
-  } | null;
+  };
   category: {
     id: number;
     name: string;
@@ -47,157 +44,116 @@ export interface TaskListItemType {
   };
   status: {
     id: number;
-    nameEn: string;
-    nameRu: string;
+    name: string;
   };
-  _count: {
-    comments: number;
-    subtasks: number;
-  };
-}
-
-interface TaskListItemProps {
-  task?: TaskListItemType;
+  commentsCount: number;
+  subtasksCount: number;
+  showSkeleton?: boolean;
   showCheckbox?: boolean;
 }
 
-export const TaskListItem = ({ task, showCheckbox }: TaskListItemProps) => {
+export const TaskListItem = ({
+  id,
+  title,
+  deadline,
+  totalSubtasks,
+  subtasksDone,
+  creator,
+  category,
+  project,
+  status,
+  commentsCount,
+  subtasksCount,
+  showCheckbox,
+}: TaskListItemProps) => {
   const locale = "en-GB";
 
   const formattedDeadline = useMemo(() => {
-    if (!task?.deadline) return "";
-    return new Date(task.deadline).toLocaleDateString(locale, {
+    if (!deadline) return "";
+
+    return new Date(deadline).toLocaleDateString(locale, {
       day: "2-digit",
       month: "short",
       year: "numeric",
     });
-  }, [task?.deadline, locale]);
-
-  const progressValue = useMemo(() => {
-    if (!task || task.subtasks.length === 0) return 0;
-    const subtasksDone = task.subtasks.filter((s) => s.isDone).length;
-    return (subtasksDone / task.subtasks.length) * 100;
-  }, [task]);
+  }, [deadline, locale]);
 
   return (
     <ListItem>
-      {task && showCheckbox && <Checkbox aria-label="task checkbox" />}
+      {showCheckbox && <Checkbox aria-label="task checkbox" />}
 
-      {/* --- Task Details --- */}
-      {!task ? (
-        <ListItemInfoSkeleton />
-      ) : (
-        <ListItemInfo>
-          <TaskListItemTitle task={task} />
+      <ListItemInfo>
+        <TaskListItemTitle id={id} title={title} />
+        <ListItemText>{`Deadline on ${formattedDeadline}`}</ListItemText>
+      </ListItemInfo>
 
-          <ListItemText>{`Deadline on ${formattedDeadline}`}</ListItemText>
-        </ListItemInfo>
-      )}
+      <ListItemInfo className="@max-3xl:hidden">
+        <ListItemTitle>Category</ListItemTitle>
 
-      {/* --- Category --- */}
-      {!task ? (
-        <ListItemInfoSkeleton className="@max-3xl:hidden" />
-      ) : (
-        <ListItemInfo className="@max-3xl:hidden">
-          <ListItemTitle>Category</ListItemTitle>
+        <ListItemText>
+          <Link href={`/categories/${category.id}`}>{category.name}</Link>
+        </ListItemText>
+      </ListItemInfo>
 
-          <ListItemText>
-            <Link href={`/categories/${task.category.id}`}>
-              {task.category.name}
-            </Link>
-          </ListItemText>
-        </ListItemInfo>
-      )}
+      <ListItemInfo className="@max-4xl:hidden">
+        <ListItemTitle>Project</ListItemTitle>
+        <ListItemText>
+          <Link href={`/projects/${project.id}`}>{project.title}</Link>
+        </ListItemText>
+      </ListItemInfo>
 
-      {/* --- Project --- */}
-      {!task ? (
-        <ListItemInfoSkeleton className="@max-4xl:hidden" />
-      ) : (
-        <ListItemInfo className="@max-4xl:hidden">
-          <ListItemTitle>Project</ListItemTitle>
+      <ListItemInfo className="@max-5xl:hidden">
+        <ListItemTitle>Status</ListItemTitle>
+        <ListItemText>{status?.name}</ListItemText>
+      </ListItemInfo>
 
-          <ListItemText>
-            <Link href={`/projects/${task.project.id}`}>
-              {task.project.title}
-            </Link>
-          </ListItemText>
-        </ListItemInfo>
-      )}
-
-      {/* --- Status --- */}
-      {!task ? (
-        <ListItemInfoSkeleton className="@max-5xl:hidden" />
-      ) : (
-        <ListItemInfo className="@max-5xl:hidden">
-          <ListItemTitle>Status</ListItemTitle>
-          <ListItemText>{task.status.nameEn}</ListItemText>
-        </ListItemInfo>
-      )}
-
-      {/* --- Right side (progress, creator, menu) --- */}
       <div className="flex flex-none items-center justify-end gap-4">
-        {/* --- Progress --- */}
-        {!task ? (
-          <ListItemProgressSkeleton />
-        ) : (
-          <ListItemProgress
-            value={progressValue}
-            showValueText={false}
-            aria-label="task progress"
-          />
-        )}
+        <ListItemProgress
+          value={((subtasksDone || 0) / (totalSubtasks || 1)) * 100}
+          showValueText={false}
+          aria-label="task progress"
+        />
 
-        {/* --- Creator Image & Menu --- */}
         <div className="flex items-center gap-2">
-          {!task ? (
-            <ImageContainerSkeleton className="h-8 w-8" />
-          ) : task.creator?.imageUrl ? (
-            <Link href={`/users/${task.creator.id}`}>
+          {creator?.imageUrl ? (
+            <Link href={`/users/${creator.id}`}>
               <ImageContainer className="h-8 w-8">
-                <Image
-                  fill
-                  src={task.creator.imageUrl}
-                  alt={task.creator.fullName}
-                />
+                <Image fill src={creator.imageUrl} alt={creator.fullName} />
               </ImageContainer>
             </Link>
           ) : (
             <ImageContainer className="h-8 w-8" />
           )}
 
-          {!task ? (
-            <MenuTriggerSkeleton />
-          ) : (
-            <ResponsiveMenuTrigger
-              placement="bottom right"
-              renderDialogHeader={() => <MenuDialogHeader heading="Actions" />}
-              renderButton={() => (
-                <Button
-                  aria-label="task menu"
-                  variant="ghost"
-                  iconLeft={
-                    <Ellipsis size={16} strokeWidth={1.5} absoluteStrokeWidth />
-                  }
-                  className="rounded-full"
-                />
-              )}
-            >
-              <Item textValue="Delete" key="delete">
-                <Trash size={16} /> Delete
-              </Item>
-              <Item textValue="Mark as Pending" key="pending">
-                <CircleEllipsis size={16} /> Mark as Pending
-              </Item>
-              <Item textValue="Mark as Done" key="done">
-                <Check size={16} />
-                Mark as Done
-              </Item>
-              <Item textValue="Mark as Active" key="active">
-                <Clock size={16} />
-                Mark as Active
-              </Item>
-            </ResponsiveMenuTrigger>
-          )}
+          <ResponsiveMenuTrigger
+            placement="bottom right"
+            renderDialogHeader={() => <MenuDialogHeader heading="Actions" />}
+            renderButton={() => (
+              <Button
+                aria-label="task menu"
+                variant="ghost"
+                iconLeft={
+                  <Ellipsis size={16} strokeWidth={1.5} absoluteStrokeWidth />
+                }
+                className="rounded-full"
+              />
+            )}
+          >
+            <Item textValue="Delete" key="delete">
+              <Trash size={16} /> Delete
+            </Item>
+            <Item textValue="Mark as Pending" key="pending">
+              <CircleEllipsis size={16} /> Mark as Pending
+            </Item>
+            <Item textValue="Mark as Done" key="done">
+              <Check size={16} />
+              Mark as Done
+            </Item>
+            <Item textValue="Mark as Active" key="active">
+              <Clock size={16} />
+              Mark as Active
+            </Item>
+          </ResponsiveMenuTrigger>
         </div>
       </div>
     </ListItem>

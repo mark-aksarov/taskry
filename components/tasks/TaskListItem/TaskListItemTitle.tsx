@@ -8,9 +8,11 @@ import { TaskDetailBottomSheet } from "../TaskDetailBottomSheet";
 import { focusRing, RACButton, RACDialogTrigger } from "@/components/ui";
 
 export function TaskListItemTitle({
-  task,
+  id,
+  title,
 }: {
-  task: { id: number; title: string };
+  id: number;
+  title: string;
 }) {
   const state = useOverlayTriggerState({});
   const { triggerProps } = useOverlayTrigger({ type: "dialog" }, state);
@@ -25,9 +27,9 @@ export function TaskListItemTitle({
                 focusRing({ ...renderProps, className: "cursor-pointer" })
               }
             >
-              {task.title}
+              {title}
             </RACButton>
-            <TaskDetailModal taskId={task.id} />
+            <TaskDetailModal taskId={id} />
           </RACDialogTrigger>
         </ListItemTitle>
       </div>
@@ -40,9 +42,9 @@ export function TaskListItemTitle({
               focusRing({ ...renderProps, className: "cursor-pointer" })
             }
           >
-            {task.title}
+            {title}
           </RACButton>
-          <TaskDetailBottomSheet taskId={task.id} state={state} />
+          <TaskDetailBottomSheet taskId={id} state={state} />
         </ListItemTitle>
       </div>
     </>

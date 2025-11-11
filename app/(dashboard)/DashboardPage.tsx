@@ -6,10 +6,16 @@ import {
   ToolbarMobileTop,
 } from "@/components/common/Toolbar";
 import { TotalProjectsCardSkeleton } from "@/components/dashboard/TotalProjectsCard";
-import { AssignedTasksSkeleton } from "@/components/tasks/AssignedTasks/AssignedTasksSkeleton";
 import { TotalTasksCardSkeleton } from "@/components/dashboard/TotalTasksCard";
 import { TotalCustomersCardSkeleton } from "@/components/dashboard/TotalCustomersCard";
 import { TotalUsersCardSkeleton } from "@/components/dashboard/TotalUsersCard";
+import { TaskList } from "@/components/tasks/TaskList";
+import { Repeat } from "@/components/common/Repeat";
+import { TaskListItemSkeleton } from "@/components/tasks/TaskListItem";
+import {
+  AssignedTasksSection,
+  AssignedTasksSectionHeading,
+} from "@/components/tasks/AssignedTasks";
 
 interface DashboardPageProps {
   TotalProjectsCardContainer: React.ComponentType;
@@ -50,7 +56,19 @@ export function DashboardPage({
           </Suspense>
         </div>
 
-        <Suspense fallback={<AssignedTasksSkeleton />}>
+        <Suspense
+          fallback={
+            <AssignedTasksSection>
+              <AssignedTasksSectionHeading />
+              <TaskList>
+                <Repeat
+                  items={10}
+                  renderItem={() => <TaskListItemSkeleton />}
+                />
+              </TaskList>
+            </AssignedTasksSection>
+          }
+        >
           <AssignedTasksContainer />
         </Suspense>
       </PageGrid>

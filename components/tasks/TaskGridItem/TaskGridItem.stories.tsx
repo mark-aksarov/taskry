@@ -17,27 +17,18 @@ type Story = StoryObj<typeof TaskGridItem>;
 
 export const Default = {
   args: {
-    task: {
-      id: 1,
-      title: "Design homepage",
-      deadline: new Date("2025-09-28"),
-      creator: { id: "user1", imageUrl: "/man.jpg", fullName: "Liam Turner" },
-      subtasks: [{ isDone: false }, { isDone: true }, { isDone: false }],
-    },
-  },
-} satisfies Story;
-
-export const Skeleton = {
-  args: {
-    task: undefined,
+    id: 1,
+    title: "Design landing page",
+    deadline: new Date("2025-09-30"),
+    creator: { id: "user1", imageUrl: "/man.jpg", fullName: "John Doe" },
+    totalSubtasks: 6,
+    subtasksDone: 2,
   },
 } satisfies Story;
 
 export const WithoutCreator = {
   args: {
-    task: {
-      ...Default.args.task,
-      creator: null,
-    },
+    ...Default.args,
+    creator: undefined,
   },
 } satisfies Story;

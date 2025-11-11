@@ -1,13 +1,54 @@
+import { TaskList } from "../TaskList";
 import { getTasks } from "@/lib/queries/task";
-import { AssignedTasks } from "./AssignedTasks";
-import { AssignedTasksEmpty } from "./AssignedTasksEmpty";
+import { TaskListItem } from "../TaskListItem";
+import { AssignedTasksSection } from "./AssignedTasksSection";
+import { AssignedTasksEmptyCard } from "./AssignedTasksEmptyCard";
+import { AssignedTasksSectionHeading } from "./AssignedTasksSectionHeading";
 
 export async function AssignedTasksContainer() {
   const tasks = await getTasks();
 
   if (!tasks.length) {
-    return <AssignedTasksEmpty />;
+    return (
+      <AssignedTasksSection>
+        <AssignedTasksSectionHeading />
+        <AssignedTasksEmptyCard />
+      </AssignedTasksSection>
+    );
   }
 
-  return <AssignedTasks tasks={tasks} />;
+  return (
+    <AssignedTasksSection>
+      <AssignedTasksSectionHeading />
+      <TaskList>
+        {tasks.map((task) => (
+          <TaskListItem
+            key={task.id}
+            id={task.id}
+            title={task.title}
+            deadline={task.deadline}
+            category={task.category}
+            project={task.project}
+            status={{
+              id: task.status.id,
+              name: task.status.nameEn,
+            }}
+            creator={
+              task.creator
+                ? {
+                    id: task.creator.id,
+                    imageUrl: task.creator.imageUrl ?? undefined,
+                    fullName: task.creator.fullName,
+                  }
+                : undefined
+            }
+            totalSubtasks={task.subtasks.length}
+            subtasksDone={task.subtasks.filter((s) => s.isDone).length}
+            commentsCount={task._count.comments}
+            subtasksCount={task._count.subtasks}
+          />
+        ))}
+      </TaskList>
+    </AssignedTasksSection>
+  );
 }

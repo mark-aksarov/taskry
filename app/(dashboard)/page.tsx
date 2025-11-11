@@ -2,7 +2,7 @@ import { DashboardPage } from "./DashboardPage";
 import { TotalTasksCardContainer } from "@/components/dashboard/TotalTasksCard";
 import { TotalProjectsCardContainer } from "@/components/dashboard/TotalProjectsCard";
 import { TotalCustomersCardContainer } from "@/components/dashboard/TotalCustomersCard";
-import { AssignedTasksContainer } from "@/components/tasks/AssignedTasks/AssignedTasksContainer";
+import { AssignedTasksContainer } from "@/components/tasks/AssignedTasks";
 import { TotalUsersCardContainer } from "@/components/dashboard/TotalUsersCard";
 
 export default function AppDashboardPage() {

@@ -2,7 +2,7 @@ import "server-only";
 
 import prisma from "../prisma";
 import { cache } from "react";
-import { TaskDetail } from "./types";
+import { TaskDetail, ThenArg } from "./types";
 import { TaskItem } from "@/components/tasks/types";
 
 export const getTask = cache(async (id: number): Promise<TaskDetail> => {
@@ -52,6 +52,8 @@ export const getTask = cache(async (id: number): Promise<TaskDetail> => {
     },
   });
 });
+
+export type GetTasksType = ThenArg<ReturnType<typeof getTasks>>;
 
 export const getTasks = cache(
   async (creatorId?: string): Promise<TaskItem[]> => {

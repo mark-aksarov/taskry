@@ -1,3 +1,3 @@
 export { TaskListItem } from "./TaskListItem";
 export { TaskListItemTitle } from "./TaskListItemTitle";
-export { type TaskListItemType } from "./TaskListItem";
+export { TaskListItemSkeleton } from "./TaskListItemSkeleton";

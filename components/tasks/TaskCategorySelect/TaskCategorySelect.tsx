@@ -1,13 +1,12 @@
 "use client";
 
 import { Item } from "react-stately";
-import { TaskCategory } from "@/generated/prisma";
 import { ResponsiveSelect } from "@/components/common/ResponsiveSelect";
 
 export function TaskCategorySelect({
   categories,
 }: {
-  categories: Pick<TaskCategory, "id" | "name">[];
+  categories: { id: number; name: string }[];
 }) {
   if (!categories.length) {
     return null;

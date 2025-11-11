@@ -1,10 +1,9 @@
-import { TaskCategory } from "@/generated/prisma";
 import { CheckboxGroup, Checkbox } from "@/components/ui";
 
 export function TaskCategoryCheckboxGroup({
   categories,
 }: {
-  categories: Pick<TaskCategory, "id" | "name">[];
+  categories: { id: number; name: string }[];
 }) {
   if (!categories.length) {
     return null;

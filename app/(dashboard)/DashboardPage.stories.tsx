@@ -9,17 +9,20 @@ import {
   TotalProjectsCardSkeleton,
 } from "@/components/dashboard/TotalProjectsCard";
 import {
-  AssignedTasks,
-  AssignedTasksEmpty,
-  AssignedTasksSkeleton,
+  AssignedTasksSection,
+  AssignedTasksSectionHeading,
 } from "@/components/tasks/AssignedTasks";
 import {
   TotalTasksCard,
   TotalTasksCardSkeleton,
 } from "@/components/dashboard/TotalTasksCard";
-import { TotalCustomersCard } from "@/components/dashboard/TotalCustomersCard";
+import { Repeat } from "@/components/common/Repeat";
+import { TaskList } from "@/components/tasks/TaskList";
 import { TotalUsersCard } from "@/components/dashboard/TotalUsersCard";
+import { TaskListItemSkeleton } from "@/components/tasks/TaskListItem";
+import { TotalCustomersCard } from "@/components/dashboard/TotalCustomersCard";
 import { Default as TaskListStory } from "@/components/tasks/TaskList/TaskList.stories";
+import { AssignedTasksEmptyCard } from "@/components/tasks/AssignedTasks/AssignedTasksEmptyCard";
 
 const meta = {
   title: "components/pages/DashboardPage",
@@ -46,7 +49,10 @@ export const Default: Story = {
         <TotalCustomersCard totalCustomers={20} />
       )}
       AssignedTasksContainer={() => (
-        <AssignedTasks tasks={TaskListStory.args?.tasks} />
+        <AssignedTasksSection>
+          <AssignedTasksSectionHeading />
+          <TaskList {...TaskListStory.args} />
+        </AssignedTasksSection>
       )}
     />
   ),
@@ -59,7 +65,14 @@ export const Loading = {
       TotalTasksCardContainer={() => <TotalTasksCardSkeleton />}
       TotalUsersCardContainer={() => <TotalUsersCard />}
       TotalCustomersCardContainer={() => <TotalCustomersCard />}
-      AssignedTasksContainer={() => <AssignedTasksSkeleton />}
+      AssignedTasksContainer={() => (
+        <AssignedTasksSection>
+          <AssignedTasksSectionHeading />
+          <TaskList>
+            <Repeat items={10} renderItem={() => <TaskListItemSkeleton />} />
+          </TaskList>
+        </AssignedTasksSection>
+      )}
     />
   ),
 } satisfies Story;
@@ -75,7 +88,12 @@ export const WithNoTasks = {
       TotalCustomersCardContainer={() => (
         <TotalCustomersCard totalCustomers={20} />
       )}
-      AssignedTasksContainer={() => <AssignedTasksEmpty />}
+      AssignedTasksContainer={() => (
+        <AssignedTasksSection>
+          <AssignedTasksSectionHeading />
+          <AssignedTasksEmptyCard />
+        </AssignedTasksSection>
+      )}
     />
   ),
 } satisfies Story;
