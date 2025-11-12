@@ -14,11 +14,11 @@ export async function TaskViewModeContainer() {
     deadline: task.deadline,
     totalSubtasks: task.subtasks.length,
     subtasksDone: task.subtasks.filter((s) => s.isDone).length,
-    creator: task.creator
+    assignee: task.assignee
       ? {
-          id: task.creator.id,
-          imageUrl: task.creator.imageUrl ?? undefined,
-          fullName: task.creator.fullName,
+          id: task.assignee.id,
+          imageUrl: task.assignee.imageUrl ?? undefined,
+          fullName: task.assignee.fullName,
         }
       : undefined,
   });

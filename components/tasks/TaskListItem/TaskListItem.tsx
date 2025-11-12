@@ -29,7 +29,7 @@ interface TaskListItemProps {
   totalSubtasks?: number;
   subtasksDone?: number;
 
-  creator?: {
+  assignee?: {
     id: string;
     imageUrl?: string;
     fullName: string;
@@ -58,7 +58,7 @@ export const TaskListItem = ({
   deadline,
   totalSubtasks,
   subtasksDone,
-  creator,
+  assignee,
   category,
   project,
   status,
@@ -115,10 +115,10 @@ export const TaskListItem = ({
         />
 
         <div className="flex items-center gap-2">
-          {creator?.imageUrl ? (
-            <Link href={`/users/${creator.id}`}>
+          {assignee?.imageUrl ? (
+            <Link href={`/users/${assignee.id}`}>
               <ImageContainer className="h-8 w-8">
-                <Image fill src={creator.imageUrl} alt={creator.fullName} />
+                <Image fill src={assignee.imageUrl} alt={assignee.fullName} />
               </ImageContainer>
             </Link>
           ) : (

@@ -37,7 +37,7 @@ export const Default = {
     project: { id: 1, title: "Website Redesign" },
     category: { id: 1, name: "Design" },
     status: { id: 1, name: "Pending" },
-    creator: { id: "user1", imageUrl: "/man.jpg", fullName: "John Doe" },
+    assignee: { id: "user1", imageUrl: "/man.jpg", fullName: "John Doe" },
     totalSubtasks: 6,
     subtasksDone: 2,
     commentsCount: 10,
@@ -52,9 +52,9 @@ export const WithCheckbox = {
   },
 } satisfies Story;
 
-export const WithoutCreator = {
+export const WithoutAssignee = {
   args: {
     ...Default.args,
-    creator: undefined,
+    assignee: undefined,
   },
 } satisfies Story;

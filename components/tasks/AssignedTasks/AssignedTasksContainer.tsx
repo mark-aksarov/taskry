@@ -33,12 +33,12 @@ export async function AssignedTasksContainer() {
               id: task.status.id,
               name: task.status.nameEn,
             }}
-            creator={
-              task.creator
+            assignee={
+              task.assignee
                 ? {
-                    id: task.creator.id,
-                    imageUrl: task.creator.imageUrl ?? undefined,
-                    fullName: task.creator.fullName,
+                    id: task.assignee.id,
+                    imageUrl: task.assignee.imageUrl ?? undefined,
+                    fullName: task.assignee.fullName,
                   }
                 : undefined
             }

@@ -39,15 +39,15 @@ export const Default = {
     id: 1,
     title: "Design landing page",
     deadline: new Date("2025-09-30"),
-    creator: { id: "user1", imageUrl: "/man.jpg", fullName: "John Doe" },
+    assignee: { id: "user1", imageUrl: "/man.jpg", fullName: "John Doe" },
     totalSubtasks: 6,
     subtasksDone: 2,
   },
 } satisfies Story;
 
-export const WithoutCreator = {
+export const WithoutAssignee = {
   args: {
     ...Default.args,
-    creator: undefined,
+    assignee: undefined,
   },
 } satisfies Story;
