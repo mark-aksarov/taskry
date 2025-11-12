@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Button,
   Dialog,
@@ -8,9 +10,11 @@ import {
   DialogHeading,
   Modal,
 } from "@/components/ui";
-import { TaskDetail } from "../TaskDetail";
+import { useTaskDetailContainer } from "@/components/tasks/TaskDetail";
 
 export function TaskDetailModal({ taskId }: { taskId: number }) {
+  const TaskDetailContainer = useTaskDetailContainer();
+
   return (
     <Modal isDismissable className="w-[460px]">
       <Dialog className="max-h-[calc(100dvh-64px)]">
@@ -19,7 +23,7 @@ export function TaskDetailModal({ taskId }: { taskId: number }) {
           <DialogCloseButton iconSize={20} />
         </DialogHeader>
         <DialogBody>
-          <TaskDetail taskId={taskId} />
+          <TaskDetailContainer taskId={taskId} />
         </DialogBody>
         <DialogFooter>
           <Button

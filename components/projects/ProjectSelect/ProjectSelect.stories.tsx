@@ -6,7 +6,7 @@ import { ProjectSelect } from "./ProjectSelect";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 
 const meta = {
-  title: "Components/tasks/ProjectSelect",
+  title: "Components/projects/ProjectSelect",
   component: ProjectSelect,
   tags: ["autodocs"],
   decorators: [withContainerWidth(), withBackgroundVariant({ variant: "alt" })],

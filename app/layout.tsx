@@ -15,7 +15,7 @@ import { NotificationModalContentContainer } from "@/components/notifications/No
 import { NotificationModalTrigger } from "@/components/notifications/NotificationModalTrigger";
 import { AppBottomSheetTrigger } from "@/components/layout/AppBottomSheetTrigger";
 import { AppSidebarSheetTrigger } from "@/components/layout/AppSidebarSheetTrigger";
-import { NotificationListItem } from "@/components/notifications/NotificationListItem";
+import { NotificationListItemSkeleton } from "@/components/notifications/NotificationListItem";
 import { Repeat } from "@/components/common/Repeat";
 
 const nunitoSans = Nunito_Sans({
@@ -60,7 +60,7 @@ export function Layout({
   children: React.ReactNode;
 }) {
   const notificationListSkeleton = (
-    <Repeat items={7} renderItem={() => <NotificationListItem />} />
+    <Repeat items={7} renderItem={() => <NotificationListItemSkeleton />} />
   );
 
   return (

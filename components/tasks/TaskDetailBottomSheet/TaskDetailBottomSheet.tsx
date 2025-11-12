@@ -9,15 +9,19 @@ import {
   DialogHeading,
 } from "@/components/ui";
 import { OverlayTriggerState } from "react-stately";
-import { TaskDetail } from "../TaskDetail";
+import { useTaskDetailContainer } from "../TaskDetail";
+
+export interface TaskDetailBottomSheetProps {
+  taskId: number;
+  state: OverlayTriggerState;
+}
 
 export function TaskDetailBottomSheet({
   taskId,
   state,
-}: {
-  taskId: number;
-  state: OverlayTriggerState;
-}) {
+}: TaskDetailBottomSheetProps) {
+  const TaskDetailContainer = useTaskDetailContainer();
+
   return (
     <BottomSheet isDismissable state={state} className="md:hidden">
       <Dialog
@@ -29,7 +33,7 @@ export function TaskDetailBottomSheet({
           <DialogCloseButton />
         </DialogHeader>
         <DialogBody>
-          <TaskDetail taskId={taskId} />
+          <TaskDetailContainer taskId={taskId} />
         </DialogBody>
         <DialogFooter>
           <Button

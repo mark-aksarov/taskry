@@ -5,7 +5,6 @@ import {
   GridItemInfo,
   GridItemProgress,
   GridItemText,
-  GridItemTitle,
   GridItemTop,
 } from "@/components/common/Grid";
 
@@ -13,19 +12,12 @@ import { Item } from "react-stately";
 import { Check, CircleEllipsis, Clock, Ellipsis, Trash } from "lucide-react";
 
 import { useMemo } from "react";
-import {
-  Button,
-  Link,
-  Checkbox,
-  RACButton,
-  focusRing,
-  RACDialogTrigger,
-} from "@/components/ui";
+import { Button, Link, Checkbox } from "@/components/ui";
 import Image from "next/image";
-import { TaskDetailModal } from "../TaskDetailModal";
 import { ImageContainer } from "@/components/common/ImageContainer";
 import { MenuDialogHeader } from "@/components/common/MenuDialogHeader";
 import { ResponsiveMenuTrigger } from "@/components/common/ResponsiveMenuTrigger";
+import { TaskGridItemTitle } from "./TaskGridItemTitle";
 
 export interface TaskGridItemProps {
   id: number;
@@ -98,18 +90,7 @@ export function TaskGridItem({
 
       <div className="flex items-center justify-between max-sm:flex-col-reverse max-sm:gap-4">
         <GridItemInfo className="max-sm:w-full max-sm:items-center sm:flex-auto">
-          <GridItemTitle>
-            <RACDialogTrigger>
-              <RACButton
-                className={(renderProps) =>
-                  focusRing({ ...renderProps, className: "cursor-pointer" })
-                }
-              >
-                {title}
-              </RACButton>
-              <TaskDetailModal taskId={id} />
-            </RACDialogTrigger>
-          </GridItemTitle>
+          <TaskGridItemTitle id={id} title={title} />
 
           <GridItemText>{`Deadline on ${formattedDeadline}`}</GridItemText>
         </GridItemInfo>

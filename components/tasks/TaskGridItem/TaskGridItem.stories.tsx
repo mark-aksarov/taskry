@@ -4,12 +4,30 @@ import {
   withBackgroundVariant,
   withContainerWidth,
 } from "@/.storybook/decorators";
+import { TaskDetail, TaskDetailContainerProvider } from "../TaskDetail";
+import { CommentsContainerProvider } from "@/components/comments/CommentsContainer";
+import { MockedTaskCommentsContainer } from "../TaskCommentsModalTrigger/TaskCommentsModalTrigger.stories";
+import { Default as TaskDetailStory } from "../TaskDetail/TaskDetail.stories";
 
 const meta = {
   title: "Components/tasks/TaskGridItem",
   component: TaskGridItem,
   tags: ["autodocs"],
-  decorators: [withContainerWidth("250px"), withBackgroundVariant()],
+  decorators: [
+    (Story) => (
+      <TaskDetailContainerProvider
+        TaskDetailContainer={() => <TaskDetail {...TaskDetailStory.args} />}
+      >
+        <CommentsContainerProvider
+          CommentsContainer={() => <MockedTaskCommentsContainer />}
+        >
+          <Story />
+        </CommentsContainerProvider>
+      </TaskDetailContainerProvider>
+    ),
+    withContainerWidth("250px"),
+    withBackgroundVariant(),
+  ],
 } satisfies Meta<typeof TaskGridItem>;
 
 export default meta;

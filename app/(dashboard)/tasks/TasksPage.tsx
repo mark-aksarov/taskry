@@ -139,6 +139,7 @@ export function TasksPage({
               <NewTaskModal newTaskForm={newTaskForm} />
             </RACDialogTrigger>
           </ToolbarMobileBottom>
+
           <TaskViewModeContainer />
         </ViewModeProvider>
       </PageGrid>

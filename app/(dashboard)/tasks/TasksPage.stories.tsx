@@ -15,7 +15,6 @@ import { TasksPageEmpty } from "./TasksPageEmpty";
 import { TaskCategorySelect } from "@/components/tasks/TaskCategorySelect/TaskCategorySelect";
 import { UserSelect } from "@/components/users/UserSelect";
 import { ProjectSelect } from "@/components/projects/ProjectSelect";
-
 import { Default as TaskCategorySelectStory } from "@/components/tasks/TaskCategorySelect/TaskCategorySelect.stories";
 import { Default as ProjectCheckboxGroupStory } from "@/components/projects/ProjectCheckboxGroup/ProjectCheckboxGroup.stories";
 import { Default as ProjectSelectStory } from "@/components/projects/ProjectSelect/ProjectSelect.stories";
@@ -24,12 +23,33 @@ import { Default as TaskListStory } from "@/components/tasks/TaskList/TaskList.s
 import { Default as TaskGridStory } from "@/components/tasks/TaskGrid/TaskGrid.stories";
 import { Default as TaskCategoryCheckboxGroupStory } from "@/components/tasks/TaskCategoryCheckboxGroup/TaskCategoryCheckboxGroup.stories";
 import { Default as UserCheckboxGroupStory } from "@/components/users/UserCheckboxGroup/UserCheckboxGroup.stories";
+import {
+  TaskDetail,
+  TaskDetailContainerProvider,
+} from "@/components/tasks/TaskDetail";
+import { Default as TaskDetailStory } from "@/components/tasks/TaskDetail/TaskDetail.stories";
+import { CommentsContainerProvider } from "@/components/comments/CommentsContainer";
+import { MockedTaskCommentsContainer } from "@/components/tasks/TaskCommentsModalTrigger/TaskCommentsModalTrigger.stories";
 
 const meta = {
   title: "components/pages/TasksPage",
   component: TasksPage,
   parameters: { layout: "fullscreen" },
-  decorators: [PageDecorator, withBackgroundVariant()],
+  decorators: [
+    (Story) => (
+      <TaskDetailContainerProvider
+        TaskDetailContainer={() => <TaskDetail {...TaskDetailStory.args} />}
+      >
+        <CommentsContainerProvider
+          CommentsContainer={() => <MockedTaskCommentsContainer />}
+        >
+          <Story />
+        </CommentsContainerProvider>
+      </TaskDetailContainerProvider>
+    ),
+    PageDecorator,
+    withBackgroundVariant(),
+  ],
   beforeEach: () => {
     mocked(usePathname).mockReturnValue("/tasks");
   },

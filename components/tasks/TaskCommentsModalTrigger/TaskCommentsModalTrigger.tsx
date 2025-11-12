@@ -1,6 +1,7 @@
 import { CommentItem } from "@/components/comments/CommentItem";
-import { CommentModalInput } from "@/components/comments/CommentModalInput";
 import { ResponsiveModal } from "@/components/common/ResponsiveModal";
+import { CommentModalInput } from "@/components/comments/CommentModalInput";
+import { useCommentsContainer } from "@/components/comments/CommentsContainer";
 import {
   Button,
   Dialog,
@@ -11,7 +12,6 @@ import {
   DialogHeading,
   RACDialogTrigger,
 } from "@/components/ui";
-import { commentsMock } from "@/lib/data/__mocks__/comments";
 import { MessagesSquare } from "lucide-react";
 import { useMediaQuery } from "react-responsive";
 
@@ -22,7 +22,7 @@ export function TaskCommentsModalTrigger({
   commentCount: number;
   taskId: number;
 }) {
-  const comments = commentsMock;
+  const CommentsContainer = useCommentsContainer();
 
   const isMd = useMediaQuery({ query: "(max-width: 48rem)" });
 
@@ -44,9 +44,7 @@ export function TaskCommentsModalTrigger({
             <DialogCloseButton iconSize={20} />
           </DialogHeader>
           <DialogBody className="flex flex-col gap-4">
-            {comments.map((comment) => {
-              return <CommentItem key={comment.id} comment={comment} />;
-            })}
+            <CommentsContainer taskId={taskId} />
           </DialogBody>
           <DialogFooter className="px-4 py-3">
             <CommentModalInput />

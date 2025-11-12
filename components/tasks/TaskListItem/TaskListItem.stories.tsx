@@ -1,12 +1,29 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { TaskListItem } from "./TaskListItem";
 import { withBackgroundVariant } from "@/.storybook/decorators";
+import { TaskDetail, TaskDetailContainerProvider } from "../TaskDetail";
+import { CommentsContainerProvider } from "@/components/comments/CommentsContainer";
+import { MockedTaskCommentsContainer } from "../TaskCommentsModalTrigger/TaskCommentsModalTrigger.stories";
+import { Default as TaskDetailStory } from "../TaskDetail/TaskDetail.stories";
 
 const meta = {
   title: "Components/tasks/TaskListItem",
   component: TaskListItem,
   tags: ["autodocs"],
-  decorators: [withBackgroundVariant()],
+  decorators: [
+    (Story) => (
+      <TaskDetailContainerProvider
+        TaskDetailContainer={() => <TaskDetail {...TaskDetailStory.args} />}
+      >
+        <CommentsContainerProvider
+          CommentsContainer={() => <MockedTaskCommentsContainer />}
+        >
+          <Story />
+        </CommentsContainerProvider>
+      </TaskDetailContainerProvider>
+    ),
+    withBackgroundVariant(),
+  ],
 } satisfies Meta<typeof TaskListItem>;
 
 export default meta;

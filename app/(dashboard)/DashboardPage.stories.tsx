@@ -23,12 +23,33 @@ import { TaskListItemSkeleton } from "@/components/tasks/TaskListItem";
 import { TotalCustomersCard } from "@/components/dashboard/TotalCustomersCard";
 import { Default as TaskListStory } from "@/components/tasks/TaskList/TaskList.stories";
 import { AssignedTasksEmptyCard } from "@/components/tasks/AssignedTasks/AssignedTasksEmptyCard";
+import {
+  TaskDetail,
+  TaskDetailContainerProvider,
+} from "@/components/tasks/TaskDetail";
+import { CommentsContainerProvider } from "@/components/comments/CommentsContainer";
+import { MockedTaskCommentsContainer } from "@/components/tasks/TaskCommentsModalTrigger/TaskCommentsModalTrigger.stories";
+import { Default as TaskDetailStory } from "@/components/tasks/TaskDetail/TaskDetail.stories";
 
 const meta = {
   title: "components/pages/DashboardPage",
   component: DashboardPage,
   parameters: { layout: "fullscreen" },
-  decorators: [PageDecorator, withBackgroundVariant()],
+  decorators: [
+    (Story) => (
+      <TaskDetailContainerProvider
+        TaskDetailContainer={() => <TaskDetail {...TaskDetailStory.args} />}
+      >
+        <CommentsContainerProvider
+          CommentsContainer={() => <MockedTaskCommentsContainer />}
+        >
+          <Story />
+        </CommentsContainerProvider>
+      </TaskDetailContainerProvider>
+    ),
+    PageDecorator,
+    withBackgroundVariant(),
+  ],
   beforeEach: () => {
     mocked(usePathname).mockReturnValue("/");
   },

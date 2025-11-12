@@ -1,4 +1,5 @@
-export { CommentItem, type CommentItemType } from "./CommentItem";
+export { CommentItem } from "./CommentItem";
+export { CommentItemSkeleton } from "./CommentItemSkeleton";
 export { CommentItemActions } from "./CommentItemActions";
 export { CommentItemDate } from "./CommentItemDate";
 export { CommentItemTitle } from "./CommentItemTitle";

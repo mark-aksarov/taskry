@@ -2,8 +2,11 @@ import "server-only";
 
 import { cache } from "react";
 import prisma from "../prisma";
-import { Comment, CommentWithReplies } from "@/lib/queries/types";
+import { Comment, CommentWithReplies, ThenArg } from "@/lib/queries/types";
 
+export type GetCommentsByTaskType = ThenArg<
+  ReturnType<typeof getCommentsByTask>
+>;
 export const getCommentsByTask = cache(
   async (taskId: number, userId: string): Promise<Comment[]> => {
     return await prisma.comment.findMany({

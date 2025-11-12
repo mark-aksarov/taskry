@@ -1,41 +1,48 @@
 "use client";
 
 import Image from "next/image";
-import { CommentItemDate } from "./CommentItemDate";
-import { CommentItemText, CommentItemTextSkeleton } from "./CommentItemText";
-import { CommentItemInfo, CommentItemInfoSkeleton } from "./CommentItemInfo";
-import { CommentItemTitle } from "./CommentItemTitle";
-import {
-  ImageContainer,
-  ImageContainerSkeleton,
-} from "@/components/common/ImageContainer";
 import { useMemo } from "react";
-import { CommentItemContent } from "./CommentItemContent";
-import { Attachment, Attachments } from "@/components/attachments/Attachments";
-import { Link, Skeleton } from "@/components/ui";
-import { CommentItemActions } from "./CommentItemActions";
-import { ReplyButton } from "../ReplyButton";
+import { Link } from "@/components/ui";
 import { LikeButton } from "../LikeButton";
-
-export interface CommentItemType {
-  id: number;
-  content: string;
-  createdAt: Date;
-  attachments: { id: number; fileUrl: string }[];
-  likes: { userId: string }[];
-  _count: { likes: number };
-  sender: { id: string; fullName: string; imageUrl?: string | null };
-}
+import { ReplyButton } from "../ReplyButton";
+import { CommentItemDate } from "./CommentItemDate";
+import { CommentItemText } from "./CommentItemText";
+import { CommentItemInfo } from "./CommentItemInfo";
+import { CommentItemTitle } from "./CommentItemTitle";
+import { CommentItemLayout } from "./CommentItemLayout";
+import { CommentItemContent } from "./CommentItemContent";
+import { CommentItemActions } from "./CommentItemActions";
+import { ImageContainer } from "@/components/common/ImageContainer";
+import { Attachment, Attachments } from "@/components/attachments/Attachments";
 
 interface CommentItemProps {
-  comment?: CommentItemType;
+  content: string;
+  createdAt: Date;
+  attachments: {
+    id: number;
+    fileUrl: string;
+  }[];
+  likes: number;
+  likedByMe: boolean;
+  sender?: {
+    id: string;
+    fullName: string;
+    imageUrl?: string;
+  };
 }
 
-export function CommentItem({ comment }: CommentItemProps) {
+export function CommentItem({
+  content,
+  createdAt,
+  attachments,
+  likes,
+  likedByMe,
+  sender,
+}: CommentItemProps) {
   const formattedDate = useMemo(() => {
-    if (!comment) return null;
+    if (!createdAt) return null;
 
-    return comment.createdAt.toLocaleString("en-GB", {
+    return createdAt.toLocaleString("en-GB", {
       day: "numeric",
       month: "long",
       year: "numeric",
@@ -43,79 +50,58 @@ export function CommentItem({ comment }: CommentItemProps) {
       minute: "2-digit",
       hour12: true,
     });
-  }, [comment]);
-
-  const isLiked = comment ? comment.likes.length > 0 : false;
+  }, [createdAt]);
 
   return (
-    <div className="flex flex-col gap-4 border-gray-300 not-last:border-b-1 not-last:pb-4 dark:border-gray-600">
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          {!comment ? (
-            <ImageContainerSkeleton className="h-9 w-9" />
-          ) : comment.sender?.imageUrl ? (
+    <CommentItemLayout
+      senderImageSlot={
+        <>
+          {sender?.imageUrl ? (
             <ImageContainer className="h-9 w-9">
-              <Image
-                src={comment.sender.imageUrl}
-                alt={comment.sender.fullName}
-                fill
-              />
+              <Image src={sender.imageUrl} alt={sender.fullName} fill />
             </ImageContainer>
           ) : (
             <ImageContainer className="h-9 w-9" />
           )}
-
-          {!comment ? (
-            <CommentItemInfoSkeleton />
-          ) : (
-            <CommentItemInfo>
-              <CommentItemTitle>
-                <Link href={`/users/${comment.sender.id}`}>
-                  {comment.sender.fullName}
-                </Link>
-              </CommentItemTitle>
-              <CommentItemDate>{formattedDate}</CommentItemDate>
-            </CommentItemInfo>
-          )}
-        </div>
-      </div>
-
-      <CommentItemContent>
-        {!comment ? (
-          <CommentItemTextSkeleton />
-        ) : (
-          <>
-            <CommentItemText>{comment.content}</CommentItemText>
-            {comment.attachments.length > 0 && (
-              <Attachments>
-                {comment.attachments.map((attachment) => (
-                  <Attachment key={attachment.id}>
-                    <Image
-                      src={attachment.fileUrl}
-                      alt=""
-                      fill
-                      className="object-cover"
-                    />
-                  </Attachment>
-                ))}
-              </Attachments>
+        </>
+      }
+      senderNameAndDateSlot={
+        <CommentItemInfo>
+          <CommentItemTitle>
+            {!sender ? (
+              "Unknow user"
+            ) : (
+              <Link href={`/users/${sender.id}`}>{sender.fullName}</Link>
             )}
-            <CommentItemActions>
-              {!comment ? (
-                <>
-                  <Skeleton className="h-[1rem] w-[3.5rem]" />
-                  <Skeleton className="h-[1rem] w-[2.25rem]" />
-                </>
-              ) : (
-                <>
-                  <ReplyButton />
-                  <LikeButton value={comment._count.likes} fill={isLiked} />
-                </>
-              )}
-            </CommentItemActions>
-          </>
-        )}
-      </CommentItemContent>
-    </div>
+          </CommentItemTitle>
+          <CommentItemDate>{formattedDate}</CommentItemDate>
+        </CommentItemInfo>
+      }
+      contentSlot={
+        <>
+          <CommentItemText>{content}</CommentItemText>
+          {attachments.length > 0 && (
+            <Attachments>
+              {attachments.map((attachment) => (
+                <Attachment key={attachment.id}>
+                  <Image
+                    src={attachment.fileUrl}
+                    alt=""
+                    fill
+                    className="object-cover"
+                  />
+                </Attachment>
+              ))}
+            </Attachments>
+          )}
+          <CommentItemActions>
+            <>
+              <ReplyButton />
+              <LikeButton value={likes} fill={likedByMe} />
+            </>
+          </CommentItemActions>
+        </>
+      }
+    />
   );
 }
