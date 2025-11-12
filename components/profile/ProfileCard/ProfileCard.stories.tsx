@@ -4,7 +4,7 @@ import { ProfileCardLeft } from "./ProfileCardLeft";
 import { ProfileCardHeader } from "./ProfileCardHeader";
 import { ProfileCardTitle } from "./ProfileCardTitle";
 import { ProfileCardRight } from "./ProfileCardRight";
-import { withBackgroundVariant } from "@/.storybook/withBackgroundVariant";
+import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {
   title: "components/profile/ProfileCard",
@@ -26,7 +26,7 @@ const meta = {
       </>
     ),
   },
-  decorators: [withBackgroundVariant()],
+  decorators: [withThemedBackground],
 } satisfies Meta<typeof ProfileCard>;
 
 export default meta;

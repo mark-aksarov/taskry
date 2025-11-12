@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { NotificationListItem } from "./NotificationListItem";
-import { withBackgroundVariant } from "@/.storybook/withBackgroundVariant";
+import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { Link } from "@/components/ui";
 
 const meta = {
@@ -8,9 +8,10 @@ const meta = {
   component: NotificationListItem,
   tags: ["autodocs"],
   parameters: {
+    backgroundVariant: "alt",
     layout: "fullscreen",
   },
-  decorators: [withBackgroundVariant({ variant: "alt" })],
+  decorators: [withThemedBackground],
 } satisfies Meta<typeof NotificationListItem>;
 
 export default meta;

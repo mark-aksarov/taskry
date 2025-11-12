@@ -1,4 +1,4 @@
-import { withBackgroundVariant } from "@/.storybook/withBackgroundVariant";
+import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { TaskList } from "./TaskList";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { TaskListItem } from "../TaskListItem";
@@ -23,7 +23,7 @@ const meta = {
         </CommentsContainerProvider>
       </TaskDetailContainerProvider>
     ),
-    withBackgroundVariant(),
+    withThemedBackground,
   ],
 } satisfies Meta<typeof TaskList>;
 

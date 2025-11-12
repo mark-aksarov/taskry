@@ -5,8 +5,7 @@ import { Apple, Banana, Citrus } from "lucide-react";
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { Form } from "react-aria-components";
 import { Button } from "../Button";
-import { withBackgroundVariant } from "@/.storybook/withBackgroundVariant";
-import { withContainerWidth } from "@/.storybook/withContainerWidth";
+import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta: Meta<typeof Select> = {
   title: "Components/ui/Select",
@@ -22,7 +21,17 @@ const meta: Meta<typeof Select> = {
     onSelectionChange: fn(),
     isDisabled: false,
   },
-  decorators: [withContainerWidth(), withBackgroundVariant({ variant: "alt" })],
+  decorators: [
+    (Story) => (
+      <div className="w-[500px]">
+        <Story />
+      </div>
+    ),
+    withThemedBackground,
+  ],
+  parameters: {
+    backgroundVariant: "alt",
+  },
 } satisfies Meta<typeof Select>;
 
 export default meta;

@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { TaskGrid } from "./TaskGrid";
-import { withBackgroundVariant } from "@/.storybook/withBackgroundVariant";
+import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { TaskGridItem } from "../TaskGridItem";
 import { TaskDetail, TaskDetailContainerProvider } from "../TaskDetail";
 import { CommentsContainerProvider } from "@/components/comments/CommentsContainer";
@@ -23,7 +23,7 @@ const meta = {
         </CommentsContainerProvider>
       </TaskDetailContainerProvider>
     ),
-    withBackgroundVariant(),
+    withThemedBackground,
   ],
 } satisfies Meta<typeof TaskGrid>;
 

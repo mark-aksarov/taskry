@@ -1,13 +1,19 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { TotalUsersCard } from "./TotalUsersCard";
-import { withBackgroundVariant } from "@/.storybook/withBackgroundVariant";
-import { withContainerWidth } from "@/.storybook/withContainerWidth";
+import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {
   title: "Components/dashboard/TotalUsersCard",
   component: TotalUsersCard,
   tags: ["autodocs"],
-  decorators: [withContainerWidth(), withBackgroundVariant()],
+  decorators: [
+    (Story) => (
+      <div className="w-[500px]">
+        <Story />
+      </div>
+    ),
+    withThemedBackground,
+  ],
   args: {
     totalUsers: 15,
   },

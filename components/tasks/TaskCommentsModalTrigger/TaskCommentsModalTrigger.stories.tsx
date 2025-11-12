@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { withBackgroundVariant } from "@/.storybook/withBackgroundVariant";
+import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { TaskCommentsModalTrigger } from "./TaskCommentsModalTrigger";
 import { CommentsContainerProvider } from "@/components/comments/CommentsContainer";
 import {
@@ -146,7 +146,10 @@ const meta = {
   title: "Components/tasks/TaskCommentsModalTrigger",
   component: TaskCommentsModalTrigger,
   tags: ["autodocs"],
-  decorators: [withBackgroundVariant({ variant: "alt" })],
+  decorators: [withThemedBackground],
+  parameters: {
+    backgroundVariant: "alt",
+  },
   excludeStories: ["MockedTaskCommentsContainer"],
   args: {
     commentCount: 25,

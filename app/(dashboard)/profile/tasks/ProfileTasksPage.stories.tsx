@@ -2,7 +2,7 @@ import { mocked } from "storybook/test";
 import { usePathname } from "next/navigation";
 import { ProfileTasksPage } from "./ProfileTasksPage";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { withBackgroundVariant } from "@/.storybook/withBackgroundVariant";
+import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { PageDecorator } from "@/.storybook/PageDecorator";
 import {
   ProfileTasksMobile,
@@ -20,7 +20,7 @@ const meta = {
   title: "components/pages/ProfileTasksPage",
   component: ProfileTasksPage,
   parameters: { layout: "fullscreen" },
-  decorators: [PageDecorator, withBackgroundVariant()],
+  decorators: [PageDecorator, withThemedBackground()],
   beforeEach: () => {
     mocked(usePathname).mockReturnValue("/profile");
   },

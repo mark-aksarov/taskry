@@ -12,8 +12,7 @@ import {
   ProjectCheckboxGroup,
   ProjectCheckboxGroupSkeleton,
 } from "@/components/projects/ProjectCheckboxGroup";
-import { withBackgroundVariant } from "@/.storybook/withBackgroundVariant";
-import { withContainerWidth } from "@/.storybook/withContainerWidth";
+import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { Default as ProjectCheckboxGroupStory } from "@/components/projects/ProjectCheckboxGroup/ProjectCheckboxGroup.stories";
 import { Default as TaskCategoryCheckboxGroupStory } from "../TaskCategoryCheckboxGroup/TaskCategoryCheckboxGroup.stories";
 import { Default as UserCheckboxGroupStory } from "@/components/users/UserCheckboxGroup/UserCheckboxGroup.stories";
@@ -22,7 +21,17 @@ const meta: Meta<typeof TaskFiltersForm> = {
   title: "Components/tasks/TaskFiltersForm",
   component: TaskFiltersForm,
   tags: ["autodocs"],
-  decorators: [withContainerWidth(), withBackgroundVariant({ variant: "alt" })],
+  decorators: [
+    (Story) => (
+      <div className="w-[500px]">
+        <Story />
+      </div>
+    ),
+    withThemedBackground,
+  ],
+  parameters: {
+    backgroundVariant: "alt",
+  },
 } satisfies Meta<typeof TaskFiltersForm>;
 
 export default meta;

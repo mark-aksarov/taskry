@@ -1,13 +1,13 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { ProfileTasksDesktop } from "./ProfileTasksDesktop";
-import { withBackgroundVariant } from "@/.storybook/withBackgroundVariant";
+import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {
   title: "components/profile/ProfileTasksDesktop",
   component: ProfileTasksDesktop,
   tags: ["autodocs"],
   parameters: { layout: "fullscreen" },
-  decorators: [withBackgroundVariant()],
+  decorators: [withThemedBackground],
 } satisfies Meta<typeof ProfileTasksDesktop>;
 
 export default meta;

@@ -1,12 +1,12 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { ReplyButton } from "./ReplyButton";
-import { withBackgroundVariant } from "@/.storybook/withBackgroundVariant";
+import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {
   title: "Components/comments/ReplyButton",
   component: ReplyButton,
   tags: ["autodocs"],
-  decorators: [withBackgroundVariant()],
+  decorators: [withThemedBackground],
 } satisfies Meta<typeof ReplyButton>;
 
 export default meta;

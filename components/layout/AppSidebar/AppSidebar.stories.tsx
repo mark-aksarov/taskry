@@ -12,12 +12,12 @@ import { AppSidebarHeader } from "./AppSidebarHeader";
 import { AppSidebarHeading } from "./AppSidebarHeading";
 import { AppSidebarBody } from "./AppSidebarBody";
 import { AppNavigation } from "../AppNavigation";
-import { withBackgroundVariant } from "@/.storybook/withBackgroundVariant";
+import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {
   title: "Components/layout/AppSidebar",
   component: AppSidebar,
-  decorators: [withBackgroundVariant()],
+  decorators: [withThemedBackground],
 } satisfies Meta<typeof AppSidebar>;
 
 export default meta;

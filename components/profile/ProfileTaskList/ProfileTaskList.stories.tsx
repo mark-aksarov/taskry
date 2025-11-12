@@ -1,4 +1,4 @@
-import { withBackgroundVariant } from "@/.storybook/withBackgroundVariant";
+import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { ProfileTaskList } from "./ProfileTaskList";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 
@@ -6,7 +6,7 @@ const meta = {
   title: "Components/profile/ProfileTaskList",
   component: ProfileTaskList,
   parameters: { layout: "fullscreen" },
-  decorators: [withBackgroundVariant()],
+  decorators: [withThemedBackground],
 } satisfies Meta<typeof ProfileTaskList>;
 
 export default meta;

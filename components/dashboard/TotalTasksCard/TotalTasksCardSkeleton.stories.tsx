@@ -1,13 +1,19 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { TotalTasksCardSkeleton } from "./TotalTasksCardSkeleton";
-import { withBackgroundVariant } from "@/.storybook/withBackgroundVariant";
-import { withContainerWidth } from "@/.storybook/withContainerWidth";
+import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {
   title: "Components/dashboard/TotalTasksCardSkeleton",
   component: TotalTasksCardSkeleton,
   tags: ["autodocs"],
-  decorators: [withContainerWidth(), withBackgroundVariant()],
+  decorators: [
+    (Story) => (
+      <div className="w-[500px]">
+        <Story />
+      </div>
+    ),
+    withThemedBackground,
+  ],
 } satisfies Meta<typeof TotalTasksCardSkeleton>;
 
 export default meta;

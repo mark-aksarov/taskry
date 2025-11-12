@@ -1,12 +1,15 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { NotificationFilterToggleButtonGroup } from "./NotificationFilterToggleButtonGroup";
-import { withBackgroundVariant } from "@/.storybook/withBackgroundVariant";
+import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {
   title: "Components/notifications/NotificationFilterToggleButtonGroup",
   component: NotificationFilterToggleButtonGroup,
   tags: ["autodocs"],
-  decorators: [withBackgroundVariant({ variant: "alt" })],
+  decorators: [withThemedBackground],
+  parameters: {
+    backgroundVariant: "alt",
+  },
 } satisfies Meta<typeof NotificationFilterToggleButtonGroup>;
 
 export default meta;

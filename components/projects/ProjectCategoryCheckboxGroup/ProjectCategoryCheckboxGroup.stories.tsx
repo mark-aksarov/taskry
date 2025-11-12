@@ -1,12 +1,15 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { withBackgroundVariant } from "@/.storybook/withBackgroundVariant";
+import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { ProjectCategoryCheckboxGroup } from "./ProjectCategoryCheckboxGroup";
 
 const meta = {
   title: "Components/projects/ProjectCategoryCheckboxGroup",
   component: ProjectCategoryCheckboxGroup,
   tags: ["autodocs"],
-  decorators: [withBackgroundVariant({ variant: "alt" })],
+  decorators: [withThemedBackground],
+  parameters: {
+    backgroundVariant: "alt",
+  },
 } satisfies Meta<typeof ProjectCategoryCheckboxGroup>;
 
 export default meta;

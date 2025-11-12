@@ -1,11 +1,14 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { ProfileHeader } from "./ProfileHeader";
-import { withBackgroundVariant } from "@/.storybook/withBackgroundVariant";
+import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {
   title: "components/profile/ProfileHeader",
   component: ProfileHeader,
-  decorators: [withBackgroundVariant({ variant: "alt" })],
+  decorators: [withThemedBackground],
+  parameters: {
+    backgroundVariant: "alt",
+  },
 } satisfies Meta<typeof ProfileHeader>;
 
 export default meta;

@@ -4,14 +4,20 @@ import { DashboardCardIcon } from "./DashboardCardIcon";
 import { DashboardCardValue } from "./DashboardCardValue";
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { DashboardCardText } from "./DashboardCardText";
-import { withBackgroundVariant } from "@/.storybook/withBackgroundVariant";
-import { withContainerWidth } from "@/.storybook/withContainerWidth";
+import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {
   title: "Components/dashboard/DashboardCard",
   component: DashboardCard,
   tags: ["autodocs"],
-  decorators: [withContainerWidth(), withBackgroundVariant()],
+  decorators: [
+    (Story) => (
+      <div className="w-[500px]">
+        <Story />
+      </div>
+    ),
+    withThemedBackground,
+  ],
   args: {
     text: <DashboardCardText>Dashboard card text</DashboardCardText>,
     icon: (

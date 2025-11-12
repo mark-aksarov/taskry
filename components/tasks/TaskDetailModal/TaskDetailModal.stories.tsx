@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { TaskDetailModal } from "./TaskDetailModal";
 import { Button, RACDialogTrigger } from "@/components/ui";
-import { withBackgroundVariant } from "@/.storybook/withBackgroundVariant";
+import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import {
   TaskDetail,
   TaskDetailContainerProvider,
@@ -22,7 +22,7 @@ const meta = {
         <Story />
       </RACDialogTrigger>
     ),
-    withBackgroundVariant(),
+    withThemedBackground,
   ],
   args: {
     taskId: 1,

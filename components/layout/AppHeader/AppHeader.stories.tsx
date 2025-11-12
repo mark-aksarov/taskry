@@ -1,6 +1,6 @@
 import { AppHeader } from "./AppHeader";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { withBackgroundVariant } from "@/.storybook/withBackgroundVariant";
+import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { AppBottomSheetTrigger } from "../AppBottomSheetTrigger";
 import { AppSidebarSheetTrigger } from "../AppSidebarSheetTrigger";
 import { NotificationModalTrigger } from "@/components/notifications/NotificationModalTrigger";
@@ -12,7 +12,7 @@ const meta = {
   parameters: {
     layout: "fullscreen",
   },
-  decorators: [withBackgroundVariant()],
+  decorators: [withThemedBackground],
 } satisfies Meta<typeof AppHeader>;
 
 export default meta;

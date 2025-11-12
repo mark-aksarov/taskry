@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { ProfileNavigationMobileLink } from "./ProfileNavigationMobileLink";
-import { withBackgroundVariant } from "@/.storybook/withBackgroundVariant";
+import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {
   title: "components/profile/ProfileNavigationMobileLink",
@@ -9,7 +9,7 @@ const meta = {
   args: {
     children: "Button",
   },
-  decorators: [withBackgroundVariant()],
+  decorators: [withThemedBackground],
 } satisfies Meta<typeof ProfileNavigationMobileLink>;
 
 export default meta;

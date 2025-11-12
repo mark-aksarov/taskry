@@ -1,16 +1,17 @@
 import { Link } from "@/components/ui";
 import { Meta, StoryObj } from "@storybook/react";
 import { NotificationList } from "./NotificationList";
-import { withBackgroundVariant } from "@/.storybook/withBackgroundVariant";
+import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { NotificationListItem } from "../NotificationListItem";
 
 const meta = {
   title: "Components/notifications/NotificationList",
   component: NotificationList,
   parameters: {
+    backgroundVariant: "alt",
     layout: "fullscreen",
   },
-  decorators: [withBackgroundVariant({ variant: "alt" })],
+  decorators: [withThemedBackground],
 } satisfies Meta<typeof NotificationList>;
 
 export default meta;

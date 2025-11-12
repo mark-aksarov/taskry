@@ -1,12 +1,12 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { UserList } from "./UserList";
-import { withBackgroundVariant } from "@/.storybook/withBackgroundVariant";
+import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta: Meta<typeof UserList> = {
   title: "Components/users/UserList",
   component: UserList,
   tags: ["autodocs"],
-  decorators: [withBackgroundVariant()],
+  decorators: [withThemedBackground],
 } satisfies Meta<typeof UserList>;
 
 export default meta;

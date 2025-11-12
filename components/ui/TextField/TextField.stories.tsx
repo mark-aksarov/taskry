@@ -4,8 +4,7 @@ import { TextField } from "../TextField";
 import { Form } from "react-aria-components";
 import { Button } from "@/components/ui/Button";
 import { fn } from "storybook/test";
-import { withBackgroundVariant } from "@/.storybook/withBackgroundVariant";
-import { withContainerWidth } from "@/.storybook/withContainerWidth";
+import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {
   title: "Components/ui/TextField",
@@ -29,7 +28,17 @@ const meta = {
     onChange: fn(),
   },
 
-  decorators: [withContainerWidth(), withBackgroundVariant({ variant: "alt" })],
+  decorators: [
+    (Story) => (
+      <div className="w-[500px]">
+        <Story />
+      </div>
+    ),
+    withThemedBackground,
+  ],
+  parameters: {
+    backgroundVariant: "alt",
+  },
 } satisfies Meta<typeof TextField>;
 
 export default meta;

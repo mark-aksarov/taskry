@@ -1,11 +1,11 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { withBackgroundVariant } from "@/.storybook/withBackgroundVariant";
+import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { AssignedTasksEmptyCard } from "./AssignedTasksEmptyCard";
 
 const meta = {
   title: "Components/tasks/AssignedTasksEmptyCard",
   component: AssignedTasksEmptyCard,
-  decorators: [withBackgroundVariant()],
+  decorators: [withThemedBackground],
 } satisfies Meta<typeof AssignedTasksEmptyCard>;
 
 export default meta;

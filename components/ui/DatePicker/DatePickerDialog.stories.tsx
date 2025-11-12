@@ -5,7 +5,7 @@ import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { today, getLocalTimeZone } from "@internationalized/date";
 import { Form } from "react-aria-components";
 import { Button } from "../Button";
-import { withBackgroundVariant } from "@/.storybook/withBackgroundVariant";
+import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 type DatePickerPropsWithLocaleArgs = React.ComponentProps<typeof DatePicker> & {
   locale: string;
@@ -48,7 +48,10 @@ const meta = {
       <DatePicker {...args} />
     </I18nProvider>
   ),
-  decorators: [withBackgroundVariant({ variant: "alt" })],
+  decorators: [withThemedBackground],
+  parameters: {
+    backgroundVariant: "alt",
+  },
 } satisfies Meta<DatePickerPropsWithLocaleArgs>;
 
 export default meta;

@@ -2,8 +2,7 @@ import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { Attachments } from "./Attachments";
 import { Attachment } from "./Attachment";
 import Image from "next/image";
-import { withBackgroundVariant } from "@/.storybook/withBackgroundVariant";
-import { withContainerWidth } from "@/.storybook/withContainerWidth";
+import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {
   title: "Components/common/Attachments",
@@ -12,7 +11,10 @@ const meta = {
   args: {
     children: null,
   },
-  decorators: [withBackgroundVariant({ variant: "alt" }), withContainerWidth()],
+  decorators: [withThemedBackground],
+  parameters: {
+    backgroundVariant: "alt",
+  },
 } satisfies Meta<typeof Attachments>;
 
 export default meta;

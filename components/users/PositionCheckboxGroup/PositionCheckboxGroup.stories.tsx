@@ -1,12 +1,15 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { PositionCheckboxGroup } from "./PositionCheckboxGroup";
-import { withBackgroundVariant } from "@/.storybook/withBackgroundVariant";
+import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {
   title: "Components/users/PositionCheckboxGroup",
   component: PositionCheckboxGroup,
   tags: ["autodocs"],
-  decorators: [withBackgroundVariant({ variant: "alt" })],
+  decorators: [withThemedBackground],
+  parameters: {
+    backgroundVariant: "alt",
+  },
 } satisfies Meta<typeof PositionCheckboxGroup>;
 
 export default meta;

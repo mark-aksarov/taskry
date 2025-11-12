@@ -3,13 +3,16 @@ import { EmptySection } from "./EmptySection";
 import { EmptySectionHeading } from "./EmptySectionHeading";
 import { EmptySectionDescription } from "./EmptySectionDescription";
 import { EmptySectionButton } from "./EmptySectionButton";
-import { withBackgroundVariant } from "@/.storybook/withBackgroundVariant";
+import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {
   title: "Components/common/EmptySection",
   component: EmptySection,
   tags: ["autodocs"],
-  decorators: [withBackgroundVariant({ variant: "alt" })],
+  decorators: [withThemedBackground],
+  parameters: {
+    backgroundVariant: "alt",
+  },
 } satisfies Meta<typeof EmptySection>;
 
 export default meta;

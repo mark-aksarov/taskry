@@ -1,12 +1,18 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { TaskGridItemSkeleton } from "./TaskGridItemSkeleton";
-import { withBackgroundVariant } from "@/.storybook/withBackgroundVariant";
-import { withContainerWidth } from "@/.storybook/withContainerWidth";
+import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {
   title: "Components/tasks/TaskGridItemSkeleton",
   component: TaskGridItemSkeleton,
-  decorators: [withContainerWidth("250px"), withBackgroundVariant()],
+  decorators: [
+    (Story) => (
+      <div className="w-[300px]">
+        <Story />
+      </div>
+    ),
+    withThemedBackground,
+  ],
 } satisfies Meta<typeof TaskGridItemSkeleton>;
 
 export default meta;

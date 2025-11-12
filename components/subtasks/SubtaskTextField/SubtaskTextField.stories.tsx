@@ -2,8 +2,7 @@ import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { SubtaskTextField } from "./SubtaskTextField";
 import { Button } from "@/components/ui/Button";
 import { X } from "lucide-react";
-import { withBackgroundVariant } from "@/.storybook/withBackgroundVariant";
-import { withContainerWidth } from "@/.storybook/withContainerWidth";
+import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {
   title: "Components/subtasks/SubtaskTextField",
@@ -20,7 +19,17 @@ const meta = {
       />
     ),
   },
-  decorators: [withContainerWidth(), withBackgroundVariant({ variant: "alt" })],
+  decorators: [
+    (Story) => (
+      <div className="w-[500px]">
+        <Story />
+      </div>
+    ),
+    withThemedBackground,
+  ],
+  parameters: {
+    backgroundVariant: "alt",
+  },
 } satisfies Meta<typeof SubtaskTextField>;
 
 export default meta;

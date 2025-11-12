@@ -7,7 +7,7 @@ import {
   TaskDetailBottomSheet,
   TaskDetailBottomSheetProps,
 } from "./TaskDetailBottomSheet";
-import { withBackgroundVariant } from "@/.storybook/withBackgroundVariant";
+import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { Default as TaskDetailStory } from "../TaskDetail/TaskDetail.stories";
 import { TaskDetailContainerProvider } from "../TaskDetail/TaskDetailContainerContext";
 import { CommentsContainerProvider } from "@/components/comments/CommentsContainer";
@@ -17,7 +17,7 @@ const meta = {
   title: "components/tasks/TaskDetailBottomSheet",
   component: TaskDetailBottomSheet,
   tags: ["autodocs"],
-  decorators: [withBackgroundVariant()],
+  decorators: [withThemedBackground],
   args: {
     taskId: 1,
     state: {

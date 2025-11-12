@@ -1,13 +1,22 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { Skeleton } from "./Skeleton";
-import { withBackgroundVariant } from "@/.storybook/withBackgroundVariant";
-import { withContainerWidth } from "@/.storybook/withContainerWidth";
+import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta: Meta<typeof Skeleton> = {
   title: "Components/ui/Skeleton",
   component: Skeleton,
   tags: ["autodocs"],
-  decorators: [withContainerWidth(), withBackgroundVariant({ variant: "alt" })],
+  decorators: [
+    (Story) => (
+      <div className="w-[500px]">
+        <Story />
+      </div>
+    ),
+    withThemedBackground,
+  ],
+  parameters: {
+    backgroundVariant: "alt",
+  },
 } satisfies Meta<typeof Skeleton>;
 
 export default meta;

@@ -5,7 +5,7 @@ import { RACDialogTrigger, Skeleton } from "@/components/ui";
 import { UpdateSubtasksForm } from "../UpdateSubtasksForm";
 import { UpdateSubtasksButton } from "../UpdateSubtasksButton";
 import { Default as UpdateSubtasksFormStory } from "@/components/subtasks/UpdateSubtasksForm/UpdateSubtasksForm.stories";
-import { withBackgroundVariant } from "@/.storybook/withBackgroundVariant";
+import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {
   title: "Components/subtasks/UpdateSubtasksModal",
@@ -27,7 +27,7 @@ const meta = {
         </Suspense>
       </RACDialogTrigger>
     ),
-    withBackgroundVariant(),
+    withThemedBackground,
   ],
 } satisfies Meta<typeof UpdateSubtasksModal>;
 

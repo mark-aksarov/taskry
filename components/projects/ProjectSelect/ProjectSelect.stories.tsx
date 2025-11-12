@@ -1,5 +1,4 @@
-import { withBackgroundVariant } from "@/.storybook/withBackgroundVariant";
-import { withContainerWidth } from "@/.storybook/withContainerWidth";
+import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { ProjectSelect } from "./ProjectSelect";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 
@@ -7,7 +6,17 @@ const meta = {
   title: "Components/projects/ProjectSelect",
   component: ProjectSelect,
   tags: ["autodocs"],
-  decorators: [withContainerWidth(), withBackgroundVariant({ variant: "alt" })],
+  decorators: [
+    (Story) => (
+      <div className="w-[500px]">
+        <Story />
+      </div>
+    ),
+    withThemedBackground,
+  ],
+  parameters: {
+    backgroundVariant: "alt",
+  },
 } satisfies Meta<typeof ProjectSelect>;
 
 export default meta;

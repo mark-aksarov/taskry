@@ -4,7 +4,7 @@ import { ProjectCategoryCheckboxGroup } from "@/components/projects/ProjectCateg
 import { CustomerCheckboxGroup } from "@/components/customer/CustomerCheckboxGroup";
 import { UserCheckboxGroup } from "@/components/users/UserCheckboxGroup";
 import { ViewModeContainer } from "@/components/common/ViewMode";
-import { withBackgroundVariant } from "@/.storybook/withBackgroundVariant";
+import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { PageDecorator } from "@/.storybook/PageDecorator";
 import { mocked } from "storybook/test";
 import { usePathname } from "next/navigation";
@@ -22,7 +22,7 @@ const meta = {
   title: "components/pages/ProjectsPage",
   component: ProjectsPage,
   parameters: { layout: "fullscreen" },
-  decorators: [PageDecorator, withBackgroundVariant()],
+  decorators: [PageDecorator, withThemedBackground],
   beforeEach: () => {
     mocked(usePathname).mockReturnValue("/projects");
   },

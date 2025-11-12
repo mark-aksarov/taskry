@@ -1,13 +1,22 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { FiltersFormSkeleton } from "./FiltersFormSkeleton";
-import { withBackgroundVariant } from "@/.storybook/withBackgroundVariant";
-import { withContainerWidth } from "@/.storybook/withContainerWidth";
+import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta: Meta<typeof FiltersFormSkeleton> = {
   title: "Components/common/FiltersFormSkeleton",
   component: FiltersFormSkeleton,
   tags: ["autodocs"],
-  decorators: [withContainerWidth(), withBackgroundVariant({ variant: "alt" })],
+  decorators: [
+    (Story) => (
+      <div className="w-[500px]">
+        <Story />
+      </div>
+    ),
+    withThemedBackground,
+  ],
+  parameters: {
+    backgroundVariant: "alt",
+  },
 } satisfies Meta<typeof FiltersFormSkeleton>;
 
 export default meta;

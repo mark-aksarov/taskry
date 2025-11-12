@@ -4,7 +4,7 @@ import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { Button, RACDialogTrigger } from "@/components/ui";
 import { NewTaskForm } from "../NewTaskForm";
 import { Default as NewTaskFormStory } from "../NewTaskForm/NewTaskForm.stories";
-import { withBackgroundVariant } from "@/.storybook/withBackgroundVariant";
+import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {
   title: "Components/tasks/NewTaskModal",
@@ -19,7 +19,7 @@ const meta = {
         </Suspense>
       </RACDialogTrigger>
     ),
-    withBackgroundVariant(),
+    withThemedBackground,
   ],
 } satisfies Meta<typeof NewTaskModal>;
 

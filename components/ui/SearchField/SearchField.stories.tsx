@@ -3,8 +3,7 @@ import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { Form } from "react-aria-components";
 import { Button } from "../Button";
 import { fn } from "storybook/test";
-import { withBackgroundVariant } from "@/.storybook/withBackgroundVariant";
-import { withContainerWidth } from "@/.storybook/withContainerWidth";
+import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta: Meta<typeof SearchField> = {
   title: "Components/ui/SearchField",
@@ -19,7 +18,17 @@ const meta: Meta<typeof SearchField> = {
     isDisabled: false,
     onChange: fn(),
   },
-  decorators: [withContainerWidth(), withBackgroundVariant({ variant: "alt" })],
+  decorators: [
+    (Story) => (
+      <div className="w-[500px]">
+        <Story />
+      </div>
+    ),
+    withThemedBackground,
+  ],
+  parameters: {
+    backgroundVariant: "alt",
+  },
 } satisfies Meta<typeof SearchField>;
 
 export default meta;

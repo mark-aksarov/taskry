@@ -6,7 +6,7 @@ import { ProfileInfo } from "../ProfileInfo";
 import { ProfileHeader } from "../ProfileHeader";
 import { Default as ProfileHeaderStory } from "@/components/profile/ProfileHeader/ProfileHeader.stories";
 import { Default as ProfileInfoStory } from "@/components/profile/ProfileInfo/ProfileInfo.stories";
-import { withBackgroundVariant } from "@/.storybook/withBackgroundVariant";
+import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {
   title: "components/profile/ProfileInfoCard",
@@ -14,7 +14,7 @@ const meta = {
   beforeEach: () => {
     mocked(usePathname).mockReturnValue("/profile/info");
   },
-  decorators: [withBackgroundVariant()],
+  decorators: [withThemedBackground],
 } satisfies Meta<typeof ProfileInfoCard>;
 
 export default meta;

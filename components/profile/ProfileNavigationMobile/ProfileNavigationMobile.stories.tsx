@@ -2,7 +2,7 @@ import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { ProfileNavigationMobile } from "./ProfileNavigationMobile";
 import { mocked } from "storybook/internal/test";
 import { usePathname } from "next/navigation";
-import { withBackgroundVariant } from "@/.storybook/withBackgroundVariant";
+import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {
   title: "components/profile/ProfileNavigationMobile",
@@ -10,7 +10,7 @@ const meta = {
   beforeEach: () => {
     mocked(usePathname).mockReturnValue("/profile/info");
   },
-  decorators: [withBackgroundVariant()],
+  decorators: [withThemedBackground],
 } satisfies Meta<typeof ProfileNavigationMobile>;
 
 export default meta;

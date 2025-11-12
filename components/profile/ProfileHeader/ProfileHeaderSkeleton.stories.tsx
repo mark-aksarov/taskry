@@ -1,12 +1,15 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { ProfileHeaderSkeleton } from "./ProfileHeaderSkeleton";
-import { withBackgroundVariant } from "@/.storybook/withBackgroundVariant";
+import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {
   title: "components/profile/ProfileHeaderSkeleton",
   component: ProfileHeaderSkeleton,
   tags: ["autodocs"],
-  decorators: [withBackgroundVariant({ variant: "alt" })],
+  decorators: [withThemedBackground],
+  parameters: {
+    backgroundVariant: "alt",
+  },
 } satisfies Meta<typeof ProfileHeaderSkeleton>;
 
 export default meta;

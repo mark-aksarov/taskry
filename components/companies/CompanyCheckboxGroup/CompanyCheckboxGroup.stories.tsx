@@ -1,11 +1,14 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { withBackgroundVariant } from "@/.storybook/withBackgroundVariant";
+import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { CompanyCheckboxGroup } from "./CompanyCheckboxGroup";
 
 const meta = {
   title: "Components/projects/CompanyCheckboxGroup",
   component: CompanyCheckboxGroup,
-  decorators: [withBackgroundVariant({ variant: "alt" })],
+  decorators: [withThemedBackground],
+  parameters: {
+    backgroundVariant: "alt",
+  },
 } satisfies Meta<typeof CompanyCheckboxGroup>;
 
 export default meta;

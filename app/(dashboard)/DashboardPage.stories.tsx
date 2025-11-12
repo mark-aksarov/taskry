@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { DashboardPage } from "./DashboardPage";
-import { withBackgroundVariant } from "@/.storybook/withBackgroundVariant";
+import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { PageDecorator } from "@/.storybook/PageDecorator";
 import { mocked } from "storybook/test";
 import { usePathname } from "next/navigation";
@@ -48,7 +48,7 @@ const meta = {
       </TaskDetailContainerProvider>
     ),
     PageDecorator,
-    withBackgroundVariant(),
+    withThemedBackground,
   ],
   beforeEach: () => {
     mocked(usePathname).mockReturnValue("/");

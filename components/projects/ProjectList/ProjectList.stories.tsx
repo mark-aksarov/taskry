@@ -1,4 +1,4 @@
-import { withBackgroundVariant } from "@/.storybook/withBackgroundVariant";
+import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { ProjectList } from "./ProjectList";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 
@@ -6,7 +6,7 @@ const meta = {
   title: "Components/projects/ProjectList",
   component: ProjectList,
   tags: ["autodocs"],
-  decorators: [withBackgroundVariant()],
+  decorators: [withThemedBackground],
 } satisfies Meta<typeof ProjectList>;
 
 export default meta;

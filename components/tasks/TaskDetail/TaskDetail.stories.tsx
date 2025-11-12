@@ -1,7 +1,6 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { TaskDetail } from "./TaskDetail";
-import { withBackgroundVariant } from "@/.storybook/withBackgroundVariant";
-import { withContainerWidth } from "@/.storybook/withContainerWidth";
+import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { CommentsContainerProvider } from "@/components/comments/CommentsContainer";
 import { MockedTaskCommentsContainer } from "../TaskCommentsModalTrigger/TaskCommentsModalTrigger.stories";
 
@@ -17,9 +16,16 @@ const meta = {
         <Story />
       </CommentsContainerProvider>
     ),
-    withContainerWidth(),
-    withBackgroundVariant({ variant: "alt" }),
+    (Story) => (
+      <div className="w-[500px]">
+        <Story />
+      </div>
+    ),
+    withThemedBackground,
   ],
+  parameters: {
+    backgroundVariant: "alt",
+  },
 } satisfies Meta<typeof TaskDetail>;
 
 export default meta;

@@ -1,15 +1,6 @@
-import React, { useEffect } from "react";
 import { type Decorator } from "@storybook/react";
 
-type BackgroundVariant = "default" | "alt";
-
-interface WithBackgroundVariantOptions {
-  variant?: BackgroundVariant;
-}
-
-export const withBackgroundVariant = (
-  options: WithBackgroundVariantOptions = {},
-): Decorator => {
+export const withThemedBackground = (): Decorator => {
   const { variant: defaultVariant = "default" } = options;
 
   return (Story, context) => {

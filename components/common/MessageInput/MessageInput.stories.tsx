@@ -4,14 +4,23 @@ import { useState } from "react";
 import { Attachment, Attachments } from "@/components/attachments/Attachments";
 import Image from "next/image";
 import { fn } from "storybook/test";
-import { withBackgroundVariant } from "@/.storybook/withBackgroundVariant";
-import { withContainerWidth } from "@/.storybook/withContainerWidth";
+import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {
   title: "Components/common/MessageInput",
   component: MessageInput,
   tags: ["autodocs"],
-  decorators: [withContainerWidth(), withBackgroundVariant({ variant: "alt" })],
+  decorators: [
+    (Story) => (
+      <div className="w-[500px]">
+        <Story />
+      </div>
+    ),
+    withThemedBackground,
+  ],
+  parameters: {
+    backgroundVariant: "alt",
+  },
   args: {
     onFilesSelect: fn(),
     placeholder: "Placeholder",

@@ -2,8 +2,7 @@ import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { DropZone } from "./DropZone";
 import { fn } from "storybook/test";
 import { useState } from "react";
-import { withBackgroundVariant } from "@/.storybook/withBackgroundVariant";
-import { withContainerWidth } from "@/.storybook/withContainerWidth";
+import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {
   title: "Components/ui/DropZone",
@@ -31,7 +30,17 @@ const meta = {
       </div>
     );
   },
-  decorators: [withContainerWidth(), withBackgroundVariant({ variant: "alt" })],
+  decorators: [
+    (Story) => (
+      <div className="w-[500px]">
+        <Story />
+      </div>
+    ),
+    withThemedBackground,
+  ],
+  parameters: {
+    backgroundVariant: "alt",
+  },
 } satisfies Meta<typeof DropZone>;
 
 export default meta;

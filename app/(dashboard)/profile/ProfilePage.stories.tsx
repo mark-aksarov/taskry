@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { ProfilePage } from "./ProfilePage";
-import { withBackgroundVariant } from "@/.storybook/withBackgroundVariant";
+import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { PageDecorator } from "@/.storybook/PageDecorator";
 import { mocked } from "storybook/test";
 import { usePathname } from "next/navigation";
@@ -21,7 +21,7 @@ const meta = {
   title: "components/pages/ProfilePage",
   component: ProfilePage,
   parameters: { layout: "fullscreen" },
-  decorators: [PageDecorator, withBackgroundVariant()],
+  decorators: [PageDecorator, withThemedBackground],
   beforeEach: () => {
     mocked(usePathname).mockReturnValue("/profile");
   },

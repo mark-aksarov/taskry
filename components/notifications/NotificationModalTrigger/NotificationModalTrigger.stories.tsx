@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { withBackgroundVariant } from "@/.storybook/withBackgroundVariant";
+import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { NotificationModalTrigger } from "./NotificationModalTrigger";
 import { NotificationModalContent } from "../NotificationModalContent";
 import { Default as NotificationModalContentStory } from "../NotificationModalContent/NotificationModalContent.stories";
@@ -8,7 +8,7 @@ const meta = {
   title: "Components/notifications/NotificationModalTrigger",
   component: NotificationModalTrigger,
   tags: ["autodocs"],
-  decorators: [withBackgroundVariant()],
+  decorators: [withThemedBackground],
 } satisfies Meta<typeof NotificationModalTrigger>;
 
 export default meta;
