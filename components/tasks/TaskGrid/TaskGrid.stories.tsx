@@ -38,7 +38,7 @@ export const Default = {
           id={1}
           title="Design homepage"
           deadline={new Date("2025-09-28")}
-          creator={{
+          assignee={{
             id: "user1",
             imageUrl: "/man.jpg",
             fullName: "Liam Turner",
@@ -51,7 +51,7 @@ export const Default = {
           id={2}
           title="Implement authentication"
           deadline={new Date("2025-10-06")}
-          creator={undefined}
+          assignee={undefined}
           totalSubtasks={4}
           subtasksDone={2}
         />
@@ -60,7 +60,7 @@ export const Default = {
           id={3}
           title="Migrate database schema"
           deadline={new Date("2025-10-11")}
-          creator={{
+          assignee={{
             id: "user3",
             imageUrl: undefined,
             fullName: "Olivia White",
@@ -73,7 +73,7 @@ export const Default = {
           id={4}
           title="Write automated tests"
           deadline={new Date("2025-10-13")}
-          creator={{
+          assignee={{
             id: "user4",
             imageUrl: "/man.jpg",
             fullName: "Ethan Green",
@@ -86,7 +86,7 @@ export const Default = {
           id={5}
           title="Setup CI/CD pipeline"
           deadline={new Date("2025-10-16")}
-          creator={{
+          assignee={{
             id: "user5",
             imageUrl: "/man.jpg",
             fullName: "Mason Moore",
@@ -99,7 +99,11 @@ export const Default = {
           id={6}
           title="Setup staging environment"
           deadline={new Date("2025-10-19")}
-          creator={{ id: "user6", imageUrl: "/man.jpg", fullName: "Ava Black" }}
+          assignee={{
+            id: "user6",
+            imageUrl: "/man.jpg",
+            fullName: "Ava Black",
+          }}
           totalSubtasks={3}
           subtasksDone={3}
         />
@@ -108,7 +112,7 @@ export const Default = {
           id={7}
           title="Design onboarding flow"
           deadline={new Date("2025-10-21")}
-          creator={{
+          assignee={{
             id: "user7",
             imageUrl: "/man.jpg",
             fullName: "Isabella Hall",
@@ -121,7 +125,7 @@ export const Default = {
           id={8}
           title="Fix checkout bug"
           deadline={new Date("2025-10-23")}
-          creator={{
+          assignee={{
             id: "user8",
             imageUrl: "/man.jpg",
             fullName: "Henry Young",
@@ -134,7 +138,7 @@ export const Default = {
           id={9}
           title="Optimize image loading"
           deadline={new Date("2025-10-26")}
-          creator={{ id: "user9", imageUrl: undefined, fullName: "Ivy Adams" }}
+          assignee={{ id: "user9", imageUrl: undefined, fullName: "Ivy Adams" }}
           totalSubtasks={3}
           subtasksDone={1}
         />
@@ -143,7 +147,7 @@ export const Default = {
           id={10}
           title="Refactor authentication middleware"
           deadline={new Date("2025-10-29")}
-          creator={undefined}
+          assignee={undefined}
           totalSubtasks={3}
           subtasksDone={2}
         />
