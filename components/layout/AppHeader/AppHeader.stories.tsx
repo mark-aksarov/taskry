@@ -1,6 +1,6 @@
 import { AppHeader } from "./AppHeader";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { withBackgroundVariant } from "@/.storybook/decorators";
+import { withBackgroundVariant } from "@/.storybook/withBackgroundVariant";
 import { AppBottomSheetTrigger } from "../AppBottomSheetTrigger";
 import { AppSidebarSheetTrigger } from "../AppSidebarSheetTrigger";
 import { NotificationModalTrigger } from "@/components/notifications/NotificationModalTrigger";

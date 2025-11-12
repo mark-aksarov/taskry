@@ -1,9 +1,7 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { TaskDetail } from "./TaskDetail";
-import {
-  withBackgroundVariant,
-  withContainerWidth,
-} from "@/.storybook/decorators";
+import { withBackgroundVariant } from "@/.storybook/withBackgroundVariant";
+import { withContainerWidth } from "@/.storybook/withContainerWidth";
 import { CommentsContainerProvider } from "@/components/comments/CommentsContainer";
 import { MockedTaskCommentsContainer } from "../TaskCommentsModalTrigger/TaskCommentsModalTrigger.stories";
 

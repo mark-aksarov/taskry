@@ -1,7 +1,5 @@
-import {
-  withBackgroundVariant,
-  withContainerWidth,
-} from "@/.storybook/decorators";
+import { withBackgroundVariant } from "@/.storybook/withBackgroundVariant";
+import { withContainerWidth } from "@/.storybook/withContainerWidth";
 import { ProjectSelect } from "./ProjectSelect";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 

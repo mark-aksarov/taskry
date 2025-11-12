@@ -1,4 +1,4 @@
-import { withBackgroundVariant } from "@/.storybook/decorators";
+import { withBackgroundVariant } from "@/.storybook/withBackgroundVariant";
 import { LikeButton } from "./LikeButton";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 

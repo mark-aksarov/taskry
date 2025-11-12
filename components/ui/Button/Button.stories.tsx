@@ -4,7 +4,7 @@ import { fn } from "storybook/test";
 
 import { Button } from "./Button";
 import { Clock, Download, Heart } from "lucide-react";
-import { withBackgroundVariant } from "@/.storybook/decorators";
+import { withBackgroundVariant } from "@/.storybook/withBackgroundVariant";
 
 const iconOptions = ["None", "Clock", "Heart", "Download"];
 const icons = {

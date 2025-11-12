@@ -1,9 +1,7 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { TaskCategoryCheckboxGroupSkeleton } from "./TaskCategoryCheckboxGroupSkeleton";
-import {
-  withBackgroundVariant,
-  withContainerWidth,
-} from "@/.storybook/decorators";
+import { withBackgroundVariant } from "@/.storybook/withBackgroundVariant";
+import { withContainerWidth } from "@/.storybook/withContainerWidth";
 
 const meta = {
   title: "Components/tasks/TaskCategoryCheckboxGroupSkeleton",

@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { TaskGrid } from "./TaskGrid";
-import { withBackgroundVariant } from "@/.storybook/decorators";
+import { withBackgroundVariant } from "@/.storybook/withBackgroundVariant";
 import { TaskGridItem } from "../TaskGridItem";
 import { TaskDetail, TaskDetailContainerProvider } from "../TaskDetail";
 import { CommentsContainerProvider } from "@/components/comments/CommentsContainer";

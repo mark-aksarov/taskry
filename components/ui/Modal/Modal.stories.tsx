@@ -11,7 +11,7 @@ import {
   DialogHeading,
 } from "../Dialog";
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { withBackgroundVariant } from "@/.storybook/decorators";
+import { withBackgroundVariant } from "@/.storybook/withBackgroundVariant";
 
 const meta: Meta<typeof Modal> = {
   title: "Components/ui/Modal",

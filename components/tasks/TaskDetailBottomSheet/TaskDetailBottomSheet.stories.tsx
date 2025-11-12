@@ -7,7 +7,7 @@ import {
   TaskDetailBottomSheet,
   TaskDetailBottomSheetProps,
 } from "./TaskDetailBottomSheet";
-import { withBackgroundVariant } from "@/.storybook/decorators";
+import { withBackgroundVariant } from "@/.storybook/withBackgroundVariant";
 import { Default as TaskDetailStory } from "../TaskDetail/TaskDetail.stories";
 import { TaskDetailContainerProvider } from "../TaskDetail/TaskDetailContainerContext";
 import { CommentsContainerProvider } from "@/components/comments/CommentsContainer";

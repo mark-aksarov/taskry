@@ -1,10 +1,8 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { ProgressBar } from "../ProgressBar";
 import { CheckCheck } from "lucide-react";
-import {
-  withContainerWidth,
-  withBackgroundVariant,
-} from "@/.storybook/decorators";
+import { withBackgroundVariant } from "@/.storybook/withBackgroundVariant";
+import { withContainerWidth } from "@/.storybook/withContainerWidth";
 
 const meta: Meta<typeof ProgressBar> = {
   title: "Components/ui/ProgressBar",

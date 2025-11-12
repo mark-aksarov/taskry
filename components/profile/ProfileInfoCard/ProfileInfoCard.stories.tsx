@@ -6,7 +6,7 @@ import { ProfileInfo } from "../ProfileInfo";
 import { ProfileHeader } from "../ProfileHeader";
 import { Default as ProfileHeaderStory } from "@/components/profile/ProfileHeader/ProfileHeader.stories";
 import { Default as ProfileInfoStory } from "@/components/profile/ProfileInfo/ProfileInfo.stories";
-import { withBackgroundVariant } from "@/.storybook/decorators";
+import { withBackgroundVariant } from "@/.storybook/withBackgroundVariant";
 
 const meta = {
   title: "components/profile/ProfileInfoCard",

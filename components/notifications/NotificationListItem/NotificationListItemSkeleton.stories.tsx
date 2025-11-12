@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { NotificationListItemSkeleton } from "./NotificationListItemSkeleton";
-import { withBackgroundVariant } from "@/.storybook/decorators";
+import { withBackgroundVariant } from "@/.storybook/withBackgroundVariant";
 
 const meta = {
   title: "Components/notifications/NotificationListItemSkeleton",

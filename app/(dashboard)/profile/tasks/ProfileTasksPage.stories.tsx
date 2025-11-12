@@ -2,7 +2,7 @@ import { mocked } from "storybook/test";
 import { usePathname } from "next/navigation";
 import { ProfileTasksPage } from "./ProfileTasksPage";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { withBackgroundVariant } from "@/.storybook/decorators";
+import { withBackgroundVariant } from "@/.storybook/withBackgroundVariant";
 import { PageDecorator } from "@/.storybook/PageDecorator";
 import {
   ProfileTasksMobile,

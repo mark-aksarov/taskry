@@ -1,9 +1,7 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { Skeleton } from "./Skeleton";
-import {
-  withContainerWidth,
-  withBackgroundVariant,
-} from "@/.storybook/decorators";
+import { withBackgroundVariant } from "@/.storybook/withBackgroundVariant";
+import { withContainerWidth } from "@/.storybook/withContainerWidth";
 
 const meta: Meta<typeof Skeleton> = {
   title: "Components/ui/Skeleton",

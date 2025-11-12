@@ -2,10 +2,8 @@ import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { SubtaskTextField } from "./SubtaskTextField";
 import { Button } from "@/components/ui/Button";
 import { X } from "lucide-react";
-import {
-  withBackgroundVariant,
-  withContainerWidth,
-} from "@/.storybook/decorators";
+import { withBackgroundVariant } from "@/.storybook/withBackgroundVariant";
+import { withContainerWidth } from "@/.storybook/withContainerWidth";
 
 const meta = {
   title: "Components/subtasks/SubtaskTextField",

@@ -4,7 +4,7 @@ import { ProfileCardLeft } from "./ProfileCardLeft";
 import { ProfileCardHeader } from "./ProfileCardHeader";
 import { ProfileCardTitle } from "./ProfileCardTitle";
 import { ProfileCardRight } from "./ProfileCardRight";
-import { withBackgroundVariant } from "@/.storybook/decorators";
+import { withBackgroundVariant } from "@/.storybook/withBackgroundVariant";
 
 const meta = {
   title: "components/profile/ProfileCard",

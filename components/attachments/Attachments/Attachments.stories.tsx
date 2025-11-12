@@ -2,10 +2,8 @@ import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { Attachments } from "./Attachments";
 import { Attachment } from "./Attachment";
 import Image from "next/image";
-import {
-  withBackgroundVariant,
-  withContainerWidth,
-} from "@/.storybook/decorators";
+import { withBackgroundVariant } from "@/.storybook/withBackgroundVariant";
+import { withContainerWidth } from "@/.storybook/withContainerWidth";
 
 const meta = {
   title: "Components/common/Attachments",

@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { withBackgroundVariant } from "@/.storybook/decorators";
+import { withBackgroundVariant } from "@/.storybook/withBackgroundVariant";
 import { TaskCommentsModalTrigger } from "./TaskCommentsModalTrigger";
 import { CommentsContainerProvider } from "@/components/comments/CommentsContainer";
 import {

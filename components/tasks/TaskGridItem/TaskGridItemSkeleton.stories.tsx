@@ -1,9 +1,7 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { TaskGridItemSkeleton } from "./TaskGridItemSkeleton";
-import {
-  withBackgroundVariant,
-  withContainerWidth,
-} from "@/.storybook/decorators";
+import { withBackgroundVariant } from "@/.storybook/withBackgroundVariant";
+import { withContainerWidth } from "@/.storybook/withContainerWidth";
 
 const meta = {
   title: "Components/tasks/TaskGridItemSkeleton",

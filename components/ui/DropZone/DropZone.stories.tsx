@@ -2,10 +2,8 @@ import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { DropZone } from "./DropZone";
 import { fn } from "storybook/test";
 import { useState } from "react";
-import {
-  withBackgroundVariant,
-  withContainerWidth,
-} from "@/.storybook/decorators";
+import { withBackgroundVariant } from "@/.storybook/withBackgroundVariant";
+import { withContainerWidth } from "@/.storybook/withContainerWidth";
 
 const meta = {
   title: "Components/ui/DropZone",

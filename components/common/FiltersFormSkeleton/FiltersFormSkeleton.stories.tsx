@@ -1,9 +1,7 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { FiltersFormSkeleton } from "./FiltersFormSkeleton";
-import {
-  withContainerWidth,
-  withBackgroundVariant,
-} from "@/.storybook/decorators";
+import { withBackgroundVariant } from "@/.storybook/withBackgroundVariant";
+import { withContainerWidth } from "@/.storybook/withContainerWidth";
 
 const meta: Meta<typeof FiltersFormSkeleton> = {
   title: "Components/common/FiltersFormSkeleton",

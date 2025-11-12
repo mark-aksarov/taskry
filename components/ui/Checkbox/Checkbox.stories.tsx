@@ -1,4 +1,4 @@
-import { withBackgroundVariant } from "@/.storybook/decorators";
+import { withBackgroundVariant } from "@/.storybook/withBackgroundVariant";
 import { Checkbox } from "../Checkbox";
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 

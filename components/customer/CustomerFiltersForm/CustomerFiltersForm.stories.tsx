@@ -2,10 +2,8 @@ import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { CustomerFiltersForm } from "./CustomerFiltersForm";
 import { CompanyCheckboxGroup } from "@/components/companies/CompanyCheckboxGroup";
 import { Default as CompanyCheckboxGroupStory } from "@/components/companies/CompanyCheckboxGroup/CompanyCheckboxGroup.stories";
-import {
-  withContainerWidth,
-  withBackgroundVariant,
-} from "@/.storybook/decorators";
+import { withBackgroundVariant } from "@/.storybook/withBackgroundVariant";
+import { withContainerWidth } from "@/.storybook/withContainerWidth";
 
 const meta: Meta<typeof CustomerFiltersForm> = {
   title: "Components/customers/CustomerFiltersForm",

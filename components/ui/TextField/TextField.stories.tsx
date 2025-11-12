@@ -4,10 +4,8 @@ import { TextField } from "../TextField";
 import { Form } from "react-aria-components";
 import { Button } from "@/components/ui/Button";
 import { fn } from "storybook/test";
-import {
-  withContainerWidth,
-  withBackgroundVariant,
-} from "@/.storybook/decorators";
+import { withBackgroundVariant } from "@/.storybook/withBackgroundVariant";
+import { withContainerWidth } from "@/.storybook/withContainerWidth";
 
 const meta = {
   title: "Components/ui/TextField",

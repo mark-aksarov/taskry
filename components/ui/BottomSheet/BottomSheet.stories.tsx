@@ -12,7 +12,7 @@ import {
   DialogHeader,
   DialogHeading,
 } from "../Dialog";
-import { withBackgroundVariant } from "@/.storybook/decorators";
+import { withBackgroundVariant } from "@/.storybook/withBackgroundVariant";
 
 const meta: Meta<typeof BottomSheet> = {
   title: "Components/ui/BottomSheet",

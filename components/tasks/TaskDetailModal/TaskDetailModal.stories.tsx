@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { TaskDetailModal } from "./TaskDetailModal";
 import { Button, RACDialogTrigger } from "@/components/ui";
-import { withBackgroundVariant } from "@/.storybook/decorators";
+import { withBackgroundVariant } from "@/.storybook/withBackgroundVariant";
 import {
   TaskDetail,
   TaskDetailContainerProvider,

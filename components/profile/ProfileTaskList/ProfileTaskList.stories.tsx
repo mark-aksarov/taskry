@@ -1,4 +1,4 @@
-import { withBackgroundVariant } from "@/.storybook/decorators";
+import { withBackgroundVariant } from "@/.storybook/withBackgroundVariant";
 import { ProfileTaskList } from "./ProfileTaskList";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 

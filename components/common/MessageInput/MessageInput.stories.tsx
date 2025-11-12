@@ -1,13 +1,11 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { MessageInput } from "./MessageInput";
 import { useState } from "react";
-import { Attachment, Attachments } from "../../attachments/Attachments";
+import { Attachment, Attachments } from "@/components/attachments/Attachments";
 import Image from "next/image";
 import { fn } from "storybook/test";
-import {
-  withContainerWidth,
-  withBackgroundVariant,
-} from "@/.storybook/decorators";
+import { withBackgroundVariant } from "@/.storybook/withBackgroundVariant";
+import { withContainerWidth } from "@/.storybook/withContainerWidth";
 
 const meta = {
   title: "Components/common/MessageInput",

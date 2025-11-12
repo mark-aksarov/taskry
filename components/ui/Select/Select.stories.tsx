@@ -5,10 +5,8 @@ import { Apple, Banana, Citrus } from "lucide-react";
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { Form } from "react-aria-components";
 import { Button } from "../Button";
-import {
-  withBackgroundVariant,
-  withContainerWidth,
-} from "@/.storybook/decorators";
+import { withBackgroundVariant } from "@/.storybook/withBackgroundVariant";
+import { withContainerWidth } from "@/.storybook/withContainerWidth";
 
 const meta: Meta<typeof Select> = {
   title: "Components/ui/Select",

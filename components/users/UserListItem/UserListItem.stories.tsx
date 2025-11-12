@@ -1,4 +1,4 @@
-import { withBackgroundVariant } from "@/.storybook/decorators";
+import { withBackgroundVariant } from "@/.storybook/withBackgroundVariant";
 import { UserListItem } from "./UserListItem";
 import { Meta, StoryObj } from "@storybook/react";
 

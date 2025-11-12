@@ -1,7 +1,7 @@
 import { Link } from "@/components/ui";
 import { Meta, StoryObj } from "@storybook/react";
 import { NotificationList } from "./NotificationList";
-import { withBackgroundVariant } from "@/.storybook/decorators";
+import { withBackgroundVariant } from "@/.storybook/withBackgroundVariant";
 import { NotificationListItem } from "../NotificationListItem";
 
 const meta = {

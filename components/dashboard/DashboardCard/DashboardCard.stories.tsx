@@ -4,10 +4,8 @@ import { DashboardCardIcon } from "./DashboardCardIcon";
 import { DashboardCardValue } from "./DashboardCardValue";
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { DashboardCardText } from "./DashboardCardText";
-import {
-  withBackgroundVariant,
-  withContainerWidth,
-} from "@/.storybook/decorators";
+import { withBackgroundVariant } from "@/.storybook/withBackgroundVariant";
+import { withContainerWidth } from "@/.storybook/withContainerWidth";
 
 const meta = {
   title: "Components/dashboard/DashboardCard",

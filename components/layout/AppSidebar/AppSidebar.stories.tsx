@@ -12,7 +12,7 @@ import { AppSidebarHeader } from "./AppSidebarHeader";
 import { AppSidebarHeading } from "./AppSidebarHeading";
 import { AppSidebarBody } from "./AppSidebarBody";
 import { AppNavigation } from "../AppNavigation";
-import { withBackgroundVariant } from "@/.storybook/decorators";
+import { withBackgroundVariant } from "@/.storybook/withBackgroundVariant";
 
 const meta = {
   title: "Components/layout/AppSidebar",

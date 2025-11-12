@@ -1,14 +1,6 @@
 import React, { useEffect } from "react";
 import { type Decorator } from "@storybook/react";
 
-export const withContainerWidth =
-  (width: string = "500px"): Decorator =>
-  (Story) => (
-    <div style={{ maxWidth: width }}>
-      <Story />
-    </div>
-  );
-
 type BackgroundVariant = "default" | "alt";
 
 interface WithBackgroundVariantOptions {

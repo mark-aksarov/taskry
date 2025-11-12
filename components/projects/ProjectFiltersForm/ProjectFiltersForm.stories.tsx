@@ -3,10 +3,8 @@ import { ProjectFiltersForm } from "./ProjectFiltersForm";
 import { ProjectCategoryCheckboxGroup } from "../ProjectCategoryCheckboxGroup";
 import { CustomerCheckboxGroup } from "@/components/customer/CustomerCheckboxGroup";
 import { UserCheckboxGroup } from "@/components/users/UserCheckboxGroup";
-import {
-  withContainerWidth,
-  withBackgroundVariant,
-} from "@/.storybook/decorators";
+import { withBackgroundVariant } from "@/.storybook/withBackgroundVariant";
+import { withContainerWidth } from "@/.storybook/withContainerWidth";
 import { Default as CustomerCheckboxGroupStory } from "@/components/customer/CustomerCheckboxGroup/CustomerCheckboxGroup.stories";
 import { Default as ProjectCategoryCheckboxGroupStory } from "@/components/projects/ProjectCategoryCheckboxGroup/ProjectCategoryCheckboxGroup.stories";
 import { Default as UserCheckboxGroupStory } from "@/components/users/UserCheckboxGroup/UserCheckboxGroup.stories";

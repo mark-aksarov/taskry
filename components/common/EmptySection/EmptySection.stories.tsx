@@ -3,7 +3,7 @@ import { EmptySection } from "./EmptySection";
 import { EmptySectionHeading } from "./EmptySectionHeading";
 import { EmptySectionDescription } from "./EmptySectionDescription";
 import { EmptySectionButton } from "./EmptySectionButton";
-import { withBackgroundVariant } from "@/.storybook/decorators";
+import { withBackgroundVariant } from "@/.storybook/withBackgroundVariant";
 
 const meta = {
   title: "Components/common/EmptySection",

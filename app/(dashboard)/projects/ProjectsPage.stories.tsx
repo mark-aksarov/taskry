@@ -4,7 +4,7 @@ import { ProjectCategoryCheckboxGroup } from "@/components/projects/ProjectCateg
 import { CustomerCheckboxGroup } from "@/components/customer/CustomerCheckboxGroup";
 import { UserCheckboxGroup } from "@/components/users/UserCheckboxGroup";
 import { ViewModeContainer } from "@/components/common/ViewMode";
-import { withBackgroundVariant } from "@/.storybook/decorators";
+import { withBackgroundVariant } from "@/.storybook/withBackgroundVariant";
 import { PageDecorator } from "@/.storybook/PageDecorator";
 import { mocked } from "storybook/test";
 import { usePathname } from "next/navigation";

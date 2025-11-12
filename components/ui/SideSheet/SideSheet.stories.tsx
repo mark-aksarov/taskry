@@ -10,7 +10,7 @@ import {
   DialogHeader,
   DialogHeading,
 } from "../Dialog";
-import { withBackgroundVariant } from "@/.storybook/decorators";
+import { withBackgroundVariant } from "@/.storybook/withBackgroundVariant";
 
 const meta: Meta<typeof SideSheet> = {
   title: "Components/ui/SideSheet",

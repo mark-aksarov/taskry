@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { UserList } from "./UserList";
-import { withBackgroundVariant } from "@/.storybook/decorators";
+import { withBackgroundVariant } from "@/.storybook/withBackgroundVariant";
 
 const meta: Meta<typeof UserList> = {
   title: "Components/users/UserList",
