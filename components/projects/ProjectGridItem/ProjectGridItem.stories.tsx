@@ -21,32 +21,47 @@ type Story = StoryObj<typeof ProjectGridItem>;
 
 export const Default = {
   args: {
-    project: {
-      id: 1,
-      title: "Website Revamp",
-      deadline: new Date("2025-06-25"),
-      creator: { id: "user1", fullName: "Liam Turner", imageUrl: "/man.jpg" },
-      tasks: [
-        { statusId: 1 },
-        { statusId: 1 },
-        { statusId: 2 },
-        { statusId: 3 },
-      ],
+    id: 1,
+    title: "Website Redesign",
+    deadline: new Date("2025-06-30"),
+    creator: {
+      id: "user1",
+      fullName: "Alice Smith",
+      imageUrl: "/woman.jpg",
     },
-  },
-} satisfies Story;
-
-export const Skeleton = {
-  args: {
-    project: undefined,
+    status: {
+      id: 1,
+      name: "Pending",
+    },
+    comments: 5,
+    tasks: 10,
+    tasksDone: 8,
   },
 } satisfies Story;
 
 export const WithoutCreator = {
   args: {
-    project: {
-      ...Default.args.project,
-      creator: null,
+    ...Default.args,
+    creator: undefined,
+  },
+} satisfies Story;
+
+export const WithActiveStatus = {
+  args: {
+    ...Default.args,
+    status: {
+      id: 2,
+      name: "Active",
+    },
+  },
+} satisfies Story;
+
+export const WithCompletedStatus = {
+  args: {
+    ...Default.args,
+    status: {
+      id: 3,
+      name: "Completed",
     },
   },
 } satisfies Story;

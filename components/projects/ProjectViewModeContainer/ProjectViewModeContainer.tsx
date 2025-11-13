@@ -3,6 +3,7 @@ import { ProjectGrid } from "../ProjectGrid";
 import { getProjects } from "@/lib/queries/project";
 import { ViewModeContainer } from "@/components/common/ViewMode";
 import { ProjectListItem } from "../ProjectListItem";
+import { ProjectGridItem } from "../ProjectGridItem";
 
 export async function ProjectViewModeContainer() {
   const projects = await getProjects();
@@ -54,7 +55,34 @@ export async function ProjectViewModeContainer() {
           ))}
         </ProjectList>
       }
-      grid={<ProjectGrid projects={projects} />}
+      grid={
+        <ProjectGrid>
+          {projects.map((project) => (
+            <ProjectGridItem
+              key={project.id}
+              id={project.id}
+              title={project.title}
+              deadline={project.deadline}
+              creator={
+                project.creator
+                  ? {
+                      id: project.creator.id,
+                      fullName: project.creator.fullName,
+                      imageUrl: project.creator.imageUrl ?? undefined,
+                    }
+                  : undefined
+              }
+              status={{
+                id: project.status.id,
+                name: project.status.nameEn,
+              }}
+              tasks={project.tasks.length}
+              tasksDone={project.tasks.filter((t) => t.statusId === 3).length}
+              comments={project._count.comments}
+            />
+          ))}
+        </ProjectGrid>
+      }
     />
   );
 }

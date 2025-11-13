@@ -1,12 +1,6 @@
 import { Grid } from "@/components/common/Grid";
-import { ProjectGridItem, ProjectGridItemType } from "../ProjectGridItem";
+import React from "react";
 
-export function ProjectGrid({ projects }: { projects: ProjectGridItemType[] }) {
-  return (
-    <Grid>
-      {projects.map((project) => (
-        <ProjectGridItem key={project.id} project={project} />
-      ))}
-    </Grid>
-  );
+export function ProjectGrid({ children }: { children: React.ReactNode }) {
+  return <Grid>{children}</Grid>;
 }

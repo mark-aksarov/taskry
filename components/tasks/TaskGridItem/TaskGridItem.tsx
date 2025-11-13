@@ -5,7 +5,7 @@ import {
   GridItemInfo,
   GridItemProgress,
   GridItemText,
-  GridItemTop,
+  GridItemRow,
 } from "@/components/common/Grid";
 
 import { Item } from "react-stately";
@@ -55,7 +55,7 @@ export function TaskGridItem({
 
   return (
     <GridItem>
-      <GridItemTop>
+      <GridItemRow>
         <Checkbox aria-label={title} />
         <ResponsiveMenuTrigger
           placement="bottom right"
@@ -86,7 +86,7 @@ export function TaskGridItem({
             Mark as Active
           </Item>
         </ResponsiveMenuTrigger>
-      </GridItemTop>
+      </GridItemRow>
 
       <div className="flex items-center justify-between max-sm:flex-col-reverse max-sm:gap-4">
         <GridItemInfo className="max-sm:w-full max-sm:items-center sm:flex-auto">

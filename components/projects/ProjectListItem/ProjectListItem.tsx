@@ -23,6 +23,7 @@ import { MenuDialogHeader } from "@/components/common/MenuDialogHeader";
 import { ProjectListItemLayout } from "./ProjectListItemLayout";
 import { ImageContainer } from "@/components/common/ImageContainer";
 import Image from "next/image";
+import { ProjectStatusBadge } from "../ProjectStatusBadge";
 
 export interface ProjectListItemProps {
   id: number;
@@ -76,19 +77,6 @@ export const ProjectListItem = ({
       year: "numeric",
     });
   }, [deadline, locale]);
-
-  function getStatusBadgeColor(statusId: number): BadgeColor {
-    switch (statusId) {
-      case 1:
-        return "orange";
-      case 2:
-        return "green";
-      case 3:
-        return "blue";
-      default:
-        throw new Error("Unknown status id");
-    }
-  }
 
   return (
     <ProjectListItemLayout
@@ -170,12 +158,10 @@ export const ProjectListItem = ({
         </ListItemInfo>
       }
       statusSlot={
-        <Badge
+        <ProjectStatusBadge
           className="w-[5.625rem] @max-md:hidden"
-          color={getStatusBadgeColor(status.id)}
-        >
-          {status.name}
-        </Badge>
+          status={status}
+        />
       }
       commentsModalTriggerSlot={
         <Button

@@ -5,7 +5,7 @@ import {
   GridItemInfo,
   GridItemText,
   GridItemTitle,
-  GridItemTop,
+  GridItemRow,
   GridItemInfoSkeleton,
   GridItemContactList,
   GridItemContact,
@@ -47,7 +47,7 @@ export function UserGridItem({ user }: UserGridItemProps) {
   return (
     <GridItem>
       {/* --- Checkbox & Menu --- */}
-      <GridItemTop>
+      <GridItemRow>
         {!user ? (
           <MenuTriggerSkeleton className="-mr-2 ml-auto" />
         ) : (
@@ -76,7 +76,7 @@ export function UserGridItem({ user }: UserGridItemProps) {
             </ResponsiveMenuTrigger>
           </>
         )}
-      </GridItemTop>
+      </GridItemRow>
 
       <div className="flex flex-col items-center justify-between gap-4">
         {/* --- User Image --- */}

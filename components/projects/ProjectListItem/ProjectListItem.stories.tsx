@@ -24,7 +24,7 @@ export const Default = {
     },
     status: {
       id: 1,
-      name: "Active",
+      name: "Pending",
     },
     category: { id: 1, name: "Design" },
     customer: {
@@ -36,7 +36,7 @@ export const Default = {
       id: 1,
       name: "Doe Inc.",
     },
-    messages: 5,
+    comments: 5,
     showCheckbox: false,
   },
 } satisfies Story;

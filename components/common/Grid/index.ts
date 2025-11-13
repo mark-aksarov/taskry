@@ -1,6 +1,6 @@
 export { Grid } from "./Grid";
 export { GridItem } from "./GridItem";
-export { GridItemTop } from "./GridItemTop";
+export { GridItemRow } from "./GridItemRow";
 export { GridItemInfo, GridItemInfoSkeleton } from "./GridItemInfo";
 export { GridItemTitle } from "./GridItemTitle";
 export { GridItemText } from "./GridItemText";
