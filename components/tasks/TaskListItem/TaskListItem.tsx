@@ -5,10 +5,10 @@ import { useMemo } from "react";
 import { Item } from "react-stately";
 import {
   Check,
+  CheckCheck,
   CircleEllipsis,
   Clock,
   Ellipsis,
-  ListTodo,
   MessageSquare,
   Trash,
 } from "lucide-react";
@@ -51,8 +51,8 @@ interface TaskListItemProps {
     id: number;
     name: string;
   };
-  commentsCount: number;
-  subtasksCount: number;
+  comments: number;
+  subtasks: number;
   showCheckbox?: boolean;
 }
 
@@ -64,8 +64,8 @@ export const TaskListItem = ({
   category,
   project,
   status,
-  commentsCount,
-  subtasksCount,
+  comments,
+  subtasks,
   showCheckbox,
 }: TaskListItemProps) => {
   const locale = "en-GB";
@@ -142,7 +142,7 @@ export const TaskListItem = ({
       commentsModalTriggerSlot={
         <Button
           variant="outlined"
-          label={commentsCount}
+          label={comments}
           iconLeft={
             <MessageSquare size={16} strokeWidth={1.5} absoluteStrokeWidth />
           }
@@ -152,9 +152,9 @@ export const TaskListItem = ({
       subtasksModalTriggerSlot={
         <Button
           variant="outlined"
-          label={subtasksCount}
+          label={subtasks}
           iconLeft={
-            <ListTodo size={16} strokeWidth={1.5} absoluteStrokeWidth />
+            <CheckCheck size={16} strokeWidth={1.5} absoluteStrokeWidth />
           }
           className="h-[1.75rem] w-[3.75rem] justify-center rounded-full @max-md:hidden"
         />

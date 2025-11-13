@@ -44,8 +44,8 @@ export async function AssignedTasksContainer() {
             }
             totalSubtasks={task.subtasks.length}
             subtasksDone={task.subtasks.filter((s) => s.isDone).length}
-            commentsCount={task._count.comments}
-            subtasksCount={task._count.subtasks}
+            comments={task._count.comments}
+            subtasks={task._count.subtasks}
           />
         ))}
       </TaskList>

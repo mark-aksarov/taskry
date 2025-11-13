@@ -19,34 +19,33 @@ export function TaskListItemTitle({
 
   return (
     <>
-      <div className="max-md:hidden">
-        <ListItemTitle>
-          <RACDialogTrigger>
-            <RACButton
-              className={(renderProps) =>
-                focusRing({ ...renderProps, className: "cursor-pointer" })
-              }
-            >
-              {title}
-            </RACButton>
-            <TaskDetailModal taskId={id} />
-          </RACDialogTrigger>
-        </ListItemTitle>
-      </div>
-
-      <div className="md:hidden">
-        <ListItemTitle>
+      <ListItemTitle className="max-md:hidden">
+        <RACDialogTrigger>
           <RACButton
-            {...triggerProps}
             className={(renderProps) =>
-              focusRing({ ...renderProps, className: "cursor-pointer" })
+              focusRing({
+                ...renderProps,
+                className: "cursor-pointer",
+              })
             }
           >
             {title}
           </RACButton>
-          <TaskDetailBottomSheet taskId={id} state={state} />
-        </ListItemTitle>
-      </div>
+          <TaskDetailModal taskId={id} />
+        </RACDialogTrigger>
+      </ListItemTitle>
+
+      <ListItemTitle className="md:hidden">
+        <RACButton
+          {...triggerProps}
+          className={(renderProps) =>
+            focusRing({ ...renderProps, className: "cursor-pointer" })
+          }
+        >
+          {title}
+        </RACButton>
+        <TaskDetailBottomSheet taskId={id} state={state} />
+      </ListItemTitle>
     </>
   );
 }

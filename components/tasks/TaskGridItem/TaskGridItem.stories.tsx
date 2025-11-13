@@ -39,8 +39,17 @@ export const Default = {
     id: 1,
     title: "Design landing page",
     deadline: new Date("2025-09-30"),
-    assignee: { id: "user1", imageUrl: "/man.jpg", fullName: "John Doe" },
-    totalSubtasks: 6,
+    assignee: {
+      id: "user1",
+      imageUrl: "/man.jpg",
+      fullName: "John Doe",
+    },
+    status: {
+      id: 1,
+      name: "Pending",
+    },
+    comments: 99,
+    subtasks: 6,
     subtasksDone: 2,
   },
 } satisfies Story;
@@ -49,5 +58,35 @@ export const WithoutAssignee = {
   args: {
     ...Default.args,
     assignee: undefined,
+  },
+} satisfies Story;
+
+export const WithoutAssigneeImage = {
+  args: {
+    ...Default.args,
+    assignee: {
+      ...Default.args.assignee,
+      imageUrl: undefined,
+    },
+  },
+} satisfies Story;
+
+export const WithActiveStatus = {
+  args: {
+    ...Default.args,
+    status: {
+      id: 2,
+      name: "Active",
+    },
+  },
+} satisfies Story;
+
+export const WithCompletedStatus = {
+  args: {
+    ...Default.args,
+    status: {
+      id: 3,
+      name: "Completed",
+    },
   },
 } satisfies Story;

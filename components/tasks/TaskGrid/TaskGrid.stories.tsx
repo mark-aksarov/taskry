@@ -43,7 +43,12 @@ export const Default = {
             imageUrl: "/man.jpg",
             fullName: "Liam Turner",
           }}
-          totalSubtasks={3}
+          status={{
+            id: 1,
+            name: "Pending",
+          }}
+          comments={99}
+          subtasks={3}
           subtasksDone={1}
         />
 
@@ -52,7 +57,12 @@ export const Default = {
           title="Implement authentication"
           deadline={new Date("2025-10-06")}
           assignee={undefined}
-          totalSubtasks={4}
+          status={{
+            id: 2,
+            name: "Active",
+          }}
+          comments={10}
+          subtasks={4}
           subtasksDone={2}
         />
 
@@ -65,7 +75,12 @@ export const Default = {
             imageUrl: undefined,
             fullName: "Olivia White",
           }}
-          totalSubtasks={2}
+          status={{
+            id: 1,
+            name: "Pending",
+          }}
+          comments={6}
+          subtasks={2}
           subtasksDone={2}
         />
 
@@ -78,7 +93,12 @@ export const Default = {
             imageUrl: "/man.jpg",
             fullName: "Ethan Green",
           }}
-          totalSubtasks={4}
+          status={{
+            id: 3,
+            name: "Completed",
+          }}
+          comments={25}
+          subtasks={4}
           subtasksDone={2}
         />
 
@@ -91,7 +111,12 @@ export const Default = {
             imageUrl: "/man.jpg",
             fullName: "Mason Moore",
           }}
-          totalSubtasks={4}
+          status={{
+            id: 1,
+            name: "Pending",
+          }}
+          comments={99}
+          subtasks={4}
           subtasksDone={3}
         />
 
@@ -104,7 +129,12 @@ export const Default = {
             imageUrl: "/man.jpg",
             fullName: "Ava Black",
           }}
-          totalSubtasks={3}
+          status={{
+            id: 2,
+            name: "Active",
+          }}
+          comments={99}
+          subtasks={3}
           subtasksDone={3}
         />
 
@@ -117,7 +147,12 @@ export const Default = {
             imageUrl: "/man.jpg",
             fullName: "Isabella Hall",
           }}
-          totalSubtasks={3}
+          status={{
+            id: 3,
+            name: "Completed",
+          }}
+          comments={47}
+          subtasks={3}
           subtasksDone={3}
         />
 
@@ -130,7 +165,12 @@ export const Default = {
             imageUrl: "/man.jpg",
             fullName: "Henry Young",
           }}
-          totalSubtasks={3}
+          status={{
+            id: 1,
+            name: "Pending",
+          }}
+          comments={18}
+          subtasks={3}
           subtasksDone={1}
         />
 
@@ -139,7 +179,12 @@ export const Default = {
           title="Optimize image loading"
           deadline={new Date("2025-10-26")}
           assignee={{ id: "user9", imageUrl: undefined, fullName: "Ivy Adams" }}
-          totalSubtasks={3}
+          status={{
+            id: 1,
+            name: "Pending",
+          }}
+          comments={67}
+          subtasks={3}
           subtasksDone={1}
         />
 
@@ -148,7 +193,12 @@ export const Default = {
           title="Refactor authentication middleware"
           deadline={new Date("2025-10-29")}
           assignee={undefined}
-          totalSubtasks={3}
+          status={{
+            id: 2,
+            name: "Active",
+          }}
+          comments={87}
+          subtasks={3}
           subtasksDone={2}
         />
       </>

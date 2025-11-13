@@ -46,6 +46,16 @@ export const WithoutCreator = {
   },
 } satisfies Story;
 
+export const WithoutCreatorImage = {
+  args: {
+    ...Default.args,
+    creator: {
+      ...Default.args.creator,
+      imageUrl: undefined,
+    },
+  },
+} satisfies Story;
+
 export const WithActiveStatus = {
   args: {
     ...Default.args,

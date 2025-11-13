@@ -44,8 +44,8 @@ export const Default = {
           assignee={{ id: "user1", imageUrl: "/man.jpg", fullName: "John Doe" }}
           totalSubtasks={6}
           subtasksDone={2}
-          commentsCount={10}
-          subtasksCount={6}
+          comments={10}
+          subtasks={6}
           showCheckbox
         />
 
@@ -59,8 +59,8 @@ export const Default = {
           assignee={undefined}
           totalSubtasks={10}
           subtasksDone={7}
-          commentsCount={22}
-          subtasksCount={16}
+          comments={22}
+          subtasks={16}
           showCheckbox
         />
 
@@ -74,8 +74,8 @@ export const Default = {
           assignee={{ id: "user3", fullName: "Jane Doe" }}
           totalSubtasks={8}
           subtasksDone={4}
-          commentsCount={2}
-          subtasksCount={2}
+          comments={2}
+          subtasks={2}
           showCheckbox
         />
 
@@ -89,8 +89,8 @@ export const Default = {
           assignee={{ id: "user4", imageUrl: "/man.jpg", fullName: "John Doe" }}
           totalSubtasks={12}
           subtasksDone={6}
-          commentsCount={12}
-          subtasksCount={32}
+          comments={12}
+          subtasks={32}
           showCheckbox
         />
 
@@ -104,8 +104,8 @@ export const Default = {
           assignee={{ id: "user5", imageUrl: "/man.jpg", fullName: "John Doe" }}
           totalSubtasks={21}
           subtasksDone={16}
-          commentsCount={15}
-          subtasksCount={8}
+          comments={15}
+          subtasks={8}
           showCheckbox
         />
 
@@ -119,8 +119,8 @@ export const Default = {
           assignee={{ id: "user6", imageUrl: "/man.jpg", fullName: "John Doe" }}
           totalSubtasks={11}
           subtasksDone={10}
-          commentsCount={9}
-          subtasksCount={16}
+          comments={9}
+          subtasks={16}
           showCheckbox
         />
 
@@ -134,8 +134,8 @@ export const Default = {
           assignee={{ id: "user7", imageUrl: "/man.jpg", fullName: "John Doe" }}
           totalSubtasks={7}
           subtasksDone={7}
-          commentsCount={12}
-          subtasksCount={22}
+          comments={12}
+          subtasks={22}
           showCheckbox
         />
 
@@ -149,8 +149,8 @@ export const Default = {
           assignee={{ id: "user8", imageUrl: "/man.jpg", fullName: "John Doe" }}
           totalSubtasks={7}
           subtasksDone={5}
-          commentsCount={10}
-          subtasksCount={6}
+          comments={10}
+          subtasks={6}
           showCheckbox
         />
 
@@ -164,8 +164,8 @@ export const Default = {
           assignee={{ id: "user9", fullName: "Jane Doe" }}
           totalSubtasks={7}
           subtasksDone={4}
-          commentsCount={23}
-          subtasksCount={12}
+          comments={23}
+          subtasks={12}
           showCheckbox
         />
 
@@ -179,8 +179,8 @@ export const Default = {
           assignee={undefined}
           totalSubtasks={21}
           subtasksDone={13}
-          commentsCount={13}
-          subtasksCount={23}
+          comments={13}
+          subtasks={23}
           showCheckbox
         />
       </TaskList>

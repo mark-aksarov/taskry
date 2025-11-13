@@ -19,34 +19,30 @@ export function TaskGridItemTitle({
 
   return (
     <>
-      <div className="max-md:hidden">
-        <GridItemTitle>
-          <RACDialogTrigger>
-            <RACButton
-              className={(renderProps) =>
-                focusRing({ ...renderProps, className: "cursor-pointer" })
-              }
-            >
-              {title}
-            </RACButton>
-            <TaskDetailModal taskId={id} />
-          </RACDialogTrigger>
-        </GridItemTitle>
-      </div>
-
-      <div className="md:hidden">
-        <GridItemTitle>
+      <GridItemTitle className="max-md:hidden">
+        <RACDialogTrigger>
           <RACButton
-            {...triggerProps}
             className={(renderProps) =>
               focusRing({ ...renderProps, className: "cursor-pointer" })
             }
           >
             {title}
           </RACButton>
-          <TaskDetailBottomSheet taskId={id} state={state} />
-        </GridItemTitle>
-      </div>
+          <TaskDetailModal taskId={id} />
+        </RACDialogTrigger>
+      </GridItemTitle>
+
+      <GridItemTitle className="md:hidden">
+        <RACButton
+          {...triggerProps}
+          className={(renderProps) =>
+            focusRing({ ...renderProps, className: "cursor-pointer" })
+          }
+        >
+          {title}
+        </RACButton>
+        <TaskDetailBottomSheet taskId={id} state={state} />
+      </GridItemTitle>
     </>
   );
 }

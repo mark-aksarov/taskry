@@ -1,15 +1,21 @@
 "use client";
 
 import {
-  GridItem,
   GridItemInfo,
   GridItemProgress,
   GridItemText,
-  GridItemRow,
 } from "@/components/common/Grid";
 
 import { Item } from "react-stately";
-import { Check, CircleEllipsis, Clock, Ellipsis, Trash } from "lucide-react";
+import {
+  Check,
+  CheckCheck,
+  CircleEllipsis,
+  Clock,
+  Ellipsis,
+  MessageSquare,
+  Trash,
+} from "lucide-react";
 
 import { useMemo } from "react";
 import { Button, Link, Checkbox } from "@/components/ui";
@@ -18,29 +24,36 @@ import { ImageContainer } from "@/components/common/ImageContainer";
 import { MenuDialogHeader } from "@/components/common/MenuDialogHeader";
 import { ResponsiveMenuTrigger } from "@/components/common/ResponsiveMenuTrigger";
 import { TaskGridItemTitle } from "./TaskGridItemTitle";
+import { TaskGridItemLayout } from "./TaskGridItemLayout";
+import { TaskStatusBadge } from "../TaskStatusBadge";
 
 export interface TaskGridItemProps {
   id: number;
   title: string;
-  deadline?: Date;
-
-  totalSubtasks?: number;
-  subtasksDone?: number;
-
+  deadline: Date;
   assignee?: {
     id: string;
     imageUrl?: string;
     fullName: string;
   };
+  status: {
+    id: number;
+    name: string;
+  };
+  comments: number;
+  subtasks: number;
+  subtasksDone: number;
 }
 
 export function TaskGridItem({
   id,
   title,
   deadline,
-  totalSubtasks,
-  subtasksDone,
   assignee,
+  status,
+  comments,
+  subtasks,
+  subtasksDone,
 }: TaskGridItemProps) {
   const locale = "en-GB";
 
@@ -54,9 +67,9 @@ export function TaskGridItem({
   }, [deadline, locale]);
 
   return (
-    <GridItem>
-      <GridItemRow>
-        <Checkbox aria-label={title} />
+    <TaskGridItemLayout
+      checkboxSlot={<Checkbox aria-label={title} />}
+      menuTriggerSlot={
         <ResponsiveMenuTrigger
           placement="bottom right"
           renderDialogHeader={() => <MenuDialogHeader heading="Actions" />}
@@ -86,16 +99,16 @@ export function TaskGridItem({
             Mark as Active
           </Item>
         </ResponsiveMenuTrigger>
-      </GridItemRow>
-
-      <div className="flex items-center justify-between max-sm:flex-col-reverse max-sm:gap-4">
-        <GridItemInfo className="max-sm:w-full max-sm:items-center sm:flex-auto">
+      }
+      titleSlot={
+        <GridItemInfo className="flex-auto">
           <TaskGridItemTitle id={id} title={title} />
 
           <GridItemText>{`Deadline on ${formattedDeadline}`}</GridItemText>
         </GridItemInfo>
-
-        {assignee?.imageUrl ? (
+      }
+      assigneeImageSlot={
+        assignee?.imageUrl ? (
           <Link href={`/users/${assignee.id}`}>
             <ImageContainer className="h-9 w-9">
               <Image fill src={assignee.imageUrl} alt={assignee.fullName} />
@@ -103,14 +116,36 @@ export function TaskGridItem({
           </Link>
         ) : (
           <ImageContainer className="h-9 w-9" />
-        )}
-      </div>
-
-      <GridItemProgress
-        value={((subtasksDone || 0) / (totalSubtasks || 1)) * 100}
-        showValueText={false}
-        aria-label="task progress"
-      />
-    </GridItem>
+        )
+      }
+      commentsSlot={
+        <Button
+          variant="outlined"
+          label={comments}
+          iconLeft={
+            <MessageSquare size={16} strokeWidth={1.5} absoluteStrokeWidth />
+          }
+          className="h-[1.75rem] w-[3.75rem] justify-center rounded-full"
+        />
+      }
+      subtasksSlot={
+        <Button
+          variant="outlined"
+          label={subtasksDone}
+          iconLeft={
+            <CheckCheck size={16} strokeWidth={1.5} absoluteStrokeWidth />
+          }
+          className="h-[1.75rem] w-[3.75rem] justify-center rounded-full"
+        />
+      }
+      statusSlot={<TaskStatusBadge status={status} />}
+      progressSlot={
+        <GridItemProgress
+          value={(subtasksDone / subtasks) * 100}
+          showValueText={false}
+          aria-label="project progress"
+        />
+      }
+    />
   );
 }

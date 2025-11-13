@@ -19,6 +19,12 @@ export async function TaskViewModeContainer() {
           fullName: task.assignee.fullName,
         }
       : undefined,
+    status: {
+      id: task.status.id,
+      name: task.status.nameEn,
+    },
+    comments: task._count.comments,
+    subtasks: task._count.subtasks,
   });
 
   return (
@@ -31,12 +37,6 @@ export async function TaskViewModeContainer() {
               {...commonProps(task)}
               category={task.category}
               project={task.project}
-              status={{
-                id: task.status.id,
-                name: task.status.nameEn,
-              }}
-              commentsCount={task._count.comments}
-              subtasksCount={task._count.subtasks}
               showCheckbox
             />
           ))}
@@ -47,7 +47,6 @@ export async function TaskViewModeContainer() {
           {tasks.map((task) => (
             <TaskGridItem
               key={task.id}
-              totalSubtasks={task.subtasks.length}
               subtasksDone={task.subtasks.filter((s) => s.isDone).length}
               {...commonProps(task)}
             />

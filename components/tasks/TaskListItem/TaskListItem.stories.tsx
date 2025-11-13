@@ -38,8 +38,8 @@ export const Default = {
     category: { id: 1, name: "Design" },
     status: { id: 1, name: "Pending" },
     assignee: { id: "user1", imageUrl: "/man.jpg", fullName: "John Doe" },
-    commentsCount: 10,
-    subtasksCount: 6,
+    comments: 10,
+    subtasks: 6,
   },
 } satisfies Story;
 
