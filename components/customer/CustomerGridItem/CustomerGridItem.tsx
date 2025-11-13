@@ -1,133 +1,108 @@
 "use client";
 
 import {
-  GridItem,
   GridItemInfo,
   GridItemText,
   GridItemTitle,
-  GridItemRow,
-  GridItemInfoSkeleton,
   GridItemContactList,
   GridItemContact,
   GridItemContactIconWrapper,
   GridItemContactText,
-  GridItemContactListSkeleton,
+  GridItemRow,
 } from "@/components/common/Grid";
-
-import {
-  ImageContainer,
-  ImageContainerSkeleton,
-} from "@/components/common/ImageContainer";
-
+import Image from "next/image";
 import { Item } from "react-stately";
+import { Button, Link, Checkbox, Divider } from "@/components/ui";
+import { CustomerGridItemLayout } from "./CustomerGridItemLayout";
 import { Ellipsis, Link2, Mail, Phone, Trash } from "lucide-react";
+import { ImageContainer } from "@/components/common/ImageContainer";
+import { MenuDialogHeader } from "@/components/common/MenuDialogHeader";
 import { ResponsiveMenuTrigger } from "@/components/common/ResponsiveMenuTrigger";
 
-import { Button, Link, Checkbox, Divider, Skeleton } from "@/components/ui";
-import Image from "next/image";
-import { MenuTriggerSkeleton } from "@/components/common/MenuTriggerSkeleton";
-import { MenuDialogHeader } from "@/components/common/MenuDialogHeader";
-
-export interface CustomerGridItemType {
-  id: number | string;
+interface CustomerGridItemProps {
+  id: number;
   fullName: string;
   email: string;
-  phoneNumber?: string | null;
-  publicLink?: string | null;
-  imageUrl?: string | null;
+  phoneNumber?: string;
+  publicLink?: string;
+  imageUrl?: string;
   company: {
-    id: number | string;
+    id: number;
     name: string;
   };
 }
 
-interface CustomerGridItemProps {
-  customer?: CustomerGridItemType;
-}
+export function CustomerGridItem({
+  id,
+  fullName,
+  email,
+  phoneNumber,
+  publicLink,
+  imageUrl,
+  company,
+}: CustomerGridItemProps) {
+  const contactLinkClasses = "max-w-full overflow-hidden";
 
-export function CustomerGridItem({ customer }: CustomerGridItemProps) {
   return (
-    <GridItem>
-      {/* --- Checkbox --- */}
-      <GridItemRow>
-        {!customer ? (
-          <MenuTriggerSkeleton className="-mr-2 ml-auto" />
-        ) : (
-          <>
-            <Checkbox aria-label={`${customer.fullName} checkbox`} />
-            <ResponsiveMenuTrigger
-              placement="bottom right"
-              renderDialogHeader={() => <MenuDialogHeader heading="Actions" />}
-              renderButton={() => (
-                <Button
-                  aria-label="user menu"
-                  variant="ghost"
-                  iconLeft={
-                    <Ellipsis size={16} strokeWidth={1.5} absoluteStrokeWidth />
-                  }
-                  className="-mr-2 rounded-full"
-                />
-              )}
-            >
-              <Item textValue="Delete" key="delete">
-                <Trash size={16} /> Delete
-              </Item>
-            </ResponsiveMenuTrigger>
-          </>
-        )}
-      </GridItemRow>
-
-      <div className="flex flex-col items-center justify-between gap-4">
-        {/* --- Customer Image --- */}
-        {!customer ? (
-          <ImageContainerSkeleton className="h-20 w-20" />
-        ) : customer.imageUrl ? (
-          <Link href={`/customers/${customer.id}`}>
+    <CustomerGridItemLayout
+      topRowSlot={
+        <GridItemRow>
+          <Checkbox aria-label={`${fullName} checkbox`} />
+          <ResponsiveMenuTrigger
+            placement="bottom right"
+            renderDialogHeader={() => <MenuDialogHeader heading="Actions" />}
+            renderButton={() => (
+              <Button
+                aria-label="user menu"
+                variant="ghost"
+                iconLeft={
+                  <Ellipsis size={16} strokeWidth={1.5} absoluteStrokeWidth />
+                }
+                className="-mr-2 rounded-full"
+              />
+            )}
+          >
+            <Item textValue="Delete" key="delete">
+              <Trash size={16} /> Delete
+            </Item>
+          </ResponsiveMenuTrigger>
+        </GridItemRow>
+      }
+      imageSlot={
+        imageUrl ? (
+          <Link href={`/customers/${id}`}>
             <ImageContainer className="h-20 w-20">
-              <Image fill src={customer.imageUrl} alt={customer.fullName} />
+              <Image fill src={imageUrl} alt={fullName} />
             </ImageContainer>
           </Link>
         ) : (
           <ImageContainer className="h-20 w-20" />
-        )}
+        )
+      }
+      titleSlot={
+        <GridItemInfo className="w-full items-center">
+          <GridItemTitle>
+            <Link className="block truncate" href={`/customers/${id}`}>
+              {fullName}
+            </Link>
+          </GridItemTitle>
 
-        {/* --- Customer Details --- */}
-        {!customer ? (
-          <GridItemInfoSkeleton className="w-full items-center" />
-        ) : (
-          <GridItemInfo className="w-full items-center">
-            <GridItemTitle>
-              <Link href={`/customers/${customer.id}`}>
-                {customer.fullName}
-              </Link>
-            </GridItemTitle>
-
-            <GridItemText>{customer.company.name}</GridItemText>
-          </GridItemInfo>
-        )}
-      </div>
-
-      {/* --- Contacts --- */}
-      {!customer ? (
-        <>
-          <Skeleton className="h-px" />
-          <GridItemContactListSkeleton />
-        </>
-      ) : (
+          <GridItemText>{company.name}</GridItemText>
+        </GridItemInfo>
+      }
+      contactSlot={
         <>
           <Divider />
           <GridItemContactList>
-            {customer.phoneNumber ? (
-              <GridItemContact>
-                <Link href={`tel:${customer.phoneNumber}`} className="contents">
+            {phoneNumber ? (
+              <Link className={contactLinkClasses} href={`tel:${phoneNumber}`}>
+                <GridItemContact>
                   <GridItemContactIconWrapper>
                     <Phone size={16} strokeWidth={1.5} absoluteStrokeWidth />
                   </GridItemContactIconWrapper>
-                  <GridItemContactText>
-                    {customer.phoneNumber}
-                  </GridItemContactText>
-                </Link>
-              </GridItemContact>
+                  <GridItemContactText>{phoneNumber}</GridItemContactText>
+                </GridItemContact>
+              </Link>
             ) : (
               <GridItemContact>
                 <GridItemContactIconWrapper>
@@ -137,17 +112,15 @@ export function CustomerGridItem({ customer }: CustomerGridItemProps) {
               </GridItemContact>
             )}
 
-            {customer.publicLink ? (
-              <GridItemContact>
-                <Link href={customer.publicLink} className="contents">
+            {publicLink ? (
+              <Link className={contactLinkClasses} href={publicLink}>
+                <GridItemContact>
                   <GridItemContactIconWrapper>
                     <Link2 size={16} strokeWidth={1.5} absoluteStrokeWidth />
                   </GridItemContactIconWrapper>
-                  <GridItemContactText>
-                    {customer.publicLink}
-                  </GridItemContactText>
-                </Link>
-              </GridItemContact>
+                  <GridItemContactText>{publicLink}</GridItemContactText>
+                </GridItemContact>
+              </Link>
             ) : (
               <GridItemContact>
                 <GridItemContactIconWrapper>
@@ -157,17 +130,17 @@ export function CustomerGridItem({ customer }: CustomerGridItemProps) {
               </GridItemContact>
             )}
 
-            <GridItemContact>
-              <Link href={`mailto:${customer.email}`} className="contents">
+            <Link className={contactLinkClasses} href={`mailto:${email}`}>
+              <GridItemContact>
                 <GridItemContactIconWrapper>
                   <Mail size={16} strokeWidth={1.5} absoluteStrokeWidth />
                 </GridItemContactIconWrapper>
-                <GridItemContactText>{customer.email}</GridItemContactText>
-              </Link>
-            </GridItemContact>
+                <GridItemContactText>{email}</GridItemContactText>
+              </GridItemContact>
+            </Link>
           </GridItemContactList>
         </>
-      )}
-    </GridItem>
+      }
+    />
   );
 }

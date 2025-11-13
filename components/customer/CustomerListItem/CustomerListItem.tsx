@@ -18,9 +18,9 @@ export type CustomerListItemProps = {
   id: number;
   fullName: string;
   email: string;
-  phoneNumber?: string | null;
-  publicLink?: string | null;
-  imageUrl?: string | null;
+  phoneNumber?: string;
+  publicLink?: string;
+  imageUrl?: string;
   company: {
     id: number;
     name: string;

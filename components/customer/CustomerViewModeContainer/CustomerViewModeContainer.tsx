@@ -3,6 +3,7 @@ import { CustomerGrid } from "../CustomerGrid";
 import { getCustomers } from "@/lib/queries/customers";
 import { ViewModeContainer } from "@/components/common/ViewMode";
 import { CustomerListItem } from "../CustomerListItem";
+import { CustomerGridItem } from "../CustomerGridItem";
 
 export async function CustomerViewModeContainer() {
   const customers = await getCustomers(1);
@@ -16,16 +17,31 @@ export async function CustomerViewModeContainer() {
               key={customer.id}
               id={customer.id}
               fullName={customer.fullName}
-              imageUrl={customer.imageUrl}
+              imageUrl={customer.imageUrl ?? undefined}
               email={customer.email}
-              phoneNumber={customer.phoneNumber}
-              publicLink={customer.publicLink}
+              phoneNumber={customer.phoneNumber ?? undefined}
+              publicLink={customer.publicLink ?? undefined}
               company={customer.company}
             />
           ))}
         </CustomerList>
       }
-      grid={<CustomerGrid customers={customers} />}
+      grid={
+        <CustomerGrid>
+          {customers.map((customer) => (
+            <CustomerGridItem
+              key={customer.id}
+              id={customer.id}
+              fullName={customer.fullName}
+              imageUrl={customer.imageUrl ?? undefined}
+              email={customer.email}
+              phoneNumber={customer.phoneNumber ?? undefined}
+              publicLink={customer.publicLink ?? undefined}
+              company={customer.company}
+            />
+          ))}
+        </CustomerGrid>
+      }
     />
   );
 }

@@ -1,4 +1,2 @@
-export {
-  CustomerGridItem,
-  type CustomerGridItemType,
-} from "./CustomerGridItem";
+export { CustomerGridItem } from "./CustomerGridItem";
+export { CustomerGridItemSkeleton } from "./CustomerGridItemSkeleton";
