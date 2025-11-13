@@ -28,7 +28,7 @@ export function ProjectStatusBadge({
 }: ProjectStatusBadgeProps) {
   return (
     <Badge
-      className={twMerge("w-[5.625rem] @max-md:hidden", className)}
+      className={twMerge("w-[5.625rem]", className)}
       color={getStatusBadgeColor(status.id)}
     >
       {status.name}

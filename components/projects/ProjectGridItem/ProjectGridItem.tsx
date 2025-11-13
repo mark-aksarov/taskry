@@ -98,9 +98,11 @@ export function ProjectGridItem({
         </ResponsiveMenuTrigger>
       }
       titleSlot={
-        <GridItemInfo className="max-sm:w-full max-sm:items-center sm:flex-1">
+        <GridItemInfo className="flex-auto">
           <GridItemTitle>
-            <Link href={`/projects/${id}`}>{title}</Link>
+            <Link className="inline" href={`/projects/${id}`}>
+              {title}
+            </Link>
           </GridItemTitle>
           <GridItemText>{`Deadline on ${formattedDeadline}`}</GridItemText>
         </GridItemInfo>
@@ -126,9 +128,7 @@ export function ProjectGridItem({
           className="h-[1.75rem] w-[3.75rem] justify-center rounded-full"
         />
       }
-      statusSlot={
-        <ProjectStatusBadge className="@max-md:hidden" status={status} />
-      }
+      statusSlot={<ProjectStatusBadge status={status} />}
       progressSlot={
         <GridItemProgress
           value={(tasksDone / tasks) * 100}

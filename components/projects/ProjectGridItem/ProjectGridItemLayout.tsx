@@ -25,7 +25,7 @@ export function ProjectGridItemLayout({
         {checkboxSlot}
         {menuTriggerSlot}
       </GridItemRow>
-      <GridItemRow className="max-sm:flex-col-reverse max-sm:gap-4">
+      <GridItemRow>
         {titleSlot}
         {creatorImageSlot}
       </GridItemRow>
