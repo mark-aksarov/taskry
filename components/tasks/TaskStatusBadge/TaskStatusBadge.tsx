@@ -25,7 +25,7 @@ interface TaskStatusBadgeProps {
 export function TaskStatusBadge({ className, status }: TaskStatusBadgeProps) {
   return (
     <Badge
-      className={twMerge("w-[5.625rem]", className)}
+      className={twMerge("block w-[5.625rem]", className)}
       color={getStatusBadgeColor(status.id)}
     >
       {status.name}
