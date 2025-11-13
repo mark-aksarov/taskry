@@ -39,6 +39,7 @@ export async function TaskViewModeContainer() {
               }}
               commentsCount={task._count.comments}
               subtasksCount={task._count.subtasks}
+              showCheckbox
             />
           ))}
         </TaskList>

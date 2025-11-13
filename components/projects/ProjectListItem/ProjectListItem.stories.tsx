@@ -14,51 +14,97 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    project: {
-      id: 1,
-      title: "Website Redesign",
-      deadline: new Date("2025-06-30"),
-      creator: {
-        id: "user1",
-        fullName: "Alice Smith",
-        imageUrl: "/woman.jpg",
-      },
-      status: {
-        nameEn: "Active",
-      },
-      category: { id: 1, name: "Design" },
-      customer: {
-        id: 1,
-        fullName: "John Doe",
-        company: { name: "Doe Inc." },
-      },
-      tasks: [
-        { statusId: 1 },
-        { statusId: 2 },
-        { statusId: 2 },
-        { statusId: 3 },
-      ],
+    id: 1,
+    title: "Website Redesign",
+    deadline: new Date("2025-06-30"),
+    creator: {
+      id: "user1",
+      fullName: "Alice Smith",
+      imageUrl: "/woman.jpg",
     },
+    status: {
+      id: 1,
+      name: "Active",
+    },
+    category: { id: 1, name: "Design" },
+    customer: {
+      id: 1,
+      imageUrl: "/man.jpg",
+      fullName: "John Doe",
+    },
+    company: {
+      id: 1,
+      name: "Doe Inc.",
+    },
+    messages: 5,
+    showCheckbox: false,
   },
 } satisfies Story;
 
 export const WithoutCreator = {
   args: {
-    project: {
-      ...Default.args.project,
-      creator: null,
+    ...Default.args,
+    creator: undefined,
+  },
+} satisfies Story;
+
+export const WithoutCreatorImage = {
+  args: {
+    ...Default.args,
+    creator: {
+      ...Default.args.creator,
+      imageUrl: undefined,
     },
+  },
+} satisfies Story;
+
+export const WithoutCustomer = {
+  args: {
+    ...Default.args,
+    customer: undefined,
+  },
+} satisfies Story;
+
+export const WithoutCustomerImage = {
+  args: {
+    ...Default.args,
+    customer: {
+      ...Default.args.customer,
+      imageUrl: undefined,
+    },
+  },
+} satisfies Story;
+
+export const WithoutCompany = {
+  args: {
+    ...Default.args,
+    company: undefined,
   },
 } satisfies Story;
 
 export const WithCheckbox = {
   args: {
+    ...Default.args,
     showCheckbox: true,
   },
 } satisfies Story;
 
-export const Skeleton = {
+export const WithActiveStatus = {
   args: {
-    project: undefined,
+    ...Default.args,
+    status: {
+      id: 2,
+      name: "Active",
+    },
+  },
+} satisfies Story;
+
+export const WithCompletedStatus = {
+  args: {
+    ...Default.args,
+    status: {
+      id: 3,
+      name: "Completed",
+    },
   },
 } satisfies Story;

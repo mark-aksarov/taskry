@@ -4,3 +4,7 @@ export { ListItemInfo, ListItemInfoSkeleton } from "./ListItemInfo";
 export { ListItemTitle } from "./ListItemTitle";
 export { ListItemText } from "./ListItemText";
 export { ListItemProgress, ListItemProgressSkeleton } from "./ListItemProgress";
+export {
+  ListItemImageInfo,
+  ListItemImageInfoSkeleton,
+} from "./ListItemImageInfo";
