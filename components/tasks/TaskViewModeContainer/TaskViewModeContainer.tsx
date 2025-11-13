@@ -12,8 +12,6 @@ export async function TaskViewModeContainer() {
     id: task.id,
     title: task.title,
     deadline: task.deadline,
-    totalSubtasks: task.subtasks.length,
-    subtasksDone: task.subtasks.filter((s) => s.isDone).length,
     assignee: task.assignee
       ? {
           id: task.assignee.id,
@@ -47,7 +45,12 @@ export async function TaskViewModeContainer() {
       grid={
         <TaskGrid>
           {tasks.map((task) => (
-            <TaskGridItem key={task.id} {...commonProps(task)} />
+            <TaskGridItem
+              key={task.id}
+              totalSubtasks={task.subtasks.length}
+              subtasksDone={task.subtasks.filter((s) => s.isDone).length}
+              {...commonProps(task)}
+            />
           ))}
         </TaskGrid>
       }

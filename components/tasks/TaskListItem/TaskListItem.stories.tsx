@@ -38,8 +38,6 @@ export const Default = {
     category: { id: 1, name: "Design" },
     status: { id: 1, name: "Pending" },
     assignee: { id: "user1", imageUrl: "/man.jpg", fullName: "John Doe" },
-    totalSubtasks: 6,
-    subtasksDone: 2,
     commentsCount: 10,
     subtasksCount: 6,
   },
@@ -56,5 +54,35 @@ export const WithoutAssignee = {
   args: {
     ...Default.args,
     assignee: undefined,
+  },
+} satisfies Story;
+
+export const WithoutAssigneeImage = {
+  args: {
+    ...Default.args,
+    assignee: {
+      ...Default.args.assignee,
+      imageUrl: undefined,
+    },
+  },
+} satisfies Story;
+
+export const WithActiveStatus = {
+  args: {
+    ...Default.args,
+    status: {
+      id: 2,
+      name: "Active",
+    },
+  },
+} satisfies Story;
+
+export const WithCompletedStatus = {
+  args: {
+    ...Default.args,
+    status: {
+      id: 3,
+      name: "Completed",
+    },
   },
 } satisfies Story;
