@@ -4,7 +4,10 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { PageDecorator } from "@/.storybook/PageDecorator";
 import { mocked } from "storybook/test";
 import { usePathname } from "next/navigation";
-import { ProfileInfo } from "@/components/profile/ProfileInfo";
+import {
+  ProfileInfo,
+  ProfileInfoSkeleton,
+} from "@/components/profile/ProfileInfo";
 import { ProfileHeader } from "@/components/profile/ProfileHeader";
 
 import {
@@ -41,7 +44,7 @@ export const Default = {
 
 export const Loading: Story = {
   args: {
-    ProfileInfoContainer: () => <ProfileInfo />,
+    ProfileInfoContainer: () => <ProfileInfoSkeleton />,
     ProfileHeaderContainer: () => <ProfileHeader />,
   },
 } satisfies Story;

@@ -3,7 +3,9 @@ import "server-only";
 import { cache } from "react";
 import prisma from "../prisma";
 import { UserItem, UserDetail } from "@/components/users/types";
+import { ThenArg } from "./types";
 
+export type GetUserByIdType = ThenArg<ReturnType<typeof getUserById>>;
 export const getUserById = cache(
   async (userId: string): Promise<UserDetail> => {
     return await prisma.user.findUniqueOrThrow({
