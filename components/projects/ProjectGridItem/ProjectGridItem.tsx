@@ -118,7 +118,7 @@ export function ProjectGridItem({
           <ImageContainer className="h-9 w-9" />
         )
       }
-      messagesSlot={
+      commentsSlot={
         <Button
           variant="outlined"
           label={comments}
