@@ -2,18 +2,26 @@
 
 import { Skeleton } from "@/components/ui";
 import { ProjectListItemLayout } from "./ProjectListItemLayout";
-import {
-  ListItemImageInfoSkeleton,
-  ListItemInfoSkeleton,
-} from "@/components/common/List/index";
+import { ListItemInfoSkeleton } from "@/components/common/List/index";
 import { MenuTriggerSkeleton } from "@/components/common/MenuTriggerSkeleton";
+import { ImageContainerSkeleton } from "@/components/common/ImageContainer";
 
 export const ProjectListItemSkeleton = () => {
   return (
     <ProjectListItemLayout
       titleSlot={<ListItemInfoSkeleton />}
-      creatorSlot={<ListItemImageInfoSkeleton className="@max-2xl:hidden" />}
-      customerSlot={<ListItemImageInfoSkeleton className="@max-3xl:hidden" />}
+      creatorSlot={
+        <>
+          <ImageContainerSkeleton className="h-9 w-9 @max-2xl:hidden" />
+          <ListItemInfoSkeleton className="@max-2xl:hidden" />
+        </>
+      }
+      customerSlot={
+        <>
+          <ImageContainerSkeleton className="h-9 w-9 @max-3xl:hidden" />
+          <ListItemInfoSkeleton className="@max-3xl:hidden" />
+        </>
+      }
       categorySlot={<ListItemInfoSkeleton className="@max-4xl:hidden" />}
       companySlot={<ListItemInfoSkeleton className="@max-5xl:hidden" />}
       statusSlot={

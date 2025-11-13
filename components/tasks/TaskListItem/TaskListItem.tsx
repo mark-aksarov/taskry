@@ -19,7 +19,6 @@ import {
   ListItemInfo,
   ListItemText,
   ListItemTitle,
-  ListItemImageInfo,
 } from "@/components/common/List";
 
 import { ImageContainer } from "@/components/common/ImageContainer";
@@ -90,27 +89,29 @@ export const TaskListItem = ({
         </ListItemInfo>
       }
       assigneeSlot={
-        <ListItemImageInfo className="@max-2xl:hidden">
+        <>
           {assignee?.imageUrl ? (
-            <Link href={`/users/${assignee.id}`}>
+            <Link className="@max-2xl:hidden" href={`/users/${assignee.id}`}>
               <ImageContainer className="h-9 w-9">
                 <Image fill src={assignee.imageUrl} alt={assignee.fullName} />
               </ImageContainer>
             </Link>
           ) : (
-            <ImageContainer className="h-9 w-9" />
+            <ImageContainer className="h-9 w-9 @max-2xl:hidden" />
           )}
-          <ListItemTitle>Assignee</ListItemTitle>
-          {assignee ? (
-            <ListItemText>
-              <Link className="block truncate" href={`/users=${assignee.id}`}>
-                {assignee.fullName}
-              </Link>
-            </ListItemText>
-          ) : (
-            <ListItemText>Unknown assignee</ListItemText>
-          )}
-        </ListItemImageInfo>
+          <ListItemInfo className="@max-2xl:hidden">
+            <ListItemTitle>Assignee</ListItemTitle>
+            {assignee ? (
+              <ListItemText>
+                <Link className="block truncate" href={`/users=${assignee.id}`}>
+                  {assignee.fullName}
+                </Link>
+              </ListItemText>
+            ) : (
+              <ListItemText>Unknown assignee</ListItemText>
+            )}
+          </ListItemInfo>
+        </>
       }
       categorySlot={
         <ListItemInfo className="@max-3xl:hidden">

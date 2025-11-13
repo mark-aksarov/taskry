@@ -13,7 +13,6 @@ import {
 import { Item } from "react-stately";
 import { Checkbox, Button } from "@/components/ui";
 import {
-  ListItemImageInfo,
   ListItemInfo,
   ListItemText,
   ListItemTitle,
@@ -93,54 +92,63 @@ export const ProjectListItem = ({
         </ListItemInfo>
       }
       creatorSlot={
-        <ListItemImageInfo className="@max-2xl:hidden">
+        <>
           {creator?.imageUrl ? (
-            <Link href={`/users/${creator.id}`}>
+            <Link className="@max-2xl:hidden" href={`/users/${creator.id}`}>
               <ImageContainer className="h-9 w-9">
                 <Image fill src={creator.imageUrl} alt={creator.fullName} />
               </ImageContainer>
             </Link>
           ) : (
-            <ImageContainer className="h-9 w-9" />
+            <ImageContainer className="h-9 w-9 @max-2xl:hidden" />
           )}
-          <ListItemTitle>Creator</ListItemTitle>
-          {creator ? (
-            <ListItemText>
-              <Link className="block truncate" href={`/users=${creator.id}`}>
-                {creator.fullName}
-              </Link>
-            </ListItemText>
-          ) : (
-            <ListItemText>Unknown creator</ListItemText>
-          )}
-        </ListItemImageInfo>
+
+          <ListItemInfo className="@max!-2xl:hidden">
+            <ListItemTitle>Creator</ListItemTitle>
+            {creator ? (
+              <ListItemText>
+                <Link className="block truncate" href={`/users=${creator.id}`}>
+                  {creator.fullName}
+                </Link>
+              </ListItemText>
+            ) : (
+              <ListItemText>Unknown creator</ListItemText>
+            )}
+          </ListItemInfo>
+        </>
       }
       customerSlot={
-        <ListItemImageInfo className="@max-3xl:hidden">
+        <>
           {customer?.imageUrl ? (
-            <Link href={`/customers/${customer.id}`}>
+            <Link
+              className="@max-3xl:hidden"
+              href={`/customers/${customer.id}`}
+            >
               <ImageContainer className="h-9 w-9">
                 <Image fill src={customer.imageUrl} alt={customer.fullName} />
               </ImageContainer>
             </Link>
           ) : (
-            <ImageContainer className="h-9 w-9" />
+            <ImageContainer className="h-9 w-9 @max-3xl:hidden" />
           )}
-          <ListItemTitle>Customer</ListItemTitle>
 
-          {customer ? (
-            <ListItemText>
-              <Link
-                className="block truncate"
-                href={`/customers=${customer.id}`}
-              >
-                {customer.fullName}
-              </Link>
-            </ListItemText>
-          ) : (
-            <ListItemText>Unknown customer</ListItemText>
-          )}
-        </ListItemImageInfo>
+          <ListItemInfo className="@max-3xl:hidden">
+            <ListItemTitle>Customer</ListItemTitle>
+
+            {customer ? (
+              <ListItemText>
+                <Link
+                  className="block truncate"
+                  href={`/customers=${customer.id}`}
+                >
+                  {customer.fullName}
+                </Link>
+              </ListItemText>
+            ) : (
+              <ListItemText>Unknown customer</ListItemText>
+            )}
+          </ListItemInfo>
+        </>
       }
       categorySlot={
         <ListItemInfo className="@max-4xl:hidden">

@@ -2,7 +2,9 @@ import "server-only";
 
 import { cache } from "react";
 import prisma from "../prisma";
+import { ThenArg } from "./types";
 
+export type GetCustomersType = ThenArg<ReturnType<typeof getCustomers>>;
 export const getCustomers = cache(async (workspaceId: number) => {
   return await prisma.customer.findMany({
     where: {

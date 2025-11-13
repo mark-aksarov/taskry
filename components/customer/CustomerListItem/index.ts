@@ -1,4 +1,2 @@
-export {
-  CustomerListItem,
-  type CustomerListItemType,
-} from "./CustomerListItem";
+export { CustomerListItem } from "./CustomerListItem";
+export { CustomerListItemSkeleton } from "./CustomerListItemSkeleton";

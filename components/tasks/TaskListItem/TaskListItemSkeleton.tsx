@@ -1,16 +1,19 @@
-import {
-  ListItemImageInfoSkeleton,
-  ListItemInfoSkeleton,
-} from "@/components/common/List";
+import { ListItemInfoSkeleton } from "@/components/common/List";
 import { MenuTriggerSkeleton } from "@/components/common/MenuTriggerSkeleton";
 import { TaskListItemLayout } from "./TaskListItemLayout";
 import { Skeleton } from "@/components/ui";
+import { ImageContainerSkeleton } from "@/components/common/ImageContainer";
 
 export const TaskListItemSkeleton = () => {
   return (
     <TaskListItemLayout
       titleSlot={<ListItemInfoSkeleton />}
-      assigneeSlot={<ListItemImageInfoSkeleton className="@max-2xl:hidden" />}
+      assigneeSlot={
+        <>
+          <ImageContainerSkeleton className="h-9 w-9 @max-2xl:hidden" />
+          <ListItemInfoSkeleton className="@max-2xl:hidden" />
+        </>
+      }
       categorySlot={<ListItemInfoSkeleton className="@max-3xl:hidden" />}
       projectSlot={<ListItemInfoSkeleton className="@max-4xl:hidden" />}
       statusSlot={
