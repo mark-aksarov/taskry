@@ -3,6 +3,7 @@ import { UserGrid } from "../UserGrid";
 import { getUsers } from "@/lib/queries/user";
 import { ViewModeContainer } from "@/components/common/ViewMode";
 import { UserListItem } from "../UserListItem";
+import { UserGridItem } from "../UserGridItem";
 
 export async function UserViewModeContainer() {
   const users = await getUsers(1);
@@ -32,7 +33,28 @@ export async function UserViewModeContainer() {
           ))}
         </UserList>
       }
-      grid={<UserGrid users={users} />}
+      grid={
+        <UserGrid>
+          {users.map((user) => (
+            <UserGridItem
+              key={user.id}
+              id={user.id}
+              fullName={user.fullName}
+              imageUrl={user.imageUrl ?? undefined}
+              email={user.email}
+              phoneNumber={user.phoneNumber ?? undefined}
+              publicLink={user.publicLink ?? undefined}
+              position={
+                user.position
+                  ? {
+                      name: user.position.name,
+                    }
+                  : undefined
+              }
+            />
+          ))}
+        </UserGrid>
+      }
     />
   );
 }

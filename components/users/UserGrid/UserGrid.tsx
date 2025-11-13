@@ -1,12 +1,5 @@
-import { Grid } from "@/components/common/Grid";
-import { UserGridItem, UserGridItemType } from "../UserGridItem";
+import { Grid } from "@/components/common/Grid/Grid";
 
-export function UserGrid({ users }: { users: UserGridItemType[] }) {
-  return (
-    <Grid>
-      {users.map((user) => (
-        <UserGridItem key={user.id} user={user} />
-      ))}
-    </Grid>
-  );
+export function UserGrid({ children }: { children: React.ReactNode }) {
+  return <Grid>{children}</Grid>;
 }

@@ -1,130 +1,104 @@
 "use client";
 
 import {
-  GridItem,
   GridItemInfo,
   GridItemText,
   GridItemTitle,
-  GridItemRow,
-  GridItemInfoSkeleton,
   GridItemContactList,
   GridItemContact,
   GridItemContactIconWrapper,
   GridItemContactText,
-  GridItemContactListSkeleton,
 } from "@/components/common/Grid";
 
+import Image from "next/image";
 import { Item } from "react-stately";
+import { UserGridItemLayout } from "./UserGridItemLayout";
+import { Button, Link, Checkbox, Divider } from "@/components/ui";
+import { ImageContainer } from "@/components/common/ImageContainer";
+import { MenuDialogHeader } from "@/components/common/MenuDialogHeader";
 import { Ellipsis, Link2, Mail, Pencil, Phone, Trash } from "lucide-react";
 import { ResponsiveMenuTrigger } from "@/components/common/ResponsiveMenuTrigger";
 
-import { Button, Link, Checkbox, Divider, Skeleton } from "@/components/ui";
-import Image from "next/image";
-import {
-  ImageContainer,
-  ImageContainerSkeleton,
-} from "@/components/common/ImageContainer";
-import { MenuDialogHeader } from "@/components/common/MenuDialogHeader";
-import { MenuTriggerSkeleton } from "@/components/common/MenuTriggerSkeleton";
-
-export interface UserGridItemType {
+export interface UserGridItemProps {
   id: string;
   fullName: string;
-  imageUrl?: string | null;
+  imageUrl?: string;
   position?: {
     name: string;
-  } | null;
-  phoneNumber?: string | null;
-  publicLink?: string | null;
+  };
+  phoneNumber?: string;
+  publicLink?: string;
   email: string;
 }
 
-export interface UserGridItemProps {
-  user?: UserGridItemType | null;
-}
-
-export function UserGridItem({ user }: UserGridItemProps) {
+export function UserGridItem({
+  id,
+  fullName,
+  imageUrl,
+  position,
+  phoneNumber,
+  publicLink,
+  email,
+}: UserGridItemProps) {
   return (
-    <GridItem>
-      {/* --- Checkbox & Menu --- */}
-      <GridItemRow>
-        {!user ? (
-          <MenuTriggerSkeleton className="-mr-2 ml-auto" />
-        ) : (
-          <>
-            <Checkbox aria-label={`${user.fullName} checkbox`} />
-            <ResponsiveMenuTrigger
-              placement="bottom right"
-              renderDialogHeader={() => <MenuDialogHeader heading="Actions" />}
-              renderButton={() => (
-                <Button
-                  aria-label="user menu"
-                  variant="ghost"
-                  iconLeft={
-                    <Ellipsis size={16} strokeWidth={1.5} absoluteStrokeWidth />
-                  }
-                  className="-mr-2 rounded-full"
-                />
-              )}
-            >
-              <Item textValue="Edit" key="edit">
-                <Pencil size={16} /> Edit
-              </Item>
-              <Item textValue="Delete" key="delete">
-                <Trash size={16} /> Delete
-              </Item>
-            </ResponsiveMenuTrigger>
-          </>
-        )}
-      </GridItemRow>
-
-      <div className="flex flex-col items-center justify-between gap-4">
-        {/* --- User Image --- */}
-        {!user ? (
-          <ImageContainerSkeleton className="h-20 w-20" />
-        ) : user.imageUrl ? (
-          <Link href={`/users/${user.id}`}>
+    <UserGridItemLayout
+      checkboxSlot={<Checkbox aria-label={`${fullName} checkbox`} />}
+      actionMenuSlot={
+        <ResponsiveMenuTrigger
+          placement="bottom right"
+          renderDialogHeader={() => <MenuDialogHeader heading="Actions" />}
+          renderButton={() => (
+            <Button
+              aria-label="user menu"
+              variant="ghost"
+              iconLeft={
+                <Ellipsis size={16} strokeWidth={1.5} absoluteStrokeWidth />
+              }
+              className="-mr-2 rounded-full"
+            />
+          )}
+        >
+          <Item textValue="Edit" key="edit">
+            <Pencil size={16} /> Edit
+          </Item>
+          <Item textValue="Delete" key="delete">
+            <Trash size={16} /> Delete
+          </Item>
+        </ResponsiveMenuTrigger>
+      }
+      imageSlot={
+        imageUrl ? (
+          <Link href={`/users/${id}`}>
             <ImageContainer className="h-20 w-20">
-              <Image fill src={user.imageUrl} alt={user.fullName} />
+              <Image fill src={imageUrl} alt={fullName} />
             </ImageContainer>
           </Link>
         ) : (
           <ImageContainer className="h-20 w-20" />
-        )}
+        )
+      }
+      titleSlot={
+        <GridItemInfo className="w-full items-center">
+          <GridItemTitle>
+            <Link href={`/tasks/${id}`}>{fullName}</Link>
+          </GridItemTitle>
 
-        {/* --- User Details --- */}
-        {!user ? (
-          <GridItemInfoSkeleton className="w-full items-center" />
-        ) : (
-          <GridItemInfo className="w-full items-center">
-            <GridItemTitle>
-              <Link href={`/tasks/${user.id}`}>{user.fullName}</Link>
-            </GridItemTitle>
-
-            <GridItemText>
-              {user.position ? user.position.name : "Unknown position"}
-            </GridItemText>
-          </GridItemInfo>
-        )}
-      </div>
-
-      {/* --- Contacts --- */}
-      {!user ? (
-        <>
-          <Skeleton className="h-px" />
-          <GridItemContactListSkeleton />
-        </>
-      ) : (
+          <GridItemText>
+            {position ? position.name : "Unknown position"}
+          </GridItemText>
+        </GridItemInfo>
+      }
+      phoneNumberSlot={
         <>
           <Divider />
           <GridItemContactList>
-            {user.phoneNumber ? (
+            {phoneNumber ? (
               <GridItemContact>
-                <Link href={`tel:${user.phoneNumber}`} className="contents">
+                <Link href={`tel:${phoneNumber}`} className="contents">
                   <GridItemContactIconWrapper>
                     <Phone size={16} strokeWidth={1.5} absoluteStrokeWidth />
                   </GridItemContactIconWrapper>
-                  <GridItemContactText>{user.phoneNumber}</GridItemContactText>
+                  <GridItemContactText>{phoneNumber}</GridItemContactText>
                 </Link>
               </GridItemContact>
             ) : (
@@ -136,13 +110,13 @@ export function UserGridItem({ user }: UserGridItemProps) {
               </GridItemContact>
             )}
 
-            {user.publicLink ? (
+            {publicLink ? (
               <GridItemContact>
-                <Link href={user.publicLink} className="contents">
+                <Link href={publicLink} className="contents">
                   <GridItemContactIconWrapper>
                     <Link2 size={16} strokeWidth={1.5} absoluteStrokeWidth />
                   </GridItemContactIconWrapper>
-                  <GridItemContactText>{user.publicLink}</GridItemContactText>
+                  <GridItemContactText>{publicLink}</GridItemContactText>
                 </Link>
               </GridItemContact>
             ) : (
@@ -155,16 +129,16 @@ export function UserGridItem({ user }: UserGridItemProps) {
             )}
 
             <GridItemContact>
-              <Link href={`mailto:${user.email}`} className="contents">
+              <Link href={`mailto:${email}`} className="contents">
                 <GridItemContactIconWrapper>
                   <Mail size={16} strokeWidth={1.5} absoluteStrokeWidth />
                 </GridItemContactIconWrapper>
-                <GridItemContactText>{user.email}</GridItemContactText>
+                <GridItemContactText>{email}</GridItemContactText>
               </Link>
             </GridItemContact>
           </GridItemContactList>
         </>
-      )}
-    </GridItem>
+      }
+    />
   );
 }
