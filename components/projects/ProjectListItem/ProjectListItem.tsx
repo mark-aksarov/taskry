@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo } from "react";
-import { Badge, BadgeColor, Link } from "@/components/ui";
+import { Link } from "@/components/ui";
 import {
   Check,
   CircleEllipsis,
@@ -84,7 +84,7 @@ export const ProjectListItem = ({
       titleSlot={
         <ListItemInfo>
           <ListItemTitle>
-            <Link className="inline" href={`/projects/${id}`}>
+            <Link className="block truncate" href={`/projects/${id}`}>
               {title}
             </Link>
           </ListItemTitle>
@@ -106,7 +106,9 @@ export const ProjectListItem = ({
           <ListItemTitle>Creator</ListItemTitle>
           {creator ? (
             <ListItemText>
-              <Link href={`/users=${creator.id}`}>{creator.fullName}</Link>
+              <Link className="block truncate" href={`/users=${creator.id}`}>
+                {creator.fullName}
+              </Link>
             </ListItemText>
           ) : (
             <ListItemText>Unknown creator</ListItemText>
@@ -128,7 +130,10 @@ export const ProjectListItem = ({
 
           {customer ? (
             <ListItemText>
-              <Link className="inline" href={`/customers=${customer.id}`}>
+              <Link
+                className="block truncate"
+                href={`/customers=${customer.id}`}
+              >
                 {customer.fullName}
               </Link>
             </ListItemText>
@@ -142,7 +147,10 @@ export const ProjectListItem = ({
           <ListItemTitle>Category</ListItemTitle>
 
           <ListItemText>
-            <Link className="inline" href={`/categories=${category.id}`}>
+            <Link
+              className="block truncate"
+              href={`/categories=${category.id}`}
+            >
               {category.name}
             </Link>
           </ListItemText>

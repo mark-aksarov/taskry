@@ -103,7 +103,7 @@ export const TaskListItem = ({
           <ListItemTitle>Assignee</ListItemTitle>
           {assignee ? (
             <ListItemText>
-              <Link className="inline" href={`/users=${assignee.id}`}>
+              <Link className="block truncate" href={`/users=${assignee.id}`}>
                 {assignee.fullName}
               </Link>
             </ListItemText>
@@ -117,7 +117,10 @@ export const TaskListItem = ({
           <ListItemTitle>Category</ListItemTitle>
 
           <ListItemText>
-            <Link className="inline" href={`/categories/${category.id}`}>
+            <Link
+              className="block truncate"
+              href={`/categories/${category.id}`}
+            >
               {category.name}
             </Link>
           </ListItemText>
@@ -127,7 +130,7 @@ export const TaskListItem = ({
         <ListItemInfo className="@max-4xl:hidden">
           <ListItemTitle>Project</ListItemTitle>
           <ListItemText>
-            <Link className="inline" href={`/projects/${project.id}`}>
+            <Link className="block truncate" href={`/projects/${project.id}`}>
               {project.title}
             </Link>
           </ListItemText>

@@ -16,8 +16,8 @@ export function ListItemInfo({ className, children }: ListItemInfoProps) {
 export function ListItemInfoSkeleton({ className }: { className?: string }) {
   return (
     <div className={twMerge(styles, className)}>
-      <Skeleton className="w-[10rem]" size="sm" />
-      <Skeleton className="w-[7rem]" size="xs" />
+      <Skeleton className="w-[10rem] max-w-full" size="sm" />
+      <Skeleton className="w-[7rem] max-w-full" size="xs" />
     </div>
   );
 }

@@ -16,7 +16,7 @@ export function ListItemImageInfo({
   return (
     <div className={twMerge(styles, className)}>
       {children[0]}
-      <div className="flex w-full flex-col gap-1">
+      <div className="flex w-full flex-col gap-1 overflow-hidden">
         {children[1]}
         {children[2]}
       </div>
@@ -32,9 +32,9 @@ export function ListItemImageInfoSkeleton({
   return (
     <div className={twMerge(styles, className)}>
       <ImageContainerSkeleton className="h-9 w-9" />
-      <div className="flex w-full flex-col gap-1">
-        <Skeleton className="w-[10rem]" size="sm" />
-        <Skeleton className="w-[7rem]" size="xs" />
+      <div className="flex w-full flex-col gap-1 overflow-hidden">
+        <Skeleton className="w-[10rem] max-w-full" size="sm" />
+        <Skeleton className="w-[7rem] max-w-full" size="xs" />
       </div>
     </div>
   );

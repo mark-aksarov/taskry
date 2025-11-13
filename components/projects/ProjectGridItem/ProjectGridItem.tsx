@@ -100,7 +100,7 @@ export function ProjectGridItem({
       titleSlot={
         <GridItemInfo className="flex-auto">
           <GridItemTitle>
-            <Link className="inline" href={`/projects/${id}`}>
+            <Link className="block truncate" href={`/projects/${id}`}>
               {title}
             </Link>
           </GridItemTitle>

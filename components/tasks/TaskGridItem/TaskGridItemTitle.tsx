@@ -23,7 +23,10 @@ export function TaskGridItemTitle({
         <RACDialogTrigger>
           <RACButton
             className={(renderProps) =>
-              focusRing({ ...renderProps, className: "cursor-pointer" })
+              focusRing({
+                ...renderProps,
+                className: "max-w-full cursor-pointer truncate",
+              })
             }
           >
             {title}
@@ -36,7 +39,10 @@ export function TaskGridItemTitle({
         <RACButton
           {...triggerProps}
           className={(renderProps) =>
-            focusRing({ ...renderProps, className: "cursor-pointer" })
+            focusRing({
+              ...renderProps,
+              className: "max-w-full cursor-pointer truncate",
+            })
           }
         >
           {title}

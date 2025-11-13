@@ -4,7 +4,7 @@ export function GridItemContactText({
   children: React.ReactNode;
 }) {
   return (
-    <span className="-m-1 max-w-full overflow-hidden p-1 text-xs font-medium text-nowrap overflow-ellipsis text-black dark:text-white">
+    <span className="-m-1 max-w-full truncate p-1 text-xs font-medium text-black dark:text-white">
       {children}
     </span>
   );

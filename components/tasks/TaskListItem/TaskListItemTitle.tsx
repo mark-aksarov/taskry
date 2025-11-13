@@ -25,7 +25,7 @@ export function TaskListItemTitle({
             className={(renderProps) =>
               focusRing({
                 ...renderProps,
-                className: "cursor-pointer",
+                className: "max-w-full cursor-pointer truncate",
               })
             }
           >
@@ -39,7 +39,10 @@ export function TaskListItemTitle({
         <RACButton
           {...triggerProps}
           className={(renderProps) =>
-            focusRing({ ...renderProps, className: "cursor-pointer" })
+            focusRing({
+              ...renderProps,
+              className: "max-w-full cursor-pointer truncate",
+            })
           }
         >
           {title}
