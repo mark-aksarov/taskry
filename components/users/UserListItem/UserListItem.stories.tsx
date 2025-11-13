@@ -10,38 +10,35 @@ const meta: Meta<typeof UserListItem> = {
 } satisfies Meta<typeof UserListItem>;
 
 export default meta;
-type Story = StoryObj<typeof UserListItem>;
+type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    user: {
-      id: "user1",
-      fullName: "John Doe",
-      email: "user1@example.com",
-      imageUrl: "/man.jpg",
-      phoneNumber: "+380990000001",
-      publicLink: "https://example.com/user1",
-      position: {
-        name: "Developer",
-      },
+    id: "user1",
+    fullName: "John Doe",
+    email: "user1@example.com",
+    imageUrl: "/man.jpg",
+    phoneNumber: "+380990000001",
+    publicLink: "https://example.com/user1",
+    position: {
+      name: "Developer",
     },
+  },
+} satisfies Story;
+
+export const WithCheckbox = {
+  args: {
+    ...Default.args,
+    showCheckbox: true,
   },
 } satisfies Story;
 
 export const WithoutImagePositionPhoneAndLink = {
   args: {
-    user: {
-      ...Default.args.user,
-      imageUrl: null,
-      position: null,
-      phoneNumber: null,
-      publicLink: null,
-    },
-  },
-} satisfies Story;
-
-export const Skeleton = {
-  args: {
-    user: undefined,
+    ...Default.args,
+    imageUrl: undefined,
+    position: undefined,
+    phoneNumber: undefined,
+    publicLink: undefined,
   },
 } satisfies Story;

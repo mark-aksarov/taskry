@@ -32,6 +32,7 @@ export const getUserById = cache(
   },
 );
 
+export type GetUsersType = ThenArg<ReturnType<typeof getUsers>>;
 export const getUsers = cache(
   async (workspaceId: number): Promise<UserItem[]> => {
     return await prisma.user.findMany({

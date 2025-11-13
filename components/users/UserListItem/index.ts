@@ -1,1 +1,2 @@
-export { UserListItem, type UserListItemType } from "./UserListItem";
+export { UserListItem } from "./UserListItem";
+export { UserListItemSkeleton } from "./UserListItemSkeleton";
