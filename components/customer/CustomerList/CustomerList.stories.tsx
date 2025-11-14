@@ -40,14 +40,14 @@ export const Default = {
           fullName="Clara Davis"
           imageUrl="/woman.jpg"
           email="clara.davis@example.com"
-          phoneNumber={null}
-          publicLink={null}
+          phoneNumber={undefined}
+          publicLink={undefined}
           company={{ id: 2, name: "DesignStudio" }}
         />
         <CustomerListItem
           id={4}
           fullName="David Lee"
-          imageUrl={null}
+          imageUrl={undefined}
           email="david.lee@example.com"
           phoneNumber="+44-7700-900123"
           publicLink="https://company.com/customers/david"

@@ -26,7 +26,7 @@ export const Default = {
             fullName: "Liam Turner",
             imageUrl: "/man.jpg",
           }}
-          status={{ id: 1, name: "Pending" }}
+          status={{ id: "pending", name: "Pending" }}
           tasks={4}
           tasksDone={1}
           comments={12}
@@ -40,7 +40,7 @@ export const Default = {
             fullName: "Emma Parker",
             imageUrl: "/woman.jpg",
           }}
-          status={{ id: 2, name: "Active" }}
+          status={{ id: "active", name: "Active" }}
           tasks={4}
           tasksDone={1}
           comments={9}
@@ -54,7 +54,7 @@ export const Default = {
             fullName: "Olivia White",
             imageUrl: "/woman.jpg",
           }}
-          status={{ id: 3, name: "Completed" }}
+          status={{ id: "completed", name: "Completed" }}
           tasks={3}
           tasksDone={2}
           comments={7}
@@ -68,7 +68,7 @@ export const Default = {
             fullName: "Ethan Green",
             imageUrl: "/man.jpg",
           }}
-          status={{ id: 1, name: "Pending" }}
+          status={{ id: "pending", name: "Pending" }}
           tasks={4}
           tasksDone={1}
           comments={5}
@@ -82,7 +82,7 @@ export const Default = {
             fullName: "Ava Black",
             imageUrl: "/woman.jpg",
           }}
-          status={{ id: 2, name: "Active" }}
+          status={{ id: "active", name: "Active" }}
           tasks={3}
           tasksDone={0}
           comments={6}
@@ -96,7 +96,7 @@ export const Default = {
             fullName: "Mason Moore",
             imageUrl: "/man.jpg",
           }}
-          status={{ id: 1, name: "Pending" }}
+          status={{ id: "pending", name: "Pending" }}
           tasks={4}
           tasksDone={1}
           comments={11}
@@ -110,7 +110,7 @@ export const Default = {
             fullName: "Isabella Hall",
             imageUrl: "/woman.jpg",
           }}
-          status={{ id: 3, name: "Completed" }}
+          status={{ id: "completed", name: "Completed" }}
           tasks={3}
           tasksDone={2}
           comments={4}
@@ -124,7 +124,7 @@ export const Default = {
             fullName: "Henry Young",
             imageUrl: "/man.jpg",
           }}
-          status={{ id: 2, name: "Active" }}
+          status={{ id: "active", name: "Active" }}
           tasks={3}
           tasksDone={0}
           comments={8}
@@ -138,7 +138,7 @@ export const Default = {
             fullName: "Ivy Adams",
             imageUrl: "/woman.jpg",
           }}
-          status={{ id: 1, name: "Pending" }}
+          status={{ id: "pending", name: "Pending" }}
           tasks={2}
           tasksDone={0}
           comments={3}
@@ -152,7 +152,7 @@ export const Default = {
             fullName: "Jack Carter",
             imageUrl: "/man.jpg",
           }}
-          status={{ id: 3, name: "Completed" }}
+          status={{ id: "completed", name: "Completed" }}
           tasks={3}
           tasksDone={1}
           comments={10}

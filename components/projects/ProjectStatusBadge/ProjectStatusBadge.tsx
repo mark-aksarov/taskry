@@ -1,13 +1,13 @@
 import { Badge, BadgeColor } from "@/components/ui";
 import { twMerge } from "tailwind-merge";
 
-function getStatusBadgeColor(statusId: number): BadgeColor {
+function getStatusBadgeColor(statusId: string): BadgeColor {
   switch (statusId) {
-    case 1:
+    case "pending":
       return "orange";
-    case 2:
+    case "active":
       return "green";
-    case 3:
+    case "completed":
       return "blue";
     default:
       throw new Error("Unknown status id");
@@ -17,7 +17,7 @@ function getStatusBadgeColor(statusId: number): BadgeColor {
 interface ProjectStatusBadgeProps {
   className?: string;
   status: {
-    id: number;
+    id: string;
     name: string;
   };
 }

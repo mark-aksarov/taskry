@@ -44,7 +44,7 @@ export const Default = {
             fullName: "Liam Turner",
           }}
           status={{
-            id: 1,
+            id: "pending",
             name: "Pending",
           }}
           comments={99}
@@ -58,7 +58,7 @@ export const Default = {
           deadline={new Date("2025-10-06")}
           assignee={undefined}
           status={{
-            id: 2,
+            id: "active",
             name: "Active",
           }}
           comments={10}
@@ -76,7 +76,7 @@ export const Default = {
             fullName: "Olivia White",
           }}
           status={{
-            id: 1,
+            id: "pending",
             name: "Pending",
           }}
           comments={6}
@@ -94,7 +94,7 @@ export const Default = {
             fullName: "Ethan Green",
           }}
           status={{
-            id: 3,
+            id: "completed",
             name: "Completed",
           }}
           comments={25}
@@ -112,7 +112,7 @@ export const Default = {
             fullName: "Mason Moore",
           }}
           status={{
-            id: 1,
+            id: "pending",
             name: "Pending",
           }}
           comments={99}
@@ -130,7 +130,7 @@ export const Default = {
             fullName: "Ava Black",
           }}
           status={{
-            id: 2,
+            id: "active",
             name: "Active",
           }}
           comments={99}
@@ -148,7 +148,7 @@ export const Default = {
             fullName: "Isabella Hall",
           }}
           status={{
-            id: 3,
+            id: "completed",
             name: "Completed",
           }}
           comments={47}
@@ -166,7 +166,7 @@ export const Default = {
             fullName: "Henry Young",
           }}
           status={{
-            id: 1,
+            id: "pending",
             name: "Pending",
           }}
           comments={18}
@@ -180,7 +180,7 @@ export const Default = {
           deadline={new Date("2025-10-26")}
           assignee={{ id: "user9", imageUrl: undefined, fullName: "Ivy Adams" }}
           status={{
-            id: 1,
+            id: "pending",
             name: "Pending",
           }}
           comments={67}
@@ -194,7 +194,7 @@ export const Default = {
           deadline={new Date("2025-10-29")}
           assignee={undefined}
           status={{
-            id: 2,
+            id: "active",
             name: "Active",
           }}
           comments={87}

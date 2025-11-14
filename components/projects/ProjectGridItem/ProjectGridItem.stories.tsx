@@ -30,7 +30,7 @@ export const Default = {
       imageUrl: "/woman.jpg",
     },
     status: {
-      id: 1,
+      id: "pending",
       name: "Pending",
     },
     comments: 5,
@@ -60,7 +60,7 @@ export const WithActiveStatus = {
   args: {
     ...Default.args,
     status: {
-      id: 2,
+      id: "active",
       name: "Active",
     },
   },
@@ -70,7 +70,7 @@ export const WithCompletedStatus = {
   args: {
     ...Default.args,
     status: {
-      id: 3,
+      id: "completed",
       name: "Completed",
     },
   },

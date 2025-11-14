@@ -29,7 +29,7 @@ export const Default = {
           customer={{ id: 1, fullName: "John Doe", imageUrl: "/man.jpg" }}
           category={{ id: 1, name: "Design" }}
           company={{ id: 1, name: "Doe Inc." }}
-          status={{ id: 1, name: "Pending" }}
+          status={{ id: "pending", name: "Pending" }}
           comments={4}
         />
 
@@ -45,7 +45,7 @@ export const Default = {
           customer={{ id: 2, fullName: "Sarah Lee", imageUrl: "/man.jpg" }}
           category={{ id: 2, name: "Development" }}
           company={{ id: 2, name: "Lee Corp." }}
-          status={{ id: 2, name: "Active" }}
+          status={{ id: "active", name: "Active" }}
           comments={5}
         />
 
@@ -61,7 +61,7 @@ export const Default = {
           customer={{ id: 3, fullName: "Mike Brown", imageUrl: "/man.jpg" }}
           category={{ id: 3, name: "Marketing" }}
           company={{ id: 3, name: "Brown LLC" }}
-          status={{ id: 3, name: "Completed" }}
+          status={{ id: "completed", name: "Completed" }}
           comments={3}
         />
 
@@ -77,7 +77,7 @@ export const Default = {
           customer={{ id: 4, fullName: "Emma Wilson", imageUrl: "/woman.jpg" }}
           category={{ id: 2, name: "IT" }}
           company={{ id: 4, name: "Wilson Tech" }}
-          status={{ id: 1, name: "Pending" }}
+          status={{ id: "pending", name: "Pending" }}
           comments={6}
         />
 
@@ -93,7 +93,7 @@ export const Default = {
           customer={{ id: 5, fullName: "Tom Harris", imageUrl: "/man.jpg" }}
           category={{ id: 3, name: "Marketing" }}
           company={{ id: 5, name: "Harris Co." }}
-          status={{ id: 2, name: "Active" }}
+          status={{ id: "active", name: "Active" }}
           comments={4}
         />
 
@@ -109,7 +109,7 @@ export const Default = {
           customer={{ id: 6, fullName: "Linda King", imageUrl: "/woman.jpg" }}
           category={{ id: 2, name: "Development" }}
           company={{ id: 6, name: "King Enterprises" }}
-          status={{ id: 1, name: "Pending" }}
+          status={{ id: "pending", name: "Pending" }}
           comments={7}
         />
 
@@ -125,7 +125,7 @@ export const Default = {
           customer={{ id: 7, fullName: "Peter Scott", imageUrl: "/man.jpg" }}
           category={{ id: 4, name: "Research" }}
           company={{ id: 7, name: "Scott Group" }}
-          status={{ id: 3, name: "Completed" }}
+          status={{ id: "completed", name: "Completed" }}
           comments={4}
         />
 
@@ -141,7 +141,7 @@ export const Default = {
           customer={{ id: 8, fullName: "Nancy Allen", imageUrl: "/woman.jpg" }}
           category={{ id: 1, name: "Design" }}
           company={{ id: 8, name: "Allen Studio" }}
-          status={{ id: 1, name: "Pending" }}
+          status={{ id: "pending", name: "Pending" }}
           comments={6}
         />
 
@@ -157,7 +157,7 @@ export const Default = {
           customer={{ id: 9, fullName: "George Baker", imageUrl: "/man.jpg" }}
           category={{ id: 2, name: "IT" }}
           company={{ id: 9, name: "Baker Tech" }}
-          status={{ id: 2, name: "Active" }}
+          status={{ id: "active", name: "Active" }}
           comments={3}
         />
 
@@ -177,7 +177,7 @@ export const Default = {
           }}
           category={{ id: 5, name: "Finance" }}
           company={{ id: 10, name: "Evans Ltd." }}
-          status={{ id: 3, name: "Completed" }}
+          status={{ id: "completed", name: "Completed" }}
           comments={8}
         />
       </>

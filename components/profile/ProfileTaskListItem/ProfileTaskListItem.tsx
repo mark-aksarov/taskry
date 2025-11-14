@@ -24,7 +24,7 @@ export interface ProfileTaskListItemProps {
   title: string;
   deadline?: Date;
   status: {
-    id: number;
+    id: string;
     name: string;
   };
   comments: number;

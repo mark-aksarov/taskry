@@ -47,7 +47,7 @@ export interface ProjectListItemProps {
     name: string;
   };
   status: {
-    id: number;
+    id: string;
     name: string;
   };
   comments: number;

@@ -36,7 +36,7 @@ export const Default = {
     deadline: new Date("2025-09-30"),
     project: { id: 1, title: "Website Redesign" },
     category: { id: 1, name: "Design" },
-    status: { id: 1, name: "Pending" },
+    status: { id: "pending", name: "Pending" },
     assignee: { id: "user1", imageUrl: "/man.jpg", fullName: "John Doe" },
     comments: 10,
     subtasks: 6,
@@ -71,7 +71,7 @@ export const WithActiveStatus = {
   args: {
     ...Default.args,
     status: {
-      id: 2,
+      id: "active",
       name: "Active",
     },
   },
@@ -81,7 +81,7 @@ export const WithCompletedStatus = {
   args: {
     ...Default.args,
     status: {
-      id: 3,
+      id: "completed",
       name: "Completed",
     },
   },

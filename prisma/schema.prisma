@@ -144,7 +144,7 @@ model Project {
   creatorId  String?
   customerId Int?
   categoryId Int
-  statusId   Int
+  statusId   String
 
   creator  User?           @relation(fields: [creatorId], references: [id], onDelete: SetNull)
   customer Customer?       @relation(fields: [customerId], references: [id], onDelete: SetNull)
@@ -184,7 +184,7 @@ model ProjectCategory {
 }
 
 model ProjectStatus {
-  id     Int    @id @default(autoincrement())
+  id     String @id
   nameEn String
   nameRu String
 
@@ -208,7 +208,7 @@ model Task {
   creatorId  String?
   assigneeId String?
   categoryId Int
-  statusId   Int
+  statusId   String
 
   project  Project      @relation(fields: [projectId], references: [id], onDelete: Cascade)
   creator  User?        @relation("CreatedTasks", fields: [creatorId], references: [id], onDelete: SetNull)
@@ -250,7 +250,7 @@ model TaskCategory {
 }
 
 model TaskStatus {
-  id     Int    @id @default(autoincrement())
+  id     String @id
   nameEn String
   nameRu String
 

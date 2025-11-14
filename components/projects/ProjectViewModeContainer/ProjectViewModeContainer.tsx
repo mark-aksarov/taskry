@@ -77,7 +77,9 @@ export async function ProjectViewModeContainer() {
                 name: project.status.nameEn,
               }}
               tasks={project.tasks.length}
-              tasksDone={project.tasks.filter((t) => t.statusId === 3).length}
+              tasksDone={
+                project.tasks.filter((t) => t.statusId === "completed").length
+              }
               comments={project._count.comments}
             />
           ))}

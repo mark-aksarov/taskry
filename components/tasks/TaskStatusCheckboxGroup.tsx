@@ -9,8 +9,8 @@ export function TaskStatusCheckboxGroup() {
       <Checkbox value="active" className="font-normal">
         Active
       </Checkbox>
-      <Checkbox value="done" className="font-normal">
-        Done
+      <Checkbox value="completed" className="font-normal">
+        Completed
       </Checkbox>
     </CheckboxGroup>
   );

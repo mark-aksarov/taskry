@@ -27,7 +27,7 @@ interface TaskDetailProps {
     title: string;
   };
   status: {
-    id: number;
+    id: string;
     name: string;
   };
   subtasks: {

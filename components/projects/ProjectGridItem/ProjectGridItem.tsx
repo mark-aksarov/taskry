@@ -34,7 +34,7 @@ export interface ProjectGridItemProps {
     imageUrl?: string;
   };
   status: {
-    id: number;
+    id: string;
     name: string;
   };
   tasks: number;

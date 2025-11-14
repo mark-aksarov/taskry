@@ -10,7 +10,7 @@ export function TaskStatusSelect() {
     >
       <Item key="pending">Pending</Item>
       <Item key="active">Active</Item>
-      <Item key="done">Done</Item>
+      <Item key="completed">Completed</Item>
     </ResponsiveSelect>
   );
 }

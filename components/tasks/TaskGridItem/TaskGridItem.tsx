@@ -37,7 +37,7 @@ export interface TaskGridItemProps {
     fullName: string;
   };
   status: {
-    id: number;
+    id: string;
     name: string;
   };
   comments: number;

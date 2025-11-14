@@ -30,8 +30,8 @@ export const Default = {
 export const WithoutImagePhoneAndLink = {
   args: {
     ...Default.args,
-    imageUrl: null,
-    phoneNumber: null,
-    publicLink: null,
+    imageUrl: undefined,
+    phoneNumber: undefined,
+    publicLink: undefined,
   },
 } satisfies Story;

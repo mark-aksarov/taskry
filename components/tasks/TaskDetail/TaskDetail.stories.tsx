@@ -47,8 +47,8 @@ export const Default = {
       title: "Website Redesign",
     },
     status: {
-      id: 301,
-      name: "In Progress",
+      id: "active",
+      name: "Active",
     },
     subtasks: [
       { id: 1, name: "Wireframe the layout", isDone: true },

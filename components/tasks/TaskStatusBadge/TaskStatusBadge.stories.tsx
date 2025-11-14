@@ -13,7 +13,7 @@ type Story = StoryObj<typeof meta>;
 export const Pending = {
   args: {
     status: {
-      id: 1,
+      id: "pending",
       name: "Pending",
     },
   },
@@ -22,7 +22,7 @@ export const Pending = {
 export const Active = {
   args: {
     status: {
-      id: 2,
+      id: "active",
       name: "Active",
     },
   },
@@ -31,7 +31,7 @@ export const Active = {
 export const Completed = {
   args: {
     status: {
-      id: 3,
+      id: "completed",
       name: "Completed",
     },
   },

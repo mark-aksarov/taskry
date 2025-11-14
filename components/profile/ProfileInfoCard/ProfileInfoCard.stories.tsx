@@ -1,12 +1,16 @@
-import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { ProfileInfoCard } from "./ProfileInfoCard";
 import { mocked } from "storybook/test";
-import { usePathname } from "next/navigation";
 import { ProfileInfo } from "../ProfileInfo";
+import { usePathname } from "next/navigation";
 import { ProfileHeader } from "../ProfileHeader";
-import { Default as ProfileHeaderStory } from "@/components/profile/ProfileHeader/ProfileHeader.stories";
-import { Default as ProfileInfoStory } from "@/components/profile/ProfileInfo/ProfileInfo.stories";
+import { ProfileInfoCard } from "./ProfileInfoCard";
+import { ProfileInfoSkeleton } from "../ProfileInfo";
+import { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { ProfileHeaderSkeleton } from "../ProfileHeader";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { Default as ProfileInfoStory } from "@/components/profile/ProfileInfo/ProfileInfo.stories";
+import { Default as ProfileHeaderStory } from "@/components/profile/ProfileHeader/ProfileHeader.stories";
+import { WithoutSomeData as ProfileInfoWithoutSomeDataStory } from "@/components/profile/ProfileInfo/ProfileInfo.stories";
+import { WithoutSomeData as ProfileHeaderWithoutSomeDataStory } from "@/components/profile/ProfileHeader/ProfileHeader.stories";
 
 const meta = {
   title: "components/profile/ProfileInfoCard",
@@ -31,36 +35,18 @@ export const Default = {
 
 export const Loading = {
   args: {
-    ProfileInfoContainer: () => <ProfileInfo />,
-    ProfileHeaderContainer: () => <ProfileHeader />,
+    ProfileInfoContainer: () => <ProfileInfoSkeleton />,
+    ProfileHeaderContainer: () => <ProfileHeaderSkeleton />,
   },
 } satisfies Story;
 
 export const WithoutSomeData = {
   args: {
     ProfileInfoContainer: () => (
-      <ProfileInfo
-        {...ProfileInfoStory.args}
-        user={{
-          ...ProfileInfoStory.args.user,
-          publicLink: null,
-          phoneNumber: null,
-          position: null,
-          birthdate: null,
-          address: null,
-          bio: null,
-        }}
-      />
+      <ProfileInfo {...ProfileInfoWithoutSomeDataStory.args} />
     ),
     ProfileHeaderContainer: () => (
-      <ProfileHeader
-        {...ProfileHeaderStory.args}
-        user={{
-          ...ProfileHeaderStory.args.user,
-          imageUrl: null,
-          position: null,
-        }}
-      />
+      <ProfileHeader {...ProfileHeaderWithoutSomeDataStory.args} />
     ),
   },
 } satisfies Story;

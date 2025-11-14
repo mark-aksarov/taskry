@@ -11,6 +11,9 @@ export const ProfileTaskListItemSkeleton = () => {
       subtasksSlot={
         <Skeleton className="h-[2rem] w-[3.75rem] @max-md:hidden" />
       }
+      statusSlot={
+        <Skeleton className="h-[1.75rem] w-[5.625rem] rounded-full @max-md:hidden" />
+      }
       actionMenuSlot={<MenuTriggerSkeleton />}
     />
   );
