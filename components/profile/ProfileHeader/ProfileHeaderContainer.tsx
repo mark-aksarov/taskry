@@ -11,7 +11,6 @@ const getUser = cache(async (userId: string) => {
       id: true,
       fullName: true,
       imageUrl: true,
-
       position: {
         select: {
           name: true,
@@ -24,5 +23,11 @@ const getUser = cache(async (userId: string) => {
 export async function ProfileHeaderContainer() {
   const user = await getUser("BKs42HvVDEZFoaJUmTqf1gTN0K8pUFjI");
 
-  return <ProfileHeader user={user} />;
+  return (
+    <ProfileHeader
+      fullName={user.fullName}
+      imageUrl={user.imageUrl ?? undefined}
+      position={user.position ? { name: user.position.name } : undefined}
+    />
+  );
 }

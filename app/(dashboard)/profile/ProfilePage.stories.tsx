@@ -8,7 +8,10 @@ import {
   ProfileInfo,
   ProfileInfoSkeleton,
 } from "@/components/profile/ProfileInfo";
-import { ProfileHeader } from "@/components/profile/ProfileHeader";
+import {
+  ProfileHeader,
+  ProfileHeaderSkeleton,
+} from "@/components/profile/ProfileHeader";
 
 import {
   Default as ProfileHeaderStory,
@@ -45,7 +48,7 @@ export const Default = {
 export const Loading: Story = {
   args: {
     ProfileInfoContainer: () => <ProfileInfoSkeleton />,
-    ProfileHeaderContainer: () => <ProfileHeader />,
+    ProfileHeaderContainer: () => <ProfileHeaderSkeleton />,
   },
 } satisfies Story;
 

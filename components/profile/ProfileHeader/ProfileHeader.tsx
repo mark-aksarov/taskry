@@ -1,46 +1,42 @@
-import {
-  ImageContainer,
-  ImageContainerSkeleton,
-} from "@/components/common/ImageContainer";
 import Image from "next/image";
-import {
-  ProfileHeaderInfo,
-  ProfileHeaderInfoSkeleton,
-} from "./ProfileHeaderInfo";
-import { ProfileHeaderTitle } from "./ProfileHeaderTitle";
+import { ProfileHeaderInfo } from "./ProfileHeaderInfo";
 import { ProfileHeaderText } from "./ProfileHeaderText";
+import { ProfileHeaderTitle } from "./ProfileHeaderTitle";
+import { ProfileHeaderLayout } from "./ProfileHeaderLayout";
+import { ImageContainer } from "@/components/common/ImageContainer";
 
-export interface UserProfileData {
+export interface ProfileHeaderProps {
   fullName: string;
-  imageUrl?: string | null;
+  imageUrl?: string;
   position?: {
     name: string;
-  } | null;
+  };
 }
 
-export function ProfileHeader({ user }: { user?: UserProfileData }) {
+export function ProfileHeader({
+  fullName,
+  imageUrl,
+  position,
+}: ProfileHeaderProps) {
   return (
-    <div className="inline-flex flex-col items-center gap-4">
-      {!user ? (
-        <ImageContainerSkeleton className="h-21 w-21" />
-      ) : user.imageUrl ? (
-        <ImageContainer className="h-21 w-21">
-          <Image fill src={user.imageUrl} alt={user.fullName} />
-        </ImageContainer>
-      ) : (
-        <ImageContainer className="h-21 w-21" />
-      )}
-
-      {!user ? (
-        <ProfileHeaderInfoSkeleton />
-      ) : (
+    <ProfileHeaderLayout
+      imageSlot={
+        imageUrl ? (
+          <ImageContainer className="h-21 w-21">
+            <Image fill src={imageUrl} alt={fullName} />
+          </ImageContainer>
+        ) : (
+          <ImageContainer className="h-21 w-21" />
+        )
+      }
+      infoSlot={
         <ProfileHeaderInfo>
-          <ProfileHeaderTitle>{user.fullName}</ProfileHeaderTitle>
+          <ProfileHeaderTitle>{fullName}</ProfileHeaderTitle>
           <ProfileHeaderText>
-            {user.position ? user.position.name : "Unknown position"}
+            {position ? position.name : "Unknown position"}
           </ProfileHeaderText>
         </ProfileHeaderInfo>
-      )}
-    </div>
+      }
+    />
   );
 }

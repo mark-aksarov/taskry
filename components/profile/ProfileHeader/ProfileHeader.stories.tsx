@@ -16,18 +16,16 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    user: {
-      fullName: "John Doe",
-      imageUrl: "/man.jpg",
-      position: { name: "Developer" },
+    fullName: "John Doe",
+    imageUrl: "/man.jpg",
+    position: {
+      name: "Developer",
     },
   },
 } satisfies Story;
 
 export const WithoutSomeData = {
   args: {
-    user: {
-      fullName: "John Doe",
-    },
+    fullName: "John Doe",
   },
 } satisfies Story;
