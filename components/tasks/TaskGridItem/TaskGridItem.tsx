@@ -138,7 +138,7 @@ export function TaskGridItem({
           className="h-[1.75rem] w-[3.75rem] justify-center rounded-full"
         />
       }
-      statusSlot={<TaskStatusBadge status={status} className="truncate px-2" />}
+      statusSlot={<TaskStatusBadge status={status} />}
       progressSlot={
         <GridItemProgress
           value={(subtasksDone / subtasks) * 100}
