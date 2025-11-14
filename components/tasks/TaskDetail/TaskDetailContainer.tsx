@@ -24,8 +24,17 @@ export function TaskDetailContainer({ taskId }: { taskId: number }) {
     <TaskDetail
       id={task.id}
       title={task.title}
-      description={task.description ?? undefined}
+      assignee={
+        task.assignee
+          ? {
+              id: task.assignee.id,
+              fullName: task.assignee.fullName,
+              imageUrl: task.assignee.imageUrl ?? undefined,
+            }
+          : undefined
+      }
       deadline={task.deadline}
+      description={task.description ?? undefined}
       category={task.category}
       project={task.project}
       status={{

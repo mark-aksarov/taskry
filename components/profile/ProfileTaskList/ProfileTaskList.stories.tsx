@@ -56,7 +56,7 @@ export const Default = {
           id={3}
           title="Database schema migration"
           deadline={new Date("2025-10-10")}
-          status={{ id: "completed", name: "Complete" }}
+          status={{ id: "completed", name: "Completed" }}
           comments={2}
           subtasks={2}
         />
@@ -80,7 +80,7 @@ export const Default = {
           id={6}
           title="Set up staging environment"
           deadline={new Date("2025-10-18")}
-          status={{ id: "completed", name: "Complete" }}
+          status={{ id: "completed", name: "Completed" }}
           comments={9}
           subtasks={16}
         />
@@ -88,7 +88,7 @@ export const Default = {
           id={7}
           title="Create onboarding flow"
           deadline={new Date("2025-10-20")}
-          status={{ id: "completed", name: "Complete" }}
+          status={{ id: "completed", name: "Completed" }}
           comments={12}
           subtasks={22}
         />
@@ -112,7 +112,7 @@ export const Default = {
           id={10}
           title="Refactor auth middleware"
           deadline={new Date("2025-10-28")}
-          status={{ id: "completed", name: "Complete" }}
+          status={{ id: "completed", name: "Completed" }}
           comments={13}
           subtasks={23}
         />

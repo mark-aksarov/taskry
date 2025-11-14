@@ -3,7 +3,7 @@ import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { UpdateSubtasksModal } from "./UpdateSubtasksModal";
 import { RACDialogTrigger, Skeleton } from "@/components/ui";
 import { UpdateSubtasksForm } from "../UpdateSubtasksForm";
-import { UpdateSubtasksButton } from "../UpdateSubtasksButton";
+import { NewSubtasksButton } from "../NewSubtasksButton";
 import { Default as UpdateSubtasksFormStory } from "@/components/subtasks/UpdateSubtasksForm/UpdateSubtasksForm.stories";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
@@ -21,7 +21,7 @@ const meta = {
   decorators: [
     (Story) => (
       <RACDialogTrigger>
-        <UpdateSubtasksButton />
+        <NewSubtasksButton />
         <Suspense>
           <Story />
         </Suspense>

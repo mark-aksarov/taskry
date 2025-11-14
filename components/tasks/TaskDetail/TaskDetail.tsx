@@ -8,16 +8,29 @@ import {
 import Image from "next/image";
 import { useMemo } from "react";
 import { TaskDetailLayout } from "./TaskDetailLayout";
-import { TaskCommentsModalTrigger } from "../TaskCommentsModalTrigger";
 import { TaskDetailStatusMenuTrigger } from "./TaskDetailStatusMenuTrigger";
 import { Attachment, Attachments } from "@/components/attachments/Attachments";
 import { SubtasksCheckboxGroup } from "@/components/subtasks/SubtasksCheckboxGroup";
+import { Badge, Button, Link } from "@/components/ui";
+import { ExternalLink } from "lucide-react";
+import { ImageContainer } from "@/components/common/ImageContainer";
+import { NewSubtasksButton } from "@/components/subtasks/NewSubtasksButton";
 
 interface TaskDetailProps {
   id: number;
   title: string;
+  assignee?: {
+    id: string;
+    fullName: string;
+    imageUrl?: string;
+  };
+  creator?: {
+    id: string;
+    fullName: string;
+    imageUrl?: string;
+  };
+  deadline: Date;
   description?: string;
-  deadline?: Date;
   category: {
     id: number;
     name: string;
@@ -45,8 +58,10 @@ interface TaskDetailProps {
 export function TaskDetail({
   id,
   title,
-  description,
+  assignee,
+  creator,
   deadline,
+  description,
   category,
   project,
   status,
@@ -57,6 +72,7 @@ export function TaskDetail({
 
   const formattedDeadline = useMemo(() => {
     if (!deadline) return "";
+
     return new Date(deadline).toLocaleDateString(locale, {
       day: "2-digit",
       month: "short",
@@ -72,8 +88,41 @@ export function TaskDetail({
         </h2>
       }
       statusMenuTriggerSlot={<TaskDetailStatusMenuTrigger />}
-      commentsModalTriggerSlot={
-        <TaskCommentsModalTrigger commentCount={27} taskId={id} />
+      openTaskSlot={
+        <Button
+          variant="outlined"
+          className="rounded-lg"
+          iconLeft={
+            <ExternalLink size={16} strokeWidth={1.5} absoluteStrokeWidth />
+          }
+        />
+      }
+      assigneesSlot={
+        <DetailInfo>
+          <DetailTitle>Assignee</DetailTitle>
+          <div className="flex items-center gap-2">
+            {assignee?.imageUrl ? (
+              <Link href={`/users/${id}`}>
+                <ImageContainer className="h-9 w-9">
+                  <Image fill src={assignee.imageUrl} alt={assignee.fullName} />
+                </ImageContainer>
+              </Link>
+            ) : (
+              <ImageContainer className="h-9 w-9" />
+            )}
+            <DetailText>
+              {assignee ? assignee.fullName : "Unassigned"}
+            </DetailText>
+          </div>
+        </DetailInfo>
+      }
+      deadlineSlot={
+        <DetailInfo className="md:gap-3.5">
+          <DetailTitle>Deadline</DetailTitle>
+          <Badge color="gray" className="self-start">
+            {formattedDeadline}
+          </Badge>
+        </DetailInfo>
       }
       descriptionSlot={
         <DetailInfo>
@@ -81,22 +130,12 @@ export function TaskDetail({
           <DetailText>{description}</DetailText>
         </DetailInfo>
       }
-      assigneesSlot={
-        <DetailInfo>
-          <DetailTitle>Assignees</DetailTitle>
-          <DetailText>John Doe</DetailText>
-        </DetailInfo>
-      }
-      deadlineSlot={
-        <DetailInfo>
-          <DetailTitle>Deadline</DetailTitle>
-          <DetailText>{formattedDeadline}</DetailText>
-        </DetailInfo>
-      }
       creatorSlot={
         <DetailInfo>
           <DetailTitle>Creator</DetailTitle>
-          <DetailText>John Doe</DetailText>
+          <DetailText>
+            {creator ? creator.fullName : "Unknown creator"}
+          </DetailText>
         </DetailInfo>
       }
       categoryNameSlot={
@@ -113,9 +152,8 @@ export function TaskDetail({
       }
       subtasksSlot={
         <DetailInfo>
-          <div className="relative">
-            <SubtasksCheckboxGroup subtasks={subtasks} />
-          </div>
+          <SubtasksCheckboxGroup subtasks={subtasks} />
+          <NewSubtasksButton />
         </DetailInfo>
       }
       attachmentsSlot={

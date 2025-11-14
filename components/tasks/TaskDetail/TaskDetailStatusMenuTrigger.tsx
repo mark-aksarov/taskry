@@ -19,7 +19,7 @@ export function TaskDetailStatusMenuTrigger() {
           {...triggerProps}
           variant="outlined"
           label="Active"
-          className="rounded-full"
+          className="rounded-lg"
           iconRight={
             <ChevronDown size={16} strokeWidth={1.5} absoluteStrokeWidth />
           }

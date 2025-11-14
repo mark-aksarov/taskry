@@ -3,7 +3,7 @@ import { DetailRow } from "@/components/common/Detail";
 interface TaskDetailLayoutProps {
   titleSlot: React.ReactNode;
   statusMenuTriggerSlot: React.ReactNode;
-  commentsModalTriggerSlot: React.ReactNode;
+  openTaskSlot: React.ReactNode;
   descriptionSlot: React.ReactNode;
   assigneesSlot: React.ReactNode;
   deadlineSlot: React.ReactNode;
@@ -17,10 +17,10 @@ interface TaskDetailLayoutProps {
 export function TaskDetailLayout({
   titleSlot,
   statusMenuTriggerSlot,
-  commentsModalTriggerSlot,
-  descriptionSlot,
+  openTaskSlot,
   assigneesSlot,
   deadlineSlot,
+  descriptionSlot,
   creatorSlot,
   categoryNameSlot,
   projectTitleSlot,
@@ -36,15 +36,15 @@ export function TaskDetailLayout({
 
         <div className="flex gap-4">
           {statusMenuTriggerSlot}
-          {commentsModalTriggerSlot}
+          {openTaskSlot}
         </div>
       </div>
       <div className="flex flex-col gap-4">
-        <DetailRow className={rowStyles}>{descriptionSlot}</DetailRow>
         <DetailRow className={rowStyles}>
           {assigneesSlot}
           {deadlineSlot}
         </DetailRow>
+        <DetailRow className={rowStyles}>{descriptionSlot}</DetailRow>
         <DetailRow className={rowStyles}>
           {creatorSlot}
           {categoryNameSlot}

@@ -3,15 +3,15 @@
 import { RACButton, RACButtonProps } from "../ui";
 import { tv } from "tailwind-variants";
 import { composeRenderProps } from "react-aria-components";
-import { SquarePen } from "lucide-react";
+import { Plus } from "lucide-react";
 import { linkStyles } from "../ui";
 
 const styles = tv({
   extend: linkStyles,
-  base: "text-xs font-bold",
+  base: "text-sm font-semibold",
 });
 
-export function UpdateSubtasksButton({ className, ...props }: RACButtonProps) {
+export function NewSubtasksButton({ className, ...props }: RACButtonProps) {
   return (
     <RACButton
       {...props}
@@ -19,8 +19,8 @@ export function UpdateSubtasksButton({ className, ...props }: RACButtonProps) {
         styles({ ...renderProps, variant: "primary", className }),
       )}
     >
-      <SquarePen size={16} strokeWidth={1.5} absoluteStrokeWidth />
-      Update subtasks
+      <Plus size={16} strokeWidth={1.5} absoluteStrokeWidth />
+      New Subtask
     </RACButton>
   );
 }

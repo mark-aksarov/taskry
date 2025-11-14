@@ -13,14 +13,19 @@ import {
 } from "@/components/ui";
 import { MessagesSquare } from "lucide-react";
 import { useMediaQuery } from "react-responsive";
+import { twMerge } from "tailwind-merge";
 
-export function TaskCommentsModalTrigger({
-  commentCount,
-  taskId,
-}: {
+interface TaskCommentsModalTriggerProps {
+  className?: string;
   commentCount: number;
   taskId: number;
-}) {
+}
+
+export function TaskCommentsModalTrigger({
+  className,
+  commentCount,
+  taskId,
+}: TaskCommentsModalTriggerProps) {
   const CommentsContainer = useCommentsContainer();
 
   const isMd = useMediaQuery({ query: "(max-width: 48rem)" });
@@ -30,7 +35,10 @@ export function TaskCommentsModalTrigger({
       <Button
         variant="outlined"
         label={commentCount}
-        className="h-[1.75rem] w-[3.75rem] justify-center rounded-full @max-md:hidden"
+        className={twMerge(
+          "h-[1.75rem] w-[3.75rem] justify-center rounded-full @max-md:hidden",
+          className,
+        )}
         aria-label="Show task comments"
         iconLeft={
           <MessagesSquare size={16} strokeWidth={1.5} absoluteStrokeWidth />

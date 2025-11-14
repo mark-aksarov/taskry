@@ -7,8 +7,8 @@ export function TaskDetailSkeleton() {
   return (
     <TaskDetailLayout
       titleSlot={<Skeleton size="base" className="w-[15rem]" />}
-      statusMenuTriggerSlot={<Skeleton className="h-8 w-[5rem]" />}
-      commentsModalTriggerSlot={<Skeleton className="h-8 w-[3.75rem]" />}
+      statusMenuTriggerSlot={<Skeleton className="h-8 w-[5rem] rounded-lg" />}
+      openTaskSlot={<Skeleton className="h-8 w-8 rounded-lg" />}
       descriptionSlot={
         <DetailInfo>
           <Skeleton className="w-[7rem]" size="xs" />
