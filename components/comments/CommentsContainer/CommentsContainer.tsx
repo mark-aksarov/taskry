@@ -2,6 +2,7 @@ import useSWR from "swr";
 import { CommentItem, CommentItemSkeleton } from "../CommentItem";
 import { Repeat } from "@/components/common/Repeat";
 import { GetCommentsByTaskType } from "@/lib/queries/comments";
+import { CommentsEmptySection } from "../CommentsEmptySection";
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
@@ -17,6 +18,10 @@ export function CommentsContainer({ taskId }: { taskId: number }) {
   }
 
   if (!comments) return null;
+
+  if (comments.length === 0) {
+    return <CommentsEmptySection />;
+  }
 
   return (
     <>

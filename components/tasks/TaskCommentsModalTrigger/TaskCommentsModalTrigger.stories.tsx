@@ -7,6 +7,7 @@ import {
   CommentItemSkeleton,
 } from "@/components/comments/CommentItem";
 import { Repeat } from "@/components/common/Repeat";
+import { CommentsEmptySection } from "@/components/comments/CommentsEmptySection";
 
 export function MockedTaskCommentsContainer() {
   return (
@@ -165,6 +166,18 @@ export const Default = {
     (Story) => (
       <CommentsContainerProvider
         CommentsContainer={() => <MockedTaskCommentsContainer />}
+      >
+        <Story />
+      </CommentsContainerProvider>
+    ),
+  ],
+} satisfies Story;
+
+export const Empty = {
+  decorators: [
+    (Story) => (
+      <CommentsContainerProvider
+        CommentsContainer={() => <CommentsEmptySection />}
       >
         <Story />
       </CommentsContainerProvider>
