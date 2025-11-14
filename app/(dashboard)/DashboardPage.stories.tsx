@@ -7,7 +7,7 @@ import { usePathname } from "next/navigation";
 import {
   TotalProjectsCard,
   TotalProjectsCardSkeleton,
-} from "@/components/dashboard/TotalProjectsCard";
+} from "@/components/projects/TotalProjectsCard";
 import {
   AssignedTasksSection,
   AssignedTasksSectionHeading,
@@ -15,12 +15,12 @@ import {
 import {
   TotalTasksCard,
   TotalTasksCardSkeleton,
-} from "@/components/dashboard/TotalTasksCard";
+} from "@/components/tasks/TotalTasksCard";
 import { Repeat } from "@/components/common/Repeat";
 import { TaskList } from "@/components/tasks/TaskList";
-import { TotalUsersCard } from "@/components/dashboard/TotalUsersCard";
+import { TotalUsersCard } from "@/components/users/TotalUsersCard";
 import { TaskListItemSkeleton } from "@/components/tasks/TaskListItem";
-import { TotalCustomersCard } from "@/components/dashboard/TotalCustomersCard";
+import { TotalCustomersCard } from "@/components/customer/TotalCustomersCard";
 import { Default as TaskListStory } from "@/components/tasks/TaskList/TaskList.stories";
 import { AssignedTasksEmptyCard } from "@/components/tasks/AssignedTasks/AssignedTasksEmptyCard";
 import {

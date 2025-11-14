@@ -5,10 +5,10 @@ import {
   ToolbarMobileHeading,
   ToolbarMobileTop,
 } from "@/components/common/Toolbar";
-import { TotalProjectsCardSkeleton } from "@/components/dashboard/TotalProjectsCard";
-import { TotalTasksCardSkeleton } from "@/components/dashboard/TotalTasksCard";
-import { TotalCustomersCardSkeleton } from "@/components/dashboard/TotalCustomersCard";
-import { TotalUsersCardSkeleton } from "@/components/dashboard/TotalUsersCard";
+import { TotalProjectsCardSkeleton } from "@/components/projects/TotalProjectsCard";
+import { TotalTasksCardSkeleton } from "@/components/tasks/TotalTasksCard";
+import { TotalCustomersCardSkeleton } from "@/components/customer/TotalCustomersCard";
+import { TotalUsersCardSkeleton } from "@/components/users/TotalUsersCard";
 import { TaskList } from "@/components/tasks/TaskList";
 import { Repeat } from "@/components/common/Repeat";
 import { TaskListItemSkeleton } from "@/components/tasks/TaskListItem";

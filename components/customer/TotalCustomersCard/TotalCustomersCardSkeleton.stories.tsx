@@ -3,12 +3,12 @@ import { TotalCustomersCardSkeleton } from "./TotalCustomersCardSkeleton";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {
-  title: "Components/dashboard/TotalCustomersCardSkeleton",
+  title: "Components/customers/TotalCustomersCardSkeleton",
   component: TotalCustomersCardSkeleton,
   tags: ["autodocs"],
   decorators: [
     (Story) => (
-      <div className="w-[500px]">
+      <div className="max-w-[500px]">
         <Story />
       </div>
     ),

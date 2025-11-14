@@ -1,25 +1,25 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { TotalCustomersCard } from "./TotalCustomersCard";
+import { TotalTasksCard } from "./TotalTasksCard";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {
-  title: "Components/dashboard/TotalCustomersCard",
-  component: TotalCustomersCard,
+  title: "Components/tasks/TotalTasksCard",
+  component: TotalTasksCard,
   tags: ["autodocs"],
   decorators: [
     (Story) => (
-      <div className="w-[500px]">
+      <div className="max-w-[500px]">
         <Story />
       </div>
     ),
     withThemedBackground,
   ],
   args: {
-    totalCustomers: 20,
+    totalTasks: 500,
   },
-} satisfies Meta<typeof TotalCustomersCard>;
+} satisfies Meta<typeof TotalTasksCard>;
 
 export default meta;
-type Story = StoryObj<typeof meta>;
+type Story = StoryObj<typeof TotalTasksCard>;
 
 export const Default = {} satisfies Story;

@@ -7,7 +7,7 @@ import { DashboardCardText } from "./DashboardCardText";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {
-  title: "Components/dashboard/DashboardCard",
+  title: "Components/common/DashboardCard",
   component: DashboardCard,
   tags: ["autodocs"],
   decorators: [

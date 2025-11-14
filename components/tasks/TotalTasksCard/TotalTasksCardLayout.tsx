@@ -1,13 +1,15 @@
-import { Skeleton } from "@/components/ui";
 import {
   DashboardCard,
   DashboardCardIcon,
   DashboardCardText,
-  DashboardCardValue,
-} from "../DashboardCard";
+} from "@/components/common/DashboardCard";
 import { IconlyCalendar } from "@/components/icons/IconlyCalendar";
 
-export const TotalTasksCard = ({ totalTasks }: { totalTasks?: number }) => {
+export const TotalTasksCardLayout = ({
+  children,
+}: {
+  children: React.ReactNode;
+}) => {
   return (
     <DashboardCard
       text={<DashboardCardText>Total Tasks</DashboardCardText>}
@@ -16,13 +18,7 @@ export const TotalTasksCard = ({ totalTasks }: { totalTasks?: number }) => {
           <IconlyCalendar size={24} />
         </DashboardCardIcon>
       }
-      value={
-        totalTasks === undefined ? (
-          <Skeleton className="w-[3rem]" size="xl" />
-        ) : (
-          <DashboardCardValue>{totalTasks}</DashboardCardValue>
-        )
-      }
+      value={children}
     />
   );
 };
