@@ -18,8 +18,11 @@ import { TaskActionsMenuTrigger } from "@/components/tasks/TaskActionsMenuTrigge
 import { ProjectCheckboxGroupSkeleton } from "@/components/projects/ProjectCheckboxGroup";
 import { FiltersBottomSheetTrigger } from "@/components/common/FiltersBottomSheetTrigger";
 import { TaskCategoryCheckboxGroupSkeleton } from "@/components/tasks/TaskCategoryCheckboxGroup";
-import { NewTaskModal } from "@/components/tasks/NewTaskModal/NewTaskModal";
-import { NewTaskForm } from "@/components/tasks/NewTaskForm";
+import { NewTaskModal } from "@/components/tasks/NewTaskModal";
+import {
+  NewTaskForm,
+  NewTaskFormSkeleton,
+} from "@/components/tasks/NewTaskForm";
 import {
   FieldGroupSkeleton,
   FieldSkeleton,
@@ -80,52 +83,14 @@ export function TasksPage({
   );
 
   const newTaskForm = (
-    <NewTaskForm
-      taskStatusSelect={
-        <Suspense
-          fallback={
-            <FieldSkeleton>
-              <FieldGroupSkeleton />
-            </FieldSkeleton>
-          }
-        >
-          <TaskStatusSelectContainer />
-        </Suspense>
-      }
-      taskCategorySelect={
-        <Suspense
-          fallback={
-            <FieldSkeleton>
-              <FieldGroupSkeleton />
-            </FieldSkeleton>
-          }
-        >
-          <TaskCategorySelectContainer />
-        </Suspense>
-      }
-      projectSelect={
-        <Suspense
-          fallback={
-            <FieldSkeleton>
-              <FieldGroupSkeleton />
-            </FieldSkeleton>
-          }
-        >
-          <ProjectSelectContainer />
-        </Suspense>
-      }
-      assigneeSelect={
-        <Suspense
-          fallback={
-            <FieldSkeleton>
-              <FieldGroupSkeleton />
-            </FieldSkeleton>
-          }
-        >
-          <UserSelectContainer />
-        </Suspense>
-      }
-    />
+    <Suspense fallback={<NewTaskFormSkeleton />}>
+      <NewTaskForm
+        taskStatusSelect={<TaskStatusSelectContainer />}
+        taskCategorySelect={<TaskCategorySelectContainer />}
+        projectSelect={<ProjectSelectContainer />}
+        assigneeSelect={<UserSelectContainer />}
+      />
+    </Suspense>
   );
 
   return (
