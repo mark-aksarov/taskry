@@ -2,16 +2,17 @@
 
 import { RACForm } from "@/components/ui";
 import { TextField } from "@/components/ui";
-import { TaskStatusCheckboxGroup } from "../TaskStatusCheckboxGroup";
 import { TaskFiltersDeadline } from "../TaskFiltersDeadline";
 
 interface TaskFiltersFormProps {
+  statusCheckboxGroup: React.ReactNode;
   categoryCheckboxGroup: React.ReactNode;
   projectCheckboxGroup: React.ReactNode;
   creatorCheckboxGroup: React.ReactNode;
 }
 
 export function TaskFiltersForm({
+  statusCheckboxGroup,
   categoryCheckboxGroup,
   projectCheckboxGroup,
   creatorCheckboxGroup,
@@ -21,7 +22,7 @@ export function TaskFiltersForm({
       <div className="flex flex-col gap-4">
         <TextField label="Title" placeholder="Title" />
         <TaskFiltersDeadline />
-        <TaskStatusCheckboxGroup />
+        {statusCheckboxGroup}
         {categoryCheckboxGroup}
         {projectCheckboxGroup}
         {creatorCheckboxGroup}

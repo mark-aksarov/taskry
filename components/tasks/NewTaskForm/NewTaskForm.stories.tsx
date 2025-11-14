@@ -3,7 +3,7 @@ import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { UserSelect } from "@/components/users/UserSelect";
 import { TaskCategorySelect } from "../TaskCategorySelect";
 import { ProjectSelect } from "@/components/projects/ProjectSelect";
-import { TaskStatusSelect } from "../TaskStatusSelect/TaskStatusSelect";
+import { TaskStatusSelect } from "../TaskStatusSelect";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { Default as UserSelectStory } from "@/components/users/UserSelect/UserSelect.stories";
 import { Default as TaskCategorySelectStory } from "../TaskCategorySelect/TaskCategorySelect.stories";

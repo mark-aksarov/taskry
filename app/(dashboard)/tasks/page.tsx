@@ -11,6 +11,7 @@ import { UserSelectContainer } from "@/components/users/UserSelect";
 import { TaskDetailContainerProvider } from "@/components/tasks/TaskDetail";
 import { CommentsContainerProvider } from "@/components/comments/CommentsContainer";
 import { TaskStatusSelectContainer } from "@/components/tasks/TaskStatusSelect/TaskStatusSelectContainer";
+import { TaskStatusCheckboxGroupContainer } from "@/components/tasks/TaskStatusCheckboxGroup/TaskStatusCheckboxGroupContainer";
 
 export default async function AppTasksPage() {
   const tasks = await getTasks();
@@ -21,6 +22,7 @@ export default async function AppTasksPage() {
     <TaskDetailContainerProvider>
       <CommentsContainerProvider>
         <TasksPage
+          TaskStatusCheckboxGroupContainer={TaskStatusCheckboxGroupContainer}
           TaskCategoryCheckboxGroupContainer={
             TaskCategoryCheckboxGroupContainer
           }

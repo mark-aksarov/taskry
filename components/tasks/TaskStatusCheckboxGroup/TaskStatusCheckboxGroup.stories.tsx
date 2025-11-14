@@ -1,10 +1,10 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { TaskStatusSelect } from "./TaskStatusSelect";
+import { TaskStatusCheckboxGroup } from "./TaskStatusCheckboxGroup";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {
-  title: "Components/tasks/TaskStatusSelect",
-  component: TaskStatusSelect,
+  title: "Components/tasks/TaskStatusCheckboxGroup",
+  component: TaskStatusCheckboxGroup,
   tags: ["autodocs"],
   decorators: [
     (Story) => (
@@ -17,7 +17,7 @@ const meta = {
   parameters: {
     backgroundVariant: "alt",
   },
-} satisfies Meta<typeof TaskStatusSelect>;
+} satisfies Meta<typeof TaskStatusCheckboxGroup>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;

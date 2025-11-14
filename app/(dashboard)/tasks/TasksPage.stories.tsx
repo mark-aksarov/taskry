@@ -30,8 +30,10 @@ import {
 import { Default as TaskDetailStory } from "@/components/tasks/TaskDetail/TaskDetail.stories";
 import { CommentsContainerProvider } from "@/components/comments/CommentsContainer";
 import { MockedTaskCommentsContainer } from "@/components/tasks/TaskCommentsModalTrigger/TaskCommentsModalTrigger.stories";
-import { TaskStatusSelect } from "@/components/tasks/TaskStatusSelect/TaskStatusSelect";
+import { TaskStatusSelect } from "@/components/tasks/TaskStatusSelect";
 import { Default as TaskStatusSelectStory } from "@/components/tasks/TaskStatusSelect/TaskStatusSelect.stories";
+import { TaskStatusCheckboxGroup } from "@/components/tasks/TaskStatusCheckboxGroup";
+import { Default as TaskStatusCheckboxGroupStory } from "@/components/tasks/TaskStatusCheckboxGroup/TaskStatusCheckboxGroup.stories";
 
 const meta = {
   title: "components/pages/TasksPage",
@@ -62,6 +64,9 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
+    TaskStatusCheckboxGroupContainer: () => (
+      <TaskStatusCheckboxGroup {...TaskStatusCheckboxGroupStory.args} />
+    ),
     TaskCategoryCheckboxGroupContainer: () => (
       <TaskCategoryCheckboxGroup {...TaskCategoryCheckboxGroupStory.args} />
     ),

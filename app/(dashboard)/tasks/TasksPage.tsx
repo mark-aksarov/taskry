@@ -26,6 +26,7 @@ import {
 } from "@/components/common/FieldSkeleton";
 
 interface TasksPageProps {
+  TaskStatusCheckboxGroupContainer: React.ComponentType;
   TaskCategoryCheckboxGroupContainer: React.ComponentType;
   UserCheckboxGroupContainer: React.ComponentType;
   ProjectCheckboxGroupContainer: React.ComponentType;
@@ -37,6 +38,7 @@ interface TasksPageProps {
 }
 
 export function TasksPage({
+  TaskStatusCheckboxGroupContainer,
   TaskCategoryCheckboxGroupContainer,
   UserCheckboxGroupContainer,
   ProjectCheckboxGroupContainer,
@@ -48,6 +50,17 @@ export function TasksPage({
 }: TasksPageProps) {
   const taskFiltersForm = (
     <TaskFiltersForm
+      statusCheckboxGroup={
+        <Suspense
+          fallback={
+            <FieldSkeleton>
+              <FieldGroupSkeleton />
+            </FieldSkeleton>
+          }
+        >
+          <TaskStatusCheckboxGroupContainer />
+        </Suspense>
+      }
       categoryCheckboxGroup={
         <Suspense fallback={<TaskCategoryCheckboxGroupSkeleton />}>
           <TaskCategoryCheckboxGroupContainer />

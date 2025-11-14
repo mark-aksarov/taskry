@@ -12,10 +12,12 @@ import {
   ProjectCheckboxGroup,
   ProjectCheckboxGroupSkeleton,
 } from "@/components/projects/ProjectCheckboxGroup";
+import { TaskStatusCheckboxGroup } from "../TaskStatusCheckboxGroup";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { Default as ProjectCheckboxGroupStory } from "@/components/projects/ProjectCheckboxGroup/ProjectCheckboxGroup.stories";
-import { Default as TaskCategoryCheckboxGroupStory } from "../TaskCategoryCheckboxGroup/TaskCategoryCheckboxGroup.stories";
 import { Default as UserCheckboxGroupStory } from "@/components/users/UserCheckboxGroup/UserCheckboxGroup.stories";
+import { Default as TaskStatusCheckboxGroupStory } from "../TaskStatusCheckboxGroup/TaskStatusCheckboxGroup.stories";
+import { Default as TaskCategoryCheckboxGroupStory } from "../TaskCategoryCheckboxGroup/TaskCategoryCheckboxGroup.stories";
+import { Default as ProjectCheckboxGroupStory } from "@/components/projects/ProjectCheckboxGroup/ProjectCheckboxGroup.stories";
 
 const meta: Meta<typeof TaskFiltersForm> = {
   title: "Components/tasks/TaskFiltersForm",
@@ -23,7 +25,7 @@ const meta: Meta<typeof TaskFiltersForm> = {
   tags: ["autodocs"],
   decorators: [
     (Story) => (
-      <div className="w-[500px]">
+      <div className="max-w-[500px]">
         <Story />
       </div>
     ),
@@ -39,6 +41,9 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
+    statusCheckboxGroup: (
+      <TaskStatusCheckboxGroup {...TaskStatusCheckboxGroupStory.args} />
+    ),
     categoryCheckboxGroup: (
       <TaskCategoryCheckboxGroup {...TaskCategoryCheckboxGroupStory.args} />
     ),
