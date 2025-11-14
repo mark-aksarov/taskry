@@ -30,6 +30,8 @@ import {
 import { Default as TaskDetailStory } from "@/components/tasks/TaskDetail/TaskDetail.stories";
 import { CommentsContainerProvider } from "@/components/comments/CommentsContainer";
 import { MockedTaskCommentsContainer } from "@/components/tasks/TaskCommentsModalTrigger/TaskCommentsModalTrigger.stories";
+import { TaskStatusSelect } from "@/components/tasks/TaskStatusSelect/TaskStatusSelect";
+import { Default as TaskStatusSelectStory } from "@/components/tasks/TaskStatusSelect/TaskStatusSelect.stories";
 
 const meta = {
   title: "components/pages/TasksPage",
@@ -68,6 +70,9 @@ export const Default: Story = {
     ),
     UserCheckboxGroupContainer: () => (
       <UserCheckboxGroup {...UserCheckboxGroupStory.args} />
+    ),
+    TaskStatusSelectContainer: () => (
+      <TaskStatusSelect {...TaskStatusSelectStory.args} />
     ),
     TaskCategorySelectContainer: () => (
       <TaskCategorySelect {...TaskCategorySelectStory.args} />

@@ -30,6 +30,7 @@ interface TasksPageProps {
   UserCheckboxGroupContainer: React.ComponentType;
   ProjectCheckboxGroupContainer: React.ComponentType;
   TaskCategorySelectContainer: React.ComponentType;
+  TaskStatusSelectContainer: React.ComponentType;
   ProjectSelectContainer: React.ComponentType;
   UserSelectContainer: React.ComponentType;
   TaskViewModeContainer: React.ComponentType;
@@ -40,6 +41,7 @@ export function TasksPage({
   UserCheckboxGroupContainer,
   ProjectCheckboxGroupContainer,
   TaskCategorySelectContainer,
+  TaskStatusSelectContainer,
   ProjectSelectContainer,
   UserSelectContainer,
   TaskViewModeContainer,
@@ -66,6 +68,17 @@ export function TasksPage({
 
   const newTaskForm = (
     <NewTaskForm
+      taskStatusSelect={
+        <Suspense
+          fallback={
+            <FieldSkeleton>
+              <FieldGroupSkeleton />
+            </FieldSkeleton>
+          }
+        >
+          <TaskStatusSelectContainer />
+        </Suspense>
+      }
       taskCategorySelect={
         <Suspense
           fallback={

@@ -1,15 +1,16 @@
 "use client";
 
 import { RACForm, TextField } from "@/components/ui";
-import { TaskStatusSelect } from "../TaskStatusSelect";
 import { ResponsiveDatePicker } from "@/components/common/ResponsiveDatePicker";
 import { AttachmentsField } from "@/components/common/AttachmentsField/AttachmentsField";
 
 export function NewTaskForm({
+  taskStatusSelect,
   taskCategorySelect,
   projectSelect,
   assigneeSelect,
 }: {
+  taskStatusSelect: React.ReactNode;
   taskCategorySelect: React.ReactNode;
   projectSelect: React.ReactNode;
   assigneeSelect: React.ReactNode;
@@ -28,7 +29,7 @@ export function NewTaskForm({
           label="Deadline"
           overlayClassName="w-[var(--trigger-width)]"
         />
-        <TaskStatusSelect />
+        {taskStatusSelect}
         {taskCategorySelect}
         {projectSelect}
         {assigneeSelect}
