@@ -1,19 +1,10 @@
 import { TaskFiltersForm } from "./TaskFiltersForm";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import {
-  UserCheckboxGroup,
-  UserCheckboxGroupSkeleton,
-} from "@/components/users/UserCheckboxGroup";
-import {
-  TaskCategoryCheckboxGroup,
-  TaskCategoryCheckboxGroupSkeleton,
-} from "../TaskCategoryCheckboxGroup";
-import {
-  ProjectCheckboxGroup,
-  ProjectCheckboxGroupSkeleton,
-} from "@/components/projects/ProjectCheckboxGroup";
 import { TaskStatusCheckboxGroup } from "../TaskStatusCheckboxGroup";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { UserCheckboxGroup } from "@/components/users/UserCheckboxGroup";
+import { TaskCategoryCheckboxGroup } from "../TaskCategoryCheckboxGroup";
+import { ProjectCheckboxGroup } from "@/components/projects/ProjectCheckboxGroup";
 import { Default as UserCheckboxGroupStory } from "@/components/users/UserCheckboxGroup/UserCheckboxGroup.stories";
 import { Default as TaskStatusCheckboxGroupStory } from "../TaskStatusCheckboxGroup/TaskStatusCheckboxGroup.stories";
 import { Default as TaskCategoryCheckboxGroupStory } from "../TaskCategoryCheckboxGroup/TaskCategoryCheckboxGroup.stories";
@@ -53,13 +44,5 @@ export const Default = {
     creatorCheckboxGroup: (
       <UserCheckboxGroup {...UserCheckboxGroupStory.args} />
     ),
-  },
-} satisfies Story;
-
-export const Loading = {
-  args: {
-    categoryCheckboxGroup: <TaskCategoryCheckboxGroupSkeleton />,
-    projectCheckboxGroup: <ProjectCheckboxGroupSkeleton />,
-    creatorCheckboxGroup: <UserCheckboxGroupSkeleton />,
   },
 } satisfies Story;

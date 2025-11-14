@@ -1,14 +1,14 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { FiltersFormSkeleton } from "./FiltersFormSkeleton";
+import { TaskFiltersFormSkeleton } from "./TaskFiltersFormSkeleton";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
-const meta: Meta<typeof FiltersFormSkeleton> = {
-  title: "Components/common/FiltersFormSkeleton",
-  component: FiltersFormSkeleton,
+const meta = {
+  title: "components/tasks/TaskFiltersFormSkeleton",
+  component: TaskFiltersFormSkeleton,
   tags: ["autodocs"],
   decorators: [
     (Story) => (
-      <div className="w-[500px]">
+      <div className="max-w-[500px]">
         <Story />
       </div>
     ),
@@ -17,7 +17,7 @@ const meta: Meta<typeof FiltersFormSkeleton> = {
   parameters: {
     backgroundVariant: "alt",
   },
-} satisfies Meta<typeof FiltersFormSkeleton>;
+} as Meta<typeof TaskFiltersFormSkeleton>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;

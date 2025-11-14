@@ -12,11 +12,9 @@ import {
 import { ViewModeProvider } from "@/components/common/ViewMode";
 import { PageContainer } from "@/components/common/PageContainer";
 import { TaskFiltersForm } from "@/components/tasks/TaskFiltersForm";
-import { FiltersModalTrigger } from "@/components/common/FiltersModalTrigger";
 import { UserCheckboxGroupSkeleton } from "@/components/users/UserCheckboxGroup";
 import { TaskActionsMenuTrigger } from "@/components/tasks/TaskActionsMenuTrigger";
 import { ProjectCheckboxGroupSkeleton } from "@/components/projects/ProjectCheckboxGroup";
-import { FiltersBottomSheetTrigger } from "@/components/common/FiltersBottomSheetTrigger";
 import { TaskCategoryCheckboxGroupSkeleton } from "@/components/tasks/TaskCategoryCheckboxGroup";
 import { NewTaskModal } from "@/components/tasks/NewTaskModal";
 import {
@@ -27,6 +25,8 @@ import {
   FieldGroupSkeleton,
   FieldSkeleton,
 } from "@/components/common/FieldSkeleton";
+import { TaskFiltersModalTrigger } from "@/components/tasks/TaskFiltersModalTrigger";
+import { TaskFiltersBottomSheetTrigger } from "@/components/tasks/TaskFiltersBottomSheetTrigger";
 
 interface TasksPageProps {
   TaskStatusCheckboxGroupContainer: React.ComponentType;
@@ -98,7 +98,7 @@ export function TasksPage({
       <PageGrid>
         <ViewModeProvider>
           <ToolbarDesktop>
-            <FiltersModalTrigger filtersForm={taskFiltersForm} />
+            <TaskFiltersModalTrigger filtersForm={taskFiltersForm} />
             <TaskActionsMenuTrigger />
             <ViewModeToggleButtonGroup className="ml-auto" />
             <RACDialogTrigger>
@@ -114,7 +114,7 @@ export function TasksPage({
 
           <ToolbarMobileTop>
             <ToolbarMobileHeading>Tasks</ToolbarMobileHeading>
-            <FiltersBottomSheetTrigger filtersForm={taskFiltersForm} />
+            <TaskFiltersBottomSheetTrigger filtersForm={taskFiltersForm} />
             <TaskActionsMenuTrigger />
           </ToolbarMobileTop>
 
