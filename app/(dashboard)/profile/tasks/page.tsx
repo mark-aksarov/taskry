@@ -1,14 +1,20 @@
 import { ProfileTasksPage } from "./ProfileTasksPage";
+import { TaskDetailContainerProvider } from "@/components/tasks/TaskDetail";
 import { ProfileHeaderContainer } from "@/components/profile/ProfileHeader";
-import { ProfileTasksDesktopContainer } from "@/components/profile/ProfileTasksDesktop";
+import { CommentsContainerProvider } from "@/components/comments/CommentsContainer";
 import { ProfileTasksMobileContainer } from "@/components/profile/ProfileTasksMobile";
+import { ProfileTasksDesktopContainer } from "@/components/profile/ProfileTasksDesktop";
 
 export default async function AppProfileTasksPage() {
   return (
-    <ProfileTasksPage
-      ProfileTasksDesktopContainer={ProfileTasksDesktopContainer}
-      ProfileTasksMobileContainer={ProfileTasksMobileContainer}
-      ProfileHeaderContainer={ProfileHeaderContainer}
-    />
+    <TaskDetailContainerProvider>
+      <CommentsContainerProvider>
+        <ProfileTasksPage
+          ProfileTasksDesktopContainer={ProfileTasksDesktopContainer}
+          ProfileTasksMobileContainer={ProfileTasksMobileContainer}
+          ProfileHeaderContainer={ProfileHeaderContainer}
+        />
+      </CommentsContainerProvider>
+    </TaskDetailContainerProvider>
   );
 }

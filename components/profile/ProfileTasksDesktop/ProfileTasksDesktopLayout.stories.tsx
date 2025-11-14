@@ -1,17 +1,18 @@
-import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { ProfileTaskListItem } from "./ProfileTaskListItem";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import {
   TaskDetail,
   TaskDetailContainerProvider,
 } from "@/components/tasks/TaskDetail";
+import { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { ProfileTasksDesktopLayout } from "./ProfileTasksDesktopLayout";
+import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { CommentsContainerProvider } from "@/components/comments/CommentsContainer";
+import { Default as ProfileTaskListStory } from "../ProfileTaskList/ProfileTaskList.stories";
 import { Default as TaskDetailStory } from "@/components/tasks/TaskDetail/TaskDetail.stories";
 import { MockedTaskCommentsContainer } from "@/components/tasks/TaskCommentsModalTrigger/TaskCommentsModalTrigger.stories";
 
 const meta = {
-  title: "components/profile/ProfileTaskListItem",
-  component: ProfileTaskListItem,
+  title: "components/profile/ProfileTasksDesktopLayout",
+  component: ProfileTasksDesktopLayout,
   tags: ["autodocs"],
   decorators: [
     (Story) => (
@@ -27,18 +28,27 @@ const meta = {
     ),
     withThemedBackground,
   ],
-} satisfies Meta<typeof ProfileTaskListItem>;
+  globals: {
+    viewport: { value: "tablet", isRotated: true },
+  },
+  parameters: {
+    backgroundVariant: "alt",
+  },
+} satisfies Meta<typeof ProfileTasksDesktopLayout>;
 
 export default meta;
-type Story = StoryObj<typeof ProfileTaskListItem>;
+export type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
+export const Default = {
+  parameters: { layout: "fullscreen" },
   args: {
-    id: 1,
-    title: "Design landing page",
-    deadline: new Date("2025-09-30"),
-    comments: 10,
-    subtasks: 6,
-    status: { id: 1, name: "Pending" },
+    children: ProfileTaskListStory.args?.children,
   },
-};
+} satisfies Story;
+
+export const Empty = {
+  parameters: { layout: "centered" },
+  args: {
+    children: undefined,
+  },
+} satisfies Story;

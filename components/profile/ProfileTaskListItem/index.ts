@@ -1,4 +1,2 @@
-export {
-  ProfileTaskListItem,
-  type ProfileTaskListItemType,
-} from "./ProfileTaskListItem";
+export { ProfileTaskListItem } from "./ProfileTaskListItem";
+export { ProfileTaskListItemSkeleton } from "./ProfileTaskListItemSkeleton";

@@ -6,10 +6,11 @@ import {
   ProfileCardTitle,
 } from "@/components/profile/ProfileCard";
 import { Suspense } from "react";
+import { Repeat } from "@/components/common/Repeat";
 import { PageContainer } from "@/components/common/PageContainer";
+import { ProfileTaskList } from "@/components/profile/ProfileTaskList";
 import { ProfileHeaderSkeleton } from "@/components/profile/ProfileHeader";
-import { ProfileTasksMobile } from "@/components/profile/ProfileTasksMobile";
-import { ProfileTasksDesktop } from "@/components/profile/ProfileTasksDesktop";
+import { ProfileTaskListItemSkeleton } from "@/components/profile/ProfileTaskListItem";
 import { ProfileNavigationDesktop } from "@/components/profile/ProfileNavigationDesktop";
 
 interface ProfileTasksPageProps {
@@ -31,7 +32,16 @@ export function ProfileTasksPage({
             <ProfileCardHeader>
               <ProfileCardTitle>Assigned tasks</ProfileCardTitle>
             </ProfileCardHeader>
-            <Suspense fallback={<ProfileTasksDesktop />}>
+            <Suspense
+              fallback={
+                <ProfileTaskList>
+                  <Repeat
+                    items={10}
+                    renderItem={() => <ProfileTaskListItemSkeleton />}
+                  />
+                </ProfileTaskList>
+              }
+            >
               <ProfileTasksDesktopContainer />
             </Suspense>
           </ProfileCardLeft>
@@ -45,7 +55,16 @@ export function ProfileTasksPage({
         </ProfileCard>
       </PageContainer>
 
-      <Suspense fallback={<ProfileTasksMobile />}>
+      <Suspense
+        fallback={
+          <ProfileTaskList>
+            <Repeat
+              items={10}
+              renderItem={() => <ProfileTaskListItemSkeleton />}
+            />
+          </ProfileTaskList>
+        }
+      >
         <ProfileTasksMobileContainer />
       </Suspense>
     </>

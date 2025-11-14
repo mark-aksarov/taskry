@@ -1,3 +1,2 @@
-export { ProfileTasksMobile } from "./ProfileTasksMobile";
-export { ProfileTasksMobileEmpty } from "./ProfileTasksMobileEmpty";
+export { ProfileTasksMobileLayout } from "./ProfileTasksMobileLayout";
 export { ProfileTasksMobileContainer } from "./ProfileTasksMobileContainer";

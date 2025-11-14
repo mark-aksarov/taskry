@@ -1,7 +1,5 @@
 "use client";
 
-import { useMemo } from "react";
-import { Item } from "react-stately";
 import {
   Check,
   CircleEllipsis,
@@ -10,127 +8,104 @@ import {
   ListTodo,
   Trash,
 } from "lucide-react";
-
-import { Button, Checkbox, Skeleton } from "@/components/ui";
-
-import {
-  ListItem,
-  ListItemInfo,
-  ListItemInfoSkeleton,
-  ListItemText,
-} from "@/components/common/List";
-
-import { ResponsiveMenuTrigger } from "@/components/common/ResponsiveMenuTrigger";
-import { MenuTriggerSkeleton } from "@/components/common/MenuTriggerSkeleton";
-import { MenuDialogHeader } from "@/components/common/MenuDialogHeader";
+import { useMemo } from "react";
+import { Item } from "react-stately";
+import { Button, Checkbox } from "@/components/ui";
 import { TaskListItemTitle } from "@/components/tasks/TaskListItem";
+import { ListItemInfo, ListItemText } from "@/components/common/List";
+import { ProfileTaskListItemLayout } from "./ProfileTaskListItemLayout";
+import { MenuDialogHeader } from "@/components/common/MenuDialogHeader";
+import { ResponsiveMenuTrigger } from "@/components/common/ResponsiveMenuTrigger";
 import { TaskCommentsModalTrigger } from "@/components/tasks/TaskCommentsModalTrigger";
-
-export interface ProfileTaskListItemType {
-  id: number;
-  title: string;
-  deadline?: Date | null;
-  _count: {
-    comments: number;
-    subtasks: number;
-  };
-  subtasks?: { isDone: boolean }[];
-}
+import { TaskStatusBadge } from "@/components/tasks/TaskStatusBadge";
 
 export interface ProfileTaskListItemProps {
-  task?: ProfileTaskListItemType;
+  id: number;
+  title: string;
+  deadline?: Date;
+  status: {
+    id: number;
+    name: string;
+  };
+  comments: number;
+  subtasks: number;
 }
 
-export const ProfileTaskListItem = ({ task }: ProfileTaskListItemProps) => {
+export const ProfileTaskListItem = ({
+  id,
+  title,
+  deadline,
+  status,
+  comments,
+  subtasks,
+}: ProfileTaskListItemProps) => {
   const locale = "en-GB";
 
   const formattedDeadline = useMemo(() => {
-    if (!task?.deadline) return "";
-    return new Date(task.deadline).toLocaleDateString(locale, {
+    if (!deadline) return "";
+    return new Date(deadline).toLocaleDateString(locale, {
       day: "2-digit",
       month: "short",
       year: "numeric",
     });
-  }, [task?.deadline, locale]);
-
-  const buttonStyles = "w-[3.75rem] justify-center rounded-full @max-md:hidden";
+  }, [deadline, locale]);
 
   return (
-    <ListItem className="border-gray-300 md:rounded-none md:px-0 md:py-4 md:shadow-none md:not-last:border-b-1 dark:border-gray-600">
-      {task && <Checkbox aria-label="task checkbox" />}
-
-      {/* --- Task Details --- */}
-      {!task ? (
-        <ListItemInfoSkeleton />
-      ) : (
+    <ProfileTaskListItemLayout
+      checkboxSlot={<Checkbox aria-label="task checkbox" />}
+      deadlineSlot={
         <ListItemInfo>
-          <TaskListItemTitle task={task} />
+          <TaskListItemTitle id={id} title={title} />
           <ListItemText>{`Deadline on ${formattedDeadline}`}</ListItemText>
         </ListItemInfo>
-      )}
-
-      <div className="flex items-center gap-2">
-        {/* --- Comments --- */}
-        {!task ? (
-          <Skeleton className="h-8 w-[3.75rem]" />
-        ) : (
-          <TaskCommentsModalTrigger
-            commentCount={task._count.comments}
-            taskId={task.id}
-          />
-        )}
-
-        <div className="flex items-center gap-1">
-          {/* --- Subtasks --- */}
-          {!task ? (
-            <Skeleton className="h-[2rem] w-[3.75rem] @max-md:hidden" />
-          ) : (
+      }
+      statusSlot={
+        <TaskStatusBadge status={status} className="@max-lg:hidden" />
+      }
+      commentsSlot={
+        <TaskCommentsModalTrigger commentCount={comments} taskId={id} />
+      }
+      subtasksSlot={
+        <Button
+          variant="outlined"
+          iconLeft={
+            <ListTodo size={16} strokeWidth={1.5} absoluteStrokeWidth />
+          }
+          label={subtasks}
+          className="h-[1.75rem] w-[3.75rem] justify-center rounded-full @max-md:hidden"
+        />
+      }
+      actionMenuSlot={
+        <ResponsiveMenuTrigger
+          placement="bottom right"
+          renderDialogHeader={() => <MenuDialogHeader heading="Actions" />}
+          renderButton={() => (
             <Button
-              variant="outlined"
+              aria-label="task menu"
+              variant="ghost"
               iconLeft={
-                <ListTodo size={16} strokeWidth={1.5} absoluteStrokeWidth />
+                <Ellipsis size={16} strokeWidth={1.5} absoluteStrokeWidth />
               }
-              label={task._count.subtasks}
-              className={buttonStyles}
+              className="rounded-full"
             />
           )}
-
-          {/* --- Menu --- */}
-          {!task ? (
-            <MenuTriggerSkeleton />
-          ) : (
-            <ResponsiveMenuTrigger
-              placement="bottom right"
-              renderDialogHeader={() => <MenuDialogHeader heading="Actions" />}
-              renderButton={() => (
-                <Button
-                  aria-label="task menu"
-                  variant="ghost"
-                  iconLeft={
-                    <Ellipsis size={16} strokeWidth={1.5} absoluteStrokeWidth />
-                  }
-                  className="rounded-full"
-                />
-              )}
-            >
-              <Item textValue="Delete" key="delete">
-                <Trash size={16} /> Delete
-              </Item>
-              <Item textValue="Mark as Pending" key="pending">
-                <CircleEllipsis size={16} /> Mark as Pending
-              </Item>
-              <Item textValue="Mark as Done" key="done">
-                <Check size={16} />
-                Mark as Done
-              </Item>
-              <Item textValue="Mark as Active" key="active">
-                <Clock size={16} />
-                Mark as Active
-              </Item>
-            </ResponsiveMenuTrigger>
-          )}
-        </div>
-      </div>
-    </ListItem>
+        >
+          <Item textValue="Delete" key="delete">
+            <Trash size={16} /> Delete
+          </Item>
+          <Item textValue="Mark as Pending" key="pending">
+            <CircleEllipsis size={16} /> Mark as Pending
+          </Item>
+          <Item textValue="Mark as Done" key="done">
+            <Check size={16} />
+            Mark as Done
+          </Item>
+          <Item textValue="Mark as Active" key="active">
+            <Clock size={16} />
+            Mark as Active
+          </Item>
+        </ResponsiveMenuTrigger>
+      }
+    />
   );
 };

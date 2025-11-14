@@ -42,8 +42,6 @@ export const Default = {
           category={{ id: 1, name: "Design" }}
           status={{ id: 1, name: "Pending" }}
           assignee={{ id: "user1", imageUrl: "/man.jpg", fullName: "John Doe" }}
-          totalSubtasks={6}
-          subtasksDone={2}
           comments={10}
           subtasks={6}
           showCheckbox
@@ -57,8 +55,6 @@ export const Default = {
           category={{ id: 2, name: "Development" }}
           status={{ id: 2, name: "Active" }}
           assignee={undefined}
-          totalSubtasks={10}
-          subtasksDone={7}
           comments={22}
           subtasks={16}
           showCheckbox
@@ -72,8 +68,6 @@ export const Default = {
           category={{ id: 3, name: "Backend" }}
           status={{ id: 3, name: "Complete" }}
           assignee={{ id: "user3", fullName: "Jane Doe" }}
-          totalSubtasks={8}
-          subtasksDone={4}
           comments={2}
           subtasks={2}
           showCheckbox
@@ -87,8 +81,6 @@ export const Default = {
           category={{ id: 4, name: "Testing" }}
           status={{ id: 1, name: "Pending" }}
           assignee={{ id: "user4", imageUrl: "/man.jpg", fullName: "John Doe" }}
-          totalSubtasks={12}
-          subtasksDone={6}
           comments={12}
           subtasks={32}
           showCheckbox
@@ -102,8 +94,6 @@ export const Default = {
           category={{ id: 5, name: "DevOps" }}
           status={{ id: 2, name: "Active" }}
           assignee={{ id: "user5", imageUrl: "/man.jpg", fullName: "John Doe" }}
-          totalSubtasks={21}
-          subtasksDone={16}
           comments={15}
           subtasks={8}
           showCheckbox
@@ -117,8 +107,6 @@ export const Default = {
           category={{ id: 6, name: "Infrastructure" }}
           status={{ id: 3, name: "Complete" }}
           assignee={{ id: "user6", imageUrl: "/man.jpg", fullName: "John Doe" }}
-          totalSubtasks={11}
-          subtasksDone={10}
           comments={9}
           subtasks={16}
           showCheckbox
@@ -132,8 +120,6 @@ export const Default = {
           category={{ id: 7, name: "UX" }}
           status={{ id: 3, name: "Complete" }}
           assignee={{ id: "user7", imageUrl: "/man.jpg", fullName: "John Doe" }}
-          totalSubtasks={7}
-          subtasksDone={7}
           comments={12}
           subtasks={22}
           showCheckbox
@@ -147,8 +133,6 @@ export const Default = {
           category={{ id: 8, name: "Bugfix" }}
           status={{ id: 2, name: "Active" }}
           assignee={{ id: "user8", imageUrl: "/man.jpg", fullName: "John Doe" }}
-          totalSubtasks={7}
-          subtasksDone={5}
           comments={10}
           subtasks={6}
           showCheckbox
@@ -162,8 +146,6 @@ export const Default = {
           category={{ id: 9, name: "Performance" }}
           status={{ id: 1, name: "Pending" }}
           assignee={{ id: "user9", fullName: "Jane Doe" }}
-          totalSubtasks={7}
-          subtasksDone={4}
           comments={23}
           subtasks={12}
           showCheckbox
@@ -177,8 +159,6 @@ export const Default = {
           category={{ id: 3, name: "Backend" }}
           status={{ id: 3, name: "Complete" }}
           assignee={undefined}
-          totalSubtasks={21}
-          subtasksDone={13}
           comments={13}
           subtasks={23}
           showCheckbox

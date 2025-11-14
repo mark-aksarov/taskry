@@ -1,4 +1,3 @@
-import { CommentItem } from "@/components/comments/CommentItem";
 import { ResponsiveModal } from "@/components/common/ResponsiveModal";
 import { CommentModalInput } from "@/components/comments/CommentModalInput";
 import { useCommentsContainer } from "@/components/comments/CommentsContainer";
@@ -31,7 +30,7 @@ export function TaskCommentsModalTrigger({
       <Button
         variant="outlined"
         label={commentCount}
-        className="rounded-full"
+        className="h-[1.75rem] w-[3.75rem] justify-center rounded-full @max-md:hidden"
         aria-label="Show task comments"
         iconLeft={
           <MessagesSquare size={16} strokeWidth={1.5} absoluteStrokeWidth />

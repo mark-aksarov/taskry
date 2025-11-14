@@ -2,25 +2,46 @@ import { mocked } from "storybook/test";
 import { usePathname } from "next/navigation";
 import { ProfileTasksPage } from "./ProfileTasksPage";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { PageDecorator } from "@/.storybook/PageDecorator";
 import {
-  ProfileTasksMobile,
-  ProfileTasksMobileEmpty,
-} from "@/components/profile/ProfileTasksMobile";
-import {
-  ProfileTasksDesktop,
-  ProfileTasksDesktopEmpty,
-} from "@/components/profile/ProfileTasksDesktop";
-import { ProfileHeader } from "@/components/profile/ProfileHeader";
+  ProfileHeader,
+  ProfileHeaderSkeleton,
+} from "@/components/profile/ProfileHeader";
+import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { ProfileTasksMobileLayout } from "@/components/profile/ProfileTasksMobile";
+import { ProfileTasksDesktopLayout } from "@/components/profile/ProfileTasksDesktop";
+import { Default as ProfileTaskListStory } from "@/components/profile/ProfileTaskList/ProfileTaskList.stories";
 import { Default as ProfileHeaderStory } from "@/components/profile/ProfileHeader/ProfileHeader.stories";
-import { Default as TaskListStory } from "@/components/tasks/TaskList/TaskList.stories";
+import {
+  TaskDetail,
+  TaskDetailContainerProvider,
+} from "@/components/tasks/TaskDetail";
+import { CommentsContainerProvider } from "@/components/comments/CommentsContainer";
+import { MockedTaskCommentsContainer } from "@/components/tasks/TaskCommentsModalTrigger/TaskCommentsModalTrigger.stories";
+import { Default as TaskDetailStory } from "@/components/tasks/TaskDetail/TaskDetail.stories";
+import { ProfileTaskList } from "@/components/profile/ProfileTaskList";
+import { Repeat } from "@/components/common/Repeat";
+import { ProfileTaskListItemSkeleton } from "@/components/profile/ProfileTaskListItem";
 
 const meta = {
   title: "components/pages/ProfileTasksPage",
   component: ProfileTasksPage,
   parameters: { layout: "fullscreen" },
-  decorators: [PageDecorator, withThemedBackground()],
+  decorators: [
+    (Story) => (
+      <TaskDetailContainerProvider
+        TaskDetailContainer={() => <TaskDetail {...TaskDetailStory.args} />}
+      >
+        <CommentsContainerProvider
+          CommentsContainer={() => <MockedTaskCommentsContainer />}
+        >
+          <Story />
+        </CommentsContainerProvider>
+      </TaskDetailContainerProvider>
+    ),
+    PageDecorator,
+    withThemedBackground,
+  ],
   beforeEach: () => {
     mocked(usePathname).mockReturnValue("/profile");
   },
@@ -29,34 +50,46 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
+export const Default = {
   args: {
     ProfileTasksDesktopContainer: () => (
-      <ProfileTasksDesktop {...TaskListStory.args} />
+      <ProfileTasksDesktopLayout {...ProfileTaskListStory.args} />
     ),
     ProfileTasksMobileContainer: () => (
-      <ProfileTasksMobile {...TaskListStory.args} />
+      <ProfileTasksMobileLayout {...ProfileTaskListStory.args} />
     ),
     ProfileHeaderContainer: () => (
       <ProfileHeader {...ProfileHeaderStory.args} />
     ),
   },
-};
+} satisfies Story;
 
-export const Loading: Story = {
+export const Loading = {
   args: {
-    ProfileTasksDesktopContainer: () => <ProfileTasksDesktop />,
-    ProfileTasksMobileContainer: () => <ProfileTasksMobile />,
-    ProfileHeaderContainer: () => <ProfileHeader />,
+    ProfileTasksDesktopContainer: () => (
+      <ProfileTaskList>
+        <Repeat items={10} renderItem={() => <ProfileTaskListItemSkeleton />} />
+      </ProfileTaskList>
+    ),
+    ProfileTasksMobileContainer: () => (
+      <ProfileTaskList>
+        <Repeat items={10} renderItem={() => <ProfileTaskListItemSkeleton />} />
+      </ProfileTaskList>
+    ),
+    ProfileHeaderContainer: () => <ProfileHeaderSkeleton />,
   },
-};
+} satisfies Story;
 
-export const WithNoTask: Story = {
+export const WithNoTask = {
   args: {
-    ProfileTasksDesktopContainer: () => <ProfileTasksDesktopEmpty />,
-    ProfileTasksMobileContainer: () => <ProfileTasksMobileEmpty />,
+    ProfileTasksDesktopContainer: () => (
+      <ProfileTasksDesktopLayout children={null} />
+    ),
+    ProfileTasksMobileContainer: () => (
+      <ProfileTasksMobileLayout children={null} />
+    ),
     ProfileHeaderContainer: () => (
       <ProfileHeader {...ProfileHeaderStory.args} />
     ),
   },
-};
+} satisfies Story;

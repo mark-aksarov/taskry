@@ -1,6 +1,6 @@
 import { twMerge } from "tailwind-merge";
 
-interface PageContainerProps {
+export interface PageContainerProps {
   className?: string;
   fullscreen?: boolean;
   centered?: boolean;

@@ -1,13 +1,27 @@
 import { getTasks } from "@/lib/queries/task";
-import { ProfileTasksDesktop } from "./ProfileTasksDesktop";
-import { ProfileTasksDesktopEmpty } from "./ProfileTasksDesktopEmpty";
+import { ProfileTaskListItem } from "../ProfileTaskListItem";
+import { ProfileTasksDesktopLayout } from "./ProfileTasksDesktopLayout";
 
 export async function ProfileTasksDesktopContainer() {
   const tasks = await getTasks("BKs42HvVDEZFoaJUmTqf1gTN0K8pUFjI");
 
-  if (!tasks.length) {
-    return <ProfileTasksDesktopEmpty />;
-  }
-
-  return <ProfileTasksDesktop tasks={tasks} />;
+  return (
+    <ProfileTasksDesktopLayout>
+      {tasks.length &&
+        tasks.map((task) => (
+          <ProfileTaskListItem
+            key={task.id}
+            id={task.id}
+            title={task.title}
+            deadline={task.deadline}
+            comments={task._count.comments}
+            subtasks={task._count.subtasks}
+            status={{
+              id: task.status.id,
+              name: task.status.nameEn,
+            }}
+          />
+        ))}
+    </ProfileTasksDesktopLayout>
+  );
 }

@@ -1,21 +1,14 @@
 import { List } from "@/components/common/List";
-import {
-  ProfileTaskListItem,
-  ProfileTaskListItemType,
-} from "../ProfileTaskListItem";
+import { twMerge } from "tailwind-merge";
 
 export function ProfileTaskList({
-  tasks,
   className,
+  children,
 }: {
-  tasks: ProfileTaskListItemType[];
   className?: string;
+  children: React.ReactNode;
 }) {
   return (
-    <List className={className}>
-      {tasks.map((task) => (
-        <ProfileTaskListItem key={task.id} task={task} />
-      ))}
-    </List>
+    <List className={twMerge("md:gap-0 md:px-6", className)}>{children}</List>
   );
 }

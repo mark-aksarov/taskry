@@ -1,3 +1,2 @@
-export { ProfileTasksDesktop } from "./ProfileTasksDesktop";
-export { ProfileTasksDesktopEmpty } from "./ProfileTasksDesktopEmpty";
+export { ProfileTasksDesktopLayout } from "./ProfileTasksDesktopLayout";
 export { ProfileTasksDesktopContainer } from "./ProfileTasksDesktopContainer";
