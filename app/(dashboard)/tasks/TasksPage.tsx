@@ -23,6 +23,7 @@ import {
 } from "@/components/tasks/NewTaskForm";
 import { TaskFiltersModalTrigger } from "@/components/tasks/TaskFiltersModalTrigger";
 import { TaskFiltersBottomSheetTrigger } from "@/components/tasks/TaskFiltersBottomSheetTrigger";
+import { TaskSortingMenuTrigger } from "@/components/tasks/TaskSortingMenuTrigger";
 
 interface TasksPageProps {
   TaskStatusCheckboxGroupContainer: React.ComponentType;
@@ -74,6 +75,7 @@ export function TasksPage({
       <PageGrid>
         <ViewModeProvider>
           <ToolbarDesktop>
+            <TaskSortingMenuTrigger />
             <TaskFiltersModalTrigger filtersForm={taskFiltersForm} />
             <TaskActionsMenuTrigger />
             <ViewModeToggleButtonGroup className="ml-auto" />
@@ -90,6 +92,7 @@ export function TasksPage({
 
           <ToolbarMobileTop>
             <ToolbarMobileHeading>Tasks</ToolbarMobileHeading>
+            <TaskSortingMenuTrigger />
             <TaskFiltersBottomSheetTrigger filtersForm={taskFiltersForm} />
             <TaskActionsMenuTrigger />
           </ToolbarMobileTop>

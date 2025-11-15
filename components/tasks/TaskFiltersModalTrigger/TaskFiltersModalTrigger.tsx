@@ -21,7 +21,7 @@ export function TaskFiltersModalTrigger({
   return (
     <DialogTrigger>
       <Button
-        label="Task Filters"
+        label="Filters"
         variant="outlined"
         iconLeft={
           <SlidersHorizontal size={16} strokeWidth={1.5} absoluteStrokeWidth />
