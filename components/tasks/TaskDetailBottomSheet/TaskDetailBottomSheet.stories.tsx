@@ -11,7 +11,7 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { Default as TaskDetailStory } from "../TaskDetail/TaskDetail.stories";
 import { TaskDetailContainerProvider } from "../TaskDetail/TaskDetailContainerContext";
 import { CommentsContainerProvider } from "@/components/comments/CommentsContainer";
-import { MockedTaskCommentsContainer } from "../TaskCommentsModalTrigger/TaskCommentsModalTrigger.stories";
+import { MockedCommentsContainer } from "@/components/comments/CommentsContainer";
 
 const meta = {
   title: "components/tasks/TaskDetailBottomSheet",
@@ -58,7 +58,7 @@ export const Default = {
         TaskDetailContainer={() => <TaskDetail {...TaskDetailStory.args} />}
       >
         <CommentsContainerProvider
-          CommentsContainer={() => <MockedTaskCommentsContainer />}
+          CommentsContainer={() => <MockedCommentsContainer />}
         >
           <Story />
         </CommentsContainerProvider>
@@ -74,7 +74,7 @@ export const WithSkeletonContent = {
         TaskDetailContainer={() => <TaskDetailSkeleton />}
       >
         <CommentsContainerProvider
-          CommentsContainer={() => <MockedTaskCommentsContainer />}
+          CommentsContainer={() => <MockedCommentsContainer />}
         >
           <Story />
         </CommentsContainerProvider>

@@ -2,7 +2,7 @@ import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { TaskDetail } from "./TaskDetail";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { CommentsContainerProvider } from "@/components/comments/CommentsContainer";
-import { MockedTaskCommentsContainer } from "../TaskCommentsModalTrigger/TaskCommentsModalTrigger.stories";
+import { MockedCommentsContainer } from "@/components/comments/CommentsContainer";
 
 const meta = {
   title: "components/tasks/TaskDetail",
@@ -11,7 +11,7 @@ const meta = {
   decorators: [
     (Story) => (
       <CommentsContainerProvider
-        CommentsContainer={() => <MockedTaskCommentsContainer />}
+        CommentsContainer={() => <MockedCommentsContainer />}
       >
         <Story />
       </CommentsContainerProvider>

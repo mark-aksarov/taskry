@@ -1,10 +1,10 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { TaskDetailSkeleton } from "./TaskDetailSkeleton";
+import { ProjectDetailSkeleton } from "./ProjectDetailSkeleton";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {
-  title: "components/tasks/TaskDetailSkeleton",
-  component: TaskDetailSkeleton,
+  title: "components/projects/ProjectDetailSkeleton",
+  component: ProjectDetailSkeleton,
   tags: ["autodocs"],
   decorators: [
     (Story) => (
@@ -17,7 +17,7 @@ const meta = {
   parameters: {
     backgroundVariant: "alt",
   },
-} satisfies Meta<typeof TaskDetailSkeleton>;
+} satisfies Meta<typeof ProjectDetailSkeleton>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;

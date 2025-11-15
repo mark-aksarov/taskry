@@ -2,7 +2,7 @@ import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { TaskStatusBadge } from "./TaskStatusBadge";
 
 const meta = {
-  title: "Components/projects/TaskStatusBadge",
+  title: "Components/tasks/TaskStatusBadge",
   component: TaskStatusBadge,
   tags: ["autodocs"],
 } satisfies Meta<typeof TaskStatusBadge>;

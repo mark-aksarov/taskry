@@ -3,3 +3,4 @@ export {
   CommentsContainerProvider,
   useCommentsContainer,
 } from "./CommentsContainerContext";
+export { MockedCommentsContainer } from "./MockedCommentsContainer";

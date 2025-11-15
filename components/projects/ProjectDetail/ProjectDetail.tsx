@@ -7,23 +7,16 @@ import {
 } from "@/components/common/Detail";
 import Image from "next/image";
 import { useMemo } from "react";
-import { TaskDetailLayout } from "./TaskDetailLayout";
-import { TaskDetailStatusMenuTrigger } from "./TaskDetailStatusMenuTrigger";
-import { Attachment, Attachments } from "@/components/attachments/Attachments";
-import { SubtasksCheckboxGroup } from "@/components/subtasks/SubtasksCheckboxGroup";
-import { Badge, Button, Link } from "@/components/ui";
 import { ExternalLink } from "lucide-react";
+import { Badge, Button, Link } from "@/components/ui";
+import { ProjectDetailLayout } from "./ProjectDetailLayout";
 import { ImageContainer } from "@/components/common/ImageContainer";
-import { NewSubtasksButton } from "@/components/subtasks/NewSubtasksButton";
+import { Attachment, Attachments } from "@/components/attachments/Attachments";
+import { ProjectDetailStatusMenuTrigger } from "./ProjectDetailStatusMenuTrigger";
 
-interface TaskDetailProps {
+interface ProjectDetailProps {
   id: number;
   title: string;
-  assignee?: {
-    id: string;
-    fullName: string;
-    imageUrl?: string;
-  };
   creator?: {
     id: string;
     fullName: string;
@@ -31,23 +24,19 @@ interface TaskDetailProps {
   };
   deadline: Date;
   description?: string;
+  customer?: {
+    id: number;
+    fullName: string;
+    imageUrl?: string;
+  };
   category: {
     id: number;
     name: string;
-  };
-  project: {
-    id: number;
-    title: string;
   };
   status: {
     id: string;
     name: string;
   };
-  subtasks: {
-    id: number;
-    name: string;
-    isDone: boolean;
-  }[];
   attachments: {
     id: number;
     fileUrl: string;
@@ -55,19 +44,17 @@ interface TaskDetailProps {
   }[];
 }
 
-export function TaskDetail({
+export function ProjectDetail({
   id,
   title,
-  assignee,
   creator,
   deadline,
   description,
+  customer,
   category,
-  project,
   status,
-  subtasks,
   attachments,
-}: TaskDetailProps) {
+}: ProjectDetailProps) {
   const locale = "en-GB";
 
   const formattedDeadline = useMemo(() => {
@@ -81,14 +68,14 @@ export function TaskDetail({
   }, [deadline, locale]);
 
   return (
-    <TaskDetailLayout
+    <ProjectDetailLayout
       titleSlot={
         <h2 className="text-base font-bold text-black dark:text-white">
           {title}
         </h2>
       }
-      statusMenuTriggerSlot={<TaskDetailStatusMenuTrigger />}
-      openTaskSlot={
+      statusMenuTriggerSlot={<ProjectDetailStatusMenuTrigger />}
+      openProjectSlot={
         <Button
           variant="outlined"
           className="rounded-lg"
@@ -97,21 +84,21 @@ export function TaskDetail({
           }
         />
       }
-      assigneesSlot={
+      creatorSlot={
         <DetailInfo>
-          <DetailTitle>Assignee</DetailTitle>
+          <DetailTitle>Creator</DetailTitle>
           <div className="flex items-center gap-2">
-            {assignee?.imageUrl ? (
+            {creator?.imageUrl ? (
               <Link href={`/users/${id}`}>
                 <ImageContainer className="h-9 w-9">
-                  <Image fill src={assignee.imageUrl} alt={assignee.fullName} />
+                  <Image fill src={creator.imageUrl} alt={creator.fullName} />
                 </ImageContainer>
               </Link>
             ) : (
               <ImageContainer className="h-9 w-9" />
             )}
             <DetailText>
-              {assignee ? assignee.fullName : "Unassigned"}
+              {creator ? creator.fullName : "Unknown creator"}
             </DetailText>
           </div>
         </DetailInfo>
@@ -132,30 +119,18 @@ export function TaskDetail({
           </DetailText>
         </DetailInfo>
       }
-      creatorSlot={
+      customerSlot={
         <DetailInfo>
-          <DetailTitle>Creator</DetailTitle>
+          <DetailTitle>Customer</DetailTitle>
           <DetailText>
-            {creator ? creator.fullName : "Unknown creator"}
+            {customer ? customer.fullName : "Unknown customer"}
           </DetailText>
         </DetailInfo>
       }
-      categoryNameSlot={
+      categorySlot={
         <DetailInfo>
           <DetailTitle>Category</DetailTitle>
           <DetailText>{category.name}</DetailText>
-        </DetailInfo>
-      }
-      projectTitleSlot={
-        <DetailInfo>
-          <DetailTitle>Project</DetailTitle>
-          <DetailText>{project.title}</DetailText>
-        </DetailInfo>
-      }
-      subtasksSlot={
-        <DetailInfo>
-          <SubtasksCheckboxGroup subtasks={subtasks} />
-          <NewSubtasksButton />
         </DetailInfo>
       }
       attachmentsSlot={

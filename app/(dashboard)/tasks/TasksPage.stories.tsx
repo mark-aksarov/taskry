@@ -17,7 +17,7 @@ import {
 } from "@/components/tasks/TaskDetail";
 import { Default as TaskDetailStory } from "@/components/tasks/TaskDetail/TaskDetail.stories";
 import { CommentsContainerProvider } from "@/components/comments/CommentsContainer";
-import { MockedTaskCommentsContainer } from "@/components/tasks/TaskCommentsModalTrigger/TaskCommentsModalTrigger.stories";
+import { MockedCommentsContainer } from "@/components/comments/CommentsContainer";
 import { NewTaskForm } from "@/components/tasks/NewTaskForm";
 import { Default as NewTaskFormStory } from "@/components/tasks/NewTaskForm/NewTaskForm.stories";
 import { TaskFiltersForm } from "@/components/tasks/TaskFiltersForm";
@@ -33,7 +33,7 @@ const meta = {
         TaskDetailContainer={() => <TaskDetail {...TaskDetailStory.args} />}
       >
         <CommentsContainerProvider
-          CommentsContainer={() => <MockedTaskCommentsContainer />}
+          CommentsContainer={() => <MockedCommentsContainer />}
         >
           <Story />
         </CommentsContainerProvider>

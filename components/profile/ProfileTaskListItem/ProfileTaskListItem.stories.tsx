@@ -7,7 +7,7 @@ import {
 } from "@/components/tasks/TaskDetail";
 import { CommentsContainerProvider } from "@/components/comments/CommentsContainer";
 import { Default as TaskDetailStory } from "@/components/tasks/TaskDetail/TaskDetail.stories";
-import { MockedTaskCommentsContainer } from "@/components/tasks/TaskCommentsModalTrigger/TaskCommentsModalTrigger.stories";
+import { MockedCommentsContainer } from "@/components/comments/CommentsContainer";
 
 const meta = {
   title: "components/profile/ProfileTaskListItem",
@@ -19,7 +19,7 @@ const meta = {
         TaskDetailContainer={() => <TaskDetail {...TaskDetailStory.args} />}
       >
         <CommentsContainerProvider
-          CommentsContainer={() => <MockedTaskCommentsContainer />}
+          CommentsContainer={() => <MockedCommentsContainer />}
         >
           <Story />
         </CommentsContainerProvider>

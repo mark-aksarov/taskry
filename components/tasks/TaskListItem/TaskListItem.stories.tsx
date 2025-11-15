@@ -3,7 +3,7 @@ import { TaskListItem } from "./TaskListItem";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { TaskDetail, TaskDetailContainerProvider } from "../TaskDetail";
 import { CommentsContainerProvider } from "@/components/comments/CommentsContainer";
-import { MockedTaskCommentsContainer } from "../TaskCommentsModalTrigger/TaskCommentsModalTrigger.stories";
+import { MockedCommentsContainer } from "@/components/comments/CommentsContainer";
 import { Default as TaskDetailStory } from "../TaskDetail/TaskDetail.stories";
 
 const meta = {
@@ -16,7 +16,7 @@ const meta = {
         TaskDetailContainer={() => <TaskDetail {...TaskDetailStory.args} />}
       >
         <CommentsContainerProvider
-          CommentsContainer={() => <MockedTaskCommentsContainer />}
+          CommentsContainer={() => <MockedCommentsContainer />}
         >
           <Story />
         </CommentsContainerProvider>
