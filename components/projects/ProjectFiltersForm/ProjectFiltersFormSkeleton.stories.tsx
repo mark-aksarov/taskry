@@ -1,14 +1,14 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { ProjectCategoryCheckboxGroupSkeleton } from "./ProjectCategoryCheckboxGroupSkeleton";
+import { ProjectFiltersFormSkeleton } from "./ProjectFiltersFormSkeleton";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {
-  title: "Components/projects/ProjectCategoryCheckboxGroupSkeleton",
-  component: ProjectCategoryCheckboxGroupSkeleton,
+  title: "components/tasks/ProjectFiltersFormSkeleton",
+  component: ProjectFiltersFormSkeleton,
   tags: ["autodocs"],
   decorators: [
     (Story) => (
-      <div className="w-[500px]">
+      <div className="max-w-[500px]">
         <Story />
       </div>
     ),
@@ -17,11 +17,9 @@ const meta = {
   parameters: {
     backgroundVariant: "alt",
   },
-} satisfies Meta<typeof ProjectCategoryCheckboxGroupSkeleton>;
+} as Meta<typeof ProjectFiltersFormSkeleton>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
-  args: {},
-};
+export const Default = {} satisfies Story;

@@ -1,23 +1,23 @@
-import { Suspense } from "react";
-import { Plus } from "lucide-react";
-import { Button } from "@/components/ui";
-import { PageGrid } from "@/components/common/PageGrid";
-import { ViewModeToggleButtonGroup } from "@/components/common/ViewMode";
 import {
   ToolbarDesktop,
   ToolbarMobileBottom,
   ToolbarMobileHeading,
   ToolbarMobileTop,
 } from "@/components/common/Toolbar";
-import { ProjectFiltersForm } from "@/components/projects/ProjectFiltersForm";
+import { Suspense } from "react";
+import { Plus } from "lucide-react";
+import { Button } from "@/components/ui";
+import { PageGrid } from "@/components/common/PageGrid";
+import { ViewModeProvider } from "@/components/common/ViewMode";
+import { PageContainer } from "@/components/common/PageContainer";
+import { ViewModeToggleButtonGroup } from "@/components/common/ViewMode";
 import { FiltersModalTrigger } from "@/components/common/FiltersModalTrigger";
 import { FiltersBottomSheetTrigger } from "@/components/common/FiltersBottomSheetTrigger";
 import { ProjectActionsMenuTrigger } from "@/components/projects/ProjectActionsMenuTrigger";
-import { ViewModeProvider } from "@/components/common/ViewMode";
-import { PageContainer } from "@/components/common/PageContainer";
-import { UserCheckboxGroupSkeleton } from "@/components/users/UserCheckboxGroup";
-import { CustomerCheckboxGroupSkeleton } from "@/components/customer/CustomerCheckboxGroup";
-import { ProjectCategoryCheckboxGroupSkeleton } from "@/components/projects/ProjectCategoryCheckboxGroup";
+import {
+  ProjectFiltersForm,
+  ProjectFiltersFormSkeleton,
+} from "@/components/projects/ProjectFiltersForm";
 
 interface ProjectsPageProps {
   ProjectCategoryCheckboxGroupContainer: React.ComponentType;
@@ -33,23 +33,13 @@ export function ProjectsPage({
   ProjectViewModeContainer,
 }: ProjectsPageProps) {
   const projectFiltersForm = (
-    <ProjectFiltersForm
-      projectCategoryCheckboxGroup={
-        <Suspense fallback={<ProjectCategoryCheckboxGroupSkeleton />}>
-          <ProjectCategoryCheckboxGroupContainer />
-        </Suspense>
-      }
-      customerCheckboxGroup={
-        <Suspense fallback={<CustomerCheckboxGroupSkeleton />}>
-          <CustomerCheckboxGroupContainer />
-        </Suspense>
-      }
-      userCheckboxGroup={
-        <Suspense fallback={<UserCheckboxGroupSkeleton />}>
-          <UserCheckboxGroupContainer />
-        </Suspense>
-      }
-    />
+    <Suspense fallback={<ProjectFiltersFormSkeleton />}>
+      <ProjectFiltersForm
+        projectCategoryCheckboxGroup={<ProjectCategoryCheckboxGroupContainer />}
+        customerCheckboxGroup={<CustomerCheckboxGroupContainer />}
+        userCheckboxGroup={<UserCheckboxGroupContainer />}
+      />
+    </Suspense>
   );
 
   return (
