@@ -8,11 +8,11 @@ import { usePathname } from "next/navigation";
 import { default as ProjectPageLoading } from "./loading";
 import { CustomerList } from "@/components/customer/CustomerList";
 import { CustomerGrid } from "@/components/customer/CustomerGrid";
-import { CompanyCheckboxGroup } from "@/components/companies/CompanyCheckboxGroup";
 import { CustomersPageEmpty } from "./CustomersPageEmpty";
-import { Default as CompanyCheckboxGroupStory } from "@/components/companies/CompanyCheckboxGroup/CompanyCheckboxGroup.stories";
 import { Default as CustomerGridStory } from "@/components/customer/CustomerGrid/CustomerGrid.stories";
 import { Default as CustomerListStory } from "@/components/customer/CustomerList/CustomerList.stories";
+import { CustomerFiltersForm } from "@/components/customer/CustomerFiltersForm";
+import { Default as CustomerFiltersFormStory } from "@/components/customer/CustomerFiltersForm/CustomerFiltersForm.stories";
 
 const meta = {
   title: "components/pages/CustomersPage",
@@ -29,8 +29,8 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    CompanyCheckboxGroupContainer: () => (
-      <CompanyCheckboxGroup {...CompanyCheckboxGroupStory.args} />
+    CustomerFiltersFormContainer: () => (
+      <CustomerFiltersForm {...CustomerFiltersFormStory.args} />
     ),
     CustomerViewModeContainer: () => (
       <ViewModeContainer

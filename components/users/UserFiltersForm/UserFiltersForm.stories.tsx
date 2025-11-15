@@ -1,8 +1,7 @@
-import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { UserFiltersForm } from "./UserFiltersForm";
-import { PositionCheckboxGroup } from "../PositionCheckboxGroup";
-import { Default as PositionCheckboxGroupStory } from "@/components/users/PositionCheckboxGroup/PositionCheckboxGroup.stories";
+import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { UserFiltersFormPositionCheckboxGroup } from "./UserFiltersFormPositionCheckboxGroup";
 
 const meta: Meta<typeof UserFiltersForm> = {
   title: "Components/users/UserFiltersForm",
@@ -10,7 +9,7 @@ const meta: Meta<typeof UserFiltersForm> = {
   tags: ["autodocs"],
   decorators: [
     (Story) => (
-      <div className="w-[500px]">
+      <div className="max-w-[500px]">
         <Story />
       </div>
     ),
@@ -27,7 +26,26 @@ type Story = StoryObj<typeof meta>;
 export const Default = {
   args: {
     positionCheckboxGroup: (
-      <PositionCheckboxGroup {...PositionCheckboxGroupStory.args} />
+      <UserFiltersFormPositionCheckboxGroup
+        positions={[
+          {
+            id: 1,
+            name: "Founder",
+          },
+          {
+            id: 2,
+            name: "Manager",
+          },
+          {
+            id: 3,
+            name: "Designer",
+          },
+          {
+            id: 4,
+            name: "Developer",
+          },
+        ]}
+      />
     ),
   },
 } satisfies Story;

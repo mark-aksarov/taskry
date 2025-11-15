@@ -1,7 +1,7 @@
 import { Company } from "@/generated/prisma";
 import { Checkbox, CheckboxGroup } from "@/components/ui";
 
-export function CompanyCheckboxGroup({
+export function CustomerFiltersFormCompanyCheckboxGroup({
   companies,
 }: {
   companies: Pick<Company, "id" | "name">[];

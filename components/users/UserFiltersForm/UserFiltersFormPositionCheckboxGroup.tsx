@@ -1,7 +1,7 @@
 import { Position } from "@/generated/prisma";
 import { CheckboxGroup, Checkbox } from "@/components/ui";
 
-export function PositionCheckboxGroup({
+export function UserFiltersFormPositionCheckboxGroup({
   positions,
 }: {
   positions: Pick<Position, "id" | "name">[];

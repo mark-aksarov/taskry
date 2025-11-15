@@ -6,13 +6,13 @@ import { PageDecorator } from "@/.storybook/PageDecorator";
 import { mocked } from "storybook/test";
 import { usePathname } from "next/navigation";
 import { default as UserPageLoading } from "./loading";
-import { PositionCheckboxGroup } from "@/components/users/PositionCheckboxGroup";
 import { UsersPageEmpty } from "./UsersPageEmpty";
 import { UserList } from "@/components/users/UserList";
 import { UserGrid } from "@/components/users/UserGrid";
-import { Default as PositionCheckboxGroupStory } from "@/components/users/PositionCheckboxGroup/PositionCheckboxGroup.stories";
 import { Default as UserListStory } from "@/components/users/UserList/UserList.stories";
 import { Default as UserGridStory } from "@/components/users/UserGrid/UserGrid.stories";
+import { UserFiltersForm } from "@/components/users/UserFiltersForm";
+import { Default as UserFiltersFormStory } from "@/components/users/UserFiltersForm/UserFiltersForm.stories";
 
 const meta = {
   title: "components/pages/UsersPage",
@@ -29,8 +29,8 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    PositionCheckboxGroupContainer: () => (
-      <PositionCheckboxGroup {...PositionCheckboxGroupStory.args} />
+    UserFiltersFormContainer: () => (
+      <UserFiltersForm {...UserFiltersFormStory.args} />
     ),
     UserViewModeContainer: () => (
       <ViewModeContainer

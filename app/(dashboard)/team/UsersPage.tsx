@@ -9,39 +9,34 @@ import {
   ToolbarMobileHeading,
   ToolbarMobileTop,
 } from "@/components/common/Toolbar";
-import { FiltersModalTrigger } from "@/components/common/FiltersModalTrigger";
-import { FiltersBottomSheetTrigger } from "@/components/common/FiltersBottomSheetTrigger";
-import { UserActionsMenuTrigger } from "@/components/users/UserActionsMenuTrigger";
 import { ViewModeProvider } from "@/components/common/ViewMode";
 import { PageContainer } from "@/components/common/PageContainer";
-import { UserFiltersForm } from "@/components/users/UserFiltersForm";
-import { PositionCheckboxGroupSkeleton } from "@/components/users/PositionCheckboxGroup";
+import { UserFiltersFormSkeleton } from "@/components/users/UserFiltersForm";
+import { UserActionsMenuTrigger } from "@/components/users/UserActionsMenuTrigger";
+import { UserFiltersModalTrigger } from "@/components/users/UserFiltersModalTrigger";
+import { UserFiltersBottomSheetTrigger } from "@/components/users/UserFiltersBottomSheetTrigger";
 
 interface UsersPageProps {
-  PositionCheckboxGroupContainer: React.ComponentType;
+  UserFiltersFormContainer: React.ComponentType;
   UserViewModeContainer: React.ComponentType;
 }
 
 export function UsersPage({
-  PositionCheckboxGroupContainer,
+  UserFiltersFormContainer,
   UserViewModeContainer,
 }: UsersPageProps) {
-  const userFiltersForm = (
-    <UserFiltersForm
-      positionCheckboxGroup={
-        <Suspense fallback={<PositionCheckboxGroupSkeleton />}>
-          <PositionCheckboxGroupContainer />
-        </Suspense>
-      }
-    />
-  );
-
   return (
     <PageContainer>
       <PageGrid>
         <ViewModeProvider>
           <ToolbarDesktop>
-            <FiltersModalTrigger filtersForm={userFiltersForm} />
+            <UserFiltersModalTrigger
+              filtersForm={
+                <Suspense fallback={<UserFiltersFormSkeleton />}>
+                  <UserFiltersFormContainer />
+                </Suspense>
+              }
+            />
             <UserActionsMenuTrigger />
             <ViewModeToggleButtonGroup className="ml-auto" />
             <Button
@@ -54,7 +49,13 @@ export function UsersPage({
 
           <ToolbarMobileTop>
             <ToolbarMobileHeading>Users</ToolbarMobileHeading>
-            <FiltersBottomSheetTrigger filtersForm={userFiltersForm} />
+            <UserFiltersBottomSheetTrigger
+              filtersForm={
+                <Suspense fallback={<UserFiltersFormSkeleton />}>
+                  <UserFiltersFormContainer />
+                </Suspense>
+              }
+            />
             <UserActionsMenuTrigger />
           </ToolbarMobileTop>
 

@@ -1,8 +1,8 @@
 import { UsersPage } from "./UsersPage";
 import { getUsers } from "@/lib/queries/user";
 import { UsersPageEmpty } from "./UsersPageEmpty";
+import { UserFiltersFormContainer } from "@/components/users/UserFiltersForm";
 import { UserViewModeContainer } from "@/components/users/UserViewModeContainer";
-import { PositionCheckboxGroupContainer } from "@/components/users/PositionCheckboxGroup";
 
 export default async function AppUsersPage() {
   const users = await getUsers(1);
@@ -11,7 +11,7 @@ export default async function AppUsersPage() {
 
   return (
     <UsersPage
-      PositionCheckboxGroupContainer={PositionCheckboxGroupContainer}
+      UserFiltersFormContainer={UserFiltersFormContainer}
       UserViewModeContainer={UserViewModeContainer}
     />
   );

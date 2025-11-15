@@ -3,13 +3,13 @@
 import { RACForm } from "@/components/ui";
 import { TextField } from "@/components/ui";
 
-interface UserFiltersFormProps {
+interface CustomerFiltersFormProps {
   companyCheckboxGroup: React.ReactNode;
 }
 
 export function CustomerFiltersForm({
   companyCheckboxGroup,
-}: UserFiltersFormProps) {
+}: CustomerFiltersFormProps) {
   return (
     <RACForm>
       <div className="flex flex-col gap-4">

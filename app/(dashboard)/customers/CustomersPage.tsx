@@ -9,39 +9,34 @@ import {
   ToolbarMobileHeading,
   ToolbarMobileTop,
 } from "@/components/common/Toolbar";
-import { FiltersModalTrigger } from "@/components/common/FiltersModalTrigger";
-import { FiltersBottomSheetTrigger } from "@/components/common/FiltersBottomSheetTrigger";
-import { CustomerActionsMenuTrigger } from "@/components/customer/CustomerActionsMenuTrigger";
 import { ViewModeProvider } from "@/components/common/ViewMode";
 import { PageContainer } from "@/components/common/PageContainer";
-import { CustomerFiltersForm } from "@/components/customer/CustomerFiltersForm";
-import { CompanyCheckboxGroupSkeleton } from "@/components/companies/CompanyCheckboxGroup/CompanyCheckboxGroupSkeleton";
+import { CustomerActionsMenuTrigger } from "@/components/customer/CustomerActionsMenuTrigger";
+import { CustomerFiltersModalTrigger } from "@/components/customer/CustomerFiltersModalTrigger";
+import { CustomerFiltersFormSkeleton } from "@/components/customer/CustomerFiltersForm";
+import { CustomerFiltersBottomSheetTrigger } from "@/components/customer/CustomerFiltersBottomSheetTrigger";
 
 interface CustomersPageProps {
-  CompanyCheckboxGroupContainer: React.ComponentType;
+  CustomerFiltersFormContainer: React.ComponentType;
   CustomerViewModeContainer: React.ComponentType;
 }
 
 export function CustomersPage({
-  CompanyCheckboxGroupContainer,
+  CustomerFiltersFormContainer,
   CustomerViewModeContainer,
 }: CustomersPageProps) {
-  const customerFiltersForm = (
-    <CustomerFiltersForm
-      companyCheckboxGroup={
-        <Suspense fallback={<CompanyCheckboxGroupSkeleton />}>
-          <CompanyCheckboxGroupContainer />
-        </Suspense>
-      }
-    />
-  );
-
   return (
     <PageContainer>
       <PageGrid>
         <ViewModeProvider>
           <ToolbarDesktop>
-            <FiltersModalTrigger filtersForm={customerFiltersForm} />
+            <CustomerFiltersModalTrigger
+              filtersForm={
+                <Suspense fallback={<CustomerFiltersFormSkeleton />}>
+                  <CustomerFiltersFormContainer />
+                </Suspense>
+              }
+            />
             <CustomerActionsMenuTrigger />
             <ViewModeToggleButtonGroup className="ml-auto" />
             <Button
@@ -54,7 +49,13 @@ export function CustomersPage({
 
           <ToolbarMobileTop>
             <ToolbarMobileHeading>Customers</ToolbarMobileHeading>
-            <FiltersBottomSheetTrigger filtersForm={customerFiltersForm} />
+            <CustomerFiltersBottomSheetTrigger
+              filtersForm={
+                <Suspense fallback={<CustomerFiltersFormSkeleton />}>
+                  <CustomerFiltersFormContainer />
+                </Suspense>
+              }
+            />
             <CustomerActionsMenuTrigger />
           </ToolbarMobileTop>
 
