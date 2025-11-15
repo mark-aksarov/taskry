@@ -5,7 +5,6 @@ import prisma from "../prisma";
 import { ThenArg } from "./types";
 
 export type GetNotificationsType = ThenArg<ReturnType<typeof getNotifications>>;
-
 export const getNotifications = cache(
   async (userId: string, workspaceId: number) => {
     return prisma.notification.findMany({
