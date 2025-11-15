@@ -9,22 +9,18 @@ import {
   ToolbarMobileHeading,
   ToolbarMobileTop,
 } from "@/components/common/Toolbar";
+import { NewTaskModal } from "@/components/tasks/NewTaskModal";
 import { ViewModeProvider } from "@/components/common/ViewMode";
 import { PageContainer } from "@/components/common/PageContainer";
-import { TaskFiltersForm } from "@/components/tasks/TaskFiltersForm";
-import { UserCheckboxGroupSkeleton } from "@/components/users/UserCheckboxGroup";
+import {
+  TaskFiltersForm,
+  TaskFiltersFormSkeleton,
+} from "@/components/tasks/TaskFiltersForm";
 import { TaskActionsMenuTrigger } from "@/components/tasks/TaskActionsMenuTrigger";
-import { ProjectCheckboxGroupSkeleton } from "@/components/projects/ProjectCheckboxGroup";
-import { TaskCategoryCheckboxGroupSkeleton } from "@/components/tasks/TaskCategoryCheckboxGroup";
-import { NewTaskModal } from "@/components/tasks/NewTaskModal";
 import {
   NewTaskForm,
   NewTaskFormSkeleton,
 } from "@/components/tasks/NewTaskForm";
-import {
-  FieldGroupSkeleton,
-  FieldSkeleton,
-} from "@/components/common/FieldSkeleton";
 import { TaskFiltersModalTrigger } from "@/components/tasks/TaskFiltersModalTrigger";
 import { TaskFiltersBottomSheetTrigger } from "@/components/tasks/TaskFiltersBottomSheetTrigger";
 
@@ -52,34 +48,14 @@ export function TasksPage({
   TaskViewModeContainer,
 }: TasksPageProps) {
   const taskFiltersForm = (
-    <TaskFiltersForm
-      statusCheckboxGroup={
-        <Suspense
-          fallback={
-            <FieldSkeleton>
-              <FieldGroupSkeleton />
-            </FieldSkeleton>
-          }
-        >
-          <TaskStatusCheckboxGroupContainer />
-        </Suspense>
-      }
-      categoryCheckboxGroup={
-        <Suspense fallback={<TaskCategoryCheckboxGroupSkeleton />}>
-          <TaskCategoryCheckboxGroupContainer />
-        </Suspense>
-      }
-      creatorCheckboxGroup={
-        <Suspense fallback={<UserCheckboxGroupSkeleton />}>
-          <UserCheckboxGroupContainer />
-        </Suspense>
-      }
-      projectCheckboxGroup={
-        <Suspense fallback={<ProjectCheckboxGroupSkeleton />}>
-          <ProjectCheckboxGroupContainer />
-        </Suspense>
-      }
-    />
+    <Suspense fallback={<TaskFiltersFormSkeleton />}>
+      <TaskFiltersForm
+        statusCheckboxGroup={<TaskStatusCheckboxGroupContainer />}
+        categoryCheckboxGroup={<TaskCategoryCheckboxGroupContainer />}
+        creatorCheckboxGroup={<UserCheckboxGroupContainer />}
+        projectCheckboxGroup={<ProjectCheckboxGroupContainer />}
+      />
+    </Suspense>
   );
 
   const newTaskForm = (
