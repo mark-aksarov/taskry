@@ -17,6 +17,8 @@ import { Default as ProjectCategoryCheckboxGroupStory } from "@/components/proje
 import { Default as ProjectListStory } from "@/components/projects/ProjectList/ProjectList.stories";
 import { Default as ProjectGridStory } from "@/components/projects/ProjectGrid/ProjectGrid.stories";
 import { Default as UserCheckboxGroupStory } from "@/components/users/UserCheckboxGroup/UserCheckboxGroup.stories";
+import { NewProjectForm } from "@/components/projects/NewProjectForm";
+import { Default as NewProjectFormStory } from "@/components/projects/NewProjectForm/NewProjectForm.stories";
 
 const meta = {
   title: "components/pages/ProjectsPage",
@@ -49,6 +51,9 @@ export const Default: Story = {
         list={<ProjectList {...ProjectListStory.args} />}
         grid={<ProjectGrid {...ProjectGridStory.args} />}
       />
+    ),
+    NewProjectFormContainer: () => (
+      <NewProjectForm {...NewProjectFormStory.args} />
     ),
   },
 };

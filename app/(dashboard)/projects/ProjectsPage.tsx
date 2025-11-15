@@ -6,7 +6,7 @@ import {
 } from "@/components/common/Toolbar";
 import { Suspense } from "react";
 import { Plus } from "lucide-react";
-import { Button } from "@/components/ui";
+import { Button, RACDialogTrigger } from "@/components/ui";
 import { PageGrid } from "@/components/common/PageGrid";
 import { ViewModeProvider } from "@/components/common/ViewMode";
 import { PageContainer } from "@/components/common/PageContainer";
@@ -18,11 +18,14 @@ import {
   ProjectFiltersForm,
   ProjectFiltersFormSkeleton,
 } from "@/components/projects/ProjectFiltersForm";
+import { NewProjectFormSkeleton } from "@/components/projects/NewProjectForm";
+import { NewProjectModal } from "@/components/projects/NewProjectModal";
 
 interface ProjectsPageProps {
   ProjectCategoryCheckboxGroupContainer: React.ComponentType;
   CustomerCheckboxGroupContainer: React.ComponentType;
   UserCheckboxGroupContainer: React.ComponentType;
+  NewProjectFormContainer: React.ComponentType;
   ProjectViewModeContainer: React.ComponentType;
 }
 
@@ -30,6 +33,7 @@ export function ProjectsPage({
   ProjectCategoryCheckboxGroupContainer,
   CustomerCheckboxGroupContainer,
   UserCheckboxGroupContainer,
+  NewProjectFormContainer,
   ProjectViewModeContainer,
 }: ProjectsPageProps) {
   const projectFiltersForm = (
@@ -50,12 +54,21 @@ export function ProjectsPage({
             <FiltersModalTrigger filtersForm={projectFiltersForm} />
             <ProjectActionsMenuTrigger />
             <ViewModeToggleButtonGroup className="ml-auto" />
-            <Button
-              label="New Project"
-              iconLeft={
-                <Plus size={16} strokeWidth={1.5} absoluteStrokeWidth />
-              }
-            />
+            <RACDialogTrigger>
+              <Button
+                label="New Project"
+                iconLeft={
+                  <Plus size={16} strokeWidth={1.5} absoluteStrokeWidth />
+                }
+              />
+              <NewProjectModal
+                newProjectForm={
+                  <Suspense fallback={<NewProjectFormSkeleton />}>
+                    <NewProjectFormContainer />
+                  </Suspense>
+                }
+              />
+            </RACDialogTrigger>
           </ToolbarDesktop>
 
           <ToolbarMobileTop>
@@ -66,10 +79,11 @@ export function ProjectsPage({
 
           <ToolbarMobileBottom>
             <ViewModeToggleButtonGroup />
-            <Button
-              label="New Project"
-              iconLeft={
-                <Plus size={16} strokeWidth={1.5} absoluteStrokeWidth />
+            <NewProjectModal
+              newProjectForm={
+                <Suspense fallback={<NewProjectFormSkeleton />}>
+                  <NewProjectFormContainer />
+                </Suspense>
               }
             />
           </ToolbarMobileBottom>

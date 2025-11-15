@@ -63,3 +63,16 @@ export const getProjects = cache(async (creatorId?: string) => {
     },
   });
 });
+
+export const getProjectStatuses = cache(async () => {
+  return await prisma.projectStatus.findMany({
+    select: { id: true, nameEn: true },
+  });
+});
+
+export const getProjectCategories = cache(async (workspaceId: number) => {
+  return await prisma.projectCategory.findMany({
+    where: { workspaceId },
+    select: { id: true, name: true },
+  });
+});
