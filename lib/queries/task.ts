@@ -112,12 +112,14 @@ export const getTasks = cache(async (creatorId?: string) => {
   });
 });
 
+export const getTaskStatuses = cache(async () => {
+  return prisma.taskStatus.findMany({
+    select: { id: true, nameEn: true },
+  });
+});
+
 export const getTaskCategories = cache(async (workspaceId: number) => {
   return prisma.taskCategory.findMany({
     where: { workspaceId },
   });
-});
-
-export const getTotalTasks = cache(async () => {
-  return prisma.task.count();
 });

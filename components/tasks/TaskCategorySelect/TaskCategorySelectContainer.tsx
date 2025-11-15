@@ -1,14 +1,5 @@
-import "server-only";
-
-import { cache } from "react";
-import prisma from "@/lib/prisma";
+import { getTaskCategories } from "@/lib/queries/task";
 import { TaskCategorySelect } from "./TaskCategorySelect";
-
-export const getTaskCategories = cache(async (workspaceId: number) => {
-  return prisma.taskCategory.findMany({
-    where: { workspaceId },
-  });
-});
 
 export async function TaskCategorySelectContainer() {
   const categories = await getTaskCategories(1);

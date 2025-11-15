@@ -1,14 +1,5 @@
-import "server-only";
-
-import { cache } from "react";
-import prisma from "@/lib/prisma";
+import { getTaskStatuses } from "@/lib/queries/task";
 import { TaskStatusCheckboxGroup } from "./TaskStatusCheckboxGroup";
-
-export const getTaskStatuses = cache(async () => {
-  return prisma.taskStatus.findMany({
-    select: { id: true, nameEn: true },
-  });
-});
 
 export async function TaskStatusCheckboxGroupContainer() {
   const statuses = await getTaskStatuses();
