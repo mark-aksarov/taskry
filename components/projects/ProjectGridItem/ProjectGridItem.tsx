@@ -23,6 +23,7 @@ import { ImageContainer } from "@/components/common/ImageContainer";
 import { MenuDialogHeader } from "@/components/common/MenuDialogHeader";
 import { ProjectGridItemLayout } from "./ProjectGridItemLayout";
 import { ProjectStatusBadge } from "../ProjectStatusBadge";
+import { ProjectGridItemTitle } from "./ProjectGridItemTitle";
 
 export interface ProjectGridItemProps {
   id: number;
@@ -99,11 +100,7 @@ export function ProjectGridItem({
       }
       titleSlot={
         <GridItemInfo className="flex-auto">
-          <GridItemTitle>
-            <Link className="block truncate" href={`/projects/${id}`}>
-              {title}
-            </Link>
-          </GridItemTitle>
+          <ProjectGridItemTitle id={id} title={title} />
           <GridItemText>{`Deadline on ${formattedDeadline}`}</GridItemText>
         </GridItemInfo>
       }

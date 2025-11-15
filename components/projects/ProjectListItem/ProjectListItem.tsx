@@ -23,6 +23,7 @@ import { ProjectListItemLayout } from "./ProjectListItemLayout";
 import { ImageContainer } from "@/components/common/ImageContainer";
 import Image from "next/image";
 import { ProjectStatusBadge } from "../ProjectStatusBadge";
+import { ProjectListItemTitle } from "./ProjectListItemTitle";
 
 export interface ProjectListItemProps {
   id: number;
@@ -82,12 +83,7 @@ export const ProjectListItem = ({
       checkboxSlot={showCheckbox && <Checkbox aria-label="project checkbox" />}
       titleSlot={
         <ListItemInfo>
-          <ListItemTitle>
-            <Link className="block truncate" href={`/projects/${id}`}>
-              {title}
-            </Link>
-          </ListItemTitle>
-
+          <ProjectListItemTitle id={id} title={title} />
           <ListItemText>{`Deadline on ${formattedDeadline}`}</ListItemText>
         </ListItemInfo>
       }
