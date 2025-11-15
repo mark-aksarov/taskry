@@ -1,8 +1,5 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { ProjectsPage } from "./ProjectsPage";
-import { ProjectCategoryCheckboxGroup } from "@/components/projects/ProjectCategoryCheckboxGroup";
-import { CustomerCheckboxGroup } from "@/components/customer/CustomerCheckboxGroup";
-import { UserCheckboxGroup } from "@/components/users/UserCheckboxGroup";
 import { ViewModeContainer } from "@/components/common/ViewMode";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { PageDecorator } from "@/.storybook/PageDecorator";
@@ -12,13 +9,12 @@ import { ProjectList } from "@/components/projects/ProjectList";
 import { ProjectGrid } from "@/components/projects/ProjectGrid";
 import { default as ProjectPageLoading } from "./loading";
 import { ProjectsPageEmpty } from "./ProjectsPageEmpty";
-import { Default as CustomerCheckboxGroupStory } from "@/components/customer/CustomerCheckboxGroup/CustomerCheckboxGroup.stories";
-import { Default as ProjectCategoryCheckboxGroupStory } from "@/components/projects/ProjectCategoryCheckboxGroup/ProjectCategoryCheckboxGroup.stories";
 import { Default as ProjectListStory } from "@/components/projects/ProjectList/ProjectList.stories";
 import { Default as ProjectGridStory } from "@/components/projects/ProjectGrid/ProjectGrid.stories";
-import { Default as UserCheckboxGroupStory } from "@/components/users/UserCheckboxGroup/UserCheckboxGroup.stories";
 import { NewProjectForm } from "@/components/projects/NewProjectForm";
 import { Default as NewProjectFormStory } from "@/components/projects/NewProjectForm/NewProjectForm.stories";
+import { ProjectFiltersForm } from "@/components/projects/ProjectFiltersForm";
+import { Default as ProjectFiltersFormStory } from "@/components/projects/ProjectFiltersForm/ProjectFiltersForm.stories";
 
 const meta = {
   title: "components/pages/ProjectsPage",
@@ -35,16 +31,8 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    ProjectCategoryCheckboxGroupContainer: () => (
-      <ProjectCategoryCheckboxGroup
-        {...ProjectCategoryCheckboxGroupStory.args}
-      />
-    ),
-    CustomerCheckboxGroupContainer: () => (
-      <CustomerCheckboxGroup {...CustomerCheckboxGroupStory.args} />
-    ),
-    UserCheckboxGroupContainer: () => (
-      <UserCheckboxGroup {...UserCheckboxGroupStory.args} />
+    ProjectFiltersFormContainer: () => (
+      <ProjectFiltersForm {...ProjectFiltersFormStory.args} />
     ),
     ProjectViewModeContainer: () => (
       <ViewModeContainer

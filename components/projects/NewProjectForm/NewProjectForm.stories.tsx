@@ -1,8 +1,8 @@
 import { NewProjectForm } from "./NewProjectForm";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { ProjectStatusSelect } from "./ProjectStatusSelect";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { ProjectCategorySelect } from "./ProjectCategorySelect";
+import { NewProjectFormStatusSelect } from "./NewProjectFormStatusSelect";
+import { NewProjectFormCategorySelect } from "./NewProjectFormCategorySelect";
 
 const meta = {
   title: "components/projects/NewProjectForm",
@@ -27,7 +27,7 @@ type Story = StoryObj<typeof meta>;
 export const Default = {
   args: {
     projectStatusSelect: (
-      <ProjectStatusSelect
+      <NewProjectFormStatusSelect
         statuses={[
           { id: "pending", name: "Pending" },
           { id: "active", name: "Active" },
@@ -36,7 +36,7 @@ export const Default = {
       />
     ),
     projectCategorySelect: (
-      <ProjectCategorySelect
+      <NewProjectFormCategorySelect
         categories={[
           {
             id: 1,

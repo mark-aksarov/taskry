@@ -14,44 +14,33 @@ import { ViewModeToggleButtonGroup } from "@/components/common/ViewMode";
 import { FiltersModalTrigger } from "@/components/common/FiltersModalTrigger";
 import { FiltersBottomSheetTrigger } from "@/components/common/FiltersBottomSheetTrigger";
 import { ProjectActionsMenuTrigger } from "@/components/projects/ProjectActionsMenuTrigger";
-import {
-  ProjectFiltersForm,
-  ProjectFiltersFormSkeleton,
-} from "@/components/projects/ProjectFiltersForm";
+import { ProjectFiltersFormSkeleton } from "@/components/projects/ProjectFiltersForm";
 import { NewProjectFormSkeleton } from "@/components/projects/NewProjectForm";
 import { NewProjectModal } from "@/components/projects/NewProjectModal";
 
 interface ProjectsPageProps {
-  ProjectCategoryCheckboxGroupContainer: React.ComponentType;
-  CustomerCheckboxGroupContainer: React.ComponentType;
-  UserCheckboxGroupContainer: React.ComponentType;
+  ProjectFiltersFormContainer: React.ComponentType;
   NewProjectFormContainer: React.ComponentType;
   ProjectViewModeContainer: React.ComponentType;
 }
 
 export function ProjectsPage({
-  ProjectCategoryCheckboxGroupContainer,
-  CustomerCheckboxGroupContainer,
-  UserCheckboxGroupContainer,
+  ProjectFiltersFormContainer,
   NewProjectFormContainer,
   ProjectViewModeContainer,
 }: ProjectsPageProps) {
-  const projectFiltersForm = (
-    <Suspense fallback={<ProjectFiltersFormSkeleton />}>
-      <ProjectFiltersForm
-        projectCategoryCheckboxGroup={<ProjectCategoryCheckboxGroupContainer />}
-        customerCheckboxGroup={<CustomerCheckboxGroupContainer />}
-        userCheckboxGroup={<UserCheckboxGroupContainer />}
-      />
-    </Suspense>
-  );
-
   return (
     <PageContainer>
       <PageGrid>
         <ViewModeProvider>
           <ToolbarDesktop>
-            <FiltersModalTrigger filtersForm={projectFiltersForm} />
+            <FiltersModalTrigger
+              filtersForm={
+                <Suspense fallback={<ProjectFiltersFormSkeleton />}>
+                  <ProjectFiltersFormContainer />
+                </Suspense>
+              }
+            />
             <ProjectActionsMenuTrigger />
             <ViewModeToggleButtonGroup className="ml-auto" />
             <RACDialogTrigger>
@@ -73,7 +62,13 @@ export function ProjectsPage({
 
           <ToolbarMobileTop>
             <ToolbarMobileHeading>Projects</ToolbarMobileHeading>
-            <FiltersBottomSheetTrigger filtersForm={projectFiltersForm} />
+            <FiltersBottomSheetTrigger
+              filtersForm={
+                <Suspense fallback={<ProjectFiltersFormSkeleton />}>
+                  <ProjectFiltersFormContainer />
+                </Suspense>
+              }
+            />
             <ProjectActionsMenuTrigger />
           </ToolbarMobileTop>
 

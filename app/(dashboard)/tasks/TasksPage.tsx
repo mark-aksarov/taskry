@@ -12,71 +12,37 @@ import {
 import { NewTaskModal } from "@/components/tasks/NewTaskModal";
 import { ViewModeProvider } from "@/components/common/ViewMode";
 import { PageContainer } from "@/components/common/PageContainer";
-import {
-  TaskFiltersForm,
-  TaskFiltersFormSkeleton,
-} from "@/components/tasks/TaskFiltersForm";
+import { TaskFiltersFormSkeleton } from "@/components/tasks/TaskFiltersForm";
 import { TaskActionsMenuTrigger } from "@/components/tasks/TaskActionsMenuTrigger";
-import {
-  NewTaskForm,
-  NewTaskFormSkeleton,
-} from "@/components/tasks/NewTaskForm";
+import { NewTaskFormSkeleton } from "@/components/tasks/NewTaskForm";
 import { TaskFiltersModalTrigger } from "@/components/tasks/TaskFiltersModalTrigger";
 import { TaskFiltersBottomSheetTrigger } from "@/components/tasks/TaskFiltersBottomSheetTrigger";
 import { TaskSortingMenuTrigger } from "@/components/tasks/TaskSortingMenuTrigger";
 
 interface TasksPageProps {
-  TaskStatusCheckboxGroupContainer: React.ComponentType;
-  TaskCategoryCheckboxGroupContainer: React.ComponentType;
-  UserCheckboxGroupContainer: React.ComponentType;
-  ProjectCheckboxGroupContainer: React.ComponentType;
-  TaskCategorySelectContainer: React.ComponentType;
-  TaskStatusSelectContainer: React.ComponentType;
-  ProjectSelectContainer: React.ComponentType;
-  UserSelectContainer: React.ComponentType;
+  TaskFiltersFormContainer: React.ComponentType;
+  NewTaskFormContainer: React.ComponentType;
   TaskViewModeContainer: React.ComponentType;
 }
 
 export function TasksPage({
-  TaskStatusCheckboxGroupContainer,
-  TaskCategoryCheckboxGroupContainer,
-  UserCheckboxGroupContainer,
-  ProjectCheckboxGroupContainer,
-  TaskCategorySelectContainer,
-  TaskStatusSelectContainer,
-  ProjectSelectContainer,
-  UserSelectContainer,
+  TaskFiltersFormContainer,
+  NewTaskFormContainer,
   TaskViewModeContainer,
 }: TasksPageProps) {
-  const taskFiltersForm = (
-    <Suspense fallback={<TaskFiltersFormSkeleton />}>
-      <TaskFiltersForm
-        statusCheckboxGroup={<TaskStatusCheckboxGroupContainer />}
-        categoryCheckboxGroup={<TaskCategoryCheckboxGroupContainer />}
-        creatorCheckboxGroup={<UserCheckboxGroupContainer />}
-        projectCheckboxGroup={<ProjectCheckboxGroupContainer />}
-      />
-    </Suspense>
-  );
-
-  const newTaskForm = (
-    <Suspense fallback={<NewTaskFormSkeleton />}>
-      <NewTaskForm
-        taskStatusSelect={<TaskStatusSelectContainer />}
-        taskCategorySelect={<TaskCategorySelectContainer />}
-        projectSelect={<ProjectSelectContainer />}
-        assigneeSelect={<UserSelectContainer />}
-      />
-    </Suspense>
-  );
-
   return (
     <PageContainer>
       <PageGrid>
         <ViewModeProvider>
           <ToolbarDesktop>
             <TaskSortingMenuTrigger />
-            <TaskFiltersModalTrigger filtersForm={taskFiltersForm} />
+            <TaskFiltersModalTrigger
+              filtersForm={
+                <Suspense fallback={<TaskFiltersFormSkeleton />}>
+                  <TaskFiltersFormContainer />
+                </Suspense>
+              }
+            />
             <TaskActionsMenuTrigger />
             <ViewModeToggleButtonGroup className="ml-auto" />
             <RACDialogTrigger>
@@ -86,14 +52,26 @@ export function TasksPage({
                   <Plus size={16} strokeWidth={1.5} absoluteStrokeWidth />
                 }
               />
-              <NewTaskModal newTaskForm={newTaskForm} />
+              <NewTaskModal
+                newTaskForm={
+                  <Suspense fallback={<NewTaskFormSkeleton />}>
+                    <NewTaskFormContainer />
+                  </Suspense>
+                }
+              />
             </RACDialogTrigger>
           </ToolbarDesktop>
 
           <ToolbarMobileTop>
             <ToolbarMobileHeading>Tasks</ToolbarMobileHeading>
             <TaskSortingMenuTrigger />
-            <TaskFiltersBottomSheetTrigger filtersForm={taskFiltersForm} />
+            <TaskFiltersBottomSheetTrigger
+              filtersForm={
+                <Suspense fallback={<TaskFiltersFormSkeleton />}>
+                  <TaskFiltersFormContainer />
+                </Suspense>
+              }
+            />
             <TaskActionsMenuTrigger />
           </ToolbarMobileTop>
 
@@ -106,7 +84,13 @@ export function TasksPage({
                   <Plus size={16} strokeWidth={1.5} absoluteStrokeWidth />
                 }
               />
-              <NewTaskModal newTaskForm={newTaskForm} />
+              <NewTaskModal
+                newTaskForm={
+                  <Suspense fallback={<NewTaskFormSkeleton />}>
+                    <NewTaskFormContainer />
+                  </Suspense>
+                }
+              />
             </RACDialogTrigger>
           </ToolbarMobileBottom>
 

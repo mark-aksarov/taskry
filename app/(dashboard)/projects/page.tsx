@@ -1,11 +1,9 @@
 import { ProjectsPage } from "./ProjectsPage";
 import { getProjects } from "@/lib/queries/project";
 import { ProjectsPageEmpty } from "./ProjectsPageEmpty";
-import { UserCheckboxGroupContainer } from "@/components/users/UserCheckboxGroup";
-import { CustomerCheckboxGroupContainer } from "@/components/customer/CustomerCheckboxGroup";
-import { ProjectCategoryCheckboxGroupContainer } from "@/components/projects/ProjectCategoryCheckboxGroup";
-import { ProjectViewModeContainer } from "@/components/projects/ProjectViewModeContainer";
 import { NewProjectFormContainer } from "@/components/projects/NewProjectForm";
+import { ProjectFiltersFormContainer } from "@/components/projects/ProjectFiltersForm";
+import { ProjectViewModeContainer } from "@/components/projects/ProjectViewModeContainer";
 
 export default async function AppProjectsPage() {
   const projects = await getProjects();
@@ -14,11 +12,7 @@ export default async function AppProjectsPage() {
 
   return (
     <ProjectsPage
-      ProjectCategoryCheckboxGroupContainer={
-        ProjectCategoryCheckboxGroupContainer
-      }
-      CustomerCheckboxGroupContainer={CustomerCheckboxGroupContainer}
-      UserCheckboxGroupContainer={UserCheckboxGroupContainer}
+      ProjectFiltersFormContainer={ProjectFiltersFormContainer}
       ProjectViewModeContainer={ProjectViewModeContainer}
       NewProjectFormContainer={NewProjectFormContainer}
     />

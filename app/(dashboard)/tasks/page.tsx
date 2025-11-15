@@ -1,17 +1,11 @@
 import { TasksPage } from "./TasksPage";
 import { getTasks } from "@/lib/queries/task";
 import { TasksPageEmpty } from "./TasksPageEmpty";
-import { UserCheckboxGroupContainer } from "@/components/users/UserCheckboxGroup";
-import { CustomerCheckboxGroupContainer } from "@/components/customer/CustomerCheckboxGroup";
-import { TaskCategoryCheckboxGroupContainer } from "@/components/tasks/TaskCategoryCheckboxGroup";
-import { TaskViewModeContainer } from "@/components/tasks/TaskViewModeContainer";
-import { TaskCategorySelectContainer } from "@/components/tasks/TaskCategorySelect";
-import { ProjectSelectContainer } from "@/components/projects/ProjectSelect";
-import { UserSelectContainer } from "@/components/users/UserSelect";
+import { NewTaskFormContainer } from "@/components/tasks/NewTaskForm";
 import { TaskDetailContainerProvider } from "@/components/tasks/TaskDetail";
+import { TaskViewModeContainer } from "@/components/tasks/TaskViewModeContainer";
 import { CommentsContainerProvider } from "@/components/comments/CommentsContainer";
-import { TaskStatusSelectContainer } from "@/components/tasks/TaskStatusSelect/TaskStatusSelectContainer";
-import { TaskStatusCheckboxGroupContainer } from "@/components/tasks/TaskStatusCheckboxGroup/TaskStatusCheckboxGroupContainer";
+import { TaskFiltersFormContainer } from "@/components/tasks/TaskFiltersForm/TaskFiltersFormContainer";
 
 export default async function AppTasksPage() {
   const tasks = await getTasks();
@@ -22,16 +16,8 @@ export default async function AppTasksPage() {
     <TaskDetailContainerProvider>
       <CommentsContainerProvider>
         <TasksPage
-          TaskStatusCheckboxGroupContainer={TaskStatusCheckboxGroupContainer}
-          TaskCategoryCheckboxGroupContainer={
-            TaskCategoryCheckboxGroupContainer
-          }
-          UserCheckboxGroupContainer={UserCheckboxGroupContainer}
-          ProjectCheckboxGroupContainer={CustomerCheckboxGroupContainer}
-          TaskStatusSelectContainer={TaskStatusSelectContainer}
-          TaskCategorySelectContainer={TaskCategorySelectContainer}
-          ProjectSelectContainer={ProjectSelectContainer}
-          UserSelectContainer={UserSelectContainer}
+          TaskFiltersFormContainer={TaskFiltersFormContainer}
+          NewTaskFormContainer={NewTaskFormContainer}
           TaskViewModeContainer={TaskViewModeContainer}
         />
       </CommentsContainerProvider>

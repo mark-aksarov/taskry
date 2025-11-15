@@ -8,14 +8,14 @@ interface TaskFiltersFormProps {
   statusCheckboxGroup: React.ReactNode;
   categoryCheckboxGroup: React.ReactNode;
   projectCheckboxGroup: React.ReactNode;
-  creatorCheckboxGroup: React.ReactNode;
+  assigneeCheckboxGroup: React.ReactNode;
 }
 
 export function TaskFiltersForm({
   statusCheckboxGroup,
   categoryCheckboxGroup,
   projectCheckboxGroup,
-  creatorCheckboxGroup,
+  assigneeCheckboxGroup,
 }: TaskFiltersFormProps) {
   return (
     <RACForm>
@@ -25,7 +25,7 @@ export function TaskFiltersForm({
         {statusCheckboxGroup}
         {categoryCheckboxGroup}
         {projectCheckboxGroup}
-        {creatorCheckboxGroup}
+        {assigneeCheckboxGroup}
       </div>
     </RACForm>
   );
