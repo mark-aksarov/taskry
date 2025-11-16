@@ -7,7 +7,7 @@ export function ProjectDetailModal({ projectId }: { projectId: number }) {
   const ProjectDetailContainer = useProjectDetailContainer();
 
   return (
-    <DetailModal>
+    <DetailModal title="Project Detail">
       <ProjectDetailContainer projectId={projectId} />
     </DetailModal>
   );

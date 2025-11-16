@@ -1,6 +1,5 @@
-"use client";
-
 import {
+  BottomSheet,
   Button,
   Dialog,
   DialogBody,
@@ -8,21 +7,26 @@ import {
   DialogFooter,
   DialogHeader,
   DialogHeading,
-  Modal,
 } from "@/components/ui";
+import { OverlayTriggerState } from "react-stately";
 
-interface DetailModalProps {
+export interface DetailBottomSheetProps {
+  state: OverlayTriggerState;
   title: string;
   children: React.ReactNode;
 }
 
-export function DetailModal({ title, children }: DetailModalProps) {
+export function DetailBottomSheet({
+  state,
+  title,
+  children,
+}: DetailBottomSheetProps) {
   return (
-    <Modal isDismissable className="w-[460px]">
-      <Dialog className="max-h-[calc(100dvh-64px)]">
+    <BottomSheet isDismissable state={state} className="md:hidden">
+      <Dialog className="max-h-[calc(100dvh-6.25rem)]">
         <DialogHeader>
-          <DialogHeading>{title}</DialogHeading>
-          <DialogCloseButton iconSize={20} />
+          <DialogHeading className="text-base">{title}</DialogHeading>
+          <DialogCloseButton />
         </DialogHeader>
         <DialogBody>{children}</DialogBody>
         <DialogFooter>
@@ -34,6 +38,6 @@ export function DetailModal({ title, children }: DetailModalProps) {
           />
         </DialogFooter>
       </Dialog>
-    </Modal>
+    </BottomSheet>
   );
 }

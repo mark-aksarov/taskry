@@ -7,7 +7,7 @@ export function TaskDetailModal({ taskId }: { taskId: number }) {
   const TaskDetailContainer = useTaskDetailContainer();
 
   return (
-    <DetailModal>
+    <DetailModal title="Task Detail">
       <TaskDetailContainer taskId={taskId} />
     </DetailModal>
   );

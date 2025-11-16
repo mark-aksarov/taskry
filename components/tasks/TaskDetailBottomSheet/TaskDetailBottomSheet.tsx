@@ -1,15 +1,8 @@
-import {
-  BottomSheet,
-  Button,
-  Dialog,
-  DialogBody,
-  DialogCloseButton,
-  DialogFooter,
-  DialogHeader,
-  DialogHeading,
-} from "@/components/ui";
+"use client";
+
 import { OverlayTriggerState } from "react-stately";
 import { useTaskDetailContainer } from "../TaskDetail";
+import { DetailBottomSheet } from "@/components/common/DetailBottomSheet";
 
 export interface TaskDetailBottomSheetProps {
   taskId: number;
@@ -23,27 +16,8 @@ export function TaskDetailBottomSheet({
   const TaskDetailContainer = useTaskDetailContainer();
 
   return (
-    <BottomSheet isDismissable state={state} className="md:hidden">
-      <Dialog
-        aria-label="App navigation"
-        className="max-h-[calc(100dvh-6.25rem)]"
-      >
-        <DialogHeader>
-          <DialogHeading className="text-base">Task Details</DialogHeading>
-          <DialogCloseButton />
-        </DialogHeader>
-        <DialogBody>
-          <TaskDetailContainer taskId={taskId} />
-        </DialogBody>
-        <DialogFooter>
-          <Button
-            variant="primary"
-            size="medium"
-            label="Edit Task"
-            className="w-full justify-center"
-          />
-        </DialogFooter>
-      </Dialog>
-    </BottomSheet>
+    <DetailBottomSheet state={state} title="Task Detail">
+      <TaskDetailContainer taskId={taskId} />
+    </DetailBottomSheet>
   );
 }
