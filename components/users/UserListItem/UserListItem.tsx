@@ -64,35 +64,35 @@ export function UserListItem({
       </ListItemInfo>
 
       <ListItemInfo className="@max-lg:hidden">
-        <ListItemTitle>Phone number</ListItemTitle>
-
-        <ListItemText>
+        <ListItemTitle>
           {phoneNumber ? (
             <Link href={`tel:${phoneNumber}`}>{phoneNumber}</Link>
           ) : (
             "Phone number is not provided"
           )}
-        </ListItemText>
+        </ListItemTitle>
+
+        <ListItemText>Phone number</ListItemText>
       </ListItemInfo>
 
       <ListItemInfo className="@max-2xl:hidden">
-        <ListItemTitle>Public link</ListItemTitle>
-
-        <ListItemText>
+        <ListItemTitle>
           {publicLink ? (
             <Link href={publicLink}>{publicLink}</Link>
           ) : (
             "Link is not provided"
           )}
-        </ListItemText>
+        </ListItemTitle>
+
+        <ListItemText>Public link</ListItemText>
       </ListItemInfo>
 
       <ListItemInfo className="@max-4xl:hidden">
-        <ListItemTitle>Position</ListItemTitle>
-
-        <ListItemText>
+        <ListItemTitle>
           {position ? position.name : "Unknown position"}
-        </ListItemText>
+        </ListItemTitle>
+
+        <ListItemText>Position</ListItemText>
       </ListItemInfo>
 
       <ItemBaseActionMenuTrigger>

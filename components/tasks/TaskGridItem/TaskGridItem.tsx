@@ -19,9 +19,8 @@ import {
 
 import Image from "next/image";
 import { useMemo } from "react";
-import { TaskStatusBadge } from "../TaskStatusBadge";
 import { TaskDetailModal } from "../TaskDetailModal";
-import { Button, Link, Checkbox } from "@/components/ui";
+import { Link, Checkbox } from "@/components/ui";
 import { TaskGridItemLayout } from "./TaskGridItemLayout";
 import { TaskDetailBottomSheet } from "../TaskDetailBottomSheet";
 import { ImageContainer } from "@/components/common/ImageContainer";

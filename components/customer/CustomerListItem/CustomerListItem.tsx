@@ -61,9 +61,7 @@ export function CustomerListItem({
         </ListItemText>
       </ListItemInfo>
       <ListItemInfo className="@max-lg:hidden">
-        <ListItemTitle>Phone number</ListItemTitle>
-
-        <ListItemText>
+        <ListItemTitle>
           {phoneNumber ? (
             <Link className="block truncate" href={`tel:${phoneNumber}`}>
               {phoneNumber}
@@ -71,12 +69,12 @@ export function CustomerListItem({
           ) : (
             "Phone number is not provided"
           )}
-        </ListItemText>
+        </ListItemTitle>
+
+        <ListItemText>Phone number</ListItemText>
       </ListItemInfo>
       <ListItemInfo className="@max-2xl:hidden">
-        <ListItemTitle>Public link</ListItemTitle>
-
-        <ListItemText>
+        <ListItemTitle>
           {publicLink ? (
             <Link className="block truncate" href={publicLink}>
               {publicLink}
@@ -84,12 +82,14 @@ export function CustomerListItem({
           ) : (
             "Link is not provided"
           )}
-        </ListItemText>
+        </ListItemTitle>
+
+        <ListItemText>Public link</ListItemText>
       </ListItemInfo>
 
       <ListItemInfo className="@max-4xl:hidden">
-        <ListItemTitle>Company</ListItemTitle>
-        <ListItemText>{company.name}</ListItemText>
+        <ListItemTitle>{company.name}</ListItemTitle>
+        <ListItemText>Company</ListItemText>
       </ListItemInfo>
 
       <ItemBaseActionMenuTrigger>

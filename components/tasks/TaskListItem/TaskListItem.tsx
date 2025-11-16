@@ -115,41 +115,41 @@ export const TaskListItem = ({
             <ImageContainer className="h-9 w-9 @max-2xl:hidden" />
           )}
           <ListItemInfo className="@max-2xl:hidden">
-            <ListItemTitle>Assignee</ListItemTitle>
-            {assignee ? (
-              <ListItemText>
+            <ListItemTitle>
+              {assignee ? (
                 <Link className="block truncate" href={`/users=${assignee.id}`}>
                   {assignee.fullName}
                 </Link>
-              </ListItemText>
-            ) : (
-              <ListItemText>Unknown assignee</ListItemText>
-            )}
+              ) : (
+                "Unknown assignee"
+              )}
+            </ListItemTitle>
+            <ListItemText>Assignee</ListItemText>
           </ListItemInfo>
         </>
       }
       categorySlot={
         <ListItemInfo className="@max-3xl:hidden">
-          <ListItemTitle>Category</ListItemTitle>
-
-          <ListItemText>
+          <ListItemTitle>
             <Link
               className="block truncate"
               href={`/categories/${category.id}`}
             >
               {category.name}
             </Link>
-          </ListItemText>
+          </ListItemTitle>
+
+          <ListItemText>Category</ListItemText>
         </ListItemInfo>
       }
       projectSlot={
         <ListItemInfo className="@max-4xl:hidden">
-          <ListItemTitle>Project</ListItemTitle>
-          <ListItemText>
+          <ListItemTitle>
             <Link className="block truncate" href={`/projects/${project.id}`}>
               {project.title}
             </Link>
-          </ListItemText>
+          </ListItemTitle>
+          <ListItemText>Project</ListItemText>
         </ListItemInfo>
       }
       statusSlot={

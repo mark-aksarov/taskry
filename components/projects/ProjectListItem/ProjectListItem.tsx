@@ -116,16 +116,16 @@ export const ProjectListItem = ({
           )}
 
           <ListItemInfo className="@max!-2xl:hidden">
-            <ListItemTitle>Creator</ListItemTitle>
-            {creator ? (
-              <ListItemText>
+            <ListItemTitle>
+              {creator ? (
                 <Link className="block truncate" href={`/users=${creator.id}`}>
                   {creator.fullName}
                 </Link>
-              </ListItemText>
-            ) : (
-              <ListItemText>Unknown creator</ListItemText>
-            )}
+              ) : (
+                "Unknown creator"
+              )}
+            </ListItemTitle>
+            <ListItemText>Creator</ListItemText>
           </ListItemInfo>
         </>
       }
@@ -145,44 +145,44 @@ export const ProjectListItem = ({
           )}
 
           <ListItemInfo className="@max-3xl:hidden">
-            <ListItemTitle>Customer</ListItemTitle>
-
-            {customer ? (
-              <ListItemText>
+            <ListItemTitle>
+              {customer ? (
                 <Link
                   className="block truncate"
                   href={`/customers=${customer.id}`}
                 >
                   {customer.fullName}
                 </Link>
-              </ListItemText>
-            ) : (
-              <ListItemText>Unknown customer</ListItemText>
-            )}
+              ) : (
+                "Unknown customer"
+              )}
+            </ListItemTitle>
+
+            <ListItemText>Customer</ListItemText>
           </ListItemInfo>
         </>
       }
       categorySlot={
         <ListItemInfo className="@max-4xl:hidden">
-          <ListItemTitle>Category</ListItemTitle>
-
-          <ListItemText>
+          <ListItemTitle>
             <Link
               className="block truncate"
               href={`/categories=${category.id}`}
             >
               {category.name}
             </Link>
-          </ListItemText>
+          </ListItemTitle>
+
+          <ListItemText>Category</ListItemText>
         </ListItemInfo>
       }
       companySlot={
         <ListItemInfo className="@max-5xl:hidden">
-          <ListItemTitle>Company</ListItemTitle>
-
-          <ListItemText>
+          <ListItemTitle>
             {company ? company.name : "Unknown company"}
-          </ListItemText>
+          </ListItemTitle>
+
+          <ListItemText>Company</ListItemText>
         </ListItemInfo>
       }
       statusSlot={
