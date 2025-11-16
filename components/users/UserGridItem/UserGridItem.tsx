@@ -13,11 +13,10 @@ import {
 import Image from "next/image";
 import { Item } from "react-stately";
 import { UserGridItemLayout } from "./UserGridItemLayout";
-import { Button, Link, Checkbox, Divider } from "@/components/ui";
+import { Link, Checkbox, Divider } from "@/components/ui";
+import { Link2, Mail, Pencil, Phone, Trash } from "lucide-react";
 import { ImageContainer } from "@/components/common/ImageContainer";
-import { MenuDialogHeader } from "@/components/common/MenuDialogHeader";
-import { Ellipsis, Link2, Mail, Pencil, Phone, Trash } from "lucide-react";
-import { ResponsiveMenuTrigger } from "@/components/common/ResponsiveMenuTrigger";
+import { ItemBaseActionMenuTrigger } from "@/components/common/ItemBase";
 
 export interface UserGridItemProps {
   id: string;
@@ -44,27 +43,14 @@ export function UserGridItem({
     <UserGridItemLayout
       checkboxSlot={<Checkbox aria-label={`${fullName} checkbox`} />}
       actionMenuSlot={
-        <ResponsiveMenuTrigger
-          placement="bottom right"
-          renderDialogHeader={() => <MenuDialogHeader heading="Actions" />}
-          renderButton={() => (
-            <Button
-              aria-label="user menu"
-              variant="ghost"
-              iconLeft={
-                <Ellipsis size={16} strokeWidth={1.5} absoluteStrokeWidth />
-              }
-              className="-mr-2 rounded-full"
-            />
-          )}
-        >
+        <ItemBaseActionMenuTrigger>
           <Item textValue="Edit" key="edit">
             <Pencil size={16} /> Edit
           </Item>
           <Item textValue="Delete" key="delete">
             <Trash size={16} /> Delete
           </Item>
-        </ResponsiveMenuTrigger>
+        </ItemBaseActionMenuTrigger>
       }
       imageSlot={
         imageUrl ? (

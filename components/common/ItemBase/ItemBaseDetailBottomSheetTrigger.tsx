@@ -4,15 +4,15 @@ import { useOverlayTrigger } from "react-aria";
 import { focusRing, RACButton } from "@/components/ui";
 import { OverlayTriggerState, useOverlayTriggerState } from "react-stately";
 
-interface ListItemDetailBottomSheetTriggerProps {
+interface ItemBaseDetailBottomSheetTriggerProps {
   title: string;
   renderBottomSheet: (state: OverlayTriggerState) => React.ReactNode;
 }
 
-export function ListItemDetailBottomSheetTrigger({
+export function ItemBaseDetailBottomSheetTrigger({
   title,
   renderBottomSheet,
-}: ListItemDetailBottomSheetTriggerProps) {
+}: ItemBaseDetailBottomSheetTriggerProps) {
   const state = useOverlayTriggerState({});
   const { triggerProps } = useOverlayTrigger({ type: "dialog" }, state);
 

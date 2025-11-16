@@ -6,24 +6,29 @@ import {
   Check,
   CircleEllipsis,
   Clock,
-  Ellipsis,
   MessageSquare,
   Trash,
 } from "lucide-react";
 import { Item } from "react-stately";
-import { Checkbox, Button } from "@/components/ui";
+import { Checkbox } from "@/components/ui";
 import {
   ListItemInfo,
   ListItemText,
   ListItemTitle,
 } from "@/components/common/List/index";
-import { ResponsiveMenuTrigger } from "@/components/common/ResponsiveMenuTrigger";
-import { MenuDialogHeader } from "@/components/common/MenuDialogHeader";
 import { ProjectListItemLayout } from "./ProjectListItemLayout";
 import { ImageContainer } from "@/components/common/ImageContainer";
 import Image from "next/image";
-import { ProjectStatusBadge } from "../ProjectStatusBadge";
-import { ProjectListItemTitle } from "./ProjectListItemTitle";
+import {
+  ItemBaseActionMenuTrigger,
+  ItemBaseBadge,
+  ItemBaseButton,
+  ItemBaseDetailBottomSheetTrigger,
+  ItemBaseDetailModalTrigger,
+} from "@/components/common/ItemBase";
+import { ProjectDetailModal } from "../ProjectDetailModal";
+import { ProjectDetailBottomSheet } from "../ProjectDetailBottomSheet";
+import { getProjectStatusBadgeColor } from "../getProjectStatusBadgeColor";
 
 export interface ProjectListItemProps {
   id: number;
@@ -83,7 +88,18 @@ export const ProjectListItem = ({
       checkboxSlot={showCheckbox && <Checkbox aria-label="project checkbox" />}
       titleSlot={
         <ListItemInfo>
-          <ProjectListItemTitle id={id} title={title} />
+          <ListItemTitle>
+            <ItemBaseDetailModalTrigger
+              title={title}
+              modal={<ProjectDetailModal projectId={id} />}
+            />
+            <ItemBaseDetailBottomSheetTrigger
+              title={title}
+              renderBottomSheet={(state) => (
+                <ProjectDetailBottomSheet projectId={id} state={state} />
+              )}
+            />
+          </ListItemTitle>
           <ListItemText>{`Deadline on ${formattedDeadline}`}</ListItemText>
         </ListItemInfo>
       }
@@ -170,36 +186,21 @@ export const ProjectListItem = ({
         </ListItemInfo>
       }
       statusSlot={
-        <ProjectStatusBadge
-          className="w-[5.625rem] @max-md:hidden"
-          status={status}
-        />
+        <ItemBaseBadge color={getProjectStatusBadgeColor(status.id)}>
+          {status.name}
+        </ItemBaseBadge>
       }
       commentsModalTriggerSlot={
-        <Button
-          variant="outlined"
+        <ItemBaseButton
           label={comments}
           iconLeft={
             <MessageSquare size={16} strokeWidth={1.5} absoluteStrokeWidth />
           }
-          className="h-[1.75rem] w-[3.75rem] justify-center rounded-full @max-md:hidden"
+          className="@max-md:hidden"
         />
       }
       menuTriggerSlot={
-        <ResponsiveMenuTrigger
-          placement="bottom right"
-          renderDialogHeader={() => <MenuDialogHeader heading="Actions" />}
-          renderButton={() => (
-            <Button
-              aria-label="project menu"
-              variant="ghost"
-              iconLeft={
-                <Ellipsis size={16} strokeWidth={1.5} absoluteStrokeWidth />
-              }
-              className="rounded-full"
-            />
-          )}
-        >
+        <ItemBaseActionMenuTrigger>
           <Item textValue="Delete" key="delete">
             <Trash size={16} /> Delete
           </Item>
@@ -214,7 +215,7 @@ export const ProjectListItem = ({
             <Clock size={16} />
             Mark as Active
           </Item>
-        </ResponsiveMenuTrigger>
+        </ItemBaseActionMenuTrigger>
       }
     />
   );

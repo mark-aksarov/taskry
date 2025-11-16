@@ -8,11 +8,10 @@ import {
 } from "@/components/common/List";
 import Image from "next/image";
 import { Item } from "react-stately";
-import { Ellipsis, Pencil, Trash } from "lucide-react";
-import { Button, Checkbox, Link } from "@/components/ui";
+import { Pencil, Trash } from "lucide-react";
+import { Checkbox, Link } from "@/components/ui";
 import { ImageContainer } from "@/components/common/ImageContainer";
-import { MenuDialogHeader } from "@/components/common/MenuDialogHeader";
-import { ResponsiveMenuTrigger } from "@/components/common/ResponsiveMenuTrigger";
+import { ItemBaseActionMenuTrigger } from "@/components/common/ItemBase";
 
 export type CustomerListItemProps = {
   id: number;
@@ -93,27 +92,14 @@ export function CustomerListItem({
         <ListItemText>{company.name}</ListItemText>
       </ListItemInfo>
 
-      <ResponsiveMenuTrigger
-        placement="bottom right"
-        renderDialogHeader={() => <MenuDialogHeader heading="Actions" />}
-        renderButton={() => (
-          <Button
-            aria-label="customer menu"
-            variant="ghost"
-            iconLeft={
-              <Ellipsis size={16} strokeWidth={1.5} absoluteStrokeWidth />
-            }
-            className="rounded-full"
-          />
-        )}
-      >
+      <ItemBaseActionMenuTrigger>
         <Item textValue="Edit" key="edit">
           <Pencil size={16} /> Edit
         </Item>
         <Item textValue="Delete" key="delete">
           <Trash size={16} /> Delete
         </Item>
-      </ResponsiveMenuTrigger>
+      </ItemBaseActionMenuTrigger>
     </ListItem>
   );
 }

@@ -27,7 +27,6 @@ export const CustomerActionsMenuTrigger = () => {
           />
           <Button
             {...triggerProps}
-            aria-label="actions"
             variant="outlined"
             label="Actions"
             iconLeft={

@@ -5,12 +5,14 @@ import {
 import { Skeleton } from "@/components/ui";
 import { UserGridItemLayout } from "./UserGridItemLayout";
 import { ImageContainerSkeleton } from "@/components/common/ImageContainer";
-import { MenuTriggerSkeleton } from "@/components/common/MenuTriggerSkeleton";
+import { ItemBaseActionMenuTriggerSkeleton } from "@/components/common/ItemBase";
 
 export function UserGridItemSkeleton() {
   return (
     <UserGridItemLayout
-      actionMenuSlot={<MenuTriggerSkeleton className="-mr-2 ml-auto" />}
+      actionMenuSlot={
+        <ItemBaseActionMenuTriggerSkeleton className="-mr-2 ml-auto" />
+      }
       imageSlot={<ImageContainerSkeleton className="h-20 w-20" />}
       titleSlot={<GridItemInfoSkeleton className="w-full items-center" />}
       phoneNumberSlot={

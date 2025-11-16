@@ -1,7 +1,10 @@
-import { ListItemInfoSkeleton } from "@/components/common/List";
-import { MenuTriggerSkeleton } from "@/components/common/MenuTriggerSkeleton";
+import {
+  ItemBaseBadgeSkeleton,
+  ItemBaseButtonSkeleton,
+  ItemBaseActionMenuTriggerSkeleton,
+} from "@/components/common/ItemBase";
 import { TaskListItemLayout } from "./TaskListItemLayout";
-import { Skeleton } from "@/components/ui";
+import { ListItemInfoSkeleton } from "@/components/common/List";
 import { ImageContainerSkeleton } from "@/components/common/ImageContainer";
 
 export const TaskListItemSkeleton = () => {
@@ -16,16 +19,14 @@ export const TaskListItemSkeleton = () => {
       }
       categorySlot={<ListItemInfoSkeleton className="@max-3xl:hidden" />}
       projectSlot={<ListItemInfoSkeleton className="@max-4xl:hidden" />}
-      statusSlot={
-        <Skeleton className="h-[1.75rem] w-[5.625rem] rounded-full @max-lg:hidden" />
-      }
+      statusSlot={<ItemBaseBadgeSkeleton className="@max-lg:hidden" />}
       commentsModalTriggerSlot={
-        <Skeleton className="h-[1.75rem] w-[3.75rem] rounded-full @max-md:hidden" />
+        <ItemBaseButtonSkeleton className="@max-md:hidden" />
       }
       subtasksModalTriggerSlot={
-        <Skeleton className="h-[1.75rem] w-[3.75rem] rounded-full @max-md:hidden" />
+        <ItemBaseButtonSkeleton className="@max-md:hidden" />
       }
-      menuTriggerSlot={<MenuTriggerSkeleton />}
+      menuTriggerSlot={<ItemBaseActionMenuTriggerSkeleton />}
     />
   );
 };

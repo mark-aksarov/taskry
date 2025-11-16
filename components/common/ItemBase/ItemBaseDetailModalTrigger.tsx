@@ -2,15 +2,15 @@
 
 import { focusRing, RACButton, RACDialogTrigger } from "@/components/ui";
 
-interface ListItemDetailModalTriggerProps {
+interface ItemBaseDetailModalTriggerProps {
   title: string;
   modal: React.ReactNode;
 }
 
-export function ListItemDetailModalTrigger({
+export function ItemBaseDetailModalTrigger({
   title,
   modal,
-}: ListItemDetailModalTriggerProps) {
+}: ItemBaseDetailModalTriggerProps) {
   return (
     <RACDialogTrigger>
       <RACButton

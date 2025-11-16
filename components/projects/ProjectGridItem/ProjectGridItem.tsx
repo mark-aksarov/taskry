@@ -3,16 +3,14 @@
 import Image from "next/image";
 import { useMemo } from "react";
 import { Item } from "react-stately";
-import { Checkbox, Button, Link } from "@/components/ui";
+import { Checkbox, Link } from "@/components/ui";
 import {
   Check,
   CircleEllipsis,
   Clock,
-  Ellipsis,
   MessageSquare,
   Trash,
 } from "lucide-react";
-import { ResponsiveMenuTrigger } from "@/components/common/ResponsiveMenuTrigger";
 import {
   GridItemInfo,
   GridItemProgress,
@@ -20,10 +18,17 @@ import {
   GridItemTitle,
 } from "@/components/common/Grid";
 import { ImageContainer } from "@/components/common/ImageContainer";
-import { MenuDialogHeader } from "@/components/common/MenuDialogHeader";
 import { ProjectGridItemLayout } from "./ProjectGridItemLayout";
-import { ProjectStatusBadge } from "../ProjectStatusBadge";
-import { ProjectGridItemTitle } from "./ProjectGridItemTitle";
+import {
+  ItemBaseActionMenuTrigger,
+  ItemBaseBadge,
+  ItemBaseButton,
+  ItemBaseDetailBottomSheetTrigger,
+  ItemBaseDetailModalTrigger,
+} from "@/components/common/ItemBase";
+import { ProjectDetailModal } from "../ProjectDetailModal";
+import { ProjectDetailBottomSheet } from "../ProjectDetailBottomSheet";
+import { getProjectStatusBadgeColor } from "../getProjectStatusBadgeColor";
 
 export interface ProjectGridItemProps {
   id: number;
@@ -68,20 +73,7 @@ export function ProjectGridItem({
     <ProjectGridItemLayout
       checkboxSlot={<Checkbox aria-label={title} />}
       menuTriggerSlot={
-        <ResponsiveMenuTrigger
-          placement="bottom right"
-          renderDialogHeader={() => <MenuDialogHeader heading="Actions" />}
-          renderButton={() => (
-            <Button
-              aria-label="project menu"
-              variant="ghost"
-              iconLeft={
-                <Ellipsis size={16} strokeWidth={1.5} absoluteStrokeWidth />
-              }
-              className="-mr-2 rounded-full"
-            />
-          )}
-        >
+        <ItemBaseActionMenuTrigger>
           <Item textValue="Delete" key="delete">
             <Trash size={16} /> Delete
           </Item>
@@ -96,11 +88,23 @@ export function ProjectGridItem({
             <Clock size={16} />
             Mark as Active
           </Item>
-        </ResponsiveMenuTrigger>
+        </ItemBaseActionMenuTrigger>
       }
       titleSlot={
         <GridItemInfo className="flex-auto">
-          <ProjectGridItemTitle id={id} title={title} />
+          <GridItemTitle>
+            <ItemBaseDetailModalTrigger
+              title={title}
+              modal={<ProjectDetailModal projectId={id} />}
+            />
+            <ItemBaseDetailBottomSheetTrigger
+              title={title}
+              renderBottomSheet={(state) => (
+                <ProjectDetailBottomSheet projectId={id} state={state} />
+              )}
+            />
+          </GridItemTitle>
+
           <GridItemText>{`Deadline on ${formattedDeadline}`}</GridItemText>
         </GridItemInfo>
       }
@@ -116,16 +120,18 @@ export function ProjectGridItem({
         )
       }
       commentsSlot={
-        <Button
-          variant="outlined"
+        <ItemBaseButton
           label={comments}
           iconLeft={
             <MessageSquare size={16} strokeWidth={1.5} absoluteStrokeWidth />
           }
-          className="h-[1.75rem] w-[3.75rem] justify-center rounded-full"
         />
       }
-      statusSlot={<ProjectStatusBadge status={status} />}
+      statusSlot={
+        <ItemBaseBadge color={getProjectStatusBadgeColor(status.id)}>
+          {status.name}
+        </ItemBaseBadge>
+      }
       progressSlot={
         <GridItemProgress
           value={(tasksDone / tasks) * 100}

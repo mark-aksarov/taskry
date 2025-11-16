@@ -1,8 +1,6 @@
 "use client";
 
 import {
-  GridItemDetailBottomSheetTrigger,
-  GridItemDetailModalTrigger,
   GridItemInfo,
   GridItemProgress,
   GridItemText,
@@ -15,7 +13,6 @@ import {
   CheckCheck,
   CircleEllipsis,
   Clock,
-  Ellipsis,
   MessageSquare,
   Trash,
 } from "lucide-react";
@@ -28,8 +25,14 @@ import { Button, Link, Checkbox } from "@/components/ui";
 import { TaskGridItemLayout } from "./TaskGridItemLayout";
 import { TaskDetailBottomSheet } from "../TaskDetailBottomSheet";
 import { ImageContainer } from "@/components/common/ImageContainer";
-import { MenuDialogHeader } from "@/components/common/MenuDialogHeader";
-import { ResponsiveMenuTrigger } from "@/components/common/ResponsiveMenuTrigger";
+import {
+  ItemBaseActionMenuTrigger,
+  ItemBaseBadge,
+  ItemBaseButton,
+  ItemBaseDetailBottomSheetTrigger,
+  ItemBaseDetailModalTrigger,
+} from "@/components/common/ItemBase";
+import { getTaskStatusBadgeColor } from "../getTaskStatusBadgeColor";
 
 export interface TaskGridItemProps {
   id: number;
@@ -74,20 +77,7 @@ export function TaskGridItem({
     <TaskGridItemLayout
       checkboxSlot={<Checkbox aria-label={title} />}
       menuTriggerSlot={
-        <ResponsiveMenuTrigger
-          placement="bottom right"
-          renderDialogHeader={() => <MenuDialogHeader heading="Actions" />}
-          renderButton={() => (
-            <Button
-              aria-label="project menu"
-              variant="ghost"
-              iconLeft={
-                <Ellipsis size={16} strokeWidth={1.5} absoluteStrokeWidth />
-              }
-              className="-mr-2 rounded-full"
-            />
-          )}
-        >
+        <ItemBaseActionMenuTrigger>
           <Item textValue="Delete" key="delete">
             <Trash size={16} /> Delete
           </Item>
@@ -102,16 +92,16 @@ export function TaskGridItem({
             <Clock size={16} />
             Mark as Active
           </Item>
-        </ResponsiveMenuTrigger>
+        </ItemBaseActionMenuTrigger>
       }
       titleSlot={
         <GridItemInfo className="flex-auto">
           <GridItemTitle>
-            <GridItemDetailModalTrigger
+            <ItemBaseDetailModalTrigger
               title={title}
               modal={<TaskDetailModal taskId={id} />}
             />
-            <GridItemDetailBottomSheetTrigger
+            <ItemBaseDetailBottomSheetTrigger
               title={title}
               renderBottomSheet={(state) => (
                 <TaskDetailBottomSheet taskId={id} state={state} />
@@ -134,26 +124,26 @@ export function TaskGridItem({
         )
       }
       commentsSlot={
-        <Button
-          variant="outlined"
+        <ItemBaseButton
           label={comments}
           iconLeft={
             <MessageSquare size={16} strokeWidth={1.5} absoluteStrokeWidth />
           }
-          className="h-[1.75rem] w-[3.75rem] justify-center rounded-full"
         />
       }
       subtasksSlot={
-        <Button
-          variant="outlined"
+        <ItemBaseButton
           label={subtasksDone}
           iconLeft={
             <CheckCheck size={16} strokeWidth={1.5} absoluteStrokeWidth />
           }
-          className="h-[1.75rem] w-[3.75rem] justify-center rounded-full"
         />
       }
-      statusSlot={<TaskStatusBadge status={status} />}
+      statusSlot={
+        <ItemBaseBadge color={getTaskStatusBadgeColor(status.id)}>
+          {status.name}
+        </ItemBaseBadge>
+      }
       progressSlot={
         <GridItemProgress
           value={(subtasksDone / subtasks) * 100}

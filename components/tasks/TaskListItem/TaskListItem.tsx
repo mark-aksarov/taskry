@@ -8,28 +8,30 @@ import {
   CheckCheck,
   CircleEllipsis,
   Clock,
-  Ellipsis,
   MessageSquare,
   Trash,
 } from "lucide-react";
 
-import { Button, Checkbox, Link } from "@/components/ui";
+import { Checkbox, Link } from "@/components/ui";
 
 import {
   ListItemInfo,
   ListItemText,
   ListItemTitle,
-  ListItemDetailModalTrigger,
-  ListItemDetailBottomSheetTrigger,
 } from "@/components/common/List";
 
-import { TaskStatusBadge } from "../TaskStatusBadge";
 import { TaskListItemLayout } from "./TaskListItemLayout";
 import { ImageContainer } from "@/components/common/ImageContainer";
-import { MenuDialogHeader } from "@/components/common/MenuDialogHeader";
-import { ResponsiveMenuTrigger } from "@/components/common/ResponsiveMenuTrigger";
 import { TaskDetailModal } from "../TaskDetailModal";
 import { TaskDetailBottomSheet } from "../TaskDetailBottomSheet";
+import {
+  ItemBaseActionMenuTrigger,
+  ItemBaseBadge,
+  ItemBaseButton,
+  ItemBaseDetailBottomSheetTrigger,
+  ItemBaseDetailModalTrigger,
+} from "@/components/common/ItemBase";
+import { getTaskStatusBadgeColor } from "../getTaskStatusBadgeColor";
 
 interface TaskListItemProps {
   id: number;
@@ -87,11 +89,11 @@ export const TaskListItem = ({
       titleSlot={
         <ListItemInfo>
           <ListItemTitle>
-            <ListItemDetailModalTrigger
+            <ItemBaseDetailModalTrigger
               title={title}
               modal={<TaskDetailModal taskId={id} />}
             />
-            <ListItemDetailBottomSheetTrigger
+            <ItemBaseDetailBottomSheetTrigger
               title={title}
               renderBottomSheet={(state) => (
                 <TaskDetailBottomSheet taskId={id} state={state} />
@@ -151,46 +153,33 @@ export const TaskListItem = ({
         </ListItemInfo>
       }
       statusSlot={
-        <TaskStatusBadge
-          className="w-[5.625rem] @max-lg:hidden"
-          status={status}
-        />
+        <ItemBaseBadge
+          className="@max-lg:hidden"
+          color={getTaskStatusBadgeColor(status.id)}
+        >
+          {status.name}
+        </ItemBaseBadge>
       }
       commentsModalTriggerSlot={
-        <Button
-          variant="outlined"
+        <ItemBaseButton
           label={comments}
           iconLeft={
             <MessageSquare size={16} strokeWidth={1.5} absoluteStrokeWidth />
           }
-          className="h-[1.75rem] w-[3.75rem] justify-center rounded-full @max-md:hidden"
+          className="@max-md:hidden"
         />
       }
       subtasksModalTriggerSlot={
-        <Button
-          variant="outlined"
+        <ItemBaseButton
           label={subtasks}
           iconLeft={
             <CheckCheck size={16} strokeWidth={1.5} absoluteStrokeWidth />
           }
-          className="h-[1.75rem] w-[3.75rem] justify-center rounded-full @max-md:hidden"
+          className="@max-md:hidden"
         />
       }
       menuTriggerSlot={
-        <ResponsiveMenuTrigger
-          placement="bottom right"
-          renderDialogHeader={() => <MenuDialogHeader heading="Actions" />}
-          renderButton={() => (
-            <Button
-              aria-label="task menu"
-              variant="ghost"
-              iconLeft={
-                <Ellipsis size={16} strokeWidth={1.5} absoluteStrokeWidth />
-              }
-              className="rounded-full"
-            />
-          )}
-        >
+        <ItemBaseActionMenuTrigger>
           <Item textValue="Delete" key="delete">
             <Trash size={16} /> Delete
           </Item>
@@ -205,7 +194,7 @@ export const TaskListItem = ({
             <Clock size={16} />
             Mark as Active
           </Item>
-        </ResponsiveMenuTrigger>
+        </ItemBaseActionMenuTrigger>
       }
     />
   );

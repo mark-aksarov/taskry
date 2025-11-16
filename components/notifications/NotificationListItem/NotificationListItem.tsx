@@ -6,16 +6,12 @@ import { Item } from "react-stately";
 import { Link } from "@/components/ui";
 import { twMerge } from "tailwind-merge";
 
-import { Ellipsis, ListCheck, Trash } from "lucide-react";
-
-import { Button } from "@/components/ui";
-import { ResponsiveMenuTrigger } from "@/components/common/ResponsiveMenuTrigger";
+import { ListCheck, Trash } from "lucide-react";
 import { ImageContainer } from "@/components/common/ImageContainer";
 import { NotificationListItemActor } from "./NotificationListItemActor";
 import { NotificationListItemActionText } from "./NotificationListItemActionText";
 import { NotificationListItemDate } from "./NotificationListItemDate";
 import { NotificationListItemTarget } from "./NotificationListItemTarget";
-import { MenuDialogHeader } from "@/components/common/MenuDialogHeader";
 import {
   CommentItemActions,
   CommentItemContent,
@@ -24,6 +20,7 @@ import {
 import { Attachment, Attachments } from "@/components/attachments/Attachments";
 import { ReplyButton } from "@/components/comments/ReplyButton";
 import { LikeButton } from "@/components/comments/LikeButton";
+import { ItemBaseActionMenuTrigger } from "@/components/common/ItemBase";
 
 interface NotificationListItemProps {
   date: Date;
@@ -145,19 +142,7 @@ export const NotificationListItem = ({
       </div>
 
       <div className="ml-auto">
-        <ResponsiveMenuTrigger
-          renderDialogHeader={() => <MenuDialogHeader heading="Actions" />}
-          renderButton={() => (
-            <Button
-              aria-label="task item menu"
-              variant="ghost"
-              iconLeft={
-                <Ellipsis size={16} strokeWidth={1.5} absoluteStrokeWidth />
-              }
-              className="shrink-0 grow-0 rounded-full"
-            />
-          )}
-        >
+        <ItemBaseActionMenuTrigger>
           <>
             {!isRead && (
               <Item textValue="Mark as Read" key="read">
@@ -169,7 +154,7 @@ export const NotificationListItem = ({
           <Item textValue="Delete" key="delete">
             <Trash size={16} strokeWidth={1.5} absoluteStrokeWidth /> Delete
           </Item>
-        </ResponsiveMenuTrigger>
+        </ItemBaseActionMenuTrigger>
       </div>
     </div>
   );

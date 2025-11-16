@@ -1,23 +1,11 @@
 "use client";
 
-import {
-  Check,
-  CircleEllipsis,
-  Clock,
-  Ellipsis,
-  ListTodo,
-  Trash,
-} from "lucide-react";
+import { Check, CircleEllipsis, Clock, ListTodo, Trash } from "lucide-react";
 import { useMemo } from "react";
 import { Item } from "react-stately";
 import { Button, Checkbox } from "@/components/ui";
-import { TaskStatusBadge } from "@/components/tasks/TaskStatusBadge";
 import { ProfileTaskListItemLayout } from "./ProfileTaskListItemLayout";
-import { MenuDialogHeader } from "@/components/common/MenuDialogHeader";
-import { ResponsiveMenuTrigger } from "@/components/common/ResponsiveMenuTrigger";
 import {
-  ListItemDetailBottomSheetTrigger,
-  ListItemDetailModalTrigger,
   ListItemInfo,
   ListItemText,
   ListItemTitle,
@@ -25,6 +13,13 @@ import {
 import { TaskCommentsModalTrigger } from "@/components/tasks/TaskCommentsModalTrigger";
 import { TaskDetailModal } from "@/components/tasks/TaskDetailModal";
 import { TaskDetailBottomSheet } from "@/components/tasks/TaskDetailBottomSheet";
+import {
+  ItemBaseActionMenuTrigger,
+  ItemBaseBadge,
+  ItemBaseDetailBottomSheetTrigger,
+  ItemBaseDetailModalTrigger,
+} from "@/components/common/ItemBase";
+import { getTaskStatusBadgeColor } from "@/components/tasks/getTaskStatusBadgeColor";
 
 export interface ProfileTaskListItemProps {
   id: number;
@@ -63,11 +58,11 @@ export const ProfileTaskListItem = ({
       deadlineSlot={
         <ListItemInfo>
           <ListItemTitle>
-            <ListItemDetailModalTrigger
+            <ItemBaseDetailModalTrigger
               title={title}
               modal={<TaskDetailModal taskId={id} />}
             />
-            <ListItemDetailBottomSheetTrigger
+            <ItemBaseDetailBottomSheetTrigger
               title={title}
               renderBottomSheet={(state) => (
                 <TaskDetailBottomSheet taskId={id} state={state} />
@@ -78,7 +73,12 @@ export const ProfileTaskListItem = ({
         </ListItemInfo>
       }
       statusSlot={
-        <TaskStatusBadge status={status} className="@max-lg:hidden" />
+        <ItemBaseBadge
+          color={getTaskStatusBadgeColor(status.id)}
+          className="@max-lg:hidden"
+        >
+          {status.name}
+        </ItemBaseBadge>
       }
       commentsSlot={
         <TaskCommentsModalTrigger commentCount={comments} taskId={id} />
@@ -94,20 +94,7 @@ export const ProfileTaskListItem = ({
         />
       }
       actionMenuSlot={
-        <ResponsiveMenuTrigger
-          placement="bottom right"
-          renderDialogHeader={() => <MenuDialogHeader heading="Actions" />}
-          renderButton={() => (
-            <Button
-              aria-label="task menu"
-              variant="ghost"
-              iconLeft={
-                <Ellipsis size={16} strokeWidth={1.5} absoluteStrokeWidth />
-              }
-              className="rounded-full"
-            />
-          )}
-        >
+        <ItemBaseActionMenuTrigger>
           <Item textValue="Delete" key="delete">
             <Trash size={16} /> Delete
           </Item>
@@ -122,7 +109,7 @@ export const ProfileTaskListItem = ({
             <Clock size={16} />
             Mark as Active
           </Item>
-        </ResponsiveMenuTrigger>
+        </ItemBaseActionMenuTrigger>
       }
     />
   );

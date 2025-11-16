@@ -12,12 +12,11 @@ import {
 } from "@/components/common/Grid";
 import Image from "next/image";
 import { Item } from "react-stately";
-import { Button, Link, Checkbox, Divider } from "@/components/ui";
+import { Link, Checkbox, Divider } from "@/components/ui";
 import { CustomerGridItemLayout } from "./CustomerGridItemLayout";
-import { Ellipsis, Link2, Mail, Phone, Trash } from "lucide-react";
+import { Link2, Mail, Phone, Trash } from "lucide-react";
 import { ImageContainer } from "@/components/common/ImageContainer";
-import { MenuDialogHeader } from "@/components/common/MenuDialogHeader";
-import { ResponsiveMenuTrigger } from "@/components/common/ResponsiveMenuTrigger";
+import { ItemBaseActionMenuTrigger } from "@/components/common/ItemBase";
 
 interface CustomerGridItemProps {
   id: number;
@@ -48,24 +47,11 @@ export function CustomerGridItem({
       topRowSlot={
         <GridItemRow>
           <Checkbox aria-label={`${fullName} checkbox`} />
-          <ResponsiveMenuTrigger
-            placement="bottom right"
-            renderDialogHeader={() => <MenuDialogHeader heading="Actions" />}
-            renderButton={() => (
-              <Button
-                aria-label="user menu"
-                variant="ghost"
-                iconLeft={
-                  <Ellipsis size={16} strokeWidth={1.5} absoluteStrokeWidth />
-                }
-                className="-mr-2 rounded-full"
-              />
-            )}
-          >
+          <ItemBaseActionMenuTrigger>
             <Item textValue="Delete" key="delete">
               <Trash size={16} /> Delete
             </Item>
-          </ResponsiveMenuTrigger>
+          </ItemBaseActionMenuTrigger>
         </GridItemRow>
       }
       imageSlot={

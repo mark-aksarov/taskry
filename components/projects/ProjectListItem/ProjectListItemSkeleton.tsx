@@ -1,10 +1,11 @@
-"use client";
-
-import { Skeleton } from "@/components/ui";
 import { ProjectListItemLayout } from "./ProjectListItemLayout";
 import { ListItemInfoSkeleton } from "@/components/common/List/index";
-import { MenuTriggerSkeleton } from "@/components/common/MenuTriggerSkeleton";
 import { ImageContainerSkeleton } from "@/components/common/ImageContainer";
+import {
+  ItemBaseActionMenuTriggerSkeleton,
+  ItemBaseBadgeSkeleton,
+  ItemBaseButtonSkeleton,
+} from "@/components/common/ItemBase";
 
 export const ProjectListItemSkeleton = () => {
   return (
@@ -24,13 +25,11 @@ export const ProjectListItemSkeleton = () => {
       }
       categorySlot={<ListItemInfoSkeleton className="@max-4xl:hidden" />}
       companySlot={<ListItemInfoSkeleton className="@max-5xl:hidden" />}
-      statusSlot={
-        <Skeleton className="h-[1.75rem] w-[5.625rem] rounded-full @max-md:hidden" />
-      }
+      statusSlot={<ItemBaseBadgeSkeleton className="@max-md:hidden" />}
       commentsModalTriggerSlot={
-        <Skeleton className="h-[1.75rem] w-[3.75rem] rounded-full @max-md:hidden" />
+        <ItemBaseButtonSkeleton className="@max-md:hidden" />
       }
-      menuTriggerSlot={<MenuTriggerSkeleton />}
+      menuTriggerSlot={<ItemBaseActionMenuTriggerSkeleton />}
     />
   );
 };

@@ -1,10 +1,10 @@
 "use client";
 
-import { Ellipsis, Pencil, Trash } from "lucide-react";
+import { Pencil, Trash } from "lucide-react";
 import Image from "next/image";
 import { Item } from "react-stately";
 
-import { Button, Checkbox, Link } from "@/components/ui";
+import { Checkbox, Link } from "@/components/ui";
 
 import {
   ListItem,
@@ -13,9 +13,8 @@ import {
   ListItemTitle,
 } from "@/components/common/List";
 
-import { ResponsiveMenuTrigger } from "@/components/common/ResponsiveMenuTrigger";
 import { ImageContainer } from "@/components/common/ImageContainer";
-import { MenuDialogHeader } from "@/components/common/MenuDialogHeader";
+import { ItemBaseActionMenuTrigger } from "@/components/common/ItemBase";
 
 export interface UserListItemProps {
   id: string;
@@ -96,27 +95,14 @@ export function UserListItem({
         </ListItemText>
       </ListItemInfo>
 
-      <ResponsiveMenuTrigger
-        placement="bottom right"
-        renderDialogHeader={() => <MenuDialogHeader heading="Actions" />}
-        renderButton={() => (
-          <Button
-            aria-label="user menu"
-            variant="ghost"
-            iconLeft={
-              <Ellipsis size={16} strokeWidth={1.5} absoluteStrokeWidth />
-            }
-            className="rounded-full"
-          />
-        )}
-      >
+      <ItemBaseActionMenuTrigger>
         <Item textValue="Edit" key="edit">
           <Pencil size={16} /> Edit
         </Item>
         <Item textValue="Delete" key="delete">
           <Trash size={16} /> Delete
         </Item>
-      </ResponsiveMenuTrigger>
+      </ItemBaseActionMenuTrigger>
     </ListItem>
   );
 }
