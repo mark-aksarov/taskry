@@ -11,13 +11,20 @@ import {
 import { useMemo } from "react";
 import { Item } from "react-stately";
 import { Button, Checkbox } from "@/components/ui";
-import { TaskListItemTitle } from "@/components/tasks/TaskListItem";
-import { ListItemInfo, ListItemText } from "@/components/common/List";
+import { TaskStatusBadge } from "@/components/tasks/TaskStatusBadge";
 import { ProfileTaskListItemLayout } from "./ProfileTaskListItemLayout";
 import { MenuDialogHeader } from "@/components/common/MenuDialogHeader";
 import { ResponsiveMenuTrigger } from "@/components/common/ResponsiveMenuTrigger";
+import {
+  ListItemDetailBottomSheetTrigger,
+  ListItemDetailModalTrigger,
+  ListItemInfo,
+  ListItemText,
+  ListItemTitle,
+} from "@/components/common/List";
 import { TaskCommentsModalTrigger } from "@/components/tasks/TaskCommentsModalTrigger";
-import { TaskStatusBadge } from "@/components/tasks/TaskStatusBadge";
+import { TaskDetailModal } from "@/components/tasks/TaskDetailModal";
+import { TaskDetailBottomSheet } from "@/components/tasks/TaskDetailBottomSheet";
 
 export interface ProfileTaskListItemProps {
   id: number;
@@ -55,7 +62,18 @@ export const ProfileTaskListItem = ({
       checkboxSlot={<Checkbox aria-label="task checkbox" />}
       deadlineSlot={
         <ListItemInfo>
-          <TaskListItemTitle id={id} title={title} />
+          <ListItemTitle>
+            <ListItemDetailModalTrigger
+              title={title}
+              modal={<TaskDetailModal taskId={id} />}
+            />
+            <ListItemDetailBottomSheetTrigger
+              title={title}
+              renderBottomSheet={(state) => (
+                <TaskDetailBottomSheet taskId={id} state={state} />
+              )}
+            />
+          </ListItemTitle>
           <ListItemText>{`Deadline on ${formattedDeadline}`}</ListItemText>
         </ListItemInfo>
       }

@@ -12,33 +12,19 @@ import { ProfileTasksMobileLayout } from "@/components/profile/ProfileTasksMobil
 import { ProfileTasksDesktopLayout } from "@/components/profile/ProfileTasksDesktop";
 import { Default as ProfileTaskListStory } from "@/components/profile/ProfileTaskList/ProfileTaskList.stories";
 import { Default as ProfileHeaderStory } from "@/components/profile/ProfileHeader/ProfileHeader.stories";
-import {
-  TaskDetail,
-  TaskDetailContainerProvider,
-} from "@/components/tasks/TaskDetail";
-import { CommentsContainerProvider } from "@/components/comments/CommentsContainer";
-import { MockedCommentsContainer } from "@/components/comments/CommentsContainer";
-import { Default as TaskDetailStory } from "@/components/tasks/TaskDetail/TaskDetail.stories";
 import { ProfileTaskList } from "@/components/profile/ProfileTaskList";
 import { Repeat } from "@/components/common/Repeat";
 import { ProfileTaskListItemSkeleton } from "@/components/profile/ProfileTaskListItem";
+import { withTaskDetail } from "@/components/tasks/TaskDetail/decorators";
+import { withTaskComments } from "@/components/tasks/TaskCommentsContainer/decorators";
 
 const meta = {
   title: "components/pages/ProfileTasksPage",
   component: ProfileTasksPage,
   parameters: { layout: "fullscreen" },
   decorators: [
-    (Story) => (
-      <TaskDetailContainerProvider
-        TaskDetailContainer={() => <TaskDetail {...TaskDetailStory.args} />}
-      >
-        <CommentsContainerProvider
-          CommentsContainer={() => <MockedCommentsContainer />}
-        >
-          <Story />
-        </CommentsContainerProvider>
-      </TaskDetailContainerProvider>
-    ),
+    withTaskDetail,
+    withTaskComments,
     PageDecorator,
     withThemedBackground,
   ],

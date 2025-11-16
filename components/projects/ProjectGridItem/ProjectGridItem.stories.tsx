@@ -1,6 +1,7 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { ProjectGridItem } from "./ProjectGridItem";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { withProjectDetail } from "../ProjectDetail/decorators";
 
 const meta = {
   title: "Components/projects/ProjectGridItem",
@@ -8,10 +9,11 @@ const meta = {
   tags: ["autodocs"],
   decorators: [
     (Story) => (
-      <div className="w-[300px]">
+      <div className="max-w-[300px]">
         <Story />
       </div>
     ),
+    withProjectDetail,
     withThemedBackground,
   ],
 } satisfies Meta<typeof ProjectGridItem>;

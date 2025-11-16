@@ -12,3 +12,5 @@ export {
 } from "./GridItemContactList";
 export { GridItemContactText } from "./GridItemContactText";
 export { GridItemContactIconWrapper } from "./GridItemContactIconWrapper";
+export { GridItemDetailBottomSheetTrigger } from "./GridItemDetailBottomSheetTrigger";
+export { GridItemDetailModalTrigger } from "./GridItemDetailModalTrigger";

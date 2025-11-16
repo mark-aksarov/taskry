@@ -1,30 +1,15 @@
-import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { TaskGrid } from "./TaskGrid";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { TaskGridItem } from "../TaskGridItem";
-import { TaskDetail, TaskDetailContainerProvider } from "../TaskDetail";
-import { CommentsContainerProvider } from "@/components/comments/CommentsContainer";
-import { MockedCommentsContainer } from "@/components/comments/CommentsContainer";
-import { Default as TaskDetailStory } from "../TaskDetail/TaskDetail.stories";
+import { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { withTaskDetail } from "@/components/tasks/TaskDetail/decorators";
+import { withTaskComments } from "@/components/tasks/TaskCommentsContainer/decorators";
 
 const meta = {
   title: "Components/tasks/TaskGrid",
   component: TaskGrid,
   tags: ["autodocs"],
-  decorators: [
-    (Story) => (
-      <TaskDetailContainerProvider
-        TaskDetailContainer={() => <TaskDetail {...TaskDetailStory.args} />}
-      >
-        <CommentsContainerProvider
-          CommentsContainer={() => <MockedCommentsContainer />}
-        >
-          <Story />
-        </CommentsContainerProvider>
-      </TaskDetailContainerProvider>
-    ),
-    withThemedBackground,
-  ],
+  decorators: [withTaskDetail, withTaskComments, withThemedBackground],
 } satisfies Meta<typeof TaskGrid>;
 
 export default meta;

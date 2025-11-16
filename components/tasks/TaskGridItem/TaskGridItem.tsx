@@ -1,9 +1,12 @@
 "use client";
 
 import {
+  GridItemDetailBottomSheetTrigger,
+  GridItemDetailModalTrigger,
   GridItemInfo,
   GridItemProgress,
   GridItemText,
+  GridItemTitle,
 } from "@/components/common/Grid";
 
 import { Item } from "react-stately";
@@ -17,15 +20,16 @@ import {
   Trash,
 } from "lucide-react";
 
-import { useMemo } from "react";
-import { Button, Link, Checkbox } from "@/components/ui";
 import Image from "next/image";
+import { useMemo } from "react";
+import { TaskStatusBadge } from "../TaskStatusBadge";
+import { TaskDetailModal } from "../TaskDetailModal";
+import { Button, Link, Checkbox } from "@/components/ui";
+import { TaskGridItemLayout } from "./TaskGridItemLayout";
+import { TaskDetailBottomSheet } from "../TaskDetailBottomSheet";
 import { ImageContainer } from "@/components/common/ImageContainer";
 import { MenuDialogHeader } from "@/components/common/MenuDialogHeader";
 import { ResponsiveMenuTrigger } from "@/components/common/ResponsiveMenuTrigger";
-import { TaskGridItemTitle } from "./TaskGridItemTitle";
-import { TaskGridItemLayout } from "./TaskGridItemLayout";
-import { TaskStatusBadge } from "../TaskStatusBadge";
 
 export interface TaskGridItemProps {
   id: number;
@@ -102,7 +106,18 @@ export function TaskGridItem({
       }
       titleSlot={
         <GridItemInfo className="flex-auto">
-          <TaskGridItemTitle id={id} title={title} />
+          <GridItemTitle>
+            <GridItemDetailModalTrigger
+              title={title}
+              modal={<TaskDetailModal taskId={id} />}
+            />
+            <GridItemDetailBottomSheetTrigger
+              title={title}
+              renderBottomSheet={(state) => (
+                <TaskDetailBottomSheet taskId={id} state={state} />
+              )}
+            />
+          </GridItemTitle>
 
           <GridItemText>{`Deadline on ${formattedDeadline}`}</GridItemText>
         </GridItemInfo>

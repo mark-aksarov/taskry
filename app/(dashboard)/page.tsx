@@ -5,12 +5,12 @@ import { TotalCustomersCardContainer } from "@/components/customer/TotalCustomer
 import { AssignedTasksContainer } from "@/components/tasks/AssignedTasks";
 import { TotalUsersCardContainer } from "@/components/users/TotalUsersCard";
 import { TaskDetailContainerProvider } from "@/components/tasks/TaskDetail";
-import { CommentsContainerProvider } from "@/components/comments/CommentsContainer";
+import { TaskCommentsContainerProvider } from "@/components/tasks/TaskCommentsContainer";
 
 export default function AppDashboardPage() {
   return (
     <TaskDetailContainerProvider>
-      <CommentsContainerProvider>
+      <TaskCommentsContainerProvider>
         <DashboardPage
           TotalProjectsCardContainer={TotalProjectsCardContainer}
           TotalTasksCardContainer={TotalTasksCardContainer}
@@ -18,7 +18,7 @@ export default function AppDashboardPage() {
           TotalCustomersCardContainer={TotalCustomersCardContainer}
           AssignedTasksContainer={AssignedTasksContainer}
         />
-      </CommentsContainerProvider>
+      </TaskCommentsContainerProvider>
     </TaskDetailContainerProvider>
   );
 }

@@ -1,6 +1,5 @@
 import { ResponsiveModal } from "@/components/common/ResponsiveModal";
 import { CommentModalInput } from "@/components/comments/CommentModalInput";
-import { useCommentsContainer } from "@/components/comments/CommentsContainer";
 import {
   Button,
   Dialog,
@@ -14,6 +13,7 @@ import {
 import { MessagesSquare } from "lucide-react";
 import { useMediaQuery } from "react-responsive";
 import { twMerge } from "tailwind-merge";
+import { useTaskCommentsContainer } from "../TaskCommentsContainer";
 
 interface TaskCommentsModalTriggerProps {
   className?: string;
@@ -26,7 +26,7 @@ export function TaskCommentsModalTrigger({
   commentCount,
   taskId,
 }: TaskCommentsModalTriggerProps) {
-  const CommentsContainer = useCommentsContainer();
+  const CommentsContainer = useTaskCommentsContainer();
 
   const isMd = useMediaQuery({ query: "(max-width: 48rem)" });
 

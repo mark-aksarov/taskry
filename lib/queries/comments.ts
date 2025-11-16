@@ -4,14 +4,21 @@ import { cache } from "react";
 import prisma from "../prisma";
 import { ThenArg } from "@/lib/queries/types";
 
-export type GetCommentsByTaskType = ThenArg<
-  ReturnType<typeof getCommentsByTask>
->;
-export const getCommentsByTask = cache(
-  async (taskId: number, userId: string) => {
+export type GetCommentsType = ThenArg<ReturnType<typeof getComments>>;
+export const getComments = cache(
+  async ({
+    userId,
+    taskId,
+    projectId,
+  }: {
+    userId: string;
+    taskId?: number;
+    projectId?: number;
+  }) => {
     return await prisma.comment.findMany({
       where: {
         taskId,
+        projectId,
         parentId: null,
       },
       include: {

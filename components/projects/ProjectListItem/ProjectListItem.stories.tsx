@@ -1,12 +1,13 @@
-import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { ProjectListItem } from "./ProjectListItem";
+import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { withProjectDetail } from "../ProjectDetail/decorators";
 
 const meta = {
   title: "Components/projects/ProjectListItem",
   component: ProjectListItem,
   tags: ["autodocs"],
-  decorators: [withThemedBackground],
+  decorators: [withProjectDetail, withThemedBackground],
 } satisfies Meta<typeof ProjectListItem>;
 
 export default meta;

@@ -19,15 +19,17 @@ import {
   ListItemInfo,
   ListItemText,
   ListItemTitle,
+  ListItemDetailModalTrigger,
+  ListItemDetailBottomSheetTrigger,
 } from "@/components/common/List";
 
+import { TaskStatusBadge } from "../TaskStatusBadge";
+import { TaskListItemLayout } from "./TaskListItemLayout";
 import { ImageContainer } from "@/components/common/ImageContainer";
-
-import { TaskListItemTitle } from "./TaskListItemTitle";
 import { MenuDialogHeader } from "@/components/common/MenuDialogHeader";
 import { ResponsiveMenuTrigger } from "@/components/common/ResponsiveMenuTrigger";
-import { TaskListItemLayout } from "./TaskListItemLayout";
-import { TaskStatusBadge } from "../TaskStatusBadge";
+import { TaskDetailModal } from "../TaskDetailModal";
+import { TaskDetailBottomSheet } from "../TaskDetailBottomSheet";
 
 interface TaskListItemProps {
   id: number;
@@ -84,7 +86,18 @@ export const TaskListItem = ({
       checkboxSlot={showCheckbox && <Checkbox aria-label="task checkbox" />}
       titleSlot={
         <ListItemInfo>
-          <TaskListItemTitle id={id} title={title} />
+          <ListItemTitle>
+            <ListItemDetailModalTrigger
+              title={title}
+              modal={<TaskDetailModal taskId={id} />}
+            />
+            <ListItemDetailBottomSheetTrigger
+              title={title}
+              renderBottomSheet={(state) => (
+                <TaskDetailBottomSheet taskId={id} state={state} />
+              )}
+            />
+          </ListItemTitle>
           <ListItemText>{`Deadline on ${formattedDeadline}`}</ListItemText>
         </ListItemInfo>
       }

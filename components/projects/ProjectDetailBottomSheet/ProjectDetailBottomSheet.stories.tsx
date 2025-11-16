@@ -2,16 +2,15 @@ import { Button } from "@/components/ui";
 import { useOverlayTrigger } from "react-aria";
 import { useOverlayTriggerState } from "react-stately";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { ProjectDetail, ProjectDetailSkeleton } from "../ProjectDetail";
 import {
   ProjectDetailBottomSheet,
   ProjectDetailBottomSheetProps,
 } from "./ProjectDetailBottomSheet";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { Default as ProjectDetailStory } from "../ProjectDetail/ProjectDetail.stories";
-import { ProjectDetailContainerProvider } from "../ProjectDetail/ProjectDetailContainerContext";
-import { CommentsContainerProvider } from "@/components/comments/CommentsContainer";
-import { MockedCommentsContainer } from "@/components/comments/CommentsContainer";
+import {
+  withProjectDetail,
+  withProjectDetailSkeleton,
+} from "../ProjectDetail/decorators";
 
 const meta = {
   title: "components/projects/ProjectDetailBottomSheet",
@@ -52,35 +51,9 @@ const ProjectDetailBottomSheetTemplate = ({
 };
 
 export const Default = {
-  decorators: [
-    (Story) => (
-      <ProjectDetailContainerProvider
-        ProjectDetailContainer={() => (
-          <ProjectDetail {...ProjectDetailStory.args} />
-        )}
-      >
-        <CommentsContainerProvider
-          CommentsContainer={() => <MockedCommentsContainer />}
-        >
-          <Story />
-        </CommentsContainerProvider>
-      </ProjectDetailContainerProvider>
-    ),
-  ],
+  decorators: [withProjectDetail],
 } satisfies Story;
 
 export const WithSkeletonContent = {
-  decorators: [
-    (Story) => (
-      <ProjectDetailContainerProvider
-        ProjectDetailContainer={() => <ProjectDetailSkeleton />}
-      >
-        <CommentsContainerProvider
-          CommentsContainer={() => <MockedCommentsContainer />}
-        >
-          <Story />
-        </CommentsContainerProvider>
-      </ProjectDetailContainerProvider>
-    ),
-  ],
+  decorators: [withProjectDetailSkeleton],
 } satisfies Story;

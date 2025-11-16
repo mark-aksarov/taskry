@@ -23,30 +23,16 @@ import { TaskListItemSkeleton } from "@/components/tasks/TaskListItem";
 import { TotalCustomersCard } from "@/components/customer/TotalCustomersCard";
 import { Default as TaskListStory } from "@/components/tasks/TaskList/TaskList.stories";
 import { AssignedTasksEmptyCard } from "@/components/tasks/AssignedTasks/AssignedTasksEmptyCard";
-import {
-  TaskDetail,
-  TaskDetailContainerProvider,
-} from "@/components/tasks/TaskDetail";
-import { CommentsContainerProvider } from "@/components/comments/CommentsContainer";
-import { MockedCommentsContainer } from "@/components/comments/CommentsContainer";
-import { Default as TaskDetailStory } from "@/components/tasks/TaskDetail/TaskDetail.stories";
+import { withTaskDetail } from "@/components/tasks/TaskDetail/decorators";
+import { withTaskComments } from "@/components/tasks/TaskCommentsContainer/decorators";
 
 const meta = {
   title: "components/pages/DashboardPage",
   component: DashboardPage,
   parameters: { layout: "fullscreen" },
   decorators: [
-    (Story) => (
-      <TaskDetailContainerProvider
-        TaskDetailContainer={() => <TaskDetail {...TaskDetailStory.args} />}
-      >
-        <CommentsContainerProvider
-          CommentsContainer={() => <MockedCommentsContainer />}
-        >
-          <Story />
-        </CommentsContainerProvider>
-      </TaskDetailContainerProvider>
-    ),
+    withTaskDetail,
+    withTaskComments,
     PageDecorator,
     withThemedBackground,
   ],

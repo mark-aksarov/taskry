@@ -11,34 +11,20 @@ import { default as TaskPageLoading } from "./loading";
 import { TasksPageEmpty } from "./TasksPageEmpty";
 import { Default as TaskListStory } from "@/components/tasks/TaskList/TaskList.stories";
 import { Default as TaskGridStory } from "@/components/tasks/TaskGrid/TaskGrid.stories";
-import {
-  TaskDetail,
-  TaskDetailContainerProvider,
-} from "@/components/tasks/TaskDetail";
-import { Default as TaskDetailStory } from "@/components/tasks/TaskDetail/TaskDetail.stories";
-import { CommentsContainerProvider } from "@/components/comments/CommentsContainer";
-import { MockedCommentsContainer } from "@/components/comments/CommentsContainer";
 import { NewTaskForm } from "@/components/tasks/NewTaskForm";
 import { Default as NewTaskFormStory } from "@/components/tasks/NewTaskForm/NewTaskForm.stories";
 import { TaskFiltersForm } from "@/components/tasks/TaskFiltersForm";
 import { Default as TaskFiltersFormStory } from "@/components/tasks/TaskFiltersForm/TaskFiltersForm.stories";
+import { withTaskDetail } from "@/components/tasks/TaskDetail/decorators";
+import { withTaskComments } from "@/components/tasks/TaskCommentsContainer/decorators";
 
 const meta = {
   title: "components/pages/TasksPage",
   component: TasksPage,
   parameters: { layout: "fullscreen" },
   decorators: [
-    (Story) => (
-      <TaskDetailContainerProvider
-        TaskDetailContainer={() => <TaskDetail {...TaskDetailStory.args} />}
-      >
-        <CommentsContainerProvider
-          CommentsContainer={() => <MockedCommentsContainer />}
-        >
-          <Story />
-        </CommentsContainerProvider>
-      </TaskDetailContainerProvider>
-    ),
+    withTaskDetail,
+    withTaskComments,
     PageDecorator,
     withThemedBackground,
   ],

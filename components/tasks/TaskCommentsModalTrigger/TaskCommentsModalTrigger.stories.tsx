@@ -1,13 +1,11 @@
-import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { TaskCommentsModalTrigger } from "./TaskCommentsModalTrigger";
 import {
-  CommentsContainerProvider,
-  MockedCommentsContainer,
-} from "@/components/comments/CommentsContainer";
-import { CommentItemSkeleton } from "@/components/comments/CommentItem";
-import { Repeat } from "@/components/common/Repeat";
-import { CommentsEmptySection } from "@/components/comments/CommentsEmptySection";
+  withTaskComments,
+  withTaskCommentsEmpty,
+  withTaskCommentsSkeleton,
+} from "../TaskCommentsContainer/decorators";
+import { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { TaskCommentsModalTrigger } from "./TaskCommentsModalTrigger";
+import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {
   title: "Components/tasks/TaskCommentsModalTrigger",
@@ -17,7 +15,6 @@ const meta = {
   parameters: {
     backgroundVariant: "alt",
   },
-  excludeStories: ["MockedCommentsContainer"],
   args: {
     commentCount: 25,
     taskId: 1,
@@ -28,39 +25,13 @@ export default meta;
 export type Story = StoryObj<typeof meta>;
 
 export const Default = {
-  decorators: [
-    (Story) => (
-      <CommentsContainerProvider
-        CommentsContainer={() => <MockedCommentsContainer />}
-      >
-        <Story />
-      </CommentsContainerProvider>
-    ),
-  ],
+  decorators: [withTaskComments],
 } satisfies Story;
 
 export const Empty = {
-  decorators: [
-    (Story) => (
-      <CommentsContainerProvider
-        CommentsContainer={() => <CommentsEmptySection />}
-      >
-        <Story />
-      </CommentsContainerProvider>
-    ),
-  ],
+  decorators: [withTaskCommentsEmpty],
 } satisfies Story;
 
 export const WithSkeletonContent = {
-  decorators: [
-    (Story) => (
-      <CommentsContainerProvider
-        CommentsContainer={() => (
-          <Repeat items={10} renderItem={() => <CommentItemSkeleton />} />
-        )}
-      >
-        <Story />
-      </CommentsContainerProvider>
-    ),
-  ],
+  decorators: [withTaskCommentsSkeleton],
 } satisfies Story;

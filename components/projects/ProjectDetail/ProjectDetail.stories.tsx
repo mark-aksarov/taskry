@@ -1,21 +1,12 @@
-import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { ProjectDetail } from "./ProjectDetail";
+import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { CommentsContainerProvider } from "@/components/comments/CommentsContainer";
-import { MockedCommentsContainer } from "@/components/comments/CommentsContainer";
 
 const meta = {
   title: "components/projects/ProjectDetail",
   component: ProjectDetail,
   tags: ["autodocs"],
   decorators: [
-    (Story) => (
-      <CommentsContainerProvider
-        CommentsContainer={() => <MockedCommentsContainer />}
-      >
-        <Story />
-      </CommentsContainerProvider>
-    ),
     (Story) => (
       <div className="max-w-[500px]">
         <Story />

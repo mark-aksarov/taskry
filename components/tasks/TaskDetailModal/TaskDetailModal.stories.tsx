@@ -3,13 +3,10 @@ import { TaskDetailModal } from "./TaskDetailModal";
 import { Button, RACDialogTrigger } from "@/components/ui";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import {
-  TaskDetail,
-  TaskDetailContainerProvider,
-  TaskDetailSkeleton,
-} from "../TaskDetail";
-import { Default as TaskDetailStory } from "../TaskDetail/TaskDetail.stories";
-import { CommentsContainerProvider } from "@/components/comments/CommentsContainer";
-import { MockedCommentsContainer } from "@/components/comments/CommentsContainer";
+  withTaskDetail,
+  withTaskDetailSkeleton,
+} from "@/components/tasks/TaskDetail/decorators";
+import { withTaskComments } from "@/components/tasks/TaskCommentsContainer/decorators";
 
 const meta = {
   title: "components/tasks/TaskDetailModal",
@@ -33,29 +30,9 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default = {
-  decorators: [
-    (Story) => (
-      <TaskDetailContainerProvider
-        TaskDetailContainer={() => <TaskDetail {...TaskDetailStory.args} />}
-      >
-        <CommentsContainerProvider
-          CommentsContainer={() => <MockedCommentsContainer />}
-        >
-          <Story />
-        </CommentsContainerProvider>
-      </TaskDetailContainerProvider>
-    ),
-  ],
+  decorators: [withTaskDetail, withTaskComments],
 } satisfies Story;
 
 export const WithSkeletonContent = {
-  decorators: [
-    (Story) => (
-      <TaskDetailContainerProvider
-        TaskDetailContainer={() => <TaskDetailSkeleton />}
-      >
-        <Story />
-      </TaskDetailContainerProvider>
-    ),
-  ],
+  decorators: [withTaskDetailSkeleton, withTaskComments],
 } satisfies Story;

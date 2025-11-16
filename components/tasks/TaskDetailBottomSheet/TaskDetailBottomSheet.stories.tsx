@@ -2,16 +2,16 @@ import { Button } from "@/components/ui";
 import { useOverlayTrigger } from "react-aria";
 import { useOverlayTriggerState } from "react-stately";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { TaskDetail, TaskDetailSkeleton } from "../TaskDetail";
 import {
   TaskDetailBottomSheet,
   TaskDetailBottomSheetProps,
 } from "./TaskDetailBottomSheet";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { Default as TaskDetailStory } from "../TaskDetail/TaskDetail.stories";
-import { TaskDetailContainerProvider } from "../TaskDetail/TaskDetailContainerContext";
-import { CommentsContainerProvider } from "@/components/comments/CommentsContainer";
-import { MockedCommentsContainer } from "@/components/comments/CommentsContainer";
+import {
+  withTaskDetail,
+  withTaskDetailSkeleton,
+} from "@/components/tasks/TaskDetail/decorators";
+import { withTaskComments } from "@/components/tasks/TaskCommentsContainer/decorators";
 
 const meta = {
   title: "components/tasks/TaskDetailBottomSheet",
@@ -52,33 +52,9 @@ const TaskDetailBottomSheetTemplate = ({
 };
 
 export const Default = {
-  decorators: [
-    (Story) => (
-      <TaskDetailContainerProvider
-        TaskDetailContainer={() => <TaskDetail {...TaskDetailStory.args} />}
-      >
-        <CommentsContainerProvider
-          CommentsContainer={() => <MockedCommentsContainer />}
-        >
-          <Story />
-        </CommentsContainerProvider>
-      </TaskDetailContainerProvider>
-    ),
-  ],
+  decorators: [withTaskDetail, withTaskComments],
 } satisfies Story;
 
 export const WithSkeletonContent = {
-  decorators: [
-    (Story) => (
-      <TaskDetailContainerProvider
-        TaskDetailContainer={() => <TaskDetailSkeleton />}
-      >
-        <CommentsContainerProvider
-          CommentsContainer={() => <MockedCommentsContainer />}
-        >
-          <Story />
-        </CommentsContainerProvider>
-      </TaskDetailContainerProvider>
-    ),
-  ],
+  decorators: [withTaskDetailSkeleton, withTaskComments],
 } satisfies Story;
