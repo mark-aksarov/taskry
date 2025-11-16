@@ -1,20 +1,20 @@
-import { Suspense } from "react";
-import { Plus } from "lucide-react";
-import { Button } from "@/components/ui";
-import { PageGrid } from "@/components/common/PageGrid";
-import { ViewModeToggleButtonGroup } from "@/components/common/ViewMode";
 import {
   ToolbarDesktop,
   ToolbarMobileBottom,
   ToolbarMobileHeading,
   ToolbarMobileTop,
 } from "@/components/common/Toolbar";
+import { Suspense } from "react";
+import { Plus } from "lucide-react";
+import { Button } from "@/components/ui";
+import { PageGrid } from "@/components/common/PageGrid";
 import { ViewModeProvider } from "@/components/common/ViewMode";
 import { PageContainer } from "@/components/common/PageContainer";
+import { ViewModeToggleButtonGroup } from "@/components/common/ViewMode";
 import { UserFiltersFormSkeleton } from "@/components/users/UserFiltersForm";
-import { UserActionsMenuTrigger } from "@/components/users/UserActionsMenuTrigger";
-import { UserFiltersModalTrigger } from "@/components/users/UserFiltersModalTrigger";
-import { UserFiltersBottomSheetTrigger } from "@/components/users/UserFiltersBottomSheetTrigger";
+import { UserToolbarActionsMenuTrigger } from "@/components/users/UserToolbarActionsMenuTrigger";
+import { UserToolbarFiltersModalTrigger } from "@/components/users/UserToolbarFiltersModalTrigger";
+import { UserToolbarFiltersBottomSheetTrigger } from "@/components/users/UserToolbarFiltersBottomSheetTrigger";
 
 interface UsersPageProps {
   UserFiltersFormContainer: React.ComponentType;
@@ -30,14 +30,14 @@ export function UsersPage({
       <PageGrid>
         <ViewModeProvider>
           <ToolbarDesktop>
-            <UserFiltersModalTrigger
+            <UserToolbarFiltersModalTrigger
               filtersForm={
                 <Suspense fallback={<UserFiltersFormSkeleton />}>
                   <UserFiltersFormContainer />
                 </Suspense>
               }
             />
-            <UserActionsMenuTrigger />
+            <UserToolbarActionsMenuTrigger />
             <ViewModeToggleButtonGroup className="ml-auto" />
             <Button
               label="New User"
@@ -49,14 +49,14 @@ export function UsersPage({
 
           <ToolbarMobileTop>
             <ToolbarMobileHeading>Users</ToolbarMobileHeading>
-            <UserFiltersBottomSheetTrigger
+            <UserToolbarFiltersBottomSheetTrigger
               filtersForm={
                 <Suspense fallback={<UserFiltersFormSkeleton />}>
                   <UserFiltersFormContainer />
                 </Suspense>
               }
             />
-            <UserActionsMenuTrigger />
+            <UserToolbarActionsMenuTrigger />
           </ToolbarMobileTop>
 
           <ToolbarMobileBottom>

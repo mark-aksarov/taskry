@@ -1,1 +1,0 @@
-export { CustomerFiltersModalTrigger } from "./CustomerFiltersModalTrigger";

@@ -6,17 +6,17 @@ import {
 } from "@/components/common/Toolbar";
 import { Suspense } from "react";
 import { Plus } from "lucide-react";
-import { Button, RACDialogTrigger } from "@/components/ui";
 import { PageGrid } from "@/components/common/PageGrid";
+import { Button, RACDialogTrigger } from "@/components/ui";
 import { ViewModeProvider } from "@/components/common/ViewMode";
 import { PageContainer } from "@/components/common/PageContainer";
-import { ViewModeToggleButtonGroup } from "@/components/common/ViewMode";
-import { ProjectFiltersModalTrigger } from "@/components/projects/ProjectFiltersModalTrigger";
-import { ProjectActionsMenuTrigger } from "@/components/projects/ProjectActionsMenuTrigger";
-import { ProjectFiltersFormSkeleton } from "@/components/projects/ProjectFiltersForm";
-import { NewProjectFormSkeleton } from "@/components/projects/NewProjectForm";
 import { NewProjectModal } from "@/components/projects/NewProjectModal";
-import { ProjectFiltersBottomSheetTrigger } from "@/components/projects/ProjectFiltersBottomSheetTrigger";
+import { ViewModeToggleButtonGroup } from "@/components/common/ViewMode";
+import { NewProjectFormSkeleton } from "@/components/projects/NewProjectForm";
+import { ProjectFiltersFormSkeleton } from "@/components/projects/ProjectFiltersForm";
+import { ProjectToolbarActionsMenuTrigger } from "@/components/projects/ProjectToolbarActionsMenuTrigger";
+import { ProjectToolbarFiltersModalTrigger } from "@/components/projects/ProjectToolbarFiltersModalTrigger";
+import { ProjectToolbarFiltersBottomSheetTrigger } from "@/components/projects/ProjectToolbarFiltersBottomSheetTrigger";
 
 interface ProjectsPageProps {
   ProjectFiltersFormContainer: React.ComponentType;
@@ -34,14 +34,14 @@ export function ProjectsPage({
       <PageGrid>
         <ViewModeProvider>
           <ToolbarDesktop>
-            <ProjectFiltersModalTrigger
+            <ProjectToolbarFiltersModalTrigger
               filtersForm={
                 <Suspense fallback={<ProjectFiltersFormSkeleton />}>
                   <ProjectFiltersFormContainer />
                 </Suspense>
               }
             />
-            <ProjectActionsMenuTrigger />
+            <ProjectToolbarActionsMenuTrigger />
             <ViewModeToggleButtonGroup className="ml-auto" />
             <RACDialogTrigger>
               <Button
@@ -62,14 +62,14 @@ export function ProjectsPage({
 
           <ToolbarMobileTop>
             <ToolbarMobileHeading>Projects</ToolbarMobileHeading>
-            <ProjectFiltersBottomSheetTrigger
+            <ProjectToolbarFiltersBottomSheetTrigger
               filtersForm={
                 <Suspense fallback={<ProjectFiltersFormSkeleton />}>
                   <ProjectFiltersFormContainer />
                 </Suspense>
               }
             />
-            <ProjectActionsMenuTrigger />
+            <ProjectToolbarActionsMenuTrigger />
           </ToolbarMobileTop>
 
           <ToolbarMobileBottom>

@@ -1,1 +1,0 @@
-export { ProjectFiltersModalTrigger } from "./ProjectFiltersModalTrigger";

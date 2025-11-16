@@ -1,20 +1,20 @@
-import { Suspense } from "react";
-import { Plus } from "lucide-react";
-import { Button } from "@/components/ui";
-import { PageGrid } from "@/components/common/PageGrid";
-import { ViewModeToggleButtonGroup } from "@/components/common/ViewMode";
 import {
   ToolbarDesktop,
   ToolbarMobileBottom,
   ToolbarMobileHeading,
   ToolbarMobileTop,
 } from "@/components/common/Toolbar";
+import { Suspense } from "react";
+import { Plus } from "lucide-react";
+import { Button } from "@/components/ui";
+import { PageGrid } from "@/components/common/PageGrid";
 import { ViewModeProvider } from "@/components/common/ViewMode";
 import { PageContainer } from "@/components/common/PageContainer";
-import { CustomerActionsMenuTrigger } from "@/components/customer/CustomerActionsMenuTrigger";
-import { CustomerFiltersModalTrigger } from "@/components/customer/CustomerFiltersModalTrigger";
+import { ViewModeToggleButtonGroup } from "@/components/common/ViewMode";
 import { CustomerFiltersFormSkeleton } from "@/components/customer/CustomerFiltersForm";
-import { CustomerFiltersBottomSheetTrigger } from "@/components/customer/CustomerFiltersBottomSheetTrigger";
+import { CustomerToolbarActionsMenuTrigger } from "@/components/customer/CustomerToolbarActionsMenuTrigger";
+import { CustomerToolbarFiltersModalTrigger } from "@/components/customer/CustomerToolbarFiltersModalTrigger";
+import { CustomerToolbarFiltersBottomSheetTrigger } from "@/components/customer/CustomerToolbarFiltersBottomSheetTrigger";
 
 interface CustomersPageProps {
   CustomerFiltersFormContainer: React.ComponentType;
@@ -30,14 +30,14 @@ export function CustomersPage({
       <PageGrid>
         <ViewModeProvider>
           <ToolbarDesktop>
-            <CustomerFiltersModalTrigger
+            <CustomerToolbarFiltersModalTrigger
               filtersForm={
                 <Suspense fallback={<CustomerFiltersFormSkeleton />}>
                   <CustomerFiltersFormContainer />
                 </Suspense>
               }
             />
-            <CustomerActionsMenuTrigger />
+            <CustomerToolbarActionsMenuTrigger />
             <ViewModeToggleButtonGroup className="ml-auto" />
             <Button
               label="New Customer"
@@ -49,14 +49,14 @@ export function CustomersPage({
 
           <ToolbarMobileTop>
             <ToolbarMobileHeading>Customers</ToolbarMobileHeading>
-            <CustomerFiltersBottomSheetTrigger
+            <CustomerToolbarFiltersBottomSheetTrigger
               filtersForm={
                 <Suspense fallback={<CustomerFiltersFormSkeleton />}>
                   <CustomerFiltersFormContainer />
                 </Suspense>
               }
             />
-            <CustomerActionsMenuTrigger />
+            <CustomerToolbarActionsMenuTrigger />
           </ToolbarMobileTop>
 
           <ToolbarMobileBottom>

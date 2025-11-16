@@ -1,1 +1,0 @@
-export { ProjectFiltersBottomSheetTrigger } from "./ProjectFiltersBottomSheetTrigger";

@@ -1,23 +1,23 @@
-import { Suspense } from "react";
-import { Plus } from "lucide-react";
-import { Button, RACDialogTrigger } from "@/components/ui";
-import { PageGrid } from "@/components/common/PageGrid";
-import { ViewModeToggleButtonGroup } from "@/components/common/ViewMode";
 import {
   ToolbarDesktop,
+  ToolbarMobileTop,
   ToolbarMobileBottom,
   ToolbarMobileHeading,
-  ToolbarMobileTop,
 } from "@/components/common/Toolbar";
+import { Suspense } from "react";
+import { Plus } from "lucide-react";
+import { PageGrid } from "@/components/common/PageGrid";
+import { Button, RACDialogTrigger } from "@/components/ui";
 import { NewTaskModal } from "@/components/tasks/NewTaskModal";
 import { ViewModeProvider } from "@/components/common/ViewMode";
 import { PageContainer } from "@/components/common/PageContainer";
-import { TaskFiltersFormSkeleton } from "@/components/tasks/TaskFiltersForm";
-import { TaskActionsMenuTrigger } from "@/components/tasks/TaskActionsMenuTrigger";
 import { NewTaskFormSkeleton } from "@/components/tasks/NewTaskForm";
-import { TaskFiltersModalTrigger } from "@/components/tasks/TaskFiltersModalTrigger";
-import { TaskFiltersBottomSheetTrigger } from "@/components/tasks/TaskFiltersBottomSheetTrigger";
-import { TaskSortingMenuTrigger } from "@/components/tasks/TaskSortingMenuTrigger";
+import { ViewModeToggleButtonGroup } from "@/components/common/ViewMode";
+import { TaskFiltersFormSkeleton } from "@/components/tasks/TaskFiltersForm";
+import { TaskToolbarSortingMenuTrigger } from "@/components/tasks/TaskToolbarSortingMenuTrigger";
+import { TaskToolbarActionsMenuTrigger } from "@/components/tasks/TaskToolbarActionsMenuTrigger";
+import { TaskToolbarFiltersModalTrigger } from "@/components/tasks/TaskToolbarFiltersModalTrigger";
+import { TaskToolbarFiltersBottomSheetTrigger } from "@/components/tasks/TaskToolbarFiltersBottomSheetTrigger";
 
 interface TasksPageProps {
   TaskFiltersFormContainer: React.ComponentType;
@@ -35,15 +35,15 @@ export function TasksPage({
       <PageGrid>
         <ViewModeProvider>
           <ToolbarDesktop>
-            <TaskSortingMenuTrigger />
-            <TaskFiltersModalTrigger
+            <TaskToolbarSortingMenuTrigger />
+            <TaskToolbarFiltersModalTrigger
               filtersForm={
                 <Suspense fallback={<TaskFiltersFormSkeleton />}>
                   <TaskFiltersFormContainer />
                 </Suspense>
               }
             />
-            <TaskActionsMenuTrigger />
+            <TaskToolbarActionsMenuTrigger />
             <ViewModeToggleButtonGroup className="ml-auto" />
             <RACDialogTrigger>
               <Button
@@ -64,15 +64,15 @@ export function TasksPage({
 
           <ToolbarMobileTop>
             <ToolbarMobileHeading>Tasks</ToolbarMobileHeading>
-            <TaskSortingMenuTrigger />
-            <TaskFiltersBottomSheetTrigger
+            <TaskToolbarSortingMenuTrigger />
+            <TaskToolbarFiltersBottomSheetTrigger
               filtersForm={
                 <Suspense fallback={<TaskFiltersFormSkeleton />}>
                   <TaskFiltersFormContainer />
                 </Suspense>
               }
             />
-            <TaskActionsMenuTrigger />
+            <TaskToolbarActionsMenuTrigger />
           </ToolbarMobileTop>
 
           <ToolbarMobileBottom>

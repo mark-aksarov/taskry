@@ -1,1 +1,0 @@
-export { UserFiltersBottomSheetTrigger } from "./UserFiltersBottomSheetTrigger";

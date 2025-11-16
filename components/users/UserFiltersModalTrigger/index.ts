@@ -1,1 +1,0 @@
-export { UserFiltersModalTrigger } from "./UserFiltersModalTrigger";
