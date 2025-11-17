@@ -1,9 +1,13 @@
 "use client";
 
-import { Button } from "@/components/ui";
+import {
+  Button,
+  DialogCloseButton,
+  DialogHeader,
+  DialogHeading,
+} from "@/components/ui";
 import { useOverlayTrigger } from "react-aria";
 import { Item, useOverlayTriggerState } from "react-stately";
-import { MenuDialogHeader } from "@/components/common/MenuDialogHeader";
 import { Check, ChevronDown, CircleEllipsis, Clock } from "lucide-react";
 import { ResponsiveMenuTrigger } from "@/components/common/ResponsiveMenuTrigger";
 
@@ -13,7 +17,12 @@ export function ProjectDetailStatusMenuTrigger() {
 
   return (
     <ResponsiveMenuTrigger
-      renderDialogHeader={() => <MenuDialogHeader heading="Project Status" />}
+      renderDialogHeader={() => (
+        <DialogHeader className="px-4 py-3">
+          <DialogHeading className="text-base">Project Status</DialogHeading>
+          <DialogCloseButton />
+        </DialogHeader>
+      )}
       renderButton={() => (
         <Button
           {...triggerProps}

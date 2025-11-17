@@ -2,9 +2,14 @@
 
 import { Item } from "react-stately";
 import { Languages } from "lucide-react";
-import { MenuTrigger, Button } from "@/components/ui";
+import {
+  MenuTrigger,
+  Button,
+  DialogHeader,
+  DialogHeading,
+  DialogCloseButton,
+} from "@/components/ui";
 import { NavigationButton } from "../common/NavigationButton";
-import { MenuDialogHeader } from "../common/MenuDialogHeader";
 
 const menuItems = [
   <Item textValue="Delete" key="delete">
@@ -29,7 +34,12 @@ export const LangMenuBottomSheetTrigger = () => {
   return (
     <MenuTrigger
       overlayType="bottomsheet"
-      renderDialogHeader={() => <MenuDialogHeader heading="Language" />}
+      renderDialogHeader={() => (
+        <DialogHeader className="px-4 py-3">
+          <DialogHeading className="text-base">Language</DialogHeading>
+          <DialogCloseButton />
+        </DialogHeader>
+      )}
       renderButton={() => (
         <NavigationButton>
           <Languages size={18} strokeWidth={1.5} absoluteStrokeWidth />

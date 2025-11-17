@@ -1,6 +1,7 @@
 import { ProjectsPage } from "./ProjectsPage";
 import { getProjects } from "@/lib/queries/project";
 import { ProjectsPageEmpty } from "./ProjectsPageEmpty";
+import { NewTaskFormContainer } from "@/components/tasks/NewTaskForm";
 import { NewProjectFormContainer } from "@/components/projects/NewProjectForm";
 import { ProjectDetailContainerProvider } from "@/components/projects/ProjectDetail";
 import { ProjectFiltersFormContainer } from "@/components/projects/ProjectFiltersForm";
@@ -17,6 +18,7 @@ export default async function AppProjectsPage() {
       <ProjectCommentsContainerProvider>
         <ProjectsPage
           ProjectFiltersFormContainer={ProjectFiltersFormContainer}
+          NewTaskFormContainer={NewTaskFormContainer}
           ProjectViewModeContainer={ProjectViewModeContainer}
           NewProjectFormContainer={NewProjectFormContainer}
         />

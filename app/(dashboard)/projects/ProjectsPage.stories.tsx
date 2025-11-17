@@ -17,6 +17,8 @@ import { ProjectFiltersForm } from "@/components/projects/ProjectFiltersForm";
 import { Default as ProjectFiltersFormStory } from "@/components/projects/ProjectFiltersForm/ProjectFiltersForm.stories";
 import { withProjectDetail } from "@/components/projects/ProjectDetail/decorators";
 import { withProjectComments } from "@/components/projects/ProjectCommentsContainer/decorators";
+import { NewTaskForm } from "@/components/tasks/NewTaskForm";
+import { Default as NewTaskFormStory } from "@/components/tasks/NewTaskForm/NewTaskForm.stories";
 
 const meta = {
   title: "components/pages/ProjectsPage",
@@ -47,6 +49,8 @@ export const Default: Story = {
         grid={<ProjectGrid {...ProjectGridStory.args} />}
       />
     ),
+
+    NewTaskFormContainer: () => <NewTaskForm {...NewTaskFormStory.args} />,
     NewProjectFormContainer: () => (
       <NewProjectForm {...NewProjectFormStory.args} />
     ),

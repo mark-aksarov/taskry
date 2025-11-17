@@ -2,10 +2,15 @@
 
 import { Ellipsis } from "lucide-react";
 import { useOverlayTrigger } from "react-aria";
-import { MenuDialogHeader } from "../MenuDialogHeader";
 import { useOverlayTriggerState } from "react-stately";
-import { Button, MenuTriggerProps } from "@/components/ui";
 import { ResponsiveMenuTrigger } from "../ResponsiveMenuTrigger";
+import {
+  Button,
+  DialogCloseButton,
+  DialogHeader,
+  DialogHeading,
+  MenuTriggerProps,
+} from "@/components/ui";
 
 export function ToolbarActionsMenuTrigger<T extends object = any>({
   children,
@@ -15,7 +20,12 @@ export function ToolbarActionsMenuTrigger<T extends object = any>({
 
   return (
     <ResponsiveMenuTrigger
-      renderDialogHeader={() => <MenuDialogHeader heading="Actions" />}
+      renderDialogHeader={() => (
+        <DialogHeader className="px-4 py-3">
+          <DialogHeading className="text-base">Actions</DialogHeading>
+          <DialogCloseButton />
+        </DialogHeader>
+      )}
       renderButton={() => (
         <>
           <Button

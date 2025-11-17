@@ -7,15 +7,20 @@ import {
   DialogFooter,
   DialogHeader,
   DialogHeading,
+  ModalProps,
 } from "@/components/ui";
+
+interface NewProjectModalProps
+  extends Pick<ModalProps, "isOpen" | "onOpenChange"> {
+  newProjectForm: React.ReactNode;
+}
 
 export function NewProjectModal({
   newProjectForm,
-}: {
-  newProjectForm: React.ReactNode;
-}) {
+  ...props
+}: NewProjectModalProps) {
   return (
-    <ResponsiveModal isDismissable className="w-[460px]">
+    <ResponsiveModal isDismissable className="w-[460px]" {...props}>
       <Dialog className="md:max-h-[calc(100dvh-64px)]">
         <DialogHeader>
           <DialogHeading>New Project</DialogHeading>

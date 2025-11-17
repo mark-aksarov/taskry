@@ -3,17 +3,16 @@ import {
   ToolbarMobileTop,
   ToolbarMobileBottom,
   ToolbarMobileHeading,
+  ToolbarCreateNewMenuTrigger,
 } from "@/components/common/Toolbar";
 import { Suspense } from "react";
-import { Plus } from "lucide-react";
 import { PageGrid } from "@/components/common/PageGrid";
-import { Button, RACDialogTrigger } from "@/components/ui";
-import { NewTaskModal } from "@/components/tasks/NewTaskModal";
 import { ViewModeProvider } from "@/components/common/ViewMode";
 import { PageContainer } from "@/components/common/PageContainer";
 import { NewTaskFormSkeleton } from "@/components/tasks/NewTaskForm";
 import { ViewModeToggleButtonGroup } from "@/components/common/ViewMode";
 import { TaskFiltersFormSkeleton } from "@/components/tasks/TaskFiltersForm";
+import { NewProjectFormSkeleton } from "@/components/projects/NewProjectForm";
 import { TaskToolbarSortingMenuTrigger } from "@/components/tasks/TaskToolbarSortingMenuTrigger";
 import { TaskToolbarActionsMenuTrigger } from "@/components/tasks/TaskToolbarActionsMenuTrigger";
 import { TaskToolbarFiltersModalTrigger } from "@/components/tasks/TaskToolbarFiltersModalTrigger";
@@ -22,12 +21,14 @@ import { TaskToolbarFiltersBottomSheetTrigger } from "@/components/tasks/TaskToo
 interface TasksPageProps {
   TaskFiltersFormContainer: React.ComponentType;
   NewTaskFormContainer: React.ComponentType;
+  NewProjectFormContainer: React.ComponentType;
   TaskViewModeContainer: React.ComponentType;
 }
 
 export function TasksPage({
   TaskFiltersFormContainer,
   NewTaskFormContainer,
+  NewProjectFormContainer,
   TaskViewModeContainer,
 }: TasksPageProps) {
   return (
@@ -45,21 +46,19 @@ export function TasksPage({
             />
             <TaskToolbarActionsMenuTrigger />
             <ViewModeToggleButtonGroup className="ml-auto" />
-            <RACDialogTrigger>
-              <Button
-                label="New Task"
-                iconLeft={
-                  <Plus size={16} strokeWidth={1.5} absoluteStrokeWidth />
-                }
-              />
-              <NewTaskModal
-                newTaskForm={
-                  <Suspense fallback={<NewTaskFormSkeleton />}>
-                    <NewTaskFormContainer />
-                  </Suspense>
-                }
-              />
-            </RACDialogTrigger>
+
+            <ToolbarCreateNewMenuTrigger
+              newTaskForm={
+                <Suspense fallback={<NewTaskFormSkeleton />}>
+                  <NewTaskFormContainer />
+                </Suspense>
+              }
+              newProjectForm={
+                <Suspense fallback={<NewProjectFormSkeleton />}>
+                  <NewProjectFormContainer />
+                </Suspense>
+              }
+            />
           </ToolbarDesktop>
 
           <ToolbarMobileTop>
@@ -77,21 +76,18 @@ export function TasksPage({
 
           <ToolbarMobileBottom>
             <ViewModeToggleButtonGroup />
-            <RACDialogTrigger>
-              <Button
-                label="New Task"
-                iconLeft={
-                  <Plus size={16} strokeWidth={1.5} absoluteStrokeWidth />
-                }
-              />
-              <NewTaskModal
-                newTaskForm={
-                  <Suspense fallback={<NewTaskFormSkeleton />}>
-                    <NewTaskFormContainer />
-                  </Suspense>
-                }
-              />
-            </RACDialogTrigger>
+            <ToolbarCreateNewMenuTrigger
+              newTaskForm={
+                <Suspense fallback={<NewTaskFormSkeleton />}>
+                  <NewTaskFormContainer />
+                </Suspense>
+              }
+              newProjectForm={
+                <Suspense fallback={<NewProjectFormSkeleton />}>
+                  <NewProjectFormContainer />
+                </Suspense>
+              }
+            />
           </ToolbarMobileBottom>
 
           <TaskViewModeContainer />

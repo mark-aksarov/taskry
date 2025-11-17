@@ -1,16 +1,15 @@
 import {
   ToolbarDesktop,
+  ToolbarMobileTop,
   ToolbarMobileBottom,
   ToolbarMobileHeading,
-  ToolbarMobileTop,
+  ToolbarCreateNewMenuTrigger,
 } from "@/components/common/Toolbar";
 import { Suspense } from "react";
-import { Plus } from "lucide-react";
 import { PageGrid } from "@/components/common/PageGrid";
-import { Button, RACDialogTrigger } from "@/components/ui";
 import { ViewModeProvider } from "@/components/common/ViewMode";
 import { PageContainer } from "@/components/common/PageContainer";
-import { NewProjectModal } from "@/components/projects/NewProjectModal";
+import { NewTaskFormSkeleton } from "@/components/tasks/NewTaskForm";
 import { ViewModeToggleButtonGroup } from "@/components/common/ViewMode";
 import { NewProjectFormSkeleton } from "@/components/projects/NewProjectForm";
 import { ProjectFiltersFormSkeleton } from "@/components/projects/ProjectFiltersForm";
@@ -21,12 +20,14 @@ import { ProjectToolbarFiltersBottomSheetTrigger } from "@/components/projects/P
 
 interface ProjectsPageProps {
   ProjectFiltersFormContainer: React.ComponentType;
+  NewTaskFormContainer: React.ComponentType;
   NewProjectFormContainer: React.ComponentType;
   ProjectViewModeContainer: React.ComponentType;
 }
 
 export function ProjectsPage({
   ProjectFiltersFormContainer,
+  NewTaskFormContainer,
   NewProjectFormContainer,
   ProjectViewModeContainer,
 }: ProjectsPageProps) {
@@ -45,21 +46,18 @@ export function ProjectsPage({
             />
             <ProjectToolbarActionsMenuTrigger />
             <ViewModeToggleButtonGroup className="ml-auto" />
-            <RACDialogTrigger>
-              <Button
-                label="New Project"
-                iconLeft={
-                  <Plus size={16} strokeWidth={1.5} absoluteStrokeWidth />
-                }
-              />
-              <NewProjectModal
-                newProjectForm={
-                  <Suspense fallback={<NewProjectFormSkeleton />}>
-                    <NewProjectFormContainer />
-                  </Suspense>
-                }
-              />
-            </RACDialogTrigger>
+            <ToolbarCreateNewMenuTrigger
+              newTaskForm={
+                <Suspense fallback={<NewTaskFormSkeleton />}>
+                  <NewTaskFormContainer />
+                </Suspense>
+              }
+              newProjectForm={
+                <Suspense fallback={<NewProjectFormSkeleton />}>
+                  <NewProjectFormContainer />
+                </Suspense>
+              }
+            />
           </ToolbarDesktop>
 
           <ToolbarMobileTop>
@@ -77,7 +75,12 @@ export function ProjectsPage({
 
           <ToolbarMobileBottom>
             <ViewModeToggleButtonGroup />
-            <NewProjectModal
+            <ToolbarCreateNewMenuTrigger
+              newTaskForm={
+                <Suspense fallback={<NewTaskFormSkeleton />}>
+                  <NewTaskFormContainer />
+                </Suspense>
+              }
               newProjectForm={
                 <Suspense fallback={<NewProjectFormSkeleton />}>
                   <NewProjectFormContainer />

@@ -13,11 +13,13 @@ import { Default as TaskListStory } from "@/components/tasks/TaskList/TaskList.s
 import { Default as TaskGridStory } from "@/components/tasks/TaskGrid/TaskGrid.stories";
 import { NewTaskForm } from "@/components/tasks/NewTaskForm";
 import { Default as NewTaskFormStory } from "@/components/tasks/NewTaskForm/NewTaskForm.stories";
+import { Default as NewProjectFormStory } from "@/components/projects/NewProjectForm/NewProjectForm.stories";
 import { TaskFiltersForm } from "@/components/tasks/TaskFiltersForm";
 import { Default as TaskFiltersFormStory } from "@/components/tasks/TaskFiltersForm/TaskFiltersForm.stories";
 import { withTaskDetail } from "@/components/tasks/TaskDetail/decorators";
 import { withTaskComments } from "@/components/tasks/TaskCommentsContainer/decorators";
 import { withUpdateSubtasksForm } from "@/components/subtasks/UpdateSubtasksForm/decorators";
+import { NewProjectForm } from "@/components/projects/NewProjectForm";
 
 const meta = {
   title: "components/pages/TasksPage",
@@ -44,6 +46,9 @@ export const Default: Story = {
       <TaskFiltersForm {...TaskFiltersFormStory.args} />
     ),
     NewTaskFormContainer: () => <NewTaskForm {...NewTaskFormStory.args} />,
+    NewProjectFormContainer: () => (
+      <NewProjectForm {...NewProjectFormStory.args} />
+    ),
     TaskViewModeContainer: () => (
       <ViewModeContainer
         list={<TaskList {...TaskListStory.args} />}
