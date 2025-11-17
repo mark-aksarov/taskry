@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo } from "react";
-import { Link } from "@/components/ui";
+import { Button, Link, RACDialogTrigger } from "@/components/ui";
 import {
   Check,
   CircleEllipsis,
@@ -29,6 +29,7 @@ import {
 import { ProjectDetailModal } from "../ProjectDetailModal";
 import { ProjectDetailBottomSheet } from "../ProjectDetailBottomSheet";
 import { getProjectStatusBadgeColor } from "../getProjectStatusBadgeColor";
+import { ProjectCommentsModal } from "../ProjectCommentsModal";
 
 export interface ProjectListItemProps {
   id: number;
@@ -194,13 +195,23 @@ export const ProjectListItem = ({
         </ItemBaseBadge>
       }
       commentsModalTriggerSlot={
-        <ItemBaseButton
-          label={comments}
-          iconLeft={
-            <MessageSquare size={16} strokeWidth={1.5} absoluteStrokeWidth />
-          }
-          className="@max-md:hidden"
-        />
+        <RACDialogTrigger>
+          <ItemBaseButton
+            label={comments}
+            iconLeft={
+              <MessageSquare size={16} strokeWidth={1.5} absoluteStrokeWidth />
+            }
+            className="@max-md:hidden"
+          />
+          <Button
+            variant="ghost"
+            iconLeft={
+              <MessageSquare size={16} strokeWidth={1.5} absoluteStrokeWidth />
+            }
+            className="rounded-full @md:hidden"
+          />
+          <ProjectCommentsModal projectId={id} />
+        </RACDialogTrigger>
       }
       menuTriggerSlot={
         <ItemBaseActionMenuTrigger>

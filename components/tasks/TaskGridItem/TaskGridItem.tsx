@@ -78,7 +78,7 @@ export function TaskGridItem({
     <TaskGridItemLayout
       checkboxSlot={<Checkbox aria-label={title} />}
       menuTriggerSlot={
-        <ItemBaseActionMenuTrigger>
+        <ItemBaseActionMenuTrigger className="-mr-2">
           <Item textValue="Delete" key="delete">
             <Trash size={16} /> Delete
           </Item>

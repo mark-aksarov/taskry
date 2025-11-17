@@ -1,8 +1,9 @@
 import React from "react";
 import { type Decorator } from "@storybook/react";
+import { Repeat } from "@/components/common/Repeat";
 import { CommentItemSkeleton } from "@/components/comments/CommentItem";
-import { ProjectCommentsContainerProvider } from "./ProjectCommentsContainerContext";
 import { CommentsEmptySection } from "@/components/comments/CommentsEmptySection";
+import { ProjectCommentsContainerProvider } from "./ProjectCommentsContainerContext";
 import { MockedCommentsContainer } from "@/components/comments/MockedCommentsContainer";
 
 export const withProjectComments: Decorator = (Story) => {
@@ -28,7 +29,9 @@ export const withProjectCommentsEmpty: Decorator = (Story) => {
 export const withProjectCommentsSkeleton: Decorator = (Story) => {
   return (
     <ProjectCommentsContainerProvider
-      ProjectCommentsContainer={() => <CommentItemSkeleton />}
+      ProjectCommentsContainer={() => (
+        <Repeat items={10} renderItem={() => <CommentItemSkeleton />} />
+      )}
     >
       <Story />
     </ProjectCommentsContainerProvider>

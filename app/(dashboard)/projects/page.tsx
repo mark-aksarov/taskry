@@ -5,6 +5,7 @@ import { NewProjectFormContainer } from "@/components/projects/NewProjectForm";
 import { ProjectDetailContainerProvider } from "@/components/projects/ProjectDetail";
 import { ProjectFiltersFormContainer } from "@/components/projects/ProjectFiltersForm";
 import { ProjectViewModeContainer } from "@/components/projects/ProjectViewModeContainer";
+import { ProjectCommentsContainerProvider } from "@/components/projects/ProjectCommentsContainer";
 
 export default async function AppProjectsPage() {
   const projects = await getProjects();
@@ -13,11 +14,13 @@ export default async function AppProjectsPage() {
 
   return (
     <ProjectDetailContainerProvider>
-      <ProjectsPage
-        ProjectFiltersFormContainer={ProjectFiltersFormContainer}
-        ProjectViewModeContainer={ProjectViewModeContainer}
-        NewProjectFormContainer={NewProjectFormContainer}
-      />
+      <ProjectCommentsContainerProvider>
+        <ProjectsPage
+          ProjectFiltersFormContainer={ProjectFiltersFormContainer}
+          ProjectViewModeContainer={ProjectViewModeContainer}
+          NewProjectFormContainer={NewProjectFormContainer}
+        />
+      </ProjectCommentsContainerProvider>
     </ProjectDetailContainerProvider>
   );
 }

@@ -7,10 +7,12 @@ import {
 } from "@/components/ui";
 import { Ellipsis } from "lucide-react";
 import { ResponsiveMenuTrigger } from "../ResponsiveMenuTrigger";
+import { twMerge } from "tailwind-merge";
 
 export function ItemBaseActionMenuTrigger<T extends object = any>({
+  className,
   children,
-}: Pick<MenuTriggerProps<T>, "children">) {
+}: Pick<MenuTriggerProps<T>, "children"> & { className?: string }) {
   return (
     <ResponsiveMenuTrigger
       placement="bottom right"
@@ -27,7 +29,7 @@ export function ItemBaseActionMenuTrigger<T extends object = any>({
           iconLeft={
             <Ellipsis size={16} strokeWidth={1.5} absoluteStrokeWidth />
           }
-          className="rounded-full"
+          className={twMerge("rounded-full", className)}
         />
       )}
     >

@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useMemo } from "react";
 import { Item } from "react-stately";
-import { Checkbox, Link } from "@/components/ui";
+import { Button, Checkbox, Link, RACDialogTrigger } from "@/components/ui";
 import {
   Check,
   CircleEllipsis,
@@ -29,6 +29,7 @@ import {
 import { ProjectDetailModal } from "../ProjectDetailModal";
 import { ProjectDetailBottomSheet } from "../ProjectDetailBottomSheet";
 import { getProjectStatusBadgeColor } from "../getProjectStatusBadgeColor";
+import { ProjectCommentsModal } from "../ProjectCommentsModal";
 
 export interface ProjectGridItemProps {
   id: number;
@@ -73,7 +74,7 @@ export function ProjectGridItem({
     <ProjectGridItemLayout
       checkboxSlot={<Checkbox aria-label={title} />}
       menuTriggerSlot={
-        <ItemBaseActionMenuTrigger>
+        <ItemBaseActionMenuTrigger className="-mr-2">
           <Item textValue="Delete" key="delete">
             <Trash size={16} /> Delete
           </Item>
@@ -120,12 +121,15 @@ export function ProjectGridItem({
         )
       }
       commentsSlot={
-        <ItemBaseButton
-          label={comments}
-          iconLeft={
-            <MessageSquare size={16} strokeWidth={1.5} absoluteStrokeWidth />
-          }
-        />
+        <RACDialogTrigger>
+          <ItemBaseButton
+            label={comments}
+            iconLeft={
+              <MessageSquare size={16} strokeWidth={1.5} absoluteStrokeWidth />
+            }
+          />
+          <ProjectCommentsModal projectId={id} />
+        </RACDialogTrigger>
       }
       statusSlot={
         <ItemBaseBadge color={getProjectStatusBadgeColor(status.id)}>

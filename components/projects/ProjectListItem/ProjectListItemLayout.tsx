@@ -37,7 +37,7 @@ export const ProjectListItemLayout = ({
       <div className="flex flex-none items-center justify-end gap-4">
         {statusSlot}
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center @max-md:gap-0.5 @md:gap-2">
           {commentsModalTriggerSlot}
           {menuTriggerSlot}
         </div>

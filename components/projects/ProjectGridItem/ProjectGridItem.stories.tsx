@@ -2,6 +2,7 @@ import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { ProjectGridItem } from "./ProjectGridItem";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withProjectDetail } from "../ProjectDetail/decorators";
+import { withProjectComments } from "../ProjectCommentsContainer/decorators";
 
 const meta = {
   title: "Components/projects/ProjectGridItem",
@@ -14,6 +15,7 @@ const meta = {
       </div>
     ),
     withProjectDetail,
+    withProjectComments,
     withThemedBackground,
   ],
 } satisfies Meta<typeof ProjectGridItem>;

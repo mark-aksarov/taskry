@@ -16,12 +16,18 @@ import { Default as NewProjectFormStory } from "@/components/projects/NewProject
 import { ProjectFiltersForm } from "@/components/projects/ProjectFiltersForm";
 import { Default as ProjectFiltersFormStory } from "@/components/projects/ProjectFiltersForm/ProjectFiltersForm.stories";
 import { withProjectDetail } from "@/components/projects/ProjectDetail/decorators";
+import { withProjectComments } from "@/components/projects/ProjectCommentsContainer/decorators";
 
 const meta = {
   title: "components/pages/ProjectsPage",
   component: ProjectsPage,
   parameters: { layout: "fullscreen" },
-  decorators: [withProjectDetail, PageDecorator, withThemedBackground],
+  decorators: [
+    withProjectDetail,
+    withProjectComments,
+    PageDecorator,
+    withThemedBackground,
+  ],
   beforeEach: () => {
     mocked(usePathname).mockReturnValue("/projects");
   },
