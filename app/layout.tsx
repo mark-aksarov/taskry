@@ -76,7 +76,6 @@ export function Layout({
 
       <div className="flex flex-auto flex-col">
         <AppHeader
-          title="Dashboard"
           notificationModalTrigger={
             <NotificationModalTrigger>
               <Suspense fallback={notificationListSkeleton}>

@@ -3,16 +3,15 @@ import { Button } from "@/components/ui";
 import { SearchForm } from "../SearchForm";
 import { LangMenuPopoverTrigger } from "../LangMenuTrigger";
 import { ProfileLink } from "../ProfileLink";
+import { AppHeaderTitle } from "./AppHeaderTitle";
 
 interface AppHeaderProps {
-  title: string;
   notificationModalTrigger: React.ReactNode;
   appBottomSheetTrigger: React.ReactNode;
   appSidebarSheetTrigger: React.ReactNode;
 }
 
 export const AppHeader = ({
-  title,
   notificationModalTrigger,
   appBottomSheetTrigger,
   appSidebarSheetTrigger,
@@ -26,7 +25,7 @@ export const AppHeader = ({
           {
             <div className="flex flex-none items-center gap-4">
               {appSidebarSheetTrigger}
-              <h2 className="text-xl font-bold">{title}</h2>
+              <AppHeaderTitle />
             </div>
           }
           <div className="flex flex-auto items-center justify-end gap-4">
