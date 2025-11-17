@@ -115,7 +115,7 @@ export const ProjectListItem = ({
             <ImageContainer className="h-9 w-9 @max-2xl:hidden" />
           )}
 
-          <ListItemInfo className="@max!-2xl:hidden">
+          <ListItemInfo className="@max-2xl:hidden">
             <ListItemTitle>
               {creator ? (
                 <Link className="block truncate" href={`/users=${creator.id}`}>
@@ -186,7 +186,10 @@ export const ProjectListItem = ({
         </ListItemInfo>
       }
       statusSlot={
-        <ItemBaseBadge color={getProjectStatusBadgeColor(status.id)}>
+        <ItemBaseBadge
+          className="@max-lg:hidden"
+          color={getProjectStatusBadgeColor(status.id)}
+        >
           {status.name}
         </ItemBaseBadge>
       }

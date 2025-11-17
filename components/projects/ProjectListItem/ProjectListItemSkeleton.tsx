@@ -1,11 +1,11 @@
+import {
+  ItemBaseBadgeSkeleton,
+  ItemBaseButtonSkeleton,
+  ItemBaseActionMenuTriggerSkeleton,
+} from "@/components/common/ItemBase";
 import { ProjectListItemLayout } from "./ProjectListItemLayout";
 import { ListItemInfoSkeleton } from "@/components/common/List/index";
 import { ImageContainerSkeleton } from "@/components/common/ImageContainer";
-import {
-  ItemBaseActionMenuTriggerSkeleton,
-  ItemBaseBadgeSkeleton,
-  ItemBaseButtonSkeleton,
-} from "@/components/common/ItemBase";
 
 export const ProjectListItemSkeleton = () => {
   return (
@@ -25,7 +25,7 @@ export const ProjectListItemSkeleton = () => {
       }
       categorySlot={<ListItemInfoSkeleton className="@max-4xl:hidden" />}
       companySlot={<ListItemInfoSkeleton className="@max-5xl:hidden" />}
-      statusSlot={<ItemBaseBadgeSkeleton className="@max-md:hidden" />}
+      statusSlot={<ItemBaseBadgeSkeleton className="@max-lg:hidden" />}
       commentsModalTriggerSlot={
         <ItemBaseButtonSkeleton className="@max-md:hidden" />
       }
