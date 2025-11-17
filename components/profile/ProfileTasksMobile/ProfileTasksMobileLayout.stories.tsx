@@ -1,15 +1,21 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { ProfileTasksMobileLayout } from "./ProfileTasksMobileLayout";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { Default as ProfileTaskListStory } from "../ProfileTaskList/ProfileTaskList.stories";
 import { withTaskDetail } from "@/components/tasks/TaskDetail/decorators";
 import { withTaskComments } from "@/components/tasks/TaskCommentsContainer/decorators";
+import { withUpdateSubtasksForm } from "@/components/subtasks/UpdateSubtasksForm/decorators";
+import { Default as ProfileTaskListStory } from "../ProfileTaskList/ProfileTaskList.stories";
 
 const meta = {
   title: "components/profile/ProfileTasksMobileLayout",
   component: ProfileTasksMobileLayout,
   tags: ["autodocs"],
-  decorators: [withTaskDetail, withTaskComments, withThemedBackground],
+  decorators: [
+    withTaskDetail,
+    withTaskComments,
+    withUpdateSubtasksForm,
+    withThemedBackground,
+  ],
   globals: {
     viewport: { value: "mobile2", isRotated: false },
   },

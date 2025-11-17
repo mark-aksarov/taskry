@@ -2,9 +2,9 @@
 
 import {
   Check,
+  CheckCheck,
   CircleEllipsis,
   Clock,
-  ListTodo,
   MessageSquare,
   Trash,
 } from "lucide-react";
@@ -28,6 +28,7 @@ import {
   ItemBaseDetailModalTrigger,
 } from "@/components/common/ItemBase";
 import { getTaskStatusBadgeColor } from "@/components/tasks/getTaskStatusBadgeColor";
+import { UpdateSubtasksModal } from "@/components/subtasks/UpdateSubtasksModal/UpdateSubtasksModal";
 
 export interface ProfileTaskListItemProps {
   id: number;
@@ -108,13 +109,23 @@ export const ProfileTaskListItem = ({
         </RACDialogTrigger>
       }
       subtasksSlot={
-        <ItemBaseButton
-          iconLeft={
-            <ListTodo size={16} strokeWidth={1.5} absoluteStrokeWidth />
-          }
-          label={subtasks}
-          className="@max-md:hidden"
-        />
+        <RACDialogTrigger>
+          <ItemBaseButton
+            label={subtasks}
+            iconLeft={
+              <CheckCheck size={16} strokeWidth={1.5} absoluteStrokeWidth />
+            }
+            className="@max-md:hidden"
+          />
+          <Button
+            variant="ghost"
+            iconLeft={
+              <CheckCheck size={16} strokeWidth={1.5} absoluteStrokeWidth />
+            }
+            className="rounded-full @md:hidden"
+          />
+          <UpdateSubtasksModal taskId={id} />
+        </RACDialogTrigger>
       }
       actionMenuSlot={
         <ItemBaseActionMenuTrigger>

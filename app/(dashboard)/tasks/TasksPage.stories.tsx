@@ -17,6 +17,7 @@ import { TaskFiltersForm } from "@/components/tasks/TaskFiltersForm";
 import { Default as TaskFiltersFormStory } from "@/components/tasks/TaskFiltersForm/TaskFiltersForm.stories";
 import { withTaskDetail } from "@/components/tasks/TaskDetail/decorators";
 import { withTaskComments } from "@/components/tasks/TaskCommentsContainer/decorators";
+import { withUpdateSubtasksForm } from "@/components/subtasks/UpdateSubtasksForm/decorators";
 
 const meta = {
   title: "components/pages/TasksPage",
@@ -25,6 +26,7 @@ const meta = {
   decorators: [
     withTaskDetail,
     withTaskComments,
+    withUpdateSubtasksForm,
     PageDecorator,
     withThemedBackground,
   ],

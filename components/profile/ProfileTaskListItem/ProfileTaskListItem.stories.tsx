@@ -3,12 +3,18 @@ import { ProfileTaskListItem } from "./ProfileTaskListItem";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withTaskDetail } from "@/components/tasks/TaskDetail/decorators";
 import { withTaskComments } from "@/components/tasks/TaskCommentsContainer/decorators";
+import { withUpdateSubtasksForm } from "@/components/subtasks/UpdateSubtasksForm/decorators";
 
 const meta = {
   title: "components/profile/ProfileTaskListItem",
   component: ProfileTaskListItem,
   tags: ["autodocs"],
-  decorators: [withTaskDetail, withTaskComments, withThemedBackground],
+  decorators: [
+    withTaskDetail,
+    withTaskComments,
+    withUpdateSubtasksForm,
+    withThemedBackground,
+  ],
 } satisfies Meta<typeof ProfileTaskListItem>;
 
 export default meta;

@@ -1,10 +1,12 @@
+import {
+  withUpdateSubtasksForm,
+  withUpdateSubtasksFormEmpty,
+  withUpdateSubtasksFormSkeleton,
+} from "../UpdateSubtasksForm/decorators";
 import { Suspense } from "react";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { Button, RACDialogTrigger } from "@/components/ui";
 import { UpdateSubtasksModal } from "./UpdateSubtasksModal";
-import { RACDialogTrigger, Skeleton } from "@/components/ui";
-import { UpdateSubtasksForm } from "../UpdateSubtasksForm";
-import { NewSubtasksButton } from "../NewSubtasksButton";
-import { Default as UpdateSubtasksFormStory } from "@/components/subtasks/UpdateSubtasksForm/UpdateSubtasksForm.stories";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {
@@ -12,16 +14,12 @@ const meta = {
   component: UpdateSubtasksModal,
   tags: ["autodocs"],
   args: {
-    updateSubtasksForm: (
-      <Suspense fallback={<Skeleton />}>
-        <UpdateSubtasksForm {...UpdateSubtasksFormStory.args} />
-      </Suspense>
-    ),
+    taskId: 1,
   },
   decorators: [
     (Story) => (
       <RACDialogTrigger>
-        <NewSubtasksButton />
+        <Button label="Update subtasks" />
         <Suspense>
           <Story />
         </Suspense>
@@ -34,4 +32,14 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  decorators: [withUpdateSubtasksForm],
+};
+
+export const WithEmptyContent = {
+  decorators: [withUpdateSubtasksFormEmpty],
+};
+
+export const WithSkeletonContent = {
+  decorators: [withUpdateSubtasksFormSkeleton],
+} satisfies Story;

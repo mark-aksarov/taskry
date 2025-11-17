@@ -1,14 +1,20 @@
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { ProfileTaskList } from "./ProfileTaskList";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { ProfileTaskListItem } from "../ProfileTaskListItem";
+import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withTaskDetail } from "@/components/tasks/TaskDetail/decorators";
 import { withTaskComments } from "@/components/tasks/TaskCommentsContainer/decorators";
+import { withUpdateSubtasksForm } from "@/components/subtasks/UpdateSubtasksForm/decorators";
 
 const meta = {
   title: "Components/profile/ProfileTaskList",
   component: ProfileTaskList,
-  decorators: [withTaskDetail, withTaskComments, withThemedBackground],
+  decorators: [
+    withTaskDetail,
+    withTaskComments,
+    withUpdateSubtasksForm,
+    withThemedBackground,
+  ],
 } satisfies Meta<typeof ProfileTaskList>;
 
 export default meta;
