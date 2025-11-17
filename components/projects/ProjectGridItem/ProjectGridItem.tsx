@@ -30,6 +30,7 @@ import { ProjectDetailModal } from "../ProjectDetailModal";
 import { ProjectDetailBottomSheet } from "../ProjectDetailBottomSheet";
 import { getProjectStatusBadgeColor } from "../getProjectStatusBadgeColor";
 import { ProjectCommentsModal } from "../ProjectCommentsModal";
+import { UnknownUser } from "@/components/common/UnknownUser";
 
 export interface ProjectGridItemProps {
   id: number;
@@ -117,7 +118,7 @@ export function ProjectGridItem({
             </ImageContainer>
           </Link>
         ) : (
-          <ImageContainer className="h-9 w-9" />
+          <UnknownUser className="h-9 w-9" />
         )
       }
       commentsSlot={

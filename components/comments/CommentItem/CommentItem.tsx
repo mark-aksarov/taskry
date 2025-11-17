@@ -14,6 +14,7 @@ import { CommentItemContent } from "./CommentItemContent";
 import { CommentItemActions } from "./CommentItemActions";
 import { ImageContainer } from "@/components/common/ImageContainer";
 import { Attachment, Attachments } from "@/components/attachments/Attachments";
+import { UnknownUser } from "@/components/common/UnknownUser";
 
 interface CommentItemProps {
   content: string;
@@ -61,7 +62,7 @@ export function CommentItem({
               <Image src={sender.imageUrl} alt={sender.fullName} fill />
             </ImageContainer>
           ) : (
-            <ImageContainer className="h-9 w-9" />
+            <UnknownUser className="h-9 w-9" />
           )}
         </>
       }

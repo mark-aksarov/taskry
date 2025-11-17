@@ -4,6 +4,7 @@ import { ProfileHeaderText } from "./ProfileHeaderText";
 import { ProfileHeaderTitle } from "./ProfileHeaderTitle";
 import { ProfileHeaderLayout } from "./ProfileHeaderLayout";
 import { ImageContainer } from "@/components/common/ImageContainer";
+import { UnknownUser } from "@/components/common/UnknownUser";
 
 export interface ProfileHeaderProps {
   fullName: string;
@@ -26,7 +27,7 @@ export function ProfileHeader({
             <Image fill src={imageUrl} alt={fullName} />
           </ImageContainer>
         ) : (
-          <ImageContainer className="h-21 w-21" />
+          <UnknownUser className="h-21 w-21" iconSize={50} />
         )
       }
       infoSlot={

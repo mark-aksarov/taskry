@@ -1,8 +1,8 @@
 import { AppHeader } from "./AppHeader";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { AppBottomSheetTrigger } from "../AppBottomSheetTrigger";
 import { AppSidebarSheetTrigger } from "../AppSidebarSheetTrigger";
+import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { NotificationModalTrigger } from "@/components/notifications/NotificationModalTrigger";
 import { Default as NotificationModalTriggerStory } from "@/components/notifications/NotificationModalTrigger/NotificationModalTrigger.stories";
 
@@ -20,7 +20,6 @@ type Story = StoryObj<typeof AppHeader>;
 
 export const Default = {
   args: {
-    title: "Dashboard",
     notificationModalTrigger: (
       <NotificationModalTrigger {...NotificationModalTriggerStory.args} />
     ),

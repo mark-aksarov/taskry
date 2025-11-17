@@ -15,6 +15,7 @@ import { Badge, Button, Link } from "@/components/ui";
 import { ExternalLink } from "lucide-react";
 import { ImageContainer } from "@/components/common/ImageContainer";
 import { NewSubtasksButton } from "@/components/subtasks/NewSubtasksButton";
+import { UnknownUser } from "@/components/common/UnknownUser";
 
 interface TaskDetailProps {
   id: number;
@@ -108,7 +109,7 @@ export function TaskDetail({
                 </ImageContainer>
               </Link>
             ) : (
-              <ImageContainer className="h-9 w-9" />
+              <UnknownUser className="h-9 w-9" />
             )}
             <DetailText>
               {assignee ? assignee.fullName : "Unassigned"}

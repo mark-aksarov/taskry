@@ -34,6 +34,8 @@ import {
 import { getTaskStatusBadgeColor } from "../getTaskStatusBadgeColor";
 import { TaskCommentsModal } from "../TaskCommentsModal";
 import { UpdateSubtasksModal } from "@/components/subtasks/UpdateSubtasksModal/UpdateSubtasksModal";
+import { UserIcon } from "@/components/icons/UserIcon";
+import { UnknownUser } from "@/components/common/UnknownUser";
 
 interface TaskListItemProps {
   id: number;
@@ -114,7 +116,7 @@ export const TaskListItem = ({
               </ImageContainer>
             </Link>
           ) : (
-            <ImageContainer className="h-9 w-9 @max-2xl:hidden" />
+            <UnknownUser className="h-9 w-9" />
           )}
           <ListItemInfo className="@max-2xl:hidden">
             <ListItemTitle>

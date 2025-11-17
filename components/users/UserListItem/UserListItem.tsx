@@ -15,6 +15,7 @@ import {
 
 import { ImageContainer } from "@/components/common/ImageContainer";
 import { ItemBaseActionMenuTrigger } from "@/components/common/ItemBase";
+import { UnknownUser } from "@/components/common/UnknownUser";
 
 export interface UserListItemProps {
   id: string;
@@ -50,7 +51,7 @@ export function UserListItem({
           </ImageContainer>
         </Link>
       ) : (
-        <ImageContainer className="h-9 w-9" />
+        <UnknownUser className="h-9 w-9" />
       )}
 
       <ListItemInfo>

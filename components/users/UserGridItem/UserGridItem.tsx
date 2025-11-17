@@ -17,6 +17,7 @@ import { Link, Checkbox, Divider } from "@/components/ui";
 import { Link2, Mail, Pencil, Phone, Trash } from "lucide-react";
 import { ImageContainer } from "@/components/common/ImageContainer";
 import { ItemBaseActionMenuTrigger } from "@/components/common/ItemBase";
+import { UnknownUser } from "@/components/common/UnknownUser";
 
 export interface UserGridItemProps {
   id: string;
@@ -60,7 +61,7 @@ export function UserGridItem({
             </ImageContainer>
           </Link>
         ) : (
-          <ImageContainer className="h-20 w-20" />
+          <UnknownUser className="h-20 w-20" iconSize={48} />
         )
       }
       titleSlot={

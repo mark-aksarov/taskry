@@ -13,6 +13,7 @@ import { ProjectDetailLayout } from "./ProjectDetailLayout";
 import { ImageContainer } from "@/components/common/ImageContainer";
 import { Attachment, Attachments } from "@/components/attachments/Attachments";
 import { ProjectDetailStatusMenuTrigger } from "./ProjectDetailStatusMenuTrigger";
+import { UnknownUser } from "@/components/common/UnknownUser";
 
 interface ProjectDetailProps {
   id: number;
@@ -95,7 +96,7 @@ export function ProjectDetail({
                 </ImageContainer>
               </Link>
             ) : (
-              <ImageContainer className="h-9 w-9" />
+              <UnknownUser className="h-9 w-9" />
             )}
             <DetailText>
               {creator ? creator.fullName : "Unknown creator"}

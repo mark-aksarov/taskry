@@ -34,6 +34,7 @@ import {
 import { getTaskStatusBadgeColor } from "../getTaskStatusBadgeColor";
 import { TaskCommentsModal } from "../TaskCommentsModal";
 import { UpdateSubtasksModal } from "@/components/subtasks/UpdateSubtasksModal/UpdateSubtasksModal";
+import { UnknownUser } from "@/components/common/UnknownUser";
 
 export interface TaskGridItemProps {
   id: number;
@@ -121,7 +122,7 @@ export function TaskGridItem({
             </ImageContainer>
           </Link>
         ) : (
-          <ImageContainer className="h-9 w-9" />
+          <UnknownUser className="h-9 w-9" />
         )
       }
       commentsSlot={

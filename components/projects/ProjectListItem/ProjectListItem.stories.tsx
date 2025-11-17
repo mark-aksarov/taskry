@@ -43,43 +43,11 @@ export const Default = {
   },
 } satisfies Story;
 
-export const WithoutCreator = {
+export const WithoutSomeData = {
   args: {
     ...Default.args,
     creator: undefined,
-  },
-} satisfies Story;
-
-export const WithoutCreatorImage = {
-  args: {
-    ...Default.args,
-    creator: {
-      ...Default.args.creator,
-      imageUrl: undefined,
-    },
-  },
-} satisfies Story;
-
-export const WithoutCustomer = {
-  args: {
-    ...Default.args,
     customer: undefined,
-  },
-} satisfies Story;
-
-export const WithoutCustomerImage = {
-  args: {
-    ...Default.args,
-    customer: {
-      ...Default.args.customer,
-      imageUrl: undefined,
-    },
-  },
-} satisfies Story;
-
-export const WithoutCompany = {
-  args: {
-    ...Default.args,
     company: undefined,
   },
 } satisfies Story;

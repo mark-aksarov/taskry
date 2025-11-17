@@ -21,6 +21,7 @@ import { Attachment, Attachments } from "@/components/attachments/Attachments";
 import { ReplyButton } from "@/components/comments/ReplyButton";
 import { LikeButton } from "@/components/comments/LikeButton";
 import { ItemBaseActionMenuTrigger } from "@/components/common/ItemBase";
+import { UnknownUser } from "@/components/common/UnknownUser";
 
 interface NotificationListItemProps {
   date: Date;
@@ -87,7 +88,7 @@ export const NotificationListItem = ({
       )}
     >
       {!actor || !actor.imageUrl ? (
-        <ImageContainer className="h-10 w-10" />
+        <UnknownUser className="h-10 w-10" iconSize={22} />
       ) : (
         <Link href={`/users/${actor.id}`}>
           <ImageContainer className="h-10 w-10">

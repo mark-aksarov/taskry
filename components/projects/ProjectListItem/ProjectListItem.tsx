@@ -30,6 +30,7 @@ import { ProjectDetailModal } from "../ProjectDetailModal";
 import { ProjectDetailBottomSheet } from "../ProjectDetailBottomSheet";
 import { getProjectStatusBadgeColor } from "../getProjectStatusBadgeColor";
 import { ProjectCommentsModal } from "../ProjectCommentsModal";
+import { UnknownUser } from "@/components/common/UnknownUser";
 
 export interface ProjectListItemProps {
   id: number;
@@ -113,7 +114,7 @@ export const ProjectListItem = ({
               </ImageContainer>
             </Link>
           ) : (
-            <ImageContainer className="h-9 w-9 @max-2xl:hidden" />
+            <UnknownUser className="h-9 w-9 @max-2xl:hidden" />
           )}
 
           <ListItemInfo className="@max-2xl:hidden">
@@ -142,7 +143,7 @@ export const ProjectListItem = ({
               </ImageContainer>
             </Link>
           ) : (
-            <ImageContainer className="h-9 w-9 @max-3xl:hidden" />
+            <UnknownUser className="h-9 w-9 @max-3xl:hidden" />
           )}
 
           <ListItemInfo className="@max-3xl:hidden">

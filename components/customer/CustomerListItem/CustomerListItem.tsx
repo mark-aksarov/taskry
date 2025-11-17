@@ -12,6 +12,7 @@ import { Pencil, Trash } from "lucide-react";
 import { Checkbox, Link } from "@/components/ui";
 import { ImageContainer } from "@/components/common/ImageContainer";
 import { ItemBaseActionMenuTrigger } from "@/components/common/ItemBase";
+import { UnknownUser } from "@/components/common/UnknownUser";
 
 export type CustomerListItemProps = {
   id: number;
@@ -45,7 +46,7 @@ export function CustomerListItem({
           </ImageContainer>
         </Link>
       ) : (
-        <ImageContainer className="h-9 w-9" />
+        <UnknownUser className="h-9 w-9" />
       )}
       <ListItemInfo>
         <ListItemTitle>
