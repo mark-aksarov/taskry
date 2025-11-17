@@ -14,6 +14,7 @@ import { NewProjectModal } from "@/components/projects/NewProjectModal";
 import { ViewModeToggleButtonGroup } from "@/components/common/ViewMode";
 import { NewProjectFormSkeleton } from "@/components/projects/NewProjectForm";
 import { ProjectFiltersFormSkeleton } from "@/components/projects/ProjectFiltersForm";
+import { ProjectToolbarSortingMenuTrigger } from "@/components/projects/ProjectToolbarSortingMenuTrigger";
 import { ProjectToolbarActionsMenuTrigger } from "@/components/projects/ProjectToolbarActionsMenuTrigger";
 import { ProjectToolbarFiltersModalTrigger } from "@/components/projects/ProjectToolbarFiltersModalTrigger";
 import { ProjectToolbarFiltersBottomSheetTrigger } from "@/components/projects/ProjectToolbarFiltersBottomSheetTrigger";
@@ -34,6 +35,7 @@ export function ProjectsPage({
       <PageGrid>
         <ViewModeProvider>
           <ToolbarDesktop>
+            <ProjectToolbarSortingMenuTrigger />
             <ProjectToolbarFiltersModalTrigger
               filtersForm={
                 <Suspense fallback={<ProjectFiltersFormSkeleton />}>
@@ -62,6 +64,7 @@ export function ProjectsPage({
 
           <ToolbarMobileTop>
             <ToolbarMobileHeading>Projects</ToolbarMobileHeading>
+            <ProjectToolbarSortingMenuTrigger />
             <ProjectToolbarFiltersBottomSheetTrigger
               filtersForm={
                 <Suspense fallback={<ProjectFiltersFormSkeleton />}>

@@ -16,7 +16,7 @@ export function ToolbarSortingMenuTrigger<T extends object = any>({
   return (
     <ResponsiveMenuTrigger
       renderDialogHeader={() => <MenuDialogHeader heading="Actions" />}
-      overlayClassName="md:w-[150px]"
+      overlayClassName="md:min-w-[150px]"
       renderButton={() => (
         <>
           <Button
