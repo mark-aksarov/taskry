@@ -47,9 +47,9 @@ export const Default = {
       name: "Active",
     },
     subtasks: [
-      { id: 1, name: "Wireframe the layout", isDone: true },
-      { id: 2, name: "Create high-fidelity mockups", isDone: false },
-      { id: 3, name: "Review with stakeholders", isDone: false },
+      { id: 1, text: "Wireframe the layout", isDone: true },
+      { id: 2, text: "Create high-fidelity mockups", isDone: false },
+      { id: 3, text: "Review with stakeholders", isDone: false },
     ],
     attachments: [
       {

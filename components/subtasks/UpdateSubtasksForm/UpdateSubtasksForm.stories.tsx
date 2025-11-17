@@ -27,12 +27,12 @@ export const Default = {
     initialSubtasks: [
       {
         id: 1,
-        name: "Set up project structure",
+        text: "Set up project structure",
         isDone: true,
       },
       {
         id: 2,
-        name: "Configure server environment",
+        text: "Configure server environment",
         isDone: false,
       },
     ],

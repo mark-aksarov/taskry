@@ -10,7 +10,7 @@ import { UpdateSubtasksFormLegend } from "./UpdateSubtasksFormLegend";
 export function UpdateSubtasksForm({
   initialSubtasks,
 }: {
-  initialSubtasks: { id: number; name: string; isDone: boolean }[];
+  initialSubtasks: { id: number; text: string; isDone: boolean }[];
 }) {
   const [subtasks, setSubtasks] = useState(initialSubtasks);
 
@@ -23,15 +23,15 @@ export function UpdateSubtasksForm({
       ...prev,
       {
         id: -1,
-        name: "",
+        text: "",
         isDone: false,
       },
     ]);
   }
 
-  function updateSubtaskName(index: number, name: string) {
+  function updateSubtaskName(index: number, text: string) {
     setSubtasks((prev) =>
-      prev.map((s, i) => (i === index ? { ...s, name } : s)),
+      prev.map((s, i) => (i === index ? { ...s, text } : s)),
     );
   }
 
@@ -52,9 +52,9 @@ export function UpdateSubtasksForm({
 
             <SubtaskTextField
               label="Name"
-              value={subtask.name}
+              value={subtask.text}
               onChange={(value) => updateSubtaskName(index, value)}
-              placeholder="Type a subtask name"
+              placeholder="Type a subtask text"
               actionButton={
                 index !== subtasks.length - 1 ? (
                   <Button

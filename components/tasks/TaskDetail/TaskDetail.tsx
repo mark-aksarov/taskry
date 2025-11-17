@@ -45,7 +45,7 @@ interface TaskDetailProps {
   };
   subtasks: {
     id: number;
-    name: string;
+    text: string;
     isDone: boolean;
   }[];
   attachments: {

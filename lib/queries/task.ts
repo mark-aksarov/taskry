@@ -43,7 +43,7 @@ export const getTaskDetail = cache(async (id: number) => {
       subtasks: {
         select: {
           id: true,
-          name: true,
+          text: true,
           isDone: true,
         },
       },

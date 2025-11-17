@@ -3,7 +3,7 @@ import { CheckboxGroup, Checkbox } from "../ui";
 export function SubtasksCheckboxGroup({
   subtasks,
 }: {
-  subtasks: { id: number; name: string; isDone: boolean }[];
+  subtasks: { id: number; text: string; isDone: boolean }[];
 }) {
   return (
     <CheckboxGroup
@@ -19,7 +19,7 @@ export function SubtasksCheckboxGroup({
           value={subtask.id.toString()}
           className="font-normal capitalize"
         >
-          {subtask.name}
+          {subtask.text}
         </Checkbox>
       ))}
     </CheckboxGroup>

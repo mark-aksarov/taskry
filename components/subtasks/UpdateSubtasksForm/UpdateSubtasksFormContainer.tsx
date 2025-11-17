@@ -22,7 +22,7 @@ export function UpdateSubtasksFormContainer({ taskId }: { taskId: number }) {
     <UpdateSubtasksForm
       initialSubtasks={subtasks.map((s) => ({
         id: s.id,
-        name: s.name,
+        text: s.text,
         isDone: s.isDone,
       }))}
     />

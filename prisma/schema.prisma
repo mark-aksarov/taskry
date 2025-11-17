@@ -264,7 +264,7 @@ model TaskStatus {
 
 model Subtask {
   id       Int      @id @default(autoincrement())
-  name     String
+  text     String
   isDone   Boolean
   deadline DateTime
 
