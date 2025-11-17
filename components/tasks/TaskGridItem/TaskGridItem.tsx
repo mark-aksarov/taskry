@@ -20,7 +20,7 @@ import {
 import Image from "next/image";
 import { useMemo } from "react";
 import { TaskDetailModal } from "../TaskDetailModal";
-import { Link, Checkbox } from "@/components/ui";
+import { Link, Checkbox, RACDialogTrigger } from "@/components/ui";
 import { TaskGridItemLayout } from "./TaskGridItemLayout";
 import { TaskDetailBottomSheet } from "../TaskDetailBottomSheet";
 import { ImageContainer } from "@/components/common/ImageContainer";
@@ -32,6 +32,7 @@ import {
   ItemBaseDetailModalTrigger,
 } from "@/components/common/ItemBase";
 import { getTaskStatusBadgeColor } from "../getTaskStatusBadgeColor";
+import { TaskCommentsModal } from "../TaskCommentsModal";
 
 export interface TaskGridItemProps {
   id: number;
@@ -123,12 +124,15 @@ export function TaskGridItem({
         )
       }
       commentsSlot={
-        <ItemBaseButton
-          label={comments}
-          iconLeft={
-            <MessageSquare size={16} strokeWidth={1.5} absoluteStrokeWidth />
-          }
-        />
+        <RACDialogTrigger>
+          <ItemBaseButton
+            label={comments}
+            iconLeft={
+              <MessageSquare size={16} strokeWidth={1.5} absoluteStrokeWidth />
+            }
+          />
+          <TaskCommentsModal taskId={id} />
+        </RACDialogTrigger>
       }
       subtasksSlot={
         <ItemBaseButton

@@ -4,22 +4,30 @@ import {
   withTaskCommentsSkeleton,
 } from "../TaskCommentsContainer/decorators";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { TaskCommentsModalTrigger } from "./TaskCommentsModalTrigger";
+import { TaskCommentsModal } from "./TaskCommentsModal";
+import { Button, RACDialogTrigger } from "@/components/ui";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {
-  title: "Components/tasks/TaskCommentsModalTrigger",
-  component: TaskCommentsModalTrigger,
+  title: "Components/tasks/TaskCommentsModal",
+  component: TaskCommentsModal,
   tags: ["autodocs"],
-  decorators: [withThemedBackground],
+  decorators: [
+    (Story) => (
+      <RACDialogTrigger>
+        <Button label="Task comments" />
+        <Story />
+      </RACDialogTrigger>
+    ),
+    withThemedBackground,
+  ],
   parameters: {
     backgroundVariant: "alt",
   },
   args: {
-    commentCount: 25,
     taskId: 1,
   },
-} satisfies Meta<typeof TaskCommentsModalTrigger>;
+} satisfies Meta<typeof TaskCommentsModal>;
 
 export default meta;
 export type Story = StoryObj<typeof meta>;

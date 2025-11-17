@@ -33,7 +33,7 @@ export const TaskListItemLayout = ({
       {categorySlot}
       {projectSlot}
 
-      <div className="flex flex-none items-center justify-end gap-4">
+      <div className="flex flex-none items-center justify-end @max-md:gap-0.5 @md:gap-4">
         {statusSlot}
         {commentsModalTriggerSlot}
 

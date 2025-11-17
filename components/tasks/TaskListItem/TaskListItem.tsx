@@ -12,7 +12,7 @@ import {
   Trash,
 } from "lucide-react";
 
-import { Checkbox, Link } from "@/components/ui";
+import { Button, Checkbox, Link, RACDialogTrigger } from "@/components/ui";
 
 import {
   ListItemInfo,
@@ -32,6 +32,7 @@ import {
   ItemBaseDetailModalTrigger,
 } from "@/components/common/ItemBase";
 import { getTaskStatusBadgeColor } from "../getTaskStatusBadgeColor";
+import { TaskCommentsModal } from "../TaskCommentsModal";
 
 interface TaskListItemProps {
   id: number;
@@ -161,13 +162,23 @@ export const TaskListItem = ({
         </ItemBaseBadge>
       }
       commentsModalTriggerSlot={
-        <ItemBaseButton
-          label={comments}
-          iconLeft={
-            <MessageSquare size={16} strokeWidth={1.5} absoluteStrokeWidth />
-          }
-          className="@max-md:hidden"
-        />
+        <RACDialogTrigger>
+          <ItemBaseButton
+            label={comments}
+            iconLeft={
+              <MessageSquare size={16} strokeWidth={1.5} absoluteStrokeWidth />
+            }
+            className="@max-md:hidden"
+          />
+          <Button
+            variant="ghost"
+            iconLeft={
+              <MessageSquare size={16} strokeWidth={1.5} absoluteStrokeWidth />
+            }
+            className="rounded-full @md:hidden"
+          />
+          <TaskCommentsModal taskId={id} />
+        </RACDialogTrigger>
       }
       subtasksModalTriggerSlot={
         <ItemBaseButton

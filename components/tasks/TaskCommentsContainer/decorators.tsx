@@ -4,6 +4,7 @@ import { CommentItemSkeleton } from "@/components/comments/CommentItem";
 import { TaskCommentsContainerProvider } from "./TaskCommentsContainerContext";
 import { CommentsEmptySection } from "@/components/comments/CommentsEmptySection";
 import { MockedCommentsContainer } from "@/components/comments/MockedCommentsContainer";
+import { Repeat } from "@/components/common/Repeat";
 
 export const withTaskComments: Decorator = (Story) => {
   return (
@@ -28,7 +29,9 @@ export const withTaskCommentsEmpty: Decorator = (Story) => {
 export const withTaskCommentsSkeleton: Decorator = (Story) => {
   return (
     <TaskCommentsContainerProvider
-      TaskCommentsContainer={() => <CommentItemSkeleton />}
+      TaskCommentsContainer={() => (
+        <Repeat items={10} renderItem={() => <CommentItemSkeleton />} />
+      )}
     >
       <Story />
     </TaskCommentsContainerProvider>

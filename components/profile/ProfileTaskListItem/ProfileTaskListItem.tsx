@@ -1,21 +1,29 @@
 "use client";
 
-import { Check, CircleEllipsis, Clock, ListTodo, Trash } from "lucide-react";
+import {
+  Check,
+  CircleEllipsis,
+  Clock,
+  ListTodo,
+  MessageSquare,
+  Trash,
+} from "lucide-react";
 import { useMemo } from "react";
 import { Item } from "react-stately";
-import { Button, Checkbox } from "@/components/ui";
+import { Button, Checkbox, RACDialogTrigger } from "@/components/ui";
 import { ProfileTaskListItemLayout } from "./ProfileTaskListItemLayout";
 import {
   ListItemInfo,
   ListItemText,
   ListItemTitle,
 } from "@/components/common/List";
-import { TaskCommentsModalTrigger } from "@/components/tasks/TaskCommentsModalTrigger";
+import { TaskCommentsModal } from "@/components/tasks/TaskCommentsModal";
 import { TaskDetailModal } from "@/components/tasks/TaskDetailModal";
 import { TaskDetailBottomSheet } from "@/components/tasks/TaskDetailBottomSheet";
 import {
   ItemBaseActionMenuTrigger,
   ItemBaseBadge,
+  ItemBaseButton,
   ItemBaseDetailBottomSheetTrigger,
   ItemBaseDetailModalTrigger,
 } from "@/components/common/ItemBase";
@@ -81,16 +89,31 @@ export const ProfileTaskListItem = ({
         </ItemBaseBadge>
       }
       commentsSlot={
-        <TaskCommentsModalTrigger commentCount={comments} taskId={id} />
+        <RACDialogTrigger>
+          <ItemBaseButton
+            label={comments}
+            iconLeft={
+              <MessageSquare size={16} strokeWidth={1.5} absoluteStrokeWidth />
+            }
+            className="@max-md:hidden"
+          />
+          <Button
+            variant="ghost"
+            iconLeft={
+              <MessageSquare size={16} strokeWidth={1.5} absoluteStrokeWidth />
+            }
+            className="rounded-full @md:hidden"
+          />
+          <TaskCommentsModal taskId={id} />
+        </RACDialogTrigger>
       }
       subtasksSlot={
-        <Button
-          variant="outlined"
+        <ItemBaseButton
           iconLeft={
             <ListTodo size={16} strokeWidth={1.5} absoluteStrokeWidth />
           }
           label={subtasks}
-          className="h-[1.75rem] w-[3.75rem] justify-center rounded-full @max-md:hidden"
+          className="@max-md:hidden"
         />
       }
       actionMenuSlot={
