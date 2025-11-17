@@ -1,14 +1,5 @@
-import { ResponsiveModal } from "@/components/common/ResponsiveModal";
-import {
-  Button,
-  Dialog,
-  DialogBody,
-  DialogCloseButton,
-  DialogFooter,
-  DialogHeader,
-  DialogHeading,
-  ModalProps,
-} from "@/components/ui";
+import { ModalProps } from "@/components/ui";
+import { CreateNewModal } from "@/components/common/CreateNewModal";
 
 interface NewProjectModalProps
   extends Pick<ModalProps, "isOpen" | "onOpenChange"> {
@@ -20,22 +11,11 @@ export function NewProjectModal({
   ...props
 }: NewProjectModalProps) {
   return (
-    <ResponsiveModal isDismissable className="w-[460px]" {...props}>
-      <Dialog className="md:max-h-[calc(100dvh-64px)]">
-        <DialogHeader>
-          <DialogHeading>New Project</DialogHeading>
-          <DialogCloseButton iconSize={20} />
-        </DialogHeader>
-        <DialogBody>{newProjectForm}</DialogBody>
-        <DialogFooter>
-          <Button
-            variant="primary"
-            size="medium"
-            label="Create Project"
-            className="w-full justify-center"
-          />
-        </DialogFooter>
-      </Dialog>
-    </ResponsiveModal>
+    <CreateNewModal
+      title="New Project"
+      submitButtonLabel="Create Project"
+      form={newProjectForm}
+      {...props}
+    />
   );
 }

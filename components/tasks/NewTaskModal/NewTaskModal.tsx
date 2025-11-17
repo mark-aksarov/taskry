@@ -1,14 +1,5 @@
-import { ResponsiveModal } from "@/components/common/ResponsiveModal";
-import {
-  Button,
-  Dialog,
-  DialogBody,
-  DialogCloseButton,
-  DialogFooter,
-  DialogHeader,
-  DialogHeading,
-  ModalProps,
-} from "@/components/ui";
+import { ModalProps } from "@/components/ui";
+import { CreateNewModal } from "@/components/common/CreateNewModal";
 
 interface NewTaskModalProps
   extends Pick<ModalProps, "isOpen" | "onOpenChange"> {
@@ -17,22 +8,11 @@ interface NewTaskModalProps
 
 export function NewTaskModal({ newTaskForm, ...props }: NewTaskModalProps) {
   return (
-    <ResponsiveModal isDismissable className="w-[460px]" {...props}>
-      <Dialog className="md:max-h-[calc(100dvh-64px)]">
-        <DialogHeader>
-          <DialogHeading>New Task</DialogHeading>
-          <DialogCloseButton iconSize={20} />
-        </DialogHeader>
-        <DialogBody>{newTaskForm}</DialogBody>
-        <DialogFooter>
-          <Button
-            variant="primary"
-            size="medium"
-            label="Create Task"
-            className="w-full justify-center"
-          />
-        </DialogFooter>
-      </Dialog>
-    </ResponsiveModal>
+    <CreateNewModal
+      title="New Task"
+      submitButtonLabel="Create Task"
+      form={newTaskForm}
+      {...props}
+    />
   );
 }
