@@ -1,17 +1,19 @@
 "use client";
 
-import { RACButton, RACButtonProps } from "../ui";
+import { Plus } from "lucide-react";
 import { tv } from "tailwind-variants";
 import { composeRenderProps } from "react-aria-components";
-import { Plus } from "lucide-react";
-import { linkStyles } from "../ui";
+import { RACButton, RACButtonProps, linkStyles } from "../ui";
 
 const styles = tv({
   extend: linkStyles,
-  base: "text-sm font-semibold",
+  base: "self-start text-sm font-semibold",
 });
 
-export function NewSubtasksButton({ className, ...props }: RACButtonProps) {
+export function NewSubtasksButton({
+  className,
+  ...props
+}: RACButtonProps & React.RefAttributes<HTMLButtonElement>) {
   return (
     <RACButton
       {...props}

@@ -14,8 +14,10 @@ import { SubtasksCheckboxGroup } from "@/components/subtasks/SubtasksCheckboxGro
 import { Badge, Button, Link } from "@/components/ui";
 import { ExternalLink } from "lucide-react";
 import { ImageContainer } from "@/components/common/ImageContainer";
-import { NewSubtasksButton } from "@/components/subtasks/NewSubtasksButton";
+import { NewSubtasksButton } from "@/components/subtasks/NewSubtaskButton";
 import { UnknownUser } from "@/components/common/UnknownUser";
+import { NewSubtaskBottomSheetTrigger } from "@/components/subtasks/NewSubtaskBottomSheetTrigger";
+import { NewSubtaskPopoverTrigger } from "@/components/subtasks/NewSubtaskPopoverTrigger";
 
 interface TaskDetailProps {
   id: number;
@@ -156,7 +158,8 @@ export function TaskDetail({
       subtasksSlot={
         <DetailInfo>
           <SubtasksCheckboxGroup subtasks={subtasks} />
-          <NewSubtasksButton />
+          <NewSubtaskBottomSheetTrigger />
+          <NewSubtaskPopoverTrigger />
         </DetailInfo>
       }
       attachmentsSlot={
