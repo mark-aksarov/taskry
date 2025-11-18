@@ -12,6 +12,7 @@ import { ProfileTaskList } from "@/components/profile/ProfileTaskList";
 import { ProfileHeaderSkeleton } from "@/components/profile/ProfileHeader";
 import { ProfileTaskListItemSkeleton } from "@/components/profile/ProfileTaskListItem";
 import { ProfileNavigationDesktop } from "@/components/profile/ProfileNavigationDesktop";
+import { ProfileTasksMobileLayout } from "@/components/profile/ProfileTasksMobile";
 
 interface ProfileTasksPageProps {
   ProfileTasksDesktopContainer: React.ComponentType;
@@ -57,12 +58,14 @@ export function ProfileTasksPage({
 
       <Suspense
         fallback={
-          <ProfileTaskList>
-            <Repeat
-              items={10}
-              renderItem={() => <ProfileTaskListItemSkeleton />}
-            />
-          </ProfileTaskList>
+          <ProfileTasksMobileLayout>
+            <ProfileTaskList>
+              <Repeat
+                items={10}
+                renderItem={() => <ProfileTaskListItemSkeleton />}
+              />
+            </ProfileTaskList>
+          </ProfileTasksMobileLayout>
         }
       >
         <ProfileTasksMobileContainer />

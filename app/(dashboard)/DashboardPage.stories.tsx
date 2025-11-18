@@ -18,9 +18,15 @@ import {
 } from "@/components/tasks/TotalTasksCard";
 import { Repeat } from "@/components/common/Repeat";
 import { TaskList } from "@/components/tasks/TaskList";
-import { TotalUsersCard } from "@/components/users/TotalUsersCard";
+import {
+  TotalUsersCard,
+  TotalUsersCardSkeleton,
+} from "@/components/users/TotalUsersCard";
 import { TaskListItemSkeleton } from "@/components/tasks/TaskListItem";
-import { TotalCustomersCard } from "@/components/customer/TotalCustomersCard";
+import {
+  TotalCustomersCard,
+  TotalCustomersCardSkeleton,
+} from "@/components/customer/TotalCustomersCard";
 import { Default as TaskListStory } from "@/components/tasks/TaskList/TaskList.stories";
 import { AssignedTasksEmptyCard } from "@/components/tasks/AssignedTasks/AssignedTasksEmptyCard";
 import { withTaskDetail } from "@/components/tasks/TaskDetail/decorators";
@@ -72,8 +78,8 @@ export const Loading = {
     <DashboardPage
       TotalProjectsCardContainer={() => <TotalProjectsCardSkeleton />}
       TotalTasksCardContainer={() => <TotalTasksCardSkeleton />}
-      TotalUsersCardContainer={() => <TotalUsersCard />}
-      TotalCustomersCardContainer={() => <TotalCustomersCard />}
+      TotalUsersCardContainer={() => <TotalUsersCardSkeleton />}
+      TotalCustomersCardContainer={() => <TotalCustomersCardSkeleton />}
       AssignedTasksContainer={() => (
         <AssignedTasksSection>
           <AssignedTasksSectionHeading />

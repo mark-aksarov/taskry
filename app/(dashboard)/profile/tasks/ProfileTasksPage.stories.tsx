@@ -31,7 +31,7 @@ const meta = {
     withThemedBackground,
   ],
   beforeEach: () => {
-    mocked(usePathname).mockReturnValue("/profile");
+    mocked(usePathname).mockReturnValue("/profile/tasks");
   },
 } satisfies Meta<typeof ProfileTasksPage>;
 
@@ -60,9 +60,14 @@ export const Loading = {
       </ProfileTaskList>
     ),
     ProfileTasksMobileContainer: () => (
-      <ProfileTaskList>
-        <Repeat items={10} renderItem={() => <ProfileTaskListItemSkeleton />} />
-      </ProfileTaskList>
+      <ProfileTasksMobileLayout>
+        <ProfileTaskList>
+          <Repeat
+            items={10}
+            renderItem={() => <ProfileTaskListItemSkeleton />}
+          />
+        </ProfileTaskList>
+      </ProfileTasksMobileLayout>
     ),
     ProfileHeaderContainer: () => <ProfileHeaderSkeleton />,
   },

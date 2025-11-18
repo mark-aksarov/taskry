@@ -2,10 +2,12 @@ import { ProfileTaskList } from "../ProfileTaskList";
 import { PageGrid } from "@/components/common/PageGrid";
 import { PageContainer } from "@/components/common/PageContainer";
 import {
+  ToolbarMobileBottom,
   ToolbarMobileHeading,
   ToolbarMobileTop,
 } from "@/components/common/Toolbar";
 import { ProfileTasksEmptySection } from "../ProfileTasksEmptySection";
+import { ProfileNavigationMobile } from "../ProfileNavigationMobile";
 
 export function ProfileTasksMobileLayout({
   children,
@@ -14,8 +16,17 @@ export function ProfileTasksMobileLayout({
 }) {
   if (!children) {
     return (
-      <PageContainer className="md:hidden">
-        <ProfileTasksEmptySection />
+      <PageContainer fullscreen className="md:hidden">
+        <PageGrid className="flex-auto">
+          <ToolbarMobileTop>
+            <ToolbarMobileHeading>Assigned tasks</ToolbarMobileHeading>
+          </ToolbarMobileTop>
+
+          <ToolbarMobileBottom>
+            <ProfileNavigationMobile />
+          </ToolbarMobileBottom>
+          <ProfileTasksEmptySection />
+        </PageGrid>
       </PageContainer>
     );
   }
@@ -26,6 +37,10 @@ export function ProfileTasksMobileLayout({
         <ToolbarMobileTop>
           <ToolbarMobileHeading>Assigned tasks</ToolbarMobileHeading>
         </ToolbarMobileTop>
+
+        <ToolbarMobileBottom>
+          <ProfileNavigationMobile />
+        </ToolbarMobileBottom>
         <ProfileTaskList>{children}</ProfileTaskList>
       </PageGrid>
     </PageContainer>

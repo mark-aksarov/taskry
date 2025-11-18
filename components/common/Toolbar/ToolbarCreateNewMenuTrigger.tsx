@@ -54,7 +54,7 @@ export function ToolbarCreateNewMenuTrigger({
             iconLeft={<Plus size={16} strokeWidth={1.5} absoluteStrokeWidth />}
           />
         )}
-        placement="bottom left"
+        placement="bottom right"
       >
         <Item textValue="Task" key="task">
           Task

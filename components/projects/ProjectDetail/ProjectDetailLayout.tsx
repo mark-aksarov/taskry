@@ -30,7 +30,7 @@ export function ProjectDetailLayout({
       <div className="flex flex-col gap-4">
         {titleSlot}
 
-        <div className="flex gap-4">
+        <div className="flex gap-3">
           {statusMenuTriggerSlot}
           {openProjectSlot}
         </div>

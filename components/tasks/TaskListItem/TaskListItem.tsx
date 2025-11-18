@@ -116,7 +116,7 @@ export const TaskListItem = ({
               </ImageContainer>
             </Link>
           ) : (
-            <UnknownUser className="h-9 w-9" />
+            <UnknownUser className="h-9 w-9 @max-2xl:hidden" />
           )}
           <ListItemInfo className="@max-2xl:hidden">
             <ListItemTitle>
