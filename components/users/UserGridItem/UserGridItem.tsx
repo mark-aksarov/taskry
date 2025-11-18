@@ -40,6 +40,8 @@ export function UserGridItem({
   publicLink,
   email,
 }: UserGridItemProps) {
+  const contactLinkClasses = "max-w-full overflow-hidden";
+
   return (
     <UserGridItemLayout
       checkboxSlot={<Checkbox aria-label={`${fullName} checkbox`} />}
@@ -80,14 +82,14 @@ export function UserGridItem({
           <Divider />
           <GridItemContactList>
             {phoneNumber ? (
-              <GridItemContact>
-                <Link href={`tel:${phoneNumber}`} className="contents">
+              <Link className={contactLinkClasses} href={`tel:${phoneNumber}`}>
+                <GridItemContact>
                   <GridItemContactIconWrapper>
                     <Phone size={16} strokeWidth={1.5} absoluteStrokeWidth />
                   </GridItemContactIconWrapper>
                   <GridItemContactText>{phoneNumber}</GridItemContactText>
-                </Link>
-              </GridItemContact>
+                </GridItemContact>
+              </Link>
             ) : (
               <GridItemContact>
                 <GridItemContactIconWrapper>
@@ -98,14 +100,14 @@ export function UserGridItem({
             )}
 
             {publicLink ? (
-              <GridItemContact>
-                <Link href={publicLink} className="contents">
+              <Link className={contactLinkClasses} href={publicLink}>
+                <GridItemContact>
                   <GridItemContactIconWrapper>
                     <Link2 size={16} strokeWidth={1.5} absoluteStrokeWidth />
                   </GridItemContactIconWrapper>
                   <GridItemContactText>{publicLink}</GridItemContactText>
-                </Link>
-              </GridItemContact>
+                </GridItemContact>
+              </Link>
             ) : (
               <GridItemContact>
                 <GridItemContactIconWrapper>
@@ -115,14 +117,14 @@ export function UserGridItem({
               </GridItemContact>
             )}
 
-            <GridItemContact>
-              <Link href={`mailto:${email}`} className="contents">
+            <Link className={contactLinkClasses} href={`mailto:${email}`}>
+              <GridItemContact>
                 <GridItemContactIconWrapper>
                   <Mail size={16} strokeWidth={1.5} absoluteStrokeWidth />
                 </GridItemContactIconWrapper>
                 <GridItemContactText>{email}</GridItemContactText>
-              </Link>
-            </GridItemContact>
+              </GridItemContact>
+            </Link>
           </GridItemContactList>
         </>
       }
