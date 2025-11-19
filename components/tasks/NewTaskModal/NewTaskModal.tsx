@@ -1,5 +1,5 @@
 import { ModalProps } from "@/components/ui";
-import { CreateNewModal } from "@/components/common/CreateNewModal";
+import { FormBaseModal } from "@/components/common/FormBaseModal";
 
 interface NewTaskModalProps
   extends Pick<ModalProps, "isOpen" | "onOpenChange"> {
@@ -8,7 +8,7 @@ interface NewTaskModalProps
 
 export function NewTaskModal({ newTaskForm, ...props }: NewTaskModalProps) {
   return (
-    <CreateNewModal
+    <FormBaseModal
       title="New Task"
       submitButtonLabel="Create Task"
       form={newTaskForm}

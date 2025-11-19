@@ -1,18 +1,17 @@
-import { NewTaskForm } from "./NewTaskForm";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { NewTaskFormStatusSelect } from "./NewTaskFormStatusSelect";
-import { NewTaskFormProjectSelect } from "./NewTaskFormProjectSelect";
-import { NewTaskFormCategorySelect } from "./NewTaskFormCategorySelect";
-import { NewTaskFormAssigneeSelect } from "./NewTaskFormAssigneeSelect";
+import { TaskFormBase, TaskFormBaseStatusSelect } from ".";
+import { TaskFormBaseProjectSelect } from ".";
+import { TaskFormBaseCategorySelect } from ".";
+import { TaskFormBaseAssigneeSelect } from ".";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {
-  title: "components/tasks/NewTaskForm",
-  component: NewTaskForm,
+  title: "components/tasks/TaskFormBase",
+  component: TaskFormBase,
   tags: ["autodocs"],
   decorators: [
     (Story) => (
-      <div className="max-w-[500px]">
+      <div className="w-[500px] max-w-full">
         <Story />
       </div>
     ),
@@ -21,7 +20,7 @@ const meta = {
   parameters: {
     backgroundVariant: "alt",
   },
-} satisfies Meta<typeof NewTaskForm>;
+} satisfies Meta<typeof TaskFormBase>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
@@ -29,7 +28,7 @@ type Story = StoryObj<typeof meta>;
 export const Default = {
   args: {
     taskStatusSelect: (
-      <NewTaskFormStatusSelect
+      <TaskFormBaseStatusSelect
         statuses={[
           { id: "pending", name: "Pending" },
           { id: "active", name: "Active" },
@@ -38,7 +37,7 @@ export const Default = {
       />
     ),
     taskCategorySelect: (
-      <NewTaskFormCategorySelect
+      <TaskFormBaseCategorySelect
         categories={[
           {
             id: 1,
@@ -64,7 +63,7 @@ export const Default = {
       />
     ),
     projectSelect: (
-      <NewTaskFormProjectSelect
+      <TaskFormBaseProjectSelect
         projects={[
           {
             id: 1,
@@ -110,7 +109,7 @@ export const Default = {
       />
     ),
     assigneeSelect: (
-      <NewTaskFormAssigneeSelect
+      <TaskFormBaseAssigneeSelect
         users={[
           {
             id: "user1",

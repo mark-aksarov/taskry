@@ -1,8 +1,8 @@
 import { ProfileInfo } from "../ProfileInfo";
-import { getUserById } from "@/lib/queries/user";
+import { getUserDetails } from "@/lib/queries/user";
 
 export async function ProfileInfoServerContainer() {
-  const user = await getUserById("BKs42HvVDEZFoaJUmTqf1gTN0K8pUFjI");
+  const user = await getUserDetails("BKs42HvVDEZFoaJUmTqf1gTN0K8pUFjI");
 
   return (
     <ProfileInfo

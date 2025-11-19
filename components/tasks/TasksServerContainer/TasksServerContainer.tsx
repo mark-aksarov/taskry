@@ -1,14 +1,14 @@
 import { TaskList } from "../TaskList";
 import { TaskGrid } from "../TaskGrid";
-import { getTasks, GetTasksType } from "@/lib/queries/task";
+import { getTaskList, GetTaskListType } from "@/lib/queries/task";
 import { TaskListItem } from "../TaskListItem";
 import { TaskGridItem } from "../TaskGridItem";
 import { ViewModeLayout } from "@/components/common/ViewMode";
 
 export async function TasksServerContainer() {
-  const tasks = await getTasks();
+  const tasks = await getTaskList();
 
-  const commonProps = (task: GetTasksType[number]) => ({
+  const commonProps = (task: GetTaskListType[number]) => ({
     id: task.id,
     title: task.title,
     deadline: task.deadline,

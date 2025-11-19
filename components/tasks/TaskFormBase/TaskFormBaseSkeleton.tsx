@@ -4,7 +4,7 @@ import {
   FieldSkeleton,
 } from "@/components/common/FieldSkeleton";
 
-export function NewTaskFormSkeleton() {
+export function TaskFormBaseSkeleton() {
   return (
     <div className="flex flex-col gap-4">
       <FieldSkeleton>

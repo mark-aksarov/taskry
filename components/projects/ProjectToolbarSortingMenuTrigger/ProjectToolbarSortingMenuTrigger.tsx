@@ -6,7 +6,7 @@ import { ToolbarSortingMenuTrigger } from "@/components/common/Toolbar";
 export function ProjectToolbarSortingMenuTrigger() {
   return (
     <ToolbarSortingMenuTrigger>
-      <Item textValue="Status" key="default">
+      <Item textValue="Default" key="default">
         By Default
       </Item>
       <Item textValue="Status" key="status">
@@ -21,7 +21,7 @@ export function ProjectToolbarSortingMenuTrigger() {
       <Item textValue="Assignee" key="creator">
         By Creator
       </Item>
-      <Item textValue="Category" key="customer">
+      <Item textValue="Customer" key="customer">
         By Customer
       </Item>
       <Item textValue="Category" key="category">

@@ -4,8 +4,8 @@ import { cache } from "react";
 import prisma from "../prisma";
 import { ThenArg } from "./types";
 
-export type GetUserByIdType = ThenArg<ReturnType<typeof getUserById>>;
-export const getUserById = cache(async (userId: string) => {
+export type GetUserDetailsType = ThenArg<ReturnType<typeof getUserDetails>>;
+export const getUserDetails = cache(async (userId: string) => {
   return await prisma.user.findUniqueOrThrow({
     where: { id: userId },
     select: {
@@ -29,8 +29,8 @@ export const getUserById = cache(async (userId: string) => {
   });
 });
 
-export type GetUsersType = ThenArg<ReturnType<typeof getUsers>>;
-export const getUsers = cache(async (workspaceId: number) => {
+export type GetUserListType = ThenArg<ReturnType<typeof getUserList>>;
+export const getUserList = cache(async (workspaceId: number) => {
   return await prisma.user.findMany({
     where: { position: { workspaceId } },
     select: {
@@ -48,5 +48,13 @@ export const getUsers = cache(async (workspaceId: number) => {
         },
       },
     },
+  });
+});
+
+export type GeUserSummariesType = ThenArg<ReturnType<typeof getUserSummaries>>;
+export const getUserSummaries = cache(async (workspaceId: number) => {
+  return await prisma.user.findMany({
+    where: { position: { workspaceId } },
+    select: { id: true, fullName: true },
   });
 });

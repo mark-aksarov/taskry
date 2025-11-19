@@ -6,7 +6,7 @@ import {
   DetailTitle,
 } from "@/components/common/Detail";
 import Image from "next/image";
-import { useMemo } from "react";
+import { useContext, useMemo } from "react";
 import { TaskDetailLayout } from "./TaskDetailLayout";
 import { Attachment, Attachments } from "@/components/attachments/Attachments";
 import { SubtasksCheckboxGroup } from "@/components/subtasks/SubtasksCheckboxGroup";
@@ -18,6 +18,7 @@ import { NewSubtaskPopoverTrigger } from "@/components/subtasks/NewSubtaskPopove
 import { TaskDetailStatusMenuTrigger } from "./TaskDetailStatusMenuTrigger";
 import { TaskDetailCommentModalTrigger } from "./TaskDetailCommentModalTrigger";
 import { TaskDetailEditModalTrigger } from "./TaskDetailEditModalTrigger";
+import { OverlayTriggerStateContext } from "react-aria-components";
 
 interface TaskDetailProps {
   id: number;
@@ -71,6 +72,8 @@ export function TaskDetail({
   subtasks,
   attachments,
 }: TaskDetailProps) {
+  const state = useContext(OverlayTriggerStateContext);
+
   const locale = "en-GB";
 
   const formattedDeadline = useMemo(() => {

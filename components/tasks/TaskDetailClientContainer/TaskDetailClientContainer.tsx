@@ -3,7 +3,6 @@
 import useSWR from "swr";
 import { TaskDetail } from "../TaskDetail/TaskDetail";
 import { GetTaskDetailType } from "@/lib/queries/task";
-import { TaskDetailSkeleton } from "../TaskDetail/TaskDetailSkeleton";
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
@@ -14,15 +13,11 @@ interface TaskDetailClientContainerProps {
 export function TaskDetailClientContainer({
   taskId,
 }: TaskDetailClientContainerProps) {
-  const {
-    data: task,
-    error,
-    isLoading,
-  } = useSWR<GetTaskDetailType>(`/api/tasks/${taskId}`, fetcher);
-
-  if (isLoading) {
-    return <TaskDetailSkeleton />;
-  }
+  const { data: task } = useSWR<GetTaskDetailType>(
+    `/api/tasks/${taskId}`,
+    fetcher,
+    { suspense: true },
+  );
 
   if (!task) return null;
 

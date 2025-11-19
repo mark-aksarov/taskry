@@ -2,7 +2,7 @@
 
 import useSWR from "swr";
 import { GetProjectDetailType } from "@/lib/queries/project";
-import { ProjectDetail, ProjectDetailSkeleton } from "../ProjectDetail";
+import { ProjectDetail } from "../ProjectDetail";
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
@@ -11,15 +11,11 @@ export function ProjectDetailClientContainer({
 }: {
   projectId: number;
 }) {
-  const {
-    data: project,
-    error,
-    isLoading,
-  } = useSWR<GetProjectDetailType>(`/api/projects/${projectId}`, fetcher);
-
-  if (isLoading) {
-    return <ProjectDetailSkeleton />;
-  }
+  const { data: project } = useSWR<GetProjectDetailType>(
+    `/api/projects/${projectId}`,
+    fetcher,
+    { suspense: true },
+  );
 
   if (!project) return null;
 

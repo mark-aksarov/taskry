@@ -1,12 +1,12 @@
 import { UserList } from "../UserList";
 import { UserGrid } from "../UserGrid";
-import { getUsers } from "@/lib/queries/user";
+import { getUserList } from "@/lib/queries/user";
 import { ViewModeLayout } from "@/components/common/ViewMode";
 import { UserListItem } from "../UserListItem";
 import { UserGridItem } from "../UserGridItem";
 
 export async function UsersServerContainer() {
-  const users = await getUsers(1);
+  const users = await getUserList(1);
 
   return (
     <ViewModeLayout

@@ -30,3 +30,20 @@ export const getCustomers = cache(async (workspaceId: number) => {
     },
   });
 });
+
+export type GetCustomerSummariesType = ThenArg<
+  ReturnType<typeof getCustomerSummaries>
+>;
+export const getCustomerSummaries = cache(async (workspaceId: number) => {
+  return await prisma.customer.findMany({
+    where: {
+      company: {
+        workspaceId,
+      },
+    },
+    select: {
+      id: true,
+      fullName: true,
+    },
+  });
+});

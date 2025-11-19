@@ -17,7 +17,7 @@ import { Default as ProjectFiltersFormStory } from "@/components/projects/Projec
 import { withProjectDetail } from "@/components/projects/ProjectDetailClientContainer/decorators";
 import { withProjectComments } from "@/components/projects/ProjectCommentsClientContainer/decorators";
 import { NewTaskForm } from "@/components/tasks/NewTaskForm";
-import { Default as NewTaskFormStory } from "@/components/tasks/NewTaskForm/NewTaskForm.stories";
+import { Default as NewTaskFormStory } from "@/components/tasks/TaskFormBase/TaskFormBase.stories";
 import ProjectsPageLoading from "./loading";
 
 const meta = {

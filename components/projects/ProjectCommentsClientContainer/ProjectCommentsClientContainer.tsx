@@ -1,11 +1,7 @@
 import useSWR from "swr";
-import { Repeat } from "@/components/common/Repeat";
 import { GetCommentsType } from "@/lib/queries/comments";
 import { CommentsEmptySection } from "@/components/comments/CommentsEmptySection";
-import {
-  CommentItem,
-  CommentItemSkeleton,
-} from "@/components/comments/CommentItem";
+import { CommentItem } from "@/components/comments/CommentItem";
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
@@ -14,15 +10,13 @@ export function ProjectCommentsClientContainer({
 }: {
   projectId: number;
 }) {
-  const {
-    data: comments,
-    error,
-    isLoading,
-  } = useSWR<GetCommentsType>(`/api/projects/${projectId}/comments`, fetcher);
-
-  if (isLoading) {
-    return <Repeat items={10} renderItem={() => <CommentItemSkeleton />} />;
-  }
+  const { data: comments } = useSWR<GetCommentsType>(
+    `/api/projects/${projectId}/comments`,
+    fetcher,
+    {
+      suspense: true,
+    },
+  );
 
   if (!comments) return null;
 

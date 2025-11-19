@@ -1,7 +1,8 @@
 "use client";
 
-import { useContext } from "react";
+import { Suspense, useContext } from "react";
 import { DetailModal } from "@/components/common/DetailModal";
+import { TaskDetailSkeleton } from "../TaskDetail/TaskDetailSkeleton";
 import { TaskDetailClientContainerContext } from "@/components/tasks/TaskDetailClientContainer";
 
 export function TaskDetailModal({ taskId }: { taskId: number }) {
@@ -11,7 +12,9 @@ export function TaskDetailModal({ taskId }: { taskId: number }) {
 
   return (
     <DetailModal title="Task Detail">
-      <TaskDetailClientContainer taskId={taskId} />
+      <Suspense fallback={<TaskDetailSkeleton />}>
+        <TaskDetailClientContainer taskId={taskId} />
+      </Suspense>
     </DetailModal>
   );
 }

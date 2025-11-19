@@ -1,13 +1,24 @@
+import { Suspense, useContext } from "react";
+import { EditTaskModal } from "../EditTaskModal";
+import { TaskFormBaseSkeleton } from "../TaskFormBase";
 import { Button, RACDialogTrigger } from "@/components/ui";
-import { NewTaskModal } from "../NewTaskModal";
+import { EditTaskFormClientContainerContext } from "../EditTaskFormClientContainer";
 
 export function TaskDetailEditModalTrigger() {
-  const editTaskForm = <div>edit task form</div>;
+  const EditTaskFormClientContainer = useContext(
+    EditTaskFormClientContainerContext,
+  );
 
   return (
     <RACDialogTrigger>
       <Button label="Edit" />
-      <NewTaskModal newTaskForm={editTaskForm} />
+      <EditTaskModal
+        newTaskForm={
+          <Suspense fallback={<TaskFormBaseSkeleton />}>
+            <EditTaskFormClientContainer />
+          </Suspense>
+        }
+      />
     </RACDialogTrigger>
   );
 }

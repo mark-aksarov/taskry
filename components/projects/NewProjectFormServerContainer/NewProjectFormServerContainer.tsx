@@ -1,27 +1,14 @@
-"server only";
-
-import { cache } from "react";
-import prisma from "@/lib/prisma";
+import {
+  getProjectStatusSummaries,
+  getProjectCategorySummaries,
+} from "@/lib/queries/project";
 import { NewProjectForm } from "../NewProjectForm";
 import { NewProjectFormStatusSelect } from "../NewProjectForm";
 import { NewProjectFormCategorySelect } from "../NewProjectForm";
 
-export const getProjectCategories = cache(async (workspaceId: number) => {
-  return await prisma.projectCategory.findMany({
-    where: { workspaceId },
-    select: { id: true, name: true },
-  });
-});
-
-export const getProjectStatuses = cache(async () => {
-  return await prisma.projectStatus.findMany({
-    select: { id: true, nameEn: true },
-  });
-});
-
 export async function NewProjectFormServerContainer() {
-  const categories = await getProjectCategories(1);
-  const statuses = await getProjectStatuses();
+  const categories = await getProjectCategorySummaries(1);
+  const statuses = await getProjectStatusSummaries();
 
   return (
     <NewProjectForm

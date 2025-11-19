@@ -10,21 +10,21 @@ import {
   ModalProps,
 } from "@/components/ui";
 
-interface CreateNewModalProps
+interface FormBaseModalProps
   extends Pick<ModalProps, "isOpen" | "onOpenChange"> {
   title: string;
   form: React.ReactNode;
   submitButtonLabel: string;
 }
 
-export function CreateNewModal({
+export function FormBaseModal({
   title,
   form,
   submitButtonLabel,
   ...props
-}: CreateNewModalProps) {
+}: FormBaseModalProps) {
   return (
-    <ResponsiveModal isDismissable className="w-[460px]" {...props}>
+    <ResponsiveModal isDismissable className="w-[500px]" {...props}>
       <Dialog className="md:max-h-[calc(100dvh-64px)]">
         <DialogHeader>
           <DialogHeading>{title}</DialogHeading>

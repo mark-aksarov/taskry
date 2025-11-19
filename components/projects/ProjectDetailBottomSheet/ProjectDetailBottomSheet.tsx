@@ -1,9 +1,10 @@
 "use client";
 
-import { useContext } from "react";
+import { Suspense, useContext } from "react";
 import { OverlayTriggerState } from "react-stately";
 import { DetailBottomSheet } from "@/components/common/DetailBottomSheet";
 import { ProjectDetailClientContainerContext } from "../ProjectDetailClientContainer";
+import { ProjectDetailSkeleton } from "../ProjectDetail/ProjectDetailSkeleton";
 
 export interface ProjectDetailBottomSheetProps {
   projectId: number;
@@ -20,7 +21,9 @@ export function ProjectDetailBottomSheet({
 
   return (
     <DetailBottomSheet state={state} title="Project Detail">
-      <ProjectDetailContainer projectId={projectId} />
+      <Suspense fallback={<ProjectDetailSkeleton />}>
+        <ProjectDetailContainer projectId={projectId} />
+      </Suspense>
     </DetailBottomSheet>
   );
 }

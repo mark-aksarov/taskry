@@ -4,11 +4,11 @@ import {
   AssignedTasksSectionHeading,
 } from "../AssignedTasks";
 import { TaskList } from "../TaskList";
-import { getTasks } from "@/lib/queries/task";
+import { getTaskList } from "@/lib/queries/task";
 import { TaskListItem } from "../TaskListItem";
 
 export async function AssignedTasksServerContainer() {
-  const tasks = await getTasks();
+  const tasks = await getTaskList();
 
   if (!tasks.length) {
     return (

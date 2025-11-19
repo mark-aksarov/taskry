@@ -51,8 +51,8 @@ export const getProjectDetail = cache(async (id: number) => {
   });
 });
 
-export type GetProjectsType = ThenArg<ReturnType<typeof getProjects>>;
-export const getProjects = cache(async (creatorId?: string) => {
+export type GetProjectListType = ThenArg<ReturnType<typeof getProjectList>>;
+export const getProjectList = cache(async (creatorId?: string) => {
   return await prisma.project.findMany({
     where: creatorId
       ? {
@@ -108,5 +108,45 @@ export const getProjects = cache(async (creatorId?: string) => {
         },
       },
     },
+  });
+});
+
+export type GetProjectSummariesType = ThenArg<
+  ReturnType<typeof getProjectSummaries>
+>;
+export const getProjectSummaries = cache(async (workspaceId: number) => {
+  return await prisma.project.findMany({
+    where: { creator: { position: { workspaceId } } },
+    select: { id: true, title: true },
+  });
+});
+
+export type GetProjectSummarySummariesType = ThenArg<
+  ReturnType<typeof getProjectSummarySummaries>
+>;
+export const getProjectSummarySummaries = cache(async () => {
+  return await prisma.projectStatus.findMany({
+    select: { id: true, nameEn: true },
+  });
+});
+
+export type GetProjectCategorySummariesType = ThenArg<
+  ReturnType<typeof getProjectCategorySummaries>
+>;
+export const getProjectCategorySummaries = cache(
+  async (workspaceId: number) => {
+    return await prisma.projectCategory.findMany({
+      where: { workspaceId },
+      select: { id: true, name: true },
+    });
+  },
+);
+
+export type GetProjectStatusSummariesType = ThenArg<
+  ReturnType<typeof getProjectStatusSummaries>
+>;
+export const getProjectStatusSummaries = cache(async () => {
+  return await prisma.projectStatus.findMany({
+    select: { id: true, nameEn: true },
   });
 });

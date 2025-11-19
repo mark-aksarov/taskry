@@ -9,7 +9,7 @@ import { Suspense } from "react";
 import { PageGrid } from "@/components/common/PageGrid";
 import { ViewModeProvider } from "@/components/common/ViewMode";
 import { PageContainer } from "@/components/common/PageContainer";
-import { NewTaskFormSkeleton } from "@/components/tasks/NewTaskForm";
+import { TaskFormBaseSkeleton } from "@/components/tasks/TaskFormBase";
 import { ViewModeToggleButtonGroup } from "@/components/common/ViewMode";
 import { TaskFiltersFormSkeleton } from "@/components/tasks/TaskFiltersForm";
 import { NewProjectFormSkeleton } from "@/components/projects/NewProjectForm";
@@ -49,7 +49,7 @@ export function TasksPage({
 
             <ToolbarCreateNewMenuTrigger
               newTaskForm={
-                <Suspense fallback={<NewTaskFormSkeleton />}>
+                <Suspense fallback={<TaskFormBaseSkeleton />}>
                   <NewTaskFormContainer />
                 </Suspense>
               }
@@ -78,7 +78,7 @@ export function TasksPage({
             <ViewModeToggleButtonGroup />
             <ToolbarCreateNewMenuTrigger
               newTaskForm={
-                <Suspense fallback={<NewTaskFormSkeleton />}>
+                <Suspense fallback={<TaskFormBaseSkeleton />}>
                   <NewTaskFormContainer />
                 </Suspense>
               }

@@ -64,8 +64,8 @@ export const getTaskDetail = cache(async (id: number) => {
   });
 });
 
-export type GetTasksType = ThenArg<ReturnType<typeof getTasks>>;
-export const getTasks = cache(async (creatorId?: string) => {
+export type GetTaskListType = ThenArg<ReturnType<typeof getTaskList>>;
+export const getTaskList = cache(async (creatorId?: string) => {
   return await prisma.task.findMany({
     where: creatorId
       ? {
@@ -115,5 +115,24 @@ export const getTasks = cache(async (creatorId?: string) => {
         },
       },
     },
+  });
+});
+
+export type GetTaskCategorySummariesType = ThenArg<
+  ReturnType<typeof getTaskCategorySummaries>
+>;
+export const getTaskCategorySummaries = cache(async (workspaceId: number) => {
+  return prisma.taskCategory.findMany({
+    where: { workspaceId },
+    select: { id: true, name: true },
+  });
+});
+
+export type GetTaskStatusSummariesType = ThenArg<
+  ReturnType<typeof getTaskStatusSummaries>
+>;
+export const getTaskStatusSummaries = cache(async () => {
+  return prisma.taskStatus.findMany({
+    select: { id: true, nameEn: true },
   });
 });

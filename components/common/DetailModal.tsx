@@ -18,7 +18,7 @@ interface DetailModalProps {
 
 export function DetailModal({ title, children }: DetailModalProps) {
   return (
-    <Modal isDismissable className="w-[460px]">
+    <Modal isDismissable className="w-[600px]">
       <Dialog className="max-h-[calc(100dvh-64px)]">
         <DialogHeader>
           <DialogHeading>{title}</DialogHeading>
@@ -27,6 +27,8 @@ export function DetailModal({ title, children }: DetailModalProps) {
         <DialogBody>{children}</DialogBody>
         <DialogFooter>
           <Button
+            as="a"
+            href="/tasks/1"
             variant="primary"
             size="medium"
             label="Open in Full Page"

@@ -1,7 +1,8 @@
 "use client";
 
-import { useContext } from "react";
+import { Suspense, useContext } from "react";
 import { OverlayTriggerState } from "react-stately";
+import { TaskDetailSkeleton } from "../TaskDetail/TaskDetailSkeleton";
 import { DetailBottomSheet } from "@/components/common/DetailBottomSheet";
 import { TaskDetailClientContainerContext } from "../TaskDetailClientContainer";
 
@@ -20,7 +21,9 @@ export function TaskDetailBottomSheet({
 
   return (
     <DetailBottomSheet state={state} title="Task Detail">
-      <TaskDetailClientContainer taskId={taskId} />
+      <Suspense fallback={<TaskDetailSkeleton />}>
+        <TaskDetailClientContainer taskId={taskId} />
+      </Suspense>
     </DetailBottomSheet>
   );
 }

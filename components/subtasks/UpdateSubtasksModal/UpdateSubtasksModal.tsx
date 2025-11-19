@@ -17,7 +17,7 @@ export function UpdateSubtasksModal({ taskId }: { taskId: number }) {
   );
 
   return (
-    <ResponsiveModal isDismissable className="w-[460px]">
+    <ResponsiveModal isDismissable className="w-[600px]">
       <Dialog className="md:max-h-[calc(100dvh-64px)]">
         <DialogHeader>
           <DialogHeading>Subtasks</DialogHeading>

@@ -1,7 +1,3 @@
-"server only";
-
-import { cache } from "react";
-import prisma from "@/lib/prisma";
 import {
   ProjectFiltersForm,
   ProjectFiltersFormUserCheckboxGroup,
@@ -9,46 +5,18 @@ import {
   ProjectFiltersFormCustomerCheckboxGroup,
   ProjectFiltersFormStatusCheckboxGroup,
 } from "../ProjectFiltersForm";
-
-export const getCustomers = cache(async (workspaceId: number) => {
-  return await prisma.customer.findMany({
-    where: {
-      company: {
-        workspaceId,
-      },
-    },
-    select: {
-      id: true,
-      fullName: true,
-    },
-  });
-});
-
-export const getProjectCategories = cache(async (workspaceId: number) => {
-  return await prisma.projectCategory.findMany({
-    where: { workspaceId },
-    select: { id: true, name: true },
-  });
-});
-
-const getUsers = cache(async (workspaceId: number) => {
-  return await prisma.user.findMany({
-    where: { position: { workspaceId } },
-    select: { id: true, fullName: true },
-  });
-});
-
-export const getProjectStatuses = cache(async () => {
-  return await prisma.projectStatus.findMany({
-    select: { id: true, nameEn: true },
-  });
-});
+import { getCustomerSummaries } from "@/lib/queries/customers";
+import { getUserSummaries } from "@/lib/queries/user";
+import {
+  getProjectCategorySummaries,
+  getProjectSummarySummaries,
+} from "@/lib/queries/project";
 
 export async function ProjectFiltersFormServerContainer() {
-  const categories = await getProjectCategories(1);
-  const customers = await getCustomers(1);
-  const users = await getUsers(1);
-  const statuses = await getProjectStatuses();
+  const categories = await getProjectCategorySummaries(1);
+  const customers = await getCustomerSummaries(1);
+  const users = await getUserSummaries(1);
+  const statuses = await getProjectSummarySummaries();
 
   return (
     <ProjectFiltersForm

@@ -1,9 +1,9 @@
-import { getTasks } from "@/lib/queries/task";
+import { getTaskList } from "@/lib/queries/task";
 import { ProfileTaskListItem } from "../ProfileTaskListItem";
 import { ProfileTasksMobileLayout } from "../ProfileTasksMobile";
 
 export async function ProfileTasksMobileServerContainer() {
-  const tasks = await getTasks("BKs42HvVDEZFoaJUmTqf1gTN0K8pUFjI");
+  const tasks = await getTaskList("BKs42HvVDEZFoaJUmTqf1gTN0K8pUFjI");
 
   return (
     <ProfileTasksMobileLayout>

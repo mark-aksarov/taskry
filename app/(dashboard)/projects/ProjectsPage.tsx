@@ -9,7 +9,7 @@ import { Suspense } from "react";
 import { PageGrid } from "@/components/common/PageGrid";
 import { ViewModeProvider } from "@/components/common/ViewMode";
 import { PageContainer } from "@/components/common/PageContainer";
-import { NewTaskFormSkeleton } from "@/components/tasks/NewTaskForm";
+import { TaskFormBaseSkeleton } from "@/components/tasks/TaskFormBase";
 import { ViewModeToggleButtonGroup } from "@/components/common/ViewMode";
 import { NewProjectFormSkeleton } from "@/components/projects/NewProjectForm";
 import { ProjectFiltersFormSkeleton } from "@/components/projects/ProjectFiltersForm";
@@ -48,7 +48,7 @@ export function ProjectsPage({
             <ViewModeToggleButtonGroup className="ml-auto" />
             <ToolbarCreateNewMenuTrigger
               newTaskForm={
-                <Suspense fallback={<NewTaskFormSkeleton />}>
+                <Suspense fallback={<TaskFormBaseSkeleton />}>
                   <NewTaskFormContainer />
                 </Suspense>
               }
@@ -77,7 +77,7 @@ export function ProjectsPage({
             <ViewModeToggleButtonGroup />
             <ToolbarCreateNewMenuTrigger
               newTaskForm={
-                <Suspense fallback={<NewTaskFormSkeleton />}>
+                <Suspense fallback={<TaskFormBaseSkeleton />}>
                   <NewTaskFormContainer />
                 </Suspense>
               }

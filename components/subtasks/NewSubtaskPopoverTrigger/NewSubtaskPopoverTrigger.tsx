@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { Popover } from "@/components/ui";
+import { Modal, Popover, RACDialogTrigger } from "@/components/ui";
 import { useOverlayTrigger } from "react-aria";
 import { useOverlayTriggerState } from "react-stately";
 import { NewSubtaskDialog } from "../NewSubtaskDialog";
@@ -16,17 +16,15 @@ export function NewSubtaskPopoverTrigger() {
   );
 
   return (
-    <>
+    <RACDialogTrigger>
       <NewSubtasksButton
         {...triggerProps}
         ref={triggerRef}
         className="max-md:hidden"
       />
-      <OverlayTriggerStateContext.Provider value={state}>
-        <Popover triggerRef={triggerRef} state={state} placement="bottom left">
-          <NewSubtaskDialog />
-        </Popover>
-      </OverlayTriggerStateContext.Provider>
-    </>
+      <Modal className="w-[300px]">
+        <NewSubtaskDialog />
+      </Modal>
+    </RACDialogTrigger>
   );
 }

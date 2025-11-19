@@ -17,9 +17,7 @@ export type Story = StoryObj<typeof meta>;
 export const Default = {
   args: {
     children: (
-      <NotificationModalTrigger>
-        <NotificationModalContent {...NotificationModalContentStory.args} />
-      </NotificationModalTrigger>
+      <NotificationModalContent {...NotificationModalContentStory.args} />
     ),
   },
 } satisfies Story;

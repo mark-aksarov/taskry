@@ -1,12 +1,12 @@
 import { ProjectList } from "../ProjectList";
 import { ProjectGrid } from "../ProjectGrid";
-import { getProjects } from "@/lib/queries/project";
+import { getProjectList } from "@/lib/queries/project";
 import { ViewModeLayout } from "@/components/common/ViewMode";
 import { ProjectListItem } from "../ProjectListItem";
 import { ProjectGridItem } from "../ProjectGridItem";
 
 export async function ProjectsServerContainer() {
-  const projects = await getProjects();
+  const projects = await getProjectList();
 
   return (
     <ViewModeLayout

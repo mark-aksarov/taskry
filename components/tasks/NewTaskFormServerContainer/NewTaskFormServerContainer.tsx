@@ -1,66 +1,42 @@
-"server only";
-
-import { cache } from "react";
-import prisma from "@/lib/prisma";
+import { NewTaskForm } from "../NewTaskForm";
 import {
-  NewTaskForm,
-  NewTaskFormStatusSelect,
-  NewTaskFormCategorySelect,
-  NewTaskFormProjectSelect,
-  NewTaskFormAssigneeSelect,
-} from "../NewTaskForm";
-
-const getTaskStatuses = cache(async () => {
-  return prisma.taskStatus.findMany({
-    select: { id: true, nameEn: true },
-  });
-});
-
-const getTaskCategories = cache(async (workspaceId: number) => {
-  return prisma.taskCategory.findMany({
-    where: { workspaceId },
-  });
-});
-
-const getProjects = cache(async (workspaceId: number) => {
-  return await prisma.project.findMany({
-    where: { creator: { position: { workspaceId } } },
-    select: { id: true, title: true },
-  });
-});
-
-const getUsers = cache(async (workspaceId: number) => {
-  return await prisma.user.findMany({
-    where: { position: { workspaceId } },
-    select: { id: true, fullName: true },
-  });
-});
+  TaskFormBaseAssigneeSelect,
+  TaskFormBaseCategorySelect,
+  TaskFormBaseProjectSelect,
+  TaskFormBaseStatusSelect,
+} from "../TaskFormBase";
+import { getUserSummaries } from "@/lib/queries/user";
+import { getProjectSummaries } from "@/lib/queries/project";
+import {
+  getTaskCategorySummaries,
+  getTaskStatusSummaries,
+} from "@/lib/queries/task";
 
 export async function NewTaskFormServerContainer() {
-  const statuses = await getTaskStatuses();
-  const categories = await getTaskCategories(1);
-  const projects = await getProjects(1);
-  const users = await getUsers(1);
+  const statuses = await getTaskStatusSummaries();
+  const categories = await getTaskCategorySummaries(1);
+  const projects = await getProjectSummaries(1);
+  const users = await getUserSummaries(1);
 
   return (
     <NewTaskForm
       taskStatusSelect={
-        <NewTaskFormStatusSelect
+        <TaskFormBaseStatusSelect
           statuses={statuses.map((s) => ({ id: s.id, name: s.nameEn }))}
         />
       }
       taskCategorySelect={
-        <NewTaskFormCategorySelect
+        <TaskFormBaseCategorySelect
           categories={categories.map((c) => ({ id: c.id, name: c.name }))}
         />
       }
       projectSelect={
-        <NewTaskFormProjectSelect
+        <TaskFormBaseProjectSelect
           projects={projects.map((p) => ({ id: p.id, title: p.title }))}
         />
       }
       assigneeSelect={
-        <NewTaskFormAssigneeSelect
+        <TaskFormBaseAssigneeSelect
           users={users.map((u) => ({ id: u.id, fullName: u.fullName }))}
         />
       }

@@ -3,17 +3,21 @@
 import { Item } from "react-stately";
 import { ResponsiveSelect } from "@/components/common/ResponsiveSelect";
 
-export function NewTaskFormStatusSelect({
-  statuses,
+export function TaskFormBaseCategorySelect({
+  categories,
 }: {
-  statuses: { id: string; name: string }[];
+  categories: { id: number; name: string }[];
 }) {
+  if (!categories.length) {
+    return null;
+  }
+
   return (
     <ResponsiveSelect
-      label="Status"
-      placeholder="Select status"
+      label="Category"
+      placeholder="Select category"
       overlayClassName="w-[var(--trigger-width)]"
-      items={statuses.map((item) => ({ id: item.id, label: item.name }))}
+      items={categories.map((item) => ({ id: item.id, label: item.name }))}
     >
       {(item: any) => <Item key={item.id}>{item.label}</Item>}
     </ResponsiveSelect>

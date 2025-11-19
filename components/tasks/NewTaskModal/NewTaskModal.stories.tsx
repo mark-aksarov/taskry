@@ -1,10 +1,11 @@
 import { Suspense } from "react";
+import { NewTaskForm } from "../NewTaskForm";
 import { NewTaskModal } from "./NewTaskModal";
+import { TaskFormBaseSkeleton } from "../TaskFormBase";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { Button, RACDialogTrigger } from "@/components/ui";
-import { NewTaskForm, NewTaskFormSkeleton } from "../NewTaskForm";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { Default as NewTaskFormStory } from "../NewTaskForm/NewTaskForm.stories";
+import { Default as TaskFormBaseStory } from "@/components/tasks/TaskFormBase/TaskFormBase.stories";
 
 const meta = {
   title: "Components/tasks/NewTaskModal",
@@ -28,12 +29,12 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    newTaskForm: <NewTaskForm {...NewTaskFormStory.args} />,
+    newTaskForm: <NewTaskForm {...TaskFormBaseStory.args} />,
   },
 } satisfies Story;
 
 export const Skeleton = {
   args: {
-    newTaskForm: <NewTaskFormSkeleton />,
+    newTaskForm: <TaskFormBaseSkeleton />,
   },
 } satisfies Story;

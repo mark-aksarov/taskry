@@ -1,5 +1,5 @@
 import { ModalProps } from "@/components/ui";
-import { CreateNewModal } from "@/components/common/CreateNewModal";
+import { FormBaseModal } from "@/components/common/FormBaseModal";
 
 interface NewProjectModalProps
   extends Pick<ModalProps, "isOpen" | "onOpenChange"> {
@@ -11,7 +11,7 @@ export function NewProjectModal({
   ...props
 }: NewProjectModalProps) {
   return (
-    <CreateNewModal
+    <FormBaseModal
       title="New Project"
       submitButtonLabel="Create Project"
       form={newProjectForm}

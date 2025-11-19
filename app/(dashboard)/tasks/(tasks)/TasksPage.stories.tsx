@@ -17,7 +17,7 @@ import { Default as TaskGridStory } from "@/components/tasks/TaskGrid/TaskGrid.s
 import { withTaskDetail } from "@/components/tasks/TaskDetailClientContainer/decorators";
 import { withTaskComments } from "@/components/tasks/TaskCommentsClientContainer/decorators";
 import { withUpdateSubtasksForm } from "@/components/subtasks/UpdateSubtasksForm/decorators";
-import { Default as NewTaskFormStory } from "@/components/tasks/NewTaskForm/NewTaskForm.stories";
+import { Default as NewTaskFormStory } from "@/components/tasks/TaskFormBase/TaskFormBase.stories";
 import { Default as NewProjectFormStory } from "@/components/projects/NewProjectForm/NewProjectForm.stories";
 import { Default as TaskFiltersFormStory } from "@/components/tasks/TaskFiltersForm/TaskFiltersForm.stories";
 

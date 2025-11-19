@@ -1,8 +1,9 @@
 "use client";
 
-import { useContext } from "react";
+import { Suspense, useContext } from "react";
 import { DetailModal } from "@/components/common/DetailModal";
 import { ProjectDetailClientContainerContext } from "../ProjectDetailClientContainer";
+import { ProjectDetailSkeleton } from "../ProjectDetail/ProjectDetailSkeleton";
 
 export function ProjectDetailModal({ projectId }: { projectId: number }) {
   const ProjectDetailContainer = useContext(
@@ -11,7 +12,9 @@ export function ProjectDetailModal({ projectId }: { projectId: number }) {
 
   return (
     <DetailModal title="Project Detail">
-      <ProjectDetailContainer projectId={projectId} />
+      <Suspense fallback={<ProjectDetailSkeleton />}>
+        <ProjectDetailContainer projectId={projectId} />
+      </Suspense>
     </DetailModal>
   );
 }

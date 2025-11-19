@@ -3,21 +3,21 @@
 import { Item } from "react-stately";
 import { ResponsiveSelect } from "@/components/common/ResponsiveSelect";
 
-export function NewTaskFormCategorySelect({
-  categories,
+export function TaskFormBaseAssigneeSelect({
+  users,
 }: {
-  categories: { id: number; name: string }[];
+  users: { id: string; fullName: string }[];
 }) {
-  if (!categories.length) {
+  if (!users.length) {
     return null;
   }
 
   return (
     <ResponsiveSelect
-      label="Category"
-      placeholder="Select category"
+      label="Assigned To"
+      placeholder="Select user"
       overlayClassName="w-[var(--trigger-width)]"
-      items={categories.map((item) => ({ id: item.id, label: item.name }))}
+      items={users.map((item) => ({ id: item.id, label: item.fullName }))}
     >
       {(item: any) => <Item key={item.id}>{item.label}</Item>}
     </ResponsiveSelect>
