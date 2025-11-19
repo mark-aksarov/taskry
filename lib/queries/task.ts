@@ -6,6 +6,7 @@ import { ThenArg } from "./types";
 
 export type GetTaskDetailType = ThenArg<ReturnType<typeof getTaskDetail>>;
 export const getTaskDetail = cache(async (id: number) => {
+  await new Promise((resolve) => setTimeout(resolve, 3000));
   return await prisma.task.findUniqueOrThrow({
     where: { id },
     select: {
@@ -52,6 +53,11 @@ export const getTaskDetail = cache(async (id: number) => {
           id: true,
           fileUrl: true,
           fileName: true,
+        },
+      },
+      _count: {
+        select: {
+          comments: true,
         },
       },
     },

@@ -2,7 +2,7 @@ import {
   withTaskComments,
   withTaskCommentsEmpty,
   withTaskCommentsSkeleton,
-} from "../TaskCommentsContainer/decorators";
+} from "../TaskCommentsClientContainer/decorators";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { TaskCommentsModal } from "./TaskCommentsModal";
 import { Button, RACDialogTrigger } from "@/components/ui";

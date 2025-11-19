@@ -1,11 +1,10 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { UsersPage } from "./UsersPage";
-import { ViewModeContainer } from "@/components/common/ViewMode";
+import { ViewModeLayout } from "@/components/common/ViewMode";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { PageDecorator } from "@/.storybook/PageDecorator";
 import { mocked } from "storybook/test";
 import { usePathname } from "next/navigation";
-import { default as UserPageLoading } from "./loading";
 import { UsersPageEmpty } from "./UsersPageEmpty";
 import { UserList } from "@/components/users/UserList";
 import { UserGrid } from "@/components/users/UserGrid";
@@ -13,6 +12,7 @@ import { Default as UserListStory } from "@/components/users/UserList/UserList.s
 import { Default as UserGridStory } from "@/components/users/UserGrid/UserGrid.stories";
 import { UserFiltersForm } from "@/components/users/UserFiltersForm";
 import { Default as UserFiltersFormStory } from "@/components/users/UserFiltersForm/UserFiltersForm.stories";
+import UsersPageLoading from "./loading";
 
 const meta = {
   title: "components/pages/UsersPage",
@@ -32,8 +32,8 @@ export const Default: Story = {
     UserFiltersFormContainer: () => (
       <UserFiltersForm {...UserFiltersFormStory.args} />
     ),
-    UserViewModeContainer: () => (
-      <ViewModeContainer
+    UsersServerContainer: () => (
+      <ViewModeLayout
         list={<UserList {...UserListStory.args} />}
         grid={<UserGrid {...UserGridStory.args} />}
       />
@@ -43,7 +43,7 @@ export const Default: Story = {
 
 export const Loading: Story = {
   args: { ...Default.args },
-  render: () => <UserPageLoading />,
+  render: () => <UsersPageLoading />,
 };
 
 export const WithNoUsers: Story = {

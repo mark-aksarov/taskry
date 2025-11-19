@@ -1,3 +1,6 @@
 export { TaskFiltersForm } from "./TaskFiltersForm";
 export { TaskFiltersFormSkeleton } from "./TaskFiltersFormSkeleton";
-export { TaskFiltersFormContainer } from "./TaskFiltersFormContainer";
+export { TaskFiltersFormCategoryCheckboxGroup } from "./TaskFiltersFormCategoryCheckboxGroup";
+export { TaskFiltersFormAssigneeCheckboxGroup } from "./TaskFiltersFormAssigneeCheckboxGroup";
+export { TaskFiltersFormStatusCheckboxGroup } from "./TaskFiltersFormStatusCheckboxGroup";
+export { TaskFiltersFormProjectCheckboxGroup } from "./TaskFiltersFormProjectCheckboxGroup";

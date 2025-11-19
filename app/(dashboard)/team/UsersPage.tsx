@@ -18,12 +18,12 @@ import { UserToolbarFiltersBottomSheetTrigger } from "@/components/users/UserToo
 
 interface UsersPageProps {
   UserFiltersFormContainer: React.ComponentType;
-  UserViewModeContainer: React.ComponentType;
+  UsersServerContainer: React.ComponentType;
 }
 
-export function UsersPage({
+export async function UsersPage({
   UserFiltersFormContainer,
-  UserViewModeContainer,
+  UsersServerContainer,
 }: UsersPageProps) {
   return (
     <PageContainer>
@@ -68,7 +68,7 @@ export function UsersPage({
               }
             />
           </ToolbarMobileBottom>
-          <UserViewModeContainer />
+          <UsersServerContainer />
         </ViewModeProvider>
       </PageGrid>
     </PageContainer>

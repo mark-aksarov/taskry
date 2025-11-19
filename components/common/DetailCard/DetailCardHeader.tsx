@@ -1,0 +1,7 @@
+export function DetailCardHeader({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="border-b-1 border-gray-300 px-4 py-5 dark:border-gray-600">
+      {children}
+    </div>
+  );
+}

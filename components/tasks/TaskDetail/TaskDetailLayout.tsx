@@ -2,8 +2,7 @@ import { DetailRow } from "@/components/common/Detail";
 
 interface TaskDetailLayoutProps {
   titleSlot: React.ReactNode;
-  statusMenuTriggerSlot: React.ReactNode;
-  openTaskSlot: React.ReactNode;
+  actionsSlot: React.ReactNode;
   descriptionSlot: React.ReactNode;
   assigneesSlot: React.ReactNode;
   deadlineSlot: React.ReactNode;
@@ -16,8 +15,7 @@ interface TaskDetailLayoutProps {
 
 export function TaskDetailLayout({
   titleSlot,
-  statusMenuTriggerSlot,
-  openTaskSlot,
+  actionsSlot,
   assigneesSlot,
   deadlineSlot,
   descriptionSlot,
@@ -34,10 +32,7 @@ export function TaskDetailLayout({
       <div className="flex flex-col gap-4">
         {titleSlot}
 
-        <div className="flex gap-3">
-          {statusMenuTriggerSlot}
-          {openTaskSlot}
-        </div>
+        <div className="flex gap-3">{actionsSlot}</div>
       </div>
       <div className="flex flex-col gap-4">
         <DetailRow className={rowStyles}>

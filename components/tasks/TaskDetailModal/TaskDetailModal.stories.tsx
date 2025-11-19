@@ -5,8 +5,8 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import {
   withTaskDetail,
   withTaskDetailSkeleton,
-} from "@/components/tasks/TaskDetail/decorators";
-import { withTaskComments } from "@/components/tasks/TaskCommentsContainer/decorators";
+} from "@/components/tasks/TaskDetailClientContainer/decorators";
+import { withTaskComments } from "@/components/tasks/TaskCommentsClientContainer/decorators";
 
 const meta = {
   title: "components/tasks/TaskDetailModal",

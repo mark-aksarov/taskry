@@ -15,8 +15,8 @@ import { Default as ProfileHeaderStory } from "@/components/profile/ProfileHeade
 import { ProfileTaskList } from "@/components/profile/ProfileTaskList";
 import { Repeat } from "@/components/common/Repeat";
 import { ProfileTaskListItemSkeleton } from "@/components/profile/ProfileTaskListItem";
-import { withTaskDetail } from "@/components/tasks/TaskDetail/decorators";
-import { withTaskComments } from "@/components/tasks/TaskCommentsContainer/decorators";
+import { withTaskDetail } from "@/components/tasks/TaskDetailClientContainer/decorators";
+import { withTaskComments } from "@/components/tasks/TaskCommentsClientContainer/decorators";
 import { withUpdateSubtasksForm } from "@/components/subtasks/UpdateSubtasksForm/decorators";
 
 const meta = {

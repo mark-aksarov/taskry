@@ -1,8 +1,8 @@
 import { TaskListItem } from "./TaskListItem";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withTaskDetail } from "@/components/tasks/TaskDetail/decorators";
-import { withTaskComments } from "@/components/tasks/TaskCommentsContainer/decorators";
+import { withTaskDetail } from "@/components/tasks/TaskDetailClientContainer/decorators";
+import { withTaskComments } from "@/components/tasks/TaskCommentsClientContainer/decorators";
 import { withUpdateSubtasksForm } from "@/components/subtasks/UpdateSubtasksForm/decorators";
 
 const meta = {

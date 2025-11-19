@@ -1,8 +1,8 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { ProjectGridItem } from "./ProjectGridItem";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withProjectDetail } from "../ProjectDetail/decorators";
-import { withProjectComments } from "../ProjectCommentsContainer/decorators";
+import { withProjectDetail } from "../ProjectDetailClientContainer/decorators";
+import { withProjectComments } from "../ProjectCommentsClientContainer/decorators";
 
 const meta = {
   title: "Components/projects/ProjectGridItem",

@@ -18,12 +18,12 @@ import { CustomerToolbarFiltersBottomSheetTrigger } from "@/components/customer/
 
 interface CustomersPageProps {
   CustomerFiltersFormContainer: React.ComponentType;
-  CustomerViewModeContainer: React.ComponentType;
+  CustomersServerContainer: React.ComponentType;
 }
 
-export function CustomersPage({
+export async function CustomersPage({
   CustomerFiltersFormContainer,
-  CustomerViewModeContainer,
+  CustomersServerContainer,
 }: CustomersPageProps) {
   return (
     <PageContainer>
@@ -68,7 +68,7 @@ export function CustomersPage({
               }
             />
           </ToolbarMobileBottom>
-          <CustomerViewModeContainer />
+          <CustomersServerContainer />
         </ViewModeProvider>
       </PageGrid>
     </PageContainer>

@@ -2,6 +2,7 @@ import { twMerge } from "tailwind-merge";
 
 interface PageGridProps {
   className?: string;
+  cols?: number;
   children: React.ReactNode;
 }
 

@@ -1,28 +1,22 @@
 import { ProjectsPage } from "./ProjectsPage";
 import { getProjects } from "@/lib/queries/project";
 import { ProjectsPageEmpty } from "./ProjectsPageEmpty";
-import { NewTaskFormContainer } from "@/components/tasks/NewTaskForm";
-import { NewProjectFormContainer } from "@/components/projects/NewProjectForm";
-import { ProjectDetailContainerProvider } from "@/components/projects/ProjectDetail";
-import { ProjectFiltersFormContainer } from "@/components/projects/ProjectFiltersForm";
-import { ProjectViewModeContainer } from "@/components/projects/ProjectViewModeContainer";
-import { ProjectCommentsContainerProvider } from "@/components/projects/ProjectCommentsContainer";
+import { ProjectsServerContainer } from "@/components/projects/ProjectsServerContainer";
+import { NewTaskFormServerContainer } from "@/components/tasks/NewTaskFormServerContainer";
+import { NewProjectFormServerContainer } from "@/components/projects/NewProjectFormServerContainer";
+import { ProjectFiltersFormServerContainer } from "@/components/projects/ProjectFiltersFormServerContainer";
 
 export default async function AppProjectsPage() {
   const projects = await getProjects();
 
-  if (!projects) return <ProjectsPageEmpty />;
+  if (!projects.length) return <ProjectsPageEmpty />;
 
   return (
-    <ProjectDetailContainerProvider>
-      <ProjectCommentsContainerProvider>
-        <ProjectsPage
-          ProjectFiltersFormContainer={ProjectFiltersFormContainer}
-          NewTaskFormContainer={NewTaskFormContainer}
-          ProjectViewModeContainer={ProjectViewModeContainer}
-          NewProjectFormContainer={NewProjectFormContainer}
-        />
-      </ProjectCommentsContainerProvider>
-    </ProjectDetailContainerProvider>
+    <ProjectsPage
+      ProjectFiltersFormContainer={ProjectFiltersFormServerContainer}
+      NewTaskFormContainer={NewTaskFormServerContainer}
+      ProjectsServerContainer={ProjectsServerContainer}
+      NewProjectFormContainer={NewProjectFormServerContainer}
+    />
   );
 }

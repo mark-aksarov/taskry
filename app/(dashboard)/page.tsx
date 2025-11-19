@@ -1,27 +1,18 @@
 import { DashboardPage } from "./DashboardPage";
-import { TotalTasksCardContainer } from "@/components/tasks/TotalTasksCard";
-import { TotalProjectsCardContainer } from "@/components/projects/TotalProjectsCard";
-import { TotalCustomersCardContainer } from "@/components/customer/TotalCustomersCard";
-import { AssignedTasksContainer } from "@/components/tasks/AssignedTasks";
-import { TotalUsersCardContainer } from "@/components/users/TotalUsersCard";
-import { TaskDetailContainerProvider } from "@/components/tasks/TaskDetail";
-import { TaskCommentsContainerProvider } from "@/components/tasks/TaskCommentsContainer";
-import { UpdateSubtasksFormContainerProvider } from "@/components/subtasks/UpdateSubtasksForm";
+import { AssignedTasksServerContainer } from "@/components/tasks/AssignedTasksServerContainer";
+import { TotalTasksCardServerContainer } from "@/components/tasks/TotalTasksCardServerContainer";
+import { TotalUsersCardServerContainer } from "@/components/users/TotalUsersCardServerContainer";
+import { TotalProjectsCardServerContainer } from "@/components/projects/TotalProjectsCardServerContainer";
+import { TotalCustomersCardServerContainer } from "@/components/customer/TotalCustomersCardServerContainer";
 
 export default function AppDashboardPage() {
   return (
-    <TaskDetailContainerProvider>
-      <TaskCommentsContainerProvider>
-        <UpdateSubtasksFormContainerProvider>
-          <DashboardPage
-            TotalProjectsCardContainer={TotalProjectsCardContainer}
-            TotalTasksCardContainer={TotalTasksCardContainer}
-            TotalUsersCardContainer={TotalUsersCardContainer}
-            TotalCustomersCardContainer={TotalCustomersCardContainer}
-            AssignedTasksContainer={AssignedTasksContainer}
-          />
-        </UpdateSubtasksFormContainerProvider>
-      </TaskCommentsContainerProvider>
-    </TaskDetailContainerProvider>
+    <DashboardPage
+      TotalProjectsCardContainer={TotalProjectsCardServerContainer}
+      TotalTasksCardContainer={TotalTasksCardServerContainer}
+      TotalUsersCardContainer={TotalUsersCardServerContainer}
+      TotalCustomersCardContainer={TotalCustomersCardServerContainer}
+      AssignedTasksContainer={AssignedTasksServerContainer}
+    />
   );
 }

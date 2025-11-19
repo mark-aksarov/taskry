@@ -1,12 +1,13 @@
+import { useContext } from "react";
 import { CommentsModal } from "@/components/common/CommentsModal";
-import { useProjectCommentsContainer } from "../ProjectCommentsContainer";
+import { ProjectCommentsClientContainerContext } from "../ProjectCommentsClientContainer";
 
 interface ProjectCommentsModalProps {
   projectId: number;
 }
 
 export function ProjectCommentsModal({ projectId }: ProjectCommentsModalProps) {
-  const CommentsContainer = useProjectCommentsContainer();
+  const CommentsContainer = useContext(ProjectCommentsClientContainerContext);
 
   return (
     <CommentsModal title="Project comments">

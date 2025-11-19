@@ -1,11 +1,10 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { CustomersPage } from "./CustomersPage";
-import { ViewModeContainer } from "@/components/common/ViewMode";
+import { ViewModeLayout } from "@/components/common/ViewMode";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { PageDecorator } from "@/.storybook/PageDecorator";
 import { mocked } from "storybook/test";
 import { usePathname } from "next/navigation";
-import { default as ProjectPageLoading } from "./loading";
 import { CustomerList } from "@/components/customer/CustomerList";
 import { CustomerGrid } from "@/components/customer/CustomerGrid";
 import { CustomersPageEmpty } from "./CustomersPageEmpty";
@@ -13,6 +12,7 @@ import { Default as CustomerGridStory } from "@/components/customer/CustomerGrid
 import { Default as CustomerListStory } from "@/components/customer/CustomerList/CustomerList.stories";
 import { CustomerFiltersForm } from "@/components/customer/CustomerFiltersForm";
 import { Default as CustomerFiltersFormStory } from "@/components/customer/CustomerFiltersForm/CustomerFiltersForm.stories";
+import CustomersPageLoading from "./loading";
 
 const meta = {
   title: "components/pages/CustomersPage",
@@ -32,8 +32,8 @@ export const Default = {
     CustomerFiltersFormContainer: () => (
       <CustomerFiltersForm {...CustomerFiltersFormStory.args} />
     ),
-    CustomerViewModeContainer: () => (
-      <ViewModeContainer
+    CustomersServerContainer: () => (
+      <ViewModeLayout
         list={<CustomerList {...CustomerListStory.args} />}
         grid={<CustomerGrid {...CustomerGridStory.args} />}
       />
@@ -43,7 +43,7 @@ export const Default = {
 
 export const Loading = {
   args: { ...Default.args },
-  render: () => <ProjectPageLoading />,
+  render: () => <CustomersPageLoading />,
 } satisfies Story;
 
 export const WithNoCustomers: Story = {

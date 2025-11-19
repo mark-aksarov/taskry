@@ -1687,17 +1687,17 @@ async function main() {
 
   await prisma.attachment.createMany({
     data: [
-      { fileUrl: "/man.jpg", fileName: "Profile Picture.jpg", taskId: 1 },
-      { fileUrl: "/man.jpg", fileName: "Team Photo.jpg", taskId: 1 },
-      { fileUrl: "/man.jpg", fileName: "Screenshot 1.jpg", taskId: 1 },
-      { fileUrl: "/man.jpg", fileName: "Screenshot 2.jpg", taskId: 1 },
-      { fileUrl: "/man.jpg", fileName: "Document Preview.jpg", taskId: 1 },
-      { fileUrl: "/man.jpg", fileName: "Mockup Design.jpg", taskId: 1 },
-      { fileUrl: "/man.jpg", fileName: "Diagram.jpg", taskId: 1 },
-      { fileUrl: "/man.jpg", fileName: "Chart.jpg", taskId: 1 },
-      { fileUrl: "/man.jpg", fileName: "Banner.jpg", taskId: 1 },
-      { fileUrl: "/man.jpg", fileName: "Icon Set.jpg", taskId: 1 },
-      { fileUrl: "/man.jpg", fileName: "Reference Image.jpg", taskId: 1 },
+      { fileUrl: "/placeholder.jpg", fileName: "Profile Picture.jpg", taskId: 1 },
+      { fileUrl: "/placeholder.jpg", fileName: "Team Photo.jpg", taskId: 1 },
+      { fileUrl: "/placeholder.jpg", fileName: "Screenshot 1.jpg", taskId: 2 },
+      { fileUrl: "/placeholder.jpg", fileName: "Screenshot 2.jpg", taskId: 2 },
+      { fileUrl: "/placeholder.jpg", fileName: "Document Preview.jpg", taskId: 3 },
+      { fileUrl: "/placeholder.jpg", fileName: "Mockup Design.jpg", taskId: 3 },
+      { fileUrl: "/placeholder.jpg", fileName: "Diagram.jpg", taskId: 4 },
+      { fileUrl: "/placeholder.jpg", fileName: "Chart.jpg", taskId: 4 },
+      { fileUrl: "/placeholder.jpg", fileName: "Banner.jpg", taskId: 5 },
+      { fileUrl: "/placeholder.jpg", fileName: "Icon Set.jpg", taskId: 5 },
+      { fileUrl: "/placeholder.jpg", fileName: "Reference Image.jpg", taskId: 6 },
     ],
   });
 

@@ -31,9 +31,11 @@ export function DetailBottomSheet({
         <DialogBody>{children}</DialogBody>
         <DialogFooter>
           <Button
+            as="a"
+            href="/tasks/1"
             variant="primary"
             size="medium"
-            label="Edit Task"
+            label="Open in Full Page"
             className="w-full justify-center"
           />
         </DialogFooter>

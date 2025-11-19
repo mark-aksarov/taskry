@@ -8,16 +8,16 @@ import {
 import Image from "next/image";
 import { useMemo } from "react";
 import { TaskDetailLayout } from "./TaskDetailLayout";
-import { TaskDetailStatusMenuTrigger } from "./TaskDetailStatusMenuTrigger";
 import { Attachment, Attachments } from "@/components/attachments/Attachments";
 import { SubtasksCheckboxGroup } from "@/components/subtasks/SubtasksCheckboxGroup";
-import { Badge, Button, Link } from "@/components/ui";
-import { ExternalLink } from "lucide-react";
+import { Badge, Link } from "@/components/ui";
 import { ImageContainer } from "@/components/common/ImageContainer";
-import { NewSubtasksButton } from "@/components/subtasks/NewSubtaskButton";
 import { UnknownUser } from "@/components/common/UnknownUser";
 import { NewSubtaskBottomSheetTrigger } from "@/components/subtasks/NewSubtaskBottomSheetTrigger";
 import { NewSubtaskPopoverTrigger } from "@/components/subtasks/NewSubtaskPopoverTrigger";
+import { TaskDetailStatusMenuTrigger } from "./TaskDetailStatusMenuTrigger";
+import { TaskDetailCommentModalTrigger } from "./TaskDetailCommentModalTrigger";
+import { TaskDetailEditModalTrigger } from "./TaskDetailEditModalTrigger";
 
 interface TaskDetailProps {
   id: number;
@@ -90,15 +90,12 @@ export function TaskDetail({
           {title}
         </h2>
       }
-      statusMenuTriggerSlot={<TaskDetailStatusMenuTrigger />}
-      openTaskSlot={
-        <Button
-          variant="outlined"
-          className="rounded-lg"
-          iconLeft={
-            <ExternalLink size={16} strokeWidth={1.5} absoluteStrokeWidth />
-          }
-        />
+      actionsSlot={
+        <>
+          <TaskDetailStatusMenuTrigger />
+          <TaskDetailCommentModalTrigger />
+          <TaskDetailEditModalTrigger />
+        </>
       }
       assigneesSlot={
         <DetailInfo>

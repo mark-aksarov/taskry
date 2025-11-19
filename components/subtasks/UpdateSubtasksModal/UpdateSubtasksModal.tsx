@@ -8,10 +8,13 @@ import {
   DialogHeader,
   DialogHeading,
 } from "@/components/ui";
-import { useUpdateSubtasksFormContainer } from "../UpdateSubtasksForm/UpdateSubtasksFormContainerContext";
+import { UpdateSubtasksFormContainerContext } from "../UpdateSubtasksForm/UpdateSubtasksFormContainerContext";
+import { useContext } from "react";
 
 export function UpdateSubtasksModal({ taskId }: { taskId: number }) {
-  const UpdateSubtasksFormContainer = useUpdateSubtasksFormContainer();
+  const UpdateSubtasksFormContainer = useContext(
+    UpdateSubtasksFormContainerContext,
+  );
 
   return (
     <ResponsiveModal isDismissable className="w-[460px]">

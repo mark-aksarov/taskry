@@ -29,7 +29,7 @@ export function DetailModal({ title, children }: DetailModalProps) {
           <Button
             variant="primary"
             size="medium"
-            label="Edit Task"
+            label="Open in Full Page"
             className="w-full justify-center"
           />
         </DialogFooter>

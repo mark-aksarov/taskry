@@ -1,18 +1,18 @@
 import { CustomersPage } from "./CustomersPage";
-import { getProjects } from "@/lib/queries/project";
+import { getCustomers } from "@/lib/queries/customers";
 import { CustomersPageEmpty } from "./CustomersPageEmpty";
-import { CustomerViewModeContainer } from "@/components/customer/CustomerViewModeContainer";
-import { CustomerFiltersFormContainer } from "@/components/customer/CustomerFiltersForm";
+import { CustomersServerContainer } from "@/components/customer/CustomersServerContainer";
+import { CustomerFiltersFormServerContainer } from "@/components/customer/CustomerFiltersFormServerContainer";
 
 export default async function AppCustomersPage() {
-  const projects = await getProjects();
+  const customers = await getCustomers(1);
 
-  if (!projects) return <CustomersPageEmpty />;
+  if (!customers.length) return <CustomersPageEmpty />;
 
   return (
     <CustomersPage
-      CustomerFiltersFormContainer={CustomerFiltersFormContainer}
-      CustomerViewModeContainer={CustomerViewModeContainer}
+      CustomerFiltersFormContainer={CustomerFiltersFormServerContainer}
+      CustomersServerContainer={CustomersServerContainer}
     />
   );
 }

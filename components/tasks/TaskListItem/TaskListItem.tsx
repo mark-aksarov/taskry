@@ -34,7 +34,6 @@ import {
 import { getTaskStatusBadgeColor } from "../getTaskStatusBadgeColor";
 import { TaskCommentsModal } from "../TaskCommentsModal";
 import { UpdateSubtasksModal } from "@/components/subtasks/UpdateSubtasksModal/UpdateSubtasksModal";
-import { UserIcon } from "@/components/icons/UserIcon";
 import { UnknownUser } from "@/components/common/UnknownUser";
 
 interface TaskListItemProps {

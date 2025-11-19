@@ -1,8 +1,9 @@
 "use client";
 
+import { useContext } from "react";
 import { OverlayTriggerState } from "react-stately";
-import { useProjectDetailContainer } from "../ProjectDetail";
 import { DetailBottomSheet } from "@/components/common/DetailBottomSheet";
+import { ProjectDetailClientContainerContext } from "../ProjectDetailClientContainer";
 
 export interface ProjectDetailBottomSheetProps {
   projectId: number;
@@ -13,7 +14,9 @@ export function ProjectDetailBottomSheet({
   projectId,
   state,
 }: ProjectDetailBottomSheetProps) {
-  const ProjectDetailContainer = useProjectDetailContainer();
+  const ProjectDetailContainer = useContext(
+    ProjectDetailClientContainerContext,
+  );
 
   return (
     <DetailBottomSheet state={state} title="Project Detail">

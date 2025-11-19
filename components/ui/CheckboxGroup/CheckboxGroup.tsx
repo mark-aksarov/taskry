@@ -4,6 +4,7 @@ import {
   CheckboxGroup as RACCheckboxGroup,
 } from "react-aria-components";
 import type { CheckboxGroupProps as RACCheckboxGroupProps } from "react-aria-components";
+import { twMerge } from "tailwind-merge";
 
 type CheckboxGroupProps = RACCheckboxGroupProps &
   React.RefAttributes<HTMLDivElement> & {
@@ -20,7 +21,10 @@ export function CheckboxGroup({
     <RACCheckboxGroup
       {...props}
       className={composeRenderProps(className, (className, renderProps) =>
-        fieldStyles({ ...renderProps, className }),
+        fieldStyles({
+          ...renderProps,
+          className: twMerge(className, "relative"),
+        }),
       )}
     >
       <>

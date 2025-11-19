@@ -1,3 +1,4 @@
 export { NewProjectForm } from "./NewProjectForm";
 export { NewProjectFormSkeleton } from "./NewProjectFormSkeleton";
-export { NewProjectFormContainer } from "./NewProjectFormContainer";
+export { NewProjectFormStatusSelect } from "./NewProjectFormStatusSelect";
+export { NewProjectFormCategorySelect } from "./NewProjectFormCategorySelect";

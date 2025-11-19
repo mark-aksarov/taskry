@@ -16,10 +16,10 @@ export function NewSubtaskDialog() {
         <DialogHeading className="text-sm">New Subtask</DialogHeading>
         <DialogCloseButton iconSize={16} />
       </DialogHeader>
-      <DialogBody className="p-3">
+      <DialogBody className="p-3 pb-1">
         <NewSubtaskForm />
       </DialogBody>
-      <DialogFooter className="p-3">
+      <DialogFooter className="border-0 p-3">
         <Button
           variant="primary"
           size="medium"

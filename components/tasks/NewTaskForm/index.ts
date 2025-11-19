@@ -1,3 +1,6 @@
 export { NewTaskForm } from "./NewTaskForm";
 export { NewTaskFormSkeleton } from "./NewTaskFormSkeleton";
-export { NewTaskFormContainer } from "./NewTaskFormContainer";
+export { NewTaskFormStatusSelect } from "./NewTaskFormStatusSelect";
+export { NewTaskFormCategorySelect } from "./NewTaskFormCategorySelect";
+export { NewTaskFormProjectSelect } from "./NewTaskFormProjectSelect";
+export { NewTaskFormAssigneeSelect } from "./NewTaskFormAssigneeSelect";

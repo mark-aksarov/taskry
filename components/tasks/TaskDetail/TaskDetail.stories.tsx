@@ -1,5 +1,5 @@
-import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { TaskDetail } from "./TaskDetail";
+import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {

@@ -1,18 +1,18 @@
 import { UsersPage } from "./UsersPage";
 import { getUsers } from "@/lib/queries/user";
 import { UsersPageEmpty } from "./UsersPageEmpty";
-import { UserFiltersFormContainer } from "@/components/users/UserFiltersForm";
-import { UserViewModeContainer } from "@/components/users/UserViewModeContainer";
+import { UsersServerContainer } from "@/components/users/UsersServerContainer";
+import { UserFiltersFormServerContainer } from "@/components/users/UserFiltersFormServerContainer";
 
 export default async function AppUsersPage() {
   const users = await getUsers(1);
 
-  if (!users) return <UsersPageEmpty />;
+  if (!users.length) return <UsersPageEmpty />;
 
   return (
     <UsersPage
-      UserFiltersFormContainer={UserFiltersFormContainer}
-      UserViewModeContainer={UserViewModeContainer}
+      UserFiltersFormContainer={UserFiltersFormServerContainer}
+      UsersServerContainer={UsersServerContainer}
     />
   );
 }

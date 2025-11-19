@@ -22,14 +22,14 @@ interface ProjectsPageProps {
   ProjectFiltersFormContainer: React.ComponentType;
   NewTaskFormContainer: React.ComponentType;
   NewProjectFormContainer: React.ComponentType;
-  ProjectViewModeContainer: React.ComponentType;
+  ProjectsServerContainer: React.ComponentType;
 }
 
 export function ProjectsPage({
   ProjectFiltersFormContainer,
   NewTaskFormContainer,
   NewProjectFormContainer,
-  ProjectViewModeContainer,
+  ProjectsServerContainer,
 }: ProjectsPageProps) {
   return (
     <PageContainer>
@@ -88,7 +88,7 @@ export function ProjectsPage({
               }
             />
           </ToolbarMobileBottom>
-          <ProjectViewModeContainer />
+          <ProjectsServerContainer />
         </ViewModeProvider>
       </PageGrid>
     </PageContainer>

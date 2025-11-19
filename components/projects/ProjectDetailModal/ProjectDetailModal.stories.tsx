@@ -5,7 +5,7 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import {
   withProjectDetail,
   withProjectDetailSkeleton,
-} from "../ProjectDetail/decorators";
+} from "../ProjectDetailClientContainer/decorators";
 
 const meta = {
   title: "components/projects/ProjectDetailModal",

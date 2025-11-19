@@ -1,23 +1,14 @@
 import { ProfileTasksPage } from "./ProfileTasksPage";
-import { TaskDetailContainerProvider } from "@/components/tasks/TaskDetail";
-import { ProfileHeaderContainer } from "@/components/profile/ProfileHeader";
-import { ProfileTasksMobileContainer } from "@/components/profile/ProfileTasksMobile";
-import { ProfileTasksDesktopContainer } from "@/components/profile/ProfileTasksDesktop";
-import { TaskCommentsContainerProvider } from "@/components/tasks/TaskCommentsContainer";
-import { UpdateSubtasksFormContainerProvider } from "@/components/subtasks/UpdateSubtasksForm";
+import { ProfileHeaderServerContainer } from "@/components/profile/ProfileHeaderServerContainer";
+import { ProfileTasksMobileServerContainer } from "@/components/profile/ProfileTasksMobileServerContainer";
+import { ProfileTasksDesktopServerContainer } from "@/components/profile/ProfileTasksDesktopServerContainer";
 
 export default async function AppProfileTasksPage() {
   return (
-    <TaskDetailContainerProvider>
-      <TaskCommentsContainerProvider>
-        <UpdateSubtasksFormContainerProvider>
-          <ProfileTasksPage
-            ProfileTasksDesktopContainer={ProfileTasksDesktopContainer}
-            ProfileTasksMobileContainer={ProfileTasksMobileContainer}
-            ProfileHeaderContainer={ProfileHeaderContainer}
-          />
-        </UpdateSubtasksFormContainerProvider>
-      </TaskCommentsContainerProvider>
-    </TaskDetailContainerProvider>
+    <ProfileTasksPage
+      ProfileTasksDesktopContainer={ProfileTasksDesktopServerContainer}
+      ProfileTasksMobileContainer={ProfileTasksMobileServerContainer}
+      ProfileHeaderContainer={ProfileHeaderServerContainer}
+    />
   );
 }

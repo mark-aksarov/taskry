@@ -2,7 +2,7 @@ import {
   withProjectComments,
   withProjectCommentsEmpty,
   withProjectCommentsSkeleton,
-} from "../ProjectCommentsContainer/decorators";
+} from "../ProjectCommentsClientContainer/decorators";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { Button, RACDialogTrigger } from "@/components/ui";
 import { ProjectCommentsModal } from "./ProjectCommentsModal";

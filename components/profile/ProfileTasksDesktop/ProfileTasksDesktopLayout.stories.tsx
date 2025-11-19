@@ -1,8 +1,8 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { ProfileTasksDesktopLayout } from "./ProfileTasksDesktopLayout";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withTaskDetail } from "@/components/tasks/TaskDetail/decorators";
-import { withTaskComments } from "@/components/tasks/TaskCommentsContainer/decorators";
+import { withTaskDetail } from "@/components/tasks/TaskDetailClientContainer/decorators";
+import { withTaskComments } from "@/components/tasks/TaskCommentsClientContainer/decorators";
 import { withUpdateSubtasksForm } from "@/components/subtasks/UpdateSubtasksForm/decorators";
 import { Default as ProfileTaskListStory } from "../ProfileTaskList/ProfileTaskList.stories";
 

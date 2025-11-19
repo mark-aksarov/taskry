@@ -1,10 +1,13 @@
 "use client";
 
-import { useProjectDetailContainer } from "@/components/projects/ProjectDetail";
+import { useContext } from "react";
 import { DetailModal } from "@/components/common/DetailModal";
+import { ProjectDetailClientContainerContext } from "../ProjectDetailClientContainer";
 
 export function ProjectDetailModal({ projectId }: { projectId: number }) {
-  const ProjectDetailContainer = useProjectDetailContainer();
+  const ProjectDetailContainer = useContext(
+    ProjectDetailClientContainerContext,
+  );
 
   return (
     <DetailModal title="Project Detail">

@@ -1,8 +1,9 @@
 "use client";
 
+import { useContext } from "react";
 import { OverlayTriggerState } from "react-stately";
-import { useTaskDetailContainer } from "../TaskDetail";
 import { DetailBottomSheet } from "@/components/common/DetailBottomSheet";
+import { TaskDetailClientContainerContext } from "../TaskDetailClientContainer";
 
 export interface TaskDetailBottomSheetProps {
   taskId: number;
@@ -13,11 +14,13 @@ export function TaskDetailBottomSheet({
   taskId,
   state,
 }: TaskDetailBottomSheetProps) {
-  const TaskDetailContainer = useTaskDetailContainer();
+  const TaskDetailClientContainer = useContext(
+    TaskDetailClientContainerContext,
+  );
 
   return (
     <DetailBottomSheet state={state} title="Task Detail">
-      <TaskDetailContainer taskId={taskId} />
+      <TaskDetailClientContainer taskId={taskId} />
     </DetailBottomSheet>
   );
 }
