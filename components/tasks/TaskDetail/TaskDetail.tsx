@@ -14,7 +14,7 @@ import { Badge, Link } from "@/components/ui";
 import { ImageContainer } from "@/components/common/ImageContainer";
 import { UnknownUser } from "@/components/common/UnknownUser";
 import { NewSubtaskBottomSheetTrigger } from "@/components/subtasks/NewSubtaskBottomSheetTrigger";
-import { NewSubtaskPopoverTrigger } from "@/components/subtasks/NewSubtaskPopoverTrigger";
+import { NewSubtaskModalTrigger } from "@/components/subtasks/NewSubtaskModalTrigger";
 import { TaskDetailStatusMenuTrigger } from "./TaskDetailStatusMenuTrigger";
 import { TaskDetailCommentModalTrigger } from "./TaskDetailCommentModalTrigger";
 import { TaskDetailEditModalTrigger } from "./TaskDetailEditModalTrigger";
@@ -159,7 +159,7 @@ export function TaskDetail({
         <DetailInfo>
           <SubtasksCheckboxGroup subtasks={subtasks} />
           <NewSubtaskBottomSheetTrigger />
-          <NewSubtaskPopoverTrigger />
+          <NewSubtaskModalTrigger />
         </DetailInfo>
       }
       attachmentsSlot={

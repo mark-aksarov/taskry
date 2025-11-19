@@ -1,16 +1,16 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { NewSubtaskPopoverTrigger } from "./NewSubtaskPopoverTrigger";
+import { NewSubtaskModalTrigger } from "./NewSubtaskModalTrigger";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {
-  title: "Components/subtasks/NewSubtaskPopoverTrigger",
-  component: NewSubtaskPopoverTrigger,
+  title: "Components/subtasks/NewSubtaskModalTrigger",
+  component: NewSubtaskModalTrigger,
   tags: ["autodocs"],
   decorators: [withThemedBackground],
   parameters: {
     backgroundVariant: "alt",
   },
-} satisfies Meta<typeof NewSubtaskPopoverTrigger>;
+} satisfies Meta<typeof NewSubtaskModalTrigger>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;

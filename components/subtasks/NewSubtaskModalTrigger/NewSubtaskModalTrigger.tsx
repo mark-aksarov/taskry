@@ -1,12 +1,11 @@
 import { useRef } from "react";
-import { Modal, Popover, RACDialogTrigger } from "@/components/ui";
+import { Modal, RACDialogTrigger } from "@/components/ui";
 import { useOverlayTrigger } from "react-aria";
 import { useOverlayTriggerState } from "react-stately";
 import { NewSubtaskDialog } from "../NewSubtaskDialog";
 import { NewSubtasksButton } from "../NewSubtaskButton";
-import { OverlayTriggerStateContext } from "react-aria-components";
 
-export function NewSubtaskPopoverTrigger() {
+export function NewSubtaskModalTrigger() {
   const state = useOverlayTriggerState({});
   const triggerRef = useRef<HTMLButtonElement>(null);
   const { triggerProps } = useOverlayTrigger(

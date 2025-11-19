@@ -11,15 +11,15 @@ import { NewSubtaskForm } from "../NewSubtaskForm";
 
 export function NewSubtaskDialog() {
   return (
-    <Dialog className="p-0 md:w-[300px]">
-      <DialogHeader className="p-3">
-        <DialogHeading className="text-sm">New Subtask</DialogHeading>
+    <Dialog className="md:w-[300px]">
+      <DialogHeader className="p-4">
+        <DialogHeading className="text-base">New Subtask</DialogHeading>
         <DialogCloseButton iconSize={16} />
       </DialogHeader>
-      <DialogBody className="p-3 pb-1">
+      <DialogBody className="p-4">
         <NewSubtaskForm />
       </DialogBody>
-      <DialogFooter className="border-0 p-3">
+      <DialogFooter className="border-none px-4 pt-0 pb-3">
         <Button
           variant="primary"
           size="medium"
