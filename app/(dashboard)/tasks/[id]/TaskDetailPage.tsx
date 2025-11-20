@@ -6,6 +6,10 @@ import { TaskDetailFormSkeleton } from "@/components/tasks/TaskDetailForm";
 import { TaskDetailCompactSkeleton } from "@/components/tasks/TaskDetailCompact";
 import { TaskDetailCard } from "@/components/tasks/TaskDetailCard/TaskDetailCard";
 import { TaskDetailFullSkeleton } from "@/components/tasks/TaskDetailFull/TaskDetailFullSkeleton";
+import {
+  ToolbarMobileHeading,
+  ToolbarMobileTop,
+} from "@/components/common/Toolbar";
 
 interface TaskDetailPageProps {
   id: number;
@@ -24,7 +28,10 @@ export function TaskDetailPage({
 }: TaskDetailPageProps) {
   return (
     <PageContainer>
-      <PageGrid className="items-center">
+      <PageGrid>
+        <ToolbarMobileTop>
+          <ToolbarMobileHeading>Task Details</ToolbarMobileHeading>
+        </ToolbarMobileTop>
         <TaskDetailCard
           taskDetailCardHeading={
             <Suspense fallback={<DetailCardHeadingSkeleton />}>

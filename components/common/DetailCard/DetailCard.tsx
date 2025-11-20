@@ -10,7 +10,7 @@ export function DetailCard({ className, children }: DetailCardProps) {
   return (
     <Card
       className={twMerge(
-        "flex flex-col p-0 max-2xl:w-full 2xl:w-[1024px]",
+        "flex flex-col self-center p-0 max-2xl:w-full 2xl:w-[1024px]",
         className,
       )}
     >
