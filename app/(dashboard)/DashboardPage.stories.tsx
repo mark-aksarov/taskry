@@ -31,7 +31,6 @@ import { Default as TaskListStory } from "@/components/tasks/TaskList/TaskList.s
 import { AssignedTasksEmptyCard } from "@/components/tasks/AssignedTasks/AssignedTasksEmptyCard";
 import { withTaskDetailCompact } from "@/components/tasks/TaskDetailCompactClientContainer/decorators";
 import { withTaskComments } from "@/components/tasks/TaskCommentsClientContainer/decorators";
-import { withUpdateSubtasksForm } from "@/components/subtasks/UpdateSubtasksForm/decorators";
 
 const meta = {
   title: "components/pages/DashboardPage",
@@ -40,7 +39,6 @@ const meta = {
   decorators: [
     withTaskDetailCompact,
     withTaskComments,
-    withUpdateSubtasksForm,
     PageDecorator,
     withThemedBackground,
   ],

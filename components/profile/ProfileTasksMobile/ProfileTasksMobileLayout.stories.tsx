@@ -3,19 +3,13 @@ import { ProfileTasksMobileLayout } from "./ProfileTasksMobileLayout";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withTaskDetailCompact } from "@/components/tasks/TaskDetailCompactClientContainer/decorators";
 import { withTaskComments } from "@/components/tasks/TaskCommentsClientContainer/decorators";
-import { withUpdateSubtasksForm } from "@/components/subtasks/UpdateSubtasksForm/decorators";
 import { Default as ProfileTaskListStory } from "../ProfileTaskList/ProfileTaskList.stories";
 
 const meta = {
   title: "components/profile/ProfileTasksMobileLayout",
   component: ProfileTasksMobileLayout,
   tags: ["autodocs"],
-  decorators: [
-    withTaskDetailCompact,
-    withTaskComments,
-    withUpdateSubtasksForm,
-    withThemedBackground,
-  ],
+  decorators: [withTaskDetailCompact, withTaskComments, withThemedBackground],
   globals: {
     viewport: { value: "mobile2", isRotated: false },
   },

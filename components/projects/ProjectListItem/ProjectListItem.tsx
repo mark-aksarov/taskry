@@ -202,14 +202,6 @@ export const ProjectListItem = ({
             iconLeft={
               <MessageSquare size={16} strokeWidth={1.5} absoluteStrokeWidth />
             }
-            className="@max-md:hidden"
-          />
-          <Button
-            variant="ghost"
-            iconLeft={
-              <MessageSquare size={16} strokeWidth={1.5} absoluteStrokeWidth />
-            }
-            className="rounded-full @md:hidden"
           />
           <ProjectCommentsModal projectId={id} />
         </RACDialogTrigger>

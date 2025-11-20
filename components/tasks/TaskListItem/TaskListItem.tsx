@@ -33,7 +33,6 @@ import {
 } from "@/components/common/ItemBase";
 import { getTaskStatusBadgeColor } from "../getTaskStatusBadgeColor";
 import { TaskCommentsModal } from "../TaskCommentsModal";
-import { UpdateSubtasksModal } from "@/components/subtasks/UpdateSubtasksModal/UpdateSubtasksModal";
 import { UnknownUser } from "@/components/common/UnknownUser";
 
 interface TaskListItemProps {
@@ -170,35 +169,8 @@ export const TaskListItem = ({
             iconLeft={
               <MessageSquare size={16} strokeWidth={1.5} absoluteStrokeWidth />
             }
-            className="@max-md:hidden"
-          />
-          <Button
-            variant="ghost"
-            iconLeft={
-              <MessageSquare size={16} strokeWidth={1.5} absoluteStrokeWidth />
-            }
-            className="rounded-full @md:hidden"
           />
           <TaskCommentsModal taskId={id} />
-        </RACDialogTrigger>
-      }
-      subtasksModalTriggerSlot={
-        <RACDialogTrigger>
-          <ItemBaseButton
-            label={subtasks}
-            iconLeft={
-              <CheckCheck size={16} strokeWidth={1.5} absoluteStrokeWidth />
-            }
-            className="@max-md:hidden"
-          />
-          <Button
-            variant="ghost"
-            iconLeft={
-              <CheckCheck size={16} strokeWidth={1.5} absoluteStrokeWidth />
-            }
-            className="rounded-full @md:hidden"
-          />
-          <UpdateSubtasksModal taskId={id} />
         </RACDialogTrigger>
       }
       menuTriggerSlot={

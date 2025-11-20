@@ -6,7 +6,6 @@ export interface TaskGridItemProps {
   titleSlot: React.ReactNode;
   assigneeImageSlot: React.ReactNode;
   commentsSlot: React.ReactNode;
-  subtasksSlot: React.ReactNode;
   statusSlot: React.ReactNode;
   progressSlot: React.ReactNode;
 }
@@ -17,7 +16,6 @@ export function TaskGridItemLayout({
   titleSlot,
   assigneeImageSlot,
   commentsSlot,
-  subtasksSlot,
   statusSlot,
   progressSlot,
 }: TaskGridItemProps) {
@@ -33,10 +31,7 @@ export function TaskGridItemLayout({
       </GridItemRow>
 
       <GridItemRow className="gap-2">
-        <div className="flex gap-2">
-          {commentsSlot}
-          {subtasksSlot}
-        </div>
+        {commentsSlot}
         {statusSlot}
       </GridItemRow>
 

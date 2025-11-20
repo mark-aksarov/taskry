@@ -4,17 +4,11 @@ import { ProfileTaskListItem } from "../ProfileTaskListItem";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withTaskDetailCompact } from "@/components/tasks/TaskDetailCompactClientContainer/decorators";
 import { withTaskComments } from "@/components/tasks/TaskCommentsClientContainer/decorators";
-import { withUpdateSubtasksForm } from "@/components/subtasks/UpdateSubtasksForm/decorators";
 
 const meta = {
   title: "Components/profile/ProfileTaskList",
   component: ProfileTaskList,
-  decorators: [
-    withTaskDetailCompact,
-    withTaskComments,
-    withUpdateSubtasksForm,
-    withThemedBackground,
-  ],
+  decorators: [withTaskDetailCompact, withTaskComments, withThemedBackground],
 } satisfies Meta<typeof ProfileTaskList>;
 
 export default meta;

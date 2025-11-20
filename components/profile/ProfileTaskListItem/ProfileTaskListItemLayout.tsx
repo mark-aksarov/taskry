@@ -5,7 +5,6 @@ export interface ProfileTaskListItemLayoutProps {
   deadlineSlot: React.ReactNode;
   statusSlot: React.ReactNode;
   commentsSlot: React.ReactNode;
-  subtasksSlot: React.ReactNode;
   actionMenuSlot: React.ReactNode;
 }
 
@@ -14,7 +13,6 @@ export const ProfileTaskListItemLayout = ({
   deadlineSlot,
   statusSlot,
   commentsSlot,
-  subtasksSlot,
   actionMenuSlot,
 }: ProfileTaskListItemLayoutProps) => {
   return (
@@ -22,14 +20,10 @@ export const ProfileTaskListItemLayout = ({
       {checkboxSlot}
       {deadlineSlot}
 
-      <div className="flex items-center @max-md:gap-0.5 @md:gap-2">
+      <div className="flex items-center @max-md:gap-1 @md:gap-2">
         {statusSlot}
         {commentsSlot}
-
-        <div className="flex items-center gap-1">
-          {subtasksSlot}
-          {actionMenuSlot}
-        </div>
+        {actionMenuSlot}
       </div>
     </ListItem>
   );

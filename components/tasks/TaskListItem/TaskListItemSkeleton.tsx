@@ -23,9 +23,6 @@ export const TaskListItemSkeleton = () => {
       commentsModalTriggerSlot={
         <ItemBaseButtonSkeleton className="@max-md:hidden" />
       }
-      subtasksModalTriggerSlot={
-        <ItemBaseButtonSkeleton className="@max-md:hidden" />
-      }
       menuTriggerSlot={<ItemBaseActionMenuTriggerSkeleton />}
     />
   );

@@ -33,7 +33,6 @@ import {
 } from "@/components/common/ItemBase";
 import { getTaskStatusBadgeColor } from "../getTaskStatusBadgeColor";
 import { TaskCommentsModal } from "../TaskCommentsModal";
-import { UpdateSubtasksModal } from "@/components/subtasks/UpdateSubtasksModal/UpdateSubtasksModal";
 import { UnknownUser } from "@/components/common/UnknownUser";
 
 export interface TaskGridItemProps {
@@ -134,17 +133,6 @@ export function TaskGridItem({
             }
           />
           <TaskCommentsModal taskId={id} />
-        </RACDialogTrigger>
-      }
-      subtasksSlot={
-        <RACDialogTrigger>
-          <ItemBaseButton
-            label={subtasks}
-            iconLeft={
-              <CheckCheck size={16} strokeWidth={1.5} absoluteStrokeWidth />
-            }
-          />
-          <UpdateSubtasksModal taskId={id} />
         </RACDialogTrigger>
       }
       statusSlot={

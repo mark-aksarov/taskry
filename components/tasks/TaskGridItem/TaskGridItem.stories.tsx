@@ -2,7 +2,6 @@ import { TaskGridItem } from "./TaskGridItem";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withTaskComments } from "@/components/tasks/TaskCommentsClientContainer/decorators";
-import { withUpdateSubtasksForm } from "@/components/subtasks/UpdateSubtasksForm/decorators";
 import { withTaskDetailCompact } from "@/components/tasks/TaskDetailCompactClientContainer/decorators";
 
 const meta = {
@@ -17,7 +16,6 @@ const meta = {
     ),
     withTaskDetailCompact,
     withTaskComments,
-    withUpdateSubtasksForm,
     withThemedBackground,
   ],
 } satisfies Meta<typeof TaskGridItem>;

@@ -17,7 +17,6 @@ import { Repeat } from "@/components/common/Repeat";
 import { ProfileTaskListItemSkeleton } from "@/components/profile/ProfileTaskListItem";
 import { withTaskDetailCompact } from "@/components/tasks/TaskDetailCompactClientContainer/decorators";
 import { withTaskComments } from "@/components/tasks/TaskCommentsClientContainer/decorators";
-import { withUpdateSubtasksForm } from "@/components/subtasks/UpdateSubtasksForm/decorators";
 
 const meta = {
   title: "components/pages/ProfileTasksPage",
@@ -26,7 +25,6 @@ const meta = {
   decorators: [
     withTaskDetailCompact,
     withTaskComments,
-    withUpdateSubtasksForm,
     PageDecorator,
     withThemedBackground,
   ],

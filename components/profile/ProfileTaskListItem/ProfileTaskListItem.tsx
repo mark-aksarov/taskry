@@ -28,7 +28,6 @@ import {
   ItemBaseDetailModalTrigger,
 } from "@/components/common/ItemBase";
 import { getTaskStatusBadgeColor } from "@/components/tasks/getTaskStatusBadgeColor";
-import { UpdateSubtasksModal } from "@/components/subtasks/UpdateSubtasksModal/UpdateSubtasksModal";
 
 export interface ProfileTaskListItemProps {
   id: number;
@@ -96,35 +95,8 @@ export const ProfileTaskListItem = ({
             iconLeft={
               <MessageSquare size={16} strokeWidth={1.5} absoluteStrokeWidth />
             }
-            className="@max-md:hidden"
-          />
-          <Button
-            variant="ghost"
-            iconLeft={
-              <MessageSquare size={16} strokeWidth={1.5} absoluteStrokeWidth />
-            }
-            className="rounded-full @md:hidden"
           />
           <TaskCommentsModal taskId={id} />
-        </RACDialogTrigger>
-      }
-      subtasksSlot={
-        <RACDialogTrigger>
-          <ItemBaseButton
-            label={subtasks}
-            iconLeft={
-              <CheckCheck size={16} strokeWidth={1.5} absoluteStrokeWidth />
-            }
-            className="@max-md:hidden"
-          />
-          <Button
-            variant="ghost"
-            iconLeft={
-              <CheckCheck size={16} strokeWidth={1.5} absoluteStrokeWidth />
-            }
-            className="rounded-full @md:hidden"
-          />
-          <UpdateSubtasksModal taskId={id} />
         </RACDialogTrigger>
       }
       actionMenuSlot={

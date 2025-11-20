@@ -16,7 +16,6 @@ import { Default as TaskListStory } from "@/components/tasks/TaskList/TaskList.s
 import { Default as TaskGridStory } from "@/components/tasks/TaskGrid/TaskGrid.stories";
 import { withTaskDetailCompact } from "@/components/tasks/TaskDetailCompactClientContainer/decorators";
 import { withTaskComments } from "@/components/tasks/TaskCommentsClientContainer/decorators";
-import { withUpdateSubtasksForm } from "@/components/subtasks/UpdateSubtasksForm/decorators";
 import { Default as NewTaskFormStory } from "@/components/tasks/TaskFormBase/TaskFormBase.stories";
 import { Default as NewProjectFormStory } from "@/components/projects/NewProjectForm/NewProjectForm.stories";
 import { Default as TaskFiltersFormStory } from "@/components/tasks/TaskFiltersForm/TaskFiltersForm.stories";
@@ -28,7 +27,6 @@ const meta = {
   decorators: [
     withTaskDetailCompact,
     withTaskComments,
-    withUpdateSubtasksForm,
     PageDecorator,
     withThemedBackground,
   ],

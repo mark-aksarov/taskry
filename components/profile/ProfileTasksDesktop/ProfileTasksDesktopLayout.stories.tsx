@@ -3,19 +3,13 @@ import { ProfileTasksDesktopLayout } from "./ProfileTasksDesktopLayout";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withTaskDetailCompact } from "@/components/tasks/TaskDetailCompactClientContainer/decorators";
 import { withTaskComments } from "@/components/tasks/TaskCommentsClientContainer/decorators";
-import { withUpdateSubtasksForm } from "@/components/subtasks/UpdateSubtasksForm/decorators";
 import { Default as ProfileTaskListStory } from "../ProfileTaskList/ProfileTaskList.stories";
 
 const meta = {
   title: "components/profile/ProfileTasksDesktopLayout",
   component: ProfileTasksDesktopLayout,
   tags: ["autodocs"],
-  decorators: [
-    withTaskDetailCompact,
-    withTaskComments,
-    withUpdateSubtasksForm,
-    withThemedBackground,
-  ],
+  decorators: [withTaskDetailCompact, withTaskComments, withThemedBackground],
   globals: {
     viewport: { value: "tablet", isRotated: true },
   },

@@ -11,7 +11,6 @@ export const ProfileTaskListItemSkeleton = () => {
     <ProfileTaskListItemLayout
       deadlineSlot={<ListItemInfoSkeleton />}
       commentsSlot={<ItemBaseButtonSkeleton className="@max-md:hidden" />}
-      subtasksSlot={<ItemBaseButtonSkeleton className="@max-md:hidden" />}
       statusSlot={<ItemBaseBadgeSkeleton className="@max-md:hidden" />}
       actionMenuSlot={<ItemBaseActionMenuTriggerSkeleton />}
     />

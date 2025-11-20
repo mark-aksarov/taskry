@@ -10,7 +10,6 @@ interface TaskListItemLayoutProps {
   projectSlot: React.ReactNode;
   statusSlot: React.ReactNode;
   commentsModalTriggerSlot: React.ReactNode;
-  subtasksModalTriggerSlot: React.ReactNode;
   menuTriggerSlot: React.ReactNode;
 }
 
@@ -22,7 +21,6 @@ export const TaskListItemLayout = ({
   projectSlot,
   statusSlot,
   commentsModalTriggerSlot,
-  subtasksModalTriggerSlot,
   menuTriggerSlot,
 }: TaskListItemLayoutProps) => {
   return (
@@ -35,10 +33,9 @@ export const TaskListItemLayout = ({
 
       <div className="flex flex-none items-center justify-end @max-md:gap-0.5 @md:gap-4">
         {statusSlot}
-        {commentsModalTriggerSlot}
 
-        <div className="flex items-center @max-md:gap-0.5 @md:gap-2">
-          {subtasksModalTriggerSlot}
+        <div className="flex items-center @max-md:gap-1 @md:gap-2">
+          {commentsModalTriggerSlot}
           {menuTriggerSlot}
         </div>
       </div>
