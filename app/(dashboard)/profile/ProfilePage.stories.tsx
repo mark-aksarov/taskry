@@ -5,9 +5,9 @@ import { PageDecorator } from "@/.storybook/PageDecorator";
 import { mocked } from "storybook/test";
 import { usePathname } from "next/navigation";
 import {
-  ProfileInfo,
-  ProfileInfoSkeleton,
-} from "@/components/profile/ProfileInfo";
+  ProfileDetail,
+  ProfileDetailSkeleton,
+} from "@/components/profile/ProfileDetail";
 import {
   ProfileHeader,
   ProfileHeaderSkeleton,
@@ -19,9 +19,9 @@ import {
 } from "@/components/profile/ProfileHeader/ProfileHeader.stories";
 
 import {
-  Default as ProfileInfoStory,
-  WithoutSomeData as ProfileInfoWithoutSomeDataStory,
-} from "@/components/profile/ProfileInfo/ProfileInfo.stories";
+  Default as ProfileDetailStory,
+  WithoutSomeData as ProfileDetailWithoutSomeDataStory,
+} from "@/components/profile/ProfileDetail/ProfileDetail.stories";
 
 const meta = {
   title: "components/pages/ProfilePage",
@@ -38,7 +38,9 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    ProfileInfoContainer: () => <ProfileInfo {...ProfileInfoStory.args} />,
+    ProfileDetailContainer: () => (
+      <ProfileDetail {...ProfileDetailStory.args} />
+    ),
     ProfileHeaderContainer: () => (
       <ProfileHeader {...ProfileHeaderStory.args} />
     ),
@@ -47,15 +49,15 @@ export const Default = {
 
 export const Loading: Story = {
   args: {
-    ProfileInfoContainer: () => <ProfileInfoSkeleton />,
+    ProfileDetailContainer: () => <ProfileDetailSkeleton />,
     ProfileHeaderContainer: () => <ProfileHeaderSkeleton />,
   },
 } satisfies Story;
 
 export const WithoutSomeData: Story = {
   args: {
-    ProfileInfoContainer: () => (
-      <ProfileInfo {...ProfileInfoWithoutSomeDataStory.args} />
+    ProfileDetailContainer: () => (
+      <ProfileDetail {...ProfileDetailWithoutSomeDataStory.args} />
     ),
     ProfileHeaderContainer: () => (
       <ProfileHeader {...ProfileHeaderWithoutSomeDataStory.args} />

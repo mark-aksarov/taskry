@@ -9,23 +9,23 @@ import {
 } from "@/components/common/Toolbar";
 import { ProfileActions } from "@/components/profile/ProfileActions";
 import { ProfileHeaderSkeleton } from "@/components/profile/ProfileHeader";
-import { ProfileInfoSkeleton } from "@/components/profile/ProfileInfo";
-import { ProfileInfoCard } from "@/components/profile/ProfileInfoCard";
+import { ProfileDetailSkeleton } from "@/components/profile/ProfileDetail";
+import { ProfileDetailCard } from "@/components/profile/ProfileDetailCard";
 import { ProfileNavigationMobile } from "@/components/profile/ProfileNavigationMobile";
 
 interface ProfilePageProps {
-  ProfileInfoContainer: React.ComponentType;
+  ProfileDetailContainer: React.ComponentType;
   ProfileHeaderContainer: React.ComponentType;
 }
 
 export function ProfilePage({
-  ProfileInfoContainer,
+  ProfileDetailContainer,
   ProfileHeaderContainer,
 }: ProfilePageProps) {
   return (
     <PageContainer>
-      <ProfileInfoCard
-        ProfileInfoContainer={ProfileInfoContainer}
+      <ProfileDetailCard
+        ProfileDetailContainer={ProfileDetailContainer}
         ProfileHeaderContainer={ProfileHeaderContainer}
       />
 
@@ -46,8 +46,8 @@ export function ProfilePage({
         </Card>
 
         <Card className="flex flex-col gap-6">
-          <Suspense fallback={<ProfileInfoSkeleton />}>
-            <ProfileInfoContainer />
+          <Suspense fallback={<ProfileDetailSkeleton />}>
+            <ProfileDetailContainer />
           </Suspense>
         </Card>
       </PageGrid>

@@ -1,10 +1,10 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { ProfileInfoSkeleton } from "./ProfileInfoSkeleton";
+import { ProfileDetailSkeleton } from "./ProfileDetailSkeleton";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {
-  title: "components/profile/ProfileInfoSkeleton",
-  component: ProfileInfoSkeleton,
+  title: "components/profile/ProfileDetailSkeleton",
+  component: ProfileDetailSkeleton,
   decorators: [
     (Story) => (
       <div className="w-[500px]">
@@ -16,7 +16,7 @@ const meta = {
   parameters: {
     backgroundVariant: "alt",
   },
-} satisfies Meta<typeof ProfileInfoSkeleton>;
+} satisfies Meta<typeof ProfileDetailSkeleton>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;

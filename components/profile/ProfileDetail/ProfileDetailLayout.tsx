@@ -1,6 +1,6 @@
 import { DetailRow } from "@/components/common/Detail";
 
-export interface ProfileInfoProps {
+export interface ProfileDetailProps {
   bioSlot: React.ReactNode;
   fullNameSlot: React.ReactNode;
   positionSlot: React.ReactNode;
@@ -11,7 +11,7 @@ export interface ProfileInfoProps {
   birthdateSlot: React.ReactNode;
 }
 
-export function ProfileInfoLayout({
+export function ProfileDetailLayout({
   bioSlot,
   fullNameSlot,
   positionSlot,
@@ -20,7 +20,7 @@ export function ProfileInfoLayout({
   addressSlot,
   publicLinkSlot,
   birthdateSlot,
-}: ProfileInfoProps) {
+}: ProfileDetailProps) {
   const rowStyles = "max-lg:flex-col max-lg:gap-4";
 
   return (

@@ -1,9 +1,9 @@
 import { DetailInfoSkeleton } from "@/components/common/Detail";
-import { ProfileInfoLayout } from "./ProfileInfoLayout";
+import { ProfileDetailLayout } from "./ProfileDetailLayout";
 
-export function ProfileInfoSkeleton() {
+export function ProfileDetailSkeleton() {
   return (
-    <ProfileInfoLayout
+    <ProfileDetailLayout
       bioSlot={<DetailInfoSkeleton />}
       fullNameSlot={<DetailInfoSkeleton />}
       positionSlot={<DetailInfoSkeleton />}

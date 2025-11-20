@@ -6,9 +6,9 @@ import {
   DetailText,
   DetailTitle,
 } from "@/components/common/Detail";
-import { ProfileInfoLayout } from "./ProfileInfoLayout";
+import { ProfileDetailLayout } from "./ProfileDetailLayout";
 
-interface ProfileInfoProps {
+interface ProfileDetailProps {
   id: string;
   fullName: string;
   bio?: string;
@@ -22,7 +22,7 @@ interface ProfileInfoProps {
   };
 }
 
-export function ProfileInfo({
+export function ProfileDetail({
   fullName,
   bio,
   email,
@@ -31,7 +31,7 @@ export function ProfileInfo({
   publicLink,
   birthdate,
   position,
-}: ProfileInfoProps) {
+}: ProfileDetailProps) {
   const formattedBirthdate = useMemo(() => {
     if (!birthdate) return null;
     try {
@@ -47,7 +47,7 @@ export function ProfileInfo({
   }, [birthdate]);
 
   return (
-    <ProfileInfoLayout
+    <ProfileDetailLayout
       bioSlot={
         <DetailInfo>
           <DetailTitle>Bio</DetailTitle>

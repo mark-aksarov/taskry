@@ -1,11 +1,11 @@
-import { ProfileInfo } from "../ProfileInfo";
+import { ProfileDetail } from "../ProfileDetail";
 import { getUserDetails } from "@/lib/queries/user";
 
-export async function ProfileInfoServerContainer() {
+export async function ProfileDetailServerContainer() {
   const user = await getUserDetails("BKs42HvVDEZFoaJUmTqf1gTN0K8pUFjI");
 
   return (
-    <ProfileInfo
+    <ProfileDetail
       id={user.id}
       fullName={user.fullName}
       bio={user.bio ?? undefined}

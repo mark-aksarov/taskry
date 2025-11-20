@@ -1,11 +1,11 @@
 import { ProfilePage } from "./ProfilePage";
 import { ProfileHeaderServerContainer } from "@/components/profile/ProfileHeaderServerContainer";
-import { ProfileInfoServerContainer } from "@/components/profile/ProfileInfoServerContainer";
+import { ProfileDetailServerContainer } from "@/components/profile/ProfileDetailServerContainer";
 
 export default async function AppProfilePage() {
   return (
     <ProfilePage
-      ProfileInfoContainer={ProfileInfoServerContainer}
+      ProfileDetailContainer={ProfileDetailServerContainer}
       ProfileHeaderContainer={ProfileHeaderServerContainer}
     />
   );
