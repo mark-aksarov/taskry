@@ -14,7 +14,7 @@ import { NewProjectForm } from "@/components/projects/NewProjectForm";
 import { Default as NewProjectFormStory } from "@/components/projects/NewProjectForm/NewProjectForm.stories";
 import { ProjectFiltersForm } from "@/components/projects/ProjectFiltersForm";
 import { Default as ProjectFiltersFormStory } from "@/components/projects/ProjectFiltersForm/ProjectFiltersForm.stories";
-import { withProjectDetail } from "@/components/projects/ProjectDetailClientContainer/decorators";
+import { withProjectDetailCompact } from "@/components/projects/ProjectDetailCompactClientContainer/decorators";
 import { withProjectComments } from "@/components/projects/ProjectCommentsClientContainer/decorators";
 import { NewTaskForm } from "@/components/tasks/NewTaskForm";
 import { Default as NewTaskFormStory } from "@/components/tasks/TaskFormBase/TaskFormBase.stories";
@@ -25,7 +25,7 @@ const meta = {
   component: ProjectsPage,
   parameters: { layout: "fullscreen" },
   decorators: [
-    withProjectDetail,
+    withProjectDetailCompact,
     withProjectComments,
     PageDecorator,
     withThemedBackground,

@@ -1,11 +1,11 @@
 import { Skeleton } from "@/components/ui";
-import { ProjectDetailLayout } from "./ProjectDetailLayout";
+import { ProjectDetailCompactLayout } from "./ProjectDetailCompactLayout";
 import { FieldSkeleton } from "@/components/common/FieldSkeleton";
 import { DetailInfo, DetailInfoSkeleton } from "@/components/common/Detail";
 
-export function ProjectDetailSkeleton() {
+export function ProjectDetailCompactSkeleton() {
   return (
-    <ProjectDetailLayout
+    <ProjectDetailCompactLayout
       titleSlot={<Skeleton size="base" className="w-[15rem]" />}
       statusMenuTriggerSlot={<Skeleton className="h-8 w-[5rem] rounded-lg" />}
       openProjectSlot={<Skeleton className="h-8 w-8 rounded-lg" />}

@@ -3,8 +3,8 @@
 import { Suspense, useContext } from "react";
 import { OverlayTriggerState } from "react-stately";
 import { DetailBottomSheet } from "@/components/common/DetailBottomSheet";
-import { ProjectDetailClientContainerContext } from "../ProjectDetailClientContainer";
-import { ProjectDetailSkeleton } from "../ProjectDetail/ProjectDetailSkeleton";
+import { ProjectDetailCompactClientContainerContext } from "../ProjectDetailCompactClientContainer";
+import { ProjectDetailCompactSkeleton } from "../ProjectDetailCompact/ProjectDetailCompactSkeleton";
 
 export interface ProjectDetailBottomSheetProps {
   projectId: number;
@@ -16,12 +16,12 @@ export function ProjectDetailBottomSheet({
   state,
 }: ProjectDetailBottomSheetProps) {
   const ProjectDetailContainer = useContext(
-    ProjectDetailClientContainerContext,
+    ProjectDetailCompactClientContainerContext,
   );
 
   return (
     <DetailBottomSheet state={state} title="Project Detail">
-      <Suspense fallback={<ProjectDetailSkeleton />}>
+      <Suspense fallback={<ProjectDetailCompactSkeleton />}>
         <ProjectDetailContainer projectId={projectId} />
       </Suspense>
     </DetailBottomSheet>

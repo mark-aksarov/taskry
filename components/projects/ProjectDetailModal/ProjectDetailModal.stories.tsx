@@ -3,9 +3,9 @@ import { ProjectDetailModal } from "./ProjectDetailModal";
 import { Button, RACDialogTrigger } from "@/components/ui";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import {
-  withProjectDetail,
-  withProjectDetailSkeleton,
-} from "../ProjectDetailClientContainer/decorators";
+  withProjectDetailCompact,
+  withProjectDetailCompactSkeleton,
+} from "../ProjectDetailCompactClientContainer/decorators";
 
 const meta = {
   title: "components/projects/ProjectDetailModal",
@@ -29,9 +29,9 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default = {
-  decorators: [withProjectDetail],
+  decorators: [withProjectDetailCompact],
 } satisfies Story;
 
 export const WithSkeletonContent = {
-  decorators: [withProjectDetailSkeleton],
+  decorators: [withProjectDetailCompactSkeleton],
 } satisfies Story;

@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { ProjectGridItem } from "./ProjectGridItem";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withProjectDetail } from "../ProjectDetailClientContainer/decorators";
+import { withProjectDetailCompact } from "../ProjectDetailCompactClientContainer/decorators";
 import { withProjectComments } from "../ProjectCommentsClientContainer/decorators";
 
 const meta = {
@@ -14,7 +14,7 @@ const meta = {
         <Story />
       </div>
     ),
-    withProjectDetail,
+    withProjectDetailCompact,
     withProjectComments,
     withThemedBackground,
   ],

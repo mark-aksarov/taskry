@@ -2,11 +2,11 @@
 
 import useSWR from "swr";
 import { GetProjectDetailType } from "@/lib/queries/project";
-import { ProjectDetail } from "../ProjectDetail";
+import { ProjectDetailCompact } from "../ProjectDetailCompact";
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
-export function ProjectDetailClientContainer({
+export function ProjectDetailCompactClientContainer({
   projectId,
 }: {
   projectId: number;
@@ -20,7 +20,7 @@ export function ProjectDetailClientContainer({
   if (!project) return null;
 
   return (
-    <ProjectDetail
+    <ProjectDetailCompact
       id={project.id}
       title={project.title}
       creator={

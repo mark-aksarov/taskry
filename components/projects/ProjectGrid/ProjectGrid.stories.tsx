@@ -1,7 +1,7 @@
 import { ProjectGrid } from "./ProjectGrid";
 import { ProjectGridItem } from "../ProjectGridItem";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { withProjectDetail } from "../ProjectDetailClientContainer/decorators";
+import { withProjectDetailCompact } from "../ProjectDetailCompactClientContainer/decorators";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withProjectComments } from "../ProjectCommentsClientContainer/decorators";
 
@@ -9,7 +9,11 @@ const meta = {
   title: "Components/projects/ProjectGrid",
   component: ProjectGrid,
   tags: ["autodocs"],
-  decorators: [withProjectDetail, withProjectComments, withThemedBackground],
+  decorators: [
+    withProjectDetailCompact,
+    withProjectComments,
+    withThemedBackground,
+  ],
 } satisfies Meta<typeof ProjectGrid>;
 
 export default meta;

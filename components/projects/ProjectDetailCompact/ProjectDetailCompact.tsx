@@ -9,13 +9,13 @@ import Image from "next/image";
 import { useMemo } from "react";
 import { ExternalLink } from "lucide-react";
 import { Badge, Button, Link } from "@/components/ui";
-import { ProjectDetailLayout } from "./ProjectDetailLayout";
+import { ProjectDetailCompactLayout } from "./ProjectDetailCompactLayout";
 import { ImageContainer } from "@/components/common/ImageContainer";
 import { Attachment, Attachments } from "@/components/attachments/Attachments";
-import { ProjectDetailStatusMenuTrigger } from "./ProjectDetailStatusMenuTrigger";
+import { ProjectDetailCompactStatusMenuTrigger } from "./ProjectDetailCompactStatusMenuTrigger";
 import { UnknownUser } from "@/components/common/UnknownUser";
 
-interface ProjectDetailProps {
+interface ProjectDetailCompactProps {
   id: number;
   title: string;
   creator?: {
@@ -45,7 +45,7 @@ interface ProjectDetailProps {
   }[];
 }
 
-export function ProjectDetail({
+export function ProjectDetailCompact({
   id,
   title,
   creator,
@@ -55,7 +55,7 @@ export function ProjectDetail({
   category,
   status,
   attachments,
-}: ProjectDetailProps) {
+}: ProjectDetailCompactProps) {
   const locale = "en-GB";
 
   const formattedDeadline = useMemo(() => {
@@ -69,13 +69,13 @@ export function ProjectDetail({
   }, [deadline, locale]);
 
   return (
-    <ProjectDetailLayout
+    <ProjectDetailCompactLayout
       titleSlot={
         <h2 className="text-base font-bold text-black dark:text-white">
           {title}
         </h2>
       }
-      statusMenuTriggerSlot={<ProjectDetailStatusMenuTrigger />}
+      statusMenuTriggerSlot={<ProjectDetailCompactStatusMenuTrigger />}
       openProjectSlot={
         <Button
           variant="outlined"

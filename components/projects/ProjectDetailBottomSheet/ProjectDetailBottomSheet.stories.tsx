@@ -8,9 +8,9 @@ import {
 } from "./ProjectDetailBottomSheet";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import {
-  withProjectDetail,
-  withProjectDetailSkeleton,
-} from "../ProjectDetailClientContainer/decorators";
+  withProjectDetailCompact,
+  withProjectDetailCompactSkeleton,
+} from "../ProjectDetailCompactClientContainer/decorators";
 
 const meta = {
   title: "components/projects/ProjectDetailBottomSheet",
@@ -51,9 +51,9 @@ const ProjectDetailBottomSheetTemplate = ({
 };
 
 export const Default = {
-  decorators: [withProjectDetail],
+  decorators: [withProjectDetailCompact],
 } satisfies Story;
 
 export const WithSkeletonContent = {
-  decorators: [withProjectDetailSkeleton],
+  decorators: [withProjectDetailCompactSkeleton],
 } satisfies Story;
