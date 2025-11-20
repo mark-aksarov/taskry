@@ -19,7 +19,6 @@ import {
 } from "@/components/comments/CommentItem";
 import { Attachment, Attachments } from "@/components/attachments/Attachments";
 import { ReplyButton } from "@/components/comments/ReplyButton";
-import { LikeButton } from "@/components/comments/LikeButton";
 import { ItemBaseActionMenuTrigger } from "@/components/common/ItemBase";
 import { UnknownUser } from "@/components/common/UnknownUser";
 
@@ -35,8 +34,6 @@ interface NotificationListItemProps {
   target: React.ReactNode;
   comment?: {
     content: string;
-    likes: number;
-    likedByMe: boolean;
     attachments: {
       id: number;
       fileUrl: string;
@@ -136,7 +133,6 @@ export const NotificationListItem = ({
             )}
             <CommentItemActions>
               <ReplyButton />
-              <LikeButton value={comment.likes} fill={comment.likedByMe} />
             </CommentItemActions>
           </CommentItemContent>
         )}

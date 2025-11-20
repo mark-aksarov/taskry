@@ -7,7 +7,6 @@ import { ThenArg } from "@/lib/queries/types";
 export type GetCommentsType = ThenArg<ReturnType<typeof getComments>>;
 export const getComments = cache(
   async ({
-    userId,
     taskId,
     projectId,
   }: {
@@ -37,16 +36,7 @@ export const getComments = cache(
         },
         _count: {
           select: {
-            likes: true,
             replies: true,
-          },
-        },
-        likes: {
-          where: {
-            userId: userId,
-          },
-          select: {
-            userId: true,
           },
         },
       },

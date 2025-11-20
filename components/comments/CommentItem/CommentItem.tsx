@@ -3,14 +3,12 @@
 import Image from "next/image";
 import { useMemo } from "react";
 import { Link } from "@/components/ui";
-import { LikeButton } from "../LikeButton";
 import { ReplyButton } from "../ReplyButton";
 import { CommentItemDate } from "./CommentItemDate";
 import { CommentItemText } from "./CommentItemText";
 import { CommentItemInfo } from "./CommentItemInfo";
 import { CommentItemTitle } from "./CommentItemTitle";
 import { CommentItemLayout } from "./CommentItemLayout";
-import { CommentItemContent } from "./CommentItemContent";
 import { CommentItemActions } from "./CommentItemActions";
 import { ImageContainer } from "@/components/common/ImageContainer";
 import { Attachment, Attachments } from "@/components/attachments/Attachments";
@@ -23,8 +21,6 @@ interface CommentItemProps {
     id: number;
     fileUrl: string;
   }[];
-  likes: number;
-  likedByMe: boolean;
   sender?: {
     id: string;
     fullName: string;
@@ -36,8 +32,6 @@ export function CommentItem({
   content,
   createdAt,
   attachments,
-  likes,
-  likedByMe,
   sender,
 }: CommentItemProps) {
   const formattedDate = useMemo(() => {
@@ -96,10 +90,7 @@ export function CommentItem({
             </Attachments>
           )}
           <CommentItemActions>
-            <>
-              <ReplyButton />
-              <LikeButton value={likes} fill={likedByMe} />
-            </>
+            <ReplyButton />
           </CommentItemActions>
         </>
       }

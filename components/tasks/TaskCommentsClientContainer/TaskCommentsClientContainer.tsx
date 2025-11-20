@@ -35,8 +35,6 @@ export function TaskCommentsClientContainer({ taskId }: { taskId: number }) {
             content={comment.content}
             createdAt={comment.createdAt}
             attachments={comment.attachments}
-            likes={comment._count.likes}
-            likedByMe={comment.likes.length > 0}
             sender={
               comment.sender
                 ? {

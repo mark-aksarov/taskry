@@ -33,8 +33,6 @@ export const Default = {
       imageUrl: "/woman.jpg",
     },
     attachments: [],
-    likes: 13,
-    likedByMe: true,
   },
 } satisfies Story;
 

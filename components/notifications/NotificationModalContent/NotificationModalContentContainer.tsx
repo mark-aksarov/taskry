@@ -122,8 +122,6 @@ function getComment(notification: GetNotificationsType[number]) {
     return {
       id: target.comment.id,
       content: target.comment.content,
-      likes: target.comment._count?.likes,
-      likedByMe: target.comment.likes.length > 0,
       attachments: target.comment.attachments.map((attachment) => ({
         id: attachment.id,
         fileUrl: attachment.fileUrl,
@@ -136,10 +134,7 @@ function getComment(notification: GetNotificationsType[number]) {
 }
 
 export async function NotificationModalContentContainer() {
-  const notifications: GetNotificationsType = await getNotifications(
-    "BKs42HvVDEZFoaJUmTqf1gTN0K8pUFjI",
-    1,
-  );
+  const notifications: GetNotificationsType = await getNotifications(1);
 
   const unreadCount = notifications.filter((n) => !n.isRead).length;
 

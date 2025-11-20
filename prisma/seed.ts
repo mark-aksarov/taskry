@@ -1653,36 +1653,6 @@ async function main() {
     ],
   });
 
-  // ----------------- Comment likes -----------------
-
-  await prisma.commentLike.createMany({
-    data: [
-      // --- Comment 1 ---
-      { id: 1, commentId: 1, userId: "MNCCPei6KJZiRuIkPbdDxhhJWEoxnUlp" },
-      { id: 2, commentId: 1, userId: "BKs42HvVDEZFoaJUmTqf1gTN0K8pUFjI" },
-      { id: 3, commentId: 1, userId: "W9OZkgMnF12FNBlys4frkj1Lj5de5Nj3" },
-      { id: 4, commentId: 1, userId: "VQmrwbFoX834fHEb1q1qo7CmKVV6NLF9" },
-
-      // --- Comment 8 ---
-      { id: 24, commentId: 8, userId: "BKs42HvVDEZFoaJUmTqf1gTN0K8pUFjI" },
-      { id: 25, commentId: 8, userId: "W9OZkgMnF12FNBlys4frkj1Lj5de5Nj3" },
-      { id: 26, commentId: 8, userId: "MNCCPei6KJZiRuIkPbdDxhhJWEoxnUlp" },
-      { id: 27, commentId: 8, userId: "VQmrwbFoX834fHEb1q1qo7CmKVV6NLF9" },
-
-      // --- Comment 45 ---
-      { id: 36, commentId: 45, userId: "MNCCPei6KJZiRuIkPbdDxhhJWEoxnUlp" },
-      { id: 37, commentId: 45, userId: "BKs42HvVDEZFoaJUmTqf1gTN0K8pUFjI" },
-      { id: 38, commentId: 45, userId: "W9OZkgMnF12FNBlys4frkj1Lj5de5Nj3" },
-      { id: 39, commentId: 45, userId: "VQmrwbFoX834fHEb1q1qo7CmKVV6NLF9" },
-
-      // --- Comment 52 ---
-      { id: 62, commentId: 52, userId: "MNCCPei6KJZiRuIkPbdDxhhJWEoxnUlp" },
-      { id: 63, commentId: 52, userId: "VQmrwbFoX834fHEb1q1qo7CmKVV6NLF9" },
-      { id: 64, commentId: 52, userId: "BKs42HvVDEZFoaJUmTqf1gTN0K8pUFjI" },
-      { id: 65, commentId: 52, userId: "W9OZkgMnF12FNBlys4frkj1Lj5de5Nj3" },
-    ],
-  });
-
   // ----------------- Attachments -----------------
 
   await prisma.attachment.createMany({

@@ -44,8 +44,6 @@ export const Default = {
           comment={{
             content:
               "I totally agree with Alice. The performance improvements are noticeable, especially in larger datasets. One suggestion though: it might be helpful to include a loading indicator when switching between tabs, since the delay can confuse first-time users.",
-            likes: 15,
-            likedByMe: true,
             attachments: [],
           }}
           actionText="updated a project"

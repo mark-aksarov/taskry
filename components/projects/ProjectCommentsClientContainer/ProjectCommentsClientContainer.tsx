@@ -33,8 +33,6 @@ export function ProjectCommentsClientContainer({
             content={comment.content}
             createdAt={comment.createdAt}
             attachments={comment.attachments}
-            likes={comment._count.likes}
-            likedByMe={comment.likes.length > 0}
             sender={
               comment.sender
                 ? {

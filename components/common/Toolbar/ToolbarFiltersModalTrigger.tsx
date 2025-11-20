@@ -31,7 +31,7 @@ export function ToolbarFiltersModalTrigger({
           <SlidersHorizontal size={16} strokeWidth={1.5} absoluteStrokeWidth />
         }
       />
-      <Modal isDismissable className="w-[600px]">
+      <Modal isDismissable className="w-[500px]">
         <Dialog className="max-h-[calc(100dvh-64px)]">
           <DialogHeader>
             <DialogHeading>{title}</DialogHeading>
