@@ -53,6 +53,7 @@ interface SelectButtonOwnProps<T extends object = any> {
   valueProps: DOMAttributes<HTMLSpanElement>;
   placeholder: string;
   validation: ValidationResult;
+  className?: string;
 }
 
 type SelectButtonProps = AriaButtonOptions<"button"> & SelectButtonOwnProps;
@@ -63,6 +64,7 @@ export const SelectButton = ({
   valueProps,
   placeholder,
   validation,
+  className,
   ...props
 }: SelectButtonProps) => {
   const { buttonProps } = useButton(props, ref);
@@ -76,6 +78,7 @@ export const SelectButton = ({
         isDisabled: buttonProps.disabled,
         isInvalid: validation.isInvalid,
         isPlaceholder: !state.selectedItem,
+        className: className,
       })}
     >
       <span

@@ -1,3 +1,5 @@
+"use client";
+
 import { useRef } from "react";
 import { BottomSheet } from "@/components/ui";
 import { useOverlayTrigger } from "react-aria";

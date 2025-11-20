@@ -29,7 +29,7 @@ import {
 } from "@/components/customer/TotalCustomersCard";
 import { Default as TaskListStory } from "@/components/tasks/TaskList/TaskList.stories";
 import { AssignedTasksEmptyCard } from "@/components/tasks/AssignedTasks/AssignedTasksEmptyCard";
-import { withTaskDetail } from "@/components/tasks/TaskDetailClientContainer/decorators";
+import { withTaskDetailCompact } from "@/components/tasks/TaskDetailCompactClientContainer/decorators";
 import { withTaskComments } from "@/components/tasks/TaskCommentsClientContainer/decorators";
 import { withUpdateSubtasksForm } from "@/components/subtasks/UpdateSubtasksForm/decorators";
 
@@ -38,7 +38,7 @@ const meta = {
   component: DashboardPage,
   parameters: { layout: "fullscreen" },
   decorators: [
-    withTaskDetail,
+    withTaskDetailCompact,
     withTaskComments,
     withUpdateSubtasksForm,
     PageDecorator,

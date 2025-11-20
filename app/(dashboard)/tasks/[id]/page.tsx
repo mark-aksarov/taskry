@@ -1,5 +1,7 @@
 import { TaskDetailPage } from "./TaskDetailPage";
-import { TaskDetailServerContainer } from "@/components/tasks/TaskDetailServerContainer/TaskDetailServerContainer";
+import { TaskDetailFullServerContainer } from "@/components/tasks/TaskDetailFullServerContainer";
+import { TaskDetailCardHeadingServerContainer } from "@/components/tasks/TaskDetailCardHeadingServerContainer";
+import { TaskDetailFormServerContainer } from "@/components/tasks/TaskDetailFormServerContainer/TaskDetailFormServerContainer";
 
 export default async function AppTaskDetailPage({
   params,
@@ -11,7 +13,11 @@ export default async function AppTaskDetailPage({
   return (
     <TaskDetailPage
       id={Number(id)}
-      TaskDetailContainer={TaskDetailServerContainer}
+      TaskDetailCardHeadingServerContainer={
+        TaskDetailCardHeadingServerContainer
+      }
+      TaskDetailContainer={TaskDetailFullServerContainer}
+      TaskDetailFormContainer={TaskDetailFormServerContainer}
     />
   );
 }

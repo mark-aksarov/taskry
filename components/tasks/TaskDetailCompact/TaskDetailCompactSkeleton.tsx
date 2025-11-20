@@ -1,11 +1,11 @@
 import { Skeleton } from "@/components/ui";
-import { TaskDetailLayout } from "./TaskDetailLayout";
+import { TaskDetailCompactLayout } from "./TaskDetailCompactLayout";
 import { FieldSkeleton } from "@/components/common/FieldSkeleton";
 import { DetailInfo, DetailInfoSkeleton } from "@/components/common/Detail";
 
-export function TaskDetailSkeleton() {
+export function TaskDetailCompactSkeleton() {
   return (
-    <TaskDetailLayout
+    <TaskDetailCompactLayout
       titleSlot={<Skeleton size="base" className="w-[15rem]" />}
       descriptionSlot={
         <DetailInfo>
@@ -43,7 +43,6 @@ export function TaskDetailSkeleton() {
       actionsSlot={
         <>
           <Skeleton className="h-8 w-[5rem] rounded-lg" />
-          <Skeleton className="h-8 w-8 rounded-lg" />
         </>
       }
     />

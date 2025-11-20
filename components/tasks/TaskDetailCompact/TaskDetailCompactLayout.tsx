@@ -1,6 +1,6 @@
 import { DetailRow } from "@/components/common/Detail";
 
-interface TaskDetailLayoutProps {
+interface TaskDetailCompactLayoutProps {
   titleSlot: React.ReactNode;
   actionsSlot: React.ReactNode;
   descriptionSlot: React.ReactNode;
@@ -13,7 +13,7 @@ interface TaskDetailLayoutProps {
   attachmentsSlot: React.ReactNode;
 }
 
-export function TaskDetailLayout({
+export function TaskDetailCompactLayout({
   titleSlot,
   actionsSlot,
   assigneesSlot,
@@ -24,7 +24,7 @@ export function TaskDetailLayout({
   projectTitleSlot,
   subtasksSlot,
   attachmentsSlot,
-}: TaskDetailLayoutProps) {
+}: TaskDetailCompactLayoutProps) {
   const rowStyles = "max-lg:flex-col max-lg:gap-4";
 
   return (

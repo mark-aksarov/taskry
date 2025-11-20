@@ -6,8 +6,8 @@ import {
   DetailTitle,
 } from "@/components/common/Detail";
 import Image from "next/image";
-import { useContext, useMemo } from "react";
-import { TaskDetailLayout } from "./TaskDetailLayout";
+import { useMemo } from "react";
+import { TaskDetailCompactLayout } from "./TaskDetailCompactLayout";
 import { Attachment, Attachments } from "@/components/attachments/Attachments";
 import { SubtasksCheckboxGroup } from "@/components/subtasks/SubtasksCheckboxGroup";
 import { Badge, Link } from "@/components/ui";
@@ -15,12 +15,9 @@ import { ImageContainer } from "@/components/common/ImageContainer";
 import { UnknownUser } from "@/components/common/UnknownUser";
 import { NewSubtaskBottomSheetTrigger } from "@/components/subtasks/NewSubtaskBottomSheetTrigger";
 import { NewSubtaskModalTrigger } from "@/components/subtasks/NewSubtaskModalTrigger";
-import { TaskDetailStatusMenuTrigger } from "./TaskDetailStatusMenuTrigger";
-import { TaskDetailCommentModalTrigger } from "./TaskDetailCommentModalTrigger";
-import { TaskDetailEditModalTrigger } from "./TaskDetailEditModalTrigger";
-import { OverlayTriggerStateContext } from "react-aria-components";
+import { TaskDetailCompactStatusMenuTrigger } from "./TaskDetailCompactStatusMenuTrigger";
 
-interface TaskDetailProps {
+interface TaskDetailCompactProps {
   id: number;
   title: string;
   assignee?: {
@@ -59,7 +56,7 @@ interface TaskDetailProps {
   }[];
 }
 
-export function TaskDetail({
+export function TaskDetailCompact({
   id,
   title,
   assignee,
@@ -71,9 +68,7 @@ export function TaskDetail({
   status,
   subtasks,
   attachments,
-}: TaskDetailProps) {
-  const state = useContext(OverlayTriggerStateContext);
-
+}: TaskDetailCompactProps) {
   const locale = "en-GB";
 
   const formattedDeadline = useMemo(() => {
@@ -87,19 +82,13 @@ export function TaskDetail({
   }, [deadline, locale]);
 
   return (
-    <TaskDetailLayout
+    <TaskDetailCompactLayout
       titleSlot={
         <h2 className="text-base font-bold text-black dark:text-white">
           {title}
         </h2>
       }
-      actionsSlot={
-        <>
-          <TaskDetailStatusMenuTrigger />
-          <TaskDetailCommentModalTrigger />
-          <TaskDetailEditModalTrigger />
-        </>
-      }
+      actionsSlot={<TaskDetailCompactStatusMenuTrigger />}
       assigneesSlot={
         <DetailInfo>
           <DetailTitle>Assignee</DetailTitle>

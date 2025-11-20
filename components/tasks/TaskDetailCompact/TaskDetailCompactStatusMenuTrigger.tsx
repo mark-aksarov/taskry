@@ -11,7 +11,7 @@ import { Item, useOverlayTriggerState } from "react-stately";
 import { Check, ChevronDown, CircleEllipsis, Clock } from "lucide-react";
 import { ResponsiveMenuTrigger } from "@/components/common/ResponsiveMenuTrigger";
 
-export function TaskDetailStatusMenuTrigger() {
+export function TaskDetailCompactStatusMenuTrigger() {
   const state = useOverlayTriggerState({});
   const { triggerProps } = useOverlayTrigger({ type: "dialog" }, state);
 

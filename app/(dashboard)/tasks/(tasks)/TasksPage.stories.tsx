@@ -14,7 +14,7 @@ import { NewProjectForm } from "@/components/projects/NewProjectForm";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { Default as TaskListStory } from "@/components/tasks/TaskList/TaskList.stories";
 import { Default as TaskGridStory } from "@/components/tasks/TaskGrid/TaskGrid.stories";
-import { withTaskDetail } from "@/components/tasks/TaskDetailClientContainer/decorators";
+import { withTaskDetailCompact } from "@/components/tasks/TaskDetailCompactClientContainer/decorators";
 import { withTaskComments } from "@/components/tasks/TaskCommentsClientContainer/decorators";
 import { withUpdateSubtasksForm } from "@/components/subtasks/UpdateSubtasksForm/decorators";
 import { Default as NewTaskFormStory } from "@/components/tasks/TaskFormBase/TaskFormBase.stories";
@@ -26,7 +26,7 @@ const meta = {
   component: TasksPage,
   parameters: { layout: "fullscreen" },
   decorators: [
-    withTaskDetail,
+    withTaskDetailCompact,
     withTaskComments,
     withUpdateSubtasksForm,
     PageDecorator,

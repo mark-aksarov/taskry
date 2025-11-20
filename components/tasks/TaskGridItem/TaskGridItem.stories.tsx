@@ -1,9 +1,9 @@
 import { TaskGridItem } from "./TaskGridItem";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withTaskDetail } from "@/components/tasks/TaskDetailClientContainer/decorators";
 import { withTaskComments } from "@/components/tasks/TaskCommentsClientContainer/decorators";
 import { withUpdateSubtasksForm } from "@/components/subtasks/UpdateSubtasksForm/decorators";
+import { withTaskDetailCompact } from "@/components/tasks/TaskDetailCompactClientContainer/decorators";
 
 const meta = {
   title: "Components/tasks/TaskGridItem",
@@ -15,7 +15,7 @@ const meta = {
         <Story />
       </div>
     ),
-    withTaskDetail,
+    withTaskDetailCompact,
     withTaskComments,
     withUpdateSubtasksForm,
     withThemedBackground,

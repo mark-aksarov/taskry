@@ -1,11 +1,25 @@
+import {
+  TaskDetailFull,
+  TaskDetailFullSkeleton,
+} from "@/components/tasks/TaskDetailFull";
+
+import {
+  DetailCardHeading,
+  DetailCardHeadingSkeleton,
+} from "@/components/common/DetailCard";
+
 import { mocked } from "storybook/test";
 import { usePathname } from "next/navigation";
 import { TaskDetailPage } from "./TaskDetailPage";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { PageDecorator } from "@/.storybook/PageDecorator";
+import {
+  TaskDetailForm,
+  TaskDetailFormSkeleton,
+} from "@/components/tasks/TaskDetailForm";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { TaskDetail, TaskDetailSkeleton } from "@/components/tasks/TaskDetail";
-import { Default as TaskDetailStory } from "@/components/tasks/TaskDetail/TaskDetail.stories";
+import { Default as TaskDetailFullStory } from "@/components/tasks/TaskDetailFull/TaskDetailFull.stories";
+import { Default as TaskDetailFormStory } from "@/components/tasks/TaskDetailForm/TaskDetailForm.stories";
 
 const meta = {
   title: "components/pages/TaskDetailPage",
@@ -25,12 +39,20 @@ export type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    TaskDetailContainer: () => <TaskDetail {...TaskDetailStory.args} />,
+    TaskDetailCardHeadingServerContainer: () => (
+      <DetailCardHeading>Design homepage layout</DetailCardHeading>
+    ),
+    TaskDetailContainer: () => <TaskDetailFull {...TaskDetailFullStory.args} />,
+    TaskDetailFormContainer: () => (
+      <TaskDetailForm {...TaskDetailFormStory.args} />
+    ),
   },
 } satisfies Story;
 
 export const Loading = {
   args: {
-    TaskDetailContainer: () => <TaskDetailSkeleton />,
+    TaskDetailCardHeadingServerContainer: () => <DetailCardHeadingSkeleton />,
+    TaskDetailContainer: () => <TaskDetailFullSkeleton />,
+    TaskDetailFormContainer: () => <TaskDetailFormSkeleton />,
   },
 } satisfies Story;

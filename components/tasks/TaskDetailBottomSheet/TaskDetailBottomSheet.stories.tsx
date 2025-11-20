@@ -8,9 +8,9 @@ import {
 } from "./TaskDetailBottomSheet";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import {
-  withTaskDetail,
-  withTaskDetailSkeleton,
-} from "@/components/tasks/TaskDetailClientContainer/decorators";
+  withTaskDetailCompact,
+  withTaskDetailCompactSkeleton,
+} from "@/components/tasks/TaskDetailCompactClientContainer/decorators";
 import { withTaskComments } from "@/components/tasks/TaskCommentsClientContainer/decorators";
 
 const meta = {
@@ -52,9 +52,9 @@ const TaskDetailBottomSheetTemplate = ({
 };
 
 export const Default = {
-  decorators: [withTaskDetail, withTaskComments],
+  decorators: [withTaskDetailCompact, withTaskComments],
 } satisfies Story;
 
 export const WithSkeletonContent = {
-  decorators: [withTaskDetailSkeleton, withTaskComments],
+  decorators: [withTaskDetailCompactSkeleton, withTaskComments],
 } satisfies Story;

@@ -31,6 +31,7 @@ export interface DatePickerOwnProps {
   overlayType?: "popover" | "bottomsheet";
   className?: string;
   overlayClassName?: string;
+  inputClassName?: string;
 }
 
 /**
@@ -104,6 +105,7 @@ export const DatePicker = <T extends DateValue>({
   overlayType,
   className,
   overlayClassName,
+  inputClassName,
   ...props
 }: DatePickerProps<T>) => {
   const validationBehavior = props.validationBehavior ?? "native";
@@ -176,6 +178,7 @@ export const DatePicker = <T extends DateValue>({
             isPressed: state.isOpen,
             isDisabled: props.isDisabled,
             isInvalid: validation.isInvalid,
+            className: inputClassName,
           })}
         >
           <DateInput className="flex">

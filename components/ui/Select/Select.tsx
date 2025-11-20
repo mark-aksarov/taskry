@@ -16,6 +16,7 @@ interface SelectOwnProps {
   overlayClassName?: string;
   className?: string;
   optionClassName?: string;
+  buttonClassName?: string;
 }
 
 export type SelectProps<T extends object = any> = AriaSelectProps<T> &
@@ -28,6 +29,7 @@ export const Select = <T extends object = any>({
   className,
   overlayClassName,
   optionClassName,
+  buttonClassName,
   ...props
 }: SelectProps<T>) => {
   const validationBehavior = props.validationBehavior ?? "native";
@@ -88,6 +90,7 @@ export const Select = <T extends object = any>({
         ref={triggerRef}
         placeholder={placeholder}
         valueProps={valueProps}
+        className={buttonClassName}
         state={state}
         validation={validation}
       />

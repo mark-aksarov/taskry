@@ -2,7 +2,7 @@ import { TaskGrid } from "./TaskGrid";
 import { TaskGridItem } from "../TaskGridItem";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withTaskDetail } from "@/components/tasks/TaskDetailClientContainer/decorators";
+import { withTaskDetailCompact } from "@/components/tasks/TaskDetailCompactClientContainer/decorators";
 import { withTaskComments } from "@/components/tasks/TaskCommentsClientContainer/decorators";
 import { withUpdateSubtasksForm } from "@/components/subtasks/UpdateSubtasksForm/decorators";
 
@@ -11,7 +11,7 @@ const meta = {
   component: TaskGrid,
   tags: ["autodocs"],
   decorators: [
-    withTaskDetail,
+    withTaskDetailCompact,
     withTaskComments,
     withUpdateSubtasksForm,
     withThemedBackground,

@@ -6,5 +6,9 @@ interface DetailCardBodyProps {
 }
 
 export function DetailCardBody({ className, children }: DetailCardBodyProps) {
-  return <div className={twMerge("p-4", className)}>{children}</div>;
+  return (
+    <div className={twMerge("flex max-lg:p-4 lg:p-5", className)}>
+      {children}
+    </div>
+  );
 }

@@ -2,20 +2,28 @@ import {
   DetailCard,
   DetailCardBody,
   DetailCardHeader,
-  DetailCardHeading,
 } from "@/components/common/DetailCard";
+import { DetailCardLeft } from "@/components/common/DetailCard/DetailCardLeft";
+import { DetailCardRight } from "@/components/common/DetailCard/DetailCardRight";
+
+interface TaskDetailCardProps {
+  taskDetailCardHeading: React.ReactNode;
+  taskDetail: React.ReactNode;
+  taskDetailForm: React.ReactNode;
+}
 
 export function TaskDetailCard({
+  taskDetailCardHeading,
   taskDetail,
-}: {
-  taskDetail: React.ReactNode;
-}) {
+  taskDetailForm,
+}: TaskDetailCardProps) {
   return (
     <DetailCard>
-      <DetailCardHeader>
-        <DetailCardHeading>Task Details</DetailCardHeading>
-      </DetailCardHeader>
-      <DetailCardBody>{taskDetail}</DetailCardBody>
+      <DetailCardHeader>{taskDetailCardHeading}</DetailCardHeader>
+      <DetailCardBody>
+        <DetailCardLeft>{taskDetail}</DetailCardLeft>
+        <DetailCardRight>{taskDetailForm}</DetailCardRight>
+      </DetailCardBody>
     </DetailCard>
   );
 }

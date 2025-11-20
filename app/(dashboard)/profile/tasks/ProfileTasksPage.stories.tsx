@@ -15,7 +15,7 @@ import { Default as ProfileHeaderStory } from "@/components/profile/ProfileHeade
 import { ProfileTaskList } from "@/components/profile/ProfileTaskList";
 import { Repeat } from "@/components/common/Repeat";
 import { ProfileTaskListItemSkeleton } from "@/components/profile/ProfileTaskListItem";
-import { withTaskDetail } from "@/components/tasks/TaskDetailClientContainer/decorators";
+import { withTaskDetailCompact } from "@/components/tasks/TaskDetailCompactClientContainer/decorators";
 import { withTaskComments } from "@/components/tasks/TaskCommentsClientContainer/decorators";
 import { withUpdateSubtasksForm } from "@/components/subtasks/UpdateSubtasksForm/decorators";
 
@@ -24,7 +24,7 @@ const meta = {
   component: ProfileTasksPage,
   parameters: { layout: "fullscreen" },
   decorators: [
-    withTaskDetail,
+    withTaskDetailCompact,
     withTaskComments,
     withUpdateSubtasksForm,
     PageDecorator,

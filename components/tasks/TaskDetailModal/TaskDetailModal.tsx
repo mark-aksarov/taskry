@@ -2,17 +2,17 @@
 
 import { Suspense, useContext } from "react";
 import { DetailModal } from "@/components/common/DetailModal";
-import { TaskDetailSkeleton } from "../TaskDetail/TaskDetailSkeleton";
-import { TaskDetailClientContainerContext } from "@/components/tasks/TaskDetailClientContainer";
+import { TaskDetailCompactSkeleton } from "../TaskDetailCompact/TaskDetailCompactSkeleton";
+import { TaskDetailCompactClientContainerContext } from "@/components/tasks/TaskDetailCompactClientContainer";
 
 export function TaskDetailModal({ taskId }: { taskId: number }) {
   const TaskDetailClientContainer = useContext(
-    TaskDetailClientContainerContext,
+    TaskDetailCompactClientContainerContext,
   );
 
   return (
     <DetailModal title="Task Detail">
-      <Suspense fallback={<TaskDetailSkeleton />}>
+      <Suspense fallback={<TaskDetailCompactSkeleton />}>
         <TaskDetailClientContainer taskId={taskId} />
       </Suspense>
     </DetailModal>

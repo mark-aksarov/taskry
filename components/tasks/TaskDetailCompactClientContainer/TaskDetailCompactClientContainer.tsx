@@ -1,11 +1,28 @@
-import { TaskDetail } from "../TaskDetail/TaskDetail";
-import { getTaskDetail } from "@/lib/queries/task";
+"use client";
 
-export async function TaskDetailServerContainer({ id }: { id: number }) {
-  const task = await getTaskDetail(id);
+import useSWR from "swr";
+import { TaskDetailCompact } from "../TaskDetailCompact/TaskDetailCompact";
+import { GetTaskDetailType } from "@/lib/queries/task";
+
+const fetcher = (url: string) => fetch(url).then((res) => res.json());
+
+interface TaskDetailCompactClientContainerProps {
+  taskId: number;
+}
+
+export function TaskDetailCompactClientContainer({
+  taskId,
+}: TaskDetailCompactClientContainerProps) {
+  const { data: task } = useSWR<GetTaskDetailType>(
+    `/api/tasks/${taskId}`,
+    fetcher,
+    { suspense: true },
+  );
+
+  if (!task) return null;
 
   return (
-    <TaskDetail
+    <TaskDetailCompact
       id={task.id}
       title={task.title}
       assignee={

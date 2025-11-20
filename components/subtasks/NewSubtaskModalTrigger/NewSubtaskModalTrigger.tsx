@@ -1,3 +1,5 @@
+"use client";
+
 import { useRef } from "react";
 import { Modal, RACDialogTrigger } from "@/components/ui";
 import { useOverlayTrigger } from "react-aria";
@@ -21,7 +23,7 @@ export function NewSubtaskModalTrigger() {
         ref={triggerRef}
         className="max-md:hidden"
       />
-      <Modal className="w-[300px]">
+      <Modal isDismissable className="w-[300px]">
         <NewSubtaskDialog />
       </Modal>
     </RACDialogTrigger>

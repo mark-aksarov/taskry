@@ -2,9 +2,9 @@
 
 import { Suspense, useContext } from "react";
 import { OverlayTriggerState } from "react-stately";
-import { TaskDetailSkeleton } from "../TaskDetail/TaskDetailSkeleton";
 import { DetailBottomSheet } from "@/components/common/DetailBottomSheet";
-import { TaskDetailClientContainerContext } from "../TaskDetailClientContainer";
+import { TaskDetailCompactSkeleton } from "../TaskDetailCompact/TaskDetailCompactSkeleton";
+import { TaskDetailCompactClientContainerContext } from "../TaskDetailCompactClientContainer";
 
 export interface TaskDetailBottomSheetProps {
   taskId: number;
@@ -16,12 +16,12 @@ export function TaskDetailBottomSheet({
   state,
 }: TaskDetailBottomSheetProps) {
   const TaskDetailClientContainer = useContext(
-    TaskDetailClientContainerContext,
+    TaskDetailCompactClientContainerContext,
   );
 
   return (
     <DetailBottomSheet state={state} title="Task Detail">
-      <Suspense fallback={<TaskDetailSkeleton />}>
+      <Suspense fallback={<TaskDetailCompactSkeleton />}>
         <TaskDetailClientContainer taskId={taskId} />
       </Suspense>
     </DetailBottomSheet>
