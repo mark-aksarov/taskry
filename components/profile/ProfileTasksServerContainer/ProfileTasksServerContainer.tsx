@@ -1,12 +1,16 @@
 import { getTaskList } from "@/lib/queries/task";
+import { ProfileTaskList } from "../ProfileTaskList";
 import { ProfileTaskListItem } from "../ProfileTaskListItem";
-import { ProfileTasksDesktopLayout } from "../ProfileTasksDesktop";
 
-export async function ProfileTasksDesktopServerContainer() {
-  const tasks = await getTaskList("BKs42HvVDEZFoaJUmTqf1gTN0K8pUFjI");
+export async function ProfileTasksServerContainer({
+  userId,
+}: {
+  userId: string;
+}) {
+  const tasks = await getTaskList(userId);
 
   return (
-    <ProfileTasksDesktopLayout>
+    <ProfileTaskList>
       {tasks.length &&
         tasks.map((task) => (
           <ProfileTaskListItem
@@ -15,13 +19,12 @@ export async function ProfileTasksDesktopServerContainer() {
             title={task.title}
             deadline={task.deadline}
             comments={task._count.comments}
-            subtasks={task._count.subtasks}
             status={{
               id: task.status.id,
               name: task.status.nameEn,
             }}
           />
         ))}
-    </ProfileTasksDesktopLayout>
+    </ProfileTaskList>
   );
 }

@@ -1,4 +1,4 @@
-import { ProfilePage } from "@/app/(dashboard)/profile/ProfilePage";
+import { TeamProfilePage } from "./TeamProfilePage";
 import { ProfileHeaderServerContainer } from "@/components/profile/ProfileHeaderServerContainer";
 import { ProfileDetailServerContainer } from "@/components/profile/ProfileDetailServerContainer";
 
@@ -10,7 +10,7 @@ export default async function AppProfilePage({
   const { id } = await params;
 
   return (
-    <ProfilePage
+    <TeamProfilePage
       userId={id}
       ProfileDetailContainer={ProfileDetailServerContainer}
       ProfileHeaderContainer={ProfileHeaderServerContainer}

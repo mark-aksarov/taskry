@@ -38,7 +38,6 @@ export interface ProfileTaskListItemProps {
     name: string;
   };
   comments: number;
-  subtasks: number;
 }
 
 export const ProfileTaskListItem = ({
@@ -47,7 +46,6 @@ export const ProfileTaskListItem = ({
   deadline,
   status,
   comments,
-  subtasks,
 }: ProfileTaskListItemProps) => {
   const locale = "en-GB";
 

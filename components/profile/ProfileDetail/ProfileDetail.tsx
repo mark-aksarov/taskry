@@ -97,7 +97,7 @@ export function ProfileDetail({
         </DetailInfo>
       }
       birthdateSlot={
-        <DetailInfo className="border-none">
+        <DetailInfo className="border-none pb-0">
           <DetailTitle>Date of birth</DetailTitle>
           <DetailText>
             {formattedBirthdate || "Birthdate not specified"}

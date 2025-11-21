@@ -10,7 +10,7 @@ export function ProfileNavigationMobile() {
     <nav className="flex gap-1 md:hidden">
       <ProfileNavigationMobileLink
         href="/profile"
-        isSelected={pathname === "/profile/info" || pathname === "/profile"}
+        isSelected={pathname === "/profile"}
       >
         Info
       </ProfileNavigationMobileLink>
@@ -20,13 +20,6 @@ export function ProfileNavigationMobile() {
         isSelected={pathname === "/profile/tasks"}
       >
         Assigned tasks
-      </ProfileNavigationMobileLink>
-
-      <ProfileNavigationMobileLink
-        href="/profile/notifications"
-        isSelected={pathname === "/profile/notifications"}
-      >
-        Notifications
       </ProfileNavigationMobileLink>
     </nav>
   );

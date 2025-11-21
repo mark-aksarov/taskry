@@ -1,36 +1,32 @@
 "use client";
 
-import { NavigationButton } from "@/components/common/NavigationButton";
-import { Divider } from "@/components/ui";
 import { CalendarCheck, Info } from "lucide-react";
-import { usePathname } from "next/navigation";
-import { ProfileActions } from "../ProfileActions";
+import { useParams, usePathname } from "next/navigation";
+import { NavigationButton } from "@/components/common/NavigationButton";
 
-export function ProfileNavigationDesktop() {
+export function UserProfileNavigationDesktop() {
   const pathname = usePathname();
+  const { id } = useParams<{ id: string }>();
 
   return (
     <nav className="flex flex-col gap-2.5">
       <NavigationButton
-        href="/profile"
-        isActive={pathname === "/profile"}
+        href={`/team/${id}`}
+        isActive={pathname === `/team/${id}`}
         variant="secondary"
       >
         <Info size={18} strokeWidth={1.5} absoluteStrokeWidth />
         Profile Information
       </NavigationButton>
+
       <NavigationButton
-        href="/profile/tasks"
-        isActive={pathname === "/profile/tasks"}
+        href={`/team/${id}/tasks`}
+        isActive={pathname === `/team/${id}/tasks`}
         variant="secondary"
       >
         <CalendarCheck size={18} strokeWidth={1.5} absoluteStrokeWidth />
         Assigned tasks
       </NavigationButton>
-
-      <Divider />
-
-      <ProfileActions />
     </nav>
   );
 }

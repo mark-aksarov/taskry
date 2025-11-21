@@ -11,7 +11,7 @@ export function ProfileDetailSkeleton() {
       phoneNumberSlot={<DetailInfoSkeleton />}
       addressSlot={<DetailInfoSkeleton />}
       publicLinkSlot={<DetailInfoSkeleton />}
-      birthdateSlot={<DetailInfoSkeleton className="border-none" />}
+      birthdateSlot={<DetailInfoSkeleton className="border-none pb-0" />}
     />
   );
 }

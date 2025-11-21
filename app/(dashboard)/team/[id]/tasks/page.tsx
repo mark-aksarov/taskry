@@ -1,9 +1,9 @@
 import { getTaskList } from "@/lib/queries/task";
-import { ProfileTasksPage } from "./ProfileTasksPage";
-import { ProfileTasksPageEmpty } from "./ProfileTasksPageEmpty";
-import { ProfileNavigationMobile } from "@/components/profile/ProfileNavigationMobile";
-import { ProfileNavigationDesktop } from "@/components/profile/ProfileNavigationDesktop";
+import { ProfileTasksPage } from "@/app/(dashboard)/profile/tasks/ProfileTasksPage";
 import { NewTaskFormServerContainer } from "@/components/tasks/NewTaskFormServerContainer";
+import { UserProfileNavigationMobile } from "@/components/users/UserProfileNavigationMobile";
+import { ProfileTasksPageEmpty } from "@/app/(dashboard)/profile/tasks/ProfileTasksPageEmpty";
+import { UserProfileNavigationDesktop } from "@/components/users/UserProfileNavigationDesktop";
 import { ProfileTasksServerContainer } from "@/components/profile/ProfileTasksServerContainer";
 import { ProfileHeaderServerContainer } from "@/components/profile/ProfileHeaderServerContainer";
 
@@ -20,19 +20,19 @@ export default async function AppProfileTasksPage({
       <ProfileTasksPageEmpty
         userId={id}
         ProfileHeaderContainer={ProfileHeaderServerContainer}
-        profileNavigationDesktop={<ProfileNavigationDesktop />}
-        profileNavigationMobile={<ProfileNavigationMobile />}
+        profileNavigationDesktop={<UserProfileNavigationDesktop />}
+        profileNavigationMobile={<UserProfileNavigationMobile />}
       />
     );
 
   return (
     <ProfileTasksPage
-      userId="BKs42HvVDEZFoaJUmTqf1gTN0K8pUFjI"
+      userId={id}
       ProfileTasksContainer={ProfileTasksServerContainer}
       ProfileHeaderContainer={ProfileHeaderServerContainer}
       NewTaskFormContainer={NewTaskFormServerContainer}
-      profileNavigationDesktop={<ProfileNavigationDesktop />}
-      profileNavigationMobile={<ProfileNavigationMobile />}
+      profileNavigationDesktop={<UserProfileNavigationDesktop />}
+      profileNavigationMobile={<UserProfileNavigationMobile />}
     />
   );
 }

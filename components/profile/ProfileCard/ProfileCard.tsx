@@ -7,5 +7,14 @@ interface ProfileCardProps {
 }
 
 export function ProfileCard({ className, children }: ProfileCardProps) {
-  return <Card className={twMerge("flex p-0", className)}>{children}</Card>;
+  return (
+    <Card
+      className={twMerge(
+        "m-auto flex max-h-full min-h-[500px] p-0 max-2xl:w-full max-md:hidden 2xl:w-[1024px]",
+        className,
+      )}
+    >
+      {children}
+    </Card>
+  );
 }

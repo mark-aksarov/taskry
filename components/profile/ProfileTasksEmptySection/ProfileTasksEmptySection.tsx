@@ -9,7 +9,7 @@ export function ProfileTasksEmptySection() {
   return (
     <div className="flex flex-auto items-center justify-center">
       <EmptySection>
-        <EmptySectionHeading className="max-md:text-3xl md:text-4xl">
+        <EmptySectionHeading className="text-3xl!">
           No assigned tasks yet
         </EmptySectionHeading>
         <EmptySectionDescription>

@@ -1,7 +1,14 @@
+"use client";
+
+import { usePathname } from "next/navigation";
 import { KeyRound, Pencil, Trash } from "lucide-react";
 import { NavigationButton } from "@/components/common/NavigationButton";
 
 export function ProfileActions() {
+  const pathname = usePathname();
+
+  if (pathname.startsWith("/team")) return null;
+
   return (
     <div className="flex flex-col gap-2.5">
       <NavigationButton variant="secondary">

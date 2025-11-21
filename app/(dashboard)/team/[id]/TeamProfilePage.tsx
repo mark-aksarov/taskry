@@ -7,24 +7,23 @@ import { Suspense } from "react";
 import { Card } from "@/components/common/Card";
 import { PageGrid } from "@/components/common/PageGrid";
 import { PageContainer } from "@/components/common/PageContainer";
-import { ProfileActions } from "@/components/profile/ProfileActions";
 import { ProfileHeaderSkeleton } from "@/components/profile/ProfileHeader";
 import { ProfileDetailSkeleton } from "@/components/profile/ProfileDetail";
 import { ProfileDetailCard } from "@/components/profile/ProfileDetailCard";
-import { ProfileNavigationMobile } from "@/components/profile/ProfileNavigationMobile";
-import { ProfileNavigationDesktop } from "@/components/profile/ProfileNavigationDesktop";
+import { UserProfileNavigationMobile } from "@/components/users/UserProfileNavigationMobile";
+import { UserProfileNavigationDesktop } from "@/components/users/UserProfileNavigationDesktop";
 
-interface ProfilePageProps {
+interface TeamProfilePageProps {
   userId: string;
   ProfileDetailContainer: React.ComponentType<{ userId: string }>;
   ProfileHeaderContainer: React.ComponentType<{ userId: string }>;
 }
 
-export function ProfilePage({
+export function TeamProfilePage({
   userId,
   ProfileDetailContainer,
   ProfileHeaderContainer,
-}: ProfilePageProps) {
+}: TeamProfilePageProps) {
   return (
     <PageContainer>
       <ProfileDetailCard
@@ -38,26 +37,22 @@ export function ProfilePage({
             <ProfileHeaderContainer userId={userId} />
           </Suspense>
         }
-        profileNavigationDesktop={<ProfileNavigationDesktop />}
+        profileNavigationDesktop={<UserProfileNavigationDesktop />}
       />
 
       <PageGrid className="md:hidden">
         <ToolbarMobileTop>
-          <ToolbarMobileHeading>Profile Settings</ToolbarMobileHeading>
+          <ToolbarMobileHeading>User Information</ToolbarMobileHeading>
         </ToolbarMobileTop>
 
         <ToolbarMobileBottom>
-          <ProfileNavigationMobile />
+          <UserProfileNavigationMobile />
         </ToolbarMobileBottom>
 
-        <Card className="flex flex-col gap-6 px-1.5">
+        <Card className="flex flex-col gap-6">
           <Suspense fallback={<ProfileHeaderSkeleton />}>
             <ProfileHeaderContainer userId={userId} />
           </Suspense>
-          <ProfileActions />
-        </Card>
-
-        <Card className="flex flex-col gap-6">
           <Suspense fallback={<ProfileDetailSkeleton />}>
             <ProfileDetailContainer userId={userId} />
           </Suspense>

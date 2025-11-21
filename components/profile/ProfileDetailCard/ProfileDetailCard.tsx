@@ -1,21 +1,24 @@
-import { Card } from "@/components/common/Card";
-import { ProfileNavigationDesktop } from "@/components/profile/ProfileNavigationDesktop";
 import {
   ProfileCardLeft,
   ProfileCardHeader,
   ProfileCardTitle,
   ProfileCardRight,
+  ProfileCard,
 } from "../ProfileCard";
+
+interface ProfileDetailCardProps {
+  profileHeader: React.ReactNode;
+  profileDetail: React.ReactNode;
+  profileNavigationDesktop: React.ReactNode;
+}
 
 export function ProfileDetailCard({
   profileHeader,
   profileDetail,
-}: {
-  profileHeader: React.ReactNode;
-  profileDetail: React.ReactNode;
-}) {
+  profileNavigationDesktop,
+}: ProfileDetailCardProps) {
   return (
-    <Card className="flex p-0 max-md:hidden">
+    <ProfileCard>
       <ProfileCardLeft>
         <ProfileCardHeader>
           <ProfileCardTitle>Profile Information</ProfileCardTitle>
@@ -25,8 +28,8 @@ export function ProfileDetailCard({
 
       <ProfileCardRight>
         {profileHeader}
-        <ProfileNavigationDesktop />
+        {profileNavigationDesktop}
       </ProfileCardRight>
-    </Card>
+    </ProfileCard>
   );
 }

@@ -1,9 +1,9 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { ProfileTasksDesktopLayout } from "./ProfileTasksDesktopLayout";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withTaskDetailCompact } from "@/components/tasks/TaskDetailCompactClientContainer/decorators";
 import { withTaskComments } from "@/components/tasks/TaskCommentsClientContainer/decorators";
 import { Default as ProfileTaskListStory } from "../ProfileTaskList/ProfileTaskList.stories";
+import { withTaskDetailCompact } from "@/components/tasks/TaskDetailCompactClientContainer/decorators";
 
 const meta = {
   title: "components/profile/ProfileTasksDesktopLayout",

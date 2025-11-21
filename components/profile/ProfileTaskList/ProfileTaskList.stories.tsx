@@ -24,7 +24,6 @@ export const Default = {
           deadline={new Date("2025-09-30")}
           status={{ id: "pending", name: "Pending" }}
           comments={10}
-          subtasks={6}
         />
         <ProfileTaskListItem
           id={2}
@@ -32,7 +31,6 @@ export const Default = {
           deadline={new Date("2025-10-05")}
           status={{ id: "active", name: "Active" }}
           comments={22}
-          subtasks={16}
         />
         <ProfileTaskListItem
           id={3}
@@ -40,7 +38,6 @@ export const Default = {
           deadline={new Date("2025-10-10")}
           status={{ id: "completed", name: "Completed" }}
           comments={2}
-          subtasks={2}
         />
         <ProfileTaskListItem
           id={4}
@@ -48,7 +45,6 @@ export const Default = {
           deadline={new Date("2025-10-12")}
           status={{ id: "pending", name: "Pending" }}
           comments={12}
-          subtasks={32}
         />
         <ProfileTaskListItem
           id={5}
@@ -56,7 +52,6 @@ export const Default = {
           deadline={new Date("2025-10-15")}
           status={{ id: "active", name: "Active" }}
           comments={15}
-          subtasks={8}
         />
         <ProfileTaskListItem
           id={6}
@@ -64,7 +59,6 @@ export const Default = {
           deadline={new Date("2025-10-18")}
           status={{ id: "completed", name: "Completed" }}
           comments={9}
-          subtasks={16}
         />
         <ProfileTaskListItem
           id={7}
@@ -72,7 +66,6 @@ export const Default = {
           deadline={new Date("2025-10-20")}
           status={{ id: "completed", name: "Completed" }}
           comments={12}
-          subtasks={22}
         />
         <ProfileTaskListItem
           id={8}
@@ -80,7 +73,6 @@ export const Default = {
           deadline={new Date("2025-10-22")}
           status={{ id: "active", name: "Active" }}
           comments={10}
-          subtasks={6}
         />
         <ProfileTaskListItem
           id={9}
@@ -88,7 +80,6 @@ export const Default = {
           deadline={new Date("2025-10-25")}
           status={{ id: "pending", name: "Pending" }}
           comments={23}
-          subtasks={12}
         />
         <ProfileTaskListItem
           id={10}
@@ -96,9 +87,7 @@ export const Default = {
           deadline={new Date("2025-10-28")}
           status={{ id: "completed", name: "Completed" }}
           comments={13}
-          subtasks={23}
         />
-        ,
       </>
     ),
   },
