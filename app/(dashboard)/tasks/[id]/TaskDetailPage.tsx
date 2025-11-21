@@ -3,7 +3,6 @@ import { PageGrid } from "@/components/common/PageGrid";
 import { PageContainer } from "@/components/common/PageContainer";
 import { DetailCardHeadingSkeleton } from "@/components/common/DetailCard";
 import { TaskDetailFormSkeleton } from "@/components/tasks/TaskDetailForm";
-import { TaskDetailCompactSkeleton } from "@/components/tasks/TaskDetailCompact";
 import { TaskDetailCard } from "@/components/tasks/TaskDetailCard/TaskDetailCard";
 import { TaskDetailFullSkeleton } from "@/components/tasks/TaskDetailFull/TaskDetailFullSkeleton";
 import {

@@ -5,22 +5,21 @@ import {
   DetailFormSelect,
 } from "@/components/common/DetailForm";
 import { Item } from "react-stately";
-import { FolderClosed } from "lucide-react";
+import { CircleCheck } from "lucide-react";
 
-export function TaskDetailFormProjectSelect({
-  projects,
+export function ProjectDetailFormStatusSelect({
+  statuses,
 }: {
-  projects: { id: number; title: string }[];
+  statuses: { id: string; name: string }[];
 }) {
   return (
     <DetailFormSelect
       label={
         <DetailFormLabel className="w-[6rem]">
-          <FolderClosed size={16} strokeWidth={1.5} absoluteStrokeWidth />
-          Project
+          <CircleCheck size={16} strokeWidth={1.5} absoluteStrokeWidth /> Status
         </DetailFormLabel>
       }
-      items={projects.map((item) => ({ id: item.id, label: item.title }))}
+      items={statuses.map((item) => ({ id: item.id, label: item.name }))}
     >
       {(item: any) => <Item key={item.id}>{item.label}</Item>}
     </DetailFormSelect>

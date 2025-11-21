@@ -1,21 +1,20 @@
-import { TaskDetailFull } from "../TaskDetailFull";
-import { getTaskDetail } from "@/lib/queries/task";
 import { getComments } from "@/lib/queries/comments";
+import { getProjectDetail } from "@/lib/queries/project";
+import { ProjectDetailFull } from "../ProjectDetailFull";
 import { CommentItem } from "@/components/comments/CommentItem";
 import { DetailCommentInput } from "@/components/common/DetailCommentInput";
 
-export async function TaskDetailFullServerContainer({ id }: { id: number }) {
-  const task = await getTaskDetail(id);
+export async function ProjectDetailFullServerContainer({ id }: { id: number }) {
+  const project = await getProjectDetail(id);
   const comments = await getComments({
-    taskId: id,
+    projectId: id,
     userId: "BKs42HvVDEZFoaJUmTqf1gTN0K8pUFjI",
   });
 
   return (
-    <TaskDetailFull
-      description={task.description ?? undefined}
-      subtasks={task.subtasks}
-      attachments={task.attachments}
+    <ProjectDetailFull
+      description={project.description ?? undefined}
+      attachments={project.attachments}
       comments={
         <div className="flex flex-col gap-4">
           <DetailCommentInput />

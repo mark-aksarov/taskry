@@ -6,7 +6,7 @@ import { MessageInput } from "@/components/common/MessageInput";
 import { Attachment, Attachments } from "@/components/attachments/Attachments";
 import { Divider } from "@/components/ui";
 
-export function TaskDetailFullCommentInput() {
+export function DetailCommentInput() {
   let [files, setFiles] = useState<FileList | null>(null);
 
   return (

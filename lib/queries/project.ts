@@ -51,6 +51,19 @@ export const getProjectDetail = cache(async (id: number) => {
   });
 });
 
+export type GetProjectSummaryType = ThenArg<
+  ReturnType<typeof getProjectSummary>
+>;
+export const getProjectSummary = cache(async (id: number) => {
+  return await prisma.project.findUniqueOrThrow({
+    where: { id },
+    select: {
+      id: true,
+      title: true,
+    },
+  });
+});
+
 export type GetProjectListType = ThenArg<ReturnType<typeof getProjectList>>;
 export const getProjectList = cache(async (creatorId?: string) => {
   return await prisma.project.findMany({

@@ -1,8 +1,11 @@
 import { TaskDetailCard } from "./TaskDetailCard";
-import { TaskDetailForm } from "../TaskDetailForm";
-import { TaskDetailFull } from "../TaskDetailFull";
+import { TaskDetailForm, TaskDetailFormSkeleton } from "../TaskDetailForm";
+import { TaskDetailFull, TaskDetailFullSkeleton } from "../TaskDetailFull";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { DetailCardHeading } from "@/components/common/DetailCard";
+import {
+  DetailCardHeading,
+  DetailCardHeadingSkeleton,
+} from "@/components/common/DetailCard";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { Default as TaskDetailFormStory } from "../TaskDetailForm/TaskDetailForm.stories";
 import { Default as TaskDetailFullStory } from "../TaskDetailFull/TaskDetailFull.stories";
@@ -23,5 +26,13 @@ export const Default = {
     ),
     taskDetail: <TaskDetailFull {...TaskDetailFullStory.args} />,
     taskDetailForm: <TaskDetailForm {...TaskDetailFormStory.args} />,
+  },
+} satisfies Story;
+
+export const Skeleton = {
+  args: {
+    taskDetailCardHeading: <DetailCardHeadingSkeleton />,
+    taskDetail: <TaskDetailFullSkeleton />,
+    taskDetailForm: <TaskDetailFormSkeleton />,
   },
 } satisfies Story;

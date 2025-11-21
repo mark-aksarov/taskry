@@ -16,7 +16,7 @@ export function TaskDetailFormAssigneeSelect({
     <DetailFormSelect
       label={
         <DetailFormLabel className="w-[6rem]">
-          <CircleUserRound size={16} strokeWidth={1.5} absoluteStrokeWidth />{" "}
+          <CircleUserRound size={16} strokeWidth={1.5} absoluteStrokeWidth />
           Assigned To
         </DetailFormLabel>
       }
