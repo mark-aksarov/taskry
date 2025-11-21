@@ -26,28 +26,24 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    ProfileDetailContainer: () => (
-      <ProfileDetail {...ProfileDetailStory.args} />
-    ),
-    ProfileHeaderContainer: () => (
-      <ProfileHeader {...ProfileHeaderStory.args} />
-    ),
+    profileDetail: <ProfileDetail {...ProfileDetailStory.args} />,
+    profileHeader: <ProfileHeader {...ProfileHeaderStory.args} />,
   },
 } satisfies Story;
 
 export const Loading = {
   args: {
-    ProfileDetailContainer: () => <ProfileDetailSkeleton />,
-    ProfileHeaderContainer: () => <ProfileHeaderSkeleton />,
+    profileDetail: <ProfileDetailSkeleton />,
+    profileHeader: <ProfileHeaderSkeleton />,
   },
 } satisfies Story;
 
 export const WithoutSomeData = {
   args: {
-    ProfileDetailContainer: () => (
+    profileDetail: (
       <ProfileDetail {...ProfileDetailWithoutSomeDataStory.args} />
     ),
-    ProfileHeaderContainer: () => (
+    profileHeader: (
       <ProfileHeader {...ProfileHeaderWithoutSomeDataStory.args} />
     ),
   },

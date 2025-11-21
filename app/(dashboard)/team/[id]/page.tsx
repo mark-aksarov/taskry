@@ -1,13 +1,17 @@
-import { ProfilePage } from "./ProfilePage";
+import { ProfilePage } from "@/app/(dashboard)/profile/ProfilePage";
 import { ProfileHeaderServerContainer } from "@/components/profile/ProfileHeaderServerContainer";
 import { ProfileDetailServerContainer } from "@/components/profile/ProfileDetailServerContainer";
 
-export default async function AppProfilePage() {
-  const userId = "BKs42HvVDEZFoaJUmTqf1gTN0K8pUFjI";
+export default async function AppProfilePage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const { id } = await params;
 
   return (
     <ProfilePage
-      userId={userId}
+      userId={id}
       ProfileDetailContainer={ProfileDetailServerContainer}
       ProfileHeaderContainer={ProfileHeaderServerContainer}
     />

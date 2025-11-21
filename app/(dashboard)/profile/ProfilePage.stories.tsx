@@ -31,6 +31,9 @@ const meta = {
   beforeEach: () => {
     mocked(usePathname).mockReturnValue("/profile");
   },
+  args: {
+    userId: "BKs42HvVDEZFoaJUmTqf1gTN0K8pUFjI",
+  },
 } satisfies Meta<typeof ProfilePage>;
 
 export default meta;

@@ -1,8 +1,5 @@
 import { Card } from "@/components/common/Card";
 import { ProfileNavigationDesktop } from "@/components/profile/ProfileNavigationDesktop";
-import { ProfileHeaderSkeleton } from "@/components/profile/ProfileHeader";
-import { ProfileDetailSkeleton } from "@/components/profile/ProfileDetail";
-import { Suspense } from "react";
 import {
   ProfileCardLeft,
   ProfileCardHeader,
@@ -11,11 +8,11 @@ import {
 } from "../ProfileCard";
 
 export function ProfileDetailCard({
-  ProfileHeaderContainer,
-  ProfileDetailContainer,
+  profileHeader,
+  profileDetail,
 }: {
-  ProfileHeaderContainer: React.ComponentType;
-  ProfileDetailContainer: React.ComponentType;
+  profileHeader: React.ReactNode;
+  profileDetail: React.ReactNode;
 }) {
   return (
     <Card className="flex p-0 max-md:hidden">
@@ -23,17 +20,11 @@ export function ProfileDetailCard({
         <ProfileCardHeader>
           <ProfileCardTitle>Profile Information</ProfileCardTitle>
         </ProfileCardHeader>
-        <div className="p-6">
-          <Suspense fallback={<ProfileDetailSkeleton />}>
-            <ProfileDetailContainer />
-          </Suspense>
-        </div>
+        <div className="p-6">{profileDetail}</div>
       </ProfileCardLeft>
 
       <ProfileCardRight>
-        <Suspense fallback={<ProfileHeaderSkeleton />}>
-          <ProfileHeaderContainer />
-        </Suspense>
+        {profileHeader}
         <ProfileNavigationDesktop />
       </ProfileCardRight>
     </Card>

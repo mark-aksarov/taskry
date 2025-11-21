@@ -1,8 +1,12 @@
 import { ProfileDetail } from "../ProfileDetail";
 import { getUserDetails } from "@/lib/queries/user";
 
-export async function ProfileDetailServerContainer() {
-  const user = await getUserDetails("BKs42HvVDEZFoaJUmTqf1gTN0K8pUFjI");
+export async function ProfileDetailServerContainer({
+  userId,
+}: {
+  userId: string;
+}) {
+  const user = await getUserDetails(userId);
 
   return (
     <ProfileDetail

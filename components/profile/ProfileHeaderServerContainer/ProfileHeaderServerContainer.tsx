@@ -20,8 +20,12 @@ const getUser = cache(async (userId: string) => {
   });
 });
 
-export async function ProfileHeaderServerContainer() {
-  const user = await getUser("BKs42HvVDEZFoaJUmTqf1gTN0K8pUFjI");
+export async function ProfileHeaderServerContainer({
+  userId,
+}: {
+  userId: string;
+}) {
+  const user = await getUser(userId);
 
   return (
     <ProfileHeader
