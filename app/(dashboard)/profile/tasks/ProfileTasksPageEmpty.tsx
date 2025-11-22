@@ -1,64 +1,22 @@
-import {
-  ToolbarMobileBottom,
-  ToolbarMobileHeading,
-  ToolbarMobileTop,
-} from "@/components/common/Toolbar";
-
-import {
-  ProfileCard,
-  ProfileCardHeader,
-  ProfileCardLeft,
-  ProfileCardRight,
-  ProfileCardTitle,
-} from "@/components/profile/ProfileCard";
-
-import { PageGrid } from "@/components/common/PageGrid";
-import { PageContainer } from "@/components/common/PageContainer";
-import { ProfileTasksEmptySection } from "@/components/profile/ProfileTasksEmptySection";
+import { UserTasksPageEmptyLayout } from "@/components/users/UserTasksPageLayout";
+import { ProfileNavigationMobile } from "@/components/users/ProfileNavigationMobile";
+import { ProfileNavigationDesktop } from "@/components/users/ProfileNavigationDesktop";
 
 interface ProfileTasksPageEmptyProps {
   userId: string;
-  ProfileHeaderContainer: React.ComponentType<{ userId: string }>;
-  profileNavigationDesktop: React.ReactNode;
-  profileNavigationMobile: React.ReactNode;
+  UserHeaderContainer: React.ComponentType<{ userId: string }>;
 }
 
 export function ProfileTasksPageEmpty({
   userId,
-  ProfileHeaderContainer,
-  profileNavigationDesktop,
-  profileNavigationMobile,
+  UserHeaderContainer,
 }: ProfileTasksPageEmptyProps) {
   return (
-    <>
-      <PageContainer className="max-md:hidden">
-        <ProfileCard>
-          <ProfileCardLeft>
-            <ProfileCardHeader>
-              <ProfileCardTitle>Assigned tasks</ProfileCardTitle>
-            </ProfileCardHeader>
-
-            <ProfileTasksEmptySection />
-          </ProfileCardLeft>
-
-          <ProfileCardRight>
-            <ProfileHeaderContainer userId={userId} />
-            {profileNavigationDesktop}
-          </ProfileCardRight>
-        </ProfileCard>
-      </PageContainer>
-
-      <PageContainer fullscreen className="md:hidden">
-        <PageGrid className="flex-auto">
-          <ToolbarMobileTop>
-            <ToolbarMobileHeading>Assigned tasks</ToolbarMobileHeading>
-          </ToolbarMobileTop>
-
-          <ToolbarMobileBottom>{profileNavigationMobile}</ToolbarMobileBottom>
-
-          <ProfileTasksEmptySection />
-        </PageGrid>
-      </PageContainer>
-    </>
+    <UserTasksPageEmptyLayout
+      userId={userId}
+      UserHeaderContainer={UserHeaderContainer}
+      navigationDesktop={<ProfileNavigationDesktop />}
+      navigationMobile={<ProfileNavigationMobile />}
+    />
   );
 }

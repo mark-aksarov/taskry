@@ -7,37 +7,37 @@ import { Suspense } from "react";
 import { Card } from "@/components/common/Card";
 import { PageGrid } from "@/components/common/PageGrid";
 import { PageContainer } from "@/components/common/PageContainer";
-import { ProfileHeaderSkeleton } from "@/components/profile/ProfileHeader";
-import { ProfileDetailSkeleton } from "@/components/profile/ProfileDetail";
-import { ProfileDetailCard } from "@/components/profile/ProfileDetailCard";
-import { UserProfileNavigationMobile } from "@/components/users/UserProfileNavigationMobile";
-import { UserProfileNavigationDesktop } from "@/components/users/UserProfileNavigationDesktop";
+import { UserHeaderSkeleton } from "@/components/users/UserHeader";
+import { UserDetailSkeleton } from "@/components/users/UserDetail";
+import { UserDetailCard } from "@/components/users/UserDetailCard";
+import { UserNavigationMobile } from "@/components/users/UserNavigationMobile";
+import { UserNavigationDesktop } from "@/components/users/UserNavigationDesktop";
 
 interface TeamProfilePageProps {
   userId: string;
-  ProfileDetailContainer: React.ComponentType<{ userId: string }>;
-  ProfileHeaderContainer: React.ComponentType<{ userId: string }>;
+  UserDetailContainer: React.ComponentType<{ userId: string }>;
+  UserHeaderContainer: React.ComponentType<{ userId: string }>;
 }
 
 export function TeamProfilePage({
   userId,
-  ProfileDetailContainer,
-  ProfileHeaderContainer,
+  UserDetailContainer,
+  UserHeaderContainer,
 }: TeamProfilePageProps) {
   return (
     <PageContainer>
-      <ProfileDetailCard
+      <UserDetailCard
         profileDetail={
-          <Suspense fallback={<ProfileDetailSkeleton />}>
-            <ProfileDetailContainer userId={userId} />
+          <Suspense fallback={<UserDetailSkeleton />}>
+            <UserDetailContainer userId={userId} />
           </Suspense>
         }
         profileHeader={
-          <Suspense fallback={<ProfileHeaderSkeleton />}>
-            <ProfileHeaderContainer userId={userId} />
+          <Suspense fallback={<UserHeaderSkeleton />}>
+            <UserHeaderContainer userId={userId} />
           </Suspense>
         }
-        profileNavigationDesktop={<UserProfileNavigationDesktop />}
+        navigationDesktop={<UserNavigationDesktop />}
       />
 
       <PageGrid className="md:hidden">
@@ -46,15 +46,15 @@ export function TeamProfilePage({
         </ToolbarMobileTop>
 
         <ToolbarMobileBottom>
-          <UserProfileNavigationMobile />
+          <UserNavigationMobile />
         </ToolbarMobileBottom>
 
         <Card className="flex flex-col gap-6">
-          <Suspense fallback={<ProfileHeaderSkeleton />}>
-            <ProfileHeaderContainer userId={userId} />
+          <Suspense fallback={<UserHeaderSkeleton />}>
+            <UserHeaderContainer userId={userId} />
           </Suspense>
-          <Suspense fallback={<ProfileDetailSkeleton />}>
-            <ProfileDetailContainer userId={userId} />
+          <Suspense fallback={<UserDetailSkeleton />}>
+            <UserDetailContainer userId={userId} />
           </Suspense>
         </Card>
       </PageGrid>

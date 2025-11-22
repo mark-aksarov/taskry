@@ -45,7 +45,6 @@ export async function AssignedTasksServerContainer() {
                 : undefined
             }
             comments={task._count.comments}
-            subtasks={task._count.subtasks}
           />
         ))}
       </TaskList>

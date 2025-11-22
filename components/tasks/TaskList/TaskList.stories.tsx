@@ -1,15 +1,23 @@
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { TaskList } from "./TaskList";
-import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { TaskListItem } from "../TaskListItem";
-import { withTaskDetailCompact } from "../TaskDetailCompactClientContainer/decorators";
+import { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withTaskComments } from "../TaskCommentsClientContainer/decorators";
+import { withTaskDetailCompact } from "../TaskDetailCompactClientContainer/decorators";
+import { withUserDetail } from "@/components/users/UserDetailClientContainer/decorators";
+import { withProjectDetailCompact } from "@/components/projects/ProjectDetailCompactClientContainer/decorators";
 
 const meta = {
   title: "Components/tasks/TaskList",
   component: TaskList,
   tags: ["autodocs"],
-  decorators: [withTaskDetailCompact, withTaskComments, withThemedBackground],
+  decorators: [
+    withTaskDetailCompact,
+    withProjectDetailCompact,
+    withUserDetail,
+    withTaskComments,
+    withThemedBackground,
+  ],
 } satisfies Meta<typeof TaskList>;
 
 export default meta;
@@ -28,7 +36,6 @@ export const Default = {
           status={{ id: "pending", name: "Pending" }}
           assignee={{ id: "user1", imageUrl: "/man.jpg", fullName: "John Doe" }}
           comments={10}
-          subtasks={6}
           showCheckbox
         />
 
@@ -41,7 +48,6 @@ export const Default = {
           status={{ id: "active", name: "Active" }}
           assignee={undefined}
           comments={22}
-          subtasks={16}
           showCheckbox
         />
 
@@ -54,7 +60,6 @@ export const Default = {
           status={{ id: "completed", name: "Completed" }}
           assignee={{ id: "user3", fullName: "Jane Doe" }}
           comments={2}
-          subtasks={2}
           showCheckbox
         />
 
@@ -67,7 +72,6 @@ export const Default = {
           status={{ id: "pending", name: "Pending" }}
           assignee={{ id: "user4", imageUrl: "/man.jpg", fullName: "John Doe" }}
           comments={12}
-          subtasks={32}
           showCheckbox
         />
 
@@ -80,7 +84,6 @@ export const Default = {
           status={{ id: "active", name: "Active" }}
           assignee={{ id: "user5", imageUrl: "/man.jpg", fullName: "John Doe" }}
           comments={15}
-          subtasks={8}
           showCheckbox
         />
 
@@ -93,7 +96,6 @@ export const Default = {
           status={{ id: "completed", name: "Completed" }}
           assignee={{ id: "user6", imageUrl: "/man.jpg", fullName: "John Doe" }}
           comments={9}
-          subtasks={16}
           showCheckbox
         />
 
@@ -106,7 +108,6 @@ export const Default = {
           status={{ id: "completed", name: "Completed" }}
           assignee={{ id: "user7", imageUrl: "/man.jpg", fullName: "John Doe" }}
           comments={12}
-          subtasks={22}
           showCheckbox
         />
 
@@ -119,7 +120,6 @@ export const Default = {
           status={{ id: "active", name: "Active" }}
           assignee={{ id: "user8", imageUrl: "/man.jpg", fullName: "John Doe" }}
           comments={10}
-          subtasks={6}
           showCheckbox
         />
 
@@ -132,7 +132,6 @@ export const Default = {
           status={{ id: "pending", name: "Pending" }}
           assignee={{ id: "user9", fullName: "Jane Doe" }}
           comments={23}
-          subtasks={12}
           showCheckbox
         />
 
@@ -145,7 +144,6 @@ export const Default = {
           status={{ id: "completed", name: "Completed" }}
           assignee={undefined}
           comments={13}
-          subtasks={23}
           showCheckbox
         />
       </TaskList>

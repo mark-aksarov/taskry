@@ -1,87 +1,28 @@
-import {
-  ProfileCard,
-  ProfileCardLeft,
-  ProfileCardRight,
-  ProfileCardTitle,
-  ProfileCardHeader,
-} from "@/components/profile/ProfileCard";
+import { UserTasksPageLayout } from "@/components/users/UserTasksPageLayout";
+import { ProfileNavigationMobile } from "@/components/users/ProfileNavigationMobile";
+import { ProfileNavigationDesktop } from "@/components/users/ProfileNavigationDesktop";
 
-import {
-  ToolbarMobileTop,
-  ToolbarMobileBottom,
-  ToolbarMobileHeading,
-} from "@/components/common/Toolbar";
-
-import { Suspense } from "react";
-import { PageGrid } from "@/components/common/PageGrid";
-import { PageContainer } from "@/components/common/PageContainer";
-import { TaskFormBaseSkeleton } from "@/components/tasks/TaskFormBase";
-import { NewTaskModalTrigger } from "@/components/tasks/NewTaskModalTrigger";
-import { TaskToolbarSortingMenuTrigger } from "@/components/tasks/TaskToolbarSortingMenuTrigger";
-import { TaskToolbarActionsMenuTrigger } from "@/components/tasks/TaskToolbarActionsMenuTrigger";
-
-interface ProfileTasksPageProps {
+interface TeamProfileTasksPageProps {
   userId: string;
-  ProfileTasksContainer: React.ComponentType<{ userId: string }>;
-  ProfileHeaderContainer: React.ComponentType<{ userId: string }>;
+  UserTasksContainer: React.ComponentType<{ userId: string }>;
+  UserHeaderContainer: React.ComponentType<{ userId: string }>;
   NewTaskFormContainer: React.ComponentType;
-  profileNavigationDesktop: React.ReactNode;
-  profileNavigationMobile: React.ReactNode;
 }
 
 export function ProfileTasksPage({
   userId,
-  ProfileTasksContainer,
-  ProfileHeaderContainer,
+  UserTasksContainer,
+  UserHeaderContainer,
   NewTaskFormContainer,
-  profileNavigationDesktop,
-  profileNavigationMobile,
-}: ProfileTasksPageProps) {
+}: TeamProfileTasksPageProps) {
   return (
-    <>
-      <PageContainer className="max-md:hidden">
-        <ProfileCard>
-          <ProfileCardLeft>
-            <ProfileCardHeader>
-              <ProfileCardTitle>Assigned tasks</ProfileCardTitle>
-              <div className="flex gap-4">
-                <TaskToolbarSortingMenuTrigger />
-                <TaskToolbarActionsMenuTrigger />
-                <NewTaskModalTrigger
-                  newTaskForm={
-                    <Suspense fallback={<TaskFormBaseSkeleton />}>
-                      <NewTaskFormContainer />
-                    </Suspense>
-                  }
-                />
-              </div>
-            </ProfileCardHeader>
-            <ProfileTasksContainer userId={userId} />
-          </ProfileCardLeft>
-
-          <ProfileCardRight>
-            <ProfileHeaderContainer userId={userId} />
-            {profileNavigationDesktop}
-          </ProfileCardRight>
-        </ProfileCard>
-      </PageContainer>
-
-      <PageContainer className="md:hidden">
-        <PageGrid>
-          <ToolbarMobileTop>
-            <ToolbarMobileHeading>Assigned tasks</ToolbarMobileHeading>
-            <TaskToolbarSortingMenuTrigger />
-            <TaskToolbarActionsMenuTrigger />
-          </ToolbarMobileTop>
-
-          <ToolbarMobileBottom>
-            {profileNavigationMobile}
-            <NewTaskModalTrigger newTaskForm={<NewTaskFormContainer />} />
-          </ToolbarMobileBottom>
-
-          <ProfileTasksContainer userId={userId} />
-        </PageGrid>
-      </PageContainer>
-    </>
+    <UserTasksPageLayout
+      userId={userId}
+      UserTasksContainer={UserTasksContainer}
+      UserHeaderContainer={UserHeaderContainer}
+      NewTaskFormContainer={NewTaskFormContainer}
+      navigationDesktop={<ProfileNavigationDesktop />}
+      navigationMobile={<ProfileNavigationMobile />}
+    />
   );
 }

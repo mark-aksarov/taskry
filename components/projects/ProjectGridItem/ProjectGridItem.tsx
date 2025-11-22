@@ -31,6 +31,8 @@ import { ProjectDetailBottomSheet } from "../ProjectDetailBottomSheet";
 import { getProjectStatusBadgeColor } from "../getProjectStatusBadgeColor";
 import { ProjectCommentsModal } from "../ProjectCommentsModal";
 import { UnknownUser } from "@/components/common/UnknownUser";
+import { UserDetailModal } from "@/components/users/UserDetailModal";
+import { UserDetailBottomSheet } from "@/components/users/UserDetailBottomSheet";
 
 export interface ProjectGridItemProps {
   id: number;
@@ -71,6 +73,14 @@ export function ProjectGridItem({
     });
   }, [deadline, locale]);
 
+  const creatorImg = creator?.imageUrl ? (
+    <ImageContainer className="h-9 w-9">
+      <Image fill src={creator.imageUrl} alt={creator.fullName} />
+    </ImageContainer>
+  ) : (
+    <UnknownUser className="h-9 w-9" />
+  );
+
   return (
     <ProjectGridItemLayout
       checkboxSlot={<Checkbox aria-label={title} />}
@@ -96,27 +106,42 @@ export function ProjectGridItem({
         <GridItemInfo className="flex-auto">
           <GridItemTitle>
             <ItemBaseDetailModalTrigger
-              title={title}
               modal={<ProjectDetailModal projectId={id} />}
-            />
+              className="truncate"
+            >
+              {title}
+            </ItemBaseDetailModalTrigger>
+
             <ItemBaseDetailBottomSheetTrigger
-              title={title}
               renderBottomSheet={(state) => (
                 <ProjectDetailBottomSheet projectId={id} state={state} />
               )}
-            />
+              className="truncate"
+            >
+              {title}
+            </ItemBaseDetailBottomSheetTrigger>
           </GridItemTitle>
 
           <GridItemText>{`Deadline on ${formattedDeadline}`}</GridItemText>
         </GridItemInfo>
       }
       creatorImageSlot={
-        creator?.imageUrl ? (
-          <Link href={`/users/${creator.id}`}>
-            <ImageContainer className="h-9 w-9">
-              <Image fill src={creator.imageUrl} alt={creator.fullName} />
-            </ImageContainer>
-          </Link>
+        creator ? (
+          <>
+            <ItemBaseDetailModalTrigger
+              modal={<UserDetailModal userId={creator.id} />}
+            >
+              {creatorImg}
+            </ItemBaseDetailModalTrigger>
+
+            <ItemBaseDetailBottomSheetTrigger
+              renderBottomSheet={(state) => (
+                <UserDetailBottomSheet userId={creator.id} state={state} />
+              )}
+            >
+              {creatorImg}
+            </ItemBaseDetailBottomSheetTrigger>
+          </>
         ) : (
           <UnknownUser className="h-9 w-9" />
         )

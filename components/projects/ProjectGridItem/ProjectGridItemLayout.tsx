@@ -30,7 +30,7 @@ export function ProjectGridItemLayout({
         {creatorImageSlot}
       </GridItemRow>
 
-      <GridItemRow>
+      <GridItemRow className="gap-2">
         {commentsSlot}
         {statusSlot}
       </GridItemRow>

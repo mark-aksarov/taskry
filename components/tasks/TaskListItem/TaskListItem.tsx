@@ -3,16 +3,14 @@
 import Image from "next/image";
 import { useMemo } from "react";
 import { Item } from "react-stately";
+
 import {
   Check,
-  CheckCheck,
-  CircleEllipsis,
   Clock,
-  MessageSquare,
   Trash,
+  CircleEllipsis,
+  MessageSquare,
 } from "lucide-react";
-
-import { Button, Checkbox, Link, RACDialogTrigger } from "@/components/ui";
 
 import {
   ListItemInfo,
@@ -20,20 +18,25 @@ import {
   ListItemTitle,
 } from "@/components/common/List";
 
-import { TaskListItemLayout } from "./TaskListItemLayout";
-import { ImageContainer } from "@/components/common/ImageContainer";
-import { TaskDetailModal } from "../TaskDetailModal";
-import { TaskDetailBottomSheet } from "../TaskDetailBottomSheet";
 import {
-  ItemBaseActionMenuTrigger,
   ItemBaseBadge,
   ItemBaseButton,
-  ItemBaseDetailBottomSheetTrigger,
+  ItemBaseActionMenuTrigger,
   ItemBaseDetailModalTrigger,
+  ItemBaseDetailBottomSheetTrigger,
 } from "@/components/common/ItemBase";
-import { getTaskStatusBadgeColor } from "../getTaskStatusBadgeColor";
+
+import { TaskDetailModal } from "../TaskDetailModal";
+import { TaskListItemLayout } from "./TaskListItemLayout";
+import { Checkbox, RACDialogTrigger } from "@/components/ui";
+import { TaskDetailBottomSheet } from "../TaskDetailBottomSheet";
+import { ImageContainer } from "@/components/common/ImageContainer";
+
 import { TaskCommentsModal } from "../TaskCommentsModal";
 import { UnknownUser } from "@/components/common/UnknownUser";
+import { UserDetailModal } from "@/components/users/UserDetailModal";
+import { getTaskStatusBadgeColor } from "../getTaskStatusBadgeColor";
+import { ProjectDetailModal } from "@/components/projects/ProjectDetailModal";
 
 interface TaskListItemProps {
   id: number;
@@ -57,7 +60,6 @@ interface TaskListItemProps {
     name: string;
   };
   comments: number;
-  subtasks: number;
   showCheckbox?: boolean;
 }
 
@@ -70,7 +72,6 @@ export const TaskListItem = ({
   project,
   status,
   comments,
-  subtasks,
   showCheckbox,
 }: TaskListItemProps) => {
   const locale = "en-GB";
@@ -85,6 +86,14 @@ export const TaskListItem = ({
     });
   }, [deadline, locale]);
 
+  const assigneeImg = assignee?.imageUrl ? (
+    <ImageContainer className="h-9 w-9">
+      <Image fill src={assignee.imageUrl} alt={assignee.fullName} />
+    </ImageContainer>
+  ) : (
+    <UnknownUser className="h-9 w-9" />
+  );
+
   return (
     <TaskListItemLayout
       checkboxSlot={showCheckbox && <Checkbox aria-label="task checkbox" />}
@@ -92,36 +101,46 @@ export const TaskListItem = ({
         <ListItemInfo>
           <ListItemTitle>
             <ItemBaseDetailModalTrigger
-              title={title}
               modal={<TaskDetailModal taskId={id} />}
-            />
+              className="truncate"
+            >
+              {title}
+            </ItemBaseDetailModalTrigger>
+
             <ItemBaseDetailBottomSheetTrigger
-              title={title}
               renderBottomSheet={(state) => (
                 <TaskDetailBottomSheet taskId={id} state={state} />
               )}
-            />
+              className="truncate"
+            >
+              {title}
+            </ItemBaseDetailBottomSheetTrigger>
           </ListItemTitle>
           <ListItemText>{`Deadline on ${formattedDeadline}`}</ListItemText>
         </ListItemInfo>
       }
       assigneeSlot={
         <>
-          {assignee?.imageUrl ? (
-            <Link className="@max-2xl:hidden" href={`/users/${assignee.id}`}>
-              <ImageContainer className="h-9 w-9">
-                <Image fill src={assignee.imageUrl} alt={assignee.fullName} />
-              </ImageContainer>
-            </Link>
+          {assignee ? (
+            <ItemBaseDetailModalTrigger
+              modal={<UserDetailModal userId={assignee.id} />}
+              className="@max-2xl:hidden"
+            >
+              {assigneeImg}
+            </ItemBaseDetailModalTrigger>
           ) : (
             <UnknownUser className="h-9 w-9 @max-2xl:hidden" />
           )}
+
           <ListItemInfo className="@max-2xl:hidden">
             <ListItemTitle>
               {assignee ? (
-                <Link className="block truncate" href={`/users=${assignee.id}`}>
+                <ItemBaseDetailModalTrigger
+                  modal={<UserDetailModal userId={assignee.id} />}
+                  className="truncate"
+                >
                   {assignee.fullName}
-                </Link>
+                </ItemBaseDetailModalTrigger>
               ) : (
                 "Unknown assignee"
               )}
@@ -132,14 +151,7 @@ export const TaskListItem = ({
       }
       categorySlot={
         <ListItemInfo className="@max-3xl:hidden">
-          <ListItemTitle>
-            <Link
-              className="block truncate"
-              href={`/categories/${category.id}`}
-            >
-              {category.name}
-            </Link>
-          </ListItemTitle>
+          <ListItemTitle>{category.name}</ListItemTitle>
 
           <ListItemText>Category</ListItemText>
         </ListItemInfo>
@@ -147,9 +159,12 @@ export const TaskListItem = ({
       projectSlot={
         <ListItemInfo className="@max-4xl:hidden">
           <ListItemTitle>
-            <Link className="block truncate" href={`/projects/${project.id}`}>
+            <ItemBaseDetailModalTrigger
+              modal={<ProjectDetailModal projectId={project.id} />}
+              className="truncate"
+            >
               {project.title}
-            </Link>
+            </ItemBaseDetailModalTrigger>
           </ListItemTitle>
           <ListItemText>Project</ListItemText>
         </ListItemInfo>

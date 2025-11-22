@@ -7,38 +7,38 @@ import { Suspense } from "react";
 import { Card } from "@/components/common/Card";
 import { PageGrid } from "@/components/common/PageGrid";
 import { PageContainer } from "@/components/common/PageContainer";
-import { ProfileActions } from "@/components/profile/ProfileActions";
-import { ProfileHeaderSkeleton } from "@/components/profile/ProfileHeader";
-import { ProfileDetailSkeleton } from "@/components/profile/ProfileDetail";
-import { ProfileDetailCard } from "@/components/profile/ProfileDetailCard";
-import { ProfileNavigationMobile } from "@/components/profile/ProfileNavigationMobile";
-import { ProfileNavigationDesktop } from "@/components/profile/ProfileNavigationDesktop";
+import { ProfileActions } from "@/components/users/ProfileActions";
+import { UserHeaderSkeleton } from "@/components/users/UserHeader";
+import { UserDetailSkeleton } from "@/components/users/UserDetail";
+import { UserDetailCard } from "@/components/users/UserDetailCard";
+import { ProfileNavigationMobile } from "@/components/users/ProfileNavigationMobile";
+import { ProfileNavigationDesktop } from "@/components/users/ProfileNavigationDesktop";
 
 interface ProfilePageProps {
   userId: string;
-  ProfileDetailContainer: React.ComponentType<{ userId: string }>;
-  ProfileHeaderContainer: React.ComponentType<{ userId: string }>;
+  UserDetailContainer: React.ComponentType<{ userId: string }>;
+  UserHeaderContainer: React.ComponentType<{ userId: string }>;
 }
 
 export function ProfilePage({
   userId,
-  ProfileDetailContainer,
-  ProfileHeaderContainer,
+  UserDetailContainer,
+  UserHeaderContainer,
 }: ProfilePageProps) {
   return (
     <PageContainer>
-      <ProfileDetailCard
+      <UserDetailCard
         profileDetail={
-          <Suspense fallback={<ProfileDetailSkeleton />}>
-            <ProfileDetailContainer userId={userId} />
+          <Suspense fallback={<UserDetailSkeleton />}>
+            <UserDetailContainer userId={userId} />
           </Suspense>
         }
         profileHeader={
-          <Suspense fallback={<ProfileHeaderSkeleton />}>
-            <ProfileHeaderContainer userId={userId} />
+          <Suspense fallback={<UserHeaderSkeleton />}>
+            <UserHeaderContainer userId={userId} />
           </Suspense>
         }
-        profileNavigationDesktop={<ProfileNavigationDesktop />}
+        navigationDesktop={<ProfileNavigationDesktop />}
       />
 
       <PageGrid className="md:hidden">
@@ -50,16 +50,19 @@ export function ProfilePage({
           <ProfileNavigationMobile />
         </ToolbarMobileBottom>
 
-        <Card className="flex flex-col gap-6 px-1.5">
-          <Suspense fallback={<ProfileHeaderSkeleton />}>
-            <ProfileHeaderContainer userId={userId} />
+        <div className="flex flex-col px-1.5">
+          <Suspense fallback={<UserHeaderSkeleton />}>
+            <UserHeaderContainer userId={userId} />
           </Suspense>
+        </div>
+
+        <Card className="flex flex-col gap-6 px-1.5">
           <ProfileActions />
         </Card>
 
         <Card className="flex flex-col gap-6">
-          <Suspense fallback={<ProfileDetailSkeleton />}>
-            <ProfileDetailContainer userId={userId} />
+          <Suspense fallback={<UserDetailSkeleton />}>
+            <UserDetailContainer userId={userId} />
           </Suspense>
         </Card>
       </PageGrid>

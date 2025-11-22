@@ -1,6 +1,6 @@
 import { ProfilePage } from "./ProfilePage";
-import { ProfileHeaderServerContainer } from "@/components/profile/ProfileHeaderServerContainer";
-import { ProfileDetailServerContainer } from "@/components/profile/ProfileDetailServerContainer";
+import { UserHeaderServerContainer } from "@/components/users/UserHeaderServerContainer";
+import { UserDetailServerContainer } from "@/components/users/UserDetailServerContainer";
 
 export default async function AppProfilePage() {
   const userId = "BKs42HvVDEZFoaJUmTqf1gTN0K8pUFjI";
@@ -8,8 +8,8 @@ export default async function AppProfilePage() {
   return (
     <ProfilePage
       userId={userId}
-      ProfileDetailContainer={ProfileDetailServerContainer}
-      ProfileHeaderContainer={ProfileHeaderServerContainer}
+      UserDetailContainer={UserDetailServerContainer}
+      UserHeaderContainer={UserHeaderServerContainer}
     />
   );
 }

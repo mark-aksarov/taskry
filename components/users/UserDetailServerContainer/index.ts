@@ -1,0 +1,1 @@
+export { UserDetailServerContainer } from "./UserDetailServerContainer";

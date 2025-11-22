@@ -1,6 +1,7 @@
-import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { UserGridItem } from "./UserGridItem";
+import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { withUserDetail } from "../UserDetailClientContainer/decorators";
 
 const meta = {
   title: "Components/users/UserGridItem",
@@ -8,10 +9,11 @@ const meta = {
   tags: ["autodocs"],
   decorators: [
     (Story) => (
-      <div className="max-w-[300px]">
+      <div className="max-w-full md:w-[300px]">
         <Story />
       </div>
     ),
+    withUserDetail,
     withThemedBackground,
   ],
 } satisfies Meta<typeof UserGridItem>;

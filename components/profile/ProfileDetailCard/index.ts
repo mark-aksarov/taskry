@@ -1,1 +1,0 @@
-export { ProfileDetailCard } from "./ProfileDetailCard";

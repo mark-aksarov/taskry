@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo } from "react";
-import { Button, Link, RACDialogTrigger } from "@/components/ui";
+import { Link, RACDialogTrigger } from "@/components/ui";
 import {
   Check,
   CircleEllipsis,
@@ -31,6 +31,7 @@ import { ProjectDetailBottomSheet } from "../ProjectDetailBottomSheet";
 import { getProjectStatusBadgeColor } from "../getProjectStatusBadgeColor";
 import { ProjectCommentsModal } from "../ProjectCommentsModal";
 import { UnknownUser } from "@/components/common/UnknownUser";
+import { UserDetailModal } from "@/components/users/UserDetailModal";
 
 export interface ProjectListItemProps {
   id: number;
@@ -85,6 +86,14 @@ export const ProjectListItem = ({
     });
   }, [deadline, locale]);
 
+  const creatorImg = creator?.imageUrl ? (
+    <ImageContainer className="h-9 w-9">
+      <Image fill src={creator.imageUrl} alt={creator.fullName} />
+    </ImageContainer>
+  ) : (
+    <UnknownUser className="h-9 w-9" />
+  );
+
   return (
     <ProjectListItemLayout
       checkboxSlot={showCheckbox && <Checkbox aria-label="project checkbox" />}
@@ -92,27 +101,33 @@ export const ProjectListItem = ({
         <ListItemInfo>
           <ListItemTitle>
             <ItemBaseDetailModalTrigger
-              title={title}
               modal={<ProjectDetailModal projectId={id} />}
-            />
+              className="truncate"
+            >
+              {title}
+            </ItemBaseDetailModalTrigger>
+
             <ItemBaseDetailBottomSheetTrigger
-              title={title}
               renderBottomSheet={(state) => (
                 <ProjectDetailBottomSheet projectId={id} state={state} />
               )}
-            />
+              className="truncate"
+            >
+              {title}
+            </ItemBaseDetailBottomSheetTrigger>
           </ListItemTitle>
           <ListItemText>{`Deadline on ${formattedDeadline}`}</ListItemText>
         </ListItemInfo>
       }
       creatorSlot={
         <>
-          {creator?.imageUrl ? (
-            <Link className="@max-2xl:hidden" href={`/users/${creator.id}`}>
-              <ImageContainer className="h-9 w-9">
-                <Image fill src={creator.imageUrl} alt={creator.fullName} />
-              </ImageContainer>
-            </Link>
+          {creator ? (
+            <ItemBaseDetailModalTrigger
+              modal={<UserDetailModal userId={creator.id} />}
+              className="@max-2xl:hidden"
+            >
+              {creatorImg}
+            </ItemBaseDetailModalTrigger>
           ) : (
             <UnknownUser className="h-9 w-9 @max-2xl:hidden" />
           )}
@@ -120,9 +135,12 @@ export const ProjectListItem = ({
           <ListItemInfo className="@max-2xl:hidden">
             <ListItemTitle>
               {creator ? (
-                <Link className="block truncate" href={`/users=${creator.id}`}>
+                <ItemBaseDetailModalTrigger
+                  modal={<UserDetailModal userId={creator.id} />}
+                  className="truncate"
+                >
                   {creator.fullName}
-                </Link>
+                </ItemBaseDetailModalTrigger>
               ) : (
                 "Unknown creator"
               )}
@@ -134,14 +152,9 @@ export const ProjectListItem = ({
       customerSlot={
         <>
           {customer?.imageUrl ? (
-            <Link
-              className="@max-3xl:hidden"
-              href={`/customers/${customer.id}`}
-            >
-              <ImageContainer className="h-9 w-9">
-                <Image fill src={customer.imageUrl} alt={customer.fullName} />
-              </ImageContainer>
-            </Link>
+            <ImageContainer className="h-9 w-9 @max-3xl:hidden">
+              <Image fill src={customer.imageUrl} alt={customer.fullName} />
+            </ImageContainer>
           ) : (
             <UnknownUser className="h-9 w-9 @max-3xl:hidden" />
           )}
@@ -166,14 +179,7 @@ export const ProjectListItem = ({
       }
       categorySlot={
         <ListItemInfo className="@max-4xl:hidden">
-          <ListItemTitle>
-            <Link
-              className="block truncate"
-              href={`/categories=${category.id}`}
-            >
-              {category.name}
-            </Link>
-          </ListItemTitle>
+          <ListItemTitle>{category.name}</ListItemTitle>
 
           <ListItemText>Category</ListItemText>
         </ListItemInfo>

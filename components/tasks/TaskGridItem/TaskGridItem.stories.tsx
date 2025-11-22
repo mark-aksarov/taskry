@@ -3,6 +3,7 @@ import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withTaskComments } from "@/components/tasks/TaskCommentsClientContainer/decorators";
 import { withTaskDetailCompact } from "@/components/tasks/TaskDetailCompactClientContainer/decorators";
+import { withUserDetail } from "@/components/users/UserDetailClientContainer/decorators";
 
 const meta = {
   title: "Components/tasks/TaskGridItem",
@@ -16,6 +17,7 @@ const meta = {
     ),
     withTaskDetailCompact,
     withTaskComments,
+    withUserDetail,
     withThemedBackground,
   ],
 } satisfies Meta<typeof TaskGridItem>;

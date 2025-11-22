@@ -1,11 +1,9 @@
 import { getTaskList } from "@/lib/queries/task";
-import { ProfileTasksPage } from "@/app/(dashboard)/profile/tasks/ProfileTasksPage";
+import { TeamProfileTasksPage } from "./TeamProfileTasksPage";
+import { TeamProfileTasksPageEmpty } from "./TeamProfileTasksPageEmpty";
+import { UserTasksServerContainer } from "@/components/users/UserTasksServerContainer";
+import { UserHeaderServerContainer } from "@/components/users/UserHeaderServerContainer";
 import { NewTaskFormServerContainer } from "@/components/tasks/NewTaskFormServerContainer";
-import { UserProfileNavigationMobile } from "@/components/users/UserProfileNavigationMobile";
-import { ProfileTasksPageEmpty } from "@/app/(dashboard)/profile/tasks/ProfileTasksPageEmpty";
-import { UserProfileNavigationDesktop } from "@/components/users/UserProfileNavigationDesktop";
-import { ProfileTasksServerContainer } from "@/components/profile/ProfileTasksServerContainer";
-import { ProfileHeaderServerContainer } from "@/components/profile/ProfileHeaderServerContainer";
 
 export default async function AppProfileTasksPage({
   params,
@@ -17,22 +15,18 @@ export default async function AppProfileTasksPage({
 
   if (!tasks.length)
     return (
-      <ProfileTasksPageEmpty
+      <TeamProfileTasksPageEmpty
         userId={id}
-        ProfileHeaderContainer={ProfileHeaderServerContainer}
-        profileNavigationDesktop={<UserProfileNavigationDesktop />}
-        profileNavigationMobile={<UserProfileNavigationMobile />}
+        UserHeaderContainer={UserHeaderServerContainer}
       />
     );
 
   return (
-    <ProfileTasksPage
+    <TeamProfileTasksPage
       userId={id}
-      ProfileTasksContainer={ProfileTasksServerContainer}
-      ProfileHeaderContainer={ProfileHeaderServerContainer}
+      UserTasksContainer={UserTasksServerContainer}
+      UserHeaderContainer={UserHeaderServerContainer}
       NewTaskFormContainer={NewTaskFormServerContainer}
-      profileNavigationDesktop={<UserProfileNavigationDesktop />}
-      profileNavigationMobile={<UserProfileNavigationMobile />}
     />
   );
 }

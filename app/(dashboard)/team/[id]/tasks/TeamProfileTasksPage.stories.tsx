@@ -1,20 +1,23 @@
+import {
+  Default as UserTasksPageLayoutDefault,
+  Loading as UserTasksPageLayoutLoading,
+  WithNoTasks as UserTasksPageLayoutWithNoTasks,
+} from "@/components/users/UserTasksPageLayout/UserTasksPageLayout.stories";
+
 import { mocked } from "storybook/test";
-import { useParams, usePathname } from "next/navigation";
-import ProfileTasksPageLoading from "./loading";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { useParams, usePathname } from "next/navigation";
 import { PageDecorator } from "@/.storybook/PageDecorator";
+import { TeamProfileTasksPage } from "./TeamProfileTasksPage";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { ProfileTasksPage } from "@/app/(dashboard)/profile/tasks/ProfileTasksPage";
-import { UserProfileNavigationMobile } from "@/components/users/UserProfileNavigationMobile";
 import { withTaskComments } from "@/components/tasks/TaskCommentsClientContainer/decorators";
-import { ProfileTasksPageEmpty } from "@/app/(dashboard)/profile/tasks/ProfileTasksPageEmpty";
-import { UserProfileNavigationDesktop } from "@/components/users/UserProfileNavigationDesktop";
 import { withTaskDetailCompact } from "@/components/tasks/TaskDetailCompactClientContainer/decorators";
-import { Default as ProfileTasksPageStory } from "@/app/(dashboard)/profile/tasks/ProfileTasksPage.stories";
+
+const userId = "BKs42HvVDEZFoaJUmTqf1gTN0K8pUFjI";
 
 const meta = {
   title: "components/pages/TeamProfileTasksPage",
-  component: ProfileTasksPage,
+  component: TeamProfileTasksPage,
   parameters: { layout: "fullscreen" },
   decorators: [
     withTaskDetailCompact,
@@ -23,31 +26,25 @@ const meta = {
     withThemedBackground,
   ],
   beforeEach: () => {
-    mocked(usePathname).mockReturnValue(
-      "/team/BKs42HvVDEZFoaJUmTqf1gTN0K8pUFjI/tasks",
-    );
-    mocked(useParams).mockReturnValue({
-      id: "BKs42HvVDEZFoaJUmTqf1gTN0K8pUFjI",
-    });
+    mocked(usePathname).mockReturnValue(`/team/${userId}/tasks`);
+    mocked(useParams).mockReturnValue({ id: userId });
   },
-} satisfies Meta<typeof ProfileTasksPage>;
+  args: {
+    userId,
+  },
+} satisfies Meta<typeof TeamProfileTasksPage>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default = {
-  ...ProfileTasksPageStory,
-  args: {
-    ...ProfileTasksPageStory.args,
-    profileNavigationDesktop: <UserProfileNavigationDesktop />,
-    profileNavigationMobile: <UserProfileNavigationMobile />,
-  },
+  ...UserTasksPageLayoutDefault,
 } satisfies Story;
 
 export const Loading = {
-  render: () => <ProfileTasksPageLoading />,
+  ...UserTasksPageLayoutLoading,
 };
 
 export const WithNoTasks = {
-  render: () => <ProfileTasksPageEmpty {...Default.args} />,
+  ...UserTasksPageLayoutWithNoTasks,
 };

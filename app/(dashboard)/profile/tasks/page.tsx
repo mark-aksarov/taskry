@@ -1,38 +1,28 @@
 import { getTaskList } from "@/lib/queries/task";
 import { ProfileTasksPage } from "./ProfileTasksPage";
 import { ProfileTasksPageEmpty } from "./ProfileTasksPageEmpty";
-import { ProfileNavigationMobile } from "@/components/profile/ProfileNavigationMobile";
-import { ProfileNavigationDesktop } from "@/components/profile/ProfileNavigationDesktop";
+import { UserTasksServerContainer } from "@/components/users/UserTasksServerContainer";
+import { UserHeaderServerContainer } from "@/components/users/UserHeaderServerContainer";
 import { NewTaskFormServerContainer } from "@/components/tasks/NewTaskFormServerContainer";
-import { ProfileTasksServerContainer } from "@/components/profile/ProfileTasksServerContainer";
-import { ProfileHeaderServerContainer } from "@/components/profile/ProfileHeaderServerContainer";
 
-export default async function AppProfileTasksPage({
-  params,
-}: {
-  params: Promise<{ id: string }>;
-}) {
-  const { id } = await params;
+export default async function AppProfileTasksPage() {
+  const id = "BKs42HvVDEZFoaJUmTqf1gTN0K8pUFjI";
   const tasks = await getTaskList(id);
 
   if (!tasks.length)
     return (
       <ProfileTasksPageEmpty
         userId={id}
-        ProfileHeaderContainer={ProfileHeaderServerContainer}
-        profileNavigationDesktop={<ProfileNavigationDesktop />}
-        profileNavigationMobile={<ProfileNavigationMobile />}
+        UserHeaderContainer={UserHeaderServerContainer}
       />
     );
 
   return (
     <ProfileTasksPage
-      userId="BKs42HvVDEZFoaJUmTqf1gTN0K8pUFjI"
-      ProfileTasksContainer={ProfileTasksServerContainer}
-      ProfileHeaderContainer={ProfileHeaderServerContainer}
+      userId={id}
+      UserTasksContainer={UserTasksServerContainer}
+      UserHeaderContainer={UserHeaderServerContainer}
       NewTaskFormContainer={NewTaskFormServerContainer}
-      profileNavigationDesktop={<ProfileNavigationDesktop />}
-      profileNavigationMobile={<ProfileNavigationMobile />}
     />
   );
 }

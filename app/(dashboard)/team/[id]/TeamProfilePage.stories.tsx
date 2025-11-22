@@ -1,14 +1,23 @@
-import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { TeamProfilePage } from "./TeamProfilePage";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { PageDecorator } from "@/.storybook/PageDecorator";
-import { mocked } from "storybook/test";
-import { useParams, usePathname } from "next/navigation";
 import {
-  Default as ProfileDefaultStory,
-  Loading as ProfileLoadingStory,
-  WithoutSomeData as ProfileWithoutSomeDataStory,
-} from "@/app/(dashboard)/profile/ProfilePage.stories";
+  Default as UserHeaderStory,
+  WithoutSomeData as UserHeaderWithoutSomeDataStory,
+} from "@/components/users/UserHeader/UserHeader.stories";
+
+import {
+  Default as UserDetailStory,
+  WithoutSomeData as UserDetailWithoutSomeDataStory,
+} from "@/components/users/UserDetail/UserDetail.stories";
+
+import { mocked } from "storybook/test";
+import { TeamProfilePage } from "./TeamProfilePage";
+import { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { useParams, usePathname } from "next/navigation";
+import { PageDecorator } from "@/.storybook/PageDecorator";
+import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { UserDetail, UserDetailSkeleton } from "@/components/users/UserDetail";
+import { UserHeader, UserHeaderSkeleton } from "@/components/users/UserHeader";
+
+const userId = "BKs42HvVDEZFoaJUmTqf1gTN0K8pUFjI";
 
 const meta = {
   title: "components/pages/TeamProfilePage",
@@ -16,15 +25,13 @@ const meta = {
   parameters: { layout: "fullscreen" },
   decorators: [PageDecorator, withThemedBackground],
   beforeEach: () => {
-    mocked(usePathname).mockReturnValue(
-      "/team/BKs42HvVDEZFoaJUmTqf1gTN0K8pUFjI",
-    );
+    mocked(usePathname).mockReturnValue(`/team/${userId}`);
     mocked(useParams).mockReturnValue({
-      id: "BKs42HvVDEZFoaJUmTqf1gTN0K8pUFjI",
+      id: userId,
     });
   },
   args: {
-    userId: "BKs42HvVDEZFoaJUmTqf1gTN0K8pUFjI",
+    userId: userId,
   },
 } satisfies Meta<typeof TeamProfilePage>;
 
@@ -32,13 +39,26 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default = {
-  ...ProfileDefaultStory,
+  args: {
+    UserDetailContainer: () => <UserDetail {...UserDetailStory.args} />,
+    UserHeaderContainer: () => <UserHeader {...UserHeaderStory.args} />,
+  },
 } satisfies Story;
 
 export const Loading: Story = {
-  ...ProfileLoadingStory,
+  args: {
+    UserDetailContainer: () => <UserDetailSkeleton />,
+    UserHeaderContainer: () => <UserHeaderSkeleton />,
+  },
 } satisfies Story;
 
 export const WithoutSomeData: Story = {
-  ...ProfileWithoutSomeDataStory,
+  args: {
+    UserDetailContainer: () => (
+      <UserDetail {...UserDetailWithoutSomeDataStory.args} />
+    ),
+    UserHeaderContainer: () => (
+      <UserHeader {...UserHeaderWithoutSomeDataStory.args} />
+    ),
+  },
 } satisfies Story;

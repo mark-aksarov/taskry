@@ -1,12 +1,12 @@
-import ProfileTasksPageLoading from "./ProfileTasksPageLoading";
-import { ProfileNavigationMobile } from "@/components/profile/ProfileNavigationMobile";
-import { ProfileNavigationDesktop } from "@/components/profile/ProfileNavigationDesktop";
+import { ProfileNavigationMobile } from "@/components/users/ProfileNavigationMobile";
+import { ProfileNavigationDesktop } from "@/components/users/ProfileNavigationDesktop";
+import { UserTasksPageLoadingLayout } from "@/components/users/UserTasksPageLayout";
 
 export default function AppProfileTasksPageLoading() {
   return (
-    <ProfileTasksPageLoading
-      profileNavigationDesktop={<ProfileNavigationDesktop />}
-      profileNavigationMobile={<ProfileNavigationMobile />}
+    <UserTasksPageLoadingLayout
+      navigationDesktop={<ProfileNavigationDesktop />}
+      navigationMobile={<ProfileNavigationMobile />}
     />
   );
 }

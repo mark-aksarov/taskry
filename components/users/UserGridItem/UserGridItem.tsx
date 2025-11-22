@@ -16,8 +16,14 @@ import { UserGridItemLayout } from "./UserGridItemLayout";
 import { Link, Checkbox, Divider } from "@/components/ui";
 import { Link2, Mail, Pencil, Phone, Trash } from "lucide-react";
 import { ImageContainer } from "@/components/common/ImageContainer";
-import { ItemBaseActionMenuTrigger } from "@/components/common/ItemBase";
+import {
+  ItemBaseActionMenuTrigger,
+  ItemBaseDetailBottomSheetTrigger,
+  ItemBaseDetailModalTrigger,
+} from "@/components/common/ItemBase";
 import { UnknownUser } from "@/components/common/UnknownUser";
+import { UserDetailModal } from "../UserDetailModal";
+import { UserDetailBottomSheet } from "../UserDetailBottomSheet";
 
 export interface UserGridItemProps {
   id: string;
@@ -42,6 +48,14 @@ export function UserGridItem({
 }: UserGridItemProps) {
   const contactLinkClasses = "max-w-full overflow-hidden";
 
+  const userImg = imageUrl ? (
+    <ImageContainer className="h-20 w-20">
+      <Image fill src={imageUrl} alt={fullName} />
+    </ImageContainer>
+  ) : (
+    <UnknownUser className="h-20 w-20" iconSize={48} />
+  );
+
   return (
     <UserGridItemLayout
       checkboxSlot={<Checkbox aria-label={`${fullName} checkbox`} />}
@@ -56,20 +70,38 @@ export function UserGridItem({
         </ItemBaseActionMenuTrigger>
       }
       imageSlot={
-        imageUrl ? (
-          <Link href={`/users/${id}`}>
-            <ImageContainer className="h-20 w-20">
-              <Image fill src={imageUrl} alt={fullName} />
-            </ImageContainer>
-          </Link>
-        ) : (
-          <UnknownUser className="h-20 w-20" iconSize={48} />
-        )
+        <>
+          <ItemBaseDetailModalTrigger modal={<UserDetailModal userId={id} />}>
+            {userImg}
+          </ItemBaseDetailModalTrigger>
+
+          <ItemBaseDetailBottomSheetTrigger
+            renderBottomSheet={(state) => (
+              <UserDetailBottomSheet userId={id} state={state} />
+            )}
+          >
+            {userImg}
+          </ItemBaseDetailBottomSheetTrigger>
+        </>
       }
       titleSlot={
         <GridItemInfo className="w-full items-center">
           <GridItemTitle>
-            <Link href={`/tasks/${id}`}>{fullName}</Link>
+            <ItemBaseDetailModalTrigger
+              modal={<UserDetailModal userId={id} />}
+              className="truncate"
+            >
+              {fullName}
+            </ItemBaseDetailModalTrigger>
+
+            <ItemBaseDetailBottomSheetTrigger
+              renderBottomSheet={(state) => (
+                <UserDetailBottomSheet userId={id} state={state} />
+              )}
+              className="truncate"
+            >
+              {fullName}
+            </ItemBaseDetailBottomSheetTrigger>
           </GridItemTitle>
 
           <GridItemText>

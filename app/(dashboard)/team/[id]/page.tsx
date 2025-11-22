@@ -1,6 +1,6 @@
 import { TeamProfilePage } from "./TeamProfilePage";
-import { ProfileHeaderServerContainer } from "@/components/profile/ProfileHeaderServerContainer";
-import { ProfileDetailServerContainer } from "@/components/profile/ProfileDetailServerContainer";
+import { UserHeaderServerContainer } from "@/components/users/UserHeaderServerContainer";
+import { UserDetailServerContainer } from "@/components/users/UserDetailServerContainer";
 
 export default async function AppProfilePage({
   params,
@@ -12,8 +12,8 @@ export default async function AppProfilePage({
   return (
     <TeamProfilePage
       userId={id}
-      ProfileDetailContainer={ProfileDetailServerContainer}
-      ProfileHeaderContainer={ProfileHeaderServerContainer}
+      UserDetailContainer={UserDetailServerContainer}
+      UserHeaderContainer={UserHeaderServerContainer}
     />
   );
 }

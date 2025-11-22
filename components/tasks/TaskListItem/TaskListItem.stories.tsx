@@ -1,14 +1,22 @@
 import { TaskListItem } from "./TaskListItem";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withTaskDetailCompact } from "@/components/tasks/TaskDetailCompactClientContainer/decorators";
+import { withUserDetail } from "@/components/users/UserDetailClientContainer/decorators";
 import { withTaskComments } from "@/components/tasks/TaskCommentsClientContainer/decorators";
+import { withTaskDetailCompact } from "@/components/tasks/TaskDetailCompactClientContainer/decorators";
+import { withProjectDetailCompact } from "@/components/projects/ProjectDetailCompactClientContainer/decorators";
 
 const meta = {
   title: "Components/tasks/TaskListItem",
   component: TaskListItem,
   tags: ["autodocs"],
-  decorators: [withTaskDetailCompact, withTaskComments, withThemedBackground],
+  decorators: [
+    withTaskDetailCompact,
+    withProjectDetailCompact,
+    withUserDetail,
+    withTaskComments,
+    withThemedBackground,
+  ],
 } satisfies Meta<typeof TaskListItem>;
 
 export default meta;
@@ -24,7 +32,6 @@ export const Default = {
     status: { id: "pending", name: "Pending" },
     assignee: { id: "user1", imageUrl: "/man.jpg", fullName: "John Doe" },
     comments: 10,
-    subtasks: 6,
   },
 } satisfies Story;
 

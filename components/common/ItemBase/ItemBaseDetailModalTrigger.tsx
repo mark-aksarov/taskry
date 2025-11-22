@@ -1,27 +1,35 @@
 "use client";
 
+import { tv } from "tailwind-variants";
 import { focusRing, RACButton, RACDialogTrigger } from "@/components/ui";
 
 interface ItemBaseDetailModalTriggerProps {
-  title: string;
   modal: React.ReactNode;
+  children: React.ReactNode;
+  className?: string;
 }
 
+const styles = tv({
+  extend: focusRing,
+  base: "max-w-full cursor-pointer max-md:hidden",
+});
+
 export function ItemBaseDetailModalTrigger({
-  title,
+  children,
   modal,
+  className,
 }: ItemBaseDetailModalTriggerProps) {
   return (
     <RACDialogTrigger>
       <RACButton
         className={(renderProps) =>
-          focusRing({
+          styles({
             ...renderProps,
-            className: "max-w-full cursor-pointer truncate max-md:hidden",
+            className,
           })
         }
       >
-        {title}
+        {children}
       </RACButton>
       {modal}
     </RACDialogTrigger>

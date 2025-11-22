@@ -1,27 +1,23 @@
-import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { ProfilePage } from "./ProfilePage";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { PageDecorator } from "@/.storybook/PageDecorator";
+import {
+  Default as UserHeaderStory,
+  WithoutSomeData as UserHeaderWithoutSomeDataStory,
+} from "@/components/users/UserHeader/UserHeader.stories";
+
+import {
+  Default as UserDetailStory,
+  WithoutSomeData as UserDetailWithoutSomeDataStory,
+} from "@/components/users/UserDetail/UserDetail.stories";
+
 import { mocked } from "storybook/test";
+import { ProfilePage } from "./ProfilePage";
 import { usePathname } from "next/navigation";
-import {
-  ProfileDetail,
-  ProfileDetailSkeleton,
-} from "@/components/profile/ProfileDetail";
-import {
-  ProfileHeader,
-  ProfileHeaderSkeleton,
-} from "@/components/profile/ProfileHeader";
+import { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { PageDecorator } from "@/.storybook/PageDecorator";
+import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { UserDetail, UserDetailSkeleton } from "@/components/users/UserDetail";
+import { UserHeader, UserHeaderSkeleton } from "@/components/users/UserHeader";
 
-import {
-  Default as ProfileHeaderStory,
-  WithoutSomeData as ProfileHeaderWithoutSomeDataStory,
-} from "@/components/profile/ProfileHeader/ProfileHeader.stories";
-
-import {
-  Default as ProfileDetailStory,
-  WithoutSomeData as ProfileDetailWithoutSomeDataStory,
-} from "@/components/profile/ProfileDetail/ProfileDetail.stories";
+const userId = "BKs42HvVDEZFoaJUmTqf1gTN0K8pUFjI";
 
 const meta = {
   title: "components/pages/ProfilePage",
@@ -32,7 +28,7 @@ const meta = {
     mocked(usePathname).mockReturnValue("/profile");
   },
   args: {
-    userId: "BKs42HvVDEZFoaJUmTqf1gTN0K8pUFjI",
+    userId,
   },
 } satisfies Meta<typeof ProfilePage>;
 
@@ -41,29 +37,25 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    ProfileDetailContainer: () => (
-      <ProfileDetail {...ProfileDetailStory.args} />
-    ),
-    ProfileHeaderContainer: () => (
-      <ProfileHeader {...ProfileHeaderStory.args} />
-    ),
+    UserDetailContainer: () => <UserDetail {...UserDetailStory.args} />,
+    UserHeaderContainer: () => <UserHeader {...UserHeaderStory.args} />,
   },
 } satisfies Story;
 
 export const Loading: Story = {
   args: {
-    ProfileDetailContainer: () => <ProfileDetailSkeleton />,
-    ProfileHeaderContainer: () => <ProfileHeaderSkeleton />,
+    UserDetailContainer: () => <UserDetailSkeleton />,
+    UserHeaderContainer: () => <UserHeaderSkeleton />,
   },
 } satisfies Story;
 
 export const WithoutSomeData: Story = {
   args: {
-    ProfileDetailContainer: () => (
-      <ProfileDetail {...ProfileDetailWithoutSomeDataStory.args} />
+    UserDetailContainer: () => (
+      <UserDetail {...UserDetailWithoutSomeDataStory.args} />
     ),
-    ProfileHeaderContainer: () => (
-      <ProfileHeader {...ProfileHeaderWithoutSomeDataStory.args} />
+    UserHeaderContainer: () => (
+      <UserHeader {...UserHeaderWithoutSomeDataStory.args} />
     ),
   },
 } satisfies Story;

@@ -10,7 +10,6 @@ import {
 import { Item } from "react-stately";
 import {
   Check,
-  CheckCheck,
   CircleEllipsis,
   Clock,
   MessageSquare,
@@ -20,7 +19,7 @@ import {
 import Image from "next/image";
 import { useMemo } from "react";
 import { TaskDetailModal } from "../TaskDetailModal";
-import { Link, Checkbox, RACDialogTrigger } from "@/components/ui";
+import { Checkbox, RACDialogTrigger } from "@/components/ui";
 import { TaskGridItemLayout } from "./TaskGridItemLayout";
 import { TaskDetailBottomSheet } from "../TaskDetailBottomSheet";
 import { ImageContainer } from "@/components/common/ImageContainer";
@@ -34,6 +33,8 @@ import {
 import { getTaskStatusBadgeColor } from "../getTaskStatusBadgeColor";
 import { TaskCommentsModal } from "../TaskCommentsModal";
 import { UnknownUser } from "@/components/common/UnknownUser";
+import { UserDetailModal } from "@/components/users/UserDetailModal";
+import { UserDetailBottomSheet } from "@/components/users/UserDetailBottomSheet";
 
 export interface TaskGridItemProps {
   id: number;
@@ -74,6 +75,14 @@ export function TaskGridItem({
     });
   }, [deadline, locale]);
 
+  const assigneeImg = assignee?.imageUrl ? (
+    <ImageContainer className="h-9 w-9">
+      <Image fill src={assignee.imageUrl} alt={assignee.fullName} />
+    </ImageContainer>
+  ) : (
+    <UnknownUser className="h-9 w-9" />
+  );
+
   return (
     <TaskGridItemLayout
       checkboxSlot={<Checkbox aria-label={title} />}
@@ -99,27 +108,42 @@ export function TaskGridItem({
         <GridItemInfo className="flex-auto">
           <GridItemTitle>
             <ItemBaseDetailModalTrigger
-              title={title}
               modal={<TaskDetailModal taskId={id} />}
-            />
+              className="truncate"
+            >
+              {title}
+            </ItemBaseDetailModalTrigger>
+
             <ItemBaseDetailBottomSheetTrigger
-              title={title}
               renderBottomSheet={(state) => (
                 <TaskDetailBottomSheet taskId={id} state={state} />
               )}
-            />
+              className="truncate"
+            >
+              {title}
+            </ItemBaseDetailBottomSheetTrigger>
           </GridItemTitle>
 
           <GridItemText>{`Deadline on ${formattedDeadline}`}</GridItemText>
         </GridItemInfo>
       }
       assigneeImageSlot={
-        assignee?.imageUrl ? (
-          <Link href={`/users/${assignee.id}`}>
-            <ImageContainer className="h-9 w-9">
-              <Image fill src={assignee.imageUrl} alt={assignee.fullName} />
-            </ImageContainer>
-          </Link>
+        assignee ? (
+          <>
+            <ItemBaseDetailModalTrigger
+              modal={<UserDetailModal userId={assignee.id} />}
+            >
+              {assigneeImg}
+            </ItemBaseDetailModalTrigger>
+
+            <ItemBaseDetailBottomSheetTrigger
+              renderBottomSheet={(state) => (
+                <UserDetailBottomSheet userId={assignee.id} state={state} />
+              )}
+            >
+              {assigneeImg}
+            </ItemBaseDetailBottomSheetTrigger>
+          </>
         ) : (
           <UnknownUser className="h-9 w-9" />
         )

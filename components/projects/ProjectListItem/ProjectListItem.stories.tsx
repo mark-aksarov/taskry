@@ -3,6 +3,7 @@ import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { withProjectDetailCompact } from "../ProjectDetailCompactClientContainer/decorators";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withProjectComments } from "../ProjectCommentsClientContainer/decorators";
+import { withUserDetail } from "@/components/users/UserDetailClientContainer/decorators";
 
 const meta = {
   title: "Components/projects/ProjectListItem",
@@ -11,6 +12,7 @@ const meta = {
   decorators: [
     withProjectDetailCompact,
     withProjectComments,
+    withUserDetail,
     withThemedBackground,
   ],
 } satisfies Meta<typeof ProjectListItem>;

@@ -76,7 +76,6 @@ export const getTaskSummary = cache(async (id: number) => {
 
 export type GetTaskListType = ThenArg<ReturnType<typeof getTaskList>>;
 export const getTaskList = cache(async (creatorId?: string) => {
-  await new Promise((resolve) => setTimeout(resolve, 3000));
   return await prisma.task.findMany({
     where: creatorId
       ? {
