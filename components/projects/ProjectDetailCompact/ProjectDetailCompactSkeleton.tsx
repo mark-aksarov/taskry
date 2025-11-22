@@ -7,8 +7,7 @@ export function ProjectDetailCompactSkeleton() {
   return (
     <ProjectDetailCompactLayout
       titleSlot={<Skeleton size="base" className="w-[15rem]" />}
-      statusMenuTriggerSlot={<Skeleton className="h-8 w-[5rem] rounded-lg" />}
-      openProjectSlot={<Skeleton className="h-8 w-8 rounded-lg" />}
+      actionsSlot={<Skeleton className="h-8 w-[5rem] rounded-lg" />}
       creatorSlot={<DetailInfoSkeleton />}
       deadlineSlot={<DetailInfoSkeleton />}
       descriptionSlot={

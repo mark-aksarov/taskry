@@ -75,16 +75,7 @@ export function ProjectDetailCompact({
           {title}
         </h2>
       }
-      statusMenuTriggerSlot={<ProjectDetailCompactStatusMenuTrigger />}
-      openProjectSlot={
-        <Button
-          variant="outlined"
-          className="rounded-lg"
-          iconLeft={
-            <ExternalLink size={16} strokeWidth={1.5} absoluteStrokeWidth />
-          }
-        />
-      }
+      actionsSlot={<ProjectDetailCompactStatusMenuTrigger />}
       creatorSlot={
         <DetailInfo>
           <DetailTitle>Creator</DetailTitle>

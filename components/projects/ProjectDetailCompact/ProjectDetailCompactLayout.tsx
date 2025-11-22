@@ -2,8 +2,7 @@ import { DetailRow } from "@/components/common/Detail";
 
 interface ProjectDetailCompactLayoutProps {
   titleSlot: React.ReactNode;
-  statusMenuTriggerSlot: React.ReactNode;
-  openProjectSlot: React.ReactNode;
+  actionsSlot: React.ReactNode;
   creatorSlot: React.ReactNode;
   deadlineSlot: React.ReactNode;
   descriptionSlot: React.ReactNode;
@@ -14,8 +13,7 @@ interface ProjectDetailCompactLayoutProps {
 
 export function ProjectDetailCompactLayout({
   titleSlot,
-  statusMenuTriggerSlot,
-  openProjectSlot,
+  actionsSlot,
   creatorSlot,
   deadlineSlot,
   descriptionSlot,
@@ -30,10 +28,7 @@ export function ProjectDetailCompactLayout({
       <div className="flex flex-col gap-4">
         {titleSlot}
 
-        <div className="flex gap-3">
-          {statusMenuTriggerSlot}
-          {openProjectSlot}
-        </div>
+        <div className="flex gap-3">{actionsSlot}</div>
       </div>
       <div className="flex flex-col gap-4">
         <DetailRow className={rowStyles}>
