@@ -2,30 +2,23 @@
 
 import { Item } from "react-stately";
 import { ToolbarSortingMenuTrigger } from "@/components/common/Toolbar";
+import { ALargeSmall, Blocks, Calendar, CircleCheck } from "lucide-react";
 
 export function ProjectToolbarSortingMenuTrigger() {
   return (
     <ToolbarSortingMenuTrigger>
-      <Item textValue="Default" key="default">
-        By Default
-      </Item>
-      <Item textValue="Status" key="status">
-        By Status
+      <Item textValue="Title" key="title">
+        <ALargeSmall size={16} strokeWidth={1.5} absoluteStrokeWidth /> By Title
       </Item>
       <Item textValue="Deadline" key="deadline">
-        By Deadline
+        <Calendar size={16} strokeWidth={1.5} absoluteStrokeWidth /> By Deadline
       </Item>
-      <Item textValue="Title" key="title">
-        By Title
-      </Item>
-      <Item textValue="Assignee" key="creator">
-        By Creator
-      </Item>
-      <Item textValue="Customer" key="customer">
-        By Customer
+      <Item textValue="Status" key="status">
+        <CircleCheck size={16} strokeWidth={1.5} absoluteStrokeWidth /> By
+        Status
       </Item>
       <Item textValue="Category" key="category">
-        By Category
+        <Blocks size={16} strokeWidth={1.5} absoluteStrokeWidth /> By Category
       </Item>
     </ToolbarSortingMenuTrigger>
   );

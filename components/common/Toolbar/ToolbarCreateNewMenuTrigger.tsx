@@ -7,7 +7,16 @@ import {
   DialogHeading,
 } from "@/components/ui";
 import { useState } from "react";
-import { Plus } from "lucide-react";
+import {
+  Blocks,
+  BriefcaseBusiness,
+  Building2,
+  CalendarCheck,
+  Contact,
+  FolderClosed,
+  Plus,
+  Users,
+} from "lucide-react";
 import { Key, useOverlayTrigger } from "react-aria";
 import { Item, useOverlayTriggerState } from "react-stately";
 import { NewTaskModal } from "@/components/tasks/NewTaskModal";
@@ -57,27 +66,31 @@ export function ToolbarCreateNewMenuTrigger({
         placement="bottom right"
       >
         <Item textValue="Task" key="task">
-          Task
+          <CalendarCheck size={16} strokeWidth={1.5} absoluteStrokeWidth /> Task
         </Item>
         <Item textValue="Task Category" key="taskCategory">
-          Task Category
+          <Blocks size={16} strokeWidth={1.5} absoluteStrokeWidth /> Task
+          Category
         </Item>
         <Item textValue="Project" key="project">
+          <FolderClosed size={16} strokeWidth={1.5} absoluteStrokeWidth />{" "}
           Project
         </Item>
         <Item textValue="Project Category" key="projectCategory">
+          <Blocks size={16} strokeWidth={1.5} absoluteStrokeWidth />
           Project Category
         </Item>
         <Item textValue="Customer" key="customer">
-          Customer
+          <Contact size={16} strokeWidth={1.5} absoluteStrokeWidth /> Customer
         </Item>
         <Item textValue="Company" key="company">
-          Company
+          <Building2 size={16} strokeWidth={1.5} absoluteStrokeWidth /> Company
         </Item>
         <Item textValue="User" key="user">
-          User
+          <Users size={16} strokeWidth={1.5} absoluteStrokeWidth /> User
         </Item>
         <Item textValue="Position" key="position">
+          <BriefcaseBusiness size={16} strokeWidth={1.5} absoluteStrokeWidth />{" "}
           Position
         </Item>
       </ResponsiveMenuTrigger>
