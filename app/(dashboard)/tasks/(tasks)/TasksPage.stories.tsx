@@ -14,11 +14,13 @@ import { NewProjectForm } from "@/components/projects/NewProjectForm";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { Default as TaskListStory } from "@/components/tasks/TaskList/TaskList.stories";
 import { Default as TaskGridStory } from "@/components/tasks/TaskGrid/TaskGrid.stories";
-import { withTaskDetailCompact } from "@/components/tasks/TaskDetailCompactClientContainer/decorators";
+import { withUserDetail } from "@/components/users/UserDetailClientContainer/decorators";
 import { withTaskComments } from "@/components/tasks/TaskCommentsClientContainer/decorators";
 import { Default as NewTaskFormStory } from "@/components/tasks/TaskFormBase/TaskFormBase.stories";
+import { withTaskDetailCompact } from "@/components/tasks/TaskDetailCompactClientContainer/decorators";
 import { Default as NewProjectFormStory } from "@/components/projects/NewProjectForm/NewProjectForm.stories";
 import { Default as TaskFiltersFormStory } from "@/components/tasks/TaskFiltersForm/TaskFiltersForm.stories";
+import { withProjectDetailCompact } from "@/components/projects/ProjectDetailCompactClientContainer/decorators";
 
 const meta = {
   title: "components/pages/TasksPage",
@@ -26,6 +28,8 @@ const meta = {
   parameters: { layout: "fullscreen" },
   decorators: [
     withTaskDetailCompact,
+    withProjectDetailCompact,
+    withUserDetail,
     withTaskComments,
     PageDecorator,
     withThemedBackground,

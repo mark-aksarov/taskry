@@ -1,28 +1,33 @@
 import {
   ToolbarDesktop,
+  ToolbarMobileTop,
   ToolbarMobileBottom,
   ToolbarMobileHeading,
-  ToolbarMobileTop,
+  ToolbarCreateNewMenuTrigger,
 } from "@/components/common/Toolbar";
 import { Suspense } from "react";
-import { Plus } from "lucide-react";
-import { Button } from "@/components/ui";
 import { PageGrid } from "@/components/common/PageGrid";
 import { ViewModeProvider } from "@/components/common/ViewMode";
 import { PageContainer } from "@/components/common/PageContainer";
+import { TaskFormBaseSkeleton } from "@/components/tasks/TaskFormBase";
 import { ViewModeToggleButtonGroup } from "@/components/common/ViewMode";
 import { UserFiltersFormSkeleton } from "@/components/users/UserFiltersForm";
+import { NewProjectFormSkeleton } from "@/components/projects/NewProjectForm";
 import { UserToolbarActionsMenuTrigger } from "@/components/users/UserToolbarActionsMenuTrigger";
 import { UserToolbarFiltersModalTrigger } from "@/components/users/UserToolbarFiltersModalTrigger";
 import { UserToolbarFiltersBottomSheetTrigger } from "@/components/users/UserToolbarFiltersBottomSheetTrigger";
 
 interface UsersPageProps {
   UserFiltersFormContainer: React.ComponentType;
+  NewTaskFormContainer: React.ComponentType;
+  NewProjectFormContainer: React.ComponentType;
   UsersServerContainer: React.ComponentType;
 }
 
 export async function UsersPage({
   UserFiltersFormContainer,
+  NewTaskFormContainer,
+  NewProjectFormContainer,
   UsersServerContainer,
 }: UsersPageProps) {
   return (
@@ -39,10 +44,16 @@ export async function UsersPage({
             />
             <UserToolbarActionsMenuTrigger />
             <ViewModeToggleButtonGroup className="ml-auto" />
-            <Button
-              label="New User"
-              iconLeft={
-                <Plus size={16} strokeWidth={1.5} absoluteStrokeWidth />
+            <ToolbarCreateNewMenuTrigger
+              newTaskForm={
+                <Suspense fallback={<TaskFormBaseSkeleton />}>
+                  <NewTaskFormContainer />
+                </Suspense>
+              }
+              newProjectForm={
+                <Suspense fallback={<NewProjectFormSkeleton />}>
+                  <NewProjectFormContainer />
+                </Suspense>
               }
             />
           </ToolbarDesktop>
@@ -61,10 +72,16 @@ export async function UsersPage({
 
           <ToolbarMobileBottom>
             <ViewModeToggleButtonGroup />
-            <Button
-              label="New User"
-              iconLeft={
-                <Plus size={16} strokeWidth={1.5} absoluteStrokeWidth />
+            <ToolbarCreateNewMenuTrigger
+              newTaskForm={
+                <Suspense fallback={<TaskFormBaseSkeleton />}>
+                  <NewTaskFormContainer />
+                </Suspense>
+              }
+              newProjectForm={
+                <Suspense fallback={<NewProjectFormSkeleton />}>
+                  <NewProjectFormContainer />
+                </Suspense>
               }
             />
           </ToolbarMobileBottom>

@@ -1,24 +1,25 @@
-import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { ProjectsPage } from "./ProjectsPage";
-import { ViewModeLayout } from "@/components/common/ViewMode";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { PageDecorator } from "@/.storybook/PageDecorator";
 import { mocked } from "storybook/test";
+import ProjectsPageLoading from "./loading";
+import { ProjectsPage } from "./ProjectsPage";
 import { usePathname } from "next/navigation";
+import { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { ProjectsPageEmpty } from "./ProjectsPageEmpty";
+import { PageDecorator } from "@/.storybook/PageDecorator";
+import { NewTaskForm } from "@/components/tasks/NewTaskForm";
+import { ViewModeLayout } from "@/components/common/ViewMode";
 import { ProjectList } from "@/components/projects/ProjectList";
 import { ProjectGrid } from "@/components/projects/ProjectGrid";
-import { ProjectsPageEmpty } from "./ProjectsPageEmpty";
+import { NewProjectForm } from "@/components/projects/NewProjectForm";
+import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { ProjectFiltersForm } from "@/components/projects/ProjectFiltersForm";
+import { withUserDetail } from "@/components/users/UserDetailClientContainer/decorators";
+import { Default as NewTaskFormStory } from "@/components/tasks/TaskFormBase/TaskFormBase.stories";
 import { Default as ProjectListStory } from "@/components/projects/ProjectList/ProjectList.stories";
 import { Default as ProjectGridStory } from "@/components/projects/ProjectGrid/ProjectGrid.stories";
-import { NewProjectForm } from "@/components/projects/NewProjectForm";
-import { Default as NewProjectFormStory } from "@/components/projects/NewProjectForm/NewProjectForm.stories";
-import { ProjectFiltersForm } from "@/components/projects/ProjectFiltersForm";
-import { Default as ProjectFiltersFormStory } from "@/components/projects/ProjectFiltersForm/ProjectFiltersForm.stories";
-import { withProjectDetailCompact } from "@/components/projects/ProjectDetailCompactClientContainer/decorators";
 import { withProjectComments } from "@/components/projects/ProjectCommentsClientContainer/decorators";
-import { NewTaskForm } from "@/components/tasks/NewTaskForm";
-import { Default as NewTaskFormStory } from "@/components/tasks/TaskFormBase/TaskFormBase.stories";
-import ProjectsPageLoading from "./loading";
+import { Default as NewProjectFormStory } from "@/components/projects/NewProjectForm/NewProjectForm.stories";
+import { withProjectDetailCompact } from "@/components/projects/ProjectDetailCompactClientContainer/decorators";
+import { Default as ProjectFiltersFormStory } from "@/components/projects/ProjectFiltersForm/ProjectFiltersForm.stories";
 
 const meta = {
   title: "components/pages/ProjectsPage",
@@ -27,6 +28,7 @@ const meta = {
   decorators: [
     withProjectDetailCompact,
     withProjectComments,
+    withUserDetail,
     PageDecorator,
     withThemedBackground,
   ],

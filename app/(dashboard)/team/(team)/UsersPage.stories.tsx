@@ -1,24 +1,29 @@
-import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { UsersPage } from "./UsersPage";
-import { ViewModeLayout } from "@/components/common/ViewMode";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { PageDecorator } from "@/.storybook/PageDecorator";
 import { mocked } from "storybook/test";
+import UsersPageLoading from "./loading";
 import { usePathname } from "next/navigation";
 import { UsersPageEmpty } from "./UsersPageEmpty";
 import { UserList } from "@/components/users/UserList";
 import { UserGrid } from "@/components/users/UserGrid";
+import { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { PageDecorator } from "@/.storybook/PageDecorator";
+import { NewTaskForm } from "@/components/tasks/NewTaskForm";
+import { ViewModeLayout } from "@/components/common/ViewMode";
+import { UserFiltersForm } from "@/components/users/UserFiltersForm";
+import { NewProjectForm } from "@/components/projects/NewProjectForm";
+import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { Default as UserListStory } from "@/components/users/UserList/UserList.stories";
 import { Default as UserGridStory } from "@/components/users/UserGrid/UserGrid.stories";
-import { UserFiltersForm } from "@/components/users/UserFiltersForm";
+import { withUserDetail } from "@/components/users/UserDetailClientContainer/decorators";
+import { Default as TaskFormBaseStory } from "@/components/tasks/TaskFormBase/TaskFormBase.stories";
 import { Default as UserFiltersFormStory } from "@/components/users/UserFiltersForm/UserFiltersForm.stories";
-import UsersPageLoading from "./loading";
+import { Default as NewProjectFormStory } from "@/components/projects/NewProjectForm/NewProjectForm.stories";
 
 const meta = {
   title: "components/pages/UsersPage",
   component: UsersPage,
   parameters: { layout: "fullscreen" },
-  decorators: [PageDecorator, withThemedBackground],
+  decorators: [withUserDetail, PageDecorator, withThemedBackground],
   beforeEach: () => {
     mocked(usePathname).mockReturnValue("/team");
   },
@@ -31,6 +36,10 @@ export const Default: Story = {
   args: {
     UserFiltersFormContainer: () => (
       <UserFiltersForm {...UserFiltersFormStory.args} />
+    ),
+    NewTaskFormContainer: () => <NewTaskForm {...TaskFormBaseStory.args} />,
+    NewProjectFormContainer: () => (
+      <NewProjectForm {...NewProjectFormStory.args} />
     ),
     UsersServerContainer: () => (
       <ViewModeLayout
