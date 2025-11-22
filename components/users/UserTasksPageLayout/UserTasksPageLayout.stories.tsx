@@ -1,18 +1,18 @@
 import { mocked } from "storybook/test";
 import { usePathname } from "next/navigation";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { UserHeader } from "@/components/users/UserHeader";
 import { PageDecorator } from "@/.storybook/PageDecorator";
 import { UserTasksPageLayout } from "./UserTasksPageLayout";
 import { NewTaskForm } from "@/components/tasks/NewTaskForm";
 import { UserTaskList } from "@/components/users/UserTaskList";
+import { PersonHeader } from "@/components/common/PersonHeader";
 import { UserTasksPageEmptyLayout } from "./UserTasksPageEmptyLayout";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { UserTasksPageLoadingLayout } from "./UserTasksPageLoadingLayout";
 import { ProfileNavigationMobile } from "@/components/users/ProfileNavigationMobile";
 import { ProfileNavigationDesktop } from "@/components/users/ProfileNavigationDesktop";
 import { withTaskComments } from "@/components/tasks/TaskCommentsClientContainer/decorators";
-import { Default as UserHeaderStory } from "@/components/users/UserHeader/UserHeader.stories";
+import { Default as PersonHeaderStory } from "@/components/common/PersonHeader/PersonHeader.stories";
 import { Default as UserTaskListStory } from "@/components/users/UserTaskList/UserTaskList.stories";
 import { Default as TaskFormBaseStory } from "@/components/tasks/TaskFormBase/TaskFormBase.stories";
 import { withTaskDetailCompact } from "@/components/tasks/TaskDetailCompactClientContainer/decorators";
@@ -39,7 +39,7 @@ export const Default = {
   args: {
     userId: "BKs42HvVDEZFoaJUmTqf1gTN0K8pUFjI",
     UserTasksContainer: () => <UserTaskList {...UserTaskListStory.args} />,
-    UserHeaderContainer: () => <UserHeader {...UserHeaderStory.args} />,
+    UserHeaderContainer: () => <PersonHeader {...PersonHeaderStory.args} />,
     NewTaskFormContainer: () => <NewTaskForm {...TaskFormBaseStory.args} />,
     navigationDesktop: <ProfileNavigationDesktop />,
     navigationMobile: <ProfileNavigationMobile />,

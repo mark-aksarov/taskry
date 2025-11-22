@@ -1,7 +1,7 @@
 import {
-  Default as UserHeaderStory,
-  WithoutSomeData as UserHeaderWithoutSomeDataStory,
-} from "@/components/users/UserHeader/UserHeader.stories";
+  Default as PersonHeaderStory,
+  WithoutImageUrl as PersonHeaderWithoutImageUrlStory,
+} from "@/components/common/PersonHeader/PersonHeader.stories";
 
 import {
   Default as UserDetailStory,
@@ -15,7 +15,10 @@ import { useParams, usePathname } from "next/navigation";
 import { PageDecorator } from "@/.storybook/PageDecorator";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { UserDetail, UserDetailSkeleton } from "@/components/users/UserDetail";
-import { UserHeader, UserHeaderSkeleton } from "@/components/users/UserHeader";
+import {
+  PersonHeader,
+  PersonHeaderSkeleton,
+} from "@/components/common/PersonHeader";
 
 const userId = "BKs42HvVDEZFoaJUmTqf1gTN0K8pUFjI";
 
@@ -41,14 +44,14 @@ type Story = StoryObj<typeof meta>;
 export const Default = {
   args: {
     UserDetailContainer: () => <UserDetail {...UserDetailStory.args} />,
-    UserHeaderContainer: () => <UserHeader {...UserHeaderStory.args} />,
+    UserHeaderContainer: () => <PersonHeader {...PersonHeaderStory.args} />,
   },
 } satisfies Story;
 
 export const Loading: Story = {
   args: {
     UserDetailContainer: () => <UserDetailSkeleton />,
-    UserHeaderContainer: () => <UserHeaderSkeleton />,
+    UserHeaderContainer: () => <PersonHeaderSkeleton />,
   },
 } satisfies Story;
 
@@ -58,7 +61,7 @@ export const WithoutSomeData: Story = {
       <UserDetail {...UserDetailWithoutSomeDataStory.args} />
     ),
     UserHeaderContainer: () => (
-      <UserHeader {...UserHeaderWithoutSomeDataStory.args} />
+      <PersonHeader {...PersonHeaderWithoutImageUrlStory.args} />
     ),
   },
 } satisfies Story;

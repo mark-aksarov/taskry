@@ -8,9 +8,9 @@ import { Card } from "@/components/common/Card";
 import { PageGrid } from "@/components/common/PageGrid";
 import { PageContainer } from "@/components/common/PageContainer";
 import { ProfileActions } from "@/components/users/ProfileActions";
-import { UserHeaderSkeleton } from "@/components/users/UserHeader";
 import { UserDetailSkeleton } from "@/components/users/UserDetail";
 import { UserDetailCard } from "@/components/users/UserDetailCard";
+import { PersonHeaderSkeleton } from "@/components/common/PersonHeader";
 import { ProfileNavigationMobile } from "@/components/users/ProfileNavigationMobile";
 import { ProfileNavigationDesktop } from "@/components/users/ProfileNavigationDesktop";
 
@@ -34,7 +34,7 @@ export function ProfilePage({
           </Suspense>
         }
         profileHeader={
-          <Suspense fallback={<UserHeaderSkeleton />}>
+          <Suspense fallback={<PersonHeaderSkeleton />}>
             <UserHeaderContainer userId={userId} />
           </Suspense>
         }
@@ -51,7 +51,7 @@ export function ProfilePage({
         </ToolbarMobileBottom>
 
         <div className="flex flex-col px-1.5">
-          <Suspense fallback={<UserHeaderSkeleton />}>
+          <Suspense fallback={<PersonHeaderSkeleton />}>
             <UserHeaderContainer userId={userId} />
           </Suspense>
         </div>

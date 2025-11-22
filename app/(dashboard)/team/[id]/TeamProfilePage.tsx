@@ -7,9 +7,9 @@ import { Suspense } from "react";
 import { Card } from "@/components/common/Card";
 import { PageGrid } from "@/components/common/PageGrid";
 import { PageContainer } from "@/components/common/PageContainer";
-import { UserHeaderSkeleton } from "@/components/users/UserHeader";
 import { UserDetailSkeleton } from "@/components/users/UserDetail";
 import { UserDetailCard } from "@/components/users/UserDetailCard";
+import { PersonHeaderSkeleton } from "@/components/common/PersonHeader";
 import { UserNavigationMobile } from "@/components/users/UserNavigationMobile";
 import { UserNavigationDesktop } from "@/components/users/UserNavigationDesktop";
 
@@ -33,7 +33,7 @@ export function TeamProfilePage({
           </Suspense>
         }
         profileHeader={
-          <Suspense fallback={<UserHeaderSkeleton />}>
+          <Suspense fallback={<PersonHeaderSkeleton />}>
             <UserHeaderContainer userId={userId} />
           </Suspense>
         }
@@ -50,7 +50,7 @@ export function TeamProfilePage({
         </ToolbarMobileBottom>
 
         <Card className="flex flex-col gap-6">
-          <Suspense fallback={<UserHeaderSkeleton />}>
+          <Suspense fallback={<PersonHeaderSkeleton />}>
             <UserHeaderContainer userId={userId} />
           </Suspense>
           <Suspense fallback={<UserDetailSkeleton />}>

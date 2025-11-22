@@ -1,14 +1,14 @@
 import { ReactNode } from "react";
 
-export interface UserHeaderLayoutProps {
+export interface PersonHeaderLayoutProps {
   imageSlot: ReactNode;
   infoSlot: ReactNode;
 }
 
-export function UserHeaderLayout({
+export function PersonHeaderLayout({
   imageSlot,
   infoSlot,
-}: UserHeaderLayoutProps) {
+}: PersonHeaderLayoutProps) {
   return (
     <div className="inline-flex flex-col items-center gap-4">
       {imageSlot}

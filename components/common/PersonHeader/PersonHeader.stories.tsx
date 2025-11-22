@@ -1,31 +1,30 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { UserHeader } from "./UserHeader";
+import { PersonHeader } from "./PersonHeader";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {
-  title: "components/users/UserHeader",
-  component: UserHeader,
+  title: "components/common/PersonHeader",
+  component: PersonHeader,
   decorators: [withThemedBackground],
   parameters: {
     backgroundVariant: "alt",
   },
-} satisfies Meta<typeof UserHeader>;
+} satisfies Meta<typeof PersonHeader>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    fullName: "John Doe",
+    title: "John Doe",
     imageUrl: "/man.jpg",
-    position: {
-      name: "Developer",
-    },
+    subtitle: "Developer",
   },
 } satisfies Story;
 
-export const WithoutSomeData = {
+export const WithoutImageUrl = {
   args: {
-    fullName: "John Doe",
+    ...Default.args,
+    imageUrl: undefined,
   },
 } satisfies Story;

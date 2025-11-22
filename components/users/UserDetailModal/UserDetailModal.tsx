@@ -3,8 +3,8 @@
 import { Suspense, useContext } from "react";
 import { DetailModal } from "@/components/common/DetailModal";
 import { UserDetailSkeleton } from "@/components/users/UserDetail";
+import { PersonHeaderSkeleton } from "@/components/common/PersonHeader";
 import { UserDetailClientContainerContext } from "../UserDetailClientContainer";
-import { UserHeaderSkeleton } from "@/components/users/UserHeader";
 
 export function UserDetailModal({ userId }: { userId: string }) {
   const UserDetailClientContainer = useContext(
@@ -16,7 +16,7 @@ export function UserDetailModal({ userId }: { userId: string }) {
       <Suspense
         fallback={
           <div className="flex flex-col gap-6">
-            <UserHeaderSkeleton />
+            <PersonHeaderSkeleton />
             <UserDetailSkeleton />
           </div>
         }

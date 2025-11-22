@@ -1,6 +1,7 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { CustomerGridItem } from "./CustomerGridItem";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { withCustomerDetail } from "../CustomerDetailClientContainer/decorators";
 
 const meta = {
   title: "Components/customers/CustomerGridItem",
@@ -8,10 +9,11 @@ const meta = {
   tags: ["autodocs"],
   decorators: [
     (Story) => (
-      <div className="max-w-[300px]">
+      <div className="max-w-full md:w-[300px]">
         <Story />
       </div>
     ),
+    withCustomerDetail,
     withThemedBackground,
   ],
 } satisfies Meta<typeof CustomerGridItem>;

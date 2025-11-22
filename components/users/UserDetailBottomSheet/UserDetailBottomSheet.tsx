@@ -2,7 +2,7 @@
 
 import { Suspense, useContext } from "react";
 import { OverlayTriggerState } from "react-stately";
-import { UserHeaderSkeleton } from "@/components/users/UserHeader";
+import { PersonHeaderSkeleton } from "@/components/common/PersonHeader";
 import { UserDetailSkeleton } from "@/components/users/UserDetail";
 import { DetailBottomSheet } from "@/components/common/DetailBottomSheet";
 import { UserDetailClientContainerContext } from "../UserDetailClientContainer";
@@ -25,7 +25,7 @@ export function UserDetailBottomSheet({
       <Suspense
         fallback={
           <div className="flex flex-col gap-6">
-            <UserHeaderSkeleton />
+            <PersonHeaderSkeleton />
             <UserDetailSkeleton />
           </div>
         }

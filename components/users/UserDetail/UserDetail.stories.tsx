@@ -7,7 +7,7 @@ const meta = {
   component: UserDetail,
   decorators: [
     (Story) => (
-      <div className="w-[500px]">
+      <div className="w-[500px] max-lg:w-full">
         <Story />
       </div>
     ),

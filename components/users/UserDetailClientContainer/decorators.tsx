@@ -1,17 +1,20 @@
 import React from "react";
 import { UserDetail, UserDetailSkeleton } from "@/components/users/UserDetail";
 import { type Decorator } from "@storybook/react";
-import { UserHeader, UserHeaderSkeleton } from "@/components/users/UserHeader";
+import {
+  PersonHeader,
+  PersonHeaderSkeleton,
+} from "@/components/common/PersonHeader";
 import { UserDetailClientContainerContext } from "./UserDetailClientContainerContext";
 import { Default as UserDetailStory } from "@/components/users/UserDetail/UserDetail.stories";
-import { Default as UserHeaderStory } from "@/components/users/UserHeader/UserHeader.stories";
+import { Default as PersonHeaderStory } from "@/components/common/PersonHeader/PersonHeader.stories";
 
 export const withUserDetail: Decorator = (Story) => {
   return (
     <UserDetailClientContainerContext.Provider
       value={() => (
         <div className="flex flex-col gap-6">
-          <UserHeader {...UserHeaderStory.args} />
+          <PersonHeader {...PersonHeaderStory.args} />
           <UserDetail {...UserDetailStory.args} />
         </div>
       )}
@@ -26,7 +29,7 @@ export const withUserDetailSkeleton: Decorator = (Story) => {
     <UserDetailClientContainerContext.Provider
       value={() => (
         <div className="flex flex-col gap-6">
-          <UserHeaderSkeleton />
+          <PersonHeaderSkeleton />
           <UserDetailSkeleton />
         </div>
       )}

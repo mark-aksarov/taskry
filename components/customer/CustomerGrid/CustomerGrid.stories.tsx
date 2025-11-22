@@ -2,12 +2,13 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { CustomerGrid } from "./CustomerGrid";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { CustomerGridItem } from "../CustomerGridItem";
+import { withCustomerDetail } from "../CustomerDetailClientContainer/decorators";
 
 const meta = {
   title: "Components/customers/CustomerGrid",
   component: CustomerGrid,
   tags: ["autodocs"],
-  decorators: [withThemedBackground],
+  decorators: [withCustomerDetail, withThemedBackground],
 } satisfies Meta<typeof CustomerGrid>;
 
 export default meta;

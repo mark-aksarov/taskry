@@ -1,4 +1,4 @@
-import { UserHeader } from "../UserHeader";
+import { PersonHeader } from "@/components/common/PersonHeader";
 import { getUserDetails } from "@/lib/queries/user";
 
 export async function UserHeaderServerContainer({
@@ -9,10 +9,10 @@ export async function UserHeaderServerContainer({
   const user = await getUserDetails(userId);
 
   return (
-    <UserHeader
-      fullName={user.fullName}
+    <PersonHeader
+      title={user.fullName}
       imageUrl={user.imageUrl ?? undefined}
-      position={user.position ? { name: user.position.name } : undefined}
+      subtitle={user.position ? user.position.name : "Unknown position"}
     />
   );
 }

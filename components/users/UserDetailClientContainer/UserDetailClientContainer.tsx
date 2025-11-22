@@ -3,7 +3,7 @@
 import useSWR from "swr";
 import { GetUserDetailsType } from "@/lib/queries/user";
 import { UserDetail } from "@/components/users/UserDetail";
-import { UserHeader } from "@/components/users/UserHeader";
+import { PersonHeader } from "@/components/common/PersonHeader";
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
@@ -24,10 +24,10 @@ export function UserDetailClientContainer({
 
   return (
     <div className="flex flex-col gap-6">
-      <UserHeader
-        fullName={user.fullName}
+      <PersonHeader
+        title={user.fullName}
         imageUrl={user.imageUrl ?? undefined}
-        position={user.position ? { name: user.position.name } : undefined}
+        subtitle={user.position ? user.position.name : "Unknown position"}
       />
       <UserDetail
         id={user.id}

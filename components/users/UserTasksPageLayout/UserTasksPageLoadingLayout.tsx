@@ -15,9 +15,9 @@ import {
 import { Skeleton } from "@/components/ui";
 import { Repeat } from "@/components/common/Repeat";
 import { PageGrid } from "@/components/common/PageGrid";
-import { PageContainer } from "@/components/common/PageContainer";
 import { UserTaskList } from "@/components/users/UserTaskList";
-import { UserHeaderSkeleton } from "@/components/users/UserHeader";
+import { PageContainer } from "@/components/common/PageContainer";
+import { PersonHeaderSkeleton } from "@/components/common/PersonHeader";
 import { UserTaskListItemSkeleton } from "@/components/users/UserTaskListItem";
 
 interface UserTasksPageLoadingLayoutProps {
@@ -51,7 +51,7 @@ export function UserTasksPageLoadingLayout({
           </UserCardLeft>
 
           <UserCardRight>
-            <UserHeaderSkeleton />
+            <PersonHeaderSkeleton />
             {navigationDesktop}
           </UserCardRight>
         </UserCard>
