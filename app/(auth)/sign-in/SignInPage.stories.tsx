@@ -1,29 +1,29 @@
 import { fn } from "storybook/test";
-import { SignUpPage } from "./SignUpPage";
+import { SignInPage } from "./SignInPage";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { AuthPageDecorator } from "@/.storybook/AuthPageDecorator";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {
-  title: "components/pages/SignUpPage",
-  component: SignUpPage,
+  title: "components/pages/SignInPage",
+  component: SignInPage,
   parameters: { layout: "fullscreen" },
   decorators: [AuthPageDecorator, withThemedBackground],
-} satisfies Meta<typeof SignUpPage>;
+} satisfies Meta<typeof SignInPage>;
 
 export default meta;
 export type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    name: "John Doe",
     email: "2MhDx@example.com",
     password: "password",
-    setName: fn(),
     setEmail: fn(),
     setPassword: fn(),
     isSubmitting: false,
     setIsSubmitting: fn(),
+    rememberMe: false,
+    setRememberMe: fn(),
     handleSubmit: fn(),
   },
 } satisfies Story;
