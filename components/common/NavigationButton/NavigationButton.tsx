@@ -76,7 +76,7 @@ export const NavigationButton = ({
 
   return (
     <RACButton
-      onClick={onPress}
+      onPress={onPress}
       className={styles({ variant, isActive, className })}
     >
       {children}

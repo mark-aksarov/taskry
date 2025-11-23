@@ -3,7 +3,7 @@
 import { use, useState } from "react";
 import { authClient } from "@/lib/auth-client";
 
-export default function VerifyEmailPage({
+export default function AppVerifyEmailPage({
   searchParams,
 }: {
   searchParams: Promise<{ email: string }>;

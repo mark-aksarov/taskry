@@ -1,3 +1,19 @@
-export function AuthCardSubtitle({ children }: { children: React.ReactNode }) {
-  return <p className="text-sm text-gray-400 dark:text-gray-500">{children}</p>;
+import { twMerge } from "tailwind-merge";
+
+interface AuthCardSubtitleProps {
+  className?: string;
+  children: React.ReactNode;
+}
+
+export function AuthCardSubtitle({
+  className,
+  children,
+}: AuthCardSubtitleProps) {
+  return (
+    <p
+      className={twMerge("text-sm text-gray-500 dark:text-gray-400", className)}
+    >
+      {children}
+    </p>
+  );
 }

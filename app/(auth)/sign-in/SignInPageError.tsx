@@ -36,7 +36,7 @@ export function SignInPageError({
           <Button
             variant="outlined"
             className="justify-center py-4"
-            onClick={sendVerificationEmail}
+            onPress={sendVerificationEmail}
             iconLeft={<Mail size={18} strokeWidth={1.5} absoluteStrokeWidth />}
             label="Send again"
             size="medium"
@@ -45,7 +45,6 @@ export function SignInPageError({
           <Button
             variant="outlined"
             className="justify-center py-4"
-            onClick={sendVerificationEmail}
             iconLeft={<LogIn size={18} strokeWidth={1.5} absoluteStrokeWidth />}
             label="Sign in with email"
             size="medium"
