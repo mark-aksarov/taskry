@@ -1,5 +1,5 @@
+import { Button, TextField } from "@/components/ui";
 import { AuthCard, AuthCardHeader } from "@/components/auth";
-import { Button, Checkbox, TextField } from "@/components/ui";
 import { AuthCardBody } from "@/components/auth/AuthCardBody";
 import { AuthCardForm } from "@/components/auth/AuthCardForm";
 import { AuthCardFooter } from "@/components/auth/AuthCardFooter";
@@ -9,38 +9,38 @@ import { AuthCardFooterItem } from "@/components/auth/AuthCardFooterItem";
 import { AuthCardFooterText } from "@/components/auth/AuthCardFooterText";
 import { AuthCardFooterLink } from "@/components/auth/AuthCardFooterLink";
 
-interface ResetPasswordPageProps {
-  password: string;
-  setPassword: (password: string) => void;
+interface ForgetPasswordPageProps {
+  email: string;
+  setEmail: (email: string) => void;
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
 }
 
-export function ResetPasswordPage({
-  password,
-  setPassword,
+export function ForgetPasswordPage({
+  email,
+  setEmail,
   handleSubmit,
-}: ResetPasswordPageProps) {
+}: ForgetPasswordPageProps) {
   return (
     <AuthCard>
       <AuthCardHeader>
-        <AuthCardHeading>Reset password</AuthCardHeading>
+        <AuthCardHeading>Forgot password?</AuthCardHeading>
         <AuthCardSubtitle>
-          Provide a new password for your account.
+          Recover your account by requesting a password reset link.
         </AuthCardSubtitle>
       </AuthCardHeader>
       <AuthCardBody>
         <AuthCardForm onSubmit={handleSubmit}>
           <TextField
-            label="Password"
-            type="password"
-            placeholder="Enter your password"
-            value={password}
-            onChange={setPassword}
+            label="Email"
+            type="Email"
+            placeholder="Enter your email"
+            value={email}
+            onChange={setEmail}
           />
         </AuthCardForm>
         <Button
           size="medium"
-          label="Reset password"
+          label="Request reset link"
           className="justify-center py-4"
         />
       </AuthCardBody>

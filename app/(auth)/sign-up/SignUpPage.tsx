@@ -48,6 +48,7 @@ export function SignUpPage({
           />
           <TextField
             label="Email"
+            type="Email"
             placeholder="Enter your email"
             value={email}
             onChange={setEmail}
