@@ -4,14 +4,15 @@ import { useState } from "react";
 import { Attachment, Attachments } from "../attachments/Attachments";
 import Image from "next/image";
 import { MessageInput } from "../common/MessageInput";
+import { twMerge } from "tailwind-merge";
 
 export function CommentModalInput() {
   let [files, setFiles] = useState<FileList | null>(null);
 
   return (
-    <div className="flex w-full flex-col rounded-lg">
+    <div className="flex w-full flex-col gap-3 rounded-lg">
       {files && (
-        <Attachments>
+        <Attachments className="max-md:px-3 max-md:pt-3">
           {Array.from(files).map((file, index) => (
             <Attachment key={index}>
               <Image
@@ -26,6 +27,10 @@ export function CommentModalInput() {
       )}
 
       <MessageInput
+        inputClassName={twMerge(
+          "max-md:bg-white dark:max-md:bg-gray-800 max-md:outline-hidden max-md:rounded-none",
+          files && "border-t-1 border-gray-300 dark:border-gray-600",
+        )}
         placeholder="Type a comment..."
         onFilesSelect={(files) => setFiles(files)}
       />

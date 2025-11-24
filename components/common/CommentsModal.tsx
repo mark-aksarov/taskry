@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Dialog,
   DialogBody,
@@ -8,6 +10,7 @@ import {
 } from "@/components/ui";
 import { ResponsiveModal } from "@/components/common/ResponsiveModal";
 import { CommentModalInput } from "@/components/comments/CommentModalInput";
+import { useEffect, useState } from "react";
 
 interface CommentsModalProps {
   title: string;
@@ -15,6 +18,30 @@ interface CommentsModalProps {
 }
 
 export function CommentsModal({ title, children }: CommentsModalProps) {
+  const [keyboardOpen, setKeyboardOpen] = useState(false);
+
+  useEffect(() => {
+    const initialViewportHeight = window.innerHeight;
+    const keyboardThreshold = 100;
+
+    const handleResize = () => {
+      const currentViewportHeight = window.innerHeight;
+      const heightDifference = initialViewportHeight - currentViewportHeight;
+
+      if (heightDifference > keyboardThreshold) {
+        setKeyboardOpen(true);
+      } else if (Math.abs(heightDifference) < 20) {
+        setKeyboardOpen(false);
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return (
     <ResponsiveModal isDismissable className="w-[600px]">
       <Dialog className="md:max-h-[calc(100dvh-64px)]">
@@ -23,7 +50,7 @@ export function CommentsModal({ title, children }: CommentsModalProps) {
           <DialogCloseButton iconSize={20} />
         </DialogHeader>
         <DialogBody className="flex flex-col gap-4">{children}</DialogBody>
-        <DialogFooter className="px-4 py-3">
+        <DialogFooter className="max-md:p-0 md:px-4 md:py-3">
           <CommentModalInput />
         </DialogFooter>
       </Dialog>

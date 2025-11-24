@@ -9,7 +9,7 @@ export function Attachment({ className, children }: AttachmentProps) {
   return (
     <div
       className={twMerge(
-        "relative h-[6rem] w-[6rem] flex-none overflow-hidden rounded-md",
+        "relative w-[6rem] flex-none overflow-hidden rounded-md max-md:h-[4rem] md:h-[6rem]",
         className,
       )}
     >
