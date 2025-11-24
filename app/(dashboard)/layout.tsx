@@ -17,6 +17,7 @@ import { AppBottomSheetTrigger } from "@/components/layout/AppBottomSheetTrigger
 import { AppSidebarSheetTrigger } from "@/components/layout/AppSidebarSheetTrigger";
 import { NotificationListItemSkeleton } from "@/components/notifications/NotificationListItem";
 import { Repeat } from "@/components/common/Repeat";
+import { RouterProvider } from "@/components/ui/RouterProvider";
 
 const nunitoSans = Nunito_Sans({
   variable: "--font-nunito-sans",
@@ -64,30 +65,32 @@ export function Layout({
   );
 
   return (
-    <div className="flex">
-      <AppSidebar className="sticky top-0 z-2 h-screen flex-none shadow-lg max-xl:hidden">
-        <AppSidebarHeader>
-          <AppSidebarHeading />
-        </AppSidebarHeader>
-        <AppSidebarBody>
-          <AppNavigation />
-        </AppSidebarBody>
-      </AppSidebar>
+    <RouterProvider>
+      <div className="flex">
+        <AppSidebar className="sticky top-0 z-2 h-screen flex-none shadow-lg max-xl:hidden">
+          <AppSidebarHeader>
+            <AppSidebarHeading />
+          </AppSidebarHeader>
+          <AppSidebarBody>
+            <AppNavigation />
+          </AppSidebarBody>
+        </AppSidebar>
 
-      <div className="flex flex-auto flex-col">
-        <AppHeader
-          notificationModalTrigger={
-            <NotificationModalTrigger>
-              <Suspense fallback={notificationListSkeleton}>
-                <NotificationModalContentContainer />
-              </Suspense>
-            </NotificationModalTrigger>
-          }
-          appBottomSheetTrigger={<AppBottomSheetTrigger />}
-          appSidebarSheetTrigger={<AppSidebarSheetTrigger />}
-        />
-        <main>{children}</main>
+        <div className="flex flex-auto flex-col">
+          <AppHeader
+            notificationModalTrigger={
+              <NotificationModalTrigger>
+                <Suspense fallback={notificationListSkeleton}>
+                  <NotificationModalContentContainer />
+                </Suspense>
+              </NotificationModalTrigger>
+            }
+            appBottomSheetTrigger={<AppBottomSheetTrigger />}
+            appSidebarSheetTrigger={<AppSidebarSheetTrigger />}
+          />
+          <main>{children}</main>
+        </div>
       </div>
-    </div>
+    </RouterProvider>
   );
 }

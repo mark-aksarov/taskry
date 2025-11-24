@@ -1,6 +1,10 @@
 "use client";
 
-import { default as NextLink } from "next/link";
+import {
+  LinkProps as ReactAriaLinkProps,
+  Link as ReactAriaLink,
+} from "react-aria-components";
+
 import { focusRing } from "../styles";
 import { tv } from "tailwind-variants";
 
@@ -8,7 +12,9 @@ type LinkVariants = "primary";
 
 export type LinkProps = {
   variant?: LinkVariants;
-} & React.ComponentProps<typeof NextLink>;
+  className?: string;
+} & ReactAriaLinkProps &
+  React.RefAttributes<HTMLAnchorElement>;
 
 export const linkStyles = tv({
   extend: focusRing,
@@ -30,12 +36,12 @@ export const Link = ({
   ...props
 }: LinkProps) => {
   return (
-    <NextLink
+    <ReactAriaLink
       href={href}
       className={linkStyles({ className, variant })}
       {...props}
     >
       {children}
-    </NextLink>
+    </ReactAriaLink>
   );
 };
