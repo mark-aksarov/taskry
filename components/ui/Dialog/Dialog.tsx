@@ -1,17 +1,18 @@
 "use client";
 
-import React, { useContext } from "react";
-import { X } from "lucide-react";
-import { Button } from "../Button";
 import {
-  Dialog as RACDialog,
-  DialogProps as RACDialogProps,
   Heading,
-  OverlayTriggerStateContext,
   PressEvent,
   HeadingProps,
+  Dialog as RACDialog,
+  OverlayTriggerStateContext,
+  DialogProps as RACDialogProps,
 } from "react-aria-components";
+
+import { X } from "lucide-react";
+import { Button } from "../Button";
 import { twMerge } from "tailwind-merge";
+import React, { useContext } from "react";
 
 export const Dialog = ({ children, className, ...props }: RACDialogProps) => {
   return (
@@ -30,7 +31,7 @@ export const DialogHeader = ({
   ...props
 }: React.ComponentPropsWithRef<"div">) => {
   const classes = twMerge(
-    "flex items-center justify-between border-b-1 border-gray-300 dark:border-gray-600 px-5 py-4",
+    "flex items-center justify-between border-b-1 border-gray-300 dark:border-gray-600 md:px-5 md:py-4 max-md:px-4 max-md:py-3",
     className,
   );
 
@@ -50,7 +51,7 @@ export const DialogHeading = ({
     <Heading
       slot="title"
       className={twMerge(
-        "text-lg font-bold text-black dark:text-white",
+        "font-bold text-black max-md:text-base md:text-lg dark:text-white",
         className,
       )}
       {...props}
@@ -65,7 +66,10 @@ export const DialogBody = ({
   className,
   ...props
 }: React.ComponentPropsWithRef<"div">) => {
-  const classes = twMerge("h-full shrink-1 overflow-auto p-5", className);
+  const classes = twMerge(
+    "h-full shrink-1 overflow-auto md:p-5 max-md:p-4",
+    className,
+  );
 
   return (
     <div className={classes} {...props}>
@@ -80,7 +84,7 @@ export const DialogFooter = ({
   ...props
 }: React.ComponentPropsWithRef<"div">) => {
   const classes = twMerge(
-    "flex items-center justify-between border-t-1 border-gray-300 dark:border-gray-600 px-5 py-3",
+    "flex items-center justify-between border-t-1 border-gray-300 dark:border-gray-600 md:px-5 max-md:px-4 py-3",
     className,
   );
 
@@ -97,7 +101,7 @@ interface DialogCloseButtonProps {
 }
 
 export const DialogCloseButton = ({
-  iconSize = 16,
+  iconSize = 18,
   onPress,
 }: DialogCloseButtonProps) => {
   const state = useContext(OverlayTriggerStateContext);

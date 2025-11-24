@@ -28,9 +28,9 @@ export function NotificationModalTrigger({
         <Dialog className="md:max-h-[calc(100dvh-64px)]">
           <DialogHeader>
             <DialogHeading>Notifications</DialogHeading>
-            <DialogCloseButton iconSize={20} />
+            <DialogCloseButton />
           </DialogHeader>
-          <DialogBody className="p-0">{children}</DialogBody>
+          <DialogBody className="p-0!">{children}</DialogBody>
         </Dialog>
       </ResponsiveModal>
     </RACDialogTrigger>

@@ -35,8 +35,8 @@ export const LangMenuBottomSheetTrigger = () => {
     <MenuTrigger
       overlayType="bottomsheet"
       renderDialogHeader={() => (
-        <DialogHeader className="px-4 py-3">
-          <DialogHeading className="text-base">Language</DialogHeading>
+        <DialogHeader>
+          <DialogHeading>Language</DialogHeading>
           <DialogCloseButton />
         </DialogHeader>
       )}

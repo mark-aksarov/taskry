@@ -18,8 +18,8 @@ export function ProjectDetailCompactStatusMenuTrigger() {
   return (
     <ResponsiveMenuTrigger
       renderDialogHeader={() => (
-        <DialogHeader className="px-4 py-3">
-          <DialogHeading className="text-base">Project Status</DialogHeading>
+        <DialogHeader>
+          <DialogHeading>Project Status</DialogHeading>
           <DialogCloseButton />
         </DialogHeader>
       )}

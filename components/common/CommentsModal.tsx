@@ -47,10 +47,10 @@ export function CommentsModal({ title, children }: CommentsModalProps) {
       <Dialog className="md:max-h-[calc(100dvh-64px)]">
         <DialogHeader>
           <DialogHeading>{title}</DialogHeading>
-          <DialogCloseButton iconSize={20} />
+          <DialogCloseButton />
         </DialogHeader>
         <DialogBody className="flex flex-col gap-4">{children}</DialogBody>
-        <DialogFooter className="max-md:p-0 md:px-4 md:py-3">
+        <DialogFooter className="max-md:p-0">
           <CommentModalInput />
         </DialogFooter>
       </Dialog>

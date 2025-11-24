@@ -51,8 +51,8 @@ export const WithForm: Story = {
   render: (args) => (
     <BottomSheetTemplate {...args}>
       <Dialog>
-        <DialogHeader className="px-4 py-3">
-          <DialogHeading className="text-base">Bottom sheet</DialogHeading>
+        <DialogHeader>
+          <DialogHeading>Bottom sheet</DialogHeading>
           <DialogCloseButton />
         </DialogHeader>
         <DialogBody>

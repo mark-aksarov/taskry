@@ -45,11 +45,9 @@ export function ToolbarFiltersModalTrigger({
         <Dialog className="md:max-h-[calc(100dvh-64px)]">
           <DialogHeader>
             <DialogHeading>{title}</DialogHeading>
-            <DialogCloseButton iconSize={20} />
+            <DialogCloseButton />
           </DialogHeader>
-          <DialogBody className="text-black dark:text-white">
-            {filtersForm}
-          </DialogBody>
+          <DialogBody>{filtersForm}</DialogBody>
           <DialogFooter>
             <Button
               variant="primary"

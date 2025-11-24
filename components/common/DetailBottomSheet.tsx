@@ -25,7 +25,7 @@ export function DetailBottomSheet({
     <BottomSheet isDismissable state={state} className="md:hidden">
       <Dialog className="max-h-[calc(100dvh-6.25rem)]">
         <DialogHeader>
-          <DialogHeading className="text-base">{title}</DialogHeading>
+          <DialogHeading>{title}</DialogHeading>
           <DialogCloseButton />
         </DialogHeader>
         <DialogBody>{children}</DialogBody>

@@ -50,8 +50,8 @@ export function ToolbarCreateNewMenuTrigger({
       <ResponsiveMenuTrigger
         onAction={handleAction}
         renderDialogHeader={() => (
-          <DialogHeader className="px-4 py-3">
-            <DialogHeading className="text-base">Create New</DialogHeading>
+          <DialogHeader>
+            <DialogHeading>Create New</DialogHeading>
             <DialogCloseButton />
           </DialogHeader>
         )}

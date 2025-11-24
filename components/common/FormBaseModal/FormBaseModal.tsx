@@ -28,7 +28,7 @@ export function FormBaseModal({
       <Dialog className="md:max-h-[calc(100dvh-64px)]">
         <DialogHeader>
           <DialogHeading>{title}</DialogHeading>
-          <DialogCloseButton iconSize={20} />
+          <DialogCloseButton />
         </DialogHeader>
         <DialogBody>{form}</DialogBody>
         <DialogFooter>

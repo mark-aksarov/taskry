@@ -22,7 +22,7 @@ export function DetailModal({ title, children }: DetailModalProps) {
       <Dialog className="max-h-[calc(100dvh-64px)]">
         <DialogHeader>
           <DialogHeading>{title}</DialogHeading>
-          <DialogCloseButton iconSize={20} />
+          <DialogCloseButton />
         </DialogHeader>
         <DialogBody>{children}</DialogBody>
         <DialogFooter>

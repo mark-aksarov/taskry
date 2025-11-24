@@ -38,7 +38,7 @@ export const Right = {
         <Dialog className="w-[360px]">
           <DialogHeader>
             <DialogHeading>Side Sheet Header</DialogHeading>
-            <DialogCloseButton iconSize={20} />
+            <DialogCloseButton />
           </DialogHeader>
           <DialogBody className="text-black dark:text-white">
             content
@@ -59,7 +59,7 @@ export const Left = {
         <Dialog className="w-[360px]">
           <DialogHeader>
             <DialogHeading>Side Sheet Header</DialogHeading>
-            <DialogCloseButton iconSize={20} />
+            <DialogCloseButton />
           </DialogHeader>
           <DialogBody className="text-black dark:text-white">
             content
@@ -77,7 +77,7 @@ export const WithLongContent = {
         <Dialog className="w-[360px]">
           <DialogHeader>
             <DialogHeading>Side Sheet Header</DialogHeading>
-            <DialogCloseButton iconSize={20} />
+            <DialogCloseButton />
           </DialogHeader>
           <DialogBody className="text-black dark:text-white">
             <h3>The standard Lorem Ipsum passage, used since the 1500s</h3>

@@ -21,8 +21,8 @@ export function ToolbarActionsMenuTrigger<T extends object = any>({
   return (
     <ResponsiveMenuTrigger
       renderDialogHeader={() => (
-        <DialogHeader className="px-4 py-3">
-          <DialogHeading className="text-base">Actions</DialogHeading>
+        <DialogHeader>
+          <DialogHeading>Actions</DialogHeading>
           <DialogCloseButton />
         </DialogHeader>
       )}
