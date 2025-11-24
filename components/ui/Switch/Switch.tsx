@@ -9,12 +9,12 @@ import { twMerge } from "tailwind-merge";
 
 type SwitchProps = Omit<RACSwitchProps, "children"> &
   React.RefAttributes<HTMLLabelElement> & {
-    children: React.ReactNode;
+    children?: React.ReactNode;
   };
 
 const track = tv({
   extend: focusRing,
-  base: "flex h-[1.25rem] w-[2.25rem] shrink-0 cursor-default items-center rounded-full px-[3px] transition duration-200 ease-in-out",
+  base: "flex h-[1.5rem] w-[2.75rem] shrink-0 cursor-default items-center rounded-full px-[3px] transition duration-200 ease-in-out",
   variants: {
     isSelected: {
       false: "bg-gray-300 dark:bg-gray-500",
@@ -27,11 +27,11 @@ const track = tv({
 });
 
 const handle = tv({
-  base: "h-[0.875rem] w-[0.875rem] transform rounded-full bg-white transition duration-200 ease-in-out",
+  base: "h-[1.125rem] w-[1.125rem] transform rounded-full bg-white transition duration-200 ease-in-out",
   variants: {
     isSelected: {
       false: "translate-x-0",
-      true: "translate-x-[1rem]",
+      true: "translate-x-[1.25rem]",
     },
     isDisabled: {
       true: "bg-gray-100 dark:bg-gray-600",
@@ -45,7 +45,7 @@ export function Switch({ children, ...props }: SwitchProps) {
       {...props}
       className={composeRenderProps(props.className, (className) =>
         twMerge(
-          "flex items-center gap-2 text-xs font-bold text-black transition disabled:text-gray-400 dark:text-white dark:disabled:text-gray-500",
+          "flex items-center gap-2 text-sm font-semibold text-black transition disabled:text-gray-400 dark:text-white dark:disabled:text-gray-500",
           className,
         ),
       )}

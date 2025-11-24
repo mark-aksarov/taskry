@@ -65,33 +65,11 @@ export function ToolbarCreateNewMenuTrigger({
         )}
         placement="bottom right"
       >
-        <Item textValue="Task" key="task">
-          <CalendarCheck size={16} strokeWidth={1.5} absoluteStrokeWidth /> Task
-        </Item>
-        <Item textValue="Task Category" key="taskCategory">
-          <Blocks size={16} strokeWidth={1.5} absoluteStrokeWidth /> Task
-          Category
-        </Item>
-        <Item textValue="Project" key="project">
-          <FolderClosed size={16} strokeWidth={1.5} absoluteStrokeWidth />{" "}
-          Project
-        </Item>
-        <Item textValue="Project Category" key="projectCategory">
-          <Blocks size={16} strokeWidth={1.5} absoluteStrokeWidth />
-          Project Category
-        </Item>
         <Item textValue="Customer" key="customer">
           <Contact size={16} strokeWidth={1.5} absoluteStrokeWidth /> Customer
         </Item>
-        <Item textValue="Company" key="company">
-          <Building2 size={16} strokeWidth={1.5} absoluteStrokeWidth /> Company
-        </Item>
         <Item textValue="User" key="user">
-          <Users size={16} strokeWidth={1.5} absoluteStrokeWidth /> User
-        </Item>
-        <Item textValue="Position" key="position">
-          <BriefcaseBusiness size={16} strokeWidth={1.5} absoluteStrokeWidth />{" "}
-          Position
+          <Building2 size={16} strokeWidth={1.5} absoluteStrokeWidth /> Company
         </Item>
       </ResponsiveMenuTrigger>
 

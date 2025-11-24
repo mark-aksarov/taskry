@@ -40,7 +40,6 @@ export function ToolbarSortingMenuTrigger<T extends object = any>({
           />
           <Button
             {...triggerProps}
-            aria-label="actions"
             variant="outlined"
             label="Sorting"
             iconLeft={

@@ -4,6 +4,7 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { TaskFiltersFormProjectCheckboxGroup } from "./TaskFiltersFormProjectCheckboxGroup";
 import { TaskFiltersFormCategoryCheckboxGroup } from "./TaskFiltersFormCategoryCheckboxGroup";
 import { TaskFiltersFormAssigneeCheckboxGroup } from "./TaskFiltersFormAssigneeCheckboxGroup";
+import { TaskFiltersFormStatusCheckboxGroup } from "./TaskFiltersFormStatusCheckboxGroup";
 
 const meta: Meta<typeof TaskFiltersForm> = {
   title: "Components/tasks/TaskFiltersForm",
@@ -28,27 +29,19 @@ type Story = StoryObj<typeof meta>;
 export const Default = {
   args: {
     statusCheckboxGroup: (
-      <TaskFiltersFormCategoryCheckboxGroup
-        categories={[
+      <TaskFiltersFormStatusCheckboxGroup
+        statuses={[
           {
-            id: 1,
-            name: "UI Design",
+            id: "pending",
+            name: "Pending",
           },
           {
-            id: 2,
-            name: "Wireframing",
+            id: "active",
+            name: "Active",
           },
           {
-            id: 3,
-            name: "Frontend Development",
-          },
-          {
-            id: 4,
-            name: "Backend Development",
-          },
-          {
-            id: 5,
-            name: "Testing & QA",
+            id: "completed",
+            name: "Completed",
           },
         ]}
       />

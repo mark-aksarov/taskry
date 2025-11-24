@@ -1,8 +1,9 @@
 "use client";
 
-import { RACForm } from "@/components/ui";
-import { TextField } from "@/components/ui";
-import { ProjectDeadline } from "../ProjectDeadline";
+import { Divider, RACForm } from "@/components/ui";
+import { ProjectFiltersFormDeadlineRange } from "./ProjectFiltersFormDeadlineRange";
+import { ProjectFiltersFormDeadlineCheckboxGroup } from "./ProjectFiltersFormDeadlineCheckboxGroup";
+import { Switch } from "@/components/ui/Switch";
 
 interface ProjectFiltersFormProps {
   projectStatusCheckboxGroup: React.ReactNode;
@@ -20,11 +21,24 @@ export function ProjectFiltersForm({
   return (
     <RACForm>
       <div className="flex flex-col gap-4">
-        <TextField label="Title" placeholder="Title" />
-        <ProjectDeadline />
+        <Switch className="justify-between">Has not active tasks</Switch>
+        <Divider />
+
+        <ProjectFiltersFormDeadlineCheckboxGroup />
+        <Divider />
+
+        <ProjectFiltersFormDeadlineRange />
+        <Divider />
+
         {projectStatusCheckboxGroup}
+        <Divider />
+
         {projectCategoryCheckboxGroup}
+        <Divider />
+
         {customerCheckboxGroup}
+        <Divider />
+
         {userCheckboxGroup}
       </div>
     </RACForm>

@@ -63,7 +63,7 @@ export function ProjectsPage({
           <ToolbarMobileTop>
             <ToolbarMobileHeading>Projects</ToolbarMobileHeading>
             <ProjectToolbarSortingMenuTrigger />
-            <ProjectToolbarFiltersBottomSheetTrigger
+            <ProjectToolbarFiltersModalTrigger
               filtersForm={
                 <Suspense fallback={<ProjectFiltersFormSkeleton />}>
                   <ProjectFiltersFormContainer />

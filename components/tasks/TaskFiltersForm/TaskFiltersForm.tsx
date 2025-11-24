@@ -1,8 +1,8 @@
 "use client";
 
-import { RACForm } from "@/components/ui";
-import { TextField } from "@/components/ui";
-import { TaskFiltersDeadline } from "../TaskFiltersDeadline";
+import { Divider, RACForm } from "@/components/ui";
+import { TaskFiltersFormDeadlineRange } from "./TaskFiltersFormDeadlineRange";
+import { TaskFiltersFormDeadlineCheckboxGroup } from "./TaskFiltersFormDeadlineCheckboxGroup";
 
 interface TaskFiltersFormProps {
   statusCheckboxGroup: React.ReactNode;
@@ -20,12 +20,22 @@ export function TaskFiltersForm({
   return (
     <RACForm>
       <div className="flex flex-col gap-4">
-        <TextField label="Title" placeholder="Title" />
-        <TaskFiltersDeadline />
+        <TaskFiltersFormDeadlineCheckboxGroup />
+        <Divider />
+
+        <TaskFiltersFormDeadlineRange />
+        <Divider />
+
         {statusCheckboxGroup}
+        <Divider />
+
         {categoryCheckboxGroup}
+        <Divider />
         {projectCheckboxGroup}
+        <Divider />
+
         {assigneeCheckboxGroup}
+        <Divider />
       </div>
     </RACForm>
   );

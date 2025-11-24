@@ -12,6 +12,7 @@ import {
 import { Button } from "@/components/ui/Button";
 import { SlidersHorizontal } from "lucide-react";
 import { DialogTrigger } from "react-aria-components";
+import { ResponsiveModal } from "../ResponsiveModal";
 
 interface ToolbarFiltersModalTriggerProps {
   title: string;
@@ -30,9 +31,18 @@ export function ToolbarFiltersModalTrigger({
         iconLeft={
           <SlidersHorizontal size={16} strokeWidth={1.5} absoluteStrokeWidth />
         }
+        className="max-md:hidden"
       />
-      <Modal isDismissable className="w-[500px]">
-        <Dialog className="max-h-[calc(100dvh-64px)]">
+      <Button
+        aria-label="Filters"
+        variant="outlined"
+        iconLeft={
+          <SlidersHorizontal size={16} strokeWidth={1.5} absoluteStrokeWidth />
+        }
+        className="md:hidden"
+      />
+      <ResponsiveModal isDismissable className="w-[500px]">
+        <Dialog className="md:max-h-[calc(100dvh-64px)]">
           <DialogHeader>
             <DialogHeading>{title}</DialogHeading>
             <DialogCloseButton iconSize={20} />
@@ -49,7 +59,7 @@ export function ToolbarFiltersModalTrigger({
             />
           </DialogFooter>
         </Dialog>
-      </Modal>
+      </ResponsiveModal>
     </DialogTrigger>
   );
 }

@@ -1,7 +1,7 @@
 "use client";
 
-import { RACForm } from "@/components/ui";
-import { TextField } from "@/components/ui";
+import { Divider, RACForm } from "@/components/ui";
+import { Switch } from "@/components/ui/Switch";
 
 interface CustomerFiltersFormProps {
   companyCheckboxGroup: React.ReactNode;
@@ -13,7 +13,15 @@ export function CustomerFiltersForm({
   return (
     <RACForm>
       <div className="flex flex-col gap-4">
-        <TextField label="Name" placeholder="Name" />
+        <Switch className="justify-between">Has no active projects</Switch>
+        <Divider />
+
+        <Switch className="justify-between">Has active projects</Switch>
+        <Divider />
+
+        <Switch className="justify-between">Has overdue projects</Switch>
+        <Divider />
+
         {companyCheckboxGroup}
       </div>
     </RACForm>

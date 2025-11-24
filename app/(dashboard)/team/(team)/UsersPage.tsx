@@ -15,7 +15,6 @@ import { UserFiltersFormSkeleton } from "@/components/users/UserFiltersForm";
 import { NewProjectFormSkeleton } from "@/components/projects/NewProjectForm";
 import { UserToolbarActionsMenuTrigger } from "@/components/users/UserToolbarActionsMenuTrigger";
 import { UserToolbarFiltersModalTrigger } from "@/components/users/UserToolbarFiltersModalTrigger";
-import { UserToolbarFiltersBottomSheetTrigger } from "@/components/users/UserToolbarFiltersBottomSheetTrigger";
 
 interface UsersPageProps {
   UserFiltersFormContainer: React.ComponentType;
@@ -60,7 +59,7 @@ export async function UsersPage({
 
           <ToolbarMobileTop>
             <ToolbarMobileHeading>Users</ToolbarMobileHeading>
-            <UserToolbarFiltersBottomSheetTrigger
+            <UserToolbarFiltersModalTrigger
               filtersForm={
                 <Suspense fallback={<UserFiltersFormSkeleton />}>
                   <UserFiltersFormContainer />

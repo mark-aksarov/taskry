@@ -16,7 +16,6 @@ import { NewProjectFormSkeleton } from "@/components/projects/NewProjectForm";
 import { TaskToolbarSortingMenuTrigger } from "@/components/tasks/TaskToolbarSortingMenuTrigger";
 import { TaskToolbarActionsMenuTrigger } from "@/components/tasks/TaskToolbarActionsMenuTrigger";
 import { TaskToolbarFiltersModalTrigger } from "@/components/tasks/TaskToolbarFiltersModalTrigger";
-import { TaskToolbarFiltersBottomSheetTrigger } from "@/components/tasks/TaskToolbarFiltersBottomSheetTrigger";
 
 interface TasksPageProps {
   TaskFiltersFormContainer: React.ComponentType;
@@ -64,7 +63,7 @@ export function TasksPage({
           <ToolbarMobileTop>
             <ToolbarMobileHeading>Tasks</ToolbarMobileHeading>
             <TaskToolbarSortingMenuTrigger />
-            <TaskToolbarFiltersBottomSheetTrigger
+            <TaskToolbarFiltersModalTrigger
               filtersForm={
                 <Suspense fallback={<TaskFiltersFormSkeleton />}>
                   <TaskFiltersFormContainer />
