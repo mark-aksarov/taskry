@@ -1,10 +1,10 @@
-import { Layout } from "../app/(auth)/layout";
+import AppAuthLayout from "../app/(auth)/layout";
 import { type Decorator } from "@storybook/react";
 
 export const AuthPageDecorator: Decorator = (Story) => {
   return (
-    <Layout>
+    <AppAuthLayout>
       <Story />
-    </Layout>
+    </AppAuthLayout>
   );
 };

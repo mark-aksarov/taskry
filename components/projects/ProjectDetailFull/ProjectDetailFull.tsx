@@ -40,7 +40,7 @@ export function ProjectDetailFull({
               {attachments.map((attachment) => (
                 <Attachment
                   key={attachment.id}
-                  className="aspect-6/5 h-auto w-auto max-w-[12rem] flex-auto"
+                  className="aspect-6/5 h-auto! w-auto max-w-[12rem] flex-auto"
                 >
                   <Image
                     src={attachment.fileUrl}
