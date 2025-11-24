@@ -12,8 +12,8 @@ import {
 } from "@/components/ui";
 import { Suspense, useContext } from "react";
 import { OverlayTriggerState } from "react-stately";
+import { ProjectDetailCompactSkeleton } from "../ProjectDetailCompact";
 import { ProjectDetailCompactClientContainerContext } from "../ProjectDetailCompactClientContainer";
-import { ProjectDetailCompactSkeleton } from "../ProjectDetailCompact/ProjectDetailCompactSkeleton";
 
 export interface ProjectDetailBottomSheetProps {
   projectId: number;
@@ -42,11 +42,9 @@ export function ProjectDetailBottomSheet({
         </DialogBody>
         <DialogFooter>
           <Button
-            as="a"
-            href={`/projects/${projectId}`}
             variant="primary"
             size="medium"
-            label="Open in Full Page"
+            label="Edit"
             className="w-full justify-center"
           />
         </DialogFooter>

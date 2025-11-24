@@ -3,15 +3,15 @@ import { FormBaseModal } from "@/components/common/FormBaseModal";
 
 interface EditTaskModalProps
   extends Pick<ModalProps, "isOpen" | "onOpenChange"> {
-  newTaskForm: React.ReactNode;
+  editTaskForm: React.ReactNode;
 }
 
-export function EditTaskModal({ newTaskForm, ...props }: EditTaskModalProps) {
+export function EditTaskModal({ editTaskForm, ...props }: EditTaskModalProps) {
   return (
     <FormBaseModal
       title="Edit Task"
       submitButtonLabel="Update Task"
-      form={newTaskForm}
+      form={editTaskForm}
       {...props}
     />
   );

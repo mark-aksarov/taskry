@@ -11,8 +11,12 @@ import {
   DialogCloseButton,
 } from "@/components/ui";
 import { Suspense, useContext } from "react";
+import { EditTaskModal } from "../EditTaskModal";
 import { OverlayTriggerState } from "react-stately";
-import { TaskDetailCompactSkeleton } from "../TaskDetailCompact/TaskDetailCompactSkeleton";
+import { DialogTrigger } from "react-aria-components";
+import { TaskFormBaseSkeleton } from "../TaskFormBase";
+import { TaskDetailCompactSkeleton } from "../TaskDetailCompact";
+import { EditTaskFormClientContainerContext } from "../EditTaskFormClientContainer";
 import { TaskDetailCompactClientContainerContext } from "../TaskDetailCompactClientContainer";
 
 export interface TaskDetailBottomSheetProps {
@@ -28,6 +32,8 @@ export function TaskDetailBottomSheet({
     TaskDetailCompactClientContainerContext,
   );
 
+  const EditTaskFormContainer = useContext(EditTaskFormClientContainerContext);
+
   return (
     <BottomSheet isDismissable state={state} className="md:hidden">
       <Dialog className="max-h-[calc(100dvh-6.25rem)]">
@@ -41,14 +47,21 @@ export function TaskDetailBottomSheet({
           </Suspense>
         </DialogBody>
         <DialogFooter>
-          <Button
-            as="a"
-            href={`/tasks/${taskId}`}
-            variant="primary"
-            size="medium"
-            label="Open in Full Page"
-            className="w-full justify-center"
-          />
+          <DialogTrigger>
+            <Button
+              variant="primary"
+              size="medium"
+              label="Edit"
+              className="w-full justify-center"
+            />
+            <EditTaskModal
+              editTaskForm={
+                <Suspense fallback={<TaskFormBaseSkeleton />}>
+                  <EditTaskFormContainer />
+                </Suspense>
+              }
+            />
+          </DialogTrigger>
         </DialogFooter>
       </Dialog>
     </BottomSheet>
