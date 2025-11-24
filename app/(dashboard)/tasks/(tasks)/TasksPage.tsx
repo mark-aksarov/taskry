@@ -3,7 +3,6 @@ import {
   ToolbarMobileTop,
   ToolbarMobileBottom,
   ToolbarMobileHeading,
-  ToolbarCreateNewMenuTrigger,
 } from "@/components/common/Toolbar";
 import { Suspense } from "react";
 import { PageGrid } from "@/components/common/PageGrid";
@@ -12,22 +11,20 @@ import { PageContainer } from "@/components/common/PageContainer";
 import { TaskFormBaseSkeleton } from "@/components/tasks/TaskFormBase";
 import { ViewModeToggleButtonGroup } from "@/components/common/ViewMode";
 import { TaskFiltersFormSkeleton } from "@/components/tasks/TaskFiltersForm";
-import { NewProjectFormSkeleton } from "@/components/projects/NewProjectForm";
 import { TaskToolbarSortingMenuTrigger } from "@/components/tasks/TaskToolbarSortingMenuTrigger";
 import { TaskToolbarActionsMenuTrigger } from "@/components/tasks/TaskToolbarActionsMenuTrigger";
 import { TaskToolbarFiltersModalTrigger } from "@/components/tasks/TaskToolbarFiltersModalTrigger";
+import { TaskToolbarCreateNewMenuTrigger } from "@/components/tasks/TaskToolbarCreateNewMenuTrigger";
 
 interface TasksPageProps {
   TaskFiltersFormContainer: React.ComponentType;
   NewTaskFormContainer: React.ComponentType;
-  NewProjectFormContainer: React.ComponentType;
   TasksServerContainer: React.ComponentType;
 }
 
 export function TasksPage({
   TaskFiltersFormContainer,
   NewTaskFormContainer,
-  NewProjectFormContainer,
   TasksServerContainer,
 }: TasksPageProps) {
   return (
@@ -46,17 +43,13 @@ export function TasksPage({
             <TaskToolbarActionsMenuTrigger />
             <ViewModeToggleButtonGroup className="ml-auto" />
 
-            <ToolbarCreateNewMenuTrigger
+            <TaskToolbarCreateNewMenuTrigger
               newTaskForm={
                 <Suspense fallback={<TaskFormBaseSkeleton />}>
                   <NewTaskFormContainer />
                 </Suspense>
               }
-              newProjectForm={
-                <Suspense fallback={<NewProjectFormSkeleton />}>
-                  <NewProjectFormContainer />
-                </Suspense>
-              }
+              newTaskCategoryForm={<></>}
             />
           </ToolbarDesktop>
 
@@ -75,17 +68,13 @@ export function TasksPage({
 
           <ToolbarMobileBottom>
             <ViewModeToggleButtonGroup />
-            <ToolbarCreateNewMenuTrigger
+            <TaskToolbarCreateNewMenuTrigger
               newTaskForm={
                 <Suspense fallback={<TaskFormBaseSkeleton />}>
                   <NewTaskFormContainer />
                 </Suspense>
               }
-              newProjectForm={
-                <Suspense fallback={<NewProjectFormSkeleton />}>
-                  <NewProjectFormContainer />
-                </Suspense>
-              }
+              newTaskCategoryForm={<></>}
             />
           </ToolbarMobileBottom>
 

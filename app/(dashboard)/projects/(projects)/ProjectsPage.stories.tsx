@@ -5,7 +5,6 @@ import { usePathname } from "next/navigation";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { ProjectsPageEmpty } from "./ProjectsPageEmpty";
 import { PageDecorator } from "@/.storybook/PageDecorator";
-import { NewTaskForm } from "@/components/tasks/NewTaskForm";
 import { ViewModeLayout } from "@/components/common/ViewMode";
 import { ProjectList } from "@/components/projects/ProjectList";
 import { ProjectGrid } from "@/components/projects/ProjectGrid";
@@ -13,7 +12,6 @@ import { NewProjectForm } from "@/components/projects/NewProjectForm";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { ProjectFiltersForm } from "@/components/projects/ProjectFiltersForm";
 import { withUserDetail } from "@/components/users/UserDetailClientContainer/decorators";
-import { Default as NewTaskFormStory } from "@/components/tasks/TaskFormBase/TaskFormBase.stories";
 import { Default as ProjectListStory } from "@/components/projects/ProjectList/ProjectList.stories";
 import { Default as ProjectGridStory } from "@/components/projects/ProjectGrid/ProjectGrid.stories";
 import { withProjectComments } from "@/components/projects/ProjectCommentsClientContainer/decorators";
@@ -51,8 +49,6 @@ export const Default: Story = {
         grid={<ProjectGrid {...ProjectGridStory.args} />}
       />
     ),
-
-    NewTaskFormContainer: () => <NewTaskForm {...NewTaskFormStory.args} />,
     NewProjectFormContainer: () => (
       <NewProjectForm {...NewProjectFormStory.args} />
     ),

@@ -4,7 +4,6 @@ import { TasksPageEmpty } from "./TasksPageEmpty";
 import { TasksServerContainer } from "@/components/tasks/TasksServerContainer";
 import { NewTaskFormServerContainer } from "@/components/tasks/NewTaskFormServerContainer";
 import { TaskFiltersFormServerContainer } from "@/components/tasks/TaskFiltersFormServerContainer";
-import { NewProjectFormServerContainer } from "@/components/projects/NewProjectFormServerContainer";
 
 export default async function AppTasksPage() {
   const tasks = await getTaskList();
@@ -15,7 +14,6 @@ export default async function AppTasksPage() {
     <TasksPage
       TaskFiltersFormContainer={TaskFiltersFormServerContainer}
       NewTaskFormContainer={NewTaskFormServerContainer}
-      NewProjectFormContainer={NewProjectFormServerContainer}
       TasksServerContainer={TasksServerContainer}
     />
   );

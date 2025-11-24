@@ -3,31 +3,27 @@ import {
   ToolbarMobileTop,
   ToolbarMobileBottom,
   ToolbarMobileHeading,
-  ToolbarCreateNewMenuTrigger,
 } from "@/components/common/Toolbar";
 import { Suspense } from "react";
 import { PageGrid } from "@/components/common/PageGrid";
 import { ViewModeProvider } from "@/components/common/ViewMode";
 import { PageContainer } from "@/components/common/PageContainer";
-import { TaskFormBaseSkeleton } from "@/components/tasks/TaskFormBase";
 import { ViewModeToggleButtonGroup } from "@/components/common/ViewMode";
 import { NewProjectFormSkeleton } from "@/components/projects/NewProjectForm";
 import { ProjectFiltersFormSkeleton } from "@/components/projects/ProjectFiltersForm";
 import { ProjectToolbarSortingMenuTrigger } from "@/components/projects/ProjectToolbarSortingMenuTrigger";
 import { ProjectToolbarActionsMenuTrigger } from "@/components/projects/ProjectToolbarActionsMenuTrigger";
 import { ProjectToolbarFiltersModalTrigger } from "@/components/projects/ProjectToolbarFiltersModalTrigger";
-import { ProjectToolbarFiltersBottomSheetTrigger } from "@/components/projects/ProjectToolbarFiltersBottomSheetTrigger";
+import { ProjectToolbarCreateNewMenuTrigger } from "@/components/projects/ProjectToolbarCreateNewMenuTrigger";
 
 interface ProjectsPageProps {
   ProjectFiltersFormContainer: React.ComponentType;
-  NewTaskFormContainer: React.ComponentType;
   NewProjectFormContainer: React.ComponentType;
   ProjectsServerContainer: React.ComponentType;
 }
 
 export function ProjectsPage({
   ProjectFiltersFormContainer,
-  NewTaskFormContainer,
   NewProjectFormContainer,
   ProjectsServerContainer,
 }: ProjectsPageProps) {
@@ -46,17 +42,13 @@ export function ProjectsPage({
             />
             <ProjectToolbarActionsMenuTrigger />
             <ViewModeToggleButtonGroup className="ml-auto" />
-            <ToolbarCreateNewMenuTrigger
-              newTaskForm={
-                <Suspense fallback={<TaskFormBaseSkeleton />}>
-                  <NewTaskFormContainer />
-                </Suspense>
-              }
+            <ProjectToolbarCreateNewMenuTrigger
               newProjectForm={
                 <Suspense fallback={<NewProjectFormSkeleton />}>
                   <NewProjectFormContainer />
                 </Suspense>
               }
+              newProjectCategoryForm={<></>}
             />
           </ToolbarDesktop>
 
@@ -75,17 +67,13 @@ export function ProjectsPage({
 
           <ToolbarMobileBottom>
             <ViewModeToggleButtonGroup />
-            <ToolbarCreateNewMenuTrigger
-              newTaskForm={
-                <Suspense fallback={<TaskFormBaseSkeleton />}>
-                  <NewTaskFormContainer />
-                </Suspense>
-              }
+            <ProjectToolbarCreateNewMenuTrigger
               newProjectForm={
                 <Suspense fallback={<NewProjectFormSkeleton />}>
                   <NewProjectFormContainer />
                 </Suspense>
               }
+              newProjectCategoryForm={<></>}
             />
           </ToolbarMobileBottom>
           <ProjectsServerContainer />

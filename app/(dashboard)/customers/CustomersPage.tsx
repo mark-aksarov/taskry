@@ -3,30 +3,24 @@ import {
   ToolbarMobileTop,
   ToolbarMobileBottom,
   ToolbarMobileHeading,
-  ToolbarCreateNewMenuTrigger,
 } from "@/components/common/Toolbar";
 import { Suspense } from "react";
 import { PageGrid } from "@/components/common/PageGrid";
 import { ViewModeProvider } from "@/components/common/ViewMode";
 import { PageContainer } from "@/components/common/PageContainer";
-import { TaskFormBaseSkeleton } from "@/components/tasks/TaskFormBase";
 import { ViewModeToggleButtonGroup } from "@/components/common/ViewMode";
-import { NewProjectFormSkeleton } from "@/components/projects/NewProjectForm";
 import { CustomerFiltersFormSkeleton } from "@/components/customer/CustomerFiltersForm";
 import { CustomerToolbarActionsMenuTrigger } from "@/components/customer/CustomerToolbarActionsMenuTrigger";
 import { CustomerToolbarFiltersModalTrigger } from "@/components/customer/CustomerToolbarFiltersModalTrigger";
+import { CustomerToolbarCreateNewMenuTrigger } from "@/components/customer/CustomerToolbarCreateNewMenuTrigger";
 
 interface CustomersPageProps {
   CustomerFiltersFormContainer: React.ComponentType;
-  NewTaskFormContainer: React.ComponentType;
-  NewProjectFormContainer: React.ComponentType;
   CustomersServerContainer: React.ComponentType;
 }
 
 export async function CustomersPage({
   CustomerFiltersFormContainer,
-  NewTaskFormContainer,
-  NewProjectFormContainer,
   CustomersServerContainer,
 }: CustomersPageProps) {
   return (
@@ -43,17 +37,9 @@ export async function CustomersPage({
             />
             <CustomerToolbarActionsMenuTrigger />
             <ViewModeToggleButtonGroup className="ml-auto" />
-            <ToolbarCreateNewMenuTrigger
-              newTaskForm={
-                <Suspense fallback={<TaskFormBaseSkeleton />}>
-                  <NewTaskFormContainer />
-                </Suspense>
-              }
-              newProjectForm={
-                <Suspense fallback={<NewProjectFormSkeleton />}>
-                  <NewProjectFormContainer />
-                </Suspense>
-              }
+            <CustomerToolbarCreateNewMenuTrigger
+              newCustomerForm={<></>}
+              newCompanyForm={<></>}
             />
           </ToolbarDesktop>
 
@@ -71,17 +57,9 @@ export async function CustomersPage({
 
           <ToolbarMobileBottom>
             <ViewModeToggleButtonGroup />
-            <ToolbarCreateNewMenuTrigger
-              newTaskForm={
-                <Suspense fallback={<TaskFormBaseSkeleton />}>
-                  <NewTaskFormContainer />
-                </Suspense>
-              }
-              newProjectForm={
-                <Suspense fallback={<NewProjectFormSkeleton />}>
-                  <NewProjectFormContainer />
-                </Suspense>
-              }
+            <CustomerToolbarCreateNewMenuTrigger
+              newCustomerForm={<></>}
+              newCompanyForm={<></>}
             />
           </ToolbarMobileBottom>
           <CustomersServerContainer />

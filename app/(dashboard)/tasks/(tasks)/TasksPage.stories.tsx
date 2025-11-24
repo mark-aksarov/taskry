@@ -10,7 +10,6 @@ import { PageDecorator } from "@/.storybook/PageDecorator";
 import { NewTaskForm } from "@/components/tasks/NewTaskForm";
 import { ViewModeLayout } from "@/components/common/ViewMode";
 import { TaskFiltersForm } from "@/components/tasks/TaskFiltersForm";
-import { NewProjectForm } from "@/components/projects/NewProjectForm";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { Default as TaskListStory } from "@/components/tasks/TaskList/TaskList.stories";
 import { Default as TaskGridStory } from "@/components/tasks/TaskGrid/TaskGrid.stories";
@@ -18,7 +17,6 @@ import { withUserDetail } from "@/components/users/UserDetailClientContainer/dec
 import { withTaskComments } from "@/components/tasks/TaskCommentsClientContainer/decorators";
 import { Default as NewTaskFormStory } from "@/components/tasks/TaskFormBase/TaskFormBase.stories";
 import { withTaskDetailCompact } from "@/components/tasks/TaskDetailCompactClientContainer/decorators";
-import { Default as NewProjectFormStory } from "@/components/projects/NewProjectForm/NewProjectForm.stories";
 import { Default as TaskFiltersFormStory } from "@/components/tasks/TaskFiltersForm/TaskFiltersForm.stories";
 import { withProjectDetailCompact } from "@/components/projects/ProjectDetailCompactClientContainer/decorators";
 
@@ -48,9 +46,6 @@ export const Default: Story = {
       <TaskFiltersForm {...TaskFiltersFormStory.args} />
     ),
     NewTaskFormContainer: () => <NewTaskForm {...NewTaskFormStory.args} />,
-    NewProjectFormContainer: () => (
-      <NewProjectForm {...NewProjectFormStory.args} />
-    ),
     TasksServerContainer: () => (
       <ViewModeLayout
         list={<TaskList {...TaskListStory.args} />}

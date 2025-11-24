@@ -2,46 +2,36 @@
 
 import {
   Button,
-  DialogCloseButton,
   DialogHeader,
   DialogHeading,
+  DialogCloseButton,
 } from "@/components/ui";
 import { useState } from "react";
-import {
-  Blocks,
-  BriefcaseBusiness,
-  Building2,
-  CalendarCheck,
-  Contact,
-  FolderClosed,
-  Plus,
-  Users,
-} from "lucide-react";
 import { Key, useOverlayTrigger } from "react-aria";
+import { Blocks, CalendarCheck, Plus } from "lucide-react";
 import { Item, useOverlayTriggerState } from "react-stately";
 import { NewTaskModal } from "@/components/tasks/NewTaskModal";
-import { ResponsiveMenuTrigger } from "../ResponsiveMenuTrigger";
-import { NewProjectModal } from "@/components/projects/NewProjectModal";
+import { ResponsiveMenuTrigger } from "@/components/common/ResponsiveMenuTrigger";
 
-interface ToolbarCreateNewMenuTriggerProps {
+interface TaskToolbarCreateNewMenuTriggerProps {
   newTaskForm: React.ReactNode;
-  newProjectForm: React.ReactNode;
+  newTaskCategoryForm: React.ReactNode;
 }
 
-export function ToolbarCreateNewMenuTrigger({
+export function TaskToolbarCreateNewMenuTrigger({
   newTaskForm,
-  newProjectForm,
-}: ToolbarCreateNewMenuTriggerProps) {
+  newTaskCategoryForm,
+}: TaskToolbarCreateNewMenuTriggerProps) {
   const state = useOverlayTriggerState({});
   const { triggerProps } = useOverlayTrigger({ type: "dialog" }, state);
   const [openTaskModal, setOpenTaskModal] = useState(false);
-  const [openProjectModal, setOpenProjectModal] = useState(false);
+  const [openTaskCategoryModal, setOpenTaskCategoryModal] = useState(false);
 
   function handleAction(key: Key) {
     if (key === "task") {
       setOpenTaskModal(true);
-    } else if (key === "project") {
-      setOpenProjectModal(true);
+    } else if (key === "category") {
+      setOpenTaskCategoryModal(true);
     }
   }
 
@@ -65,11 +55,11 @@ export function ToolbarCreateNewMenuTrigger({
         )}
         placement="bottom right"
       >
-        <Item textValue="Customer" key="customer">
-          <Contact size={16} strokeWidth={1.5} absoluteStrokeWidth /> Customer
+        <Item textValue="Task" key="task">
+          <CalendarCheck size={16} strokeWidth={1.5} absoluteStrokeWidth /> Task
         </Item>
-        <Item textValue="User" key="user">
-          <Building2 size={16} strokeWidth={1.5} absoluteStrokeWidth /> Company
+        <Item textValue="Category" key="category">
+          <Blocks size={16} strokeWidth={1.5} absoluteStrokeWidth /> Category
         </Item>
       </ResponsiveMenuTrigger>
 
@@ -79,11 +69,7 @@ export function ToolbarCreateNewMenuTrigger({
         onOpenChange={setOpenTaskModal}
       />
 
-      <NewProjectModal
-        newProjectForm={newProjectForm}
-        isOpen={openProjectModal}
-        onOpenChange={setOpenProjectModal}
-      />
+      {/* TaskCategoryModal */}
     </>
   );
 }
