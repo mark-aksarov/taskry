@@ -1,8 +1,18 @@
 "use client";
 
+import {
+  Modal,
+  Button,
+  Dialog,
+  DialogBody,
+  DialogFooter,
+  DialogHeader,
+  DialogHeading,
+  DialogCloseButton,
+} from "@/components/ui";
+
 import { Suspense, useContext } from "react";
-import { DetailModal } from "@/components/common/DetailModal";
-import { TaskDetailCompactSkeleton } from "../TaskDetailCompact/TaskDetailCompactSkeleton";
+import { TaskDetailCompactSkeleton } from "../TaskDetailCompact";
 import { TaskDetailCompactClientContainerContext } from "@/components/tasks/TaskDetailCompactClientContainer";
 
 export function TaskDetailModal({ taskId }: { taskId: number }) {
@@ -11,10 +21,28 @@ export function TaskDetailModal({ taskId }: { taskId: number }) {
   );
 
   return (
-    <DetailModal title="Task Detail">
-      <Suspense fallback={<TaskDetailCompactSkeleton />}>
-        <TaskDetailClientContainer taskId={taskId} />
-      </Suspense>
-    </DetailModal>
+    <Modal isDismissable className="w-[600px]">
+      <Dialog className="max-h-[calc(100dvh-64px)]">
+        <DialogHeader>
+          <DialogHeading>Task Details</DialogHeading>
+          <DialogCloseButton />
+        </DialogHeader>
+        <DialogBody>
+          <Suspense fallback={<TaskDetailCompactSkeleton />}>
+            <TaskDetailClientContainer taskId={taskId} />
+          </Suspense>
+        </DialogBody>
+        <DialogFooter>
+          <Button
+            as="a"
+            href={`/tasks/${taskId}`}
+            variant="primary"
+            size="medium"
+            label="Open in Full Page"
+            className="w-full justify-center"
+          />
+        </DialogFooter>
+      </Dialog>
+    </Modal>
   );
 }
