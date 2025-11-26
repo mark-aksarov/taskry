@@ -1,0 +1,11 @@
+{
+  "AppNavigation": {
+    "dashboard": "Dashboard",
+    "projects": "Projects",
+    "tasks": "Tasks",
+    "team": "Team",
+    "customers": "Customers",
+    "profile": "Profile",
+    "logout": "Logout"
+  }
+}

@@ -1,4 +1,4 @@
-import AppAuthLayout from "../app/(auth)/layout";
+import AppAuthLayout from "../app/[locale]/(auth)/layout";
 import { type Decorator } from "@storybook/react";
 
 export const AuthPageDecorator: Decorator = (Story) => {

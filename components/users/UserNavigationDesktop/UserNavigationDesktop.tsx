@@ -1,7 +1,8 @@
 "use client";
 
+import { useParams } from "next/navigation";
+import { usePathname } from "@/i18n/navigation";
 import { CalendarCheck, Info } from "lucide-react";
-import { useParams, usePathname } from "next/navigation";
 import { NavigationButton } from "@/components/common/NavigationButton";
 
 export function UserNavigationDesktop() {

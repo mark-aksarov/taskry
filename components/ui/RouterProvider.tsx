@@ -1,6 +1,6 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/i18n/navigation";
 import { RouterProvider as ReactAriaRouterProvider } from "react-aria";
 
 export function RouterProvider({ children }: { children: React.ReactNode }) {

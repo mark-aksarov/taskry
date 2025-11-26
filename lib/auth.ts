@@ -2,7 +2,7 @@ import "server-only";
 
 import prisma from "@/lib/prisma";
 import { betterAuth } from "better-auth";
-import { redirect } from "next/navigation";
+import { redirect } from "@/i18n/navigation";
 import { prismaAdapter } from "better-auth/adapters/prisma";
 import { transporter } from "./mail";
 

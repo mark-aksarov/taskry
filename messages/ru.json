@@ -1,0 +1,11 @@
+{
+  "AppNavigation": {
+    "dashboard": "Панель",
+    "projects": "Проекты",
+    "tasks": "Задачи",
+    "team": "Команда",
+    "customers": "Клиенты",
+    "profile": "Профиль",
+    "logout": "Выйти"
+  }
+}

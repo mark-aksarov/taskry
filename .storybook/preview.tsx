@@ -1,29 +1,18 @@
 import "../app/globals.css";
 
+import defaultMessages from "../messages/en.json";
+import { NextIntlClientProvider } from "next-intl";
 import type { Preview } from "@storybook/nextjs-vite";
-import { withThemeByDataAttribute } from "@storybook/addon-themes";
 import { MINIMAL_VIEWPORTS } from "storybook/viewport";
-import { mocked, sb } from "storybook/test";
-import { useParams, usePathname, useRouter } from "next/navigation";
-
-sb.mock(import("../lib/prisma"));
-sb.mock(import("next/navigation"));
+import { withThemeByDataAttribute } from "@storybook/addon-themes";
 
 const preview: Preview = {
-  beforeEach: () => {
-    mocked(usePathname).mockReturnValue("/");
-    mocked(useParams).mockReturnValue({});
-    mocked(useRouter).mockReturnValue({
-      push: () => {},
-      back: () => {},
-      forward: () => {},
-      refresh: () => {},
-      replace: () => {},
-      prefetch: () => {},
-    });
-  },
-
   decorators: [
+    (Story) => (
+      <NextIntlClientProvider locale="en" messages={defaultMessages}>
+        <Story />
+      </NextIntlClientProvider>
+    ),
     withThemeByDataAttribute({
       themes: {
         light: "light",
@@ -34,6 +23,8 @@ const preview: Preview = {
     }),
   ],
 
+  initialGlobals: {},
+
   parameters: {
     controls: {
       matchers: {
@@ -43,12 +34,6 @@ const preview: Preview = {
     },
 
     backgrounds: { disable: true },
-
-    initialGlobals: {
-      backgrounds: {
-        value: "light/dark",
-      },
-    },
 
     viewport: {
       //👇 Set available viewports for every story in the file

@@ -1,32 +1,36 @@
 "use client";
 
+import { use } from "react";
 import { useState } from "react";
-import { SignUpPage } from "./SignUpPage";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/i18n/navigation";
 import { authClient } from "@/lib/auth-client";
+import { ResetPasswordPage } from "./ResetPasswordPage";
 
-export default function AppSignUpPage() {
-  const router = useRouter();
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
+export default function AppResetPassword({
+  searchParams,
+}: {
+  searchParams: Promise<{ token: string }>;
+}) {
+  const { token } = use(searchParams);
+
   const [password, setPassword] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const router = useRouter();
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setError(null);
     setIsSubmitting(true);
 
-    authClient.signUp.email(
+    authClient.resetPassword(
       {
-        name,
-        email,
-        password,
+        newPassword: password,
+        token,
       },
       {
         onSuccess: () => {
-          router.push(`/verify-email?email=${email}`);
+          router.push("/sign-in");
         },
         onError: (ctx) => {
           setIsSubmitting(false);
@@ -34,18 +38,22 @@ export default function AppSignUpPage() {
         },
       },
     );
+
+    router.push("/sign-in");
+  }
+
+  if (!token) {
+    return (
+      <div>
+        <p>Invalid token</p>
+      </div>
+    );
   }
 
   return (
-    <SignUpPage
-      name={name}
-      email={email}
+    <ResetPasswordPage
       password={password}
-      setName={setName}
-      setEmail={setEmail}
       setPassword={setPassword}
-      isSubmitting={isSubmitting}
-      setIsSubmitting={setIsSubmitting}
       handleSubmit={handleSubmit}
     />
   );

@@ -1,7 +1,7 @@
 "use client";
 
 import { Divider } from "@/components/ui";
-import { usePathname } from "next/navigation";
+import { usePathname } from "@/i18n/navigation";
 import { CalendarCheck, Info } from "lucide-react";
 import { ProfileActions } from "../ProfileActions";
 import { NavigationButton } from "@/components/common/NavigationButton";

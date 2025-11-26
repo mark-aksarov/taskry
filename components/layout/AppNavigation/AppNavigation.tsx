@@ -11,19 +11,31 @@ import {
 } from "lucide-react";
 
 import { Divider } from "@/components/ui";
+import { usePathname } from "@/i18n/navigation";
 import { ThemeToggleButton } from "./ThemeToggleButton";
 import { NavigationButton } from "@/components/common/NavigationButton";
 import { LangMenuBottomSheetTrigger } from "../LangMenuTrigger";
-import { usePathname } from "next/navigation";
 
-export const AppNavigation = () => {
+interface AppNavigationProps {
+  messages: {
+    dashboard: string;
+    projects: string;
+    tasks: string;
+    team: string;
+    customers: string;
+    profile: string;
+    logout: string;
+  };
+}
+
+export const AppNavigation = ({ messages }: AppNavigationProps) => {
   const pathname = usePathname();
 
   return (
     <nav className="flex flex-col gap-2.5">
       <NavigationButton href="/" isActive={pathname === "/"}>
         <LayoutDashboard size={18} strokeWidth={1.5} absoluteStrokeWidth />
-        Dashboard
+        {messages.dashboard}
       </NavigationButton>
 
       <NavigationButton
@@ -31,17 +43,17 @@ export const AppNavigation = () => {
         isActive={pathname.startsWith("/projects")}
       >
         <FolderClosed size={18} strokeWidth={1.5} absoluteStrokeWidth />
-        Projects
+        {messages.projects}
       </NavigationButton>
 
       <NavigationButton href="/tasks" isActive={pathname.startsWith("/tasks")}>
         <CalendarCheck2 size={18} strokeWidth={1.5} absoluteStrokeWidth />
-        Tasks
+        {messages.tasks}
       </NavigationButton>
 
       <NavigationButton href="/team" isActive={pathname.startsWith("/team")}>
         <Users size={18} strokeWidth={1.5} absoluteStrokeWidth />
-        Team
+        {messages.team}
       </NavigationButton>
 
       <NavigationButton
@@ -49,7 +61,7 @@ export const AppNavigation = () => {
         isActive={pathname.startsWith("/customers")}
       >
         <Contact size={18} strokeWidth={1.5} absoluteStrokeWidth />
-        Customers
+        {messages.customers}
       </NavigationButton>
 
       <NavigationButton
@@ -57,7 +69,7 @@ export const AppNavigation = () => {
         isActive={pathname.startsWith("/profile")}
       >
         <UserRound size={18} strokeWidth={1.5} absoluteStrokeWidth />
-        Profile
+        {messages.profile}
       </NavigationButton>
 
       <Divider />
@@ -69,7 +81,7 @@ export const AppNavigation = () => {
 
       <NavigationButton href="#">
         <LogOut size={18} strokeWidth={1.5} absoluteStrokeWidth />
-        Logout
+        {messages.logout}
       </NavigationButton>
     </nav>
   );

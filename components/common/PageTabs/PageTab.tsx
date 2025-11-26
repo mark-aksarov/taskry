@@ -1,6 +1,6 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/i18n/navigation";
 import { ToggleButton } from "@/components/ui";
 import { ToggleButtonProps } from "@/components/ui/ToggleButtonGroup";
 import { useEffect } from "react";

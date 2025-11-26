@@ -5,9 +5,12 @@ import { Menu } from "lucide-react";
 import { useOverlayTrigger } from "react-aria";
 import { useOverlayTriggerState } from "react-stately";
 import { Button, BottomSheet, Dialog, DialogBody } from "@/components/ui";
-import { AppNavigation } from "./AppNavigation";
 
-export function AppBottomSheetTrigger() {
+export function AppBottomSheetTrigger({
+  appNavigation,
+}: {
+  appNavigation: React.ReactNode;
+}) {
   const triggerRef = useRef<HTMLButtonElement>(null);
   const state = useOverlayTriggerState({});
   const { triggerProps } = useOverlayTrigger({ type: "dialog" }, state);
@@ -28,9 +31,7 @@ export function AppBottomSheetTrigger() {
           aria-label="App navigation"
           className="max-h-[calc(100dvh-64px)]"
         >
-          <DialogBody className="px-3 py-4">
-            <AppNavigation />
-          </DialogBody>
+          <DialogBody className="px-3 py-4">{appNavigation}</DialogBody>
         </Dialog>
       </BottomSheet>
     </>

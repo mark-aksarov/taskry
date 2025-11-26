@@ -1,21 +1,24 @@
 "use client";
 
-import { useState } from "react";
-import { Menu } from "lucide-react";
 import {
   Button,
-  SideSheet,
   Dialog,
+  SideSheet,
   RACHeading,
   DialogCloseButton,
 } from "@/components/ui";
+import { useState } from "react";
+import { Menu } from "lucide-react";
 import { AppSidebar } from "./AppSidebar/AppSidebar";
-import { AppSidebarHeader } from "./AppSidebar/AppSidebarHeader";
-import { headingStyles } from "./AppSidebar/AppSidebarHeading";
 import { AppSidebarBody } from "./AppSidebar/AppSidebarBody";
-import { AppNavigation } from "./AppNavigation";
+import { headingStyles } from "./AppSidebar/AppSidebarHeading";
+import { AppSidebarHeader } from "./AppSidebar/AppSidebarHeader";
 
-export function AppSidebarSheetTrigger() {
+export function AppSidebarSheetTrigger({
+  appNavigation,
+}: {
+  appNavigation: React.ReactNode;
+}) {
   const [isOpen, setOpen] = useState(false);
 
   return (
@@ -47,9 +50,7 @@ export function AppSidebarSheetTrigger() {
                 />
               </div>
             </AppSidebarHeader>
-            <AppSidebarBody>
-              <AppNavigation />
-            </AppSidebarBody>
+            <AppSidebarBody>{appNavigation}</AppSidebarBody>
           </AppSidebar>
         </Dialog>
       </SideSheet>
