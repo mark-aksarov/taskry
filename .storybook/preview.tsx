@@ -1,18 +1,12 @@
 import "../app/globals.css";
 
-import defaultMessages from "../messages/en.json";
-import { NextIntlClientProvider } from "next-intl";
+import nextIntl from "./next-intl";
 import type { Preview } from "@storybook/nextjs-vite";
 import { MINIMAL_VIEWPORTS } from "storybook/viewport";
 import { withThemeByDataAttribute } from "@storybook/addon-themes";
 
 const preview: Preview = {
   decorators: [
-    (Story) => (
-      <NextIntlClientProvider locale="en" messages={defaultMessages}>
-        <Story />
-      </NextIntlClientProvider>
-    ),
     withThemeByDataAttribute({
       themes: {
         light: "light",
@@ -23,9 +17,16 @@ const preview: Preview = {
     }),
   ],
 
-  initialGlobals: {},
-
+  initialGlobals: {
+    locale: "ru",
+    locales: {
+      en: "English",
+      ru: "Русский",
+    },
+  },
   parameters: {
+    locale: "ru",
+    nextIntl,
     controls: {
       matchers: {
         color: /(background|color)$/i,
