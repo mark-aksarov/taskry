@@ -8,16 +8,21 @@ import {
   Dialog,
   DialogCloseButton,
 } from "@/components/ui";
+import { mocked } from "storybook/test";
+import { usePathname } from "next/navigation";
+import { AppNavigation } from "../AppNavigation";
+import { AppSidebarBody } from "./AppSidebarBody";
 import { AppSidebarHeader } from "./AppSidebarHeader";
 import { AppSidebarHeading } from "./AppSidebarHeading";
-import { AppSidebarBody } from "./AppSidebarBody";
-import { AppNavigation } from "../AppNavigation";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {
   title: "Components/layout/AppSidebar",
   component: AppSidebar,
   decorators: [withThemedBackground],
+  beforeEach: () => {
+    mocked(usePathname).mockReturnValue("/");
+  },
 } satisfies Meta<typeof AppSidebar>;
 
 export default meta;

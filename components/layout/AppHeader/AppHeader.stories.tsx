@@ -1,4 +1,7 @@
+import { mocked } from "storybook/test";
 import { AppHeader } from "./AppHeader";
+import { usePathname } from "next/navigation";
+import { AppNavigation } from "../AppNavigation";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { AppBottomSheetTrigger } from "../AppBottomSheetTrigger";
 import { AppSidebarSheetTrigger } from "../AppSidebarSheetTrigger";
@@ -13,17 +16,24 @@ const meta = {
     layout: "fullscreen",
   },
   decorators: [withThemedBackground],
+  beforeEach: () => {
+    mocked(usePathname).mockReturnValue("/");
+  },
 } satisfies Meta<typeof AppHeader>;
 
 export default meta;
-type Story = StoryObj<typeof AppHeader>;
+type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
     notificationModalTrigger: (
       <NotificationModalTrigger {...NotificationModalTriggerStory.args} />
     ),
-    appBottomSheetTrigger: <AppBottomSheetTrigger />,
-    appSidebarSheetTrigger: <AppSidebarSheetTrigger />,
+    appBottomSheetTrigger: (
+      <AppBottomSheetTrigger appNavigation={<AppNavigation />} />
+    ),
+    appSidebarSheetTrigger: (
+      <AppSidebarSheetTrigger appNavigation={<AppNavigation />} />
+    ),
   },
 } satisfies Story;

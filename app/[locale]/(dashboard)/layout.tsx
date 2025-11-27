@@ -1,5 +1,5 @@
 import { DashboardLayout } from "./DashboardLayout";
-import { NotificationModalContentContainer } from "@/components/notifications/NotificationModalContent";
+import { NotificationModalContentServerContainer } from "@/components/notifications/NotificationModalContentServerContainer";
 
 export default async function AppDashboardLayout({
   children,
@@ -8,7 +8,9 @@ export default async function AppDashboardLayout({
 }>) {
   return (
     <DashboardLayout
-      NotificationModalContentContainer={NotificationModalContentContainer}
+      NotificationModalContentContainer={
+        NotificationModalContentServerContainer
+      }
     >
       {children}
     </DashboardLayout>

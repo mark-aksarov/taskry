@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { NotificationModalTrigger } from "./NotificationModalTrigger";
 import { NotificationModalContent } from "../NotificationModalContent";
+import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { Default as NotificationModalContentStory } from "../NotificationModalContent/NotificationModalContent.stories";
 
 const meta = {

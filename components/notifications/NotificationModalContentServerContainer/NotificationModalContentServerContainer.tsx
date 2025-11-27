@@ -1,7 +1,7 @@
 import { Link } from "@/components/ui";
 import { NotificationList } from "../NotificationList";
 import { NotificationListItem } from "../NotificationListItem";
-import { NotificationModalContent } from "./NotificationModalContent";
+import { NotificationModalContent } from "../NotificationModalContent";
 import {
   getNotifications,
   GetNotificationsType,
@@ -133,7 +133,7 @@ function getComment(notification: GetNotificationsType[number]) {
   return undefined;
 }
 
-export async function NotificationModalContentContainer() {
+export async function NotificationModalContentServerContainer() {
   const notifications: GetNotificationsType = await getNotifications(1);
 
   const unreadCount = notifications.filter((n) => !n.isRead).length;

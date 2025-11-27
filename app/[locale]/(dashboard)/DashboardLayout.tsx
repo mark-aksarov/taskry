@@ -4,6 +4,7 @@ import {
   AppSidebarHeader,
   AppSidebarHeading,
 } from "@/components/layout/AppSidebar";
+
 import { Suspense } from "react";
 import { Repeat } from "@/components/common/Repeat";
 import { AppHeader } from "@/components/layout/AppHeader";
@@ -12,7 +13,6 @@ import { AppBottomSheetTrigger } from "@/components/layout/AppBottomSheetTrigger
 import { AppSidebarSheetTrigger } from "@/components/layout/AppSidebarSheetTrigger";
 import { NotificationModalTrigger } from "@/components/notifications/NotificationModalTrigger";
 import { NotificationListItemSkeleton } from "@/components/notifications/NotificationListItem";
-import { useTranslations } from "next-intl";
 
 export function DashboardLayout({
   NotificationModalContentContainer,
@@ -21,24 +21,8 @@ export function DashboardLayout({
   NotificationModalContentContainer: React.ComponentType;
   children: React.ReactNode;
 }) {
-  const t = useTranslations("AppNavigation");
-
   const notificationListSkeleton = (
     <Repeat items={7} renderItem={() => <NotificationListItemSkeleton />} />
-  );
-
-  const appNavigation = (
-    <AppNavigation
-      messages={{
-        dashboard: t("dashboard"),
-        projects: t("projects"),
-        tasks: t("tasks"),
-        team: t("team"),
-        customers: t("customers"),
-        profile: t("profile"),
-        logout: t("logout"),
-      }}
-    />
   );
 
   return (
@@ -47,7 +31,9 @@ export function DashboardLayout({
         <AppSidebarHeader>
           <AppSidebarHeading />
         </AppSidebarHeader>
-        <AppSidebarBody>{appNavigation}</AppSidebarBody>
+        <AppSidebarBody>
+          <AppNavigation />
+        </AppSidebarBody>
       </AppSidebar>
 
       <div className="flex flex-auto flex-col">
@@ -60,10 +46,10 @@ export function DashboardLayout({
             </NotificationModalTrigger>
           }
           appBottomSheetTrigger={
-            <AppBottomSheetTrigger appNavigation={appNavigation} />
+            <AppBottomSheetTrigger appNavigation={<AppNavigation />} />
           }
           appSidebarSheetTrigger={
-            <AppSidebarSheetTrigger appNavigation={appNavigation} />
+            <AppSidebarSheetTrigger appNavigation={<AppNavigation />} />
           }
         />
         <main>{children}</main>
