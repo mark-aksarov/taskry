@@ -1,12 +1,37 @@
 import "../app/globals.css";
 
-import nextIntl from "./next-intl";
+import en from "../messages/en.json";
+import ru from "../messages/ru.json";
+import { NextIntlClientProvider } from "next-intl";
 import type { Preview } from "@storybook/nextjs-vite";
 import { MINIMAL_VIEWPORTS } from "storybook/viewport";
 import { withThemeByDataAttribute } from "@storybook/addon-themes";
 
+export const globalTypes = {
+  locale: {
+    name: "Locale",
+    description: "Internationalization locale",
+    defaultValue: "ru",
+    toolbar: {
+      icon: "globe",
+      items: [
+        { value: "en", right: "en", title: "English" },
+        { value: "ru", right: "ru", title: "Русский" },
+      ],
+    },
+  },
+};
+
 const preview: Preview = {
   decorators: [
+    (Story, { globals }) => (
+      <NextIntlClientProvider
+        locale={globals.locale}
+        messages={globals.locale === "en" ? en : ru}
+      >
+        <Story />
+      </NextIntlClientProvider>
+    ),
     withThemeByDataAttribute({
       themes: {
         light: "light",
@@ -17,16 +42,9 @@ const preview: Preview = {
     }),
   ],
 
-  initialGlobals: {
-    locale: "ru",
-    locales: {
-      en: "English",
-      ru: "Русский",
-    },
-  },
+  globalTypes,
+
   parameters: {
-    locale: "ru",
-    nextIntl,
     controls: {
       matchers: {
         color: /(background|color)$/i,
