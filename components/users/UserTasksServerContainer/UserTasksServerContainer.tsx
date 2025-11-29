@@ -17,7 +17,7 @@ export async function UserTasksServerContainer({ userId }: { userId: string }) {
             comments={task._count.comments}
             status={{
               id: task.status.id,
-              name: task.status.nameEn,
+              name: task.status.name,
             }}
           />
         ))}

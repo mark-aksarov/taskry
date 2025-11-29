@@ -21,7 +21,7 @@ export async function TasksServerContainer() {
       : undefined,
     status: {
       id: task.status.id,
-      name: task.status.nameEn,
+      name: task.status.name,
     },
     comments: task._count.comments,
     subtasks: task._count.subtasks,

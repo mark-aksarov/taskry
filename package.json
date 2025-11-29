@@ -8,7 +8,7 @@
     "build:no-lint": "next build --no-lint",
     "start": "next start",
     "lint": "next lint",
-    "migrate:reset": "dotenv -e .env.development -- prisma migrate reset",
+    "migrate:dev:reset": "dotenv -e .env.development -- prisma migrate reset",
     "migrate:dev": "dotenv -e .env.development -- prisma migrate dev",
     "migrate:prod": "dotenv -e .env.production -- prisma migrate deploy",
     "seed:dev": "dotenv -e .env.development -- tsx prisma/seed.ts",

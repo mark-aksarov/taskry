@@ -40,7 +40,7 @@ export function TaskDetailCompactClientContainer({
       project={task.project}
       status={{
         id: task.status.id,
-        name: task.status.nameEn,
+        name: task.status.name,
       }}
       subtasks={task.subtasks}
       attachments={task.attachments}

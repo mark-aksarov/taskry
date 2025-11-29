@@ -45,7 +45,7 @@ export function ProjectDetailCompactClientContainer({
       category={project.category}
       status={{
         id: project.status.id,
-        name: project.status.nameEn,
+        name: project.status.name,
       }}
       attachments={project.attachments}
     />

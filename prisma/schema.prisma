@@ -168,9 +168,8 @@ model ProjectCategory {
 }
 
 model ProjectStatus {
-  id     String @id
-  nameEn String
-  nameRu String
+  id   String @id
+  name String
 
   projects Project[]
 
@@ -234,9 +233,8 @@ model TaskCategory {
 }
 
 model TaskStatus {
-  id     String @id
-  nameEn String
-  nameRu String
+  id   String @id
+  name String
 
   tasks Task[]
 

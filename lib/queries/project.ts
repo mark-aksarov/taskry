@@ -24,8 +24,7 @@ export const getProjectDetail = cache(async (id: number) => {
       status: {
         select: {
           id: true,
-          nameEn: true,
-          nameRu: true,
+          name: true,
         },
       },
       customer: {
@@ -87,8 +86,7 @@ export const getProjectList = cache(async (creatorId?: string) => {
       status: {
         select: {
           id: true,
-          nameEn: true,
-          nameRu: true,
+          name: true,
         },
       },
       category: {
@@ -139,7 +137,7 @@ export type GetProjectSummarySummariesType = ThenArg<
 >;
 export const getProjectSummarySummaries = cache(async () => {
   return await prisma.projectStatus.findMany({
-    select: { id: true, nameEn: true },
+    select: { id: true, name: true },
   });
 });
 
@@ -160,6 +158,6 @@ export type GetProjectStatusSummariesType = ThenArg<
 >;
 export const getProjectStatusSummaries = cache(async () => {
   return await prisma.projectStatus.findMany({
-    select: { id: true, nameEn: true },
+    select: { id: true, name: true },
   });
 });

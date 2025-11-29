@@ -133,9 +133,9 @@ async function main() {
 
   await prisma.projectStatus.createMany({
     data: [
-      { id: "pending", nameEn: "Pending", nameRu: "Ожидает" },
-      { id: "active", nameEn: "Active", nameRu: "Активно" },
-      { id: "completed", nameEn: "Completed", nameRu: "Завершено" },
+      { id: "pending", name: "Pending" },
+      { id: "active", name: "Active" },
+      { id: "completed", name: "Completed" },
     ],
   });
 
@@ -245,9 +245,9 @@ async function main() {
 
   await prisma.taskStatus.createMany({
     data: [
-      { id: "pending", nameEn: "Pending", nameRu: "Ожидает" },
-      { id: "active", nameEn: "Active", nameRu: "Активно" },
-      { id: "completed", nameEn: "Completed", nameRu: "Завершено" },
+      { id: "pending", name: "Pending" },
+      { id: "active", name: "Active" },
+      { id: "completed", name: "Completed" },
     ],
   });
 

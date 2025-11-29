@@ -46,7 +46,7 @@ export async function ProjectsServerContainer() {
               }
               status={{
                 id: project.status.id,
-                name: project.status.nameEn,
+                name: project.status.name,
               }}
               category={project.category}
               comments={project._count.comments}
@@ -74,7 +74,7 @@ export async function ProjectsServerContainer() {
               }
               status={{
                 id: project.status.id,
-                name: project.status.nameEn,
+                name: project.status.name,
               }}
               tasks={project.tasks.length}
               tasksDone={

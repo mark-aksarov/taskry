@@ -105,7 +105,7 @@ CREATE TABLE "public"."project_category" (
 -- CreateTable
 CREATE TABLE "public"."project_status" (
     "id" SERIAL NOT NULL,
-    "nameEn" TEXT NOT NULL,
+    "name" TEXT NOT NULL,
     "nameRu" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
@@ -143,7 +143,7 @@ CREATE TABLE "public"."task_category" (
 -- CreateTable
 CREATE TABLE "public"."task_status" (
     "id" SERIAL NOT NULL,
-    "nameEn" TEXT NOT NULL,
+    "name" TEXT NOT NULL,
     "nameRu" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,

@@ -24,8 +24,7 @@ export const getTaskDetail = cache(async (id: number) => {
       status: {
         select: {
           id: true,
-          nameEn: true,
-          nameRu: true,
+          name: true,
         },
       },
       project: {
@@ -97,8 +96,7 @@ export const getTaskList = cache(async (creatorId?: string) => {
       status: {
         select: {
           id: true,
-          nameEn: true,
-          nameRu: true,
+          name: true,
         },
       },
       project: {
@@ -143,6 +141,6 @@ export type GetTaskStatusSummariesType = ThenArg<
 >;
 export const getTaskStatusSummaries = cache(async () => {
   return prisma.taskStatus.findMany({
-    select: { id: true, nameEn: true },
+    select: { id: true, name: true },
   });
 });
