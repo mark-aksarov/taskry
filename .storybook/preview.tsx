@@ -2,6 +2,7 @@ import "../app/globals.css";
 
 import en from "../messages/en.json";
 import ru from "../messages/ru.json";
+import { I18nProvider } from "react-aria";
 import { NextIntlClientProvider } from "next-intl";
 import type { Preview } from "@storybook/nextjs-vite";
 import { MINIMAL_VIEWPORTS } from "storybook/viewport";
@@ -24,14 +25,18 @@ export const globalTypes = {
 
 const preview: Preview = {
   decorators: [
-    (Story, { globals }) => (
-      <NextIntlClientProvider
-        locale={globals.locale}
-        messages={globals.locale === "en" ? en : ru}
-      >
-        <Story />
-      </NextIntlClientProvider>
-    ),
+    (Story, { globals }) => {
+      return (
+        <NextIntlClientProvider
+          locale={globals.locale}
+          messages={globals.locale === "en" ? en : ru}
+        >
+          <I18nProvider locale={globals.locale}>
+            <Story />
+          </I18nProvider>
+        </NextIntlClientProvider>
+      );
+    },
     withThemeByDataAttribute({
       themes: {
         light: "light",

@@ -1,6 +1,7 @@
 import "../globals.css";
 
 import { routing } from "@/i18n/routing";
+import { I18nProvider } from "react-aria";
 import { notFound } from "next/navigation";
 import type { Metadata, Viewport } from "next";
 import { Nunito_Sans } from "next/font/google";
@@ -42,7 +43,9 @@ export default async function RootLayout({
         className={`${nunitoSans.className} bg-gray-100 antialiased dark:bg-gray-900`}
       >
         <NextIntlClientProvider>
-          <RouterProvider>{children}</RouterProvider>
+          <I18nProvider locale={locale}>
+            <RouterProvider>{children}</RouterProvider>
+          </I18nProvider>
         </NextIntlClientProvider>
       </body>
     </html>
