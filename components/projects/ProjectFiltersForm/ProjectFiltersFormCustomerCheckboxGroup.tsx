@@ -1,16 +1,17 @@
 import { Checkbox, CheckboxGroup } from "@/components/ui";
+import { useTranslations } from "next-intl";
 
 export function ProjectFiltersFormCustomerCheckboxGroup({
   customers,
 }: {
   customers: { id: number; fullName: string }[];
 }) {
-  if (!customers.length) {
-    return null;
-  }
+  const t = useTranslations(
+    "projects.ProjectFiltersForm.ProjectFiltersFormCustomerCheckboxGroup",
+  );
 
   return (
-    <CheckboxGroup label="Customer">
+    <CheckboxGroup label={t("label")}>
       {customers.map((customer) => (
         <Checkbox
           key={customer.id}

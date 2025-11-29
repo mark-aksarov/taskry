@@ -10,16 +10,20 @@ import { useOverlayTrigger } from "react-aria";
 import { Item, useOverlayTriggerState } from "react-stately";
 import { Check, ChevronDown, CircleEllipsis, Clock } from "lucide-react";
 import { ResponsiveMenuTrigger } from "@/components/common/ResponsiveMenuTrigger";
+import { useTranslations } from "next-intl";
 
 export function TaskDetailCompactStatusMenuTrigger() {
   const state = useOverlayTriggerState({});
   const { triggerProps } = useOverlayTrigger({ type: "dialog" }, state);
+  const t = useTranslations(
+    "tasks.TaskDetailCompact.TaskDetailCompactStatusMenuTrigger",
+  );
 
   return (
     <ResponsiveMenuTrigger
       renderDialogHeader={() => (
         <DialogHeader>
-          <DialogHeading>Task Status</DialogHeading>
+          <DialogHeading>{t("dialogHeading")}</DialogHeading>
           <DialogCloseButton />
         </DialogHeader>
       )}
@@ -27,7 +31,7 @@ export function TaskDetailCompactStatusMenuTrigger() {
         <Button
           {...triggerProps}
           variant="outlined"
-          label="Active"
+          label={t("items.active")}
           className="rounded-lg"
           iconRight={
             <ChevronDown size={16} strokeWidth={1.5} absoluteStrokeWidth />
@@ -36,17 +40,17 @@ export function TaskDetailCompactStatusMenuTrigger() {
       )}
       placement="bottom left"
     >
-      <Item textValue="Mark as Pending" key="active">
+      <Item textValue={t("items.active")} key="active">
         <Clock size={16} strokeWidth={1.5} absoluteStrokeWidth />
-        Mark as Active
+        {t("items.active")}
       </Item>
-      <Item textValue="Mark as Pending" key="pending">
+      <Item textValue={t("items.pending")} key="pending">
         <CircleEllipsis size={16} strokeWidth={1.5} absoluteStrokeWidth />
-        Mark as Pending
+        {t("items.pending")}
       </Item>
-      <Item textValue="Mark as Done" key="done">
+      <Item textValue={t("items.completed")} key="done">
         <Check size={16} strokeWidth={1.5} absoluteStrokeWidth />
-        Mark as Done
+        {t("items.completed")}
       </Item>
     </ResponsiveMenuTrigger>
   );

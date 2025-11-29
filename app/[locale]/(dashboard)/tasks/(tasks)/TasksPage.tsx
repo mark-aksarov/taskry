@@ -15,6 +15,7 @@ import { TaskToolbarSortingMenuTrigger } from "@/components/tasks/TaskToolbarSor
 import { TaskToolbarActionsMenuTrigger } from "@/components/tasks/TaskToolbarActionsMenuTrigger";
 import { TaskToolbarFiltersModalTrigger } from "@/components/tasks/TaskToolbarFiltersModalTrigger";
 import { TaskToolbarCreateNewMenuTrigger } from "@/components/tasks/TaskToolbarCreateNewMenuTrigger";
+import { useTranslations } from "next-intl";
 
 interface TasksPageProps {
   TaskFiltersFormContainer: React.ComponentType;
@@ -27,6 +28,8 @@ export function TasksPage({
   NewTaskFormContainer,
   TasksServerContainer,
 }: TasksPageProps) {
+  const t = useTranslations("app.TasksPage");
+
   return (
     <PageContainer>
       <PageGrid>
@@ -54,7 +57,7 @@ export function TasksPage({
           </ToolbarDesktop>
 
           <ToolbarMobileTop>
-            <ToolbarMobileHeading>Tasks</ToolbarMobileHeading>
+            <ToolbarMobileHeading>{t("heading")}</ToolbarMobileHeading>
             <TaskToolbarSortingMenuTrigger />
             <TaskToolbarFiltersModalTrigger
               filtersForm={

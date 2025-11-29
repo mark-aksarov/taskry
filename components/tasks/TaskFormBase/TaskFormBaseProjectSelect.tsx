@@ -2,20 +2,19 @@
 
 import { Item } from "react-stately";
 import { ResponsiveSelect } from "@/components/common/ResponsiveSelect";
+import { useTranslations } from "next-intl";
 
 export function TaskFormBaseProjectSelect({
   projects,
 }: {
   projects: { id: number; title: string }[];
 }) {
-  if (!projects.length) {
-    return null;
-  }
+  const t = useTranslations("tasks.TaskFormBase.TaskFormBaseProjectSelect");
 
   return (
     <ResponsiveSelect
-      label="Project"
-      placeholder="Select project"
+      label={t("label")}
+      placeholder={t("placeholder")}
       overlayClassName="w-[var(--trigger-width)]"
       items={projects.map((item) => ({ id: item.id, label: item.title }))}
     >

@@ -1,11 +1,1052 @@
 {
-  "AppNavigation": {
-    "dashboard": "Панель",
-    "projects": "Проекты",
-    "tasks": "Задачи",
-    "team": "Команда",
-    "customers": "Клиенты",
-    "profile": "Профиль",
-    "logout": "Выйти"
+  "app": {
+    "CheckEmailPage": {
+      "heading": "Проверьте вашу почту",
+      "subtitle": "Мы отправили ссылку для сброса пароля на вашу электронную почту.",
+      "backButtonLabel": "Назад к сбросу пароля"
+    },
+
+    "ForgetPasswordPage": {
+      "heading": "Забыли пароль",
+      "subtitle": "Введите адрес электронной почты, чтобы получить ссылку для сброса пароля."
+    },
+
+    "ResetPasswordPage": {
+      "heading": "Сброс пароля",
+      "subtitle": "Укажите новый пароль для своей учетной записи."
+    },
+
+    "SignInPage": {
+      "heading": "Вход",
+      "subtitle": "Пожалуйста, войдите в свой аккаунт."
+    },
+
+    "SignInPageError": {
+      "heading": "Что-то пошло не так",
+      "subtitle": {
+        "emailNotVerified": "Мы отправили ссылку для подтверждения на вашу почту. Пожалуйста, проверьте входящие и перейдите по ссылке, чтобы продолжить",
+        "otherError": "Что-то пошло не так. Проверьте подключение к интернету или попробуйте снова"
+      },
+      "signInButtonLabel": "Войти по email"
+    },
+
+    "SignUpPage": {
+      "heading": "Регистрация",
+      "subtitle": "Пожалуйста, создайте аккаунт."
+    },
+
+    "VerifyEmailPage": {
+      "heading": "Подтвердите электронную почту",
+      "subtitle": "Мы отправили ссылку для подтверждения на вашу почту {email}. Пожалуйста, проверьте входящие и перейдите по ссылке, чтобы продолжить.",
+      "signInButtonLabel": "Войти по email"
+    },
+
+    "DashboardPage": {
+      "heading": "Панель управления"
+    },
+
+    "ProjectsPage": {
+      "heading": "Проекты"
+    },
+
+    "TasksPage": {
+      "heading": "Задачи"
+    },
+
+    "CustomersPageEmpty": {
+      "heading": "Нет клиентов",
+      "description": "Добавьте нового клиента, чтобы начать рост клиентской базы",
+      "addButtonLabel": "Новый клиент"
+    },
+
+    "CustomersPageLoading": {
+      "title": "Все клиенты"
+    },
+
+    "ProfilePage": {
+      "heading": "Настройки профиля"
+    },
+
+    "ProjectsPageLoading": {
+      "title": "Все проекты"
+    },
+
+    "ProjectsPageEmpty": {
+      "heading": "Нет проектов",
+      "description": "Создайте новый проект, чтобы следить за работой",
+      "addButtonLabel": "Новый Проект"
+    },
+
+    "ProjectDetailPage": {
+      "heading": "Детали проекта"
+    },
+
+    "TasksPageLoading": {
+      "title": "Все задачи"
+    },
+
+    "TasksPageEmpty": {
+      "heading": "Нет задач",
+      "description": "Добавьте новую задачу, чтобы следить за работой",
+      "addButtonLabel": "Новая задача"
+    },
+
+    "TaskDetailPage": {
+      "heading": "Детали задачи"
+    },
+
+    "UsersPageLoading": {
+      "title": "Команда"
+    },
+
+    "UsersPage": {
+      "heading": "Команда"
+    },
+
+    "UsersPageEmpty": {
+      "heading": "Нет пользователей",
+      "description": "Добавьте нового пользователя, чтобы начать работу",
+      "addButtonLabel": "Новый Пользователь"
+    },
+
+    "TeamProfilePage": {
+      "heading": "Информация о пользователе"
+    }
+  },
+
+  "common": {
+    "Toolbar": {
+      "ToolbarSortingMenuTrigger": {
+        "dialogHeading": "Сортировка",
+        "ariaLabel": "Сортировать проекты по",
+        "label": "Сортировка"
+      },
+
+      "ToolbarFiltersModalTrigger": {
+        "trigger": {
+          "ariaLabel": "Фильтровать проекты",
+          "label": "Фильтры"
+        },
+        "applyButtonLabel": "Применить фильтры"
+      },
+
+      "ToolbarActionsMenuTrigger": {
+        "heading": "Действия",
+        "ariaLabel": "Действия",
+        "label": "Действия"
+      }
+    },
+
+    "ViewModeToggleButtonGroup": {
+      "list": "Список",
+      "grid": "Сетка"
+    },
+
+    "AttachmentsField": {
+      "label": "Вложения",
+      "maxSize": "Максимальный размер: 10 МБ"
+    },
+
+    "ItemBase": {
+      "ItemBaseActionMenuTrigger": {
+        "heading": "Действия",
+        "ariaLabel": "Действия"
+      }
+    },
+
+    "DetailCommentInput": {
+      "placeholder": "Напишите комментарий..."
+    },
+
+    "MessageInput": {
+      "attachFileButton": {
+        "ariaLabel": "Добавить вложения"
+      },
+      "sendButton": {
+        "ariaLabel": "Отправить сообщение"
+      }
+    }
+  },
+
+  "auth": {
+    "AuthCardFooterSignInItem": {
+      "text": "Войдите в свой аккаунт.",
+      "link": "Войти"
+    },
+
+    "AuthCardFooterForgotPasswordItem": {
+      "link": "Забыли пароль?"
+    },
+
+    "AuthCardFooterSignUpItem": {
+      "text": "Создайте аккаунт.",
+      "link": "Регистрация"
+    },
+
+    "ForgetPasswordForm": {
+      "email": {
+        "label": "Электронная почта",
+        "placeholder": "Введите адрес электронной почты"
+      },
+      "submit": {
+        "label": "Запросить ссылку для сброса"
+      }
+    },
+
+    "ResetPasswordForm": {
+      "password": {
+        "label": "Пароль",
+        "placeholder": "Введите ваш пароль"
+      },
+      "submit": {
+        "label": "Сбросить пароль"
+      }
+    },
+
+    "SignInForm": {
+      "email": {
+        "label": "Электронная почта",
+        "placeholder": "Введите ваш email"
+      },
+      "password": {
+        "label": "Пароль",
+        "placeholder": "Введите ваш пароль"
+      },
+      "rememberMe": "Запомнить меня",
+      "submit": {
+        "label": "Войти"
+      }
+    },
+
+    "SignUpForm": {
+      "email": {
+        "label": "Электронная почта",
+        "placeholder": "Введите ваш email"
+      },
+      "password": {
+        "label": "Пароль",
+        "placeholder": "Введите ваш пароль"
+      },
+      "repeatPassword": {
+        "label": "Повторите пароль",
+        "placeholder": "Повторите ваш пароль"
+      },
+      "rememberMe": "Запомнить меня",
+      "submit": {
+        "label": "Регистрация"
+      }
+    }
+  },
+
+  "notifications": {
+    "NotificationModalTrigger": {
+      "ariaLabel": "Показать уведомления",
+      "dialogHeading": "Уведомления"
+    },
+
+    "NotificationFilterToggleButtonGroup": {
+      "all": "Все",
+      "unread": "Непрочитанные"
+    },
+
+    "NotificationItem": {
+      "markAsRead": "Отметить как прочитанное",
+      "delete": "Удалить",
+      "unknownUser": "Неизвестный пользователь",
+
+      "action": {
+        "TASK_ADDED": "добавил(а) новую задачу",
+        "TASK_DELETED": "удалил(а) задачу",
+        "TASK_UPDATED": "обновил(а) задачу",
+
+        "PROJECT_ADDED": "добавил(а) новый проект",
+        "PROJECT_DELETED": "удалил(а) проект",
+        "PROJECT_UPDATED": "обновил(а) проект",
+
+        "USER_ADDED": "добавил(а) нового пользователя",
+        "USER_DELETED": "удалил(а) пользователя",
+        "USER_UPDATED": "обновил(а) пользователя",
+
+        "CUSTOMER_ADDED": "добавил(а) нового клиента",
+        "CUSTOMER_DELETED": "удалил(а) клиента",
+        "CUSTOMER_UPDATED": "обновил(а) клиента",
+
+        "COMMENT_REPLIED": "ответил(а) на комментарий в",
+        "COMMENT_ADDED": "добавил(а) комментарий к"
+      }
+    }
+  },
+
+  "layout": {
+    "AppHeader": {
+      "title": {
+        "dashboard": "Панель управления",
+        "projects": "Все проекты",
+        "tasks": "Все задачи",
+        "team": "Команда",
+        "customers": "Все клиенты",
+        "profileSettings": "Настройки профиля",
+        "taskDetails": "Детали задачи",
+        "projectDetails": "Детали проекта",
+        "userInfo": "Информация о пользователе"
+      },
+
+      "themeToggleButton": {
+        "label": "Переключить на тёмную тему"
+      },
+
+      "searchForm": {
+        "ariaLabel": "Поиск",
+        "placeholder": "Поиск"
+      },
+
+      "langMenuTrigger": {
+        "label": "Английский",
+
+        "items": {
+          "english": "Английский",
+          "russian": "Русский"
+        }
+      }
+    },
+
+    "AppNavigation": {
+      "dashboard": "Панель",
+      "projects": "Проекты",
+      "tasks": "Задачи",
+      "team": "Команда",
+      "customers": "Клиенты",
+      "profile": "Профиль",
+      "logout": "Выйти",
+
+      "themeToggleButton": {
+        "label": "Темный режим"
+      },
+
+      "langMenuTrigger": {
+        "dialogHeading": "Язык",
+        "label": "Английский",
+
+        "items": {
+          "english": "Английский",
+          "russian": "Русский"
+        }
+      }
+    },
+
+    "AppBottomSheetTrigger": {
+      "triggerAriaLabel": "язык",
+      "dialogAriaLabel": "Навигация по приложению"
+    },
+
+    "AppSidebarSheetTrigger": {
+      "triggerAriaLabel": "меню"
+    }
+  },
+
+  "projects": {
+    "TotalProjectsCard": {
+      "text": "Всего проектов"
+    },
+
+    "ProjectToolbarSortingMenuTrigger": {
+      "byTitle": "По названию",
+      "byDeadline": "По сроку",
+      "byStatus": "По статусу",
+      "byCategory": "По категории"
+    },
+
+    "NewProjectModal": {
+      "title": "Новый проект",
+      "submitButtonLabel": "Создать проект"
+    },
+
+    "ProjectToolbarFiltersModalTrigger": {
+      "title": "Фильтры проектов"
+    },
+
+    "ProjectToolbarActionsMenuTrigger": {
+      "delete": "Удалить",
+      "pending": "Отметить как «В ожидании»",
+      "active": "Отметить как «Активно»",
+      "completed": "Отметить как «Завершено»"
+    },
+
+    "NewProjectForm": {
+      "NewProjectFormTitleTextField": {
+        "label": "Название",
+        "placeholder": "Введите название"
+      },
+
+      "NewProjectFormDescriptionTextField": {
+        "label": "Описание",
+        "placeholder": "Введите описание"
+      },
+
+      "NewProjectFormDeadlineDatePicker": {
+        "label": "Срок"
+      },
+
+      "NewProjectFormCategorySelect": {
+        "label": "Категория",
+        "placeholder": "Выберите категорию"
+      },
+
+      "NewProjectFormStatusSelect": {
+        "label": "Статус",
+        "placeholder": "Выберите статус"
+      }
+    },
+
+    "ProjectFiltersForm": {
+      "switchText": "Не имеет активных задач",
+
+      "ProjectFiltersFormDeadlineCheckboxGroup": {
+        "label": "Срок",
+        "today": "Сегодня",
+        "tomorrow": "Завтра",
+        "thisWeek": "На этой неделе",
+        "overdue": "Просрочено"
+      },
+
+      "ProjectFiltersFormStatusCheckboxGroup": {
+        "label": "Статус"
+      },
+
+      "ProjectFiltersFormDeadlineRange": {
+        "label": "Диапазон срока",
+        "labelTo": "Диапазон срока до"
+      },
+
+      "ProjectFiltersFormCategoryCheckboxGroup": {
+        "label": "Категория"
+      },
+
+      "ProjectFiltersFormCustomerCheckboxGroup": {
+        "label": "Клиент"
+      },
+
+      "ProjectFiltersFormUserCheckboxGroup": {
+        "label": "Создатель"
+      }
+    },
+
+    "ProjectToolbarCreateNewMenuTrigger": {
+      "dialogHeading": "Создать новый",
+      "label": "Создать новый",
+
+      "items": {
+        "project": "Проект",
+        "category": "Категорию"
+      }
+    },
+
+    "ProjectGridItem": {
+      "noDeadline": "Без срока",
+      "deadlineOn": "Срок до {date}",
+      "progressAriaLabel": "Прогресс проекта"
+    },
+
+    "ProjectListItem": {
+      "noDeadline": "Без срока",
+      "deadlineOn": "Срок до {date}",
+      "unknownCreator": "Неизвестный создатель",
+      "creator": "Создатель",
+      "unknownCustomer": "Неизвестный клиент",
+      "customer": "Клиент",
+      "category": "Категория",
+      "unknownCompany": "Неизвестная компания",
+      "company": "Компания"
+    },
+
+    "ProjectItemActionMenuTrigger": {
+      "delete": "Удалить",
+      "markPending": "Отметить как «В ожидании»",
+      "markDone": "Отметить как «Готово»",
+      "markActive": "Отметить как «Активно»"
+    },
+
+    "ProjectStatus": {
+      "pending": "В ожидании",
+      "active": "Активный",
+      "completed": "Завершён"
+    },
+
+    "ProjectCommentsModal": {
+      "title": "Комментарии проекта"
+    },
+
+    "ProjectDetailBottomSheet": {
+      "dialogHeading": "Детали проекта",
+      "editButtonLabel": "Редактировать Проект"
+    },
+
+    "ProjectDetailCompact": {
+      "creator": "Создатель",
+      "unknownCreator": "Неизвестный создатель",
+      "deadline": "Дедлайн",
+      "noDeadline": "Без дедлайна",
+      "description": "Описание",
+      "noDescription": "Нет описания",
+      "customer": "Клиент",
+      "unknownCustomer": "Неизвестный клиент",
+      "category": "Категория",
+      "attachments": "Вложения",
+
+      "statusMenuTrigger": {
+        "dialogHeading": "Статус проекта",
+
+        "items": {
+          "pending": "В ожидании",
+          "active": "Активен",
+          "completed": "Завершен"
+        }
+      }
+    },
+
+    "ProjectDetailForm": {
+      "statusSelect": {
+        "label": "Статус",
+        "placeholder": "Выберите статус",
+
+        "items": {
+          "pending": "В ожидании",
+          "active": "Активный",
+          "completed": "Завершённый"
+        }
+      },
+
+      "deadlineDatePicker": {
+        "label": "Срок"
+      },
+
+      "customerSelect": {
+        "label": "Клиент",
+        "placeholder": "Выберите клиента"
+      },
+
+      "categorySelect": {
+        "label": "Категория",
+        "placeholder": "Выберите категорию"
+      },
+
+      "resetButtonLabel": "Сбросить",
+      "submitButtonLabel": "Сохранить"
+    },
+
+    "ProjectDetailFull": {
+      "description": "Описание",
+      "noDescription": "Нет описания",
+      "attachments": "Вложения",
+      "comments": "Комментарии"
+    },
+
+    "ProjectDetailModal": {
+      "dialogHeading": "Детали проекта",
+      "openInFullPage": "Открыть в полном окне"
+    }
+  },
+
+  "users": {
+    "TotalUsersCard": {
+      "text": "Всего пользователей"
+    },
+
+    "ProfileActions": {
+      "deleteAccount": "Удалить аккаунт",
+      "changePassword": "Сменить пароль",
+      "editAccount": "Редактировать аккаунт"
+    },
+
+    "ProfileNavigationDesktop": {
+      "userInformation": "Информация о пользователе",
+      "assignedTasks": "Назначенные задачи"
+    },
+
+    "ProfileNavigationMobile": {
+      "info": "Информация",
+      "assignedTasks": "Назначенные задачи"
+    },
+
+    "UserDetail": {
+      "bio": "Биография",
+      "noBio": "Этот пользователь еще не написал биографию.",
+      "fullName": "Полное имя",
+      "noFullName": "Имя не указано",
+      "email": "Адрес электронной почты",
+      "phoneNumber": "Номер телефона",
+      "noPhoneNumber": "Номер телефона не указан",
+      "address": "Адрес",
+      "noAddress": "Адрес не указан",
+      "publicLink": "Публичная ссылка",
+      "noPublicLink": "Публичная ссылка отсутствует",
+      "company": "Компания",
+      "position": "Должность",
+      "noPosition": "Должность не указана",
+      "birthdate": "Дата рождения",
+      "noBirthdate": "Дата рождения не указана"
+    },
+
+    "UserDetailBottomSheet": {
+      "dialogHeading": "Детали пользователя",
+      "openInFullPage": "Открыть в полном окне"
+    },
+
+    "UserDetailClientContainer": {
+      "unknownPosition": "Неизвестная должность"
+    },
+
+    "UserDetailModal": {
+      "dialogHeading": "Детали пользователя",
+      "openInFullPage": "Открыть в полном окне"
+    },
+
+    "UserFiltersForm": {
+      "hasNoActiveTasks": "Нет активных задач",
+      "hasActiveTasks": "Есть активные задачи",
+      "hasOverdueTasks": "Есть просроченные задачи",
+
+      "roleCheckboxGroup": {
+        "label": "Роль",
+
+        "items": {
+          "admin": "Администратор",
+          "manager": "Менеджер",
+          "user": "Пользователь"
+        }
+      },
+
+      "positionCheckboxGroup": {
+        "label": "Должность"
+      }
+    },
+
+    "UserItemActionMenuTrigger": {
+      "edit": "Редактировать",
+      "delete": "Удалить"
+    },
+
+    "UserGridItem": {
+      "unknownPosition": "Неизвестная должность",
+      "noPhoneNumber": "Номер телефона не указан",
+      "noPublicLink": "Публичная ссылка отсутствует"
+    },
+
+    "UserHeaderServerContainer": {
+      "unknownPosition": "Неизвестная должность"
+    },
+
+    "UserListItem": {
+      "checkboxAriaLabel": "чекбокс пользователя",
+      "phoneNumber": "Номер телефона",
+      "noPhoneNumber": "Номер телефона не указан",
+      "publicLink": "Публичная ссылка",
+      "noPublicLink": "Публичная ссылка не указана",
+      "position": "Должность",
+      "unknownPosition": "Неизвестная должность"
+    },
+
+    "UserNavigationDesktop": {
+      "userInformation": "Информация о пользователе",
+      "assignedTasks": "Назначенные задачи"
+    },
+
+    "UserNavigationMobile": {
+      "info": "Информация",
+      "assignedTasks": "Назначенные задачи"
+    },
+
+    "UserTaskListItem": {
+      "checkboxAriaLabel": "чекбокс задачи",
+      "noDeadline": "Без дедлайна",
+      "deadlineOn": "Срок до {date}"
+    },
+
+    "UserTasksEmptySection": {
+      "heading": "Пока нет назначенных задач",
+      "description": "Создайте новую задачу, чтобы отслеживать свою работу",
+      "editButtonLabel": "Новая задача"
+    },
+
+    "UserTasksPageEmptyLayout": {
+      "title": "Назначенные задачи"
+    },
+
+    "UserTasksPageLayout": {
+      "title": "Назначенные задачи"
+    },
+
+    "UserToolbarFiltersModalTrigger": {
+      "title": "Фильтры пользователя"
+    },
+
+    "UserToolbarActionsMenuTrigger": {
+      "delete": "Удалить"
+    },
+
+    "UserToolbarCreateNewMenuTrigger": {
+      "dialogHeading": "Создать нового",
+      "triggerLabel": "Создать нового",
+
+      "items": {
+        "user": "Пользователь",
+        "position": "Должность"
+      }
+    }
+  },
+
+  "customers": {
+    "TotalCustomersCard": {
+      "text": "Всего клиентов"
+    },
+
+    "CustomerDetail": {
+      "bio": "Биография",
+      "fullName": "Полное имя",
+      "email": "Электронная почта",
+      "phoneNumber": "Номер телефона",
+      "publicLink": "Публичная ссылка",
+      "company": "Компания",
+
+      "noBio": "Пользователь ещё не написал биографию.",
+      "noFullName": "Имя не указано",
+      "noEmail": "Электронная почта не указана",
+      "noPhoneNumber": "Номер телефона не указан",
+      "noPublicLink": "У пользователя нет публичной ссылки на профиль",
+      "noCompany": "Компания не указана"
+    },
+
+    "CustomerDetailBottomSheet": {
+      "dialogHeading": "Детали клиента",
+      "editButtonLabel": "Редактировать"
+    },
+
+    "CustomerDetailClientContainer": {
+      "unknownCompany": "Неизвестная компания"
+    },
+
+    "CustomerDetailModal": {
+      "dialogHeading": "Детали клиента",
+      "editButtonLabel": "Редактировать"
+    },
+
+    "CustomerFiltersForm": {
+      "hasNoActiveProjects": "Не имеет активных проектов",
+      "hasActiveProjects": "Имеет активные проекты",
+      "hasOverdueProjects": "Имеет просроченные проекты",
+
+      "company": {
+        "label": "Компания"
+      }
+    },
+
+    "CustomerItemActionMenuTrigger": {
+      "delete": "Удалить"
+    },
+
+    "CustomerGridItem": {
+      "noPhoneNumber": "Нет номера телефона",
+      "noPublicLink": "Нет публичной ссылки"
+    },
+
+    "CustomerListItem": {
+      "checkboxAriaLabel": "чекбокс клиента",
+      "phoneNumber": "Номер телефона",
+      "publicLink": "Публичная ссылка",
+      "noPhoneNumber": "Нет номера телефона",
+      "noPublicLink": "Нет публичной ссылки",
+      "company": "Компания"
+    },
+
+    "CustomerToolbarFiltersModalTrigger": {
+      "title": "Фильтры клиентов"
+    },
+
+    "CustomerToolbarActionsMenuTrigger": {
+      "delete": "Удалить"
+    },
+
+    "CustomerToolbarCreateNewMenuTrigger": {
+      "dialogHeading": "Создать новое",
+      "label": "Создать новое",
+
+      "items": {
+        "customer": "Клиент",
+        "company": "Компания"
+      }
+    }
+  },
+
+  "comments": {
+    "CommentItem": {
+      "unknownUser": "Неизвестный пользователь"
+    },
+
+    "CommentsEmptySection": {
+      "heading": "Пока нет комментариев",
+      "description": "Комментариев пока нет. Добавьте первый, чтобы поделиться обновлениями, задать вопрос или начать обсуждение по этой задаче."
+    },
+
+    "CommentModalInput": {
+      "placeholder": "Напишите комментарий..."
+    },
+
+    "ReplyButton": "Ответить"
+  },
+
+  "tasks": {
+    "AssignedTasksSectionHeading": {
+      "text": "Назначенные задачи"
+    },
+
+    "AssignedTasksEmptyCard": {
+      "heading": "Задач пока нет",
+      "description": "Создайте новую задачу, чтобы отслеживать свою работу",
+      "button": "Новая задача"
+    },
+
+    "TotalTasksCard": {
+      "text": "Всего задач"
+    },
+
+    "TaskGridItem": {
+      "noDeadline": "Без срока",
+      "deadlineOn": "Срок до {date}",
+      "progressAriaLabel": "Прогресс проекта"
+    },
+
+    "TaskListItem": {
+      "noDeadline": "Без срока",
+      "deadlineOn": "Срок до {date}",
+      "unknownAssignee": "Неизвестный исполнитель",
+      "assignee": "Исполнитель",
+      "category": "Категория",
+      "project": "Проект"
+    },
+
+    "TaskToolbarSortingMenuTrigger": {
+      "byTitle": "По названию",
+      "byDeadline": "По сроку",
+      "byStatus": "По статусу",
+      "byCategory": "По категории"
+    },
+
+    "TaskToolbarFiltersModalTrigger": {
+      "title": "Фильтры задач"
+    },
+
+    "TaskToolbarActionsMenuTrigger": {
+      "delete": "Удалить",
+      "pending": "Отметить как «В ожидании»",
+      "active": "Отметить как «Активно»",
+      "completed": "Отметить как «Завершено»"
+    },
+
+    "TaskItemActionMenuTrigger": {
+      "delete": "Удалить",
+      "markPending": "Пометить как ожидающую",
+      "markDone": "Пометить как выполненную",
+      "markActive": "Пометить как активную"
+    },
+
+    "TaskToolbarCreateNewMenuTrigger": {
+      "dialogHeading": "Создать новую",
+      "label": "Создать новую",
+
+      "items": {
+        "task": "Задачу",
+        "category": "Категорию"
+      }
+    },
+
+    "NewTaskModal": {
+      "title": "Новая задача",
+      "submitButtonLabel": "Создать задачу"
+    },
+
+    "EditTaskModal": {
+      "title": "Редактировать задачу",
+      "submitButtonLabel": "Обновить задачу"
+    },
+
+    "TaskCommentsModal": {
+      "title": "Комментарии к задаче"
+    },
+
+    "TaskDetailBottomSheet": {
+      "title": "Детали задачи",
+      "editButtonLabel": "Редактировать задачу"
+    },
+
+    "TaskDetailFull": {
+      "description": "Описание",
+      "noDescription": "Нет описания",
+      "attachments": "Вложения",
+      "comments": "Комментарии"
+    },
+
+    "NewTaskModalTrigger": {
+      "label": "Новая задача",
+      "title": "Новая задача",
+      "submitButtonLabel": "Создать задачу"
+    },
+
+    "TaskDetailForm": {
+      "resetButtonLabel": "Сброс",
+      "submitButtonLabel": "Сохранить",
+
+      "TaskDetailFormAssigneeSelect": {
+        "label": "Исполнитель",
+        "placeholder": "Выберите исполнителя"
+      },
+
+      "TaskDetailFormStatusSelect": {
+        "label": "Статус",
+        "placeholder": "Выберите статус",
+
+        "items": {
+          "pending": "В ожидании",
+          "active": "Активная",
+          "completed": "Завершённая"
+        }
+      },
+
+      "TaskDetailFormDeadlineDatePicker": {
+        "label": "Срок"
+      },
+
+      "TaskDetailFormProjectSelect": {
+        "label": "Проект",
+        "placeholder": "Выберите проект"
+      }
+    },
+
+    "TaskDetailModal": {
+      "title": "Детали задачи",
+      "editButtonLabel": "Открыть на полной странице"
+    },
+
+    "TaskFiltersForm": {
+      "TaskFiltersFormDeadlineCheckboxGroup": {
+        "label": "Срок",
+        "today": "Сегодня",
+        "tomorrow": "Завтра",
+        "thisWeek": "На этой неделе",
+        "overdue": "Просрочено"
+      },
+
+      "TaskFiltersFormDeadlineRange": {
+        "label": "Диапазон срока",
+        "labelTo": "Диапазон срока до"
+      },
+
+      "TaskFiltersFormStatusCheckboxGroup": {
+        "label": "Статус"
+      },
+
+      "TaskFiltersFormCategoryCheckboxGroup": {
+        "label": "Категория"
+      },
+
+      "TaskFiltersFormProjectCheckboxGroup": {
+        "label": "Проект"
+      },
+
+      "TaskFiltersFormAssigneeCheckboxGroup": {
+        "label": "Исполнитель"
+      }
+    },
+
+    "TaskFormBase": {
+      "TaskFormBaseTitleTextField": {
+        "label": "Название",
+        "placeholder": "Введите название"
+      },
+
+      "TaskFormBaseDescriptionTextField": {
+        "label": "Описание",
+        "placeholder": "Введите описание"
+      },
+
+      "TaskFormBaseDeadlineDatePicker": {
+        "label": "Срок"
+      },
+
+      "TaskFormBaseStatusSelect": {
+        "label": "Статус",
+        "placeholder": "Выберите статус",
+
+        "items": {
+          "pending": "В ожидании",
+          "active": "Активная",
+          "completed": "Завершённая"
+        }
+      },
+
+      "TaskFormBaseCategorySelect": {
+        "label": "Категория",
+        "placeholder": "Выберите категорию"
+      },
+
+      "TaskFormBaseProjectSelect": {
+        "label": "Проект",
+        "placeholder": "Выберите проект"
+      },
+
+      "TaskFormBaseAssigneeSelect": {
+        "label": "Исполнитель",
+        "placeholder": "Выберите пользователя"
+      }
+    },
+
+    "TaskDetailCompact": {
+      "noDeadline": "Без срока",
+      "deadline": "Срок",
+      "description": "Описание",
+      "noDescription": "Нет описания",
+      "creator": "Создатель",
+      "unknownCreator": "Неизвестный создатель",
+      "category": "Категория",
+      "project": "Проект",
+      "attachments": "Вложения",
+      "assignee": "Исполнитель",
+      "noAssignee": "Нет исполнителя",
+
+      "TaskDetailCompactStatusMenuTrigger": {
+        "dialogHeading": "Статус задачи",
+
+        "items": {
+          "pending": "В ожидании",
+          "active": "Активная",
+          "completed": "Завершённая"
+        }
+      }
+    },
+
+    "TaskStatus": {
+      "pending": "Ожидает",
+      "active": "Активна",
+      "completed": "Завершена"
+    }
+  },
+
+  "subtasks": {
+    "SubtasksCheckboxGroup": {
+      "label": "Подзадачи"
+    },
+
+    "NewSubtaskForm": {
+      "label": "Текст",
+      "placeholder": "Введите новую подзадачу..."
+    },
+
+    "NewSubtaskDialog": {
+      "dialogHeading": "Новая подзадача",
+      "addButtonLabel": "Добавить подзадачу"
+    },
+
+    "NewSubtasksButton": {
+      "label": "Новая подзадача"
+    }
   }
 }

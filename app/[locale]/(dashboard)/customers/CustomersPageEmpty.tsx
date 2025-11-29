@@ -4,17 +4,18 @@ import {
   EmptySectionHeading,
   EmptySectionDescription,
 } from "@/components/common/EmptySection";
+import { useTranslations } from "next-intl";
 import { PageContainer } from "@/components/common/PageContainer";
 
 export function CustomersPageEmpty() {
+  const t = useTranslations("app.CustomersPageEmpty");
+
   return (
     <PageContainer fullscreen centered>
       <EmptySection>
-        <EmptySectionHeading>No Customers yet</EmptySectionHeading>
-        <EmptySectionDescription>
-          Add a new customer to start growing your client base
-        </EmptySectionDescription>
-        <EmptySectionButton href="#">New Customer</EmptySectionButton>
+        <EmptySectionHeading>{t("heading")}</EmptySectionHeading>
+        <EmptySectionDescription>{t("description")}</EmptySectionDescription>
+        <EmptySectionButton href="#">{t("addButtonLabel")}</EmptySectionButton>
       </EmptySection>
     </PageContainer>
   );

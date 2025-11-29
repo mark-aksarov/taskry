@@ -12,20 +12,20 @@ import {
 } from "@/components/common/Grid";
 
 import {
-  ItemBaseActionMenuTrigger,
   ItemBaseDetailModalTrigger,
   ItemBaseDetailBottomSheetTrigger,
 } from "@/components/common/ItemBase";
 
 import Image from "next/image";
-import { Item } from "react-stately";
-import { Link2, Mail, Phone, Trash } from "lucide-react";
+import { useTranslations } from "next-intl";
+import { Link2, Mail, Phone } from "lucide-react";
 import { Link, Checkbox, Divider } from "@/components/ui";
 import { UnknownUser } from "@/components/common/UnknownUser";
 import { CustomerGridItemLayout } from "./CustomerGridItemLayout";
 import { ImageContainer } from "@/components/common/ImageContainer";
 import { CustomerDetailModal } from "../CustomerDetailModal/CustomerDetailModal";
 import { CustomerDetailBottomSheet } from "../CustomerDetailBottomSheet/CustomerDetailBottomSheet";
+import { CustomerItemActionMenuTrigger } from "../CustomerItemActionMenuTrigger";
 
 interface CustomerGridItemProps {
   id: number;
@@ -49,6 +49,8 @@ export function CustomerGridItem({
   imageUrl,
   company,
 }: CustomerGridItemProps) {
+  const t = useTranslations("customers.CustomerGridItem");
+
   const contactLinkClasses = "max-w-full overflow-hidden";
 
   const customerImg = imageUrl ? (
@@ -64,11 +66,7 @@ export function CustomerGridItem({
       topRowSlot={
         <GridItemRow>
           <Checkbox aria-label={`${fullName} checkbox`} />
-          <ItemBaseActionMenuTrigger>
-            <Item textValue="Delete" key="delete">
-              <Trash size={16} /> Delete
-            </Item>
-          </ItemBaseActionMenuTrigger>
+          <CustomerItemActionMenuTrigger className="-mr-2" />
         </GridItemRow>
       }
       imageSlot={
@@ -129,7 +127,7 @@ export function CustomerGridItem({
                 <GridItemContactIconWrapper>
                   <Phone size={16} strokeWidth={1.5} absoluteStrokeWidth />
                 </GridItemContactIconWrapper>
-                <GridItemContactText>No phone</GridItemContactText>
+                <GridItemContactText>{t("noPhoneNumber")}</GridItemContactText>
               </GridItemContact>
             )}
 
@@ -147,7 +145,7 @@ export function CustomerGridItem({
                 <GridItemContactIconWrapper>
                   <Link2 size={16} strokeWidth={1.5} absoluteStrokeWidth />
                 </GridItemContactIconWrapper>
-                <GridItemContactText>No public link</GridItemContactText>
+                <GridItemContactText>{t("noPublicLink")}</GridItemContactText>
               </GridItemContact>
             )}
 

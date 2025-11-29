@@ -2,20 +2,21 @@
 
 import { Item } from "react-stately";
 import { ResponsiveSelect } from "@/components/common/ResponsiveSelect";
+import { useTranslations } from "next-intl";
 
 export function NewProjectFormCategorySelect({
   categories,
 }: {
   categories: { id: number; name: string }[];
 }) {
-  if (!categories.length) {
-    return null;
-  }
+  const t = useTranslations(
+    "projects.NewProjectForm.NewProjectFormCategorySelect",
+  );
 
   return (
     <ResponsiveSelect
-      label="Category"
-      placeholder="Select category"
+      label={t("label")}
+      placeholder={t("placeholder")}
       overlayClassName="w-[var(--trigger-width)]"
       items={categories.map((item) => ({ id: item.id, label: item.name }))}
     >

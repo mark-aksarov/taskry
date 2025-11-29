@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui";
+import { useTranslations } from "next-intl";
 import { DetailForm } from "@/components/common/DetailForm";
 import { ProjectDetailFormDeadlineDatePicker } from "./ProjectDetailFormDeadlineDatePicker";
 
@@ -13,6 +14,8 @@ export function ProjectDetailForm({
   categorySelect,
   customerSelect,
 }: ProjectDetailFormProps) {
+  const t = useTranslations("projects.ProjectDetailForm");
+
   const buttonClasses = "flex-auto justify-center py-2";
 
   return (
@@ -26,13 +29,13 @@ export function ProjectDetailForm({
           variant="outlined"
           size="medium"
           type="reset"
-          label="Reset"
+          label={t("resetButtonLabel")}
           className={buttonClasses}
         />
         <Button
           size="medium"
           type="submit"
-          label="Save"
+          label={t("submitButtonLabel")}
           className={buttonClasses}
         />
       </div>

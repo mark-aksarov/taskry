@@ -8,19 +8,18 @@ import {
 } from "@/components/common/List";
 
 import {
-  ItemBaseActionMenuTrigger,
-  ItemBaseDetailBottomSheetTrigger,
   ItemBaseDetailModalTrigger,
+  ItemBaseDetailBottomSheetTrigger,
 } from "@/components/common/ItemBase";
 
 import Image from "next/image";
-import { Item } from "react-stately";
-import { Pencil, Trash } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { Checkbox, Link } from "@/components/ui";
+import { CustomerDetailModal } from "../CustomerDetailModal";
 import { UnknownUser } from "@/components/common/UnknownUser";
 import { ImageContainer } from "@/components/common/ImageContainer";
-import { CustomerDetailModal } from "../CustomerDetailModal/CustomerDetailModal";
-import { CustomerDetailBottomSheet } from "../CustomerDetailBottomSheet/CustomerDetailBottomSheet";
+import { CustomerDetailBottomSheet } from "../CustomerDetailBottomSheet";
+import { CustomerItemActionMenuTrigger } from "../CustomerItemActionMenuTrigger";
 
 export type CustomerListItemProps = {
   id: number;
@@ -44,6 +43,8 @@ export function CustomerListItem({
   imageUrl,
   company,
 }: CustomerListItemProps) {
+  const t = useTranslations("customers.CustomerListItem");
+
   const userImg = imageUrl ? (
     <ImageContainer className="h-9 w-9">
       <Image fill src={imageUrl} alt={fullName} />
@@ -54,7 +55,7 @@ export function CustomerListItem({
 
   return (
     <ListItem>
-      <Checkbox aria-label="customer checkbox" />
+      <Checkbox aria-label={t("checkboxLabel")} />
 
       <>
         <ItemBaseDetailModalTrigger
@@ -106,11 +107,11 @@ export function CustomerListItem({
               {phoneNumber}
             </Link>
           ) : (
-            "Phone number is not provided"
+            t("noPhoneNumber")
           )}
         </ListItemTitle>
 
-        <ListItemText>Phone number</ListItemText>
+        <ListItemText>{t("phoneNumber")}</ListItemText>
       </ListItemInfo>
       <ListItemInfo className="@max-2xl:hidden">
         <ListItemTitle>
@@ -119,26 +120,19 @@ export function CustomerListItem({
               {publicLink}
             </Link>
           ) : (
-            "Link is not provided"
+            t("noPublicLink")
           )}
         </ListItemTitle>
 
-        <ListItemText>Public link</ListItemText>
+        <ListItemText>{t("publicLink")}</ListItemText>
       </ListItemInfo>
 
       <ListItemInfo className="@max-4xl:hidden">
         <ListItemTitle>{company.name}</ListItemTitle>
-        <ListItemText>Company</ListItemText>
+        <ListItemText>{t("company")}</ListItemText>
       </ListItemInfo>
 
-      <ItemBaseActionMenuTrigger>
-        <Item textValue="Edit" key="edit">
-          <Pencil size={16} /> Edit
-        </Item>
-        <Item textValue="Delete" key="delete">
-          <Trash size={16} /> Delete
-        </Item>
-      </ItemBaseActionMenuTrigger>
+      <CustomerItemActionMenuTrigger />
     </ListItem>
   );
 }

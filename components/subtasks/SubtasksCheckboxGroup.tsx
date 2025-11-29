@@ -1,3 +1,4 @@
+import { useTranslations } from "next-intl";
 import { CheckboxGroup, Checkbox } from "../ui";
 
 export function SubtasksCheckboxGroup({
@@ -5,9 +6,11 @@ export function SubtasksCheckboxGroup({
 }: {
   subtasks: { id: number; text: string; isDone: boolean }[];
 }) {
+  const t = useTranslations("subtasks.SubtasksCheckboxGroup");
+
   return (
     <CheckboxGroup
-      label="Subtasks"
+      label={t("label")}
       defaultValue={subtasks
         .filter((subtask) => subtask.isDone)
         .map((subtask) => subtask.id.toString())}
@@ -17,7 +20,7 @@ export function SubtasksCheckboxGroup({
         <Checkbox
           key={subtask.id}
           value={subtask.id.toString()}
-          className="font-normal capitalize"
+          className="font-normal"
         >
           {subtask.text}
         </Checkbox>

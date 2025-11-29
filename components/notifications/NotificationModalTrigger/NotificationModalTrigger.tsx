@@ -9,16 +9,19 @@ import {
   RACDialogTrigger,
 } from "@/components/ui";
 import { Bell } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 export function NotificationModalTrigger({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const t = useTranslations("notifications.NotificationModalTrigger");
+
   return (
     <RACDialogTrigger>
       <Button
-        aria-label="notifications"
+        aria-label={t("ariaLabel")}
         variant="ghost"
         iconLeft={<Bell size={16} strokeWidth={1.5} absoluteStrokeWidth />}
         className="rounded-full p-3"
@@ -27,7 +30,7 @@ export function NotificationModalTrigger({
       <ResponsiveModal isDismissable className="w-[600px]">
         <Dialog className="md:max-h-[calc(100dvh-64px)]">
           <DialogHeader>
-            <DialogHeading>Notifications</DialogHeading>
+            <DialogHeading>{t("dialogHeading")}</DialogHeading>
             <DialogCloseButton />
           </DialogHeader>
           <DialogBody className="p-0!">{children}</DialogBody>

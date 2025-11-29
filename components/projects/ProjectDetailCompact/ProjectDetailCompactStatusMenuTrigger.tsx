@@ -2,10 +2,12 @@
 
 import {
   Button,
-  DialogCloseButton,
   DialogHeader,
   DialogHeading,
+  DialogCloseButton,
 } from "@/components/ui";
+
+import { useTranslations } from "next-intl";
 import { useOverlayTrigger } from "react-aria";
 import { Item, useOverlayTriggerState } from "react-stately";
 import { Check, ChevronDown, CircleEllipsis, Clock } from "lucide-react";
@@ -14,12 +16,13 @@ import { ResponsiveMenuTrigger } from "@/components/common/ResponsiveMenuTrigger
 export function ProjectDetailCompactStatusMenuTrigger() {
   const state = useOverlayTriggerState({});
   const { triggerProps } = useOverlayTrigger({ type: "dialog" }, state);
+  const t = useTranslations("projects.ProjectDetailCompact.statusMenuTrigger");
 
   return (
     <ResponsiveMenuTrigger
       renderDialogHeader={() => (
         <DialogHeader>
-          <DialogHeading>Project Status</DialogHeading>
+          <DialogHeading>{t("dialogHeading")}</DialogHeading>
           <DialogCloseButton />
         </DialogHeader>
       )}
@@ -27,7 +30,7 @@ export function ProjectDetailCompactStatusMenuTrigger() {
         <Button
           {...triggerProps}
           variant="outlined"
-          label="Active"
+          label={t("items.active")}
           className="rounded-lg"
           iconRight={
             <ChevronDown size={16} strokeWidth={1.5} absoluteStrokeWidth />
@@ -36,17 +39,17 @@ export function ProjectDetailCompactStatusMenuTrigger() {
       )}
       placement="bottom left"
     >
-      <Item textValue="Mark as Pending" key="active">
+      <Item textValue={t("items.active")} key="active">
         <Clock size={16} strokeWidth={1.5} absoluteStrokeWidth />
-        Mark as Active
+        {t("items.active")}
       </Item>
-      <Item textValue="Mark as Pending" key="pending">
+      <Item textValue={t("items.pending")} key="pending">
         <CircleEllipsis size={16} strokeWidth={1.5} absoluteStrokeWidth />
-        Mark as Pending
+        {t("items.pending")}
       </Item>
-      <Item textValue="Mark as Completed" key="done">
+      <Item textValue={t("items.completed")} key="done">
         <Check size={16} strokeWidth={1.5} absoluteStrokeWidth />
-        Mark as Completed
+        {t("items.completed")}
       </Item>
     </ResponsiveMenuTrigger>
   );

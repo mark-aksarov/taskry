@@ -6,6 +6,7 @@ import {
   DetailTitle,
 } from "@/components/common/Detail";
 import { CustomerDetailLayout } from "./CustomerDetailLayout";
+import { useTranslations } from "next-intl";
 
 interface CustomerDetailProps {
   fullName: string;
@@ -26,46 +27,44 @@ export function CustomerDetail({
   publicLink,
   company,
 }: CustomerDetailProps) {
+  const t = useTranslations("customers.CustomerDetail");
+
   return (
     <CustomerDetailLayout
       bioSlot={
         <DetailInfo>
-          <DetailTitle>Bio</DetailTitle>
-          <DetailText>
-            {bio || "This user hasn’t written a bio yet."}
-          </DetailText>
+          <DetailTitle>{t("bio")}</DetailTitle>
+          <DetailText>{bio || t("noBio")}</DetailText>
         </DetailInfo>
       }
       fullNameSlot={
         <DetailInfo>
-          <DetailTitle>Full name</DetailTitle>
-          <DetailText>{fullName || "No name provided"}</DetailText>
+          <DetailTitle>{t("fullName")}</DetailTitle>
+          <DetailText>{fullName || t("noFullName")}</DetailText>
         </DetailInfo>
       }
       emailSlot={
         <DetailInfo>
-          <DetailTitle>Email address</DetailTitle>
-          <DetailText>{email || "No email provided"}</DetailText>
+          <DetailTitle>{t("email")}</DetailTitle>
+          <DetailText>{email || t("noEmail")}</DetailText>
         </DetailInfo>
       }
       phoneNumberSlot={
         <DetailInfo>
-          <DetailTitle>Phone number</DetailTitle>
-          <DetailText>{phoneNumber || "No phone number provided"}</DetailText>
+          <DetailTitle>{t("phoneNumber")}</DetailTitle>
+          <DetailText>{phoneNumber || t("noPhoneNumber")}</DetailText>
         </DetailInfo>
       }
       publicLinkSlot={
         <DetailInfo className="md:border-none md:pb-0">
-          <DetailTitle>Public link</DetailTitle>
-          <DetailText>
-            {publicLink || "This user doesn’t have a public profile link"}
-          </DetailText>
+          <DetailTitle>{t("publicLink")}</DetailTitle>
+          <DetailText>{publicLink || t("noPublicLink")}</DetailText>
         </DetailInfo>
       }
       companySlot={
         <DetailInfo className="border-none pb-0">
-          <DetailTitle>Position</DetailTitle>
-          <DetailText>{company?.name || "Company not specified"}</DetailText>
+          <DetailTitle>{t("company")}</DetailTitle>
+          <DetailText>{company?.name || t("noCompany")}</DetailText>
         </DetailInfo>
       }
     />

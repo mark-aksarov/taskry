@@ -1,11 +1,1052 @@
 {
-  "AppNavigation": {
-    "dashboard": "Dashboard",
-    "projects": "Projects",
-    "tasks": "Tasks",
-    "team": "Team",
-    "customers": "Customers",
-    "profile": "Profile",
-    "logout": "Logout"
+  "app": {
+    "CheckEmailPage": {
+      "heading": "Check your email",
+      "subtitle": "We have sent a password reset link to your email.",
+      "backButtonLabel": "Back to reset password"
+    },
+
+    "ForgetPasswordPage": {
+      "heading": "Forget Password",
+      "subtitle": "Enter your email address to receive a link to reset your password."
+    },
+
+    "ResetPasswordPage": {
+      "heading": "Reset Password",
+      "subtitle": "Provide a new password for your account."
+    },
+
+    "SignInPage": {
+      "heading": "Sign In",
+      "subtitle": "Please sign in to your account."
+    },
+
+    "SignInPageError": {
+      "heading": "Something went wrong",
+      "subtitle": {
+        "emailNotVerified": "We sent a verification link to your email. Please check your inbox and click the link to continue",
+        "otherError": "Something went wrong. Please check your internet or try again"
+      },
+      "signInButtonLabel": "Sign in with email"
+    },
+
+    "SignUpPage": {
+      "heading": "Sign Up",
+      "subtitle": "Please sign in to your account."
+    },
+
+    "VerifyEmailPage": {
+      "heading": "Verify Email",
+      "subtitle": "We have sent a verification link to your {email}. Please check your inbox and click the link to continue.",
+      "signInButtonLabel": "Sign in with email"
+    },
+
+    "DashboardPage": {
+      "heading": "Dashboard"
+    },
+
+    "ProjectsPage": {
+      "heading": "Projects"
+    },
+
+    "TasksPage": {
+      "heading": "Tasks"
+    },
+
+    "CustomersPageEmpty": {
+      "heading": "No Customers yet",
+      "description": "Add a new customer to start growing your client base",
+      "addButtonLabel": "New Customer"
+    },
+
+    "CustomersPageLoading": {
+      "title": "All Customers"
+    },
+
+    "ProfilePage": {
+      "heading": "Profile Settings"
+    },
+
+    "ProjectsPageLoading": {
+      "title": "All Projects"
+    },
+
+    "ProjectsPageEmpty": {
+      "heading": "No projects yet",
+      "description": "Create a new project to keep track of your work",
+      "addButtonLabel": "New Project"
+    },
+
+    "ProjectDetailPage": {
+      "heading": "Project Details"
+    },
+
+    "TasksPageLoading": {
+      "title": "All Tasks"
+    },
+
+    "TasksPageEmpty": {
+      "heading": "No tasks yet",
+      "description": "Create a new task to keep track of your work",
+      "addButtonLabel": "New Task"
+    },
+
+    "TaskDetailPage": {
+      "heading": "Task Details"
+    },
+
+    "UsersPageLoading": {
+      "title": "Team"
+    },
+
+    "UsersPage": {
+      "heading": "Team"
+    },
+
+    "UsersPageEmpty": {
+      "heading": "No Users yet",
+      "description": "Add a new user to start building your team",
+      "addButtonLabel": "New User"
+    },
+
+    "TeamProfilePage": {
+      "heading": "User Information"
+    }
+  },
+
+  "common": {
+    "Toolbar": {
+      "ToolbarSortingMenuTrigger": {
+        "dialogHeading": "Sorting",
+        "ariaLabel": "Sort projects by",
+        "label": "Sorting"
+      },
+
+      "ToolbarFiltersModalTrigger": {
+        "trigger": {
+          "ariaLabel": "Filter projects",
+          "label": "Filters"
+        },
+        "applyButtonLabel": "Apply Filters"
+      },
+
+      "ToolbarActionsMenuTrigger": {
+        "heading": "Actions",
+        "ariaLabel": "Actions",
+        "label": "Actions"
+      }
+    },
+
+    "ViewModeToggleButtonGroup": {
+      "list": "List",
+      "grid": "Grid"
+    },
+
+    "AttachmentsField": {
+      "label": "Attachments",
+      "maxSize": "Max size: 10 MB"
+    },
+
+    "ItemBase": {
+      "ItemBaseActionMenuTrigger": {
+        "heading": "Actions",
+        "ariaLabel": "Actions"
+      }
+    },
+
+    "DetailCommentInput": {
+      "placeholder": "Type a comment..."
+    },
+
+    "MessageInput": {
+      "attachFileButton": {
+        "ariaLabel": "Add attachments"
+      },
+      "sendButton": {
+        "ariaLabel": "Send Message"
+      }
+    }
+  },
+
+  "auth": {
+    "AuthCardFooterSignInItem": {
+      "text": "Sign in to your account.",
+      "link": "Sign In"
+    },
+
+    "AuthCardFooterForgotPasswordItem": {
+      "link": "Forgot password?"
+    },
+
+    "AuthCardFooterSignUpItem": {
+      "text": "Сreate your account.",
+      "link": "Sign Up"
+    },
+
+    "ForgetPasswordForm": {
+      "email": {
+        "label": "Email",
+        "placeholder": "Enter your email"
+      },
+      "submit": {
+        "label": "Request reset link"
+      }
+    },
+
+    "ResetPasswordForm": {
+      "password": {
+        "label": "Password",
+        "placeholder": "Enter your password"
+      },
+      "submit": {
+        "label": "Reset password"
+      }
+    },
+
+    "SignInForm": {
+      "email": {
+        "label": "Email",
+        "placeholder": "Enter your email"
+      },
+      "password": {
+        "label": "Password",
+        "placeholder": "Enter your password"
+      },
+      "rememberMe": "Remember me",
+      "submit": {
+        "label": "Sign In"
+      }
+    },
+
+    "SignUpForm": {
+      "email": {
+        "label": "Email",
+        "placeholder": "Enter your email"
+      },
+      "password": {
+        "label": "Password",
+        "placeholder": "Enter your password"
+      },
+      "repeatPassword": {
+        "label": "Repeat password",
+        "placeholder": "Repeat your password"
+      },
+      "rememberMe": "Remember me",
+      "submit": {
+        "label": "Sign Up"
+      }
+    }
+  },
+
+  "notifications": {
+    "NotificationModalTrigger": {
+      "ariaLabel": "Show notifications",
+      "dialogHeading": "Notifications"
+    },
+
+    "NotificationFilterToggleButtonGroup": {
+      "all": "All",
+      "unread": "Unread"
+    },
+
+    "NotificationItem": {
+      "markAsRead": "Mark as read",
+      "delete": "Delete",
+      "unknownUser": "Unknown User",
+
+      "action": {
+        "TASK_ADDED": "added a new task",
+        "TASK_DELETED": "deleted a task",
+        "TASK_UPDATED": "updated a task",
+
+        "PROJECT_ADDED": "added a new project",
+        "PROJECT_DELETED": "deleted a project",
+        "PROJECT_UPDATED": "updated a project",
+
+        "USER_ADDED": "added a new user",
+        "USER_DELETED": "deleted a user",
+        "USER_UPDATED": "updated a user",
+
+        "CUSTOMER_ADDED": "added a new customer",
+        "CUSTOMER_DELETED": "deleted a customer",
+        "CUSTOMER_UPDATED": "updated a customer",
+
+        "COMMENT_REPLIED": "replied to a comment in",
+        "COMMENT_ADDED": "added a comment to"
+      }
+    }
+  },
+
+  "layout": {
+    "AppHeader": {
+      "title": {
+        "dashboard": "Dashboard",
+        "projects": "All Projects",
+        "tasks": "All Tasks",
+        "team": "Team",
+        "customers": "All Customers",
+        "profileSettings": "Profile Settings",
+        "taskDetails": "Task Details",
+        "projectDetails": "Project Details",
+        "userInfo": "User Information"
+      },
+
+      "themeToggleButton": {
+        "label": "Switch to dark theme"
+      },
+
+      "searchForm": {
+        "ariaLabel": "Search",
+        "placeholder": "Search"
+      },
+
+      "langMenuTrigger": {
+        "label": "English",
+
+        "items": {
+          "english": "English",
+          "russian": "Russian"
+        }
+      }
+    },
+
+    "AppNavigation": {
+      "dashboard": "Dashboard",
+      "projects": "Projects",
+      "tasks": "Tasks",
+      "team": "Team",
+      "customers": "Customers",
+      "profile": "Profile",
+      "logout": "Logout",
+
+      "themeToggleButton": {
+        "label": "Dark mode"
+      },
+
+      "langMenuTrigger": {
+        "dialogHeading": "Language",
+        "label": "English",
+
+        "items": {
+          "english": "English",
+          "russian": "Russian"
+        }
+      }
+    },
+
+    "AppBottomSheetTrigger": {
+      "triggerAriaLabel": "language",
+      "dialogAriaLabel": "App navigation"
+    },
+
+    "AppSidebarSheetTrigger": {
+      "triggerAriaLabel": "menu"
+    }
+  },
+
+  "projects": {
+    "TotalProjectsCard": {
+      "text": "Total Projects"
+    },
+
+    "ProjectToolbarSortingMenuTrigger": {
+      "byTitle": "By Title",
+      "byDeadline": "By Deadline",
+      "byStatus": "By Status",
+      "byCategory": "By Category"
+    },
+
+    "NewProjectModal": {
+      "title": "New Project",
+      "submitButtonLabel": "Create Project"
+    },
+
+    "ProjectToolbarFiltersModalTrigger": {
+      "title": "Project Filters"
+    },
+
+    "ProjectToolbarActionsMenuTrigger": {
+      "delete": "Delete",
+      "pending": "Mark as Pending",
+      "active": "Mark as Active",
+      "completed": "Mark as Completed"
+    },
+
+    "NewProjectForm": {
+      "NewProjectFormTitleTextField": {
+        "label": "Title",
+        "placeholder": "Typing title"
+      },
+
+      "NewProjectFormDescriptionTextField": {
+        "label": "Description",
+        "placeholder": "Typing description"
+      },
+
+      "NewProjectFormDeadlineDatePicker": {
+        "label": "Deadline"
+      },
+
+      "NewProjectFormCategorySelect": {
+        "label": "Category",
+        "placeholder": "Select category"
+      },
+
+      "NewProjectFormStatusSelect": {
+        "label": "Status",
+        "placeholder": "Select status"
+      }
+    },
+
+    "ProjectFiltersForm": {
+      "switchText": "Has not active tasks",
+
+      "ProjectFiltersFormDeadlineCheckboxGroup": {
+        "label": "Deadline",
+        "today": "Today",
+        "tomorrow": "Tomorrow",
+        "thisWeek": "This week",
+        "overdue": "Overdue"
+      },
+
+      "ProjectFiltersFormStatusCheckboxGroup": {
+        "label": "Status"
+      },
+
+      "ProjectFiltersFormDeadlineRange": {
+        "label": "Deadline range",
+        "labelTo": "Deadline range to"
+      },
+
+      "ProjectFiltersFormCategoryCheckboxGroup": {
+        "label": "Category"
+      },
+
+      "ProjectFiltersFormCustomerCheckboxGroup": {
+        "label": "Customer"
+      },
+
+      "ProjectFiltersFormUserCheckboxGroup": {
+        "label": "Creator"
+      }
+    },
+
+    "ProjectToolbarCreateNewMenuTrigger": {
+      "dialogHeading": "Create New",
+      "label": "Create New",
+
+      "items": {
+        "project": "Project",
+        "category": "Category"
+      }
+    },
+
+    "ProjectGridItem": {
+      "noDeadline": "No deadline",
+      "deadlineOn": "Deadline on {date}",
+      "progressAriaLabel": "project progress"
+    },
+
+    "ProjectListItem": {
+      "noDeadline": "No deadline",
+      "deadlineOn": "Deadline on {date}",
+      "unknownCreator": "Unknown creator",
+      "creator": "Creator",
+      "unknownCustomer": "Unknown customer",
+      "customer": "Customer",
+      "category": "Category",
+      "unknownCompany": "Unknown company",
+      "company": "Company"
+    },
+
+    "ProjectItemActionMenuTrigger": {
+      "delete": "Delete",
+      "markPending": "Mark as Pending",
+      "markDone": "Mark as Done",
+      "markActive": "Mark as Active"
+    },
+
+    "ProjectStatus": {
+      "pending": "Pending",
+      "active": "Active",
+      "completed": "Completed"
+    },
+
+    "ProjectCommentsModal": {
+      "title": "Project comments"
+    },
+
+    "ProjectDetailBottomSheet": {
+      "dialogHeading": "Project Details",
+      "editButtonLabel": "Edit Project"
+    },
+
+    "ProjectDetailCompact": {
+      "creator": "Creator",
+      "unknownCreator": "Unknown creator",
+      "deadline": "Deadline",
+      "noDeadline": "No deadline",
+      "description": "Description",
+      "noDescription": "No description",
+      "customer": "Customer",
+      "unknownCustomer": "Unknown customer",
+      "category": "Category",
+      "attachments": "Attachments",
+
+      "statusMenuTrigger": {
+        "dialogHeading": "Project Status",
+
+        "items": {
+          "pending": "Pending",
+          "active": "Active",
+          "completed": "Completed"
+        }
+      }
+    },
+
+    "ProjectDetailForm": {
+      "statusSelect": {
+        "label": "Status",
+        "placeholder": "Select status",
+
+        "items": {
+          "pending": "Pending",
+          "active": "Active",
+          "completed": "Completed"
+        }
+      },
+
+      "deadlineDatePicker": {
+        "label": "Deadline"
+      },
+
+      "customerSelect": {
+        "label": "Customer",
+        "placeholder": "Select customer"
+      },
+
+      "categorySelect": {
+        "label": "Category",
+        "placeholder": "Select category"
+      },
+
+      "resetButtonLabel": "Reset",
+      "submitButtonLabel": "Save"
+    },
+
+    "ProjectDetailFull": {
+      "description": "Description",
+      "noDescription": "No description",
+      "attachments": "Attachments",
+      "comments": "Comments"
+    },
+
+    "ProjectDetailModal": {
+      "dialogHeading": "Project Details",
+      "openInFullPage": "Open in Full Page"
+    }
+  },
+
+  "users": {
+    "TotalUsersCard": {
+      "text": "Total Users"
+    },
+
+    "ProfileActions": {
+      "deleteAccount": "Delete account",
+      "changePassword": "Change password",
+      "editAccount": "Edit account"
+    },
+
+    "ProfileNavigationDesktop": {
+      "userInformation": "User Information",
+      "assignedTasks": "Assigned Tasks"
+    },
+
+    "ProfileNavigationMobile": {
+      "info": "Info",
+      "assignedTasks": "Assigned Tasks"
+    },
+
+    "UserDetail": {
+      "bio": "Bio",
+      "noBio": "This user hasn’t written a bio yet.",
+      "fullName": "Full name",
+      "noFullName": "No name provided",
+      "email": "Email address",
+      "phoneNumber": "Phone number",
+      "noPhoneNumber": "No phone number",
+      "address": "Address",
+      "noAddress": "No address provided",
+      "publicLink": "Public link",
+      "noPublicLink": "No public link",
+      "company": "Company",
+      "position": "Position",
+      "noPosition": "Position not specified",
+      "birthdate": "Birthdate",
+      "noBirthdate": "No birthdate"
+    },
+
+    "UserDetailBottomSheet": {
+      "dialogHeading": "User Details",
+      "openInFullPage": "Open in Full Page"
+    },
+
+    "UserDetailClientContainer": {
+      "unknownPosition": "Unknown position"
+    },
+
+    "UserDetailModal": {
+      "dialogHeading": "User Details",
+      "openInFullPage": "Open in Full Page"
+    },
+
+    "UserFiltersForm": {
+      "hasNoActiveTasks": "Has no active tasks",
+      "hasActiveTasks": "Has active tasks",
+      "hasOverdueTasks": "Has overdue tasks",
+
+      "roleCheckboxGroup": {
+        "label": "Role",
+
+        "items": {
+          "admin": "Admin",
+          "manager": "Manager",
+          "user": "User"
+        }
+      },
+
+      "positionCheckboxGroup": {
+        "label": "Position"
+      }
+    },
+
+    "UserItemActionMenuTrigger": {
+      "edit": "Edit",
+      "delete": "Delete"
+    },
+
+    "UserGridItem": {
+      "unknownPosition": "Unknown position",
+      "noPhoneNumber": "No phone number",
+      "noPublicLink": "No public link"
+    },
+
+    "UserHeaderServerContainer": {
+      "unknownPosition": "Unknown position"
+    },
+
+    "UserListItem": {
+      "checkboxAriaLabel": "user checkbox",
+      "phoneNumber": "Phone number",
+      "noPhoneNumber": "Phone number is not provided",
+      "publicLink": "Public link",
+      "noPublicLink": "Public link is not provided",
+      "position": "Position",
+      "unknownPosition": "Unknown position"
+    },
+
+    "UserNavigationDesktop": {
+      "userInformation": "User Information",
+      "assignedTasks": "Assigned Tasks"
+    },
+
+    "UserNavigationMobile": {
+      "info": "Info",
+      "assignedTasks": "Assigned Tasks"
+    },
+
+    "UserTaskListItem": {
+      "checkboxAriaLabel": "task checkbox",
+      "noDeadline": "No deadline",
+      "deadlineOn": "Deadline on {date}"
+    },
+
+    "UserTasksEmptySection": {
+      "heading": "No assigned tasks yet",
+      "description": "Create a new task to keep track of your work",
+      "editButtonLabel": "New Task"
+    },
+
+    "UserTasksPageEmptyLayout": {
+      "title": "Assigned tasks"
+    },
+
+    "UserTasksPageLayout": {
+      "title": "Assigned tasks"
+    },
+
+    "UserToolbarFiltersModalTrigger": {
+      "title": "User Filters"
+    },
+
+    "UserToolbarActionsMenuTrigger": {
+      "delete": "Delete"
+    },
+
+    "UserToolbarCreateNewMenuTrigger": {
+      "dialogHeading": "Create New",
+      "triggerLabel": "Create New",
+
+      "items": {
+        "user": "User",
+        "position": "Position"
+      }
+    }
+  },
+
+  "customers": {
+    "TotalCustomersCard": {
+      "text": "Total Customers"
+    },
+
+    "CustomerDetail": {
+      "bio": "Bio",
+      "fullName": "Full name",
+      "email": "Email address",
+      "phoneNumber": "Phone number",
+      "publicLink": "Public link",
+      "company": "Company",
+
+      "noBio": "This user hasn’t written a bio yet.",
+      "noFullName": "No name provided",
+      "noEmail": "No email provided",
+      "noPhoneNumber": "No phone number provided",
+      "noPublicLink": "This user doesn’t have a public profile link",
+      "noCompany": "Company not specified"
+    },
+
+    "CustomerDetailBottomSheet": {
+      "dialogHeading": "Customer Details",
+      "editButtonLabel": "Edit"
+    },
+
+    "CustomerDetailClientContainer": {
+      "unknownCompany": "Unknown company"
+    },
+
+    "CustomerDetailModal": {
+      "dialogHeading": "Customer Details",
+      "editButtonLabel": "Edit"
+    },
+
+    "CustomerFiltersForm": {
+      "hasNoActiveProjects": "Has no active projects",
+      "hasActiveProjects": "Has active projects",
+      "hasOverdueProjects": "Has overdue projects",
+
+      "company": {
+        "label": "Company"
+      }
+    },
+
+    "CustomerItemActionMenuTrigger": {
+      "delete": "Delete"
+    },
+
+    "CustomerGridItem": {
+      "noPhoneNumber": "No phone number",
+      "noPublicLink": "No public link"
+    },
+
+    "CustomerListItem": {
+      "checkboxAriaLabel": "customer checkbox",
+      "phoneNumber": "Phone number",
+      "publicLink": "Public link",
+      "noPhoneNumber": "No phone number",
+      "noPublicLink": "No public link",
+      "company": "Company"
+    },
+
+    "CustomerToolbarFiltersModalTrigger": {
+      "title": "Customer Filters"
+    },
+
+    "CustomerToolbarActionsMenuTrigger": {
+      "delete": "Delete"
+    },
+
+    "CustomerToolbarCreateNewMenuTrigger": {
+      "dialogHeading": "Create New",
+      "label": "Create New",
+
+      "items": {
+        "customer": "Customer",
+        "company": "Company"
+      }
+    }
+  },
+
+  "comments": {
+    "CommentItem": {
+      "unknownUser": "Unknown user"
+    },
+
+    "CommentsEmptySection": {
+      "heading": "No comments yet?",
+      "description": "No comments yet. Add the first one to share updates, ask a question, or start a discussion about this task."
+    },
+
+    "CommentModalInput": {
+      "placeholder": "Type a comment..."
+    },
+
+    "ReplyButton": "Reply"
+  },
+
+  "tasks": {
+    "AssignedTasksSectionHeading": {
+      "text": "Assigned Tasks"
+    },
+
+    "AssignedTasksEmptyCard": {
+      "heading": "No tasks yet",
+      "description": "Create a new task to keep track of your work",
+      "button": "New Task"
+    },
+
+    "TotalTasksCard": {
+      "text": "Total Tasks"
+    },
+
+    "TaskGridItem": {
+      "noDeadline": "No deadline",
+      "deadlineOn": "Deadline on {date}",
+      "progressAriaLabel": "task progress"
+    },
+
+    "TaskListItem": {
+      "noDeadline": "No deadline",
+      "deadlineOn": "Deadline on {date}",
+      "unknownAssignee": "Unknown assignee",
+      "assignee": "Assignee",
+      "category": "Category",
+      "project": "Project"
+    },
+
+    "TaskToolbarSortingMenuTrigger": {
+      "byTitle": "By Title",
+      "byDeadline": "By Deadline",
+      "byStatus": "By Status",
+      "byCategory": "By Category"
+    },
+
+    "TaskToolbarFiltersModalTrigger": {
+      "title": "Task Filters"
+    },
+
+    "TaskToolbarActionsMenuTrigger": {
+      "delete": "Delete",
+      "pending": "Mark as Pending",
+      "active": "Mark as Active",
+      "completed": "Mark as Completed"
+    },
+
+    "TaskItemActionMenuTrigger": {
+      "delete": "Delete",
+      "markPending": "Mark as Pending",
+      "markDone": "Mark as Done",
+      "markActive": "Mark as Active"
+    },
+
+    "TaskToolbarCreateNewMenuTrigger": {
+      "dialogHeading": "Create New",
+      "label": "Create New",
+
+      "items": {
+        "task": "Task",
+        "category": "Category"
+      }
+    },
+
+    "NewTaskModal": {
+      "title": "New Task",
+      "submitButtonLabel": "Create Task"
+    },
+
+    "EditTaskModal": {
+      "title": "Edit Task",
+      "submitButtonLabel": "Update Task"
+    },
+
+    "TaskCommentsModal": {
+      "title": "Task Comments"
+    },
+
+    "TaskDetailBottomSheet": {
+      "title": "Task Details",
+      "editButtonLabel": "Edit Task"
+    },
+
+    "TaskDetailFull": {
+      "description": "Description",
+      "noDescription": "No description",
+      "attachments": "Attachments",
+      "comments": "Comments"
+    },
+
+    "NewTaskModalTrigger": {
+      "label": "New Task",
+      "title": "New Task",
+      "submitButtonLabel": "Create Task"
+    },
+
+    "TaskDetailForm": {
+      "resetButtonLabel": "Reset",
+      "submitButtonLabel": "Save",
+
+      "TaskDetailFormAssigneeSelect": {
+        "label": "Assigned To",
+        "placeholder": "Select assignee"
+      },
+
+      "TaskDetailFormStatusSelect": {
+        "label": "Status",
+        "placeholder": "Select status",
+
+        "items": {
+          "pending": "Pending",
+          "active": "Active",
+          "completed": "Completed"
+        }
+      },
+
+      "TaskDetailFormDeadlineDatePicker": {
+        "label": "Deadline"
+      },
+
+      "TaskDetailFormProjectSelect": {
+        "label": "Project",
+        "placeholder": "Select project"
+      }
+    },
+
+    "TaskDetailModal": {
+      "title": "Task Details",
+      "editButtonLabel": "Open in Full Page"
+    },
+
+    "TaskFiltersForm": {
+      "TaskFiltersFormDeadlineCheckboxGroup": {
+        "label": "Deadline",
+        "today": "Today",
+        "tomorrow": "Tomorrow",
+        "thisWeek": "This week",
+        "overdue": "Overdue"
+      },
+
+      "TaskFiltersFormDeadlineRange": {
+        "label": "Deadline range",
+        "labelTo": "Deadline range to"
+      },
+
+      "TaskFiltersFormStatusCheckboxGroup": {
+        "label": "Status"
+      },
+
+      "TaskFiltersFormCategoryCheckboxGroup": {
+        "label": "Category"
+      },
+
+      "TaskFiltersFormProjectCheckboxGroup": {
+        "label": "Project"
+      },
+
+      "TaskFiltersFormAssigneeCheckboxGroup": {
+        "label": "Assignee"
+      }
+    },
+
+    "TaskFormBase": {
+      "TaskFormBaseTitleTextField": {
+        "label": "Title",
+        "placeholder": "Typing title"
+      },
+
+      "TaskFormBaseDescriptionTextField": {
+        "label": "Description",
+        "placeholder": "Typing description"
+      },
+
+      "TaskFormBaseDeadlineDatePicker": {
+        "label": "Deadline"
+      },
+
+      "TaskFormBaseStatusSelect": {
+        "label": "Status",
+        "placeholder": "Select status",
+
+        "items": {
+          "pending": "Pending",
+          "active": "Active",
+          "completed": "Completed"
+        }
+      },
+
+      "TaskFormBaseCategorySelect": {
+        "label": "Category",
+        "placeholder": "Select category"
+      },
+
+      "TaskFormBaseProjectSelect": {
+        "label": "Project",
+        "placeholder": "Select project"
+      },
+
+      "TaskFormBaseAssigneeSelect": {
+        "label": "Assigned To",
+        "placeholder": "Select user"
+      }
+    },
+
+    "TaskDetailCompact": {
+      "noDeadline": "No deadline",
+      "deadline": "Deadline",
+      "description": "Description",
+      "noDescription": "No description",
+      "creator": "Creator",
+      "unknownCreator": "Unknown creator",
+      "category": "Category",
+      "project": "Project",
+      "attachments": "Attachments",
+      "assignee": "Assignee",
+      "noAssignee": "No assignee",
+
+      "TaskDetailCompactStatusMenuTrigger": {
+        "dialogHeading": "Task Status",
+
+        "items": {
+          "pending": "Pending",
+          "active": "Active",
+          "completed": "Completed"
+        }
+      }
+    },
+
+    "TaskStatus": {
+      "pending": "Pending",
+      "active": "Active",
+      "completed": "Completed"
+    }
+  },
+
+  "subtasks": {
+    "SubtasksCheckboxGroup": {
+      "label": "Subtasks"
+    },
+
+    "NewSubtaskForm": {
+      "label": "Text",
+      "placeholder": "Typing a new subtask..."
+    },
+
+    "NewSubtaskDialog": {
+      "dialogHeading": "New Subtask",
+      "addButtonLabel": "Add Subtask"
+    },
+
+    "NewSubtasksButton": {
+      "label": "New Subtask"
+    }
   }
 }

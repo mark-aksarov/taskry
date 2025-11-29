@@ -11,11 +11,14 @@ import {
   DialogCloseButton,
 } from "@/components/ui";
 
+import { useTranslations } from "next-intl";
 import { Suspense, useContext } from "react";
+import { ProjectDetailCompactSkeleton } from "../ProjectDetailCompact";
 import { ProjectDetailCompactClientContainerContext } from "../ProjectDetailCompactClientContainer";
-import { ProjectDetailCompactSkeleton } from "../ProjectDetailCompact/ProjectDetailCompactSkeleton";
 
 export function ProjectDetailModal({ projectId }: { projectId: number }) {
+  const t = useTranslations("projects.ProjectDetailModal");
+
   const ProjectDetailContainer = useContext(
     ProjectDetailCompactClientContainerContext,
   );
@@ -24,7 +27,7 @@ export function ProjectDetailModal({ projectId }: { projectId: number }) {
     <Modal isDismissable className="w-[600px]">
       <Dialog className="max-h-[calc(100dvh-64px)]">
         <DialogHeader>
-          <DialogHeading>Project Details</DialogHeading>
+          <DialogHeading>{t("dialogHeading")}</DialogHeading>
           <DialogCloseButton />
         </DialogHeader>
         <DialogBody>
@@ -38,7 +41,7 @@ export function ProjectDetailModal({ projectId }: { projectId: number }) {
             href={`/projects/${projectId}`}
             variant="primary"
             size="medium"
-            label="Open in Full Page"
+            label={t("openInFullPage")}
             className="w-full justify-center"
           />
         </DialogFooter>

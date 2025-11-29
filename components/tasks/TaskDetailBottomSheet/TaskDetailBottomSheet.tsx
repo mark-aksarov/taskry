@@ -10,6 +10,7 @@ import {
   DialogHeading,
   DialogCloseButton,
 } from "@/components/ui";
+import { useTranslations } from "next-intl";
 import { Suspense, useContext } from "react";
 import { EditTaskModal } from "../EditTaskModal";
 import { OverlayTriggerState } from "react-stately";
@@ -31,14 +32,14 @@ export function TaskDetailBottomSheet({
   const TaskDetailClientContainer = useContext(
     TaskDetailCompactClientContainerContext,
   );
-
   const EditTaskFormContainer = useContext(EditTaskFormClientContainerContext);
+  const t = useTranslations("tasks.TaskDetailBottomSheet");
 
   return (
     <BottomSheet isDismissable state={state} className="md:hidden">
       <Dialog className="max-h-[calc(100dvh-6.25rem)]">
         <DialogHeader>
-          <DialogHeading>Task Detail</DialogHeading>
+          <DialogHeading>{t("title")}</DialogHeading>
           <DialogCloseButton />
         </DialogHeader>
         <DialogBody>
@@ -51,7 +52,7 @@ export function TaskDetailBottomSheet({
             <Button
               variant="primary"
               size="medium"
-              label="Edit"
+              label={t("editButtonLabel")}
               className="w-full justify-center"
             />
             <EditTaskModal

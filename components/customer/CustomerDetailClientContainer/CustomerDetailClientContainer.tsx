@@ -1,9 +1,10 @@
 "use client";
 
 import useSWR from "swr";
+import { useTranslations } from "next-intl";
 import { CustomerDetail } from "../CustomerDetail";
-import { GetCustomerDetailsType } from "@/lib/queries/customers";
 import { PersonHeader } from "@/components/common/PersonHeader";
+import { GetCustomerDetailsType } from "@/lib/queries/customers";
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
@@ -14,6 +15,8 @@ interface CustomerDetailClientContainerProps {
 export function CustomerDetailClientContainer({
   customerId,
 }: CustomerDetailClientContainerProps) {
+  const t = useTranslations("customers.CustomerDetailClientContainer");
+
   const { data: customer } = useSWR<GetCustomerDetailsType>(
     `/api/customers/${customerId}`,
     fetcher,
@@ -27,7 +30,9 @@ export function CustomerDetailClientContainer({
       <PersonHeader
         title={customer.fullName}
         imageUrl={customer.imageUrl ?? undefined}
-        subtitle={customer.company ? customer.company.name : "Unknown company"}
+        subtitle={
+          customer.company ? customer.company.name : t("unknownCompany")
+        }
       />
       <CustomerDetail
         fullName={customer.fullName}

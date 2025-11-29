@@ -15,6 +15,7 @@ import { OverlayTriggerState } from "react-stately";
 import { UserDetailSkeleton } from "@/components/users/UserDetail";
 import { PersonHeaderSkeleton } from "@/components/common/PersonHeader";
 import { UserDetailClientContainerContext } from "../UserDetailClientContainer";
+import { useTranslations } from "next-intl";
 
 export interface UserDetailBottomSheetProps {
   userId: string;
@@ -25,6 +26,8 @@ export function UserDetailBottomSheet({
   userId,
   state,
 }: UserDetailBottomSheetProps) {
+  const t = useTranslations("users.UserDetailBottomSheet");
+
   const UserDetailClientContainer = useContext(
     UserDetailClientContainerContext,
   );
@@ -33,7 +36,7 @@ export function UserDetailBottomSheet({
     <BottomSheet isDismissable state={state} className="md:hidden">
       <Dialog className="max-h-[calc(100dvh-6.25rem)]">
         <DialogHeader>
-          <DialogHeading>User Details</DialogHeading>
+          <DialogHeading>{t("dialogHeading")}</DialogHeading>
           <DialogCloseButton />
         </DialogHeader>
         <DialogBody>
@@ -54,7 +57,7 @@ export function UserDetailBottomSheet({
             href={`/team/${userId}`}
             variant="primary"
             size="medium"
-            label="Open in Full Page"
+            label={t("openInFullPage")}
             className="w-full justify-center"
           />
         </DialogFooter>

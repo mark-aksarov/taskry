@@ -3,12 +3,12 @@
 import {
   Dialog,
   DialogBody,
-  DialogCloseButton,
   DialogHeader,
   DialogFooter,
   DialogHeading,
-  Modal,
+  DialogCloseButton,
 } from "@/components/ui";
+import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/Button";
 import { SlidersHorizontal } from "lucide-react";
 import { DialogTrigger } from "react-aria-components";
@@ -23,10 +23,12 @@ export function ToolbarFiltersModalTrigger({
   title,
   filtersForm,
 }: ToolbarFiltersModalTriggerProps) {
+  const t = useTranslations("common.Toolbar.ToolbarFiltersModalTrigger");
+
   return (
     <DialogTrigger>
       <Button
-        label="Filters"
+        label={t("trigger.label")}
         variant="outlined"
         iconLeft={
           <SlidersHorizontal size={16} strokeWidth={1.5} absoluteStrokeWidth />
@@ -34,7 +36,7 @@ export function ToolbarFiltersModalTrigger({
         className="max-md:hidden"
       />
       <Button
-        aria-label="Filters"
+        aria-label={t("trigger.ariaLabel")}
         variant="outlined"
         iconLeft={
           <SlidersHorizontal size={16} strokeWidth={1.5} absoluteStrokeWidth />
@@ -52,7 +54,7 @@ export function ToolbarFiltersModalTrigger({
             <Button
               variant="primary"
               size="medium"
-              label="Apply Filters"
+              label={t("applyButtonLabel")}
               className="w-full justify-center"
             />
           </DialogFooter>

@@ -1,20 +1,78 @@
+"use client";
+
+import {
+  Users,
+  LogOut,
+  Contact,
+  UserRound,
+  FolderClosed,
+  CalendarCheck2,
+  LayoutDashboard,
+} from "lucide-react";
+
+import { Divider } from "@/components/ui";
 import { useTranslations } from "next-intl";
-import { AppNavigationInner } from "./AppNavigationInner";
+import { usePathname } from "@/i18n/navigation";
+import { NavigationButton } from "@/components/common/NavigationButton";
+import { AppNavigationLangMenuTrigger } from "./AppNavigationLangMenuTrigger";
+import { AppNavigationThemeToggleButton } from "./AppNavigationThemeToggleButton";
 
 export const AppNavigation = () => {
-  const t = useTranslations("AppNavigation");
+  const pathname = usePathname();
+  const t = useTranslations("layout.AppNavigation");
 
   return (
-    <AppNavigationInner
-      messages={{
-        dashboard: t("dashboard"),
-        projects: t("projects"),
-        tasks: t("tasks"),
-        team: t("team"),
-        customers: t("customers"),
-        profile: t("profile"),
-        logout: t("logout"),
-      }}
-    />
+    <nav className="flex flex-col gap-2.5">
+      <NavigationButton href="/" isActive={pathname === "/"}>
+        <LayoutDashboard size={18} strokeWidth={1.5} absoluteStrokeWidth />
+        {t("dashboard")}
+      </NavigationButton>
+
+      <NavigationButton
+        href="/projects"
+        isActive={pathname.startsWith("/projects")}
+      >
+        <FolderClosed size={18} strokeWidth={1.5} absoluteStrokeWidth />
+        {t("projects")}
+      </NavigationButton>
+
+      <NavigationButton href="/tasks" isActive={pathname.startsWith("/tasks")}>
+        <CalendarCheck2 size={18} strokeWidth={1.5} absoluteStrokeWidth />
+        {t("tasks")}
+      </NavigationButton>
+
+      <NavigationButton href="/team" isActive={pathname.startsWith("/team")}>
+        <Users size={18} strokeWidth={1.5} absoluteStrokeWidth />
+        {t("team")}
+      </NavigationButton>
+
+      <NavigationButton
+        href="/customers"
+        isActive={pathname.startsWith("/customers")}
+      >
+        <Contact size={18} strokeWidth={1.5} absoluteStrokeWidth />
+        {t("customers")}
+      </NavigationButton>
+
+      <NavigationButton
+        href="/profile"
+        isActive={pathname.startsWith("/profile")}
+      >
+        <UserRound size={18} strokeWidth={1.5} absoluteStrokeWidth />
+        {t("profile")}
+      </NavigationButton>
+
+      <Divider />
+
+      <div className="flex flex-col gap-2.5 md:hidden">
+        <AppNavigationLangMenuTrigger />
+        <AppNavigationThemeToggleButton />
+      </div>
+
+      <NavigationButton href="#">
+        <LogOut size={18} strokeWidth={1.5} absoluteStrokeWidth />
+        {t("logout")}
+      </NavigationButton>
+    </nav>
   );
 };

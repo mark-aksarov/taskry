@@ -4,8 +4,11 @@ import { useParams } from "next/navigation";
 import { usePathname } from "@/i18n/navigation";
 import { CalendarCheck, Info } from "lucide-react";
 import { NavigationButton } from "@/components/common/NavigationButton";
+import { useTranslations } from "next-intl";
 
 export function UserNavigationDesktop() {
+  const t = useTranslations("users.UserNavigationDesktop");
+
   const pathname = usePathname();
   const { id } = useParams<{ id: string }>();
 
@@ -17,7 +20,7 @@ export function UserNavigationDesktop() {
         variant="secondary"
       >
         <Info size={18} strokeWidth={1.5} absoluteStrokeWidth />
-        Profile Information
+        {t("userInformation")}
       </NavigationButton>
 
       <NavigationButton
@@ -26,7 +29,7 @@ export function UserNavigationDesktop() {
         variant="secondary"
       >
         <CalendarCheck size={18} strokeWidth={1.5} absoluteStrokeWidth />
-        Assigned tasks
+        {t("assignedTasks")}
       </NavigationButton>
     </nav>
   );

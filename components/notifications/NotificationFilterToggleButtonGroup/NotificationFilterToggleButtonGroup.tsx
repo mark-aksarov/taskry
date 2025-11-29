@@ -1,4 +1,5 @@
 import { ToggleButton, ToggleButtonGroup } from "@/components/ui";
+import { useTranslations } from "next-intl";
 
 interface NotificationFilterToggleButtonGroupProps {
   notificationsCount: number;
@@ -9,6 +10,10 @@ export function NotificationFilterToggleButtonGroup({
   notificationsCount,
   unreadCount,
 }: NotificationFilterToggleButtonGroupProps) {
+  const t = useTranslations(
+    "notifications.NotificationFilterToggleButtonGroup",
+  );
+
   return (
     <ToggleButtonGroup
       defaultSelectedKeys={["all"]}
@@ -16,8 +21,12 @@ export function NotificationFilterToggleButtonGroup({
       disallowEmptySelection
       variant="contrast"
     >
-      <ToggleButton id="all">All ({notificationsCount})</ToggleButton>
-      <ToggleButton id="unread">Unread ({unreadCount})</ToggleButton>
+      <ToggleButton id="all">
+        {t("all")} ({notificationsCount})
+      </ToggleButton>
+      <ToggleButton id="unread">
+        {t("unread")} ({unreadCount})
+      </ToggleButton>
     </ToggleButtonGroup>
   );
 }

@@ -4,6 +4,7 @@ import useSWR from "swr";
 import { GetUserDetailsType } from "@/lib/queries/user";
 import { UserDetail } from "@/components/users/UserDetail";
 import { PersonHeader } from "@/components/common/PersonHeader";
+import { useTranslations } from "next-intl";
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
@@ -14,6 +15,8 @@ interface UserDetailClientContainerProps {
 export function UserDetailClientContainer({
   userId,
 }: UserDetailClientContainerProps) {
+  const t = useTranslations("users.UserDetailClientContainer");
+
   const { data: user } = useSWR<GetUserDetailsType>(
     `/api/users/${userId}`,
     fetcher,
@@ -27,7 +30,7 @@ export function UserDetailClientContainer({
       <PersonHeader
         title={user.fullName}
         imageUrl={user.imageUrl ?? undefined}
-        subtitle={user.position ? user.position.name : "Unknown position"}
+        subtitle={user.position ? user.position.name : t("unknownPosition")}
       />
       <UserDetail
         id={user.id}

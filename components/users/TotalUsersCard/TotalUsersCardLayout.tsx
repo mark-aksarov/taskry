@@ -3,6 +3,7 @@ import {
   DashboardCardIcon,
   DashboardCardText,
 } from "@/components/common/DashboardCard";
+import { useTranslations } from "next-intl";
 import { IconlyUser } from "@/components/icons/IconlyUser";
 
 export const TotalUsersCardLayout = ({
@@ -10,9 +11,11 @@ export const TotalUsersCardLayout = ({
 }: {
   children: React.ReactNode;
 }) => {
+  const t = useTranslations("users.TotalUsersCard");
+
   return (
     <DashboardCard
-      text={<DashboardCardText>Total Users</DashboardCardText>}
+      text={<DashboardCardText>{t("text")}</DashboardCardText>}
       icon={
         <DashboardCardIcon color="red">
           <IconlyUser size={24} />

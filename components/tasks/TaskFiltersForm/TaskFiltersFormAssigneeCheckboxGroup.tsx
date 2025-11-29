@@ -1,6 +1,7 @@
 "use client";
 
 import { User } from "@/generated/prisma";
+import { useTranslations } from "next-intl";
 import { Checkbox, CheckboxGroup } from "@/components/ui";
 
 export function TaskFiltersFormAssigneeCheckboxGroup({
@@ -8,12 +9,12 @@ export function TaskFiltersFormAssigneeCheckboxGroup({
 }: {
   users: Pick<User, "id" | "fullName">[];
 }) {
-  if (!users.length) {
-    return null;
-  }
+  const t = useTranslations(
+    "tasks.TaskFiltersForm.TaskFiltersFormAssigneeCheckboxGroup",
+  );
 
   return (
-    <CheckboxGroup label="Assignee">
+    <CheckboxGroup label={t("label")}>
       {users.map((user) => (
         <Checkbox
           key={user.id}

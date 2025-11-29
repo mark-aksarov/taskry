@@ -2,31 +2,33 @@
 
 import {
   Check,
-  CircleEllipsis,
   Clock,
-  MessageSquare,
   Trash,
+  MessageSquare,
+  CircleEllipsis,
 } from "lucide-react";
-import { useMemo } from "react";
-import { Item } from "react-stately";
-import { Checkbox, RACDialogTrigger } from "@/components/ui";
-import { UserTaskListItemLayout } from "./UserTaskListItemLayout";
+
 import {
   ListItemInfo,
   ListItemText,
   ListItemTitle,
 } from "@/components/common/List";
-import { TaskCommentsModal } from "@/components/tasks/TaskCommentsModal";
-import { TaskDetailModal } from "@/components/tasks/TaskDetailModal";
-import { TaskDetailBottomSheet } from "@/components/tasks/TaskDetailBottomSheet";
+
 import {
-  ItemBaseActionMenuTrigger,
   ItemBaseBadge,
   ItemBaseButton,
-  ItemBaseDetailBottomSheetTrigger,
   ItemBaseDetailModalTrigger,
+  ItemBaseDetailBottomSheetTrigger,
 } from "@/components/common/ItemBase";
+
+import { useFormatter, useTranslations } from "next-intl";
+import { Checkbox, RACDialogTrigger } from "@/components/ui";
+import { UserTaskListItemLayout } from "./UserTaskListItemLayout";
+import { TaskDetailModal } from "@/components/tasks/TaskDetailModal";
+import { TaskCommentsModal } from "@/components/tasks/TaskCommentsModal";
+import { TaskDetailBottomSheet } from "@/components/tasks/TaskDetailBottomSheet";
 import { getTaskStatusBadgeColor } from "@/components/tasks/getTaskStatusBadgeColor";
+import { TaskItemActionMenuTrigger } from "@/components/tasks/TaskItemActionMenuTrigger";
 
 export interface UserTaskListItemProps {
   id: number;
@@ -46,20 +48,25 @@ export const UserTaskListItem = ({
   status,
   comments,
 }: UserTaskListItemProps) => {
-  const locale = "en-GB";
+  const t = useTranslations();
 
-  const formattedDeadline = useMemo(() => {
-    if (!deadline) return "";
-    return new Date(deadline).toLocaleDateString(locale, {
-      day: "2-digit",
-      month: "short",
-      year: "numeric",
-    });
-  }, [deadline, locale]);
+  const format = useFormatter();
+
+  const deadlineOn = deadline
+    ? t("users.UserTaskListItem.deadlineOn", {
+        date: format.dateTime(deadline, {
+          day: "2-digit",
+          month: "short",
+          year: "numeric",
+        }),
+      })
+    : t("users.UserTaskListItem.noDeadline");
 
   return (
     <UserTaskListItemLayout
-      checkboxSlot={<Checkbox aria-label="task checkbox" />}
+      checkboxSlot={
+        <Checkbox aria-label={t("users.UserTaskListItem.checkboxAriaLabel")} />
+      }
       deadlineSlot={
         <ListItemInfo>
           <ListItemTitle>
@@ -79,7 +86,7 @@ export const UserTaskListItem = ({
               {title}
             </ItemBaseDetailBottomSheetTrigger>
           </ListItemTitle>
-          <ListItemText>{`Deadline on ${formattedDeadline}`}</ListItemText>
+          <ListItemText>{deadlineOn}</ListItemText>
         </ListItemInfo>
       }
       statusSlot={
@@ -87,7 +94,7 @@ export const UserTaskListItem = ({
           color={getTaskStatusBadgeColor(status.id)}
           className="@max-lg:hidden"
         >
-          {status.name}
+          {t(`tasks.TaskStatus.${status.id}`)}
         </ItemBaseBadge>
       }
       commentsSlot={
@@ -101,24 +108,7 @@ export const UserTaskListItem = ({
           <TaskCommentsModal taskId={id} />
         </RACDialogTrigger>
       }
-      actionMenuSlot={
-        <ItemBaseActionMenuTrigger>
-          <Item textValue="Delete" key="delete">
-            <Trash size={16} /> Delete
-          </Item>
-          <Item textValue="Mark as Pending" key="pending">
-            <CircleEllipsis size={16} /> Mark as Pending
-          </Item>
-          <Item textValue="Mark as Done" key="done">
-            <Check size={16} />
-            Mark as Done
-          </Item>
-          <Item textValue="Mark as Active" key="active">
-            <Clock size={16} />
-            Mark as Active
-          </Item>
-        </ItemBaseActionMenuTrigger>
-      }
+      actionMenuSlot={<TaskItemActionMenuTrigger />}
     />
   );
 };

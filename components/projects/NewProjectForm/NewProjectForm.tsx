@@ -3,6 +3,7 @@
 import { RACForm, TextField } from "@/components/ui";
 import { ResponsiveDatePicker } from "@/components/common/ResponsiveDatePicker";
 import { AttachmentsField } from "@/components/common/AttachmentsField/AttachmentsField";
+import { useTranslations } from "next-intl";
 
 export function NewProjectForm({
   projectStatusSelect,
@@ -11,18 +12,23 @@ export function NewProjectForm({
   projectStatusSelect: React.ReactNode;
   projectCategorySelect: React.ReactNode;
 }) {
+  const t = useTranslations("projects.NewProjectForm");
+
   return (
     <RACForm>
       <div className="flex flex-col gap-4">
-        <TextField label="Title" placeholder="Typing title" />
+        <TextField
+          label={t("NewProjectFormTitleTextField.label")}
+          placeholder={t("NewProjectFormTitleTextField.placeholder")}
+        />
         <TextField
           multiline
-          label="Description"
-          placeholder="Typing description"
+          label={t("NewProjectFormDescriptionTextField.label")}
+          placeholder={t("NewProjectFormDescriptionTextField.placeholder")}
           inputClassName="h-[9rem]"
         />
         <ResponsiveDatePicker
-          label="Deadline"
+          label={t("NewProjectFormDeadlineDatePicker.label")}
           overlayClassName="w-[var(--trigger-width)]"
         />
         {projectStatusSelect}

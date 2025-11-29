@@ -4,24 +4,27 @@ import {
   DetailFormLabel,
   DetailFormSelect,
 } from "@/components/common/DetailForm";
+
 import { Item } from "react-stately";
 import { CircleCheck } from "lucide-react";
+import { useTranslations } from "next-intl";
 
-export function ProjectDetailFormStatusSelect({
-  statuses,
-}: {
-  statuses: { id: string; name: string }[];
-}) {
+export function ProjectDetailFormStatusSelect() {
+  const t = useTranslations("projects.ProjectDetailForm.statusSelect");
+
   return (
     <DetailFormSelect
       label={
         <DetailFormLabel className="w-[6rem]">
-          <CircleCheck size={16} strokeWidth={1.5} absoluteStrokeWidth /> Status
+          <CircleCheck size={16} strokeWidth={1.5} absoluteStrokeWidth />
+          {t("label")}
         </DetailFormLabel>
       }
-      items={statuses.map((item) => ({ id: item.id, label: item.name }))}
+      placeholder={t("placeholder")}
     >
-      {(item: any) => <Item key={item.id}>{item.label}</Item>}
+      <Item key="pending">{t("items.pending")}</Item>
+      <Item key="active">{t("items.active")}</Item>
+      <Item key="completed">{t("items.completed")}</Item>
     </DetailFormSelect>
   );
 }

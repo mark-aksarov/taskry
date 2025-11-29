@@ -1,16 +1,16 @@
 "use client";
 
 import { ToolbarFiltersModalTrigger } from "@/components/common/Toolbar";
+import { useTranslations } from "next-intl";
 
 export function TaskToolbarFiltersModalTrigger({
   filtersForm,
 }: {
   filtersForm: React.ReactNode;
 }) {
+  const t = useTranslations("tasks.TaskToolbarFiltersModalTrigger");
+
   return (
-    <ToolbarFiltersModalTrigger
-      title="Task Filters"
-      filtersForm={filtersForm}
-    />
+    <ToolbarFiltersModalTrigger title={t("title")} filtersForm={filtersForm} />
   );
 }

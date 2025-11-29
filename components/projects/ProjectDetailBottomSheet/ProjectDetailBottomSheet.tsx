@@ -10,6 +10,7 @@ import {
   DialogHeading,
   DialogCloseButton,
 } from "@/components/ui";
+import { useTranslations } from "next-intl";
 import { Suspense, useContext } from "react";
 import { OverlayTriggerState } from "react-stately";
 import { ProjectDetailCompactSkeleton } from "../ProjectDetailCompact";
@@ -24,6 +25,8 @@ export function ProjectDetailBottomSheet({
   projectId,
   state,
 }: ProjectDetailBottomSheetProps) {
+  const t = useTranslations("projects.ProjectDetailBottomSheet");
+
   const ProjectDetailContainer = useContext(
     ProjectDetailCompactClientContainerContext,
   );
@@ -32,7 +35,7 @@ export function ProjectDetailBottomSheet({
     <BottomSheet isDismissable state={state} className="md:hidden">
       <Dialog className="max-h-[calc(100dvh-6.25rem)]">
         <DialogHeader>
-          <DialogHeading>Project Detail</DialogHeading>
+          <DialogHeading>{t("dialogHeading")}</DialogHeading>
           <DialogCloseButton />
         </DialogHeader>
         <DialogBody>
@@ -44,7 +47,7 @@ export function ProjectDetailBottomSheet({
           <Button
             variant="primary"
             size="medium"
-            label="Edit"
+            label={t("editButtonLabel")}
             className="w-full justify-center"
           />
         </DialogFooter>

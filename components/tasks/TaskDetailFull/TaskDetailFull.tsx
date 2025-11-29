@@ -3,12 +3,14 @@ import {
   DetailText,
   DetailTitle,
 } from "@/components/common/Detail";
-import { TaskDetailFullLayout } from "./TaskDetailFullLayout";
-import { SubtasksCheckboxGroup } from "@/components/subtasks/SubtasksCheckboxGroup";
-import { NewSubtaskBottomSheetTrigger } from "@/components/subtasks/NewSubtaskBottomSheetTrigger";
-import { NewSubtaskModalTrigger } from "@/components/subtasks/NewSubtaskModalTrigger";
-import { Attachment, Attachments } from "@/components/attachments/Attachments";
+
 import Image from "next/image";
+import { useTranslations } from "next-intl";
+import { TaskDetailFullLayout } from "./TaskDetailFullLayout";
+import { Attachment, Attachments } from "@/components/attachments/Attachments";
+import { SubtasksCheckboxGroup } from "@/components/subtasks/SubtasksCheckboxGroup";
+import { NewSubtaskModalTrigger } from "@/components/subtasks/NewSubtaskModalTrigger";
+import { NewSubtaskBottomSheetTrigger } from "@/components/subtasks/NewSubtaskBottomSheetTrigger";
 
 interface TaskDetailFullProps {
   description?: string;
@@ -31,13 +33,15 @@ export function TaskDetailFull({
   attachments,
   comments,
 }: TaskDetailFullProps) {
+  const t = useTranslations("tasks.TaskDetailFull");
+
   return (
     <TaskDetailFullLayout
       descriptionSlot={
         <DetailInfo>
-          <DetailTitle>Description</DetailTitle>
+          <DetailTitle>{t("description")}</DetailTitle>
           <DetailText>
-            {description ? description : "No description"}
+            {description ? description : t("noDescription")}
           </DetailText>
         </DetailInfo>
       }
@@ -50,7 +54,7 @@ export function TaskDetailFull({
       }
       attachmentsSlot={
         <DetailInfo>
-          <DetailTitle>Attachments</DetailTitle>
+          <DetailTitle>{t("attachments")}</DetailTitle>
           {attachments.length > 0 && (
             <Attachments>
               {attachments.map((attachment) => (
@@ -72,7 +76,7 @@ export function TaskDetailFull({
       }
       commentsSlot={
         <DetailInfo className="border-none pb-0">
-          <DetailTitle>Comments</DetailTitle>
+          <DetailTitle>{t("comments")}</DetailTitle>
           {comments}
         </DetailInfo>
       }

@@ -1,3 +1,9 @@
+import {
+  ToolbarMobileTop,
+  ToolbarMobileHeading,
+} from "@/components/common/Toolbar";
+import { useTranslations } from "next-intl";
+
 import { Suspense } from "react";
 import { PageGrid } from "@/components/common/PageGrid";
 import { PageContainer } from "@/components/common/PageContainer";
@@ -5,10 +11,6 @@ import { DetailCardHeadingSkeleton } from "@/components/common/DetailCard";
 import { TaskDetailFormSkeleton } from "@/components/tasks/TaskDetailForm";
 import { TaskDetailCard } from "@/components/tasks/TaskDetailCard/TaskDetailCard";
 import { TaskDetailFullSkeleton } from "@/components/tasks/TaskDetailFull/TaskDetailFullSkeleton";
-import {
-  ToolbarMobileHeading,
-  ToolbarMobileTop,
-} from "@/components/common/Toolbar";
 
 interface TaskDetailPageProps {
   id: number;
@@ -25,11 +27,13 @@ export function TaskDetailPage({
   TaskDetailContainer,
   TaskDetailFormContainer,
 }: TaskDetailPageProps) {
+  const t = useTranslations("app.TaskDetailPage");
+
   return (
     <PageContainer>
       <PageGrid>
         <ToolbarMobileTop>
-          <ToolbarMobileHeading>Task Details</ToolbarMobileHeading>
+          <ToolbarMobileHeading>{t("heading")}</ToolbarMobileHeading>
         </ToolbarMobileTop>
         <TaskDetailCard
           taskDetailCardHeading={

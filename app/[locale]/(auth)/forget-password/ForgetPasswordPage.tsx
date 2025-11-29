@@ -1,56 +1,31 @@
-import { Button, TextField } from "@/components/ui";
-import { AuthCard, AuthCardHeader } from "@/components/auth";
-import { AuthCardBody } from "@/components/auth/AuthCardBody";
-import { AuthCardForm } from "@/components/auth/AuthCardForm";
-import { AuthCardFooter } from "@/components/auth/AuthCardFooter";
-import { AuthCardHeading } from "@/components/auth/AuthCardHeading";
-import { AuthCardSubtitle } from "@/components/auth/AuthCardSubtitle";
-import { AuthCardFooterItem } from "@/components/auth/AuthCardFooterItem";
-import { AuthCardFooterText } from "@/components/auth/AuthCardFooterText";
-import { AuthCardFooterLink } from "@/components/auth/AuthCardFooterLink";
+"use client";
 
-interface ForgetPasswordPageProps {
-  email: string;
-  setEmail: (email: string) => void;
-  handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
-}
+import {
+  AuthCard,
+  AuthCardBody,
+  AuthCardHeader,
+  AuthCardFooter,
+  AuthCardHeading,
+  AuthCardSubtitle,
+} from "@/components/auth/AuthCard";
+import { useTranslations } from "next-intl";
+import { ForgetPasswordForm } from "@/components/auth/ForgetPasswordForm";
+import { AuthCardFooterSignInItem } from "@/components/auth/AuthCardFooterSignInItem";
 
-export function ForgetPasswordPage({
-  email,
-  setEmail,
-  handleSubmit,
-}: ForgetPasswordPageProps) {
+export function ForgetPasswordPage() {
+  const t = useTranslations("app.ForgetPasswordPage");
+
   return (
     <AuthCard>
       <AuthCardHeader>
-        <AuthCardHeading>Forgot password?</AuthCardHeading>
-        <AuthCardSubtitle>
-          Recover your account by requesting a password reset link.
-        </AuthCardSubtitle>
+        <AuthCardHeading>{t("heading")}</AuthCardHeading>
+        <AuthCardSubtitle>{t("subtitle")}</AuthCardSubtitle>
       </AuthCardHeader>
       <AuthCardBody>
-        <AuthCardForm onSubmit={handleSubmit}>
-          <TextField
-            label="Email"
-            type="Email"
-            placeholder="Enter your email"
-            value={email}
-            onChange={setEmail}
-          />
-        </AuthCardForm>
-        <Button
-          size="medium"
-          label="Request reset link"
-          className="justify-center py-4"
-        />
+        <ForgetPasswordForm />
       </AuthCardBody>
       <AuthCardFooter>
-        <AuthCardFooterItem>
-          <AuthCardFooterText>
-            Please sign in to your account.
-          </AuthCardFooterText>
-          <AuthCardFooterLink href="#">Sign In</AuthCardFooterLink>
-        </AuthCardFooterItem>
+        <AuthCardFooterSignInItem />
       </AuthCardFooter>
     </AuthCard>
   );

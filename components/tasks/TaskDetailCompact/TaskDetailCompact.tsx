@@ -5,17 +5,18 @@ import {
   DetailText,
   DetailTitle,
 } from "@/components/common/Detail";
+
 import Image from "next/image";
-import { useMemo } from "react";
+import { Badge, Link } from "@/components/ui";
+import { useFormatter, useTranslations } from "next-intl";
+import { UnknownUser } from "@/components/common/UnknownUser";
+import { ImageContainer } from "@/components/common/ImageContainer";
 import { TaskDetailCompactLayout } from "./TaskDetailCompactLayout";
 import { Attachment, Attachments } from "@/components/attachments/Attachments";
 import { SubtasksCheckboxGroup } from "@/components/subtasks/SubtasksCheckboxGroup";
-import { Badge, Link } from "@/components/ui";
-import { ImageContainer } from "@/components/common/ImageContainer";
-import { UnknownUser } from "@/components/common/UnknownUser";
-import { NewSubtaskBottomSheetTrigger } from "@/components/subtasks/NewSubtaskBottomSheetTrigger";
 import { NewSubtaskModalTrigger } from "@/components/subtasks/NewSubtaskModalTrigger";
 import { TaskDetailCompactStatusMenuTrigger } from "./TaskDetailCompactStatusMenuTrigger";
+import { NewSubtaskBottomSheetTrigger } from "@/components/subtasks/NewSubtaskBottomSheetTrigger";
 
 interface TaskDetailCompactProps {
   id: number;
@@ -69,17 +70,17 @@ export function TaskDetailCompact({
   subtasks,
   attachments,
 }: TaskDetailCompactProps) {
-  const locale = "en-GB";
+  const t = useTranslations("tasks.TaskDetailCompact");
 
-  const formattedDeadline = useMemo(() => {
-    if (!deadline) return "";
+  const format = useFormatter();
 
-    return new Date(deadline).toLocaleDateString(locale, {
-      day: "2-digit",
-      month: "short",
-      year: "numeric",
-    });
-  }, [deadline, locale]);
+  const formattedDeadline = deadline
+    ? format.dateTime(new Date(deadline), {
+        day: "2-digit",
+        month: "short",
+        year: "numeric",
+      })
+    : t("noDeadline");
 
   return (
     <TaskDetailCompactLayout
@@ -91,7 +92,7 @@ export function TaskDetailCompact({
       actionsSlot={<TaskDetailCompactStatusMenuTrigger />}
       assigneesSlot={
         <DetailInfo>
-          <DetailTitle>Assignee</DetailTitle>
+          <DetailTitle>{t("assignee")}</DetailTitle>
           <div className="flex items-center gap-2">
             {assignee?.imageUrl ? (
               <Link href={`/users/${id}`}>
@@ -103,14 +104,14 @@ export function TaskDetailCompact({
               <UnknownUser className="h-9 w-9" />
             )}
             <DetailText>
-              {assignee ? assignee.fullName : "Unassigned"}
+              {assignee ? assignee.fullName : t("noAssignee")}
             </DetailText>
           </div>
         </DetailInfo>
       }
       deadlineSlot={
         <DetailInfo className="md:gap-3.5">
-          <DetailTitle>Deadline</DetailTitle>
+          <DetailTitle>{t("deadline")}</DetailTitle>
           <Badge color="gray" className="self-start">
             {formattedDeadline}
           </Badge>
@@ -118,29 +119,29 @@ export function TaskDetailCompact({
       }
       descriptionSlot={
         <DetailInfo>
-          <DetailTitle>Description</DetailTitle>
+          <DetailTitle>{t("description")}</DetailTitle>
           <DetailText>
-            {description ? description : "No description"}
+            {description ? description : t("noDescription")}
           </DetailText>
         </DetailInfo>
       }
       creatorSlot={
         <DetailInfo>
-          <DetailTitle>Creator</DetailTitle>
+          <DetailTitle>{t("creator")}</DetailTitle>
           <DetailText>
-            {creator ? creator.fullName : "Unknown creator"}
+            {creator ? creator.fullName : t("unknownCreator")}
           </DetailText>
         </DetailInfo>
       }
       categoryNameSlot={
         <DetailInfo>
-          <DetailTitle>Category</DetailTitle>
+          <DetailTitle>{t("category")}</DetailTitle>
           <DetailText>{category.name}</DetailText>
         </DetailInfo>
       }
       projectTitleSlot={
         <DetailInfo>
-          <DetailTitle>Project</DetailTitle>
+          <DetailTitle>{t("project")}</DetailTitle>
           <DetailText>{project.title}</DetailText>
         </DetailInfo>
       }
@@ -153,7 +154,7 @@ export function TaskDetailCompact({
       }
       attachmentsSlot={
         <DetailInfo className="border-none pb-0">
-          <DetailTitle>Attachments</DetailTitle>
+          <DetailTitle>{t("attachments")}</DetailTitle>
           {attachments.length > 0 && (
             <Attachments>
               {attachments.map((attachment) => (

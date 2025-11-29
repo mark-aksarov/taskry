@@ -1,17 +1,18 @@
 import {
+  ToolbarMobileTop,
   ToolbarMobileBottom,
   ToolbarMobileHeading,
-  ToolbarMobileTop,
 } from "@/components/common/Toolbar";
 
 import {
   UserCard,
-  UserCardHeader,
   UserCardLeft,
   UserCardRight,
   UserCardTitle,
+  UserCardHeader,
 } from "@/components/users/UserCard";
 
+import { useTranslations } from "next-intl";
 import { PageGrid } from "@/components/common/PageGrid";
 import { PageContainer } from "@/components/common/PageContainer";
 import { UserTasksEmptySection } from "@/components/users/UserTasksEmptySection";
@@ -29,13 +30,15 @@ export function UserTasksPageEmptyLayout({
   navigationDesktop,
   navigationMobile,
 }: UserTasksPageEmptyLayoutProps) {
+  const t = useTranslations("users.UserTasksPageEmptyLayout");
+
   return (
     <>
       <PageContainer className="max-md:hidden">
         <UserCard>
           <UserCardLeft>
             <UserCardHeader>
-              <UserCardTitle>Assigned tasks</UserCardTitle>
+              <UserCardTitle>{t("title")}</UserCardTitle>
             </UserCardHeader>
 
             <UserTasksEmptySection />
@@ -51,7 +54,7 @@ export function UserTasksPageEmptyLayout({
       <PageContainer fullscreen className="md:hidden">
         <PageGrid className="flex-auto">
           <ToolbarMobileTop>
-            <ToolbarMobileHeading>Assigned tasks</ToolbarMobileHeading>
+            <ToolbarMobileHeading>{t("title")}</ToolbarMobileHeading>
           </ToolbarMobileTop>
 
           <ToolbarMobileBottom>{navigationMobile}</ToolbarMobileBottom>

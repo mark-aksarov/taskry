@@ -4,7 +4,9 @@ import {
   ToolbarMobileBottom,
   ToolbarMobileHeading,
 } from "@/components/common/Toolbar";
+
 import { Suspense } from "react";
+import { useTranslations } from "next-intl";
 import { PageGrid } from "@/components/common/PageGrid";
 import { ViewModeProvider } from "@/components/common/ViewMode";
 import { PageContainer } from "@/components/common/PageContainer";
@@ -27,6 +29,8 @@ export function ProjectsPage({
   NewProjectFormContainer,
   ProjectsServerContainer,
 }: ProjectsPageProps) {
+  const t = useTranslations("app.ProjectsPage");
+
   return (
     <PageContainer>
       <PageGrid>
@@ -53,7 +57,7 @@ export function ProjectsPage({
           </ToolbarDesktop>
 
           <ToolbarMobileTop>
-            <ToolbarMobileHeading>Projects</ToolbarMobileHeading>
+            <ToolbarMobileHeading>{t("heading")}</ToolbarMobileHeading>
             <ProjectToolbarSortingMenuTrigger />
             <ProjectToolbarFiltersModalTrigger
               filtersForm={
@@ -76,6 +80,7 @@ export function ProjectsPage({
               newProjectCategoryForm={<></>}
             />
           </ToolbarMobileBottom>
+
           <ProjectsServerContainer />
         </ViewModeProvider>
       </PageGrid>

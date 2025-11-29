@@ -1,9 +1,10 @@
 "use client";
 
+import { useTranslations } from "next-intl";
+import { Switch } from "@/components/ui/Switch";
 import { Divider, RACForm } from "@/components/ui";
 import { ProjectFiltersFormDeadlineRange } from "./ProjectFiltersFormDeadlineRange";
 import { ProjectFiltersFormDeadlineCheckboxGroup } from "./ProjectFiltersFormDeadlineCheckboxGroup";
-import { Switch } from "@/components/ui/Switch";
 
 interface ProjectFiltersFormProps {
   projectStatusCheckboxGroup: React.ReactNode;
@@ -18,10 +19,12 @@ export function ProjectFiltersForm({
   customerCheckboxGroup,
   userCheckboxGroup,
 }: ProjectFiltersFormProps) {
+  const t = useTranslations("projects.ProjectFiltersForm");
+
   return (
     <RACForm>
       <div className="flex flex-col gap-4">
-        <Switch className="justify-between">Has not active tasks</Switch>
+        <Switch className="justify-between">{t("switchText")}</Switch>
         <Divider />
 
         <ProjectFiltersFormDeadlineCheckboxGroup />

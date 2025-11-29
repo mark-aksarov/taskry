@@ -16,6 +16,7 @@ import {
 } from "@/components/ui";
 import { Paperclip, SendHorizonal } from "lucide-react";
 import { twMerge } from "tailwind-merge";
+import { useTranslations } from "next-intl";
 
 type MessageInputProps = RACTextFieldProps &
   React.RefAttributes<HTMLDivElement> & {
@@ -43,6 +44,8 @@ export const MessageInput = ({
   inputClassName,
   ...props
 }: MessageInputProps) => {
+  const t = useTranslations("common.MessageInput");
+
   const buttonClasses = "absolute top-[1.75rem] -translate-y-1/2 rounded-full";
 
   return (
@@ -61,7 +64,7 @@ export const MessageInput = ({
           iconLeft={<Paperclip size={16} strokeWidth={1} absoluteStrokeWidth />}
           className={twMerge(buttonClasses, "translate-x-2")}
           isDisabled={props.isDisabled}
-          aria-label="Add attachments"
+          aria-label={t("attachFileButton.ariaLabel")}
         />
       </FileTrigger>
 
@@ -83,7 +86,7 @@ export const MessageInput = ({
         }
         className={twMerge(buttonClasses, "right-0 -translate-x-2")}
         isDisabled={props.isDisabled}
-        aria-label="Send Message"
+        aria-label={t("sendButton.ariaLabel")}
       />
     </div>
   );

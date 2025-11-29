@@ -1,28 +1,31 @@
 "use client";
 
-import { Ellipsis } from "lucide-react";
-import { useOverlayTrigger } from "react-aria";
-import { useOverlayTriggerState } from "react-stately";
-import { ResponsiveMenuTrigger } from "../ResponsiveMenuTrigger";
 import {
   Button,
-  DialogCloseButton,
   DialogHeader,
   DialogHeading,
   MenuTriggerProps,
+  DialogCloseButton,
 } from "@/components/ui";
+
+import { Ellipsis } from "lucide-react";
+import { useTranslations } from "next-intl";
+import { useOverlayTrigger } from "react-aria";
+import { useOverlayTriggerState } from "react-stately";
+import { ResponsiveMenuTrigger } from "../ResponsiveMenuTrigger";
 
 export function ToolbarActionsMenuTrigger<T extends object = any>({
   children,
 }: Pick<MenuTriggerProps<T>, "children">) {
   const state = useOverlayTriggerState({});
   const { triggerProps } = useOverlayTrigger({ type: "dialog" }, state);
+  const t = useTranslations("common.Toolbar.ToolbarActionsMenuTrigger");
 
   return (
     <ResponsiveMenuTrigger
       renderDialogHeader={() => (
         <DialogHeader>
-          <DialogHeading>Actions</DialogHeading>
+          <DialogHeading>{t("heading")}</DialogHeading>
           <DialogCloseButton />
         </DialogHeader>
       )}
@@ -30,7 +33,7 @@ export function ToolbarActionsMenuTrigger<T extends object = any>({
         <>
           <Button
             {...triggerProps}
-            aria-label="actions"
+            aria-label={t("ariaLabel")}
             variant="outlined"
             iconLeft={
               <Ellipsis size={16} strokeWidth={1.5} absoluteStrokeWidth />
@@ -39,9 +42,8 @@ export function ToolbarActionsMenuTrigger<T extends object = any>({
           />
           <Button
             {...triggerProps}
-            aria-label="actions"
             variant="outlined"
-            label="Actions"
+            label={t("label")}
             iconLeft={
               <Ellipsis size={16} strokeWidth={1.5} absoluteStrokeWidth />
             }

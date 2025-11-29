@@ -1,56 +1,33 @@
-import { AuthCard, AuthCardHeader } from "@/components/auth";
-import { Button, Checkbox, TextField } from "@/components/ui";
-import { AuthCardBody } from "@/components/auth/AuthCardBody";
-import { AuthCardForm } from "@/components/auth/AuthCardForm";
-import { AuthCardFooter } from "@/components/auth/AuthCardFooter";
-import { AuthCardHeading } from "@/components/auth/AuthCardHeading";
-import { AuthCardSubtitle } from "@/components/auth/AuthCardSubtitle";
-import { AuthCardFooterItem } from "@/components/auth/AuthCardFooterItem";
-import { AuthCardFooterText } from "@/components/auth/AuthCardFooterText";
-import { AuthCardFooterLink } from "@/components/auth/AuthCardFooterLink";
+import {
+  AuthCard,
+  AuthCardBody,
+  AuthCardHeader,
+  AuthCardFooter,
+  AuthCardHeading,
+  AuthCardSubtitle,
+} from "@/components/auth/AuthCard";
+import { useTranslations } from "next-intl";
+import { ResetPasswordForm } from "@/components/auth/ResetPasswordForm";
+import { AuthCardFooterSignInItem } from "@/components/auth/AuthCardFooterSignInItem";
 
 interface ResetPasswordPageProps {
-  password: string;
-  setPassword: (password: string) => void;
-  handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+  token: string;
 }
 
-export function ResetPasswordPage({
-  password,
-  setPassword,
-  handleSubmit,
-}: ResetPasswordPageProps) {
+export function ResetPasswordPage({ token }: ResetPasswordPageProps) {
+  const t = useTranslations("app.ResetPasswordPage");
+
   return (
     <AuthCard>
       <AuthCardHeader>
-        <AuthCardHeading>Reset password</AuthCardHeading>
-        <AuthCardSubtitle>
-          Provide a new password for your account.
-        </AuthCardSubtitle>
+        <AuthCardHeading>{t("heading")}</AuthCardHeading>
+        <AuthCardSubtitle>{t("subtitle")}</AuthCardSubtitle>
       </AuthCardHeader>
       <AuthCardBody>
-        <AuthCardForm onSubmit={handleSubmit}>
-          <TextField
-            label="Password"
-            type="password"
-            placeholder="Enter your password"
-            value={password}
-            onChange={setPassword}
-          />
-        </AuthCardForm>
-        <Button
-          size="medium"
-          label="Reset password"
-          className="justify-center py-4"
-        />
+        <ResetPasswordForm token={token} />
       </AuthCardBody>
       <AuthCardFooter>
-        <AuthCardFooterItem>
-          <AuthCardFooterText>
-            Please sign in to your account.
-          </AuthCardFooterText>
-          <AuthCardFooterLink href="#">Sign In</AuthCardFooterLink>
-        </AuthCardFooterItem>
+        <AuthCardFooterSignInItem />
       </AuthCardFooter>
     </AuthCard>
   );

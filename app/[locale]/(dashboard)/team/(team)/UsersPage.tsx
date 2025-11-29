@@ -13,6 +13,7 @@ import { UserFiltersFormSkeleton } from "@/components/users/UserFiltersForm";
 import { UserToolbarActionsMenuTrigger } from "@/components/users/UserToolbarActionsMenuTrigger";
 import { UserToolbarFiltersModalTrigger } from "@/components/users/UserToolbarFiltersModalTrigger";
 import { UserToolbarCreateNewMenuTrigger } from "@/components/users/UserToolbarCreateNewMenuTrigger";
+import { useTranslations } from "next-intl";
 
 interface UsersPageProps {
   UserFiltersFormContainer: React.ComponentType;
@@ -23,6 +24,8 @@ export async function UsersPage({
   UserFiltersFormContainer,
   UsersServerContainer,
 }: UsersPageProps) {
+  const t = useTranslations("app.UsersPage");
+
   return (
     <PageContainer>
       <PageGrid>
@@ -44,7 +47,7 @@ export async function UsersPage({
           </ToolbarDesktop>
 
           <ToolbarMobileTop>
-            <ToolbarMobileHeading>Users</ToolbarMobileHeading>
+            <ToolbarMobileHeading>{t("heading")}</ToolbarMobileHeading>
             <UserToolbarFiltersModalTrigger
               filtersForm={
                 <Suspense fallback={<UserFiltersFormSkeleton />}>

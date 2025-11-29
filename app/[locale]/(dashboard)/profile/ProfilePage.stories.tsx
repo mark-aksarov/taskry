@@ -1,4 +1,9 @@
 import {
+  PersonHeader,
+  PersonHeaderSkeleton,
+} from "@/components/common/PersonHeader";
+
+import {
   Default as PersonHeaderStory,
   WithoutImageUrl as PersonHeaderWithoutImageUrlStory,
 } from "@/components/common/PersonHeader/PersonHeader.stories";
@@ -15,10 +20,6 @@ import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { PageDecorator } from "@/.storybook/PageDecorator";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { UserDetail, UserDetailSkeleton } from "@/components/users/UserDetail";
-import {
-  PersonHeader,
-  PersonHeaderSkeleton,
-} from "@/components/common/PersonHeader";
 
 const userId = "BKs42HvVDEZFoaJUmTqf1gTN0K8pUFjI";
 

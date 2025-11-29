@@ -1,6 +1,7 @@
+import { Button } from "@/components/ui";
+import { useTranslations } from "next-intl";
 import { DetailForm } from "@/components/common/DetailForm";
 import { TaskDetailFormDeadlineDatePicker } from "./TaskDetailFormDeadlineDatePicker";
-import { Button } from "@/components/ui";
 
 interface TaskDetailFormProps {
   taskStatusSelect: React.ReactNode;
@@ -13,6 +14,8 @@ export function TaskDetailForm({
   projectSelect,
   assigneeSelect,
 }: TaskDetailFormProps) {
+  const t = useTranslations("tasks.TaskDetailForm");
+
   const buttonClasses = "flex-auto justify-center py-2";
 
   return (
@@ -26,13 +29,13 @@ export function TaskDetailForm({
           variant="outlined"
           size="medium"
           type="reset"
-          label="Reset"
+          label={t("resetButtonLabel")}
           className={buttonClasses}
         />
         <Button
           size="medium"
           type="submit"
-          label="Save"
+          label={t("submitButtonLabel")}
           className={buttonClasses}
         />
       </div>

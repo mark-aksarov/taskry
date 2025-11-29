@@ -1,9 +1,10 @@
+import { TaskFormBase } from "./TaskFormBase";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { TaskFormBase, TaskFormBaseStatusSelect } from ".";
-import { TaskFormBaseProjectSelect } from ".";
-import { TaskFormBaseCategorySelect } from ".";
-import { TaskFormBaseAssigneeSelect } from ".";
+import { TaskFormBaseStatusSelect } from "./TaskFormBaseStatusSelect";
+import { TaskFormBaseProjectSelect } from "./TaskFormBaseProjectSelect";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { TaskFormBaseCategorySelect } from "./TaskFormBaseCategorySelect";
+import { TaskFormBaseAssigneeSelect } from "./TaskFormBaseAssigneeSelect";
 
 const meta = {
   title: "components/tasks/TaskFormBase",
@@ -27,15 +28,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    taskStatusSelect: (
-      <TaskFormBaseStatusSelect
-        statuses={[
-          { id: "pending", name: "Pending" },
-          { id: "active", name: "Active" },
-          { id: "completed", name: "Completed" },
-        ]}
-      />
-    ),
+    taskStatusSelect: <TaskFormBaseStatusSelect />,
     taskCategorySelect: (
       <TaskFormBaseCategorySelect
         categories={[

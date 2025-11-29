@@ -1,0 +1,1 @@
+export { CustomerDetailBottomSheet } from "./CustomerDetailBottomSheet";

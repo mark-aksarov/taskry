@@ -1,3 +1,4 @@
+import { useTranslations } from "next-intl";
 import { ModalProps } from "@/components/ui";
 import { FormBaseModal } from "@/components/common/FormBaseModal";
 
@@ -7,10 +8,12 @@ interface EditTaskModalProps
 }
 
 export function EditTaskModal({ editTaskForm, ...props }: EditTaskModalProps) {
+  const t = useTranslations("tasks.EditTaskModal");
+
   return (
     <FormBaseModal
-      title="Edit Task"
-      submitButtonLabel="Update Task"
+      title={t("title")}
+      submitButtonLabel={t("submitButtonLabel")}
       form={editTaskForm}
       {...props}
     />

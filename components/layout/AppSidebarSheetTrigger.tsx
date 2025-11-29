@@ -9,6 +9,7 @@ import {
 } from "@/components/ui";
 import { useState } from "react";
 import { Menu } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { AppSidebar } from "./AppSidebar/AppSidebar";
 import { AppSidebarBody } from "./AppSidebar/AppSidebarBody";
 import { headingStyles } from "./AppSidebar/AppSidebarHeading";
@@ -19,12 +20,14 @@ export function AppSidebarSheetTrigger({
 }: {
   appNavigation: React.ReactNode;
 }) {
+  const t = useTranslations("layout.AppSidebarSheetTrigger");
+
   const [isOpen, setOpen] = useState(false);
 
   return (
     <>
       <Button
-        aria-label="menu"
+        aria-label={t("triggerAriaLabel")}
         variant="ghost"
         iconLeft={<Menu size={16} strokeWidth={1.5} absoluteStrokeWidth />}
         className="rounded-full p-3 max-md:hidden xl:hidden"

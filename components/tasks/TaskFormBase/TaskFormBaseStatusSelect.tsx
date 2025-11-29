@@ -2,20 +2,20 @@
 
 import { Item } from "react-stately";
 import { ResponsiveSelect } from "@/components/common/ResponsiveSelect";
+import { useTranslations } from "next-intl";
 
-export function TaskFormBaseStatusSelect({
-  statuses,
-}: {
-  statuses: { id: string; name: string }[];
-}) {
+export function TaskFormBaseStatusSelect() {
+  const t = useTranslations("tasks.TaskFormBase.TaskFormBaseStatusSelect");
+
   return (
     <ResponsiveSelect
-      label="Status"
-      placeholder="Select status"
+      label={t("label")}
+      placeholder={t("placeholder")}
       overlayClassName="w-[var(--trigger-width)]"
-      items={statuses.map((item) => ({ id: item.id, label: item.name }))}
     >
-      {(item: any) => <Item key={item.id}>{item.label}</Item>}
+      <Item key="pending">{t("items.pending")}</Item>
+      <Item key="active">{t("items.active")}</Item>
+      <Item key="completed">{t("items.completed")}</Item>
     </ResponsiveSelect>
   );
 }

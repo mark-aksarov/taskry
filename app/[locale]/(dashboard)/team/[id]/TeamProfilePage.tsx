@@ -3,7 +3,9 @@ import {
   ToolbarMobileBottom,
   ToolbarMobileHeading,
 } from "@/components/common/Toolbar";
+
 import { Suspense } from "react";
+import { useTranslations } from "next-intl";
 import { Card } from "@/components/common/Card";
 import { PageGrid } from "@/components/common/PageGrid";
 import { PageContainer } from "@/components/common/PageContainer";
@@ -24,6 +26,8 @@ export function TeamProfilePage({
   UserDetailContainer,
   UserHeaderContainer,
 }: TeamProfilePageProps) {
+  const t = useTranslations("app.TeamProfilePage");
+
   return (
     <PageContainer>
       <UserDetailCard
@@ -42,7 +46,7 @@ export function TeamProfilePage({
 
       <PageGrid className="md:hidden">
         <ToolbarMobileTop>
-          <ToolbarMobileHeading>User Information</ToolbarMobileHeading>
+          <ToolbarMobileHeading>{t("heading")}</ToolbarMobileHeading>
         </ToolbarMobileTop>
 
         <ToolbarMobileBottom>

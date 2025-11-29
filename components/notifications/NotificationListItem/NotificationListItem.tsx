@@ -1,28 +1,28 @@
 "use client";
 
+import {
+  CommentItemText,
+  CommentItemActions,
+  CommentItemContent,
+} from "@/components/comments/CommentItem";
+
 import Image from "next/image";
-import { useMemo } from "react";
 import { Item } from "react-stately";
 import { Link } from "@/components/ui";
 import { twMerge } from "tailwind-merge";
-
 import { ListCheck, Trash } from "lucide-react";
-import { ImageContainer } from "@/components/common/ImageContainer";
-import { NotificationListItemActor } from "./NotificationListItemActor";
-import { NotificationListItemActionText } from "./NotificationListItemActionText";
-import { NotificationListItemDate } from "./NotificationListItemDate";
-import { NotificationListItemTarget } from "./NotificationListItemTarget";
-import {
-  CommentItemActions,
-  CommentItemContent,
-  CommentItemText,
-} from "@/components/comments/CommentItem";
-import { Attachment, Attachments } from "@/components/attachments/Attachments";
-import { ReplyButton } from "@/components/comments/ReplyButton";
-import { ItemBaseActionMenuTrigger } from "@/components/common/ItemBase";
+import { useFormatter, useTranslations } from "next-intl";
 import { UnknownUser } from "@/components/common/UnknownUser";
+import { ReplyButton } from "@/components/comments/ReplyButton";
+import { ImageContainer } from "@/components/common/ImageContainer";
+import { NotificationListItemDate } from "./NotificationListItemDate";
+import { NotificationListItemActor } from "./NotificationListItemActor";
+import { ItemBaseActionMenuTrigger } from "@/components/common/ItemBase";
+import { NotificationListItemTarget } from "./NotificationListItemTarget";
+import { Attachment, Attachments } from "@/components/attachments/Attachments";
+import { NotificationListItemActionText } from "./NotificationListItemActionText";
 
-interface NotificationListItemProps {
+export interface NotificationListItemProps {
   date: Date;
   isRead: boolean;
   actor?: {
@@ -30,7 +30,7 @@ interface NotificationListItemProps {
     fullName: string;
     imageUrl?: string;
   };
-  actionText: string;
+  type: string;
   target: React.ReactNode;
   comment?: {
     content: string;
@@ -47,34 +47,26 @@ export const notificationListItemStyles =
   "flex items-start gap-3 border-gray-300 bg-white p-4 pr-2 not-last:border-b-1 dark:border-gray-600 dark:bg-gray-800";
 
 export const NotificationListItem = ({
-  date,
   isRead,
   actor,
-  actionText,
   target,
   comment,
   className,
+  date,
+  type,
 }: NotificationListItemProps) => {
-  const locale = "en-GB";
+  const t = useTranslations("notifications.NotificationItem");
 
-  const formattedDate = useMemo(() => {
-    if (!date) return "";
+  const format = useFormatter();
 
-    const formattedDate = new Date(date);
-
-    return formattedDate.toLocaleDateString(locale, {
-      day: "2-digit",
-      month: "short",
-      year: "numeric",
-      hour: "2-digit",
-      minute: "2-digit",
-      hour12: true,
-    });
-  }, [date, locale]);
-
-  const formattedUpper = formattedDate.replace(/([ap]m)$/i, (match) =>
-    match.toUpperCase(),
-  );
+  const formattedDate = format.dateTime(date, {
+    day: "2-digit",
+    month: "short",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: true,
+  });
 
   return (
     <div
@@ -102,16 +94,16 @@ export const NotificationListItem = ({
                 {actor ? (
                   <Link href={`/users/${actor.id}`}>{actor.fullName}</Link>
                 ) : (
-                  "Unknown User"
+                  t("unknownUser")
                 )}
               </>
             </NotificationListItemActor>
             <NotificationListItemActionText>
-              &nbsp;{actionText}&nbsp;
+              &nbsp;{t(`action.${type}`)}&nbsp;
             </NotificationListItemActionText>
             <NotificationListItemTarget>{target}</NotificationListItemTarget>
           </span>
-          <NotificationListItemDate>{formattedUpper}</NotificationListItemDate>
+          <NotificationListItemDate>{formattedDate}</NotificationListItemDate>
         </div>
 
         {comment && (
@@ -142,14 +134,15 @@ export const NotificationListItem = ({
         <ItemBaseActionMenuTrigger>
           <>
             {!isRead && (
-              <Item textValue="Mark as Read" key="read">
+              <Item textValue={t("markAsRead")} key="read">
                 <ListCheck size={16} strokeWidth={1.5} absoluteStrokeWidth />{" "}
-                Mark as Read
+                {t("markAsRead")}
               </Item>
             )}
           </>
-          <Item textValue="Delete" key="delete">
-            <Trash size={16} strokeWidth={1.5} absoluteStrokeWidth /> Delete
+          <Item textValue={t("delete")} key="delete">
+            <Trash size={16} strokeWidth={1.5} absoluteStrokeWidth />{" "}
+            {t("delete")}
           </Item>
         </ItemBaseActionMenuTrigger>
       </div>

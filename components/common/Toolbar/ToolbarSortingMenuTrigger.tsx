@@ -1,28 +1,31 @@
 "use client";
 
-import { ArrowDownUp } from "lucide-react";
-import { useOverlayTrigger } from "react-aria";
-import { useOverlayTriggerState } from "react-stately";
-import { ResponsiveMenuTrigger } from "@/components/common/ResponsiveMenuTrigger";
 import {
   Button,
-  DialogCloseButton,
   DialogHeader,
   DialogHeading,
   MenuTriggerProps,
+  DialogCloseButton,
 } from "@/components/ui";
+
+import { ArrowDownUp } from "lucide-react";
+import { useTranslations } from "next-intl";
+import { useOverlayTrigger } from "react-aria";
+import { useOverlayTriggerState } from "react-stately";
+import { ResponsiveMenuTrigger } from "@/components/common/ResponsiveMenuTrigger";
 
 export function ToolbarSortingMenuTrigger<T extends object = any>({
   children,
 }: Pick<MenuTriggerProps<T>, "children">) {
   const state = useOverlayTriggerState({});
   const { triggerProps } = useOverlayTrigger({ type: "dialog" }, state);
+  const t = useTranslations("common.Toolbar.ToolbarSortingMenuTrigger");
 
   return (
     <ResponsiveMenuTrigger
       renderDialogHeader={() => (
         <DialogHeader>
-          <DialogHeading>Sorting</DialogHeading>
+          <DialogHeading>{t("dialogHeading")}</DialogHeading>
           <DialogCloseButton />
         </DialogHeader>
       )}
@@ -31,7 +34,7 @@ export function ToolbarSortingMenuTrigger<T extends object = any>({
         <>
           <Button
             {...triggerProps}
-            aria-label="sorting"
+            aria-label={t("ariaLabel")}
             variant="outlined"
             iconLeft={
               <ArrowDownUp size={16} strokeWidth={1.5} absoluteStrokeWidth />
@@ -41,7 +44,7 @@ export function ToolbarSortingMenuTrigger<T extends object = any>({
           <Button
             {...triggerProps}
             variant="outlined"
-            label="Sorting"
+            label={t("label")}
             iconLeft={
               <ArrowDownUp size={16} strokeWidth={1.5} absoluteStrokeWidth />
             }

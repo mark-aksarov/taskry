@@ -1,4 +1,3 @@
-import { fn } from "storybook/test";
 import { ResetPasswordPage } from "./ResetPasswordPage";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { AuthPageDecorator } from "@/.storybook/AuthPageDecorator";
@@ -16,8 +15,6 @@ export type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    password: "password",
-    setPassword: fn(),
-    handleSubmit: fn(),
+    token: "token",
   },
 } satisfies Story;

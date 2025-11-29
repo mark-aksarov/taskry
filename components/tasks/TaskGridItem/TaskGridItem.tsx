@@ -2,38 +2,31 @@
 
 import {
   GridItemInfo,
-  GridItemProgress,
   GridItemText,
   GridItemTitle,
+  GridItemProgress,
 } from "@/components/common/Grid";
 
-import { Item } from "react-stately";
 import {
-  Check,
-  CircleEllipsis,
-  Clock,
-  MessageSquare,
-  Trash,
-} from "lucide-react";
-
-import Image from "next/image";
-import { useMemo } from "react";
-import { TaskDetailModal } from "../TaskDetailModal";
-import { Checkbox, RACDialogTrigger } from "@/components/ui";
-import { TaskGridItemLayout } from "./TaskGridItemLayout";
-import { TaskDetailBottomSheet } from "../TaskDetailBottomSheet";
-import { ImageContainer } from "@/components/common/ImageContainer";
-import {
-  ItemBaseActionMenuTrigger,
   ItemBaseBadge,
   ItemBaseButton,
-  ItemBaseDetailBottomSheetTrigger,
   ItemBaseDetailModalTrigger,
+  ItemBaseDetailBottomSheetTrigger,
 } from "@/components/common/ItemBase";
-import { getTaskStatusBadgeColor } from "../getTaskStatusBadgeColor";
+
+import Image from "next/image";
+import { MessageSquare } from "lucide-react";
+import { TaskDetailModal } from "../TaskDetailModal";
 import { TaskCommentsModal } from "../TaskCommentsModal";
+import { useFormatter, useTranslations } from "next-intl";
+import { TaskGridItemLayout } from "./TaskGridItemLayout";
+import { Checkbox, RACDialogTrigger } from "@/components/ui";
 import { UnknownUser } from "@/components/common/UnknownUser";
+import { TaskDetailBottomSheet } from "../TaskDetailBottomSheet";
+import { ImageContainer } from "@/components/common/ImageContainer";
+import { getTaskStatusBadgeColor } from "../getTaskStatusBadgeColor";
 import { UserDetailModal } from "@/components/users/UserDetailModal";
+import { TaskItemActionMenuTrigger } from "../TaskItemActionMenuTrigger";
 import { UserDetailBottomSheet } from "@/components/users/UserDetailBottomSheet";
 
 export interface TaskGridItemProps {
@@ -64,16 +57,19 @@ export function TaskGridItem({
   subtasks,
   subtasksDone,
 }: TaskGridItemProps) {
-  const locale = "en-GB";
+  const t = useTranslations("tasks");
 
-  const formattedDeadline = useMemo(() => {
-    if (!deadline) return "";
-    return new Date(deadline).toLocaleDateString(locale, {
-      day: "2-digit",
-      month: "short",
-      year: "numeric",
-    });
-  }, [deadline, locale]);
+  const format = useFormatter();
+
+  const deadlineOn = deadline
+    ? t("TaskGridItem.deadlineOn", {
+        date: format.dateTime(deadline, {
+          day: "2-digit",
+          month: "short",
+          year: "numeric",
+        }),
+      })
+    : t("TaskGridItem.noDeadline");
 
   const assigneeImg = assignee?.imageUrl ? (
     <ImageContainer className="h-9 w-9">
@@ -86,24 +82,7 @@ export function TaskGridItem({
   return (
     <TaskGridItemLayout
       checkboxSlot={<Checkbox aria-label={title} />}
-      menuTriggerSlot={
-        <ItemBaseActionMenuTrigger className="-mr-2">
-          <Item textValue="Delete" key="delete">
-            <Trash size={16} /> Delete
-          </Item>
-          <Item textValue="Mark as Pending" key="pending">
-            <CircleEllipsis size={16} /> Mark as Pending
-          </Item>
-          <Item textValue="Mark as Done" key="done">
-            <Check size={16} />
-            Mark as Done
-          </Item>
-          <Item textValue="Mark as Active" key="active">
-            <Clock size={16} />
-            Mark as Active
-          </Item>
-        </ItemBaseActionMenuTrigger>
-      }
+      menuTriggerSlot={<TaskItemActionMenuTrigger className="-mr-2" />}
       titleSlot={
         <GridItemInfo className="flex-auto">
           <GridItemTitle>
@@ -124,7 +103,7 @@ export function TaskGridItem({
             </ItemBaseDetailBottomSheetTrigger>
           </GridItemTitle>
 
-          <GridItemText>{`Deadline on ${formattedDeadline}`}</GridItemText>
+          <GridItemText>{deadlineOn}</GridItemText>
         </GridItemInfo>
       }
       assigneeImageSlot={
@@ -161,14 +140,14 @@ export function TaskGridItem({
       }
       statusSlot={
         <ItemBaseBadge color={getTaskStatusBadgeColor(status.id)}>
-          {status.name}
+          {t(`TaskStatus.${status.id}`)}
         </ItemBaseBadge>
       }
       progressSlot={
         <GridItemProgress
           value={(subtasksDone / subtasks) * 100}
           showValueText={false}
-          aria-label="project progress"
+          aria-label={t("TaskGridItem.progressAriaLabel")}
         />
       }
     />

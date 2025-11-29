@@ -5,15 +5,15 @@ import {
   DetailText,
   DetailTitle,
 } from "@/components/common/Detail";
+
 import Image from "next/image";
-import { useMemo } from "react";
-import { ExternalLink } from "lucide-react";
-import { Badge, Button, Link } from "@/components/ui";
-import { ProjectDetailCompactLayout } from "./ProjectDetailCompactLayout";
+import { Badge, Link } from "@/components/ui";
+import { useFormatter, useTranslations } from "next-intl";
+import { UnknownUser } from "@/components/common/UnknownUser";
 import { ImageContainer } from "@/components/common/ImageContainer";
+import { ProjectDetailCompactLayout } from "./ProjectDetailCompactLayout";
 import { Attachment, Attachments } from "@/components/attachments/Attachments";
 import { ProjectDetailCompactStatusMenuTrigger } from "./ProjectDetailCompactStatusMenuTrigger";
-import { UnknownUser } from "@/components/common/UnknownUser";
 
 interface ProjectDetailCompactProps {
   id: number;
@@ -56,17 +56,17 @@ export function ProjectDetailCompact({
   status,
   attachments,
 }: ProjectDetailCompactProps) {
-  const locale = "en-GB";
+  const t = useTranslations("projects.ProjectDetailCompact");
 
-  const formattedDeadline = useMemo(() => {
-    if (!deadline) return "";
+  const format = useFormatter();
 
-    return new Date(deadline).toLocaleDateString(locale, {
-      day: "2-digit",
-      month: "short",
-      year: "numeric",
-    });
-  }, [deadline, locale]);
+  const formattedDeadline = deadline
+    ? format.dateTime(new Date(deadline), {
+        day: "2-digit",
+        month: "short",
+        year: "numeric",
+      })
+    : t("noDeadline");
 
   return (
     <ProjectDetailCompactLayout
@@ -78,7 +78,7 @@ export function ProjectDetailCompact({
       actionsSlot={<ProjectDetailCompactStatusMenuTrigger />}
       creatorSlot={
         <DetailInfo>
-          <DetailTitle>Creator</DetailTitle>
+          <DetailTitle>{t("creator")}</DetailTitle>
           <div className="flex items-center gap-2">
             {creator?.imageUrl ? (
               <Link href={`/users/${id}`}>
@@ -90,14 +90,14 @@ export function ProjectDetailCompact({
               <UnknownUser className="h-9 w-9" />
             )}
             <DetailText>
-              {creator ? creator.fullName : "Unknown creator"}
+              {creator ? creator.fullName : t("unknownCreator")}
             </DetailText>
           </div>
         </DetailInfo>
       }
       deadlineSlot={
         <DetailInfo className="md:gap-3.5">
-          <DetailTitle>Deadline</DetailTitle>
+          <DetailTitle>{t("deadline")}</DetailTitle>
           <Badge color="gray" className="self-start">
             {formattedDeadline}
           </Badge>
@@ -105,29 +105,29 @@ export function ProjectDetailCompact({
       }
       descriptionSlot={
         <DetailInfo>
-          <DetailTitle>Description</DetailTitle>
+          <DetailTitle>{t("description")}</DetailTitle>
           <DetailText>
-            {description ? description : "No description"}
+            {description ? description : t("noDescription")}
           </DetailText>
         </DetailInfo>
       }
       customerSlot={
         <DetailInfo>
-          <DetailTitle>Customer</DetailTitle>
+          <DetailTitle>{t("customer")}</DetailTitle>
           <DetailText>
-            {customer ? customer.fullName : "Unknown customer"}
+            {customer ? customer.fullName : t("unknownCustomer")}
           </DetailText>
         </DetailInfo>
       }
       categorySlot={
         <DetailInfo>
-          <DetailTitle>Category</DetailTitle>
+          <DetailTitle>{t("category")}</DetailTitle>
           <DetailText>{category.name}</DetailText>
         </DetailInfo>
       }
       attachmentsSlot={
         <DetailInfo className="border-none pb-0">
-          <DetailTitle>Attachments</DetailTitle>
+          <DetailTitle>{t("attachments")}</DetailTitle>
           {attachments.length > 0 && (
             <Attachments>
               {attachments.map((attachment) => (

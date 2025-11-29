@@ -1,52 +1,12 @@
-import { Link } from "@/components/ui";
-import { NotificationList } from "../NotificationList";
-import { NotificationListItem } from "../NotificationListItem";
-import { NotificationModalContent } from "../NotificationModalContent";
 import {
   getNotifications,
   GetNotificationsType,
 } from "@/lib/queries/notification";
-import { NotificationFilterToggleButtonGroup } from "../NotificationFilterToggleButtonGroup/NotificationFilterToggleButtonGroup";
-
-function getActionText(notification: GetNotificationsType[number]) {
-  switch (notification.type) {
-    case "TASK_ADDED":
-      return "added a new task";
-    case "TASK_DELETED":
-      return "deleted a task";
-    case "TASK_UPDATED":
-      return "updated a task";
-
-    case "PROJECT_ADDED":
-      return "added a new project";
-    case "PROJECT_DELETED":
-      return "deleted a project";
-    case "PROJECT_UPDATED":
-      return "updated a project";
-
-    case "USER_ADDED":
-      return "added a new user";
-    case "USER_DELETED":
-      return "deleted a user";
-    case "USER_UPDATED":
-      return "updated a user";
-
-    case "CUSTOMER_ADDED":
-      return "added a new customer";
-    case "CUSTOMER_DELETED":
-      return "deleted a customer";
-    case "CUSTOMER_UPDATED":
-      return "updated a customer";
-
-    case "COMMENT_REPLIED":
-      return "replied to a comment in";
-    case "COMMENT_ADDED":
-      return "added a comment to";
-
-    default:
-      throw new Error("Invalid notification type");
-  }
-}
+import { Link } from "@/components/ui";
+import { NotificationList } from "../NotificationList";
+import { NotificationListItem } from "../NotificationListItem";
+import { NotificationModalContent } from "../NotificationModalContent";
+import { NotificationFilterToggleButtonGroup } from "../NotificationFilterToggleButtonGroup";
 
 function getTarget(notification: GetNotificationsType[number]) {
   const { type, target, targetName } = notification;
@@ -160,7 +120,7 @@ export async function NotificationModalContentServerContainer() {
                 : undefined
             }
             date={notification.createdAt}
-            actionText={getActionText(notification)}
+            type={notification.type.toString()}
             target={getTarget(notification)}
             comment={getComment(notification)}
           />

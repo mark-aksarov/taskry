@@ -1,3 +1,4 @@
+import { useTranslations } from "next-intl";
 import { CheckboxGroup, Checkbox } from "@/components/ui";
 
 export function TaskFiltersFormProjectCheckboxGroup({
@@ -5,12 +6,12 @@ export function TaskFiltersFormProjectCheckboxGroup({
 }: {
   projects: { id: number; title: string }[];
 }) {
-  if (!projects.length) {
-    return null;
-  }
+  const t = useTranslations(
+    "tasks.TaskFiltersForm.TaskFiltersFormProjectCheckboxGroup",
+  );
 
   return (
-    <CheckboxGroup label="Project">
+    <CheckboxGroup label={t("label")}>
       {projects.map((item) => (
         <Checkbox
           key={item.id}

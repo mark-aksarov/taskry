@@ -5,4 +5,3 @@ export { ToolbarMobileHeading } from "./ToolbarMobileHeading";
 export { ToolbarActionsMenuTrigger } from "./ToolbarActionsMenuTrigger";
 export { ToolbarSortingMenuTrigger } from "./ToolbarSortingMenuTrigger";
 export { ToolbarFiltersModalTrigger } from "./ToolbarFiltersModalTrigger";
-export { ToolbarFiltersBottomSheetTrigger } from "./ToolbarFiltersBottomSheetTrigger";

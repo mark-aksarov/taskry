@@ -9,6 +9,7 @@ import { DetailCardHeadingSkeleton } from "@/components/common/DetailCard";
 import { ProjectDetailCard } from "@/components/projects/ProjectDetailCard";
 import { ProjectDetailFormSkeleton } from "@/components/projects/ProjectDetailForm";
 import { ProjectDetailFullSkeleton } from "@/components/projects/ProjectDetailFull/ProjectDetailFullSkeleton";
+import { useTranslations } from "next-intl";
 
 interface ProjectDetailPageProps {
   id: number;
@@ -25,11 +26,13 @@ export function ProjectDetailPage({
   ProjectDetailContainer,
   ProjectDetailFormContainer,
 }: ProjectDetailPageProps) {
+  const t = useTranslations("app.ProjectDetailPage");
+
   return (
     <PageContainer>
       <PageGrid>
         <ToolbarMobileTop>
-          <ToolbarMobileHeading>Project Details</ToolbarMobileHeading>
+          <ToolbarMobileHeading>{t("heading")}</ToolbarMobileHeading>
         </ToolbarMobileTop>
         <ProjectDetailCard
           projectDetailCardHeading={

@@ -1,10 +1,5 @@
 "use client";
 
-import Image from "next/image";
-import { Item } from "react-stately";
-import { Pencil, Trash } from "lucide-react";
-import { Checkbox, Link } from "@/components/ui";
-
 import {
   ListItem,
   ListItemInfo,
@@ -13,14 +8,18 @@ import {
 } from "@/components/common/List";
 
 import {
-  ItemBaseActionMenuTrigger,
   ItemBaseDetailModalTrigger,
   ItemBaseDetailBottomSheetTrigger,
 } from "@/components/common/ItemBase";
+
+import Image from "next/image";
+import { Checkbox, Link } from "@/components/ui";
 import { UserDetailModal } from "../UserDetailModal";
 import { UnknownUser } from "@/components/common/UnknownUser";
 import { UserDetailBottomSheet } from "../UserDetailBottomSheet";
 import { ImageContainer } from "@/components/common/ImageContainer";
+import { UserItemActionMenuTrigger } from "../UserItemActionMenuTrigger";
+import { useTranslations } from "next-intl";
 
 export interface UserListItemProps {
   id: string;
@@ -45,6 +44,8 @@ export function UserListItem({
   position,
   showCheckbox,
 }: UserListItemProps) {
+  const t = useTranslations("users.UserListItem");
+
   const userImg = imageUrl ? (
     <ImageContainer className="h-9 w-9">
       <Image fill src={imageUrl} alt={fullName} />
@@ -55,7 +56,7 @@ export function UserListItem({
 
   return (
     <ListItem>
-      {showCheckbox && <Checkbox aria-label="user checkbox" />}
+      {showCheckbox && <Checkbox aria-label={t("checkboxAriaLabel")} />}
 
       <>
         <ItemBaseDetailModalTrigger
@@ -106,11 +107,11 @@ export function UserListItem({
           {phoneNumber ? (
             <Link href={`tel:${phoneNumber}`}>{phoneNumber}</Link>
           ) : (
-            "Phone number is not provided"
+            t("noPhoneNumber")
           )}
         </ListItemTitle>
 
-        <ListItemText>Phone number</ListItemText>
+        <ListItemText>{t("phoneNumber")}</ListItemText>
       </ListItemInfo>
 
       <ListItemInfo className="@max-2xl:hidden">
@@ -118,29 +119,22 @@ export function UserListItem({
           {publicLink ? (
             <Link href={publicLink}>{publicLink}</Link>
           ) : (
-            "Link is not provided"
+            t("noPublicLink")
           )}
         </ListItemTitle>
 
-        <ListItemText>Public link</ListItemText>
+        <ListItemText>{t("publicLink")}</ListItemText>
       </ListItemInfo>
 
       <ListItemInfo className="@max-4xl:hidden">
         <ListItemTitle>
-          {position ? position.name : "Unknown position"}
+          {position ? position.name : t("unknownPosition")}
         </ListItemTitle>
 
-        <ListItemText>Position</ListItemText>
+        <ListItemText>{t("position")}</ListItemText>
       </ListItemInfo>
 
-      <ItemBaseActionMenuTrigger>
-        <Item textValue="Edit" key="edit">
-          <Pencil size={16} /> Edit
-        </Item>
-        <Item textValue="Delete" key="delete">
-          <Trash size={16} /> Delete
-        </Item>
-      </ItemBaseActionMenuTrigger>
+      <UserItemActionMenuTrigger />
     </ListItem>
   );
 }

@@ -1,27 +1,30 @@
 "use client";
 
 import { Item } from "react-stately";
+import { useTranslations } from "next-intl";
 import { ToolbarActionsMenuTrigger } from "../common/Toolbar";
 import { Check, CircleEllipsis, Clock, Trash } from "lucide-react";
 
 export const ProjectToolbarActionsMenuTrigger = () => {
+  const t = useTranslations("projects.ProjectToolbarActionsMenuTrigger");
+
   return (
     <ToolbarActionsMenuTrigger>
-      <Item textValue="Delete" key="delete">
+      <Item textValue={t("delete")} key="delete">
         <Trash size={16} strokeWidth={1.5} absoluteStrokeWidth />
-        Remove
+        {t("delete")}
       </Item>
-      <Item textValue="Mark as Pending" key="pending">
-        <CircleEllipsis size={16} strokeWidth={1.5} absoluteStrokeWidth /> Mark
-        as Pending
+      <Item textValue={t("pending")} key="pending">
+        <CircleEllipsis size={16} strokeWidth={1.5} absoluteStrokeWidth />{" "}
+        {t("pending")}
       </Item>
-      <Item textValue="Mark as Active" key="active">
+      <Item textValue={t("active")} key="active">
         <Check size={16} strokeWidth={1.5} absoluteStrokeWidth />
-        Mark as Active
+        {t("active")}
       </Item>
-      <Item textValue="Mark as Completed" key="completed">
+      <Item textValue={t("completed")} key="completed">
         <Clock size={16} strokeWidth={1.5} absoluteStrokeWidth />
-        Mark as Completed
+        {t("completed")}
       </Item>
     </ToolbarActionsMenuTrigger>
   );

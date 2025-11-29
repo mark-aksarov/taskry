@@ -2,9 +2,9 @@ import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { ProjectFiltersForm } from "./ProjectFiltersForm";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { ProjectFiltersFormUserCheckboxGroup } from "./ProjectFiltersFormUserCheckboxGroup";
+import { ProjectFiltersFormStatusCheckboxGroup } from "./ProjectFiltersFormStatusCheckboxGroup";
 import { ProjectFiltersFormCustomerCheckboxGroup } from "./ProjectFiltersFormCustomerCheckboxGroup";
 import { ProjectFiltersFormCategoryCheckboxGroup } from "./ProjectFiltersFormCategoryCheckboxGroup";
-import { ProjectFiltersFormStatusCheckboxGroup } from "./ProjectFiltersFormStatusCheckboxGroup";
 
 const meta: Meta<typeof ProjectFiltersForm> = {
   title: "Components/projects/ProjectFiltersForm",
@@ -28,24 +28,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    projectStatusCheckboxGroup: (
-      <ProjectFiltersFormStatusCheckboxGroup
-        statuses={[
-          {
-            id: "pending",
-            name: "Pending",
-          },
-          {
-            id: "active",
-            name: "Active",
-          },
-          {
-            id: "completed",
-            name: "Completed",
-          },
-        ]}
-      />
-    ),
+    projectStatusCheckboxGroup: <ProjectFiltersFormStatusCheckboxGroup />,
     projectCategoryCheckboxGroup: (
       <ProjectFiltersFormCategoryCheckboxGroup
         categories={[

@@ -1,12 +1,12 @@
 "use client";
 
-import { useMemo } from "react";
 import {
   DetailInfo,
   DetailText,
   DetailTitle,
 } from "@/components/common/Detail";
 import { UserDetailLayout } from "./UserDetailLayout";
+import { useFormatter, useTranslations } from "next-intl";
 
 interface UserDetailProps {
   id: string;
@@ -32,76 +32,66 @@ export function UserDetail({
   birthdate,
   position,
 }: UserDetailProps) {
-  const formattedBirthdate = useMemo(() => {
-    if (!birthdate) return null;
-    try {
-      const date = new Date(birthdate);
-      return date.toLocaleDateString("en-US", {
+  const t = useTranslations("users.UserDetail");
+
+  const format = useFormatter();
+
+  const formattedBirthdate = birthdate
+    ? format.dateTime(birthdate, {
+        day: "2-digit",
+        month: "short",
         year: "numeric",
-        month: "long",
-        day: "numeric",
-      });
-    } catch {
-      return "Invalid date";
-    }
-  }, [birthdate]);
+      })
+    : t("noBirthdate");
 
   return (
     <UserDetailLayout
       bioSlot={
         <DetailInfo>
-          <DetailTitle>Bio</DetailTitle>
-          <DetailText>
-            {bio || "This user hasn’t written a bio yet."}
-          </DetailText>
+          <DetailTitle>{t("bio")}</DetailTitle>
+          <DetailText>{bio || t("noBio")}</DetailText>
         </DetailInfo>
       }
       fullNameSlot={
         <DetailInfo>
-          <DetailTitle>Full name</DetailTitle>
-          <DetailText>{fullName || "No name provided"}</DetailText>
+          <DetailTitle>{t("fullName")}</DetailTitle>
+          <DetailText>{fullName || t("noFullName")}</DetailText>
         </DetailInfo>
       }
       positionSlot={
         <DetailInfo>
-          <DetailTitle>Position</DetailTitle>
+          <DetailTitle>{t("position")}</DetailTitle>
           <DetailText>{position?.name || "Position not specified"}</DetailText>
         </DetailInfo>
       }
       emailSlot={
         <DetailInfo>
-          <DetailTitle>Email address</DetailTitle>
-          <DetailText>{email || "No email provided"}</DetailText>
+          <DetailTitle>{t("email")}</DetailTitle>
+          <DetailText>{email}</DetailText>
         </DetailInfo>
       }
       phoneNumberSlot={
         <DetailInfo>
-          <DetailTitle>Phone number</DetailTitle>
-          <DetailText>{phoneNumber || "No phone number provided"}</DetailText>
+          <DetailTitle>{t("phoneNumber")}</DetailTitle>
+          <DetailText>{phoneNumber || t("noPhoneNumber")}</DetailText>
         </DetailInfo>
       }
       addressSlot={
         <DetailInfo>
-          <DetailTitle>Address</DetailTitle>
-          <DetailText>
-            {address || "No address information available"}
-          </DetailText>
+          <DetailTitle>{t("address")}</DetailTitle>
+          <DetailText>{address || t("noAddress")}</DetailText>
         </DetailInfo>
       }
       publicLinkSlot={
         <DetailInfo>
-          <DetailTitle>Public link</DetailTitle>
-          <DetailText>
-            {publicLink || "This user doesn’t have a public profile link"}
-          </DetailText>
+          <DetailTitle>{t("publicLink")}</DetailTitle>
+          <DetailText>{publicLink || t("noPublicLink")}</DetailText>
         </DetailInfo>
       }
       birthdateSlot={
         <DetailInfo className="border-none pb-0">
-          <DetailTitle>Date of birth</DetailTitle>
-          <DetailText>
-            {formattedBirthdate || "Birthdate not specified"}
-          </DetailText>
+          <DetailTitle>{t("birthdate")}</DetailTitle>
+          <DetailText>{formattedBirthdate}</DetailText>
         </DetailInfo>
       }
     />

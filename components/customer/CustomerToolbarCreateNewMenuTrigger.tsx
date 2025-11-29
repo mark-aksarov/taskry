@@ -7,6 +7,7 @@ import {
   DialogCloseButton,
 } from "@/components/ui";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { Key, useOverlayTrigger } from "react-aria";
 import { Building2, Contact, Plus } from "lucide-react";
 import { Item, useOverlayTriggerState } from "react-stately";
@@ -21,6 +22,8 @@ export function CustomerToolbarCreateNewMenuTrigger({
   newCustomerForm,
   newCompanyForm,
 }: CustomerToolbarCreateNewMenuTriggerProps) {
+  const t = useTranslations("customers.CustomerToolbarCreateNewMenuTrigger");
+
   const state = useOverlayTriggerState({});
   const { triggerProps } = useOverlayTrigger({ type: "dialog" }, state);
   const [openCustomerModal, setOpenCustomerModal] = useState(false);
@@ -40,7 +43,7 @@ export function CustomerToolbarCreateNewMenuTrigger({
         onAction={handleAction}
         renderDialogHeader={() => (
           <DialogHeader>
-            <DialogHeading>Create New</DialogHeading>
+            <DialogHeading>{t("dialogHeading")}</DialogHeading>
             <DialogCloseButton />
           </DialogHeader>
         )}
@@ -48,17 +51,19 @@ export function CustomerToolbarCreateNewMenuTrigger({
         renderButton={() => (
           <Button
             {...triggerProps}
-            label="Create New"
+            label={t("label")}
             iconLeft={<Plus size={16} strokeWidth={1.5} absoluteStrokeWidth />}
           />
         )}
         placement="bottom right"
       >
-        <Item textValue="Customer" key="customer">
-          <Contact size={16} strokeWidth={1.5} absoluteStrokeWidth /> Customer
+        <Item textValue={t("items.customer")} key="customer">
+          <Contact size={16} strokeWidth={1.5} absoluteStrokeWidth />
+          {t("items.customer")}
         </Item>
-        <Item textValue="User" key="user">
-          <Building2 size={16} strokeWidth={1.5} absoluteStrokeWidth /> Company
+        <Item textValue={t("items.company")} key="user">
+          <Building2 size={16} strokeWidth={1.5} absoluteStrokeWidth />
+          {t("items.company")}
         </Item>
       </ResponsiveMenuTrigger>
 

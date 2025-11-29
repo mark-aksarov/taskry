@@ -7,6 +7,7 @@ import {
   DialogCloseButton,
 } from "@/components/ui";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { Key, useOverlayTrigger } from "react-aria";
 import { Item, useOverlayTriggerState } from "react-stately";
 import { BriefcaseBusiness, Plus, Users } from "lucide-react";
@@ -21,6 +22,8 @@ export function UserToolbarCreateNewMenuTrigger({
   newUserForm,
   newPositionForm,
 }: UserToolbarCreateNewMenuTriggerProps) {
+  const t = useTranslations("users.UserToolbarCreateNewMenuTrigger");
+
   const state = useOverlayTriggerState({});
   const { triggerProps } = useOverlayTrigger({ type: "dialog" }, state);
   const [openUserModal, setOpenUserModal] = useState(false);
@@ -40,7 +43,7 @@ export function UserToolbarCreateNewMenuTrigger({
         onAction={handleAction}
         renderDialogHeader={() => (
           <DialogHeader>
-            <DialogHeading>Create New</DialogHeading>
+            <DialogHeading>{t("dialogHeading")}</DialogHeading>
             <DialogCloseButton />
           </DialogHeader>
         )}
@@ -48,18 +51,19 @@ export function UserToolbarCreateNewMenuTrigger({
         renderButton={() => (
           <Button
             {...triggerProps}
-            label="Create New"
+            label={t("triggerLabel")}
             iconLeft={<Plus size={16} strokeWidth={1.5} absoluteStrokeWidth />}
           />
         )}
         placement="bottom right"
       >
-        <Item textValue="Customer" key="customer">
-          <Users size={16} strokeWidth={1.5} absoluteStrokeWidth /> User
+        <Item textValue={t("user")} key="user">
+          <Users size={16} strokeWidth={1.5} absoluteStrokeWidth />
+          {t("user")}
         </Item>
-        <Item textValue="User" key="user">
+        <Item textValue={t("position")} key="position">
           <BriefcaseBusiness size={16} strokeWidth={1.5} absoluteStrokeWidth />
-          Position
+          {t("position")}
         </Item>
       </ResponsiveMenuTrigger>
 

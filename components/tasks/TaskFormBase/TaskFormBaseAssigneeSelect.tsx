@@ -2,20 +2,19 @@
 
 import { Item } from "react-stately";
 import { ResponsiveSelect } from "@/components/common/ResponsiveSelect";
+import { useTranslations } from "next-intl";
 
 export function TaskFormBaseAssigneeSelect({
   users,
 }: {
   users: { id: string; fullName: string }[];
 }) {
-  if (!users.length) {
-    return null;
-  }
+  const t = useTranslations("tasks.TaskFormBase.TaskFormBaseAssigneeSelect");
 
   return (
     <ResponsiveSelect
-      label="Assigned To"
-      placeholder="Select user"
+      label={t("label")}
+      placeholder={t("placeholder")}
       overlayClassName="w-[var(--trigger-width)]"
       items={users.map((item) => ({ id: item.id, label: item.fullName }))}
     >

@@ -7,6 +7,7 @@ import {
   DialogHeading,
 } from "@/components/ui";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { Key, useOverlayTrigger } from "react-aria";
 import { Blocks, FolderClosed, Plus } from "lucide-react";
 import { Item, useOverlayTriggerState } from "react-stately";
@@ -28,6 +29,8 @@ export function ProjectToolbarCreateNewMenuTrigger({
   const [openProjectCategoryModal, setOpenProjectCategoryModal] =
     useState(false);
 
+  const t = useTranslations("projects.ProjectToolbarCreateNewMenuTrigger");
+
   function handleAction(key: Key) {
     if (key === "project") {
       setOpenProjectModal(true);
@@ -42,7 +45,7 @@ export function ProjectToolbarCreateNewMenuTrigger({
         onAction={handleAction}
         renderDialogHeader={() => (
           <DialogHeader>
-            <DialogHeading>Create New</DialogHeading>
+            <DialogHeading>{t("dialogHeading")}</DialogHeading>
             <DialogCloseButton />
           </DialogHeader>
         )}
@@ -50,18 +53,19 @@ export function ProjectToolbarCreateNewMenuTrigger({
         renderButton={() => (
           <Button
             {...triggerProps}
-            label="Create New"
+            label={t("label")}
             iconLeft={<Plus size={16} strokeWidth={1.5} absoluteStrokeWidth />}
           />
         )}
         placement="bottom right"
       >
-        <Item textValue="Project" key="project">
-          <FolderClosed size={16} strokeWidth={1.5} absoluteStrokeWidth />{" "}
-          Project
+        <Item textValue={t("items.project")} key="project">
+          <FolderClosed size={16} strokeWidth={1.5} absoluteStrokeWidth />
+          {t("items.project")}
         </Item>
-        <Item textValue="Category" key="category">
-          <Blocks size={16} strokeWidth={1.5} absoluteStrokeWidth /> Category
+        <Item textValue={t("items.category")} key="category">
+          <Blocks size={16} strokeWidth={1.5} absoluteStrokeWidth />
+          {t("items.category")}
         </Item>
       </ResponsiveMenuTrigger>
 

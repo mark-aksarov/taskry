@@ -1,63 +1,50 @@
+import {
+  AuthCard,
+  AuthCardBody,
+  AuthCardHeader,
+  AuthCardFooter,
+  AuthCardHeading,
+  AuthCardSubtitle,
+} from "@/components/auth/AuthCard";
+import { LogIn } from "lucide-react";
 import { Button } from "@/components/ui";
-import { LogIn, Mail } from "lucide-react";
-import { BetterFetchError } from "better-auth/react";
-import { AuthCard, AuthCardHeader } from "@/components/auth";
-import { AuthCardBody } from "@/components/auth/AuthCardBody";
-import { AuthCardFooter } from "@/components/auth/AuthCardFooter";
-import { AuthCardHeading } from "@/components/auth/AuthCardHeading";
-import { AuthCardSubtitle } from "@/components/auth/AuthCardSubtitle";
-import { AuthCardFooterItem } from "@/components/auth/AuthCardFooterItem";
-import { AuthCardFooterText } from "@/components/auth/AuthCardFooterText";
-import { AuthCardFooterLink } from "@/components/auth/AuthCardFooterLink";
+import { useTranslations } from "next-intl";
+import { SendVerificationButton } from "@/components/auth/SendVerificationButton";
+import { AuthCardFooterSignUpItem } from "@/components/auth/AuthCardFooterSignUpItem";
 
 interface SignInPageErrorProps {
-  error: BetterFetchError & Record<string, any>;
-  sendVerificationEmail: () => Promise<void>;
+  error: Error;
+  email: string;
 }
 
-export function SignInPageError({
-  error,
-  sendVerificationEmail,
-}: SignInPageErrorProps) {
+export function SignInPageError({ error, email }: SignInPageErrorProps) {
+  const t = useTranslations("app.SignInPageError");
+
   return (
     <AuthCard>
       <AuthCardHeader>
-        <AuthCardHeading>
-          {error.message || "Something went wrong"}
-        </AuthCardHeading>
+        <AuthCardHeading>{error.message || t("heading")}</AuthCardHeading>
         <AuthCardSubtitle>
-          {error.code === "EMAIL_NOT_VERIFIED"
-            ? "We sent a verification link to your email. Please check your inbox and click the link to continue"
-            : "Something went wrong. Please check your internet or try again"}
+          {error.name === "EMAIL_NOT_VERIFIED"
+            ? t("subtitle.emailNotVerified")
+            : t("subtitle.otherError")}
         </AuthCardSubtitle>
       </AuthCardHeader>
       <AuthCardBody>
-        {error.code === "EMAIL_NOT_VERIFIED" ? (
-          <Button
-            variant="outlined"
-            className="justify-center py-4"
-            onPress={sendVerificationEmail}
-            iconLeft={<Mail size={18} strokeWidth={1.5} absoluteStrokeWidth />}
-            label="Send again"
-            size="medium"
-          />
+        {error.name === "EMAIL_NOT_VERIFIED" ? (
+          <SendVerificationButton email={email} />
         ) : (
           <Button
             variant="outlined"
             className="justify-center py-4"
             iconLeft={<LogIn size={18} strokeWidth={1.5} absoluteStrokeWidth />}
-            label="Sign in with email"
+            label={t("signInButtonLabel")}
             size="medium"
           />
         )}
       </AuthCardBody>
       <AuthCardFooter>
-        <AuthCardFooterItem>
-          <AuthCardFooterText>
-            Start by creating your account.
-          </AuthCardFooterText>
-          <AuthCardFooterLink href="#">Sign Up</AuthCardFooterLink>
-        </AuthCardFooterItem>
+        <AuthCardFooterSignUpItem />
       </AuthCardFooter>
     </AuthCard>
   );

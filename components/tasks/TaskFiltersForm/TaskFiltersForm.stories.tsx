@@ -1,10 +1,10 @@
 import { TaskFiltersForm } from "./TaskFiltersForm";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { TaskFiltersFormStatusCheckboxGroup } from "./TaskFiltersFormStatusCheckboxGroup";
 import { TaskFiltersFormProjectCheckboxGroup } from "./TaskFiltersFormProjectCheckboxGroup";
 import { TaskFiltersFormCategoryCheckboxGroup } from "./TaskFiltersFormCategoryCheckboxGroup";
 import { TaskFiltersFormAssigneeCheckboxGroup } from "./TaskFiltersFormAssigneeCheckboxGroup";
-import { TaskFiltersFormStatusCheckboxGroup } from "./TaskFiltersFormStatusCheckboxGroup";
 
 const meta: Meta<typeof TaskFiltersForm> = {
   title: "Components/tasks/TaskFiltersForm",
@@ -28,24 +28,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    statusCheckboxGroup: (
-      <TaskFiltersFormStatusCheckboxGroup
-        statuses={[
-          {
-            id: "pending",
-            name: "Pending",
-          },
-          {
-            id: "active",
-            name: "Active",
-          },
-          {
-            id: "completed",
-            name: "Completed",
-          },
-        ]}
-      />
-    ),
+    statusCheckboxGroup: <TaskFiltersFormStatusCheckboxGroup />,
     categoryCheckboxGroup: (
       <TaskFiltersFormCategoryCheckboxGroup
         categories={[

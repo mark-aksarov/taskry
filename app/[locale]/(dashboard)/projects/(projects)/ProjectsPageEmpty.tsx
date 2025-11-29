@@ -5,16 +5,17 @@ import {
   EmptySectionDescription,
 } from "@/components/common/EmptySection";
 import { PageContainer } from "@/components/common/PageContainer";
+import { useTranslations } from "next-intl";
 
 export function ProjectsPageEmpty() {
+  const t = useTranslations("app.ProjectsPageEmpty");
+
   return (
     <PageContainer fullscreen centered>
       <EmptySection>
-        <EmptySectionHeading>No projects yet</EmptySectionHeading>
-        <EmptySectionDescription>
-          Create a new project to keep track of your work
-        </EmptySectionDescription>
-        <EmptySectionButton href="#">New Project</EmptySectionButton>
+        <EmptySectionHeading>{t("heading")}</EmptySectionHeading>
+        <EmptySectionDescription>{t("description")}</EmptySectionDescription>
+        <EmptySectionButton href="#">{t("addButtonLabel")}</EmptySectionButton>
       </EmptySection>
     </PageContainer>
   );

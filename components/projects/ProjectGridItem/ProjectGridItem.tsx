@@ -1,37 +1,32 @@
 "use client";
 
-import Image from "next/image";
-import { useMemo } from "react";
-import { Item } from "react-stately";
-import { Button, Checkbox, Link, RACDialogTrigger } from "@/components/ui";
 import {
-  Check,
-  CircleEllipsis,
-  Clock,
-  MessageSquare,
-  Trash,
-} from "lucide-react";
-import {
-  GridItemInfo,
-  GridItemProgress,
   GridItemText,
+  GridItemInfo,
   GridItemTitle,
+  GridItemProgress,
 } from "@/components/common/Grid";
-import { ImageContainer } from "@/components/common/ImageContainer";
-import { ProjectGridItemLayout } from "./ProjectGridItemLayout";
+
 import {
-  ItemBaseActionMenuTrigger,
   ItemBaseBadge,
   ItemBaseButton,
-  ItemBaseDetailBottomSheetTrigger,
   ItemBaseDetailModalTrigger,
+  ItemBaseDetailBottomSheetTrigger,
 } from "@/components/common/ItemBase";
+
+import Image from "next/image";
+import { MessageSquare } from "lucide-react";
+import { useFormatter, useTranslations } from "next-intl";
 import { ProjectDetailModal } from "../ProjectDetailModal";
+import { Checkbox, RACDialogTrigger } from "@/components/ui";
+import { UnknownUser } from "@/components/common/UnknownUser";
+import { ProjectCommentsModal } from "../ProjectCommentsModal";
+import { ProjectGridItemLayout } from "./ProjectGridItemLayout";
+import { ImageContainer } from "@/components/common/ImageContainer";
+import { UserDetailModal } from "@/components/users/UserDetailModal";
 import { ProjectDetailBottomSheet } from "../ProjectDetailBottomSheet";
 import { getProjectStatusBadgeColor } from "../getProjectStatusBadgeColor";
-import { ProjectCommentsModal } from "../ProjectCommentsModal";
-import { UnknownUser } from "@/components/common/UnknownUser";
-import { UserDetailModal } from "@/components/users/UserDetailModal";
+import { ProjectItemActionMenuTrigger } from "../ProjectItemActionMenuTrigger";
 import { UserDetailBottomSheet } from "@/components/users/UserDetailBottomSheet";
 
 export interface ProjectGridItemProps {
@@ -62,16 +57,19 @@ export function ProjectGridItem({
   tasksDone,
   comments,
 }: ProjectGridItemProps) {
-  const locale = "en-GB";
+  const t = useTranslations("projects");
 
-  const formattedDeadline = useMemo(() => {
-    if (!deadline) return "";
-    return new Date(deadline).toLocaleDateString(locale, {
-      day: "2-digit",
-      month: "short",
-      year: "numeric",
-    });
-  }, [deadline, locale]);
+  const format = useFormatter();
+
+  const deadlineOn = deadline
+    ? t("ProjectGridItem.deadlineOn", {
+        date: format.dateTime(deadline, {
+          day: "2-digit",
+          month: "short",
+          year: "numeric",
+        }),
+      })
+    : t("ProjectGridItem.noDeadline");
 
   const creatorImg = creator?.imageUrl ? (
     <ImageContainer className="h-9 w-9">
@@ -84,24 +82,7 @@ export function ProjectGridItem({
   return (
     <ProjectGridItemLayout
       checkboxSlot={<Checkbox aria-label={title} />}
-      menuTriggerSlot={
-        <ItemBaseActionMenuTrigger className="-mr-2">
-          <Item textValue="Delete" key="delete">
-            <Trash size={16} /> Delete
-          </Item>
-          <Item textValue="Mark as Pending" key="pending">
-            <CircleEllipsis size={16} /> Mark as Pending
-          </Item>
-          <Item textValue="Mark as Competed" key="competed">
-            <Check size={16} />
-            Mark as Competed
-          </Item>
-          <Item textValue="Mark as Active" key="active">
-            <Clock size={16} />
-            Mark as Active
-          </Item>
-        </ItemBaseActionMenuTrigger>
-      }
+      menuTriggerSlot={<ProjectItemActionMenuTrigger className="-mr-2" />}
       titleSlot={
         <GridItemInfo className="flex-auto">
           <GridItemTitle>
@@ -122,7 +103,7 @@ export function ProjectGridItem({
             </ItemBaseDetailBottomSheetTrigger>
           </GridItemTitle>
 
-          <GridItemText>{`Deadline on ${formattedDeadline}`}</GridItemText>
+          <GridItemText>{deadlineOn}</GridItemText>
         </GridItemInfo>
       }
       creatorImageSlot={
@@ -159,14 +140,14 @@ export function ProjectGridItem({
       }
       statusSlot={
         <ItemBaseBadge color={getProjectStatusBadgeColor(status.id)}>
-          {status.name}
+          {t(`ProjectStatus.${status.id}`)}
         </ItemBaseBadge>
       }
       progressSlot={
         <GridItemProgress
           value={(tasksDone / tasks) * 100}
           showValueText={false}
-          aria-label="project progress"
+          aria-label={t("ProjectGridItem.progressAriaLabel")}
         />
       }
     />

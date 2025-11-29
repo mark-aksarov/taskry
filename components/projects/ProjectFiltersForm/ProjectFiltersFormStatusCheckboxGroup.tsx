@@ -1,25 +1,34 @@
 import { Checkbox, CheckboxGroup } from "@/components/ui";
+import { useTranslations } from "next-intl";
 
-export function ProjectFiltersFormStatusCheckboxGroup({
-  statuses,
-}: {
-  statuses: { id: string; name: string }[];
-}) {
-  if (!statuses.length) {
-    return null;
-  }
+export function ProjectFiltersFormStatusCheckboxGroup() {
+  const t = useTranslations("projects");
 
   return (
-    <CheckboxGroup label="Status">
-      {statuses.map((status) => (
-        <Checkbox
-          key={status.id}
-          value={status.id.toString()}
-          className="font-normal capitalize"
-        >
-          {status.name}
-        </Checkbox>
-      ))}
+    <CheckboxGroup
+      label={t(
+        "ProjectFiltersForm.ProjectFiltersFormStatusCheckboxGroup.label",
+      )}
+    >
+      <Checkbox
+        key="pending"
+        value="pending"
+        className="font-normal capitalize"
+      >
+        {t("ProjectStatus.pending")}
+      </Checkbox>
+
+      <Checkbox key="active" value="active" className="font-normal capitalize">
+        {t("ProjectStatus.active")}
+      </Checkbox>
+
+      <Checkbox
+        key="completed"
+        value="completed"
+        className="font-normal capitalize"
+      >
+        {t("ProjectStatus.completed")}
+      </Checkbox>
     </CheckboxGroup>
   );
 }

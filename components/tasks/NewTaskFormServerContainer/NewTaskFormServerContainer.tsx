@@ -1,30 +1,23 @@
-import { NewTaskForm } from "../NewTaskForm";
 import {
+  TaskFormBaseStatusSelect,
+  TaskFormBaseProjectSelect,
   TaskFormBaseAssigneeSelect,
   TaskFormBaseCategorySelect,
-  TaskFormBaseProjectSelect,
-  TaskFormBaseStatusSelect,
 } from "../TaskFormBase";
+
+import { NewTaskForm } from "../NewTaskForm";
 import { getUserSummaries } from "@/lib/queries/user";
 import { getProjectSummaries } from "@/lib/queries/project";
-import {
-  getTaskCategorySummaries,
-  getTaskStatusSummaries,
-} from "@/lib/queries/task";
+import { getTaskCategorySummaries } from "@/lib/queries/task";
 
 export async function NewTaskFormServerContainer() {
-  const statuses = await getTaskStatusSummaries();
   const categories = await getTaskCategorySummaries(1);
   const projects = await getProjectSummaries(1);
   const users = await getUserSummaries(1);
 
   return (
     <NewTaskForm
-      taskStatusSelect={
-        <TaskFormBaseStatusSelect
-          statuses={statuses.map((s) => ({ id: s.id, name: s.nameEn }))}
-        />
-      }
+      taskStatusSelect={<TaskFormBaseStatusSelect />}
       taskCategorySelect={
         <TaskFormBaseCategorySelect
           categories={categories.map((c) => ({ id: c.id, name: c.name }))}

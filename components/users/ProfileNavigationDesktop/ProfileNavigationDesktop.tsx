@@ -1,12 +1,14 @@
 "use client";
 
 import { Divider } from "@/components/ui";
+import { useTranslations } from "next-intl";
 import { usePathname } from "@/i18n/navigation";
 import { CalendarCheck, Info } from "lucide-react";
 import { ProfileActions } from "../ProfileActions";
 import { NavigationButton } from "@/components/common/NavigationButton";
 
 export function ProfileNavigationDesktop() {
+  const t = useTranslations("users.ProfileNavigationDesktop");
   const pathname = usePathname();
 
   return (
@@ -17,15 +19,16 @@ export function ProfileNavigationDesktop() {
         variant="secondary"
       >
         <Info size={18} strokeWidth={1.5} absoluteStrokeWidth />
-        User Information
+        {t("userInformation")}
       </NavigationButton>
+
       <NavigationButton
         href="/profile/tasks"
         isActive={pathname === "/profile/tasks"}
         variant="secondary"
       >
         <CalendarCheck size={18} strokeWidth={1.5} absoluteStrokeWidth />
-        Assigned tasks
+        {t("assignedTasks")}
       </NavigationButton>
 
       <Divider />

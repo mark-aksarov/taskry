@@ -1,17 +1,5 @@
 "use client";
 
-import Image from "next/image";
-import { useMemo } from "react";
-import { Item } from "react-stately";
-
-import {
-  Check,
-  Clock,
-  Trash,
-  CircleEllipsis,
-  MessageSquare,
-} from "lucide-react";
-
 import {
   ListItemInfo,
   ListItemText,
@@ -21,24 +9,26 @@ import {
 import {
   ItemBaseBadge,
   ItemBaseButton,
-  ItemBaseActionMenuTrigger,
   ItemBaseDetailModalTrigger,
   ItemBaseDetailBottomSheetTrigger,
 } from "@/components/common/ItemBase";
 
+import Image from "next/image";
+import { MessageSquare } from "lucide-react";
 import { TaskDetailModal } from "../TaskDetailModal";
+import { TaskCommentsModal } from "../TaskCommentsModal";
 import { TaskListItemLayout } from "./TaskListItemLayout";
+import { useFormatter, useTranslations } from "next-intl";
 import { Checkbox, RACDialogTrigger } from "@/components/ui";
+import { UnknownUser } from "@/components/common/UnknownUser";
 import { TaskDetailBottomSheet } from "../TaskDetailBottomSheet";
 import { ImageContainer } from "@/components/common/ImageContainer";
-
-import { TaskCommentsModal } from "../TaskCommentsModal";
-import { UnknownUser } from "@/components/common/UnknownUser";
 import { UserDetailModal } from "@/components/users/UserDetailModal";
 import { getTaskStatusBadgeColor } from "../getTaskStatusBadgeColor";
+import { TaskItemActionMenuTrigger } from "../TaskItemActionMenuTrigger";
 import { ProjectDetailModal } from "@/components/projects/ProjectDetailModal";
 
-interface TaskListItemProps {
+export interface TaskListItemProps {
   id: number;
   title: string;
   deadline?: Date;
@@ -74,17 +64,19 @@ export const TaskListItem = ({
   comments,
   showCheckbox,
 }: TaskListItemProps) => {
-  const locale = "en-GB";
+  const t = useTranslations("tasks");
 
-  const formattedDeadline = useMemo(() => {
-    if (!deadline) return "";
+  const format = useFormatter();
 
-    return new Date(deadline).toLocaleDateString(locale, {
-      day: "2-digit",
-      month: "short",
-      year: "numeric",
-    });
-  }, [deadline, locale]);
+  const deadlineOn = deadline
+    ? t("TaskListItem.deadlineOn", {
+        date: format.dateTime(deadline, {
+          day: "2-digit",
+          month: "short",
+          year: "numeric",
+        }),
+      })
+    : t("TaskListItem.noDeadline");
 
   const assigneeImg = assignee?.imageUrl ? (
     <ImageContainer className="h-9 w-9">
@@ -116,7 +108,8 @@ export const TaskListItem = ({
               {title}
             </ItemBaseDetailBottomSheetTrigger>
           </ListItemTitle>
-          <ListItemText>{`Deadline on ${formattedDeadline}`}</ListItemText>
+
+          <ListItemText>{deadlineOn}</ListItemText>
         </ListItemInfo>
       }
       assigneeSlot={
@@ -142,18 +135,18 @@ export const TaskListItem = ({
                   {assignee.fullName}
                 </ItemBaseDetailModalTrigger>
               ) : (
-                "Unknown assignee"
+                t("TaskListItem.unknownAssignee")
               )}
             </ListItemTitle>
-            <ListItemText>Assignee</ListItemText>
+
+            <ListItemText>{t("TaskListItem.assignee")}</ListItemText>
           </ListItemInfo>
         </>
       }
       categorySlot={
         <ListItemInfo className="@max-3xl:hidden">
           <ListItemTitle>{category.name}</ListItemTitle>
-
-          <ListItemText>Category</ListItemText>
+          <ListItemText>{t("TaskListItem.category")}</ListItemText>
         </ListItemInfo>
       }
       projectSlot={
@@ -166,7 +159,7 @@ export const TaskListItem = ({
               {project.title}
             </ItemBaseDetailModalTrigger>
           </ListItemTitle>
-          <ListItemText>Project</ListItemText>
+          <ListItemText>{t("TaskListItem.project")}</ListItemText>
         </ListItemInfo>
       }
       statusSlot={
@@ -174,7 +167,7 @@ export const TaskListItem = ({
           className="@max-lg:hidden"
           color={getTaskStatusBadgeColor(status.id)}
         >
-          {status.name}
+          {t(`TaskStatus.${status.id}`)}
         </ItemBaseBadge>
       }
       commentsModalTriggerSlot={
@@ -188,24 +181,7 @@ export const TaskListItem = ({
           <TaskCommentsModal taskId={id} />
         </RACDialogTrigger>
       }
-      menuTriggerSlot={
-        <ItemBaseActionMenuTrigger>
-          <Item textValue="Delete" key="delete">
-            <Trash size={16} /> Delete
-          </Item>
-          <Item textValue="Mark as Pending" key="pending">
-            <CircleEllipsis size={16} /> Mark as Pending
-          </Item>
-          <Item textValue="Mark as Done" key="done">
-            <Check size={16} />
-            Mark as Done
-          </Item>
-          <Item textValue="Mark as Active" key="active">
-            <Clock size={16} />
-            Mark as Active
-          </Item>
-        </ItemBaseActionMenuTrigger>
-      }
+      menuTriggerSlot={<TaskItemActionMenuTrigger />}
     />
   );
 };

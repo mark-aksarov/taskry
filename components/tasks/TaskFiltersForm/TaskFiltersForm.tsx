@@ -31,11 +31,11 @@ export function TaskFiltersForm({
 
         {categoryCheckboxGroup}
         <Divider />
+
         {projectCheckboxGroup}
         <Divider />
 
         {assigneeCheckboxGroup}
-        <Divider />
       </div>
     </RACForm>
   );

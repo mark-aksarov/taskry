@@ -1,29 +1,33 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { usePathname } from "@/i18n/navigation";
 
 export function AppHeaderTitle() {
   const pathname = usePathname();
+  const t = useTranslations("layout.AppHeader.title");
 
-  let title = "Dashboard";
+  let title = t("dashboard");
 
   if (pathname === "/projects") {
-    title = "All Projects";
+    title = t("projects");
   } else if (pathname === "/tasks") {
-    title = "All Tasks";
+    title = t("tasks");
   } else if (pathname === "/team") {
-    title = "Team";
+    title = t("team");
   } else if (pathname === "/customers") {
-    title = "All Customers";
+    title = t("customers");
   } else if (pathname === "/profile" || pathname === "/profile/tasks") {
-    title = "Profile Settings";
+    title = t("profileSettings");
   } else if (pathname.match("/tasks/[0-9]+")) {
-    title = "Task Details";
+    title = t("taskDetails");
+  } else if (pathname.match("/projects/[0-9]+")) {
+    title = t("projectDetails");
   } else if (
     pathname?.startsWith("/team/") &&
     (pathname.split("/").length === 3 || pathname.endsWith("/tasks"))
   ) {
-    title = "User Information";
+    title = t("userInfo");
   }
 
   return <h2 className="text-xl font-extrabold">{title}</h2>;

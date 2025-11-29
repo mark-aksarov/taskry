@@ -3,7 +3,9 @@ import {
   ToolbarMobileBottom,
   ToolbarMobileHeading,
 } from "@/components/common/Toolbar";
+
 import { Suspense } from "react";
+import { useTranslations } from "next-intl";
 import { Card } from "@/components/common/Card";
 import { PageGrid } from "@/components/common/PageGrid";
 import { PageContainer } from "@/components/common/PageContainer";
@@ -25,6 +27,8 @@ export function ProfilePage({
   UserDetailContainer,
   UserHeaderContainer,
 }: ProfilePageProps) {
+  const t = useTranslations("app.ProfilePage");
+
   return (
     <PageContainer>
       <UserDetailCard
@@ -43,7 +47,7 @@ export function ProfilePage({
 
       <PageGrid className="md:hidden">
         <ToolbarMobileTop>
-          <ToolbarMobileHeading>Profile Settings</ToolbarMobileHeading>
+          <ToolbarMobileHeading>{t("heading")}</ToolbarMobileHeading>
         </ToolbarMobileTop>
 
         <ToolbarMobileBottom>

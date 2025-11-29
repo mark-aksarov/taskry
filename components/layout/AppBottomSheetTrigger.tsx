@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import { Menu } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useOverlayTrigger } from "react-aria";
 import { useOverlayTriggerState } from "react-stately";
 import { Button, BottomSheet, Dialog, DialogBody } from "@/components/ui";
@@ -11,6 +12,8 @@ export function AppBottomSheetTrigger({
 }: {
   appNavigation: React.ReactNode;
 }) {
+  const t = useTranslations("layout.AppBottomSheetTrigger");
+
   const triggerRef = useRef<HTMLButtonElement>(null);
   const state = useOverlayTriggerState({});
   const { triggerProps } = useOverlayTrigger({ type: "dialog" }, state);
@@ -20,7 +23,7 @@ export function AppBottomSheetTrigger({
       <Button
         {...triggerProps}
         ref={triggerRef}
-        aria-label="language"
+        aria-label={t("triggerAriaLabel")}
         variant="ghost"
         iconLeft={<Menu size={16} strokeWidth={1.5} absoluteStrokeWidth />}
         className="rounded-full p-3"
@@ -28,7 +31,7 @@ export function AppBottomSheetTrigger({
 
       <BottomSheet isDismissable state={state}>
         <Dialog
-          aria-label="App navigation"
+          aria-label={t("dialogAriaLabel")}
           className="max-h-[calc(100dvh-64px)]"
         >
           <DialogBody className="px-3 py-4">{appNavigation}</DialogBody>

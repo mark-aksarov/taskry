@@ -27,15 +27,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    statusSelect: (
-      <ProjectDetailFormStatusSelect
-        statuses={[
-          { id: "pending", name: "Pending" },
-          { id: "active", name: "Active" },
-          { id: "completed", name: "Completed" },
-        ]}
-      />
-    ),
+    statusSelect: <ProjectDetailFormStatusSelect />,
     categorySelect: (
       <ProjectDetailFormCategorySelect
         categories={[

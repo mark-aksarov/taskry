@@ -4,26 +4,27 @@ import {
   GridItemInfo,
   GridItemText,
   GridItemTitle,
-  GridItemContactList,
   GridItemContact,
-  GridItemContactIconWrapper,
+  GridItemContactList,
   GridItemContactText,
+  GridItemContactIconWrapper,
 } from "@/components/common/Grid";
 
+import {
+  ItemBaseDetailModalTrigger,
+  ItemBaseDetailBottomSheetTrigger,
+} from "@/components/common/ItemBase";
+
 import Image from "next/image";
-import { Item } from "react-stately";
+import { useTranslations } from "next-intl";
+import { Link2, Mail, Phone } from "lucide-react";
+import { UserDetailModal } from "../UserDetailModal";
 import { UserGridItemLayout } from "./UserGridItemLayout";
 import { Link, Checkbox, Divider } from "@/components/ui";
-import { Link2, Mail, Pencil, Phone, Trash } from "lucide-react";
-import { ImageContainer } from "@/components/common/ImageContainer";
-import {
-  ItemBaseActionMenuTrigger,
-  ItemBaseDetailBottomSheetTrigger,
-  ItemBaseDetailModalTrigger,
-} from "@/components/common/ItemBase";
 import { UnknownUser } from "@/components/common/UnknownUser";
-import { UserDetailModal } from "../UserDetailModal";
 import { UserDetailBottomSheet } from "../UserDetailBottomSheet";
+import { ImageContainer } from "@/components/common/ImageContainer";
+import { UserItemActionMenuTrigger } from "../UserItemActionMenuTrigger";
 
 export interface UserGridItemProps {
   id: string;
@@ -46,6 +47,8 @@ export function UserGridItem({
   publicLink,
   email,
 }: UserGridItemProps) {
+  const t = useTranslations("users.UserGridItem");
+
   const contactLinkClasses = "max-w-full overflow-hidden";
 
   const userImg = imageUrl ? (
@@ -59,16 +62,7 @@ export function UserGridItem({
   return (
     <UserGridItemLayout
       checkboxSlot={<Checkbox aria-label={`${fullName} checkbox`} />}
-      actionMenuSlot={
-        <ItemBaseActionMenuTrigger>
-          <Item textValue="Edit" key="edit">
-            <Pencil size={16} /> Edit
-          </Item>
-          <Item textValue="Delete" key="delete">
-            <Trash size={16} /> Delete
-          </Item>
-        </ItemBaseActionMenuTrigger>
-      }
+      actionMenuSlot={<UserItemActionMenuTrigger className="-mr-2" />}
       imageSlot={
         <>
           <ItemBaseDetailModalTrigger modal={<UserDetailModal userId={id} />}>
@@ -105,7 +99,7 @@ export function UserGridItem({
           </GridItemTitle>
 
           <GridItemText>
-            {position ? position.name : "Unknown position"}
+            {position ? position.name : t("unknownPosition")}
           </GridItemText>
         </GridItemInfo>
       }
@@ -127,7 +121,7 @@ export function UserGridItem({
                 <GridItemContactIconWrapper>
                   <Phone size={16} strokeWidth={1.5} absoluteStrokeWidth />
                 </GridItemContactIconWrapper>
-                <GridItemContactText>No phone</GridItemContactText>
+                <GridItemContactText>{t("noPhoneNumber")}</GridItemContactText>
               </GridItemContact>
             )}
 
@@ -145,7 +139,7 @@ export function UserGridItem({
                 <GridItemContactIconWrapper>
                   <Link2 size={16} strokeWidth={1.5} absoluteStrokeWidth />
                 </GridItemContactIconWrapper>
-                <GridItemContactText>No public link</GridItemContactText>
+                <GridItemContactText>{t("noPublicLink")}</GridItemContactText>
               </GridItemContact>
             )}
 

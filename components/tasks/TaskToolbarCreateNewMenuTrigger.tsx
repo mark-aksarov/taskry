@@ -7,6 +7,7 @@ import {
   DialogCloseButton,
 } from "@/components/ui";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { Key, useOverlayTrigger } from "react-aria";
 import { Blocks, CalendarCheck, Plus } from "lucide-react";
 import { Item, useOverlayTriggerState } from "react-stately";
@@ -26,6 +27,7 @@ export function TaskToolbarCreateNewMenuTrigger({
   const { triggerProps } = useOverlayTrigger({ type: "dialog" }, state);
   const [openTaskModal, setOpenTaskModal] = useState(false);
   const [openTaskCategoryModal, setOpenTaskCategoryModal] = useState(false);
+  const t = useTranslations("tasks.TaskToolbarCreateNewMenuTrigger");
 
   function handleAction(key: Key) {
     if (key === "task") {
@@ -41,7 +43,7 @@ export function TaskToolbarCreateNewMenuTrigger({
         onAction={handleAction}
         renderDialogHeader={() => (
           <DialogHeader>
-            <DialogHeading>Create New</DialogHeading>
+            <DialogHeading>{t("dialogHeading")}</DialogHeading>
             <DialogCloseButton />
           </DialogHeader>
         )}
@@ -49,17 +51,19 @@ export function TaskToolbarCreateNewMenuTrigger({
         renderButton={() => (
           <Button
             {...triggerProps}
-            label="Create New"
+            label={t("label")}
             iconLeft={<Plus size={16} strokeWidth={1.5} absoluteStrokeWidth />}
           />
         )}
         placement="bottom right"
       >
-        <Item textValue="Task" key="task">
-          <CalendarCheck size={16} strokeWidth={1.5} absoluteStrokeWidth /> Task
+        <Item textValue={t("items.task")} key="task">
+          <CalendarCheck size={16} strokeWidth={1.5} absoluteStrokeWidth />
+          {t("items.task")}
         </Item>
-        <Item textValue="Category" key="category">
-          <Blocks size={16} strokeWidth={1.5} absoluteStrokeWidth /> Category
+        <Item textValue={t("items.category")} key="category">
+          <Blocks size={16} strokeWidth={1.5} absoluteStrokeWidth />
+          {t("items.category")}
         </Item>
       </ResponsiveMenuTrigger>
 

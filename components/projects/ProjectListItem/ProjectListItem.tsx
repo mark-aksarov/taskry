@@ -1,37 +1,32 @@
 "use client";
 
-import { useMemo } from "react";
-import { Link, RACDialogTrigger } from "@/components/ui";
-import {
-  Check,
-  CircleEllipsis,
-  Clock,
-  MessageSquare,
-  Trash,
-} from "lucide-react";
-import { Item } from "react-stately";
-import { Checkbox } from "@/components/ui";
 import {
   ListItemInfo,
   ListItemText,
   ListItemTitle,
 } from "@/components/common/List/index";
-import { ProjectListItemLayout } from "./ProjectListItemLayout";
-import { ImageContainer } from "@/components/common/ImageContainer";
-import Image from "next/image";
+
 import {
-  ItemBaseActionMenuTrigger,
   ItemBaseBadge,
   ItemBaseButton,
-  ItemBaseDetailBottomSheetTrigger,
   ItemBaseDetailModalTrigger,
+  ItemBaseDetailBottomSheetTrigger,
 } from "@/components/common/ItemBase";
+
+import Image from "next/image";
+import { Checkbox } from "@/components/ui";
+import { MessageSquare } from "lucide-react";
+import { Link, RACDialogTrigger } from "@/components/ui";
+import { useFormatter, useTranslations } from "next-intl";
 import { ProjectDetailModal } from "../ProjectDetailModal";
+import { UnknownUser } from "@/components/common/UnknownUser";
+import { ProjectCommentsModal } from "../ProjectCommentsModal";
+import { ProjectListItemLayout } from "./ProjectListItemLayout";
+import { ImageContainer } from "@/components/common/ImageContainer";
+import { UserDetailModal } from "@/components/users/UserDetailModal";
 import { ProjectDetailBottomSheet } from "../ProjectDetailBottomSheet";
 import { getProjectStatusBadgeColor } from "../getProjectStatusBadgeColor";
-import { ProjectCommentsModal } from "../ProjectCommentsModal";
-import { UnknownUser } from "@/components/common/UnknownUser";
-import { UserDetailModal } from "@/components/users/UserDetailModal";
+import { ProjectItemActionMenuTrigger } from "../ProjectItemActionMenuTrigger";
 
 export interface ProjectListItemProps {
   id: number;
@@ -75,16 +70,19 @@ export const ProjectListItem = ({
   comments,
   showCheckbox,
 }: ProjectListItemProps) => {
-  const locale = "en-GB";
+  const t = useTranslations("projects");
 
-  const formattedDeadline = useMemo(() => {
-    if (!deadline) return "";
-    return new Date(deadline).toLocaleDateString(locale, {
-      day: "2-digit",
-      month: "short",
-      year: "numeric",
-    });
-  }, [deadline, locale]);
+  const format = useFormatter();
+
+  const deadlineOn = deadline
+    ? t("ProjectListItem.deadlineOn", {
+        date: format.dateTime(deadline, {
+          day: "2-digit",
+          month: "short",
+          year: "numeric",
+        }),
+      })
+    : t("ProjectListItem.noDeadline");
 
   const creatorImg = creator?.imageUrl ? (
     <ImageContainer className="h-9 w-9">
@@ -116,7 +114,7 @@ export const ProjectListItem = ({
               {title}
             </ItemBaseDetailBottomSheetTrigger>
           </ListItemTitle>
-          <ListItemText>{`Deadline on ${formattedDeadline}`}</ListItemText>
+          <ListItemText>{deadlineOn}</ListItemText>
         </ListItemInfo>
       }
       creatorSlot={
@@ -142,10 +140,10 @@ export const ProjectListItem = ({
                   {creator.fullName}
                 </ItemBaseDetailModalTrigger>
               ) : (
-                "Unknown creator"
+                t("ProjectListItem.unknownCreator")
               )}
             </ListItemTitle>
-            <ListItemText>Creator</ListItemText>
+            <ListItemText>{t("ProjectListItem.creator")}</ListItemText>
           </ListItemInfo>
         </>
       }
@@ -169,11 +167,11 @@ export const ProjectListItem = ({
                   {customer.fullName}
                 </Link>
               ) : (
-                "Unknown customer"
+                t("ProjectListItem.unknownCustomer")
               )}
             </ListItemTitle>
 
-            <ListItemText>Customer</ListItemText>
+            <ListItemText>{t("ProjectListItem.creator")}</ListItemText>
           </ListItemInfo>
         </>
       }
@@ -181,16 +179,16 @@ export const ProjectListItem = ({
         <ListItemInfo className="@max-4xl:hidden">
           <ListItemTitle>{category.name}</ListItemTitle>
 
-          <ListItemText>Category</ListItemText>
+          <ListItemText>{t("ProjectListItem.category")}</ListItemText>
         </ListItemInfo>
       }
       companySlot={
         <ListItemInfo className="@max-5xl:hidden">
           <ListItemTitle>
-            {company ? company.name : "Unknown company"}
+            {company ? company.name : t("ProjectListItem.unknownCompany")}
           </ListItemTitle>
 
-          <ListItemText>Company</ListItemText>
+          <ListItemText>{t("ProjectListItem.company")}</ListItemText>
         </ListItemInfo>
       }
       statusSlot={
@@ -198,7 +196,7 @@ export const ProjectListItem = ({
           className="@max-lg:hidden"
           color={getProjectStatusBadgeColor(status.id)}
         >
-          {status.name}
+          {t(`ProjectStatus.${status.id}`)}
         </ItemBaseBadge>
       }
       commentsModalTriggerSlot={
@@ -212,24 +210,7 @@ export const ProjectListItem = ({
           <ProjectCommentsModal projectId={id} />
         </RACDialogTrigger>
       }
-      menuTriggerSlot={
-        <ItemBaseActionMenuTrigger>
-          <Item textValue="Delete" key="delete">
-            <Trash size={16} /> Delete
-          </Item>
-          <Item textValue="Mark as Pending" key="pending">
-            <CircleEllipsis size={16} /> Mark as Pending
-          </Item>
-          <Item textValue="Mark as Competed" key="competed">
-            <Check size={16} />
-            Mark as Competed
-          </Item>
-          <Item textValue="Mark as Active" key="active">
-            <Clock size={16} />
-            Mark as Active
-          </Item>
-        </ItemBaseActionMenuTrigger>
-      }
+      menuTriggerSlot={<ProjectItemActionMenuTrigger />}
     />
   );
 };

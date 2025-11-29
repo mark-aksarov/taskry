@@ -11,12 +11,15 @@ import {
   DialogCloseButton,
 } from "@/components/ui";
 
+import { useTranslations } from "next-intl";
 import { Suspense, useContext } from "react";
 import { UserDetailSkeleton } from "@/components/users/UserDetail";
 import { PersonHeaderSkeleton } from "@/components/common/PersonHeader";
 import { UserDetailClientContainerContext } from "../UserDetailClientContainer";
 
 export function UserDetailModal({ userId }: { userId: string }) {
+  const t = useTranslations("users.UserDetailModal");
+
   const UserDetailClientContainer = useContext(
     UserDetailClientContainerContext,
   );
@@ -25,7 +28,7 @@ export function UserDetailModal({ userId }: { userId: string }) {
     <Modal isDismissable className="w-[600px]">
       <Dialog className="max-h-[calc(100dvh-64px)]">
         <DialogHeader>
-          <DialogHeading>Task Details</DialogHeading>
+          <DialogHeading>{t("dialogHeading")}</DialogHeading>
           <DialogCloseButton />
         </DialogHeader>
         <DialogBody>
@@ -46,7 +49,7 @@ export function UserDetailModal({ userId }: { userId: string }) {
             href={`/team/${userId}`}
             variant="primary"
             size="medium"
-            label="Open in Full Page"
+            label={t("openInFullPage")}
             className="w-full justify-center"
           />
         </DialogFooter>

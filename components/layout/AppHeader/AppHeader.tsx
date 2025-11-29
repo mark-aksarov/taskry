@@ -1,9 +1,10 @@
-import { Search, Sun } from "lucide-react";
 import { Button } from "@/components/ui";
-import { SearchForm } from "../SearchForm";
-import { LangMenuPopoverTrigger } from "../LangMenuTrigger";
+import { Search } from "lucide-react";
 import { ProfileLink } from "../ProfileLink";
 import { AppHeaderTitle } from "./AppHeaderTitle";
+import { AppHeaderSearchForm } from "./AppHeaderSearchForm";
+import { AppHeaderLangMenuTrigger } from "./AppHeaderLangMenuTrigger";
+import { AppHeaderThemeToggleButton } from "./AppHeaderThemeToggleButton";
 
 interface AppHeaderProps {
   notificationModalTrigger: React.ReactNode;
@@ -29,15 +30,12 @@ export const AppHeader = ({
             </div>
           }
           <div className="flex flex-auto items-center justify-end gap-4">
-            <SearchForm />
+            <AppHeaderSearchForm />
             {notificationModalTrigger}
-            <Button
-              aria-label="theme"
-              variant="ghost"
-              iconLeft={<Sun size={16} strokeWidth={1.5} absoluteStrokeWidth />}
-              className={buttonClasses}
-            />
-            <LangMenuPopoverTrigger />
+
+            <AppHeaderThemeToggleButton className={buttonClasses} />
+
+            <AppHeaderLangMenuTrigger />
             <ProfileLink />
           </div>
         </div>

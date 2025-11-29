@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import { useMemo } from "react";
 import { Link } from "@/components/ui";
 import { ReplyButton } from "../ReplyButton";
 import { CommentItemDate } from "./CommentItemDate";
@@ -10,9 +9,10 @@ import { CommentItemInfo } from "./CommentItemInfo";
 import { CommentItemTitle } from "./CommentItemTitle";
 import { CommentItemLayout } from "./CommentItemLayout";
 import { CommentItemActions } from "./CommentItemActions";
+import { useFormatter, useTranslations } from "next-intl";
+import { UnknownUser } from "@/components/common/UnknownUser";
 import { ImageContainer } from "@/components/common/ImageContainer";
 import { Attachment, Attachments } from "@/components/attachments/Attachments";
-import { UnknownUser } from "@/components/common/UnknownUser";
 
 interface CommentItemProps {
   content: string;
@@ -34,18 +34,18 @@ export function CommentItem({
   attachments,
   sender,
 }: CommentItemProps) {
-  const formattedDate = useMemo(() => {
-    if (!createdAt) return null;
+  const t = useTranslations("comments.CommentItem");
 
-    return createdAt.toLocaleString("en-GB", {
-      day: "numeric",
-      month: "long",
-      year: "numeric",
-      hour: "numeric",
-      minute: "2-digit",
-      hour12: true,
-    });
-  }, [createdAt]);
+  const format = useFormatter();
+
+  const formattedDate = format.dateTime(new Date(createdAt), {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+    hour: "numeric",
+    minute: "2-digit",
+    hour12: true,
+  });
 
   return (
     <CommentItemLayout
@@ -64,7 +64,7 @@ export function CommentItem({
         <CommentItemInfo>
           <CommentItemTitle>
             {!sender ? (
-              "Unknow user"
+              t("unknownUser")
             ) : (
               <Link href={`/users/${sender.id}`}>{sender.fullName}</Link>
             )}

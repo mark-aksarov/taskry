@@ -1,7 +1,8 @@
 "use client";
 
-import { ToggleButton, ToggleButtonGroup } from "@/components/ui";
+import { useTranslations } from "next-intl";
 import { useViewMode, ViewMode } from "./ViewModeContext";
+import { ToggleButton, ToggleButtonGroup } from "@/components/ui";
 
 export const ViewModeToggleButtonGroup = ({
   className,
@@ -9,6 +10,7 @@ export const ViewModeToggleButtonGroup = ({
   className?: string;
 }) => {
   const { viewMode, setViewMode } = useViewMode();
+  const t = useTranslations("common.ViewModeToggleButtonGroup");
 
   return (
     <ToggleButtonGroup
@@ -22,8 +24,8 @@ export const ViewModeToggleButtonGroup = ({
         setViewMode(key as ViewMode);
       }}
     >
-      <ToggleButton id="list">List</ToggleButton>
-      <ToggleButton id="grid">Grid</ToggleButton>
+      <ToggleButton id="list">{t("list")}</ToggleButton>
+      <ToggleButton id="grid">{t("grid")}</ToggleButton>
     </ToggleButtonGroup>
   );
 };

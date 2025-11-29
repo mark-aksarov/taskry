@@ -13,6 +13,7 @@ import {
 } from "@/components/common/Toolbar";
 
 import { Suspense } from "react";
+import { useTranslations } from "next-intl";
 import { PageGrid } from "@/components/common/PageGrid";
 import { PageContainer } from "@/components/common/PageContainer";
 import { TaskFormBaseSkeleton } from "@/components/tasks/TaskFormBase";
@@ -37,13 +38,15 @@ export function UserTasksPageLayout({
   navigationDesktop,
   navigationMobile,
 }: UserTasksPageLayoutProps) {
+  const t = useTranslations("users.UserTasksPageLayout");
+
   return (
     <>
       <PageContainer className="max-md:hidden">
         <UserCard>
           <UserCardLeft>
             <UserCardHeader>
-              <UserCardTitle>Assigned tasks</UserCardTitle>
+              <UserCardTitle>{t("title")}</UserCardTitle>
               <div className="flex gap-4">
                 <TaskToolbarSortingMenuTrigger />
                 <TaskToolbarActionsMenuTrigger />
@@ -69,7 +72,7 @@ export function UserTasksPageLayout({
       <PageContainer className="md:hidden">
         <PageGrid>
           <ToolbarMobileTop>
-            <ToolbarMobileHeading>Assigned tasks</ToolbarMobileHeading>
+            <ToolbarMobileHeading>{t("title")}</ToolbarMobileHeading>
             <TaskToolbarSortingMenuTrigger />
             <TaskToolbarActionsMenuTrigger />
           </ToolbarMobileTop>

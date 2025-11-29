@@ -29,7 +29,7 @@ export const Default = {
             fullName: "Alice Johnson",
             imageUrl: "/woman.jpg",
           }}
-          actionText="added a new task"
+          type="TASK_ADDED"
           target={<Link href="#">Create Landing Page</Link>}
         />
 
@@ -46,7 +46,7 @@ export const Default = {
               "I totally agree with Alice. The performance improvements are noticeable, especially in larger datasets. One suggestion though: it might be helpful to include a loading indicator when switching between tabs, since the delay can confuse first-time users.",
             attachments: [],
           }}
-          actionText="updated a project"
+          type="PROJECT_UPDATED"
           target={<Link href="#">Website Redesign</Link>}
         />
 
@@ -58,7 +58,7 @@ export const Default = {
             fullName: "Emma Brown",
             imageUrl: "/woman.jpg",
           }}
-          actionText="added a comment to"
+          type="COMMENT_ADDED"
           target={<Link href="#">Optimize SEO</Link>}
         />
 
@@ -70,7 +70,7 @@ export const Default = {
             fullName: "John Doe",
             imageUrl: "/man.jpg",
           }}
-          actionText="added a new user"
+          type="USER_ADDED"
           target={<Link href="#">Michael Scott</Link>}
         />
 
@@ -82,7 +82,7 @@ export const Default = {
             fullName: "Pam Beesly",
             imageUrl: "/woman.jpg",
           }}
-          actionText="updated a customer"
+          type="CUSTOMER_ADDED"
           target={<Link href="#">Dunder Mifflin Inc.</Link>}
         />
 
@@ -94,7 +94,7 @@ export const Default = {
             fullName: "Kevin Malone",
             imageUrl: "/man.jpg",
           }}
-          actionText="deleted a task"
+          type="TASK_DELETED"
           target="Weekly Report"
         />
 
@@ -106,7 +106,7 @@ export const Default = {
             fullName: "Dwight Schrute",
             imageUrl: "/man.jpg",
           }}
-          actionText="deleted a project"
+          type="PROJECT_DELETED"
           target="Sales Dashboard"
         />
 
@@ -118,7 +118,7 @@ export const Default = {
             fullName: "Angela Martin",
             imageUrl: "/woman.jpg",
           }}
-          actionText="updated a task"
+          type="TASK_UPDATED"
           target={<Link href="#">Budget Review</Link>}
         />
 
@@ -130,7 +130,7 @@ export const Default = {
             fullName: "Stanley Hudson",
             imageUrl: "/man.jpg",
           }}
-          actionText="replied to a comment in"
+          type="COMMENT_REPLIED"
           target={<Link href="#">Mobile App Launch</Link>}
         />
 
@@ -142,7 +142,7 @@ export const Default = {
             fullName: "Jim Halpert",
             imageUrl: "/man.jpg",
           }}
-          actionText="updated a user"
+          type="USER_UPDATED"
           target={<Link href="#">Alice Johnson</Link>}
         />
       </>

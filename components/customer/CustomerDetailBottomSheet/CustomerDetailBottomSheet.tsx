@@ -15,6 +15,7 @@ import { OverlayTriggerState } from "react-stately";
 import { PersonHeaderSkeleton } from "@/components/common/PersonHeader";
 import { CustomerDetailSkeleton } from "@/components/customer/CustomerDetail";
 import { CustomerDetailClientContainerContext } from "../CustomerDetailClientContainer";
+import { useTranslations } from "next-intl";
 
 export interface CustomerDetailBottomSheetProps {
   customerId: number;
@@ -25,6 +26,8 @@ export function CustomerDetailBottomSheet({
   customerId,
   state,
 }: CustomerDetailBottomSheetProps) {
+  const t = useTranslations("customers.CustomerDetailBottomSheet");
+
   const CustomerDetailClientContainer = useContext(
     CustomerDetailClientContainerContext,
   );
@@ -33,7 +36,7 @@ export function CustomerDetailBottomSheet({
     <BottomSheet isDismissable state={state} className="md:hidden">
       <Dialog className="max-h-[calc(100dvh-6.25rem)]">
         <DialogHeader>
-          <DialogHeading>Customer Details</DialogHeading>
+          <DialogHeading>{t("dialogHeading")}</DialogHeading>
           <DialogCloseButton />
         </DialogHeader>
         <DialogBody>
@@ -52,7 +55,7 @@ export function CustomerDetailBottomSheet({
           <Button
             variant="primary"
             size="medium"
-            label="Edit"
+            label={t("editButtonLabel")}
             className="w-full justify-center"
           />
         </DialogFooter>

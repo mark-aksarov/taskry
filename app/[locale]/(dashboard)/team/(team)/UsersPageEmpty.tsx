@@ -5,16 +5,17 @@ import {
   EmptySectionDescription,
 } from "@/components/common/EmptySection";
 import { PageContainer } from "@/components/common/PageContainer";
+import { useTranslations } from "next-intl";
 
 export function UsersPageEmpty() {
+  const t = useTranslations("app.UsersPageEmpty");
+
   return (
     <PageContainer fullscreen centered>
       <EmptySection>
-        <EmptySectionHeading>No Users yet</EmptySectionHeading>
-        <EmptySectionDescription>
-          Add a new user to start building your team
-        </EmptySectionDescription>
-        <EmptySectionButton href="#">New User</EmptySectionButton>
+        <EmptySectionHeading>{t("heading")}</EmptySectionHeading>
+        <EmptySectionDescription>{t("description")}</EmptySectionDescription>
+        <EmptySectionButton href="#">{t("addButtonLabel")}</EmptySectionButton>
       </EmptySection>
     </PageContainer>
   );
