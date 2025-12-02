@@ -1,4 +1,4 @@
-const styles = "text-sm font-semibold text-black dark:text-white";
+const styles = "text-sm font-semibold text-black dark:text-white text-wrap";
 
 interface NotificationListItemTargetProps {
   children: React.ReactNode;

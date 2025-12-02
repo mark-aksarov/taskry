@@ -245,10 +245,9 @@ model TaskStatus {
 }
 
 model Subtask {
-  id       Int      @id @default(autoincrement())
-  text     String
-  isDone   Boolean
-  deadline DateTime
+  id     Int     @id @default(autoincrement())
+  text   String
+  isDone Boolean
 
   taskId Int
 
@@ -313,10 +312,10 @@ model NotificationTarget {
   id Int @id @default(autoincrement())
 
   userId     String? @unique
-  customerId Int?    @unique
-  projectId  Int?    @unique
-  taskId     Int?    @unique
-  commentId  Int?    @unique
+  customerId Int?
+  projectId  Int?
+  taskId     Int?
+  commentId  Int?
 
   project  Project?  @relation(fields: [projectId], references: [id], onDelete: Cascade)
   task     Task?     @relation(fields: [taskId], references: [id], onDelete: Cascade)

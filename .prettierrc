@@ -3,9 +3,9 @@
   "tailwindFunctions": ["tv"],
   "overrides": [
     {
-      "files": "prisma/seed.ts",
+      "files": "prisma/seed/**/*.ts",
       "options": {
-        "printWidth": 1000
+        "printWidth": 10000
       }
     }
   ]

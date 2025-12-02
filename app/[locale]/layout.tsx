@@ -1,12 +1,12 @@
 import "../globals.css";
 
 import { routing } from "@/i18n/routing";
-import { I18nProvider } from "react-aria";
 import { notFound } from "next/navigation";
 import type { Metadata, Viewport } from "next";
 import { Nunito_Sans } from "next/font/google";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { RouterProvider } from "@/components/ui/RouterProvider";
+import { I18nProvider } from "@/components/ui/I18nProvider";
 
 const nunitoSans = Nunito_Sans({
   variable: "--font-nunito-sans",

@@ -14,7 +14,9 @@ function getTarget(notification: GetNotificationsType[number]) {
     case "TASK_ADDED":
     case "TASK_UPDATED":
       return (
-        <Link href={`/users/${target?.task?.id}`}>{target?.task?.title}</Link>
+        <Link className="inline" href={`/users/${target?.task?.id}`}>
+          {target?.task?.title}
+        </Link>
       );
     case "TASK_DELETED":
       return targetName;
@@ -22,7 +24,7 @@ function getTarget(notification: GetNotificationsType[number]) {
     case "PROJECT_ADDED":
     case "PROJECT_UPDATED":
       return (
-        <Link href={`/users/${target?.project?.id}`}>
+        <Link className="inline" href={`/users/${target?.project?.id}`}>
           {target?.project?.title}
         </Link>
       );
@@ -32,7 +34,7 @@ function getTarget(notification: GetNotificationsType[number]) {
     case "USER_ADDED":
     case "USER_UPDATED":
       return (
-        <Link href={`/users/${target?.user?.id}`}>
+        <Link className="inline" href={`/users/${target?.user?.id}`}>
           {target?.user?.fullName}
         </Link>
       );
@@ -42,7 +44,7 @@ function getTarget(notification: GetNotificationsType[number]) {
     case "CUSTOMER_ADDED":
     case "CUSTOMER_UPDATED":
       return (
-        <Link href={`/customers/${target?.customer?.id}`}>
+        <Link className="inline" href={`/customers/${target?.customer?.id}`}>
           {target?.customer?.fullName}
         </Link>
       );
@@ -53,6 +55,7 @@ function getTarget(notification: GetNotificationsType[number]) {
       const comment = target?.comment!;
       return (
         <Link
+          className="inline"
           href={`/${comment.project ? "projects" : "tasks"}?commentId=${comment.id}`}
         >
           {comment.project ? comment.project.title : comment.task!.title}
@@ -63,6 +66,7 @@ function getTarget(notification: GetNotificationsType[number]) {
       const comment = target?.comment!;
       return (
         <Link
+          className="inline"
           href={`/${comment.project ? "projects" : "tasks"}?commentId=${comment.id}`}
         >
           {comment.project ? comment.project.title : comment.task!.title}
@@ -95,6 +99,7 @@ function getComment(notification: GetNotificationsType[number]) {
 
 export async function NotificationModalContentServerContainer() {
   const notifications: GetNotificationsType = await getNotifications(1);
+  console.log(notifications);
 
   const unreadCount = notifications.filter((n) => !n.isRead).length;
 
