@@ -99,7 +99,6 @@ function getComment(notification: GetNotificationsType[number]) {
 
 export async function NotificationModalContentServerContainer() {
   const notifications: GetNotificationsType = await getNotifications(1);
-  console.log(notifications);
 
   const unreadCount = notifications.filter((n) => !n.isRead).length;
 

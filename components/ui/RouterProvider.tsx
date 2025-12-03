@@ -9,7 +9,6 @@ export function RouterProvider({ children }: { children: React.ReactNode }) {
   return (
     <ReactAriaRouterProvider
       navigate={(path: string, routerOptions: any) => {
-        console.log(path);
         router.push(path, routerOptions);
       }}
     >

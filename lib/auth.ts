@@ -27,8 +27,6 @@ export const auth = betterAuth({
     enabled: true,
     requireEmailVerification: true,
     sendResetPassword: async ({ user, url }) => {
-      console.log(1);
-
       await transporter.sendMail({
         from: process.env.SMTP_USER,
         to: user.email,
