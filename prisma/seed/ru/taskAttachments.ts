@@ -1,702 +1,604 @@
+const prefix = `${process.env.S3_ENDPOINT}/${process.env.S3_BUCKET}/`;
+
 export const taskAttachments = [
   {
     id: 81,
-    fileUrl: "S3_URL/task_1_attachment_1.jpg",
-    fileName: "task_1_attachment_1.jpg",
-
+    fileUrl: `${prefix}Task1_TechnicalSpecification.docx`,
+    fileName: "Task1_TechnicalSpecification.docx",
     taskId: 1,
   },
   {
     id: 82,
-    fileUrl: "S3_URL/task_1_attachment_2.jpg",
-    fileName: "task_1_attachment_2.jpg",
-
+    fileUrl: `${prefix}Task1_Summary.docx`,
+    fileName: "Task1_Summary.docx",
     taskId: 1,
   },
   {
     id: 83,
-    fileUrl: "S3_URL/task_2_attachment_1.jpg",
-    fileName: "task_2_attachment_1.jpg",
-
+    fileUrl: `${prefix}Task2_TechnicalSpecification.docx`,
+    fileName: "Task2_TechnicalSpecification.docx",
     taskId: 2,
   },
   {
     id: 84,
-    fileUrl: "S3_URL/task_2_attachment_2.jpg",
-    fileName: "task_2_attachment_2.jpg",
-
+    fileUrl: `${prefix}Task2_Summary.docx`,
+    fileName: "Task2_Summary.docx",
     taskId: 2,
   },
   {
     id: 85,
-    fileUrl: "S3_URL/task_3_attachment_1.jpg",
-    fileName: "task_3_attachment_1.jpg",
-
+    fileUrl: `${prefix}Task3_TechnicalSpecification.docx`,
+    fileName: "Task3_TechnicalSpecification.docx",
     taskId: 3,
   },
   {
     id: 86,
-    fileUrl: "S3_URL/task_3_attachment_2.jpg",
-    fileName: "task_3_attachment_2.jpg",
-
+    fileUrl: `${prefix}Task3_Summary.docx`,
+    fileName: "Task3_Summary.docx",
     taskId: 3,
   },
   {
     id: 87,
-    fileUrl: "S3_URL/task_4_attachment_1.jpg",
-    fileName: "task_4_attachment_1.jpg",
-
+    fileUrl: `${prefix}Task4_TechnicalSpecification.docx`,
+    fileName: "Task4_TechnicalSpecification.docx",
     taskId: 4,
   },
   {
     id: 88,
-    fileUrl: "S3_URL/task_4_attachment_2.jpg",
-    fileName: "task_4_attachment_2.jpg",
-
+    fileUrl: `${prefix}Task4_Summary.docx`,
+    fileName: "Task4_Summary.docx",
     taskId: 4,
   },
   {
     id: 89,
-    fileUrl: "S3_URL/task_5_attachment_1.jpg",
-    fileName: "task_5_attachment_1.jpg",
-
+    fileUrl: `${prefix}Task5_TechnicalSpecification.docx`,
+    fileName: "Task5_TechnicalSpecification.docx",
     taskId: 5,
   },
   {
     id: 90,
-    fileUrl: "S3_URL/task_5_attachment_2.jpg",
-    fileName: "task_5_attachment_2.jpg",
-
+    fileUrl: `${prefix}Task5_Summary.docx`,
+    fileName: "Task5_Summary.docx",
     taskId: 5,
   },
   {
     id: 91,
-    fileUrl: "S3_URL/task_6_attachment_1.jpg",
-    fileName: "task_6_attachment_1.jpg",
-
+    fileUrl: `${prefix}Task6_TechnicalSpecification.docx`,
+    fileName: "Task6_TechnicalSpecification.docx",
     taskId: 6,
   },
   {
     id: 92,
-    fileUrl: "S3_URL/task_6_attachment_2.jpg",
-    fileName: "task_6_attachment_2.jpg",
-
+    fileUrl: `${prefix}Task6_Summary.docx`,
+    fileName: "Task6_Summary.docx",
     taskId: 6,
   },
   {
     id: 93,
-    fileUrl: "S3_URL/task_7_attachment_1.jpg",
-    fileName: "task_7_attachment_1.jpg",
-
+    fileUrl: `${prefix}Task7_TechnicalSpecification.docx`,
+    fileName: "Task7_TechnicalSpecification.docx",
     taskId: 7,
   },
   {
     id: 94,
-    fileUrl: "S3_URL/task_7_attachment_2.jpg",
-    fileName: "task_7_attachment_2.jpg",
-
+    fileUrl: `${prefix}Task7_Summary.docx`,
+    fileName: "Task7_Summary.docx",
     taskId: 7,
   },
   {
     id: 95,
-    fileUrl: "S3_URL/task_8_attachment_1.jpg",
-    fileName: "task_8_attachment_1.jpg",
-
+    fileUrl: `${prefix}Task8_TechnicalSpecification.docx`,
+    fileName: "Task8_TechnicalSpecification.docx",
     taskId: 8,
   },
   {
     id: 96,
-    fileUrl: "S3_URL/task_8_attachment_2.jpg",
-    fileName: "task_8_attachment_2.jpg",
-
+    fileUrl: `${prefix}Task8_Summary.docx`,
+    fileName: "Task8_Summary.docx",
     taskId: 8,
   },
   {
     id: 97,
-    fileUrl: "S3_URL/task_9_attachment_1.jpg",
-    fileName: "task_9_attachment_1.jpg",
-
+    fileUrl: `${prefix}Task9_TechnicalSpecification.docx`,
+    fileName: "Task9_TechnicalSpecification.docx",
     taskId: 9,
   },
   {
     id: 98,
-    fileUrl: "S3_URL/task_9_attachment_2.jpg",
-    fileName: "task_9_attachment_2.jpg",
-
+    fileUrl: `${prefix}Task9_Summary.docx`,
+    fileName: "Task9_Summary.docx",
     taskId: 9,
   },
   {
     id: 99,
-    fileUrl: "S3_URL/task_10_attachment_1.jpg",
-    fileName: "task_10_attachment_1.jpg",
-
+    fileUrl: `${prefix}Task10_TechnicalSpecification.docx`,
+    fileName: "Task10_TechnicalSpecification.docx",
     taskId: 10,
   },
   {
     id: 100,
-    fileUrl: "S3_URL/task_10_attachment_2.jpg",
-    fileName: "task_10_attachment_2.jpg",
-
+    fileUrl: `${prefix}Task10_Summary.docx`,
+    fileName: "Task10_Summary.docx",
     taskId: 10,
   },
   {
     id: 101,
-    fileUrl: "S3_URL/task_11_attachment_1.jpg",
-    fileName: "task_11_attachment_1.jpg",
-
+    fileUrl: `${prefix}Task11_TechnicalSpecification.docx`,
+    fileName: "Task11_TechnicalSpecification.docx",
     taskId: 11,
   },
   {
     id: 102,
-    fileUrl: "S3_URL/task_11_attachment_2.jpg",
-    fileName: "task_11_attachment_2.jpg",
-
+    fileUrl: `${prefix}Task11_Summary.docx`,
+    fileName: "Task11_Summary.docx",
     taskId: 11,
   },
   {
     id: 103,
-    fileUrl: "S3_URL/task_12_attachment_1.jpg",
-    fileName: "task_12_attachment_1.jpg",
-
+    fileUrl: `${prefix}Task12_TechnicalSpecification.docx`,
+    fileName: "Task12_TechnicalSpecification.docx",
     taskId: 12,
   },
   {
     id: 104,
-    fileUrl: "S3_URL/task_12_attachment_2.jpg",
-    fileName: "task_12_attachment_2.jpg",
-
+    fileUrl: `${prefix}Task12_Summary.docx`,
+    fileName: "Task12_Summary.docx",
     taskId: 12,
   },
   {
     id: 105,
-    fileUrl: "S3_URL/task_13_attachment_1.jpg",
-    fileName: "task_13_attachment_1.jpg",
-
+    fileUrl: `${prefix}Task13_TechnicalSpecification.docx`,
+    fileName: "Task13_TechnicalSpecification.docx",
     taskId: 13,
   },
   {
     id: 106,
-    fileUrl: "S3_URL/task_13_attachment_2.jpg",
-    fileName: "task_13_attachment_2.jpg",
-
+    fileUrl: `${prefix}Task13_Summary.docx`,
+    fileName: "Task13_Summary.docx",
     taskId: 13,
   },
   {
     id: 107,
-    fileUrl: "S3_URL/task_14_attachment_1.jpg",
-    fileName: "task_14_attachment_1.jpg",
-
+    fileUrl: `${prefix}Task14_TechnicalSpecification.docx`,
+    fileName: "Task14_TechnicalSpecification.docx",
     taskId: 14,
   },
   {
     id: 108,
-    fileUrl: "S3_URL/task_14_attachment_2.jpg",
-    fileName: "task_14_attachment_2.jpg",
-
+    fileUrl: `${prefix}Task14_Summary.docx`,
+    fileName: "Task14_Summary.docx",
     taskId: 14,
   },
   {
     id: 109,
-    fileUrl: "S3_URL/task_15_attachment_1.jpg",
-    fileName: "task_15_attachment_1.jpg",
-
+    fileUrl: `${prefix}Task15_TechnicalSpecification.docx`,
+    fileName: "Task15_TechnicalSpecification.docx",
     taskId: 15,
   },
   {
     id: 110,
-    fileUrl: "S3_URL/task_15_attachment_2.jpg",
-    fileName: "task_15_attachment_2.jpg",
-
+    fileUrl: `${prefix}Task15_Summary.docx`,
+    fileName: "Task15_Summary.docx",
     taskId: 15,
   },
   {
     id: 111,
-    fileUrl: "S3_URL/task_16_attachment_1.jpg",
-    fileName: "task_16_attachment_1.jpg",
-
+    fileUrl: `${prefix}Task16_TechnicalSpecification.docx`,
+    fileName: "Task16_TechnicalSpecification.docx",
     taskId: 16,
   },
   {
     id: 112,
-    fileUrl: "S3_URL/task_16_attachment_2.jpg",
-    fileName: "task_16_attachment_2.jpg",
-
+    fileUrl: `${prefix}Task16_Summary.docx`,
+    fileName: "Task16_Summary.docx",
     taskId: 16,
   },
   {
     id: 113,
-    fileUrl: "S3_URL/task_17_attachment_1.jpg",
-    fileName: "task_17_attachment_1.jpg",
-
+    fileUrl: `${prefix}Task17_TechnicalSpecification.docx`,
+    fileName: "Task17_TechnicalSpecification.docx",
     taskId: 17,
   },
   {
     id: 114,
-    fileUrl: "S3_URL/task_17_attachment_2.jpg",
-    fileName: "task_17_attachment_2.jpg",
-
+    fileUrl: `${prefix}Task17_Summary.docx`,
+    fileName: "Task17_Summary.docx",
     taskId: 17,
   },
   {
     id: 115,
-    fileUrl: "S3_URL/task_18_attachment_1.jpg",
-    fileName: "task_18_attachment_1.jpg",
-
+    fileUrl: `${prefix}Task18_TechnicalSpecification.docx`,
+    fileName: "Task18_TechnicalSpecification.docx",
     taskId: 18,
   },
   {
     id: 116,
-    fileUrl: "S3_URL/task_18_attachment_2.jpg",
-    fileName: "task_18_attachment_2.jpg",
-
+    fileUrl: `${prefix}Task18_Summary.docx`,
+    fileName: "Task18_Summary.docx",
     taskId: 18,
   },
   {
     id: 117,
-    fileUrl: "S3_URL/task_19_attachment_1.jpg",
-    fileName: "task_19_attachment_1.jpg",
-
+    fileUrl: `${prefix}Task19_TechnicalSpecification.docx`,
+    fileName: "Task19_TechnicalSpecification.docx",
     taskId: 19,
   },
   {
     id: 118,
-    fileUrl: "S3_URL/task_19_attachment_2.jpg",
-    fileName: "task_19_attachment_2.jpg",
-
+    fileUrl: `${prefix}Task19_Summary.docx`,
+    fileName: "Task19_Summary.docx",
     taskId: 19,
   },
   {
     id: 119,
-    fileUrl: "S3_URL/task_20_attachment_1.jpg",
-    fileName: "task_20_attachment_1.jpg",
-
+    fileUrl: `${prefix}Task20_TechnicalSpecification.docx`,
+    fileName: "Task20_TechnicalSpecification.docx",
     taskId: 20,
   },
   {
     id: 120,
-    fileUrl: "S3_URL/task_20_attachment_2.jpg",
-    fileName: "task_20_attachment_2.jpg",
-
+    fileUrl: `${prefix}Task20_Summary.docx`,
+    fileName: "Task20_Summary.docx",
     taskId: 20,
   },
   {
     id: 121,
-    fileUrl: "S3_URL/task_21_attachment_1.jpg",
-    fileName: "task_21_attachment_1.jpg",
-
+    fileUrl: `${prefix}Task21_TechnicalSpecification.docx`,
+    fileName: "Task21_TechnicalSpecification.docx",
     taskId: 21,
   },
   {
     id: 122,
-    fileUrl: "S3_URL/task_21_attachment_2.jpg",
-    fileName: "task_21_attachment_2.jpg",
-
+    fileUrl: `${prefix}Task21_Summary.docx`,
+    fileName: "Task21_Summary.docx",
     taskId: 21,
   },
   {
     id: 123,
-    fileUrl: "S3_URL/task_22_attachment_1.jpg",
-    fileName: "task_22_attachment_1.jpg",
-
+    fileUrl: `${prefix}Task22_TechnicalSpecification.docx`,
+    fileName: "Task22_TechnicalSpecification.docx",
     taskId: 22,
   },
   {
     id: 124,
-    fileUrl: "S3_URL/task_22_attachment_2.jpg",
-    fileName: "task_22_attachment_2.jpg",
-
+    fileUrl: `${prefix}Task22_Summary.docx`,
+    fileName: "Task22_Summary.docx",
     taskId: 22,
   },
   {
     id: 125,
-    fileUrl: "S3_URL/task_23_attachment_1.jpg",
-    fileName: "task_23_attachment_1.jpg",
-
+    fileUrl: `${prefix}Task23_TechnicalSpecification.docx`,
+    fileName: "Task23_TechnicalSpecification.docx",
     taskId: 23,
   },
   {
     id: 126,
-    fileUrl: "S3_URL/task_23_attachment_2.jpg",
-    fileName: "task_23_attachment_2.jpg",
-
+    fileUrl: `${prefix}Task23_Summary.docx`,
+    fileName: "Task23_Summary.docx",
     taskId: 23,
   },
   {
     id: 127,
-    fileUrl: "S3_URL/task_24_attachment_1.jpg",
-    fileName: "task_24_attachment_1.jpg",
-
+    fileUrl: `${prefix}Task24_TechnicalSpecification.docx`,
+    fileName: "Task24_TechnicalSpecification.docx",
     taskId: 24,
   },
   {
     id: 128,
-    fileUrl: "S3_URL/task_24_attachment_2.jpg",
-    fileName: "task_24_attachment_2.jpg",
-
+    fileUrl: `${prefix}Task24_Summary.docx`,
+    fileName: "Task24_Summary.docx",
     taskId: 24,
   },
   {
     id: 129,
-    fileUrl: "S3_URL/task_25_attachment_1.jpg",
-    fileName: "task_25_attachment_1.jpg",
-
+    fileUrl: `${prefix}Task25_TechnicalSpecification.docx`,
+    fileName: "Task25_TechnicalSpecification.docx",
     taskId: 25,
   },
   {
     id: 130,
-    fileUrl: "S3_URL/task_25_attachment_2.jpg",
-    fileName: "task_25_attachment_2.jpg",
-
+    fileUrl: `${prefix}Task25_Summary.docx`,
+    fileName: "Task25_Summary.docx",
     taskId: 25,
   },
   {
     id: 131,
-    fileUrl: "S3_URL/task_26_attachment_1.jpg",
-    fileName: "task_26_attachment_1.jpg",
-
+    fileUrl: `${prefix}Task26_TechnicalSpecification.docx`,
+    fileName: "Task26_TechnicalSpecification.docx",
     taskId: 26,
   },
   {
     id: 132,
-    fileUrl: "S3_URL/task_26_attachment_2.jpg",
-    fileName: "task_26_attachment_2.jpg",
-
+    fileUrl: `${prefix}Task26_Summary.docx`,
+    fileName: "Task26_Summary.docx",
     taskId: 26,
   },
   {
     id: 133,
-    fileUrl: "S3_URL/task_27_attachment_1.jpg",
-    fileName: "task_27_attachment_1.jpg",
-
+    fileUrl: `${prefix}Task27_TechnicalSpecification.docx`,
+    fileName: "Task27_TechnicalSpecification.docx",
     taskId: 27,
   },
   {
     id: 134,
-    fileUrl: "S3_URL/task_27_attachment_2.jpg",
-    fileName: "task_27_attachment_2.jpg",
-
+    fileUrl: `${prefix}Task27_Summary.docx`,
+    fileName: "Task27_Summary.docx",
     taskId: 27,
   },
   {
     id: 135,
-    fileUrl: "S3_URL/task_28_attachment_1.jpg",
-    fileName: "task_28_attachment_1.jpg",
-
+    fileUrl: `${prefix}Task28_TechnicalSpecification.docx`,
+    fileName: "Task28_TechnicalSpecification.docx",
     taskId: 28,
   },
   {
     id: 136,
-    fileUrl: "S3_URL/task_28_attachment_2.jpg",
-    fileName: "task_28_attachment_2.jpg",
-
+    fileUrl: `${prefix}Task28_Summary.docx`,
+    fileName: "Task28_Summary.docx",
     taskId: 28,
   },
   {
     id: 137,
-    fileUrl: "S3_URL/task_29_attachment_1.jpg",
-    fileName: "task_29_attachment_1.jpg",
-
+    fileUrl: `${prefix}Task29_TechnicalSpecification.docx`,
+    fileName: "Task29_TechnicalSpecification.docx",
     taskId: 29,
   },
   {
     id: 138,
-    fileUrl: "S3_URL/task_29_attachment_2.jpg",
-    fileName: "task_29_attachment_2.jpg",
-
+    fileUrl: `${prefix}Task29_Summary.docx`,
+    fileName: "Task29_Summary.docx",
     taskId: 29,
   },
   {
     id: 139,
-    fileUrl: "S3_URL/task_30_attachment_1.jpg",
-    fileName: "task_30_attachment_1.jpg",
-
+    fileUrl: `${prefix}Task30_TechnicalSpecification.docx`,
+    fileName: "Task30_TechnicalSpecification.docx",
     taskId: 30,
   },
   {
     id: 140,
-    fileUrl: "S3_URL/task_30_attachment_2.jpg",
-    fileName: "task_30_attachment_2.jpg",
-
+    fileUrl: `${prefix}Task30_Summary.docx`,
+    fileName: "Task30_Summary.docx",
     taskId: 30,
   },
   {
     id: 141,
-    fileUrl: "S3_URL/task_31_attachment_1.jpg",
-    fileName: "task_31_attachment_1.jpg",
-
+    fileUrl: `${prefix}Task31_TechnicalSpecification.docx`,
+    fileName: "Task31_TechnicalSpecification.docx",
     taskId: 31,
   },
   {
     id: 142,
-    fileUrl: "S3_URL/task_31_attachment_2.jpg",
-    fileName: "task_31_attachment_2.jpg",
-
+    fileUrl: `${prefix}Task31_Summary.docx`,
+    fileName: "Task31_Summary.docx",
     taskId: 31,
   },
   {
     id: 143,
-    fileUrl: "S3_URL/task_32_attachment_1.jpg",
-    fileName: "task_32_attachment_1.jpg",
-
+    fileUrl: `${prefix}Task32_TechnicalSpecification.docx`,
+    fileName: "Task32_TechnicalSpecification.docx",
     taskId: 32,
   },
   {
     id: 144,
-    fileUrl: "S3_URL/task_32_attachment_2.jpg",
-    fileName: "task_32_attachment_2.jpg",
-
+    fileUrl: `${prefix}Task32_Summary.docx`,
+    fileName: "Task32_Summary.docx",
     taskId: 32,
   },
   {
     id: 145,
-    fileUrl: "S3_URL/task_33_attachment_1.jpg",
-    fileName: "task_33_attachment_1.jpg",
-
+    fileUrl: `${prefix}Task33_TechnicalSpecification.docx`,
+    fileName: "Task33_TechnicalSpecification.docx",
     taskId: 33,
   },
   {
     id: 146,
-    fileUrl: "S3_URL/task_33_attachment_2.jpg",
-    fileName: "task_33_attachment_2.jpg",
-
+    fileUrl: `${prefix}Task33_Summary.docx`,
+    fileName: "Task33_Summary.docx",
     taskId: 33,
   },
   {
     id: 147,
-    fileUrl: "S3_URL/task_34_attachment_1.jpg",
-    fileName: "task_34_attachment_1.jpg",
-
+    fileUrl: `${prefix}Task34_TechnicalSpecification.docx`,
+    fileName: "Task34_TechnicalSpecification.docx",
     taskId: 34,
   },
   {
     id: 148,
-    fileUrl: "S3_URL/task_34_attachment_2.jpg",
-    fileName: "task_34_attachment_2.jpg",
-
+    fileUrl: `${prefix}Task34_Summary.docx`,
+    fileName: "Task34_Summary.docx",
     taskId: 34,
   },
   {
     id: 149,
-    fileUrl: "S3_URL/task_35_attachment_1.jpg",
-    fileName: "task_35_attachment_1.jpg",
-
+    fileUrl: `${prefix}Task35_TechnicalSpecification.docx`,
+    fileName: "Task35_TechnicalSpecification.docx",
     taskId: 35,
   },
   {
     id: 150,
-    fileUrl: "S3_URL/task_35_attachment_2.jpg",
-    fileName: "task_35_attachment_2.jpg",
-
+    fileUrl: `${prefix}Task35_Summary.docx`,
+    fileName: "Task35_Summary.docx",
     taskId: 35,
   },
   {
     id: 151,
-    fileUrl: "S3_URL/task_36_attachment_1.jpg",
-    fileName: "task_36_attachment_1.jpg",
-
+    fileUrl: `${prefix}Task36_TechnicalSpecification.docx`,
+    fileName: "Task36_TechnicalSpecification.docx",
     taskId: 36,
   },
   {
     id: 152,
-    fileUrl: "S3_URL/task_36_attachment_2.jpg",
-    fileName: "task_36_attachment_2.jpg",
-
+    fileUrl: `${prefix}Task36_Summary.docx`,
+    fileName: "Task36_Summary.docx",
     taskId: 36,
   },
   {
     id: 153,
-    fileUrl: "S3_URL/task_37_attachment_1.jpg",
-    fileName: "task_37_attachment_1.jpg",
-
+    fileUrl: `${prefix}Task37_TechnicalSpecification.docx`,
+    fileName: "Task37_TechnicalSpecification.docx",
     taskId: 37,
   },
   {
     id: 154,
-    fileUrl: "S3_URL/task_37_attachment_2.jpg",
-    fileName: "task_37_attachment_2.jpg",
-
+    fileUrl: `${prefix}Task37_Summary.docx`,
+    fileName: "Task37_Summary.docx",
     taskId: 37,
   },
   {
     id: 155,
-    fileUrl: "S3_URL/task_38_attachment_1.jpg",
-    fileName: "task_38_attachment_1.jpg",
-
+    fileUrl: `${prefix}Task38_TechnicalSpecification.docx`,
+    fileName: "Task38_TechnicalSpecification.docx",
     taskId: 38,
   },
   {
     id: 156,
-    fileUrl: "S3_URL/task_38_attachment_2.jpg",
-    fileName: "task_38_attachment_2.jpg",
-
+    fileUrl: `${prefix}Task38_Summary.docx`,
+    fileName: "Task38_Summary.docx",
     taskId: 38,
   },
   {
     id: 161,
-    fileUrl: "S3_URL/task_41_attachment_1.jpg",
-    fileName: "task_41_attachment_1.jpg",
-
+    fileUrl: `${prefix}Task41_TechnicalSpecification.docx`,
+    fileName: "Task41_TechnicalSpecification.docx",
     taskId: 41,
   },
   {
     id: 162,
-    fileUrl: "S3_URL/task_41_attachment_2.jpg",
-    fileName: "task_41_attachment_2.jpg",
-
+    fileUrl: `${prefix}Task41_Summary.docx`,
+    fileName: "Task41_Summary.docx",
     taskId: 41,
   },
   {
     id: 163,
-    fileUrl: "S3_URL/task_42_attachment_1.jpg",
-    fileName: "task_42_attachment_1.jpg",
-
+    fileUrl: `${prefix}Task42_TechnicalSpecification.docx`,
+    fileName: "Task42_TechnicalSpecification.docx",
     taskId: 42,
   },
   {
     id: 164,
-    fileUrl: "S3_URL/task_42_attachment_2.jpg",
-    fileName: "task_42_attachment_2.jpg",
-
+    fileUrl: `${prefix}Task42_Summary.docx`,
+    fileName: "Task42_Summary.docx",
     taskId: 42,
   },
   {
     id: 165,
-    fileUrl: "S3_URL/task_43_attachment_1.jpg",
-    fileName: "task_43_attachment_1.jpg",
-
+    fileUrl: `${prefix}Task43_TechnicalSpecification.docx`,
+    fileName: "Task43_TechnicalSpecification.docx",
     taskId: 43,
   },
   {
     id: 166,
-    fileUrl: "S3_URL/task_43_attachment_2.jpg",
-    fileName: "task_43_attachment_2.jpg",
-
+    fileUrl: `${prefix}Task43_Summary.docx`,
+    fileName: "Task43_Summary.docx",
     taskId: 43,
   },
   {
     id: 167,
-    fileUrl: "S3_URL/task_44_attachment_1.jpg",
-    fileName: "task_44_attachment_1.jpg",
-
+    fileUrl: `${prefix}Task44_TechnicalSpecification.docx`,
+    fileName: "Task44_TechnicalSpecification.docx",
     taskId: 44,
   },
   {
     id: 168,
-    fileUrl: "S3_URL/task_44_attachment_2.jpg",
-    fileName: "task_44_attachment_2.jpg",
-
+    fileUrl: `${prefix}Task44_Summary.docx`,
+    fileName: "Task44_Summary.docx",
     taskId: 44,
   },
   {
     id: 169,
-    fileUrl: "S3_URL/task_45_attachment_1.jpg",
-    fileName: "task_45_attachment_1.jpg",
-
+    fileUrl: `${prefix}Task45_TechnicalSpecification.docx`,
+    fileName: "Task45_TechnicalSpecification.docx",
     taskId: 45,
   },
   {
     id: 170,
-    fileUrl: "S3_URL/task_45_attachment_2.jpg",
-    fileName: "task_45_attachment_2.jpg",
-
+    fileUrl: `${prefix}Task45_Summary.docx`,
+    fileName: "Task45_Summary.docx",
     taskId: 45,
   },
   {
     id: 171,
-    fileUrl: "S3_URL/task_46_attachment_1.jpg",
-    fileName: "task_46_attachment_1.jpg",
-
+    fileUrl: `${prefix}Task46_TechnicalSpecification.docx`,
+    fileName: "Task46_TechnicalSpecification.docx",
     taskId: 46,
   },
   {
     id: 172,
-    fileUrl: "S3_URL/task_46_attachment_2.jpg",
-    fileName: "task_46_attachment_2.jpg",
-
+    fileUrl: `${prefix}Task46_Summary.docx`,
+    fileName: "Task46_Summary.docx",
     taskId: 46,
   },
   {
     id: 173,
-    fileUrl: "S3_URL/task_47_attachment_1.jpg",
-    fileName: "task_47_attachment_1.jpg",
-
+    fileUrl: `${prefix}Task47_TechnicalSpecification.docx`,
+    fileName: "Task47_TechnicalSpecification.docx",
     taskId: 47,
   },
   {
     id: 174,
-    fileUrl: "S3_URL/task_47_attachment_2.jpg",
-    fileName: "task_47_attachment_2.jpg",
-
+    fileUrl: `${prefix}Task47_Summary.docx`,
+    fileName: "Task47_Summary.docx",
     taskId: 47,
   },
   {
     id: 175,
-    fileUrl: "S3_URL/task_48_attachment_1.jpg",
-    fileName: "task_48_attachment_1.jpg",
-
+    fileUrl: `${prefix}Task48_TechnicalSpecification.docx`,
+    fileName: "Task48_TechnicalSpecification.docx",
     taskId: 48,
   },
   {
     id: 176,
-    fileUrl: "S3_URL/task_48_attachment_2.jpg",
-    fileName: "task_48_attachment_2.jpg",
-
+    fileUrl: `${prefix}Task48_Summary.docx`,
+    fileName: "Task48_Summary.docx",
     taskId: 48,
   },
   {
     id: 177,
-    fileUrl: "S3_URL/task_49_attachment_1.jpg",
-    fileName: "task_49_attachment_1.jpg",
-
+    fileUrl: `${prefix}Task49_TechnicalSpecification.docx`,
+    fileName: "Task49_TechnicalSpecification.docx",
     taskId: 49,
   },
   {
     id: 178,
-    fileUrl: "S3_URL/task_49_attachment_2.jpg",
-    fileName: "task_49_attachment_2.jpg",
-
+    fileUrl: `${prefix}Task49_Summary.docx`,
+    fileName: "Task49_Summary.docx",
     taskId: 49,
   },
   {
     id: 179,
-    fileUrl: "S3_URL/task_50_attachment_1.jpg",
-    fileName: "task_50_attachment_1.jpg",
-
+    fileUrl: `${prefix}Task50_TechnicalSpecification.docx`,
+    fileName: "Task50_TechnicalSpecification.docx",
     taskId: 50,
   },
   {
     id: 180,
-    fileUrl: "S3_URL/task_50_attachment_2.jpg",
-    fileName: "task_50_attachment_2.jpg",
-
+    fileUrl: `${prefix}Task50_Summary.docx`,
+    fileName: "Task50_Summary.docx",
     taskId: 50,
   },
   {
     id: 157,
-    fileUrl: "S3_URL/task_51_attachment_1.jpg",
-    fileName: "task_51_attachment_1.jpg",
-
+    fileUrl: `${prefix}Task51_TechnicalSpecification.docx`,
+    fileName: "Task51_TechnicalSpecification.docx",
     taskId: 51,
   },
   {
     id: 158,
-    fileUrl: "S3_URL/task_51_attachment_2.jpg",
-    fileName: "task_51_attachment_2.jpg",
-
+    fileUrl: `${prefix}Task51_Summary.docx`,
+    fileName: "Task51_Summary.docx",
     taskId: 51,
   },
   {
     id: 159,
-    fileUrl: "S3_URL/task_52_attachment_1.jpg",
-    fileName: "task_52_attachment_1.jpg",
-
+    fileUrl: `${prefix}Task52_TechnicalSpecification.docx`,
+    fileName: "Task52_TechnicalSpecification.docx",
     taskId: 52,
   },
   {
     id: 160,
-    fileUrl: "S3_URL/task_52_attachment_2.jpg",
-    fileName: "task_52_attachment_2.jpg",
-
+    fileUrl: `${prefix}Task52_Summary.docx`,
+    fileName: "Task52_Summary.docx",
     taskId: 52,
   },
 ];

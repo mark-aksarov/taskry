@@ -1,132 +1,134 @@
+const prefix = `${process.env.S3_ENDPOINT}/${process.env.S3_BUCKET}/`;
+
 export const projectAttachments = [
   // --- Attachments for Project 41 ---
   {
     id: 181,
-    fileUrl: "S3_URL/project_41_attachment_1.jpg",
-    fileName: "project_41_attachment_1.jpg",
+    fileUrl: `${prefix}Project41_TechnicalSpecification.docx`,
+    fileName: "Project41_TechnicalSpecification.docx",
     projectId: 41,
   },
   {
     id: 182,
-    fileUrl: "S3_URL/project_41_attachment_2.jpg",
-    fileName: "project_41_attachment_2.jpg",
+    fileUrl: `${prefix}Project41_ServicesCatalog.xlsx`,
+    fileName: "Project41_ServicesCatalog.xlsx",
     projectId: 41,
   },
   // --- Attachments for Project 42 ---
   {
     id: 183,
-    fileUrl: "S3_URL/project_42_attachment_1.jpg",
-    fileName: "project_42_attachment_1.jpg",
+    fileUrl: `${prefix}Project42_TechnicalSpecification.docx`,
+    fileName: "Project42_TechnicalSpecification.docx",
     projectId: 42,
   },
   {
     id: 184,
-    fileUrl: "S3_URL/project_42_attachment_2.jpg",
-    fileName: "project_42_attachment_2.jpg",
+    fileUrl: `${prefix}Project42_ServicesCatalog.xlsx`,
+    fileName: "Project42_ServicesCatalog.xlsx",
     projectId: 42,
   },
   // --- Attachments for Project 43 ---
   {
     id: 185,
-    fileUrl: "S3_URL/project_43_attachment_1.jpg",
-    fileName: "project_43_attachment_1.jpg",
+    fileUrl: `${prefix}Project43_TechnicalSpecification.docx`,
+    fileName: "Project43_TechnicalSpecification.docx",
     projectId: 43,
   },
   {
     id: 186,
-    fileUrl: "S3_URL/project_43_attachment_2.jpg",
-    fileName: "project_43_attachment_2.jpg",
+    fileUrl: `${prefix}Project43_ServicesCatalog.xlsx`,
+    fileName: "Project43_ServicesCatalog.xlsx",
     projectId: 43,
   },
   // --- Attachments for Project 44 ---
   {
     id: 187,
-    fileUrl: "S3_URL/project_44_attachment_1.jpg",
-    fileName: "project_44_attachment_1.jpg",
+    fileUrl: `${prefix}Project44_TechnicalSpecification.docx`,
+    fileName: "Project44_TechnicalSpecification.docx",
     projectId: 44,
   },
   {
     id: 188,
-    fileUrl: "S3_URL/project_44_attachment_2.jpg",
-    fileName: "project_44_attachment_2.jpg",
+    fileUrl: `${prefix}Project44_ServicesCatalog.xlsx`,
+    fileName: "Project44_ServicesCatalog.xlsx",
     projectId: 44,
   },
   // --- Attachments for Project 45 ---
   {
     id: 189,
-    fileUrl: "S3_URL/project_45_attachment_1.jpg",
-    fileName: "project_45_attachment_1.jpg",
+    fileUrl: `${prefix}Project45_TechnicalSpecification.docx`,
+    fileName: "Project45_TechnicalSpecification.docx",
     projectId: 45,
   },
   {
     id: 190,
-    fileUrl: "S3_URL/project_45_attachment_2.jpg",
-    fileName: "project_45_attachment_2.jpg",
+    fileUrl: `${prefix}Project45_ServicesCatalog.xlsx`,
+    fileName: "Project45_ServicesCatalog.xlsx",
     projectId: 45,
   },
   // --- Attachments for Project 46 ---
   {
     id: 191,
-    fileUrl: "S3_URL/project_46_attachment_1.jpg",
-    fileName: "project_46_attachment_1.jpg",
+    fileUrl: `${prefix}Project46_TechnicalSpecification.docx`,
+    fileName: "Project46_TechnicalSpecification.docx",
     projectId: 46,
   },
   {
     id: 192,
-    fileUrl: "S3_URL/project_46_attachment_2.jpg",
-    fileName: "project_46_attachment_2.jpg",
+    fileUrl: `${prefix}Project46_ServicesCatalog.xlsx`,
+    fileName: "Project46_ServicesCatalog.xlsx",
     projectId: 46,
   },
   // --- Attachments for Project 47 ---
   {
     id: 193,
-    fileUrl: "S3_URL/project_47_attachment_1.jpg",
-    fileName: "project_47_attachment_1.jpg",
+    fileUrl: `${prefix}Project47_TechnicalSpecification.docx`,
+    fileName: "Project47_TechnicalSpecification.docx",
     projectId: 47,
   },
   {
     id: 194,
-    fileUrl: "S3_URL/project_47_attachment_2.jpg",
-    fileName: "project_47_attachment_2.jpg",
+    fileUrl: `${prefix}Project47_ServicesCatalog.xlsx`,
+    fileName: "Project47_ServicesCatalog.xlsx",
     projectId: 47,
   },
   // --- Attachments for Project 48 ---
   {
     id: 195,
-    fileUrl: "S3_URL/project_48_attachment_1.jpg",
-    fileName: "project_48_attachment_1.jpg",
+    fileUrl: `${prefix}Project48_TechnicalSpecification.docx`,
+    fileName: "Project48_TechnicalSpecification.docx",
     projectId: 48,
   },
   {
     id: 196,
-    fileUrl: "S3_URL/project_48_attachment_2.jpg",
-    fileName: "project_48_attachment_2.jpg",
+    fileUrl: `${prefix}Project48_ServicesCatalog.xlsx`,
+    fileName: "Project48_ServicesCatalog.xlsx",
     projectId: 48,
   },
   // --- Attachments for Project 49 ---
   {
     id: 197,
-    fileUrl: "S3_URL/project_49_attachment_1.jpg",
-    fileName: "project_49_attachment_1.jpg",
+    fileUrl: `${prefix}Project49_TechnicalSpecification.docx`,
+    fileName: "Project49_TechnicalSpecification.docx",
     projectId: 49,
   },
   {
     id: 198,
-    fileUrl: "S3_URL/project_49_attachment_2.jpg",
-    fileName: "project_49_attachment_2.jpg",
+    fileUrl: `${prefix}Project49_ServicesCatalog.xlsx`,
+    fileName: "Project49_ServicesCatalog.xlsx",
     projectId: 49,
   },
   // --- Attachments for Project 50 ---
   {
     id: 199,
-    fileUrl: "S3_URL/project_50_attachment_1.jpg",
-    fileName: "project_50_attachment_1.jpg",
+    fileUrl: `${prefix}Project50_TechnicalSpecification.docx`,
+    fileName: "Project50_TechnicalSpecification.docx",
     projectId: 50,
   },
   {
     id: 200,
-    fileUrl: "S3_URL/project_50_attachment_2.jpg",
-    fileName: "project_50_attachment_2.jpg",
+    fileUrl: `${prefix}Project50_ServicesCatalog.xlsx`,
+    fileName: "Project50_ServicesCatalog.xlsx",
     projectId: 50,
   },
 ];
