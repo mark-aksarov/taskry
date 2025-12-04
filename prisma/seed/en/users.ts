@@ -1,3 +1,5 @@
+const prefix = `${process.env.S3_ENDPOINT}/${process.env.S3_BUCKET}/`;
+
 export const users = [
   {
     id: "user-11",
@@ -8,7 +10,7 @@ export const users = [
     role: "Admin",
     email: "alice.johnson@corp.com",
     emailVerified: true,
-    imageUrl: null,
+    imageUrl: `${prefix}user-11.jpg`,
     phoneNumber: "+1-555-123-4567",
     publicLink: null,
     positionId: 6, // Project Manager
@@ -23,7 +25,7 @@ export const users = [
     role: "Member",
     email: "bob.smith@corp.com",
     emailVerified: true,
-    imageUrl: null,
+    imageUrl: `${prefix}user-12.jpg`,
     phoneNumber: "+1-555-987-6543",
     publicLink: null,
     positionId: 8, // Backend Developer (Assumed Backend role based on bio)
@@ -38,7 +40,7 @@ export const users = [
     role: "Member",
     email: "catherine.lee@corp.com",
     emailVerified: true,
-    imageUrl: null,
+    imageUrl: `${prefix}user-13.jpg`,
     phoneNumber: "+1-555-234-5678",
     publicLink: null,
     positionId: 10, // QA Engineer (Assumed QA/Testing role for 'Product Manager' if no PM role available)
@@ -53,7 +55,7 @@ export const users = [
     role: "Member",
     email: "david.chen@corp.com",
     emailVerified: false,
-    imageUrl: null,
+    imageUrl: `${prefix}user-14.jpg`,
     phoneNumber: "+1-555-345-6789",
     publicLink: null,
     positionId: 9, // UI/UX Designer (Best fit for Data Analyst/Designer blend)
@@ -68,7 +70,7 @@ export const users = [
     role: "Admin",
     email: "emily.white@corp.com",
     emailVerified: true,
-    imageUrl: null,
+    imageUrl: `${prefix}user-15.jpg`,
     phoneNumber: "+1-555-456-7890",
     publicLink: null,
     positionId: 8, // Backend Developer (Assumed CTO oversees Backend/Infrastructure)
@@ -83,7 +85,7 @@ export const users = [
     role: "Member",
     email: "frank.green@corp.com",
     emailVerified: true,
-    imageUrl: null,
+    imageUrl: `${prefix}user-16.jpg`,
     phoneNumber: "+1-555-567-8901",
     publicLink: null,
     positionId: 9, // UI/UX Designer
@@ -98,7 +100,7 @@ export const users = [
     role: "Member",
     email: "grace.hall@corp.com",
     emailVerified: true,
-    imageUrl: null,
+    imageUrl: `${prefix}user-17.jpg`,
     phoneNumber: "+1-555-678-9012",
     publicLink: null,
     positionId: 6, // Project Manager (Assumed PM role for 'Marketing Specialist' to cover cross-functional work)
@@ -113,7 +115,7 @@ export const users = [
     role: "Admin",
     email: "henry.miller@corp.com",
     emailVerified: true,
-    imageUrl: null,
+    imageUrl: `${prefix}user-18.jpg`,
     phoneNumber: "+1-555-789-0123",
     publicLink: null,
     positionId: 6, // Project Manager (Best fit for HR/Admin)
@@ -128,7 +130,7 @@ export const users = [
     role: "Member",
     email: "ivy.rodriguez@corp.com",
     emailVerified: false,
-    imageUrl: null,
+    imageUrl: `${prefix}user-19.jpg`,
     phoneNumber: "+1-555-890-1234",
     publicLink: null,
     positionId: 6, // Project Manager (Assumed PM role for admin/finance oversight)
@@ -143,7 +145,7 @@ export const users = [
     role: "Member",
     email: "jack.taylor@corp.com",
     emailVerified: true,
-    imageUrl: null,
+    imageUrl: `${prefix}user-20.jpg`,
     phoneNumber: "+1-555-012-3456",
     publicLink: null,
     positionId: 7, // Frontend Developer (Corrected from ID 3)
