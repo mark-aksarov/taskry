@@ -2,6 +2,9 @@ import {
   getNotifications,
   GetNotificationsType,
 } from "@/lib/queries/notification";
+
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
 import { Link } from "@/components/ui";
 import { NotificationList } from "../NotificationList";
 import { NotificationListItem } from "../NotificationListItem";
@@ -98,7 +101,13 @@ function getComment(notification: GetNotificationsType[number]) {
 }
 
 export async function NotificationModalContentServerContainer() {
-  const notifications: GetNotificationsType = await getNotifications(1);
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
+
+  const notifications: GetNotificationsType = await getNotifications(
+    session!.user.id,
+  );
 
   const unreadCount = notifications.filter((n) => !n.isRead).length;
 

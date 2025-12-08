@@ -1,12 +1,14 @@
 import { ProjectList } from "../ProjectList";
 import { ProjectGrid } from "../ProjectGrid";
-import { getProjectList } from "@/lib/queries/project";
-import { ViewModeLayout } from "@/components/common/ViewMode";
 import { ProjectListItem } from "../ProjectListItem";
 import { ProjectGridItem } from "../ProjectGridItem";
+import { getProjectList } from "@/lib/queries/project";
+import { ViewModeLayout } from "@/components/common/ViewMode";
+import { getUserWorkspaceId } from "@/lib/utils/getUserWorkspaceId";
 
 export async function ProjectsServerContainer() {
-  const projects = await getProjectList();
+  const workspaceId = await getUserWorkspaceId();
+  const projects = await getProjectList({ workspaceId });
 
   return (
     <ViewModeLayout

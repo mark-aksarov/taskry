@@ -64,63 +64,66 @@ export const getProjectSummary = cache(async (id: number) => {
 });
 
 export type GetProjectListType = ThenArg<ReturnType<typeof getProjectList>>;
-export const getProjectList = cache(async (creatorId?: string) => {
-  return await prisma.project.findMany({
-    where: creatorId
-      ? {
-          creatorId,
-        }
-      : undefined,
-    select: {
-      id: true,
-      title: true,
-      deadline: true,
+export const getProjectList = cache(
+  async ({ workspaceId }: { workspaceId: number }) => {
+    return await prisma.project.findMany({
+      where: {
+        category: {
+          workspaceId,
+        },
+      },
 
-      creator: {
-        select: {
-          id: true,
-          fullName: true,
-          imageUrl: true,
+      select: {
+        id: true,
+        title: true,
+        deadline: true,
+
+        creator: {
+          select: {
+            id: true,
+            fullName: true,
+            imageUrl: true,
+          },
         },
-      },
-      status: {
-        select: {
-          id: true,
-          name: true,
+        status: {
+          select: {
+            id: true,
+            name: true,
+          },
         },
-      },
-      category: {
-        select: {
-          id: true,
-          name: true,
+        category: {
+          select: {
+            id: true,
+            name: true,
+          },
         },
-      },
-      customer: {
-        select: {
-          id: true,
-          fullName: true,
-          imageUrl: true,
-          company: {
-            select: {
-              id: true,
-              name: true,
+        customer: {
+          select: {
+            id: true,
+            fullName: true,
+            imageUrl: true,
+            company: {
+              select: {
+                id: true,
+                name: true,
+              },
             },
           },
         },
-      },
-      _count: {
-        select: {
-          comments: true,
+        _count: {
+          select: {
+            comments: true,
+          },
+        },
+        tasks: {
+          select: {
+            statusId: true,
+          },
         },
       },
-      tasks: {
-        select: {
-          statusId: true,
-        },
-      },
-    },
-  });
-});
+    });
+  },
+);
 
 export type GetProjectSummariesType = ThenArg<
   ReturnType<typeof getProjectSummaries>

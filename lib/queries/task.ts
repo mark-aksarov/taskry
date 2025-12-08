@@ -74,57 +74,72 @@ export const getTaskSummary = cache(async (id: number) => {
 });
 
 export type GetTaskListType = ThenArg<ReturnType<typeof getTaskList>>;
-export const getTaskList = cache(async (creatorId?: string) => {
-  return await prisma.task.findMany({
-    where: creatorId
-      ? {
-          creatorId,
-        }
-      : undefined,
-    select: {
-      id: true,
-      title: true,
-      deadline: true,
+export const getTaskList = cache(
+  async ({
+    workspaceId,
+    assigneeId,
+  }: {
+    workspaceId: number;
+    assigneeId?: string;
+  }) => {
+    return await prisma.task.findMany({
+      where: {
+        category: {
+          workspaceId,
+        },
 
-      assignee: {
-        select: {
-          id: true,
-          fullName: true,
-          imageUrl: true,
+        ...(assigneeId && { assigneeId }),
+      },
+
+      orderBy: {
+        deadline: "asc",
+      },
+
+      select: {
+        id: true,
+        title: true,
+        deadline: true,
+
+        assignee: {
+          select: {
+            id: true,
+            fullName: true,
+            imageUrl: true,
+          },
+        },
+        status: {
+          select: {
+            id: true,
+            name: true,
+          },
+        },
+        project: {
+          select: {
+            id: true,
+            title: true,
+          },
+        },
+        category: {
+          select: {
+            id: true,
+            name: true,
+          },
+        },
+        subtasks: {
+          select: {
+            isDone: true,
+          },
+        },
+        _count: {
+          select: {
+            comments: true,
+            subtasks: true,
+          },
         },
       },
-      status: {
-        select: {
-          id: true,
-          name: true,
-        },
-      },
-      project: {
-        select: {
-          id: true,
-          title: true,
-        },
-      },
-      category: {
-        select: {
-          id: true,
-          name: true,
-        },
-      },
-      subtasks: {
-        select: {
-          isDone: true,
-        },
-      },
-      _count: {
-        select: {
-          comments: true,
-          subtasks: true,
-        },
-      },
-    },
-  });
-});
+    });
+  },
+);
 
 export type GetTaskCategorySummariesType = ThenArg<
   ReturnType<typeof getTaskCategorySummaries>

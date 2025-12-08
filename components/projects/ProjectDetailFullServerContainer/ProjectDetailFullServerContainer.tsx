@@ -1,3 +1,5 @@
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
 import { getComments } from "@/lib/queries/comments";
 import { getProjectDetail } from "@/lib/queries/project";
 import { ProjectDetailFull } from "../ProjectDetailFull";
@@ -5,10 +7,15 @@ import { CommentItem } from "@/components/comments/CommentItem";
 import { DetailCommentInput } from "@/components/common/DetailCommentInput";
 
 export async function ProjectDetailFullServerContainer({ id }: { id: number }) {
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
+  const { id: userId } = session!.user;
+
   const project = await getProjectDetail(id);
   const comments = await getComments({
     projectId: id,
-    userId: "BKs42HvVDEZFoaJUmTqf1gTN0K8pUFjI",
+    userId,
   });
 
   return (

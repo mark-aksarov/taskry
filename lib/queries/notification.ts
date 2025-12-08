@@ -5,10 +5,10 @@ import prisma from "../prisma";
 import { ThenArg } from "./types";
 
 export type GetNotificationsType = ThenArg<ReturnType<typeof getNotifications>>;
-export const getNotifications = cache(async (workspaceId: number) => {
+export const getNotifications = cache(async (userId: string) => {
   return prisma.notification.findMany({
     where: {
-      workspaceId,
+      recipientId: userId,
     },
 
     orderBy: [

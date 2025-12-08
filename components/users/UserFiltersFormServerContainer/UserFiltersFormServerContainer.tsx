@@ -3,9 +3,11 @@ import {
   UserFiltersFormPositionCheckboxGroup,
 } from "../UserFiltersForm";
 import { getPositionSummaries } from "@/lib/queries/posititons";
+import { getUserWorkspaceId } from "@/lib/utils/getUserWorkspaceId";
 
 export async function UserFiltersFormServerContainer() {
-  const positions = await getPositionSummaries(1);
+  const workspaceId = await getUserWorkspaceId();
+  const positions = await getPositionSummaries(workspaceId);
 
   return (
     <UserFiltersForm

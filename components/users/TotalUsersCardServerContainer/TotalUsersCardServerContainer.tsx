@@ -3,6 +3,7 @@ import "server-only";
 import { cache } from "react";
 import prisma from "@/lib/prisma";
 import { TotalUsersCard } from "../TotalUsersCard";
+import { getUserWorkspaceId } from "@/lib/utils/getUserWorkspaceId";
 
 const getTotalUsers = cache(async (workspaceId: number) => {
   return prisma.user.count({
@@ -15,7 +16,8 @@ const getTotalUsers = cache(async (workspaceId: number) => {
 });
 
 export const TotalUsersCardServerContainer = async () => {
-  const totalUsers = await getTotalUsers(1);
+  const workspaceId = await getUserWorkspaceId();
+  const totalUsers = await getTotalUsers(workspaceId);
 
   return <TotalUsersCard totalUsers={totalUsers} />;
 };

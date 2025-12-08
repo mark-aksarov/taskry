@@ -3,12 +3,25 @@ import {
   AssignedTasksEmptyCard,
   AssignedTasksSectionHeading,
 } from "../AssignedTasks";
+
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
 import { TaskList } from "../TaskList";
-import { getTaskList } from "@/lib/queries/task";
 import { TaskListItem } from "../TaskListItem";
+import { getTaskList } from "@/lib/queries/task";
+import { getUserWorkspaceId } from "@/lib/utils/getUserWorkspaceId";
 
 export async function AssignedTasksServerContainer() {
-  const tasks = await getTaskList();
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
+
+  const workspaceId = await getUserWorkspaceId();
+
+  const tasks = await getTaskList({
+    workspaceId,
+    assigneeId: session!.user.id,
+  });
 
   if (!tasks.length) {
     return (

@@ -1,13 +1,15 @@
 import { getUserSummaries } from "@/lib/queries/user";
 import { getProjectSummaries } from "@/lib/queries/project";
 import { TaskDetailForm } from "../TaskDetailForm/TaskDetailForm";
+import { getUserWorkspaceId } from "@/lib/utils/getUserWorkspaceId";
 import { TaskDetailFormStatusSelect } from "../TaskDetailForm/TaskDetailFormStatusSelect";
 import { TaskDetailFormProjectSelect } from "../TaskDetailForm/TaskDetailFormProjectSelect";
 import { TaskDetailFormAssigneeSelect } from "../TaskDetailForm/TaskDetailFormAssigneeSelect";
 
 export async function TaskDetailFormServerContainer() {
-  const projects = await getProjectSummaries(1);
-  const users = await getUserSummaries(1);
+  const workspaceId = await getUserWorkspaceId();
+  const projects = await getProjectSummaries(workspaceId);
+  const users = await getUserSummaries(workspaceId);
 
   return (
     <TaskDetailForm

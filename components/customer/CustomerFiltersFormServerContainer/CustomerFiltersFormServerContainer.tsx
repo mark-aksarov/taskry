@@ -1,9 +1,11 @@
 import { CustomerFiltersForm } from "../CustomerFiltersForm";
 import { getCompanySummaries } from "@/lib/queries/companies";
+import { getUserWorkspaceId } from "@/lib/utils/getUserWorkspaceId";
 import { CustomerFiltersFormCompanyCheckboxGroup } from "../CustomerFiltersForm";
 
 export async function CustomerFiltersFormServerContainer() {
-  const companies = await getCompanySummaries(1);
+  const workspaceId = await getUserWorkspaceId();
+  const companies = await getCompanySummaries(workspaceId);
 
   return (
     <CustomerFiltersForm

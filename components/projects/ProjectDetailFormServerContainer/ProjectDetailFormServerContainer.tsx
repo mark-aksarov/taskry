@@ -1,13 +1,15 @@
 import { getCustomerSummaries } from "@/lib/queries/customers";
 import { getProjectCategorySummaries } from "@/lib/queries/project";
+import { getUserWorkspaceId } from "@/lib/utils/getUserWorkspaceId";
 import { ProjectDetailForm } from "../ProjectDetailForm/ProjectDetailForm";
 import { ProjectDetailFormStatusSelect } from "../ProjectDetailForm/ProjectDetailFormStatusSelect";
 import { ProjectDetailFormCategorySelect } from "../ProjectDetailForm/ProjectDetailFormCategorySelect";
 import { ProjectDetailFormCustomerSelect } from "../ProjectDetailForm/ProjectDetailFormCustomerSelect";
 
 export async function ProjectDetailFormServerContainer() {
-  const categories = await getProjectCategorySummaries(1);
-  const customers = await getCustomerSummaries(1);
+  const workspaceId = await getUserWorkspaceId();
+  const categories = await getProjectCategorySummaries(workspaceId);
+  const customers = await getCustomerSummaries(workspaceId);
 
   return (
     <ProjectDetailForm

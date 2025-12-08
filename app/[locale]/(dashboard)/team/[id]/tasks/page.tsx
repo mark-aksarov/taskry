@@ -1,5 +1,6 @@
 import { getTaskList } from "@/lib/queries/task";
 import { TeamProfileTasksPage } from "./TeamProfileTasksPage";
+import { getUserWorkspaceId } from "@/lib/utils/getUserWorkspaceId";
 import { TeamProfileTasksPageEmpty } from "./TeamProfileTasksPageEmpty";
 import { UserTasksServerContainer } from "@/components/users/UserTasksServerContainer";
 import { UserHeaderServerContainer } from "@/components/users/UserHeaderServerContainer";
@@ -11,7 +12,8 @@ export default async function AppProfileTasksPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const tasks = await getTaskList(id);
+  const workspaceId = await getUserWorkspaceId();
+  const tasks = await getTaskList({ workspaceId, assigneeId: id });
 
   if (!tasks.length)
     return (

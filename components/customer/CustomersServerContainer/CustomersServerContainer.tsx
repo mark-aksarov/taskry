@@ -1,12 +1,14 @@
 import { CustomerList } from "../CustomerList";
 import { CustomerGrid } from "../CustomerGrid";
 import { getCustomers } from "@/lib/queries/customers";
-import { ViewModeLayout } from "@/components/common/ViewMode";
 import { CustomerListItem } from "../CustomerListItem";
 import { CustomerGridItem } from "../CustomerGridItem";
+import { ViewModeLayout } from "@/components/common/ViewMode";
+import { getUserWorkspaceId } from "@/lib/utils/getUserWorkspaceId";
 
 export async function CustomersServerContainer() {
-  const customers = await getCustomers(1);
+  const workspaceId = await getUserWorkspaceId();
+  const customers = await getCustomers(workspaceId);
 
   return (
     <ViewModeLayout

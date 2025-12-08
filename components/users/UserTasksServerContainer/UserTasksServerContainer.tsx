@@ -1,9 +1,11 @@
 import { UserTaskList } from "../UserTaskList";
 import { getTaskList } from "@/lib/queries/task";
 import { UserTaskListItem } from "../UserTaskListItem";
+import { getUserWorkspaceId } from "@/lib/utils/getUserWorkspaceId";
 
 export async function UserTasksServerContainer({ userId }: { userId: string }) {
-  const tasks = await getTaskList(userId);
+  const workspaceId = await getUserWorkspaceId();
+  const tasks = await getTaskList({ workspaceId, assigneeId: userId });
 
   return (
     <UserTaskList>

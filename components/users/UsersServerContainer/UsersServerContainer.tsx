@@ -1,12 +1,14 @@
 import { UserList } from "../UserList";
 import { UserGrid } from "../UserGrid";
-import { getUserList } from "@/lib/queries/user";
-import { ViewModeLayout } from "@/components/common/ViewMode";
 import { UserListItem } from "../UserListItem";
 import { UserGridItem } from "../UserGridItem";
+import { getUserList } from "@/lib/queries/user";
+import { ViewModeLayout } from "@/components/common/ViewMode";
+import { getUserWorkspaceId } from "@/lib/utils/getUserWorkspaceId";
 
 export async function UsersServerContainer() {
-  const users = await getUserList(1);
+  const workspaceId = await getUserWorkspaceId();
+  const users = await getUserList(workspaceId);
 
   return (
     <ViewModeLayout
