@@ -1,54 +1,63 @@
-import { NextRequest, NextResponse } from "next/server";
-import { getSessionCookie } from "better-auth/cookies";
 import createMiddleware from "next-intl/middleware";
-import { routing } from "./i18n/routing";
+import { getSessionCookie } from "better-auth/cookies";
+import { NextRequest, NextResponse } from "next/server";
 
-const handleI18nRouting = createMiddleware(routing);
+const locales = ["en", "ru"];
+const defaultLocale = "ru";
 
-const PROTECTED_ROUTES = ["/"];
-
-const AUTH_ROUTES = new Set([
+const publicPages = [
   "/sign-in",
   "/sign-up",
+  "/forget-password",
+  "/forget-password/check-email",
   "/reset-password",
   "/verify-email",
-  "/forgot-password",
-]);
+];
+
+const handleI18nRouting = createMiddleware({
+  locales,
+  defaultLocale,
+});
+
+function getLocaleFromPathname(pathname: string): string | null {
+  const segments = pathname.split("/").filter((s) => s.length > 0);
+  if (segments.length > 0 && locales.includes(segments[0])) {
+    return segments[0];
+  }
+  return null;
+}
 
 export async function middleware(request: NextRequest) {
-  const handleI18nRouting = createMiddleware({
-    locales: ["en", "ru"],
-    defaultLocale: "en",
-  });
-  const response = handleI18nRouting(request);
+  const pathname = request.nextUrl.pathname;
 
-  /*
-	const session = getSessionCookie(request);
-	const pathname = request.nextUrl.pathname;
+  const publicPathnameRegex = RegExp(
+    `^(/(${locales.join("|")}))?(${publicPages
+      .flatMap((p) => (p === "/" ? ["", "/"] : p))
+      .join("|")})/?$`,
+    "i",
+  );
 
-	const isProtectedRoute = PROTECTED_ROUTES.some((route) => pathname === route);
+  const isPublicPage = publicPathnameRegex.test(pathname);
 
-	if (isProtectedRoute && !session) {
-		return NextResponse.redirect(new URL("/sign-in", request.url));
-	}
+  if (isPublicPage) {
+    return handleI18nRouting(request);
+  }
 
-	const isAuthRoute = AUTH_ROUTES.has(pathname);
+  const sessionCookie = getSessionCookie(request);
 
-	if (session && isAuthRoute) {
-		return NextResponse.redirect(new URL("/", request.url));
-	}*/
+  if (!sessionCookie) {
+    const currentLocale = getLocaleFromPathname(pathname);
+    const redirectLocale = currentLocale || defaultLocale;
+    const signInPath = `/${redirectLocale}/sign-in`;
+    const signInUrl = new URL(signInPath, request.url);
+    signInUrl.searchParams.set("callbackUrl", pathname);
 
-  return response;
+    return NextResponse.redirect(signInUrl);
+  }
+
+  return handleI18nRouting(request);
 }
 
 export const config = {
-  matcher: [
-    "/",
-    "/sign-in",
-    "/sign-up",
-    "/reset-password",
-    "/verify-email",
-    "/forgot-password",
-    "/((?!api|trpc|_next|_vercel|.*\\..*).*)",
-  ],
+  matcher: "/((?!api|trpc|_next|_vercel|.*\\..*).*)",
 };

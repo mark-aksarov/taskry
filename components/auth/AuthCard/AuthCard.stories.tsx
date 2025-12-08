@@ -31,7 +31,7 @@ export const Default = {
           <AuthCardSubtitle>Please sign in to your account.</AuthCardSubtitle>
         </AuthCardHeader>
         <AuthCardBody>
-          <AuthCardForm>
+          <AuthCardForm action={() => {}}>
             <TextField label="Email" placeholder="Enter your email" />
             <TextField
               label="Password"

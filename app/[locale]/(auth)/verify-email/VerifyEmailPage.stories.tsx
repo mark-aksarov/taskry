@@ -18,10 +18,3 @@ export const Default = {
     email: "a@b.c",
   },
 } satisfies Story;
-
-export const WithError = {
-  args: {
-    error: "Something went wrong",
-    email: "a@b.c",
-  },
-} satisfies Story;

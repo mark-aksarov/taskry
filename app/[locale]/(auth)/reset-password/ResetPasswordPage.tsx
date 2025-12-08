@@ -9,12 +9,13 @@ import {
 import { useTranslations } from "next-intl";
 import { ResetPasswordForm } from "@/components/auth/ResetPasswordForm";
 import { AuthCardFooterSignInItem } from "@/components/auth/AuthCardFooterSignInItem";
+import { ResetPasswordAction } from "@/lib/actions/types";
 
 interface ResetPasswordPageProps {
-  token: string;
+  action: ResetPasswordAction;
 }
 
-export function ResetPasswordPage({ token }: ResetPasswordPageProps) {
+export function ResetPasswordPage({ action }: ResetPasswordPageProps) {
   const t = useTranslations("app.ResetPasswordPage");
 
   return (
@@ -24,7 +25,7 @@ export function ResetPasswordPage({ token }: ResetPasswordPageProps) {
         <AuthCardSubtitle>{t("subtitle")}</AuthCardSubtitle>
       </AuthCardHeader>
       <AuthCardBody>
-        <ResetPasswordForm token={token} />
+        <ResetPasswordForm action={action} />
       </AuthCardBody>
       <AuthCardFooter>
         <AuthCardFooterSignInItem />

@@ -1,3 +1,5 @@
+import { fn } from "storybook/internal/test";
+import ResetPasswordNotFound from "./not-found";
 import { ResetPasswordPage } from "./ResetPasswordPage";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { AuthPageDecorator } from "@/.storybook/AuthPageDecorator";
@@ -15,6 +17,11 @@ export type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    token: "token",
+    action: fn(),
   },
+} satisfies Story;
+
+export const NotFound = {
+  ...Default,
+  render: () => <ResetPasswordNotFound />,
 } satisfies Story;

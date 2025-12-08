@@ -11,7 +11,7 @@ export function AuthCardFooterSignUpItem() {
   return (
     <AuthCardFooterItem>
       <AuthCardFooterText>{t("text")}</AuthCardFooterText>
-      <AuthCardFooterLink href="/sign-in">{t("link")}</AuthCardFooterLink>
+      <AuthCardFooterLink href="/sign-up">{t("link")}</AuthCardFooterLink>
     </AuthCardFooterItem>
   );
 }

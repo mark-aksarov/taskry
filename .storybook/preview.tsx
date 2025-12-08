@@ -3,9 +3,11 @@ import "../app/globals.css";
 import en from "../messages/en.json";
 import ru from "../messages/ru.json";
 import { I18nProvider } from "react-aria";
+import { mocked } from "storybook/internal/test";
 import { NextIntlClientProvider } from "next-intl";
 import type { Preview } from "@storybook/nextjs-vite";
 import { MINIMAL_VIEWPORTS } from "storybook/viewport";
+import { useRouter, useSearchParams } from "next/navigation";
 import { withThemeByDataAttribute } from "@storybook/addon-themes";
 
 export const globalTypes = {
@@ -70,6 +72,14 @@ const preview: Preview = {
       // 'off' - skip a11y checks entirely
       test: "todo",
     },
+  },
+
+  beforeEach: () => {
+    mocked(useSearchParams).mockReturnValue({
+      get: () => "/",
+    } as any);
+
+    mocked(useRouter).mockReturnValue({} as any);
   },
 };
 

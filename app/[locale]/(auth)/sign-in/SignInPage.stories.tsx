@@ -1,5 +1,5 @@
-import { fn } from "storybook/test";
 import { SignInPage } from "./SignInPage";
+import { fn, mocked } from "storybook/test";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { AuthPageDecorator } from "@/.storybook/AuthPageDecorator";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
@@ -16,14 +16,6 @@ export type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    email: "2MhDx@example.com",
-    password: "password",
-    setEmail: fn(),
-    setPassword: fn(),
-    isSubmitting: false,
-    setIsSubmitting: fn(),
-    rememberMe: false,
-    setRememberMe: fn(),
-    handleSubmit: fn(),
+    action: fn(),
   },
 } satisfies Story;

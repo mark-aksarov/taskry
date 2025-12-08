@@ -2,7 +2,6 @@
 
 import {
   Users,
-  LogOut,
   Contact,
   UserRound,
   FolderClosed,
@@ -14,6 +13,7 @@ import { Divider } from "@/components/ui";
 import { useTranslations } from "next-intl";
 import { usePathname } from "@/i18n/navigation";
 import { NavigationButton } from "@/components/common/NavigationButton";
+import { AppNavigationLogoutButton } from "./AppNavigationLogoutButton";
 import { AppNavigationLangMenuTrigger } from "./AppNavigationLangMenuTrigger";
 import { AppNavigationThemeToggleButton } from "./AppNavigationThemeToggleButton";
 
@@ -69,10 +69,7 @@ export const AppNavigation = () => {
         <AppNavigationThemeToggleButton />
       </div>
 
-      <NavigationButton href="#">
-        <LogOut size={18} strokeWidth={1.5} absoluteStrokeWidth />
-        {t("logout")}
-      </NavigationButton>
+      <AppNavigationLogoutButton />
     </nav>
   );
 };

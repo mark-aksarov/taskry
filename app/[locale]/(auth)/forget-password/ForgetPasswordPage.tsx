@@ -9,10 +9,15 @@ import {
   AuthCardSubtitle,
 } from "@/components/auth/AuthCard";
 import { useTranslations } from "next-intl";
+import { ForgetPasswordAction } from "@/lib/actions/types";
 import { ForgetPasswordForm } from "@/components/auth/ForgetPasswordForm";
 import { AuthCardFooterSignInItem } from "@/components/auth/AuthCardFooterSignInItem";
 
-export function ForgetPasswordPage() {
+export function ForgetPasswordPage({
+  action,
+}: {
+  action: ForgetPasswordAction;
+}) {
   const t = useTranslations("app.ForgetPasswordPage");
 
   return (
@@ -22,7 +27,7 @@ export function ForgetPasswordPage() {
         <AuthCardSubtitle>{t("subtitle")}</AuthCardSubtitle>
       </AuthCardHeader>
       <AuthCardBody>
-        <ForgetPasswordForm />
+        <ForgetPasswordForm action={action} />
       </AuthCardBody>
       <AuthCardFooter>
         <AuthCardFooterSignInItem />

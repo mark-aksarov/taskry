@@ -5,7 +5,7 @@ import { TotalUsersCardServerContainer } from "@/components/users/TotalUsersCard
 import { TotalProjectsCardServerContainer } from "@/components/projects/TotalProjectsCardServerContainer";
 import { TotalCustomersCardServerContainer } from "@/components/customer/TotalCustomersCardServerContainer";
 
-export default function AppDashboardPage() {
+export default async function AppDashboardPage() {
   return (
     <DashboardPage
       TotalProjectsCardContainer={TotalProjectsCardServerContainer}

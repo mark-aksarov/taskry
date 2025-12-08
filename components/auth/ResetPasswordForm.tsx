@@ -1,54 +1,71 @@
 "use client";
 
-import { useState } from "react";
-import { useRouter } from "next/router";
-import { AuthCardForm } from "./AuthCard";
+import { useActionState } from "react";
 import { Button, TextField } from "../ui";
-import { authClient } from "@/lib/auth-client";
 import { useTranslations } from "next-intl";
+import { toCamelCase } from "@/lib/utils/toCamelCase";
+import { AuthCardForm, AuthCardFormErrorText } from "./AuthCard";
+import { ResetPasswordAction, ResetPasswordState } from "@/lib/actions/types";
 
-export function ResetPasswordForm({ token }: { token: string }) {
+const initialState: ResetPasswordState = {
+  error: null,
+};
+
+interface ResetPasswordFormProps {
+  action: ResetPasswordAction;
+}
+
+export function ResetPasswordForm({ action }: ResetPasswordFormProps) {
   const t = useTranslations("auth.ResetPasswordForm");
+  const tServerError = useTranslations("auth.ServerError");
 
-  const [password, setPassword] = useState("");
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const router = useRouter();
+  const [state, formAction, isPending] = useActionState(action, initialState);
 
-  function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    setError(null);
-    setIsSubmitting(true);
+  let errorTranslationKey;
 
-    authClient.resetPassword(
-      {
-        newPassword: password,
-        token,
-      },
-      {
-        onSuccess: () => {
-          router.push("/sign-in");
-        },
-        onError: (ctx) => {
-          setIsSubmitting(false);
-          setError(ctx.error.message || "Something went wrong.");
-        },
-      },
-    );
-
-    router.push("/sign-in");
+  if (state.error) {
+    if (state.error.status === "UnknownError") {
+      errorTranslationKey = "internalServerError";
+    } else if (state.error.status === "InvalidInputData") {
+      errorTranslationKey = "invalidInputData";
+    } else {
+      errorTranslationKey = toCamelCase(state.error.message!);
+    }
   }
 
   return (
-    <AuthCardForm onSubmit={handleSubmit}>
+    <AuthCardForm action={formAction}>
+      {state.error && (
+        <AuthCardFormErrorText>
+          {tServerError(errorTranslationKey!)}
+        </AuthCardFormErrorText>
+      )}
       <TextField
         label={t("password.label")}
         type="password"
+        name="password"
         placeholder={t("password.placeholder")}
-        value={password}
-        onChange={setPassword}
+        isRequired
+        minLength={8}
+        maxLength={128}
+        errorMessage={(validation) => {
+          const details = validation.validationDetails;
+
+          if (details.valueMissing) {
+            return t("validation.password.required");
+          }
+          if (details.tooShort) {
+            return t("validation.password.tooShort", { minLength: 8 });
+          }
+          if (details.tooLong) {
+            return t("validation.password.tooLong", { minLength: 128 });
+          }
+
+          return "";
+        }}
       />
       <Button
+        type="submit"
         size="medium"
         label={t("submit.label")}
         className="justify-center py-4"

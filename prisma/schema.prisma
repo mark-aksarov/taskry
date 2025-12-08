@@ -361,6 +361,9 @@ model User {
   imageUrl      String?
   phoneNumber   String?   @db.VarChar(20)
   publicLink    String?
+  banned        Boolean?
+  banReason     String?
+  banExpires    DateTime?
 
   positionId Int?
 
@@ -385,11 +388,12 @@ model User {
 }
 
 model Session {
-  id        String   @id
-  expiresAt DateTime
-  token     String
-  ipAddress String?
-  userAgent String?
+  id             String   @id
+  expiresAt      DateTime
+  token          String
+  ipAddress      String?
+  userAgent      String?
+  impersonatedBy String?
 
   userId String
 

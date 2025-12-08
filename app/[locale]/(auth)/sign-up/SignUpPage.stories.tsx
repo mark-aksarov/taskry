@@ -16,14 +16,6 @@ export type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    name: "John Doe",
-    email: "2MhDx@example.com",
-    password: "password",
-    setName: fn(),
-    setEmail: fn(),
-    setPassword: fn(),
-    isSubmitting: false,
-    setIsSubmitting: fn(),
-    handleSubmit: fn(),
+    action: fn(),
   },
 } satisfies Story;

@@ -16,8 +16,6 @@ export type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    email: "2MhDx@example.com",
-    setEmail: fn(),
-    handleSubmit: fn(),
+    action: fn(),
   },
 } satisfies Story;

@@ -1,50 +1,70 @@
-import { useState } from "react";
-import { AuthCardForm } from "./AuthCard";
+import { useActionState } from "react";
 import { Button, TextField } from "../ui";
-import { authClient } from "@/lib/auth-client";
 import { useTranslations } from "next-intl";
+import { toCamelCase } from "@/lib/utils/toCamelCase";
+import { AuthCardForm, AuthCardFormErrorText } from "./AuthCard";
+import { ForgetPasswordAction, ForgetPasswordState } from "@/lib/actions/types";
 
-export function ForgetPasswordForm() {
+const initialState: ForgetPasswordState = {
+  error: null,
+  payload: null,
+};
+
+interface ForgetPasswordFormProps {
+  action: ForgetPasswordAction;
+}
+
+export function ForgetPasswordForm({ action }: ForgetPasswordFormProps) {
   const t = useTranslations("auth.ForgetPasswordForm");
+  const tServerError = useTranslations("auth.ServerError");
 
-  const [email, setEmail] = useState("");
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSubmitted, setIsSubmitted] = useState(false);
-  const [error, setError] = useState("");
+  const [state, formAction, isPending] = useActionState(action, initialState);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setError("");
-    setIsSubmitting(true);
+  let errorTranslationKey;
 
-    authClient.requestPasswordReset(
-      {
-        email,
-        redirectTo: "/reset-password",
-      },
-      {
-        onSuccess: () => {
-          setIsSubmitting(false);
-          setIsSubmitted(true);
-        },
-        onError: (ctx) => {
-          setIsSubmitting(false);
-          setError(ctx.error.message || "Something went wrong.");
-        },
-      },
-    );
-  };
+  if (state.error) {
+    if (state.error.status === "UnknownError") {
+      errorTranslationKey = "internalServerError";
+    } else if (state.error.status === "InvalidInputData") {
+      errorTranslationKey = "invalidInputData";
+    } else {
+      errorTranslationKey = toCamelCase(state.error.message!);
+    }
+  }
 
   return (
-    <AuthCardForm onSubmit={handleSubmit}>
+    <AuthCardForm action={formAction}>
+      {state.error && (
+        <AuthCardFormErrorText>
+          {tServerError(errorTranslationKey!)}
+        </AuthCardFormErrorText>
+      )}
       <TextField
         label={t("email.label")}
-        type="Email"
+        type="email"
         placeholder={t("email.placeholder")}
-        value={email}
-        onChange={setEmail}
+        isRequired
+        maxLength={254}
+        name="email"
+        defaultValue={state.payload?.get("email") as string}
+        errorMessage={(validation) => {
+          const details = validation.validationDetails;
+
+          if (details.valueMissing) {
+            return t("validation.email.required");
+          }
+          if (details.tooLong) {
+            return t("validation.email.tooLong", { maxLength: 254 });
+          }
+          if (details.typeMismatch) {
+            return t("validation.email.format");
+          }
+
+          return "";
+        }}
       />
       <Button
+        type="submit"
         size="medium"
         label={t("submit.label")}
         className="justify-center py-4"

@@ -1,38 +1,21 @@
-"use client";
-
-import { use, useState } from "react";
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
+import { getLocale } from "next-intl/server";
+import { redirect } from "@/i18n/navigation";
 import { VerifyEmailPage } from "./VerifyEmailPage";
-import { authClient } from "@/lib/auth-client";
 
-export default function AppVerifyEmailPage({
-  searchParams,
-}: {
-  searchParams: Promise<{ email: string }>;
-}) {
-  const { email } = use(searchParams);
-  const [error, setError] = useState<string | null>(null);
-  const [isSubmitting, setIsSubmitting] = useState(false);
+export default async function AppVerifyEmailPage() {
+  const locale = await getLocale();
 
-  const sendVerificationEmail = () => {
-    setIsSubmitting(true);
-    setError(null);
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
 
-    authClient.sendVerificationEmail(
-      {
-        email,
-        callbackURL: "/",
-      },
-      {
-        onSuccess: () => {
-          setIsSubmitting(false);
-        },
-        onError: (ctx) => {
-          setIsSubmitting(false);
-          setError(ctx.error.message || "Something went wrong.");
-        },
-      },
-    );
-  };
+  if (session && session.user.emailVerified) {
+    redirect({ href: "/", locale });
+  } else if (!session) {
+    redirect({ href: "/sign-in", locale });
+  }
 
-  return <VerifyEmailPage error={error || undefined} email={email} />;
+  return <VerifyEmailPage email={session!.user.email} />;
 }

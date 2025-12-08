@@ -1,9 +1,8 @@
-import "server-only";
-
 import prisma from "@/lib/prisma";
 import { transporter } from "./mail";
 import { betterAuth } from "better-auth";
-import { redirect } from "@/i18n/navigation";
+import { admin } from "better-auth/plugins";
+import { nextCookies } from "better-auth/next-js";
 import { prismaAdapter } from "better-auth/adapters/prisma";
 
 export const auth = betterAuth({
@@ -12,7 +11,7 @@ export const auth = betterAuth({
   }),
   emailVerification: {
     sendVerificationEmail: async ({ user, url }) => {
-      await transporter.sendMail({
+      transporter.sendMail({
         from: process.env.SMTP_USER,
         to: user.email,
         subject: "Verify your email address",
@@ -25,9 +24,10 @@ export const auth = betterAuth({
   },
   emailAndPassword: {
     enabled: true,
-    requireEmailVerification: true,
+    minPasswordLength: 8,
+    maxPasswordLength: 128,
     sendResetPassword: async ({ user, url }) => {
-      await transporter.sendMail({
+      transporter.sendMail({
         from: process.env.SMTP_USER,
         to: user.email,
         subject: "Reset your password",
@@ -35,14 +35,10 @@ export const auth = betterAuth({
       });
     },
   },
-  signUp: {
-    onSuccess: async () => {
-      redirect("/");
-    },
-  },
-  signIn: {
-    onSuccess: async () => {
-      redirect("/");
+  plugins: [admin(), nextCookies()],
+  user: {
+    fields: {
+      name: "fullName",
     },
   },
 });

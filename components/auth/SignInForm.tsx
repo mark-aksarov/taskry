@@ -1,68 +1,101 @@
 "use client";
 
-import { useState } from "react";
-import { AuthCardForm } from "./AuthCard";
+import { useActionState } from "react";
 import { useTranslations } from "next-intl";
-import { authClient } from "@/lib/auth-client";
 import { Button, Checkbox, TextField } from "../ui";
-import { BetterFetchError } from "better-auth/react";
+import { toCamelCase } from "@/lib/utils/toCamelCase";
+import { SignInAction, SignInState } from "@/lib/actions/types";
+import { AuthCardForm, AuthCardFormErrorText } from "./AuthCard";
 
-export function SignInForm() {
+const initialState: SignInState = {
+  error: null,
+  payload: null,
+};
+
+interface SignInFormProps {
+  action: SignInAction;
+}
+
+export function SignInForm({ action }: SignInFormProps) {
   const t = useTranslations("auth.SignInForm");
+  const tServerError = useTranslations("auth.ServerError");
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [rememberMe, setRememberMe] = useState(false);
-  const [error, setError] = useState<
-    (BetterFetchError & Record<string, any>) | null
-  >(null);
+  const [state, formAction, isPending] = useActionState(action, initialState);
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    setError(null);
-    setIsSubmitting(true);
+  let errorTranslationKey;
 
-    authClient.signIn.email(
-      {
-        email,
-        password,
-        callbackURL: "/",
-        rememberMe,
-      },
-      {
-        onError: (ctx) => {
-          setIsSubmitting(false);
-          setError(ctx.error);
-        },
-      },
-    );
+  if (state.error) {
+    if (state.error.status === "UnknownError") {
+      errorTranslationKey = "internalServerError";
+    } else if (state.error.status === "InvalidInputData") {
+      errorTranslationKey = "invalidInputData";
+    } else {
+      errorTranslationKey = toCamelCase(state.error.message!);
+    }
   }
 
   return (
-    <AuthCardForm onSubmit={handleSubmit}>
+    <AuthCardForm action={formAction}>
+      {state.error && (
+        <AuthCardFormErrorText>
+          {tServerError(errorTranslationKey!)}
+        </AuthCardFormErrorText>
+      )}
       <TextField
         label={t("email.label")}
-        type="Email"
+        type="email"
         placeholder={t("email.placeholder")}
-        value={email}
-        onChange={setEmail}
+        isRequired
+        maxLength={254}
+        name="email"
+        defaultValue={state.payload?.get("email") as string}
+        errorMessage={(validation) => {
+          const details = validation.validationDetails;
+
+          if (details.valueMissing) {
+            return t("validation.email.required");
+          }
+          if (details.tooLong) {
+            return t("validation.email.tooLong", { maxLength: 254 });
+          }
+          if (details.typeMismatch) {
+            return t("validation.email.format");
+          }
+
+          return "";
+        }}
       />
       <TextField
         label={t("password.label")}
         type="password"
         placeholder={t("password.placeholder")}
-        value={password}
-        onChange={setPassword}
+        name="password"
+        isRequired
+        errorMessage={(validation) => {
+          const details = validation.validationDetails;
+
+          if (details.valueMissing) {
+            return t("validation.password.required");
+          }
+          if (details.tooShort) {
+            return t("validation.password.tooShort", { minLength: 8 });
+          }
+          if (details.tooLong) {
+            return t("validation.password.tooLong", { minLength: 128 });
+          }
+
+          return "";
+        }}
       />
       <Checkbox
         className="font-normal"
-        isSelected={rememberMe}
-        onChange={setRememberMe}
+        name="rememberMe"
+        defaultSelected={state.payload?.get("rememberMe") === "on"}
       >
         {t("rememberMe")}
       </Checkbox>
       <Button
+        type="submit"
         size="medium"
         label={t("submit.label")}
         className="justify-center py-4"

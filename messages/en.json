@@ -2,7 +2,7 @@
   "app": {
     "CheckEmailPage": {
       "heading": "Check your email",
-      "subtitle": "We have sent a password reset link to your email.",
+      "subtitle": "We have sent a password reset link to your email. If this email exists in our system, check your email for the reset link",
       "backButtonLabel": "Back to reset password"
     },
 
@@ -13,12 +13,19 @@
 
     "ResetPasswordPage": {
       "heading": "Reset Password",
-      "subtitle": "Provide a new password for your account."
+      "subtitle": "Provide a new password for your account.",
+
+      "notFound": {
+        "heading": "Invalid Link",
+        "body": "The password reset link has expired or is invalid. Please request a password reset again.",
+        "signInButtonLabel": "Sign in with email"
+      }
     },
 
     "SignInPage": {
       "heading": "Sign In",
-      "subtitle": "Please sign in to your account."
+      "subtitle": "Please sign in to your account.",
+      "resetPasswordSubtitle": "Your password has been reset successfully. You can now sign in with your new password."
     },
 
     "SignInPageError": {
@@ -37,8 +44,7 @@
 
     "VerifyEmailPage": {
       "heading": "Verify Email",
-      "subtitle": "We have sent a verification link to your {email}. Please check your inbox and click the link to continue.",
-      "signInButtonLabel": "Sign in with email"
+      "subtitle": "We've sent a verification email to {email}. Click the link in the email to activate your account and continue using the service. If you don’t see the message, check your spam folder or resend it."
     },
 
     "DashboardPage": {
@@ -169,6 +175,40 @@
   },
 
   "auth": {
+    "ServerError": {
+      "emailAndPasswordIsNotEnabled": "Email and password is not enabled",
+      "emailAndPasswordSignUpIsNotEnabled": "Email and password sign up is not enabled",
+      "userNotFound": "User not found",
+      "failedToCreateUser": "Failed to create user",
+      "failedToCreateSession": "Failed to create session",
+      "failedToUpdateUser": "Failed to update user",
+      "failedToGetSession": "Failed to get session",
+      "invalidPassword": "Invalid password",
+      "invalidEmail": "Invalid email",
+      "invalidEmailOrPassword": "Invalid email or password",
+      "socialAccountAlreadyLinked": "Social account already linked",
+      "providerNotFound": "Provider not found",
+      "invalidToken": "Invalid token",
+      "idtokenNotSupported": "id_token not supported",
+      "failedToGetUserInfo": "Failed to get user info",
+      "userEmailNotFound": "User email not found",
+      "emailNotVerified": "Email not verified",
+      "passwordTooShort": "Password too short",
+      "passwordTooLong": "Password too long",
+      "userAlreadyExists": "User already exists.",
+      "userAlreadyExistsUseAnotherEmail": "User already exists. Use another email.",
+      "emailCanNotBeUpdated": "Email can not be updated",
+      "credentialAccountNotFound": "Credential account not found",
+      "sessionExpiredReauthenticateToPerformThisAction": "Session expired. Re-authenticate to perform this action.",
+      "youCantUnlinkYourLastAccount": "You can't unlink your last account",
+      "accountNotFound": "Account not found",
+      "userAlreadyHasAPasswordProvideThatToDeleteTheAccount": "User already has a password. Provide that to delete the account.",
+      "invalidInputData": "The data provided is incorrect or incomplete",
+      "resetPasswordIsntEnabled": "Reset password isn't enabled",
+      "failedToSendEmail": "An error occurred while sending the email.",
+      "internalServerError": "An internal server error occurred. Please try again later."
+    },
+
     "AuthCardFooterSignInItem": {
       "text": "Sign in to your account.",
       "link": "Sign In"
@@ -190,6 +230,14 @@
       },
       "submit": {
         "label": "Request reset link"
+      },
+
+      "validation": {
+        "email": {
+          "required": "Please enter your email address.",
+          "format": "Invalid format. The email address must be in the format `user@example.com`.",
+          "tooLong": "This email address is too long. The maximum allowed length is {maxLength} characters."
+        }
       }
     },
 
@@ -200,6 +248,14 @@
       },
       "submit": {
         "label": "Reset password"
+      },
+
+      "validation": {
+        "password": {
+          "required": "Please enter your password.",
+          "tooShort": "The password is too short. It must contain at least {minLength} characters.",
+          "tooLong": "The password is too long. The maximum length is {maxLength} characters."
+        }
       }
     },
 
@@ -215,10 +271,28 @@
       "rememberMe": "Remember me",
       "submit": {
         "label": "Sign In"
+      },
+
+      "validation": {
+        "password": {
+          "required": "Please enter your password.",
+          "tooShort": "The password is too short. It must contain at least {minLength} characters.",
+          "tooLong": "The password is too long. The maximum length is {maxLength} characters."
+        },
+
+        "email": {
+          "required": "Please enter your email address.",
+          "format": "Invalid format. The email address must be in the format `user@example.com`.",
+          "tooLong": "This email address is too long. The maximum allowed length is {maxLength} characters."
+        }
       }
     },
 
     "SignUpForm": {
+      "name": {
+        "label": "Name",
+        "placeholder": "Enter your name"
+      },
       "email": {
         "label": "Email",
         "placeholder": "Enter your email"
@@ -234,7 +308,46 @@
       "rememberMe": "Remember me",
       "submit": {
         "label": "Sign Up"
+      },
+
+      "validation": {
+        "name": {
+          "required": "Please enter your name.",
+          "tooShort": "Your name is too short. It must contain at least {minLength} characters.",
+          "tooLong": "Your name is too long. The maximum length is {maxLength} characters."
+        },
+
+        "password": {
+          "required": "Please enter your password.",
+          "tooShort": "The password is too short. It must contain at least {minLength} characters.",
+          "tooLong": "The password is too long. The maximum length is {maxLength} characters."
+        },
+
+        "repeatPassword": {
+          "required": "Please confirm your password.",
+          "mustMatch": "The passwords do not match.",
+          "tooShort": "The confirmed password is too short. It must contain at least {minLength} characters.",
+          "tooLong": "The confirmed password is too long. The maximum length is {maxLength} characters."
+        },
+
+        "email": {
+          "required": "Please enter your email address.",
+          "format": "Invalid format. The email address must be in the format `user@example.com`.",
+          "tooLong": "This email address is too long. The maximum allowed length is {maxLength} characters."
+        }
       }
+    },
+
+    "VerifyEmailContent": {
+      "error": "Failed to send verification email. Please try again."
+    },
+
+    "SendVerificationEmailButton": {
+      "label": "Resend email"
+    },
+
+    "AuthSignOutButton": {
+      "label": "Sign Out"
     }
   },
 
@@ -317,10 +430,13 @@
       "team": "Team",
       "customers": "Customers",
       "profile": "Profile",
-      "logout": "Logout",
 
       "themeToggleButton": {
         "label": "Dark mode"
+      },
+
+      "logoutButton": {
+        "logout": "Logout"
       },
 
       "langMenuTrigger": {
