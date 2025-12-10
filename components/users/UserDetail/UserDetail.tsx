@@ -37,7 +37,7 @@ export function UserDetail({
   const format = useFormatter();
 
   const formattedBirthdate = birthdate
-    ? format.dateTime(birthdate, {
+    ? format.dateTime(new Date(birthdate), {
         day: "2-digit",
         month: "short",
         year: "numeric",

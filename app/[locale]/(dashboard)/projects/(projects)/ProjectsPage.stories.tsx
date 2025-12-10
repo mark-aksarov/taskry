@@ -40,6 +40,8 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
+    page: 1,
+    pageSize: 10,
     ProjectFiltersFormContainer: () => (
       <ProjectFiltersForm {...ProjectFiltersFormStory.args} />
     ),

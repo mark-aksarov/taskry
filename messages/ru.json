@@ -171,6 +171,12 @@
       "sendButton": {
         "ariaLabel": "Отправить сообщение"
       }
+    },
+
+    "Pagination": {
+      "previousPage": "Предыдущая страница",
+      "nextPage": "Следующая страница",
+      "page": "страница {pageNumber}"
     }
   },
 
@@ -701,6 +707,10 @@
       "noPosition": "Должность не указана",
       "birthdate": "Дата рождения",
       "noBirthdate": "Дата рождения не указана"
+    },
+
+    "UserDetailCard": {
+      "title": "Детали пользователя"
     },
 
     "UserDetailBottomSheet": {

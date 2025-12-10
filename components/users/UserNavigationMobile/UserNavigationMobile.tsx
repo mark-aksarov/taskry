@@ -17,7 +17,7 @@ export function UserNavigationMobile() {
         href={`/team/${id}`}
         isSelected={pathname === `/team/${id}`}
       >
-        {t("userInfo")}
+        {t("info")}
       </UserNavigationMobileLink>
 
       <UserNavigationMobileLink

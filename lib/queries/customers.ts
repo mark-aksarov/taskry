@@ -29,32 +29,62 @@ export const getCustomerDetails = cache(async (customerId: number) => {
   });
 });
 
-export type GetCustomersType = ThenArg<ReturnType<typeof getCustomers>>;
-export const getCustomers = cache(async (workspaceId: number) => {
-  return await prisma.customer.findMany({
-    where: {
-      company: {
-        workspaceId,
-      },
-    },
-    select: {
-      id: true,
-      fullName: true,
-      email: true,
-      phoneNumber: true,
-      publicLink: true,
-      imageUrl: true,
+function getCustomerWhereClause(params: { workspaceId: number }) {
+  const { workspaceId } = params;
 
-      company: {
-        select: {
-          id: true,
-          name: true,
-          workspaceId: true,
+  return {
+    company: {
+      workspaceId,
+    },
+  };
+}
+
+export type GetCustomerListType = ThenArg<ReturnType<typeof getCustomerList>>;
+export const getCustomerList = cache(
+  async ({
+    workspaceId,
+    page,
+    pageSize,
+  }: {
+    workspaceId: number;
+    page: number;
+    pageSize: number;
+  }) => {
+    const where = getCustomerWhereClause({ workspaceId });
+    const skip = (page - 1) * pageSize;
+
+    return await prisma.customer.findMany({
+      where,
+      skip,
+      take: pageSize,
+
+      select: {
+        id: true,
+        fullName: true,
+        email: true,
+        phoneNumber: true,
+        publicLink: true,
+        imageUrl: true,
+
+        company: {
+          select: {
+            id: true,
+            name: true,
+            workspaceId: true,
+          },
         },
       },
-    },
-  });
-});
+    });
+  },
+);
+
+export const getCustomerCount = cache(
+  async ({ workspaceId }: { workspaceId: number }) => {
+    const where = getCustomerWhereClause({ workspaceId });
+
+    return prisma.customer.count({ where });
+  },
+);
 
 export type GetCustomerSummariesType = ThenArg<
   ReturnType<typeof getCustomerSummaries>

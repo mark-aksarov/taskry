@@ -29,27 +29,61 @@ export const getUserDetails = cache(async (userId: string) => {
   });
 });
 
-export type GetUserListType = ThenArg<ReturnType<typeof getUserList>>;
-export const getUserList = cache(async (workspaceId: number) => {
-  return await prisma.user.findMany({
-    where: { position: { workspaceId } },
-    select: {
-      id: true,
-      fullName: true,
-      email: true,
-      phoneNumber: true,
-      imageUrl: true,
-      publicLink: true,
+function getUserWhereClause(params: { workspaceId: number }) {
+  const { workspaceId } = params;
 
-      position: {
-        select: {
-          name: true,
-          workspaceId: true,
+  return {
+    position: {
+      workspaceId,
+    },
+  };
+}
+
+export type GetUserListType = ThenArg<ReturnType<typeof getUserList>>;
+export const getUserList = cache(
+  async ({
+    workspaceId,
+    page,
+    pageSize,
+  }: {
+    workspaceId: number;
+    page: number;
+    pageSize: number;
+  }) => {
+    const where = getUserWhereClause({ workspaceId });
+    const skip = (page - 1) * pageSize;
+
+    return await prisma.user.findMany({
+      where,
+      skip,
+      take: pageSize,
+
+      select: {
+        id: true,
+        fullName: true,
+        email: true,
+        phoneNumber: true,
+        imageUrl: true,
+        publicLink: true,
+
+        position: {
+          select: {
+            name: true,
+            workspaceId: true,
+          },
         },
       },
-    },
-  });
-});
+    });
+  },
+);
+
+export const getUserCount = cache(
+  async ({ workspaceId }: { workspaceId: number }) => {
+    const where = getUserWhereClause({ workspaceId });
+
+    return prisma.user.count({ where });
+  },
+);
 
 export type GeUserSummariesType = ThenArg<ReturnType<typeof getUserSummaries>>;
 export const getUserSummaries = cache(async (workspaceId: number) => {

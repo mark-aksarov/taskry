@@ -1,10 +1,11 @@
 import {
+  UserCard,
   UserCardLeft,
-  UserCardHeader,
   UserCardTitle,
   UserCardRight,
-  UserCard,
+  UserCardHeader,
 } from "../UserCard";
+import { useTranslations } from "next-intl";
 
 interface UserDetailCardProps {
   profileHeader: React.ReactNode;
@@ -17,11 +18,13 @@ export function UserDetailCard({
   profileDetail,
   navigationDesktop,
 }: UserDetailCardProps) {
+  const t = useTranslations("users.UserDetailCard");
+
   return (
     <UserCard>
       <UserCardLeft>
         <UserCardHeader>
-          <UserCardTitle>User Information</UserCardTitle>
+          <UserCardTitle>{t("title")}</UserCardTitle>
         </UserCardHeader>
         <div className="p-6">{profileDetail}</div>
       </UserCardLeft>

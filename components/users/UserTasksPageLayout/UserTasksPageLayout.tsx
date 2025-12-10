@@ -23,7 +23,15 @@ import { TaskToolbarActionsMenuTrigger } from "@/components/tasks/TaskToolbarAct
 
 interface UserTasksPageLayoutProps {
   userId: string;
-  UserTasksContainer: React.ComponentType<{ userId: string }>;
+  page: number;
+  pageSize: number;
+  baseUrl: string;
+  UserTasksContainer: React.ComponentType<{
+    page: number;
+    pageSize: number;
+    userId: string;
+    baseUrl: string;
+  }>;
   UserHeaderContainer: React.ComponentType<{ userId: string }>;
   NewTaskFormContainer: React.ComponentType;
   navigationDesktop: React.ReactNode;
@@ -32,6 +40,9 @@ interface UserTasksPageLayoutProps {
 
 export function UserTasksPageLayout({
   userId,
+  page,
+  pageSize,
+  baseUrl,
   UserTasksContainer,
   UserHeaderContainer,
   NewTaskFormContainer,
@@ -59,7 +70,12 @@ export function UserTasksPageLayout({
                 />
               </div>
             </UserCardHeader>
-            <UserTasksContainer userId={userId} />
+            <UserTasksContainer
+              userId={userId}
+              page={page}
+              pageSize={pageSize}
+              baseUrl={baseUrl}
+            />
           </UserCardLeft>
 
           <UserCardRight>
@@ -82,7 +98,12 @@ export function UserTasksPageLayout({
             <NewTaskModalTrigger newTaskForm={<NewTaskFormContainer />} />
           </ToolbarMobileBottom>
 
-          <UserTasksContainer userId={userId} />
+          <UserTasksContainer
+            userId={userId}
+            page={page}
+            pageSize={pageSize}
+            baseUrl={baseUrl}
+          />
         </PageGrid>
       </PageContainer>
     </>

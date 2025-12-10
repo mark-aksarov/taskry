@@ -4,7 +4,9 @@ import {
   ToolbarMobileBottom,
   ToolbarMobileHeading,
 } from "@/components/common/Toolbar";
+
 import { Suspense } from "react";
+import { useTranslations } from "next-intl";
 import { PageGrid } from "@/components/common/PageGrid";
 import { ViewModeProvider } from "@/components/common/ViewMode";
 import { PageContainer } from "@/components/common/PageContainer";
@@ -15,15 +17,21 @@ import { TaskToolbarSortingMenuTrigger } from "@/components/tasks/TaskToolbarSor
 import { TaskToolbarActionsMenuTrigger } from "@/components/tasks/TaskToolbarActionsMenuTrigger";
 import { TaskToolbarFiltersModalTrigger } from "@/components/tasks/TaskToolbarFiltersModalTrigger";
 import { TaskToolbarCreateNewMenuTrigger } from "@/components/tasks/TaskToolbarCreateNewMenuTrigger";
-import { useTranslations } from "next-intl";
 
 interface TasksPageProps {
+  page: number;
+  pageSize: number;
   TaskFiltersFormContainer: React.ComponentType;
   NewTaskFormContainer: React.ComponentType;
-  TasksServerContainer: React.ComponentType;
+  TasksServerContainer: React.ComponentType<{
+    page: number;
+    pageSize: number;
+  }>;
 }
 
 export function TasksPage({
+  page,
+  pageSize,
   TaskFiltersFormContainer,
   NewTaskFormContainer,
   TasksServerContainer,
@@ -81,7 +89,7 @@ export function TasksPage({
             />
           </ToolbarMobileBottom>
 
-          <TasksServerContainer />
+          <TasksServerContainer page={page} pageSize={pageSize} />
         </ViewModeProvider>
       </PageGrid>
     </PageContainer>

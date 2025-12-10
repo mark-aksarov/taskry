@@ -15,11 +15,18 @@ import { CustomerToolbarFiltersModalTrigger } from "@/components/customer/Custom
 import { CustomerToolbarCreateNewMenuTrigger } from "@/components/customer/CustomerToolbarCreateNewMenuTrigger";
 
 interface CustomersPageProps {
+  page: number;
+  pageSize: number;
   CustomerFiltersFormContainer: React.ComponentType;
-  CustomersServerContainer: React.ComponentType;
+  CustomersServerContainer: React.ComponentType<{
+    page: number;
+    pageSize: number;
+  }>;
 }
 
 export async function CustomersPage({
+  page,
+  pageSize,
   CustomerFiltersFormContainer,
   CustomersServerContainer,
 }: CustomersPageProps) {
@@ -62,7 +69,7 @@ export async function CustomersPage({
               newCompanyForm={<></>}
             />
           </ToolbarMobileBottom>
-          <CustomersServerContainer />
+          <CustomersServerContainer page={page} pageSize={pageSize} />
         </ViewModeProvider>
       </PageGrid>
     </PageContainer>

@@ -16,7 +16,7 @@ export const UserTaskListItemLayout = ({
   actionMenuSlot,
 }: UserTaskListItemLayoutProps) => {
   return (
-    <ListItem className="border-gray-300 md:rounded-none md:px-0 md:py-4 md:shadow-none md:not-last:border-b-1 dark:border-gray-600">
+    <ListItem className="border-gray-300 md:rounded-none md:border-b-1 md:px-0 md:py-4 md:shadow-none dark:border-gray-600">
       {checkboxSlot}
       {deadlineSlot}
 

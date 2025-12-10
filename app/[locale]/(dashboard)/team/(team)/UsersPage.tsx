@@ -4,7 +4,9 @@ import {
   ToolbarMobileBottom,
   ToolbarMobileHeading,
 } from "@/components/common/Toolbar";
+
 import { Suspense } from "react";
+import { useTranslations } from "next-intl";
 import { PageGrid } from "@/components/common/PageGrid";
 import { ViewModeProvider } from "@/components/common/ViewMode";
 import { PageContainer } from "@/components/common/PageContainer";
@@ -13,14 +15,20 @@ import { UserFiltersFormSkeleton } from "@/components/users/UserFiltersForm";
 import { UserToolbarActionsMenuTrigger } from "@/components/users/UserToolbarActionsMenuTrigger";
 import { UserToolbarFiltersModalTrigger } from "@/components/users/UserToolbarFiltersModalTrigger";
 import { UserToolbarCreateNewMenuTrigger } from "@/components/users/UserToolbarCreateNewMenuTrigger";
-import { useTranslations } from "next-intl";
 
 interface UsersPageProps {
+  page: number;
+  pageSize: number;
   UserFiltersFormContainer: React.ComponentType;
-  UsersServerContainer: React.ComponentType;
+  UsersServerContainer: React.ComponentType<{
+    page: number;
+    pageSize: number;
+  }>;
 }
 
-export async function UsersPage({
+export function UsersPage({
+  page,
+  pageSize,
   UserFiltersFormContainer,
   UsersServerContainer,
 }: UsersPageProps) {
@@ -65,7 +73,7 @@ export async function UsersPage({
               newPositionForm={<></>}
             />
           </ToolbarMobileBottom>
-          <UsersServerContainer />
+          <UsersServerContainer page={page} pageSize={pageSize} />
         </ViewModeProvider>
       </PageGrid>
     </PageContainer>

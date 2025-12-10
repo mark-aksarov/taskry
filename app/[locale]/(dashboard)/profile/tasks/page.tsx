@@ -1,27 +1,36 @@
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
-import { getTaskList } from "@/lib/queries/task";
+import { getTaskCount } from "@/lib/queries/task";
 import { ProfileTasksPage } from "./ProfileTasksPage";
+import { getPageParams } from "@/lib/utils/getPageParams";
 import { ProfileTasksPageEmpty } from "./ProfileTasksPageEmpty";
 import { getUserWorkspaceId } from "@/lib/utils/getUserWorkspaceId";
 import { UserTasksServerContainer } from "@/components/users/UserTasksServerContainer";
 import { UserHeaderServerContainer } from "@/components/users/UserHeaderServerContainer";
 import { NewTaskFormServerContainer } from "@/components/tasks/NewTaskFormServerContainer";
 
-export default async function AppProfileTasksPage() {
+export default async function AppProfileTasksPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ page?: string; pageSize?: string }>;
+}) {
+  const params = await searchParams;
+  const { page, pageSize } = getPageParams({
+    ...params,
+    defaultPage: 1,
+    defaultPageSize: 10,
+  });
+
   const session = await auth.api.getSession({
     headers: await headers(),
   });
+
   const { id: userId } = session!.user;
 
   const workspaceId = await getUserWorkspaceId();
+  const taskCount = await getTaskCount({ workspaceId });
 
-  const tasks = await getTaskList({
-    workspaceId,
-    assigneeId: userId,
-  });
-
-  if (!tasks.length)
+  if (!taskCount)
     return (
       <ProfileTasksPageEmpty
         userId={userId}
@@ -32,6 +41,8 @@ export default async function AppProfileTasksPage() {
   return (
     <ProfileTasksPage
       userId={userId}
+      page={page}
+      pageSize={pageSize}
       UserTasksContainer={UserTasksServerContainer}
       UserHeaderContainer={UserHeaderServerContainer}
       NewTaskFormContainer={NewTaskFormServerContainer}

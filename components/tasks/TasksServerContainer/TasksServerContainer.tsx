@@ -6,15 +6,25 @@ import { TaskListItem } from "../TaskListItem";
 import { TaskGridItem } from "../TaskGridItem";
 import { ViewModeLayout } from "@/components/common/ViewMode";
 import { getWorkspaceIdByUserId } from "@/lib/queries/workspace";
-import { getTaskList, GetTaskListType } from "@/lib/queries/task";
+import { getTaskCount, getTaskList, GetTaskListType } from "@/lib/queries/task";
+import { Pagination } from "@/components/common/Pagination";
 
-export async function TasksServerContainer() {
+interface TasksServerContainerProps {
+  page: number;
+  pageSize: number;
+}
+
+export async function TasksServerContainer({
+  page,
+  pageSize,
+}: TasksServerContainerProps) {
   const session = await auth.api.getSession({
     headers: await headers(),
   });
 
   const workspaceId = await getWorkspaceIdByUserId(session!.user.id);
-  const tasks = await getTaskList({ workspaceId });
+  const tasks = await getTaskList({ page, pageSize, workspaceId });
+  const count = await getTaskCount({ workspaceId });
 
   const commonProps = (task: GetTaskListType[number]) => ({
     id: task.id,
@@ -35,32 +45,46 @@ export async function TasksServerContainer() {
     subtasks: task._count.subtasks,
   });
 
+  const totalPages = Math.ceil(count / pageSize);
+
   return (
-    <ViewModeLayout
-      list={
-        <TaskList>
-          {tasks.map((task) => (
-            <TaskListItem
-              key={task.id}
-              {...commonProps(task)}
-              category={task.category}
-              project={task.project}
-              showCheckbox
-            />
-          ))}
-        </TaskList>
-      }
-      grid={
-        <TaskGrid>
-          {tasks.map((task) => (
-            <TaskGridItem
-              key={task.id}
-              subtasksDone={task.subtasks.filter((s) => s.isDone).length}
-              {...commonProps(task)}
-            />
-          ))}
-        </TaskGrid>
-      }
-    />
+    <>
+      <ViewModeLayout
+        list={
+          <TaskList>
+            {tasks.map((task) => (
+              <TaskListItem
+                key={task.id}
+                {...commonProps(task)}
+                category={task.category}
+                project={task.project}
+                showCheckbox
+              />
+            ))}
+          </TaskList>
+        }
+        grid={
+          <TaskGrid>
+            {tasks.map((task) => (
+              <TaskGridItem
+                key={task.id}
+                subtasksDone={task.subtasks.filter((s) => s.isDone).length}
+                {...commonProps(task)}
+              />
+            ))}
+          </TaskGrid>
+        }
+      />
+      {totalPages > 1 && (
+        <div className="flex justify-center">
+          <Pagination
+            page={page}
+            totalPages={totalPages}
+            pageSize={pageSize}
+            baseUrl="/tasks"
+          />
+        </div>
+      )}
+    </>
   );
 }

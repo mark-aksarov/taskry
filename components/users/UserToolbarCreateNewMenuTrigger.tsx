@@ -57,13 +57,13 @@ export function UserToolbarCreateNewMenuTrigger({
         )}
         placement="bottom right"
       >
-        <Item textValue={t("user")} key="user">
+        <Item textValue={t("items.user")} key="user">
           <Users size={16} strokeWidth={1.5} absoluteStrokeWidth />
-          {t("user")}
+          {t("items.user")}
         </Item>
-        <Item textValue={t("position")} key="position">
+        <Item textValue={t("items.position")} key="position">
           <BriefcaseBusiness size={16} strokeWidth={1.5} absoluteStrokeWidth />
-          {t("position")}
+          {t("items.position")}
         </Item>
       </ResponsiveMenuTrigger>
 

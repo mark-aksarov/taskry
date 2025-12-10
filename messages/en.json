@@ -171,6 +171,12 @@
       "sendButton": {
         "ariaLabel": "Send Message"
       }
+    },
+
+    "Pagination": {
+      "previousPage": "Previous page",
+      "nextPage": "Next page",
+      "page": "page {pageNumber}"
     }
   },
 
@@ -701,6 +707,10 @@
       "noPosition": "Position not specified",
       "birthdate": "Birthdate",
       "noBirthdate": "No birthdate"
+    },
+
+    "UserDetailCard": {
+      "title": "User Information"
     },
 
     "UserDetailBottomSheet": {

@@ -1,3 +1,3 @@
 export { AssignedTasksSection } from "./AssignedTasksSection";
-export { AssignedTasksSectionHeading } from "./AssignedTasksSectionHeading";
 export { AssignedTasksEmptyCard } from "./AssignedTasksEmptyCard";
+export { AssignedTasksSectionHeading } from "./AssignedTasksSectionHeading";

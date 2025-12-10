@@ -73,28 +73,44 @@ export const getTaskSummary = cache(async (id: number) => {
   });
 });
 
+function getTaskWhereClause(params: {
+  workspaceId: number;
+  assigneeId?: string;
+}) {
+  const { workspaceId, assigneeId } = params;
+
+  return {
+    category: {
+      workspaceId,
+    },
+    ...(assigneeId && { assigneeId }),
+  };
+}
+
 export type GetTaskListType = ThenArg<ReturnType<typeof getTaskList>>;
 export const getTaskList = cache(
   async ({
     workspaceId,
     assigneeId,
+    page,
+    pageSize,
   }: {
     workspaceId: number;
     assigneeId?: string;
+    page: number;
+    pageSize: number;
   }) => {
-    return await prisma.task.findMany({
-      where: {
-        category: {
-          workspaceId,
-        },
+    const where = getTaskWhereClause({ workspaceId, assigneeId });
 
-        ...(assigneeId && { assigneeId }),
-      },
+    const skip = (page - 1) * pageSize;
 
+    return prisma.task.findMany({
+      where,
+      skip,
+      take: pageSize,
       orderBy: {
         deadline: "asc",
       },
-
       select: {
         id: true,
         title: true,
@@ -138,6 +154,20 @@ export const getTaskList = cache(
         },
       },
     });
+  },
+);
+
+export const getTaskCount = cache(
+  async ({
+    workspaceId,
+    assigneeId,
+  }: {
+    workspaceId: number;
+    assigneeId?: string;
+  }) => {
+    const where = getTaskWhereClause({ workspaceId, assigneeId });
+
+    return prisma.task.count({ where });
   },
 );
 

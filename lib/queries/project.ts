@@ -63,15 +63,34 @@ export const getProjectSummary = cache(async (id: number) => {
   });
 });
 
+function getProjectWhereClause(params: { workspaceId: number }) {
+  const { workspaceId } = params;
+
+  return {
+    category: {
+      workspaceId,
+    },
+  };
+}
+
 export type GetProjectListType = ThenArg<ReturnType<typeof getProjectList>>;
 export const getProjectList = cache(
-  async ({ workspaceId }: { workspaceId: number }) => {
+  async ({
+    workspaceId,
+    page,
+    pageSize,
+  }: {
+    workspaceId: number;
+    page: number;
+    pageSize: number;
+  }) => {
+    const where = getProjectWhereClause({ workspaceId });
+    const skip = (page - 1) * pageSize;
+
     return await prisma.project.findMany({
-      where: {
-        category: {
-          workspaceId,
-        },
-      },
+      where,
+      skip,
+      take: pageSize,
 
       select: {
         id: true,
@@ -122,6 +141,14 @@ export const getProjectList = cache(
         },
       },
     });
+  },
+);
+
+export const getProjectCount = cache(
+  async ({ workspaceId }: { workspaceId: number }) => {
+    const where = getProjectWhereClause({ workspaceId });
+
+    return prisma.project.count({ where });
   },
 );
 

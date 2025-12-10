@@ -1,36 +1,41 @@
-import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { DashboardPage } from "./DashboardPage";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { PageDecorator } from "@/.storybook/PageDecorator";
-import { mocked } from "storybook/test";
-import { usePathname } from "next/navigation";
 import {
   TotalProjectsCard,
   TotalProjectsCardSkeleton,
 } from "@/components/projects/TotalProjectsCard";
+
 import {
   AssignedTasksSection,
   AssignedTasksSectionHeading,
 } from "@/components/tasks/AssignedTasks";
+
 import {
   TotalTasksCard,
   TotalTasksCardSkeleton,
 } from "@/components/tasks/TotalTasksCard";
-import { Repeat } from "@/components/common/Repeat";
-import { TaskList } from "@/components/tasks/TaskList";
+
 import {
   TotalUsersCard,
   TotalUsersCardSkeleton,
 } from "@/components/users/TotalUsersCard";
 import { TaskListItemSkeleton } from "@/components/tasks/TaskListItem";
+
 import {
   TotalCustomersCard,
   TotalCustomersCardSkeleton,
 } from "@/components/customer/TotalCustomersCard";
+
+import { mocked } from "storybook/test";
+import { usePathname } from "next/navigation";
+import { DashboardPage } from "./DashboardPage";
+import { Repeat } from "@/components/common/Repeat";
+import { TaskList } from "@/components/tasks/TaskList";
+import { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { PageDecorator } from "@/.storybook/PageDecorator";
+import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { Default as TaskListStory } from "@/components/tasks/TaskList/TaskList.stories";
+import { withTaskComments } from "@/components/tasks/TaskCommentsClientContainer/decorators";
 import { AssignedTasksEmptyCard } from "@/components/tasks/AssignedTasks/AssignedTasksEmptyCard";
 import { withTaskDetailCompact } from "@/components/tasks/TaskDetailCompactClientContainer/decorators";
-import { withTaskComments } from "@/components/tasks/TaskCommentsClientContainer/decorators";
 
 const meta = {
   title: "components/pages/DashboardPage",
@@ -53,6 +58,8 @@ type Story = StoryObj<typeof DashboardPage>;
 export const Default: Story = {
   render: () => (
     <DashboardPage
+      page={1}
+      pageSize={20}
       TotalProjectsCardContainer={() => (
         <TotalProjectsCard totalProjects={50} />
       )}
@@ -74,6 +81,8 @@ export const Default: Story = {
 export const Loading = {
   render: () => (
     <DashboardPage
+      page={1}
+      pageSize={20}
       TotalProjectsCardContainer={() => <TotalProjectsCardSkeleton />}
       TotalTasksCardContainer={() => <TotalTasksCardSkeleton />}
       TotalUsersCardContainer={() => <TotalUsersCardSkeleton />}
@@ -93,6 +102,8 @@ export const Loading = {
 export const WithNoTasks = {
   render: () => (
     <DashboardPage
+      page={1}
+      pageSize={20}
       TotalProjectsCardContainer={() => (
         <TotalProjectsCard totalProjects={50} />
       )}

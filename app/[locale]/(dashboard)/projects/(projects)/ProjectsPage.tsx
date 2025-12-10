@@ -19,12 +19,19 @@ import { ProjectToolbarFiltersModalTrigger } from "@/components/projects/Project
 import { ProjectToolbarCreateNewMenuTrigger } from "@/components/projects/ProjectToolbarCreateNewMenuTrigger";
 
 interface ProjectsPageProps {
+  page: number;
+  pageSize: number;
   ProjectFiltersFormContainer: React.ComponentType;
   NewProjectFormContainer: React.ComponentType;
-  ProjectsServerContainer: React.ComponentType;
+  ProjectsServerContainer: React.ComponentType<{
+    page: number;
+    pageSize: number;
+  }>;
 }
 
 export function ProjectsPage({
+  page,
+  pageSize,
   ProjectFiltersFormContainer,
   NewProjectFormContainer,
   ProjectsServerContainer,
@@ -81,7 +88,7 @@ export function ProjectsPage({
             />
           </ToolbarMobileBottom>
 
-          <ProjectsServerContainer />
+          <ProjectsServerContainer page={page} pageSize={pageSize} />
         </ViewModeProvider>
       </PageGrid>
     </PageContainer>

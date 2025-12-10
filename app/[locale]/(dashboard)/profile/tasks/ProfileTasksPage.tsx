@@ -4,13 +4,22 @@ import { ProfileNavigationDesktop } from "@/components/users/ProfileNavigationDe
 
 interface TeamProfileTasksPageProps {
   userId: string;
-  UserTasksContainer: React.ComponentType<{ userId: string }>;
+  page: number;
+  pageSize: number;
+  UserTasksContainer: React.ComponentType<{
+    page: number;
+    pageSize: number;
+    userId: string;
+    baseUrl: string;
+  }>;
   UserHeaderContainer: React.ComponentType<{ userId: string }>;
   NewTaskFormContainer: React.ComponentType;
 }
 
 export function ProfileTasksPage({
   userId,
+  page,
+  pageSize,
   UserTasksContainer,
   UserHeaderContainer,
   NewTaskFormContainer,
@@ -18,6 +27,9 @@ export function ProfileTasksPage({
   return (
     <UserTasksPageLayout
       userId={userId}
+      page={page}
+      pageSize={pageSize}
+      baseUrl="/profile/tasks"
       UserTasksContainer={UserTasksContainer}
       UserHeaderContainer={UserHeaderContainer}
       NewTaskFormContainer={NewTaskFormContainer}

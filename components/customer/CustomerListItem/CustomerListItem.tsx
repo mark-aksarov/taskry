@@ -55,7 +55,7 @@ export function CustomerListItem({
 
   return (
     <ListItem>
-      <Checkbox aria-label={t("checkboxLabel")} />
+      <Checkbox aria-label={t("checkboxAriaLabel")} />
 
       <>
         <ItemBaseDetailModalTrigger

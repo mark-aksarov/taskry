@@ -5,7 +5,7 @@ import { usePathname } from "@/i18n/navigation";
 import { UserNavigationMobileLink } from "../UserNavigationMobile";
 
 export function ProfileNavigationMobile() {
-  const t = useTranslations("users.ProfileNavigationDesktop");
+  const t = useTranslations("users.ProfileNavigationMobile");
   const pathname = usePathname();
 
   return (

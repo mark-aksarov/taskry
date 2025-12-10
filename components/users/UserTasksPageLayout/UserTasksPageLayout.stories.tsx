@@ -38,6 +38,9 @@ type Story = StoryObj<typeof meta>;
 export const Default = {
   args: {
     userId: "BKs42HvVDEZFoaJUmTqf1gTN0K8pUFjI",
+    page: 1,
+    pageSize: 10,
+    baseUrl: "/profile/tasks",
     UserTasksContainer: () => <UserTaskList {...UserTaskListStory.args} />,
     UserHeaderContainer: () => <PersonHeader {...PersonHeaderStory.args} />,
     NewTaskFormContainer: () => <NewTaskForm {...TaskFormBaseStory.args} />,

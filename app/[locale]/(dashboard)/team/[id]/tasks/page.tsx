@@ -1,4 +1,5 @@
-import { getTaskList } from "@/lib/queries/task";
+import { getTaskCount } from "@/lib/queries/task";
+import { getPageParams } from "@/lib/utils/getPageParams";
 import { TeamProfileTasksPage } from "./TeamProfileTasksPage";
 import { getUserWorkspaceId } from "@/lib/utils/getUserWorkspaceId";
 import { TeamProfileTasksPageEmpty } from "./TeamProfileTasksPageEmpty";
@@ -8,14 +9,22 @@ import { NewTaskFormServerContainer } from "@/components/tasks/NewTaskFormServer
 
 export default async function AppProfileTasksPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ id: string }>;
+  searchParams: Promise<{ page?: string; pageSize?: string }>;
 }) {
   const { id } = await params;
+  const query = await searchParams;
+  const { page, pageSize } = getPageParams({
+    ...query,
+    defaultPage: 1,
+    defaultPageSize: 10,
+  });
   const workspaceId = await getUserWorkspaceId();
-  const tasks = await getTaskList({ workspaceId, assigneeId: id });
+  const taskCount = await getTaskCount({ workspaceId });
 
-  if (!tasks.length)
+  if (!taskCount)
     return (
       <TeamProfileTasksPageEmpty
         userId={id}
@@ -26,6 +35,8 @@ export default async function AppProfileTasksPage({
   return (
     <TeamProfileTasksPage
       userId={id}
+      page={page}
+      pageSize={pageSize}
       UserTasksContainer={UserTasksServerContainer}
       UserHeaderContainer={UserHeaderServerContainer}
       NewTaskFormContainer={NewTaskFormServerContainer}
