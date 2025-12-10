@@ -1,12 +1,16 @@
 import { ToggleButton, ToggleButtonGroup } from "@/components/ui";
+import { ToggleButtonGroupProps } from "@/components/ui/ToggleButtonGroup/ToggleButtonGroup";
 import { useTranslations } from "next-intl";
 
-interface NotificationFilterToggleButtonGroupProps {
+interface NotificationFilterToggleButtonGroupProps
+  extends Pick<ToggleButtonGroupProps, "selectedKeys" | "onSelectionChange"> {
   notificationsCount: number;
   unreadCount: number;
 }
 
 export function NotificationFilterToggleButtonGroup({
+  selectedKeys,
+  onSelectionChange,
   notificationsCount,
   unreadCount,
 }: NotificationFilterToggleButtonGroupProps) {
@@ -16,7 +20,8 @@ export function NotificationFilterToggleButtonGroup({
 
   return (
     <ToggleButtonGroup
-      defaultSelectedKeys={["all"]}
+      selectedKeys={selectedKeys}
+      onSelectionChange={onSelectionChange}
       selectionMode="single"
       disallowEmptySelection
       variant="contrast"

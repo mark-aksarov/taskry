@@ -5,19 +5,20 @@ import { AppHeaderTitle } from "./AppHeaderTitle";
 import { AppHeaderSearchForm } from "./AppHeaderSearchForm";
 import { AppHeaderLangMenuTrigger } from "./AppHeaderLangMenuTrigger";
 import { AppHeaderThemeToggleButton } from "./AppHeaderThemeToggleButton";
+import { NotificationModalTrigger } from "@/components/notifications/NotificationModalTrigger";
 
 interface AppHeaderProps {
-  notificationModalTrigger: React.ReactNode;
   appBottomSheetTrigger: React.ReactNode;
   appSidebarSheetTrigger: React.ReactNode;
 }
 
 export const AppHeader = ({
-  notificationModalTrigger,
   appBottomSheetTrigger,
   appSidebarSheetTrigger,
 }: AppHeaderProps) => {
   const buttonClasses = "rounded-full p-3";
+
+  const notificationModalTrigger = <NotificationModalTrigger />;
 
   return (
     <>

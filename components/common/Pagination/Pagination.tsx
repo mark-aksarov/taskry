@@ -51,6 +51,7 @@ export function Pagination({
       <Button
         as={getHref ? "a" : "button"}
         {...(getHref ? { href: getHref(page - 1) } : {})}
+        {...(onChange ? { onPress: () => onChange(page - 1) } : {})}
         iconLeft={
           <ChevronLeft size={18} strokeWidth={1.5} absoluteStrokeWidth />
         }
@@ -66,6 +67,7 @@ export function Pagination({
           <Button
             as={getHref ? "a" : "button"}
             {...(getHref ? { href: getHref(p) } : {})}
+            {...(onChange ? { onPress: () => onChange(p) } : {})}
             key={idx}
             label={p}
             variant={p === page ? "primary" : "ghost"}
@@ -91,6 +93,7 @@ export function Pagination({
       <Button
         as={getHref ? "a" : "button"}
         {...(getHref ? { href: getHref(page + 1) } : {})}
+        {...(onChange ? { onPress: () => onChange(page + 1) } : {})}
         iconLeft={
           <ChevronRight size={18} strokeWidth={1.5} absoluteStrokeWidth />
         }

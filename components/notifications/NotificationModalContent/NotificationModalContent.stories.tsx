@@ -1,9 +1,9 @@
 import { NotificationList } from "../NotificationList";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { NotificationModalContent } from "./NotificationModalContent";
-import { Default as NotificationListStory } from "../NotificationList/NotificationList.stories";
-import { NotificationFilterToggleButtonGroup } from "../NotificationFilterToggleButtonGroup";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { NotificationFilterToggleButtonGroup } from "../NotificationFilterToggleButtonGroup";
+import { Default as NotificationListStory } from "../NotificationList/NotificationList.stories";
 
 const meta = {
   title: "Components/notifications/NotificationModalContent",

@@ -8,7 +8,7 @@ export const NotificationListItemSkeleton = () => {
     <div className={notificationListItemStyles}>
       <ImageContainerSkeleton className="h-10 w-10" />
       <NotificationListItemInfoSkeleton />
-      <ItemBaseActionMenuTriggerSkeleton />
+      <ItemBaseActionMenuTriggerSkeleton className="ml-auto" />
     </div>
   );
 };

@@ -1,22 +1,25 @@
-import { ResponsiveModal } from "@/components/common/ResponsiveModal";
+"use client";
+
 import {
   Button,
   Dialog,
   DialogBody,
-  DialogCloseButton,
   DialogHeader,
   DialogHeading,
   RACDialogTrigger,
+  DialogCloseButton,
 } from "@/components/ui";
+import { useContext } from "react";
 import { Bell } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { ResponsiveModal } from "@/components/common/ResponsiveModal";
+import { NotificationModalContentClientContainerContext } from "../NotificationModalContentClientContainer";
 
-export function NotificationModalTrigger({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export function NotificationModalTrigger() {
   const t = useTranslations("notifications.NotificationModalTrigger");
+  const NotificationModalContentContainer = useContext(
+    NotificationModalContentClientContainerContext,
+  );
 
   return (
     <RACDialogTrigger>
@@ -28,12 +31,13 @@ export function NotificationModalTrigger({
       />
 
       <ResponsiveModal isDismissable className="w-[600px]">
-        <Dialog className="md:max-h-[calc(100dvh-64px)]">
+        <Dialog className="md:h-[calc(100dvh-64px)]">
           <DialogHeader>
             <DialogHeading>{t("dialogHeading")}</DialogHeading>
             <DialogCloseButton />
           </DialogHeader>
-          <DialogBody className="p-0!">{children}</DialogBody>
+
+          <NotificationModalContentContainer />
         </Dialog>
       </ResponsiveModal>
     </RACDialogTrigger>

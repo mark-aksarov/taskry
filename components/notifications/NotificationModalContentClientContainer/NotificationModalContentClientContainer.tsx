@@ -1,0 +1,190 @@
+"use client";
+
+import {
+  NotificationListItem,
+  NotificationListItemSkeleton,
+} from "../NotificationListItem";
+
+import useSWR from "swr";
+import { useState } from "react";
+import { Repeat } from "@/components/common/Repeat";
+import { NotificationList } from "../NotificationList";
+import { Pagination } from "@/components/common/Pagination";
+import { NotificationModalContent } from "../NotificationModalContent";
+import { DialogBody, DialogFooter, Link, Skeleton } from "@/components/ui";
+import { NotificationFilterToggleButtonGroup } from "../NotificationFilterToggleButtonGroup";
+
+function getTarget(notification: any) {
+  const { type, target, targetName } = notification;
+  switch (type) {
+    case "TASK_ADDED":
+    case "TASK_UPDATED":
+      return (
+        <Link className="inline" href={`/users/${target?.task?.id}`}>
+          {target?.task?.title}
+        </Link>
+      );
+    case "TASK_DELETED":
+      return targetName;
+
+    case "PROJECT_ADDED":
+    case "PROJECT_UPDATED":
+      return (
+        <Link className="inline" href={`/users/${target?.project?.id}`}>
+          {target?.project?.title}
+        </Link>
+      );
+    case "PROJECT_DELETED":
+      return targetName;
+
+    case "USER_ADDED":
+    case "USER_UPDATED":
+      return (
+        <Link className="inline" href={`/users/${target?.user?.id}`}>
+          {target?.user?.fullName}
+        </Link>
+      );
+    case "USER_DELETED":
+      return targetName;
+
+    case "CUSTOMER_ADDED":
+    case "CUSTOMER_UPDATED":
+      return (
+        <Link className="inline" href={`/customers/${target?.customer?.id}`}>
+          {target?.customer?.fullName}
+        </Link>
+      );
+    case "CUSTOMER_DELETED":
+      return targetName;
+
+    case "COMMENT_REPLIED": {
+      const comment = target?.comment!;
+      return (
+        <Link
+          className="inline"
+          href={`/${comment.project ? "projects" : "tasks"}?commentId=${comment.id}`}
+        >
+          {comment.project ? comment.project.title : comment.task!.title}
+        </Link>
+      );
+    }
+    case "COMMENT_ADDED": {
+      const comment = target?.comment!;
+      return (
+        <Link
+          className="inline"
+          href={`/${comment.project ? "projects" : "tasks"}?commentId=${comment.id}`}
+        >
+          {comment.project ? comment.project.title : comment.task!.title}
+        </Link>
+      );
+    }
+
+    default:
+      throw new Error("Invalid notification type");
+  }
+}
+
+function getComment(notification: any) {
+  const { target } = notification;
+
+  if (target?.comment) {
+    return {
+      id: target.comment.id,
+      content: target.comment.content,
+      attachments: target.comment.attachments.map((attachment: any) => ({
+        id: attachment.id,
+        fileUrl: attachment.fileUrl,
+        fileName: attachment.fileName,
+      })),
+    };
+  }
+
+  return undefined;
+}
+
+const fetcher = (url: string) => fetch(url).then((res) => res.json());
+
+type NotificationFilter = "all" | "unread";
+
+export function NotificationModalContentClientContainer() {
+  const [page, setPage] = useState(1);
+  const [filter, setFilter] = useState<NotificationFilter>("all");
+  const pageSize = 10;
+
+  const { data, isLoading } = useSWR(
+    `/api/notifications?page=${page}&pageSize=${pageSize}&filter=${filter}`,
+    fetcher,
+  );
+
+  if (isLoading) {
+    return (
+      <DialogBody className="p-0!">
+        <NotificationModalContent>
+          <div className="flex gap-4">
+            <Skeleton className="h-8 w-[5rem] rounded-lg" />
+            <Skeleton className="h-8 w-[5rem] rounded-lg" />
+          </div>
+          <NotificationList>
+            <Repeat
+              items={10}
+              renderItem={() => <NotificationListItemSkeleton />}
+            />
+          </NotificationList>
+        </NotificationModalContent>
+      </DialogBody>
+    );
+  }
+
+  const { notifications, totalPages, totalCount, unreadCount } = data;
+
+  return (
+    <>
+      <DialogBody className="p-0!">
+        <NotificationModalContent>
+          <NotificationFilterToggleButtonGroup
+            notificationsCount={totalCount}
+            unreadCount={unreadCount}
+            selectedKeys={[filter]}
+            onSelectionChange={(keys) => {
+              setPage(1);
+              setFilter([...keys][0] as NotificationFilter);
+            }}
+          />
+
+          <NotificationList>
+            {notifications.map((notification: any) => (
+              <NotificationListItem
+                key={notification.id}
+                isRead={notification.isRead}
+                actor={
+                  notification.actor
+                    ? {
+                        id: notification.actor.id,
+                        fullName: notification.actor.fullName,
+                        imageUrl: notification.actor.imageUrl || undefined,
+                      }
+                    : undefined
+                }
+                date={notification.createdAt}
+                type={notification.type.toString()}
+                target={getTarget(notification)}
+                comment={getComment(notification)}
+              />
+            ))}
+          </NotificationList>
+        </NotificationModalContent>
+      </DialogBody>
+      {totalPages > 1 && (
+        <DialogFooter className="justify-center">
+          <Pagination
+            page={page}
+            totalPages={totalPages}
+            pageSize={pageSize}
+            onChange={(p) => setPage(p)}
+          />
+        </DialogFooter>
+      )}
+    </>
+  );
+}

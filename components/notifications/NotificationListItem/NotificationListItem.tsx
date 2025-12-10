@@ -59,7 +59,7 @@ export const NotificationListItem = ({
 
   const format = useFormatter();
 
-  const formattedDate = format.dateTime(date, {
+  const formattedDate = format.dateTime(new Date(date), {
     day: "2-digit",
     month: "short",
     year: "numeric",
@@ -130,22 +130,20 @@ export const NotificationListItem = ({
         )}
       </div>
 
-      <div className="ml-auto">
-        <ItemBaseActionMenuTrigger>
-          <>
-            {!isRead && (
-              <Item textValue={t("markAsRead")} key="read">
-                <ListCheck size={16} strokeWidth={1.5} absoluteStrokeWidth />{" "}
-                {t("markAsRead")}
-              </Item>
-            )}
-          </>
-          <Item textValue={t("delete")} key="delete">
-            <Trash size={16} strokeWidth={1.5} absoluteStrokeWidth />{" "}
-            {t("delete")}
-          </Item>
-        </ItemBaseActionMenuTrigger>
-      </div>
+      <ItemBaseActionMenuTrigger className="ml-auto">
+        <>
+          {!isRead && (
+            <Item textValue={t("markAsRead")} key="read">
+              <ListCheck size={16} strokeWidth={1.5} absoluteStrokeWidth />{" "}
+              {t("markAsRead")}
+            </Item>
+          )}
+        </>
+        <Item textValue={t("delete")} key="delete">
+          <Trash size={16} strokeWidth={1.5} absoluteStrokeWidth />{" "}
+          {t("delete")}
+        </Item>
+      </ItemBaseActionMenuTrigger>
     </div>
   );
 };

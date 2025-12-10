@@ -3,7 +3,6 @@ import { headers } from "next/headers";
 import { redirect } from "@/i18n/navigation";
 import { getLocale } from "next-intl/server";
 import { DashboardLayout } from "./DashboardLayout";
-import { NotificationModalContentServerContainer } from "@/components/notifications/NotificationModalContentServerContainer";
 
 export default async function AppDashboardLayout({
   children,
@@ -24,13 +23,5 @@ export default async function AppDashboardLayout({
     redirect({ href: "/verify-email", locale });
   }
 
-  return (
-    <DashboardLayout
-      NotificationModalContentContainer={
-        NotificationModalContentServerContainer
-      }
-    >
-      {children}
-    </DashboardLayout>
-  );
+  return <DashboardLayout>{children}</DashboardLayout>;
 }
