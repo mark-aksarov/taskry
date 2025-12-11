@@ -47,6 +47,13 @@ export async function TasksServerContainer({
 
   const totalPages = Math.ceil(count / pageSize);
 
+  const paginationProps = {
+    page,
+    totalPages,
+    pageSize,
+    baseUrl: "/tasks",
+  };
+
   return (
     <>
       <ViewModeLayout
@@ -78,11 +85,11 @@ export async function TasksServerContainer({
       {totalPages > 1 && (
         <div className="flex justify-center">
           <Pagination
-            page={page}
-            totalPages={totalPages}
-            pageSize={pageSize}
-            baseUrl="/tasks"
+            {...paginationProps}
+            size="large"
+            className="max-md:hidden"
           />
+          <Pagination {...paginationProps} className="md:hidden" />
         </div>
       )}
     </>

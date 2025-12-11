@@ -28,6 +28,13 @@ export async function UserTasksServerContainer({
   const count = await getTaskCount({ workspaceId, assigneeId: userId });
   const totalPages = Math.ceil(count / pageSize);
 
+  const paginationProps = {
+    page,
+    totalPages,
+    pageSize,
+    baseUrl,
+  };
+
   return (
     <>
       <UserTaskList>
@@ -49,11 +56,11 @@ export async function UserTasksServerContainer({
       {totalPages > 1 && (
         <div className="flex justify-center py-4">
           <Pagination
-            page={page}
-            totalPages={totalPages}
-            pageSize={pageSize}
-            baseUrl={baseUrl}
+            {...paginationProps}
+            size="large"
+            className="max-md:hidden"
           />
+          <Pagination {...paginationProps} className="md:hidden" />
         </div>
       )}
     </>

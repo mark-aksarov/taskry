@@ -12,9 +12,17 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof Pagination>;
 
-export const Default = {
+export const Small = {
   args: {
     page: 1,
     totalPages: 10,
+  },
+} satisfies Story;
+
+export const Large = {
+  args: {
+    page: 1,
+    totalPages: 10,
+    size: "large",
   },
 } satisfies Story;

@@ -21,6 +21,13 @@ export async function ProjectsServerContainer({
   const count = await getProjectCount({ workspaceId });
   const totalPages = Math.ceil(count / pageSize);
 
+  const paginationProps = {
+    page,
+    totalPages,
+    pageSize,
+    baseUrl: "/projects",
+  };
+
   return (
     <>
       <ViewModeLayout
@@ -103,11 +110,11 @@ export async function ProjectsServerContainer({
       {totalPages > 1 && (
         <div className="flex justify-center">
           <Pagination
-            page={page}
-            totalPages={totalPages}
-            pageSize={pageSize}
-            baseUrl="/projects"
+            {...paginationProps}
+            size="large"
+            className="max-md:hidden"
           />
+          <Pagination {...paginationProps} className="md:hidden" />
         </div>
       )}
     </>

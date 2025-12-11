@@ -12,7 +12,7 @@ import {
 import { tv } from "tailwind-variants";
 import { focusRing } from "../styles";
 
-type ElementType = "button" | "a";
+export type ElementType = "button" | "a";
 
 export type ButtonVariant =
   | "primary"
