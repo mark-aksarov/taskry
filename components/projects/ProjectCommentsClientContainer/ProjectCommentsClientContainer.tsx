@@ -1,9 +1,7 @@
 import useSWR from "swr";
 import { GetCommentsType } from "@/lib/queries/comments";
-import { CommentsEmptySection } from "@/components/comments/CommentsEmptySection";
 import { CommentItem } from "@/components/comments/CommentItem";
-
-const fetcher = (url: string) => fetch(url).then((res) => res.json());
+import { CommentsEmptySection } from "@/components/comments/CommentsEmptySection";
 
 export function ProjectCommentsClientContainer({
   projectId,
@@ -12,7 +10,6 @@ export function ProjectCommentsClientContainer({
 }) {
   const { data: comments } = useSWR<GetCommentsType>(
     `/api/projects/${projectId}/comments`,
-    fetcher,
     {
       suspense: true,
     },

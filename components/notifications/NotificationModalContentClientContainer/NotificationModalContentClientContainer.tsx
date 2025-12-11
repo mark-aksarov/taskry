@@ -107,8 +107,6 @@ function getComment(notification: any) {
   return undefined;
 }
 
-const fetcher = (url: string) => fetch(url).then((res) => res.json());
-
 type NotificationFilter = "all" | "unread";
 
 export function NotificationModalContentClientContainer() {
@@ -118,7 +116,6 @@ export function NotificationModalContentClientContainer() {
 
   const { data, isLoading } = useSWR(
     `/api/notifications?page=${page}&pageSize=${pageSize}&filter=${filter}`,
-    fetcher,
   );
 
   if (isLoading) {
@@ -190,10 +187,7 @@ export function NotificationModalContentClientContainer() {
             page={page}
             totalPages={totalPages}
             pageSize={pageSize}
-            onChange={(p) => {
-              console.log(p);
-              setPage(p);
-            }}
+            onChange={(p) => setPage(p)}
             showPageItems={false}
           />
         </DialogFooter>

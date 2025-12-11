@@ -6,8 +6,6 @@ import { CustomerDetail } from "../CustomerDetail";
 import { PersonHeader } from "@/components/common/PersonHeader";
 import { GetCustomerDetailsType } from "@/lib/queries/customers";
 
-const fetcher = (url: string) => fetch(url).then((res) => res.json());
-
 interface CustomerDetailClientContainerProps {
   customerId: number;
 }
@@ -19,7 +17,6 @@ export function CustomerDetailClientContainer({
 
   const { data: customer } = useSWR<GetCustomerDetailsType>(
     `/api/customers/${customerId}`,
-    fetcher,
     { suspense: true },
   );
 

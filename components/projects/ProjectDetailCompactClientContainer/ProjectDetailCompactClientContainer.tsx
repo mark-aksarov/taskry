@@ -4,8 +4,6 @@ import useSWR from "swr";
 import { GetProjectDetailType } from "@/lib/queries/project";
 import { ProjectDetailCompact } from "../ProjectDetailCompact";
 
-const fetcher = (url: string) => fetch(url).then((res) => res.json());
-
 export function ProjectDetailCompactClientContainer({
   projectId,
 }: {
@@ -13,7 +11,6 @@ export function ProjectDetailCompactClientContainer({
 }) {
   const { data: project } = useSWR<GetProjectDetailType>(
     `/api/projects/${projectId}`,
-    fetcher,
     { suspense: true },
   );
 

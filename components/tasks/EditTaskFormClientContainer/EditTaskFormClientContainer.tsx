@@ -11,20 +11,15 @@ import { GeUserSummariesType } from "@/lib/queries/user";
 import { GetProjectSummariesType } from "@/lib/queries/project";
 import { GetTaskCategorySummariesType } from "@/lib/queries/task";
 
-const fetcher = (url: string) => fetch(url).then((res) => res.json());
-
 export function EditTaskFormClientContainer() {
   const { data: categories } = useSWR<GetTaskCategorySummariesType>(
     `/api/task-categories`,
-    fetcher,
     { suspense: true },
   );
-  const { data: projects } = useSWR<GetProjectSummariesType>(
-    `/api/projects`,
-    fetcher,
-    { suspense: true },
-  );
-  const { data: users } = useSWR<GeUserSummariesType>(`/api/users`, fetcher, {
+  const { data: projects } = useSWR<GetProjectSummariesType>(`/api/projects`, {
+    suspense: true,
+  });
+  const { data: users } = useSWR<GeUserSummariesType>(`/api/users`, {
     suspense: true,
   });
 

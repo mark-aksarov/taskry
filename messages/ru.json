@@ -687,7 +687,7 @@
 
     "ProfileNavigationMobile": {
       "info": "Информация",
-      "assignedTasks": "Назначенные задачи"
+      "assignedTasks": "Задачи"
     },
 
     "UserDetail": {
@@ -779,7 +779,7 @@
 
     "UserNavigationMobile": {
       "info": "Информация",
-      "assignedTasks": "Назначенные задачи"
+      "assignedTasks": "Задачи"
     },
 
     "UserTaskListItem": {

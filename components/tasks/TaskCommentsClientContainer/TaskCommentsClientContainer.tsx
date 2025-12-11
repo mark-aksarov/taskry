@@ -7,14 +7,12 @@ import {
   CommentItemSkeleton,
 } from "@/components/comments/CommentItem";
 
-const fetcher = (url: string) => fetch(url).then((res) => res.json());
-
 export function TaskCommentsClientContainer({ taskId }: { taskId: number }) {
   const {
     data: comments,
     error,
     isLoading,
-  } = useSWR<GetCommentsType>(`/api/tasks/${taskId}/comments`, fetcher);
+  } = useSWR<GetCommentsType>(`/api/tasks/${taskId}/comments`);
 
   if (isLoading) {
     return <Repeat items={10} renderItem={() => <CommentItemSkeleton />} />;

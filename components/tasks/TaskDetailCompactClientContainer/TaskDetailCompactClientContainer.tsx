@@ -1,10 +1,8 @@
 "use client";
 
 import useSWR from "swr";
-import { TaskDetailCompact } from "../TaskDetailCompact/TaskDetailCompact";
 import { GetTaskDetailType } from "@/lib/queries/task";
-
-const fetcher = (url: string) => fetch(url).then((res) => res.json());
+import { TaskDetailCompact } from "../TaskDetailCompact/TaskDetailCompact";
 
 interface TaskDetailCompactClientContainerProps {
   taskId: number;
@@ -13,11 +11,9 @@ interface TaskDetailCompactClientContainerProps {
 export function TaskDetailCompactClientContainer({
   taskId,
 }: TaskDetailCompactClientContainerProps) {
-  const { data: task } = useSWR<GetTaskDetailType>(
-    `/api/tasks/${taskId}`,
-    fetcher,
-    { suspense: true },
-  );
+  const { data: task } = useSWR<GetTaskDetailType>(`/api/tasks/${taskId}`, {
+    suspense: true,
+  });
 
   if (!task) return null;
 

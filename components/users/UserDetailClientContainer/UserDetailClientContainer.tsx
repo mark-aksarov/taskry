@@ -1,12 +1,10 @@
 "use client";
 
 import useSWR from "swr";
+import { useTranslations } from "next-intl";
 import { GetUserDetailsType } from "@/lib/queries/user";
 import { UserDetail } from "@/components/users/UserDetail";
 import { PersonHeader } from "@/components/common/PersonHeader";
-import { useTranslations } from "next-intl";
-
-const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 interface UserDetailClientContainerProps {
   userId: string;
@@ -17,11 +15,9 @@ export function UserDetailClientContainer({
 }: UserDetailClientContainerProps) {
   const t = useTranslations("users.UserDetailClientContainer");
 
-  const { data: user } = useSWR<GetUserDetailsType>(
-    `/api/users/${userId}`,
-    fetcher,
-    { suspense: true },
-  );
+  const { data: user } = useSWR<GetUserDetailsType>(`/api/users/${userId}`, {
+    suspense: true,
+  });
 
   if (!user) return null;
 
