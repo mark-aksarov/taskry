@@ -5,12 +5,16 @@ import {
   NotificationListItemSkeleton,
 } from "../NotificationListItem";
 
+import {
+  NotificationModalContent,
+  NotificationModalContentStatus,
+} from "../NotificationModalContent";
+
 import useSWR from "swr";
 import { useState } from "react";
 import { Repeat } from "@/components/common/Repeat";
 import { NotificationList } from "../NotificationList";
 import { Pagination } from "@/components/common/Pagination";
-import { NotificationModalContent } from "../NotificationModalContent";
 import { DialogBody, DialogFooter, Link, Skeleton } from "@/components/ui";
 import { NotificationFilterToggleButtonGroup } from "../NotificationFilterToggleButtonGroup";
 
@@ -176,12 +180,21 @@ export function NotificationModalContentClientContainer() {
         </NotificationModalContent>
       </DialogBody>
       {totalPages > 1 && (
-        <DialogFooter className="justify-center">
+        <DialogFooter className="justify-between">
+          <NotificationModalContentStatus
+            page={page}
+            pageSize={pageSize}
+            totalCount={totalCount}
+          />
           <Pagination
             page={page}
             totalPages={totalPages}
             pageSize={pageSize}
-            onChange={(p) => setPage(p)}
+            onChange={(p) => {
+              console.log(p);
+              setPage(p);
+            }}
+            showPageItems={false}
           />
         </DialogFooter>
       )}

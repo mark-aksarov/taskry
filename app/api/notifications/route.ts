@@ -31,8 +31,6 @@ export async function GET(req: NextRequest) {
     getNotificationsUnreadCount({ userId }),
   ]);
 
-  await new Promise((resolve) => setTimeout(resolve, 3000));
-
   return NextResponse.json({
     notifications,
     totalCount,
