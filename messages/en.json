@@ -588,6 +588,15 @@
       "markActive": "Mark as Active"
     },
 
+    "DeleteProjectModal": {
+      "heading": "Delete Project",
+      "text": "Are you sure you want to delete <strong>«{projectTitle}»</strong>? All contents will be permanently removed, and all related tasks will also be deleted.",
+      "error": "An error occurred while deleting the project. Please try again later.",
+      "deleteButton": "Delete",
+      "retryButton": "Retry",
+      "cancelButton": "Cancel"
+    },
+
     "ProjectStatus": {
       "pending": "Pending",
       "active": "Active",

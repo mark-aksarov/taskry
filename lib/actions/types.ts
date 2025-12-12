@@ -48,3 +48,10 @@ export type ResetPasswordAction = (
   initialState: ResetPasswordState,
   formData: FormData,
 ) => Promise<ResetPasswordState>;
+
+export type DeleteProjectActionState = {
+  success: boolean;
+  error: {
+    status: string;
+  } | null;
+};

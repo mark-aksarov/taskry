@@ -21,6 +21,7 @@ import { useFormatter, useTranslations } from "next-intl";
 import { ProjectDetailModal } from "../ProjectDetailModal";
 import { UnknownUser } from "@/components/common/UnknownUser";
 import { ProjectCommentsModal } from "../ProjectCommentsModal";
+import { DeleteProjectActionState } from "@/lib/actions/types";
 import { ProjectListItemLayout } from "./ProjectListItemLayout";
 import { ImageContainer } from "@/components/common/ImageContainer";
 import { UserDetailModal } from "@/components/users/UserDetailModal";
@@ -56,6 +57,10 @@ export interface ProjectListItemProps {
   };
   comments: number;
   showCheckbox?: boolean;
+  deleteProjectAction: (
+    prevState: any,
+    id: number,
+  ) => Promise<DeleteProjectActionState>;
 }
 
 export const ProjectListItem = ({
@@ -69,6 +74,7 @@ export const ProjectListItem = ({
   creator,
   comments,
   showCheckbox,
+  deleteProjectAction,
 }: ProjectListItemProps) => {
   const t = useTranslations("projects");
 
@@ -210,7 +216,14 @@ export const ProjectListItem = ({
           <ProjectCommentsModal projectId={id} />
         </RACDialogTrigger>
       }
-      menuTriggerSlot={<ProjectItemActionMenuTrigger />}
+      menuTriggerSlot={
+        <ProjectItemActionMenuTrigger
+          projectId={id}
+          projectTitle={title}
+          deleteProjectAction={deleteProjectAction}
+          updateStatusAction={() => {}}
+        />
+      }
     />
   );
 };

@@ -28,6 +28,7 @@ import { ProjectDetailBottomSheet } from "../ProjectDetailBottomSheet";
 import { getProjectStatusBadgeColor } from "../getProjectStatusBadgeColor";
 import { ProjectItemActionMenuTrigger } from "../ProjectItemActionMenuTrigger";
 import { UserDetailBottomSheet } from "@/components/users/UserDetailBottomSheet";
+import { DeleteProjectActionState } from "@/lib/actions/types";
 
 export interface ProjectGridItemProps {
   id: number;
@@ -45,6 +46,10 @@ export interface ProjectGridItemProps {
   tasks: number;
   tasksDone: number;
   comments: number;
+  deleteProjectAction: (
+    prevState: any,
+    id: number,
+  ) => Promise<DeleteProjectActionState>;
 }
 
 export function ProjectGridItem({
@@ -56,6 +61,7 @@ export function ProjectGridItem({
   tasks,
   tasksDone,
   comments,
+  deleteProjectAction,
 }: ProjectGridItemProps) {
   const t = useTranslations("projects");
 
@@ -82,7 +88,15 @@ export function ProjectGridItem({
   return (
     <ProjectGridItemLayout
       checkboxSlot={<Checkbox aria-label={title} />}
-      menuTriggerSlot={<ProjectItemActionMenuTrigger className="-mr-2" />}
+      menuTriggerSlot={
+        <ProjectItemActionMenuTrigger
+          className="-mr-2"
+          projectId={id}
+          projectTitle={title}
+          deleteProjectAction={deleteProjectAction}
+          updateStatusAction={() => {}}
+        />
+      }
       titleSlot={
         <GridItemInfo className="flex-auto">
           <GridItemTitle>

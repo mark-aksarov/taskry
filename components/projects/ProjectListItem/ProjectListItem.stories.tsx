@@ -1,9 +1,9 @@
 import { ProjectListItem } from "./ProjectListItem";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { withProjectDetailCompact } from "../ProjectDetailCompactClientContainer/decorators";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withProjectComments } from "../ProjectCommentsClientContainer/decorators";
 import { withUserDetail } from "@/components/users/UserDetailClientContainer/decorators";
+import { withProjectDetailCompact } from "../ProjectDetailCompactClientContainer/decorators";
 
 const meta = {
   title: "Components/projects/ProjectListItem",
@@ -46,6 +46,12 @@ export const Default = {
     },
     comments: 5,
     showCheckbox: false,
+    deleteProjectAction: () => {
+      return new Promise(() => ({
+        success: true,
+        error: null,
+      }));
+    },
   },
 } satisfies Story;
 

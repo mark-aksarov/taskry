@@ -1,10 +1,10 @@
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { ProjectList } from "./ProjectList";
-import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { ProjectListItem } from "../ProjectListItem";
-import { withProjectDetailCompact } from "../ProjectDetailCompactClientContainer/decorators";
+import { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withProjectComments } from "../ProjectCommentsClientContainer/decorators";
 import { withUserDetail } from "@/components/users/UserDetailClientContainer/decorators";
+import { withProjectDetailCompact } from "../ProjectDetailCompactClientContainer/decorators";
 
 const meta = {
   title: "Components/projects/ProjectList",
@@ -20,6 +20,13 @@ const meta = {
 
 export default meta;
 type Story = StoryObj<typeof meta>;
+
+function deleteProjectActionMock() {
+  return new Promise<any>(() => ({
+    success: true,
+    error: null,
+  }));
+}
 
 export const Default = {
   args: {
@@ -39,6 +46,7 @@ export const Default = {
           company={{ id: 1, name: "Doe Inc." }}
           status={{ id: "pending", name: "Pending" }}
           comments={4}
+          deleteProjectAction={deleteProjectActionMock}
         />
 
         <ProjectListItem
@@ -55,6 +63,7 @@ export const Default = {
           company={{ id: 2, name: "Lee Corp." }}
           status={{ id: "active", name: "Active" }}
           comments={5}
+          deleteProjectAction={deleteProjectActionMock}
         />
 
         <ProjectListItem
@@ -71,6 +80,7 @@ export const Default = {
           company={{ id: 3, name: "Brown LLC" }}
           status={{ id: "completed", name: "Completed" }}
           comments={3}
+          deleteProjectAction={deleteProjectActionMock}
         />
 
         <ProjectListItem
@@ -87,6 +97,7 @@ export const Default = {
           company={{ id: 4, name: "Wilson Tech" }}
           status={{ id: "pending", name: "Pending" }}
           comments={6}
+          deleteProjectAction={deleteProjectActionMock}
         />
 
         <ProjectListItem
@@ -103,6 +114,7 @@ export const Default = {
           company={{ id: 5, name: "Harris Co." }}
           status={{ id: "active", name: "Active" }}
           comments={4}
+          deleteProjectAction={deleteProjectActionMock}
         />
 
         <ProjectListItem
@@ -119,6 +131,7 @@ export const Default = {
           company={{ id: 6, name: "King Enterprises" }}
           status={{ id: "pending", name: "Pending" }}
           comments={7}
+          deleteProjectAction={deleteProjectActionMock}
         />
 
         <ProjectListItem
@@ -135,6 +148,7 @@ export const Default = {
           company={{ id: 7, name: "Scott Group" }}
           status={{ id: "completed", name: "Completed" }}
           comments={4}
+          deleteProjectAction={deleteProjectActionMock}
         />
 
         <ProjectListItem
@@ -151,6 +165,7 @@ export const Default = {
           company={{ id: 8, name: "Allen Studio" }}
           status={{ id: "pending", name: "Pending" }}
           comments={6}
+          deleteProjectAction={deleteProjectActionMock}
         />
 
         <ProjectListItem
@@ -167,6 +182,7 @@ export const Default = {
           company={{ id: 9, name: "Baker Tech" }}
           status={{ id: "active", name: "Active" }}
           comments={3}
+          deleteProjectAction={deleteProjectActionMock}
         />
 
         <ProjectListItem
@@ -187,6 +203,7 @@ export const Default = {
           company={{ id: 10, name: "Evans Ltd." }}
           status={{ id: "completed", name: "Completed" }}
           comments={8}
+          deleteProjectAction={deleteProjectActionMock}
         />
       </>
     ),

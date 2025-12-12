@@ -1,23 +1,24 @@
 import {
   Button,
-  DialogCloseButton,
   DialogHeader,
   DialogHeading,
   MenuTriggerProps,
+  DialogCloseButton,
 } from "@/components/ui";
 import { Ellipsis } from "lucide-react";
-import { ResponsiveMenuTrigger } from "../ResponsiveMenuTrigger";
 import { twMerge } from "tailwind-merge";
 import { useTranslations } from "next-intl";
+import { ResponsiveMenuTrigger } from "../ResponsiveMenuTrigger";
 
 export function ItemBaseActionMenuTrigger<T extends object = any>({
   className,
-  children,
-}: Pick<MenuTriggerProps<T>, "children"> & { className?: string }) {
+  ...props
+}: MenuTriggerProps<T> & { className?: string }) {
   const t = useTranslations("common.ItemBase.ItemBaseActionMenuTrigger");
 
   return (
     <ResponsiveMenuTrigger
+      {...props}
       placement="bottom right"
       renderDialogHeader={() => (
         <DialogHeader>
@@ -35,8 +36,6 @@ export function ItemBaseActionMenuTrigger<T extends object = any>({
           className={twMerge("rounded-full", className)}
         />
       )}
-    >
-      {children}
-    </ResponsiveMenuTrigger>
+    />
   );
 }

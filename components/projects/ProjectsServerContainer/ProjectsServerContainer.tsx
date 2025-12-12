@@ -2,10 +2,11 @@ import { ProjectList } from "../ProjectList";
 import { ProjectGrid } from "../ProjectGrid";
 import { ProjectListItem } from "../ProjectListItem";
 import { ProjectGridItem } from "../ProjectGridItem";
+import { Pagination } from "@/components/common/Pagination";
 import { ViewModeLayout } from "@/components/common/ViewMode";
 import { getUserWorkspaceId } from "@/lib/utils/getUserWorkspaceId";
 import { getProjectCount, getProjectList } from "@/lib/queries/project";
-import { Pagination } from "@/components/common/Pagination";
+import { deleteProjectAction } from "@/lib/actions/deleteProjectAction";
 
 interface ProjectsServerContainerProps {
   page: number;
@@ -72,6 +73,7 @@ export async function ProjectsServerContainer({
                 category={project.category}
                 comments={project._count.comments}
                 showCheckbox
+                deleteProjectAction={deleteProjectAction}
               />
             ))}
           </ProjectList>
@@ -102,6 +104,7 @@ export async function ProjectsServerContainer({
                   project.tasks.filter((t) => t.statusId === "completed").length
                 }
                 comments={project._count.comments}
+                deleteProjectAction={deleteProjectAction}
               />
             ))}
           </ProjectGrid>
