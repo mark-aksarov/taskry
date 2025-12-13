@@ -117,12 +117,12 @@ async function main() {
 
   // ----------------- Notifications -----------------
 
-  await prisma.notificationTarget.createMany({
-    data: [...ruNotificationTargets, ...enNotificationTargets],
-  });
-
   await prisma.notification.createMany({
     data: [...ruNotifications, ...enNotifications],
+  });
+
+  await prisma.notificationTarget.createMany({
+    data: [...ruNotificationTargets, ...enNotificationTargets],
   });
 }
 

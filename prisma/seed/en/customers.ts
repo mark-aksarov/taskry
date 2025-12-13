@@ -11,6 +11,7 @@ export const customers = [
     companyId: 6,
     createdAt: new Date("2024-06-01T10:00:00Z"),
     updatedAt: new Date("2024-11-20T12:00:00Z"),
+    workspaceId: 2,
   },
   {
     id: 12,
@@ -23,6 +24,7 @@ export const customers = [
     companyId: 6,
     createdAt: new Date("2024-06-05T11:30:00Z"),
     updatedAt: new Date("2024-11-20T12:00:00Z"),
+    workspaceId: 2,
   },
   // --- Company 2: Global Dynamics Ltd. ---
   {
@@ -36,6 +38,7 @@ export const customers = [
     companyId: 7,
     createdAt: new Date("2024-07-10T14:00:00Z"),
     updatedAt: new Date("2024-11-20T12:00:00Z"),
+    workspaceId: 2,
   },
   {
     id: 14,
@@ -48,6 +51,7 @@ export const customers = [
     companyId: 7,
     createdAt: new Date("2024-07-15T15:30:00Z"),
     updatedAt: new Date("2024-11-20T12:00:00Z"),
+    workspaceId: 2,
   },
   // --- Company 3: Astra Marketing Group ---
   {
@@ -61,6 +65,7 @@ export const customers = [
     companyId: 8,
     createdAt: new Date("2024-08-20T09:00:00Z"),
     updatedAt: new Date("2024-11-20T12:00:00Z"),
+    workspaceId: 2,
   },
   {
     id: 16,
@@ -73,6 +78,7 @@ export const customers = [
     companyId: 8,
     createdAt: new Date("2024-08-25T10:15:00Z"),
     updatedAt: new Date("2024-11-20T12:00:00Z"),
+    workspaceId: 2,
   },
   // --- Company 4: Phoenix Data Services ---
   {
@@ -86,6 +92,7 @@ export const customers = [
     companyId: 9,
     createdAt: new Date("2024-09-01T12:30:00Z"),
     updatedAt: new Date("2024-11-20T12:00:00Z"),
+    workspaceId: 2,
   },
   {
     id: 18,
@@ -98,6 +105,7 @@ export const customers = [
     companyId: 9,
     createdAt: new Date("2024-09-05T14:45:00Z"),
     updatedAt: new Date("2024-11-20T12:00:00Z"),
+    workspaceId: 2,
   },
   // --- Company 5: Quantum Consulting LLC ---
   {
@@ -111,6 +119,7 @@ export const customers = [
     companyId: 10,
     createdAt: new Date("2024-10-10T16:00:00Z"),
     updatedAt: new Date("2024-11-20T12:00:00Z"),
+    workspaceId: 2,
   },
   {
     id: 20,
@@ -123,5 +132,6 @@ export const customers = [
     companyId: 10,
     createdAt: new Date("2024-10-15T17:15:00Z"),
     updatedAt: new Date("2024-11-20T12:00:00Z"),
+    workspaceId: 2,
   },
 ];

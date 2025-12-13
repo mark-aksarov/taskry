@@ -9,6 +9,7 @@ export let projects = [
     categoryId: 1,
     statusId: "active",
     createdAt: "2025-01-01T03:00:00.000Z",
+    workspaceId: 1,
   },
   {
     id: 2,
@@ -20,6 +21,7 @@ export let projects = [
     categoryId: 2,
     statusId: "active",
     createdAt: "2025-01-03T03:53:52.000Z",
+    workspaceId: 1,
   },
   {
     id: 3,
@@ -31,6 +33,7 @@ export let projects = [
     categoryId: 4,
     statusId: "completed",
     createdAt: "2025-01-08T11:53:45.000Z",
+    workspaceId: 1,
   },
   {
     id: 4,
@@ -42,6 +45,7 @@ export let projects = [
     categoryId: 5,
     statusId: "active",
     createdAt: "2025-01-11T08:03:54.000Z",
+    workspaceId: 1,
   },
   {
     id: 5,
@@ -53,6 +57,7 @@ export let projects = [
     categoryId: 3,
     statusId: "pending",
     createdAt: "2025-01-15T12:41:03.000Z",
+    workspaceId: 1,
   },
   {
     id: 6,
@@ -64,6 +69,7 @@ export let projects = [
     categoryId: 1,
     statusId: "active",
     createdAt: "2025-01-16T05:09:58.000Z",
+    workspaceId: 1,
   },
   {
     id: 7,
@@ -75,6 +81,7 @@ export let projects = [
     categoryId: 4,
     statusId: "active",
     createdAt: "2025-01-17T03:11:13.000Z",
+    workspaceId: 1,
   },
   {
     id: 8,
@@ -86,6 +93,7 @@ export let projects = [
     categoryId: 3,
     statusId: "completed",
     createdAt: "2025-01-18T05:14:41.000Z",
+    workspaceId: 1,
   },
   {
     id: 9,
@@ -97,6 +105,7 @@ export let projects = [
     categoryId: 5,
     statusId: "pending",
     createdAt: "2025-01-22T08:29:52.000Z",
+    workspaceId: 1,
   },
   {
     id: 10,
@@ -108,6 +117,7 @@ export let projects = [
     categoryId: 3,
     statusId: "active",
     createdAt: "2025-01-26T03:36:17.000Z",
+    workspaceId: 1,
   },
   {
     id: 11,
@@ -119,6 +129,7 @@ export let projects = [
     categoryId: 1,
     statusId: "active",
     createdAt: "2025-01-27T13:35:43.000Z",
+    workspaceId: 1,
   },
   {
     id: 12,
@@ -130,6 +141,7 @@ export let projects = [
     categoryId: 2,
     statusId: "completed",
     createdAt: "2025-01-30T05:54:37.000Z",
+    workspaceId: 1,
   },
   {
     id: 13,
@@ -141,6 +153,7 @@ export let projects = [
     categoryId: 4,
     statusId: "active",
     createdAt: "2025-02-04T11:52:26.000Z",
+    workspaceId: 1,
   },
   {
     id: 14,
@@ -152,6 +165,7 @@ export let projects = [
     categoryId: 5,
     statusId: "pending",
     createdAt: "2025-02-05T07:16:51.000Z",
+    workspaceId: 1,
   },
   {
     id: 15,
@@ -163,6 +177,7 @@ export let projects = [
     categoryId: 1,
     statusId: "active",
     createdAt: "2025-02-07T05:48:56.000Z",
+    workspaceId: 1,
   },
   {
     id: 16,
@@ -174,6 +189,7 @@ export let projects = [
     categoryId: 3,
     statusId: "active",
     createdAt: "2025-02-11T08:04:45.000Z",
+    workspaceId: 1,
   },
   {
     id: 17,
@@ -185,6 +201,7 @@ export let projects = [
     categoryId: 4,
     statusId: "completed",
     createdAt: "2025-02-14T13:40:34.000Z",
+    workspaceId: 1,
   },
   {
     id: 18,
@@ -196,6 +213,7 @@ export let projects = [
     categoryId: 5,
     statusId: "active",
     createdAt: "2025-02-18T12:06:03.000Z",
+    workspaceId: 1,
   },
   {
     id: 19,
@@ -207,6 +225,7 @@ export let projects = [
     categoryId: 3,
     statusId: "completed",
     createdAt: "2025-02-20T14:31:50.000Z",
+    workspaceId: 1,
   },
   {
     id: 20,
@@ -218,6 +237,7 @@ export let projects = [
     categoryId: 1,
     statusId: "pending",
     createdAt: "2025-02-22T06:46:38.000Z",
+    workspaceId: 1,
   },
   {
     id: 21,
@@ -229,6 +249,7 @@ export let projects = [
     categoryId: 5,
     statusId: "active",
     createdAt: "2025-02-26T14:55:52.000Z",
+    workspaceId: 1,
   },
   {
     id: 22,
@@ -240,6 +261,7 @@ export let projects = [
     categoryId: 4,
     statusId: "completed",
     createdAt: "2025-02-28T06:39:06.000Z",
+    workspaceId: 1,
   },
   {
     id: 23,
@@ -251,6 +273,7 @@ export let projects = [
     categoryId: 2,
     statusId: "pending",
     createdAt: "2025-03-02T10:46:58.000Z",
+    workspaceId: 1,
   },
   {
     id: 24,
@@ -262,6 +285,7 @@ export let projects = [
     categoryId: 3,
     statusId: "active",
     createdAt: "2025-03-07T07:39:36.000Z",
+    workspaceId: 1,
   },
   {
     id: 25,
@@ -273,6 +297,7 @@ export let projects = [
     categoryId: 1,
     statusId: "active",
     createdAt: "2025-03-09T11:06:08.000Z",
+    workspaceId: 1,
   },
   {
     id: 26,
@@ -284,6 +309,7 @@ export let projects = [
     categoryId: 3,
     statusId: "completed",
     createdAt: "2025-03-13T12:04:20.000Z",
+    workspaceId: 1,
   },
   {
     id: 27,
@@ -295,6 +321,7 @@ export let projects = [
     categoryId: 4,
     statusId: "active",
     createdAt: "2025-03-16T08:37:26.000Z",
+    workspaceId: 1,
   },
   {
     id: 28,
@@ -306,6 +333,7 @@ export let projects = [
     categoryId: 5,
     statusId: "active",
     createdAt: "2025-03-17T12:28:17.000Z",
+    workspaceId: 1,
   },
   {
     id: 29,
@@ -317,6 +345,7 @@ export let projects = [
     categoryId: 2,
     statusId: "pending",
     createdAt: "2025-03-22T07:26:44.000Z",
+    workspaceId: 1,
   },
   {
     id: 30,
@@ -328,6 +357,7 @@ export let projects = [
     categoryId: 1,
     statusId: "completed",
     createdAt: "2025-03-26T11:46:10.000Z",
+    workspaceId: 1,
   },
   {
     id: 31,
@@ -339,6 +369,7 @@ export let projects = [
     categoryId: 1,
     statusId: "active",
     createdAt: "2025-03-28T14:20:02.000Z",
+    workspaceId: 1,
   },
   {
     id: 32,
@@ -350,6 +381,7 @@ export let projects = [
     categoryId: 4,
     statusId: "active",
     createdAt: "2025-03-30T04:20:39.000Z",
+    workspaceId: 1,
   },
   {
     id: 33,
@@ -361,6 +393,7 @@ export let projects = [
     categoryId: 5,
     statusId: "pending",
     createdAt: "2025-04-04T07:06:07.000Z",
+    workspaceId: 1,
   },
   {
     id: 34,
@@ -372,6 +405,7 @@ export let projects = [
     categoryId: 3,
     statusId: "active",
     createdAt: "2025-04-05T14:43:29.000Z",
+    workspaceId: 1,
   },
   {
     id: 35,
@@ -383,6 +417,7 @@ export let projects = [
     categoryId: 2,
     statusId: "active",
     createdAt: "2025-04-10T12:07:15.000Z",
+    workspaceId: 1,
   },
   {
     id: 36,
@@ -394,6 +429,7 @@ export let projects = [
     categoryId: 5,
     statusId: "pending",
     createdAt: "2025-04-15T11:54:12.000Z",
+    workspaceId: 1,
   },
   {
     id: 37,
@@ -405,6 +441,7 @@ export let projects = [
     categoryId: 4,
     statusId: "completed",
     createdAt: "2025-04-19T06:03:14.000Z",
+    workspaceId: 1,
   },
   {
     id: 38,
@@ -416,6 +453,7 @@ export let projects = [
     categoryId: 5,
     statusId: "active",
     createdAt: "2025-04-23T12:52:09.000Z",
+    workspaceId: 1,
   },
   {
     id: 39,
@@ -427,6 +465,7 @@ export let projects = [
     categoryId: 3,
     statusId: "active",
     createdAt: "2025-04-25T03:18:02.000Z",
+    workspaceId: 1,
   },
   {
     id: 40,
@@ -438,5 +477,6 @@ export let projects = [
     categoryId: 1,
     statusId: "active",
     createdAt: "2025-04-30T05:02:39.000Z",
+    workspaceId: 1,
   },
 ];

@@ -14,9 +14,13 @@ model Workspace {
   id Int @id @default(autoincrement())
 
   companies         Company[]
+  customers         Customer[]
   projectCategories ProjectCategory[]
+  projects          Project[]
+  tasks             Task[]
   taskCategories    TaskCategory[]
   positions         Position[]
+  users             User[]
   notifications     Notification[]
 
   createdAt DateTime @default(now())
@@ -42,6 +46,9 @@ model Attachment {
   Project Project? @relation(fields: [projectId], references: [id], onDelete: Cascade)
   Task    Task?    @relation(fields: [taskId], references: [id], onDelete: Cascade)
 
+  @@index([projectId])
+  @@index([taskId])
+  @@index([commentId])
   @@map("attachment")
 }
 
@@ -69,7 +76,6 @@ model Comment {
 
   @@index([projectId])
   @@index([taskId])
-  @@index([parentId])
   @@map("comment")
 }
 
@@ -106,14 +112,16 @@ model Customer {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  companyId Int
+  companyId   Int
+  workspaceId Int
 
-  company Company @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  workspace Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  company   Company   @relation(fields: [companyId], references: [id], onDelete: Cascade)
 
   projects            Project[]
   notificationTargets NotificationTarget[]
 
-  @@index([companyId])
+  @@index(workspaceId)
   @@map("customer")
 }
 
@@ -125,15 +133,17 @@ model Project {
   description String?  @db.VarChar(5000)
   deadline    DateTime
 
-  creatorId  String?
-  customerId Int?
-  categoryId Int
-  statusId   String
+  creatorId   String?
+  customerId  Int?
+  categoryId  Int
+  statusId    String
+  workspaceId Int
 
-  creator  User?           @relation(fields: [creatorId], references: [id], onDelete: SetNull)
-  customer Customer?       @relation(fields: [customerId], references: [id], onDelete: SetNull)
-  category ProjectCategory @relation(fields: [categoryId], references: [id], onDelete: Cascade)
-  status   ProjectStatus   @relation(fields: [statusId], references: [id], onDelete: Cascade)
+  workspace Workspace       @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  creator   User?           @relation(fields: [creatorId], references: [id], onDelete: SetNull)
+  customer  Customer?       @relation(fields: [customerId], references: [id], onDelete: SetNull)
+  category  ProjectCategory @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  status    ProjectStatus   @relation(fields: [statusId], references: [id], onDelete: Cascade)
 
   attachments         Attachment[]
   tasks               Task[]
@@ -143,10 +153,7 @@ model Project {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  @@index([creatorId])
-  @@index([customerId])
-  @@index([categoryId])
-  @@index([statusId])
+  @@index([workspaceId])
   @@map("project")
 }
 
@@ -163,7 +170,7 @@ model ProjectCategory {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  @@index([workspaceId])
+  @@index(workspaceId)
   @@map("project_category")
 }
 
@@ -187,17 +194,19 @@ model Task {
   description String?  @db.VarChar(5000)
   deadline    DateTime
 
-  projectId  Int
-  creatorId  String?
-  assigneeId String?
-  categoryId Int
-  statusId   String
+  projectId   Int
+  creatorId   String?
+  assigneeId  String?
+  categoryId  Int
+  statusId    String
+  workspaceId Int
 
-  project  Project      @relation(fields: [projectId], references: [id], onDelete: Cascade)
-  creator  User?        @relation("CreatedTasks", fields: [creatorId], references: [id], onDelete: SetNull)
-  assignee User?        @relation("AssignedTasks", fields: [assigneeId], references: [id], onDelete: SetNull)
-  category TaskCategory @relation(fields: [categoryId], references: [id], onDelete: Cascade)
-  status   TaskStatus   @relation(fields: [statusId], references: [id], onDelete: Cascade)
+  workspace Workspace    @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  project   Project      @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  creator   User?        @relation("CreatedTasks", fields: [creatorId], references: [id], onDelete: SetNull)
+  assignee  User?        @relation("AssignedTasks", fields: [assigneeId], references: [id], onDelete: SetNull)
+  category  TaskCategory @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  status    TaskStatus   @relation(fields: [statusId], references: [id], onDelete: Cascade)
 
   subtasks            Subtask[]
   attachments         Attachment[]
@@ -207,11 +216,7 @@ model Task {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  @@index([projectId])
-  @@index([creatorId])
-  @@index([assigneeId])
-  @@index([categoryId])
-  @@index([statusId])
+  @@index(workspaceId)
   @@map("task")
 }
 
@@ -228,7 +233,7 @@ model TaskCategory {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  @@index([workspaceId])
+  @@index(workspaceId)
   @@map("task_category")
 }
 
@@ -256,6 +261,7 @@ model Subtask {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
+  @@index([taskId])
   @@map("subtask")
 }
 
@@ -294,8 +300,7 @@ model Notification {
   recipientId String?
   recipient   User?   @relation("Recipient", fields: [recipientId], references: [id], onDelete: SetNull)
 
-  targetId   Int?                @unique
-  target     NotificationTarget? @relation(fields: [targetId], references: [id], onDelete: Cascade)
+  target     NotificationTarget?
   targetName String?
 
   workspaceId Int
@@ -304,7 +309,7 @@ model Notification {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  @@index([workspaceId])
+  @@index([workspaceId, recipientId])
   @@map("notification")
 }
 
@@ -323,7 +328,8 @@ model NotificationTarget {
   customer Customer? @relation(fields: [customerId], references: [id], onDelete: Cascade)
   comment  Comment?  @relation(fields: [commentId], references: [id], onDelete: Cascade)
 
-  notification Notification? @relation
+  notificationId Int          @unique
+  notification   Notification @relation(fields: [notificationId], references: [id], onDelete: Cascade)
 
   createdAt DateTime @default(now())
 
@@ -339,8 +345,7 @@ model Position {
   workspaceId Int
 
   workspace Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
-
-  users User[]
+  users     User[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -365,9 +370,11 @@ model User {
   banReason     String?
   banExpires    DateTime?
 
-  positionId Int?
+  positionId  Int?
+  workspaceId Int
 
-  position Position? @relation(fields: [positionId], references: [id], onDelete: SetNull)
+  workspace Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  position  Position? @relation(fields: [positionId], references: [id], onDelete: SetNull)
 
   projects      Project[]
   createdTasks  Task[]    @relation("CreatedTasks")
@@ -384,6 +391,7 @@ model User {
   updatedAt DateTime @updatedAt
 
   @@unique([email])
+  @@index([workspaceId])
   @@map("user")
 }
 

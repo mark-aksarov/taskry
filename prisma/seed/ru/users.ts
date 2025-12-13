@@ -15,6 +15,7 @@ export const users = [
     publicLink: null,
     positionId: 1,
     createdAt: new Date("2023-01-10T10:00:00Z"),
+    workspaceId: 1,
   },
   {
     id: "user-2",
@@ -30,6 +31,7 @@ export const users = [
     publicLink: null,
     positionId: 2,
     createdAt: new Date("2023-03-01T11:30:00Z"),
+    workspaceId: 1,
   },
   {
     id: "user-3",
@@ -45,6 +47,7 @@ export const users = [
     publicLink: null,
     positionId: 3,
     createdAt: new Date("2023-01-15T09:00:00Z"),
+    workspaceId: 1,
   },
   {
     id: "user-4",
@@ -60,6 +63,7 @@ export const users = [
     publicLink: null,
     positionId: 4,
     createdAt: new Date("2023-05-20T14:00:00Z"),
+    workspaceId: 1,
   },
   {
     id: "user-5",
@@ -75,6 +79,7 @@ export const users = [
     publicLink: null,
     positionId: 5,
     createdAt: new Date("2023-02-10T08:30:00Z"),
+    workspaceId: 1,
   },
   {
     id: "user-6",
@@ -90,6 +95,7 @@ export const users = [
     publicLink: null,
     positionId: 1,
     createdAt: new Date("2023-08-01T13:00:00Z"),
+    workspaceId: 1,
   },
   {
     id: "user-7",
@@ -105,6 +111,7 @@ export const users = [
     publicLink: null,
     positionId: 2,
     createdAt: new Date("2023-04-10T09:45:00Z"),
+    workspaceId: 1,
   },
   {
     id: "user-8",
@@ -120,6 +127,7 @@ export const users = [
     publicLink: null,
     positionId: 3,
     createdAt: new Date("2024-01-20T15:00:00Z"),
+    workspaceId: 1,
   },
   {
     id: "user-9",
@@ -135,6 +143,7 @@ export const users = [
     publicLink: null,
     positionId: 4,
     createdAt: new Date("2023-06-05T10:15:00Z"),
+    workspaceId: 1,
   },
   {
     id: "user-10",
@@ -150,5 +159,6 @@ export const users = [
     publicLink: null,
     positionId: 5,
     createdAt: new Date("2023-10-15T12:40:00Z"),
+    workspaceId: 1,
   },
 ];

@@ -40,5 +40,12 @@ export const auth = betterAuth({
     fields: {
       name: "fullName",
     },
+
+    additionalFields: {
+      workspaceId: {
+        type: "number",
+        input: true,
+      },
+    },
   },
 });

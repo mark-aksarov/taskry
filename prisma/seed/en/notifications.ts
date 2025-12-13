@@ -3,61 +3,61 @@ import { NotificationType } from "@/generated/prisma";
 export const notificationTargets = [
   {
     id: 15,
+    notificationId: 15,
     taskId: 558,
     createdAt: "2025-01-02T00:00:00.000Z",
   },
   {
     id: 16,
+    notificationId: 16,
     taskId: 558,
     createdAt: "2025-01-02T00:00:00.000Z",
   },
   {
     id: 17,
+    notificationId: 18,
     projectId: 41,
     createdAt: "2025-01-01T00:00:00.000Z",
   },
   {
     id: 18,
+    notificationId: 19,
     projectId: 41,
     createdAt: "2025-01-01T00:00:00.000Z",
   },
   {
     id: 21,
+    notificationId: 21,
     taskId: 559,
     createdAt: "2025-01-02T00:00:00.000Z",
   },
   {
     id: 22,
+    notificationId: 22,
     taskId: 559,
     createdAt: "2025-01-02T00:00:00.000Z",
   },
   {
-    id: 23,
-    taskId: 560,
-    createdAt: "2025-01-04T00:00:00.000Z",
-  },
-  {
     id: 24,
+    notificationId: 24,
     taskId: 560,
     createdAt: "2025-01-04T00:00:00.000Z",
   },
   {
     id: 25,
+    notificationId: 25,
     projectId: 42,
     createdAt: "2025-01-06T00:00:00.000Z",
   },
   {
     id: 26,
+    notificationId: 26,
     projectId: 42,
     createdAt: "2025-01-06T00:00:00.000Z",
   },
   {
-    id: 27,
-    projectId: 43,
-    createdAt: "2025-01-10T00:00:00.000Z",
-  },
-  {
     id: 28,
+    notificationId: 28,
     projectId: 43,
     createdAt: "2025-01-10T00:00:00.000Z",
   },
@@ -72,7 +72,6 @@ export const notifications = [
     type: NotificationType.TASK_ADDED,
     createdAt: "2025-01-02T00:00:00.000Z",
     isRead: true,
-    targetId: 15,
   },
   {
     id: 16,
@@ -82,7 +81,6 @@ export const notifications = [
     type: NotificationType.TASK_UPDATED,
     createdAt: "2025-01-06T00:00:00.000Z",
     isRead: true,
-    targetId: 16,
   },
   {
     id: 17,
@@ -102,7 +100,6 @@ export const notifications = [
     type: NotificationType.PROJECT_ADDED,
     createdAt: "2025-01-01T00:00:00.000Z",
     isRead: true,
-    targetId: 17,
   },
   {
     id: 19,
@@ -112,7 +109,6 @@ export const notifications = [
     type: NotificationType.PROJECT_UPDATED,
     createdAt: "2025-01-07T00:00:00.000Z",
     isRead: true,
-    targetId: 18,
   },
   {
     id: 20,
@@ -132,7 +128,6 @@ export const notifications = [
     type: NotificationType.TASK_UPDATED,
     createdAt: "2025-01-03T00:00:00.000Z",
     isRead: false,
-    targetId: 21,
   },
   {
     id: 22,
@@ -142,7 +137,6 @@ export const notifications = [
     type: NotificationType.TASK_ADDED,
     createdAt: "2025-01-10T00:00:00.000Z",
     isRead: false,
-    targetId: 22,
   },
   {
     id: 23,
@@ -162,7 +156,6 @@ export const notifications = [
     type: NotificationType.TASK_ADDED,
     createdAt: "2025-01-11T00:00:00.000Z",
     isRead: false,
-    targetId: 24,
   },
   {
     id: 25,
@@ -172,7 +165,6 @@ export const notifications = [
     type: NotificationType.PROJECT_UPDATED,
     createdAt: "2025-01-11T00:00:00.000Z",
     isRead: true,
-    targetId: 25,
   },
   {
     id: 26,
@@ -182,7 +174,6 @@ export const notifications = [
     type: NotificationType.PROJECT_ADDED,
     createdAt: "2025-01-13T00:00:00.000Z",
     isRead: false,
-    targetId: 26,
   },
   {
     id: 27,
@@ -202,6 +193,5 @@ export const notifications = [
     type: NotificationType.PROJECT_ADDED,
     createdAt: "2025-01-12T00:00:00.000Z",
     isRead: false,
-    targetId: 28,
   },
 ];

@@ -10,6 +10,7 @@ export const customers = [
     companyId: 1,
     createdAt: new Date("2024-03-01T09:00:00Z"),
     updatedAt: new Date("2024-11-20T11:00:00Z"),
+    workspaceId: 1,
   },
   {
     id: 2,
@@ -22,6 +23,7 @@ export const customers = [
     companyId: 1,
     createdAt: new Date("2024-03-15T10:30:00Z"),
     updatedAt: new Date("2024-11-20T11:00:00Z"),
+    workspaceId: 1,
   },
   {
     id: 3,
@@ -34,6 +36,7 @@ export const customers = [
     companyId: 2,
     createdAt: new Date("2024-04-01T11:00:00Z"),
     updatedAt: new Date("2024-11-20T11:00:00Z"),
+    workspaceId: 1,
   },
   {
     id: 4,
@@ -46,6 +49,7 @@ export const customers = [
     companyId: 2,
     createdAt: new Date("2024-04-10T12:45:00Z"),
     updatedAt: new Date("2024-11-20T11:00:00Z"),
+    workspaceId: 1,
   },
   {
     id: 5,
@@ -58,6 +62,7 @@ export const customers = [
     companyId: 3,
     createdAt: new Date("2024-05-05T13:00:00Z"),
     updatedAt: new Date("2024-11-20T11:00:00Z"),
+    workspaceId: 1,
   },
   {
     id: 6,
@@ -70,6 +75,7 @@ export const customers = [
     companyId: 4,
     createdAt: new Date("2024-06-01T14:30:00Z"),
     updatedAt: new Date("2024-11-20T11:00:00Z"),
+    workspaceId: 1,
   },
   {
     id: 7,
@@ -82,6 +88,7 @@ export const customers = [
     companyId: 4,
     createdAt: new Date("2024-06-10T15:00:00Z"),
     updatedAt: new Date("2024-11-20T11:00:00Z"),
+    workspaceId: 1,
   },
   {
     id: 8,
@@ -94,6 +101,7 @@ export const customers = [
     companyId: 5,
     createdAt: new Date("2024-07-01T16:00:00Z"),
     updatedAt: new Date("2024-11-20T11:00:00Z"),
+    workspaceId: 1,
   },
   {
     id: 9,
@@ -106,6 +114,7 @@ export const customers = [
     companyId: 5,
     createdAt: new Date("2024-07-15T17:20:00Z"),
     updatedAt: new Date("2024-11-20T11:00:00Z"),
+    workspaceId: 1,
   },
   {
     id: 10,
@@ -118,5 +127,6 @@ export const customers = [
     companyId: 1,
     createdAt: new Date("2024-08-01T08:30:00Z"),
     updatedAt: new Date("2024-11-20T11:00:00Z"),
+    workspaceId: 1,
   },
 ];

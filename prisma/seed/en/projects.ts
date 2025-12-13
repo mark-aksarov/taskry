@@ -9,6 +9,7 @@ export const projects = [
     categoryId: 6,
     statusId: "active",
     createdAt: "2025-01-01T03:00:00.000Z",
+    workspaceId: 2,
   },
   {
     id: 42,
@@ -20,6 +21,7 @@ export const projects = [
     categoryId: 7,
     statusId: "pending",
     createdAt: "2025-01-02T10:32:05.000Z",
+    workspaceId: 2,
   },
   {
     id: 43,
@@ -31,6 +33,7 @@ export const projects = [
     categoryId: 8,
     statusId: "active",
     createdAt: "2025-01-03T11:59:04.000Z",
+    workspaceId: 2,
   },
   {
     id: 44,
@@ -42,6 +45,7 @@ export const projects = [
     categoryId: 10,
     statusId: "pending",
     createdAt: "2025-01-05T03:14:13.000Z",
+    workspaceId: 2,
   },
   {
     id: 45,
@@ -53,6 +57,7 @@ export const projects = [
     categoryId: 9,
     statusId: "completed",
     createdAt: "2025-01-09T14:57:10.000Z",
+    workspaceId: 2,
   },
   {
     id: 46,
@@ -64,6 +69,7 @@ export const projects = [
     categoryId: 6,
     statusId: "active",
     createdAt: "2025-01-13T07:12:28.000Z",
+    workspaceId: 2,
   },
   {
     id: 47,
@@ -75,6 +81,7 @@ export const projects = [
     categoryId: 10,
     statusId: "completed",
     createdAt: "2025-01-18T06:29:49.000Z",
+    workspaceId: 2,
   },
   {
     id: 48,
@@ -86,6 +93,7 @@ export const projects = [
     categoryId: 7,
     statusId: "active",
     createdAt: "2025-01-21T08:11:49.000Z",
+    workspaceId: 2,
   },
   {
     id: 49,
@@ -97,6 +105,7 @@ export const projects = [
     categoryId: 10,
     statusId: "completed",
     createdAt: "2025-01-22T11:38:53.000Z",
+    workspaceId: 2,
   },
   {
     id: 50,
@@ -108,6 +117,7 @@ export const projects = [
     categoryId: 9,
     statusId: "pending",
     createdAt: "2025-01-23T13:41:15.000Z",
+    workspaceId: 2,
   },
   {
     id: 51,
@@ -119,6 +129,7 @@ export const projects = [
     categoryId: 7,
     statusId: "active",
     createdAt: "2025-01-27T04:52:21.000Z",
+    workspaceId: 2,
   },
   {
     id: 52,
@@ -130,6 +141,7 @@ export const projects = [
     categoryId: 10,
     statusId: "pending",
     createdAt: "2025-01-31T09:35:22.000Z",
+    workspaceId: 2,
   },
   {
     id: 53,
@@ -141,6 +153,7 @@ export const projects = [
     categoryId: 8,
     statusId: "active",
     createdAt: "2025-02-01T14:01:55.000Z",
+    workspaceId: 2,
   },
   {
     id: 54,
@@ -152,6 +165,7 @@ export const projects = [
     categoryId: 9,
     statusId: "completed",
     createdAt: "2025-02-06T09:35:13.000Z",
+    workspaceId: 2,
   },
   {
     id: 55,
@@ -163,6 +177,7 @@ export const projects = [
     categoryId: 6,
     statusId: "active",
     createdAt: "2025-02-11T03:16:42.000Z",
+    workspaceId: 2,
   },
   {
     id: 56,
@@ -174,6 +189,7 @@ export const projects = [
     categoryId: 6,
     statusId: "pending",
     createdAt: "2025-02-14T13:00:33.000Z",
+    workspaceId: 2,
   },
   {
     id: 57,
@@ -185,6 +201,7 @@ export const projects = [
     categoryId: 10,
     statusId: "completed",
     createdAt: "2025-02-16T07:39:50.000Z",
+    workspaceId: 2,
   },
   {
     id: 58,
@@ -196,6 +213,7 @@ export const projects = [
     categoryId: 8,
     statusId: "active",
     createdAt: "2025-02-19T07:06:28.000Z",
+    workspaceId: 2,
   },
   {
     id: 59,
@@ -207,6 +225,7 @@ export const projects = [
     categoryId: 7,
     statusId: "pending",
     createdAt: "2025-02-24T05:04:35.000Z",
+    workspaceId: 2,
   },
   {
     id: 60,
@@ -218,5 +237,6 @@ export const projects = [
     categoryId: 9,
     statusId: "pending",
     createdAt: "2025-03-01T14:02:56.000Z",
+    workspaceId: 2,
   },
 ];

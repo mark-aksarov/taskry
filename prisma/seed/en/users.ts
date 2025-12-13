@@ -15,6 +15,7 @@ export const users = [
     publicLink: null,
     positionId: 6, // Project Manager
     createdAt: new Date("2023-01-10T10:00:00Z"),
+    workspaceId: 2,
   },
   {
     id: "user-12",
@@ -30,6 +31,7 @@ export const users = [
     publicLink: null,
     positionId: 8, // Backend Developer (Assumed Backend role based on bio)
     createdAt: new Date("2023-01-10T10:00:00Z"),
+    workspaceId: 2,
   },
   {
     id: "user-13",
@@ -45,6 +47,7 @@ export const users = [
     publicLink: null,
     positionId: 10, // QA Engineer (Assumed QA/Testing role for 'Product Manager' if no PM role available)
     createdAt: new Date("2023-01-10T10:00:00Z"),
+    workspaceId: 2,
   },
   {
     id: "user-14",
@@ -60,6 +63,7 @@ export const users = [
     publicLink: null,
     positionId: 9, // UI/UX Designer (Best fit for Data Analyst/Designer blend)
     createdAt: new Date("2023-01-10T10:00:00Z"),
+    workspaceId: 2,
   },
   {
     id: "user-15",
@@ -75,6 +79,7 @@ export const users = [
     publicLink: null,
     positionId: 8, // Backend Developer (Assumed CTO oversees Backend/Infrastructure)
     createdAt: new Date("2023-01-10T10:00:00Z"),
+    workspaceId: 2,
   },
   {
     id: "user-16",
@@ -90,6 +95,7 @@ export const users = [
     publicLink: null,
     positionId: 9, // UI/UX Designer
     createdAt: new Date("2023-01-10T10:00:00Z"),
+    workspaceId: 2,
   },
   {
     id: "user-17",
@@ -105,6 +111,7 @@ export const users = [
     publicLink: null,
     positionId: 6, // Project Manager (Assumed PM role for 'Marketing Specialist' to cover cross-functional work)
     createdAt: new Date("2023-01-10T10:00:00Z"),
+    workspaceId: 2,
   },
   {
     id: "user-18",
@@ -120,6 +127,7 @@ export const users = [
     publicLink: null,
     positionId: 6, // Project Manager (Best fit for HR/Admin)
     createdAt: new Date("2023-01-10T10:00:00Z"),
+    workspaceId: 2,
   },
   {
     id: "user-19",
@@ -135,6 +143,7 @@ export const users = [
     publicLink: null,
     positionId: 6, // Project Manager (Assumed PM role for admin/finance oversight)
     createdAt: new Date("2023-01-10T10:00:00Z"),
+    workspaceId: 2,
   },
   {
     id: "user-20",
@@ -150,5 +159,6 @@ export const users = [
     publicLink: null,
     positionId: 7, // Frontend Developer (Corrected from ID 3)
     createdAt: new Date("2023-01-10T10:00:00Z"),
+    workspaceId: 2,
   },
 ];
