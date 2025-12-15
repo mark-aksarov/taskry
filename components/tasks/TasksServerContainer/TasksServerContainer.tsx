@@ -1,13 +1,10 @@
-import { auth } from "@/lib/auth";
 import { TaskList } from "../TaskList";
 import { TaskGrid } from "../TaskGrid";
-import { headers } from "next/headers";
 import { TaskListItem } from "../TaskListItem";
 import { TaskGridItem } from "../TaskGridItem";
-import { ViewModeLayout } from "@/components/common/ViewMode";
-import { getWorkspaceIdByUserId } from "@/lib/queries/workspace";
-import { getTaskCount, getTaskList, GetTaskListType } from "@/lib/queries/task";
 import { Pagination } from "@/components/common/Pagination";
+import { ViewModeLayout } from "@/components/common/ViewMode";
+import { getTaskCount, getTaskList, GetTaskListType } from "@/lib/queries/task";
 
 interface TasksServerContainerProps {
   page: number;
@@ -18,13 +15,8 @@ export async function TasksServerContainer({
   page,
   pageSize,
 }: TasksServerContainerProps) {
-  const session = await auth.api.getSession({
-    headers: await headers(),
-  });
-
-  const workspaceId = await getWorkspaceIdByUserId(session!.user.id);
-  const tasks = await getTaskList({ page, pageSize, workspaceId });
-  const count = await getTaskCount({ workspaceId });
+  const tasks = await getTaskList({ page, pageSize });
+  const count = await getTaskCount();
 
   const commonProps = (task: GetTaskListType[number]) => ({
     id: task.id,

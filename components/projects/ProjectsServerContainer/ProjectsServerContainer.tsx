@@ -4,7 +4,6 @@ import { ProjectListItem } from "../ProjectListItem";
 import { ProjectGridItem } from "../ProjectGridItem";
 import { Pagination } from "@/components/common/Pagination";
 import { ViewModeLayout } from "@/components/common/ViewMode";
-import { getUserWorkspaceId } from "@/lib/utils/getUserWorkspaceId";
 import { getProjectCount, getProjectList } from "@/lib/queries/project";
 import { deleteProjectAction } from "@/lib/actions/deleteProjectAction";
 
@@ -17,9 +16,8 @@ export async function ProjectsServerContainer({
   page,
   pageSize,
 }: ProjectsServerContainerProps) {
-  const workspaceId = await getUserWorkspaceId();
-  const projects = await getProjectList({ page, pageSize, workspaceId });
-  const count = await getProjectCount({ workspaceId });
+  const projects = await getProjectList({ page, pageSize });
+  const count = await getProjectCount();
   const totalPages = Math.ceil(count / pageSize);
 
   const paginationProps = {

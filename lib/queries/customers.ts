@@ -3,12 +3,14 @@ import "server-only";
 import { cache } from "react";
 import prisma from "../prisma";
 import { ThenArg } from "./types";
+import { auth } from "../auth";
+import { headers } from "next/headers";
 
 export type GetCustomerDetailsType = ThenArg<
   ReturnType<typeof getCustomerDetails>
 >;
 export const getCustomerDetails = cache(async (customerId: number) => {
-  return await prisma.customer.findUniqueOrThrow({
+  return await prisma.customer.findUnique({
     where: { id: customerId },
     select: {
       id: true,
@@ -41,15 +43,17 @@ function getCustomerWhereClause(params: { workspaceId: number }) {
 
 export type GetCustomerListType = ThenArg<ReturnType<typeof getCustomerList>>;
 export const getCustomerList = cache(
-  async ({
-    workspaceId,
-    page,
-    pageSize,
-  }: {
-    workspaceId: number;
-    page: number;
-    pageSize: number;
-  }) => {
+  async ({ page, pageSize }: { page: number; pageSize: number }) => {
+    const session = await auth.api.getSession({
+      headers: await headers(),
+    });
+
+    if (!session) {
+      throw new Error("Unauthorized");
+    }
+
+    const workspaceId = session.user.workspaceId;
+
     const where = getCustomerWhereClause({ workspaceId });
     const skip = (page - 1) * pageSize;
 
@@ -78,18 +82,36 @@ export const getCustomerList = cache(
   },
 );
 
-export const getCustomerCount = cache(
-  async ({ workspaceId }: { workspaceId: number }) => {
-    const where = getCustomerWhereClause({ workspaceId });
+export const getCustomerCount = cache(async () => {
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
 
-    return prisma.customer.count({ where });
-  },
-);
+  if (!session) {
+    throw new Error("Unauthorized");
+  }
+
+  const workspaceId = session.user.workspaceId;
+
+  const where = getCustomerWhereClause({ workspaceId });
+
+  return prisma.customer.count({ where });
+});
 
 export type GetCustomerSummariesType = ThenArg<
   ReturnType<typeof getCustomerSummaries>
 >;
-export const getCustomerSummaries = cache(async (workspaceId: number) => {
+export const getCustomerSummaries = cache(async () => {
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
+
+  if (!session) {
+    throw new Error("Unauthorized");
+  }
+
+  const workspaceId = session.user.workspaceId;
+
   return await prisma.customer.findMany({
     where: {
       company: {

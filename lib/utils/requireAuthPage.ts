@@ -3,7 +3,7 @@ import { headers } from "next/headers";
 import { getLocale } from "next-intl/server";
 import { redirect } from "@/i18n/navigation";
 
-export async function handleAuthPageRedirect() {
+export async function requireAuthPage() {
   const locale = await getLocale();
 
   const session = await auth.api.getSession({

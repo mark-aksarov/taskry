@@ -1,9 +1,17 @@
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 import { getTaskCategorySummaries } from "@/lib/queries/task";
-import { getUserWorkspaceId } from "@/lib/utils/getUserWorkspaceId";
 
 export async function GET(req: NextRequest) {
-  const workspaceId = await getUserWorkspaceId();
-  const categories = await getTaskCategorySummaries(workspaceId);
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
+
+  if (!session) {
+    return NextResponse.json("Unauthorized", { status: 401 });
+  }
+
+  const categories = await getTaskCategorySummaries();
   return NextResponse.json(categories);
 }

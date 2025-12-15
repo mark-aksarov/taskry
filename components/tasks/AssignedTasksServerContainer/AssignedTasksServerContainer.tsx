@@ -10,7 +10,6 @@ import { TaskList } from "../TaskList";
 import { TaskListItem } from "../TaskListItem";
 import { Pagination } from "@/components/common/Pagination";
 import { getTaskCount, getTaskList } from "@/lib/queries/task";
-import { getUserWorkspaceId } from "@/lib/utils/getUserWorkspaceId";
 
 interface AssignedTasksServerContainerProps {
   page: number;
@@ -25,20 +24,15 @@ export async function AssignedTasksServerContainer({
     headers: await headers(),
   });
 
-  const workspaceId = await getUserWorkspaceId();
   const assigneeId = session!.user.id;
 
   const tasks = await getTaskList({
-    workspaceId,
     assigneeId,
     page,
     pageSize,
   });
 
-  const count = await getTaskCount({
-    workspaceId,
-    assigneeId,
-  });
+  const count = await getTaskCount(assigneeId);
 
   if (!count) {
     return (

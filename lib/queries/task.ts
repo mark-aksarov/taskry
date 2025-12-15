@@ -3,6 +3,8 @@ import "server-only";
 import prisma from "../prisma";
 import { cache } from "react";
 import { ThenArg } from "./types";
+import { auth } from "../auth";
+import { headers } from "next/headers";
 
 export type GetTaskDetailType = ThenArg<ReturnType<typeof getTaskDetail>>;
 export const getTaskDetail = cache(async (id: number) => {
@@ -90,16 +92,24 @@ function getTaskWhereClause(params: {
 export type GetTaskListType = ThenArg<ReturnType<typeof getTaskList>>;
 export const getTaskList = cache(
   async ({
-    workspaceId,
     assigneeId,
     page,
     pageSize,
   }: {
-    workspaceId: number;
     assigneeId?: string;
     page: number;
     pageSize: number;
   }) => {
+    const session = await auth.api.getSession({
+      headers: await headers(),
+    });
+
+    if (!session) {
+      throw new Error("Unauthorized");
+    }
+
+    const workspaceId = session.user.workspaceId;
+
     const where = getTaskWhereClause({ workspaceId, assigneeId });
 
     const skip = (page - 1) * pageSize;
@@ -157,24 +167,36 @@ export const getTaskList = cache(
   },
 );
 
-export const getTaskCount = cache(
-  async ({
-    workspaceId,
-    assigneeId,
-  }: {
-    workspaceId: number;
-    assigneeId?: string;
-  }) => {
-    const where = getTaskWhereClause({ workspaceId, assigneeId });
+export const getTaskCount = cache(async (assigneeId?: string) => {
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
 
-    return prisma.task.count({ where });
-  },
-);
+  if (!session) {
+    throw new Error("Unauthorized");
+  }
+
+  const workspaceId = session.user.workspaceId;
+
+  const where = getTaskWhereClause({ workspaceId, assigneeId });
+
+  return prisma.task.count({ where });
+});
 
 export type GetTaskCategorySummariesType = ThenArg<
   ReturnType<typeof getTaskCategorySummaries>
 >;
-export const getTaskCategorySummaries = cache(async (workspaceId: number) => {
+export const getTaskCategorySummaries = cache(async () => {
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
+
+  if (!session) {
+    throw new Error("Unauthorized");
+  }
+
+  const workspaceId = session.user.workspaceId;
+
   return prisma.taskCategory.findMany({
     where: { workspaceId },
     select: { id: true, name: true },

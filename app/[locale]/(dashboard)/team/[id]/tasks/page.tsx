@@ -1,7 +1,7 @@
 import { getTaskCount } from "@/lib/queries/task";
 import { getPageParams } from "@/lib/utils/getPageParams";
 import { TeamProfileTasksPage } from "./TeamProfileTasksPage";
-import { getUserWorkspaceId } from "@/lib/utils/getUserWorkspaceId";
+import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { TeamProfileTasksPageEmpty } from "./TeamProfileTasksPageEmpty";
 import { UserTasksServerContainer } from "@/components/users/UserTasksServerContainer";
 import { UserHeaderServerContainer } from "@/components/users/UserHeaderServerContainer";
@@ -14,6 +14,8 @@ export default async function AppProfileTasksPage({
   params: Promise<{ id: string }>;
   searchParams: Promise<{ page?: string; pageSize?: string }>;
 }) {
+  await requireProtectedPage();
+
   const { id } = await params;
   const query = await searchParams;
   const { page, pageSize } = getPageParams({
@@ -21,8 +23,8 @@ export default async function AppProfileTasksPage({
     defaultPage: 1,
     defaultPageSize: 10,
   });
-  const workspaceId = await getUserWorkspaceId();
-  const taskCount = await getTaskCount({ workspaceId });
+
+  const taskCount = await getTaskCount();
 
   if (!taskCount)
     return (

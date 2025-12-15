@@ -9,13 +9,11 @@ import {
 import { getUserSummaries } from "@/lib/queries/user";
 import { getProjectSummaries } from "@/lib/queries/project";
 import { getTaskCategorySummaries } from "@/lib/queries/task";
-import { getUserWorkspaceId } from "@/lib/utils/getUserWorkspaceId";
 
 export async function TaskFiltersFormServerContainer() {
-  const workspaceId = await getUserWorkspaceId();
-  const categories = await getTaskCategorySummaries(workspaceId);
-  const projects = await getProjectSummaries(workspaceId);
-  const users = await getUserSummaries(workspaceId);
+  const categories = await getTaskCategorySummaries();
+  const projects = await getProjectSummaries();
+  const users = await getUserSummaries();
 
   return (
     <TaskFiltersForm

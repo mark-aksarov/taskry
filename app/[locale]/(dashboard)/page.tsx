@@ -1,5 +1,6 @@
 import { DashboardPage } from "./DashboardPage";
 import { getPageParams } from "@/lib/utils/getPageParams";
+import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { AssignedTasksServerContainer } from "@/components/tasks/AssignedTasksServerContainer";
 import { TotalTasksCardServerContainer } from "@/components/tasks/TotalTasksCardServerContainer";
 import { TotalUsersCardServerContainer } from "@/components/users/TotalUsersCardServerContainer";
@@ -11,6 +12,8 @@ export default async function AppDashboardPage({
 }: {
   searchParams: Promise<{ page?: string; pageSize?: string }>;
 }) {
+  await requireProtectedPage();
+
   const params = await searchParams;
   const { page, pageSize } = getPageParams(params);
 

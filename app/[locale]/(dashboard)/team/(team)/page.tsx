@@ -2,7 +2,7 @@ import { UsersPage } from "./UsersPage";
 import { getUserCount } from "@/lib/queries/user";
 import { UsersPageEmpty } from "./UsersPageEmpty";
 import { getPageParams } from "@/lib/utils/getPageParams";
-import { getUserWorkspaceId } from "@/lib/utils/getUserWorkspaceId";
+import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { UsersServerContainer } from "@/components/users/UsersServerContainer";
 import { UserFiltersFormServerContainer } from "@/components/users/UserFiltersFormServerContainer";
 
@@ -11,11 +11,12 @@ export default async function AppUsersPage({
 }: {
   searchParams: Promise<{ page?: string; pageSize?: string }>;
 }) {
+  await requireProtectedPage();
+
   const params = await searchParams;
   const { page, pageSize } = getPageParams(params);
 
-  const workspaceId = await getUserWorkspaceId();
-  const count = await getUserCount({ workspaceId });
+  const count = await getUserCount();
 
   if (!count) return <UsersPageEmpty />;
 

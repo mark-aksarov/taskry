@@ -1,8 +1,8 @@
 import { CheckEmailPage } from "./CheckEmailPage";
-import { handleAuthPageRedirect } from "@/lib/utils/handleAuthPageRedirect";
+import { requireAuthPage } from "@/lib/utils/requireAuthPage";
 
 export default async function AppCheckEmailPage() {
-  await handleAuthPageRedirect();
+  await requireAuthPage();
 
   return <CheckEmailPage />;
 }

@@ -5,7 +5,6 @@ import { UserGridItem } from "../UserGridItem";
 import { Pagination } from "@/components/common/Pagination";
 import { ViewModeLayout } from "@/components/common/ViewMode";
 import { getUserCount, getUserList } from "@/lib/queries/user";
-import { getUserWorkspaceId } from "@/lib/utils/getUserWorkspaceId";
 
 interface UsersServerContainerProps {
   page: number;
@@ -16,9 +15,8 @@ export async function UsersServerContainer({
   page,
   pageSize,
 }: UsersServerContainerProps) {
-  const workspaceId = await getUserWorkspaceId();
-  const users = await getUserList({ workspaceId, page, pageSize });
-  const count = await getUserCount({ workspaceId });
+  const users = await getUserList({ page, pageSize });
+  const count = await getUserCount();
   const totalPages = Math.ceil(count / pageSize);
 
   const paginationProps = {

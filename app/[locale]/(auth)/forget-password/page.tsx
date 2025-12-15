@@ -1,9 +1,9 @@
 import { ForgetPasswordPage } from "./ForgetPasswordPage";
 import { forgetPassword } from "@/lib/actions/forgetPassword";
-import { handleAuthPageRedirect } from "@/lib/utils/handleAuthPageRedirect";
+import { requireAuthPage } from "@/lib/utils/requireAuthPage";
 
 export default async function Page() {
-  await handleAuthPageRedirect();
+  await requireAuthPage();
 
   return <ForgetPasswordPage action={forgetPassword} />;
 }

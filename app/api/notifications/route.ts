@@ -9,11 +9,16 @@ import { headers } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {
+  //Authorization
   const session = await auth.api.getSession({
     headers: await headers(),
   });
-  const userId = session!.user.id;
 
+  if (!session) {
+    return NextResponse.json("Unauthorized", { status: 401 });
+  }
+
+  const userId = session.user.id;
   const search = req.nextUrl.searchParams;
 
   const page = Number(search.get("page") ?? 1);

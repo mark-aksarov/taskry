@@ -1,16 +1,17 @@
 "use server";
 
+import z from "zod";
 import { auth } from "../auth";
 import prisma from "../prisma";
 import { headers } from "next/headers";
 import { revalidatePath } from "next/cache";
 import { DeleteProjectActionState } from "./types";
-import { getWorkspaceIdByUserId } from "../queries/workspace";
 
 export async function deleteProjectAction(
   prevState: DeleteProjectActionState,
   id: number,
 ): Promise<DeleteProjectActionState> {
+  // Authorization
   const session = await auth.api.getSession({
     headers: await headers(),
   });
@@ -19,34 +20,34 @@ export async function deleteProjectAction(
     return {
       success: false,
       error: {
-        status: "Unauthenticated",
+        status: "Unauthorized",
       },
     };
   }
 
-  const workspaceId = await getWorkspaceIdByUserId(session.user.id);
+  // Validation
+  const schema = z.object({
+    id: z.number().min(1),
+  });
 
-  if (!workspaceId) {
+  const data = schema.safeParse({ id });
+
+  if (!data.success) {
     return {
       success: false,
       error: {
-        status: "InternalServerError",
+        status: "BadRequest",
       },
     };
   }
+
+  // Find Project
+  const workspaceId = session.user.workspaceId;
 
   const project = await prisma.project.findUnique({
     where: { id },
     select: {
-      customer: {
-        select: {
-          company: {
-            select: {
-              workspaceId: true,
-            },
-          },
-        },
-      },
+      workspaceId: true,
     },
   });
 
@@ -54,22 +55,22 @@ export async function deleteProjectAction(
     return {
       success: false,
       error: {
-        status: "InternalServerError",
+        status: "NotFound",
       },
     };
   }
 
-  const projectWorkspaceId = project.customer?.company.workspaceId;
-
-  if (projectWorkspaceId !== workspaceId) {
+  // Check Permissions
+  if (project.workspaceId !== workspaceId) {
     return {
       success: false,
       error: {
-        status: "InternalServerError",
+        status: "Forbidden",
       },
     };
   }
 
+  // Delete
   await prisma.project.delete({
     where: {
       id,

@@ -4,7 +4,6 @@ import { CustomerListItem } from "../CustomerListItem";
 import { CustomerGridItem } from "../CustomerGridItem";
 import { Pagination } from "@/components/common/Pagination";
 import { ViewModeLayout } from "@/components/common/ViewMode";
-import { getUserWorkspaceId } from "@/lib/utils/getUserWorkspaceId";
 import { getCustomerCount, getCustomerList } from "@/lib/queries/customers";
 
 interface CustomersServerContainerProps {
@@ -16,9 +15,8 @@ export async function CustomersServerContainer({
   page,
   pageSize,
 }: CustomersServerContainerProps) {
-  const workspaceId = await getUserWorkspaceId();
-  const customers = await getCustomerList({ page, pageSize, workspaceId });
-  const count = await getCustomerCount({ workspaceId });
+  const customers = await getCustomerList({ page, pageSize });
+  const count = await getCustomerCount();
   const totalPages = Math.ceil(count / pageSize);
 
   const paginationProps = {

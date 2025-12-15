@@ -2,7 +2,7 @@ import { CustomersPage } from "./CustomersPage";
 import { CustomersPageEmpty } from "./CustomersPageEmpty";
 import { getPageParams } from "@/lib/utils/getPageParams";
 import { getCustomerCount } from "@/lib/queries/customers";
-import { getUserWorkspaceId } from "@/lib/utils/getUserWorkspaceId";
+import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { CustomersServerContainer } from "@/components/customer/CustomersServerContainer";
 import { CustomerFiltersFormServerContainer } from "@/components/customer/CustomerFiltersFormServerContainer";
 
@@ -11,11 +11,12 @@ export default async function AppCustomersPage({
 }: {
   searchParams: Promise<{ page?: string; pageSize?: string }>;
 }) {
+  await requireProtectedPage();
+
   const params = await searchParams;
   const { page, pageSize } = getPageParams(params);
 
-  const workspaceId = await getUserWorkspaceId();
-  const count = await getCustomerCount({ workspaceId });
+  const count = await getCustomerCount();
 
   if (!count) return <CustomersPageEmpty />;
 

@@ -3,6 +3,8 @@ import "server-only";
 import { cache } from "react";
 import prisma from "../prisma";
 import { ThenArg } from "./types";
+import { auth } from "../auth";
+import { headers } from "next/headers";
 
 export type GetProjectDetailType = ThenArg<ReturnType<typeof getProjectDetail>>;
 export const getProjectDetail = cache(async (id: number) => {
@@ -75,15 +77,17 @@ function getProjectWhereClause(params: { workspaceId: number }) {
 
 export type GetProjectListType = ThenArg<ReturnType<typeof getProjectList>>;
 export const getProjectList = cache(
-  async ({
-    workspaceId,
-    page,
-    pageSize,
-  }: {
-    workspaceId: number;
-    page: number;
-    pageSize: number;
-  }) => {
+  async ({ page, pageSize }: { page: number; pageSize: number }) => {
+    const session = await auth.api.getSession({
+      headers: await headers(),
+    });
+
+    if (!session) {
+      throw new Error("Unauthorized");
+    }
+
+    const workspaceId = session.user.workspaceId;
+
     const where = getProjectWhereClause({ workspaceId });
     const skip = (page - 1) * pageSize;
 
@@ -144,18 +148,36 @@ export const getProjectList = cache(
   },
 );
 
-export const getProjectCount = cache(
-  async ({ workspaceId }: { workspaceId: number }) => {
-    const where = getProjectWhereClause({ workspaceId });
+export const getProjectCount = cache(async () => {
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
 
-    return prisma.project.count({ where });
-  },
-);
+  if (!session) {
+    throw new Error("Unauthorized");
+  }
+
+  const workspaceId = session.user.workspaceId;
+
+  const where = getProjectWhereClause({ workspaceId });
+
+  return prisma.project.count({ where });
+});
 
 export type GetProjectSummariesType = ThenArg<
   ReturnType<typeof getProjectSummaries>
 >;
-export const getProjectSummaries = cache(async (workspaceId: number) => {
+export const getProjectSummaries = cache(async () => {
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
+
+  if (!session) {
+    throw new Error("Unauthorized");
+  }
+
+  const workspaceId = session.user.workspaceId;
+
   return await prisma.project.findMany({
     where: { creator: { position: { workspaceId } } },
     select: { id: true, title: true },
@@ -174,14 +196,22 @@ export const getProjectSummarySummaries = cache(async () => {
 export type GetProjectCategorySummariesType = ThenArg<
   ReturnType<typeof getProjectCategorySummaries>
 >;
-export const getProjectCategorySummaries = cache(
-  async (workspaceId: number) => {
-    return await prisma.projectCategory.findMany({
-      where: { workspaceId },
-      select: { id: true, name: true },
-    });
-  },
-);
+export const getProjectCategorySummaries = cache(async () => {
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
+
+  if (!session) {
+    throw new Error("Unauthorized");
+  }
+
+  const workspaceId = session.user.workspaceId;
+
+  return await prisma.projectCategory.findMany({
+    where: { workspaceId },
+    select: { id: true, name: true },
+  });
+});
 
 export type GetProjectStatusSummariesType = ThenArg<
   ReturnType<typeof getProjectStatusSummaries>

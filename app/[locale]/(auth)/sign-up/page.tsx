@@ -1,9 +1,9 @@
 import { SignUpPage } from "./SignUpPage";
 import { signUp } from "@/lib/actions/signUp";
-import { handleAuthPageRedirect } from "@/lib/utils/handleAuthPageRedirect";
+import { requireAuthPage } from "@/lib/utils/requireAuthPage";
 
 export default async function AppSignUpPage() {
-  await handleAuthPageRedirect();
+  await requireAuthPage();
 
   return <SignUpPage action={signUp} />;
 }
