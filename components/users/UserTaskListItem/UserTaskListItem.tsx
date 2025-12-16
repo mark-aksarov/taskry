@@ -1,14 +1,6 @@
 "use client";
 
 import {
-  Check,
-  Clock,
-  Trash,
-  MessageSquare,
-  CircleEllipsis,
-} from "lucide-react";
-
-import {
   ListItemInfo,
   ListItemText,
   ListItemTitle,
@@ -21,6 +13,8 @@ import {
   ItemBaseDetailBottomSheetTrigger,
 } from "@/components/common/ItemBase";
 
+import { MessageSquare } from "lucide-react";
+import { TaskStatus } from "@/generated/prisma";
 import { useFormatter, useTranslations } from "next-intl";
 import { Checkbox, RACDialogTrigger } from "@/components/ui";
 import { UserTaskListItemLayout } from "./UserTaskListItemLayout";
@@ -34,10 +28,7 @@ export interface UserTaskListItemProps {
   id: number;
   title: string;
   deadline?: Date;
-  status: {
-    id: string;
-    name: string;
-  };
+  status: TaskStatus;
   comments: number;
 }
 
@@ -91,10 +82,10 @@ export const UserTaskListItem = ({
       }
       statusSlot={
         <ItemBaseBadge
-          color={getTaskStatusBadgeColor(status.id)}
+          color={getTaskStatusBadgeColor(status)}
           className="@max-lg:hidden"
         >
-          {t(`tasks.TaskStatus.${status.id}`)}
+          {t(`tasks.TaskStatus.${status}`)}
         </ItemBaseBadge>
       }
       commentsSlot={

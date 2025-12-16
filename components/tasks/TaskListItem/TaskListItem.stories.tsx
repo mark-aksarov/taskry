@@ -29,7 +29,7 @@ export const Default = {
     deadline: new Date("2025-09-30"),
     project: { id: 1, title: "Website Redesign" },
     category: { id: 1, name: "Design" },
-    status: { id: "pending", name: "Pending" },
+    status: "pending",
     assignee: { id: "user1", imageUrl: "/man.jpg", fullName: "John Doe" },
     comments: 10,
   },
@@ -62,19 +62,13 @@ export const WithoutAssigneeImage = {
 export const WithActiveStatus = {
   args: {
     ...Default.args,
-    status: {
-      id: "active",
-      name: "Active",
-    },
+    status: "active",
   },
 } satisfies Story;
 
 export const WithCompletedStatus = {
   args: {
     ...Default.args,
-    status: {
-      id: "completed",
-      name: "Completed",
-    },
+    status: "completed",
   },
 } satisfies Story;

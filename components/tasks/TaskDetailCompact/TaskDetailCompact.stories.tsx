@@ -42,10 +42,7 @@ export const Default = {
       id: 2,
       title: "Website Redesign",
     },
-    status: {
-      id: "active",
-      name: "Active",
-    },
+    status: "active",
     subtasks: [
       { id: 1, text: "Wireframe the layout", isDone: true },
       { id: 2, text: "Create high-fidelity mockups", isDone: false },
@@ -81,10 +78,7 @@ export const WithoutSomeData = {
       id: 1,
       title: "Website Redesign",
     },
-    status: {
-      id: "active",
-      name: "Active",
-    },
+    status: "active",
     subtasks: [],
     attachments: [],
   },

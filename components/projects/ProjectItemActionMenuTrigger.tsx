@@ -11,6 +11,7 @@ import { useState, startTransition, useActionState } from "react";
 import { Check, CircleEllipsis, Clock, Trash } from "lucide-react";
 import { useActionErrorToast } from "@/lib/hooks/useActionErrorToast";
 import { DeleteProjectModal } from "./DeleteProjectModal/DeleteProjectModal";
+import { ProjectStatus } from "@/generated/prisma";
 
 export type ProjectItemActionMenuTriggerProps = {
   projectId: number;
@@ -22,7 +23,7 @@ export type ProjectItemActionMenuTriggerProps = {
   ) => Promise<DeleteProjectActionState>;
   updateStatusAction: (
     prevState: any,
-    { id, statusId }: UpdateProjectStatusPayload,
+    { id, status }: UpdateProjectStatusPayload,
   ) => Promise<UpdateProjectStatusState>;
 };
 
@@ -55,7 +56,7 @@ export function ProjectItemActionMenuTrigger({
       startTransition(() =>
         updateProjectStatusAction({
           id: projectId,
-          statusId: action as "active" | "completed" | "pending",
+          status: action as ProjectStatus,
         }),
       );
     }

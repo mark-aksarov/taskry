@@ -3,7 +3,6 @@ import { users as ruUsers } from "./seed/ru/users";
 import { users as enUsers } from "./seed/en/users";
 import { tasks as ruTasks } from "./seed/ru/tasks";
 import { tasks as enTasks } from "./seed/en/tasks";
-import { taskStatuses } from "./seed/common/taskStatuses";
 import { subtasks as ruSubtasks } from "./seed/ru/subtasks";
 import { subtasks as enSubtasks } from "./seed/en/subtasks";
 import { projects as ruProjects } from "./seed/ru/projects";
@@ -16,7 +15,6 @@ import { customers as ruCustomers } from "./seed/ru/customers";
 import { customers as enCustomers } from "./seed/en/customers";
 import { workspace as ruWorkspace } from "./seed/ru/workspace";
 import { workspace as enWorkspace } from "./seed/en/workspace";
-import { projectStatuses } from "./seed/common/projectStatuses";
 import { taskComments as ruTaskComments } from "./seed/ru/taskComments";
 import { taskComments as enTaskComments } from "./seed/en/taskComments";
 import { taskCategories as ruTaskCategories } from "./seed/ru/taskCategories";
@@ -67,10 +65,6 @@ async function main() {
 
   // ----------------- Projects -----------------
 
-  await prisma.projectStatus.createMany({
-    data: projectStatuses,
-  });
-
   await prisma.projectCategory.createMany({
     data: [...ruProjectCategories, ...enProjectCategories],
   });
@@ -88,10 +82,6 @@ async function main() {
   });
 
   // ----------------- Tasks -----------------
-
-  await prisma.taskStatus.createMany({
-    data: taskStatuses,
-  });
 
   await prisma.taskCategory.createMany({
     data: [...ruTaskCategories, ...enTaskCategories],

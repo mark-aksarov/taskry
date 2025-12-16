@@ -37,10 +37,7 @@ export const Default = {
       fullName: "Alice Smith",
       imageUrl: "/woman.jpg",
     },
-    status: {
-      id: "pending",
-      name: "Pending",
-    },
+    status: "pending",
     category: { id: 1, name: "Design" },
     customer: {
       id: 1,
@@ -77,19 +74,13 @@ export const WithCheckbox = {
 export const WithActiveStatus = {
   args: {
     ...Default.args,
-    status: {
-      id: "active",
-      name: "Active",
-    },
+    status: "active",
   },
 } satisfies Story;
 
 export const WithCompletedStatus = {
   args: {
     ...Default.args,
-    status: {
-      id: "completed",
-      name: "Completed",
-    },
+    status: "completed",
   },
 } satisfies Story;

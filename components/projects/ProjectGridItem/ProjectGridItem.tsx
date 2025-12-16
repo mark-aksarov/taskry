@@ -22,6 +22,7 @@ import {
 
 import Image from "next/image";
 import { MessageSquare } from "lucide-react";
+import { ProjectStatus } from "@/generated/prisma";
 import { useFormatter, useTranslations } from "next-intl";
 import { ProjectDetailModal } from "../ProjectDetailModal";
 import { Checkbox, RACDialogTrigger } from "@/components/ui";
@@ -44,10 +45,7 @@ export interface ProjectGridItemProps {
     fullName: string;
     imageUrl?: string;
   };
-  status: {
-    id: string;
-    name: string;
-  };
+  status: ProjectStatus;
   tasks: number;
   tasksDone: number;
   comments: number;
@@ -59,7 +57,7 @@ export interface ProjectGridItemProps {
 
   updateStatusAction: (
     prevState: any,
-    { id, statusId }: UpdateProjectStatusPayload,
+    { id, status }: UpdateProjectStatusPayload,
   ) => Promise<UpdateProjectStatusState>;
 }
 
@@ -165,8 +163,8 @@ export function ProjectGridItem({
         </RACDialogTrigger>
       }
       statusSlot={
-        <ItemBaseBadge color={getProjectStatusBadgeColor(status.id)}>
-          {t(`ProjectStatus.${status.id}`)}
+        <ItemBaseBadge color={getProjectStatusBadgeColor(status)}>
+          {t(`ProjectStatus.${status}`)}
         </ItemBaseBadge>
       }
       progressSlot={

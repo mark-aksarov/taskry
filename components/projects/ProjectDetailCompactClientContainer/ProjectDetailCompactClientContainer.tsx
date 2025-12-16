@@ -40,10 +40,7 @@ export function ProjectDetailCompactClientContainer({
           : undefined
       }
       category={project.category}
-      status={{
-        id: project.status.id,
-        name: project.status.name,
-      }}
+      status={project.status}
       attachments={project.attachments}
     />
   );

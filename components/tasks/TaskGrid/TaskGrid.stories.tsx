@@ -34,10 +34,7 @@ export const Default = {
             imageUrl: "/man.jpg",
             fullName: "Liam Turner",
           }}
-          status={{
-            id: "pending",
-            name: "Pending",
-          }}
+          status="pending"
           comments={99}
           subtasks={3}
           subtasksDone={1}
@@ -48,10 +45,7 @@ export const Default = {
           title="Implement authentication"
           deadline={new Date("2025-10-06")}
           assignee={undefined}
-          status={{
-            id: "active",
-            name: "Active",
-          }}
+          status="active"
           comments={10}
           subtasks={4}
           subtasksDone={2}
@@ -66,10 +60,7 @@ export const Default = {
             imageUrl: undefined,
             fullName: "Olivia White",
           }}
-          status={{
-            id: "pending",
-            name: "Pending",
-          }}
+          status="pending"
           comments={6}
           subtasks={2}
           subtasksDone={2}
@@ -84,10 +75,7 @@ export const Default = {
             imageUrl: "/man.jpg",
             fullName: "Ethan Green",
           }}
-          status={{
-            id: "completed",
-            name: "Completed",
-          }}
+          status="completed"
           comments={25}
           subtasks={4}
           subtasksDone={2}
@@ -102,10 +90,7 @@ export const Default = {
             imageUrl: "/man.jpg",
             fullName: "Mason Moore",
           }}
-          status={{
-            id: "pending",
-            name: "Pending",
-          }}
+          status="pending"
           comments={99}
           subtasks={4}
           subtasksDone={3}
@@ -120,10 +105,7 @@ export const Default = {
             imageUrl: "/man.jpg",
             fullName: "Ava Black",
           }}
-          status={{
-            id: "active",
-            name: "Active",
-          }}
+          status="active"
           comments={99}
           subtasks={3}
           subtasksDone={3}
@@ -138,10 +120,7 @@ export const Default = {
             imageUrl: "/man.jpg",
             fullName: "Isabella Hall",
           }}
-          status={{
-            id: "completed",
-            name: "Completed",
-          }}
+          status="completed"
           comments={47}
           subtasks={3}
           subtasksDone={3}
@@ -156,10 +135,7 @@ export const Default = {
             imageUrl: "/man.jpg",
             fullName: "Henry Young",
           }}
-          status={{
-            id: "pending",
-            name: "Pending",
-          }}
+          status="pending"
           comments={18}
           subtasks={3}
           subtasksDone={1}
@@ -170,10 +146,7 @@ export const Default = {
           title="Optimize image loading"
           deadline={new Date("2025-10-26")}
           assignee={{ id: "user9", imageUrl: undefined, fullName: "Ivy Adams" }}
-          status={{
-            id: "pending",
-            name: "Pending",
-          }}
+          status="pending"
           comments={67}
           subtasks={3}
           subtasksDone={1}
@@ -184,10 +157,7 @@ export const Default = {
           title="Refactor authentication middleware"
           deadline={new Date("2025-10-29")}
           assignee={undefined}
-          status={{
-            id: "active",
-            name: "Active",
-          }}
+          status="active"
           comments={87}
           subtasks={3}
           subtasksDone={2}

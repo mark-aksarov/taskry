@@ -10,12 +10,12 @@ import { updateProjectStatus as updateProjectStatusQuery } from "../data/project
 
 const schema = z.object({
   id: z.coerce.number().int().positive(),
-  statusId: z.enum(["active", "completed", "pending"]),
+  status: z.enum(["active", "completed", "pending"]),
 });
 
 export async function updateProjectStatus(
   _prevState: UpdateProjectStatusState,
-  { id, statusId }: UpdateProjectStatusPayload,
+  { id, status }: UpdateProjectStatusPayload,
 ): Promise<UpdateProjectStatusState> {
   const t = await getTranslations("actions.updateProjectStatus");
   const errorResponse: UpdateProjectStatusState = {
@@ -31,11 +31,11 @@ export async function updateProjectStatus(
     if (!session) return errorResponse;
 
     // Validation
-    const { success } = schema.safeParse({ id, statusId });
+    const { success } = schema.safeParse({ id, status });
     if (!success) return errorResponse;
 
     // Update Status
-    await updateProjectStatusQuery(id, statusId);
+    await updateProjectStatusQuery(id, status);
 
     revalidatePath("/projects");
 

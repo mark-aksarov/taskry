@@ -1,7 +1,7 @@
 import { BadgeColor } from "@/components/ui";
 
-export function getProjectStatusBadgeColor(statusId: string): BadgeColor {
-  switch (statusId) {
+export function getProjectStatusBadgeColor(status: string): BadgeColor {
+  switch (status) {
     case "pending":
       return "orange";
     case "active":

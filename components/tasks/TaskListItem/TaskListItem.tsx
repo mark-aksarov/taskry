@@ -15,6 +15,7 @@ import {
 
 import Image from "next/image";
 import { MessageSquare } from "lucide-react";
+import { TaskStatus } from "@/generated/prisma";
 import { TaskDetailModal } from "../TaskDetailModal";
 import { TaskCommentsModal } from "../TaskCommentsModal";
 import { TaskListItemLayout } from "./TaskListItemLayout";
@@ -45,10 +46,7 @@ export interface TaskListItemProps {
     id: number;
     title: string;
   };
-  status: {
-    id: string;
-    name: string;
-  };
+  status: TaskStatus;
   comments: number;
   showCheckbox?: boolean;
 }
@@ -165,9 +163,9 @@ export const TaskListItem = ({
       statusSlot={
         <ItemBaseBadge
           className="@max-lg:hidden"
-          color={getTaskStatusBadgeColor(status.id)}
+          color={getTaskStatusBadgeColor(status)}
         >
-          {t(`TaskStatus.${status.id}`)}
+          {t(`TaskStatus.${status}`)}
         </ItemBaseBadge>
       }
       commentsModalTriggerSlot={

@@ -1,9 +1,9 @@
 import { TaskGridItem } from "./TaskGridItem";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { withUserDetail } from "@/components/users/UserDetailClientContainer/decorators";
 import { withTaskComments } from "@/components/tasks/TaskCommentsClientContainer/decorators";
 import { withTaskDetailCompact } from "@/components/tasks/TaskDetailCompactClientContainer/decorators";
-import { withUserDetail } from "@/components/users/UserDetailClientContainer/decorators";
 
 const meta = {
   title: "Components/tasks/TaskGridItem",
@@ -35,10 +35,7 @@ export const Default = {
       imageUrl: "/man.jpg",
       fullName: "John Doe",
     },
-    status: {
-      id: "pending",
-      name: "Pending",
-    },
+    status: "pending",
     comments: 99,
     subtasks: 6,
     subtasksDone: 2,
@@ -65,19 +62,13 @@ export const WithoutAssigneeImage = {
 export const WithActiveStatus = {
   args: {
     ...Default.args,
-    status: {
-      id: "active",
-      name: "Active",
-    },
+    status: "active",
   },
 } satisfies Story;
 
 export const WithCompletedStatus = {
   args: {
     ...Default.args,
-    status: {
-      id: "completed",
-      name: "Completed",
-    },
+    status: "completed",
   },
 } satisfies Story;

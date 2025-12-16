@@ -16,6 +16,7 @@ import {
 
 import Image from "next/image";
 import { MessageSquare } from "lucide-react";
+import { TaskStatus } from "@/generated/prisma";
 import { TaskDetailModal } from "../TaskDetailModal";
 import { TaskCommentsModal } from "../TaskCommentsModal";
 import { useFormatter, useTranslations } from "next-intl";
@@ -38,10 +39,7 @@ export interface TaskGridItemProps {
     imageUrl?: string;
     fullName: string;
   };
-  status: {
-    id: string;
-    name: string;
-  };
+  status: TaskStatus;
   comments: number;
   subtasks: number;
   subtasksDone: number;
@@ -139,8 +137,8 @@ export function TaskGridItem({
         </RACDialogTrigger>
       }
       statusSlot={
-        <ItemBaseBadge color={getTaskStatusBadgeColor(status.id)}>
-          {t(`TaskStatus.${status.id}`)}
+        <ItemBaseBadge color={getTaskStatusBadgeColor(status)}>
+          {t(`TaskStatus.${status}`)}
         </ItemBaseBadge>
       }
       progressSlot={

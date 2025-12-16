@@ -65,10 +65,7 @@ export async function AssignedTasksServerContainer({
               deadline={task.deadline}
               category={task.category}
               project={task.project}
-              status={{
-                id: task.status.id,
-                name: task.status.name,
-              }}
+              status={task.status}
               assignee={
                 task.assignee
                   ? {

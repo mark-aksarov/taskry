@@ -29,10 +29,7 @@ export async function TasksServerContainer({
           fullName: task.assignee.fullName,
         }
       : undefined,
-    status: {
-      id: task.status.id,
-      name: task.status.name,
-    },
+    status: task.status,
     comments: task._count.comments,
     subtasks: task._count.subtasks,
   });

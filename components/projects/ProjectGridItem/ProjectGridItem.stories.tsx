@@ -42,10 +42,7 @@ export const Default = {
       fullName: "Alice Smith",
       imageUrl: "/woman.jpg",
     },
-    status: {
-      id: "pending",
-      name: "Pending",
-    },
+    status: "pending",
     comments: 5,
     tasks: 10,
     tasksDone: 8,
@@ -74,19 +71,13 @@ export const WithoutCreatorImage = {
 export const WithActiveStatus = {
   args: {
     ...Default.args,
-    status: {
-      id: "active",
-      name: "Active",
-    },
+    status: "active",
   },
 } satisfies Story;
 
 export const WithCompletedStatus = {
   args: {
     ...Default.args,
-    status: {
-      id: "completed",
-      name: "Completed",
-    },
+    status: "completed",
   },
 } satisfies Story;

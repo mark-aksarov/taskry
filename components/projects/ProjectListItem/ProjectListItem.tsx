@@ -26,6 +26,7 @@ import {
   UpdateProjectStatusPayload,
   UpdateProjectStatusState,
 } from "@/lib/actions/types";
+import { ProjectStatus } from "@/generated/prisma";
 import { ProjectListItemLayout } from "./ProjectListItemLayout";
 import { ImageContainer } from "@/components/common/ImageContainer";
 import { UserDetailModal } from "@/components/users/UserDetailModal";
@@ -55,10 +56,7 @@ export interface ProjectListItemProps {
     id: number;
     name: string;
   };
-  status: {
-    id: string;
-    name: string;
-  };
+  status: ProjectStatus;
   comments: number;
   showCheckbox?: boolean;
   deleteAction: (
@@ -68,7 +66,7 @@ export interface ProjectListItemProps {
 
   updateStatusAction: (
     prevState: any,
-    { id, statusId }: UpdateProjectStatusPayload,
+    { id, status }: UpdateProjectStatusPayload,
   ) => Promise<UpdateProjectStatusState>;
 }
 
@@ -210,9 +208,9 @@ export const ProjectListItem = ({
       statusSlot={
         <ItemBaseBadge
           className="@max-lg:hidden"
-          color={getProjectStatusBadgeColor(status.id)}
+          color={getProjectStatusBadgeColor(status)}
         >
-          {t(`ProjectStatus.${status.id}`)}
+          {t(`ProjectStatus.${status}`)}
         </ItemBaseBadge>
       }
       commentsModalTriggerSlot={

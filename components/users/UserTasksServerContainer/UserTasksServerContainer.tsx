@@ -43,10 +43,7 @@ export async function UserTasksServerContainer({
               title={task.title}
               deadline={task.deadline}
               comments={task._count.comments}
-              status={{
-                id: task.status.id,
-                name: task.status.name,
-              }}
+              status={task.status}
             />
           ))}
       </UserTaskList>

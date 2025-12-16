@@ -4,6 +4,7 @@ import { cache } from "react";
 import prisma from "../prisma";
 import { ThenArg } from "./types";
 import { getSessionOrThrow } from "../utils/getSessionOrThrow";
+import { ProjectStatus } from "@/generated/prisma";
 
 export type GetProjectDetailType = ThenArg<ReturnType<typeof getProjectDetail>>;
 export const getProjectDetail = cache(async (id: number) => {
@@ -25,12 +26,7 @@ export const getProjectDetail = cache(async (id: number) => {
           imageUrl: true,
         },
       },
-      status: {
-        select: {
-          id: true,
-          name: true,
-        },
-      },
+      status: true,
       customer: {
         select: {
           id: true,
@@ -105,12 +101,7 @@ export const getProjectList = cache(
             imageUrl: true,
           },
         },
-        status: {
-          select: {
-            id: true,
-            name: true,
-          },
-        },
+        status: true,
         category: {
           select: {
             id: true,
@@ -137,7 +128,7 @@ export const getProjectList = cache(
         },
         tasks: {
           select: {
-            statusId: true,
+            status: true,
           },
         },
       },
@@ -179,15 +170,6 @@ export const getProjectCategorySummaries = cache(async () => {
   });
 });
 
-export type GetProjectStatusSummariesType = ThenArg<
-  ReturnType<typeof getProjectStatusSummaries>
->;
-export const getProjectStatusSummaries = cache(async () => {
-  return await prisma.projectStatus.findMany({
-    select: { id: true, name: true },
-  });
-});
-
 export const deleteProject = async (id: number) => {
   const session = await getSessionOrThrow();
   const workspaceId = session.user.workspaceId;
@@ -199,7 +181,7 @@ export const deleteProject = async (id: number) => {
 
 export const updateProjectStatus = async (
   id: number,
-  statusId: "active" | "completed" | "pending",
+  status: ProjectStatus,
 ) => {
   const session = await getSessionOrThrow();
   const workspaceId = session.user.workspaceId;
@@ -207,7 +189,7 @@ export const updateProjectStatus = async (
   return await prisma.project.update({
     where: { id, workspaceId },
     data: {
-      statusId,
+      status,
     },
   });
 };

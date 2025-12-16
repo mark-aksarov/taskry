@@ -43,10 +43,7 @@ export const Default = {
       id: 10,
       name: "Design",
     },
-    status: {
-      id: "pending",
-      name: "Pending",
-    },
+    status: "pending",
     attachments: [
       {
         id: 1,
@@ -71,10 +68,7 @@ export const WithoutSomeData = {
       id: 10,
       name: "Design",
     },
-    status: {
-      id: "pending",
-      name: "Pending",
-    },
+    status: "pending",
     attachments: [],
   },
 } satisfies Story;

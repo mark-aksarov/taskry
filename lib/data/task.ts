@@ -25,12 +25,7 @@ export const getTaskDetail = cache(async (id: number) => {
           imageUrl: true,
         },
       },
-      status: {
-        select: {
-          id: true,
-          name: true,
-        },
-      },
+      status: true,
       project: {
         select: {
           id: true,
@@ -129,12 +124,7 @@ export const getTaskList = cache(
             imageUrl: true,
           },
         },
-        status: {
-          select: {
-            id: true,
-            name: true,
-          },
-        },
+        status: true,
         project: {
           select: {
             id: true,
@@ -180,15 +170,6 @@ export const getTaskCategorySummaries = cache(async () => {
 
   return prisma.taskCategory.findMany({
     where: { workspaceId },
-    select: { id: true, name: true },
-  });
-});
-
-export type GetTaskStatusSummariesType = ThenArg<
-  ReturnType<typeof getTaskStatusSummaries>
->;
-export const getTaskStatusSummaries = cache(async () => {
-  return prisma.taskStatus.findMany({
     select: { id: true, name: true },
   });
 });

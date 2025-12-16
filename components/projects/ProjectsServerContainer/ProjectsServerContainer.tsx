@@ -75,10 +75,7 @@ export async function ProjectsServerContainer({
                       }
                     : undefined
                 }
-                status={{
-                  id: project.status.id,
-                  name: project.status.name,
-                }}
+                status={project.status}
                 category={project.category}
                 comments={project._count.comments}
                 showCheckbox
@@ -105,13 +102,10 @@ export async function ProjectsServerContainer({
                       }
                     : undefined
                 }
-                status={{
-                  id: project.status.id,
-                  name: project.status.name,
-                }}
+                status={project.status}
                 tasks={project.tasks.length}
                 tasksDone={
-                  project.tasks.filter((t) => t.statusId === "completed").length
+                  project.tasks.filter((t) => t.status === "completed").length
                 }
                 comments={project._count.comments}
                 deleteAction={handleDeleteProject}

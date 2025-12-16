@@ -1,3 +1,5 @@
+import { ProjectStatus } from "@/generated/prisma";
+
 export type SignInState = {
   error: {
     status: string | number;
@@ -67,5 +69,5 @@ export interface UpdateProjectStatusState {
 
 export interface UpdateProjectStatusPayload {
   id: number;
-  statusId: "active" | "completed" | "pending";
+  status: ProjectStatus;
 }

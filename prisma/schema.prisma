@@ -142,14 +142,13 @@ model Project {
   creatorId   String?
   customerId  Int?
   categoryId  Int
-  statusId    String
   workspaceId Int
 
   workspace Workspace       @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
   creator   User?           @relation(fields: [creatorId], references: [id], onDelete: SetNull)
   customer  Customer?       @relation(fields: [customerId], references: [id], onDelete: SetNull)
   category  ProjectCategory @relation(fields: [categoryId], references: [id], onDelete: Cascade)
-  status    ProjectStatus   @relation(fields: [statusId], references: [id], onDelete: Cascade)
+  status    ProjectStatus
 
   attachments         Attachment[]
   tasks               Task[]
@@ -180,16 +179,10 @@ model ProjectCategory {
   @@map("project_category")
 }
 
-model ProjectStatus {
-  id   String @id
-  name String
-
-  projects Project[]
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  @@map("project_status")
+enum ProjectStatus {
+  active
+  pending
+  completed
 }
 
 // Task
@@ -204,7 +197,6 @@ model Task {
   creatorId   String?
   assigneeId  String?
   categoryId  Int
-  statusId    String
   workspaceId Int
 
   workspace Workspace    @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
@@ -212,7 +204,7 @@ model Task {
   creator   User?        @relation("CreatedTasks", fields: [creatorId], references: [id], onDelete: SetNull)
   assignee  User?        @relation("AssignedTasks", fields: [assigneeId], references: [id], onDelete: SetNull)
   category  TaskCategory @relation(fields: [categoryId], references: [id], onDelete: Cascade)
-  status    TaskStatus   @relation(fields: [statusId], references: [id], onDelete: Cascade)
+  status    TaskStatus
 
   subtasks            Subtask[]
   attachments         Attachment[]
@@ -243,16 +235,10 @@ model TaskCategory {
   @@map("task_category")
 }
 
-model TaskStatus {
-  id   String @id
-  name String
-
-  tasks Task[]
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  @@map("task_status")
+enum TaskStatus {
+  active
+  pending
+  completed
 }
 
 model Subtask {
