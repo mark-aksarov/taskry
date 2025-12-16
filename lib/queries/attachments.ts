@@ -11,7 +11,7 @@ export const getAttachmentsByTask = cache(
     const workspaceId = session.user.workspaceId;
 
     return await prisma.attachment.findMany({
-      where: { taskId },
+      where: { taskId, workspaceId },
     });
   },
 );

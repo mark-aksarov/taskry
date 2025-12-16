@@ -13,6 +13,8 @@ datasource db {
 model Workspace {
   id Int @id @default(autoincrement())
 
+  attachments       Attachment[]
+  comments          Comment[]
   companies         Company[]
   customers         Customer[]
   projectCategories ProjectCategory[]
@@ -38,13 +40,15 @@ model Attachment {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  commentId Int?
-  projectId Int?
-  taskId    Int?
+  commentId   Int?
+  projectId   Int?
+  taskId      Int?
+  workspaceId Int
 
-  Comment Comment? @relation(fields: [commentId], references: [id])
-  Project Project? @relation(fields: [projectId], references: [id], onDelete: Cascade)
-  Task    Task?    @relation(fields: [taskId], references: [id], onDelete: Cascade)
+  workspace Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  Comment   Comment?  @relation(fields: [commentId], references: [id])
+  Project   Project?  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  Task      Task?     @relation(fields: [taskId], references: [id], onDelete: Cascade)
 
   @@index([projectId])
   @@index([taskId])
@@ -60,16 +64,18 @@ model Comment {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  senderId  String
-  projectId Int?
-  taskId    Int?
-  parentId  Int?
+  senderId    String
+  projectId   Int?
+  taskId      Int?
+  parentId    Int?
+  workspaceId Int
 
-  sender  User      @relation(fields: [senderId], references: [id], onDelete: Cascade)
-  project Project?  @relation(fields: [projectId], references: [id], onDelete: Cascade)
-  task    Task?     @relation(fields: [taskId], references: [id], onDelete: Cascade)
-  parent  Comment?  @relation("CommentReplies", fields: [parentId], references: [id], onDelete: Cascade)
-  replies Comment[] @relation("CommentReplies")
+  workspace Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  sender    User      @relation(fields: [senderId], references: [id], onDelete: Cascade)
+  project   Project?  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  task      Task?     @relation(fields: [taskId], references: [id], onDelete: Cascade)
+  parent    Comment?  @relation("CommentReplies", fields: [parentId], references: [id], onDelete: Cascade)
+  replies   Comment[] @relation("CommentReplies")
 
   attachments         Attachment[]
   notificationTargets NotificationTarget[]

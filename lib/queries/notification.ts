@@ -20,17 +20,19 @@ export const getNotificationsList = cache(
     filter?: string;
   }) => {
     const session = await getSessionOrThrow();
+    const recipientId = session.user.id;
+    const workspaceId = session.user.workspaceId;
+
     const skip = (page - 1) * pageSize;
     const where: any = {
-      recipientId: session.user.id,
-      workspaceId: session.user.workspaceId,
+      recipientId,
+      workspaceId,
     };
 
     if (filter === "unread") where.isRead = false;
 
     return prisma.notification.findMany({
       where,
-
       skip,
       take: pageSize,
       orderBy: {
@@ -130,10 +132,12 @@ export const getNotificationsList = cache(
 export const getNotificationsCount = cache(
   async ({ isRead }: { isRead?: boolean } = {}) => {
     const session = await getSessionOrThrow();
+    const recipientId = session.user.id;
+    const workspaceId = session.user.workspaceId;
 
     const where = {
-      recipientId: session.user.id,
-      workspaceId: session.user.workspaceId,
+      recipientId,
+      workspaceId,
       ...(isRead !== undefined && { isRead }),
     };
 
