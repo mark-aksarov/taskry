@@ -2,7 +2,7 @@
 
 import useSWR from "swr";
 import { useTranslations } from "next-intl";
-import { GetUserDetailsType } from "@/lib/queries/user";
+import { GetUserDetailsType } from "@/lib/data/user";
 import { UserDetail } from "@/components/users/UserDetail";
 import { PersonHeader } from "@/components/common/PersonHeader";
 

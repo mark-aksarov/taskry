@@ -7,9 +7,9 @@ import {
 
 import useSWR from "swr";
 import { NewTaskForm } from "../NewTaskForm";
-import { GeUserSummariesType } from "@/lib/queries/user";
-import { GetProjectSummariesType } from "@/lib/queries/project";
-import { GetTaskCategorySummariesType } from "@/lib/queries/task";
+import { GeUserSummariesType } from "@/lib/data/user";
+import { GetProjectSummariesType } from "@/lib/data/project";
+import { GetTaskCategorySummariesType } from "@/lib/data/task";
 
 export function EditTaskFormClientContainer() {
   const { data: categories } = useSWR<GetTaskCategorySummariesType>(

@@ -1,5 +1,5 @@
 import { CustomerFiltersForm } from "../CustomerFiltersForm";
-import { getCompanySummaries } from "@/lib/queries/companies";
+import { getCompanySummaries } from "@/lib/data/companies";
 import { CustomerFiltersFormCompanyCheckboxGroup } from "../CustomerFiltersForm";
 
 export async function CustomerFiltersFormServerContainer() {

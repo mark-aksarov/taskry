@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getTaskStatusSummaries } from "@/lib/queries/task";
+import { getTaskStatusSummaries } from "@/lib/data/task";
 
 export async function GET(req: NextRequest) {
   try {

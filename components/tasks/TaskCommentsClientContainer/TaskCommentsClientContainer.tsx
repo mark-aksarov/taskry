@@ -1,6 +1,6 @@
 import useSWR from "swr";
 import { Repeat } from "@/components/common/Repeat";
-import { GetCommentsType } from "@/lib/queries/comments";
+import { GetCommentsType } from "@/lib/data/comments";
 import { CommentsEmptySection } from "@/components/comments/CommentsEmptySection";
 import {
   CommentItem,

@@ -1,7 +1,7 @@
 "use client";
 
 import useSWR from "swr";
-import { GetProjectDetailType } from "@/lib/queries/project";
+import { GetProjectDetailType } from "@/lib/data/project";
 import { ProjectDetailCompact } from "../ProjectDetailCompact";
 
 export function ProjectDetailCompactClientContainer({

@@ -187,3 +187,12 @@ export const getProjectStatusSummaries = cache(async () => {
     select: { id: true, name: true },
   });
 });
+
+export const deleteProject = async (id: number) => {
+  const session = await getSessionOrThrow();
+  const workspaceId = session.user.workspaceId;
+
+  return await prisma.project.delete({
+    where: { id, workspaceId },
+  });
+};

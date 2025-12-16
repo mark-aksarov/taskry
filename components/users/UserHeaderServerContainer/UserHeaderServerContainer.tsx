@@ -1,5 +1,5 @@
 import { PersonHeader } from "@/components/common/PersonHeader";
-import { getUserDetails } from "@/lib/queries/user";
+import { getUserDetails } from "@/lib/data/user";
 import { useTranslations } from "next-intl";
 
 export async function UserHeaderServerContainer({

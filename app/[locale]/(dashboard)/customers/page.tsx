@@ -1,7 +1,7 @@
 import { CustomersPage } from "./CustomersPage";
 import { CustomersPageEmpty } from "./CustomersPageEmpty";
 import { getPageParams } from "@/lib/utils/getPageParams";
-import { getCustomerCount } from "@/lib/queries/customers";
+import { getCustomerCount } from "@/lib/data/customers";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { CustomersServerContainer } from "@/components/customer/CustomersServerContainer";
 import { CustomerFiltersFormServerContainer } from "@/components/customer/CustomerFiltersFormServerContainer";

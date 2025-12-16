@@ -2,85 +2,53 @@
 
 import z from "zod";
 import { auth } from "../auth";
-import prisma from "../prisma";
 import { headers } from "next/headers";
 import { revalidatePath } from "next/cache";
-import { DeleteProjectActionState } from "./types";
+import { redirect } from "@/i18n/navigation";
+import { deleteProject } from "../data/project";
+import { getLocale, getTranslations } from "next-intl/server";
+import { DeleteProjectActionState, DeleteProjectPayload } from "./types";
+
+const schema = z.object({
+  id: z.coerce.number().int().positive(),
+});
 
 export async function deleteProjectAction(
-  prevState: DeleteProjectActionState,
-  id: number,
+  _prevState: DeleteProjectActionState,
+  { id, currentPage, isLastItemOnPage }: DeleteProjectPayload,
 ): Promise<DeleteProjectActionState> {
-  // Authorization
-  const session = await auth.api.getSession({
-    headers: await headers(),
-  });
-
-  if (!session) {
-    return {
-      success: false,
-      error: {
-        status: "Unauthorized",
-      },
-    };
-  }
-
-  // Validation
-  const schema = z.object({
-    id: z.coerce.number().int().positive(),
-  });
-
-  const data = schema.safeParse({ id });
-
-  if (!data.success) {
-    return {
-      success: false,
-      error: {
-        status: "BadRequest",
-      },
-    };
-  }
-
-  // Find Project
-  const project = await prisma.project.findUnique({
-    where: { id },
-    select: {
-      workspaceId: true,
-    },
-  });
-
-  if (!project) {
-    return {
-      success: false,
-      error: {
-        status: "NotFound",
-      },
-    };
-  }
-
-  // Check Permissions
-  const workspaceId = session.user.workspaceId;
-
-  if (project.workspaceId !== workspaceId) {
-    return {
-      success: false,
-      error: {
-        status: "Forbidden",
-      },
-    };
-  }
-
-  // Delete
-  await prisma.project.delete({
-    where: {
-      id,
-    },
-  });
-
-  revalidatePath("/projects");
-
-  return {
-    success: true,
-    error: null,
+  const locale = await getLocale();
+  const t = await getTranslations("actions.deleteProjectAction");
+  const errorResponse: DeleteProjectActionState = {
+    status: "error",
+    message: t("error"),
   };
+  let isSuccess = false;
+
+  try {
+    // Authorization
+    const session = await auth.api.getSession({
+      headers: await headers(),
+    });
+    if (!session) return errorResponse;
+
+    // Validation
+    const { success } = schema.safeParse({ id });
+    if (!success) return errorResponse;
+
+    // Delete Project
+    await deleteProject(id);
+
+    revalidatePath("/projects");
+    isSuccess = true;
+  } catch (error) {
+    console.error("Delete Project Error:", error);
+    return errorResponse;
+  }
+
+  // Handle redirect OUTSIDE the try/catch
+  if (isSuccess && isLastItemOnPage && currentPage > 1) {
+    redirect({ href: `/projects?page=${currentPage - 1}`, locale });
+  }
+  return { status: "success", message: null };
 }

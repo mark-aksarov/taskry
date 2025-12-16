@@ -4,7 +4,7 @@ import { UserListItem } from "../UserListItem";
 import { UserGridItem } from "../UserGridItem";
 import { Pagination } from "@/components/common/Pagination";
 import { ViewModeLayout } from "@/components/common/ViewMode";
-import { getUserCount, getUserList } from "@/lib/queries/user";
+import { getUserCount, getUserList } from "@/lib/data/user";
 
 interface UsersServerContainerProps {
   page: number;

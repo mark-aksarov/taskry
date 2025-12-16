@@ -1,5 +1,5 @@
-import { getCustomerSummaries } from "@/lib/queries/customers";
-import { getProjectCategorySummaries } from "@/lib/queries/project";
+import { getCustomerSummaries } from "@/lib/data/customers";
+import { getProjectCategorySummaries } from "@/lib/data/project";
 import { ProjectDetailForm } from "../ProjectDetailForm/ProjectDetailForm";
 import { ProjectDetailFormStatusSelect } from "../ProjectDetailForm/ProjectDetailFormStatusSelect";
 import { ProjectDetailFormCategorySelect } from "../ProjectDetailForm/ProjectDetailFormCategorySelect";

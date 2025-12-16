@@ -1,7 +1,7 @@
 import "server-only";
 
 import { TotalTasksCard } from "../TotalTasksCard";
-import { getTaskCount } from "@/lib/queries/task";
+import { getTaskCount } from "@/lib/data/task";
 
 export const TotalTasksCardServerContainer = async () => {
   const totalTasks = await getTaskCount();

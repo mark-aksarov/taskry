@@ -4,7 +4,7 @@ import useSWR from "swr";
 import { useTranslations } from "next-intl";
 import { CustomerDetail } from "../CustomerDetail";
 import { PersonHeader } from "@/components/common/PersonHeader";
-import { GetCustomerDetailsType } from "@/lib/queries/customers";
+import { GetCustomerDetailsType } from "@/lib/data/customers";
 
 interface CustomerDetailClientContainerProps {
   customerId: number;

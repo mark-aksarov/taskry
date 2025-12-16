@@ -1,6 +1,6 @@
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
-import { getTaskCount } from "@/lib/queries/task";
+import { getTaskCount } from "@/lib/data/task";
 import { ProfileTasksPage } from "./ProfileTasksPage";
 import { getPageParams } from "@/lib/utils/getPageParams";
 import { ProfileTasksPageEmpty } from "./ProfileTasksPageEmpty";

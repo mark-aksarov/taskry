@@ -2,7 +2,7 @@ import z from "zod";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
-import { getProjectDetail } from "@/lib/queries/project";
+import { getProjectDetail } from "@/lib/data/project";
 
 export async function GET(
   req: NextRequest,

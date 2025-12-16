@@ -1,7 +1,7 @@
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
-import { getProjectSummaries } from "@/lib/queries/project";
+import { getProjectSummaries } from "@/lib/data/project";
 
 export async function GET(req: NextRequest) {
   try {

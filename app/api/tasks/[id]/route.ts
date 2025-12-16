@@ -1,7 +1,7 @@
 import z from "zod";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
-import { getTaskDetail } from "@/lib/queries/task";
+import { getTaskDetail } from "@/lib/data/task";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(

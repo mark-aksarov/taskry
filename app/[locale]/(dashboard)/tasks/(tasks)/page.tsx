@@ -1,5 +1,5 @@
 import { TasksPage } from "./TasksPage";
-import { getTaskCount } from "@/lib/queries/task";
+import { getTaskCount } from "@/lib/data/task";
 import { TasksPageEmpty } from "./TasksPageEmpty";
 import { getPageParams } from "@/lib/utils/getPageParams";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";

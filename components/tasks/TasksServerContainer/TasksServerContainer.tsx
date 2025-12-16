@@ -4,7 +4,7 @@ import { TaskListItem } from "../TaskListItem";
 import { TaskGridItem } from "../TaskGridItem";
 import { Pagination } from "@/components/common/Pagination";
 import { ViewModeLayout } from "@/components/common/ViewMode";
-import { getTaskCount, getTaskList, GetTaskListType } from "@/lib/queries/task";
+import { getTaskCount, getTaskList, GetTaskListType } from "@/lib/data/task";
 
 interface TasksServerContainerProps {
   page: number;

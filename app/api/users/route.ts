@@ -1,4 +1,4 @@
-import { getUserSummaries } from "@/lib/queries/user";
+import { getUserSummaries } from "@/lib/data/user";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {

@@ -1,5 +1,5 @@
-import { getComments } from "@/lib/queries/comments";
-import { getProjectDetail } from "@/lib/queries/project";
+import { getComments } from "@/lib/data/comments";
+import { getProjectDetail } from "@/lib/data/project";
 import { ProjectDetailFull } from "../ProjectDetailFull";
 import { CommentItem } from "@/components/comments/CommentItem";
 import { DetailCommentInput } from "@/components/common/DetailCommentInput";

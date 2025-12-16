@@ -1,7 +1,7 @@
 "use client";
 
 import useSWR from "swr";
-import { GetTaskDetailType } from "@/lib/queries/task";
+import { GetTaskDetailType } from "@/lib/data/task";
 import { TaskDetailCompact } from "../TaskDetailCompact/TaskDetailCompact";
 
 interface TaskDetailCompactClientContainerProps {

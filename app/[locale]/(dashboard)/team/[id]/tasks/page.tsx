@@ -1,4 +1,4 @@
-import { getTaskCount } from "@/lib/queries/task";
+import { getTaskCount } from "@/lib/data/task";
 import { getPageParams } from "@/lib/utils/getPageParams";
 import { TeamProfileTasksPage } from "./TeamProfileTasksPage";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";

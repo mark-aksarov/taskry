@@ -1,5 +1,5 @@
 import useSWR from "swr";
-import { GetCommentsType } from "@/lib/queries/comments";
+import { GetCommentsType } from "@/lib/data/comments";
 import { CommentItem } from "@/components/comments/CommentItem";
 import { CommentsEmptySection } from "@/components/comments/CommentsEmptySection";
 

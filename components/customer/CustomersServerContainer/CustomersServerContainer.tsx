@@ -4,7 +4,7 @@ import { CustomerListItem } from "../CustomerListItem";
 import { CustomerGridItem } from "../CustomerGridItem";
 import { Pagination } from "@/components/common/Pagination";
 import { ViewModeLayout } from "@/components/common/ViewMode";
-import { getCustomerCount, getCustomerList } from "@/lib/queries/customers";
+import { getCustomerCount, getCustomerList } from "@/lib/data/customers";
 
 interface CustomersServerContainerProps {
   page: number;

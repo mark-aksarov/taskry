@@ -2,7 +2,7 @@ import "server-only";
 
 import { cache } from "react";
 import prisma from "../prisma";
-import { ThenArg } from "@/lib/queries/types";
+import { ThenArg } from "@/lib/data/types";
 import { getSessionOrThrow } from "../utils/getSessionOrThrow";
 
 export type GetCommentsType = ThenArg<ReturnType<typeof getComments>>;

@@ -1,7 +1,7 @@
 import { UserTaskList } from "../UserTaskList";
 import { UserTaskListItem } from "../UserTaskListItem";
 import { Pagination } from "@/components/common/Pagination";
-import { getTaskCount, getTaskList } from "@/lib/queries/task";
+import { getTaskCount, getTaskList } from "@/lib/data/task";
 
 interface UserTasksServerContainerProps {
   page: number;

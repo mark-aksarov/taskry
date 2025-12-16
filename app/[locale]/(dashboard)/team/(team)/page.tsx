@@ -1,5 +1,5 @@
 import { UsersPage } from "./UsersPage";
-import { getUserCount } from "@/lib/queries/user";
+import { getUserCount } from "@/lib/data/user";
 import { UsersPageEmpty } from "./UsersPageEmpty";
 import { getPageParams } from "@/lib/utils/getPageParams";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";

@@ -1,5 +1,5 @@
-import { getUserSummaries } from "@/lib/queries/user";
-import { getProjectSummaries } from "@/lib/queries/project";
+import { getUserSummaries } from "@/lib/data/user";
+import { getProjectSummaries } from "@/lib/data/project";
 import { TaskDetailForm } from "../TaskDetailForm/TaskDetailForm";
 import { TaskDetailFormStatusSelect } from "../TaskDetailForm/TaskDetailFormStatusSelect";
 import { TaskDetailFormProjectSelect } from "../TaskDetailForm/TaskDetailFormProjectSelect";

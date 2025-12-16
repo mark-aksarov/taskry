@@ -50,8 +50,12 @@ export type ResetPasswordAction = (
 ) => Promise<ResetPasswordState>;
 
 export type DeleteProjectActionState = {
-  success: boolean;
-  error: {
-    status: string;
-  } | null;
+  status: "error" | "success" | null;
+  message: string | null;
 };
+
+export interface DeleteProjectPayload {
+  id: number;
+  currentPage: number;
+  isLastItemOnPage: boolean;
+}

@@ -9,7 +9,7 @@ import { headers } from "next/headers";
 import { TaskList } from "../TaskList";
 import { TaskListItem } from "../TaskListItem";
 import { Pagination } from "@/components/common/Pagination";
-import { getTaskCount, getTaskList } from "@/lib/queries/task";
+import { getTaskCount, getTaskList } from "@/lib/data/task";
 
 interface AssignedTasksServerContainerProps {
   page: number;

@@ -6,9 +6,9 @@ import {
 } from "../TaskFormBase";
 
 import { NewTaskForm } from "../NewTaskForm";
-import { getUserSummaries } from "@/lib/queries/user";
-import { getProjectSummaries } from "@/lib/queries/project";
-import { getTaskCategorySummaries } from "@/lib/queries/task";
+import { getUserSummaries } from "@/lib/data/user";
+import { getProjectSummaries } from "@/lib/data/project";
+import { getTaskCategorySummaries } from "@/lib/data/task";
 
 export async function NewTaskFormServerContainer() {
   const categories = await getTaskCategorySummaries();

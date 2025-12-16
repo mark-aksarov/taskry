@@ -1,5 +1,5 @@
 import { DetailCardHeading } from "@/components/common/DetailCard";
-import { getProjectSummary } from "@/lib/queries/project";
+import { getProjectSummary } from "@/lib/data/project";
 
 export async function ProjectDetailCardHeadingServerContainer({
   id,

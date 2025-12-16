@@ -4,7 +4,7 @@ import { ProjectListItem } from "../ProjectListItem";
 import { ProjectGridItem } from "../ProjectGridItem";
 import { Pagination } from "@/components/common/Pagination";
 import { ViewModeLayout } from "@/components/common/ViewMode";
-import { getProjectCount, getProjectList } from "@/lib/queries/project";
+import { getProjectCount, getProjectList } from "@/lib/data/project";
 import { deleteProjectAction } from "@/lib/actions/deleteProjectAction";
 
 interface ProjectsServerContainerProps {
@@ -19,12 +19,22 @@ export async function ProjectsServerContainer({
   const projects = await getProjectList({ page, pageSize });
   const count = await getProjectCount();
   const totalPages = Math.ceil(count / pageSize);
+  const isLastItemOnPage = projects.length === 1;
 
   const paginationProps = {
     page,
     totalPages,
     pageSize,
     baseUrl: "/projects",
+  };
+
+  const handleDeleteProject = async (prevState: any, id: number) => {
+    "use server";
+    return deleteProjectAction(prevState, {
+      id,
+      currentPage: page,
+      isLastItemOnPage,
+    });
   };
 
   return (
@@ -71,7 +81,7 @@ export async function ProjectsServerContainer({
                 category={project.category}
                 comments={project._count.comments}
                 showCheckbox
-                deleteProjectAction={deleteProjectAction}
+                deleteProjectAction={handleDeleteProject}
               />
             ))}
           </ProjectList>
@@ -102,7 +112,7 @@ export async function ProjectsServerContainer({
                   project.tasks.filter((t) => t.statusId === "completed").length
                 }
                 comments={project._count.comments}
-                deleteProjectAction={deleteProjectAction}
+                deleteProjectAction={handleDeleteProject}
               />
             ))}
           </ProjectGrid>

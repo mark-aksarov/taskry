@@ -1,21 +1,22 @@
 "use client";
 
-import { startTransition, useActionState, useEffect } from "react";
 import {
   ConfirmModal,
+  ConfirmModalText,
+  ConfirmModalError,
   ConfirmModalActions,
   ConfirmModalCancelButton,
   ConfirmModalConfirmButton,
-  ConfirmModalError,
-  ConfirmModalText,
 } from "@/components/common/ConfirmModal";
-import { DeleteProjectActionState } from "@/lib/actions/types";
+
 import { useTranslations } from "next-intl";
 import { DialogHeading } from "@/components/ui";
+import { DeleteProjectActionState } from "@/lib/actions/types";
+import { startTransition, useActionState, useEffect } from "react";
 
 const initialState: DeleteProjectActionState = {
-  success: false,
-  error: null,
+  status: null,
+  message: null,
 };
 
 interface DeleteProjectModalProps {
@@ -50,15 +51,17 @@ export function DeleteProjectModal({
   };
 
   useEffect(() => {
-    if (state.success) {
+    if (state.status === "success") {
       onOpenChange(false);
     }
-  }, [state.success]);
+  }, [state.status]);
 
   return (
     <ConfirmModal isOpen={isOpen} onOpenChange={onOpenChange}>
       <DialogHeading>{t("heading")}</DialogHeading>
-      {state.error && <ConfirmModalError>t("error")</ConfirmModalError>}
+      {state.status === "error" && (
+        <ConfirmModalError>{state.message}</ConfirmModalError>
+      )}
       <ConfirmModalText>
         {t.rich("text", {
           strong: (chunks) => <strong>{chunks}</strong>,

@@ -3,7 +3,7 @@ import {
   UserFiltersFormPositionCheckboxGroup,
 } from "../UserFiltersForm";
 
-import { getPositionSummaries } from "@/lib/queries/posititons";
+import { getPositionSummaries } from "@/lib/data/posititons";
 
 export async function UserFiltersFormServerContainer() {
   const positions = await getPositionSummaries();

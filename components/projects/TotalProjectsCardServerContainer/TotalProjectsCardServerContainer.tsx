@@ -1,6 +1,6 @@
 import "server-only";
 
-import { getProjectCount } from "@/lib/queries/project";
+import { getProjectCount } from "@/lib/data/project";
 import { TotalProjectsCard } from "../TotalProjectsCard";
 
 export const TotalProjectsCardServerContainer = async () => {

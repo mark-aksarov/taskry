@@ -1,5 +1,5 @@
 import z from "zod";
-import { getUserDetails } from "@/lib/queries/user";
+import { getUserDetails } from "@/lib/data/user";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(

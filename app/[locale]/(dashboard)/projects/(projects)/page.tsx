@@ -1,5 +1,5 @@
 import { ProjectsPage } from "./ProjectsPage";
-import { getProjectCount } from "@/lib/queries/project";
+import { getProjectCount } from "@/lib/data/project";
 import { ProjectsPageEmpty } from "./ProjectsPageEmpty";
 import { getPageParams } from "@/lib/utils/getPageParams";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";

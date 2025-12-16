@@ -2,7 +2,7 @@ import z from "zod";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
-import { getCustomerDetails } from "@/lib/queries/customers";
+import { getCustomerDetails } from "@/lib/data/customers";
 
 export async function GET(
   req: NextRequest,
