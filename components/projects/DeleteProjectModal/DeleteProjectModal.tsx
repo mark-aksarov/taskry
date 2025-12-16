@@ -8,12 +8,12 @@ import {
   ConfirmModalConfirmButton,
 } from "@/components/common/ConfirmModal";
 
+import { CircleX } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { DialogHeading } from "@/components/ui";
 import { ToastContext } from "@/components/ui/Toast";
 import { DeleteProjectActionState } from "@/lib/actions/types";
 import { startTransition, useActionState, useContext, useEffect } from "react";
-import { CircleX } from "lucide-react";
 
 const initialState: DeleteProjectActionState = {
   status: null,

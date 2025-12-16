@@ -37,7 +37,7 @@ export async function deleteProjectAction(
     if (!success) return errorResponse;
 
     // Delete Project
-    await deleteProject(111111);
+    await deleteProject(id);
 
     revalidatePath("/projects");
     isSuccess = true;
