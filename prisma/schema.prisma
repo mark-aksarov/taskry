@@ -274,24 +274,24 @@ model Subtask {
 // Notifications
 
 enum NotificationType {
-  TASK_ADDED
-  TASK_DELETED
-  TASK_UPDATED
+  taskAdded
+  taskDeleted
+  taskUpdated
 
-  PROJECT_ADDED
-  PROJECT_DELETED
-  PROJECT_UPDATED
+  projectAdded
+  projectDeleted
+  projectUpdated
 
-  USER_ADDED
-  USER_DELETED
-  USER_UPDATED
+  userAdded
+  userDeleted
+  userUpdated
 
-  CUSTOMER_ADDED
-  CUSTOMER_DELETED
-  CUSTOMER_UPDATED
+  customerAdded
+  customerDeleted
+  customerUpdated
 
-  COMMENT_REPLIED
-  COMMENT_ADDED
+  commentReplied
+  commentAdded
 }
 
 model Notification {

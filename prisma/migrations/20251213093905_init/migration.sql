@@ -1,5 +1,5 @@
 -- CreateEnum
-CREATE TYPE "public"."NotificationType" AS ENUM ('TASK_ADDED', 'TASK_DELETED', 'TASK_UPDATED', 'PROJECT_ADDED', 'PROJECT_DELETED', 'PROJECT_UPDATED', 'USER_ADDED', 'USER_DELETED', 'USER_UPDATED', 'CUSTOMER_ADDED', 'CUSTOMER_DELETED', 'CUSTOMER_UPDATED', 'COMMENT_REPLIED', 'COMMENT_ADDED');
+CREATE TYPE "public"."NotificationType" AS ENUM ('taskAdded', 'taskDeleted', 'taskUpdated', 'projectAdded', 'projectDeleted', 'projectUpdated', 'userAdded', 'userDeleted', 'userUpdated', 'customerAdded', 'customerDeleted', 'customerUpdated', 'commentReplied', 'commentAdded');
 
 -- CreateTable
 CREATE TABLE "public"."workspace" (

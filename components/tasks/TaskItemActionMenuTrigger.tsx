@@ -20,8 +20,8 @@ export function TaskItemActionMenuTrigger({
       <Item textValue={t("markPending")} key="pending">
         <CircleEllipsis size={16} /> {t("markPending")}
       </Item>
-      <Item textValue={t("markDone")} key="done">
-        <Check size={16} /> {t("markDone")}
+      <Item textValue={t("markCompleted")} key="done">
+        <Check size={16} /> {t("markCompleted")}
       </Item>
       <Item textValue={t("markActive")} key="active">
         <Clock size={16} /> {t("markActive")}

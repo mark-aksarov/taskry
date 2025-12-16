@@ -29,7 +29,7 @@ export const Default = {
             fullName: "Alice Johnson",
             imageUrl: "/woman.jpg",
           }}
-          type="TASK_ADDED"
+          type="taskAdded"
           target={<Link href="#">Create Landing Page</Link>}
         />
 
@@ -46,7 +46,7 @@ export const Default = {
               "I totally agree with Alice. The performance improvements are noticeable, especially in larger datasets. One suggestion though: it might be helpful to include a loading indicator when switching between tabs, since the delay can confuse first-time users.",
             attachments: [],
           }}
-          type="PROJECT_UPDATED"
+          type="projectUpdated"
           target={<Link href="#">Website Redesign</Link>}
         />
 
@@ -58,7 +58,7 @@ export const Default = {
             fullName: "Emma Brown",
             imageUrl: "/woman.jpg",
           }}
-          type="COMMENT_ADDED"
+          type="commentAdded"
           target={<Link href="#">Optimize SEO</Link>}
         />
 
@@ -70,7 +70,7 @@ export const Default = {
             fullName: "John Doe",
             imageUrl: "/man.jpg",
           }}
-          type="USER_ADDED"
+          type="userAdded"
           target={<Link href="#">Michael Scott</Link>}
         />
 
@@ -82,7 +82,7 @@ export const Default = {
             fullName: "Pam Beesly",
             imageUrl: "/woman.jpg",
           }}
-          type="CUSTOMER_ADDED"
+          type="customerAdded"
           target={<Link href="#">Dunder Mifflin Inc.</Link>}
         />
 
@@ -94,7 +94,7 @@ export const Default = {
             fullName: "Kevin Malone",
             imageUrl: "/man.jpg",
           }}
-          type="TASK_DELETED"
+          type="taskDeleted"
           target="Weekly Report"
         />
 
@@ -106,7 +106,7 @@ export const Default = {
             fullName: "Dwight Schrute",
             imageUrl: "/man.jpg",
           }}
-          type="PROJECT_DELETED"
+          type="projectDeleted"
           target="Sales Dashboard"
         />
 
@@ -118,7 +118,7 @@ export const Default = {
             fullName: "Angela Martin",
             imageUrl: "/woman.jpg",
           }}
-          type="TASK_UPDATED"
+          type="taskUpdated"
           target={<Link href="#">Budget Review</Link>}
         />
 
@@ -130,7 +130,7 @@ export const Default = {
             fullName: "Stanley Hudson",
             imageUrl: "/man.jpg",
           }}
-          type="COMMENT_REPLIED"
+          type="commentReplied"
           target={<Link href="#">Mobile App Launch</Link>}
         />
 
@@ -142,7 +142,7 @@ export const Default = {
             fullName: "Jim Halpert",
             imageUrl: "/man.jpg",
           }}
-          type="USER_UPDATED"
+          type="userUpdated"
           target={<Link href="#">Alice Johnson</Link>}
         />
       </>

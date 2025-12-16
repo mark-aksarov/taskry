@@ -383,24 +383,24 @@
       "unknownUser": "Неизвестный пользователь",
 
       "action": {
-        "TASK_ADDED": "добавил(а) новую задачу",
-        "TASK_DELETED": "удалил(а) задачу",
-        "TASK_UPDATED": "обновил(а) задачу",
+        "taskAdded": "добавил(а) новую задачу",
+        "taskDeleted": "удалил(а) задачу",
+        "taskUpdated": "обновил(а) задачу",
 
-        "PROJECT_ADDED": "добавил(а) новый проект",
-        "PROJECT_DELETED": "удалил(а) проект",
-        "PROJECT_UPDATED": "обновил(а) проект",
+        "projectAdded": "добавил(а) новый проект",
+        "projectDeleted": "удалил(а) проект",
+        "projectUpdated": "обновил(а) проект",
 
-        "USER_ADDED": "добавил(а) нового пользователя",
-        "USER_DELETED": "удалил(а) пользователя",
-        "USER_UPDATED": "обновил(а) пользователя",
+        "userAdded": "добавил(а) нового пользователя",
+        "userDeleted": "удалил(а) пользователя",
+        "userUpdated": "обновил(а) пользователя",
 
-        "CUSTOMER_ADDED": "добавил(а) нового клиента",
-        "CUSTOMER_DELETED": "удалил(а) клиента",
-        "CUSTOMER_UPDATED": "обновил(а) клиента",
+        "customerAdded": "добавил(а) нового клиента",
+        "customerDeleted": "удалил(а) клиента",
+        "customerUpdated": "обновил(а) клиента",
 
-        "COMMENT_REPLIED": "ответил(а) на комментарий в",
-        "COMMENT_ADDED": "добавил(а) комментарий к"
+        "commentReplied": "ответил(а) на комментарий в",
+        "commentAdded": "добавил(а) комментарий к"
       }
     }
   },

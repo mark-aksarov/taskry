@@ -383,24 +383,24 @@
       "unknownUser": "Unknown User",
 
       "action": {
-        "TASK_ADDED": "added a new task",
-        "TASK_DELETED": "deleted a task",
-        "TASK_UPDATED": "updated a task",
+        "taskAdded": "added a new task",
+        "taskDeleted": "deleted a task",
+        "taskUpdated": "updated a task",
 
-        "PROJECT_ADDED": "added a new project",
-        "PROJECT_DELETED": "deleted a project",
-        "PROJECT_UPDATED": "updated a project",
+        "projectAdded": "added a new project",
+        "projectDeleted": "deleted a project",
+        "projectUpdated": "updated a project",
 
-        "USER_ADDED": "added a new user",
-        "USER_DELETED": "deleted a user",
-        "USER_UPDATED": "updated a user",
+        "userAdded": "added a new user",
+        "userDeleted": "deleted a user",
+        "userUpdated": "updated a user",
 
-        "CUSTOMER_ADDED": "added a new customer",
-        "CUSTOMER_DELETED": "deleted a customer",
-        "CUSTOMER_UPDATED": "updated a customer",
+        "customerAdded": "added a new customer",
+        "customerDeleted": "deleted a customer",
+        "customerUpdated": "updated a customer",
 
-        "COMMENT_REPLIED": "replied to a comment in",
-        "COMMENT_ADDED": "added a comment to"
+        "commentReplied": "replied to a comment in",
+        "commentAdded": "added a comment to"
       }
     }
   },

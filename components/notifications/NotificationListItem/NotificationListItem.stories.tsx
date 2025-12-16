@@ -26,7 +26,7 @@ export const Default = {
       fullName: "Alice Johnson",
       imageUrl: "/woman.jpg",
     },
-    type: "TASK_ADDED",
+    type: "taskAdded",
     target: <Link href="#">Create Landing Page</Link>,
   },
 } satisfies Story;
