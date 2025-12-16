@@ -1,15 +1,51 @@
-import { NextRequest, NextResponse } from "next/server";
+import z from "zod";
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
 import { getTaskDetail } from "@/lib/queries/task";
+import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(
   req: NextRequest,
-  { params }: { params: Promise<{ id: number }> },
+  { params }: { params: Promise<{ id: string }> },
 ) {
   try {
-    const { id } = await params;
-    const task = await getTaskDetail(Number(id));
+    // Authorization
+    const session = await auth.api.getSession({
+      headers: await headers(),
+    });
+
+    if (!session) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
+    // Validation
+    const data = await params;
+
+    const schema = z.object({
+      id: z.coerce.number().int().positive(),
+    });
+
+    const parse = schema.safeParse({ id: data.id });
+    if (!parse.success) {
+      return NextResponse.json({ error: "Invalid task ID" }, { status: 400 });
+    }
+
+    const { id } = parse.data;
+
+    // Fetch task
+    const task = await getTaskDetail(id);
+
+    if (!task) {
+      return NextResponse.json({ error: "Task not found" }, { status: 404 });
+    }
+
     return NextResponse.json(task);
-  } catch (err) {
-    return NextResponse.json({ error: "Task not found" }, { status: 404 });
+  } catch (error) {
+    console.error("GET /task error:", error);
+
+    return NextResponse.json(
+      { error: "Internal server error" },
+      { status: 500 },
+    );
   }
 }

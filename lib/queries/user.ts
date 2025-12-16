@@ -3,8 +3,7 @@ import "server-only";
 import { cache } from "react";
 import prisma from "../prisma";
 import { ThenArg } from "./types";
-import { auth } from "../auth";
-import { headers } from "next/headers";
+import { getSessionOrThrow } from "../utils/getSessionOrThrow";
 
 export type GetUserDetailsType = ThenArg<ReturnType<typeof getUserDetails>>;
 export const getUserDetails = cache(async (userId: string) => {
@@ -44,14 +43,7 @@ function getUserWhereClause(params: { workspaceId: number }) {
 export type GetUserListType = ThenArg<ReturnType<typeof getUserList>>;
 export const getUserList = cache(
   async ({ page, pageSize }: { page: number; pageSize: number }) => {
-    const session = await auth.api.getSession({
-      headers: await headers(),
-    });
-
-    if (!session) {
-      throw new Error("Unauthorized");
-    }
-
+    const session = await getSessionOrThrow();
     const workspaceId = session.user.workspaceId;
 
     const where = getUserWhereClause({ workspaceId });
@@ -82,16 +74,8 @@ export const getUserList = cache(
 );
 
 export const getUserCount = cache(async () => {
-  const session = await auth.api.getSession({
-    headers: await headers(),
-  });
-
-  if (!session) {
-    throw new Error("Unauthorized");
-  }
-
+  const session = await getSessionOrThrow();
   const workspaceId = session.user.workspaceId;
-
   const where = getUserWhereClause({ workspaceId });
 
   return prisma.user.count({ where });
@@ -99,14 +83,7 @@ export const getUserCount = cache(async () => {
 
 export type GeUserSummariesType = ThenArg<ReturnType<typeof getUserSummaries>>;
 export const getUserSummaries = cache(async () => {
-  const session = await auth.api.getSession({
-    headers: await headers(),
-  });
-
-  if (!session) {
-    throw new Error("Unauthorized");
-  }
-
+  const session = await getSessionOrThrow();
   const workspaceId = session.user.workspaceId;
 
   return await prisma.user.findMany({

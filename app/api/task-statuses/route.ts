@@ -2,6 +2,17 @@ import { NextRequest, NextResponse } from "next/server";
 import { getTaskStatusSummaries } from "@/lib/queries/task";
 
 export async function GET(req: NextRequest) {
-  const statuses = await getTaskStatusSummaries();
-  return NextResponse.json(statuses);
+  try {
+    // Fetch statuses
+    const statuses = await getTaskStatusSummaries();
+
+    return NextResponse.json(statuses);
+  } catch (error) {
+    console.error("GET /task-statuses error:", error);
+
+    return NextResponse.json(
+      { error: "Internal server error" },
+      { status: 500 },
+    );
+  }
 }

@@ -1,21 +1,13 @@
 import { cache } from "react";
 import prisma from "../prisma";
-import { auth } from "../auth";
 import { ThenArg } from "./types";
-import { headers } from "next/headers";
+import { getSessionOrThrow } from "../utils/getSessionOrThrow";
 
 export type GetPositionSummariesType = ThenArg<
   ReturnType<typeof getPositionSummaries>
 >;
 export const getPositionSummaries = cache(async () => {
-  const session = await auth.api.getSession({
-    headers: await headers(),
-  });
-
-  if (!session) {
-    throw new Error("Unauthorized");
-  }
-
+  const session = await getSessionOrThrow();
   const workspaceId = session.user.workspaceId;
 
   return await prisma.position.findMany({

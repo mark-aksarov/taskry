@@ -27,7 +27,7 @@ export async function deleteProjectAction(
 
   // Validation
   const schema = z.object({
-    id: z.number().min(1),
+    id: z.coerce.number().int().positive(),
   });
 
   const data = schema.safeParse({ id });
@@ -42,8 +42,6 @@ export async function deleteProjectAction(
   }
 
   // Find Project
-  const workspaceId = session.user.workspaceId;
-
   const project = await prisma.project.findUnique({
     where: { id },
     select: {
@@ -61,6 +59,8 @@ export async function deleteProjectAction(
   }
 
   // Check Permissions
+  const workspaceId = session.user.workspaceId;
+
   if (project.workspaceId !== workspaceId) {
     return {
       success: false,

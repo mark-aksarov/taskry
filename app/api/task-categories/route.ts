@@ -4,14 +4,26 @@ import { NextRequest, NextResponse } from "next/server";
 import { getTaskCategorySummaries } from "@/lib/queries/task";
 
 export async function GET(req: NextRequest) {
-  const session = await auth.api.getSession({
-    headers: await headers(),
-  });
+  try {
+    // Authorization
+    const session = await auth.api.getSession({
+      headers: await headers(),
+    });
 
-  if (!session) {
-    return NextResponse.json("Unauthorized", { status: 401 });
+    if (!session) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
+    // Fetch categories
+    const categories = await getTaskCategorySummaries();
+
+    return NextResponse.json(categories);
+  } catch (error) {
+    console.error("GET /task-categories error:", error);
+
+    return NextResponse.json(
+      { error: "Internal server error" },
+      { status: 500 },
+    );
   }
-
-  const categories = await getTaskCategorySummaries();
-  return NextResponse.json(categories);
 }

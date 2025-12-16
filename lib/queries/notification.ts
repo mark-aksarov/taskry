@@ -3,6 +3,7 @@ import "server-only";
 import { cache } from "react";
 import prisma from "../prisma";
 import { ThenArg } from "./types";
+import { getSessionOrThrow } from "../utils/getSessionOrThrow";
 
 export type GetNotificationsListType = ThenArg<
   ReturnType<typeof getNotificationsList>
@@ -10,19 +11,20 @@ export type GetNotificationsListType = ThenArg<
 
 export const getNotificationsList = cache(
   async ({
-    userId,
     page,
     pageSize,
     filter,
   }: {
-    userId: string;
     page: number;
     pageSize: number;
     filter?: string;
   }) => {
+    const session = await getSessionOrThrow();
     const skip = (page - 1) * pageSize;
-
-    const where: any = { recipientId: userId };
+    const where: any = {
+      recipientId: session.user.id,
+      workspaceId: session.user.workspaceId,
+    };
 
     if (filter === "unread") where.isRead = false;
 
@@ -126,18 +128,15 @@ export const getNotificationsList = cache(
 );
 
 export const getNotificationsCount = cache(
-  async ({ userId }: { userId: string }) => {
-    const where: any = { recipientId: userId };
-    return prisma.notification.count({ where });
-  },
-);
+  async ({ isRead }: { isRead?: boolean } = {}) => {
+    const session = await getSessionOrThrow();
 
-export const getNotificationsUnreadCount = cache(
-  async ({ userId }: { userId: string }) => {
-    const where: any = {
-      recipientId: userId,
-      isRead: false,
+    const where = {
+      recipientId: session.user.id,
+      workspaceId: session.user.workspaceId,
+      ...(isRead !== undefined && { isRead }),
     };
+
     return prisma.notification.count({ where });
   },
 );
