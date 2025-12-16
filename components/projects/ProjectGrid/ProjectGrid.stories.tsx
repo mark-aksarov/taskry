@@ -21,12 +21,12 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-function deleteProjectActionMock() {
-  return new Promise<any>(() => ({
-    success: true,
-    error: null,
-  }));
-}
+const mockedAction = () => {
+  return new Promise(() => ({
+    status: "success",
+    message: null,
+  })) as any;
+};
 
 export const Default = {
   args: {
@@ -45,7 +45,8 @@ export const Default = {
           tasks={4}
           tasksDone={1}
           comments={12}
-          deleteProjectAction={deleteProjectActionMock}
+          deleteAction={mockedAction}
+          updateStatusAction={mockedAction}
         />
         <ProjectGridItem
           id={2}
@@ -60,7 +61,8 @@ export const Default = {
           tasks={4}
           tasksDone={1}
           comments={9}
-          deleteProjectAction={deleteProjectActionMock}
+          deleteAction={mockedAction}
+          updateStatusAction={mockedAction}
         />
         <ProjectGridItem
           id={3}
@@ -75,7 +77,8 @@ export const Default = {
           tasks={3}
           tasksDone={2}
           comments={7}
-          deleteProjectAction={deleteProjectActionMock}
+          deleteAction={mockedAction}
+          updateStatusAction={mockedAction}
         />
         <ProjectGridItem
           id={4}
@@ -90,7 +93,8 @@ export const Default = {
           tasks={4}
           tasksDone={1}
           comments={5}
-          deleteProjectAction={deleteProjectActionMock}
+          deleteAction={mockedAction}
+          updateStatusAction={mockedAction}
         />
         <ProjectGridItem
           id={5}
@@ -105,7 +109,8 @@ export const Default = {
           tasks={3}
           tasksDone={0}
           comments={6}
-          deleteProjectAction={deleteProjectActionMock}
+          deleteAction={mockedAction}
+          updateStatusAction={mockedAction}
         />
         <ProjectGridItem
           id={6}
@@ -120,7 +125,8 @@ export const Default = {
           tasks={4}
           tasksDone={1}
           comments={11}
-          deleteProjectAction={deleteProjectActionMock}
+          deleteAction={mockedAction}
+          updateStatusAction={mockedAction}
         />
         <ProjectGridItem
           id={7}
@@ -135,7 +141,8 @@ export const Default = {
           tasks={3}
           tasksDone={2}
           comments={4}
-          deleteProjectAction={deleteProjectActionMock}
+          deleteAction={mockedAction}
+          updateStatusAction={mockedAction}
         />
         <ProjectGridItem
           id={8}
@@ -150,7 +157,8 @@ export const Default = {
           tasks={3}
           tasksDone={0}
           comments={8}
-          deleteProjectAction={deleteProjectActionMock}
+          deleteAction={mockedAction}
+          updateStatusAction={mockedAction}
         />
         <ProjectGridItem
           id={9}
@@ -165,7 +173,8 @@ export const Default = {
           tasks={2}
           tasksDone={0}
           comments={3}
-          deleteProjectAction={deleteProjectActionMock}
+          deleteAction={mockedAction}
+          updateStatusAction={mockedAction}
         />
         <ProjectGridItem
           id={10}
@@ -180,7 +189,8 @@ export const Default = {
           tasks={3}
           tasksDone={1}
           comments={10}
-          deleteProjectAction={deleteProjectActionMock}
+          deleteAction={mockedAction}
+          updateStatusAction={mockedAction}
         />
       </>
     ),

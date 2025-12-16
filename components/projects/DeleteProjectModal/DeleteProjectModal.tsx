@@ -25,7 +25,7 @@ interface DeleteProjectModalProps {
   projectTitle: string;
   isOpen: boolean;
   onOpenChange: (isOpen: boolean) => void;
-  deleteProjectAction: (
+  deleteAction: (
     prevState: any,
     id: number,
   ) => Promise<DeleteProjectActionState>;
@@ -36,20 +36,17 @@ export function DeleteProjectModal({
   projectTitle,
   isOpen,
   onOpenChange,
-  deleteProjectAction,
+  deleteAction,
 }: DeleteProjectModalProps) {
   const toastQueue = useContext(ToastContext);
 
   const t = useTranslations("projects.DeleteProjectModal");
 
-  const [state, deleteAction, pending] = useActionState(
-    deleteProjectAction,
-    initialState,
-  );
+  const [state, action, pending] = useActionState(deleteAction, initialState);
 
   const handleDeleteProject = () => {
     startTransition(() => {
-      deleteAction(projectId);
+      action(projectId);
     });
   };
 

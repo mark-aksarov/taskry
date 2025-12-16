@@ -196,3 +196,18 @@ export const deleteProject = async (id: number) => {
     where: { id, workspaceId },
   });
 };
+
+export const updateProjectStatus = async (
+  id: number,
+  statusId: "active" | "completed" | "pending",
+) => {
+  const session = await getSessionOrThrow();
+  const workspaceId = session.user.workspaceId;
+
+  return await prisma.project.update({
+    where: { id, workspaceId },
+    data: {
+      statusId,
+    },
+  });
+};

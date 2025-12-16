@@ -6,6 +6,7 @@ import { Pagination } from "@/components/common/Pagination";
 import { ViewModeLayout } from "@/components/common/ViewMode";
 import { getProjectCount, getProjectList } from "@/lib/data/project";
 import { deleteProjectAction } from "@/lib/actions/deleteProjectAction";
+import { updateProjectStatus } from "@/lib/actions/updateProjectStatus";
 
 interface ProjectsServerContainerProps {
   page: number;
@@ -81,7 +82,8 @@ export async function ProjectsServerContainer({
                 category={project.category}
                 comments={project._count.comments}
                 showCheckbox
-                deleteProjectAction={handleDeleteProject}
+                deleteAction={handleDeleteProject}
+                updateStatusAction={updateProjectStatus}
               />
             ))}
           </ProjectList>
@@ -112,7 +114,8 @@ export async function ProjectsServerContainer({
                   project.tasks.filter((t) => t.statusId === "completed").length
                 }
                 comments={project._count.comments}
-                deleteProjectAction={handleDeleteProject}
+                deleteAction={handleDeleteProject}
+                updateStatusAction={updateProjectStatus}
               />
             ))}
           </ProjectGrid>

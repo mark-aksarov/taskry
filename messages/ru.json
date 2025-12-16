@@ -2,6 +2,9 @@
   "actions": {
     "deleteProjectAction": {
       "error": "Что-то пошло не так. Удаление не удалось."
+    },
+    "updateProjectStatus": {
+      "error": "Что-то пошло не так. Обновление не удалось."
     }
   },
 
@@ -590,7 +593,7 @@
     "ProjectItemActionMenuTrigger": {
       "delete": "Удалить",
       "markPending": "Отметить как «В ожидании»",
-      "markDone": "Отметить как «Готово»",
+      "markCompleted": "Отметить как «Готово»",
       "markActive": "Отметить как «Активно»"
     },
 
@@ -985,7 +988,7 @@
     "TaskItemActionMenuTrigger": {
       "delete": "Удалить",
       "markPending": "Пометить как ожидающую",
-      "markDone": "Пометить как выполненную",
+      "markCompleted": "Пометить как выполненную",
       "markActive": "Пометить как активную"
     },
 

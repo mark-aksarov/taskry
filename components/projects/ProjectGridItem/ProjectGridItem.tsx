@@ -1,6 +1,12 @@
 "use client";
 
 import {
+  DeleteProjectActionState,
+  UpdateProjectStatusPayload,
+  UpdateProjectStatusState,
+} from "@/lib/actions/types";
+
+import {
   GridItemText,
   GridItemInfo,
   GridItemTitle,
@@ -28,7 +34,6 @@ import { ProjectDetailBottomSheet } from "../ProjectDetailBottomSheet";
 import { getProjectStatusBadgeColor } from "../getProjectStatusBadgeColor";
 import { ProjectItemActionMenuTrigger } from "../ProjectItemActionMenuTrigger";
 import { UserDetailBottomSheet } from "@/components/users/UserDetailBottomSheet";
-import { DeleteProjectActionState } from "@/lib/actions/types";
 
 export interface ProjectGridItemProps {
   id: number;
@@ -46,10 +51,16 @@ export interface ProjectGridItemProps {
   tasks: number;
   tasksDone: number;
   comments: number;
-  deleteProjectAction: (
+
+  deleteAction: (
     prevState: any,
     id: number,
   ) => Promise<DeleteProjectActionState>;
+
+  updateStatusAction: (
+    prevState: any,
+    { id, statusId }: UpdateProjectStatusPayload,
+  ) => Promise<UpdateProjectStatusState>;
 }
 
 export function ProjectGridItem({
@@ -61,7 +72,8 @@ export function ProjectGridItem({
   tasks,
   tasksDone,
   comments,
-  deleteProjectAction,
+  deleteAction,
+  updateStatusAction,
 }: ProjectGridItemProps) {
   const t = useTranslations("projects");
 
@@ -93,8 +105,8 @@ export function ProjectGridItem({
           className="-mr-2"
           projectId={id}
           projectTitle={title}
-          deleteProjectAction={deleteProjectAction}
-          updateStatusAction={() => {}}
+          deleteAction={deleteAction}
+          updateStatusAction={updateStatusAction}
         />
       }
       titleSlot={

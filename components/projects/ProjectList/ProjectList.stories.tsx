@@ -21,12 +21,12 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-function deleteProjectActionMock() {
-  return new Promise<any>(() => ({
-    success: true,
-    error: null,
-  }));
-}
+const mockedAction = () => {
+  return new Promise(() => ({
+    status: "success",
+    message: null,
+  })) as any;
+};
 
 export const Default = {
   args: {
@@ -46,7 +46,8 @@ export const Default = {
           company={{ id: 1, name: "Doe Inc." }}
           status={{ id: "pending", name: "Pending" }}
           comments={4}
-          deleteProjectAction={deleteProjectActionMock}
+          deleteAction={mockedAction}
+          updateStatusAction={mockedAction}
         />
 
         <ProjectListItem
@@ -63,7 +64,8 @@ export const Default = {
           company={{ id: 2, name: "Lee Corp." }}
           status={{ id: "active", name: "Active" }}
           comments={5}
-          deleteProjectAction={deleteProjectActionMock}
+          deleteAction={mockedAction}
+          updateStatusAction={mockedAction}
         />
 
         <ProjectListItem
@@ -80,7 +82,8 @@ export const Default = {
           company={{ id: 3, name: "Brown LLC" }}
           status={{ id: "completed", name: "Completed" }}
           comments={3}
-          deleteProjectAction={deleteProjectActionMock}
+          deleteAction={mockedAction}
+          updateStatusAction={mockedAction}
         />
 
         <ProjectListItem
@@ -97,7 +100,8 @@ export const Default = {
           company={{ id: 4, name: "Wilson Tech" }}
           status={{ id: "pending", name: "Pending" }}
           comments={6}
-          deleteProjectAction={deleteProjectActionMock}
+          deleteAction={mockedAction}
+          updateStatusAction={mockedAction}
         />
 
         <ProjectListItem
@@ -114,7 +118,8 @@ export const Default = {
           company={{ id: 5, name: "Harris Co." }}
           status={{ id: "active", name: "Active" }}
           comments={4}
-          deleteProjectAction={deleteProjectActionMock}
+          deleteAction={mockedAction}
+          updateStatusAction={mockedAction}
         />
 
         <ProjectListItem
@@ -131,7 +136,8 @@ export const Default = {
           company={{ id: 6, name: "King Enterprises" }}
           status={{ id: "pending", name: "Pending" }}
           comments={7}
-          deleteProjectAction={deleteProjectActionMock}
+          deleteAction={mockedAction}
+          updateStatusAction={mockedAction}
         />
 
         <ProjectListItem
@@ -148,7 +154,8 @@ export const Default = {
           company={{ id: 7, name: "Scott Group" }}
           status={{ id: "completed", name: "Completed" }}
           comments={4}
-          deleteProjectAction={deleteProjectActionMock}
+          deleteAction={mockedAction}
+          updateStatusAction={mockedAction}
         />
 
         <ProjectListItem
@@ -165,7 +172,8 @@ export const Default = {
           company={{ id: 8, name: "Allen Studio" }}
           status={{ id: "pending", name: "Pending" }}
           comments={6}
-          deleteProjectAction={deleteProjectActionMock}
+          deleteAction={mockedAction}
+          updateStatusAction={mockedAction}
         />
 
         <ProjectListItem
@@ -182,7 +190,8 @@ export const Default = {
           company={{ id: 9, name: "Baker Tech" }}
           status={{ id: "active", name: "Active" }}
           comments={3}
-          deleteProjectAction={deleteProjectActionMock}
+          deleteAction={mockedAction}
+          updateStatusAction={mockedAction}
         />
 
         <ProjectListItem
@@ -203,7 +212,8 @@ export const Default = {
           company={{ id: 10, name: "Evans Ltd." }}
           status={{ id: "completed", name: "Completed" }}
           comments={8}
-          deleteProjectAction={deleteProjectActionMock}
+          deleteAction={mockedAction}
+          updateStatusAction={mockedAction}
         />
       </>
     ),

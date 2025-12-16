@@ -21,7 +21,11 @@ import { useFormatter, useTranslations } from "next-intl";
 import { ProjectDetailModal } from "../ProjectDetailModal";
 import { UnknownUser } from "@/components/common/UnknownUser";
 import { ProjectCommentsModal } from "../ProjectCommentsModal";
-import { DeleteProjectActionState } from "@/lib/actions/types";
+import {
+  DeleteProjectActionState,
+  UpdateProjectStatusPayload,
+  UpdateProjectStatusState,
+} from "@/lib/actions/types";
 import { ProjectListItemLayout } from "./ProjectListItemLayout";
 import { ImageContainer } from "@/components/common/ImageContainer";
 import { UserDetailModal } from "@/components/users/UserDetailModal";
@@ -57,10 +61,15 @@ export interface ProjectListItemProps {
   };
   comments: number;
   showCheckbox?: boolean;
-  deleteProjectAction: (
+  deleteAction: (
     prevState: any,
     id: number,
   ) => Promise<DeleteProjectActionState>;
+
+  updateStatusAction: (
+    prevState: any,
+    { id, statusId }: UpdateProjectStatusPayload,
+  ) => Promise<UpdateProjectStatusState>;
 }
 
 export const ProjectListItem = ({
@@ -74,7 +83,8 @@ export const ProjectListItem = ({
   creator,
   comments,
   showCheckbox,
-  deleteProjectAction,
+  deleteAction,
+  updateStatusAction,
 }: ProjectListItemProps) => {
   const t = useTranslations("projects");
 
@@ -220,8 +230,8 @@ export const ProjectListItem = ({
         <ProjectItemActionMenuTrigger
           projectId={id}
           projectTitle={title}
-          deleteProjectAction={deleteProjectAction}
-          updateStatusAction={() => {}}
+          deleteAction={deleteAction}
+          updateStatusAction={updateStatusAction}
         />
       }
     />

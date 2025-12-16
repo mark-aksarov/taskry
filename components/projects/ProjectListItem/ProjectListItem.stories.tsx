@@ -20,6 +20,13 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
+const mockedAction = () => {
+  return new Promise(() => ({
+    status: "success",
+    message: null,
+  })) as any;
+};
+
 export const Default = {
   args: {
     id: 1,
@@ -46,12 +53,8 @@ export const Default = {
     },
     comments: 5,
     showCheckbox: false,
-    deleteProjectAction: () => {
-      return new Promise(() => ({
-        success: true,
-        error: null,
-      }));
-    },
+    deleteAction: mockedAction,
+    updateStatusAction: mockedAction,
   },
 } satisfies Story;
 

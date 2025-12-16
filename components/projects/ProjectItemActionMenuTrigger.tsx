@@ -1,30 +1,48 @@
+import {
+  DeleteProjectActionState,
+  UpdateProjectStatusState,
+  UpdateProjectStatusPayload,
+} from "@/lib/actions/types";
+
 import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
-import { useState, startTransition } from "react";
 import { ItemBaseActionMenuTrigger } from "../common/ItemBase";
-import { DeleteProjectActionState } from "@/lib/actions/types";
+import { useState, startTransition, useActionState } from "react";
 import { Check, CircleEllipsis, Clock, Trash } from "lucide-react";
+import { useActionErrorToast } from "@/lib/hooks/useActionErrorToast";
 import { DeleteProjectModal } from "./DeleteProjectModal/DeleteProjectModal";
 
 export type ProjectItemActionMenuTriggerProps = {
   projectId: number;
   projectTitle: string;
   className?: string;
-  deleteProjectAction: (
+  deleteAction: (
     prevState: any,
     id: number,
   ) => Promise<DeleteProjectActionState>;
-  updateStatusAction: (id: number, status: string) => void;
+  updateStatusAction: (
+    prevState: any,
+    { id, statusId }: UpdateProjectStatusPayload,
+  ) => Promise<UpdateProjectStatusState>;
+};
+
+const initialState: UpdateProjectStatusState = {
+  status: null,
+  message: null,
 };
 
 export function ProjectItemActionMenuTrigger({
   projectId,
   projectTitle,
   className,
-  deleteProjectAction,
+  deleteAction,
   updateStatusAction,
 }: ProjectItemActionMenuTriggerProps) {
   const [isOpenDeleteModal, setIsOpenDeleteModal] = useState(false);
+  const [state, updateProjectStatusAction, pending] = useActionState(
+    updateStatusAction,
+    initialState,
+  );
 
   const t = useTranslations("projects.ProjectItemActionMenuTrigger");
 
@@ -34,9 +52,16 @@ export function ProjectItemActionMenuTrigger({
     if (action === "delete") {
       setIsOpenDeleteModal(true);
     } else {
-      startTransition(() => updateStatusAction(projectId, action));
+      startTransition(() =>
+        updateProjectStatusAction({
+          id: projectId,
+          statusId: action as "active" | "completed" | "pending",
+        }),
+      );
     }
   };
+
+  useActionErrorToast(state);
 
   return (
     <>
@@ -47,8 +72,8 @@ export function ProjectItemActionMenuTrigger({
         <Item textValue={t("markPending")} key="pending">
           <CircleEllipsis size={16} /> {t("markPending")}
         </Item>
-        <Item textValue={t("markDone")} key="done">
-          <Check size={16} /> {t("markDone")}
+        <Item textValue={t("markCompleted")} key="completed">
+          <Check size={16} /> {t("markCompleted")}
         </Item>
         <Item textValue={t("markActive")} key="active">
           <Clock size={16} /> {t("markActive")}
@@ -60,7 +85,7 @@ export function ProjectItemActionMenuTrigger({
         projectTitle={projectTitle}
         isOpen={isOpenDeleteModal}
         onOpenChange={setIsOpenDeleteModal}
-        deleteProjectAction={deleteProjectAction}
+        deleteAction={deleteAction}
       />
     </>
   );

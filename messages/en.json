@@ -2,6 +2,9 @@
   "actions": {
     "deleteProjectAction": {
       "error": "Something went wrong. Delete failed."
+    },
+    "updateProjectStatus": {
+      "error": "Something went wrong. Update failed."
     }
   },
 
@@ -590,7 +593,7 @@
     "ProjectItemActionMenuTrigger": {
       "delete": "Delete",
       "markPending": "Mark as Pending",
-      "markDone": "Mark as Done",
+      "markCompleted": "Mark as Completed",
       "markActive": "Mark as Active"
     },
 
@@ -985,7 +988,7 @@
     "TaskItemActionMenuTrigger": {
       "delete": "Delete",
       "markPending": "Mark as Pending",
-      "markDone": "Mark as Done",
+      "markCompleted": "Mark as Completed",
       "markActive": "Mark as Active"
     },
 

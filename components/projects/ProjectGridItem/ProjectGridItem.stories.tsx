@@ -25,6 +25,13 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof ProjectGridItem>;
 
+const mockedAction = () => {
+  return new Promise(() => ({
+    status: "success",
+    message: null,
+  })) as any;
+};
+
 export const Default = {
   args: {
     id: 1,
@@ -42,6 +49,8 @@ export const Default = {
     comments: 5,
     tasks: 10,
     tasksDone: 8,
+    deleteAction: mockedAction,
+    updateStatusAction: mockedAction,
   },
 } satisfies Story;
 

@@ -59,3 +59,13 @@ export interface DeleteProjectPayload {
   currentPage: number;
   isLastItemOnPage: boolean;
 }
+
+export interface UpdateProjectStatusState {
+  status: "error" | "success" | null;
+  message: string | null;
+}
+
+export interface UpdateProjectStatusPayload {
+  id: number;
+  statusId: "active" | "completed" | "pending";
+}
