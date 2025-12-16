@@ -1,21 +1,29 @@
+import { z } from "zod";
 import { CustomersPage } from "./CustomersPage";
-import { CustomersPageEmpty } from "./CustomersPageEmpty";
-import { getPageParams } from "@/lib/utils/getPageParams";
 import { getCustomerCount } from "@/lib/data/customers";
+import { CustomersPageEmpty } from "./CustomersPageEmpty";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { CustomersServerContainer } from "@/components/customer/CustomersServerContainer";
 import { CustomerFiltersFormServerContainer } from "@/components/customer/CustomerFiltersFormServerContainer";
+
+const searchParamsSchema = z.object({
+  page: z.coerce.number().int().positive().catch(1),
+  pageSize: z.coerce.number().int().min(1).max(100).catch(20),
+});
 
 export default async function AppCustomersPage({
   searchParams,
 }: {
   searchParams: Promise<{ page?: string; pageSize?: string }>;
 }) {
+  // Authorization
   await requireProtectedPage();
 
-  const params = await searchParams;
-  const { page, pageSize } = getPageParams(params);
+  // Validation
+  const rawParams = await searchParams;
+  const { page, pageSize } = searchParamsSchema.parse(rawParams);
 
+  // Get count
   const count = await getCustomerCount();
 
   if (!count) return <CustomersPageEmpty />;

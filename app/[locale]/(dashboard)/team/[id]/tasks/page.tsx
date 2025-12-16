@@ -1,11 +1,16 @@
+import { z } from "zod";
 import { getTaskCount } from "@/lib/data/task";
-import { getPageParams } from "@/lib/utils/getPageParams";
 import { TeamProfileTasksPage } from "./TeamProfileTasksPage";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { TeamProfileTasksPageEmpty } from "./TeamProfileTasksPageEmpty";
 import { UserTasksServerContainer } from "@/components/users/UserTasksServerContainer";
 import { UserHeaderServerContainer } from "@/components/users/UserHeaderServerContainer";
 import { NewTaskFormServerContainer } from "@/components/tasks/NewTaskFormServerContainer";
+
+const searchParamsSchema = z.object({
+  page: z.coerce.number().int().positive().catch(1),
+  pageSize: z.coerce.number().int().min(1).max(100).catch(20),
+});
 
 export default async function AppProfileTasksPage({
   params,
@@ -14,16 +19,16 @@ export default async function AppProfileTasksPage({
   params: Promise<{ id: string }>;
   searchParams: Promise<{ page?: string; pageSize?: string }>;
 }) {
+  // Authorization
   await requireProtectedPage();
 
   const { id } = await params;
-  const query = await searchParams;
-  const { page, pageSize } = getPageParams({
-    ...query,
-    defaultPage: 1,
-    defaultPageSize: 10,
-  });
 
+  // Validation
+  const rawParams = await searchParams;
+  const { page, pageSize } = searchParamsSchema.parse(rawParams);
+
+  // Get count
   const taskCount = await getTaskCount();
 
   if (!taskCount)
