@@ -8,6 +8,7 @@ import { Nunito_Sans } from "next/font/google";
 import { I18nProvider } from "@/components/ui/I18nProvider";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { RouterProvider } from "@/components/ui/RouterProvider";
+import { ToastRegion } from "@/components/ui/Toast/Toast";
 
 const nunitoSans = Nunito_Sans({
   variable: "--font-nunito-sans",
@@ -43,6 +44,7 @@ export default async function RootLayout({
       <body
         className={`${nunitoSans.className} bg-gray-100 antialiased dark:bg-gray-900`}
       >
+        <ToastRegion />
         <SWRProvider>
           <NextIntlClientProvider>
             <I18nProvider locale={locale}>

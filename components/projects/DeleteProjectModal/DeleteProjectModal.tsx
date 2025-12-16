@@ -3,7 +3,6 @@
 import {
   ConfirmModal,
   ConfirmModalText,
-  ConfirmModalError,
   ConfirmModalActions,
   ConfirmModalCancelButton,
   ConfirmModalConfirmButton,
@@ -11,8 +10,10 @@ import {
 
 import { useTranslations } from "next-intl";
 import { DialogHeading } from "@/components/ui";
+import { ToastContext } from "@/components/ui/Toast";
 import { DeleteProjectActionState } from "@/lib/actions/types";
-import { startTransition, useActionState, useEffect } from "react";
+import { startTransition, useActionState, useContext, useEffect } from "react";
+import { CircleX } from "lucide-react";
 
 const initialState: DeleteProjectActionState = {
   status: null,
@@ -37,6 +38,8 @@ export function DeleteProjectModal({
   onOpenChange,
   deleteProjectAction,
 }: DeleteProjectModalProps) {
+  const toastQueue = useContext(ToastContext);
+
   const t = useTranslations("projects.DeleteProjectModal");
 
   const [state, deleteAction, pending] = useActionState(
@@ -51,17 +54,22 @@ export function DeleteProjectModal({
   };
 
   useEffect(() => {
-    if (state.status === "success") {
-      onOpenChange(false);
+    onOpenChange(false);
+
+    if (state.status === "error") {
+      toastQueue.add(
+        {
+          title: state.message!,
+          iconLeft: <CircleX size={16} strokeWidth={1.5} absoluteStrokeWidth />,
+        },
+        { timeout: 5000 },
+      );
     }
-  }, [state.status]);
+  }, [state]);
 
   return (
     <ConfirmModal isOpen={isOpen} onOpenChange={onOpenChange}>
       <DialogHeading>{t("heading")}</DialogHeading>
-      {state.status === "error" && (
-        <ConfirmModalError>{state.message}</ConfirmModalError>
-      )}
       <ConfirmModalText>
         {t.rich("text", {
           strong: (chunks) => <strong>{chunks}</strong>,

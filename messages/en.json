@@ -1,7 +1,7 @@
 {
   "actions": {
     "deleteProjectAction": {
-      "error": "An error occurred while deleting the project. Please try again later."
+      "error": "Something went wrong. Delete failed."
     }
   },
 
