@@ -8,7 +8,6 @@ import {
 
 import Image from "next/image";
 import { Badge, Link } from "@/components/ui";
-import { TaskStatus } from "@/generated/prisma";
 import { useFormatter, useTranslations } from "next-intl";
 import { UnknownUser } from "@/components/common/UnknownUser";
 import { ImageContainer } from "@/components/common/ImageContainer";
@@ -32,7 +31,7 @@ interface TaskDetailCompactProps {
     fullName: string;
     imageUrl?: string;
   };
-  deadline: Date;
+  deadline?: Date;
   description?: string;
   category: {
     id: number;
@@ -42,7 +41,7 @@ interface TaskDetailCompactProps {
     id: number;
     title: string;
   };
-  status: TaskStatus;
+  status: string;
   subtasks: {
     id: number;
     text: string;

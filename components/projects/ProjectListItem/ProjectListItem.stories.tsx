@@ -48,7 +48,7 @@ export const Default = {
       id: 1,
       name: "Doe Inc.",
     },
-    comments: 5,
+    commentsCount: 5,
     showCheckbox: false,
     deleteAction: mockedAction,
     updateStatusAction: mockedAction,

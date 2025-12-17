@@ -45,7 +45,7 @@ export const Default = {
           category={{ id: 1, name: "Design" }}
           company={{ id: 1, name: "Doe Inc." }}
           status="pending"
-          comments={4}
+          commentsCount={4}
           deleteAction={mockedAction}
           updateStatusAction={mockedAction}
         />
@@ -63,7 +63,7 @@ export const Default = {
           category={{ id: 2, name: "Development" }}
           company={{ id: 2, name: "Lee Corp." }}
           status="active"
-          comments={5}
+          commentsCount={5}
           deleteAction={mockedAction}
           updateStatusAction={mockedAction}
         />
@@ -81,7 +81,7 @@ export const Default = {
           category={{ id: 3, name: "Marketing" }}
           company={{ id: 3, name: "Brown LLC" }}
           status="completed"
-          comments={3}
+          commentsCount={3}
           deleteAction={mockedAction}
           updateStatusAction={mockedAction}
         />
@@ -99,7 +99,7 @@ export const Default = {
           category={{ id: 2, name: "IT" }}
           company={{ id: 4, name: "Wilson Tech" }}
           status="pending"
-          comments={6}
+          commentsCount={6}
           deleteAction={mockedAction}
           updateStatusAction={mockedAction}
         />
@@ -117,7 +117,7 @@ export const Default = {
           category={{ id: 3, name: "Marketing" }}
           company={{ id: 5, name: "Harris Co." }}
           status="active"
-          comments={4}
+          commentsCount={4}
           deleteAction={mockedAction}
           updateStatusAction={mockedAction}
         />
@@ -135,7 +135,7 @@ export const Default = {
           category={{ id: 2, name: "Development" }}
           company={{ id: 6, name: "King Enterprises" }}
           status="pending"
-          comments={7}
+          commentsCount={7}
           deleteAction={mockedAction}
           updateStatusAction={mockedAction}
         />
@@ -153,7 +153,7 @@ export const Default = {
           category={{ id: 4, name: "Research" }}
           company={{ id: 7, name: "Scott Group" }}
           status="completed"
-          comments={4}
+          commentsCount={4}
           deleteAction={mockedAction}
           updateStatusAction={mockedAction}
         />
@@ -171,7 +171,7 @@ export const Default = {
           category={{ id: 1, name: "Design" }}
           company={{ id: 8, name: "Allen Studio" }}
           status="pending"
-          comments={6}
+          commentsCount={6}
           deleteAction={mockedAction}
           updateStatusAction={mockedAction}
         />
@@ -189,7 +189,7 @@ export const Default = {
           category={{ id: 2, name: "IT" }}
           company={{ id: 9, name: "Baker Tech" }}
           status="active"
-          comments={3}
+          commentsCount={3}
           deleteAction={mockedAction}
           updateStatusAction={mockedAction}
         />
@@ -211,7 +211,7 @@ export const Default = {
           category={{ id: 5, name: "Finance" }}
           company={{ id: 10, name: "Evans Ltd." }}
           status="completed"
-          comments={8}
+          commentsCount={8}
           deleteAction={mockedAction}
           updateStatusAction={mockedAction}
         />

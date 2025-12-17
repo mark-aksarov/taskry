@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { getTaskCount } from "@/lib/data/task";
+import { getTaskCount } from "@/lib/dal/task";
 import { TeamProfileTasksPage } from "./TeamProfileTasksPage";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { TeamProfileTasksPageEmpty } from "./TeamProfileTasksPageEmpty";

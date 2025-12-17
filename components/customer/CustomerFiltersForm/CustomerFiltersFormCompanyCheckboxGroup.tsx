@@ -1,11 +1,10 @@
 import { useTranslations } from "next-intl";
-import { Company } from "@/generated/prisma";
 import { Checkbox, CheckboxGroup } from "@/components/ui";
 
 export function CustomerFiltersFormCompanyCheckboxGroup({
   companies,
 }: {
-  companies: Pick<Company, "id" | "name">[];
+  companies: { id: number; name: string }[];
 }) {
   const t = useTranslations("customers.CustomerFiltersForm.company");
 

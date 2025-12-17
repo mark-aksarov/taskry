@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { TasksPage } from "./TasksPage";
-import { getTaskCount } from "@/lib/data/task";
+import { getTaskCount } from "@/lib/dal/task";
 import { TasksPageEmpty } from "./TasksPageEmpty";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { TasksServerContainer } from "@/components/tasks/TasksServerContainer";

@@ -1,5 +1,7 @@
 import z from "zod";
-import { getUserDetails } from "@/lib/data/user";
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
+import { getUserDetails } from "@/lib/dal/user";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(
@@ -7,6 +9,15 @@ export async function GET(
   { params }: { params: Promise<{ id: string }> },
 ) {
   try {
+    // Authorization
+    const session = await auth.api.getSession({
+      headers: await headers(),
+    });
+
+    if (!session) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
     // Validation
     const data = await params;
 
@@ -24,17 +35,9 @@ export async function GET(
     // Fetch user
     const user = await getUserDetails(id);
 
-    if (!user) {
-      return NextResponse.json({ error: "User not found" }, { status: 404 });
-    }
-
     return NextResponse.json(user);
   } catch (error) {
     console.error("GET /user error:", error);
-
-    if (error instanceof Error && error.message === "Unauthorized") {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-    }
 
     return NextResponse.json(
       { error: "Internal server error" },

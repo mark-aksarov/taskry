@@ -6,7 +6,7 @@ import { headers } from "next/headers";
 import { revalidatePath } from "next/cache";
 import { getTranslations } from "next-intl/server";
 import { UpdateProjectStatusState, UpdateProjectStatusPayload } from "./types";
-import { updateProjectStatus as updateProjectStatusQuery } from "../data/project";
+import { updateProjectStatus as updateProjectStatusQuery } from "../dal/project";
 
 const schema = z.object({
   id: z.coerce.number().int().positive(),

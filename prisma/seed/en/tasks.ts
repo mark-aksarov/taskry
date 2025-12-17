@@ -1,4 +1,4 @@
-import { TaskStatus } from "@/generated/prisma";
+import { TaskStatus } from "@/generated/prisma/client";
 
 export const tasks = [
   {

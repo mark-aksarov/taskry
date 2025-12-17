@@ -2,7 +2,7 @@ import z from "zod";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
-import { getCustomerDetails } from "@/lib/data/customers";
+import { getCustomerDetails } from "@/lib/dal/customers";
 
 export async function GET(
   req: NextRequest,
@@ -33,12 +33,6 @@ export async function GET(
 
     // Find Customer
     const customer = await getCustomerDetails(id);
-    if (!customer) {
-      return NextResponse.json(
-        { error: "Customer not found" },
-        { status: 404 },
-      );
-    }
 
     return NextResponse.json(customer);
   } catch (error) {

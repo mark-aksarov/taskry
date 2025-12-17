@@ -6,9 +6,9 @@ import {
   ProjectFiltersFormCustomerCheckboxGroup,
 } from "../ProjectFiltersForm";
 
-import { getUserSummaries } from "@/lib/data/user";
-import { getCustomerSummaries } from "@/lib/data/customers";
-import { getProjectCategorySummaries } from "@/lib/data/project";
+import { getUserSummaries } from "@/lib/dal/user";
+import { getCustomerSummaries } from "@/lib/dal/customers";
+import { getProjectCategorySummaries } from "@/lib/dal/project";
 
 export async function ProjectFiltersFormServerContainer() {
   const categories = await getProjectCategorySummaries();

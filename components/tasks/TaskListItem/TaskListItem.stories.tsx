@@ -31,7 +31,7 @@ export const Default = {
     category: { id: 1, name: "Design" },
     status: "pending",
     assignee: { id: "user1", imageUrl: "/man.jpg", fullName: "John Doe" },
-    comments: 10,
+    commentsCount: 10,
   },
 } satisfies Story;
 

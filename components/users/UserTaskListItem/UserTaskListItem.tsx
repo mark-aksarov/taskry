@@ -14,7 +14,6 @@ import {
 } from "@/components/common/ItemBase";
 
 import { MessageSquare } from "lucide-react";
-import { TaskStatus } from "@/generated/prisma";
 import { useFormatter, useTranslations } from "next-intl";
 import { Checkbox, RACDialogTrigger } from "@/components/ui";
 import { UserTaskListItemLayout } from "./UserTaskListItemLayout";
@@ -28,8 +27,8 @@ export interface UserTaskListItemProps {
   id: number;
   title: string;
   deadline?: Date;
-  status: TaskStatus;
-  comments: number;
+  status: string;
+  commentsCount: number;
 }
 
 export const UserTaskListItem = ({
@@ -37,7 +36,7 @@ export const UserTaskListItem = ({
   title,
   deadline,
   status,
-  comments,
+  commentsCount,
 }: UserTaskListItemProps) => {
   const t = useTranslations();
 
@@ -91,7 +90,7 @@ export const UserTaskListItem = ({
       commentsSlot={
         <RACDialogTrigger>
           <ItemBaseButton
-            label={comments}
+            label={commentsCount}
             iconLeft={
               <MessageSquare size={16} strokeWidth={1.5} absoluteStrokeWidth />
             }

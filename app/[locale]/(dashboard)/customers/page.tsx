@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { CustomersPage } from "./CustomersPage";
-import { getCustomerCount } from "@/lib/data/customers";
+import { getCustomerCount } from "@/lib/dal/customers";
 import { CustomersPageEmpty } from "./CustomersPageEmpty";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { CustomersServerContainer } from "@/components/customer/CustomersServerContainer";

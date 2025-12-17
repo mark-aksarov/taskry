@@ -1,16 +1,36 @@
 import "server-only";
 
+import {
+  mapTaskCategorySummaryToDTO,
+  mapTaskDetailToDTO,
+  mapTaskListItemToDTO,
+  mapTaskSummaryToDTO,
+} from "../mappers/task";
+
 import { cache } from "react";
 import prisma from "../prisma";
-import { ThenArg } from "./types";
 import { getSessionOrThrow } from "../utils/getSessionOrThrow";
 
-export type GetTaskDetailType = ThenArg<ReturnType<typeof getTaskDetail>>;
+export const getTaskSummary = cache(async (id: number) => {
+  const session = await getSessionOrThrow();
+  const workspaceId = session.user.workspaceId;
+
+  const task = await prisma.task.findUniqueOrThrow({
+    where: { id, workspaceId },
+    select: {
+      id: true,
+      title: true,
+    },
+  });
+
+  return mapTaskSummaryToDTO(task);
+});
+
 export const getTaskDetail = cache(async (id: number) => {
   const session = await getSessionOrThrow();
   const workspaceId = session.user.workspaceId;
 
-  return await prisma.task.findUniqueOrThrow({
+  const taskDetail = await prisma.task.findUniqueOrThrow({
     where: { id, workspaceId },
     select: {
       id: true,
@@ -59,20 +79,8 @@ export const getTaskDetail = cache(async (id: number) => {
       },
     },
   });
-});
 
-export type GetTaskSummaryType = ThenArg<ReturnType<typeof getTaskSummary>>;
-export const getTaskSummary = cache(async (id: number) => {
-  const session = await getSessionOrThrow();
-  const workspaceId = session.user.workspaceId;
-
-  return await prisma.task.findUniqueOrThrow({
-    where: { id, workspaceId },
-    select: {
-      id: true,
-      title: true,
-    },
-  });
+  return mapTaskDetailToDTO(taskDetail);
 });
 
 function getTaskWhereClause(params: {
@@ -89,7 +97,6 @@ function getTaskWhereClause(params: {
   };
 }
 
-export type GetTaskListType = ThenArg<ReturnType<typeof getTaskList>>;
 export const getTaskList = cache(
   async ({
     assigneeId,
@@ -105,7 +112,7 @@ export const getTaskList = cache(
     const where = getTaskWhereClause({ workspaceId, assigneeId });
     const skip = (page - 1) * pageSize;
 
-    return prisma.task.findMany({
+    const tasks = await prisma.task.findMany({
       where,
       skip,
       take: pageSize,
@@ -150,8 +157,22 @@ export const getTaskList = cache(
         },
       },
     });
+
+    return tasks.map(mapTaskListItemToDTO);
   },
 );
+
+export const getTaskCategorySummaries = cache(async () => {
+  const session = await getSessionOrThrow();
+  const workspaceId = session.user.workspaceId;
+
+  const categories = await prisma.taskCategory.findMany({
+    where: { workspaceId },
+    select: { id: true, name: true },
+  });
+
+  return categories.map(mapTaskCategorySummaryToDTO);
+});
 
 export const getTaskCount = cache(async (assigneeId?: string) => {
   const session = await getSessionOrThrow();
@@ -159,17 +180,4 @@ export const getTaskCount = cache(async (assigneeId?: string) => {
   const where = getTaskWhereClause({ workspaceId, assigneeId });
 
   return prisma.task.count({ where });
-});
-
-export type GetTaskCategorySummariesType = ThenArg<
-  ReturnType<typeof getTaskCategorySummaries>
->;
-export const getTaskCategorySummaries = cache(async () => {
-  const session = await getSessionOrThrow();
-  const workspaceId = session.user.workspaceId;
-
-  return prisma.taskCategory.findMany({
-    where: { workspaceId },
-    select: { id: true, name: true },
-  });
 });

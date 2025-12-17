@@ -1,7 +1,7 @@
 import z from "zod";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
-import { getTaskDetail } from "@/lib/data/task";
+import { getTaskDetail } from "@/lib/dal/task";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(
@@ -34,10 +34,6 @@ export async function GET(
 
     // Fetch task
     const task = await getTaskDetail(id);
-
-    if (!task) {
-      return NextResponse.json({ error: "Task not found" }, { status: 404 });
-    }
 
     return NextResponse.json(task);
   } catch (error) {

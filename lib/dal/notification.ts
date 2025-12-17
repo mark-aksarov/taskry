@@ -2,12 +2,8 @@ import "server-only";
 
 import { cache } from "react";
 import prisma from "../prisma";
-import { ThenArg } from "./types";
 import { getSessionOrThrow } from "../utils/getSessionOrThrow";
-
-export type GetNotificationsListType = ThenArg<
-  ReturnType<typeof getNotificationsList>
->;
+import { mapNotificationListItemToDTO } from "../mappers/notification";
 
 export const getNotificationsList = cache(
   async ({
@@ -31,7 +27,7 @@ export const getNotificationsList = cache(
 
     if (filter === "unread") where.isRead = false;
 
-    return prisma.notification.findMany({
+    const notifications = await prisma.notification.findMany({
       where,
       skip,
       take: pageSize,
@@ -126,6 +122,8 @@ export const getNotificationsList = cache(
         },
       },
     });
+
+    return notifications.map(mapNotificationListItemToDTO);
   },
 );
 

@@ -35,8 +35,8 @@ export const Default = {
             fullName: "Liam Turner",
           }}
           status="pending"
-          comments={99}
-          subtasks={3}
+          commentsCount={99}
+          subtasksTotal={3}
           subtasksDone={1}
         />
 
@@ -46,8 +46,8 @@ export const Default = {
           deadline={new Date("2025-10-06")}
           assignee={undefined}
           status="active"
-          comments={10}
-          subtasks={4}
+          commentsCount={10}
+          subtasksTotal={4}
           subtasksDone={2}
         />
 
@@ -61,8 +61,8 @@ export const Default = {
             fullName: "Olivia White",
           }}
           status="pending"
-          comments={6}
-          subtasks={2}
+          commentsCount={6}
+          subtasksTotal={2}
           subtasksDone={2}
         />
 
@@ -76,8 +76,8 @@ export const Default = {
             fullName: "Ethan Green",
           }}
           status="completed"
-          comments={25}
-          subtasks={4}
+          commentsCount={25}
+          subtasksTotal={4}
           subtasksDone={2}
         />
 
@@ -91,8 +91,8 @@ export const Default = {
             fullName: "Mason Moore",
           }}
           status="pending"
-          comments={99}
-          subtasks={4}
+          commentsCount={99}
+          subtasksTotal={4}
           subtasksDone={3}
         />
 
@@ -106,8 +106,8 @@ export const Default = {
             fullName: "Ava Black",
           }}
           status="active"
-          comments={99}
-          subtasks={3}
+          commentsCount={99}
+          subtasksTotal={3}
           subtasksDone={3}
         />
 
@@ -121,8 +121,8 @@ export const Default = {
             fullName: "Isabella Hall",
           }}
           status="completed"
-          comments={47}
-          subtasks={3}
+          commentsCount={47}
+          subtasksTotal={3}
           subtasksDone={3}
         />
 
@@ -136,8 +136,8 @@ export const Default = {
             fullName: "Henry Young",
           }}
           status="pending"
-          comments={18}
-          subtasks={3}
+          commentsCount={18}
+          subtasksTotal={3}
           subtasksDone={1}
         />
 
@@ -147,8 +147,8 @@ export const Default = {
           deadline={new Date("2025-10-26")}
           assignee={{ id: "user9", imageUrl: undefined, fullName: "Ivy Adams" }}
           status="pending"
-          comments={67}
-          subtasks={3}
+          commentsCount={67}
+          subtasksTotal={3}
           subtasksDone={1}
         />
 
@@ -158,8 +158,8 @@ export const Default = {
           deadline={new Date("2025-10-29")}
           assignee={undefined}
           status="active"
-          comments={87}
-          subtasks={3}
+          commentsCount={87}
+          subtasksTotal={3}
           subtasksDone={2}
         />
       </>

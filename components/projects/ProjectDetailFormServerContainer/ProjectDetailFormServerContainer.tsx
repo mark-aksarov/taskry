@@ -1,5 +1,5 @@
-import { getCustomerSummaries } from "@/lib/data/customers";
-import { getProjectCategorySummaries } from "@/lib/data/project";
+import { getCustomerSummaries } from "@/lib/dal/customers";
+import { getProjectCategorySummaries } from "@/lib/dal/project";
 import { ProjectDetailForm } from "../ProjectDetailForm/ProjectDetailForm";
 import { ProjectDetailFormStatusSelect } from "../ProjectDetailForm/ProjectDetailFormStatusSelect";
 import { ProjectDetailFormCategorySelect } from "../ProjectDetailForm/ProjectDetailFormCategorySelect";
@@ -13,15 +13,9 @@ export async function ProjectDetailFormServerContainer() {
     <ProjectDetailForm
       statusSelect={<ProjectDetailFormStatusSelect />}
       categorySelect={
-        <ProjectDetailFormCategorySelect
-          categories={categories.map((c) => ({ id: c.id, name: c.name }))}
-        />
+        <ProjectDetailFormCategorySelect categories={categories} />
       }
-      customerSelect={
-        <ProjectDetailFormCustomerSelect
-          customers={customers.map((c) => ({ id: c.id, fullName: c.fullName }))}
-        />
-      }
+      customerSelect={<ProjectDetailFormCustomerSelect customers={customers} />}
     />
   );
 }

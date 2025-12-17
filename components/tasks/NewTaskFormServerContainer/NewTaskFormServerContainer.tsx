@@ -6,9 +6,9 @@ import {
 } from "../TaskFormBase";
 
 import { NewTaskForm } from "../NewTaskForm";
-import { getUserSummaries } from "@/lib/data/user";
-import { getProjectSummaries } from "@/lib/data/project";
-import { getTaskCategorySummaries } from "@/lib/data/task";
+import { getUserSummaries } from "@/lib/dal/user";
+import { getProjectSummaries } from "@/lib/dal/project";
+import { getTaskCategorySummaries } from "@/lib/dal/task";
 
 export async function NewTaskFormServerContainer() {
   const categories = await getTaskCategorySummaries();
@@ -19,20 +19,10 @@ export async function NewTaskFormServerContainer() {
     <NewTaskForm
       taskStatusSelect={<TaskFormBaseStatusSelect />}
       taskCategorySelect={
-        <TaskFormBaseCategorySelect
-          categories={categories.map((c) => ({ id: c.id, name: c.name }))}
-        />
+        <TaskFormBaseCategorySelect categories={categories} />
       }
-      projectSelect={
-        <TaskFormBaseProjectSelect
-          projects={projects.map((p) => ({ id: p.id, title: p.title }))}
-        />
-      }
-      assigneeSelect={
-        <TaskFormBaseAssigneeSelect
-          users={users.map((u) => ({ id: u.id, fullName: u.fullName }))}
-        />
-      }
+      projectSelect={<TaskFormBaseProjectSelect projects={projects} />}
+      assigneeSelect={<TaskFormBaseAssigneeSelect users={users} />}
     />
   );
 }

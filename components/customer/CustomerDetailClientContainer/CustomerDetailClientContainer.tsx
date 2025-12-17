@@ -4,7 +4,7 @@ import useSWR from "swr";
 import { useTranslations } from "next-intl";
 import { CustomerDetail } from "../CustomerDetail";
 import { PersonHeader } from "@/components/common/PersonHeader";
-import { GetCustomerDetailsType } from "@/lib/data/customers";
+import { CustomerDetailDTO } from "@/lib/dto/customers";
 
 interface CustomerDetailClientContainerProps {
   customerId: number;
@@ -15,7 +15,7 @@ export function CustomerDetailClientContainer({
 }: CustomerDetailClientContainerProps) {
   const t = useTranslations("customers.CustomerDetailClientContainer");
 
-  const { data: customer } = useSWR<GetCustomerDetailsType>(
+  const { data: customer } = useSWR<CustomerDetailDTO>(
     `/api/customers/${customerId}`,
     { suspense: true },
   );
@@ -33,11 +33,11 @@ export function CustomerDetailClientContainer({
       />
       <CustomerDetail
         fullName={customer.fullName}
-        bio={customer.bio ?? undefined}
+        bio={customer.bio}
         email={customer.email}
-        phoneNumber={customer.phoneNumber ?? undefined}
-        publicLink={customer.publicLink ?? undefined}
-        company={customer.company ?? undefined}
+        phoneNumber={customer.phoneNumber}
+        publicLink={customer.publicLink}
+        company={customer.company}
       />
     </div>
   );

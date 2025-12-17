@@ -1,17 +1,37 @@
 import "server-only";
 
+import {
+  mapProjectDetailToDTO,
+  mapProjectSummaryToDTO,
+  mapProjectListItemToDTO,
+  mapProjectCategorySummaryToDTO,
+} from "../mappers/project";
+
 import { cache } from "react";
 import prisma from "../prisma";
-import { ThenArg } from "./types";
+import { ProjectStatus } from "@/generated/prisma/client";
 import { getSessionOrThrow } from "../utils/getSessionOrThrow";
-import { ProjectStatus } from "@/generated/prisma";
 
-export type GetProjectDetailType = ThenArg<ReturnType<typeof getProjectDetail>>;
+export const getProjectSummary = cache(async (id: number) => {
+  const session = await getSessionOrThrow();
+  const workspaceId = session.user.workspaceId;
+
+  const projectSummary = await prisma.project.findUniqueOrThrow({
+    where: { id, workspaceId },
+    select: {
+      id: true,
+      title: true,
+    },
+  });
+
+  return mapProjectSummaryToDTO(projectSummary);
+});
+
 export const getProjectDetail = cache(async (id: number) => {
   const session = await getSessionOrThrow();
   const workspaceId = session.user.workspaceId;
 
-  return await prisma.project.findUniqueOrThrow({
+  const projectDetail = await prisma.project.findUniqueOrThrow({
     where: { id, workspaceId },
     select: {
       id: true,
@@ -48,22 +68,8 @@ export const getProjectDetail = cache(async (id: number) => {
       },
     },
   });
-});
 
-export type GetProjectSummaryType = ThenArg<
-  ReturnType<typeof getProjectSummary>
->;
-export const getProjectSummary = cache(async (id: number) => {
-  const session = await getSessionOrThrow();
-  const workspaceId = session.user.workspaceId;
-
-  return await prisma.project.findUniqueOrThrow({
-    where: { id, workspaceId },
-    select: {
-      id: true,
-      title: true,
-    },
-  });
+  return mapProjectDetailToDTO(projectDetail);
 });
 
 function getProjectWhereClause(params: { workspaceId: number }) {
@@ -76,7 +82,6 @@ function getProjectWhereClause(params: { workspaceId: number }) {
   };
 }
 
-export type GetProjectListType = ThenArg<ReturnType<typeof getProjectList>>;
 export const getProjectList = cache(
   async ({ page, pageSize }: { page: number; pageSize: number }) => {
     const session = await getSessionOrThrow();
@@ -84,7 +89,7 @@ export const getProjectList = cache(
     const where = getProjectWhereClause({ workspaceId });
     const skip = (page - 1) * pageSize;
 
-    return await prisma.project.findMany({
+    const projects = await prisma.project.findMany({
       where,
       skip,
       take: pageSize,
@@ -133,6 +138,8 @@ export const getProjectList = cache(
         },
       },
     });
+
+    return projects.map((project) => mapProjectListItemToDTO(project));
   },
 );
 
@@ -144,30 +151,28 @@ export const getProjectCount = cache(async () => {
   return prisma.project.count({ where });
 });
 
-export type GetProjectSummariesType = ThenArg<
-  ReturnType<typeof getProjectSummaries>
->;
 export const getProjectSummaries = cache(async () => {
   const session = await getSessionOrThrow();
   const workspaceId = session.user.workspaceId;
 
-  return await prisma.project.findMany({
+  const projects = await prisma.project.findMany({
     where: { creator: { position: { workspaceId } } },
     select: { id: true, title: true },
   });
+
+  return projects.map((project) => mapProjectSummaryToDTO(project));
 });
 
-export type GetProjectCategorySummariesType = ThenArg<
-  ReturnType<typeof getProjectCategorySummaries>
->;
 export const getProjectCategorySummaries = cache(async () => {
   const session = await getSessionOrThrow();
   const workspaceId = session.user.workspaceId;
 
-  return await prisma.projectCategory.findMany({
+  const categories = await prisma.projectCategory.findMany({
     where: { workspaceId },
     select: { id: true, name: true },
   });
+
+  return categories.map((category) => mapProjectCategorySummaryToDTO(category));
 });
 
 export const deleteProject = async (id: number) => {
@@ -179,17 +184,14 @@ export const deleteProject = async (id: number) => {
   });
 };
 
-export const updateProjectStatus = async (
-  id: number,
-  status: ProjectStatus,
-) => {
+export const updateProjectStatus = async (id: number, status: string) => {
   const session = await getSessionOrThrow();
   const workspaceId = session.user.workspaceId;
 
   return await prisma.project.update({
     where: { id, workspaceId },
     data: {
-      status,
+      status: status as ProjectStatus,
     },
   });
 };

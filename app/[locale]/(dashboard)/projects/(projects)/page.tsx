@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { ProjectsPage } from "./ProjectsPage";
-import { getProjectCount } from "@/lib/data/project";
+import { getProjectCount } from "@/lib/dal/project";
 import { ProjectsPageEmpty } from "./ProjectsPageEmpty";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { ProjectsServerContainer } from "@/components/projects/ProjectsServerContainer";

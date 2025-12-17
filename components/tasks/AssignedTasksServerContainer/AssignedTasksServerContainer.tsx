@@ -9,7 +9,7 @@ import { headers } from "next/headers";
 import { TaskList } from "../TaskList";
 import { TaskListItem } from "../TaskListItem";
 import { Pagination } from "@/components/common/Pagination";
-import { getTaskCount, getTaskList } from "@/lib/data/task";
+import { getTaskCount, getTaskList } from "@/lib/dal/task";
 
 interface AssignedTasksServerContainerProps {
   page: number;
@@ -66,16 +66,8 @@ export async function AssignedTasksServerContainer({
               category={task.category}
               project={task.project}
               status={task.status}
-              assignee={
-                task.assignee
-                  ? {
-                      id: task.assignee.id,
-                      imageUrl: task.assignee.imageUrl ?? undefined,
-                      fullName: task.assignee.fullName,
-                    }
-                  : undefined
-              }
-              comments={task._count.comments}
+              assignee={task.assignee}
+              commentsCount={task.commentsCount}
             />
           ))}
         </TaskList>

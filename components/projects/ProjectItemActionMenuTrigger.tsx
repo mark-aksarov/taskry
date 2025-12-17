@@ -1,3 +1,5 @@
+"use client";
+
 import {
   DeleteProjectActionState,
   UpdateProjectStatusState,
@@ -11,7 +13,6 @@ import { useState, startTransition, useActionState } from "react";
 import { Check, CircleEllipsis, Clock, Trash } from "lucide-react";
 import { useActionErrorToast } from "@/lib/hooks/useActionErrorToast";
 import { DeleteProjectModal } from "./DeleteProjectModal/DeleteProjectModal";
-import { ProjectStatus } from "@/generated/prisma";
 
 export type ProjectItemActionMenuTriggerProps = {
   projectId: number;
@@ -56,7 +57,7 @@ export function ProjectItemActionMenuTrigger({
       startTransition(() =>
         updateProjectStatusAction({
           id: projectId,
-          status: action as ProjectStatus,
+          status: action,
         }),
       );
     }

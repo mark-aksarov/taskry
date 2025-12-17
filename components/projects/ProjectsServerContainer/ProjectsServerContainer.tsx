@@ -2,9 +2,10 @@ import { ProjectList } from "../ProjectList";
 import { ProjectGrid } from "../ProjectGrid";
 import { ProjectListItem } from "../ProjectListItem";
 import { ProjectGridItem } from "../ProjectGridItem";
+import { ProjectListItemDTO } from "@/lib/dto/project";
 import { Pagination } from "@/components/common/Pagination";
 import { ViewModeLayout } from "@/components/common/ViewMode";
-import { getProjectCount, getProjectList } from "@/lib/data/project";
+import { getProjectCount, getProjectList } from "@/lib/dal/project";
 import { deleteProjectAction } from "@/lib/actions/deleteProjectAction";
 import { updateProjectStatus } from "@/lib/actions/updateProjectStatus";
 
@@ -38,6 +39,18 @@ export async function ProjectsServerContainer({
     });
   };
 
+  const getCommonProps = (project: ProjectListItemDTO) => ({
+    key: project.id,
+    id: project.id,
+    title: project.title,
+    deadline: project.deadline,
+    creator: project.creator,
+    status: project.status,
+    commentsCount: project.commentsCount,
+    deleteAction: handleDeleteProject,
+    updateStatusAction: updateProjectStatus,
+  });
+
   return (
     <>
       <ViewModeLayout
@@ -45,42 +58,11 @@ export async function ProjectsServerContainer({
           <ProjectList>
             {projects.map((project) => (
               <ProjectListItem
-                key={project.id}
-                id={project.id}
-                title={project.title}
-                deadline={project.deadline}
-                creator={
-                  project.creator
-                    ? {
-                        id: project.creator.id,
-                        fullName: project.creator.fullName,
-                        imageUrl: project.creator.imageUrl ?? undefined,
-                      }
-                    : undefined
-                }
-                customer={
-                  project.customer
-                    ? {
-                        id: project.customer.id,
-                        fullName: project.customer.fullName,
-                        imageUrl: project.customer.imageUrl ?? undefined,
-                      }
-                    : undefined
-                }
-                company={
-                  project.customer?.company
-                    ? {
-                        id: project.customer.company.id,
-                        name: project.customer.company.name,
-                      }
-                    : undefined
-                }
-                status={project.status}
+                {...getCommonProps(project)}
+                customer={project.customer}
+                company={project.customer?.company}
                 category={project.category}
-                comments={project._count.comments}
                 showCheckbox
-                deleteAction={handleDeleteProject}
-                updateStatusAction={updateProjectStatus}
               />
             ))}
           </ProjectList>
@@ -89,32 +71,15 @@ export async function ProjectsServerContainer({
           <ProjectGrid>
             {projects.map((project) => (
               <ProjectGridItem
-                key={project.id}
-                id={project.id}
-                title={project.title}
-                deadline={project.deadline}
-                creator={
-                  project.creator
-                    ? {
-                        id: project.creator.id,
-                        fullName: project.creator.fullName,
-                        imageUrl: project.creator.imageUrl ?? undefined,
-                      }
-                    : undefined
-                }
-                status={project.status}
-                tasks={project.tasks.length}
-                tasksDone={
-                  project.tasks.filter((t) => t.status === "completed").length
-                }
-                comments={project._count.comments}
-                deleteAction={handleDeleteProject}
-                updateStatusAction={updateProjectStatus}
+                {...getCommonProps(project)}
+                tasksTotal={project.tasks.total}
+                tasksCompleted={project.tasks.completed}
               />
             ))}
           </ProjectGrid>
         }
       />
+
       {totalPages > 1 && (
         <div className="flex justify-center">
           <Pagination

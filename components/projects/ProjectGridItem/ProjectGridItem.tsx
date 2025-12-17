@@ -22,7 +22,6 @@ import {
 
 import Image from "next/image";
 import { MessageSquare } from "lucide-react";
-import { ProjectStatus } from "@/generated/prisma";
 import { useFormatter, useTranslations } from "next-intl";
 import { ProjectDetailModal } from "../ProjectDetailModal";
 import { Checkbox, RACDialogTrigger } from "@/components/ui";
@@ -39,16 +38,16 @@ import { UserDetailBottomSheet } from "@/components/users/UserDetailBottomSheet"
 export interface ProjectGridItemProps {
   id: number;
   title: string;
-  deadline: Date;
+  deadline?: Date;
   creator?: {
     id: string;
     fullName: string;
     imageUrl?: string;
   };
-  status: ProjectStatus;
-  tasks: number;
-  tasksDone: number;
-  comments: number;
+  status: string;
+  tasksTotal: number;
+  tasksCompleted: number;
+  commentsCount: number;
 
   deleteAction: (
     prevState: any,
@@ -67,9 +66,9 @@ export function ProjectGridItem({
   deadline,
   creator,
   status,
-  tasks,
-  tasksDone,
-  comments,
+  tasksTotal,
+  tasksCompleted,
+  commentsCount,
   deleteAction,
   updateStatusAction,
 }: ProjectGridItemProps) {
@@ -154,7 +153,7 @@ export function ProjectGridItem({
       commentsSlot={
         <RACDialogTrigger>
           <ItemBaseButton
-            label={comments}
+            label={commentsCount}
             iconLeft={
               <MessageSquare size={16} strokeWidth={1.5} absoluteStrokeWidth />
             }
@@ -169,7 +168,7 @@ export function ProjectGridItem({
       }
       progressSlot={
         <GridItemProgress
-          value={(tasksDone / tasks) * 100}
+          value={(tasksCompleted / tasksTotal) * 100}
           showValueText={false}
           aria-label={t("ProjectGridItem.progressAriaLabel")}
         />

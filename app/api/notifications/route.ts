@@ -1,7 +1,7 @@
 import {
   getNotificationsList,
   getNotificationsCount,
-} from "@/lib/data/notification";
+} from "@/lib/dal/notification";
 
 import z from "zod";
 import { auth } from "@/lib/auth";

@@ -1,5 +1,5 @@
 import { UserDetail } from "../UserDetail";
-import { getUserDetails } from "@/lib/data/user";
+import { getUserDetails } from "@/lib/dal/user";
 
 export async function UserDetailServerContainer({
   userId,

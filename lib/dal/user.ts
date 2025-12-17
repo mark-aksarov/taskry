@@ -2,10 +2,21 @@ import "server-only";
 
 import { cache } from "react";
 import prisma from "../prisma";
-import { ThenArg } from "./types";
 import { getSessionOrThrow } from "../utils/getSessionOrThrow";
+import { mapUserListItemToDTO, mapUserSummaryToDTO } from "../mappers/user";
 
-export type GetUserDetailsType = ThenArg<ReturnType<typeof getUserDetails>>;
+export const getUserSummaries = cache(async () => {
+  const session = await getSessionOrThrow();
+  const workspaceId = session.user.workspaceId;
+
+  const users = await prisma.user.findMany({
+    where: { position: { workspaceId } },
+    select: { id: true, fullName: true },
+  });
+
+  return users.map(mapUserSummaryToDTO);
+});
+
 export const getUserDetails = cache(async (userId: string) => {
   return await prisma.user.findUniqueOrThrow({
     where: { id: userId },
@@ -40,7 +51,6 @@ function getUserWhereClause(params: { workspaceId: number }) {
   };
 }
 
-export type GetUserListType = ThenArg<ReturnType<typeof getUserList>>;
 export const getUserList = cache(
   async ({ page, pageSize }: { page: number; pageSize: number }) => {
     const session = await getSessionOrThrow();
@@ -49,7 +59,7 @@ export const getUserList = cache(
     const where = getUserWhereClause({ workspaceId });
     const skip = (page - 1) * pageSize;
 
-    return await prisma.user.findMany({
+    const users = await prisma.user.findMany({
       where,
       skip,
       take: pageSize,
@@ -65,11 +75,12 @@ export const getUserList = cache(
         position: {
           select: {
             name: true,
-            workspaceId: true,
           },
         },
       },
     });
+
+    return users.map(mapUserListItemToDTO);
   },
 );
 
@@ -79,15 +90,4 @@ export const getUserCount = cache(async () => {
   const where = getUserWhereClause({ workspaceId });
 
   return prisma.user.count({ where });
-});
-
-export type GeUserSummariesType = ThenArg<ReturnType<typeof getUserSummaries>>;
-export const getUserSummaries = cache(async () => {
-  const session = await getSessionOrThrow();
-  const workspaceId = session.user.workspaceId;
-
-  return await prisma.user.findMany({
-    where: { position: { workspaceId } },
-    select: { id: true, fullName: true },
-  });
 });

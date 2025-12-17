@@ -1,11 +1,10 @@
 generator client {
-  provider = "prisma-client-js"
+  provider = "prisma-client"
   output   = "../generated/prisma"
 }
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
 }
 
 //Workspace
@@ -308,7 +307,7 @@ model Notification {
 model NotificationTarget {
   id Int @id @default(autoincrement())
 
-  userId     String? @unique
+  userId     String?
   customerId Int?
   projectId  Int?
   taskId     Int?

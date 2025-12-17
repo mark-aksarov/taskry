@@ -1,18 +1,19 @@
-import useSWR from "swr";
-import { Repeat } from "@/components/common/Repeat";
-import { GetCommentsType } from "@/lib/data/comments";
-import { CommentsEmptySection } from "@/components/comments/CommentsEmptySection";
 import {
   CommentItem,
   CommentItemSkeleton,
 } from "@/components/comments/CommentItem";
+
+import useSWR from "swr";
+import { CommentDTO } from "@/lib/dto/comments";
+import { Repeat } from "@/components/common/Repeat";
+import { CommentsEmptySection } from "@/components/comments/CommentsEmptySection";
 
 export function TaskCommentsClientContainer({ taskId }: { taskId: number }) {
   const {
     data: comments,
     error,
     isLoading,
-  } = useSWR<GetCommentsType>(`/api/tasks/${taskId}/comments`);
+  } = useSWR<CommentDTO[]>(`/api/tasks/${taskId}/comments`);
 
   if (isLoading) {
     return <Repeat items={10} renderItem={() => <CommentItemSkeleton />} />;
@@ -33,15 +34,7 @@ export function TaskCommentsClientContainer({ taskId }: { taskId: number }) {
             content={comment.content}
             createdAt={comment.createdAt}
             attachments={comment.attachments}
-            sender={
-              comment.sender
-                ? {
-                    id: comment.sender.id,
-                    fullName: comment.sender.fullName,
-                    imageUrl: comment.sender.imageUrl ?? undefined,
-                  }
-                : undefined
-            }
+            sender={comment.sender}
           />
         );
       })}

@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { UsersPage } from "./UsersPage";
-import { getUserCount } from "@/lib/data/user";
+import { getUserCount } from "@/lib/dal/user";
 import { UsersPageEmpty } from "./UsersPageEmpty";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { UsersServerContainer } from "@/components/users/UsersServerContainer";

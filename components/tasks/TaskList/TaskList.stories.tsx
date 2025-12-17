@@ -35,7 +35,7 @@ export const Default = {
           category={{ id: 1, name: "Design" }}
           status="pending"
           assignee={{ id: "user1", imageUrl: "/man.jpg", fullName: "John Doe" }}
-          comments={10}
+          commentsCount={10}
           showCheckbox
         />
 
@@ -47,7 +47,7 @@ export const Default = {
           category={{ id: 2, name: "Development" }}
           status="active"
           assignee={undefined}
-          comments={22}
+          commentsCount={22}
           showCheckbox
         />
 
@@ -59,7 +59,7 @@ export const Default = {
           category={{ id: 3, name: "Backend" }}
           status="completed"
           assignee={{ id: "user3", fullName: "Jane Doe" }}
-          comments={2}
+          commentsCount={2}
           showCheckbox
         />
 
@@ -71,7 +71,7 @@ export const Default = {
           category={{ id: 4, name: "Testing" }}
           status="pending"
           assignee={{ id: "user4", imageUrl: "/man.jpg", fullName: "John Doe" }}
-          comments={12}
+          commentsCount={12}
           showCheckbox
         />
 
@@ -83,7 +83,7 @@ export const Default = {
           category={{ id: 5, name: "DevOps" }}
           status="active"
           assignee={{ id: "user5", imageUrl: "/man.jpg", fullName: "John Doe" }}
-          comments={15}
+          commentsCount={15}
           showCheckbox
         />
 
@@ -95,7 +95,7 @@ export const Default = {
           category={{ id: 6, name: "Infrastructure" }}
           status="completed"
           assignee={{ id: "user6", imageUrl: "/man.jpg", fullName: "John Doe" }}
-          comments={9}
+          commentsCount={9}
           showCheckbox
         />
 
@@ -107,7 +107,7 @@ export const Default = {
           category={{ id: 7, name: "UX" }}
           status="completed"
           assignee={{ id: "user7", imageUrl: "/man.jpg", fullName: "John Doe" }}
-          comments={12}
+          commentsCount={12}
           showCheckbox
         />
 
@@ -119,7 +119,7 @@ export const Default = {
           category={{ id: 8, name: "Bugfix" }}
           status="active"
           assignee={{ id: "user8", imageUrl: "/man.jpg", fullName: "John Doe" }}
-          comments={10}
+          commentsCount={10}
           showCheckbox
         />
 
@@ -131,7 +131,7 @@ export const Default = {
           category={{ id: 9, name: "Performance" }}
           status="pending"
           assignee={{ id: "user9", fullName: "Jane Doe" }}
-          comments={23}
+          commentsCount={23}
           showCheckbox
         />
 
@@ -143,7 +143,7 @@ export const Default = {
           category={{ id: 3, name: "Backend" }}
           status="completed"
           assignee={undefined}
-          comments={13}
+          commentsCount={13}
           showCheckbox
         />
       </TaskList>

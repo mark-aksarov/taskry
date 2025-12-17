@@ -15,10 +15,11 @@ import { useState } from "react";
 import { Repeat } from "@/components/common/Repeat";
 import { NotificationList } from "../NotificationList";
 import { Pagination } from "@/components/common/Pagination";
+import { NotificationListItemDTO } from "@/lib/dto/notification";
 import { DialogBody, DialogFooter, Link, Skeleton } from "@/components/ui";
 import { NotificationFilterToggleButtonGroup } from "../NotificationFilterToggleButtonGroup";
 
-function getTarget(notification: any) {
+function getTarget(notification: NotificationListItemDTO) {
   const { type, target, targetName } = notification;
   switch (type) {
     case "taskAdded":
@@ -114,9 +115,12 @@ export function NotificationModalContentClientContainer() {
   const [filter, setFilter] = useState<NotificationFilter>("all");
   const pageSize = 10;
 
-  const { data, isLoading } = useSWR(
-    `/api/notifications?page=${page}&pageSize=${pageSize}&filter=${filter}`,
-  );
+  const { data, isLoading } = useSWR<{
+    notifications: NotificationListItemDTO[];
+    totalCount: number;
+    totalPages: number;
+    unreadCount: number;
+  }>(`/api/notifications?page=${page}&pageSize=${pageSize}&filter=${filter}`);
 
   if (isLoading) {
     return (
@@ -137,7 +141,7 @@ export function NotificationModalContentClientContainer() {
     );
   }
 
-  const { notifications, totalPages, totalCount, unreadCount } = data;
+  const { notifications, totalPages, totalCount, unreadCount } = data!;
 
   return (
     <>
@@ -154,21 +158,13 @@ export function NotificationModalContentClientContainer() {
           />
 
           <NotificationList>
-            {notifications.map((notification: any) => (
+            {notifications.map((notification) => (
               <NotificationListItem
                 key={notification.id}
                 isRead={notification.isRead}
-                actor={
-                  notification.actor
-                    ? {
-                        id: notification.actor.id,
-                        fullName: notification.actor.fullName,
-                        imageUrl: notification.actor.imageUrl || undefined,
-                      }
-                    : undefined
-                }
+                actor={notification.actor}
                 date={notification.createdAt}
-                type={notification.type.toString()}
+                type={notification.type}
                 target={getTarget(notification)}
                 comment={getComment(notification)}
               />

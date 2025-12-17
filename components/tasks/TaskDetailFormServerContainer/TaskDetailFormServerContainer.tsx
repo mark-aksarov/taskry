@@ -1,5 +1,5 @@
-import { getUserSummaries } from "@/lib/data/user";
-import { getProjectSummaries } from "@/lib/data/project";
+import { getUserSummaries } from "@/lib/dal/user";
+import { getProjectSummaries } from "@/lib/dal/project";
 import { TaskDetailForm } from "../TaskDetailForm/TaskDetailForm";
 import { TaskDetailFormStatusSelect } from "../TaskDetailForm/TaskDetailFormStatusSelect";
 import { TaskDetailFormProjectSelect } from "../TaskDetailForm/TaskDetailFormProjectSelect";
@@ -12,16 +12,8 @@ export async function TaskDetailFormServerContainer() {
   return (
     <TaskDetailForm
       taskStatusSelect={<TaskDetailFormStatusSelect />}
-      projectSelect={
-        <TaskDetailFormProjectSelect
-          projects={projects.map((p) => ({ id: p.id, title: p.title }))}
-        />
-      }
-      assigneeSelect={
-        <TaskDetailFormAssigneeSelect
-          users={users.map((u) => ({ id: u.id, fullName: u.fullName }))}
-        />
-      }
+      projectSelect={<TaskDetailFormProjectSelect projects={projects} />}
+      assigneeSelect={<TaskDetailFormAssigneeSelect users={users} />}
     />
   );
 }

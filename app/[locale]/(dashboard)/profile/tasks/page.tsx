@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
-import { getTaskCount } from "@/lib/data/task";
+import { getTaskCount } from "@/lib/dal/task";
 import { ProfileTasksPage } from "./ProfileTasksPage";
 import { ProfileTasksPageEmpty } from "./ProfileTasksPageEmpty";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";

@@ -19,7 +19,7 @@ export const Default = {
     id: 1,
     title: "Design landing page",
     deadline: new Date("2025-09-30"),
-    comments: 10,
+    commentsCount: 10,
     status: "pending",
   },
 } satisfies Story;

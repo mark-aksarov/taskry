@@ -15,7 +15,6 @@ import {
 
 import Image from "next/image";
 import { MessageSquare } from "lucide-react";
-import { TaskStatus } from "@/generated/prisma";
 import { TaskDetailModal } from "../TaskDetailModal";
 import { TaskCommentsModal } from "../TaskCommentsModal";
 import { TaskListItemLayout } from "./TaskListItemLayout";
@@ -46,8 +45,8 @@ export interface TaskListItemProps {
     id: number;
     title: string;
   };
-  status: TaskStatus;
-  comments: number;
+  status: string;
+  commentsCount: number;
   showCheckbox?: boolean;
 }
 
@@ -59,7 +58,7 @@ export const TaskListItem = ({
   category,
   project,
   status,
-  comments,
+  commentsCount,
   showCheckbox,
 }: TaskListItemProps) => {
   const t = useTranslations("tasks");
@@ -171,7 +170,7 @@ export const TaskListItem = ({
       commentsModalTriggerSlot={
         <RACDialogTrigger>
           <ItemBaseButton
-            label={comments}
+            label={commentsCount}
             iconLeft={
               <MessageSquare size={16} strokeWidth={1.5} absoluteStrokeWidth />
             }

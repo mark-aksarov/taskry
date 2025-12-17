@@ -1,7 +1,7 @@
 import { NewProjectForm } from "../NewProjectForm";
 import { NewProjectFormStatusSelect } from "../NewProjectForm";
 import { NewProjectFormCategorySelect } from "../NewProjectForm";
-import { getProjectCategorySummaries } from "@/lib/data/project";
+import { getProjectCategorySummaries } from "@/lib/dal/project";
 
 export async function NewProjectFormServerContainer() {
   const categories = await getProjectCategorySummaries();

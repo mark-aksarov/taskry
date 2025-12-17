@@ -2,7 +2,7 @@
 
 import useSWR from "swr";
 import { useTranslations } from "next-intl";
-import { GetUserDetailsType } from "@/lib/data/user";
+import { UserDetailDTO } from "@/lib/dto/user";
 import { UserDetail } from "@/components/users/UserDetail";
 import { PersonHeader } from "@/components/common/PersonHeader";
 
@@ -15,7 +15,7 @@ export function UserDetailClientContainer({
 }: UserDetailClientContainerProps) {
   const t = useTranslations("users.UserDetailClientContainer");
 
-  const { data: user } = useSWR<GetUserDetailsType>(`/api/users/${userId}`, {
+  const { data: user } = useSWR<UserDetailDTO>(`/api/users/${userId}`, {
     suspense: true,
   });
 

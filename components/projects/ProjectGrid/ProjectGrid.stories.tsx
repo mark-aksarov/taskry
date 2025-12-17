@@ -42,9 +42,9 @@ export const Default = {
             imageUrl: "/man.jpg",
           }}
           status="pending"
-          tasks={4}
-          tasksDone={1}
-          comments={12}
+          tasksTotal={4}
+          tasksCompleted={1}
+          commentsCount={12}
           deleteAction={mockedAction}
           updateStatusAction={mockedAction}
         />
@@ -58,9 +58,9 @@ export const Default = {
             imageUrl: "/woman.jpg",
           }}
           status="active"
-          tasks={4}
-          tasksDone={1}
-          comments={9}
+          tasksTotal={4}
+          tasksCompleted={1}
+          commentsCount={9}
           deleteAction={mockedAction}
           updateStatusAction={mockedAction}
         />
@@ -74,9 +74,9 @@ export const Default = {
             imageUrl: "/woman.jpg",
           }}
           status="completed"
-          tasks={3}
-          tasksDone={2}
-          comments={7}
+          tasksTotal={3}
+          tasksCompleted={2}
+          commentsCount={7}
           deleteAction={mockedAction}
           updateStatusAction={mockedAction}
         />
@@ -90,9 +90,9 @@ export const Default = {
             imageUrl: "/man.jpg",
           }}
           status="pending"
-          tasks={4}
-          tasksDone={1}
-          comments={5}
+          tasksTotal={4}
+          tasksCompleted={1}
+          commentsCount={5}
           deleteAction={mockedAction}
           updateStatusAction={mockedAction}
         />
@@ -106,9 +106,9 @@ export const Default = {
             imageUrl: "/woman.jpg",
           }}
           status="active"
-          tasks={3}
-          tasksDone={0}
-          comments={6}
+          tasksTotal={3}
+          tasksCompleted={0}
+          commentsCount={6}
           deleteAction={mockedAction}
           updateStatusAction={mockedAction}
         />
@@ -122,9 +122,9 @@ export const Default = {
             imageUrl: "/man.jpg",
           }}
           status="pending"
-          tasks={4}
-          tasksDone={1}
-          comments={11}
+          tasksTotal={4}
+          tasksCompleted={1}
+          commentsCount={11}
           deleteAction={mockedAction}
           updateStatusAction={mockedAction}
         />
@@ -138,9 +138,9 @@ export const Default = {
             imageUrl: "/woman.jpg",
           }}
           status="completed"
-          tasks={3}
-          tasksDone={2}
-          comments={4}
+          tasksTotal={3}
+          tasksCompleted={2}
+          commentsCount={4}
           deleteAction={mockedAction}
           updateStatusAction={mockedAction}
         />
@@ -154,9 +154,9 @@ export const Default = {
             imageUrl: "/man.jpg",
           }}
           status="active"
-          tasks={3}
-          tasksDone={0}
-          comments={8}
+          tasksTotal={3}
+          tasksCompleted={0}
+          commentsCount={8}
           deleteAction={mockedAction}
           updateStatusAction={mockedAction}
         />
@@ -170,9 +170,9 @@ export const Default = {
             imageUrl: "/woman.jpg",
           }}
           status="pending"
-          tasks={2}
-          tasksDone={0}
-          comments={3}
+          tasksTotal={2}
+          tasksCompleted={0}
+          commentsCount={3}
           deleteAction={mockedAction}
           updateStatusAction={mockedAction}
         />
@@ -186,9 +186,9 @@ export const Default = {
             imageUrl: "/man.jpg",
           }}
           status="completed"
-          tasks={3}
-          tasksDone={1}
-          comments={10}
+          tasksTotal={3}
+          tasksCompleted={1}
+          commentsCount={10}
           deleteAction={mockedAction}
           updateStatusAction={mockedAction}
         />

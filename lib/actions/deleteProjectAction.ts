@@ -5,7 +5,7 @@ import { auth } from "../auth";
 import { headers } from "next/headers";
 import { revalidatePath } from "next/cache";
 import { redirect } from "@/i18n/navigation";
-import { deleteProject } from "../data/project";
+import { deleteProject } from "../dal/project";
 import { getLocale, getTranslations } from "next-intl/server";
 import { DeleteProjectActionState, DeleteProjectPayload } from "./types";
 

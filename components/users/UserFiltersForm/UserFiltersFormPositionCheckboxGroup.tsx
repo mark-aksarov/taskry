@@ -1,11 +1,10 @@
-import { Position } from "@/generated/prisma";
-import { CheckboxGroup, Checkbox } from "@/components/ui";
 import { useTranslations } from "next-intl";
+import { CheckboxGroup, Checkbox } from "@/components/ui";
 
 export function UserFiltersFormPositionCheckboxGroup({
   positions,
 }: {
-  positions: Pick<Position, "id" | "name">[];
+  positions: { id: number; name: string }[];
 }) {
   const t = useTranslations("users.UserFiltersForm.positionCheckboxGroup");
 

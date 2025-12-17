@@ -1,8 +1,8 @@
 "use client";
 
 import useSWR from "swr";
-import { GetTaskDetailType } from "@/lib/data/task";
 import { TaskDetailCompact } from "../TaskDetailCompact/TaskDetailCompact";
+import { TaskDetailDTO } from "@/lib/dto/task";
 
 interface TaskDetailCompactClientContainerProps {
   taskId: number;
@@ -11,7 +11,7 @@ interface TaskDetailCompactClientContainerProps {
 export function TaskDetailCompactClientContainer({
   taskId,
 }: TaskDetailCompactClientContainerProps) {
-  const { data: task } = useSWR<GetTaskDetailType>(`/api/tasks/${taskId}`, {
+  const { data: task } = useSWR<TaskDetailDTO>(`/api/tasks/${taskId}`, {
     suspense: true,
   });
 
@@ -21,15 +21,7 @@ export function TaskDetailCompactClientContainer({
     <TaskDetailCompact
       id={task.id}
       title={task.title}
-      assignee={
-        task.assignee
-          ? {
-              id: task.assignee.id,
-              fullName: task.assignee.fullName,
-              imageUrl: task.assignee.imageUrl ?? undefined,
-            }
-          : undefined
-      }
+      assignee={task.assignee}
       deadline={task.deadline}
       description={task.description ?? undefined}
       category={task.category}

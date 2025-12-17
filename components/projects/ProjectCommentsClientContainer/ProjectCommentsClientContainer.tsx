@@ -1,5 +1,5 @@
 import useSWR from "swr";
-import { GetCommentsType } from "@/lib/data/comments";
+import { CommentDTO } from "@/lib/dto/comments";
 import { CommentItem } from "@/components/comments/CommentItem";
 import { CommentsEmptySection } from "@/components/comments/CommentsEmptySection";
 
@@ -8,7 +8,7 @@ export function ProjectCommentsClientContainer({
 }: {
   projectId: number;
 }) {
-  const { data: comments } = useSWR<GetCommentsType>(
+  const { data: comments } = useSWR<CommentDTO[]>(
     `/api/projects/${projectId}/comments`,
     {
       suspense: true,
@@ -30,15 +30,7 @@ export function ProjectCommentsClientContainer({
             content={comment.content}
             createdAt={comment.createdAt}
             attachments={comment.attachments}
-            sender={
-              comment.sender
-                ? {
-                    id: comment.sender.id,
-                    fullName: comment.sender.fullName,
-                    imageUrl: comment.sender.imageUrl ?? undefined,
-                  }
-                : undefined
-            }
+            sender={comment.sender}
           />
         );
       })}

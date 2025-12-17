@@ -1,6 +1,6 @@
+import { getTaskDetail } from "@/lib/dal/task";
+import { getComments } from "@/lib/dal/comments";
 import { TaskDetailFull } from "../TaskDetailFull";
-import { getTaskDetail } from "@/lib/data/task";
-import { getComments } from "@/lib/data/comments";
 import { CommentItem } from "@/components/comments/CommentItem";
 import { DetailCommentInput } from "@/components/common/DetailCommentInput";
 
@@ -12,7 +12,7 @@ export async function TaskDetailFullServerContainer({ id }: { id: number }) {
 
   return (
     <TaskDetailFull
-      description={task.description ?? undefined}
+      description={task.description}
       subtasks={task.subtasks}
       attachments={task.attachments}
       comments={
@@ -25,15 +25,7 @@ export async function TaskDetailFullServerContainer({ id }: { id: number }) {
                 content={comment.content}
                 createdAt={comment.createdAt}
                 attachments={comment.attachments}
-                sender={
-                  comment.sender
-                    ? {
-                        id: comment.sender.id,
-                        fullName: comment.sender.fullName,
-                        imageUrl: comment.sender.imageUrl ?? undefined,
-                      }
-                    : undefined
-                }
+                sender={comment.sender}
               />
             );
           })}

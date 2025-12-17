@@ -36,8 +36,8 @@ export const Default = {
       fullName: "John Doe",
     },
     status: "pending",
-    comments: 99,
-    subtasks: 6,
+    commentsCount: 99,
+    subtasksTotal: 6,
     subtasksDone: 2,
   },
 } satisfies Story;

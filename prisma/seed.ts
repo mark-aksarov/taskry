@@ -1,4 +1,16 @@
-import prisma from "@/lib/prisma";
+import { PrismaPg } from "@prisma/adapter-pg";
+import { PrismaClient } from "../generated/prisma/client";
+import "dotenv/config";
+
+import {
+  notifications as ruNotifications,
+  notificationTargets as ruNotificationTargets,
+} from "./seed/ru/notifications";
+import {
+  notifications as enNotifications,
+  notificationTargets as enNotificationTargets,
+} from "./seed/en/notifications";
+
 import { users as ruUsers } from "./seed/ru/users";
 import { users as enUsers } from "./seed/en/users";
 import { tasks as ruTasks } from "./seed/ru/tasks";
@@ -27,14 +39,14 @@ import { projectCategories as ruProjectCategories } from "./seed/ru/projectCateg
 import { projectCategories as enProjectCategories } from "./seed/en/projectCategories";
 import { projectAttachments as ruProjectAttachments } from "./seed/ru/projectAttachments";
 import { projectAttachments as enProjectAttachments } from "./seed/en/projectAttachments";
-import {
-  notifications as ruNotifications,
-  notificationTargets as ruNotificationTargets,
-} from "./seed/ru/notifications";
-import {
-  notifications as enNotifications,
-  notificationTargets as enNotificationTargets,
-} from "./seed/en/notifications";
+
+const adapter = new PrismaPg({
+  connectionString: process.env.DATABASE_URL,
+});
+
+const prisma = new PrismaClient({
+  adapter,
+});
 
 async function main() {
   // ----------------- Workspaces -----------------
@@ -116,10 +128,4 @@ async function main() {
   });
 }
 
-main()
-  .then(async () => await prisma.$disconnect())
-  .catch(async (e) => {
-    console.error(e);
-    await prisma.$disconnect();
-    process.exit(1);
-  });
+main();

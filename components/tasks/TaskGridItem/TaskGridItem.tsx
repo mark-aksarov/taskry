@@ -16,7 +16,6 @@ import {
 
 import Image from "next/image";
 import { MessageSquare } from "lucide-react";
-import { TaskStatus } from "@/generated/prisma";
 import { TaskDetailModal } from "../TaskDetailModal";
 import { TaskCommentsModal } from "../TaskCommentsModal";
 import { useFormatter, useTranslations } from "next-intl";
@@ -33,15 +32,15 @@ import { UserDetailBottomSheet } from "@/components/users/UserDetailBottomSheet"
 export interface TaskGridItemProps {
   id: number;
   title: string;
-  deadline: Date;
+  deadline?: Date;
   assignee?: {
     id: string;
     imageUrl?: string;
     fullName: string;
   };
-  status: TaskStatus;
-  comments: number;
-  subtasks: number;
+  status: string;
+  commentsCount: number;
+  subtasksTotal: number;
   subtasksDone: number;
 }
 
@@ -51,8 +50,8 @@ export function TaskGridItem({
   deadline,
   assignee,
   status,
-  comments,
-  subtasks,
+  commentsCount,
+  subtasksTotal,
   subtasksDone,
 }: TaskGridItemProps) {
   const t = useTranslations("tasks");
@@ -128,7 +127,7 @@ export function TaskGridItem({
       commentsSlot={
         <RACDialogTrigger>
           <ItemBaseButton
-            label={comments}
+            label={commentsCount}
             iconLeft={
               <MessageSquare size={16} strokeWidth={1.5} absoluteStrokeWidth />
             }
@@ -143,7 +142,7 @@ export function TaskGridItem({
       }
       progressSlot={
         <GridItemProgress
-          value={(subtasksDone / subtasks) * 100}
+          value={(subtasksDone / subtasksTotal) * 100}
           showValueText={false}
           aria-label={t("TaskGridItem.progressAriaLabel")}
         />

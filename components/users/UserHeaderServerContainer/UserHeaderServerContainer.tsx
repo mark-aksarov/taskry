@@ -1,6 +1,6 @@
-import { PersonHeader } from "@/components/common/PersonHeader";
-import { getUserDetails } from "@/lib/data/user";
 import { useTranslations } from "next-intl";
+import { getUserDetails } from "@/lib/dal/user";
+import { PersonHeader } from "@/components/common/PersonHeader";
 
 export async function UserHeaderServerContainer({
   userId,

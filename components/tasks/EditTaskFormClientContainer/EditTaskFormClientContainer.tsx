@@ -7,19 +7,21 @@ import {
 
 import useSWR from "swr";
 import { NewTaskForm } from "../NewTaskForm";
-import { GeUserSummariesType } from "@/lib/data/user";
-import { GetProjectSummariesType } from "@/lib/data/project";
-import { GetTaskCategorySummariesType } from "@/lib/data/task";
+import { UserSummaryDTO } from "@/lib/dto/user";
+import { ProjectSummaryDTO } from "@/lib/dto/project";
+import { TaskCategorySummaryDTO } from "@/lib/dto/task";
 
 export function EditTaskFormClientContainer() {
-  const { data: categories } = useSWR<GetTaskCategorySummariesType>(
+  const { data: categories } = useSWR<TaskCategorySummaryDTO[]>(
     `/api/task-categories`,
     { suspense: true },
   );
-  const { data: projects } = useSWR<GetProjectSummariesType>(`/api/projects`, {
+
+  const { data: projects } = useSWR<ProjectSummaryDTO[]>(`/api/projects`, {
     suspense: true,
   });
-  const { data: users } = useSWR<GeUserSummariesType>(`/api/users`, {
+
+  const { data: users } = useSWR<UserSummaryDTO[]>(`/api/users`, {
     suspense: true,
   });
 
@@ -29,20 +31,10 @@ export function EditTaskFormClientContainer() {
     <NewTaskForm
       taskStatusSelect={<TaskFormBaseStatusSelect />}
       taskCategorySelect={
-        <TaskFormBaseCategorySelect
-          categories={categories.map((c) => ({ id: c.id, name: c.name }))}
-        />
+        <TaskFormBaseCategorySelect categories={categories} />
       }
-      projectSelect={
-        <TaskFormBaseProjectSelect
-          projects={projects.map((p) => ({ id: p.id, title: p.title }))}
-        />
-      }
-      assigneeSelect={
-        <TaskFormBaseAssigneeSelect
-          users={users.map((u) => ({ id: u.id, fullName: u.fullName }))}
-        />
-      }
+      projectSelect={<TaskFormBaseProjectSelect projects={projects} />}
+      assigneeSelect={<TaskFormBaseAssigneeSelect users={users} />}
     />
   );
 }

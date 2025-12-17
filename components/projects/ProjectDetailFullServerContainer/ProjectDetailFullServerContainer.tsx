@@ -1,5 +1,5 @@
-import { getComments } from "@/lib/data/comments";
-import { getProjectDetail } from "@/lib/data/project";
+import { getComments } from "@/lib/dal/comments";
+import { getProjectDetail } from "@/lib/dal/project";
 import { ProjectDetailFull } from "../ProjectDetailFull";
 import { CommentItem } from "@/components/comments/CommentItem";
 import { DetailCommentInput } from "@/components/common/DetailCommentInput";
@@ -24,15 +24,7 @@ export async function ProjectDetailFullServerContainer({ id }: { id: number }) {
                 content={comment.content}
                 createdAt={comment.createdAt}
                 attachments={comment.attachments}
-                sender={
-                  comment.sender
-                    ? {
-                        id: comment.sender.id,
-                        fullName: comment.sender.fullName,
-                        imageUrl: comment.sender.imageUrl ?? undefined,
-                      }
-                    : undefined
-                }
+                sender={comment.sender}
               />
             );
           })}

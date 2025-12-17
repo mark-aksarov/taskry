@@ -2,7 +2,7 @@ import "server-only";
 
 import { cache } from "react";
 import prisma from "../prisma";
-import { Attachment } from "@/generated/prisma";
+import { Attachment } from "@/generated/prisma/client";
 import { getSessionOrThrow } from "../utils/getSessionOrThrow";
 
 export const getAttachmentsByTask = cache(

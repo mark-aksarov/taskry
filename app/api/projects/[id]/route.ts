@@ -1,8 +1,8 @@
 import z from "zod";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
+import { getProjectDetail } from "@/lib/dal/project";
 import { NextRequest, NextResponse } from "next/server";
-import { getProjectDetail } from "@/lib/data/project";
 
 export async function GET(
   req: NextRequest,
@@ -37,10 +37,6 @@ export async function GET(
 
     // Fetch project
     const project = await getProjectDetail(id);
-
-    if (!project) {
-      return NextResponse.json({ error: "Project not found" }, { status: 404 });
-    }
 
     return NextResponse.json(project);
   } catch (error) {

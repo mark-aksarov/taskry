@@ -1,6 +1,12 @@
 "use client";
 
 import {
+  DeleteProjectActionState,
+  UpdateProjectStatusPayload,
+  UpdateProjectStatusState,
+} from "@/lib/actions/types";
+
+import {
   ListItemInfo,
   ListItemText,
   ListItemTitle,
@@ -21,12 +27,6 @@ import { useFormatter, useTranslations } from "next-intl";
 import { ProjectDetailModal } from "../ProjectDetailModal";
 import { UnknownUser } from "@/components/common/UnknownUser";
 import { ProjectCommentsModal } from "../ProjectCommentsModal";
-import {
-  DeleteProjectActionState,
-  UpdateProjectStatusPayload,
-  UpdateProjectStatusState,
-} from "@/lib/actions/types";
-import { ProjectStatus } from "@/generated/prisma";
 import { ProjectListItemLayout } from "./ProjectListItemLayout";
 import { ImageContainer } from "@/components/common/ImageContainer";
 import { UserDetailModal } from "@/components/users/UserDetailModal";
@@ -37,7 +37,7 @@ import { ProjectItemActionMenuTrigger } from "../ProjectItemActionMenuTrigger";
 export interface ProjectListItemProps {
   id: number;
   title: string;
-  deadline: Date;
+  deadline?: Date;
   creator?: {
     id: string;
     fullName: string;
@@ -56,8 +56,8 @@ export interface ProjectListItemProps {
     id: number;
     name: string;
   };
-  status: ProjectStatus;
-  comments: number;
+  status: string;
+  commentsCount: number;
   showCheckbox?: boolean;
   deleteAction: (
     prevState: any,
@@ -79,7 +79,7 @@ export const ProjectListItem = ({
   company,
   status,
   creator,
-  comments,
+  commentsCount,
   showCheckbox,
   deleteAction,
   updateStatusAction,
@@ -216,7 +216,7 @@ export const ProjectListItem = ({
       commentsModalTriggerSlot={
         <RACDialogTrigger>
           <ItemBaseButton
-            label={comments}
+            label={commentsCount}
             iconLeft={
               <MessageSquare size={16} strokeWidth={1.5} absoluteStrokeWidth />
             }

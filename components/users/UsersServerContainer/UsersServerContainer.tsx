@@ -2,9 +2,10 @@ import { UserList } from "../UserList";
 import { UserGrid } from "../UserGrid";
 import { UserListItem } from "../UserListItem";
 import { UserGridItem } from "../UserGridItem";
+import { UserListItemDTO } from "@/lib/dto/user";
+import { getUserCount, getUserList } from "@/lib/dal/user";
 import { Pagination } from "@/components/common/Pagination";
 import { ViewModeLayout } from "@/components/common/ViewMode";
-import { getUserCount, getUserList } from "@/lib/data/user";
 
 interface UsersServerContainerProps {
   page: number;
@@ -26,51 +27,31 @@ export async function UsersServerContainer({
     baseUrl: "/team",
   };
 
+  const getUserCommonProps = (user: UserListItemDTO) => ({
+    key: user.id,
+    id: user.id,
+    fullName: user.fullName,
+    imageUrl: user.imageUrl,
+    email: user.email,
+    phoneNumber: user.phoneNumber,
+    publicLink: user.publicLink,
+    position: user.position,
+  });
+
   return (
     <>
       <ViewModeLayout
         list={
           <UserList>
             {users.map((user) => (
-              <UserListItem
-                key={user.id}
-                id={user.id}
-                fullName={user.fullName}
-                imageUrl={user.imageUrl ?? undefined}
-                email={user.email}
-                phoneNumber={user.phoneNumber ?? undefined}
-                publicLink={user.publicLink ?? undefined}
-                position={
-                  user.position
-                    ? {
-                        name: user.position.name,
-                      }
-                    : undefined
-                }
-                showCheckbox
-              />
+              <UserListItem {...getUserCommonProps(user)} showCheckbox />
             ))}
           </UserList>
         }
         grid={
           <UserGrid>
             {users.map((user) => (
-              <UserGridItem
-                key={user.id}
-                id={user.id}
-                fullName={user.fullName}
-                imageUrl={user.imageUrl ?? undefined}
-                email={user.email}
-                phoneNumber={user.phoneNumber ?? undefined}
-                publicLink={user.publicLink ?? undefined}
-                position={
-                  user.position
-                    ? {
-                        name: user.position.name,
-                      }
-                    : undefined
-                }
-              />
+              <UserGridItem {...getUserCommonProps(user)} />
             ))}
           </UserGrid>
         }
