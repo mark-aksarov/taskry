@@ -8,11 +8,16 @@ import {
   ConfirmModalConfirmButton,
 } from "@/components/common/ConfirmModal";
 
+import {
+  ActionFn,
+  UpdateProjectStatusesPayload,
+  UpdateProjectStatusesState,
+} from "@/lib/actions/types";
+
 import { useTranslations } from "next-intl";
 import { DialogHeading } from "@/components/ui";
 import { startTransition, useActionState } from "react";
 import { useActionErrorToast } from "@/lib/hooks/useActionErrorToast";
-import { ActionFn, UpdateProjectStatusesState } from "@/lib/actions/types";
 
 const initialState: UpdateProjectStatusesState = {
   status: null,
@@ -22,16 +27,17 @@ const initialState: UpdateProjectStatusesState = {
 interface BulkUpdateProjectStatusModalProps {
   projectIds: number[];
   nextStatus: string;
-  modalTextKey: string;
   isOpen: boolean;
   onOpenChange: (isOpen: boolean) => void;
-  updateStatusAction: ActionFn<UpdateProjectStatusesState>;
+  updateStatusAction: ActionFn<
+    UpdateProjectStatusesState,
+    UpdateProjectStatusesPayload
+  >;
 }
 
 export function BulkUpdateProjectStatusModal({
   projectIds,
   nextStatus,
-  modalTextKey,
   isOpen,
   onOpenChange,
   updateStatusAction,
@@ -46,7 +52,7 @@ export function BulkUpdateProjectStatusModal({
   const handleUpdateProjectStatus = () => {
     startTransition(() => {
       action({
-        id: projectIds,
+        ids: projectIds,
         nextStatus,
       });
     });
@@ -60,7 +66,7 @@ export function BulkUpdateProjectStatusModal({
     <ConfirmModal isOpen={isOpen} onOpenChange={onOpenChange}>
       <DialogHeading>{t("heading")}</DialogHeading>
 
-      <ConfirmModalText>{t(`text.${modalTextKey}`)}</ConfirmModalText>
+      <ConfirmModalText>{t("text")}</ConfirmModalText>
 
       <ConfirmModalActions>
         <ConfirmModalCancelButton label={t("cancelButton")} />

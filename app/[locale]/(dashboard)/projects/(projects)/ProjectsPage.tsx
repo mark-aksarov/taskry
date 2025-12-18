@@ -12,6 +12,7 @@ import { deleteProjects } from "@/lib/actions/deleteProjects";
 import { ViewModeProvider } from "@/components/common/ViewMode";
 import { PageContainer } from "@/components/common/PageContainer";
 import { ViewModeToggleButtonGroup } from "@/components/common/ViewMode";
+import { updateProjectStatuses } from "@/lib/actions/updateProjectStatuses";
 import { NewProjectFormSkeleton } from "@/components/projects/NewProjectForm";
 import { ProjectFiltersFormSkeleton } from "@/components/projects/ProjectFiltersForm";
 import { ProjectToolbarSortingMenuTrigger } from "@/components/projects/ProjectToolbarSortingMenuTrigger";
@@ -52,7 +53,10 @@ export function ProjectsPage({
                 </Suspense>
               }
             />
-            <ProjectToolbarActionsMenuTrigger deleteAction={deleteProjects} />
+            <ProjectToolbarActionsMenuTrigger
+              deleteAction={deleteProjects}
+              updateStatusAction={updateProjectStatuses}
+            />
             <ViewModeToggleButtonGroup className="ml-auto" />
             <ProjectToolbarCreateNewMenuTrigger
               newProjectForm={
@@ -74,7 +78,10 @@ export function ProjectsPage({
                 </Suspense>
               }
             />
-            <ProjectToolbarActionsMenuTrigger deleteAction={deleteProjects} />
+            <ProjectToolbarActionsMenuTrigger
+              deleteAction={deleteProjects}
+              updateStatusAction={updateProjectStatuses}
+            />
           </ToolbarMobileTop>
 
           <ToolbarMobileBottom>

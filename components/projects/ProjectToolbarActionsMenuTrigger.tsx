@@ -14,6 +14,7 @@ import { ToolbarActionsMenuTrigger } from "../common/Toolbar";
 import { useProjectsSelection } from "./ProjectsSelectionContext";
 import { BulkDeleteProjectModal } from "./BulkDeleteProjectModal";
 import { Check, CircleEllipsis, Clock, Trash } from "lucide-react";
+import { BulkUpdateProjectStatusModal } from "./BulkUpdateProjectStatusModal";
 
 interface ProjectToolbarActionsMenuTriggerProps {
   deleteAction: ActionFn<DeleteProjectsState, DeleteProjectsPayload>;
@@ -21,6 +22,11 @@ interface ProjectToolbarActionsMenuTriggerProps {
     UpdateProjectStatusesState,
     UpdateProjectStatusesPayload
   >;
+}
+
+interface UpdateStatusModalState {
+  isOpen: boolean;
+  nextStatus: string;
 }
 
 export const ProjectToolbarActionsMenuTrigger = ({
@@ -31,6 +37,12 @@ export const ProjectToolbarActionsMenuTrigger = ({
 
   // Delete State
   const [isOpenDeleteModal, setIsOpenDeleteModal] = useState(false);
+
+  // Update Status
+  const [updateModal, setUpdateModal] = useState<UpdateStatusModalState>({
+    isOpen: false,
+    nextStatus: "complete",
+  });
 
   const { selectedIds } = useProjectsSelection();
 
@@ -45,6 +57,8 @@ export const ProjectToolbarActionsMenuTrigger = ({
   const handleAction = (key: Key) => {
     if (key === "delete") {
       setIsOpenDeleteModal(true);
+    } else {
+      setUpdateModal({ isOpen: true, nextStatus: key.toString() });
     }
   };
 
@@ -74,6 +88,15 @@ export const ProjectToolbarActionsMenuTrigger = ({
         isOpen={isOpenDeleteModal}
         onOpenChange={setIsOpenDeleteModal}
         deleteAction={deleteAction}
+      />
+
+      <BulkUpdateProjectStatusModal
+        projectIds={projectIds}
+        {...updateModal}
+        onOpenChange={(open) =>
+          setUpdateModal((prev) => ({ ...prev, isOpen: open }))
+        }
+        updateStatusAction={updateStatusAction}
       />
     </>
   );

@@ -9,7 +9,7 @@ import { Pagination } from "@/components/common/Pagination";
 import { deleteProjects } from "@/lib/actions/deleteProjects";
 import { ViewModeLayout } from "@/components/common/ViewMode";
 import { getProjectCount, getProjectList } from "@/lib/dal/project";
-import { updateProjectStatus } from "@/lib/actions/updateProjectStatuses";
+import { updateProjectStatuses } from "@/lib/actions/updateProjectStatuses";
 
 interface ProjectsServerContainerProps {
   page: number;
@@ -48,7 +48,7 @@ export async function ProjectsServerContainer({
     status: project.status,
     commentsCount: project.commentsCount,
     deleteAction: deleteProjects,
-    updateStatusAction: updateProjectStatus,
+    updateStatusAction: updateProjectStatuses,
   });
 
   return (

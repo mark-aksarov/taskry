@@ -17,7 +17,7 @@ const schema = z.object({
   nextStatus: z.enum(["active", "completed", "pending"]),
 });
 
-export async function updateProjectStatus(
+export async function updateProjectStatuses(
   _prevState: UpdateProjectStatusesState,
   {
     ids,
