@@ -73,6 +73,17 @@ export const ProjectToolbarActionsMenuTrigger = ({
         onOpenChange={setIsOpenDeleteModal}
         deleteAction={deleteAction}
       />
+
+      {/*
+      <UpdateProjectStatusModal
+        projectId={projectId}
+        nextStatus={nextStatus!}
+        modalTextKey={modalTextKey}
+        isOpen={isOpenUpdateStatusModal}
+        onOpenChange={setIsOpenUpdateStatusModal}
+        updateStatusAction={updateStatusAction}
+      />
+*/}
     </>
   );
 };

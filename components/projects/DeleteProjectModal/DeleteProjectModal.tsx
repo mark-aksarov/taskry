@@ -26,7 +26,7 @@ interface BaseDeleteProps {
 }
 
 interface SingleDeleteProps extends BaseDeleteProps {
-  projectIds: [number];
+  projectIds: number;
   projectTitle: string;
 }
 
@@ -37,41 +37,36 @@ interface BulkDeleteProps extends BaseDeleteProps {
 
 type DeleteProjectModalProps = SingleDeleteProps | BulkDeleteProps;
 
-export function DeleteProjectModal({
-  projectIds,
-  projectTitle,
-  isOpen,
-  onOpenChange,
-  deleteAction,
-}: DeleteProjectModalProps) {
+export function DeleteProjectModal(props: DeleteProjectModalProps) {
   const t = useTranslations("projects.DeleteProjectModal");
-  const [state, action, pending] = useActionState(deleteAction, initialState);
-
-  const isBulk = projectIds.length > 1;
+  const [state, action, pending] = useActionState(
+    props.deleteAction,
+    initialState,
+  );
 
   const handleDeleteProjects = () => {
-    const payload = isBulk ? projectIds : projectIds[0];
-
     startTransition(() => {
-      action(payload);
+      action(props.projectIds);
     });
 
-    onOpenChange(false);
+    props.onOpenChange(false);
   };
 
   useActionErrorToast(state);
 
   return (
-    <ConfirmModal isOpen={isOpen} onOpenChange={onOpenChange}>
-      <DialogHeading>{isBulk ? t("bulkHeading") : t("heading")}</DialogHeading>
+    <ConfirmModal isOpen={props.isOpen} onOpenChange={props.onOpenChange}>
+      <DialogHeading>
+        {"projectTitle" in props ? t("heading") : t("bulkHeading")}
+      </DialogHeading>
 
       <ConfirmModalText>
-        {isBulk
-          ? t("bulkText", { count: projectIds.length })
-          : t.rich("text", {
+        {"projectTitle" in props
+          ? t.rich("text", {
               strong: (chunks) => <strong>{chunks}</strong>,
-              projectTitle: projectTitle as string,
-            })}
+              projectTitle: props.projectTitle!,
+            })
+          : t("bulkText", { count: props.projectIds.length })}
       </ConfirmModalText>
 
       <ConfirmModalActions>
