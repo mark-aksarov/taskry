@@ -1,9 +1,9 @@
 "use client";
 
 import {
-  DeleteProjectActionState,
+  ActionFn,
+  DeleteProjectState,
   UpdateProjectStatusState,
-  UpdateProjectStatusPayload,
 } from "@/lib/actions/types";
 
 import { Item, Key } from "react-stately";
@@ -18,14 +18,8 @@ export type ProjectItemActionMenuTriggerProps = {
   projectId: number;
   projectTitle: string;
   className?: string;
-  deleteAction: (
-    prevState: any,
-    id: number,
-  ) => Promise<DeleteProjectActionState>;
-  updateStatusAction: (
-    prevState: any,
-    { id, status }: UpdateProjectStatusPayload,
-  ) => Promise<UpdateProjectStatusState>;
+  deleteAction: ActionFn<DeleteProjectState>;
+  updateStatusAction: ActionFn<UpdateProjectStatusState>;
 };
 
 const initialState: UpdateProjectStatusState = {

@@ -12,10 +12,10 @@ import { CircleX } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { DialogHeading } from "@/components/ui";
 import { ToastContext } from "@/components/ui/Toast";
-import { DeleteProjectActionState } from "@/lib/actions/types";
+import { ActionFn, DeleteProjectState } from "@/lib/actions/types";
 import { startTransition, useActionState, useContext, useEffect } from "react";
 
-const initialState: DeleteProjectActionState = {
+const initialState: DeleteProjectState = {
   status: null,
   message: null,
 };
@@ -25,10 +25,7 @@ interface DeleteProjectModalProps {
   projectTitle: string;
   isOpen: boolean;
   onOpenChange: (isOpen: boolean) => void;
-  deleteAction: (
-    prevState: any,
-    id: number,
-  ) => Promise<DeleteProjectActionState>;
+  deleteAction: ActionFn<DeleteProjectState>;
 }
 
 export function DeleteProjectModal({

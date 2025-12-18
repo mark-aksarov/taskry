@@ -2,43 +2,28 @@
 
 import { useActionState } from "react";
 import { useTranslations } from "next-intl";
-import { toCamelCase } from "@/lib/utils/toCamelCase";
+import { ActionFn, SignUpState } from "@/lib/actions/types";
 import { Button, Checkbox, TextField } from "@/components/ui";
-import { SignUpAction, SignUpState } from "@/lib/actions/types";
 import { AuthCardForm, AuthCardFormErrorText } from "./AuthCard";
 
 const initialState: SignUpState = {
-  error: null,
+  status: null,
+  message: null,
   payload: null,
 };
 
 interface SignUpFormProps {
-  action: SignUpAction;
+  action: ActionFn<SignUpState>;
 }
 
 export function SignUpForm({ action }: SignUpFormProps) {
   const t = useTranslations("auth.SignUpForm");
-  const tServerError = useTranslations("auth.ServerError");
   const [state, formAction, isPending] = useActionState(action, initialState);
-
-  let errorTranslationKey;
-
-  if (state.error) {
-    if (state.error.status === "UnknownError") {
-      errorTranslationKey = "internalServerError";
-    } else if (state.error.status === "InvalidInputData") {
-      errorTranslationKey = "invalidInputData";
-    } else {
-      errorTranslationKey = toCamelCase(state.error.message!);
-    }
-  }
 
   return (
     <AuthCardForm action={formAction}>
-      {state.error && (
-        <AuthCardFormErrorText>
-          {tServerError(errorTranslationKey!)}
-        </AuthCardFormErrorText>
+      {state.status === "error" && state.message && (
+        <AuthCardFormErrorText>{state.message}</AuthCardFormErrorText>
       )}
       <TextField
         label={t("name.label")}

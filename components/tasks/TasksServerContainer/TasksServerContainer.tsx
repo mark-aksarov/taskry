@@ -20,7 +20,6 @@ export async function TasksServerContainer({
   const count = await getTaskCount();
 
   const getCommonProps = (task: TaskListItemDTO) => ({
-    key: task.id,
     id: task.id,
     title: task.title,
     deadline: task.deadline,
@@ -46,10 +45,11 @@ export async function TasksServerContainer({
           <TaskList>
             {tasks.map((task) => (
               <TaskListItem
-                {...getCommonProps(task)}
+                key={task.id}
                 category={task.category}
                 project={task.project}
                 showCheckbox
+                {...getCommonProps(task)}
               />
             ))}
           </TaskList>
@@ -58,6 +58,7 @@ export async function TasksServerContainer({
           <TaskGrid>
             {tasks.map((task) => (
               <TaskGridItem
+                key={task.id}
                 subtasksDone={task.subtasks.done}
                 {...getCommonProps(task)}
               />

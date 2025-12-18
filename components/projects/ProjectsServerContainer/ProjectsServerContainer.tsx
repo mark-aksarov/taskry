@@ -1,12 +1,14 @@
 import { ProjectList } from "../ProjectList";
 import { ProjectGrid } from "../ProjectGrid";
+import { redirect } from "@/i18n/navigation";
+import { getLocale } from "next-intl/server";
 import { ProjectListItem } from "../ProjectListItem";
 import { ProjectGridItem } from "../ProjectGridItem";
 import { ProjectListItemDTO } from "@/lib/dto/project";
 import { Pagination } from "@/components/common/Pagination";
+import { deleteProject } from "@/lib/actions/deleteProject";
 import { ViewModeLayout } from "@/components/common/ViewMode";
 import { getProjectCount, getProjectList } from "@/lib/dal/project";
-import { deleteProjectAction } from "@/lib/actions/deleteProjectAction";
 import { updateProjectStatus } from "@/lib/actions/updateProjectStatus";
 
 interface ProjectsServerContainerProps {
@@ -21,7 +23,15 @@ export async function ProjectsServerContainer({
   const projects = await getProjectList({ page, pageSize });
   const count = await getProjectCount();
   const totalPages = Math.ceil(count / pageSize);
-  const isLastItemOnPage = projects.length === 1;
+
+  // If the page is out of bounds, redirect to the previous page
+  // this can be happening when deleting a project
+  if (projects.length === 0 && count > 0 && page > 1) {
+    const prevPage = page - 1;
+    const locale = await getLocale();
+
+    redirect({ href: `/projects?page=${prevPage}`, locale });
+  }
 
   const paginationProps = {
     page,
@@ -30,24 +40,14 @@ export async function ProjectsServerContainer({
     baseUrl: "/projects",
   };
 
-  const handleDeleteProject = async (prevState: any, id: number) => {
-    "use server";
-    return deleteProjectAction(prevState, {
-      id,
-      currentPage: page,
-      isLastItemOnPage,
-    });
-  };
-
   const getCommonProps = (project: ProjectListItemDTO) => ({
-    key: project.id,
     id: project.id,
     title: project.title,
     deadline: project.deadline,
     creator: project.creator,
     status: project.status,
     commentsCount: project.commentsCount,
-    deleteAction: handleDeleteProject,
+    deleteAction: deleteProject,
     updateStatusAction: updateProjectStatus,
   });
 
@@ -58,11 +58,12 @@ export async function ProjectsServerContainer({
           <ProjectList>
             {projects.map((project) => (
               <ProjectListItem
-                {...getCommonProps(project)}
+                key={project.id}
                 customer={project.customer}
                 company={project.customer?.company}
                 category={project.category}
                 showCheckbox
+                {...getCommonProps(project)}
               />
             ))}
           </ProjectList>
@@ -71,9 +72,10 @@ export async function ProjectsServerContainer({
           <ProjectGrid>
             {projects.map((project) => (
               <ProjectGridItem
-                {...getCommonProps(project)}
+                key={project.id}
                 tasksTotal={project.tasks.total}
                 tasksCompleted={project.tasks.completed}
+                {...getCommonProps(project)}
               />
             ))}
           </ProjectGrid>

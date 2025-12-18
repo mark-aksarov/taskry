@@ -3,43 +3,28 @@
 import { useActionState } from "react";
 import { useTranslations } from "next-intl";
 import { Button, Checkbox, TextField } from "../ui";
-import { toCamelCase } from "@/lib/utils/toCamelCase";
-import { SignInAction, SignInState } from "@/lib/actions/types";
+import { ActionFn, SignInState } from "@/lib/actions/types";
 import { AuthCardForm, AuthCardFormErrorText } from "./AuthCard";
 
 const initialState: SignInState = {
-  error: null,
+  status: null,
+  message: null,
   payload: null,
 };
 
 interface SignInFormProps {
-  action: SignInAction;
+  action: ActionFn<SignInState>;
 }
 
 export function SignInForm({ action }: SignInFormProps) {
   const t = useTranslations("auth.SignInForm");
-  const tServerError = useTranslations("auth.ServerError");
 
   const [state, formAction, isPending] = useActionState(action, initialState);
 
-  let errorTranslationKey;
-
-  if (state.error) {
-    if (state.error.status === "UnknownError") {
-      errorTranslationKey = "internalServerError";
-    } else if (state.error.status === "InvalidInputData") {
-      errorTranslationKey = "invalidInputData";
-    } else {
-      errorTranslationKey = toCamelCase(state.error.message!);
-    }
-  }
-
   return (
     <AuthCardForm action={formAction}>
-      {state.error && (
-        <AuthCardFormErrorText>
-          {tServerError(errorTranslationKey!)}
-        </AuthCardFormErrorText>
+      {state.status === "error" && state.message && (
+        <AuthCardFormErrorText>{state.message}</AuthCardFormErrorText>
       )}
       <TextField
         label={t("email.label")}
@@ -51,7 +36,6 @@ export function SignInForm({ action }: SignInFormProps) {
         defaultValue={state.payload?.get("email") as string}
         errorMessage={(validation) => {
           const details = validation.validationDetails;
-
           if (details.valueMissing) {
             return t("validation.email.required");
           }
@@ -61,7 +45,6 @@ export function SignInForm({ action }: SignInFormProps) {
           if (details.typeMismatch) {
             return t("validation.email.format");
           }
-
           return "";
         }}
       />
@@ -81,7 +64,7 @@ export function SignInForm({ action }: SignInFormProps) {
             return t("validation.password.tooShort", { minLength: 8 });
           }
           if (details.tooLong) {
-            return t("validation.password.tooLong", { minLength: 128 });
+            return t("validation.password.tooLong", { maxLength: 128 });
           }
 
           return "";

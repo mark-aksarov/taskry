@@ -7,14 +7,14 @@ import {
   AuthCardSubtitle,
 } from "@/components/auth/AuthCard";
 import { useTranslations } from "next-intl";
-import { SignInAction } from "@/lib/actions/types";
 import { SignInForm } from "@/components/auth/SignInForm";
+import { ActionFn, SignInState } from "@/lib/actions/types";
 import { AuthCardFooterSignUpItem } from "@/components/auth/AuthCardFooterSignUpItem";
 import { AuthCardFooterForgotPasswordItem } from "@/components/auth/AuthCardFooterForgotPasswordItem";
 
 interface SignInPageProps {
   resetPasswordSuccess?: boolean;
-  action: SignInAction;
+  action: ActionFn<SignInState>;
 }
 
 export function SignInPage({ resetPasswordSuccess, action }: SignInPageProps) {

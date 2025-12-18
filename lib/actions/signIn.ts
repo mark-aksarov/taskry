@@ -4,17 +4,37 @@ import * as z from "zod";
 import { auth } from "../auth";
 import { SignInState } from "./types";
 import { APIError } from "better-auth";
-import { getLocale } from "next-intl/server";
+import { headers } from "next/headers";
 import { redirect } from "@/i18n/navigation";
+import { getLocale, getTranslations } from "next-intl/server";
 
 export async function signIn(
   callbackUrl: string,
-  prevState: SignInState,
+  _prevState: SignInState,
   formData: FormData,
 ): Promise<SignInState> {
+  const locale = await getLocale();
+  const t = await getTranslations("auth.SignInForm");
+
+  // check if user is already signed in
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
+
+  if (session) {
+    redirect({ href: "/", locale: await getLocale() });
+
+    return {
+      status: "success",
+      message: null,
+      payload: formData,
+    };
+  }
+
+  // Validation
   const schema = z.object({
-    email: z.email().max(254),
-    password: z.string().min(8).max(128),
+    email: z.email().min(1).max(254),
+    password: z.string().min(1).min(8).max(128),
     rememberMe: z.preprocess((val) => !!val, z.boolean()),
   });
 
@@ -24,15 +44,16 @@ export async function signIn(
     rememberMe: formData.get("rememberMe"),
   });
 
+  // Return errors if validation fails
   if (!parse.success) {
     return {
-      error: {
-        status: "InvalidInputData",
-      },
+      status: "error",
+      message: t("validation.server.invalidCredentials"),
       payload: formData,
     };
   }
 
+  // Sign in
   const { email, password, rememberMe } = parse.data;
 
   try {
@@ -44,33 +65,37 @@ export async function signIn(
       },
     });
   } catch (error: unknown) {
-    if (error instanceof APIError) {
+    // Better Auth Error
+    if (
+      error instanceof APIError &&
+      (error.status === "BAD_REQUEST" ||
+        error.status === "FORBIDDEN" ||
+        error.status === "UNAUTHORIZED")
+    ) {
       return {
-        error: {
-          status: error.status,
-          message: error.message,
-        },
+        status: "error",
+        message: t(`validation.server.${error.status.toLowerCase()}`),
         payload: formData,
       };
     }
 
+    // Handle unexpected errors
     return {
-      error: {
-        status: "UnknownError",
-      },
+      status: "error",
+      message: t("validation.server.internalServerError"),
       payload: formData,
     };
   }
 
-  const locale = await getLocale();
-
+  // Handle redirect OUTSIDE the try/catch
   redirect({
     href: callbackUrl ?? "/",
     locale,
   });
 
   return {
-    error: null,
+    status: "success",
+    message: null,
     payload: formData,
   };
 }

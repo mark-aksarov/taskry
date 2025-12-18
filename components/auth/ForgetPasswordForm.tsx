@@ -1,43 +1,28 @@
 import { useActionState } from "react";
 import { Button, TextField } from "../ui";
 import { useTranslations } from "next-intl";
-import { toCamelCase } from "@/lib/utils/toCamelCase";
 import { AuthCardForm, AuthCardFormErrorText } from "./AuthCard";
-import { ForgetPasswordAction, ForgetPasswordState } from "@/lib/actions/types";
+import { ActionFn, ForgetPasswordState } from "@/lib/actions/types";
 
 const initialState: ForgetPasswordState = {
-  error: null,
+  status: null,
+  message: null,
   payload: null,
 };
 
 interface ForgetPasswordFormProps {
-  action: ForgetPasswordAction;
+  action: ActionFn<ForgetPasswordState>;
 }
 
 export function ForgetPasswordForm({ action }: ForgetPasswordFormProps) {
   const t = useTranslations("auth.ForgetPasswordForm");
-  const tServerError = useTranslations("auth.ServerError");
 
   const [state, formAction, isPending] = useActionState(action, initialState);
 
-  let errorTranslationKey;
-
-  if (state.error) {
-    if (state.error.status === "UnknownError") {
-      errorTranslationKey = "internalServerError";
-    } else if (state.error.status === "InvalidInputData") {
-      errorTranslationKey = "invalidInputData";
-    } else {
-      errorTranslationKey = toCamelCase(state.error.message!);
-    }
-  }
-
   return (
     <AuthCardForm action={formAction}>
-      {state.error && (
-        <AuthCardFormErrorText>
-          {tServerError(errorTranslationKey!)}
-        </AuthCardFormErrorText>
+      {state.status === "error" && state.message && (
+        <AuthCardFormErrorText>{state.message}</AuthCardFormErrorText>
       )}
       <TextField
         label={t("email.label")}

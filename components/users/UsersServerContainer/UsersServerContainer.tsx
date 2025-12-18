@@ -28,7 +28,6 @@ export async function UsersServerContainer({
   };
 
   const getUserCommonProps = (user: UserListItemDTO) => ({
-    key: user.id,
     id: user.id,
     fullName: user.fullName,
     imageUrl: user.imageUrl,
@@ -44,14 +43,18 @@ export async function UsersServerContainer({
         list={
           <UserList>
             {users.map((user) => (
-              <UserListItem {...getUserCommonProps(user)} showCheckbox />
+              <UserListItem
+                key={user.id}
+                {...getUserCommonProps(user)}
+                showCheckbox
+              />
             ))}
           </UserList>
         }
         grid={
           <UserGrid>
             {users.map((user) => (
-              <UserGridItem {...getUserCommonProps(user)} />
+              <UserGridItem key={user.id} {...getUserCommonProps(user)} />
             ))}
           </UserGrid>
         }

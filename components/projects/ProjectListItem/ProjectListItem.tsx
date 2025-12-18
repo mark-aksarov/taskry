@@ -1,7 +1,8 @@
 "use client";
 
 import {
-  DeleteProjectActionState,
+  ActionFn,
+  DeleteProjectState,
   UpdateProjectStatusPayload,
   UpdateProjectStatusState,
 } from "@/lib/actions/types";
@@ -59,15 +60,8 @@ export interface ProjectListItemProps {
   status: string;
   commentsCount: number;
   showCheckbox?: boolean;
-  deleteAction: (
-    prevState: any,
-    id: number,
-  ) => Promise<DeleteProjectActionState>;
-
-  updateStatusAction: (
-    prevState: any,
-    { id, status }: UpdateProjectStatusPayload,
-  ) => Promise<UpdateProjectStatusState>;
+  deleteAction: ActionFn<DeleteProjectState>;
+  updateStatusAction: ActionFn<UpdateProjectStatusState>;
 }
 
 export const ProjectListItem = ({

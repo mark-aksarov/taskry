@@ -7,12 +7,12 @@ import {
   AuthCardSubtitle,
 } from "@/components/auth/AuthCard";
 import { useTranslations } from "next-intl";
-import { SignUpAction } from "@/lib/actions/types";
 import { SignUpForm } from "@/components/auth/SignUpForm";
+import { ActionFn, SignUpState } from "@/lib/actions/types";
 import { AuthCardFooterSignInItem } from "@/components/auth/AuthCardFooterSignInItem";
 import { AuthCardFooterForgotPasswordItem } from "@/components/auth/AuthCardFooterForgotPasswordItem";
 
-export function SignUpPage({ action }: { action: SignUpAction }) {
+export function SignUpPage({ action }: { action: ActionFn<SignUpState> }) {
   const t = useTranslations("app.SignUpPage");
 
   return (

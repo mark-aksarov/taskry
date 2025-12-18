@@ -7,12 +7,12 @@ import {
   AuthCardSubtitle,
 } from "@/components/auth/AuthCard";
 import { useTranslations } from "next-intl";
+import { ActionFn, ResetPasswordState } from "@/lib/actions/types";
 import { ResetPasswordForm } from "@/components/auth/ResetPasswordForm";
 import { AuthCardFooterSignInItem } from "@/components/auth/AuthCardFooterSignInItem";
-import { ResetPasswordAction } from "@/lib/actions/types";
 
 interface ResetPasswordPageProps {
-  action: ResetPasswordAction;
+  action: ActionFn<ResetPasswordState>;
 }
 
 export function ResetPasswordPage({ action }: ResetPasswordPageProps) {

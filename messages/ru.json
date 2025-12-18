@@ -190,40 +190,6 @@
   },
 
   "auth": {
-    "ServerError": {
-      "emailAndPasswordIsNotEnabled": "Вход по электронной почте и паролю не включен",
-      "emailAndPasswordSignUpIsNotEnabled": "Регистрация по электронной почте и паролю не включена",
-      "userNotFound": "Пользователь не найден",
-      "failedToCreateUser": "Не удалось создать пользователя",
-      "failedToCreateSession": "Не удалось создать сеанс",
-      "failedToUpdateUser": "Не удалось обновить пользователя",
-      "failedToGetSession": "Не удалось получить сеанс",
-      "invalidPassword": "Неверный пароль",
-      "invalidEmail": "Неверный адрес электронной почты",
-      "invalidEmailOrPassword": "Неверный адрес электронной почты или пароль",
-      "socialAccountAlreadyLinked": "Социальная учетная запись уже привязана",
-      "providerNotFound": "Провайдер не найден",
-      "invalidToken": "Неверный токен",
-      "idtokenNotSupported": "id_token не поддерживается",
-      "failedToGetUserInfo": "Не удалось получить информацию о пользователе",
-      "userEmailNotFound": "Электронная почта пользователя не найдена",
-      "emailNotVerified": "Электронная почта не подтверждена",
-      "passwordTooShort": "Пароль слишком короткий",
-      "passwordTooLong": "Пароль слишком длинный",
-      "userAlreadyExists": "Пользователь уже существует.",
-      "userAlreadyExistsUseAnotherEmail": "Пользователь уже существует. Используйте другой адрес электронной почты.",
-      "emailCanNotBeUpdated": "Невозможно обновить адрес электронной почты",
-      "credentialAccountNotFound": "Учетная запись учетных данных не найдена",
-      "sessionExpiredReauthenticateToPerformThisAction": "Сеанс истек. Для выполнения этого действия необходимо повторно авторизоваться.",
-      "youCantUnlinkYourLastAccount": "Вы не можете отвязать свою последнюю учетную запись",
-      "accountNotFound": "Учетная запись не найдена",
-      "userAlreadyHasAPasswordProvideThatToDeleteTheAccount": "У пользователя уже есть пароль. Укажите его, чтобы удалить учетную запись.",
-      "invalidInputData": "Введены неверные или неполные данные",
-      "resetPasswordIsntEnabled": "Сброс пароля не включен",
-      "failedToSendEmail": "Произошла ошибка при отправке письма.",
-      "internalServerError": "Произошла внутренняя ошибка сервера. Пожалуйста, попробуйте позже."
-    },
-
     "AuthCardFooterSignInItem": {
       "text": "Войдите в свой аккаунт.",
       "link": "Войти"
@@ -248,6 +214,12 @@
       },
 
       "validation": {
+        "server": {
+          "invalidCredentials": "Пожалуйста, проверьте email",
+          "internalServerError": "Произошла ошибка сервера. Пожалуйста, попробуйте позже.",
+          "bad_request": "Сброс пароля не включен"
+        },
+
         "email": {
           "required": "Пожалуйста, введите ваш email-адрес.",
           "format": "Некорректный формат. Email-адрес должен выглядеть как user@example.com.",
@@ -266,6 +238,12 @@
       },
 
       "validation": {
+        "server": {
+          "invalidCredentials": "Пожалуйста, проверьте пароль",
+          "internalServerError": "Произошла ошибка сервера. Пожалуйста, попробуйте позже.",
+          "bad_request": "Недействительный токен или недопустимая длина пароля"
+        },
+
         "password": {
           "required": "Пожалуйста, введите ваш пароль.",
           "tooShort": "Пароль слишком короткий. Он должен содержать не менее {minLength} символов.",
@@ -289,6 +267,14 @@
       },
 
       "validation": {
+        "server": {
+          "invalidCredentials": "Пожалуйста, проверьте email и пароль",
+          "internalServerError": "Произошла ошибка сервера. Пожалуйста, попробуйте позже.",
+          "unauthorized": "Ошибка входа. Пожалуйста, проверьте email и пароль или попробуйте позже.",
+          "forbidden": "Email не подтвержден.",
+          "bad_request": "Неверный формат email или этот способ входа недоступен."
+        },
+
         "password": {
           "required": "Пожалуйста, введите ваш пароль.",
           "tooShort": "Пароль слишком короткий. Он должен содержать не менее {minLength} символов.",
@@ -326,6 +312,13 @@
       },
 
       "validation": {
+        "server": {
+          "invalidInputData": "Введены некорректные данные.",
+          "internalServerError": "Произошла ошибка сервера. Пожалуйста, попробуйте позже.",
+          "unprocessable_entity": "Этот email уже используется или произошла ошибка регистрации.",
+          "bad_request": "Не удалось создать аккаунт. Проверьте правильность email или попробуйте другой способ регистрации."
+        },
+
         "name": {
           "required": "Пожалуйста, введите ваше имя.",
           "tooShort": "Имя слишком короткое. Оно должно содержать не менее {minLength} символов.",

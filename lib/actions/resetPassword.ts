@@ -4,15 +4,19 @@ import * as z from "zod";
 import { auth } from "../auth";
 import { APIError } from "better-auth";
 import { ResetPasswordState } from "./types";
-import { getLocale } from "next-intl/server";
 import { redirect } from "@/i18n/navigation";
 import { buildURL } from "../utils/buildURL";
+import { getLocale, getTranslations } from "next-intl/server";
 
 export async function resetPassword(
   token: string,
   prevState: ResetPasswordState,
   formData: FormData,
 ): Promise<ResetPasswordState> {
+  const locale = await getLocale();
+  const t = await getTranslations("auth.ForgetPasswordForm");
+
+  // Validation
   const schema = z.object({
     password: z.string().min(8).max(128),
   });
@@ -21,14 +25,16 @@ export async function resetPassword(
     password: formData.get("password"),
   });
 
+  // Return errors if validation fails
   if (!parse.success) {
     return {
-      error: {
-        status: "InvalidInputData",
-      },
+      status: "error",
+      message: t("validation.server.invalidCredentials"),
+      payload: formData,
     };
   }
 
+  // Request password reset
   const { password } = parse.data;
 
   try {
@@ -39,30 +45,30 @@ export async function resetPassword(
       },
     });
   } catch (error: unknown) {
-    if (error instanceof APIError) {
+    if (error instanceof APIError && error.status === "BAD_REQUEST") {
       return {
-        error: {
-          status: error.status,
-          message: error.message,
-        },
+        status: "error",
+        message: t(`validation.server.${error.status.toLowerCase()}`),
+        payload: formData,
       };
     }
 
     return {
-      error: {
-        status: "UnknownError",
-      },
+      status: "error",
+      message: t("validation.server.internalServerError"),
+      payload: formData,
     };
   }
 
-  const locale = await getLocale();
-
+  // Handle redirect OUTSIDE the try/catch
   redirect({
     href: buildURL("/sign-in", { status: "reset-password-success" }),
     locale,
   });
 
   return {
-    error: null,
+    status: "success",
+    message: null,
+    payload: formData,
   };
 }

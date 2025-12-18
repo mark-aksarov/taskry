@@ -190,40 +190,6 @@
   },
 
   "auth": {
-    "ServerError": {
-      "emailAndPasswordIsNotEnabled": "Email and password is not enabled",
-      "emailAndPasswordSignUpIsNotEnabled": "Email and password sign up is not enabled",
-      "userNotFound": "User not found",
-      "failedToCreateUser": "Failed to create user",
-      "failedToCreateSession": "Failed to create session",
-      "failedToUpdateUser": "Failed to update user",
-      "failedToGetSession": "Failed to get session",
-      "invalidPassword": "Invalid password",
-      "invalidEmail": "Invalid email",
-      "invalidEmailOrPassword": "Invalid email or password",
-      "socialAccountAlreadyLinked": "Social account already linked",
-      "providerNotFound": "Provider not found",
-      "invalidToken": "Invalid token",
-      "idtokenNotSupported": "id_token not supported",
-      "failedToGetUserInfo": "Failed to get user info",
-      "userEmailNotFound": "User email not found",
-      "emailNotVerified": "Email not verified",
-      "passwordTooShort": "Password too short",
-      "passwordTooLong": "Password too long",
-      "userAlreadyExists": "User already exists.",
-      "userAlreadyExistsUseAnotherEmail": "User already exists. Use another email.",
-      "emailCanNotBeUpdated": "Email can not be updated",
-      "credentialAccountNotFound": "Credential account not found",
-      "sessionExpiredReauthenticateToPerformThisAction": "Session expired. Re-authenticate to perform this action.",
-      "youCantUnlinkYourLastAccount": "You can't unlink your last account",
-      "accountNotFound": "Account not found",
-      "userAlreadyHasAPasswordProvideThatToDeleteTheAccount": "User already has a password. Provide that to delete the account.",
-      "invalidInputData": "The data provided is incorrect or incomplete",
-      "resetPasswordIsntEnabled": "Reset password isn't enabled",
-      "failedToSendEmail": "An error occurred while sending the email.",
-      "internalServerError": "An internal server error occurred. Please try again later."
-    },
-
     "AuthCardFooterSignInItem": {
       "text": "Sign in to your account.",
       "link": "Sign In"
@@ -248,6 +214,12 @@
       },
 
       "validation": {
+        "server": {
+          "invalidCredentials": "Please check your email",
+          "internalServerError": "An internal server error occurred. Please try again later.",
+          "bad_request": "Reset password isn't enabled"
+        },
+
         "email": {
           "required": "Please enter your email address.",
           "format": "Invalid format. The email address must be in the format `user@example.com`.",
@@ -266,6 +238,12 @@
       },
 
       "validation": {
+        "server": {
+          "invalidCredentials": "Please check your password",
+          "internalServerError": "An internal server error occurred. Please try again later.",
+          "bad_request": "Invalid or expired token or invalid password length"
+        },
+
         "password": {
           "required": "Please enter your password.",
           "tooShort": "The password is too short. It must contain at least {minLength} characters.",
@@ -289,6 +267,14 @@
       },
 
       "validation": {
+        "server": {
+          "invalidCredentials": "Please check your email and password",
+          "internalServerError": "An internal server error occurred. Please try again later.",
+          "unauthorized": "Login failed. Please check your email and password or try again later.",
+          "forbidden": "Email not verified.",
+          "bad_request": "Invalid email format or this sign-in method is not enabled."
+        },
+
         "password": {
           "required": "Please enter your password.",
           "tooShort": "The password is too short. It must contain at least {minLength} characters.",
@@ -326,6 +312,13 @@
       },
 
       "validation": {
+        "server": {
+          "invalidInputData": "The input data is invalid.",
+          "internalServerError": "An internal server error occurred. Please try again later.",
+          "unprocessable_entity": "This email is already in use or a registration error occurred.",
+          "bad_request": "Could not create account. Please check your email or try another sign-up method."
+        },
+
         "name": {
           "required": "Please enter your name.",
           "tooShort": "Your name is too short. It must contain at least {minLength} characters.",

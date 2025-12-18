@@ -28,7 +28,6 @@ export async function CustomersServerContainer({
   };
 
   const getCustomerCommonProps = (customer: CustomerListItemDTO) => ({
-    key: customer.id,
     id: customer.id,
     fullName: customer.fullName,
     imageUrl: customer.imageUrl,
@@ -44,14 +43,20 @@ export async function CustomersServerContainer({
         list={
           <CustomerList>
             {customers.map((customer) => (
-              <CustomerListItem {...getCustomerCommonProps(customer)} />
+              <CustomerListItem
+                key={customer.id}
+                {...getCustomerCommonProps(customer)}
+              />
             ))}
           </CustomerList>
         }
         grid={
           <CustomerGrid>
             {customers.map((customer) => (
-              <CustomerGridItem {...getCustomerCommonProps(customer)} />
+              <CustomerGridItem
+                key={customer.id}
+                {...getCustomerCommonProps(customer)}
+              />
             ))}
           </CustomerGrid>
         }
