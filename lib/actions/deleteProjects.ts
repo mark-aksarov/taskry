@@ -4,23 +4,20 @@ import z from "zod";
 import { auth } from "../auth";
 import { headers } from "next/headers";
 import { revalidatePath } from "next/cache";
-import { DeleteProjectState } from "./types";
+import { DeleteProjectsState } from "./types";
 import { getTranslations } from "next-intl/server";
-import { deleteProject as deleteProjectQuery } from "../dal/project";
+import { deleteProjects as deleteProjectQuery } from "../dal/project";
 
 const schema = z.object({
-  ids: z.union([
-    z.coerce.number().int().positive(),
-    z.array(z.coerce.number().int().positive()),
-  ]),
+  ids: z.array(z.coerce.number().int().positive()).min(1),
 });
 
-export async function deleteProject(
-  _prevState: DeleteProjectState,
-  ids: number | number[],
-): Promise<DeleteProjectState> {
+export async function deleteProjects(
+  _prevState: DeleteProjectsState,
+  ids: number[],
+): Promise<DeleteProjectsState> {
   const t = await getTranslations("actions.deleteProjectAction");
-  const errorResponse: DeleteProjectState = {
+  const errorResponse: DeleteProjectsState = {
     status: "error",
     message: t("error"),
   };
@@ -37,7 +34,7 @@ export async function deleteProject(
     // Validation
     const validated = schema.safeParse({ ids });
     if (!validated.success) {
-      console.error("Invalid project ID", validated.error);
+      console.error("Invalid project IDs", validated.error);
       return errorResponse;
     }
 
@@ -46,7 +43,10 @@ export async function deleteProject(
 
     revalidatePath("/projects");
 
-    return { status: "success", message: t("success") };
+    return {
+      status: "success",
+      message: null,
+    };
   } catch (error) {
     console.error("Delete Project Error:", error);
     return errorResponse;

@@ -8,7 +8,7 @@ import {
 import { Suspense } from "react";
 import { useTranslations } from "next-intl";
 import { PageGrid } from "@/components/common/PageGrid";
-import { deleteProject } from "@/lib/actions/deleteProject";
+import { deleteProjects } from "@/lib/actions/deleteProjects";
 import { ViewModeProvider } from "@/components/common/ViewMode";
 import { PageContainer } from "@/components/common/PageContainer";
 import { ViewModeToggleButtonGroup } from "@/components/common/ViewMode";
@@ -52,7 +52,7 @@ export function ProjectsPage({
                 </Suspense>
               }
             />
-            <ProjectToolbarActionsMenuTrigger deleteAction={deleteProject} />
+            <ProjectToolbarActionsMenuTrigger deleteAction={deleteProjects} />
             <ViewModeToggleButtonGroup className="ml-auto" />
             <ProjectToolbarCreateNewMenuTrigger
               newProjectForm={
@@ -74,7 +74,7 @@ export function ProjectsPage({
                 </Suspense>
               }
             />
-            <ProjectToolbarActionsMenuTrigger deleteAction={deleteProject} />
+            <ProjectToolbarActionsMenuTrigger deleteAction={deleteProjects} />
           </ToolbarMobileTop>
 
           <ToolbarMobileBottom>

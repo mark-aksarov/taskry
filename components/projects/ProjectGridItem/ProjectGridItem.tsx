@@ -2,8 +2,8 @@
 
 import {
   ActionFn,
-  DeleteProjectState,
-  UpdateProjectStatusState,
+  DeleteProjectsState,
+  UpdateProjectStatusesState,
 } from "@/lib/actions/types";
 
 import {
@@ -50,8 +50,8 @@ export interface ProjectGridItemProps {
   tasksCompleted: number;
   commentsCount: number;
 
-  deleteAction: ActionFn<DeleteProjectState>;
-  updateStatusAction: ActionFn<UpdateProjectStatusState>;
+  deleteAction: ActionFn<DeleteProjectsState>;
+  updateStatusAction: ActionFn<UpdateProjectStatusesState>;
 }
 
 export function ProjectGridItem({

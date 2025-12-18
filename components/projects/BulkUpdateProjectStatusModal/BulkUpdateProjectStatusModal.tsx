@@ -1,10 +1,4 @@
-"use client";
-
-import {
-  ActionFn,
-  DeleteProjectsState,
-  DeleteProjectsPayload,
-} from "@/lib/actions/types";
+"usse client";
 
 import {
   ConfirmModal,
@@ -18,30 +12,45 @@ import { useTranslations } from "next-intl";
 import { DialogHeading } from "@/components/ui";
 import { startTransition, useActionState } from "react";
 import { useActionErrorToast } from "@/lib/hooks/useActionErrorToast";
+import { ActionFn, UpdateProjectStatusesState } from "@/lib/actions/types";
 
-const initialState: DeleteProjectsState = {
+const initialState: UpdateProjectStatusesState = {
   status: null,
   message: null,
 };
 
-interface BulkDeleteProjectModalProps {
+interface BulkUpdateProjectStatusModalProps {
   projectIds: number[];
+  nextStatus: string;
+  modalTextKey: string;
   isOpen: boolean;
   onOpenChange: (isOpen: boolean) => void;
-  deleteAction: ActionFn<DeleteProjectsState, DeleteProjectsPayload>;
+  updateStatusAction: ActionFn<UpdateProjectStatusesState>;
 }
 
-export function BulkDeleteProjectModal({
+export function BulkUpdateProjectStatusModal({
   projectIds,
+  nextStatus,
+  modalTextKey,
   isOpen,
   onOpenChange,
-  deleteAction,
-}: BulkDeleteProjectModalProps) {
-  const t = useTranslations("projects.BulkDeleteProjectModal");
-  const [state, action, pending] = useActionState(deleteAction, initialState);
+  updateStatusAction,
+}: BulkUpdateProjectStatusModalProps) {
+  const t = useTranslations("projects.BulkUpdateProjectStatusModal");
 
-  const handleDelete = () => {
-    startTransition(() => action(projectIds));
+  const [state, action, pending] = useActionState(
+    updateStatusAction,
+    initialState,
+  );
+
+  const handleUpdateProjectStatus = () => {
+    startTransition(() => {
+      action({
+        id: projectIds,
+        nextStatus,
+      });
+    });
+
     onOpenChange(false);
   };
 
@@ -50,14 +59,14 @@ export function BulkDeleteProjectModal({
   return (
     <ConfirmModal isOpen={isOpen} onOpenChange={onOpenChange}>
       <DialogHeading>{t("heading")}</DialogHeading>
-      <ConfirmModalText>
-        {t("text", { count: projectIds.length })}
-      </ConfirmModalText>
+
+      <ConfirmModalText>{t(`text.${modalTextKey}`)}</ConfirmModalText>
+
       <ConfirmModalActions>
         <ConfirmModalCancelButton label={t("cancelButton")} />
         <ConfirmModalConfirmButton
-          label={t("deleteButton")}
-          onConfirm={handleDelete}
+          label={t("updateButton")}
+          onConfirm={handleUpdateProjectStatus}
         />
       </ConfirmModalActions>
     </ConfirmModal>

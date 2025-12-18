@@ -5,27 +5,30 @@ import { auth } from "../auth";
 import { headers } from "next/headers";
 import { revalidatePath } from "next/cache";
 import { getTranslations } from "next-intl/server";
-import { UpdateProjectStatusState } from "./types";
+import { UpdateProjectStatusesState } from "./types";
 import { ProjectStatus } from "@/generated/prisma/enums";
-import { updateProjectStatus as updateProjectStatusQuery } from "../dal/project";
+import {
+  updateProjectStatus as updateProjectStatusQuery,
+  bulkUpdateProjectStatuses as bulkUpdateProjectStatusesQuery,
+} from "../dal/project";
 
 const schema = z.object({
-  id: z.coerce.number().int().positive(),
+  ids: z.array(z.coerce.number().int().positive()).min(1),
   nextStatus: z.enum(["active", "completed", "pending"]),
 });
 
 export async function updateProjectStatus(
-  _prevState: UpdateProjectStatusState,
+  _prevState: UpdateProjectStatusesState,
   {
-    id,
+    ids,
     nextStatus,
   }: {
-    id: number;
+    ids: number[];
     nextStatus: string;
   },
-): Promise<UpdateProjectStatusState> {
+): Promise<UpdateProjectStatusesState> {
   const t = await getTranslations("actions.updateProjectStatus");
-  const errorResponse: UpdateProjectStatusState = {
+  const errorResponse: UpdateProjectStatusesState = {
     status: "error",
     message: t("error"),
   };
@@ -42,14 +45,18 @@ export async function updateProjectStatus(
     }
 
     // Validation
-    const { success, error } = schema.safeParse({ id, nextStatus });
+    const { success, error } = schema.safeParse({ ids, nextStatus });
     if (!success) {
       console.error("Invalid data", error);
       return errorResponse;
     }
 
     // Update Status
-    await updateProjectStatusQuery(id, nextStatus as ProjectStatus);
+    if (ids.length === 1) {
+      await updateProjectStatusQuery(ids[0], nextStatus as ProjectStatus);
+    } else {
+      await bulkUpdateProjectStatusesQuery(ids, nextStatus as ProjectStatus);
+    }
 
     revalidatePath("/projects");
 

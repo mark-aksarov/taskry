@@ -30,12 +30,19 @@ export type ResetPasswordState = {
   payload: FormData | null;
 };
 
-export type DeleteProjectState = {
+export type DeleteProjectsState = {
   status: ActionStatus;
   message: string | null;
 };
 
-export interface UpdateProjectStatusState {
+export type DeleteProjectsPayload = number[];
+
+export interface UpdateProjectStatusesState {
   status: ActionStatus;
   message: string | null;
+}
+
+export interface UpdateProjectStatusesPayload {
+  ids: number[];
+  nextStatus: string;
 }

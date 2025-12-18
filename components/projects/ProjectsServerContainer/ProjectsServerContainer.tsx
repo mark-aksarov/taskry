@@ -6,10 +6,10 @@ import { ProjectListItem } from "../ProjectListItem";
 import { ProjectGridItem } from "../ProjectGridItem";
 import { ProjectListItemDTO } from "@/lib/dto/project";
 import { Pagination } from "@/components/common/Pagination";
-import { deleteProject } from "@/lib/actions/deleteProject";
+import { deleteProjects } from "@/lib/actions/deleteProjects";
 import { ViewModeLayout } from "@/components/common/ViewMode";
 import { getProjectCount, getProjectList } from "@/lib/dal/project";
-import { updateProjectStatus } from "@/lib/actions/updateProjectStatus";
+import { updateProjectStatus } from "@/lib/actions/updateProjectStatuses";
 
 interface ProjectsServerContainerProps {
   page: number;
@@ -47,7 +47,7 @@ export async function ProjectsServerContainer({
     creator: project.creator,
     status: project.status,
     commentsCount: project.commentsCount,
-    deleteAction: deleteProject,
+    deleteAction: deleteProjects,
     updateStatusAction: updateProjectStatus,
   });
 

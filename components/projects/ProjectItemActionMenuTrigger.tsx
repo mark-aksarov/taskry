@@ -2,25 +2,42 @@
 
 import {
   ActionFn,
-  DeleteProjectState,
-  UpdateProjectStatusState,
+  DeleteProjectsPayload,
+  DeleteProjectsState,
+  UpdateProjectStatusesPayload,
+  UpdateProjectStatusesState,
 } from "@/lib/actions/types";
 
-import { Item } from "react-stately";
+import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
 import { ItemBaseActionMenuTrigger } from "../common/ItemBase";
-import { useProjectActions } from "@/lib/hooks/useProjectActions";
+import { startTransition, useActionState, useState } from "react";
 import { Check, CircleEllipsis, Clock, Trash } from "lucide-react";
+import { UpdateProjectStatusModal } from "./UpdateProjectStatusModal";
 import { DeleteProjectModal } from "./DeleteProjectModal/DeleteProjectModal";
-import { UpdateProjectStatusModal } from "./UpdateProjectStatusModal/UpdateProjectStatusModal";
+import { useActionErrorToast } from "@/lib/hooks/useActionErrorToast";
 
 export type ProjectItemActionMenuTriggerProps = {
   projectId: number;
   projectTitle: string;
   projectStatus: string;
   className?: string;
-  deleteAction: ActionFn<DeleteProjectState>;
-  updateStatusAction: ActionFn<UpdateProjectStatusState>;
+  deleteAction: ActionFn<DeleteProjectsState, DeleteProjectsPayload>;
+  updateStatusAction: ActionFn<
+    UpdateProjectStatusesState,
+    UpdateProjectStatusesPayload
+  >;
+};
+
+interface UpdateStatusModalState {
+  isOpen: boolean;
+  textKey: "resume" | "pause" | "complete";
+  nextStatus: string;
+}
+
+const initialState: UpdateProjectStatusesState = {
+  status: null,
+  message: null,
 };
 
 export function ProjectItemActionMenuTrigger({
@@ -33,21 +50,59 @@ export function ProjectItemActionMenuTrigger({
 }: ProjectItemActionMenuTriggerProps) {
   const t = useTranslations("projects.ProjectItemActionMenuTrigger");
 
-  const {
-    handleAction,
-    deleteModal: { isOpen: isOpenDeleteModal, setIsOpen: setIsOpenDeleteModal },
-    statusModal: {
-      isOpen: isOpenUpdateStatusModal,
-      setIsOpen: setIsOpenUpdateStatusModal,
-      nextStatus,
-      modalTextKey,
-    },
-    updateProjectStatusPending,
-  } = useProjectActions({
-    projectIds: [projectId],
-    projectStatus,
-    updateStatusAction,
+  // Delete State
+  const [isOpenDeleteModal, setIsOpenDeleteModal] = useState(false);
+
+  // Update Status
+  const [updateModal, setUpdateModal] = useState<UpdateStatusModalState>({
+    isOpen: false,
+    textKey: "resume",
+    nextStatus: "complete",
   });
+
+  const [
+    updateProjectStatusState,
+    updateProjectStatusAction,
+    updateProjectStatusPending,
+  ] = useActionState(updateStatusAction, initialState);
+
+  useActionErrorToast(updateProjectStatusState);
+
+  const handleAction = (key: Key) => {
+    const action = key.toString();
+    if (action === "delete") {
+      setIsOpenDeleteModal(true);
+    } else {
+      if (projectStatus === action) return;
+
+      const baseModalState = {
+        isOpen: true,
+        nextStatus: action,
+        isDone: false,
+      };
+
+      if (action === "completed") {
+        setUpdateModal({
+          ...baseModalState,
+          textKey: "complete",
+        });
+      } else if (projectStatus === "active" && action === "pending") {
+        setUpdateModal({
+          ...baseModalState,
+          textKey: "pause",
+        });
+      } else if (projectStatus === "pending" && action === "active") {
+        setUpdateModal({
+          ...baseModalState,
+          textKey: "resume",
+        });
+      } else {
+        startTransition(() => {
+          updateProjectStatusAction({ ids: [projectId], nextStatus: action });
+        });
+      }
+    }
+  };
 
   return (
     <>
@@ -76,10 +131,10 @@ export function ProjectItemActionMenuTrigger({
 
       <UpdateProjectStatusModal
         projectId={projectId}
-        nextStatus={nextStatus!}
-        modalTextKey={modalTextKey}
-        isOpen={isOpenUpdateStatusModal}
-        onOpenChange={setIsOpenUpdateStatusModal}
+        {...updateModal}
+        onOpenChange={(open) =>
+          setUpdateModal((prev) => ({ ...prev, isOpen: open }))
+        }
         updateStatusAction={updateStatusAction}
       />
     </>

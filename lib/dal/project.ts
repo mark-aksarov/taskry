@@ -173,28 +173,22 @@ export const getProjectCategorySummaries = cache(async () => {
   return categories.map((category) => mapProjectCategorySummaryToDTO(category));
 });
 
-export const deleteProject = async (ids: number | number[]) => {
+export const deleteProjects = async (ids: number[]) => {
   const session = await getSessionOrThrow();
   const workspaceId = session.user.workspaceId;
 
-  const idFilter = Array.isArray(ids) ? { in: ids } : ids;
-
-  const result = await prisma.project.deleteMany({
+  const { count } = await prisma.project.deleteMany({
     where: {
-      id: idFilter,
       workspaceId,
+      id: { in: ids },
     },
   });
 
-  if (result.count === 0)
-    throw new Error(
-      "No tasks were deleted: either they don't exist or you have no access",
-    );
+  if (count === 0) throw new Error("No projects deleted.");
 
-  return { deletedCount: result.count };
+  return count;
 };
 
-//FIX: Pessimistic lock
 export const updateProjectStatus = async (
   projectId: number,
   nextStatus: ProjectStatus,
@@ -246,7 +240,7 @@ export const updateProjectStatus = async (
     }
 
     // pending -> active
-    if (project.status === "pending" && nextStatus === "active") {
+    if (nextStatus === "active") {
       await tx.task.updateMany({
         where: {
           projectId,
@@ -270,5 +264,59 @@ export const updateProjectStatus = async (
     }
 
     return updatedProject;
+  });
+};
+
+export const bulkUpdateProjectStatuses = async (
+  projectIds: number[],
+  nextStatus: ProjectStatus,
+) => {
+  const session = await getSessionOrThrow();
+  const workspaceId = session.user.workspaceId;
+
+  // Transaction ensures that project and task updates are atomic
+  return await prisma.$transaction(async (tx) => {
+    // 1. Update all accessible projects at once
+    await tx.project.updateMany({
+      where: {
+        id: { in: projectIds },
+        workspaceId,
+      },
+      data: { status: nextStatus },
+    });
+
+    // 2. Bulk update tasks based on the target project status
+
+    // If project is completed, force all its tasks to completed
+    if (nextStatus === "completed") {
+      await tx.task.updateMany({
+        where: { projectId: { in: projectIds } },
+        data: { status: "completed" },
+      });
+    }
+
+    // If project becomes active, activate only pending tasks
+    if (nextStatus === "active") {
+      await tx.task.updateMany({
+        where: {
+          projectId: { in: projectIds },
+          status: "pending",
+        },
+        data: { status: "active" },
+      });
+    }
+
+    // If project becomes pending, revert only active tasks
+    if (nextStatus === "pending") {
+      await tx.task.updateMany({
+        where: {
+          projectId: { in: projectIds },
+          status: "active",
+        },
+        data: { status: "pending" },
+      });
+    }
+
+    return projectIds;
   });
 };

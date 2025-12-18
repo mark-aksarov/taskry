@@ -1,23 +1,36 @@
 "use client";
 
-import { useMemo } from "react";
-import { Item } from "react-stately";
+import {
+  ActionFn,
+  DeleteProjectsState,
+  DeleteProjectsPayload,
+  UpdateProjectStatusesState,
+  UpdateProjectStatusesPayload,
+} from "@/lib/actions/types";
+import { useMemo, useState } from "react";
+import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
 import { ToolbarActionsMenuTrigger } from "../common/Toolbar";
 import { useProjectsSelection } from "./ProjectsSelectionContext";
 import { BulkDeleteProjectModal } from "./BulkDeleteProjectModal";
-import { useProjectActions } from "@/lib/hooks/useProjectActions";
 import { Check, CircleEllipsis, Clock, Trash } from "lucide-react";
-import { ActionFn, DeleteProjectState } from "@/lib/actions/types";
 
 interface ProjectToolbarActionsMenuTriggerProps {
-  deleteAction: ActionFn<DeleteProjectState, number | number[]>;
+  deleteAction: ActionFn<DeleteProjectsState, DeleteProjectsPayload>;
+  updateStatusAction: ActionFn<
+    UpdateProjectStatusesState,
+    UpdateProjectStatusesPayload
+  >;
 }
 
 export const ProjectToolbarActionsMenuTrigger = ({
   deleteAction,
+  updateStatusAction,
 }: ProjectToolbarActionsMenuTriggerProps) => {
   const t = useTranslations("projects.ProjectToolbarActionsMenuTrigger");
+
+  // Delete State
+  const [isOpenDeleteModal, setIsOpenDeleteModal] = useState(false);
 
   const { selectedIds } = useProjectsSelection();
 
@@ -29,21 +42,11 @@ export const ProjectToolbarActionsMenuTrigger = ({
     [selectedIds],
   );
 
-  const {
-    handleAction,
-    deleteModal: { isOpen: isOpenDeleteModal, setIsOpen: setIsOpenDeleteModal },
-    statusModal: {
-      isOpen: isOpenUpdateStatusModal,
-      setIsOpen: setIsOpenUpdateStatusModal,
-      nextStatus,
-      modalTextKey,
-    },
-    updateProjectStatusPending,
-  } = useProjectActions({
-    projectIds,
-    projectStatus: "null",
-    updateStatusAction: (...f: any): any => {},
-  });
+  const handleAction = (key: Key) => {
+    if (key === "delete") {
+      setIsOpenDeleteModal(true);
+    }
+  };
 
   return (
     <>
@@ -72,17 +75,6 @@ export const ProjectToolbarActionsMenuTrigger = ({
         onOpenChange={setIsOpenDeleteModal}
         deleteAction={deleteAction}
       />
-
-      {/*
-      <UpdateProjectStatusModal
-        projectId={projectId}
-        nextStatus={nextStatus!}
-        modalTextKey={modalTextKey}
-        isOpen={isOpenUpdateStatusModal}
-        onOpenChange={setIsOpenUpdateStatusModal}
-        updateStatusAction={updateStatusAction}
-      />
-*/}
     </>
   );
 };

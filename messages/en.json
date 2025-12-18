@@ -609,8 +609,19 @@
       "text": {
         "complete": "Changing the project status to Completed will mark all tasks in this project as Completed.",
         "pause": "Changing the project status to Pending will pause all active tasks in this project.",
-        "resume": "Changing the project status to Active will resume all pending tasks in this project.",
-        "noTaskChange": "Changing the project status will not affect task statuses."
+        "resume": "Changing the project status to Active will resume all pending tasks in this project."
+      },
+      "updateButton": "Update",
+      "cancelButton": "Cancel"
+    },
+
+    "BulkUpdateProjectStatusModal": {
+      "heading": "Update Projects Status",
+      "text": {
+        "complete": "Changing the status to Completed will mark all tasks in the selected projects as Completed.",
+        "pause": "Changing the status to Pending will pause all active tasks in the selected projects.",
+        "resume": "Changing the status to Active will resume all pending tasks in the selected projects.",
+        "noTaskChange": "Changing the project status will not affect task statuses in the selected projects."
       },
       "updateButton": "Update",
       "cancelButton": "Cancel"

@@ -1,6 +1,12 @@
 "use client";
 
 import {
+  ActionFn,
+  DeleteProjectsState,
+  DeleteProjectsPayload,
+} from "@/lib/actions/types";
+
+import {
   ConfirmModal,
   ConfirmModalText,
   ConfirmModalActions,
@@ -11,10 +17,9 @@ import {
 import { useTranslations } from "next-intl";
 import { DialogHeading } from "@/components/ui";
 import { startTransition, useActionState } from "react";
-import { ActionFn, DeleteProjectState } from "@/lib/actions/types";
 import { useActionErrorToast } from "@/lib/hooks/useActionErrorToast";
 
-const initialState: DeleteProjectState = {
+const initialState: DeleteProjectsState = {
   status: null,
   message: null,
 };
@@ -24,7 +29,7 @@ interface DeleteProjectModalProps {
   projectTitle: string;
   isOpen: boolean;
   onOpenChange: (isOpen: boolean) => void;
-  deleteAction: ActionFn<DeleteProjectState, number>;
+  deleteAction: ActionFn<DeleteProjectsState, DeleteProjectsPayload>;
 }
 
 export function DeleteProjectModal({
@@ -38,7 +43,7 @@ export function DeleteProjectModal({
   const [state, action, pending] = useActionState(deleteAction, initialState);
 
   const handleDelete = () => {
-    startTransition(() => action(projectId));
+    startTransition(() => action([projectId]));
     onOpenChange(false);
   };
 

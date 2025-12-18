@@ -2,8 +2,10 @@
 
 import {
   ActionFn,
-  DeleteProjectState,
-  UpdateProjectStatusState,
+  DeleteProjectsPayload,
+  DeleteProjectsState,
+  UpdateProjectStatusesPayload,
+  UpdateProjectStatusesState,
 } from "@/lib/actions/types";
 
 import {
@@ -28,12 +30,12 @@ import { ProjectDetailModal } from "../ProjectDetailModal";
 import { UnknownUser } from "@/components/common/UnknownUser";
 import { ProjectCommentsModal } from "../ProjectCommentsModal";
 import { ProjectListItemLayout } from "./ProjectListItemLayout";
+import { useProjectsSelection } from "../ProjectsSelectionContext";
 import { ImageContainer } from "@/components/common/ImageContainer";
 import { UserDetailModal } from "@/components/users/UserDetailModal";
 import { ProjectDetailBottomSheet } from "../ProjectDetailBottomSheet";
 import { getProjectStatusBadgeColor } from "../getProjectStatusBadgeColor";
 import { ProjectItemActionMenuTrigger } from "../ProjectItemActionMenuTrigger";
-import { useProjectsSelection } from "../ProjectsSelectionContext";
 
 export interface ProjectListItemProps {
   id: number;
@@ -60,8 +62,11 @@ export interface ProjectListItemProps {
   status: string;
   commentsCount: number;
   showCheckbox?: boolean;
-  deleteAction: ActionFn<DeleteProjectState>;
-  updateStatusAction: ActionFn<UpdateProjectStatusState>;
+  deleteAction: ActionFn<DeleteProjectsState, DeleteProjectsPayload>;
+  updateStatusAction: ActionFn<
+    UpdateProjectStatusesState,
+    UpdateProjectStatusesPayload
+  >;
 }
 
 export const ProjectListItem = ({
