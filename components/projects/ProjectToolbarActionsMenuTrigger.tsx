@@ -5,11 +5,10 @@ import { Item } from "react-stately";
 import { useTranslations } from "next-intl";
 import { ToolbarActionsMenuTrigger } from "../common/Toolbar";
 import { useProjectsSelection } from "./ProjectsSelectionContext";
+import { BulkDeleteProjectModal } from "./BulkDeleteProjectModal";
 import { useProjectActions } from "@/lib/hooks/useProjectActions";
 import { Check, CircleEllipsis, Clock, Trash } from "lucide-react";
 import { ActionFn, DeleteProjectState } from "@/lib/actions/types";
-import { DeleteProjectModal } from "./DeleteProjectModal/DeleteProjectModal";
-import { UpdateProjectStatusModal } from "./UpdateProjectStatusModal/UpdateProjectStatusModal";
 
 interface ProjectToolbarActionsMenuTriggerProps {
   deleteAction: ActionFn<DeleteProjectState, number | number[]>;
@@ -67,7 +66,7 @@ export const ProjectToolbarActionsMenuTrigger = ({
         </Item>
       </ToolbarActionsMenuTrigger>
 
-      <DeleteProjectModal
+      <BulkDeleteProjectModal
         projectIds={projectIds}
         isOpen={isOpenDeleteModal}
         onOpenChange={setIsOpenDeleteModal}

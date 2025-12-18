@@ -67,7 +67,7 @@ export function ProjectItemActionMenuTrigger({
       </ItemBaseActionMenuTrigger>
 
       <DeleteProjectModal
-        projectIds={projectId}
+        projectId={projectId}
         projectTitle={projectTitle}
         isOpen={isOpenDeleteModal}
         onOpenChange={setIsOpenDeleteModal}

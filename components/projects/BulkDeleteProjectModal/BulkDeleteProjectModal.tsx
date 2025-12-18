@@ -19,26 +19,24 @@ const initialState: DeleteProjectState = {
   message: null,
 };
 
-interface DeleteProjectModalProps {
-  projectId: number;
-  projectTitle: string;
+interface BulkDeleteProjectModalProps {
+  projectIds: number[];
   isOpen: boolean;
   onOpenChange: (isOpen: boolean) => void;
-  deleteAction: ActionFn<DeleteProjectState, number>;
+  deleteAction: ActionFn<DeleteProjectState, number[]>;
 }
 
-export function DeleteProjectModal({
-  projectId,
-  projectTitle,
+export function BulkDeleteProjectModal({
+  projectIds,
   isOpen,
   onOpenChange,
   deleteAction,
-}: DeleteProjectModalProps) {
-  const t = useTranslations("projects.DeleteProjectModal");
+}: BulkDeleteProjectModalProps) {
+  const t = useTranslations("projects.BulkDeleteProjectModal");
   const [state, action, pending] = useActionState(deleteAction, initialState);
 
   const handleDelete = () => {
-    startTransition(() => action(projectId));
+    startTransition(() => action(projectIds));
     onOpenChange(false);
   };
 
@@ -48,10 +46,7 @@ export function DeleteProjectModal({
     <ConfirmModal isOpen={isOpen} onOpenChange={onOpenChange}>
       <DialogHeading>{t("heading")}</DialogHeading>
       <ConfirmModalText>
-        {t.rich("text", {
-          strong: (chunks) => <strong>{chunks}</strong>,
-          projectTitle,
-        })}
+        {t("text", { count: projectIds.length })}
       </ConfirmModalText>
       <ConfirmModalActions>
         <ConfirmModalCancelButton label={t("cancelButton")} />
