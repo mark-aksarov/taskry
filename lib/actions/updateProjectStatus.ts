@@ -5,17 +5,24 @@ import { auth } from "../auth";
 import { headers } from "next/headers";
 import { revalidatePath } from "next/cache";
 import { getTranslations } from "next-intl/server";
-import { UpdateProjectStatusState, UpdateProjectStatusPayload } from "./types";
+import { UpdateProjectStatusState } from "./types";
+import { ProjectStatus } from "@/generated/prisma/enums";
 import { updateProjectStatus as updateProjectStatusQuery } from "../dal/project";
 
 const schema = z.object({
   id: z.coerce.number().int().positive(),
-  status: z.enum(["active", "completed", "pending"]),
+  nextStatus: z.enum(["active", "completed", "pending"]),
 });
 
 export async function updateProjectStatus(
   _prevState: UpdateProjectStatusState,
-  { id, status }: UpdateProjectStatusPayload,
+  {
+    id,
+    nextStatus,
+  }: {
+    id: number;
+    nextStatus: string;
+  },
 ): Promise<UpdateProjectStatusState> {
   const t = await getTranslations("actions.updateProjectStatus");
   const errorResponse: UpdateProjectStatusState = {
@@ -28,14 +35,21 @@ export async function updateProjectStatus(
     const session = await auth.api.getSession({
       headers: await headers(),
     });
-    if (!session) return errorResponse;
+
+    if (!session) {
+      console.error("Unauthorized");
+      return errorResponse;
+    }
 
     // Validation
-    const { success } = schema.safeParse({ id, status });
-    if (!success) return errorResponse;
+    const { success, error } = schema.safeParse({ id, nextStatus });
+    if (!success) {
+      console.error("Invalid data", error);
+      return errorResponse;
+    }
 
     // Update Status
-    await updateProjectStatusQuery(id, status);
+    await updateProjectStatusQuery(id, nextStatus as ProjectStatus);
 
     revalidatePath("/projects");
 

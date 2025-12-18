@@ -594,7 +594,18 @@
       "heading": "Delete Project",
       "text": "Are you sure you want to delete <strong>«{projectTitle}»</strong>? All contents will be permanently removed, and all related tasks will also be deleted.",
       "deleteButton": "Delete",
-      "retryButton": "Retry",
+      "cancelButton": "Cancel"
+    },
+
+    "UpdateProjectStatusModal": {
+      "heading": "Update Project Status",
+      "text": {
+        "complete": "Changing the project status to Completed will mark all tasks in this project as Completed.",
+        "pause": "Changing the project status to Pending will pause all active tasks in this project.",
+        "resume": "Changing the project status to Active will resume all pending tasks in this project.",
+        "noTaskChange": "Changing the project status will not affect task statuses."
+      },
+      "updateButton": "Update",
       "cancelButton": "Cancel"
     },
 

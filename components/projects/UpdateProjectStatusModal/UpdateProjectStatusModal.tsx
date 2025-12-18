@@ -1,4 +1,4 @@
-"use client";
+"usse client";
 
 import {
   ConfirmModal,
@@ -11,36 +11,44 @@ import {
 import { useTranslations } from "next-intl";
 import { DialogHeading } from "@/components/ui";
 import { startTransition, useActionState } from "react";
-import { ActionFn, DeleteProjectState } from "@/lib/actions/types";
 import { useActionErrorToast } from "@/lib/hooks/useActionErrorToast";
+import { ActionFn, UpdateProjectStatusState } from "@/lib/actions/types";
 
-const initialState: DeleteProjectState = {
+const initialState: UpdateProjectStatusState = {
   status: null,
   message: null,
 };
 
-interface DeleteProjectModalProps {
+interface UpdateProjectStatusModalProps {
   projectId: number;
-  projectTitle: string;
+  nextStatus: string;
+  modalTextKey: string;
   isOpen: boolean;
   onOpenChange: (isOpen: boolean) => void;
-  deleteAction: ActionFn<DeleteProjectState>;
+  updateStatusAction: ActionFn<UpdateProjectStatusState>;
 }
 
-export function DeleteProjectModal({
+export function UpdateProjectStatusModal({
   projectId,
-  projectTitle,
+  nextStatus,
+  modalTextKey,
   isOpen,
   onOpenChange,
-  deleteAction,
-}: DeleteProjectModalProps) {
-  const t = useTranslations("projects.DeleteProjectModal");
+  updateStatusAction,
+}: UpdateProjectStatusModalProps) {
+  const t = useTranslations("projects.UpdateProjectStatusModal");
 
-  const [state, action, pending] = useActionState(deleteAction, initialState);
+  const [state, action, pending] = useActionState(
+    updateStatusAction,
+    initialState,
+  );
 
-  const handleDeleteProject = () => {
+  const handleUpdateProjectStatus = () => {
     startTransition(() => {
-      action(projectId);
+      action({
+        id: projectId,
+        nextStatus,
+      });
     });
 
     onOpenChange(false);
@@ -51,17 +59,14 @@ export function DeleteProjectModal({
   return (
     <ConfirmModal isOpen={isOpen} onOpenChange={onOpenChange}>
       <DialogHeading>{t("heading")}</DialogHeading>
-      <ConfirmModalText>
-        {t.rich("text", {
-          strong: (chunks) => <strong>{chunks}</strong>,
-          projectTitle,
-        })}
-      </ConfirmModalText>
+
+      <ConfirmModalText>{t(`text.${modalTextKey}`)}</ConfirmModalText>
+
       <ConfirmModalActions>
         <ConfirmModalCancelButton label={t("cancelButton")} />
         <ConfirmModalConfirmButton
-          label={t("deleteButton")}
-          onConfirm={handleDeleteProject}
+          label={t("updateButton")}
+          onConfirm={handleUpdateProjectStatus}
         />
       </ConfirmModalActions>
     </ConfirmModal>

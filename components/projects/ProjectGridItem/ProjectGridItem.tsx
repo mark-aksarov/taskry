@@ -1,8 +1,8 @@
 "use client";
 
 import {
+  ActionFn,
   DeleteProjectState,
-  UpdateProjectStatusPayload,
   UpdateProjectStatusState,
 } from "@/lib/actions/types";
 
@@ -49,12 +49,8 @@ export interface ProjectGridItemProps {
   tasksCompleted: number;
   commentsCount: number;
 
-  deleteAction: (prevState: any, id: number) => Promise<DeleteProjectState>;
-
-  updateStatusAction: (
-    prevState: any,
-    { id, status }: UpdateProjectStatusPayload,
-  ) => Promise<UpdateProjectStatusState>;
+  deleteAction: ActionFn<DeleteProjectState>;
+  updateStatusAction: ActionFn<UpdateProjectStatusState>;
 }
 
 export function ProjectGridItem({

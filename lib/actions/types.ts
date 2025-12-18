@@ -18,11 +18,6 @@ export type SignUpState = {
   payload: FormData | null;
 };
 
-export type DeleteProjectState = {
-  status: ActionStatus;
-  message: string | null;
-};
-
 export type ForgetPasswordState = {
   status: ActionStatus;
   message: string | null;
@@ -35,13 +30,12 @@ export type ResetPasswordState = {
   payload: FormData | null;
 };
 
-// UpdateProjectStatus
+export type DeleteProjectState = {
+  status: ActionStatus;
+  message: string | null;
+};
+
 export interface UpdateProjectStatusState {
   status: ActionStatus;
   message: string | null;
-}
-
-export interface UpdateProjectStatusPayload {
-  id: number;
-  status: string;
 }

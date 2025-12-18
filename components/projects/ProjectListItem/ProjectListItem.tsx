@@ -3,7 +3,6 @@
 import {
   ActionFn,
   DeleteProjectState,
-  UpdateProjectStatusPayload,
   UpdateProjectStatusState,
 } from "@/lib/actions/types";
 
@@ -222,6 +221,7 @@ export const ProjectListItem = ({
         <ProjectItemActionMenuTrigger
           projectId={id}
           projectTitle={title}
+          projectStatus={status}
           deleteAction={deleteAction}
           updateStatusAction={updateStatusAction}
         />

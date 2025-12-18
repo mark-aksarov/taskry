@@ -184,14 +184,80 @@ export const deleteProject = async (id: number) => {
   });
 };
 
-export const updateProjectStatus = async (id: number, status: string) => {
+export const updateProjectStatus = async (
+  projectId: number,
+  nextStatus: ProjectStatus,
+) => {
   const session = await getSessionOrThrow();
   const workspaceId = session.user.workspaceId;
 
-  return await prisma.project.update({
-    where: { id, workspaceId },
-    data: {
-      status: status as ProjectStatus,
-    },
+  return await prisma.$transaction(async (tx) => {
+    // Get project with workspace check
+    const project = await tx.project.findFirst({
+      where: {
+        id: projectId,
+        workspaceId,
+      },
+      select: {
+        id: true,
+        status: true,
+      },
+    });
+
+    if (!project) {
+      throw new Error("Project not found");
+    }
+
+    // No-op if status is the same
+    if (project.status === nextStatus) {
+      return project;
+    }
+
+    // Update project status
+    const updatedProject = await tx.project.update({
+      where: { id: projectId },
+      data: { status: nextStatus },
+    });
+
+    // If project was completed, do not touch tasks
+    if (project.status === "completed") {
+      return updatedProject;
+    }
+
+    // Project -> completed
+    if (nextStatus === "completed") {
+      await tx.task.updateMany({
+        where: { projectId },
+        data: { status: "completed" },
+      });
+
+      return updatedProject;
+    }
+
+    // pending -> active
+    if (project.status === "pending" && nextStatus === "active") {
+      await tx.task.updateMany({
+        where: {
+          projectId,
+          status: "pending",
+        },
+        data: { status: "active" },
+      });
+
+      return updatedProject;
+    }
+
+    // active -> pending
+    if (project.status === "active" && nextStatus === "pending") {
+      await tx.task.updateMany({
+        where: {
+          projectId,
+          status: "active",
+        },
+        data: { status: "pending" },
+      });
+    }
+
+    return updatedProject;
   });
 };
