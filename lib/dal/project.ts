@@ -16,13 +16,15 @@ export const getProjectSummary = cache(async (id: number) => {
   const session = await getSessionOrThrow();
   const workspaceId = session.user.workspaceId;
 
-  const projectSummary = await prisma.project.findUniqueOrThrow({
+  const projectSummary = await prisma.project.findFirst({
     where: { id, workspaceId },
     select: {
       id: true,
       title: true,
     },
   });
+
+  if (!projectSummary) throw new Error("Not Found");
 
   return mapProjectSummaryToDTO(projectSummary);
 });
@@ -31,7 +33,7 @@ export const getProjectDetail = cache(async (id: number) => {
   const session = await getSessionOrThrow();
   const workspaceId = session.user.workspaceId;
 
-  const projectDetail = await prisma.project.findUniqueOrThrow({
+  const projectDetail = await prisma.project.findFirst({
     where: { id, workspaceId },
     select: {
       id: true,
@@ -69,28 +71,21 @@ export const getProjectDetail = cache(async (id: number) => {
     },
   });
 
+  if (!projectDetail) throw new Error("Not Found");
+
   return mapProjectDetailToDTO(projectDetail);
 });
-
-function getProjectWhereClause(params: { workspaceId: number }) {
-  const { workspaceId } = params;
-
-  return {
-    category: {
-      workspaceId,
-    },
-  };
-}
 
 export const getProjectList = cache(
   async ({ page, pageSize }: { page: number; pageSize: number }) => {
     const session = await getSessionOrThrow();
     const workspaceId = session.user.workspaceId;
-    const where = getProjectWhereClause({ workspaceId });
     const skip = (page - 1) * pageSize;
 
     const projects = await prisma.project.findMany({
-      where,
+      where: {
+        workspaceId,
+      },
       skip,
       take: pageSize,
 
@@ -146,9 +141,12 @@ export const getProjectList = cache(
 export const getProjectCount = cache(async () => {
   const session = await getSessionOrThrow();
   const workspaceId = session.user.workspaceId;
-  const where = getProjectWhereClause({ workspaceId });
 
-  return prisma.project.count({ where });
+  return prisma.project.count({
+    where: {
+      workspaceId,
+    },
+  });
 });
 
 export const getProjectSummaries = cache(async () => {
@@ -156,7 +154,7 @@ export const getProjectSummaries = cache(async () => {
   const workspaceId = session.user.workspaceId;
 
   const projects = await prisma.project.findMany({
-    where: { creator: { position: { workspaceId } } },
+    where: { workspaceId },
     select: { id: true, title: true },
   });
 
@@ -175,15 +173,28 @@ export const getProjectCategorySummaries = cache(async () => {
   return categories.map((category) => mapProjectCategorySummaryToDTO(category));
 });
 
-export const deleteProject = async (id: number) => {
+export const deleteProject = async (ids: number | number[]) => {
   const session = await getSessionOrThrow();
   const workspaceId = session.user.workspaceId;
 
-  return await prisma.project.delete({
-    where: { id, workspaceId },
+  const idFilter = Array.isArray(ids) ? { in: ids } : ids;
+
+  const result = await prisma.project.deleteMany({
+    where: {
+      id: idFilter,
+      workspaceId,
+    },
   });
+
+  if (result.count === 0)
+    throw new Error(
+      "No tasks were deleted: either they don't exist or you have no access",
+    );
+
+  return { deletedCount: result.count };
 };
 
+//FIX: Pessimistic lock
 export const updateProjectStatus = async (
   projectId: number,
   nextStatus: ProjectStatus,

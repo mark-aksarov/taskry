@@ -15,7 +15,7 @@ export const getTaskSummary = cache(async (id: number) => {
   const session = await getSessionOrThrow();
   const workspaceId = session.user.workspaceId;
 
-  const task = await prisma.task.findUniqueOrThrow({
+  const taskSummary = await prisma.task.findFirst({
     where: { id, workspaceId },
     select: {
       id: true,
@@ -23,14 +23,16 @@ export const getTaskSummary = cache(async (id: number) => {
     },
   });
 
-  return mapTaskSummaryToDTO(task);
+  if (!taskSummary) throw new Error("Not Found");
+
+  return mapTaskSummaryToDTO(taskSummary);
 });
 
 export const getTaskDetail = cache(async (id: number) => {
   const session = await getSessionOrThrow();
   const workspaceId = session.user.workspaceId;
 
-  const taskDetail = await prisma.task.findUniqueOrThrow({
+  const taskDetail = await prisma.task.findFirst({
     where: { id, workspaceId },
     select: {
       id: true,
@@ -80,22 +82,10 @@ export const getTaskDetail = cache(async (id: number) => {
     },
   });
 
+  if (!taskDetail) throw new Error("Not Found");
+
   return mapTaskDetailToDTO(taskDetail);
 });
-
-function getTaskWhereClause(params: {
-  workspaceId: number;
-  assigneeId?: string;
-}) {
-  const { workspaceId, assigneeId } = params;
-
-  return {
-    category: {
-      workspaceId,
-    },
-    ...(assigneeId && { assigneeId }),
-  };
-}
 
 export const getTaskList = cache(
   async ({
@@ -109,11 +99,13 @@ export const getTaskList = cache(
   }) => {
     const session = await getSessionOrThrow();
     const workspaceId = session.user.workspaceId;
-    const where = getTaskWhereClause({ workspaceId, assigneeId });
     const skip = (page - 1) * pageSize;
 
     const tasks = await prisma.task.findMany({
-      where,
+      where: {
+        workspaceId,
+        assigneeId,
+      },
       skip,
       take: pageSize,
       orderBy: {
@@ -177,7 +169,11 @@ export const getTaskCategorySummaries = cache(async () => {
 export const getTaskCount = cache(async (assigneeId?: string) => {
   const session = await getSessionOrThrow();
   const workspaceId = session.user.workspaceId;
-  const where = getTaskWhereClause({ workspaceId, assigneeId });
 
-  return prisma.task.count({ where });
+  return prisma.task.count({
+    where: {
+      workspaceId,
+      assigneeId,
+    },
+  });
 });

@@ -41,26 +41,17 @@ export const getUserDetails = cache(async (userId: string) => {
   });
 });
 
-function getUserWhereClause(params: { workspaceId: number }) {
-  const { workspaceId } = params;
-
-  return {
-    position: {
-      workspaceId,
-    },
-  };
-}
-
 export const getUserList = cache(
   async ({ page, pageSize }: { page: number; pageSize: number }) => {
     const session = await getSessionOrThrow();
     const workspaceId = session.user.workspaceId;
 
-    const where = getUserWhereClause({ workspaceId });
     const skip = (page - 1) * pageSize;
 
     const users = await prisma.user.findMany({
-      where,
+      where: {
+        workspaceId,
+      },
       skip,
       take: pageSize,
 
@@ -87,7 +78,10 @@ export const getUserList = cache(
 export const getUserCount = cache(async () => {
   const session = await getSessionOrThrow();
   const workspaceId = session.user.workspaceId;
-  const where = getUserWhereClause({ workspaceId });
 
-  return prisma.user.count({ where });
+  return prisma.user.count({
+    where: {
+      workspaceId,
+    },
+  });
 });

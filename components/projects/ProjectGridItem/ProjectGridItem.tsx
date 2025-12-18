@@ -95,6 +95,7 @@ export function ProjectGridItem({
           className="-mr-2"
           projectId={id}
           projectTitle={title}
+          projectStatus={status}
           deleteAction={deleteAction}
           updateStatusAction={updateStatusAction}
         />

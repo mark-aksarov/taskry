@@ -56,25 +56,14 @@ export const getCustomerDetails = cache(async (customerId: number) => {
   return mapCustomerDetailToDTO(customer);
 });
 
-function getCustomerWhereClause(params: { workspaceId: number }) {
-  const { workspaceId } = params;
-
-  return {
-    company: {
-      workspaceId,
-    },
-  };
-}
-
 export const getCustomerList = cache(
   async ({ page, pageSize }: { page: number; pageSize: number }) => {
     const session = await getSessionOrThrow();
     const workspaceId = session.user.workspaceId;
-    const where = getCustomerWhereClause({ workspaceId });
     const skip = (page - 1) * pageSize;
 
     const customers = await prisma.customer.findMany({
-      where,
+      where: { workspaceId },
       skip,
       take: pageSize,
 
@@ -102,7 +91,8 @@ export const getCustomerList = cache(
 export const getCustomerCount = cache(async () => {
   const session = await getSessionOrThrow();
   const workspaceId = session.user.workspaceId;
-  const where = getCustomerWhereClause({ workspaceId });
 
-  return prisma.customer.count({ where });
+  return prisma.customer.count({
+    where: { workspaceId },
+  });
 });
