@@ -33,6 +33,7 @@ import { UserDetailModal } from "@/components/users/UserDetailModal";
 import { ProjectDetailBottomSheet } from "../ProjectDetailBottomSheet";
 import { getProjectStatusBadgeColor } from "../getProjectStatusBadgeColor";
 import { ProjectItemActionMenuTrigger } from "../ProjectItemActionMenuTrigger";
+import { useProjectsSelection } from "../ProjectsSelectionContext";
 
 export interface ProjectListItemProps {
   id: number;
@@ -78,6 +79,7 @@ export const ProjectListItem = ({
   updateStatusAction,
 }: ProjectListItemProps) => {
   const t = useTranslations("projects");
+  const { selectedIds, toggleSelection } = useProjectsSelection();
 
   const format = useFormatter();
 
@@ -99,9 +101,19 @@ export const ProjectListItem = ({
     <UnknownUser className="h-9 w-9" />
   );
 
+  const isSelected = !!selectedIds[id];
+
   return (
     <ProjectListItemLayout
-      checkboxSlot={showCheckbox && <Checkbox aria-label="project checkbox" />}
+      checkboxSlot={
+        showCheckbox && (
+          <Checkbox
+            aria-label="project checkbox"
+            isSelected={isSelected}
+            onChange={() => toggleSelection(id)}
+          />
+        )
+      }
       titleSlot={
         <ListItemInfo>
           <ListItemTitle>

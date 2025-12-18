@@ -4,6 +4,7 @@ import { getProjectCount } from "@/lib/dal/project";
 import { ProjectsPageEmpty } from "./ProjectsPageEmpty";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { ProjectsServerContainer } from "@/components/projects/ProjectsServerContainer";
+import { ProjectsSelectionProvider } from "@/components/projects/ProjectsSelectionContext";
 import { NewProjectFormServerContainer } from "@/components/projects/NewProjectFormServerContainer";
 import { ProjectFiltersFormServerContainer } from "@/components/projects/ProjectFiltersFormServerContainer";
 
@@ -30,12 +31,14 @@ export default async function AppProjectsPage({
   if (!projectCount) return <ProjectsPageEmpty />;
 
   return (
-    <ProjectsPage
-      page={page}
-      pageSize={pageSize}
-      ProjectFiltersFormContainer={ProjectFiltersFormServerContainer}
-      ProjectsServerContainer={ProjectsServerContainer}
-      NewProjectFormContainer={NewProjectFormServerContainer}
-    />
+    <ProjectsSelectionProvider>
+      <ProjectsPage
+        page={page}
+        pageSize={pageSize}
+        ProjectFiltersFormContainer={ProjectFiltersFormServerContainer}
+        ProjectsServerContainer={ProjectsServerContainer}
+        NewProjectFormContainer={NewProjectFormServerContainer}
+      />
+    </ProjectsSelectionProvider>
   );
 }

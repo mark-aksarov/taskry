@@ -19,28 +19,41 @@ const initialState: DeleteProjectState = {
   message: null,
 };
 
-interface DeleteProjectModalProps {
-  projectId: number;
-  projectTitle: string;
+interface BaseDeleteProps {
   isOpen: boolean;
   onOpenChange: (isOpen: boolean) => void;
-  deleteAction: ActionFn<DeleteProjectState>;
+  deleteAction: ActionFn<DeleteProjectState, number | number[]>;
 }
 
+interface SingleDeleteProps extends BaseDeleteProps {
+  projectIds: [number];
+  projectTitle: string;
+}
+
+interface BulkDeleteProps extends BaseDeleteProps {
+  projectIds: number[];
+  projectTitle?: never;
+}
+
+type DeleteProjectModalProps = SingleDeleteProps | BulkDeleteProps;
+
 export function DeleteProjectModal({
-  projectId,
+  projectIds,
   projectTitle,
   isOpen,
   onOpenChange,
   deleteAction,
 }: DeleteProjectModalProps) {
   const t = useTranslations("projects.DeleteProjectModal");
-
   const [state, action, pending] = useActionState(deleteAction, initialState);
 
-  const handleDeleteProject = () => {
+  const isBulk = projectIds.length > 1;
+
+  const handleDeleteProjects = () => {
+    const payload = isBulk ? projectIds : projectIds[0];
+
     startTransition(() => {
-      action(projectId);
+      action(payload);
     });
 
     onOpenChange(false);
@@ -50,18 +63,22 @@ export function DeleteProjectModal({
 
   return (
     <ConfirmModal isOpen={isOpen} onOpenChange={onOpenChange}>
-      <DialogHeading>{t("heading")}</DialogHeading>
+      <DialogHeading>{isBulk ? t("bulkHeading") : t("heading")}</DialogHeading>
+
       <ConfirmModalText>
-        {t.rich("text", {
-          strong: (chunks) => <strong>{chunks}</strong>,
-          projectTitle,
-        })}
+        {isBulk
+          ? t("bulkText", { count: projectIds.length })
+          : t.rich("text", {
+              strong: (chunks) => <strong>{chunks}</strong>,
+              projectTitle: projectTitle as string,
+            })}
       </ConfirmModalText>
+
       <ConfirmModalActions>
         <ConfirmModalCancelButton label={t("cancelButton")} />
         <ConfirmModalConfirmButton
           label={t("deleteButton")}
-          onConfirm={handleDeleteProject}
+          onConfirm={handleDeleteProjects}
         />
       </ConfirmModalActions>
     </ConfirmModal>

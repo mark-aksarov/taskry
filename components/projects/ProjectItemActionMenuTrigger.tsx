@@ -6,12 +6,11 @@ import {
   UpdateProjectStatusState,
 } from "@/lib/actions/types";
 
-import { Item, Key } from "react-stately";
+import { Item } from "react-stately";
 import { useTranslations } from "next-intl";
 import { ItemBaseActionMenuTrigger } from "../common/ItemBase";
-import { useState, startTransition, useActionState } from "react";
+import { useProjectActions } from "@/lib/hooks/useProjectActions";
 import { Check, CircleEllipsis, Clock, Trash } from "lucide-react";
-import { useActionErrorToast } from "@/lib/hooks/useActionErrorToast";
 import { DeleteProjectModal } from "./DeleteProjectModal/DeleteProjectModal";
 import { UpdateProjectStatusModal } from "./UpdateProjectStatusModal/UpdateProjectStatusModal";
 
@@ -24,11 +23,6 @@ export type ProjectItemActionMenuTriggerProps = {
   updateStatusAction: ActionFn<UpdateProjectStatusState>;
 };
 
-const initialState: UpdateProjectStatusState = {
-  status: null,
-  message: null,
-};
-
 export function ProjectItemActionMenuTrigger({
   projectId,
   projectTitle,
@@ -39,57 +33,21 @@ export function ProjectItemActionMenuTrigger({
 }: ProjectItemActionMenuTriggerProps) {
   const t = useTranslations("projects.ProjectItemActionMenuTrigger");
 
-  // Delete Project
-  const [isOpenDeleteModal, setIsOpenDeleteModal] = useState(false);
-
-  // Update Status
-  const [
-    updateProjectStatusState,
-    updateProjectStatusAction,
+  const {
+    handleAction,
+    deleteModal: { isOpen: isOpenDeleteModal, setIsOpen: setIsOpenDeleteModal },
+    statusModal: {
+      isOpen: isOpenUpdateStatusModal,
+      setIsOpen: setIsOpenUpdateStatusModal,
+      nextStatus,
+      modalTextKey,
+    },
     updateProjectStatusPending,
-  ] = useActionState(updateStatusAction, initialState);
-
-  const [isOpenUpdateStatusModal, setIsOpenUpdateStatusModal] = useState(false);
-  const [nextStatus, setNextStatus] = useState<string | null>(null);
-  const [modalTextKey, setModalTextKey] = useState<
-    "complete" | "pause" | "resume" | "noTaskChange"
-  >("noTaskChange");
-
-  useActionErrorToast(updateProjectStatusState);
-
-  const handleAction = (key: Key) => {
-    const action = key.toString();
-
-    if (action === "delete") {
-      setIsOpenDeleteModal(true);
-      return;
-    }
-
-    // Status is not changing → do nothing
-    if (projectStatus === action) return;
-
-    // Project was completed → tasks are not affected
-    if (projectStatus === "completed") {
-      startTransition(() => {
-        updateProjectStatusAction({ id: projectId, nextStatus: action });
-      });
-      return;
-    }
-
-    // Decide modal text
-    if (action === "completed") {
-      setModalTextKey("complete");
-    } else if (projectStatus === "active" && action === "pending") {
-      setModalTextKey("pause");
-    } else if (projectStatus === "pending" && action === "active") {
-      setModalTextKey("resume");
-    } else {
-      setModalTextKey("noTaskChange");
-    }
-
-    setNextStatus(action);
-    setIsOpenUpdateStatusModal(true);
-  };
+  } = useProjectActions({
+    projectIds: [projectId],
+    projectStatus,
+    updateStatusAction,
+  });
 
   return (
     <>
@@ -109,7 +67,7 @@ export function ProjectItemActionMenuTrigger({
       </ItemBaseActionMenuTrigger>
 
       <DeleteProjectModal
-        projectId={projectId}
+        projectIds={[projectId]}
         projectTitle={projectTitle}
         isOpen={isOpenDeleteModal}
         onOpenChange={setIsOpenDeleteModal}

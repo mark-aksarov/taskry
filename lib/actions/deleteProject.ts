@@ -9,12 +9,15 @@ import { getTranslations } from "next-intl/server";
 import { deleteProject as deleteProjectQuery } from "../dal/project";
 
 const schema = z.object({
-  id: z.coerce.number().int().positive(),
+  ids: z.union([
+    z.coerce.number().int().positive(),
+    z.array(z.coerce.number().int().positive()),
+  ]),
 });
 
 export async function deleteProject(
   _prevState: DeleteProjectState,
-  id: number,
+  ids: number | number[],
 ): Promise<DeleteProjectState> {
   const t = await getTranslations("actions.deleteProjectAction");
   const errorResponse: DeleteProjectState = {
@@ -23,24 +26,29 @@ export async function deleteProject(
   };
 
   try {
-    // Authorization
     const session = await auth.api.getSession({
       headers: await headers(),
     });
-    if (!session) return errorResponse;
+    if (!session) {
+      console.error("Unauthorized");
+      return errorResponse;
+    }
 
     // Validation
-    const { success } = schema.safeParse({ id });
-    if (!success) return errorResponse;
+    const validated = schema.safeParse({ ids });
+    if (!validated.success) {
+      console.error("Invalid project ID", validated.error);
+      return errorResponse;
+    }
 
-    // Delete Project
-    await deleteProjectQuery(id);
+    // Execute delete
+    await deleteProjectQuery(ids);
 
     revalidatePath("/projects");
+
+    return { status: "success", message: t("success") };
   } catch (error) {
     console.error("Delete Project Error:", error);
     return errorResponse;
   }
-
-  return { status: "success", message: null };
 }
