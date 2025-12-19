@@ -195,7 +195,7 @@ export const ProjectListItem = ({
               )}
             </ListItemTitle>
 
-            <ListItemText>{t("ProjectListItem.creator")}</ListItemText>
+            <ListItemText>{t("ProjectListItem.customer")}</ListItemText>
           </ListItemInfo>
         </>
       }
