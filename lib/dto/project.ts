@@ -5,6 +5,16 @@ export type ProjectSummaryDTO = {
   title: string;
 };
 
+export type ProjectFormDataDTO = {
+  id: number;
+  title: string;
+  description?: string;
+  deadline: Date;
+  categoryId: number;
+  status: ProjectStatus;
+  customerId?: number;
+};
+
 export type ProjectDetailDTO = {
   id: number;
   title: string;
@@ -78,10 +88,19 @@ export interface ProjectCategorySummaryDTO {
 
 export interface CreateProjectInputDTO {
   title: string;
-  description?: string | null;
+  description?: string;
   deadline: Date;
   categoryId: number;
   status: ProjectStatus;
-  customerId?: number | null;
-  creatorId?: string | null;
+  customerId?: number;
+}
+
+export interface UpdateProjectInputDTO {
+  id: number;
+  title: string;
+  description?: string;
+  deadline: Date;
+  categoryId: number;
+  status: ProjectStatus;
+  customerId?: number;
 }

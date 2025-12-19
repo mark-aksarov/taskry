@@ -485,6 +485,11 @@
       "submitButtonLabel": "Create Project"
     },
 
+    "EditProjectModal": {
+      "title": "Edit Project",
+      "submitButtonLabel": "Update Project"
+    },
+
     "ProjectToolbarFiltersModalTrigger": {
       "title": "Project Filters"
     },
@@ -496,8 +501,8 @@
       "completed": "Mark as Completed"
     },
 
-    "NewProjectForm": {
-      "NewProjectFormTitleTextField": {
+    "ProjectFormBase": {
+      "title": {
         "label": "Title",
         "placeholder": "Typing title",
 
@@ -507,12 +512,12 @@
         }
       },
 
-      "NewProjectFormDescriptionTextField": {
+      "description": {
         "label": "Description",
         "placeholder": "Typing description"
       },
 
-      "NewProjectFormDeadlineDatePicker": {
+      "deadline": {
         "label": "Deadline",
 
         "validation": {
@@ -520,7 +525,7 @@
         }
       },
 
-      "NewProjectFormCategorySelect": {
+      "category": {
         "label": "Category",
         "placeholder": "Select category",
 
@@ -529,7 +534,7 @@
         }
       },
 
-      "NewProjectFormCustomerSelect": {
+      "customer": {
         "label": "Customer",
         "placeholder": "Select customer",
 
@@ -538,7 +543,7 @@
         }
       },
 
-      "NewProjectFormStatusSelect": {
+      "status": {
         "label": "Status",
         "placeholder": "Select status",
 
@@ -617,6 +622,7 @@
     },
 
     "ProjectItemActionMenuTrigger": {
+      "edit": "Edit",
       "delete": "Delete",
       "markPending": "Mark as Pending",
       "markCompleted": "Mark as Completed",

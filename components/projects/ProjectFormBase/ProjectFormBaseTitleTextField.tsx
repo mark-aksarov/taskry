@@ -1,10 +1,14 @@
 import { TextField } from "@/components/ui";
 import { useTranslations } from "next-intl";
 
-export function NewProjectFormTitleTextField() {
-  const t = useTranslations(
-    "projects.NewProjectForm.NewProjectFormTitleTextField",
-  );
+interface ProjectFormBaseTitleTextFieldProps {
+  defaultValue?: string;
+}
+
+export function ProjectFormBaseTitleTextField({
+  defaultValue,
+}: ProjectFormBaseTitleTextFieldProps) {
+  const t = useTranslations("projects.ProjectFormBase.title");
 
   return (
     <TextField
@@ -21,6 +25,7 @@ export function NewProjectFormTitleTextField() {
         }
         return "";
       }}
+      defaultValue={defaultValue}
       isRequired
     />
   );

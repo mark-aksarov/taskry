@@ -1,0 +1,84 @@
+"use client";
+
+import {
+  ActionFn,
+  CreateProjectState,
+  UpdateProjectState,
+} from "@/lib/actions/types";
+import { RACForm } from "@/components/ui";
+import { useTranslations } from "next-intl";
+import { FormErrorText } from "@/components/common/FormErrorText";
+import { DateValue, OverlayTriggerStateContext } from "react-aria-components";
+import { startTransition, useActionState, useContext, useEffect } from "react";
+import { ProjectFormBaseTitleTextField } from "./ProjectFormBaseTitleTextField";
+import { ProjectFormBaseDeadlineDatePicker } from "./ProjectFormBaseDeadlineDatePicker";
+import { ProjectFormBaseDescriptionTextField } from "./ProjectFormBaseDescriptionTextField";
+
+const initialState: CreateProjectState = {
+  status: null,
+  message: null,
+};
+
+interface ProjectFormBaseProps {
+  projectId?: number;
+  projectTitleDefaultValue?: string;
+  projectDescriptionDefaultValue?: string;
+  projectDeadlineDefaultValue?: DateValue;
+  projectStatusSelect: React.ReactNode;
+  projectCategorySelect: React.ReactNode;
+  projectCustomerSelect: React.ReactNode;
+  formAction: ActionFn<CreateProjectState | UpdateProjectState, FormData>;
+}
+
+export function ProjectFormBase({
+  projectId,
+  projectTitleDefaultValue,
+  projectDescriptionDefaultValue,
+  projectDeadlineDefaultValue,
+  projectStatusSelect,
+  projectCategorySelect,
+  projectCustomerSelect,
+  formAction,
+}: ProjectFormBaseProps) {
+  const { close } = useContext(OverlayTriggerStateContext)!;
+
+  const t = useTranslations("projects.ProjectFormBase");
+  const [state, action, pending] = useActionState(formAction, initialState);
+
+  useEffect(() => {
+    if (state.status === "success") {
+      close();
+    }
+  }, [state, close]);
+
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    startTransition(() => action(formData));
+  }
+
+  return (
+    <RACForm id="new-project-form" onSubmit={handleSubmit}>
+      <div className="flex flex-col gap-4">
+        {state.status === "error" && (
+          <FormErrorText>{state.message}</FormErrorText>
+        )}
+
+        {projectId && <input type="hidden" name="id" value={projectId} />}
+
+        <ProjectFormBaseTitleTextField
+          defaultValue={projectTitleDefaultValue}
+        />
+        <ProjectFormBaseDescriptionTextField
+          defaultValue={projectDescriptionDefaultValue}
+        />
+        <ProjectFormBaseDeadlineDatePicker
+          defaultValue={projectDeadlineDefaultValue}
+        />
+        {projectStatusSelect}
+        {projectCategorySelect}
+        {projectCustomerSelect}
+      </div>
+    </RACForm>
+  );
+}

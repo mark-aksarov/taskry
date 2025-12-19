@@ -7,9 +7,10 @@ import { revalidatePath } from "next/cache";
 import { CreateProjectState } from "./types";
 import { redirect } from "@/i18n/navigation";
 import { getLocale, getTranslations } from "next-intl/server";
-import { createProject as createProjectQuery } from "../dal/project";
+import { updateProject as updateProjectQuery } from "../dal/project";
 
 const schema = z.object({
+  id: z.coerce.number().int().positive(),
   title: z.string().min(1).max(255),
   description: z.string().max(5000).optional(),
   deadline: z.coerce.date(),
@@ -18,7 +19,7 @@ const schema = z.object({
   customerId: z.coerce.number().optional(),
 });
 
-export async function createProject(
+export async function updateProject(
   _prevState: CreateProjectState,
   formData: FormData,
 ): Promise<CreateProjectState> {
@@ -42,6 +43,7 @@ export async function createProject(
 
   // Data Validation
   const parse = schema.safeParse({
+    id: formData.get("id"),
     title: formData.get("title"),
     description: formData.get("description"),
     deadline: formData.get("deadline"),
@@ -56,7 +58,7 @@ export async function createProject(
 
     return {
       status: "error",
-      message: t("validation.server..invalidInput"),
+      message: t("validation.server.invalidInput"),
     };
   }
 
@@ -64,7 +66,7 @@ export async function createProject(
   try {
     const projectData = parse.data;
 
-    await createProjectQuery(projectData);
+    await updateProjectQuery(projectData);
 
     revalidatePath("/projects");
 
@@ -73,7 +75,7 @@ export async function createProject(
       message: null,
     };
   } catch (error) {
-    console.error("Create Project Error:", error);
+    console.error("Update Project Error:", error);
 
     return {
       status: "error",

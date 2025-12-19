@@ -1,8 +1,8 @@
 import z from "zod";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
-import { getProjectDetail } from "@/lib/dal/project";
 import { NextRequest, NextResponse } from "next/server";
+import { getProjectDetail, getProjectFormData } from "@/lib/dal/project";
 
 export async function GET(
   req: NextRequest,
@@ -33,11 +33,18 @@ export async function GET(
       );
     }
 
+    // Fetch project
+    const { searchParams } = req.nextUrl;
+    const view = searchParams.get("view");
+
     const { id } = parse.data;
 
-    // Fetch project
-    const project = await getProjectDetail(id);
+    if (view === "edit") {
+      const formData = await getProjectFormData(id);
+      return NextResponse.json(formData);
+    }
 
+    const project = await getProjectDetail(id);
     return NextResponse.json(project);
   } catch (error) {
     console.error("GET /project error:", error);

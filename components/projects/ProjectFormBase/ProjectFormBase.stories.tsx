@@ -1,14 +1,14 @@
 import { fn } from "storybook/test";
-import { NewProjectForm } from "./NewProjectForm";
+import { ProjectFormBase } from "./ProjectFormBase";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { NewProjectFormStatusSelect } from "./NewProjectFormStatusSelect";
-import { NewProjectFormCategorySelect } from "./NewProjectFormCategorySelect";
-import { NewProjectFormCustomerSelect } from "./NewProjectFormCustomerSelect";
+import { ProjectFormBaseStatusSelect } from "./ProjectFormBaseStatusSelect";
+import { ProjectFormBaseCategorySelect } from "./ProjectFormBaseCategorySelect";
+import { ProjectFormBaseCustomerSelect } from "./ProjectFormBaseCustomerSelect";
 
 const meta = {
-  title: "components/projects/NewProjectForm",
-  component: NewProjectForm,
+  title: "components/projects/ProjectFormBase",
+  component: ProjectFormBase,
   tags: ["autodocs"],
   decorators: [
     (Story) => (
@@ -21,16 +21,16 @@ const meta = {
   parameters: {
     backgroundVariant: "alt",
   },
-} satisfies Meta<typeof NewProjectForm>;
+} satisfies Meta<typeof ProjectFormBase>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    projectStatusSelect: <NewProjectFormStatusSelect />,
+    projectStatusSelect: <ProjectFormBaseStatusSelect />,
     projectCategorySelect: (
-      <NewProjectFormCategorySelect
+      <ProjectFormBaseCategorySelect
         categories={[
           {
             id: 1,
@@ -56,7 +56,7 @@ export const Default = {
       />
     ),
     projectCustomerSelect: (
-      <NewProjectFormCustomerSelect
+      <ProjectFormBaseCustomerSelect
         customers={[
           {
             id: 1,
@@ -73,6 +73,6 @@ export const Default = {
         ]}
       />
     ),
-    createProjectAction: fn(),
+    formAction: fn(),
   },
 } satisfies Story;

@@ -5,14 +5,15 @@ import {
   mapProjectSummaryToDTO,
   mapProjectListItemToDTO,
   mapProjectCategorySummaryToDTO,
+  mapProjectFormDataToDTO,
 } from "../mappers/project";
 
 import { cache } from "react";
 import prisma from "../prisma";
-import { Prisma, ProjectStatus } from "@/generated/prisma/client";
-import { getSessionOrThrow } from "../utils/getSessionOrThrow";
 import { ProjectFiltersType } from "../types/projects";
-import { CreateProjectInputDTO } from "../dto/project";
+import { ProjectStatus } from "@/generated/prisma/client";
+import { getSessionOrThrow } from "../utils/getSessionOrThrow";
+import { CreateProjectInputDTO, UpdateProjectInputDTO } from "../dto/project";
 
 export const getProjectSummary = cache(async (id: number) => {
   const session = await getSessionOrThrow();
@@ -29,6 +30,28 @@ export const getProjectSummary = cache(async (id: number) => {
   if (!projectSummary) throw new Error("Not Found");
 
   return mapProjectSummaryToDTO(projectSummary);
+});
+
+export const getProjectFormData = cache(async (id: number) => {
+  const session = await getSessionOrThrow();
+  const workspaceId = session.user.workspaceId;
+
+  const project = await prisma.project.findFirst({
+    where: { id, workspaceId },
+    select: {
+      id: true,
+      title: true,
+      description: true,
+      deadline: true,
+      status: true,
+      categoryId: true,
+      customerId: true,
+    },
+  });
+
+  if (!project) throw new Error("Project not found");
+
+  return mapProjectFormDataToDTO(project);
 });
 
 export const getProjectDetail = cache(async (id: number) => {
@@ -283,7 +306,20 @@ export const createProject = async (project: CreateProjectInputDTO) => {
   });
 
   if (!category) {
-    throw new Error("Invalid category for this workspace");
+    throw new Error("Invalid category");
+  }
+
+  if (project.customerId) {
+    const customer = await prisma.customer.findFirst({
+      where: {
+        id: project.customerId,
+        workspaceId: workspaceId,
+      },
+    });
+
+    if (!customer) {
+      throw new Error("Invalid customer");
+    }
   }
 
   return await prisma.project.create({
@@ -292,6 +328,43 @@ export const createProject = async (project: CreateProjectInputDTO) => {
       creatorId,
       workspaceId,
     },
+  });
+};
+
+export const updateProject = async (project: UpdateProjectInputDTO) => {
+  const session = await getSessionOrThrow();
+  const workspaceId = session.user.workspaceId;
+
+  const category = await prisma.projectCategory.findFirst({
+    where: {
+      id: project.categoryId,
+      workspaceId: workspaceId,
+    },
+  });
+
+  if (!category) {
+    throw new Error("Invalid category");
+  }
+
+  if (project.customerId) {
+    const customer = await prisma.customer.findFirst({
+      where: {
+        id: project.customerId,
+        workspaceId: workspaceId,
+      },
+    });
+
+    if (!customer) {
+      throw new Error("Invalid customer");
+    }
+  }
+
+  return await prisma.project.update({
+    where: {
+      id: project.id,
+      workspaceId,
+    },
+    data: project,
   });
 };
 

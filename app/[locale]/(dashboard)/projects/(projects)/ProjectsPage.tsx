@@ -14,7 +14,7 @@ import { ViewModeProvider } from "@/components/common/ViewMode";
 import { PageContainer } from "@/components/common/PageContainer";
 import { ViewModeToggleButtonGroup } from "@/components/common/ViewMode";
 import { updateProjectStatuses } from "@/lib/actions/updateProjectStatuses";
-import { NewProjectFormSkeleton } from "@/components/projects/NewProjectForm";
+import { ProjectFormBaseSkeleton } from "@/components/projects/ProjectFormBase";
 import { ProjectFiltersFormSkeleton } from "@/components/projects/ProjectFiltersForm";
 import { ProjectToolbarSortingMenuTrigger } from "@/components/projects/ProjectToolbarSortingMenuTrigger";
 import { ProjectToolbarActionsMenuTrigger } from "@/components/projects/ProjectToolbarActionsMenuTrigger";
@@ -67,7 +67,7 @@ export function ProjectsPage({
             <ViewModeToggleButtonGroup className="ml-auto" />
             <ProjectToolbarCreateNewMenuTrigger
               newProjectForm={
-                <Suspense fallback={<NewProjectFormSkeleton />}>
+                <Suspense fallback={<ProjectFormBaseSkeleton />}>
                   <NewProjectFormContainer />
                 </Suspense>
               }
@@ -95,7 +95,7 @@ export function ProjectsPage({
             <ViewModeToggleButtonGroup />
             <ProjectToolbarCreateNewMenuTrigger
               newProjectForm={
-                <Suspense fallback={<NewProjectFormSkeleton />}>
+                <Suspense fallback={<ProjectFormBaseSkeleton />}>
                   <NewProjectFormContainer />
                 </Suspense>
               }

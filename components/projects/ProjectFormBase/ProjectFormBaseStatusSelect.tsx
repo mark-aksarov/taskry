@@ -4,10 +4,14 @@ import { Item } from "react-stately";
 import { useTranslations } from "next-intl";
 import { ResponsiveSelect } from "@/components/common/ResponsiveSelect";
 
-export function NewProjectFormStatusSelect() {
-  const t = useTranslations(
-    "projects.NewProjectForm.NewProjectFormStatusSelect",
-  );
+interface ProjectFormBaseStatusSelectProps {
+  defaultSelectedKey?: string;
+}
+
+export function ProjectFormBaseStatusSelect({
+  defaultSelectedKey,
+}: ProjectFormBaseStatusSelectProps) {
+  const t = useTranslations("projects.ProjectFormBase.status");
   const tStatus = useTranslations("projects.ProjectStatus");
 
   return (
@@ -17,6 +21,7 @@ export function NewProjectFormStatusSelect() {
       placeholder={t("placeholder")}
       overlayClassName="w-[var(--trigger-width)]"
       isRequired
+      defaultSelectedKey={defaultSelectedKey}
       errorMessage={t("validation.required")}
     >
       <Item key="pending">{tStatus("pending")}</Item>

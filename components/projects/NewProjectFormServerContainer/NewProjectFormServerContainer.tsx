@@ -1,10 +1,13 @@
+import {
+  ProjectFormBaseStatusSelect,
+  ProjectFormBaseCategorySelect,
+  ProjectFormBaseCustomerSelect,
+} from "../ProjectFormBase";
+
 import { NewProjectForm } from "../NewProjectForm";
 import { getCustomerSummaries } from "@/lib/dal/customers";
 import { createProject } from "@/lib/actions/createProject";
-import { NewProjectFormStatusSelect } from "../NewProjectForm";
 import { getProjectCategorySummaries } from "@/lib/dal/project";
-import { NewProjectFormCategorySelect } from "../NewProjectForm";
-import { NewProjectFormCustomerSelect } from "../NewProjectForm";
 
 export async function NewProjectFormServerContainer() {
   const categories = await getProjectCategorySummaries();
@@ -13,13 +16,13 @@ export async function NewProjectFormServerContainer() {
   return (
     <NewProjectForm
       projectCategorySelect={
-        <NewProjectFormCategorySelect categories={categories} />
+        <ProjectFormBaseCategorySelect categories={categories} />
       }
       projectCustomerSelect={
-        <NewProjectFormCustomerSelect customers={customers} />
+        <ProjectFormBaseCustomerSelect customers={customers} />
       }
-      projectStatusSelect={<NewProjectFormStatusSelect />}
-      createProjectAction={createProject}
+      projectStatusSelect={<ProjectFormBaseStatusSelect />}
+      formAction={createProject}
     />
   );
 }

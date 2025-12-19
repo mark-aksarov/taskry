@@ -1,17 +1,19 @@
 "use client";
 
 import { Item } from "react-stately";
-import { ResponsiveSelect } from "@/components/common/ResponsiveSelect";
 import { useTranslations } from "next-intl";
+import { ResponsiveSelect } from "@/components/common/ResponsiveSelect";
 
-export function NewProjectFormCategorySelect({
-  categories,
-}: {
+interface ProjectFormBaseCategorySelectProps {
+  defaultSelectedKey?: string;
   categories: { id: number; name: string }[];
-}) {
-  const t = useTranslations(
-    "projects.NewProjectForm.NewProjectFormCategorySelect",
-  );
+}
+
+export function ProjectFormBaseCategorySelect({
+  defaultSelectedKey,
+  categories,
+}: ProjectFormBaseCategorySelectProps) {
+  const t = useTranslations("projects.ProjectFormBase.category");
 
   return (
     <ResponsiveSelect
@@ -21,6 +23,7 @@ export function NewProjectFormCategorySelect({
       overlayClassName="w-[var(--trigger-width)]"
       items={categories.map((item) => ({ id: item.id, label: item.name }))}
       isRequired
+      defaultSelectedKey={defaultSelectedKey}
       errorMessage={t("validation.required")}
     >
       {(item: any) => <Item key={item.id}>{item.label}</Item>}

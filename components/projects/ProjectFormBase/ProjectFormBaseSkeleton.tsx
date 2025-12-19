@@ -1,10 +1,10 @@
-import { Skeleton } from "@/components/ui";
 import {
-  FieldGroupSkeleton,
   FieldSkeleton,
+  FieldGroupSkeleton,
 } from "@/components/common/FieldSkeleton";
+import { Skeleton } from "@/components/ui";
 
-export function NewProjectFormSkeleton() {
+export function ProjectFormBaseSkeleton() {
   return (
     <div className="flex flex-col gap-4">
       <FieldSkeleton>

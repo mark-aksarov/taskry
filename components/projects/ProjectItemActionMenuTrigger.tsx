@@ -12,10 +12,11 @@ import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
 import { ItemBaseActionMenuTrigger } from "../common/ItemBase";
 import { startTransition, useActionState, useState } from "react";
-import { Check, CircleEllipsis, Clock, Trash } from "lucide-react";
+import { Check, CircleEllipsis, Clock, Pencil, Trash } from "lucide-react";
 import { UpdateProjectStatusModal } from "./UpdateProjectStatusModal";
 import { DeleteProjectModal } from "./DeleteProjectModal/DeleteProjectModal";
 import { useActionErrorToast } from "@/lib/hooks/useActionErrorToast";
+import { EditProjectModal } from "./EditProjectModal";
 
 export type ProjectItemActionMenuTriggerProps = {
   projectId: number;
@@ -50,6 +51,9 @@ export function ProjectItemActionMenuTrigger({
 }: ProjectItemActionMenuTriggerProps) {
   const t = useTranslations("projects.ProjectItemActionMenuTrigger");
 
+  // Edit State
+  const [isOpenEditModal, setIsOpenEditModal] = useState(false);
+
   // Delete State
   const [isOpenDeleteModal, setIsOpenDeleteModal] = useState(false);
 
@@ -70,7 +74,9 @@ export function ProjectItemActionMenuTrigger({
 
   const handleAction = (key: Key) => {
     const action = key.toString();
-    if (action === "delete") {
+    if (action === "edit") {
+      setIsOpenEditModal(true);
+    } else if (action === "delete") {
       setIsOpenDeleteModal(true);
     } else {
       if (projectStatus === action) return;
@@ -107,6 +113,9 @@ export function ProjectItemActionMenuTrigger({
   return (
     <>
       <ItemBaseActionMenuTrigger className={className} onAction={handleAction}>
+        <Item textValue={t("edit")} key="edit">
+          <Pencil size={16} /> {t("edit")}
+        </Item>
         <Item textValue={t("delete")} key="delete">
           <Trash size={16} /> {t("delete")}
         </Item>
@@ -120,6 +129,12 @@ export function ProjectItemActionMenuTrigger({
           <Clock size={16} /> {t("markActive")}
         </Item>
       </ItemBaseActionMenuTrigger>
+
+      <EditProjectModal
+        projectId={projectId}
+        isOpen={isOpenEditModal}
+        onOpenChange={setIsOpenEditModal}
+      />
 
       <DeleteProjectModal
         projectId={projectId}

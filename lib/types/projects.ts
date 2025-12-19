@@ -11,6 +11,22 @@ export type ProjectSummaryType = Prisma.ProjectGetPayload<{
   select: typeof projectSummarySelect;
 }>;
 
+// ProjectFormData
+
+const projectFormDataSelect = {
+  id: true,
+  title: true,
+  description: true,
+  deadline: true,
+  status: true,
+  categoryId: true,
+  customerId: true,
+} satisfies Prisma.ProjectSelect;
+
+export type ProjectFormDataType = Prisma.ProjectGetPayload<{
+  select: typeof projectFormDataSelect;
+}>;
+
 // ProjectDetail
 
 const projectDetailSelect = {

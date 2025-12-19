@@ -485,6 +485,11 @@
       "submitButtonLabel": "Создать проект"
     },
 
+    "EditProjectModal": {
+      "title": "Изменить проект",
+      "submitButtonLabel": "Обновить проект"
+    },
+
     "ProjectToolbarFiltersModalTrigger": {
       "title": "Фильтры проектов"
     },
@@ -496,8 +501,8 @@
       "completed": "Отметить как «Завершено»"
     },
 
-    "NewProjectForm": {
-      "NewProjectFormTitleTextField": {
+    "ProjectFormBase": {
+      "title": {
         "label": "Название",
         "placeholder": "Введите название",
 
@@ -507,12 +512,12 @@
         }
       },
 
-      "NewProjectFormDescriptionTextField": {
+      "description": {
         "label": "Описание",
         "placeholder": "Введите описание"
       },
 
-      "NewProjectFormDeadlineDatePicker": {
+      "deadline": {
         "label": "Срок",
 
         "validation": {
@@ -520,7 +525,7 @@
         }
       },
 
-      "NewProjectFormCategorySelect": {
+      "category": {
         "label": "Категория",
         "placeholder": "Выберите категорию",
 
@@ -529,7 +534,7 @@
         }
       },
 
-      "NewProjectFormCustomerSelect": {
+      "customer": {
         "label": "Клиент",
         "placeholder": "Выберите клиента",
 
@@ -538,7 +543,7 @@
         }
       },
 
-      "NewProjectFormStatusSelect": {
+      "status": {
         "label": "Статус",
         "placeholder": "Выберите статус",
 
@@ -617,6 +622,7 @@
     },
 
     "ProjectItemActionMenuTrigger": {
+      "edit": "Изменить",
       "delete": "Удалить",
       "markPending": "Отметить как «В ожидании»",
       "markCompleted": "Отметить как «Готово»",

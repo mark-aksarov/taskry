@@ -1,15 +1,12 @@
 import { Suspense } from "react";
-import { NewProjectForm } from "../NewProjectForm";
-import { NewProjectModal } from "./NewProjectModal";
+import { EditProjectModal } from "./EditProjectModal";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { Button, RACDialogTrigger } from "@/components/ui";
-import { ProjectFormBaseSkeleton } from "../ProjectFormBase";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { Default as ProjectFormBaseStory } from "../ProjectFormBase/ProjectFormBase.stories";
 
 const meta = {
-  title: "Components/projects/NewProjectModal",
-  component: NewProjectModal,
+  title: "Components/projects/EditProjectModal",
+  component: EditProjectModal,
   tags: ["autodocs"],
   decorators: [
     (Story) => (
@@ -22,19 +19,19 @@ const meta = {
     ),
     withThemedBackground,
   ],
-} satisfies Meta<typeof NewProjectModal>;
+} satisfies Meta<typeof EditProjectModal>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    newProjectForm: <NewProjectForm {...ProjectFormBaseStory.args} />,
+    projectId: 1,
   },
 } satisfies Story;
 
 export const Skeleton = {
   args: {
-    newProjectForm: <ProjectFormBaseSkeleton />,
+    projectId: 1,
   },
 } satisfies Story;

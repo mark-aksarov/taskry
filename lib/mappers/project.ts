@@ -3,6 +3,7 @@ import {
   ProjectSummaryDTO,
   ProjectListItemDTO,
   ProjectCategorySummaryDTO,
+  ProjectFormDataDTO,
 } from "../dto/project";
 
 import {
@@ -10,6 +11,7 @@ import {
   ProjectSummaryType,
   ProjectListItemType,
   ProjectCategorySummaryType,
+  ProjectFormDataType,
 } from "../types/projects";
 
 export function mapProjectSummaryToDTO(
@@ -20,6 +22,20 @@ export function mapProjectSummaryToDTO(
     title: project.title,
   };
 }
+
+export const mapProjectFormDataToDTO = (
+  project: ProjectFormDataType,
+): ProjectFormDataDTO => {
+  return {
+    id: project.id,
+    title: project.title,
+    description: project.description ?? "",
+    deadline: project.deadline,
+    categoryId: project.categoryId,
+    status: project.status,
+    customerId: project.customerId ?? undefined,
+  };
+};
 
 export function mapProjectDetailToDTO(
   project: ProjectDetailType,

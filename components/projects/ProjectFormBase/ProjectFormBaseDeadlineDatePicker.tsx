@@ -1,11 +1,16 @@
+import { DateValue } from "react-aria";
 import { useTranslations } from "next-intl";
 import { today, getLocalTimeZone } from "@internationalized/date";
 import { ResponsiveDatePicker } from "@/components/common/ResponsiveDatePicker";
 
-export function NewProjectFormDeadlineDatePicker() {
-  const t = useTranslations(
-    "projects.NewProjectForm.NewProjectFormDeadlineDatePicker",
-  );
+interface ProjectFormBaseDeadlineDatePickerProps {
+  defaultValue?: DateValue;
+}
+
+export function ProjectFormBaseDeadlineDatePicker({
+  defaultValue,
+}: ProjectFormBaseDeadlineDatePickerProps) {
+  const t = useTranslations("projects.ProjectFormBase.deadline");
 
   const now = today(getLocalTimeZone());
 
@@ -17,6 +22,7 @@ export function NewProjectFormDeadlineDatePicker() {
       isRequired
       minValue={now}
       errorMessage={t("validation.required")}
+      defaultValue={defaultValue}
     />
   );
 }

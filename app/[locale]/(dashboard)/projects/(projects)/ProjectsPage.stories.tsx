@@ -15,7 +15,7 @@ import { withUserDetail } from "@/components/users/UserDetailClientContainer/dec
 import { Default as ProjectListStory } from "@/components/projects/ProjectList/ProjectList.stories";
 import { Default as ProjectGridStory } from "@/components/projects/ProjectGrid/ProjectGrid.stories";
 import { withProjectComments } from "@/components/projects/ProjectCommentsClientContainer/decorators";
-import { Default as NewProjectFormStory } from "@/components/projects/NewProjectForm/NewProjectForm.stories";
+import { Default as ProjectFormBaseStory } from "@/components/projects/ProjectFormBase/ProjectFormBase.stories";
 import { withProjectDetailCompact } from "@/components/projects/ProjectDetailCompactClientContainer/decorators";
 import { Default as ProjectFiltersFormStory } from "@/components/projects/ProjectFiltersForm/ProjectFiltersForm.stories";
 
@@ -53,7 +53,7 @@ export const Default: Story = {
       />
     ),
     NewProjectFormContainer: () => (
-      <NewProjectForm {...NewProjectFormStory.args} />
+      <NewProjectForm {...ProjectFormBaseStory.args} />
     ),
   },
 };
