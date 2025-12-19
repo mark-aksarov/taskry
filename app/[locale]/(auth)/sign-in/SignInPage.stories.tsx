@@ -1,5 +1,5 @@
+import { fn } from "storybook/test";
 import { SignInPage } from "./SignInPage";
-import { fn, mocked } from "storybook/test";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { AuthPageDecorator } from "@/.storybook/AuthPageDecorator";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";

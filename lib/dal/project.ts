@@ -9,9 +9,10 @@ import {
 
 import { cache } from "react";
 import prisma from "../prisma";
-import { ProjectStatus } from "@/generated/prisma/client";
+import { Prisma, ProjectStatus } from "@/generated/prisma/client";
 import { getSessionOrThrow } from "../utils/getSessionOrThrow";
 import { ProjectFiltersType } from "../types/projects";
+import { CreateProjectInputDTO } from "../dto/project";
 
 export const getProjectSummary = cache(async (id: number) => {
   const session = await getSessionOrThrow();
@@ -268,6 +269,31 @@ export const getProjectCategorySummaries = cache(async () => {
 
   return categories.map((category) => mapProjectCategorySummaryToDTO(category));
 });
+
+export const createProject = async (project: CreateProjectInputDTO) => {
+  const session = await getSessionOrThrow();
+  const creatorId = session.user.id;
+  const workspaceId = session.user.workspaceId;
+
+  const category = await prisma.projectCategory.findFirst({
+    where: {
+      id: project.categoryId,
+      workspaceId: workspaceId,
+    },
+  });
+
+  if (!category) {
+    throw new Error("Invalid category for this workspace");
+  }
+
+  return await prisma.project.create({
+    data: {
+      ...project,
+      creatorId,
+      workspaceId,
+    },
+  });
+};
 
 export const deleteProjects = async (ids: number[]) => {
   const session = await getSessionOrThrow();

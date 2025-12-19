@@ -33,6 +33,8 @@ export function FormBaseModal({
         <DialogBody>{form}</DialogBody>
         <DialogFooter>
           <Button
+            type="submit"
+            form="new-project-form"
             variant="primary"
             size="medium"
             label={submitButtonLabel}

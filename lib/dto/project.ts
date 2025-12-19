@@ -1,3 +1,5 @@
+import { ProjectStatus } from "@/generated/prisma/enums";
+
 export type ProjectSummaryDTO = {
   id: number;
   title: string;
@@ -72,4 +74,14 @@ export interface ProjectListItemDTO {
 export interface ProjectCategorySummaryDTO {
   id: number;
   name: string;
+}
+
+export interface CreateProjectInputDTO {
+  title: string;
+  description?: string | null;
+  deadline: Date;
+  categoryId: number;
+  status: ProjectStatus;
+  customerId?: number | null;
+  creatorId?: string | null;
 }

@@ -46,3 +46,8 @@ export interface UpdateProjectStatusesPayload {
   ids: number[];
   nextStatus: string;
 }
+
+export type CreateProjectState = {
+  status: ActionStatus;
+  message: string | null;
+};

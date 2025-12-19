@@ -1,0 +1,83 @@
+"use server";
+
+import z from "zod";
+import { auth } from "../auth";
+import { headers } from "next/headers";
+import { revalidatePath } from "next/cache";
+import { CreateProjectState } from "./types";
+import { redirect } from "@/i18n/navigation";
+import { getLocale, getTranslations } from "next-intl/server";
+import { createProject as createProjectQuery } from "../dal/project";
+
+const schema = z.object({
+  title: z.string().min(1).max(255),
+  description: z.string().max(5000).optional().nullable(),
+  deadline: z.coerce.date(),
+  status: z.enum(["active", "completed", "pending"]),
+  categoryId: z.coerce.number(),
+  customerId: z.coerce.number(),
+});
+
+export async function createProject(
+  _prevState: CreateProjectState,
+  formData: FormData,
+): Promise<CreateProjectState> {
+  const t = await getTranslations("projects.NewProjectForm");
+  const locale = await getLocale();
+
+  // Session Validation
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
+
+  if (!session) {
+    redirect({ href: "/sign-in", locale });
+
+    console.error("Unauthorized");
+    return {
+      status: "error",
+      message: null,
+    };
+  }
+
+  // Data Validation
+  const parse = schema.safeParse({
+    title: formData.get("title"),
+    description: formData.get("description"),
+    deadline: formData.get("deadline"),
+    status: formData.get("status"),
+    categoryId: formData.get("categoryId"),
+    customerId: formData.get("customerId"),
+    workspaceId: formData.get("workspaceId"),
+  });
+
+  if (!parse.success) {
+    console.error("Invalid form data", parse.error);
+
+    return {
+      status: "error",
+      message: t("validation.invalidInput"),
+    };
+  }
+
+  // Database Action
+  try {
+    const projectData = parse.data;
+
+    await createProjectQuery(projectData);
+
+    revalidatePath("/projects");
+
+    return {
+      status: "success",
+      message: null,
+    };
+  } catch (error) {
+    console.error("Create Project Error:", error);
+
+    return {
+      status: "error",
+      message: t("errors.internalServerError"),
+    };
+  }
+}

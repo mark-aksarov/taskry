@@ -1,8 +1,10 @@
+import { fn } from "storybook/test";
 import { NewProjectForm } from "./NewProjectForm";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { NewProjectFormStatusSelect } from "./NewProjectFormStatusSelect";
 import { NewProjectFormCategorySelect } from "./NewProjectFormCategorySelect";
+import { NewProjectFormCustomerSelect } from "./NewProjectFormCustomerSelect";
 
 const meta = {
   title: "components/projects/NewProjectForm",
@@ -53,5 +55,24 @@ export const Default = {
         ]}
       />
     ),
+    projectCustomerSelect: (
+      <NewProjectFormCustomerSelect
+        customers={[
+          {
+            id: 1,
+            fullName: "John Doe",
+          },
+          {
+            id: 2,
+            fullName: "Jane Smith",
+          },
+          {
+            id: 3,
+            fullName: "Bob Johnson",
+          },
+        ]}
+      />
+    ),
+    createProjectAction: fn(),
   },
 } satisfies Story;

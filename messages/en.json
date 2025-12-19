@@ -499,7 +499,12 @@
     "NewProjectForm": {
       "NewProjectFormTitleTextField": {
         "label": "Title",
-        "placeholder": "Typing title"
+        "placeholder": "Typing title",
+
+        "validation": {
+          "required": "Title is required",
+          "tooLong": "Title is too long"
+        }
       },
 
       "NewProjectFormDescriptionTextField": {
@@ -508,17 +513,45 @@
       },
 
       "NewProjectFormDeadlineDatePicker": {
-        "label": "Deadline"
+        "label": "Deadline",
+
+        "validation": {
+          "required": "Deadline is required"
+        }
       },
 
       "NewProjectFormCategorySelect": {
         "label": "Category",
-        "placeholder": "Select category"
+        "placeholder": "Select category",
+
+        "validation": {
+          "required": "Please select a category"
+        }
+      },
+
+      "NewProjectFormCustomerSelect": {
+        "label": "Customer",
+        "placeholder": "Select customer",
+
+        "validation": {
+          "required": "Customer is required"
+        }
       },
 
       "NewProjectFormStatusSelect": {
         "label": "Status",
-        "placeholder": "Select status"
+        "placeholder": "Select status",
+
+        "validation": {
+          "required": "Please select a status"
+        }
+      },
+
+      "validation": {
+        "server": {
+          "invalidInput": "Invalid input. Please check your data and try again.",
+          "internalServerError": "An internal server error occurred. Please try again later."
+        }
       }
     },
 
