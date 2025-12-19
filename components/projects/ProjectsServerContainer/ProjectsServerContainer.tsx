@@ -14,13 +14,15 @@ import { updateProjectStatuses } from "@/lib/actions/updateProjectStatuses";
 interface ProjectsServerContainerProps {
   page: number;
   pageSize: number;
+  sort: string;
 }
 
 export async function ProjectsServerContainer({
   page,
   pageSize,
+  sort,
 }: ProjectsServerContainerProps) {
-  const projects = await getProjectList({ page, pageSize });
+  const projects = await getProjectList({ page, pageSize, sort });
   const count = await getProjectCount();
   const totalPages = Math.ceil(count / pageSize);
 

@@ -14,15 +14,16 @@ import { useOverlayTrigger } from "react-aria";
 import { useOverlayTriggerState } from "react-stately";
 import { ResponsiveMenuTrigger } from "@/components/common/ResponsiveMenuTrigger";
 
-export function ToolbarSortingMenuTrigger<T extends object = any>({
-  children,
-}: Pick<MenuTriggerProps<T>, "children">) {
+export function ToolbarSortingMenuTrigger<T extends object = any>(
+  props: MenuTriggerProps<T>,
+) {
   const state = useOverlayTriggerState({});
   const { triggerProps } = useOverlayTrigger({ type: "dialog" }, state);
   const t = useTranslations("common.Toolbar.ToolbarSortingMenuTrigger");
 
   return (
     <ResponsiveMenuTrigger
+      {...props}
       renderDialogHeader={() => (
         <DialogHeader>
           <DialogHeading>{t("dialogHeading")}</DialogHeading>
@@ -53,8 +54,6 @@ export function ToolbarSortingMenuTrigger<T extends object = any>({
         </>
       )}
       placement="bottom left"
-    >
-      {children}
-    </ResponsiveMenuTrigger>
+    />
   );
 }

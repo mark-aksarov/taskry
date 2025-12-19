@@ -23,17 +23,20 @@ import { ProjectToolbarCreateNewMenuTrigger } from "@/components/projects/Projec
 interface ProjectsPageProps {
   page: number;
   pageSize: number;
+  sort: string;
   ProjectFiltersFormContainer: React.ComponentType;
   NewProjectFormContainer: React.ComponentType;
   ProjectsServerContainer: React.ComponentType<{
     page: number;
     pageSize: number;
+    sort: string;
   }>;
 }
 
 export function ProjectsPage({
   page,
   pageSize,
+  sort,
   ProjectFiltersFormContainer,
   NewProjectFormContainer,
   ProjectsServerContainer,
@@ -96,7 +99,11 @@ export function ProjectsPage({
             />
           </ToolbarMobileBottom>
 
-          <ProjectsServerContainer page={page} pageSize={pageSize} />
+          <ProjectsServerContainer
+            page={page}
+            pageSize={pageSize}
+            sort={sort}
+          />
         </ViewModeProvider>
       </PageGrid>
     </PageContainer>

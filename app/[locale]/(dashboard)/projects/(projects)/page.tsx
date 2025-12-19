@@ -11,6 +11,7 @@ import { ProjectFiltersFormServerContainer } from "@/components/projects/Project
 const searchParamsSchema = z.object({
   page: z.coerce.number().int().positive().catch(1),
   pageSize: z.coerce.number().int().min(1).max(100).catch(20),
+  sort: z.enum(["title", "deadline", "status", "category"]).catch("title"),
 });
 
 export default async function AppProjectsPage({
@@ -23,7 +24,7 @@ export default async function AppProjectsPage({
 
   // Validation
   const rawParams = await searchParams;
-  const { page, pageSize } = searchParamsSchema.parse(rawParams);
+  const { page, pageSize, sort } = searchParamsSchema.parse(rawParams);
 
   // Get count
   const projectCount = await getProjectCount();
@@ -35,6 +36,7 @@ export default async function AppProjectsPage({
       <ProjectsPage
         page={page}
         pageSize={pageSize}
+        sort={sort}
         ProjectFiltersFormContainer={ProjectFiltersFormServerContainer}
         ProjectsServerContainer={ProjectsServerContainer}
         NewProjectFormContainer={NewProjectFormServerContainer}

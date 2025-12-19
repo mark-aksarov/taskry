@@ -1,28 +1,41 @@
 "use client";
 
-import { Item } from "react-stately";
-import { useTranslations } from "next-intl";
+import { Item, Key } from "react-stately";
+import { useSearchParams } from "next/navigation";
+import { useLocale, useTranslations } from "next-intl";
+import { usePathname, useRouter } from "@/i18n/navigation";
 import { ToolbarSortingMenuTrigger } from "@/components/common/Toolbar";
 import { ALargeSmall, Blocks, Calendar, CircleCheck } from "lucide-react";
 
 export function ProjectToolbarSortingMenuTrigger() {
   const t = useTranslations("projects.ProjectToolbarSortingMenuTrigger");
+  const locale = useLocale();
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
+  const handleAction = (key: Key) => {
+    const params = new URLSearchParams(searchParams.toString());
+    params.set("sort", key as string);
+    params.delete("page");
+    router.push(`${pathname}?${params.toString()}`, { locale });
+  };
 
   return (
-    <ToolbarSortingMenuTrigger>
-      <Item textValue="Title" key="title">
+    <ToolbarSortingMenuTrigger onAction={handleAction}>
+      <Item textValue={t("byTitle")} key="title">
         <ALargeSmall size={16} strokeWidth={1.5} absoluteStrokeWidth />
         {t("byTitle")}
       </Item>
-      <Item textValue="Deadline" key="deadline">
+      <Item textValue={t("byDeadline")} key="deadline">
         <Calendar size={16} strokeWidth={1.5} absoluteStrokeWidth />
         {t("byDeadline")}
       </Item>
-      <Item textValue="Status" key="status">
+      <Item textValue={t("byStatus")} key="status">
         <CircleCheck size={16} strokeWidth={1.5} absoluteStrokeWidth />
         {t("byStatus")}
       </Item>
-      <Item textValue="Category" key="category">
+      <Item textValue={t("byCategory")} key="category">
         <Blocks size={16} strokeWidth={1.5} absoluteStrokeWidth />
         {t("byCategory")}
       </Item>

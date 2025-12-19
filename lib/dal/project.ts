@@ -77,23 +77,40 @@ export const getProjectDetail = cache(async (id: number) => {
 });
 
 export const getProjectList = cache(
-  async ({ page, pageSize }: { page: number; pageSize: number }) => {
+  async ({
+    page,
+    pageSize,
+    sort,
+  }: {
+    page: number;
+    pageSize: number;
+    sort: string;
+  }) => {
     const session = await getSessionOrThrow();
     const workspaceId = session.user.workspaceId;
     const skip = (page - 1) * pageSize;
+
+    const orderByMapping: Record<string, any> = {
+      title: { title: "asc" },
+      deadline: { deadline: "asc" },
+      status: { status: "asc" },
+      category: { category: { name: "asc" } },
+    };
+
+    const orderBy = orderByMapping[sort] || { title: "asc" };
 
     const projects = await prisma.project.findMany({
       where: {
         workspaceId,
       },
+
+      orderBy: [orderBy],
       skip,
       take: pageSize,
-
       select: {
         id: true,
         title: true,
         deadline: true,
-
         creator: {
           select: {
             id: true,
