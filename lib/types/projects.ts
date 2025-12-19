@@ -123,4 +123,5 @@ export interface ProjectFiltersType {
   deadline?: string;
   dateStart?: string;
   dateEnd?: string;
+  noActiveTasks?: boolean;
 }

@@ -19,6 +19,7 @@ const searchParamsSchema = z.object({
   deadline: z.string().optional(),
   dateStart: z.string().optional(),
   dateEnd: z.string().optional(),
+  noActiveTasks: z.preprocess((val) => val === "true", z.boolean()).optional(),
 });
 
 export default async function AppProjectsPage({
@@ -35,6 +36,7 @@ export default async function AppProjectsPage({
     deadline?: string;
     dateStart?: string;
     dateEnd?: string;
+    noActiveTasks?: boolean;
   }>;
 }) {
   // Authorization
@@ -53,6 +55,7 @@ export default async function AppProjectsPage({
     deadline,
     dateStart,
     dateEnd,
+    noActiveTasks,
   } = searchParamsSchema.parse(rawParams);
 
   // Get count
@@ -74,6 +77,7 @@ export default async function AppProjectsPage({
           deadline,
           dateStart,
           dateEnd,
+          noActiveTasks,
         }}
         ProjectFiltersFormContainer={ProjectFiltersFormServerContainer}
         ProjectsServerContainer={ProjectsServerContainer}

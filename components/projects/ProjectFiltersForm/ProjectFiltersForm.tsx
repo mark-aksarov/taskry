@@ -40,7 +40,12 @@ export function ProjectFiltersForm({
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
-  // --- STATE ---
+  // Switch state for "No active tasks"
+  const [noActiveTasks, setNoActiveTasks] = useState<boolean>(
+    searchParams.get("noActiveTasks") === "true",
+  );
+
+  // Deadline state
   const [deadlineCheckboxes, setDeadlineCheckboxes] = useState<string[]>(
     searchParams.get("deadline")?.split(",") || [],
   );
@@ -78,6 +83,13 @@ export function ProjectFiltersForm({
     e.preventDefault();
     const params = new URLSearchParams(searchParams.toString());
 
+    // Handle "No active tasks" Switch
+    if (noActiveTasks) {
+      params.set("noActiveTasks", "true");
+    } else {
+      params.delete("noActiveTasks");
+    }
+
     // Handle Checkboxes
     if (deadlineCheckboxes.length > 0) {
       params.set("deadline", deadlineCheckboxes.join(","));
@@ -108,7 +120,15 @@ export function ProjectFiltersForm({
   return (
     <RACForm id="project-filter-form" onSubmit={handleSubmit}>
       <div className="flex flex-col gap-4">
-        <Switch className="justify-between">{t("switchText")}</Switch>
+        <Switch
+          className="justify-between"
+          isSelected={noActiveTasks}
+          onChange={setNoActiveTasks}
+          name="noActiveTasks"
+        >
+          {t("switchText")}
+        </Switch>
+
         <Divider />
 
         <ProjectFiltersFormDeadlineCheckboxGroup

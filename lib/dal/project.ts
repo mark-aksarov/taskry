@@ -147,8 +147,16 @@ function buildProjectWhereClause(
   filters?: ProjectFiltersType,
 ) {
   // 1. Destructure the new range filters
-  const { status, category, customer, user, deadline, dateStart, dateEnd } =
-    filters ?? {};
+  const {
+    status,
+    category,
+    customer,
+    user,
+    deadline,
+    dateStart,
+    dateEnd,
+    noActiveTasks,
+  } = filters ?? {};
 
   const now = new Date();
   const getStartOfDay = (date: Date) =>
@@ -169,6 +177,17 @@ function buildProjectWhereClause(
     }),
     ...(user && {
       creatorId: { in: user.split(",") },
+    }),
+
+    // --- No Active Tasks Logic ---
+    ...(noActiveTasks && {
+      tasks: {
+        // Returns projects where NONE of the tasks are "Active"
+        // Adjust "Active" to match your actual Task status enum/string
+        none: {
+          status: ProjectStatus.active,
+        },
+      },
     }),
 
     // --- Combined Deadline Logic ---
