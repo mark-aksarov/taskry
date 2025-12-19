@@ -8,6 +8,7 @@ import {
 import { Suspense } from "react";
 import { useTranslations } from "next-intl";
 import { PageGrid } from "@/components/common/PageGrid";
+import { ProjectFiltersType } from "@/lib/types/projects";
 import { deleteProjects } from "@/lib/actions/deleteProjects";
 import { ViewModeProvider } from "@/components/common/ViewMode";
 import { PageContainer } from "@/components/common/PageContainer";
@@ -24,12 +25,14 @@ interface ProjectsPageProps {
   page: number;
   pageSize: number;
   sort: string;
+  filters?: ProjectFiltersType;
   ProjectFiltersFormContainer: React.ComponentType;
   NewProjectFormContainer: React.ComponentType;
   ProjectsServerContainer: React.ComponentType<{
     page: number;
     pageSize: number;
     sort: string;
+    filters?: ProjectFiltersType;
   }>;
 }
 
@@ -37,6 +40,7 @@ export function ProjectsPage({
   page,
   pageSize,
   sort,
+  filters,
   ProjectFiltersFormContainer,
   NewProjectFormContainer,
   ProjectsServerContainer,
@@ -103,6 +107,7 @@ export function ProjectsPage({
             page={page}
             pageSize={pageSize}
             sort={sort}
+            filters={filters}
           />
         </ViewModeProvider>
       </PageGrid>

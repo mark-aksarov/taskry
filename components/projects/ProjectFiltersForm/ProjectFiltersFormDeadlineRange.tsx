@@ -1,17 +1,39 @@
+import { DateValue } from "react-aria";
 import { useTranslations } from "next-intl";
 import { ResponsiveDatePicker } from "@/components/common/ResponsiveDatePicker";
 
-export function ProjectFiltersFormDeadlineRange() {
+interface RangeProps {
+  startDate: DateValue | null;
+  endDate: DateValue | null;
+  onDateChange: (val: any, type: "start" | "end") => void;
+  isDisabled: boolean;
+}
+
+export function ProjectFiltersFormDeadlineRange({
+  startDate,
+  endDate,
+  onDateChange,
+  isDisabled,
+}: RangeProps) {
   const t = useTranslations(
     "projects.ProjectFiltersForm.ProjectFiltersFormDeadlineRange",
   );
 
   return (
-    <div className="flex gap-4">
-      <ResponsiveDatePicker className="flex-auto" label={t("label")} />
+    <div
+      className={`flex gap-4 transition-opacity ${isDisabled ? "pointer-events-none opacity-40" : ""}`}
+    >
+      <ResponsiveDatePicker
+        className="flex-auto"
+        label={t("label")}
+        value={startDate}
+        onChange={(val) => onDateChange(val, "start")}
+      />
       <ResponsiveDatePicker
         className="flex-auto self-end"
         aria-label={t("labelTo")}
+        value={endDate}
+        onChange={(val) => onDateChange(val, "end")}
       />
     </div>
   );

@@ -1,14 +1,21 @@
-import { Checkbox, CheckboxGroup } from "@/components/ui";
+"use client";
+
 import { useTranslations } from "next-intl";
+import { useSearchParams } from "next/navigation";
+import { Checkbox, CheckboxGroup } from "@/components/ui";
 
 export function ProjectFiltersFormStatusCheckboxGroup() {
   const t = useTranslations("projects");
+  const searchParams = useSearchParams();
+  const initialValues = searchParams.get("status")?.split(",") || [];
 
   return (
     <CheckboxGroup
+      name="status"
       label={t(
         "ProjectFiltersForm.ProjectFiltersFormStatusCheckboxGroup.label",
       )}
+      defaultValue={initialValues}
     >
       <Checkbox
         key="pending"

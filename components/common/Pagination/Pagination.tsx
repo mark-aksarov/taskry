@@ -2,6 +2,8 @@
 
 import { Fragment } from "react";
 import { twMerge } from "tailwind-merge";
+import { usePathname } from "@/i18n/navigation";
+import { useSearchParams } from "next/navigation";
 import { PaginationButton } from "./PaginationButton";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { ButtonVariant } from "@/components/ui/Button/Button";
@@ -76,9 +78,17 @@ export function Pagination({
   size = "small",
   className,
 }: PaginationProps) {
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
   const pages = createPageArray(page, totalPages, size);
 
-  const getHref = (p: number) => `${baseUrl}?page=${p}&pageSize=${pageSize}`;
+  const getHref = (p: number) => {
+    const params = new URLSearchParams(searchParams.toString());
+    params.set("page", p.toString());
+    if (pageSize) params.set("pageSize", pageSize.toString());
+
+    return `${pathname}?${params.toString()}`;
+  };
 
   const renderButton = (type: "prev" | "next" | "page", targetPage: number) => {
     const isPrev = type === "prev";

@@ -1,5 +1,8 @@
+"use client";
+
 import { Checkbox, CheckboxGroup } from "@/components/ui";
 import { useTranslations } from "next-intl";
+import { useSearchParams } from "next/navigation";
 
 export function ProjectFiltersFormCustomerCheckboxGroup({
   customers,
@@ -10,8 +13,15 @@ export function ProjectFiltersFormCustomerCheckboxGroup({
     "projects.ProjectFiltersForm.ProjectFiltersFormCustomerCheckboxGroup",
   );
 
+  const searchParams = useSearchParams();
+  const initialValues = searchParams.get("customer")?.split(",") || [];
+
   return (
-    <CheckboxGroup label={t("label")}>
+    <CheckboxGroup
+      name="customer"
+      label={t("label")}
+      defaultValue={initialValues}
+    >
       {customers.map((customer) => (
         <Checkbox
           key={customer.id}

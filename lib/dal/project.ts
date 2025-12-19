@@ -11,6 +11,7 @@ import { cache } from "react";
 import prisma from "../prisma";
 import { ProjectStatus } from "@/generated/prisma/client";
 import { getSessionOrThrow } from "../utils/getSessionOrThrow";
+import { ProjectFiltersType } from "../types/projects";
 
 export const getProjectSummary = cache(async (id: number) => {
   const session = await getSessionOrThrow();
@@ -81,14 +82,18 @@ export const getProjectList = cache(
     page,
     pageSize,
     sort,
+    filters,
   }: {
     page: number;
     pageSize: number;
     sort: string;
+    filters?: ProjectFiltersType;
   }) => {
     const session = await getSessionOrThrow();
     const workspaceId = session.user.workspaceId;
     const skip = (page - 1) * pageSize;
+
+    const where = buildProjectWhereClause(workspaceId, filters);
 
     const orderByMapping: Record<string, any> = {
       title: { title: "asc" },
@@ -100,10 +105,7 @@ export const getProjectList = cache(
     const orderBy = orderByMapping[sort] || { title: "asc" };
 
     const projects = await prisma.project.findMany({
-      where: {
-        workspaceId,
-      },
-
+      where, // Use shared clause
       orderBy: [orderBy],
       skip,
       take: pageSize,
@@ -111,43 +113,19 @@ export const getProjectList = cache(
         id: true,
         title: true,
         deadline: true,
-        creator: {
-          select: {
-            id: true,
-            fullName: true,
-            imageUrl: true,
-          },
-        },
+        creator: { select: { id: true, fullName: true, imageUrl: true } },
         status: true,
-        category: {
-          select: {
-            id: true,
-            name: true,
-          },
-        },
+        category: { select: { id: true, name: true } },
         customer: {
           select: {
             id: true,
             fullName: true,
             imageUrl: true,
-            company: {
-              select: {
-                id: true,
-                name: true,
-              },
-            },
+            company: { select: { id: true, name: true } },
           },
         },
-        _count: {
-          select: {
-            comments: true,
-          },
-        },
-        tasks: {
-          select: {
-            status: true,
-          },
-        },
+        _count: { select: { comments: true } },
+        tasks: { select: { status: true } },
       },
     });
 
@@ -155,16 +133,98 @@ export const getProjectList = cache(
   },
 );
 
-export const getProjectCount = cache(async () => {
+export const getProjectCount = cache(async (filters?: ProjectFiltersType) => {
   const session = await getSessionOrThrow();
   const workspaceId = session.user.workspaceId;
 
   return prisma.project.count({
-    where: {
-      workspaceId,
-    },
+    where: buildProjectWhereClause(workspaceId, filters), // Use shared clause
   });
 });
+
+function buildProjectWhereClause(
+  workspaceId: number,
+  filters?: ProjectFiltersType,
+) {
+  // 1. Destructure the new range filters
+  const { status, category, customer, user, deadline, dateStart, dateEnd } =
+    filters ?? {};
+
+  const now = new Date();
+  const getStartOfDay = (date: Date) =>
+    new Date(new Date(date).setHours(0, 0, 0, 0));
+  const getEndOfDay = (date: Date) =>
+    new Date(new Date(date).setHours(23, 59, 59, 999));
+
+  return {
+    workspaceId,
+    ...(status && {
+      status: { in: status.split(",") as ProjectStatus[] },
+    }),
+    ...(category && {
+      categoryId: { in: category.split(",").map(Number) },
+    }),
+    ...(customer && {
+      customerId: { in: customer.split(",").map(Number) },
+    }),
+    ...(user && {
+      creatorId: { in: user.split(",") },
+    }),
+
+    // --- Combined Deadline Logic ---
+    ...(deadline
+      ? {
+          // Logic for Quick Select Checkboxes (Today, Tomorrow, etc.)
+          OR: deadline.split(",").map((d) => {
+            if (d === "today") {
+              return {
+                deadline: {
+                  gte: getStartOfDay(new Date()),
+                  lte: getEndOfDay(new Date()),
+                },
+              };
+            }
+            if (d === "tomorrow") {
+              const tomorrow = new Date();
+              tomorrow.setDate(tomorrow.getDate() + 1);
+              return {
+                deadline: {
+                  gte: getStartOfDay(tomorrow),
+                  lte: getEndOfDay(tomorrow),
+                },
+              };
+            }
+            if (d === "thisWeek") {
+              const endOfWeek = new Date();
+              const day = endOfWeek.getDay();
+              const diff = day === 0 ? 0 : 7 - day;
+              endOfWeek.setDate(endOfWeek.getDate() + diff);
+              return {
+                deadline: {
+                  gte: getStartOfDay(new Date()),
+                  lte: getEndOfDay(endOfWeek),
+                },
+              };
+            }
+            if (d === "overdue") {
+              return {
+                deadline: { lt: now },
+              };
+            }
+            return {};
+          }),
+        }
+      : dateStart || dateEnd
+        ? {
+            // Logic for Custom Date Range
+            deadline: {
+              ...(dateStart && { gte: getStartOfDay(new Date(dateStart)) }),
+              ...(dateEnd && { lte: getEndOfDay(new Date(dateEnd)) }),
+            },
+          }
+        : {}),
+  };
+}
 
 export const getProjectSummaries = cache(async () => {
   const session = await getSessionOrThrow();

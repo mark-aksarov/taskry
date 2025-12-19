@@ -1,5 +1,8 @@
-import { CheckboxGroup, Checkbox } from "@/components/ui";
+"use client";
+
 import { useTranslations } from "next-intl";
+import { useSearchParams } from "next/navigation";
+import { CheckboxGroup, Checkbox } from "@/components/ui";
 
 export function ProjectFiltersFormCategoryCheckboxGroup({
   categories,
@@ -10,8 +13,15 @@ export function ProjectFiltersFormCategoryCheckboxGroup({
     "projects.ProjectFiltersForm.ProjectFiltersFormCategoryCheckboxGroup",
   );
 
+  const searchParams = useSearchParams();
+  const initialValues = searchParams.get("category")?.split(",") || [];
+
   return (
-    <CheckboxGroup label={t("label")}>
+    <CheckboxGroup
+      name="category"
+      label={t("label")}
+      defaultValue={initialValues}
+    >
       {categories.map((item) => (
         <Checkbox
           key={item.id}

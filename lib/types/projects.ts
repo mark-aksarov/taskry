@@ -112,3 +112,15 @@ const projectCategorySummarySelect = {
 export type ProjectCategorySummaryType = Prisma.ProjectCategoryGetPayload<{
   select: typeof projectCategorySummarySelect;
 }>;
+
+// ProjectFilters
+
+export interface ProjectFiltersType {
+  status?: string;
+  category?: string;
+  customer?: string;
+  user?: string;
+  deadline?: string;
+  dateStart?: string;
+  dateEnd?: string;
+}

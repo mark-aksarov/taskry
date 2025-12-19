@@ -10,20 +10,23 @@ import { deleteProjects } from "@/lib/actions/deleteProjects";
 import { ViewModeLayout } from "@/components/common/ViewMode";
 import { getProjectCount, getProjectList } from "@/lib/dal/project";
 import { updateProjectStatuses } from "@/lib/actions/updateProjectStatuses";
+import { ProjectFiltersType } from "@/lib/types/projects";
 
 interface ProjectsServerContainerProps {
   page: number;
   pageSize: number;
   sort: string;
+  filters?: ProjectFiltersType;
 }
 
 export async function ProjectsServerContainer({
   page,
   pageSize,
   sort,
+  filters,
 }: ProjectsServerContainerProps) {
-  const projects = await getProjectList({ page, pageSize, sort });
-  const count = await getProjectCount();
+  const projects = await getProjectList({ page, pageSize, sort, filters });
+  const count = await getProjectCount(filters);
   const totalPages = Math.ceil(count / pageSize);
 
   // If the page is out of bounds, redirect to the previous page

@@ -52,6 +52,9 @@ export function ToolbarFiltersModalTrigger({
           <DialogBody>{filtersForm}</DialogBody>
           <DialogFooter>
             <Button
+              slot="close"
+              type="submit"
+              form="project-filter-form"
               variant="primary"
               size="medium"
               label={t("applyButtonLabel")}
