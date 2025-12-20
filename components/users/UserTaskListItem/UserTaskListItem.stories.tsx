@@ -1,8 +1,9 @@
-import { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { fn } from "storybook/test";
 import { UserTaskListItem } from "./UserTaskListItem";
+import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withTaskDetailCompact } from "@/components/tasks/TaskDetailCompactClientContainer/decorators";
 import { withTaskComments } from "@/components/tasks/TaskCommentsClientContainer/decorators";
+import { withTaskDetailCompact } from "@/components/tasks/TaskDetailCompactClientContainer/decorators";
 
 const meta = {
   title: "components/users/UserTaskListItem",
@@ -21,5 +22,6 @@ export const Default = {
     deadline: new Date("2025-09-30"),
     commentsCount: 10,
     status: "pending",
+    deleteAction: fn(),
   },
 } satisfies Story;

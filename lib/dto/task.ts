@@ -58,6 +58,7 @@ export type TaskListItemDTO = {
   project: {
     id: number;
     title: string;
+    status: string;
   };
 
   category: {

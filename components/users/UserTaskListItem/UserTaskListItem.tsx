@@ -1,6 +1,12 @@
 "use client";
 
 import {
+  ActionFn,
+  ActionState,
+  DeleteProjectsPayload,
+} from "@/lib/actions/types";
+
+import {
   ListItemInfo,
   ListItemText,
   ListItemTitle,
@@ -29,6 +35,7 @@ export interface UserTaskListItemProps {
   deadline?: Date;
   status: string;
   commentsCount: number;
+  deleteAction: ActionFn<ActionState, DeleteProjectsPayload>;
 }
 
 export const UserTaskListItem = ({
@@ -37,6 +44,7 @@ export const UserTaskListItem = ({
   deadline,
   status,
   commentsCount,
+  deleteAction,
 }: UserTaskListItemProps) => {
   const t = useTranslations();
 
@@ -98,7 +106,13 @@ export const UserTaskListItem = ({
           <TaskCommentsModal taskId={id} />
         </RACDialogTrigger>
       }
-      actionMenuSlot={<TaskItemActionMenuTrigger />}
+      actionMenuSlot={
+        <TaskItemActionMenuTrigger
+          taskId={id}
+          taskTitle={title}
+          deleteAction={deleteAction}
+        />
+      }
     />
   );
 };

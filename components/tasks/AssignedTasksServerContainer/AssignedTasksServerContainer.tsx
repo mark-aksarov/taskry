@@ -8,8 +8,9 @@ import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import { TaskList } from "../TaskList";
 import { TaskListItem } from "../TaskListItem";
-import { Pagination } from "@/components/common/Pagination";
+import { deleteTasks } from "@/lib/actions/deleteTasks";
 import { getTaskCount, getTaskList } from "@/lib/dal/task";
+import { Pagination } from "@/components/common/Pagination";
 
 interface AssignedTasksServerContainerProps {
   page: number;
@@ -68,6 +69,7 @@ export async function AssignedTasksServerContainer({
               status={task.status}
               assignee={task.assignee}
               commentsCount={task.commentsCount}
+              deleteAction={deleteTasks}
             />
           ))}
         </TaskList>

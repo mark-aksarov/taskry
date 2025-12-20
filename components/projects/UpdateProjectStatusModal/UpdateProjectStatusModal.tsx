@@ -1,4 +1,4 @@
-"usse client";
+"use client";
 
 import {
   ActionFn,
@@ -15,7 +15,7 @@ import {
 } from "@/components/common/ConfirmModal";
 
 import { useTranslations } from "next-intl";
-import { DialogHeading } from "@/components/ui";
+import { DialogHeading, ModalProps } from "@/components/ui";
 import { startTransition, useActionState } from "react";
 import { useActionErrorToast } from "@/lib/hooks/useActionErrorToast";
 
@@ -24,12 +24,11 @@ const initialState: ActionState = {
   message: null,
 };
 
-interface UpdateProjectStatusModalProps {
+interface UpdateProjectStatusModalProps
+  extends Pick<ModalProps, "isOpen" | "onOpenChange"> {
   projectId: number;
   nextStatus: string;
   textKey: string;
-  isOpen: boolean;
-  onOpenChange: (isOpen: boolean) => void;
   updateStatusAction: ActionFn<ActionState, UpdateProjectStatusesPayload>;
 }
 
@@ -56,7 +55,7 @@ export function UpdateProjectStatusModal({
       });
     });
 
-    onOpenChange(false);
+    onOpenChange?.(false);
   };
 
   useActionErrorToast(state);

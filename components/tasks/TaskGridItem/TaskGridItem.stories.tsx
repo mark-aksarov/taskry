@@ -1,3 +1,4 @@
+import { fn } from "storybook/internal/test";
 import { TaskGridItem } from "./TaskGridItem";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
@@ -39,6 +40,7 @@ export const Default = {
     commentsCount: 99,
     subtasksTotal: 6,
     subtasksDone: 2,
+    deleteAction: fn(),
   },
 } satisfies Story;
 

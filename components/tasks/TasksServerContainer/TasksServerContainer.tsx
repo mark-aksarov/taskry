@@ -3,6 +3,7 @@ import { TaskGrid } from "../TaskGrid";
 import { TaskListItem } from "../TaskListItem";
 import { TaskGridItem } from "../TaskGridItem";
 import { TaskListItemDTO } from "@/lib/dto/task";
+import { deleteTasks } from "@/lib/actions/deleteTasks";
 import { getTaskCount, getTaskList } from "@/lib/dal/task";
 import { Pagination } from "@/components/common/Pagination";
 import { ViewModeLayout } from "@/components/common/ViewMode";
@@ -48,6 +49,7 @@ export async function TasksServerContainer({
                 key={task.id}
                 category={task.category}
                 project={task.project}
+                deleteAction={deleteTasks}
                 showCheckbox
                 {...getCommonProps(task)}
               />
@@ -60,6 +62,7 @@ export async function TasksServerContainer({
               <TaskGridItem
                 key={task.id}
                 subtasksDone={task.subtasks.done}
+                deleteAction={deleteTasks}
                 {...getCommonProps(task)}
               />
             ))}

@@ -1,6 +1,12 @@
 "use client";
 
 import {
+  ActionFn,
+  ActionState,
+  DeleteProjectsPayload,
+} from "@/lib/actions/types";
+
+import {
   GridItemInfo,
   GridItemText,
   GridItemTitle,
@@ -42,6 +48,7 @@ export interface TaskGridItemProps {
   commentsCount: number;
   subtasksTotal: number;
   subtasksDone: number;
+  deleteAction: ActionFn<ActionState, DeleteProjectsPayload>;
 }
 
 export function TaskGridItem({
@@ -53,6 +60,7 @@ export function TaskGridItem({
   commentsCount,
   subtasksTotal,
   subtasksDone,
+  deleteAction,
 }: TaskGridItemProps) {
   const t = useTranslations("tasks");
 
@@ -79,7 +87,14 @@ export function TaskGridItem({
   return (
     <TaskGridItemLayout
       checkboxSlot={<Checkbox aria-label={title} />}
-      menuTriggerSlot={<TaskItemActionMenuTrigger className="-mr-2" />}
+      menuTriggerSlot={
+        <TaskItemActionMenuTrigger
+          taskId={id}
+          taskTitle={title}
+          deleteAction={deleteAction}
+          className="-mr-2"
+        />
+      }
       titleSlot={
         <GridItemInfo className="flex-auto">
           <GridItemTitle>

@@ -21,6 +21,13 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
+const mockedAction = () => {
+  return new Promise(() => ({
+    status: "success",
+    message: null,
+  })) as any;
+};
+
 export const Default = {
   args: {
     children: (
@@ -38,6 +45,7 @@ export const Default = {
           commentsCount={99}
           subtasksTotal={3}
           subtasksDone={1}
+          deleteAction={mockedAction}
         />
 
         <TaskGridItem
@@ -49,6 +57,7 @@ export const Default = {
           commentsCount={10}
           subtasksTotal={4}
           subtasksDone={2}
+          deleteAction={mockedAction}
         />
 
         <TaskGridItem
@@ -64,6 +73,7 @@ export const Default = {
           commentsCount={6}
           subtasksTotal={2}
           subtasksDone={2}
+          deleteAction={mockedAction}
         />
 
         <TaskGridItem
@@ -79,6 +89,7 @@ export const Default = {
           commentsCount={25}
           subtasksTotal={4}
           subtasksDone={2}
+          deleteAction={mockedAction}
         />
 
         <TaskGridItem
@@ -94,6 +105,7 @@ export const Default = {
           commentsCount={99}
           subtasksTotal={4}
           subtasksDone={3}
+          deleteAction={mockedAction}
         />
 
         <TaskGridItem
@@ -109,6 +121,7 @@ export const Default = {
           commentsCount={99}
           subtasksTotal={3}
           subtasksDone={3}
+          deleteAction={mockedAction}
         />
 
         <TaskGridItem
@@ -124,6 +137,7 @@ export const Default = {
           commentsCount={47}
           subtasksTotal={3}
           subtasksDone={3}
+          deleteAction={mockedAction}
         />
 
         <TaskGridItem
@@ -139,6 +153,7 @@ export const Default = {
           commentsCount={18}
           subtasksTotal={3}
           subtasksDone={1}
+          deleteAction={mockedAction}
         />
 
         <TaskGridItem
@@ -150,6 +165,7 @@ export const Default = {
           commentsCount={67}
           subtasksTotal={3}
           subtasksDone={1}
+          deleteAction={mockedAction}
         />
 
         <TaskGridItem
@@ -161,6 +177,7 @@ export const Default = {
           commentsCount={87}
           subtasksTotal={3}
           subtasksDone={2}
+          deleteAction={mockedAction}
         />
       </>
     ),

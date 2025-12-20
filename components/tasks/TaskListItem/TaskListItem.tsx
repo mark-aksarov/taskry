@@ -1,6 +1,12 @@
 "use client";
 
 import {
+  ActionFn,
+  ActionState,
+  DeleteProjectsPayload,
+} from "@/lib/actions/types";
+
+import {
   ListItemInfo,
   ListItemText,
   ListItemTitle,
@@ -44,10 +50,12 @@ export interface TaskListItemProps {
   project: {
     id: number;
     title: string;
+    status: string;
   };
   status: string;
   commentsCount: number;
   showCheckbox?: boolean;
+  deleteAction: ActionFn<ActionState, DeleteProjectsPayload>;
 }
 
 export const TaskListItem = ({
@@ -60,6 +68,7 @@ export const TaskListItem = ({
   status,
   commentsCount,
   showCheckbox,
+  deleteAction,
 }: TaskListItemProps) => {
   const t = useTranslations("tasks");
 
@@ -178,7 +187,13 @@ export const TaskListItem = ({
           <TaskCommentsModal taskId={id} />
         </RACDialogTrigger>
       }
-      menuTriggerSlot={<TaskItemActionMenuTrigger />}
+      menuTriggerSlot={
+        <TaskItemActionMenuTrigger
+          taskId={id}
+          taskTitle={title}
+          deleteAction={deleteAction}
+        />
+      }
     />
   );
 };

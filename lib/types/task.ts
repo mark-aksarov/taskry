@@ -83,6 +83,7 @@ const taskListItemSelect = {
     select: {
       id: true,
       title: true,
+      status: true,
     },
   },
   category: {

@@ -1,3 +1,4 @@
+import { fn } from "storybook/test";
 import { TaskListItem } from "./TaskListItem";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
@@ -27,11 +28,12 @@ export const Default = {
     id: 1,
     title: "Design landing page",
     deadline: new Date("2025-09-30"),
-    project: { id: 1, title: "Website Redesign" },
+    project: { id: 1, title: "Website Redesign", status: "active" },
     category: { id: 1, name: "Design" },
     status: "pending",
     assignee: { id: "user1", imageUrl: "/man.jpg", fullName: "John Doe" },
     commentsCount: 10,
+    deleteAction: fn(),
   },
 } satisfies Story;
 

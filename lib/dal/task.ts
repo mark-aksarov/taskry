@@ -128,6 +128,7 @@ export const getTaskList = cache(
           select: {
             id: true,
             title: true,
+            status: true,
           },
         },
         category: {
@@ -177,3 +178,19 @@ export const getTaskCount = cache(async (assigneeId?: string) => {
     },
   });
 });
+
+export const deleteTasks = async (ids: number[]) => {
+  const session = await getSessionOrThrow();
+  const workspaceId = session.user.workspaceId;
+
+  const { count } = await prisma.task.deleteMany({
+    where: {
+      workspaceId,
+      id: { in: ids },
+    },
+  });
+
+  if (count === 0) throw new Error("No tasks deleted.");
+
+  return count;
+};

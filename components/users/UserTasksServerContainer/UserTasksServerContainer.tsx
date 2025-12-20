@@ -2,6 +2,7 @@ import { UserTaskList } from "../UserTaskList";
 import { UserTaskListItem } from "../UserTaskListItem";
 import { getTaskCount, getTaskList } from "@/lib/dal/task";
 import { Pagination } from "@/components/common/Pagination";
+import { deleteTasks } from "@/lib/actions/deleteTasks";
 
 interface UserTasksServerContainerProps {
   page: number;
@@ -44,6 +45,7 @@ export async function UserTasksServerContainer({
               deadline={task.deadline}
               commentsCount={task.commentsCount}
               status={task.status}
+              deleteAction={deleteTasks}
             />
           ))}
       </UserTaskList>

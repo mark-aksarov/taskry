@@ -1,9 +1,8 @@
-import { Modal, Dialog, DialogBody } from "@/components/ui";
+import { Modal, Dialog, DialogBody, ModalProps } from "@/components/ui";
 
-interface ConfirmModalProps {
-  isOpen: boolean;
+interface ConfirmModalProps
+  extends Pick<ModalProps, "isOpen" | "onOpenChange"> {
   children: React.ReactNode;
-  onOpenChange: (isOpen: boolean) => void;
 }
 
 export function ConfirmModal({
