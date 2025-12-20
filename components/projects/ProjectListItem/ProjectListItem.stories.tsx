@@ -2,14 +2,18 @@ import { ProjectListItem } from "./ProjectListItem";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withProjectComments } from "../ProjectCommentsClientContainer/decorators";
+import { withProjectsSelectionProvider } from "../ProjectsSelectionContext/decorators";
 import { withUserDetail } from "@/components/users/UserDetailClientContainer/decorators";
 import { withProjectDetailCompact } from "../ProjectDetailCompactClientContainer/decorators";
+import { withEditProjectForm } from "../EditProjectFormClientContainerContext/decorators";
 
 const meta = {
   title: "Components/projects/ProjectListItem",
   component: ProjectListItem,
   tags: ["autodocs"],
   decorators: [
+    withEditProjectForm,
+    withProjectsSelectionProvider,
     withProjectDetailCompact,
     withProjectComments,
     withUserDetail,

@@ -2,11 +2,17 @@ import { z } from "zod";
 import { ProjectsPage } from "./ProjectsPage";
 import { getProjectCount } from "@/lib/dal/project";
 import { ProjectsPageEmpty } from "./ProjectsPageEmpty";
+import { deleteProjects } from "@/lib/actions/deleteProjects";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
+import { updateProjectStatuses } from "@/lib/actions/updateProjectStatuses";
 import { ProjectsServerContainer } from "@/components/projects/ProjectsServerContainer";
 import { ProjectsSelectionProvider } from "@/components/projects/ProjectsSelectionContext";
 import { NewProjectFormServerContainer } from "@/components/projects/NewProjectFormServerContainer";
 import { ProjectFiltersFormServerContainer } from "@/components/projects/ProjectFiltersFormServerContainer";
+import {
+  EditProjectFormClientContainer,
+  EditProjectFormClientContainerContext,
+} from "@/components/projects/EditProjectFormClientContainer";
 
 const searchParamsSchema = z.object({
   page: z.coerce.number().int().positive().catch(1),
@@ -64,25 +70,31 @@ export default async function AppProjectsPage({
   if (!projectCount) return <ProjectsPageEmpty />;
 
   return (
-    <ProjectsSelectionProvider>
-      <ProjectsPage
-        page={page}
-        pageSize={pageSize}
-        sort={sort}
-        filters={{
-          status,
-          category,
-          customer,
-          user,
-          deadline,
-          dateStart,
-          dateEnd,
-          noActiveTasks,
-        }}
-        ProjectFiltersFormContainer={ProjectFiltersFormServerContainer}
-        ProjectsServerContainer={ProjectsServerContainer}
-        NewProjectFormContainer={NewProjectFormServerContainer}
-      />
-    </ProjectsSelectionProvider>
+    <EditProjectFormClientContainerContext.Provider
+      value={EditProjectFormClientContainer}
+    >
+      <ProjectsSelectionProvider>
+        <ProjectsPage
+          page={page}
+          pageSize={pageSize}
+          sort={sort}
+          filters={{
+            status,
+            category,
+            customer,
+            user,
+            deadline,
+            dateStart,
+            dateEnd,
+            noActiveTasks,
+          }}
+          deleteProjectsAction={deleteProjects}
+          updateProjectStatusesAction={updateProjectStatuses}
+          ProjectFiltersFormContainer={ProjectFiltersFormServerContainer}
+          ProjectsServerContainer={ProjectsServerContainer}
+          NewProjectFormContainer={NewProjectFormServerContainer}
+        />
+      </ProjectsSelectionProvider>
+    </EditProjectFormClientContainerContext.Provider>
   );
 }

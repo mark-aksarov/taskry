@@ -1,4 +1,12 @@
 import {
+  ActionFn,
+  DeleteProjectsState,
+  DeleteProjectsPayload,
+  UpdateProjectStatusesState,
+  UpdateProjectStatusesPayload,
+} from "@/lib/actions/types";
+
+import {
   ToolbarDesktop,
   ToolbarMobileTop,
   ToolbarMobileBottom,
@@ -9,11 +17,9 @@ import { Suspense } from "react";
 import { useTranslations } from "next-intl";
 import { PageGrid } from "@/components/common/PageGrid";
 import { ProjectFiltersType } from "@/lib/types/projects";
-import { deleteProjects } from "@/lib/actions/deleteProjects";
 import { ViewModeProvider } from "@/components/common/ViewMode";
 import { PageContainer } from "@/components/common/PageContainer";
 import { ViewModeToggleButtonGroup } from "@/components/common/ViewMode";
-import { updateProjectStatuses } from "@/lib/actions/updateProjectStatuses";
 import { ProjectFormBaseSkeleton } from "@/components/projects/ProjectFormBase";
 import { ProjectFiltersFormSkeleton } from "@/components/projects/ProjectFiltersForm";
 import { ProjectToolbarSortingMenuTrigger } from "@/components/projects/ProjectToolbarSortingMenuTrigger";
@@ -26,6 +32,11 @@ interface ProjectsPageProps {
   pageSize: number;
   sort: string;
   filters?: ProjectFiltersType;
+  deleteProjectsAction: ActionFn<DeleteProjectsState, DeleteProjectsPayload>;
+  updateProjectStatusesAction: ActionFn<
+    UpdateProjectStatusesState,
+    UpdateProjectStatusesPayload
+  >;
   ProjectFiltersFormContainer: React.ComponentType;
   NewProjectFormContainer: React.ComponentType;
   ProjectsServerContainer: React.ComponentType<{
@@ -41,6 +52,8 @@ export function ProjectsPage({
   pageSize,
   sort,
   filters,
+  deleteProjectsAction,
+  updateProjectStatusesAction,
   ProjectFiltersFormContainer,
   NewProjectFormContainer,
   ProjectsServerContainer,
@@ -61,8 +74,8 @@ export function ProjectsPage({
               }
             />
             <ProjectToolbarActionsMenuTrigger
-              deleteAction={deleteProjects}
-              updateStatusAction={updateProjectStatuses}
+              deleteAction={deleteProjectsAction}
+              updateStatusAction={updateProjectStatusesAction}
             />
             <ViewModeToggleButtonGroup className="ml-auto" />
             <ProjectToolbarCreateNewMenuTrigger
@@ -86,8 +99,8 @@ export function ProjectsPage({
               }
             />
             <ProjectToolbarActionsMenuTrigger
-              deleteAction={deleteProjects}
-              updateStatusAction={updateProjectStatuses}
+              deleteAction={deleteProjectsAction}
+              updateStatusAction={updateProjectStatusesAction}
             />
           </ToolbarMobileTop>
 

@@ -7,13 +7,13 @@ import {
   ProjectFormBaseStatusSelect,
   ProjectFormBaseCategorySelect,
   ProjectFormBaseCustomerSelect,
-} from "../ProjectFormBase";
+} from "./ProjectFormBase";
 
 import useSWR from "swr";
+import { EditProjectForm } from "./EditProjectForm";
 import { CalendarDate } from "@internationalized/date";
 import { CustomerSummaryDTO } from "@/lib/dto/customers";
 import { updateProject } from "@/lib/actions/updateProject";
-import { EditProjectForm } from "../EditProjectForm/EditProjectForm";
 
 export function EditProjectFormClientContainer({
   projectId,

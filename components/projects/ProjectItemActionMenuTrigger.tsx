@@ -10,13 +10,13 @@ import {
 
 import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
+import { EditProjectModal } from "./EditProjectModal";
 import { ItemBaseActionMenuTrigger } from "../common/ItemBase";
 import { startTransition, useActionState, useState } from "react";
-import { Check, CircleEllipsis, Clock, Pencil, Trash } from "lucide-react";
 import { UpdateProjectStatusModal } from "./UpdateProjectStatusModal";
-import { DeleteProjectModal } from "./DeleteProjectModal/DeleteProjectModal";
 import { useActionErrorToast } from "@/lib/hooks/useActionErrorToast";
-import { EditProjectModal } from "./EditProjectModal";
+import { Check, CircleEllipsis, Clock, Pencil, Trash } from "lucide-react";
+import { DeleteProjectModal } from "./DeleteProjectModal/DeleteProjectModal";
 
 export type ProjectItemActionMenuTriggerProps = {
   projectId: number;

@@ -3,7 +3,7 @@ import { ModalProps } from "@/components/ui";
 import { Suspense, useContext } from "react";
 import { ProjectFormBaseSkeleton } from "../ProjectFormBase";
 import { FormBaseModal } from "@/components/common/FormBaseModal";
-import { EditProjectFormClientContainerContext } from "../EditProjectFormClientContainer";
+import { EditProjectFormClientContainerContext } from "../EditProjectFormClientContainerContext";
 
 interface EditProjectModalProps
   extends Pick<ModalProps, "isOpen" | "onOpenChange"> {
@@ -19,6 +19,12 @@ export function EditProjectModal({
   const EditProjectFormClientContainer = useContext(
     EditProjectFormClientContainerContext,
   );
+
+  if (!EditProjectFormClientContainer) {
+    throw new Error(
+      "EditProjectModal must be used within a EditProjectFormClientProvider",
+    );
+  }
 
   return (
     <FormBaseModal
