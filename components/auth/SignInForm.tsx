@@ -3,16 +3,16 @@
 import { useTranslations } from "next-intl";
 import { Button, Checkbox, TextField } from "../ui";
 import { startTransition, useActionState } from "react";
-import { ActionFn, SignInState } from "@/lib/actions/types";
+import { ActionFn, ActionState } from "@/lib/actions/types";
 import { AuthCardForm, AuthCardFormErrorText } from "./AuthCard";
 
-const initialState: SignInState = {
+const initialState: ActionState = {
   status: null,
   message: null,
 };
 
 interface SignInFormProps {
-  action: ActionFn<SignInState, FormData>;
+  action: ActionFn<ActionState, FormData>;
 }
 
 export function SignInForm({ action }: SignInFormProps) {

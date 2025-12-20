@@ -8,13 +8,13 @@ import {
 } from "@/components/auth/AuthCard";
 import { useTranslations } from "next-intl";
 import { SignInForm } from "@/components/auth/SignInForm";
-import { ActionFn, SignInState } from "@/lib/actions/types";
+import { ActionFn, ActionState } from "@/lib/actions/types";
 import { AuthCardFooterSignUpItem } from "@/components/auth/AuthCardFooterSignUpItem";
 import { AuthCardFooterForgotPasswordItem } from "@/components/auth/AuthCardFooterForgotPasswordItem";
 
 interface SignInPageProps {
   resetPasswordSuccess?: boolean;
-  action: ActionFn<SignInState>;
+  action: ActionFn<ActionState, FormData>;
 }
 
 export function SignInPage({ resetPasswordSuccess, action }: SignInPageProps) {

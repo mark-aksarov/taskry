@@ -3,16 +3,16 @@
 import { Button, TextField } from "../ui";
 import { useTranslations } from "next-intl";
 import { startTransition, useActionState } from "react";
+import { ActionFn, ActionState } from "@/lib/actions/types";
 import { AuthCardForm, AuthCardFormErrorText } from "./AuthCard";
-import { ActionFn, ResetPasswordState } from "@/lib/actions/types";
 
-const initialState: ResetPasswordState = {
+const initialState: ActionState = {
   status: null,
   message: null,
 };
 
 interface ResetPasswordFormProps {
-  action: ActionFn<ResetPasswordState, FormData>;
+  action: ActionFn<ActionState, FormData>;
 }
 
 export function ResetPasswordForm({ action }: ResetPasswordFormProps) {

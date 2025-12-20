@@ -1,10 +1,8 @@
 import {
   ActionFn,
-  DeleteProjectsState,
+  ActionState,
   DeleteProjectsPayload,
-  UpdateProjectStatusesState,
   UpdateProjectStatusesPayload,
-  CreateProjectCategoryState,
 } from "@/lib/actions/types";
 
 import {
@@ -34,10 +32,10 @@ interface ProjectsPageProps {
   pageSize: number;
   sort: string;
   filters?: ProjectFiltersType;
-  createProjectCategoryAction: ActionFn<CreateProjectCategoryState, FormData>;
-  deleteProjectsAction: ActionFn<DeleteProjectsState, DeleteProjectsPayload>;
+  createProjectCategoryAction: ActionFn<ActionState, FormData>;
+  deleteProjectsAction: ActionFn<ActionState, DeleteProjectsPayload>;
   updateProjectStatusesAction: ActionFn<
-    UpdateProjectStatusesState,
+    ActionState,
     UpdateProjectStatusesPayload
   >;
   ProjectFiltersFormContainer: React.ComponentType;

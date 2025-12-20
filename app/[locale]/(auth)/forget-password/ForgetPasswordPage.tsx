@@ -9,14 +9,14 @@ import {
   AuthCardSubtitle,
 } from "@/components/auth/AuthCard";
 import { useTranslations } from "next-intl";
-import { ActionFn, ForgetPasswordState } from "@/lib/actions/types";
+import { ActionFn, ActionState } from "@/lib/actions/types";
 import { ForgetPasswordForm } from "@/components/auth/ForgetPasswordForm";
 import { AuthCardFooterSignInItem } from "@/components/auth/AuthCardFooterSignInItem";
 
 export function ForgetPasswordPage({
   action,
 }: {
-  action: ActionFn<ForgetPasswordState>;
+  action: ActionFn<ActionState, FormData>;
 }) {
   const t = useTranslations("app.ForgetPasswordPage");
 

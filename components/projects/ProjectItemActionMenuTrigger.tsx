@@ -2,10 +2,9 @@
 
 import {
   ActionFn,
+  ActionState,
   DeleteProjectsPayload,
-  DeleteProjectsState,
   UpdateProjectStatusesPayload,
-  UpdateProjectStatusesState,
 } from "@/lib/actions/types";
 
 import { Item, Key } from "react-stately";
@@ -23,11 +22,8 @@ export type ProjectItemActionMenuTriggerProps = {
   projectTitle: string;
   projectStatus: string;
   className?: string;
-  deleteAction: ActionFn<DeleteProjectsState, DeleteProjectsPayload>;
-  updateStatusAction: ActionFn<
-    UpdateProjectStatusesState,
-    UpdateProjectStatusesPayload
-  >;
+  deleteAction: ActionFn<ActionState, DeleteProjectsPayload>;
+  updateStatusAction: ActionFn<ActionState, UpdateProjectStatusesPayload>;
 };
 
 interface UpdateStatusModalState {
@@ -36,7 +32,7 @@ interface UpdateStatusModalState {
   nextStatus: string;
 }
 
-const initialState: UpdateProjectStatusesState = {
+const initialState: ActionState = {
   status: null,
   message: null,
 };

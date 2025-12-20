@@ -1,11 +1,11 @@
 import { ProjectFormBase } from "../ProjectFormBase";
-import { ActionFn, CreateProjectState } from "@/lib/actions/types";
+import { ActionFn, ActionState } from "@/lib/actions/types";
 
 interface NewProjectFormProps {
   projectStatusSelect: React.ReactNode;
   projectCategorySelect: React.ReactNode;
   projectCustomerSelect: React.ReactNode;
-  formAction: ActionFn<CreateProjectState, FormData>;
+  formAction: ActionFn<ActionState, FormData>;
 }
 
 export function NewProjectForm({

@@ -1,16 +1,16 @@
 import { Button, TextField } from "../ui";
 import { useTranslations } from "next-intl";
 import { startTransition, useActionState } from "react";
+import { ActionFn, ActionState } from "@/lib/actions/types";
 import { AuthCardForm, AuthCardFormErrorText } from "./AuthCard";
-import { ActionFn, ForgetPasswordState } from "@/lib/actions/types";
 
-const initialState: ForgetPasswordState = {
+const initialState: ActionState = {
   status: null,
   message: null,
 };
 
 interface ForgetPasswordFormProps {
-  action: ActionFn<ForgetPasswordState, FormData>;
+  action: ActionFn<ActionState, FormData>;
 }
 
 export function ForgetPasswordForm({ action }: ForgetPasswordFormProps) {

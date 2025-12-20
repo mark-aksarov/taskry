@@ -2,9 +2,9 @@
 
 import z from "zod";
 import { auth } from "../auth";
+import { ActionState } from "./types";
 import { headers } from "next/headers";
 import { revalidatePath } from "next/cache";
-import { CreateProjectState } from "./types";
 import { redirect } from "@/i18n/navigation";
 import { getLocale, getTranslations } from "next-intl/server";
 import { createProjectCategory as createProjectCategoryQuery } from "../dal/project";
@@ -14,9 +14,9 @@ const schema = z.object({
 });
 
 export async function createProjectCategory(
-  _prevState: CreateProjectState,
+  _prevState: ActionState,
   formData: FormData,
-): Promise<CreateProjectState> {
+): Promise<ActionState> {
   const t = await getTranslations("actions.createProjectCategory");
   const locale = await getLocale();
 

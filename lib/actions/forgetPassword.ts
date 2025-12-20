@@ -2,15 +2,15 @@
 
 import * as z from "zod";
 import { auth } from "../auth";
+import { ActionState } from "./types";
 import { APIError } from "better-auth";
 import { redirect } from "@/i18n/navigation";
-import { ForgetPasswordState } from "./types";
 import { getLocale, getTranslations } from "next-intl/server";
 
 export async function forgetPassword(
-  _prevState: ForgetPasswordState,
+  _prevState: ActionState,
   formData: FormData,
-): Promise<ForgetPasswordState> {
+): Promise<ActionState> {
   const locale = await getLocale();
   const t = await getTranslations("auth.ForgetPasswordForm");
 

@@ -2,10 +2,10 @@
 
 import z from "zod";
 import { auth } from "../auth";
+import { ActionState } from "./types";
 import { headers } from "next/headers";
 import { revalidatePath } from "next/cache";
 import { getTranslations } from "next-intl/server";
-import { UpdateProjectStatusesState } from "./types";
 import { ProjectStatus } from "@/generated/prisma/enums";
 import {
   updateProjectStatus as updateProjectStatusQuery,
@@ -18,7 +18,7 @@ const schema = z.object({
 });
 
 export async function updateProjectStatuses(
-  _prevState: UpdateProjectStatusesState,
+  _prevState: ActionState,
   {
     ids,
     nextStatus,
@@ -26,9 +26,9 @@ export async function updateProjectStatuses(
     ids: number[];
     nextStatus: string;
   },
-): Promise<UpdateProjectStatusesState> {
+): Promise<ActionState> {
   const t = await getTranslations("actions.updateProjectStatus");
-  const errorResponse: UpdateProjectStatusesState = {
+  const errorResponse: ActionState = {
     status: "error",
     message: t("error"),
   };

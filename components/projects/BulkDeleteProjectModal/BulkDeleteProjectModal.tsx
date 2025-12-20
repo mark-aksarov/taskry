@@ -2,7 +2,7 @@
 
 import {
   ActionFn,
-  DeleteProjectsState,
+  ActionState,
   DeleteProjectsPayload,
 } from "@/lib/actions/types";
 
@@ -19,7 +19,7 @@ import { DialogHeading } from "@/components/ui";
 import { startTransition, useActionState } from "react";
 import { useActionErrorToast } from "@/lib/hooks/useActionErrorToast";
 
-const initialState: DeleteProjectsState = {
+const initialState: ActionState = {
   status: null,
   message: null,
 };
@@ -28,7 +28,7 @@ interface BulkDeleteProjectModalProps {
   projectIds: number[];
   isOpen: boolean;
   onOpenChange: (isOpen: boolean) => void;
-  deleteAction: ActionFn<DeleteProjectsState, DeleteProjectsPayload>;
+  deleteAction: ActionFn<ActionState, DeleteProjectsPayload>;
 }
 
 export function BulkDeleteProjectModal({

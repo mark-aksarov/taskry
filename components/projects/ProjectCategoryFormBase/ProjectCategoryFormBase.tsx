@@ -1,17 +1,13 @@
 "use client";
 
-import {
-  ActionFn,
-  CreateProjectState,
-  UpdateProjectState,
-} from "@/lib/actions/types";
+import { ActionFn, ActionState } from "@/lib/actions/types";
 import { RACForm } from "@/components/ui";
 import { FormErrorText } from "@/components/common/FormErrorText";
 import { OverlayTriggerStateContext } from "react-aria-components";
 import { startTransition, useActionState, useContext, useEffect } from "react";
 import { ProjectCategoryFormBaseNameTextField } from "./ProjectCategoryFormBaseNameTextField";
 
-const initialState: CreateProjectState = {
+const initialState: ActionState = {
   status: null,
   message: null,
 };
@@ -19,7 +15,7 @@ const initialState: CreateProjectState = {
 interface ProjectCategoryFormBaseProps {
   projectId?: number;
   projectTitleDefaultValue?: string;
-  formAction: ActionFn<CreateProjectState | UpdateProjectState, FormData>;
+  formAction: ActionFn<ActionState, FormData>;
 }
 
 export function ProjectCategoryFormBase({

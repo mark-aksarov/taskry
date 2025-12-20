@@ -2,17 +2,17 @@
 
 import * as z from "zod";
 import { auth } from "../auth";
+import { ActionState } from "./types";
 import { APIError } from "better-auth";
-import { ResetPasswordState } from "./types";
 import { redirect } from "@/i18n/navigation";
 import { buildURL } from "../utils/buildURL";
 import { getLocale, getTranslations } from "next-intl/server";
 
 export async function resetPassword(
   token: string,
-  prevState: ResetPasswordState,
+  prevState: ActionState,
   formData: FormData,
-): Promise<ResetPasswordState> {
+): Promise<ActionState> {
   const locale = await getLocale();
   const t = await getTranslations("auth.ForgetPasswordForm");
 

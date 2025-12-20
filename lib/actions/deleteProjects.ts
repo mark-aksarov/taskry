@@ -2,9 +2,9 @@
 
 import z from "zod";
 import { auth } from "../auth";
+import { ActionState } from "./types";
 import { headers } from "next/headers";
 import { revalidatePath } from "next/cache";
-import { DeleteProjectsState } from "./types";
 import { getTranslations } from "next-intl/server";
 import { deleteProjects as deleteProjectQuery } from "../dal/project";
 
@@ -13,11 +13,11 @@ const schema = z.object({
 });
 
 export async function deleteProjects(
-  _prevState: DeleteProjectsState,
+  _prevState: ActionState,
   ids: number[],
-): Promise<DeleteProjectsState> {
+): Promise<ActionState> {
   const t = await getTranslations("actions.deleteProjectAction");
-  const errorResponse: DeleteProjectsState = {
+  const errorResponse: ActionState = {
     status: "error",
     message: t("error"),
   };

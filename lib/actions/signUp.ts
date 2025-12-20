@@ -3,16 +3,16 @@
 import * as z from "zod";
 import { auth } from "../auth";
 import prisma from "../prisma";
-import { SignUpState } from "./types";
+import { ActionState } from "./types";
 import { APIError } from "better-auth";
 import { headers } from "next/headers";
 import { redirect } from "@/i18n/navigation";
 import { getLocale, getTranslations } from "next-intl/server";
 
 export async function signUp(
-  _prevState: SignUpState,
+  _prevState: ActionState,
   formData: FormData,
-): Promise<SignUpState> {
+): Promise<ActionState> {
   const locale = await getLocale();
   const t = await getTranslations("auth.SignUpForm");
 

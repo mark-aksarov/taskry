@@ -1,11 +1,7 @@
 "use client";
 
-import {
-  ActionFn,
-  CreateProjectState,
-  UpdateProjectState,
-} from "@/lib/actions/types";
 import { RACForm } from "@/components/ui";
+import { ActionFn, ActionState } from "@/lib/actions/types";
 import { FormErrorText } from "@/components/common/FormErrorText";
 import { DateValue, OverlayTriggerStateContext } from "react-aria-components";
 import { startTransition, useActionState, useContext, useEffect } from "react";
@@ -13,7 +9,7 @@ import { ProjectFormBaseTitleTextField } from "./ProjectFormBaseTitleTextField";
 import { ProjectFormBaseDeadlineDatePicker } from "./ProjectFormBaseDeadlineDatePicker";
 import { ProjectFormBaseDescriptionTextField } from "./ProjectFormBaseDescriptionTextField";
 
-const initialState: CreateProjectState = {
+const initialState: ActionState = {
   status: null,
   message: null,
 };
@@ -26,7 +22,7 @@ interface ProjectFormBaseProps {
   projectStatusSelect: React.ReactNode;
   projectCategorySelect: React.ReactNode;
   projectCustomerSelect: React.ReactNode;
-  formAction: ActionFn<CreateProjectState | UpdateProjectState, FormData>;
+  formAction: ActionFn<ActionState, FormData>;
 }
 
 export function ProjectFormBase({

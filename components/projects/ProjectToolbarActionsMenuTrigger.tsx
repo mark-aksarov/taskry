@@ -2,9 +2,8 @@
 
 import {
   ActionFn,
-  DeleteProjectsState,
+  ActionState,
   DeleteProjectsPayload,
-  UpdateProjectStatusesState,
   UpdateProjectStatusesPayload,
 } from "@/lib/actions/types";
 import { useMemo, useState } from "react";
@@ -17,11 +16,8 @@ import { Check, CircleEllipsis, Clock, Trash } from "lucide-react";
 import { BulkUpdateProjectStatusModal } from "./BulkUpdateProjectStatusModal";
 
 interface ProjectToolbarActionsMenuTriggerProps {
-  deleteAction: ActionFn<DeleteProjectsState, DeleteProjectsPayload>;
-  updateStatusAction: ActionFn<
-    UpdateProjectStatusesState,
-    UpdateProjectStatusesPayload
-  >;
+  deleteAction: ActionFn<ActionState, DeleteProjectsPayload>;
+  updateStatusAction: ActionFn<ActionState, UpdateProjectStatusesPayload>;
 }
 
 interface UpdateStatusModalState {

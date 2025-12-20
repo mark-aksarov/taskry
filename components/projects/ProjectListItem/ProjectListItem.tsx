@@ -2,10 +2,9 @@
 
 import {
   ActionFn,
+  ActionState,
   DeleteProjectsPayload,
-  DeleteProjectsState,
   UpdateProjectStatusesPayload,
-  UpdateProjectStatusesState,
 } from "@/lib/actions/types";
 
 import {
@@ -62,11 +61,8 @@ export interface ProjectListItemProps {
   status: string;
   commentsCount: number;
   showCheckbox?: boolean;
-  deleteAction: ActionFn<DeleteProjectsState, DeleteProjectsPayload>;
-  updateStatusAction: ActionFn<
-    UpdateProjectStatusesState,
-    UpdateProjectStatusesPayload
-  >;
+  deleteAction: ActionFn<ActionState, DeleteProjectsPayload>;
+  updateStatusAction: ActionFn<ActionState, UpdateProjectStatusesPayload>;
 }
 
 export const ProjectListItem = ({

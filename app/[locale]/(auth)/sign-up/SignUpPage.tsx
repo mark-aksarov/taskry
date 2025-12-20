@@ -8,11 +8,15 @@ import {
 } from "@/components/auth/AuthCard";
 import { useTranslations } from "next-intl";
 import { SignUpForm } from "@/components/auth/SignUpForm";
-import { ActionFn, SignUpState } from "@/lib/actions/types";
+import { ActionFn, ActionState } from "@/lib/actions/types";
 import { AuthCardFooterSignInItem } from "@/components/auth/AuthCardFooterSignInItem";
 import { AuthCardFooterForgotPasswordItem } from "@/components/auth/AuthCardFooterForgotPasswordItem";
 
-export function SignUpPage({ action }: { action: ActionFn<SignUpState> }) {
+export function SignUpPage({
+  action,
+}: {
+  action: ActionFn<ActionState, FormData>;
+}) {
   const t = useTranslations("app.SignUpPage");
 
   return (

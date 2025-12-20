@@ -2,17 +2,17 @@
 
 import { useTranslations } from "next-intl";
 import { startTransition, useActionState } from "react";
-import { ActionFn, SignUpState } from "@/lib/actions/types";
+import { ActionFn, ActionState } from "@/lib/actions/types";
 import { Button, Checkbox, TextField } from "@/components/ui";
 import { AuthCardForm, AuthCardFormErrorText } from "./AuthCard";
 
-const initialState: SignUpState = {
+const initialState: ActionState = {
   status: null,
   message: null,
 };
 
 interface SignUpFormProps {
-  action: ActionFn<SignUpState, FormData>;
+  action: ActionFn<ActionState, FormData>;
 }
 
 export function SignUpForm({ action }: SignUpFormProps) {

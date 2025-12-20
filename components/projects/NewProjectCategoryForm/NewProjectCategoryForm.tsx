@@ -1,8 +1,8 @@
-import { ActionFn, CreateProjectState } from "@/lib/actions/types";
+import { ActionFn, ActionState } from "@/lib/actions/types";
 import { ProjectCategoryFormBase } from "../ProjectCategoryFormBase";
 
 interface NewProjectCategoryFormProps {
-  formAction: ActionFn<CreateProjectState, FormData>;
+  formAction: ActionFn<ActionState, FormData>;
 }
 
 export function NewProjectCategoryForm({

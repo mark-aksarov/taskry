@@ -1,6 +1,6 @@
 import { DateValue } from "react-aria";
 import { ProjectFormBase } from "../ProjectFormBase";
-import { ActionFn, UpdateProjectState } from "@/lib/actions/types";
+import { ActionFn, ActionState } from "@/lib/actions/types";
 
 interface EditProjectFormProps {
   projectId: number;
@@ -10,7 +10,7 @@ interface EditProjectFormProps {
   projectStatusSelect: React.ReactNode;
   projectCategorySelect: React.ReactNode;
   projectCustomerSelect: React.ReactNode;
-  formAction: ActionFn<UpdateProjectState, FormData>;
+  formAction: ActionFn<ActionState, FormData>;
 }
 
 export function EditProjectForm({

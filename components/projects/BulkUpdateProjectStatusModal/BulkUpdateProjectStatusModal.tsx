@@ -10,8 +10,8 @@ import {
 
 import {
   ActionFn,
+  ActionState,
   UpdateProjectStatusesPayload,
-  UpdateProjectStatusesState,
 } from "@/lib/actions/types";
 
 import { useTranslations } from "next-intl";
@@ -19,7 +19,7 @@ import { DialogHeading } from "@/components/ui";
 import { startTransition, useActionState } from "react";
 import { useActionErrorToast } from "@/lib/hooks/useActionErrorToast";
 
-const initialState: UpdateProjectStatusesState = {
+const initialState: ActionState = {
   status: null,
   message: null,
 };
@@ -29,10 +29,7 @@ interface BulkUpdateProjectStatusModalProps {
   nextStatus: string;
   isOpen: boolean;
   onOpenChange: (isOpen: boolean) => void;
-  updateStatusAction: ActionFn<
-    UpdateProjectStatusesState,
-    UpdateProjectStatusesPayload
-  >;
+  updateStatusAction: ActionFn<ActionState, UpdateProjectStatusesPayload>;
 }
 
 export function BulkUpdateProjectStatusModal({
