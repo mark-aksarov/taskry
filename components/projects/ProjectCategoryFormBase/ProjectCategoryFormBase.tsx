@@ -7,38 +7,26 @@ import {
 } from "@/lib/actions/types";
 import { RACForm } from "@/components/ui";
 import { FormErrorText } from "@/components/common/FormErrorText";
-import { DateValue, OverlayTriggerStateContext } from "react-aria-components";
+import { OverlayTriggerStateContext } from "react-aria-components";
 import { startTransition, useActionState, useContext, useEffect } from "react";
-import { ProjectFormBaseTitleTextField } from "./ProjectFormBaseTitleTextField";
-import { ProjectFormBaseDeadlineDatePicker } from "./ProjectFormBaseDeadlineDatePicker";
-import { ProjectFormBaseDescriptionTextField } from "./ProjectFormBaseDescriptionTextField";
+import { ProjectCategoryFormBaseNameTextField } from "./ProjectCategoryFormBaseNameTextField";
 
 const initialState: CreateProjectState = {
   status: null,
   message: null,
 };
 
-interface ProjectFormBaseProps {
+interface ProjectCategoryFormBaseProps {
   projectId?: number;
   projectTitleDefaultValue?: string;
-  projectDescriptionDefaultValue?: string;
-  projectDeadlineDefaultValue?: DateValue;
-  projectStatusSelect: React.ReactNode;
-  projectCategorySelect: React.ReactNode;
-  projectCustomerSelect: React.ReactNode;
   formAction: ActionFn<CreateProjectState | UpdateProjectState, FormData>;
 }
 
-export function ProjectFormBase({
+export function ProjectCategoryFormBase({
   projectId,
   projectTitleDefaultValue,
-  projectDescriptionDefaultValue,
-  projectDeadlineDefaultValue,
-  projectStatusSelect,
-  projectCategorySelect,
-  projectCustomerSelect,
   formAction,
-}: ProjectFormBaseProps) {
+}: ProjectCategoryFormBaseProps) {
   const { close } = useContext(OverlayTriggerStateContext)!;
 
   const [state, action, pending] = useActionState(formAction, initialState);
@@ -64,18 +52,9 @@ export function ProjectFormBase({
 
         {projectId && <input type="hidden" name="id" value={projectId} />}
 
-        <ProjectFormBaseTitleTextField
+        <ProjectCategoryFormBaseNameTextField
           defaultValue={projectTitleDefaultValue}
         />
-        <ProjectFormBaseDescriptionTextField
-          defaultValue={projectDescriptionDefaultValue}
-        />
-        <ProjectFormBaseDeadlineDatePicker
-          defaultValue={projectDeadlineDefaultValue}
-        />
-        {projectStatusSelect}
-        {projectCategorySelect}
-        {projectCustomerSelect}
       </div>
     </RACForm>
   );

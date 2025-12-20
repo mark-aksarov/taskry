@@ -4,6 +4,7 @@ import {
   DeleteProjectsPayload,
   UpdateProjectStatusesState,
   UpdateProjectStatusesPayload,
+  CreateProjectCategoryState,
 } from "@/lib/actions/types";
 
 import {
@@ -21,6 +22,7 @@ import { ViewModeProvider } from "@/components/common/ViewMode";
 import { PageContainer } from "@/components/common/PageContainer";
 import { ViewModeToggleButtonGroup } from "@/components/common/ViewMode";
 import { ProjectFormBaseSkeleton } from "@/components/projects/ProjectFormBase";
+import { NewProjectCategoryForm } from "@/components/projects/NewProjectCategoryForm";
 import { ProjectFiltersFormSkeleton } from "@/components/projects/ProjectFiltersForm";
 import { ProjectToolbarSortingMenuTrigger } from "@/components/projects/ProjectToolbarSortingMenuTrigger";
 import { ProjectToolbarActionsMenuTrigger } from "@/components/projects/ProjectToolbarActionsMenuTrigger";
@@ -32,6 +34,7 @@ interface ProjectsPageProps {
   pageSize: number;
   sort: string;
   filters?: ProjectFiltersType;
+  createProjectCategoryAction: ActionFn<CreateProjectCategoryState, FormData>;
   deleteProjectsAction: ActionFn<DeleteProjectsState, DeleteProjectsPayload>;
   updateProjectStatusesAction: ActionFn<
     UpdateProjectStatusesState,
@@ -52,6 +55,7 @@ export function ProjectsPage({
   pageSize,
   sort,
   filters,
+  createProjectCategoryAction,
   deleteProjectsAction,
   updateProjectStatusesAction,
   ProjectFiltersFormContainer,
@@ -84,7 +88,11 @@ export function ProjectsPage({
                   <NewProjectFormContainer />
                 </Suspense>
               }
-              newProjectCategoryForm={<></>}
+              newProjectCategoryForm={
+                <NewProjectCategoryForm
+                  formAction={createProjectCategoryAction}
+                />
+              }
             />
           </ToolbarDesktop>
 
@@ -112,7 +120,11 @@ export function ProjectsPage({
                   <NewProjectFormContainer />
                 </Suspense>
               }
-              newProjectCategoryForm={<></>}
+              newProjectCategoryForm={
+                <NewProjectCategoryForm
+                  formAction={createProjectCategoryAction}
+                />
+              }
             />
           </ToolbarMobileBottom>
 

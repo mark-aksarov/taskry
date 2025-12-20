@@ -95,6 +95,10 @@ export interface CreateProjectInputDTO {
   customerId?: number;
 }
 
+export interface CreateProjectCategoryInputDTO {
+  name: string;
+}
+
 export interface UpdateProjectInputDTO {
   id: number;
   title: string;

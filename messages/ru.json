@@ -5,6 +5,10 @@
     },
     "updateProjectStatus": {
       "error": "Что-то пошло не так. Обновление не удалось."
+    },
+    "createProjectCategory": {
+      "invalidInput": "Некорректный ввод. Пожалуйста, проверьте данные и попробуйте снова.",
+      "internalServerError": "Произошла внутренняя ошибка сервера. Пожалуйста, попробуйте позже."
     }
   },
 
@@ -485,6 +489,11 @@
       "submitButtonLabel": "Создать проект"
     },
 
+    "NewProjectCategoryModal": {
+      "title": "Новая категория проекта",
+      "submitButtonLabel": "Создать категорию"
+    },
+
     "EditProjectModal": {
       "title": "Изменить проект",
       "submitButtonLabel": "Обновить проект"
@@ -556,6 +565,18 @@
         "server": {
           "invalidInput": "Некорректный ввод. Пожалуйста, проверьте данные и попробуйте снова.",
           "internalServerError": "Произошла внутренняя ошибка сервера. Пожалуйста, попробуйте позже."
+        }
+      }
+    },
+
+    "ProjectCategoryFormBase": {
+      "title": {
+        "label": "Название",
+        "placeholder": "Введите название",
+
+        "validation": {
+          "required": "Требуется название",
+          "tooLong": "Название слишком длинное"
         }
       }
     },

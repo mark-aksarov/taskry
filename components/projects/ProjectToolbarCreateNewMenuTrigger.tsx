@@ -13,6 +13,7 @@ import { Blocks, FolderClosed, Plus } from "lucide-react";
 import { Item, useOverlayTriggerState } from "react-stately";
 import { NewProjectModal } from "@/components/projects/NewProjectModal";
 import { ResponsiveMenuTrigger } from "@/components/common/ResponsiveMenuTrigger";
+import { NewProjectCategoryModal } from "./NewProjectCategoryModal/NewProjectCategoryModal";
 
 interface ProjectToolbarCreateNewMenuTriggerProps {
   newProjectForm: React.ReactNode;
@@ -75,7 +76,11 @@ export function ProjectToolbarCreateNewMenuTrigger({
         onOpenChange={setOpenProjectModal}
       />
 
-      {/* ProjectCategoryModal */}
+      <NewProjectCategoryModal
+        newProjectCategoryForm={newProjectCategoryForm}
+        isOpen={openProjectCategoryModal}
+        onOpenChange={setOpenProjectCategoryModal}
+      />
     </>
   );
 }

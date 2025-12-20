@@ -8,3 +8,17 @@ type EditProjectFormClientContainerType = React.ComponentType<{
 
 export const EditProjectFormClientContainerContext =
   createContext<EditProjectFormClientContainerType | null>(null);
+
+export function EditProjectFormClientContainerProvider({
+  children,
+  value,
+}: {
+  children: React.ReactNode;
+  value: EditProjectFormClientContainerType;
+}) {
+  return (
+    <EditProjectFormClientContainerContext.Provider value={value}>
+      {children}
+    </EditProjectFormClientContainerContext.Provider>
+  );
+}

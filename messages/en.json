@@ -5,6 +5,10 @@
     },
     "updateProjectStatus": {
       "error": "Something went wrong. Update failed."
+    },
+    "createProjectCategory": {
+      "invalidInput": "Invalid input. Please check your data and try again.",
+      "internalServerError": "An internal server error occurred. Please try again later."
     }
   },
 
@@ -485,6 +489,11 @@
       "submitButtonLabel": "Create Project"
     },
 
+    "NewProjectCategoryModal": {
+      "title": "New project category",
+      "submitButtonLabel": "Create category"
+    },
+
     "EditProjectModal": {
       "title": "Edit Project",
       "submitButtonLabel": "Update Project"
@@ -556,6 +565,18 @@
         "server": {
           "invalidInput": "Invalid input. Please check your data and try again.",
           "internalServerError": "An internal server error occurred. Please try again later."
+        }
+      }
+    },
+
+    "ProjectCategoryFormBase": {
+      "title": {
+        "label": "Name",
+        "placeholder": "Typing name",
+
+        "validation": {
+          "required": "Name is required",
+          "tooLong": "Name is too long"
         }
       }
     },

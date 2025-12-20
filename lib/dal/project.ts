@@ -13,7 +13,11 @@ import prisma from "../prisma";
 import { ProjectFiltersType } from "../types/projects";
 import { ProjectStatus } from "@/generated/prisma/client";
 import { getSessionOrThrow } from "../utils/getSessionOrThrow";
-import { CreateProjectInputDTO, UpdateProjectInputDTO } from "../dto/project";
+import {
+  CreateProjectCategoryInputDTO,
+  CreateProjectInputDTO,
+  UpdateProjectInputDTO,
+} from "../dto/project";
 
 export const getProjectSummary = cache(async (id: number) => {
   const session = await getSessionOrThrow();
@@ -513,5 +517,19 @@ export const bulkUpdateProjectStatuses = async (
     }
 
     return projectIds;
+  });
+};
+
+export const createProjectCategory = async (
+  projectCategory: CreateProjectCategoryInputDTO,
+) => {
+  const session = await getSessionOrThrow();
+  const workspaceId = session.user.workspaceId;
+
+  return await prisma.projectCategory.create({
+    data: {
+      ...projectCategory,
+      workspaceId,
+    },
   });
 };

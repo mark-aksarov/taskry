@@ -56,3 +56,8 @@ export type UpdateProjectState = {
   status: ActionStatus;
   message: string | null;
 };
+
+export type CreateProjectCategoryState = {
+  status: ActionStatus;
+  message: string | null;
+};

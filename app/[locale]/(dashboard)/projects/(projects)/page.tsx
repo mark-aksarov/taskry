@@ -5,14 +5,13 @@ import { ProjectsPageEmpty } from "./ProjectsPageEmpty";
 import { deleteProjects } from "@/lib/actions/deleteProjects";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { updateProjectStatuses } from "@/lib/actions/updateProjectStatuses";
+import { createProjectCategory } from "@/lib/actions/createProjectCategory";
 import { ProjectsServerContainer } from "@/components/projects/ProjectsServerContainer";
 import { ProjectsSelectionProvider } from "@/components/projects/ProjectsSelectionContext";
 import { NewProjectFormServerContainer } from "@/components/projects/NewProjectFormServerContainer";
+import { EditProjectFormClientContainer } from "@/components/projects/EditProjectFormClientContainer";
 import { ProjectFiltersFormServerContainer } from "@/components/projects/ProjectFiltersFormServerContainer";
-import {
-  EditProjectFormClientContainer,
-  EditProjectFormClientContainerContext,
-} from "@/components/projects/EditProjectFormClientContainer";
+import { EditProjectFormClientContainerProvider } from "@/components/projects/EditProjectFormClientContainerContext";
 
 const searchParamsSchema = z.object({
   page: z.coerce.number().int().positive().catch(1),
@@ -70,7 +69,7 @@ export default async function AppProjectsPage({
   if (!projectCount) return <ProjectsPageEmpty />;
 
   return (
-    <EditProjectFormClientContainerContext.Provider
+    <EditProjectFormClientContainerProvider
       value={EditProjectFormClientContainer}
     >
       <ProjectsSelectionProvider>
@@ -88,6 +87,7 @@ export default async function AppProjectsPage({
             dateEnd,
             noActiveTasks,
           }}
+          createProjectCategoryAction={createProjectCategory}
           deleteProjectsAction={deleteProjects}
           updateProjectStatusesAction={updateProjectStatuses}
           ProjectFiltersFormContainer={ProjectFiltersFormServerContainer}
@@ -95,6 +95,6 @@ export default async function AppProjectsPage({
           NewProjectFormContainer={NewProjectFormServerContainer}
         />
       </ProjectsSelectionProvider>
-    </EditProjectFormClientContainerContext.Provider>
+    </EditProjectFormClientContainerProvider>
   );
 }

@@ -1,3 +1,5 @@
+"use client";
+
 import { useTranslations } from "next-intl";
 import { ModalProps } from "@/components/ui";
 import { Suspense, useContext } from "react";
