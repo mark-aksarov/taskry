@@ -1,19 +1,18 @@
 "use client";
 
-import { useActionState } from "react";
 import { Button, TextField } from "../ui";
 import { useTranslations } from "next-intl";
+import { startTransition, useActionState } from "react";
 import { AuthCardForm, AuthCardFormErrorText } from "./AuthCard";
 import { ActionFn, ResetPasswordState } from "@/lib/actions/types";
 
 const initialState: ResetPasswordState = {
   status: null,
   message: null,
-  payload: null,
 };
 
 interface ResetPasswordFormProps {
-  action: ActionFn<ResetPasswordState>;
+  action: ActionFn<ResetPasswordState, FormData>;
 }
 
 export function ResetPasswordForm({ action }: ResetPasswordFormProps) {
@@ -21,8 +20,14 @@ export function ResetPasswordForm({ action }: ResetPasswordFormProps) {
 
   const [state, formAction, isPending] = useActionState(action, initialState);
 
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    startTransition(() => formAction(formData));
+  }
+
   return (
-    <AuthCardForm action={formAction}>
+    <AuthCardForm onSubmit={handleSubmit}>
       {state.status === "error" && state.message && (
         <AuthCardFormErrorText>{state.message}</AuthCardFormErrorText>
       )}

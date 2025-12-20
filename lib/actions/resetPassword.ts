@@ -30,7 +30,6 @@ export async function resetPassword(
     return {
       status: "error",
       message: t("validation.server.invalidCredentials"),
-      payload: formData,
     };
   }
 
@@ -49,14 +48,12 @@ export async function resetPassword(
       return {
         status: "error",
         message: t(`validation.server.${error.status.toLowerCase()}`),
-        payload: formData,
       };
     }
 
     return {
       status: "error",
       message: t("validation.server.internalServerError"),
-      payload: formData,
     };
   }
 
@@ -69,6 +66,5 @@ export async function resetPassword(
   return {
     status: "success",
     message: null,
-    payload: formData,
   };
 }

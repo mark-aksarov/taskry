@@ -1,7 +1,7 @@
 "use client";
 
-import { useActionState } from "react";
 import { useTranslations } from "next-intl";
+import { startTransition, useActionState } from "react";
 import { ActionFn, SignUpState } from "@/lib/actions/types";
 import { Button, Checkbox, TextField } from "@/components/ui";
 import { AuthCardForm, AuthCardFormErrorText } from "./AuthCard";
@@ -9,19 +9,24 @@ import { AuthCardForm, AuthCardFormErrorText } from "./AuthCard";
 const initialState: SignUpState = {
   status: null,
   message: null,
-  payload: null,
 };
 
 interface SignUpFormProps {
-  action: ActionFn<SignUpState>;
+  action: ActionFn<SignUpState, FormData>;
 }
 
 export function SignUpForm({ action }: SignUpFormProps) {
   const t = useTranslations("auth.SignUpForm");
   const [state, formAction, isPending] = useActionState(action, initialState);
 
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    startTransition(() => formAction(formData));
+  }
+
   return (
-    <AuthCardForm action={formAction}>
+    <AuthCardForm onSubmit={handleSubmit}>
       {state.status === "error" && state.message && (
         <AuthCardFormErrorText>{state.message}</AuthCardFormErrorText>
       )}
@@ -32,7 +37,6 @@ export function SignUpForm({ action }: SignUpFormProps) {
         isRequired
         minLength={5}
         maxLength={50}
-        defaultValue={state.payload?.get("name") as string}
         errorMessage={(validation) => {
           const details = validation.validationDetails;
 
@@ -57,7 +61,6 @@ export function SignUpForm({ action }: SignUpFormProps) {
         placeholder={t("email.placeholder")}
         isRequired
         maxLength={254}
-        defaultValue={state.payload?.get("email") as string}
         errorMessage={(validation) => {
           const details = validation.validationDetails;
 
@@ -100,11 +103,7 @@ export function SignUpForm({ action }: SignUpFormProps) {
         }}
       />
 
-      <Checkbox
-        className="font-normal"
-        name="rememberMe"
-        defaultSelected={state.payload?.get("rememberMe") === "on"}
-      >
+      <Checkbox className="font-normal" name="rememberMe">
         {t("rememberMe")}
       </Checkbox>
 

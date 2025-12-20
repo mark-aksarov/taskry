@@ -1,3 +1,4 @@
+import { fn } from "storybook/test";
 import { AuthCard } from "./AuthCard";
 import { AuthCardBody } from "./AuthCardBody";
 import { AuthCardForm } from "./AuthCardForm";
@@ -31,7 +32,7 @@ export const Default = {
           <AuthCardSubtitle>Please sign in to your account.</AuthCardSubtitle>
         </AuthCardHeader>
         <AuthCardBody>
-          <AuthCardForm action={() => {}}>
+          <AuthCardForm onSubmit={fn()}>
             <TextField label="Email" placeholder="Enter your email" />
             <TextField
               label="Password"

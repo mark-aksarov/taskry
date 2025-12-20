@@ -27,7 +27,6 @@ export async function signUp(
     return {
       status: "success",
       message: null,
-      payload: formData,
     };
   }
 
@@ -50,7 +49,6 @@ export async function signUp(
     return {
       status: "error",
       message: t("validation.server.invalidInputData"),
-      payload: formData,
     };
   }
 
@@ -82,7 +80,6 @@ export async function signUp(
       return {
         status: "error",
         message: t(`validation.server.${error.status.toLowerCase()}`),
-        payload: formData,
       };
     }
 
@@ -90,7 +87,6 @@ export async function signUp(
     return {
       status: "error",
       message: t("validation.server.internalServerError"),
-      payload: formData,
     };
   }
 
@@ -103,6 +99,5 @@ export async function signUp(
   return {
     status: "success",
     message: null,
-    payload: formData,
   };
 }

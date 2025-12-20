@@ -9,25 +9,21 @@ type ActionStatus = "error" | "success" | null;
 export type SignInState = {
   status: ActionStatus;
   message: string | null;
-  payload: FormData | null;
 };
 
 export type SignUpState = {
   status: ActionStatus;
   message: string | null;
-  payload: FormData | null;
 };
 
 export type ForgetPasswordState = {
   status: ActionStatus;
   message: string | null;
-  payload: FormData | null;
 };
 
 export type ResetPasswordState = {
   status: ActionStatus;
   message: string | null;
-  payload: FormData | null;
 };
 
 export type DeleteProjectsState = {

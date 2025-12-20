@@ -1,17 +1,16 @@
-import { useActionState } from "react";
 import { Button, TextField } from "../ui";
 import { useTranslations } from "next-intl";
+import { startTransition, useActionState } from "react";
 import { AuthCardForm, AuthCardFormErrorText } from "./AuthCard";
 import { ActionFn, ForgetPasswordState } from "@/lib/actions/types";
 
 const initialState: ForgetPasswordState = {
   status: null,
   message: null,
-  payload: null,
 };
 
 interface ForgetPasswordFormProps {
-  action: ActionFn<ForgetPasswordState>;
+  action: ActionFn<ForgetPasswordState, FormData>;
 }
 
 export function ForgetPasswordForm({ action }: ForgetPasswordFormProps) {
@@ -19,8 +18,14 @@ export function ForgetPasswordForm({ action }: ForgetPasswordFormProps) {
 
   const [state, formAction, isPending] = useActionState(action, initialState);
 
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    startTransition(() => formAction(formData));
+  }
+
   return (
-    <AuthCardForm action={formAction}>
+    <AuthCardForm onSubmit={handleSubmit}>
       {state.status === "error" && state.message && (
         <AuthCardFormErrorText>{state.message}</AuthCardFormErrorText>
       )}
@@ -31,7 +36,6 @@ export function ForgetPasswordForm({ action }: ForgetPasswordFormProps) {
         isRequired
         maxLength={254}
         name="email"
-        defaultValue={state.payload?.get("email") as string}
         errorMessage={(validation) => {
           const details = validation.validationDetails;
 
@@ -48,6 +52,7 @@ export function ForgetPasswordForm({ action }: ForgetPasswordFormProps) {
           return "";
         }}
       />
+
       <Button
         type="submit"
         size="medium"

@@ -27,7 +27,6 @@ export async function signIn(
     return {
       status: "success",
       message: null,
-      payload: formData,
     };
   }
 
@@ -49,7 +48,6 @@ export async function signIn(
     return {
       status: "error",
       message: t("validation.server.invalidCredentials"),
-      payload: formData,
     };
   }
 
@@ -75,7 +73,6 @@ export async function signIn(
       return {
         status: "error",
         message: t(`validation.server.${error.status.toLowerCase()}`),
-        payload: formData,
       };
     }
 
@@ -83,7 +80,6 @@ export async function signIn(
     return {
       status: "error",
       message: t("validation.server.internalServerError"),
-      payload: formData,
     };
   }
 
@@ -96,6 +92,5 @@ export async function signIn(
   return {
     status: "success",
     message: null,
-    payload: formData,
   };
 }

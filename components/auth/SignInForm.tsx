@@ -1,19 +1,18 @@
 "use client";
 
-import { useActionState } from "react";
 import { useTranslations } from "next-intl";
 import { Button, Checkbox, TextField } from "../ui";
+import { startTransition, useActionState } from "react";
 import { ActionFn, SignInState } from "@/lib/actions/types";
 import { AuthCardForm, AuthCardFormErrorText } from "./AuthCard";
 
 const initialState: SignInState = {
   status: null,
   message: null,
-  payload: null,
 };
 
 interface SignInFormProps {
-  action: ActionFn<SignInState>;
+  action: ActionFn<SignInState, FormData>;
 }
 
 export function SignInForm({ action }: SignInFormProps) {
@@ -21,8 +20,14 @@ export function SignInForm({ action }: SignInFormProps) {
 
   const [state, formAction, isPending] = useActionState(action, initialState);
 
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    startTransition(() => formAction(formData));
+  }
+
   return (
-    <AuthCardForm action={formAction}>
+    <AuthCardForm onSubmit={handleSubmit}>
       {state.status === "error" && state.message && (
         <AuthCardFormErrorText>{state.message}</AuthCardFormErrorText>
       )}
@@ -33,7 +38,6 @@ export function SignInForm({ action }: SignInFormProps) {
         isRequired
         maxLength={254}
         name="email"
-        defaultValue={state.payload?.get("email") as string}
         errorMessage={(validation) => {
           const details = validation.validationDetails;
           if (details.valueMissing) {
@@ -48,6 +52,7 @@ export function SignInForm({ action }: SignInFormProps) {
           return "";
         }}
       />
+
       <TextField
         label={t("password.label")}
         type="password"
@@ -70,13 +75,11 @@ export function SignInForm({ action }: SignInFormProps) {
           return "";
         }}
       />
-      <Checkbox
-        className="font-normal"
-        name="rememberMe"
-        defaultSelected={state.payload?.get("rememberMe") === "on"}
-      >
+
+      <Checkbox className="font-normal" name="rememberMe">
         {t("rememberMe")}
       </Checkbox>
+
       <Button
         type="submit"
         size="medium"
