@@ -33,6 +33,8 @@ export const TaskToolbarActionsMenuTrigger = ({
   const handleAction = (key: Key) => {
     const ids = extractCheckedItemIds();
 
+    console.log(ids);
+
     if (key === "delete") {
       if (ids.length > 0) {
         setDeleteModal({

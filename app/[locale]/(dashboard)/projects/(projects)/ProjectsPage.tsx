@@ -19,6 +19,7 @@ import { ProjectFiltersType } from "@/lib/types/projects";
 import { ViewModeProvider } from "@/components/common/ViewMode";
 import { PageContainer } from "@/components/common/PageContainer";
 import { ViewModeToggleButtonGroup } from "@/components/common/ViewMode";
+import { ItemsContainerProvider } from "@/components/common/ItemsContainer";
 import { ProjectFormBaseSkeleton } from "@/components/projects/ProjectFormBase";
 import { NewProjectCategoryForm } from "@/components/projects/NewProjectCategoryForm";
 import { ProjectFiltersFormSkeleton } from "@/components/projects/ProjectFiltersForm";
@@ -66,72 +67,74 @@ export function ProjectsPage({
     <PageContainer>
       <PageGrid>
         <ViewModeProvider>
-          <ToolbarDesktop>
-            <ProjectToolbarSortingMenuTrigger />
-            <ProjectToolbarFiltersModalTrigger
-              filtersForm={
-                <Suspense fallback={<ProjectFiltersFormSkeleton />}>
-                  <ProjectFiltersFormContainer />
-                </Suspense>
-              }
-            />
-            <ProjectToolbarActionsMenuTrigger
-              deleteAction={deleteProjectsAction}
-              updateStatusAction={updateProjectStatusesAction}
-            />
-            <ViewModeToggleButtonGroup className="ml-auto" />
-            <ProjectToolbarCreateNewMenuTrigger
-              newProjectForm={
-                <Suspense fallback={<ProjectFormBaseSkeleton />}>
-                  <NewProjectFormContainer />
-                </Suspense>
-              }
-              newProjectCategoryForm={
-                <NewProjectCategoryForm
-                  formAction={createProjectCategoryAction}
-                />
-              }
-            />
-          </ToolbarDesktop>
+          <ItemsContainerProvider>
+            <ToolbarDesktop>
+              <ProjectToolbarSortingMenuTrigger />
+              <ProjectToolbarFiltersModalTrigger
+                filtersForm={
+                  <Suspense fallback={<ProjectFiltersFormSkeleton />}>
+                    <ProjectFiltersFormContainer />
+                  </Suspense>
+                }
+              />
+              <ProjectToolbarActionsMenuTrigger
+                deleteAction={deleteProjectsAction}
+                updateStatusAction={updateProjectStatusesAction}
+              />
+              <ViewModeToggleButtonGroup className="ml-auto" />
+              <ProjectToolbarCreateNewMenuTrigger
+                newProjectForm={
+                  <Suspense fallback={<ProjectFormBaseSkeleton />}>
+                    <NewProjectFormContainer />
+                  </Suspense>
+                }
+                newProjectCategoryForm={
+                  <NewProjectCategoryForm
+                    formAction={createProjectCategoryAction}
+                  />
+                }
+              />
+            </ToolbarDesktop>
 
-          <ToolbarMobileTop>
-            <ToolbarMobileHeading>{t("heading")}</ToolbarMobileHeading>
-            <ProjectToolbarSortingMenuTrigger />
-            <ProjectToolbarFiltersModalTrigger
-              filtersForm={
-                <Suspense fallback={<ProjectFiltersFormSkeleton />}>
-                  <ProjectFiltersFormContainer />
-                </Suspense>
-              }
-            />
-            <ProjectToolbarActionsMenuTrigger
-              deleteAction={deleteProjectsAction}
-              updateStatusAction={updateProjectStatusesAction}
-            />
-          </ToolbarMobileTop>
+            <ToolbarMobileTop>
+              <ToolbarMobileHeading>{t("heading")}</ToolbarMobileHeading>
+              <ProjectToolbarSortingMenuTrigger />
+              <ProjectToolbarFiltersModalTrigger
+                filtersForm={
+                  <Suspense fallback={<ProjectFiltersFormSkeleton />}>
+                    <ProjectFiltersFormContainer />
+                  </Suspense>
+                }
+              />
+              <ProjectToolbarActionsMenuTrigger
+                deleteAction={deleteProjectsAction}
+                updateStatusAction={updateProjectStatusesAction}
+              />
+            </ToolbarMobileTop>
 
-          <ToolbarMobileBottom>
-            <ViewModeToggleButtonGroup />
-            <ProjectToolbarCreateNewMenuTrigger
-              newProjectForm={
-                <Suspense fallback={<ProjectFormBaseSkeleton />}>
-                  <NewProjectFormContainer />
-                </Suspense>
-              }
-              newProjectCategoryForm={
-                <NewProjectCategoryForm
-                  formAction={createProjectCategoryAction}
-                />
-              }
-            />
-          </ToolbarMobileBottom>
+            <ToolbarMobileBottom>
+              <ViewModeToggleButtonGroup />
+              <ProjectToolbarCreateNewMenuTrigger
+                newProjectForm={
+                  <Suspense fallback={<ProjectFormBaseSkeleton />}>
+                    <NewProjectFormContainer />
+                  </Suspense>
+                }
+                newProjectCategoryForm={
+                  <NewProjectCategoryForm
+                    formAction={createProjectCategoryAction}
+                  />
+                }
+              />
+            </ToolbarMobileBottom>
 
-          <ProjectsServerContainer
-            page={page}
-            pageSize={pageSize}
-            sort={sort}
-            filters={filters}
-          />
+            <ProjectsServerContainer
+              page={page}
+              pageSize={pageSize}
+              sort={sort}
+              filters={filters}
+            />
+          </ItemsContainerProvider>
         </ViewModeProvider>
       </PageGrid>
     </PageContainer>

@@ -18,6 +18,7 @@ import { TaskToolbarSortingMenuTrigger } from "@/components/tasks/TaskToolbarSor
 import { TaskToolbarActionsMenuTrigger } from "@/components/tasks/TaskToolbarActionsMenuTrigger";
 import { TaskToolbarFiltersModalTrigger } from "@/components/tasks/TaskToolbarFiltersModalTrigger";
 import { TaskToolbarCreateNewMenuTrigger } from "@/components/tasks/TaskToolbarCreateNewMenuTrigger";
+import { ItemsContainerProvider } from "@/components/common/ItemsContainer";
 
 interface TasksPageProps {
   page: number;
@@ -45,54 +46,56 @@ export function TasksPage({
     <PageContainer>
       <PageGrid>
         <ViewModeProvider>
-          <ToolbarDesktop>
-            <TaskToolbarSortingMenuTrigger />
-            <TaskToolbarFiltersModalTrigger
-              filtersForm={
-                <Suspense fallback={<TaskFiltersFormSkeleton />}>
-                  <TaskFiltersFormContainer />
-                </Suspense>
-              }
-            />
-            <TaskToolbarActionsMenuTrigger deleteAction={deleteTasksAction} />
-            <ViewModeToggleButtonGroup className="ml-auto" />
+          <ItemsContainerProvider>
+            <ToolbarDesktop>
+              <TaskToolbarSortingMenuTrigger />
+              <TaskToolbarFiltersModalTrigger
+                filtersForm={
+                  <Suspense fallback={<TaskFiltersFormSkeleton />}>
+                    <TaskFiltersFormContainer />
+                  </Suspense>
+                }
+              />
+              <TaskToolbarActionsMenuTrigger deleteAction={deleteTasksAction} />
+              <ViewModeToggleButtonGroup className="ml-auto" />
 
-            <TaskToolbarCreateNewMenuTrigger
-              newTaskForm={
-                <Suspense fallback={<TaskFormBaseSkeleton />}>
-                  <NewTaskFormContainer />
-                </Suspense>
-              }
-              newTaskCategoryForm={<></>}
-            />
-          </ToolbarDesktop>
+              <TaskToolbarCreateNewMenuTrigger
+                newTaskForm={
+                  <Suspense fallback={<TaskFormBaseSkeleton />}>
+                    <NewTaskFormContainer />
+                  </Suspense>
+                }
+                newTaskCategoryForm={<></>}
+              />
+            </ToolbarDesktop>
 
-          <ToolbarMobileTop>
-            <ToolbarMobileHeading>{t("heading")}</ToolbarMobileHeading>
-            <TaskToolbarSortingMenuTrigger />
-            <TaskToolbarFiltersModalTrigger
-              filtersForm={
-                <Suspense fallback={<TaskFiltersFormSkeleton />}>
-                  <TaskFiltersFormContainer />
-                </Suspense>
-              }
-            />
-            <TaskToolbarActionsMenuTrigger deleteAction={deleteTasksAction} />
-          </ToolbarMobileTop>
+            <ToolbarMobileTop>
+              <ToolbarMobileHeading>{t("heading")}</ToolbarMobileHeading>
+              <TaskToolbarSortingMenuTrigger />
+              <TaskToolbarFiltersModalTrigger
+                filtersForm={
+                  <Suspense fallback={<TaskFiltersFormSkeleton />}>
+                    <TaskFiltersFormContainer />
+                  </Suspense>
+                }
+              />
+              <TaskToolbarActionsMenuTrigger deleteAction={deleteTasksAction} />
+            </ToolbarMobileTop>
 
-          <ToolbarMobileBottom>
-            <ViewModeToggleButtonGroup />
-            <TaskToolbarCreateNewMenuTrigger
-              newTaskForm={
-                <Suspense fallback={<TaskFormBaseSkeleton />}>
-                  <NewTaskFormContainer />
-                </Suspense>
-              }
-              newTaskCategoryForm={<></>}
-            />
-          </ToolbarMobileBottom>
+            <ToolbarMobileBottom>
+              <ViewModeToggleButtonGroup />
+              <TaskToolbarCreateNewMenuTrigger
+                newTaskForm={
+                  <Suspense fallback={<TaskFormBaseSkeleton />}>
+                    <NewTaskFormContainer />
+                  </Suspense>
+                }
+                newTaskCategoryForm={<></>}
+              />
+            </ToolbarMobileBottom>
 
-          <TasksServerContainer page={page} pageSize={pageSize} />
+            <TasksServerContainer page={page} pageSize={pageSize} />
+          </ItemsContainerProvider>
         </ViewModeProvider>
       </PageGrid>
     </PageContainer>

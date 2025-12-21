@@ -1,11 +1,13 @@
-import { useViewMode } from "@/components/common/ViewMode";
+"use client";
+
 import { useCallback } from "react";
+import { useItemsContainerRef } from "@/components/common/ItemsContainer";
 
 export const useExtractCheckedItemIds = <T extends number | string = number>(
   prefix: string,
   asNumber: boolean = true,
 ): (() => T[]) => {
-  const { containerRef } = useViewMode();
+  const containerRef = useItemsContainerRef();
 
   return useCallback(() => {
     const container = containerRef.current;
