@@ -63,9 +63,20 @@ export function TaskItemActionMenuTrigger({
 
   useActionErrorToast(updateTaskStatusState);
 
+  const disabledKeys =
+    projectStatus === "completed"
+      ? ["active", "pending", "completed"]
+      : projectStatus === "pending"
+        ? ["pending", "active"]
+        : [projectStatus];
+
   return (
     <>
-      <ItemBaseActionMenuTrigger className={className} onAction={handleAction}>
+      <ItemBaseActionMenuTrigger
+        className={className}
+        onAction={handleAction}
+        disabledKeys={disabledKeys}
+      >
         <Item textValue={t("edit")} key="edit">
           <Pencil size={16} /> {t("edit")}
         </Item>

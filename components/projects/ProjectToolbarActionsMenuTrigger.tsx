@@ -53,7 +53,10 @@ export const ProjectToolbarActionsMenuTrigger = ({
 
   return (
     <>
-      <ToolbarActionsMenuTrigger onAction={handleAction}>
+      <ToolbarActionsMenuTrigger
+        onAction={handleAction}
+        isDisabled={projectIds.length === 0}
+      >
         <Item textValue={t("delete")} key="delete">
           <Trash size={16} strokeWidth={1.5} absoluteStrokeWidth />
           {t("delete")}

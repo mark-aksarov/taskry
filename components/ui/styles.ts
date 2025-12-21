@@ -20,6 +20,9 @@ export const itemStyles = tv({
     isFocused: {
       true: "bg-gray-100 dark:bg-gray-600",
     },
+    isDisabled: {
+      true: "pointer-events-none text-gray-400 dark:text-gray-500",
+    },
   },
 });
 

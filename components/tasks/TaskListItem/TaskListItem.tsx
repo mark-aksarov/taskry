@@ -22,19 +22,19 @@ import {
 
 import Image from "next/image";
 import { MessageSquare } from "lucide-react";
+import { RACDialogTrigger } from "@/components/ui";
 import { TaskDetailModal } from "../TaskDetailModal";
 import { TaskCommentsModal } from "../TaskCommentsModal";
 import { TaskListItemLayout } from "./TaskListItemLayout";
 import { useFormatter, useTranslations } from "next-intl";
-import { Checkbox, RACDialogTrigger } from "@/components/ui";
 import { UnknownUser } from "@/components/common/UnknownUser";
+import { TaskListItemCheckbox } from "./TaskListItemCheckbox";
 import { TaskDetailBottomSheet } from "../TaskDetailBottomSheet";
 import { ImageContainer } from "@/components/common/ImageContainer";
 import { UserDetailModal } from "@/components/users/UserDetailModal";
 import { getTaskStatusBadgeColor } from "../getTaskStatusBadgeColor";
 import { TaskItemActionMenuTrigger } from "../TaskItemActionMenuTrigger";
 import { ProjectDetailModal } from "@/components/projects/ProjectDetailModal";
-import { useTaskSelection } from "@/lib/hooks/useTaskSelection";
 
 export interface TaskListItemProps {
   id: number;
@@ -76,8 +76,6 @@ export const TaskListItem = ({
 }: TaskListItemProps) => {
   const t = useTranslations("tasks");
 
-  const { isSelected, toggleId } = useTaskSelection();
-
   const format = useFormatter();
 
   const deadlineOn = deadline
@@ -100,15 +98,7 @@ export const TaskListItem = ({
 
   return (
     <TaskListItemLayout
-      checkboxSlot={
-        showCheckbox && (
-          <Checkbox
-            aria-label="task checkbox"
-            isSelected={isSelected(id)}
-            onChange={() => toggleId(id)}
-          />
-        )
-      }
+      checkboxSlot={showCheckbox && <TaskListItemCheckbox id={id} />}
       titleSlot={
         <ListItemInfo>
           <ListItemTitle>

@@ -27,7 +27,11 @@ export const MenuItem = ({
   const classes = twMerge(
     className,
     "font-bold",
-    itemStyles({ isHovered, isFocused: states.isFocused }),
+    itemStyles({
+      isHovered,
+      isFocused: states.isFocused,
+      isDisabled: states.isDisabled,
+    }),
   );
 
   return (

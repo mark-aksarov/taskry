@@ -79,6 +79,13 @@ export const LeftBottomPlacement = {
   },
 } satisfies Story;
 
+export const WithDisabledItem = {
+  ...MenuTemplate,
+  args: {
+    disabledKeys: ["delete"],
+  },
+} satisfies Story;
+
 export const WithSheet = {
   ...MenuTemplate,
   args: {

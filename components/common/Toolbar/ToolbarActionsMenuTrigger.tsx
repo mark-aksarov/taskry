@@ -14,9 +14,14 @@ import { useOverlayTrigger } from "react-aria";
 import { useOverlayTriggerState } from "react-stately";
 import { ResponsiveMenuTrigger } from "../ResponsiveMenuTrigger";
 
-export function ToolbarActionsMenuTrigger<T extends object = any>(
-  props: MenuTriggerProps<T>,
-) {
+export type ToolbarActionsMenuTriggerProps<T extends object = any> = {
+  isDisabled?: boolean;
+} & MenuTriggerProps<T>;
+
+export function ToolbarActionsMenuTrigger<T extends object = any>({
+  isDisabled,
+  ...props
+}: ToolbarActionsMenuTriggerProps<T>) {
   const state = useOverlayTriggerState({});
   const { triggerProps } = useOverlayTrigger({ type: "dialog" }, state);
   const t = useTranslations("common.Toolbar.ToolbarActionsMenuTrigger");
@@ -39,6 +44,7 @@ export function ToolbarActionsMenuTrigger<T extends object = any>(
             iconLeft={
               <Ellipsis size={16} strokeWidth={1.5} absoluteStrokeWidth />
             }
+            isDisabled={isDisabled}
             className="md:hidden"
           />
           <Button
@@ -48,6 +54,7 @@ export function ToolbarActionsMenuTrigger<T extends object = any>(
             iconLeft={
               <Ellipsis size={16} strokeWidth={1.5} absoluteStrokeWidth />
             }
+            isDisabled={isDisabled}
             className="max-md:hidden"
           />
         </>
