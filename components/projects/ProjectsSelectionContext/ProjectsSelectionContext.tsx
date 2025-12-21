@@ -1,71 +1,28 @@
 "use client";
 
-import {
-  createContext,
-  useContext,
-  useState,
-  useMemo,
-  useCallback,
-  ReactNode,
-} from "react";
+import { createContext, useContext } from "react";
+import { useSelection, UseSelectionType } from "@/lib/hooks/useSelection";
 
-interface ProjectsSelectionContextType {
-  selectedIds: Record<number, boolean>;
-  toggleSelection: (id: number) => void;
-  clearSelection: () => void;
-  selectedCount: number;
-}
-
-const ProjectsSelectionContext = createContext<
-  ProjectsSelectionContextType | undefined
->(undefined);
+const ProjectsSelection = createContext<UseSelectionType | null>(null);
 
 export function ProjectsSelectionProvider({
   children,
 }: {
-  children: ReactNode;
+  children: React.ReactNode;
 }) {
-  const [selectedIds, setSelectedIds] = useState<Record<number, boolean>>({});
-
-  const toggleSelection = useCallback((id: number) => {
-    setSelectedIds((prev) => ({
-      ...prev,
-      [id]: !prev[id],
-    }));
-  }, []);
-
-  const clearSelection = useCallback(() => {
-    setSelectedIds({});
-  }, []);
-
-  const selectedCount = useMemo(
-    () => Object.values(selectedIds).filter(Boolean).length,
-    [selectedIds],
-  );
-
-  const contextValue = useMemo(
-    () => ({
-      selectedIds,
-      toggleSelection,
-      clearSelection,
-      selectedCount,
-    }),
-    [selectedIds, toggleSelection, clearSelection, selectedCount],
-  );
-
+  const selection = useSelection();
   return (
-    <ProjectsSelectionContext.Provider value={contextValue}>
+    <ProjectsSelection.Provider value={selection}>
       {children}
-    </ProjectsSelectionContext.Provider>
+    </ProjectsSelection.Provider>
   );
 }
 
 export const useProjectsSelection = () => {
-  const context = useContext(ProjectsSelectionContext);
-  if (!context) {
+  const context = useContext(ProjectsSelection);
+  if (!context)
     throw new Error(
-      "useProjectsSelection must be used within a ProjectsSelectionProvider",
+      "useProjectsSelection must be used within ProjectsSelectionProvider",
     );
-  }
   return context;
 };

@@ -1,6 +1,6 @@
 import { TasksPage } from "./TasksPage";
-import { mocked } from "storybook/test";
 import TasksPageLoading from "./loading";
+import { fn, mocked } from "storybook/test";
 import { usePathname } from "next/navigation";
 import { TasksPageEmpty } from "./TasksPageEmpty";
 import { TaskList } from "@/components/tasks/TaskList";
@@ -15,6 +15,7 @@ import { Default as TaskListStory } from "@/components/tasks/TaskList/TaskList.s
 import { Default as TaskGridStory } from "@/components/tasks/TaskGrid/TaskGrid.stories";
 import { withUserDetail } from "@/components/users/UserDetailClientContainer/decorators";
 import { withTaskComments } from "@/components/tasks/TaskCommentsClientContainer/decorators";
+import { withTasksSelectionProvider } from "@/components/tasks/TasksSelectionContext/decorators";
 import { Default as NewTaskFormStory } from "@/components/tasks/TaskFormBase/TaskFormBase.stories";
 import { withTaskDetailCompact } from "@/components/tasks/TaskDetailCompactClientContainer/decorators";
 import { Default as TaskFiltersFormStory } from "@/components/tasks/TaskFiltersForm/TaskFiltersForm.stories";
@@ -25,6 +26,7 @@ const meta = {
   component: TasksPage,
   parameters: { layout: "fullscreen" },
   decorators: [
+    withTasksSelectionProvider,
     withTaskDetailCompact,
     withProjectDetailCompact,
     withUserDetail,
@@ -54,6 +56,7 @@ export const Default: Story = {
         grid={<TaskGrid {...TaskGridStory.args} />}
       />
     ),
+    deleteTasksAction: fn(),
   },
 };
 

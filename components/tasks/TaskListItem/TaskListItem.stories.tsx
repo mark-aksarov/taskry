@@ -2,6 +2,7 @@ import { fn } from "storybook/test";
 import { TaskListItem } from "./TaskListItem";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { withTasksSelectionProvider } from "../TasksSelectionContext/decorators";
 import { withUserDetail } from "@/components/users/UserDetailClientContainer/decorators";
 import { withTaskComments } from "@/components/tasks/TaskCommentsClientContainer/decorators";
 import { withTaskDetailCompact } from "@/components/tasks/TaskDetailCompactClientContainer/decorators";
@@ -12,6 +13,7 @@ const meta = {
   component: TaskListItem,
   tags: ["autodocs"],
   decorators: [
+    withTasksSelectionProvider,
     withTaskDetailCompact,
     withProjectDetailCompact,
     withUserDetail,

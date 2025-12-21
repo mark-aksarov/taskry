@@ -1,12 +1,6 @@
 "use client";
 
 import {
-  ActionFn,
-  ActionState,
-  DeleteProjectsPayload,
-} from "@/lib/actions/types";
-
-import {
   ConfirmModal,
   ConfirmModalText,
   ConfirmModalActions,
@@ -17,6 +11,7 @@ import {
 import { useTranslations } from "next-intl";
 import { DialogHeading } from "@/components/ui";
 import { startTransition, useActionState } from "react";
+import { ActionFn, ActionState } from "@/lib/actions/types";
 import { useActionErrorToast } from "@/lib/hooks/useActionErrorToast";
 
 const initialState: ActionState = {
@@ -24,24 +19,27 @@ const initialState: ActionState = {
   message: null,
 };
 
-interface BulkDeleteProjectModalProps {
-  projectIds: number[];
+interface BulkDeleteEntityModalProps<T> {
+  entityIds: T[];
   isOpen: boolean;
   onOpenChange: (isOpen: boolean) => void;
-  deleteAction: ActionFn<ActionState, DeleteProjectsPayload>;
+  deleteAction: ActionFn<ActionState, T[]>;
+  translationNamespace: string;
+  itemCount?: number;
 }
 
-export function BulkDeleteProjectModal({
-  projectIds,
+export function BulkDeleteEntityModal<T>({
+  entityIds,
   isOpen,
   onOpenChange,
   deleteAction,
-}: BulkDeleteProjectModalProps) {
-  const t = useTranslations("projects.BulkDeleteProjectModal");
+  translationNamespace,
+}: BulkDeleteEntityModalProps<T>) {
+  const t = useTranslations(translationNamespace);
   const [state, action, pending] = useActionState(deleteAction, initialState);
 
   const handleDelete = () => {
-    startTransition(() => action(projectIds));
+    startTransition(() => action(entityIds));
     onOpenChange(false);
   };
 
@@ -53,7 +51,7 @@ export function BulkDeleteProjectModal({
       <ConfirmModalText>
         {t.rich("text", {
           strong: (chunks) => <strong>{chunks}</strong>,
-          count: projectIds.length,
+          count: entityIds.length,
         })}
       </ConfirmModalText>
       <ConfirmModalActions>

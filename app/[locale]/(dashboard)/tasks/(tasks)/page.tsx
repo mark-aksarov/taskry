@@ -2,8 +2,10 @@ import { z } from "zod";
 import { TasksPage } from "./TasksPage";
 import { getTaskCount } from "@/lib/dal/task";
 import { TasksPageEmpty } from "./TasksPageEmpty";
+import { deleteTasks } from "@/lib/actions/deleteTasks";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { TasksServerContainer } from "@/components/tasks/TasksServerContainer";
+import { TasksSelectionProvider } from "@/components/tasks/TasksSelectionContext";
 import { NewTaskFormServerContainer } from "@/components/tasks/NewTaskFormServerContainer";
 import { TaskFiltersFormServerContainer } from "@/components/tasks/TaskFiltersFormServerContainer";
 
@@ -30,12 +32,15 @@ export default async function AppTasksPage({
   if (!taskCount) return <TasksPageEmpty />;
 
   return (
-    <TasksPage
-      page={page}
-      pageSize={pageSize}
-      TaskFiltersFormContainer={TaskFiltersFormServerContainer}
-      NewTaskFormContainer={NewTaskFormServerContainer}
-      TasksServerContainer={TasksServerContainer}
-    />
+    <TasksSelectionProvider>
+      <TasksPage
+        page={page}
+        pageSize={pageSize}
+        TaskFiltersFormContainer={TaskFiltersFormServerContainer}
+        NewTaskFormContainer={NewTaskFormServerContainer}
+        TasksServerContainer={TasksServerContainer}
+        deleteTasksAction={deleteTasks}
+      />
+    </TasksSelectionProvider>
   );
 }

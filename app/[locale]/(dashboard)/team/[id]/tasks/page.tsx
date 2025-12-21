@@ -1,8 +1,10 @@
 import { z } from "zod";
 import { getTaskCount } from "@/lib/dal/task";
+import { deleteTasks } from "@/lib/actions/deleteTasks";
 import { TeamProfileTasksPage } from "./TeamProfileTasksPage";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { TeamProfileTasksPageEmpty } from "./TeamProfileTasksPageEmpty";
+import { TasksSelectionProvider } from "@/components/tasks/TasksSelectionContext";
 import { UserTasksServerContainer } from "@/components/users/UserTasksServerContainer";
 import { UserHeaderServerContainer } from "@/components/users/UserHeaderServerContainer";
 import { NewTaskFormServerContainer } from "@/components/tasks/NewTaskFormServerContainer";
@@ -40,13 +42,16 @@ export default async function AppProfileTasksPage({
     );
 
   return (
-    <TeamProfileTasksPage
-      userId={id}
-      page={page}
-      pageSize={pageSize}
-      UserTasksContainer={UserTasksServerContainer}
-      UserHeaderContainer={UserHeaderServerContainer}
-      NewTaskFormContainer={NewTaskFormServerContainer}
-    />
+    <TasksSelectionProvider>
+      <TeamProfileTasksPage
+        userId={id}
+        page={page}
+        pageSize={pageSize}
+        UserTasksContainer={UserTasksServerContainer}
+        UserHeaderContainer={UserHeaderServerContainer}
+        NewTaskFormContainer={NewTaskFormServerContainer}
+        deleteTasksAction={deleteTasks}
+      />
+    </TasksSelectionProvider>
   );
 }

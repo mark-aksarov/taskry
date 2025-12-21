@@ -1,4 +1,4 @@
-import { mocked } from "storybook/test";
+import { fn, mocked } from "storybook/test";
 import { usePathname } from "next/navigation";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { PageDecorator } from "@/.storybook/PageDecorator";
@@ -46,6 +46,7 @@ export const Default = {
     NewTaskFormContainer: () => <NewTaskForm {...TaskFormBaseStory.args} />,
     navigationDesktop: <ProfileNavigationDesktop />,
     navigationMobile: <ProfileNavigationMobile />,
+    deleteTasksAction: fn(),
   },
 } satisfies Story;
 

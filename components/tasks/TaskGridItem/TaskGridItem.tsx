@@ -27,6 +27,7 @@ import { TaskCommentsModal } from "../TaskCommentsModal";
 import { useFormatter, useTranslations } from "next-intl";
 import { TaskGridItemLayout } from "./TaskGridItemLayout";
 import { Checkbox, RACDialogTrigger } from "@/components/ui";
+import { useTasksSelection } from "../TasksSelectionContext";
 import { UnknownUser } from "@/components/common/UnknownUser";
 import { TaskDetailBottomSheet } from "../TaskDetailBottomSheet";
 import { ImageContainer } from "@/components/common/ImageContainer";
@@ -63,6 +64,7 @@ export function TaskGridItem({
   deleteAction,
 }: TaskGridItemProps) {
   const t = useTranslations("tasks");
+  const { selectedIds, toggleSelection } = useTasksSelection();
 
   const format = useFormatter();
 
@@ -84,9 +86,17 @@ export function TaskGridItem({
     <UnknownUser className="h-9 w-9" />
   );
 
+  const isSelected = !!selectedIds[id];
+
   return (
     <TaskGridItemLayout
-      checkboxSlot={<Checkbox aria-label={title} />}
+      checkboxSlot={
+        <Checkbox
+          aria-label={title}
+          isSelected={isSelected}
+          onChange={() => toggleSelection(id)}
+        />
+      }
       menuTriggerSlot={
         <TaskItemActionMenuTrigger
           taskId={id}

@@ -3,6 +3,9 @@
     "deleteProjectAction": {
       "error": "Something went wrong. Delete failed."
     },
+    "deleteTaskAction": {
+      "error": "Something went wrong. Delete failed."
+    },
     "updateProjectStatus": {
       "error": "Something went wrong. Update failed."
     },
@@ -1083,6 +1086,13 @@
     "DeleteTaskModal": {
       "heading": "Delete Task",
       "text": "Are you sure you want to delete <strong>«{name}»</strong>? All contents will be permanently removed.",
+      "deleteButton": "Delete",
+      "cancelButton": "Cancel"
+    },
+
+    "BulkDeleteTaskModal": {
+      "heading": "Delete Tasks",
+      "text": "Are you sure you want to delete <strong>{count} tasks</strong>? All contents will be permanently removed.",
       "deleteButton": "Delete",
       "cancelButton": "Cancel"
     },

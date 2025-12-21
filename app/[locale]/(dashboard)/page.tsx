@@ -1,6 +1,7 @@
 import { z } from "zod";
 import { DashboardPage } from "./DashboardPage";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
+import { TasksSelectionProvider } from "@/components/tasks/TasksSelectionContext";
 import { AssignedTasksServerContainer } from "@/components/tasks/AssignedTasksServerContainer";
 import { TotalTasksCardServerContainer } from "@/components/tasks/TotalTasksCardServerContainer";
 import { TotalUsersCardServerContainer } from "@/components/users/TotalUsersCardServerContainer";
@@ -25,14 +26,16 @@ export default async function AppDashboardPage({
   const { page, pageSize } = searchParamsSchema.parse(rawParams);
 
   return (
-    <DashboardPage
-      page={page}
-      pageSize={pageSize}
-      TotalProjectsCardContainer={TotalProjectsCardServerContainer}
-      TotalTasksCardContainer={TotalTasksCardServerContainer}
-      TotalUsersCardContainer={TotalUsersCardServerContainer}
-      TotalCustomersCardContainer={TotalCustomersCardServerContainer}
-      AssignedTasksContainer={AssignedTasksServerContainer}
-    />
+    <TasksSelectionProvider>
+      <DashboardPage
+        page={page}
+        pageSize={pageSize}
+        TotalProjectsCardContainer={TotalProjectsCardServerContainer}
+        TotalTasksCardContainer={TotalTasksCardServerContainer}
+        TotalUsersCardContainer={TotalUsersCardServerContainer}
+        TotalCustomersCardContainer={TotalCustomersCardServerContainer}
+        AssignedTasksContainer={AssignedTasksServerContainer}
+      />
+    </TasksSelectionProvider>
   );
 }

@@ -18,6 +18,7 @@ import { PageGrid } from "@/components/common/PageGrid";
 import { PageContainer } from "@/components/common/PageContainer";
 import { TaskFormBaseSkeleton } from "@/components/tasks/TaskFormBase";
 import { NewTaskModalTrigger } from "@/components/tasks/NewTaskModalTrigger";
+import { ActionFn, ActionState, DeleteTasksPayload } from "@/lib/actions/types";
 import { TaskToolbarSortingMenuTrigger } from "@/components/tasks/TaskToolbarSortingMenuTrigger";
 import { TaskToolbarActionsMenuTrigger } from "@/components/tasks/TaskToolbarActionsMenuTrigger";
 
@@ -36,6 +37,7 @@ interface UserTasksPageLayoutProps {
   NewTaskFormContainer: React.ComponentType;
   navigationDesktop: React.ReactNode;
   navigationMobile: React.ReactNode;
+  deleteTasksAction: ActionFn<ActionState, DeleteTasksPayload>;
 }
 
 export function UserTasksPageLayout({
@@ -48,6 +50,7 @@ export function UserTasksPageLayout({
   NewTaskFormContainer,
   navigationDesktop,
   navigationMobile,
+  deleteTasksAction,
 }: UserTasksPageLayoutProps) {
   const t = useTranslations("users.UserTasksPageLayout");
 
@@ -60,7 +63,9 @@ export function UserTasksPageLayout({
               <UserCardTitle>{t("title")}</UserCardTitle>
               <div className="flex gap-4">
                 <TaskToolbarSortingMenuTrigger />
-                <TaskToolbarActionsMenuTrigger />
+                <TaskToolbarActionsMenuTrigger
+                  deleteAction={deleteTasksAction}
+                />
                 <NewTaskModalTrigger
                   newTaskForm={
                     <Suspense fallback={<TaskFormBaseSkeleton />}>
@@ -90,7 +95,7 @@ export function UserTasksPageLayout({
           <ToolbarMobileTop>
             <ToolbarMobileHeading>{t("title")}</ToolbarMobileHeading>
             <TaskToolbarSortingMenuTrigger />
-            <TaskToolbarActionsMenuTrigger />
+            <TaskToolbarActionsMenuTrigger deleteAction={deleteTasksAction} />
           </ToolbarMobileTop>
 
           <ToolbarMobileBottom>

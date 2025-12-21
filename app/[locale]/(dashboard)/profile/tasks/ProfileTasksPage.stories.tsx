@@ -11,6 +11,7 @@ import { useParams, usePathname } from "next/navigation";
 import { PageDecorator } from "@/.storybook/PageDecorator";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withTaskComments } from "@/components/tasks/TaskCommentsClientContainer/decorators";
+import { withTasksSelectionProvider } from "@/components/tasks/TasksSelectionContext/decorators";
 import { withTaskDetailCompact } from "@/components/tasks/TaskDetailCompactClientContainer/decorators";
 
 const userId = "BKs42HvVDEZFoaJUmTqf1gTN0K8pUFjI";
@@ -20,6 +21,7 @@ const meta = {
   component: ProfileTasksPage,
   parameters: { layout: "fullscreen" },
   decorators: [
+    withTasksSelectionProvider,
     withTaskDetailCompact,
     withTaskComments,
     PageDecorator,

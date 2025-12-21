@@ -13,6 +13,7 @@ import { PageContainer } from "@/components/common/PageContainer";
 import { TaskFormBaseSkeleton } from "@/components/tasks/TaskFormBase";
 import { ViewModeToggleButtonGroup } from "@/components/common/ViewMode";
 import { TaskFiltersFormSkeleton } from "@/components/tasks/TaskFiltersForm";
+import { ActionFn, ActionState, DeleteTasksPayload } from "@/lib/actions/types";
 import { TaskToolbarSortingMenuTrigger } from "@/components/tasks/TaskToolbarSortingMenuTrigger";
 import { TaskToolbarActionsMenuTrigger } from "@/components/tasks/TaskToolbarActionsMenuTrigger";
 import { TaskToolbarFiltersModalTrigger } from "@/components/tasks/TaskToolbarFiltersModalTrigger";
@@ -27,6 +28,7 @@ interface TasksPageProps {
     page: number;
     pageSize: number;
   }>;
+  deleteTasksAction: ActionFn<ActionState, DeleteTasksPayload>;
 }
 
 export function TasksPage({
@@ -35,6 +37,7 @@ export function TasksPage({
   TaskFiltersFormContainer,
   NewTaskFormContainer,
   TasksServerContainer,
+  deleteTasksAction,
 }: TasksPageProps) {
   const t = useTranslations("app.TasksPage");
 
@@ -51,7 +54,7 @@ export function TasksPage({
                 </Suspense>
               }
             />
-            <TaskToolbarActionsMenuTrigger />
+            <TaskToolbarActionsMenuTrigger deleteAction={deleteTasksAction} />
             <ViewModeToggleButtonGroup className="ml-auto" />
 
             <TaskToolbarCreateNewMenuTrigger
@@ -74,7 +77,7 @@ export function TasksPage({
                 </Suspense>
               }
             />
-            <TaskToolbarActionsMenuTrigger />
+            <TaskToolbarActionsMenuTrigger deleteAction={deleteTasksAction} />
           </ToolbarMobileTop>
 
           <ToolbarMobileBottom>

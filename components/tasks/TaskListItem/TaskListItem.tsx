@@ -26,6 +26,7 @@ import { TaskCommentsModal } from "../TaskCommentsModal";
 import { TaskListItemLayout } from "./TaskListItemLayout";
 import { useFormatter, useTranslations } from "next-intl";
 import { Checkbox, RACDialogTrigger } from "@/components/ui";
+import { useTasksSelection } from "../TasksSelectionContext";
 import { UnknownUser } from "@/components/common/UnknownUser";
 import { TaskDetailBottomSheet } from "../TaskDetailBottomSheet";
 import { ImageContainer } from "@/components/common/ImageContainer";
@@ -71,6 +72,7 @@ export const TaskListItem = ({
   deleteAction,
 }: TaskListItemProps) => {
   const t = useTranslations("tasks");
+  const { selectedIds, toggleSelection } = useTasksSelection();
 
   const format = useFormatter();
 
@@ -92,9 +94,19 @@ export const TaskListItem = ({
     <UnknownUser className="h-9 w-9" />
   );
 
+  const isSelected = !!selectedIds[id];
+
   return (
     <TaskListItemLayout
-      checkboxSlot={showCheckbox && <Checkbox aria-label="task checkbox" />}
+      checkboxSlot={
+        showCheckbox && (
+          <Checkbox
+            aria-label="task checkbox"
+            isSelected={isSelected}
+            onChange={() => toggleSelection(id)}
+          />
+        )
+      }
       titleSlot={
         <ListItemInfo>
           <ListItemTitle>
