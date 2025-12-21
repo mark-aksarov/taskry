@@ -4,7 +4,6 @@ import { deleteTasks } from "@/lib/actions/deleteTasks";
 import { getTaskCount, getTaskList } from "@/lib/dal/task";
 import { Pagination } from "@/components/common/Pagination";
 import { updateTaskStatuses } from "@/lib/actions/updateTaskStatuses";
-import { ItemsContainer } from "@/components/common/ItemsContainer";
 
 interface UserTasksServerContainerProps {
   page: number;
@@ -37,24 +36,22 @@ export async function UserTasksServerContainer({
 
   return (
     <>
-      <ItemsContainer>
-        <UserTaskList>
-          {tasks.length &&
-            tasks.map((task) => (
-              <UserTaskListItem
-                key={task.id}
-                id={task.id}
-                title={task.title}
-                deadline={task.deadline}
-                commentsCount={task.commentsCount}
-                status={task.status}
-                projectStatus={task.project.status}
-                deleteAction={deleteTasks}
-                updateStatusAction={updateTaskStatuses}
-              />
-            ))}
-        </UserTaskList>
-      </ItemsContainer>
+      <UserTaskList>
+        {tasks.length &&
+          tasks.map((task) => (
+            <UserTaskListItem
+              key={task.id}
+              id={task.id}
+              title={task.title}
+              deadline={task.deadline}
+              commentsCount={task.commentsCount}
+              status={task.status}
+              projectStatus={task.project.status}
+              deleteAction={deleteTasks}
+              updateStatusAction={updateTaskStatuses}
+            />
+          ))}
+      </UserTaskList>
 
       {totalPages > 1 && (
         <div className="flex justify-center py-4">

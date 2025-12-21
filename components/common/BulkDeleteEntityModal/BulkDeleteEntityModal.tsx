@@ -10,8 +10,8 @@ import {
 
 import { useTranslations } from "next-intl";
 import { DialogHeading } from "@/components/ui";
-import { startTransition, useActionState } from "react";
 import { ActionFn, ActionState } from "@/lib/actions/types";
+import { startTransition, useActionState, useEffect } from "react";
 import { useActionErrorToast } from "@/lib/hooks/useActionErrorToast";
 
 const initialState: ActionState = {
@@ -26,6 +26,7 @@ interface BulkDeleteEntityModalProps<T> {
   deleteAction: ActionFn<ActionState, T[]>;
   translationNamespace: string;
   itemCount?: number;
+  onSuccess?: () => void;
 }
 
 export function BulkDeleteEntityModal<T>({
@@ -34,9 +35,16 @@ export function BulkDeleteEntityModal<T>({
   onOpenChange,
   deleteAction,
   translationNamespace,
+  onSuccess,
 }: BulkDeleteEntityModalProps<T>) {
   const t = useTranslations(translationNamespace);
   const [state, action, pending] = useActionState(deleteAction, initialState);
+
+  useEffect(() => {
+    if (state.status === "success") {
+      onSuccess?.();
+    }
+  }, [state.status, onSuccess]);
 
   const handleDelete = () => {
     startTransition(() => action(entityIds));

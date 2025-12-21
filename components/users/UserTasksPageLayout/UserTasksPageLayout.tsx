@@ -17,7 +17,7 @@ import { useTranslations } from "next-intl";
 import { PageGrid } from "@/components/common/PageGrid";
 import { PageContainer } from "@/components/common/PageContainer";
 import { TaskFormBaseSkeleton } from "@/components/tasks/TaskFormBase";
-import { ItemsContainerProvider } from "@/components/common/ItemsContainer";
+import { SelectionProvider } from "@/components/common/SelectionContext";
 import { NewTaskModalTrigger } from "@/components/tasks/NewTaskModalTrigger";
 import { ActionFn, ActionState, DeleteTasksPayload } from "@/lib/actions/types";
 import { TaskToolbarSortingMenuTrigger } from "@/components/tasks/TaskToolbarSortingMenuTrigger";
@@ -56,34 +56,32 @@ export function UserTasksPageLayout({
   const t = useTranslations("users.UserTasksPageLayout");
 
   return (
-    <>
+    <SelectionProvider>
       <PageContainer className="max-md:hidden">
         <UserCard>
           <UserCardLeft>
-            <ItemsContainerProvider>
-              <UserCardHeader>
-                <UserCardTitle>{t("title")}</UserCardTitle>
-                <div className="flex gap-4">
-                  <TaskToolbarSortingMenuTrigger />
-                  <TaskToolbarActionsMenuTrigger
-                    deleteAction={deleteTasksAction}
-                  />
-                  <NewTaskModalTrigger
-                    newTaskForm={
-                      <Suspense fallback={<TaskFormBaseSkeleton />}>
-                        <NewTaskFormContainer />
-                      </Suspense>
-                    }
-                  />
-                </div>
-              </UserCardHeader>
-              <UserTasksContainer
-                userId={userId}
-                page={page}
-                pageSize={pageSize}
-                baseUrl={baseUrl}
-              />
-            </ItemsContainerProvider>
+            <UserCardHeader>
+              <UserCardTitle>{t("title")}</UserCardTitle>
+              <div className="flex gap-4">
+                <TaskToolbarSortingMenuTrigger />
+                <TaskToolbarActionsMenuTrigger
+                  deleteAction={deleteTasksAction}
+                />
+                <NewTaskModalTrigger
+                  newTaskForm={
+                    <Suspense fallback={<TaskFormBaseSkeleton />}>
+                      <NewTaskFormContainer />
+                    </Suspense>
+                  }
+                />
+              </div>
+            </UserCardHeader>
+            <UserTasksContainer
+              userId={userId}
+              page={page}
+              pageSize={pageSize}
+              baseUrl={baseUrl}
+            />
           </UserCardLeft>
 
           <UserCardRight>
@@ -95,27 +93,25 @@ export function UserTasksPageLayout({
 
       <PageContainer className="md:hidden">
         <PageGrid>
-          <ItemsContainerProvider>
-            <ToolbarMobileTop>
-              <ToolbarMobileHeading>{t("title")}</ToolbarMobileHeading>
-              <TaskToolbarSortingMenuTrigger />
-              <TaskToolbarActionsMenuTrigger deleteAction={deleteTasksAction} />
-            </ToolbarMobileTop>
+          <ToolbarMobileTop>
+            <ToolbarMobileHeading>{t("title")}</ToolbarMobileHeading>
+            <TaskToolbarSortingMenuTrigger />
+            <TaskToolbarActionsMenuTrigger deleteAction={deleteTasksAction} />
+          </ToolbarMobileTop>
 
-            <ToolbarMobileBottom>
-              {navigationMobile}
-              <NewTaskModalTrigger newTaskForm={<NewTaskFormContainer />} />
-            </ToolbarMobileBottom>
+          <ToolbarMobileBottom>
+            {navigationMobile}
+            <NewTaskModalTrigger newTaskForm={<NewTaskFormContainer />} />
+          </ToolbarMobileBottom>
 
-            <UserTasksContainer
-              userId={userId}
-              page={page}
-              pageSize={pageSize}
-              baseUrl={baseUrl}
-            />
-          </ItemsContainerProvider>
+          <UserTasksContainer
+            userId={userId}
+            page={page}
+            pageSize={pageSize}
+            baseUrl={baseUrl}
+          />
         </PageGrid>
       </PageContainer>
-    </>
+    </SelectionProvider>
   );
 }

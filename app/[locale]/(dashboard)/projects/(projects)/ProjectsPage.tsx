@@ -18,8 +18,8 @@ import { PageGrid } from "@/components/common/PageGrid";
 import { ProjectFiltersType } from "@/lib/types/projects";
 import { ViewModeProvider } from "@/components/common/ViewMode";
 import { PageContainer } from "@/components/common/PageContainer";
+import { SelectionProvider } from "@/components/common/SelectionContext";
 import { ViewModeToggleButtonGroup } from "@/components/common/ViewMode";
-import { ItemsContainerProvider } from "@/components/common/ItemsContainer";
 import { ProjectFormBaseSkeleton } from "@/components/projects/ProjectFormBase";
 import { NewProjectCategoryForm } from "@/components/projects/NewProjectCategoryForm";
 import { ProjectFiltersFormSkeleton } from "@/components/projects/ProjectFiltersForm";
@@ -67,7 +67,7 @@ export function ProjectsPage({
     <PageContainer>
       <PageGrid>
         <ViewModeProvider>
-          <ItemsContainerProvider>
+          <SelectionProvider>
             <ToolbarDesktop>
               <ProjectToolbarSortingMenuTrigger />
               <ProjectToolbarFiltersModalTrigger
@@ -134,7 +134,7 @@ export function ProjectsPage({
               sort={sort}
               filters={filters}
             />
-          </ItemsContainerProvider>
+          </SelectionProvider>
         </ViewModeProvider>
       </PageGrid>
     </PageContainer>

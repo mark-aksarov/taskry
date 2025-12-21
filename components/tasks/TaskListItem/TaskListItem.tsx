@@ -34,6 +34,7 @@ import { UserDetailModal } from "@/components/users/UserDetailModal";
 import { getTaskStatusBadgeColor } from "../getTaskStatusBadgeColor";
 import { TaskItemActionMenuTrigger } from "../TaskItemActionMenuTrigger";
 import { ProjectDetailModal } from "@/components/projects/ProjectDetailModal";
+import { useTaskSelection } from "@/lib/hooks/useTaskSelection";
 
 export interface TaskListItemProps {
   id: number;
@@ -75,6 +76,8 @@ export const TaskListItem = ({
 }: TaskListItemProps) => {
   const t = useTranslations("tasks");
 
+  const { isSelected, toggleId } = useTaskSelection();
+
   const format = useFormatter();
 
   const deadlineOn = deadline
@@ -99,7 +102,11 @@ export const TaskListItem = ({
     <TaskListItemLayout
       checkboxSlot={
         showCheckbox && (
-          <Checkbox aria-label="task checkbox" id={`task-checkbox-${id}`} />
+          <Checkbox
+            aria-label="task checkbox"
+            isSelected={isSelected(id)}
+            onChange={() => toggleId(id)}
+          />
         )
       }
       titleSlot={

@@ -12,13 +12,13 @@ import { ViewModeProvider } from "@/components/common/ViewMode";
 import { PageContainer } from "@/components/common/PageContainer";
 import { TaskFormBaseSkeleton } from "@/components/tasks/TaskFormBase";
 import { ViewModeToggleButtonGroup } from "@/components/common/ViewMode";
+import { SelectionProvider } from "@/components/common/SelectionContext";
 import { TaskFiltersFormSkeleton } from "@/components/tasks/TaskFiltersForm";
 import { ActionFn, ActionState, DeleteTasksPayload } from "@/lib/actions/types";
 import { TaskToolbarSortingMenuTrigger } from "@/components/tasks/TaskToolbarSortingMenuTrigger";
 import { TaskToolbarActionsMenuTrigger } from "@/components/tasks/TaskToolbarActionsMenuTrigger";
 import { TaskToolbarFiltersModalTrigger } from "@/components/tasks/TaskToolbarFiltersModalTrigger";
 import { TaskToolbarCreateNewMenuTrigger } from "@/components/tasks/TaskToolbarCreateNewMenuTrigger";
-import { ItemsContainerProvider } from "@/components/common/ItemsContainer";
 
 interface TasksPageProps {
   page: number;
@@ -46,7 +46,7 @@ export function TasksPage({
     <PageContainer>
       <PageGrid>
         <ViewModeProvider>
-          <ItemsContainerProvider>
+          <SelectionProvider>
             <ToolbarDesktop>
               <TaskToolbarSortingMenuTrigger />
               <TaskToolbarFiltersModalTrigger
@@ -95,7 +95,7 @@ export function TasksPage({
             </ToolbarMobileBottom>
 
             <TasksServerContainer page={page} pageSize={pageSize} />
-          </ItemsContainerProvider>
+          </SelectionProvider>
         </ViewModeProvider>
       </PageGrid>
     </PageContainer>

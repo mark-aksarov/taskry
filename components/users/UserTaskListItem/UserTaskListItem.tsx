@@ -25,6 +25,7 @@ import { useFormatter, useTranslations } from "next-intl";
 import { Checkbox, RACDialogTrigger } from "@/components/ui";
 import { UserTaskListItemLayout } from "./UserTaskListItemLayout";
 import { TaskDetailModal } from "@/components/tasks/TaskDetailModal";
+import { useProjectSelection } from "@/lib/hooks/useProjectSelection";
 import { TaskCommentsModal } from "@/components/tasks/TaskCommentsModal";
 import { TaskDetailBottomSheet } from "@/components/tasks/TaskDetailBottomSheet";
 import { getTaskStatusBadgeColor } from "@/components/tasks/getTaskStatusBadgeColor";
@@ -53,6 +54,8 @@ export const UserTaskListItem = ({
 }: UserTaskListItemProps) => {
   const t = useTranslations();
 
+  const { isSelected, toggleId } = useProjectSelection();
+
   const format = useFormatter();
 
   const deadlineOn = deadline
@@ -70,7 +73,8 @@ export const UserTaskListItem = ({
       checkboxSlot={
         <Checkbox
           aria-label={t("users.UserTaskListItem.checkboxAriaLabel")}
-          id={`task-checkbox-${id}`}
+          isSelected={isSelected(id)}
+          onChange={() => toggleId(id)}
         />
       }
       deadlineSlot={

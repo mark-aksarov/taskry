@@ -31,6 +31,7 @@ import { ProjectCommentsModal } from "../ProjectCommentsModal";
 import { ProjectGridItemLayout } from "./ProjectGridItemLayout";
 import { ImageContainer } from "@/components/common/ImageContainer";
 import { UserDetailModal } from "@/components/users/UserDetailModal";
+import { useProjectSelection } from "@/lib/hooks/useProjectSelection";
 import { ProjectDetailBottomSheet } from "../ProjectDetailBottomSheet";
 import { getProjectStatusBadgeColor } from "../getProjectStatusBadgeColor";
 import { ProjectItemActionMenuTrigger } from "../ProjectItemActionMenuTrigger";
@@ -68,6 +69,8 @@ export function ProjectGridItem({
 }: ProjectGridItemProps) {
   const t = useTranslations("projects");
 
+  const { isSelected, toggleId } = useProjectSelection();
+
   const format = useFormatter();
 
   const deadlineOn = deadline
@@ -91,7 +94,11 @@ export function ProjectGridItem({
   return (
     <ProjectGridItemLayout
       checkboxSlot={
-        <Checkbox aria-label={title} id={`project-checkbox-${id}`} />
+        <Checkbox
+          aria-label={title}
+          isSelected={isSelected(id)}
+          onChange={() => toggleId(id)}
+        />
       }
       menuTriggerSlot={
         <ProjectItemActionMenuTrigger

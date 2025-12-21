@@ -4,44 +4,26 @@ import { useState } from "react";
 import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
 import { ToolbarActionsMenuTrigger } from "../common/Toolbar";
+import { useTaskSelection } from "@/lib/hooks/useTaskSelection";
 import { Check, CircleEllipsis, Clock, Trash } from "lucide-react";
 import { BulkDeleteEntityModal } from "../common/BulkDeleteEntityModal";
 import { ActionFn, ActionState, DeleteTasksPayload } from "@/lib/actions/types";
-import { useExtractCheckedItemIds } from "@/lib/hooks/useExtractCheckedItemIds";
 
 interface TaskToolbarActionsMenuTriggerProps {
   deleteAction: ActionFn<ActionState, DeleteTasksPayload>;
-}
-
-interface DeleteModalState {
-  taskIds: number[];
-  isOpen: boolean;
 }
 
 export const TaskToolbarActionsMenuTrigger = ({
   deleteAction,
 }: TaskToolbarActionsMenuTriggerProps) => {
   const t = useTranslations("tasks.TaskToolbarActionsMenuTrigger");
-  const extractCheckedItemIds =
-    useExtractCheckedItemIds<number>("task-checkbox-");
+  const { selectedIds: taskIds, clearIds } = useTaskSelection();
 
-  const [deleteModal, setDeleteModal] = useState<DeleteModalState>({
-    taskIds: [],
-    isOpen: false,
-  });
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
   const handleAction = (key: Key) => {
-    const ids = extractCheckedItemIds();
-
-    console.log(ids);
-
     if (key === "delete") {
-      if (ids.length > 0) {
-        setDeleteModal({
-          taskIds: ids,
-          isOpen: true,
-        });
-      }
+      setIsDeleteModalOpen(true);
     }
   };
 
@@ -67,13 +49,12 @@ export const TaskToolbarActionsMenuTrigger = ({
       </ToolbarActionsMenuTrigger>
 
       <BulkDeleteEntityModal
-        entityIds={deleteModal.taskIds}
-        isOpen={deleteModal.isOpen}
-        onOpenChange={(isOpen) =>
-          setDeleteModal((prev) => ({ ...prev, isOpen }))
-        }
+        entityIds={taskIds}
+        isOpen={isDeleteModalOpen}
+        onOpenChange={setIsDeleteModalOpen}
         deleteAction={deleteAction}
         translationNamespace="tasks.BulkDeleteTaskModal"
+        onSuccess={clearIds}
       />
     </>
   );

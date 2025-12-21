@@ -11,23 +11,17 @@ import { useState } from "react";
 import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
 import { ToolbarActionsMenuTrigger } from "../common/Toolbar";
+import { useTaskSelection } from "@/lib/hooks/useTaskSelection";
 import { Check, CircleEllipsis, Clock, Trash } from "lucide-react";
 import { BulkDeleteEntityModal } from "../common/BulkDeleteEntityModal";
 import { BulkUpdateProjectStatusModal } from "./BulkUpdateProjectStatusModal";
-import { useExtractCheckedItemIds } from "@/lib/hooks/useExtractCheckedItemIds";
 
 interface ProjectToolbarActionsMenuTriggerProps {
   deleteAction: ActionFn<ActionState, DeleteProjectsPayload>;
   updateStatusAction: ActionFn<ActionState, UpdateProjectStatusesPayload>;
 }
 
-interface DeleteModalState {
-  projectIds: number[];
-  isOpen: boolean;
-}
-
 interface UpdateStatusModalState {
-  projectIds: number[];
   isOpen: boolean;
   nextStatus: string;
 }
@@ -37,31 +31,20 @@ export const ProjectToolbarActionsMenuTrigger = ({
   updateStatusAction,
 }: ProjectToolbarActionsMenuTriggerProps) => {
   const t = useTranslations("projects.ProjectToolbarActionsMenuTrigger");
-  const extractCheckedItemIds =
-    useExtractCheckedItemIds<number>("project-checkbox-");
+  const { selectedIds: projectIds, clearIds } = useTaskSelection();
 
-  const [deleteModal, setDeleteModal] = useState<DeleteModalState>({
-    projectIds: [],
-    isOpen: false,
-  });
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
   const [updateModal, setUpdateModal] = useState<UpdateStatusModalState>({
-    projectIds: [],
     isOpen: false,
     nextStatus: "complete",
   });
 
   const handleAction = (key: Key) => {
-    const ids = extractCheckedItemIds();
-
     if (key === "delete") {
-      setDeleteModal({
-        projectIds: ids,
-        isOpen: true,
-      });
+      setIsDeleteModalOpen(true);
     } else {
       setUpdateModal({
-        projectIds: ids,
         isOpen: true,
         nextStatus: key.toString(),
       });
@@ -90,17 +73,16 @@ export const ProjectToolbarActionsMenuTrigger = ({
       </ToolbarActionsMenuTrigger>
 
       <BulkDeleteEntityModal
-        entityIds={deleteModal.projectIds}
-        isOpen={deleteModal.isOpen}
-        onOpenChange={(isOpen) =>
-          setDeleteModal((prev) => ({ ...prev, isOpen }))
-        }
+        entityIds={projectIds}
+        isOpen={isDeleteModalOpen}
+        onOpenChange={setIsDeleteModalOpen}
         translationNamespace="projects.BulkDeleteProjectModal"
         deleteAction={deleteAction}
+        onSuccess={clearIds}
       />
 
       <BulkUpdateProjectStatusModal
-        projectIds={updateModal.projectIds}
+        projectIds={projectIds}
         nextStatus={updateModal.nextStatus}
         isOpen={updateModal.isOpen}
         onOpenChange={(open) =>

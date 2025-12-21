@@ -7,7 +7,6 @@ import { deleteTasks } from "@/lib/actions/deleteTasks";
 import { getTaskCount, getTaskList } from "@/lib/dal/task";
 import { Pagination } from "@/components/common/Pagination";
 import { ViewModeLayout } from "@/components/common/ViewMode";
-import { ItemsContainer } from "@/components/common/ItemsContainer";
 import { updateTaskStatuses } from "@/lib/actions/updateTaskStatuses";
 
 interface TasksServerContainerProps {
@@ -43,39 +42,37 @@ export async function TasksServerContainer({
 
   return (
     <>
-      <ItemsContainer>
-        <ViewModeLayout
-          list={
-            <TaskList>
-              {tasks.map((task) => (
-                <TaskListItem
-                  key={task.id}
-                  category={task.category}
-                  project={task.project}
-                  deleteAction={deleteTasks}
-                  updateStatusAction={updateTaskStatuses}
-                  showCheckbox
-                  {...getCommonProps(task)}
-                />
-              ))}
-            </TaskList>
-          }
-          grid={
-            <TaskGrid>
-              {tasks.map((task) => (
-                <TaskGridItem
-                  key={task.id}
-                  subtasksDone={task.subtasks.done}
-                  projectStatus={task.project.status}
-                  updateStatusAction={updateTaskStatuses}
-                  deleteAction={deleteTasks}
-                  {...getCommonProps(task)}
-                />
-              ))}
-            </TaskGrid>
-          }
-        />
-      </ItemsContainer>
+      <ViewModeLayout
+        list={
+          <TaskList>
+            {tasks.map((task) => (
+              <TaskListItem
+                key={task.id}
+                category={task.category}
+                project={task.project}
+                deleteAction={deleteTasks}
+                updateStatusAction={updateTaskStatuses}
+                showCheckbox
+                {...getCommonProps(task)}
+              />
+            ))}
+          </TaskList>
+        }
+        grid={
+          <TaskGrid>
+            {tasks.map((task) => (
+              <TaskGridItem
+                key={task.id}
+                subtasksDone={task.subtasks.done}
+                projectStatus={task.project.status}
+                updateStatusAction={updateTaskStatuses}
+                deleteAction={deleteTasks}
+                {...getCommonProps(task)}
+              />
+            ))}
+          </TaskGrid>
+        }
+      />
       {totalPages > 1 && (
         <div className="flex justify-center">
           <Pagination

@@ -31,6 +31,7 @@ import { ProjectCommentsModal } from "../ProjectCommentsModal";
 import { ProjectListItemLayout } from "./ProjectListItemLayout";
 import { ImageContainer } from "@/components/common/ImageContainer";
 import { UserDetailModal } from "@/components/users/UserDetailModal";
+import { useProjectSelection } from "@/lib/hooks/useProjectSelection";
 import { ProjectDetailBottomSheet } from "../ProjectDetailBottomSheet";
 import { getProjectStatusBadgeColor } from "../getProjectStatusBadgeColor";
 import { ProjectItemActionMenuTrigger } from "../ProjectItemActionMenuTrigger";
@@ -80,6 +81,8 @@ export const ProjectListItem = ({
 }: ProjectListItemProps) => {
   const t = useTranslations("projects");
 
+  const { isSelected, toggleId } = useProjectSelection();
+
   const format = useFormatter();
 
   const deadlineOn = deadline
@@ -106,7 +109,8 @@ export const ProjectListItem = ({
         showCheckbox && (
           <Checkbox
             aria-label="project checkbox"
-            id={`project-checkbox-${id}`}
+            isSelected={isSelected(id)}
+            onChange={() => toggleId(id)}
           />
         )
       }
