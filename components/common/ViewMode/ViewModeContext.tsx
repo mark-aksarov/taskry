@@ -1,12 +1,20 @@
 "use client";
 
-import { createContext, useContext, useMemo, useState } from "react";
+import {
+  createContext,
+  useContext,
+  useMemo,
+  useState,
+  useRef,
+  RefObject,
+} from "react";
 
 export type ViewMode = "list" | "grid";
 
 interface ViewModeContextType {
   viewMode: ViewMode;
   setViewMode: (mode: ViewMode) => void;
+  containerRef: RefObject<HTMLDivElement | null>;
 }
 
 const ViewModeContext = createContext<ViewModeContextType | null>(null);
@@ -20,12 +28,15 @@ export function ViewModeProvider({
 }) {
   const [viewMode, setViewMode] = useState<ViewMode>(initialValue);
 
+  const containerRef = useRef<HTMLDivElement>(null);
+
   const contextValue = useMemo(
     () => ({
       viewMode,
       setViewMode,
+      containerRef,
     }),
-    [viewMode, setViewMode],
+    [viewMode],
   );
 
   return (

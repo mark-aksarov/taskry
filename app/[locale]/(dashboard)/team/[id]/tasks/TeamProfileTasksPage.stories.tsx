@@ -11,7 +11,6 @@ import { PageDecorator } from "@/.storybook/PageDecorator";
 import { TeamProfileTasksPage } from "./TeamProfileTasksPage";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withTaskComments } from "@/components/tasks/TaskCommentsClientContainer/decorators";
-import { withTasksSelectionProvider } from "@/components/tasks/TasksSelectionContext/decorators";
 import { withTaskDetailCompact } from "@/components/tasks/TaskDetailCompactClientContainer/decorators";
 
 const userId = "BKs42HvVDEZFoaJUmTqf1gTN0K8pUFjI";
@@ -21,7 +20,6 @@ const meta = {
   component: TeamProfileTasksPage,
   parameters: { layout: "fullscreen" },
   decorators: [
-    withTasksSelectionProvider,
     withTaskDetailCompact,
     withTaskComments,
     PageDecorator,

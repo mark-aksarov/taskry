@@ -8,7 +8,7 @@ interface ViewModeLayoutProps {
 }
 
 export function ViewModeLayout({ list, grid }: ViewModeLayoutProps) {
-  const { viewMode } = useViewMode();
+  const { viewMode, containerRef } = useViewMode();
 
-  return <>{viewMode === "list" ? list : grid}</>;
+  return <div ref={containerRef}>{viewMode === "list" ? list : grid}</div>;
 }

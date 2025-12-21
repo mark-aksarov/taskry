@@ -1,39 +1,45 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
 import { ToolbarActionsMenuTrigger } from "../common/Toolbar";
 import { Check, CircleEllipsis, Clock, Trash } from "lucide-react";
 import { BulkDeleteEntityModal } from "../common/BulkDeleteEntityModal";
 import { ActionFn, ActionState, DeleteTasksPayload } from "@/lib/actions/types";
-import { useTasksSelection } from "./TasksSelectionContext/TasksSelectionContext";
+import { useExtractCheckedItemIds } from "@/lib/hooks/useExtractCheckedItemIds";
 
 interface TaskToolbarActionsMenuTriggerProps {
   deleteAction: ActionFn<ActionState, DeleteTasksPayload>;
+}
+
+interface DeleteModalState {
+  taskIds: number[];
+  isOpen: boolean;
 }
 
 export const TaskToolbarActionsMenuTrigger = ({
   deleteAction,
 }: TaskToolbarActionsMenuTriggerProps) => {
   const t = useTranslations("tasks.TaskToolbarActionsMenuTrigger");
+  const extractCheckedItemIds =
+    useExtractCheckedItemIds<number>("task-checkbox-");
 
-  // Delete State
-  const [isOpenDeleteModal, setIsOpenDeleteModal] = useState(false);
-
-  const { selectedIds } = useTasksSelection();
-
-  const taskIds = useMemo(
-    () =>
-      Object.keys(selectedIds)
-        .filter((id) => selectedIds[Number(id)])
-        .map(Number),
-    [selectedIds],
-  );
+  const [deleteModal, setDeleteModal] = useState<DeleteModalState>({
+    taskIds: [],
+    isOpen: false,
+  });
 
   const handleAction = (key: Key) => {
+    const ids = extractCheckedItemIds();
+
     if (key === "delete") {
-      setIsOpenDeleteModal(true);
+      if (ids.length > 0) {
+        setDeleteModal({
+          taskIds: ids,
+          isOpen: true,
+        });
+      }
     }
   };
 
@@ -59,9 +65,11 @@ export const TaskToolbarActionsMenuTrigger = ({
       </ToolbarActionsMenuTrigger>
 
       <BulkDeleteEntityModal
-        entityIds={taskIds}
-        isOpen={isOpenDeleteModal}
-        onOpenChange={setIsOpenDeleteModal}
+        entityIds={deleteModal.taskIds}
+        isOpen={deleteModal.isOpen}
+        onOpenChange={(isOpen) =>
+          setDeleteModal((prev) => ({ ...prev, isOpen }))
+        }
         deleteAction={deleteAction}
         translationNamespace="tasks.BulkDeleteTaskModal"
       />

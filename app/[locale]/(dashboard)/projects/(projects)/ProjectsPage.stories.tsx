@@ -14,9 +14,8 @@ import { ProjectFiltersForm } from "@/components/projects/ProjectFiltersForm";
 import { withUserDetail } from "@/components/users/UserDetailClientContainer/decorators";
 import { Default as ProjectListStory } from "@/components/projects/ProjectList/ProjectList.stories";
 import { Default as ProjectGridStory } from "@/components/projects/ProjectGrid/ProjectGrid.stories";
-import { withEditProjectForm } from "@/components/projects/EditProjectFormClientContainerContext/decorators";
 import { withProjectComments } from "@/components/projects/ProjectCommentsClientContainer/decorators";
-import { withProjectsSelectionProvider } from "@/components/projects/ProjectsSelectionContext/decorators";
+import { withEditProjectForm } from "@/components/projects/EditProjectFormClientContainerContext/decorators";
 import { Default as ProjectFormBaseStory } from "@/components/projects/ProjectFormBase/ProjectFormBase.stories";
 import { withProjectDetailCompact } from "@/components/projects/ProjectDetailCompactClientContainer/decorators";
 import { Default as ProjectFiltersFormStory } from "@/components/projects/ProjectFiltersForm/ProjectFiltersForm.stories";
@@ -26,7 +25,6 @@ const meta = {
   component: ProjectsPage,
   parameters: { layout: "fullscreen" },
   decorators: [
-    withProjectsSelectionProvider,
     withEditProjectForm,
     withProjectDetailCompact,
     withProjectComments,

@@ -7,7 +7,6 @@ import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { updateProjectStatuses } from "@/lib/actions/updateProjectStatuses";
 import { createProjectCategory } from "@/lib/actions/createProjectCategory";
 import { ProjectsServerContainer } from "@/components/projects/ProjectsServerContainer";
-import { ProjectsSelectionProvider } from "@/components/projects/ProjectsSelectionContext";
 import { NewProjectFormServerContainer } from "@/components/projects/NewProjectFormServerContainer";
 import { EditProjectFormClientContainer } from "@/components/projects/EditProjectFormClientContainer";
 import { ProjectFiltersFormServerContainer } from "@/components/projects/ProjectFiltersFormServerContainer";
@@ -72,29 +71,27 @@ export default async function AppProjectsPage({
     <EditProjectFormClientContainerProvider
       value={EditProjectFormClientContainer}
     >
-      <ProjectsSelectionProvider>
-        <ProjectsPage
-          page={page}
-          pageSize={pageSize}
-          sort={sort}
-          filters={{
-            status,
-            category,
-            customer,
-            user,
-            deadline,
-            dateStart,
-            dateEnd,
-            noActiveTasks,
-          }}
-          createProjectCategoryAction={createProjectCategory}
-          deleteProjectsAction={deleteProjects}
-          updateProjectStatusesAction={updateProjectStatuses}
-          ProjectFiltersFormContainer={ProjectFiltersFormServerContainer}
-          ProjectsServerContainer={ProjectsServerContainer}
-          NewProjectFormContainer={NewProjectFormServerContainer}
-        />
-      </ProjectsSelectionProvider>
+      <ProjectsPage
+        page={page}
+        pageSize={pageSize}
+        sort={sort}
+        filters={{
+          status,
+          category,
+          customer,
+          user,
+          deadline,
+          dateStart,
+          dateEnd,
+          noActiveTasks,
+        }}
+        createProjectCategoryAction={createProjectCategory}
+        deleteProjectsAction={deleteProjects}
+        updateProjectStatusesAction={updateProjectStatuses}
+        ProjectFiltersFormContainer={ProjectFiltersFormServerContainer}
+        ProjectsServerContainer={ProjectsServerContainer}
+        NewProjectFormContainer={NewProjectFormServerContainer}
+      />
     </EditProjectFormClientContainerProvider>
   );
 }

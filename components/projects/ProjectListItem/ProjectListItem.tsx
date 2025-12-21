@@ -29,7 +29,6 @@ import { ProjectDetailModal } from "../ProjectDetailModal";
 import { UnknownUser } from "@/components/common/UnknownUser";
 import { ProjectCommentsModal } from "../ProjectCommentsModal";
 import { ProjectListItemLayout } from "./ProjectListItemLayout";
-import { useProjectsSelection } from "../ProjectsSelectionContext";
 import { ImageContainer } from "@/components/common/ImageContainer";
 import { UserDetailModal } from "@/components/users/UserDetailModal";
 import { ProjectDetailBottomSheet } from "../ProjectDetailBottomSheet";
@@ -80,7 +79,6 @@ export const ProjectListItem = ({
   updateStatusAction,
 }: ProjectListItemProps) => {
   const t = useTranslations("projects");
-  const { selectedIds, toggleSelection } = useProjectsSelection();
 
   const format = useFormatter();
 
@@ -102,16 +100,13 @@ export const ProjectListItem = ({
     <UnknownUser className="h-9 w-9" />
   );
 
-  const isSelected = !!selectedIds[id];
-
   return (
     <ProjectListItemLayout
       checkboxSlot={
         showCheckbox && (
           <Checkbox
             aria-label="project checkbox"
-            isSelected={isSelected}
-            onChange={() => toggleSelection(id)}
+            id={`project-checkbox-${id}`}
           />
         )
       }

@@ -1,6 +1,6 @@
+import { useTranslations } from "next-intl";
 import { ToggleButton, ToggleButtonGroup } from "@/components/ui";
 import { ToggleButtonGroupProps } from "@/components/ui/ToggleButtonGroup/ToggleButtonGroup";
-import { useTranslations } from "next-intl";
 
 interface NotificationFilterToggleButtonGroupProps
   extends Pick<ToggleButtonGroupProps, "selectedKeys" | "onSelectionChange"> {

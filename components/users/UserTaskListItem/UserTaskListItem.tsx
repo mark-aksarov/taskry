@@ -25,7 +25,6 @@ import { Checkbox, RACDialogTrigger } from "@/components/ui";
 import { UserTaskListItemLayout } from "./UserTaskListItemLayout";
 import { TaskDetailModal } from "@/components/tasks/TaskDetailModal";
 import { TaskCommentsModal } from "@/components/tasks/TaskCommentsModal";
-import { useTasksSelection } from "@/components/tasks/TasksSelectionContext";
 import { TaskDetailBottomSheet } from "@/components/tasks/TaskDetailBottomSheet";
 import { getTaskStatusBadgeColor } from "@/components/tasks/getTaskStatusBadgeColor";
 import { TaskItemActionMenuTrigger } from "@/components/tasks/TaskItemActionMenuTrigger";
@@ -48,7 +47,6 @@ export const UserTaskListItem = ({
   deleteAction,
 }: UserTaskListItemProps) => {
   const t = useTranslations();
-  const { selectedIds, toggleSelection } = useTasksSelection();
 
   const format = useFormatter();
 
@@ -62,15 +60,12 @@ export const UserTaskListItem = ({
       })
     : t("users.UserTaskListItem.noDeadline");
 
-  const isSelected = !!selectedIds[id];
-
   return (
     <UserTaskListItemLayout
       checkboxSlot={
         <Checkbox
           aria-label={t("users.UserTaskListItem.checkboxAriaLabel")}
-          isSelected={isSelected}
-          onChange={() => toggleSelection(id)}
+          id={`task-checkbox-${id}`}
         />
       }
       deadlineSlot={

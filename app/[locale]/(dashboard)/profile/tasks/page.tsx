@@ -6,7 +6,6 @@ import { ProfileTasksPage } from "./ProfileTasksPage";
 import { deleteTasks } from "@/lib/actions/deleteTasks";
 import { ProfileTasksPageEmpty } from "./ProfileTasksPageEmpty";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
-import { TasksSelectionProvider } from "@/components/tasks/TasksSelectionContext";
 import { UserTasksServerContainer } from "@/components/users/UserTasksServerContainer";
 import { UserHeaderServerContainer } from "@/components/users/UserHeaderServerContainer";
 import { NewTaskFormServerContainer } from "@/components/tasks/NewTaskFormServerContainer";
@@ -46,16 +45,14 @@ export default async function AppProfileTasksPage({
     );
 
   return (
-    <TasksSelectionProvider>
-      <ProfileTasksPage
-        userId={userId}
-        page={page}
-        pageSize={pageSize}
-        UserTasksContainer={UserTasksServerContainer}
-        UserHeaderContainer={UserHeaderServerContainer}
-        NewTaskFormContainer={NewTaskFormServerContainer}
-        deleteTasksAction={deleteTasks}
-      />
-    </TasksSelectionProvider>
+    <ProfileTasksPage
+      userId={userId}
+      page={page}
+      pageSize={pageSize}
+      UserTasksContainer={UserTasksServerContainer}
+      UserHeaderContainer={UserHeaderServerContainer}
+      NewTaskFormContainer={NewTaskFormServerContainer}
+      deleteTasksAction={deleteTasks}
+    />
   );
 }

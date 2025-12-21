@@ -5,7 +5,6 @@ import { withProjectComments } from "../ProjectCommentsClientContainer/decorator
 import { withUserDetail } from "@/components/users/UserDetailClientContainer/decorators";
 import { withProjectDetailCompact } from "../ProjectDetailCompactClientContainer/decorators";
 import { withEditProjectForm } from "../EditProjectFormClientContainerContext/decorators";
-import { withProjectsSelectionProvider } from "../ProjectsSelectionContext/decorators";
 
 const meta = {
   title: "Components/projects/ProjectGridItem",
@@ -18,7 +17,6 @@ const meta = {
       </div>
     ),
     withEditProjectForm,
-    withProjectsSelectionProvider,
     withProjectDetailCompact,
     withProjectComments,
     withUserDetail,

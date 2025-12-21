@@ -29,7 +29,6 @@ import { Checkbox, RACDialogTrigger } from "@/components/ui";
 import { UnknownUser } from "@/components/common/UnknownUser";
 import { ProjectCommentsModal } from "../ProjectCommentsModal";
 import { ProjectGridItemLayout } from "./ProjectGridItemLayout";
-import { useProjectsSelection } from "../ProjectsSelectionContext";
 import { ImageContainer } from "@/components/common/ImageContainer";
 import { UserDetailModal } from "@/components/users/UserDetailModal";
 import { ProjectDetailBottomSheet } from "../ProjectDetailBottomSheet";
@@ -68,7 +67,6 @@ export function ProjectGridItem({
   updateStatusAction,
 }: ProjectGridItemProps) {
   const t = useTranslations("projects");
-  const { selectedIds, toggleSelection } = useProjectsSelection();
 
   const format = useFormatter();
 
@@ -90,16 +88,10 @@ export function ProjectGridItem({
     <UnknownUser className="h-9 w-9" />
   );
 
-  const isSelected = !!selectedIds[id];
-
   return (
     <ProjectGridItemLayout
       checkboxSlot={
-        <Checkbox
-          aria-label={title}
-          isSelected={isSelected}
-          onChange={() => toggleSelection(id)}
-        />
+        <Checkbox aria-label={title} id={`project-checkbox-${id}`} />
       }
       menuTriggerSlot={
         <ProjectItemActionMenuTrigger
