@@ -1,1 +1,0 @@
-export { BulkDeleteProjectModal } from "./BulkDeleteProjectModal";

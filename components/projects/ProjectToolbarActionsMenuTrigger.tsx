@@ -12,8 +12,8 @@ import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
 import { ToolbarActionsMenuTrigger } from "../common/Toolbar";
 import { useProjectsSelection } from "./ProjectsSelectionContext";
-import { BulkDeleteProjectModal } from "./BulkDeleteProjectModal";
 import { Check, CircleEllipsis, Clock, Trash } from "lucide-react";
+import { BulkDeleteEntityModal } from "../common/BulkDeleteEntityModal";
 import { BulkUpdateProjectStatusModal } from "./BulkUpdateProjectStatusModal";
 
 interface ProjectToolbarActionsMenuTriggerProps {
@@ -80,10 +80,11 @@ export const ProjectToolbarActionsMenuTrigger = ({
         </Item>
       </ToolbarActionsMenuTrigger>
 
-      <BulkDeleteProjectModal
-        projectIds={projectIds}
+      <BulkDeleteEntityModal
+        entityIds={projectIds}
         isOpen={isOpenDeleteModal}
         onOpenChange={setIsOpenDeleteModal}
+        translationNamespace="projects.BulkDeleteProjectModal"
         deleteAction={deleteAction}
       />
 
