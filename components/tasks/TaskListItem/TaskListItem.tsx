@@ -4,6 +4,7 @@ import {
   ActionFn,
   ActionState,
   DeleteProjectsPayload,
+  UpdateTaskStatusesPayload,
 } from "@/lib/actions/types";
 
 import {
@@ -56,6 +57,7 @@ export interface TaskListItemProps {
   commentsCount: number;
   showCheckbox?: boolean;
   deleteAction: ActionFn<ActionState, DeleteProjectsPayload>;
+  updateStatusAction: ActionFn<ActionState, UpdateTaskStatusesPayload>;
 }
 
 export const TaskListItem = ({
@@ -69,6 +71,7 @@ export const TaskListItem = ({
   commentsCount,
   showCheckbox,
   deleteAction,
+  updateStatusAction,
 }: TaskListItemProps) => {
   const t = useTranslations("tasks");
 
@@ -195,7 +198,10 @@ export const TaskListItem = ({
         <TaskItemActionMenuTrigger
           taskId={id}
           taskTitle={title}
+          taskStatus={status}
+          projectStatus={project.status}
           deleteAction={deleteAction}
+          updateStatusAction={updateStatusAction}
         />
       }
     />

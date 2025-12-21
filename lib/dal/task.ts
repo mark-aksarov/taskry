@@ -1,14 +1,15 @@
 import "server-only";
 
 import {
-  mapTaskCategorySummaryToDTO,
   mapTaskDetailToDTO,
-  mapTaskListItemToDTO,
   mapTaskSummaryToDTO,
+  mapTaskListItemToDTO,
+  mapTaskCategorySummaryToDTO,
 } from "../mappers/task";
 
 import { cache } from "react";
 import prisma from "../prisma";
+import { TaskStatus } from "@/generated/prisma/enums";
 import { getSessionOrThrow } from "../utils/getSessionOrThrow";
 
 export const getTaskSummary = cache(async (id: number) => {
@@ -193,4 +194,29 @@ export const deleteTasks = async (ids: number[]) => {
   if (count === 0) throw new Error("No tasks deleted.");
 
   return count;
+};
+
+export const updateTaskStatuses = async (
+  taskIds: number[],
+  nextStatus: TaskStatus,
+) => {
+  const session = await getSessionOrThrow();
+  const workspaceId = session.user.workspaceId;
+
+  await prisma.task.updateMany({
+    where: {
+      id: { in: taskIds },
+      workspaceId,
+      project: {
+        status: { not: "completed" },
+        ...(nextStatus === "active" ? { status: { not: "pending" } } : {}),
+      },
+    },
+    data: {
+      status: nextStatus,
+      updatedAt: new Date(),
+    },
+  });
+
+  return taskIds;
 };

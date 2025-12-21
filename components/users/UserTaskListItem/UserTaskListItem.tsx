@@ -4,6 +4,7 @@ import {
   ActionFn,
   ActionState,
   DeleteProjectsPayload,
+  UpdateTaskStatusesPayload,
 } from "@/lib/actions/types";
 
 import {
@@ -34,8 +35,10 @@ export interface UserTaskListItemProps {
   title: string;
   deadline?: Date;
   status: string;
+  projectStatus: string;
   commentsCount: number;
   deleteAction: ActionFn<ActionState, DeleteProjectsPayload>;
+  updateStatusAction: ActionFn<ActionState, UpdateTaskStatusesPayload>;
 }
 
 export const UserTaskListItem = ({
@@ -43,8 +46,10 @@ export const UserTaskListItem = ({
   title,
   deadline,
   status,
+  projectStatus,
   commentsCount,
   deleteAction,
+  updateStatusAction,
 }: UserTaskListItemProps) => {
   const t = useTranslations();
 
@@ -114,6 +119,9 @@ export const UserTaskListItem = ({
           taskId={id}
           taskTitle={title}
           deleteAction={deleteAction}
+          updateStatusAction={updateStatusAction}
+          taskStatus={status}
+          projectStatus={projectStatus}
         />
       }
     />

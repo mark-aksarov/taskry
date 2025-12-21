@@ -31,7 +31,9 @@ export const Default = {
           deadline={new Date("2025-09-30")}
           status="pending"
           commentsCount={10}
+          projectStatus="pending"
           deleteAction={mockedAction}
+          updateStatusAction={mockedAction}
         />
         <UserTaskListItem
           id={2}
@@ -39,7 +41,9 @@ export const Default = {
           deadline={new Date("2025-10-05")}
           status="active"
           commentsCount={22}
+          projectStatus="pending"
           deleteAction={mockedAction}
+          updateStatusAction={mockedAction}
         />
         <UserTaskListItem
           id={3}
@@ -47,7 +51,9 @@ export const Default = {
           deadline={new Date("2025-10-10")}
           status="completed"
           commentsCount={2}
+          projectStatus="pending"
           deleteAction={mockedAction}
+          updateStatusAction={mockedAction}
         />
         <UserTaskListItem
           id={4}
@@ -55,7 +61,9 @@ export const Default = {
           deadline={new Date("2025-10-12")}
           status="pending"
           commentsCount={12}
+          projectStatus="pending"
           deleteAction={mockedAction}
+          updateStatusAction={mockedAction}
         />
         <UserTaskListItem
           id={5}
@@ -63,7 +71,9 @@ export const Default = {
           deadline={new Date("2025-10-15")}
           status="active"
           commentsCount={15}
+          projectStatus="pending"
           deleteAction={mockedAction}
+          updateStatusAction={mockedAction}
         />
         <UserTaskListItem
           id={6}
@@ -71,7 +81,9 @@ export const Default = {
           deadline={new Date("2025-10-18")}
           status="completed"
           commentsCount={9}
+          projectStatus="pending"
           deleteAction={mockedAction}
+          updateStatusAction={mockedAction}
         />
         <UserTaskListItem
           id={7}
@@ -79,7 +91,9 @@ export const Default = {
           deadline={new Date("2025-10-20")}
           status="completed"
           commentsCount={12}
+          projectStatus="pending"
           deleteAction={mockedAction}
+          updateStatusAction={mockedAction}
         />
         <UserTaskListItem
           id={8}
@@ -87,7 +101,9 @@ export const Default = {
           deadline={new Date("2025-10-22")}
           status="active"
           commentsCount={10}
+          projectStatus="pending"
           deleteAction={mockedAction}
+          updateStatusAction={mockedAction}
         />
         <UserTaskListItem
           id={9}
@@ -95,7 +111,9 @@ export const Default = {
           deadline={new Date("2025-10-25")}
           status="pending"
           commentsCount={23}
+          projectStatus="pending"
           deleteAction={mockedAction}
+          updateStatusAction={mockedAction}
         />
         <UserTaskListItem
           id={10}
@@ -103,7 +121,9 @@ export const Default = {
           deadline={new Date("2025-10-28")}
           status="completed"
           commentsCount={13}
+          projectStatus="pending"
           deleteAction={mockedAction}
+          updateStatusAction={mockedAction}
         />
       </>
     ),

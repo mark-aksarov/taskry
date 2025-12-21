@@ -144,8 +144,8 @@ export function ProjectItemActionMenuTrigger({
       <UpdateProjectStatusModal
         projectId={projectId}
         {...updateModal}
-        onOpenChange={(open) =>
-          setUpdateModal((prev) => ({ ...prev, isOpen: open }))
+        onOpenChange={(isOpen) =>
+          setUpdateModal((prev) => ({ ...prev, isOpen }))
         }
         updateStatusAction={updateStatusAction}
       />

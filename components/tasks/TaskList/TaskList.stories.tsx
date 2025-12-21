@@ -45,6 +45,7 @@ export const Default = {
           commentsCount={10}
           showCheckbox
           deleteAction={mockedAction}
+          updateStatusAction={mockedAction}
         />
 
         <TaskListItem
@@ -58,6 +59,7 @@ export const Default = {
           commentsCount={22}
           showCheckbox
           deleteAction={mockedAction}
+          updateStatusAction={mockedAction}
         />
 
         <TaskListItem
@@ -71,6 +73,7 @@ export const Default = {
           commentsCount={2}
           showCheckbox
           deleteAction={mockedAction}
+          updateStatusAction={mockedAction}
         />
 
         <TaskListItem
@@ -88,6 +91,7 @@ export const Default = {
           commentsCount={12}
           showCheckbox
           deleteAction={mockedAction}
+          updateStatusAction={mockedAction}
         />
 
         <TaskListItem
@@ -101,6 +105,7 @@ export const Default = {
           commentsCount={15}
           showCheckbox
           deleteAction={mockedAction}
+          updateStatusAction={mockedAction}
         />
 
         <TaskListItem
@@ -114,6 +119,7 @@ export const Default = {
           commentsCount={9}
           showCheckbox
           deleteAction={mockedAction}
+          updateStatusAction={mockedAction}
         />
 
         <TaskListItem
@@ -131,6 +137,7 @@ export const Default = {
           commentsCount={12}
           showCheckbox
           deleteAction={mockedAction}
+          updateStatusAction={mockedAction}
         />
 
         <TaskListItem
@@ -144,6 +151,7 @@ export const Default = {
           commentsCount={10}
           showCheckbox
           deleteAction={mockedAction}
+          updateStatusAction={mockedAction}
         />
 
         <TaskListItem
@@ -161,6 +169,7 @@ export const Default = {
           commentsCount={23}
           showCheckbox
           deleteAction={mockedAction}
+          updateStatusAction={mockedAction}
         />
 
         <TaskListItem
@@ -174,6 +183,7 @@ export const Default = {
           commentsCount={13}
           showCheckbox
           deleteAction={mockedAction}
+          updateStatusAction={mockedAction}
         />
       </TaskList>
     ),

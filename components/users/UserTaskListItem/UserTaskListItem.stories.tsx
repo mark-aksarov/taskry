@@ -22,6 +22,8 @@ export const Default = {
     deadline: new Date("2025-09-30"),
     commentsCount: 10,
     status: "pending",
+    projectStatus: "pending",
     deleteAction: fn(),
+    updateStatusAction: fn(),
   },
 } satisfies Story;

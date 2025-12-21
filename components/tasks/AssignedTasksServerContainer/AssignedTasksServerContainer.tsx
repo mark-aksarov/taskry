@@ -11,6 +11,7 @@ import { TaskListItem } from "../TaskListItem";
 import { deleteTasks } from "@/lib/actions/deleteTasks";
 import { getTaskCount, getTaskList } from "@/lib/dal/task";
 import { Pagination } from "@/components/common/Pagination";
+import { updateTaskStatuses } from "@/lib/actions/updateTaskStatuses";
 
 interface AssignedTasksServerContainerProps {
   page: number;
@@ -70,6 +71,7 @@ export async function AssignedTasksServerContainer({
               assignee={task.assignee}
               commentsCount={task.commentsCount}
               deleteAction={deleteTasks}
+              updateStatusAction={updateTaskStatuses}
             />
           ))}
         </TaskList>

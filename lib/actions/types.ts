@@ -19,3 +19,8 @@ export interface UpdateProjectStatusesPayload {
   ids: number[];
   nextStatus: string;
 }
+
+export interface UpdateTaskStatusesPayload {
+  ids: number[];
+  nextStatus: string;
+}

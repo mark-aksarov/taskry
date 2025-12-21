@@ -4,46 +4,70 @@ import {
   ActionFn,
   ActionState,
   DeleteProjectsPayload,
+  UpdateTaskStatusesPayload,
 } from "@/lib/actions/types";
 
-import { useState } from "react";
 import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
 import { ItemBaseActionMenuTrigger } from "../common/ItemBase";
 import { DeleteEntityModal } from "../common/DeleteEntityModal";
-import { Check, CircleEllipsis, Clock, Trash } from "lucide-react";
+import { startTransition, useActionState, useState } from "react";
+import { useActionErrorToast } from "@/lib/hooks/useActionErrorToast";
+import { Check, CircleEllipsis, Clock, Pencil, Trash } from "lucide-react";
 
 export type TaskItemActionMenuTriggerProps = {
   taskId: number;
   taskTitle: string;
+  taskStatus: string;
+  projectStatus: string;
   className?: string;
   deleteAction: ActionFn<ActionState, DeleteProjectsPayload>;
+  updateStatusAction: ActionFn<ActionState, UpdateTaskStatusesPayload>;
+};
+
+const initialState: ActionState = {
+  status: null,
+  message: null,
 };
 
 export function TaskItemActionMenuTrigger({
   taskId,
   taskTitle,
+  taskStatus,
+  projectStatus,
   className,
   deleteAction,
+  updateStatusAction,
 }: TaskItemActionMenuTriggerProps) {
   const t = useTranslations("tasks.TaskItemActionMenuTrigger");
 
-  // Delete State
   const [isOpenDeleteModal, setIsOpenDeleteModal] = useState(false);
+
+  const [
+    updateTaskStatusState,
+    updateTaskStatusAction,
+    updateTaskStatusPending,
+  ] = useActionState(updateStatusAction, initialState);
 
   function handleAction(key: Key) {
     const action = key.toString();
 
     if (action === "delete") {
       setIsOpenDeleteModal(true);
+    } else {
+      startTransition(() => {
+        updateTaskStatusAction({ ids: [taskId], nextStatus: action });
+      });
     }
   }
+
+  useActionErrorToast(updateTaskStatusState);
 
   return (
     <>
       <ItemBaseActionMenuTrigger className={className} onAction={handleAction}>
         <Item textValue={t("edit")} key="edit">
-          <Trash size={16} /> {t("edit")}
+          <Pencil size={16} /> {t("edit")}
         </Item>
         <Item textValue={t("delete")} key="delete">
           <Trash size={16} /> {t("delete")}
@@ -51,7 +75,7 @@ export function TaskItemActionMenuTrigger({
         <Item textValue={t("markPending")} key="pending">
           <CircleEllipsis size={16} /> {t("markPending")}
         </Item>
-        <Item textValue={t("markCompleted")} key="done">
+        <Item textValue={t("markCompleted")} key="completed">
           <Check size={16} /> {t("markCompleted")}
         </Item>
         <Item textValue={t("markActive")} key="active">

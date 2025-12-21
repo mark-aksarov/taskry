@@ -34,6 +34,7 @@ export const Default = {
     assignee: { id: "user1", imageUrl: "/man.jpg", fullName: "John Doe" },
     commentsCount: 10,
     deleteAction: fn(),
+    updateStatusAction: fn(),
   },
 } satisfies Story;
 

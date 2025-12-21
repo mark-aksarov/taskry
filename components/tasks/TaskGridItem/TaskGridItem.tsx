@@ -4,6 +4,7 @@ import {
   ActionFn,
   ActionState,
   DeleteProjectsPayload,
+  UpdateTaskStatusesPayload,
 } from "@/lib/actions/types";
 
 import {
@@ -45,10 +46,12 @@ export interface TaskGridItemProps {
     fullName: string;
   };
   status: string;
+  projectStatus: string;
   commentsCount: number;
   subtasksTotal: number;
   subtasksDone: number;
   deleteAction: ActionFn<ActionState, DeleteProjectsPayload>;
+  updateStatusAction: ActionFn<ActionState, UpdateTaskStatusesPayload>;
 }
 
 export function TaskGridItem({
@@ -57,10 +60,12 @@ export function TaskGridItem({
   deadline,
   assignee,
   status,
+  projectStatus,
   commentsCount,
   subtasksTotal,
   subtasksDone,
   deleteAction,
+  updateStatusAction,
 }: TaskGridItemProps) {
   const t = useTranslations("tasks");
 
@@ -91,7 +96,10 @@ export function TaskGridItem({
         <TaskItemActionMenuTrigger
           taskId={id}
           taskTitle={title}
+          taskStatus={status}
+          projectStatus={projectStatus}
           deleteAction={deleteAction}
+          updateStatusAction={updateStatusAction}
           className="-mr-2"
         />
       }

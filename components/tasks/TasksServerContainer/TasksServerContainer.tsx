@@ -7,6 +7,7 @@ import { deleteTasks } from "@/lib/actions/deleteTasks";
 import { getTaskCount, getTaskList } from "@/lib/dal/task";
 import { Pagination } from "@/components/common/Pagination";
 import { ViewModeLayout } from "@/components/common/ViewMode";
+import { updateTaskStatuses } from "@/lib/actions/updateTaskStatuses";
 
 interface TasksServerContainerProps {
   page: number;
@@ -50,6 +51,7 @@ export async function TasksServerContainer({
                 category={task.category}
                 project={task.project}
                 deleteAction={deleteTasks}
+                updateStatusAction={updateTaskStatuses}
                 showCheckbox
                 {...getCommonProps(task)}
               />
@@ -62,6 +64,8 @@ export async function TasksServerContainer({
               <TaskGridItem
                 key={task.id}
                 subtasksDone={task.subtasks.done}
+                projectStatus={task.project.status}
+                updateStatusAction={updateTaskStatuses}
                 deleteAction={deleteTasks}
                 {...getCommonProps(task)}
               />
