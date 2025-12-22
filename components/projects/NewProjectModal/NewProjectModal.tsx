@@ -15,6 +15,7 @@ export function NewProjectModal({
 
   return (
     <FormBaseModal
+      formId="new-project-form"
       title={t("title")}
       submitButtonLabel={t("submitButtonLabel")}
       form={newProjectForm}

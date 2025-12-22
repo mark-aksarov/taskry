@@ -13,6 +13,7 @@ import { twMerge } from "tailwind-merge";
 
 interface FormBaseModalProps
   extends Pick<ModalProps, "isOpen" | "onOpenChange"> {
+  formId: string;
   title: string;
   form: React.ReactNode;
   submitButtonLabel: string;
@@ -20,6 +21,7 @@ interface FormBaseModalProps
 }
 
 export function FormBaseModal({
+  formId,
   title,
   form,
   submitButtonLabel,
@@ -41,7 +43,7 @@ export function FormBaseModal({
         <DialogFooter>
           <Button
             type="submit"
-            form="new-project-form"
+            form={formId}
             variant="primary"
             size="medium"
             label={submitButtonLabel}

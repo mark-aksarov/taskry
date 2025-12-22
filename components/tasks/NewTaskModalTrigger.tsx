@@ -20,6 +20,7 @@ export function NewTaskModalTrigger({ newTaskForm }: NewTaskModalTriggerProps) {
         iconLeft={<Plus size={16} strokeWidth={1.5} absoluteStrokeWidth />}
       />
       <FormBaseModal
+        formId="new-task-form"
         title={t("title")}
         form={newTaskForm}
         submitButtonLabel={t("submitButtonLabel")}

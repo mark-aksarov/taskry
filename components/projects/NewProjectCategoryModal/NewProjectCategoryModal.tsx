@@ -15,6 +15,7 @@ export function NewProjectCategoryModal({
 
   return (
     <FormBaseModal
+      formId="new-project-category-form"
       title={t("title")}
       submitButtonLabel={t("submitButtonLabel")}
       form={newProjectCategoryForm}

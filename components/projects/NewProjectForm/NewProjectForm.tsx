@@ -16,6 +16,7 @@ export function NewProjectForm({
 }: NewProjectFormProps) {
   return (
     <ProjectFormBase
+      id="new-project-form"
       projectStatusSelect={projectStatusSelect}
       projectCategorySelect={projectCategorySelect}
       projectCustomerSelect={projectCustomerSelect}

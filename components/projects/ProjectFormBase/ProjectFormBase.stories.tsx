@@ -74,5 +74,6 @@ export const Default = {
       />
     ),
     formAction: fn(),
+    id: "new-project-form",
   },
 } satisfies Story;

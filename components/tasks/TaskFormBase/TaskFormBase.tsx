@@ -1,45 +1,80 @@
 "use client";
 
 import { RACForm, TextField } from "@/components/ui";
-import { ResponsiveDatePicker } from "@/components/common/ResponsiveDatePicker";
-import { AttachmentsField } from "@/components/common/AttachmentsField/AttachmentsField";
-import { useTranslations } from "next-intl";
+import { ActionFn, ActionState } from "@/lib/actions/types";
+import { FormErrorText } from "@/components/common/FormErrorText";
+import { TaskFormBaseTitleTextField } from "./TaskFormBaseTitleTextField";
+import { DateValue, OverlayTriggerStateContext } from "react-aria-components";
+import { startTransition, useActionState, useContext, useEffect } from "react";
+import { TaskFormBaseDeadlineDatePicker } from "./TaskFormBaseDeadlineDatePicker";
+import { TaskFormBaseDescriptionTextField } from "./TaskFormBaseDescriptionTextField";
 
-export function TaskFormBase({
-  taskStatusSelect,
-  taskCategorySelect,
-  projectSelect,
-  assigneeSelect,
-}: {
+const initialState: ActionState = {
+  status: null,
+  message: null,
+};
+
+interface ProjectFormBaseProps {
+  id: string;
+  taskId?: number;
+  taskTitleDefaultValue?: string;
+  taskDescriptionDefaultValue?: string;
+  taskDeadlineDefaultValue?: DateValue;
   taskStatusSelect: React.ReactNode;
   taskCategorySelect: React.ReactNode;
   projectSelect: React.ReactNode;
   assigneeSelect: React.ReactNode;
-}) {
-  const t = useTranslations("tasks.TaskFormBase");
+  formAction: ActionFn<ActionState, FormData>;
+}
+
+export function TaskFormBase({
+  id,
+  taskId,
+  taskTitleDefaultValue,
+  taskDescriptionDefaultValue,
+  taskDeadlineDefaultValue,
+  taskStatusSelect,
+  taskCategorySelect,
+  projectSelect,
+  assigneeSelect,
+  formAction,
+}: ProjectFormBaseProps) {
+  const { close } = useContext(OverlayTriggerStateContext)!;
+
+  const [state, action, pending] = useActionState(formAction, initialState);
+
+  useEffect(() => {
+    if (state.status === "success") {
+      close();
+    }
+  }, [state, close]);
+
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    startTransition(() => action(formData));
+  }
 
   return (
-    <RACForm>
+    <RACForm id={id} onSubmit={handleSubmit}>
       <div className="flex flex-col gap-4">
-        <TextField
-          label={t("TaskFormBaseTitleTextField.label")}
-          placeholder={t("TaskFormBaseTitleTextField.placeholder")}
+        {state.status === "error" && (
+          <FormErrorText>{state.message}</FormErrorText>
+        )}
+
+        {taskId && <input type="hidden" name="id" value={taskId} />}
+
+        <TaskFormBaseTitleTextField defaultValue={taskTitleDefaultValue} />
+        <TaskFormBaseDescriptionTextField
+          defaultValue={taskDescriptionDefaultValue}
         />
-        <TextField
-          multiline
-          label={t("TaskFormBaseDescriptionTextField.label")}
-          placeholder={t("TaskFormBaseDescriptionTextField.placeholder")}
-          inputClassName="h-[9rem]"
-        />
-        <ResponsiveDatePicker
-          label={t("TaskFormBaseDeadlineDatePicker.label")}
-          overlayClassName="w-[var(--trigger-width)]"
+        <TaskFormBaseDeadlineDatePicker
+          defaultValue={taskDeadlineDefaultValue}
         />
         {taskStatusSelect}
         {taskCategorySelect}
         {projectSelect}
         {assigneeSelect}
-        <AttachmentsField />
       </div>
     </RACForm>
   );

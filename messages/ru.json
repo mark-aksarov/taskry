@@ -12,6 +12,12 @@
     },
     "deleteTaskAction": {
       "error": "Что-то пошло не так. Удаление не удалось."
+    },
+    "createProject": {
+      "validation": {
+        "invalidInput": "Некорректный ввод. Пожалуйста, проверьте данные и попробуйте снова.",
+        "internalServerError": "Произошла внутренняя ошибка сервера. Пожалуйста, попробуйте позже."
+      }
     }
   },
 
@@ -1203,44 +1209,70 @@
     },
 
     "TaskFormBase": {
-      "TaskFormBaseTitleTextField": {
-        "label": "Название",
-        "placeholder": "Введите название"
+      "title": {
+        "label": "Заголовок",
+        "placeholder": "Введите заголовок",
+
+        "validation": {
+          "required": "Заголовок обязателен",
+          "tooLong": "Заголовок слишком длинный"
+        }
       },
 
-      "TaskFormBaseDescriptionTextField": {
+      "description": {
         "label": "Описание",
         "placeholder": "Введите описание"
       },
 
-      "TaskFormBaseDeadlineDatePicker": {
-        "label": "Срок"
-      },
+      "deadline": {
+        "label": "Срок выполнения",
 
-      "TaskFormBaseStatusSelect": {
-        "label": "Статус",
-        "placeholder": "Выберите статус",
-
-        "items": {
-          "pending": "В ожидании",
-          "active": "Активная",
-          "completed": "Завершённая"
+        "validation": {
+          "required": "Укажите срок выполнения"
         }
       },
 
-      "TaskFormBaseCategorySelect": {
+      "category": {
         "label": "Категория",
-        "placeholder": "Выберите категорию"
+        "placeholder": "Выберите категорию",
+
+        "validation": {
+          "required": "Пожалуйста, выберите категорию"
+        }
       },
 
-      "TaskFormBaseProjectSelect": {
+      "project": {
         "label": "Проект",
-        "placeholder": "Выберите проект"
+        "placeholder": "Выберите проект",
+
+        "validation": {
+          "required": "Проект обязателен"
+        }
       },
 
-      "TaskFormBaseAssigneeSelect": {
+      "assignee": {
         "label": "Исполнитель",
-        "placeholder": "Выберите пользователя"
+        "placeholder": "Выберите исполнителя",
+
+        "validation": {
+          "required": "Исполнитель обязателен"
+        }
+      },
+
+      "status": {
+        "label": "Статус",
+        "placeholder": "Выберите статус",
+
+        "validation": {
+          "required": "Пожалуйста, выберите статус"
+        }
+      },
+
+      "validation": {
+        "server": {
+          "invalidInput": "Некорректные данные. Пожалуйста, проверьте введённую информацию и попробуйте снова.",
+          "internalServerError": "Произошла внутренняя ошибка сервера. Пожалуйста, попробуйте позже."
+        }
       }
     },
 

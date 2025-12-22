@@ -79,3 +79,13 @@ export interface TaskCategorySummaryDTO {
   id: number;
   name: string;
 }
+
+export interface CreateTaskInputDTO {
+  title: string;
+  description?: string;
+  deadline: Date;
+  categoryId: number;
+  status: ProjectStatus;
+  projectId: number;
+  assigneeId?: string;
+}

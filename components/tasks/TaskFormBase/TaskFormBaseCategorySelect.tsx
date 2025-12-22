@@ -5,15 +5,19 @@ import { ResponsiveSelect } from "@/components/common/ResponsiveSelect";
 import { useTranslations } from "next-intl";
 
 export function TaskFormBaseCategorySelect({
+  defaultSelectedKey,
   categories,
 }: {
+  defaultSelectedKey?: string;
   categories: { id: number; name: string }[];
 }) {
-  const t = useTranslations("tasks.TaskFormBase.TaskFormBaseCategorySelect");
+  const t = useTranslations("tasks.TaskFormBase.category");
 
   return (
     <ResponsiveSelect
+      name="categoryId"
       label={t("label")}
+      defaultSelectedKey={defaultSelectedKey}
       placeholder={t("placeholder")}
       overlayClassName="w-[var(--trigger-width)]"
       items={categories.map((item) => ({ id: item.id, label: item.name }))}

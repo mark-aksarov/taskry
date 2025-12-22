@@ -9,6 +9,7 @@ import {
 
 import { cache } from "react";
 import prisma from "../prisma";
+import { CreateTaskInputDTO } from "../dto/task";
 import { buildDateWhere } from "../utils/dateWhere";
 import { TaskFilters } from "../dto/filters/taskFilters";
 import { getSessionOrThrow } from "../utils/getSessionOrThrow";
@@ -254,4 +255,53 @@ export const updateTaskStatuses = async (
   });
 
   return count;
+};
+
+export const createTask = async (task: CreateTaskInputDTO) => {
+  const session = await getSessionOrThrow();
+  const creatorId = session.user.id;
+  const workspaceId = session.user.workspaceId;
+
+  const category = await prisma.taskCategory.findFirst({
+    where: {
+      id: task.categoryId,
+      workspaceId: workspaceId,
+    },
+  });
+
+  if (!category) {
+    throw new Error("Invalid category");
+  }
+
+  const project = await prisma.project.findFirst({
+    where: {
+      id: task.projectId,
+      workspaceId: workspaceId,
+    },
+  });
+
+  if (!project) {
+    throw new Error("Invalid project");
+  }
+
+  if (task.assigneeId) {
+    const assignee = await prisma.user.findFirst({
+      where: {
+        id: task.assigneeId,
+        workspaceId: workspaceId,
+      },
+    });
+
+    if (!assignee) {
+      throw new Error("Invalid assignee");
+    }
+  }
+
+  return await prisma.task.create({
+    data: {
+      ...task,
+      creatorId,
+      workspaceId,
+    },
+  });
 };

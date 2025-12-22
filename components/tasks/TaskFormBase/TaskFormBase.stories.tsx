@@ -1,3 +1,4 @@
+import { fn } from "storybook/test";
 import { TaskFormBase } from "./TaskFormBase";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { TaskFormBaseStatusSelect } from "./TaskFormBaseStatusSelect";
@@ -28,6 +29,8 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
+    id: "new-task-form",
+    formAction: fn(),
     taskStatusSelect: <TaskFormBaseStatusSelect />,
     taskCategorySelect: (
       <TaskFormBaseCategorySelect

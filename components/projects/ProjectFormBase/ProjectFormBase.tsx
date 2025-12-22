@@ -15,6 +15,7 @@ const initialState: ActionState = {
 };
 
 interface ProjectFormBaseProps {
+  id: string;
   projectId?: number;
   projectTitleDefaultValue?: string;
   projectDescriptionDefaultValue?: string;
@@ -26,6 +27,7 @@ interface ProjectFormBaseProps {
 }
 
 export function ProjectFormBase({
+  id,
   projectId,
   projectTitleDefaultValue,
   projectDescriptionDefaultValue,
@@ -52,7 +54,7 @@ export function ProjectFormBase({
   }
 
   return (
-    <RACForm id="new-project-form" onSubmit={handleSubmit}>
+    <RACForm id={id} onSubmit={handleSubmit}>
       <div className="flex flex-col gap-4">
         {state.status === "error" && (
           <FormErrorText>{state.message}</FormErrorText>

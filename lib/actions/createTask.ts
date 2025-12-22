@@ -6,23 +6,25 @@ import { ActionState } from "./types";
 import { headers } from "next/headers";
 import { revalidatePath } from "next/cache";
 import { redirect } from "@/i18n/navigation";
+import { TaskStatus } from "@/generated/prisma/enums";
+import { createTask as createTaskQuery } from "../dal/task";
 import { getLocale, getTranslations } from "next-intl/server";
-import { createProject as createProjectQuery } from "../dal/project";
 
 const schema = z.object({
   title: z.string().min(1).max(255),
   description: z.string().max(5000).optional(),
   deadline: z.coerce.date(),
-  status: z.enum(["active", "completed", "pending"]),
+  status: z.enum(TaskStatus),
   categoryId: z.coerce.number(),
-  customerId: z.coerce.number().optional(),
+  projectId: z.coerce.number(),
+  assigneeId: z.coerce.string().optional(),
 });
 
-export async function createProject(
+export async function createTask(
   _prevState: ActionState,
   formData: FormData,
 ): Promise<ActionState> {
-  const t = await getTranslations("projects.ProjectFormBase");
+  const t = await getTranslations("action.createTask");
   const locale = await getLocale();
 
   // Session Validation
@@ -47,7 +49,8 @@ export async function createProject(
     deadline: formData.get("deadline"),
     status: formData.get("status"),
     categoryId: formData.get("categoryId"),
-    customerId: formData.get("customerId"),
+    projectId: formData.get("projectId"),
+    assigneeId: formData.get("assigneeId"),
     workspaceId: formData.get("workspaceId"),
   });
 
@@ -56,7 +59,7 @@ export async function createProject(
 
     return {
       status: "error",
-      message: t("validation.server.invalidInput"),
+      message: t("validation.invalidInput"),
     };
   }
 
@@ -64,7 +67,7 @@ export async function createProject(
   try {
     const projectData = parse.data;
 
-    await createProjectQuery(projectData);
+    await createTaskQuery(projectData);
 
     revalidatePath("/projects");
 
@@ -77,7 +80,7 @@ export async function createProject(
 
     return {
       status: "error",
-      message: t("validation.server.internalServerError"),
+      message: t("validation.internalServerError"),
     };
   }
 }

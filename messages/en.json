@@ -13,8 +13,11 @@
     "deleteTaskAction": {
       "error": "Something went wrong. Delete failed."
     },
-    "updateTaskStatuses": {
-      "skippedTasks": "Some tasks were skipped ({count}) because their projects do not allow status changes (completed or pending): {tasks}"
+    "createProject": {
+      "validation": {
+        "invalidInput": "Invalid input. Please check your data and try again.",
+        "internalServerError": "An internal server error occurred. Please try again later."
+      }
     }
   },
 
@@ -1206,44 +1209,70 @@
     },
 
     "TaskFormBase": {
-      "TaskFormBaseTitleTextField": {
+      "title": {
         "label": "Title",
-        "placeholder": "Typing title"
+        "placeholder": "Typing title",
+
+        "validation": {
+          "required": "Title is required",
+          "tooLong": "Title is too long"
+        }
       },
 
-      "TaskFormBaseDescriptionTextField": {
+      "description": {
         "label": "Description",
         "placeholder": "Typing description"
       },
 
-      "TaskFormBaseDeadlineDatePicker": {
-        "label": "Deadline"
-      },
+      "deadline": {
+        "label": "Deadline",
 
-      "TaskFormBaseStatusSelect": {
-        "label": "Status",
-        "placeholder": "Select status",
-
-        "items": {
-          "pending": "Pending",
-          "active": "Active",
-          "completed": "Completed"
+        "validation": {
+          "required": "Deadline is required"
         }
       },
 
-      "TaskFormBaseCategorySelect": {
+      "category": {
         "label": "Category",
-        "placeholder": "Select category"
+        "placeholder": "Select category",
+
+        "validation": {
+          "required": "Please select a category"
+        }
       },
 
-      "TaskFormBaseProjectSelect": {
+      "project": {
         "label": "Project",
-        "placeholder": "Select project"
+        "placeholder": "Select project",
+
+        "validation": {
+          "required": "Project is required"
+        }
       },
 
-      "TaskFormBaseAssigneeSelect": {
-        "label": "Assigned To",
-        "placeholder": "Select user"
+      "assignee": {
+        "label": "Assignee",
+        "placeholder": "Select assignee",
+
+        "validation": {
+          "required": "Assignee is required"
+        }
+      },
+
+      "status": {
+        "label": "Status",
+        "placeholder": "Select status",
+
+        "validation": {
+          "required": "Please select a status"
+        }
+      },
+
+      "validation": {
+        "server": {
+          "invalidInput": "Invalid input. Please check your data and try again.",
+          "internalServerError": "An internal server error occurred. Please try again later."
+        }
       }
     },
 

@@ -26,6 +26,7 @@ export function EditProjectForm({
   return (
     <ProjectFormBase
       projectId={projectId}
+      id="edit-project-form"
       projectTitleDefaultValue={projectTitleDefaultValue}
       projectDescriptionDefaultValue={projectDescriptionDefaultValue}
       projectDeadlineDefaultValue={projectDeadlineDefaultValue}

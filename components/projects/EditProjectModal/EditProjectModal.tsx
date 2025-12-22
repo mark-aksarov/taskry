@@ -30,6 +30,7 @@ export function EditProjectModal({
 
   return (
     <FormBaseModal
+      formId="edit-project-form"
       title={t("title")}
       submitButtonLabel={t("submitButtonLabel")}
       form={

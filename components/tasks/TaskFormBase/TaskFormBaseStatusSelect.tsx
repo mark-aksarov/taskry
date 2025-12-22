@@ -4,18 +4,27 @@ import { Item } from "react-stately";
 import { ResponsiveSelect } from "@/components/common/ResponsiveSelect";
 import { useTranslations } from "next-intl";
 
-export function TaskFormBaseStatusSelect() {
-  const t = useTranslations("tasks.TaskFormBase.TaskFormBaseStatusSelect");
+interface TaskFormBaseStatusSelectProps {
+  defaultSelectedKey?: string;
+}
+
+export function TaskFormBaseStatusSelect({
+  defaultSelectedKey,
+}: TaskFormBaseStatusSelectProps) {
+  const t = useTranslations("tasks.TaskFormBase.status");
+  const tStatus = useTranslations("tasks.TaskStatus");
 
   return (
     <ResponsiveSelect
+      name="status"
       label={t("label")}
+      defaultSelectedKey={defaultSelectedKey}
       placeholder={t("placeholder")}
       overlayClassName="w-[var(--trigger-width)]"
     >
-      <Item key="pending">{t("items.pending")}</Item>
-      <Item key="active">{t("items.active")}</Item>
-      <Item key="completed">{t("items.completed")}</Item>
+      <Item key="pending">{tStatus("pending")}</Item>
+      <Item key="active">{tStatus("active")}</Item>
+      <Item key="completed">{tStatus("completed")}</Item>
     </ResponsiveSelect>
   );
 }

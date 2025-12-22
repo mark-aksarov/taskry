@@ -5,14 +5,18 @@ import { ResponsiveSelect } from "@/components/common/ResponsiveSelect";
 import { useTranslations } from "next-intl";
 
 export function TaskFormBaseAssigneeSelect({
+  defaultSelectedKey,
   users,
 }: {
+  defaultSelectedKey?: string;
   users: { id: string; fullName: string }[];
 }) {
-  const t = useTranslations("tasks.TaskFormBase.TaskFormBaseAssigneeSelect");
+  const t = useTranslations("tasks.TaskFormBase.assignee");
 
   return (
     <ResponsiveSelect
+      name="assigneeId"
+      defaultSelectedKey={defaultSelectedKey}
       label={t("label")}
       placeholder={t("placeholder")}
       overlayClassName="w-[var(--trigger-width)]"
