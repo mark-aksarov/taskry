@@ -1,12 +1,14 @@
 import {
   TaskCategorySummaryDTO,
   TaskDetailDTO,
+  TaskFormDataDTO,
   TaskListItemDTO,
   TaskSummaryDTO,
 } from "../dto/task";
 import {
   TaskCategorySummaryType,
   TaskDetailType,
+  TaskFormDataType,
   TaskListItemType,
   TaskSummaryType,
 } from "../types/task";
@@ -17,6 +19,21 @@ export function mapTaskSummaryToDTO(task: TaskSummaryType): TaskSummaryDTO {
     title: task.title,
   };
 }
+
+export const mapTaskFormDataToDTO = (
+  task: TaskFormDataType,
+): TaskFormDataDTO => {
+  return {
+    id: task.id,
+    title: task.title,
+    description: task.description ?? "",
+    deadline: task.deadline,
+    categoryId: task.categoryId,
+    status: task.status,
+    projectId: task.projectId,
+    assigneeId: task.assigneeId ?? undefined,
+  };
+};
 
 export function mapTaskDetailToDTO(task: TaskDetailType): TaskDetailDTO {
   return {

@@ -15,9 +15,8 @@ import { Suspense, useContext } from "react";
 import { EditTaskModal } from "../EditTaskModal";
 import { OverlayTriggerState } from "react-stately";
 import { DialogTrigger } from "react-aria-components";
-import { TaskFormBaseSkeleton } from "../TaskFormBase";
 import { TaskDetailCompactSkeleton } from "../TaskDetailCompact";
-import { EditTaskFormClientContainerContext } from "../EditTaskFormClientContainer";
+import { EditTaskFormClientContainerContext } from "../EditTaskFormClientContainerContext";
 import { TaskDetailCompactClientContainerContext } from "../TaskDetailCompactClientContainer";
 
 export interface TaskDetailBottomSheetProps {
@@ -33,6 +32,13 @@ export function TaskDetailBottomSheet({
     TaskDetailCompactClientContainerContext,
   );
   const EditTaskFormContainer = useContext(EditTaskFormClientContainerContext);
+
+  if (!EditTaskFormContainer) {
+    throw new Error(
+      "EditTaskFormContainer must be used within a EditTaskFormContainerProvider",
+    );
+  }
+
   const t = useTranslations("tasks.TaskDetailBottomSheet");
 
   return (
@@ -55,13 +61,7 @@ export function TaskDetailBottomSheet({
               label={t("editButtonLabel")}
               className="w-full justify-center"
             />
-            <EditTaskModal
-              editTaskForm={
-                <Suspense fallback={<TaskFormBaseSkeleton />}>
-                  <EditTaskFormContainer />
-                </Suspense>
-              }
-            />
+            <EditTaskModal taskId={taskId} />
           </DialogTrigger>
         </DialogFooter>
       </Dialog>

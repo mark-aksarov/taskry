@@ -5,6 +5,17 @@ export type TaskSummaryDTO = {
   title: string;
 };
 
+export type TaskFormDataDTO = {
+  id: number;
+  title: string;
+  description?: string;
+  deadline: Date;
+  categoryId: number;
+  status: ProjectStatus;
+  projectId: number;
+  assigneeId?: string;
+};
+
 export type TaskDetailDTO = {
   id: number;
   title: string;
@@ -81,6 +92,17 @@ export interface TaskCategorySummaryDTO {
 }
 
 export interface CreateTaskInputDTO {
+  title: string;
+  description?: string;
+  deadline: Date;
+  categoryId: number;
+  status: ProjectStatus;
+  projectId: number;
+  assigneeId?: string;
+}
+
+export interface UpdateTaskInputDTO {
+  id: number;
   title: string;
   description?: string;
   deadline: Date;

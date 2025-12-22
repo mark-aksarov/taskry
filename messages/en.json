@@ -18,6 +18,12 @@
         "invalidInput": "Invalid input. Please check your data and try again.",
         "internalServerError": "An internal server error occurred. Please try again later."
       }
+    },
+    "createTask": {
+      "validation": {
+        "invalidInput": "Invalid input. Please check your data and try again.",
+        "internalServerError": "An internal server error occurred. Please try again later."
+      }
     }
   },
 

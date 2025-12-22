@@ -1,7 +1,7 @@
 import z from "zod";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
-import { getTaskDetail } from "@/lib/dal/task";
+import { getTaskDetail, getTaskFormData } from "@/lib/dal/task";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(
@@ -30,7 +30,16 @@ export async function GET(
       return NextResponse.json({ error: "Invalid task ID" }, { status: 400 });
     }
 
+    // Fetch project
+    const { searchParams } = req.nextUrl;
+    const view = searchParams.get("view");
+
     const { id } = parse.data;
+
+    if (view === "edit") {
+      const formData = await getTaskFormData(id);
+      return NextResponse.json(formData);
+    }
 
     // Fetch task
     const task = await getTaskDetail(id);

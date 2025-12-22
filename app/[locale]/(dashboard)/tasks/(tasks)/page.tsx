@@ -9,7 +9,9 @@ import { updateTaskStatuses } from "@/lib/actions/updateTaskStatuses";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { TasksServerContainer } from "@/components/tasks/TasksServerContainer";
 import { NewTaskFormServerContainer } from "@/components/tasks/NewTaskFormServerContainer";
+import { EditTaskFormClientContainer } from "@/components/tasks/EditTaskFormClientContainer";
 import { TaskFiltersFormServerContainer } from "@/components/tasks/TaskFiltersFormServerContainer";
+import { EditTaskFormClientContainerProvider } from "@/components/tasks/EditTaskFormClientContainerContext";
 
 const searchParamsSchema = z.object({
   page: z.coerce.number().int().positive().catch(1),
@@ -43,16 +45,18 @@ export default async function AppTasksPage({
   if (!taskCount) return <TasksPageEmpty />;
 
   return (
-    <TasksPage
-      page={page}
-      pageSize={pageSize}
-      sort={sort}
-      filters={filters}
-      TaskFiltersFormContainer={TaskFiltersFormServerContainer}
-      NewTaskFormContainer={NewTaskFormServerContainer}
-      TasksServerContainer={TasksServerContainer}
-      deleteTasksAction={deleteTasks}
-      updateTasksStatusesAction={updateTaskStatuses}
-    />
+    <EditTaskFormClientContainerProvider value={EditTaskFormClientContainer}>
+      <TasksPage
+        page={page}
+        pageSize={pageSize}
+        sort={sort}
+        filters={filters}
+        TaskFiltersFormContainer={TaskFiltersFormServerContainer}
+        NewTaskFormContainer={NewTaskFormServerContainer}
+        TasksServerContainer={TasksServerContainer}
+        deleteTasksAction={deleteTasks}
+        updateTasksStatusesAction={updateTaskStatuses}
+      />
+    </EditTaskFormClientContainerProvider>
   );
 }

@@ -5,14 +5,15 @@ import {
   mapTaskSummaryToDTO,
   mapTaskListItemToDTO,
   mapTaskCategorySummaryToDTO,
+  mapTaskFormDataToDTO,
 } from "../mappers/task";
 
 import { cache } from "react";
 import prisma from "../prisma";
-import { CreateTaskInputDTO } from "../dto/task";
 import { buildDateWhere } from "../utils/dateWhere";
 import { TaskFilters } from "../dto/filters/taskFilters";
 import { getSessionOrThrow } from "../utils/getSessionOrThrow";
+import { CreateTaskInputDTO, UpdateTaskInputDTO } from "../dto/task";
 import { ProjectStatus, TaskStatus } from "@/generated/prisma/enums";
 import { ALLOWED_TASK_STATUSES_BY_PROJECT } from "../utils/statusUtils";
 
@@ -31,6 +32,29 @@ export const getTaskSummary = cache(async (id: number) => {
   if (!taskSummary) throw new Error("Not Found");
 
   return mapTaskSummaryToDTO(taskSummary);
+});
+
+export const getTaskFormData = cache(async (id: number) => {
+  const session = await getSessionOrThrow();
+  const workspaceId = session.user.workspaceId;
+
+  const task = await prisma.task.findFirst({
+    where: { id, workspaceId },
+    select: {
+      id: true,
+      title: true,
+      description: true,
+      deadline: true,
+      status: true,
+      categoryId: true,
+      projectId: true,
+      assigneeId: true,
+    },
+  });
+
+  if (!task) throw new Error("Task not found");
+
+  return mapTaskFormDataToDTO(task);
 });
 
 export const getTaskDetail = cache(async (id: number) => {
@@ -303,5 +327,54 @@ export const createTask = async (task: CreateTaskInputDTO) => {
       creatorId,
       workspaceId,
     },
+  });
+};
+
+export const updateTask = async (task: UpdateTaskInputDTO) => {
+  const session = await getSessionOrThrow();
+  const creatorId = session.user.id;
+  const workspaceId = session.user.workspaceId;
+
+  const category = await prisma.taskCategory.findFirst({
+    where: {
+      id: task.categoryId,
+      workspaceId: workspaceId,
+    },
+  });
+
+  if (!category) {
+    throw new Error("Invalid category");
+  }
+
+  const project = await prisma.project.findFirst({
+    where: {
+      id: task.projectId,
+      workspaceId: workspaceId,
+    },
+  });
+
+  if (!project) {
+    throw new Error("Invalid project");
+  }
+
+  if (task.assigneeId) {
+    const assignee = await prisma.user.findFirst({
+      where: {
+        id: task.assigneeId,
+        workspaceId: workspaceId,
+      },
+    });
+
+    if (!assignee) {
+      throw new Error("Invalid assignee");
+    }
+  }
+
+  return await prisma.task.update({
+    where: {
+      id: task.id,
+      workspaceId,
+    },
+    data: task,
   });
 };

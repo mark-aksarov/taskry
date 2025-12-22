@@ -7,10 +7,11 @@ import { headers } from "next/headers";
 import { revalidatePath } from "next/cache";
 import { redirect } from "@/i18n/navigation";
 import { TaskStatus } from "@/generated/prisma/enums";
-import { createTask as createTaskQuery } from "../dal/task";
+import { updateTask as updateTaskQuery } from "../dal/task";
 import { getLocale, getTranslations } from "next-intl/server";
 
 const schema = z.object({
+  id: z.coerce.number().int().positive(),
   title: z.string().min(1).max(255),
   description: z.string().max(5000).optional(),
   deadline: z.coerce.date(),
@@ -20,7 +21,7 @@ const schema = z.object({
   assigneeId: z.coerce.string().optional(),
 });
 
-export async function createTask(
+export async function updateTask(
   _prevState: ActionState,
   formData: FormData,
 ): Promise<ActionState> {
@@ -44,6 +45,7 @@ export async function createTask(
 
   // Data Validation
   const parse = schema.safeParse({
+    id: formData.get("id"),
     title: formData.get("title"),
     description: formData.get("description"),
     deadline: formData.get("deadline"),
@@ -65,18 +67,18 @@ export async function createTask(
 
   // Database Action
   try {
-    const projectData = parse.data;
+    const taskData = parse.data;
 
-    await createTaskQuery(projectData);
+    await updateTaskQuery(taskData);
 
-    revalidatePath("/projects");
+    revalidatePath("/tasks");
 
     return {
       status: "success",
       message: null,
     };
   } catch (error) {
-    console.error("Create Project Error:", error);
+    console.error("Create Task Error:", error);
 
     return {
       status: "error",

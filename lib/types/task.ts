@@ -11,6 +11,23 @@ export type TaskSummaryType = Prisma.TaskGetPayload<{
   select: typeof taskSummarySelect;
 }>;
 
+// TaskFormData
+
+const taskFormDataSelect = {
+  id: true,
+  title: true,
+  description: true,
+  deadline: true,
+  status: true,
+  categoryId: true,
+  projectId: true,
+  assigneeId: true,
+} satisfies Prisma.TaskSelect;
+
+export type TaskFormDataType = Prisma.TaskGetPayload<{
+  select: typeof taskFormDataSelect;
+}>;
+
 // TaskDetail
 
 const taskDetailSelect = {
