@@ -28,11 +28,13 @@ import {
 interface TasksPageProps {
   page: number;
   pageSize: number;
+  sort: string;
   TaskFiltersFormContainer: React.ComponentType;
   NewTaskFormContainer: React.ComponentType;
   TasksServerContainer: React.ComponentType<{
     page: number;
     pageSize: number;
+    sort: string;
   }>;
   deleteTasksAction: ActionFn<ActionState, DeleteTasksPayload>;
   updateTasksStatusesAction: ActionFn<ActionState, UpdateTaskStatusesPayload>;
@@ -41,6 +43,7 @@ interface TasksPageProps {
 export function TasksPage({
   page,
   pageSize,
+  sort,
   TaskFiltersFormContainer,
   NewTaskFormContainer,
   TasksServerContainer,
@@ -107,7 +110,7 @@ export function TasksPage({
               />
             </ToolbarMobileBottom>
 
-            <TasksServerContainer page={page} pageSize={pageSize} />
+            <TasksServerContainer page={page} pageSize={pageSize} sort={sort} />
           </SelectionProvider>
         </ViewModeProvider>
       </PageGrid>

@@ -12,13 +12,15 @@ import { updateTaskStatuses } from "@/lib/actions/updateTaskStatuses";
 interface TasksServerContainerProps {
   page: number;
   pageSize: number;
+  sort: string;
 }
 
 export async function TasksServerContainer({
   page,
   pageSize,
+  sort,
 }: TasksServerContainerProps) {
-  const tasks = await getTaskList({ page, pageSize });
+  const tasks = await getTaskList({ page, pageSize, sort });
   const count = await getTaskCount();
 
   const getCommonProps = (task: TaskListItemDTO) => ({

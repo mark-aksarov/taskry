@@ -94,14 +94,25 @@ export const getTaskList = cache(
     assigneeId,
     page,
     pageSize,
+    sort,
   }: {
     assigneeId?: string;
     page: number;
     pageSize: number;
+    sort: string;
   }) => {
     const session = await getSessionOrThrow();
     const workspaceId = session.user.workspaceId;
     const skip = (page - 1) * pageSize;
+
+    const orderByMapping: Record<string, any> = {
+      title: { title: "asc" },
+      deadline: { deadline: "asc" },
+      status: { status: "asc" },
+      category: { category: { name: "asc" } },
+    };
+
+    const orderBy = orderByMapping[sort] || { title: "asc" };
 
     const tasks = await prisma.task.findMany({
       where: {
@@ -110,9 +121,7 @@ export const getTaskList = cache(
       },
       skip,
       take: pageSize,
-      orderBy: {
-        deadline: "asc",
-      },
+      orderBy: [orderBy],
       select: {
         id: true,
         title: true,

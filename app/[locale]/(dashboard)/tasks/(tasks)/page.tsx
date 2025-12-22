@@ -12,19 +12,20 @@ import { TaskFiltersFormServerContainer } from "@/components/tasks/TaskFiltersFo
 const searchParamsSchema = z.object({
   page: z.coerce.number().int().positive().catch(1),
   pageSize: z.coerce.number().int().min(1).max(100).catch(20),
+  sort: z.enum(["title", "deadline", "status", "category"]).catch("title"),
 });
 
 export default async function AppTasksPage({
   searchParams,
 }: {
-  searchParams: Promise<{ page?: string; pageSize?: string }>;
+  searchParams: Promise<{ page?: string; pageSize?: string; sort?: string }>;
 }) {
   // Authorization
   await requireProtectedPage();
 
   // Validation
   const rawParams = await searchParams;
-  const { page, pageSize } = searchParamsSchema.parse(rawParams);
+  const { page, pageSize, sort } = searchParamsSchema.parse(rawParams);
 
   // Get count
   const taskCount = await getTaskCount();
@@ -35,6 +36,7 @@ export default async function AppTasksPage({
     <TasksPage
       page={page}
       pageSize={pageSize}
+      sort={sort}
       TaskFiltersFormContainer={TaskFiltersFormServerContainer}
       NewTaskFormContainer={NewTaskFormServerContainer}
       TasksServerContainer={TasksServerContainer}
