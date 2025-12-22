@@ -15,9 +15,9 @@ import {
 import { Suspense } from "react";
 import { useTranslations } from "next-intl";
 import { PageGrid } from "@/components/common/PageGrid";
-import { ProjectFiltersType } from "@/lib/types/projects";
 import { ViewModeProvider } from "@/components/common/ViewMode";
 import { PageContainer } from "@/components/common/PageContainer";
+import { ProjectFilters } from "@/lib/dto/filters/projectFilters";
 import { SelectionProvider } from "@/components/common/SelectionContext";
 import { ViewModeToggleButtonGroup } from "@/components/common/ViewMode";
 import { ProjectFormBaseSkeleton } from "@/components/projects/ProjectFormBase";
@@ -32,20 +32,22 @@ interface ProjectsPageProps {
   page: number;
   pageSize: number;
   sort: string;
-  filters?: ProjectFiltersType;
+  filters: ProjectFilters;
   createProjectCategoryAction: ActionFn<ActionState, FormData>;
   deleteProjectsAction: ActionFn<ActionState, DeleteProjectsPayload>;
   updateProjectStatusesAction: ActionFn<
     ActionState,
     UpdateProjectStatusesPayload
   >;
-  ProjectFiltersFormContainer: React.ComponentType;
+  ProjectFiltersFormContainer: React.ComponentType<{
+    filters: ProjectFilters;
+  }>;
   NewProjectFormContainer: React.ComponentType;
   ProjectsServerContainer: React.ComponentType<{
     page: number;
     pageSize: number;
     sort: string;
-    filters?: ProjectFiltersType;
+    filters?: ProjectFilters;
   }>;
 }
 
@@ -73,7 +75,7 @@ export function ProjectsPage({
               <ProjectToolbarFiltersModalTrigger
                 filtersForm={
                   <Suspense fallback={<ProjectFiltersFormSkeleton />}>
-                    <ProjectFiltersFormContainer />
+                    <ProjectFiltersFormContainer filters={filters} />
                   </Suspense>
                 }
               />
@@ -102,7 +104,7 @@ export function ProjectsPage({
               <ProjectToolbarFiltersModalTrigger
                 filtersForm={
                   <Suspense fallback={<ProjectFiltersFormSkeleton />}>
-                    <ProjectFiltersFormContainer />
+                    <ProjectFiltersFormContainer filters={filters} />
                   </Suspense>
                 }
               />

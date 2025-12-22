@@ -31,14 +31,16 @@ interface TasksPageProps {
   page: number;
   pageSize: number;
   sort: string;
-  filters?: TaskFilters;
-  TaskFiltersFormContainer: React.ComponentType;
+  filters: TaskFilters;
+  TaskFiltersFormContainer: React.ComponentType<{
+    filters: TaskFilters;
+  }>;
   NewTaskFormContainer: React.ComponentType;
   TasksServerContainer: React.ComponentType<{
     page: number;
     pageSize: number;
     sort: string;
-    filters?: TaskFilters;
+    filters: TaskFilters;
   }>;
   deleteTasksAction: ActionFn<ActionState, DeleteTasksPayload>;
   updateTasksStatusesAction: ActionFn<ActionState, UpdateTaskStatusesPayload>;
@@ -67,7 +69,7 @@ export function TasksPage({
               <TaskToolbarFiltersModalTrigger
                 filtersForm={
                   <Suspense fallback={<TaskFiltersFormSkeleton />}>
-                    <TaskFiltersFormContainer />
+                    <TaskFiltersFormContainer filters={filters} />
                   </Suspense>
                 }
               />
@@ -93,7 +95,7 @@ export function TasksPage({
               <TaskToolbarFiltersModalTrigger
                 filtersForm={
                   <Suspense fallback={<TaskFiltersFormSkeleton />}>
-                    <TaskFiltersFormContainer />
+                    <TaskFiltersFormContainer filters={filters} />
                   </Suspense>
                 }
               />

@@ -45,6 +45,12 @@ export const Default: Story = {
     page: 1,
     pageSize: 20,
     sort: "title",
+    filters: {
+      status: [],
+      category: [],
+      project: [],
+      assignee: [],
+    },
     TaskFiltersFormContainer: () => (
       <TaskFiltersForm {...TaskFiltersFormStory.args} />
     ),

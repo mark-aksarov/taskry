@@ -127,5 +127,11 @@ export const Default = {
         ]}
       />
     ),
+    filters: {
+      category: [],
+      customer: [],
+      user: [],
+      status: [],
+    },
   },
 } satisfies Story;

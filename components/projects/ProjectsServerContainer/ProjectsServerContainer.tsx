@@ -5,10 +5,10 @@ import { getLocale } from "next-intl/server";
 import { ProjectListItem } from "../ProjectListItem";
 import { ProjectGridItem } from "../ProjectGridItem";
 import { ProjectListItemDTO } from "@/lib/dto/project";
-import { ProjectFiltersType } from "@/lib/types/projects";
 import { Pagination } from "@/components/common/Pagination";
 import { deleteProjects } from "@/lib/actions/deleteProjects";
 import { ViewModeLayout } from "@/components/common/ViewMode";
+import { ProjectFilters } from "@/lib/dto/filters/projectFilters";
 import { getProjectCount, getProjectList } from "@/lib/dal/project";
 import { updateProjectStatuses } from "@/lib/actions/updateProjectStatuses";
 
@@ -16,7 +16,7 @@ interface ProjectsServerContainerProps {
   page: number;
   pageSize: number;
   sort: string;
-  filters?: ProjectFiltersType;
+  filters?: ProjectFilters;
 }
 
 export async function ProjectsServerContainer({

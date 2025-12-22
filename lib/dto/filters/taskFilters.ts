@@ -1,6 +1,5 @@
+import { DeadlineQuickFilter } from "./common";
 import { TaskStatus } from "@/generated/prisma/enums";
-
-export type DeadlineQuickFilter = "today" | "tomorrow" | "overdue";
 
 export interface TaskFilters {
   status: TaskStatus[];

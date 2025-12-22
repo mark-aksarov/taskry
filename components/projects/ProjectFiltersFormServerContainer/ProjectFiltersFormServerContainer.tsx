@@ -9,8 +9,15 @@ import {
 import { getUserSummaries } from "@/lib/dal/user";
 import { getCustomerSummaries } from "@/lib/dal/customers";
 import { getProjectCategorySummaries } from "@/lib/dal/project";
+import { ProjectFilters } from "@/lib/dto/filters/projectFilters";
 
-export async function ProjectFiltersFormServerContainer() {
+interface ProjectFiltersFormServerContainerProps {
+  filters: ProjectFilters;
+}
+
+export async function ProjectFiltersFormServerContainer({
+  filters,
+}: ProjectFiltersFormServerContainerProps) {
   const categories = await getProjectCategorySummaries();
   const customers = await getCustomerSummaries();
   const users = await getUserSummaries();
@@ -25,6 +32,7 @@ export async function ProjectFiltersFormServerContainer() {
       customerCheckboxGroup={
         <ProjectFiltersFormCustomerCheckboxGroup customers={customers} />
       }
+      filters={filters}
     />
   );
 }

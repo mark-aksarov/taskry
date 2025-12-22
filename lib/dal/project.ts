@@ -16,10 +16,11 @@ import {
 
 import { cache } from "react";
 import prisma from "../prisma";
-import { ProjectFiltersType } from "../types/projects";
 import { getSessionOrThrow } from "../utils/getSessionOrThrow";
 import { ProjectStatus, TaskStatus } from "@/generated/prisma/client";
 import { TRANSITION_TASK_STATUSES_BY_PROJECT } from "../utils/statusUtils";
+import { ProjectFilters } from "../dto/filters/projectFilters";
+import { buildDateWhere } from "../utils/dateWhere";
 
 export const getProjectSummary = cache(async (id: number) => {
   const session = await getSessionOrThrow();
@@ -117,7 +118,7 @@ export const getProjectList = cache(
     page: number;
     pageSize: number;
     sort: string;
-    filters?: ProjectFiltersType;
+    filters?: ProjectFilters;
   }) => {
     const session = await getSessionOrThrow();
     const workspaceId = session.user.workspaceId;
@@ -132,30 +133,52 @@ export const getProjectList = cache(
       category: { category: { name: "asc" } },
     };
 
-    const orderBy = orderByMapping[sort] || { title: "asc" };
-
     const projects = await prisma.project.findMany({
-      where, // Use shared clause
-      orderBy: [orderBy],
+      where,
+      orderBy: [orderByMapping[sort] || { title: "asc" }],
       skip,
       take: pageSize,
       select: {
         id: true,
         title: true,
         deadline: true,
-        creator: { select: { id: true, fullName: true, imageUrl: true } },
+        creator: {
+          select: {
+            id: true,
+            fullName: true,
+            imageUrl: true,
+          },
+        },
         status: true,
-        category: { select: { id: true, name: true } },
+        category: {
+          select: {
+            id: true,
+            name: true,
+          },
+        },
         customer: {
           select: {
             id: true,
             fullName: true,
             imageUrl: true,
-            company: { select: { id: true, name: true } },
+            company: {
+              select: {
+                id: true,
+                name: true,
+              },
+            },
           },
         },
-        _count: { select: { comments: true } },
-        tasks: { select: { status: true } },
+        _count: {
+          select: {
+            comments: true,
+          },
+        },
+        tasks: {
+          select: {
+            status: true,
+          },
+        },
       },
     });
 
@@ -163,7 +186,7 @@ export const getProjectList = cache(
   },
 );
 
-export const getProjectCount = cache(async (filters?: ProjectFiltersType) => {
+export const getProjectCount = cache(async (filters?: ProjectFilters) => {
   const session = await getSessionOrThrow();
   const workspaceId = session.user.workspaceId;
 
@@ -172,11 +195,14 @@ export const getProjectCount = cache(async (filters?: ProjectFiltersType) => {
   });
 });
 
-function buildProjectWhereClause(
+export function buildProjectWhereClause(
   workspaceId: number,
-  filters?: ProjectFiltersType,
+  filters?: ProjectFilters,
 ) {
-  // 1. Destructure the new range filters
+  if (!filters) {
+    return { workspaceId };
+  }
+
   const {
     status,
     category,
@@ -186,92 +212,31 @@ function buildProjectWhereClause(
     dateStart,
     dateEnd,
     noActiveTasks,
-  } = filters ?? {};
+  } = filters;
 
-  const now = new Date();
-  const getStartOfDay = (date: Date) =>
-    new Date(new Date(date).setHours(0, 0, 0, 0));
-  const getEndOfDay = (date: Date) =>
-    new Date(new Date(date).setHours(23, 59, 59, 999));
+  const datesWhere = buildDateWhere({
+    quick: deadline as any,
+    dateStart,
+    dateEnd,
+  });
 
   return {
     workspaceId,
-    ...(status && {
-      status: { in: status.split(",") as ProjectStatus[] },
-    }),
-    ...(category && {
-      categoryId: { in: category.split(",").map(Number) },
-    }),
-    ...(customer && {
-      customerId: { in: customer.split(",").map(Number) },
-    }),
-    ...(user && {
-      creatorId: { in: user.split(",") },
-    }),
 
-    // --- No Active Tasks Logic ---
     ...(noActiveTasks && {
       tasks: {
-        // Returns projects where NONE of the tasks are "Active"
-        // Adjust "Active" to match your actual Task status enum/string
         none: {
           status: ProjectStatus.active,
         },
       },
     }),
 
-    // --- Combined Deadline Logic ---
-    ...(deadline
-      ? {
-          // Logic for Quick Select Checkboxes (Today, Tomorrow, etc.)
-          OR: deadline.split(",").map((d) => {
-            if (d === "today") {
-              return {
-                deadline: {
-                  gte: getStartOfDay(new Date()),
-                  lte: getEndOfDay(new Date()),
-                },
-              };
-            }
-            if (d === "tomorrow") {
-              const tomorrow = new Date();
-              tomorrow.setDate(tomorrow.getDate() + 1);
-              return {
-                deadline: {
-                  gte: getStartOfDay(tomorrow),
-                  lte: getEndOfDay(tomorrow),
-                },
-              };
-            }
-            if (d === "thisWeek") {
-              const endOfWeek = new Date();
-              const day = endOfWeek.getDay();
-              const diff = day === 0 ? 0 : 7 - day;
-              endOfWeek.setDate(endOfWeek.getDate() + diff);
-              return {
-                deadline: {
-                  gte: getStartOfDay(new Date()),
-                  lte: getEndOfDay(endOfWeek),
-                },
-              };
-            }
-            if (d === "overdue") {
-              return {
-                deadline: { lt: now },
-              };
-            }
-            return {};
-          }),
-        }
-      : dateStart || dateEnd
-        ? {
-            // Logic for Custom Date Range
-            deadline: {
-              ...(dateStart && { gte: getStartOfDay(new Date(dateStart)) }),
-              ...(dateEnd && { lte: getEndOfDay(new Date(dateEnd)) }),
-            },
-          }
-        : {}),
+    ...(status.length && { status: { in: status } }),
+    ...(category.length && { categoryId: { in: category } }),
+    ...(customer.length && { customerId: { in: customer } }),
+    ...(user.length && { creatorId: { in: user } }),
+
+    ...(datesWhere && { deadline: datesWhere }),
   };
 }
 

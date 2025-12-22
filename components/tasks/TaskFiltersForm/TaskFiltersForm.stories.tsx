@@ -147,5 +147,11 @@ export const Default = {
         ]}
       />
     ),
+    filters: {
+      status: [],
+      category: [],
+      project: [],
+      assignee: [],
+    },
   },
 } satisfies Story;

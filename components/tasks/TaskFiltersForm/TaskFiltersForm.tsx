@@ -3,31 +3,33 @@
 import { useState } from "react";
 import { useLocale } from "next-intl";
 import { DateValue } from "react-aria";
-import { useSearchParams } from "next/navigation";
 import { Divider, RACForm } from "@/components/ui";
 import { parseDate } from "@internationalized/date";
 import { usePathname, useRouter } from "@/i18n/navigation";
+import { TaskFilters } from "@/lib/dto/filters/taskFilters";
 import { TaskFiltersFormDeadlineRange } from "./TaskFiltersFormDeadlineRange";
 import { TaskFiltersFormDeadlineCheckboxGroup } from "./TaskFiltersFormDeadlineCheckboxGroup";
 
 interface TaskFiltersFormProps {
+  filters: TaskFilters;
   statusCheckboxGroup: React.ReactNode;
   categoryCheckboxGroup: React.ReactNode;
   projectCheckboxGroup: React.ReactNode;
   assigneeCheckboxGroup: React.ReactNode;
 }
 
-// Helper to safely parse URL string to CalendarDate
-const parseUrlDate = (dateStr: string | null): DateValue | null => {
+// Helper to safely parse string to DateValue
+const parseUrlDate = (dateStr: string | undefined): DateValue | null => {
   if (!dateStr) return null;
   try {
     return parseDate(dateStr);
-  } catch (e) {
+  } catch {
     return null;
   }
 };
 
 export function TaskFiltersForm({
+  filters,
   statusCheckboxGroup,
   categoryCheckboxGroup,
   projectCheckboxGroup,
@@ -36,20 +38,16 @@ export function TaskFiltersForm({
   const locale = useLocale();
   const router = useRouter();
   const pathname = usePathname();
-  const searchParams = useSearchParams();
 
-  // Deadline state
+  // --- INITIAL STATE FROM FILTERS ---
   const [deadlineCheckboxes, setDeadlineCheckboxes] = useState<string[]>(
-    searchParams.get("deadline")?.split(",") || [],
+    filters.deadline ? [filters.deadline] : [],
   );
-
-  // State now uses DateValue type required by React Aria
   const [dateStart, setDateStart] = useState<DateValue | null>(
-    parseUrlDate(searchParams.get("dateStart")),
+    parseUrlDate(filters.dateStart),
   );
-
   const [dateEnd, setDateEnd] = useState<DateValue | null>(
-    parseUrlDate(searchParams.get("dateEnd")),
+    parseUrlDate(filters.dateEnd),
   );
 
   // --- HANDLERS ---
@@ -68,39 +66,35 @@ export function TaskFiltersForm({
     if (type === "start") setDateStart(value);
     else setDateEnd(value);
 
-    if (value) {
-      setDeadlineCheckboxes([]);
-    }
+    if (value) setDeadlineCheckboxes([]);
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const params = new URLSearchParams(searchParams.toString());
+    const params = new URLSearchParams();
 
-    // Handle Checkboxes
-    if (deadlineCheckboxes.length > 0) {
+    // Deadline checkboxes
+    if (deadlineCheckboxes.length > 0)
       params.set("deadline", deadlineCheckboxes.join(","));
-    } else {
-      params.delete("deadline");
-    }
 
-    // Handle Date Range (Convert DateValue back to string for URL)
+    // Date range
     if (dateStart) params.set("dateStart", dateStart.toString());
-    else params.delete("dateStart");
-
     if (dateEnd) params.set("dateEnd", dateEnd.toString());
-    else params.delete("dateEnd");
 
-    // Handle other filters
-    const otherKeys = ["status", "category", "project", "assignee"];
+    // Other filters
+    const otherKeys: (keyof TaskFilters)[] = [
+      "status",
+      "category",
+      "project",
+      "assignee",
+    ];
     const formData = new FormData(e.currentTarget);
     otherKeys.forEach((key) => {
-      const values = formData.getAll(key);
+      const values = formData.getAll(key as string);
       if (values.length > 0) params.set(key, values.join(","));
-      else params.delete(key);
     });
 
-    params.delete("page");
+    params.delete("page"); // reset page on filter change
     router.push(`${pathname}?${params.toString()}`, { locale });
   };
 
@@ -125,13 +119,10 @@ export function TaskFiltersForm({
 
         {statusCheckboxGroup}
         <Divider />
-
         {categoryCheckboxGroup}
         <Divider />
-
         {projectCheckboxGroup}
         <Divider />
-
         {assigneeCheckboxGroup}
       </div>
     </RACForm>

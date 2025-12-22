@@ -45,6 +45,12 @@ export const Default: Story = {
     page: 1,
     pageSize: 10,
     sort: "title",
+    filters: {
+      category: [],
+      customer: [],
+      user: [],
+      status: [],
+    },
     createProjectCategoryAction: fn(),
     deleteProjectsAction: fn(),
     updateProjectStatusesAction: fn(),
