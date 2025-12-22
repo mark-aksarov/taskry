@@ -7,10 +7,7 @@ import { headers } from "next/headers";
 import { revalidatePath } from "next/cache";
 import { getTranslations } from "next-intl/server";
 import { ProjectStatus } from "@/generated/prisma/enums";
-import {
-  updateProjectStatus as updateProjectStatusQuery,
-  bulkUpdateProjectStatuses as bulkUpdateProjectStatusesQuery,
-} from "../dal/project";
+import { updateProjectStatuses as updateProjectStatusesQuery } from "../dal/project";
 
 const schema = z.object({
   ids: z.array(z.coerce.number().int().positive()).min(1),
@@ -24,7 +21,7 @@ export async function updateProjectStatuses(
     nextStatus,
   }: {
     ids: number[];
-    nextStatus: string;
+    nextStatus: ProjectStatus;
   },
 ): Promise<ActionState> {
   const t = await getTranslations("actions.updateProjectStatus");
@@ -52,11 +49,7 @@ export async function updateProjectStatuses(
     }
 
     // Update Status
-    if (ids.length === 1) {
-      await updateProjectStatusQuery(ids[0], nextStatus as ProjectStatus);
-    } else {
-      await bulkUpdateProjectStatusesQuery(ids, nextStatus as ProjectStatus);
-    }
+    updateProjectStatusesQuery(ids, nextStatus);
 
     revalidatePath("/projects");
 

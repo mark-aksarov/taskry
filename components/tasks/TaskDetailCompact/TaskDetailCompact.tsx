@@ -8,6 +8,7 @@ import {
 
 import Image from "next/image";
 import { Badge, Link } from "@/components/ui";
+import { TaskStatus } from "@/generated/prisma/enums";
 import { useFormatter, useTranslations } from "next-intl";
 import { UnknownUser } from "@/components/common/UnknownUser";
 import { ImageContainer } from "@/components/common/ImageContainer";
@@ -41,7 +42,7 @@ interface TaskDetailCompactProps {
     id: number;
     title: string;
   };
-  status: string;
+  status: TaskStatus;
   subtasks: {
     id: number;
     text: string;

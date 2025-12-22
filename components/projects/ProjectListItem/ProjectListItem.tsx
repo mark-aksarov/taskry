@@ -1,6 +1,11 @@
 "use client";
 
 import {
+  useProjectSelection,
+  useSyncSelectionProjectItem,
+} from "@/lib/hooks/useProjectSelection";
+
+import {
   ActionFn,
   ActionState,
   DeleteProjectsPayload,
@@ -23,6 +28,7 @@ import {
 import Image from "next/image";
 import { Checkbox } from "@/components/ui";
 import { MessageSquare } from "lucide-react";
+import { ProjectStatus } from "@/generated/prisma/enums";
 import { Link, RACDialogTrigger } from "@/components/ui";
 import { useFormatter, useTranslations } from "next-intl";
 import { ProjectDetailModal } from "../ProjectDetailModal";
@@ -31,7 +37,6 @@ import { ProjectCommentsModal } from "../ProjectCommentsModal";
 import { ProjectListItemLayout } from "./ProjectListItemLayout";
 import { ImageContainer } from "@/components/common/ImageContainer";
 import { UserDetailModal } from "@/components/users/UserDetailModal";
-import { useProjectSelection } from "@/lib/hooks/useProjectSelection";
 import { ProjectDetailBottomSheet } from "../ProjectDetailBottomSheet";
 import { getProjectStatusBadgeColor } from "../getProjectStatusBadgeColor";
 import { ProjectItemActionMenuTrigger } from "../ProjectItemActionMenuTrigger";
@@ -58,7 +63,7 @@ export interface ProjectListItemProps {
     id: number;
     name: string;
   };
-  status: string;
+  status: ProjectStatus;
   commentsCount: number;
   showCheckbox?: boolean;
   deleteAction: ActionFn<ActionState, DeleteProjectsPayload>;
@@ -81,7 +86,8 @@ export const ProjectListItem = ({
 }: ProjectListItemProps) => {
   const t = useTranslations("projects");
 
-  const { isSelected, toggleId } = useProjectSelection();
+  const { isSelected, toggleItem } = useProjectSelection();
+  useSyncSelectionProjectItem(id, title);
 
   const format = useFormatter();
 
@@ -110,7 +116,7 @@ export const ProjectListItem = ({
           <Checkbox
             aria-label="project checkbox"
             isSelected={isSelected(id)}
-            onChange={() => toggleId(id)}
+            onChange={() => toggleItem(id)}
           />
         )
       }

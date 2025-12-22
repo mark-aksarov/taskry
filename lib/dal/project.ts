@@ -1,6 +1,12 @@
 import "server-only";
 
 import {
+  CreateProjectInputDTO,
+  UpdateProjectInputDTO,
+  CreateProjectCategoryInputDTO,
+} from "../dto/project";
+
+import {
   mapProjectDetailToDTO,
   mapProjectSummaryToDTO,
   mapProjectListItemToDTO,
@@ -11,13 +17,9 @@ import {
 import { cache } from "react";
 import prisma from "../prisma";
 import { ProjectFiltersType } from "../types/projects";
-import { ProjectStatus } from "@/generated/prisma/client";
 import { getSessionOrThrow } from "../utils/getSessionOrThrow";
-import {
-  CreateProjectCategoryInputDTO,
-  CreateProjectInputDTO,
-  UpdateProjectInputDTO,
-} from "../dto/project";
+import { ProjectStatus, TaskStatus } from "@/generated/prisma/client";
+import { TRANSITION_TASK_STATUSES_BY_PROJECT } from "../utils/statusUtils";
 
 export const getProjectSummary = cache(async (id: number) => {
   const session = await getSessionOrThrow();
@@ -388,131 +390,30 @@ export const deleteProjects = async (ids: number[]) => {
   return count;
 };
 
-export const updateProjectStatus = async (
-  projectId: number,
-  nextStatus: ProjectStatus,
-) => {
-  const session = await getSessionOrThrow();
-  const workspaceId = session.user.workspaceId;
-
-  return await prisma.$transaction(async (tx) => {
-    // Get project with workspace check
-    const project = await tx.project.findFirst({
-      where: {
-        id: projectId,
-        workspaceId,
-      },
-      select: {
-        id: true,
-        status: true,
-      },
-    });
-
-    if (!project) {
-      throw new Error("Project not found");
-    }
-
-    // No-op if status is the same
-    if (project.status === nextStatus) {
-      return project;
-    }
-
-    // Update project status
-    const updatedProject = await tx.project.update({
-      where: { id: projectId },
-      data: { status: nextStatus },
-    });
-
-    // If project was completed, do not touch tasks
-    if (project.status === "completed") {
-      return updatedProject;
-    }
-
-    // Project -> completed
-    if (nextStatus === "completed") {
-      await tx.task.updateMany({
-        where: { projectId },
-        data: { status: "completed" },
-      });
-
-      return updatedProject;
-    }
-
-    // pending -> active
-    if (nextStatus === "active") {
-      await tx.task.updateMany({
-        where: {
-          projectId,
-          status: "pending",
-        },
-        data: { status: "active" },
-      });
-
-      return updatedProject;
-    }
-
-    // active -> pending
-    if (project.status === "active" && nextStatus === "pending") {
-      await tx.task.updateMany({
-        where: {
-          projectId,
-          status: "active",
-        },
-        data: { status: "pending" },
-      });
-    }
-
-    return updatedProject;
-  });
-};
-
-export const bulkUpdateProjectStatuses = async (
+export const updateProjectStatuses = async (
   projectIds: number[],
   nextStatus: ProjectStatus,
 ) => {
   const session = await getSessionOrThrow();
   const workspaceId = session.user.workspaceId;
 
-  // Transaction ensures that project and task updates are atomic
   return await prisma.$transaction(async (tx) => {
-    // 1. Update all accessible projects at once
     await tx.project.updateMany({
-      where: {
-        id: { in: projectIds },
-        workspaceId,
-      },
+      where: { id: { in: projectIds }, workspaceId },
       data: { status: nextStatus },
     });
 
-    // 2. Bulk update tasks based on the target project status
+    const taskRules = TRANSITION_TASK_STATUSES_BY_PROJECT[nextStatus];
 
-    // If project is completed, force all its tasks to completed
-    if (nextStatus === "completed") {
-      await tx.task.updateMany({
-        where: { projectId: { in: projectIds } },
-        data: { status: "completed" },
-      });
-    }
+    for (const [currentStatus, newStatus] of Object.entries(taskRules)) {
+      if (currentStatus === newStatus) continue;
 
-    // If project becomes active, activate only pending tasks
-    if (nextStatus === "active") {
       await tx.task.updateMany({
         where: {
           projectId: { in: projectIds },
-          status: "pending",
+          status: currentStatus as TaskStatus,
         },
-        data: { status: "active" },
-      });
-    }
-
-    // If project becomes pending, revert only active tasks
-    if (nextStatus === "pending") {
-      await tx.task.updateMany({
-        where: {
-          projectId: { in: projectIds },
-          status: "active",
-        },
-        data: { status: "pending" },
+        data: { status: newStatus },
       });
     }
 

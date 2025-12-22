@@ -21,22 +21,24 @@ import {
 } from "@/components/common/ItemBase";
 
 import { MessageSquare } from "lucide-react";
+import { RACDialogTrigger } from "@/components/ui";
 import { useFormatter, useTranslations } from "next-intl";
-import { Checkbox, RACDialogTrigger } from "@/components/ui";
 import { UserTaskListItemLayout } from "./UserTaskListItemLayout";
+import { ProjectStatus, TaskStatus } from "@/generated/prisma/enums";
 import { TaskDetailModal } from "@/components/tasks/TaskDetailModal";
-import { useProjectSelection } from "@/lib/hooks/useProjectSelection";
+import { useSyncSelectionTaskItem } from "@/lib/hooks/useTaskSelection";
 import { TaskCommentsModal } from "@/components/tasks/TaskCommentsModal";
 import { TaskDetailBottomSheet } from "@/components/tasks/TaskDetailBottomSheet";
 import { getTaskStatusBadgeColor } from "@/components/tasks/getTaskStatusBadgeColor";
 import { TaskItemActionMenuTrigger } from "@/components/tasks/TaskItemActionMenuTrigger";
+import { TaskListItemCheckbox } from "@/components/tasks/TaskListItem/TaskListItemCheckbox";
 
 export interface UserTaskListItemProps {
   id: number;
   title: string;
   deadline?: Date;
-  status: string;
-  projectStatus: string;
+  status: TaskStatus;
+  projectStatus: ProjectStatus;
   commentsCount: number;
   deleteAction: ActionFn<ActionState, DeleteProjectsPayload>;
   updateStatusAction: ActionFn<ActionState, UpdateTaskStatusesPayload>;
@@ -54,7 +56,7 @@ export const UserTaskListItem = ({
 }: UserTaskListItemProps) => {
   const t = useTranslations();
 
-  const { isSelected, toggleId } = useProjectSelection();
+  useSyncSelectionTaskItem(id, title, status, projectStatus);
 
   const format = useFormatter();
 
@@ -70,13 +72,7 @@ export const UserTaskListItem = ({
 
   return (
     <UserTaskListItemLayout
-      checkboxSlot={
-        <Checkbox
-          aria-label={t("users.UserTaskListItem.checkboxAriaLabel")}
-          isSelected={isSelected(id)}
-          onChange={() => toggleId(id)}
-        />
-      }
+      checkboxSlot={<TaskListItemCheckbox id={id} />}
       deadlineSlot={
         <ListItemInfo>
           <ListItemTitle>

@@ -1,6 +1,7 @@
 import { BadgeColor } from "@/components/ui";
+import { ProjectStatus } from "@/generated/prisma/enums";
 
-export function getProjectStatusBadgeColor(status: string): BadgeColor {
+export function getProjectStatusBadgeColor(status: ProjectStatus): BadgeColor {
   switch (status) {
     case "pending":
       return "orange";

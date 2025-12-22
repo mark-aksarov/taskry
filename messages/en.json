@@ -3,15 +3,18 @@
     "deleteProjectAction": {
       "error": "Something went wrong. Delete failed."
     },
-    "deleteTaskAction": {
-      "error": "Something went wrong. Delete failed."
-    },
     "updateProjectStatus": {
       "error": "Something went wrong. Update failed."
     },
     "createProjectCategory": {
       "invalidInput": "Invalid input. Please check your data and try again.",
       "internalServerError": "An internal server error occurred. Please try again later."
+    },
+    "deleteTaskAction": {
+      "error": "Something went wrong. Delete failed."
+    },
+    "updateTaskStatuses": {
+      "skippedTasks": "Some tasks were skipped ({count}) because their projects do not allow status changes (completed or pending): {tasks}"
     }
   },
 
@@ -1087,6 +1090,13 @@
       "heading": "Delete Task",
       "text": "Are you sure you want to delete <strong>«{name}»</strong>? All contents will be permanently removed.",
       "deleteButton": "Delete",
+      "cancelButton": "Cancel"
+    },
+
+    "UpdateTaskStatusRestrictedModal": {
+      "heading": "Task Status Update",
+      "text": "For some tasks, the status cannot be changed because the project is pending or completed",
+      "confirmButton": "Continue",
       "cancelButton": "Cancel"
     },
 

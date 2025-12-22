@@ -21,10 +21,10 @@ export async function updateTaskStatuses(
     nextStatus,
   }: {
     ids: number[];
-    nextStatus: string;
+    nextStatus: TaskStatus;
   },
 ): Promise<ActionState> {
-  const t = await getTranslations("actions.updateTaskStatus");
+  const t = await getTranslations("actions.updateTaskStatuses");
   const errorResponse: ActionState = {
     status: "error",
     message: t("error"),

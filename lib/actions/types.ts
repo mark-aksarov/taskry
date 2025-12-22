@@ -1,4 +1,5 @@
 import { useActionState } from "react";
+import { ProjectStatus, TaskStatus } from "@/generated/prisma/enums";
 
 export type ActionFn<State, Payload> = Parameters<
   typeof useActionState<State, Payload>
@@ -17,10 +18,10 @@ export type DeleteTasksPayload = number[];
 
 export interface UpdateProjectStatusesPayload {
   ids: number[];
-  nextStatus: string;
+  nextStatus: ProjectStatus;
 }
 
 export interface UpdateTaskStatusesPayload {
   ids: number[];
-  nextStatus: string;
+  nextStatus: TaskStatus;
 }

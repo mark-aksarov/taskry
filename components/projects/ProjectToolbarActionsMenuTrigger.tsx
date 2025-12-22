@@ -10,6 +10,7 @@ import {
 import { useState } from "react";
 import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
+import { ProjectStatus } from "@/generated/prisma/enums";
 import { ToolbarActionsMenuTrigger } from "../common/Toolbar";
 import { useTaskSelection } from "@/lib/hooks/useTaskSelection";
 import { Check, CircleEllipsis, Clock, Trash } from "lucide-react";
@@ -23,7 +24,7 @@ interface ProjectToolbarActionsMenuTriggerProps {
 
 interface UpdateStatusModalState {
   isOpen: boolean;
-  nextStatus: string;
+  nextStatus: ProjectStatus;
 }
 
 export const ProjectToolbarActionsMenuTrigger = ({
@@ -31,13 +32,15 @@ export const ProjectToolbarActionsMenuTrigger = ({
   updateStatusAction,
 }: ProjectToolbarActionsMenuTriggerProps) => {
   const t = useTranslations("projects.ProjectToolbarActionsMenuTrigger");
-  const { selectedIds: projectIds, clearIds } = useTaskSelection();
+
+  // Updated: get selected IDs from the selection map
+  const { selectedIds: projectIds, clearSelectedIds } = useTaskSelection();
 
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
   const [updateModal, setUpdateModal] = useState<UpdateStatusModalState>({
     isOpen: false,
-    nextStatus: "complete",
+    nextStatus: ProjectStatus.pending,
   });
 
   const handleAction = (key: Key) => {
@@ -46,7 +49,7 @@ export const ProjectToolbarActionsMenuTrigger = ({
     } else {
       setUpdateModal({
         isOpen: true,
-        nextStatus: key.toString(),
+        nextStatus: key as ProjectStatus,
       });
     }
   };
@@ -81,7 +84,7 @@ export const ProjectToolbarActionsMenuTrigger = ({
         onOpenChange={setIsDeleteModalOpen}
         translationNamespace="projects.BulkDeleteProjectModal"
         deleteAction={deleteAction}
-        onSuccess={clearIds}
+        onSuccess={clearSelectedIds}
       />
 
       <BulkUpdateProjectStatusModal

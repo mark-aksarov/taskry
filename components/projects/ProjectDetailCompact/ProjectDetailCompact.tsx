@@ -8,6 +8,7 @@ import {
 
 import Image from "next/image";
 import { Badge, Link } from "@/components/ui";
+import { ProjectStatus } from "@/generated/prisma/enums";
 import { useFormatter, useTranslations } from "next-intl";
 import { UnknownUser } from "@/components/common/UnknownUser";
 import { ImageContainer } from "@/components/common/ImageContainer";
@@ -34,7 +35,7 @@ interface ProjectDetailCompactProps {
     id: number;
     name: string;
   };
-  status: string;
+  status: ProjectStatus;
   attachments: {
     id: number;
     fileUrl: string;

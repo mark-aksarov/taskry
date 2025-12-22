@@ -9,8 +9,9 @@ import {
 
 import { cache } from "react";
 import prisma from "../prisma";
-import { TaskStatus } from "@/generated/prisma/enums";
 import { getSessionOrThrow } from "../utils/getSessionOrThrow";
+import { ProjectStatus, TaskStatus } from "@/generated/prisma/enums";
+import { ALLOWED_TASK_STATUSES_BY_PROJECT } from "../utils/statusUtils";
 
 export const getTaskSummary = cache(async (id: number) => {
   const session = await getSessionOrThrow();
@@ -203,20 +204,22 @@ export const updateTaskStatuses = async (
   const session = await getSessionOrThrow();
   const workspaceId = session.user.workspaceId;
 
-  await prisma.task.updateMany({
+  const allowedProjectStatuses = (
+    Object.keys(ALLOWED_TASK_STATUSES_BY_PROJECT) as ProjectStatus[]
+  ).filter((ps) => ALLOWED_TASK_STATUSES_BY_PROJECT[ps].includes(nextStatus));
+
+  const { count } = await prisma.task.updateMany({
     where: {
       id: { in: taskIds },
       workspaceId,
       project: {
-        status: { not: "completed" },
-        ...(nextStatus === "active" ? { status: { not: "pending" } } : {}),
+        status: { in: allowedProjectStatuses },
       },
     },
     data: {
       status: nextStatus,
-      updatedAt: new Date(),
     },
   });
 
-  return taskIds;
+  return count;
 };

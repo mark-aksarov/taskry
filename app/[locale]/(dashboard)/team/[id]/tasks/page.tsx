@@ -2,6 +2,7 @@ import { z } from "zod";
 import { getTaskCount } from "@/lib/dal/task";
 import { deleteTasks } from "@/lib/actions/deleteTasks";
 import { TeamProfileTasksPage } from "./TeamProfileTasksPage";
+import { updateTaskStatuses } from "@/lib/actions/updateTaskStatuses";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { TeamProfileTasksPageEmpty } from "./TeamProfileTasksPageEmpty";
 import { UserTasksServerContainer } from "@/components/users/UserTasksServerContainer";
@@ -49,6 +50,7 @@ export default async function AppProfileTasksPage({
       UserHeaderContainer={UserHeaderServerContainer}
       NewTaskFormContainer={NewTaskFormServerContainer}
       deleteTasksAction={deleteTasks}
+      updateTasksStatusesAction={updateTaskStatuses}
     />
   );
 }

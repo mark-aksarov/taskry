@@ -5,6 +5,7 @@ import { getTaskCount } from "@/lib/dal/task";
 import { ProfileTasksPage } from "./ProfileTasksPage";
 import { deleteTasks } from "@/lib/actions/deleteTasks";
 import { ProfileTasksPageEmpty } from "./ProfileTasksPageEmpty";
+import { updateTaskStatuses } from "@/lib/actions/updateTaskStatuses";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { UserTasksServerContainer } from "@/components/users/UserTasksServerContainer";
 import { UserHeaderServerContainer } from "@/components/users/UserHeaderServerContainer";
@@ -53,6 +54,7 @@ export default async function AppProfileTasksPage({
       UserHeaderContainer={UserHeaderServerContainer}
       NewTaskFormContainer={NewTaskFormServerContainer}
       deleteTasksAction={deleteTasks}
+      updateTasksStatusesAction={updateTaskStatuses}
     />
   );
 }

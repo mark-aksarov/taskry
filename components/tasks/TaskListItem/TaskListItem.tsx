@@ -33,6 +33,8 @@ import { TaskDetailBottomSheet } from "../TaskDetailBottomSheet";
 import { ImageContainer } from "@/components/common/ImageContainer";
 import { UserDetailModal } from "@/components/users/UserDetailModal";
 import { getTaskStatusBadgeColor } from "../getTaskStatusBadgeColor";
+import { ProjectStatus, TaskStatus } from "@/generated/prisma/enums";
+import { useSyncSelectionTaskItem } from "@/lib/hooks/useTaskSelection";
 import { TaskItemActionMenuTrigger } from "../TaskItemActionMenuTrigger";
 import { ProjectDetailModal } from "@/components/projects/ProjectDetailModal";
 
@@ -52,9 +54,9 @@ export interface TaskListItemProps {
   project: {
     id: number;
     title: string;
-    status: string;
+    status: ProjectStatus;
   };
-  status: string;
+  status: TaskStatus;
   commentsCount: number;
   showCheckbox?: boolean;
   deleteAction: ActionFn<ActionState, DeleteProjectsPayload>;
@@ -75,6 +77,8 @@ export const TaskListItem = ({
   updateStatusAction,
 }: TaskListItemProps) => {
   const t = useTranslations("tasks");
+
+  useSyncSelectionTaskItem(id, title, status, project.status);
 
   const format = useFormatter();
 

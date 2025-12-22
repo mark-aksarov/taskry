@@ -1,6 +1,12 @@
+import {
+  ActionFn,
+  ActionState,
+  DeleteTasksPayload,
+  UpdateTaskStatusesPayload,
+} from "@/lib/actions/types";
+
 import { UserTasksPageLayout } from "@/components/users/UserTasksPageLayout";
 import { UserNavigationMobile } from "@/components/users/UserNavigationMobile";
-import { ActionFn, ActionState, DeleteTasksPayload } from "@/lib/actions/types";
 import { UserNavigationDesktop } from "@/components/users/UserNavigationDesktop";
 
 interface TeamProfileTasksPageProps {
@@ -16,6 +22,7 @@ interface TeamProfileTasksPageProps {
   UserHeaderContainer: React.ComponentType<{ userId: string }>;
   NewTaskFormContainer: React.ComponentType;
   deleteTasksAction: ActionFn<ActionState, DeleteTasksPayload>;
+  updateTasksStatusesAction: ActionFn<ActionState, UpdateTaskStatusesPayload>;
 }
 
 export function TeamProfileTasksPage({
@@ -26,6 +33,7 @@ export function TeamProfileTasksPage({
   UserHeaderContainer,
   NewTaskFormContainer,
   deleteTasksAction,
+  updateTasksStatusesAction,
 }: TeamProfileTasksPageProps) {
   return (
     <UserTasksPageLayout
@@ -39,6 +47,7 @@ export function TeamProfileTasksPage({
       navigationDesktop={<UserNavigationDesktop />}
       navigationMobile={<UserNavigationMobile />}
       deleteTasksAction={deleteTasksAction}
+      updateTasksStatusesAction={updateTasksStatusesAction}
     />
   );
 }

@@ -23,18 +23,20 @@ import {
 
 import Image from "next/image";
 import { MessageSquare } from "lucide-react";
+import { RACDialogTrigger } from "@/components/ui";
 import { TaskDetailModal } from "../TaskDetailModal";
 import { TaskCommentsModal } from "../TaskCommentsModal";
 import { useFormatter, useTranslations } from "next-intl";
 import { TaskGridItemLayout } from "./TaskGridItemLayout";
-import { Checkbox, RACDialogTrigger } from "@/components/ui";
 import { UnknownUser } from "@/components/common/UnknownUser";
-import { useTaskSelection } from "@/lib/hooks/useTaskSelection";
 import { TaskDetailBottomSheet } from "../TaskDetailBottomSheet";
 import { ImageContainer } from "@/components/common/ImageContainer";
 import { getTaskStatusBadgeColor } from "../getTaskStatusBadgeColor";
 import { UserDetailModal } from "@/components/users/UserDetailModal";
+import { ProjectStatus, TaskStatus } from "@/generated/prisma/enums";
+import { useSyncSelectionTaskItem } from "@/lib/hooks/useTaskSelection";
 import { TaskItemActionMenuTrigger } from "../TaskItemActionMenuTrigger";
+import { TaskListItemCheckbox } from "../TaskListItem/TaskListItemCheckbox";
 import { UserDetailBottomSheet } from "@/components/users/UserDetailBottomSheet";
 
 export interface TaskGridItemProps {
@@ -46,8 +48,8 @@ export interface TaskGridItemProps {
     imageUrl?: string;
     fullName: string;
   };
-  status: string;
-  projectStatus: string;
+  status: TaskStatus;
+  projectStatus: ProjectStatus;
   commentsCount: number;
   subtasksTotal: number;
   subtasksDone: number;
@@ -70,7 +72,7 @@ export function TaskGridItem({
 }: TaskGridItemProps) {
   const t = useTranslations("tasks");
 
-  const { isSelected, toggleId } = useTaskSelection();
+  useSyncSelectionTaskItem(id, title, status, projectStatus);
 
   const format = useFormatter();
 
@@ -94,13 +96,7 @@ export function TaskGridItem({
 
   return (
     <TaskGridItemLayout
-      checkboxSlot={
-        <Checkbox
-          aria-label={title}
-          isSelected={isSelected(id)}
-          onChange={() => toggleId(id)}
-        />
-      }
+      checkboxSlot={<TaskListItemCheckbox id={id} />}
       menuTriggerSlot={
         <TaskItemActionMenuTrigger
           taskId={id}

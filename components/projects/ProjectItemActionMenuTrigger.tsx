@@ -10,6 +10,7 @@ import {
 import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
 import { EditProjectModal } from "./EditProjectModal";
+import { ProjectStatus } from "@/generated/prisma/enums";
 import { ItemBaseActionMenuTrigger } from "../common/ItemBase";
 import { DeleteEntityModal } from "../common/DeleteEntityModal";
 import { startTransition, useActionState, useState } from "react";
@@ -20,7 +21,7 @@ import { Check, CircleEllipsis, Clock, Pencil, Trash } from "lucide-react";
 export type ProjectItemActionMenuTriggerProps = {
   projectId: number;
   projectTitle: string;
-  projectStatus: string;
+  projectStatus: ProjectStatus;
   className?: string;
   deleteAction: ActionFn<ActionState, DeleteProjectsPayload>;
   updateStatusAction: ActionFn<ActionState, UpdateProjectStatusesPayload>;
@@ -29,7 +30,7 @@ export type ProjectItemActionMenuTriggerProps = {
 interface UpdateStatusModalState {
   isOpen: boolean;
   textKey: "resume" | "pause" | "complete";
-  nextStatus: string;
+  nextStatus: ProjectStatus;
 }
 
 const initialState: ActionState = {
@@ -57,7 +58,7 @@ export function ProjectItemActionMenuTrigger({
   const [updateModal, setUpdateModal] = useState<UpdateStatusModalState>({
     isOpen: false,
     textKey: "resume",
-    nextStatus: "complete",
+    nextStatus: ProjectStatus.pending,
   });
 
   const [
@@ -79,7 +80,7 @@ export function ProjectItemActionMenuTrigger({
 
       const baseModalState = {
         isOpen: true,
-        nextStatus: action,
+        nextStatus: action as ProjectStatus,
         isDone: false,
       };
 
@@ -100,23 +101,21 @@ export function ProjectItemActionMenuTrigger({
         });
       } else {
         startTransition(() => {
-          updateProjectStatusAction({ ids: [projectId], nextStatus: action });
+          updateProjectStatusAction({
+            ids: [projectId],
+            nextStatus: action as ProjectStatus,
+          });
         });
       }
     }
   };
-
-  const disabledKeys =
-    projectStatus === "completed"
-      ? ["active", "pending", "completed"]
-      : [projectStatus];
 
   return (
     <>
       <ItemBaseActionMenuTrigger
         className={className}
         onAction={handleAction}
-        disabledKeys={disabledKeys}
+        disabledKeys={[projectStatus]}
       >
         <Item textValue={t("edit")} key="edit">
           <Pencil size={16} /> {t("edit")}

@@ -17,6 +17,7 @@ import {
 import { useTranslations } from "next-intl";
 import { DialogHeading } from "@/components/ui";
 import { startTransition, useActionState } from "react";
+import { ProjectStatus } from "@/generated/prisma/enums";
 import { useActionErrorToast } from "@/lib/hooks/useActionErrorToast";
 
 const initialState: ActionState = {
@@ -26,7 +27,7 @@ const initialState: ActionState = {
 
 interface BulkUpdateProjectStatusModalProps {
   projectIds: number[];
-  nextStatus: string;
+  nextStatus: ProjectStatus;
   isOpen: boolean;
   onOpenChange: (isOpen: boolean) => void;
   updateStatusAction: ActionFn<ActionState, UpdateProjectStatusesPayload>;

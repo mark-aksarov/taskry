@@ -20,7 +20,7 @@ export type ProjectDetailDTO = {
   title: string;
   description?: string;
   deadline?: Date;
-  status: string;
+  status: ProjectStatus;
 
   creator?: {
     id: string;
@@ -49,7 +49,7 @@ export interface ProjectListItemDTO {
   id: number;
   title: string;
   deadline?: Date;
-  status: string;
+  status: ProjectStatus;
 
   creator?: {
     id: string;

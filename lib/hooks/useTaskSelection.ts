@@ -1,13 +1,26 @@
-import {
-  SelectionContext,
-  SelectionContextType,
-} from "@/components/common/SelectionContext";
+import { useSyncSelectionItem } from "./useSyncSelectionItem";
+import { useSelection } from "@/components/common/SelectionContext";
+import { ProjectStatus, TaskStatus } from "@/generated/prisma/enums";
+import { useMemo } from "react";
 
-import { useContext } from "react";
+type TaskItem = {
+  id: number;
+  title: string;
+  status: TaskStatus;
+  projectStatus: ProjectStatus;
+};
 
-export const useTaskSelection = () => {
-  const context = useContext(SelectionContext);
-  if (!context)
-    throw new Error("useTaskSelection must be used within SelectionProvider");
-  return context as SelectionContextType<number>;
+export const useTaskSelection = () => useSelection<number, TaskItem>();
+
+export const useSyncSelectionTaskItem = (
+  id: number,
+  title: string,
+  status: TaskStatus,
+  projectStatus: ProjectStatus,
+) => {
+  const item = useMemo(
+    () => ({ id, title, status, projectStatus }),
+    [id, title, status, projectStatus],
+  );
+  useSyncSelectionItem<number, TaskItem>(id, item);
 };

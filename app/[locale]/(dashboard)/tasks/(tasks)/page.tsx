@@ -3,6 +3,7 @@ import { TasksPage } from "./TasksPage";
 import { getTaskCount } from "@/lib/dal/task";
 import { TasksPageEmpty } from "./TasksPageEmpty";
 import { deleteTasks } from "@/lib/actions/deleteTasks";
+import { updateTaskStatuses } from "@/lib/actions/updateTaskStatuses";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { TasksServerContainer } from "@/components/tasks/TasksServerContainer";
 import { NewTaskFormServerContainer } from "@/components/tasks/NewTaskFormServerContainer";
@@ -38,6 +39,7 @@ export default async function AppTasksPage({
       NewTaskFormContainer={NewTaskFormServerContainer}
       TasksServerContainer={TasksServerContainer}
       deleteTasksAction={deleteTasks}
+      updateTasksStatusesAction={updateTaskStatuses}
     />
   );
 }

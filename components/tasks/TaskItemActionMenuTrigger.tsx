@@ -1,6 +1,11 @@
 "use client";
 
 import {
+  taskStatuses,
+  ALLOWED_TASK_STATUSES_BY_PROJECT,
+} from "@/lib/utils/statusUtils";
+
+import {
   ActionFn,
   ActionState,
   DeleteProjectsPayload,
@@ -12,14 +17,15 @@ import { useTranslations } from "next-intl";
 import { ItemBaseActionMenuTrigger } from "../common/ItemBase";
 import { DeleteEntityModal } from "../common/DeleteEntityModal";
 import { startTransition, useActionState, useState } from "react";
+import { ProjectStatus, TaskStatus } from "@/generated/prisma/enums";
 import { useActionErrorToast } from "@/lib/hooks/useActionErrorToast";
 import { Check, CircleEllipsis, Clock, Pencil, Trash } from "lucide-react";
 
 export type TaskItemActionMenuTriggerProps = {
   taskId: number;
   taskTitle: string;
-  taskStatus: string;
-  projectStatus: string;
+  taskStatus: TaskStatus;
+  projectStatus: ProjectStatus;
   className?: string;
   deleteAction: ActionFn<ActionState, DeleteProjectsPayload>;
   updateStatusAction: ActionFn<ActionState, UpdateTaskStatusesPayload>;
@@ -56,19 +62,20 @@ export function TaskItemActionMenuTrigger({
       setIsOpenDeleteModal(true);
     } else {
       startTransition(() => {
-        updateTaskStatusAction({ ids: [taskId], nextStatus: action });
+        updateTaskStatusAction({
+          ids: [taskId],
+          nextStatus: action as TaskStatus,
+        });
       });
     }
   }
 
   useActionErrorToast(updateTaskStatusState);
 
-  const disabledKeys =
-    projectStatus === "completed"
-      ? ["active", "pending", "completed"]
-      : projectStatus === "pending"
-        ? ["pending", "active"]
-        : [projectStatus];
+  const allowedStatuses = ALLOWED_TASK_STATUSES_BY_PROJECT[projectStatus];
+  const disabledKeys = taskStatuses.filter(
+    (status) => !allowedStatuses.includes(status) || status === taskStatus,
+  );
 
   return (
     <>

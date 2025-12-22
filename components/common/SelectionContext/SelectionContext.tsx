@@ -2,75 +2,93 @@
 
 import React, {
   createContext,
-  useState,
   useCallback,
-  ReactNode,
+  useContext,
   useMemo,
+  useState,
 } from "react";
 
-type Id = string | number;
+export type IdType = string | number;
 
-export interface SelectionContextType<T extends Id> {
+export interface SelectionContextType<T extends IdType, ItemType> {
   selectedIds: T[];
-  addId: (id: T) => void;
-  removeId: (id: T) => void;
-  toggleId: (id: T) => void;
-  clearIds: () => void;
+  selectedItems: ItemType[]; // <-- added
+  items: Record<T, ItemType>;
+  toggleItem: (id: T) => void;
   isSelected: (id: T) => boolean;
+  updateItem: (id: T, item: ItemType) => void;
+  clearSelectedIds: () => void;
 }
 
-export const SelectionContext = createContext<
-  SelectionContextType<any> | undefined
->(undefined);
+export const SelectionContext = createContext<SelectionContextType<
+  any,
+  any
+> | null>(null);
 
-export const SelectionProvider = ({ children }: { children: ReactNode }) => {
-  const [selectedIds, setSelectedIds] = useState<Set<Id>>(new Set());
+export const SelectionProvider = ({
+  children,
+}: {
+  children: React.ReactNode;
+}) => {
+  const [selectedIds, setSelectedIds] = useState<Set<IdType>>(new Set());
+  const [items, setItems] = useState<Record<IdType, any>>({});
 
-  const addId = useCallback(
-    (id: Id) => setSelectedIds((p) => new Set(p).add(id)),
-    [],
-  );
-
-  const removeId = useCallback(
-    (id: Id) =>
-      setSelectedIds((p) => {
-        const n = new Set(p);
-        n.delete(id);
-        return n;
-      }),
-    [],
-  );
-
-  const toggleId = useCallback((id: Id) => {
-    setSelectedIds((p) => {
-      const n = new Set(p);
-      if (n.has(id)) n.delete(id);
-      else n.add(id);
-      return n;
+  const toggleItem = useCallback((id: IdType) => {
+    setSelectedIds((prev) => {
+      const next = new Set(prev);
+      if (next.has(id)) {
+        next.delete(id);
+      } else {
+        next.add(id);
+      }
+      return next;
     });
   }, []);
 
-  const clearIds = useCallback(() => setSelectedIds(new Set()), []);
   const isSelected = useCallback(
-    (id: Id) => selectedIds.has(id),
+    (id: IdType) => selectedIds.has(id),
     [selectedIds],
   );
 
-  const value = useMemo(
-    () => ({
-      selectedIds: Array.from(selectedIds),
-      addId,
-      removeId,
-      toggleId,
-      clearIds,
+  const updateItem = useCallback((id: IdType, item: any) => {
+    setItems((prev) => ({ ...prev, [id]: item }));
+  }, []);
+
+  const clearSelectedIds = () => setSelectedIds(new Set());
+
+  const contextValue = useMemo(() => {
+    const selectedIdsArray = Array.from(selectedIds);
+    const selectedItems = selectedIdsArray.map((id) => items[id]);
+
+    return {
+      selectedIds: selectedIdsArray,
+      selectedItems,
+      items,
+      toggleItem,
       isSelected,
-    }),
-    [selectedIds, addId, removeId, toggleId, isSelected],
-  );
+      updateItem,
+      clearSelectedIds,
+    };
+  }, [
+    selectedIds,
+    items,
+    toggleItem,
+    isSelected,
+    updateItem,
+    clearSelectedIds,
+  ]);
 
   return (
-    <SelectionContext.Provider value={value}>
+    <SelectionContext.Provider value={contextValue}>
       {children}
     </SelectionContext.Provider>
   );
+};
+
+export const useSelection = <T extends IdType, ItemType>() => {
+  const context = useContext(SelectionContext);
+  if (!context)
+    throw new Error("useSelection must be used within SelectionProvider");
+
+  return context as SelectionContextType<T, ItemType>;
 };

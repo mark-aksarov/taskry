@@ -14,11 +14,16 @@ import { TaskFormBaseSkeleton } from "@/components/tasks/TaskFormBase";
 import { ViewModeToggleButtonGroup } from "@/components/common/ViewMode";
 import { SelectionProvider } from "@/components/common/SelectionContext";
 import { TaskFiltersFormSkeleton } from "@/components/tasks/TaskFiltersForm";
-import { ActionFn, ActionState, DeleteTasksPayload } from "@/lib/actions/types";
 import { TaskToolbarSortingMenuTrigger } from "@/components/tasks/TaskToolbarSortingMenuTrigger";
 import { TaskToolbarActionsMenuTrigger } from "@/components/tasks/TaskToolbarActionsMenuTrigger";
 import { TaskToolbarFiltersModalTrigger } from "@/components/tasks/TaskToolbarFiltersModalTrigger";
 import { TaskToolbarCreateNewMenuTrigger } from "@/components/tasks/TaskToolbarCreateNewMenuTrigger";
+import {
+  ActionFn,
+  ActionState,
+  DeleteTasksPayload,
+  UpdateTaskStatusesPayload,
+} from "@/lib/actions/types";
 
 interface TasksPageProps {
   page: number;
@@ -30,6 +35,7 @@ interface TasksPageProps {
     pageSize: number;
   }>;
   deleteTasksAction: ActionFn<ActionState, DeleteTasksPayload>;
+  updateTasksStatusesAction: ActionFn<ActionState, UpdateTaskStatusesPayload>;
 }
 
 export function TasksPage({
@@ -39,6 +45,7 @@ export function TasksPage({
   NewTaskFormContainer,
   TasksServerContainer,
   deleteTasksAction,
+  updateTasksStatusesAction,
 }: TasksPageProps) {
   const t = useTranslations("app.TasksPage");
 
@@ -56,7 +63,10 @@ export function TasksPage({
                   </Suspense>
                 }
               />
-              <TaskToolbarActionsMenuTrigger deleteAction={deleteTasksAction} />
+              <TaskToolbarActionsMenuTrigger
+                deleteAction={deleteTasksAction}
+                updateStatusAction={updateTasksStatusesAction}
+              />
               <ViewModeToggleButtonGroup className="ml-auto" />
 
               <TaskToolbarCreateNewMenuTrigger
@@ -79,7 +89,10 @@ export function TasksPage({
                   </Suspense>
                 }
               />
-              <TaskToolbarActionsMenuTrigger deleteAction={deleteTasksAction} />
+              <TaskToolbarActionsMenuTrigger
+                deleteAction={deleteTasksAction}
+                updateStatusAction={updateTasksStatusesAction}
+              />
             </ToolbarMobileTop>
 
             <ToolbarMobileBottom>

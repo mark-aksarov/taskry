@@ -12,6 +12,13 @@ import {
   ToolbarMobileHeading,
 } from "@/components/common/Toolbar";
 
+import {
+  ActionFn,
+  ActionState,
+  DeleteTasksPayload,
+  UpdateTaskStatusesPayload,
+} from "@/lib/actions/types";
+
 import { Suspense } from "react";
 import { useTranslations } from "next-intl";
 import { PageGrid } from "@/components/common/PageGrid";
@@ -19,7 +26,6 @@ import { PageContainer } from "@/components/common/PageContainer";
 import { TaskFormBaseSkeleton } from "@/components/tasks/TaskFormBase";
 import { SelectionProvider } from "@/components/common/SelectionContext";
 import { NewTaskModalTrigger } from "@/components/tasks/NewTaskModalTrigger";
-import { ActionFn, ActionState, DeleteTasksPayload } from "@/lib/actions/types";
 import { TaskToolbarSortingMenuTrigger } from "@/components/tasks/TaskToolbarSortingMenuTrigger";
 import { TaskToolbarActionsMenuTrigger } from "@/components/tasks/TaskToolbarActionsMenuTrigger";
 
@@ -39,6 +45,7 @@ interface UserTasksPageLayoutProps {
   navigationDesktop: React.ReactNode;
   navigationMobile: React.ReactNode;
   deleteTasksAction: ActionFn<ActionState, DeleteTasksPayload>;
+  updateTasksStatusesAction: ActionFn<ActionState, UpdateTaskStatusesPayload>;
 }
 
 export function UserTasksPageLayout({
@@ -52,6 +59,7 @@ export function UserTasksPageLayout({
   navigationDesktop,
   navigationMobile,
   deleteTasksAction,
+  updateTasksStatusesAction,
 }: UserTasksPageLayoutProps) {
   const t = useTranslations("users.UserTasksPageLayout");
 
@@ -66,6 +74,7 @@ export function UserTasksPageLayout({
                 <TaskToolbarSortingMenuTrigger />
                 <TaskToolbarActionsMenuTrigger
                   deleteAction={deleteTasksAction}
+                  updateStatusAction={updateTasksStatusesAction}
                 />
                 <NewTaskModalTrigger
                   newTaskForm={
@@ -96,7 +105,10 @@ export function UserTasksPageLayout({
           <ToolbarMobileTop>
             <ToolbarMobileHeading>{t("title")}</ToolbarMobileHeading>
             <TaskToolbarSortingMenuTrigger />
-            <TaskToolbarActionsMenuTrigger deleteAction={deleteTasksAction} />
+            <TaskToolbarActionsMenuTrigger
+              deleteAction={deleteTasksAction}
+              updateStatusAction={updateTasksStatusesAction}
+            />
           </ToolbarMobileTop>
 
           <ToolbarMobileBottom>

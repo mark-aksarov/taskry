@@ -47,6 +47,7 @@ export const Default = {
     navigationDesktop: <ProfileNavigationDesktop />,
     navigationMobile: <ProfileNavigationMobile />,
     deleteTasksAction: fn(),
+    updateTasksStatusesAction: fn(),
   },
 } satisfies Story;
 

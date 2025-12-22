@@ -1,15 +1,15 @@
-import {
-  SelectionContext,
-  SelectionContextType,
-} from "@/components/common/SelectionContext";
+import { useMemo } from "react";
+import { useSyncSelectionItem } from "./useSyncSelectionItem";
+import { useSelection } from "@/components/common/SelectionContext";
 
-import { useContext } from "react";
+type ProjectItem = {
+  id: number;
+  title: string;
+};
 
-export const useProjectSelection = () => {
-  const context = useContext(SelectionContext);
-  if (!context)
-    throw new Error(
-      "useProjectSelection must be used within SelectionProvider",
-    );
-  return context as SelectionContextType<number>;
+export const useProjectSelection = () => useSelection<number, ProjectItem>();
+
+export const useSyncSelectionProjectItem = (id: number, title: string) => {
+  const item = useMemo(() => ({ id, title }), [id, title]);
+  useSyncSelectionItem<number, ProjectItem>(id, item);
 };

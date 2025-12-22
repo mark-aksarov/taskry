@@ -1,3 +1,5 @@
+import { ProjectStatus, TaskStatus } from "@/generated/prisma/enums";
+
 export type TaskSummaryDTO = {
   id: number;
   title: string;
@@ -15,7 +17,7 @@ export type TaskDetailDTO = {
     imageUrl?: string;
   };
 
-  status: string;
+  status: TaskStatus;
 
   project: {
     id: number;
@@ -53,12 +55,12 @@ export type TaskListItemDTO = {
     imageUrl?: string;
   };
 
-  status: string;
+  status: TaskStatus;
 
   project: {
     id: number;
     title: string;
-    status: string;
+    status: ProjectStatus;
   };
 
   category: {

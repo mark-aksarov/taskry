@@ -55,6 +55,7 @@ export const Default: Story = {
       />
     ),
     deleteTasksAction: fn(),
+    updateTasksStatusesAction: fn(),
   },
 };
 

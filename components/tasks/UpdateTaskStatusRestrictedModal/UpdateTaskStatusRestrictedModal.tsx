@@ -3,7 +3,7 @@
 import {
   ActionFn,
   ActionState,
-  UpdateProjectStatusesPayload,
+  UpdateTaskStatusesPayload,
 } from "@/lib/actions/types";
 
 import {
@@ -15,8 +15,8 @@ import {
 } from "@/components/common/ConfirmModal";
 
 import { useTranslations } from "next-intl";
+import { TaskStatus } from "@/generated/prisma/enums";
 import { startTransition, useActionState } from "react";
-import { ProjectStatus } from "@/generated/prisma/enums";
 import { DialogHeading, ModalProps } from "@/components/ui";
 import { useActionErrorToast } from "@/lib/hooks/useActionErrorToast";
 
@@ -25,37 +25,24 @@ const initialState: ActionState = {
   message: null,
 };
 
-interface UpdateProjectStatusModalProps
-  extends Pick<ModalProps, "isOpen" | "onOpenChange"> {
-  projectId: number;
-  nextStatus: ProjectStatus;
-  textKey: string;
-  updateStatusAction: ActionFn<ActionState, UpdateProjectStatusesPayload>;
-}
+export type UpdateTaskStatusRestrictedModalProps = {
+  taskIds: number[];
+  nextStatus: TaskStatus;
+  updateStatusAction: ActionFn<ActionState, UpdateTaskStatusesPayload>;
+} & Pick<ModalProps, "isOpen" | "onOpenChange">;
 
-export function UpdateProjectStatusModal({
-  projectId,
-  nextStatus,
-  textKey,
+export function UpdateTaskStatusRestrictedModal({
   isOpen,
   onOpenChange,
+  taskIds,
+  nextStatus,
   updateStatusAction,
-}: UpdateProjectStatusModalProps) {
-  const t = useTranslations("projects.UpdateProjectStatusModal");
+}: UpdateTaskStatusRestrictedModalProps) {
+  const t = useTranslations("tasks.UpdateTaskStatusRestrictedModal");
+  const [state, action] = useActionState(updateStatusAction, initialState);
 
-  const [state, action, pending] = useActionState(
-    updateStatusAction,
-    initialState,
-  );
-
-  const handleUpdateProjectStatus = () => {
-    startTransition(() => {
-      action({
-        ids: [projectId],
-        nextStatus,
-      });
-    });
-
+  const handleConfirm = () => {
+    startTransition(() => action({ ids: taskIds, nextStatus }));
     onOpenChange?.(false);
   };
 
@@ -64,14 +51,12 @@ export function UpdateProjectStatusModal({
   return (
     <ConfirmModal isOpen={isOpen} onOpenChange={onOpenChange}>
       <DialogHeading>{t("heading")}</DialogHeading>
-
-      <ConfirmModalText>{t(`text.${textKey}`)}</ConfirmModalText>
-
+      <ConfirmModalText>{t("text")}</ConfirmModalText>
       <ConfirmModalActions>
         <ConfirmModalCancelButton label={t("cancelButton")} />
         <ConfirmModalConfirmButton
-          label={t("updateButton")}
-          onConfirm={handleUpdateProjectStatus}
+          label={t("confirmButton")}
+          onConfirm={handleConfirm}
         />
       </ConfirmModalActions>
     </ConfirmModal>
