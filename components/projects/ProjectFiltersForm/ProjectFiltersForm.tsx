@@ -54,6 +54,7 @@ export function ProjectFiltersForm({
   const [dateStart, setDateStart] = useState<DateValue | null>(
     parseUrlDate(searchParams.get("dateStart")),
   );
+
   const [dateEnd, setDateEnd] = useState<DateValue | null>(
     parseUrlDate(searchParams.get("dateEnd")),
   );

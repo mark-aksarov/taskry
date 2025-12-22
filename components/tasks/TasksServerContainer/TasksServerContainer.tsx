@@ -6,6 +6,7 @@ import { TaskListItemDTO } from "@/lib/dto/task";
 import { deleteTasks } from "@/lib/actions/deleteTasks";
 import { getTaskCount, getTaskList } from "@/lib/dal/task";
 import { Pagination } from "@/components/common/Pagination";
+import { TaskFilters } from "@/lib/dto/filters/taskFilters";
 import { ViewModeLayout } from "@/components/common/ViewMode";
 import { updateTaskStatuses } from "@/lib/actions/updateTaskStatuses";
 
@@ -13,15 +14,17 @@ interface TasksServerContainerProps {
   page: number;
   pageSize: number;
   sort: string;
+  filters?: TaskFilters;
 }
 
 export async function TasksServerContainer({
   page,
   pageSize,
   sort,
+  filters,
 }: TasksServerContainerProps) {
-  const tasks = await getTaskList({ page, pageSize, sort });
-  const count = await getTaskCount();
+  const tasks = await getTaskList({ page, pageSize, sort, filters });
+  const count = await getTaskCount(filters);
 
   const getCommonProps = (task: TaskListItemDTO) => ({
     id: task.id,

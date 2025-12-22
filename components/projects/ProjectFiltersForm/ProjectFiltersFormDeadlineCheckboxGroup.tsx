@@ -1,6 +1,5 @@
 import { CheckboxGroup, Checkbox } from "@/components/ui";
 import { useTranslations } from "next-intl";
-import { useSearchParams } from "next/navigation";
 
 interface ProjectFiltersFormDeadlineCheckboxGroupProps {
   value: string[];
@@ -14,7 +13,6 @@ export function ProjectFiltersFormDeadlineCheckboxGroup({
   const t = useTranslations(
     "projects.ProjectFiltersForm.ProjectFiltersFormDeadlineCheckboxGroup",
   );
-  const searchParams = useSearchParams();
 
   return (
     <CheckboxGroup

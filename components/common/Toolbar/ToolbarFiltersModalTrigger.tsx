@@ -17,11 +17,13 @@ import { ResponsiveModal } from "../ResponsiveModal";
 interface ToolbarFiltersModalTriggerProps {
   title: string;
   filtersForm: React.ReactNode;
+  formId: string;
 }
 
 export function ToolbarFiltersModalTrigger({
   title,
   filtersForm,
+  formId,
 }: ToolbarFiltersModalTriggerProps) {
   const t = useTranslations("common.Toolbar.ToolbarFiltersModalTrigger");
 
@@ -54,8 +56,8 @@ export function ToolbarFiltersModalTrigger({
             <Button
               slot="close"
               type="submit"
-              form="project-filter-form"
               variant="primary"
+              form={formId}
               size="medium"
               label={t("applyButtonLabel")}
               className="w-full justify-center"

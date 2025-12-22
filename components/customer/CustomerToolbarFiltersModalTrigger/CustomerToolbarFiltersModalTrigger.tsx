@@ -11,6 +11,10 @@ export function CustomerToolbarFiltersModalTrigger({
   const t = useTranslations("customers.CustomerToolbarFiltersModalTrigger");
 
   return (
-    <ToolbarFiltersModalTrigger title={t("title")} filtersForm={filtersForm} />
+    <ToolbarFiltersModalTrigger
+      title={t("title")}
+      filtersForm={filtersForm}
+      formId="customer-filter-form"
+    />
   );
 }

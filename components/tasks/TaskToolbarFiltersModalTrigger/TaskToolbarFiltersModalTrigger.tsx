@@ -11,6 +11,10 @@ export function TaskToolbarFiltersModalTrigger({
   const t = useTranslations("tasks.TaskToolbarFiltersModalTrigger");
 
   return (
-    <ToolbarFiltersModalTrigger title={t("title")} filtersForm={filtersForm} />
+    <ToolbarFiltersModalTrigger
+      title={t("title")}
+      filtersForm={filtersForm}
+      formId="task-filter-form"
+    />
   );
 }

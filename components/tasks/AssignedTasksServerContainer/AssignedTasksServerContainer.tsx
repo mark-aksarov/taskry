@@ -28,14 +28,21 @@ export async function AssignedTasksServerContainer({
 
   const assigneeId = session!.user.id;
 
+  const filters = {
+    status: [],
+    category: [],
+    project: [],
+    assignee: [assigneeId],
+  };
+
   const tasks = await getTaskList({
-    assigneeId,
     page,
     pageSize,
     sort: "deadline",
+    filters,
   });
 
-  const count = await getTaskCount(assigneeId);
+  const count = await getTaskCount(filters);
 
   if (!count) {
     return (

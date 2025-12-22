@@ -9,6 +9,8 @@ import {
 
 import { cache } from "react";
 import prisma from "../prisma";
+import { buildDateWhere } from "../utils/dateWhere";
+import { TaskFilters } from "../dto/filters/taskFilters";
 import { getSessionOrThrow } from "../utils/getSessionOrThrow";
 import { ProjectStatus, TaskStatus } from "@/generated/prisma/enums";
 import { ALLOWED_TASK_STATUSES_BY_PROJECT } from "../utils/statusUtils";
@@ -91,19 +93,21 @@ export const getTaskDetail = cache(async (id: number) => {
 
 export const getTaskList = cache(
   async ({
-    assigneeId,
     page,
     pageSize,
     sort,
+    filters,
   }: {
-    assigneeId?: string;
     page: number;
     pageSize: number;
     sort: string;
+    filters?: TaskFilters;
   }) => {
     const session = await getSessionOrThrow();
     const workspaceId = session.user.workspaceId;
     const skip = (page - 1) * pageSize;
+
+    const where = buildTaskWhereClause(workspaceId, filters);
 
     const orderByMapping: Record<string, any> = {
       title: { title: "asc" },
@@ -112,16 +116,11 @@ export const getTaskList = cache(
       category: { category: { name: "asc" } },
     };
 
-    const orderBy = orderByMapping[sort] || { title: "asc" };
-
     const tasks = await prisma.task.findMany({
-      where: {
-        workspaceId,
-        assigneeId,
-      },
+      where,
       skip,
       take: pageSize,
-      orderBy: [orderBy],
+      orderBy: [orderByMapping[sort] || { title: "asc" }],
       select: {
         id: true,
         title: true,
@@ -166,6 +165,42 @@ export const getTaskList = cache(
   },
 );
 
+export const getTaskCount = cache(async (filters?: TaskFilters) => {
+  const session = await getSessionOrThrow();
+  const where = buildTaskWhereClause(session.user.workspaceId, filters);
+
+  return prisma.task.count({ where });
+});
+
+export function buildTaskWhereClause(
+  workspaceId: number,
+  filters?: TaskFilters,
+) {
+  if (!filters) {
+    return { workspaceId };
+  }
+
+  const { status, category, project, assignee, deadline, dateStart, dateEnd } =
+    filters;
+
+  const datesWhere = buildDateWhere({
+    quick: deadline as any,
+    dateStart,
+    dateEnd,
+  });
+
+  return {
+    workspaceId,
+
+    ...(status.length && { status: { in: status } }),
+    ...(category.length && { categoryId: { in: category } }),
+    ...(project.length && { projectId: { in: project } }),
+    ...(assignee.length && { assigneeId: { in: assignee } }),
+
+    ...(datesWhere && { deadline: datesWhere }),
+  };
+}
+
 export const getTaskCategorySummaries = cache(async () => {
   const session = await getSessionOrThrow();
   const workspaceId = session.user.workspaceId;
@@ -176,18 +211,6 @@ export const getTaskCategorySummaries = cache(async () => {
   });
 
   return categories.map(mapTaskCategorySummaryToDTO);
-});
-
-export const getTaskCount = cache(async (assigneeId?: string) => {
-  const session = await getSessionOrThrow();
-  const workspaceId = session.user.workspaceId;
-
-  return prisma.task.count({
-    where: {
-      workspaceId,
-      assigneeId,
-    },
-  });
 });
 
 export const deleteTasks = async (ids: number[]) => {

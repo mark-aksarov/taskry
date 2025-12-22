@@ -1,6 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
+import { useSearchParams } from "next/navigation";
 import { Checkbox, CheckboxGroup } from "@/components/ui";
 
 export function TaskFiltersFormAssigneeCheckboxGroup({
@@ -8,12 +9,18 @@ export function TaskFiltersFormAssigneeCheckboxGroup({
 }: {
   users: { id: string; fullName: string }[];
 }) {
+  const searchParams = useSearchParams();
   const t = useTranslations(
     "tasks.TaskFiltersForm.TaskFiltersFormAssigneeCheckboxGroup",
   );
+  const initialValues = searchParams.get("assignee")?.split(",") || [];
 
   return (
-    <CheckboxGroup label={t("label")}>
+    <CheckboxGroup
+      label={t("label")}
+      name="assignee"
+      defaultValue={initialValues}
+    >
       {users.map((user) => (
         <Checkbox
           key={user.id}

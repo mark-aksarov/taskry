@@ -20,14 +20,20 @@ export async function UserTasksServerContainer({
   userId,
   baseUrl,
 }: UserTasksServerContainerProps) {
+  const filters = {
+    status: [],
+    category: [],
+    project: [],
+    assignee: [userId],
+  };
   const tasks = await getTaskList({
     page,
     pageSize,
-    assigneeId: userId,
     sort,
+    filters,
   });
 
-  const count = await getTaskCount(userId);
+  const count = await getTaskCount(filters);
   const totalPages = Math.ceil(count / pageSize);
 
   const paginationProps = {

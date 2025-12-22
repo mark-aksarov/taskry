@@ -11,6 +11,10 @@ export function UserToolbarFiltersModalTrigger({
   const t = useTranslations("users.UserToolbarFiltersModalTrigger");
 
   return (
-    <ToolbarFiltersModalTrigger title={t("title")} filtersForm={filtersForm} />
+    <ToolbarFiltersModalTrigger
+      title={t("title")}
+      filtersForm={filtersForm}
+      formId="user-filter-form"
+    />
   );
 }

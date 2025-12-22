@@ -1,4 +1,4 @@
-import { Prisma } from "@/generated/prisma/client";
+import { Prisma, TaskStatus } from "@/generated/prisma/client";
 
 // TaskSummary
 

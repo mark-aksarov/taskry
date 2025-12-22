@@ -9,6 +9,10 @@ export function ProjectToolbarFiltersModalTrigger({
   const t = useTranslations("projects.ProjectToolbarFiltersModalTrigger");
 
   return (
-    <ToolbarFiltersModalTrigger title={t("title")} filtersForm={filtersForm} />
+    <ToolbarFiltersModalTrigger
+      title={t("title")}
+      filtersForm={filtersForm}
+      formId="project-filter-form"
+    />
   );
 }

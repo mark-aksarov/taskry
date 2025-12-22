@@ -1,4 +1,11 @@
 import {
+  ActionFn,
+  ActionState,
+  DeleteTasksPayload,
+  UpdateTaskStatusesPayload,
+} from "@/lib/actions/types";
+
+import {
   ToolbarDesktop,
   ToolbarMobileTop,
   ToolbarMobileBottom,
@@ -8,6 +15,7 @@ import {
 import { Suspense } from "react";
 import { useTranslations } from "next-intl";
 import { PageGrid } from "@/components/common/PageGrid";
+import { TaskFilters } from "@/lib/dto/filters/taskFilters";
 import { ViewModeProvider } from "@/components/common/ViewMode";
 import { PageContainer } from "@/components/common/PageContainer";
 import { TaskFormBaseSkeleton } from "@/components/tasks/TaskFormBase";
@@ -18,23 +26,19 @@ import { TaskToolbarSortingMenuTrigger } from "@/components/tasks/TaskToolbarSor
 import { TaskToolbarActionsMenuTrigger } from "@/components/tasks/TaskToolbarActionsMenuTrigger";
 import { TaskToolbarFiltersModalTrigger } from "@/components/tasks/TaskToolbarFiltersModalTrigger";
 import { TaskToolbarCreateNewMenuTrigger } from "@/components/tasks/TaskToolbarCreateNewMenuTrigger";
-import {
-  ActionFn,
-  ActionState,
-  DeleteTasksPayload,
-  UpdateTaskStatusesPayload,
-} from "@/lib/actions/types";
 
 interface TasksPageProps {
   page: number;
   pageSize: number;
   sort: string;
+  filters?: TaskFilters;
   TaskFiltersFormContainer: React.ComponentType;
   NewTaskFormContainer: React.ComponentType;
   TasksServerContainer: React.ComponentType<{
     page: number;
     pageSize: number;
     sort: string;
+    filters?: TaskFilters;
   }>;
   deleteTasksAction: ActionFn<ActionState, DeleteTasksPayload>;
   updateTasksStatusesAction: ActionFn<ActionState, UpdateTaskStatusesPayload>;
@@ -44,6 +48,7 @@ export function TasksPage({
   page,
   pageSize,
   sort,
+  filters,
   TaskFiltersFormContainer,
   NewTaskFormContainer,
   TasksServerContainer,
@@ -110,7 +115,12 @@ export function TasksPage({
               />
             </ToolbarMobileBottom>
 
-            <TasksServerContainer page={page} pageSize={pageSize} sort={sort} />
+            <TasksServerContainer
+              page={page}
+              pageSize={pageSize}
+              sort={sort}
+              filters={filters}
+            />
           </SelectionProvider>
         </ViewModeProvider>
       </PageGrid>

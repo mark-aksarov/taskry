@@ -8,7 +8,6 @@ export const useSyncSelectionItem = <T extends IdType, ItemType>(
   const { updateItem } = useSelection<T, ItemType>();
 
   useEffect(() => {
-    console.log("useSyncSelectionItem", id, item);
     updateItem(id, item);
   }, [id, item, updateItem]);
 };
