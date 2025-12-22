@@ -13,9 +13,11 @@ interface TeamProfileTasksPageProps {
   userId: string;
   page: number;
   pageSize: number;
+  sort: string;
   UserTasksContainer: React.ComponentType<{
     page: number;
     pageSize: number;
+    sort: string;
     userId: string;
     baseUrl: string;
   }>;
@@ -29,6 +31,7 @@ export function TeamProfileTasksPage({
   userId,
   page,
   pageSize,
+  sort,
   UserTasksContainer,
   UserHeaderContainer,
   NewTaskFormContainer,
@@ -40,6 +43,7 @@ export function TeamProfileTasksPage({
       userId={userId}
       page={page}
       pageSize={pageSize}
+      sort={sort}
       baseUrl={`/team/${userId}/tasks`}
       UserTasksContainer={UserTasksContainer}
       UserHeaderContainer={UserHeaderContainer}

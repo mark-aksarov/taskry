@@ -8,6 +8,7 @@ import { updateTaskStatuses } from "@/lib/actions/updateTaskStatuses";
 interface UserTasksServerContainerProps {
   page: number;
   pageSize: number;
+  sort: string;
   userId: string;
   baseUrl: string;
 }
@@ -15,6 +16,7 @@ interface UserTasksServerContainerProps {
 export async function UserTasksServerContainer({
   page,
   pageSize,
+  sort,
   userId,
   baseUrl,
 }: UserTasksServerContainerProps) {
@@ -22,6 +24,7 @@ export async function UserTasksServerContainer({
     page,
     pageSize,
     assigneeId: userId,
+    sort,
   });
 
   const count = await getTaskCount(userId);

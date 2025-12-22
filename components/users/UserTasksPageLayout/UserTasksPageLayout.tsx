@@ -33,10 +33,12 @@ interface UserTasksPageLayoutProps {
   userId: string;
   page: number;
   pageSize: number;
+  sort: string;
   baseUrl: string;
   UserTasksContainer: React.ComponentType<{
     page: number;
     pageSize: number;
+    sort: string;
     userId: string;
     baseUrl: string;
   }>;
@@ -52,6 +54,7 @@ export function UserTasksPageLayout({
   userId,
   page,
   pageSize,
+  sort,
   baseUrl,
   UserTasksContainer,
   UserHeaderContainer,
@@ -89,6 +92,7 @@ export function UserTasksPageLayout({
               userId={userId}
               page={page}
               pageSize={pageSize}
+              sort={sort}
               baseUrl={baseUrl}
             />
           </UserCardLeft>
@@ -120,6 +124,7 @@ export function UserTasksPageLayout({
             userId={userId}
             page={page}
             pageSize={pageSize}
+            sort={sort}
             baseUrl={baseUrl}
           />
         </PageGrid>

@@ -14,19 +14,20 @@ import { NewTaskFormServerContainer } from "@/components/tasks/NewTaskFormServer
 const searchParamsSchema = z.object({
   page: z.coerce.number().int().positive().catch(1),
   pageSize: z.coerce.number().int().min(1).max(100).catch(10),
+  sort: z.enum(["title", "deadline", "status", "category"]).catch("title"),
 });
 
 export default async function AppProfileTasksPage({
   searchParams,
 }: {
-  searchParams: Promise<{ page?: string; pageSize?: string }>;
+  searchParams: Promise<{ page?: string; pageSize?: string; sort?: string }>;
 }) {
   // Authorization
   await requireProtectedPage();
 
   // Validation
   const rawParams = await searchParams;
-  const { page, pageSize } = searchParamsSchema.parse(rawParams);
+  const { page, pageSize, sort } = searchParamsSchema.parse(rawParams);
 
   // Get data
   const session = await auth.api.getSession({
@@ -50,6 +51,7 @@ export default async function AppProfileTasksPage({
       userId={userId}
       page={page}
       pageSize={pageSize}
+      sort={sort}
       UserTasksContainer={UserTasksServerContainer}
       UserHeaderContainer={UserHeaderServerContainer}
       NewTaskFormContainer={NewTaskFormServerContainer}

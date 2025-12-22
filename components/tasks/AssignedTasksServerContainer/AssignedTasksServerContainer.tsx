@@ -32,6 +32,7 @@ export async function AssignedTasksServerContainer({
     assigneeId,
     page,
     pageSize,
+    sort: "deadline",
   });
 
   const count = await getTaskCount(assigneeId);

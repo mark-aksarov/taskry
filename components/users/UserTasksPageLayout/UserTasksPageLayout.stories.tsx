@@ -40,6 +40,7 @@ export const Default = {
     userId: "BKs42HvVDEZFoaJUmTqf1gTN0K8pUFjI",
     page: 1,
     pageSize: 10,
+    sort: "title",
     baseUrl: "/profile/tasks",
     UserTasksContainer: () => <UserTaskList {...UserTaskListStory.args} />,
     UserHeaderContainer: () => <PersonHeader {...PersonHeaderStory.args} />,

@@ -44,6 +44,7 @@ export const Default: Story = {
   args: {
     page: 1,
     pageSize: 20,
+    sort: "title",
     TaskFiltersFormContainer: () => (
       <TaskFiltersForm {...TaskFiltersFormStory.args} />
     ),
