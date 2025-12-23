@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import { ResetPasswordPage } from "./ResetPasswordPage";
-import { resetPassword } from "@/lib/actions/resetPassword";
+import { resetPassword } from "@/lib/actions/auth/resetPassword";
 import { requireAuthPage } from "@/lib/utils/requireAuthPage";
 
 export default async function AppResetPassword({

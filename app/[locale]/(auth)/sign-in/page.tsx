@@ -1,5 +1,5 @@
 import { SignInPage } from "./SignInPage";
-import { signIn } from "@/lib/actions/signIn";
+import { signIn } from "@/lib/actions/auth/signIn";
 import { requireAuthPage } from "@/lib/utils/requireAuthPage";
 
 export default async function AppSignInPage({

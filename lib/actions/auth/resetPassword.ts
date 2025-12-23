@@ -1,11 +1,11 @@
 "use server";
 
 import * as z from "zod";
-import { auth } from "../auth";
-import { ActionState } from "./types";
+import { auth } from "@/lib/auth";
+import { ActionState } from "../types";
 import { APIError } from "better-auth";
 import { redirect } from "@/i18n/navigation";
-import { buildURL } from "../utils/buildURL";
+import { buildURL } from "../../utils/buildURL";
 import { getLocale, getTranslations } from "next-intl/server";
 import { actionError, actionSuccess } from "../utils/actionResult";
 import { validateActionInput } from "../utils/validateActionInput";

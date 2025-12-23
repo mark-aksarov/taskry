@@ -1,34 +1,32 @@
 "use server";
 
 import z from "zod";
-import { ActionState } from "./types";
+import { ActionState } from "../types";
 import { revalidatePath } from "next/cache";
 import { getTranslations } from "next-intl/server";
 import { withAuthAction } from "../utils/withAuthAction";
 import { validateActionInput } from "../utils/validateActionInput";
 import { actionError, actionSuccess } from "../utils/actionResult";
-import { createProjectCategory as createProjectCategoryQuery } from "../data/projectCategory/projectCategory.dal";
+import { deleteProjects as deleteProjectQuery } from "@/lib/data/project/project.dal";
 
 const schema = z.object({
-  name: z.string().min(1).max(255),
+  ids: z.array(z.coerce.number().int().positive()).min(1),
 });
 
-export async function createProjectCategory(
+export async function deleteProjects(
   _prevState: ActionState,
-  formData: FormData,
+  ids: number[],
 ): Promise<ActionState> {
   return withAuthAction(async () => {
     const t = await getTranslations("actions.common");
 
-    const parsed = validateActionInput(schema, {
-      name: formData.get("name"),
-    });
+    const parsed = validateActionInput(schema, { ids });
 
     if (!parsed.success) {
       return actionError(t("validation.invalidInput"));
     }
 
-    await createProjectCategoryQuery(parsed.data);
+    await deleteProjectQuery(parsed.data.ids);
     revalidatePath("/projects");
 
     return actionSuccess();

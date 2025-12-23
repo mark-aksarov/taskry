@@ -1,6 +1,6 @@
 import { cache } from "react";
 import prisma from "@/lib/prisma";
-import { getSessionOrThrow } from "@/lib/utils/getSessionOrThrow";
+import { getSessionOrThrow } from "@/lib/data/utils/getSessionOrThrow";
 import { mapTaskCategorySummaryToDTO } from "./taskCategory.mapper";
 
 export const getTaskCategorySummaries = cache(async () => {

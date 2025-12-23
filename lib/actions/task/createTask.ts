@@ -1,30 +1,33 @@
 "use server";
 
 import z from "zod";
-import { ActionState } from "./types";
+import { ActionState } from "../types";
 import { revalidatePath } from "next/cache";
 import { getTranslations } from "next-intl/server";
+import { TaskStatus } from "@/generated/prisma/enums";
 import { withAuthAction } from "../utils/withAuthAction";
 import { validateActionInput } from "../utils/validateActionInput";
 import { actionError, actionSuccess } from "../utils/actionResult";
-import { createProject as createProjectQuery } from "../data/project/project.dal";
+import { createTask as createTaskQuery } from "@/lib/data/task/task.dal";
 
 const schema = z.object({
   title: z.string().min(1).max(255),
   description: z.string().max(5000).optional(),
   deadline: z.coerce.date(),
-  status: z.enum(["active", "completed", "pending"]),
+  status: z.enum(TaskStatus),
   categoryId: z.coerce.number(),
-  customerId: z.coerce.number().optional(),
+  projectId: z.coerce.number(),
+  assigneeId: z.coerce.string().optional(),
 });
 
-export async function createProject(
+export async function createTask(
   _prevState: ActionState,
   formData: FormData,
 ): Promise<ActionState> {
   return withAuthAction(async () => {
     const t = await getTranslations("actions.common");
 
+    // Parse and validate form data
     const input = Object.fromEntries(formData.entries());
     const parsed = validateActionInput(schema, input);
 
@@ -32,7 +35,10 @@ export async function createProject(
       return actionError(t("validation.invalidInput"));
     }
 
-    await createProjectQuery(parsed.data);
+    // Execute create
+    await createTaskQuery(parsed.data);
+
+    // Revalidation
     revalidatePath("/projects");
 
     return actionSuccess();

@@ -4,7 +4,7 @@ import { cache } from "react";
 import prisma from "@/lib/prisma";
 import { companySummarySelect } from "./company.select";
 import { mapCompanySummaryToDTO } from "./company.mapper";
-import { getSessionOrThrow } from "@/lib/utils/getSessionOrThrow";
+import { getSessionOrThrow } from "@/lib/data/utils/getSessionOrThrow";
 
 export const getCompanySummaries = cache(async () => {
   const {

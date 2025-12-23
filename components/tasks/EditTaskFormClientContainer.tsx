@@ -8,7 +8,7 @@ import {
 } from "./TaskFormBase";
 
 import useSWR from "swr";
-import { updateTask } from "@/lib/actions/updateTask";
+import { updateTask } from "@/lib/actions/task/updateTask";
 import { CalendarDate } from "@internationalized/date";
 import { UserSummaryDTO } from "@/lib/data/user/user.dto";
 import { EditTaskForm } from "./EditTaskForm/EditTaskForm";

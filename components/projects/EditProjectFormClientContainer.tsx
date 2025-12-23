@@ -9,7 +9,7 @@ import {
 import useSWR from "swr";
 import { EditProjectForm } from "./EditProjectForm";
 import { CalendarDate } from "@internationalized/date";
-import { updateProject } from "@/lib/actions/updateProject";
+import { updateProject } from "@/lib/actions/project/updateProject";
 import { ProjectFormDataDTO } from "@/lib/data/project/project.dto";
 import { CustomerSummaryDTO } from "@/lib/data/customer/customer.dto";
 import { ProjectCategorySummaryDTO } from "@/lib/data/projectCategory/projectCategory.dto";

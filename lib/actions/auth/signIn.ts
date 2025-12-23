@@ -1,9 +1,8 @@
 "use server";
 
 import * as z from "zod";
-import { auth } from "../auth";
-import prisma from "../prisma";
-import { ActionState } from "./types";
+import { auth } from "@/lib/auth";
+import { ActionState } from "../types";
 import { APIError } from "better-auth";
 import { headers } from "next/headers";
 import { redirect } from "@/i18n/navigation";
@@ -12,18 +11,18 @@ import { actionError, actionSuccess } from "../utils/actionResult";
 import { validateActionInput } from "../utils/validateActionInput";
 
 const schema = z.object({
-  name: z.string().min(5).max(50),
   email: z.email().min(1).max(254),
   password: z.string().min(8).max(128),
   rememberMe: z.coerce.boolean(),
 });
 
-export async function signUp(
+export async function signIn(
+  callbackUrl: string,
   _prevState: ActionState,
   formData: FormData,
 ): Promise<ActionState> {
   const locale = await getLocale();
-  const t = await getTranslations("actions.signUp");
+  const t = await getTranslations("actions.signIn");
 
   // Check if user is already signed in
   const session = await auth.api.getSession({
@@ -35,7 +34,7 @@ export async function signUp(
     return actionSuccess();
   }
 
-  // Parse and validate form data
+  // Parse form data
   const input = Object.fromEntries(formData.entries());
   const parsed = validateActionInput(schema, input);
 
@@ -43,30 +42,17 @@ export async function signUp(
     return actionError(t("validation.invalidInput"));
   }
 
-  const { name, email, password, rememberMe } = parsed.data;
-
+  // Authenticate
   try {
-    // Create workspace
-    const workspace = await prisma.workspace.create({
-      data: { id: 3 }, // Adjust as needed
-    });
-
-    // Sign-up
-    await auth.api.signUpEmail({
-      body: {
-        name,
-        email,
-        password,
-        rememberMe,
-        workspaceId: workspace.id,
-      },
+    await auth.api.signInEmail({
+      body: parsed.data,
     });
   } catch (error: unknown) {
-    console.error("Sign-up Error:", error);
+    console.error("Sign-in Error:", error);
 
     if (error instanceof APIError) {
       const statusKey = String(error.status).toLowerCase();
-      const knownKeys = ["bad_request", "unprocessable_entity"];
+      const knownKeys = ["bad_request", "forbidden", "unauthorized"];
 
       if (knownKeys.includes(statusKey)) {
         return actionError(t(`validation.${statusKey}`));
@@ -76,9 +62,9 @@ export async function signUp(
     return actionError(t("validation.internalServerError"));
   }
 
-  // Redirect to verify email
+  // Redirect to callbackUrl or default "/"
   redirect({
-    href: "/verify-email",
+    href: callbackUrl || "/",
     locale,
   });
 

@@ -15,9 +15,9 @@ import { getLocale } from "next-intl/server";
 import { ProjectListItem } from "../ProjectListItem";
 import { ProjectGridItem } from "../ProjectGridItem";
 import { Pagination } from "@/components/common/Pagination";
-import { deleteProjects } from "@/lib/actions/deleteProjects";
+import { deleteProjects } from "@/lib/actions/project/deleteProjects";
 import { ViewModeLayout } from "@/components/common/ViewMode";
-import { updateProjectStatuses } from "@/lib/actions/updateProjectStatuses";
+import { updateProjectStatuses } from "@/lib/actions/project/updateProjectStatuses";
 
 interface ProjectsServerContainerProps {
   page: number;

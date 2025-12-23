@@ -1,4 +1,4 @@
-import { addDays, endOfDay, startOfDay } from "@/lib/utils/date";
+import { addDays, endOfDay, startOfDay } from "./date";
 
 export type DateQuickFilter = "today" | "tomorrow" | "overdue";
 

@@ -1,8 +1,8 @@
 "use server";
 
 import * as z from "zod";
-import { auth } from "../auth";
-import { ActionState } from "./types";
+import { auth } from "@/lib/auth";
+import { ActionState } from "../types";
 import { APIError } from "better-auth";
 import { redirect } from "@/i18n/navigation";
 import { getLocale, getTranslations } from "next-intl/server";

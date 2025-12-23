@@ -5,7 +5,7 @@ import {
 } from "../ProjectFormBase";
 
 import { NewProjectForm } from "../NewProjectForm";
-import { createProject } from "@/lib/actions/createProject";
+import { createProject } from "@/lib/actions/project/createProject";
 import { getCustomerSummaries } from "@/lib/data/customer/customer.dal";
 import { getProjectCategorySummaries } from "@/lib/data/projectCategory/projectCategory.dal";
 

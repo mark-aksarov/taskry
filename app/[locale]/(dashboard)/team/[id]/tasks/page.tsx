@@ -4,10 +4,10 @@ import {
 } from "@/components/tasks/EditTaskFormClientContainerContext";
 
 import { z } from "zod";
-import { deleteTasks } from "@/lib/actions/deleteTasks";
+import { deleteTasks } from "@/lib/actions/task/deleteTasks";
 import { getTaskCount } from "@/lib/data/task/task.dal";
 import { TeamProfileTasksPage } from "./TeamProfileTasksPage";
-import { updateTaskStatuses } from "@/lib/actions/updateTaskStatuses";
+import { updateTaskStatuses } from "@/lib/actions/task/updateTaskStatuses";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { TeamProfileTasksPageEmpty } from "./TeamProfileTasksPageEmpty";
 import { UserTasksServerContainer } from "@/components/users/UserTasksServerContainer";

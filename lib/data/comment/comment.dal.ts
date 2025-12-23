@@ -4,7 +4,7 @@ import { cache } from "react";
 import prisma from "@/lib/prisma";
 import { commentSelect } from "./comment.select";
 import { mapCommentToDTO } from "./comment.mapper";
-import { getSessionOrThrow } from "@/lib/utils/getSessionOrThrow";
+import { getSessionOrThrow } from "@/lib/data/utils/getSessionOrThrow";
 
 export const getComments = cache(
   async ({ taskId, projectId }: { taskId?: number; projectId?: number }) => {

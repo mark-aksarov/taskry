@@ -1,7 +1,7 @@
-import { auth } from "../auth";
+import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
+import { ActionState } from "../types";
 import { redirect } from "@/i18n/navigation";
-import { ActionState } from "../actions/types";
 import { getLocale, getTranslations } from "next-intl/server";
 
 export async function withAuthAction(

@@ -23,7 +23,7 @@ import {
 import { cache } from "react";
 import prisma from "@/lib/prisma";
 import { buildDateWhere } from "../utils/dateWhere";
-import { getSessionOrThrow } from "@/lib/utils/getSessionOrThrow";
+import { getSessionOrThrow } from "@/lib/data/utils/getSessionOrThrow";
 import { TRANSITION_TASK_STATUSES_BY_PROJECT } from "../utils/statusUtils";
 import { Prisma, ProjectStatus, TaskStatus } from "@/generated/prisma/client";
 

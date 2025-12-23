@@ -1,5 +1,5 @@
 import { ForgetPasswordPage } from "./ForgetPasswordPage";
-import { forgetPassword } from "@/lib/actions/forgetPassword";
+import { forgetPassword } from "@/lib/actions/auth/forgetPassword";
 import { requireAuthPage } from "@/lib/utils/requireAuthPage";
 
 export default async function Page() {

@@ -1,4 +1,4 @@
-import { ActionState } from "../actions/types";
+import { ActionState } from "../types";
 
 export const actionError = (message: string): ActionState => ({
   status: "error",

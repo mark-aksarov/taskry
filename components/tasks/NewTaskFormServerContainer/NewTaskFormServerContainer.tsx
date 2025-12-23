@@ -7,7 +7,7 @@ import {
 
 import { NewTaskForm } from "../NewTaskForm";
 
-import { createTask } from "@/lib/actions/createTask";
+import { createTask } from "@/lib/actions/task/createTask";
 import { getUserSummaries } from "@/lib/data/user/user.dal";
 import { getProjectSummaries } from "@/lib/data/project/project.dal";
 import { getTaskCategorySummaries } from "@/lib/data/taskCategory/taskCategory.dal";

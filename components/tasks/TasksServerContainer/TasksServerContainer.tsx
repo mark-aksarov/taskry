@@ -2,11 +2,11 @@ import { TaskList } from "../TaskList";
 import { TaskGrid } from "../TaskGrid";
 import { TaskListItem } from "../TaskListItem";
 import { TaskGridItem } from "../TaskGridItem";
-import { deleteTasks } from "@/lib/actions/deleteTasks";
+import { deleteTasks } from "@/lib/actions/task/deleteTasks";
 import { Pagination } from "@/components/common/Pagination";
 import { ViewModeLayout } from "@/components/common/ViewMode";
 import { getTaskCount, getTaskList } from "@/lib/data/task/task.dal";
-import { updateTaskStatuses } from "@/lib/actions/updateTaskStatuses";
+import { updateTaskStatuses } from "@/lib/actions/task/updateTaskStatuses";
 import { TaskFilters, TaskListItemDTO } from "@/lib/data/task/task.dto";
 
 interface TasksServerContainerProps {
