@@ -1,7 +1,7 @@
 import "server-only";
 
-import { getProjectCount } from "@/lib/dal/project";
 import { TotalProjectsCard } from "../TotalProjectsCard";
+import { getProjectCount } from "@/lib/data/project/project.dal";
 
 export const TotalProjectsCardServerContainer = async () => {
   const totalProjects = await getProjectCount();

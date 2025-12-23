@@ -8,7 +8,7 @@ import { ProjectStatus } from "@/generated/prisma/enums";
 import { withAuthAction } from "../utils/withAuthAction";
 import { validateActionInput } from "../utils/validateActionInput";
 import { actionError, actionSuccess } from "../utils/actionResult";
-import { updateProjectStatuses as updateProjectStatusesQuery } from "../dal/project";
+import { updateProjectStatuses as updateProjectStatusesQuery } from "../data/project/project.dal";
 
 const schema = z.object({
   ids: z.array(z.coerce.number().int().positive()).min(1),

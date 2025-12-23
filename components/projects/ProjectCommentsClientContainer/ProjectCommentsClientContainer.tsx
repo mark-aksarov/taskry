@@ -1,5 +1,5 @@
 import useSWR from "swr";
-import { CommentDTO } from "@/lib/dto/comments";
+import { CommentDTO } from "@/lib/data/comment/comment.dto";
 import { CommentItem } from "@/components/comments/CommentItem";
 import { CommentsEmptySection } from "@/components/comments/CommentsEmptySection";
 

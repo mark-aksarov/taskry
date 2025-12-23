@@ -2,10 +2,10 @@ import { UserList } from "../UserList";
 import { UserGrid } from "../UserGrid";
 import { UserListItem } from "../UserListItem";
 import { UserGridItem } from "../UserGridItem";
-import { UserListItemDTO } from "@/lib/dto/user";
-import { getUserCount, getUserList } from "@/lib/dal/user";
+import { UserListItemDTO } from "@/lib/data/user/user.dto";
 import { Pagination } from "@/components/common/Pagination";
 import { ViewModeLayout } from "@/components/common/ViewMode";
+import { getUserCount, getUserList } from "@/lib/data/user/user.dal";
 
 interface UsersServerContainerProps {
   page: number;

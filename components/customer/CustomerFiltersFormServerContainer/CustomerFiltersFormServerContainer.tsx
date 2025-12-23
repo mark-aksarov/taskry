@@ -1,5 +1,5 @@
-import { getCompanySummaries } from "@/lib/dal/companies";
 import { CustomerFiltersForm } from "../CustomerFiltersForm";
+import { getCompanySummaries } from "@/lib/data/company/company.dal";
 import { CustomerFiltersFormCompanyCheckboxGroup } from "../CustomerFiltersForm";
 
 export async function CustomerFiltersFormServerContainer() {

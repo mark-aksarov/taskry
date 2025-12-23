@@ -1,10 +1,10 @@
 import { z } from "zod";
 import { TasksPage } from "./TasksPage";
-import { getTaskCount } from "@/lib/dal/task";
 import { TasksPageEmpty } from "./TasksPageEmpty";
 import { arrayParam } from "@/lib/utils/arrayParam";
 import { TaskStatus } from "@/generated/prisma/enums";
 import { deleteTasks } from "@/lib/actions/deleteTasks";
+import { getTaskCount } from "@/lib/data/task/task.dal";
 import { updateTaskStatuses } from "@/lib/actions/updateTaskStatuses";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { TasksServerContainer } from "@/components/tasks/TasksServerContainer";

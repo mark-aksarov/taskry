@@ -7,7 +7,7 @@ import { getTranslations } from "next-intl/server";
 import { withAuthAction } from "../utils/withAuthAction";
 import { validateActionInput } from "../utils/validateActionInput";
 import { actionError, actionSuccess } from "../utils/actionResult";
-import { deleteProjects as deleteProjectQuery } from "../dal/project";
+import { deleteProjects as deleteProjectQuery } from "../data/project/project.dal";
 
 const schema = z.object({
   ids: z.array(z.coerce.number().int().positive()).min(1),

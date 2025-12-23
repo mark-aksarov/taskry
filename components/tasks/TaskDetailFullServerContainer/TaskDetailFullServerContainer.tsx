@@ -1,6 +1,6 @@
-import { getTaskDetail } from "@/lib/dal/task";
-import { getComments } from "@/lib/dal/comments";
 import { TaskDetailFull } from "../TaskDetailFull";
+import { getTaskDetail } from "@/lib/data/task/task.dal";
+import { getComments } from "@/lib/data/comment/comment.dal";
 import { CommentItem } from "@/components/comments/CommentItem";
 import { DetailCommentInput } from "@/components/common/DetailCommentInput";
 

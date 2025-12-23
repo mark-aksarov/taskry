@@ -6,10 +6,11 @@ import {
 } from "../TaskFormBase";
 
 import { NewTaskForm } from "../NewTaskForm";
-import { getUserSummaries } from "@/lib/dal/user";
+
 import { createTask } from "@/lib/actions/createTask";
-import { getProjectSummaries } from "@/lib/dal/project";
-import { getTaskCategorySummaries } from "@/lib/dal/task";
+import { getUserSummaries } from "@/lib/data/user/user.dal";
+import { getProjectSummaries } from "@/lib/data/project/project.dal";
+import { getTaskCategorySummaries } from "@/lib/data/taskCategory/taskCategory.dal";
 
 export async function NewTaskFormServerContainer() {
   const categories = await getTaskCategorySummaries();

@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getCustomerSummaries } from "@/lib/dal/customers";
 import { withAuthRouteHandler } from "@/lib/utils/withAuthRouteHandler";
+import { getCustomerSummaries } from "@/lib/data/customer/customer.dal";
 
 export async function GET(req: NextRequest) {
   return withAuthRouteHandler(async () => {

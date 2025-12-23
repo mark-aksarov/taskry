@@ -1,6 +1,6 @@
-import { getCustomerSummaries } from "@/lib/dal/customers";
-import { getProjectCategorySummaries } from "@/lib/dal/project";
+import { getCustomerSummaries } from "@/lib/data/customer/customer.dal";
 import { ProjectDetailForm } from "../ProjectDetailForm/ProjectDetailForm";
+import { getProjectCategorySummaries } from "@/lib/data/projectCategory/projectCategory.dal";
 import { ProjectDetailFormStatusSelect } from "../ProjectDetailForm/ProjectDetailFormStatusSelect";
 import { ProjectDetailFormCategorySelect } from "../ProjectDetailForm/ProjectDetailFormCategorySelect";
 import { ProjectDetailFormCustomerSelect } from "../ProjectDetailForm/ProjectDetailFormCustomerSelect";

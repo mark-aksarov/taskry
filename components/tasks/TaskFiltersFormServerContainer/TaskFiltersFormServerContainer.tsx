@@ -6,10 +6,10 @@ import {
   TaskFiltersFormAssigneeCheckboxGroup,
 } from "../TaskFiltersForm";
 
-import { getUserSummaries } from "@/lib/dal/user";
-import { getProjectSummaries } from "@/lib/dal/project";
-import { getTaskCategorySummaries } from "@/lib/dal/task";
-import { TaskFilters } from "@/lib/dto/filters/taskFilters";
+import { TaskFilters } from "@/lib/data/task/task.dto";
+import { getUserSummaries } from "@/lib/data/user/user.dal";
+import { getProjectSummaries } from "@/lib/data/project/project.dal";
+import { getTaskCategorySummaries } from "@/lib/data/taskCategory/taskCategory.dal";
 
 interface TaskFiltersFormServerContainerProps {
   filters: TaskFilters;

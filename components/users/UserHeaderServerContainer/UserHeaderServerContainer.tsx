@@ -1,5 +1,5 @@
 import { useTranslations } from "next-intl";
-import { getUserDetails } from "@/lib/dal/user";
+import { getUserDetail } from "@/lib/data/user/user.dal";
 import { PersonHeader } from "@/components/common/PersonHeader";
 
 export async function UserHeaderServerContainer({
@@ -9,7 +9,7 @@ export async function UserHeaderServerContainer({
 }) {
   const t = useTranslations("users.UserHeaderServerContainer");
 
-  const user = await getUserDetails(userId);
+  const user = await getUserDetail(userId);
 
   return (
     <PersonHeader

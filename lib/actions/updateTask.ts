@@ -6,9 +6,9 @@ import { revalidatePath } from "next/cache";
 import { getTranslations } from "next-intl/server";
 import { TaskStatus } from "@/generated/prisma/enums";
 import { withAuthAction } from "../utils/withAuthAction";
-import { updateTask as updateTaskQuery } from "../dal/task";
 import { validateActionInput } from "../utils/validateActionInput";
 import { actionError, actionSuccess } from "../utils/actionResult";
+import { updateTask as updateTaskQuery } from "../data/task/task.dal";
 
 const schema = z.object({
   id: z.coerce.number().int().positive(),

@@ -7,7 +7,7 @@ import { getTranslations } from "next-intl/server";
 import { withAuthAction } from "../utils/withAuthAction";
 import { validateActionInput } from "../utils/validateActionInput";
 import { actionError, actionSuccess } from "../utils/actionResult";
-import { createProjectCategory as createProjectCategoryQuery } from "../dal/project";
+import { createProjectCategory as createProjectCategoryQuery } from "../data/projectCategory/projectCategory.dal";
 
 const schema = z.object({
   name: z.string().min(1).max(255),

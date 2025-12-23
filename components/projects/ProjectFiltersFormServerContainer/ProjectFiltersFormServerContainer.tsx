@@ -6,10 +6,10 @@ import {
   ProjectFiltersFormCustomerCheckboxGroup,
 } from "../ProjectFiltersForm";
 
-import { getUserSummaries } from "@/lib/dal/user";
-import { getCustomerSummaries } from "@/lib/dal/customers";
-import { getProjectCategorySummaries } from "@/lib/dal/project";
-import { ProjectFilters } from "@/lib/dto/filters/projectFilters";
+import { getUserSummaries } from "@/lib/data/user/user.dal";
+import { ProjectFilters } from "@/lib/data/project/project.dto";
+import { getCustomerSummaries } from "@/lib/data/customer/customer.dal";
+import { getProjectCategorySummaries } from "@/lib/data/projectCategory/projectCategory.dal";
 
 interface ProjectFiltersFormServerContainerProps {
   filters: ProjectFilters;

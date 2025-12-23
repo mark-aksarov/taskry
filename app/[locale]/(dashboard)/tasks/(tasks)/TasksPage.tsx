@@ -14,8 +14,8 @@ import {
 
 import { Suspense } from "react";
 import { useTranslations } from "next-intl";
+import { TaskFilters } from "@/lib/data/task/task.dto";
 import { PageGrid } from "@/components/common/PageGrid";
-import { TaskFilters } from "@/lib/dto/filters/taskFilters";
 import { ViewModeProvider } from "@/components/common/ViewMode";
 import { PageContainer } from "@/components/common/PageContainer";
 import { TaskFormBaseSkeleton } from "@/components/tasks/TaskFormBase";

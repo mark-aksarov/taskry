@@ -1,7 +1,7 @@
 import z from "zod";
 import { NextResponse, NextRequest } from "next/server";
-import { getTaskDetail, getTaskFormData } from "@/lib/dal/task";
 import { withAuthRouteHandler } from "@/lib/utils/withAuthRouteHandler";
+import { getTaskDetail, getTaskFormData } from "@/lib/data/task/task.dal";
 
 export async function GET(
   req: NextRequest,

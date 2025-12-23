@@ -1,6 +1,6 @@
 import z from "zod";
-import { getUserDetails } from "@/lib/dal/user";
 import { NextRequest, NextResponse } from "next/server";
+import { getUserDetail } from "@/lib/data/user/user.dal";
 import { withAuthRouteHandler } from "@/lib/utils/withAuthRouteHandler";
 
 export async function GET(
@@ -23,7 +23,7 @@ export async function GET(
     const { id } = parse.data;
 
     // Fetch user
-    const user = await getUserDetails(id);
+    const user = await getUserDetail(id);
 
     return NextResponse.json(user);
   });

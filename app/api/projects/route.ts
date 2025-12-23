@@ -1,5 +1,5 @@
 import { NextResponse, NextRequest } from "next/server";
-import { getProjectSummaries } from "@/lib/dal/project";
+import { getProjectSummaries } from "@/lib/data/project/project.dal";
 import { withAuthRouteHandler } from "@/lib/utils/withAuthRouteHandler";
 
 export async function GET(req: NextRequest) {

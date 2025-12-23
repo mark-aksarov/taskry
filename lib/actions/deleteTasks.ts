@@ -5,9 +5,9 @@ import { ActionState } from "./types";
 import { revalidatePath } from "next/cache";
 import { getTranslations } from "next-intl/server";
 import { withAuthAction } from "../utils/withAuthAction";
-import { deleteTasks as deleteTasksQuery } from "../dal/task";
 import { validateActionInput } from "../utils/validateActionInput";
 import { actionError, actionSuccess } from "../utils/actionResult";
+import { deleteTasks as deleteTasksQuery } from "../data/task/task.dal";
 
 const schema = z.object({
   ids: z.array(z.coerce.number().int().positive()).min(1),

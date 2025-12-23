@@ -4,7 +4,7 @@ import useSWR from "swr";
 import { useTranslations } from "next-intl";
 import { CustomerDetail } from "../CustomerDetail";
 import { PersonHeader } from "@/components/common/PersonHeader";
-import { CustomerDetailDTO } from "@/lib/dto/customers";
+import { CustomerDetailDTO } from "@/lib/data/customer/customer.dto";
 
 interface CustomerDetailClientContainerProps {
   customerId: number;

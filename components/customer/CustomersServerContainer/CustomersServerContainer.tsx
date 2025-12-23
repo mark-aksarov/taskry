@@ -1,11 +1,15 @@
+import {
+  getCustomerCount,
+  getCustomerList,
+} from "@/lib/data/customer/customer.dal";
+
 import { CustomerList } from "../CustomerList";
 import { CustomerGrid } from "../CustomerGrid";
 import { CustomerListItem } from "../CustomerListItem";
 import { CustomerGridItem } from "../CustomerGridItem";
-import { CustomerListItemDTO } from "@/lib/dto/customers";
 import { Pagination } from "@/components/common/Pagination";
 import { ViewModeLayout } from "@/components/common/ViewMode";
-import { getCustomerCount, getCustomerList } from "@/lib/dal/customers";
+import { CustomerListItemDTO } from "@/lib/data/customer/customer.dto";
 
 interface CustomersServerContainerProps {
   page: number;

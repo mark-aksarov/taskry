@@ -1,6 +1,6 @@
-import { getUserSummaries } from "@/lib/dal/user";
-import { getProjectSummaries } from "@/lib/dal/project";
+import { getUserSummaries } from "@/lib/data/user/user.dal";
 import { TaskDetailForm } from "../TaskDetailForm/TaskDetailForm";
+import { getProjectSummaries } from "@/lib/data/project/project.dal";
 import { TaskDetailFormStatusSelect } from "../TaskDetailForm/TaskDetailFormStatusSelect";
 import { TaskDetailFormProjectSelect } from "../TaskDetailForm/TaskDetailFormProjectSelect";
 import { TaskDetailFormAssigneeSelect } from "../TaskDetailForm/TaskDetailFormAssigneeSelect";

@@ -1,3 +1,8 @@
+import {
+  EditTaskFormClientContainer,
+  EditTaskFormClientContainerProvider,
+} from "@/components/tasks/EditTaskFormClientContainerContext";
+
 import { z } from "zod";
 import { DashboardPage } from "./DashboardPage";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
@@ -25,14 +30,16 @@ export default async function AppDashboardPage({
   const { page, pageSize } = searchParamsSchema.parse(rawParams);
 
   return (
-    <DashboardPage
-      page={page}
-      pageSize={pageSize}
-      TotalProjectsCardContainer={TotalProjectsCardServerContainer}
-      TotalTasksCardContainer={TotalTasksCardServerContainer}
-      TotalUsersCardContainer={TotalUsersCardServerContainer}
-      TotalCustomersCardContainer={TotalCustomersCardServerContainer}
-      AssignedTasksContainer={AssignedTasksServerContainer}
-    />
+    <EditTaskFormClientContainerProvider value={EditTaskFormClientContainer}>
+      <DashboardPage
+        page={page}
+        pageSize={pageSize}
+        TotalProjectsCardContainer={TotalProjectsCardServerContainer}
+        TotalTasksCardContainer={TotalTasksCardServerContainer}
+        TotalUsersCardContainer={TotalUsersCardServerContainer}
+        TotalCustomersCardContainer={TotalCustomersCardServerContainer}
+        AssignedTasksContainer={AssignedTasksServerContainer}
+      />
+    </EditTaskFormClientContainerProvider>
   );
 }

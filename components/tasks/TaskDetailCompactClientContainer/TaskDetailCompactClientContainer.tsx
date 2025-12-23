@@ -1,8 +1,8 @@
 "use client";
 
 import useSWR from "swr";
+import { TaskDetailDTO } from "@/lib/data/task/task.dto";
 import { TaskDetailCompact } from "../TaskDetailCompact/TaskDetailCompact";
-import { TaskDetailDTO } from "@/lib/dto/task";
 
 interface TaskDetailCompactClientContainerProps {
   taskId: number;

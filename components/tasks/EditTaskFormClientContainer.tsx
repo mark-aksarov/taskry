@@ -8,12 +8,13 @@ import {
 } from "./TaskFormBase";
 
 import useSWR from "swr";
-import { UserSummaryDTO } from "@/lib/dto/user";
-import { ProjectSummaryDTO } from "@/lib/dto/project";
 import { updateTask } from "@/lib/actions/updateTask";
-import { EditTaskForm } from "./EditTaskForm/EditTaskForm";
-import { TaskCategorySummaryDTO, TaskFormDataDTO } from "@/lib/dto/task";
 import { CalendarDate } from "@internationalized/date";
+import { UserSummaryDTO } from "@/lib/data/user/user.dto";
+import { EditTaskForm } from "./EditTaskForm/EditTaskForm";
+import { TaskFormDataDTO } from "@/lib/data/task/task.dto";
+import { ProjectSummaryDTO } from "@/lib/data/project/project.dto";
+import { TaskCategorySummaryDTO } from "@/lib/data/taskCategory/taskCategory.dto";
 
 export function EditTaskFormClientContainer({ taskId }: { taskId: number }) {
   const { data: categories } = useSWR<TaskCategorySummaryDTO[]>(

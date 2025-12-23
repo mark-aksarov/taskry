@@ -1,7 +1,7 @@
 import {
-  getNotificationsList,
   getNotificationsCount,
-} from "@/lib/dal/notification";
+  getNotificationsList,
+} from "@/lib/data/notification/notification.dal";
 
 import z from "zod";
 import { NextRequest, NextResponse } from "next/server";

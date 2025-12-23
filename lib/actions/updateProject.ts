@@ -7,7 +7,7 @@ import { getTranslations } from "next-intl/server";
 import { withAuthAction } from "../utils/withAuthAction";
 import { validateActionInput } from "../utils/validateActionInput";
 import { actionError, actionSuccess } from "../utils/actionResult";
-import { updateProject as updateProjectQuery } from "../dal/project";
+import { updateProject as updateProjectQuery } from "../data/project/project.dal";
 
 const schema = z.object({
   id: z.coerce.number().int().positive(),

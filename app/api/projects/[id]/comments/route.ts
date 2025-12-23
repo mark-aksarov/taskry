@@ -1,6 +1,6 @@
 import z from "zod";
-import { getComments } from "@/lib/dal/comments";
 import { NextRequest, NextResponse } from "next/server";
+import { getComments } from "@/lib/data/comment/comment.dal";
 import { withAuthRouteHandler } from "@/lib/utils/withAuthRouteHandler";
 
 export async function GET(

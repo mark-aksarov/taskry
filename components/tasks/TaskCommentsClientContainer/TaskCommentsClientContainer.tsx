@@ -4,8 +4,8 @@ import {
 } from "@/components/comments/CommentItem";
 
 import useSWR from "swr";
-import { CommentDTO } from "@/lib/dto/comments";
 import { Repeat } from "@/components/common/Repeat";
+import { CommentDTO } from "@/lib/data/comment/comment.dto";
 import { CommentsEmptySection } from "@/components/comments/CommentsEmptySection";
 
 export function TaskCommentsClientContainer({ taskId }: { taskId: number }) {

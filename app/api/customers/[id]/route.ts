@@ -1,6 +1,6 @@
 import z from "zod";
 import { NextRequest, NextResponse } from "next/server";
-import { getCustomerDetails } from "@/lib/dal/customers";
+import { getCustomerDetail } from "@/lib/data/customer/customer.dal";
 import { withAuthRouteHandler } from "@/lib/utils/withAuthRouteHandler";
 
 const schema = z.object({ id: z.coerce.number().int().positive() });
@@ -24,7 +24,7 @@ export async function GET(
     const { id } = parse.data;
 
     // Fetch customer
-    const customer = await getCustomerDetails(id);
+    const customer = await getCustomerDetail(id);
 
     if (!customer) {
       return NextResponse.json(

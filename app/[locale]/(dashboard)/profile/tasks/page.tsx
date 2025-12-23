@@ -1,9 +1,14 @@
+import {
+  EditTaskFormClientContainer,
+  EditTaskFormClientContainerProvider,
+} from "@/components/tasks/EditTaskFormClientContainerContext";
+
 import { z } from "zod";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
-import { getTaskCount } from "@/lib/dal/task";
 import { ProfileTasksPage } from "./ProfileTasksPage";
 import { deleteTasks } from "@/lib/actions/deleteTasks";
+import { getTaskCount } from "@/lib/data/task/task.dal";
 import { ProfileTasksPageEmpty } from "./ProfileTasksPageEmpty";
 import { updateTaskStatuses } from "@/lib/actions/updateTaskStatuses";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
@@ -47,16 +52,18 @@ export default async function AppProfileTasksPage({
     );
 
   return (
-    <ProfileTasksPage
-      userId={userId}
-      page={page}
-      pageSize={pageSize}
-      sort={sort}
-      UserTasksContainer={UserTasksServerContainer}
-      UserHeaderContainer={UserHeaderServerContainer}
-      NewTaskFormContainer={NewTaskFormServerContainer}
-      deleteTasksAction={deleteTasks}
-      updateTasksStatusesAction={updateTaskStatuses}
-    />
+    <EditTaskFormClientContainerProvider value={EditTaskFormClientContainer}>
+      <ProfileTasksPage
+        userId={userId}
+        page={page}
+        pageSize={pageSize}
+        sort={sort}
+        UserTasksContainer={UserTasksServerContainer}
+        UserHeaderContainer={UserHeaderServerContainer}
+        NewTaskFormContainer={NewTaskFormServerContainer}
+        deleteTasksAction={deleteTasks}
+        updateTasksStatusesAction={updateTaskStatuses}
+      />
+    </EditTaskFormClientContainerProvider>
   );
 }

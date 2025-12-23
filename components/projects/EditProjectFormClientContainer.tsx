@@ -1,11 +1,6 @@
 "use client";
 
 import {
-  ProjectFormDataDTO,
-  ProjectCategorySummaryDTO,
-} from "@/lib/dto/project";
-
-import {
   ProjectFormBaseStatusSelect,
   ProjectFormBaseCategorySelect,
   ProjectFormBaseCustomerSelect,
@@ -14,8 +9,10 @@ import {
 import useSWR from "swr";
 import { EditProjectForm } from "./EditProjectForm";
 import { CalendarDate } from "@internationalized/date";
-import { CustomerSummaryDTO } from "@/lib/dto/customers";
 import { updateProject } from "@/lib/actions/updateProject";
+import { ProjectFormDataDTO } from "@/lib/data/project/project.dto";
+import { CustomerSummaryDTO } from "@/lib/data/customer/customer.dto";
+import { ProjectCategorySummaryDTO } from "@/lib/data/projectCategory/projectCategory.dto";
 
 export function EditProjectFormClientContainer({
   projectId,

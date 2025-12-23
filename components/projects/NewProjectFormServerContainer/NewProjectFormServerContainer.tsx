@@ -5,9 +5,9 @@ import {
 } from "../ProjectFormBase";
 
 import { NewProjectForm } from "../NewProjectForm";
-import { getCustomerSummaries } from "@/lib/dal/customers";
 import { createProject } from "@/lib/actions/createProject";
-import { getProjectCategorySummaries } from "@/lib/dal/project";
+import { getCustomerSummaries } from "@/lib/data/customer/customer.dal";
+import { getProjectCategorySummaries } from "@/lib/data/projectCategory/projectCategory.dal";
 
 export async function NewProjectFormServerContainer() {
   const categories = await getProjectCategorySummaries();

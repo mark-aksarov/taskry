@@ -15,8 +15,8 @@ import { useState } from "react";
 import { Repeat } from "@/components/common/Repeat";
 import { NotificationList } from "../NotificationList";
 import { Pagination } from "@/components/common/Pagination";
-import { NotificationListItemDTO } from "@/lib/dto/notification";
 import { DialogBody, DialogFooter, Link, Skeleton } from "@/components/ui";
+import { NotificationListItemDTO } from "@/lib/data/notification/notification.dto";
 import { NotificationFilterToggleButtonGroup } from "../NotificationFilterToggleButtonGroup";
 
 function getTarget(notification: NotificationListItemDTO) {

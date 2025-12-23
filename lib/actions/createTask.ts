@@ -6,9 +6,9 @@ import { revalidatePath } from "next/cache";
 import { getTranslations } from "next-intl/server";
 import { TaskStatus } from "@/generated/prisma/enums";
 import { withAuthAction } from "../utils/withAuthAction";
-import { createTask as createTaskQuery } from "../dal/task";
 import { validateActionInput } from "../utils/validateActionInput";
 import { actionError, actionSuccess } from "../utils/actionResult";
+import { createTask as createTaskQuery } from "../data/task/task.dal";
 
 const schema = z.object({
   title: z.string().min(1).max(255),

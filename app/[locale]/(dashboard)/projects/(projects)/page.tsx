@@ -1,10 +1,10 @@
 import { z } from "zod";
 import { ProjectsPage } from "./ProjectsPage";
-import { getProjectCount } from "@/lib/dal/project";
 import { arrayParam } from "@/lib/utils/arrayParam";
 import { ProjectsPageEmpty } from "./ProjectsPageEmpty";
 import { ProjectStatus } from "@/generated/prisma/enums";
 import { deleteProjects } from "@/lib/actions/deleteProjects";
+import { getProjectCount } from "@/lib/data/project/project.dal";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { updateProjectStatuses } from "@/lib/actions/updateProjectStatuses";
 import { createProjectCategory } from "@/lib/actions/createProjectCategory";

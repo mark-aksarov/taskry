@@ -1,8 +1,8 @@
 "use client";
 
 import useSWR from "swr";
-import { ProjectDetailDTO } from "@/lib/dto/project";
 import { ProjectDetailCompact } from "../ProjectDetailCompact";
+import { ProjectDetailDTO } from "@/lib/data/project/project.dto";
 
 export function ProjectDetailCompactClientContainer({
   projectId,

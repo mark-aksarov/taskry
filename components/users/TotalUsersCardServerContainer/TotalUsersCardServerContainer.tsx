@@ -1,7 +1,7 @@
 import "server-only";
 
-import { getUserCount } from "@/lib/dal/user";
 import { TotalUsersCard } from "../TotalUsersCard";
+import { getUserCount } from "@/lib/data/user/user.dal";
 
 export const TotalUsersCardServerContainer = async () => {
   const totalUsers = await getUserCount();

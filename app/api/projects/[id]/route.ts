@@ -1,6 +1,10 @@
+import {
+  getProjectDetail,
+  getProjectFormData,
+} from "@/lib/data/project/project.dal";
+
 import z from "zod";
 import { NextResponse, NextRequest } from "next/server";
-import { getProjectDetail, getProjectFormData } from "@/lib/dal/project";
 import { withAuthRouteHandler } from "@/lib/utils/withAuthRouteHandler";
 
 export async function GET(

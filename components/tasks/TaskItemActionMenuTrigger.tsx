@@ -3,7 +3,7 @@
 import {
   taskStatuses,
   ALLOWED_TASK_STATUSES_BY_PROJECT,
-} from "@/lib/utils/statusUtils";
+} from "@/lib/data/utils/statusUtils";
 
 import {
   ActionFn,

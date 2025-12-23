@@ -1,7 +1,7 @@
-import { getComments } from "@/lib/dal/comments";
-import { getProjectDetail } from "@/lib/dal/project";
 import { ProjectDetailFull } from "../ProjectDetailFull";
+import { getComments } from "@/lib/data/comment/comment.dal";
 import { CommentItem } from "@/components/comments/CommentItem";
+import { getProjectDetail } from "@/lib/data/project/project.dal";
 import { DetailCommentInput } from "@/components/common/DetailCommentInput";
 
 export async function ProjectDetailFullServerContainer({ id }: { id: number }) {

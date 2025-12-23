@@ -7,7 +7,7 @@ import { Divider, RACForm } from "@/components/ui";
 import { parseDate } from "@internationalized/date";
 import { useLocale, useTranslations } from "next-intl";
 import { usePathname, useRouter } from "@/i18n/navigation";
-import { ProjectFilters } from "@/lib/dto/filters/projectFilters";
+import { ProjectFilters } from "@/lib/data/project/project.dto";
 import { ProjectFiltersFormDeadlineRange } from "./ProjectFiltersFormDeadlineRange";
 import { ProjectFiltersFormDeadlineCheckboxGroup } from "./ProjectFiltersFormDeadlineCheckboxGroup";
 

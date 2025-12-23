@@ -1,12 +1,12 @@
 import { UserDetail } from "../UserDetail";
-import { getUserDetails } from "@/lib/dal/user";
+import { getUserDetail } from "@/lib/data/user/user.dal";
 
 export async function UserDetailServerContainer({
   userId,
 }: {
   userId: string;
 }) {
-  const user = await getUserDetails(userId);
+  const user = await getUserDetail(userId);
 
   return (
     <UserDetail

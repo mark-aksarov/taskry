@@ -2,7 +2,7 @@
 
 import useSWR from "swr";
 import { useTranslations } from "next-intl";
-import { UserDetailDTO } from "@/lib/dto/user";
+import { UserDetailDTO } from "@/lib/data/user/user.dto";
 import { UserDetail } from "@/components/users/UserDetail";
 import { PersonHeader } from "@/components/common/PersonHeader";
 
