@@ -4,73 +4,47 @@ import {
 } from "@/lib/dal/notification";
 
 import z from "zod";
-import { auth } from "@/lib/auth";
-import { headers } from "next/headers";
+import { withAuth } from "@/lib/api/withAuth";
 import { NextRequest, NextResponse } from "next/server";
-
-const MAX_PAGE_SIZE = 100;
 
 const FilterEnum = z.enum(["all", "unread"]);
 
 export const searchParamsSchema = z.object({
-  page: z.coerce.number().int().positive().default(1),
-  pageSize: z.coerce.number().int().positive().max(MAX_PAGE_SIZE).default(10),
+  page: z.coerce.number().int().positive().catch(1),
+  pageSize: z.coerce.number().int().min(1).max(100).catch(20),
   filter: FilterEnum.default("all"),
 });
 
-export async function GET(req: NextRequest) {
-  try {
-    // Authorization
-    const session = await auth.api.getSession({
-      headers: await headers(),
-    });
-
-    if (!session) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-    }
-
+export const GET = (req: NextRequest) =>
+  withAuth(async () => {
     // Validation
     const rawParams = Object.fromEntries(req.nextUrl.searchParams.entries());
+    const parsed = searchParamsSchema.safeParse(rawParams);
 
-    const parse = searchParamsSchema.safeParse(rawParams);
-
-    if (!parse.success) {
+    if (!parsed.success) {
       return NextResponse.json(
         { error: "Invalid search params" },
         { status: 400 },
       );
     }
 
-    const { page, pageSize, filter } = parse.data;
+    const { page, pageSize, filter } = parsed.data;
 
-    // Get notifications
+    // Fetch notifications
     const [notifications, totalCount, unreadCount] = await Promise.all([
-      getNotificationsList({
-        page,
-        pageSize,
-        filter,
-      }),
+      getNotificationsList({ page, pageSize, filter }),
       getNotificationsCount(),
       getNotificationsCount({ isRead: false }),
     ]);
 
     const countForPagination = filter === "unread" ? unreadCount : totalCount;
-    const totalPages = Math.ceil(countForPagination / pageSize);
 
     return NextResponse.json({
       notifications,
       totalCount,
       unreadCount,
-      totalPages,
+      totalPages: Math.ceil(countForPagination / pageSize),
       page,
       pageSize,
     });
-  } catch (error) {
-    console.error("GET /notifications error:", error);
-
-    return NextResponse.json(
-      { error: "Internal server error" },
-      { status: 500 },
-    );
-  }
-}
+  });

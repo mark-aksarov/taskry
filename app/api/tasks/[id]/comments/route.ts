@@ -1,6 +1,5 @@
 import z from "zod";
-import { auth } from "@/lib/auth";
-import { headers } from "next/headers";
+import { withAuth } from "@/lib/api/withAuth";
 import { getComments } from "@/lib/dal/comments";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -8,16 +7,7 @@ export async function GET(
   req: NextRequest,
   { params }: { params: Promise<{ id: string }> },
 ) {
-  try {
-    // Authorization
-    const session = await auth.api.getSession({
-      headers: await headers(),
-    });
-
-    if (!session) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-    }
-
+  return withAuth(async (session) => {
     // Validation
     const data = await params;
 
@@ -32,18 +22,11 @@ export async function GET(
 
     const { id: taskId } = parse.data;
 
-    // Fetch comments
+    // Data Fetching
     const comments = await getComments({
       taskId,
     });
 
     return NextResponse.json(comments);
-  } catch (error) {
-    console.error("GET /task-comments error:", error);
-
-    return NextResponse.json(
-      { error: "Internal server error" },
-      { status: 500 },
-    );
-  }
+  });
 }
