@@ -1,12 +1,12 @@
 "use server";
 
 import z from "zod";
-import { auth } from "../auth";
 import { ActionState } from "./types";
-import { headers } from "next/headers";
 import { revalidatePath } from "next/cache";
-import { redirect } from "@/i18n/navigation";
-import { getLocale, getTranslations } from "next-intl/server";
+import { getTranslations } from "next-intl/server";
+import { withAuthAction } from "../utils/withAuthAction";
+import { validateActionInput } from "../utils/validateActionInput";
+import { actionError, actionSuccess } from "../utils/actionResult";
 import { createProjectCategory as createProjectCategoryQuery } from "../dal/project";
 
 const schema = z.object({
@@ -17,56 +17,20 @@ export async function createProjectCategory(
   _prevState: ActionState,
   formData: FormData,
 ): Promise<ActionState> {
-  const t = await getTranslations("actions.createProjectCategory");
-  const locale = await getLocale();
+  return withAuthAction(async () => {
+    const t = await getTranslations("actions.common");
 
-  // Session Validation
-  const session = await auth.api.getSession({
-    headers: await headers(),
-  });
+    const parsed = validateActionInput(schema, {
+      name: formData.get("name"),
+    });
 
-  if (!session) {
-    redirect({ href: "/sign-in", locale });
+    if (!parsed.success) {
+      return actionError(t("validation.invalidInput"));
+    }
 
-    console.error("Unauthorized");
-    return {
-      status: "error",
-      message: null,
-    };
-  }
-
-  // Data Validation
-  const parse = schema.safeParse({
-    name: formData.get("name"),
-  });
-
-  if (!parse.success) {
-    console.error("Invalid form data", parse.error);
-
-    return {
-      status: "error",
-      message: t("invalidInput"),
-    };
-  }
-
-  // Database Action
-  try {
-    const projectCategoryData = parse.data;
-
-    await createProjectCategoryQuery(projectCategoryData);
-
+    await createProjectCategoryQuery(parsed.data);
     revalidatePath("/projects");
 
-    return {
-      status: "success",
-      message: null,
-    };
-  } catch (error) {
-    console.error("Create Project Error:", error);
-
-    return {
-      status: "error",
-      message: t("internalServerError"),
-    };
-  }
+    return actionSuccess();
+  });
 }

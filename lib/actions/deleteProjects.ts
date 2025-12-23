@@ -1,11 +1,12 @@
 "use server";
 
 import z from "zod";
-import { auth } from "../auth";
 import { ActionState } from "./types";
-import { headers } from "next/headers";
 import { revalidatePath } from "next/cache";
 import { getTranslations } from "next-intl/server";
+import { withAuthAction } from "../utils/withAuthAction";
+import { validateActionInput } from "../utils/validateActionInput";
+import { actionError, actionSuccess } from "../utils/actionResult";
 import { deleteProjects as deleteProjectQuery } from "../dal/project";
 
 const schema = z.object({
@@ -16,39 +17,18 @@ export async function deleteProjects(
   _prevState: ActionState,
   ids: number[],
 ): Promise<ActionState> {
-  const t = await getTranslations("actions.deleteProjectAction");
-  const errorResponse: ActionState = {
-    status: "error",
-    message: t("error"),
-  };
+  return withAuthAction(async () => {
+    const t = await getTranslations("actions.common");
 
-  try {
-    const session = await auth.api.getSession({
-      headers: await headers(),
-    });
-    if (!session) {
-      console.error("Unauthorized");
-      return errorResponse;
+    const parsed = validateActionInput(schema, { ids });
+
+    if (!parsed.success) {
+      return actionError(t("validation.invalidInput"));
     }
 
-    // Validation
-    const validated = schema.safeParse({ ids });
-    if (!validated.success) {
-      console.error("Invalid project IDs", validated.error);
-      return errorResponse;
-    }
-
-    // Execute delete
-    await deleteProjectQuery(ids);
-
+    await deleteProjectQuery(parsed.data.ids);
     revalidatePath("/projects");
 
-    return {
-      status: "success",
-      message: null,
-    };
-  } catch (error) {
-    console.error("Delete Project Error:", error);
-    return errorResponse;
-  }
+    return actionSuccess();
+  });
 }

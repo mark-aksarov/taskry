@@ -1,28 +1,40 @@
 {
   "actions": {
-    "deleteProjectAction": {
-      "error": "Something went wrong. Delete failed."
-    },
-    "updateProjectStatus": {
-      "error": "Something went wrong. Update failed."
-    },
-    "createProjectCategory": {
-      "invalidInput": "Invalid input. Please check your data and try again.",
-      "internalServerError": "An internal server error occurred. Please try again later."
-    },
-    "deleteTaskAction": {
-      "error": "Something went wrong. Delete failed."
-    },
-    "createProject": {
+    "common": {
       "validation": {
-        "invalidInput": "Invalid input. Please check your data and try again.",
+        "invalidInput": "Invalid input data. Please check your input and try again.",
         "internalServerError": "An internal server error occurred. Please try again later."
       }
     },
-    "createTask": {
+    "forgetPassword": {
       "validation": {
-        "invalidInput": "Invalid input. Please check your data and try again.",
-        "internalServerError": "An internal server error occurred. Please try again later."
+        "invalidInput": "Please check your email",
+        "internalServerError": "An internal server error occurred. Please try again later.",
+        "bad_request": "Reset password isn't enabled"
+      }
+    },
+    "resetPassword": {
+      "validation": {
+        "invalidInput": "Please check your password",
+        "internalServerError": "An internal server error occurred. Please try again later.",
+        "bad_request": "Invalid or expired token or invalid password length"
+      }
+    },
+    "signIn": {
+      "validation": {
+        "invalidInput": "The input data is invalid.",
+        "internalServerError": "An internal server error occurred. Please try again later.",
+        "unauthorized": "Login failed. Please check your email and password or try again later.",
+        "forbidden": "Email not verified.",
+        "bad_request": "Invalid email format or this sign-in method is not enabled."
+      }
+    },
+    "signUp": {
+      "validation": {
+        "invalidInput": "The input data is invalid.",
+        "internalServerError": "An internal server error occurred. Please try again later.",
+        "unprocessable_entity": "This email is already in use or a registration error occurred.",
+        "bad_request": "Could not create account. Please check your email or try another sign-up method."
       }
     }
   },
@@ -233,12 +245,6 @@
       },
 
       "validation": {
-        "server": {
-          "invalidCredentials": "Please check your email",
-          "internalServerError": "An internal server error occurred. Please try again later.",
-          "bad_request": "Reset password isn't enabled"
-        },
-
         "email": {
           "required": "Please enter your email address.",
           "format": "Invalid format. The email address must be in the format `user@example.com`.",
@@ -257,12 +263,6 @@
       },
 
       "validation": {
-        "server": {
-          "invalidCredentials": "Please check your password",
-          "internalServerError": "An internal server error occurred. Please try again later.",
-          "bad_request": "Invalid or expired token or invalid password length"
-        },
-
         "password": {
           "required": "Please enter your password.",
           "tooShort": "The password is too short. It must contain at least {minLength} characters.",
@@ -286,14 +286,6 @@
       },
 
       "validation": {
-        "server": {
-          "invalidCredentials": "Please check your email and password",
-          "internalServerError": "An internal server error occurred. Please try again later.",
-          "unauthorized": "Login failed. Please check your email and password or try again later.",
-          "forbidden": "Email not verified.",
-          "bad_request": "Invalid email format or this sign-in method is not enabled."
-        },
-
         "password": {
           "required": "Please enter your password.",
           "tooShort": "The password is too short. It must contain at least {minLength} characters.",
@@ -331,13 +323,6 @@
       },
 
       "validation": {
-        "server": {
-          "invalidInputData": "The input data is invalid.",
-          "internalServerError": "An internal server error occurred. Please try again later.",
-          "unprocessable_entity": "This email is already in use or a registration error occurred.",
-          "bad_request": "Could not create account. Please check your email or try another sign-up method."
-        },
-
         "name": {
           "required": "Please enter your name.",
           "tooShort": "Your name is too short. It must contain at least {minLength} characters.",

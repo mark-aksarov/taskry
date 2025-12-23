@@ -7,64 +7,52 @@ import { APIError } from "better-auth";
 import { redirect } from "@/i18n/navigation";
 import { buildURL } from "../utils/buildURL";
 import { getLocale, getTranslations } from "next-intl/server";
+import { actionError, actionSuccess } from "../utils/actionResult";
+import { validateActionInput } from "../utils/validateActionInput";
+
+const schema = z.object({
+  password: z.string().min(8).max(128),
+});
 
 export async function resetPassword(
   token: string,
-  prevState: ActionState,
+  _prevState: ActionState,
   formData: FormData,
 ): Promise<ActionState> {
   const locale = await getLocale();
-  const t = await getTranslations("auth.ForgetPasswordForm");
+  const t = await getTranslations("actions.resetPassword");
 
-  // Validation
-  const schema = z.object({
-    password: z.string().min(8).max(128),
-  });
+  // Parse form data
+  const input = Object.fromEntries(formData.entries());
+  const parsed = validateActionInput(schema, input);
 
-  const parse = schema.safeParse({
-    password: formData.get("password"),
-  });
-
-  // Return errors if validation fails
-  if (!parse.success) {
-    return {
-      status: "error",
-      message: t("validation.server.invalidCredentials"),
-    };
+  if (!parsed.success) {
+    return actionError(t("validation.invalidInput"));
   }
 
   // Request password reset
-  const { password } = parse.data;
-
   try {
     await auth.api.resetPassword({
       body: {
-        newPassword: password,
+        newPassword: parsed.data.password,
         token,
       },
     });
   } catch (error: unknown) {
+    console.error("Reset Password Error:", error);
+
     if (error instanceof APIError && error.status === "BAD_REQUEST") {
-      return {
-        status: "error",
-        message: t(`validation.server.${error.status.toLowerCase()}`),
-      };
+      return actionError(t(`validation.${error.status.toLowerCase()}`));
     }
 
-    return {
-      status: "error",
-      message: t("validation.server.internalServerError"),
-    };
+    return actionError(t("validation.internalServerError"));
   }
 
-  // Handle redirect OUTSIDE the try/catch
+  // Redirect to sign-in with success query
   redirect({
     href: buildURL("/sign-in", { status: "reset-password-success" }),
     locale,
   });
 
-  return {
-    status: "success",
-    message: null,
-  };
+  return actionSuccess();
 }

@@ -2,8 +2,8 @@ import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import { NextResponse } from "next/server";
 
-export async function withAuth(
-  handler: (session: any) => Promise<NextResponse>,
+export async function withAuthRouteHandler(
+  handler: () => Promise<NextResponse>,
 ) {
   const session = await auth.api.getSession({
     headers: await headers(),
@@ -14,7 +14,7 @@ export async function withAuth(
   }
 
   try {
-    return await handler(session);
+    return await handler();
   } catch (error) {
     console.error("API Error:", error);
     return NextResponse.json(

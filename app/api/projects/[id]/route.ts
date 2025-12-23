@@ -1,13 +1,13 @@
 import z from "zod";
-import { withAuth } from "@/lib/api/withAuth";
 import { NextResponse, NextRequest } from "next/server";
 import { getProjectDetail, getProjectFormData } from "@/lib/dal/project";
+import { withAuthRouteHandler } from "@/lib/utils/withAuthRouteHandler";
 
 export async function GET(
   req: NextRequest,
   { params }: { params: Promise<{ id: string }> },
 ) {
-  return withAuth(async (session) => {
+  return withAuthRouteHandler(async () => {
     // Validation
     const rawParams = await params;
     const schema = z.object({

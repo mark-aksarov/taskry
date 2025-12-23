@@ -1,7 +1,7 @@
 import z from "zod";
-import { withAuth } from "@/lib/api/withAuth";
 import { NextRequest, NextResponse } from "next/server";
 import { getCustomerDetails } from "@/lib/dal/customers";
+import { withAuthRouteHandler } from "@/lib/utils/withAuthRouteHandler";
 
 const schema = z.object({ id: z.coerce.number().int().positive() });
 
@@ -9,7 +9,7 @@ export async function GET(
   req: NextRequest,
   { params }: { params: Promise<{ id: string }> },
 ) {
-  return withAuth(async (session) => {
+  return withAuthRouteHandler(async () => {
     // Validation
     const data = await params;
     const parse = schema.safeParse({ id: data.id });

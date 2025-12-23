@@ -4,8 +4,8 @@ import {
 } from "@/lib/dal/notification";
 
 import z from "zod";
-import { withAuth } from "@/lib/api/withAuth";
 import { NextRequest, NextResponse } from "next/server";
+import { withAuthRouteHandler } from "@/lib/utils/withAuthRouteHandler";
 
 const FilterEnum = z.enum(["all", "unread"]);
 
@@ -16,7 +16,7 @@ export const searchParamsSchema = z.object({
 });
 
 export const GET = (req: NextRequest) =>
-  withAuth(async () => {
+  withAuthRouteHandler(async () => {
     // Validation
     const rawParams = Object.fromEntries(req.nextUrl.searchParams.entries());
     const parsed = searchParamsSchema.safeParse(rawParams);

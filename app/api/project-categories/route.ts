@@ -1,9 +1,9 @@
-import { withAuth } from "@/lib/api/withAuth";
 import { NextRequest, NextResponse } from "next/server";
 import { getProjectCategorySummaries } from "@/lib/dal/project";
+import { withAuthRouteHandler } from "@/lib/utils/withAuthRouteHandler";
 
 export async function GET(req: NextRequest) {
-  return withAuth(async (session) => {
+  return withAuthRouteHandler(async () => {
     // Fetch projects
     const projects = await getProjectCategorySummaries();
     return NextResponse.json(projects);

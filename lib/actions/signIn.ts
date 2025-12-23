@@ -7,6 +7,14 @@ import { APIError } from "better-auth";
 import { headers } from "next/headers";
 import { redirect } from "@/i18n/navigation";
 import { getLocale, getTranslations } from "next-intl/server";
+import { actionError, actionSuccess } from "../utils/actionResult";
+import { validateActionInput } from "../utils/validateActionInput";
+
+const schema = z.object({
+  email: z.email().min(1).max(254),
+  password: z.string().min(8).max(128),
+  rememberMe: z.coerce.boolean(),
+});
 
 export async function signIn(
   callbackUrl: string,
@@ -14,83 +22,51 @@ export async function signIn(
   formData: FormData,
 ): Promise<ActionState> {
   const locale = await getLocale();
-  const t = await getTranslations("auth.SignInForm");
+  const t = await getTranslations("actions.signIn");
 
-  // check if user is already signed in
+  // Check if user is already signed in
   const session = await auth.api.getSession({
     headers: await headers(),
   });
 
   if (session) {
-    redirect({ href: "/", locale: await getLocale() });
-
-    return {
-      status: "success",
-      message: null,
-    };
+    redirect({ href: "/", locale });
+    return actionSuccess();
   }
 
-  // Validation
-  const schema = z.object({
-    email: z.email().min(1).max(254),
-    password: z.string().min(1).min(8).max(128),
-    rememberMe: z.preprocess((val) => !!val, z.boolean()),
-  });
+  // Parse form data
+  const input = Object.fromEntries(formData.entries());
+  const parsed = validateActionInput(schema, input);
 
-  const parse = schema.safeParse({
-    email: formData.get("email"),
-    password: formData.get("password"),
-    rememberMe: formData.get("rememberMe"),
-  });
-
-  // Return errors if validation fails
-  if (!parse.success) {
-    return {
-      status: "error",
-      message: t("validation.server.invalidCredentials"),
-    };
+  if (!parsed.success) {
+    return actionError(t("validation.invalidInput"));
   }
 
-  // Sign in
-  const { email, password, rememberMe } = parse.data;
-
+  // Authenticate
   try {
     await auth.api.signInEmail({
-      body: {
-        email,
-        password,
-        rememberMe,
-      },
+      body: parsed.data,
     });
   } catch (error: unknown) {
-    // Better Auth Error
-    if (
-      error instanceof APIError &&
-      (error.status === "BAD_REQUEST" ||
-        error.status === "FORBIDDEN" ||
-        error.status === "UNAUTHORIZED")
-    ) {
-      return {
-        status: "error",
-        message: t(`validation.server.${error.status.toLowerCase()}`),
-      };
+    console.error("Sign-in Error:", error);
+
+    if (error instanceof APIError) {
+      const statusKey = String(error.status).toLowerCase();
+      const knownKeys = ["bad_request", "forbidden", "unauthorized"];
+
+      if (knownKeys.includes(statusKey)) {
+        return actionError(t(`validation.${statusKey}`));
+      }
     }
 
-    // Handle unexpected errors
-    return {
-      status: "error",
-      message: t("validation.server.internalServerError"),
-    };
+    return actionError(t("validation.internalServerError"));
   }
 
-  // Handle redirect OUTSIDE the try/catch
+  // Redirect to callbackUrl or default "/"
   redirect({
-    href: callbackUrl ?? "/",
+    href: callbackUrl || "/",
     locale,
   });
 
-  return {
-    status: "success",
-    message: null,
-  };
+  return actionSuccess();
 }

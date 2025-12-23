@@ -1,61 +1,40 @@
 "use server";
 
 import z from "zod";
-import { auth } from "../auth";
 import { ActionState } from "./types";
-import { headers } from "next/headers";
 import { revalidatePath } from "next/cache";
 import { getTranslations } from "next-intl/server";
 import { ProjectStatus } from "@/generated/prisma/enums";
+import { withAuthAction } from "../utils/withAuthAction";
+import { validateActionInput } from "../utils/validateActionInput";
+import { actionError, actionSuccess } from "../utils/actionResult";
 import { updateProjectStatuses as updateProjectStatusesQuery } from "../dal/project";
 
 const schema = z.object({
   ids: z.array(z.coerce.number().int().positive()).min(1),
-  nextStatus: z.enum(["active", "completed", "pending"]),
+  nextStatus: z.enum(ProjectStatus),
 });
 
 export async function updateProjectStatuses(
   _prevState: ActionState,
-  {
-    ids,
-    nextStatus,
-  }: {
-    ids: number[];
-    nextStatus: ProjectStatus;
-  },
+  { ids, nextStatus }: { ids: number[]; nextStatus: ProjectStatus },
 ): Promise<ActionState> {
-  const t = await getTranslations("actions.updateProjectStatus");
-  const errorResponse: ActionState = {
-    status: "error",
-    message: t("error"),
-  };
-
-  try {
-    // Authorization
-    const session = await auth.api.getSession({
-      headers: await headers(),
-    });
-
-    if (!session) {
-      console.error("Unauthorized");
-      return errorResponse;
-    }
+  return withAuthAction(async () => {
+    const t = await getTranslations("actions.common");
 
     // Validation
-    const { success, error } = schema.safeParse({ ids, nextStatus });
-    if (!success) {
-      console.error("Invalid data", error);
-      return errorResponse;
+    const parsed = validateActionInput(schema, { ids, nextStatus });
+
+    if (!parsed.success) {
+      return actionError(t("validation.invalidInput"));
     }
 
-    // Update Status
-    updateProjectStatusesQuery(ids, nextStatus);
+    // Execute update
+    await updateProjectStatusesQuery(parsed.data.ids, parsed.data.nextStatus);
 
+    // Revalidation
     revalidatePath("/projects");
 
-    return { status: "success", message: null };
-  } catch (error) {
-    console.error("Update Project Status Error:", error);
-    return errorResponse;
-  }
+    return actionSuccess();
+  });
 }

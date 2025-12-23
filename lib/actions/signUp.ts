@@ -8,59 +8,50 @@ import { APIError } from "better-auth";
 import { headers } from "next/headers";
 import { redirect } from "@/i18n/navigation";
 import { getLocale, getTranslations } from "next-intl/server";
+import { actionError, actionSuccess } from "../utils/actionResult";
+import { validateActionInput } from "../utils/validateActionInput";
+
+const schema = z.object({
+  name: z.string().min(5).max(50),
+  email: z.email().min(1).max(254),
+  password: z.string().min(8).max(128),
+  rememberMe: z.coerce.boolean(),
+});
 
 export async function signUp(
   _prevState: ActionState,
   formData: FormData,
 ): Promise<ActionState> {
   const locale = await getLocale();
-  const t = await getTranslations("auth.SignUpForm");
+  const t = await getTranslations("actions.signUp");
 
-  // check if user is already signed in
+  // Check if user is already signed in
   const session = await auth.api.getSession({
     headers: await headers(),
   });
 
   if (session) {
-    redirect({ href: "/", locale: await getLocale() });
-
-    return {
-      status: "success",
-      message: null,
-    };
+    redirect({ href: "/", locale });
+    return actionSuccess();
   }
 
-  // Validation
-  const schema = z.object({
-    name: z.string().min(5).max(50),
-    email: z.email().min(1).max(254),
-    password: z.string().min(8).max(128),
-    rememberMe: z.preprocess((val) => !!val, z.boolean()),
-  });
+  // Parse and validate form data
+  const input = Object.fromEntries(formData.entries());
+  const parsed = validateActionInput(schema, input);
 
-  const parse = schema.safeParse({
-    name: formData.get("name"),
-    email: formData.get("email"),
-    password: formData.get("password"),
-    rememberMe: formData.get("rememberMe"),
-  });
-
-  if (!parse.success) {
-    return {
-      status: "error",
-      message: t("validation.server.invalidInputData"),
-    };
+  if (!parsed.success) {
+    return actionError(t("validation.invalidInput"));
   }
 
-  const { name, email, password, rememberMe } = parse.data;
+  const { name, email, password, rememberMe } = parsed.data;
 
   try {
-    // create workspace
+    // Create workspace
     const workspace = await prisma.workspace.create({
-      data: { id: 3 },
+      data: { id: 3 }, // Adjust as needed
     });
 
-    // create user
+    // Sign-up
     await auth.api.signUpEmail({
       body: {
         name,
@@ -71,33 +62,25 @@ export async function signUp(
       },
     });
   } catch (error: unknown) {
-    // Better Auth Error
-    if (
-      error instanceof APIError &&
-      (error.status === "BAD_REQUEST" ||
-        error.status === "UNPROCESSABLE_ENTITY")
-    ) {
-      return {
-        status: "error",
-        message: t(`validation.server.${error.status.toLowerCase()}`),
-      };
+    console.error("Sign-up Error:", error);
+
+    if (error instanceof APIError) {
+      const statusKey = String(error.status).toLowerCase();
+      const knownKeys = ["bad_request", "unprocessable_entity"];
+
+      if (knownKeys.includes(statusKey)) {
+        return actionError(t(`validation.${statusKey}`));
+      }
     }
 
-    // Handle unexpected errors
-    return {
-      status: "error",
-      message: t("validation.server.internalServerError"),
-    };
+    return actionError(t("validation.internalServerError"));
   }
 
-  // Handle redirect OUTSIDE the try/catch
+  // Redirect to verify email
   redirect({
     href: "/verify-email",
     locale,
   });
 
-  return {
-    status: "success",
-    message: null,
-  };
+  return actionSuccess();
 }

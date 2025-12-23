@@ -1,12 +1,13 @@
 "use server";
 
 import z from "zod";
-import { auth } from "../auth";
 import { ActionState } from "./types";
-import { headers } from "next/headers";
 import { revalidatePath } from "next/cache";
 import { getTranslations } from "next-intl/server";
+import { withAuthAction } from "../utils/withAuthAction";
 import { deleteTasks as deleteTasksQuery } from "../dal/task";
+import { validateActionInput } from "../utils/validateActionInput";
+import { actionError, actionSuccess } from "../utils/actionResult";
 
 const schema = z.object({
   ids: z.array(z.coerce.number().int().positive()).min(1),
@@ -16,40 +17,18 @@ export async function deleteTasks(
   _prevState: ActionState,
   ids: number[],
 ): Promise<ActionState> {
-  const t = await getTranslations("actions.deleteTaskAction");
-  const errorResponse: ActionState = {
-    status: "error",
-    message: t("error"),
-  };
+  return withAuthAction(async () => {
+    const t = await getTranslations("actions.common");
 
-  try {
-    const session = await auth.api.getSession({
-      headers: await headers(),
-    });
+    const parsed = validateActionInput(schema, { ids });
 
-    if (!session) {
-      console.error("Unauthorized");
-      return errorResponse;
+    if (!parsed.success) {
+      return actionError(t("validation.invalidInput"));
     }
 
-    // Validation
-    const validated = schema.safeParse({ ids });
-    if (!validated.success) {
-      console.error("Invalid task IDs", validated.error);
-      return errorResponse;
-    }
-
-    // Execute delete
-    await deleteTasksQuery(ids);
-
+    await deleteTasksQuery(parsed.data.ids);
     revalidatePath("/tasks");
 
-    return {
-      status: "success",
-      message: null,
-    };
-  } catch (error) {
-    console.error("Delete Task Error:", error);
-    return errorResponse;
-  }
+    return actionSuccess();
+  });
 }

@@ -6,63 +6,51 @@ import { ActionState } from "./types";
 import { APIError } from "better-auth";
 import { redirect } from "@/i18n/navigation";
 import { getLocale, getTranslations } from "next-intl/server";
+import { actionError, actionSuccess } from "../utils/actionResult";
+import { validateActionInput } from "../utils/validateActionInput";
+
+const schema = z.object({
+  email: z.email().min(1).max(254),
+});
 
 export async function forgetPassword(
   _prevState: ActionState,
   formData: FormData,
 ): Promise<ActionState> {
   const locale = await getLocale();
-  const t = await getTranslations("auth.ForgetPasswordForm");
+  const t = await getTranslations("actions.forgetPassword");
 
-  // Validation
-  const schema = z.object({
-    email: z.email().min(1).max(254),
-  });
+  // Parse form data
+  const input = Object.fromEntries(formData.entries());
+  const parsed = validateActionInput(schema, input);
 
-  const parse = schema.safeParse({
-    email: formData.get("email"),
-  });
-
-  // Return errors if validation fails
-  if (!parse.success) {
-    return {
-      status: "error",
-      message: t("validation.server.invalidCredentials"),
-    };
+  if (!parsed.success) {
+    return actionError(t("validation.invalidInput"));
   }
 
   // Request password reset
-  const { email } = parse.data;
-
   try {
     await auth.api.requestPasswordReset({
       body: {
-        email,
+        email: parsed.data.email,
         redirectTo: "/reset-password",
       },
     });
   } catch (error: unknown) {
+    console.error("Password Reset Error:", error);
+
     if (error instanceof APIError && error.status === "BAD_REQUEST") {
-      return {
-        status: "error",
-        message: t(`validation.server.${error.status.toLowerCase()}`),
-      };
+      return actionError(t(`validation.${error.status.toLowerCase()}`));
     }
 
-    return {
-      status: "error",
-      message: t("validation.server.internalServerError"),
-    };
+    return actionError(t("validation.internalServerError"));
   }
 
-  // Handle redirect OUTSIDE the try/catch
+  // Redirect to check email
   redirect({
     href: "/forget-password/check-email",
     locale,
   });
 
-  return {
-    status: "success",
-    message: null,
-  };
+  return actionSuccess();
 }
