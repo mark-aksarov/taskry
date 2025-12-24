@@ -3,6 +3,11 @@
     "text": "Всего пользователей"
   },
 
+  "UserToolbarSortingMenuTrigger": {
+    "byFullName": "По полному имени",
+    "byPosition": "По должности"
+  },
+
   "ProfileActions": {
     "deleteAccount": "Удалить аккаунт",
     "changePassword": "Сменить пароль",

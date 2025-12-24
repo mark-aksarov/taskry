@@ -18,22 +18,26 @@ import { ActionFn, ActionState, DeleteUsersPayload } from "@/lib/actions/types";
 import { UserToolbarActionsMenuTrigger } from "@/components/users/UserToolbarActionsMenuTrigger";
 import { UserToolbarFiltersModalTrigger } from "@/components/users/UserToolbarFiltersModalTrigger";
 import { UserToolbarCreateNewMenuTrigger } from "@/components/users/UserToolbarCreateNewMenuTrigger";
+import { UserToolbarSortingMenuTrigger } from "@/components/users/UserToolbarSortingMenuTrigger";
 
 interface UsersPageProps {
   page: number;
   pageSize: number;
+  sort: string;
   createPositionAction: ActionFn<ActionState, FormData>;
   deleteUsersAction: ActionFn<ActionState, DeleteUsersPayload>;
   UserFiltersFormContainer: React.ComponentType;
   UsersServerContainer: React.ComponentType<{
     page: number;
     pageSize: number;
+    sort: string;
   }>;
 }
 
 export function UsersPage({
   page,
   pageSize,
+  sort,
   createPositionAction,
   deleteUsersAction,
   UserFiltersFormContainer,
@@ -47,6 +51,7 @@ export function UsersPage({
         <ViewModeProvider>
           <SelectionProvider>
             <ToolbarDesktop>
+              <UserToolbarSortingMenuTrigger />
               <UserToolbarFiltersModalTrigger
                 filtersForm={
                   <Suspense fallback={<UserFiltersFormSkeleton />}>
@@ -66,6 +71,7 @@ export function UsersPage({
 
             <ToolbarMobileTop>
               <ToolbarMobileHeading>{t("heading")}</ToolbarMobileHeading>
+              <UserToolbarSortingMenuTrigger />
               <UserToolbarFiltersModalTrigger
                 filtersForm={
                   <Suspense fallback={<UserFiltersFormSkeleton />}>
@@ -85,7 +91,7 @@ export function UsersPage({
                 }
               />
             </ToolbarMobileBottom>
-            <UsersServerContainer page={page} pageSize={pageSize} />
+            <UsersServerContainer page={page} pageSize={pageSize} sort={sort} />
           </SelectionProvider>
         </ViewModeProvider>
       </PageGrid>

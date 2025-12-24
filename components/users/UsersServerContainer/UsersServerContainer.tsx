@@ -11,13 +11,15 @@ import { getUserCount, getUserList } from "@/lib/data/user/user.dal";
 interface UsersServerContainerProps {
   page: number;
   pageSize: number;
+  sort: string;
 }
 
 export async function UsersServerContainer({
   page,
   pageSize,
+  sort,
 }: UsersServerContainerProps) {
-  const users = await getUserList({ page, pageSize });
+  const users = await getUserList({ page, pageSize, sort });
   const count = await getUserCount();
   const totalPages = Math.ceil(count / pageSize);
 

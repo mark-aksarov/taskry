@@ -11,19 +11,20 @@ import { UserFiltersFormServerContainer } from "@/components/users/UserFiltersFo
 const searchParamsSchema = z.object({
   page: z.coerce.number().int().positive().catch(1),
   pageSize: z.coerce.number().int().min(1).max(100).catch(20),
+  sort: z.enum(["fullName", "position"]).catch("fullName"),
 });
 
 export default async function AppUsersPage({
   searchParams,
 }: {
-  searchParams: Promise<{ page?: string; pageSize?: string }>;
+  searchParams: Promise<{ page?: string; pageSize?: string; sort?: string }>;
 }) {
   // Authorization
   await requireProtectedPage();
 
   // Validation
   const rawParams = await searchParams;
-  const { page, pageSize } = searchParamsSchema.parse(rawParams);
+  const { page, pageSize, sort } = searchParamsSchema.parse(rawParams);
 
   // Get count
   const count = await getUserCount();
@@ -34,6 +35,7 @@ export default async function AppUsersPage({
     <UsersPage
       page={page}
       pageSize={pageSize}
+      sort={sort}
       createPositionAction={createPosition}
       UserFiltersFormContainer={UserFiltersFormServerContainer}
       UsersServerContainer={UsersServerContainer}

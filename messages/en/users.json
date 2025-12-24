@@ -3,6 +3,11 @@
     "text": "Total Users"
   },
 
+  "UserToolbarSortingMenuTrigger": {
+    "byFullName": "By full name",
+    "byPosition": "By position"
+  },
+
   "ProfileActions": {
     "deleteAccount": "Delete account",
     "changePassword": "Change password",

@@ -32,6 +32,7 @@ export const Default: Story = {
   args: {
     page: 1,
     pageSize: 10,
+    sort: "fullName",
     deleteUsersAction: fn(),
     createPositionAction: fn(),
     UserFiltersFormContainer: () => (

@@ -14,6 +14,7 @@ import {
 
 import { cache } from "react";
 import prisma from "@/lib/prisma";
+import { Prisma } from "@/generated/prisma/client";
 import { getSessionOrThrow } from "@/lib/data/utils/getSessionOrThrow";
 
 export const getUserSummaries = cache(async () => {
@@ -45,15 +46,30 @@ export const getUserDetail = cache(async (userId: string) => {
 });
 
 export const getUserList = cache(
-  async ({ page, pageSize }: { page: number; pageSize: number }) => {
+  async ({
+    page,
+    pageSize,
+    sort,
+  }: {
+    page: number;
+    pageSize: number;
+    sort: string;
+  }) => {
     const {
       user: { workspaceId },
     } = await getSessionOrThrow();
 
     const skip = (page - 1) * pageSize;
 
+    const orderByMapping: Record<string, Prisma.UserOrderByWithRelationInput> =
+      {
+        fullName: { fullName: "asc" },
+        position: { position: { name: "asc" } },
+      };
+
     const users = await prisma.user.findMany({
       where: { workspaceId },
+      orderBy: [orderByMapping[sort] || { fullName: "asc" }],
       skip,
       take: pageSize,
       select: userListItemSelect,
