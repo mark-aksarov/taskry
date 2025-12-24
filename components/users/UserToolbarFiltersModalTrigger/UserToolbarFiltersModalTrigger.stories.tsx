@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { UserToolbarFiltersModalTrigger } from "./UserToolbarFiltersModalTrigger";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { UserFiltersForm, UserFiltersFormSkeleton } from "../UserFiltersForm";
+import { UserToolbarFiltersModalTrigger } from "./UserToolbarFiltersModalTrigger";
 import { Default as UserFiltersFormStory } from "../UserFiltersForm/UserFiltersForm.stories";
 
 const meta = {

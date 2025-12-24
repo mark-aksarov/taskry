@@ -7,6 +7,7 @@ import {
 
 import { Suspense } from "react";
 import { useTranslations } from "next-intl";
+import { UserFilters } from "@/lib/data/user/user.dto";
 import { PageGrid } from "@/components/common/PageGrid";
 import { ViewModeProvider } from "@/components/common/ViewMode";
 import { PageContainer } from "@/components/common/PageContainer";
@@ -16,21 +17,25 @@ import { SelectionProvider } from "@/components/common/SelectionContext";
 import { UserFiltersFormSkeleton } from "@/components/users/UserFiltersForm";
 import { ActionFn, ActionState, DeleteUsersPayload } from "@/lib/actions/types";
 import { UserToolbarActionsMenuTrigger } from "@/components/users/UserToolbarActionsMenuTrigger";
+import { UserToolbarSortingMenuTrigger } from "@/components/users/UserToolbarSortingMenuTrigger";
 import { UserToolbarFiltersModalTrigger } from "@/components/users/UserToolbarFiltersModalTrigger";
 import { UserToolbarCreateNewMenuTrigger } from "@/components/users/UserToolbarCreateNewMenuTrigger";
-import { UserToolbarSortingMenuTrigger } from "@/components/users/UserToolbarSortingMenuTrigger";
 
 interface UsersPageProps {
   page: number;
   pageSize: number;
   sort: string;
+  filters: UserFilters;
   createPositionAction: ActionFn<ActionState, FormData>;
   deleteUsersAction: ActionFn<ActionState, DeleteUsersPayload>;
-  UserFiltersFormContainer: React.ComponentType;
+  UserFiltersFormContainer: React.ComponentType<{
+    filters: UserFilters;
+  }>;
   UsersServerContainer: React.ComponentType<{
     page: number;
     pageSize: number;
     sort: string;
+    filters?: UserFilters;
   }>;
 }
 
@@ -38,6 +43,7 @@ export function UsersPage({
   page,
   pageSize,
   sort,
+  filters,
   createPositionAction,
   deleteUsersAction,
   UserFiltersFormContainer,
@@ -55,7 +61,7 @@ export function UsersPage({
               <UserToolbarFiltersModalTrigger
                 filtersForm={
                   <Suspense fallback={<UserFiltersFormSkeleton />}>
-                    <UserFiltersFormContainer />
+                    <UserFiltersFormContainer filters={filters} />
                   </Suspense>
                 }
               />
@@ -75,7 +81,7 @@ export function UsersPage({
               <UserToolbarFiltersModalTrigger
                 filtersForm={
                   <Suspense fallback={<UserFiltersFormSkeleton />}>
-                    <UserFiltersFormContainer />
+                    <UserFiltersFormContainer filters={filters} />
                   </Suspense>
                 }
               />
@@ -91,7 +97,12 @@ export function UsersPage({
                 }
               />
             </ToolbarMobileBottom>
-            <UsersServerContainer page={page} pageSize={pageSize} sort={sort} />
+            <UsersServerContainer
+              page={page}
+              pageSize={pageSize}
+              sort={sort}
+              filters={filters}
+            />
           </SelectionProvider>
         </ViewModeProvider>
       </PageGrid>

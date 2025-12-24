@@ -2,25 +2,27 @@ import { UserList } from "../UserList";
 import { UserGrid } from "../UserGrid";
 import { UserListItem } from "../UserListItem";
 import { UserGridItem } from "../UserGridItem";
-import { UserListItemDTO } from "@/lib/data/user/user.dto";
 import { Pagination } from "@/components/common/Pagination";
 import { deleteUsers } from "@/lib/actions/user/deleteUsers";
 import { ViewModeLayout } from "@/components/common/ViewMode";
 import { getUserCount, getUserList } from "@/lib/data/user/user.dal";
+import { UserFilters, UserListItemDTO } from "@/lib/data/user/user.dto";
 
 interface UsersServerContainerProps {
   page: number;
   pageSize: number;
   sort: string;
+  filters?: UserFilters;
 }
 
 export async function UsersServerContainer({
   page,
   pageSize,
   sort,
+  filters,
 }: UsersServerContainerProps) {
-  const users = await getUserList({ page, pageSize, sort });
-  const count = await getUserCount();
+  const users = await getUserList({ page, pageSize, sort, filters });
+  const count = await getUserCount(filters);
   const totalPages = Math.ceil(count / pageSize);
 
   const paginationProps = {

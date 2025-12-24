@@ -25,8 +25,10 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
+    filters: { position: [] },
     positionCheckboxGroup: (
       <UserFiltersFormPositionCheckboxGroup
+        filters={{ position: [] }}
         positions={[
           {
             id: 1,

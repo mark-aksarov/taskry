@@ -34,7 +34,7 @@ const searchParamsSchema = z.object({
 export default async function AppCustomersPage({
   searchParams,
 }: {
-  searchParams: Promise<{ page?: string; pageSize?: string; sort?: string }>;
+  searchParams: Promise<{ [key: string]: string | undefined }>;
 }) {
   // Authorization
   await requireProtectedPage();

@@ -28,3 +28,10 @@ export interface UserListItemDTO
     name: string;
   };
 }
+
+export interface UserFilters {
+  hasNoActiveTasks?: boolean;
+  hasActiveTasks?: boolean;
+  hasOverdueTasks?: boolean;
+  position: number[];
+}

@@ -33,6 +33,7 @@ export const Default: Story = {
     page: 1,
     pageSize: 10,
     sort: "fullName",
+    filters: { position: [] },
     deleteUsersAction: fn(),
     createPositionAction: fn(),
     UserFiltersFormContainer: () => (

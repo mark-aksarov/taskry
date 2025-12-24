@@ -14,8 +14,9 @@ import {
 
 import { cache } from "react";
 import prisma from "@/lib/prisma";
-import { Prisma } from "@/generated/prisma/client";
+import { Prisma, TaskStatus } from "@/generated/prisma/client";
 import { getSessionOrThrow } from "@/lib/data/utils/getSessionOrThrow";
+import { UserFilters } from "./user.dto";
 
 export const getUserSummaries = cache(async () => {
   const {
@@ -50,10 +51,12 @@ export const getUserList = cache(
     page,
     pageSize,
     sort,
+    filters,
   }: {
     page: number;
     pageSize: number;
     sort: string;
+    filters?: UserFilters;
   }) => {
     const {
       user: { workspaceId },
@@ -68,7 +71,7 @@ export const getUserList = cache(
       };
 
     const users = await prisma.user.findMany({
-      where: { workspaceId },
+      where: buildUserWhereClause(workspaceId, filters),
       orderBy: [orderByMapping[sort] || { fullName: "asc" }],
       skip,
       take: pageSize,
@@ -79,13 +82,13 @@ export const getUserList = cache(
   },
 );
 
-export const getUserCount = cache(async () => {
+export const getUserCount = cache(async (filters?: UserFilters) => {
   const {
     user: { workspaceId },
   } = await getSessionOrThrow();
 
   return prisma.user.count({
-    where: { workspaceId },
+    where: buildUserWhereClause(workspaceId, filters),
   });
 });
 
@@ -102,3 +105,32 @@ export const deleteUsers = async (ids: string[]) => {
 
   return count;
 };
+
+export function buildUserWhereClause(
+  workspaceId: number,
+  filters?: UserFilters,
+): Prisma.UserWhereInput {
+  if (!filters) return { workspaceId };
+
+  return {
+    workspaceId,
+    ...(filters.hasNoActiveTasks && {
+      assignedTasks: { none: { status: TaskStatus.active } },
+    }),
+
+    ...(filters.hasActiveTasks && {
+      assignedTasks: { some: { status: TaskStatus.active } },
+    }),
+
+    ...(filters.hasOverdueTasks && {
+      assignedTasks: {
+        some: {
+          status: { not: TaskStatus.completed },
+          deadline: { lt: new Date() },
+        },
+      },
+    }),
+
+    ...(filters.position?.length && { positionId: { in: filters.position } }),
+  };
+}
