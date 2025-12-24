@@ -11,11 +11,11 @@ import { updateProject as updateProjectQuery } from "@/lib/data/project/project.
 
 const schema = z.object({
   id: z.coerce.number().int().positive(),
-  title: z.string().min(1).max(255),
+  title: z.string().min(1).max(255).optional(),
   description: z.string().max(5000).optional(),
-  deadline: z.coerce.date(),
-  status: z.enum(["active", "completed", "pending"]),
-  categoryId: z.coerce.number(),
+  deadline: z.coerce.date().optional(),
+  status: z.enum(["active", "completed", "pending"]).optional(),
+  categoryId: z.coerce.number().optional(),
   customerId: z.coerce.number().optional(),
 });
 

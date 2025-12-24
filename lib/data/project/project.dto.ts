@@ -68,7 +68,10 @@ export interface ProjectListItemDTO
 
 export interface CreateProjectInputDTO extends Omit<BaseProjectDTO, "id"> {}
 
-export interface UpdateProjectInputDTO extends BaseProjectDTO {}
+export interface UpdateProjectInputDTO
+  extends Partial<Omit<BaseProjectDTO, "id">> {
+  id: BaseProjectDTO["id"];
+}
 
 export interface ProjectFilters {
   status: ProjectStatus[];

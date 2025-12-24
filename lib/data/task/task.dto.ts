@@ -20,7 +20,10 @@ export interface TaskFormDataDTO extends BaseTaskDTO {
 
 export interface CreateTaskInputDTO extends Omit<TaskFormDataDTO, "id"> {}
 
-export interface UpdateTaskInputDTO extends TaskFormDataDTO {}
+export interface UpdateTaskInputDTO
+  extends Partial<Omit<TaskFormDataDTO, "id">> {
+  id: BaseTaskDTO["id"];
+}
 
 export interface TaskDetailDTO
   extends Omit<BaseTaskDTO, "projectId" | "categoryId" | "assigneeId"> {

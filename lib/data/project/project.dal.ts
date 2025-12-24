@@ -156,9 +156,18 @@ export const updateProject = async (input: UpdateProjectInputDTO) => {
 
   await validateRelations(workspaceId, input.categoryId, input.customerId);
 
-  return prisma.project.update({
-    where: { id: input.id, workspaceId },
-    data: input,
+  return prisma.$transaction(async (tx) => {
+    await tx.project.update({
+      where: {
+        id: input.id,
+        workspaceId,
+      },
+      data: input,
+    });
+
+    if (input.status) {
+      await applyProjectStatusTaskTransitions(tx, [input.id], input.status);
+    }
   });
 };
 
@@ -172,18 +181,17 @@ export const updateProjectStatuses = async (
 
   return prisma.$transaction(async (tx) => {
     await tx.project.updateMany({
-      where: { id: { in: ids }, workspaceId },
-      data: { status: nextStatus },
+      where: {
+        id: { in: ids },
+        workspaceId,
+      },
+      data: {
+        status: nextStatus,
+      },
     });
 
-    const taskRules = TRANSITION_TASK_STATUSES_BY_PROJECT[nextStatus];
-    for (const [current, target] of Object.entries(taskRules)) {
-      if (current === target) continue;
-      await tx.task.updateMany({
-        where: { projectId: { in: ids }, status: current as TaskStatus },
-        data: { status: target as TaskStatus },
-      });
-    }
+    await applyProjectStatusTaskTransitions(tx, ids, nextStatus);
+
     return ids;
   });
 };
@@ -209,15 +217,40 @@ export const deleteProjects = async (ids: number[]) => {
  * HELPERS
  */
 
+const applyProjectStatusTaskTransitions = async (
+  tx: Prisma.TransactionClient,
+  projectIds: number[],
+  nextStatus: ProjectStatus,
+) => {
+  const taskRules = TRANSITION_TASK_STATUSES_BY_PROJECT[nextStatus];
+  if (!taskRules) return;
+
+  for (const [current, target] of Object.entries(taskRules)) {
+    if (current === target) continue;
+
+    await tx.task.updateMany({
+      where: {
+        projectId: { in: projectIds },
+        status: current as TaskStatus,
+      },
+      data: {
+        status: target as TaskStatus,
+      },
+    });
+  }
+};
+
 async function validateRelations(
   workspaceId: number,
-  catId: number,
+  catId?: number,
   custId?: number,
 ) {
-  const category = await prisma.projectCategory.findFirst({
-    where: { id: catId, workspaceId },
-  });
-  if (!category) throw new Error("Category access denied or not found");
+  if (catId) {
+    const category = await prisma.projectCategory.findFirst({
+      where: { id: catId, workspaceId },
+    });
+    if (!category) throw new Error("Category access denied or not found");
+  }
 
   if (custId) {
     const customer = await prisma.customer.findFirst({
