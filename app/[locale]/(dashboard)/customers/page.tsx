@@ -9,6 +9,7 @@ import { NewCustomerFormServerContainer } from "@/components/customer/NewCustome
 import { EditCustomerFormClientContainer } from "@/components/customer/EditCustomerFormClientContainer";
 import { CustomerFiltersFormServerContainer } from "@/components/customer/CustomerFiltersFormServerContainer";
 import { EditCustomerFormClientContainerProvider } from "@/components/customer/EditCustomerFormClientContainerContext";
+import { deleteCustomers } from "@/lib/actions/company/deleteCustomers";
 
 const searchParamsSchema = z.object({
   page: z.coerce.number().int().positive().catch(1),
@@ -43,6 +44,7 @@ export default async function AppCustomersPage({
         CustomerFiltersFormContainer={CustomerFiltersFormServerContainer}
         CustomersServerContainer={CustomersServerContainer}
         NewCustomerFormContainer={NewCustomerFormServerContainer}
+        deleteCustomersAction={deleteCustomers}
       />
     </EditCustomerFormClientContainerProvider>
   );

@@ -134,6 +134,13 @@
     "cancelButton": "Cancel"
   },
 
+  "BulkDeleteCustomerModal": {
+    "heading": "Delete customers",
+    "text": "Are you sure you want to delete <strong>{count} customers</strong>? All contents will be permanently removed.",
+    "deleteButton": "Delete",
+    "cancelButton": "Cancel"
+  },
+
   "CustomerGridItem": {
     "noPhoneNumber": "No phone number",
     "noPublicLink": "No public link"

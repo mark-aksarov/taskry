@@ -18,6 +18,11 @@ import {
   ItemBaseDetailBottomSheetTrigger,
 } from "@/components/common/ItemBase";
 
+import {
+  useCustomerSelection,
+  useSyncSelectionCustomerItem,
+} from "@/lib/hooks/useCustomerSelection";
+
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { Checkbox, Link } from "@/components/ui";
@@ -53,6 +58,9 @@ export function CustomerListItem({
 }: CustomerListItemProps) {
   const t = useTranslations("customers.CustomerListItem");
 
+  const { isSelected, toggleItem } = useCustomerSelection();
+  useSyncSelectionCustomerItem(id, fullName);
+
   const userImg = imageUrl ? (
     <ImageContainer className="h-9 w-9">
       <Image fill src={imageUrl} alt={fullName} />
@@ -63,7 +71,11 @@ export function CustomerListItem({
 
   return (
     <ListItem>
-      <Checkbox aria-label={t("checkboxAriaLabel")} />
+      <Checkbox
+        aria-label={t("checkboxAriaLabel")}
+        isSelected={isSelected(id)}
+        onChange={() => toggleItem(id)}
+      />
 
       <>
         <ItemBaseDetailModalTrigger

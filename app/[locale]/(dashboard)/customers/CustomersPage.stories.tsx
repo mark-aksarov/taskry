@@ -53,6 +53,7 @@ export const Default = {
     NewCustomerFormContainer: () => (
       <NewCustomerForm {...CustomerFormBaseStory.args} />
     ),
+    deleteCustomersAction: fn(),
   },
 } satisfies Story;
 

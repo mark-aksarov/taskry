@@ -22,6 +22,11 @@ import {
   ItemBaseDetailBottomSheetTrigger,
 } from "@/components/common/ItemBase";
 
+import {
+  useCustomerSelection,
+  useSyncSelectionCustomerItem,
+} from "@/lib/hooks/useCustomerSelection";
+
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { Link2, Mail, Phone } from "lucide-react";
@@ -59,6 +64,9 @@ export function CustomerGridItem({
 }: CustomerGridItemProps) {
   const t = useTranslations("customers.CustomerGridItem");
 
+  const { isSelected, toggleItem } = useCustomerSelection();
+  useSyncSelectionCustomerItem(id, fullName);
+
   const contactLinkClasses = "max-w-full overflow-hidden";
 
   const customerImg = imageUrl ? (
@@ -73,7 +81,11 @@ export function CustomerGridItem({
     <CustomerGridItemLayout
       topRowSlot={
         <GridItemRow>
-          <Checkbox aria-label={`${fullName} checkbox`} />
+          <Checkbox
+            aria-label={`${fullName} checkbox`}
+            isSelected={isSelected(id)}
+            onChange={() => toggleItem(id)}
+          />
           <CustomerItemActionMenuTrigger
             deleteAction={deleteAction}
             className="-mr-2"
