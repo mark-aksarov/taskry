@@ -1,0 +1,81 @@
+{
+  "TotalCustomersCard": {
+    "text": "Total Customers"
+  },
+
+  "CustomerDetail": {
+    "bio": "Bio",
+    "fullName": "Full name",
+    "email": "Email address",
+    "phoneNumber": "Phone number",
+    "publicLink": "Public link",
+    "company": "Company",
+
+    "noBio": "This user hasn’t written a bio yet.",
+    "noFullName": "No name provided",
+    "noEmail": "No email provided",
+    "noPhoneNumber": "No phone number provided",
+    "noPublicLink": "This user doesn’t have a public profile link",
+    "noCompany": "Company not specified"
+  },
+
+  "CustomerDetailBottomSheet": {
+    "dialogHeading": "Customer Details",
+    "editButtonLabel": "Edit"
+  },
+
+  "CustomerDetailClientContainer": {
+    "unknownCompany": "Unknown company"
+  },
+
+  "CustomerDetailModal": {
+    "dialogHeading": "Customer Details",
+    "editButtonLabel": "Edit"
+  },
+
+  "CustomerFiltersForm": {
+    "hasNoActiveProjects": "Has no active projects",
+    "hasActiveProjects": "Has active projects",
+    "hasOverdueProjects": "Has overdue projects",
+
+    "company": {
+      "label": "Company"
+    }
+  },
+
+  "CustomerItemActionMenuTrigger": {
+    "delete": "Delete"
+  },
+
+  "CustomerGridItem": {
+    "noPhoneNumber": "No phone number",
+    "noPublicLink": "No public link"
+  },
+
+  "CustomerListItem": {
+    "checkboxAriaLabel": "customer checkbox",
+    "phoneNumber": "Phone number",
+    "publicLink": "Public link",
+    "noPhoneNumber": "No phone number",
+    "noPublicLink": "No public link",
+    "company": "Company"
+  },
+
+  "CustomerToolbarFiltersModalTrigger": {
+    "title": "Customer Filters"
+  },
+
+  "CustomerToolbarActionsMenuTrigger": {
+    "delete": "Delete"
+  },
+
+  "CustomerToolbarCreateNewMenuTrigger": {
+    "dialogHeading": "Create New",
+    "label": "Create New",
+
+    "items": {
+      "customer": "Customer",
+      "company": "Company"
+    }
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "AppHeader": {
+    "title": {
+      "dashboard": "Dashboard",
+      "projects": "All Projects",
+      "tasks": "All Tasks",
+      "team": "Team",
+      "customers": "All Customers",
+      "profileSettings": "Profile Settings",
+      "taskDetails": "Task Details",
+      "projectDetails": "Project Details",
+      "userInfo": "User Information"
+    },
+
+    "themeToggleButton": {
+      "label": "Switch to dark theme"
+    },
+
+    "searchForm": {
+      "ariaLabel": "Search",
+      "placeholder": "Search"
+    },
+
+    "langMenuTrigger": {
+      "label": "English",
+
+      "items": {
+        "english": "English",
+        "russian": "Russian"
+      }
+    }
+  },
+
+  "AppNavigation": {
+    "dashboard": "Dashboard",
+    "projects": "Projects",
+    "tasks": "Tasks",
+    "team": "Team",
+    "customers": "Customers",
+    "profile": "Profile",
+
+    "themeToggleButton": {
+      "label": "Dark mode"
+    },
+
+    "logoutButton": {
+      "logout": "Logout"
+    },
+
+    "langMenuTrigger": {
+      "dialogHeading": "Language",
+      "label": "English",
+
+      "items": {
+        "english": "English",
+        "russian": "Russian"
+      }
+    }
+  },
+
+  "AppBottomSheetTrigger": {
+    "triggerAriaLabel": "language",
+    "dialogAriaLabel": "App navigation"
+  },
+
+  "AppSidebarSheetTrigger": {
+    "triggerAriaLabel": "menu"
+  }
+}

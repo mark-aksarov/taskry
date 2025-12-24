@@ -1,0 +1,290 @@
+{
+  "TotalProjectsCard": {
+    "text": "Total Projects"
+  },
+
+  "ProjectToolbarSortingMenuTrigger": {
+    "byTitle": "By Title",
+    "byDeadline": "By Deadline",
+    "byStatus": "By Status",
+    "byCategory": "By Category"
+  },
+
+  "NewProjectModal": {
+    "title": "New Project",
+    "submitButtonLabel": "Create Project"
+  },
+
+  "NewProjectCategoryModal": {
+    "title": "New project category",
+    "submitButtonLabel": "Create category"
+  },
+
+  "EditProjectModal": {
+    "title": "Edit Project",
+    "submitButtonLabel": "Update Project"
+  },
+
+  "ProjectToolbarFiltersModalTrigger": {
+    "title": "Project Filters"
+  },
+
+  "ProjectToolbarActionsMenuTrigger": {
+    "delete": "Delete",
+    "pending": "Mark as Pending",
+    "active": "Mark as Active",
+    "completed": "Mark as Completed"
+  },
+
+  "ProjectFormBase": {
+    "title": {
+      "label": "Title",
+      "placeholder": "Typing title",
+
+      "validation": {
+        "required": "Title is required",
+        "tooLong": "Title is too long"
+      }
+    },
+
+    "description": {
+      "label": "Description",
+      "placeholder": "Typing description"
+    },
+
+    "deadline": {
+      "label": "Deadline",
+
+      "validation": {
+        "required": "Deadline is required"
+      }
+    },
+
+    "category": {
+      "label": "Category",
+      "placeholder": "Select category",
+
+      "validation": {
+        "required": "Please select a category"
+      }
+    },
+
+    "customer": {
+      "label": "Customer",
+      "placeholder": "Select customer",
+
+      "validation": {
+        "required": "Customer is required"
+      }
+    },
+
+    "status": {
+      "label": "Status",
+      "placeholder": "Select status",
+
+      "validation": {
+        "required": "Please select a status"
+      }
+    },
+
+    "validation": {
+      "server": {
+        "invalidInput": "Invalid input. Please check your data and try again.",
+        "internalServerError": "An internal server error occurred. Please try again later."
+      }
+    }
+  },
+
+  "ProjectCategoryFormBase": {
+    "title": {
+      "label": "Name",
+      "placeholder": "Typing name",
+
+      "validation": {
+        "required": "Name is required",
+        "tooLong": "Name is too long"
+      }
+    }
+  },
+
+  "ProjectFiltersForm": {
+    "switchText": "Has not active tasks",
+
+    "ProjectFiltersFormDeadlineCheckboxGroup": {
+      "label": "Deadline",
+      "today": "Today",
+      "tomorrow": "Tomorrow",
+      "thisWeek": "This week",
+      "overdue": "Overdue"
+    },
+
+    "ProjectFiltersFormStatusCheckboxGroup": {
+      "label": "Status"
+    },
+
+    "ProjectFiltersFormDeadlineRange": {
+      "label": "Deadline range",
+      "labelTo": "Deadline range to"
+    },
+
+    "ProjectFiltersFormCategoryCheckboxGroup": {
+      "label": "Category"
+    },
+
+    "ProjectFiltersFormCustomerCheckboxGroup": {
+      "label": "Customer"
+    },
+
+    "ProjectFiltersFormUserCheckboxGroup": {
+      "label": "Creator"
+    }
+  },
+
+  "ProjectToolbarCreateNewMenuTrigger": {
+    "dialogHeading": "Create New",
+    "label": "Create New",
+
+    "items": {
+      "project": "Project",
+      "category": "Category"
+    }
+  },
+
+  "ProjectGridItem": {
+    "noDeadline": "No deadline",
+    "deadlineOn": "Deadline on {date}",
+    "progressAriaLabel": "project progress"
+  },
+
+  "ProjectListItem": {
+    "noDeadline": "No deadline",
+    "deadlineOn": "Deadline on {date}",
+    "unknownCreator": "Unknown creator",
+    "creator": "Creator",
+    "unknownCustomer": "Unknown customer",
+    "customer": "Customer",
+    "category": "Category",
+    "unknownCompany": "Unknown company",
+    "company": "Company"
+  },
+
+  "ProjectItemActionMenuTrigger": {
+    "edit": "Edit",
+    "delete": "Delete",
+    "markPending": "Mark as Pending",
+    "markCompleted": "Mark as Completed",
+    "markActive": "Mark as Active"
+  },
+
+  "DeleteProjectModal": {
+    "heading": "Delete Project",
+    "text": "Are you sure you want to delete <strong>«{name}»</strong>? All contents will be permanently removed, and all related tasks will also be deleted.",
+    "deleteButton": "Delete",
+    "cancelButton": "Cancel"
+  },
+
+  "BulkDeleteProjectModal": {
+    "heading": "Delete Projects",
+    "text": "Are you sure you want to delete <strong>{count} projects</strong>? All contents will be permanently removed, and all related tasks will also be deleted.",
+    "deleteButton": "Delete",
+    "cancelButton": "Cancel"
+  },
+
+  "UpdateProjectStatusModal": {
+    "heading": "Update Project Status",
+    "text": {
+      "complete": "Changing the project status to Completed will mark all tasks in this project as Completed.",
+      "pause": "Changing the project status to Pending will pause all active tasks in this project.",
+      "resume": "Changing the project status to Active will resume all pending tasks in this project."
+    },
+    "updateButton": "Update",
+    "cancelButton": "Cancel"
+  },
+
+  "BulkUpdateProjectStatusModal": {
+    "heading": "Update Project Statuses",
+    "text": "Changing the status of selected projects will automatically update related tasks according to the new project status.",
+    "updateButton": "Update",
+    "cancelButton": "Cancel"
+  },
+
+  "ProjectStatus": {
+    "pending": "Pending",
+    "active": "Active",
+    "completed": "Completed"
+  },
+
+  "ProjectCommentsModal": {
+    "title": "Project comments"
+  },
+
+  "ProjectDetailBottomSheet": {
+    "dialogHeading": "Project Details",
+    "editButtonLabel": "Edit Project"
+  },
+
+  "ProjectDetailCompact": {
+    "creator": "Creator",
+    "unknownCreator": "Unknown creator",
+    "deadline": "Deadline",
+    "noDeadline": "No deadline",
+    "description": "Description",
+    "noDescription": "No description",
+    "customer": "Customer",
+    "unknownCustomer": "Unknown customer",
+    "category": "Category",
+    "attachments": "Attachments",
+
+    "statusMenuTrigger": {
+      "dialogHeading": "Project Status",
+
+      "items": {
+        "pending": "Pending",
+        "active": "Active",
+        "completed": "Completed"
+      }
+    }
+  },
+
+  "ProjectDetailForm": {
+    "statusSelect": {
+      "label": "Status",
+      "placeholder": "Select status",
+
+      "items": {
+        "pending": "Pending",
+        "active": "Active",
+        "completed": "Completed"
+      }
+    },
+
+    "deadlineDatePicker": {
+      "label": "Deadline"
+    },
+
+    "customerSelect": {
+      "label": "Customer",
+      "placeholder": "Select customer"
+    },
+
+    "categorySelect": {
+      "label": "Category",
+      "placeholder": "Select category"
+    },
+
+    "resetButtonLabel": "Reset",
+    "submitButtonLabel": "Save"
+  },
+
+  "ProjectDetailFull": {
+    "description": "Description",
+    "noDescription": "No description",
+    "attachments": "Attachments",
+    "comments": "Comments"
+  },
+
+  "ProjectDetailModal": {
+    "dialogHeading": "Project Details",
+    "openInFullPage": "Open in Full Page"
+  }
+}

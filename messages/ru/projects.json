@@ -1,0 +1,290 @@
+{
+  "TotalProjectsCard": {
+    "text": "Всего проектов"
+  },
+
+  "ProjectToolbarSortingMenuTrigger": {
+    "byTitle": "По названию",
+    "byDeadline": "По сроку",
+    "byStatus": "По статусу",
+    "byCategory": "По категории"
+  },
+
+  "NewProjectModal": {
+    "title": "Новый проект",
+    "submitButtonLabel": "Создать проект"
+  },
+
+  "NewProjectCategoryModal": {
+    "title": "Новая категория проекта",
+    "submitButtonLabel": "Создать категорию"
+  },
+
+  "EditProjectModal": {
+    "title": "Изменить проект",
+    "submitButtonLabel": "Обновить проект"
+  },
+
+  "ProjectToolbarFiltersModalTrigger": {
+    "title": "Фильтры проектов"
+  },
+
+  "ProjectToolbarActionsMenuTrigger": {
+    "delete": "Удалить",
+    "pending": "Отметить как «В ожидании»",
+    "active": "Отметить как «Активно»",
+    "completed": "Отметить как «Завершено»"
+  },
+
+  "ProjectFormBase": {
+    "title": {
+      "label": "Название",
+      "placeholder": "Введите название",
+
+      "validation": {
+        "required": "Заголовок обязателен для заполнения",
+        "tooLong": "Заголовок слишком длинный"
+      }
+    },
+
+    "description": {
+      "label": "Описание",
+      "placeholder": "Введите описание"
+    },
+
+    "deadline": {
+      "label": "Срок",
+
+      "validation": {
+        "required": "Необходимо указать срок исполнения"
+      }
+    },
+
+    "category": {
+      "label": "Категория",
+      "placeholder": "Выберите категорию",
+
+      "validation": {
+        "required": "Выберите категорию"
+      }
+    },
+
+    "customer": {
+      "label": "Клиент",
+      "placeholder": "Выберите клиента",
+
+      "validation": {
+        "required": "Необходимо указать заказчика"
+      }
+    },
+
+    "status": {
+      "label": "Статус",
+      "placeholder": "Выберите статус",
+
+      "validation": {
+        "required": "Укажите статус"
+      }
+    },
+
+    "validation": {
+      "server": {
+        "invalidInput": "Некорректный ввод. Пожалуйста, проверьте данные и попробуйте снова.",
+        "internalServerError": "Произошла внутренняя ошибка сервера. Пожалуйста, попробуйте позже."
+      }
+    }
+  },
+
+  "ProjectCategoryFormBase": {
+    "title": {
+      "label": "Название",
+      "placeholder": "Введите название",
+
+      "validation": {
+        "required": "Требуется название",
+        "tooLong": "Название слишком длинное"
+      }
+    }
+  },
+
+  "ProjectFiltersForm": {
+    "switchText": "Не имеет активных задач",
+
+    "ProjectFiltersFormDeadlineCheckboxGroup": {
+      "label": "Срок",
+      "today": "Сегодня",
+      "tomorrow": "Завтра",
+      "thisWeek": "На этой неделе",
+      "overdue": "Просрочено"
+    },
+
+    "ProjectFiltersFormStatusCheckboxGroup": {
+      "label": "Статус"
+    },
+
+    "ProjectFiltersFormDeadlineRange": {
+      "label": "Диапазон срока",
+      "labelTo": "Диапазон срока до"
+    },
+
+    "ProjectFiltersFormCategoryCheckboxGroup": {
+      "label": "Категория"
+    },
+
+    "ProjectFiltersFormCustomerCheckboxGroup": {
+      "label": "Клиент"
+    },
+
+    "ProjectFiltersFormUserCheckboxGroup": {
+      "label": "Создатель"
+    }
+  },
+
+  "ProjectToolbarCreateNewMenuTrigger": {
+    "dialogHeading": "Создать новый",
+    "label": "Создать новый",
+
+    "items": {
+      "project": "Проект",
+      "category": "Категорию"
+    }
+  },
+
+  "ProjectGridItem": {
+    "noDeadline": "Без срока",
+    "deadlineOn": "Срок до {date}",
+    "progressAriaLabel": "Прогресс проекта"
+  },
+
+  "ProjectListItem": {
+    "noDeadline": "Без срока",
+    "deadlineOn": "Срок до {date}",
+    "unknownCreator": "Неизвестный создатель",
+    "creator": "Создатель",
+    "unknownCustomer": "Неизвестный клиент",
+    "customer": "Клиент",
+    "category": "Категория",
+    "unknownCompany": "Неизвестная компания",
+    "company": "Компания"
+  },
+
+  "ProjectItemActionMenuTrigger": {
+    "edit": "Изменить",
+    "delete": "Удалить",
+    "markPending": "Отметить как «В ожидании»",
+    "markCompleted": "Отметить как «Готово»",
+    "markActive": "Отметить как «Активно»"
+  },
+
+  "DeleteProjectModal": {
+    "heading": "Удалить проект",
+    "text": "Вы уверены, что хотите удалить <strong>«{name}»</strong>? Все содержимое будет безвозвратно удалено. Связанные задачи также будут удалены.",
+    "deleteButton": "Удалить",
+    "cancelButton": "Отменить"
+  },
+
+  "BulkDeleteProjectModal": {
+    "heading": "Удалить проекты",
+    "text": "Вы уверены, что хотите удалить <strong>{count} выбранных проектов </strong>? Все содержимое будет безвозвратно удалено. Связанные задачи также будут удалены.",
+    "deleteButton": "Удалить",
+    "cancelButton": "Отменить"
+  },
+
+  "UpdateProjectStatusModal": {
+    "heading": "Обновить статус проекта",
+    "text": {
+      "complete": "При изменении статуса проекта на «Завершён» все задачи в этом проекте будут помечены как завершённые.",
+      "pause": "При изменении статуса проекта на «В ожидании» все активные задачи будут приостановлены.",
+      "resume": "При изменении статуса проекта на «Активный» все приостановленные задачи будут возобновлены."
+    },
+    "updateButton": "Обновить",
+    "cancelButton": "Отменить"
+  },
+
+  "BulkUpdateProjectStatusModal": {
+    "heading": "Изменить статус проектов",
+    "text": "При изменении статуса выбранных проектов связанные задачи будут автоматически обновлены в соответствии с новым статусом проекта.",
+    "updateButton": "Обновить",
+    "cancelButton": "Отмена"
+  },
+
+  "ProjectStatus": {
+    "pending": "В ожидании",
+    "active": "Активный",
+    "completed": "Завершён"
+  },
+
+  "ProjectCommentsModal": {
+    "title": "Комментарии проекта"
+  },
+
+  "ProjectDetailBottomSheet": {
+    "dialogHeading": "Детали проекта",
+    "editButtonLabel": "Редактировать Проект"
+  },
+
+  "ProjectDetailCompact": {
+    "creator": "Создатель",
+    "unknownCreator": "Неизвестный создатель",
+    "deadline": "Дедлайн",
+    "noDeadline": "Без дедлайна",
+    "description": "Описание",
+    "noDescription": "Нет описания",
+    "customer": "Клиент",
+    "unknownCustomer": "Неизвестный клиент",
+    "category": "Категория",
+    "attachments": "Вложения",
+
+    "statusMenuTrigger": {
+      "dialogHeading": "Статус проекта",
+
+      "items": {
+        "pending": "В ожидании",
+        "active": "Активен",
+        "completed": "Завершен"
+      }
+    }
+  },
+
+  "ProjectDetailForm": {
+    "statusSelect": {
+      "label": "Статус",
+      "placeholder": "Выберите статус",
+
+      "items": {
+        "pending": "В ожидании",
+        "active": "Активный",
+        "completed": "Завершённый"
+      }
+    },
+
+    "deadlineDatePicker": {
+      "label": "Срок"
+    },
+
+    "customerSelect": {
+      "label": "Клиент",
+      "placeholder": "Выберите клиента"
+    },
+
+    "categorySelect": {
+      "label": "Категория",
+      "placeholder": "Выберите категорию"
+    },
+
+    "resetButtonLabel": "Сбросить",
+    "submitButtonLabel": "Сохранить"
+  },
+
+  "ProjectDetailFull": {
+    "description": "Описание",
+    "noDescription": "Нет описания",
+    "attachments": "Вложения",
+    "comments": "Комментарии"
+  },
+
+  "ProjectDetailModal": {
+    "dialogHeading": "Детали проекта",
+    "openInFullPage": "Открыть в полном окне"
+  }
+}

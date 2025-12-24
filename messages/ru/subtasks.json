@@ -1,0 +1,19 @@
+{
+  "SubtasksCheckboxGroup": {
+    "label": "Подзадачи"
+  },
+
+  "NewSubtaskForm": {
+    "label": "Текст",
+    "placeholder": "Введите новую подзадачу..."
+  },
+
+  "NewSubtaskDialog": {
+    "dialogHeading": "Новая подзадача",
+    "addButtonLabel": "Добавить подзадачу"
+  },
+
+  "NewSubtasksButton": {
+    "label": "Новая подзадача"
+  }
+}

@@ -1,7 +1,7 @@
 import "../app/globals.css";
 
-import en from "../messages/en.json";
-import ru from "../messages/ru.json";
+import en from "../messages/en";
+import ru from "../messages/ru";
 import { I18nProvider } from "react-aria";
 import { mocked } from "storybook/internal/test";
 import { NextIntlClientProvider } from "next-intl";

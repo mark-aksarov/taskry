@@ -1,0 +1,69 @@
+{
+  "AppHeader": {
+    "title": {
+      "dashboard": "Панель управления",
+      "projects": "Все проекты",
+      "tasks": "Все задачи",
+      "team": "Команда",
+      "customers": "Все клиенты",
+      "profileSettings": "Настройки профиля",
+      "taskDetails": "Детали задачи",
+      "projectDetails": "Детали проекта",
+      "userInfo": "Информация о пользователе"
+    },
+
+    "themeToggleButton": {
+      "label": "Переключить на тёмную тему"
+    },
+
+    "searchForm": {
+      "ariaLabel": "Поиск",
+      "placeholder": "Поиск"
+    },
+
+    "langMenuTrigger": {
+      "label": "Английский",
+
+      "items": {
+        "english": "Английский",
+        "russian": "Русский"
+      }
+    }
+  },
+
+  "AppNavigation": {
+    "dashboard": "Панель",
+    "projects": "Проекты",
+    "tasks": "Задачи",
+    "team": "Команда",
+    "customers": "Клиенты",
+    "profile": "Профиль",
+
+    "themeToggleButton": {
+      "label": "Темный режим"
+    },
+
+    "logoutButton": {
+      "logout": "Выйти"
+    },
+
+    "langMenuTrigger": {
+      "dialogHeading": "Язык",
+      "label": "Английский",
+
+      "items": {
+        "english": "Английский",
+        "russian": "Русский"
+      }
+    }
+  },
+
+  "AppBottomSheetTrigger": {
+    "triggerAriaLabel": "язык",
+    "dialogAriaLabel": "Навигация по приложению"
+  },
+
+  "AppSidebarSheetTrigger": {
+    "triggerAriaLabel": "меню"
+  }
+}

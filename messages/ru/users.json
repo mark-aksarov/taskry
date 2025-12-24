@@ -1,0 +1,151 @@
+{
+  "TotalUsersCard": {
+    "text": "Всего пользователей"
+  },
+
+  "ProfileActions": {
+    "deleteAccount": "Удалить аккаунт",
+    "changePassword": "Сменить пароль",
+    "editAccount": "Редактировать аккаунт"
+  },
+
+  "ProfileNavigationDesktop": {
+    "userInformation": "Информация о пользователе",
+    "assignedTasks": "Назначенные задачи"
+  },
+
+  "ProfileNavigationMobile": {
+    "info": "Информация",
+    "assignedTasks": "Задачи"
+  },
+
+  "UserDetail": {
+    "bio": "Биография",
+    "noBio": "Этот пользователь еще не написал биографию.",
+    "fullName": "Полное имя",
+    "noFullName": "Имя не указано",
+    "email": "Адрес электронной почты",
+    "phoneNumber": "Номер телефона",
+    "noPhoneNumber": "Номер телефона не указан",
+    "address": "Адрес",
+    "noAddress": "Адрес не указан",
+    "publicLink": "Публичная ссылка",
+    "noPublicLink": "Публичная ссылка отсутствует",
+    "company": "Компания",
+    "position": "Должность",
+    "noPosition": "Должность не указана",
+    "birthdate": "Дата рождения",
+    "noBirthdate": "Дата рождения не указана"
+  },
+
+  "UserDetailCard": {
+    "title": "Детали пользователя"
+  },
+
+  "UserDetailBottomSheet": {
+    "dialogHeading": "Детали пользователя",
+    "openInFullPage": "Открыть в полном окне"
+  },
+
+  "UserDetailClientContainer": {
+    "unknownPosition": "Неизвестная должность"
+  },
+
+  "UserDetailModal": {
+    "dialogHeading": "Детали пользователя",
+    "openInFullPage": "Открыть в полном окне"
+  },
+
+  "UserFiltersForm": {
+    "hasNoActiveTasks": "Нет активных задач",
+    "hasActiveTasks": "Есть активные задачи",
+    "hasOverdueTasks": "Есть просроченные задачи",
+
+    "roleCheckboxGroup": {
+      "label": "Роль",
+
+      "items": {
+        "admin": "Администратор",
+        "manager": "Менеджер",
+        "user": "Пользователь"
+      }
+    },
+
+    "positionCheckboxGroup": {
+      "label": "Должность"
+    }
+  },
+
+  "UserItemActionMenuTrigger": {
+    "edit": "Редактировать",
+    "delete": "Удалить"
+  },
+
+  "UserGridItem": {
+    "unknownPosition": "Неизвестная должность",
+    "noPhoneNumber": "Номер телефона не указан",
+    "noPublicLink": "Публичная ссылка отсутствует"
+  },
+
+  "UserHeaderServerContainer": {
+    "unknownPosition": "Неизвестная должность"
+  },
+
+  "UserListItem": {
+    "checkboxAriaLabel": "чекбокс пользователя",
+    "phoneNumber": "Номер телефона",
+    "noPhoneNumber": "Номер телефона не указан",
+    "publicLink": "Публичная ссылка",
+    "noPublicLink": "Публичная ссылка не указана",
+    "position": "Должность",
+    "unknownPosition": "Неизвестная должность"
+  },
+
+  "UserNavigationDesktop": {
+    "userInformation": "Информация о пользователе",
+    "assignedTasks": "Назначенные задачи"
+  },
+
+  "UserNavigationMobile": {
+    "info": "Информация",
+    "assignedTasks": "Задачи"
+  },
+
+  "UserTaskListItem": {
+    "checkboxAriaLabel": "чекбокс задачи",
+    "noDeadline": "Без дедлайна",
+    "deadlineOn": "Срок до {date}"
+  },
+
+  "UserTasksEmptySection": {
+    "heading": "Пока нет назначенных задач",
+    "description": "Создайте новую задачу, чтобы отслеживать свою работу",
+    "editButtonLabel": "Новая задача"
+  },
+
+  "UserTasksPageEmptyLayout": {
+    "title": "Назначенные задачи"
+  },
+
+  "UserTasksPageLayout": {
+    "title": "Назначенные задачи"
+  },
+
+  "UserToolbarFiltersModalTrigger": {
+    "title": "Фильтры пользователя"
+  },
+
+  "UserToolbarActionsMenuTrigger": {
+    "delete": "Удалить"
+  },
+
+  "UserToolbarCreateNewMenuTrigger": {
+    "dialogHeading": "Создать нового",
+    "triggerLabel": "Создать нового",
+
+    "items": {
+      "user": "Пользователь",
+      "position": "Должность"
+    }
+  }
+}

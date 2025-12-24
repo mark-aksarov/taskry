@@ -1,0 +1,81 @@
+{
+  "TotalCustomersCard": {
+    "text": "Всего клиентов"
+  },
+
+  "CustomerDetail": {
+    "bio": "Биография",
+    "fullName": "Полное имя",
+    "email": "Электронная почта",
+    "phoneNumber": "Номер телефона",
+    "publicLink": "Публичная ссылка",
+    "company": "Компания",
+
+    "noBio": "Пользователь ещё не написал биографию.",
+    "noFullName": "Имя не указано",
+    "noEmail": "Электронная почта не указана",
+    "noPhoneNumber": "Номер телефона не указан",
+    "noPublicLink": "У пользователя нет публичной ссылки на профиль",
+    "noCompany": "Компания не указана"
+  },
+
+  "CustomerDetailBottomSheet": {
+    "dialogHeading": "Детали клиента",
+    "editButtonLabel": "Редактировать"
+  },
+
+  "CustomerDetailClientContainer": {
+    "unknownCompany": "Неизвестная компания"
+  },
+
+  "CustomerDetailModal": {
+    "dialogHeading": "Детали клиента",
+    "editButtonLabel": "Редактировать"
+  },
+
+  "CustomerFiltersForm": {
+    "hasNoActiveProjects": "Не имеет активных проектов",
+    "hasActiveProjects": "Имеет активные проекты",
+    "hasOverdueProjects": "Имеет просроченные проекты",
+
+    "company": {
+      "label": "Компания"
+    }
+  },
+
+  "CustomerItemActionMenuTrigger": {
+    "delete": "Удалить"
+  },
+
+  "CustomerGridItem": {
+    "noPhoneNumber": "Нет номера телефона",
+    "noPublicLink": "Нет публичной ссылки"
+  },
+
+  "CustomerListItem": {
+    "checkboxAriaLabel": "чекбокс клиента",
+    "phoneNumber": "Номер телефона",
+    "publicLink": "Публичная ссылка",
+    "noPhoneNumber": "Нет номера телефона",
+    "noPublicLink": "Нет публичной ссылки",
+    "company": "Компания"
+  },
+
+  "CustomerToolbarFiltersModalTrigger": {
+    "title": "Фильтры клиентов"
+  },
+
+  "CustomerToolbarActionsMenuTrigger": {
+    "delete": "Удалить"
+  },
+
+  "CustomerToolbarCreateNewMenuTrigger": {
+    "dialogHeading": "Создать новое",
+    "label": "Создать новое",
+
+    "items": {
+      "customer": "Клиент",
+      "company": "Компания"
+    }
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "Toolbar": {
+    "ToolbarSortingMenuTrigger": {
+      "dialogHeading": "Сортировка",
+      "ariaLabel": "Сортировать проекты по",
+      "label": "Сортировка"
+    },
+
+    "ToolbarFiltersModalTrigger": {
+      "trigger": {
+        "ariaLabel": "Фильтровать проекты",
+        "label": "Фильтры"
+      },
+      "applyButtonLabel": "Применить фильтры"
+    },
+
+    "ToolbarActionsMenuTrigger": {
+      "heading": "Действия",
+      "ariaLabel": "Действия",
+      "label": "Действия"
+    }
+  },
+
+  "ViewModeToggleButtonGroup": {
+    "list": "Список",
+    "grid": "Сетка"
+  },
+
+  "AttachmentsField": {
+    "label": "Вложения",
+    "maxSize": "Максимальный размер: 10 МБ"
+  },
+
+  "ItemBase": {
+    "ItemBaseActionMenuTrigger": {
+      "heading": "Действия",
+      "ariaLabel": "Действия"
+    }
+  },
+
+  "DetailCommentInput": {
+    "placeholder": "Напишите комментарий..."
+  },
+
+  "MessageInput": {
+    "attachFileButton": {
+      "ariaLabel": "Добавить вложения"
+    },
+    "sendButton": {
+      "ariaLabel": "Отправить сообщение"
+    }
+  },
+
+  "Pagination": {
+    "previousPage": "Предыдущая страница",
+    "nextPage": "Следующая страница",
+    "page": "страница {pageNumber}"
+  }
+}

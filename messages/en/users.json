@@ -1,0 +1,151 @@
+{
+  "TotalUsersCard": {
+    "text": "Total Users"
+  },
+
+  "ProfileActions": {
+    "deleteAccount": "Delete account",
+    "changePassword": "Change password",
+    "editAccount": "Edit account"
+  },
+
+  "ProfileNavigationDesktop": {
+    "userInformation": "User Information",
+    "assignedTasks": "Assigned Tasks"
+  },
+
+  "ProfileNavigationMobile": {
+    "info": "Info",
+    "assignedTasks": "Assigned Tasks"
+  },
+
+  "UserDetail": {
+    "bio": "Bio",
+    "noBio": "This user hasn’t written a bio yet.",
+    "fullName": "Full name",
+    "noFullName": "No name provided",
+    "email": "Email address",
+    "phoneNumber": "Phone number",
+    "noPhoneNumber": "No phone number",
+    "address": "Address",
+    "noAddress": "No address provided",
+    "publicLink": "Public link",
+    "noPublicLink": "No public link",
+    "company": "Company",
+    "position": "Position",
+    "noPosition": "Position not specified",
+    "birthdate": "Birthdate",
+    "noBirthdate": "No birthdate"
+  },
+
+  "UserDetailCard": {
+    "title": "User Information"
+  },
+
+  "UserDetailBottomSheet": {
+    "dialogHeading": "User Details",
+    "openInFullPage": "Open in Full Page"
+  },
+
+  "UserDetailClientContainer": {
+    "unknownPosition": "Unknown position"
+  },
+
+  "UserDetailModal": {
+    "dialogHeading": "User Details",
+    "openInFullPage": "Open in Full Page"
+  },
+
+  "UserFiltersForm": {
+    "hasNoActiveTasks": "Has no active tasks",
+    "hasActiveTasks": "Has active tasks",
+    "hasOverdueTasks": "Has overdue tasks",
+
+    "roleCheckboxGroup": {
+      "label": "Role",
+
+      "items": {
+        "admin": "Admin",
+        "manager": "Manager",
+        "user": "User"
+      }
+    },
+
+    "positionCheckboxGroup": {
+      "label": "Position"
+    }
+  },
+
+  "UserItemActionMenuTrigger": {
+    "edit": "Edit",
+    "delete": "Delete"
+  },
+
+  "UserGridItem": {
+    "unknownPosition": "Unknown position",
+    "noPhoneNumber": "No phone number",
+    "noPublicLink": "No public link"
+  },
+
+  "UserHeaderServerContainer": {
+    "unknownPosition": "Unknown position"
+  },
+
+  "UserListItem": {
+    "checkboxAriaLabel": "user checkbox",
+    "phoneNumber": "Phone number",
+    "noPhoneNumber": "Phone number is not provided",
+    "publicLink": "Public link",
+    "noPublicLink": "Public link is not provided",
+    "position": "Position",
+    "unknownPosition": "Unknown position"
+  },
+
+  "UserNavigationDesktop": {
+    "userInformation": "User Information",
+    "assignedTasks": "Assigned Tasks"
+  },
+
+  "UserNavigationMobile": {
+    "info": "Info",
+    "assignedTasks": "Assigned Tasks"
+  },
+
+  "UserTaskListItem": {
+    "checkboxAriaLabel": "task checkbox",
+    "noDeadline": "No deadline",
+    "deadlineOn": "Deadline on {date}"
+  },
+
+  "UserTasksEmptySection": {
+    "heading": "No assigned tasks yet",
+    "description": "Create a new task to keep track of your work",
+    "editButtonLabel": "New Task"
+  },
+
+  "UserTasksPageEmptyLayout": {
+    "title": "Assigned tasks"
+  },
+
+  "UserTasksPageLayout": {
+    "title": "Assigned tasks"
+  },
+
+  "UserToolbarFiltersModalTrigger": {
+    "title": "User Filters"
+  },
+
+  "UserToolbarActionsMenuTrigger": {
+    "delete": "Delete"
+  },
+
+  "UserToolbarCreateNewMenuTrigger": {
+    "dialogHeading": "Create New",
+    "triggerLabel": "Create New",
+
+    "items": {
+      "user": "User",
+      "position": "Position"
+    }
+  }
+}

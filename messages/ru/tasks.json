@@ -1,0 +1,300 @@
+{
+  "AssignedTasksSectionHeading": {
+    "text": "Назначенные задачи"
+  },
+
+  "AssignedTasksEmptyCard": {
+    "heading": "Задач пока нет",
+    "description": "Создайте новую задачу, чтобы отслеживать свою работу",
+    "button": "Новая задача"
+  },
+
+  "TotalTasksCard": {
+    "text": "Всего задач"
+  },
+
+  "TaskGridItem": {
+    "noDeadline": "Без срока",
+    "deadlineOn": "Срок до {date}",
+    "progressAriaLabel": "Прогресс проекта"
+  },
+
+  "TaskListItem": {
+    "noDeadline": "Без срока",
+    "deadlineOn": "Срок до {date}",
+    "unknownAssignee": "Неизвестный исполнитель",
+    "assignee": "Исполнитель",
+    "category": "Категория",
+    "project": "Проект"
+  },
+
+  "TaskToolbarSortingMenuTrigger": {
+    "byTitle": "По названию",
+    "byDeadline": "По сроку",
+    "byStatus": "По статусу",
+    "byCategory": "По категории"
+  },
+
+  "TaskToolbarFiltersModalTrigger": {
+    "title": "Фильтры задач"
+  },
+
+  "TaskToolbarActionsMenuTrigger": {
+    "delete": "Удалить",
+    "pending": "Отметить как «В ожидании»",
+    "active": "Отметить как «Активно»",
+    "completed": "Отметить как «Завершено»"
+  },
+
+  "TaskItemActionMenuTrigger": {
+    "edit": "Изменить",
+    "delete": "Удалить",
+    "markPending": "Пометить как ожидающую",
+    "markCompleted": "Пометить как выполненную",
+    "markActive": "Пометить как активную"
+  },
+
+  "TaskToolbarCreateNewMenuTrigger": {
+    "dialogHeading": "Создать новую",
+    "label": "Создать новую",
+
+    "items": {
+      "task": "Задачу",
+      "category": "Категорию"
+    }
+  },
+
+  "DeleteTaskModal": {
+    "heading": "Удалить задачу",
+    "text": "Вы уверены, что хотите удалить <strong>«{name}»</strong>? Всё содержимое будет безвозвратно удалено.",
+    "deleteButton": "Удалить",
+    "cancelButton": "Отмена"
+  },
+
+  "UpdateTaskStatusRestrictedModal": {
+    "heading": "Обновление статуса задач",
+    "text": "Для некоторых задач статус не может быть изменен, так как проект находится в ожидании или завершен",
+    "confirmButton": "Продолжить",
+    "cancelButton": "Отмена"
+  },
+
+  "BulkDeleteTaskModal": {
+    "heading": "Удалить задачи",
+    "text": "Вы уверены, что хотите удалить <strong>{count} выбранных задач</strong>? Всё содержимое будет безвозвратно удалено.",
+    "deleteButton": "Удалить",
+    "cancelButton": "Отмена"
+  },
+
+  "NewTaskModal": {
+    "title": "Новая задача",
+    "submitButtonLabel": "Создать задачу"
+  },
+
+  "NewTaskCategoryModal": {
+    "title": "Новая категория задач",
+    "submitButtonLabel": "Создать категорию"
+  },
+
+  "EditTaskModal": {
+    "title": "Редактировать задачу",
+    "submitButtonLabel": "Обновить задачу"
+  },
+
+  "TaskCommentsModal": {
+    "title": "Комментарии к задаче"
+  },
+
+  "TaskDetailBottomSheet": {
+    "title": "Детали задачи",
+    "editButtonLabel": "Редактировать задачу"
+  },
+
+  "TaskDetailFull": {
+    "description": "Описание",
+    "noDescription": "Нет описания",
+    "attachments": "Вложения",
+    "comments": "Комментарии"
+  },
+
+  "NewTaskModalTrigger": {
+    "label": "Новая задача",
+    "title": "Новая задача",
+    "submitButtonLabel": "Создать задачу"
+  },
+
+  "TaskDetailForm": {
+    "resetButtonLabel": "Сброс",
+    "submitButtonLabel": "Сохранить",
+
+    "TaskDetailFormAssigneeSelect": {
+      "label": "Исполнитель",
+      "placeholder": "Выберите исполнителя"
+    },
+
+    "TaskDetailFormStatusSelect": {
+      "label": "Статус",
+      "placeholder": "Выберите статус",
+
+      "items": {
+        "pending": "В ожидании",
+        "active": "Активная",
+        "completed": "Завершённая"
+      }
+    },
+
+    "TaskDetailFormDeadlineDatePicker": {
+      "label": "Срок"
+    },
+
+    "TaskDetailFormProjectSelect": {
+      "label": "Проект",
+      "placeholder": "Выберите проект"
+    }
+  },
+
+  "TaskDetailModal": {
+    "title": "Детали задачи",
+    "editButtonLabel": "Открыть на полной странице"
+  },
+
+  "TaskFiltersForm": {
+    "TaskFiltersFormDeadlineCheckboxGroup": {
+      "label": "Срок",
+      "today": "Сегодня",
+      "tomorrow": "Завтра",
+      "thisWeek": "На этой неделе",
+      "overdue": "Просрочено"
+    },
+
+    "TaskFiltersFormDeadlineRange": {
+      "label": "Диапазон срока",
+      "labelTo": "Диапазон срока до"
+    },
+
+    "TaskFiltersFormStatusCheckboxGroup": {
+      "label": "Статус"
+    },
+
+    "TaskFiltersFormCategoryCheckboxGroup": {
+      "label": "Категория"
+    },
+
+    "TaskFiltersFormProjectCheckboxGroup": {
+      "label": "Проект"
+    },
+
+    "TaskFiltersFormAssigneeCheckboxGroup": {
+      "label": "Исполнитель"
+    }
+  },
+
+  "TaskFormBase": {
+    "title": {
+      "label": "Заголовок",
+      "placeholder": "Введите заголовок",
+
+      "validation": {
+        "required": "Заголовок обязателен",
+        "tooLong": "Заголовок слишком длинный"
+      }
+    },
+
+    "description": {
+      "label": "Описание",
+      "placeholder": "Введите описание"
+    },
+
+    "deadline": {
+      "label": "Срок выполнения",
+
+      "validation": {
+        "required": "Укажите срок выполнения"
+      }
+    },
+
+    "category": {
+      "label": "Категория",
+      "placeholder": "Выберите категорию",
+
+      "validation": {
+        "required": "Пожалуйста, выберите категорию"
+      }
+    },
+
+    "project": {
+      "label": "Проект",
+      "placeholder": "Выберите проект",
+
+      "validation": {
+        "required": "Проект обязателен"
+      }
+    },
+
+    "assignee": {
+      "label": "Исполнитель",
+      "placeholder": "Выберите исполнителя",
+
+      "validation": {
+        "required": "Исполнитель обязателен"
+      }
+    },
+
+    "status": {
+      "label": "Статус",
+      "placeholder": "Выберите статус",
+
+      "validation": {
+        "required": "Пожалуйста, выберите статус"
+      }
+    },
+
+    "validation": {
+      "server": {
+        "invalidInput": "Некорректные данные. Пожалуйста, проверьте введённую информацию и попробуйте снова.",
+        "internalServerError": "Произошла внутренняя ошибка сервера. Пожалуйста, попробуйте позже."
+      }
+    }
+  },
+
+  "TaskCategoryFormBase": {
+    "title": {
+      "label": "Название",
+      "placeholder": "Введите название",
+
+      "validation": {
+        "required": "Требуется название",
+        "tooLong": "Название слишком длинное"
+      }
+    }
+  },
+
+  "TaskDetailCompact": {
+    "noDeadline": "Без срока",
+    "deadline": "Срок",
+    "description": "Описание",
+    "noDescription": "Нет описания",
+    "creator": "Создатель",
+    "unknownCreator": "Неизвестный создатель",
+    "category": "Категория",
+    "project": "Проект",
+    "attachments": "Вложения",
+    "assignee": "Исполнитель",
+    "noAssignee": "Нет исполнителя",
+
+    "TaskDetailCompactStatusMenuTrigger": {
+      "dialogHeading": "Статус задачи",
+
+      "items": {
+        "pending": "В ожидании",
+        "active": "Активная",
+        "completed": "Завершённая"
+      }
+    }
+  },
+
+  "TaskStatus": {
+    "pending": "Ожидает",
+    "active": "Активна",
+    "completed": "Завершена"
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "Toolbar": {
+    "ToolbarSortingMenuTrigger": {
+      "dialogHeading": "Sorting",
+      "ariaLabel": "Sort projects by",
+      "label": "Sorting"
+    },
+
+    "ToolbarFiltersModalTrigger": {
+      "trigger": {
+        "ariaLabel": "Filter projects",
+        "label": "Filters"
+      },
+      "applyButtonLabel": "Apply Filters"
+    },
+
+    "ToolbarActionsMenuTrigger": {
+      "heading": "Actions",
+      "ariaLabel": "Actions",
+      "label": "Actions"
+    }
+  },
+
+  "ViewModeToggleButtonGroup": {
+    "list": "List",
+    "grid": "Grid"
+  },
+
+  "AttachmentsField": {
+    "label": "Attachments",
+    "maxSize": "Max size: 10 MB"
+  },
+
+  "ItemBase": {
+    "ItemBaseActionMenuTrigger": {
+      "heading": "Actions",
+      "ariaLabel": "Actions"
+    }
+  },
+
+  "DetailCommentInput": {
+    "placeholder": "Type a comment..."
+  },
+
+  "MessageInput": {
+    "attachFileButton": {
+      "ariaLabel": "Add attachments"
+    },
+    "sendButton": {
+      "ariaLabel": "Send Message"
+    }
+  },
+
+  "Pagination": {
+    "previousPage": "Previous page",
+    "nextPage": "Next page",
+    "page": "page {pageNumber}"
+  }
+}

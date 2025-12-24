@@ -1,0 +1,19 @@
+{
+  "SubtasksCheckboxGroup": {
+    "label": "Subtasks"
+  },
+
+  "NewSubtaskForm": {
+    "label": "Text",
+    "placeholder": "Typing a new subtask..."
+  },
+
+  "NewSubtaskDialog": {
+    "dialogHeading": "New Subtask",
+    "addButtonLabel": "Add Subtask"
+  },
+
+  "NewSubtasksButton": {
+    "label": "New Subtask"
+  }
+}

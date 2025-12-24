@@ -1,0 +1,300 @@
+{
+  "AssignedTasksSectionHeading": {
+    "text": "Assigned Tasks"
+  },
+
+  "AssignedTasksEmptyCard": {
+    "heading": "No tasks yet",
+    "description": "Create a new task to keep track of your work",
+    "button": "New Task"
+  },
+
+  "TotalTasksCard": {
+    "text": "Total Tasks"
+  },
+
+  "TaskGridItem": {
+    "noDeadline": "No deadline",
+    "deadlineOn": "Deadline on {date}",
+    "progressAriaLabel": "task progress"
+  },
+
+  "TaskListItem": {
+    "noDeadline": "No deadline",
+    "deadlineOn": "Deadline on {date}",
+    "unknownAssignee": "Unknown assignee",
+    "assignee": "Assignee",
+    "category": "Category",
+    "project": "Project"
+  },
+
+  "TaskToolbarSortingMenuTrigger": {
+    "byTitle": "By Title",
+    "byDeadline": "By Deadline",
+    "byStatus": "By Status",
+    "byCategory": "By Category"
+  },
+
+  "TaskToolbarFiltersModalTrigger": {
+    "title": "Task Filters"
+  },
+
+  "TaskToolbarActionsMenuTrigger": {
+    "delete": "Delete",
+    "pending": "Mark as Pending",
+    "active": "Mark as Active",
+    "completed": "Mark as Completed"
+  },
+
+  "TaskItemActionMenuTrigger": {
+    "edit": "Edit",
+    "delete": "Delete",
+    "markPending": "Mark as Pending",
+    "markCompleted": "Mark as Completed",
+    "markActive": "Mark as Active"
+  },
+
+  "TaskToolbarCreateNewMenuTrigger": {
+    "dialogHeading": "Create New",
+    "label": "Create New",
+
+    "items": {
+      "task": "Task",
+      "category": "Category"
+    }
+  },
+
+  "DeleteTaskModal": {
+    "heading": "Delete Task",
+    "text": "Are you sure you want to delete <strong>«{name}»</strong>? All contents will be permanently removed.",
+    "deleteButton": "Delete",
+    "cancelButton": "Cancel"
+  },
+
+  "UpdateTaskStatusRestrictedModal": {
+    "heading": "Task Status Update",
+    "text": "For some tasks, the status cannot be changed because the project is pending or completed",
+    "confirmButton": "Continue",
+    "cancelButton": "Cancel"
+  },
+
+  "BulkDeleteTaskModal": {
+    "heading": "Delete Tasks",
+    "text": "Are you sure you want to delete <strong>{count} tasks</strong>? All contents will be permanently removed.",
+    "deleteButton": "Delete",
+    "cancelButton": "Cancel"
+  },
+
+  "NewTaskModal": {
+    "title": "New Task",
+    "submitButtonLabel": "Create Task"
+  },
+
+  "NewTaskCategoryModal": {
+    "title": "New task category",
+    "submitButtonLabel": "Create category"
+  },
+
+  "EditTaskModal": {
+    "title": "Edit Task",
+    "submitButtonLabel": "Update Task"
+  },
+
+  "TaskCommentsModal": {
+    "title": "Task Comments"
+  },
+
+  "TaskDetailBottomSheet": {
+    "title": "Task Details",
+    "editButtonLabel": "Edit Task"
+  },
+
+  "TaskDetailFull": {
+    "description": "Description",
+    "noDescription": "No description",
+    "attachments": "Attachments",
+    "comments": "Comments"
+  },
+
+  "NewTaskModalTrigger": {
+    "label": "New Task",
+    "title": "New Task",
+    "submitButtonLabel": "Create Task"
+  },
+
+  "TaskDetailForm": {
+    "resetButtonLabel": "Reset",
+    "submitButtonLabel": "Save",
+
+    "TaskDetailFormAssigneeSelect": {
+      "label": "Assigned To",
+      "placeholder": "Select assignee"
+    },
+
+    "TaskDetailFormStatusSelect": {
+      "label": "Status",
+      "placeholder": "Select status",
+
+      "items": {
+        "pending": "Pending",
+        "active": "Active",
+        "completed": "Completed"
+      }
+    },
+
+    "TaskDetailFormDeadlineDatePicker": {
+      "label": "Deadline"
+    },
+
+    "TaskDetailFormProjectSelect": {
+      "label": "Project",
+      "placeholder": "Select project"
+    }
+  },
+
+  "TaskDetailModal": {
+    "title": "Task Details",
+    "editButtonLabel": "Open in Full Page"
+  },
+
+  "TaskFiltersForm": {
+    "TaskFiltersFormDeadlineCheckboxGroup": {
+      "label": "Deadline",
+      "today": "Today",
+      "tomorrow": "Tomorrow",
+      "thisWeek": "This week",
+      "overdue": "Overdue"
+    },
+
+    "TaskFiltersFormDeadlineRange": {
+      "label": "Deadline range",
+      "labelTo": "Deadline range to"
+    },
+
+    "TaskFiltersFormStatusCheckboxGroup": {
+      "label": "Status"
+    },
+
+    "TaskFiltersFormCategoryCheckboxGroup": {
+      "label": "Category"
+    },
+
+    "TaskFiltersFormProjectCheckboxGroup": {
+      "label": "Project"
+    },
+
+    "TaskFiltersFormAssigneeCheckboxGroup": {
+      "label": "Assignee"
+    }
+  },
+
+  "TaskFormBase": {
+    "title": {
+      "label": "Title",
+      "placeholder": "Typing title",
+
+      "validation": {
+        "required": "Title is required",
+        "tooLong": "Title is too long"
+      }
+    },
+
+    "description": {
+      "label": "Description",
+      "placeholder": "Typing description"
+    },
+
+    "deadline": {
+      "label": "Deadline",
+
+      "validation": {
+        "required": "Deadline is required"
+      }
+    },
+
+    "category": {
+      "label": "Category",
+      "placeholder": "Select category",
+
+      "validation": {
+        "required": "Please select a category"
+      }
+    },
+
+    "project": {
+      "label": "Project",
+      "placeholder": "Select project",
+
+      "validation": {
+        "required": "Project is required"
+      }
+    },
+
+    "assignee": {
+      "label": "Assignee",
+      "placeholder": "Select assignee",
+
+      "validation": {
+        "required": "Assignee is required"
+      }
+    },
+
+    "status": {
+      "label": "Status",
+      "placeholder": "Select status",
+
+      "validation": {
+        "required": "Please select a status"
+      }
+    },
+
+    "validation": {
+      "server": {
+        "invalidInput": "Invalid input. Please check your data and try again.",
+        "internalServerError": "An internal server error occurred. Please try again later."
+      }
+    }
+  },
+
+  "TaskCategoryFormBase": {
+    "title": {
+      "label": "Name",
+      "placeholder": "Typing name",
+
+      "validation": {
+        "required": "Name is required",
+        "tooLong": "Name is too long"
+      }
+    }
+  },
+
+  "TaskDetailCompact": {
+    "noDeadline": "No deadline",
+    "deadline": "Deadline",
+    "description": "Description",
+    "noDescription": "No description",
+    "creator": "Creator",
+    "unknownCreator": "Unknown creator",
+    "category": "Category",
+    "project": "Project",
+    "attachments": "Attachments",
+    "assignee": "Assignee",
+    "noAssignee": "No assignee",
+
+    "TaskDetailCompactStatusMenuTrigger": {
+      "dialogHeading": "Task Status",
+
+      "items": {
+        "pending": "Pending",
+        "active": "Active",
+        "completed": "Completed"
+      }
+    }
+  },
+
+  "TaskStatus": {
+    "pending": "Pending",
+    "active": "Active",
+    "completed": "Completed"
+  }
+}

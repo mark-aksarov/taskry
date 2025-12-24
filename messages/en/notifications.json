@@ -1,0 +1,38 @@
+{
+  "NotificationModalTrigger": {
+    "ariaLabel": "Show notifications",
+    "dialogHeading": "Notifications"
+  },
+
+  "NotificationFilterToggleButtonGroup": {
+    "all": "All",
+    "unread": "Unread"
+  },
+
+  "NotificationItem": {
+    "markAsRead": "Mark as read",
+    "delete": "Delete",
+    "unknownUser": "Unknown User",
+
+    "action": {
+      "taskAdded": "added a new task",
+      "taskDeleted": "deleted a task",
+      "taskUpdated": "updated a task",
+
+      "projectAdded": "added a new project",
+      "projectDeleted": "deleted a project",
+      "projectUpdated": "updated a project",
+
+      "userAdded": "added a new user",
+      "userDeleted": "deleted a user",
+      "userUpdated": "updated a user",
+
+      "customerAdded": "added a new customer",
+      "customerDeleted": "deleted a customer",
+      "customerUpdated": "updated a customer",
+
+      "commentReplied": "replied to a comment in",
+      "commentAdded": "added a comment to"
+    }
+  }
+}

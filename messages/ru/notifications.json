@@ -1,0 +1,38 @@
+{
+  "NotificationModalTrigger": {
+    "ariaLabel": "Показать уведомления",
+    "dialogHeading": "Уведомления"
+  },
+
+  "NotificationFilterToggleButtonGroup": {
+    "all": "Все",
+    "unread": "Непрочитанные"
+  },
+
+  "NotificationItem": {
+    "markAsRead": "Отметить как прочитанное",
+    "delete": "Удалить",
+    "unknownUser": "Неизвестный пользователь",
+
+    "action": {
+      "taskAdded": "добавил(а) новую задачу",
+      "taskDeleted": "удалил(а) задачу",
+      "taskUpdated": "обновил(а) задачу",
+
+      "projectAdded": "добавил(а) новый проект",
+      "projectDeleted": "удалил(а) проект",
+      "projectUpdated": "обновил(а) проект",
+
+      "userAdded": "добавил(а) нового пользователя",
+      "userDeleted": "удалил(а) пользователя",
+      "userUpdated": "обновил(а) пользователя",
+
+      "customerAdded": "добавил(а) нового клиента",
+      "customerDeleted": "удалил(а) клиента",
+      "customerUpdated": "обновил(а) клиента",
+
+      "commentReplied": "ответил(а) на комментарий в",
+      "commentAdded": "добавил(а) комментарий к"
+    }
+  }
+}
