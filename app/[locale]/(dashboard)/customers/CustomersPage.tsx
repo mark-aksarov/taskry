@@ -5,51 +5,60 @@ import {
   ToolbarMobileHeading,
 } from "@/components/common/Toolbar";
 
-import { Suspense } from "react";
-import { PageGrid } from "@/components/common/PageGrid";
 import {
   ActionFn,
   ActionState,
   DeleteCustomersPayload,
 } from "@/lib/actions/types";
+
+import { Suspense } from "react";
+import { useTranslations } from "next-intl";
+import { PageGrid } from "@/components/common/PageGrid";
 import { ViewModeProvider } from "@/components/common/ViewMode";
 import { PageContainer } from "@/components/common/PageContainer";
 import { NewCompanyForm } from "@/components/customer/NewCompanyForm";
 import { ViewModeToggleButtonGroup } from "@/components/common/ViewMode";
+import { SelectionProvider } from "@/components/common/SelectionContext";
 import { CustomerFiltersFormSkeleton } from "@/components/customer/CustomerFiltersForm";
 import { CustomerToolbarActionsMenuTrigger } from "@/components/customer/CustomerToolbarActionsMenuTrigger";
+import { CustomerToolbarSortingMenuTrigger } from "@/components/customer/CustomerToolbarSortingMenuTrigger";
 import { CustomerToolbarFiltersModalTrigger } from "@/components/customer/CustomerToolbarFiltersModalTrigger";
 import { CustomerToolbarCreateNewMenuTrigger } from "@/components/customer/CustomerToolbarCreateNewMenuTrigger";
-import { SelectionProvider } from "@/components/common/SelectionContext";
 
 interface CustomersPageProps {
   page: number;
   pageSize: number;
+  sort: string;
   createCompanyAction: ActionFn<ActionState, FormData>;
   deleteCustomersAction: ActionFn<ActionState, DeleteCustomersPayload>;
   CustomerFiltersFormContainer: React.ComponentType;
   CustomersServerContainer: React.ComponentType<{
     page: number;
     pageSize: number;
+    sort: string;
   }>;
   NewCustomerFormContainer: React.ComponentType;
 }
 
-export async function CustomersPage({
+export function CustomersPage({
   page,
   pageSize,
+  sort,
   createCompanyAction,
   deleteCustomersAction,
   CustomerFiltersFormContainer,
   CustomersServerContainer,
   NewCustomerFormContainer,
 }: CustomersPageProps) {
+  const t = useTranslations("app.CustomersPage");
+
   return (
     <PageContainer>
       <PageGrid>
         <ViewModeProvider>
           <SelectionProvider>
             <ToolbarDesktop>
+              <CustomerToolbarSortingMenuTrigger />
               <CustomerToolbarFiltersModalTrigger
                 filtersForm={
                   <Suspense fallback={<CustomerFiltersFormSkeleton />}>
@@ -70,7 +79,8 @@ export async function CustomersPage({
             </ToolbarDesktop>
 
             <ToolbarMobileTop>
-              <ToolbarMobileHeading>Customers</ToolbarMobileHeading>
+              <ToolbarMobileHeading>{t("heading")}</ToolbarMobileHeading>
+              <CustomerToolbarSortingMenuTrigger />
               <CustomerToolbarFiltersModalTrigger
                 filtersForm={
                   <Suspense fallback={<CustomerFiltersFormSkeleton />}>
@@ -92,7 +102,11 @@ export async function CustomersPage({
                 }
               />
             </ToolbarMobileBottom>
-            <CustomersServerContainer page={page} pageSize={pageSize} />
+            <CustomersServerContainer
+              page={page}
+              pageSize={pageSize}
+              sort={sort}
+            />
           </SelectionProvider>
         </ViewModeProvider>
       </PageGrid>

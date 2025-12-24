@@ -3,6 +3,11 @@
     "text": "Всего клиентов"
   },
 
+  "CustomerToolbarSortingMenuTrigger": {
+    "byFullName": "По полному имени",
+    "byCompany": "По компании"
+  },
+
   "CustomerDetail": {
     "bio": "Биография",
     "fullName": "Полное имя",

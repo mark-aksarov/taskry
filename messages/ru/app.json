@@ -58,6 +58,10 @@
     "heading": "Задачи"
   },
 
+  "CustomersPage": {
+    "heading": "Клиенты"
+  },
+
   "CustomersPageEmpty": {
     "heading": "Нет клиентов",
     "description": "Добавьте нового клиента, чтобы начать рост клиентской базы",

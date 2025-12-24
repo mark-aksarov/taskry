@@ -4,29 +4,30 @@ import { CustomersPageEmpty } from "./CustomersPageEmpty";
 import { createCompany } from "@/lib/actions/company/createCompany";
 import { getCustomerCount } from "@/lib/data/customer/customer.dal";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
+import { deleteCustomers } from "@/lib/actions/company/deleteCustomers";
 import { CustomersServerContainer } from "@/components/customer/CustomersServerContainer";
 import { NewCustomerFormServerContainer } from "@/components/customer/NewCustomerFormServerContainer";
 import { EditCustomerFormClientContainer } from "@/components/customer/EditCustomerFormClientContainer";
 import { CustomerFiltersFormServerContainer } from "@/components/customer/CustomerFiltersFormServerContainer";
 import { EditCustomerFormClientContainerProvider } from "@/components/customer/EditCustomerFormClientContainerContext";
-import { deleteCustomers } from "@/lib/actions/company/deleteCustomers";
 
 const searchParamsSchema = z.object({
   page: z.coerce.number().int().positive().catch(1),
   pageSize: z.coerce.number().int().min(1).max(100).catch(20),
+  sort: z.enum(["fullName", "company"]).catch("fullName"),
 });
 
 export default async function AppCustomersPage({
   searchParams,
 }: {
-  searchParams: Promise<{ page?: string; pageSize?: string }>;
+  searchParams: Promise<{ page?: string; pageSize?: string; sort?: string }>;
 }) {
   // Authorization
   await requireProtectedPage();
 
   // Validation
   const rawParams = await searchParams;
-  const { page, pageSize } = searchParamsSchema.parse(rawParams);
+  const { page, pageSize, sort } = searchParamsSchema.parse(rawParams);
 
   // Get count
   const count = await getCustomerCount();
@@ -40,6 +41,7 @@ export default async function AppCustomersPage({
       <CustomersPage
         page={page}
         pageSize={pageSize}
+        sort={sort}
         createCompanyAction={createCompany}
         CustomerFiltersFormContainer={CustomerFiltersFormServerContainer}
         CustomersServerContainer={CustomersServerContainer}

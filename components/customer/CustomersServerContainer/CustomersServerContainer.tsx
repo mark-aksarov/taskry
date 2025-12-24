@@ -1,6 +1,6 @@
 import {
-  getCustomerCount,
   getCustomerList,
+  getCustomerCount,
 } from "@/lib/data/customer/customer.dal";
 
 import { CustomerList } from "../CustomerList";
@@ -15,13 +15,15 @@ import { deleteCustomers } from "@/lib/actions/company/deleteCustomers";
 interface CustomersServerContainerProps {
   page: number;
   pageSize: number;
+  sort: string;
 }
 
 export async function CustomersServerContainer({
   page,
   pageSize,
+  sort,
 }: CustomersServerContainerProps) {
-  const customers = await getCustomerList({ page, pageSize });
+  const customers = await getCustomerList({ page, pageSize, sort });
   const count = await getCustomerCount();
   const totalPages = Math.ceil(count / pageSize);
 

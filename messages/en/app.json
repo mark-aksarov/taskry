@@ -58,6 +58,10 @@
     "heading": "Tasks"
   },
 
+  "CustomersPage": {
+    "heading": "Customers"
+  },
+
   "CustomersPageEmpty": {
     "heading": "No Customers yet",
     "description": "Add a new customer to start growing your client base",

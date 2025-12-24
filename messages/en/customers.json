@@ -3,6 +3,11 @@
     "text": "Total Customers"
   },
 
+  "CustomerToolbarSortingMenuTrigger": {
+    "byFullName": "By full name",
+    "byCompany": "By company"
+  },
+
   "CustomerDetail": {
     "bio": "Bio",
     "fullName": "Full name",

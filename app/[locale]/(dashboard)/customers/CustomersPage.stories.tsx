@@ -40,6 +40,7 @@ export const Default = {
   args: {
     page: 1,
     pageSize: 20,
+    sort: "fullName",
     createCompanyAction: fn(),
     CustomerFiltersFormContainer: () => (
       <CustomerFiltersForm {...CustomerFiltersFormStory.args} />

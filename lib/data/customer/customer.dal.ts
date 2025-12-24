@@ -24,6 +24,7 @@ import {
 
 import { cache } from "react";
 import prisma from "@/lib/prisma";
+import { Prisma } from "@/generated/prisma/client";
 import { getSessionOrThrow } from "@/lib/data/utils/getSessionOrThrow";
 
 export const getCustomerSummaries = cache(
@@ -77,17 +78,29 @@ export const getCustomerList = cache(
   async ({
     page,
     pageSize,
+    sort,
   }: {
     page: number;
     pageSize: number;
+    sort: string;
   }): Promise<CustomerListItemDTO[]> => {
     const {
       user: { workspaceId },
     } = await getSessionOrThrow();
+
     const skip = (page - 1) * pageSize;
+
+    const orderByMapping: Record<
+      string,
+      Prisma.CustomerOrderByWithRelationInput
+    > = {
+      fullName: { fullName: "asc" },
+      company: { company: { name: "asc" } },
+    };
 
     const customers = await prisma.customer.findMany({
       where: { workspaceId },
+      orderBy: [orderByMapping[sort] || { fullName: "asc" }],
       skip,
       take: pageSize,
       select: customerListItemSelect,
