@@ -1,0 +1,1 @@
+export { NewCustomerModal } from "./NewCustomerModal";

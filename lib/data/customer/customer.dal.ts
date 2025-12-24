@@ -1,6 +1,7 @@
 import "server-only";
 
 import {
+  CreateCustomerInputDTO,
   CustomerDetailDTO,
   CustomerListItemDTO,
   CustomerSummaryDTO,
@@ -87,3 +88,50 @@ export const getCustomerCount = cache(async () => {
     where: { workspaceId },
   });
 });
+
+export const deleteCustomers = async (ids: number[]) => {
+  const {
+    user: { workspaceId },
+  } = await getSessionOrThrow();
+
+  const { count } = await prisma.customer.deleteMany({
+    where: {
+      workspaceId,
+      id: { in: ids },
+    },
+  });
+
+  if (count === 0) throw new Error("No customers deleted.");
+
+  return count;
+};
+
+export const createCustomer = async (input: CreateCustomerInputDTO) => {
+  const {
+    user: { workspaceId },
+  } = await getSessionOrThrow();
+
+  await validateCustomerRelations(workspaceId, input);
+
+  await prisma.customer.create({
+    data: {
+      ...input,
+      workspaceId,
+    },
+  });
+};
+
+/**
+ * HELPERS
+ */
+
+async function validateCustomerRelations(
+  workspaceId: number,
+  input: Partial<CreateCustomerInputDTO>,
+) {
+  const company = await prisma.project.findFirst({
+    where: { id: input.companyId, workspaceId },
+  });
+
+  if (!company) throw new Error("Company access denied or not found");
+}

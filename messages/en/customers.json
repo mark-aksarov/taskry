@@ -19,6 +19,63 @@
     "noCompany": "Company not specified"
   },
 
+  "NewCustomerModal": {
+    "title": "New Customer",
+    "submitButtonLabel": "Create Customer"
+  },
+
+  "CustomerFormBase": {
+    "fullName": {
+      "label": "Full name",
+      "placeholder": "Typing full name",
+
+      "validation": {
+        "required": "Full name is required",
+        "tooLong": "Full name is too long"
+      }
+    },
+
+    "bio": {
+      "label": "Bio",
+      "placeholder": "Typing bio"
+    },
+
+    "email": {
+      "label": "Email",
+      "placeholder": "Typing email",
+
+      "validation": {
+        "required": "Please enter your email address.",
+        "format": "Invalid format. The email address must be in the format `user@example.com`.",
+        "tooLong": "This email address is too long. The maximum allowed length is {maxLength} characters."
+      }
+    },
+
+    "phoneNumber": {
+      "label": "Phone number",
+      "placeholder": "Typing phone number"
+    },
+
+    "publicLink": {
+      "label": "Public link",
+      "placeholder": "Typing public link",
+
+      "validation": {
+        "format": "Invalid format. The public link must be in the format `https://example.com`."
+      }
+    },
+
+    "company": {
+      "label": "Company",
+      "placeholder": "Typing company",
+
+      "validation": {
+        "required": "Company is required",
+        "tooLong": "Company is too long"
+      }
+    }
+  },
+
   "CustomerDetailBottomSheet": {
     "dialogHeading": "Customer Details",
     "editButtonLabel": "Edit"

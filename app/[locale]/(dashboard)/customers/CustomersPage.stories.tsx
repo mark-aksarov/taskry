@@ -8,11 +8,13 @@ import { PageDecorator } from "@/.storybook/PageDecorator";
 import { ViewModeLayout } from "@/components/common/ViewMode";
 import { CustomerList } from "@/components/customer/CustomerList";
 import { CustomerGrid } from "@/components/customer/CustomerGrid";
+import { NewCustomerForm } from "@/components/customer/NewCustomerForm";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { CustomerFiltersForm } from "@/components/customer/CustomerFiltersForm";
 import { withCustomerDetail } from "@/components/customer/CustomerDetailClientContainer/decorators";
 import { Default as CustomerGridStory } from "@/components/customer/CustomerGrid/CustomerGrid.stories";
 import { Default as CustomerListStory } from "@/components/customer/CustomerList/CustomerList.stories";
+import { Default as CustomerFormBaseStory } from "@/components/customer/CustomerFormBase/CustomerFormBase.stories";
 import { Default as CustomerFiltersFormStory } from "@/components/customer/CustomerFiltersForm/CustomerFiltersForm.stories";
 
 const meta = {
@@ -40,6 +42,9 @@ export const Default = {
         list={<CustomerList {...CustomerListStory.args} />}
         grid={<CustomerGrid {...CustomerGridStory.args} />}
       />
+    ),
+    NewCustomerFormContainer: () => (
+      <NewCustomerForm {...CustomerFormBaseStory.args} />
     ),
   },
 } satisfies Story;

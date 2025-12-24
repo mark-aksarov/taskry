@@ -12,6 +12,7 @@ import { Key, useOverlayTrigger } from "react-aria";
 import { Building2, Contact, Plus } from "lucide-react";
 import { Item, useOverlayTriggerState } from "react-stately";
 import { ResponsiveMenuTrigger } from "@/components/common/ResponsiveMenuTrigger";
+import { NewCustomerModal } from "./NewCustomerModal";
 
 interface CustomerToolbarCreateNewMenuTriggerProps {
   newCustomerForm: React.ReactNode;
@@ -26,14 +27,14 @@ export function CustomerToolbarCreateNewMenuTrigger({
 
   const state = useOverlayTriggerState({});
   const { triggerProps } = useOverlayTrigger({ type: "dialog" }, state);
-  const [openCustomerModal, setOpenCustomerModal] = useState(false);
-  const [openCompanyModal, setOpenCompanyModal] = useState(false);
+  const [isOpenCustomerModal, setIsOpenCustomerModal] = useState(false);
+  const [isOpenCompanyModal, setIsOpenCompanyModal] = useState(false);
 
   function handleAction(key: Key) {
     if (key === "customer") {
-      setOpenCustomerModal(true);
+      setIsOpenCustomerModal(true);
     } else if (key === "company") {
-      setOpenCompanyModal(true);
+      setIsOpenCompanyModal(true);
     }
   }
 
@@ -67,7 +68,11 @@ export function CustomerToolbarCreateNewMenuTrigger({
         </Item>
       </ResponsiveMenuTrigger>
 
-      {/* render modals*/}
+      <NewCustomerModal
+        newCompanyForm={newCustomerForm}
+        isOpen={isOpenCustomerModal}
+        onOpenChange={setIsOpenCustomerModal}
+      />
     </>
   );
 }

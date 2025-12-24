@@ -140,7 +140,7 @@ export const createProject = async (input: CreateProjectInputDTO) => {
 
   await validateRelations(workspaceId, input.categoryId, input.customerId);
 
-  return prisma.project.create({
+  prisma.project.create({
     data: {
       ...input,
       creatorId,

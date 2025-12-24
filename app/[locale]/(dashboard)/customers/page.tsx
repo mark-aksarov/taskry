@@ -4,6 +4,7 @@ import { CustomersPageEmpty } from "./CustomersPageEmpty";
 import { getCustomerCount } from "@/lib/data/customer/customer.dal";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { CustomersServerContainer } from "@/components/customer/CustomersServerContainer";
+import { NewCustomerFormServerContainer } from "@/components/customer/NewCustomerFormServerContainer";
 import { CustomerFiltersFormServerContainer } from "@/components/customer/CustomerFiltersFormServerContainer";
 
 const searchParamsSchema = z.object({
@@ -34,6 +35,7 @@ export default async function AppCustomersPage({
       pageSize={pageSize}
       CustomerFiltersFormContainer={CustomerFiltersFormServerContainer}
       CustomersServerContainer={CustomersServerContainer}
+      NewCustomerFormContainer={NewCustomerFormServerContainer}
     />
   );
 }

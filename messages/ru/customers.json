@@ -19,6 +19,63 @@
     "noCompany": "Компания не указана"
   },
 
+  "NewCustomerModal": {
+    "title": "Новый клиент",
+    "submitButtonLabel": "Создать клиента"
+  },
+
+  "CustomerFormBase": {
+    "fullName": {
+      "label": "Полное имя",
+      "placeholder": "Введите полное имя",
+
+      "validation": {
+        "required": "Полное имя обязательно для заполнения",
+        "tooLong": "Полное имя слишком длинное"
+      }
+    },
+
+    "bio": {
+      "label": "О себе",
+      "placeholder": "Введите информацию о себе"
+    },
+
+    "email": {
+      "label": "Email",
+      "placeholder": "Введите email",
+
+      "validation": {
+        "required": "Пожалуйста, введите адрес электронной почты.",
+        "format": "Неверный формат. Email должен быть в формате `user@example.com`.",
+        "tooLong": "Этот адрес слишком длинный. Максимально допустимая длина — {maxLength} символов."
+      }
+    },
+
+    "phoneNumber": {
+      "label": "Номер телефона",
+      "placeholder": "Введите номер телефона"
+    },
+
+    "publicLink": {
+      "label": "Публичная ссылка",
+      "placeholder": "Введите публичную ссылку",
+
+      "validation": {
+        "format": "Неверный формат. Публичная ссылка должна быть в формате `https://example.com`."
+      }
+    },
+
+    "company": {
+      "label": "Компания",
+      "placeholder": "Введите название компании",
+
+      "validation": {
+        "required": "Название компании обязательно для заполнения",
+        "tooLong": "Название компании слишком длинное"
+      }
+    }
+  },
+
   "CustomerDetailBottomSheet": {
     "dialogHeading": "Детали клиента",
     "editButtonLabel": "Редактировать"

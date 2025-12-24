@@ -4,6 +4,7 @@ import {
   ToolbarMobileBottom,
   ToolbarMobileHeading,
 } from "@/components/common/Toolbar";
+
 import { Suspense } from "react";
 import { PageGrid } from "@/components/common/PageGrid";
 import { ViewModeProvider } from "@/components/common/ViewMode";
@@ -22,6 +23,7 @@ interface CustomersPageProps {
     page: number;
     pageSize: number;
   }>;
+  NewCustomerFormContainer: React.ComponentType;
 }
 
 export async function CustomersPage({
@@ -29,6 +31,7 @@ export async function CustomersPage({
   pageSize,
   CustomerFiltersFormContainer,
   CustomersServerContainer,
+  NewCustomerFormContainer,
 }: CustomersPageProps) {
   return (
     <PageContainer>
@@ -45,7 +48,7 @@ export async function CustomersPage({
             <CustomerToolbarActionsMenuTrigger />
             <ViewModeToggleButtonGroup className="ml-auto" />
             <CustomerToolbarCreateNewMenuTrigger
-              newCustomerForm={<></>}
+              newCustomerForm={<NewCustomerFormContainer />}
               newCompanyForm={<></>}
             />
           </ToolbarDesktop>

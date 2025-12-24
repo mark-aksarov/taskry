@@ -1,3 +1,16 @@
+export type BaseCustomerDTO = {
+  id: number;
+  imageUrl?: string;
+  bio?: string;
+  fullName: string;
+  email: string;
+  phoneNumber?: string;
+  publicLink?: string;
+  companyId: number;
+};
+
+export interface CreateCustomerInputDTO extends Omit<BaseCustomerDTO, "id"> {}
+
 export type CustomerSummaryDTO = {
   id: number;
   fullName: string;
