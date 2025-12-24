@@ -3,11 +3,12 @@ import { TasksPage } from "./TasksPage";
 import { TasksPageEmpty } from "./TasksPageEmpty";
 import { arrayParam } from "@/lib/utils/arrayParam";
 import { TaskStatus } from "@/generated/prisma/enums";
-import { deleteTasks } from "@/lib/actions/task/deleteTasks";
 import { getTaskCount } from "@/lib/data/task/task.dal";
-import { updateTaskStatuses } from "@/lib/actions/task/updateTaskStatuses";
+import { deleteTasks } from "@/lib/actions/task/deleteTasks";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
+import { updateTaskStatuses } from "@/lib/actions/task/updateTaskStatuses";
 import { TasksServerContainer } from "@/components/tasks/TasksServerContainer";
+import { createTaskCategory } from "@/lib/actions/taskCategory/createTaskCategory";
 import { NewTaskFormServerContainer } from "@/components/tasks/NewTaskFormServerContainer";
 import { EditTaskFormClientContainer } from "@/components/tasks/EditTaskFormClientContainer";
 import { TaskFiltersFormServerContainer } from "@/components/tasks/TaskFiltersFormServerContainer";
@@ -56,6 +57,7 @@ export default async function AppTasksPage({
         TasksServerContainer={TasksServerContainer}
         deleteTasksAction={deleteTasks}
         updateTasksStatusesAction={updateTaskStatuses}
+        createTaskCategoryAction={createTaskCategory}
       />
     </EditTaskFormClientContainerProvider>
   );

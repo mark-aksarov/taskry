@@ -1106,6 +1106,11 @@
       "submitButtonLabel": "Create Task"
     },
 
+    "NewTaskCategoryModal": {
+      "title": "New task category",
+      "submitButtonLabel": "Create category"
+    },
+
     "EditTaskModal": {
       "title": "Edit Task",
       "submitButtonLabel": "Update Task"
@@ -1263,6 +1268,18 @@
         "server": {
           "invalidInput": "Invalid input. Please check your data and try again.",
           "internalServerError": "An internal server error occurred. Please try again later."
+        }
+      }
+    },
+
+    "TaskCategoryFormBase": {
+      "title": {
+        "label": "Name",
+        "placeholder": "Typing name",
+
+        "validation": {
+          "required": "Name is required",
+          "tooLong": "Name is too long"
         }
       }
     },

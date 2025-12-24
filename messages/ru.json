@@ -1106,6 +1106,11 @@
       "submitButtonLabel": "Создать задачу"
     },
 
+    "NewTaskCategoryModal": {
+      "title": "Новая категория задач",
+      "submitButtonLabel": "Создать категорию"
+    },
+
     "EditTaskModal": {
       "title": "Редактировать задачу",
       "submitButtonLabel": "Обновить задачу"
@@ -1263,6 +1268,18 @@
         "server": {
           "invalidInput": "Некорректные данные. Пожалуйста, проверьте введённую информацию и попробуйте снова.",
           "internalServerError": "Произошла внутренняя ошибка сервера. Пожалуйста, попробуйте позже."
+        }
+      }
+    },
+
+    "TaskCategoryFormBase": {
+      "title": {
+        "label": "Название",
+        "placeholder": "Введите название",
+
+        "validation": {
+          "required": "Требуется название",
+          "tooLong": "Название слишком длинное"
         }
       }
     },

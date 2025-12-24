@@ -26,6 +26,7 @@ import { TaskToolbarSortingMenuTrigger } from "@/components/tasks/TaskToolbarSor
 import { TaskToolbarActionsMenuTrigger } from "@/components/tasks/TaskToolbarActionsMenuTrigger";
 import { TaskToolbarFiltersModalTrigger } from "@/components/tasks/TaskToolbarFiltersModalTrigger";
 import { TaskToolbarCreateNewMenuTrigger } from "@/components/tasks/TaskToolbarCreateNewMenuTrigger";
+import { NewTaskCategoryForm } from "@/components/tasks/NewTaskCategoryForm";
 
 interface TasksPageProps {
   page: number;
@@ -44,6 +45,7 @@ interface TasksPageProps {
   }>;
   deleteTasksAction: ActionFn<ActionState, DeleteTasksPayload>;
   updateTasksStatusesAction: ActionFn<ActionState, UpdateTaskStatusesPayload>;
+  createTaskCategoryAction: ActionFn<ActionState, FormData>;
 }
 
 export function TasksPage({
@@ -56,6 +58,7 @@ export function TasksPage({
   TasksServerContainer,
   deleteTasksAction,
   updateTasksStatusesAction,
+  createTaskCategoryAction,
 }: TasksPageProps) {
   const t = useTranslations("app.TasksPage");
 
@@ -85,7 +88,9 @@ export function TasksPage({
                     <NewTaskFormContainer />
                   </Suspense>
                 }
-                newTaskCategoryForm={<></>}
+                newTaskCategoryForm={
+                  <NewTaskCategoryForm formAction={createTaskCategoryAction} />
+                }
               />
             </ToolbarDesktop>
 
@@ -113,7 +118,9 @@ export function TasksPage({
                     <NewTaskFormContainer />
                   </Suspense>
                 }
-                newTaskCategoryForm={<></>}
+                newTaskCategoryForm={
+                  <NewTaskCategoryForm formAction={createTaskCategoryAction} />
+                }
               />
             </ToolbarMobileBottom>
 

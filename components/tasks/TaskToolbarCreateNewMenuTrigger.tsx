@@ -11,6 +11,7 @@ import { useTranslations } from "next-intl";
 import { Key, useOverlayTrigger } from "react-aria";
 import { Blocks, CalendarCheck, Plus } from "lucide-react";
 import { Item, useOverlayTriggerState } from "react-stately";
+import { NewTaskCategoryModal } from "./NewTaskCategoryModal";
 import { NewTaskModal } from "@/components/tasks/NewTaskModal";
 import { ResponsiveMenuTrigger } from "@/components/common/ResponsiveMenuTrigger";
 
@@ -73,7 +74,11 @@ export function TaskToolbarCreateNewMenuTrigger({
         onOpenChange={setOpenTaskModal}
       />
 
-      {/* TaskCategoryModal */}
+      <NewTaskCategoryModal
+        newTaskCategoryForm={newTaskCategoryForm}
+        isOpen={openTaskCategoryModal}
+        onOpenChange={setOpenTaskCategoryModal}
+      />
     </>
   );
 }
