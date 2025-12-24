@@ -9,7 +9,7 @@ import { CustomerListItem } from "../CustomerListItem";
 import { CustomerGridItem } from "../CustomerGridItem";
 import { Pagination } from "@/components/common/Pagination";
 import { ViewModeLayout } from "@/components/common/ViewMode";
-import { deleteCustomers } from "@/lib/actions/company/deleteCustomers";
+import { deleteCustomers } from "@/lib/actions/customer/deleteCustomers";
 import {
   CustomerFilters,
   CustomerListItemDTO,

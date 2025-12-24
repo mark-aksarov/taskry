@@ -1,6 +1,6 @@
 import { UsersPage } from "./UsersPage";
-import { mocked } from "storybook/test";
 import UsersPageLoading from "./loading";
+import { fn, mocked } from "storybook/test";
 import { usePathname } from "next/navigation";
 import { UsersPageEmpty } from "./UsersPageEmpty";
 import { UserList } from "@/components/users/UserList";
@@ -32,6 +32,7 @@ export const Default: Story = {
   args: {
     page: 1,
     pageSize: 10,
+    createPositionAction: fn(),
     UserFiltersFormContainer: () => (
       <UserFiltersForm {...UserFiltersFormStory.args} />
     ),

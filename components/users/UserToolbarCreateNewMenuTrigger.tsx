@@ -11,6 +11,7 @@ import { useTranslations } from "next-intl";
 import { Key, useOverlayTrigger } from "react-aria";
 import { Item, useOverlayTriggerState } from "react-stately";
 import { BriefcaseBusiness, Plus, Users } from "lucide-react";
+import { NewPositionModal } from "./NewCompanyModal/NewPositionModal";
 import { ResponsiveMenuTrigger } from "@/components/common/ResponsiveMenuTrigger";
 
 interface UserToolbarCreateNewMenuTriggerProps {
@@ -26,14 +27,14 @@ export function UserToolbarCreateNewMenuTrigger({
 
   const state = useOverlayTriggerState({});
   const { triggerProps } = useOverlayTrigger({ type: "dialog" }, state);
-  const [openUserModal, setOpenUserModal] = useState(false);
-  const [openPositionModal, setOpenPositionModal] = useState(false);
+  const [isOpenUserModal, setIsOpenUserModal] = useState(false);
+  const [isOpenPositionModal, setIsOpenPositionModal] = useState(false);
 
   function handleAction(key: Key) {
     if (key === "user") {
-      setOpenUserModal(true);
+      setIsOpenUserModal(true);
     } else if (key === "position") {
-      setOpenPositionModal(true);
+      setIsOpenPositionModal(true);
     }
   }
 
@@ -67,7 +68,11 @@ export function UserToolbarCreateNewMenuTrigger({
         </Item>
       </ResponsiveMenuTrigger>
 
-      {/* render modals*/}
+      <NewPositionModal
+        newPositionForm={newPositionForm}
+        isOpen={isOpenPositionModal}
+        onOpenChange={setIsOpenPositionModal}
+      />
     </>
   );
 }

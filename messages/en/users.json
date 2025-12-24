@@ -38,6 +38,23 @@
     "noBirthdate": "No birthdate"
   },
 
+  "NewPositionModal": {
+    "title": "New Position",
+    "submitButtonLabel": "Create Position"
+  },
+
+  "CompanyFormBase": {
+    "title": {
+      "label": "Name",
+      "placeholder": "Typing name",
+
+      "validation": {
+        "required": "Name is required",
+        "tooLong": "Name is too long"
+      }
+    }
+  },
+
   "UserDetailCard": {
     "title": "User Information"
   },

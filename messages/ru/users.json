@@ -38,6 +38,23 @@
     "noBirthdate": "Дата рождения не указана"
   },
 
+  "NewPositionModal": {
+    "title": "Новая должность",
+    "submitButtonLabel": "Создать должность"
+  },
+
+  "PositionFormBase": {
+    "title": {
+      "label": "Название",
+      "placeholder": "Введите название",
+
+      "validation": {
+        "required": "Требуется название",
+        "tooLong": "Название слишком длинное"
+      }
+    }
+  },
+
   "UserDetailCard": {
     "title": "Детали пользователя"
   },

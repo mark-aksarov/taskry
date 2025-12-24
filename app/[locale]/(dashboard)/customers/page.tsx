@@ -5,7 +5,7 @@ import { CustomersPageEmpty } from "./CustomersPageEmpty";
 import { createCompany } from "@/lib/actions/company/createCompany";
 import { getCustomerCount } from "@/lib/data/customer/customer.dal";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
-import { deleteCustomers } from "@/lib/actions/company/deleteCustomers";
+import { deleteCustomers } from "@/lib/actions/customer/deleteCustomers";
 import { CustomersServerContainer } from "@/components/customer/CustomersServerContainer";
 import { NewCustomerFormServerContainer } from "@/components/customer/NewCustomerFormServerContainer";
 import { EditCustomerFormClientContainer } from "@/components/customer/EditCustomerFormClientContainer";

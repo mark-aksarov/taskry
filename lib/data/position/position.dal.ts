@@ -5,6 +5,7 @@ import prisma from "@/lib/prisma";
 import { positionSummarySelect } from "./position.select";
 import { mapPositionSummaryToDTO } from "./position.mapper";
 import { getSessionOrThrow } from "@/lib/data/utils/getSessionOrThrow";
+import { CreatePositionInputDTO } from "./position.dto";
 
 export const getPositionSummaries = cache(async () => {
   const {
@@ -18,3 +19,16 @@ export const getPositionSummaries = cache(async () => {
 
   return positions.map(mapPositionSummaryToDTO);
 });
+
+export const createPosition = async (position: CreatePositionInputDTO) => {
+  const {
+    user: { workspaceId },
+  } = await getSessionOrThrow();
+
+  return await prisma.position.create({
+    data: {
+      ...position,
+      workspaceId,
+    },
+  });
+};
