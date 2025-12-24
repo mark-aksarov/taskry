@@ -51,3 +51,10 @@ export type CustomerListItemDTO = {
     name: string;
   };
 };
+
+export interface CustomerFilters {
+  hasNoActiveProjects?: boolean;
+  hasActiveProjects?: boolean;
+  hasOverdueProjects?: boolean;
+  company: number[];
+}

@@ -9,22 +9,27 @@ import { CustomerListItem } from "../CustomerListItem";
 import { CustomerGridItem } from "../CustomerGridItem";
 import { Pagination } from "@/components/common/Pagination";
 import { ViewModeLayout } from "@/components/common/ViewMode";
-import { CustomerListItemDTO } from "@/lib/data/customer/customer.dto";
 import { deleteCustomers } from "@/lib/actions/company/deleteCustomers";
+import {
+  CustomerFilters,
+  CustomerListItemDTO,
+} from "@/lib/data/customer/customer.dto";
 
 interface CustomersServerContainerProps {
   page: number;
   pageSize: number;
   sort: string;
+  filters?: CustomerFilters;
 }
 
 export async function CustomersServerContainer({
   page,
   pageSize,
   sort,
+  filters,
 }: CustomersServerContainerProps) {
-  const customers = await getCustomerList({ page, pageSize, sort });
-  const count = await getCustomerCount();
+  const customers = await getCustomerList({ page, pageSize, sort, filters });
+  const count = await getCustomerCount(filters);
   const totalPages = Math.ceil(count / pageSize);
 
   const paginationProps = {

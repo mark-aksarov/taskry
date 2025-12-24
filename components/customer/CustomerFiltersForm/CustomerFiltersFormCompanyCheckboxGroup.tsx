@@ -1,15 +1,24 @@
 import { useTranslations } from "next-intl";
 import { Checkbox, CheckboxGroup } from "@/components/ui";
+import { CustomerFilters } from "@/lib/data/customer/customer.dto";
+
+interface CustomerFiltersFormCompanyCheckboxGroupProps {
+  filters: CustomerFilters;
+  companies: { id: number; name: string }[];
+}
 
 export function CustomerFiltersFormCompanyCheckboxGroup({
+  filters,
   companies,
-}: {
-  companies: { id: number; name: string }[];
-}) {
+}: CustomerFiltersFormCompanyCheckboxGroupProps) {
   const t = useTranslations("customers.CustomerFiltersForm.company");
 
   return (
-    <CheckboxGroup label={t("label")}>
+    <CheckboxGroup
+      name="company"
+      label={t("label")}
+      defaultValue={filters.company.map((id) => id.toString())}
+    >
       {companies.map((customer) => (
         <Checkbox
           key={customer.id}

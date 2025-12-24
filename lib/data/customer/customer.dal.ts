@@ -6,6 +6,7 @@ import {
   CustomerListItemDTO,
   UpdateCustomerInputDTO,
   CreateCustomerInputDTO,
+  CustomerFilters,
 } from "./customer.dto";
 
 import {
@@ -24,7 +25,7 @@ import {
 
 import { cache } from "react";
 import prisma from "@/lib/prisma";
-import { Prisma } from "@/generated/prisma/client";
+import { Prisma, ProjectStatus } from "@/generated/prisma/client";
 import { getSessionOrThrow } from "@/lib/data/utils/getSessionOrThrow";
 
 export const getCustomerSummaries = cache(
@@ -79,10 +80,12 @@ export const getCustomerList = cache(
     page,
     pageSize,
     sort,
+    filters,
   }: {
     page: number;
     pageSize: number;
     sort: string;
+    filters?: CustomerFilters;
   }): Promise<CustomerListItemDTO[]> => {
     const {
       user: { workspaceId },
@@ -99,7 +102,7 @@ export const getCustomerList = cache(
     };
 
     const customers = await prisma.customer.findMany({
-      where: { workspaceId },
+      where: buildCustomerWhereClause(workspaceId, filters),
       orderBy: [orderByMapping[sort] || { fullName: "asc" }],
       skip,
       take: pageSize,
@@ -110,13 +113,13 @@ export const getCustomerList = cache(
   },
 );
 
-export const getCustomerCount = cache(async () => {
+export const getCustomerCount = cache(async (filters?: CustomerFilters) => {
   const {
     user: { workspaceId },
   } = await getSessionOrThrow();
 
   return prisma.customer.count({
-    where: { workspaceId },
+    where: buildCustomerWhereClause(workspaceId, filters),
   });
 });
 
@@ -183,4 +186,33 @@ async function validateCustomerRelations(
 
     if (!company) throw new Error("Company access denied or not found");
   }
+}
+
+export function buildCustomerWhereClause(
+  workspaceId: number,
+  filters?: CustomerFilters,
+): Prisma.CustomerWhereInput {
+  if (!filters) return { workspaceId };
+
+  return {
+    workspaceId,
+    ...(filters.hasNoActiveProjects && {
+      projects: { none: { status: ProjectStatus.active } },
+    }),
+
+    ...(filters.hasActiveProjects && {
+      projects: { some: { status: ProjectStatus.active } },
+    }),
+
+    ...(filters.hasOverdueProjects && {
+      projects: {
+        some: {
+          status: { not: ProjectStatus.completed },
+          deadline: { lt: new Date() },
+        },
+      },
+    }),
+
+    ...(filters.company?.length && { companyId: { in: filters.company } }),
+  };
 }

@@ -41,6 +41,9 @@ export const Default = {
     page: 1,
     pageSize: 20,
     sort: "fullName",
+    filters: {
+      company: [],
+    },
     createCompanyAction: fn(),
     CustomerFiltersFormContainer: () => (
       <CustomerFiltersForm {...CustomerFiltersFormStory.args} />

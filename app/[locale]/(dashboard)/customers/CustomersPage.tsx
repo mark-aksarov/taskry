@@ -16,6 +16,7 @@ import { useTranslations } from "next-intl";
 import { PageGrid } from "@/components/common/PageGrid";
 import { ViewModeProvider } from "@/components/common/ViewMode";
 import { PageContainer } from "@/components/common/PageContainer";
+import { CustomerFilters } from "@/lib/data/customer/customer.dto";
 import { NewCompanyForm } from "@/components/customer/NewCompanyForm";
 import { ViewModeToggleButtonGroup } from "@/components/common/ViewMode";
 import { SelectionProvider } from "@/components/common/SelectionContext";
@@ -29,13 +30,17 @@ interface CustomersPageProps {
   page: number;
   pageSize: number;
   sort: string;
+  filters: CustomerFilters;
   createCompanyAction: ActionFn<ActionState, FormData>;
   deleteCustomersAction: ActionFn<ActionState, DeleteCustomersPayload>;
-  CustomerFiltersFormContainer: React.ComponentType;
+  CustomerFiltersFormContainer: React.ComponentType<{
+    filters: CustomerFilters;
+  }>;
   CustomersServerContainer: React.ComponentType<{
     page: number;
     pageSize: number;
     sort: string;
+    filters?: CustomerFilters;
   }>;
   NewCustomerFormContainer: React.ComponentType;
 }
@@ -44,6 +49,7 @@ export function CustomersPage({
   page,
   pageSize,
   sort,
+  filters,
   createCompanyAction,
   deleteCustomersAction,
   CustomerFiltersFormContainer,
@@ -62,7 +68,7 @@ export function CustomersPage({
               <CustomerToolbarFiltersModalTrigger
                 filtersForm={
                   <Suspense fallback={<CustomerFiltersFormSkeleton />}>
-                    <CustomerFiltersFormContainer />
+                    <CustomerFiltersFormContainer filters={filters} />
                   </Suspense>
                 }
               />
@@ -84,7 +90,7 @@ export function CustomersPage({
               <CustomerToolbarFiltersModalTrigger
                 filtersForm={
                   <Suspense fallback={<CustomerFiltersFormSkeleton />}>
-                    <CustomerFiltersFormContainer />
+                    <CustomerFiltersFormContainer filters={filters} />
                   </Suspense>
                 }
               />
@@ -106,6 +112,7 @@ export function CustomersPage({
               page={page}
               pageSize={pageSize}
               sort={sort}
+              filters={filters}
             />
           </SelectionProvider>
         </ViewModeProvider>

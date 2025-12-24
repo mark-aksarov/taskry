@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { CustomersPage } from "./CustomersPage";
+import { arrayParam } from "@/lib/utils/arrayParam";
 import { CustomersPageEmpty } from "./CustomersPageEmpty";
 import { createCompany } from "@/lib/actions/company/createCompany";
 import { getCustomerCount } from "@/lib/data/customer/customer.dal";
@@ -15,6 +16,19 @@ const searchParamsSchema = z.object({
   page: z.coerce.number().int().positive().catch(1),
   pageSize: z.coerce.number().int().min(1).max(100).catch(20),
   sort: z.enum(["fullName", "company"]).catch("fullName"),
+  hasNoActiveProjects: z
+    .preprocess((val) => val === "true", z.boolean())
+    .optional()
+    .catch(undefined),
+  hasActiveProjects: z
+    .preprocess((val) => val === "true", z.boolean())
+    .optional()
+    .catch(undefined),
+  hasOverdueProjects: z
+    .preprocess((val) => val === "true", z.boolean())
+    .optional()
+    .catch(undefined),
+  company: arrayParam(z.coerce.number()).catch([]),
 });
 
 export default async function AppCustomersPage({
@@ -27,7 +41,8 @@ export default async function AppCustomersPage({
 
   // Validation
   const rawParams = await searchParams;
-  const { page, pageSize, sort } = searchParamsSchema.parse(rawParams);
+  const { page, pageSize, sort, ...filters } =
+    searchParamsSchema.parse(rawParams);
 
   // Get count
   const count = await getCustomerCount();
@@ -42,6 +57,7 @@ export default async function AppCustomersPage({
         page={page}
         pageSize={pageSize}
         sort={sort}
+        filters={filters}
         createCompanyAction={createCompany}
         CustomerFiltersFormContainer={CustomerFiltersFormServerContainer}
         CustomersServerContainer={CustomersServerContainer}
