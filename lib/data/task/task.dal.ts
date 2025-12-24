@@ -152,12 +152,32 @@ export const updateTask = async (input: UpdateTaskInputDTO) => {
   const {
     user: { workspaceId },
   } = await getSessionOrThrow();
-
   await validateTaskRelations(workspaceId, input);
 
+  let dataToUpdate = { ...input };
+
+  // 1. If status is being changed, verify the project allows it
+  if (input.status) {
+    const taskWithProject = await prisma.task.findUnique({
+      where: { id: input.id, workspaceId },
+      select: { project: { select: { status: true } } },
+    });
+
+    const allowedProjectStatuses = getAllowedProjectStatuses(input.status);
+    const currentProjectStatus = taskWithProject?.project
+      .status as ProjectStatus;
+
+    // 2. If current project status is NOT in the allowed list,
+    // remove 'status' from the update payload
+    if (!allowedProjectStatuses.includes(currentProjectStatus)) {
+      delete dataToUpdate.status;
+    }
+  }
+
+  // 3. Perform the update with remaining fields
   return prisma.task.update({
     where: { id: input.id, workspaceId },
-    data: input,
+    data: dataToUpdate,
   });
 };
 
@@ -169,10 +189,7 @@ export const updateTaskStatuses = async (
     user: { workspaceId },
   } = await getSessionOrThrow();
 
-  // Determine which project statuses allow the transition to nextStatus
-  const allowedProjectStatuses = (
-    Object.keys(ALLOWED_TASK_STATUSES_BY_PROJECT) as ProjectStatus[]
-  ).filter((ps) => ALLOWED_TASK_STATUSES_BY_PROJECT[ps].includes(nextStatus));
+  const allowedProjectStatuses = getAllowedProjectStatuses(nextStatus);
 
   const { count } = await prisma.task.updateMany({
     where: {
@@ -210,6 +227,12 @@ export const deleteTasks = async (ids: number[]) => {
 /**
  * HELPERS
  */
+
+const getAllowedProjectStatuses = (nextStatus: TaskStatus): ProjectStatus[] => {
+  return (
+    Object.keys(ALLOWED_TASK_STATUSES_BY_PROJECT) as ProjectStatus[]
+  ).filter((ps) => ALLOWED_TASK_STATUSES_BY_PROJECT[ps].includes(nextStatus));
+};
 
 async function validateTaskRelations(
   workspaceId: number,

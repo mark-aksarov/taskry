@@ -12,12 +12,12 @@ import { updateTask as updateTaskQuery } from "@/lib/data/task/task.dal";
 
 const schema = z.object({
   id: z.coerce.number().int().positive(),
-  title: z.string().min(1).max(255),
+  title: z.string().min(1).max(255).optional(),
   description: z.string().max(5000).optional(),
-  deadline: z.coerce.date(),
-  status: z.enum(TaskStatus),
-  categoryId: z.coerce.number(),
-  projectId: z.coerce.number(),
+  deadline: z.coerce.date().optional(),
+  status: z.enum(TaskStatus).optional(),
+  categoryId: z.coerce.number().optional(),
+  projectId: z.coerce.number().optional(),
   assigneeId: z.coerce.string().optional(),
 });
 
