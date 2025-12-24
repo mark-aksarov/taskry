@@ -1,7 +1,8 @@
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { fn } from "storybook/test";
 import { CustomerGrid } from "./CustomerGrid";
-import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { CustomerGridItem } from "../CustomerGridItem";
+import { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withCustomerDetail } from "../CustomerDetailClientContainer/decorators";
 
 const meta = {
@@ -26,6 +27,7 @@ export const Default = {
           phoneNumber="+1-202-555-0101"
           publicLink="https://company.com/customers/sophia"
           company={{ id: 1, name: "TechCorp" }}
+          deleteAction={fn()}
         />
         <CustomerGridItem
           id={2}
@@ -35,6 +37,7 @@ export const Default = {
           phoneNumber="+1-202-555-0123"
           publicLink="https://company.com/customers/liam"
           company={{ id: 1, name: "TechCorp" }}
+          deleteAction={fn()}
         />
         <CustomerGridItem
           id={3}
@@ -44,6 +47,7 @@ export const Default = {
           phoneNumber={undefined}
           publicLink={undefined}
           company={{ id: 2, name: "DesignStudio" }}
+          deleteAction={fn()}
         />
         <CustomerGridItem
           id={4}
@@ -53,6 +57,7 @@ export const Default = {
           phoneNumber="+44-7700-900101"
           publicLink="https://company.com/customers/ethan"
           company={{ id: 2, name: "DesignStudio" }}
+          deleteAction={fn()}
         />
         <CustomerGridItem
           id={5}
@@ -62,6 +67,7 @@ export const Default = {
           phoneNumber="+1-202-555-0145"
           publicLink="https://company.com/customers/mia"
           company={{ id: 3, name: "EcomWorld" }}
+          deleteAction={fn()}
         />
       </>
     ),

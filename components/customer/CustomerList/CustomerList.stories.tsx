@@ -1,3 +1,4 @@
+import { fn } from "storybook/test";
 import { CustomerList } from "./CustomerList";
 import { Meta, StoryObj } from "@storybook/react";
 import { CustomerListItem } from "../CustomerListItem";
@@ -26,6 +27,7 @@ export const Default = {
           phoneNumber="+1-202-555-0147"
           publicLink="https://company.com/customers/alice"
           company={{ id: 1, name: "TechCorp" }}
+          deleteAction={fn()}
         />
         <CustomerListItem
           id={2}
@@ -35,6 +37,7 @@ export const Default = {
           phoneNumber="+1-202-555-0199"
           publicLink="https://company.com/customers/bob"
           company={{ id: 1, name: "TechCorp" }}
+          deleteAction={fn()}
         />
         <CustomerListItem
           id={3}
@@ -44,6 +47,7 @@ export const Default = {
           phoneNumber={undefined}
           publicLink={undefined}
           company={{ id: 2, name: "DesignStudio" }}
+          deleteAction={fn()}
         />
         <CustomerListItem
           id={4}
@@ -53,6 +57,7 @@ export const Default = {
           phoneNumber="+44-7700-900123"
           publicLink="https://company.com/customers/david"
           company={{ id: 2, name: "DesignStudio" }}
+          deleteAction={fn()}
         />
         <CustomerListItem
           id={5}
@@ -62,6 +67,7 @@ export const Default = {
           phoneNumber="+1-202-555-0173"
           publicLink="https://company.com/customers/emma"
           company={{ id: 3, name: "EcomWorld" }}
+          deleteAction={fn()}
         />
       </>
     ),

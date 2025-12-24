@@ -127,6 +127,13 @@
     "delete": "Delete"
   },
 
+  "DeleteCustomerModal": {
+    "heading": "Delete Project",
+    "text": "Are you sure you want to delete customer <strong>«{name}»</strong>? All contents will be permanently removed.",
+    "deleteButton": "Delete",
+    "cancelButton": "Cancel"
+  },
+
   "CustomerGridItem": {
     "noPhoneNumber": "No phone number",
     "noPublicLink": "No public link"

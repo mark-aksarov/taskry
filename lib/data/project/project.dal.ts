@@ -140,7 +140,7 @@ export const createProject = async (input: CreateProjectInputDTO) => {
 
   await validateRelations(workspaceId, input.categoryId, input.customerId);
 
-  prisma.project.create({
+  await prisma.project.create({
     data: {
       ...input,
       creatorId,
@@ -156,7 +156,7 @@ export const updateProject = async (input: UpdateProjectInputDTO) => {
 
   await validateRelations(workspaceId, input.categoryId, input.customerId);
 
-  return prisma.$transaction(async (tx) => {
+  return await prisma.$transaction(async (tx) => {
     await tx.project.update({
       where: {
         id: input.id,
@@ -179,7 +179,7 @@ export const updateProjectStatuses = async (
     user: { workspaceId },
   } = await getSessionOrThrow();
 
-  return prisma.$transaction(async (tx) => {
+  return await prisma.$transaction(async (tx) => {
     await tx.project.updateMany({
       where: {
         id: { in: ids },

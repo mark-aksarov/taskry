@@ -1,6 +1,12 @@
 "use client";
 
 import {
+  ActionFn,
+  ActionState,
+  DeleteCustomersPayload,
+} from "@/lib/actions/types";
+
+import {
   ListItem,
   ListItemInfo,
   ListItemText,
@@ -32,6 +38,7 @@ export type CustomerListItemProps = {
     id: number;
     name: string;
   };
+  deleteAction: ActionFn<ActionState, DeleteCustomersPayload>;
 };
 
 export function CustomerListItem({
@@ -42,6 +49,7 @@ export function CustomerListItem({
   publicLink,
   imageUrl,
   company,
+  deleteAction,
 }: CustomerListItemProps) {
   const t = useTranslations("customers.CustomerListItem");
 
@@ -132,7 +140,11 @@ export function CustomerListItem({
         <ListItemText>{t("company")}</ListItemText>
       </ListItemInfo>
 
-      <CustomerItemActionMenuTrigger customerId={id} />
+      <CustomerItemActionMenuTrigger
+        customerId={id}
+        customerFullName={fullName}
+        deleteAction={deleteAction}
+      />
     </ListItem>
   );
 }

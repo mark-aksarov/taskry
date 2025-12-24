@@ -127,6 +127,13 @@
     "delete": "Удалить"
   },
 
+  "DeleteCustomerModal": {
+    "heading": "Удалить клиента",
+    "text": "Вы уверены, что хотите удалить клиента <strong>«{name}»</strong>? Все содержимое будет безвозвратно удалено.",
+    "deleteButton": "Удалить",
+    "cancelButton": "Отменить"
+  },
+
   "CustomerGridItem": {
     "noPhoneNumber": "Нет номера телефона",
     "noPublicLink": "Нет публичной ссылки"

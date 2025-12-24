@@ -10,6 +10,7 @@ import { CustomerGridItem } from "../CustomerGridItem";
 import { Pagination } from "@/components/common/Pagination";
 import { ViewModeLayout } from "@/components/common/ViewMode";
 import { CustomerListItemDTO } from "@/lib/data/customer/customer.dto";
+import { deleteCustomers } from "@/lib/actions/company/deleteCustomers";
 
 interface CustomersServerContainerProps {
   page: number;
@@ -39,6 +40,7 @@ export async function CustomersServerContainer({
     phoneNumber: customer.phoneNumber,
     publicLink: customer.publicLink,
     company: customer.company,
+    deleteAction: deleteCustomers,
   });
 
   return (

@@ -1,6 +1,12 @@
 "use client";
 
 import {
+  ActionFn,
+  ActionState,
+  DeleteCustomersPayload,
+} from "@/lib/actions/types";
+
+import {
   GridItemRow,
   GridItemInfo,
   GridItemText,
@@ -24,8 +30,8 @@ import { UnknownUser } from "@/components/common/UnknownUser";
 import { CustomerGridItemLayout } from "./CustomerGridItemLayout";
 import { ImageContainer } from "@/components/common/ImageContainer";
 import { CustomerDetailModal } from "../CustomerDetailModal/CustomerDetailModal";
-import { CustomerDetailBottomSheet } from "../CustomerDetailBottomSheet/CustomerDetailBottomSheet";
 import { CustomerItemActionMenuTrigger } from "../CustomerItemActionMenuTrigger";
+import { CustomerDetailBottomSheet } from "../CustomerDetailBottomSheet/CustomerDetailBottomSheet";
 
 interface CustomerGridItemProps {
   id: number;
@@ -38,6 +44,7 @@ interface CustomerGridItemProps {
     id: number;
     name: string;
   };
+  deleteAction: ActionFn<ActionState, DeleteCustomersPayload>;
 }
 
 export function CustomerGridItem({
@@ -48,6 +55,7 @@ export function CustomerGridItem({
   publicLink,
   imageUrl,
   company,
+  deleteAction,
 }: CustomerGridItemProps) {
   const t = useTranslations("customers.CustomerGridItem");
 
@@ -66,7 +74,12 @@ export function CustomerGridItem({
       topRowSlot={
         <GridItemRow>
           <Checkbox aria-label={`${fullName} checkbox`} />
-          <CustomerItemActionMenuTrigger className="-mr-2" customerId={id} />
+          <CustomerItemActionMenuTrigger
+            deleteAction={deleteAction}
+            className="-mr-2"
+            customerId={id}
+            customerFullName={fullName}
+          />
         </GridItemRow>
       }
       imageSlot={
