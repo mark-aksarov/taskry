@@ -98,6 +98,20 @@
     "delete": "Удалить"
   },
 
+  "DeleteUserModal": {
+    "heading": "Удалить пользователя",
+    "text": "Вы уверены, что хотите удалить пользователя <strong>«{name}»</strong>? Все содержимое будет безвозвратно удалено.",
+    "deleteButton": "Удалить",
+    "cancelButton": "Отменить"
+  },
+
+  "BulkDeleteUserModal": {
+    "heading": "Удалить пользователей",
+    "text": "Вы уверены, что хотите удалить <strong>{count} выбранных пользователей </strong>? Все содержимое будет безвозвратно удалено.",
+    "deleteButton": "Удалить",
+    "cancelButton": "Отменить"
+  },
+
   "UserGridItem": {
     "unknownPosition": "Неизвестная должность",
     "noPhoneNumber": "Номер телефона не указан",

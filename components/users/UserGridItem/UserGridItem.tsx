@@ -25,6 +25,7 @@ import { UnknownUser } from "@/components/common/UnknownUser";
 import { UserDetailBottomSheet } from "../UserDetailBottomSheet";
 import { ImageContainer } from "@/components/common/ImageContainer";
 import { UserItemActionMenuTrigger } from "../UserItemActionMenuTrigger";
+import { ActionFn, ActionState, DeleteUsersPayload } from "@/lib/actions/types";
 
 export interface UserGridItemProps {
   id: string;
@@ -36,6 +37,7 @@ export interface UserGridItemProps {
   phoneNumber?: string;
   publicLink?: string;
   email: string;
+  deleteAction: ActionFn<ActionState, DeleteUsersPayload>;
 }
 
 export function UserGridItem({
@@ -46,6 +48,7 @@ export function UserGridItem({
   phoneNumber,
   publicLink,
   email,
+  deleteAction,
 }: UserGridItemProps) {
   const t = useTranslations("users.UserGridItem");
 
@@ -62,7 +65,14 @@ export function UserGridItem({
   return (
     <UserGridItemLayout
       checkboxSlot={<Checkbox aria-label={`${fullName} checkbox`} />}
-      actionMenuSlot={<UserItemActionMenuTrigger className="-mr-2" />}
+      actionMenuSlot={
+        <UserItemActionMenuTrigger
+          userId={id}
+          userFullName={fullName}
+          deleteAction={deleteAction}
+          className="-mr-2"
+        />
+      }
       imageSlot={
         <>
           <ItemBaseDetailModalTrigger modal={<UserDetailModal userId={id} />}>

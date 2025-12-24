@@ -2,6 +2,7 @@ import { z } from "zod";
 import { UsersPage } from "./UsersPage";
 import { UsersPageEmpty } from "./UsersPageEmpty";
 import { getUserCount } from "@/lib/data/user/user.dal";
+import { deleteUsers } from "@/lib/actions/user/deleteUsers";
 import { createPosition } from "@/lib/actions/position/createPosition";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { UsersServerContainer } from "@/components/users/UsersServerContainer";
@@ -36,6 +37,7 @@ export default async function AppUsersPage({
       createPositionAction={createPosition}
       UserFiltersFormContainer={UserFiltersFormServerContainer}
       UsersServerContainer={UsersServerContainer}
+      deleteUsersAction={deleteUsers}
     />
   );
 }

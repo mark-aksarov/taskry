@@ -1,7 +1,8 @@
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { fn } from "storybook/test";
 import { UserGrid } from "./UserGrid";
-import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { UserGridItem } from "../UserGridItem";
+import { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withUserDetail } from "../UserDetailClientContainer/decorators";
 
 const meta = {
@@ -26,6 +27,7 @@ export const Default = {
           phoneNumber="+380990001001"
           publicLink="https://example.com/liam"
           position={{ name: "Developer" }}
+          deleteAction={fn()}
         />
         <UserGridItem
           id="user2"
@@ -35,6 +37,7 @@ export const Default = {
           phoneNumber="+380990001002"
           publicLink="https://example.com/emma"
           position={{ name: "Designer" }}
+          deleteAction={fn()}
         />
         <UserGridItem
           id="user3"
@@ -44,6 +47,7 @@ export const Default = {
           phoneNumber="+380990001003"
           publicLink="https://example.com/noah"
           position={{ name: "Product Manager" }}
+          deleteAction={fn()}
         />
         <UserGridItem
           id="user4"
@@ -53,6 +57,7 @@ export const Default = {
           phoneNumber="+380990001004"
           publicLink="https://example.com/isabella"
           position={{ name: "Product Manager" }}
+          deleteAction={fn()}
         />
         <UserGridItem
           id="user5"
@@ -62,6 +67,7 @@ export const Default = {
           phoneNumber="+380990001005"
           publicLink="https://example.com/ethan"
           position={{ name: "Developer" }}
+          deleteAction={fn()}
         />
         <UserGridItem
           id="user6"
@@ -71,6 +77,7 @@ export const Default = {
           phoneNumber="+380990001006"
           publicLink="https://example.com/mia"
           position={{ name: "Designer" }}
+          deleteAction={fn()}
         />
         <UserGridItem
           id="user7"
@@ -80,6 +87,7 @@ export const Default = {
           phoneNumber="+380990001007"
           publicLink="https://example.com/alexander"
           position={{ name: "Designer" }}
+          deleteAction={fn()}
         />
         <UserGridItem
           id="user8"
@@ -89,6 +97,7 @@ export const Default = {
           phoneNumber="+380990001008"
           publicLink="https://example.com/sophia"
           position={{ name: "Developer" }}
+          deleteAction={fn()}
         />
         <UserGridItem
           id="user9"
@@ -98,6 +107,7 @@ export const Default = {
           phoneNumber="+380990001009"
           publicLink="https://example.com/james"
           position={{ name: "Developer" }}
+          deleteAction={fn()}
         />
         <UserGridItem
           id="user10"
@@ -107,6 +117,7 @@ export const Default = {
           phoneNumber="+380990001010"
           publicLink="https://example.com/olivia"
           position={{ name: "Developer" }}
+          deleteAction={fn()}
         />
       </>
     ),

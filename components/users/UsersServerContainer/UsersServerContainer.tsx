@@ -4,6 +4,7 @@ import { UserListItem } from "../UserListItem";
 import { UserGridItem } from "../UserGridItem";
 import { UserListItemDTO } from "@/lib/data/user/user.dto";
 import { Pagination } from "@/components/common/Pagination";
+import { deleteUsers } from "@/lib/actions/user/deleteUsers";
 import { ViewModeLayout } from "@/components/common/ViewMode";
 import { getUserCount, getUserList } from "@/lib/data/user/user.dal";
 
@@ -35,6 +36,7 @@ export async function UsersServerContainer({
     phoneNumber: user.phoneNumber,
     publicLink: user.publicLink,
     position: user.position,
+    deleteAction: deleteUsers,
   });
 
   return (

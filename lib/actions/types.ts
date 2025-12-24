@@ -12,6 +12,8 @@ export type ActionState = {
   message: string | null;
 };
 
+export type DeleteUsersPayload = string[];
+
 export type DeleteCustomersPayload = number[];
 
 export type DeleteProjectsPayload = number[];

@@ -72,3 +72,17 @@ export const getUserCount = cache(async () => {
     where: { workspaceId },
   });
 });
+
+export const deleteUsers = async (ids: string[]) => {
+  const {
+    user: { workspaceId },
+  } = await getSessionOrThrow();
+
+  const { count } = await prisma.user.deleteMany({
+    where: { workspaceId, id: { in: ids } },
+  });
+
+  if (count === 0) throw new Error("No users deleted.");
+
+  return count;
+};

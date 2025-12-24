@@ -133,7 +133,7 @@
   },
 
   "DeleteCustomerModal": {
-    "heading": "Delete Project",
+    "heading": "Delete customer",
     "text": "Are you sure you want to delete customer <strong>«{name}»</strong>? All contents will be permanently removed.",
     "deleteButton": "Delete",
     "cancelButton": "Cancel"

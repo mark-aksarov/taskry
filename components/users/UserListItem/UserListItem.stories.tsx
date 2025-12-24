@@ -1,3 +1,4 @@
+import { fn } from "storybook/internal/test";
 import { UserListItem } from "./UserListItem";
 import { Meta, StoryObj } from "@storybook/react";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
@@ -24,6 +25,7 @@ export const Default = {
     position: {
       name: "Developer",
     },
+    deleteAction: fn(),
   },
 } satisfies Story;
 

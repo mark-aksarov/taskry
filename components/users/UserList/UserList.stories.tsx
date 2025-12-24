@@ -1,7 +1,8 @@
-import { Meta, StoryObj } from "@storybook/react";
+import { fn } from "storybook/test";
 import { UserList } from "./UserList";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { UserListItem } from "../UserListItem";
+import { Meta, StoryObj } from "@storybook/react";
+import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withUserDetail } from "../UserDetailClientContainer/decorators";
 
 const meta: Meta<typeof UserList> = {
@@ -26,6 +27,7 @@ export const Default = {
           phoneNumber="+380990000001"
           publicLink="https://example.com/user1"
           position={{ name: "Developer" }}
+          deleteAction={fn()}
         />
         <UserListItem
           id="user2"
@@ -35,6 +37,7 @@ export const Default = {
           phoneNumber="+380990000002"
           publicLink="https://example.com/user2"
           position={{ name: "Designer" }}
+          deleteAction={fn()}
         />
         <UserListItem
           id="user3"
@@ -44,6 +47,7 @@ export const Default = {
           phoneNumber="+380990000003"
           publicLink="https://example.com/user3"
           position={{ name: "Product Manager" }}
+          deleteAction={fn()}
         />
         <UserListItem
           id="user4"
@@ -53,6 +57,7 @@ export const Default = {
           phoneNumber="+380990000004"
           publicLink="https://example.com/user4"
           position={{ name: "Product Manager" }}
+          deleteAction={fn()}
         />
         <UserListItem
           id="user5"
@@ -62,6 +67,7 @@ export const Default = {
           phoneNumber="+380990000005"
           publicLink="https://example.com/user5"
           position={{ name: "Product Manager" }}
+          deleteAction={fn()}
         />
         <UserListItem
           id="user6"
@@ -71,6 +77,7 @@ export const Default = {
           phoneNumber="+380990000006"
           publicLink="https://example.com/user6"
           position={{ name: "Designer" }}
+          deleteAction={fn()}
         />
         <UserListItem
           id="user7"
@@ -80,6 +87,7 @@ export const Default = {
           phoneNumber="+380990000007"
           publicLink="https://example.com/user7"
           position={{ name: "Designer" }}
+          deleteAction={fn()}
         />
         <UserListItem
           id="user8"
@@ -89,6 +97,7 @@ export const Default = {
           phoneNumber="+380990000008"
           publicLink="https://example.com/user8"
           position={{ name: "Developer" }}
+          deleteAction={fn()}
         />
         <UserListItem
           id="user9"
@@ -98,6 +107,7 @@ export const Default = {
           phoneNumber="+380990000009"
           publicLink="https://example.com/user9"
           position={{ name: "Developer" }}
+          deleteAction={fn()}
         />
         <UserListItem
           id="user10"
@@ -107,6 +117,7 @@ export const Default = {
           phoneNumber="+380990000010"
           publicLink="https://example.com/user10"
           position={{ name: "Developer" }}
+          deleteAction={fn()}
         />
       </>
     ),

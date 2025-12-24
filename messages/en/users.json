@@ -98,6 +98,20 @@
     "delete": "Delete"
   },
 
+  "DeleteUserModal": {
+    "heading": "Delete user",
+    "text": "Are you sure you want to delete user <strong>«{name}»</strong>? All contents will be permanently removed.",
+    "deleteButton": "Delete",
+    "cancelButton": "Cancel"
+  },
+
+  "BulkDeleteUserModal": {
+    "heading": "Delete users",
+    "text": "Are you sure you want to delete <strong>{count} users</strong>? All contents will be permanently removed.",
+    "deleteButton": "Delete",
+    "cancelButton": "Cancel"
+  },
+
   "UserGridItem": {
     "unknownPosition": "Unknown position",
     "noPhoneNumber": "No phone number",

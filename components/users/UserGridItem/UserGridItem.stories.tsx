@@ -1,3 +1,4 @@
+import { fn } from "storybook/test";
 import { UserGridItem } from "./UserGridItem";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
@@ -32,6 +33,7 @@ export const Default = {
     position: {
       name: "Developer",
     },
+    deleteAction: fn(),
   },
 } satisfies Story;
 

@@ -8,7 +8,7 @@ import {
 import { Suspense } from "react";
 import { useTranslations } from "next-intl";
 import { PageGrid } from "@/components/common/PageGrid";
-import { ActionFn, ActionState } from "@/lib/actions/types";
+import { ActionFn, ActionState, DeleteUsersPayload } from "@/lib/actions/types";
 import { ViewModeProvider } from "@/components/common/ViewMode";
 import { PageContainer } from "@/components/common/PageContainer";
 import { NewPositionForm } from "@/components/users/NewPositionForm";
@@ -22,6 +22,7 @@ interface UsersPageProps {
   page: number;
   pageSize: number;
   createPositionAction: ActionFn<ActionState, FormData>;
+  deleteUsersAction: ActionFn<ActionState, DeleteUsersPayload>;
   UserFiltersFormContainer: React.ComponentType;
   UsersServerContainer: React.ComponentType<{
     page: number;
@@ -33,6 +34,7 @@ export function UsersPage({
   page,
   pageSize,
   createPositionAction,
+  deleteUsersAction,
   UserFiltersFormContainer,
   UsersServerContainer,
 }: UsersPageProps) {

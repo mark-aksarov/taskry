@@ -13,13 +13,14 @@ import {
 } from "@/components/common/ItemBase";
 
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 import { Checkbox, Link } from "@/components/ui";
 import { UserDetailModal } from "../UserDetailModal";
 import { UnknownUser } from "@/components/common/UnknownUser";
 import { UserDetailBottomSheet } from "../UserDetailBottomSheet";
 import { ImageContainer } from "@/components/common/ImageContainer";
 import { UserItemActionMenuTrigger } from "../UserItemActionMenuTrigger";
-import { useTranslations } from "next-intl";
+import { ActionFn, ActionState, DeleteUsersPayload } from "@/lib/actions/types";
 
 export interface UserListItemProps {
   id: string;
@@ -32,6 +33,7 @@ export interface UserListItemProps {
     name: string;
   };
   showCheckbox?: boolean;
+  deleteAction: ActionFn<ActionState, DeleteUsersPayload>;
 }
 
 export function UserListItem({
@@ -43,6 +45,7 @@ export function UserListItem({
   publicLink,
   position,
   showCheckbox,
+  deleteAction,
 }: UserListItemProps) {
   const t = useTranslations("users.UserListItem");
 
@@ -134,7 +137,11 @@ export function UserListItem({
         <ListItemText>{t("position")}</ListItemText>
       </ListItemInfo>
 
-      <UserItemActionMenuTrigger />
+      <UserItemActionMenuTrigger
+        userId={id}
+        userFullName={fullName}
+        deleteAction={deleteAction}
+      />
     </ListItem>
   );
 }
