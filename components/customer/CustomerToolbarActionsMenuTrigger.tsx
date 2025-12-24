@@ -1,5 +1,11 @@
 "use client";
 
+import {
+  ActionFn,
+  ActionState,
+  DeleteCustomersPayload,
+} from "@/lib/actions/types";
+
 import { useState } from "react";
 import { Trash } from "lucide-react";
 import { Item, Key } from "react-stately";
@@ -7,11 +13,6 @@ import { useTranslations } from "next-intl";
 import { ToolbarActionsMenuTrigger } from "../common/Toolbar";
 import { useCustomerSelection } from "@/lib/hooks/useCustomerSelection";
 import { BulkDeleteEntityModal } from "../common/BulkDeleteEntityModal";
-import {
-  ActionFn,
-  ActionState,
-  DeleteCustomersPayload,
-} from "@/lib/actions/types";
 
 interface CustomerToolbarActionsMenuTriggerProps {
   deleteAction: ActionFn<ActionState, DeleteCustomersPayload>;

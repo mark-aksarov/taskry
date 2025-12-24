@@ -26,6 +26,10 @@ import { UserDetailBottomSheet } from "../UserDetailBottomSheet";
 import { ImageContainer } from "@/components/common/ImageContainer";
 import { UserItemActionMenuTrigger } from "../UserItemActionMenuTrigger";
 import { ActionFn, ActionState, DeleteUsersPayload } from "@/lib/actions/types";
+import {
+  useSyncSelectionUserItem,
+  useUserSelection,
+} from "@/lib/hooks/useUserSelection";
 
 export interface UserGridItemProps {
   id: string;
@@ -52,6 +56,9 @@ export function UserGridItem({
 }: UserGridItemProps) {
   const t = useTranslations("users.UserGridItem");
 
+  const { isSelected, toggleItem } = useUserSelection();
+  useSyncSelectionUserItem(id, fullName);
+
   const contactLinkClasses = "max-w-full overflow-hidden";
 
   const userImg = imageUrl ? (
@@ -64,7 +71,13 @@ export function UserGridItem({
 
   return (
     <UserGridItemLayout
-      checkboxSlot={<Checkbox aria-label={`${fullName} checkbox`} />}
+      checkboxSlot={
+        <Checkbox
+          aria-label={`${fullName} checkbox`}
+          isSelected={isSelected(id)}
+          onChange={() => toggleItem(id)}
+        />
+      }
       actionMenuSlot={
         <UserItemActionMenuTrigger
           userId={id}

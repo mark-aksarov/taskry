@@ -32,6 +32,7 @@ export const Default: Story = {
   args: {
     page: 1,
     pageSize: 10,
+    deleteUsersAction: fn(),
     createPositionAction: fn(),
     UserFiltersFormContainer: () => (
       <UserFiltersForm {...UserFiltersFormStory.args} />

@@ -1,6 +1,11 @@
 "use client";
 
 import {
+  useUserSelection,
+  useSyncSelectionUserItem,
+} from "@/lib/hooks/useUserSelection";
+
+import {
   ListItem,
   ListItemInfo,
   ListItemText,
@@ -49,6 +54,9 @@ export function UserListItem({
 }: UserListItemProps) {
   const t = useTranslations("users.UserListItem");
 
+  const { isSelected, toggleItem } = useUserSelection();
+  useSyncSelectionUserItem(id, fullName);
+
   const userImg = imageUrl ? (
     <ImageContainer className="h-9 w-9">
       <Image fill src={imageUrl} alt={fullName} />
@@ -59,7 +67,13 @@ export function UserListItem({
 
   return (
     <ListItem>
-      {showCheckbox && <Checkbox aria-label={t("checkboxAriaLabel")} />}
+      {showCheckbox && (
+        <Checkbox
+          aria-label={t("checkboxAriaLabel")}
+          isSelected={isSelected(id)}
+          onChange={() => toggleItem(id)}
+        />
+      )}
 
       <>
         <ItemBaseDetailModalTrigger

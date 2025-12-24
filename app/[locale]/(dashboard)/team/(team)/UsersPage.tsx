@@ -8,12 +8,13 @@ import {
 import { Suspense } from "react";
 import { useTranslations } from "next-intl";
 import { PageGrid } from "@/components/common/PageGrid";
-import { ActionFn, ActionState, DeleteUsersPayload } from "@/lib/actions/types";
 import { ViewModeProvider } from "@/components/common/ViewMode";
 import { PageContainer } from "@/components/common/PageContainer";
 import { NewPositionForm } from "@/components/users/NewPositionForm";
 import { ViewModeToggleButtonGroup } from "@/components/common/ViewMode";
+import { SelectionProvider } from "@/components/common/SelectionContext";
 import { UserFiltersFormSkeleton } from "@/components/users/UserFiltersForm";
+import { ActionFn, ActionState, DeleteUsersPayload } from "@/lib/actions/types";
 import { UserToolbarActionsMenuTrigger } from "@/components/users/UserToolbarActionsMenuTrigger";
 import { UserToolbarFiltersModalTrigger } from "@/components/users/UserToolbarFiltersModalTrigger";
 import { UserToolbarCreateNewMenuTrigger } from "@/components/users/UserToolbarCreateNewMenuTrigger";
@@ -44,46 +45,48 @@ export function UsersPage({
     <PageContainer>
       <PageGrid>
         <ViewModeProvider>
-          <ToolbarDesktop>
-            <UserToolbarFiltersModalTrigger
-              filtersForm={
-                <Suspense fallback={<UserFiltersFormSkeleton />}>
-                  <UserFiltersFormContainer />
-                </Suspense>
-              }
-            />
-            <UserToolbarActionsMenuTrigger />
-            <ViewModeToggleButtonGroup className="ml-auto" />
-            <UserToolbarCreateNewMenuTrigger
-              newUserForm={<></>}
-              newPositionForm={
-                <NewPositionForm formAction={createPositionAction} />
-              }
-            />
-          </ToolbarDesktop>
+          <SelectionProvider>
+            <ToolbarDesktop>
+              <UserToolbarFiltersModalTrigger
+                filtersForm={
+                  <Suspense fallback={<UserFiltersFormSkeleton />}>
+                    <UserFiltersFormContainer />
+                  </Suspense>
+                }
+              />
+              <UserToolbarActionsMenuTrigger deleteAction={deleteUsersAction} />
+              <ViewModeToggleButtonGroup className="ml-auto" />
+              <UserToolbarCreateNewMenuTrigger
+                newUserForm={<></>}
+                newPositionForm={
+                  <NewPositionForm formAction={createPositionAction} />
+                }
+              />
+            </ToolbarDesktop>
 
-          <ToolbarMobileTop>
-            <ToolbarMobileHeading>{t("heading")}</ToolbarMobileHeading>
-            <UserToolbarFiltersModalTrigger
-              filtersForm={
-                <Suspense fallback={<UserFiltersFormSkeleton />}>
-                  <UserFiltersFormContainer />
-                </Suspense>
-              }
-            />
-            <UserToolbarActionsMenuTrigger />
-          </ToolbarMobileTop>
+            <ToolbarMobileTop>
+              <ToolbarMobileHeading>{t("heading")}</ToolbarMobileHeading>
+              <UserToolbarFiltersModalTrigger
+                filtersForm={
+                  <Suspense fallback={<UserFiltersFormSkeleton />}>
+                    <UserFiltersFormContainer />
+                  </Suspense>
+                }
+              />
+              <UserToolbarActionsMenuTrigger deleteAction={deleteUsersAction} />
+            </ToolbarMobileTop>
 
-          <ToolbarMobileBottom>
-            <ViewModeToggleButtonGroup />
-            <UserToolbarCreateNewMenuTrigger
-              newUserForm={<></>}
-              newPositionForm={
-                <NewPositionForm formAction={createPositionAction} />
-              }
-            />
-          </ToolbarMobileBottom>
-          <UsersServerContainer page={page} pageSize={pageSize} />
+            <ToolbarMobileBottom>
+              <ViewModeToggleButtonGroup />
+              <UserToolbarCreateNewMenuTrigger
+                newUserForm={<></>}
+                newPositionForm={
+                  <NewPositionForm formAction={createPositionAction} />
+                }
+              />
+            </ToolbarMobileBottom>
+            <UsersServerContainer page={page} pageSize={pageSize} />
+          </SelectionProvider>
         </ViewModeProvider>
       </PageGrid>
     </PageContainer>
