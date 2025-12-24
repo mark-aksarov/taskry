@@ -1,4 +1,4 @@
-import { mocked } from "storybook/test";
+import { fn, mocked } from "storybook/test";
 import CustomersPageLoading from "./loading";
 import { usePathname } from "next/navigation";
 import { CustomersPage } from "./CustomersPage";
@@ -40,6 +40,7 @@ export const Default = {
   args: {
     page: 1,
     pageSize: 20,
+    createCompanyAction: fn(),
     CustomerFiltersFormContainer: () => (
       <CustomerFiltersForm {...CustomerFiltersFormStory.args} />
     ),

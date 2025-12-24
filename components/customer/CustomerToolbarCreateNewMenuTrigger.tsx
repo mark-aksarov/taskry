@@ -13,6 +13,7 @@ import { Building2, Contact, Plus } from "lucide-react";
 import { Item, useOverlayTriggerState } from "react-stately";
 import { ResponsiveMenuTrigger } from "@/components/common/ResponsiveMenuTrigger";
 import { NewCustomerModal } from "./NewCustomerModal";
+import { NewCompanyModal } from "./NewCompanyModal/NewCompanyModal";
 
 interface CustomerToolbarCreateNewMenuTriggerProps {
   newCustomerForm: React.ReactNode;
@@ -62,7 +63,7 @@ export function CustomerToolbarCreateNewMenuTrigger({
           <Contact size={16} strokeWidth={1.5} absoluteStrokeWidth />
           {t("items.customer")}
         </Item>
-        <Item textValue={t("items.company")} key="user">
+        <Item textValue={t("items.company")} key="company">
           <Building2 size={16} strokeWidth={1.5} absoluteStrokeWidth />
           {t("items.company")}
         </Item>
@@ -72,6 +73,12 @@ export function CustomerToolbarCreateNewMenuTrigger({
         newCompanyForm={newCustomerForm}
         isOpen={isOpenCustomerModal}
         onOpenChange={setIsOpenCustomerModal}
+      />
+
+      <NewCompanyModal
+        newCompanyForm={newCompanyForm}
+        isOpen={isOpenCompanyModal}
+        onOpenChange={setIsOpenCompanyModal}
       />
     </>
   );

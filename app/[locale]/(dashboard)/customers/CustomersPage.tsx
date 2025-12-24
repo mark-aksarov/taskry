@@ -7,8 +7,10 @@ import {
 
 import { Suspense } from "react";
 import { PageGrid } from "@/components/common/PageGrid";
+import { ActionFn, ActionState } from "@/lib/actions/types";
 import { ViewModeProvider } from "@/components/common/ViewMode";
 import { PageContainer } from "@/components/common/PageContainer";
+import { NewCompanyForm } from "@/components/customer/NewCompanyForm";
 import { ViewModeToggleButtonGroup } from "@/components/common/ViewMode";
 import { CustomerFiltersFormSkeleton } from "@/components/customer/CustomerFiltersForm";
 import { CustomerToolbarActionsMenuTrigger } from "@/components/customer/CustomerToolbarActionsMenuTrigger";
@@ -18,6 +20,7 @@ import { CustomerToolbarCreateNewMenuTrigger } from "@/components/customer/Custo
 interface CustomersPageProps {
   page: number;
   pageSize: number;
+  createCompanyAction: ActionFn<ActionState, FormData>;
   CustomerFiltersFormContainer: React.ComponentType;
   CustomersServerContainer: React.ComponentType<{
     page: number;
@@ -29,6 +32,7 @@ interface CustomersPageProps {
 export async function CustomersPage({
   page,
   pageSize,
+  createCompanyAction,
   CustomerFiltersFormContainer,
   CustomersServerContainer,
   NewCustomerFormContainer,
@@ -49,7 +53,9 @@ export async function CustomersPage({
             <ViewModeToggleButtonGroup className="ml-auto" />
             <CustomerToolbarCreateNewMenuTrigger
               newCustomerForm={<NewCustomerFormContainer />}
-              newCompanyForm={<></>}
+              newCompanyForm={
+                <NewCompanyForm formAction={createCompanyAction} />
+              }
             />
           </ToolbarDesktop>
 
@@ -68,8 +74,10 @@ export async function CustomersPage({
           <ToolbarMobileBottom>
             <ViewModeToggleButtonGroup />
             <CustomerToolbarCreateNewMenuTrigger
-              newCustomerForm={<></>}
-              newCompanyForm={<></>}
+              newCustomerForm={<NewCustomerFormContainer />}
+              newCompanyForm={
+                <NewCompanyForm formAction={createCompanyAction} />
+              }
             />
           </ToolbarMobileBottom>
           <CustomersServerContainer page={page} pageSize={pageSize} />

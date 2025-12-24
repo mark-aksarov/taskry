@@ -24,6 +24,11 @@
     "submitButtonLabel": "Create Customer"
   },
 
+  "NewCompanyModal": {
+    "title": "New company",
+    "submitButtonLabel": "Create company"
+  },
+
   "EditCustomerModal": {
     "title": "Edit Customer",
     "submitButtonLabel": "Update Customer"
@@ -77,6 +82,18 @@
       "validation": {
         "required": "Company is required",
         "tooLong": "Company is too long"
+      }
+    }
+  },
+
+  "CompanyFormBase": {
+    "title": {
+      "label": "Name",
+      "placeholder": "Typing name",
+
+      "validation": {
+        "required": "Name is required",
+        "tooLong": "Name is too long"
       }
     }
   },
