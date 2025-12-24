@@ -24,6 +24,11 @@
     "submitButtonLabel": "Создать клиента"
   },
 
+  "EditCustomerModal": {
+    "title": "Изменить клиента",
+    "submitButtonLabel": "Обновить клиента"
+  },
+
   "CustomerFormBase": {
     "fullName": {
       "label": "Полное имя",
@@ -101,6 +106,7 @@
   },
 
   "CustomerItemActionMenuTrigger": {
+    "edit": "Редактировать",
     "delete": "Удалить"
   },
 

@@ -11,6 +11,23 @@ export type CustomerSummaryType = Prisma.CustomerGetPayload<{
   select: typeof customerSummarySelect;
 }>;
 
+// CustomerFormData
+
+export const customerFormDataSelect = {
+  id: true,
+  fullName: true,
+  email: true,
+  phoneNumber: true,
+  imageUrl: true,
+  publicLink: true,
+  bio: true,
+  companyId: true,
+} satisfies Prisma.CustomerSelect;
+
+export type CustomerFormDataType = Prisma.CustomerGetPayload<{
+  select: typeof customerFormDataSelect;
+}>;
+
 // CustomerDetail
 
 export const customerDetailSelect = {

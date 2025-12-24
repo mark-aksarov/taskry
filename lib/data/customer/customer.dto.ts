@@ -11,6 +11,13 @@ export type BaseCustomerDTO = {
 
 export interface CreateCustomerInputDTO extends Omit<BaseCustomerDTO, "id"> {}
 
+export interface CustomerFormDataDTO extends BaseCustomerDTO {}
+
+export interface UpdateCustomerInputDTO
+  extends Partial<Omit<BaseCustomerDTO, "id">> {
+  id: BaseCustomerDTO["id"];
+}
+
 export type CustomerSummaryDTO = {
   id: number;
   fullName: string;

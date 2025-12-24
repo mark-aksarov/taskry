@@ -1,6 +1,10 @@
+import {
+  getCustomerDetail,
+  getCustomerFormData,
+} from "@/lib/data/customer/customer.dal";
+
 import z from "zod";
 import { NextRequest, NextResponse } from "next/server";
-import { getCustomerDetail } from "@/lib/data/customer/customer.dal";
 import { withAuthRouteHandler } from "@/lib/utils/withAuthRouteHandler";
 
 const schema = z.object({ id: z.coerce.number().int().positive() });
@@ -24,15 +28,15 @@ export async function GET(
     const { id } = parse.data;
 
     // Fetch customer
-    const customer = await getCustomerDetail(id);
+    const { searchParams } = req.nextUrl;
+    const view = searchParams.get("view");
 
-    if (!customer) {
-      return NextResponse.json(
-        { error: "Customer not found" },
-        { status: 404 },
-      );
+    if (view === "edit") {
+      const project = await getCustomerFormData(id);
+      return NextResponse.json(project);
     }
 
+    const customer = await getCustomerDetail(id);
     return NextResponse.json(customer);
   });
 }

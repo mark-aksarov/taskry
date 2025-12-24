@@ -66,7 +66,7 @@ export function CustomerGridItem({
       topRowSlot={
         <GridItemRow>
           <Checkbox aria-label={`${fullName} checkbox`} />
-          <CustomerItemActionMenuTrigger className="-mr-2" />
+          <CustomerItemActionMenuTrigger className="-mr-2" customerId={id} />
         </GridItemRow>
       }
       imageSlot={

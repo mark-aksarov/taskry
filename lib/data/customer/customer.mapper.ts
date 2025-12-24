@@ -2,12 +2,14 @@ import {
   CustomerDetailDTO,
   CustomerSummaryDTO,
   CustomerListItemDTO,
+  CustomerFormDataDTO,
 } from "./customer.dto";
 
 import {
   CustomerDetailType,
   CustomerSummaryType,
   CustomerListItemType,
+  CustomerFormDataType,
 } from "./customer.select";
 
 export function mapCustomerSummaryToDTO(
@@ -18,6 +20,17 @@ export function mapCustomerSummaryToDTO(
     fullName: customer.fullName,
   };
 }
+
+export const mapCustomerFormDataToDTO = (
+  customer: CustomerFormDataType,
+): CustomerFormDataDTO => ({
+  ...customer,
+  phoneNumber: customer.phoneNumber ?? undefined,
+  imageUrl: customer.imageUrl ?? undefined,
+  publicLink: customer.publicLink ?? undefined,
+  bio: customer.bio ?? undefined,
+  companyId: customer.companyId ?? undefined,
+});
 
 export const mapCustomerDetailToDTO = (
   customer: CustomerDetailType,

@@ -33,8 +33,8 @@ export async function GET(
     const view = searchParams.get("view");
 
     if (view === "edit") {
-      const formData = await getProjectFormData(id);
-      return NextResponse.json(formData);
+      const project = await getProjectFormData(id);
+      return NextResponse.json(project);
     }
 
     const project = await getProjectDetail(id);

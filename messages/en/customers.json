@@ -24,6 +24,11 @@
     "submitButtonLabel": "Create Customer"
   },
 
+  "EditCustomerModal": {
+    "title": "Edit Customer",
+    "submitButtonLabel": "Update Customer"
+  },
+
   "CustomerFormBase": {
     "fullName": {
       "label": "Full name",
@@ -101,6 +106,7 @@
   },
 
   "CustomerItemActionMenuTrigger": {
+    "edit": "Edit",
     "delete": "Delete"
   },
 

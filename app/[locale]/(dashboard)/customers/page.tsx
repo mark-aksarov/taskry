@@ -6,6 +6,8 @@ import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { CustomersServerContainer } from "@/components/customer/CustomersServerContainer";
 import { NewCustomerFormServerContainer } from "@/components/customer/NewCustomerFormServerContainer";
 import { CustomerFiltersFormServerContainer } from "@/components/customer/CustomerFiltersFormServerContainer";
+import { EditCustomerFormClientContainerProvider } from "@/components/customer/EditCustomerFormClientContainerContext";
+import { EditCustomerFormClientContainer } from "@/components/customer/EditCustomerFormClientContainer";
 
 const searchParamsSchema = z.object({
   page: z.coerce.number().int().positive().catch(1),
@@ -30,12 +32,16 @@ export default async function AppCustomersPage({
   if (!count) return <CustomersPageEmpty />;
 
   return (
-    <CustomersPage
-      page={page}
-      pageSize={pageSize}
-      CustomerFiltersFormContainer={CustomerFiltersFormServerContainer}
-      CustomersServerContainer={CustomersServerContainer}
-      NewCustomerFormContainer={NewCustomerFormServerContainer}
-    />
+    <EditCustomerFormClientContainerProvider
+      value={EditCustomerFormClientContainer}
+    >
+      <CustomersPage
+        page={page}
+        pageSize={pageSize}
+        CustomerFiltersFormContainer={CustomerFiltersFormServerContainer}
+        CustomersServerContainer={CustomersServerContainer}
+        NewCustomerFormContainer={NewCustomerFormServerContainer}
+      />
+    </EditCustomerFormClientContainerProvider>
   );
 }

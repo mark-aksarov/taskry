@@ -7,18 +7,19 @@ import { getTranslations } from "next-intl/server";
 import { withAuthAction } from "../utils/withAuthAction";
 import { validateActionInput } from "../utils/validateActionInput";
 import { actionError, actionSuccess } from "../utils/actionResult";
-import { createCustomer as createCustomerQuery } from "@/lib/data/customer/customer.dal";
+import { updateCustomer as updateCustomerQuery } from "@/lib/data/customer/customer.dal";
 
 const schema = z.object({
-  fullName: z.string().min(1).max(255),
-  bio: z.string().max(5000).optional(),
-  email: z.email().min(1).max(254),
+  id: z.coerce.number().int().positive(),
+  fullName: z.string().min(1).max(255).optional(),
+  bio: z.string().max(5000).optional().optional(),
+  email: z.email().min(1).max(254).optional(),
   phoneNumber: z.string().min(1).max(255).optional(),
   publicLink: z.string().min(1).max(255).optional(),
-  companyId: z.coerce.number().positive(),
+  companyId: z.coerce.number().positive().optional(),
 });
 
-export async function createCustomer(
+export async function updateCustomer(
   _prevState: ActionState,
   formData: FormData,
 ): Promise<ActionState> {
@@ -32,7 +33,7 @@ export async function createCustomer(
       return actionError(t("validation.invalidInput"));
     }
 
-    await createCustomerQuery(parsed.data);
+    await updateCustomerQuery(parsed.data);
     revalidatePath("/customers");
 
     return actionSuccess();

@@ -132,7 +132,7 @@ export function CustomerListItem({
         <ListItemText>{t("company")}</ListItemText>
       </ListItemInfo>
 
-      <CustomerItemActionMenuTrigger />
+      <CustomerItemActionMenuTrigger customerId={id} />
     </ListItem>
   );
 }

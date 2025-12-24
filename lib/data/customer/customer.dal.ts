@@ -1,20 +1,23 @@
 import "server-only";
 
 import {
-  CreateCustomerInputDTO,
   CustomerDetailDTO,
-  CustomerListItemDTO,
   CustomerSummaryDTO,
+  CustomerListItemDTO,
+  UpdateCustomerInputDTO,
+  CreateCustomerInputDTO,
 } from "./customer.dto";
 
 import {
   mapCustomerDetailToDTO,
   mapCustomerListItemDTO,
   mapCustomerSummaryToDTO,
+  mapCustomerFormDataToDTO,
 } from "./customer.mapper";
 
 import {
   customerDetailSelect,
+  customerFormDataSelect,
   customerListItemSelect,
   customerSummarySelect,
 } from "./customer.select";
@@ -37,6 +40,21 @@ export const getCustomerSummaries = cache(
     return customers.map(mapCustomerSummaryToDTO);
   },
 );
+
+export const getCustomerFormData = cache(async (id: number) => {
+  const {
+    user: { workspaceId },
+  } = await getSessionOrThrow();
+
+  const data = await prisma.customer.findFirst({
+    where: { id, workspaceId },
+    select: customerFormDataSelect,
+  });
+
+  if (!data) throw new Error("Customer not found");
+
+  return mapCustomerFormDataToDTO(data);
+});
 
 export const getCustomerDetail = cache(
   async (id: number): Promise<CustomerDetailDTO> => {
@@ -121,6 +139,22 @@ export const createCustomer = async (input: CreateCustomerInputDTO) => {
   });
 };
 
+export const updateCustomer = async (input: UpdateCustomerInputDTO) => {
+  const {
+    user: { workspaceId },
+  } = await getSessionOrThrow();
+
+  await validateCustomerRelations(workspaceId, input);
+
+  await prisma.customer.update({
+    where: {
+      id: input.id,
+      workspaceId,
+    },
+    data: input,
+  });
+};
+
 /**
  * HELPERS
  */
@@ -129,9 +163,11 @@ async function validateCustomerRelations(
   workspaceId: number,
   input: Partial<CreateCustomerInputDTO>,
 ) {
-  const company = await prisma.project.findFirst({
-    where: { id: input.companyId, workspaceId },
-  });
+  if (input.companyId) {
+    const company = await prisma.project.findFirst({
+      where: { id: input.companyId, workspaceId },
+    });
 
-  if (!company) throw new Error("Company access denied or not found");
+    if (!company) throw new Error("Company access denied or not found");
+  }
 }
