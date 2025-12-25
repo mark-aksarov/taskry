@@ -36,7 +36,9 @@ export const getProjectSummary = cache(async (id: number) => {
     where: { id, workspaceId },
     select: projectSummarySelect,
   });
+
   if (!data) throw new Error("Project not found");
+
   return mapProjectSummaryToDTO(data);
 });
 
@@ -62,7 +64,9 @@ export const getProjectFormData = cache(async (id: number) => {
     where: { id, workspaceId },
     select: projectFormDataSelect,
   });
+
   if (!data) throw new Error("Project not found");
+
   return mapProjectFormDataToDTO(data);
 });
 
