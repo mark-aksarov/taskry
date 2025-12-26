@@ -20,7 +20,7 @@
     "test:ui": "jest",
     "docker:up": "docker compose up -d",
     "docker:down": "docker compose down",
-    "test:db": "npm run docker:up && npx dotenv -e .env.test -- npx prisma db push && npx dotenv -e .env.test -- vitest --project database run"
+    "test:db": "npm run docker:up && npx dotenv -e .env.test -- npx prisma db push && npx dotenv -e .env.test -- vitest --pool=forks --poolOptions.forks.singleFork --project database run"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.844.0",

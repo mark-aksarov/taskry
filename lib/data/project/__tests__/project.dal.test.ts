@@ -12,6 +12,7 @@ import {
 } from "../project.dal";
 import prisma from "@/lib/prisma";
 import * as mappers from "../project.mapper";
+import { resetDatabase } from "@/lib/data/utils/test-utils";
 import { describe, it, expect, beforeEach, vi } from "vitest";
 import { ProjectStatus, TaskStatus } from "@/generated/prisma/enums";
 import { getSessionOrThrow } from "@/lib/data/utils/getSessionOrThrow";
@@ -29,14 +30,7 @@ describe("Project DAL", () => {
     };
     (getSessionOrThrow as any).mockResolvedValue(mockSession);
 
-    await prisma.task.deleteMany({});
-    await prisma.taskCategory.deleteMany({});
-    await prisma.project.deleteMany({});
-    await prisma.projectCategory.deleteMany({});
-    await prisma.customer.deleteMany({});
-    await prisma.company.deleteMany({});
-    await prisma.user.deleteMany({});
-    await prisma.workspace.deleteMany({});
+    await resetDatabase();
 
     // workspace 1
 
