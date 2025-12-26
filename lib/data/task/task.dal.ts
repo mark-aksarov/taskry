@@ -152,32 +152,34 @@ export const updateTask = async (input: UpdateTaskInputDTO) => {
   const {
     user: { workspaceId },
   } = await getSessionOrThrow();
+
   await validateTaskRelations(workspaceId, input);
 
-  let dataToUpdate = { ...input };
-
-  // 1. If status is being changed, verify the project allows it
-  if (input.status) {
-    const taskWithProject = await prisma.task.findUnique({
+  return prisma.$transaction(async (tx) => {
+    const existingTask = await tx.task.findUnique({
       where: { id: input.id, workspaceId },
       select: { project: { select: { status: true } } },
     });
 
-    const allowedProjectStatuses = getAllowedProjectStatuses(input.status);
-    const currentProjectStatus = taskWithProject?.project
-      .status as ProjectStatus;
-
-    // 2. If current project status is NOT in the allowed list,
-    // remove 'status' from the update payload
-    if (!allowedProjectStatuses.includes(currentProjectStatus)) {
-      delete dataToUpdate.status;
+    if (!existingTask) {
+      throw new Error("Task not found");
     }
-  }
 
-  // 3. Perform the update with remaining fields
-  return prisma.task.update({
-    where: { id: input.id, workspaceId },
-    data: dataToUpdate,
+    let dataToUpdate = { ...input };
+
+    if (input.status) {
+      const allowedProjectStatuses = getAllowedProjectStatuses(input.status);
+      const currentProjectStatus = existingTask.project.status as ProjectStatus;
+
+      if (!allowedProjectStatuses.includes(currentProjectStatus)) {
+        delete dataToUpdate.status;
+      }
+    }
+
+    return tx.task.update({
+      where: { id: input.id },
+      data: dataToUpdate,
+    });
   });
 };
 
@@ -218,8 +220,6 @@ export const deleteTasks = async (ids: number[]) => {
       id: { in: ids },
     },
   });
-
-  if (count === 0) throw new Error("No tasks deleted or access denied.");
 
   return count;
 };
