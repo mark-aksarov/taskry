@@ -40,7 +40,7 @@ export const getTaskId = (
   return (projectId - 1) * statuses.length + tIndex + 1;
 };
 
-describe("Project DAL", () => {
+describe("Task DAL", () => {
   beforeEach(async () => {
     const mockSession = {
       user: { id: "user-1", workspaceId: 1 },

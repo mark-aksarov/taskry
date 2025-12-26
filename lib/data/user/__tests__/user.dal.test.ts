@@ -18,7 +18,7 @@ vi.mock("@/lib/data/utils/getSessionOrThrow", () => ({
   getSessionOrThrow: vi.fn(),
 }));
 
-describe("Company DAL", () => {
+describe("User DAL", () => {
   beforeEach(async () => {
     vi.resetAllMocks();
 

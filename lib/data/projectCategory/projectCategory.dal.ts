@@ -1,7 +1,7 @@
 import { cache } from "react";
 import prisma from "@/lib/prisma";
-import { getSessionOrThrow } from "@/lib/data/utils/getSessionOrThrow";
 import { CreateProjectCategoryInputDTO } from "./projectCategory.dto";
+import { getSessionOrThrow } from "@/lib/data/utils/getSessionOrThrow";
 import { mapProjectCategorySummaryToDTO } from "./projectCategory.mapper";
 
 export const getProjectCategorySummaries = cache(async () => {
