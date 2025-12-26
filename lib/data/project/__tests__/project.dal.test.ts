@@ -1,17 +1,19 @@
 import {
+  updateProject,
   createProject,
+  deleteProjects,
   getProjectList,
   getProjectCount,
   getProjectDetail,
   getProjectSummary,
   getProjectFormData,
   getProjectSummaries,
-  updateProject,
+  updateProjectStatuses,
 } from "../project.dal";
 import prisma from "@/lib/prisma";
 import * as mappers from "../project.mapper";
-import { ProjectStatus } from "@/generated/prisma/enums";
 import { describe, it, expect, beforeEach, vi } from "vitest";
+import { ProjectStatus, TaskStatus } from "@/generated/prisma/enums";
 import { getSessionOrThrow } from "@/lib/data/utils/getSessionOrThrow";
 
 vi.mock("server-only", () => ({}));
@@ -600,6 +602,157 @@ describe("Project DAL", () => {
 
       const project = await prisma.project.findUnique({ where: { id: 1 } });
       expect(project?.title).toBe("Website Redesign");
+    });
+  });
+
+  describe("updateProjectStatuses", () => {
+    beforeEach(async () => {
+      await prisma.taskCategory.create({
+        data: {
+          id: 1,
+          name: "Category 1",
+          workspaceId: 1,
+        },
+      });
+
+      await prisma.task.createMany({
+        data: [
+          {
+            id: 1,
+            title: "Task P1",
+            deadline: new Date("2025-12-31"),
+            status: TaskStatus.active,
+            projectId: 1,
+            categoryId: 1,
+            assigneeId: "user-1",
+            workspaceId: 1,
+          },
+          {
+            id: 2,
+            title: "Task P2",
+            deadline: new Date("2025-12-31"),
+            status: TaskStatus.active,
+            projectId: 2,
+            categoryId: 1,
+            assigneeId: "user-1",
+            workspaceId: 1,
+          },
+        ],
+      });
+    });
+
+    it("should update multiple projects and their tasks in the current workspace", async () => {
+      const projectIds = [1, 2];
+      const nextStatus = ProjectStatus.completed;
+
+      await updateProjectStatuses(projectIds, nextStatus);
+
+      const projects = await prisma.project.findMany({
+        where: { id: { in: projectIds } },
+      });
+      expect(projects.every((p) => p.status === nextStatus)).toBe(true);
+
+      const tasks = await prisma.task.findMany({
+        where: { projectId: { in: projectIds } },
+      });
+      expect(tasks).toHaveLength(2);
+      expect(tasks.every((t) => t.status === TaskStatus.completed)).toBe(true);
+    });
+
+    it("should only update projects belonging to the user's workspace", async () => {
+      (getSessionOrThrow as any).mockResolvedValue({
+        user: { workspaceId: 1 },
+      });
+
+      const projectIds = [1, 3];
+      await updateProjectStatuses(projectIds, ProjectStatus.completed);
+
+      const myProject = await prisma.project.findUnique({ where: { id: 1 } });
+      expect(myProject?.status).toBe(ProjectStatus.completed);
+
+      const foreignProject = await prisma.project.findUnique({
+        where: { id: 3 },
+      });
+      expect(foreignProject?.status).toBe(ProjectStatus.active);
+    });
+
+    it("should handle transition to 'pending' correctly for multiple projects", async () => {
+      await updateProjectStatuses([1, 2], ProjectStatus.pending);
+
+      const tasks = await prisma.task.findMany({
+        where: { projectId: { in: [1, 2] } },
+      });
+
+      expect(tasks.every((t) => t.status === TaskStatus.pending)).toBe(true);
+    });
+
+    it("should return the list of IDs passed to it", async () => {
+      (getSessionOrThrow as any).mockResolvedValue({
+        user: { workspaceId: 1 },
+      });
+
+      const ids = [1, 2];
+      const result = await updateProjectStatuses(ids, ProjectStatus.active);
+
+      expect(result).toEqual(ids);
+    });
+  });
+
+  describe("deleteProjects", () => {
+    it("should successfully delete multiple projects in the current workspace", async () => {
+      const idsToDelete = [1, 2];
+      const deletedCount = await deleteProjects(idsToDelete);
+      expect(deletedCount).toBe(2);
+
+      const remainingProjects = await prisma.project.findMany({
+        where: { id: { in: idsToDelete } },
+      });
+      expect(remainingProjects).toHaveLength(0);
+    });
+
+    it("should throw 'No projects deleted' if trying to delete non-existent IDs", async () => {
+      const nonExistentIds = [999, 1000];
+
+      await expect(deleteProjects(nonExistentIds)).rejects.toThrow(
+        "No projects deleted.",
+      );
+    });
+
+    it("should not delete projects belonging to another workspace", async () => {
+      const foreignIds = [3];
+
+      await expect(deleteProjects(foreignIds)).rejects.toThrow(
+        "No projects deleted.",
+      );
+
+      const foreignProject = await prisma.project.findUnique({
+        where: { id: 3 },
+      });
+      expect(foreignProject).toBeDefined();
+    });
+
+    it("should only delete own projects even if a mix of own and foreign IDs is provided", async () => {
+      const mixedIds = [1, 3];
+
+      const deletedCount = await deleteProjects(mixedIds);
+      expect(deletedCount).toBe(1);
+
+      const myProject = await prisma.project.findUnique({ where: { id: 1 } });
+      expect(myProject).toBeNull();
+
+      const foreignProject = await prisma.project.findUnique({
+        where: { id: 3 },
+      });
+      expect(foreignProject).not.toBeNull();
+    });
+
+    it("should fail and not delete anything if authorization fails", async () => {
+      (getSessionOrThrow as any).mockRejectedValue(new Error("Unauthorized"));
+
+      await expect(deleteProjects([1])).rejects.toThrow("Unauthorized");
+
+      const project = await prisma.project.findUnique({ where: { id: 1 } });
+      expect(project).not.toBeNull();
     });
   });
 });
