@@ -180,7 +180,7 @@ async function validateCustomerRelations(
   input: Partial<CreateCustomerInputDTO>,
 ) {
   if (input.companyId) {
-    const company = await prisma.project.findFirst({
+    const company = await prisma.company.findFirst({
       where: { id: input.companyId, workspaceId },
     });
 
