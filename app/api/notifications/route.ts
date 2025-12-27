@@ -1,11 +1,7 @@
-import {
-  getNotificationsCount,
-  getNotificationsList,
-} from "@/lib/data/notification/notification.dal";
-
 import z from "zod";
 import { NextRequest, NextResponse } from "next/server";
 import { withAuthRouteHandler } from "@/lib/utils/withAuthRouteHandler";
+import { getNotificationsList } from "@/lib/data/notification/notification.dal";
 
 const FilterEnum = z.enum(["all", "unread"]);
 
@@ -28,23 +24,8 @@ export const GET = (req: NextRequest) =>
       );
     }
 
-    const { page, pageSize, filter } = parsed.data;
-
     // Fetch notifications
-    const [notifications, totalCount, unreadCount] = await Promise.all([
-      getNotificationsList({ page, pageSize, filter }),
-      getNotificationsCount(),
-      getNotificationsCount({ isRead: false }),
-    ]);
+    const data = await getNotificationsList(parsed.data);
 
-    const countForPagination = filter === "unread" ? unreadCount : totalCount;
-
-    return NextResponse.json({
-      notifications,
-      totalCount,
-      unreadCount,
-      totalPages: Math.ceil(countForPagination / pageSize),
-      page,
-      pageSize,
-    });
+    return NextResponse.json(data);
   });

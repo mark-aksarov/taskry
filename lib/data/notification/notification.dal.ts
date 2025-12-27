@@ -2,9 +2,9 @@ import "server-only";
 
 import { cache } from "react";
 import prisma from "@/lib/prisma";
-import { getSessionOrThrow } from "@/lib/data/utils/getSessionOrThrow";
+import { mapNotificationsToDTO } from "./notification.mapper";
 import { notificationListItemSelect } from "./notification.select";
-import { mapNotificationListItemToDTO } from "./notification.mapper";
+import { getSessionOrThrow } from "@/lib/data/utils/getSessionOrThrow";
 
 export const getNotificationsList = cache(
   async ({
@@ -21,40 +21,26 @@ export const getNotificationsList = cache(
     } = await getSessionOrThrow();
 
     const skip = (page - 1) * pageSize;
-    const where: any = {
-      recipientId,
-      workspaceId,
+    const baseWhere = { recipientId, workspaceId };
+
+    const listWhere = {
+      ...baseWhere,
+      ...(filter === "unread" && { isRead: false }),
     };
 
-    if (filter === "unread") where.isRead = false;
+    const [notifications, totalCount, unreadCount] = await prisma.$transaction([
+      prisma.notification.findMany({
+        where: listWhere,
+        skip,
+        take: pageSize,
+        orderBy: { createdAt: "desc" },
+        select: notificationListItemSelect,
+      }),
 
-    const notifications = await prisma.notification.findMany({
-      where,
-      skip,
-      take: pageSize,
-      orderBy: {
-        createdAt: "desc",
-      },
+      prisma.notification.count({ where: baseWhere }),
+      prisma.notification.count({ where: { ...baseWhere, isRead: false } }),
+    ]);
 
-      select: notificationListItemSelect,
-    });
-
-    return notifications.map(mapNotificationListItemToDTO);
-  },
-);
-
-export const getNotificationsCount = cache(
-  async ({ isRead }: { isRead?: boolean } = {}) => {
-    const session = await getSessionOrThrow();
-    const recipientId = session.user.id;
-    const workspaceId = session.user.workspaceId;
-
-    const where = {
-      recipientId,
-      workspaceId,
-      ...(isRead !== undefined && { isRead }),
-    };
-
-    return prisma.notification.count({ where });
+    return mapNotificationsToDTO(notifications, totalCount, unreadCount);
   },
 );

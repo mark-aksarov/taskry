@@ -16,10 +16,10 @@ import { Repeat } from "@/components/common/Repeat";
 import { NotificationList } from "../NotificationList";
 import { Pagination } from "@/components/common/Pagination";
 import { DialogBody, DialogFooter, Link, Skeleton } from "@/components/ui";
-import { NotificationListItemDTO } from "@/lib/data/notification/notification.dto";
+import { NotificationsDTO } from "@/lib/data/notification/notification.dto";
 import { NotificationFilterToggleButtonGroup } from "../NotificationFilterToggleButtonGroup";
 
-function getTarget(notification: NotificationListItemDTO) {
+function getTarget(notification: NotificationsDTO["items"][number]) {
   const { type, target, targetName } = notification;
   switch (type) {
     case "taskAdded":
@@ -115,12 +115,9 @@ export function NotificationModalContentClientContainer() {
   const [filter, setFilter] = useState<NotificationFilter>("all");
   const pageSize = 10;
 
-  const { data, isLoading } = useSWR<{
-    notifications: NotificationListItemDTO[];
-    totalCount: number;
-    totalPages: number;
-    unreadCount: number;
-  }>(`/api/notifications?page=${page}&pageSize=${pageSize}&filter=${filter}`);
+  const { data, isLoading } = useSWR<NotificationsDTO>(
+    `/api/notifications?page=${page}&pageSize=${pageSize}&filter=${filter}`,
+  );
 
   if (isLoading) {
     return (
@@ -141,7 +138,14 @@ export function NotificationModalContentClientContainer() {
     );
   }
 
-  const { notifications, totalPages, totalCount, unreadCount } = data!;
+  if (!data) {
+    return null;
+  }
+
+  const { items, totalCount, unreadCount } = data;
+
+  const countForPagination = filter === "unread" ? unreadCount : totalCount;
+  const totalPages = Math.ceil(countForPagination / pageSize);
 
   return (
     <>
@@ -158,7 +162,7 @@ export function NotificationModalContentClientContainer() {
           />
 
           <NotificationList>
-            {notifications.map((notification) => (
+            {items.map((notification) => (
               <NotificationListItem
                 key={notification.id}
                 isRead={notification.isRead}
