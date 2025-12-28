@@ -1,13 +1,15 @@
 import { TaskList } from "../TaskList";
 import { TaskGrid } from "../TaskGrid";
+import { TaskFilters } from "@/lib/types";
 import { TaskListItem } from "../TaskListItem";
 import { TaskGridItem } from "../TaskGridItem";
-import { deleteTasks } from "@/lib/actions/task/deleteTasks";
+import { getTaskCount } from "@/lib/data/task/task.dal";
+import { getTaskList } from "@/lib/data/task/task.service";
+import { TaskListItemDTO } from "@/lib/data/task/task.dto";
 import { Pagination } from "@/components/common/Pagination";
+import { deleteTasks } from "@/lib/actions/task/deleteTasks";
 import { ViewModeLayout } from "@/components/common/ViewMode";
-import { getTaskCount, getTaskList } from "@/lib/data/task/task.dal";
 import { updateTaskStatuses } from "@/lib/actions/task/updateTaskStatuses";
-import { TaskFilters, TaskListItemDTO } from "@/lib/data/task/task.dto";
 
 interface TasksServerContainerProps {
   page: number;

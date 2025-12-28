@@ -1,11 +1,11 @@
 "use client";
 
 import { useState } from "react";
+import { CustomerFilters } from "@/lib/types";
 import { Switch } from "@/components/ui/Switch";
 import { Divider, RACForm } from "@/components/ui";
 import { useLocale, useTranslations } from "next-intl";
 import { usePathname, useRouter } from "@/i18n/navigation";
-import { CustomerFilters } from "@/lib/data/customer/customer.dto";
 
 interface CustomerFiltersFormProps {
   filters: CustomerFilters;

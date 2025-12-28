@@ -13,10 +13,10 @@ import {
 
 import { Suspense } from "react";
 import { useTranslations } from "next-intl";
+import { CustomerFilters } from "@/lib/types";
 import { PageGrid } from "@/components/common/PageGrid";
 import { ViewModeProvider } from "@/components/common/ViewMode";
 import { PageContainer } from "@/components/common/PageContainer";
-import { CustomerFilters } from "@/lib/data/customer/customer.dto";
 import { NewCompanyForm } from "@/components/customer/NewCompanyForm";
 import { ViewModeToggleButtonGroup } from "@/components/common/ViewMode";
 import { SelectionProvider } from "@/components/common/SelectionContext";

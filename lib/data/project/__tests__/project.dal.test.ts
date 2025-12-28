@@ -2,33 +2,26 @@ import {
   updateProject,
   createProject,
   deleteProjects,
-  getProjectList,
   getProjectCount,
-  getProjectDetail,
-  getProjectSummary,
-  getProjectFormData,
-  getProjectSummaries,
-  updateProjectStatuses,
+  updateProjects,
 } from "../project.dal";
 import prisma from "@/lib/prisma";
-import * as mappers from "../project.mapper";
 import { resetDatabase } from "@/lib/data/utils/test-utils";
 import { describe, it, expect, beforeEach, vi } from "vitest";
+import { verifySession } from "@/lib/data/utils/verifySession";
 import { ProjectStatus, TaskStatus } from "@/generated/prisma/enums";
-import { getSessionOrThrow } from "@/lib/data/utils/getSessionOrThrow";
 
 vi.mock("server-only", () => ({}));
 
-vi.mock("@/lib/data/utils/getSessionOrThrow", () => ({
-  getSessionOrThrow: vi.fn(),
+vi.mock("@/lib/data/utils/verifySession", () => ({
+  verifySession: vi.fn(),
 }));
 
 describe("Project DAL", () => {
   beforeEach(async () => {
-    const mockSession = {
+    (verifySession as any).mockResolvedValue({
       user: { id: "user-1", workspaceId: 1 },
-    };
-    (getSessionOrThrow as any).mockResolvedValue(mockSession);
+    });
 
     await resetDatabase();
 
@@ -173,198 +166,6 @@ describe("Project DAL", () => {
     });
   });
 
-  describe("getProjectSummary", () => {
-    it("should return mapped project summary", async () => {
-      const mapperSpy = vi.spyOn(mappers, "mapProjectSummaryToDTO");
-
-      await getProjectSummary(1);
-
-      expect(getSessionOrThrow).toHaveBeenCalledTimes(1);
-      expect(mapperSpy).toHaveBeenCalledWith(
-        expect.objectContaining({
-          id: 1,
-          title: "Website Redesign",
-        }),
-      );
-    });
-
-    it("should throw 'Project not found' if project exists but belongs to a different workspace", async () => {
-      await expect(getProjectSummary(3)).rejects.toThrow("Project not found");
-    });
-
-    it("should throw 'Project not found' if project does not exist at all", async () => {
-      await expect(getProjectSummary(5)).rejects.toThrow("Project not found");
-    });
-
-    it("should throw authorization error if getSessionOrThrow fails", async () => {
-      (getSessionOrThrow as any).mockRejectedValue(new Error("Unauthorized"));
-
-      await expect(getProjectSummary(1)).rejects.toThrow("Unauthorized");
-    });
-  });
-
-  describe("getProjectSummaries", () => {
-    it("should return all projects for the current workspace", async () => {
-      const mapperSpy = vi.spyOn(mappers, "mapProjectSummaryToDTO");
-
-      const result = await getProjectSummaries();
-
-      expect(result).toHaveLength(2);
-      expect(mapperSpy).toHaveBeenCalledTimes(2);
-      expect(result).toContainEqual(
-        expect.objectContaining({ title: "Website Redesign" }),
-      );
-      expect(result).toContainEqual(
-        expect.objectContaining({ title: "Internal Dashboard" }),
-      );
-    });
-
-    it("should return an empty array if workspace has no projects", async () => {
-      (getSessionOrThrow as any).mockResolvedValue({
-        user: { workspaceId: 3 },
-      });
-
-      const result = await getProjectSummaries();
-
-      expect(result).toHaveLength(0);
-    });
-  });
-
-  describe("getProjectFormData", () => {
-    it("should return project data for form with correct mapping", async () => {
-      const formDataMapperSpy = vi.spyOn(mappers, "mapProjectFormDataToDTO");
-
-      const result = await getProjectFormData(1);
-
-      expect(result).toBeDefined();
-      expect(formDataMapperSpy).toHaveBeenCalledWith(
-        expect.objectContaining({
-          id: 1,
-          title: "Website Redesign",
-        }),
-      );
-    });
-
-    it("should throw 'Project not found' if user tries to access project from another workspace", async () => {
-      (getSessionOrThrow as any).mockResolvedValue({
-        user: { workspaceId: 2 },
-      });
-
-      await expect(getProjectFormData(1)).rejects.toThrow("Project not found");
-    });
-
-    it("should throw 'Project not found' if id does not exist", async () => {
-      await expect(getProjectFormData(100)).rejects.toThrow(
-        "Project not found",
-      );
-    });
-  });
-
-  describe("getProjectDetail", () => {
-    it("should return detailed project info with all relations", async () => {
-      const detailMapperSpy = vi.spyOn(mappers, "mapProjectDetailToDTO");
-
-      const result = await getProjectDetail(1);
-
-      expect(result).toBeDefined();
-
-      expect(detailMapperSpy).toHaveBeenCalledWith(
-        expect.objectContaining({
-          id: 1,
-          title: "Website Redesign",
-          category: expect.objectContaining({ name: "Development" }),
-          customer: expect.objectContaining({ fullName: "John Customer" }),
-          creator: expect.objectContaining({ fullName: "Alice Johnson" }),
-        }),
-      );
-    });
-
-    it("should throw 'Project not found' if workspaceId mismatch (security check)", async () => {
-      (getSessionOrThrow as any).mockResolvedValue({
-        user: { workspaceId: 2 },
-      });
-
-      await expect(getProjectDetail(1)).rejects.toThrow("Project not found");
-    });
-
-    it("should throw 'Project not found' if the project ID does not exist", async () => {
-      await expect(getProjectDetail(100)).rejects.toThrow("Project not found");
-    });
-  });
-
-  describe("getProjectList", () => {
-    it("should return projects only for the current workspace", async () => {
-      const result = await getProjectList({
-        page: 1,
-        pageSize: 10,
-        sort: "title",
-      });
-
-      expect(result).toHaveLength(2);
-      expect(result[0].title).toBe("Internal Dashboard");
-      expect(result[1].title).toBe("Website Redesign");
-    });
-
-    it("should handle pagination correctly (page and pageSize)", async () => {
-      const result = await getProjectList({
-        page: 2,
-        pageSize: 1,
-        sort: "title",
-      });
-
-      expect(result).toHaveLength(1);
-      expect(result[0].title).toBe("Website Redesign");
-    });
-
-    it("should apply filters correctly (e.g., status filter)", async () => {
-      (getSessionOrThrow as any).mockResolvedValue({
-        user: { workspaceId: 2 },
-      });
-
-      const result = await getProjectList({
-        page: 1,
-        pageSize: 10,
-        sort: "title",
-        filters: {
-          category: [],
-          customer: [],
-          user: [],
-          status: [ProjectStatus.completed],
-        },
-      });
-
-      expect(result).toHaveLength(1);
-      expect(result[0].title).toBe("Brand Strategy");
-    });
-
-    it("should sort projects by deadline in ascending order", async () => {
-      const result = await getProjectList({
-        page: 1,
-        pageSize: 10,
-        sort: "deadline",
-      });
-
-      expect(result[0].title).toBe("Website Redesign");
-      expect(result[1].title).toBe("Internal Dashboard");
-    });
-
-    it("should return an empty array if no projects match filters", async () => {
-      const result = await getProjectList({
-        page: 1,
-        pageSize: 10,
-        sort: "title",
-        filters: {
-          category: [999],
-          customer: [],
-          user: [],
-          status: [],
-        },
-      });
-
-      expect(result).toEqual([]);
-    });
-  });
-
   describe("getProjectCount", () => {
     it("should return total count of projects for the current workspace", async () => {
       const count = await getProjectCount();
@@ -373,7 +174,7 @@ describe("Project DAL", () => {
     });
 
     it("should return total count of projects for workspace 2", async () => {
-      (getSessionOrThrow as any).mockResolvedValue({
+      (verifySession as any).mockResolvedValue({
         user: { workspaceId: 2 },
       });
 
@@ -405,7 +206,7 @@ describe("Project DAL", () => {
     });
 
     it("should return filtered count by category", async () => {
-      (getSessionOrThrow as any).mockResolvedValue({
+      (verifySession as any).mockResolvedValue({
         user: { workspaceId: 2 },
       });
 
@@ -480,7 +281,7 @@ describe("Project DAL", () => {
     });
 
     it("should fail if getSessionOrThrow fails", async () => {
-      (getSessionOrThrow as any).mockRejectedValue(new Error("Unauthorized"));
+      (verifySession as any).mockRejectedValue(new Error("Unauthorized"));
 
       const input = { title: "Should not be created" } as any;
 
@@ -583,7 +384,7 @@ describe("Project DAL", () => {
     });
 
     it("should fail and rollback if validateRelations fails", async () => {
-      (getSessionOrThrow as any).mockResolvedValue({
+      (verifySession as any).mockResolvedValue({
         user: { workspaceId: 1 },
       });
 
@@ -599,7 +400,7 @@ describe("Project DAL", () => {
     });
   });
 
-  describe("updateProjectStatuses", () => {
+  describe("updateProjects", () => {
     beforeEach(async () => {
       await prisma.taskCategory.create({
         data: {
@@ -639,7 +440,7 @@ describe("Project DAL", () => {
       const projectIds = [1, 2];
       const nextStatus = ProjectStatus.completed;
 
-      await updateProjectStatuses(projectIds, nextStatus);
+      await updateProjects(projectIds, nextStatus);
 
       const projects = await prisma.project.findMany({
         where: { id: { in: projectIds } },
@@ -654,12 +455,12 @@ describe("Project DAL", () => {
     });
 
     it("should only update projects belonging to the user's workspace", async () => {
-      (getSessionOrThrow as any).mockResolvedValue({
+      (verifySession as any).mockResolvedValue({
         user: { workspaceId: 1 },
       });
 
       const projectIds = [1, 3];
-      await updateProjectStatuses(projectIds, ProjectStatus.completed);
+      await updateProjects(projectIds, ProjectStatus.completed);
 
       const myProject = await prisma.project.findUnique({ where: { id: 1 } });
       expect(myProject?.status).toBe(ProjectStatus.completed);
@@ -671,7 +472,7 @@ describe("Project DAL", () => {
     });
 
     it("should handle transition to 'pending' correctly for multiple projects", async () => {
-      await updateProjectStatuses([1, 2], ProjectStatus.pending);
+      await updateProjects([1, 2], ProjectStatus.pending);
 
       const tasks = await prisma.task.findMany({
         where: { projectId: { in: [1, 2] } },
@@ -679,57 +480,51 @@ describe("Project DAL", () => {
 
       expect(tasks.every((t) => t.status === TaskStatus.pending)).toBe(true);
     });
-
-    it("should return the list of IDs passed to it", async () => {
-      (getSessionOrThrow as any).mockResolvedValue({
-        user: { workspaceId: 1 },
-      });
-
-      const ids = [1, 2];
-      const result = await updateProjectStatuses(ids, ProjectStatus.active);
-
-      expect(result).toEqual(ids);
-    });
   });
 
   describe("deleteProjects", () => {
     it("should successfully delete multiple projects in the current workspace", async () => {
       const idsToDelete = [1, 2];
-      const deletedCount = await deleteProjects(idsToDelete);
-      expect(deletedCount).toBe(2);
+
+      const result = await deleteProjects(idsToDelete);
+
+      expect(result.count).toBe(2);
 
       const remainingProjects = await prisma.project.findMany({
         where: { id: { in: idsToDelete } },
       });
+
       expect(remainingProjects).toHaveLength(0);
     });
 
-    it("should throw 'No projects deleted' if trying to delete non-existent IDs", async () => {
+    it("should return a count of 0 if trying to delete non-existent IDs", async () => {
       const nonExistentIds = [999, 1000];
 
-      await expect(deleteProjects(nonExistentIds)).rejects.toThrow(
-        "No projects deleted.",
-      );
+      const result = await deleteProjects(nonExistentIds);
+
+      expect(result).toEqual({ count: 0 });
     });
 
     it("should not delete projects belonging to another workspace", async () => {
       const foreignIds = [3];
 
-      await expect(deleteProjects(foreignIds)).rejects.toThrow(
-        "No projects deleted.",
-      );
+      const result = await deleteProjects(foreignIds);
+
+      expect(result.count).toBe(0);
 
       const foreignProject = await prisma.project.findUnique({
         where: { id: 3 },
       });
-      expect(foreignProject).toBeDefined();
+
+      expect(foreignProject).not.toBeNull();
     });
 
     it("should only delete own projects even if a mix of own and foreign IDs is provided", async () => {
       const mixedIds = [1, 3];
 
-      const deletedCount = await deleteProjects(mixedIds);
-      expect(deletedCount).toBe(1);
+      const result = await deleteProjects(mixedIds);
+
+      expect(result.count).toBe(1);
 
       const myProject = await prisma.project.findUnique({ where: { id: 1 } });
       expect(myProject).toBeNull();
@@ -741,7 +536,7 @@ describe("Project DAL", () => {
     });
 
     it("should fail and not delete anything if authorization fails", async () => {
-      (getSessionOrThrow as any).mockRejectedValue(new Error("Unauthorized"));
+      (verifySession as any).mockRejectedValue(new Error("Unauthorized"));
 
       await expect(deleteProjects([1])).rejects.toThrow("Unauthorized");
 

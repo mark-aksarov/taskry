@@ -1,4 +1,9 @@
-export type BaseCustomerDTO = {
+export type CustomerSummaryDTO = {
+  id: number;
+  fullName: string;
+};
+
+export interface CustomerFormDataDTO {
   id: number;
   imageUrl?: string;
   bio?: string;
@@ -7,21 +12,28 @@ export type BaseCustomerDTO = {
   phoneNumber?: string;
   publicLink?: string;
   companyId: number;
-};
-
-export interface CreateCustomerInputDTO extends Omit<BaseCustomerDTO, "id"> {}
-
-export interface CustomerFormDataDTO extends BaseCustomerDTO {}
-
-export interface UpdateCustomerInputDTO
-  extends Partial<Omit<BaseCustomerDTO, "id">> {
-  id: BaseCustomerDTO["id"];
 }
 
-export type CustomerSummaryDTO = {
-  id: number;
+export interface CreateCustomerInputDTO {
+  imageUrl?: string;
+  bio?: string;
   fullName: string;
-};
+  email: string;
+  phoneNumber?: string;
+  publicLink?: string;
+  companyId: number;
+}
+
+export interface UpdateCustomerInputDTO {
+  id: number;
+  imageUrl?: string;
+  bio?: string;
+  fullName?: string;
+  email?: string;
+  phoneNumber?: string;
+  publicLink?: string;
+  companyId?: number;
+}
 
 export type CustomerDetailDTO = {
   id: number;
@@ -51,10 +63,3 @@ export type CustomerListItemDTO = {
     name: string;
   };
 };
-
-export interface CustomerFilters {
-  hasNoActiveProjects?: boolean;
-  hasActiveProjects?: boolean;
-  hasOverdueProjects?: boolean;
-  company: number[];
-}

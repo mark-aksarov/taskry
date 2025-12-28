@@ -1,8 +1,9 @@
 import { UserTaskList } from "../UserTaskList";
 import { UserTaskListItem } from "../UserTaskListItem";
+import { getTaskCount } from "@/lib/data/task/task.dal";
+import { getTaskList } from "@/lib/data/task/task.service";
 import { deleteTasks } from "@/lib/actions/task/deleteTasks";
 import { Pagination } from "@/components/common/Pagination";
-import { getTaskCount, getTaskList } from "@/lib/data/task/task.dal";
 import { updateTaskStatuses } from "@/lib/actions/task/updateTaskStatuses";
 
 interface UserTasksServerContainerProps {

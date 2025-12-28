@@ -8,9 +8,9 @@ import {
 } from "./TaskFormBase";
 
 import useSWR from "swr";
-import { updateTask } from "@/lib/actions/task/updateTask";
 import { CalendarDate } from "@internationalized/date";
 import { UserSummaryDTO } from "@/lib/data/user/user.dto";
+import { updateTask } from "@/lib/actions/task/updateTask";
 import { EditTaskForm } from "./EditTaskForm/EditTaskForm";
 import { TaskFormDataDTO } from "@/lib/data/task/task.dto";
 import { ProjectSummaryDTO } from "@/lib/data/project/project.dto";

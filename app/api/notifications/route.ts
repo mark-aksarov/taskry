@@ -1,7 +1,7 @@
 import z from "zod";
 import { NextRequest, NextResponse } from "next/server";
 import { withAuthRouteHandler } from "@/lib/utils/withAuthRouteHandler";
-import { getNotificationsList } from "@/lib/data/notification/notification.dal";
+import { getNotifications } from "@/lib/data/notification/notification.service";
 
 const FilterEnum = z.enum(["all", "unread"]);
 
@@ -25,7 +25,7 @@ export const GET = (req: NextRequest) =>
     }
 
     // Fetch notifications
-    const data = await getNotificationsList(parsed.data);
+    const data = await getNotifications(parsed.data);
 
     return NextResponse.json(data);
   });

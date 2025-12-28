@@ -1,7 +1,7 @@
-export type TaskCategorySummaryDTO = {
+export interface TaskCategorySummaryDTO {
   id: number;
   name: string;
-};
+}
 
 export interface CreateTaskCategoryInputDTO {
   name: string;

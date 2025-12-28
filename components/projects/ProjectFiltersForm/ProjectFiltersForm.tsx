@@ -2,12 +2,12 @@
 
 import { useState } from "react";
 import { DateValue } from "react-aria";
+import { ProjectFilters } from "@/lib/types";
 import { Switch } from "@/components/ui/Switch";
 import { Divider, RACForm } from "@/components/ui";
 import { parseDate } from "@internationalized/date";
 import { useLocale, useTranslations } from "next-intl";
 import { usePathname, useRouter } from "@/i18n/navigation";
-import { ProjectFilters } from "@/lib/data/project/project.dto";
 import { ProjectFiltersFormDeadlineRange } from "./ProjectFiltersFormDeadlineRange";
 import { ProjectFiltersFormDeadlineCheckboxGroup } from "./ProjectFiltersFormDeadlineCheckboxGroup";
 

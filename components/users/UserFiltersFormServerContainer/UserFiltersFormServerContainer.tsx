@@ -3,8 +3,8 @@ import {
   UserFiltersFormPositionCheckboxGroup,
 } from "../UserFiltersForm";
 
-import { UserFilters } from "@/lib/data/user/user.dto";
-import { getPositionSummaries } from "@/lib/data/position/position.dal";
+import { UserFilters } from "@/lib/types";
+import { getPositionSummaries } from "@/lib/data/position/position.service";
 
 interface UserFiltersFormServerContainerProps {
   filters: UserFilters;

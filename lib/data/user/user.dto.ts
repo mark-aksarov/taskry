@@ -1,4 +1,9 @@
-export interface BaseUserDTO {
+export type UserSummaryDTO = {
+  id: string;
+  fullName: string;
+};
+
+export interface UserDetailDTO {
   id: string;
   fullName: string;
   email: string;
@@ -8,30 +13,21 @@ export interface BaseUserDTO {
   address?: string;
   publicLink?: string;
   birthdate?: Date;
-  positionId?: number;
-}
 
-export type UserSummaryDTO = Pick<BaseUserDTO, "id" | "fullName">;
-
-export interface UserDetailDTO extends Omit<BaseUserDTO, "positionId"> {
   position?: {
     name: string;
   };
 }
 
-export interface UserListItemDTO
-  extends Pick<
-    BaseUserDTO,
-    "id" | "fullName" | "email" | "phoneNumber" | "imageUrl" | "publicLink"
-  > {
+export interface UserListItemDTO {
+  id: string;
+  fullName: string;
+  email: string;
+  phoneNumber?: string;
+  imageUrl?: string;
+  publicLink?: string;
+
   position?: {
     name: string;
   };
-}
-
-export interface UserFilters {
-  hasNoActiveTasks?: boolean;
-  hasActiveTasks?: boolean;
-  hasOverdueTasks?: boolean;
-  position: number[];
 }

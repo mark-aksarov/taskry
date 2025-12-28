@@ -1,11 +1,8 @@
-import {
-  getCustomerDetail,
-  getCustomerFormData,
-} from "@/lib/data/customer/customer.dal";
-
 import z from "zod";
 import { NextRequest, NextResponse } from "next/server";
 import { withAuthRouteHandler } from "@/lib/utils/withAuthRouteHandler";
+import { getCustomerDetail } from "@/lib/data/customer/customer.service";
+import { getCustomerFormData } from "@/lib/data/customer/customer.service";
 
 const schema = z.object({ id: z.coerce.number().int().positive() });
 

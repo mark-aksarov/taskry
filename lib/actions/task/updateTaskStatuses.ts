@@ -8,7 +8,7 @@ import { TaskStatus } from "@/generated/prisma/enums";
 import { withAuthAction } from "../utils/withAuthAction";
 import { validateActionInput } from "../utils/validateActionInput";
 import { actionError, actionSuccess } from "../utils/actionResult";
-import { updateTaskStatuses as updateTaskStatusesQuery } from "@/lib/data/task/task.dal";
+import { updateTasks as updateTasksQuery } from "@/lib/data/task/task.dal";
 
 const schema = z.object({
   ids: z.array(z.coerce.number().int().positive()).min(1),
@@ -30,7 +30,7 @@ export async function updateTaskStatuses(
     }
 
     // Execute update
-    await updateTaskStatusesQuery(parsed.data.ids, parsed.data.nextStatus);
+    await updateTasksQuery(parsed.data.ids, parsed.data.nextStatus);
 
     // Revalidation
     revalidatePath("/tasks");

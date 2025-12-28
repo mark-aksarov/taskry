@@ -1,6 +1,8 @@
 import prisma from "@/lib/prisma";
 
 export async function resetDatabase() {
+  await prisma.notification.deleteMany();
+  await prisma.notificationTarget.deleteMany();
   await prisma.comment.deleteMany();
   await prisma.task.deleteMany();
   await prisma.taskCategory.deleteMany();

@@ -8,9 +8,10 @@ import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import { TaskList } from "../TaskList";
 import { TaskListItem } from "../TaskListItem";
-import { deleteTasks } from "@/lib/actions/task/deleteTasks";
+import { getTaskCount } from "@/lib/data/task/task.dal";
+import { getTaskList } from "@/lib/data/task/task.service";
 import { Pagination } from "@/components/common/Pagination";
-import { getTaskCount, getTaskList } from "@/lib/data/task/task.dal";
+import { deleteTasks } from "@/lib/actions/task/deleteTasks";
 import { updateTaskStatuses } from "@/lib/actions/task/updateTaskStatuses";
 
 interface AssignedTasksServerContainerProps {

@@ -1,5 +1,5 @@
+import { UserFilters } from "@/lib/types";
 import { useTranslations } from "next-intl";
-import { UserFilters } from "@/lib/data/user/user.dto";
 import { CheckboxGroup, Checkbox } from "@/components/ui";
 
 interface UserFiltersFormServerContainerProps {

@@ -1,68 +1,43 @@
-import "server-only";
-
-import {
-  mapUserDetailToDTO,
-  mapUserSummaryToDTO,
-  mapUserListItemToDTO,
-} from "./user.mapper";
-
-import {
-  userDetailSelect,
-  userSummarySelect,
-  userListItemSelect,
-} from "./user.select";
-
 import { cache } from "react";
 import prisma from "@/lib/prisma";
+import { UserFilters } from "@/lib/types";
+import { verifySession } from "../utils/verifySession";
 import { Prisma, TaskStatus } from "@/generated/prisma/client";
-import { getSessionOrThrow } from "@/lib/data/utils/getSessionOrThrow";
-import { UserFilters } from "./user.dto";
 
-export const getUserSummaries = cache(async () => {
-  const {
-    user: { workspaceId },
-  } = await getSessionOrThrow();
+export const getUser = cache(
+  async <T extends Prisma.UserSelect>(id: string, select: T) => {
+    const {
+      user: { workspaceId },
+    } = await verifySession();
 
-  const users = await prisma.user.findMany({
-    where: { workspaceId },
-    select: userSummarySelect,
-  });
+    let where = { id, workspaceId };
 
-  return users.map(mapUserSummaryToDTO);
-});
-
-export const getUserDetail = cache(async (userId: string) => {
-  const {
-    user: { workspaceId },
-  } = await getSessionOrThrow();
-
-  const data = await prisma.user.findFirst({
-    where: { id: userId, workspaceId },
-    select: userDetailSelect,
-  });
-
-  if (!data) throw new Error("User not found");
-
-  return mapUserDetailToDTO(data);
-});
-
-export const getUserList = cache(
-  async ({
+    return prisma.user.findFirst({
+      where,
+      select,
+    });
+  },
+);
+export const getAllUsers = cache(
+  async <T extends Prisma.UserSelect>({
     page,
     pageSize,
     sort,
     filters,
+    select,
   }: {
-    page: number;
-    pageSize: number;
-    sort: string;
+    page?: number;
+    pageSize?: number;
+    sort?: string;
     filters?: UserFilters;
+    select: T;
   }) => {
     const {
       user: { workspaceId },
-    } = await getSessionOrThrow();
+    } = await verifySession();
 
-    const skip = (page - 1) * pageSize;
+    const skip = page && pageSize ? (page - 1) * pageSize : undefined;
+    const take = pageSize ? pageSize : undefined;
 
     const orderByMapping: Record<string, Prisma.UserOrderByWithRelationInput> =
       {
@@ -70,22 +45,22 @@ export const getUserList = cache(
         position: { position: { name: "asc" } },
       };
 
-    const users = await prisma.user.findMany({
-      where: buildUserWhereClause(workspaceId, filters),
-      orderBy: [orderByMapping[sort] || { fullName: "asc" }],
-      skip,
-      take: pageSize,
-      select: userListItemSelect,
-    });
+    const orderBy = sort ? orderByMapping[sort] : undefined;
 
-    return users.map(mapUserListItemToDTO);
+    return await prisma.user.findMany({
+      where: buildUserWhereClause(workspaceId, filters),
+      orderBy,
+      skip,
+      take,
+      select,
+    });
   },
 );
 
 export const getUserCount = cache(async (filters?: UserFilters) => {
   const {
     user: { workspaceId },
-  } = await getSessionOrThrow();
+  } = await verifySession();
 
   return prisma.user.count({
     where: buildUserWhereClause(workspaceId, filters),
@@ -95,16 +70,16 @@ export const getUserCount = cache(async (filters?: UserFilters) => {
 export const deleteUsers = async (ids: string[]) => {
   const {
     user: { workspaceId },
-  } = await getSessionOrThrow();
+  } = await verifySession();
 
-  const { count } = await prisma.user.deleteMany({
+  return await prisma.user.deleteMany({
     where: { workspaceId, id: { in: ids } },
   });
-
-  if (count === 0) throw new Error("No users deleted.");
-
-  return count;
 };
+
+/**
+ * HELPERS
+ */
 
 export function buildUserWhereClause(
   workspaceId: number,

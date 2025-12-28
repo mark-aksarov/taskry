@@ -1,31 +1,30 @@
-"server-only";
+import "server-only";
 
 import { cache } from "react";
 import prisma from "@/lib/prisma";
 import { CreateCompanyInputDTO } from "./company.dto";
-import { companySummarySelect } from "./company.select";
-import { mapCompanySummaryToDTO } from "./company.mapper";
-import { getSessionOrThrow } from "@/lib/data/utils/getSessionOrThrow";
+import { verifySession } from "../utils/verifySession";
 
-export const getCompanySummaries = cache(async () => {
+export const getAllCompanies = cache(async () => {
   const {
     user: { workspaceId },
-  } = await getSessionOrThrow();
+  } = await verifySession();
 
-  const companies = await prisma.company.findMany({
+  return await prisma.company.findMany({
     where: {
       workspaceId,
     },
-    select: companySummarySelect,
+    select: {
+      id: true,
+      name: true,
+    },
   });
-
-  return companies.map((company) => mapCompanySummaryToDTO(company));
 });
 
 export const createCompany = async (company: CreateCompanyInputDTO) => {
   const {
     user: { workspaceId },
-  } = await getSessionOrThrow();
+  } = await verifySession();
 
   return await prisma.company.create({
     data: {

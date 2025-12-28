@@ -1,26 +1,22 @@
 import {
-  getCustomerList,
-  getCustomerFormData,
-  getCustomerSummaries,
-  getCustomerCount,
-  deleteCustomers,
   createCustomer,
   updateCustomer,
+  deleteCustomers,
+  getCustomerCount,
 } from "../customer.dal";
 
 import prisma from "@/lib/prisma";
-import * as mappers from "../customer.mapper";
 import { resetDatabase } from "@/lib/data/utils/test-utils";
 import { describe, it, expect, beforeEach, vi } from "vitest";
-import { getSessionOrThrow } from "@/lib/data/utils/getSessionOrThrow";
+import { verifySession } from "@/lib/data/utils/verifySession";
 
 vi.mock("server-only", () => ({}));
 
-vi.mock("@/lib/data/utils/getSessionOrThrow", () => ({
-  getSessionOrThrow: vi.fn(),
+vi.mock("@/lib/data/utils/verifySession", () => ({
+  verifySession: vi.fn(),
 }));
 
-describe("Company DAL", () => {
+describe("Customer DAL", () => {
   beforeEach(async () => {
     vi.resetAllMocks();
 
@@ -29,7 +25,7 @@ describe("Company DAL", () => {
     const mockSession = {
       user: { id: "user-1", workspaceId: 1 },
     };
-    (getSessionOrThrow as any).mockResolvedValue(mockSession);
+    (verifySession as any).mockResolvedValue(mockSession);
 
     await prisma.workspace.create({ data: { id: 1 } });
     await prisma.company.create({
@@ -74,164 +70,6 @@ describe("Company DAL", () => {
     });
   });
 
-  describe("getCustomerSummaries", () => {
-    it("should return all customer summaries for the current workspace", async () => {
-      const mapperSpy = vi.spyOn(mappers, "mapCustomerSummaryToDTO");
-
-      const result = await getCustomerSummaries();
-
-      expect(result).toHaveLength(2);
-      expect(result.map((c) => c.fullName)).toContain("John Doe");
-      expect(result.map((c) => c.fullName)).toContain("Jane Smith");
-      expect(mapperSpy).toHaveBeenCalledTimes(2);
-    });
-
-    it("should ensure strict isolation between workspaces", async () => {
-      (getSessionOrThrow as any).mockResolvedValue({
-        user: { id: "user-2", workspaceId: 2 },
-      });
-
-      const result = await getCustomerSummaries();
-
-      expect(result).toHaveLength(1);
-      expect(result[0].fullName).toBe("Other Workspace User");
-
-      expect(result.find((c) => c.id === 1)).toBeUndefined();
-    });
-
-    it("should return an empty array if no customers exist in workspace", async () => {
-      await prisma.workspace.create({ data: { id: 3 } });
-      (getSessionOrThrow as any).mockResolvedValue({
-        user: { id: "user-3", workspaceId: 3 },
-      });
-
-      const result = await getCustomerSummaries();
-
-      expect(result).toEqual([]);
-    });
-
-    it("should fail if the session is not found", async () => {
-      (getSessionOrThrow as any).mockRejectedValue(new Error("Unauthorized"));
-
-      await expect(getCustomerSummaries()).rejects.toThrow("Unauthorized");
-    });
-  });
-
-  describe("getCustomerFormData", () => {
-    it("should return customer form data when id and workspace match", async () => {
-      const mapperSpy = vi.spyOn(mappers, "mapCustomerFormDataToDTO");
-
-      const result = await getCustomerFormData(1);
-
-      expect(result).toBeDefined();
-      expect(mapperSpy).toHaveBeenCalledWith(
-        expect.objectContaining({
-          id: 1,
-          fullName: "John Doe",
-        }),
-      );
-    });
-
-    it("should throw 'Customer not found' if customer belongs to a different workspace", async () => {
-      await expect(getCustomerFormData(3)).rejects.toThrow(
-        "Customer not found",
-      );
-    });
-
-    it("should throw 'Customer not found' if customer does not exist", async () => {
-      await expect(getCustomerFormData(999)).rejects.toThrow(
-        "Customer not found",
-      );
-    });
-  });
-
-  describe("getCustomerList", () => {
-    it("should return paginated customers for the current workspace", async () => {
-      const result = await getCustomerList({
-        page: 1,
-        pageSize: 1,
-        sort: "fullName",
-      });
-
-      expect(result).toHaveLength(1);
-      expect(result[0].fullName).toBe("Jane Smith");
-
-      const secondPage = await getCustomerList({
-        page: 2,
-        pageSize: 1,
-        sort: "fullName",
-      });
-
-      expect(secondPage).toHaveLength(1);
-      expect(secondPage[0].fullName).toBe("John Doe");
-    });
-
-    it("should sort customers by company name", async () => {
-      const result = await getCustomerList({
-        page: 1,
-        pageSize: 10,
-        sort: "company",
-      });
-
-      expect(result[0].fullName).toBe("John Doe");
-      expect(result[1].fullName).toBe("Jane Smith");
-    });
-
-    it("should filter customers by specific companies", async () => {
-      const result = await getCustomerList({
-        page: 1,
-        pageSize: 10,
-        sort: "fullName",
-        filters: {
-          company: [1],
-        },
-      });
-
-      expect(result).toHaveLength(1);
-      expect(result[0].fullName).toBe("John Doe");
-    });
-
-    it("should return multiple customers when filtering by multiple companies", async () => {
-      const result = await getCustomerList({
-        page: 1,
-        pageSize: 10,
-        sort: "fullName",
-        filters: {
-          company: [1, 2],
-        },
-      });
-
-      expect(result).toHaveLength(2);
-    });
-
-    it("should return empty array when filtering by companies with no customers in current workspace", async () => {
-      const result = await getCustomerList({
-        page: 1,
-        pageSize: 10,
-        sort: "fullName",
-        filters: {
-          company: [3],
-        },
-      });
-
-      expect(result).toHaveLength(0);
-    });
-
-    it("should return empty array if no customers match the project filters (mocking logic)", async () => {
-      const result = await getCustomerList({
-        page: 1,
-        pageSize: 10,
-        sort: "fullName",
-        filters: {
-          hasActiveProjects: true,
-          company: [],
-        },
-      });
-
-      expect(result).toHaveLength(0);
-    });
-  });
-
   describe("getCustomerCount", () => {
     it("should return total count of customers for the current workspace", async () => {
       const count = await getCustomerCount();
@@ -264,7 +102,7 @@ describe("Company DAL", () => {
     });
 
     it("should correctly count customers in a different workspace", async () => {
-      (getSessionOrThrow as any).mockResolvedValue({
+      (verifySession as any).mockResolvedValue({
         user: { id: "user-2", workspaceId: 2 },
       });
 
@@ -285,7 +123,7 @@ describe("Company DAL", () => {
 
   describe("deleteCustomers", () => {
     it("should successfully delete multiple customers in the current workspace", async () => {
-      const count = await deleteCustomers([1, 2]);
+      const { count } = await deleteCustomers([1, 2]);
 
       expect(count).toBe(2);
 
@@ -296,7 +134,7 @@ describe("Company DAL", () => {
     });
 
     it("should delete only own customers even if foreign IDs are provided", async () => {
-      const count = await deleteCustomers([1, 3]);
+      const { count } = await deleteCustomers([1, 3]);
 
       expect(count).toBe(1);
 
@@ -307,22 +145,19 @@ describe("Company DAL", () => {
       expect(foreignCustomer?.fullName).toBe("Other Workspace User");
     });
 
-    it("should throw an error if no customers were deleted", async () => {
-      await expect(deleteCustomers([999])).rejects.toThrow(
-        "No customers deleted.",
-      );
+    it("should return a count of 0 if no customers were deleted", async () => {
+      const { count } = await deleteCustomers([999]);
+      expect(count).toBe(0);
     });
 
-    it("should throw an error if trying to delete another workspace's customer exclusively", async () => {
-      await expect(deleteCustomers([3])).rejects.toThrow(
-        "No customers deleted.",
-      );
+    it("should return a count of 0 if trying to delete another workspace's customer exclusively", async () => {
+      const { count } = await deleteCustomers([3]);
+      expect(count).toBe(0);
     });
 
-    it("should handle an empty array of IDs", async () => {
-      await expect(deleteCustomers([])).rejects.toThrow(
-        "No customers deleted.",
-      );
+    it("should handle an empty array of IDs by returning count 0", async () => {
+      const { count } = await deleteCustomers([]);
+      expect(count).toBe(0);
     });
   });
 
@@ -362,7 +197,7 @@ describe("Company DAL", () => {
     });
 
     it("should fail if session is missing", async () => {
-      (getSessionOrThrow as any).mockRejectedValue(new Error("Unauthorized"));
+      (verifySession as any).mockRejectedValue(new Error("Unauthorized"));
 
       const input = {
         fullName: "No Session",
@@ -419,7 +254,7 @@ describe("Company DAL", () => {
     });
 
     it("should fail if session is invalid", async () => {
-      (getSessionOrThrow as any).mockRejectedValue(new Error("Unauthorized"));
+      (verifySession as any).mockRejectedValue(new Error("Unauthorized"));
 
       const input = { id: 1, fullName: "New Name" };
 

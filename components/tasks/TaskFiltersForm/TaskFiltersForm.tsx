@@ -3,9 +3,9 @@
 import { useState } from "react";
 import { useLocale } from "next-intl";
 import { DateValue } from "react-aria";
+import { TaskFilters } from "@/lib/types";
 import { Divider, RACForm } from "@/components/ui";
 import { parseDate } from "@internationalized/date";
-import { TaskFilters } from "@/lib/data/task/task.dto";
 import { usePathname, useRouter } from "@/i18n/navigation";
 import { TaskFiltersFormDeadlineRange } from "./TaskFiltersFormDeadlineRange";
 import { TaskFiltersFormDeadlineCheckboxGroup } from "./TaskFiltersFormDeadlineCheckboxGroup";

@@ -8,7 +8,7 @@ import { ProjectStatus } from "@/generated/prisma/enums";
 import { withAuthAction } from "../utils/withAuthAction";
 import { validateActionInput } from "../utils/validateActionInput";
 import { actionError, actionSuccess } from "../utils/actionResult";
-import { updateProjectStatuses as updateProjectStatusesQuery } from "@/lib/data/project/project.dal";
+import { updateProjects as updateProjectsQuery } from "@/lib/data/project/project.dal";
 
 const schema = z.object({
   ids: z.array(z.coerce.number().int().positive()).min(1),
@@ -30,7 +30,7 @@ export async function updateProjectStatuses(
     }
 
     // Execute update
-    await updateProjectStatusesQuery(parsed.data.ids, parsed.data.nextStatus);
+    await updateProjectsQuery(parsed.data.ids, parsed.data.nextStatus);
 
     // Revalidation
     revalidatePath("/projects");

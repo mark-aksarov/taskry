@@ -14,9 +14,9 @@ import {
 
 import { Suspense } from "react";
 import { useTranslations } from "next-intl";
+import { ProjectFilters } from "@/lib/types";
 import { PageGrid } from "@/components/common/PageGrid";
 import { ViewModeProvider } from "@/components/common/ViewMode";
-import { ProjectFilters } from "@/lib/data/project/project.dto";
 import { PageContainer } from "@/components/common/PageContainer";
 import { SelectionProvider } from "@/components/common/SelectionContext";
 import { ViewModeToggleButtonGroup } from "@/components/common/ViewMode";

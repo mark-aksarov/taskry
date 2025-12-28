@@ -1,6 +1,6 @@
 import { useTranslations } from "next-intl";
+import { CustomerFilters } from "@/lib/types";
 import { Checkbox, CheckboxGroup } from "@/components/ui";
-import { CustomerFilters } from "@/lib/data/customer/customer.dto";
 
 interface CustomerFiltersFormCompanyCheckboxGroupProps {
   filters: CustomerFilters;

@@ -1,5 +1,6 @@
+import { notFound } from "next/navigation";
 import { UserDetail } from "../UserDetail";
-import { getUserDetail } from "@/lib/data/user/user.dal";
+import { getUserDetail } from "@/lib/data/user/user.service";
 
 export async function UserDetailServerContainer({
   userId,
@@ -7,6 +8,10 @@ export async function UserDetailServerContainer({
   userId: string;
 }) {
   const user = await getUserDetail(userId);
+
+  if (!user) {
+    notFound();
+  }
 
   return (
     <UserDetail

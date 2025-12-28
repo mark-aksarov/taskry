@@ -1,9 +1,8 @@
+import { DeadlineQuickFilter } from "@/lib/types";
 import { addDays, endOfDay, startOfDay } from "./date";
 
-export type DateQuickFilter = "today" | "tomorrow" | "overdue";
-
 interface BuildDateWhereParams {
-  quick?: DateQuickFilter;
+  quick?: DeadlineQuickFilter;
   dateStart?: string;
   dateEnd?: string;
   now?: Date;

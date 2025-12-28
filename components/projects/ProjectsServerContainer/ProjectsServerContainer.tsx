@@ -1,22 +1,16 @@
-import {
-  getProjectCount,
-  getProjectList,
-} from "@/lib/data/project/project.dal";
-
-import {
-  ProjectFilters,
-  ProjectListItemDTO,
-} from "@/lib/data/project/project.dto";
-
 import { ProjectList } from "../ProjectList";
 import { ProjectGrid } from "../ProjectGrid";
 import { redirect } from "@/i18n/navigation";
 import { getLocale } from "next-intl/server";
+import { ProjectFilters } from "@/lib/types";
 import { ProjectListItem } from "../ProjectListItem";
 import { ProjectGridItem } from "../ProjectGridItem";
 import { Pagination } from "@/components/common/Pagination";
-import { deleteProjects } from "@/lib/actions/project/deleteProjects";
 import { ViewModeLayout } from "@/components/common/ViewMode";
+import { getProjectCount } from "@/lib/data/project/project.dal";
+import { getProjectList } from "@/lib/data/project/project.service";
+import { ProjectListItemDTO } from "@/lib/data/project/project.dto";
+import { deleteProjects } from "@/lib/actions/project/deleteProjects";
 import { updateProjectStatuses } from "@/lib/actions/project/updateProjectStatuses";
 
 interface ProjectsServerContainerProps {

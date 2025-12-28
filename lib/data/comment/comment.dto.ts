@@ -1,4 +1,4 @@
-export interface CommentDTO {
+export interface CommentListItemDTO {
   id: number;
   content: string;
   createdAt: Date;

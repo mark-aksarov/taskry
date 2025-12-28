@@ -1,6 +1,6 @@
 import useSWR from "swr";
-import { CommentDTO } from "@/lib/data/comment/comment.dto";
 import { CommentItem } from "@/components/comments/CommentItem";
+import { CommentListItemDTO } from "@/lib/data/comment/comment.dto";
 import { CommentsEmptySection } from "@/components/comments/CommentsEmptySection";
 
 export function ProjectCommentsClientContainer({
@@ -8,7 +8,7 @@ export function ProjectCommentsClientContainer({
 }: {
   projectId: number;
 }) {
-  const { data: comments } = useSWR<CommentDTO[]>(
+  const { data: comments } = useSWR<CommentListItemDTO[]>(
     `/api/projects/${projectId}/comments`,
     {
       suspense: true,

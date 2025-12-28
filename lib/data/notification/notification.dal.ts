@@ -2,11 +2,9 @@ import "server-only";
 
 import { cache } from "react";
 import prisma from "@/lib/prisma";
-import { mapNotificationsToDTO } from "./notification.mapper";
-import { notificationListItemSelect } from "./notification.select";
-import { getSessionOrThrow } from "@/lib/data/utils/getSessionOrThrow";
+import { verifySession } from "@/lib/data/utils/verifySession";
 
-export const getNotificationsList = cache(
+export const getAllNotifications = cache(
   async ({
     page,
     pageSize,
@@ -14,11 +12,11 @@ export const getNotificationsList = cache(
   }: {
     page: number;
     pageSize: number;
-    filter?: string;
+    filter?: "unread" | "all";
   }) => {
     const {
       user: { workspaceId, id: recipientId },
-    } = await getSessionOrThrow();
+    } = await verifySession();
 
     const skip = (page - 1) * pageSize;
     const baseWhere = { recipientId, workspaceId };
@@ -34,13 +32,98 @@ export const getNotificationsList = cache(
         skip,
         take: pageSize,
         orderBy: { createdAt: "desc" },
-        select: notificationListItemSelect,
+        select: {
+          id: true,
+          type: true,
+          targetName: true,
+          createdAt: true,
+          updatedAt: true,
+          isRead: true,
+
+          actor: {
+            select: {
+              id: true,
+              fullName: true,
+              imageUrl: true,
+            },
+          },
+
+          target: {
+            select: {
+              id: true,
+
+              project: {
+                select: {
+                  id: true,
+                  title: true,
+                },
+              },
+
+              task: {
+                select: {
+                  id: true,
+                  title: true,
+                },
+              },
+
+              user: {
+                select: {
+                  id: true,
+                  fullName: true,
+                },
+              },
+
+              customer: {
+                select: {
+                  id: true,
+                  fullName: true,
+                },
+              },
+
+              comment: {
+                select: {
+                  id: true,
+                  content: true,
+                  createdAt: true,
+
+                  attachments: {
+                    select: {
+                      id: true,
+                      fileUrl: true,
+                      fileName: true,
+                    },
+                  },
+
+                  project: {
+                    select: {
+                      id: true,
+                      title: true,
+                    },
+                  },
+
+                  task: {
+                    select: {
+                      id: true,
+                      title: true,
+                    },
+                  },
+
+                  _count: {
+                    select: {
+                      replies: true,
+                    },
+                  },
+                },
+              },
+            },
+          },
+        },
       }),
 
       prisma.notification.count({ where: baseWhere }),
       prisma.notification.count({ where: { ...baseWhere, isRead: false } }),
     ]);
 
-    return mapNotificationsToDTO(notifications, totalCount, unreadCount);
+    return { items: notifications, totalCount, unreadCount };
   },
 );

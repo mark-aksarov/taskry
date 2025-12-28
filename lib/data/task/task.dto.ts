@@ -1,7 +1,11 @@
-import { DeadlineQuickFilter } from "../utils/date";
 import { ProjectStatus, TaskStatus } from "@/generated/prisma/enums";
 
-export interface BaseTaskDTO {
+export type TaskSummaryDTO = {
+  id: number;
+  title: string;
+};
+
+export interface TaskFormDataDTO {
   id: number;
   title: string;
   description?: string;
@@ -12,22 +16,34 @@ export interface BaseTaskDTO {
   assigneeId?: string;
 }
 
-export type TaskSummaryDTO = Pick<BaseTaskDTO, "id" | "title">;
-
-export interface TaskFormDataDTO extends BaseTaskDTO {
-  status: ProjectStatus;
-}
-
-export interface CreateTaskInputDTO extends Omit<TaskFormDataDTO, "id"> {}
-
-export interface UpdateTaskInputDTO
-  extends Partial<Omit<TaskFormDataDTO, "id">> {
-  id: BaseTaskDTO["id"];
-}
-
-export interface TaskDetailDTO
-  extends Omit<BaseTaskDTO, "projectId" | "categoryId" | "assigneeId"> {
+export interface CreateTaskInputDTO {
+  title: string;
+  description?: string;
   deadline: Date;
+  status: TaskStatus;
+  projectId: number;
+  categoryId: number;
+  assigneeId?: string;
+}
+
+export interface UpdateTaskInputDTO {
+  id: number;
+  title?: string;
+  description?: string;
+  deadline?: Date;
+  status?: TaskStatus;
+  projectId?: number;
+  categoryId?: number;
+  assigneeId?: string;
+}
+
+export interface TaskDetailDTO {
+  id: number;
+  title: string;
+  description?: string;
+  deadline: Date;
+  status: TaskStatus;
+
   assignee?: {
     id: string;
     fullName: string;
@@ -54,8 +70,11 @@ export interface TaskDetailDTO
   commentsCount: number;
 }
 
-export interface TaskListItemDTO
-  extends Pick<BaseTaskDTO, "id" | "title" | "status"> {
+export interface TaskListItemDTO {
+  id: number;
+  title: string;
+  status: TaskStatus;
+
   deadline?: Date;
   assignee?: {
     id: string;
@@ -76,14 +95,4 @@ export interface TaskListItemDTO
     done: number;
   };
   commentsCount: number;
-}
-
-export interface TaskFilters {
-  status: TaskStatus[];
-  category: number[];
-  project: number[];
-  assignee: string[];
-  deadline?: DeadlineQuickFilter;
-  dateStart?: string;
-  dateEnd?: string;
 }

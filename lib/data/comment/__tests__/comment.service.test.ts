@@ -1,22 +1,22 @@
 import prisma from "@/lib/prisma";
-import { getComments } from "../comment.dal";
+import { getCommentList } from "../comment.service";
 import { resetDatabase } from "@/lib/data/utils/test-utils";
 import { describe, it, expect, beforeEach, vi } from "vitest";
+import { verifySession } from "@/lib/data/utils/verifySession";
 import { ProjectStatus, TaskStatus } from "@/generated/prisma/enums";
-import { getSessionOrThrow } from "@/lib/data/utils/getSessionOrThrow";
 
 vi.mock("server-only", () => ({}));
 
-vi.mock("@/lib/data/utils/getSessionOrThrow", () => ({
-  getSessionOrThrow: vi.fn(),
+vi.mock("@/lib/data/utils/verifySession", () => ({
+  verifySession: vi.fn(),
 }));
 
-describe("Comment DAL", () => {
+describe("Comment Service", () => {
   beforeEach(async () => {
     const mockSession = {
       user: { id: "user-1", workspaceId: 1 },
     };
-    (getSessionOrThrow as any).mockResolvedValue(mockSession);
+    (verifySession as any).mockResolvedValue(mockSession);
 
     await resetDatabase();
 
@@ -114,9 +114,9 @@ describe("Comment DAL", () => {
     });
   });
 
-  describe("getComments", () => {
+  describe("getCommentList", () => {
     it("should return only top-level project comments (excluding task comments)", async () => {
-      const result = await getComments({ projectId: 1 });
+      const result = await getCommentList({ projectId: 1 });
       expect(result).toHaveLength(2);
 
       const contents = result.map((c) => c.content);
@@ -126,24 +126,24 @@ describe("Comment DAL", () => {
     });
 
     it("should return only top-level task comments", async () => {
-      const result = await getComments({ taskId: 1 });
+      const result = await getCommentList({ taskId: 1 });
 
       expect(result).toHaveLength(1);
       expect(result[0].content).toBe("Task specific comment");
     });
 
     it("should return empty array if searching for comments in wrong workspace", async () => {
-      (getSessionOrThrow as any).mockResolvedValue({
+      (verifySession as any).mockResolvedValue({
         user: { id: "user-2", workspaceId: 2 },
       });
 
-      const result = await getComments({ projectId: 1 });
+      const result = await getCommentList({ projectId: 1 });
 
       expect(result).toHaveLength(0);
     });
 
     it("should exclude replies even if they belong to the same project", async () => {
-      const result = await getComments({ projectId: 1 });
+      const result = await getCommentList({ projectId: 1 });
 
       const reply = result.find((c) => c.content === "Reply to first comment");
       expect(reply).toBeUndefined();

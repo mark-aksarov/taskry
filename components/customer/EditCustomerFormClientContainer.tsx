@@ -4,8 +4,8 @@ import useSWR from "swr";
 import { EditCustomerForm } from "./EditCustomerForm";
 import { CustomerFormBaseCompanySelect } from "./CustomerFormBase";
 import { CompanySummaryDTO } from "@/lib/data/company/company.dto";
-import { CustomerFormDataDTO } from "@/lib/data/customer/customer.dto";
 import { updateCustomer } from "@/lib/actions/customer/updateCustomer";
+import { CustomerFormDataDTO } from "@/lib/data/customer/customer.dto";
 
 export function EditCustomerFormClientContainer({
   customerId,

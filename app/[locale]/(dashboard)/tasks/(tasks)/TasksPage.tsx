@@ -13,8 +13,8 @@ import {
 } from "@/components/common/Toolbar";
 
 import { Suspense } from "react";
+import { TaskFilters } from "@/lib/types";
 import { useTranslations } from "next-intl";
-import { TaskFilters } from "@/lib/data/task/task.dto";
 import { PageGrid } from "@/components/common/PageGrid";
 import { ViewModeProvider } from "@/components/common/ViewMode";
 import { PageContainer } from "@/components/common/PageContainer";
@@ -22,11 +22,11 @@ import { TaskFormBaseSkeleton } from "@/components/tasks/TaskFormBase";
 import { ViewModeToggleButtonGroup } from "@/components/common/ViewMode";
 import { SelectionProvider } from "@/components/common/SelectionContext";
 import { TaskFiltersFormSkeleton } from "@/components/tasks/TaskFiltersForm";
+import { NewTaskCategoryForm } from "@/components/tasks/NewTaskCategoryForm";
 import { TaskToolbarSortingMenuTrigger } from "@/components/tasks/TaskToolbarSortingMenuTrigger";
 import { TaskToolbarActionsMenuTrigger } from "@/components/tasks/TaskToolbarActionsMenuTrigger";
 import { TaskToolbarFiltersModalTrigger } from "@/components/tasks/TaskToolbarFiltersModalTrigger";
 import { TaskToolbarCreateNewMenuTrigger } from "@/components/tasks/TaskToolbarCreateNewMenuTrigger";
-import { NewTaskCategoryForm } from "@/components/tasks/NewTaskCategoryForm";
 
 interface TasksPageProps {
   page: number;

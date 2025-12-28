@@ -1,6 +1,6 @@
 import z from "zod";
 import { NextRequest, NextResponse } from "next/server";
-import { getComments } from "@/lib/data/comment/comment.dal";
+import { getCommentList } from "@/lib/data/comment/comment.service";
 import { withAuthRouteHandler } from "@/lib/utils/withAuthRouteHandler";
 
 export async function GET(
@@ -27,7 +27,7 @@ export async function GET(
     const { id: projectId } = parse.data;
 
     // Fetch comments
-    const comments = await getComments({
+    const comments = await getCommentList({
       projectId,
     });
 

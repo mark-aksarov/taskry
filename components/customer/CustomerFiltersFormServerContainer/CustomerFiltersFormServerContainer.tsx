@@ -1,6 +1,6 @@
+import { CustomerFilters } from "@/lib/types";
 import { CustomerFiltersForm } from "../CustomerFiltersForm";
-import { CustomerFilters } from "@/lib/data/customer/customer.dto";
-import { getCompanySummaries } from "@/lib/data/company/company.dal";
+import { getCompanySummaries } from "@/lib/data/company/company.service";
 import { CustomerFiltersFormCompanyCheckboxGroup } from "../CustomerFiltersForm";
 
 interface CustomerFiltersFormServerContainerProps {

@@ -1,6 +1,6 @@
 import z from "zod";
 import { NextRequest, NextResponse } from "next/server";
-import { getUserDetail } from "@/lib/data/user/user.dal";
+import { getUserDetail } from "@/lib/data/user/user.service";
 import { withAuthRouteHandler } from "@/lib/utils/withAuthRouteHandler";
 
 export async function GET(

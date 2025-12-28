@@ -1,14 +1,19 @@
+import { notFound } from "next/navigation";
 import { TaskDetailFull } from "../TaskDetailFull";
-import { getTaskDetail } from "@/lib/data/task/task.dal";
-import { getComments } from "@/lib/data/comment/comment.dal";
+import { getTaskDetail } from "@/lib/data/task/task.service";
 import { CommentItem } from "@/components/comments/CommentItem";
+import { getCommentList } from "@/lib/data/comment/comment.service";
 import { DetailCommentInput } from "@/components/common/DetailCommentInput";
 
 export async function TaskDetailFullServerContainer({ id }: { id: number }) {
   const task = await getTaskDetail(id);
-  const comments = await getComments({
+  const comments = await getCommentList({
     taskId: id,
   });
+
+  if (!task) {
+    notFound();
+  }
 
   return (
     <TaskDetailFull

@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { withAuthRouteHandler } from "@/lib/utils/withAuthRouteHandler";
-import { getTaskCategorySummaries } from "@/lib/data/taskCategory/taskCategory.dal";
+import { getTaskCategorySummaries } from "@/lib/data/taskCategory/taskCategory.service";
 
 export async function GET(req: NextRequest) {
   return withAuthRouteHandler(async () => {

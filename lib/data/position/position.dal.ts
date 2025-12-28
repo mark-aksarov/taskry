@@ -2,28 +2,27 @@
 
 import { cache } from "react";
 import prisma from "@/lib/prisma";
-import { positionSummarySelect } from "./position.select";
-import { mapPositionSummaryToDTO } from "./position.mapper";
-import { getSessionOrThrow } from "@/lib/data/utils/getSessionOrThrow";
+import { verifySession } from "../utils/verifySession";
 import { CreatePositionInputDTO } from "./position.dto";
 
-export const getPositionSummaries = cache(async () => {
+export const getAllPositions = cache(async () => {
   const {
     user: { workspaceId },
-  } = await getSessionOrThrow();
+  } = await verifySession();
 
-  const positions = await prisma.position.findMany({
+  return await prisma.position.findMany({
     where: { workspaceId },
-    select: positionSummarySelect,
+    select: {
+      id: true,
+      name: true,
+    },
   });
-
-  return positions.map(mapPositionSummaryToDTO);
 });
 
 export const createPosition = async (position: CreatePositionInputDTO) => {
   const {
     user: { workspaceId },
-  } = await getSessionOrThrow();
+  } = await verifySession();
 
   return await prisma.position.create({
     data: {

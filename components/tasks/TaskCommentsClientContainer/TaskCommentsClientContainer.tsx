@@ -5,7 +5,7 @@ import {
 
 import useSWR from "swr";
 import { Repeat } from "@/components/common/Repeat";
-import { CommentDTO } from "@/lib/data/comment/comment.dto";
+import { CommentListItemDTO } from "@/lib/data/comment/comment.dto";
 import { CommentsEmptySection } from "@/components/comments/CommentsEmptySection";
 
 export function TaskCommentsClientContainer({ taskId }: { taskId: number }) {
@@ -13,7 +13,7 @@ export function TaskCommentsClientContainer({ taskId }: { taskId: number }) {
     data: comments,
     error,
     isLoading,
-  } = useSWR<CommentDTO[]>(`/api/tasks/${taskId}/comments`);
+  } = useSWR<CommentListItemDTO[]>(`/api/tasks/${taskId}/comments`);
 
   if (isLoading) {
     return <Repeat items={10} renderItem={() => <CommentItemSkeleton />} />;

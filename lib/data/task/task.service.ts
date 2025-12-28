@@ -1,0 +1,210 @@
+import {
+  TaskDetailDTO,
+  TaskSummaryDTO,
+  TaskFormDataDTO,
+  TaskListItemDTO,
+} from "./task.dto";
+
+import { TaskFilters } from "@/lib/types";
+import { getAllTasks, getTask } from "./task.dal";
+
+export const getTaskDetail = async (
+  id: number,
+): Promise<TaskDetailDTO | null> => {
+  const task = await getTask(id, {
+    id: true,
+    title: true,
+    description: true,
+    deadline: true,
+
+    assignee: {
+      select: {
+        id: true,
+        fullName: true,
+        imageUrl: true,
+      },
+    },
+    status: true,
+    project: {
+      select: {
+        id: true,
+        title: true,
+      },
+    },
+    category: {
+      select: {
+        id: true,
+        name: true,
+      },
+    },
+    subtasks: {
+      select: {
+        id: true,
+        text: true,
+        isDone: true,
+      },
+    },
+    attachments: {
+      select: {
+        id: true,
+        fileUrl: true,
+        fileName: true,
+      },
+    },
+    _count: {
+      select: {
+        comments: true,
+      },
+    },
+  });
+
+  if (!task) {
+    return null;
+  }
+
+  return {
+    id: task.id,
+    title: task.title,
+    description: task.description ?? undefined,
+    deadline: task.deadline,
+    assignee: task.assignee
+      ? {
+          id: task.assignee.id,
+          fullName: task.assignee.fullName,
+          imageUrl: task.assignee.imageUrl ?? undefined,
+        }
+      : undefined,
+    status: task.status,
+    project: task.project,
+    category: task.category,
+    subtasks: task.subtasks,
+    attachments: task.attachments,
+    commentsCount: task._count.comments,
+  };
+};
+
+export const getTaskFormData = async (
+  id: number,
+): Promise<TaskFormDataDTO | null> => {
+  const project = await getTask(id, {
+    id: true,
+    title: true,
+    description: true,
+    deadline: true,
+    status: true,
+    categoryId: true,
+    projectId: true,
+    assigneeId: true,
+  });
+
+  if (!project) {
+    return null;
+  }
+
+  return {
+    id: project.id,
+    title: project.title,
+    description: project.description ?? undefined,
+    deadline: project.deadline,
+    status: project.status,
+    categoryId: project.categoryId ?? undefined,
+    projectId: project.projectId ?? undefined,
+    assigneeId: project.assigneeId ?? undefined,
+  };
+};
+
+export const getTaskList = async ({
+  page,
+  pageSize,
+  sort,
+  filters,
+}: {
+  page: number;
+  pageSize: number;
+  sort: string;
+  filters?: TaskFilters;
+}): Promise<TaskListItemDTO[]> => {
+  const tasks = await getAllTasks({
+    page,
+    pageSize,
+    sort,
+    filters,
+    select: {
+      id: true,
+      title: true,
+      deadline: true,
+
+      assignee: {
+        select: {
+          id: true,
+          fullName: true,
+          imageUrl: true,
+        },
+      },
+      status: true,
+      project: {
+        select: {
+          id: true,
+          title: true,
+          status: true,
+        },
+      },
+      category: {
+        select: {
+          id: true,
+          name: true,
+        },
+      },
+      subtasks: {
+        select: {
+          isDone: true,
+        },
+      },
+      _count: {
+        select: {
+          comments: true,
+          subtasks: true,
+        },
+      },
+    },
+  });
+
+  return tasks.map((task) => ({
+    id: task.id,
+    title: task.title,
+    status: task.status,
+    deadline: task.deadline ?? undefined,
+    assignee: task.assignee
+      ? {
+          id: task.assignee.id,
+          fullName: task.assignee.fullName,
+          imageUrl: task.assignee.imageUrl ?? undefined,
+        }
+      : undefined,
+    project: task.project,
+    category: task.category,
+    commentsCount: task._count.comments,
+    subtasks: {
+      total: task._count.subtasks,
+      done: task.subtasks.filter((s) => s.isDone).length,
+    },
+  }));
+};
+
+export const getTaskSummary = async (
+  id: number,
+): Promise<TaskSummaryDTO | null> => {
+  const task = await getTask(id, {
+    id: true,
+    title: true,
+  });
+
+  if (!task) {
+    return null;
+  }
+
+  return {
+    id: task.id,
+    title: task.title,
+  };
+};

@@ -1,14 +1,19 @@
+import { notFound } from "next/navigation";
 import { ProjectDetailFull } from "../ProjectDetailFull";
-import { getComments } from "@/lib/data/comment/comment.dal";
 import { CommentItem } from "@/components/comments/CommentItem";
-import { getProjectDetail } from "@/lib/data/project/project.dal";
+import { getCommentList } from "@/lib/data/comment/comment.service";
+import { getProjectDetail } from "@/lib/data/project/project.service";
 import { DetailCommentInput } from "@/components/common/DetailCommentInput";
 
 export async function ProjectDetailFullServerContainer({ id }: { id: number }) {
   const project = await getProjectDetail(id);
-  const comments = await getComments({
+  const comments = await getCommentList({
     projectId: id,
   });
+
+  if (!project) {
+    notFound();
+  }
 
   return (
     <ProjectDetailFull

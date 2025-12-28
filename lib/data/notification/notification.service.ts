@@ -1,11 +1,29 @@
-import { NotificationsDTO } from "./notification.dto";
-import { NotificationListItemType } from "./notification.select";
+import { getAllNotifications } from "./notification.dal";
+import { NotificationListItemDTO } from "./notification.dto";
 
-export function mapNotificationsToDTO(
-  notifications: NotificationListItemType[],
-  totalCount: number,
-  unreadCount: number,
-): NotificationsDTO {
+export const getNotifications = async ({
+  page,
+  pageSize,
+  filter,
+}: {
+  page: number;
+  pageSize: number;
+  filter?: "unread" | "all";
+}): Promise<{
+  items: NotificationListItemDTO[];
+  totalCount: number;
+  unreadCount: number;
+}> => {
+  const {
+    items: notifications,
+    totalCount,
+    unreadCount,
+  } = await getAllNotifications({
+    page,
+    pageSize,
+    filter,
+  });
+
   return {
     items: notifications.map((notification) => ({
       id: notification.id,
@@ -47,4 +65,4 @@ export function mapNotificationsToDTO(
     totalCount,
     unreadCount,
   };
-}
+};

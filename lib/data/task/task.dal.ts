@@ -1,101 +1,48 @@
-import "server-only";
-
-import {
-  TaskFilters,
-  TaskDetailDTO,
-  TaskSummaryDTO,
-  TaskListItemDTO,
-  CreateTaskInputDTO,
-  UpdateTaskInputDTO,
-} from "./task.dto";
-
-import {
-  mapTaskDetailToDTO,
-  mapTaskSummaryToDTO,
-  mapTaskListItemToDTO,
-  mapTaskFormDataToDTO,
-} from "./task.mapper";
-
-import {
-  taskDetailSelect,
-  taskSummarySelect,
-  taskListItemSelect,
-  taskFormDataSelect,
-} from "./task.select";
-
 import { cache } from "react";
 import prisma from "@/lib/prisma";
+import { TaskFilters } from "@/lib/types";
+import { AccessDeniedError } from "../utils/error";
 import { buildDateWhere } from "../utils/dateWhere";
-import { getSessionOrThrow } from "@/lib/data/utils/getSessionOrThrow";
+import { verifySession } from "../utils/verifySession";
+import { UpdateTaskInputDTO, CreateTaskInputDTO } from "./task.dto";
 import { ALLOWED_TASK_STATUSES_BY_PROJECT } from "../utils/statusUtils";
 import { Prisma, ProjectStatus, TaskStatus } from "@/generated/prisma/client";
 
-/**
- * READ METHODS
- */
-
-export const getTaskSummary = cache(
-  async (id: number): Promise<TaskSummaryDTO> => {
+export const getTask = cache(
+  async <T extends Prisma.TaskSelect>(id: number, select: T) => {
     const {
       user: { workspaceId },
-    } = await getSessionOrThrow();
+    } = await verifySession();
 
-    const data = await prisma.task.findFirst({
-      where: { id, workspaceId },
-      select: taskSummarySelect,
+    let where = { id, workspaceId };
+
+    return prisma.task.findFirst({
+      where,
+      select,
     });
-    if (!data) throw new Error("Task not found");
-    return mapTaskSummaryToDTO(data);
   },
 );
 
-export const getTaskDetail = cache(
-  async (id: number): Promise<TaskDetailDTO> => {
-    const {
-      user: { workspaceId },
-    } = await getSessionOrThrow();
-
-    const data = await prisma.task.findFirst({
-      where: { id, workspaceId },
-      select: taskDetailSelect,
-    });
-    if (!data) throw new Error("Task not found");
-    return mapTaskDetailToDTO(data);
-  },
-);
-
-export const getTaskFormData = cache(async (id: number) => {
-  const {
-    user: { workspaceId },
-  } = await getSessionOrThrow();
-
-  const data = await prisma.task.findFirst({
-    where: { id, workspaceId },
-    select: taskFormDataSelect,
-  });
-
-  if (!data) throw new Error("Task not found");
-
-  return mapTaskFormDataToDTO(data);
-});
-
-export const getTaskList = cache(
-  async ({
+export const getAllTasks = cache(
+  async <T extends Prisma.TaskSelect>({
     page,
     pageSize,
     sort,
     filters,
+    select,
   }: {
     page: number;
     pageSize: number;
     sort: string;
     filters?: TaskFilters;
-  }): Promise<TaskListItemDTO[]> => {
+    select: T;
+  }) => {
     const {
       user: { workspaceId },
-    } = await getSessionOrThrow();
+    } = await verifySession();
 
-    const skip = (page - 1) * pageSize;
+    const skip = page && pageSize ? (page - 1) * pageSize : undefined;
+    const take = pageSize ? pageSize : undefined;
 
     const orderByMapping: Record<string, Prisma.TaskOrderByWithRelationInput> =
       {
@@ -105,38 +52,33 @@ export const getTaskList = cache(
         category: { category: { name: "asc" } },
       };
 
-    const tasks = await prisma.task.findMany({
-      where: buildTaskWhereClause(workspaceId, filters),
-      orderBy: [orderByMapping[sort] || { title: "asc" }],
-      skip,
-      take: pageSize,
-      select: taskListItemSelect,
-    });
+    const orderBy = sort ? orderByMapping[sort] : undefined;
 
-    return tasks.map(mapTaskListItemToDTO);
+    return await prisma.task.findMany({
+      where: buildTaskWhereClause(workspaceId, filters),
+      orderBy,
+      skip,
+      take,
+      select,
+    });
   },
 );
 
 export const getTaskCount = cache(async (filters?: TaskFilters) => {
   const {
     user: { workspaceId },
-  } = await getSessionOrThrow();
+  } = await verifySession();
 
   const where = buildTaskWhereClause(workspaceId, filters);
 
   return prisma.task.count({ where });
 });
 
-/**
- * WRITE METHODS
- */
-
 export const createTask = async (input: CreateTaskInputDTO) => {
   const {
     user: { id: creatorId, workspaceId },
-  } = await getSessionOrThrow();
+  } = await verifySession();
 
-  // Validate all relations in parallel
   await validateTaskRelations(workspaceId, input);
 
   return prisma.task.create({
@@ -151,7 +93,7 @@ export const createTask = async (input: CreateTaskInputDTO) => {
 export const updateTask = async (input: UpdateTaskInputDTO) => {
   const {
     user: { workspaceId },
-  } = await getSessionOrThrow();
+  } = await verifySession();
 
   await validateTaskRelations(workspaceId, input);
 
@@ -162,7 +104,7 @@ export const updateTask = async (input: UpdateTaskInputDTO) => {
     });
 
     if (!existingTask) {
-      throw new Error("Task not found");
+      return null;
     }
 
     let dataToUpdate = { ...input };
@@ -183,17 +125,14 @@ export const updateTask = async (input: UpdateTaskInputDTO) => {
   });
 };
 
-export const updateTaskStatuses = async (
-  taskIds: number[],
-  nextStatus: TaskStatus,
-) => {
+export const updateTasks = async (taskIds: number[], status: TaskStatus) => {
   const {
     user: { workspaceId },
-  } = await getSessionOrThrow();
+  } = await verifySession();
 
-  const allowedProjectStatuses = getAllowedProjectStatuses(nextStatus);
+  const allowedProjectStatuses = getAllowedProjectStatuses(status);
 
-  const { count } = await prisma.task.updateMany({
+  return await prisma.task.updateMany({
     where: {
       id: { in: taskIds },
       workspaceId,
@@ -202,26 +141,22 @@ export const updateTaskStatuses = async (
       },
     },
     data: {
-      status: nextStatus,
+      status,
     },
   });
-
-  return count;
 };
 
 export const deleteTasks = async (ids: number[]) => {
   const {
     user: { workspaceId },
-  } = await getSessionOrThrow();
+  } = await verifySession();
 
-  const { count } = await prisma.task.deleteMany({
+  return await prisma.task.deleteMany({
     where: {
       workspaceId,
       id: { in: ids },
     },
   });
-
-  return count;
 };
 
 /**
@@ -249,9 +184,18 @@ async function validateTaskRelations(
   ];
 
   const [category, project, assignee] = await Promise.all(checks);
-  if (!category) throw new Error("Category access denied or not found");
-  if (!project) throw new Error("Project access denied or not found");
-  if (!assignee) throw new Error("Assignee access denied or not found");
+
+  if (!category) {
+    throw new AccessDeniedError("Category access denied or not found");
+  }
+
+  if (!project) {
+    throw new AccessDeniedError("Project access denied or not found");
+  }
+
+  if (!assignee) {
+    throw new AccessDeniedError("Assignee access denied or not found");
+  }
 }
 
 export function buildTaskWhereClause(
