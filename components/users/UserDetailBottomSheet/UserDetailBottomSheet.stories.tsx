@@ -1,17 +1,14 @@
-import { Button } from "@/components/ui";
-import { useOverlayTrigger } from "react-aria";
-import { useOverlayTriggerState } from "react-stately";
-import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import {
   UserDetailBottomSheet,
   UserDetailBottomSheetProps,
 } from "./UserDetailBottomSheet";
+
+import { Button } from "@/components/ui";
+import { useOverlayTrigger } from "react-aria";
+import { useOverlayTriggerState } from "react-stately";
+import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import {
-  withUserDetail,
-  withUserDetailSkeleton,
-} from "@/components/users/UserDetailClientContainer/decorators";
-import { withTaskComments } from "@/components/tasks/TaskCommentsClientContainer/decorators";
+import { withUserDetailSkeleton } from "@/components/users/UserDetailClientContainer/decorators";
 
 const meta = {
   title: "components/users/UserDetailBottomSheet",
@@ -51,10 +48,8 @@ const UserDetailBottomSheetTemplate = ({
   );
 };
 
-export const Default = {
-  decorators: [withUserDetail, withTaskComments],
-} satisfies Story;
+export const Default = {} satisfies Story;
 
 export const WithSkeletonContent = {
-  decorators: [withUserDetailSkeleton, withTaskComments],
+  decorators: [withUserDetailSkeleton],
 } satisfies Story;

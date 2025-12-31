@@ -8,7 +8,7 @@ const meta = {
   title: "components/users/ProfileNavigationMobile",
   component: ProfileNavigationMobile,
   beforeEach: () => {
-    mocked(usePathname).mockReturnValue("/profile/info");
+    mocked(usePathname).mockReturnValue("/profile");
   },
   decorators: [withThemedBackground],
 } satisfies Meta<typeof ProfileNavigationMobile>;

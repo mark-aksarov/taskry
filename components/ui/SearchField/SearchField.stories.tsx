@@ -20,7 +20,7 @@ const meta: Meta<typeof SearchField> = {
   },
   decorators: [
     (Story) => (
-      <div className="w-[500px]">
+      <div className="w-[500px] max-w-full">
         <Story />
       </div>
     ),

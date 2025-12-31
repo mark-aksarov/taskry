@@ -1,8 +1,8 @@
 import {
-  withTaskComments,
   withTaskCommentsEmpty,
   withTaskCommentsSkeleton,
 } from "../TaskCommentsClientContainer/decorators";
+
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { TaskCommentsModal } from "./TaskCommentsModal";
 import { Button, RACDialogTrigger } from "@/components/ui";
@@ -32,9 +32,7 @@ const meta = {
 export default meta;
 export type Story = StoryObj<typeof meta>;
 
-export const Default = {
-  decorators: [withTaskComments],
-} satisfies Story;
+export const Default = {} satisfies Story;
 
 export const Empty = {
   decorators: [withTaskCommentsEmpty],

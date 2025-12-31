@@ -11,22 +11,15 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { UserTasksPageLoadingLayout } from "./UserTasksPageLoadingLayout";
 import { ProfileNavigationMobile } from "@/components/users/ProfileNavigationMobile";
 import { ProfileNavigationDesktop } from "@/components/users/ProfileNavigationDesktop";
-import { withTaskComments } from "@/components/tasks/TaskCommentsClientContainer/decorators";
 import { Default as PersonHeaderStory } from "@/components/common/PersonHeader/PersonHeader.stories";
 import { Default as UserTaskListStory } from "@/components/users/UserTaskList/UserTaskList.stories";
 import { Default as TaskFormBaseStory } from "@/components/tasks/TaskFormBase/TaskFormBase.stories";
-import { withTaskDetailCompact } from "@/components/tasks/TaskDetailCompactClientContainer/decorators";
 
 const meta = {
   title: "components/users/UserTasksPageLayout",
   component: UserTasksPageLayout,
   parameters: { layout: "fullscreen" },
-  decorators: [
-    withTaskDetailCompact,
-    withTaskComments,
-    PageDecorator,
-    withThemedBackground,
-  ],
+  decorators: [PageDecorator, withThemedBackground],
   beforeEach: () => {
     mocked(usePathname).mockReturnValue("/profile/tasks");
   },

@@ -7,7 +7,7 @@ const meta = {
   component: TaskGridItemSkeleton,
   decorators: [
     (Story) => (
-      <div className="w-[300px] max-md:w-full">
+      <div className="w-[300px] max-w-full">
         <Story />
       </div>
     ),

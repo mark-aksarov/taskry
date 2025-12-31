@@ -14,13 +14,13 @@ import {
 
 import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
+import { EditTaskModal } from "./EditTaskModal";
 import { ItemBaseActionMenuTrigger } from "../common/ItemBase";
 import { DeleteEntityModal } from "../common/DeleteEntityModal";
 import { startTransition, useActionState, useState } from "react";
 import { ProjectStatus, TaskStatus } from "@/generated/prisma/enums";
 import { useActionErrorToast } from "@/lib/hooks/useActionErrorToast";
 import { Check, CircleEllipsis, Clock, Pencil, Trash } from "lucide-react";
-import { EditTaskModal } from "./EditTaskModal";
 
 export type TaskItemActionMenuTriggerProps = {
   taskId: number;

@@ -16,7 +16,6 @@ import { EditTaskModal } from "../EditTaskModal";
 import { OverlayTriggerState } from "react-stately";
 import { DialogTrigger } from "react-aria-components";
 import { TaskDetailCompactSkeleton } from "../TaskDetailCompact";
-import { EditTaskFormClientContainerContext } from "../EditTaskFormClientContainerContext";
 import { TaskDetailCompactClientContainerContext } from "../TaskDetailCompactClientContainer";
 
 export interface TaskDetailBottomSheetProps {
@@ -31,13 +30,6 @@ export function TaskDetailBottomSheet({
   const TaskDetailClientContainer = useContext(
     TaskDetailCompactClientContainerContext,
   );
-  const EditTaskFormContainer = useContext(EditTaskFormClientContainerContext);
-
-  if (!EditTaskFormContainer) {
-    throw new Error(
-      "EditTaskFormContainer must be used within a EditTaskFormContainerProvider",
-    );
-  }
 
   const t = useTranslations("tasks.TaskDetailBottomSheet");
 

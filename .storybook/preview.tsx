@@ -9,6 +9,17 @@ import type { Preview } from "@storybook/nextjs-vite";
 import { MINIMAL_VIEWPORTS } from "storybook/viewport";
 import { useRouter, useSearchParams } from "next/navigation";
 import { withThemeByDataAttribute } from "@storybook/addon-themes";
+import { SelectionProvider } from "../components/common/SelectionContext";
+import { withUserDetail } from "../components/users/UserDetailClientContainer/decorators";
+import { withTaskComments } from "../components/tasks/TaskCommentsClientContainer/decorators";
+import { withCustomerDetail } from "../components/customer/CustomerDetailClientContainer/decorators";
+import { withEditTaskForm } from "../components/tasks/EditTaskFormClientContainerContext/decorators";
+import { withProjectComments } from "../components/projects/ProjectCommentsClientContainer/decorators";
+import { withTaskDetailCompact } from "../components/tasks/TaskDetailCompactClientContainer/decorators";
+import { withEditProjectForm } from "../components/projects/EditProjectFormClientContainerContext/decorators";
+import { withEditCustomerForm } from "../components/customer/EditCustomerFormClientContainerContext/decorators";
+import { withProjectDetailCompact } from "../components/projects/ProjectDetailCompactClientContainer/decorators";
+import { withNotificationModalContent } from "../components/notifications/NotificationModalContentClientContainer/decorators";
 
 export const globalTypes = {
   locale: {
@@ -39,6 +50,21 @@ const preview: Preview = {
         </NextIntlClientProvider>
       );
     },
+    (Story) => (
+      <SelectionProvider>
+        <Story />
+      </SelectionProvider>
+    ),
+    withNotificationModalContent,
+    withEditCustomerForm,
+    withCustomerDetail,
+    withEditProjectForm,
+    withProjectComments,
+    withUserDetail,
+    withEditTaskForm,
+    withTaskDetailCompact,
+    withProjectDetailCompact,
+    withTaskComments,
     withThemeByDataAttribute({
       themes: {
         light: "light",

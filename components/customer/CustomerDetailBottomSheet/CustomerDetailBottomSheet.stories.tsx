@@ -2,17 +2,13 @@ import {
   CustomerDetailBottomSheet,
   CustomerDetailBottomSheetProps,
 } from "./CustomerDetailBottomSheet";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
-
-import {
-  withCustomerDetail,
-  withCustomerDetailSkeleton,
-} from "@/components/customer/CustomerDetailClientContainer/decorators";
 
 import { Button } from "@/components/ui";
 import { useOverlayTrigger } from "react-aria";
 import { useOverlayTriggerState } from "react-stately";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { withCustomerDetailSkeleton } from "@/components/customer/CustomerDetailClientContainer/decorators";
 
 const meta = {
   title: "components/customers/CustomerDetailBottomSheet",
@@ -52,9 +48,7 @@ const CustomerDetailBottomSheetTemplate = ({
   );
 };
 
-export const Default = {
-  decorators: [withCustomerDetail],
-} satisfies Story;
+export const Default = {} satisfies Story;
 
 export const WithSkeletonContent = {
   decorators: [withCustomerDetailSkeleton],

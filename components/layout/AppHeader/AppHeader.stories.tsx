@@ -6,7 +6,6 @@ import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { AppBottomSheetTrigger } from "../AppBottomSheetTrigger";
 import { AppSidebarSheetTrigger } from "../AppSidebarSheetTrigger";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withNotificationModalContent } from "@/components/notifications/NotificationModalContentClientContainer/decorators";
 
 const meta = {
   title: "Components/layout/AppHeader",
@@ -14,7 +13,7 @@ const meta = {
   parameters: {
     layout: "fullscreen",
   },
-  decorators: [withNotificationModalContent, withThemedBackground],
+  decorators: [withThemedBackground],
   beforeEach: () => {
     mocked(usePathname).mockReturnValue("/");
   },

@@ -2,10 +2,7 @@ import { UserDetailModal } from "./UserDetailModal";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { Button, RACDialogTrigger } from "@/components/ui";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import {
-  withUserDetail,
-  withUserDetailSkeleton,
-} from "@/components/users/UserDetailClientContainer/decorators";
+import { withUserDetailSkeleton } from "@/components/users/UserDetailClientContainer/decorators";
 
 const meta = {
   title: "components/users/UserDetailModal",
@@ -28,9 +25,7 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default = {
-  decorators: [withUserDetail],
-} satisfies Story;
+export const Default = {} satisfies Story;
 
 export const WithSkeletonContent = {
   decorators: [withUserDetailSkeleton],

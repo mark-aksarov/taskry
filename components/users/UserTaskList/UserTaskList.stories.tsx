@@ -2,13 +2,11 @@ import { UserTaskList } from "./UserTaskList";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { UserTaskListItem } from "../UserTaskListItem";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withTaskComments } from "@/components/tasks/TaskCommentsClientContainer/decorators";
-import { withTaskDetailCompact } from "@/components/tasks/TaskDetailCompactClientContainer/decorators";
 
 const meta = {
   title: "Components/users/UserTaskList",
   component: UserTaskList,
-  decorators: [withTaskDetailCompact, withTaskComments, withThemedBackground],
+  decorators: [withThemedBackground],
 } satisfies Meta<typeof UserTaskList>;
 
 export default meta;

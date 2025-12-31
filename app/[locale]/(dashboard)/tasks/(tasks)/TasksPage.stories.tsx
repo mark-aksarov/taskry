@@ -19,12 +19,14 @@ import { Default as NewTaskFormStory } from "@/components/tasks/TaskFormBase/Tas
 import { withTaskDetailCompact } from "@/components/tasks/TaskDetailCompactClientContainer/decorators";
 import { Default as TaskFiltersFormStory } from "@/components/tasks/TaskFiltersForm/TaskFiltersForm.stories";
 import { withProjectDetailCompact } from "@/components/projects/ProjectDetailCompactClientContainer/decorators";
+import { withEditTaskForm } from "@/components/tasks/EditTaskFormClientContainerContext/decorators";
 
 const meta = {
   title: "components/pages/TasksPage",
   component: TasksPage,
   parameters: { layout: "fullscreen" },
   decorators: [
+    withEditTaskForm,
     withTaskDetailCompact,
     withProjectDetailCompact,
     withUserDetail,

@@ -2,22 +2,12 @@ import { TaskList } from "./TaskList";
 import { TaskListItem } from "../TaskListItem";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withTaskComments } from "../TaskCommentsClientContainer/decorators";
-import { withTaskDetailCompact } from "../TaskDetailCompactClientContainer/decorators";
-import { withUserDetail } from "@/components/users/UserDetailClientContainer/decorators";
-import { withProjectDetailCompact } from "@/components/projects/ProjectDetailCompactClientContainer/decorators";
 
 const meta = {
   title: "Components/tasks/TaskList",
   component: TaskList,
   tags: ["autodocs"],
-  decorators: [
-    withTaskDetailCompact,
-    withProjectDetailCompact,
-    withUserDetail,
-    withTaskComments,
-    withThemedBackground,
-  ],
+  decorators: [withThemedBackground],
 } satisfies Meta<typeof TaskList>;
 
 export default meta;

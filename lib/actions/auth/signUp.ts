@@ -48,7 +48,7 @@ export async function signUp(
   try {
     // Create workspace
     const workspace = await prisma.workspace.create({
-      data: { id: 3 }, // Adjust as needed
+      data: {}, // Adjust as needed
     });
 
     // Sign-up

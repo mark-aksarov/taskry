@@ -1,6 +1,7 @@
 import { fn } from "storybook/test";
 import { ProjectFormBase } from "./ProjectFormBase";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { OverlayTriggerStateContext } from "react-aria-components";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { ProjectFormBaseStatusSelect } from "./ProjectFormBaseStatusSelect";
 import { ProjectFormBaseCategorySelect } from "./ProjectFormBaseCategorySelect";
@@ -12,9 +13,11 @@ const meta = {
   tags: ["autodocs"],
   decorators: [
     (Story) => (
-      <div className="max-w-[500px]">
-        <Story />
-      </div>
+      <OverlayTriggerStateContext.Provider value={{ close: fn() } as any}>
+        <div className="max-w-[500px]">
+          <Story />
+        </div>
+      </OverlayTriggerStateContext.Provider>
     ),
     withThemedBackground,
   ],

@@ -1,8 +1,3 @@
-import {
-  EditTaskFormClientContainer,
-  EditTaskFormClientContainerProvider,
-} from "@/components/tasks/EditTaskFormClientContainerContext";
-
 import { z } from "zod";
 import { getTaskCount } from "@/lib/data/task/task.dal";
 import { deleteTasks } from "@/lib/actions/task/deleteTasks";
@@ -13,6 +8,8 @@ import { updateTaskStatuses } from "@/lib/actions/task/updateTaskStatuses";
 import { UserTasksServerContainer } from "@/components/users/UserTasksServerContainer";
 import { UserHeaderServerContainer } from "@/components/users/UserHeaderServerContainer";
 import { NewTaskFormServerContainer } from "@/components/tasks/NewTaskFormServerContainer";
+import { EditTaskFormClientContainer } from "@/components/tasks/EditTaskFormClientContainer";
+import { EditTaskFormClientContainerProvider } from "@/components/tasks/EditTaskFormClientContainerContext";
 
 const searchParamsSchema = z.object({
   page: z.coerce.number().int().positive().catch(1),

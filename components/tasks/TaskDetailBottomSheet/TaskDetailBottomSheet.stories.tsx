@@ -1,17 +1,14 @@
-import { Button } from "@/components/ui";
-import { useOverlayTrigger } from "react-aria";
-import { useOverlayTriggerState } from "react-stately";
-import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import {
   TaskDetailBottomSheet,
   TaskDetailBottomSheetProps,
 } from "./TaskDetailBottomSheet";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import {
-  withTaskDetailCompact,
-  withTaskDetailCompactSkeleton,
-} from "@/components/tasks/TaskDetailCompactClientContainer/decorators";
-import { withTaskComments } from "@/components/tasks/TaskCommentsClientContainer/decorators";
+
+import { Button } from "@/components/ui";
+import { useOverlayTrigger } from "react-aria";
+import { useOverlayTriggerState } from "react-stately";
+import { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { withTaskDetailCompactSkeleton } from "@/components/tasks/TaskDetailCompactClientContainer/decorators";
 
 const meta = {
   title: "components/tasks/TaskDetailBottomSheet",
@@ -51,10 +48,8 @@ const TaskDetailBottomSheetTemplate = ({
   );
 };
 
-export const Default = {
-  decorators: [withTaskDetailCompact, withTaskComments],
-} satisfies Story;
+export const Default = {} satisfies Story;
 
 export const WithSkeletonContent = {
-  decorators: [withTaskDetailCompactSkeleton, withTaskComments],
+  decorators: [withTaskDetailCompactSkeleton],
 } satisfies Story;

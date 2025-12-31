@@ -1,8 +1,8 @@
 import {
-  withProjectComments,
   withProjectCommentsEmpty,
   withProjectCommentsSkeleton,
 } from "../ProjectCommentsClientContainer/decorators";
+
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { Button, RACDialogTrigger } from "@/components/ui";
 import { ProjectCommentsModal } from "./ProjectCommentsModal";
@@ -32,9 +32,7 @@ const meta = {
 export default meta;
 export type Story = StoryObj<typeof meta>;
 
-export const Default = {
-  decorators: [withProjectComments],
-} satisfies Story;
+export const Default = {} satisfies Story;
 
 export const Empty = {
   decorators: [withProjectCommentsEmpty],

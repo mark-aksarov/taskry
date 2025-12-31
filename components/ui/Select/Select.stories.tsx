@@ -23,7 +23,7 @@ const meta: Meta<typeof Select> = {
   },
   decorators: [
     (Story) => (
-      <div className="w-[500px]">
+      <div className="w-[500px] max-w-full">
         <Story />
       </div>
     ),

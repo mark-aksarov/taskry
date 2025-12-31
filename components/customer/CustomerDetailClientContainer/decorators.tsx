@@ -1,10 +1,11 @@
-import React from "react";
-import { type Decorator } from "@storybook/react";
-import { CustomerDetail, CustomerDetailSkeleton } from "../CustomerDetail";
 import {
   PersonHeader,
   PersonHeaderSkeleton,
 } from "@/components/common/PersonHeader";
+
+import React from "react";
+import { type Decorator } from "@storybook/react";
+import { CustomerDetail, CustomerDetailSkeleton } from "../CustomerDetail";
 import { Default as CustomerDetailStory } from "../CustomerDetail/CustomerDetail.stories";
 import { CustomerDetailClientContainerContext } from "./CustomerDetailClientContainerContext";
 import { Default as PersonHeaderStory } from "@/components/common/PersonHeader/PersonHeader.stories";

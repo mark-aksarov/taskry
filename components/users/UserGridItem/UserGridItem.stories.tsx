@@ -2,7 +2,6 @@ import { fn } from "storybook/test";
 import { UserGridItem } from "./UserGridItem";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withUserDetail } from "../UserDetailClientContainer/decorators";
 
 const meta = {
   title: "Components/users/UserGridItem",
@@ -14,7 +13,6 @@ const meta = {
         <Story />
       </div>
     ),
-    withUserDetail,
     withThemedBackground,
   ],
 } satisfies Meta<typeof UserGridItem>;

@@ -2,9 +2,6 @@ import { fn } from "storybook/internal/test";
 import { TaskGridItem } from "./TaskGridItem";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withUserDetail } from "@/components/users/UserDetailClientContainer/decorators";
-import { withTaskComments } from "@/components/tasks/TaskCommentsClientContainer/decorators";
-import { withTaskDetailCompact } from "@/components/tasks/TaskDetailCompactClientContainer/decorators";
 
 const meta = {
   title: "Components/tasks/TaskGridItem",
@@ -12,13 +9,10 @@ const meta = {
   tags: ["autodocs"],
   decorators: [
     (Story) => (
-      <div className="w-[300px] max-md:w-full">
+      <div className="w-[300px] max-w-full">
         <Story />
       </div>
     ),
-    withTaskDetailCompact,
-    withTaskComments,
-    withUserDetail,
     withThemedBackground,
   ],
 } satisfies Meta<typeof TaskGridItem>;
@@ -37,6 +31,7 @@ export const Default = {
       fullName: "John Doe",
     },
     status: "pending",
+    projectStatus: "active",
     commentsCount: 99,
     subtasksTotal: 6,
     subtasksDone: 2,

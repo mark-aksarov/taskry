@@ -3,13 +3,12 @@ import { UserGrid } from "./UserGrid";
 import { UserGridItem } from "../UserGridItem";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withUserDetail } from "../UserDetailClientContainer/decorators";
 
 const meta = {
   title: "Components/users/UserGrid",
   component: UserGrid,
   tags: ["autodocs"],
-  decorators: [withUserDetail, withThemedBackground],
+  decorators: [withThemedBackground],
 } satisfies Meta<typeof UserGrid>;
 
 export default meta;

@@ -1,8 +1,6 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { CustomerGridItem } from "./CustomerGridItem";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withCustomerDetail } from "../CustomerDetailClientContainer/decorators";
-import { withEditCustomerForm } from "../EditCustomerFormClientContainerContext/decorators";
 
 const meta = {
   title: "Components/customers/CustomerGridItem",
@@ -14,8 +12,6 @@ const meta = {
         <Story />
       </div>
     ),
-    withEditCustomerForm,
-    withCustomerDetail,
     withThemedBackground,
   ],
 } satisfies Meta<typeof CustomerGridItem>;

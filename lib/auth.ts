@@ -1,9 +1,10 @@
 import prisma from "@/lib/prisma";
 import { transporter } from "./mail";
 import { betterAuth } from "better-auth";
-import { admin } from "better-auth/plugins";
 import { nextCookies } from "better-auth/next-js";
+import { admin as adminPlugin } from "better-auth/plugins";
 import { prismaAdapter } from "better-auth/adapters/prisma";
+import { ac, admin, owner, manager, user, guest } from "@/lib/permissions";
 
 export const auth = betterAuth({
   database: prismaAdapter(prisma, {
@@ -35,7 +36,20 @@ export const auth = betterAuth({
       });
     },
   },
-  plugins: [admin(), nextCookies()],
+  plugins: [
+    adminPlugin({
+      ac,
+      defaultRole: "owner",
+      roles: {
+        admin,
+        owner,
+        manager,
+        user,
+        guest,
+      },
+    }),
+    nextCookies(),
+  ],
   user: {
     fields: {
       name: "fullName",
@@ -45,6 +59,10 @@ export const auth = betterAuth({
       workspaceId: {
         type: "number",
         input: true,
+      },
+      role: {
+        type: "string",
+        input: false,
       },
     },
   },

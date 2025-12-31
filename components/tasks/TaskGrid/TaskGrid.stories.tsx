@@ -2,20 +2,12 @@ import { TaskGrid } from "./TaskGrid";
 import { TaskGridItem } from "../TaskGridItem";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withUserDetail } from "@/components/users/UserDetailClientContainer/decorators";
-import { withTaskComments } from "@/components/tasks/TaskCommentsClientContainer/decorators";
-import { withTaskDetailCompact } from "@/components/tasks/TaskDetailCompactClientContainer/decorators";
 
 const meta = {
   title: "Components/tasks/TaskGrid",
   component: TaskGrid,
   tags: ["autodocs"],
-  decorators: [
-    withTaskDetailCompact,
-    withTaskComments,
-    withUserDetail,
-    withThemedBackground,
-  ],
+  decorators: [withThemedBackground],
 } satisfies Meta<typeof TaskGrid>;
 
 export default meta;

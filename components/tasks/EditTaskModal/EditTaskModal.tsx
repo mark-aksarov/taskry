@@ -1,9 +1,9 @@
 import { Suspense, useContext } from "react";
 import { useTranslations } from "next-intl";
 import { ModalProps } from "@/components/ui";
+import { TaskFormBaseSkeleton } from "../TaskFormBase";
 import { FormBaseModal } from "@/components/common/FormBaseModal";
 import { EditTaskFormClientContainerContext } from "../EditTaskFormClientContainerContext";
-import { TaskFormBaseSkeleton } from "../TaskFormBase";
 
 interface EditTaskModalProps
   extends Pick<ModalProps, "isOpen" | "onOpenChange"> {

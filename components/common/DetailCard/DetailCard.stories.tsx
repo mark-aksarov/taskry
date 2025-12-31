@@ -25,9 +25,13 @@ export const Default = {
           <DetailCardHeading>Detail Card</DetailCardHeading>
         </DetailCardHeader>
         <DetailCardBody>
-          <DetailCardLeft>Detail Card Left</DetailCardLeft>
+          <DetailCardLeft>
+            <span className="text-black dark:text-white">Detail Card Left</span>
+          </DetailCardLeft>
           <DetailCardRight>
-            <div className="w-[350px]">Detail Card Right</div>
+            <span className="w-[350px] text-black dark:text-white">
+              Detail Card Right
+            </span>
           </DetailCardRight>
         </DetailCardBody>
       </DetailCard>
