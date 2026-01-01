@@ -30,6 +30,9 @@ export const Default = {
           status="pending"
           commentsCount={10}
           projectStatus="pending"
+          canDelete={true}
+          canUpdate={true}
+          canUpdateStatus={true}
           deleteAction={mockedAction}
           updateStatusAction={mockedAction}
         />
@@ -40,6 +43,9 @@ export const Default = {
           status="active"
           commentsCount={22}
           projectStatus="pending"
+          canDelete={true}
+          canUpdate={true}
+          canUpdateStatus={true}
           deleteAction={mockedAction}
           updateStatusAction={mockedAction}
         />
@@ -50,6 +56,9 @@ export const Default = {
           status="completed"
           commentsCount={2}
           projectStatus="pending"
+          canDelete={true}
+          canUpdate={true}
+          canUpdateStatus={true}
           deleteAction={mockedAction}
           updateStatusAction={mockedAction}
         />
@@ -60,6 +69,9 @@ export const Default = {
           status="pending"
           commentsCount={12}
           projectStatus="pending"
+          canDelete={true}
+          canUpdate={true}
+          canUpdateStatus={true}
           deleteAction={mockedAction}
           updateStatusAction={mockedAction}
         />
@@ -70,6 +82,9 @@ export const Default = {
           status="active"
           commentsCount={15}
           projectStatus="pending"
+          canDelete={true}
+          canUpdate={true}
+          canUpdateStatus={true}
           deleteAction={mockedAction}
           updateStatusAction={mockedAction}
         />
@@ -80,6 +95,9 @@ export const Default = {
           status="completed"
           commentsCount={9}
           projectStatus="pending"
+          canDelete={true}
+          canUpdate={true}
+          canUpdateStatus={true}
           deleteAction={mockedAction}
           updateStatusAction={mockedAction}
         />
@@ -90,6 +108,9 @@ export const Default = {
           status="completed"
           commentsCount={12}
           projectStatus="pending"
+          canDelete={true}
+          canUpdate={true}
+          canUpdateStatus={true}
           deleteAction={mockedAction}
           updateStatusAction={mockedAction}
         />
@@ -100,6 +121,9 @@ export const Default = {
           status="active"
           commentsCount={10}
           projectStatus="pending"
+          canDelete={true}
+          canUpdate={true}
+          canUpdateStatus={true}
           deleteAction={mockedAction}
           updateStatusAction={mockedAction}
         />
@@ -110,6 +134,9 @@ export const Default = {
           status="pending"
           commentsCount={23}
           projectStatus="pending"
+          canDelete={true}
+          canUpdate={true}
+          canUpdateStatus={true}
           deleteAction={mockedAction}
           updateStatusAction={mockedAction}
         />
@@ -120,6 +147,9 @@ export const Default = {
           status="completed"
           commentsCount={13}
           projectStatus="pending"
+          canDelete={true}
+          canUpdate={true}
+          canUpdateStatus={true}
           deleteAction={mockedAction}
           updateStatusAction={mockedAction}
         />

@@ -12,14 +12,13 @@ import { UserFiltersForm } from "@/components/users/UserFiltersForm";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { Default as UserListStory } from "@/components/users/UserList/UserList.stories";
 import { Default as UserGridStory } from "@/components/users/UserGrid/UserGrid.stories";
-import { withUserDetail } from "@/components/users/UserDetailClientContainer/decorators";
 import { Default as UserFiltersFormStory } from "@/components/users/UserFiltersForm/UserFiltersForm.stories";
 
 const meta = {
   title: "components/pages/UsersPage",
   component: UsersPage,
   parameters: { layout: "fullscreen" },
-  decorators: [withUserDetail, PageDecorator, withThemedBackground],
+  decorators: [PageDecorator, withThemedBackground],
   beforeEach: () => {
     mocked(usePathname).mockReturnValue("/team");
   },

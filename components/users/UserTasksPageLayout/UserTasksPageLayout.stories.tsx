@@ -35,6 +35,8 @@ export const Default = {
     pageSize: 10,
     sort: "title",
     baseUrl: "/profile/tasks",
+    canCreateTask: true,
+    canDeleteTask: true,
     UserTasksContainer: () => <UserTaskList {...UserTaskListStory.args} />,
     UserHeaderContainer: () => <PersonHeader {...PersonHeaderStory.args} />,
     NewTaskFormContainer: () => <NewTaskForm {...TaskFormBaseStory.args} />,

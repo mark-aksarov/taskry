@@ -8,6 +8,7 @@ import {
 
 import prisma from "@/lib/prisma";
 import { TaskFilters } from "@/lib/types";
+import { AccessDeniedError } from "@/lib/data/utils/error";
 import { resetDatabase } from "@/lib/data/utils/test-utils";
 import { vi, describe, it, expect, beforeEach } from "vitest";
 import { verifySession } from "@/lib/data/utils/verifySession";
@@ -37,10 +38,9 @@ export const getTaskId = (
 
 describe("Task DAL", () => {
   beforeEach(async () => {
-    const mockSession = {
+    (verifySession as any).mockResolvedValue({
       user: { id: "user-1", workspaceId: 1 },
-    };
-    (verifySession as any).mockResolvedValue(mockSession);
+    });
 
     await resetDatabase();
 
@@ -308,6 +308,46 @@ describe("Task DAL", () => {
       expect(result.id).toBeDefined();
       expect(result.assigneeId).toBeNull();
     });
+
+    describe.only("Task RBAC Creation", () => {
+      const createTestCases = [
+        { role: "admin", expected: "allow" },
+        { role: "owner", expected: "allow" },
+        { role: "manager", expected: "allow" },
+        { role: "user", expected: "deny" },
+        { role: "guest", expected: "deny" },
+      ];
+
+      it.each(createTestCases)(
+        "should $expected task creation for role: $role",
+        async ({ role, expected }) => {
+          await prisma.user.update({
+            where: { id: "user-1" },
+            data: { role },
+          });
+
+          const input = {
+            id: 100,
+            title: "RBAC Test Task",
+            status: "active" as const,
+            projectId: getProjectId(1, "active"),
+            categoryId: 1,
+            assigneeId: `user-1`,
+            deadline: new Date(),
+          };
+
+          if (expected === "allow") {
+            const result = await createTask(input as any);
+            expect(result).toBeDefined();
+            expect(result.title).toBe(input.title);
+          } else {
+            await expect(createTask(input as any)).rejects.toThrow(
+              AccessDeniedError,
+            );
+          }
+        },
+      );
+    });
   });
 
   describe("updateTask", () => {
@@ -379,6 +419,40 @@ describe("Task DAL", () => {
 
       await expect(updateTask(updateInput)).rejects.toThrow();
     });
+
+    describe("Task RBAC Updating", () => {
+      const updateTestCases = [
+        { role: "admin", expected: "allow" },
+        { role: "owner", expected: "allow" },
+        { role: "manager", expected: "allow" },
+        { role: "user", expected: "deny" },
+        { role: "guest", expected: "deny" },
+      ];
+
+      it.each(updateTestCases)(
+        "should $expected update for role: $role",
+        async ({ role, expected }) => {
+          await prisma.user.update({
+            where: { id: "user-1" },
+            data: { role },
+          });
+
+          const taskId = getTaskId(1, "active", 0);
+          const input = {
+            id: taskId,
+            title: "Updated Title",
+          };
+
+          if (expected === "allow") {
+            const result = await updateTask(input);
+            expect(result).not.toBeNull();
+            expect(result?.title).toBe("Updated Title");
+          } else {
+            await expect(updateTask(input)).rejects.toThrow(AccessDeniedError);
+          }
+        },
+      );
+    });
   });
 
   describe("updateTasks", () => {
@@ -433,6 +507,71 @@ describe("Task DAL", () => {
       });
       expect(updatedTask?.status).toBe("pending");
     });
+
+    describe("Task RBAC Update Status", () => {
+      beforeEach(async () => {
+        const projectId = getProjectId(1, "active");
+
+        await prisma.task.upsert({
+          where: { id: 9999 },
+          update: {},
+          create: {
+            id: 9999,
+            deadline: new Date(),
+            title: "User 2's Private Task",
+            status: "active",
+            assigneeId: "user-2",
+            workspaceId: 1,
+            projectId: projectId,
+            categoryId: 1,
+          },
+        });
+      });
+
+      const statusUpdateTestCases = [
+        { role: "admin", expected: "allow" },
+        { role: "owner", expected: "allow" },
+        { role: "manager", expected: "allow" },
+        { role: "user", expected: "partial" },
+        { role: "guest", expected: "deny" },
+      ];
+
+      it.each(statusUpdateTestCases)(
+        "should $expected bulk status update for role: $role",
+        async ({ role, expected }) => {
+          await prisma.user.update({
+            where: { id: "user-1" },
+            data: { role },
+          });
+
+          (verifySession as any).mockResolvedValue({
+            user: { id: "user-1", workspaceId: 1, role: role },
+          });
+
+          const ownTaskId = getTaskId(1, "active", 0);
+          const otherTaskId = 9999;
+          const taskIds = [ownTaskId, otherTaskId];
+          const nextStatus = "completed" as const;
+
+          if (expected === "allow") {
+            const result = await updateTasks(taskIds, nextStatus);
+            expect(result.count).toBe(2);
+          } else if (expected === "partial") {
+            const result = await updateTasks(taskIds, nextStatus);
+            expect(result.count).toBe(1);
+
+            const updatedOwn = await prisma.task.findUnique({
+              where: { id: ownTaskId },
+            });
+            expect(updatedOwn?.status).toBe(nextStatus);
+          } else {
+            await expect(updateTasks(taskIds, nextStatus)).rejects.toThrow(
+              AccessDeniedError,
+            );
+          }
+        },
+      );
+    });
   });
 
   describe("deleteTasks", () => {
@@ -477,6 +616,37 @@ describe("Task DAL", () => {
     it("should return 0 if an empty array is provided", async () => {
       const result = await deleteTasks([]);
       expect(result.count).toBe(0);
+    });
+
+    describe("Task RBAC Deletion", () => {
+      const taskId = getTaskId(1, "active", 0);
+
+      const deleteTestCases = [
+        { role: "admin", expected: "allow" },
+        { role: "owner", expected: "allow" },
+        { role: "manager", expected: "allow" },
+        { role: "user", expected: "deny" },
+        { role: "guest", expected: "deny" },
+      ];
+
+      it.each(deleteTestCases)(
+        "should $expected deletion for role: $role",
+        async ({ role, expected }) => {
+          await prisma.user.update({
+            where: { id: "user-1" },
+            data: { role },
+          });
+
+          if (expected === "allow") {
+            const result = await deleteTasks([taskId]);
+            expect(result.count).toBe(1);
+          } else {
+            await expect(deleteTasks([taskId])).rejects.toThrow(
+              AccessDeniedError,
+            );
+          }
+        },
+      );
     });
   });
 });

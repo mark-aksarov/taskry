@@ -35,6 +35,8 @@ interface UserTasksPageLayoutProps {
   pageSize: number;
   sort: string;
   baseUrl: string;
+  canCreateTask: boolean;
+  canDeleteTask: boolean;
   UserTasksContainer: React.ComponentType<{
     page: number;
     pageSize: number;
@@ -56,6 +58,8 @@ export function UserTasksPageLayout({
   pageSize,
   sort,
   baseUrl,
+  canCreateTask,
+  canDeleteTask,
   UserTasksContainer,
   UserHeaderContainer,
   NewTaskFormContainer,
@@ -76,16 +80,19 @@ export function UserTasksPageLayout({
               <div className="flex gap-4">
                 <TaskToolbarSortingMenuTrigger />
                 <TaskToolbarActionsMenuTrigger
+                  canDelete={canDeleteTask}
                   deleteAction={deleteTasksAction}
                   updateStatusAction={updateTasksStatusesAction}
                 />
-                <NewTaskModalTrigger
-                  newTaskForm={
-                    <Suspense fallback={<TaskFormBaseSkeleton />}>
-                      <NewTaskFormContainer />
-                    </Suspense>
-                  }
-                />
+                {canCreateTask && (
+                  <NewTaskModalTrigger
+                    newTaskForm={
+                      <Suspense fallback={<TaskFormBaseSkeleton />}>
+                        <NewTaskFormContainer />
+                      </Suspense>
+                    }
+                  />
+                )}
               </div>
             </UserCardHeader>
             <UserTasksContainer
@@ -110,6 +117,7 @@ export function UserTasksPageLayout({
             <ToolbarMobileHeading>{t("title")}</ToolbarMobileHeading>
             <TaskToolbarSortingMenuTrigger />
             <TaskToolbarActionsMenuTrigger
+              canDelete={canDeleteTask}
               deleteAction={deleteTasksAction}
               updateStatusAction={updateTasksStatusesAction}
             />
@@ -117,7 +125,9 @@ export function UserTasksPageLayout({
 
           <ToolbarMobileBottom>
             {navigationMobile}
-            <NewTaskModalTrigger newTaskForm={<NewTaskFormContainer />} />
+            {canCreateTask && (
+              <NewTaskModalTrigger newTaskForm={<NewTaskFormContainer />} />
+            )}
           </ToolbarMobileBottom>
 
           <UserTasksContainer

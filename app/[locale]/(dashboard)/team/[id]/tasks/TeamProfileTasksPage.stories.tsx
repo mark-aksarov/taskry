@@ -10,8 +10,6 @@ import { useParams, usePathname } from "next/navigation";
 import { PageDecorator } from "@/.storybook/PageDecorator";
 import { TeamProfileTasksPage } from "./TeamProfileTasksPage";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withTaskComments } from "@/components/tasks/TaskCommentsClientContainer/decorators";
-import { withTaskDetailCompact } from "@/components/tasks/TaskDetailCompactClientContainer/decorators";
 
 const userId = "BKs42HvVDEZFoaJUmTqf1gTN0K8pUFjI";
 
@@ -19,12 +17,7 @@ const meta = {
   title: "components/pages/TeamProfileTasksPage",
   component: TeamProfileTasksPage,
   parameters: { layout: "fullscreen" },
-  decorators: [
-    withTaskDetailCompact,
-    withTaskComments,
-    PageDecorator,
-    withThemedBackground,
-  ],
+  decorators: [PageDecorator, withThemedBackground],
   beforeEach: () => {
     mocked(usePathname).mockReturnValue(`/team/${userId}/tasks`);
     mocked(useParams).mockReturnValue({ id: userId });

@@ -59,6 +59,9 @@ export interface TaskListItemProps {
   status: TaskStatus;
   commentsCount: number;
   showCheckbox?: boolean;
+  canDelete: boolean;
+  canUpdate: boolean;
+  canUpdateStatus: boolean;
   deleteAction: ActionFn<ActionState, DeleteProjectsPayload>;
   updateStatusAction: ActionFn<ActionState, UpdateTaskStatusesPayload>;
 }
@@ -73,6 +76,9 @@ export const TaskListItem = ({
   status,
   commentsCount,
   showCheckbox,
+  canDelete,
+  canUpdate,
+  canUpdateStatus,
   deleteAction,
   updateStatusAction,
 }: TaskListItemProps) => {
@@ -201,6 +207,9 @@ export const TaskListItem = ({
           taskTitle={title}
           taskStatus={status}
           projectStatus={project.status}
+          canDelete={canDelete}
+          canUpdate={canUpdate}
+          canUpdateStatus={canUpdateStatus}
           deleteAction={deleteAction}
           updateStatusAction={updateStatusAction}
         />

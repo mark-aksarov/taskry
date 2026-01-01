@@ -34,6 +34,9 @@ export const Default = {
           assignee={{ id: "user1", imageUrl: "/man.jpg", fullName: "John Doe" }}
           commentsCount={10}
           showCheckbox
+          canDelete={true}
+          canUpdate={true}
+          canUpdateStatus={true}
           deleteAction={mockedAction}
           updateStatusAction={mockedAction}
         />
@@ -48,6 +51,9 @@ export const Default = {
           assignee={undefined}
           commentsCount={22}
           showCheckbox
+          canDelete={true}
+          canUpdate={true}
+          canUpdateStatus={true}
           deleteAction={mockedAction}
           updateStatusAction={mockedAction}
         />
@@ -62,6 +68,9 @@ export const Default = {
           assignee={{ id: "user3", fullName: "Jane Doe" }}
           commentsCount={2}
           showCheckbox
+          canDelete={true}
+          canUpdate={true}
+          canUpdateStatus={true}
           deleteAction={mockedAction}
           updateStatusAction={mockedAction}
         />
@@ -80,6 +89,9 @@ export const Default = {
           assignee={{ id: "user4", imageUrl: "/man.jpg", fullName: "John Doe" }}
           commentsCount={12}
           showCheckbox
+          canDelete={true}
+          canUpdate={true}
+          canUpdateStatus={true}
           deleteAction={mockedAction}
           updateStatusAction={mockedAction}
         />
@@ -94,6 +106,9 @@ export const Default = {
           assignee={{ id: "user5", imageUrl: "/man.jpg", fullName: "John Doe" }}
           commentsCount={15}
           showCheckbox
+          canDelete={true}
+          canUpdate={true}
+          canUpdateStatus={true}
           deleteAction={mockedAction}
           updateStatusAction={mockedAction}
         />
@@ -108,6 +123,9 @@ export const Default = {
           assignee={{ id: "user6", imageUrl: "/man.jpg", fullName: "John Doe" }}
           commentsCount={9}
           showCheckbox
+          canDelete={true}
+          canUpdate={true}
+          canUpdateStatus={true}
           deleteAction={mockedAction}
           updateStatusAction={mockedAction}
         />
@@ -126,6 +144,9 @@ export const Default = {
           assignee={{ id: "user7", imageUrl: "/man.jpg", fullName: "John Doe" }}
           commentsCount={12}
           showCheckbox
+          canDelete={true}
+          canUpdate={true}
+          canUpdateStatus={true}
           deleteAction={mockedAction}
           updateStatusAction={mockedAction}
         />
@@ -140,6 +161,9 @@ export const Default = {
           assignee={{ id: "user8", imageUrl: "/man.jpg", fullName: "John Doe" }}
           commentsCount={10}
           showCheckbox
+          canDelete={true}
+          canUpdate={true}
+          canUpdateStatus={true}
           deleteAction={mockedAction}
           updateStatusAction={mockedAction}
         />
@@ -158,6 +182,9 @@ export const Default = {
           assignee={{ id: "user9", fullName: "Jane Doe" }}
           commentsCount={23}
           showCheckbox
+          canDelete={true}
+          canUpdate={true}
+          canUpdateStatus={true}
           deleteAction={mockedAction}
           updateStatusAction={mockedAction}
         />
@@ -172,6 +199,9 @@ export const Default = {
           assignee={undefined}
           commentsCount={13}
           showCheckbox
+          canDelete={true}
+          canUpdate={true}
+          canUpdateStatus={true}
           deleteAction={mockedAction}
           updateStatusAction={mockedAction}
         />

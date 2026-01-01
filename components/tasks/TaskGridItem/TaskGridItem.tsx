@@ -53,6 +53,9 @@ export interface TaskGridItemProps {
   commentsCount: number;
   subtasksTotal: number;
   subtasksDone: number;
+  canDelete: boolean;
+  canUpdate: boolean;
+  canUpdateStatus: boolean;
   deleteAction: ActionFn<ActionState, DeleteProjectsPayload>;
   updateStatusAction: ActionFn<ActionState, UpdateTaskStatusesPayload>;
 }
@@ -67,6 +70,9 @@ export function TaskGridItem({
   commentsCount,
   subtasksTotal,
   subtasksDone,
+  canDelete,
+  canUpdate,
+  canUpdateStatus,
   deleteAction,
   updateStatusAction,
 }: TaskGridItemProps) {
@@ -103,6 +109,9 @@ export function TaskGridItem({
           taskTitle={title}
           taskStatus={status}
           projectStatus={projectStatus}
+          canDelete={canDelete}
+          canUpdate={canUpdate}
+          canUpdateStatus={canUpdateStatus}
           deleteAction={deleteAction}
           updateStatusAction={updateStatusAction}
           className="-mr-2"

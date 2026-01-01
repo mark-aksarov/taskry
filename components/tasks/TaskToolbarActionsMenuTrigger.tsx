@@ -24,6 +24,7 @@ import { BulkDeleteEntityModal } from "../common/BulkDeleteEntityModal";
 import { UpdateTaskStatusRestrictedModal } from "./UpdateTaskStatusRestrictedModal";
 
 interface TaskToolbarActionsMenuTriggerProps {
+  canDelete: boolean;
   deleteAction: ActionFn<ActionState, DeleteTasksPayload>;
   updateStatusAction: ActionFn<ActionState, UpdateTaskStatusesPayload>;
 }
@@ -38,7 +39,7 @@ const initialState: ActionState = {
   message: null,
 };
 
-const canUpdateTask = (
+const isTaskStatusAllowedByProject = (
   task: { status: TaskStatus; projectStatus: ProjectStatus },
   nextStatus: TaskStatus,
 ) => {
@@ -47,6 +48,7 @@ const canUpdateTask = (
 };
 
 export const TaskToolbarActionsMenuTrigger = ({
+  canDelete,
   deleteAction,
   updateStatusAction,
 }: TaskToolbarActionsMenuTriggerProps) => {
@@ -80,7 +82,7 @@ export const TaskToolbarActionsMenuTrigger = ({
     const nextStatus = key as TaskStatus;
 
     const hasSkippedTasks = selectedTaskItems.some((task) => {
-      return !canUpdateTask(task, nextStatus);
+      return !isTaskStatusAllowedByProject(task, nextStatus);
     });
 
     if (hasSkippedTasks) {
@@ -94,11 +96,16 @@ export const TaskToolbarActionsMenuTrigger = ({
 
   useActionErrorToast(updateTaskStatusState);
 
-  const disabledKeys = taskStatuses.filter((status) =>
+  const statusDisabledKeys = taskStatuses.filter((status) =>
     selectedTaskItems.every(
-      (task) => !canUpdateTask(task, status) || task.status === status,
+      (task) =>
+        !isTaskStatusAllowedByProject(task, status) || task.status === status,
     ),
   );
+
+  const disabledKeys = [...statusDisabledKeys] as Key[];
+
+  if (!canDelete) disabledKeys.push("delete");
 
   return (
     <>

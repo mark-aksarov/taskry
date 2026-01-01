@@ -40,6 +40,9 @@ export interface UserTaskListItemProps {
   status: TaskStatus;
   projectStatus: ProjectStatus;
   commentsCount: number;
+  canDelete: boolean;
+  canUpdate: boolean;
+  canUpdateStatus: boolean;
   deleteAction: ActionFn<ActionState, DeleteProjectsPayload>;
   updateStatusAction: ActionFn<ActionState, UpdateTaskStatusesPayload>;
 }
@@ -51,6 +54,9 @@ export const UserTaskListItem = ({
   status,
   projectStatus,
   commentsCount,
+  canDelete,
+  canUpdate,
+  canUpdateStatus,
   deleteAction,
   updateStatusAction,
 }: UserTaskListItemProps) => {
@@ -118,6 +124,9 @@ export const UserTaskListItem = ({
         <TaskItemActionMenuTrigger
           taskId={id}
           taskTitle={title}
+          canDelete={canDelete}
+          canUpdate={canUpdate}
+          canUpdateStatus={canUpdateStatus}
           deleteAction={deleteAction}
           updateStatusAction={updateStatusAction}
           taskStatus={status}

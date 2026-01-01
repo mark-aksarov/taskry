@@ -11,27 +11,16 @@ import { ProjectGrid } from "@/components/projects/ProjectGrid";
 import { NewProjectForm } from "@/components/projects/NewProjectForm";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { ProjectFiltersForm } from "@/components/projects/ProjectFiltersForm";
-import { withUserDetail } from "@/components/users/UserDetailClientContainer/decorators";
 import { Default as ProjectListStory } from "@/components/projects/ProjectList/ProjectList.stories";
 import { Default as ProjectGridStory } from "@/components/projects/ProjectGrid/ProjectGrid.stories";
-import { withProjectComments } from "@/components/projects/ProjectCommentsClientContainer/decorators";
-import { withEditProjectForm } from "@/components/projects/EditProjectFormClientContainerContext/decorators";
 import { Default as ProjectFormBaseStory } from "@/components/projects/ProjectFormBase/ProjectFormBase.stories";
-import { withProjectDetailCompact } from "@/components/projects/ProjectDetailCompactClientContainer/decorators";
 import { Default as ProjectFiltersFormStory } from "@/components/projects/ProjectFiltersForm/ProjectFiltersForm.stories";
 
 const meta = {
   title: "components/pages/ProjectsPage",
   component: ProjectsPage,
   parameters: { layout: "fullscreen" },
-  decorators: [
-    withEditProjectForm,
-    withProjectDetailCompact,
-    withProjectComments,
-    withUserDetail,
-    PageDecorator,
-    withThemedBackground,
-  ],
+  decorators: [PageDecorator, withThemedBackground],
   beforeEach: () => {
     mocked(usePathname).mockReturnValue("/projects");
   },

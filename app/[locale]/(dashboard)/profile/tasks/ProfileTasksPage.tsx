@@ -14,6 +14,8 @@ interface TeamProfileTasksPageProps {
   page: number;
   pageSize: number;
   sort: string;
+  canCreateTask: boolean;
+  canDeleteTask: boolean;
   UserTasksContainer: React.ComponentType<{
     page: number;
     pageSize: number;
@@ -32,6 +34,8 @@ export function ProfileTasksPage({
   page,
   pageSize,
   sort,
+  canCreateTask,
+  canDeleteTask,
   UserTasksContainer,
   UserHeaderContainer,
   NewTaskFormContainer,
@@ -45,6 +49,8 @@ export function ProfileTasksPage({
       pageSize={pageSize}
       sort={sort}
       baseUrl="/profile/tasks"
+      canCreateTask={canCreateTask}
+      canDeleteTask={canDeleteTask}
       UserTasksContainer={UserTasksContainer}
       UserHeaderContainer={UserHeaderContainer}
       NewTaskFormContainer={NewTaskFormContainer}

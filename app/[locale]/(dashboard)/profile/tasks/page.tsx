@@ -5,6 +5,7 @@ import { ProfileTasksPage } from "./ProfileTasksPage";
 import { getTaskCount } from "@/lib/data/task/task.dal";
 import { deleteTasks } from "@/lib/actions/task/deleteTasks";
 import { ProfileTasksPageEmpty } from "./ProfileTasksPageEmpty";
+import { canCreateTask, canDeleteTask } from "@/lib/data/user/user.dal";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { updateTaskStatuses } from "@/lib/actions/task/updateTaskStatuses";
 import { UserTasksServerContainer } from "@/components/users/UserTasksServerContainer";
@@ -48,6 +49,9 @@ export default async function AppProfileTasksPage({
       />
     );
 
+  const canCreate = await canCreateTask();
+  const canDelete = await canDeleteTask();
+
   return (
     <EditTaskFormClientContainerProvider value={EditTaskFormClientContainer}>
       <ProfileTasksPage
@@ -55,6 +59,8 @@ export default async function AppProfileTasksPage({
         page={page}
         pageSize={pageSize}
         sort={sort}
+        canCreateTask={canCreate}
+        canDeleteTask={canDelete}
         UserTasksContainer={UserTasksServerContainer}
         UserHeaderContainer={UserHeaderServerContainer}
         NewTaskFormContainer={NewTaskFormServerContainer}

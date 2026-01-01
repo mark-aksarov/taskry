@@ -1,8 +1,92 @@
 import { cache } from "react";
+import { auth } from "@/lib/auth";
 import prisma from "@/lib/prisma";
 import { UserFilters } from "@/lib/types";
 import { verifySession } from "../utils/verifySession";
 import { Prisma, TaskStatus } from "@/generated/prisma/client";
+
+export async function canCreateTask() {
+  const {
+    user: { id },
+  } = await verifySession();
+
+  // ACL
+  const permission = await auth.api.userHasPermission({
+    body: {
+      userId: id,
+      permission: {
+        task: ["create"],
+      },
+    },
+  });
+
+  return permission.success;
+}
+
+export async function canDeleteTask() {
+  const {
+    user: { id },
+  } = await verifySession();
+
+  // ACL
+  const permission = await auth.api.userHasPermission({
+    body: {
+      userId: id,
+      permission: {
+        task: ["delete"],
+      },
+    },
+  });
+
+  return permission.success;
+}
+
+export async function canUpdateTask() {
+  const {
+    user: { id },
+  } = await verifySession();
+
+  // ACL
+  const permission = await auth.api.userHasPermission({
+    body: {
+      userId: id,
+      permission: {
+        task: ["update"],
+      },
+    },
+  });
+
+  return permission.success;
+}
+
+export async function canUpdateTaskStatus(assigneeId?: string) {
+  const {
+    user: { id, role },
+  } = await verifySession();
+
+  // ACL
+  const permission = await auth.api.userHasPermission({
+    body: {
+      userId: id,
+      permission: {
+        task: ["update-status"],
+      },
+    },
+  });
+
+  if (!assigneeId) {
+    return permission.success;
+  }
+
+  // Ownership
+  const isOwner = id === assigneeId;
+
+  if (role === "user" && !isOwner) {
+    return false;
+  }
+
+  return permission.success;
+}
 
 export const getUser = cache(
   async <T extends Prisma.UserSelect>(id: string, select: T) => {

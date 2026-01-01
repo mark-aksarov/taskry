@@ -11,10 +11,8 @@ import { CustomerGrid } from "@/components/customer/CustomerGrid";
 import { NewCustomerForm } from "@/components/customer/NewCustomerForm";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { CustomerFiltersForm } from "@/components/customer/CustomerFiltersForm";
-import { withCustomerDetail } from "@/components/customer/CustomerDetailClientContainer/decorators";
 import { Default as CustomerGridStory } from "@/components/customer/CustomerGrid/CustomerGrid.stories";
 import { Default as CustomerListStory } from "@/components/customer/CustomerList/CustomerList.stories";
-import { withEditCustomerForm } from "@/components/customer/EditCustomerFormClientContainerContext/decorators";
 import { Default as CustomerFormBaseStory } from "@/components/customer/CustomerFormBase/CustomerFormBase.stories";
 import { Default as CustomerFiltersFormStory } from "@/components/customer/CustomerFiltersForm/CustomerFiltersForm.stories";
 
@@ -22,12 +20,7 @@ const meta = {
   title: "components/pages/CustomersPage",
   component: CustomersPage,
   parameters: { layout: "fullscreen" },
-  decorators: [
-    withEditCustomerForm,
-    withCustomerDetail,
-    PageDecorator,
-    withThemedBackground,
-  ],
+  decorators: [PageDecorator, withThemedBackground],
   beforeEach: () => {
     mocked(usePathname).mockReturnValue("/customers");
   },

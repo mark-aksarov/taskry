@@ -13,6 +13,11 @@ import { getTaskList } from "@/lib/data/task/task.service";
 import { Pagination } from "@/components/common/Pagination";
 import { deleteTasks } from "@/lib/actions/task/deleteTasks";
 import { updateTaskStatuses } from "@/lib/actions/task/updateTaskStatuses";
+import {
+  canDeleteTask,
+  canUpdateTask,
+  canUpdateTaskStatus,
+} from "@/lib/data/user/user.dal";
 
 interface AssignedTasksServerContainerProps {
   page: number;
@@ -63,12 +68,28 @@ export async function AssignedTasksServerContainer({
     baseUrl: "/",
   };
 
+  const canDelete = await canDeleteTask();
+  const canUpdate = await canUpdateTask();
+
+  const tasksWithPermissions = await Promise.all(
+    tasks.map(async (task) => {
+      const canUpdateStatus = await canUpdateTaskStatus(task.assignee?.id);
+
+      return {
+        ...task,
+        canDelete,
+        canUpdate,
+        canUpdateStatus,
+      };
+    }),
+  );
+
   return (
     <>
       <AssignedTasksSection>
         <AssignedTasksSectionHeading />
         <TaskList>
-          {tasks.map((task) => (
+          {tasksWithPermissions.map((task) => (
             <TaskListItem
               key={task.id}
               id={task.id}
@@ -79,6 +100,9 @@ export async function AssignedTasksServerContainer({
               status={task.status}
               assignee={task.assignee}
               commentsCount={task.commentsCount}
+              canDelete={task.canDelete}
+              canUpdate={task.canUpdate}
+              canUpdateStatus={task.canUpdateStatus}
               deleteAction={deleteTasks}
               updateStatusAction={updateTaskStatuses}
             />

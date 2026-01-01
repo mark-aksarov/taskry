@@ -28,6 +28,9 @@ export type TaskItemActionMenuTriggerProps = {
   taskStatus: TaskStatus;
   projectStatus: ProjectStatus;
   className?: string;
+  canDelete: boolean;
+  canUpdate: boolean;
+  canUpdateStatus: boolean;
   deleteAction: ActionFn<ActionState, DeleteProjectsPayload>;
   updateStatusAction: ActionFn<ActionState, UpdateTaskStatusesPayload>;
 };
@@ -43,6 +46,9 @@ export function TaskItemActionMenuTrigger({
   taskStatus,
   projectStatus,
   className,
+  canDelete,
+  canUpdate,
+  canUpdateStatus,
   deleteAction,
   updateStatusAction,
 }: TaskItemActionMenuTriggerProps) {
@@ -80,9 +86,17 @@ export function TaskItemActionMenuTrigger({
   useActionErrorToast(updateTaskStatusState);
 
   const allowedStatuses = ALLOWED_TASK_STATUSES_BY_PROJECT[projectStatus];
-  const disabledKeys = taskStatuses.filter(
+  const statusDisabledKeys = taskStatuses.filter(
     (status) => !allowedStatuses.includes(status) || status === taskStatus,
   );
+
+  const disabledKeys = [...statusDisabledKeys] as Key[];
+
+  if (!canDelete) disabledKeys.push("delete");
+  if (!canUpdate) disabledKeys.push("edit");
+  if (!canUpdateStatus) {
+    disabledKeys.push("pending", "completed", "active");
+  }
 
   return (
     <>

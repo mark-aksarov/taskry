@@ -33,20 +33,13 @@ import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { PageDecorator } from "@/.storybook/PageDecorator";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { Default as TaskListStory } from "@/components/tasks/TaskList/TaskList.stories";
-import { withTaskComments } from "@/components/tasks/TaskCommentsClientContainer/decorators";
 import { AssignedTasksEmptyCard } from "@/components/tasks/AssignedTasks/AssignedTasksEmptyCard";
-import { withTaskDetailCompact } from "@/components/tasks/TaskDetailCompactClientContainer/decorators";
 
 const meta = {
   title: "components/pages/DashboardPage",
   component: DashboardPage,
   parameters: { layout: "fullscreen" },
-  decorators: [
-    withTaskDetailCompact,
-    withTaskComments,
-    PageDecorator,
-    withThemedBackground,
-  ],
+  decorators: [PageDecorator, withThemedBackground],
   beforeEach: () => {
     mocked(usePathname).mockReturnValue("/");
   },

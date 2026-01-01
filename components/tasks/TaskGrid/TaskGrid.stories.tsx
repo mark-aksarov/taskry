@@ -38,6 +38,9 @@ export const Default = {
           subtasksTotal={3}
           subtasksDone={1}
           projectStatus="active"
+          canDelete={true}
+          canUpdate={true}
+          canUpdateStatus={true}
           deleteAction={mockedAction}
           updateStatusAction={mockedAction}
         />
@@ -52,6 +55,9 @@ export const Default = {
           subtasksTotal={4}
           subtasksDone={2}
           projectStatus="active"
+          canDelete={true}
+          canUpdate={true}
+          canUpdateStatus={true}
           deleteAction={mockedAction}
           updateStatusAction={mockedAction}
         />
@@ -70,6 +76,9 @@ export const Default = {
           subtasksTotal={2}
           subtasksDone={2}
           projectStatus="active"
+          canDelete={true}
+          canUpdate={true}
+          canUpdateStatus={true}
           deleteAction={mockedAction}
           updateStatusAction={mockedAction}
         />
@@ -88,6 +97,9 @@ export const Default = {
           subtasksTotal={4}
           subtasksDone={2}
           projectStatus="active"
+          canDelete={true}
+          canUpdate={true}
+          canUpdateStatus={true}
           deleteAction={mockedAction}
           updateStatusAction={mockedAction}
         />
@@ -106,6 +118,9 @@ export const Default = {
           subtasksTotal={4}
           subtasksDone={3}
           projectStatus="active"
+          canDelete={true}
+          canUpdate={true}
+          canUpdateStatus={true}
           deleteAction={mockedAction}
           updateStatusAction={mockedAction}
         />
@@ -124,6 +139,9 @@ export const Default = {
           subtasksTotal={3}
           subtasksDone={3}
           projectStatus="active"
+          canDelete={true}
+          canUpdate={true}
+          canUpdateStatus={true}
           deleteAction={mockedAction}
           updateStatusAction={mockedAction}
         />
@@ -142,6 +160,9 @@ export const Default = {
           subtasksTotal={3}
           subtasksDone={3}
           projectStatus="active"
+          canDelete={true}
+          canUpdate={true}
+          canUpdateStatus={true}
           deleteAction={mockedAction}
           updateStatusAction={mockedAction}
         />
@@ -160,6 +181,9 @@ export const Default = {
           subtasksTotal={3}
           subtasksDone={1}
           projectStatus="active"
+          canDelete={true}
+          canUpdate={true}
+          canUpdateStatus={true}
           deleteAction={mockedAction}
           updateStatusAction={mockedAction}
         />
@@ -174,6 +198,9 @@ export const Default = {
           subtasksTotal={3}
           subtasksDone={1}
           projectStatus="active"
+          canDelete={true}
+          canUpdate={true}
+          canUpdateStatus={true}
           deleteAction={mockedAction}
           updateStatusAction={mockedAction}
         />
@@ -188,6 +215,9 @@ export const Default = {
           subtasksTotal={3}
           subtasksDone={2}
           projectStatus="active"
+          canDelete={true}
+          canUpdate={true}
+          canUpdateStatus={true}
           deleteAction={mockedAction}
           updateStatusAction={mockedAction}
         />

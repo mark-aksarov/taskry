@@ -1,3 +1,10 @@
+import {
+  canCreateTask,
+  canDeleteTask,
+  canUpdateTask,
+  canUpdateTaskStatus,
+} from "../user/user.dal";
+
 import { cache } from "react";
 import prisma from "@/lib/prisma";
 import { TaskFilters } from "@/lib/types";
@@ -79,6 +86,14 @@ export const createTask = async (input: CreateTaskInputDTO) => {
     user: { id: creatorId, workspaceId },
   } = await verifySession();
 
+  const canCreate = await canCreateTask();
+
+  if (!canCreate) {
+    throw new AccessDeniedError(
+      "You do not have permission to create task in this workspace.",
+    );
+  }
+
   await validateTaskRelations(workspaceId, input);
 
   return prisma.task.create({
@@ -94,6 +109,14 @@ export const updateTask = async (input: UpdateTaskInputDTO) => {
   const {
     user: { workspaceId },
   } = await verifySession();
+
+  const canUpdate = await canUpdateTask();
+
+  if (!canUpdate) {
+    throw new AccessDeniedError(
+      "You do not have permission to update task in this workspace.",
+    );
+  }
 
   await validateTaskRelations(workspaceId, input);
 
@@ -127,15 +150,26 @@ export const updateTask = async (input: UpdateTaskInputDTO) => {
 
 export const updateTasks = async (taskIds: number[], status: TaskStatus) => {
   const {
-    user: { workspaceId },
+    user: { id: userId, workspaceId, role },
   } = await verifySession();
 
+  const canUpdateStatus = await canUpdateTaskStatus();
+
+  if (!canUpdateStatus) {
+    throw new AccessDeniedError(
+      "You do not have permission to update task statuses in this workspace.",
+    );
+  }
+
   const allowedProjectStatuses = getAllowedProjectStatuses(status);
+
+  const ownershipFilter = role === "user" ? { assigneeId: userId } : {};
 
   return await prisma.task.updateMany({
     where: {
       id: { in: taskIds },
       workspaceId,
+      ...ownershipFilter,
       project: {
         status: { in: allowedProjectStatuses },
       },
@@ -150,6 +184,14 @@ export const deleteTasks = async (ids: number[]) => {
   const {
     user: { workspaceId },
   } = await verifySession();
+
+  const canDelete = await canDeleteTask();
+
+  if (!canDelete) {
+    throw new AccessDeniedError(
+      "You do not have permission to delete tasks in this workspace.",
+    );
+  }
 
   return await prisma.task.deleteMany({
     where: {

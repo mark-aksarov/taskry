@@ -5,6 +5,7 @@ import { arrayParam } from "@/lib/utils/arrayParam";
 import { TaskStatus } from "@/generated/prisma/enums";
 import { getTaskCount } from "@/lib/data/task/task.dal";
 import { deleteTasks } from "@/lib/actions/task/deleteTasks";
+import { canCreateTask, canDeleteTask } from "@/lib/data/user/user.dal";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { updateTaskStatuses } from "@/lib/actions/task/updateTaskStatuses";
 import { TasksServerContainer } from "@/components/tasks/TasksServerContainer";
@@ -45,6 +46,9 @@ export default async function AppTasksPage({
 
   if (!taskCount) return <TasksPageEmpty />;
 
+  const canCreate = await canCreateTask();
+  const canDelete = await canDeleteTask();
+
   return (
     <EditTaskFormClientContainerProvider value={EditTaskFormClientContainer}>
       <TasksPage
@@ -52,6 +56,8 @@ export default async function AppTasksPage({
         pageSize={pageSize}
         sort={sort}
         filters={filters}
+        canCreateTask={canCreate}
+        canDeleteTask={canDelete}
         TaskFiltersFormContainer={TaskFiltersFormServerContainer}
         NewTaskFormContainer={NewTaskFormServerContainer}
         TasksServerContainer={TasksServerContainer}

@@ -2,7 +2,7 @@ import { createAccessControl } from "better-auth/plugins/access";
 
 export const statement = {
   project: ["create", "update", "delete"],
-  task: ["create", "update", "delete"],
+  task: ["create", "update", "update-status", "delete"],
   comment: ["create", "update", "delete"],
   customer: ["create", "update", "delete"],
   user: ["create", "update", "delete"],
@@ -12,7 +12,7 @@ export const ac = createAccessControl(statement);
 
 export const admin = ac.newRole({
   project: ["create", "update", "delete"],
-  task: ["create", "update", "delete"],
+  task: ["create", "update", "update-status", "delete"],
   comment: ["create", "update", "delete"],
   customer: ["create", "update", "delete"],
   user: ["create", "update", "delete"],
@@ -20,7 +20,7 @@ export const admin = ac.newRole({
 
 export const owner = ac.newRole({
   project: ["create", "update", "delete"],
-  task: ["create", "update", "delete"],
+  task: ["create", "update", "update-status", "delete"],
   comment: ["create", "update", "delete"],
   customer: ["create", "update", "delete"],
   user: ["create", "update", "delete"],
@@ -28,7 +28,7 @@ export const owner = ac.newRole({
 
 export const manager = ac.newRole({
   project: ["create", "update", "delete"],
-  task: ["create", "update", "delete"],
+  task: ["create", "update", "update-status", "delete"],
   comment: ["create", "update", "delete"],
   customer: ["create", "update", "delete"],
   user: [],
@@ -36,7 +36,7 @@ export const manager = ac.newRole({
 
 export const user = ac.newRole({
   project: [],
-  task: ["update"],
+  task: ["update-status"],
   comment: ["create", "update", "delete"],
   customer: [],
   user: [],

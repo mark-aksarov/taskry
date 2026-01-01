@@ -35,6 +35,9 @@ export const Default = {
     commentsCount: 99,
     subtasksTotal: 6,
     subtasksDone: 2,
+    canDelete: true,
+    canUpdate: true,
+    canUpdateStatus: true,
     deleteAction: fn(),
   },
 } satisfies Story;

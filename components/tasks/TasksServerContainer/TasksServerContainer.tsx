@@ -1,3 +1,9 @@
+import {
+  canDeleteTask,
+  canUpdateTask,
+  canUpdateTaskStatus,
+} from "@/lib/data/user/user.dal";
+
 import { TaskList } from "../TaskList";
 import { TaskGrid } from "../TaskGrid";
 import { TaskFilters } from "@/lib/types";
@@ -46,31 +52,55 @@ export async function TasksServerContainer({
     baseUrl: "/tasks",
   };
 
+  const canDelete = await canDeleteTask();
+  const canUpdate = await canUpdateTask();
+
+  const tasksWithPermissions = await Promise.all(
+    tasks.map(async (task) => {
+      const canUpdateStatus = await canUpdateTaskStatus(task.assignee?.id);
+
+      return {
+        ...task,
+        canDelete,
+        canUpdate,
+        canUpdateStatus,
+      };
+    }),
+  );
+
   return (
     <>
       <ViewModeLayout
         list={
           <TaskList>
-            {tasks.map((task) => (
-              <TaskListItem
-                key={task.id}
-                category={task.category}
-                project={task.project}
-                deleteAction={deleteTasks}
-                updateStatusAction={updateTaskStatuses}
-                showCheckbox
-                {...getCommonProps(task)}
-              />
-            ))}
+            {tasksWithPermissions.map((task) => {
+              return (
+                <TaskListItem
+                  key={task.id}
+                  category={task.category}
+                  project={task.project}
+                  canDelete={task.canDelete}
+                  canUpdate={task.canUpdate}
+                  canUpdateStatus={task.canUpdateStatus}
+                  deleteAction={deleteTasks}
+                  updateStatusAction={updateTaskStatuses}
+                  showCheckbox
+                  {...getCommonProps(task)}
+                />
+              );
+            })}
           </TaskList>
         }
         grid={
           <TaskGrid>
-            {tasks.map((task) => (
+            {tasksWithPermissions.map((task) => (
               <TaskGridItem
                 key={task.id}
                 subtasksDone={task.subtasks.done}
                 projectStatus={task.project.status}
+                canDelete={task.canDelete}
+                canUpdate={task.canUpdate}
+                canUpdateStatus={task.canUpdateStatus}
                 updateStatusAction={updateTaskStatuses}
                 deleteAction={deleteTasks}
                 {...getCommonProps(task)}
