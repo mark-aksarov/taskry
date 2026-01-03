@@ -16,6 +16,7 @@ export function TaskFormBaseStatusSelect({
 
   return (
     <ResponsiveSelect
+      data-test="status-select"
       name="status"
       label={t("label")}
       defaultSelectedKey={defaultSelectedKey}

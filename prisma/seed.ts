@@ -15,6 +15,8 @@ import { users as ruUsers } from "./seed/ru/users";
 import { users as enUsers } from "./seed/en/users";
 import { tasks as ruTasks } from "./seed/ru/tasks";
 import { tasks as enTasks } from "./seed/en/tasks";
+import { accounts as ruAccounts } from "./seed/ru/accounts";
+import { accounts as enAccounts } from "./seed/en/accounts";
 import { subtasks as ruSubtasks } from "./seed/ru/subtasks";
 import { subtasks as enSubtasks } from "./seed/en/subtasks";
 import { projects as ruProjects } from "./seed/ru/projects";
@@ -63,6 +65,12 @@ async function main() {
 
   await prisma.user.createMany({
     data: [...ruUsers, ...enUsers],
+  });
+
+  // ----------------- Accounts -----------------
+
+  await prisma.account.createMany({
+    data: [...ruAccounts, ...enAccounts],
   });
 
   // ----------------- Customers -----------------
@@ -126,6 +134,33 @@ async function main() {
   await prisma.notificationTarget.createMany({
     data: [...ruNotificationTargets, ...enNotificationTargets],
   });
+
+  // ----------------- Reset IDs -----------------
+
+  const tables = [
+    "attachment",
+    "comment",
+    "company",
+    "customer",
+    "notification",
+    "notification_target",
+    "position",
+    "project",
+    "project_category",
+    "subtask",
+    "task",
+    "task_category",
+    "workspace",
+  ];
+
+  for (const table of tables) {
+    await prisma.$executeRawUnsafe(`
+      SELECT setval(
+        pg_get_serial_sequence('"${table}"', 'id'),
+        COALESCE((SELECT MAX(id) FROM "${table}"), 1)
+      );
+    `);
+  }
 }
 
 main();

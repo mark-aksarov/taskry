@@ -25,6 +25,7 @@ export function EditTaskModal({ taskId, ...props }: EditTaskModalProps) {
 
   return (
     <FormBaseModal
+      data-test="edit-task-modal"
       formId="edit-task-form"
       title={t("title")}
       submitButtonLabel={t("submitButtonLabel")}

@@ -12,6 +12,7 @@ export function ConfirmModal({
 }: ConfirmModalProps) {
   return (
     <Modal
+      data-test="confirm-modal"
       isDismissable
       isOpen={isOpen}
       onOpenChange={onOpenChange}

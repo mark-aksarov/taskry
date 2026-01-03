@@ -45,6 +45,7 @@ export function UserDetailModal({ userId }: { userId: string }) {
         </DialogBody>
         <DialogFooter>
           <Button
+            data-test="open-full-page-button"
             as="a"
             href={`/team/${userId}`}
             variant="primary"

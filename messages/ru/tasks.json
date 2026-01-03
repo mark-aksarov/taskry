@@ -154,7 +154,7 @@
 
   "TaskDetailModal": {
     "title": "Детали задачи",
-    "editButtonLabel": "Открыть на полной странице"
+    "openButtonLabel": "Открыть на полной странице"
   },
 
   "TaskFiltersForm": {

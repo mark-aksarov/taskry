@@ -111,7 +111,7 @@ export const TaskListItem = ({
       checkboxSlot={showCheckbox && <TaskListItemCheckbox id={id} />}
       titleSlot={
         <ListItemInfo>
-          <ListItemTitle>
+          <ListItemTitle data-test="task-list-item-title">
             <ItemBaseDetailModalTrigger
               modal={<TaskDetailModal taskId={id} />}
               className="truncate"
@@ -146,7 +146,7 @@ export const TaskListItem = ({
           )}
 
           <ListItemInfo className="@max-2xl:hidden">
-            <ListItemTitle>
+            <ListItemTitle data-test="task-list-item-user-title">
               {assignee ? (
                 <ItemBaseDetailModalTrigger
                   modal={<UserDetailModal userId={assignee.id} />}
@@ -171,7 +171,7 @@ export const TaskListItem = ({
       }
       projectSlot={
         <ListItemInfo className="@max-4xl:hidden">
-          <ListItemTitle>
+          <ListItemTitle data-test="task-list-item-project-title">
             <ItemBaseDetailModalTrigger
               modal={<ProjectDetailModal projectId={project.id} />}
               className="truncate"

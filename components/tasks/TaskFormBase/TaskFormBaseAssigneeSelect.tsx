@@ -15,6 +15,7 @@ export function TaskFormBaseAssigneeSelect({
 
   return (
     <ResponsiveSelect
+      data-test="assignee-select"
       name="assigneeId"
       defaultSelectedKey={defaultSelectedKey}
       label={t("label")}

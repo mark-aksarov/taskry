@@ -15,6 +15,7 @@ export function TaskFormBaseCategorySelect({
 
   return (
     <ResponsiveSelect
+      data-test="category-select"
       name="categoryId"
       label={t("label")}
       defaultSelectedKey={defaultSelectedKey}

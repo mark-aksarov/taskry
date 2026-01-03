@@ -36,6 +36,7 @@ describe("Position DAL", () => {
   describe("createPosition", () => {
     it("should successfully create a position and automatically inject the workspaceId", async () => {
       const input = {
+        id: 100,
         name: "Senior Developer",
       };
 
@@ -53,6 +54,7 @@ describe("Position DAL", () => {
 
     it("should prevent overriding the workspaceId from the input", async () => {
       const input = {
+        id: 100,
         name: "Malicious Position",
         workspaceId: 99,
       } as any;

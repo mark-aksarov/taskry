@@ -101,6 +101,7 @@ export function TaskItemActionMenuTrigger({
   return (
     <>
       <ItemBaseActionMenuTrigger
+        trigger-data-test="task-list-item-action-menu-trigger"
         className={className}
         onAction={handleAction}
         disabledKeys={disabledKeys}

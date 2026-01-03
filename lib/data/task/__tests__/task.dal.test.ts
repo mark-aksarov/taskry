@@ -309,7 +309,7 @@ describe("Task DAL", () => {
       expect(result.assigneeId).toBeNull();
     });
 
-    describe.only("Task RBAC Creation", () => {
+    describe("Task RBAC Creation", () => {
       const createTestCases = [
         { role: "admin", expected: "allow" },
         { role: "owner", expected: "allow" },

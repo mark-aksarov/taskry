@@ -233,6 +233,7 @@ describe("Project DAL", () => {
   describe("createProject", () => {
     it("should successfully create a project with correct data and creatorId", async () => {
       const input = {
+        id: 100,
         title: "New Integration Test",
         description: "Verify creation logic",
         deadline: new Date("2025-12-31"),

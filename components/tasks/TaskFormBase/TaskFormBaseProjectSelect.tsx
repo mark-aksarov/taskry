@@ -15,6 +15,7 @@ export function TaskFormBaseProjectSelect({
 
   return (
     <ResponsiveSelect
+      data-test="project-select"
       name="projectId"
       label={t("label")}
       defaultSelectedKey={defaultSelectedKey}

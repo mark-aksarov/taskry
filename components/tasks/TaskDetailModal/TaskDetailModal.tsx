@@ -23,7 +23,7 @@ export function TaskDetailModal({ taskId }: { taskId: number }) {
   const t = useTranslations("tasks.TaskDetailModal");
 
   return (
-    <Modal isDismissable className="w-[600px]">
+    <Modal data-test="task-detail-modal" isDismissable className="w-[600px]">
       <Dialog className="max-h-[calc(100dvh-64px)]">
         <DialogHeader>
           <DialogHeading>{t("title")}</DialogHeading>
@@ -36,11 +36,12 @@ export function TaskDetailModal({ taskId }: { taskId: number }) {
         </DialogBody>
         <DialogFooter>
           <Button
+            data-test="open-full-page-button"
             as="a"
             href={`/tasks/${taskId}`}
             variant="primary"
             size="medium"
-            label={t("editButtonLabel")}
+            label={t("openButtonLabel")}
             className="w-full justify-center"
           />
         </DialogFooter>

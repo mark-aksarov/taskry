@@ -12,8 +12,9 @@ import { ResponsiveMenuTrigger } from "../ResponsiveMenuTrigger";
 
 export function ItemBaseActionMenuTrigger<T extends object = any>({
   className,
+  "trigger-data-test": triggerDataTest,
   ...props
-}: MenuTriggerProps<T> & { className?: string }) {
+}: MenuTriggerProps<T> & { className?: string; "trigger-data-test"?: string }) {
   const t = useTranslations("common.ItemBase.ItemBaseActionMenuTrigger");
 
   return (
@@ -29,6 +30,7 @@ export function ItemBaseActionMenuTrigger<T extends object = any>({
       renderButton={() => (
         <Button
           aria-label={t("ariaLabel")}
+          data-test={triggerDataTest}
           variant="ghost"
           iconLeft={
             <Ellipsis size={16} strokeWidth={1.5} absoluteStrokeWidth />

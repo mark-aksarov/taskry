@@ -36,6 +36,7 @@ describe("ProjectCategory DAL", () => {
   describe("createProjectCategory", () => {
     it("should successfully create a project category and automatically assign the workspaceId", async () => {
       const input = {
+        id: 100,
         name: "Urgent Projects",
       };
 
@@ -54,6 +55,7 @@ describe("ProjectCategory DAL", () => {
 
     it("should overwrite any workspaceId provided in the input with the session workspaceId", async () => {
       const input = {
+        id: 100,
         name: "Security Test Category",
         workspaceId: 2,
       } as any;

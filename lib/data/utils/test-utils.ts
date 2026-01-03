@@ -1,16 +1,21 @@
 import prisma from "@/lib/prisma";
 
 export async function resetDatabase() {
-  await prisma.notification.deleteMany();
-  await prisma.notificationTarget.deleteMany();
-  await prisma.comment.deleteMany();
-  await prisma.task.deleteMany();
-  await prisma.taskCategory.deleteMany();
-  await prisma.project.deleteMany();
-  await prisma.projectCategory.deleteMany();
-  await prisma.customer.deleteMany();
-  await prisma.company.deleteMany();
-  await prisma.user.deleteMany();
-  await prisma.position.deleteMany();
-  await prisma.workspace.deleteMany();
+  await prisma.$executeRawUnsafe(`
+    TRUNCATE TABLE
+    "notification",
+    "notification_target",
+    "comment",  
+    "task",
+    "task_category",
+    "project",
+    "project_category",
+    "customer",
+    "company",
+    "user",
+    "position",
+    "workspace",
+    "account"
+    RESTART IDENTITY CASCADE;
+  `);
 }

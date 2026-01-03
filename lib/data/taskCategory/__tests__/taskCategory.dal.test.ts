@@ -45,6 +45,7 @@ describe("TaskCategory DAL", () => {
 
     it("should overwrite any workspaceId provided in the input with the session workspaceId", async () => {
       const input = {
+        id: 100,
         name: "Security Test Category",
         workspaceId: 2,
       } as any;

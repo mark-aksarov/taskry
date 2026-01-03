@@ -37,6 +37,7 @@ export function ProjectDetailModal({ projectId }: { projectId: number }) {
         </DialogBody>
         <DialogFooter>
           <Button
+            data-test="open-full-page-button"
             as="a"
             href={`/projects/${projectId}`}
             variant="primary"

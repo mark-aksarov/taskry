@@ -24,7 +24,7 @@ export const TaskListItemLayout = ({
   menuTriggerSlot,
 }: TaskListItemLayoutProps) => {
   return (
-    <ListItem>
+    <ListItem data-test="task-list-item">
       {checkboxSlot}
       {titleSlot}
       {assigneeSlot}

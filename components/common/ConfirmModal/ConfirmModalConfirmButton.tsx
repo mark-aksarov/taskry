@@ -13,6 +13,7 @@ export function ConfirmModalConfirmButton({
 
   return (
     <Button
+      data-test="confirm-button"
       variant="contrast"
       label={label}
       onPress={handlePress}

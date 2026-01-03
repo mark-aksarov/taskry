@@ -154,7 +154,7 @@
 
   "TaskDetailModal": {
     "title": "Task Details",
-    "editButtonLabel": "Open in Full Page"
+    "openButtonLabel": "Open in Full Page"
   },
 
   "TaskFiltersForm": {
