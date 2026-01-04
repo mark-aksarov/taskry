@@ -1,8 +1,9 @@
-Cypress.Commands.add("changeSelection", (dataTestAttribute) => {
+Cypress.Commands.add("changeSelection", (dataTestAttribute, key) => {
   cy.getByData(dataTestAttribute).click();
   return cy
     .get('li[role="option"]')
     .filter(':not([aria-selected="true"])')
+    .filter(`[data-key=${key}]`)
     .first()
     .click();
 });
@@ -14,10 +15,10 @@ Cypress.Commands.add("getMenuItem", (dataTestAttribute, key) => {
 
 Cypress.Commands.add(
   "setDatePickerDate",
-  (dataTestAttribute, day, month, year) => {
+  (dataTestAttribute, month, day, year) => {
     return cy.getByData(dataTestAttribute).within(() => {
-      cy.getByRole("spinbutton").eq(0).clear().type(day);
-      cy.getByRole("spinbutton").eq(1).clear().type(month);
+      cy.getByRole("spinbutton").eq(0).clear().type(month);
+      cy.getByRole("spinbutton").eq(1).clear().type(day);
       cy.getByRole("spinbutton").eq(2).clear().type(year);
     });
   },

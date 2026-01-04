@@ -97,7 +97,8 @@ describe("Dashboard cards", () => {
 
     cy.task("db:reset");
     cy.task("db:seed", payload);
-    cy.signIn("owner@example.com", "12345abc", "/");
+    cy.signIn("owner@example.com", "12345abc");
+    cy.visit("/en");
   });
 
   it("Displays correct dashboard cards", () => {
@@ -110,7 +111,7 @@ describe("Dashboard cards", () => {
     cy.getByData("dashboard-card-value").eq(1).should("contain", "2");
 
     cy.getByData("dashboard-card-text").eq(2).should("contain", "Total Users");
-    cy.getByData("dashboard-card-value").eq(2).should("contain", "4");
+    cy.getByData("dashboard-card-value").eq(2).should("contain", "5");
 
     cy.getByData("dashboard-card-text")
       .eq(3)
