@@ -10,12 +10,12 @@ import {
   DialogHeading,
   DialogCloseButton,
 } from "@/components/ui";
+import { Suspense } from "react";
 import { useTranslations } from "next-intl";
-import { Suspense, useContext } from "react";
 import { OverlayTriggerState } from "react-stately";
 import { PersonHeaderSkeleton } from "@/components/common/PersonHeader";
-import { CustomerDetailContainerContext } from "../CustomerDetailContainer";
 import { CustomerDetailSkeleton } from "@/components/customer/CustomerDetail";
+import { useGlobalContainer } from "@/components/layout/GlobalContainerContext";
 
 export interface CustomerDetailBottomSheetProps {
   customerId: number;
@@ -28,7 +28,13 @@ export function CustomerDetailBottomSheet({
 }: CustomerDetailBottomSheetProps) {
   const t = useTranslations("customers.CustomerDetailBottomSheet");
 
-  const CustomerDetailContainer = useContext(CustomerDetailContainerContext);
+  const { CustomerDetailContainer } = useGlobalContainer();
+
+  if (!CustomerDetailContainer) {
+    throw new Error(
+      "CustomerDetailContainer is missing in GlobalContainerContext",
+    );
+  }
 
   return (
     <BottomSheet isDismissable state={state} className="md:hidden">

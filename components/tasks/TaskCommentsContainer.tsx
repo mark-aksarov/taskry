@@ -1,15 +1,25 @@
+"use client";
+
+import {
+  CommentItem,
+  CommentItemSkeleton,
+} from "@/components/comments/CommentItem";
+
 import useSWR from "swr";
-import { CommentItem } from "@/components/comments/CommentItem";
+import { Repeat } from "@/components/common/Repeat";
 import { CommentListItemDTO } from "@/lib/data/comment/comment.dto";
 import { CommentsEmptySection } from "@/components/comments/CommentsEmptySection";
 
-export function ProjectCommentsContainer({ projectId }: { projectId: number }) {
-  const { data: comments } = useSWR<CommentListItemDTO[]>(
-    `/api/projects/${projectId}/comments`,
-    {
-      suspense: true,
-    },
-  );
+export function TaskCommentsContainer({ taskId }: { taskId: number }) {
+  const {
+    data: comments,
+    error,
+    isLoading,
+  } = useSWR<CommentListItemDTO[]>(`/api/tasks/${taskId}/comments`);
+
+  if (isLoading) {
+    return <Repeat items={10} renderItem={() => <CommentItemSkeleton />} />;
+  }
 
   if (!comments) return null;
 

@@ -1,9 +1,9 @@
-import { Suspense, useContext } from "react";
+import { Suspense } from "react";
 import { useTranslations } from "next-intl";
 import { ModalProps } from "@/components/ui";
 import { TaskFormBaseSkeleton } from "../TaskFormBase";
 import { FormBaseModal } from "@/components/common/FormBaseModal";
-import { EditTaskFormContainerContext } from "../EditTaskFormContainerContext";
+import { useGlobalContainer } from "@/components/layout/GlobalContainerContext";
 
 interface EditTaskModalProps
   extends Pick<ModalProps, "isOpen" | "onOpenChange"> {
@@ -13,11 +13,11 @@ interface EditTaskModalProps
 export function EditTaskModal({ taskId, ...props }: EditTaskModalProps) {
   const t = useTranslations("tasks.EditTaskModal");
 
-  const EditTaskFormContainer = useContext(EditTaskFormContainerContext);
+  const { EditTaskFormContainer } = useGlobalContainer();
 
   if (!EditTaskFormContainer) {
     throw new Error(
-      "EditTaskModal must be used within a EditTaskFormClientProvider",
+      "EditTaskFormContainer is missing in GlobalContainerContext",
     );
   }
 

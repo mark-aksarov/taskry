@@ -16,7 +16,7 @@ import { EditTaskModal } from "../EditTaskModal";
 import { OverlayTriggerState } from "react-stately";
 import { DialogTrigger } from "react-aria-components";
 import { TaskDetailCompactSkeleton } from "../TaskDetailCompact";
-import { TaskDetailCompactContainerContext } from "../TaskDetailCompactContainer";
+import { useGlobalContainer } from "@/components/layout/GlobalContainerContext";
 
 export interface TaskDetailBottomSheetProps {
   taskId: number;
@@ -27,9 +27,15 @@ export function TaskDetailBottomSheet({
   taskId,
   state,
 }: TaskDetailBottomSheetProps) {
-  const TaskDetailContainer = useContext(TaskDetailCompactContainerContext);
-
   const t = useTranslations("tasks.TaskDetailBottomSheet");
+
+  const { TaskDetailCompactContainer } = useGlobalContainer();
+
+  if (!TaskDetailCompactContainer) {
+    throw new Error(
+      "TaskDetailCompactContainer is missing in GlobalContainerContext",
+    );
+  }
 
   return (
     <BottomSheet isDismissable state={state} className="md:hidden">
@@ -40,7 +46,7 @@ export function TaskDetailBottomSheet({
         </DialogHeader>
         <DialogBody>
           <Suspense fallback={<TaskDetailCompactSkeleton />}>
-            <TaskDetailContainer taskId={taskId} />
+            <TaskDetailCompactContainer taskId={taskId} />
           </Suspense>
         </DialogBody>
         <DialogFooter>

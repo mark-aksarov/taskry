@@ -10,11 +10,11 @@ import {
   DialogHeading,
   DialogCloseButton,
 } from "@/components/ui";
+import { Suspense } from "react";
 import { useTranslations } from "next-intl";
-import { Suspense, useContext } from "react";
 import { OverlayTriggerState } from "react-stately";
 import { ProjectDetailCompactSkeleton } from "../ProjectDetailCompact";
-import { ProjectDetailCompactContainerContext } from "../ProjectDetailCompactContainer";
+import { useGlobalContainer } from "@/components/layout/GlobalContainerContext";
 
 export interface ProjectDetailBottomSheetProps {
   projectId: number;
@@ -27,9 +27,13 @@ export function ProjectDetailBottomSheet({
 }: ProjectDetailBottomSheetProps) {
   const t = useTranslations("projects.ProjectDetailBottomSheet");
 
-  const ProjectDetailContainer = useContext(
-    ProjectDetailCompactContainerContext,
-  );
+  const { ProjectDetailCompactContainer } = useGlobalContainer();
+
+  if (!ProjectDetailCompactContainer) {
+    throw new Error(
+      "ProjectDetailCompactContainer is missing in GlobalContainerContext",
+    );
+  }
 
   return (
     <BottomSheet isDismissable state={state} className="md:hidden">
@@ -40,7 +44,7 @@ export function ProjectDetailBottomSheet({
         </DialogHeader>
         <DialogBody>
           <Suspense fallback={<ProjectDetailCompactSkeleton />}>
-            <ProjectDetailContainer projectId={projectId} />
+            <ProjectDetailCompactContainer projectId={projectId} />
           </Suspense>
         </DialogBody>
         <DialogFooter>

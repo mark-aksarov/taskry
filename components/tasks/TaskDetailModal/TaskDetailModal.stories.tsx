@@ -1,8 +1,9 @@
-import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { TaskDetailModal } from "./TaskDetailModal";
+import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { Button, RACDialogTrigger } from "@/components/ui";
+import { TaskDetailCompactSkeleton } from "../TaskDetailCompact";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withTaskDetailCompactSkeleton } from "@/components/tasks/TaskDetailCompactContainer/decorators";
+import { GlobalContainerProvider } from "@/components/layout/GlobalContainerContext";
 
 const meta = {
   title: "components/tasks/TaskDetailModal",
@@ -28,5 +29,15 @@ type Story = StoryObj<typeof meta>;
 export const Default = {} satisfies Story;
 
 export const WithSkeletonContent = {
-  decorators: [withTaskDetailCompactSkeleton],
+  decorators: [
+    (Story) => (
+      <GlobalContainerProvider
+        value={{
+          TaskDetailCompactContainer: () => <TaskDetailCompactSkeleton />,
+        }}
+      >
+        <Story />
+      </GlobalContainerProvider>
+    ),
+  ],
 } satisfies Story;

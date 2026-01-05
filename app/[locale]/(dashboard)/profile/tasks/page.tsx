@@ -1,3 +1,8 @@
+import {
+  GlobalContainerProvider,
+  GlobalContainerContextType,
+} from "@/components/layout/GlobalContainerContext";
+
 import { z } from "zod";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
@@ -12,13 +17,20 @@ import { updateTaskStatuses } from "@/lib/actions/task/updateTaskStatuses";
 import { UserHeaderContainer } from "@/components/users/UserHeaderContainer";
 import { NewTaskFormContainer } from "@/components/tasks/NewTaskFormContainer";
 import { EditTaskFormContainer } from "@/components/tasks/EditTaskFormContainer";
-import { EditTaskFormContainerProvider } from "@/components/tasks/EditTaskFormContainerContext";
+import { TaskCommentsContainer } from "@/components/tasks/TaskCommentsContainer";
+import { TaskDetailCompactContainer } from "@/components/tasks/TaskDetailCompactContainer";
 
 const searchParamsSchema = z.object({
   page: z.coerce.number().int().positive().catch(1),
   pageSize: z.coerce.number().int().min(1).max(100).catch(10),
   sort: z.enum(["title", "deadline", "status", "category"]).catch("title"),
 });
+
+const context: GlobalContainerContextType = {
+  EditTaskFormContainer,
+  TaskDetailCompactContainer,
+  TaskCommentsContainer,
+};
 
 export default async function AppProfileTasksPage({
   searchParams,
@@ -54,7 +66,7 @@ export default async function AppProfileTasksPage({
   const canDelete = await canDeleteTask();
 
   return (
-    <EditTaskFormContainerProvider value={EditTaskFormContainer}>
+    <GlobalContainerProvider value={context}>
       <ProfileTasksPage
         userId={userId}
         page={page}
@@ -68,6 +80,6 @@ export default async function AppProfileTasksPage({
         deleteTasksAction={deleteTasks}
         updateTasksStatusesAction={updateTaskStatuses}
       />
-    </EditTaskFormContainerProvider>
+    </GlobalContainerProvider>
   );
 }

@@ -2,13 +2,13 @@ import {
   ProjectDetailBottomSheet,
   ProjectDetailBottomSheetProps,
 } from "./ProjectDetailBottomSheet";
-
 import { Button } from "@/components/ui";
 import { useOverlayTrigger } from "react-aria";
 import { useOverlayTriggerState } from "react-stately";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { ProjectDetailCompactSkeleton } from "../ProjectDetailCompact";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withProjectDetailCompactSkeleton } from "../ProjectDetailCompactContainer/decorators";
+import { GlobalContainerProvider } from "@/components/layout/GlobalContainerContext";
 
 const meta = {
   title: "components/projects/ProjectDetailBottomSheet",
@@ -51,5 +51,15 @@ const ProjectDetailBottomSheetTemplate = ({
 export const Default = {} satisfies Story;
 
 export const WithSkeletonContent = {
-  decorators: [withProjectDetailCompactSkeleton],
+  decorators: [
+    (Story) => (
+      <GlobalContainerProvider
+        value={{
+          ProjectDetailCompactContainer: () => <ProjectDetailCompactSkeleton />,
+        }}
+      >
+        <Story />
+      </GlobalContainerProvider>
+    ),
+  ],
 } satisfies Story;

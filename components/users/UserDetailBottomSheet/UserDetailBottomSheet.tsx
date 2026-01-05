@@ -10,12 +10,13 @@ import {
   DialogHeading,
   DialogCloseButton,
 } from "@/components/ui";
+
+import { Suspense } from "react";
 import { useTranslations } from "next-intl";
-import { Suspense, useContext } from "react";
 import { OverlayTriggerState } from "react-stately";
 import { UserDetailSkeleton } from "@/components/users/UserDetail";
-import { UserDetailContainerContext } from "../UserDetailContainer";
 import { PersonHeaderSkeleton } from "@/components/common/PersonHeader";
+import { useGlobalContainer } from "@/components/layout/GlobalContainerContext";
 
 export interface UserDetailBottomSheetProps {
   userId: string;
@@ -28,7 +29,11 @@ export function UserDetailBottomSheet({
 }: UserDetailBottomSheetProps) {
   const t = useTranslations("users.UserDetailBottomSheet");
 
-  const UserDetailContainer = useContext(UserDetailContainerContext);
+  const { UserDetailContainer } = useGlobalContainer();
+
+  if (!UserDetailContainer) {
+    throw new Error("UserDetailContainer is missing in GlobalContainerContext");
+  }
 
   return (
     <BottomSheet isDismissable state={state} className="md:hidden">

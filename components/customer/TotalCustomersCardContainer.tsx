@@ -1,6 +1,6 @@
 import "server-only";
 
-import { TotalCustomersCard } from "../TotalCustomersCard";
+import { TotalCustomersCard } from "./TotalCustomersCard";
 import { getCustomerCount } from "@/lib/data/customer/customer.dal";
 
 export const TotalCustomersCardContainer = async () => {

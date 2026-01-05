@@ -1,1 +1,0 @@
-export { TotalCustomersCardContainer } from "./TotalCustomersCardContainer";

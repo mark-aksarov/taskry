@@ -8,7 +8,8 @@ import { Button } from "@/components/ui";
 import { useOverlayTrigger } from "react-aria";
 import { useOverlayTriggerState } from "react-stately";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { withTaskDetailCompactSkeleton } from "@/components/tasks/TaskDetailCompactContainer/decorators";
+import { TaskDetailCompactSkeleton } from "../TaskDetailCompact";
+import { GlobalContainerProvider } from "@/components/layout/GlobalContainerContext";
 
 const meta = {
   title: "components/tasks/TaskDetailBottomSheet",
@@ -51,5 +52,15 @@ const TaskDetailBottomSheetTemplate = ({
 export const Default = {} satisfies Story;
 
 export const WithSkeletonContent = {
-  decorators: [withTaskDetailCompactSkeleton],
+  decorators: [
+    (Story) => (
+      <GlobalContainerProvider
+        value={{
+          TaskDetailCompactContainer: () => <TaskDetailCompactSkeleton />,
+        }}
+      >
+        <Story />
+      </GlobalContainerProvider>
+    ),
+  ],
 } satisfies Story;

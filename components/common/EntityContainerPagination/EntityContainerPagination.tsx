@@ -43,7 +43,6 @@ export function EntityContainerPagination({
 
   return (
     <>
-      {isPending && <div className="flex justify-center">Loading...</div>}
       {totalPages > 1 && (
         <div className="flex justify-center">
           <Pagination

@@ -1,12 +1,11 @@
-import {
-  withTaskCommentsEmpty,
-  withTaskCommentsSkeleton,
-} from "../TaskCommentsContainer/decorators";
-
+import { Repeat } from "@/components/common/Repeat";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { TaskCommentsModal } from "./TaskCommentsModal";
 import { Button, RACDialogTrigger } from "@/components/ui";
+import { CommentItemSkeleton } from "@/components/comments/CommentItem";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { CommentsEmptySection } from "@/components/comments/CommentsEmptySection";
+import { GlobalContainerProvider } from "@/components/layout/GlobalContainerContext";
 
 const meta = {
   title: "Components/tasks/TaskCommentsModal",
@@ -35,9 +34,31 @@ export type Story = StoryObj<typeof meta>;
 export const Default = {} satisfies Story;
 
 export const Empty = {
-  decorators: [withTaskCommentsEmpty],
+  decorators: [
+    (Story) => (
+      <GlobalContainerProvider
+        value={{
+          TaskCommentsContainer: () => <CommentsEmptySection />,
+        }}
+      >
+        <Story />
+      </GlobalContainerProvider>
+    ),
+  ],
 } satisfies Story;
 
 export const WithSkeletonContent = {
-  decorators: [withTaskCommentsSkeleton],
+  decorators: [
+    (Story) => (
+      <GlobalContainerProvider
+        value={{
+          TaskCommentsContainer: () => (
+            <Repeat items={10} renderItem={() => <CommentItemSkeleton />} />
+          ),
+        }}
+      >
+        <Story />
+      </GlobalContainerProvider>
+    ),
+  ],
 } satisfies Story;

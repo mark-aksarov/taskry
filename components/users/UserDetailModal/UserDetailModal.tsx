@@ -11,16 +11,20 @@ import {
   DialogCloseButton,
 } from "@/components/ui";
 
+import { Suspense } from "react";
 import { useTranslations } from "next-intl";
-import { Suspense, useContext } from "react";
 import { UserDetailSkeleton } from "@/components/users/UserDetail";
 import { PersonHeaderSkeleton } from "@/components/common/PersonHeader";
-import { UserDetailContainerContext } from "../UserDetailContainer";
+import { useGlobalContainer } from "@/components/layout/GlobalContainerContext";
 
 export function UserDetailModal({ userId }: { userId: string }) {
   const t = useTranslations("users.UserDetailModal");
 
-  const UserDetailContainer = useContext(UserDetailContainerContext);
+  const { UserDetailContainer } = useGlobalContainer();
+
+  if (!UserDetailContainer) {
+    throw new Error("UserDetailContainer is missing in GlobalContainerContext");
+  }
 
   return (
     <Modal isDismissable className="w-[600px]">

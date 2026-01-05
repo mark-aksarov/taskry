@@ -3,23 +3,27 @@
 import {
   Button,
   Dialog,
-  DialogBody,
   DialogHeader,
   DialogHeading,
   RACDialogTrigger,
   DialogCloseButton,
 } from "@/components/ui";
-import { useContext } from "react";
+
 import { Bell } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { ResponsiveModal } from "@/components/common/ResponsiveModal";
-import { NotificationModalContentContainerContext } from "../NotificationModalContentContainer";
+import { useGlobalContainer } from "@/components/layout/GlobalContainerContext";
 
 export function NotificationModalTrigger() {
   const t = useTranslations("notifications.NotificationModalTrigger");
-  const NotificationModalContentContainer = useContext(
-    NotificationModalContentContainerContext,
-  );
+
+  const { NotificationModalContentContainer } = useGlobalContainer();
+
+  if (!NotificationModalContentContainer) {
+    throw new Error(
+      "NotificationModalContentContainer is missing in GlobalContainerContext",
+    );
+  }
 
   return (
     <RACDialogTrigger>

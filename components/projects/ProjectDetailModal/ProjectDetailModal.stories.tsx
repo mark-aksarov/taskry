@@ -2,7 +2,8 @@ import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { ProjectDetailModal } from "./ProjectDetailModal";
 import { Button, RACDialogTrigger } from "@/components/ui";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withProjectDetailCompactSkeleton } from "../ProjectDetailCompactContainer/decorators";
+import { GlobalContainerProvider } from "@/components/layout/GlobalContainerContext";
+import { ProjectDetailCompactSkeleton } from "../ProjectDetailCompact";
 
 const meta = {
   title: "components/projects/ProjectDetailModal",
@@ -28,5 +29,15 @@ type Story = StoryObj<typeof meta>;
 export const Default = {} satisfies Story;
 
 export const WithSkeletonContent = {
-  decorators: [withProjectDetailCompactSkeleton],
+  decorators: [
+    (Story) => (
+      <GlobalContainerProvider
+        value={{
+          ProjectDetailCompactContainer: () => <ProjectDetailCompactSkeleton />,
+        }}
+      >
+        <Story />
+      </GlobalContainerProvider>
+    ),
+  ],
 } satisfies Story;

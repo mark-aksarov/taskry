@@ -1,19 +1,26 @@
 import { useContext } from "react";
 import { useTranslations } from "next-intl";
 import { CommentsModal } from "@/components/common/CommentsModal";
-import { TaskCommentsContainerContext } from "../TaskCommentsContainer";
+import { useGlobalContainer } from "@/components/layout/GlobalContainerContext";
 
 interface TaskCommentsModalProps {
   taskId: number;
 }
 
 export function TaskCommentsModal({ taskId }: TaskCommentsModalProps) {
-  const CommentsContainer = useContext(TaskCommentsContainerContext);
   const t = useTranslations("tasks.TaskCommentsModal");
+
+  const { TaskCommentsContainer } = useGlobalContainer();
+
+  if (!TaskCommentsContainer) {
+    throw new Error(
+      "TaskCommentsContainer is missing in GlobalContainerContext",
+    );
+  }
 
   return (
     <CommentsModal title={t("title")}>
-      <CommentsContainer taskId={taskId} />
+      <TaskCommentsContainer taskId={taskId} />
     </CommentsModal>
   );
 }

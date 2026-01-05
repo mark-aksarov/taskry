@@ -1,12 +1,11 @@
-import {
-  withProjectCommentsEmpty,
-  withProjectCommentsSkeleton,
-} from "../ProjectCommentsContainer/decorators";
-
+import { Repeat } from "@/components/common/Repeat";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { Button, RACDialogTrigger } from "@/components/ui";
 import { ProjectCommentsModal } from "./ProjectCommentsModal";
+import { CommentItemSkeleton } from "@/components/comments/CommentItem";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { GlobalContainerProvider } from "@/components/layout/GlobalContainerContext";
+import { CommentsEmptySection } from "@/components/comments/CommentsEmptySection";
 
 const meta = {
   title: "Components/projects/ProjectCommentsModal",
@@ -35,9 +34,31 @@ export type Story = StoryObj<typeof meta>;
 export const Default = {} satisfies Story;
 
 export const Empty = {
-  decorators: [withProjectCommentsEmpty],
+  decorators: [
+    (Story) => (
+      <GlobalContainerProvider
+        value={{
+          ProjectCommentsContainer: () => <CommentsEmptySection />,
+        }}
+      >
+        <Story />
+      </GlobalContainerProvider>
+    ),
+  ],
 } satisfies Story;
 
 export const WithSkeletonContent = {
-  decorators: [withProjectCommentsSkeleton],
+  decorators: [
+    (Story) => (
+      <GlobalContainerProvider
+        value={{
+          ProjectCommentsContainer: () => (
+            <Repeat items={10} renderItem={() => <CommentItemSkeleton />} />
+          ),
+        }}
+      >
+        <Story />
+      </GlobalContainerProvider>
+    ),
+  ],
 } satisfies Story;

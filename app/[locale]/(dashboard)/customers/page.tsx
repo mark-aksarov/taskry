@@ -1,3 +1,8 @@
+import {
+  GlobalContainerProvider,
+  GlobalContainerContextType,
+} from "@/components/layout/GlobalContainerContext";
+
 import { z } from "zod";
 import { Suspense } from "react";
 import { CustomersPage } from "./CustomersPage";
@@ -12,7 +17,7 @@ import { CustomerFiltersFormSkeleton } from "@/components/customer/CustomerFilte
 import { NewCustomerFormContainer } from "@/components/customer/NewCustomerFormContainer";
 import { EditCustomerFormContainer } from "@/components/customer/EditCustomerFormContainer";
 import { CustomerFiltersFormContainer } from "@/components/customer/CustomerFiltersFormContainer";
-import { EditCustomerFormContainerProvider } from "@/components/customer/EditCustomerFormContainerContext";
+import { CustomerDetailContainer } from "@/components/customer/CustomerDetailContainer";
 
 const searchParamsSchema = z.object({
   page: z.coerce.number().int().positive().catch(1),
@@ -32,6 +37,11 @@ const searchParamsSchema = z.object({
     .catch(undefined),
   company: arrayParam(z.coerce.number()).catch([]),
 });
+
+const context: GlobalContainerContextType = {
+  CustomerDetailContainer,
+  EditCustomerFormContainer,
+};
 
 export default async function AppCustomersPage({
   searchParams,
@@ -58,7 +68,7 @@ export default async function AppCustomersPage({
   }
 
   return (
-    <EditCustomerFormContainerProvider value={EditCustomerFormContainer}>
+    <GlobalContainerProvider value={context}>
       <CustomersPage
         customersFiltersForm={
           <Suspense fallback={<CustomerFiltersFormSkeleton />}>
@@ -77,6 +87,6 @@ export default async function AppCustomersPage({
         createCompanyAction={createCompany}
         deleteCustomersAction={deleteCustomers}
       />
-    </EditCustomerFormContainerProvider>
+    </GlobalContainerProvider>
   );
 }

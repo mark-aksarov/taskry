@@ -1,3 +1,8 @@
+import {
+  GlobalContainerContextType,
+  GlobalContainerProvider,
+} from "@/components/layout/GlobalContainerContext";
+
 import { z } from "zod";
 import { UsersPage } from "./UsersPage";
 import { UsersPageEmpty } from "./UsersPageEmpty";
@@ -7,6 +12,7 @@ import { deleteUsers } from "@/lib/actions/user/deleteUsers";
 import { UsersContainer } from "@/components/users/UsersContainer";
 import { createPosition } from "@/lib/actions/position/createPosition";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
+import { UserDetailContainer } from "@/components/users/UserDetailContainer";
 import { UserFiltersFormContainer } from "@/components/users/UserFiltersFormContainer";
 
 const searchParamsSchema = z.object({
@@ -28,6 +34,10 @@ const searchParamsSchema = z.object({
   position: arrayParam(z.coerce.number()).catch([]),
 });
 
+const context: GlobalContainerContextType = {
+  UserDetailContainer,
+};
+
 export default async function AppUsersPage({
   searchParams,
 }: {
@@ -47,15 +57,17 @@ export default async function AppUsersPage({
   if (!count) return <UsersPageEmpty />;
 
   return (
-    <UsersPage
-      page={page}
-      pageSize={pageSize}
-      sort={sort}
-      filters={filters}
-      createPositionAction={createPosition}
-      UserFiltersFormContainer={UserFiltersFormContainer}
-      UsersContainer={UsersContainer}
-      deleteUsersAction={deleteUsers}
-    />
+    <GlobalContainerProvider value={context}>
+      <UsersPage
+        page={page}
+        pageSize={pageSize}
+        sort={sort}
+        filters={filters}
+        createPositionAction={createPosition}
+        UserFiltersFormContainer={UserFiltersFormContainer}
+        UsersContainer={UsersContainer}
+        deleteUsersAction={deleteUsers}
+      />
+    </GlobalContainerProvider>
   );
 }

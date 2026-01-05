@@ -11,14 +11,21 @@ import {
   DialogCloseButton,
 } from "@/components/ui";
 
+import { Suspense } from "react";
 import { useTranslations } from "next-intl";
-import { Suspense, useContext } from "react";
 import { TaskDetailCompactSkeleton } from "../TaskDetailCompact";
-import { TaskDetailCompactContainerContext } from "@/components/tasks/TaskDetailCompactContainer";
+import { useGlobalContainer } from "@/components/layout/GlobalContainerContext";
 
 export function TaskDetailModal({ taskId }: { taskId: number }) {
-  const TaskDetailContainer = useContext(TaskDetailCompactContainerContext);
   const t = useTranslations("tasks.TaskDetailModal");
+
+  const { TaskDetailCompactContainer } = useGlobalContainer();
+
+  if (!TaskDetailCompactContainer) {
+    throw new Error(
+      "TaskDetailCompactContainer is missing in GlobalContainerContext",
+    );
+  }
 
   return (
     <Modal data-test="task-detail-modal" isDismissable className="w-[600px]">
@@ -29,7 +36,7 @@ export function TaskDetailModal({ taskId }: { taskId: number }) {
         </DialogHeader>
         <DialogBody>
           <Suspense fallback={<TaskDetailCompactSkeleton />}>
-            <TaskDetailContainer taskId={taskId} />
+            <TaskDetailCompactContainer taskId={taskId} />
           </Suspense>
         </DialogBody>
         <DialogFooter>

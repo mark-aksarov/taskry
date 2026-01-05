@@ -2,7 +2,7 @@
 
 import useSWR from "swr";
 import { TaskDetailDTO } from "@/lib/data/task/task.dto";
-import { TaskDetailCompact } from "../TaskDetailCompact/TaskDetailCompact";
+import { TaskDetailCompact } from "./TaskDetailCompact/TaskDetailCompact";
 
 interface TaskDetailCompactContainerProps {
   taskId: number;

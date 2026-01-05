@@ -5,10 +5,20 @@ import {
   AppSidebarHeading,
 } from "@/components/layout/AppSidebar";
 
+import {
+  GlobalContainerContextType,
+  GlobalContainerProvider,
+} from "@/components/layout/GlobalContainerContext";
+
 import { AppHeader } from "@/components/layout/AppHeader";
 import { AppNavigation } from "@/components/layout/AppNavigation";
 import { AppBottomSheetTrigger } from "@/components/layout/AppBottomSheetTrigger";
 import { AppSidebarSheetTrigger } from "@/components/layout/AppSidebarSheetTrigger";
+import { NotificationModalContentContainer } from "@/components/notifications/NotificationModalContentContainer";
+
+const context: GlobalContainerContextType = {
+  NotificationModalContentContainer,
+};
 
 export function DashboardLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -23,14 +33,16 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
       </AppSidebar>
 
       <div className="flex flex-auto flex-col">
-        <AppHeader
-          appBottomSheetTrigger={
-            <AppBottomSheetTrigger appNavigation={<AppNavigation />} />
-          }
-          appSidebarSheetTrigger={
-            <AppSidebarSheetTrigger appNavigation={<AppNavigation />} />
-          }
-        />
+        <GlobalContainerProvider value={context}>
+          <AppHeader
+            appBottomSheetTrigger={
+              <AppBottomSheetTrigger appNavigation={<AppNavigation />} />
+            }
+            appSidebarSheetTrigger={
+              <AppSidebarSheetTrigger appNavigation={<AppNavigation />} />
+            }
+          />
+        </GlobalContainerProvider>
         <main>{children}</main>
       </div>
     </div>

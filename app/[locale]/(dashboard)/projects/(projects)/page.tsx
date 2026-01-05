@@ -1,3 +1,8 @@
+import {
+  GlobalContainerProvider,
+  GlobalContainerContextType,
+} from "@/components/layout/GlobalContainerContext";
+
 import { z } from "zod";
 import { ProjectsPage } from "./ProjectsPage";
 import { arrayParam } from "@/lib/utils/arrayParam";
@@ -7,12 +12,14 @@ import { getProjectCount } from "@/lib/data/project/project.dal";
 import { deleteProjects } from "@/lib/actions/project/deleteProjects";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { ProjectsContainer } from "@/components/projects/ProjectsContainer";
+import { UserDetailContainer } from "@/components/users/UserDetailContainer";
 import { updateProjectStatuses } from "@/lib/actions/project/updateProjectStatuses";
 import { NewProjectFormContainer } from "@/components/projects/NewProjectFormContainer";
+import { ProjectCommentsContainer } from "@/components/projects/ProjectCommentsContainer";
 import { EditProjectFormContainer } from "@/components/projects/EditProjectFormContainer";
 import { createProjectCategory } from "@/lib/actions/projectCategory/createProjectCategory";
 import { ProjectFiltersFormContainer } from "@/components/projects/ProjectFiltersFormContainer";
-import { EditProjectFormContainerProvider } from "@/components/projects/EditProjectFormContainerContext";
+import { ProjectDetailCompactContainer } from "@/components/projects/ProjectDetailCompactContainer";
 
 const searchParamsSchema = z.object({
   page: z.coerce.number().int().positive().catch(1),
@@ -33,6 +40,13 @@ const searchParamsSchema = z.object({
     .optional()
     .catch(undefined),
 });
+
+const context: GlobalContainerContextType = {
+  EditProjectFormContainer,
+  ProjectDetailCompactContainer,
+  ProjectCommentsContainer,
+  UserDetailContainer,
+};
 
 export default async function AppProjectsPage({
   searchParams,
@@ -57,7 +71,7 @@ export default async function AppProjectsPage({
   }
 
   return (
-    <EditProjectFormContainerProvider value={EditProjectFormContainer}>
+    <GlobalContainerProvider value={context}>
       <ProjectsPage
         page={page}
         pageSize={pageSize}
@@ -70,6 +84,6 @@ export default async function AppProjectsPage({
         ProjectsContainer={ProjectsContainer}
         NewProjectFormContainer={NewProjectFormContainer}
       />
-    </EditProjectFormContainerProvider>
+    </GlobalContainerProvider>
   );
 }

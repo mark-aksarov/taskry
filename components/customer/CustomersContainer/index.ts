@@ -1,1 +1,0 @@
-export { CustomersContainer } from "./CustomersContainer";

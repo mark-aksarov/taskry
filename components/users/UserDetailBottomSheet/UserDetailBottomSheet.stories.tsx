@@ -7,8 +7,10 @@ import { Button } from "@/components/ui";
 import { useOverlayTrigger } from "react-aria";
 import { useOverlayTriggerState } from "react-stately";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { UserDetailSkeleton } from "../UserDetail/UserDetailSkeleton";
+import { PersonHeaderSkeleton } from "@/components/common/PersonHeader";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withUserDetailSkeleton } from "@/components/users/UserDetailContainer/decorators";
+import { GlobalContainerProvider } from "@/components/layout/GlobalContainerContext";
 
 const meta = {
   title: "components/users/UserDetailBottomSheet",
@@ -51,5 +53,20 @@ const UserDetailBottomSheetTemplate = ({
 export const Default = {} satisfies Story;
 
 export const WithSkeletonContent = {
-  decorators: [withUserDetailSkeleton],
+  decorators: [
+    (Story) => (
+      <GlobalContainerProvider
+        value={{
+          UserDetailContainer: () => (
+            <div className="flex flex-col gap-6">
+              <PersonHeaderSkeleton />
+              <UserDetailSkeleton />
+            </div>
+          ),
+        }}
+      >
+        <Story />
+      </GlobalContainerProvider>
+    ),
+  ],
 } satisfies Story;

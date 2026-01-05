@@ -9,23 +9,14 @@ import type { Preview } from "@storybook/nextjs-vite";
 import { MINIMAL_VIEWPORTS } from "storybook/viewport";
 import { useRouter, useSearchParams } from "next/navigation";
 import { withThemeByDataAttribute } from "@storybook/addon-themes";
+import { GlobalContainerDecorator } from "./GlobalContainerDecorator";
 import { SelectionProvider } from "../components/common/SelectionContext";
-import { withUserDetail } from "../components/users/UserDetailContainer/decorators";
-import { withTaskComments } from "../components/tasks/TaskCommentsContainer/decorators";
-import { withCustomerDetail } from "../components/customer/CustomerDetailContainer/decorators";
-import { withEditTaskForm } from "../components/tasks/EditTaskFormContainerContext/decorators";
-import { withProjectComments } from "../components/projects/ProjectCommentsContainer/decorators";
-import { withTaskDetailCompact } from "../components/tasks/TaskDetailCompactContainer/decorators";
-import { withEditProjectForm } from "../components/projects/EditProjectFormContainerContext/decorators";
-import { withEditCustomerForm } from "../components/customer/EditCustomerFormContainerContext/decorators";
-import { withProjectDetailCompact } from "../components/projects/ProjectDetailCompactContainer/decorators";
-import { withNotificationModalContent } from "../components/notifications/NotificationModalContentContainer/decorators";
 
 export const globalTypes = {
   locale: {
     name: "Locale",
     description: "Internationalization locale",
-    defaultValue: "ru",
+    defaultValue: "en",
     toolbar: {
       icon: "globe",
       items: [
@@ -55,16 +46,7 @@ const preview: Preview = {
         <Story />
       </SelectionProvider>
     ),
-    withNotificationModalContent,
-    withEditCustomerForm,
-    withCustomerDetail,
-    withEditProjectForm,
-    withProjectComments,
-    withUserDetail,
-    withEditTaskForm,
-    withTaskDetailCompact,
-    withProjectDetailCompact,
-    withTaskComments,
+    GlobalContainerDecorator,
     withThemeByDataAttribute({
       themes: {
         light: "light",

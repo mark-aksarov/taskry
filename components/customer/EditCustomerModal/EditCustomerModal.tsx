@@ -1,11 +1,11 @@
 "use client";
 
+import { Suspense } from "react";
 import { useTranslations } from "next-intl";
 import { ModalProps } from "@/components/ui";
-import { Suspense, useContext } from "react";
 import { CustomerFormBaseSkeleton } from "../CustomerFormBase";
 import { FormBaseModal } from "@/components/common/FormBaseModal";
-import { EditCustomerFormContainerContext } from "../EditCustomerFormContainerContext";
+import { useGlobalContainer } from "@/components/layout/GlobalContainerContext";
 
 interface EditCustomerModalProps
   extends Pick<ModalProps, "isOpen" | "onOpenChange"> {
@@ -18,9 +18,13 @@ export function EditCustomerModal({
 }: EditCustomerModalProps) {
   const t = useTranslations("customers.EditCustomerModal");
 
-  const EditCustomerFormContainer = useContext(
-    EditCustomerFormContainerContext,
-  );
+  const { EditCustomerFormContainer } = useGlobalContainer();
+
+  if (!EditCustomerFormContainer) {
+    throw new Error(
+      "EditCustomerFormContainer is missing in GlobalContainerContext",
+    );
+  }
 
   if (!EditCustomerFormContainer) {
     throw new Error(

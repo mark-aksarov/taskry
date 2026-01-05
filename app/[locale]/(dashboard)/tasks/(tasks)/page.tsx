@@ -1,3 +1,8 @@
+import {
+  GlobalContainerContextType,
+  GlobalContainerProvider,
+} from "@/components/layout/GlobalContainerContext";
+
 import { z } from "zod";
 import { TasksPage } from "./TasksPage";
 import { TasksPageEmpty } from "./TasksPageEmpty";
@@ -9,11 +14,14 @@ import { TasksContainer } from "@/components/tasks/TasksContainer";
 import { canCreateTask, canDeleteTask } from "@/lib/data/user/user.dal";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { updateTaskStatuses } from "@/lib/actions/task/updateTaskStatuses";
+import { UserDetailContainer } from "@/components/users/UserDetailContainer";
 import { NewTaskFormContainer } from "@/components/tasks/NewTaskFormContainer";
+import { TaskCommentsContainer } from "@/components/tasks/TaskCommentsContainer";
 import { EditTaskFormContainer } from "@/components/tasks/EditTaskFormContainer";
 import { createTaskCategory } from "@/lib/actions/taskCategory/createTaskCategory";
 import { TaskFiltersFormContainer } from "@/components/tasks/TaskFiltersFormContainer";
-import { EditTaskFormContainerProvider } from "@/components/tasks/EditTaskFormContainerContext";
+import { TaskDetailCompactContainer } from "@/components/tasks/TaskDetailCompactContainer";
+import { ProjectDetailCompactContainer } from "@/components/projects/ProjectDetailCompactContainer";
 
 const searchParamsSchema = z.object({
   page: z.coerce.number().int().positive().catch(1),
@@ -30,6 +38,14 @@ const searchParamsSchema = z.object({
   dateStart: z.string().optional().catch(undefined),
   dateEnd: z.string().optional().catch(undefined),
 });
+
+const context: GlobalContainerContextType = {
+  EditTaskFormContainer,
+  TaskDetailCompactContainer,
+  TaskCommentsContainer,
+  ProjectDetailCompactContainer,
+  UserDetailContainer,
+};
 
 export default async function AppTasksPage({
   searchParams,
@@ -52,7 +68,7 @@ export default async function AppTasksPage({
   const canDelete = await canDeleteTask();
 
   return (
-    <EditTaskFormContainerProvider value={EditTaskFormContainer}>
+    <GlobalContainerProvider value={context}>
       <TasksPage
         page={page}
         pageSize={pageSize}
@@ -67,6 +83,6 @@ export default async function AppTasksPage({
         updateTasksStatusesAction={updateTaskStatuses}
         createTaskCategoryAction={createTaskCategory}
       />
-    </EditTaskFormContainerProvider>
+    </GlobalContainerProvider>
   );
 }

@@ -14,14 +14,18 @@ import {
 import { useTranslations } from "next-intl";
 import { Suspense, useContext } from "react";
 import { ProjectDetailCompactSkeleton } from "../ProjectDetailCompact";
-import { ProjectDetailCompactContainerContext } from "../ProjectDetailCompactContainer";
+import { useGlobalContainer } from "@/components/layout/GlobalContainerContext";
 
 export function ProjectDetailModal({ projectId }: { projectId: number }) {
   const t = useTranslations("projects.ProjectDetailModal");
 
-  const ProjectDetailContainer = useContext(
-    ProjectDetailCompactContainerContext,
-  );
+  const { ProjectDetailCompactContainer } = useGlobalContainer();
+
+  if (!ProjectDetailCompactContainer) {
+    throw new Error(
+      "ProjectDetailCompactContainer is missing in GlobalContainerContext",
+    );
+  }
 
   return (
     <Modal isDismissable className="w-[600px]">
@@ -32,7 +36,7 @@ export function ProjectDetailModal({ projectId }: { projectId: number }) {
         </DialogHeader>
         <DialogBody>
           <Suspense fallback={<ProjectDetailCompactSkeleton />}>
-            <ProjectDetailContainer projectId={projectId} />
+            <ProjectDetailCompactContainer projectId={projectId} />
           </Suspense>
         </DialogBody>
         <DialogFooter>

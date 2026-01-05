@@ -1,8 +1,8 @@
 import { CustomerFilters } from "@/lib/types";
-import { CustomerList } from "../CustomerList";
-import { CustomerGrid } from "../CustomerGrid";
-import { CustomerListItem } from "../CustomerListItem";
-import { CustomerGridItem } from "../CustomerGridItem";
+import { CustomerList } from "./CustomerList";
+import { CustomerGrid } from "./CustomerGrid";
+import { CustomerListItem } from "./CustomerListItem";
+import { CustomerGridItem } from "./CustomerGridItem";
 import { ViewModeLayout } from "@/components/common/ViewMode";
 import { getCustomerCount } from "@/lib/data/customer/customer.dal";
 import { getCustomerList } from "@/lib/data/customer/customer.service";
