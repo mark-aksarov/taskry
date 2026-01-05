@@ -4,11 +4,11 @@ import { FormBaseModal } from "@/components/common/FormBaseModal";
 
 interface NewCustomerModalProps
   extends Pick<ModalProps, "isOpen" | "onOpenChange"> {
-  newCompanyForm: React.ReactNode;
+  newCustomerForm: React.ReactNode;
 }
 
 export function NewCustomerModal({
-  newCompanyForm,
+  newCustomerForm,
   ...props
 }: NewCustomerModalProps) {
   const t = useTranslations("customers.NewCustomerModal");
@@ -18,7 +18,7 @@ export function NewCustomerModal({
       formId="new-customer-form"
       title={t("title")}
       submitButtonLabel={t("submitButtonLabel")}
-      form={newCompanyForm}
+      form={newCustomerForm}
       {...props}
     />
   );

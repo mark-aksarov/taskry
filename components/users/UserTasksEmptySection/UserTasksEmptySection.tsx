@@ -5,8 +5,15 @@ import {
   EmptySectionDescription,
 } from "@/components/common/EmptySection";
 import { useTranslations } from "next-intl";
+import { NewTaskModal } from "@/components/tasks/NewTaskModal";
 
-export function UserTasksEmptySection() {
+interface UserTasksEmptySectionProps {
+  NewTaskFormContainer: React.ComponentType;
+}
+
+export function UserTasksEmptySection({
+  NewTaskFormContainer,
+}: UserTasksEmptySectionProps) {
   const t = useTranslations("users.UserTasksEmptySection");
 
   return (
@@ -16,7 +23,11 @@ export function UserTasksEmptySection() {
           {t("heading")}
         </EmptySectionHeading>
         <EmptySectionDescription>{t("description")}</EmptySectionDescription>
-        <EmptySectionButton href="/users/edit">
+        <EmptySectionButton
+          createNewModal={
+            <NewTaskModal newTaskForm={<NewTaskFormContainer />} />
+          }
+        >
           {t("editButtonLabel")}
         </EmptySectionButton>
       </EmptySection>

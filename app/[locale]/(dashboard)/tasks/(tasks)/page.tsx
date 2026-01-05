@@ -24,7 +24,7 @@ const searchParamsSchema = z.object({
   project: arrayParam(z.coerce.number()).catch([]),
   assignee: arrayParam(z.string()).catch([]),
   deadline: z
-    .enum(["today", "tomorrow", "overdue"])
+    .enum(["today", "tomorrow", "thisWeek", "overdue"])
     .optional()
     .catch(undefined),
   dateStart: z.string().optional().catch(undefined),
@@ -44,7 +44,9 @@ export default async function AppTasksPage({
 
   const taskCount = await getTaskCount();
 
-  if (!taskCount) return <TasksPageEmpty />;
+  if (!taskCount) {
+    return <TasksPageEmpty NewTaskFormContainer={NewTaskFormServerContainer} />;
+  }
 
   const canCreate = await canCreateTask();
   const canDelete = await canDeleteTask();

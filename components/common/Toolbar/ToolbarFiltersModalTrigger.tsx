@@ -30,6 +30,7 @@ export function ToolbarFiltersModalTrigger({
   return (
     <DialogTrigger>
       <Button
+        data-test="toolbar-filters-modal-trigger"
         label={t("trigger.label")}
         variant="outlined"
         iconLeft={

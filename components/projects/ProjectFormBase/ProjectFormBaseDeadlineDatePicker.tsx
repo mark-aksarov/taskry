@@ -16,11 +16,11 @@ export function ProjectFormBaseDeadlineDatePicker({
 
   return (
     <ResponsiveDatePicker
+      data-test="deadline-date-picker"
       name="deadline"
       label={t("label")}
       overlayClassName="w-[var(--trigger-width)]"
       isRequired
-      minValue={now}
       errorMessage={t("validation.required")}
       defaultValue={defaultValue}
     />

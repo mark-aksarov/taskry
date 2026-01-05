@@ -24,6 +24,7 @@ export function ProjectFiltersFormCategoryCheckboxGroup({
     >
       {categories.map((item) => (
         <Checkbox
+          data-test={`category-${item.id}-checkbox`}
           key={item.id}
           value={item.id.toString()}
           className="font-normal capitalize"

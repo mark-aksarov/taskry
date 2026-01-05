@@ -4,10 +4,17 @@ import {
   EmptySectionHeading,
   EmptySectionDescription,
 } from "@/components/common/EmptySection";
-import { PageContainer } from "@/components/common/PageContainer";
 import { useTranslations } from "next-intl";
+import { PageContainer } from "@/components/common/PageContainer";
+import { NewProjectModal } from "@/components/projects/NewProjectModal";
 
-export function ProjectsPageEmpty() {
+interface ProjectsPageEmptyProps {
+  NewProjectFormContainer: React.ComponentType;
+}
+
+export function ProjectsPageEmpty({
+  NewProjectFormContainer,
+}: ProjectsPageEmptyProps) {
   const t = useTranslations("app.ProjectsPageEmpty");
 
   return (
@@ -15,7 +22,13 @@ export function ProjectsPageEmpty() {
       <EmptySection>
         <EmptySectionHeading>{t("heading")}</EmptySectionHeading>
         <EmptySectionDescription>{t("description")}</EmptySectionDescription>
-        <EmptySectionButton href="#">{t("addButtonLabel")}</EmptySectionButton>
+        <EmptySectionButton
+          createNewModal={
+            <NewProjectModal newProjectForm={<NewProjectFormContainer />} />
+          }
+        >
+          {t("addButtonLabel")}
+        </EmptySectionButton>
       </EmptySection>
     </PageContainer>
   );

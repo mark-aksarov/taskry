@@ -217,7 +217,8 @@ export function buildProjectWhereClause(
   return {
     workspaceId,
     ...(filters.noActiveTasks && {
-      tasks: { none: { status: ProjectStatus.active } },
+      status: ProjectStatus.active,
+      tasks: { none: { status: TaskStatus.active } },
     }),
     ...(filters.status?.length && { status: { in: filters.status } }),
     ...(filters.category?.length && { categoryId: { in: filters.category } }),

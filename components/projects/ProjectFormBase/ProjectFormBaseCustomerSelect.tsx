@@ -17,6 +17,7 @@ export function ProjectFormBaseCustomerSelect({
 
   return (
     <ResponsiveSelect
+      data-test="customer-select"
       label={t("label")}
       name="customerId"
       placeholder={t("placeholder")}

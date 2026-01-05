@@ -13,7 +13,7 @@ import { TaskFiltersForm } from "@/components/tasks/TaskFiltersForm";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { Default as TaskListStory } from "@/components/tasks/TaskList/TaskList.stories";
 import { Default as TaskGridStory } from "@/components/tasks/TaskGrid/TaskGrid.stories";
-import { Default as NewTaskFormStory } from "@/components/tasks/TaskFormBase/TaskFormBase.stories";
+import { Default as TaskFormBaseStory } from "@/components/tasks/TaskFormBase/TaskFormBase.stories";
 import { Default as TaskFiltersFormStory } from "@/components/tasks/TaskFiltersForm/TaskFiltersForm.stories";
 
 const meta = {
@@ -45,7 +45,7 @@ export const Default: Story = {
     TaskFiltersFormContainer: () => (
       <TaskFiltersForm {...TaskFiltersFormStory.args} />
     ),
-    NewTaskFormContainer: () => <NewTaskForm {...NewTaskFormStory.args} />,
+    NewTaskFormContainer: () => <NewTaskForm {...TaskFormBaseStory.args} />,
     TasksServerContainer: () => (
       <ViewModeLayout
         list={<TaskList {...TaskListStory.args} />}
@@ -65,5 +65,9 @@ export const Loading: Story = {
 
 export const WithNoTasks: Story = {
   args: { ...Default.args },
-  render: () => <TasksPageEmpty />,
+  render: () => (
+    <TasksPageEmpty
+      NewTaskFormContainer={() => <NewTaskForm {...TaskFormBaseStory.args} />}
+    />
+  ),
 };

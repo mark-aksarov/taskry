@@ -61,5 +61,11 @@ export const Loading = {
 
 export const WithNoCustomers: Story = {
   args: { ...Default.args },
-  render: () => <CustomersPageEmpty />,
+  render: () => (
+    <CustomersPageEmpty
+      NewCustomerFormContainer={() => (
+        <NewCustomerForm {...CustomerFormBaseStory.args} />
+      )}
+    />
+  ),
 } satisfies Story;

@@ -65,5 +65,11 @@ export const Loading: Story = {
 
 export const WithNoProjects: Story = {
   args: { ...Default.args },
-  render: () => <ProjectsPageEmpty />,
+  render: () => (
+    <ProjectsPageEmpty
+      NewProjectFormContainer={() => (
+        <NewProjectForm {...ProjectFormBaseStory.args} />
+      )}
+    />
+  ),
 };

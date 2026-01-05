@@ -23,6 +23,7 @@ export function TaskFiltersFormAssigneeCheckboxGroup({
     >
       {users.map((user) => (
         <Checkbox
+          data-test={`assignee-${user.id}-checkbox`}
           key={user.id}
           value={user.id.toString()}
           className="font-normal capitalize"

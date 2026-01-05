@@ -1,4 +1,10 @@
 import {
+  canDeleteTask,
+  canUpdateTask,
+  canUpdateTaskStatus,
+} from "@/lib/data/user/user.dal";
+
+import {
   AssignedTasksSection,
   AssignedTasksEmptyCard,
   AssignedTasksSectionHeading,
@@ -13,20 +19,17 @@ import { getTaskList } from "@/lib/data/task/task.service";
 import { Pagination } from "@/components/common/Pagination";
 import { deleteTasks } from "@/lib/actions/task/deleteTasks";
 import { updateTaskStatuses } from "@/lib/actions/task/updateTaskStatuses";
-import {
-  canDeleteTask,
-  canUpdateTask,
-  canUpdateTaskStatus,
-} from "@/lib/data/user/user.dal";
 
 interface AssignedTasksServerContainerProps {
   page: number;
   pageSize: number;
+  NewTaskFormContainer: React.ComponentType;
 }
 
 export async function AssignedTasksServerContainer({
   page,
   pageSize,
+  NewTaskFormContainer,
 }: AssignedTasksServerContainerProps) {
   const session = await auth.api.getSession({
     headers: await headers(),
@@ -54,7 +57,7 @@ export async function AssignedTasksServerContainer({
     return (
       <AssignedTasksSection>
         <AssignedTasksSectionHeading />
-        <AssignedTasksEmptyCard />
+        <AssignedTasksEmptyCard NewTaskFormContainer={NewTaskFormContainer} />
       </AssignedTasksSection>
     );
   }

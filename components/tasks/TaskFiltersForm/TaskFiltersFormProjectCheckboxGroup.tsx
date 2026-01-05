@@ -23,6 +23,7 @@ export function TaskFiltersFormProjectCheckboxGroup({
     >
       {projects.map((item) => (
         <Checkbox
+          data-test={`project-${item.id}-checkbox`}
           key={item.id}
           value={item.id.toString()}
           className="font-normal capitalize"

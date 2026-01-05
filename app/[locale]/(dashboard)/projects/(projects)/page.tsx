@@ -23,7 +23,7 @@ const searchParamsSchema = z.object({
   customer: arrayParam(z.coerce.number()).catch([]),
   user: arrayParam(z.string()).catch([]),
   deadline: z
-    .enum(["today", "tomorrow", "overdue"])
+    .enum(["today", "tomorrow", "thisWeek", "overdue"])
     .optional()
     .catch(undefined),
   dateStart: z.string().optional().catch(undefined),
@@ -50,7 +50,13 @@ export default async function AppProjectsPage({
   // Get count
   const projectCount = await getProjectCount();
 
-  if (!projectCount) return <ProjectsPageEmpty />;
+  if (!projectCount) {
+    return (
+      <ProjectsPageEmpty
+        NewProjectFormContainer={NewProjectFormServerContainer}
+      />
+    );
+  }
 
   return (
     <EditProjectFormClientContainerProvider

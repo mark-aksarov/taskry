@@ -1,6 +1,7 @@
 import { z } from "zod";
 import { DashboardPage } from "./DashboardPage";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
+import { NewTaskFormServerContainer } from "@/components/tasks/NewTaskFormServerContainer";
 import { EditTaskFormClientContainer } from "@/components/tasks/EditTaskFormClientContainer";
 import { AssignedTasksServerContainer } from "@/components/tasks/AssignedTasksServerContainer";
 import { TotalTasksCardServerContainer } from "@/components/tasks/TotalTasksCardServerContainer";
@@ -31,6 +32,7 @@ export default async function AppDashboardPage({
       <DashboardPage
         page={page}
         pageSize={pageSize}
+        NewTaskFormContainer={NewTaskFormServerContainer}
         TotalProjectsCardContainer={TotalProjectsCardServerContainer}
         TotalTasksCardContainer={TotalTasksCardServerContainer}
         TotalUsersCardContainer={TotalUsersCardServerContainer}

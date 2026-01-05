@@ -1,9 +1,12 @@
-import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { EmptySection } from "./EmptySection";
-import { EmptySectionHeading } from "./EmptySectionHeading";
-import { EmptySectionDescription } from "./EmptySectionDescription";
+import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { EmptySectionButton } from "./EmptySectionButton";
+import { EmptySectionHeading } from "./EmptySectionHeading";
+import { NewTaskForm } from "@/components/tasks/NewTaskForm";
+import { NewTaskModal } from "@/components/tasks/NewTaskModal";
+import { EmptySectionDescription } from "./EmptySectionDescription";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { Default as TaskFormBaseStory } from "@/components/tasks/TaskFormBase/TaskFormBase.stories";
 
 const meta = {
   title: "Components/common/EmptySection",
@@ -26,7 +29,15 @@ export const Default = {
         <EmptySectionDescription>
           Create a new task to keep track of your work
         </EmptySectionDescription>
-        <EmptySectionButton href="#">New Task</EmptySectionButton>
+        <EmptySectionButton
+          createNewModal={
+            <NewTaskModal
+              newTaskForm={<NewTaskForm {...TaskFormBaseStory.args} />}
+            />
+          }
+        >
+          New Task
+        </EmptySectionButton>
       </>
     ),
   },

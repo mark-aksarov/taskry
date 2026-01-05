@@ -17,6 +17,7 @@ export function ProjectFormBaseCategorySelect({
 
   return (
     <ResponsiveSelect
+      data-test="category-select"
       label={t("label")}
       name="categoryId"
       placeholder={t("placeholder")}

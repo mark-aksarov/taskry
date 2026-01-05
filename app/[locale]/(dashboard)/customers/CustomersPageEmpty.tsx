@@ -6,8 +6,15 @@ import {
 } from "@/components/common/EmptySection";
 import { useTranslations } from "next-intl";
 import { PageContainer } from "@/components/common/PageContainer";
+import { NewCustomerModal } from "@/components/customer/NewCustomerModal";
 
-export function CustomersPageEmpty() {
+interface CustomersPageEmptyProps {
+  NewCustomerFormContainer: React.ComponentType;
+}
+
+export function CustomersPageEmpty({
+  NewCustomerFormContainer,
+}: CustomersPageEmptyProps) {
   const t = useTranslations("app.CustomersPageEmpty");
 
   return (
@@ -15,7 +22,13 @@ export function CustomersPageEmpty() {
       <EmptySection>
         <EmptySectionHeading>{t("heading")}</EmptySectionHeading>
         <EmptySectionDescription>{t("description")}</EmptySectionDescription>
-        <EmptySectionButton href="#">{t("addButtonLabel")}</EmptySectionButton>
+        <EmptySectionButton
+          createNewModal={
+            <NewCustomerModal newCustomerForm={<NewCustomerFormContainer />} />
+          }
+        >
+          {t("addButtonLabel")}
+        </EmptySectionButton>
       </EmptySection>
     </PageContainer>
   );

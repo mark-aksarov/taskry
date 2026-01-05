@@ -44,6 +44,7 @@ export function ToolbarSortingMenuTrigger<T extends object = any>(
           />
           <Button
             {...triggerProps}
+            data-test="toolbar-sorting-menu-trigger"
             variant="outlined"
             label={t("label")}
             iconLeft={

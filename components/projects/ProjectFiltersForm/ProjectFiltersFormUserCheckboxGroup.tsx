@@ -20,6 +20,7 @@ export function ProjectFiltersFormUserCheckboxGroup({
     <CheckboxGroup name="user" label={t("label")} defaultValue={initialValues}>
       {users.map((user) => (
         <Checkbox
+          data-test={`user-${user.id}-checkbox`}
           key={user.id}
           value={user.id.toString()}
           className="font-normal capitalize"

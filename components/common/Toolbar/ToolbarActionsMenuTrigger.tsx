@@ -49,6 +49,7 @@ export function ToolbarActionsMenuTrigger<T extends object = any>({
           />
           <Button
             {...triggerProps}
+            data-test="toolbar-action-menu-trigger"
             variant="outlined"
             label={t("label")}
             iconLeft={

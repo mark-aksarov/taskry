@@ -16,6 +16,7 @@ export function ProjectFormBaseStatusSelect({
 
   return (
     <ResponsiveSelect
+      data-test="status-select"
       name="status"
       label={t("label")}
       placeholder={t("placeholder")}

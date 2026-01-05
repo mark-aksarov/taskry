@@ -1,11 +1,12 @@
 "use client";
 
-import { RACButtonProps, linkStyles, RACButton } from "@/components/ui";
-import { CirclePlus } from "lucide-react";
 import { tv } from "tailwind-variants";
+import { CirclePlus } from "lucide-react";
+import { DialogTrigger } from "react-aria-components";
+import { RACButtonProps, linkStyles, RACButton } from "@/components/ui";
 
 interface EmptySectionButtonProps extends RACButtonProps {
-  href: string;
+  createNewModal: React.ReactNode;
   children: React.ReactNode;
 }
 
@@ -15,19 +16,24 @@ const styles = tv({
 });
 
 export function EmptySectionButton({
-  href,
+  createNewModal,
   children,
   ...props
 }: EmptySectionButtonProps) {
   return (
-    <RACButton
-      {...props}
-      className={(renderProps) =>
-        styles({ ...renderProps, variant: "primary" })
-      }
-    >
-      <CirclePlus size={16} strokeWidth={1.5} absoluteStrokeWidth />
-      {children}
-    </RACButton>
+    <DialogTrigger>
+      <RACButton
+        {...props}
+        className={(renderProps) =>
+          styles({ ...renderProps, variant: "primary" })
+        }
+        data-test="empty-section-button"
+      >
+        <CirclePlus size={16} strokeWidth={1.5} absoluteStrokeWidth />
+        {children}
+      </RACButton>
+
+      {createNewModal}
+    </DialogTrigger>
   );
 }

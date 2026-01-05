@@ -31,9 +31,11 @@ import { Repeat } from "@/components/common/Repeat";
 import { TaskList } from "@/components/tasks/TaskList";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { PageDecorator } from "@/.storybook/PageDecorator";
+import { NewTaskForm } from "@/components/tasks/NewTaskForm";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { Default as TaskListStory } from "@/components/tasks/TaskList/TaskList.stories";
 import { AssignedTasksEmptyCard } from "@/components/tasks/AssignedTasks/AssignedTasksEmptyCard";
+import { Default as TaskFormBaseStory } from "@/components/tasks/TaskFormBase/TaskFormBase.stories";
 
 const meta = {
   title: "components/pages/DashboardPage",
@@ -53,6 +55,7 @@ export const Default: Story = {
     <DashboardPage
       page={1}
       pageSize={20}
+      NewTaskFormContainer={() => <NewTaskForm {...TaskFormBaseStory.args} />}
       TotalProjectsCardContainer={() => (
         <TotalProjectsCard totalProjects={50} />
       )}
@@ -76,6 +79,7 @@ export const Loading = {
     <DashboardPage
       page={1}
       pageSize={20}
+      NewTaskFormContainer={() => <NewTaskForm {...TaskFormBaseStory.args} />}
       TotalProjectsCardContainer={() => <TotalProjectsCardSkeleton />}
       TotalTasksCardContainer={() => <TotalTasksCardSkeleton />}
       TotalUsersCardContainer={() => <TotalUsersCardSkeleton />}
@@ -97,6 +101,7 @@ export const WithNoTasks = {
     <DashboardPage
       page={1}
       pageSize={20}
+      NewTaskFormContainer={() => <NewTaskForm {...TaskFormBaseStory.args} />}
       TotalProjectsCardContainer={() => (
         <TotalProjectsCard totalProjects={50} />
       )}
@@ -108,7 +113,11 @@ export const WithNoTasks = {
       AssignedTasksContainer={() => (
         <AssignedTasksSection>
           <AssignedTasksSectionHeading />
-          <AssignedTasksEmptyCard />
+          <AssignedTasksEmptyCard
+            NewTaskFormContainer={() => (
+              <NewTaskForm {...TaskFormBaseStory.args} />
+            )}
+          />
         </AssignedTasksSection>
       )}
     />

@@ -1,5 +1,12 @@
+// buildDateWhere.ts
 import { DeadlineQuickFilter } from "@/lib/types";
-import { addDays, endOfDay, startOfDay } from "./date";
+import {
+  addDays,
+  endOfDay,
+  startOfDay,
+  startOfWeek,
+  endOfWeek,
+} from "date-fns";
 
 interface BuildDateWhereParams {
   quick?: DeadlineQuickFilter;
@@ -8,6 +15,9 @@ interface BuildDateWhereParams {
   now?: Date;
 }
 
+/**
+ * Возвращает Prisma-style фильтр по дате
+ */
 export function buildDateWhere({
   quick,
   dateStart,
@@ -30,9 +40,15 @@ export function buildDateWhere({
         };
       }
 
+      case "thisWeek":
+        return {
+          gte: startOfWeek(now, { weekStartsOn: 1 }),
+          lte: endOfWeek(now, { weekStartsOn: 1 }),
+        };
+
       case "overdue":
         return {
-          lt: now,
+          lt: startOfDay(now),
         };
     }
   }

@@ -24,6 +24,7 @@ import { TotalCustomersCardSkeleton } from "@/components/customer/TotalCustomers
 interface DashboardPageProps {
   page: number;
   pageSize: number;
+  NewTaskFormContainer: React.ComponentType;
   TotalProjectsCardContainer: React.ComponentType;
   TotalTasksCardContainer: React.ComponentType;
   TotalUsersCardContainer: React.ComponentType;
@@ -31,12 +32,14 @@ interface DashboardPageProps {
   AssignedTasksContainer: React.ComponentType<{
     page: number;
     pageSize: number;
+    NewTaskFormContainer: React.ComponentType;
   }>;
 }
 
 export function DashboardPage({
   page,
   pageSize,
+  NewTaskFormContainer,
   TotalProjectsCardContainer,
   TotalTasksCardContainer,
   TotalUsersCardContainer,
@@ -83,7 +86,11 @@ export function DashboardPage({
               </AssignedTasksSection>
             }
           >
-            <AssignedTasksContainer page={page} pageSize={pageSize} />
+            <AssignedTasksContainer
+              page={page}
+              pageSize={pageSize}
+              NewTaskFormContainer={NewTaskFormContainer}
+            />
           </Suspense>
         </SelectionProvider>
       </PageGrid>

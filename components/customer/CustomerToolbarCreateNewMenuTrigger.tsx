@@ -70,7 +70,7 @@ export function CustomerToolbarCreateNewMenuTrigger({
       </ResponsiveMenuTrigger>
 
       <NewCustomerModal
-        newCompanyForm={newCustomerForm}
+        newCustomerForm={newCustomerForm}
         isOpen={isOpenCustomerModal}
         onOpenChange={setIsOpenCustomerModal}
       />

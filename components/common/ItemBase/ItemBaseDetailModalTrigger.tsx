@@ -7,6 +7,7 @@ interface ItemBaseDetailModalTriggerProps {
   modal: React.ReactNode;
   children: React.ReactNode;
   className?: string;
+  "data-test"?: string;
 }
 
 const styles = tv({
@@ -18,6 +19,7 @@ export function ItemBaseDetailModalTrigger({
   children,
   modal,
   className,
+  "data-test": dataTest,
 }: ItemBaseDetailModalTriggerProps) {
   return (
     <RACDialogTrigger>
@@ -28,6 +30,7 @@ export function ItemBaseDetailModalTrigger({
             className,
           })
         }
+        data-test={dataTest}
       >
         {children}
       </RACButton>

@@ -1,5 +1,5 @@
-import { E2ESeedPayload } from "../../../prisma/e2e/types";
-import { ProjectStatus, TaskStatus } from "../../../generated/prisma/enums";
+import { E2ESeedPayload } from "@/prisma/e2e/types";
+import { ProjectStatus, TaskStatus } from "@/generated/prisma/enums";
 
 const createPayload = (
   projectStatus: ProjectStatus = "active",
@@ -49,7 +49,7 @@ const createPayload = (
   return payload;
 };
 
-describe("Menu Actions", () => {
+describe("Task Item Menu", () => {
   beforeEach(() => {
     cy.viewport(1440, 900);
     cy.task("db:reset");
@@ -92,7 +92,10 @@ describe("Menu Actions", () => {
         });
 
         it(`${user.canEdit ? "can" : "cannot"} edit a task`, () => {
-          const edit = cy.getMenuItem("task-item-action-menu-trigger", "edit");
+          const edit = cy.getMenuItem(
+            "task-item-1-action-menu-trigger",
+            "edit",
+          );
 
           user.canEdit
             ? edit.should("not.have.attr", "aria-disabled")
@@ -100,7 +103,10 @@ describe("Menu Actions", () => {
         });
 
         it(`${user.canEdit ? "can" : "cannot"} delete a task`, () => {
-          const del = cy.getMenuItem("task-item-action-menu-trigger", "delete");
+          const del = cy.getMenuItem(
+            "task-item-1-action-menu-trigger",
+            "delete",
+          );
 
           user.canEdit
             ? del.should("not.have.attr", "aria-disabled")
@@ -110,7 +116,7 @@ describe("Menu Actions", () => {
     });
   });
 
-  describe.only("Task Status Transition Rules", () => {
+  describe("Task Status Transition Rules", () => {
     const users = {
       owner: { label: "Owner", email: "owner@example.com", id: "user-1" },
       manager: { label: "Manager", email: "manager@example.com", id: "user-2" },
@@ -240,18 +246,18 @@ describe("Menu Actions", () => {
         });
 
         rule.disabled.forEach((targetStatus) => {
-          it(`should DISABLE transition to '${targetStatus}'`, () => {
+          it(`should disable transition to '${targetStatus}'`, () => {
             cy.getMenuItem(
-              "task-item-action-menu-trigger",
+              "task-item-1-action-menu-trigger",
               targetStatus,
             ).should("have.attr", "aria-disabled", "true");
           });
         });
 
         rule.enabled.forEach((targetStatus) => {
-          it(`should ENABLE transition to '${targetStatus}'`, () => {
+          it(`should enable transition to '${targetStatus}'`, () => {
             cy.getMenuItem(
-              "task-item-action-menu-trigger",
+              "task-item-1-action-menu-trigger",
               targetStatus,
             ).should("not.have.attr", "aria-disabled");
           });

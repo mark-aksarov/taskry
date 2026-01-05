@@ -4,8 +4,8 @@ import {
   EmptySectionHeading,
   EmptySectionDescription,
 } from "@/components/common/EmptySection";
-import { PageContainer } from "@/components/common/PageContainer";
 import { useTranslations } from "next-intl";
+import { PageContainer } from "@/components/common/PageContainer";
 
 export function UsersPageEmpty() {
   const t = useTranslations("app.UsersPageEmpty");
@@ -15,7 +15,9 @@ export function UsersPageEmpty() {
       <EmptySection>
         <EmptySectionHeading>{t("heading")}</EmptySectionHeading>
         <EmptySectionDescription>{t("description")}</EmptySectionDescription>
-        <EmptySectionButton href="#">{t("addButtonLabel")}</EmptySectionButton>
+        <EmptySectionButton createNewModal={<div />}>
+          {t("addButtonLabel")}
+        </EmptySectionButton>
       </EmptySection>
     </PageContainer>
   );

@@ -2,8 +2,14 @@
   "compilerOptions": {
     "target": "es6",
     "lib": ["es6", "dom"],
+    "module": "esnext",
+    "moduleResolution": "node",
     "sourceMap": true,
-    "types": ["cypress", "node"]
+    "types": ["cypress", "node"],
+    "baseUrl": "../",
+    "paths": {
+      "@/*": ["./*"]
+    }
   },
   "include": ["**/*.ts"]
 }

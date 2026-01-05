@@ -11,7 +11,7 @@ import { useTranslations } from "next-intl";
 import { Key, useOverlayTrigger } from "react-aria";
 import { Item, useOverlayTriggerState } from "react-stately";
 import { BriefcaseBusiness, Plus, Users } from "lucide-react";
-import { NewPositionModal } from "./NewCompanyModal/NewPositionModal";
+import { NewPositionModal } from "./NewPositionModal/NewPositionModal";
 import { ResponsiveMenuTrigger } from "@/components/common/ResponsiveMenuTrigger";
 
 interface UserToolbarCreateNewMenuTriggerProps {

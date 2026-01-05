@@ -1,7 +1,7 @@
 import { E2ESeedPayload } from "@/prisma/e2e/types";
 import { ProjectStatus, TaskStatus } from "@/generated/prisma/enums";
 
-describe("deletes a task", () => {
+describe("deletes a project", () => {
   beforeEach(() => {
     cy.viewport(1440, 900);
 
@@ -48,12 +48,12 @@ describe("deletes a task", () => {
     cy.task("db:reset");
     cy.task("db:seed", payload);
     cy.signIn("owner@example.com", "12345abc");
-    cy.visit("/en/tasks");
+    cy.visit("/en/projects");
   });
 
-  it("can delete a task", () => {
-    cy.getMenuItem("task-item-1-action-menu-trigger", "delete").click();
+  it("can delete a project", () => {
+    cy.getMenuItem("project-item-1-action-menu-trigger", "delete").click();
     cy.getByData("confirm-button").click();
-    cy.getByData("task-list-item").should("not.exist");
+    cy.getByData("project-list-item").should("not.exist");
   });
 });

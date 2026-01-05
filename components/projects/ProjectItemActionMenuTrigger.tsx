@@ -113,6 +113,7 @@ export function ProjectItemActionMenuTrigger({
   return (
     <>
       <ItemBaseActionMenuTrigger
+        trigger-data-test={`project-item-${projectId}-action-menu-trigger`}
         className={className}
         onAction={handleAction}
         disabledKeys={[projectStatus]}

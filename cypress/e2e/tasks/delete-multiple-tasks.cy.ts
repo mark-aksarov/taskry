@@ -1,7 +1,7 @@
 import { E2ESeedPayload } from "@/prisma/e2e/types";
 import { ProjectStatus, TaskStatus } from "@/generated/prisma/enums";
 
-describe("deletes a task", () => {
+describe("delete multiple tasks", () => {
   beforeEach(() => {
     cy.viewport(1440, 900);
 
@@ -42,6 +42,17 @@ describe("deletes a task", () => {
           creatorId: "user-1",
           assigneeId: "user-1",
         },
+        {
+          id: 2,
+          title: "Task 2",
+          status: TaskStatus.active,
+          deadline: new Date("2022-01-01"),
+          categoryId: 1,
+          projectId: 1,
+          workspaceId: 1,
+          creatorId: "user-1",
+          assigneeId: "user-1",
+        },
       ],
     };
 
@@ -51,8 +62,11 @@ describe("deletes a task", () => {
     cy.visit("/en/tasks");
   });
 
-  it("can delete a task", () => {
-    cy.getMenuItem("task-item-1-action-menu-trigger", "delete").click();
+  it("can delete tasks", () => {
+    cy.getByData("task-1-checkbox").click();
+    cy.getByData("task-2-checkbox").click();
+    cy.getMenuItem("toolbar-action-menu-trigger", "delete").click();
+    cy.getByData("confirm-modal").should("be.visible").contains("2 tasks");
     cy.getByData("confirm-button").click();
     cy.getByData("task-list-item").should("not.exist");
   });

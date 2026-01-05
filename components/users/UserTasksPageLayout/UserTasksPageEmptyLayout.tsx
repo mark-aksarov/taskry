@@ -19,6 +19,7 @@ import { UserTasksEmptySection } from "@/components/users/UserTasksEmptySection"
 
 interface UserTasksPageEmptyLayoutProps {
   userId: string;
+  NewTaskFormContainer: React.ComponentType;
   UserHeaderContainer: React.ComponentType<{ userId: string }>;
   navigationDesktop: React.ReactNode;
   navigationMobile: React.ReactNode;
@@ -26,6 +27,7 @@ interface UserTasksPageEmptyLayoutProps {
 
 export function UserTasksPageEmptyLayout({
   userId,
+  NewTaskFormContainer,
   UserHeaderContainer,
   navigationDesktop,
   navigationMobile,
@@ -41,7 +43,9 @@ export function UserTasksPageEmptyLayout({
               <UserCardTitle>{t("title")}</UserCardTitle>
             </UserCardHeader>
 
-            <UserTasksEmptySection />
+            <UserTasksEmptySection
+              NewTaskFormContainer={NewTaskFormContainer}
+            />
           </UserCardLeft>
 
           <UserCardRight>
@@ -59,7 +63,7 @@ export function UserTasksPageEmptyLayout({
 
           <ToolbarMobileBottom>{navigationMobile}</ToolbarMobileBottom>
 
-          <UserTasksEmptySection />
+          <UserTasksEmptySection NewTaskFormContainer={NewTaskFormContainer} />
         </PageGrid>
       </PageContainer>
     </>

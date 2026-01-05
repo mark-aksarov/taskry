@@ -28,12 +28,12 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
-    newCompanyForm: <NewCustomerForm {...CustomerFormBaseStory.args} />,
+    newCustomerForm: <NewCustomerForm {...CustomerFormBaseStory.args} />,
   },
 } satisfies Story;
 
 export const Skeleton = {
   args: {
-    newCompanyForm: <CustomerFormBaseSkeleton />,
+    newCustomerForm: <CustomerFormBaseSkeleton />,
   },
 } satisfies Story;

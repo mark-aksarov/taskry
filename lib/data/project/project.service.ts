@@ -190,6 +190,13 @@ export const getProjectList = async ({
         ? {
             id: p.customer.id,
             fullName: p.customer.fullName,
+            imageUrl: p.customer.imageUrl ?? undefined,
+            company: p.customer.company
+              ? {
+                  id: p.customer.company.id,
+                  name: p.customer.company.name,
+                }
+              : undefined,
           }
         : undefined,
       category: {

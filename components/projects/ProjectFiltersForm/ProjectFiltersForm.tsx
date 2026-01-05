@@ -109,6 +109,7 @@ export function ProjectFiltersForm({
     <RACForm id="project-filter-form" onSubmit={handleSubmit}>
       <div className="flex flex-col gap-4">
         <Switch
+          data-test="no-active-tasks-switch"
           className="justify-between"
           isSelected={noActiveTasks}
           onChange={setNoActiveTasks}

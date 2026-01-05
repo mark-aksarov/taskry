@@ -21,16 +21,36 @@ export function ProjectFiltersFormDeadlineCheckboxGroup({
       value={value}
       onChange={onChange}
     >
-      <Checkbox key="today" value="today" className="font-normal">
+      <Checkbox
+        data-test="today-deadline-checkbox"
+        key="today"
+        value="today"
+        className="font-normal"
+      >
         {t("today")}
       </Checkbox>
-      <Checkbox key="tomorrow" value="tomorrow" className="font-normal">
+      <Checkbox
+        data-test="tomorrow-deadline-checkbox"
+        key="tomorrow"
+        value="tomorrow"
+        className="font-normal"
+      >
         {t("tomorrow")}
       </Checkbox>
-      <Checkbox key="thisWeek" value="thisWeek" className="font-normal">
+      <Checkbox
+        data-test="this-week-deadline-checkbox"
+        key="thisWeek"
+        value="thisWeek"
+        className="font-normal"
+      >
         {t("thisWeek")}
       </Checkbox>
-      <Checkbox key="overdue" value="overdue" className="font-normal">
+      <Checkbox
+        data-test="overdue-deadline-checkbox"
+        key="overdue"
+        value="overdue"
+        className="font-normal"
+      >
         {t("overdue")}
       </Checkbox>
     </CheckboxGroup>

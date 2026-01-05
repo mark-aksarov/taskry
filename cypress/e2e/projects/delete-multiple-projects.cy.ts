@@ -1,7 +1,7 @@
 import { E2ESeedPayload } from "@/prisma/e2e/types";
 import { ProjectStatus, TaskStatus } from "@/generated/prisma/enums";
 
-describe("deletes a task", () => {
+describe("delete multiple projects", () => {
   beforeEach(() => {
     cy.viewport(1440, 900);
 
@@ -29,6 +29,16 @@ describe("deletes a task", () => {
           workspaceId: 1,
           creatorId: "user-1",
         },
+        {
+          id: 2,
+          title: "Project 2",
+          status: ProjectStatus.active,
+          deadline: new Date("2022-01-01"),
+          categoryId: 1,
+          customerId: 1,
+          workspaceId: 1,
+          creatorId: "user-1",
+        },
       ],
       tasks: [
         {
@@ -42,18 +52,32 @@ describe("deletes a task", () => {
           creatorId: "user-1",
           assigneeId: "user-1",
         },
+        {
+          id: 2,
+          title: "Task 2",
+          status: TaskStatus.active,
+          deadline: new Date("2022-01-01"),
+          categoryId: 1,
+          projectId: 2,
+          workspaceId: 1,
+          creatorId: "user-1",
+          assigneeId: "user-1",
+        },
       ],
     };
 
     cy.task("db:reset");
     cy.task("db:seed", payload);
     cy.signIn("owner@example.com", "12345abc");
-    cy.visit("/en/tasks");
+    cy.visit("/en/projects");
   });
 
-  it("can delete a task", () => {
-    cy.getMenuItem("task-item-1-action-menu-trigger", "delete").click();
+  it("can delete projects", () => {
+    cy.getByData("project-1-checkbox").click();
+    cy.getByData("project-2-checkbox").click();
+    cy.getMenuItem("toolbar-action-menu-trigger", "delete").click();
+    cy.getByData("confirm-modal").should("be.visible").contains("2 projects");
     cy.getByData("confirm-button").click();
-    cy.getByData("task-list-item").should("not.exist");
+    cy.getByData("project-list-item").should("not.exist");
   });
 });

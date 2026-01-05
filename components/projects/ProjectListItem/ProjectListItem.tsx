@@ -114,6 +114,7 @@ export const ProjectListItem = ({
       checkboxSlot={
         showCheckbox && (
           <Checkbox
+            data-test={`project-${id}-checkbox`}
             aria-label="project checkbox"
             isSelected={isSelected(id)}
             onChange={() => toggleItem(id)}
@@ -122,8 +123,9 @@ export const ProjectListItem = ({
       }
       titleSlot={
         <ListItemInfo>
-          <ListItemTitle>
+          <ListItemTitle data-test="project-list-item-title">
             <ItemBaseDetailModalTrigger
+              data-test="project-list-item-title-trigger"
               modal={<ProjectDetailModal projectId={id} />}
               className="truncate"
             >
@@ -146,6 +148,7 @@ export const ProjectListItem = ({
         <>
           {creator ? (
             <ItemBaseDetailModalTrigger
+              data-test="project-list-item-creator-image-trigger"
               modal={<UserDetailModal userId={creator.id} />}
               className="@max-2xl:hidden"
             >
@@ -159,6 +162,7 @@ export const ProjectListItem = ({
             <ListItemTitle>
               {creator ? (
                 <ItemBaseDetailModalTrigger
+                  data-test="project-list-item-creator-name-trigger"
                   modal={<UserDetailModal userId={creator.id} />}
                   className="truncate"
                 >

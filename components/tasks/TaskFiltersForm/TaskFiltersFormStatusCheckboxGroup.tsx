@@ -16,6 +16,7 @@ export function TaskFiltersFormStatusCheckboxGroup() {
       defaultValue={initialValues}
     >
       <Checkbox
+        data-test="pending-checkbox"
         key="pending"
         value="pending"
         className="font-normal capitalize"
@@ -23,11 +24,17 @@ export function TaskFiltersFormStatusCheckboxGroup() {
         {t("TaskStatus.pending")}
       </Checkbox>
 
-      <Checkbox key="active" value="active" className="font-normal capitalize">
+      <Checkbox
+        data-test="active-checkbox"
+        key="active"
+        value="active"
+        className="font-normal capitalize"
+      >
         {t("TaskStatus.active")}
       </Checkbox>
 
       <Checkbox
+        data-test="completed-checkbox"
         key="completed"
         value="completed"
         className="font-normal capitalize"

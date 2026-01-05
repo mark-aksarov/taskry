@@ -47,7 +47,13 @@ export default async function AppCustomersPage({
   // Get count
   const count = await getCustomerCount();
 
-  if (!count) return <CustomersPageEmpty />;
+  if (!count) {
+    return (
+      <CustomersPageEmpty
+        NewCustomerFormContainer={NewCustomerFormServerContainer}
+      />
+    );
+  }
 
   return (
     <EditCustomerFormClientContainerProvider

@@ -26,7 +26,7 @@ export const ProjectListItemLayout = ({
   menuTriggerSlot,
 }: ProjectListItemProps) => {
   return (
-    <ListItem>
+    <ListItem data-test="project-list-item">
       {checkboxSlot}
       {titleSlot}
       {creatorSlot}

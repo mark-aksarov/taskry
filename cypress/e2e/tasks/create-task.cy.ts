@@ -1,7 +1,7 @@
 import { E2ESeedPayload } from "@/prisma/e2e/types";
-import { ProjectStatus, TaskStatus } from "@/generated/prisma/enums";
+import { ProjectStatus } from "@/generated/prisma/enums";
 
-describe("deletes a task", () => {
+describe("creates a new task", () => {
   beforeEach(() => {
     cy.viewport(1440, 900);
 
@@ -30,19 +30,6 @@ describe("deletes a task", () => {
           creatorId: "user-1",
         },
       ],
-      tasks: [
-        {
-          id: 1,
-          title: "Task 1",
-          status: TaskStatus.active,
-          deadline: new Date("2022-01-01"),
-          categoryId: 1,
-          projectId: 1,
-          workspaceId: 1,
-          creatorId: "user-1",
-          assigneeId: "user-1",
-        },
-      ],
     };
 
     cy.task("db:reset");
@@ -51,9 +38,29 @@ describe("deletes a task", () => {
     cy.visit("/en/tasks");
   });
 
-  it("can delete a task", () => {
-    cy.getMenuItem("task-item-1-action-menu-trigger", "delete").click();
-    cy.getByData("confirm-button").click();
-    cy.getByData("task-list-item").should("not.exist");
+  it("can create a task", () => {
+    cy.getByData("empty-section-button").click();
+
+    // fill form
+    cy.get('input[name="title"]').clear().type("Updated Task Title");
+    cy.get('textarea[name="description"]')
+      .clear()
+      .type("Updated Task Description");
+    cy.setDatePickerDate("deadline-date-picker", "12", "31", "2025");
+    cy.changeSelection("status-select", "active");
+    cy.changeSelection("category-select", "1");
+    cy.changeSelection("project-select", "1");
+    cy.changeSelection("assignee-select", "user-1");
+
+    // submit
+    cy.get('button[type="submit"]').click();
+
+    // assert
+    cy.getByData("task-list-item").within(() => {
+      cy.contains("Updated Task Title");
+      cy.contains("Category 1");
+      cy.contains("Project 1");
+      cy.contains("Active");
+    });
   });
 });

@@ -1,4 +1,4 @@
-export type DeadlineQuickFilter = "today" | "tomorrow" | "overdue";
+export type DeadlineQuickFilter = "today" | "tomorrow" | "thisWeek" | "overdue";
 import { ProjectStatus, TaskStatus } from "@/generated/prisma/enums";
 
 export interface ProjectFilters {

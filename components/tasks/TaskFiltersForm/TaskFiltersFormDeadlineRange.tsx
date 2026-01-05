@@ -24,12 +24,14 @@ export function TaskFiltersFormDeadlineRange({
       className={`flex gap-4 transition-opacity ${isDisabled ? "pointer-events-none opacity-40" : ""}`}
     >
       <ResponsiveDatePicker
+        data-test="date-start"
         className="flex-auto"
         label={t("label")}
         value={startDate}
         onChange={(val) => onDateChange(val, "start")}
       />
       <ResponsiveDatePicker
+        data-test="date-end"
         className="flex-auto self-end"
         aria-label={t("labelTo")}
         value={endDate}

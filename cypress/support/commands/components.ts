@@ -1,5 +1,5 @@
 Cypress.Commands.add("changeSelection", (dataTestAttribute, key) => {
-  cy.getByData(dataTestAttribute).click();
+  cy.getByData(dataTestAttribute).eq(0).click();
   return cy
     .get('li[role="option"]')
     .filter(':not([aria-selected="true"])')

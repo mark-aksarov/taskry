@@ -24,6 +24,7 @@ export function ProjectFiltersFormCustomerCheckboxGroup({
     >
       {customers.map((customer) => (
         <Checkbox
+          data-test={`customer-${customer.id}-checkbox`}
           key={customer.id}
           value={customer.id.toString()}
           className="font-normal capitalize"

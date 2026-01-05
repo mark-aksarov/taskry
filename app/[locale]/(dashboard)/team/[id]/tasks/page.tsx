@@ -41,6 +41,7 @@ export default async function AppProfileTasksPage({
     return (
       <TeamProfileTasksPageEmpty
         userId={id}
+        NewTaskFormContainer={NewTaskFormServerContainer}
         UserHeaderContainer={UserHeaderServerContainer}
       />
     );

@@ -1,6 +1,6 @@
 import { E2ESeedPayload } from "@/prisma/e2e/types";
 
-describe("Task List Item", () => {
+describe("Project List Item", () => {
   describe("Navigation & Modals", () => {
     beforeEach(() => {
       cy.viewport(1440, 900);
@@ -41,46 +41,16 @@ describe("Task List Item", () => {
             creatorId: "user-1",
           },
         ],
-        taskCategories: [
-          {
-            id: 1,
-            name: "Category 1",
-            workspaceId: 1,
-          },
-        ],
-        tasks: [
-          {
-            id: 1,
-            title: "Task 1",
-            status: "active",
-            deadline: new Date("2022-01-01"),
-            categoryId: 1,
-            projectId: 1,
-            workspaceId: 1,
-            creatorId: "user-1",
-            assigneeId: "user-1",
-          },
-        ],
       };
 
       cy.task("db:reset");
       cy.task("db:seed", payload);
       cy.signIn("owner@example.com", "12345abc");
-      cy.visit("/en/tasks");
-    });
-
-    it("goes to the full task page", () => {
-      cy.getByData("task-list-item-title").eq(0).click();
-      cy.getByData("open-full-page-button")
-        .should("have.attr", "href")
-        .then((href) => {
-          cy.getByData("open-full-page-button").click();
-          cy.location("pathname").should("include", href);
-        });
+      cy.visit("/en/projects");
     });
 
     it("goes to the full project page", () => {
-      cy.getByData("task-list-item-project-title").eq(0).click();
+      cy.getByData("project-list-item-title-trigger").eq(0).click();
       cy.getByData("open-full-page-button")
         .should("have.attr", "href")
         .then((href) => {
@@ -89,8 +59,8 @@ describe("Task List Item", () => {
         });
     });
 
-    it("goes to the user's profile page", () => {
-      cy.getByData("task-list-item-user-title").eq(0).click();
+    it("goes to the creator profile page", () => {
+      cy.getByData("project-list-item-creator-image-trigger").eq(0).click();
       cy.getByData("open-full-page-button")
         .should("have.attr", "href")
         .then((href) => {
