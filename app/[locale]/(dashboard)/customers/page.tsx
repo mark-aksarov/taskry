@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { Suspense } from "react";
 import { CustomersPage } from "./CustomersPage";
 import { arrayParam } from "@/lib/utils/arrayParam";
 import { CustomersPageEmpty } from "./CustomersPageEmpty";
@@ -7,6 +8,7 @@ import { getCustomerCount } from "@/lib/data/customer/customer.dal";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { deleteCustomers } from "@/lib/actions/customer/deleteCustomers";
 import { CustomersContainer } from "@/components/customer/CustomersContainer";
+import { CustomerFiltersFormSkeleton } from "@/components/customer/CustomerFiltersForm";
 import { NewCustomerFormContainer } from "@/components/customer/NewCustomerFormContainer";
 import { EditCustomerFormContainer } from "@/components/customer/EditCustomerFormContainer";
 import { CustomerFiltersFormContainer } from "@/components/customer/CustomerFiltersFormContainer";
@@ -14,7 +16,7 @@ import { EditCustomerFormContainerProvider } from "@/components/customer/EditCus
 
 const searchParamsSchema = z.object({
   page: z.coerce.number().int().positive().catch(1),
-  pageSize: z.coerce.number().int().min(1).max(100).catch(20),
+  pageSize: z.coerce.number().int().min(1).max(100).catch(5),
   sort: z.enum(["fullName", "company"]).catch("fullName"),
   hasNoActiveProjects: z
     .preprocess((val) => val === "true", z.boolean())
@@ -49,21 +51,30 @@ export default async function AppCustomersPage({
 
   if (!count) {
     return (
-      <CustomersPageEmpty NewCustomerFormContainer={NewCustomerFormContainer} />
+      <CustomersPageEmpty
+        newCustomerFormContainer={<NewCustomerFormContainer />}
+      />
     );
   }
 
   return (
     <EditCustomerFormContainerProvider value={EditCustomerFormContainer}>
       <CustomersPage
-        page={page}
-        pageSize={pageSize}
-        sort={sort}
-        filters={filters}
+        customersFiltersForm={
+          <Suspense fallback={<CustomerFiltersFormSkeleton />}>
+            <CustomerFiltersFormContainer filters={filters} />
+          </Suspense>
+        }
+        customersContainer={
+          <CustomersContainer
+            page={page}
+            pageSize={pageSize}
+            sort={sort}
+            filters={filters}
+          />
+        }
+        newCustomerFormContainer={<NewCustomerFormContainer />}
         createCompanyAction={createCompany}
-        CustomerFiltersFormContainer={CustomerFiltersFormContainer}
-        CustomersContainer={CustomersContainer}
-        NewCustomerFormContainer={NewCustomerFormContainer}
         deleteCustomersAction={deleteCustomers}
       />
     </EditCustomerFormContainerProvider>

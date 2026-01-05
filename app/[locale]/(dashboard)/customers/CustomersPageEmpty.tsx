@@ -9,11 +9,11 @@ import { PageContainer } from "@/components/common/PageContainer";
 import { NewCustomerModal } from "@/components/customer/NewCustomerModal";
 
 interface CustomersPageEmptyProps {
-  NewCustomerFormContainer: React.ComponentType;
+  newCustomerFormContainer: React.ReactNode;
 }
 
 export function CustomersPageEmpty({
-  NewCustomerFormContainer,
+  newCustomerFormContainer,
 }: CustomersPageEmptyProps) {
   const t = useTranslations("app.CustomersPageEmpty");
 
@@ -24,7 +24,7 @@ export function CustomersPageEmpty({
         <EmptySectionDescription>{t("description")}</EmptySectionDescription>
         <EmptySectionButton
           createNewModal={
-            <NewCustomerModal newCustomerForm={<NewCustomerFormContainer />} />
+            <NewCustomerModal newCustomerForm={newCustomerFormContainer} />
           }
         >
           {t("addButtonLabel")}

@@ -31,25 +31,20 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    page: 1,
-    pageSize: 20,
-    sort: "fullName",
-    filters: {
-      company: [],
-    },
-    createCompanyAction: fn(),
-    CustomerFiltersFormContainer: () => (
+    customersFiltersForm: (
       <CustomerFiltersForm {...CustomerFiltersFormStory.args} />
     ),
-    CustomersContainer: () => (
+    customersContainer: (
       <ViewModeLayout
         list={<CustomerList {...CustomerListStory.args} />}
         grid={<CustomerGrid {...CustomerGridStory.args} />}
       />
     ),
-    NewCustomerFormContainer: () => (
+    newCustomerFormContainer: (
       <NewCustomerForm {...CustomerFormBaseStory.args} />
     ),
+
+    createCompanyAction: fn(),
     deleteCustomersAction: fn(),
   },
 } satisfies Story;
@@ -63,9 +58,9 @@ export const WithNoCustomers: Story = {
   args: { ...Default.args },
   render: () => (
     <CustomersPageEmpty
-      NewCustomerFormContainer={() => (
+      newCustomerFormContainer={
         <NewCustomerForm {...CustomerFormBaseStory.args} />
-      )}
+      }
     />
   ),
 } satisfies Story;

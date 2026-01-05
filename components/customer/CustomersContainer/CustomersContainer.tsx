@@ -3,14 +3,14 @@ import { CustomerList } from "../CustomerList";
 import { CustomerGrid } from "../CustomerGrid";
 import { CustomerListItem } from "../CustomerListItem";
 import { CustomerGridItem } from "../CustomerGridItem";
-import { Pagination } from "@/components/common/Pagination";
 import { ViewModeLayout } from "@/components/common/ViewMode";
 import { getCustomerCount } from "@/lib/data/customer/customer.dal";
 import { getCustomerList } from "@/lib/data/customer/customer.service";
 import { CustomerListItemDTO } from "@/lib/data/customer/customer.dto";
 import { deleteCustomers } from "@/lib/actions/customer/deleteCustomers";
+import { EntityContainerPagination } from "@/components/common/EntityContainerPagination";
 
-interface CustomersContainerProps {
+export interface CustomersContainerProps {
   page: number;
   pageSize: number;
   sort: string;
@@ -23,16 +23,10 @@ export async function CustomersContainer({
   sort,
   filters,
 }: CustomersContainerProps) {
+  await new Promise((resolve) => setTimeout(resolve, 2000));
+
   const customers = await getCustomerList({ page, pageSize, sort, filters });
   const count = await getCustomerCount(filters);
-  const totalPages = Math.ceil(count / pageSize);
-
-  const paginationProps = {
-    page,
-    totalPages,
-    pageSize,
-    baseUrl: "/customers",
-  };
 
   const getCustomerCommonProps = (customer: CustomerListItemDTO) => ({
     id: customer.id,
@@ -70,16 +64,11 @@ export async function CustomersContainer({
         }
       />
 
-      {totalPages > 1 && (
-        <div className="flex justify-center">
-          <Pagination
-            {...paginationProps}
-            size="large"
-            className="max-md:hidden"
-          />
-          <Pagination {...paginationProps} className="md:hidden" />
-        </div>
-      )}
+      <EntityContainerPagination
+        page={page}
+        totalPages={Math.ceil(count / pageSize)}
+        pageSize={pageSize}
+      />
     </>
   );
 }

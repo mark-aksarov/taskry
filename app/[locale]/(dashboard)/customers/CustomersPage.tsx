@@ -11,50 +11,32 @@ import {
   DeleteCustomersPayload,
 } from "@/lib/actions/types";
 
-import { Suspense } from "react";
 import { useTranslations } from "next-intl";
-import { CustomerFilters } from "@/lib/types";
 import { PageGrid } from "@/components/common/PageGrid";
 import { ViewModeProvider } from "@/components/common/ViewMode";
 import { PageContainer } from "@/components/common/PageContainer";
 import { NewCompanyForm } from "@/components/customer/NewCompanyForm";
 import { ViewModeToggleButtonGroup } from "@/components/common/ViewMode";
 import { SelectionProvider } from "@/components/common/SelectionContext";
-import { CustomerFiltersFormSkeleton } from "@/components/customer/CustomerFiltersForm";
 import { CustomerToolbarActionsMenuTrigger } from "@/components/customer/CustomerToolbarActionsMenuTrigger";
 import { CustomerToolbarSortingMenuTrigger } from "@/components/customer/CustomerToolbarSortingMenuTrigger";
 import { CustomerToolbarFiltersModalTrigger } from "@/components/customer/CustomerToolbarFiltersModalTrigger";
 import { CustomerToolbarCreateNewMenuTrigger } from "@/components/customer/CustomerToolbarCreateNewMenuTrigger";
 
 interface CustomersPageProps {
-  page: number;
-  pageSize: number;
-  sort: string;
-  filters: CustomerFilters;
+  customersFiltersForm: React.ReactNode;
+  customersContainer: React.ReactNode;
+  newCustomerFormContainer: React.ReactNode;
   createCompanyAction: ActionFn<ActionState, FormData>;
   deleteCustomersAction: ActionFn<ActionState, DeleteCustomersPayload>;
-  CustomerFiltersFormContainer: React.ComponentType<{
-    filters: CustomerFilters;
-  }>;
-  CustomersContainer: React.ComponentType<{
-    page: number;
-    pageSize: number;
-    sort: string;
-    filters?: CustomerFilters;
-  }>;
-  NewCustomerFormContainer: React.ComponentType;
 }
 
 export function CustomersPage({
-  page,
-  pageSize,
-  sort,
-  filters,
+  customersFiltersForm,
+  customersContainer,
+  newCustomerFormContainer,
   createCompanyAction,
   deleteCustomersAction,
-  CustomerFiltersFormContainer,
-  CustomersContainer,
-  NewCustomerFormContainer,
 }: CustomersPageProps) {
   const t = useTranslations("app.CustomersPage");
 
@@ -66,18 +48,14 @@ export function CustomersPage({
             <ToolbarDesktop>
               <CustomerToolbarSortingMenuTrigger />
               <CustomerToolbarFiltersModalTrigger
-                filtersForm={
-                  <Suspense fallback={<CustomerFiltersFormSkeleton />}>
-                    <CustomerFiltersFormContainer filters={filters} />
-                  </Suspense>
-                }
+                filtersForm={customersFiltersForm}
               />
               <CustomerToolbarActionsMenuTrigger
                 deleteAction={deleteCustomersAction}
               />
               <ViewModeToggleButtonGroup className="ml-auto" />
               <CustomerToolbarCreateNewMenuTrigger
-                newCustomerForm={<NewCustomerFormContainer />}
+                newCustomerForm={newCustomerFormContainer}
                 newCompanyForm={
                   <NewCompanyForm formAction={createCompanyAction} />
                 }
@@ -88,11 +66,7 @@ export function CustomersPage({
               <ToolbarMobileHeading>{t("heading")}</ToolbarMobileHeading>
               <CustomerToolbarSortingMenuTrigger />
               <CustomerToolbarFiltersModalTrigger
-                filtersForm={
-                  <Suspense fallback={<CustomerFiltersFormSkeleton />}>
-                    <CustomerFiltersFormContainer filters={filters} />
-                  </Suspense>
-                }
+                filtersForm={customersFiltersForm}
               />
               <CustomerToolbarActionsMenuTrigger
                 deleteAction={deleteCustomersAction}
@@ -102,18 +76,13 @@ export function CustomersPage({
             <ToolbarMobileBottom>
               <ViewModeToggleButtonGroup />
               <CustomerToolbarCreateNewMenuTrigger
-                newCustomerForm={<NewCustomerFormContainer />}
+                newCustomerForm={newCustomerFormContainer}
                 newCompanyForm={
                   <NewCompanyForm formAction={createCompanyAction} />
                 }
               />
             </ToolbarMobileBottom>
-            <CustomersContainer
-              page={page}
-              pageSize={pageSize}
-              sort={sort}
-              filters={filters}
-            />
+            {customersContainer}
           </SelectionProvider>
         </ViewModeProvider>
       </PageGrid>
