@@ -6,11 +6,11 @@ import { createCompany } from "@/lib/actions/company/createCompany";
 import { getCustomerCount } from "@/lib/data/customer/customer.dal";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { deleteCustomers } from "@/lib/actions/customer/deleteCustomers";
-import { CustomersServerContainer } from "@/components/customer/CustomersServerContainer";
-import { NewCustomerFormServerContainer } from "@/components/customer/NewCustomerFormServerContainer";
-import { EditCustomerFormClientContainer } from "@/components/customer/EditCustomerFormClientContainer";
-import { CustomerFiltersFormServerContainer } from "@/components/customer/CustomerFiltersFormServerContainer";
-import { EditCustomerFormClientContainerProvider } from "@/components/customer/EditCustomerFormClientContainerContext";
+import { CustomersContainer } from "@/components/customer/CustomersContainer";
+import { NewCustomerFormContainer } from "@/components/customer/NewCustomerFormContainer";
+import { EditCustomerFormContainer } from "@/components/customer/EditCustomerFormContainer";
+import { CustomerFiltersFormContainer } from "@/components/customer/CustomerFiltersFormContainer";
+import { EditCustomerFormContainerProvider } from "@/components/customer/EditCustomerFormContainerContext";
 
 const searchParamsSchema = z.object({
   page: z.coerce.number().int().positive().catch(1),
@@ -49,27 +49,23 @@ export default async function AppCustomersPage({
 
   if (!count) {
     return (
-      <CustomersPageEmpty
-        NewCustomerFormContainer={NewCustomerFormServerContainer}
-      />
+      <CustomersPageEmpty NewCustomerFormContainer={NewCustomerFormContainer} />
     );
   }
 
   return (
-    <EditCustomerFormClientContainerProvider
-      value={EditCustomerFormClientContainer}
-    >
+    <EditCustomerFormContainerProvider value={EditCustomerFormContainer}>
       <CustomersPage
         page={page}
         pageSize={pageSize}
         sort={sort}
         filters={filters}
         createCompanyAction={createCompany}
-        CustomerFiltersFormContainer={CustomerFiltersFormServerContainer}
-        CustomersServerContainer={CustomersServerContainer}
-        NewCustomerFormContainer={NewCustomerFormServerContainer}
+        CustomerFiltersFormContainer={CustomerFiltersFormContainer}
+        CustomersContainer={CustomersContainer}
+        NewCustomerFormContainer={NewCustomerFormContainer}
         deleteCustomersAction={deleteCustomers}
       />
-    </EditCustomerFormClientContainerProvider>
+    </EditCustomerFormContainerProvider>
   );
 }

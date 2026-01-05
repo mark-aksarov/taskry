@@ -5,5 +5,5 @@ interface TaskListProps {
 }
 
 export function TaskList({ children }: TaskListProps) {
-  return <List>{children}</List>;
+  return <List data-test="tasks-list">{children}</List>;
 }

@@ -1,0 +1,1 @@
+export { ProjectDetailFullContainer } from "./ProjectDetailFullContainer";

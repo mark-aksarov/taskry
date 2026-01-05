@@ -2,7 +2,7 @@ import { UserFilters } from "@/lib/types";
 import { useTranslations } from "next-intl";
 import { CheckboxGroup, Checkbox } from "@/components/ui";
 
-interface UserFiltersFormServerContainerProps {
+interface UserFiltersFormPositionCheckboxGroupProps {
   filters: UserFilters;
   positions: { id: number; name: string }[];
 }
@@ -10,7 +10,7 @@ interface UserFiltersFormServerContainerProps {
 export function UserFiltersFormPositionCheckboxGroup({
   filters,
   positions,
-}: UserFiltersFormServerContainerProps) {
+}: UserFiltersFormPositionCheckboxGroupProps) {
   const t = useTranslations("users.UserFiltersForm.positionCheckboxGroup");
 
   return (

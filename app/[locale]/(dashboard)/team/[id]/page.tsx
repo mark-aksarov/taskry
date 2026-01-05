@@ -1,7 +1,7 @@
 import { TeamProfilePage } from "./TeamProfilePage";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
-import { UserHeaderServerContainer } from "@/components/users/UserHeaderServerContainer";
-import { UserDetailServerContainer } from "@/components/users/UserDetailServerContainer";
+import { UserHeaderContainer } from "@/components/users/UserHeaderContainer";
+import { ProfileDetailContainer } from "@/components/users/ProfileDetailContainer";
 
 export default async function AppProfilePage({
   params,
@@ -15,8 +15,8 @@ export default async function AppProfilePage({
   return (
     <TeamProfilePage
       userId={id}
-      UserDetailContainer={UserDetailServerContainer}
-      UserHeaderContainer={UserHeaderServerContainer}
+      ProfileDetailContainer={ProfileDetailContainer}
+      UserHeaderContainer={UserHeaderContainer}
     />
   );
 }

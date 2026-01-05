@@ -2,8 +2,8 @@ import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import { ProfilePage } from "./ProfilePage";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
-import { UserHeaderServerContainer } from "@/components/users/UserHeaderServerContainer";
-import { UserDetailServerContainer } from "@/components/users/UserDetailServerContainer";
+import { UserHeaderContainer } from "@/components/users/UserHeaderContainer";
+import { ProfileDetailContainer } from "@/components/users/ProfileDetailContainer";
 
 export default async function AppProfilePage() {
   await requireProtectedPage();
@@ -17,8 +17,8 @@ export default async function AppProfilePage() {
   return (
     <ProfilePage
       userId={userId}
-      UserDetailContainer={UserDetailServerContainer}
-      UserHeaderContainer={UserHeaderServerContainer}
+      ProfileDetailContainer={ProfileDetailContainer}
+      UserHeaderContainer={UserHeaderContainer}
     />
   );
 }

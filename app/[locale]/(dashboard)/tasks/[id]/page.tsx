@@ -1,8 +1,8 @@
 import { TaskDetailPage } from "./TaskDetailPage";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
-import { TaskDetailFullServerContainer } from "@/components/tasks/TaskDetailFullServerContainer";
-import { TaskDetailFormServerContainer } from "@/components/tasks/TaskDetailFormServerContainer";
-import { TaskDetailCardHeadingServerContainer } from "@/components/tasks/TaskDetailCardHeadingServerContainer";
+import { TaskDetailFormContainer } from "@/components/tasks/TaskDetailFormContainer";
+import { TaskDetailFullContainer } from "@/components/tasks/TaskDetailFullContainer";
+import { TaskDetailCardHeadingContainer } from "@/components/tasks/TaskDetailCardHeadingContainer";
 
 export default async function AppTaskDetailPage({
   params,
@@ -15,11 +15,9 @@ export default async function AppTaskDetailPage({
   return (
     <TaskDetailPage
       id={Number(id)}
-      TaskDetailCardHeadingServerContainer={
-        TaskDetailCardHeadingServerContainer
-      }
-      TaskDetailContainer={TaskDetailFullServerContainer}
-      TaskDetailFormContainer={TaskDetailFormServerContainer}
+      TaskDetailCardHeadingContainer={TaskDetailCardHeadingContainer}
+      TaskDetailContainer={TaskDetailFullContainer}
+      TaskDetailFormContainer={TaskDetailFormContainer}
     />
   );
 }

@@ -43,7 +43,7 @@ interface ProjectsPageProps {
     filters: ProjectFilters;
   }>;
   NewProjectFormContainer: React.ComponentType;
-  ProjectsServerContainer: React.ComponentType<{
+  ProjectsContainer: React.ComponentType<{
     page: number;
     pageSize: number;
     sort: string;
@@ -61,7 +61,7 @@ export function ProjectsPage({
   updateProjectStatusesAction,
   ProjectFiltersFormContainer,
   NewProjectFormContainer,
-  ProjectsServerContainer,
+  ProjectsContainer,
 }: ProjectsPageProps) {
   const t = useTranslations("app.ProjectsPage");
 
@@ -130,7 +130,7 @@ export function ProjectsPage({
               />
             </ToolbarMobileBottom>
 
-            <ProjectsServerContainer
+            <ProjectsContainer
               page={page}
               pageSize={pageSize}
               sort={sort}

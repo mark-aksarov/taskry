@@ -13,12 +13,12 @@ import { useContext } from "react";
 import { Bell } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { ResponsiveModal } from "@/components/common/ResponsiveModal";
-import { NotificationModalContentClientContainerContext } from "../NotificationModalContentClientContainer";
+import { NotificationModalContentContainerContext } from "../NotificationModalContentContainer";
 
 export function NotificationModalTrigger() {
   const t = useTranslations("notifications.NotificationModalTrigger");
   const NotificationModalContentContainer = useContext(
-    NotificationModalContentClientContainerContext,
+    NotificationModalContentContainerContext,
   );
 
   return (

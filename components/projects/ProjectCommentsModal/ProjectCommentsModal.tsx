@@ -1,9 +1,9 @@
+import { useTranslations } from "next-intl";
 import { Suspense, useContext } from "react";
 import { Repeat } from "@/components/common/Repeat";
 import { CommentsModal } from "@/components/common/CommentsModal";
 import { CommentItemSkeleton } from "@/components/comments/CommentItem";
-import { ProjectCommentsClientContainerContext } from "../ProjectCommentsClientContainer";
-import { useTranslations } from "next-intl";
+import { ProjectCommentsContainerContext } from "../ProjectCommentsContainer";
 
 interface ProjectCommentsModalProps {
   projectId: number;
@@ -12,7 +12,7 @@ interface ProjectCommentsModalProps {
 export function ProjectCommentsModal({ projectId }: ProjectCommentsModalProps) {
   const t = useTranslations("projects.ProjectCommentsModal");
 
-  const CommentsContainer = useContext(ProjectCommentsClientContainerContext);
+  const CommentsContainer = useContext(ProjectCommentsContainerContext);
 
   return (
     <CommentsModal title={t("title")}>

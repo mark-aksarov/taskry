@@ -38,7 +38,7 @@ export const Default: Story = {
     UserFiltersFormContainer: () => (
       <UserFiltersForm {...UserFiltersFormStory.args} />
     ),
-    UsersServerContainer: () => (
+    UsersContainer: () => (
       <ViewModeLayout
         list={<UserList {...UserListStory.args} />}
         grid={<UserGrid {...UserGridStory.args} />}

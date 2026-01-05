@@ -5,7 +5,7 @@ import { ModalProps } from "@/components/ui";
 import { Suspense, useContext } from "react";
 import { ProjectFormBaseSkeleton } from "../ProjectFormBase";
 import { FormBaseModal } from "@/components/common/FormBaseModal";
-import { EditProjectFormClientContainerContext } from "../EditProjectFormClientContainerContext";
+import { EditProjectFormContainerContext } from "../EditProjectFormContainerContext";
 
 interface EditProjectModalProps
   extends Pick<ModalProps, "isOpen" | "onOpenChange"> {
@@ -18,13 +18,11 @@ export function EditProjectModal({
 }: EditProjectModalProps) {
   const t = useTranslations("projects.EditProjectModal");
 
-  const EditProjectFormClientContainer = useContext(
-    EditProjectFormClientContainerContext,
-  );
+  const EditProjectFormContainer = useContext(EditProjectFormContainerContext);
 
-  if (!EditProjectFormClientContainer) {
+  if (!EditProjectFormContainer) {
     throw new Error(
-      "EditProjectModal must be used within a EditProjectFormClientProvider",
+      "EditProjectModal must be used within a EditProjectFormProvider",
     );
   }
 
@@ -35,7 +33,7 @@ export function EditProjectModal({
       submitButtonLabel={t("submitButtonLabel")}
       form={
         <Suspense fallback={<ProjectFormBaseSkeleton />}>
-          <EditProjectFormClientContainer projectId={projectId} />
+          <EditProjectFormContainer projectId={projectId} />
         </Suspense>
       }
       {...props}

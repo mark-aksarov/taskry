@@ -1,7 +1,7 @@
 import {
   withTaskCommentsEmpty,
   withTaskCommentsSkeleton,
-} from "../TaskCommentsClientContainer/decorators";
+} from "../TaskCommentsContainer/decorators";
 
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { TaskCommentsModal } from "./TaskCommentsModal";

@@ -14,7 +14,7 @@ import { TaskDetailFullSkeleton } from "@/components/tasks/TaskDetailFull/TaskDe
 
 interface TaskDetailPageProps {
   id: number;
-  TaskDetailCardHeadingServerContainer: React.ComponentType<{ id: number }>;
+  TaskDetailCardHeadingContainer: React.ComponentType<{ id: number }>;
   TaskDetailContainer: React.ComponentType<{
     id: number;
   }>;
@@ -23,7 +23,7 @@ interface TaskDetailPageProps {
 
 export function TaskDetailPage({
   id,
-  TaskDetailCardHeadingServerContainer,
+  TaskDetailCardHeadingContainer,
   TaskDetailContainer,
   TaskDetailFormContainer,
 }: TaskDetailPageProps) {
@@ -38,7 +38,7 @@ export function TaskDetailPage({
         <TaskDetailCard
           taskDetailCardHeading={
             <Suspense fallback={<DetailCardHeadingSkeleton />}>
-              <TaskDetailCardHeadingServerContainer id={id} />
+              <TaskDetailCardHeadingContainer id={id} />
             </Suspense>
           }
           taskDetail={

@@ -41,7 +41,7 @@ export const Default = {
     CustomerFiltersFormContainer: () => (
       <CustomerFiltersForm {...CustomerFiltersFormStory.args} />
     ),
-    CustomersServerContainer: () => (
+    CustomersContainer: () => (
       <ViewModeLayout
         list={<CustomerList {...CustomerListStory.args} />}
         grid={<CustomerGrid {...CustomerGridStory.args} />}

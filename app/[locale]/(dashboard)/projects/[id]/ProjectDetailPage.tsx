@@ -13,7 +13,7 @@ import { useTranslations } from "next-intl";
 
 interface ProjectDetailPageProps {
   id: number;
-  ProjectDetailCardHeadingServerContainer: React.ComponentType<{ id: number }>;
+  ProjectDetailCardHeadingContainer: React.ComponentType<{ id: number }>;
   ProjectDetailContainer: React.ComponentType<{
     id: number;
   }>;
@@ -22,7 +22,7 @@ interface ProjectDetailPageProps {
 
 export function ProjectDetailPage({
   id,
-  ProjectDetailCardHeadingServerContainer,
+  ProjectDetailCardHeadingContainer,
   ProjectDetailContainer,
   ProjectDetailFormContainer,
 }: ProjectDetailPageProps) {
@@ -37,7 +37,7 @@ export function ProjectDetailPage({
         <ProjectDetailCard
           projectDetailCardHeading={
             <Suspense fallback={<DetailCardHeadingSkeleton />}>
-              <ProjectDetailCardHeadingServerContainer id={id} />
+              <ProjectDetailCardHeadingContainer id={id} />
             </Suspense>
           }
           projectDetail={

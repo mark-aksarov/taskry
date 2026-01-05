@@ -5,5 +5,5 @@ interface ProjectListProps {
 }
 
 export function ProjectList({ children }: ProjectListProps) {
-  return <List>{children}</List>;
+  return <List data-test="projects-list">{children}</List>;
 }

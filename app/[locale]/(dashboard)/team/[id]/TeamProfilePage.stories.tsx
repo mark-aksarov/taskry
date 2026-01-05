@@ -43,21 +43,21 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    UserDetailContainer: () => <UserDetail {...UserDetailStory.args} />,
+    ProfileDetailContainer: () => <UserDetail {...UserDetailStory.args} />,
     UserHeaderContainer: () => <PersonHeader {...PersonHeaderStory.args} />,
   },
 } satisfies Story;
 
 export const Loading: Story = {
   args: {
-    UserDetailContainer: () => <UserDetailSkeleton />,
+    ProfileDetailContainer: () => <UserDetailSkeleton />,
     UserHeaderContainer: () => <PersonHeaderSkeleton />,
   },
 } satisfies Story;
 
 export const WithoutSomeData: Story = {
   args: {
-    UserDetailContainer: () => (
+    ProfileDetailContainer: () => (
       <UserDetail {...UserDetailWithoutSomeDataStory.args} />
     ),
     UserHeaderContainer: () => (

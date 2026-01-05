@@ -18,7 +18,7 @@ export function TaskDetailCard({
   taskDetailForm,
 }: TaskDetailCardProps) {
   return (
-    <DetailCard>
+    <DetailCard data-test="task-detail-card">
       <DetailCardHeader>{taskDetailCardHeading}</DetailCardHeader>
       <DetailCardBody>
         <DetailCardLeft>{taskDetail}</DetailCardLeft>

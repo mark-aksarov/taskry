@@ -17,13 +17,13 @@ import { UserNavigationDesktop } from "@/components/users/UserNavigationDesktop"
 
 interface TeamProfilePageProps {
   userId: string;
-  UserDetailContainer: React.ComponentType<{ userId: string }>;
+  ProfileDetailContainer: React.ComponentType<{ userId: string }>;
   UserHeaderContainer: React.ComponentType<{ userId: string }>;
 }
 
 export function TeamProfilePage({
   userId,
-  UserDetailContainer,
+  ProfileDetailContainer,
   UserHeaderContainer,
 }: TeamProfilePageProps) {
   const t = useTranslations("app.TeamProfilePage");
@@ -33,7 +33,7 @@ export function TeamProfilePage({
       <UserDetailCard
         profileDetail={
           <Suspense fallback={<UserDetailSkeleton />}>
-            <UserDetailContainer userId={userId} />
+            <ProfileDetailContainer userId={userId} />
           </Suspense>
         }
         profileHeader={
@@ -58,7 +58,7 @@ export function TeamProfilePage({
             <UserHeaderContainer userId={userId} />
           </Suspense>
           <Suspense fallback={<UserDetailSkeleton />}>
-            <UserDetailContainer userId={userId} />
+            <ProfileDetailContainer userId={userId} />
           </Suspense>
         </Card>
       </PageGrid>

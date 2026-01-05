@@ -5,15 +5,15 @@ import { arrayParam } from "@/lib/utils/arrayParam";
 import { TaskStatus } from "@/generated/prisma/enums";
 import { getTaskCount } from "@/lib/data/task/task.dal";
 import { deleteTasks } from "@/lib/actions/task/deleteTasks";
+import { TasksContainer } from "@/components/tasks/TasksContainer";
 import { canCreateTask, canDeleteTask } from "@/lib/data/user/user.dal";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { updateTaskStatuses } from "@/lib/actions/task/updateTaskStatuses";
-import { TasksServerContainer } from "@/components/tasks/TasksServerContainer";
+import { NewTaskFormContainer } from "@/components/tasks/NewTaskFormContainer";
+import { EditTaskFormContainer } from "@/components/tasks/EditTaskFormContainer";
 import { createTaskCategory } from "@/lib/actions/taskCategory/createTaskCategory";
-import { NewTaskFormServerContainer } from "@/components/tasks/NewTaskFormServerContainer";
-import { EditTaskFormClientContainer } from "@/components/tasks/EditTaskFormClientContainer";
-import { TaskFiltersFormServerContainer } from "@/components/tasks/TaskFiltersFormServerContainer";
-import { EditTaskFormClientContainerProvider } from "@/components/tasks/EditTaskFormClientContainerContext";
+import { TaskFiltersFormContainer } from "@/components/tasks/TaskFiltersFormContainer";
+import { EditTaskFormContainerProvider } from "@/components/tasks/EditTaskFormContainerContext";
 
 const searchParamsSchema = z.object({
   page: z.coerce.number().int().positive().catch(1),
@@ -45,14 +45,14 @@ export default async function AppTasksPage({
   const taskCount = await getTaskCount();
 
   if (!taskCount) {
-    return <TasksPageEmpty NewTaskFormContainer={NewTaskFormServerContainer} />;
+    return <TasksPageEmpty NewTaskFormContainer={NewTaskFormContainer} />;
   }
 
   const canCreate = await canCreateTask();
   const canDelete = await canDeleteTask();
 
   return (
-    <EditTaskFormClientContainerProvider value={EditTaskFormClientContainer}>
+    <EditTaskFormContainerProvider value={EditTaskFormContainer}>
       <TasksPage
         page={page}
         pageSize={pageSize}
@@ -60,13 +60,13 @@ export default async function AppTasksPage({
         filters={filters}
         canCreateTask={canCreate}
         canDeleteTask={canDelete}
-        TaskFiltersFormContainer={TaskFiltersFormServerContainer}
-        NewTaskFormContainer={NewTaskFormServerContainer}
-        TasksServerContainer={TasksServerContainer}
+        TaskFiltersFormContainer={TaskFiltersFormContainer}
+        NewTaskFormContainer={NewTaskFormContainer}
+        TasksContainer={TasksContainer}
         deleteTasksAction={deleteTasks}
         updateTasksStatusesAction={updateTaskStatuses}
         createTaskCategoryAction={createTaskCategory}
       />
-    </EditTaskFormClientContainerProvider>
+    </EditTaskFormContainerProvider>
   );
 }

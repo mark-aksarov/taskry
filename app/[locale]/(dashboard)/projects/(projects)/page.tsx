@@ -6,13 +6,13 @@ import { ProjectStatus } from "@/generated/prisma/enums";
 import { getProjectCount } from "@/lib/data/project/project.dal";
 import { deleteProjects } from "@/lib/actions/project/deleteProjects";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
+import { ProjectsContainer } from "@/components/projects/ProjectsContainer";
 import { updateProjectStatuses } from "@/lib/actions/project/updateProjectStatuses";
-import { ProjectsServerContainer } from "@/components/projects/ProjectsServerContainer";
+import { NewProjectFormContainer } from "@/components/projects/NewProjectFormContainer";
+import { EditProjectFormContainer } from "@/components/projects/EditProjectFormContainer";
 import { createProjectCategory } from "@/lib/actions/projectCategory/createProjectCategory";
-import { NewProjectFormServerContainer } from "@/components/projects/NewProjectFormServerContainer";
-import { EditProjectFormClientContainer } from "@/components/projects/EditProjectFormClientContainer";
-import { ProjectFiltersFormServerContainer } from "@/components/projects/ProjectFiltersFormServerContainer";
-import { EditProjectFormClientContainerProvider } from "@/components/projects/EditProjectFormClientContainerContext";
+import { ProjectFiltersFormContainer } from "@/components/projects/ProjectFiltersFormContainer";
+import { EditProjectFormContainerProvider } from "@/components/projects/EditProjectFormContainerContext";
 
 const searchParamsSchema = z.object({
   page: z.coerce.number().int().positive().catch(1),
@@ -52,16 +52,12 @@ export default async function AppProjectsPage({
 
   if (!projectCount) {
     return (
-      <ProjectsPageEmpty
-        NewProjectFormContainer={NewProjectFormServerContainer}
-      />
+      <ProjectsPageEmpty NewProjectFormContainer={NewProjectFormContainer} />
     );
   }
 
   return (
-    <EditProjectFormClientContainerProvider
-      value={EditProjectFormClientContainer}
-    >
+    <EditProjectFormContainerProvider value={EditProjectFormContainer}>
       <ProjectsPage
         page={page}
         pageSize={pageSize}
@@ -70,10 +66,10 @@ export default async function AppProjectsPage({
         createProjectCategoryAction={createProjectCategory}
         deleteProjectsAction={deleteProjects}
         updateProjectStatusesAction={updateProjectStatuses}
-        ProjectFiltersFormContainer={ProjectFiltersFormServerContainer}
-        ProjectsServerContainer={ProjectsServerContainer}
-        NewProjectFormContainer={NewProjectFormServerContainer}
+        ProjectFiltersFormContainer={ProjectFiltersFormContainer}
+        ProjectsContainer={ProjectsContainer}
+        NewProjectFormContainer={NewProjectFormContainer}
       />
-    </EditProjectFormClientContainerProvider>
+    </EditProjectFormContainerProvider>
   );
 }

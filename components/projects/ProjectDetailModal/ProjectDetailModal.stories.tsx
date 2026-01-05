@@ -2,7 +2,7 @@ import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { ProjectDetailModal } from "./ProjectDetailModal";
 import { Button, RACDialogTrigger } from "@/components/ui";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withProjectDetailCompactSkeleton } from "../ProjectDetailCompactClientContainer/decorators";
+import { withProjectDetailCompactSkeleton } from "../ProjectDetailCompactContainer/decorators";
 
 const meta = {
   title: "components/projects/ProjectDetailModal",

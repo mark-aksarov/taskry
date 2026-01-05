@@ -31,7 +31,7 @@ interface UsersPageProps {
   UserFiltersFormContainer: React.ComponentType<{
     filters: UserFilters;
   }>;
-  UsersServerContainer: React.ComponentType<{
+  UsersContainer: React.ComponentType<{
     page: number;
     pageSize: number;
     sort: string;
@@ -47,7 +47,7 @@ export function UsersPage({
   createPositionAction,
   deleteUsersAction,
   UserFiltersFormContainer,
-  UsersServerContainer,
+  UsersContainer,
 }: UsersPageProps) {
   const t = useTranslations("app.UsersPage");
 
@@ -97,7 +97,7 @@ export function UsersPage({
                 }
               />
             </ToolbarMobileBottom>
-            <UsersServerContainer
+            <UsersContainer
               page={page}
               pageSize={pageSize}
               sort={sort}

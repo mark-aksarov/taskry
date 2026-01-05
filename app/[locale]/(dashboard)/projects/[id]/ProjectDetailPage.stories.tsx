@@ -39,7 +39,7 @@ export type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    ProjectDetailCardHeadingServerContainer: () => (
+    ProjectDetailCardHeadingContainer: () => (
       <DetailCardHeading>Design homepage layout</DetailCardHeading>
     ),
     ProjectDetailContainer: () => (
@@ -53,9 +53,7 @@ export const Default = {
 
 export const Loading = {
   args: {
-    ProjectDetailCardHeadingServerContainer: () => (
-      <DetailCardHeadingSkeleton />
-    ),
+    ProjectDetailCardHeadingContainer: () => <DetailCardHeadingSkeleton />,
     ProjectDetailContainer: () => <ProjectDetailFullSkeleton />,
     ProjectDetailFormContainer: () => <ProjectDetailFormSkeleton />,
   },

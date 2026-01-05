@@ -4,10 +4,10 @@ import { UsersPageEmpty } from "./UsersPageEmpty";
 import { arrayParam } from "@/lib/utils/arrayParam";
 import { getUserCount } from "@/lib/data/user/user.dal";
 import { deleteUsers } from "@/lib/actions/user/deleteUsers";
+import { UsersContainer } from "@/components/users/UsersContainer";
 import { createPosition } from "@/lib/actions/position/createPosition";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
-import { UsersServerContainer } from "@/components/users/UsersServerContainer";
-import { UserFiltersFormServerContainer } from "@/components/users/UserFiltersFormServerContainer";
+import { UserFiltersFormContainer } from "@/components/users/UserFiltersFormContainer";
 
 const searchParamsSchema = z.object({
   page: z.coerce.number().int().positive().catch(1),
@@ -53,8 +53,8 @@ export default async function AppUsersPage({
       sort={sort}
       filters={filters}
       createPositionAction={createPosition}
-      UserFiltersFormContainer={UserFiltersFormServerContainer}
-      UsersServerContainer={UsersServerContainer}
+      UserFiltersFormContainer={UserFiltersFormContainer}
+      UsersContainer={UsersContainer}
       deleteUsersAction={deleteUsers}
     />
   );

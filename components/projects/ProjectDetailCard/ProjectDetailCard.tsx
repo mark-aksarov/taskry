@@ -18,7 +18,7 @@ export function ProjectDetailCard({
   projectDetailForm,
 }: ProjectDetailCardProps) {
   return (
-    <DetailCard>
+    <DetailCard data-test="project-detail-card">
       <DetailCardHeader>{projectDetailCardHeading}</DetailCardHeader>
       <DetailCardBody>
         <DetailCardLeft>{projectDetail}</DetailCardLeft>

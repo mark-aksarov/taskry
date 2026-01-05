@@ -16,7 +16,7 @@ import { EditTaskModal } from "../EditTaskModal";
 import { OverlayTriggerState } from "react-stately";
 import { DialogTrigger } from "react-aria-components";
 import { TaskDetailCompactSkeleton } from "../TaskDetailCompact";
-import { TaskDetailCompactClientContainerContext } from "../TaskDetailCompactClientContainer";
+import { TaskDetailCompactContainerContext } from "../TaskDetailCompactContainer";
 
 export interface TaskDetailBottomSheetProps {
   taskId: number;
@@ -27,9 +27,7 @@ export function TaskDetailBottomSheet({
   taskId,
   state,
 }: TaskDetailBottomSheetProps) {
-  const TaskDetailClientContainer = useContext(
-    TaskDetailCompactClientContainerContext,
-  );
+  const TaskDetailContainer = useContext(TaskDetailCompactContainerContext);
 
   const t = useTranslations("tasks.TaskDetailBottomSheet");
 
@@ -42,7 +40,7 @@ export function TaskDetailBottomSheet({
         </DialogHeader>
         <DialogBody>
           <Suspense fallback={<TaskDetailCompactSkeleton />}>
-            <TaskDetailClientContainer taskId={taskId} />
+            <TaskDetailContainer taskId={taskId} />
           </Suspense>
         </DialogBody>
         <DialogFooter>

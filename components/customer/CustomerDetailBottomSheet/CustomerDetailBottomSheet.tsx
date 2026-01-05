@@ -10,12 +10,12 @@ import {
   DialogHeading,
   DialogCloseButton,
 } from "@/components/ui";
+import { useTranslations } from "next-intl";
 import { Suspense, useContext } from "react";
 import { OverlayTriggerState } from "react-stately";
 import { PersonHeaderSkeleton } from "@/components/common/PersonHeader";
+import { CustomerDetailContainerContext } from "../CustomerDetailContainer";
 import { CustomerDetailSkeleton } from "@/components/customer/CustomerDetail";
-import { CustomerDetailClientContainerContext } from "../CustomerDetailClientContainer";
-import { useTranslations } from "next-intl";
 
 export interface CustomerDetailBottomSheetProps {
   customerId: number;
@@ -28,9 +28,7 @@ export function CustomerDetailBottomSheet({
 }: CustomerDetailBottomSheetProps) {
   const t = useTranslations("customers.CustomerDetailBottomSheet");
 
-  const CustomerDetailClientContainer = useContext(
-    CustomerDetailClientContainerContext,
-  );
+  const CustomerDetailContainer = useContext(CustomerDetailContainerContext);
 
   return (
     <BottomSheet isDismissable state={state} className="md:hidden">
@@ -48,7 +46,7 @@ export function CustomerDetailBottomSheet({
               </div>
             }
           >
-            <CustomerDetailClientContainer customerId={customerId} />
+            <CustomerDetailContainer customerId={customerId} />
           </Suspense>
         </DialogBody>
         <DialogFooter>

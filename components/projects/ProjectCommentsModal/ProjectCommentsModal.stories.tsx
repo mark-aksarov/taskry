@@ -1,7 +1,7 @@
 import {
   withProjectCommentsEmpty,
   withProjectCommentsSkeleton,
-} from "../ProjectCommentsClientContainer/decorators";
+} from "../ProjectCommentsContainer/decorators";
 
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { Button, RACDialogTrigger } from "@/components/ui";

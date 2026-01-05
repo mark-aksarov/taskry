@@ -46,7 +46,7 @@ export const Default: Story = {
       <TaskFiltersForm {...TaskFiltersFormStory.args} />
     ),
     NewTaskFormContainer: () => <NewTaskForm {...TaskFormBaseStory.args} />,
-    TasksServerContainer: () => (
+    TasksContainer: () => (
       <ViewModeLayout
         list={<TaskList {...TaskListStory.args} />}
         grid={<TaskGrid {...TaskGridStory.args} />}

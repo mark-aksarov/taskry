@@ -1,1 +1,0 @@
-export { TotalProjectsCardServerContainer } from "./TotalProjectsCardServerContainer";

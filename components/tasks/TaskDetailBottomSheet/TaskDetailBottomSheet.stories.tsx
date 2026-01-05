@@ -8,7 +8,7 @@ import { Button } from "@/components/ui";
 import { useOverlayTrigger } from "react-aria";
 import { useOverlayTriggerState } from "react-stately";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { withTaskDetailCompactSkeleton } from "@/components/tasks/TaskDetailCompactClientContainer/decorators";
+import { withTaskDetailCompactSkeleton } from "@/components/tasks/TaskDetailCompactContainer/decorators";
 
 const meta = {
   title: "components/tasks/TaskDetailBottomSheet",

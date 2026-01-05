@@ -11,15 +11,13 @@ import {
   DialogCloseButton,
 } from "@/components/ui";
 
+import { useTranslations } from "next-intl";
 import { Suspense, useContext } from "react";
 import { TaskDetailCompactSkeleton } from "../TaskDetailCompact";
-import { TaskDetailCompactClientContainerContext } from "@/components/tasks/TaskDetailCompactClientContainer";
-import { useTranslations } from "next-intl";
+import { TaskDetailCompactContainerContext } from "@/components/tasks/TaskDetailCompactContainer";
 
 export function TaskDetailModal({ taskId }: { taskId: number }) {
-  const TaskDetailClientContainer = useContext(
-    TaskDetailCompactClientContainerContext,
-  );
+  const TaskDetailContainer = useContext(TaskDetailCompactContainerContext);
   const t = useTranslations("tasks.TaskDetailModal");
 
   return (
@@ -31,7 +29,7 @@ export function TaskDetailModal({ taskId }: { taskId: number }) {
         </DialogHeader>
         <DialogBody>
           <Suspense fallback={<TaskDetailCompactSkeleton />}>
-            <TaskDetailClientContainer taskId={taskId} />
+            <TaskDetailContainer taskId={taskId} />
           </Suspense>
         </DialogBody>
         <DialogFooter>

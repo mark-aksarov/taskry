@@ -39,7 +39,7 @@ interface TasksPageProps {
     filters: TaskFilters;
   }>;
   NewTaskFormContainer: React.ComponentType;
-  TasksServerContainer: React.ComponentType<{
+  TasksContainer: React.ComponentType<{
     page: number;
     pageSize: number;
     sort: string;
@@ -59,7 +59,7 @@ export function TasksPage({
   canDeleteTask,
   TaskFiltersFormContainer,
   NewTaskFormContainer,
-  TasksServerContainer,
+  TasksContainer,
   deleteTasksAction,
   updateTasksStatusesAction,
   createTaskCategoryAction,
@@ -138,7 +138,7 @@ export function TasksPage({
               )}
             </ToolbarMobileBottom>
 
-            <TasksServerContainer
+            <TasksContainer
               page={page}
               pageSize={pageSize}
               sort={sort}

@@ -14,13 +14,13 @@ import {
 import { useTranslations } from "next-intl";
 import { Suspense, useContext } from "react";
 import { ProjectDetailCompactSkeleton } from "../ProjectDetailCompact";
-import { ProjectDetailCompactClientContainerContext } from "../ProjectDetailCompactClientContainer";
+import { ProjectDetailCompactContainerContext } from "../ProjectDetailCompactContainer";
 
 export function ProjectDetailModal({ projectId }: { projectId: number }) {
   const t = useTranslations("projects.ProjectDetailModal");
 
   const ProjectDetailContainer = useContext(
-    ProjectDetailCompactClientContainerContext,
+    ProjectDetailCompactContainerContext,
   );
 
   return (

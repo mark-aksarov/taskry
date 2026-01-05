@@ -39,7 +39,7 @@ export type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    TaskDetailCardHeadingServerContainer: () => (
+    TaskDetailCardHeadingContainer: () => (
       <DetailCardHeading>Design homepage layout</DetailCardHeading>
     ),
     TaskDetailContainer: () => <TaskDetailFull {...TaskDetailFullStory.args} />,
@@ -51,7 +51,7 @@ export const Default = {
 
 export const Loading = {
   args: {
-    TaskDetailCardHeadingServerContainer: () => <DetailCardHeadingSkeleton />,
+    TaskDetailCardHeadingContainer: () => <DetailCardHeadingSkeleton />,
     TaskDetailContainer: () => <TaskDetailFullSkeleton />,
     TaskDetailFormContainer: () => <TaskDetailFormSkeleton />,
   },

@@ -36,7 +36,7 @@ interface CustomersPageProps {
   CustomerFiltersFormContainer: React.ComponentType<{
     filters: CustomerFilters;
   }>;
-  CustomersServerContainer: React.ComponentType<{
+  CustomersContainer: React.ComponentType<{
     page: number;
     pageSize: number;
     sort: string;
@@ -53,7 +53,7 @@ export function CustomersPage({
   createCompanyAction,
   deleteCustomersAction,
   CustomerFiltersFormContainer,
-  CustomersServerContainer,
+  CustomersContainer,
   NewCustomerFormContainer,
 }: CustomersPageProps) {
   const t = useTranslations("app.CustomersPage");
@@ -108,7 +108,7 @@ export function CustomersPage({
                 }
               />
             </ToolbarMobileBottom>
-            <CustomersServerContainer
+            <CustomersContainer
               page={page}
               pageSize={pageSize}
               sort={sort}

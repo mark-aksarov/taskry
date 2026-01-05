@@ -1,8 +1,8 @@
 import { ProjectDetailPage } from "./ProjectDetailPage";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
-import { ProjectDetailFullServerContainer } from "@/components/projects/ProjectDetailFullServerContainer";
-import { ProjectDetailFormServerContainer } from "@/components/projects/ProjectDetailFormServerContainer";
-import { ProjectDetailCardHeadingServerContainer } from "@/components/projects/ProjectDetailCardHeadingServerContainer";
+import { ProjectDetailFormContainer } from "@/components/projects/ProjectDetailFormContainer";
+import { ProjectDetailFullContainer } from "@/components/projects/ProjectDetailFullContainer";
+import { ProjectDetailCardHeadingContainer } from "@/components/projects/ProjectDetailCardHeadingContainer";
 
 export default async function AppProjectDetailPage({
   params,
@@ -16,11 +16,9 @@ export default async function AppProjectDetailPage({
   return (
     <ProjectDetailPage
       id={Number(id)}
-      ProjectDetailCardHeadingServerContainer={
-        ProjectDetailCardHeadingServerContainer
-      }
-      ProjectDetailContainer={ProjectDetailFullServerContainer}
-      ProjectDetailFormContainer={ProjectDetailFormServerContainer}
+      ProjectDetailCardHeadingContainer={ProjectDetailCardHeadingContainer}
+      ProjectDetailContainer={ProjectDetailFullContainer}
+      ProjectDetailFormContainer={ProjectDetailFormContainer}
     />
   );
 }

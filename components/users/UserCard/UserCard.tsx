@@ -9,6 +9,7 @@ interface UserCardProps {
 export function UserCard({ className, children }: UserCardProps) {
   return (
     <Card
+      data-test="user-card"
       className={twMerge(
         "m-auto flex max-h-full min-h-[500px] p-0 max-2xl:w-full max-md:hidden 2xl:w-[1024px]",
         className,

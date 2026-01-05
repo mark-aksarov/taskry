@@ -6,11 +6,11 @@ import { canCreateTask, canDeleteTask } from "@/lib/data/user/user.dal";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { TeamProfileTasksPageEmpty } from "./TeamProfileTasksPageEmpty";
 import { updateTaskStatuses } from "@/lib/actions/task/updateTaskStatuses";
-import { UserTasksServerContainer } from "@/components/users/UserTasksServerContainer";
-import { UserHeaderServerContainer } from "@/components/users/UserHeaderServerContainer";
-import { NewTaskFormServerContainer } from "@/components/tasks/NewTaskFormServerContainer";
-import { EditTaskFormClientContainer } from "@/components/tasks/EditTaskFormClientContainer";
-import { EditTaskFormClientContainerProvider } from "@/components/tasks/EditTaskFormClientContainerContext";
+import { UserTasksContainer } from "@/components/users/UserTasksContainer";
+import { UserHeaderContainer } from "@/components/users/UserHeaderContainer";
+import { NewTaskFormContainer } from "@/components/tasks/NewTaskFormContainer";
+import { EditTaskFormContainer } from "@/components/tasks/EditTaskFormContainer";
+import { EditTaskFormContainerProvider } from "@/components/tasks/EditTaskFormContainerContext";
 
 const searchParamsSchema = z.object({
   page: z.coerce.number().int().positive().catch(1),
@@ -41,8 +41,8 @@ export default async function AppProfileTasksPage({
     return (
       <TeamProfileTasksPageEmpty
         userId={id}
-        NewTaskFormContainer={NewTaskFormServerContainer}
-        UserHeaderContainer={UserHeaderServerContainer}
+        NewTaskFormContainer={NewTaskFormContainer}
+        UserHeaderContainer={UserHeaderContainer}
       />
     );
 
@@ -50,7 +50,7 @@ export default async function AppProfileTasksPage({
   const canDelete = await canDeleteTask();
 
   return (
-    <EditTaskFormClientContainerProvider value={EditTaskFormClientContainer}>
+    <EditTaskFormContainerProvider value={EditTaskFormContainer}>
       <TeamProfileTasksPage
         userId={id}
         page={page}
@@ -58,12 +58,12 @@ export default async function AppProfileTasksPage({
         sort={sort}
         canCreateTask={canCreate}
         canDeleteTask={canDelete}
-        UserTasksContainer={UserTasksServerContainer}
-        UserHeaderContainer={UserHeaderServerContainer}
-        NewTaskFormContainer={NewTaskFormServerContainer}
+        UserTasksContainer={UserTasksContainer}
+        UserHeaderContainer={UserHeaderContainer}
+        NewTaskFormContainer={NewTaskFormContainer}
         deleteTasksAction={deleteTasks}
         updateTasksStatusesAction={updateTaskStatuses}
       />
-    </EditTaskFormClientContainerProvider>
+    </EditTaskFormContainerProvider>
   );
 }

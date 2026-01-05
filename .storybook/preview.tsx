@@ -10,16 +10,16 @@ import { MINIMAL_VIEWPORTS } from "storybook/viewport";
 import { useRouter, useSearchParams } from "next/navigation";
 import { withThemeByDataAttribute } from "@storybook/addon-themes";
 import { SelectionProvider } from "../components/common/SelectionContext";
-import { withUserDetail } from "../components/users/UserDetailClientContainer/decorators";
-import { withTaskComments } from "../components/tasks/TaskCommentsClientContainer/decorators";
-import { withCustomerDetail } from "../components/customer/CustomerDetailClientContainer/decorators";
-import { withEditTaskForm } from "../components/tasks/EditTaskFormClientContainerContext/decorators";
-import { withProjectComments } from "../components/projects/ProjectCommentsClientContainer/decorators";
-import { withTaskDetailCompact } from "../components/tasks/TaskDetailCompactClientContainer/decorators";
-import { withEditProjectForm } from "../components/projects/EditProjectFormClientContainerContext/decorators";
-import { withEditCustomerForm } from "../components/customer/EditCustomerFormClientContainerContext/decorators";
-import { withProjectDetailCompact } from "../components/projects/ProjectDetailCompactClientContainer/decorators";
-import { withNotificationModalContent } from "../components/notifications/NotificationModalContentClientContainer/decorators";
+import { withUserDetail } from "../components/users/UserDetailContainer/decorators";
+import { withTaskComments } from "../components/tasks/TaskCommentsContainer/decorators";
+import { withCustomerDetail } from "../components/customer/CustomerDetailContainer/decorators";
+import { withEditTaskForm } from "../components/tasks/EditTaskFormContainerContext/decorators";
+import { withProjectComments } from "../components/projects/ProjectCommentsContainer/decorators";
+import { withTaskDetailCompact } from "../components/tasks/TaskDetailCompactContainer/decorators";
+import { withEditProjectForm } from "../components/projects/EditProjectFormContainerContext/decorators";
+import { withEditCustomerForm } from "../components/customer/EditCustomerFormContainerContext/decorators";
+import { withProjectDetailCompact } from "../components/projects/ProjectDetailCompactContainer/decorators";
+import { withNotificationModalContent } from "../components/notifications/NotificationModalContentContainer/decorators";
 
 export const globalTypes = {
   locale: {

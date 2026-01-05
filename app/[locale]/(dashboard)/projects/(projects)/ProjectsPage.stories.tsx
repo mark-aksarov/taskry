@@ -46,7 +46,7 @@ export const Default: Story = {
     ProjectFiltersFormContainer: () => (
       <ProjectFiltersForm {...ProjectFiltersFormStory.args} />
     ),
-    ProjectsServerContainer: () => (
+    ProjectsContainer: () => (
       <ViewModeLayout
         list={<ProjectList {...ProjectListStory.args} />}
         grid={<ProjectGrid {...ProjectGridStory.args} />}

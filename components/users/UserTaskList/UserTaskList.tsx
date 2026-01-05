@@ -9,6 +9,11 @@ export function UserTaskList({
   children: React.ReactNode;
 }) {
   return (
-    <List className={twMerge("md:gap-0 md:px-6", className)}>{children}</List>
+    <List
+      data-test="user-task-list"
+      className={twMerge("md:gap-0 md:px-6", className)}
+    >
+      {children}
+    </List>
   );
 }

@@ -8,7 +8,7 @@ import { useOverlayTrigger } from "react-aria";
 import { useOverlayTriggerState } from "react-stately";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withUserDetailSkeleton } from "@/components/users/UserDetailClientContainer/decorators";
+import { withUserDetailSkeleton } from "@/components/users/UserDetailContainer/decorators";
 
 const meta = {
   title: "components/users/UserDetailBottomSheet",

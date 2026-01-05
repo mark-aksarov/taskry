@@ -14,15 +14,13 @@ import {
 import { useTranslations } from "next-intl";
 import { Suspense, useContext } from "react";
 import { PersonHeaderSkeleton } from "@/components/common/PersonHeader";
+import { CustomerDetailContainerContext } from "../CustomerDetailContainer";
 import { CustomerDetailSkeleton } from "@/components/customer/CustomerDetail";
-import { CustomerDetailClientContainerContext } from "../CustomerDetailClientContainer";
 
 export function CustomerDetailModal({ customerId }: { customerId: number }) {
   const t = useTranslations("customers.CustomerDetailModal");
 
-  const CustomerDetailClientContainer = useContext(
-    CustomerDetailClientContainerContext,
-  );
+  const CustomerDetailContainer = useContext(CustomerDetailContainerContext);
 
   return (
     <Modal isDismissable className="w-[600px]">
@@ -40,7 +38,7 @@ export function CustomerDetailModal({ customerId }: { customerId: number }) {
               </div>
             }
           >
-            <CustomerDetailClientContainer customerId={customerId} />
+            <CustomerDetailContainer customerId={customerId} />
           </Suspense>
         </DialogBody>
         <DialogFooter>

@@ -18,13 +18,13 @@ import { ProfileNavigationDesktop } from "@/components/users/ProfileNavigationDe
 
 interface ProfilePageProps {
   userId: string;
-  UserDetailContainer: React.ComponentType<{ userId: string }>;
+  ProfileDetailContainer: React.ComponentType<{ userId: string }>;
   UserHeaderContainer: React.ComponentType<{ userId: string }>;
 }
 
 export function ProfilePage({
   userId,
-  UserDetailContainer,
+  ProfileDetailContainer,
   UserHeaderContainer,
 }: ProfilePageProps) {
   const t = useTranslations("app.ProfilePage");
@@ -34,7 +34,7 @@ export function ProfilePage({
       <UserDetailCard
         profileDetail={
           <Suspense fallback={<UserDetailSkeleton />}>
-            <UserDetailContainer userId={userId} />
+            <ProfileDetailContainer userId={userId} />
           </Suspense>
         }
         profileHeader={
@@ -66,7 +66,7 @@ export function ProfilePage({
 
         <Card className="flex flex-col gap-6">
           <Suspense fallback={<UserDetailSkeleton />}>
-            <UserDetailContainer userId={userId} />
+            <ProfileDetailContainer userId={userId} />
           </Suspense>
         </Card>
       </PageGrid>

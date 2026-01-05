@@ -14,7 +14,7 @@ import { useTranslations } from "next-intl";
 import { Suspense, useContext } from "react";
 import { OverlayTriggerState } from "react-stately";
 import { ProjectDetailCompactSkeleton } from "../ProjectDetailCompact";
-import { ProjectDetailCompactClientContainerContext } from "../ProjectDetailCompactClientContainer";
+import { ProjectDetailCompactContainerContext } from "../ProjectDetailCompactContainer";
 
 export interface ProjectDetailBottomSheetProps {
   projectId: number;
@@ -28,7 +28,7 @@ export function ProjectDetailBottomSheet({
   const t = useTranslations("projects.ProjectDetailBottomSheet");
 
   const ProjectDetailContainer = useContext(
-    ProjectDetailCompactClientContainerContext,
+    ProjectDetailCompactContainerContext,
   );
 
   return (

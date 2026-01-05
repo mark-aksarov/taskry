@@ -1,14 +1,14 @@
 import { z } from "zod";
 import { DashboardPage } from "./DashboardPage";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
-import { NewTaskFormServerContainer } from "@/components/tasks/NewTaskFormServerContainer";
-import { EditTaskFormClientContainer } from "@/components/tasks/EditTaskFormClientContainer";
-import { AssignedTasksServerContainer } from "@/components/tasks/AssignedTasksServerContainer";
-import { TotalTasksCardServerContainer } from "@/components/tasks/TotalTasksCardServerContainer";
-import { TotalUsersCardServerContainer } from "@/components/users/TotalUsersCardServerContainer";
-import { TotalProjectsCardServerContainer } from "@/components/projects/TotalProjectsCardServerContainer";
-import { TotalCustomersCardServerContainer } from "@/components/customer/TotalCustomersCardServerContainer";
-import { EditTaskFormClientContainerProvider } from "@/components/tasks/EditTaskFormClientContainerContext";
+import { NewTaskFormContainer } from "@/components/tasks/NewTaskFormContainer";
+import { EditTaskFormContainer } from "@/components/tasks/EditTaskFormContainer";
+import { AssignedTasksContainer } from "@/components/tasks/AssignedTasksContainer";
+import { TotalTasksCardContainer } from "@/components/tasks/TotalTasksCardContainer";
+import { TotalUsersCardContainer } from "@/components/users/TotalUsersCardContainer";
+import { TotalProjectsCardContainer } from "@/components/projects/TotalProjectsCardContainer";
+import { TotalCustomersCardContainer } from "@/components/customer/TotalCustomersCardContainer";
+import { EditTaskFormContainerProvider } from "@/components/tasks/EditTaskFormContainerContext";
 
 const searchParamsSchema = z.object({
   page: z.coerce.number().int().positive().catch(1),
@@ -28,17 +28,17 @@ export default async function AppDashboardPage({
   const { page, pageSize } = searchParamsSchema.parse(rawParams);
 
   return (
-    <EditTaskFormClientContainerProvider value={EditTaskFormClientContainer}>
+    <EditTaskFormContainerProvider value={EditTaskFormContainer}>
       <DashboardPage
         page={page}
         pageSize={pageSize}
-        NewTaskFormContainer={NewTaskFormServerContainer}
-        TotalProjectsCardContainer={TotalProjectsCardServerContainer}
-        TotalTasksCardContainer={TotalTasksCardServerContainer}
-        TotalUsersCardContainer={TotalUsersCardServerContainer}
-        TotalCustomersCardContainer={TotalCustomersCardServerContainer}
-        AssignedTasksContainer={AssignedTasksServerContainer}
+        NewTaskFormContainer={NewTaskFormContainer}
+        TotalProjectsCardContainer={TotalProjectsCardContainer}
+        TotalTasksCardContainer={TotalTasksCardContainer}
+        TotalUsersCardContainer={TotalUsersCardContainer}
+        TotalCustomersCardContainer={TotalCustomersCardContainer}
+        AssignedTasksContainer={AssignedTasksContainer}
       />
-    </EditTaskFormClientContainerProvider>
+    </EditTaskFormContainerProvider>
   );
 }

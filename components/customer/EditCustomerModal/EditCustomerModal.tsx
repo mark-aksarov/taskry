@@ -5,7 +5,7 @@ import { ModalProps } from "@/components/ui";
 import { Suspense, useContext } from "react";
 import { CustomerFormBaseSkeleton } from "../CustomerFormBase";
 import { FormBaseModal } from "@/components/common/FormBaseModal";
-import { EditCustomerFormClientContainerContext } from "../EditCustomerFormClientContainerContext";
+import { EditCustomerFormContainerContext } from "../EditCustomerFormContainerContext";
 
 interface EditCustomerModalProps
   extends Pick<ModalProps, "isOpen" | "onOpenChange"> {
@@ -18,13 +18,13 @@ export function EditCustomerModal({
 }: EditCustomerModalProps) {
   const t = useTranslations("customers.EditCustomerModal");
 
-  const EditCustomerFormClientContainer = useContext(
-    EditCustomerFormClientContainerContext,
+  const EditCustomerFormContainer = useContext(
+    EditCustomerFormContainerContext,
   );
 
-  if (!EditCustomerFormClientContainer) {
+  if (!EditCustomerFormContainer) {
     throw new Error(
-      "EditCustomerModal must be used within a EditCustomerFormClientProvider",
+      "EditCustomerModal must be used within a EditCustomerFormProvider",
     );
   }
 
@@ -35,7 +35,7 @@ export function EditCustomerModal({
       submitButtonLabel={t("submitButtonLabel")}
       form={
         <Suspense fallback={<CustomerFormBaseSkeleton />}>
-          <EditCustomerFormClientContainer customerId={customerId} />
+          <EditCustomerFormContainer customerId={customerId} />
         </Suspense>
       }
       {...props}
