@@ -4,6 +4,7 @@ import {
 } from "@/components/layout/GlobalContainerContext";
 
 import { z } from "zod";
+import { Suspense } from "react";
 import { TasksPage } from "./TasksPage";
 import { TasksPageEmpty } from "./TasksPageEmpty";
 import { arrayParam } from "@/lib/utils/arrayParam";
@@ -11,9 +12,11 @@ import { TaskStatus } from "@/generated/prisma/enums";
 import { getTaskCount } from "@/lib/data/task/task.dal";
 import { deleteTasks } from "@/lib/actions/task/deleteTasks";
 import { TasksContainer } from "@/components/tasks/TasksContainer";
+import { TaskFormBaseSkeleton } from "@/components/tasks/TaskFormBase";
 import { canCreateTask, canDeleteTask } from "@/lib/data/user/user.dal";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { updateTaskStatuses } from "@/lib/actions/task/updateTaskStatuses";
+import { TaskFiltersFormSkeleton } from "@/components/tasks/TaskFiltersForm";
 import { UserDetailContainer } from "@/components/users/UserDetailContainer";
 import { NewTaskFormContainer } from "@/components/tasks/NewTaskFormContainer";
 import { TaskCommentsContainer } from "@/components/tasks/TaskCommentsContainer";
@@ -61,7 +64,15 @@ export default async function AppTasksPage({
   const taskCount = await getTaskCount();
 
   if (!taskCount) {
-    return <TasksPageEmpty NewTaskFormContainer={NewTaskFormContainer} />;
+    return (
+      <TasksPageEmpty
+        newTaskFormContainer={
+          <Suspense fallback={<TaskFormBaseSkeleton />}>
+            <NewTaskFormContainer />
+          </Suspense>
+        }
+      />
+    );
   }
 
   const canCreate = await canCreateTask();
@@ -70,15 +81,26 @@ export default async function AppTasksPage({
   return (
     <GlobalContainerProvider value={context}>
       <TasksPage
-        page={page}
-        pageSize={pageSize}
-        sort={sort}
-        filters={filters}
         canCreateTask={canCreate}
         canDeleteTask={canDelete}
-        TaskFiltersFormContainer={TaskFiltersFormContainer}
-        NewTaskFormContainer={NewTaskFormContainer}
-        TasksContainer={TasksContainer}
+        taskFiltersFormContainer={
+          <Suspense fallback={<TaskFiltersFormSkeleton />}>
+            <TaskFiltersFormContainer filters={filters} />
+          </Suspense>
+        }
+        newTaskFormContainer={
+          <Suspense fallback={<TaskFormBaseSkeleton />}>
+            <NewTaskFormContainer />
+          </Suspense>
+        }
+        tasksContainer={
+          <TasksContainer
+            page={page}
+            pageSize={pageSize}
+            sort={sort}
+            filters={filters}
+          />
+        }
         deleteTasksAction={deleteTasks}
         updateTasksStatusesAction={updateTaskStatuses}
         createTaskCategoryAction={createTaskCategory}

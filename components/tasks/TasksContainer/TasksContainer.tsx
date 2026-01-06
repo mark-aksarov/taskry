@@ -4,6 +4,11 @@ import {
   canUpdateTaskStatus,
 } from "@/lib/data/user/user.dal";
 
+import {
+  EntityContainerPagination,
+  EntityPaginationProvider,
+} from "@/components/common/EntityContainerPagination";
+
 import { TaskList } from "../TaskList";
 import { TaskGrid } from "../TaskGrid";
 import { TaskFilters } from "@/lib/types";
@@ -12,7 +17,6 @@ import { TaskGridItem } from "../TaskGridItem";
 import { getTaskCount } from "@/lib/data/task/task.dal";
 import { getTaskList } from "@/lib/data/task/task.service";
 import { TaskListItemDTO } from "@/lib/data/task/task.dto";
-import { Pagination } from "@/components/common/Pagination";
 import { deleteTasks } from "@/lib/actions/task/deleteTasks";
 import { ViewModeLayout } from "@/components/common/ViewMode";
 import { updateTaskStatuses } from "@/lib/actions/task/updateTaskStatuses";
@@ -33,25 +37,6 @@ export async function TasksContainer({
   const tasks = await getTaskList({ page, pageSize, sort, filters });
   const count = await getTaskCount(filters);
 
-  const getCommonProps = (task: TaskListItemDTO) => ({
-    id: task.id,
-    title: task.title,
-    deadline: task.deadline,
-    assignee: task.assignee,
-    status: task.status,
-    commentsCount: task.commentsCount,
-    subtasksTotal: task.subtasks.total,
-  });
-
-  const totalPages = Math.ceil(count / pageSize);
-
-  const paginationProps = {
-    page,
-    totalPages,
-    pageSize,
-    baseUrl: "/tasks",
-  };
-
   const canDelete = await canDeleteTask();
   const canUpdate = await canUpdateTask();
 
@@ -68,8 +53,18 @@ export async function TasksContainer({
     }),
   );
 
+  const getCommonProps = (task: TaskListItemDTO) => ({
+    id: task.id,
+    title: task.title,
+    deadline: task.deadline,
+    assignee: task.assignee,
+    status: task.status,
+    commentsCount: task.commentsCount,
+    subtasksTotal: task.subtasks.total,
+  });
+
   return (
-    <>
+    <EntityPaginationProvider>
       <ViewModeLayout
         list={
           <TaskList>
@@ -109,16 +104,12 @@ export async function TasksContainer({
           </TaskGrid>
         }
       />
-      {totalPages > 1 && (
-        <div className="flex justify-center">
-          <Pagination
-            {...paginationProps}
-            size="large"
-            className="max-md:hidden"
-          />
-          <Pagination {...paginationProps} className="md:hidden" />
-        </div>
-      )}
-    </>
+
+      <EntityContainerPagination
+        page={page}
+        totalPages={Math.ceil(count / pageSize)}
+        pageSize={pageSize}
+      />
+    </EntityPaginationProvider>
   );
 }

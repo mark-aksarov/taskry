@@ -19,33 +19,20 @@ import {
   UpdateTaskStatusesPayload,
 } from "@/lib/actions/types";
 
-import { Suspense } from "react";
 import { useTranslations } from "next-intl";
 import { PageGrid } from "@/components/common/PageGrid";
 import { PageContainer } from "@/components/common/PageContainer";
-import { TaskFormBaseSkeleton } from "@/components/tasks/TaskFormBase";
 import { SelectionProvider } from "@/components/common/SelectionContext";
 import { NewTaskModalTrigger } from "@/components/tasks/NewTaskModalTrigger";
 import { TaskToolbarSortingMenuTrigger } from "@/components/tasks/TaskToolbarSortingMenuTrigger";
 import { TaskToolbarActionsMenuTrigger } from "@/components/tasks/TaskToolbarActionsMenuTrigger";
 
 interface UserTasksPageLayoutProps {
-  userId: string;
-  page: number;
-  pageSize: number;
-  sort: string;
-  baseUrl: string;
   canCreateTask: boolean;
   canDeleteTask: boolean;
-  UserTasksContainer: React.ComponentType<{
-    page: number;
-    pageSize: number;
-    sort: string;
-    userId: string;
-    baseUrl: string;
-  }>;
-  UserHeaderContainer: React.ComponentType<{ userId: string }>;
-  NewTaskFormContainer: React.ComponentType;
+  userTasksContainer: React.ReactNode;
+  userHeaderContainer: React.ReactNode;
+  newTaskFormContainer: React.ReactNode;
   navigationDesktop: React.ReactNode;
   navigationMobile: React.ReactNode;
   deleteTasksAction: ActionFn<ActionState, DeleteTasksPayload>;
@@ -53,16 +40,11 @@ interface UserTasksPageLayoutProps {
 }
 
 export function UserTasksPageLayout({
-  userId,
-  page,
-  pageSize,
-  sort,
-  baseUrl,
   canCreateTask,
   canDeleteTask,
-  UserTasksContainer,
-  UserHeaderContainer,
-  NewTaskFormContainer,
+  userTasksContainer,
+  userHeaderContainer,
+  newTaskFormContainer,
   navigationDesktop,
   navigationMobile,
   deleteTasksAction,
@@ -85,27 +67,15 @@ export function UserTasksPageLayout({
                   updateStatusAction={updateTasksStatusesAction}
                 />
                 {canCreateTask && (
-                  <NewTaskModalTrigger
-                    newTaskForm={
-                      <Suspense fallback={<TaskFormBaseSkeleton />}>
-                        <NewTaskFormContainer />
-                      </Suspense>
-                    }
-                  />
+                  <NewTaskModalTrigger newTaskForm={newTaskFormContainer} />
                 )}
               </div>
             </UserCardHeader>
-            <UserTasksContainer
-              userId={userId}
-              page={page}
-              pageSize={pageSize}
-              sort={sort}
-              baseUrl={baseUrl}
-            />
+            {userTasksContainer}
           </UserCardLeft>
 
           <UserCardRight>
-            <UserHeaderContainer userId={userId} />
+            {userHeaderContainer}
             {navigationDesktop}
           </UserCardRight>
         </UserCard>
@@ -126,17 +96,10 @@ export function UserTasksPageLayout({
           <ToolbarMobileBottom>
             {navigationMobile}
             {canCreateTask && (
-              <NewTaskModalTrigger newTaskForm={<NewTaskFormContainer />} />
+              <NewTaskModalTrigger newTaskForm={newTaskFormContainer} />
             )}
           </ToolbarMobileBottom>
-
-          <UserTasksContainer
-            userId={userId}
-            page={page}
-            pageSize={pageSize}
-            sort={sort}
-            baseUrl={baseUrl}
-          />
+          {userTasksContainer}
         </PageGrid>
       </PageContainer>
     </SelectionProvider>

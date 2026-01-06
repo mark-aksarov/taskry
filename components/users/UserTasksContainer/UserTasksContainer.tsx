@@ -1,15 +1,20 @@
-import { UserTaskList } from "../UserTaskList";
-import { UserTaskListItem } from "../UserTaskListItem";
-import { getTaskCount } from "@/lib/data/task/task.dal";
-import { getTaskList } from "@/lib/data/task/task.service";
-import { deleteTasks } from "@/lib/actions/task/deleteTasks";
-import { Pagination } from "@/components/common/Pagination";
-import { updateTaskStatuses } from "@/lib/actions/task/updateTaskStatuses";
 import {
   canDeleteTask,
   canUpdateTask,
   canUpdateTaskStatus,
 } from "@/lib/data/user/user.dal";
+
+import {
+  EntityContainerPagination,
+  EntityPaginationProvider,
+} from "@/components/common/EntityContainerPagination";
+
+import { UserTaskList } from "../UserTaskList";
+import { UserTaskListItem } from "../UserTaskListItem";
+import { getTaskCount } from "@/lib/data/task/task.dal";
+import { getTaskList } from "@/lib/data/task/task.service";
+import { deleteTasks } from "@/lib/actions/task/deleteTasks";
+import { updateTaskStatuses } from "@/lib/actions/task/updateTaskStatuses";
 
 interface UserTasksContainerProps {
   page: number;
@@ -40,14 +45,6 @@ export async function UserTasksContainer({
   });
 
   const count = await getTaskCount(filters);
-  const totalPages = Math.ceil(count / pageSize);
-
-  const paginationProps = {
-    page,
-    totalPages,
-    pageSize,
-    baseUrl,
-  };
 
   const canDelete = await canDeleteTask();
   const canUpdate = await canUpdateTask();
@@ -66,7 +63,7 @@ export async function UserTasksContainer({
   );
 
   return (
-    <>
+    <EntityPaginationProvider>
       <UserTaskList>
         {tasksWithPermissions.length &&
           tasksWithPermissions.map((task) => (
@@ -87,16 +84,11 @@ export async function UserTasksContainer({
           ))}
       </UserTaskList>
 
-      {totalPages > 1 && (
-        <div className="flex justify-center py-4">
-          <Pagination
-            {...paginationProps}
-            size="large"
-            className="max-md:hidden"
-          />
-          <Pagination {...paginationProps} className="md:hidden" />
-        </div>
-      )}
-    </>
+      <EntityContainerPagination
+        page={page}
+        totalPages={Math.ceil(count / pageSize)}
+        pageSize={pageSize}
+      />
+    </EntityPaginationProvider>
   );
 }

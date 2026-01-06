@@ -31,30 +31,19 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    page: 1,
-    pageSize: 10,
-    sort: "title",
-    filters: {
-      category: [],
-      customer: [],
-      user: [],
-      status: [],
-    },
     createProjectCategoryAction: fn(),
     deleteProjectsAction: fn(),
     updateProjectStatusesAction: fn(),
-    ProjectFiltersFormContainer: () => (
+    projectFiltersFormContainer: (
       <ProjectFiltersForm {...ProjectFiltersFormStory.args} />
     ),
-    ProjectsContainer: () => (
+    projectsContainer: (
       <ViewModeLayout
         list={<ProjectList {...ProjectListStory.args} />}
         grid={<ProjectGrid {...ProjectGridStory.args} />}
       />
     ),
-    NewProjectFormContainer: () => (
-      <NewProjectForm {...ProjectFormBaseStory.args} />
-    ),
+    newProjectFormContainer: <NewProjectForm {...ProjectFormBaseStory.args} />,
   },
 };
 
@@ -67,9 +56,9 @@ export const WithNoProjects: Story = {
   args: { ...Default.args },
   render: () => (
     <ProjectsPageEmpty
-      NewProjectFormContainer={() => (
+      newProjectFormContainer={
         <NewProjectForm {...ProjectFormBaseStory.args} />
-      )}
+      }
     />
   ),
 };

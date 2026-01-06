@@ -8,11 +8,11 @@ import { useTranslations } from "next-intl";
 import { NewTaskModal } from "@/components/tasks/NewTaskModal";
 
 interface UserTasksEmptySectionProps {
-  NewTaskFormContainer: React.ComponentType;
+  newTaskFormContainer: React.ReactNode;
 }
 
 export function UserTasksEmptySection({
-  NewTaskFormContainer,
+  newTaskFormContainer,
 }: UserTasksEmptySectionProps) {
   const t = useTranslations("users.UserTasksEmptySection");
 
@@ -24,9 +24,7 @@ export function UserTasksEmptySection({
         </EmptySectionHeading>
         <EmptySectionDescription>{t("description")}</EmptySectionDescription>
         <EmptySectionButton
-          createNewModal={
-            <NewTaskModal newTaskForm={<NewTaskFormContainer />} />
-          }
+          createNewModal={<NewTaskModal newTaskForm={newTaskFormContainer} />}
         >
           {t("editButtonLabel")}
         </EmptySectionButton>

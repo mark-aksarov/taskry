@@ -11,7 +11,7 @@ export function CustomerList({ children }: { children: React.ReactNode }) {
 
   if (isPending) {
     return (
-      <List>
+      <List data-test="customers-list">
         <Repeat
           items={Children.count(children)}
           renderItem={() => <CustomerListItemSkeleton />}

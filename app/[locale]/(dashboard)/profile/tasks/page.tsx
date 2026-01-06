@@ -4,20 +4,24 @@ import {
 } from "@/components/layout/GlobalContainerContext";
 
 import { z } from "zod";
+import { Suspense } from "react";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
-import { ProfileTasksPage } from "./ProfileTasksPage";
 import { getTaskCount } from "@/lib/data/task/task.dal";
 import { deleteTasks } from "@/lib/actions/task/deleteTasks";
 import { ProfileTasksPageEmpty } from "./ProfileTasksPageEmpty";
+import { TaskFormBaseSkeleton } from "@/components/tasks/TaskFormBase";
 import { canCreateTask, canDeleteTask } from "@/lib/data/user/user.dal";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { UserTasksContainer } from "@/components/users/UserTasksContainer";
 import { updateTaskStatuses } from "@/lib/actions/task/updateTaskStatuses";
 import { UserHeaderContainer } from "@/components/users/UserHeaderContainer";
+import { UserTasksPageLayout } from "@/components/users/UserTasksPageLayout";
 import { NewTaskFormContainer } from "@/components/tasks/NewTaskFormContainer";
 import { EditTaskFormContainer } from "@/components/tasks/EditTaskFormContainer";
 import { TaskCommentsContainer } from "@/components/tasks/TaskCommentsContainer";
+import { ProfileNavigationMobile } from "@/components/users/ProfileNavigationMobile";
+import { ProfileNavigationDesktop } from "@/components/users/ProfileNavigationDesktop";
 import { TaskDetailCompactContainer } from "@/components/tasks/TaskDetailCompactContainer";
 
 const searchParamsSchema = z.object({
@@ -57,8 +61,12 @@ export default async function AppProfileTasksPage({
     return (
       <ProfileTasksPageEmpty
         userId={userId}
-        NewTaskFormContainer={NewTaskFormContainer}
-        UserHeaderContainer={UserHeaderContainer}
+        newTaskFormContainer={
+          <Suspense fallback={<TaskFormBaseSkeleton />}>
+            <NewTaskFormContainer />
+          </Suspense>
+        }
+        userHeaderContainer={<UserHeaderContainer userId={userId} />}
       />
     );
 
@@ -67,18 +75,28 @@ export default async function AppProfileTasksPage({
 
   return (
     <GlobalContainerProvider value={context}>
-      <ProfileTasksPage
-        userId={userId}
-        page={page}
-        pageSize={pageSize}
-        sort={sort}
+      <UserTasksPageLayout
         canCreateTask={canCreate}
         canDeleteTask={canDelete}
-        UserTasksContainer={UserTasksContainer}
-        UserHeaderContainer={UserHeaderContainer}
-        NewTaskFormContainer={NewTaskFormContainer}
+        userTasksContainer={
+          <UserTasksContainer
+            userId={userId}
+            page={page}
+            pageSize={pageSize}
+            sort={sort}
+            baseUrl="/profile/tasks"
+          />
+        }
+        userHeaderContainer={<UserHeaderContainer userId={userId} />}
+        newTaskFormContainer={
+          <Suspense fallback={<TaskFormBaseSkeleton />}>
+            <NewTaskFormContainer />
+          </Suspense>
+        }
         deleteTasksAction={deleteTasks}
         updateTasksStatusesAction={updateTaskStatuses}
+        navigationDesktop={<ProfileNavigationDesktop />}
+        navigationMobile={<ProfileNavigationMobile />}
       />
     </GlobalContainerProvider>
   );

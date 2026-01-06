@@ -1,19 +1,19 @@
 import {
   EmptySection,
-  EmptySectionDescription,
-  EmptySectionHeading,
   EmptySectionButton,
+  EmptySectionHeading,
+  EmptySectionDescription,
 } from "@/components/common/EmptySection";
 import { useTranslations } from "next-intl";
 import { NewTaskModal } from "../NewTaskModal";
 import { Card } from "@/components/common/Card";
 
 interface AssignedTasksEmptyCardProps {
-  NewTaskFormContainer: React.ComponentType;
+  newTaskFormContainer: React.ReactNode;
 }
 
 export function AssignedTasksEmptyCard({
-  NewTaskFormContainer,
+  newTaskFormContainer,
 }: AssignedTasksEmptyCardProps) {
   const t = useTranslations("tasks.AssignedTasksEmptyCard");
 
@@ -26,9 +26,7 @@ export function AssignedTasksEmptyCard({
           </EmptySectionHeading>
           <EmptySectionDescription>{t("description")}</EmptySectionDescription>
           <EmptySectionButton
-            createNewModal={
-              <NewTaskModal newTaskForm={<NewTaskFormContainer />} />
-            }
+            createNewModal={<NewTaskModal newTaskForm={newTaskFormContainer} />}
           >
             {t("button")}
           </EmptySectionButton>

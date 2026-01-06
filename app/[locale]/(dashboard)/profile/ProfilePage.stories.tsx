@@ -31,9 +31,6 @@ const meta = {
   beforeEach: () => {
     mocked(usePathname).mockReturnValue("/profile");
   },
-  args: {
-    userId,
-  },
 } satisfies Meta<typeof ProfilePage>;
 
 export default meta;
@@ -41,24 +38,24 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    ProfileDetailContainer: () => <UserDetail {...UserDetailStory.args} />,
-    UserHeaderContainer: () => <PersonHeader {...PersonHeaderStory.args} />,
+    profileDetailContainer: <UserDetail {...UserDetailStory.args} />,
+    userHeaderContainer: <PersonHeader {...PersonHeaderStory.args} />,
   },
 } satisfies Story;
 
 export const Loading: Story = {
   args: {
-    ProfileDetailContainer: () => <UserDetailSkeleton />,
-    UserHeaderContainer: () => <PersonHeaderSkeleton />,
+    profileDetailContainer: <UserDetailSkeleton />,
+    userHeaderContainer: <PersonHeaderSkeleton />,
   },
 } satisfies Story;
 
 export const WithoutSomeData: Story = {
   args: {
-    ProfileDetailContainer: () => (
+    profileDetailContainer: (
       <UserDetail {...UserDetailWithoutSomeDataStory.args} />
     ),
-    UserHeaderContainer: () => (
+    userHeaderContainer: (
       <PersonHeader {...PersonHeaderWithoutImageUrlStory.args} />
     ),
   },

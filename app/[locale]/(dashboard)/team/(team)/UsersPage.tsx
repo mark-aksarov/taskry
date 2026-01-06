@@ -5,8 +5,6 @@ import {
   ToolbarMobileHeading,
 } from "@/components/common/Toolbar";
 
-import { Suspense } from "react";
-import { UserFilters } from "@/lib/types";
 import { useTranslations } from "next-intl";
 import { PageGrid } from "@/components/common/PageGrid";
 import { ViewModeProvider } from "@/components/common/ViewMode";
@@ -14,7 +12,6 @@ import { PageContainer } from "@/components/common/PageContainer";
 import { NewPositionForm } from "@/components/users/NewPositionForm";
 import { ViewModeToggleButtonGroup } from "@/components/common/ViewMode";
 import { SelectionProvider } from "@/components/common/SelectionContext";
-import { UserFiltersFormSkeleton } from "@/components/users/UserFiltersForm";
 import { ActionFn, ActionState, DeleteUsersPayload } from "@/lib/actions/types";
 import { UserToolbarActionsMenuTrigger } from "@/components/users/UserToolbarActionsMenuTrigger";
 import { UserToolbarSortingMenuTrigger } from "@/components/users/UserToolbarSortingMenuTrigger";
@@ -22,32 +19,17 @@ import { UserToolbarFiltersModalTrigger } from "@/components/users/UserToolbarFi
 import { UserToolbarCreateNewMenuTrigger } from "@/components/users/UserToolbarCreateNewMenuTrigger";
 
 interface UsersPageProps {
-  page: number;
-  pageSize: number;
-  sort: string;
-  filters: UserFilters;
   createPositionAction: ActionFn<ActionState, FormData>;
   deleteUsersAction: ActionFn<ActionState, DeleteUsersPayload>;
-  UserFiltersFormContainer: React.ComponentType<{
-    filters: UserFilters;
-  }>;
-  UsersContainer: React.ComponentType<{
-    page: number;
-    pageSize: number;
-    sort: string;
-    filters?: UserFilters;
-  }>;
+  userFiltersFormContainer: React.ReactNode;
+  usersContainer: React.ReactNode;
 }
 
 export function UsersPage({
-  page,
-  pageSize,
-  sort,
-  filters,
   createPositionAction,
   deleteUsersAction,
-  UserFiltersFormContainer,
-  UsersContainer,
+  userFiltersFormContainer,
+  usersContainer,
 }: UsersPageProps) {
   const t = useTranslations("app.UsersPage");
 
@@ -59,11 +41,7 @@ export function UsersPage({
             <ToolbarDesktop>
               <UserToolbarSortingMenuTrigger />
               <UserToolbarFiltersModalTrigger
-                filtersForm={
-                  <Suspense fallback={<UserFiltersFormSkeleton />}>
-                    <UserFiltersFormContainer filters={filters} />
-                  </Suspense>
-                }
+                filtersForm={userFiltersFormContainer}
               />
               <UserToolbarActionsMenuTrigger deleteAction={deleteUsersAction} />
               <ViewModeToggleButtonGroup className="ml-auto" />
@@ -79,11 +57,7 @@ export function UsersPage({
               <ToolbarMobileHeading>{t("heading")}</ToolbarMobileHeading>
               <UserToolbarSortingMenuTrigger />
               <UserToolbarFiltersModalTrigger
-                filtersForm={
-                  <Suspense fallback={<UserFiltersFormSkeleton />}>
-                    <UserFiltersFormContainer filters={filters} />
-                  </Suspense>
-                }
+                filtersForm={userFiltersFormContainer}
               />
               <UserToolbarActionsMenuTrigger deleteAction={deleteUsersAction} />
             </ToolbarMobileTop>
@@ -97,12 +71,7 @@ export function UsersPage({
                 }
               />
             </ToolbarMobileBottom>
-            <UsersContainer
-              page={page}
-              pageSize={pageSize}
-              sort={sort}
-              filters={filters}
-            />
+            {usersContainer}
           </SelectionProvider>
         </ViewModeProvider>
       </PageGrid>

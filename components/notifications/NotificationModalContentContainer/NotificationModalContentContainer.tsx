@@ -186,7 +186,6 @@ export function NotificationModalContentContainer() {
           <Pagination
             page={page}
             totalPages={totalPages}
-            pageSize={pageSize}
             onChange={(p) => setPage(p)}
             showPageItems={false}
           />

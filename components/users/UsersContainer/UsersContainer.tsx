@@ -1,3 +1,8 @@
+import {
+  EntityContainerPagination,
+  EntityPaginationProvider,
+} from "@/components/common/EntityContainerPagination";
+
 import { UserList } from "../UserList";
 import { UserGrid } from "../UserGrid";
 import { UserFilters } from "@/lib/types";
@@ -6,7 +11,6 @@ import { UserGridItem } from "../UserGridItem";
 import { getUserCount } from "@/lib/data/user/user.dal";
 import { getUserList } from "@/lib/data/user/user.service";
 import { UserListItemDTO } from "@/lib/data/user/user.dto";
-import { Pagination } from "@/components/common/Pagination";
 import { deleteUsers } from "@/lib/actions/user/deleteUsers";
 import { ViewModeLayout } from "@/components/common/ViewMode";
 
@@ -25,14 +29,6 @@ export async function UsersContainer({
 }: UsersContainerProps) {
   const users = await getUserList({ page, pageSize, sort, filters });
   const count = await getUserCount(filters);
-  const totalPages = Math.ceil(count / pageSize);
-
-  const paginationProps = {
-    page,
-    totalPages,
-    pageSize,
-    baseUrl: "/team",
-  };
 
   const getUserCommonProps = (user: UserListItemDTO) => ({
     id: user.id,
@@ -46,7 +42,7 @@ export async function UsersContainer({
   });
 
   return (
-    <>
+    <EntityPaginationProvider>
       <ViewModeLayout
         list={
           <UserList>
@@ -67,16 +63,12 @@ export async function UsersContainer({
           </UserGrid>
         }
       />
-      {totalPages > 1 && (
-        <div className="flex justify-center">
-          <Pagination
-            {...paginationProps}
-            size="large"
-            className="max-md:hidden"
-          />
-          <Pagination {...paginationProps} className="md:hidden" />
-        </div>
-      )}
-    </>
+
+      <EntityContainerPagination
+        page={page}
+        totalPages={Math.ceil(count / pageSize)}
+        pageSize={pageSize}
+      />
+    </EntityPaginationProvider>
   );
 }

@@ -30,16 +30,11 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    userId: "BKs42HvVDEZFoaJUmTqf1gTN0K8pUFjI",
-    page: 1,
-    pageSize: 10,
-    sort: "title",
-    baseUrl: "/profile/tasks",
     canCreateTask: true,
     canDeleteTask: true,
-    UserTasksContainer: () => <UserTaskList {...UserTaskListStory.args} />,
-    UserHeaderContainer: () => <PersonHeader {...PersonHeaderStory.args} />,
-    NewTaskFormContainer: () => <NewTaskForm {...TaskFormBaseStory.args} />,
+    userTasksContainer: <UserTaskList {...UserTaskListStory.args} />,
+    userHeaderContainer: <PersonHeader {...PersonHeaderStory.args} />,
+    newTaskFormContainer: <NewTaskForm {...TaskFormBaseStory.args} />,
     navigationDesktop: <ProfileNavigationDesktop />,
     navigationMobile: <ProfileNavigationMobile />,
     deleteTasksAction: fn(),
@@ -48,9 +43,9 @@ export const Default = {
 } satisfies Story;
 
 export const Loading = {
-  render: () => <UserTasksPageLoadingLayout {...Default.args} />,
+  render: <UserTasksPageLoadingLayout {...Default.args} />,
 };
 
 export const WithNoTasks = {
-  render: () => <UserTasksPageEmptyLayout {...Default.args} />,
+  render: <UserTasksPageEmptyLayout {...Default.args} />,
 };

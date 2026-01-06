@@ -10,26 +10,30 @@ import {
   AssignedTasksSectionHeading,
 } from "../AssignedTasks";
 
+import {
+  EntityContainerPagination,
+  EntityPaginationProvider,
+} from "@/components/common/EntityContainerPagination";
+
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import { TaskList } from "../TaskList";
 import { TaskListItem } from "../TaskListItem";
 import { getTaskCount } from "@/lib/data/task/task.dal";
 import { getTaskList } from "@/lib/data/task/task.service";
-import { Pagination } from "@/components/common/Pagination";
 import { deleteTasks } from "@/lib/actions/task/deleteTasks";
 import { updateTaskStatuses } from "@/lib/actions/task/updateTaskStatuses";
 
 interface AssignedTasksContainerProps {
   page: number;
   pageSize: number;
-  NewTaskFormContainer: React.ComponentType;
+  newTaskFormContainer: React.ReactNode;
 }
 
 export async function AssignedTasksContainer({
   page,
   pageSize,
-  NewTaskFormContainer,
+  newTaskFormContainer,
 }: AssignedTasksContainerProps) {
   const session = await auth.api.getSession({
     headers: await headers(),
@@ -57,19 +61,10 @@ export async function AssignedTasksContainer({
     return (
       <AssignedTasksSection>
         <AssignedTasksSectionHeading />
-        <AssignedTasksEmptyCard NewTaskFormContainer={NewTaskFormContainer} />
+        <AssignedTasksEmptyCard newTaskFormContainer={newTaskFormContainer} />
       </AssignedTasksSection>
     );
   }
-
-  const totalPages = Math.ceil(count / pageSize);
-
-  const paginationProps = {
-    page,
-    totalPages,
-    pageSize,
-    baseUrl: "/",
-  };
 
   const canDelete = await canDeleteTask();
   const canUpdate = await canUpdateTask();
@@ -88,7 +83,7 @@ export async function AssignedTasksContainer({
   );
 
   return (
-    <>
+    <EntityPaginationProvider>
       <AssignedTasksSection>
         <AssignedTasksSectionHeading />
         <TaskList>
@@ -112,16 +107,12 @@ export async function AssignedTasksContainer({
           ))}
         </TaskList>
       </AssignedTasksSection>
-      {totalPages > 1 && (
-        <div className="flex justify-center">
-          <Pagination
-            {...paginationProps}
-            size="large"
-            className="max-md:hidden"
-          />
-          <Pagination {...paginationProps} className="md:hidden" />
-        </div>
-      )}
-    </>
+
+      <EntityContainerPagination
+        page={page}
+        totalPages={Math.ceil(count / pageSize)}
+        pageSize={pageSize}
+      />
+    </EntityPaginationProvider>
   );
 }

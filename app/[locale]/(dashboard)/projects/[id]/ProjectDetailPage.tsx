@@ -2,29 +2,21 @@ import {
   ToolbarMobileTop,
   ToolbarMobileHeading,
 } from "@/components/common/Toolbar";
-import { Suspense } from "react";
+import { useTranslations } from "next-intl";
 import { PageGrid } from "@/components/common/PageGrid";
 import { PageContainer } from "@/components/common/PageContainer";
-import { DetailCardHeadingSkeleton } from "@/components/common/DetailCard";
 import { ProjectDetailCard } from "@/components/projects/ProjectDetailCard";
-import { ProjectDetailFormSkeleton } from "@/components/projects/ProjectDetailForm";
-import { ProjectDetailFullSkeleton } from "@/components/projects/ProjectDetailFull/ProjectDetailFullSkeleton";
-import { useTranslations } from "next-intl";
 
 interface ProjectDetailPageProps {
-  id: number;
-  ProjectDetailCardHeadingContainer: React.ComponentType<{ id: number }>;
-  ProjectDetailContainer: React.ComponentType<{
-    id: number;
-  }>;
-  ProjectDetailFormContainer: React.ComponentType;
+  projectDetailCardHeadingContainer: React.ReactNode;
+  projectDetailContainer: React.ReactNode;
+  projectDetailFormContainer: React.ReactNode;
 }
 
 export function ProjectDetailPage({
-  id,
-  ProjectDetailCardHeadingContainer,
-  ProjectDetailContainer,
-  ProjectDetailFormContainer,
+  projectDetailCardHeadingContainer,
+  projectDetailContainer,
+  projectDetailFormContainer,
 }: ProjectDetailPageProps) {
   const t = useTranslations("app.ProjectDetailPage");
 
@@ -35,21 +27,9 @@ export function ProjectDetailPage({
           <ToolbarMobileHeading>{t("heading")}</ToolbarMobileHeading>
         </ToolbarMobileTop>
         <ProjectDetailCard
-          projectDetailCardHeading={
-            <Suspense fallback={<DetailCardHeadingSkeleton />}>
-              <ProjectDetailCardHeadingContainer id={id} />
-            </Suspense>
-          }
-          projectDetail={
-            <Suspense fallback={<ProjectDetailFullSkeleton />}>
-              <ProjectDetailContainer id={id} />
-            </Suspense>
-          }
-          projectDetailForm={
-            <Suspense fallback={<ProjectDetailFormSkeleton />}>
-              <ProjectDetailFormContainer />
-            </Suspense>
-          }
+          projectDetailCardHeading={projectDetailCardHeadingContainer}
+          projectDetail={projectDetailContainer}
+          projectDetailForm={projectDetailFormContainer}
         />
       </PageGrid>
     </PageContainer>

@@ -29,39 +29,24 @@ import { ProjectToolbarFiltersModalTrigger } from "@/components/projects/Project
 import { ProjectToolbarCreateNewMenuTrigger } from "@/components/projects/ProjectToolbarCreateNewMenuTrigger";
 
 interface ProjectsPageProps {
-  page: number;
-  pageSize: number;
-  sort: string;
-  filters: ProjectFilters;
   createProjectCategoryAction: ActionFn<ActionState, FormData>;
   deleteProjectsAction: ActionFn<ActionState, DeleteProjectsPayload>;
   updateProjectStatusesAction: ActionFn<
     ActionState,
     UpdateProjectStatusesPayload
   >;
-  ProjectFiltersFormContainer: React.ComponentType<{
-    filters: ProjectFilters;
-  }>;
-  NewProjectFormContainer: React.ComponentType;
-  ProjectsContainer: React.ComponentType<{
-    page: number;
-    pageSize: number;
-    sort: string;
-    filters?: ProjectFilters;
-  }>;
+  projectFiltersFormContainer: React.ReactNode;
+  newProjectFormContainer: React.ReactNode;
+  projectsContainer: React.ReactNode;
 }
 
 export function ProjectsPage({
-  page,
-  pageSize,
-  sort,
-  filters,
   createProjectCategoryAction,
   deleteProjectsAction,
   updateProjectStatusesAction,
-  ProjectFiltersFormContainer,
-  NewProjectFormContainer,
-  ProjectsContainer,
+  projectFiltersFormContainer,
+  newProjectFormContainer,
+  projectsContainer,
 }: ProjectsPageProps) {
   const t = useTranslations("app.ProjectsPage");
 
@@ -73,11 +58,7 @@ export function ProjectsPage({
             <ToolbarDesktop>
               <ProjectToolbarSortingMenuTrigger />
               <ProjectToolbarFiltersModalTrigger
-                filtersForm={
-                  <Suspense fallback={<ProjectFiltersFormSkeleton />}>
-                    <ProjectFiltersFormContainer filters={filters} />
-                  </Suspense>
-                }
+                filtersForm={projectFiltersFormContainer}
               />
               <ProjectToolbarActionsMenuTrigger
                 deleteAction={deleteProjectsAction}
@@ -85,11 +66,7 @@ export function ProjectsPage({
               />
               <ViewModeToggleButtonGroup className="ml-auto" />
               <ProjectToolbarCreateNewMenuTrigger
-                newProjectForm={
-                  <Suspense fallback={<ProjectFormBaseSkeleton />}>
-                    <NewProjectFormContainer />
-                  </Suspense>
-                }
+                newProjectForm={newProjectFormContainer}
                 newProjectCategoryForm={
                   <NewProjectCategoryForm
                     formAction={createProjectCategoryAction}
@@ -102,11 +79,7 @@ export function ProjectsPage({
               <ToolbarMobileHeading>{t("heading")}</ToolbarMobileHeading>
               <ProjectToolbarSortingMenuTrigger />
               <ProjectToolbarFiltersModalTrigger
-                filtersForm={
-                  <Suspense fallback={<ProjectFiltersFormSkeleton />}>
-                    <ProjectFiltersFormContainer filters={filters} />
-                  </Suspense>
-                }
+                filtersForm={projectFiltersFormContainer}
               />
               <ProjectToolbarActionsMenuTrigger
                 deleteAction={deleteProjectsAction}
@@ -117,11 +90,7 @@ export function ProjectsPage({
             <ToolbarMobileBottom>
               <ViewModeToggleButtonGroup />
               <ProjectToolbarCreateNewMenuTrigger
-                newProjectForm={
-                  <Suspense fallback={<ProjectFormBaseSkeleton />}>
-                    <NewProjectFormContainer />
-                  </Suspense>
-                }
+                newProjectForm={newProjectFormContainer}
                 newProjectCategoryForm={
                   <NewProjectCategoryForm
                     formAction={createProjectCategoryAction}
@@ -130,12 +99,7 @@ export function ProjectsPage({
               />
             </ToolbarMobileBottom>
 
-            <ProjectsContainer
-              page={page}
-              pageSize={pageSize}
-              sort={sort}
-              filters={filters}
-            />
+            {projectsContainer}
           </SelectionProvider>
         </ViewModeProvider>
       </PageGrid>

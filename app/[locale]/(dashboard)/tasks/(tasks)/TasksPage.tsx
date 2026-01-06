@@ -12,16 +12,12 @@ import {
   ToolbarMobileHeading,
 } from "@/components/common/Toolbar";
 
-import { Suspense } from "react";
-import { TaskFilters } from "@/lib/types";
 import { useTranslations } from "next-intl";
 import { PageGrid } from "@/components/common/PageGrid";
 import { ViewModeProvider } from "@/components/common/ViewMode";
 import { PageContainer } from "@/components/common/PageContainer";
-import { TaskFormBaseSkeleton } from "@/components/tasks/TaskFormBase";
 import { ViewModeToggleButtonGroup } from "@/components/common/ViewMode";
 import { SelectionProvider } from "@/components/common/SelectionContext";
-import { TaskFiltersFormSkeleton } from "@/components/tasks/TaskFiltersForm";
 import { NewTaskCategoryForm } from "@/components/tasks/NewTaskCategoryForm";
 import { TaskToolbarSortingMenuTrigger } from "@/components/tasks/TaskToolbarSortingMenuTrigger";
 import { TaskToolbarActionsMenuTrigger } from "@/components/tasks/TaskToolbarActionsMenuTrigger";
@@ -29,37 +25,22 @@ import { TaskToolbarFiltersModalTrigger } from "@/components/tasks/TaskToolbarFi
 import { TaskToolbarCreateNewMenuTrigger } from "@/components/tasks/TaskToolbarCreateNewMenuTrigger";
 
 interface TasksPageProps {
-  page: number;
-  pageSize: number;
-  sort: string;
-  filters: TaskFilters;
   canCreateTask: boolean;
   canDeleteTask: boolean;
-  TaskFiltersFormContainer: React.ComponentType<{
-    filters: TaskFilters;
-  }>;
-  NewTaskFormContainer: React.ComponentType;
-  TasksContainer: React.ComponentType<{
-    page: number;
-    pageSize: number;
-    sort: string;
-    filters: TaskFilters;
-  }>;
+  taskFiltersFormContainer: React.ReactNode;
+  newTaskFormContainer: React.ReactNode;
+  tasksContainer: React.ReactNode;
   deleteTasksAction: ActionFn<ActionState, DeleteTasksPayload>;
   updateTasksStatusesAction: ActionFn<ActionState, UpdateTaskStatusesPayload>;
   createTaskCategoryAction: ActionFn<ActionState, FormData>;
 }
 
 export function TasksPage({
-  page,
-  pageSize,
-  sort,
-  filters,
   canCreateTask,
   canDeleteTask,
-  TaskFiltersFormContainer,
-  NewTaskFormContainer,
-  TasksContainer,
+  taskFiltersFormContainer,
+  newTaskFormContainer,
+  tasksContainer,
   deleteTasksAction,
   updateTasksStatusesAction,
   createTaskCategoryAction,
@@ -74,11 +55,7 @@ export function TasksPage({
             <ToolbarDesktop>
               <TaskToolbarSortingMenuTrigger />
               <TaskToolbarFiltersModalTrigger
-                filtersForm={
-                  <Suspense fallback={<TaskFiltersFormSkeleton />}>
-                    <TaskFiltersFormContainer filters={filters} />
-                  </Suspense>
-                }
+                filtersForm={taskFiltersFormContainer}
               />
               <TaskToolbarActionsMenuTrigger
                 canDelete={canDeleteTask}
@@ -89,11 +66,7 @@ export function TasksPage({
 
               {canCreateTask && (
                 <TaskToolbarCreateNewMenuTrigger
-                  newTaskForm={
-                    <Suspense fallback={<TaskFormBaseSkeleton />}>
-                      <NewTaskFormContainer />
-                    </Suspense>
-                  }
+                  newTaskForm={newTaskFormContainer}
                   newTaskCategoryForm={
                     <NewTaskCategoryForm
                       formAction={createTaskCategoryAction}
@@ -107,11 +80,7 @@ export function TasksPage({
               <ToolbarMobileHeading>{t("heading")}</ToolbarMobileHeading>
               <TaskToolbarSortingMenuTrigger />
               <TaskToolbarFiltersModalTrigger
-                filtersForm={
-                  <Suspense fallback={<TaskFiltersFormSkeleton />}>
-                    <TaskFiltersFormContainer filters={filters} />
-                  </Suspense>
-                }
+                filtersForm={taskFiltersFormContainer}
               />
               <TaskToolbarActionsMenuTrigger
                 canDelete={canDeleteTask}
@@ -124,11 +93,7 @@ export function TasksPage({
               <ViewModeToggleButtonGroup />
               {canCreateTask && (
                 <TaskToolbarCreateNewMenuTrigger
-                  newTaskForm={
-                    <Suspense fallback={<TaskFormBaseSkeleton />}>
-                      <NewTaskFormContainer />
-                    </Suspense>
-                  }
+                  newTaskForm={newTaskFormContainer}
                   newTaskCategoryForm={
                     <NewTaskCategoryForm
                       formAction={createTaskCategoryAction}
@@ -138,12 +103,7 @@ export function TasksPage({
               )}
             </ToolbarMobileBottom>
 
-            <TasksContainer
-              page={page}
-              pageSize={pageSize}
-              sort={sort}
-              filters={filters}
-            />
+            {tasksContainer}
           </SelectionProvider>
         </ViewModeProvider>
       </PageGrid>

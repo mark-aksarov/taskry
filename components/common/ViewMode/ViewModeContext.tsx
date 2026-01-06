@@ -1,6 +1,12 @@
 "use client";
 
-import { createContext, useContext, useMemo, useState } from "react";
+import {
+  createContext,
+  useContext,
+  useMemo,
+  useState,
+  useTransition,
+} from "react";
 
 export type ViewMode = "list" | "grid";
 
@@ -18,14 +24,22 @@ export function ViewModeProvider({
   initialValue?: ViewMode;
   children: React.ReactNode;
 }) {
-  const [viewMode, setViewMode] = useState<ViewMode>(initialValue);
+  const [viewMode, setViewModeState] = useState<ViewMode>(initialValue);
+  const [isPending, startTransition] = useTransition();
+
+  const setViewMode = (mode: ViewMode) => {
+    startTransition(() => {
+      setViewModeState(mode);
+    });
+  };
 
   const contextValue = useMemo(
     () => ({
       viewMode,
       setViewMode,
+      isPending,
     }),
-    [viewMode],
+    [viewMode, isPending],
   );
 
   return (

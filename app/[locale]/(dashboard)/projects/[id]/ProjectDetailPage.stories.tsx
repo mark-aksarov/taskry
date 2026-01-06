@@ -8,15 +8,16 @@ import {
   DetailCardHeadingSkeleton,
 } from "@/components/common/DetailCard";
 
+import {
+  ProjectDetailForm,
+  ProjectDetailFormSkeleton,
+} from "@/components/projects/ProjectDetailForm";
+
 import { mocked } from "storybook/test";
 import { usePathname } from "next/navigation";
 import { ProjectDetailPage } from "./ProjectDetailPage";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { PageDecorator } from "@/.storybook/PageDecorator";
-import {
-  ProjectDetailForm,
-  ProjectDetailFormSkeleton,
-} from "@/components/projects/ProjectDetailForm";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { Default as ProjectDetailFullStory } from "@/components/projects/ProjectDetailFull/ProjectDetailFull.stories";
 import { Default as ProjectDetailFormStory } from "@/components/projects/ProjectDetailForm/ProjectDetailForm.stories";
@@ -29,9 +30,6 @@ const meta = {
   beforeEach: () => {
     mocked(usePathname).mockReturnValue("/projects/1");
   },
-  args: {
-    id: 1,
-  },
 } satisfies Meta<typeof ProjectDetailPage>;
 
 export default meta;
@@ -39,13 +37,13 @@ export type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    ProjectDetailCardHeadingContainer: () => (
+    projectDetailCardHeadingContainer: (
       <DetailCardHeading>Design homepage layout</DetailCardHeading>
     ),
-    ProjectDetailContainer: () => (
+    projectDetailContainer: (
       <ProjectDetailFull {...ProjectDetailFullStory.args} />
     ),
-    ProjectDetailFormContainer: () => (
+    projectDetailFormContainer: (
       <ProjectDetailForm {...ProjectDetailFormStory.args} />
     ),
   },
@@ -53,8 +51,8 @@ export const Default = {
 
 export const Loading = {
   args: {
-    ProjectDetailCardHeadingContainer: () => <DetailCardHeadingSkeleton />,
-    ProjectDetailContainer: () => <ProjectDetailFullSkeleton />,
-    ProjectDetailFormContainer: () => <ProjectDetailFormSkeleton />,
+    projectDetailCardHeadingContainer: <DetailCardHeadingSkeleton />,
+    projectDetailContainer: <ProjectDetailFullSkeleton />,
+    projectDetailFormContainer: <ProjectDetailFormSkeleton />,
   },
 } satisfies Story;

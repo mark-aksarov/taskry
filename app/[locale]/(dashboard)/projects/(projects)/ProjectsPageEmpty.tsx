@@ -9,11 +9,11 @@ import { PageContainer } from "@/components/common/PageContainer";
 import { NewProjectModal } from "@/components/projects/NewProjectModal";
 
 interface ProjectsPageEmptyProps {
-  NewProjectFormContainer: React.ComponentType;
+  newProjectFormContainer: React.ReactNode;
 }
 
 export function ProjectsPageEmpty({
-  NewProjectFormContainer,
+  newProjectFormContainer,
 }: ProjectsPageEmptyProps) {
   const t = useTranslations("app.ProjectsPageEmpty");
 
@@ -24,7 +24,7 @@ export function ProjectsPageEmpty({
         <EmptySectionDescription>{t("description")}</EmptySectionDescription>
         <EmptySectionButton
           createNewModal={
-            <NewProjectModal newProjectForm={<NewProjectFormContainer />} />
+            <NewProjectModal newProjectForm={newProjectFormContainer} />
           }
         >
           {t("addButtonLabel")}

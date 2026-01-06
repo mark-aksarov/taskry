@@ -4,18 +4,22 @@ import {
 } from "@/components/layout/GlobalContainerContext";
 
 import { z } from "zod";
+import { Suspense } from "react";
 import { getTaskCount } from "@/lib/data/task/task.dal";
 import { deleteTasks } from "@/lib/actions/task/deleteTasks";
-import { TeamProfileTasksPage } from "./TeamProfileTasksPage";
+import { TaskFormBaseSkeleton } from "@/components/tasks/TaskFormBase";
 import { canCreateTask, canDeleteTask } from "@/lib/data/user/user.dal";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { TeamProfileTasksPageEmpty } from "./TeamProfileTasksPageEmpty";
 import { updateTaskStatuses } from "@/lib/actions/task/updateTaskStatuses";
 import { UserTasksContainer } from "@/components/users/UserTasksContainer";
+import { UserTasksPageLayout } from "@/components/users/UserTasksPageLayout";
 import { UserHeaderContainer } from "@/components/users/UserHeaderContainer";
 import { NewTaskFormContainer } from "@/components/tasks/NewTaskFormContainer";
+import { UserNavigationMobile } from "@/components/users/UserNavigationMobile";
 import { TaskCommentsContainer } from "@/components/tasks/TaskCommentsContainer";
 import { EditTaskFormContainer } from "@/components/tasks/EditTaskFormContainer";
+import { UserNavigationDesktop } from "@/components/users/UserNavigationDesktop";
 import { TaskDetailCompactContainer } from "@/components/tasks/TaskDetailCompactContainer";
 
 const searchParamsSchema = z.object({
@@ -53,8 +57,12 @@ export default async function AppProfileTasksPage({
     return (
       <TeamProfileTasksPageEmpty
         userId={id}
-        NewTaskFormContainer={NewTaskFormContainer}
-        UserHeaderContainer={UserHeaderContainer}
+        newTaskFormContainer={
+          <Suspense fallback={<TaskFormBaseSkeleton />}>
+            <NewTaskFormContainer />
+          </Suspense>
+        }
+        userHeaderContainer={<UserHeaderContainer userId={id} />}
       />
     );
 
@@ -63,18 +71,28 @@ export default async function AppProfileTasksPage({
 
   return (
     <GlobalContainerProvider value={context}>
-      <TeamProfileTasksPage
-        userId={id}
-        page={page}
-        pageSize={pageSize}
-        sort={sort}
+      <UserTasksPageLayout
         canCreateTask={canCreate}
         canDeleteTask={canDelete}
-        UserTasksContainer={UserTasksContainer}
-        UserHeaderContainer={UserHeaderContainer}
-        NewTaskFormContainer={NewTaskFormContainer}
+        userTasksContainer={
+          <UserTasksContainer
+            userId={id}
+            page={page}
+            pageSize={pageSize}
+            sort={sort}
+            baseUrl={`/team/${id}/tasks`}
+          />
+        }
+        userHeaderContainer={<UserHeaderContainer userId={id} />}
+        newTaskFormContainer={
+          <Suspense fallback={<TaskFormBaseSkeleton />}>
+            <NewTaskFormContainer />
+          </Suspense>
+        }
         deleteTasksAction={deleteTasks}
         updateTasksStatusesAction={updateTaskStatuses}
+        navigationDesktop={<UserNavigationDesktop />}
+        navigationMobile={<UserNavigationMobile />}
       />
     </GlobalContainerProvider>
   );

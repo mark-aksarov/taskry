@@ -18,17 +18,15 @@ import { PageContainer } from "@/components/common/PageContainer";
 import { UserTasksEmptySection } from "@/components/users/UserTasksEmptySection";
 
 interface UserTasksPageEmptyLayoutProps {
-  userId: string;
-  NewTaskFormContainer: React.ComponentType;
-  UserHeaderContainer: React.ComponentType<{ userId: string }>;
+  newTaskFormContainer: React.ReactNode;
+  userHeaderContainer: React.ReactNode;
   navigationDesktop: React.ReactNode;
   navigationMobile: React.ReactNode;
 }
 
 export function UserTasksPageEmptyLayout({
-  userId,
-  NewTaskFormContainer,
-  UserHeaderContainer,
+  newTaskFormContainer,
+  userHeaderContainer,
   navigationDesktop,
   navigationMobile,
 }: UserTasksPageEmptyLayoutProps) {
@@ -44,12 +42,12 @@ export function UserTasksPageEmptyLayout({
             </UserCardHeader>
 
             <UserTasksEmptySection
-              NewTaskFormContainer={NewTaskFormContainer}
+              newTaskFormContainer={newTaskFormContainer}
             />
           </UserCardLeft>
 
           <UserCardRight>
-            <UserHeaderContainer userId={userId} />
+            {userHeaderContainer}
             {navigationDesktop}
           </UserCardRight>
         </UserCard>
@@ -63,7 +61,7 @@ export function UserTasksPageEmptyLayout({
 
           <ToolbarMobileBottom>{navigationMobile}</ToolbarMobileBottom>
 
-          <UserTasksEmptySection NewTaskFormContainer={NewTaskFormContainer} />
+          <UserTasksEmptySection newTaskFormContainer={newTaskFormContainer} />
         </PageGrid>
       </PageContainer>
     </>

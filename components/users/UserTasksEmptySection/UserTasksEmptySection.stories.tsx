@@ -19,6 +19,6 @@ export type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    NewTaskFormContainer: () => <NewTaskForm {...TaskFormBaseStory.args} />,
+    newTaskFormContainer: <NewTaskForm {...TaskFormBaseStory.args} />,
   },
 } satisfies Story;

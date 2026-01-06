@@ -4,43 +4,30 @@ import {
   ToolbarMobileHeading,
 } from "@/components/common/Toolbar";
 
-import { Suspense } from "react";
 import { useTranslations } from "next-intl";
 import { Card } from "@/components/common/Card";
 import { PageGrid } from "@/components/common/PageGrid";
 import { PageContainer } from "@/components/common/PageContainer";
-import { UserDetailSkeleton } from "@/components/users/UserDetail";
 import { UserDetailCard } from "@/components/users/UserDetailCard";
-import { PersonHeaderSkeleton } from "@/components/common/PersonHeader";
 import { UserNavigationMobile } from "@/components/users/UserNavigationMobile";
 import { UserNavigationDesktop } from "@/components/users/UserNavigationDesktop";
 
 interface TeamProfilePageProps {
-  userId: string;
-  ProfileDetailContainer: React.ComponentType<{ userId: string }>;
-  UserHeaderContainer: React.ComponentType<{ userId: string }>;
+  profileDetailContainer: React.ReactNode;
+  userHeaderContainer: React.ReactNode;
 }
 
 export function TeamProfilePage({
-  userId,
-  ProfileDetailContainer,
-  UserHeaderContainer,
+  profileDetailContainer,
+  userHeaderContainer,
 }: TeamProfilePageProps) {
   const t = useTranslations("app.TeamProfilePage");
 
   return (
     <PageContainer>
       <UserDetailCard
-        profileDetail={
-          <Suspense fallback={<UserDetailSkeleton />}>
-            <ProfileDetailContainer userId={userId} />
-          </Suspense>
-        }
-        profileHeader={
-          <Suspense fallback={<PersonHeaderSkeleton />}>
-            <UserHeaderContainer userId={userId} />
-          </Suspense>
-        }
+        profileDetail={profileDetailContainer}
+        profileHeader={userHeaderContainer}
         navigationDesktop={<UserNavigationDesktop />}
       />
 
@@ -54,12 +41,8 @@ export function TeamProfilePage({
         </ToolbarMobileBottom>
 
         <Card className="flex flex-col gap-6">
-          <Suspense fallback={<PersonHeaderSkeleton />}>
-            <UserHeaderContainer userId={userId} />
-          </Suspense>
-          <Suspense fallback={<UserDetailSkeleton />}>
-            <ProfileDetailContainer userId={userId} />
-          </Suspense>
+          {userHeaderContainer}
+          {profileDetailContainer}
         </Card>
       </PageGrid>
     </PageContainer>

@@ -53,45 +53,34 @@ type Story = StoryObj<typeof DashboardPage>;
 export const Default: Story = {
   render: () => (
     <DashboardPage
-      page={1}
-      pageSize={20}
-      NewTaskFormContainer={() => <NewTaskForm {...TaskFormBaseStory.args} />}
-      TotalProjectsCardContainer={() => (
-        <TotalProjectsCard totalProjects={50} />
-      )}
-      TotalTasksCardContainer={() => <TotalTasksCard totalTasks={500} />}
-      TotalUsersCardContainer={() => <TotalUsersCard totalUsers={15} />}
-      TotalCustomersCardContainer={() => (
-        <TotalCustomersCard totalCustomers={20} />
-      )}
-      AssignedTasksContainer={() => (
+      totalProjectsCardContainer={<TotalProjectsCard totalProjects={50} />}
+      totalTasksCardContainer={<TotalTasksCard totalTasks={500} />}
+      totalUsersCardContainer={<TotalUsersCard totalUsers={15} />}
+      totalCustomersCardContainer={<TotalCustomersCard totalCustomers={20} />}
+      assignedTasksContainer={
         <AssignedTasksSection>
           <AssignedTasksSectionHeading />
           <TaskList {...TaskListStory.args} />
         </AssignedTasksSection>
-      )}
+      }
     />
   ),
 };
-
 export const Loading = {
   render: () => (
     <DashboardPage
-      page={1}
-      pageSize={20}
-      NewTaskFormContainer={() => <NewTaskForm {...TaskFormBaseStory.args} />}
-      TotalProjectsCardContainer={() => <TotalProjectsCardSkeleton />}
-      TotalTasksCardContainer={() => <TotalTasksCardSkeleton />}
-      TotalUsersCardContainer={() => <TotalUsersCardSkeleton />}
-      TotalCustomersCardContainer={() => <TotalCustomersCardSkeleton />}
-      AssignedTasksContainer={() => (
+      totalProjectsCardContainer={<TotalProjectsCardSkeleton />}
+      totalTasksCardContainer={<TotalTasksCardSkeleton />}
+      totalUsersCardContainer={<TotalUsersCardSkeleton />}
+      totalCustomersCardContainer={<TotalCustomersCardSkeleton />}
+      assignedTasksContainer={
         <AssignedTasksSection>
           <AssignedTasksSectionHeading />
           <TaskList>
             <Repeat items={10} renderItem={() => <TaskListItemSkeleton />} />
           </TaskList>
         </AssignedTasksSection>
-      )}
+      }
     />
   ),
 } satisfies Story;
@@ -99,27 +88,18 @@ export const Loading = {
 export const WithNoTasks = {
   render: () => (
     <DashboardPage
-      page={1}
-      pageSize={20}
-      NewTaskFormContainer={() => <NewTaskForm {...TaskFormBaseStory.args} />}
-      TotalProjectsCardContainer={() => (
-        <TotalProjectsCard totalProjects={50} />
-      )}
-      TotalTasksCardContainer={() => <TotalTasksCard totalTasks={500} />}
-      TotalUsersCardContainer={() => <TotalUsersCard totalUsers={15} />}
-      TotalCustomersCardContainer={() => (
-        <TotalCustomersCard totalCustomers={20} />
-      )}
-      AssignedTasksContainer={() => (
+      totalProjectsCardContainer={<TotalProjectsCard totalProjects={50} />}
+      totalTasksCardContainer={<TotalTasksCard totalTasks={500} />}
+      totalUsersCardContainer={<TotalUsersCard totalUsers={15} />}
+      totalCustomersCardContainer={<TotalCustomersCard totalCustomers={20} />}
+      assignedTasksContainer={
         <AssignedTasksSection>
           <AssignedTasksSectionHeading />
           <AssignedTasksEmptyCard
-            NewTaskFormContainer={() => (
-              <NewTaskForm {...TaskFormBaseStory.args} />
-            )}
+            newTaskFormContainer={<NewTaskForm {...TaskFormBaseStory.args} />}
           />
         </AssignedTasksSection>
-      )}
+      }
     />
   ),
 } satisfies Story;

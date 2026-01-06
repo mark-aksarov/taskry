@@ -29,16 +29,12 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    page: 1,
-    pageSize: 10,
-    sort: "fullName",
-    filters: { position: [] },
     deleteUsersAction: fn(),
     createPositionAction: fn(),
-    UserFiltersFormContainer: () => (
+    userFiltersFormContainer: (
       <UserFiltersForm {...UserFiltersFormStory.args} />
     ),
-    UsersContainer: () => (
+    usersContainer: (
       <ViewModeLayout
         list={<UserList {...UserListStory.args} />}
         grid={<UserGrid {...UserGridStory.args} />}

@@ -31,22 +31,13 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    page: 1,
-    pageSize: 20,
-    sort: "title",
     canCreateTask: true,
     canDeleteTask: true,
-    filters: {
-      status: [],
-      category: [],
-      project: [],
-      assignee: [],
-    },
-    TaskFiltersFormContainer: () => (
+    taskFiltersFormContainer: (
       <TaskFiltersForm {...TaskFiltersFormStory.args} />
     ),
-    NewTaskFormContainer: () => <NewTaskForm {...TaskFormBaseStory.args} />,
-    TasksContainer: () => (
+    newTaskFormContainer: <NewTaskForm {...TaskFormBaseStory.args} />,
+    tasksContainer: (
       <ViewModeLayout
         list={<TaskList {...TaskListStory.args} />}
         grid={<TaskGrid {...TaskGridStory.args} />}
@@ -67,7 +58,7 @@ export const WithNoTasks: Story = {
   args: { ...Default.args },
   render: () => (
     <TasksPageEmpty
-      NewTaskFormContainer={() => <NewTaskForm {...TaskFormBaseStory.args} />}
+      newTaskFormContainer={<NewTaskForm {...TaskFormBaseStory.args} />}
     />
   ),
 };

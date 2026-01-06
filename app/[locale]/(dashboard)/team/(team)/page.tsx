@@ -4,6 +4,7 @@ import {
 } from "@/components/layout/GlobalContainerContext";
 
 import { z } from "zod";
+import { Suspense } from "react";
 import { UsersPage } from "./UsersPage";
 import { UsersPageEmpty } from "./UsersPageEmpty";
 import { arrayParam } from "@/lib/utils/arrayParam";
@@ -13,6 +14,7 @@ import { UsersContainer } from "@/components/users/UsersContainer";
 import { createPosition } from "@/lib/actions/position/createPosition";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { UserDetailContainer } from "@/components/users/UserDetailContainer";
+import { UserFiltersFormSkeleton } from "@/components/users/UserFiltersForm";
 import { UserFiltersFormContainer } from "@/components/users/UserFiltersFormContainer";
 
 const searchParamsSchema = z.object({
@@ -59,13 +61,20 @@ export default async function AppUsersPage({
   return (
     <GlobalContainerProvider value={context}>
       <UsersPage
-        page={page}
-        pageSize={pageSize}
-        sort={sort}
-        filters={filters}
         createPositionAction={createPosition}
-        UserFiltersFormContainer={UserFiltersFormContainer}
-        UsersContainer={UsersContainer}
+        userFiltersFormContainer={
+          <Suspense fallback={<UserFiltersFormSkeleton />}>
+            <UserFiltersFormContainer filters={filters} />
+          </Suspense>
+        }
+        usersContainer={
+          <UsersContainer
+            page={page}
+            pageSize={pageSize}
+            sort={sort}
+            filters={filters}
+          />
+        }
         deleteUsersAction={deleteUsers}
       />
     </GlobalContainerProvider>

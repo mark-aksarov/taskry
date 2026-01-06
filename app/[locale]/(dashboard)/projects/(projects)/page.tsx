@@ -4,6 +4,7 @@ import {
 } from "@/components/layout/GlobalContainerContext";
 
 import { z } from "zod";
+import { Suspense } from "react";
 import { ProjectsPage } from "./ProjectsPage";
 import { arrayParam } from "@/lib/utils/arrayParam";
 import { ProjectsPageEmpty } from "./ProjectsPageEmpty";
@@ -13,7 +14,9 @@ import { deleteProjects } from "@/lib/actions/project/deleteProjects";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { ProjectsContainer } from "@/components/projects/ProjectsContainer";
 import { UserDetailContainer } from "@/components/users/UserDetailContainer";
+import { ProjectFormBaseSkeleton } from "@/components/projects/ProjectFormBase";
 import { updateProjectStatuses } from "@/lib/actions/project/updateProjectStatuses";
+import { ProjectFiltersFormSkeleton } from "@/components/projects/ProjectFiltersForm";
 import { NewProjectFormContainer } from "@/components/projects/NewProjectFormContainer";
 import { ProjectCommentsContainer } from "@/components/projects/ProjectCommentsContainer";
 import { EditProjectFormContainer } from "@/components/projects/EditProjectFormContainer";
@@ -66,23 +69,40 @@ export default async function AppProjectsPage({
 
   if (!projectCount) {
     return (
-      <ProjectsPageEmpty NewProjectFormContainer={NewProjectFormContainer} />
+      <ProjectsPageEmpty
+        newProjectFormContainer={
+          <Suspense fallback={<ProjectFormBaseSkeleton />}>
+            <NewProjectFormContainer />
+          </Suspense>
+        }
+      />
     );
   }
 
   return (
     <GlobalContainerProvider value={context}>
       <ProjectsPage
-        page={page}
-        pageSize={pageSize}
-        sort={sort}
-        filters={filters}
         createProjectCategoryAction={createProjectCategory}
         deleteProjectsAction={deleteProjects}
         updateProjectStatusesAction={updateProjectStatuses}
-        ProjectFiltersFormContainer={ProjectFiltersFormContainer}
-        ProjectsContainer={ProjectsContainer}
-        NewProjectFormContainer={NewProjectFormContainer}
+        projectFiltersFormContainer={
+          <Suspense fallback={<ProjectFiltersFormSkeleton />}>
+            <ProjectFiltersFormContainer filters={filters} />
+          </Suspense>
+        }
+        projectsContainer={
+          <ProjectsContainer
+            page={page}
+            pageSize={pageSize}
+            sort={sort}
+            filters={filters}
+          />
+        }
+        newProjectFormContainer={
+          <Suspense fallback={<ProjectFormBaseSkeleton />}>
+            <NewProjectFormContainer />
+          </Suspense>
+        }
       />
     </GlobalContainerProvider>
   );

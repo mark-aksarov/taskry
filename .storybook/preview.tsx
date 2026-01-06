@@ -11,6 +11,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { withThemeByDataAttribute } from "@storybook/addon-themes";
 import { GlobalContainerDecorator } from "./GlobalContainerDecorator";
 import { SelectionProvider } from "../components/common/SelectionContext";
+import { EntityPaginationProvider } from "../components/common/EntityContainerPagination";
 
 export const globalTypes = {
   locale: {
@@ -43,7 +44,9 @@ const preview: Preview = {
     },
     (Story) => (
       <SelectionProvider>
-        <Story />
+        <EntityPaginationProvider>
+          <Story />
+        </EntityPaginationProvider>
       </SelectionProvider>
     ),
     GlobalContainerDecorator,

@@ -9,10 +9,10 @@ import { NewTaskModal } from "@/components/tasks/NewTaskModal";
 import { PageContainer } from "@/components/common/PageContainer";
 
 interface TasksPageEmptyProps {
-  NewTaskFormContainer: React.ComponentType;
+  newTaskFormContainer: React.ReactNode;
 }
 
-export function TasksPageEmpty({ NewTaskFormContainer }: TasksPageEmptyProps) {
+export function TasksPageEmpty({ newTaskFormContainer }: TasksPageEmptyProps) {
   const t = useTranslations("app.TasksPageEmpty");
 
   return (
@@ -21,9 +21,7 @@ export function TasksPageEmpty({ NewTaskFormContainer }: TasksPageEmptyProps) {
         <EmptySectionHeading>{t("heading")}</EmptySectionHeading>
         <EmptySectionDescription>{t("description")}</EmptySectionDescription>
         <EmptySectionButton
-          createNewModal={
-            <NewTaskModal newTaskForm={<NewTaskFormContainer />} />
-          }
+          createNewModal={<NewTaskModal newTaskForm={newTaskFormContainer} />}
         >
           {t("addButtonLabel")}
         </EmptySectionButton>

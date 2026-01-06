@@ -13,5 +13,5 @@ export function GridItemProgress({
 }
 
 export function GridItemProgressSkeleton() {
-  return <Skeleton className="h-2 w-full" />;
+  return <Skeleton className="h-1.5 w-full" />;
 }

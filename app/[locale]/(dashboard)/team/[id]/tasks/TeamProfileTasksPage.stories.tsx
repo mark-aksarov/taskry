@@ -8,24 +8,21 @@ import { mocked } from "storybook/test";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { useParams, usePathname } from "next/navigation";
 import { PageDecorator } from "@/.storybook/PageDecorator";
-import { TeamProfileTasksPage } from "./TeamProfileTasksPage";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { UserTasksPageLayout } from "@/components/users/UserTasksPageLayout";
 
 const userId = "BKs42HvVDEZFoaJUmTqf1gTN0K8pUFjI";
 
 const meta = {
   title: "components/pages/TeamProfileTasksPage",
-  component: TeamProfileTasksPage,
+  component: UserTasksPageLayout,
   parameters: { layout: "fullscreen" },
   decorators: [PageDecorator, withThemedBackground],
   beforeEach: () => {
     mocked(usePathname).mockReturnValue(`/team/${userId}/tasks`);
     mocked(useParams).mockReturnValue({ id: userId });
   },
-  args: {
-    userId,
-  },
-} satisfies Meta<typeof TeamProfileTasksPage>;
+} satisfies Meta<typeof UserTasksPageLayout>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
