@@ -21,7 +21,7 @@ import { CustomerDetailContainer } from "@/components/customer/CustomerDetailCon
 
 const searchParamsSchema = z.object({
   page: z.coerce.number().int().positive().catch(1),
-  pageSize: z.coerce.number().int().min(1).max(100).catch(5),
+  pageSize: z.coerce.number().int().min(1).max(100).catch(20),
   sort: z.enum(["fullName", "company"]).catch("fullName"),
   hasNoActiveProjects: z
     .preprocess((val) => val === "true", z.boolean())

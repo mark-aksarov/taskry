@@ -1,10 +1,11 @@
 "use client";
 
-import { Pagination } from "@/components/common/Pagination";
-import { usePathname, useRouter } from "@/i18n/navigation";
+import { useOptimistic } from "react";
 import { useLocale } from "next-intl";
 import { useSearchParams } from "next/navigation";
-import { useTransition } from "react";
+import { usePathname, useRouter } from "@/i18n/navigation";
+import { useEntityPagination } from "./EntityPaginationContext";
+import { Pagination, PaginationProps } from "@/components/common/Pagination";
 
 interface EntityContainerPaginationProps {
   page: number;
@@ -19,26 +20,34 @@ export function EntityContainerPagination({
 }: EntityContainerPaginationProps) {
   const locale = useLocale();
   const router = useRouter();
-  const [isPending, startTransition] = useTransition();
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
+  const { startTransition } = useEntityPagination();
+  const [optimisticPage, setOptimisticPage] = useOptimistic(
+    page,
+    (_, newPage: number) => newPage,
+  );
+
   function handleChange(targetPage: number) {
     startTransition(() => {
+      setOptimisticPage(targetPage);
+
       const params = new URLSearchParams(searchParams.toString());
       params.set("page", targetPage.toString());
-      if (pageSize) params.set("pageSize", pageSize.toString());
+      params.set("pageSize", pageSize.toString());
 
-      router.push(`${pathname}?${params.toString()}`, { locale });
+      router.push(`${pathname}?${params.toString()}`, {
+        locale,
+        scroll: false,
+      });
     });
   }
 
-  const paginationProps = {
-    page,
+  const paginationProps: PaginationProps = {
+    page: optimisticPage,
     totalPages,
-    pageSize,
     onChange: handleChange,
-    isPending,
   };
 
   return (

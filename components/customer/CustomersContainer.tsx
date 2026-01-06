@@ -8,7 +8,8 @@ import { getCustomerCount } from "@/lib/data/customer/customer.dal";
 import { getCustomerList } from "@/lib/data/customer/customer.service";
 import { CustomerListItemDTO } from "@/lib/data/customer/customer.dto";
 import { deleteCustomers } from "@/lib/actions/customer/deleteCustomers";
-import { EntityContainerPagination } from "@/components/common/EntityContainerPagination";
+import { EntityPaginationProvider } from "../common/EntityContainerPagination";
+import { EntityContainerPagination } from "../common/EntityContainerPagination";
 
 export interface CustomersContainerProps {
   page: number;
@@ -23,8 +24,6 @@ export async function CustomersContainer({
   sort,
   filters,
 }: CustomersContainerProps) {
-  await new Promise((resolve) => setTimeout(resolve, 2000));
-
   const customers = await getCustomerList({ page, pageSize, sort, filters });
   const count = await getCustomerCount(filters);
 
@@ -40,7 +39,7 @@ export async function CustomersContainer({
   });
 
   return (
-    <>
+    <EntityPaginationProvider>
       <ViewModeLayout
         list={
           <CustomerList>
@@ -69,6 +68,6 @@ export async function CustomersContainer({
         totalPages={Math.ceil(count / pageSize)}
         pageSize={pageSize}
       />
-    </>
+    </EntityPaginationProvider>
   );
 }

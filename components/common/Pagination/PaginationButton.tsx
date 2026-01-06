@@ -1,12 +1,21 @@
-import { Button, ButtonProps } from "@/components/ui";
-import { ElementType } from "@/components/ui/Button/Button";
+"use client";
 
-export function PaginationButton<T extends ElementType = "button">(
-  props: Omit<ButtonProps<T>, "size">,
-) {
+import { twMerge } from "tailwind-merge";
+import { PaginationSize } from "./Pagination";
+import { Button, ButtonProps } from "@/components/ui";
+
+export type PaginationButtonProps = {
+  size?: PaginationSize;
+} & Omit<ButtonProps<"button">, "size">;
+
+export function PaginationButton({ size, ...props }: PaginationButtonProps) {
   return (
     <Button
-      className="justify-center rounded-full max-md:h-8 max-md:w-8 md:h-9 md:w-9"
+      className={twMerge(
+        "justify-center rounded-full",
+        size === "small" && "h-7.5 w-7.5",
+        size === "large" && "h-9 w-9",
+      )}
       size="small"
       {...props}
     />

@@ -43,7 +43,7 @@ export function PageListSkeleton({
         </ToolbarMobileBottom>
 
         <List>
-          <Repeat items={10} renderItem={renderItemSkeleton} />
+          <Repeat items={20} renderItem={renderItemSkeleton} />
         </List>
       </PageGrid>
     </PageContainer>
