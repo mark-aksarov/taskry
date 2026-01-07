@@ -14,7 +14,9 @@ export function ProjectDetailCompactContainer({
     { suspense: true },
   );
 
-  if (!project) return null;
+  if (!project) {
+    throw new Error("Project not found");
+  }
 
   return (
     <ProjectDetailCompact

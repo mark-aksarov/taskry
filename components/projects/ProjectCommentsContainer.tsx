@@ -13,9 +13,7 @@ export function ProjectCommentsContainer({ projectId }: { projectId: number }) {
     },
   );
 
-  if (!comments) return null;
-
-  if (comments.length === 0) {
+  if (!comments || comments.length === 0) {
     return <CommentsEmptySection />;
   }
 

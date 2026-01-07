@@ -37,7 +37,9 @@ export function EditTaskFormContainer({ taskId }: { taskId: number }) {
     },
   );
 
-  if (!categories || !projects || !users || !task) return null;
+  if (!categories || !projects || !users || !task) {
+    throw new Error("Task not found");
+  }
 
   const d = new Date(task.deadline);
   const dateValue = new CalendarDate(

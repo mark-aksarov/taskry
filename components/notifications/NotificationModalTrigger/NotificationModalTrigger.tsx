@@ -3,15 +3,22 @@
 import {
   Button,
   Dialog,
+  Skeleton,
+  DialogBody,
   DialogHeader,
   DialogHeading,
   RACDialogTrigger,
   DialogCloseButton,
 } from "@/components/ui";
 
+import { Suspense } from "react";
 import { Bell } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { Repeat } from "@/components/common/Repeat";
+import { NotificationList } from "../NotificationList";
 import { ResponsiveModal } from "@/components/common/ResponsiveModal";
+import { NotificationListItemSkeleton } from "../NotificationListItem";
+import { NotificationModalContent } from "../NotificationModalContent";
 import { useGlobalContainer } from "@/components/layout/GlobalContainerContext";
 
 export function NotificationModalTrigger() {
@@ -41,7 +48,26 @@ export function NotificationModalTrigger() {
             <DialogCloseButton />
           </DialogHeader>
 
-          <NotificationModalContentContainer />
+          <Suspense
+            fallback={
+              <DialogBody className="p-0!">
+                <NotificationModalContent>
+                  <div className="flex gap-4">
+                    <Skeleton className="h-8 w-[5rem] rounded-lg" />
+                    <Skeleton className="h-8 w-[5rem] rounded-lg" />
+                  </div>
+                  <NotificationList>
+                    <Repeat
+                      items={10}
+                      renderItem={() => <NotificationListItemSkeleton />}
+                    />
+                  </NotificationList>
+                </NotificationModalContent>
+              </DialogBody>
+            }
+          >
+            <NotificationModalContentContainer />
+          </Suspense>
         </Dialog>
       </ResponsiveModal>
     </RACDialogTrigger>

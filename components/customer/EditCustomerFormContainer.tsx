@@ -23,7 +23,9 @@ export function EditCustomerFormContainer({
     },
   );
 
-  if (!companies || !customer) return null;
+  if (!companies || !customer) {
+    throw new Error("Customer not found");
+  }
 
   return (
     <EditCustomerForm

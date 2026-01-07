@@ -15,7 +15,9 @@ export function TaskDetailCompactContainer({
     suspense: true,
   });
 
-  if (!task) return null;
+  if (!task) {
+    throw new Error("Task not found");
+  }
 
   return (
     <TaskDetailCompact

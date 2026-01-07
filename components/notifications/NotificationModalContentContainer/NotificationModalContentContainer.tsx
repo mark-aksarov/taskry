@@ -1,21 +1,16 @@
 "use client";
 
 import {
-  NotificationListItem,
-  NotificationListItemSkeleton,
-} from "../NotificationListItem";
-
-import {
   NotificationModalContent,
   NotificationModalContentStatus,
 } from "../NotificationModalContent";
 
 import useSWR from "swr";
 import { useState } from "react";
-import { Repeat } from "@/components/common/Repeat";
 import { NotificationList } from "../NotificationList";
 import { Pagination } from "@/components/common/Pagination";
-import { DialogBody, DialogFooter, Link, Skeleton } from "@/components/ui";
+import { NotificationListItem } from "../NotificationListItem";
+import { DialogBody, DialogFooter, Link } from "@/components/ui";
 import { NotificationsDTO } from "@/lib/data/notification/notification.dto";
 import { NotificationFilterToggleButtonGroup } from "../NotificationFilterToggleButtonGroup";
 
@@ -115,31 +110,15 @@ export function NotificationModalContentContainer() {
   const [filter, setFilter] = useState<NotificationFilter>("all");
   const pageSize = 10;
 
-  const { data, isLoading } = useSWR<NotificationsDTO>(
+  const { data } = useSWR<NotificationsDTO>(
     `/api/notifications?page=${page}&pageSize=${pageSize}&filter=${filter}`,
+    {
+      suspense: true,
+    },
   );
 
-  if (isLoading) {
-    return (
-      <DialogBody className="p-0!">
-        <NotificationModalContent>
-          <div className="flex gap-4">
-            <Skeleton className="h-8 w-[5rem] rounded-lg" />
-            <Skeleton className="h-8 w-[5rem] rounded-lg" />
-          </div>
-          <NotificationList>
-            <Repeat
-              items={10}
-              renderItem={() => <NotificationListItemSkeleton />}
-            />
-          </NotificationList>
-        </NotificationModalContent>
-      </DialogBody>
-    );
-  }
-
   if (!data) {
-    return null;
+    throw <div>Empty notification</div>;
   }
 
   const { items, totalCount, unreadCount } = data;

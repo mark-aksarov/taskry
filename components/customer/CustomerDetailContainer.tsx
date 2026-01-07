@@ -20,7 +20,9 @@ export function CustomerDetailContainer({
     { suspense: true },
   );
 
-  if (!customer) return null;
+  if (!customer) {
+    throw new Error("Customer not found");
+  }
 
   return (
     <div className="flex flex-col gap-6">

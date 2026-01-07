@@ -1,4 +1,9 @@
 {
+  "DashboardErrorPage": {
+    "heading": "Something went wrong",
+    "description": "We encountered an unexpected error. Please try refreshing the page or contact support if the issue persists."
+  },
+
   "CheckEmailPage": {
     "heading": "Check your email",
     "subtitle": "We have sent a password reset link to your email. If this email exists in our system, check your email for the reset link",

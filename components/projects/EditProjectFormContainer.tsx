@@ -31,7 +31,9 @@ export function EditProjectFormContainer({ projectId }: { projectId: number }) {
     },
   );
 
-  if (!categories || !customers || !project) return null;
+  if (!categories || !customers || !project) {
+    throw new Error("Project not found");
+  }
 
   const d = new Date(project.deadline);
   const dateValue = new CalendarDate(

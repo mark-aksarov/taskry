@@ -17,7 +17,9 @@ export function UserDetailContainer({ userId }: UserDetailContainerProps) {
     suspense: true,
   });
 
-  if (!user) return null;
+  if (!user) {
+    throw new Error("User not found");
+  }
 
   return (
     <div className="flex flex-col gap-6">
