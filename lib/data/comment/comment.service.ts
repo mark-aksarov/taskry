@@ -24,7 +24,6 @@ export const getCommentList = async ({
         id: a.id,
         fileUrl: a.fileUrl,
       })),
-      repliesCount: c._count.replies,
     };
   });
 };

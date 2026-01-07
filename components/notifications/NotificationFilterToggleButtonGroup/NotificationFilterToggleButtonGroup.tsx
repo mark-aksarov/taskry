@@ -29,7 +29,7 @@ export function NotificationFilterToggleButtonGroup({
       <ToggleButton id="all">
         {t("all")} ({notificationsCount})
       </ToggleButton>
-      <ToggleButton id="unread">
+      <ToggleButton id="unread" isDisabled={!unreadCount}>
         {t("unread")} ({unreadCount})
       </ToggleButton>
     </ToggleButtonGroup>

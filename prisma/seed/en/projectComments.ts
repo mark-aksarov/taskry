@@ -6,7 +6,6 @@ export const projectComments = [
     senderId: "user-14",
     projectId: 41,
     taskId: null,
-    parentId: null,
     workspaceId: 2,
   },
   {
@@ -16,7 +15,6 @@ export const projectComments = [
     senderId: "user-16",
     projectId: 41,
     taskId: null,
-    parentId: 5004,
     workspaceId: 2,
   },
   {
@@ -26,7 +24,6 @@ export const projectComments = [
     senderId: "user-12",
     projectId: 41,
     taskId: null,
-    parentId: 5005,
     workspaceId: 2,
   },
   {
@@ -36,7 +33,6 @@ export const projectComments = [
     senderId: "user-11",
     projectId: 41,
     taskId: null,
-    parentId: null,
     workspaceId: 2,
   },
   {
@@ -46,7 +42,6 @@ export const projectComments = [
     senderId: "user-12",
     projectId: 41,
     taskId: null,
-    parentId: 5007,
     workspaceId: 2,
   },
   {
@@ -56,7 +51,6 @@ export const projectComments = [
     senderId: "user-20",
     projectId: 41,
     taskId: null,
-    parentId: null,
     workspaceId: 2,
   },
   {
@@ -66,7 +60,6 @@ export const projectComments = [
     senderId: "user-12",
     projectId: 41,
     taskId: null,
-    parentId: 5009,
     workspaceId: 2,
   },
   {
@@ -76,7 +69,6 @@ export const projectComments = [
     senderId: "user-15",
     projectId: 41,
     taskId: null,
-    parentId: null,
     workspaceId: 2,
   },
   {
@@ -86,7 +78,6 @@ export const projectComments = [
     senderId: "user-12",
     projectId: 42,
     taskId: null,
-    parentId: null,
     workspaceId: 2,
   },
   {
@@ -96,7 +87,6 @@ export const projectComments = [
     senderId: "user-16",
     projectId: 42,
     taskId: null,
-    parentId: null,
     workspaceId: 2,
   },
   {
@@ -106,7 +96,6 @@ export const projectComments = [
     senderId: "user-17",
     projectId: 42,
     taskId: null,
-    parentId: null,
     workspaceId: 2,
   },
   {
@@ -116,7 +105,6 @@ export const projectComments = [
     senderId: "user-20",
     projectId: 42,
     taskId: null,
-    parentId: 5014,
     workspaceId: 2,
   },
   {
@@ -126,7 +114,6 @@ export const projectComments = [
     senderId: "user-15",
     projectId: 42,
     taskId: null,
-    parentId: null,
     workspaceId: 2,
   },
   {
@@ -136,7 +123,6 @@ export const projectComments = [
     senderId: "user-11",
     projectId: 42,
     taskId: null,
-    parentId: 5016,
     workspaceId: 2,
   },
   {
@@ -146,7 +132,6 @@ export const projectComments = [
     senderId: "user-14",
     projectId: 42,
     taskId: null,
-    parentId: null,
     workspaceId: 2,
   },
   {
@@ -156,7 +141,6 @@ export const projectComments = [
     senderId: "user-13",
     projectId: 42,
     taskId: null,
-    parentId: null,
     workspaceId: 2,
   },
   {
@@ -166,7 +150,6 @@ export const projectComments = [
     senderId: "user-15",
     projectId: 43,
     taskId: null,
-    parentId: null,
     workspaceId: 2,
   },
   {
@@ -176,7 +159,6 @@ export const projectComments = [
     senderId: "user-17",
     projectId: 43,
     taskId: null,
-    parentId: 5027,
     workspaceId: 2,
   },
   {
@@ -186,7 +168,6 @@ export const projectComments = [
     senderId: "user-19",
     projectId: 43,
     taskId: null,
-    parentId: null,
     workspaceId: 2,
   },
   {
@@ -196,7 +177,6 @@ export const projectComments = [
     senderId: "user-17",
     projectId: 43,
     taskId: null,
-    parentId: null,
     workspaceId: 2,
   },
   {
@@ -206,7 +186,6 @@ export const projectComments = [
     senderId: "user-12",
     projectId: 43,
     taskId: null,
-    parentId: 5030,
     workspaceId: 2,
   },
   {
@@ -216,7 +195,6 @@ export const projectComments = [
     senderId: "user-16",
     projectId: 43,
     taskId: null,
-    parentId: 5030,
     workspaceId: 2,
   },
   {
@@ -226,7 +204,6 @@ export const projectComments = [
     senderId: "user-14",
     projectId: 43,
     taskId: null,
-    parentId: 5031,
     workspaceId: 2,
   },
   {
@@ -236,7 +213,6 @@ export const projectComments = [
     senderId: "user-17",
     projectId: 43,
     taskId: null,
-    parentId: 5029,
     workspaceId: 2,
   },
   {
@@ -246,7 +222,6 @@ export const projectComments = [
     senderId: "user-15",
     projectId: 44,
     taskId: null,
-    parentId: null,
     workspaceId: 2,
   },
   {
@@ -256,7 +231,6 @@ export const projectComments = [
     senderId: "user-12",
     projectId: 44,
     taskId: null,
-    parentId: 5035,
     workspaceId: 2,
   },
   {
@@ -266,7 +240,6 @@ export const projectComments = [
     senderId: "user-20",
     projectId: 44,
     taskId: null,
-    parentId: null,
     workspaceId: 2,
   },
   {
@@ -276,7 +249,6 @@ export const projectComments = [
     senderId: "user-18",
     projectId: 44,
     taskId: null,
-    parentId: 5037,
     workspaceId: 2,
   },
   {
@@ -286,7 +258,6 @@ export const projectComments = [
     senderId: "user-11",
     projectId: 44,
     taskId: null,
-    parentId: null,
     workspaceId: 2,
   },
   {
@@ -296,7 +267,6 @@ export const projectComments = [
     senderId: "user-18",
     projectId: 44,
     taskId: null,
-    parentId: 5039,
     workspaceId: 2,
   },
   {
@@ -306,7 +276,6 @@ export const projectComments = [
     senderId: "user-19",
     projectId: 44,
     taskId: null,
-    parentId: 5040,
     workspaceId: 2,
   },
   {
@@ -316,7 +285,6 @@ export const projectComments = [
     senderId: "user-14",
     projectId: 44,
     taskId: null,
-    parentId: null,
     workspaceId: 2,
   },
   {
@@ -326,7 +294,6 @@ export const projectComments = [
     senderId: "user-13",
     projectId: 44,
     taskId: null,
-    parentId: 5042,
     workspaceId: 2,
   },
   {
@@ -336,7 +303,6 @@ export const projectComments = [
     senderId: "user-14",
     projectId: 45,
     taskId: null,
-    parentId: null,
     workspaceId: 2,
   },
   {
@@ -346,7 +312,6 @@ export const projectComments = [
     senderId: "user-16",
     projectId: 45,
     taskId: null,
-    parentId: 5044,
     workspaceId: 2,
   },
   {
@@ -356,7 +321,6 @@ export const projectComments = [
     senderId: "user-19",
     projectId: 45,
     taskId: null,
-    parentId: null,
     workspaceId: 2,
   },
   {
@@ -366,7 +330,6 @@ export const projectComments = [
     senderId: "user-17",
     projectId: 45,
     taskId: null,
-    parentId: 5046,
     workspaceId: 2,
   },
   {
@@ -376,7 +339,6 @@ export const projectComments = [
     senderId: "user-14",
     projectId: 45,
     taskId: null,
-    parentId: null,
     workspaceId: 2,
   },
   {
@@ -386,7 +348,6 @@ export const projectComments = [
     senderId: "user-20",
     projectId: 45,
     taskId: null,
-    parentId: 5048,
     workspaceId: 2,
   },
   {
@@ -396,7 +357,6 @@ export const projectComments = [
     senderId: "user-16",
     projectId: 45,
     taskId: null,
-    parentId: 5049,
     workspaceId: 2,
   },
   {
@@ -406,7 +366,6 @@ export const projectComments = [
     senderId: "user-11",
     projectId: 45,
     taskId: null,
-    parentId: null,
     workspaceId: 2,
   },
   {
@@ -416,7 +375,6 @@ export const projectComments = [
     senderId: "user-15",
     projectId: 46,
     taskId: null,
-    parentId: null,
     workspaceId: 2,
   },
   {
@@ -426,7 +384,6 @@ export const projectComments = [
     senderId: "user-12",
     projectId: 46,
     taskId: null,
-    parentId: 5052,
     workspaceId: 2,
   },
   {
@@ -436,7 +393,6 @@ export const projectComments = [
     senderId: "user-11",
     projectId: 46,
     taskId: null,
-    parentId: null,
     workspaceId: 2,
   },
   {
@@ -446,7 +402,6 @@ export const projectComments = [
     senderId: "user-19",
     projectId: 46,
     taskId: null,
-    parentId: 5054,
     workspaceId: 2,
   },
   {
@@ -456,7 +411,6 @@ export const projectComments = [
     senderId: "user-13",
     projectId: 46,
     taskId: null,
-    parentId: null,
     workspaceId: 2,
   },
   {
@@ -466,7 +420,6 @@ export const projectComments = [
     senderId: "user-15",
     projectId: 46,
     taskId: null,
-    parentId: null,
     workspaceId: 2,
   },
   {
@@ -476,7 +429,6 @@ export const projectComments = [
     senderId: "user-12",
     projectId: 46,
     taskId: null,
-    parentId: 5057,
     workspaceId: 2,
   },
   {
@@ -486,7 +438,6 @@ export const projectComments = [
     senderId: "user-13",
     projectId: 46,
     taskId: null,
-    parentId: 5056,
     workspaceId: 2,
   },
   {
@@ -496,7 +447,6 @@ export const projectComments = [
     senderId: "user-11",
     projectId: 46,
     taskId: null,
-    parentId: null,
     workspaceId: 2,
   },
   {
@@ -506,7 +456,6 @@ export const projectComments = [
     senderId: "user-14",
     projectId: 47,
     taskId: null,
-    parentId: null,
     workspaceId: 2,
   },
   {
@@ -516,7 +465,6 @@ export const projectComments = [
     senderId: "user-12",
     projectId: 47,
     taskId: null,
-    parentId: 5061,
     workspaceId: 2,
   },
   {
@@ -526,7 +474,6 @@ export const projectComments = [
     senderId: "user-11",
     projectId: 47,
     taskId: null,
-    parentId: null,
     workspaceId: 2,
   },
   {
@@ -536,7 +483,6 @@ export const projectComments = [
     senderId: "user-17",
     projectId: 47,
     taskId: null,
-    parentId: 5063,
     workspaceId: 2,
   },
   {
@@ -546,7 +492,6 @@ export const projectComments = [
     senderId: "user-13",
     projectId: 47,
     taskId: null,
-    parentId: null,
     workspaceId: 2,
   },
   {
@@ -556,7 +501,6 @@ export const projectComments = [
     senderId: "user-20",
     projectId: 47,
     taskId: null,
-    parentId: null,
     workspaceId: 2,
   },
   {
@@ -566,7 +510,6 @@ export const projectComments = [
     senderId: "user-19",
     projectId: 47,
     taskId: null,
-    parentId: null,
     workspaceId: 2,
   },
   {
@@ -576,7 +519,6 @@ export const projectComments = [
     senderId: "user-14",
     projectId: 47,
     taskId: null,
-    parentId: 5067,
     workspaceId: 2,
   },
   {
@@ -586,7 +528,6 @@ export const projectComments = [
     senderId: "user-20",
     projectId: 48,
     taskId: null,
-    parentId: null,
     workspaceId: 2,
   },
   {
@@ -596,7 +537,6 @@ export const projectComments = [
     senderId: "user-11",
     projectId: 48,
     taskId: null,
-    parentId: 5069,
     workspaceId: 2,
   },
   {
@@ -606,7 +546,6 @@ export const projectComments = [
     senderId: "user-12",
     projectId: 48,
     taskId: null,
-    parentId: null,
     workspaceId: 2,
   },
   {
@@ -616,7 +555,6 @@ export const projectComments = [
     senderId: "user-15",
     projectId: 48,
     taskId: null,
-    parentId: 5071,
     workspaceId: 2,
   },
   {
@@ -626,7 +564,6 @@ export const projectComments = [
     senderId: "user-20",
     projectId: 48,
     taskId: null,
-    parentId: null,
     workspaceId: 2,
   },
   {
@@ -636,7 +573,6 @@ export const projectComments = [
     senderId: "user-17",
     projectId: 48,
     taskId: null,
-    parentId: 5073,
     workspaceId: 2,
   },
   {
@@ -646,7 +582,6 @@ export const projectComments = [
     senderId: "user-13",
     projectId: 48,
     taskId: null,
-    parentId: null,
     workspaceId: 2,
   },
   {
@@ -656,7 +591,6 @@ export const projectComments = [
     senderId: "user-14",
     projectId: 48,
     taskId: null,
-    parentId: null,
     workspaceId: 2,
   },
   {
@@ -666,7 +600,6 @@ export const projectComments = [
     senderId: "user-12",
     projectId: 48,
     taskId: null,
-    parentId: 5073,
     workspaceId: 2,
   },
   {
@@ -676,7 +609,6 @@ export const projectComments = [
     senderId: "user-13",
     projectId: 49,
     taskId: null,
-    parentId: null,
     workspaceId: 2,
   },
   {
@@ -686,7 +618,6 @@ export const projectComments = [
     senderId: "user-18",
     projectId: 49,
     taskId: null,
-    parentId: 5078,
     workspaceId: 2,
   },
   {
@@ -696,7 +627,6 @@ export const projectComments = [
     senderId: "user-12",
     projectId: 49,
     taskId: null,
-    parentId: null,
     workspaceId: 2,
   },
   {
@@ -706,7 +636,6 @@ export const projectComments = [
     senderId: "user-20",
     projectId: 49,
     taskId: null,
-    parentId: 5080,
     workspaceId: 2,
   },
   {
@@ -716,7 +645,6 @@ export const projectComments = [
     senderId: "user-15",
     projectId: 49,
     taskId: null,
-    parentId: null,
     workspaceId: 2,
   },
   {
@@ -726,7 +654,6 @@ export const projectComments = [
     senderId: "user-11",
     projectId: 49,
     taskId: null,
-    parentId: 5082,
     workspaceId: 2,
   },
   {
@@ -736,7 +663,6 @@ export const projectComments = [
     senderId: "user-15",
     projectId: 49,
     taskId: null,
-    parentId: null,
     workspaceId: 2,
   },
   {
@@ -746,7 +672,6 @@ export const projectComments = [
     senderId: "user-13",
     projectId: 49,
     taskId: null,
-    parentId: 5084,
     workspaceId: 2,
   },
   {
@@ -756,7 +681,6 @@ export const projectComments = [
     senderId: "user-14",
     projectId: 50,
     taskId: null,
-    parentId: null,
     workspaceId: 2,
   },
   {
@@ -766,7 +690,6 @@ export const projectComments = [
     senderId: "user-16",
     projectId: 50,
     taskId: null,
-    parentId: 5086,
     workspaceId: 2,
   },
   {
@@ -776,7 +699,6 @@ export const projectComments = [
     senderId: "user-11",
     projectId: 50,
     taskId: null,
-    parentId: null,
     workspaceId: 2,
   },
   {
@@ -786,7 +708,6 @@ export const projectComments = [
     senderId: "user-17",
     projectId: 50,
     taskId: null,
-    parentId: 5088,
     workspaceId: 2,
   },
   {
@@ -796,7 +717,6 @@ export const projectComments = [
     senderId: "user-20",
     projectId: 50,
     taskId: null,
-    parentId: null,
     workspaceId: 2,
   },
   {
@@ -806,7 +726,6 @@ export const projectComments = [
     senderId: "user-12",
     projectId: 50,
     taskId: null,
-    parentId: 5090,
     workspaceId: 2,
   },
   {
@@ -816,7 +735,6 @@ export const projectComments = [
     senderId: "user-13",
     projectId: 50,
     taskId: null,
-    parentId: null,
     workspaceId: 2,
   },
   {
@@ -826,7 +744,6 @@ export const projectComments = [
     senderId: "user-17",
     projectId: 50,
     taskId: null,
-    parentId: 5090,
     workspaceId: 2,
   },
   {
@@ -836,7 +753,6 @@ export const projectComments = [
     senderId: "user-11",
     projectId: 51,
     taskId: null,
-    parentId: null,
     workspaceId: 2,
   },
   {
@@ -846,7 +762,6 @@ export const projectComments = [
     senderId: "user-12",
     projectId: 51,
     taskId: null,
-    parentId: 5094,
     workspaceId: 2,
   },
   {
@@ -856,7 +771,6 @@ export const projectComments = [
     senderId: "user-20",
     projectId: 51,
     taskId: null,
-    parentId: null,
     workspaceId: 2,
   },
   {
@@ -866,7 +780,6 @@ export const projectComments = [
     senderId: "user-14",
     projectId: 51,
     taskId: null,
-    parentId: null,
     workspaceId: 2,
   },
   {
@@ -876,7 +789,6 @@ export const projectComments = [
     senderId: "user-13",
     projectId: 51,
     taskId: null,
-    parentId: null,
     workspaceId: 2,
   },
   {
@@ -886,7 +798,6 @@ export const projectComments = [
     senderId: "user-12",
     projectId: 51,
     taskId: null,
-    parentId: 5096,
     workspaceId: 2,
   },
   {
@@ -896,7 +807,6 @@ export const projectComments = [
     senderId: "user-16",
     projectId: 51,
     taskId: null,
-    parentId: 5097,
     workspaceId: 2,
   },
   {
@@ -906,7 +816,6 @@ export const projectComments = [
     senderId: "user-11",
     projectId: 52,
     taskId: null,
-    parentId: null,
     workspaceId: 2,
   },
   {
@@ -916,7 +825,6 @@ export const projectComments = [
     senderId: "user-18",
     projectId: 52,
     taskId: null,
-    parentId: 5101,
     workspaceId: 2,
   },
   {
@@ -926,7 +834,6 @@ export const projectComments = [
     senderId: "user-12",
     projectId: 52,
     taskId: null,
-    parentId: 5102,
     workspaceId: 2,
   },
   {
@@ -936,7 +843,6 @@ export const projectComments = [
     senderId: "user-15",
     projectId: 52,
     taskId: null,
-    parentId: null,
     workspaceId: 2,
   },
   {
@@ -946,7 +852,6 @@ export const projectComments = [
     senderId: "user-13",
     projectId: 52,
     taskId: null,
-    parentId: null,
     workspaceId: 2,
   },
   {
@@ -956,7 +861,6 @@ export const projectComments = [
     senderId: "user-14",
     projectId: 52,
     taskId: null,
-    parentId: 5104,
     workspaceId: 2,
   },
   {
@@ -966,7 +870,6 @@ export const projectComments = [
     senderId: "user-14",
     projectId: 53,
     taskId: null,
-    parentId: null,
     workspaceId: 2,
   },
   {
@@ -976,7 +879,6 @@ export const projectComments = [
     senderId: "user-17",
     projectId: 53,
     taskId: null,
-    parentId: 5107,
     workspaceId: 2,
   },
   {
@@ -986,7 +888,6 @@ export const projectComments = [
     senderId: "user-19",
     projectId: 53,
     taskId: null,
-    parentId: null,
     workspaceId: 2,
   },
   {
@@ -996,7 +897,6 @@ export const projectComments = [
     senderId: "user-11",
     projectId: 53,
     taskId: null,
-    parentId: null,
     workspaceId: 2,
   },
   {
@@ -1006,7 +906,6 @@ export const projectComments = [
     senderId: "user-16",
     projectId: 53,
     taskId: null,
-    parentId: 5110,
     workspaceId: 2,
   },
   {
@@ -1016,7 +915,6 @@ export const projectComments = [
     senderId: "user-17",
     projectId: 53,
     taskId: null,
-    parentId: null,
     workspaceId: 2,
   },
   {
@@ -1026,7 +924,6 @@ export const projectComments = [
     senderId: "user-20",
     projectId: 53,
     taskId: null,
-    parentId: null,
     workspaceId: 2,
   },
   {
@@ -1036,7 +933,6 @@ export const projectComments = [
     senderId: "user-11",
     projectId: 53,
     taskId: null,
-    parentId: null,
     workspaceId: 2,
   },
   {
@@ -1046,7 +942,6 @@ export const projectComments = [
     senderId: "user-13",
     projectId: 53,
     taskId: null,
-    parentId: 5114,
     workspaceId: 2,
   },
   {
@@ -1056,7 +951,6 @@ export const projectComments = [
     senderId: "user-16",
     projectId: 54,
     taskId: null,
-    parentId: null,
     workspaceId: 2,
   },
   {
@@ -1066,7 +960,6 @@ export const projectComments = [
     senderId: "user-13",
     projectId: 54,
     taskId: null,
-    parentId: 5116,
     workspaceId: 2,
   },
   {
@@ -1076,7 +969,6 @@ export const projectComments = [
     senderId: "user-15",
     projectId: 54,
     taskId: null,
-    parentId: null,
     workspaceId: 2,
   },
   {
@@ -1086,7 +978,6 @@ export const projectComments = [
     senderId: "user-14",
     projectId: 54,
     taskId: null,
-    parentId: null,
     workspaceId: 2,
   },
   {
@@ -1096,7 +987,6 @@ export const projectComments = [
     senderId: "user-16",
     projectId: 54,
     taskId: null,
-    parentId: null,
     workspaceId: 2,
   },
   {
@@ -1106,7 +996,6 @@ export const projectComments = [
     senderId: "user-20",
     projectId: 54,
     taskId: null,
-    parentId: 5120,
     workspaceId: 2,
   },
   {
@@ -1116,7 +1005,6 @@ export const projectComments = [
     senderId: "user-15",
     projectId: 54,
     taskId: null,
-    parentId: null,
     workspaceId: 2,
   },
   {
@@ -1126,7 +1014,6 @@ export const projectComments = [
     senderId: "user-11",
     projectId: 54,
     taskId: null,
-    parentId: 5122,
     workspaceId: 2,
   },
   {
@@ -1136,7 +1023,6 @@ export const projectComments = [
     senderId: "user-12",
     projectId: 55,
     taskId: null,
-    parentId: null,
     workspaceId: 2,
   },
   {
@@ -1146,7 +1032,6 @@ export const projectComments = [
     senderId: "user-15",
     projectId: 55,
     taskId: null,
-    parentId: 5124,
     workspaceId: 2,
   },
   {
@@ -1156,7 +1041,6 @@ export const projectComments = [
     senderId: "user-13",
     projectId: 55,
     taskId: null,
-    parentId: null,
     workspaceId: 2,
   },
   {
@@ -1166,7 +1050,6 @@ export const projectComments = [
     senderId: "user-12",
     projectId: 55,
     taskId: null,
-    parentId: 5126,
     workspaceId: 2,
   },
   {
@@ -1176,7 +1059,6 @@ export const projectComments = [
     senderId: "user-19",
     projectId: 55,
     taskId: null,
-    parentId: null,
     workspaceId: 2,
   },
   {
@@ -1186,7 +1068,6 @@ export const projectComments = [
     senderId: "user-11",
     projectId: 55,
     taskId: null,
-    parentId: 5128,
     workspaceId: 2,
   },
   {
@@ -1196,7 +1077,6 @@ export const projectComments = [
     senderId: "user-12",
     projectId: 55,
     taskId: null,
-    parentId: null,
     workspaceId: 2,
   },
   {
@@ -1206,7 +1086,6 @@ export const projectComments = [
     senderId: "user-20",
     projectId: 55,
     taskId: null,
-    parentId: 5130,
     workspaceId: 2,
   },
   {
@@ -1216,7 +1095,6 @@ export const projectComments = [
     senderId: "user-13",
     projectId: 56,
     taskId: null,
-    parentId: null,
     workspaceId: 2,
   },
   {
@@ -1226,7 +1104,6 @@ export const projectComments = [
     senderId: "user-12",
     projectId: 56,
     taskId: null,
-    parentId: 5132,
     workspaceId: 2,
   },
   {
@@ -1236,7 +1113,6 @@ export const projectComments = [
     senderId: "user-14",
     projectId: 56,
     taskId: null,
-    parentId: null,
     workspaceId: 2,
   },
   {
@@ -1246,7 +1122,6 @@ export const projectComments = [
     senderId: "user-16",
     projectId: 56,
     taskId: null,
-    parentId: 5134,
     workspaceId: 2,
   },
   {
@@ -1256,7 +1131,6 @@ export const projectComments = [
     senderId: "user-11",
     projectId: 56,
     taskId: null,
-    parentId: null,
     workspaceId: 2,
   },
   {
@@ -1266,7 +1140,6 @@ export const projectComments = [
     senderId: "user-17",
     projectId: 56,
     taskId: null,
-    parentId: 5136,
     workspaceId: 2,
   },
   {
@@ -1276,7 +1149,6 @@ export const projectComments = [
     senderId: "user-15",
     projectId: 56,
     taskId: null,
-    parentId: null,
     workspaceId: 2,
   },
   {
@@ -1286,7 +1158,6 @@ export const projectComments = [
     senderId: "user-20",
     projectId: 56,
     taskId: null,
-    parentId: 5138,
     workspaceId: 2,
   },
   {
@@ -1296,7 +1167,6 @@ export const projectComments = [
     senderId: "user-19",
     projectId: 57,
     taskId: null,
-    parentId: null,
     workspaceId: 2,
   },
   {
@@ -1306,7 +1176,6 @@ export const projectComments = [
     senderId: "user-12",
     projectId: 57,
     taskId: null,
-    parentId: 5140,
     workspaceId: 2,
   },
   {
@@ -1316,7 +1185,6 @@ export const projectComments = [
     senderId: "user-15",
     projectId: 57,
     taskId: null,
-    parentId: null,
     workspaceId: 2,
   },
   {
@@ -1326,7 +1194,6 @@ export const projectComments = [
     senderId: "user-13",
     projectId: 57,
     taskId: null,
-    parentId: 5142,
     workspaceId: 2,
   },
   {
@@ -1336,7 +1203,6 @@ export const projectComments = [
     senderId: "user-18",
     projectId: 57,
     taskId: null,
-    parentId: 5143,
     workspaceId: 2,
   },
   {
@@ -1346,7 +1212,6 @@ export const projectComments = [
     senderId: "user-11",
     projectId: 57,
     taskId: null,
-    parentId: null,
     workspaceId: 2,
   },
   {
@@ -1356,7 +1221,6 @@ export const projectComments = [
     senderId: "user-14",
     projectId: 57,
     taskId: null,
-    parentId: null,
     workspaceId: 2,
   },
   {
@@ -1366,7 +1230,6 @@ export const projectComments = [
     senderId: "user-11",
     projectId: 58,
     taskId: null,
-    parentId: null,
     workspaceId: 2,
   },
   {
@@ -1376,7 +1239,6 @@ export const projectComments = [
     senderId: "user-14",
     projectId: 58,
     taskId: null,
-    parentId: 5147,
     workspaceId: 2,
   },
   {
@@ -1386,7 +1248,6 @@ export const projectComments = [
     senderId: "user-17",
     projectId: 58,
     taskId: null,
-    parentId: 5148,
     workspaceId: 2,
   },
   {
@@ -1396,7 +1257,6 @@ export const projectComments = [
     senderId: "user-16",
     projectId: 58,
     taskId: null,
-    parentId: null,
     workspaceId: 2,
   },
   {
@@ -1406,7 +1266,6 @@ export const projectComments = [
     senderId: "user-14",
     projectId: 58,
     taskId: null,
-    parentId: null,
     workspaceId: 2,
   },
   {
@@ -1416,7 +1275,6 @@ export const projectComments = [
     senderId: "user-12",
     projectId: 58,
     taskId: null,
-    parentId: 5151,
     workspaceId: 2,
   },
   {
@@ -1426,7 +1284,6 @@ export const projectComments = [
     senderId: "user-17",
     projectId: 58,
     taskId: null,
-    parentId: 5152,
     workspaceId: 2,
   },
   {
@@ -1436,7 +1293,6 @@ export const projectComments = [
     senderId: "user-11",
     projectId: 58,
     taskId: null,
-    parentId: null,
     workspaceId: 2,
   },
   {
@@ -1446,7 +1302,6 @@ export const projectComments = [
     senderId: "user-15",
     projectId: 59,
     taskId: null,
-    parentId: null,
     workspaceId: 2,
   },
   {
@@ -1456,7 +1311,6 @@ export const projectComments = [
     senderId: "user-20",
     projectId: 59,
     taskId: null,
-    parentId: 5155,
     workspaceId: 2,
   },
   {
@@ -1466,7 +1320,6 @@ export const projectComments = [
     senderId: "user-13",
     projectId: 59,
     taskId: null,
-    parentId: null,
     workspaceId: 2,
   },
   {
@@ -1476,7 +1329,6 @@ export const projectComments = [
     senderId: "user-12",
     projectId: 59,
     taskId: null,
-    parentId: 5157,
     workspaceId: 2,
   },
   {
@@ -1486,7 +1338,6 @@ export const projectComments = [
     senderId: "user-15",
     projectId: 59,
     taskId: null,
-    parentId: null,
     workspaceId: 2,
   },
   {
@@ -1496,7 +1347,6 @@ export const projectComments = [
     senderId: "user-11",
     projectId: 59,
     taskId: null,
-    parentId: 5159,
     workspaceId: 2,
   },
   {
@@ -1506,7 +1356,6 @@ export const projectComments = [
     senderId: "user-14",
     projectId: 59,
     taskId: null,
-    parentId: null,
     workspaceId: 2,
   },
   {
@@ -1516,7 +1365,6 @@ export const projectComments = [
     senderId: "user-16",
     projectId: 59,
     taskId: null,
-    parentId: 5161,
     workspaceId: 2,
   },
   {
@@ -1526,7 +1374,6 @@ export const projectComments = [
     senderId: "user-11",
     projectId: 60,
     taskId: null,
-    parentId: null,
     workspaceId: 2,
   },
   {
@@ -1536,7 +1383,6 @@ export const projectComments = [
     senderId: "user-16",
     projectId: 60,
     taskId: null,
-    parentId: 5163,
     workspaceId: 2,
   },
   {
@@ -1546,7 +1392,6 @@ export const projectComments = [
     senderId: "user-15",
     projectId: 60,
     taskId: null,
-    parentId: null,
     workspaceId: 2,
   },
   {
@@ -1556,7 +1401,6 @@ export const projectComments = [
     senderId: "user-14",
     projectId: 60,
     taskId: null,
-    parentId: 5165,
     workspaceId: 2,
   },
   {
@@ -1566,7 +1410,6 @@ export const projectComments = [
     senderId: "user-13",
     projectId: 60,
     taskId: null,
-    parentId: null,
     workspaceId: 2,
   },
   {
@@ -1576,7 +1419,6 @@ export const projectComments = [
     senderId: "user-16",
     projectId: 60,
     taskId: null,
-    parentId: null,
     workspaceId: 2,
   },
   {
@@ -1586,7 +1428,6 @@ export const projectComments = [
     senderId: "user-20",
     projectId: 60,
     taskId: null,
-    parentId: 5168,
     workspaceId: 2,
   },
   {
@@ -1596,7 +1437,6 @@ export const projectComments = [
     senderId: "user-11",
     projectId: 60,
     taskId: null,
-    parentId: null,
     workspaceId: 2,
   },
   {
@@ -1606,7 +1446,6 @@ export const projectComments = [
     senderId: "user-17",
     projectId: 60,
     taskId: null,
-    parentId: 5170,
     workspaceId: 2,
   },
 ];

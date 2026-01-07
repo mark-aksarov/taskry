@@ -1,11 +1,15 @@
+import { useTranslations } from "next-intl";
+
 const styles = "text-sm text-gray-500 dark:text-gray-400 font-normal";
 
 interface NotificationListItemActionTextProps {
-  children: React.ReactNode;
+  notificationType: string;
 }
 
 export function NotificationListItemActionText({
-  children,
+  notificationType,
 }: NotificationListItemActionTextProps) {
-  return <span className={styles}>{children}</span>;
+  const t = useTranslations("notifications.NotificationItem.action");
+
+  return <span className={styles}>&nbsp;{t(notificationType)}&nbsp;</span>;
 }

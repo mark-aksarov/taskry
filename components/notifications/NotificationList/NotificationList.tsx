@@ -1,3 +1,7 @@
 export function NotificationList({ children }: { children: React.ReactNode }) {
-  return <div className="flex flex-col">{children}</div>;
+  return (
+    <div data-test="notification-list" className="flex flex-col">
+      {children}
+    </div>
+  );
 }

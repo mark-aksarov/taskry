@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { NotificationFilterToggleButtonGroup } from "./NotificationFilterToggleButtonGroup";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { NotificationFilterToggleButtonGroup } from "./NotificationFilterToggleButtonGroup";
 
 const meta = {
   title: "Components/notifications/NotificationFilterToggleButtonGroup",
@@ -17,6 +17,7 @@ export type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
+    selectedKeys: ["all"],
     notificationsCount: 10,
     unreadCount: 5,
   },

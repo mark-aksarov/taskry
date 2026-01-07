@@ -7,7 +7,7 @@ export const users = [
     bio: "Опытный менеджер проекта, специализирующийся на разработке сложных веб-приложений. 5 лет в IT.",
     address: "ул. Тверская, 1, Москва",
     birthdate: new Date("1988-05-15"),
-    role: "admin",
+    role: "owner",
     email: "ivan@ws.com",
     emailVerified: true,
     imageUrl: `${prefix}user-1.jpg`,

@@ -66,15 +66,12 @@ model Comment {
   senderId    String
   projectId   Int?
   taskId      Int?
-  parentId    Int?
   workspaceId Int
 
   workspace Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
   sender    User      @relation(fields: [senderId], references: [id], onDelete: Cascade)
   project   Project?  @relation(fields: [projectId], references: [id], onDelete: Cascade)
   task      Task?     @relation(fields: [taskId], references: [id], onDelete: Cascade)
-  parent    Comment?  @relation("CommentReplies", fields: [parentId], references: [id], onDelete: Cascade)
-  replies   Comment[] @relation("CommentReplies")
 
   attachments         Attachment[]
   notificationTargets NotificationTarget[]
@@ -259,24 +256,19 @@ model Subtask {
 // Notifications
 
 enum NotificationType {
-  taskAdded
-  taskDeleted
-  taskUpdated
-
   projectAdded
+  projectDeadlineChanged
+  projectStatusChanged
   projectDeleted
-  projectUpdated
 
-  userAdded
-  userDeleted
-  userUpdated
+  taskAdded
+  taskDeadlineChanged
+  taskStatusChanged
+  taskDeleted
 
-  customerAdded
-  customerDeleted
-  customerUpdated
-
-  commentReplied
   commentAdded
+  commentChanged
+  commentDeleted
 }
 
 model Notification {
@@ -291,8 +283,8 @@ model Notification {
   recipientId String?
   recipient   User?   @relation("Recipient", fields: [recipientId], references: [id], onDelete: SetNull)
 
-  target     NotificationTarget?
-  targetName String?
+  target  NotificationTarget?
+  content String?
 
   workspaceId Int
   workspace   Workspace @relation(fields: [workspaceId], references: [id])

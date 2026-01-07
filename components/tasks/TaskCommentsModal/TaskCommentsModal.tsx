@@ -1,4 +1,3 @@
-import { useContext } from "react";
 import { useTranslations } from "next-intl";
 import { CommentsModal } from "@/components/common/CommentsModal";
 import { useGlobalContainer } from "@/components/layout/GlobalContainerContext";

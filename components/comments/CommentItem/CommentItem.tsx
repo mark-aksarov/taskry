@@ -2,13 +2,11 @@
 
 import Image from "next/image";
 import { Link } from "@/components/ui";
-import { ReplyButton } from "../ReplyButton";
 import { CommentItemDate } from "./CommentItemDate";
 import { CommentItemText } from "./CommentItemText";
 import { CommentItemInfo } from "./CommentItemInfo";
 import { CommentItemTitle } from "./CommentItemTitle";
 import { CommentItemLayout } from "./CommentItemLayout";
-import { CommentItemActions } from "./CommentItemActions";
 import { useFormatter, useTranslations } from "next-intl";
 import { UnknownUser } from "@/components/common/UnknownUser";
 import { ImageContainer } from "@/components/common/ImageContainer";
@@ -89,9 +87,6 @@ export function CommentItem({
               ))}
             </Attachments>
           )}
-          <CommentItemActions>
-            <ReplyButton />
-          </CommentItemActions>
         </>
       }
     />

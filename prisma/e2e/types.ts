@@ -7,4 +7,6 @@ export interface E2ESeedPayload {
   projects?: Prisma.ProjectCreateManyInput[];
   taskCategories?: Prisma.TaskCategoryCreateManyInput[];
   tasks?: Prisma.TaskCreateManyInput[];
+  notifications?: Prisma.NotificationCreateManyInput[];
+  notificationTargets?: Prisma.NotificationTargetCreateManyInput[];
 }

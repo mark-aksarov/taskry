@@ -26,7 +26,7 @@ import { NotificationFilterToggleButtonGroup } from "../components/notifications
 import { Default as NotificationListStory } from "../components/notifications/NotificationList/NotificationList.stories";
 import { Default as ProjectDetailCompactStory } from "../components/projects/ProjectDetailCompact/ProjectDetailCompact.stories";
 
-const context: GlobalContainerContextType = {
+export const context: GlobalContainerContextType = {
   EditProjectFormContainer: () => (
     <EditProjectForm {...EditProjectFormStory.args} projectId={1} />
   ),

@@ -15,7 +15,6 @@ export const getAllComments = cache(
         taskId,
         projectId,
         workspaceId,
-        parentId: null,
       },
       select: {
         id: true,
@@ -33,11 +32,6 @@ export const getAllComments = cache(
           select: {
             id: true,
             fileUrl: true,
-          },
-        },
-        _count: {
-          select: {
-            replies: true,
           },
         },
       },

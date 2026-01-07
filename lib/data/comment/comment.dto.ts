@@ -13,6 +13,4 @@ export interface CommentListItemDTO {
     id: number;
     fileUrl: string;
   }[];
-
-  repliesCount: number;
 }

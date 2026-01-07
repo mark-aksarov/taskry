@@ -35,13 +35,18 @@ export function NotificationModalTrigger() {
   return (
     <RACDialogTrigger>
       <Button
+        data-test="notification-modal-trigger"
         aria-label={t("ariaLabel")}
         variant="ghost"
         iconLeft={<Bell size={16} strokeWidth={1.5} absoluteStrokeWidth />}
         className="rounded-full p-3"
       />
 
-      <ResponsiveModal isDismissable className="w-[600px]">
+      <ResponsiveModal
+        data-test="notification-modal"
+        isDismissable
+        className="w-[600px]"
+      >
         <Dialog className="md:h-[calc(100dvh-64px)]">
           <DialogHeader>
             <DialogHeading>{t("dialogHeading")}</DialogHeading>

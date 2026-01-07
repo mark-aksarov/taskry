@@ -35,7 +35,7 @@ export const getAllNotifications = cache(
         select: {
           id: true,
           type: true,
-          targetName: true,
+          content: true,
           createdAt: true,
           updatedAt: true,
           isRead: true,
@@ -56,6 +56,8 @@ export const getAllNotifications = cache(
                 select: {
                   id: true,
                   title: true,
+                  deadline: true,
+                  status: true,
                 },
               },
 
@@ -63,6 +65,8 @@ export const getAllNotifications = cache(
                 select: {
                   id: true,
                   title: true,
+                  deadline: true,
+                  status: true,
                 },
               },
 
@@ -105,12 +109,6 @@ export const getAllNotifications = cache(
                     select: {
                       id: true,
                       title: true,
-                    },
-                  },
-
-                  _count: {
-                    select: {
-                      replies: true,
                     },
                   },
                 },

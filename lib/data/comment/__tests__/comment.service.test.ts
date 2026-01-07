@@ -81,7 +81,6 @@ describe("Comment Service", () => {
           taskId: null,
           workspaceId: 1,
           senderId: "user-1",
-          parentId: null,
         },
         {
           id: 2,
@@ -90,32 +89,21 @@ describe("Comment Service", () => {
           taskId: null,
           workspaceId: 1,
           senderId: "user-1",
-          parentId: null,
         },
         {
           id: 3,
-          content: "Reply to first comment",
-          projectId: 1,
-          taskId: null,
-          workspaceId: 1,
-          senderId: "user-1",
-          parentId: 1,
-        },
-        {
-          id: 4,
           content: "Task specific comment",
           projectId: null,
           taskId: 1,
           workspaceId: 1,
           senderId: "user-1",
-          parentId: null,
         },
       ],
     });
   });
 
   describe("getCommentList", () => {
-    it("should return only top-level project comments (excluding task comments)", async () => {
+    it("should return project comments (excluding task comments)", async () => {
       const result = await getCommentList({ projectId: 1 });
       expect(result).toHaveLength(2);
 
@@ -125,7 +113,7 @@ describe("Comment Service", () => {
       expect(contents).not.toContain("Task specific comment");
     });
 
-    it("should return only top-level task comments", async () => {
+    it("should return task comments", async () => {
       const result = await getCommentList({ taskId: 1 });
 
       expect(result).toHaveLength(1);

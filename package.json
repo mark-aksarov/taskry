@@ -12,7 +12,7 @@
     "migrate:dev:reset": "dotenv -e .env.development -- prisma migrate reset",
     "migrate:dev": "dotenv -e .env.development -- prisma migrate dev",
     "migrate:prod": "dotenv -e .env.production -- prisma migrate deploy",
-    "seed:prod": "dotenv -e .env.production -- tsx prisma/seed.ts",
+    "seed:dev": "dotenv -e .env.development -- tsx prisma/seed.ts",
     "build-storybook": "storybook build",
     "docker:up": "docker compose up -d",
     "docker:down": "docker compose down",

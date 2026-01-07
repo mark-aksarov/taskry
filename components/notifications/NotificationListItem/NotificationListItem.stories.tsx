@@ -1,7 +1,12 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { NotificationListItem } from "./NotificationListItem";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { Link } from "@/components/ui";
+import { NotificationListItemTarget } from "./NotificationListItemTarget";
+import { NotificationListItemContent } from "./NotificationListItemContent";
+import { NotificationListItemActorLink } from "./NotificationListItemActorLink";
+import { NotificationListItemActionText } from "./NotificationListItemActionText";
+import { NotificationListItemActorImageLink } from "./NotificationListItemActorImageLink";
+import { ProjectStatus } from "@/generated/prisma/enums";
 
 const meta = {
   title: "Components/notifications/NotificationListItem",
@@ -17,17 +22,46 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
+const mockedNotification = {
+  id: 1,
+  type: "projectAdded",
+  content: "New project 'Mobile App Launch' has been created.",
+  createdAt: new Date("2026-01-07T09:00:00Z"),
+  updatedAt: new Date("2026-01-07T09:00:00Z"),
+  isRead: false,
+  actor: {
+    id: "user-1",
+    fullName: "Alice Freeman",
+    imageUrl: "/woman.jpg",
+  },
+  target: {
+    id: 101,
+    project: {
+      id: 50,
+      title: "Mobile App Launch",
+      deadline: new Date("2026-06-01"),
+      status: ProjectStatus.active,
+    },
+  },
+};
+
 export const Default = {
   args: {
-    date: new Date("2025-09-23T08:00:00Z"),
-    isRead: true,
-    actor: {
-      id: "user-2",
-      fullName: "Alice Johnson",
-      imageUrl: "/woman.jpg",
-    },
-    type: "taskAdded",
-    target: <Link href="#">Create Landing Page</Link>,
+    date: mockedNotification.createdAt,
+    isRead: mockedNotification.isRead,
+    target: <NotificationListItemTarget notification={mockedNotification} />,
+    content: <NotificationListItemContent notification={mockedNotification} />,
+    actorImageLink: (
+      <NotificationListItemActorImageLink actor={mockedNotification.actor} />
+    ),
+    actorLink: (
+      <NotificationListItemActorLink actor={mockedNotification.actor} />
+    ),
+    actionContent: (
+      <NotificationListItemActionText
+        notificationType={mockedNotification.type}
+      />
+    ),
   },
 } satisfies Story;
 
@@ -41,38 +75,7 @@ export const Unread = {
 export const WithoutActor = {
   args: {
     ...Default.args,
-    actor: undefined,
-  },
-} satisfies Story;
-
-export const WithComment = {
-  args: {
-    ...Default.args,
-    comment: {
-      content:
-        "I totally agree with Alice. The performance improvements are noticeable, especially in larger datasets. One suggestion though: it might be helpful to include a loading indicator when switching between tabs, since the delay can confuse first-time users.",
-      attachments: [],
-    },
-  },
-} satisfies Story;
-
-export const WithAttachements = {
-  args: {
-    ...WithComment.args,
-    comment: {
-      ...WithComment.args.comment,
-      attachments: [
-        {
-          id: 1,
-          fileUrl: "/placeholder.jpg",
-          fileName: "placeholder.jpg",
-        },
-        {
-          id: 2,
-          fileUrl: "/placeholder.jpg",
-          fileName: "placeholder.jpg",
-        },
-      ],
-    },
+    actorImageLink: undefined,
+    actorLink: undefined,
   },
 } satisfies Story;

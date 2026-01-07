@@ -7,7 +7,7 @@ export const users = [
     bio: "Head of Strategic Initiatives and Project Oversight. Focus on delivery alignment.",
     address: "123 Executive Way, San Francisco, CA 94107",
     birthdate: new Date("1980-05-15"),
-    role: "admin",
+    role: "owner",
     email: "alice.johnson@corp.com",
     emailVerified: true,
     imageUrl: `${prefix}user-11.jpg`,

@@ -15,24 +15,24 @@
     "unknownUser": "Unknown User",
 
     "action": {
-      "taskAdded": "added a new task",
-      "taskDeleted": "deleted a task",
-      "taskUpdated": "updated a task",
-
       "projectAdded": "added a new project",
-      "projectDeleted": "deleted a project",
-      "projectUpdated": "updated a project",
+      "projectDeadlineChanged": "changed the project deadline",
+      "projectStatusChanged": "changed the project status",
+      "projectDeleted": "deleted the project",
 
-      "userAdded": "added a new user",
-      "userDeleted": "deleted a user",
-      "userUpdated": "updated a user",
+      "taskAdded": "added a new task",
+      "taskDeadlineChanged": "changed the task deadline",
+      "taskStatusChanged": "changed the task status",
+      "taskDeleted": "deleted the task",
 
-      "customerAdded": "added a new customer",
-      "customerDeleted": "deleted a customer",
-      "customerUpdated": "updated a customer",
+      "commentAdded": "added a comment in",
+      "commentChanged": "edited a comment in",
+      "commentDeleted": "deleted your comment in"
+    },
 
-      "commentReplied": "replied to a comment in",
-      "commentAdded": "added a comment to"
+    "content": {
+      "deadlineChanged": "Deadline changed to {deadline}",
+      "statusChanged": "Status changed to {status}"
     }
   }
 }

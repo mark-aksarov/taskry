@@ -15,24 +15,24 @@
     "unknownUser": "Неизвестный пользователь",
 
     "action": {
-      "taskAdded": "добавил(а) новую задачу",
-      "taskDeleted": "удалил(а) задачу",
-      "taskUpdated": "обновил(а) задачу",
-
       "projectAdded": "добавил(а) новый проект",
+      "projectDeadlineChanged": "изменил(а) дедлайн проекта",
+      "projectStatusChanged": "изменил(а) статус проекта",
       "projectDeleted": "удалил(а) проект",
-      "projectUpdated": "обновил(а) проект",
 
-      "userAdded": "добавил(а) нового пользователя",
-      "userDeleted": "удалил(а) пользователя",
-      "userUpdated": "обновил(а) пользователя",
+      "taskAdded": "добавил(а) новую задачу",
+      "taskDeadlineChanged": "изменил(а) дедлайн задачи",
+      "taskStatusChanged": "изменил(а) статус задачи",
+      "taskDeleted": "удалил(а) задачу",
 
-      "customerAdded": "добавил(а) нового клиента",
-      "customerDeleted": "удалил(а) клиента",
-      "customerUpdated": "обновил(а) клиента",
+      "commentAdded": "добавил(а) комментарий в",
+      "commentChanged": "изменил(а) комментарий в",
+      "commentDeleted": "удалил(а) ваш комментарий в"
+    },
 
-      "commentReplied": "ответил(а) на комментарий в",
-      "commentAdded": "добавил(а) комментарий к"
+    "content": {
+      "deadlineChanged": "Дедлайн изменен на {deadline}",
+      "statusChanged": "Статус изменен на {status}"
     }
   }
 }

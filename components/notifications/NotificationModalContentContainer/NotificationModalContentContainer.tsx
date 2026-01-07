@@ -5,103 +5,22 @@ import {
   NotificationModalContentStatus,
 } from "../NotificationModalContent";
 
+import {
+  NotificationListItem,
+  NotificationListItemTarget,
+  NotificationListItemContent,
+  NotificationListItemActorLink,
+  NotificationListItemActionText,
+  NotificationListItemActorImageLink,
+} from "../NotificationListItem";
+
 import useSWR from "swr";
 import { useState } from "react";
 import { NotificationList } from "../NotificationList";
+import { DialogBody, DialogFooter } from "@/components/ui";
 import { Pagination } from "@/components/common/Pagination";
-import { NotificationListItem } from "../NotificationListItem";
-import { DialogBody, DialogFooter, Link } from "@/components/ui";
 import { NotificationsDTO } from "@/lib/data/notification/notification.dto";
 import { NotificationFilterToggleButtonGroup } from "../NotificationFilterToggleButtonGroup";
-
-function getTarget(notification: NotificationsDTO["items"][number]) {
-  const { type, target, targetName } = notification;
-  switch (type) {
-    case "taskAdded":
-    case "taskUpdated":
-      return (
-        <Link className="inline" href={`/users/${target?.task?.id}`}>
-          {target?.task?.title}
-        </Link>
-      );
-    case "taskDeleted":
-      return targetName;
-
-    case "projectAdded":
-    case "projectUpdated":
-      return (
-        <Link className="inline" href={`/users/${target?.project?.id}`}>
-          {target?.project?.title}
-        </Link>
-      );
-    case "projectDeleted":
-      return targetName;
-
-    case "userAdded":
-    case "userUpdated":
-      return (
-        <Link className="inline" href={`/users/${target?.user?.id}`}>
-          {target?.user?.fullName}
-        </Link>
-      );
-    case "userDeleted":
-      return targetName;
-
-    case "customerAdded":
-    case "customerUpdated":
-      return (
-        <Link className="inline" href={`/customers/${target?.customer?.id}`}>
-          {target?.customer?.fullName}
-        </Link>
-      );
-    case "customerDeleted":
-      return targetName;
-
-    case "commentReplied": {
-      const comment = target?.comment!;
-      return (
-        <Link
-          className="inline"
-          href={`/${comment.project ? "projects" : "tasks"}?commentId=${comment.id}`}
-        >
-          {comment.project ? comment.project.title : comment.task!.title}
-        </Link>
-      );
-    }
-    case "commentAdded": {
-      const comment = target?.comment!;
-      return (
-        <Link
-          className="inline"
-          href={`/${comment.project ? "projects" : "tasks"}?commentId=${comment.id}`}
-        >
-          {comment.project ? comment.project.title : comment.task!.title}
-        </Link>
-      );
-    }
-
-    default:
-      throw new Error("Invalid notification type");
-  }
-}
-
-function getComment(notification: any) {
-  const { target } = notification;
-
-  if (target?.comment) {
-    return {
-      id: target.comment.id,
-      content: target.comment.content,
-      attachments: target.comment.attachments.map((attachment: any) => ({
-        id: attachment.id,
-        fileUrl: attachment.fileUrl,
-        fileName: attachment.fileName,
-      })),
-    };
-  }
-
-  return undefined;
-}
 
 type NotificationFilter = "all" | "unread";
 
@@ -141,17 +60,34 @@ export function NotificationModalContentContainer() {
           />
 
           <NotificationList>
-            {items.map((notification) => (
-              <NotificationListItem
-                key={notification.id}
-                isRead={notification.isRead}
-                actor={notification.actor}
-                date={notification.createdAt}
-                type={notification.type}
-                target={getTarget(notification)}
-                comment={getComment(notification)}
-              />
-            ))}
+            {items.map((notification) => {
+              return (
+                <NotificationListItem
+                  key={notification.id}
+                  isRead={notification.isRead}
+                  date={notification.createdAt}
+                  target={
+                    <NotificationListItemTarget notification={notification} />
+                  }
+                  content={
+                    <NotificationListItemContent notification={notification} />
+                  }
+                  actorImageLink={
+                    <NotificationListItemActorImageLink
+                      actor={notification.actor}
+                    />
+                  }
+                  actorLink={
+                    <NotificationListItemActorLink actor={notification.actor} />
+                  }
+                  actionContent={
+                    <NotificationListItemActionText
+                      notificationType={notification.type}
+                    />
+                  }
+                />
+              );
+            })}
           </NotificationList>
         </NotificationModalContent>
       </DialogBody>
