@@ -46,7 +46,11 @@ export function ToolbarFiltersModalTrigger({
         }
         className="md:hidden"
       />
-      <ResponsiveModal isDismissable className="w-[500px]">
+      <ResponsiveModal
+        data-test="toolbar-filters-modal"
+        isDismissable
+        className="w-[500px]"
+      >
         <Dialog className="md:max-h-[calc(100dvh-64px)]">
           <DialogHeader>
             <DialogHeading>{title}</DialogHeading>

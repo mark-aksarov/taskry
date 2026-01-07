@@ -53,6 +53,7 @@ export function CustomerToolbarCreateNewMenuTrigger({
         renderButton={() => (
           <Button
             {...triggerProps}
+            data-test="customer-toolbar-create-new-menu-trigger"
             label={t("label")}
             iconLeft={<Plus size={16} strokeWidth={1.5} absoluteStrokeWidth />}
           />

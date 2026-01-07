@@ -40,7 +40,11 @@ export function CustomerItemActionMenuTrigger({
 
   return (
     <>
-      <ItemBaseActionMenuTrigger className={className} onAction={handleAction}>
+      <ItemBaseActionMenuTrigger
+        trigger-data-test={`customer-item-${customerId}-action-menu-trigger`}
+        className={className}
+        onAction={handleAction}
+      >
         <Item textValue={t("edit")} key="edit">
           <Pencil size={16} /> {t("edit")}
         </Item>

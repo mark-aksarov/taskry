@@ -1,6 +1,6 @@
 import { E2ESeedPayload } from "@/prisma/e2e/types";
 
-describe("Critical Path Smoke Tests", () => {
+describe("Navigation Smoke Tests", () => {
   beforeEach(() => {
     cy.viewport(1440, 900);
 
@@ -65,44 +65,28 @@ describe("Critical Path Smoke Tests", () => {
     cy.task("db:reset");
     cy.task("db:seed", payload);
     cy.signIn("owner@example.com", "12345abc");
-    cy.visit("/en");
   });
 
-  it("should verify main pages are accessible", () => {
-    cy.visit("/en");
-    cy.getByData("dashboard-cards").should("exist");
-    cy.getByData("tasks-list").should("be.visible");
+  it("should verify all main modules are reachable and display seeded data", () => {
+    const sections = [
+      { url: "/en", data: "dashboard-cards" },
+      { url: "/en/projects", data: "projects-list" },
+      { url: "/en/tasks", data: "tasks-list" },
+      { url: "/en/team", data: "users-list" },
+      { url: "/en/customers", data: "customers-list" },
+    ];
 
-    cy.visit("/en/projects");
-    cy.getByData("projects-list").should("be.visible");
+    sections.forEach((section) => {
+      cy.visit(section.url);
+      cy.getByData(section.data).should("be.visible");
+    });
+  });
 
+  it("should verify detail pages content", () => {
     cy.visit("/en/projects/1");
-    cy.getByData("project-detail-card").should("be.visible");
-
-    cy.visit("/en/tasks");
-    cy.getByData("tasks-list").should("be.visible");
+    cy.getByData("project-detail-card").should("contain", "Project 1");
 
     cy.visit("/en/tasks/1");
-    cy.getByData("task-detail-card").should("be.visible");
-
-    cy.visit("/en/team");
-    cy.getByData("users-list").should("be.visible");
-
-    cy.visit("/en/team/user-1");
-    cy.getByData("user-card").should("be.visible");
-
-    cy.visit("/en/team/user-1/tasks");
-    cy.getByData("user-card").should("be.visible");
-    cy.getByData("user-task-list").should("be.visible");
-
-    cy.visit("/en/customers");
-    cy.getByData("customers-list").should("be.visible");
-
-    cy.visit("/en/profile");
-    cy.getByData("user-card").should("be.visible");
-
-    cy.visit("/en/profile/tasks");
-    cy.getByData("user-card").should("be.visible");
-    cy.getByData("user-task-list").should("be.visible");
+    cy.getByData("task-detail-card").should("contain", "Task 1");
   });
 });

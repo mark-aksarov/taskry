@@ -34,6 +34,7 @@ export function EditCustomerModal({
 
   return (
     <FormBaseModal
+      data-test="edit-customer-modal"
       formId="edit-customer-form"
       title={t("title")}
       submitButtonLabel={t("submitButtonLabel")}

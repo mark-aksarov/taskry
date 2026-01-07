@@ -49,6 +49,7 @@ interface NavigationButtonProps {
   onPress?: () => void;
   children: React.ReactNode;
   className?: string;
+  "data-test"?: string;
 }
 
 export const NavigationButton = ({
@@ -58,6 +59,7 @@ export const NavigationButton = ({
   onPress,
   children,
   className,
+  "data-test": dataTest,
 }: NavigationButtonProps) => {
   if (href) {
     return (
@@ -76,6 +78,7 @@ export const NavigationButton = ({
 
   return (
     <RACButton
+      data-test={dataTest}
       onPress={onPress}
       className={styles({ variant, isActive, className })}
     >

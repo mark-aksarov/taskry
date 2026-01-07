@@ -54,6 +54,7 @@ export function ProjectToolbarCreateNewMenuTrigger({
         renderButton={() => (
           <Button
             {...triggerProps}
+            data-test="project-toolbar-create-new-menu-trigger"
             label={t("label")}
             iconLeft={<Plus size={16} strokeWidth={1.5} absoluteStrokeWidth />}
           />

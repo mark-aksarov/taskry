@@ -12,6 +12,7 @@ export function NewTaskModal({ newTaskForm, ...props }: NewTaskModalProps) {
 
   return (
     <FormBaseModal
+      data-test="new-task-modal"
       formId="new-task-form"
       title={t("title")}
       submitButtonLabel={t("submitButtonLabel")}

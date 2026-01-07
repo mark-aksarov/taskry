@@ -15,6 +15,7 @@ export function NewCustomerModal({
 
   return (
     <FormBaseModal
+      data-test="new-customer-modal"
       formId="new-customer-form"
       title={t("title")}
       submitButtonLabel={t("submitButtonLabel")}

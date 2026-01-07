@@ -28,6 +28,7 @@ export function EditProjectModal({
 
   return (
     <FormBaseModal
+      data-test="edit-project-modal"
       formId="edit-project-form"
       title={t("title")}
       submitButtonLabel={t("submitButtonLabel")}

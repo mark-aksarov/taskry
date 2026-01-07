@@ -52,6 +52,7 @@ export function TaskToolbarCreateNewMenuTrigger({
         renderButton={() => (
           <Button
             {...triggerProps}
+            data-test="task-toolbar-create-new-menu-trigger"
             label={t("label")}
             iconLeft={<Plus size={16} strokeWidth={1.5} absoluteStrokeWidth />}
           />

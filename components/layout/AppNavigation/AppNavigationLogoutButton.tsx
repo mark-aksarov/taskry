@@ -23,7 +23,7 @@ export function AppNavigationLogoutButton() {
 
   return (
     <>
-      <NavigationButton onPress={logout}>
+      <NavigationButton data-test="sign-out-btn" onPress={logout}>
         <LogOut size={18} strokeWidth={1.5} absoluteStrokeWidth />
         {t("logout")}
       </NavigationButton>
