@@ -2,12 +2,12 @@ import {
   createTask,
   updateTask,
   deleteTasks,
-  updateTasks,
+  updateTaskStatuses,
   getTaskCount,
 } from "../task.dal";
 
 import prisma from "@/lib/prisma";
-import { AccessDeniedError } from "@/lib/data/utils/error";
+import { AccessDeniedError, DomainRuleError } from "@/lib/data/utils/error";
 import { resetDatabase } from "@/lib/data/utils/test-utils";
 import { vi, describe, it, expect, beforeEach } from "vitest";
 import { verifySession } from "@/lib/data/utils/verifySession";
@@ -22,6 +22,50 @@ vi.mock("server-only", () => ({}));
 vi.mock("@/lib/data/utils/verifySession", () => ({
   verifySession: vi.fn(),
 }));
+
+const transitionRules: {
+  pStatus: ProjectStatus;
+  tStatus: TaskStatus;
+  deny: TaskStatus[];
+  allow: TaskStatus[];
+}[] = [
+  {
+    pStatus: ProjectStatus.active,
+    tStatus: TaskStatus.active,
+    deny: [],
+    allow: ["pending", "completed"],
+  },
+  {
+    pStatus: ProjectStatus.active,
+    tStatus: TaskStatus.pending,
+    deny: [],
+    allow: ["active", "completed"],
+  },
+  {
+    pStatus: ProjectStatus.active,
+    tStatus: TaskStatus.completed,
+    deny: [],
+    allow: ["active", "pending"],
+  },
+  {
+    pStatus: ProjectStatus.pending,
+    tStatus: TaskStatus.pending,
+    deny: ["active"],
+    allow: ["completed"],
+  },
+  {
+    pStatus: ProjectStatus.pending,
+    tStatus: TaskStatus.completed,
+    deny: ["active"],
+    allow: ["pending"],
+  },
+  {
+    pStatus: ProjectStatus.completed,
+    tStatus: TaskStatus.completed,
+    deny: ["active", "pending"],
+    allow: [],
+  },
+];
 
 describe("Task DAL", () => {
   beforeEach(async () => {
@@ -364,7 +408,7 @@ describe("Task DAL", () => {
       expect(result!.title).toBe("Updated Task Title");
     });
 
-    it("should return null when trying to update a task from another workspace", async () => {
+    it("should throw an error when trying to update a task from another workspace", async () => {
       const taskId = 100;
 
       await prisma.task.create({
@@ -384,142 +428,74 @@ describe("Task DAL", () => {
         title: "Updated Task Title",
       };
 
-      const result = await updateTask(updateInput);
-
-      expect(result).toBeNull();
+      await expect(updateTask(updateInput)).rejects.toThrow("Task not found");
     });
 
-    describe("Task Status Transition Rules", () => {
-      const users: { [key: string]: { role: string; userId: string } } = {
-        owner: { role: "owner", userId: "user-1" },
-        manager: { role: "manager", userId: "user-2" },
-        user: { role: "user", userId: "user-3" },
-        guest: { role: "guest", userId: "user-4" },
+    describe("RBAC: update task", () => {
+      const setup = async (userId: string, role: string) => {
+        (verifySession as any).mockResolvedValue({
+          user: { id: userId, workspaceId: 1, role },
+        });
+
+        const taskId = 100;
+
+        await prisma.task.create({
+          data: {
+            id: taskId,
+            title: "Task 1",
+            deadline: new Date(),
+            projectId: 1,
+            categoryId: 1,
+            workspaceId: 1,
+            status: TaskStatus.active,
+          },
+        });
+
+        return {
+          taskId,
+          updateInput: {
+            id: taskId,
+            title: "Updated Task Title",
+          },
+        };
       };
 
-      const transitionRules: {
-        user: { role: string; userId: string };
-        pStatus: ProjectStatus;
-        tStatus: TaskStatus;
-        deny: TaskStatus[];
-        skip: TaskStatus[];
-        allow: TaskStatus[];
-      }[] = [
-        // Guest rules
-        {
-          user: users.guest,
-          pStatus: ProjectStatus.active,
-          tStatus: TaskStatus.active,
-          deny: ["active", "pending", "completed"],
-          skip: [],
-          allow: [],
-        },
-        {
-          user: users.guest,
-          pStatus: ProjectStatus.active,
-          tStatus: TaskStatus.pending,
-          deny: ["active", "pending", "completed"],
-          skip: [],
-          allow: [],
-        },
-        {
-          user: users.guest,
-          pStatus: ProjectStatus.active,
-          tStatus: TaskStatus.completed,
-          deny: ["active", "pending", "completed"],
-          skip: [],
-          allow: [],
-        },
-        {
-          user: users.guest,
-          pStatus: ProjectStatus.pending,
-          tStatus: TaskStatus.pending,
-          deny: ["active", "pending", "completed"],
-          skip: [],
-          allow: [],
-        },
-        {
-          user: users.guest,
-          pStatus: ProjectStatus.pending,
-          tStatus: TaskStatus.completed,
-          deny: ["active", "pending", "completed"],
-          skip: [],
-          allow: [],
-        },
-        {
-          user: users.guest,
-          pStatus: ProjectStatus.completed,
-          tStatus: TaskStatus.completed,
-          deny: ["active", "pending", "completed"],
-          skip: [],
-          allow: [],
-        },
-      ];
+      it("should succeed for owner", async () => {
+        const { updateInput } = await setup("user-1", "owner");
+        const result = await updateTask(updateInput);
+        expect(result.title).toBe(updateInput.title);
+      });
 
-      // Owner, Manager, User rules
-      [users.owner].forEach((user) => {
-        transitionRules.push(
-          {
-            user,
-            pStatus: ProjectStatus.active,
-            tStatus: TaskStatus.active,
-            deny: [],
-            skip: [],
-            allow: ["pending", "completed"],
-          },
-          {
-            user,
-            pStatus: ProjectStatus.active,
-            tStatus: TaskStatus.pending,
-            deny: [],
-            skip: [],
-            allow: ["active", "completed"],
-          },
-          {
-            user,
-            pStatus: ProjectStatus.active,
-            tStatus: TaskStatus.completed,
-            deny: [],
-            skip: [],
-            allow: ["active", "pending"],
-          },
-          {
-            user,
-            pStatus: ProjectStatus.pending,
-            tStatus: TaskStatus.pending,
-            deny: [],
-            skip: ["active"],
-            allow: ["completed"],
-          },
-          {
-            user,
-            pStatus: ProjectStatus.pending,
-            tStatus: TaskStatus.completed,
-            deny: [],
-            skip: ["active"],
-            allow: ["pending"],
-          },
-          {
-            user,
-            pStatus: ProjectStatus.completed,
-            tStatus: TaskStatus.completed,
-            deny: [],
-            skip: ["active", "pending"],
-            allow: [],
-          },
+      it("should succeed for manager", async () => {
+        const { updateInput } = await setup("user-2", "manager");
+        const result = await updateTask(updateInput);
+        expect(result.title).toBe(updateInput.title);
+      });
+
+      it("should fail for user", async () => {
+        const { updateInput } = await setup("user-3", "user");
+
+        await expect(updateTask(updateInput)).rejects.toThrow(
+          AccessDeniedError,
         );
       });
 
+      it("should fail for guest", async () => {
+        const { updateInput } = await setup("user-4", "guest");
+
+        await expect(updateTask(updateInput)).rejects.toThrow(
+          AccessDeniedError,
+        );
+      });
+    });
+
+    describe("update task status by project status", () => {
       transitionRules.forEach((rule) => {
-        describe(`Role: ${rule.user.role} | Project: ${rule.pStatus} | Task: ${rule.tStatus}`, () => {
+        describe(`Project: ${rule.pStatus} | Task: ${rule.tStatus}`, () => {
           const projectId = 100;
           const taskId = 100;
 
           beforeEach(async () => {
-            (verifySession as any).mockResolvedValue({
-              user: { id: rule.user.userId, workspaceId: 1 },
-            });
-
             await prisma.project.create({
               data: {
                 id: projectId,
@@ -539,7 +515,7 @@ describe("Task DAL", () => {
                 projectId,
                 categoryId: 1,
                 workspaceId: 1,
-                assigneeId: rule.user.userId,
+                assigneeId: "user-1",
                 status: rule.tStatus,
               },
             });
@@ -557,22 +533,11 @@ describe("Task DAL", () => {
           });
 
           rule.deny.forEach((status) => {
-            it(`should throw AccessDeniedError when transition to ${status}`, async () => {
+            it(`should throw DomainRuleError when transition to ${status}`, async () => {
               const updateInput = { id: taskId, status };
               await expect(updateTask(updateInput)).rejects.toThrow(
-                AccessDeniedError,
+                DomainRuleError,
               );
-            });
-          });
-
-          rule.skip.forEach((status) => {
-            it(`should skip transition to ${status}`, async () => {
-              const updateInput = { id: taskId, status };
-              const result = await updateTask(updateInput);
-
-              expect(result).not.toBeNull();
-              expect(result!.id).toBe(taskId);
-              expect(result!.status).toBe(rule.tStatus);
             });
           });
         });
@@ -590,49 +555,46 @@ describe("Task DAL", () => {
 
       await expect(updateTask(updateInput)).rejects.toThrow();
     });
-
-    /*describe("Task RBAC Updating", () => {
-      const updateTestCases = [
-        { role: "admin", expected: "allow" },
-        { role: "owner", expected: "allow" },
-        { role: "manager", expected: "allow" },
-        { role: "user", expected: "deny" },
-        { role: "guest", expected: "deny" },
-      ];
-
-      it.each(updateTestCases)(
-        "should $expected update for role: $role",
-        async ({ role, expected }) => {
-          await prisma.user.update({
-            where: { id: "user-1" },
-            data: { role },
-          });
-
-          const taskId = 1;
-          const input = {
-            id: taskId,
-            title: "Updated Title",
-          };
-
-          if (expected === "allow") {
-            const result = await updateTask(input);
-            expect(result).not.toBeNull();
-            expect(result?.title).toBe("Updated Title");
-          } else {
-            await expect(updateTask(input)).rejects.toThrow(AccessDeniedError);
-          }
-        },
-      );
-    });*/
   });
 
-  /*
-  describe("updateTasks", () => {
-    it("should update multiple tasks when they are in the current workspace and have allowed project statuses", async () => {
-      const taskIds = [1, 2];
-      const nextStatus = "completed" as const;
+  describe("updateTaskStatuses", () => {
+    it("should update multiple tasks when they are in the current workspace", async () => {
+      await prisma.task.createMany({
+        data: [
+          {
+            id: 1,
+            title: "Task 1",
+            deadline: new Date(),
+            projectId: 1,
+            categoryId: 1,
+            workspaceId: 1,
+            status: TaskStatus.active,
+          },
+          {
+            id: 2,
+            title: "Task 2",
+            deadline: new Date(),
+            projectId: 1,
+            categoryId: 1,
+            workspaceId: 1,
+            status: TaskStatus.active,
+          },
+          {
+            id: 3,
+            title: "Task 3",
+            deadline: new Date(),
+            projectId: 2,
+            categoryId: 2,
+            workspaceId: 2,
+            status: TaskStatus.active,
+          },
+        ],
+      });
 
-      const result = await updateTasks(taskIds, nextStatus);
+      const taskIds = [1, 2];
+      const nextStatus = TaskStatus.completed;
+
+      const result = await updateTaskStatuses(taskIds, nextStatus);
 
       expect(result.count).toBe(2);
 
@@ -643,134 +605,255 @@ describe("Task DAL", () => {
     });
 
     it("should return count 0 when attempting to update tasks from a different workspace", async () => {
-      const taskIds = [1, 2];
-
-      const result = await updateTasks(taskIds, "completed");
-
-      expect(result.count).toBe(0);
-    });
-
-    it("should not update tasks if their parent project status is not allowed", async () => {
-      const taskId = 1;
-      const taskBefore = await prisma.task.findUnique({
-        where: { id: taskId },
-      });
-
-      const result = await updateTasks([taskId], "active");
-
-      expect(result.count).toBe(0);
-
-      const taskAfter = await prisma.task.findUnique({
-        where: { id: taskId },
-      });
-      expect(taskAfter?.status).toBe(taskBefore?.status);
-    });
-
-    it("should partially update only the valid tasks in a mixed list", async () => {
-      const validId = 1;
-      const invalidId = 2;
-
-      const result = await updateTasks([validId, invalidId], "pending");
-
-      expect(result.count).toBe(1);
-
-      const updatedTask = await prisma.task.findUnique({
-        where: { id: validId },
-      });
-      expect(updatedTask?.status).toBe("pending");
-    });
-
-    describe("Task RBAC Update Status", () => {
-      beforeEach(async () => {
-        const projectId = 1;
-
-        await prisma.task.upsert({
-          where: { id: 9999 },
-          update: {},
-          create: {
-            id: 9999,
+      await prisma.task.createMany({
+        data: [
+          {
+            id: 1,
+            title: "Task 1",
             deadline: new Date(),
-            title: "User 2's Private Task",
-            status: "active",
-            assigneeId: "user-2",
-            workspaceId: 1,
-            projectId: projectId,
+            projectId: 1,
             categoryId: 1,
+            workspaceId: 1,
+            status: TaskStatus.active,
+          },
+          {
+            id: 2,
+            title: "Task 2",
+            deadline: new Date(),
+            projectId: 2,
+            categoryId: 2,
+            workspaceId: 2,
+            status: TaskStatus.active,
+          },
+        ],
+      });
+
+      const taskIds = [2];
+
+      const result = await updateTaskStatuses(taskIds, "completed");
+
+      expect(result.count).toBe(0);
+    });
+
+    describe("RBAC: update task status", () => {
+      const setup = async (
+        userId: string,
+        role: string,
+        assigneeId?: string,
+      ) => {
+        (verifySession as any).mockResolvedValue({
+          user: { id: userId, role, workspaceId: 1 },
+        });
+
+        const taskId = 100;
+
+        await prisma.task.create({
+          data: {
+            id: taskId,
+            title: "Task 1",
+            deadline: new Date(),
+            projectId: 1,
+            categoryId: 1,
+            workspaceId: 1,
+            status: TaskStatus.active,
+            assigneeId,
           },
         });
+      };
+
+      it("should succeed for owner", async () => {
+        await setup("user-1", "owner");
+
+        const result = await updateTaskStatuses([100], "completed");
+
+        expect(result.count).toBe(1);
+        const updatedTask = await prisma.task.findFirst({
+          where: { id: 100 },
+        });
+        expect(updatedTask!.status).toBe("completed");
       });
 
-      const statusUpdateTestCases = [
-        { role: "admin", expected: "allow" },
-        { role: "owner", expected: "allow" },
-        { role: "manager", expected: "allow" },
-        { role: "user", expected: "partial" },
-        { role: "guest", expected: "deny" },
-      ];
+      it("should succeed for manager", async () => {
+        await setup("user-2", "manager");
 
-      it.each(statusUpdateTestCases)(
-        "should $expected bulk status update for role: $role",
-        async ({ role, expected }) => {
-          await prisma.user.update({
-            where: { id: "user-1" },
-            data: { role },
-          });
+        const result = await updateTaskStatuses([100], "completed");
 
-          (verifySession as any).mockResolvedValue({
-            user: { id: "user-1", workspaceId: 1, role: role },
-          });
+        expect(result.count).toBe(1);
+        const updatedTask = await prisma.task.findFirst({
+          where: { id: 100 },
+        });
+        expect(updatedTask!.status).toBe("completed");
+      });
 
-          const ownTaskId = 1;
-          const otherTaskId = 9999;
-          const taskIds = [ownTaskId, otherTaskId];
-          const nextStatus = "completed" as const;
+      it("should succeed for assignee user", async () => {
+        await setup("user-3", "user", "user-3");
 
-          if (expected === "allow") {
-            const result = await updateTasks(taskIds, nextStatus);
-            expect(result.count).toBe(2);
-          } else if (expected === "partial") {
-            const result = await updateTasks(taskIds, nextStatus);
-            expect(result.count).toBe(1);
+        const result = await updateTaskStatuses([100], "completed");
 
-            const updatedOwn = await prisma.task.findUnique({
-              where: { id: ownTaskId },
+        expect(result.count).toBe(1);
+        const updatedTask = await prisma.task.findFirst({
+          where: { id: 100 },
+        });
+        expect(updatedTask!.status).toBe("completed");
+      });
+
+      it("should fail for not assignee user", async () => {
+        await setup("user-3", "user");
+
+        const result = await updateTaskStatuses([100], "completed");
+
+        expect(result.count).toBe(0);
+        const updatedTask = await prisma.task.findFirst({
+          where: { id: 100 },
+        });
+        expect(updatedTask!.status).toBe("active");
+      });
+
+      it("should fail for guest", async () => {
+        await setup("user-4", "guest");
+
+        await expect(updateTaskStatuses([100], "completed")).rejects.toThrow(
+          AccessDeniedError,
+        );
+      });
+    });
+
+    describe("update task status by project status", () => {
+      transitionRules.forEach((rule) => {
+        describe(`Project: ${rule.pStatus} | Task: ${rule.tStatus}`, () => {
+          const projectId = 100;
+          const taskId = 100;
+
+          beforeEach(async () => {
+            await prisma.project.create({
+              data: {
+                id: projectId,
+                title: "Project",
+                deadline: new Date(),
+                categoryId: 1,
+                workspaceId: 1,
+                status: rule.pStatus,
+              },
             });
-            expect(updatedOwn?.status).toBe(nextStatus);
-          } else {
-            await expect(updateTasks(taskIds, nextStatus)).rejects.toThrow(
-              AccessDeniedError,
-            );
-          }
-        },
-      );
+
+            await prisma.task.create({
+              data: {
+                id: taskId,
+                title: "Task",
+                deadline: new Date(),
+                projectId,
+                categoryId: 1,
+                workspaceId: 1,
+                assigneeId: "user-1",
+                status: rule.tStatus,
+              },
+            });
+          });
+
+          rule.allow.forEach((status) => {
+            it(`should allow transition to ${status}`, async () => {
+              const result = await updateTaskStatuses([taskId], status);
+
+              expect(result.count).toBe(1);
+              const updatedTask = await prisma.task.findFirst({
+                where: { id: 100 },
+              });
+              expect(updatedTask!.status).toBe(status);
+            });
+          });
+
+          rule.deny.forEach((status) => {
+            it(`should throw DomainRuleError when transition to ${status}`, async () => {
+              const result = await updateTaskStatuses([taskId], status);
+
+              expect(result.count).toBe(0);
+              const updatedTask = await prisma.task.findFirst({
+                where: { id: 100 },
+              });
+              expect(updatedTask!.status).toBe(rule.tStatus);
+            });
+          });
+        });
+      });
     });
   });
 
   describe("deleteTasks", () => {
-    it("should successfully delete multiple tasks in the current workspace and return the count", async () => {
-      const id1 = 1;
-      const id2 = 2;
-      const idsToDelete = [id1, id2];
+    it("should successfully delete tasks in the current workspace", async () => {
+      await prisma.task.createMany({
+        data: [
+          {
+            id: 1,
+            title: "Task 1",
+            deadline: new Date(),
+            projectId: 1,
+            categoryId: 1,
+            workspaceId: 1,
+            status: TaskStatus.active,
+          },
+          {
+            id: 2,
+            title: "Task 2",
+            deadline: new Date(),
+            projectId: 1,
+            categoryId: 1,
+            workspaceId: 1,
+            status: TaskStatus.active,
+          },
+        ],
+      });
 
-      const result = await deleteTasks(idsToDelete);
+      const result = await deleteTasks([1, 2]);
 
       expect(result.count).toBe(2);
-
-      const remainingTasks = await prisma.task.findMany({
-        where: { id: { in: idsToDelete } },
-      });
+      const remainingTasks = await prisma.task.findMany();
       expect(remainingTasks).toHaveLength(0);
     });
 
-    it("should return count 0 when attempting to delete tasks from a different workspace", async () => {
-      const ws2Ids = [1];
+    it("should not delete tasks from a different workspace", async () => {
+      await prisma.task.createMany({
+        data: [
+          {
+            id: 1,
+            title: "Task 1",
+            deadline: new Date(),
+            projectId: 2,
+            categoryId: 2,
+            workspaceId: 2,
+            status: TaskStatus.active,
+          },
+        ],
+      });
 
-      const result = await deleteTasks(ws2Ids);
+      const result = await deleteTasks([1]);
 
       expect(result.count).toBe(0);
     });
 
-    it("should only delete tasks belonging to the current workspace in a mixed list", async () => {
+    it("should only delete tasks belonging to the current workspace", async () => {
+      await prisma.task.createMany({
+        data: [
+          {
+            id: 1,
+            title: "Task 1",
+            deadline: new Date(),
+            projectId: 1,
+            categoryId: 1,
+            workspaceId: 1,
+            status: TaskStatus.active,
+          },
+          {
+            id: 2,
+            title: "Task 2",
+            deadline: new Date(),
+            projectId: 2,
+            categoryId: 2,
+            workspaceId: 2,
+            status: TaskStatus.active,
+          },
+        ],
+      });
+
       const validId = 1;
       const invalidId = 2;
       const mixedIds = [validId, invalidId];
@@ -791,7 +874,21 @@ describe("Task DAL", () => {
     });
 
     describe("Task RBAC Deletion", () => {
-      const taskId = 1;
+      beforeEach(async () => {
+        await prisma.task.createMany({
+          data: [
+            {
+              id: 1,
+              title: "Task 1",
+              deadline: new Date(),
+              projectId: 1,
+              categoryId: 1,
+              workspaceId: 1,
+              status: TaskStatus.active,
+            },
+          ],
+        });
+      });
 
       const deleteTestCases = [
         { role: "admin", expected: "allow" },
@@ -810,16 +907,13 @@ describe("Task DAL", () => {
           });
 
           if (expected === "allow") {
-            const result = await deleteTasks([taskId]);
+            const result = await deleteTasks([1]);
             expect(result.count).toBe(1);
           } else {
-            await expect(deleteTasks([taskId])).rejects.toThrow(
-              AccessDeniedError,
-            );
+            await expect(deleteTasks([1])).rejects.toThrow(AccessDeniedError);
           }
         },
       );
     });
   });
-  */
 });

@@ -8,9 +8,9 @@ import {
 import { cache } from "react";
 import prisma from "@/lib/prisma";
 import { TaskFilters } from "@/lib/types";
-import { AccessDeniedError } from "../utils/error";
 import { buildDateWhere } from "../utils/dateWhere";
 import { verifySession } from "../utils/verifySession";
+import { AccessDeniedError, DomainRuleError } from "../utils/error";
 import { UpdateTaskInputDTO, CreateTaskInputDTO } from "./task.dto";
 import { ALLOWED_TASK_STATUSES_BY_PROJECT } from "../utils/statusUtils";
 import { Prisma, ProjectStatus, TaskStatus } from "@/generated/prisma/client";
@@ -116,46 +116,48 @@ export const createTask = async (input: CreateTaskInputDTO) => {
 
 export const updateTask = async (input: UpdateTaskInputDTO) => {
   const {
-    user: { id, workspaceId },
+    user: { workspaceId },
   } = await verifySession();
 
   const canUpdate = await canUpdateTask();
 
   if (!canUpdate) {
-    throw new AccessDeniedError("You do not have permission to update task.");
+    throw new AccessDeniedError();
   }
 
-  await validateTaskRelations(workspaceId, input);
-
   return prisma.$transaction(async (tx) => {
-    const existingTask = await tx.task.findUnique({
+    const task = await tx.task.findUnique({
       where: { id: input.id, workspaceId },
-      select: { project: { select: { status: true } } },
+      select: {
+        project: { select: { status: true } },
+      },
     });
 
-    if (!existingTask) {
-      return null;
+    if (!task) {
+      throw new Error("Task not found");
     }
 
-    let dataToUpdate = { ...input };
-
     if (input.status) {
-      const allowedProjectStatuses = getAllowedProjectStatuses(input.status);
-      const currentProjectStatus = existingTask.project.status as ProjectStatus;
+      const allowed = getAllowedProjectStatuses(input.status);
 
-      if (!allowedProjectStatuses.includes(currentProjectStatus)) {
-        delete dataToUpdate.status;
+      if (!allowed.includes(task.project.status)) {
+        throw new DomainRuleError(
+          `Cannot change task status to ${input.status} while project is ${task.project.status}`,
+        );
       }
     }
 
     return tx.task.update({
       where: { id: input.id },
-      data: dataToUpdate,
+      data: input,
     });
   });
 };
 
-export const updateTasks = async (taskIds: number[], status: TaskStatus) => {
+export const updateTaskStatuses = async (
+  taskIds: number[],
+  status: TaskStatus,
+) => {
   const {
     user: { id: userId, workspaceId, role },
   } = await verifySession();
