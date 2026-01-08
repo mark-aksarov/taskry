@@ -1,24 +1,6 @@
-import {
-  addDays,
-  endOfDay,
-  endOfWeek,
-  startOfDay,
-  startOfWeek,
-} from "date-fns";
-
+import { dates } from "@/lib/data/utils/test-utils";
 import { E2ESeedPayload } from "@/prisma/e2e/types";
 import { ProjectStatus, TaskStatus } from "@/generated/prisma/enums";
-
-const now = new Date();
-
-export const dates = {
-  overdue: addDays(startOfDay(now), -5),
-  today: endOfDay(now),
-  tomorrow: endOfDay(addDays(now, 1)),
-  thisWeek: endOfWeek(now, { weekStartsOn: 1 }),
-  nextWeek: endOfWeek(addDays(now, 7), { weekStartsOn: 1 }),
-  prevWeek: startOfWeek(addDays(now, -7), { weekStartsOn: 1 }),
-};
 
 const createPayload = (payload: E2ESeedPayload): E2ESeedPayload => {
   const basePayload: E2ESeedPayload = {

@@ -208,10 +208,4 @@ export async function seedE2E(payload: E2ESeedPayload) {
       data: payload.notifications,
     });
   }
-
-  if (payload.notificationTargets) {
-    await prisma.notificationTarget.createMany({
-      data: payload.notificationTargets,
-    });
-  }
 }

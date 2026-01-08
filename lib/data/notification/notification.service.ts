@@ -28,7 +28,6 @@ export const getNotifications = async ({
     items: notifications.map((notification) => ({
       id: notification.id,
       type: notification.type,
-      content: notification.content ?? undefined,
       createdAt: notification.createdAt,
       updatedAt: notification.updatedAt,
       isRead: notification.isRead,
@@ -41,23 +40,23 @@ export const getNotifications = async ({
           }
         : undefined,
 
-      target: notification.target
+      project: notification.project ?? undefined,
+      task: notification.task ?? undefined,
+
+      projectTitle: notification.projectTitle ?? undefined,
+      projectDeadline: notification.projectDeadline ?? undefined,
+      projectStatus: notification.projectStatus ?? undefined,
+
+      taskTitle: notification.taskTitle ?? undefined,
+      taskDeadline: notification.taskDeadline ?? undefined,
+      taskStatus: notification.taskStatus ?? undefined,
+
+      commentContent: notification.commentContent ?? undefined,
+
+      comment: notification.comment
         ? {
-            id: notification.target.id,
-            project: notification.target.project ?? undefined,
-            task: notification.target.task ?? undefined,
-            user: notification.target.user ?? undefined,
-            customer: notification.target.customer ?? undefined,
-            comment: notification.target.comment
-              ? {
-                  id: notification.target.comment.id,
-                  content: notification.target.comment.content,
-                  createdAt: notification.target.comment.createdAt,
-                  attachments: notification.target.comment.attachments,
-                  project: notification.target.comment.project ?? undefined,
-                  task: notification.target.comment.task ?? undefined,
-                }
-              : undefined,
+            id: notification.comment.id,
+            content: notification.comment.content,
           }
         : undefined,
     })),

@@ -1,66 +1,4 @@
-import { NotificationType } from "@/generated/prisma/client";
-
-export const notificationTargets = [
-  //Projects
-  {
-    id: 1,
-    notificationId: 1,
-    projectId: 1,
-    createdAt: "2025-01-01T00:00:00.000Z",
-  },
-  {
-    id: 2,
-    notificationId: 2,
-    projectId: 2,
-    createdAt: "2025-01-02T00:00:00.000Z",
-  },
-  {
-    id: 3,
-    notificationId: 3,
-    projectId: 3,
-    createdAt: "2025-01-03T00:00:00.000Z",
-  },
-
-  //Tasks
-  {
-    id: 4,
-    notificationId: 5,
-    taskId: 1,
-    createdAt: "2025-01-05T00:00:00.000Z",
-  },
-  {
-    id: 5,
-    notificationId: 6,
-    taskId: 2,
-    createdAt: "2025-01-06T00:00:00.000Z",
-  },
-  {
-    id: 6,
-    notificationId: 7,
-    taskId: 3,
-    createdAt: "2025-01-07T00:00:00.000Z",
-  },
-
-  //Comments
-  {
-    id: 7,
-    notificationId: 9,
-    commentId: 461,
-    createdAt: "2025-01-05T00:00:00.000Z",
-  },
-  {
-    id: 8,
-    notificationId: 10,
-    commentId: 460,
-    createdAt: "2025-01-06T00:00:00.000Z",
-  },
-  {
-    id: 9,
-    notificationId: 11,
-    taskId: 3,
-    createdAt: "2025-01-06T00:00:00.000Z",
-  },
-];
+import { NotificationType, ProjectStatus, TaskStatus } from "@/generated/prisma/client";
 
 export const notifications = [
   //Projects
@@ -69,6 +7,10 @@ export const notifications = [
     workspaceId: 1,
     actorId: "user-1",
     recipientId: "user-10",
+    projectId: 1,
+    projectTitle: "Разработка корпоративного сайта",
+    projectDeadline: "2027-03-15T00:00:00.000Z",
+    projectStatus: ProjectStatus.active,
     type: NotificationType.projectAdded,
     createdAt: "2025-01-01T00:00:00.000Z",
     isRead: true,
@@ -78,6 +20,10 @@ export const notifications = [
     workspaceId: 1,
     actorId: "user-5",
     recipientId: "user-10",
+    projectId: 2,
+    projectTitle: "Мобильное приложение (MVP)",
+    projectDeadline: "2027-05-20T00:00:00.000Z",
+    projectStatus: ProjectStatus.active,
     type: NotificationType.projectDeadlineChanged,
     createdAt: "2025-01-07T00:00:00.000Z",
     isRead: true,
@@ -87,6 +33,10 @@ export const notifications = [
     workspaceId: 1,
     actorId: "user-1",
     recipientId: "user-10",
+    projectId: 3,
+    projectTitle: "Редизайн логотипа и стиля",
+    projectDeadline: "2027-02-10T00:00:00.000Z",
+    projectStatus: ProjectStatus.completed,
     type: NotificationType.projectStatusChanged,
     createdAt: "2025-01-07T00:00:00.000Z",
     isRead: true,
@@ -96,10 +46,12 @@ export const notifications = [
     workspaceId: 1,
     actorId: "user-5",
     recipientId: "user-10",
+    projectTitle: "Разработка сайта для внутреннего использования.",
+    projectDeadline: "2027-02-10T00:00:00.000Z",
+    projectStatus: ProjectStatus.completed,
     type: NotificationType.projectDeleted,
     createdAt: "2025-03-08T00:00:00.000Z",
     isRead: true,
-    content: "Разработка сайта для внутреннего использования.",
   },
 
   //Tasks
@@ -108,6 +60,10 @@ export const notifications = [
     workspaceId: 1,
     actorId: "user-1",
     recipientId: "user-10",
+    taskId: 1,
+    taskTitle: "Разработка главной страницы (макет)",
+    taskDeadline: "2026-12-10T00:00:00.000Z",
+    taskStatus: TaskStatus.active,
     type: NotificationType.taskAdded,
     createdAt: "2025-01-02T00:00:00.000Z",
     isRead: true,
@@ -117,6 +73,10 @@ export const notifications = [
     workspaceId: 1,
     actorId: "user-5",
     recipientId: "user-10",
+    taskId: 2,
+    taskTitle: "Мобильное приложение (MVP)",
+    taskDeadline: "2026-12-05T00:00:00.000Z",
+    taskStatus: TaskStatus.completed,
     type: NotificationType.taskDeadlineChanged,
     createdAt: "2025-01-06T00:00:00.000Z",
     isRead: true,
@@ -126,6 +86,10 @@ export const notifications = [
     workspaceId: 1,
     actorId: "user-1",
     recipientId: "user-10",
+    taskId: 3,
+    taskTitle: "Создание API: список услуг",
+    taskDeadline: "2026-12-15T00:00:00.000Z",
+    taskStatus: TaskStatus.active,
     type: NotificationType.taskStatusChanged,
     createdAt: "2025-01-06T00:00:00.000Z",
     isRead: true,
@@ -135,10 +99,12 @@ export const notifications = [
     workspaceId: 1,
     actorId: "user-5",
     recipientId: "user-10",
+    taskTitle: "Проектирование схемы БД.",
+    taskDeadline: "2026-12-15T00:00:00.000Z",
+    taskStatus: TaskStatus.active,
     type: NotificationType.taskDeleted,
     createdAt: "2025-03-18T00:00:00.000Z",
     isRead: true,
-    content: "Проектирование схемы БД.",
   },
 
   //Comments
@@ -147,6 +113,10 @@ export const notifications = [
     workspaceId: 1,
     actorId: "user-1",
     recipientId: "user-10",
+    commentId: 461,
+    commentContent: 'Ссылка на облако с контентом отправлена. Все файлы в папке "About_Us_Content". Просьба проверить разрешение перед загрузкой.',
+    taskId: 7,
+    taskTitle: "Наполнение раздела 'О нас'",
     type: NotificationType.commentAdded,
     createdAt: "2025-01-02T00:00:00.000Z",
     isRead: true,
@@ -156,6 +126,10 @@ export const notifications = [
     workspaceId: 1,
     actorId: "user-5",
     recipientId: "user-10",
+    commentId: 460,
+    commentContent: "Какие именно фотографии и логотипы нужно загрузить? Есть ли ссылка на папку с исходниками?",
+    taskId: 7,
+    taskTitle: "Наполнение раздела 'О нас'",
     type: NotificationType.commentChanged,
     createdAt: "2025-01-06T00:00:00.000Z",
     isRead: true,
@@ -165,9 +139,11 @@ export const notifications = [
     workspaceId: 1,
     actorId: "user-5",
     recipientId: "user-10",
+    commentContent: "Нужен список секций главной страницы, чтобы начать работу над структурой в Figma. Он уже есть или нужны референсы?",
+    taskId: 3,
+    taskTitle: "Создание API: список услуг",
     type: NotificationType.commentDeleted,
     createdAt: "2025-03-18T00:00:00.000Z",
     isRead: true,
-    content: "Нужен список секций главной страницы, чтобы начать работу над структурой в Figma. Он уже есть или нужны референсы?",
   },
 ];

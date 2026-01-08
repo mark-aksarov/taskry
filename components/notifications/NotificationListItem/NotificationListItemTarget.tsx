@@ -3,85 +3,96 @@
 import { Link } from "@/components/ui";
 import { NotificationListItemDTO } from "@/lib/data/notification/notification.dto";
 
-export function NotificationListItemTarget({
-  notification,
-}: {
+type Props = {
   notification: NotificationListItemDTO;
+};
+
+const styles =
+  "text-sm font-semibold text-black dark:text-white text-wrap inline";
+
+function renderTarget({
+  entity,
+  title,
+  href,
+}: {
+  entity?: { id: number; title: string } | null;
+  title?: string | null;
+  href: (id: number) => string;
 }) {
-  const type = notification.type.toLowerCase();
-  const target = notification.target;
-
-  const styles =
-    "text-sm font-semibold text-black dark:text-white text-wrap inline";
-
-  // deleted is plain text
-  if (type.includes("deleted")) {
-    const project = target?.project;
-    const task = target?.task;
-
-    if (project) {
-      return (
-        <Link className={styles} href={`/projects/${project.id}`}>
-          {project.title}
-        </Link>
-      );
-    }
-
-    if (task) {
-      return (
-        <Link className={styles} href={`/tasks/${task.id}`}>
-          {task.title}
-        </Link>
-      );
-    }
-
-    return <span className={styles}>{notification.content}</span>;
+  // for cases where the entity (project / task) has been deleted after the notification was created
+  if (!entity && title) {
+    return <span className={styles}>{title}</span>;
   }
 
-  // project
-  if (type.includes("project")) {
-    const project = target?.project;
-    if (!project) return null;
-
+  // entity  (project / task) exists
+  if (entity) {
     return (
-      <Link className={styles} href={`/projects/${project.id}`}>
-        {project.title}
+      <Link className={styles} href={href(entity.id)}>
+        {entity.title}
       </Link>
     );
   }
 
-  // task
-  if (type.includes("task")) {
-    const task = target?.task;
-    if (!task) return null;
+  return null;
+}
 
-    return (
-      <Link className={styles} href={`/tasks/${task.id}`}>
-        {task.title}
-      </Link>
-    );
+export function NotificationListItemTarget({ notification }: Props) {
+  const { type } = notification;
+
+  // deleted task
+  if (type === "taskDeleted") {
+    return <span className={styles}>{notification.taskTitle}</span>;
   }
 
-  // comment
-  if (type.includes("comment")) {
-    const comment = target?.comment;
-    if (!comment) return null;
+  // deleted project
+  if (type === "projectDeleted") {
+    return <span className={styles}>{notification.projectTitle}</span>;
+  }
 
-    if (comment.project) {
-      return (
-        <Link className={styles} href={`/projects/${comment.project.id}`}>
-          {comment.project.title}
-        </Link>
-      );
-    }
+  // project-related
+  if (
+    type === "projectAdded" ||
+    type === "projectDeadlineChanged" ||
+    type === "projectStatusChanged"
+  ) {
+    return renderTarget({
+      entity: notification.project,
+      title: notification.projectTitle,
+      href: (id) => `/projects/${id}`,
+    });
+  }
 
-    if (comment.task) {
-      return (
-        <Link className={styles} href={`/tasks/${comment.task.id}`}>
-          {comment.task.title}
-        </Link>
-      );
-    }
+  // task-related
+  if (
+    type === "taskAdded" ||
+    type === "taskDeadlineChanged" ||
+    type === "taskStatusChanged"
+  ) {
+    return renderTarget({
+      entity: notification.task,
+      title: notification.taskTitle,
+      href: (id) => `/tasks/${id}`,
+    });
+  }
+
+  // comment-related (project OR task)
+  if (
+    type === "commentAdded" ||
+    type === "commentChanged" ||
+    type === "commentDeleted"
+  ) {
+    return (
+      renderTarget({
+        entity: notification.project,
+        title: notification.projectTitle,
+        href: (id) => `/projects/${id}`,
+      }) ??
+      renderTarget({
+        entity: notification.task,
+        title: notification.taskTitle,
+        href: (id) => `/tasks/${id}`,
+      })
+    );
   }
 
   return null;

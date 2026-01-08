@@ -3,6 +3,7 @@ import "server-only";
 import { cache } from "react";
 import prisma from "@/lib/prisma";
 import { verifySession } from "@/lib/data/utils/verifySession";
+import { NotificationType, Prisma, Task } from "@/generated/prisma/client";
 
 export const getAllNotifications = cache(
   async ({
@@ -35,10 +36,19 @@ export const getAllNotifications = cache(
         select: {
           id: true,
           type: true,
-          content: true,
           createdAt: true,
           updatedAt: true,
           isRead: true,
+
+          projectTitle: true,
+          projectDeadline: true,
+          projectStatus: true,
+
+          taskTitle: true,
+          taskDeadline: true,
+          taskStatus: true,
+
+          commentContent: true,
 
           actor: {
             select: {
@@ -48,71 +58,28 @@ export const getAllNotifications = cache(
             },
           },
 
-          target: {
+          project: {
             select: {
               id: true,
+              title: true,
+              deadline: true,
+              status: true,
+            },
+          },
 
-              project: {
-                select: {
-                  id: true,
-                  title: true,
-                  deadline: true,
-                  status: true,
-                },
-              },
+          task: {
+            select: {
+              id: true,
+              title: true,
+              deadline: true,
+              status: true,
+            },
+          },
 
-              task: {
-                select: {
-                  id: true,
-                  title: true,
-                  deadline: true,
-                  status: true,
-                },
-              },
-
-              user: {
-                select: {
-                  id: true,
-                  fullName: true,
-                },
-              },
-
-              customer: {
-                select: {
-                  id: true,
-                  fullName: true,
-                },
-              },
-
-              comment: {
-                select: {
-                  id: true,
-                  content: true,
-                  createdAt: true,
-
-                  attachments: {
-                    select: {
-                      id: true,
-                      fileUrl: true,
-                      fileName: true,
-                    },
-                  },
-
-                  project: {
-                    select: {
-                      id: true,
-                      title: true,
-                    },
-                  },
-
-                  task: {
-                    select: {
-                      id: true,
-                      title: true,
-                    },
-                  },
-                },
-              },
+          comment: {
+            select: {
+              id: true,
+              content: true,
             },
           },
         },
@@ -125,3 +92,50 @@ export const getAllNotifications = cache(
     return { items: notifications, totalCount, unreadCount };
   },
 );
+
+export async function createTaskAddedNotifications(
+  tx: Prisma.TransactionClient,
+  {
+    task,
+    actorId,
+    workspaceId,
+  }: {
+    task: Task;
+    actorId: string;
+    workspaceId: number;
+  },
+) {
+  const orConditions: Prisma.UserWhereInput[] = [
+    { role: "owner" },
+    { role: "manager" },
+  ];
+
+  if (task.assigneeId) {
+    orConditions.push({ id: task.assigneeId });
+  }
+
+  const recipients = await tx.user.findMany({
+    where: {
+      workspaceId,
+      id: { not: actorId },
+      OR: orConditions,
+    },
+    select: { id: true },
+  });
+
+  if (!recipients.length) return;
+
+  await tx.notification.createMany({
+    data: recipients.map((user) => ({
+      type: NotificationType.taskAdded,
+      actorId: actorId,
+      isRead: false,
+      recipientId: user.id,
+      workspaceId,
+      taskId: task.id,
+      taskTitle: task.title,
+      taskDeadline: task.deadline,
+      taskStatus: task.status,
+    })),
+  });
+}

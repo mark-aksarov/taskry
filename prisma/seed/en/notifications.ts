@@ -1,66 +1,4 @@
-import { NotificationType } from "@/generated/prisma/client";
-
-export const notificationTargets = [
-  //Projects
-  {
-    id: 10,
-    notificationId: 12,
-    projectId: 41,
-    createdAt: "2025-01-01T00:00:00.000Z",
-  },
-  {
-    id: 11,
-    notificationId: 13,
-    projectId: 42,
-    createdAt: "2025-01-02T00:00:00.000Z",
-  },
-  {
-    id: 12,
-    notificationId: 14,
-    projectId: 43,
-    createdAt: "2025-01-03T00:00:00.000Z",
-  },
-
-  //Tasks
-  {
-    id: 13,
-    notificationId: 16,
-    taskId: 558,
-    createdAt: "2025-01-05T00:00:00.000Z",
-  },
-  {
-    id: 14,
-    notificationId: 17,
-    taskId: 559,
-    createdAt: "2025-01-06T00:00:00.000Z",
-  },
-  {
-    id: 15,
-    notificationId: 18,
-    taskId: 560,
-    createdAt: "2025-01-07T00:00:00.000Z",
-  },
-
-  //Comments
-  {
-    id: 16,
-    notificationId: 20,
-    commentId: 5173,
-    createdAt: "2025-01-05T00:00:00.000Z",
-  },
-  {
-    id: 17,
-    notificationId: 21,
-    commentId: 5172,
-    createdAt: "2025-01-06T00:00:00.000Z",
-  },
-  {
-    id: 18,
-    notificationId: 22,
-    taskId: 558,
-    createdAt: "2025-01-06T00:00:00.000Z",
-  },
-];
+import { NotificationType, ProjectStatus, TaskStatus } from "@/generated/prisma/client";
 
 export const notifications = [
   //Projects
@@ -69,6 +7,10 @@ export const notifications = [
     workspaceId: 1,
     actorId: "user-11",
     recipientId: "user-20",
+    projectId: 41,
+    projectTitle: "E-commerce Platform Redesign",
+    projectDeadline: "2026-03-30T23:59:59.000Z",
+    projectStatus: ProjectStatus.active,
     type: NotificationType.projectAdded,
     createdAt: "2025-01-01T00:00:00.000Z",
     isRead: true,
@@ -78,6 +20,10 @@ export const notifications = [
     workspaceId: 1,
     actorId: "user-15",
     recipientId: "user-20",
+    projectId: 42,
+    projectTitle: "iOS & Android App Development",
+    projectDeadline: "2026-06-15T23:59:59.000Z",
+    projectStatus: ProjectStatus.pending,
     type: NotificationType.projectDeadlineChanged,
     createdAt: "2025-01-07T00:00:00.000Z",
     isRead: true,
@@ -87,6 +33,10 @@ export const notifications = [
     workspaceId: 1,
     actorId: "user-11",
     recipientId: "user-20",
+    projectId: 43,
+    projectTitle: "Q4 Digital Marketing Campaign",
+    projectDeadline: "2026-01-31T23:59:59.000Z",
+    projectStatus: ProjectStatus.active,
     type: NotificationType.projectStatusChanged,
     createdAt: "2025-01-07T00:00:00.000Z",
     isRead: true,
@@ -96,10 +46,12 @@ export const notifications = [
     workspaceId: 1,
     actorId: "user-15",
     recipientId: "user-20",
+    projectTitle: "Updating API v1.5 documentation",
+    projectDeadline: "2026-01-24T23:59:59.000Z",
+    projectStatus: ProjectStatus.active,
     type: NotificationType.projectDeleted,
     createdAt: "2025-03-08T00:00:00.000Z",
     isRead: true,
-    content: "Updating API v1.5 documentation",
   },
 
   //Tasks
@@ -108,6 +60,10 @@ export const notifications = [
     workspaceId: 1,
     actorId: "user-11",
     recipientId: "user-20",
+    taskId: 558,
+    taskTitle: "Setup React Project Structure",
+    taskDeadline: "2026-01-15T17:00:00.000Z",
+    taskStatus: TaskStatus.active,
     type: NotificationType.taskAdded,
     createdAt: "2025-01-02T00:00:00.000Z",
     isRead: true,
@@ -117,6 +73,10 @@ export const notifications = [
     workspaceId: 1,
     actorId: "user-15",
     recipientId: "user-20",
+    taskId: 559,
+    taskTitle: "Design System Component Audit",
+    taskDeadline: "2026-01-20T17:00:00.000Z",
+    taskStatus: TaskStatus.pending,
     type: NotificationType.taskDeadlineChanged,
     createdAt: "2025-01-06T00:00:00.000Z",
     isRead: true,
@@ -126,6 +86,10 @@ export const notifications = [
     workspaceId: 1,
     actorId: "user-11",
     recipientId: "user-20",
+    taskId: 560,
+    taskTitle: "Integrate New Payment Gateway",
+    taskDeadline: "2026-02-10T17:00:00.000Z",
+    taskStatus: TaskStatus.completed,
     type: NotificationType.taskStatusChanged,
     createdAt: "2025-01-06T00:00:00.000Z",
     isRead: true,
@@ -135,10 +99,12 @@ export const notifications = [
     workspaceId: 1,
     actorId: "user-15",
     recipientId: "user-20",
+    taskTitle: "Setting up CI/CD pipeline",
+    taskDeadline: "2026-02-10T17:00:00.000Z",
+    taskStatus: TaskStatus.completed,
     type: NotificationType.taskDeleted,
     createdAt: "2025-03-18T00:00:00.000Z",
     isRead: true,
-    content: "Setting up CI/CD pipeline",
   },
 
   //Comments
@@ -147,6 +113,10 @@ export const notifications = [
     workspaceId: 1,
     actorId: "user-11",
     recipientId: "user-20",
+    taskId: 558,
+    taskTitle: "Setup React Project Structure",
+    commentId: 5173,
+    commentContent: "Great, Jack. Make sure to follow the 'atomic design' principles we discussed for the component structure.",
     type: NotificationType.commentAdded,
     createdAt: "2025-01-02T00:00:00.000Z",
     isRead: true,
@@ -156,6 +126,10 @@ export const notifications = [
     workspaceId: 1,
     actorId: "user-15",
     recipientId: "user-20",
+    taskId: 558,
+    taskTitle: "Setup React Project Structure",
+    commentId: 5172,
+    commentContent: "Starting on the folder structure now. Will prioritize the base components and utility folders first.",
     type: NotificationType.commentChanged,
     createdAt: "2025-01-06T00:00:00.000Z",
     isRead: true,
@@ -165,9 +139,11 @@ export const notifications = [
     workspaceId: 1,
     actorId: "user-15",
     recipientId: "user-20",
+    taskId: 558,
+    taskTitle: "Setup React Project Structure",
+    commentContent: "I need a list of the homepage sections to start working on the layout in Figma. Do you already have one, or do you need some references?",
     type: NotificationType.commentDeleted,
     createdAt: "2025-03-18T00:00:00.000Z",
     isRead: true,
-    content: "I need a list of the homepage sections to start working on the layout in Figma. Do you already have one, or do you need some references?",
   },
 ];

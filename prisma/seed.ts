@@ -2,15 +2,6 @@ import { PrismaPg } from "@prisma/adapter-pg";
 import { PrismaClient } from "../generated/prisma/client";
 import "dotenv/config";
 
-import {
-  notifications as ruNotifications,
-  notificationTargets as ruNotificationTargets,
-} from "./seed/ru/notifications";
-import {
-  notifications as enNotifications,
-  notificationTargets as enNotificationTargets,
-} from "./seed/en/notifications";
-
 import { users as ruUsers } from "./seed/ru/users";
 import { users as enUsers } from "./seed/en/users";
 import { tasks as ruTasks } from "./seed/ru/tasks";
@@ -31,6 +22,8 @@ import { workspace as ruWorkspace } from "./seed/ru/workspace";
 import { workspace as enWorkspace } from "./seed/en/workspace";
 import { taskComments as ruTaskComments } from "./seed/ru/taskComments";
 import { taskComments as enTaskComments } from "./seed/en/taskComments";
+import { notifications as ruNotifications } from "./seed/ru/notifications";
+import { notifications as enNotifications } from "./seed/en/notifications";
 import { taskCategories as ruTaskCategories } from "./seed/ru/taskCategories";
 import { taskCategories as enTaskCategories } from "./seed/en/taskCategories";
 import { taskAttachments as ruTaskAttachments } from "./seed/ru/taskAttachments";
@@ -131,10 +124,6 @@ async function main() {
     data: [...ruNotifications, ...enNotifications],
   });
 
-  await prisma.notificationTarget.createMany({
-    data: [...ruNotificationTargets, ...enNotificationTargets],
-  });
-
   // ----------------- Reset IDs -----------------
 
   const tables = [
@@ -143,7 +132,6 @@ async function main() {
     "company",
     "customer",
     "notification",
-    "notification_target",
     "position",
     "project",
     "project_category",

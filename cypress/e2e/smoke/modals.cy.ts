@@ -67,17 +67,13 @@ describe("Modals Smoke Tests", () => {
           workspaceId: 1,
           actorId: "user-2",
           recipientId: "user-1",
+          taskId: 1,
+          taskTitle: "Task 1",
+          taskDeadline: new Date("2022-01-01"),
+          taskStatus: "active",
           type: NotificationType.taskAdded,
           createdAt: "2025-01-01T00:00:00.000Z",
           isRead: true,
-        },
-      ],
-      notificationTargets: [
-        {
-          id: 1,
-          notificationId: 1,
-          projectId: 1,
-          createdAt: "2025-01-01T00:00:00.000Z",
         },
       ],
     };
@@ -87,7 +83,7 @@ describe("Modals Smoke Tests", () => {
     cy.signIn("owner@example.com", "12345abc");
   });
 
-  it.only("should open notification modals", () => {
+  it("should open notification modals", () => {
     cy.visit("/en");
     cy.getByData("notification-modal-trigger").first().click();
     cy.getByData("notification-modal").should("be.visible");

@@ -1,9 +1,12 @@
-import { ProjectStatus, TaskStatus } from "@/generated/prisma/enums";
+import {
+  TaskStatus,
+  ProjectStatus,
+  NotificationType,
+} from "@/generated/prisma/enums";
 
 export type NotificationListItemDTO = {
   id: number;
-  type: string;
-  content?: string;
+  type: NotificationType;
   createdAt: Date;
   updatedAt: Date;
   isRead: boolean;
@@ -14,29 +17,27 @@ export type NotificationListItemDTO = {
     imageUrl?: string;
   };
 
-  target?: {
+  project?: {
     id: number;
-    project?: {
-      id: number;
-      title: string;
-      deadline: Date;
-      status: ProjectStatus;
-    };
-    task?: { id: number; title: string; deadline: Date; status: TaskStatus };
-    user?: { id: string; fullName: string };
-    customer?: { id: number; fullName: string };
-    comment?: {
-      id: number;
-      content: string;
-      createdAt: Date;
-      attachments: { id: number; fileUrl: string; fileName: string }[];
-      project?: {
-        id: number;
-        title: string;
-      };
-      task?: { id: number; title: string };
-    };
+    title: string;
+    deadline: Date;
+    status: ProjectStatus;
   };
+
+  task?: { id: number; title: string; deadline: Date; status: TaskStatus };
+
+  comment?: {
+    id: number;
+    content: string;
+  };
+
+  projectTitle?: string;
+  taskTitle?: string;
+  projectDeadline?: Date;
+  taskDeadline?: Date;
+  projectStatus?: ProjectStatus;
+  taskStatus?: TaskStatus;
+  commentContent?: string;
 };
 
 export type NotificationsDTO = {

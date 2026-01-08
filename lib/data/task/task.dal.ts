@@ -14,6 +14,7 @@ import { verifySession } from "../utils/verifySession";
 import { UpdateTaskInputDTO, CreateTaskInputDTO } from "./task.dto";
 import { ALLOWED_TASK_STATUSES_BY_PROJECT } from "../utils/statusUtils";
 import { Prisma, ProjectStatus, TaskStatus } from "@/generated/prisma/client";
+import { createTaskAddedNotifications } from "../notification/notification.dal";
 
 export const getTask = cache(
   async <T extends Prisma.TaskSelect>(id: number, select: T) => {
@@ -89,33 +90,39 @@ export const createTask = async (input: CreateTaskInputDTO) => {
   const canCreate = await canCreateTask();
 
   if (!canCreate) {
-    throw new AccessDeniedError(
-      "You do not have permission to create task in this workspace.",
-    );
+    throw new AccessDeniedError("You do not have permission to create task.");
   }
 
   await validateTaskRelations(workspaceId, input);
 
-  return prisma.task.create({
-    data: {
-      ...input,
-      creatorId,
+  return prisma.$transaction(async (tx) => {
+    const task = await tx.task.create({
+      data: {
+        ...input,
+        creatorId,
+        workspaceId,
+      },
+    });
+
+    await createTaskAddedNotifications(tx, {
+      task,
+      actorId: creatorId,
       workspaceId,
-    },
+    });
+
+    return task;
   });
 };
 
 export const updateTask = async (input: UpdateTaskInputDTO) => {
   const {
-    user: { workspaceId },
+    user: { id, workspaceId },
   } = await verifySession();
 
   const canUpdate = await canUpdateTask();
 
   if (!canUpdate) {
-    throw new AccessDeniedError(
-      "You do not have permission to update task in this workspace.",
-    );
+    throw new AccessDeniedError("You do not have permission to update task.");
   }
 
   await validateTaskRelations(workspaceId, input);
@@ -157,7 +164,7 @@ export const updateTasks = async (taskIds: number[], status: TaskStatus) => {
 
   if (!canUpdateStatus) {
     throw new AccessDeniedError(
-      "You do not have permission to update task statuses in this workspace.",
+      "You do not have permission to update task statuses.",
     );
   }
 
@@ -188,9 +195,7 @@ export const deleteTasks = async (ids: number[]) => {
   const canDelete = await canDeleteTask();
 
   if (!canDelete) {
-    throw new AccessDeniedError(
-      "You do not have permission to delete tasks in this workspace.",
-    );
+    throw new AccessDeniedError("You do not have permission to delete tasks.");
   }
 
   return await prisma.task.deleteMany({

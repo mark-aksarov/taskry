@@ -1,9 +1,13 @@
 import prisma from "@/lib/prisma";
 import { getNotifications } from "../notification.service";
 import { resetDatabase } from "@/lib/data/utils/test-utils";
+import {
+  NotificationType,
+  ProjectStatus,
+  TaskStatus,
+} from "@/generated/prisma/enums";
 import { vi, describe, beforeEach, it, expect } from "vitest";
 import { verifySession } from "@/lib/data/utils/verifySession";
-import { NotificationType } from "@/generated/prisma/enums";
 
 vi.mock("server-only", () => ({}));
 
@@ -158,9 +162,11 @@ describe("Notification Service", () => {
           workspaceId: 1,
           actorId: "user-2",
           recipientId: "user-1",
+          projectId: 1,
+          projectTitle: "Project 1",
+          commentContent: "Comment Content",
           type: NotificationType.commentDeleted,
           createdAt: "2025-01-01T00:00:00.000Z",
-          content: "Deleted comment",
           isRead: true,
         },
         {
@@ -168,6 +174,10 @@ describe("Notification Service", () => {
           workspaceId: 1,
           actorId: "user-2",
           recipientId: "user-1",
+          taskId: 1,
+          taskTitle: "Task 1",
+          taskDeadline: "2026-12-10T00:00:00.000Z",
+          taskStatus: TaskStatus.active,
           type: NotificationType.taskAdded,
           createdAt: "2025-01-02T00:00:00.000Z",
           isRead: false,
@@ -177,32 +187,13 @@ describe("Notification Service", () => {
           workspaceId: 2,
           actorId: "user-4",
           recipientId: "user-3",
+          projectId: 2,
+          projectTitle: "Project 2",
+          projectDeadline: "2027-05-20T00:00:00.000Z",
+          projectStatus: ProjectStatus.active,
           type: NotificationType.projectAdded,
           createdAt: "2025-01-01T00:00:00.000Z",
           isRead: true,
-        },
-      ],
-    });
-
-    await prisma.notificationTarget.createMany({
-      data: [
-        {
-          id: 1,
-          notificationId: 1,
-          projectId: 1,
-          createdAt: "2025-01-01T00:00:00.000Z",
-        },
-        {
-          id: 2,
-          notificationId: 2,
-          taskId: 1,
-          createdAt: "2025-01-01T00:00:00.000Z",
-        },
-        {
-          id: 3,
-          notificationId: 3,
-          projectId: 2,
-          createdAt: "2025-01-01T00:00:00.000Z",
         },
       ],
     });
@@ -227,14 +218,14 @@ describe("Notification Service", () => {
       expect(result.items[0].id).toBe(2);
       expect(result.items[0].isRead).toBe(false);
       expect(result.items[0].actor!.id).toBe("user-2");
-      expect(result.items[0].target!.task!.id).toBe(1);
+      expect(result.items[0].task!.id).toBe(1);
 
       expect(result.items[1].id).toBe(1);
       expect(result.items[1].isRead).toBe(true);
       expect(result.items[1].actor!.id).toBe("user-2");
-      expect(result.items[1].target).toBeDefined();
-      expect(result.items[1].target!.project).toBeDefined();
-      expect(result.items[1].target!.project!.id).toBe(1);
+      expect(result.items[1]).toBeDefined();
+      expect(result.items[1].project).toBeDefined();
+      expect(result.items[1].project!.id).toBe(1);
     });
 
     it("should filter only unread notifications when filter is set to 'unread'", async () => {
@@ -249,7 +240,7 @@ describe("Notification Service", () => {
       expect(result.items[0].id).toBe(2);
       expect(result.items[0].isRead).toBe(false);
       expect(result.items[0].actor!.id).toBe("user-2");
-      expect(result.items[0].target!.task!.id).toBe(1);
+      expect(result.items[0].task!.id).toBe(1);
     });
 
     it("should handle pagination correctly", async () => {
@@ -272,7 +263,7 @@ describe("Notification Service", () => {
       expect(result.items[0].id).toBe(3);
       expect(result.items[0].isRead).toBe(true);
       expect(result.items[0].actor!.id).toBe("user-4");
-      expect(result.items[0].target!.project!.id).toBe(2);
+      expect(result.items[0].project!.id).toBe(2);
     });
   });
 });

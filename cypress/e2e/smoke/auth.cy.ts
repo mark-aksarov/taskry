@@ -9,8 +9,10 @@ describe("Auth Smoke Tests", () => {
   });
 
   it("should sign-out successfully", () => {
-    cy.signIn("owner@example.com", "12345abc");
-    cy.visit("/en");
+    cy.visit("/en/sign-in");
+    cy.get("input[name=email]").type("owner@example.com");
+    cy.get("input[name=password]").type("12345abc");
+    cy.get('button[type="submit"]').click();
     cy.getByData("sign-out-btn").click();
     cy.url().should("include", "/sign-in");
   });

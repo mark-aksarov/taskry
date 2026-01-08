@@ -7,6 +7,7 @@ import { NotificationListItemActorLink } from "./NotificationListItemActorLink";
 import { NotificationListItemActionText } from "./NotificationListItemActionText";
 import { NotificationListItemActorImageLink } from "./NotificationListItemActorImageLink";
 import { ProjectStatus } from "@/generated/prisma/enums";
+import { NotificationListItemDTO } from "@/lib/data/notification/notification.dto";
 
 const meta = {
   title: "Components/notifications/NotificationListItem",
@@ -22,10 +23,9 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-const mockedNotification = {
+const mockedNotification: NotificationListItemDTO = {
   id: 1,
   type: "projectAdded",
-  content: "New project 'Mobile App Launch' has been created.",
   createdAt: new Date("2026-01-07T09:00:00Z"),
   updatedAt: new Date("2026-01-07T09:00:00Z"),
   isRead: false,
@@ -34,15 +34,15 @@ const mockedNotification = {
     fullName: "Alice Freeman",
     imageUrl: "/woman.jpg",
   },
-  target: {
-    id: 101,
-    project: {
-      id: 50,
-      title: "Mobile App Launch",
-      deadline: new Date("2026-06-01"),
-      status: ProjectStatus.active,
-    },
+
+  project: {
+    id: 50,
+    title: "Mobile App Launch",
+    deadline: new Date("2026-06-01"),
+    status: ProjectStatus.active,
   },
+
+  projectTitle: "Mobile App Launch",
 };
 
 export const Default = {
