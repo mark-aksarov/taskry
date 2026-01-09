@@ -116,66 +116,89 @@ describe("Task Item Menu", () => {
     });
   });
 
-  describe.only("Task Status Transition Rules", () => {
+  describe.only("Task Status Disabled Transitions by Role and Project Status", () => {
     const users = {
-      owner: { label: "Owner", email: "owner@example.com", id: "user-1" },
-      manager: { label: "Manager", email: "manager@example.com", id: "user-2" },
-      user: { label: "User", email: "user@example.com", id: "user-3" },
-      guest: { label: "Guest", email: "guest@example.com", id: "user-4" },
+      owner: {
+        label: "Owner",
+        email: "owner@example.com",
+        id: "user-1",
+      },
+      manager: {
+        label: "Manager",
+        email: "manager@example.com",
+        id: "user-2",
+        assigneeId: "user-1",
+      },
+      user: {
+        label: "User",
+        email: "user@example.com",
+        id: "user-3",
+      },
+      guest: {
+        label: "Guest",
+        email: "guest@example.com",
+        id: "user-4",
+      },
     };
 
     const transitionRules = [
-      //guest active project
+      //active project
       {
-        user: users.guest,
+        user: users.user,
         pStatus: ProjectStatus.active,
         tStatus: TaskStatus.active,
+        tAssigneeId: "user-1",
         disabled: ["active", "pending", "completed"],
         enabled: [],
       },
       {
-        user: users.guest,
+        user: users.user,
         pStatus: ProjectStatus.active,
         tStatus: TaskStatus.pending,
+        tAssigneeId: "user-1",
         disabled: ["active", "pending", "completed"],
         enabled: [],
       },
       {
-        user: users.guest,
+        user: users.user,
         pStatus: ProjectStatus.active,
         tStatus: TaskStatus.completed,
+        tAssigneeId: "user-1",
         disabled: ["active", "pending", "completed"],
         enabled: [],
       },
 
-      //guest pending project
+      //pending project
       {
-        user: users.guest,
+        user: users.user,
         pStatus: ProjectStatus.pending,
         tStatus: TaskStatus.pending,
+        tAssigneeId: "user-1",
         disabled: ["active", "pending", "completed"],
         enabled: [],
       },
       {
-        user: users.guest,
+        user: users.user,
         pStatus: ProjectStatus.pending,
         tStatus: TaskStatus.completed,
+        tAssigneeId: "user-1",
         disabled: ["active", "pending", "completed"],
         enabled: [],
       },
 
-      //guest completed project
+      //completed project
       {
-        user: users.guest,
+        user: users.user,
         pStatus: ProjectStatus.completed,
         tStatus: TaskStatus.completed,
+        tAssigneeId: "user-1",
         disabled: ["active", "pending", "completed"],
         enabled: [],
       },
     ];
 
-    //Owner, Manager, User
-    [users.owner, users.manager, users.user].forEach((user) => {
+    //Owner, Manager, User, Guest
+    [users.owner, users.manager, users.user, users.guest].forEach((user) => {
       transitionRules.push(
         //active project
         {
@@ -183,6 +206,7 @@ describe("Task Item Menu", () => {
           pStatus: ProjectStatus.active,
           tStatus: TaskStatus.active,
           disabled: ["active"],
+          tAssigneeId: user.id,
           enabled: ["pending", "completed"],
         },
         {
@@ -190,6 +214,7 @@ describe("Task Item Menu", () => {
           pStatus: ProjectStatus.active,
           tStatus: TaskStatus.pending,
           disabled: ["pending"],
+          tAssigneeId: user.id,
           enabled: ["active", "completed"],
         },
         {
@@ -197,6 +222,7 @@ describe("Task Item Menu", () => {
           pStatus: ProjectStatus.active,
           tStatus: TaskStatus.completed,
           disabled: ["completed"],
+          tAssigneeId: user.id,
           enabled: ["active", "pending"],
         },
 
@@ -205,6 +231,7 @@ describe("Task Item Menu", () => {
           user,
           pStatus: ProjectStatus.pending,
           tStatus: TaskStatus.pending,
+          tAssigneeId: user.id,
           disabled: ["active", "pending"],
           enabled: ["completed"],
         },
@@ -212,6 +239,7 @@ describe("Task Item Menu", () => {
           user,
           pStatus: ProjectStatus.pending,
           tStatus: TaskStatus.completed,
+          tAssigneeId: user.id,
           disabled: ["active", "completed"],
           enabled: ["pending"],
         },
@@ -221,6 +249,7 @@ describe("Task Item Menu", () => {
           user,
           pStatus: ProjectStatus.completed,
           tStatus: TaskStatus.completed,
+          tAssigneeId: user.id,
           disabled: ["active", "pending", "completed"],
           enabled: [],
         },
@@ -239,7 +268,7 @@ describe("Task Item Menu", () => {
         beforeEach(() => {
           cy.task(
             "db:seed",
-            createPayload(rule.pStatus, rule.tStatus, rule.user.id),
+            createPayload(rule.pStatus, rule.tStatus, rule.tAssigneeId),
           );
           cy.signIn(rule.user.email, "12345abc");
           cy.visit("/en/tasks");

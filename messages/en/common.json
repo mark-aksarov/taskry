@@ -1,4 +1,10 @@
 {
+  "GuestModeModal": {
+    "heading": "Guest Mode",
+    "text": "<strong>Action is restricted in guest mode.</strong> An account is required to access all features. Please sign in or create a new account to remove guest mode restrictions.",
+    "cancelButton": "Cancel"
+  },
+
   "Toolbar": {
     "ToolbarSortingMenuTrigger": {
       "dialogHeading": "Sorting",

@@ -22,6 +22,7 @@ import { ViewModeLayout } from "@/components/common/ViewMode";
 import { updateTaskStatuses } from "@/lib/actions/task/updateTaskStatuses";
 
 interface TasksContainerProps {
+  guestMode?: boolean;
   page: number;
   pageSize: number;
   sort: string;
@@ -29,6 +30,7 @@ interface TasksContainerProps {
 }
 
 export async function TasksContainer({
+  guestMode,
   page,
   pageSize,
   sort,
@@ -74,6 +76,7 @@ export async function TasksContainer({
                   key={task.id}
                   category={task.category}
                   project={task.project}
+                  guestMode={guestMode}
                   canDelete={task.canDelete}
                   canUpdate={task.canUpdate}
                   canUpdateStatus={task.canUpdateStatus}

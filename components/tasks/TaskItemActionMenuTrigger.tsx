@@ -21,6 +21,7 @@ import { startTransition, useActionState, useState } from "react";
 import { ProjectStatus, TaskStatus } from "@/generated/prisma/enums";
 import { useActionErrorToast } from "@/lib/hooks/useActionErrorToast";
 import { Check, CircleEllipsis, Clock, Pencil, Trash } from "lucide-react";
+import { GuestModeModal } from "../common/GuestModeModal";
 
 export type TaskItemActionMenuTriggerProps = {
   taskId: number;
@@ -28,6 +29,7 @@ export type TaskItemActionMenuTriggerProps = {
   taskStatus: TaskStatus;
   projectStatus: ProjectStatus;
   className?: string;
+  guestMode?: boolean;
   canDelete: boolean;
   canUpdate: boolean;
   canUpdateStatus: boolean;
@@ -46,6 +48,7 @@ export function TaskItemActionMenuTrigger({
   taskStatus,
   projectStatus,
   className,
+  guestMode,
   canDelete,
   canUpdate,
   canUpdateStatus,
@@ -53,6 +56,9 @@ export function TaskItemActionMenuTrigger({
   updateStatusAction,
 }: TaskItemActionMenuTriggerProps) {
   const t = useTranslations("tasks.TaskItemActionMenuTrigger");
+
+  // Guest mode modal
+  const [isGuestModeModalOpen, setIsGuestModeModalOpen] = useState(false);
 
   // Edit State
   const [isOpenEditModal, setIsOpenEditModal] = useState(false);
@@ -68,6 +74,11 @@ export function TaskItemActionMenuTrigger({
   ] = useActionState(updateStatusAction, initialState);
 
   function handleAction(key: Key) {
+    if (guestMode) {
+      setIsGuestModeModalOpen(true);
+      return;
+    }
+
     const action = key.toString();
     if (action === "edit") {
       setIsOpenEditModal(true);
@@ -92,9 +103,9 @@ export function TaskItemActionMenuTrigger({
 
   const disabledKeys = [...statusDisabledKeys] as Key[];
 
-  if (!canDelete) disabledKeys.push("delete");
-  if (!canUpdate) disabledKeys.push("edit");
-  if (!canUpdateStatus) {
+  if (!canDelete && !guestMode) disabledKeys.push("delete");
+  if (!canUpdate && !guestMode) disabledKeys.push("edit");
+  if (!canUpdateStatus && !guestMode) {
     disabledKeys.push("pending", "completed", "active");
   }
 
@@ -136,6 +147,11 @@ export function TaskItemActionMenuTrigger({
         isOpen={isOpenDeleteModal}
         onOpenChange={setIsOpenDeleteModal}
         deleteAction={deleteAction}
+      />
+
+      <GuestModeModal
+        isOpen={isGuestModeModalOpen}
+        onOpenChange={setIsGuestModeModalOpen}
       />
     </>
   );

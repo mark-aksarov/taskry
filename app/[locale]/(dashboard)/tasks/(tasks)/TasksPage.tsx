@@ -25,6 +25,7 @@ import { TaskToolbarFiltersModalTrigger } from "@/components/tasks/TaskToolbarFi
 import { TaskToolbarCreateNewMenuTrigger } from "@/components/tasks/TaskToolbarCreateNewMenuTrigger";
 
 interface TasksPageProps {
+  guestMode?: boolean;
   canCreateTask: boolean;
   canDeleteTask: boolean;
   taskFiltersFormContainer: React.ReactNode;
@@ -36,6 +37,7 @@ interface TasksPageProps {
 }
 
 export function TasksPage({
+  guestMode,
   canCreateTask,
   canDeleteTask,
   taskFiltersFormContainer,
@@ -46,6 +48,8 @@ export function TasksPage({
   createTaskCategoryAction,
 }: TasksPageProps) {
   const t = useTranslations("app.TasksPage");
+
+  const showCreateNewMenuTrigger = canCreateTask || guestMode;
 
   return (
     <PageContainer>
@@ -58,14 +62,16 @@ export function TasksPage({
                 filtersForm={taskFiltersFormContainer}
               />
               <TaskToolbarActionsMenuTrigger
+                guestMode={guestMode}
                 canDelete={canDeleteTask}
                 deleteAction={deleteTasksAction}
                 updateStatusAction={updateTasksStatusesAction}
               />
               <ViewModeToggleButtonGroup className="ml-auto" />
 
-              {canCreateTask && (
+              {showCreateNewMenuTrigger && (
                 <TaskToolbarCreateNewMenuTrigger
+                  guestMode={guestMode}
                   newTaskForm={newTaskFormContainer}
                   newTaskCategoryForm={
                     <NewTaskCategoryForm
@@ -83,6 +89,7 @@ export function TasksPage({
                 filtersForm={taskFiltersFormContainer}
               />
               <TaskToolbarActionsMenuTrigger
+                guestMode={guestMode}
                 canDelete={canDeleteTask}
                 deleteAction={deleteTasksAction}
                 updateStatusAction={updateTasksStatusesAction}
@@ -91,8 +98,9 @@ export function TasksPage({
 
             <ToolbarMobileBottom>
               <ViewModeToggleButtonGroup />
-              {canCreateTask && (
+              {showCreateNewMenuTrigger && (
                 <TaskToolbarCreateNewMenuTrigger
+                  guestMode={guestMode}
                   newTaskForm={newTaskFormContainer}
                   newTaskCategoryForm={
                     <NewTaskCategoryForm

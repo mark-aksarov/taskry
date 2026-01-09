@@ -1,6 +1,6 @@
+import { useTranslations } from "next-intl";
 import { ModalProps } from "@/components/ui";
 import { FormBaseModal } from "@/components/common/FormBaseModal";
-import { useTranslations } from "next-intl";
 
 interface NewTaskModalProps
   extends Pick<ModalProps, "isOpen" | "onOpenChange"> {

@@ -59,6 +59,7 @@ export interface TaskListItemProps {
   status: TaskStatus;
   commentsCount: number;
   showCheckbox?: boolean;
+  guestMode?: boolean;
   canDelete: boolean;
   canUpdate: boolean;
   canUpdateStatus: boolean;
@@ -76,6 +77,7 @@ export const TaskListItem = ({
   status,
   commentsCount,
   showCheckbox,
+  guestMode,
   canDelete,
   canUpdate,
   canUpdateStatus,
@@ -203,6 +205,7 @@ export const TaskListItem = ({
       }
       menuTriggerSlot={
         <TaskItemActionMenuTrigger
+          guestMode={guestMode}
           taskId={id}
           taskTitle={title}
           taskStatus={status}

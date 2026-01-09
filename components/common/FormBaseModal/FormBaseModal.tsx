@@ -1,15 +1,16 @@
-import { ResponsiveModal } from "@/components/common/ResponsiveModal";
 import {
   Button,
   Dialog,
+  ModalProps,
   DialogBody,
-  DialogCloseButton,
   DialogFooter,
   DialogHeader,
   DialogHeading,
-  ModalProps,
+  DialogCloseButton,
 } from "@/components/ui";
+
 import { twMerge } from "tailwind-merge";
+import { ResponsiveModal } from "@/components/common/ResponsiveModal";
 
 interface FormBaseModalProps
   extends Pick<ModalProps, "isOpen" | "onOpenChange"> {

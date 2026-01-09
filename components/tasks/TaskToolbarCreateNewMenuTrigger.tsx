@@ -9,6 +9,7 @@ import {
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { Key, useOverlayTrigger } from "react-aria";
+import { GuestModeModal } from "../common/GuestModeModal";
 import { Blocks, CalendarCheck, Plus } from "lucide-react";
 import { Item, useOverlayTriggerState } from "react-stately";
 import { NewTaskCategoryModal } from "./NewTaskCategoryModal";
@@ -16,11 +17,13 @@ import { NewTaskModal } from "@/components/tasks/NewTaskModal";
 import { ResponsiveMenuTrigger } from "@/components/common/ResponsiveMenuTrigger";
 
 interface TaskToolbarCreateNewMenuTriggerProps {
+  guestMode?: boolean;
   newTaskForm: React.ReactNode;
   newTaskCategoryForm: React.ReactNode;
 }
 
 export function TaskToolbarCreateNewMenuTrigger({
+  guestMode,
   newTaskForm,
   newTaskCategoryForm,
 }: TaskToolbarCreateNewMenuTriggerProps) {
@@ -30,7 +33,15 @@ export function TaskToolbarCreateNewMenuTrigger({
   const [openTaskCategoryModal, setOpenTaskCategoryModal] = useState(false);
   const t = useTranslations("tasks.TaskToolbarCreateNewMenuTrigger");
 
+  // Guest mode modal
+  const [isGuestModeModalOpen, setIsGuestModeModalOpen] = useState(false);
+
   function handleAction(key: Key) {
+    if (guestMode) {
+      setIsGuestModeModalOpen(true);
+      return;
+    }
+
     if (key === "task") {
       setOpenTaskModal(true);
     } else if (key === "category") {
@@ -79,6 +90,11 @@ export function TaskToolbarCreateNewMenuTrigger({
         newTaskCategoryForm={newTaskCategoryForm}
         isOpen={openTaskCategoryModal}
         onOpenChange={setOpenTaskCategoryModal}
+      />
+
+      <GuestModeModal
+        isOpen={isGuestModeModalOpen}
+        onOpenChange={setIsGuestModeModalOpen}
       />
     </>
   );

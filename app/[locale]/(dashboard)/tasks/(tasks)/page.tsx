@@ -25,6 +25,7 @@ import { createTaskCategory } from "@/lib/actions/taskCategory/createTaskCategor
 import { TaskFiltersFormContainer } from "@/components/tasks/TaskFiltersFormContainer";
 import { TaskDetailCompactContainer } from "@/components/tasks/TaskDetailCompactContainer";
 import { ProjectDetailCompactContainer } from "@/components/projects/ProjectDetailCompactContainer";
+import { hasGuestRole } from "@/lib/utils/hasGuestRole";
 
 const searchParamsSchema = z.object({
   onlyMyTasks: z
@@ -79,12 +80,14 @@ export default async function AppTasksPage({
     );
   }
 
+  const guestMode = await hasGuestRole();
   const canCreate = await canCreateTask();
   const canDelete = await canDeleteTask();
 
   return (
     <GlobalContainerProvider value={context}>
       <TasksPage
+        guestMode={guestMode}
         canCreateTask={canCreate}
         canDeleteTask={canDelete}
         taskFiltersFormContainer={
@@ -99,6 +102,7 @@ export default async function AppTasksPage({
         }
         tasksContainer={
           <TasksContainer
+            guestMode={guestMode}
             page={page}
             pageSize={pageSize}
             sort={sort}

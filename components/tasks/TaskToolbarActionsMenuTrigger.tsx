@@ -22,8 +22,10 @@ import { ProjectStatus, TaskStatus } from "@/generated/prisma/enums";
 import { useActionErrorToast } from "@/lib/hooks/useActionErrorToast";
 import { BulkDeleteEntityModal } from "../common/BulkDeleteEntityModal";
 import { UpdateTaskStatusRestrictedModal } from "./UpdateTaskStatusRestrictedModal";
+import { GuestModeModal } from "../common/GuestModeModal";
 
 interface TaskToolbarActionsMenuTriggerProps {
+  guestMode?: boolean;
   canDelete: boolean;
   deleteAction: ActionFn<ActionState, DeleteTasksPayload>;
   updateStatusAction: ActionFn<ActionState, UpdateTaskStatusesPayload>;
@@ -48,6 +50,7 @@ const isTaskStatusAllowedByProject = (
 };
 
 export const TaskToolbarActionsMenuTrigger = ({
+  guestMode,
   canDelete,
   deleteAction,
   updateStatusAction,
@@ -58,6 +61,9 @@ export const TaskToolbarActionsMenuTrigger = ({
     clearSelectedIds,
     selectedItems: selectedTaskItems,
   } = useTaskSelection();
+
+  // Guest mode modal
+  const [isGuestModeModalOpen, setIsGuestModeModalOpen] = useState(false);
 
   // Delete
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
@@ -74,6 +80,11 @@ export const TaskToolbarActionsMenuTrigger = ({
   );
 
   const handleAction = (key: Key) => {
+    if (guestMode) {
+      setIsGuestModeModalOpen(true);
+      return;
+    }
+
     if (key === "delete") {
       setIsDeleteModalOpen(true);
       return;
@@ -105,7 +116,7 @@ export const TaskToolbarActionsMenuTrigger = ({
 
   const disabledKeys = [...statusDisabledKeys] as Key[];
 
-  if (!canDelete) disabledKeys.push("delete");
+  if (!canDelete && !guestMode) disabledKeys.push("delete");
 
   return (
     <>
@@ -149,6 +160,11 @@ export const TaskToolbarActionsMenuTrigger = ({
         }
         taskIds={selectedTaskIds}
         updateStatusAction={updateStatusAction}
+      />
+
+      <GuestModeModal
+        isOpen={isGuestModeModalOpen}
+        onOpenChange={setIsGuestModeModalOpen}
       />
     </>
   );

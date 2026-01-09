@@ -40,6 +40,7 @@ import { TaskListItemCheckbox } from "../TaskListItem/TaskListItemCheckbox";
 import { UserDetailBottomSheet } from "@/components/users/UserDetailBottomSheet";
 
 export interface TaskGridItemProps {
+  guestMode?: boolean;
   id: number;
   title: string;
   deadline?: Date;
@@ -61,6 +62,7 @@ export interface TaskGridItemProps {
 }
 
 export function TaskGridItem({
+  guestMode,
   id,
   title,
   deadline,
@@ -105,6 +107,7 @@ export function TaskGridItem({
       checkboxSlot={<TaskListItemCheckbox id={id} />}
       menuTriggerSlot={
         <TaskItemActionMenuTrigger
+          guestMode={guestMode}
           taskId={id}
           taskTitle={title}
           taskStatus={status}
