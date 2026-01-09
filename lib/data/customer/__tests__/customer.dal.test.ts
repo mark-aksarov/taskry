@@ -6,7 +6,7 @@ import {
 } from "../customer.dal";
 
 import prisma from "@/lib/prisma";
-import { resetDatabase } from "@/lib/data/utils/test-utils";
+import { resetDatabase } from "@/prisma/resetDatabase";
 import { describe, it, expect, beforeEach, vi } from "vitest";
 import { verifySession } from "@/lib/data/utils/verifySession";
 

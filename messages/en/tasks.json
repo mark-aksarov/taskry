@@ -158,6 +158,8 @@
   },
 
   "TaskFiltersForm": {
+    "showOnlyAssignedSwitchText": "Show only my tasks",
+
     "TaskFiltersFormDeadlineCheckboxGroup": {
       "label": "Deadline",
       "today": "Today",

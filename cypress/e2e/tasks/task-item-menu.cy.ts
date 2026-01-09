@@ -116,7 +116,7 @@ describe("Task Item Menu", () => {
     });
   });
 
-  describe("Task Status Transition Rules", () => {
+  describe.only("Task Status Transition Rules", () => {
     const users = {
       owner: { label: "Owner", email: "owner@example.com", id: "user-1" },
       manager: { label: "Manager", email: "manager@example.com", id: "user-2" },

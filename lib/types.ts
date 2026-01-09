@@ -13,6 +13,7 @@ export interface ProjectFilters {
 }
 
 export interface TaskFilters {
+  onlyMyTasks?: boolean;
   status: TaskStatus[];
   category: number[];
   project: number[];

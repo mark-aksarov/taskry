@@ -8,7 +8,7 @@ import {
 
 import prisma from "@/lib/prisma";
 import { AccessDeniedError, DomainRuleError } from "@/lib/data/utils/error";
-import { resetDatabase } from "@/lib/data/utils/test-utils";
+import { resetDatabase } from "@/prisma/resetDatabase";
 import { vi, describe, it, expect, beforeEach } from "vitest";
 import { verifySession } from "@/lib/data/utils/verifySession";
 import {

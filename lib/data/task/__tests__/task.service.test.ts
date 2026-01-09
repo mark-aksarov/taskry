@@ -7,7 +7,7 @@ import {
 
 import prisma from "@/lib/prisma";
 import { TaskFilters } from "@/lib/types";
-import { resetDatabase } from "@/lib/data/utils/test-utils";
+import { resetDatabase } from "@/prisma/resetDatabase";
 import { vi, describe, it, expect, beforeEach } from "vitest";
 import { verifySession } from "@/lib/data/utils/verifySession";
 import { ProjectStatus, TaskStatus } from "@/generated/prisma/enums";

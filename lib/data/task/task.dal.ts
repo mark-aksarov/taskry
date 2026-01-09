@@ -46,7 +46,7 @@ export const getAllTasks = cache(
     select: T;
   }) => {
     const {
-      user: { workspaceId },
+      user: { id: userId, workspaceId },
     } = await verifySession();
 
     const skip = page && pageSize ? (page - 1) * pageSize : undefined;
@@ -63,7 +63,7 @@ export const getAllTasks = cache(
     const orderBy = sort ? orderByMapping[sort] : undefined;
 
     return await prisma.task.findMany({
-      where: buildTaskWhereClause(workspaceId, filters),
+      where: buildTaskWhereClause(userId, workspaceId, filters),
       orderBy,
       skip,
       take,
@@ -74,10 +74,10 @@ export const getAllTasks = cache(
 
 export const getTaskCount = cache(async (filters?: TaskFilters) => {
   const {
-    user: { workspaceId },
+    user: { id: userId, workspaceId },
   } = await verifySession();
 
-  const where = buildTaskWhereClause(workspaceId, filters);
+  const where = buildTaskWhereClause(userId, workspaceId, filters);
 
   return prisma.task.count({ where });
 });
@@ -248,6 +248,7 @@ async function validateTaskRelations(
 }
 
 export function buildTaskWhereClause(
+  userId: string,
   workspaceId: number,
   filters?: TaskFilters,
 ): Prisma.TaskWhereInput {
@@ -261,6 +262,7 @@ export function buildTaskWhereClause(
 
   return {
     workspaceId,
+    ...(filters.onlyMyTasks && { assigneeId: userId }),
     ...(filters.status?.length && { status: { in: filters.status } }),
     ...(filters.category?.length && { categoryId: { in: filters.category } }),
     ...(filters.project?.length && { projectId: { in: filters.project } }),

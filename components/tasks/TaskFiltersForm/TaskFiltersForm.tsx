@@ -1,14 +1,15 @@
 "use client";
 
 import { useState } from "react";
-import { useLocale } from "next-intl";
 import { DateValue } from "react-aria";
 import { TaskFilters } from "@/lib/types";
 import { Divider, RACForm } from "@/components/ui";
 import { parseDate } from "@internationalized/date";
+import { useLocale, useTranslations } from "next-intl";
 import { usePathname, useRouter } from "@/i18n/navigation";
 import { TaskFiltersFormDeadlineRange } from "./TaskFiltersFormDeadlineRange";
 import { TaskFiltersFormDeadlineCheckboxGroup } from "./TaskFiltersFormDeadlineCheckboxGroup";
+import { Switch } from "@/components/ui/Switch";
 
 interface TaskFiltersFormProps {
   filters: TaskFilters;
@@ -35,11 +36,17 @@ export function TaskFiltersForm({
   projectCheckboxGroup,
   assigneeCheckboxGroup,
 }: TaskFiltersFormProps) {
+  const t = useTranslations("tasks.TaskFiltersForm");
+
   const locale = useLocale();
   const router = useRouter();
   const pathname = usePathname();
 
   // --- INITIAL STATE FROM FILTERS ---
+  const [onlyMyTasks, setOnlyMyTasks] = useState<boolean>(
+    !!filters.onlyMyTasks,
+  );
+
   const [deadlineCheckboxes, setDeadlineCheckboxes] = useState<string[]>(
     filters.deadline ? [filters.deadline] : [],
   );
@@ -73,6 +80,9 @@ export function TaskFiltersForm({
     e.preventDefault();
     const params = new URLSearchParams();
 
+    // Only my tasks
+    if (onlyMyTasks) params.set("onlyMyTasks", "true");
+
     // Deadline checkboxes
     if (deadlineCheckboxes.length > 0)
       params.set("deadline", deadlineCheckboxes.join(","));
@@ -101,6 +111,16 @@ export function TaskFiltersForm({
   return (
     <RACForm id="task-filter-form" onSubmit={handleSubmit}>
       <div className="flex flex-col gap-4">
+        <Switch
+          data-test="show-only-my-tasks"
+          className="justify-between"
+          isSelected={onlyMyTasks}
+          onChange={setOnlyMyTasks}
+          name="onlyAssignedTasks"
+        >
+          {t("showOnlyAssignedSwitchText")}
+        </Switch>
+
         <TaskFiltersFormDeadlineCheckboxGroup
           value={deadlineCheckboxes}
           onChange={handleCheckboxChange}

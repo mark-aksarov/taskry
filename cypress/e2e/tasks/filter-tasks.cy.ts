@@ -58,6 +58,58 @@ describe("filter tasks", () => {
     cy.viewport(1440, 900);
   });
 
+  it("filter only my tasks", () => {
+    setup(
+      createPayload({
+        tasks: [
+          {
+            id: 1,
+            title: "A",
+            status: TaskStatus.active,
+            deadline: dates.today,
+            categoryId: 1,
+            projectId: 1,
+            workspaceId: 1,
+            creatorId: "user-1",
+            assigneeId: "user-1",
+          },
+          {
+            id: 2,
+            title: "B",
+            status: TaskStatus.active,
+            deadline: dates.today,
+            categoryId: 1,
+            projectId: 1,
+            workspaceId: 1,
+            creatorId: "user-1",
+            assigneeId: "user-2",
+          },
+          {
+            id: 3,
+            title: "C",
+            status: TaskStatus.active,
+            deadline: dates.today,
+            categoryId: 1,
+            projectId: 1,
+            workspaceId: 1,
+            creatorId: "user-1",
+            assigneeId: "user-1",
+          },
+        ],
+      }),
+    );
+
+    cy.getByData("toolbar-filters-modal-trigger").first().click();
+    cy.getByData("show-only-my-tasks").click();
+    cy.get('button[type="submit"]').click();
+
+    cy.getByData("task-list-item-title").should("have.length", 2);
+    cy.getByData("task-list-item-title").eq(0).should("contain", "A");
+    cy.getByData("task-list-item-title").eq(1).should("contain", "C");
+
+    cy.location("search").should("include", "onlyMyTasks=true");
+  });
+
   describe("filter by deadline", () => {
     it("filter tasks by 'today'", () => {
       setup(

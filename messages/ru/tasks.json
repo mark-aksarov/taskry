@@ -158,6 +158,8 @@
   },
 
   "TaskFiltersForm": {
+    "showOnlyAssignedSwitchText": "Только мои задачи",
+
     "TaskFiltersFormDeadlineCheckboxGroup": {
       "label": "Срок",
       "today": "Сегодня",

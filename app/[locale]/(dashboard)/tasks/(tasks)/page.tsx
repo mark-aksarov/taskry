@@ -1,6 +1,6 @@
 import {
-  GlobalContainerContextType,
   GlobalContainerProvider,
+  GlobalContainerContextType,
 } from "@/components/layout/GlobalContainerContext";
 
 import { z } from "zod";
@@ -27,6 +27,10 @@ import { TaskDetailCompactContainer } from "@/components/tasks/TaskDetailCompact
 import { ProjectDetailCompactContainer } from "@/components/projects/ProjectDetailCompactContainer";
 
 const searchParamsSchema = z.object({
+  onlyMyTasks: z
+    .preprocess((val) => val === "true", z.boolean())
+    .optional()
+    .catch(undefined),
   page: z.coerce.number().int().positive().catch(1),
   pageSize: z.coerce.number().int().min(1).max(100).catch(20),
   sort: z.enum(["title", "deadline", "status", "category"]).catch("title"),

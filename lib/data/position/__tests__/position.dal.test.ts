@@ -1,6 +1,6 @@
 import prisma from "@/lib/prisma";
 import { createPosition } from "../position.dal";
-import { resetDatabase } from "@/lib/data/utils/test-utils";
+import { resetDatabase } from "@/prisma/resetDatabase";
 import { vi, describe, beforeEach, it, expect } from "vitest";
 import { verifySession } from "@/lib/data/utils/verifySession";
 

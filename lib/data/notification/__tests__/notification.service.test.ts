@@ -1,6 +1,6 @@
 import prisma from "@/lib/prisma";
 import { getNotifications } from "../notification.service";
-import { resetDatabase } from "@/lib/data/utils/test-utils";
+import { resetDatabase } from "@/prisma/resetDatabase";
 import {
   NotificationType,
   ProjectStatus,

@@ -1,6 +1,6 @@
 import prisma from "@/lib/prisma";
 import { getCommentList } from "../comment.service";
-import { resetDatabase } from "@/lib/data/utils/test-utils";
+import { resetDatabase } from "@/prisma/resetDatabase";
 import { describe, it, expect, beforeEach, vi } from "vitest";
 import { verifySession } from "@/lib/data/utils/verifySession";
 import { ProjectStatus, TaskStatus } from "@/generated/prisma/enums";
