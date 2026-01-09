@@ -49,7 +49,7 @@ const createPayload = (
   return payload;
 };
 
-describe("Task Item Menu", () => {
+describe("task actions permissions", () => {
   beforeEach(() => {
     cy.viewport(1440, 900);
     cy.task("db:reset");

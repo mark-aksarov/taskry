@@ -1,4 +1,4 @@
-describe("Auth Smoke Tests", () => {
+describe("auth smoke tests", () => {
   beforeEach(() => {
     cy.viewport(1440, 900);
   });

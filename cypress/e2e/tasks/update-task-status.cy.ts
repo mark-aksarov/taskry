@@ -1,7 +1,7 @@
 import { ProjectStatus, TaskStatus } from "@/generated/prisma/enums";
 import { E2ESeedPayload } from "@/prisma/e2e/types";
 
-describe("Update Task Status", () => {
+describe("update task status", () => {
   beforeEach(() => {
     cy.viewport(1440, 900);
 

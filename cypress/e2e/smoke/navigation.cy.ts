@@ -1,6 +1,6 @@
 import { E2ESeedPayload } from "@/prisma/e2e/types";
 
-describe("Navigation Smoke Tests", () => {
+describe("navigation smoke tests", () => {
   beforeEach(() => {
     cy.viewport(1440, 900);
 

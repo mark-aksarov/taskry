@@ -1,7 +1,7 @@
 import { E2ESeedPayload } from "@/prisma/e2e/types";
 import { ProjectStatus, TaskStatus } from "@/generated/prisma/enums";
 
-describe("toolbar action menu", () => {
+describe("update multiple task status", () => {
   beforeEach(() => {
     cy.viewport(1440, 900);
 

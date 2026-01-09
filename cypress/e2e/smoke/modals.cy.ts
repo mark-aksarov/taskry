@@ -1,7 +1,7 @@
 import { NotificationType } from "@/generated/prisma/enums";
 import { E2ESeedPayload } from "@/prisma/e2e/types";
 
-describe("Modals Smoke Tests", () => {
+describe("modals smoke tests", () => {
   beforeEach(() => {
     cy.viewport(1440, 900);
 

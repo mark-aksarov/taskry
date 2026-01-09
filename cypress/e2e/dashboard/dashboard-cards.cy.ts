@@ -1,6 +1,6 @@
-import { E2ESeedPayload } from "../../../prisma/e2e/types";
+import { E2ESeedPayload } from "@/prisma/e2e/types";
 
-describe("Dashboard cards", () => {
+describe("dashboard cards", () => {
   beforeEach(() => {
     cy.viewport(1440, 900);
 
