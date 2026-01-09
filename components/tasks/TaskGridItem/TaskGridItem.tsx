@@ -1,13 +1,6 @@
 "use client";
 
 import {
-  ActionFn,
-  ActionState,
-  DeleteProjectsPayload,
-  UpdateTaskStatusesPayload,
-} from "@/lib/actions/types";
-
-import {
   GridItemInfo,
   GridItemText,
   GridItemTitle,
@@ -35,12 +28,10 @@ import { getTaskStatusBadgeColor } from "../getTaskStatusBadgeColor";
 import { UserDetailModal } from "@/components/users/UserDetailModal";
 import { ProjectStatus, TaskStatus } from "@/generated/prisma/enums";
 import { useSyncSelectionTaskItem } from "@/lib/hooks/useTaskSelection";
-import { TaskItemActionMenuTrigger } from "../TaskItemActionMenuTrigger";
 import { TaskListItemCheckbox } from "../TaskListItem/TaskListItemCheckbox";
 import { UserDetailBottomSheet } from "@/components/users/UserDetailBottomSheet";
 
 export interface TaskGridItemProps {
-  guestMode?: boolean;
   id: number;
   title: string;
   deadline?: Date;
@@ -54,15 +45,10 @@ export interface TaskGridItemProps {
   commentsCount: number;
   subtasksTotal: number;
   subtasksDone: number;
-  canDelete: boolean;
-  canUpdate: boolean;
-  canUpdateStatus: boolean;
-  deleteAction: ActionFn<ActionState, DeleteProjectsPayload>;
-  updateStatusAction: ActionFn<ActionState, UpdateTaskStatusesPayload>;
+  menuTrigger?: React.ReactNode;
 }
 
 export function TaskGridItem({
-  guestMode,
   id,
   title,
   deadline,
@@ -72,11 +58,7 @@ export function TaskGridItem({
   commentsCount,
   subtasksTotal,
   subtasksDone,
-  canDelete,
-  canUpdate,
-  canUpdateStatus,
-  deleteAction,
-  updateStatusAction,
+  menuTrigger,
 }: TaskGridItemProps) {
   const t = useTranslations("tasks");
 
@@ -105,21 +87,7 @@ export function TaskGridItem({
   return (
     <TaskGridItemLayout
       checkboxSlot={<TaskListItemCheckbox id={id} />}
-      menuTriggerSlot={
-        <TaskItemActionMenuTrigger
-          guestMode={guestMode}
-          taskId={id}
-          taskTitle={title}
-          taskStatus={status}
-          projectStatus={projectStatus}
-          canDelete={canDelete}
-          canUpdate={canUpdate}
-          canUpdateStatus={canUpdateStatus}
-          deleteAction={deleteAction}
-          updateStatusAction={updateStatusAction}
-          className="-mr-2"
-        />
-      }
+      menuTriggerSlot={menuTrigger}
       titleSlot={
         <GridItemInfo className="flex-auto">
           <GridItemTitle>

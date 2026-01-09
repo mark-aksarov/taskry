@@ -2,6 +2,7 @@ import { fn } from "storybook/test";
 import { TaskListItem } from "./TaskListItem";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { TaskItemActionMenuTrigger } from "../TaskItemActionMenuTrigger";
 
 const meta = {
   title: "Components/tasks/TaskListItem",
@@ -23,11 +24,20 @@ export const Default = {
     status: "pending",
     assignee: { id: "user1", imageUrl: "/man.jpg", fullName: "John Doe" },
     commentsCount: 10,
-    canDelete: true,
-    canUpdate: true,
-    canUpdateStatus: true,
-    deleteAction: fn(),
-    updateStatusAction: fn(),
+    menuTrigger: (
+      <TaskItemActionMenuTrigger
+        guestMode={true}
+        taskId={1}
+        taskTitle="Design landing page"
+        taskStatus="pending"
+        projectStatus="active"
+        canDelete={true}
+        canUpdate={true}
+        canUpdateStatus={true}
+        deleteAction={fn()}
+        updateStatusAction={fn()}
+      />
+    ),
   },
 } satisfies Story;
 

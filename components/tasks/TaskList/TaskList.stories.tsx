@@ -2,6 +2,7 @@ import { TaskList } from "./TaskList";
 import { TaskListItem } from "../TaskListItem";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { TaskItemActionMenuTrigger } from "../TaskItemActionMenuTrigger";
 
 const meta = {
   title: "Components/tasks/TaskList",
@@ -34,11 +35,20 @@ export const Default = {
           assignee={{ id: "user1", imageUrl: "/man.jpg", fullName: "John Doe" }}
           commentsCount={10}
           showCheckbox
-          canDelete={true}
-          canUpdate={true}
-          canUpdateStatus={true}
-          deleteAction={mockedAction}
-          updateStatusAction={mockedAction}
+          menuTrigger={
+            <TaskItemActionMenuTrigger
+              guestMode={true}
+              taskId={1}
+              taskTitle="Design landing page"
+              taskStatus="pending"
+              projectStatus="active"
+              canDelete={true}
+              canUpdate={true}
+              canUpdateStatus={true}
+              deleteAction={mockedAction}
+              updateStatusAction={mockedAction}
+            />
+          }
         />
 
         <TaskListItem
@@ -51,11 +61,20 @@ export const Default = {
           assignee={undefined}
           commentsCount={22}
           showCheckbox
-          canDelete={true}
-          canUpdate={true}
-          canUpdateStatus={true}
-          deleteAction={mockedAction}
-          updateStatusAction={mockedAction}
+          menuTrigger={
+            <TaskItemActionMenuTrigger
+              guestMode={true}
+              taskId={2}
+              taskTitle="Implement login system"
+              taskStatus="active"
+              projectStatus="active"
+              canDelete={true}
+              canUpdate={true}
+              canUpdateStatus={true}
+              deleteAction={mockedAction}
+              updateStatusAction={mockedAction}
+            />
+          }
         />
 
         <TaskListItem
@@ -68,11 +87,20 @@ export const Default = {
           assignee={{ id: "user3", fullName: "Jane Doe" }}
           commentsCount={2}
           showCheckbox
-          canDelete={true}
-          canUpdate={true}
-          canUpdateStatus={true}
-          deleteAction={mockedAction}
-          updateStatusAction={mockedAction}
+          menuTrigger={
+            <TaskItemActionMenuTrigger
+              guestMode={true}
+              taskId={3}
+              taskTitle="Database schema migration"
+              taskStatus="completed"
+              projectStatus="active"
+              canDelete={true}
+              canUpdate={true}
+              canUpdateStatus={true}
+              deleteAction={mockedAction}
+              updateStatusAction={mockedAction}
+            />
+          }
         />
 
         <TaskListItem
@@ -89,11 +117,20 @@ export const Default = {
           assignee={{ id: "user4", imageUrl: "/man.jpg", fullName: "John Doe" }}
           commentsCount={12}
           showCheckbox
-          canDelete={true}
-          canUpdate={true}
-          canUpdateStatus={true}
-          deleteAction={mockedAction}
-          updateStatusAction={mockedAction}
+          menuTrigger={
+            <TaskItemActionMenuTrigger
+              guestMode={true}
+              taskId={4}
+              taskTitle="Write unit tests"
+              taskStatus="pending"
+              projectStatus="active"
+              canDelete={true}
+              canUpdate={true}
+              canUpdateStatus={true}
+              deleteAction={mockedAction}
+              updateStatusAction={mockedAction}
+            />
+          }
         />
 
         <TaskListItem
@@ -106,11 +143,20 @@ export const Default = {
           assignee={{ id: "user5", imageUrl: "/man.jpg", fullName: "John Doe" }}
           commentsCount={15}
           showCheckbox
-          canDelete={true}
-          canUpdate={true}
-          canUpdateStatus={true}
-          deleteAction={mockedAction}
-          updateStatusAction={mockedAction}
+          menuTrigger={
+            <TaskItemActionMenuTrigger
+              guestMode={true}
+              taskId={5}
+              taskTitle="Prepare deployment pipeline"
+              taskStatus="active"
+              projectStatus="active"
+              canDelete={true}
+              canUpdate={true}
+              canUpdateStatus={true}
+              deleteAction={mockedAction}
+              updateStatusAction={mockedAction}
+            />
+          }
         />
 
         <TaskListItem
@@ -123,11 +169,20 @@ export const Default = {
           assignee={{ id: "user6", imageUrl: "/man.jpg", fullName: "John Doe" }}
           commentsCount={9}
           showCheckbox
-          canDelete={true}
-          canUpdate={true}
-          canUpdateStatus={true}
-          deleteAction={mockedAction}
-          updateStatusAction={mockedAction}
+          menuTrigger={
+            <TaskItemActionMenuTrigger
+              guestMode={true}
+              taskId={6}
+              taskTitle="Set up staging environment"
+              taskStatus="completed"
+              projectStatus="active"
+              canDelete={true}
+              canUpdate={true}
+              canUpdateStatus={true}
+              deleteAction={mockedAction}
+              updateStatusAction={mockedAction}
+            />
+          }
         />
 
         <TaskListItem
@@ -144,11 +199,20 @@ export const Default = {
           assignee={{ id: "user7", imageUrl: "/man.jpg", fullName: "John Doe" }}
           commentsCount={12}
           showCheckbox
-          canDelete={true}
-          canUpdate={true}
-          canUpdateStatus={true}
-          deleteAction={mockedAction}
-          updateStatusAction={mockedAction}
+          menuTrigger={
+            <TaskItemActionMenuTrigger
+              guestMode={true}
+              taskId={7}
+              taskTitle="Create onboarding flow"
+              taskStatus="completed"
+              projectStatus="active"
+              canDelete={true}
+              canUpdate={true}
+              canUpdateStatus={true}
+              deleteAction={mockedAction}
+              updateStatusAction={mockedAction}
+            />
+          }
         />
 
         <TaskListItem
@@ -161,11 +225,20 @@ export const Default = {
           assignee={{ id: "user8", imageUrl: "/man.jpg", fullName: "John Doe" }}
           commentsCount={10}
           showCheckbox
-          canDelete={true}
-          canUpdate={true}
-          canUpdateStatus={true}
-          deleteAction={mockedAction}
-          updateStatusAction={mockedAction}
+          menuTrigger={
+            <TaskItemActionMenuTrigger
+              guestMode={true}
+              taskId={8}
+              taskTitle="Fix payment bug"
+              taskStatus="active"
+              projectStatus="active"
+              canDelete={true}
+              canUpdate={true}
+              canUpdateStatus={true}
+              deleteAction={mockedAction}
+              updateStatusAction={mockedAction}
+            />
+          }
         />
 
         <TaskListItem
@@ -182,11 +255,20 @@ export const Default = {
           assignee={{ id: "user9", fullName: "Jane Doe" }}
           commentsCount={23}
           showCheckbox
-          canDelete={true}
-          canUpdate={true}
-          canUpdateStatus={true}
-          deleteAction={mockedAction}
-          updateStatusAction={mockedAction}
+          menuTrigger={
+            <TaskItemActionMenuTrigger
+              guestMode={true}
+              taskId={9}
+              taskTitle="Optimize image loading"
+              taskStatus="pending"
+              projectStatus="active"
+              canDelete={true}
+              canUpdate={true}
+              canUpdateStatus={true}
+              deleteAction={mockedAction}
+              updateStatusAction={mockedAction}
+            />
+          }
         />
 
         <TaskListItem
@@ -199,11 +281,20 @@ export const Default = {
           assignee={undefined}
           commentsCount={13}
           showCheckbox
-          canDelete={true}
-          canUpdate={true}
-          canUpdateStatus={true}
-          deleteAction={mockedAction}
-          updateStatusAction={mockedAction}
+          menuTrigger={
+            <TaskItemActionMenuTrigger
+              guestMode={true}
+              taskId={10}
+              taskTitle="Refactor auth middleware"
+              taskStatus="completed"
+              projectStatus="active"
+              canDelete={true}
+              canUpdate={true}
+              canUpdateStatus={true}
+              deleteAction={mockedAction}
+              updateStatusAction={mockedAction}
+            />
+          }
         />
       </TaskList>
     ),

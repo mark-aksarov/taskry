@@ -19,6 +19,7 @@ import { getTaskList } from "@/lib/data/task/task.service";
 import { TaskListItemDTO } from "@/lib/data/task/task.dto";
 import { deleteTasks } from "@/lib/actions/task/deleteTasks";
 import { ViewModeLayout } from "@/components/common/ViewMode";
+import { TaskItemActionMenuTrigger } from "../TaskItemActionMenuTrigger";
 import { updateTaskStatuses } from "@/lib/actions/task/updateTaskStatuses";
 
 interface TasksContainerProps {
@@ -65,6 +66,27 @@ export async function TasksContainer({
     subtasksTotal: task.subtasks.total,
   });
 
+  const renderMenuTrigger = (
+    task: (typeof tasksWithPermissions)[number],
+    className?: string,
+  ) => {
+    return (
+      <TaskItemActionMenuTrigger
+        guestMode={guestMode}
+        taskId={task.id}
+        taskTitle={task.title}
+        taskStatus={task.status}
+        projectStatus={task.project.status}
+        canDelete={canDelete}
+        canUpdate={canUpdate}
+        canUpdateStatus={task.canUpdateStatus}
+        deleteAction={deleteTasks}
+        updateStatusAction={updateTaskStatuses}
+        className={className}
+      />
+    );
+  };
+
   return (
     <EntityPaginationProvider>
       <ViewModeLayout
@@ -76,12 +98,7 @@ export async function TasksContainer({
                   key={task.id}
                   category={task.category}
                   project={task.project}
-                  guestMode={guestMode}
-                  canDelete={task.canDelete}
-                  canUpdate={task.canUpdate}
-                  canUpdateStatus={task.canUpdateStatus}
-                  deleteAction={deleteTasks}
-                  updateStatusAction={updateTaskStatuses}
+                  menuTrigger={renderMenuTrigger(task)}
                   showCheckbox
                   {...getCommonProps(task)}
                 />
@@ -96,11 +113,7 @@ export async function TasksContainer({
                 key={task.id}
                 subtasksDone={task.subtasks.done}
                 projectStatus={task.project.status}
-                canDelete={task.canDelete}
-                canUpdate={task.canUpdate}
-                canUpdateStatus={task.canUpdateStatus}
-                updateStatusAction={updateTaskStatuses}
-                deleteAction={deleteTasks}
+                menuTrigger={renderMenuTrigger(task, "-mr-2")}
                 {...getCommonProps(task)}
               />
             ))}

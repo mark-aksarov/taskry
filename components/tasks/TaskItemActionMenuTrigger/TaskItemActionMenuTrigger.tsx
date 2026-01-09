@@ -15,13 +15,13 @@ import {
 import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
 import { EditTaskModal } from "../EditTaskModal";
-import { ItemBaseActionMenuTrigger } from "../../common/ItemBase";
-import { DeleteEntityModal } from "../../common/DeleteEntityModal";
 import { startTransition, useActionState, useState } from "react";
+import { GuestModeModal } from "@/components/common/GuestModeModal";
 import { ProjectStatus, TaskStatus } from "@/generated/prisma/enums";
 import { useActionErrorToast } from "@/lib/hooks/useActionErrorToast";
+import { ItemBaseActionMenuTrigger } from "@/components/common/ItemBase";
+import { DeleteEntityModal } from "@/components/common/DeleteEntityModal";
 import { Check, CircleEllipsis, Clock, Pencil, Trash } from "lucide-react";
-import { GuestModeModal } from "../../common/GuestModeModal";
 
 export type TaskItemActionMenuTriggerProps = {
   taskId: number;

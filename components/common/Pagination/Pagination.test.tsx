@@ -1,6 +1,6 @@
 import React from "react";
-import { describe, expect, it, vi } from "vitest";
 import { Pagination, createPageArray } from "./Pagination";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
 
 describe("Pagination Logic (createPageArray)", () => {

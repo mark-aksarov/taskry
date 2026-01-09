@@ -1,13 +1,6 @@
 "use client";
 
 import {
-  ActionFn,
-  ActionState,
-  DeleteProjectsPayload,
-  UpdateTaskStatusesPayload,
-} from "@/lib/actions/types";
-
-import {
   ListItemInfo,
   ListItemText,
   ListItemTitle,
@@ -35,7 +28,6 @@ import { UserDetailModal } from "@/components/users/UserDetailModal";
 import { getTaskStatusBadgeColor } from "../getTaskStatusBadgeColor";
 import { ProjectStatus, TaskStatus } from "@/generated/prisma/enums";
 import { useSyncSelectionTaskItem } from "@/lib/hooks/useTaskSelection";
-import { TaskItemActionMenuTrigger } from "../TaskItemActionMenuTrigger";
 import { ProjectDetailModal } from "@/components/projects/ProjectDetailModal";
 
 export interface TaskListItemProps {
@@ -59,12 +51,7 @@ export interface TaskListItemProps {
   status: TaskStatus;
   commentsCount: number;
   showCheckbox?: boolean;
-  guestMode?: boolean;
-  canDelete: boolean;
-  canUpdate: boolean;
-  canUpdateStatus: boolean;
-  deleteAction: ActionFn<ActionState, DeleteProjectsPayload>;
-  updateStatusAction: ActionFn<ActionState, UpdateTaskStatusesPayload>;
+  menuTrigger?: React.ReactNode;
 }
 
 export const TaskListItem = ({
@@ -77,12 +64,7 @@ export const TaskListItem = ({
   status,
   commentsCount,
   showCheckbox,
-  guestMode,
-  canDelete,
-  canUpdate,
-  canUpdateStatus,
-  deleteAction,
-  updateStatusAction,
+  menuTrigger,
 }: TaskListItemProps) => {
   const t = useTranslations("tasks");
 
@@ -203,20 +185,7 @@ export const TaskListItem = ({
           <TaskCommentsModal taskId={id} />
         </RACDialogTrigger>
       }
-      menuTriggerSlot={
-        <TaskItemActionMenuTrigger
-          guestMode={guestMode}
-          taskId={id}
-          taskTitle={title}
-          taskStatus={status}
-          projectStatus={project.status}
-          canDelete={canDelete}
-          canUpdate={canUpdate}
-          canUpdateStatus={canUpdateStatus}
-          deleteAction={deleteAction}
-          updateStatusAction={updateStatusAction}
-        />
-      }
+      menuTriggerSlot={menuTrigger}
     />
   );
 };

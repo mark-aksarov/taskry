@@ -22,15 +22,18 @@ import { TaskListItem } from "../TaskListItem";
 import { getTaskCount } from "@/lib/data/task/task.dal";
 import { getTaskList } from "@/lib/data/task/task.service";
 import { deleteTasks } from "@/lib/actions/task/deleteTasks";
+import { TaskItemActionMenuTrigger } from "../TaskItemActionMenuTrigger";
 import { updateTaskStatuses } from "@/lib/actions/task/updateTaskStatuses";
 
 interface AssignedTasksContainerProps {
+  guestMode?: boolean;
   page: number;
   pageSize: number;
   newTaskFormContainer: React.ReactNode;
 }
 
 export async function AssignedTasksContainer({
+  guestMode,
   page,
   pageSize,
   newTaskFormContainer,
@@ -98,11 +101,20 @@ export async function AssignedTasksContainer({
               status={task.status}
               assignee={task.assignee}
               commentsCount={task.commentsCount}
-              canDelete={task.canDelete}
-              canUpdate={task.canUpdate}
-              canUpdateStatus={task.canUpdateStatus}
-              deleteAction={deleteTasks}
-              updateStatusAction={updateTaskStatuses}
+              menuTrigger={
+                <TaskItemActionMenuTrigger
+                  guestMode={guestMode}
+                  taskId={task.id}
+                  taskTitle={task.title}
+                  taskStatus={task.status}
+                  projectStatus={task.project.status}
+                  canDelete={canDelete}
+                  canUpdate={canUpdate}
+                  canUpdateStatus={task.canUpdateStatus}
+                  deleteAction={deleteTasks}
+                  updateStatusAction={updateTaskStatuses}
+                />
+              }
             />
           ))}
         </TaskList>
