@@ -19,4 +19,4 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof TotalTasksCardSkeleton>;
 
-export const Default: Story = {};
+export const Default = {} satisfies Story;

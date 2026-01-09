@@ -33,7 +33,7 @@ const ToggleButtonGroupTemplate: Story = {
       <ToggleButton id="oranges">Oranges</ToggleButton>
     </ToggleButtonGroup>
   ),
-} satisfies Story;
+};
 
 export const Contast = {
   ...ToggleButtonGroupTemplate,
@@ -54,7 +54,7 @@ export const Disabled = {
   },
 } satisfies Story;
 
-export const Vertical: Story = {
+export const Vertical = {
   ...ToggleButtonGroupTemplate,
   args: {
     orientation: "vertical",

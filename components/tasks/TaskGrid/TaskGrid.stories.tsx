@@ -143,7 +143,7 @@ export const Default = {
             projectStatus={ProjectStatus.active}
             menuTrigger={
               <TaskItemActionMenuTrigger
-                guestMode
+                guestMode={false}
                 taskId={task.id}
                 taskTitle={task.title}
                 taskStatus={task.status}

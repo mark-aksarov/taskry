@@ -6,13 +6,6 @@ import {
 } from "@/lib/hooks/useProjectSelection";
 
 import {
-  ActionFn,
-  ActionState,
-  DeleteProjectsPayload,
-  UpdateProjectStatusesPayload,
-} from "@/lib/actions/types";
-
-import {
   GridItemText,
   GridItemInfo,
   GridItemTitle,
@@ -55,9 +48,7 @@ export interface ProjectGridItemProps {
   tasksTotal: number;
   tasksCompleted: number;
   commentsCount: number;
-
-  deleteAction: ActionFn<ActionState, DeleteProjectsPayload>;
-  updateStatusAction: ActionFn<ActionState, UpdateProjectStatusesPayload>;
+  menuTrigger?: React.ReactNode;
 }
 
 export function ProjectGridItem({
@@ -69,8 +60,7 @@ export function ProjectGridItem({
   tasksTotal,
   tasksCompleted,
   commentsCount,
-  deleteAction,
-  updateStatusAction,
+  menuTrigger,
 }: ProjectGridItemProps) {
   const t = useTranslations("projects");
 
@@ -106,16 +96,7 @@ export function ProjectGridItem({
           onChange={() => toggleItem(id)}
         />
       }
-      menuTriggerSlot={
-        <ProjectItemActionMenuTrigger
-          className="-mr-2"
-          projectId={id}
-          projectTitle={title}
-          projectStatus={status}
-          deleteAction={deleteAction}
-          updateStatusAction={updateStatusAction}
-        />
-      }
+      menuTriggerSlot={menuTrigger}
       titleSlot={
         <GridItemInfo className="flex-auto">
           <GridItemTitle>

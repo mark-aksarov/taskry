@@ -47,7 +47,7 @@ const BottomSheetTemplate = ({
   );
 };
 
-export const WithForm: Story = {
+export const WithForm = {
   render: (args) => (
     <BottomSheetTemplate {...args}>
       <Dialog>
@@ -78,9 +78,9 @@ export const WithForm: Story = {
       </Dialog>
     </BottomSheetTemplate>
   ),
-};
+} satisfies Story;
 
-export const WithLongContent: Story = {
+export const WithLongContent = {
   render: (args) => (
     <BottomSheetTemplate aria-label="Bottom sheet" {...args}>
       <Dialog className="max-h-[calc(100dvh-64px)]">
@@ -179,4 +179,4 @@ export const WithLongContent: Story = {
       </Dialog>
     </BottomSheetTemplate>
   ),
-};
+} satisfies Story;

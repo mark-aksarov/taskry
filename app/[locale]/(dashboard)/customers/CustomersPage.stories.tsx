@@ -54,7 +54,7 @@ export const Loading = {
   render: () => <CustomersPageLoading />,
 } satisfies Story;
 
-export const WithNoCustomers: Story = {
+export const WithNoCustomers = {
   args: { ...Default.args },
   render: () => (
     <CustomersPageEmpty

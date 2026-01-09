@@ -22,9 +22,9 @@ const meta: Meta<typeof Skeleton> = {
 export default meta;
 type Story = StoryObj<typeof Skeleton>;
 
-export const Default: Story = {};
+export const Default = {} satisfies Story;
 
-export const TextSize: Story = {
+export const TextSize = {
   tags: ["!test"],
   render: (args) => {
     return (
@@ -41,11 +41,11 @@ export const TextSize: Story = {
       </div>
     );
   },
-};
+} satisfies Story;
 
-export const Circle: Story = {
+export const Circle = {
   tags: ["!test"],
   args: {
     className: "w-10 h-10 rounded-full",
   },
-};
+} satisfies Story;

@@ -24,8 +24,6 @@ import { UserDetailModal } from "../UserDetailModal";
 import { UnknownUser } from "@/components/common/UnknownUser";
 import { UserDetailBottomSheet } from "../UserDetailBottomSheet";
 import { ImageContainer } from "@/components/common/ImageContainer";
-import { UserItemActionMenuTrigger } from "../UserItemActionMenuTrigger";
-import { ActionFn, ActionState, DeleteUsersPayload } from "@/lib/actions/types";
 
 export interface UserListItemProps {
   id: string;
@@ -37,7 +35,7 @@ export interface UserListItemProps {
   position?: {
     name: string;
   };
-  deleteAction: ActionFn<ActionState, DeleteUsersPayload>;
+  menuTrigger: React.ReactNode;
 }
 
 export function UserListItem({
@@ -48,7 +46,7 @@ export function UserListItem({
   phoneNumber,
   publicLink,
   position,
-  deleteAction,
+  menuTrigger,
 }: UserListItemProps) {
   const t = useTranslations("users.UserListItem");
 
@@ -147,11 +145,7 @@ export function UserListItem({
         <ListItemText>{t("position")}</ListItemText>
       </ListItemInfo>
 
-      <UserItemActionMenuTrigger
-        userId={id}
-        userFullName={fullName}
-        deleteAction={deleteAction}
-      />
+      {menuTrigger}
     </ListItem>
   );
 }

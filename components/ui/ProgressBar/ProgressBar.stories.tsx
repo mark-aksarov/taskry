@@ -23,7 +23,7 @@ const meta: Meta<typeof ProgressBar> = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
+export const Default = {
   render: (args) => (
     <ProgressBar
       {...args}
@@ -34,9 +34,9 @@ export const Default: Story = {
       }
     />
   ),
-};
+} satisfies Story;
 
-export const Red: Story = {
+export const Red = {
   args: {
     value: 30,
   },
@@ -50,9 +50,9 @@ export const Red: Story = {
       }
     />
   ),
-};
+} satisfies Story;
 
-export const Orange: Story = {
+export const Orange = {
   args: {
     value: 60,
   },
@@ -66,9 +66,9 @@ export const Orange: Story = {
       }
     />
   ),
-};
+} satisfies Story;
 
-export const Green: Story = {
+export const Green = {
   args: {
     value: 90,
   },
@@ -82,4 +82,4 @@ export const Green: Story = {
       }
     />
   ),
-};
+} satisfies Story;

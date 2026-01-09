@@ -1,17 +1,29 @@
 import { fn } from "storybook/test";
-import { Meta, StoryObj } from "@storybook/react";
 import { CustomerListItem } from "./CustomerListItem";
+import type { Meta, StoryObj } from "@storybook/react";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { CustomerItemActionMenuTrigger } from "../CustomerItemActionMenuTrigger";
 
-const meta: Meta<typeof CustomerListItem> = {
+const meta = {
   title: "Components/customers/CustomerListItem",
   component: CustomerListItem,
   tags: ["autodocs"],
   decorators: [withThemedBackground],
+  render: (args) => (
+    <CustomerListItem {...args} menuTrigger={renderMenu(args)} />
+  ),
 } satisfies Meta<typeof CustomerListItem>;
 
 export default meta;
 type Story = StoryObj<typeof CustomerListItem>;
+
+const renderMenu = (args: any) => (
+  <CustomerItemActionMenuTrigger
+    customerId={args.id}
+    customerFullName={args.fullName}
+    deleteAction={fn()}
+  />
+);
 
 export const Default = {
   args: {
@@ -25,7 +37,6 @@ export const Default = {
       id: 1,
       name: "TechCorp",
     },
-    deleteAction: fn(),
   },
 } satisfies Story;
 

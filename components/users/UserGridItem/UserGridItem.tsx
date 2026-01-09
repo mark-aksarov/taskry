@@ -15,6 +15,11 @@ import {
   ItemBaseDetailBottomSheetTrigger,
 } from "@/components/common/ItemBase";
 
+import {
+  useSyncSelectionUserItem,
+  useUserSelection,
+} from "@/lib/hooks/useUserSelection";
+
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { Link2, Mail, Phone } from "lucide-react";
@@ -24,12 +29,6 @@ import { Link, Checkbox, Divider } from "@/components/ui";
 import { UnknownUser } from "@/components/common/UnknownUser";
 import { UserDetailBottomSheet } from "../UserDetailBottomSheet";
 import { ImageContainer } from "@/components/common/ImageContainer";
-import { UserItemActionMenuTrigger } from "../UserItemActionMenuTrigger";
-import { ActionFn, ActionState, DeleteUsersPayload } from "@/lib/actions/types";
-import {
-  useSyncSelectionUserItem,
-  useUserSelection,
-} from "@/lib/hooks/useUserSelection";
 
 export interface UserGridItemProps {
   id: string;
@@ -41,7 +40,7 @@ export interface UserGridItemProps {
   phoneNumber?: string;
   publicLink?: string;
   email: string;
-  deleteAction: ActionFn<ActionState, DeleteUsersPayload>;
+  menuTrigger: React.ReactNode;
 }
 
 export function UserGridItem({
@@ -52,7 +51,7 @@ export function UserGridItem({
   phoneNumber,
   publicLink,
   email,
-  deleteAction,
+  menuTrigger,
 }: UserGridItemProps) {
   const t = useTranslations("users.UserGridItem");
 
@@ -78,14 +77,7 @@ export function UserGridItem({
           onChange={() => toggleItem(id)}
         />
       }
-      actionMenuSlot={
-        <UserItemActionMenuTrigger
-          userId={id}
-          userFullName={fullName}
-          deleteAction={deleteAction}
-          className="-mr-2"
-        />
-      }
+      actionMenuSlot={menuTrigger}
       imageSlot={
         <>
           <ItemBaseDetailModalTrigger modal={<UserDetailModal userId={id} />}>

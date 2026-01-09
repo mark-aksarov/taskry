@@ -1,7 +1,8 @@
 import { fn } from "storybook/test";
 import { UserGridItem } from "./UserGridItem";
-import { Meta, StoryObj } from "@storybook/nextjs-vite";
+import type { Meta, StoryObj } from "@storybook/react";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { UserItemActionMenuTrigger } from "../UserItemActionMenuTrigger";
 
 const meta = {
   title: "Components/users/UserGridItem",
@@ -15,10 +16,19 @@ const meta = {
     ),
     withThemedBackground,
   ],
+  render: (args) => <UserGridItem {...args} menuTrigger={renderMenu(args)} />,
 } satisfies Meta<typeof UserGridItem>;
 
 export default meta;
 type Story = StoryObj<typeof UserGridItem>;
+
+const renderMenu = (args: any) => (
+  <UserItemActionMenuTrigger
+    userId={args.id}
+    userFullName={args.fullName}
+    deleteAction={fn()}
+  />
+);
 
 export const Default = {
   args: {
@@ -31,7 +41,6 @@ export const Default = {
     position: {
       name: "Developer",
     },
-    deleteAction: fn(),
   },
 } satisfies Story;
 

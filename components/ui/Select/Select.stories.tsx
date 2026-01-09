@@ -80,7 +80,7 @@ export const Invalid = {
   },
 } satisfies Story;
 
-export const Disabled: Story = {
+export const Disabled = {
   ...SelectTemplate,
   args: {
     ...SelectTemplate.args,
@@ -88,7 +88,7 @@ export const Disabled: Story = {
   },
 } satisfies Story;
 
-export const Validation: Story = {
+export const Validation = {
   ...SelectTemplate,
   args: {
     ...SelectTemplate.args,

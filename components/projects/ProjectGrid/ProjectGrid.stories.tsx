@@ -1,7 +1,113 @@
+import { fn } from "storybook/test";
 import { ProjectGrid } from "./ProjectGrid";
 import { ProjectGridItem } from "../ProjectGridItem";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { ProjectStatus } from "@/generated/prisma/enums";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { ProjectItemActionMenuTrigger } from "../ProjectItemActionMenuTrigger";
+
+const mockedProjects = [
+  {
+    id: 1,
+    title: "Website Redesign",
+    deadline: new Date("2025-06-30"),
+    creator: { id: "u1", fullName: "Alice Smith", imageUrl: "/woman.jpg" },
+    status: ProjectStatus.pending,
+    commentsCount: 5,
+    tasksTotal: 10,
+    tasksCompleted: 8,
+  },
+  {
+    id: 2,
+    title: "Mobile App Launch",
+    deadline: new Date("2025-08-15"),
+    creator: { id: "u2", fullName: "Bob Johnson", imageUrl: "/man.jpg" },
+    status: ProjectStatus.active,
+    commentsCount: 5,
+    tasksTotal: 12,
+    tasksCompleted: 4,
+  },
+  {
+    id: 3,
+    title: "Marketing Campaign Q2",
+    deadline: new Date("2025-05-31"),
+    creator: { id: "u3", fullName: "Carol White", imageUrl: "/woman.jpg" },
+    status: ProjectStatus.completed,
+    commentsCount: 3,
+    tasksTotal: 8,
+    tasksCompleted: 8,
+  },
+  {
+    id: 4,
+    title: "Server Migration",
+    deadline: new Date("2025-07-15"),
+    creator: { id: "u4", fullName: "David Green", imageUrl: "/man.jpg" },
+    status: ProjectStatus.pending,
+    commentsCount: 6,
+    tasksTotal: 15,
+    tasksCompleted: 2,
+  },
+  {
+    id: 5,
+    title: "SEO Optimization",
+    deadline: new Date("2025-06-01"),
+    creator: { id: "u5", fullName: "Eva Black", imageUrl: "/woman.jpg" },
+    status: ProjectStatus.active,
+    commentsCount: 4,
+    tasksTotal: 6,
+    tasksCompleted: 3,
+  },
+  {
+    id: 6,
+    title: "Internal Dashboard",
+    deadline: new Date("2025-09-01"),
+    creator: { id: "u6", fullName: "Frank Moore", imageUrl: "/man.jpg" },
+    status: ProjectStatus.pending,
+    commentsCount: 7,
+    tasksTotal: 20,
+    tasksCompleted: 5,
+  },
+  {
+    id: 7,
+    title: "Customer Feedback",
+    deadline: new Date("2025-03-20"),
+    creator: { id: "u7", fullName: "Grace Hall", imageUrl: "/woman.jpg" },
+    status: ProjectStatus.completed,
+    commentsCount: 4,
+    tasksTotal: 10,
+    tasksCompleted: 10,
+  },
+  {
+    id: 8,
+    title: "Product Photography",
+    deadline: new Date("2025-07-10"),
+    creator: { id: "u8", fullName: "Henry Young", imageUrl: "/man.jpg" },
+    status: ProjectStatus.pending,
+    commentsCount: 6,
+    tasksTotal: 4,
+    tasksCompleted: 1,
+  },
+  {
+    id: 9,
+    title: "Cloud Security Audit",
+    deadline: new Date("2025-08-05"),
+    creator: { id: "u9", fullName: "Ivy Adams", imageUrl: "/woman.jpg" },
+    status: ProjectStatus.active,
+    commentsCount: 3,
+    tasksTotal: 14,
+    tasksCompleted: 12,
+  },
+  {
+    id: 10,
+    title: "Annual Report 2025",
+    deadline: new Date("2025-05-31"),
+    creator: { id: "u10", fullName: "Jack Carter", imageUrl: "/man.jpg" },
+    status: ProjectStatus.completed,
+    commentsCount: 8,
+    tasksTotal: 25,
+    tasksCompleted: 25,
+  },
+];
 
 const meta = {
   title: "Components/projects/ProjectGrid",
@@ -11,179 +117,28 @@ const meta = {
 } satisfies Meta<typeof ProjectGrid>;
 
 export default meta;
-type Story = StoryObj<typeof meta>;
-
-const mockedAction = () => {
-  return new Promise(() => ({
-    status: "success",
-    message: null,
-  })) as any;
-};
+type Story = StoryObj<typeof ProjectGrid>;
 
 export const Default = {
   args: {
     children: (
       <>
-        <ProjectGridItem
-          id={1}
-          title="Website Revamp"
-          deadline={new Date("2025-06-25")}
-          creator={{
-            id: "user1",
-            fullName: "Liam Turner",
-            imageUrl: "/man.jpg",
-          }}
-          status="pending"
-          tasksTotal={4}
-          tasksCompleted={1}
-          commentsCount={12}
-          deleteAction={mockedAction}
-          updateStatusAction={mockedAction}
-        />
-        <ProjectGridItem
-          id={2}
-          title="Mobile App Release"
-          deadline={new Date("2025-08-20")}
-          creator={{
-            id: "user2",
-            fullName: "Emma Parker",
-            imageUrl: "/woman.jpg",
-          }}
-          status="active"
-          tasksTotal={4}
-          tasksCompleted={1}
-          commentsCount={9}
-          deleteAction={mockedAction}
-          updateStatusAction={mockedAction}
-        />
-        <ProjectGridItem
-          id={3}
-          title="Q2 Marketing Strategy"
-          deadline={new Date("2025-05-28")}
-          creator={{
-            id: "user3",
-            fullName: "Olivia White",
-            imageUrl: "/woman.jpg",
-          }}
-          status="completed"
-          tasksTotal={3}
-          tasksCompleted={2}
-          commentsCount={7}
-          deleteAction={mockedAction}
-          updateStatusAction={mockedAction}
-        />
-        <ProjectGridItem
-          id={4}
-          title="Server Upgrade"
-          deadline={new Date("2025-07-18")}
-          creator={{
-            id: "user4",
-            fullName: "Ethan Green",
-            imageUrl: "/man.jpg",
-          }}
-          status="pending"
-          tasksTotal={4}
-          tasksCompleted={1}
-          commentsCount={5}
-          deleteAction={mockedAction}
-          updateStatusAction={mockedAction}
-        />
-        <ProjectGridItem
-          id={5}
-          title="SEO Campaign"
-          deadline={new Date("2025-06-05")}
-          creator={{
-            id: "user5",
-            fullName: "Ava Black",
-            imageUrl: "/woman.jpg",
-          }}
-          status="active"
-          tasksTotal={3}
-          tasksCompleted={0}
-          commentsCount={6}
-          deleteAction={mockedAction}
-          updateStatusAction={mockedAction}
-        />
-        <ProjectGridItem
-          id={6}
-          title="Internal Analytics Dashboard"
-          deadline={new Date("2025-09-05")}
-          creator={{
-            id: "user6",
-            fullName: "Mason Moore",
-            imageUrl: "/man.jpg",
-          }}
-          status="pending"
-          tasksTotal={4}
-          tasksCompleted={1}
-          commentsCount={11}
-          deleteAction={mockedAction}
-          updateStatusAction={mockedAction}
-        />
-        <ProjectGridItem
-          id={7}
-          title="Customer Survey Analysis"
-          deadline={new Date("2025-03-22")}
-          creator={{
-            id: "user7",
-            fullName: "Isabella Hall",
-            imageUrl: "/woman.jpg",
-          }}
-          status="completed"
-          tasksTotal={3}
-          tasksCompleted={2}
-          commentsCount={4}
-          deleteAction={mockedAction}
-          updateStatusAction={mockedAction}
-        />
-        <ProjectGridItem
-          id={8}
-          title="Product Shoot"
-          deadline={new Date("2025-07-12")}
-          creator={{
-            id: "user8",
-            fullName: "Henry Young",
-            imageUrl: "/man.jpg",
-          }}
-          status="active"
-          tasksTotal={3}
-          tasksCompleted={0}
-          commentsCount={8}
-          deleteAction={mockedAction}
-          updateStatusAction={mockedAction}
-        />
-        <ProjectGridItem
-          id={9}
-          title="Cloud Compliance Audit"
-          deadline={new Date("2025-08-08")}
-          creator={{
-            id: "user9",
-            fullName: "Ivy Adams",
-            imageUrl: "/woman.jpg",
-          }}
-          status="pending"
-          tasksTotal={2}
-          tasksCompleted={0}
-          commentsCount={3}
-          deleteAction={mockedAction}
-          updateStatusAction={mockedAction}
-        />
-        <ProjectGridItem
-          id={10}
-          title="Annual Financial Report"
-          deadline={new Date("2025-05-29")}
-          creator={{
-            id: "user10",
-            fullName: "Jack Carter",
-            imageUrl: "/man.jpg",
-          }}
-          status="completed"
-          tasksTotal={3}
-          tasksCompleted={1}
-          commentsCount={10}
-          deleteAction={mockedAction}
-          updateStatusAction={mockedAction}
-        />
+        {mockedProjects.map((project) => (
+          <ProjectGridItem
+            key={project.id}
+            {...project}
+            menuTrigger={
+              <ProjectItemActionMenuTrigger
+                projectId={project.id}
+                projectTitle={project.title}
+                projectStatus={project.status}
+                deleteAction={fn()}
+                updateStatusAction={fn()}
+                className="-mr-2"
+              />
+            }
+          />
+        ))}
       </>
     ),
   },

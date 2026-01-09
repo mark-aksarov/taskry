@@ -1,6 +1,8 @@
-import { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { fn } from "storybook/test";
 import { CustomerGridItem } from "./CustomerGridItem";
+import type { Meta, StoryObj } from "@storybook/react";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { CustomerItemActionMenuTrigger } from "../CustomerItemActionMenuTrigger";
 
 const meta = {
   title: "Components/customers/CustomerGridItem",
@@ -14,10 +16,22 @@ const meta = {
     ),
     withThemedBackground,
   ],
+  render: (args) => (
+    <CustomerGridItem {...args} menuTrigger={renderMenu(args)} />
+  ),
 } satisfies Meta<typeof CustomerGridItem>;
 
 export default meta;
 type Story = StoryObj<typeof CustomerGridItem>;
+
+const renderMenu = (args: any) => (
+  <CustomerItemActionMenuTrigger
+    customerId={args.id}
+    customerFullName={args.fullName}
+    deleteAction={fn()}
+    className="-mr-2"
+  />
+);
 
 export const Default = {
   args: {

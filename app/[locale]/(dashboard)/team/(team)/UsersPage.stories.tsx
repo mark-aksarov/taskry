@@ -27,7 +27,7 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
+export const Default = {
   args: {
     deleteUsersAction: fn(),
     createPositionAction: fn(),
@@ -41,14 +41,14 @@ export const Default: Story = {
       />
     ),
   },
-};
+} satisfies Story;
 
-export const Loading: Story = {
+export const Loading = {
   args: { ...Default.args },
   render: () => <UsersPageLoading />,
-};
+} satisfies Story;
 
-export const WithNoUsers: Story = {
+export const WithNoUsers = {
   args: { ...Default.args },
   render: () => <UsersPageEmpty />,
-};
+} satisfies Story;

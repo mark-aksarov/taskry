@@ -15,15 +15,15 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof UserNavigationMobileLink>;
 
-export const Default: Story = {
+export const Default = {
   globals: {
     viewport: { value: "mobile2", isRotated: false },
   },
-};
+} satisfies Story;
 
-export const Selected: Story = {
+export const Selected = {
   ...Default,
   args: {
     isSelected: true,
   },
-};
+} satisfies Story;

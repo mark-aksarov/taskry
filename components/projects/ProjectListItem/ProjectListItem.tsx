@@ -6,13 +6,6 @@ import {
 } from "@/lib/hooks/useProjectSelection";
 
 import {
-  ActionFn,
-  ActionState,
-  DeleteProjectsPayload,
-  UpdateProjectStatusesPayload,
-} from "@/lib/actions/types";
-
-import {
   ListItemInfo,
   ListItemText,
   ListItemTitle,
@@ -39,7 +32,6 @@ import { ImageContainer } from "@/components/common/ImageContainer";
 import { UserDetailModal } from "@/components/users/UserDetailModal";
 import { ProjectDetailBottomSheet } from "../ProjectDetailBottomSheet";
 import { getProjectStatusBadgeColor } from "../getProjectStatusBadgeColor";
-import { ProjectItemActionMenuTrigger } from "../ProjectItemActionMenuTrigger";
 
 export interface ProjectListItemProps {
   id: number;
@@ -66,8 +58,7 @@ export interface ProjectListItemProps {
   status: ProjectStatus;
   commentsCount: number;
   showCheckbox?: boolean;
-  deleteAction: ActionFn<ActionState, DeleteProjectsPayload>;
-  updateStatusAction: ActionFn<ActionState, UpdateProjectStatusesPayload>;
+  menuTrigger?: React.ReactNode;
 }
 
 export const ProjectListItem = ({
@@ -81,8 +72,7 @@ export const ProjectListItem = ({
   creator,
   commentsCount,
   showCheckbox,
-  deleteAction,
-  updateStatusAction,
+  menuTrigger,
 }: ProjectListItemProps) => {
   const t = useTranslations("projects");
 
@@ -239,15 +229,7 @@ export const ProjectListItem = ({
           <ProjectCommentsModal projectId={id} />
         </RACDialogTrigger>
       }
-      menuTriggerSlot={
-        <ProjectItemActionMenuTrigger
-          projectId={id}
-          projectTitle={title}
-          projectStatus={status}
-          deleteAction={deleteAction}
-          updateStatusAction={updateStatusAction}
-        />
-      }
+      menuTriggerSlot={menuTrigger}
     />
   );
 };

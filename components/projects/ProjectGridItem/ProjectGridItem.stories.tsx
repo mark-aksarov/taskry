@@ -1,6 +1,8 @@
+import { fn } from "storybook/test";
 import { ProjectGridItem } from "./ProjectGridItem";
-import { Meta, StoryObj } from "@storybook/nextjs-vite";
+import type { Meta, StoryObj } from "@storybook/react";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { ProjectItemActionMenuTrigger } from "../ProjectItemActionMenuTrigger";
 
 const meta = {
   title: "Components/projects/ProjectGridItem",
@@ -14,17 +16,25 @@ const meta = {
     ),
     withThemedBackground,
   ],
+
+  render: (args) => (
+    <ProjectGridItem {...args} menuTrigger={renderMenu(args)} />
+  ),
 } satisfies Meta<typeof ProjectGridItem>;
 
 export default meta;
 type Story = StoryObj<typeof ProjectGridItem>;
 
-const mockedAction = () => {
-  return new Promise(() => ({
-    status: "success",
-    message: null,
-  })) as any;
-};
+const renderMenu = (args: any) => (
+  <ProjectItemActionMenuTrigger
+    projectId={args.id}
+    projectTitle={args.title}
+    projectStatus={args.status}
+    deleteAction={fn()}
+    updateStatusAction={fn()}
+    className="-mr-2"
+  />
+);
 
 export const Default = {
   args: {
@@ -40,8 +50,6 @@ export const Default = {
     commentsCount: 5,
     tasksTotal: 10,
     tasksCompleted: 8,
-    deleteAction: mockedAction,
-    updateStatusAction: mockedAction,
   },
 } satisfies Story;
 
@@ -56,7 +64,8 @@ export const WithoutCreatorImage = {
   args: {
     ...Default.args,
     creator: {
-      ...Default.args.creator,
+      id: "user1",
+      fullName: "Alice Smith",
       imageUrl: undefined,
     },
   },

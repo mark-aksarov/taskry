@@ -10,7 +10,7 @@ const meta = {
   component: TaskList,
   tags: ["autodocs"],
   decorators: [withThemedBackground],
-  excludeStories: ["TaskListTemplate"],
+  excludeStories: ["TaskListItemsTemplate"],
 } satisfies Meta<typeof TaskList>;
 
 export default meta;
@@ -148,7 +148,7 @@ export const TaskListItemsTemplate = ({
         showCheckbox={showCheckbox}
         menuTrigger={
           <TaskItemActionMenuTrigger
-            guestMode
+            guestMode={false}
             taskId={task.id}
             taskTitle={task.title}
             taskStatus={task.status}

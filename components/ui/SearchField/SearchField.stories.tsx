@@ -1,8 +1,8 @@
-import { SearchField } from "./SearchField";
-import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { Form } from "react-aria-components";
 import { Button } from "../Button";
 import { fn } from "storybook/test";
+import { SearchField } from "./SearchField";
+import { Form } from "react-aria-components";
+import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta: Meta<typeof SearchField> = {
@@ -34,21 +34,21 @@ const meta: Meta<typeof SearchField> = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
+export const Default = {} satisfies Story;
 
-export const Invalid: Story = {
+export const Invalid = {
   args: {
     isInvalid: true,
   },
-};
+} satisfies Story;
 
-export const Disabled: Story = {
+export const Disabled = {
   args: {
     isDisabled: true,
   },
-};
+} satisfies Story;
 
-export const Validation: Story = {
+export const Validation = {
   args: {
     isRequired: true,
     className: "w-full",
@@ -66,4 +66,4 @@ export const Validation: Story = {
       </Form>
     ),
   ],
-};
+} satisfies Story;

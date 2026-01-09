@@ -1,12 +1,6 @@
 "use client";
 
 import {
-  ActionFn,
-  ActionState,
-  DeleteCustomersPayload,
-} from "@/lib/actions/types";
-
-import {
   ListItem,
   ListItemInfo,
   ListItemText,
@@ -30,7 +24,6 @@ import { CustomerDetailModal } from "../CustomerDetailModal";
 import { UnknownUser } from "@/components/common/UnknownUser";
 import { ImageContainer } from "@/components/common/ImageContainer";
 import { CustomerDetailBottomSheet } from "../CustomerDetailBottomSheet";
-import { CustomerItemActionMenuTrigger } from "../CustomerItemActionMenuTrigger";
 
 export type CustomerListItemProps = {
   id: number;
@@ -43,7 +36,7 @@ export type CustomerListItemProps = {
     id: number;
     name: string;
   };
-  deleteAction: ActionFn<ActionState, DeleteCustomersPayload>;
+  menuTrigger: React.ReactNode;
 };
 
 export function CustomerListItem({
@@ -54,7 +47,7 @@ export function CustomerListItem({
   publicLink,
   imageUrl,
   company,
-  deleteAction,
+  menuTrigger,
 }: CustomerListItemProps) {
   const t = useTranslations("customers.CustomerListItem");
 
@@ -152,11 +145,7 @@ export function CustomerListItem({
         <ListItemText>{t("company")}</ListItemText>
       </ListItemInfo>
 
-      <CustomerItemActionMenuTrigger
-        customerId={id}
-        customerFullName={fullName}
-        deleteAction={deleteAction}
-      />
+      {menuTrigger}
     </ListItem>
   );
 }

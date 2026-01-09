@@ -44,7 +44,7 @@ function getItems() {
   return items;
 }
 
-const MenuTemplate: Story = {
+const MenuTemplate = {
   render: (args) => {
     return (
       <MenuTrigger renderButton={() => <Button label="Actions" />} {...args}>
@@ -52,7 +52,7 @@ const MenuTemplate: Story = {
       </MenuTrigger>
     );
   },
-};
+} satisfies Story;
 
 export const BottomLeftPlacement = {
   ...MenuTemplate,

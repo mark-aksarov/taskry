@@ -50,7 +50,7 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof DashboardPage>;
 
-export const Default: Story = {
+export const Default = {
   render: () => (
     <DashboardPage
       totalProjectsCardContainer={<TotalProjectsCard totalProjects={50} />}
@@ -68,7 +68,8 @@ export const Default: Story = {
       }
     />
   ),
-};
+} satisfies Story;
+
 export const Loading = {
   render: () => (
     <DashboardPage

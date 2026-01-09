@@ -25,7 +25,7 @@ type Story = StoryObj<typeof TaskGridItem>;
 
 const renderMenu = (args: any) => (
   <TaskItemActionMenuTrigger
-    guestMode
+    guestMode={false}
     taskId={args.id}
     taskTitle={args.title}
     taskStatus={args.status}
@@ -39,7 +39,7 @@ const renderMenu = (args: any) => (
   />
 );
 
-export const Default: Story = {
+export const Default = {
   args: {
     id: 1,
     title: "Design landing page",
@@ -55,16 +55,16 @@ export const Default: Story = {
     subtasksTotal: 6,
     subtasksDone: 2,
   },
-};
+} satisfies Story;
 
-export const WithoutAssignee: Story = {
+export const WithoutAssignee = {
   args: {
     ...Default.args,
     assignee: undefined,
   },
-};
+} satisfies Story;
 
-export const WithoutAssigneeImage: Story = {
+export const WithoutAssigneeImage = {
   args: {
     ...Default.args,
     assignee: {
@@ -73,18 +73,18 @@ export const WithoutAssigneeImage: Story = {
       imageUrl: undefined,
     },
   },
-};
+} satisfies Story;
 
-export const WithActiveStatus: Story = {
+export const WithActiveStatus = {
   args: {
     ...Default.args,
     status: "active",
   },
-};
+} satisfies Story;
 
-export const WithCompletedStatus: Story = {
+export const WithCompletedStatus = {
   args: {
     ...Default.args,
     status: "completed",
   },
-};
+} satisfies Story;

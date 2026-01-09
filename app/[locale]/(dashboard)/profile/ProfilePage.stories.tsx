@@ -43,14 +43,14 @@ export const Default = {
   },
 } satisfies Story;
 
-export const Loading: Story = {
+export const Loading = {
   args: {
     profileDetailContainer: <UserDetailSkeleton />,
     userHeaderContainer: <PersonHeaderSkeleton />,
   },
 } satisfies Story;
 
-export const WithoutSomeData: Story = {
+export const WithoutSomeData = {
   args: {
     profileDetailContainer: (
       <UserDetail {...UserDetailWithoutSomeDataStory.args} />

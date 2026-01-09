@@ -10,6 +10,7 @@ import { CustomerListItemDTO } from "@/lib/data/customer/customer.dto";
 import { deleteCustomers } from "@/lib/actions/customer/deleteCustomers";
 import { EntityPaginationProvider } from "../common/EntityContainerPagination";
 import { EntityContainerPagination } from "../common/EntityContainerPagination";
+import { CustomerItemActionMenuTrigger } from "./CustomerItemActionMenuTrigger";
 
 export interface CustomersContainerProps {
   page: number;
@@ -35,8 +36,21 @@ export async function CustomersContainer({
     phoneNumber: customer.phoneNumber,
     publicLink: customer.publicLink,
     company: customer.company,
-    deleteAction: deleteCustomers,
   });
+
+  function renderMenuTrigger(
+    customer: CustomerListItemDTO,
+    className?: string,
+  ) {
+    return (
+      <CustomerItemActionMenuTrigger
+        customerId={customer.id}
+        customerFullName={customer.fullName}
+        deleteAction={deleteCustomers}
+        className={className}
+      />
+    );
+  }
 
   return (
     <EntityPaginationProvider>
@@ -46,6 +60,7 @@ export async function CustomersContainer({
             {customers.map((customer) => (
               <CustomerListItem
                 key={customer.id}
+                menuTrigger={renderMenuTrigger(customer)}
                 {...getCustomerCommonProps(customer)}
               />
             ))}
@@ -56,6 +71,7 @@ export async function CustomersContainer({
             {customers.map((customer) => (
               <CustomerGridItem
                 key={customer.id}
+                menuTrigger={(renderMenuTrigger(customer), "-mr-2")}
                 {...getCustomerCommonProps(customer)}
               />
             ))}

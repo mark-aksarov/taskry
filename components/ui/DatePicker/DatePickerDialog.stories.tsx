@@ -80,13 +80,13 @@ export const WithUnavailableDates = {
   },
 } satisfies Story;
 
-export const Invalid: Story = {
+export const Invalid = {
   args: {
     isInvalid: true,
   },
 } satisfies Story;
 
-export const Disabled: Story = {
+export const Disabled = {
   args: {
     isDisabled: true,
   },

@@ -29,7 +29,7 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
+export const Default = {
   args: {
     canCreateTask: true,
     canDeleteTask: true,
@@ -47,18 +47,18 @@ export const Default: Story = {
     updateTasksStatusesAction: fn(),
     createTaskCategoryAction: fn(),
   },
-};
+} satisfies Story;
 
-export const Loading: Story = {
+export const Loading = {
   args: { ...Default.args },
   render: () => <TasksPageLoading />,
-};
+} satisfies Story;
 
-export const WithNoTasks: Story = {
+export const WithNoTasks = {
   args: { ...Default.args },
   render: () => (
     <TasksPageEmpty
       newTaskFormContainer={<NewTaskForm {...TaskFormBaseStory.args} />}
     />
   ),
-};
+} satisfies Story;

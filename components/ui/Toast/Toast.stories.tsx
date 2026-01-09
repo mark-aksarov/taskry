@@ -30,7 +30,7 @@ const meta: Meta<ToastStoryArgs> = {
 export default meta;
 type Story = StoryObj<ToastStoryArgs>;
 
-export const Default: Story = {
+export const Default = {
   render: (args) => {
     const toastQueue = useContext(ToastContext);
 
@@ -54,4 +54,4 @@ export const Default: Story = {
       </>
     );
   },
-};
+} satisfies Story;

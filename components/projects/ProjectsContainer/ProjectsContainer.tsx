@@ -13,6 +13,7 @@ import { getProjectCount } from "@/lib/data/project/project.dal";
 import { getProjectList } from "@/lib/data/project/project.service";
 import { ProjectListItemDTO } from "@/lib/data/project/project.dto";
 import { deleteProjects } from "@/lib/actions/project/deleteProjects";
+import { ProjectItemActionMenuTrigger } from "../ProjectItemActionMenuTrigger";
 import { updateProjectStatuses } from "@/lib/actions/project/updateProjectStatuses";
 
 interface ProjectsContainerProps {
@@ -42,6 +43,22 @@ export async function ProjectsContainer({
     updateStatusAction: updateProjectStatuses,
   });
 
+  const renderMenuTrigger = (
+    project: ProjectListItemDTO,
+    className?: string,
+  ) => {
+    return (
+      <ProjectItemActionMenuTrigger
+        projectId={project.id}
+        projectTitle={project.title}
+        projectStatus={project.status}
+        deleteAction={deleteProjects}
+        updateStatusAction={updateProjectStatuses}
+        className={className}
+      />
+    );
+  };
+
   return (
     <EntityPaginationProvider>
       <ViewModeLayout
@@ -49,11 +66,12 @@ export async function ProjectsContainer({
           <ProjectList showCheckbox>
             {projects.map((project) => (
               <ProjectListItem
+                showCheckbox
                 key={project.id}
                 customer={project.customer}
                 company={project.customer?.company}
                 category={project.category}
-                showCheckbox
+                menuTrigger={renderMenuTrigger(project)}
                 {...getCommonProps(project)}
               />
             ))}
@@ -65,6 +83,7 @@ export async function ProjectsContainer({
               <ProjectGridItem
                 key={project.id}
                 tasksTotal={project.tasks.total}
+                menuTrigger={renderMenuTrigger(project, "-mr-2")}
                 tasksCompleted={project.tasks.completed}
                 {...getCommonProps(project)}
               />

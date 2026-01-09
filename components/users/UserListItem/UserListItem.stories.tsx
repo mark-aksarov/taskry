@@ -1,17 +1,27 @@
-import { fn } from "storybook/internal/test";
+import { fn } from "storybook/test";
 import { UserListItem } from "./UserListItem";
-import { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { UserItemActionMenuTrigger } from "../UserItemActionMenuTrigger";
 
-const meta: Meta<typeof UserListItem> = {
+const meta = {
   title: "Components/users/UserListItem",
   component: UserListItem,
   tags: ["autodocs"],
   decorators: [withThemedBackground],
+  render: (args) => <UserListItem {...args} menuTrigger={renderMenu(args)} />,
 } satisfies Meta<typeof UserListItem>;
 
 export default meta;
-type Story = StoryObj<typeof meta>;
+type Story = StoryObj<typeof UserListItem>;
+
+const renderMenu = (args: any) => (
+  <UserItemActionMenuTrigger
+    userId={args.id}
+    userFullName={args.fullName}
+    deleteAction={fn()}
+  />
+);
 
 export const Default = {
   args: {
@@ -24,7 +34,6 @@ export const Default = {
     position: {
       name: "Developer",
     },
-    deleteAction: fn(),
   },
 } satisfies Story;
 

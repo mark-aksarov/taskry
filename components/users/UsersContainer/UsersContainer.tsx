@@ -13,6 +13,7 @@ import { getUserList } from "@/lib/data/user/user.service";
 import { UserListItemDTO } from "@/lib/data/user/user.dto";
 import { deleteUsers } from "@/lib/actions/user/deleteUsers";
 import { ViewModeLayout } from "@/components/common/ViewMode";
+import { UserItemActionMenuTrigger } from "../UserItemActionMenuTrigger";
 
 interface UsersContainerProps {
   page: number;
@@ -38,8 +39,18 @@ export async function UsersContainer({
     phoneNumber: user.phoneNumber,
     publicLink: user.publicLink,
     position: user.position,
-    deleteAction: deleteUsers,
   });
+
+  function renderMenuTrigger(user: UserListItemDTO, className?: string) {
+    return (
+      <UserItemActionMenuTrigger
+        userId={user.id}
+        userFullName={user.fullName}
+        deleteAction={deleteUsers}
+        className={className}
+      />
+    );
+  }
 
   return (
     <EntityPaginationProvider>
@@ -47,14 +58,22 @@ export async function UsersContainer({
         list={
           <UserList>
             {users.map((user) => (
-              <UserListItem key={user.id} {...getUserCommonProps(user)} />
+              <UserListItem
+                key={user.id}
+                menuTrigger={renderMenuTrigger(user)}
+                {...getUserCommonProps(user)}
+              />
             ))}
           </UserList>
         }
         grid={
           <UserGrid>
             {users.map((user) => (
-              <UserGridItem key={user.id} {...getUserCommonProps(user)} />
+              <UserGridItem
+                key={user.id}
+                menuTrigger={(renderMenuTrigger(user), "-mr-2")}
+                {...getUserCommonProps(user)}
+              />
             ))}
           </UserGrid>
         }

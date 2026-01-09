@@ -29,7 +29,7 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
+export const Default = {
   args: {
     createProjectCategoryAction: fn(),
     deleteProjectsAction: fn(),
@@ -45,14 +45,14 @@ export const Default: Story = {
     ),
     newProjectFormContainer: <NewProjectForm {...ProjectFormBaseStory.args} />,
   },
-};
+} satisfies Story;
 
-export const Loading: Story = {
+export const Loading = {
   args: { ...Default.args },
   render: () => <ProjectsPageLoading />,
-};
+} satisfies Story;
 
-export const WithNoProjects: Story = {
+export const WithNoProjects = {
   args: { ...Default.args },
   render: () => (
     <ProjectsPageEmpty
@@ -61,4 +61,4 @@ export const WithNoProjects: Story = {
       }
     />
   ),
-};
+} satisfies Story;
