@@ -1,5 +1,5 @@
 import React from "react";
-import "@testing-library/jest-dom";
+import { describe, expect, test, vi } from "vitest";
 import userEvent from "@testing-library/user-event";
 import { render, screen } from "@testing-library/react";
 import { Button, ButtonSize, ButtonVariant } from "./Button";
@@ -155,7 +155,7 @@ describe("Button", () => {
   });
 
   test("should trigger onPress handler", async () => {
-    const handlePress = jest.fn();
+    const handlePress = vi.fn();
 
     render(<Button label="Button" onPress={handlePress} />);
 

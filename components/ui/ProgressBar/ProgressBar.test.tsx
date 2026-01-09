@@ -1,4 +1,4 @@
-import "@testing-library/jest-dom";
+import { describe, expect, test } from "vitest";
 import { ProgressBar } from "./ProgressBar";
 import { render, screen } from "@testing-library/react";
 

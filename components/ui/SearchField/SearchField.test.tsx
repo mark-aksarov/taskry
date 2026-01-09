@@ -1,8 +1,8 @@
 import React from "react";
-import "@testing-library/jest-dom";
 import { Button } from "../Button";
 import { SearchField } from "./SearchField";
 import { Form } from "react-aria-components";
+import { describe, expect, test, vi } from "vitest";
 import userEvent from "@testing-library/user-event";
 import { render, screen } from "@testing-library/react";
 
@@ -93,7 +93,7 @@ describe("SearchField", () => {
   });
 
   test("allows typing text", async () => {
-    const handleChange = jest.fn();
+    const handleChange = vi.fn();
     const user = userEvent.setup();
     render(<SearchField label="Label" onChange={handleChange} />);
 
@@ -105,7 +105,7 @@ describe("SearchField", () => {
   });
 
   test("should submit when value is valid", async () => {
-    const onSubmit = jest.fn().mockImplementation((e) => e.preventDefault());
+    const onSubmit = vi.fn().mockImplementation((e) => e.preventDefault());
 
     render(
       <Form onSubmit={onSubmit}>
@@ -123,7 +123,7 @@ describe("SearchField", () => {
   });
 
   test("supports custom validation errors", async () => {
-    const onSubmit = jest.fn().mockImplementation((e) => e.preventDefault());
+    const onSubmit = vi.fn().mockImplementation((e) => e.preventDefault());
 
     render(
       <Form onSubmit={onSubmit}>

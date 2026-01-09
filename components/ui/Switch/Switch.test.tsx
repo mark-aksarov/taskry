@@ -1,6 +1,6 @@
 import React from "react";
-import "@testing-library/jest-dom";
 import { Switch } from "./Switch";
+import { describe, expect, test, vi } from "vitest";
 import userEvent from "@testing-library/user-event";
 import { render, screen } from "@testing-library/react";
 
@@ -62,7 +62,7 @@ describe("Switch", () => {
   });
 
   test("should trigger onChange handler on click", async () => {
-    const onChange = jest.fn();
+    const onChange = vi.fn();
     render(<Switch {...defaultProps} onChange={onChange} />);
     const user = userEvent.setup();
 

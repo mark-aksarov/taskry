@@ -1,5 +1,5 @@
-import "@testing-library/jest-dom";
 import { ToggleButton } from "./ToggleButton";
+import { describe, expect, test } from "vitest";
 import { render, screen } from "@testing-library/react";
 import { ToggleButtonGroup } from "./ToggleButtonGroup";
 import { ToggleButtonGroupProps } from "react-aria-components";

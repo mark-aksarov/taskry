@@ -1,19 +1,20 @@
-import React from "react";
-import "@testing-library/jest-dom";
-import { Button } from "../Button";
-import { useOverlayTrigger } from "react-aria";
-import { useOverlayTriggerState } from "react-stately";
-import { render, screen, waitFor } from "@testing-library/react";
 import {
   Dialog,
   DialogBody,
-  DialogCloseButton,
   DialogHeader,
   DialogHeading,
+  DialogCloseButton,
 } from "../Dialog";
-import { BottomSheet, BottomSheetProps } from "./BottomSheet";
-import userEvent from "@testing-library/user-event";
+
+import React from "react";
+import { Button } from "../Button";
 import { TextField } from "../TextField";
+import { useOverlayTrigger } from "react-aria";
+import { describe, expect, test } from "vitest";
+import userEvent from "@testing-library/user-event";
+import { useOverlayTriggerState } from "react-stately";
+import { BottomSheet, BottomSheetProps } from "./BottomSheet";
+import { render, screen, waitFor } from "@testing-library/react";
 
 const TestBottomSheet = (
   props: Omit<BottomSheetProps, "state" | "children">,

@@ -1,6 +1,6 @@
 import React from "react";
-import "@testing-library/jest-dom";
 import { Checkbox } from "./Checkbox";
+import { describe, expect, test, vi } from "vitest";
 import userEvent from "@testing-library/user-event";
 import { render, screen } from "@testing-library/react";
 
@@ -62,7 +62,7 @@ describe("Checkbox", () => {
   });
 
   test("should trigger onChange handler", async () => {
-    const onChange = jest.fn();
+    const onChange = vi.fn();
 
     render(
       <Checkbox onChange={onChange} data-testid="label">

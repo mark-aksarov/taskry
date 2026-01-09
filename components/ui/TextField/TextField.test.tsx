@@ -1,8 +1,8 @@
 import React from "react";
-import "@testing-library/jest-dom";
 import { Button } from "../Button";
 import { TextField } from "./TextField";
 import { Form } from "react-aria-components";
+import { describe, expect, test, vi } from "vitest";
 import userEvent from "@testing-library/user-event";
 import { render, screen } from "@testing-library/react";
 
@@ -96,7 +96,7 @@ describe("TextField", () => {
   });
 
   test("allows typing text", async () => {
-    const handleChange = jest.fn();
+    const handleChange = vi.fn();
     const user = userEvent.setup();
     render(<TextField label="Label" onChange={handleChange} />);
 
@@ -108,7 +108,7 @@ describe("TextField", () => {
   });
 
   test("should submit when value is valid", async () => {
-    const onSubmit = jest.fn().mockImplementation((e) => e.preventDefault());
+    const onSubmit = vi.fn().mockImplementation((e) => e.preventDefault());
 
     render(
       <Form onSubmit={onSubmit}>
@@ -126,7 +126,7 @@ describe("TextField", () => {
   });
 
   test("supports custom validation errors", async () => {
-    const onSubmit = jest.fn().mockImplementation((e) => e.preventDefault());
+    const onSubmit = vi.fn().mockImplementation((e) => e.preventDefault());
 
     render(
       <Form onSubmit={onSubmit}>

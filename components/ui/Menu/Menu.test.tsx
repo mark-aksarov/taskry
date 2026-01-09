@@ -1,8 +1,8 @@
 import React from "react";
 import { Button } from "../Button";
-import "@testing-library/jest-dom";
 import { Item } from "react-stately";
 import { User } from "@react-aria/test-utils";
+import { describe, expect, test, vi } from "vitest";
 import userEvent from "@testing-library/user-event";
 import { render, screen } from "@testing-library/react";
 import { MenuTrigger, MenuTriggerProps } from "./MenuTrigger";
@@ -98,7 +98,7 @@ describe("Menu", () => {
   });
 
   test("should select an option via keyboard", async () => {
-    const onAction = jest.fn();
+    const onAction = vi.fn();
 
     render(<TestMenu onAction={onAction} />);
 
@@ -118,7 +118,7 @@ describe("Menu", () => {
   });
 
   test("should select an option via typeahead", async () => {
-    const onAction = jest.fn();
+    const onAction = vi.fn();
 
     render(<TestMenu onAction={onAction} />);
 

@@ -1,7 +1,7 @@
 import React from "react";
-import { render, screen, fireEvent } from "@testing-library/react";
-import "@testing-library/jest-dom";
+import { describe, expect, it, vi } from "vitest";
 import { Pagination, createPageArray } from "./Pagination";
+import { render, screen, fireEvent } from "@testing-library/react";
 
 describe("Pagination Logic (createPageArray)", () => {
   it("should return all pages if totalPages is 7 or less", () => {
@@ -26,7 +26,7 @@ describe("Pagination Logic (createPageArray)", () => {
 });
 
 describe("Pagination Component", () => {
-  const mockOnChange = jest.fn();
+  const mockOnChange = vi.fn();
 
   const defaultProps = {
     page: 1,
@@ -35,7 +35,7 @@ describe("Pagination Component", () => {
   };
 
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it("renders correctly with default props", () => {

@@ -1,4 +1,5 @@
 import path from "node:path";
+import react from "@vitejs/plugin-react";
 import { fileURLToPath } from "node:url";
 import { defineConfig } from "vitest/config";
 import tsconfigPaths from "vite-tsconfig-paths";
@@ -11,6 +12,11 @@ const dirname =
 
 export default defineConfig({
   test: {
+    server: {
+      deps: {
+        inline: ["next-intl"],
+      },
+    },
     globals: true,
     projects: [
       {
@@ -36,6 +42,16 @@ export default defineConfig({
           environment: "node",
           include: ["lib/data/**/*.test.ts"],
           root: dirname,
+        },
+      },
+      {
+        plugins: [tsconfigPaths(), react()],
+        test: {
+          globals: true,
+          name: "ui",
+          environment: "jsdom",
+          setupFiles: "./vitest.setup.ts",
+          include: ["components/**/*.test.tsx"],
         },
       },
     ],

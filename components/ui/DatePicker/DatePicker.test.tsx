@@ -1,12 +1,11 @@
-import "@testing-library/jest-dom";
-
 import React from "react";
-import { DatePicker } from "./DatePicker";
-import { render, screen, waitFor } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
-import { Form } from "react-aria-components";
 import { Button } from "../Button";
+import { DatePicker } from "./DatePicker";
+import { Form } from "react-aria-components";
+import userEvent from "@testing-library/user-event";
+import { describe, expect, test, vi } from "vitest";
 import { CalendarDate } from "@internationalized/date";
+import { render, screen, waitFor } from "@testing-library/react";
 
 describe("DatePicker", () => {
   test("renders with default props", () => {
@@ -86,7 +85,7 @@ describe("DatePicker", () => {
   });
 
   test("allows typing date", async () => {
-    const handleChange = jest.fn();
+    const handleChange = vi.fn();
 
     render(<DatePicker label="Label" onChange={handleChange} />);
 
@@ -118,7 +117,7 @@ describe("DatePicker", () => {
   });
 
   test("should pick a date", async () => {
-    const handleChange = jest.fn();
+    const handleChange = vi.fn();
 
     render(
       <DatePicker
@@ -179,7 +178,7 @@ describe("DatePicker", () => {
   });
 
   test("should submit selected date", async () => {
-    const onSubmit = jest.fn().mockImplementation((e) => e.preventDefault());
+    const onSubmit = vi.fn().mockImplementation((e) => e.preventDefault());
 
     render(
       <Form onSubmit={onSubmit}>
@@ -218,7 +217,7 @@ describe("DatePicker", () => {
   });
 
   test("should not submit if required and date is not selected", async () => {
-    const onSubmit = jest.fn().mockImplementation((e) => e.preventDefault());
+    const onSubmit = vi.fn().mockImplementation((e) => e.preventDefault());
 
     render(
       <Form onSubmit={onSubmit}>

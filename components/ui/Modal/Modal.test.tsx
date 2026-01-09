@@ -1,18 +1,19 @@
+import {
+  Dialog,
+  DialogBody,
+  DialogHeader,
+  DialogHeading,
+  DialogCloseButton,
+} from "../Dialog";
+
 import React from "react";
-import "@testing-library/jest-dom";
 import { Button } from "../Button";
+import { TextField } from "../TextField";
 import { Modal, ModalProps } from "./Modal";
 import userEvent from "@testing-library/user-event";
 import { DialogTrigger } from "react-aria-components";
 import { render, screen, waitFor } from "@testing-library/react";
-import {
-  Dialog,
-  DialogBody,
-  DialogCloseButton,
-  DialogHeader,
-  DialogHeading,
-} from "../Dialog";
-import { TextField } from "../TextField";
+import { describe, expect, test } from "vitest";
 
 const TestModal = (props: Omit<ModalProps, "children">) => {
   return (

@@ -1,8 +1,8 @@
 import React from "react";
-import "@testing-library/jest-dom";
 import { Item } from "react-stately";
 import { User } from "@react-aria/test-utils";
 import { Select, SelectProps } from "./Select";
+import { describe, expect, test, vi } from "vitest";
 import userEvent from "@testing-library/user-event";
 import { Button, Form } from "react-aria-components";
 import { render, screen } from "@testing-library/react";
@@ -135,8 +135,8 @@ describe("Select", () => {
   });
 
   test("should submit selected value", async () => {
-    const handleSelectionChange = jest.fn();
-    const onSubmit = jest.fn().mockImplementation((e) => e.preventDefault());
+    const handleSelectionChange = vi.fn();
+    const onSubmit = vi.fn().mockImplementation((e) => e.preventDefault());
 
     render(
       <Form onSubmit={onSubmit}>
@@ -162,7 +162,7 @@ describe("Select", () => {
   });
 
   test("should not submit if required and value is not selected", async () => {
-    const onSubmit = jest.fn().mockImplementation((e) => e.preventDefault());
+    const onSubmit = vi.fn().mockImplementation((e) => e.preventDefault());
 
     render(
       <Form onSubmit={onSubmit}>
@@ -180,7 +180,7 @@ describe("Select", () => {
   });
 
   test("should select an option via keyboard", async () => {
-    const handleSelectionChange = jest.fn();
+    const handleSelectionChange = vi.fn();
     render(<TestSelect onSelectionChange={handleSelectionChange} />);
 
     const testUtilUser = new User();
@@ -199,7 +199,7 @@ describe("Select", () => {
   });
 
   test("should select an option via typeahead", async () => {
-    const handleSelectionChange = jest.fn();
+    const handleSelectionChange = vi.fn();
     render(<TestSelect onSelectionChange={handleSelectionChange} />);
 
     const user = userEvent.setup();
@@ -219,7 +219,7 @@ describe("Select", () => {
   });
 
   test("supports custom validation errors", async () => {
-    const onSubmit = jest.fn().mockImplementation((e) => e.preventDefault());
+    const onSubmit = vi.fn().mockImplementation((e) => e.preventDefault());
 
     render(
       <Form onSubmit={onSubmit}>
