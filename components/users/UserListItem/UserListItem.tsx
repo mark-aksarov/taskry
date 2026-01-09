@@ -37,7 +37,6 @@ export interface UserListItemProps {
   position?: {
     name: string;
   };
-  showCheckbox?: boolean;
   deleteAction: ActionFn<ActionState, DeleteUsersPayload>;
 }
 
@@ -49,7 +48,6 @@ export function UserListItem({
   phoneNumber,
   publicLink,
   position,
-  showCheckbox,
   deleteAction,
 }: UserListItemProps) {
   const t = useTranslations("users.UserListItem");
@@ -67,13 +65,11 @@ export function UserListItem({
 
   return (
     <ListItem>
-      {showCheckbox && (
-        <Checkbox
-          aria-label={t("checkboxAriaLabel")}
-          isSelected={isSelected(id)}
-          onChange={() => toggleItem(id)}
-        />
-      )}
+      <Checkbox
+        aria-label={t("checkboxAriaLabel")}
+        isSelected={isSelected(id)}
+        onChange={() => toggleItem(id)}
+      />
 
       <>
         <ItemBaseDetailModalTrigger

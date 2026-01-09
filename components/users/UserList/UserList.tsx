@@ -6,7 +6,12 @@ import { Repeat } from "@/components/common/Repeat";
 import { UserListItemSkeleton } from "../UserListItem";
 import { useEntityPagination } from "@/components/common/EntityContainerPagination";
 
-export function UserList({ children }: { children: React.ReactNode }) {
+export type UserListProps = {
+  showCheckbox?: boolean;
+  children: React.ReactNode;
+};
+
+export function UserList({ showCheckbox, children }: UserListProps) {
   const { isPending } = useEntityPagination();
 
   if (isPending) {
@@ -14,7 +19,9 @@ export function UserList({ children }: { children: React.ReactNode }) {
       <List data-test="users-list">
         <Repeat
           items={Children.count(children)}
-          renderItem={() => <UserListItemSkeleton />}
+          renderItem={() => (
+            <UserListItemSkeleton showCheckbox={showCheckbox} />
+          )}
         />
       </List>
     );

@@ -36,7 +36,7 @@ export const Default: Story = {
     ),
     usersContainer: (
       <ViewModeLayout
-        list={<UserList {...UserListStory.args} />}
+        list={<UserList {...UserListStory.args} showCheckbox />}
         grid={<UserGrid {...UserGridStory.args} />}
       />
     ),

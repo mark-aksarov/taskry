@@ -33,7 +33,7 @@ import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { PageDecorator } from "@/.storybook/PageDecorator";
 import { NewTaskForm } from "@/components/tasks/NewTaskForm";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { Default as TaskListStory } from "@/components/tasks/TaskList/TaskList.stories";
+import { TaskListItemsTemplate } from "@/components/tasks/TaskList/TaskList.stories";
 import { AssignedTasksEmptyCard } from "@/components/tasks/AssignedTasks/AssignedTasksEmptyCard";
 import { Default as TaskFormBaseStory } from "@/components/tasks/TaskFormBase/TaskFormBase.stories";
 
@@ -60,7 +60,10 @@ export const Default: Story = {
       assignedTasksContainer={
         <AssignedTasksSection>
           <AssignedTasksSectionHeading />
-          <TaskList {...TaskListStory.args} />
+          <TaskList
+            showCheckbox={false}
+            children={<TaskListItemsTemplate showCheckbox={false} />}
+          />
         </AssignedTasksSection>
       }
     />
@@ -76,8 +79,11 @@ export const Loading = {
       assignedTasksContainer={
         <AssignedTasksSection>
           <AssignedTasksSectionHeading />
-          <TaskList>
-            <Repeat items={10} renderItem={() => <TaskListItemSkeleton />} />
+          <TaskList showCheckbox={false}>
+            <Repeat
+              items={10}
+              renderItem={() => <TaskListItemSkeleton showCheckbox={false} />}
+            />
           </TaskList>
         </AssignedTasksSection>
       }

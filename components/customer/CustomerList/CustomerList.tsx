@@ -6,7 +6,11 @@ import { Repeat } from "@/components/common/Repeat";
 import { CustomerListItemSkeleton } from "../CustomerListItem";
 import { useEntityPagination } from "@/components/common/EntityContainerPagination";
 
-export function CustomerList({ children }: { children: React.ReactNode }) {
+export type CustomerListProps = {
+  children: React.ReactNode;
+};
+
+export function CustomerList({ children }: CustomerListProps) {
   const { isPending } = useEntityPagination();
 
   if (isPending) {

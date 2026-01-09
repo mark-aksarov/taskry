@@ -47,11 +47,7 @@ export async function UsersContainer({
         list={
           <UserList>
             {users.map((user) => (
-              <UserListItem
-                key={user.id}
-                {...getUserCommonProps(user)}
-                showCheckbox
-              />
+              <UserListItem key={user.id} {...getUserCommonProps(user)} />
             ))}
           </UserList>
         }

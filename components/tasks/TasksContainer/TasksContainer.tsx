@@ -91,7 +91,7 @@ export async function TasksContainer({
     <EntityPaginationProvider>
       <ViewModeLayout
         list={
-          <TaskList>
+          <TaskList showCheckbox>
             {tasksWithPermissions.map((task) => {
               return (
                 <TaskListItem

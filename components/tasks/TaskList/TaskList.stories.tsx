@@ -1,6 +1,7 @@
 import { TaskList } from "./TaskList";
 import { TaskListItem } from "../TaskListItem";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { ProjectStatus, TaskStatus } from "@/generated/prisma/enums";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { TaskItemActionMenuTrigger } from "../TaskItemActionMenuTrigger";
 
@@ -9,6 +10,7 @@ const meta = {
   component: TaskList,
   tags: ["autodocs"],
   decorators: [withThemedBackground],
+  excludeStories: ["TaskListTemplate"],
 } satisfies Meta<typeof TaskList>;
 
 export default meta;
@@ -21,282 +23,151 @@ const mockedAction = () => {
   })) as any;
 };
 
+const mockedTasks = [
+  {
+    id: 1,
+    title: "Design landing page",
+    deadline: "2025-09-30",
+    project: "Website Redesign",
+    category: "Design",
+    status: TaskStatus.pending,
+    comments: 10,
+    assignee: { id: "user1", imageUrl: "/man.jpg", fullName: "John Doe" },
+  },
+  {
+    id: 2,
+    title: "Implement login system",
+    deadline: "2025-10-05",
+    project: "Authentication Module",
+    category: "Development",
+    status: TaskStatus.active,
+    comments: 22,
+  },
+  {
+    id: 3,
+    title: "Database schema migration",
+    deadline: "2025-10-10",
+    project: "Core Database Upgrade",
+    category: "Backend",
+    status: TaskStatus.completed,
+    comments: 2,
+    assignee: { id: "user3", fullName: "Jane Doe" },
+  },
+  {
+    id: 4,
+    title: "Write unit tests",
+    deadline: "2025-10-12",
+    project: "Quality Assurance Suite",
+    category: "Testing",
+    status: TaskStatus.pending,
+    comments: 12,
+    assignee: { id: "user4", imageUrl: "/man.jpg", fullName: "John Doe" },
+  },
+  {
+    id: 5,
+    title: "Prepare deployment pipeline",
+    deadline: "2025-10-15",
+    project: "CI/CD Automation",
+    category: "DevOps",
+    status: TaskStatus.active,
+    comments: 15,
+    assignee: { id: "user5", imageUrl: "/man.jpg", fullName: "John Doe" },
+  },
+  {
+    id: 6,
+    title: "Set up staging environment",
+    deadline: "2025-10-18",
+    project: "Infrastructure Setup",
+    category: "Infrastructure",
+    status: TaskStatus.completed,
+    comments: 9,
+    assignee: { id: "user6", imageUrl: "/man.jpg", fullName: "John Doe" },
+  },
+  {
+    id: 7,
+    title: "Create onboarding flow",
+    deadline: "2025-10-20",
+    project: "User Experience Improvements",
+    category: "UX",
+    status: TaskStatus.completed,
+    comments: 12,
+    assignee: { id: "user7", imageUrl: "/man.jpg", fullName: "John Doe" },
+  },
+  {
+    id: 8,
+    title: "Fix payment bug",
+    deadline: "2025-10-22",
+    project: "E-commerce Platform",
+    category: "Bugfix",
+    status: TaskStatus.active,
+    comments: 10,
+    assignee: { id: "user8", imageUrl: "/man.jpg", fullName: "John Doe" },
+  },
+  {
+    id: 9,
+    title: "Optimize image loading",
+    deadline: "2025-10-25",
+    project: "Performance Optimization",
+    category: "Performance",
+    status: TaskStatus.pending,
+    comments: 23,
+    assignee: { id: "user9", fullName: "Jane Doe" },
+  },
+  {
+    id: 10,
+    title: "Refactor auth middleware",
+    deadline: "2025-10-28",
+    project: "Backend Refactoring",
+    category: "Backend",
+    status: TaskStatus.completed,
+    comments: 13,
+  },
+];
+
+export const TaskListItemsTemplate = ({
+  showCheckbox,
+}: {
+  showCheckbox?: boolean;
+}) => (
+  <>
+    {mockedTasks.map((task) => (
+      <TaskListItem
+        key={task.id}
+        id={task.id}
+        title={task.title}
+        deadline={new Date(task.deadline)}
+        status={task.status}
+        commentsCount={task.comments}
+        assignee={task.assignee}
+        project={{
+          id: task.id,
+          title: task.project,
+          status: ProjectStatus.active,
+        }}
+        category={{ id: task.id, name: task.category }}
+        showCheckbox={showCheckbox}
+        menuTrigger={
+          <TaskItemActionMenuTrigger
+            guestMode
+            taskId={task.id}
+            taskTitle={task.title}
+            taskStatus={task.status}
+            projectStatus={ProjectStatus.active}
+            canDelete
+            canUpdate
+            canUpdateStatus
+            deleteAction={mockedAction}
+            updateStatusAction={mockedAction}
+          />
+        }
+      />
+    ))}
+  </>
+);
+
 export const Default = {
   args: {
-    children: (
-      <TaskList>
-        <TaskListItem
-          id={1}
-          title="Design landing page"
-          deadline={new Date("2025-09-30")}
-          project={{ id: 1, title: "Website Redesign", status: "active" }}
-          category={{ id: 1, name: "Design" }}
-          status="pending"
-          assignee={{ id: "user1", imageUrl: "/man.jpg", fullName: "John Doe" }}
-          commentsCount={10}
-          showCheckbox
-          menuTrigger={
-            <TaskItemActionMenuTrigger
-              guestMode={true}
-              taskId={1}
-              taskTitle="Design landing page"
-              taskStatus="pending"
-              projectStatus="active"
-              canDelete={true}
-              canUpdate={true}
-              canUpdateStatus={true}
-              deleteAction={mockedAction}
-              updateStatusAction={mockedAction}
-            />
-          }
-        />
-
-        <TaskListItem
-          id={2}
-          title="Implement login system"
-          deadline={new Date("2025-10-05")}
-          project={{ id: 2, title: "Authentication Module", status: "active" }}
-          category={{ id: 2, name: "Development" }}
-          status="active"
-          assignee={undefined}
-          commentsCount={22}
-          showCheckbox
-          menuTrigger={
-            <TaskItemActionMenuTrigger
-              guestMode={true}
-              taskId={2}
-              taskTitle="Implement login system"
-              taskStatus="active"
-              projectStatus="active"
-              canDelete={true}
-              canUpdate={true}
-              canUpdateStatus={true}
-              deleteAction={mockedAction}
-              updateStatusAction={mockedAction}
-            />
-          }
-        />
-
-        <TaskListItem
-          id={3}
-          title="Database schema migration"
-          deadline={new Date("2025-10-10")}
-          project={{ id: 3, title: "Core Database Upgrade", status: "active" }}
-          category={{ id: 3, name: "Backend" }}
-          status="completed"
-          assignee={{ id: "user3", fullName: "Jane Doe" }}
-          commentsCount={2}
-          showCheckbox
-          menuTrigger={
-            <TaskItemActionMenuTrigger
-              guestMode={true}
-              taskId={3}
-              taskTitle="Database schema migration"
-              taskStatus="completed"
-              projectStatus="active"
-              canDelete={true}
-              canUpdate={true}
-              canUpdateStatus={true}
-              deleteAction={mockedAction}
-              updateStatusAction={mockedAction}
-            />
-          }
-        />
-
-        <TaskListItem
-          id={4}
-          title="Write unit tests"
-          deadline={new Date("2025-10-12")}
-          project={{
-            id: 4,
-            title: "Quality Assurance Suite",
-            status: "active",
-          }}
-          category={{ id: 4, name: "Testing" }}
-          status="pending"
-          assignee={{ id: "user4", imageUrl: "/man.jpg", fullName: "John Doe" }}
-          commentsCount={12}
-          showCheckbox
-          menuTrigger={
-            <TaskItemActionMenuTrigger
-              guestMode={true}
-              taskId={4}
-              taskTitle="Write unit tests"
-              taskStatus="pending"
-              projectStatus="active"
-              canDelete={true}
-              canUpdate={true}
-              canUpdateStatus={true}
-              deleteAction={mockedAction}
-              updateStatusAction={mockedAction}
-            />
-          }
-        />
-
-        <TaskListItem
-          id={5}
-          title="Prepare deployment pipeline"
-          deadline={new Date("2025-10-15")}
-          project={{ id: 5, title: "CI/CD Automation", status: "active" }}
-          category={{ id: 5, name: "DevOps" }}
-          status="active"
-          assignee={{ id: "user5", imageUrl: "/man.jpg", fullName: "John Doe" }}
-          commentsCount={15}
-          showCheckbox
-          menuTrigger={
-            <TaskItemActionMenuTrigger
-              guestMode={true}
-              taskId={5}
-              taskTitle="Prepare deployment pipeline"
-              taskStatus="active"
-              projectStatus="active"
-              canDelete={true}
-              canUpdate={true}
-              canUpdateStatus={true}
-              deleteAction={mockedAction}
-              updateStatusAction={mockedAction}
-            />
-          }
-        />
-
-        <TaskListItem
-          id={6}
-          title="Set up staging environment"
-          deadline={new Date("2025-10-18")}
-          project={{ id: 6, title: "Infrastructure Setup", status: "active" }}
-          category={{ id: 6, name: "Infrastructure" }}
-          status="completed"
-          assignee={{ id: "user6", imageUrl: "/man.jpg", fullName: "John Doe" }}
-          commentsCount={9}
-          showCheckbox
-          menuTrigger={
-            <TaskItemActionMenuTrigger
-              guestMode={true}
-              taskId={6}
-              taskTitle="Set up staging environment"
-              taskStatus="completed"
-              projectStatus="active"
-              canDelete={true}
-              canUpdate={true}
-              canUpdateStatus={true}
-              deleteAction={mockedAction}
-              updateStatusAction={mockedAction}
-            />
-          }
-        />
-
-        <TaskListItem
-          id={7}
-          title="Create onboarding flow"
-          deadline={new Date("2025-10-20")}
-          project={{
-            id: 7,
-            title: "User Experience Improvements",
-            status: "active",
-          }}
-          category={{ id: 7, name: "UX" }}
-          status="completed"
-          assignee={{ id: "user7", imageUrl: "/man.jpg", fullName: "John Doe" }}
-          commentsCount={12}
-          showCheckbox
-          menuTrigger={
-            <TaskItemActionMenuTrigger
-              guestMode={true}
-              taskId={7}
-              taskTitle="Create onboarding flow"
-              taskStatus="completed"
-              projectStatus="active"
-              canDelete={true}
-              canUpdate={true}
-              canUpdateStatus={true}
-              deleteAction={mockedAction}
-              updateStatusAction={mockedAction}
-            />
-          }
-        />
-
-        <TaskListItem
-          id={8}
-          title="Fix payment bug"
-          deadline={new Date("2025-10-22")}
-          project={{ id: 8, title: "E-commerce Platform", status: "active" }}
-          category={{ id: 8, name: "Bugfix" }}
-          status="active"
-          assignee={{ id: "user8", imageUrl: "/man.jpg", fullName: "John Doe" }}
-          commentsCount={10}
-          showCheckbox
-          menuTrigger={
-            <TaskItemActionMenuTrigger
-              guestMode={true}
-              taskId={8}
-              taskTitle="Fix payment bug"
-              taskStatus="active"
-              projectStatus="active"
-              canDelete={true}
-              canUpdate={true}
-              canUpdateStatus={true}
-              deleteAction={mockedAction}
-              updateStatusAction={mockedAction}
-            />
-          }
-        />
-
-        <TaskListItem
-          id={9}
-          title="Optimize image loading"
-          deadline={new Date("2025-10-25")}
-          project={{
-            id: 9,
-            title: "Performance Optimization",
-            status: "active",
-          }}
-          category={{ id: 9, name: "Performance" }}
-          status="pending"
-          assignee={{ id: "user9", fullName: "Jane Doe" }}
-          commentsCount={23}
-          showCheckbox
-          menuTrigger={
-            <TaskItemActionMenuTrigger
-              guestMode={true}
-              taskId={9}
-              taskTitle="Optimize image loading"
-              taskStatus="pending"
-              projectStatus="active"
-              canDelete={true}
-              canUpdate={true}
-              canUpdateStatus={true}
-              deleteAction={mockedAction}
-              updateStatusAction={mockedAction}
-            />
-          }
-        />
-
-        <TaskListItem
-          id={10}
-          title="Refactor auth middleware"
-          deadline={new Date("2025-10-28")}
-          project={{ id: 10, title: "Backend Refactoring", status: "active" }}
-          category={{ id: 3, name: "Backend" }}
-          status="completed"
-          assignee={undefined}
-          commentsCount={13}
-          showCheckbox
-          menuTrigger={
-            <TaskItemActionMenuTrigger
-              guestMode={true}
-              taskId={10}
-              taskTitle="Refactor auth middleware"
-              taskStatus="completed"
-              projectStatus="active"
-              canDelete={true}
-              canUpdate={true}
-              canUpdateStatus={true}
-              deleteAction={mockedAction}
-              updateStatusAction={mockedAction}
-            />
-          }
-        />
-      </TaskList>
-    ),
+    showCheckbox: true,
+    children: <TaskListItemsTemplate showCheckbox />,
   },
 } satisfies Story;

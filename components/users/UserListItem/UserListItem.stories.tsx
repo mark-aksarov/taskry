@@ -28,13 +28,6 @@ export const Default = {
   },
 } satisfies Story;
 
-export const WithCheckbox = {
-  args: {
-    ...Default.args,
-    showCheckbox: true,
-  },
-} satisfies Story;
-
 export const WithoutImagePositionPhoneAndLink = {
   args: {
     ...Default.args,

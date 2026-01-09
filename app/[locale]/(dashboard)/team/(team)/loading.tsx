@@ -8,7 +8,7 @@ export default function UsersPageLoading() {
   return (
     <PageListSkeleton
       title={t("title")}
-      renderItemSkeleton={() => <UserListItemSkeleton />}
+      renderItemSkeleton={() => <UserListItemSkeleton showCheckbox />}
     />
   );
 }

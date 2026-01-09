@@ -5,11 +5,17 @@ import {
 } from "@/components/common/ItemBase";
 import { TaskListItemLayout } from "./TaskListItemLayout";
 import { ListItemInfoSkeleton } from "@/components/common/List";
+import { CheckboxSkeleton } from "@/components/common/CheckboxSkeleton";
 import { ImageContainerSkeleton } from "@/components/common/ImageContainer";
 
-export const TaskListItemSkeleton = () => {
+export const TaskListItemSkeleton = ({
+  showCheckbox,
+}: {
+  showCheckbox?: boolean;
+}) => {
   return (
     <TaskListItemLayout
+      checkboxSlot={showCheckbox && <CheckboxSkeleton />}
       titleSlot={<ListItemInfoSkeleton />}
       assigneeSlot={
         <>

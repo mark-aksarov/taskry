@@ -1,10 +1,16 @@
+import { CheckboxSkeleton } from "@/components/common/CheckboxSkeleton";
 import { ListItem, ListItemInfoSkeleton } from "@/components/common/List";
 import { ImageContainerSkeleton } from "@/components/common/ImageContainer";
 import { ItemBaseActionMenuTriggerSkeleton } from "@/components/common/ItemBase";
 
-export function UserListItemSkeleton() {
+export function UserListItemSkeleton({
+  showCheckbox,
+}: {
+  showCheckbox?: boolean;
+}) {
   return (
     <ListItem>
+      {showCheckbox && <CheckboxSkeleton />}
       <ImageContainerSkeleton className="h-9 w-9" />
       <ListItemInfoSkeleton />
       <ListItemInfoSkeleton className="@max-lg:hidden" />

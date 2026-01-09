@@ -8,7 +8,7 @@ export default function ProjectsPageLoading() {
   return (
     <PageListSkeleton
       title={t("title")}
-      renderItemSkeleton={() => <ProjectListItemSkeleton />}
+      renderItemSkeleton={() => <ProjectListItemSkeleton showCheckbox />}
     />
   );
 }

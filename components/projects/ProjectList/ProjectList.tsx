@@ -7,10 +7,11 @@ import { ProjectListItemSkeleton } from "../ProjectListItem";
 import { useEntityPagination } from "@/components/common/EntityContainerPagination";
 
 interface ProjectListProps {
+  showCheckbox?: boolean;
   children: React.ReactNode;
 }
 
-export function ProjectList({ children }: ProjectListProps) {
+export function ProjectList({ showCheckbox, children }: ProjectListProps) {
   const { isPending } = useEntityPagination();
 
   if (isPending) {
@@ -18,7 +19,9 @@ export function ProjectList({ children }: ProjectListProps) {
       <List data-test="projects-list">
         <Repeat
           items={Children.count(children)}
-          renderItem={() => <ProjectListItemSkeleton />}
+          renderItem={() => (
+            <ProjectListItemSkeleton showCheckbox={showCheckbox} />
+          )}
         />
       </List>
     );

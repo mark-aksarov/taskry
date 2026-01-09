@@ -9,12 +9,28 @@ const meta = {
   component: TaskListItem,
   tags: ["autodocs"],
   decorators: [withThemedBackground],
+  render: (args) => <TaskListItem {...args} menuTrigger={renderMenu(args)} />,
 } satisfies Meta<typeof TaskListItem>;
 
 export default meta;
-type Story = StoryObj<typeof meta>;
+type Story = StoryObj<typeof TaskListItem>;
 
-export const Default = {
+const renderMenu = (args: any) => (
+  <TaskItemActionMenuTrigger
+    guestMode={true}
+    taskId={args.id}
+    taskTitle={args.title}
+    taskStatus={args.status}
+    projectStatus={args.project?.status}
+    canDelete={true}
+    canUpdate={true}
+    canUpdateStatus={true}
+    deleteAction={fn()}
+    updateStatusAction={fn()}
+  />
+);
+
+export const Default: Story = {
   args: {
     id: 1,
     title: "Design landing page",
@@ -24,57 +40,44 @@ export const Default = {
     status: "pending",
     assignee: { id: "user1", imageUrl: "/man.jpg", fullName: "John Doe" },
     commentsCount: 10,
-    menuTrigger: (
-      <TaskItemActionMenuTrigger
-        guestMode={true}
-        taskId={1}
-        taskTitle="Design landing page"
-        taskStatus="pending"
-        projectStatus="active"
-        canDelete={true}
-        canUpdate={true}
-        canUpdateStatus={true}
-        deleteAction={fn()}
-        updateStatusAction={fn()}
-      />
-    ),
   },
-} satisfies Story;
+};
 
-export const WithCheckbox = {
+export const WithCheckbox: Story = {
   args: {
     ...Default.args,
     showCheckbox: true,
   },
-} satisfies Story;
+};
 
-export const WithoutAssignee = {
+export const WithoutAssignee: Story = {
   args: {
     ...Default.args,
     assignee: undefined,
   },
-} satisfies Story;
+};
 
-export const WithoutAssigneeImage = {
+export const WithoutAssigneeImage: Story = {
   args: {
     ...Default.args,
     assignee: {
-      ...Default.args.assignee,
+      id: "user1",
+      fullName: "John Doe",
       imageUrl: undefined,
     },
   },
-} satisfies Story;
+};
 
-export const WithActiveStatus = {
+export const WithActiveStatus: Story = {
   args: {
     ...Default.args,
     status: "active",
   },
-} satisfies Story;
+};
 
-export const WithCompletedStatus = {
+export const WithCompletedStatus: Story = {
   args: {
     ...Default.args,
     status: "completed",
   },
-} satisfies Story;
+};

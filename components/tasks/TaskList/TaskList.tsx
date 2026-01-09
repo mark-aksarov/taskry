@@ -7,10 +7,11 @@ import { TaskListItemSkeleton } from "../TaskListItem";
 import { useEntityPagination } from "@/components/common/EntityContainerPagination";
 
 interface TaskListProps {
+  showCheckbox?: boolean;
   children: React.ReactNode;
 }
 
-export function TaskList({ children }: TaskListProps) {
+export function TaskList({ showCheckbox, children }: TaskListProps) {
   const { isPending } = useEntityPagination();
 
   if (isPending) {
@@ -18,7 +19,9 @@ export function TaskList({ children }: TaskListProps) {
       <List data-test="tasks-list">
         <Repeat
           items={Children.count(children)}
-          renderItem={() => <TaskListItemSkeleton />}
+          renderItem={() => (
+            <TaskListItemSkeleton showCheckbox={showCheckbox} />
+          )}
         />
       </List>
     );

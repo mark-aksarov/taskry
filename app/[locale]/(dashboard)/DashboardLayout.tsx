@@ -9,7 +9,6 @@ import { AppHeader } from "@/components/layout/AppHeader";
 import { AppNavigation } from "@/components/layout/AppNavigation";
 import { AppBottomSheetTrigger } from "@/components/layout/AppBottomSheetTrigger";
 import { AppSidebarSheetTrigger } from "@/components/layout/AppSidebarSheetTrigger";
-import { GlobalContainerProvider } from "@/components/layout/GlobalContainerContext";
 
 interface DashboardLayoutProps {
   children: React.ReactNode;

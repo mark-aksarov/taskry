@@ -40,6 +40,7 @@ export const Default = {
           commentsCount={4}
           deleteAction={mockedAction}
           updateStatusAction={mockedAction}
+          showCheckbox
         />
 
         <ProjectListItem
@@ -58,6 +59,7 @@ export const Default = {
           commentsCount={5}
           deleteAction={mockedAction}
           updateStatusAction={mockedAction}
+          showCheckbox
         />
 
         <ProjectListItem
@@ -76,6 +78,7 @@ export const Default = {
           commentsCount={3}
           deleteAction={mockedAction}
           updateStatusAction={mockedAction}
+          showCheckbox
         />
 
         <ProjectListItem
@@ -94,6 +97,7 @@ export const Default = {
           commentsCount={6}
           deleteAction={mockedAction}
           updateStatusAction={mockedAction}
+          showCheckbox
         />
 
         <ProjectListItem
@@ -112,6 +116,7 @@ export const Default = {
           commentsCount={4}
           deleteAction={mockedAction}
           updateStatusAction={mockedAction}
+          showCheckbox
         />
 
         <ProjectListItem
@@ -130,6 +135,7 @@ export const Default = {
           commentsCount={7}
           deleteAction={mockedAction}
           updateStatusAction={mockedAction}
+          showCheckbox
         />
 
         <ProjectListItem
@@ -148,6 +154,7 @@ export const Default = {
           commentsCount={4}
           deleteAction={mockedAction}
           updateStatusAction={mockedAction}
+          showCheckbox
         />
 
         <ProjectListItem
@@ -166,6 +173,7 @@ export const Default = {
           commentsCount={6}
           deleteAction={mockedAction}
           updateStatusAction={mockedAction}
+          showCheckbox
         />
 
         <ProjectListItem
@@ -184,6 +192,7 @@ export const Default = {
           commentsCount={3}
           deleteAction={mockedAction}
           updateStatusAction={mockedAction}
+          showCheckbox
         />
 
         <ProjectListItem
@@ -206,6 +215,7 @@ export const Default = {
           commentsCount={8}
           deleteAction={mockedAction}
           updateStatusAction={mockedAction}
+          showCheckbox
         />
       </>
     ),

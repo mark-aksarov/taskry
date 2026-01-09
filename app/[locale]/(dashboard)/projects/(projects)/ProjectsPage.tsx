@@ -12,17 +12,13 @@ import {
   ToolbarMobileHeading,
 } from "@/components/common/Toolbar";
 
-import { Suspense } from "react";
 import { useTranslations } from "next-intl";
-import { ProjectFilters } from "@/lib/types";
 import { PageGrid } from "@/components/common/PageGrid";
 import { ViewModeProvider } from "@/components/common/ViewMode";
 import { PageContainer } from "@/components/common/PageContainer";
 import { SelectionProvider } from "@/components/common/SelectionContext";
 import { ViewModeToggleButtonGroup } from "@/components/common/ViewMode";
-import { ProjectFormBaseSkeleton } from "@/components/projects/ProjectFormBase";
 import { NewProjectCategoryForm } from "@/components/projects/NewProjectCategoryForm";
-import { ProjectFiltersFormSkeleton } from "@/components/projects/ProjectFiltersForm";
 import { ProjectToolbarSortingMenuTrigger } from "@/components/projects/ProjectToolbarSortingMenuTrigger";
 import { ProjectToolbarActionsMenuTrigger } from "@/components/projects/ProjectToolbarActionsMenuTrigger";
 import { ProjectToolbarFiltersModalTrigger } from "@/components/projects/ProjectToolbarFiltersModalTrigger";

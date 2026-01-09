@@ -46,7 +46,7 @@ export async function ProjectsContainer({
     <EntityPaginationProvider>
       <ViewModeLayout
         list={
-          <ProjectList>
+          <ProjectList showCheckbox>
             {projects.map((project) => (
               <ProjectListItem
                 key={project.id}
