@@ -139,3 +139,48 @@ export async function createTaskAddedNotifications(
     })),
   });
 }
+
+export async function createTaskDeletedNotifications(
+  tx: Prisma.TransactionClient,
+  {
+    taskTitle,
+    taskAssigneeId,
+    actorId,
+    workspaceId,
+  }: {
+    taskTitle: string;
+    taskAssigneeId: string | null;
+    actorId: string;
+    workspaceId: number;
+  },
+) {
+  const orConditions: Prisma.UserWhereInput[] = [
+    { role: "owner" },
+    { role: "manager" },
+  ];
+
+  if (taskAssigneeId) {
+    orConditions.push({ id: taskAssigneeId });
+  }
+
+  const recipients = await tx.user.findMany({
+    where: {
+      workspaceId,
+      id: { not: actorId },
+      OR: orConditions,
+    },
+    select: { id: true },
+  });
+
+  if (!recipients.length) return;
+
+  await tx.notification.createMany({
+    data: recipients.map((user) => ({
+      type: NotificationType.taskDeleted,
+      actorId,
+      recipientId: user.id,
+      workspaceId,
+      taskTitle,
+    })),
+  });
+}

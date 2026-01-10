@@ -38,11 +38,11 @@ describe("creates a new task", () => {
     cy.visit("/en/tasks");
   });
 
-  it("can create a task", () => {
+  it("can create a task and send notifications", () => {
     cy.getByData("empty-section-button").click();
 
     // fill form
-    cy.get('input[name="title"]').clear().type("Updated Task Title");
+    cy.get('input[name="title"]').clear().type("Created Task Title");
     cy.get('textarea[name="description"]')
       .clear()
       .type("Updated Task Description");
@@ -50,17 +50,46 @@ describe("creates a new task", () => {
     cy.changeSelection("status-select", "active");
     cy.changeSelection("category-select", "1");
     cy.changeSelection("project-select", "1");
-    cy.changeSelection("assignee-select", "user-1");
+    cy.changeSelection("assignee-select", "user-3");
 
     // submit
     cy.get('button[type="submit"]').click();
 
     // assert
     cy.getByData("task-list-item").within(() => {
-      cy.contains("Updated Task Title");
+      cy.contains("Created Task Title");
       cy.contains("Category 1");
       cy.contains("Project 1");
       cy.contains("Active");
     });
+
+    // check notifications
+    cy.checkNotifications(0);
+
+    // sign in as user-2
+    cy.signIn("manager@example.com", "12345abc");
+    cy.visit("/en/tasks");
+
+    // check notifications
+    cy.checkNotifications(1, [
+      {
+        target: "Created Task Title",
+        actor: "John Doe",
+        action: "added a new task",
+      },
+    ]);
+
+    // sign in as user-2
+    cy.signIn("user@example.com", "12345abc");
+    cy.visit("/en/tasks");
+
+    // check notifications
+    cy.checkNotifications(1, [
+      {
+        target: "Created Task Title",
+        actor: "John Doe",
+        action: "added a new task",
+      },
+    ]);
   });
 });

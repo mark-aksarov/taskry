@@ -55,7 +55,7 @@ describe("deletes a task", () => {
             projectId: 1,
             workspaceId: 1,
             creatorId: "user-1",
-            assigneeId: "user-1",
+            assigneeId: "user-3",
           },
         ],
       }),
@@ -66,6 +66,35 @@ describe("deletes a task", () => {
     cy.getMenuItem("task-item-1-action-menu-trigger", "delete").click();
     cy.getByData("confirm-button").click();
     cy.getByData("task-list-item").should("not.exist");
+
+    // check notifications
+    cy.checkNotifications(0);
+
+    // sign in as user-2
+    cy.signIn("manager@example.com", "12345abc");
+    cy.visit("/en/tasks");
+
+    // check notifications
+    cy.checkNotifications(1, [
+      {
+        target: "Task 1",
+        actor: "John Doe",
+        action: "deleted the task",
+      },
+    ]);
+
+    // sign in as user-2
+    cy.signIn("user@example.com", "12345abc");
+    cy.visit("/en/tasks");
+
+    // check notifications
+    cy.checkNotifications(1, [
+      {
+        target: "Task 1",
+        actor: "John Doe",
+        action: "deleted the task",
+      },
+    ]);
   });
 
   describe("access control (RBAC)", () => {

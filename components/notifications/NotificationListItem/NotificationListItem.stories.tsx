@@ -47,6 +47,7 @@ const mockedNotification: NotificationListItemDTO = {
 
 export const Default = {
   args: {
+    id: mockedNotification.id,
     date: mockedNotification.createdAt,
     isRead: mockedNotification.isRead,
     target: <NotificationListItemTarget notification={mockedNotification} />,

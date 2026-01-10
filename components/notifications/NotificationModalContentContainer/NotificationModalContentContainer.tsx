@@ -64,6 +64,7 @@ export function NotificationModalContentContainer() {
               return (
                 <NotificationListItem
                   key={notification.id}
+                  id={notification.id}
                   isRead={notification.isRead}
                   date={notification.createdAt}
                   target={

@@ -8,6 +8,7 @@ import { NotificationListItemDate } from "./NotificationListItemDate";
 import { ItemBaseActionMenuTrigger } from "@/components/common/ItemBase";
 
 export interface NotificationListItemProps {
+  id: number;
   date: Date;
   isRead: boolean;
   actorLink: React.ReactNode;
@@ -22,6 +23,7 @@ export const notificationListItemStyles =
   "flex items-start gap-3 border-gray-300 bg-white p-4 pr-2 not-last:border-b-1 dark:border-gray-600 dark:bg-gray-800";
 
 export const NotificationListItem = ({
+  id,
   isRead,
   actorLink,
   actorImageLink,
@@ -46,6 +48,7 @@ export const NotificationListItem = ({
 
   return (
     <div
+      data-test="notification-list-item"
       className={twMerge(
         notificationListItemStyles,
         !isRead && "bg-gray-100/70 dark:bg-gray-700/70",

@@ -779,7 +779,7 @@ describe("Task DAL", () => {
   });
 
   describe("deleteTasks", () => {
-    it("should successfully delete tasks in the current workspace", async () => {
+    it("should successfully delete tasks and send notifications in the current workspace", async () => {
       await prisma.task.createMany({
         data: [
           {
@@ -799,6 +799,7 @@ describe("Task DAL", () => {
             categoryId: 1,
             workspaceId: 1,
             status: TaskStatus.active,
+            assigneeId: "user-3",
           },
         ],
       });
@@ -807,7 +808,28 @@ describe("Task DAL", () => {
 
       expect(result.count).toBe(2);
       const remainingTasks = await prisma.task.findMany();
+      const notifications = await prisma.notification.findMany();
+
       expect(remainingTasks).toHaveLength(0);
+      expect(notifications).toHaveLength(3);
+
+      // user-1 do not receive notifications because he is the actor of the notification
+
+      // user-2 receive notifications (task 1 and task 2) because he is manager
+      const notification1 = notifications.find(
+        (n) => n.taskTitle === "Task 1" && n.recipientId === "user-2",
+      );
+      const notification2 = notifications.find(
+        (n) => n.taskTitle === "Task 2" && n.recipientId === "user-2",
+      );
+      expect(notification1).toBeDefined();
+      expect(notification2).toBeDefined();
+
+      // user-3 receive notification only for task 2 because he is the assignee
+      const notification3 = notifications.find(
+        (n) => n.taskTitle === "Task 2" && n.recipientId === "user-3",
+      );
+      expect(notification3).toBeDefined();
     });
 
     it("should not delete tasks from a different workspace", async () => {
@@ -826,8 +848,10 @@ describe("Task DAL", () => {
       });
 
       const result = await deleteTasks([1]);
+      const notifications = await prisma.notification.findMany();
 
       expect(result.count).toBe(0);
+      expect(notifications).toHaveLength(0);
     });
 
     it("should only delete tasks belonging to the current workspace", async () => {
@@ -865,7 +889,12 @@ describe("Task DAL", () => {
       const task = await prisma.task.findUnique({
         where: { id: invalidId },
       });
+      const notifications = await prisma.notification.findMany();
+
       expect(task).not.toBeNull();
+
+      expect(notifications).toHaveLength(1);
+      expect(notifications[0].recipientId).toBe("user-2");
     });
 
     it("should return 0 if an empty array is provided", async () => {

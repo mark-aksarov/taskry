@@ -14,7 +14,10 @@ import { AccessDeniedError, DomainRuleError } from "../utils/error";
 import { UpdateTaskInputDTO, CreateTaskInputDTO } from "./task.dto";
 import { ALLOWED_TASK_STATUSES_BY_PROJECT } from "../utils/statusUtils";
 import { Prisma, ProjectStatus, TaskStatus } from "@/generated/prisma/client";
-import { createTaskAddedNotifications } from "../notification/notification.dal";
+import {
+  createTaskAddedNotifications,
+  createTaskDeletedNotifications,
+} from "../notification/notification.dal";
 
 export const getTask = cache(
   async <T extends Prisma.TaskSelect>(id: number, select: T) => {
@@ -191,20 +194,47 @@ export const updateTaskStatuses = async (
 
 export const deleteTasks = async (ids: number[]) => {
   const {
-    user: { workspaceId },
+    user: { id: actorId, workspaceId },
   } = await verifySession();
 
   const canDelete = await canDeleteTask();
-
   if (!canDelete) {
     throw new AccessDeniedError("You do not have permission to delete tasks.");
   }
 
-  return await prisma.task.deleteMany({
-    where: {
-      workspaceId,
-      id: { in: ids },
-    },
+  return prisma.$transaction(async (tx) => {
+    // 1. Fetch tasks before deletion to get titles and assignees
+    const tasksToDelete = await tx.task.findMany({
+      where: {
+        workspaceId,
+        id: { in: ids },
+      },
+      select: { id: true, title: true, assigneeId: true },
+    });
+
+    if (tasksToDelete.length === 0) return { count: 0 };
+
+    // 2. Perform the deletion
+    const result = await tx.task.deleteMany({
+      where: {
+        workspaceId,
+        id: { in: ids },
+      },
+    });
+
+    // 3. Create notifications for each deleted task
+    await Promise.all(
+      tasksToDelete.map((task) =>
+        createTaskDeletedNotifications(tx, {
+          taskTitle: task.title,
+          taskAssigneeId: task.assigneeId,
+          actorId,
+          workspaceId,
+        }),
+      ),
+    );
+
+    return result;
   });
 };
 
