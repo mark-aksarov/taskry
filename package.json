@@ -18,7 +18,7 @@
     "docker:down": "docker compose down",
     "db:push:test": "npx dotenv -e .env.test -- npx prisma db push",
     "storybook": "storybook dev -p 6006",
-    "test:smoke": "npm run test:prepare && npx dotenv -e .env.test -- start-server-and-test dev http://localhost:3000 'cypress run' --spec 'cypress/e2e/smoke/*.cy.ts'",
+    "test:smoke": "npm run test:prepare && npx dotenv -e .env.test -- start-server-and-test dev http://localhost:3000 \"cypress run --spec cypress/e2e/smoke/*.cy.ts\"",
     "test:ui": "vitest --project ui run",
     "test:prepare": "npm run docker:up && npm run db:push:test",
     "test:e2e": "npm run test:prepare && npx dotenv -e .env.test -- start-server-and-test dev http://localhost:3000 'cypress open'",

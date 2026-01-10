@@ -1,13 +1,6 @@
 "use client";
 
 import {
-  ActionFn,
-  ActionState,
-  DeleteProjectsPayload,
-  UpdateTaskStatusesPayload,
-} from "@/lib/actions/types";
-
-import {
   ListItemInfo,
   ListItemText,
   ListItemTitle,
@@ -30,7 +23,6 @@ import { useSyncSelectionTaskItem } from "@/lib/hooks/useTaskSelection";
 import { TaskCommentsModal } from "@/components/tasks/TaskCommentsModal";
 import { TaskDetailBottomSheet } from "@/components/tasks/TaskDetailBottomSheet";
 import { getTaskStatusBadgeColor } from "@/components/tasks/getTaskStatusBadgeColor";
-import { TaskItemActionMenuTrigger } from "@/components/tasks/TaskItemActionMenuTrigger";
 import { TaskListItemCheckbox } from "@/components/tasks/TaskListItem/TaskListItemCheckbox";
 
 export interface UserTaskListItemProps {
@@ -40,11 +32,7 @@ export interface UserTaskListItemProps {
   status: TaskStatus;
   projectStatus: ProjectStatus;
   commentsCount: number;
-  canDelete: boolean;
-  canUpdate: boolean;
-  canUpdateStatus: boolean;
-  deleteAction: ActionFn<ActionState, DeleteProjectsPayload>;
-  updateStatusAction: ActionFn<ActionState, UpdateTaskStatusesPayload>;
+  menuTrigger?: React.ReactNode;
 }
 
 export const UserTaskListItem = ({
@@ -54,11 +42,7 @@ export const UserTaskListItem = ({
   status,
   projectStatus,
   commentsCount,
-  canDelete,
-  canUpdate,
-  canUpdateStatus,
-  deleteAction,
-  updateStatusAction,
+  menuTrigger,
 }: UserTaskListItemProps) => {
   const t = useTranslations();
 
@@ -120,19 +104,7 @@ export const UserTaskListItem = ({
           <TaskCommentsModal taskId={id} />
         </RACDialogTrigger>
       }
-      actionMenuSlot={
-        <TaskItemActionMenuTrigger
-          taskId={id}
-          taskTitle={title}
-          canDelete={canDelete}
-          canUpdate={canUpdate}
-          canUpdateStatus={canUpdateStatus}
-          deleteAction={deleteAction}
-          updateStatusAction={updateStatusAction}
-          taskStatus={status}
-          projectStatus={projectStatus}
-        />
-      }
+      actionMenuSlot={menuTrigger}
     />
   );
 };

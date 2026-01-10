@@ -15,13 +15,13 @@ import { getTaskCount } from "@/lib/data/task/task.dal";
 import { getTaskList } from "@/lib/data/task/task.service";
 import { deleteTasks } from "@/lib/actions/task/deleteTasks";
 import { updateTaskStatuses } from "@/lib/actions/task/updateTaskStatuses";
+import { TaskItemActionMenuTrigger } from "@/components/tasks/TaskItemActionMenuTrigger";
 
 interface UserTasksContainerProps {
   page: number;
   pageSize: number;
   sort: string;
   userId: string;
-  baseUrl: string;
 }
 
 export async function UserTasksContainer({
@@ -29,7 +29,6 @@ export async function UserTasksContainer({
   pageSize,
   sort,
   userId,
-  baseUrl,
 }: UserTasksContainerProps) {
   const filters = {
     status: [],
@@ -55,8 +54,6 @@ export async function UserTasksContainer({
 
       return {
         ...task,
-        canDelete,
-        canUpdate,
         canUpdateStatus,
       };
     }),
@@ -75,11 +72,19 @@ export async function UserTasksContainer({
               commentsCount={task.commentsCount}
               status={task.status}
               projectStatus={task.project.status}
-              canDelete={task.canDelete}
-              canUpdate={task.canUpdate}
-              canUpdateStatus={task.canUpdateStatus}
-              deleteAction={deleteTasks}
-              updateStatusAction={updateTaskStatuses}
+              menuTrigger={
+                <TaskItemActionMenuTrigger
+                  taskId={task.id}
+                  taskTitle={task.title}
+                  canDelete={canDelete}
+                  canUpdate={canUpdate}
+                  canUpdateStatus={task.canUpdateStatus}
+                  deleteAction={deleteTasks}
+                  updateStatusAction={updateTaskStatuses}
+                  taskStatus={task.status}
+                  projectStatus={task.project.status}
+                />
+              }
             />
           ))}
       </UserTaskList>
@@ -88,6 +93,7 @@ export async function UserTasksContainer({
         page={page}
         totalPages={Math.ceil(count / pageSize)}
         pageSize={pageSize}
+        className="my-4"
       />
     </EntityPaginationProvider>
   );

@@ -80,7 +80,6 @@ export default async function AppProfileTasksPage({
             page={page}
             pageSize={pageSize}
             sort={sort}
-            baseUrl={`/team/${id}/tasks`}
           />
         }
         userHeaderContainer={<UserHeaderContainer userId={id} />}

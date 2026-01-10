@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from "react";
 import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";

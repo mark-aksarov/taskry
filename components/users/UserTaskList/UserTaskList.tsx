@@ -1,5 +1,10 @@
-import { List } from "@/components/common/List";
-import { twMerge } from "tailwind-merge";
+"use client";
+
+import { Children } from "react";
+import { Repeat } from "@/components/common/Repeat";
+import { UserTaskListLayout } from "./UserTaskListLayout";
+import { UserTaskListItemSkeleton } from "../UserTaskListItem";
+import { useEntityPagination } from "@/components/common/EntityContainerPagination";
 
 export function UserTaskList({
   className,
@@ -8,12 +13,20 @@ export function UserTaskList({
   className?: string;
   children: React.ReactNode;
 }) {
+  const { isPending } = useEntityPagination();
+
+  if (isPending) {
+    return (
+      <UserTaskListLayout className={className}>
+        <Repeat
+          items={Children.count(children)}
+          renderItem={() => <UserTaskListItemSkeleton />}
+        />
+      </UserTaskListLayout>
+    );
+  }
+
   return (
-    <List
-      data-test="user-task-list"
-      className={twMerge("md:gap-0 md:px-6", className)}
-    >
-      {children}
-    </List>
+    <UserTaskListLayout className={className}>{children}</UserTaskListLayout>
   );
 }

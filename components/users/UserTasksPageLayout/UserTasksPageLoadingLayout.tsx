@@ -15,8 +15,8 @@ import {
 import { Skeleton } from "@/components/ui";
 import { Repeat } from "@/components/common/Repeat";
 import { PageGrid } from "@/components/common/PageGrid";
-import { UserTaskList } from "@/components/users/UserTaskList";
 import { PageContainer } from "@/components/common/PageContainer";
+import { UserTaskListLayout } from "@/components/users/UserTaskList";
 import { PersonHeaderSkeleton } from "@/components/common/PersonHeader";
 import { UserTaskListItemSkeleton } from "@/components/users/UserTaskListItem";
 
@@ -42,12 +42,12 @@ export function UserTasksPageLoadingLayout({
                 <Skeleton className="h-8 w-[6.25rem] rounded-lg" />
               </div>
             </UserCardHeader>
-            <UserTaskList>
+            <UserTaskListLayout>
               <Repeat
                 items={10}
                 renderItem={() => <UserTaskListItemSkeleton />}
               />
-            </UserTaskList>
+            </UserTaskListLayout>
           </UserCardLeft>
 
           <UserCardRight>
@@ -70,12 +70,12 @@ export function UserTasksPageLoadingLayout({
             <Skeleton className="h-8 w-[6.25rem] rounded-lg" />
           </ToolbarMobileBottom>
 
-          <UserTaskList>
+          <UserTaskListLayout>
             <Repeat
               items={10}
               renderItem={() => <UserTaskListItemSkeleton />}
             />
-          </UserTaskList>
+          </UserTaskListLayout>
         </PageGrid>
       </PageContainer>
     </>

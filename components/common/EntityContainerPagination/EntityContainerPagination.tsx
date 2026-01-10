@@ -2,6 +2,7 @@
 
 import { useOptimistic } from "react";
 import { useLocale } from "next-intl";
+import { twMerge } from "tailwind-merge";
 import { useSearchParams } from "next/navigation";
 import { usePathname, useRouter } from "@/i18n/navigation";
 import { useEntityPagination } from "./EntityPaginationContext";
@@ -11,12 +12,14 @@ interface EntityContainerPaginationProps {
   page: number;
   pageSize: number;
   totalPages: number;
+  className?: string;
 }
 
 export function EntityContainerPagination({
   page,
   pageSize,
   totalPages,
+  className,
 }: EntityContainerPaginationProps) {
   const locale = useLocale();
   const router = useRouter();
@@ -53,7 +56,7 @@ export function EntityContainerPagination({
   return (
     <>
       {totalPages > 1 && (
-        <div className="flex justify-center">
+        <div className={twMerge("flex justify-center", className)}>
           <Pagination
             {...paginationProps}
             size="large"
