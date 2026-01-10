@@ -115,7 +115,7 @@ describe("update multiple task status", () => {
           projectId: 3,
           workspaceId: 1,
           creatorId: "user-1",
-          assigneeId: "user-1",
+          assigneeId: "user-3",
         },
       ],
     };
@@ -372,6 +372,7 @@ describe("update multiple task status", () => {
         .eq(0)
         .contains(/pending/i);
     });
+
     it("should change status for completed task (active project) -> to pending", () => {
       cy.getByData("task-3-checkbox").click();
       cy.getMenuItem("toolbar-action-menu-trigger", "pending").click();
@@ -379,6 +380,7 @@ describe("update multiple task status", () => {
         .eq(2)
         .contains(/pending/i);
     });
+
     it("should change status for active task (active project) -> to completed", () => {
       cy.getByData("task-1-checkbox").click();
       cy.getMenuItem("toolbar-action-menu-trigger", "completed").click();
@@ -386,6 +388,7 @@ describe("update multiple task status", () => {
         .eq(0)
         .contains(/completed/i);
     });
+
     it("should change status for pending task (active project) -> to completed", () => {
       cy.getByData("task-2-checkbox").click();
       cy.getMenuItem("toolbar-action-menu-trigger", "completed").click();
@@ -393,6 +396,7 @@ describe("update multiple task status", () => {
         .eq(1)
         .contains(/completed/i);
     });
+
     it("should change status for pending task (active project) -> to active", () => {
       cy.getByData("task-2-checkbox").click();
       cy.getMenuItem("toolbar-action-menu-trigger", "active").click();
@@ -400,6 +404,7 @@ describe("update multiple task status", () => {
         .eq(1)
         .contains(/active/i);
     });
+
     it("should change status for completed task (active project) -> to active", () => {
       cy.getByData("task-3-checkbox").click();
       cy.getMenuItem("toolbar-action-menu-trigger", "active").click();
@@ -420,6 +425,7 @@ describe("update multiple task status", () => {
         .eq(3)
         .contains(/pending/i);
     });
+
     it("should change status for active task (active project) + completed task (pending project) -> to pending", () => {
       cy.getByData("task-1-checkbox").click();
       cy.getByData("task-5-checkbox").click();
@@ -432,6 +438,7 @@ describe("update multiple task status", () => {
         .eq(4)
         .contains(/pending/i);
     });
+
     it("should change status for pending task (active project) + completed task (pending project) -> to pending", () => {
       cy.getByData("task-2-checkbox").click();
       cy.getByData("task-5-checkbox").click();
@@ -457,6 +464,7 @@ describe("update multiple task status", () => {
         .eq(3)
         .contains(/completed/i);
     });
+
     it("should change status for active task (active project) + completed task (pending project) -> to completed", () => {
       cy.getByData("task-1-checkbox").click();
       cy.getByData("task-5-checkbox").click();
@@ -469,6 +477,7 @@ describe("update multiple task status", () => {
         .eq(4)
         .contains(/completed/i);
     });
+
     it("should change status for pending task (active project) + completed task (pending project) -> to completed", () => {
       cy.getByData("task-2-checkbox").click();
       cy.getByData("task-5-checkbox").click();
@@ -494,6 +503,7 @@ describe("update multiple task status", () => {
         .eq(2)
         .contains(/active/i);
     });
+
     it("should change status for active + completed tasks (active project) -> to pending", () => {
       cy.getByData("task-1-checkbox").click();
       cy.getByData("task-3-checkbox").click();
@@ -506,6 +516,7 @@ describe("update multiple task status", () => {
         .eq(2)
         .contains(/pending/i);
     });
+
     it("should change status for active + pending tasks (active project) -> to completed", () => {
       cy.getByData("task-1-checkbox").click();
       cy.getByData("task-2-checkbox").click();
@@ -535,6 +546,7 @@ describe("update multiple task status", () => {
         .eq(3)
         .contains(/pending/i);
     });
+
     it("should change status for active + completed tasks (active project) + completed task (pending project) -> to completed", () => {
       cy.getByData("task-1-checkbox").click();
       cy.getByData("task-3-checkbox").click();
@@ -551,6 +563,7 @@ describe("update multiple task status", () => {
         .eq(4)
         .contains(/completed/i);
     });
+
     it("should change status for active + pending tasks (active project) + pending task (pending project) -> to completed", () => {
       cy.getByData("task-1-checkbox").click();
       cy.getByData("task-2-checkbox").click();
@@ -567,6 +580,7 @@ describe("update multiple task status", () => {
         .eq(3)
         .contains(/completed/i);
     });
+
     it("should change status for active + completed tasks (active project) + completed task (completed project) -> to completed", () => {
       cy.getByData("task-1-checkbox").click();
       cy.getByData("task-3-checkbox").click();
@@ -583,6 +597,7 @@ describe("update multiple task status", () => {
         .eq(5)
         .contains(/completed/i);
     });
+
     it("should change status for active + pending tasks (active project) + completed task (completed project) -> to completed", () => {
       cy.getByData("task-1-checkbox").click();
       cy.getByData("task-2-checkbox").click();
@@ -599,6 +614,7 @@ describe("update multiple task status", () => {
         .eq(5)
         .contains(/completed/i);
     });
+
     it("should change status for pending + completed tasks (active project) + completed task (completed project) -> to completed", () => {
       cy.getByData("task-2-checkbox").click();
       cy.getByData("task-3-checkbox").click();
@@ -628,6 +644,7 @@ describe("update multiple task status", () => {
         .eq(5)
         .contains(/completed/i);
     });
+
     it("should change status for active task (active project) + completed task (completed project) -> to completed", () => {
       cy.getByData("task-1-checkbox").click();
       cy.getByData("task-6-checkbox").click();
@@ -640,6 +657,7 @@ describe("update multiple task status", () => {
         .eq(5)
         .contains(/completed/i);
     });
+
     it("should change status for pending task (active project) + completed task (completed project) -> to completed", () => {
       cy.getByData("task-2-checkbox").click();
       cy.getByData("task-6-checkbox").click();
@@ -651,6 +669,66 @@ describe("update multiple task status", () => {
       cy.getByData("task-list-item")
         .eq(5)
         .contains(/completed/i);
+    });
+
+    it.only("should send notifications when task status is updated", () => {
+      cy.getByData("task-2-checkbox").click();
+      cy.getByData("task-3-checkbox").click();
+      cy.getByData("task-6-checkbox").click();
+      cy.getMenuItem("toolbar-action-menu-trigger", "completed").click();
+
+      cy.getByData("task-list-item")
+        .eq(1)
+        .contains(/completed/i);
+      cy.getByData("task-list-item")
+        .eq(2)
+        .contains(/completed/i);
+      cy.getByData("task-list-item")
+        .eq(5)
+        .contains(/completed/i);
+
+      // check notifications
+      cy.checkNotifications(0);
+
+      // sign in as user-2
+      cy.signIn("manager@example.com", "12345abc");
+      cy.visit("/en/tasks");
+
+      // check notifications
+      cy.checkNotifications(3, [
+        {
+          target: "Task 2",
+          actor: "John Doe",
+          action: "changed the task status",
+          content: "completed",
+        },
+        {
+          target: "Task 3",
+          actor: "John Doe",
+          action: "changed the task status",
+          content: "completed",
+        },
+        {
+          target: "Task 6",
+          actor: "John Doe",
+          action: "changed the task status",
+          content: "completed",
+        },
+      ]);
+
+      // sign in as user-3
+      cy.signIn("user@example.com", "12345abc");
+      cy.visit("/en/tasks");
+
+      // check notifications
+      cy.checkNotifications(1, [
+        {
+          target: "Task 6",
+          actor: "John Doe",
+          action: "changed the task status",
+          content: "completed",
+        },
+      ]);
     });
   });
 });

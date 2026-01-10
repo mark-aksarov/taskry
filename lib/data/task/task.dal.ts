@@ -17,6 +17,7 @@ import { Prisma, ProjectStatus, TaskStatus } from "@/generated/prisma/client";
 import {
   createTaskAddedNotifications,
   createTaskDeletedNotifications,
+  createTaskStatusChangedNotifications,
 } from "../notification/notification.dal";
 
 export const getTask = cache(
@@ -91,14 +92,15 @@ export const createTask = async (input: CreateTaskInputDTO) => {
   } = await verifySession();
 
   const canCreate = await canCreateTask();
-
   if (!canCreate) {
     throw new AccessDeniedError("You do not have permission to create task.");
   }
 
+  // Validates if category, project, and assignee exist in the current workspace
   await validateTaskRelations(workspaceId, input);
 
   return prisma.$transaction(async (tx) => {
+    // 1. Create task within the workspace
     const task = await tx.task.create({
       data: {
         ...input,
@@ -107,6 +109,7 @@ export const createTask = async (input: CreateTaskInputDTO) => {
       },
     });
 
+    // 2. Send batched notifications (single DB query for recipients)
     await createTaskAddedNotifications(tx, {
       task,
       actorId: creatorId,
@@ -121,31 +124,22 @@ export const updateTask = async (input: UpdateTaskInputDTO) => {
   const {
     user: { workspaceId },
   } = await verifySession();
-
   const canUpdate = await canUpdateTask();
-
-  if (!canUpdate) {
-    throw new AccessDeniedError();
-  }
+  if (!canUpdate) throw new AccessDeniedError();
 
   return prisma.$transaction(async (tx) => {
-    const task = await tx.task.findUnique({
+    const existingTask = await tx.task.findFirst({
       where: { id: input.id, workspaceId },
-      select: {
-        project: { select: { status: true } },
-      },
+      select: { project: { select: { status: true } } },
     });
 
-    if (!task) {
-      throw new Error("Task not found");
-    }
+    if (!existingTask) throw new Error("Task not found");
 
     if (input.status) {
       const allowed = getAllowedProjectStatuses(input.status);
-
-      if (!allowed.includes(task.project.status)) {
+      if (!allowed.includes(existingTask.project.status)) {
         throw new DomainRuleError(
-          `Cannot change task status to ${input.status} while project is ${task.project.status}`,
+          `Status ${input.status} not allowed for project state`,
         );
       }
     }
@@ -162,33 +156,42 @@ export const updateTaskStatuses = async (
   status: TaskStatus,
 ) => {
   const {
-    user: { id: userId, workspaceId, role },
+    user: { id: actorId, workspaceId, role },
   } = await verifySession();
+  if (!(await canUpdateTaskStatus())) throw new AccessDeniedError();
 
-  const canUpdateStatus = await canUpdateTaskStatus();
+  return prisma.$transaction(async (tx) => {
+    const allowedProjectStatuses = getAllowedProjectStatuses(status);
+    const ownershipFilter = role === "user" ? { assigneeId: actorId } : {};
 
-  if (!canUpdateStatus) {
-    throw new AccessDeniedError(
-      "You do not have permission to update task statuses.",
-    );
-  }
-
-  const allowedProjectStatuses = getAllowedProjectStatuses(status);
-
-  const ownershipFilter = role === "user" ? { assigneeId: userId } : {};
-
-  return await prisma.task.updateMany({
-    where: {
-      id: { in: taskIds },
-      workspaceId,
-      ...ownershipFilter,
-      project: {
-        status: { in: allowedProjectStatuses },
+    // 1. Fetch task details before deletion for notification metadata
+    const tasksToUpdate = await tx.task.findMany({
+      where: {
+        workspaceId,
+        id: { in: taskIds },
+        ...ownershipFilter,
+        project: { status: { in: allowedProjectStatuses } },
       },
-    },
-    data: {
-      status,
-    },
+      select: { id: true, title: true, assigneeId: true, status: true },
+    });
+
+    if (tasksToUpdate.length === 0) return { count: 0 };
+
+    // 2. Bulk delete tasks within the workspace
+    const result = await tx.task.updateMany({
+      where: { id: { in: tasksToUpdate.map((t) => t.id) } },
+      data: { status },
+    });
+
+    // 3. Send batched notifications (single DB query for recipients)
+    await createTaskStatusChangedNotifications(tx, {
+      tasks: tasksToUpdate,
+      actorId,
+      workspaceId,
+      newStatus: status,
+    });
+
+    return result;
   });
 };
 
@@ -203,36 +206,25 @@ export const deleteTasks = async (ids: number[]) => {
   }
 
   return prisma.$transaction(async (tx) => {
-    // 1. Fetch tasks before deletion to get titles and assignees
+    // 1. Fetch task details before deletion for notification metadata
     const tasksToDelete = await tx.task.findMany({
-      where: {
-        workspaceId,
-        id: { in: ids },
-      },
+      where: { workspaceId, id: { in: ids } },
       select: { id: true, title: true, assigneeId: true },
     });
 
     if (tasksToDelete.length === 0) return { count: 0 };
 
-    // 2. Perform the deletion
+    // 2. Bulk delete tasks within the workspace
     const result = await tx.task.deleteMany({
-      where: {
-        workspaceId,
-        id: { in: ids },
-      },
+      where: { workspaceId, id: { in: ids } },
     });
 
-    // 3. Create notifications for each deleted task
-    await Promise.all(
-      tasksToDelete.map((task) =>
-        createTaskDeletedNotifications(tx, {
-          taskTitle: task.title,
-          taskAssigneeId: task.assigneeId,
-          actorId,
-          workspaceId,
-        }),
-      ),
-    );
+    // 3. Send batched notifications (single DB query for recipients)
+    await createTaskDeletedNotifications(tx, {
+      tasks: tasksToDelete,
+      actorId,
+      workspaceId,
+    });
 
     return result;
   });

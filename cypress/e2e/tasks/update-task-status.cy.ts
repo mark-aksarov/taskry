@@ -114,14 +114,13 @@ describe("update task status", () => {
     });
 
     it("should update 'active' task status ('active' project) to 'pending'", () => {
-      cy.getByData("task-1-checkbox").click();
       cy.getMenuItem("task-item-1-action-menu-trigger", "pending").click();
       cy.getByData("task-list-item")
         .eq(0)
         .contains(/pending/i);
     });
+
     it("should update 'active' task status ('active' project) to 'completed'", () => {
-      cy.getByData("task-1-checkbox").click();
       cy.getMenuItem("task-item-1-action-menu-trigger", "completed").click();
       cy.getByData("task-list-item")
         .eq(0)
@@ -129,14 +128,13 @@ describe("update task status", () => {
     });
 
     it("should update 'pending' task status ('active' project) to 'active'", () => {
-      cy.getByData("task-2-checkbox").click();
       cy.getMenuItem("task-item-2-action-menu-trigger", "active").click();
       cy.getByData("task-list-item")
         .eq(1)
         .contains(/active/i);
     });
+
     it("should update 'pending' task status ('active' project) to 'completed'", () => {
-      cy.getByData("task-2-checkbox").click();
       cy.getMenuItem("task-item-2-action-menu-trigger", "completed").click();
       cy.getByData("task-list-item")
         .eq(1)
@@ -144,14 +142,13 @@ describe("update task status", () => {
     });
 
     it("should update 'completed' task status ('active' project) to 'active'", () => {
-      cy.getByData("task-3-checkbox").click();
       cy.getMenuItem("task-item-3-action-menu-trigger", "active").click();
       cy.getByData("task-list-item")
         .eq(2)
         .contains(/active/i);
     });
+
     it("should update 'completed' task status ('active' project) to 'pending'", () => {
-      cy.getByData("task-3-checkbox").click();
       cy.getMenuItem("task-item-3-action-menu-trigger", "pending").click();
       cy.getByData("task-list-item")
         .eq(2)
@@ -159,18 +156,40 @@ describe("update task status", () => {
     });
 
     it("should update 'pending' task status ('pending' project) to 'completed'", () => {
-      cy.getByData("task-4-checkbox").click();
       cy.getMenuItem("task-item-4-action-menu-trigger", "completed").click();
       cy.getByData("task-list-item")
         .eq(3)
         .contains(/completed/i);
     });
+
     it("should update 'completed' task status ('pending' project) to 'pending'", () => {
-      cy.getByData("task-5-checkbox").click();
       cy.getMenuItem("task-item-5-action-menu-trigger", "pending").click();
       cy.getByData("task-list-item")
         .eq(4)
         .contains(/pending/i);
+    });
+
+    it("should send notifications when task status is updated", () => {
+      cy.getMenuItem("task-item-1-action-menu-trigger", "pending").click();
+      cy.getByData("task-list-item")
+        .eq(0)
+        .contains(/pending/i);
+
+      // check notifications
+      cy.checkNotifications(0);
+
+      // sign in as user-2
+      cy.signIn("manager@example.com", "12345abc");
+      cy.visit("/en/tasks");
+
+      // check notifications
+      cy.checkNotifications(1, [
+        {
+          target: "Task 1",
+          actor: "John Doe",
+          action: "changed the task status",
+        },
+      ]);
     });
   });
 

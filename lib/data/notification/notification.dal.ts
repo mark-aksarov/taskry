@@ -1,9 +1,14 @@
 import "server-only";
 
+import {
+  Prisma,
+  TaskStatus,
+  NotificationType,
+} from "@/generated/prisma/client";
+
 import { cache } from "react";
 import prisma from "@/lib/prisma";
 import { verifySession } from "@/lib/data/utils/verifySession";
-import { NotificationType, Prisma, Task } from "@/generated/prisma/client";
 
 export const getAllNotifications = cache(
   async ({
@@ -100,87 +105,173 @@ export async function createTaskAddedNotifications(
     actorId,
     workspaceId,
   }: {
-    task: Task;
+    task: { id: number; title: string; assigneeId: string | null };
     actorId: string;
     workspaceId: number;
   },
 ) {
-  const orConditions: Prisma.UserWhereInput[] = [
-    { role: "owner" },
-    { role: "manager" },
-  ];
+  const candidates = await getNotificationCandidates(tx, workspaceId, actorId, [
+    task.assigneeId,
+  ]);
 
-  if (task.assigneeId) {
-    orConditions.push({ id: task.assigneeId });
-  }
-
-  const recipients = await tx.user.findMany({
-    where: {
-      workspaceId,
-      id: { not: actorId },
-      OR: orConditions,
-    },
-    select: { id: true },
-  });
-
-  if (!recipients.length) return;
-
-  await tx.notification.createMany({
-    data: recipients.map((user) => ({
+  const notificationsData = candidates
+    .filter((user) => {
+      const isAdmin = user.role === "owner" || user.role === "manager";
+      const isAssignee = user.id === task.assigneeId;
+      return isAdmin || isAssignee;
+    })
+    .map((user) => ({
       type: NotificationType.taskAdded,
-      actorId: actorId,
-      isRead: false,
+      actorId,
       recipientId: user.id,
       workspaceId,
       taskId: task.id,
       taskTitle: task.title,
-      taskDeadline: task.deadline,
-      taskStatus: task.status,
-    })),
-  });
+      isRead: false,
+    }));
+
+  if (notificationsData.length > 0) {
+    await tx.notification.createMany({ data: notificationsData });
+  }
 }
 
+/**
+ * Creates notifications for multiple deleted tasks.
+ * Logic: owner and manager get all notifications; Assignees only get their own.
+ */
 export async function createTaskDeletedNotifications(
   tx: Prisma.TransactionClient,
   {
-    taskTitle,
-    taskAssigneeId,
+    tasks,
     actorId,
     workspaceId,
   }: {
-    taskTitle: string;
-    taskAssigneeId: string | null;
+    tasks: { title: string; assigneeId: string | null }[];
     actorId: string;
     workspaceId: number;
   },
 ) {
-  const orConditions: Prisma.UserWhereInput[] = [
-    { role: "owner" },
-    { role: "manager" },
-  ];
+  const allAssigneeIds = tasks
+    .map((t) => t.assigneeId)
+    .filter(Boolean) as string[];
 
-  if (taskAssigneeId) {
-    orConditions.push({ id: taskAssigneeId });
+  const candidates = await getNotificationCandidates(
+    tx,
+    workspaceId,
+    actorId,
+    allAssigneeIds,
+  );
+
+  const notificationsData: Prisma.NotificationCreateManyInput[] = [];
+
+  for (const task of tasks) {
+    for (const user of candidates) {
+      const isAdmin = user.role === "owner" || user.role === "manager";
+      const isAssignee = user.id === task.assigneeId;
+
+      // Send if user is an owner or manager (sees everything) OR the specific Assignee
+      if (isAdmin || isAssignee) {
+        notificationsData.push({
+          type: NotificationType.taskDeleted,
+          actorId,
+          recipientId: user.id,
+          workspaceId,
+          taskTitle: task.title,
+        });
+      }
+    }
   }
 
-  const recipients = await tx.user.findMany({
+  if (notificationsData.length > 0) {
+    await tx.notification.createMany({ data: notificationsData });
+  }
+}
+
+/**
+ * Creates notifications for multiple task status changes.
+ * Logic: owner and manager get all updates; Assignees only get updates for their own tasks.
+ */
+export async function createTaskStatusChangedNotifications(
+  tx: Prisma.TransactionClient,
+  {
+    tasks,
+    actorId,
+    workspaceId,
+    newStatus,
+  }: {
+    tasks: {
+      id: number;
+      title: string;
+      assigneeId: string | null;
+    }[];
+    actorId: string;
+    workspaceId: number;
+    newStatus: TaskStatus;
+  },
+) {
+  const allAssigneeIds = tasks.map((t) => t.assigneeId);
+  const candidates = await getNotificationCandidates(
+    tx,
+    workspaceId,
+    actorId,
+    allAssigneeIds,
+  );
+
+  const notificationsData: Prisma.NotificationCreateManyInput[] = [];
+
+  for (const task of tasks) {
+    for (const user of candidates) {
+      const isAdmin = user.role === "owner" || user.role === "manager";
+      const isAssignee = user.id === task.assigneeId;
+
+      // Only notify if user is an Admin or the specific Assignee for this task
+      if (isAdmin || isAssignee) {
+        notificationsData.push({
+          type: NotificationType.taskStatusChanged,
+          actorId,
+          recipientId: user.id,
+          workspaceId,
+          taskId: task.id,
+          taskTitle: task.title,
+          taskStatus: newStatus,
+          isRead: false,
+        });
+      }
+    }
+  }
+
+  if (notificationsData.length > 0) {
+    await tx.notification.createMany({ data: notificationsData });
+  }
+}
+
+/**
+ * HELPER
+ */
+
+/**
+ * Fetches all potential notification recipients for the given context.
+ * Candidates include workspace owners and managers and specific task assignees.
+ */
+async function getNotificationCandidates(
+  tx: Prisma.TransactionClient,
+  workspaceId: number,
+  actorId: string,
+  assigneeIds: (string | null)[],
+) {
+  const uniqueAssigneeIds = Array.from(
+    new Set(assigneeIds.filter(Boolean)),
+  ) as string[];
+
+  return tx.user.findMany({
     where: {
       workspaceId,
       id: { not: actorId },
-      OR: orConditions,
+      OR: [
+        { role: { in: ["owner", "manager"] } },
+        { id: { in: uniqueAssigneeIds } },
+      ],
     },
-    select: { id: true },
-  });
-
-  if (!recipients.length) return;
-
-  await tx.notification.createMany({
-    data: recipients.map((user) => ({
-      type: NotificationType.taskDeleted,
-      actorId,
-      recipientId: user.id,
-      workspaceId,
-      taskTitle,
-    })),
+    select: { id: true, role: true },
   });
 }
