@@ -1,18 +1,35 @@
 "use client";
 
+import {
+  taskStatuses,
+  ALLOWED_TASK_STATUSES_BY_PROJECT,
+} from "@/lib/data/utils/statusUtils";
+
 import { Item } from "react-stately";
-import { ResponsiveSelect } from "@/components/common/ResponsiveSelect";
 import { useTranslations } from "next-intl";
+import { ProjectStatus } from "@/generated/prisma/enums";
+import { ResponsiveSelect } from "@/components/common/ResponsiveSelect";
 
 interface TaskFormBaseStatusSelectProps {
+  projectStatus?: ProjectStatus;
   defaultSelectedKey?: string;
 }
 
 export function TaskFormBaseStatusSelect({
+  projectStatus,
   defaultSelectedKey,
 }: TaskFormBaseStatusSelectProps) {
   const t = useTranslations("tasks.TaskFormBase.status");
   const tStatus = useTranslations("tasks.TaskStatus");
+
+  let disabledKeys: string[] = [];
+  if (projectStatus) {
+    const allowedStatuses = ALLOWED_TASK_STATUSES_BY_PROJECT[projectStatus];
+    disabledKeys = taskStatuses.filter(
+      (status) =>
+        !allowedStatuses.includes(status) || status === defaultSelectedKey,
+    );
+  }
 
   return (
     <ResponsiveSelect
@@ -22,6 +39,8 @@ export function TaskFormBaseStatusSelect({
       defaultSelectedKey={defaultSelectedKey}
       placeholder={t("placeholder")}
       overlayClassName="w-[var(--trigger-width)]"
+      disabledKeys={disabledKeys}
+      isDisabled={disabledKeys.length === taskStatuses.length}
     >
       <Item key="pending">{tStatus("pending")}</Item>
       <Item key="active">{tStatus("active")}</Item>

@@ -58,6 +58,7 @@ export const Option = <T extends object>({
   const classes = itemStyles({
     isHovered,
     isFocused: states.isFocused,
+    isDisabled: states.isDisabled,
     className,
   });
 

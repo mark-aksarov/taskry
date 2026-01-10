@@ -55,7 +55,10 @@ export function EditTaskFormContainer({ taskId }: { taskId: number }) {
       taskDescriptionDefaultValue={task.description}
       taskDeadlineDefaultValue={dateValue}
       taskStatusSelect={
-        <TaskFormBaseStatusSelect defaultSelectedKey={task.status} />
+        <TaskFormBaseStatusSelect
+          defaultSelectedKey={task.status}
+          projectStatus={task.projectStatus}
+        />
       }
       taskCategorySelect={
         <TaskFormBaseCategorySelect

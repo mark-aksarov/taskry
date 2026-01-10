@@ -12,6 +12,7 @@ export interface TaskFormDataDTO {
   deadline: Date;
   status: TaskStatus;
   projectId: number;
+  projectStatus: ProjectStatus;
   categoryId: number;
   assigneeId?: string;
 }

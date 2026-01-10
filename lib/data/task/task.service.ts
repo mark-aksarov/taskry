@@ -86,7 +86,7 @@ export const getTaskDetail = async (
 export const getTaskFormData = async (
   id: number,
 ): Promise<TaskFormDataDTO | null> => {
-  const project = await getTask(id, {
+  const task = await getTask(id, {
     id: true,
     title: true,
     description: true,
@@ -94,22 +94,28 @@ export const getTaskFormData = async (
     status: true,
     categoryId: true,
     projectId: true,
+    project: {
+      select: {
+        status: true,
+      },
+    },
     assigneeId: true,
   });
 
-  if (!project) {
+  if (!task) {
     return null;
   }
 
   return {
-    id: project.id,
-    title: project.title,
-    description: project.description ?? undefined,
-    deadline: project.deadline,
-    status: project.status,
-    categoryId: project.categoryId ?? undefined,
-    projectId: project.projectId ?? undefined,
-    assigneeId: project.assigneeId ?? undefined,
+    id: task.id,
+    title: task.title,
+    description: task.description ?? undefined,
+    deadline: task.deadline,
+    status: task.status,
+    categoryId: task.categoryId ?? undefined,
+    projectId: task.projectId ?? undefined,
+    projectStatus: task.project.status,
+    assigneeId: task.assigneeId ?? undefined,
   };
 };
 
