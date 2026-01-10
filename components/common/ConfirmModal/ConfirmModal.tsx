@@ -2,17 +2,19 @@ import { Modal, Dialog, DialogBody, ModalProps } from "@/components/ui";
 
 interface ConfirmModalProps
   extends Pick<ModalProps, "isOpen" | "onOpenChange"> {
+  "data-test"?: string;
   children: React.ReactNode;
 }
 
 export function ConfirmModal({
+  "data-test": dataTest,
   isOpen,
   onOpenChange,
   children,
 }: ConfirmModalProps) {
   return (
     <Modal
-      data-test="confirm-modal"
+      data-test={dataTest}
       isDismissable
       isOpen={isOpen}
       onOpenChange={onOpenChange}

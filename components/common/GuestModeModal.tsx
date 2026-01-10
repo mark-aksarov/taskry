@@ -17,7 +17,11 @@ export function GuestModeModal({ isOpen, onOpenChange }: GuestModeModalProps) {
   const t = useTranslations("common.GuestModeModal");
 
   return (
-    <ConfirmModal isOpen={isOpen} onOpenChange={onOpenChange}>
+    <ConfirmModal
+      data-test="guest-mode-modal"
+      isOpen={isOpen}
+      onOpenChange={onOpenChange}
+    >
       <DialogHeading>{t("heading")}</DialogHeading>
       <ConfirmModalText>
         {t.rich("text", {

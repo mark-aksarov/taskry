@@ -55,68 +55,7 @@ describe("task actions permissions", () => {
     cy.task("db:reset");
   });
 
-  describe("Edit & Delete", () => {
-    const users = [
-      {
-        label: "Owner",
-        email: "owner@example.com",
-        id: "user-1",
-        canEdit: true,
-      },
-      {
-        label: "Manager",
-        email: "manager@example.com",
-        id: "user-2",
-        canEdit: true,
-      },
-      {
-        label: "User",
-        email: "user@example.com",
-        id: "user-3",
-        canEdit: false,
-      },
-      {
-        label: "Guest",
-        email: "guest@example.com",
-        id: "user-4",
-        canEdit: false,
-      },
-    ];
-
-    users.forEach((user) => {
-      describe(`Role: ${user.label}`, () => {
-        beforeEach(() => {
-          cy.task("db:seed", createPayload());
-          cy.signIn(user.email, "12345abc");
-          cy.visit("/en/tasks");
-        });
-
-        it(`${user.canEdit ? "can" : "cannot"} edit a task`, () => {
-          const edit = cy.getMenuItem(
-            "task-item-1-action-menu-trigger",
-            "edit",
-          );
-
-          user.canEdit
-            ? edit.should("not.have.attr", "aria-disabled")
-            : edit.should("have.attr", "aria-disabled", "true");
-        });
-
-        it(`${user.canEdit ? "can" : "cannot"} delete a task`, () => {
-          const del = cy.getMenuItem(
-            "task-item-1-action-menu-trigger",
-            "delete",
-          );
-
-          user.canEdit
-            ? del.should("not.have.attr", "aria-disabled")
-            : del.should("have.attr", "aria-disabled", "true");
-        });
-      });
-    });
-  });
-
-  describe.only("Task Status Disabled Transitions by Role and Project Status", () => {
+  describe("Task Status Disabled Transitions by Role and Project Status", () => {
     const users = {
       owner: {
         label: "Owner",

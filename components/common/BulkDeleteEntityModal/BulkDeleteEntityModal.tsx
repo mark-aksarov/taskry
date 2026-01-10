@@ -54,7 +54,11 @@ export function BulkDeleteEntityModal<T>({
   useActionErrorToast(state);
 
   return (
-    <ConfirmModal isOpen={isOpen} onOpenChange={onOpenChange}>
+    <ConfirmModal
+      data-test="bulk-delete-entity-modal"
+      isOpen={isOpen}
+      onOpenChange={onOpenChange}
+    >
       <DialogHeading>{t("heading")}</DialogHeading>
       <ConfirmModalText>
         {t.rich("text", {

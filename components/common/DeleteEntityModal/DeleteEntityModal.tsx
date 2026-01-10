@@ -49,7 +49,11 @@ export function DeleteEntityModal<T extends Id>({
   useActionErrorToast(state);
 
   return (
-    <ConfirmModal isOpen={isOpen} onOpenChange={onOpenChange}>
+    <ConfirmModal
+      data-test="delete-entity-modal"
+      isOpen={isOpen}
+      onOpenChange={onOpenChange}
+    >
       <DialogHeading>{t("heading")}</DialogHeading>
       <ConfirmModalText>
         {t.rich("text", {

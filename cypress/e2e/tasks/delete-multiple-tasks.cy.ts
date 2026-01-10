@@ -66,7 +66,9 @@ describe("delete multiple tasks", () => {
     cy.getByData("task-1-checkbox").click();
     cy.getByData("task-2-checkbox").click();
     cy.getMenuItem("toolbar-action-menu-trigger", "delete").click();
-    cy.getByData("confirm-modal").should("be.visible").contains("2 tasks");
+    cy.getByData("bulk-delete-entity-modal")
+      .should("be.visible")
+      .contains("2 tasks");
     cy.getByData("confirm-button").click();
     cy.getByData("task-list-item").should("not.exist");
   });

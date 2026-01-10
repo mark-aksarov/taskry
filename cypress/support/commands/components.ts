@@ -13,6 +13,11 @@ Cypress.Commands.add("getMenuItem", (dataTestAttribute, key) => {
   return cy.get('li[role="menuitem"]').filter(`[data-key=${key}]`).first();
 });
 
+Cypress.Commands.add("getSelectOption", (dataTestAttribute, key) => {
+  cy.getByData(dataTestAttribute).eq(0).click();
+  return cy.get('li[role="option"]').filter(`[data-key=${key}]`).first();
+});
+
 Cypress.Commands.add(
   "setDatePickerDate",
   (dataTestAttribute, month, day, year) => {
