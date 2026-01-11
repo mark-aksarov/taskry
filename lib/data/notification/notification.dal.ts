@@ -246,6 +246,50 @@ export async function createTaskStatusChangedNotifications(
 }
 
 /**
+ * Creates notifications for deadline changes.
+ * Logic: owner and manager get all notifications; Assignees only get their own.
+ */
+export async function createTaskDeadlineChangedNotifications(
+  tx: Prisma.TransactionClient,
+  {
+    task,
+    newDeadline,
+    actorId,
+    workspaceId,
+  }: {
+    task: { id: number; title: string; assigneeId: string | null };
+    newDeadline: Date;
+    actorId: string;
+    workspaceId: number;
+  },
+) {
+  const candidates = await getNotificationCandidates(tx, workspaceId, actorId, [
+    task.assigneeId,
+  ]);
+
+  const notificationsData = candidates
+    .filter((user) => {
+      const isAdmin = user.role === "owner" || user.role === "manager";
+      const isAssignee = user.id === task.assigneeId;
+      return isAdmin || isAssignee;
+    })
+    .map((user) => ({
+      type: NotificationType.taskDeadlineChanged,
+      actorId,
+      recipientId: user.id,
+      workspaceId,
+      taskId: task.id,
+      taskTitle: task.title,
+      taskDeadline: newDeadline,
+      isRead: false,
+    }));
+
+  if (notificationsData.length > 0) {
+    await tx.notification.createMany({ data: notificationsData });
+  }
+}
+
+/**
  * HELPER
  */
 

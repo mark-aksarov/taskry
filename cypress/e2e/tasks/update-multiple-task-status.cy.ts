@@ -671,7 +671,7 @@ describe("update multiple task status", () => {
         .contains(/completed/i);
     });
 
-    it.only("should send notifications when task status is updated", () => {
+    it("should send notifications when task status is updated", () => {
       cy.getByData("task-2-checkbox").click();
       cy.getByData("task-3-checkbox").click();
       cy.getByData("task-6-checkbox").click();

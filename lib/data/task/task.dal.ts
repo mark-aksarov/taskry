@@ -5,6 +5,13 @@ import {
   canUpdateTaskStatus,
 } from "../user/user.dal";
 
+import {
+  createTaskAddedNotifications,
+  createTaskDeadlineChangedNotifications,
+  createTaskDeletedNotifications,
+  createTaskStatusChangedNotifications,
+} from "../notification/notification.dal";
+
 import { cache } from "react";
 import prisma from "@/lib/prisma";
 import { TaskFilters } from "@/lib/types";
@@ -14,11 +21,7 @@ import { AccessDeniedError, DomainRuleError } from "../utils/error";
 import { UpdateTaskInputDTO, CreateTaskInputDTO } from "./task.dto";
 import { ALLOWED_TASK_STATUSES_BY_PROJECT } from "../utils/statusUtils";
 import { Prisma, ProjectStatus, TaskStatus } from "@/generated/prisma/client";
-import {
-  createTaskAddedNotifications,
-  createTaskDeletedNotifications,
-  createTaskStatusChangedNotifications,
-} from "../notification/notification.dal";
+import { isSameDay } from "date-fns";
 
 export const getTask = cache(
   async <T extends Prisma.TaskSelect>(id: number, select: T) => {
@@ -122,25 +125,60 @@ export const createTask = async (input: CreateTaskInputDTO) => {
 
 export const updateTask = async (input: UpdateTaskInputDTO) => {
   const {
-    user: { workspaceId },
+    user: { id: actorId, workspaceId },
   } = await verifySession();
   const canUpdate = await canUpdateTask();
   if (!canUpdate) throw new AccessDeniedError();
 
   return prisma.$transaction(async (tx) => {
+    // 1. Fetch current state
     const existingTask = await tx.task.findFirst({
       where: { id: input.id, workspaceId },
-      select: { project: { select: { status: true } } },
+      select: {
+        id: true,
+        title: true,
+        deadline: true,
+        status: true,
+        assigneeId: true,
+        project: { select: { status: true } },
+      },
     });
 
     if (!existingTask) throw new Error("Task not found");
 
+    // 2. Validate Project/Task status logic
     if (input.status) {
       const allowed = getAllowedProjectStatuses(input.status);
       if (!allowed.includes(existingTask.project.status)) {
         throw new DomainRuleError(
           `Status ${input.status} not allowed for project state`,
         );
+      }
+
+      // Send notification only if status actually changed
+      if (input.status !== existingTask.status) {
+        await createTaskStatusChangedNotifications(tx, {
+          tasks: [existingTask],
+          newStatus: input.status,
+          actorId,
+          workspaceId,
+        });
+      }
+    }
+
+    // 3. Compare deadlines using date-fns
+    // isSameDay returns false if one is null and the other is a date
+    if (input.deadline) {
+      const oldDeadline = existingTask.deadline;
+      const newDeadline = new Date(input.deadline);
+
+      if (!oldDeadline || !isSameDay(oldDeadline, newDeadline)) {
+        await createTaskDeadlineChangedNotifications(tx, {
+          task: existingTask,
+          newDeadline: newDeadline,
+          actorId,
+          workspaceId,
+        });
       }
     }
 

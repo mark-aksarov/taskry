@@ -2,20 +2,22 @@ import {
   createTask,
   updateTask,
   deleteTasks,
-  updateTaskStatuses,
   getTaskCount,
+  updateTaskStatuses,
 } from "../task.dal";
 
+import {
+  TaskStatus,
+  ProjectStatus,
+  NotificationType,
+} from "@/generated/prisma/enums";
+
 import prisma from "@/lib/prisma";
-import { AccessDeniedError, DomainRuleError } from "@/lib/data/utils/error";
+import { formatDate, isSameDay } from "date-fns";
 import { resetDatabase } from "@/prisma/resetDatabase";
 import { vi, describe, it, expect, beforeEach } from "vitest";
 import { verifySession } from "@/lib/data/utils/verifySession";
-import {
-  NotificationType,
-  ProjectStatus,
-  TaskStatus,
-} from "@/generated/prisma/enums";
+import { AccessDeniedError, DomainRuleError } from "@/lib/data/utils/error";
 
 vi.mock("server-only", () => ({}));
 
@@ -407,6 +409,110 @@ describe("Task DAL", () => {
       expect(result!.title).toBe("Updated Task Title");
     });
 
+    it("should not send notifications whe deadline or status are not changed", async () => {
+      const taskId = 100;
+
+      await prisma.task.create({
+        data: {
+          id: taskId,
+          title: "Task 1",
+          deadline: new Date(),
+          projectId: 1,
+          categoryId: 1,
+          workspaceId: 1,
+          status: TaskStatus.active,
+        },
+      });
+
+      const updateInput = {
+        id: taskId,
+        title: "Updated Task Title",
+      };
+
+      await updateTask(updateInput);
+      const notifications = await prisma.notification.findMany();
+      expect(notifications).toHaveLength(0);
+    });
+
+    it("should send notifications when deadline and status are changed", async () => {
+      const taskId = 100;
+
+      await prisma.task.create({
+        data: {
+          id: taskId,
+          title: "Task 1",
+          deadline: new Date("2023-01-01"),
+          projectId: 1,
+          categoryId: 1,
+          workspaceId: 1,
+          assigneeId: "user-3",
+          status: TaskStatus.active,
+        },
+      });
+
+      const updateInput = {
+        id: taskId,
+        deadline: new Date("2023-01-02"),
+        status: TaskStatus.completed,
+      };
+
+      const result = await updateTask(updateInput);
+      const actualDeadline = formatDate(result!.deadline, "yyyy-MM-dd");
+      const expectedDeadline = "2023-01-02";
+
+      expect(result).not.toBeNull();
+      expect(result!.id).toBe(taskId);
+      expect(actualDeadline).toBe(expectedDeadline);
+      expect(result!.status).toBe(TaskStatus.completed);
+
+      const notifications = await prisma.notification.findMany();
+      expect(notifications).toHaveLength(4);
+
+      expect(notifications).toContainEqual(
+        expect.objectContaining({
+          taskId,
+          taskTitle: "Task 1",
+          recipientId: "user-2",
+          type: NotificationType.taskDeadlineChanged,
+          taskDeadline: expect.toSatisfy((date: Date) =>
+            isSameDay(date, expectedDeadline),
+          ),
+        }),
+      );
+
+      expect(notifications).toContainEqual(
+        expect.objectContaining({
+          taskId,
+          taskTitle: "Task 1",
+          recipientId: "user-2",
+          type: NotificationType.taskStatusChanged,
+          taskStatus: TaskStatus.completed,
+        }),
+      );
+
+      expect(notifications).toContainEqual(
+        expect.objectContaining({
+          taskId,
+          taskTitle: "Task 1",
+          recipientId: "user-3",
+          type: NotificationType.taskDeadlineChanged,
+          taskDeadline: expect.toSatisfy((date: Date) =>
+            isSameDay(date, expectedDeadline),
+          ),
+        }),
+      );
+
+      expect(notifications).toContainEqual(
+        expect.objectContaining({
+          taskId,
+          taskTitle: "Task 1",
+          recipientId: "user-3",
+          type: NotificationType.taskStatusChanged,
+          taskStatus: TaskStatus.completed,
+        }),
+      );
+    });
+
     it("should throw an error when trying to update a task from another workspace", async () => {
       const taskId = 100;
 
@@ -621,7 +727,7 @@ describe("Task DAL", () => {
       const notification3 = notifications.find(
         (n) => n.taskTitle === "Task 2" && n.recipientId === "user-3",
       );
-      expect(notification3).toBeUndefined();
+      expect(notification3).toBeDefined();
     });
 
     it("should return count 0 when attempting to update tasks from a different workspace", async () => {

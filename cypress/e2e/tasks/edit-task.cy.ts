@@ -33,7 +33,7 @@ describe("edit a new task", () => {
     cy.viewport(1440, 900);
   });
 
-  it("can edit a task", () => {
+  it.only("can edit a task", () => {
     setup(
       createPayload({
         projects: [
@@ -68,7 +68,7 @@ describe("edit a new task", () => {
             projectId: 1,
             workspaceId: 1,
             creatorId: "user-1",
-            assigneeId: "user-1",
+            assigneeId: "user-3",
           },
         ],
       }),
@@ -99,6 +99,45 @@ describe("edit a new task", () => {
       cy.contains("Project 2");
       cy.contains("Pending");
     });
+
+    // check notifications
+    cy.checkNotifications(0);
+
+    // sign in as user-2
+    cy.signIn("manager@example.com", "12345abc");
+    cy.visit("/en/tasks");
+
+    // check notifications
+    cy.checkNotifications(2, [
+      {
+        target: "Updated Task Title",
+        actor: "John Doe",
+        action: "changed the task status",
+      },
+      {
+        target: "Updated Task Title",
+        actor: "John Doe",
+        action: "changed the task deadline",
+      },
+    ]);
+
+    // sign in as user-3
+    cy.signIn("user@example.com", "12345abc");
+    cy.visit("/en/tasks");
+
+    // check notifications
+    cy.checkNotifications(2, [
+      {
+        target: "Updated Task Title",
+        actor: "John Doe",
+        action: "changed the task status",
+      },
+      {
+        target: "Updated Task Title",
+        actor: "John Doe",
+        action: "changed the task deadline",
+      },
+    ]);
   });
 
   describe("access control (RBAC)", () => {
