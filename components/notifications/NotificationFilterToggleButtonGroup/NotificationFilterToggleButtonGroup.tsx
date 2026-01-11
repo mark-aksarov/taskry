@@ -9,7 +9,7 @@ interface NotificationFilterToggleButtonGroupProps
 }
 
 const styles =
-  "w-full rounded-none sticky top-0 z-1 border-b-1 border-gray-300 bg-white px-4 py-3 dark:border-gray-600 dark:bg-gray-800";
+  "w-full inline-flex gap-4 rounded-none sticky top-0 z-1 border-b-1 border-gray-300 bg-white px-4 py-3 dark:border-gray-600 dark:bg-gray-800";
 
 export function NotificationFilterToggleButtonGroup({
   selectedKeys,

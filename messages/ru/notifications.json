@@ -1,4 +1,9 @@
 {
+  "NotificationEmptySection": {
+    "heading": "Уведомлений пока нет",
+    "description": "На данный момент новых уведомлений нет! Здесь будут появляться обновления, упоминания и новости по вашим задачам."
+  },
+
   "NotificationModalTrigger": {
     "ariaLabel": "Показать уведомления",
     "dialogHeading": "Уведомления"

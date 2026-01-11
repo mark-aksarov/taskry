@@ -14,6 +14,7 @@ import { useState } from "react";
 import { NotificationFilter } from "../types";
 import { NotificationList } from "../NotificationList";
 import { NotificationModalContent } from "../NotificationModalContent";
+import { NotificationEmptySection } from "../NotificationEmptySection";
 import { NotificationsDTO } from "@/lib/data/notification/notification.dto";
 
 export function NotificationModalContentContainer() {
@@ -28,8 +29,8 @@ export function NotificationModalContentContainer() {
     },
   );
 
-  if (!data) {
-    throw <div>Empty notification</div>;
+  if (!data || data.items.length === 0) {
+    return <NotificationEmptySection />;
   }
 
   const { items, totalCount, unreadCount } = data;

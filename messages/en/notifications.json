@@ -1,4 +1,9 @@
 {
+  "NotificationEmptySection": {
+    "heading": "No new notifications",
+    "description": "No new notifications at the moment. This is where you’ll see updates, mentions, and activity related to your tasks."
+  },
+
   "NotificationModalTrigger": {
     "ariaLabel": "Show notifications",
     "dialogHeading": "Notifications"
