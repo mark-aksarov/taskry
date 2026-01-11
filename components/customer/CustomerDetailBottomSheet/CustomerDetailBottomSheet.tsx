@@ -16,6 +16,7 @@ import { OverlayTriggerState } from "react-stately";
 import { PersonHeaderSkeleton } from "@/components/common/PersonHeader";
 import { CustomerDetailSkeleton } from "@/components/customer/CustomerDetail";
 import { useGlobalContainer } from "@/components/layout/GlobalContainerContext";
+import { PersonDetailPresentation } from "@/components/common/PersonDetailPresentation";
 
 export interface CustomerDetailBottomSheetProps {
   customerId: number;
@@ -46,10 +47,10 @@ export function CustomerDetailBottomSheet({
         <DialogBody>
           <Suspense
             fallback={
-              <div className="flex flex-col gap-6">
-                <PersonHeaderSkeleton />
-                <CustomerDetailSkeleton />
-              </div>
+              <PersonDetailPresentation
+                personHeader={<PersonHeaderSkeleton />}
+                userDetail={<CustomerDetailSkeleton />}
+              />
             }
           >
             <CustomerDetailContainer customerId={customerId} />

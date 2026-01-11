@@ -4,11 +4,6 @@ import {
   canUpdateTaskStatus,
 } from "@/lib/data/user/user.dal";
 
-import {
-  EntityContainerPagination,
-  EntityPaginationProvider,
-} from "@/components/common/EntityContainerPagination";
-
 import { TaskList } from "../TaskList";
 import { TaskGrid } from "../TaskGrid";
 import { TaskFilters } from "@/lib/types";
@@ -18,9 +13,9 @@ import { getTaskCount } from "@/lib/data/task/task.dal";
 import { getTaskList } from "@/lib/data/task/task.service";
 import { TaskListItemDTO } from "@/lib/data/task/task.dto";
 import { deleteTasks } from "@/lib/actions/task/deleteTasks";
-import { ViewModeLayout } from "@/components/common/ViewMode";
 import { TaskItemActionMenuTrigger } from "../TaskItemActionMenuTrigger";
 import { updateTaskStatuses } from "@/lib/actions/task/updateTaskStatuses";
+import { EntityContainerPresentation } from "@/components/common/EntityContainerPresentation";
 
 interface TasksContainerProps {
   guestMode?: boolean;
@@ -88,44 +83,39 @@ export async function TasksContainer({
   };
 
   return (
-    <EntityPaginationProvider>
-      <ViewModeLayout
-        list={
-          <TaskList showCheckbox>
-            {tasksWithPermissions.map((task) => {
-              return (
-                <TaskListItem
-                  key={task.id}
-                  category={task.category}
-                  project={task.project}
-                  menuTrigger={renderMenuTrigger(task)}
-                  showCheckbox
-                  {...getCommonProps(task)}
-                />
-              );
-            })}
-          </TaskList>
-        }
-        grid={
-          <TaskGrid>
-            {tasksWithPermissions.map((task) => (
-              <TaskGridItem
+    <EntityContainerPresentation
+      list={
+        <TaskList showCheckbox>
+          {tasksWithPermissions.map((task) => {
+            return (
+              <TaskListItem
                 key={task.id}
-                subtasksDone={task.subtasks.done}
-                projectStatus={task.project.status}
-                menuTrigger={renderMenuTrigger(task, "-mr-2")}
+                category={task.category}
+                project={task.project}
+                menuTrigger={renderMenuTrigger(task)}
+                showCheckbox
                 {...getCommonProps(task)}
               />
-            ))}
-          </TaskGrid>
-        }
-      />
-
-      <EntityContainerPagination
-        page={page}
-        totalPages={Math.ceil(count / pageSize)}
-        pageSize={pageSize}
-      />
-    </EntityPaginationProvider>
+            );
+          })}
+        </TaskList>
+      }
+      grid={
+        <TaskGrid>
+          {tasksWithPermissions.map((task) => (
+            <TaskGridItem
+              key={task.id}
+              subtasksDone={task.subtasks.done}
+              projectStatus={task.project.status}
+              menuTrigger={renderMenuTrigger(task, "-mr-2")}
+              {...getCommonProps(task)}
+            />
+          ))}
+        </TaskGrid>
+      }
+      page={page}
+      pageSize={pageSize}
+      totalPages={Math.ceil(count / pageSize)}
+    />
   );
 }

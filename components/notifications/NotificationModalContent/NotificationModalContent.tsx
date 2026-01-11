@@ -1,15 +1,63 @@
+import { NotificationFilter } from "../types";
+import { DialogBody, DialogFooter } from "@/components/ui";
+import { Pagination } from "@/components/common/Pagination";
+import { NotificationModalContentStatus } from "./NotificationModalContentStatus";
+import { NotificationFilterToggleButtonGroup } from "../NotificationFilterToggleButtonGroup";
+
+interface NotificationModalContentProps {
+  notificationList: React.ReactNode;
+  totalCount: number;
+  unreadCount: number;
+  page: number;
+  pageSize: number;
+  totalPages: number;
+  setPage: React.Dispatch<React.SetStateAction<number>>;
+  filter: NotificationFilter;
+  setFilter: React.Dispatch<React.SetStateAction<NotificationFilter>>;
+}
+
 export function NotificationModalContent({
-  children,
-}: {
-  children: [React.ReactNode, React.ReactNode];
-}) {
+  notificationList,
+  totalCount,
+  unreadCount,
+  page,
+  pageSize,
+  totalPages,
+  setPage,
+  filter,
+  setFilter,
+}: NotificationModalContentProps) {
   return (
     <>
-      <div className="sticky top-0 z-1 border-b-1 border-gray-300 bg-white px-4 py-3 dark:border-gray-600 dark:bg-gray-800">
-        {children[0]}
-      </div>
+      <DialogBody className="p-0!">
+        <NotificationFilterToggleButtonGroup
+          notificationsCount={totalCount}
+          unreadCount={unreadCount}
+          selectedKeys={[filter]}
+          onSelectionChange={(keys) => {
+            setPage(1);
+            setFilter([...keys][0] as NotificationFilter);
+          }}
+        />
 
-      {children[1]}
+        {notificationList}
+      </DialogBody>
+
+      {totalPages > 1 && (
+        <DialogFooter className="justify-between">
+          <NotificationModalContentStatus
+            page={page}
+            pageSize={pageSize}
+            totalCount={totalCount}
+          />
+          <Pagination
+            page={page}
+            totalPages={totalPages}
+            onChange={(p) => setPage(p)}
+            showPageItems={false}
+          />
+        </DialogFooter>
+      )}
     </>
   );
 }

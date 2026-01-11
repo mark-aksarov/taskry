@@ -20,7 +20,7 @@ type Story = StoryObj<typeof meta>;
 export const Default = {
   args: {
     children: (
-      <DetailCard>
+      <>
         <DetailCardHeader>
           <DetailCardHeading>Detail Card</DetailCardHeading>
         </DetailCardHeader>
@@ -34,7 +34,7 @@ export const Default = {
             </span>
           </DetailCardRight>
         </DetailCardBody>
-      </DetailCard>
+      </>
     ),
   },
 } satisfies Story;

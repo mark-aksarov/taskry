@@ -1,16 +1,16 @@
 import { fn, mocked } from "storybook/test";
 import ProjectsPageLoading from "./loading";
 import { ProjectsPage } from "./ProjectsPage";
-import { usePathname } from "next/navigation";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { ProjectsPageEmpty } from "./ProjectsPageEmpty";
+import { usePathname, useRouter } from "next/navigation";
 import { PageDecorator } from "@/.storybook/PageDecorator";
-import { ViewModeLayout } from "@/components/common/ViewMode";
 import { ProjectList } from "@/components/projects/ProjectList";
 import { ProjectGrid } from "@/components/projects/ProjectGrid";
 import { NewProjectForm } from "@/components/projects/NewProjectForm";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { ProjectFiltersForm } from "@/components/projects/ProjectFiltersForm";
+import { EntityContainerPresentation } from "@/components/common/EntityContainerPresentation";
 import { Default as ProjectListStory } from "@/components/projects/ProjectList/ProjectList.stories";
 import { Default as ProjectGridStory } from "@/components/projects/ProjectGrid/ProjectGrid.stories";
 import { Default as ProjectFormBaseStory } from "@/components/projects/ProjectFormBase/ProjectFormBase.stories";
@@ -23,6 +23,7 @@ const meta = {
   decorators: [PageDecorator, withThemedBackground],
   beforeEach: () => {
     mocked(usePathname).mockReturnValue("/projects");
+    mocked(useRouter).mockReturnValue({ push: fn() } as any);
   },
 } satisfies Meta<typeof ProjectsPage>;
 
@@ -38,9 +39,12 @@ export const Default = {
       <ProjectFiltersForm {...ProjectFiltersFormStory.args} />
     ),
     projectsContainer: (
-      <ViewModeLayout
+      <EntityContainerPresentation
+        page={1}
+        pageSize={3}
         list={<ProjectList {...ProjectListStory.args} />}
         grid={<ProjectGrid {...ProjectGridStory.args} />}
+        totalPages={3}
       />
     ),
     newProjectFormContainer: <NewProjectForm {...ProjectFormBaseStory.args} />,

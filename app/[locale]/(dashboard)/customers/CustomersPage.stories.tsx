@@ -1,16 +1,16 @@
 import { fn, mocked } from "storybook/test";
 import CustomersPageLoading from "./loading";
-import { usePathname } from "next/navigation";
 import { CustomersPage } from "./CustomersPage";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { usePathname, useRouter } from "next/navigation";
 import { CustomersPageEmpty } from "./CustomersPageEmpty";
 import { PageDecorator } from "@/.storybook/PageDecorator";
-import { ViewModeLayout } from "@/components/common/ViewMode";
 import { CustomerList } from "@/components/customer/CustomerList";
 import { CustomerGrid } from "@/components/customer/CustomerGrid";
 import { NewCustomerForm } from "@/components/customer/NewCustomerForm";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { CustomerFiltersForm } from "@/components/customer/CustomerFiltersForm";
+import { EntityContainerPresentation } from "@/components/common/EntityContainerPresentation";
 import { Default as CustomerGridStory } from "@/components/customer/CustomerGrid/CustomerGrid.stories";
 import { Default as CustomerListStory } from "@/components/customer/CustomerList/CustomerList.stories";
 import { Default as CustomerFormBaseStory } from "@/components/customer/CustomerFormBase/CustomerFormBase.stories";
@@ -23,6 +23,7 @@ const meta = {
   decorators: [PageDecorator, withThemedBackground],
   beforeEach: () => {
     mocked(usePathname).mockReturnValue("/customers");
+    mocked(useRouter).mockReturnValue({ push: fn() } as any);
   },
 } satisfies Meta<typeof CustomersPage>;
 
@@ -35,9 +36,12 @@ export const Default = {
       <CustomerFiltersForm {...CustomerFiltersFormStory.args} />
     ),
     customersContainer: (
-      <ViewModeLayout
+      <EntityContainerPresentation
+        page={1}
+        pageSize={3}
         list={<CustomerList {...CustomerListStory.args} />}
         grid={<CustomerGrid {...CustomerGridStory.args} />}
+        totalPages={3}
       />
     ),
     newCustomerFormContainer: (

@@ -10,8 +10,8 @@ import {
   DialogHeading,
   DialogCloseButton,
 } from "@/components/ui";
+import { Suspense } from "react";
 import { useTranslations } from "next-intl";
-import { Suspense, useContext } from "react";
 import { EditTaskModal } from "../EditTaskModal";
 import { OverlayTriggerState } from "react-stately";
 import { DialogTrigger } from "react-aria-components";

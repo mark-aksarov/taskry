@@ -11,6 +11,7 @@ import { PageContainer } from "@/components/common/PageContainer";
 import { UserDetailCard } from "@/components/users/UserDetailCard";
 import { UserNavigationMobile } from "@/components/users/UserNavigationMobile";
 import { UserNavigationDesktop } from "@/components/users/UserNavigationDesktop";
+import { PersonDetailPresentation } from "@/components/common/PersonDetailPresentation";
 
 interface TeamProfilePageProps {
   profileDetailContainer: React.ReactNode;
@@ -40,9 +41,11 @@ export function TeamProfilePage({
           <UserNavigationMobile />
         </ToolbarMobileBottom>
 
-        <Card className="flex flex-col gap-6">
-          {userHeaderContainer}
-          {profileDetailContainer}
+        <Card>
+          <PersonDetailPresentation
+            personHeader={userHeaderContainer}
+            userDetail={profileDetailContainer}
+          />
         </Card>
       </PageGrid>
     </PageContainer>

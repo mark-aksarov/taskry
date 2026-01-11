@@ -3,14 +3,12 @@ import { CustomerList } from "./CustomerList";
 import { CustomerGrid } from "./CustomerGrid";
 import { CustomerListItem } from "./CustomerListItem";
 import { CustomerGridItem } from "./CustomerGridItem";
-import { ViewModeLayout } from "@/components/common/ViewMode";
 import { getCustomerCount } from "@/lib/data/customer/customer.dal";
 import { getCustomerList } from "@/lib/data/customer/customer.service";
 import { CustomerListItemDTO } from "@/lib/data/customer/customer.dto";
 import { deleteCustomers } from "@/lib/actions/customer/deleteCustomers";
-import { EntityPaginationProvider } from "../common/EntityContainerPagination";
-import { EntityContainerPagination } from "../common/EntityContainerPagination";
 import { CustomerItemActionMenuTrigger } from "./CustomerItemActionMenuTrigger";
+import { EntityContainerPresentation } from "../common/EntityContainerPresentation";
 
 export interface CustomersContainerProps {
   page: number;
@@ -53,37 +51,32 @@ export async function CustomersContainer({
   }
 
   return (
-    <EntityPaginationProvider>
-      <ViewModeLayout
-        list={
-          <CustomerList>
-            {customers.map((customer) => (
-              <CustomerListItem
-                key={customer.id}
-                menuTrigger={renderMenuTrigger(customer)}
-                {...getCustomerCommonProps(customer)}
-              />
-            ))}
-          </CustomerList>
-        }
-        grid={
-          <CustomerGrid>
-            {customers.map((customer) => (
-              <CustomerGridItem
-                key={customer.id}
-                menuTrigger={(renderMenuTrigger(customer), "-mr-2")}
-                {...getCustomerCommonProps(customer)}
-              />
-            ))}
-          </CustomerGrid>
-        }
-      />
-
-      <EntityContainerPagination
-        page={page}
-        totalPages={Math.ceil(count / pageSize)}
-        pageSize={pageSize}
-      />
-    </EntityPaginationProvider>
+    <EntityContainerPresentation
+      page={page}
+      pageSize={pageSize}
+      list={
+        <CustomerList>
+          {customers.map((customer) => (
+            <CustomerListItem
+              key={customer.id}
+              menuTrigger={renderMenuTrigger(customer)}
+              {...getCustomerCommonProps(customer)}
+            />
+          ))}
+        </CustomerList>
+      }
+      grid={
+        <CustomerGrid>
+          {customers.map((customer) => (
+            <CustomerGridItem
+              key={customer.id}
+              menuTrigger={(renderMenuTrigger(customer), "-mr-2")}
+              {...getCustomerCommonProps(customer)}
+            />
+          ))}
+        </CustomerGrid>
+      }
+      totalPages={Math.ceil(count / pageSize)}
+    />
   );
 }

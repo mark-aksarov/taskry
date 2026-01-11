@@ -5,6 +5,7 @@ import { UserDetailSkeleton } from "../UserDetail/UserDetailSkeleton";
 import { PersonHeaderSkeleton } from "@/components/common/PersonHeader";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { GlobalContainerProvider } from "@/components/layout/GlobalContainerContext";
+import { PersonDetailPresentation } from "@/components/common/PersonDetailPresentation";
 
 const meta = {
   title: "components/users/UserDetailModal",
@@ -35,10 +36,10 @@ export const WithSkeletonContent = {
       <GlobalContainerProvider
         value={{
           UserDetailContainer: () => (
-            <div className="flex flex-col gap-6">
-              <PersonHeaderSkeleton />
-              <UserDetailSkeleton />
-            </div>
+            <PersonDetailPresentation
+              personHeader={<PersonHeaderSkeleton />}
+              userDetail={<UserDetailSkeleton />}
+            />
           ),
         }}
       >

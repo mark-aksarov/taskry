@@ -1,5 +1,5 @@
 import { useTranslations } from "next-intl";
-import { ToggleButton, ToggleButtonGroup } from "@/components/ui";
+import { Skeleton, ToggleButton, ToggleButtonGroup } from "@/components/ui";
 import { ToggleButtonGroupProps } from "@/components/ui/ToggleButtonGroup/ToggleButtonGroup";
 
 interface NotificationFilterToggleButtonGroupProps
@@ -7,6 +7,9 @@ interface NotificationFilterToggleButtonGroupProps
   notificationsCount: number;
   unreadCount: number;
 }
+
+const styles =
+  "w-full rounded-none sticky top-0 z-1 border-b-1 border-gray-300 bg-white px-4 py-3 dark:border-gray-600 dark:bg-gray-800";
 
 export function NotificationFilterToggleButtonGroup({
   selectedKeys,
@@ -18,6 +21,10 @@ export function NotificationFilterToggleButtonGroup({
     "notifications.NotificationFilterToggleButtonGroup",
   );
 
+  if (notificationsCount === 0) {
+    return null;
+  }
+
   return (
     <ToggleButtonGroup
       selectedKeys={selectedKeys}
@@ -25,6 +32,7 @@ export function NotificationFilterToggleButtonGroup({
       selectionMode="single"
       disallowEmptySelection
       variant="contrast"
+      className={styles}
     >
       <ToggleButton id="all">
         {t("all")} ({notificationsCount})
@@ -33,5 +41,14 @@ export function NotificationFilterToggleButtonGroup({
         {t("unread")} ({unreadCount})
       </ToggleButton>
     </ToggleButtonGroup>
+  );
+}
+
+export function NotificationFilterToggleButtonGroupSkeleton() {
+  return (
+    <div className={styles}>
+      <Skeleton className="h-8 w-[5rem] rounded-lg" />
+      <Skeleton className="h-8 w-[5rem] rounded-lg" />
+    </div>
   );
 }

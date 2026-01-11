@@ -2,9 +2,10 @@
 
 import useSWR from "swr";
 import { useTranslations } from "next-intl";
+import { UserDetail } from "./UserDetail/UserDetail";
+import { PersonHeader } from "../common/PersonHeader";
 import { UserDetailDTO } from "@/lib/data/user/user.dto";
-import { UserDetail } from "@/components/users/UserDetail";
-import { PersonHeader } from "@/components/common/PersonHeader";
+import { PersonDetailPresentation } from "../common/PersonDetailPresentation";
 
 interface UserDetailContainerProps {
   userId: string;
@@ -22,23 +23,27 @@ export function UserDetailContainer({ userId }: UserDetailContainerProps) {
   }
 
   return (
-    <div className="flex flex-col gap-6">
-      <PersonHeader
-        title={user.fullName}
-        imageUrl={user.imageUrl ?? undefined}
-        subtitle={user.position ? user.position.name : t("unknownPosition")}
-      />
-      <UserDetail
-        id={user.id}
-        fullName={user.fullName}
-        bio={user.bio ?? undefined}
-        email={user.email}
-        phoneNumber={user.phoneNumber ?? undefined}
-        address={user.address ?? undefined}
-        publicLink={user.publicLink ?? undefined}
-        birthdate={user.birthdate ?? undefined}
-        position={user.position ?? undefined}
-      />
-    </div>
+    <PersonDetailPresentation
+      personHeader={
+        <PersonHeader
+          title={user.fullName}
+          imageUrl={user.imageUrl}
+          subtitle={user.position ? user.position.name : t("unknownPosition")}
+        />
+      }
+      userDetail={
+        <UserDetail
+          id={user.id}
+          fullName={user.fullName}
+          bio={user.bio}
+          email={user.email}
+          phoneNumber={user.phoneNumber}
+          address={user.address}
+          publicLink={user.publicLink}
+          birthdate={user.birthdate}
+          position={user.position}
+        />
+      }
+    />
   );
 }

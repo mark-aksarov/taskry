@@ -21,8 +21,6 @@ import { PageDecorator } from "@/.storybook/PageDecorator";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { UserDetail, UserDetailSkeleton } from "@/components/users/UserDetail";
 
-const userId = "BKs42HvVDEZFoaJUmTqf1gTN0K8pUFjI";
-
 const meta = {
   title: "components/pages/ProfilePage",
   component: ProfilePage,

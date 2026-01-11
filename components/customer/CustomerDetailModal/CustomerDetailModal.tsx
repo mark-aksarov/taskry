@@ -16,6 +16,7 @@ import { useTranslations } from "next-intl";
 import { PersonHeaderSkeleton } from "@/components/common/PersonHeader";
 import { CustomerDetailSkeleton } from "@/components/customer/CustomerDetail";
 import { useGlobalContainer } from "@/components/layout/GlobalContainerContext";
+import { PersonDetailPresentation } from "@/components/common/PersonDetailPresentation";
 
 export function CustomerDetailModal({ customerId }: { customerId: number }) {
   const t = useTranslations("customers.CustomerDetailModal");
@@ -38,10 +39,10 @@ export function CustomerDetailModal({ customerId }: { customerId: number }) {
         <DialogBody>
           <Suspense
             fallback={
-              <div className="flex flex-col gap-6">
-                <PersonHeaderSkeleton />
-                <CustomerDetailSkeleton />
-              </div>
+              <PersonDetailPresentation
+                personHeader={<PersonHeaderSkeleton />}
+                userDetail={<CustomerDetailSkeleton />}
+              />
             }
           >
             <CustomerDetailContainer customerId={customerId} />

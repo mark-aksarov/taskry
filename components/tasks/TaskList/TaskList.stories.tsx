@@ -10,7 +10,7 @@ const meta = {
   component: TaskList,
   tags: ["autodocs"],
   decorators: [withThemedBackground],
-  excludeStories: ["TaskListItemsTemplate"],
+  excludeStories: ["getTaskListItems"],
 } satisfies Meta<typeof TaskList>;
 
 export default meta;
@@ -124,50 +124,47 @@ const mockedTasks = [
   },
 ];
 
-export const TaskListItemsTemplate = ({
+export const getTaskListItems = ({
   showCheckbox,
 }: {
   showCheckbox?: boolean;
-}) => (
-  <>
-    {mockedTasks.map((task) => (
-      <TaskListItem
-        key={task.id}
-        id={task.id}
-        title={task.title}
-        deadline={new Date(task.deadline)}
-        status={task.status}
-        commentsCount={task.comments}
-        assignee={task.assignee}
-        project={{
-          id: task.id,
-          title: task.project,
-          status: ProjectStatus.active,
-        }}
-        category={{ id: task.id, name: task.category }}
-        showCheckbox={showCheckbox}
-        menuTrigger={
-          <TaskItemActionMenuTrigger
-            guestMode={false}
-            taskId={task.id}
-            taskTitle={task.title}
-            taskStatus={task.status}
-            projectStatus={ProjectStatus.active}
-            canDelete
-            canUpdate
-            canUpdateStatus
-            deleteAction={mockedAction}
-            updateStatusAction={mockedAction}
-          />
-        }
-      />
-    ))}
-  </>
-);
+}) =>
+  mockedTasks.map((task) => (
+    <TaskListItem
+      key={task.id}
+      id={task.id}
+      title={task.title}
+      deadline={new Date(task.deadline)}
+      status={task.status}
+      commentsCount={task.comments}
+      assignee={task.assignee}
+      project={{
+        id: task.id,
+        title: task.project,
+        status: ProjectStatus.active,
+      }}
+      category={{ id: task.id, name: task.category }}
+      showCheckbox={showCheckbox}
+      menuTrigger={
+        <TaskItemActionMenuTrigger
+          guestMode={false}
+          taskId={task.id}
+          taskTitle={task.title}
+          taskStatus={task.status}
+          projectStatus={ProjectStatus.active}
+          canDelete
+          canUpdate
+          canUpdateStatus
+          deleteAction={mockedAction}
+          updateStatusAction={mockedAction}
+        />
+      }
+    />
+  ));
 
 export const Default = {
   args: {
     showCheckbox: true,
-    children: <TaskListItemsTemplate showCheckbox />,
+    children: getTaskListItems({ showCheckbox: true }),
   },
 } satisfies Story;

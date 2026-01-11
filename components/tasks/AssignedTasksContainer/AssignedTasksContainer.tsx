@@ -8,12 +8,8 @@ import {
   AssignedTasksSection,
   AssignedTasksEmptyCard,
   AssignedTasksSectionHeading,
+  AssignedTasksPresentation,
 } from "../AssignedTasks";
-
-import {
-  EntityContainerPagination,
-  EntityPaginationProvider,
-} from "@/components/common/EntityContainerPagination";
 
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
@@ -86,9 +82,11 @@ export async function AssignedTasksContainer({
   );
 
   return (
-    <EntityPaginationProvider>
-      <AssignedTasksSection>
-        <AssignedTasksSectionHeading />
+    <AssignedTasksPresentation
+      page={page}
+      pageSize={pageSize}
+      totalPages={Math.ceil(count / pageSize)}
+      list={
         <TaskList>
           {tasksWithPermissions.map((task) => (
             <TaskListItem
@@ -118,13 +116,7 @@ export async function AssignedTasksContainer({
             />
           ))}
         </TaskList>
-      </AssignedTasksSection>
-
-      <EntityContainerPagination
-        page={page}
-        totalPages={Math.ceil(count / pageSize)}
-        pageSize={pageSize}
-      />
-    </EntityPaginationProvider>
+      }
+    />
   );
 }

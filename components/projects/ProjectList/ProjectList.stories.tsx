@@ -77,25 +77,21 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    children: (
-      <>
-        {mockedProjects.map((project) => (
-          <ProjectListItem
-            key={project.id}
-            {...project}
-            showCheckbox={true}
-            menuTrigger={
-              <ProjectItemActionMenuTrigger
-                projectId={project.id}
-                projectTitle={project.title}
-                projectStatus={project.status}
-                deleteAction={fn()}
-                updateStatusAction={fn()}
-              />
-            }
+    children: mockedProjects.map((project) => (
+      <ProjectListItem
+        key={project.id}
+        {...project}
+        showCheckbox={true}
+        menuTrigger={
+          <ProjectItemActionMenuTrigger
+            projectId={project.id}
+            projectTitle={project.title}
+            projectStatus={project.status}
+            deleteAction={fn()}
+            updateStatusAction={fn()}
           />
-        ))}
-      </>
-    ),
+        }
+      />
+    )),
   },
 } satisfies Story;

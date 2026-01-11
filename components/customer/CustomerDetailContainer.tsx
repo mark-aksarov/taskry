@@ -5,6 +5,7 @@ import { useTranslations } from "next-intl";
 import { CustomerDetail } from "./CustomerDetail";
 import { PersonHeader } from "@/components/common/PersonHeader";
 import { CustomerDetailDTO } from "@/lib/data/customer/customer.dto";
+import { PersonDetailPresentation } from "../common/PersonDetailPresentation";
 
 interface CustomerDetailContainerProps {
   customerId: number;
@@ -25,22 +26,26 @@ export function CustomerDetailContainer({
   }
 
   return (
-    <div className="flex flex-col gap-6">
-      <PersonHeader
-        title={customer.fullName}
-        imageUrl={customer.imageUrl ?? undefined}
-        subtitle={
-          customer.company ? customer.company.name : t("unknownCompany")
-        }
-      />
-      <CustomerDetail
-        fullName={customer.fullName}
-        bio={customer.bio}
-        email={customer.email}
-        phoneNumber={customer.phoneNumber}
-        publicLink={customer.publicLink}
-        company={customer.company}
-      />
-    </div>
+    <PersonDetailPresentation
+      personHeader={
+        <PersonHeader
+          title={customer.fullName}
+          imageUrl={customer.imageUrl ?? undefined}
+          subtitle={
+            customer.company ? customer.company.name : t("unknownCompany")
+          }
+        />
+      }
+      userDetail={
+        <CustomerDetail
+          fullName={customer.fullName}
+          bio={customer.bio}
+          email={customer.email}
+          phoneNumber={customer.phoneNumber}
+          publicLink={customer.publicLink}
+          company={customer.company}
+        />
+      }
+    />
   );
 }
