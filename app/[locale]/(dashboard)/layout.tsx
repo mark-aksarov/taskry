@@ -4,6 +4,7 @@ import {
 } from "@/components/layout/GlobalContainerContext";
 
 import { DashboardLayout } from "./DashboardLayout";
+import { hasGuestRole } from "@/lib/utils/hasGuestRole";
 import { NotificationModalContentContainer } from "@/components/notifications/NotificationModalContentContainer";
 
 const context: GlobalContainerContextType = {
@@ -15,9 +16,11 @@ export default async function AppDashboardLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const guestMode = await hasGuestRole();
+
   return (
     <GlobalContainerProvider value={context}>
-      <DashboardLayout>{children}</DashboardLayout>
+      <DashboardLayout guestMode={guestMode}>{children}</DashboardLayout>
     </GlobalContainerProvider>
   );
 }

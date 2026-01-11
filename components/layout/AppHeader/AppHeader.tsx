@@ -8,17 +8,21 @@ import { AppHeaderThemeToggleButton } from "./AppHeaderThemeToggleButton";
 import { NotificationModalTrigger } from "@/components/notifications/NotificationModalTrigger";
 
 interface AppHeaderProps {
+  guestMode?: boolean;
   appBottomSheetTrigger: React.ReactNode;
   appSidebarSheetTrigger: React.ReactNode;
 }
 
 export const AppHeader = ({
+  guestMode,
   appBottomSheetTrigger,
   appSidebarSheetTrigger,
 }: AppHeaderProps) => {
   const buttonClasses = "rounded-full p-3";
 
-  const notificationModalTrigger = <NotificationModalTrigger />;
+  const notificationModalTrigger = (
+    <NotificationModalTrigger guestMode={guestMode} />
+  );
 
   return (
     <>

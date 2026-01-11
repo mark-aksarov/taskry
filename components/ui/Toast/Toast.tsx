@@ -26,7 +26,7 @@ export function ToastRegion() {
   return (
     <RACToastRegion
       queue={toastQueue}
-      className="fixed bottom-4 left-4 z-2 flex flex-col-reverse gap-2"
+      className="fixed bottom-4 left-4 z-3 flex flex-col-reverse gap-2"
     >
       {({ toast }) => (
         <Toast toast={toast}>

@@ -8,6 +8,8 @@ import {
 
 import { cache } from "react";
 import prisma from "@/lib/prisma";
+import { AccessDeniedError } from "../utils/error";
+import { canDeleteNotification } from "../user/user.dal";
 import { verifySession } from "@/lib/data/utils/verifySession";
 
 export const getAllNotifications = cache(
@@ -97,6 +99,31 @@ export const getAllNotifications = cache(
     return { items: notifications, totalCount, unreadCount };
   },
 );
+
+export const deleteNotification = async (id: number) => {
+  const {
+    user: { id: recipientId, workspaceId },
+  } = await verifySession();
+
+  const canDelete = await canDeleteNotification();
+  if (!canDelete) {
+    throw new AccessDeniedError(
+      "You do not have permission to delete notifications.",
+    );
+  }
+
+  return await prisma.notification.delete({
+    where: {
+      workspaceId,
+      id,
+      recipientId,
+    },
+  });
+};
+
+/**
+ * Send notifications
+ */
 
 export async function createTaskAddedNotifications(
   tx: Prisma.TransactionClient,

@@ -1,11 +1,8 @@
 "use client";
 
-import { Item } from "react-stately";
 import { twMerge } from "tailwind-merge";
-import { ListCheck, Trash } from "lucide-react";
-import { useFormatter, useTranslations } from "next-intl";
+import { useFormatter } from "next-intl";
 import { NotificationListItemDate } from "./NotificationListItemDate";
-import { ItemBaseActionMenuTrigger } from "@/components/common/ItemBase";
 
 export interface NotificationListItemProps {
   id: number;
@@ -17,13 +14,14 @@ export interface NotificationListItemProps {
   target: React.ReactNode;
   content?: React.ReactNode;
   className?: string;
+  menuTrigger?: React.ReactNode;
 }
 
 export const notificationListItemStyles =
   "flex items-start gap-3 border-gray-300 bg-white p-4 pr-2 not-last:border-b-1 dark:border-gray-600 dark:bg-gray-800";
 
 export const NotificationListItem = ({
-  id,
+  date,
   isRead,
   actorLink,
   actorImageLink,
@@ -31,10 +29,8 @@ export const NotificationListItem = ({
   target,
   content,
   className,
-  date,
+  menuTrigger,
 }: NotificationListItemProps) => {
-  const t = useTranslations("notifications.NotificationItem");
-
   const format = useFormatter();
 
   const formattedDate = format.dateTime(new Date(date), {
@@ -69,20 +65,7 @@ export const NotificationListItem = ({
         {content}
       </div>
 
-      <ItemBaseActionMenuTrigger className="ml-auto">
-        <>
-          {!isRead && (
-            <Item textValue={t("markAsRead")} key="read">
-              <ListCheck size={16} strokeWidth={1.5} absoluteStrokeWidth />{" "}
-              {t("markAsRead")}
-            </Item>
-          )}
-        </>
-        <Item textValue={t("delete")} key="delete">
-          <Trash size={16} strokeWidth={1.5} absoluteStrokeWidth />{" "}
-          {t("delete")}
-        </Item>
-      </ItemBaseActionMenuTrigger>
+      {menuTrigger}
     </div>
   );
 };

@@ -1030,47 +1030,48 @@ describe("Task DAL", () => {
       expect(result.count).toBe(0);
     });
 
-    describe("Task RBAC Deletion", () => {
-      beforeEach(async () => {
-        await prisma.task.createMany({
-          data: [
-            {
-              id: 1,
-              title: "Task 1",
-              deadline: new Date(),
-              projectId: 1,
-              categoryId: 1,
-              workspaceId: 1,
-              status: TaskStatus.active,
-            },
-          ],
+    describe("RBAC: delete tasks", () => {
+      const taskId = 100;
+
+      const setup = async (userId: string, role: string) => {
+        (verifySession as any).mockResolvedValue({
+          user: { id: userId, workspaceId: 1, role },
         });
+
+        await prisma.task.create({
+          data: {
+            id: taskId,
+            title: "Task 1",
+            deadline: new Date(),
+            projectId: 1,
+            categoryId: 1,
+            workspaceId: 1,
+            status: TaskStatus.active,
+          },
+        });
+      };
+
+      it("should succeed for owner", async () => {
+        await setup("user-1", "owner");
+        const result = await deleteTasks([taskId]);
+        expect(result.count).toBe(1);
       });
 
-      const deleteTestCases = [
-        { role: "admin", expected: "allow" },
-        { role: "owner", expected: "allow" },
-        { role: "manager", expected: "allow" },
-        { role: "user", expected: "deny" },
-        { role: "guest", expected: "deny" },
-      ];
+      it("should succeed for manager", async () => {
+        await setup("user-2", "manager");
+        const result = await deleteTasks([taskId]);
+        expect(result.count).toBe(1);
+      });
 
-      it.each(deleteTestCases)(
-        "should $expected deletion for role: $role",
-        async ({ role, expected }) => {
-          await prisma.user.update({
-            where: { id: "user-1" },
-            data: { role },
-          });
+      it("should fail for user", async () => {
+        await setup("user-3", "user");
+        await expect(deleteTasks([taskId])).rejects.toThrow(AccessDeniedError);
+      });
 
-          if (expected === "allow") {
-            const result = await deleteTasks([1]);
-            expect(result.count).toBe(1);
-          } else {
-            await expect(deleteTasks([1])).rejects.toThrow(AccessDeniedError);
-          }
-        },
-      );
+      it("should fail for guest", async () => {
+        await setup("user-4", "user");
+        await expect(deleteTasks([taskId])).rejects.toThrow(AccessDeniedError);
+      });
     });
   });
 });

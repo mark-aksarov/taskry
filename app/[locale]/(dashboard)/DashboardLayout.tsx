@@ -11,10 +11,11 @@ import { AppBottomSheetTrigger } from "@/components/layout/AppBottomSheetTrigger
 import { AppSidebarSheetTrigger } from "@/components/layout/AppSidebarSheetTrigger";
 
 interface DashboardLayoutProps {
+  guestMode?: boolean;
   children: React.ReactNode;
 }
 
-export function DashboardLayout({ children }: DashboardLayoutProps) {
+export function DashboardLayout({ guestMode, children }: DashboardLayoutProps) {
   return (
     <div className="flex">
       <AppSidebar className="sticky top-0 z-2 h-screen flex-none shadow-lg max-xl:hidden">
@@ -28,6 +29,7 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
 
       <div className="flex flex-auto flex-col">
         <AppHeader
+          guestMode={guestMode}
           appBottomSheetTrigger={
             <AppBottomSheetTrigger appNavigation={<AppNavigation />} />
           }

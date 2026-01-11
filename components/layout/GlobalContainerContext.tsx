@@ -15,7 +15,9 @@ export interface GlobalContainerContextType {
   EditCustomerFormContainer?: React.ComponentType<{
     customerId: number;
   }>;
-  NotificationModalContentContainer?: React.ComponentType;
+  NotificationModalContentContainer?: React.ComponentType<{
+    guestMode?: boolean;
+  }>;
   ProjectCommentsContainer?: React.ComponentType<{
     projectId: number;
   }>;

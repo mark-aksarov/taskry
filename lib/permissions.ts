@@ -6,6 +6,7 @@ export const statement = {
   comment: ["create", "update", "delete"],
   customer: ["create", "update", "delete"],
   user: ["create", "update", "delete"],
+  notification: ["delete", "mark-read"],
 } as const;
 
 export const ac = createAccessControl(statement);
@@ -16,6 +17,7 @@ export const admin = ac.newRole({
   comment: ["create", "update", "delete"],
   customer: ["create", "update", "delete"],
   user: ["create", "update", "delete"],
+  notification: ["delete", "mark-read"],
 });
 
 export const owner = ac.newRole({
@@ -24,6 +26,7 @@ export const owner = ac.newRole({
   comment: ["create", "update", "delete"],
   customer: ["create", "update", "delete"],
   user: ["create", "update", "delete"],
+  notification: ["delete", "mark-read"],
 });
 
 export const manager = ac.newRole({
@@ -32,6 +35,7 @@ export const manager = ac.newRole({
   comment: ["create", "update", "delete"],
   customer: ["create", "update", "delete"],
   user: [],
+  notification: ["delete", "mark-read"],
 });
 
 export const user = ac.newRole({
@@ -40,6 +44,7 @@ export const user = ac.newRole({
   comment: ["create", "update", "delete"],
   customer: [],
   user: [],
+  notification: ["delete", "mark-read"],
 });
 
 export const guest = ac.newRole({

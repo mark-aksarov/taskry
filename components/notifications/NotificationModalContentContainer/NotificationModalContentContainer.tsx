@@ -7,6 +7,7 @@ import {
   NotificationListItemActorLink,
   NotificationListItemActionText,
   NotificationListItemActorImageLink,
+  NotificationListItemActionMenuTrigger,
 } from "../NotificationListItem";
 
 import useSWR from "swr";
@@ -16,13 +17,20 @@ import { NotificationList } from "../NotificationList";
 import { NotificationModalContent } from "../NotificationModalContent";
 import { NotificationEmptySection } from "../NotificationEmptySection";
 import { NotificationsDTO } from "@/lib/data/notification/notification.dto";
+import { deleteNotification } from "@/lib/actions/notification/deleteNotification";
 
-export function NotificationModalContentContainer() {
+interface NotificationModalContentContainerProps {
+  guestMode?: boolean;
+}
+
+export function NotificationModalContentContainer({
+  guestMode,
+}: NotificationModalContentContainerProps) {
   const [page, setPage] = useState(1);
   const [filter, setFilter] = useState<NotificationFilter>("all");
   const pageSize = 10;
 
-  const { data } = useSWR<NotificationsDTO>(
+  const { data, mutate } = useSWR<NotificationsDTO>(
     `/api/notifications?page=${page}&pageSize=${pageSize}&filter=${filter}`,
     {
       suspense: true,
@@ -66,6 +74,15 @@ export function NotificationModalContentContainer() {
                 actionContent={
                   <NotificationListItemActionText
                     notificationType={notification.type}
+                  />
+                }
+                menuTrigger={
+                  <NotificationListItemActionMenuTrigger
+                    notificaitonId={notification.id}
+                    isRead={notification.isRead}
+                    guestMode={guestMode}
+                    deleteAction={deleteNotification}
+                    mutate={mutate}
                   />
                 }
               />

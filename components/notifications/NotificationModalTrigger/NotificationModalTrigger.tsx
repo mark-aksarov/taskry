@@ -16,7 +16,13 @@ import { ResponsiveModal } from "@/components/common/ResponsiveModal";
 import { useGlobalContainer } from "@/components/layout/GlobalContainerContext";
 import { NotificationModalContentSkeleton } from "../NotificationModalContent/NotificationModalContentSkeleton";
 
-export function NotificationModalTrigger() {
+interface NotificationModalTriggerProps {
+  guestMode?: boolean;
+}
+
+export function NotificationModalTrigger({
+  guestMode,
+}: NotificationModalTriggerProps) {
   const t = useTranslations("notifications.NotificationModalTrigger");
 
   const { NotificationModalContentContainer } = useGlobalContainer();
@@ -49,7 +55,7 @@ export function NotificationModalTrigger() {
           </DialogHeader>
 
           <Suspense fallback={<NotificationModalContentSkeleton />}>
-            <NotificationModalContentContainer />
+            <NotificationModalContentContainer guestMode={guestMode} />
           </Suspense>
         </Dialog>
       </ResponsiveModal>

@@ -5,3 +5,4 @@ export { NotificationListItemSkeleton } from "./NotificationListItemSkeleton";
 export { NotificationListItemActorLink } from "./NotificationListItemActorLink";
 export { NotificationListItemActionText } from "./NotificationListItemActionText";
 export { NotificationListItemActorImageLink } from "./NotificationListItemActorImageLink";
+export { NotificationListItemActionMenuTrigger } from "./NotificationListItemActionMenuTrigger";

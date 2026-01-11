@@ -88,6 +88,24 @@ export async function canUpdateTaskStatus(assigneeId?: string) {
   return permission.success;
 }
 
+export async function canDeleteNotification() {
+  const {
+    user: { id },
+  } = await verifySession();
+
+  // ACL
+  const permission = await auth.api.userHasPermission({
+    body: {
+      userId: id,
+      permission: {
+        notification: ["delete"],
+      },
+    },
+  });
+
+  return permission.success;
+}
+
 export const getUser = cache(
   async <T extends Prisma.UserSelect>(id: string, select: T) => {
     const {

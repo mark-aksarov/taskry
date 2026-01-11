@@ -33,7 +33,7 @@ describe("edit a new task", () => {
     cy.viewport(1440, 900);
   });
 
-  it.only("can edit a task", () => {
+  it("can edit a task", () => {
     setup(
       createPayload({
         projects: [
