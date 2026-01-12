@@ -1,8 +1,11 @@
+import { NotificationFilterToggleButtonGroup } from "../NotificationFilterToggleButtonGroup";
+
 import { NotificationFilter } from "../types";
 import { DialogBody, DialogFooter } from "@/components/ui";
 import { Pagination } from "@/components/common/Pagination";
+import { NotificationModalActions } from "./NotificationModalActions";
 import { NotificationModalContentStatus } from "./NotificationModalContentStatus";
-import { NotificationFilterToggleButtonGroup } from "../NotificationFilterToggleButtonGroup";
+import { MarkAllAsReadButton } from "../MarkAllAsReadButton";
 
 interface NotificationModalContentProps {
   notificationList: React.ReactNode;
@@ -30,15 +33,18 @@ export function NotificationModalContent({
   return (
     <>
       <DialogBody className="p-0!">
-        <NotificationFilterToggleButtonGroup
-          notificationsCount={totalCount}
-          unreadCount={unreadCount}
-          selectedKeys={[filter]}
-          onSelectionChange={(keys) => {
-            setPage(1);
-            setFilter([...keys][0] as NotificationFilter);
-          }}
-        />
+        <NotificationModalActions>
+          <NotificationFilterToggleButtonGroup
+            notificationsCount={totalCount}
+            unreadCount={unreadCount}
+            selectedKeys={[filter]}
+            onSelectionChange={(keys) => {
+              setPage(1);
+              setFilter([...keys][0] as NotificationFilter);
+            }}
+          />
+          <MarkAllAsReadButton />
+        </NotificationModalActions>
 
         {notificationList}
       </DialogBody>

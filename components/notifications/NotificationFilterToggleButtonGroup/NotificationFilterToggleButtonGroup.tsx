@@ -8,9 +8,6 @@ interface NotificationFilterToggleButtonGroupProps
   unreadCount: number;
 }
 
-const styles =
-  "w-full inline-flex gap-4 rounded-none sticky top-0 z-1 border-b-1 border-gray-300 bg-white px-4 py-3 dark:border-gray-600 dark:bg-gray-800";
-
 export function NotificationFilterToggleButtonGroup({
   selectedKeys,
   onSelectionChange,
@@ -32,7 +29,6 @@ export function NotificationFilterToggleButtonGroup({
       selectionMode="single"
       disallowEmptySelection
       variant="contrast"
-      className={styles}
     >
       <ToggleButton id="all">
         {t("all")} ({notificationsCount})
@@ -46,7 +42,7 @@ export function NotificationFilterToggleButtonGroup({
 
 export function NotificationFilterToggleButtonGroupSkeleton() {
   return (
-    <div className={styles}>
+    <div className="inline-flex gap-4">
       <Skeleton className="h-8 w-[5rem] rounded-lg" />
       <Skeleton className="h-8 w-[5rem] rounded-lg" />
     </div>
