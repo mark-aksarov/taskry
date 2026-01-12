@@ -3,13 +3,18 @@
 import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
 import { ListCheck, Trash } from "lucide-react";
-import { ActionFn, ActionState } from "@/lib/actions/types";
 import { GuestModeModal } from "@/components/common/GuestModeModal";
 import { useActionErrorToast } from "@/lib/hooks/useActionErrorToast";
 import { ItemBaseActionMenuTrigger } from "@/components/common/ItemBase";
 import { startTransition, useActionState, useEffect, useState } from "react";
+import { ActionFn, ActionState, MarkAsReadPayload } from "@/lib/actions/types";
 
 const deleteActionInitialState: ActionState = {
+  status: null,
+  message: null,
+};
+
+const markAsReadActionInitialState: ActionState = {
   status: null,
   message: null,
 };
@@ -19,6 +24,7 @@ interface NotificationListItemActionMenuTriggerProps {
   isRead: boolean;
   guestMode?: boolean;
   deleteAction: ActionFn<ActionState, number>;
+  markAsReadAction: ActionFn<ActionState, MarkAsReadPayload>;
   mutate: () => void;
 }
 
@@ -27,6 +33,7 @@ export function NotificationListItemActionMenuTrigger({
   isRead,
   guestMode,
   deleteAction,
+  markAsReadAction,
   mutate,
 }: NotificationListItemActionMenuTriggerProps) {
   const t = useTranslations("notifications.NotificationItem");
@@ -41,21 +48,6 @@ export function NotificationListItemActionMenuTrigger({
     deleteNotificationPending,
   ] = useActionState(deleteAction, deleteActionInitialState);
 
-  function handleAction(key: Key) {
-    if (guestMode) {
-      setIsGuestModeModalOpen(true);
-      return;
-    }
-
-    const action = key.toString();
-    if (action === "edit") {
-    } else if (action === "delete") {
-      startTransition(() => {
-        deleteNotificationAction(notificaitonId);
-      });
-    }
-  }
-
   useEffect(() => {
     if (deleteNotificationState.status === "success") {
       mutate();
@@ -63,6 +55,40 @@ export function NotificationListItemActionMenuTrigger({
   }, [deleteNotificationState, mutate]);
 
   useActionErrorToast(deleteNotificationState);
+
+  // Mark as read notification
+  const [
+    markAsReadNotificationState,
+    markAsReadNotificationAction,
+    markAsReadNotificationPending,
+  ] = useActionState(markAsReadAction, markAsReadActionInitialState);
+
+  useEffect(() => {
+    if (markAsReadNotificationState.status === "success") {
+      mutate();
+    }
+  }, [markAsReadNotificationState, mutate]);
+
+  useActionErrorToast(markAsReadNotificationState);
+
+  // Handle action
+  function handleAction(key: Key) {
+    if (guestMode) {
+      setIsGuestModeModalOpen(true);
+      return;
+    }
+
+    const action = key.toString();
+    if (action === "markAsRead") {
+      startTransition(() => {
+        markAsReadNotificationAction([notificaitonId]);
+      });
+    } else if (action === "delete") {
+      startTransition(() => {
+        deleteNotificationAction(notificaitonId);
+      });
+    }
+  }
 
   return (
     <>
@@ -73,7 +99,7 @@ export function NotificationListItemActionMenuTrigger({
       >
         <>
           {!isRead && (
-            <Item textValue={t("markAsRead")} key="read">
+            <Item textValue={t("markAsRead")} key="markAsRead">
               <ListCheck size={16} strokeWidth={1.5} absoluteStrokeWidth />
               {t("markAsRead")}
             </Item>

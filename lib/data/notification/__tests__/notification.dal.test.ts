@@ -1,6 +1,9 @@
 import prisma from "@/lib/prisma";
 import { resetDatabase } from "@/prisma/resetDatabase";
-import { deleteNotification } from "../notification.dal";
+import {
+  deleteNotification,
+  markNotificationsAsRead,
+} from "../notification.dal";
 import { NotificationType } from "@/generated/prisma/enums";
 import { vi, describe, beforeEach, it, expect } from "vitest";
 import { verifySession } from "@/lib/data/utils/verifySession";
@@ -12,7 +15,7 @@ vi.mock("@/lib/data/utils/verifySession", () => ({
   verifySession: vi.fn(),
 }));
 
-describe("TaskCategory DAL", () => {
+describe("Notification DAL", () => {
   beforeEach(async () => {
     (verifySession as any).mockResolvedValue({
       user: { id: "user-1", workspaceId: 1 },
@@ -89,7 +92,7 @@ describe("TaskCategory DAL", () => {
       await expect(deleteNotification(notificationId)).rejects.toThrow();
     });
 
-    it("should not delete tasks for a different recipient", async () => {
+    it("should not delete notifications for a different recipient", async () => {
       const notificationId = 100;
 
       await prisma.notification.create({
@@ -140,7 +143,7 @@ describe("TaskCategory DAL", () => {
         expect(result.taskTitle).toBe("Task 1");
       });
 
-      it("should fail for user", async () => {
+      it("should succeed for user", async () => {
         await setup("user-3", "user");
         const result = await deleteNotification(notificationId);
         expect(result.taskTitle).toBe("Task 1");
@@ -149,6 +152,107 @@ describe("TaskCategory DAL", () => {
       it("should fail for guest", async () => {
         await setup("user-4", "user");
         await expect(deleteNotification(notificationId)).rejects.toThrow(
+          AccessDeniedError,
+        );
+      });
+    });
+  });
+
+  describe("mark notifications as read", () => {
+    it("should not mark notifications as read from a different workspace", async () => {
+      const notificationId = 100;
+
+      await prisma.notification.createMany({
+        data: [
+          {
+            id: notificationId,
+            type: NotificationType.taskDeleted,
+            isRead: false,
+            taskTitle: "Task 1",
+            workspaceId: 2,
+            actorId: "user-5",
+            recipientId: "user-6",
+          },
+        ],
+      });
+
+      const result = await markNotificationsAsRead([notificationId]);
+      const notification = await prisma.notification.findFirst();
+      expect(result.count).toBe(0);
+      expect(notification!.isRead).toBe(false);
+    });
+
+    it("should not mark notifications as read for a different recipient", async () => {
+      const notificationId = 100;
+
+      await prisma.notification.createMany({
+        data: [
+          {
+            id: notificationId,
+            type: NotificationType.taskDeleted,
+            isRead: false,
+            taskTitle: "Task 1",
+            workspaceId: 1,
+            actorId: "user-1",
+            recipientId: "user-2",
+          },
+        ],
+      });
+
+      const result = await markNotificationsAsRead([notificationId]);
+      const notification = await prisma.notification.findFirst();
+      expect(result.count).toBe(0);
+      expect(notification!.isRead).toBe(false);
+    });
+
+    describe("notification RBAC Deletion", () => {
+      const notificationId = 100;
+
+      const setup = async (userId: string, role: string) => {
+        (verifySession as any).mockResolvedValue({
+          user: { id: userId, workspaceId: 1, role },
+        });
+
+        await prisma.notification.create({
+          data: {
+            id: notificationId,
+            type: NotificationType.taskDeleted,
+            isRead: false,
+            taskTitle: "Task 1",
+            workspaceId: 1,
+            actorId: "user-2",
+            recipientId: userId,
+          },
+        });
+      };
+
+      it("should succeed for owner", async () => {
+        await setup("user-1", "owner");
+        const result = await markNotificationsAsRead([notificationId]);
+        const notification = await prisma.notification.findFirst();
+        expect(result.count).toBe(1);
+        expect(notification!.isRead).toBe(true);
+      });
+
+      it("should succeed for manager", async () => {
+        await setup("user-2", "manager");
+        const result = await markNotificationsAsRead([notificationId]);
+        const notification = await prisma.notification.findFirst();
+        expect(result.count).toBe(1);
+        expect(notification!.isRead).toBe(true);
+      });
+
+      it("should succeed for user", async () => {
+        await setup("user-3", "user");
+        const result = await markNotificationsAsRead([notificationId]);
+        const notification = await prisma.notification.findFirst();
+        expect(result.count).toBe(1);
+        expect(notification!.isRead).toBe(true);
+      });
+
+      it("should fail for guest", async () => {
+        await setup("user-4", "user");
+        await expect(markNotificationsAsRead([notificationId])).rejects.toThrow(
           AccessDeniedError,
         );
       });

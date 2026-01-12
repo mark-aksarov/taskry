@@ -25,5 +25,7 @@ export const Default = {
     setPage: fn(),
     filter: "all",
     setFilter: fn(),
+    markAsReadAction: fn(),
+    mutate: fn(),
   },
 } satisfies Story;

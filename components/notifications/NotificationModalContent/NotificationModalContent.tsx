@@ -1,34 +1,40 @@
-import { NotificationFilterToggleButtonGroup } from "../NotificationFilterToggleButtonGroup";
-
 import { NotificationFilter } from "../types";
 import { DialogBody, DialogFooter } from "@/components/ui";
 import { Pagination } from "@/components/common/Pagination";
-import { NotificationModalActions } from "./NotificationModalActions";
-import { NotificationModalContentStatus } from "./NotificationModalContentStatus";
 import { MarkAllAsReadButton } from "../MarkAllAsReadButton";
+import { NotificationModalActions } from "./NotificationModalActions";
+import { ActionFn, ActionState, MarkAsReadPayload } from "@/lib/actions/types";
+import { NotificationModalContentStatus } from "./NotificationModalContentStatus";
+import { NotificationFilterToggleButtonGroup } from "../NotificationFilterToggleButtonGroup";
 
 interface NotificationModalContentProps {
+  guestMode?: boolean;
   notificationList: React.ReactNode;
   totalCount: number;
   unreadCount: number;
   page: number;
   pageSize: number;
   totalPages: number;
-  setPage: React.Dispatch<React.SetStateAction<number>>;
   filter: NotificationFilter;
+  setPage: React.Dispatch<React.SetStateAction<number>>;
   setFilter: React.Dispatch<React.SetStateAction<NotificationFilter>>;
+  markAsReadAction: ActionFn<ActionState, MarkAsReadPayload>;
+  mutate: () => void;
 }
 
 export function NotificationModalContent({
+  guestMode,
   notificationList,
   totalCount,
   unreadCount,
   page,
   pageSize,
   totalPages,
-  setPage,
   filter,
+  setPage,
   setFilter,
+  markAsReadAction,
+  mutate,
 }: NotificationModalContentProps) {
   return (
     <>
@@ -43,7 +49,11 @@ export function NotificationModalContent({
               setFilter([...keys][0] as NotificationFilter);
             }}
           />
-          <MarkAllAsReadButton />
+          <MarkAllAsReadButton
+            guestMode={guestMode}
+            markAsReadAction={markAsReadAction}
+            mutate={mutate}
+          />
         </NotificationModalActions>
 
         {notificationList}

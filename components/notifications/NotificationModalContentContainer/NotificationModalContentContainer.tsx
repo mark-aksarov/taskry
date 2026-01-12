@@ -18,6 +18,7 @@ import { NotificationModalContent } from "../NotificationModalContent";
 import { NotificationEmptySection } from "../NotificationEmptySection";
 import { NotificationsDTO } from "@/lib/data/notification/notification.dto";
 import { deleteNotification } from "@/lib/actions/notification/deleteNotification";
+import { markNotificationsAsRead } from "@/lib/actions/notification/markNotificationsAsRead";
 
 interface NotificationModalContentContainerProps {
   guestMode?: boolean;
@@ -48,6 +49,9 @@ export function NotificationModalContentContainer({
 
   return (
     <NotificationModalContent
+      guestMode={guestMode}
+      markAsReadAction={markNotificationsAsRead}
+      mutate={mutate}
       notificationList={
         <NotificationList>
           {items.map((notification) => {
@@ -82,6 +86,7 @@ export function NotificationModalContentContainer({
                     isRead={notification.isRead}
                     guestMode={guestMode}
                     deleteAction={deleteNotification}
+                    markAsReadAction={markNotificationsAsRead}
                     mutate={mutate}
                   />
                 }

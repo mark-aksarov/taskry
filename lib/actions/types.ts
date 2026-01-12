@@ -29,3 +29,5 @@ export interface UpdateTaskStatusesPayload {
   ids: number[];
   nextStatus: TaskStatus;
 }
+
+export type MarkAsReadPayload = number[] | null;

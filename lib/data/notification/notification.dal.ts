@@ -6,10 +6,14 @@ import {
   NotificationType,
 } from "@/generated/prisma/client";
 
+import {
+  canDeleteNotification,
+  canMarkNotificationAsRead,
+} from "../user/user.dal";
+
 import { cache } from "react";
 import prisma from "@/lib/prisma";
 import { AccessDeniedError } from "../utils/error";
-import { canDeleteNotification } from "../user/user.dal";
 import { verifySession } from "@/lib/data/utils/verifySession";
 
 export const getAllNotifications = cache(
@@ -119,6 +123,32 @@ export const deleteNotification = async (id: number) => {
       recipientId,
     },
   });
+};
+
+export const markNotificationsAsRead = async (ids: number[] | null) => {
+  const {
+    user: { id: recipientId, workspaceId },
+  } = await verifySession();
+
+  const canMarkAsRead = await canMarkNotificationAsRead();
+  if (!canMarkAsRead) {
+    throw new AccessDeniedError(
+      "You do not have permission to mark notifications as read.",
+    );
+  }
+
+  const result = await prisma.notification.updateMany({
+    where: {
+      ...(ids ? { id: { in: ids } } : {}),
+      workspaceId,
+      recipientId,
+    },
+    data: {
+      isRead: true,
+    },
+  });
+
+  return result;
 };
 
 /**
