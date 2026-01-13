@@ -1,0 +1,28 @@
+{
+  "SearchListItem": {
+    "deadlineOn": "Срок до {date}"
+  },
+
+  "SearchToggleButtonGroup": {
+    "users": "Пользователи",
+    "tasks": "Задачи",
+    "projects": "Проекты"
+  },
+
+  "SearchModalTriggerDesktop": {
+    "label": "Поиск"
+  },
+
+  "SearchModalTriggerMobile": {
+    "ariaLabel": "Поиск"
+  },
+
+  "SearchEmptySection": {
+    "heading": "Ничего не найдено",
+    "description": "По вашему запросу нет результатов. Попробуйте изменить формулировку или проверить орфографию."
+  },
+
+  "SearchModal": {
+    "dialogHeading": "Результаты поиска"
+  }
+}

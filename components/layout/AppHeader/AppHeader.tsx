@@ -1,10 +1,10 @@
-import { Button } from "@/components/ui";
-import { Search } from "lucide-react";
 import { ProfileLink } from "../ProfileLink";
 import { AppHeaderTitle } from "./AppHeaderTitle";
-import { AppHeaderSearchForm } from "./AppHeaderSearchForm";
+import { SearchModal } from "@/components/search/SearchModal";
 import { AppHeaderLangMenuTrigger } from "./AppHeaderLangMenuTrigger";
 import { AppHeaderThemeToggleButton } from "./AppHeaderThemeToggleButton";
+import { SearchModalTriggerMobile } from "@/components/search/SearchModalTriggerMobile";
+import { SearchModalTriggerDesktop } from "@/components/search/SearchModalTriggerDesktop";
 import { NotificationModalTrigger } from "@/components/notifications/NotificationModalTrigger";
 
 interface AppHeaderProps {
@@ -24,6 +24,8 @@ export const AppHeader = ({
     <NotificationModalTrigger guestMode={guestMode} />
   );
 
+  const searchModal = <SearchModal />;
+
   return (
     <>
       <header className="sticky top-0 z-1 border-b border-gray-300 bg-gray-100 py-4 text-black max-md:px-4 md:px-6 dark:border-gray-600 dark:bg-gray-900 dark:text-white">
@@ -35,7 +37,7 @@ export const AppHeader = ({
             </div>
           }
           <div className="flex flex-auto items-center justify-end gap-4">
-            <AppHeaderSearchForm />
+            <SearchModalTriggerDesktop modal={searchModal} />
             {notificationModalTrigger}
 
             <AppHeaderThemeToggleButton className={buttonClasses} />
@@ -48,12 +50,8 @@ export const AppHeader = ({
         <div className="flex items-center justify-between md:hidden">
           <ProfileLink />
           <div className="flex items-center gap-3">
-            <Button
-              aria-label="theme"
-              variant="ghost"
-              iconLeft={
-                <Search size={16} strokeWidth={1.5} absoluteStrokeWidth />
-              }
+            <SearchModalTriggerMobile
+              modal={searchModal}
               className={buttonClasses}
             />
             {notificationModalTrigger}

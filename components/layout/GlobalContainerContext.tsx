@@ -33,6 +33,7 @@ export interface GlobalContainerContextType {
   UserDetailContainer?: React.ComponentType<{
     userId: string;
   }>;
+  SearchContainer?: React.ComponentType;
 }
 
 export const GlobalContainerContext =

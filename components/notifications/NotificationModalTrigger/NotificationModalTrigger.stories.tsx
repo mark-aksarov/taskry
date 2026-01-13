@@ -18,7 +18,7 @@ export const Default = {
   args: {},
 } satisfies Story;
 
-export const WithNotification = {
+export const WithEmptySection = {
   decorators: [
     (Story) => (
       <GlobalContainerProvider

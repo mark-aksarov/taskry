@@ -12,17 +12,9 @@ import { useTranslations } from "next-intl";
 const searchInputStyles = tv({
   extend: baseSearchInputStyles,
   base: "rounded-full bg-white py-3 dark:bg-gray-800",
-  compoundVariants: [
-    {
-      isDisabled: false,
-      isFocused: false,
-      isInvalid: false,
-      className: "border-white dark:border-gray-900",
-    },
-  ],
 });
 
-export const AppHeaderSearchForm = () => {
+export const SearchForm = () => {
   const t = useTranslations("layout.AppHeader.searchForm");
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -32,7 +24,7 @@ export const AppHeaderSearchForm = () => {
   };
 
   return (
-    <RACForm onSubmit={handleSubmit} className="max-w-[360px] flex-auto">
+    <RACForm onSubmit={handleSubmit} className="w-full p-4 pb-0">
       <SearchField
         aria-label={t("ariaLabel")}
         placeholder={t("placeholder")}

@@ -1,6 +1,5 @@
-import { twMerge } from "tailwind-merge";
 import { UserIcon } from "../icons/UserIcon";
-import { ImageContainer } from "./ImageContainer";
+import { IconContainer } from "./IconContainer";
 
 interface UnknownUserProps {
   className?: string;
@@ -9,13 +8,8 @@ interface UnknownUserProps {
 
 export function UnknownUser({ className, iconSize = 20 }: UnknownUserProps) {
   return (
-    <ImageContainer
-      className={twMerge(
-        "flex items-center justify-center text-gray-400 dark:text-gray-500",
-        className,
-      )}
-    >
+    <IconContainer className={className}>
       <UserIcon size={iconSize} />
-    </ImageContainer>
+    </IconContainer>
   );
 }

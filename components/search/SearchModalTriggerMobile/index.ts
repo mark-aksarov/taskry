@@ -1,0 +1,1 @@
+export { SearchModalTriggerMobile } from "./SearchModalTriggerMobile";

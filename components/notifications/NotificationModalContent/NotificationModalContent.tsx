@@ -6,6 +6,7 @@ import { NotificationModalActions } from "./NotificationModalActions";
 import { ActionFn, ActionState, MarkAsReadPayload } from "@/lib/actions/types";
 import { NotificationModalContentStatus } from "./NotificationModalContentStatus";
 import { NotificationFilterToggleButtonGroup } from "../NotificationFilterToggleButtonGroup";
+import { ModalPagination } from "@/components/common/ModalPagination";
 
 interface NotificationModalContentProps {
   guestMode?: boolean;
@@ -60,17 +61,13 @@ export function NotificationModalContent({
       </DialogBody>
 
       {totalPages > 1 && (
-        <DialogFooter className="justify-between">
-          <NotificationModalContentStatus
+        <DialogFooter>
+          <ModalPagination
             page={page}
             pageSize={pageSize}
             totalCount={totalCount}
-          />
-          <Pagination
-            page={page}
             totalPages={totalPages}
-            onChange={(p) => setPage(p)}
-            showPageItems={false}
+            setPage={setPage}
           />
         </DialogFooter>
       )}

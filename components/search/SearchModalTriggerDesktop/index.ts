@@ -1,0 +1,1 @@
+export { SearchModalTriggerDesktop } from "./SearchModalTriggerDesktop";

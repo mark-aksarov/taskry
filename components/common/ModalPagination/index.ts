@@ -1,0 +1,1 @@
+export { ModalPagination } from "./ModalPagination";

@@ -14,7 +14,7 @@ import { Bell } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { ResponsiveModal } from "@/components/common/ResponsiveModal";
 import { useGlobalContainer } from "@/components/layout/GlobalContainerContext";
-import { NotificationModalContentSkeleton } from "../NotificationModalContent/NotificationModalContentSkeleton";
+import { NotificationModalContentSkeleton } from "../NotificationModalContent";
 
 interface NotificationModalTriggerProps {
   guestMode?: boolean;
