@@ -7,13 +7,14 @@ import {
 
 import {
   createTaskAddedNotifications,
-  createTaskDeadlineChangedNotifications,
   createTaskDeletedNotifications,
   createTaskStatusChangedNotifications,
+  createTaskDeadlineChangedNotifications,
 } from "../notification/notification.dal";
 
 import { cache } from "react";
 import prisma from "@/lib/prisma";
+import { isSameDay } from "date-fns";
 import { TaskFilters } from "@/lib/types";
 import { buildDateWhere } from "../utils/dateWhere";
 import { verifySession } from "../utils/verifySession";
@@ -21,7 +22,6 @@ import { AccessDeniedError, DomainRuleError } from "../utils/error";
 import { UpdateTaskInputDTO, CreateTaskInputDTO } from "./task.dto";
 import { ALLOWED_TASK_STATUSES_BY_PROJECT } from "../utils/statusUtils";
 import { Prisma, ProjectStatus, TaskStatus } from "@/generated/prisma/client";
-import { isSameDay } from "date-fns";
 
 export const getTask = cache(
   async <T extends Prisma.TaskSelect>(id: number, select: T) => {
