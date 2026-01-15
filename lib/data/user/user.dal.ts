@@ -138,7 +138,23 @@ export const getUser = cache(
     });
   },
 );
+
 export const getAllUsers = cache(
+  async <T extends Prisma.UserSelect>({ select }: { select: T }) => {
+    const {
+      user: { workspaceId },
+    } = await verifySession();
+
+    let where = { workspaceId };
+
+    return await prisma.user.findMany({
+      where,
+      select,
+    });
+  },
+);
+
+export const getPaginatedUsers = cache(
   async <T extends Prisma.UserSelect>({
     page,
     pageSize,
@@ -166,14 +182,23 @@ export const getAllUsers = cache(
       };
 
     const orderBy = sort ? orderByMapping[sort] : undefined;
+    const where = buildUserWhereClause(workspaceId, filters);
 
-    return await prisma.user.findMany({
-      where: buildUserWhereClause(workspaceId, filters),
-      orderBy,
-      skip,
-      take,
-      select,
-    });
+    const [items, totalCount] = await prisma.$transaction([
+      prisma.user.findMany({
+        where,
+        orderBy,
+        skip,
+        take,
+        select,
+      }),
+      prisma.user.count({ where }),
+    ]);
+
+    return {
+      items,
+      totalCount,
+    };
   },
 );
 
@@ -209,6 +234,13 @@ export function buildUserWhereClause(
 
   return {
     workspaceId,
+
+    ...(filters.query && {
+      OR: [
+        { fullName: { contains: filters.query, mode: "insensitive" as const } },
+      ],
+    }),
+
     ...(filters.hasNoActiveTasks && {
       assignedTasks: { none: { status: TaskStatus.active } },
     }),

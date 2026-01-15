@@ -39,6 +39,21 @@ export const getTask = cache(
 );
 
 export const getAllTasks = cache(
+  async <T extends Prisma.TaskSelect>({ select }: { select: T }) => {
+    const {
+      user: { workspaceId },
+    } = await verifySession();
+
+    let where = { workspaceId };
+
+    return await prisma.task.findMany({
+      where,
+      select,
+    });
+  },
+);
+
+export const getPaginatedTasks = cache(
   async <T extends Prisma.TaskSelect>({
     page,
     pageSize,
@@ -46,9 +61,9 @@ export const getAllTasks = cache(
     filters,
     select,
   }: {
-    page: number;
-    pageSize: number;
-    sort: string;
+    page?: number;
+    pageSize?: number;
+    sort?: string;
     filters?: TaskFilters;
     select: T;
   }) => {
@@ -68,14 +83,23 @@ export const getAllTasks = cache(
       };
 
     const orderBy = sort ? orderByMapping[sort] : undefined;
+    const where = buildTaskWhereClause(userId, workspaceId, filters);
 
-    return await prisma.task.findMany({
-      where: buildTaskWhereClause(userId, workspaceId, filters),
-      orderBy,
-      skip,
-      take,
-      select,
-    });
+    const [items, totalCount] = await prisma.$transaction([
+      prisma.task.findMany({
+        where,
+        orderBy,
+        skip,
+        take,
+        select,
+      }),
+      prisma.task.count({ where }),
+    ]);
+
+    return {
+      items,
+      totalCount,
+    };
   },
 );
 
@@ -315,13 +339,20 @@ export function buildTaskWhereClause(
   if (!filters) return { workspaceId };
 
   const datesWhere = buildDateWhere({
-    quick: filters.deadline as any,
+    quick: filters.deadline,
     dateStart: filters.dateStart,
     dateEnd: filters.dateEnd,
   });
 
   return {
     workspaceId,
+
+    ...(filters.query && {
+      OR: [
+        { title: { contains: filters.query, mode: "insensitive" as const } },
+      ],
+    }),
+
     ...(filters.onlyMyTasks && { assigneeId: userId }),
     ...(filters.status?.length && { status: { in: filters.status } }),
     ...(filters.category?.length && { categoryId: { in: filters.category } }),

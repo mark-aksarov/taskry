@@ -28,7 +28,7 @@ export const WithEmptySection = {
     (Story) => (
       <GlobalContainerProvider
         value={{
-          NotificationModalContentContainer: () => <SearchEmptySection />,
+          UsersSearchContainer: () => <SearchEmptySection />,
         }}
       >
         <Story />

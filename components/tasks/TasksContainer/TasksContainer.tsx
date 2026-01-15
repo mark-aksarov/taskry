@@ -9,7 +9,6 @@ import { TaskGrid } from "../TaskGrid";
 import { TaskFilters } from "@/lib/types";
 import { TaskListItem } from "../TaskListItem";
 import { TaskGridItem } from "../TaskGridItem";
-import { getTaskCount } from "@/lib/data/task/task.dal";
 import { getTaskList } from "@/lib/data/task/task.service";
 import { TaskListItemDTO } from "@/lib/data/task/task.dto";
 import { deleteTasks } from "@/lib/actions/task/deleteTasks";
@@ -32,8 +31,12 @@ export async function TasksContainer({
   sort,
   filters,
 }: TasksContainerProps) {
-  const tasks = await getTaskList({ page, pageSize, sort, filters });
-  const count = await getTaskCount(filters);
+  const { items: tasks, totalCount } = await getTaskList({
+    page,
+    pageSize,
+    sort,
+    filters,
+  });
 
   const canDelete = await canDeleteTask();
   const canUpdate = await canUpdateTask();
@@ -115,7 +118,7 @@ export async function TasksContainer({
       }
       page={page}
       pageSize={pageSize}
-      totalPages={Math.ceil(count / pageSize)}
+      totalPages={Math.ceil(totalCount / pageSize)}
     />
   );
 }

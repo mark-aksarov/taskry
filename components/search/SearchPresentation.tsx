@@ -1,27 +1,27 @@
 import { DialogBody, DialogFooter } from "../ui";
-import { SearchForm } from "./SearchForm";
 
 export interface SearchPresentationProps {
-  toggleButtonGroup: React.ReactNode;
-  searchList: React.ReactNode;
+  searchField: React.ReactNode;
+  searchToggleButtonGroup: React.ReactNode;
+  searchResult: React.ReactNode;
   pagination: React.ReactNode;
   totalPages: number;
 }
 
 export function SearchPresentation({
-  toggleButtonGroup,
-  searchList,
+  searchField,
+  searchToggleButtonGroup,
+  searchResult,
   pagination,
   totalPages,
 }: SearchPresentationProps) {
   return (
     <>
       <DialogBody className="p-0!">
-        <SearchForm />
-        {toggleButtonGroup}
-        {searchList}
+        <div className="w-full p-4 pb-0">{searchField}</div>
+        {searchToggleButtonGroup}
+        {searchResult}
       </DialogBody>
-
       {totalPages > 1 && <DialogFooter>{pagination}</DialogFooter>}
     </>
   );

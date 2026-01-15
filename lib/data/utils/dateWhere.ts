@@ -15,9 +15,6 @@ interface BuildDateWhereParams {
   now?: Date;
 }
 
-/**
- * Возвращает Prisma-style фильтр по дате
- */
 export function buildDateWhere({
   quick,
   dateStart,

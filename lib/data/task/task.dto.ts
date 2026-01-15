@@ -71,6 +71,11 @@ export interface TaskDetailDTO {
   commentsCount: number;
 }
 
+export interface TaskListDTO {
+  items: TaskListItemDTO[];
+  totalCount: number;
+}
+
 export interface TaskListItemDTO {
   id: number;
   title: string;
@@ -96,4 +101,15 @@ export interface TaskListItemDTO {
     done: number;
   };
   commentsCount: number;
+}
+
+export interface TaskSearchDTO {
+  items: TaskSearchItemDTO[];
+  totalCount: number;
+}
+
+export interface TaskSearchItemDTO {
+  id: number;
+  title: string;
+  deadline: Date;
 }

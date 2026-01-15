@@ -18,8 +18,5 @@ export type Story = StoryObj<typeof meta>;
 export const Default = {
   args: {
     selectedKeys: ["users"],
-    totalUsersCount: 10,
-    totalTasksCount: 15,
-    totalProjectsCount: 5,
   },
 } satisfies Story;

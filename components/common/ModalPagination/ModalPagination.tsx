@@ -1,7 +1,7 @@
 import { Pagination } from "../Pagination";
 import { NotificationModalContentStatus } from "@/components/notifications/NotificationModalContent";
 
-interface ModalPaginationProps {
+export interface ModalPaginationProps {
   page: number;
   pageSize: number;
   totalPages: number;

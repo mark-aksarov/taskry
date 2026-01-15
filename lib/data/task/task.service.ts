@@ -2,11 +2,12 @@ import {
   TaskDetailDTO,
   TaskSummaryDTO,
   TaskFormDataDTO,
-  TaskListItemDTO,
+  TaskSearchDTO,
+  TaskListDTO,
 } from "./task.dto";
 
 import { TaskFilters } from "@/lib/types";
-import { getAllTasks, getTask } from "./task.dal";
+import { getPaginatedTasks, getTask } from "./task.dal";
 
 export const getTaskDetail = async (
   id: number,
@@ -129,8 +130,8 @@ export const getTaskList = async ({
   pageSize: number;
   sort: string;
   filters?: TaskFilters;
-}): Promise<TaskListItemDTO[]> => {
-  const tasks = await getAllTasks({
+}): Promise<TaskListDTO> => {
+  const { items: tasks, totalCount } = await getPaginatedTasks({
     page,
     pageSize,
     sort,
@@ -175,26 +176,30 @@ export const getTaskList = async ({
     },
   });
 
-  return tasks.map((task) => ({
-    id: task.id,
-    title: task.title,
-    status: task.status,
-    deadline: task.deadline ?? undefined,
-    assignee: task.assignee
-      ? {
-          id: task.assignee.id,
-          fullName: task.assignee.fullName,
-          imageUrl: task.assignee.imageUrl ?? undefined,
-        }
-      : undefined,
-    project: task.project,
-    category: task.category,
-    commentsCount: task._count.comments,
-    subtasks: {
-      total: task._count.subtasks,
-      done: task.subtasks.filter((s) => s.isDone).length,
-    },
-  }));
+  return {
+    items: tasks.map((task) => ({
+      id: task.id,
+      title: task.title,
+      status: task.status,
+      deadline: task.deadline ?? undefined,
+      assignee: task.assignee
+        ? {
+            id: task.assignee.id,
+            fullName: task.assignee.fullName,
+            imageUrl: task.assignee.imageUrl ?? undefined,
+          }
+        : undefined,
+      project: task.project,
+      category: task.category,
+      commentsCount: task._count.comments,
+      subtasks: {
+        total: task._count.subtasks,
+        done: task.subtasks.filter((s) => s.isDone).length,
+      },
+    })),
+
+    totalCount,
+  };
 };
 
 export const getTaskSummary = async (
@@ -212,5 +217,36 @@ export const getTaskSummary = async (
   return {
     id: task.id,
     title: task.title,
+  };
+};
+
+export const searchTasks = async ({
+  query,
+  page,
+  pageSize,
+}: {
+  query?: string;
+  page: number;
+  pageSize: number;
+}): Promise<TaskSearchDTO> => {
+  const { items, totalCount } = await getPaginatedTasks({
+    page,
+    pageSize,
+    select: {
+      id: true,
+      title: true,
+      deadline: true,
+    },
+    filters: { query },
+  });
+
+  return {
+    items: items.map((p) => ({
+      id: p.id,
+      title: p.title,
+      deadline: p.deadline,
+    })),
+
+    totalCount,
   };
 };

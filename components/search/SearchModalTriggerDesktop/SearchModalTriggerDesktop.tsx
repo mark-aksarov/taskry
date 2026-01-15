@@ -19,7 +19,7 @@ export function SearchModalTriggerDesktop({
 
   return (
     <RACDialogTrigger>
-      <RACButton className={styles}>
+      <RACButton data-test="search-modal-trigger" className={styles}>
         {t("label")}
         <Search
           size={18}

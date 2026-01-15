@@ -11,7 +11,6 @@ import {
 
 import { UserTaskList } from "../UserTaskList";
 import { UserTaskListItem } from "../UserTaskListItem";
-import { getTaskCount } from "@/lib/data/task/task.dal";
 import { getTaskList } from "@/lib/data/task/task.service";
 import { deleteTasks } from "@/lib/actions/task/deleteTasks";
 import { updateTaskStatuses } from "@/lib/actions/task/updateTaskStatuses";
@@ -36,14 +35,12 @@ export async function UserTasksContainer({
     project: [],
     assignee: [userId],
   };
-  const tasks = await getTaskList({
+  const { items: tasks, totalCount } = await getTaskList({
     page,
     pageSize,
     sort,
     filters,
   });
-
-  const count = await getTaskCount(filters);
 
   const canDelete = await canDeleteTask();
   const canUpdate = await canUpdateTask();
@@ -91,7 +88,7 @@ export async function UserTasksContainer({
 
       <EntityContainerPagination
         page={page}
-        totalPages={Math.ceil(count / pageSize)}
+        totalPages={Math.ceil(totalCount / pageSize)}
         pageSize={pageSize}
         className="my-4"
       />

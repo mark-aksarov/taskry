@@ -17,7 +17,9 @@ export function UserFiltersFormPositionCheckboxGroup({
     <CheckboxGroup
       name="position"
       label={t("label")}
-      defaultValue={filters.position.map((p) => p.toString())}
+      defaultValue={
+        filters.position && filters.position.map((p) => p.toString())
+      }
     >
       {positions.map((item) => (
         <Checkbox

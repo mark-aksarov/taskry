@@ -1,7 +1,7 @@
 import { FolderClosed } from "lucide-react";
-import { SearchListItem } from "./SearchListItem";
-import { IconContainer } from "../common/IconContainer";
+import { SearchListItem } from "../SearchListItem";
 import { useFormatter, useTranslations } from "next-intl";
+import { IconContainer } from "@/components/common/IconContainer";
 import { ListItemText, ListItemTitle } from "@/components/common/List";
 
 interface ProjectSearchListItemProps {
@@ -29,6 +29,7 @@ export function ProjectSearchListItem({
 
   return (
     <SearchListItem
+      href={`/projects/${id}`}
       imageSlot={
         <IconContainer className="h-9 w-9">
           <FolderClosed size={16} />

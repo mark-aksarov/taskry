@@ -2,11 +2,16 @@ import {
   ProjectDetailDTO,
   ProjectSummaryDTO,
   ProjectFormDataDTO,
-  ProjectListItemDTO,
+  ProjectListDTO,
+  ProjectSearchDTO,
 } from "./project.dto";
 
 import { ProjectFilters } from "@/lib/types";
-import { getAllProjects, getProject } from "./project.dal";
+import {
+  getAllProjects,
+  getPaginatedProjects,
+  getProject,
+} from "./project.dal";
 
 export const getProjectDetail = async (
   id: number,
@@ -117,8 +122,8 @@ export const getProjectList = async ({
   pageSize: number;
   sort: string;
   filters?: ProjectFilters;
-}): Promise<ProjectListItemDTO[]> => {
-  const projects = await getAllProjects({
+}): Promise<ProjectListDTO> => {
+  const { items: projects, totalCount } = await getPaginatedProjects({
     page,
     pageSize,
     sort,
@@ -168,48 +173,83 @@ export const getProjectList = async ({
     },
   });
 
-  return projects.map((p) => {
-    const totalTasks = p.tasks.length;
-    const completedTasks = p.tasks.filter(
-      (t: any) => t.status === "completed",
-    ).length;
+  return {
+    items: projects.map((p) => {
+      const totalTasks = p.tasks.length;
+      const completedTasks = p.tasks.filter(
+        (t: any) => t.status === "completed",
+      ).length;
 
-    return {
+      return {
+        id: p.id,
+        title: p.title,
+        status: p.status,
+        deadline: p.deadline,
+        creator: p.creator
+          ? {
+              id: p.creator.id,
+              fullName: p.creator.fullName,
+              imageUrl: p.creator.imageUrl ?? undefined,
+            }
+          : undefined,
+        customer: p.customer
+          ? {
+              id: p.customer.id,
+              fullName: p.customer.fullName,
+              imageUrl: p.customer.imageUrl ?? undefined,
+              company: p.customer.company
+                ? {
+                    id: p.customer.company.id,
+                    name: p.customer.company.name,
+                  }
+                : undefined,
+            }
+          : undefined,
+        category: {
+          id: p.category.id,
+          name: p.category.name,
+        },
+        commentsCount: p._count.comments,
+        tasks: {
+          total: totalTasks,
+          completed: completedTasks,
+        },
+      };
+    }),
+
+    totalCount,
+  };
+};
+
+export const searchProjects = async ({
+  query,
+  page,
+  pageSize,
+}: {
+  query?: string;
+  page: number;
+  pageSize: number;
+}): Promise<ProjectSearchDTO> => {
+  const { items, totalCount } = await getPaginatedProjects({
+    page,
+    pageSize,
+    select: {
+      id: true,
+      title: true,
+      deadline: true,
+    },
+    filters: { query },
+  });
+
+  return {
+    items: items.map((p) => ({
       id: p.id,
       title: p.title,
-      status: p.status,
       deadline: p.deadline,
-      creator: p.creator
-        ? {
-            id: p.creator.id,
-            fullName: p.creator.fullName,
-            imageUrl: p.creator.imageUrl ?? undefined,
-          }
-        : undefined,
-      customer: p.customer
-        ? {
-            id: p.customer.id,
-            fullName: p.customer.fullName,
-            imageUrl: p.customer.imageUrl ?? undefined,
-            company: p.customer.company
-              ? {
-                  id: p.customer.company.id,
-                  name: p.customer.company.name,
-                }
-              : undefined,
-          }
-        : undefined,
-      category: {
-        id: p.category.id,
-        name: p.category.name,
-      },
-      commentsCount: p._count.comments,
-      tasks: {
-        total: totalTasks,
-        completed: completedTasks,
-      },
-    };
-  });
+    })),
+
+    totalCount,
+  };
 };
 
 export const getProjectSummaries = async (): Promise<ProjectSummaryDTO[]> => {

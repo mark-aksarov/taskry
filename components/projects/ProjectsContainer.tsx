@@ -3,7 +3,6 @@ import { ProjectGrid } from "./ProjectGrid";
 import { ProjectFilters } from "@/lib/types";
 import { ProjectListItem } from "./ProjectListItem";
 import { ProjectGridItem } from "./ProjectGridItem";
-import { getProjectCount } from "@/lib/data/project/project.dal";
 import { getProjectList } from "@/lib/data/project/project.service";
 import { ProjectListItemDTO } from "@/lib/data/project/project.dto";
 import { deleteProjects } from "@/lib/actions/project/deleteProjects";
@@ -24,8 +23,12 @@ export async function ProjectsContainer({
   sort,
   filters,
 }: ProjectsContainerProps) {
-  const projects = await getProjectList({ page, pageSize, sort, filters });
-  const count = await getProjectCount(filters);
+  const { items: projects, totalCount } = await getProjectList({
+    page,
+    pageSize,
+    sort,
+    filters,
+  });
 
   const getCommonProps = (project: ProjectListItemDTO) => ({
     id: project.id,
@@ -86,7 +89,7 @@ export async function ProjectsContainer({
           ))}
         </ProjectGrid>
       }
-      totalPages={Math.ceil(count / pageSize)}
+      totalPages={Math.ceil(totalCount / pageSize)}
     />
   );
 }

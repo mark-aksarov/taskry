@@ -2,28 +2,44 @@
 
 import { tv } from "tailwind-variants";
 import { ChevronRight } from "lucide-react";
-import { focusRing, RACButton } from "@/components/ui";
+import { itemStyles, RACLink } from "@/components/ui";
 import { ListItem, ListItemInfo } from "@/components/common/List";
+
+const styles = tv({
+  base: "w-full cursor-pointer outline-none",
+
+  variants: {
+    isHovered: itemStyles.variants.isHovered,
+    isFocusVisible: itemStyles.variants.isFocused,
+    isDisabled: itemStyles.variants.isDisabled,
+    isPressed: {
+      true: "bg-gray-200 dark:bg-gray-700",
+    },
+  },
+});
 
 interface SearchListItemProps {
   imageSlot: React.ReactNode;
   titleSlot: React.ReactNode;
   textSlot: React.ReactNode;
+  href: string;
 }
-
-const styles = tv({
-  extend: focusRing,
-  base: "cursor-poiner pressed:bg-gray-300 dark:pressed:bg-gray-700 w-full bg-white hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-600",
-});
 
 export function SearchListItem({
   titleSlot,
   textSlot,
   imageSlot,
+  href,
 }: SearchListItemProps) {
   return (
-    <RACButton className={(renderProps) => styles({ ...renderProps })}>
-      <ListItem className="rounded-none bg-inherit! pr-3 shadow-none">
+    <RACLink
+      className={(renderProps) => styles({ ...renderProps })}
+      href={href}
+    >
+      <ListItem
+        data-test="search-list-item"
+        className="rounded-none bg-inherit! pr-3 shadow-none"
+      >
         {imageSlot}
         <ListItemInfo>
           {titleSlot}
@@ -36,6 +52,6 @@ export function SearchListItem({
           className="text-black dark:text-white"
         />
       </ListItem>
-    </RACButton>
+    </RACLink>
   );
 }

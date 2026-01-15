@@ -19,6 +19,11 @@ export interface UserDetailDTO {
   };
 }
 
+export interface UserListDTO {
+  items: UserListItemDTO[];
+  totalCount: number;
+}
+
 export interface UserListItemDTO {
   id: string;
   fullName: string;
@@ -30,4 +35,16 @@ export interface UserListItemDTO {
   position?: {
     name: string;
   };
+}
+
+export interface UserSearchDTO {
+  items: UserSearchItemDTO[];
+  totalCount: number;
+}
+
+export interface UserSearchItemDTO {
+  id: string;
+  fullName: string;
+  email: string;
+  imageUrl?: string;
 }

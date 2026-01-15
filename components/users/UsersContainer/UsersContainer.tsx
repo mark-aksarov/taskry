@@ -28,8 +28,12 @@ export async function UsersContainer({
   sort,
   filters,
 }: UsersContainerProps) {
-  const users = await getUserList({ page, pageSize, sort, filters });
-  const count = await getUserCount(filters);
+  const { items: users, totalCount } = await getUserList({
+    page,
+    pageSize,
+    sort,
+    filters,
+  });
 
   const getUserCommonProps = (user: UserListItemDTO) => ({
     id: user.id,
@@ -81,7 +85,7 @@ export async function UsersContainer({
 
       <EntityContainerPagination
         page={page}
-        totalPages={Math.ceil(count / pageSize)}
+        totalPages={Math.ceil(totalCount / pageSize)}
         pageSize={pageSize}
       />
     </EntityPaginationProvider>

@@ -27,6 +27,7 @@ export function UserSearchListItem({
 
   return (
     <SearchListItem
+      href={`/team/${id}`}
       imageSlot={userImg}
       titleSlot={<ListItemTitle>{fullName}</ListItemTitle>}
       textSlot={<ListItemText>{email}</ListItemText>}

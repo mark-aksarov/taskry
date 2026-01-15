@@ -26,6 +26,21 @@ export const getProject = cache(
 );
 
 export const getAllProjects = cache(
+  async <T extends Prisma.ProjectSelect>({ select }: { select: T }) => {
+    const {
+      user: { workspaceId },
+    } = await verifySession();
+
+    let where = { workspaceId };
+
+    return await prisma.project.findMany({
+      where,
+      select,
+    });
+  },
+);
+
+export const getPaginatedProjects = cache(
   async <T extends Prisma.ProjectSelect>({
     page,
     pageSize,
@@ -57,14 +72,23 @@ export const getAllProjects = cache(
     };
 
     const orderBy = sort ? orderByMapping[sort] : undefined;
+    const where = buildProjectWhereClause(workspaceId, filters);
 
-    return await prisma.project.findMany({
-      where: buildProjectWhereClause(workspaceId, filters),
-      orderBy,
-      skip,
-      take,
-      select,
-    });
+    const [items, totalCount] = await prisma.$transaction([
+      prisma.project.findMany({
+        where,
+        orderBy,
+        skip,
+        take,
+        select,
+      }),
+      prisma.project.count({ where }),
+    ]);
+
+    return {
+      items,
+      totalCount,
+    };
   },
 );
 
@@ -216,6 +240,13 @@ export function buildProjectWhereClause(
 
   return {
     workspaceId,
+
+    ...(filters.query && {
+      OR: [
+        { title: { contains: filters.query, mode: "insensitive" as const } },
+      ],
+    }),
+
     ...(filters.noActiveTasks && {
       status: ProjectStatus.active,
       tasks: { none: { status: TaskStatus.active } },

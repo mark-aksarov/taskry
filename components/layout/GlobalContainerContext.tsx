@@ -2,6 +2,14 @@
 
 import { createContext, useContext } from "react";
 
+type SearchContainerType = React.ComponentType<{
+  query: string;
+  page: number;
+  setPage: React.Dispatch<React.SetStateAction<number>>;
+  searchField: React.ReactNode;
+  searchToggleButtonGroup: React.ReactNode;
+}>;
+
 export interface GlobalContainerContextType {
   EditProjectFormContainer?: React.ComponentType<{
     projectId: number;
@@ -33,7 +41,9 @@ export interface GlobalContainerContextType {
   UserDetailContainer?: React.ComponentType<{
     userId: string;
   }>;
-  SearchContainer?: React.ComponentType;
+  UsersSearchContainer?: SearchContainerType;
+  TasksSearchContainer?: SearchContainerType;
+  ProjectsSearchContainer?: SearchContainerType;
 }
 
 export const GlobalContainerContext =

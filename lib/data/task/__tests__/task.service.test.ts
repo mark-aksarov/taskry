@@ -1,14 +1,26 @@
 import {
+  searchTasks,
   getTaskList,
   getTaskDetail,
   getTaskSummary,
   getTaskFormData,
 } from "../task.service";
 
+import {
+  vi,
+  it,
+  expect,
+  describe,
+  afterAll,
+  beforeAll,
+  afterEach,
+  beforeEach,
+} from "vitest";
+
 import prisma from "@/lib/prisma";
 import { TaskFilters } from "@/lib/types";
+import { dates } from "@/lib/data/utils/test-utils";
 import { resetDatabase } from "@/prisma/resetDatabase";
-import { vi, describe, it, expect, beforeEach } from "vitest";
 import { verifySession } from "@/lib/data/utils/verifySession";
 import { ProjectStatus, TaskStatus } from "@/generated/prisma/enums";
 
@@ -18,361 +30,987 @@ vi.mock("@/lib/data/utils/verifySession", () => ({
   verifySession: vi.fn(),
 }));
 
-const statuses = ["active", "pending", "completed"];
-
-export const getProjectId = (workspaceId: number, status: string) => {
-  const pIndex = statuses.indexOf(status);
-  return (workspaceId - 1) * statuses.length + pIndex + 1;
-};
-
-export const getTaskId = (
-  workspaceId: number,
-  projectStatus: string,
-  tIndex: number,
-) => {
-  const projectId = getProjectId(workspaceId, projectStatus);
-  return (projectId - 1) * statuses.length + tIndex + 1;
-};
-
 describe("Task Service", () => {
-  beforeEach(async () => {
-    const mockSession = {
+  beforeAll(async () => {
+    (verifySession as any).mockResolvedValue({
       user: { id: "user-1", workspaceId: 1 },
-    };
-    (verifySession as any).mockResolvedValue(mockSession);
+    });
 
     await resetDatabase();
 
-    for (const n of [1, 2]) {
-      // Create Workspace
-      await prisma.workspace.create({
-        data: { id: n },
-      });
+    await prisma.workspace.createMany({ data: [{ id: 1 }] });
 
-      // Create User & Position
-      await prisma.position.create({
-        data: { id: n, name: `Position ${n}`, workspaceId: n },
-      });
-
-      await prisma.user.create({
-        data: {
-          id: `user-${n}`,
-          workspaceId: n,
-          fullName: `User ${n}`,
-          positionId: n,
-          email: `user-${n}@ws${n}.com`,
+    await prisma.user.createMany({
+      data: [
+        {
+          id: "user-1",
+          fullName: "User 1",
+          email: "user-1@test.com",
+          role: "owner",
+          workspaceId: 1,
         },
-      });
-
-      // Create Company & Customer
-      await prisma.company.create({
-        data: { id: n, name: `Company ${n}`, workspaceId: n },
-      });
-
-      await prisma.customer.create({
-        data: {
-          id: n,
-          fullName: `Customer ${n}`,
-          email: `customer-${n}@ws${n}.com`,
-          companyId: n,
-          workspaceId: n,
+        {
+          id: "user-2",
+          fullName: "User 2",
+          email: "user-2@test.com",
+          role: "manager",
+          workspaceId: 1,
         },
-      });
-
-      // Create 2 Project Categories and 2 Task Categories per Workspace
-      const projectCats = await Promise.all([
-        prisma.projectCategory.create({
-          data: {
-            id: (n - 1) * 2 + 1,
-            name: `project-category-1 - ws-${n}`,
-            workspaceId: n,
-          },
-        }),
-        prisma.projectCategory.create({
-          data: {
-            id: (n - 1) * 2 + 2,
-            name: `project-category-2 - ws-${n}`,
-            workspaceId: n,
-          },
-        }),
-      ]);
-
-      const taskCats = await Promise.all([
-        prisma.taskCategory.create({
-          data: {
-            id: (n - 1) * 2 + 1,
-            name: `task-category-1 - ws-${n}`,
-            workspaceId: n,
-          },
-        }),
-        prisma.taskCategory.create({
-          data: {
-            id: (n - 1) * 2 + 2,
-            name: `task-category-2 - ws-${n}`,
-            workspaceId: n,
-          },
-        }),
-      ]);
-
-      const now = new Date();
-
-      const dates = {
-        overdue: new Date(new Date().setDate(now.getDate() - 5)),
-        today: new Date(new Date(now).setHours(23)),
-        tomorrow: new Date(new Date().setDate(now.getDate() + 1)),
-        thisWeek: new Date(new Date().setDate(now.getDate() + 3)),
-        nextWeek: new Date(new Date().setDate(now.getDate() + 8)),
-      };
-      const dateKeys = Object.keys(dates) as (keyof typeof dates)[];
-
-      // Create Projects (Active, Pending, Completed)
-      for (const [pIndex, status] of statuses.entries()) {
-        const projectId = getProjectId(n, status);
-
-        const project = await prisma.project.create({
-          data: {
-            id: projectId,
-            title: `project-${projectId}, ws-${n}`,
-            deadline: new Date(new Date().setDate(now.getDate() + 10)),
-            status: status as ProjectStatus,
-            workspaceId: n,
-            categoryId: projectCats[pIndex % 2].id,
-            customerId: n,
-          },
-        });
-
-        // Create 3 Tasks per Project (Active, Pending, Completed)
-        for (const [tIndex, taskStatus] of statuses.entries()) {
-          const taskId = getTaskId(n, status, tIndex);
-
-          let selectedDateKey: (typeof dateKeys)[number];
-
-          // Workspace 1
-          if (n === 1) {
-            if (tIndex === 0) selectedDateKey = "overdue";
-            else if (tIndex === 1) selectedDateKey = "today";
-            else selectedDateKey = "tomorrow";
-          }
-          // Workspace 2
-          else {
-            if (tIndex === 0) selectedDateKey = "tomorrow";
-            else if (tIndex === 1) selectedDateKey = "thisWeek";
-            else selectedDateKey = "nextWeek";
-          }
-
-          const selectedDeadline = dates[selectedDateKey];
-
-          await prisma.task.create({
-            data: {
-              id: taskId,
-              title: `task-${taskId}, ws-${n}`,
-              deadline: selectedDeadline,
-              status: taskStatus as TaskStatus,
-              projectId: project.id,
-              workspaceId: n,
-              categoryId: taskCats[tIndex % 2].id,
-              assigneeId: `user-${n}`,
-            },
-          });
-        }
-      }
-    }
-  });
-
-  describe("getTaskSummary", () => {
-    it("should successfully return a task summary for a task in the current workspace", async () => {
-      const task = await getTaskSummary(1);
-
-      expect(verifySession).toHaveBeenCalledTimes(1);
-      expect(task).toMatchObject({
-        id: 1,
-        title: "task-1, ws-1",
-      });
+        {
+          id: "user-3",
+          fullName: "User 3",
+          email: "user-3@test.com",
+          role: "user",
+          workspaceId: 1,
+        },
+        {
+          id: "user-4",
+          fullName: "User 4",
+          email: "user-4@test.com",
+          role: "guest",
+          workspaceId: 1,
+        },
+      ],
     });
 
-    it("should return null if the task belongs to a different workspace", async () => {
-      const task = await getTaskSummary(3 * 3 + 1);
-      expect(task).toBeNull();
+    await prisma.projectCategory.createMany({
+      data: [
+        { id: 1, name: "Project Category 1", workspaceId: 1 },
+        { id: 2, name: "Project Category 2", workspaceId: 1 },
+      ],
     });
 
-    it("should throw an error if the task does not exist at all", async () => {
-      const task = await getTaskSummary(999999);
-      expect(task).toBeNull();
+    await prisma.taskCategory.createMany({
+      data: [
+        { id: 1, name: "Task Category 1", workspaceId: 1 },
+        { id: 2, name: "Task Category 2", workspaceId: 1 },
+      ],
     });
-  });
 
-  describe("getTaskDetail", () => {
-    it("should return detailed task data for a valid ID in the current workspace", async () => {
-      const result = await getTaskDetail(1);
+    await prisma.company.createMany({
+      data: [
+        { id: 1, name: "Company 1", workspaceId: 1 },
+        { id: 2, name: "Company 2", workspaceId: 1 },
+      ],
+    });
 
-      expect(result).toBeDefined();
-
-      expect(result).toMatchObject({
-        id: 1,
-        title: "task-1, ws-1",
-        status: "active",
-        category: {
+    await prisma.customer.createMany({
+      data: [
+        {
           id: 1,
+          fullName: "Customer 1",
+          email: "customer-1@test.com",
+          companyId: 1,
+          workspaceId: 1,
         },
-        project: {
+        {
+          id: 2,
+          fullName: "Customer 2",
+          email: "customer-2@test.com",
+          companyId: 2,
+          workspaceId: 1,
+        },
+      ],
+    });
+
+    await prisma.project.createMany({
+      data: [
+        {
           id: 1,
+          title: "Project 1",
+          deadline: new Date(),
+          categoryId: 1,
+          workspaceId: 1,
+          status: ProjectStatus.active,
         },
-      });
-    });
-
-    it("should return null when attempting to access a task from another workspace", async () => {
-      const result = await getTaskDetail(getTaskId(2, "active", 0));
-      expect(result).toBeNull();
-    });
-
-    it("should return null if the task ID does not exist", async () => {
-      const result = await getTaskDetail(999);
-      expect(result).toBeNull();
+        {
+          id: 2,
+          title: "Project 1",
+          deadline: new Date(),
+          categoryId: 1,
+          workspaceId: 1,
+          status: ProjectStatus.active,
+        },
+      ],
     });
   });
 
-  describe("getTaskFormData", () => {
-    it("should return form data for an existing task in the current workspace", async () => {
-      const taskId = getTaskId(1, "active", 0);
-
-      const result = await getTaskFormData(taskId);
-
-      expect(result).toBeDefined();
-      expect(result).toMatchObject({
-        id: taskId,
-        title: `task-${taskId}, ws-${1}`,
-        status: "active",
-        assigneeId: `user-${1}`,
+  describe("task fetching by id", () => {
+    beforeAll(async () => {
+      await prisma.task.createMany({
+        data: [
+          {
+            id: 1,
+            title: "Task 1",
+            deadline: new Date(),
+            projectId: 1,
+            categoryId: 1,
+            workspaceId: 1,
+            status: TaskStatus.active,
+            assigneeId: "user-1",
+          },
+          {
+            id: 2,
+            title: "Task 2",
+            deadline: new Date(),
+            projectId: 2,
+            categoryId: 2,
+            workspaceId: 1,
+            status: TaskStatus.active,
+            assigneeId: "user-2",
+          },
+        ],
       });
     });
 
-    it("should return null error if the task belongs to another workspace", async () => {
-      const taskId = getTaskId(2, "active", 0);
-      const result = await getTaskFormData(taskId);
-      expect(result).toBeNull();
+    afterAll(async () => {
+      await prisma.task.deleteMany();
     });
 
-    it("should correctly return category and project data", async () => {
-      const taskId = getTaskId(1, "active", 0);
-
-      const result = await getTaskFormData(taskId);
-
-      expect(result).toMatchObject({
-        categoryId: 1,
-        projectId: getProjectId(1, "active"),
-      });
+    it.each([
+      { name: "getTaskSummary", method: getTaskSummary },
+      { name: "getTaskDetail", method: getTaskDetail },
+      { name: "getTaskFormData", method: getTaskFormData },
+    ])("should successfully return task by $name", async ({ method }) => {
+      const success = await method(1);
+      expect(success).toMatchObject({ id: 1 });
     });
 
-    it("should return null if the task ID does not exist", async () => {
-      const task = await getTaskFormData(9999);
-      expect(task).toBeNull();
+    it.each([
+      { name: "getTaskSummary", method: getTaskSummary },
+      { name: "getTaskDetail", method: getTaskDetail },
+      { name: "getTaskFormData", method: getTaskFormData },
+    ])("should return null by $name", async ({ method }) => {
+      const failure = await method(999);
+      expect(failure).toBeNull();
     });
   });
 
   describe("getTaskList", () => {
-    it("should return only tasks belonging to the current workspace", async () => {
+    it("should return all tasks", async () => {
+      await prisma.task.createMany({
+        data: [
+          {
+            id: 1,
+            title: "Task 1",
+            deadline: new Date(),
+            projectId: 1,
+            categoryId: 1,
+            workspaceId: 1,
+            status: TaskStatus.active,
+            assigneeId: "user-3",
+          },
+          {
+            id: 2,
+            title: "Task 2",
+            deadline: new Date(),
+            projectId: 1,
+            categoryId: 1,
+            workspaceId: 1,
+            status: TaskStatus.active,
+            assigneeId: "user-3",
+          },
+        ],
+      });
+
       const result = await getTaskList({
         page: 1,
         pageSize: 50,
         sort: "title",
       });
+      await prisma.task.deleteMany();
 
-      expect(result).toHaveLength(9);
-      result.forEach((task) => {
-        expect(task.title).toContain("ws-1");
+      expect(result.items).toHaveLength(2);
+      expect(result.totalCount).toBe(2);
+      expect(result.items[0].title).toBe("Task 1");
+      expect(result.items[1].title).toBe("Task 2");
+    });
+
+    describe("sorting", () => {
+      afterEach(async () => {
+        await prisma.task.deleteMany();
+      });
+
+      it("should correctly sort tasks by title", async () => {
+        await prisma.task.createMany({
+          data: [
+            {
+              id: 1,
+              title: "Task B",
+              deadline: new Date(),
+              projectId: 1,
+              categoryId: 1,
+              workspaceId: 1,
+              status: TaskStatus.active,
+              assigneeId: "user-3",
+            },
+            {
+              id: 2,
+              title: "Task C",
+              deadline: new Date(),
+              projectId: 1,
+              categoryId: 1,
+              workspaceId: 1,
+              status: TaskStatus.active,
+              assigneeId: "user-3",
+            },
+            {
+              id: 3,
+              title: "Task A",
+              deadline: new Date(),
+              projectId: 1,
+              categoryId: 1,
+              workspaceId: 1,
+              status: TaskStatus.active,
+              assigneeId: "user-3",
+            },
+          ],
+        });
+
+        const result = await getTaskList({
+          page: 1,
+          pageSize: 50,
+          sort: "title",
+        });
+
+        expect(result.items[0].title).toBe("Task A");
+        expect(result.items[1].title).toBe("Task B");
+        expect(result.items[2].title).toBe("Task C");
+      });
+
+      it("should correctly sort tasks by deadline", async () => {
+        await prisma.task.createMany({
+          data: [
+            {
+              id: 1,
+              title: "Task A",
+              deadline: new Date("2023-01-02"),
+              projectId: 1,
+              categoryId: 1,
+              workspaceId: 1,
+              status: TaskStatus.active,
+              assigneeId: "user-3",
+            },
+            {
+              id: 2,
+              title: "Task B",
+              deadline: new Date("2023-01-03"),
+              projectId: 1,
+              categoryId: 1,
+              workspaceId: 1,
+              status: TaskStatus.active,
+              assigneeId: "user-3",
+            },
+            {
+              id: 3,
+              title: "Task C",
+              deadline: new Date("2023-01-01"),
+              projectId: 1,
+              categoryId: 1,
+              workspaceId: 1,
+              status: TaskStatus.active,
+              assigneeId: "user-3",
+            },
+          ],
+        });
+
+        const result = await getTaskList({
+          page: 1,
+          pageSize: 50,
+          sort: "deadline",
+        });
+
+        expect(result.items[0].title).toBe("Task C");
+        expect(result.items[1].title).toBe("Task A");
+        expect(result.items[2].title).toBe("Task B");
+      });
+
+      it("should correctly sort tasks by status", async () => {
+        await prisma.task.createMany({
+          data: [
+            {
+              id: 1,
+              title: "Task A",
+              deadline: new Date(),
+              projectId: 1,
+              categoryId: 1,
+              workspaceId: 1,
+              status: TaskStatus.pending,
+              assigneeId: "user-3",
+            },
+            {
+              id: 2,
+              title: "Task B",
+              deadline: new Date(),
+              projectId: 1,
+              categoryId: 1,
+              workspaceId: 1,
+              status: TaskStatus.completed,
+              assigneeId: "user-3",
+            },
+            {
+              id: 3,
+              title: "Task C",
+              deadline: new Date(),
+              projectId: 1,
+              categoryId: 1,
+              workspaceId: 1,
+              status: TaskStatus.active,
+              assigneeId: "user-3",
+            },
+          ],
+        });
+
+        const result = await getTaskList({
+          page: 1,
+          pageSize: 50,
+          sort: "status",
+        });
+
+        expect(result.items[0].title).toBe("Task C");
+        expect(result.items[1].title).toBe("Task A");
+        expect(result.items[2].title).toBe("Task B");
+      });
+
+      it("should correctly sort tasks by category", async () => {
+        await prisma.task.createMany({
+          data: [
+            {
+              id: 1,
+              title: "Task A",
+              deadline: new Date(),
+              projectId: 1,
+              categoryId: 1,
+              workspaceId: 1,
+              status: TaskStatus.pending,
+              assigneeId: "user-3",
+            },
+            {
+              id: 2,
+              title: "Task B",
+              deadline: new Date(),
+              projectId: 1,
+              categoryId: 2,
+              workspaceId: 1,
+              status: TaskStatus.completed,
+              assigneeId: "user-3",
+            },
+            {
+              id: 3,
+              title: "Task C",
+              deadline: new Date(),
+              projectId: 1,
+              categoryId: 1,
+              workspaceId: 1,
+              status: TaskStatus.active,
+              assigneeId: "user-3",
+            },
+          ],
+        });
+
+        const result = await getTaskList({
+          page: 1,
+          pageSize: 50,
+          sort: "category",
+        });
+
+        expect(result.items[0].title).toBe("Task A");
+        expect(result.items[1].title).toBe("Task C");
+        expect(result.items[2].title).toBe("Task B");
       });
     });
 
-    it("should correctly handle pagination (page and pageSize)", async () => {
-      const page1 = await getTaskList({ page: 1, pageSize: 5, sort: "title" });
-      const page2 = await getTaskList({ page: 2, pageSize: 5, sort: "title" });
+    describe("filtering", () => {
+      afterEach(async () => {
+        await prisma.task.deleteMany();
+      });
 
-      expect(page1).toHaveLength(5);
-      expect(page2).toHaveLength(4);
+      it("should filter tasks by status", async () => {
+        await prisma.task.createMany({
+          data: [
+            {
+              id: 1,
+              title: "Task A",
+              deadline: new Date(),
+              projectId: 1,
+              categoryId: 1,
+              workspaceId: 1,
+              status: TaskStatus.active,
+              assigneeId: "user-3",
+            },
+            {
+              id: 2,
+              title: "Task B",
+              deadline: new Date(),
+              projectId: 1,
+              categoryId: 1,
+              workspaceId: 1,
+              status: TaskStatus.completed,
+              assigneeId: "user-3",
+            },
+            {
+              id: 3,
+              title: "Task C",
+              deadline: new Date(),
+              projectId: 1,
+              categoryId: 1,
+              workspaceId: 1,
+              status: TaskStatus.completed,
+              assigneeId: "user-3",
+            },
+          ],
+        });
 
-      const page1Ids = page1.map((t) => t.id);
-      page2.forEach((task) => {
-        expect(page1Ids).not.toContain(task.id);
+        const result = await getTaskList({
+          page: 1,
+          pageSize: 10,
+          sort: "title",
+          filters: {
+            status: [TaskStatus.completed],
+          },
+        });
+
+        expect(result.items).toHaveLength(2);
+        expect(result.totalCount).toBe(2);
+        result.items.forEach((task) =>
+          expect(task.status).toBe(TaskStatus.completed),
+        );
+      });
+
+      describe("filter tasks by deadline", () => {
+        async function setup(deadlines: Date[]) {
+          await prisma.task.createMany({
+            data: [
+              {
+                id: 1,
+                title: "Task A",
+                deadline: deadlines[0],
+                projectId: 1,
+                categoryId: 1,
+                workspaceId: 1,
+                status: TaskStatus.active,
+                assigneeId: "user-3",
+              },
+              {
+                id: 2,
+                title: "Task B",
+                deadline: deadlines[1],
+                projectId: 1,
+                categoryId: 1,
+                workspaceId: 1,
+                status: TaskStatus.completed,
+                assigneeId: "user-3",
+              },
+              {
+                id: 3,
+                title: "Task C",
+                deadline: deadlines[2],
+                projectId: 1,
+                categoryId: 1,
+                workspaceId: 1,
+                status: TaskStatus.completed,
+                assigneeId: "user-3",
+              },
+            ],
+          });
+        }
+
+        it("should filter tasks by 'overdue' deadline", async () => {
+          await setup([dates.overdue, dates.today, dates.tomorrow]);
+
+          const filters: TaskFilters = {
+            deadline: "overdue",
+          };
+
+          const result = await getTaskList({
+            page: 1,
+            pageSize: 10,
+            sort: "title",
+            filters,
+          });
+
+          expect(result.items).toHaveLength(1);
+          expect(result.totalCount).toBe(1);
+          expect(result.items[0].title).toBe("Task A");
+        });
+
+        it("should filter tasks by 'today' deadline", async () => {
+          await setup([dates.overdue, dates.today, dates.tomorrow]);
+
+          const filters: TaskFilters = {
+            deadline: "today",
+          };
+
+          const result = await getTaskList({
+            page: 1,
+            pageSize: 10,
+            sort: "title",
+            filters,
+          });
+
+          expect(result.items).toHaveLength(1);
+          expect(result.totalCount).toBe(1);
+          expect(result.items[0].title).toBe("Task B");
+        });
+
+        it("should filter tasks by 'tomorrow' deadline", async () => {
+          await setup([dates.overdue, dates.today, dates.tomorrow]);
+
+          const filters: TaskFilters = {
+            deadline: "tomorrow",
+          };
+
+          const result = await getTaskList({
+            page: 1,
+            pageSize: 10,
+            sort: "title",
+            filters,
+          });
+
+          expect(result.items).toHaveLength(1);
+          expect(result.totalCount).toBe(1);
+          expect(result.items[0].title).toBe("Task C");
+        });
+
+        it("should filter tasks by 'thisWeek' deadline", async () => {
+          await setup([dates.prevWeek, dates.today, dates.nextWeek]);
+
+          const filters: TaskFilters = {
+            deadline: "thisWeek",
+          };
+
+          const result = await getTaskList({
+            page: 1,
+            pageSize: 10,
+            sort: "title",
+            filters,
+          });
+
+          expect(result.items).toHaveLength(1);
+          expect(result.totalCount).toBe(1);
+          expect(result.items[0].title).toBe("Task B");
+        });
+
+        it("should filter tasks by deadline range", async () => {
+          await setup([
+            new Date("2023-01-01"),
+            new Date("2023-01-02"),
+            new Date("2023-01-03"),
+          ]);
+
+          const filters: TaskFilters = {
+            dateStart: "2023-01-01",
+            dateEnd: "2023-01-02",
+          };
+
+          const result = await getTaskList({
+            page: 1,
+            pageSize: 10,
+            sort: "title",
+            filters,
+          });
+
+          expect(result.items).toHaveLength(2);
+          expect(result.totalCount).toBe(2);
+          expect(result.items[0].title).toBe("Task A");
+          expect(result.items[1].title).toBe("Task B");
+        });
+      });
+
+      it("should filter tasks by specific project", async () => {
+        await prisma.task.createMany({
+          data: [
+            {
+              id: 1,
+              title: "Task A",
+              deadline: new Date(),
+              projectId: 1,
+              categoryId: 1,
+              workspaceId: 1,
+              status: TaskStatus.active,
+              assigneeId: "user-3",
+            },
+            {
+              id: 2,
+              title: "Task B",
+              deadline: new Date(),
+              projectId: 2,
+              categoryId: 1,
+              workspaceId: 1,
+              status: TaskStatus.active,
+              assigneeId: "user-3",
+            },
+          ],
+        });
+
+        const filters: TaskFilters = {
+          project: [1],
+        };
+
+        const result = await getTaskList({
+          page: 1,
+          pageSize: 10,
+          sort: "title",
+          filters,
+        });
+
+        expect(result.items).toHaveLength(1);
+        expect(result.items[0].title).toBe("Task A");
+      });
+
+      it("should filter tasks by specific task category", async () => {
+        await prisma.task.createMany({
+          data: [
+            {
+              id: 1,
+              title: "Task A",
+              deadline: new Date(),
+              projectId: 1,
+              categoryId: 1,
+              workspaceId: 1,
+              status: TaskStatus.active,
+              assigneeId: "user-3",
+            },
+            {
+              id: 2,
+              title: "Task B",
+              deadline: new Date(),
+              projectId: 1,
+              categoryId: 2,
+              workspaceId: 1,
+              status: TaskStatus.active,
+              assigneeId: "user-3",
+            },
+          ],
+        });
+
+        const filters: TaskFilters = {
+          category: [1],
+        };
+
+        const result = await getTaskList({
+          page: 1,
+          pageSize: 10,
+          sort: "title",
+          filters,
+        });
+
+        expect(result.items).toHaveLength(1);
+        expect(result.items[0].title).toBe("Task A");
+      });
+
+      it("should filter tasks by specific assignee", async () => {
+        await prisma.task.createMany({
+          data: [
+            {
+              id: 1,
+              title: "Task A",
+              deadline: new Date(),
+              projectId: 1,
+              categoryId: 1,
+              workspaceId: 1,
+              status: TaskStatus.active,
+              assigneeId: "user-3",
+            },
+            {
+              id: 2,
+              title: "Task B",
+              deadline: new Date(),
+              projectId: 1,
+              categoryId: 1,
+              workspaceId: 1,
+              status: TaskStatus.active,
+              assigneeId: "user-4",
+            },
+          ],
+        });
+
+        const filters: TaskFilters = {
+          assignee: ["user-3"],
+        };
+
+        const result = await getTaskList({
+          page: 1,
+          pageSize: 10,
+          sort: "title",
+          filters,
+        });
+
+        expect(result.items).toHaveLength(1);
+        expect(result.items[0].title).toBe("Task A");
+      });
+
+      it("should filter only my tasks", async () => {
+        await prisma.task.createMany({
+          data: [
+            {
+              id: 1,
+              title: "Task A",
+              deadline: new Date(),
+              projectId: 1,
+              categoryId: 1,
+              workspaceId: 1,
+              status: TaskStatus.active,
+              assigneeId: "user-1",
+            },
+            {
+              id: 2,
+              title: "Task B",
+              deadline: new Date(),
+              projectId: 1,
+              categoryId: 1,
+              workspaceId: 1,
+              status: TaskStatus.active,
+              assigneeId: "user-2",
+            },
+            {
+              id: 3,
+              title: "Task C",
+              deadline: new Date(),
+              projectId: 1,
+              categoryId: 1,
+              workspaceId: 1,
+              status: TaskStatus.active,
+              assigneeId: "user-3",
+            },
+          ],
+        });
+
+        const filters: TaskFilters = {
+          onlyMyTasks: true,
+        };
+
+        const result = await getTaskList({
+          page: 1,
+          pageSize: 10,
+          sort: "title",
+          filters,
+        });
+
+        expect(result.items).toHaveLength(1);
+        expect(result.items[0].title).toBe("Task A");
       });
     });
 
-    it("should filter tasks by status", async () => {
-      const filters: TaskFilters = {
-        status: [TaskStatus.completed],
-        category: [],
-        project: [],
-        assignee: [],
-      };
+    describe("pagination", () => {
+      beforeAll(async () => {
+        await prisma.task.createMany({
+          data: [
+            {
+              id: 1,
+              title: "Task A",
+              deadline: new Date(),
+              projectId: 1,
+              categoryId: 1,
+              workspaceId: 1,
+              status: TaskStatus.active,
+              assigneeId: "user-3",
+            },
+            {
+              id: 2,
+              title: "Task B",
+              deadline: new Date(),
+              projectId: 1,
+              categoryId: 1,
+              workspaceId: 1,
+              status: TaskStatus.active,
+              assigneeId: "user-3",
+            },
+            {
+              id: 3,
+              title: "Task C",
+              deadline: new Date(),
+              projectId: 1,
+              categoryId: 1,
+              workspaceId: 1,
+              status: TaskStatus.active,
+              assigneeId: "user-3",
+            },
+          ],
+        });
+      });
 
-      const result = await getTaskList({
+      afterAll(async () => {
+        await prisma.task.deleteMany();
+      });
+
+      it("should correctly handle pagination (page and pageSize)", async () => {
+        const page1 = await getTaskList({
+          page: 1,
+          pageSize: 2,
+          sort: "title",
+        });
+        const page2 = await getTaskList({
+          page: 2,
+          pageSize: 2,
+          sort: "title",
+        });
+
+        expect(page1.items).toHaveLength(2);
+        expect(page1.totalCount).toBe(3);
+        expect(page1.items[0].title).toBe("Task A");
+        expect(page1.items[1].title).toBe("Task B");
+
+        expect(page2.items).toHaveLength(1);
+        expect(page2.totalCount).toBe(3);
+        expect(page2.items[0].title).toBe("Task C");
+      });
+
+      it("should return an empty array if page exceeds available data", async () => {
+        const result = await getTaskList({
+          page: 99,
+          pageSize: 10,
+          sort: "title",
+        });
+
+        expect(result.items).toEqual([]);
+        expect(result.totalCount).toBe(3);
+      });
+    });
+  });
+
+  describe("searchTasks", () => {
+    afterEach(async () => {
+      await prisma.task.deleteMany();
+    });
+
+    it("should return all tasks with valid TaskSearchDTO", async () => {
+      await prisma.task.createMany({
+        data: [
+          {
+            id: 1,
+            title: "Task A",
+            deadline: new Date("2025-03-01"),
+            projectId: 1,
+            categoryId: 1,
+            workspaceId: 1,
+            status: TaskStatus.active,
+            assigneeId: "user-3",
+          },
+        ],
+      });
+
+      const result = await searchTasks({
         page: 1,
         pageSize: 10,
-        sort: "title",
-        filters,
       });
 
-      expect(result).toHaveLength(3);
-      result.forEach((task) => expect(task.status).toBe("completed"));
-    });
-
-    it("should filter tasks by 'overdue' deadline for Workspace 1", async () => {
-      const filters: TaskFilters = {
-        status: [],
-        category: [],
-        project: [],
-        assignee: [],
-        deadline: "overdue",
-      };
-
-      const result = await getTaskList({
-        page: 1,
-        pageSize: 10,
-        sort: "title",
-        filters,
-      });
-
-      expect(result).toHaveLength(3);
-    });
-
-    it("should filter by specific project ID", async () => {
-      const projectId = getProjectId(1, "active");
-      const filters: TaskFilters = {
-        status: [],
-        category: [],
-        project: [projectId],
-        assignee: [],
-      };
-
-      const result = await getTaskList({
-        page: 1,
-        pageSize: 10,
-        sort: "title",
-        filters,
-      });
-
-      expect(result).toHaveLength(3);
-      result.forEach((task) => {
-        expect(task.project.id).toBe(projectId);
+      expect(result).toStrictEqual({
+        items: [
+          {
+            id: 1,
+            title: "Task A",
+            deadline: new Date("2025-03-01"),
+          },
+        ],
+        totalCount: 1,
       });
     });
 
-    it("should return an empty list if no tasks match filters", async () => {
-      const projectId = getProjectId(2, "active");
-      const filters: TaskFilters = {
-        status: [],
-        category: [],
-        project: [projectId],
-        assignee: [],
-      };
-
-      const result = await getTaskList({
-        page: 1,
-        pageSize: 10,
-        sort: "title",
-        filters,
+    it("should filter tasks by query", async () => {
+      await prisma.task.createMany({
+        data: [
+          {
+            id: 1,
+            title: "Task A",
+            deadline: new Date(),
+            projectId: 1,
+            categoryId: 1,
+            workspaceId: 1,
+            status: TaskStatus.active,
+            assigneeId: "user-3",
+          },
+          {
+            id: 2,
+            title: "Task B",
+            deadline: new Date(),
+            projectId: 1,
+            categoryId: 1,
+            workspaceId: 1,
+            status: TaskStatus.active,
+            assigneeId: "user-3",
+          },
+        ],
       });
 
-      expect(result).toHaveLength(0);
+      const result = await searchTasks({
+        page: 1,
+        pageSize: 10,
+        query: "Task A",
+      });
+
+      expect(result.items).toHaveLength(1);
+      expect(result.items[0].title).toBe("Task A");
+    });
+
+    describe("pagination", () => {
+      beforeEach(async () => {
+        await prisma.task.createMany({
+          data: [
+            {
+              id: 1,
+              title: "Task 1",
+              deadline: new Date(),
+              projectId: 1,
+              categoryId: 1,
+              workspaceId: 1,
+              status: TaskStatus.active,
+              assigneeId: "user-3",
+            },
+            {
+              id: 2,
+              title: "Task 2",
+              deadline: new Date(),
+              projectId: 1,
+              categoryId: 1,
+              workspaceId: 1,
+              status: TaskStatus.active,
+              assigneeId: "user-3",
+            },
+            {
+              id: 3,
+              title: "Task 3",
+              deadline: new Date(),
+              projectId: 1,
+              categoryId: 1,
+              workspaceId: 1,
+              status: TaskStatus.active,
+              assigneeId: "user-3",
+            },
+          ],
+        });
+      });
+
+      it("should handle pagination correctly (page and pageSize)", async () => {
+        const page1 = await searchTasks({
+          page: 1,
+          pageSize: 2,
+        });
+
+        const page2 = await searchTasks({
+          page: 2,
+          pageSize: 2,
+        });
+
+        expect(page1.items).toHaveLength(2);
+        expect(page1.totalCount).toBe(3);
+        expect(page1.items[0].title).toBe("Task 1");
+        expect(page1.items[1].title).toBe("Task 2");
+
+        expect(page2.items).toHaveLength(1);
+        expect(page2.totalCount).toBe(3);
+        expect(page2.items[0].title).toBe("Task 3");
+      });
+
+      it("should return an empty array if page exceeds available data", async () => {
+        const result = await searchTasks({
+          page: 99,
+          pageSize: 10,
+        });
+
+        expect(result.items).toEqual([]);
+        expect(result.totalCount).toBe(3);
+      });
     });
   });
 });

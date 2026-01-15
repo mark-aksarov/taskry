@@ -66,6 +66,11 @@ export interface ProjectDetailDTO {
   }[];
 }
 
+export interface ProjectListDTO {
+  items: ProjectListItemDTO[];
+  totalCount: number;
+}
+
 export interface ProjectListItemDTO {
   id: number;
   title: string;
@@ -99,4 +104,15 @@ export interface ProjectListItemDTO {
     total: number;
     completed: number;
   };
+}
+
+export interface ProjectSearchDTO {
+  items: ProjectSearchItemDTO[];
+  totalCount: number;
+}
+
+export interface ProjectSearchItemDTO {
+  id: number;
+  title: string;
+  deadline: Date;
 }

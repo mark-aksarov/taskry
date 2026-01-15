@@ -1,7 +1,7 @@
 import { CalendarCheck2 } from "lucide-react";
-import { SearchListItem } from "./SearchListItem";
-import { IconContainer } from "../common/IconContainer";
+import { SearchListItem } from "../SearchListItem";
 import { useFormatter, useTranslations } from "next-intl";
+import { IconContainer } from "@/components/common/IconContainer";
 import { ListItemText, ListItemTitle } from "@/components/common/List";
 
 interface TaskSearchListItemProps {
@@ -29,6 +29,7 @@ export function TaskSearchListItem({
 
   return (
     <SearchListItem
+      href={`/tasks/${id}`}
       imageSlot={
         <IconContainer className="h-9 w-9">
           <CalendarCheck2 size={16} />

@@ -15,7 +15,6 @@ import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import { TaskList } from "../TaskList";
 import { TaskListItem } from "../TaskListItem";
-import { getTaskCount } from "@/lib/data/task/task.dal";
 import { getTaskList } from "@/lib/data/task/task.service";
 import { deleteTasks } from "@/lib/actions/task/deleteTasks";
 import { TaskItemActionMenuTrigger } from "../TaskItemActionMenuTrigger";
@@ -47,16 +46,14 @@ export async function AssignedTasksContainer({
     assignee: [assigneeId],
   };
 
-  const tasks = await getTaskList({
+  const { items: tasks, totalCount } = await getTaskList({
     page,
     pageSize,
     sort: "deadline",
     filters,
   });
 
-  const count = await getTaskCount(filters);
-
-  if (!count) {
+  if (!totalCount) {
     return (
       <AssignedTasksSection>
         <AssignedTasksSectionHeading />
@@ -85,7 +82,7 @@ export async function AssignedTasksContainer({
     <AssignedTasksPresentation
       page={page}
       pageSize={pageSize}
-      totalPages={Math.ceil(count / pageSize)}
+      totalPages={Math.ceil(totalCount / pageSize)}
       list={
         <TaskList>
           {tasksWithPermissions.map((task) => (

@@ -2,19 +2,12 @@ import { useTranslations } from "next-intl";
 import { Skeleton, ToggleButton, ToggleButtonGroup } from "@/components/ui";
 import { ToggleButtonGroupProps } from "@/components/ui/ToggleButtonGroup/ToggleButtonGroup";
 
-interface SearchToggleButtonGroupProps
-  extends Pick<ToggleButtonGroupProps, "selectedKeys" | "onSelectionChange"> {
-  totalUsersCount?: number;
-  totalTasksCount?: number;
-  totalProjectsCount?: number;
-}
+export interface SearchToggleButtonGroupProps
+  extends Pick<ToggleButtonGroupProps, "selectedKeys" | "onSelectionChange"> {}
 
 export function SearchToggleButtonGroup({
   selectedKeys,
   onSelectionChange,
-  totalUsersCount,
-  totalTasksCount,
-  totalProjectsCount,
 }: SearchToggleButtonGroupProps) {
   const t = useTranslations("search.SearchToggleButtonGroup");
 
@@ -27,23 +20,15 @@ export function SearchToggleButtonGroup({
       variant="contrast"
       className="p-4"
     >
-      {totalUsersCount && (
-        <ToggleButton id="users">
-          {t("users")} ({totalUsersCount})
-        </ToggleButton>
-      )}
-
-      {totalTasksCount && (
-        <ToggleButton id="tasks">
-          {t("tasks")} ({totalTasksCount})
-        </ToggleButton>
-      )}
-
-      {totalProjectsCount && (
-        <ToggleButton id="projects">
-          {t("projects")} ({totalProjectsCount})
-        </ToggleButton>
-      )}
+      <ToggleButton data-test="users-button" id="users">
+        {t("users")}
+      </ToggleButton>
+      <ToggleButton data-test="tasks-button" id="tasks">
+        {t("tasks")}
+      </ToggleButton>
+      <ToggleButton data-test="projects-button" id="projects">
+        {t("projects")}
+      </ToggleButton>
     </ToggleButtonGroup>
   );
 }

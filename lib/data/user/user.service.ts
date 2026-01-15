@@ -1,6 +1,12 @@
+import {
+  UserListDTO,
+  UserDetailDTO,
+  UserSearchDTO,
+  UserSummaryDTO,
+} from "./user.dto";
+
 import { UserFilters } from "@/lib/types";
-import { getAllUsers, getUser } from "./user.dal";
-import { UserDetailDTO, UserListItemDTO, UserSummaryDTO } from "./user.dto";
+import { getAllUsers, getPaginatedUsers, getUser } from "./user.dal";
 
 export const getUserDetail = async (
   id: string,
@@ -51,8 +57,8 @@ export const getUserList = async ({
   pageSize: number;
   sort: string;
   filters?: UserFilters;
-}): Promise<UserListItemDTO[]> => {
-  const users = await getAllUsers({
+}): Promise<UserListDTO> => {
+  const { items, totalCount } = await getPaginatedUsers({
     page,
     pageSize,
     sort,
@@ -73,15 +79,19 @@ export const getUserList = async ({
     },
   });
 
-  return users.map((u) => ({
-    id: u.id,
-    fullName: u.fullName,
-    email: u.email,
-    phoneNumber: u.phoneNumber ?? undefined,
-    imageUrl: u.imageUrl ?? undefined,
-    publicLink: u.publicLink ?? undefined,
-    position: u.position ?? undefined,
-  }));
+  return {
+    items: items.map((u) => ({
+      id: u.id,
+      fullName: u.fullName,
+      email: u.email,
+      phoneNumber: u.phoneNumber ?? undefined,
+      imageUrl: u.imageUrl ?? undefined,
+      publicLink: u.publicLink ?? undefined,
+      position: u.position ?? undefined,
+    })),
+
+    totalCount,
+  };
 };
 
 export const getUserSummaries = async (): Promise<UserSummaryDTO[]> => {
@@ -96,4 +106,37 @@ export const getUserSummaries = async (): Promise<UserSummaryDTO[]> => {
     id: p.id,
     fullName: p.fullName,
   }));
+};
+
+export const searchUsers = async ({
+  page,
+  pageSize,
+  query,
+}: {
+  page: number;
+  pageSize: number;
+  query?: string;
+}): Promise<UserSearchDTO> => {
+  const { items, totalCount } = await getPaginatedUsers({
+    page,
+    pageSize,
+    select: {
+      id: true,
+      fullName: true,
+      email: true,
+      imageUrl: true,
+    },
+    filters: { query },
+  });
+
+  return {
+    items: items.map((p) => ({
+      id: p.id,
+      fullName: p.fullName,
+      email: p.email,
+      imageUrl: p.imageUrl ?? undefined,
+    })),
+
+    totalCount,
+  };
 };
