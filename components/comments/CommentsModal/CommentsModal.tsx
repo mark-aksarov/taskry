@@ -20,7 +20,7 @@ interface CommentsModalProps {
 export function CommentsModal({ title, children }: CommentsModalProps) {
   return (
     <ResponsiveModal isDismissable className="w-[600px]">
-      <Dialog className="md:max-h-[calc(100dvh-64px)]">
+      <Dialog className="md:h-[calc(100dvh-64px)]">
         <DialogHeader>
           <DialogHeading>{title}</DialogHeading>
           <DialogCloseButton />
