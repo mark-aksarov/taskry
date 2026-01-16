@@ -223,7 +223,7 @@
     "editButtonLabel": "Редактировать Проект"
   },
 
-  "ProjectDetailCompact": {
+  "ProjectDetail": {
     "creator": "Создатель",
     "unknownCreator": "Неизвестный создатель",
     "deadline": "Дедлайн",
@@ -244,43 +244,6 @@
         "completed": "Завершен"
       }
     }
-  },
-
-  "ProjectDetailForm": {
-    "statusSelect": {
-      "label": "Статус",
-      "placeholder": "Выберите статус",
-
-      "items": {
-        "pending": "В ожидании",
-        "active": "Активный",
-        "completed": "Завершённый"
-      }
-    },
-
-    "deadlineDatePicker": {
-      "label": "Срок"
-    },
-
-    "customerSelect": {
-      "label": "Клиент",
-      "placeholder": "Выберите клиента"
-    },
-
-    "categorySelect": {
-      "label": "Категория",
-      "placeholder": "Выберите категорию"
-    },
-
-    "resetButtonLabel": "Сбросить",
-    "submitButtonLabel": "Сохранить"
-  },
-
-  "ProjectDetailFull": {
-    "description": "Описание",
-    "noDescription": "Нет описания",
-    "attachments": "Вложения",
-    "comments": "Комментарии"
   },
 
   "ProjectDetailModal": {

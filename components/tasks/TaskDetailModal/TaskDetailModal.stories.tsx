@@ -1,7 +1,7 @@
 import { TaskDetailModal } from "./TaskDetailModal";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { Button, RACDialogTrigger } from "@/components/ui";
-import { TaskDetailCompactSkeleton } from "../TaskDetailCompact";
+import { TaskDetailSkeleton } from "../TaskDetail";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { GlobalContainerProvider } from "@/components/layout/GlobalContainerContext";
 
@@ -33,7 +33,7 @@ export const WithSkeletonContent = {
     (Story) => (
       <GlobalContainerProvider
         value={{
-          TaskDetailCompactContainer: () => <TaskDetailCompactSkeleton />,
+          TaskDetailContainer: () => <TaskDetailSkeleton />,
         }}
       >
         <Story />

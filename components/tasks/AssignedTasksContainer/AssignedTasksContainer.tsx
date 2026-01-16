@@ -5,10 +5,8 @@ import {
 } from "@/lib/data/user/user.dal";
 
 import {
-  AssignedTasksSection,
-  AssignedTasksEmptyCard,
-  AssignedTasksSectionHeading,
   AssignedTasksPresentation,
+  AssignedTasksEmptySection,
 } from "../AssignedTasks";
 
 import { auth } from "@/lib/auth";
@@ -55,10 +53,7 @@ export async function AssignedTasksContainer({
 
   if (!totalCount) {
     return (
-      <AssignedTasksSection>
-        <AssignedTasksSectionHeading />
-        <AssignedTasksEmptyCard newTaskFormContainer={newTaskFormContainer} />
-      </AssignedTasksSection>
+      <AssignedTasksEmptySection newTaskFormContainer={newTaskFormContainer} />
     );
   }
 

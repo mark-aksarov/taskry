@@ -29,13 +29,13 @@ export interface GlobalContainerContextType {
   ProjectCommentsContainer?: React.ComponentType<{
     projectId: number;
   }>;
-  ProjectDetailCompactContainer?: React.ComponentType<{
+  ProjectDetailContainer?: React.ComponentType<{
     projectId: number;
   }>;
   TaskCommentsContainer?: React.ComponentType<{
     taskId: number;
   }>;
-  TaskDetailCompactContainer?: React.ComponentType<{
+  TaskDetailContainer?: React.ComponentType<{
     taskId: number;
   }>;
   UserDetailContainer?: React.ComponentType<{

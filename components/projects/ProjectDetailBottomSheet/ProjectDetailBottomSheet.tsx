@@ -13,7 +13,7 @@ import {
 import { Suspense } from "react";
 import { useTranslations } from "next-intl";
 import { OverlayTriggerState } from "react-stately";
-import { ProjectDetailCompactSkeleton } from "../ProjectDetailCompact";
+import { ProjectDetailSkeleton } from "../ProjectDetail";
 import { useGlobalContainer } from "@/components/layout/GlobalContainerContext";
 
 export interface ProjectDetailBottomSheetProps {
@@ -27,11 +27,11 @@ export function ProjectDetailBottomSheet({
 }: ProjectDetailBottomSheetProps) {
   const t = useTranslations("projects.ProjectDetailBottomSheet");
 
-  const { ProjectDetailCompactContainer } = useGlobalContainer();
+  const { ProjectDetailContainer } = useGlobalContainer();
 
-  if (!ProjectDetailCompactContainer) {
+  if (!ProjectDetailContainer) {
     throw new Error(
-      "ProjectDetailCompactContainer is missing in GlobalContainerContext",
+      "ProjectDetailContainer is missing in GlobalContainerContext",
     );
   }
 
@@ -43,8 +43,8 @@ export function ProjectDetailBottomSheet({
           <DialogCloseButton />
         </DialogHeader>
         <DialogBody>
-          <Suspense fallback={<ProjectDetailCompactSkeleton />}>
-            <ProjectDetailCompactContainer projectId={projectId} />
+          <Suspense fallback={<ProjectDetailSkeleton />}>
+            <ProjectDetailContainer projectId={projectId} />
           </Suspense>
         </DialogBody>
         <DialogFooter>

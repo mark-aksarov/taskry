@@ -223,7 +223,7 @@
     "editButtonLabel": "Edit Project"
   },
 
-  "ProjectDetailCompact": {
+  "ProjectDetail": {
     "creator": "Creator",
     "unknownCreator": "Unknown creator",
     "deadline": "Deadline",
@@ -244,43 +244,6 @@
         "completed": "Completed"
       }
     }
-  },
-
-  "ProjectDetailForm": {
-    "statusSelect": {
-      "label": "Status",
-      "placeholder": "Select status",
-
-      "items": {
-        "pending": "Pending",
-        "active": "Active",
-        "completed": "Completed"
-      }
-    },
-
-    "deadlineDatePicker": {
-      "label": "Deadline"
-    },
-
-    "customerSelect": {
-      "label": "Customer",
-      "placeholder": "Select customer"
-    },
-
-    "categorySelect": {
-      "label": "Category",
-      "placeholder": "Select category"
-    },
-
-    "resetButtonLabel": "Reset",
-    "submitButtonLabel": "Save"
-  },
-
-  "ProjectDetailFull": {
-    "description": "Description",
-    "noDescription": "No description",
-    "attachments": "Attachments",
-    "comments": "Comments"
   },
 
   "ProjectDetailModal": {

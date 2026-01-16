@@ -15,9 +15,9 @@ const context: GlobalContainerContextType = {
   EditCustomerFormContainer: () => <div />,
   NotificationModalContentContainer: () => <div />,
   ProjectCommentsContainer: () => <div />,
-  ProjectDetailCompactContainer: () => <div />,
+  ProjectDetailContainer: () => <div />,
   TaskCommentsContainer: () => <div />,
-  TaskDetailCompactContainer: () => <div />,
+  TaskDetailContainer: () => <div />,
   UserDetailContainer: () => <div />,
 };
 

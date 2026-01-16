@@ -3,20 +3,14 @@ import {
   GlobalContainerContextType,
 } from "@/components/layout/GlobalContainerContext";
 
-import {
-  AssignedTasksSection,
-  AssignedTasksSectionHeading,
-} from "@/components/tasks/AssignedTasks";
-
 import { z } from "zod";
 import { Suspense } from "react";
 import { DashboardPage } from "./DashboardPage";
-import { List } from "@/components/common/List";
-import { Repeat } from "@/components/common/Repeat";
-import { TaskListItemSkeleton } from "@/components/tasks/TaskListItem";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
+import { AssignedTasksSkeleton } from "@/components/tasks/AssignedTasks";
 import { TotalTasksCardSkeleton } from "@/components/tasks/TotalTasksCard";
 import { TotalUsersCardSkeleton } from "@/components/users/TotalUsersCard";
+import { TaskDetailContainer } from "@/components/tasks/TaskDetailContainer";
 import { UserDetailContainer } from "@/components/users/UserDetailContainer";
 import { NewTaskFormContainer } from "@/components/tasks/NewTaskFormContainer";
 import { EditTaskFormContainer } from "@/components/tasks/EditTaskFormContainer";
@@ -26,10 +20,9 @@ import { TotalProjectsCardSkeleton } from "@/components/projects/TotalProjectsCa
 import { TotalTasksCardContainer } from "@/components/tasks/TotalTasksCardContainer";
 import { TotalUsersCardContainer } from "@/components/users/TotalUsersCardContainer";
 import { TotalCustomersCardSkeleton } from "@/components/customer/TotalCustomersCard";
-import { TaskDetailCompactContainer } from "@/components/tasks/TaskDetailCompactContainer";
+import { ProjectDetailContainer } from "@/components/projects/ProjectDetailContainer";
 import { TotalProjectsCardContainer } from "@/components/projects/TotalProjectsCardContainer";
 import { TotalCustomersCardContainer } from "@/components/customer/TotalCustomersCardContainer";
-import { ProjectDetailCompactContainer } from "@/components/projects/ProjectDetailCompactContainer";
 
 const searchParamsSchema = z.object({
   page: z.coerce.number().int().positive().catch(1),
@@ -38,9 +31,9 @@ const searchParamsSchema = z.object({
 
 const context: GlobalContainerContextType = {
   EditTaskFormContainer,
-  TaskDetailCompactContainer,
+  TaskDetailContainer,
   TaskCommentsContainer,
-  ProjectDetailCompactContainer,
+  ProjectDetailContainer,
   UserDetailContainer,
 };
 
@@ -80,19 +73,7 @@ export default async function AppDashboardPage({
           </Suspense>
         }
         assignedTasksContainer={
-          <Suspense
-            fallback={
-              <AssignedTasksSection>
-                <AssignedTasksSectionHeading />
-                <List>
-                  <Repeat
-                    items={10}
-                    renderItem={() => <TaskListItemSkeleton />}
-                  />
-                </List>
-              </AssignedTasksSection>
-            }
-          >
+          <Suspense fallback={<AssignedTasksSkeleton />}>
             <AssignedTasksContainer
               page={page}
               pageSize={pageSize}

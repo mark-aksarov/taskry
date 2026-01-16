@@ -15,7 +15,7 @@ export function CommentTextFieldFileTrigger({
   buttonClasses,
   isDisabled,
 }: CommentTextFieldFileTriggerProps) {
-  const t = useTranslations("common.CommentTextField");
+  const t = useTranslations("comments.CommentTextField");
 
   return (
     <FileTrigger

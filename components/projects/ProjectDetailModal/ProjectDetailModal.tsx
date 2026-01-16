@@ -13,17 +13,17 @@ import {
 
 import { useTranslations } from "next-intl";
 import { Suspense, useContext } from "react";
-import { ProjectDetailCompactSkeleton } from "../ProjectDetailCompact";
+import { ProjectDetailSkeleton } from "../ProjectDetail";
 import { useGlobalContainer } from "@/components/layout/GlobalContainerContext";
 
 export function ProjectDetailModal({ projectId }: { projectId: number }) {
   const t = useTranslations("projects.ProjectDetailModal");
 
-  const { ProjectDetailCompactContainer } = useGlobalContainer();
+  const { ProjectDetailContainer } = useGlobalContainer();
 
-  if (!ProjectDetailCompactContainer) {
+  if (!ProjectDetailContainer) {
     throw new Error(
-      "ProjectDetailCompactContainer is missing in GlobalContainerContext",
+      "ProjectDetailContainer is missing in GlobalContainerContext",
     );
   }
 
@@ -35,15 +35,15 @@ export function ProjectDetailModal({ projectId }: { projectId: number }) {
           <DialogCloseButton />
         </DialogHeader>
         <DialogBody>
-          <Suspense fallback={<ProjectDetailCompactSkeleton />}>
-            <ProjectDetailCompactContainer projectId={projectId} />
+          <Suspense fallback={<ProjectDetailSkeleton />}>
+            <ProjectDetailContainer projectId={projectId} />
           </Suspense>
         </DialogBody>
         <DialogFooter>
           <Button
             data-test="open-full-page-button"
             as="a"
-            href={`/projects/${projectId}`}
+            href={`/projects?projectId=${projectId}`}
             variant="primary"
             size="medium"
             label={t("openInFullPage")}

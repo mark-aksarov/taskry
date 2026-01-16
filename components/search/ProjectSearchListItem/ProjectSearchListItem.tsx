@@ -29,7 +29,7 @@ export function ProjectSearchListItem({
 
   return (
     <SearchListItem
-      href={`/projects/${id}`}
+      href={`/projects?projectId=${id}`}
       imageSlot={
         <IconContainer className="h-9 w-9">
           <FolderClosed size={16} />

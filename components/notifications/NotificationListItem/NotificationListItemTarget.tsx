@@ -58,7 +58,7 @@ export function NotificationListItemTarget({ notification }: Props) {
     return renderTarget({
       entity: notification.project,
       title: notification.projectTitle,
-      href: (id) => `/projects/${id}`,
+      href: (id) => `/projects?projectId=${id}`,
     });
   }
 
@@ -71,7 +71,7 @@ export function NotificationListItemTarget({ notification }: Props) {
     return renderTarget({
       entity: notification.task,
       title: notification.taskTitle,
-      href: (id) => `/tasks/${id}`,
+      href: (id) => `/tasks?taskId=${id}`,
     });
   }
 
@@ -85,12 +85,12 @@ export function NotificationListItemTarget({ notification }: Props) {
       renderTarget({
         entity: notification.project,
         title: notification.projectTitle,
-        href: (id) => `/projects/${id}`,
+        href: (id) => `/projects?projectId=${id}`,
       }) ??
       renderTarget({
         entity: notification.task,
         title: notification.taskTitle,
-        href: (id) => `/tasks/${id}`,
+        href: (id) => `/tasks?taskId=${id}`,
       })
     );
   }

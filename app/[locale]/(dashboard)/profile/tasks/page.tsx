@@ -15,6 +15,7 @@ import { canCreateTask, canDeleteTask } from "@/lib/data/user/user.dal";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { UserTasksContainer } from "@/components/users/UserTasksContainer";
 import { updateTaskStatuses } from "@/lib/actions/task/updateTaskStatuses";
+import { TaskDetailContainer } from "@/components/tasks/TaskDetailContainer";
 import { UserHeaderContainer } from "@/components/users/UserHeaderContainer";
 import { UserTasksPageLayout } from "@/components/users/UserTasksPageLayout";
 import { NewTaskFormContainer } from "@/components/tasks/NewTaskFormContainer";
@@ -22,7 +23,6 @@ import { EditTaskFormContainer } from "@/components/tasks/EditTaskFormContainer"
 import { TaskCommentsContainer } from "@/components/tasks/TaskCommentsContainer";
 import { ProfileNavigationMobile } from "@/components/users/ProfileNavigationMobile";
 import { ProfileNavigationDesktop } from "@/components/users/ProfileNavigationDesktop";
-import { TaskDetailCompactContainer } from "@/components/tasks/TaskDetailCompactContainer";
 
 const searchParamsSchema = z.object({
   page: z.coerce.number().int().positive().catch(1),
@@ -32,7 +32,7 @@ const searchParamsSchema = z.object({
 
 const context: GlobalContainerContextType = {
   EditTaskFormContainer,
-  TaskDetailCompactContainer,
+  TaskDetailContainer,
   TaskCommentsContainer,
 };
 

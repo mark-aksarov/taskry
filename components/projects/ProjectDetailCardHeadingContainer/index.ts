@@ -1,1 +1,0 @@
-export { ProjectDetailCardHeadingContainer } from "./ProjectDetailCardHeadingContainer";

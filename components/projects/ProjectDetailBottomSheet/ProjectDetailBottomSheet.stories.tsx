@@ -6,7 +6,7 @@ import { Button } from "@/components/ui";
 import { useOverlayTrigger } from "react-aria";
 import { useOverlayTriggerState } from "react-stately";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { ProjectDetailCompactSkeleton } from "../ProjectDetailCompact";
+import { ProjectDetailSkeleton } from "../ProjectDetail";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { GlobalContainerProvider } from "@/components/layout/GlobalContainerContext";
 
@@ -55,7 +55,7 @@ export const WithSkeletonContent = {
     (Story) => (
       <GlobalContainerProvider
         value={{
-          ProjectDetailCompactContainer: () => <ProjectDetailCompactSkeleton />,
+          ProjectDetailContainer: () => <ProjectDetailSkeleton />,
         }}
       >
         <Story />

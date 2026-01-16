@@ -83,10 +83,10 @@ describe("navigation smoke tests", () => {
   });
 
   it("should verify detail pages content", () => {
-    cy.visit("/en/projects/1");
-    cy.getByData("project-detail-card").should("contain", "Project 1");
+    cy.visit("/en/team/user-1");
+    cy.getByData("user-card").should("contain", "John Doe");
 
-    cy.visit("/en/tasks/1");
-    cy.getByData("task-detail-card").should("contain", "Task 1");
+    cy.visit("/en/profile");
+    cy.getByData("user-card").should("contain", "John Doe");
   });
 });

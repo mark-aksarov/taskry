@@ -8,7 +8,7 @@ import { Button } from "@/components/ui";
 import { useOverlayTrigger } from "react-aria";
 import { useOverlayTriggerState } from "react-stately";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { TaskDetailCompactSkeleton } from "../TaskDetailCompact";
+import { TaskDetailSkeleton } from "../TaskDetail";
 import { GlobalContainerProvider } from "@/components/layout/GlobalContainerContext";
 
 const meta = {
@@ -56,7 +56,7 @@ export const WithSkeletonContent = {
     (Story) => (
       <GlobalContainerProvider
         value={{
-          TaskDetailCompactContainer: () => <TaskDetailCompactSkeleton />,
+          TaskDetailContainer: () => <TaskDetailSkeleton />,
         }}
       >
         <Story />

@@ -3,7 +3,7 @@ import { ProjectDetailModal } from "./ProjectDetailModal";
 import { Button, RACDialogTrigger } from "@/components/ui";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { GlobalContainerProvider } from "@/components/layout/GlobalContainerContext";
-import { ProjectDetailCompactSkeleton } from "../ProjectDetailCompact";
+import { ProjectDetailSkeleton } from "../ProjectDetail";
 
 const meta = {
   title: "components/projects/ProjectDetailModal",
@@ -33,7 +33,7 @@ export const WithSkeletonContent = {
     (Story) => (
       <GlobalContainerProvider
         value={{
-          ProjectDetailCompactContainer: () => <ProjectDetailCompactSkeleton />,
+          ProjectDetailContainer: () => <ProjectDetailSkeleton />,
         }}
       >
         <Story />

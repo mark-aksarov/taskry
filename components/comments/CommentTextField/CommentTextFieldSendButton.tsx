@@ -12,7 +12,7 @@ export function CommentTextFieldSendButton({
   buttonClasses,
   isDisabled,
 }: CommentTextFieldSendButtonProps) {
-  const t = useTranslations("common.CommentTextField");
+  const t = useTranslations("comments.CommentTextField");
 
   return (
     <Button

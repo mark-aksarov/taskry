@@ -109,47 +109,10 @@
     "editButtonLabel": "Редактировать задачу"
   },
 
-  "TaskDetailFull": {
-    "description": "Описание",
-    "noDescription": "Нет описания",
-    "attachments": "Вложения",
-    "comments": "Комментарии"
-  },
-
   "NewTaskModalTrigger": {
     "label": "Новая задача",
     "title": "Новая задача",
     "submitButtonLabel": "Создать задачу"
-  },
-
-  "TaskDetailForm": {
-    "resetButtonLabel": "Сброс",
-    "submitButtonLabel": "Сохранить",
-
-    "TaskDetailFormAssigneeSelect": {
-      "label": "Исполнитель",
-      "placeholder": "Выберите исполнителя"
-    },
-
-    "TaskDetailFormStatusSelect": {
-      "label": "Статус",
-      "placeholder": "Выберите статус",
-
-      "items": {
-        "pending": "В ожидании",
-        "active": "Активная",
-        "completed": "Завершённая"
-      }
-    },
-
-    "TaskDetailFormDeadlineDatePicker": {
-      "label": "Срок"
-    },
-
-    "TaskDetailFormProjectSelect": {
-      "label": "Проект",
-      "placeholder": "Выберите проект"
-    }
   },
 
   "TaskDetailModal": {
@@ -270,7 +233,7 @@
     }
   },
 
-  "TaskDetailCompact": {
+  "TaskDetail": {
     "noDeadline": "Без срока",
     "deadline": "Срок",
     "description": "Описание",
@@ -283,7 +246,7 @@
     "assignee": "Исполнитель",
     "noAssignee": "Нет исполнителя",
 
-    "TaskDetailCompactStatusMenuTrigger": {
+    "TaskDetailStatusMenuTrigger": {
       "dialogHeading": "Статус задачи",
 
       "items": {

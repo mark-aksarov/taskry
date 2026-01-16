@@ -18,15 +18,22 @@ import {
   TotalCustomersCardSkeleton,
 } from "@/components/customer/TotalCustomersCard";
 
+import {
+  AssignedTasksSkeleton,
+  AssignedTasksEmptySection,
+  AssignedTasksPresentation,
+} from "@/components/tasks/AssignedTasks";
+
 import { fn, mocked } from "storybook/test";
 import { DashboardPage } from "./DashboardPage";
 import { TaskList } from "@/components/tasks/TaskList";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { usePathname, useRouter } from "next/navigation";
 import { PageDecorator } from "@/.storybook/PageDecorator";
+import { NewTaskForm } from "@/components/tasks/NewTaskForm";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { AssignedTasksPresentation } from "@/components/tasks/AssignedTasks";
 import { getTaskListItems } from "@/components/tasks/TaskList/TaskList.stories";
+import { Default as TaskFormBaseStory } from "@/components/tasks/TaskFormBase/TaskFormBase.stories";
 
 const meta = {
   title: "components/pages/DashboardPage",
@@ -75,7 +82,7 @@ export const Loading = {
       totalTasksCardContainer={<TotalTasksCardSkeleton />}
       totalUsersCardContainer={<TotalUsersCardSkeleton />}
       totalCustomersCardContainer={<TotalCustomersCardSkeleton />}
-      assignedTasksContainer={<AssignedTasksContainer />}
+      assignedTasksContainer={<AssignedTasksSkeleton />}
     />
   ),
 } satisfies Story;
@@ -87,7 +94,11 @@ export const WithNoTasks = {
       totalTasksCardContainer={<TotalTasksCard totalTasks={500} />}
       totalUsersCardContainer={<TotalUsersCard totalUsers={15} />}
       totalCustomersCardContainer={<TotalCustomersCard totalCustomers={20} />}
-      assignedTasksContainer={<AssignedTasksContainer />}
+      assignedTasksContainer={
+        <AssignedTasksEmptySection
+          newTaskFormContainer={<NewTaskForm {...TaskFormBaseStory.args} />}
+        />
+      }
     />
   ),
 } satisfies Story;

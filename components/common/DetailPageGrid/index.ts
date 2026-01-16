@@ -1,1 +1,0 @@
-export { DetailPageGrid } from "./DetailPageGrid";

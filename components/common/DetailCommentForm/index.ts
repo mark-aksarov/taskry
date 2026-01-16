@@ -1,1 +1,0 @@
-export { DetailCommentForm } from "./DetailCommentForm";

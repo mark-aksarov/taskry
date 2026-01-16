@@ -15,7 +15,7 @@ import { useTranslations } from "next-intl";
 import { EditTaskModal } from "../EditTaskModal";
 import { OverlayTriggerState } from "react-stately";
 import { DialogTrigger } from "react-aria-components";
-import { TaskDetailCompactSkeleton } from "../TaskDetailCompact";
+import { TaskDetailSkeleton } from "../TaskDetail";
 import { useGlobalContainer } from "@/components/layout/GlobalContainerContext";
 
 export interface TaskDetailBottomSheetProps {
@@ -29,12 +29,10 @@ export function TaskDetailBottomSheet({
 }: TaskDetailBottomSheetProps) {
   const t = useTranslations("tasks.TaskDetailBottomSheet");
 
-  const { TaskDetailCompactContainer } = useGlobalContainer();
+  const { TaskDetailContainer } = useGlobalContainer();
 
-  if (!TaskDetailCompactContainer) {
-    throw new Error(
-      "TaskDetailCompactContainer is missing in GlobalContainerContext",
-    );
+  if (!TaskDetailContainer) {
+    throw new Error("TaskDetailContainer is missing in GlobalContainerContext");
   }
 
   return (
@@ -45,8 +43,8 @@ export function TaskDetailBottomSheet({
           <DialogCloseButton />
         </DialogHeader>
         <DialogBody>
-          <Suspense fallback={<TaskDetailCompactSkeleton />}>
-            <TaskDetailCompactContainer taskId={taskId} />
+          <Suspense fallback={<TaskDetailSkeleton />}>
+            <TaskDetailContainer taskId={taskId} />
           </Suspense>
         </DialogBody>
         <DialogFooter>

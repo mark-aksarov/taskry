@@ -12,10 +12,10 @@ import { PersonHeader } from "../components/common/PersonHeader";
 import { ModalPagination } from "../components/common/ModalPagination";
 import { CustomerDetail } from "../components/customer/CustomerDetail";
 import { EditProjectForm } from "../components/projects/EditProjectForm";
-import { TaskDetailCompact } from "../components/tasks/TaskDetailCompact";
+import { TaskDetail } from "../components/tasks/TaskDetail";
 import { EditCustomerForm } from "../components/customer/EditCustomerForm";
 import { SearchPresentation } from "../components/search/SearchPresentation";
-import { ProjectDetailCompact } from "../components/projects/ProjectDetailCompact";
+import { ProjectDetail } from "../components/projects/ProjectDetail";
 import { SearchToggleButtonGroup } from "../components/search/SearchToggleButtonGroup";
 import { MockedCommentsContainer } from "../components/comments/MockedCommentsContainer";
 import { PersonDetailPresentation } from "../components/common/PersonDetailPresentation";
@@ -27,9 +27,9 @@ import { TasksSearchList as TasksSearchListStory } from "../components/search/Se
 import { Default as CustomerDetailStory } from "../components/customer/CustomerDetail/CustomerDetail.stories";
 import { Default as EditProjectFormStory } from "../components/projects/ProjectFormBase/ProjectFormBase.stories";
 import { ProjectsSearchList as ProjectsSearchListStory } from "../components/search/SearchList/SearchList.stories";
-import { Default as TaskDetailCompactStory } from "../components/tasks/TaskDetailCompact/TaskDetailCompact.stories";
+import { Default as TaskDetailStory } from "../components/tasks/TaskDetail/TaskDetail.stories";
 import { Default as CustomerFormBaseStory } from "../components/customer/CustomerFormBase/CustomerFormBase.stories";
-import { Default as ProjectDetailCompactStory } from "../components/projects/ProjectDetailCompact/ProjectDetailCompact.stories";
+import { Default as ProjectDetailStory } from "../components/projects/ProjectDetail/ProjectDetail.stories";
 import { Default as SearchToggleButtonGroupStory } from "../components/search/SearchToggleButtonGroup/SearchToggleButtonGroup.stories";
 import { Default as NotificationModalContentStory } from "../components/notifications/NotificationModalContent/NotificationModalContent.stories";
 
@@ -104,14 +104,10 @@ export const context: GlobalContainerContextType = {
   NotificationModalContentContainer: () => (
     <NotificationModalContent {...NotificationModalContentStory.args} />
   ),
-  ProjectDetailCompactContainer: () => (
-    <ProjectDetailCompact {...ProjectDetailCompactStory.args} />
-  ),
+  ProjectDetailContainer: () => <ProjectDetail {...ProjectDetailStory.args} />,
   ProjectCommentsContainer: () => <MockedCommentsContainer />,
   TaskCommentsContainer: () => <MockedCommentsContainer />,
-  TaskDetailCompactContainer: () => (
-    <TaskDetailCompact {...TaskDetailCompactStory.args} />
-  ),
+  TaskDetailContainer: () => <TaskDetail {...TaskDetailStory.args} />,
   UserDetailContainer: () => (
     <PersonDetailPresentation
       personHeader={<PersonHeader {...PersonHeaderStory.args} />}

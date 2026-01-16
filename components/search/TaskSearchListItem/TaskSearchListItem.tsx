@@ -29,7 +29,7 @@ export function TaskSearchListItem({
 
   return (
     <SearchListItem
-      href={`/tasks/${id}`}
+      href={`/tasks?taskId=${id}`}
       imageSlot={
         <IconContainer className="h-9 w-9">
           <CalendarCheck2 size={16} />

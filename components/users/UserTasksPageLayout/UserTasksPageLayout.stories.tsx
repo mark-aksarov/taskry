@@ -43,9 +43,9 @@ export const Default = {
 } satisfies Story;
 
 export const Loading = {
-  render: <UserTasksPageLoadingLayout {...Default.args} />,
+  render: () => <UserTasksPageLoadingLayout {...Default.args} />,
 };
 
 export const WithNoTasks = {
-  render: <UserTasksPageEmptyLayout {...Default.args} />,
+  render: () => <UserTasksPageEmptyLayout {...Default.args} />,
 };

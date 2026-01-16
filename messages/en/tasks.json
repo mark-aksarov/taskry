@@ -109,47 +109,10 @@
     "editButtonLabel": "Edit Task"
   },
 
-  "TaskDetailFull": {
-    "description": "Description",
-    "noDescription": "No description",
-    "attachments": "Attachments",
-    "comments": "Comments"
-  },
-
   "NewTaskModalTrigger": {
     "label": "New Task",
     "title": "New Task",
     "submitButtonLabel": "Create Task"
-  },
-
-  "TaskDetailForm": {
-    "resetButtonLabel": "Reset",
-    "submitButtonLabel": "Save",
-
-    "TaskDetailFormAssigneeSelect": {
-      "label": "Assigned To",
-      "placeholder": "Select assignee"
-    },
-
-    "TaskDetailFormStatusSelect": {
-      "label": "Status",
-      "placeholder": "Select status",
-
-      "items": {
-        "pending": "Pending",
-        "active": "Active",
-        "completed": "Completed"
-      }
-    },
-
-    "TaskDetailFormDeadlineDatePicker": {
-      "label": "Deadline"
-    },
-
-    "TaskDetailFormProjectSelect": {
-      "label": "Project",
-      "placeholder": "Select project"
-    }
   },
 
   "TaskDetailModal": {
@@ -270,7 +233,7 @@
     }
   },
 
-  "TaskDetailCompact": {
+  "TaskDetail": {
     "noDeadline": "No deadline",
     "deadline": "Deadline",
     "description": "Description",
@@ -283,7 +246,7 @@
     "assignee": "Assignee",
     "noAssignee": "No assignee",
 
-    "TaskDetailCompactStatusMenuTrigger": {
+    "TaskDetailStatusMenuTrigger": {
       "dialogHeading": "Task Status",
 
       "items": {

@@ -5,93 +5,113 @@ import {
 
 import { z } from "zod";
 import { Suspense } from "react";
+import { TasksPage } from "./TasksPage";
+import { TasksPageEmpty } from "./TasksPageEmpty";
+import { arrayParam } from "@/lib/utils/arrayParam";
+import { TaskStatus } from "@/generated/prisma/enums";
 import { getTaskCount } from "@/lib/data/task/task.dal";
 import { deleteTasks } from "@/lib/actions/task/deleteTasks";
+import { TasksContainer } from "@/components/tasks/TasksContainer";
 import { TaskFormBaseSkeleton } from "@/components/tasks/TaskFormBase";
 import { canCreateTask, canDeleteTask } from "@/lib/data/user/user.dal";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
-import { TeamProfileTasksPageEmpty } from "./TeamProfileTasksPageEmpty";
 import { updateTaskStatuses } from "@/lib/actions/task/updateTaskStatuses";
-import { UserTasksContainer } from "@/components/users/UserTasksContainer";
 import { TaskDetailContainer } from "@/components/tasks/TaskDetailContainer";
-import { UserTasksPageLayout } from "@/components/users/UserTasksPageLayout";
-import { UserHeaderContainer } from "@/components/users/UserHeaderContainer";
+import { TaskFiltersFormSkeleton } from "@/components/tasks/TaskFiltersForm";
+import { UserDetailContainer } from "@/components/users/UserDetailContainer";
 import { NewTaskFormContainer } from "@/components/tasks/NewTaskFormContainer";
-import { UserNavigationMobile } from "@/components/users/UserNavigationMobile";
 import { TaskCommentsContainer } from "@/components/tasks/TaskCommentsContainer";
 import { EditTaskFormContainer } from "@/components/tasks/EditTaskFormContainer";
-import { UserNavigationDesktop } from "@/components/users/UserNavigationDesktop";
+import { createTaskCategory } from "@/lib/actions/taskCategory/createTaskCategory";
+import { TaskFiltersFormContainer } from "@/components/tasks/TaskFiltersFormContainer";
+import { ProjectDetailContainer } from "@/components/projects/ProjectDetailContainer";
+import { hasGuestRole } from "@/lib/utils/hasGuestRole";
 
 const searchParamsSchema = z.object({
+  onlyMyTasks: z
+    .preprocess((val) => val === "true", z.boolean())
+    .optional()
+    .catch(undefined),
   page: z.coerce.number().int().positive().catch(1),
   pageSize: z.coerce.number().int().min(1).max(100).catch(20),
   sort: z.enum(["title", "deadline", "status", "category"]).catch("title"),
+  status: arrayParam(z.enum(TaskStatus)).catch([]),
+  category: arrayParam(z.coerce.number()).catch([]),
+  project: arrayParam(z.coerce.number()).catch([]),
+  assignee: arrayParam(z.string()).catch([]),
+  deadline: z
+    .enum(["today", "tomorrow", "thisWeek", "overdue"])
+    .optional()
+    .catch(undefined),
+  dateStart: z.string().optional().catch(undefined),
+  dateEnd: z.string().optional().catch(undefined),
 });
 
 const context: GlobalContainerContextType = {
   EditTaskFormContainer,
   TaskDetailContainer,
   TaskCommentsContainer,
+  ProjectDetailContainer,
+  UserDetailContainer,
 };
 
-export default async function AppProfileTasksPage({
-  params,
+export default async function AppTasksPage({
   searchParams,
 }: {
-  params: Promise<{ id: string }>;
-  searchParams: Promise<{ page?: string; pageSize?: string; sort?: string }>;
+  searchParams: Promise<{ [key: string]: string | undefined }>;
 }) {
-  // Authorization
   await requireProtectedPage();
 
-  const { id } = await params;
-
-  // Validation
   const rawParams = await searchParams;
-  const { page, pageSize, sort } = searchParamsSchema.parse(rawParams);
+  const validated = searchParamsSchema.parse(rawParams);
+  const { page, pageSize, sort, ...filters } = validated;
 
-  // Get count
   const taskCount = await getTaskCount();
 
-  if (!taskCount)
+  if (!taskCount) {
     return (
-      <TeamProfileTasksPageEmpty
-        userId={id}
+      <TasksPageEmpty
         newTaskFormContainer={
           <Suspense fallback={<TaskFormBaseSkeleton />}>
             <NewTaskFormContainer />
           </Suspense>
         }
-        userHeaderContainer={<UserHeaderContainer userId={id} />}
       />
     );
+  }
 
+  const guestMode = await hasGuestRole();
   const canCreate = await canCreateTask();
   const canDelete = await canDeleteTask();
 
   return (
     <GlobalContainerProvider value={context}>
-      <UserTasksPageLayout
+      <TasksPage
+        guestMode={guestMode}
         canCreateTask={canCreate}
         canDeleteTask={canDelete}
-        userTasksContainer={
-          <UserTasksContainer
-            userId={id}
-            page={page}
-            pageSize={pageSize}
-            sort={sort}
-          />
+        taskFiltersFormContainer={
+          <Suspense fallback={<TaskFiltersFormSkeleton />}>
+            <TaskFiltersFormContainer filters={filters} />
+          </Suspense>
         }
-        userHeaderContainer={<UserHeaderContainer userId={id} />}
         newTaskFormContainer={
           <Suspense fallback={<TaskFormBaseSkeleton />}>
             <NewTaskFormContainer />
           </Suspense>
         }
+        tasksContainer={
+          <TasksContainer
+            guestMode={guestMode}
+            page={page}
+            pageSize={pageSize}
+            sort={sort}
+            filters={filters}
+          />
+        }
         deleteTasksAction={deleteTasks}
         updateTasksStatusesAction={updateTaskStatuses}
-        navigationDesktop={<UserNavigationDesktop />}
-        navigationMobile={<UserNavigationMobile />}
+        createTaskCategoryAction={createTaskCategory}
       />
     </GlobalContainerProvider>
   );
