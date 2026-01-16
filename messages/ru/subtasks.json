@@ -1,4 +1,9 @@
 {
+  "SubtaskActionMenuTrigger": {
+    "edit": "Редактировать",
+    "delete": "Удалить"
+  },
+
   "SubtasksCheckboxGroup": {
     "label": "Подзадачи"
   },

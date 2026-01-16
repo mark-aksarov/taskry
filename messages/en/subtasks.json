@@ -1,4 +1,9 @@
 {
+  "SubtaskActionMenuTrigger": {
+    "edit": "Edit",
+    "delete": "Delete"
+  },
+
   "SubtasksCheckboxGroup": {
     "label": "Subtasks"
   },

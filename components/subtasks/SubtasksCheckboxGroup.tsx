@@ -1,5 +1,6 @@
 import { useTranslations } from "next-intl";
 import { CheckboxGroup, Checkbox } from "../ui";
+import { SubtaskActionMenuTrigger } from "./SubtaskActionMenuTrigger";
 
 export function SubtasksCheckboxGroup({
   subtasks,
@@ -17,13 +18,16 @@ export function SubtasksCheckboxGroup({
       isReadOnly
     >
       {subtasks.map((subtask) => (
-        <Checkbox
-          key={subtask.id}
-          value={subtask.id.toString()}
-          className="font-normal"
-        >
-          {subtask.text}
-        </Checkbox>
+        <div className="flex items-start gap-2">
+          <Checkbox
+            key={subtask.id}
+            value={subtask.id.toString()}
+            className="font-normal"
+          >
+            {subtask.text}
+          </Checkbox>
+          <SubtaskActionMenuTrigger />
+        </div>
       ))}
     </CheckboxGroup>
   );
