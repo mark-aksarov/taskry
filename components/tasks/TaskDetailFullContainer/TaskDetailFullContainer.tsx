@@ -3,7 +3,7 @@ import { TaskDetailFull } from "../TaskDetailFull";
 import { getTaskDetail } from "@/lib/data/task/task.service";
 import { CommentItem } from "@/components/comments/CommentItem";
 import { getCommentList } from "@/lib/data/comment/comment.service";
-import { DetailCommentInput } from "@/components/common/DetailCommentInput";
+import { DetailCommentForm } from "@/components/common/DetailCommentForm";
 
 export async function TaskDetailFullContainer({ id }: { id: number }) {
   const task = await getTaskDetail(id);
@@ -22,7 +22,7 @@ export async function TaskDetailFullContainer({ id }: { id: number }) {
       attachments={task.attachments}
       comments={
         <div className="flex flex-col gap-4">
-          <DetailCommentInput />
+          <DetailCommentForm />
           {comments.map((comment) => {
             return (
               <CommentItem

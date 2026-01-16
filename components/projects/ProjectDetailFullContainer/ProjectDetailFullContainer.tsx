@@ -3,7 +3,7 @@ import { ProjectDetailFull } from "../ProjectDetailFull";
 import { CommentItem } from "@/components/comments/CommentItem";
 import { getCommentList } from "@/lib/data/comment/comment.service";
 import { getProjectDetail } from "@/lib/data/project/project.service";
-import { DetailCommentInput } from "@/components/common/DetailCommentInput";
+import { DetailCommentForm } from "@/components/common/DetailCommentForm";
 
 export async function ProjectDetailFullContainer({ id }: { id: number }) {
   const project = await getProjectDetail(id);
@@ -21,7 +21,7 @@ export async function ProjectDetailFullContainer({ id }: { id: number }) {
       attachments={project.attachments}
       comments={
         <div className="flex flex-col gap-4">
-          <DetailCommentInput />
+          <DetailCommentForm />
           {comments.map((comment) => {
             return (
               <CommentItem

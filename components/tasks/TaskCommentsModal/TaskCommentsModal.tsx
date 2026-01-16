@@ -1,5 +1,5 @@
 import { useTranslations } from "next-intl";
-import { CommentsModal } from "@/components/common/CommentsModal";
+import { CommentsModal } from "@/components/comments/CommentsModal/CommentsModal";
 import { useGlobalContainer } from "@/components/layout/GlobalContainerContext";
 
 interface TaskCommentsModalProps {

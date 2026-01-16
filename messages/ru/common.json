@@ -48,15 +48,6 @@
     "placeholder": "Напишите комментарий..."
   },
 
-  "MessageInput": {
-    "attachFileButton": {
-      "ariaLabel": "Добавить вложения"
-    },
-    "sendButton": {
-      "ariaLabel": "Отправить сообщение"
-    }
-  },
-
   "Pagination": {
     "previousPage": "Предыдущая страница",
     "nextPage": "Следующая страница",

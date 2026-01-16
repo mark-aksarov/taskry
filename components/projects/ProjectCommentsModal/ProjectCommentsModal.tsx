@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import { useTranslations } from "next-intl";
 import { Repeat } from "@/components/common/Repeat";
-import { CommentsModal } from "@/components/common/CommentsModal";
+import { CommentsModal } from "@/components/comments/CommentsModal/CommentsModal";
 import { CommentItemSkeleton } from "@/components/comments/CommentItem";
 import { useGlobalContainer } from "@/components/layout/GlobalContainerContext";
 

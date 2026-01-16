@@ -48,15 +48,6 @@
     "placeholder": "Type a comment..."
   },
 
-  "MessageInput": {
-    "attachFileButton": {
-      "ariaLabel": "Add attachments"
-    },
-    "sendButton": {
-      "ariaLabel": "Send Message"
-    }
-  },
-
   "Pagination": {
     "previousPage": "Previous page",
     "nextPage": "Next page",

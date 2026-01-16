@@ -1,1 +1,0 @@
-export { DetailCommentInput } from "./DetailCommentInput";

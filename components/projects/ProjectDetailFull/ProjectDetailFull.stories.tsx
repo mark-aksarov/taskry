@@ -1,7 +1,7 @@
 import { ProjectDetailFull } from "./ProjectDetailFull";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { DetailCommentInput } from "@/components/common/DetailCommentInput";
+import { DetailCommentForm } from "@/components/common/DetailCommentForm";
 import { MockedCommentsContainer } from "@/components/comments/MockedCommentsContainer";
 
 const meta = {
@@ -42,7 +42,7 @@ export const Default = {
     ],
     comments: (
       <div className="flex flex-col gap-4">
-        <DetailCommentInput />
+        <DetailCommentForm />
         <MockedCommentsContainer />
       </div>
     ),

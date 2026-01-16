@@ -1,0 +1,1 @@
+export { DetailCommentForm } from "./DetailCommentForm";

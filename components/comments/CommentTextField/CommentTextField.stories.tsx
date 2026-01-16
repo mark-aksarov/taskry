@@ -1,14 +1,14 @@
-import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { MessageInput } from "./MessageInput";
-import { useState } from "react";
-import { Attachment, Attachments } from "@/components/attachments/Attachments";
 import Image from "next/image";
 import { fn } from "storybook/test";
+import { useState } from "react";
+import { CommentTextField } from "./CommentTextField";
+import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { Attachment, Attachments } from "@/components/attachments/Attachments";
 
 const meta = {
-  title: "Components/common/MessageInput",
-  component: MessageInput,
+  title: "Components/comments/CommentTextField",
+  component: CommentTextField,
   tags: ["autodocs"],
   decorators: [
     (Story) => (
@@ -23,14 +23,13 @@ const meta = {
   },
   args: {
     onFilesSelect: fn(),
-    placeholder: "Placeholder",
   },
-} satisfies Meta<typeof MessageInput>;
+} satisfies Meta<typeof CommentTextField>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-const MessageInputTemplate = {
+const CommentTextFieldTemplate = {
   args: {},
   render: (args) => {
     let [files, setFiles] = useState<FileList | null>(null);
@@ -52,18 +51,21 @@ const MessageInputTemplate = {
           </Attachments>
         )}
 
-        <MessageInput {...args} onFilesSelect={(files) => setFiles(files)} />
+        <CommentTextField
+          {...args}
+          onFilesSelect={(files) => setFiles(files)}
+        />
       </div>
     );
   },
 } satisfies Story;
 
 export const Default = {
-  ...MessageInputTemplate,
+  ...CommentTextFieldTemplate,
 } satisfies Story;
 
 export const Disabled = {
-  ...MessageInputTemplate,
+  ...CommentTextFieldTemplate,
   args: {
     isDisabled: true,
   },

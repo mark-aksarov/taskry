@@ -8,8 +8,15 @@
     "description": "No comments yet. Add the first one to share updates, ask a question, or start a discussion about this task."
   },
 
-  "CommentModalInput": {
-    "placeholder": "Type a comment..."
+  "CommentTextField": {
+    "placeholder": "Type a comment...",
+
+    "attachFileButton": {
+      "ariaLabel": "Add attachments"
+    },
+    "sendButton": {
+      "ariaLabel": "Send Message"
+    }
   },
 
   "ReplyButton": "Reply"

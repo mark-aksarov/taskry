@@ -8,8 +8,15 @@
     "description": "Комментариев пока нет. Добавьте первый, чтобы поделиться обновлениями, задать вопрос или начать обсуждение по этой задаче."
   },
 
-  "CommentModalInput": {
-    "placeholder": "Напишите комментарий..."
+  "CommentTextField": {
+    "placeholder": "Напишите комментарий...",
+
+    "attachFileButton": {
+      "ariaLabel": "Добавить вложения"
+    },
+    "sendButton": {
+      "ariaLabel": "Отправить сообщение"
+    }
   },
 
   "ReplyButton": "Ответить"
