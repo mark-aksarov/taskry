@@ -9,16 +9,12 @@ import {
 
 import {
   ItemBaseBadge,
-  ItemBaseButton,
   ItemBaseDetailModalTrigger,
   ItemBaseDetailBottomSheetTrigger,
 } from "@/components/common/ItemBase";
 
 import Image from "next/image";
-import { MessageSquare } from "lucide-react";
-import { RACDialogTrigger } from "@/components/ui";
 import { TaskDetailModal } from "../TaskDetailModal";
-import { TaskCommentsModal } from "../TaskCommentsModal";
 import { useFormatter, useTranslations } from "next-intl";
 import { TaskGridItemLayout } from "./TaskGridItemLayout";
 import { UnknownUser } from "@/components/common/UnknownUser";
@@ -42,9 +38,9 @@ export interface TaskGridItemProps {
   };
   status: TaskStatus;
   projectStatus: ProjectStatus;
-  commentsCount: number;
   subtasksTotal: number;
   subtasksDone: number;
+  commentModalTrigger?: React.ReactNode;
   menuTrigger?: React.ReactNode;
 }
 
@@ -55,9 +51,9 @@ export function TaskGridItem({
   assignee,
   status,
   projectStatus,
-  commentsCount,
   subtasksTotal,
   subtasksDone,
+  commentModalTrigger,
   menuTrigger,
 }: TaskGridItemProps) {
   const t = useTranslations("tasks");
@@ -132,17 +128,7 @@ export function TaskGridItem({
           <UnknownUser className="h-9 w-9" />
         )
       }
-      commentsSlot={
-        <RACDialogTrigger>
-          <ItemBaseButton
-            label={commentsCount}
-            iconLeft={
-              <MessageSquare size={16} strokeWidth={1.5} absoluteStrokeWidth />
-            }
-          />
-          <TaskCommentsModal taskId={id} />
-        </RACDialogTrigger>
-      }
+      commentsSlot={commentModalTrigger}
       statusSlot={
         <ItemBaseBadge color={getTaskStatusBadgeColor(status)}>
           {t(`TaskStatus.${status}`)}

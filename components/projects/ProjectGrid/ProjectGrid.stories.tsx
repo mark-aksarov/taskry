@@ -5,6 +5,7 @@ import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { ProjectStatus } from "@/generated/prisma/enums";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { ProjectItemActionMenuTrigger } from "../ProjectItemActionMenuTrigger";
+import { ProjectCommentsModalTrigger } from "../ProjectCommentsModalTrigger";
 
 const mockedProjects = [
   {
@@ -127,6 +128,13 @@ export const Default = {
           <ProjectGridItem
             key={project.id}
             {...project}
+            commentModalTrigger={
+              <ProjectCommentsModalTrigger
+                projectId={project.id}
+                commentsCount={project.commentsCount}
+                sendCommentAction={fn()}
+              />
+            }
             menuTrigger={
               <ProjectItemActionMenuTrigger
                 projectId={project.id}

@@ -14,3 +14,13 @@ export interface CommentListItemDTO {
     fileUrl: string;
   }[];
 }
+
+export interface CreateCommentInputDTO {
+  content: string;
+  taskId?: number;
+  projectId?: number;
+  attachments?: {
+    fileUrl: string;
+    fileName: string;
+  }[];
+}

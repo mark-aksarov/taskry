@@ -5,6 +5,7 @@ import { UserTaskListItem } from "../UserTaskListItem";
 import { ProjectStatus, TaskStatus } from "@/generated/prisma/enums";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { TaskItemActionMenuTrigger } from "@/components/tasks/TaskItemActionMenuTrigger";
+import { TaskCommentsModalTrigger } from "@/components/tasks/TaskCommentsModalTrigger";
 
 const mockedTasks = [
   {
@@ -79,21 +80,6 @@ const mockedTasks = [
   },
 ];
 
-const renderMenu = (task: any) => (
-  <TaskItemActionMenuTrigger
-    guestMode={false}
-    taskId={task.id}
-    taskTitle={task.title}
-    taskStatus={task.status}
-    projectStatus={ProjectStatus.active}
-    canDelete={true}
-    canUpdate={true}
-    canUpdateStatus={true}
-    deleteAction={fn()}
-    updateStatusAction={fn()}
-  />
-);
-
 const meta = {
   title: "Components/users/UserTaskList",
   component: UserTaskList,
@@ -111,7 +97,27 @@ export const Default = {
         key={task.id}
         {...task}
         projectStatus={ProjectStatus.active}
-        menuTrigger={renderMenu(task)}
+        commentModalTrigger={
+          <TaskCommentsModalTrigger
+            taskId={task.id}
+            commentsCount={task.commentsCount}
+            sendCommentAction={fn()}
+          />
+        }
+        menuTrigger={
+          <TaskItemActionMenuTrigger
+            guestMode={false}
+            taskId={task.id}
+            taskTitle={task.title}
+            taskStatus={task.status}
+            projectStatus={ProjectStatus.active}
+            canDelete={true}
+            canUpdate={true}
+            canUpdateStatus={true}
+            deleteAction={fn()}
+            updateStatusAction={fn()}
+          />
+        }
       />
     )),
   },

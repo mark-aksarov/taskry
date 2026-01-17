@@ -56,9 +56,9 @@ export interface ProjectListItemProps {
     name: string;
   };
   status: ProjectStatus;
-  commentsCount: number;
   showCheckbox?: boolean;
-  menuTrigger?: React.ReactNode;
+  commentModalTrigger: React.ReactNode;
+  menuTrigger: React.ReactNode;
 }
 
 export const ProjectListItem = ({
@@ -70,8 +70,8 @@ export const ProjectListItem = ({
   company,
   status,
   creator,
-  commentsCount,
   showCheckbox,
+  commentModalTrigger,
   menuTrigger,
 }: ProjectListItemProps) => {
   const t = useTranslations("projects");
@@ -218,17 +218,7 @@ export const ProjectListItem = ({
           {t(`ProjectStatus.${status}`)}
         </ItemBaseBadge>
       }
-      commentsModalTriggerSlot={
-        <RACDialogTrigger>
-          <ItemBaseButton
-            label={commentsCount}
-            iconLeft={
-              <MessageSquare size={16} strokeWidth={1.5} absoluteStrokeWidth />
-            }
-          />
-          <ProjectCommentsModal projectId={id} />
-        </RACDialogTrigger>
-      }
+      commentsModalTriggerSlot={commentModalTrigger}
       menuTriggerSlot={menuTrigger}
     />
   );

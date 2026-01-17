@@ -12,7 +12,10 @@ export function CommentItemLayout({
   contentSlot,
 }: CommentItemLayoutProps) {
   return (
-    <div className="flex flex-col gap-4 border-gray-300 not-last:border-b-1 not-last:pb-4 dark:border-gray-600">
+    <div
+      data-test="comment-item"
+      className="flex flex-col gap-4 border-gray-300 not-last:border-b-1 not-last:pb-4 dark:border-gray-600"
+    >
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
           {senderImageSlot}

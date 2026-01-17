@@ -3,6 +3,7 @@ import { ProjectListItem } from "./ProjectListItem";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { ProjectStatus } from "@/generated/prisma/enums";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { ProjectCommentsModalTrigger } from "../ProjectCommentsModalTrigger";
 import { ProjectItemActionMenuTrigger } from "../ProjectItemActionMenuTrigger";
 
 const meta = {
@@ -11,22 +12,30 @@ const meta = {
   tags: ["autodocs"],
   decorators: [withThemedBackground],
   render: (args) => (
-    <ProjectListItem {...args} menuTrigger={renderMenu(args)} />
+    <ProjectListItem
+      {...args}
+      commentModalTrigger={
+        <ProjectCommentsModalTrigger
+          projectId={1}
+          commentsCount={10}
+          sendCommentAction={fn()}
+        />
+      }
+      menuTrigger={
+        <ProjectItemActionMenuTrigger
+          projectId={args.id}
+          projectTitle={args.title}
+          projectStatus={args.status}
+          deleteAction={fn()}
+          updateStatusAction={fn()}
+        />
+      }
+    />
   ),
 } satisfies Meta<typeof ProjectListItem>;
 
 export default meta;
 type Story = StoryObj<typeof ProjectListItem>;
-
-const renderMenu = (args: any) => (
-  <ProjectItemActionMenuTrigger
-    projectId={args.id}
-    projectTitle={args.title}
-    projectStatus={args.status}
-    deleteAction={fn()}
-    updateStatusAction={fn()}
-  />
-);
 
 export const Default = {
   args: {
@@ -49,7 +58,6 @@ export const Default = {
       id: 1,
       name: "Doe Inc.",
     },
-    commentsCount: 5,
     showCheckbox: false,
   },
 } satisfies Story;

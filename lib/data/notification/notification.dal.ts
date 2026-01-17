@@ -155,6 +155,70 @@ export const markNotificationsAsRead = async (ids: number[] | null) => {
  * Send notifications
  */
 
+export async function createCommentAddedNotifications(
+  tx: Prisma.TransactionClient,
+  {
+    comment,
+    actorId,
+    workspaceId,
+  }: {
+    comment: {
+      id: number;
+      content: string;
+      taskId?: number | null;
+      projectId?: number | null;
+    };
+    actorId: string;
+    workspaceId: number;
+  },
+) {
+  let taskTitle: string | undefined;
+  let projectTitle: string | undefined;
+  let contextAssigneeId: string | null = null;
+
+  if (comment.taskId) {
+    const task = await tx.task.findUnique({
+      where: { id: comment.taskId },
+      select: { title: true, assigneeId: true },
+    });
+    taskTitle = task?.title;
+    contextAssigneeId = task?.assigneeId || null;
+  }
+
+  if (comment.projectId) {
+    const project = await tx.project.findUnique({
+      where: { id: comment.projectId },
+      select: { title: true },
+    });
+    projectTitle = project?.title;
+  }
+
+  const candidates = await getNotificationCandidates(tx, workspaceId, actorId, [
+    contextAssigneeId,
+  ]);
+
+  const notificationsData = candidates.map((user) => ({
+    type: NotificationType.commentAdded,
+    actorId,
+    recipientId: user.id,
+    workspaceId,
+
+    commentId: comment.id,
+    taskId: comment.taskId,
+    projectId: comment.projectId,
+
+    commentContent: comment.content.substring(0, 150),
+    taskTitle: taskTitle,
+    projectTitle: projectTitle,
+
+    isRead: false,
+  }));
+
+  if (notificationsData.length > 0) {
+    await tx.notification.createMany({ data: notificationsData });
+  }
+}
+
 export async function createTaskAddedNotifications(
   tx: Prisma.TransactionClient,
   {

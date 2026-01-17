@@ -5,6 +5,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { ProjectStatus } from "@/generated/prisma/enums";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { ProjectItemActionMenuTrigger } from "../ProjectItemActionMenuTrigger";
+import { ProjectCommentsModalTrigger } from "../ProjectCommentsModalTrigger";
 
 const mockedProjects = [
   {
@@ -82,6 +83,13 @@ export const Default = {
         key={project.id}
         {...project}
         showCheckbox={true}
+        commentModalTrigger={
+          <ProjectCommentsModalTrigger
+            projectId={project.id}
+            commentsCount={project.commentsCount}
+            sendCommentAction={fn()}
+          />
+        }
         menuTrigger={
           <ProjectItemActionMenuTrigger
             projectId={project.id}

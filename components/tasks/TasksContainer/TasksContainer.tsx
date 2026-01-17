@@ -12,6 +12,8 @@ import { TaskGridItem } from "../TaskGridItem";
 import { getTaskList } from "@/lib/data/task/task.service";
 import { TaskListItemDTO } from "@/lib/data/task/task.dto";
 import { deleteTasks } from "@/lib/actions/task/deleteTasks";
+import { sendComment } from "@/lib/actions/comment/sendComment";
+import { TaskCommentsModalTrigger } from "../TaskCommentsModalTrigger";
 import { TaskItemActionMenuTrigger } from "../TaskItemActionMenuTrigger";
 import { updateTaskStatuses } from "@/lib/actions/task/updateTaskStatuses";
 import { EntityContainerPresentation } from "@/components/common/EntityContainerPresentation";
@@ -95,6 +97,13 @@ export async function TasksContainer({
                 key={task.id}
                 category={task.category}
                 project={task.project}
+                commentModalTrigger={
+                  <TaskCommentsModalTrigger
+                    taskId={task.id}
+                    commentsCount={task.commentsCount}
+                    sendCommentAction={sendComment}
+                  />
+                }
                 menuTrigger={renderMenuTrigger(task)}
                 showCheckbox
                 {...getCommonProps(task)}
@@ -110,6 +119,13 @@ export async function TasksContainer({
               key={task.id}
               subtasksDone={task.subtasks.done}
               projectStatus={task.project.status}
+              commentModalTrigger={
+                <TaskCommentsModalTrigger
+                  taskId={task.id}
+                  commentsCount={task.commentsCount}
+                  sendCommentAction={sendComment}
+                />
+              }
               menuTrigger={renderMenuTrigger(task, "-mr-2")}
               {...getCommonProps(task)}
             />

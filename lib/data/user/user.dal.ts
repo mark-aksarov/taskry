@@ -23,6 +23,24 @@ export async function canCreateTask() {
   return permission.success;
 }
 
+export async function canCreateComment() {
+  const {
+    user: { id },
+  } = await verifySession();
+
+  // ACL
+  const permission = await auth.api.userHasPermission({
+    body: {
+      userId: id,
+      permission: {
+        comment: ["create"],
+      },
+    },
+  });
+
+  return permission.success;
+}
+
 export async function canDeleteTask() {
   const {
     user: { id },

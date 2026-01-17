@@ -3,9 +3,11 @@ import { ProjectGrid } from "./ProjectGrid";
 import { ProjectFilters } from "@/lib/types";
 import { ProjectListItem } from "./ProjectListItem";
 import { ProjectGridItem } from "./ProjectGridItem";
+import { sendComment } from "@/lib/actions/comment/sendComment";
 import { getProjectList } from "@/lib/data/project/project.service";
 import { ProjectListItemDTO } from "@/lib/data/project/project.dto";
 import { deleteProjects } from "@/lib/actions/project/deleteProjects";
+import { ProjectCommentsModalTrigger } from "./ProjectCommentsModalTrigger";
 import { ProjectItemActionMenuTrigger } from "./ProjectItemActionMenuTrigger";
 import { updateProjectStatuses } from "@/lib/actions/project/updateProjectStatuses";
 import { EntityContainerPresentation } from "../common/EntityContainerPresentation";
@@ -70,6 +72,13 @@ export async function ProjectsContainer({
               customer={project.customer}
               company={project.customer?.company}
               category={project.category}
+              commentModalTrigger={
+                <ProjectCommentsModalTrigger
+                  projectId={project.id}
+                  commentsCount={project.commentsCount}
+                  sendCommentAction={sendComment}
+                />
+              }
               menuTrigger={renderMenuTrigger(project)}
               {...getCommonProps(project)}
             />
@@ -82,6 +91,13 @@ export async function ProjectsContainer({
             <ProjectGridItem
               key={project.id}
               tasksTotal={project.tasks.total}
+              commentModalTrigger={
+                <ProjectCommentsModalTrigger
+                  projectId={project.id}
+                  commentsCount={project.commentsCount}
+                  sendCommentAction={sendComment}
+                />
+              }
               menuTrigger={renderMenuTrigger(project, "-mr-2")}
               tasksCompleted={project.tasks.completed}
               {...getCommonProps(project)}

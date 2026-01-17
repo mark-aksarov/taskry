@@ -47,8 +47,8 @@ export interface ProjectGridItemProps {
   status: ProjectStatus;
   tasksTotal: number;
   tasksCompleted: number;
-  commentsCount: number;
-  menuTrigger?: React.ReactNode;
+  commentModalTrigger: React.ReactNode;
+  menuTrigger: React.ReactNode;
 }
 
 export function ProjectGridItem({
@@ -59,7 +59,7 @@ export function ProjectGridItem({
   status,
   tasksTotal,
   tasksCompleted,
-  commentsCount,
+  commentModalTrigger,
   menuTrigger,
 }: ProjectGridItemProps) {
   const t = useTranslations("projects");
@@ -141,17 +141,7 @@ export function ProjectGridItem({
           <UnknownUser className="h-9 w-9" />
         )
       }
-      commentsSlot={
-        <RACDialogTrigger>
-          <ItemBaseButton
-            label={commentsCount}
-            iconLeft={
-              <MessageSquare size={16} strokeWidth={1.5} absoluteStrokeWidth />
-            }
-          />
-          <ProjectCommentsModal projectId={id} />
-        </RACDialogTrigger>
-      }
+      commentsSlot={commentModalTrigger}
       statusSlot={
         <ItemBaseBadge color={getProjectStatusBadgeColor(status)}>
           {t(`ProjectStatus.${status}`)}

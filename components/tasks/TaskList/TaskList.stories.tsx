@@ -1,6 +1,8 @@
+import { fn } from "storybook/test";
 import { TaskList } from "./TaskList";
 import { TaskListItem } from "../TaskListItem";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { TaskCommentsModalTrigger } from "../TaskCommentsModalTrigger";
 import { ProjectStatus, TaskStatus } from "@/generated/prisma/enums";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { TaskItemActionMenuTrigger } from "../TaskItemActionMenuTrigger";
@@ -31,7 +33,7 @@ const mockedTasks = [
     project: "Website Redesign",
     category: "Design",
     status: TaskStatus.pending,
-    comments: 10,
+    commentsCount: 10,
     assignee: { id: "user1", imageUrl: "/man.jpg", fullName: "John Doe" },
   },
   {
@@ -41,7 +43,7 @@ const mockedTasks = [
     project: "Authentication Module",
     category: "Development",
     status: TaskStatus.active,
-    comments: 22,
+    commentsCount: 22,
   },
   {
     id: 3,
@@ -50,7 +52,7 @@ const mockedTasks = [
     project: "Core Database Upgrade",
     category: "Backend",
     status: TaskStatus.completed,
-    comments: 2,
+    commentsCount: 2,
     assignee: { id: "user3", fullName: "Jane Doe" },
   },
   {
@@ -60,7 +62,7 @@ const mockedTasks = [
     project: "Quality Assurance Suite",
     category: "Testing",
     status: TaskStatus.pending,
-    comments: 12,
+    commentsCount: 12,
     assignee: { id: "user4", imageUrl: "/man.jpg", fullName: "John Doe" },
   },
   {
@@ -70,7 +72,7 @@ const mockedTasks = [
     project: "CI/CD Automation",
     category: "DevOps",
     status: TaskStatus.active,
-    comments: 15,
+    commentsCount: 15,
     assignee: { id: "user5", imageUrl: "/man.jpg", fullName: "John Doe" },
   },
   {
@@ -80,7 +82,7 @@ const mockedTasks = [
     project: "Infrastructure Setup",
     category: "Infrastructure",
     status: TaskStatus.completed,
-    comments: 9,
+    commentsCount: 9,
     assignee: { id: "user6", imageUrl: "/man.jpg", fullName: "John Doe" },
   },
   {
@@ -90,7 +92,7 @@ const mockedTasks = [
     project: "User Experience Improvements",
     category: "UX",
     status: TaskStatus.completed,
-    comments: 12,
+    commentsCount: 12,
     assignee: { id: "user7", imageUrl: "/man.jpg", fullName: "John Doe" },
   },
   {
@@ -100,7 +102,7 @@ const mockedTasks = [
     project: "E-commerce Platform",
     category: "Bugfix",
     status: TaskStatus.active,
-    comments: 10,
+    commentsCount: 10,
     assignee: { id: "user8", imageUrl: "/man.jpg", fullName: "John Doe" },
   },
   {
@@ -110,7 +112,7 @@ const mockedTasks = [
     project: "Performance Optimization",
     category: "Performance",
     status: TaskStatus.pending,
-    comments: 23,
+    commentsCount: 23,
     assignee: { id: "user9", fullName: "Jane Doe" },
   },
   {
@@ -120,7 +122,7 @@ const mockedTasks = [
     project: "Backend Refactoring",
     category: "Backend",
     status: TaskStatus.completed,
-    comments: 13,
+    commentsCount: 13,
   },
 ];
 
@@ -136,7 +138,6 @@ export const getTaskListItems = ({
       title={task.title}
       deadline={new Date(task.deadline)}
       status={task.status}
-      commentsCount={task.comments}
       assignee={task.assignee}
       project={{
         id: task.id,
@@ -145,6 +146,13 @@ export const getTaskListItems = ({
       }}
       category={{ id: task.id, name: task.category }}
       showCheckbox={showCheckbox}
+      commentModalTrigger={
+        <TaskCommentsModalTrigger
+          taskId={task.id}
+          commentsCount={task.commentsCount}
+          sendCommentAction={fn()}
+        />
+      }
       menuTrigger={
         <TaskItemActionMenuTrigger
           guestMode={false}

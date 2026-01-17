@@ -6,13 +6,14 @@ import {
   TextField as RACTextField,
 } from "react-aria-components";
 
+import { useState } from "react";
 import { tv } from "tailwind-variants";
+import { useTranslations } from "next-intl";
 import { fieldStyles, focusRing } from "@/components/ui";
 import { fieldInputStyles as baseInputStyles } from "@/components/ui";
 import { CommentTextFieldSendButton } from "./CommentTextFieldSendButton";
 import { CommentTextFieldFileTrigger } from "./CommentTextFieldFileTrigger";
 import type { TextFieldProps as RACTextFieldProps } from "react-aria-components";
-import { useTranslations } from "next-intl";
 
 export const fieldInputStyles = tv({
   base: [
@@ -27,17 +28,20 @@ export const fieldInputStyles = tv({
 
 type CommentTextFieldProps = RACTextFieldProps &
   React.RefAttributes<HTMLDivElement> & {
+    isLoading?: boolean;
     textAreaClassName?: string;
     acceptedFileTypes?: string[];
     onFilesSelect: (files: FileList) => void;
   };
 
 export const CommentTextField = ({
+  isLoading,
   acceptedFileTypes,
   onFilesSelect,
   textAreaClassName,
   ...props
 }: CommentTextFieldProps) => {
+  const [commentContent, setCommentContent] = useState("");
   const t = useTranslations("comments.CommentTextField");
 
   const buttonClasses = "absolute top-[1.75rem] -translate-y-1/2 rounded-full";
@@ -48,7 +52,16 @@ export const CommentTextField = ({
         onFilesSelect={onFilesSelect}
         buttonClasses={buttonClasses}
       />
-      <RACTextField {...props} className={fieldStyles}>
+
+      <RACTextField
+        {...props}
+        id="content"
+        name="content"
+        value={commentContent}
+        onChange={setCommentContent}
+        className={fieldStyles}
+        isDisabled={isLoading}
+      >
         <TextArea
           placeholder={t("placeholder")}
           className={composeRenderProps(
@@ -58,7 +71,11 @@ export const CommentTextField = ({
           )}
         />
       </RACTextField>
-      <CommentTextFieldSendButton buttonClasses={buttonClasses} />
+
+      <CommentTextFieldSendButton
+        buttonClasses={buttonClasses}
+        isDisabled={!commentContent || isLoading}
+      />
     </div>
   );
 };

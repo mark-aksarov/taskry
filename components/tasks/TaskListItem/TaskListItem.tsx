@@ -8,16 +8,12 @@ import {
 
 import {
   ItemBaseBadge,
-  ItemBaseButton,
   ItemBaseDetailModalTrigger,
   ItemBaseDetailBottomSheetTrigger,
 } from "@/components/common/ItemBase";
 
 import Image from "next/image";
-import { MessageSquare } from "lucide-react";
-import { RACDialogTrigger } from "@/components/ui";
 import { TaskDetailModal } from "../TaskDetailModal";
-import { TaskCommentsModal } from "../TaskCommentsModal";
 import { TaskListItemLayout } from "./TaskListItemLayout";
 import { useFormatter, useTranslations } from "next-intl";
 import { UnknownUser } from "@/components/common/UnknownUser";
@@ -49,8 +45,8 @@ export interface TaskListItemProps {
     status: ProjectStatus;
   };
   status: TaskStatus;
-  commentsCount: number;
   showCheckbox?: boolean;
+  commentModalTrigger?: React.ReactNode;
   menuTrigger?: React.ReactNode;
 }
 
@@ -62,8 +58,8 @@ export const TaskListItem = ({
   category,
   project,
   status,
-  commentsCount,
   showCheckbox,
+  commentModalTrigger,
   menuTrigger,
 }: TaskListItemProps) => {
   const t = useTranslations("tasks");
@@ -174,17 +170,7 @@ export const TaskListItem = ({
           {t(`TaskStatus.${status}`)}
         </ItemBaseBadge>
       }
-      commentsModalTriggerSlot={
-        <RACDialogTrigger>
-          <ItemBaseButton
-            label={commentsCount}
-            iconLeft={
-              <MessageSquare size={16} strokeWidth={1.5} absoluteStrokeWidth />
-            }
-          />
-          <TaskCommentsModal taskId={id} />
-        </RACDialogTrigger>
-      }
+      commentsModalTriggerSlot={commentModalTrigger}
       menuTriggerSlot={menuTrigger}
     />
   );

@@ -2,6 +2,7 @@ import { fn } from "storybook/test";
 import { ProjectGridItem } from "./ProjectGridItem";
 import type { Meta, StoryObj } from "@storybook/react";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { ProjectCommentsModalTrigger } from "../ProjectCommentsModalTrigger";
 import { ProjectItemActionMenuTrigger } from "../ProjectItemActionMenuTrigger";
 
 const meta = {
@@ -18,23 +19,30 @@ const meta = {
   ],
 
   render: (args) => (
-    <ProjectGridItem {...args} menuTrigger={renderMenu(args)} />
+    <ProjectGridItem
+      {...args}
+      commentModalTrigger={
+        <ProjectCommentsModalTrigger
+          projectId={1}
+          commentsCount={10}
+          sendCommentAction={fn()}
+        />
+      }
+      menuTrigger={
+        <ProjectItemActionMenuTrigger
+          projectId={args.id}
+          projectTitle={args.title}
+          projectStatus={args.status}
+          deleteAction={fn()}
+          updateStatusAction={fn()}
+        />
+      }
+    />
   ),
 } satisfies Meta<typeof ProjectGridItem>;
 
 export default meta;
 type Story = StoryObj<typeof ProjectGridItem>;
-
-const renderMenu = (args: any) => (
-  <ProjectItemActionMenuTrigger
-    projectId={args.id}
-    projectTitle={args.title}
-    projectStatus={args.status}
-    deleteAction={fn()}
-    updateStatusAction={fn()}
-    className="-mr-2"
-  />
-);
 
 export const Default = {
   args: {
@@ -47,7 +55,6 @@ export const Default = {
       imageUrl: "/woman.jpg",
     },
     status: "pending",
-    commentsCount: 5,
     tasksTotal: 10,
     tasksCompleted: 8,
   },

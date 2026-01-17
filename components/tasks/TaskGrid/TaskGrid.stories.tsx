@@ -1,9 +1,11 @@
+import { fn } from "storybook/test";
 import { TaskGrid } from "./TaskGrid";
 import { TaskGridItem } from "../TaskGridItem";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { ProjectStatus, TaskStatus } from "@/generated/prisma/enums";
+import { TaskCommentsModalTrigger } from "../TaskCommentsModalTrigger";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { TaskItemActionMenuTrigger } from "../TaskItemActionMenuTrigger";
-import { ProjectStatus, TaskStatus } from "@/generated/prisma/enums";
 
 const meta = {
   title: "Components/tasks/TaskGrid",
@@ -29,7 +31,7 @@ const mockedTasks = [
     deadline: "2025-09-28",
     status: TaskStatus.active,
     assignee: { id: "user1", imageUrl: "/man.jpg", fullName: "Liam Turner" },
-    comments: 99,
+    commentsCount: 99,
     total: 3,
     done: 1,
   },
@@ -39,7 +41,7 @@ const mockedTasks = [
     deadline: "2025-10-06",
     status: TaskStatus.active,
     assignee: undefined,
-    comments: 10,
+    commentsCount: 10,
     total: 4,
     done: 2,
   },
@@ -49,7 +51,7 @@ const mockedTasks = [
     deadline: "2025-10-11",
     status: TaskStatus.pending,
     assignee: { id: "user3", imageUrl: undefined, fullName: "Olivia White" },
-    comments: 6,
+    commentsCount: 6,
     total: 2,
     done: 2,
   },
@@ -59,7 +61,7 @@ const mockedTasks = [
     deadline: "2025-10-13",
     status: TaskStatus.completed,
     assignee: { id: "user4", imageUrl: "/man.jpg", fullName: "Ethan Green" },
-    comments: 25,
+    commentsCount: 25,
     total: 4,
     done: 2,
   },
@@ -69,7 +71,7 @@ const mockedTasks = [
     deadline: "2025-10-16",
     status: TaskStatus.pending,
     assignee: { id: "user5", imageUrl: "/man.jpg", fullName: "Mason Moore" },
-    comments: 99,
+    commentsCount: 99,
     total: 4,
     done: 3,
   },
@@ -79,7 +81,7 @@ const mockedTasks = [
     deadline: "2025-10-19",
     status: TaskStatus.active,
     assignee: { id: "user6", imageUrl: "/man.jpg", fullName: "Ava Black" },
-    comments: 99,
+    commentsCount: 99,
     total: 3,
     done: 3,
   },
@@ -89,7 +91,7 @@ const mockedTasks = [
     deadline: "2025-10-21",
     status: TaskStatus.completed,
     assignee: { id: "user7", imageUrl: "/man.jpg", fullName: "Isabella Hall" },
-    comments: 47,
+    commentsCount: 47,
     total: 3,
     done: 3,
   },
@@ -99,7 +101,7 @@ const mockedTasks = [
     deadline: "2025-10-23",
     status: TaskStatus.pending,
     assignee: { id: "user8", imageUrl: "/man.jpg", fullName: "Henry Young" },
-    comments: 18,
+    commentsCount: 18,
     total: 3,
     done: 1,
   },
@@ -109,7 +111,7 @@ const mockedTasks = [
     deadline: "2025-10-26",
     status: TaskStatus.pending,
     assignee: { id: "user9", imageUrl: undefined, fullName: "Ivy Adams" },
-    comments: 67,
+    commentsCount: 67,
     total: 3,
     done: 1,
   },
@@ -119,7 +121,7 @@ const mockedTasks = [
     deadline: "2025-10-29",
     status: TaskStatus.active,
     assignee: undefined,
-    comments: 87,
+    commentsCount: 87,
     total: 3,
     done: 2,
   },
@@ -137,10 +139,16 @@ export const Default = {
             deadline={new Date(task.deadline)}
             assignee={task.assignee}
             status={task.status}
-            commentsCount={task.comments}
             subtasksTotal={task.total}
             subtasksDone={task.done}
             projectStatus={ProjectStatus.active}
+            commentModalTrigger={
+              <TaskCommentsModalTrigger
+                taskId={1}
+                commentsCount={task.commentsCount}
+                sendCommentAction={fn()}
+              />
+            }
             menuTrigger={
               <TaskItemActionMenuTrigger
                 guestMode={false}

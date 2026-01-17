@@ -1,15 +1,51 @@
 "use client";
 
-import { useState } from "react";
-import { twMerge } from "tailwind-merge";
+import { useSWRConfig } from "swr";
+import { Form } from "react-aria-components";
 import { CommentTextField } from "../CommentTextField";
-import { CommentForm, CommentFormAttachments } from "../CommentForm";
+import { CommentFormAttachments } from "../CommentForm";
+import { ActionFn, ActionState } from "@/lib/actions/types";
+import { startTransition, useActionState, useEffect, useState } from "react";
 
-export function CommentsModalForm() {
+const initialState: ActionState = {
+  status: null,
+  message: null,
+};
+
+interface CommentsModalFormProps {
+  sendCommentAction: ActionFn<ActionState, FormData>;
+  mutateUrl: string;
+  entityIdInputProps: { name: string; value: number };
+}
+
+export function CommentsModalForm({
+  sendCommentAction,
+  mutateUrl,
+  entityIdInputProps,
+}: CommentsModalFormProps) {
   let [files, setFiles] = useState<FileList | null>(null);
 
+  const { mutate } = useSWRConfig();
+
+  const [state, action, pending] = useActionState(
+    sendCommentAction,
+    initialState,
+  );
+
+  useEffect(() => {
+    if (state.status === "success") {
+      mutate(mutateUrl);
+    }
+  }, [state, mutateUrl]);
+
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    startTransition(() => action(formData));
+  }
+
   return (
-    <CommentForm files={files}>
+    <Form onSubmit={handleSubmit} className="flex w-full flex-col">
       {files && (
         <CommentFormAttachments
           files={files}
@@ -17,10 +53,11 @@ export function CommentsModalForm() {
         />
       )}
       <CommentTextField
+        isLoading={pending}
         onFilesSelect={setFiles}
-        className={twMerge("w-full")}
         textAreaClassName="bg-white dark:bg-gray-800 outline-hidden"
       />
-    </CommentForm>
+      <input type="hidden" {...entityIdInputProps} />
+    </Form>
   );
 }

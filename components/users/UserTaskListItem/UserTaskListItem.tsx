@@ -8,19 +8,15 @@ import {
 
 import {
   ItemBaseBadge,
-  ItemBaseButton,
   ItemBaseDetailModalTrigger,
   ItemBaseDetailBottomSheetTrigger,
 } from "@/components/common/ItemBase";
 
-import { MessageSquare } from "lucide-react";
-import { RACDialogTrigger } from "@/components/ui";
 import { useFormatter, useTranslations } from "next-intl";
 import { UserTaskListItemLayout } from "./UserTaskListItemLayout";
 import { ProjectStatus, TaskStatus } from "@/generated/prisma/enums";
 import { TaskDetailModal } from "@/components/tasks/TaskDetailModal";
 import { useSyncSelectionTaskItem } from "@/lib/hooks/useTaskSelection";
-import { TaskCommentsModal } from "@/components/tasks/TaskCommentsModal";
 import { TaskDetailBottomSheet } from "@/components/tasks/TaskDetailBottomSheet";
 import { getTaskStatusBadgeColor } from "@/components/tasks/getTaskStatusBadgeColor";
 import { TaskListItemCheckbox } from "@/components/tasks/TaskListItem/TaskListItemCheckbox";
@@ -31,8 +27,8 @@ export interface UserTaskListItemProps {
   deadline?: Date;
   status: TaskStatus;
   projectStatus: ProjectStatus;
-  commentsCount: number;
-  menuTrigger?: React.ReactNode;
+  commentModalTrigger?: React.ReactNode;
+  menuTrigger: React.ReactNode;
 }
 
 export const UserTaskListItem = ({
@@ -41,7 +37,7 @@ export const UserTaskListItem = ({
   deadline,
   status,
   projectStatus,
-  commentsCount,
+  commentModalTrigger,
   menuTrigger,
 }: UserTaskListItemProps) => {
   const t = useTranslations();
@@ -93,17 +89,7 @@ export const UserTaskListItem = ({
           {t(`tasks.TaskStatus.${status}`)}
         </ItemBaseBadge>
       }
-      commentsSlot={
-        <RACDialogTrigger>
-          <ItemBaseButton
-            label={commentsCount}
-            iconLeft={
-              <MessageSquare size={16} strokeWidth={1.5} absoluteStrokeWidth />
-            }
-          />
-          <TaskCommentsModal taskId={id} />
-        </RACDialogTrigger>
-      }
+      commentsSlot={commentModalTrigger}
       actionMenuSlot={menuTrigger}
     />
   );

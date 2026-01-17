@@ -1,3 +1,4 @@
+import { fn } from "storybook/test";
 import { Repeat } from "@/components/common/Repeat";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { Button, RACDialogTrigger } from "@/components/ui";
@@ -31,9 +32,14 @@ const meta = {
 export default meta;
 export type Story = StoryObj<typeof meta>;
 
-export const Default = {} satisfies Story;
+export const Default = {
+  args: {
+    sendCommentAction: fn(),
+  },
+} satisfies Story;
 
 export const Empty = {
+  ...Default,
   decorators: [
     (Story) => (
       <GlobalContainerProvider
@@ -48,6 +54,7 @@ export const Empty = {
 } satisfies Story;
 
 export const WithSkeletonContent = {
+  ...Default,
   decorators: [
     (Story) => (
       <GlobalContainerProvider

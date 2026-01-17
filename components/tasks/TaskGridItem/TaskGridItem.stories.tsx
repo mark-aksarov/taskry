@@ -1,9 +1,10 @@
 import { fn } from "storybook/internal/test";
 import { TaskGridItem } from "./TaskGridItem";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { ProjectStatus, TaskStatus } from "@/generated/prisma/enums";
+import { TaskCommentsModalTrigger } from "../TaskCommentsModalTrigger";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { TaskItemActionMenuTrigger } from "../TaskItemActionMenuTrigger";
-import { ProjectStatus, TaskStatus } from "@/generated/prisma/enums";
 
 const meta = {
   title: "Components/tasks/TaskGridItem",
@@ -17,27 +18,37 @@ const meta = {
     ),
     withThemedBackground,
   ],
-  render: (args) => <TaskGridItem {...args} menuTrigger={renderMenu(args)} />,
+  render: (args) => (
+    <TaskGridItem
+      {...args}
+      commentModalTrigger={
+        <TaskCommentsModalTrigger
+          taskId={1}
+          commentsCount={10}
+          sendCommentAction={fn()}
+        />
+      }
+      menuTrigger={
+        <TaskItemActionMenuTrigger
+          guestMode={false}
+          taskId={args.id}
+          taskTitle={args.title}
+          taskStatus={args.status}
+          projectStatus={args.projectStatus}
+          canDelete
+          canUpdate
+          canUpdateStatus
+          deleteAction={fn()}
+          updateStatusAction={fn()}
+          className="-mr-2"
+        />
+      }
+    />
+  ),
 } satisfies Meta<typeof TaskGridItem>;
 
 export default meta;
 type Story = StoryObj<typeof TaskGridItem>;
-
-const renderMenu = (args: any) => (
-  <TaskItemActionMenuTrigger
-    guestMode={false}
-    taskId={args.id}
-    taskTitle={args.title}
-    taskStatus={args.status}
-    projectStatus={args.projectStatus}
-    canDelete
-    canUpdate
-    canUpdateStatus
-    deleteAction={fn()}
-    updateStatusAction={fn()}
-    className="-mr-2"
-  />
-);
 
 export const Default = {
   args: {
@@ -51,7 +62,6 @@ export const Default = {
     },
     status: TaskStatus.pending,
     projectStatus: ProjectStatus.active,
-    commentsCount: 99,
     subtasksTotal: 6,
     subtasksDone: 2,
   },

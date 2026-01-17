@@ -5,15 +5,17 @@ import {
 } from "@/lib/data/user/user.dal";
 
 import {
-  EntityContainerPagination,
   EntityPaginationProvider,
+  EntityContainerPagination,
 } from "@/components/common/EntityContainerPagination";
 
 import { UserTaskList } from "../UserTaskList";
 import { UserTaskListItem } from "../UserTaskListItem";
 import { getTaskList } from "@/lib/data/task/task.service";
 import { deleteTasks } from "@/lib/actions/task/deleteTasks";
+import { sendComment } from "@/lib/actions/comment/sendComment";
 import { updateTaskStatuses } from "@/lib/actions/task/updateTaskStatuses";
+import { TaskCommentsModalTrigger } from "@/components/tasks/TaskCommentsModalTrigger";
 import { TaskItemActionMenuTrigger } from "@/components/tasks/TaskItemActionMenuTrigger";
 
 interface UserTasksContainerProps {
@@ -66,9 +68,15 @@ export async function UserTasksContainer({
               id={task.id}
               title={task.title}
               deadline={task.deadline}
-              commentsCount={task.commentsCount}
               status={task.status}
               projectStatus={task.project.status}
+              commentModalTrigger={
+                <TaskCommentsModalTrigger
+                  taskId={task.id}
+                  commentsCount={task.commentsCount}
+                  sendCommentAction={sendComment}
+                />
+              }
               menuTrigger={
                 <TaskItemActionMenuTrigger
                   taskId={task.id}

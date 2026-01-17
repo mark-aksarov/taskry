@@ -1,6 +1,7 @@
 import { fn } from "storybook/test";
 import { TaskListItem } from "./TaskListItem";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { TaskCommentsModalTrigger } from "../TaskCommentsModalTrigger";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { TaskItemActionMenuTrigger } from "../TaskItemActionMenuTrigger";
 
@@ -9,26 +10,36 @@ const meta = {
   component: TaskListItem,
   tags: ["autodocs"],
   decorators: [withThemedBackground],
-  render: (args) => <TaskListItem {...args} menuTrigger={renderMenu(args)} />,
+  render: (args) => (
+    <TaskListItem
+      {...args}
+      commentModalTrigger={
+        <TaskCommentsModalTrigger
+          taskId={1}
+          commentsCount={10}
+          sendCommentAction={fn()}
+        />
+      }
+      menuTrigger={
+        <TaskItemActionMenuTrigger
+          guestMode={false}
+          taskId={args.id}
+          taskTitle={args.title}
+          taskStatus={args.status}
+          projectStatus={args.project?.status}
+          canDelete={true}
+          canUpdate={true}
+          canUpdateStatus={true}
+          deleteAction={fn()}
+          updateStatusAction={fn()}
+        />
+      }
+    />
+  ),
 } satisfies Meta<typeof TaskListItem>;
 
 export default meta;
 type Story = StoryObj<typeof TaskListItem>;
-
-const renderMenu = (args: any) => (
-  <TaskItemActionMenuTrigger
-    guestMode={false}
-    taskId={args.id}
-    taskTitle={args.title}
-    taskStatus={args.status}
-    projectStatus={args.project?.status}
-    canDelete={true}
-    canUpdate={true}
-    canUpdateStatus={true}
-    deleteAction={fn()}
-    updateStatusAction={fn()}
-  />
-);
 
 export const Default = {
   args: {
@@ -39,7 +50,6 @@ export const Default = {
     category: { id: 1, name: "Design" },
     status: "pending",
     assignee: { id: "user1", imageUrl: "/man.jpg", fullName: "John Doe" },
-    commentsCount: 10,
   },
 } satisfies Story;
 

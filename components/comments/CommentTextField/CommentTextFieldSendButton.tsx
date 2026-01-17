@@ -16,6 +16,7 @@ export function CommentTextFieldSendButton({
 
   return (
     <Button
+      type="submit"
       variant="ghost"
       iconLeft={<SendHorizonal size={16} strokeWidth={1} absoluteStrokeWidth />}
       className={twMerge(buttonClasses, "right-0 -translate-x-2")}

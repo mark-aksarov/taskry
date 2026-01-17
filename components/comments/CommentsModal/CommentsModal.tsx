@@ -4,20 +4,24 @@ import {
   Dialog,
   DialogBody,
   DialogHeader,
+  DialogFooter,
   DialogHeading,
   DialogCloseButton,
-  DialogFooter,
 } from "@/components/ui";
 
-import { CommentsModalForm } from "./CommentsModalForm";
 import { ResponsiveModal } from "@/components/common/ResponsiveModal";
 
 interface CommentsModalProps {
   title: string;
-  children: React.ReactNode;
+  commentsContainer: React.ReactNode;
+  commentForm: React.ReactNode;
 }
 
-export function CommentsModal({ title, children }: CommentsModalProps) {
+export function CommentsModal({
+  title,
+  commentsContainer,
+  commentForm,
+}: CommentsModalProps) {
   return (
     <ResponsiveModal isDismissable className="w-[600px]">
       <Dialog className="md:h-[calc(100dvh-64px)]">
@@ -25,10 +29,10 @@ export function CommentsModal({ title, children }: CommentsModalProps) {
           <DialogHeading>{title}</DialogHeading>
           <DialogCloseButton />
         </DialogHeader>
-        <DialogBody className="flex flex-col gap-4">{children}</DialogBody>
-        <DialogFooter className="p-0!">
-          <CommentsModalForm />
-        </DialogFooter>
+        <DialogBody className="flex flex-col gap-4">
+          {commentsContainer}
+        </DialogBody>
+        <DialogFooter className="p-0!">{commentForm}</DialogFooter>
       </Dialog>
     </ResponsiveModal>
   );

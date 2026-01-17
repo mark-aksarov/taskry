@@ -15,6 +15,8 @@ import { TaskList } from "../TaskList";
 import { TaskListItem } from "../TaskListItem";
 import { getTaskList } from "@/lib/data/task/task.service";
 import { deleteTasks } from "@/lib/actions/task/deleteTasks";
+import { sendComment } from "@/lib/actions/comment/sendComment";
+import { TaskCommentsModalTrigger } from "../TaskCommentsModalTrigger";
 import { TaskItemActionMenuTrigger } from "../TaskItemActionMenuTrigger";
 import { updateTaskStatuses } from "@/lib/actions/task/updateTaskStatuses";
 
@@ -90,7 +92,13 @@ export async function AssignedTasksContainer({
               project={task.project}
               status={task.status}
               assignee={task.assignee}
-              commentsCount={task.commentsCount}
+              commentModalTrigger={
+                <TaskCommentsModalTrigger
+                  taskId={task.id}
+                  commentsCount={task.commentsCount}
+                  sendCommentAction={sendComment}
+                />
+              }
               menuTrigger={
                 <TaskItemActionMenuTrigger
                   guestMode={guestMode}
