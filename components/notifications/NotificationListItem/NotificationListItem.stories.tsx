@@ -27,7 +27,6 @@ const mockedNotification: NotificationListItemDTO = {
   id: 1,
   type: "projectAdded",
   createdAt: new Date("2026-01-07T09:00:00Z"),
-  updatedAt: new Date("2026-01-07T09:00:00Z"),
   isRead: false,
   actor: {
     id: "user-1",
@@ -38,8 +37,6 @@ const mockedNotification: NotificationListItemDTO = {
   project: {
     id: 50,
     title: "Mobile App Launch",
-    deadline: new Date("2026-06-01"),
-    status: ProjectStatus.active,
   },
 
   projectTitle: "Mobile App Launch",

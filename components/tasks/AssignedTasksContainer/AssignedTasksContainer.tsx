@@ -1,10 +1,4 @@
 import {
-  canDeleteTask,
-  canUpdateTask,
-  canUpdateTaskStatus,
-} from "@/lib/data/user/user.dal";
-
-import {
   AssignedTasksPresentation,
   AssignedTasksEmptySection,
 } from "../AssignedTasks";
@@ -40,9 +34,6 @@ export async function AssignedTasksContainer({
   const assigneeId = session!.user.id;
 
   const filters = {
-    status: [],
-    category: [],
-    project: [],
     assignee: [assigneeId],
   };
 
@@ -59,22 +50,6 @@ export async function AssignedTasksContainer({
     );
   }
 
-  const canDelete = await canDeleteTask();
-  const canUpdate = await canUpdateTask();
-
-  const tasksWithPermissions = await Promise.all(
-    tasks.map(async (task) => {
-      const canUpdateStatus = await canUpdateTaskStatus(task.assignee?.id);
-
-      return {
-        ...task,
-        canDelete,
-        canUpdate,
-        canUpdateStatus,
-      };
-    }),
-  );
-
   return (
     <AssignedTasksPresentation
       page={page}
@@ -82,7 +57,7 @@ export async function AssignedTasksContainer({
       totalPages={Math.ceil(totalCount / pageSize)}
       list={
         <TaskList>
-          {tasksWithPermissions.map((task) => (
+          {tasks.map((task) => (
             <TaskListItem
               key={task.id}
               id={task.id}
@@ -105,10 +80,6 @@ export async function AssignedTasksContainer({
                   taskId={task.id}
                   taskTitle={task.title}
                   taskStatus={task.status}
-                  projectStatus={task.project.status}
-                  canDelete={canDelete}
-                  canUpdate={canUpdate}
-                  canUpdateStatus={task.canUpdateStatus}
                   deleteAction={deleteTasks}
                   updateStatusAction={updateTaskStatuses}
                 />

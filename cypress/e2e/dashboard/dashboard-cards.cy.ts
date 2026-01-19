@@ -111,7 +111,7 @@ describe("dashboard cards", () => {
     cy.getByData("dashboard-card-value").eq(1).should("contain", "2");
 
     cy.getByData("dashboard-card-text").eq(2).should("contain", "Total Users");
-    cy.getByData("dashboard-card-value").eq(2).should("contain", "5");
+    cy.getByData("dashboard-card-value").eq(2).should("contain", "3");
 
     cy.getByData("dashboard-card-text")
       .eq(3)

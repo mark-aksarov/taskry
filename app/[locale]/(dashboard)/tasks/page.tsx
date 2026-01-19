@@ -10,10 +10,10 @@ import { TasksPageEmpty } from "./TasksPageEmpty";
 import { arrayParam } from "@/lib/utils/arrayParam";
 import { TaskStatus } from "@/generated/prisma/enums";
 import { getTaskCount } from "@/lib/data/task/task.dal";
+import { hasGuestRole } from "@/lib/utils/hasGuestRole";
 import { deleteTasks } from "@/lib/actions/task/deleteTasks";
 import { TasksContainer } from "@/components/tasks/TasksContainer";
 import { TaskFormBaseSkeleton } from "@/components/tasks/TaskFormBase";
-import { canCreateTask, canDeleteTask } from "@/lib/data/user/user.dal";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { updateTaskStatuses } from "@/lib/actions/task/updateTaskStatuses";
 import { TaskDetailContainer } from "@/components/tasks/TaskDetailContainer";
@@ -23,9 +23,8 @@ import { NewTaskFormContainer } from "@/components/tasks/NewTaskFormContainer";
 import { TaskCommentsContainer } from "@/components/tasks/TaskCommentsContainer";
 import { EditTaskFormContainer } from "@/components/tasks/EditTaskFormContainer";
 import { createTaskCategory } from "@/lib/actions/taskCategory/createTaskCategory";
-import { TaskFiltersFormContainer } from "@/components/tasks/TaskFiltersFormContainer";
 import { ProjectDetailContainer } from "@/components/projects/ProjectDetailContainer";
-import { hasGuestRole } from "@/lib/utils/hasGuestRole";
+import { TaskFiltersFormContainer } from "@/components/tasks/TaskFiltersFormContainer";
 
 const searchParamsSchema = z.object({
   onlyMyTasks: z
@@ -81,15 +80,11 @@ export default async function AppTasksPage({
   }
 
   const guestMode = await hasGuestRole();
-  const canCreate = await canCreateTask();
-  const canDelete = await canDeleteTask();
 
   return (
     <GlobalContainerProvider value={context}>
       <TasksPage
         guestMode={guestMode}
-        canCreateTask={canCreate}
-        canDeleteTask={canDelete}
         taskFiltersFormContainer={
           <Suspense fallback={<TaskFiltersFormSkeleton />}>
             <TaskFiltersFormContainer filters={filters} />

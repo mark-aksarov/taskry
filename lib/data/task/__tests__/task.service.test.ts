@@ -46,6 +46,7 @@ describe("Task Service", () => {
           id: "user-1",
           fullName: "User 1",
           email: "user-1@test.com",
+          imageUrl: "https://example.com/user-1.jpg",
           role: "owner",
           workspaceId: 1,
         },
@@ -53,6 +54,7 @@ describe("Task Service", () => {
           id: "user-2",
           fullName: "User 2",
           email: "user-2@test.com",
+          imageUrl: "https://example.com/user-2.jpg",
           role: "manager",
           workspaceId: 1,
         },
@@ -60,6 +62,7 @@ describe("Task Service", () => {
           id: "user-3",
           fullName: "User 3",
           email: "user-3@test.com",
+          imageUrl: "https://example.com/user-3.jpg",
           role: "user",
           workspaceId: 1,
         },
@@ -67,6 +70,7 @@ describe("Task Service", () => {
           id: "user-4",
           fullName: "User 4",
           email: "user-4@test.com",
+          imageUrl: "https://example.com/user-4.jpg",
           role: "guest",
           workspaceId: 1,
         },
@@ -142,22 +146,68 @@ describe("Task Service", () => {
           {
             id: 1,
             title: "Task 1",
-            deadline: new Date(),
+            description: "Description 1",
+            deadline: new Date("2023-01-01"),
             projectId: 1,
             categoryId: 1,
             workspaceId: 1,
             status: TaskStatus.active,
             assigneeId: "user-1",
           },
+        ],
+      });
+
+      await prisma.attachment.createMany({
+        data: [
+          {
+            id: 1,
+            taskId: 1,
+            fileName: "Attachment 1",
+            fileUrl: "https://example.com/attachment-1.jpg",
+            workspaceId: 1,
+          },
           {
             id: 2,
-            title: "Task 2",
-            deadline: new Date(),
-            projectId: 2,
-            categoryId: 2,
+            taskId: 1,
+            fileName: "Attachment 2",
+            fileUrl: "https://example.com/attachment-2.jpg",
             workspaceId: 1,
-            status: TaskStatus.active,
-            assigneeId: "user-2",
+          },
+        ],
+      });
+
+      await prisma.subtask.createMany({
+        data: [
+          {
+            id: 1,
+            taskId: 1,
+            text: "Subtask 1",
+            isDone: false,
+          },
+          {
+            id: 2,
+            taskId: 1,
+            text: "Subtask 2",
+            isDone: true,
+          },
+        ],
+      });
+
+      await prisma.comment.createMany({
+        data: [
+          {
+            id: 1,
+            taskId: 1,
+            content: "Comment 1",
+            senderId: "user-1",
+            workspaceId: 1,
+          },
+          {
+            id: 2,
+            taskId: 1,
+            content: "Comment 2",
+            senderId: "user-2",
+            workspaceId: 1,
           },
         ],
       });
@@ -165,15 +215,83 @@ describe("Task Service", () => {
 
     afterAll(async () => {
       await prisma.task.deleteMany();
+      await prisma.attachment.deleteMany();
+      await prisma.subtask.deleteMany();
+      await prisma.comment.deleteMany();
     });
 
-    it.each([
-      { name: "getTaskSummary", method: getTaskSummary },
-      { name: "getTaskDetail", method: getTaskDetail },
-      { name: "getTaskFormData", method: getTaskFormData },
-    ])("should successfully return task by $name", async ({ method }) => {
-      const success = await method(1);
-      expect(success).toMatchObject({ id: 1 });
+    it("should return a valid TaskSummaryDTO", async () => {
+      const result = await getTaskSummary(1);
+      expect(result).toStrictEqual({ id: 1, title: "Task 1" });
+    });
+
+    it("should return a valid TaskDetailDTO", async () => {
+      const result = await getTaskDetail(1);
+
+      expect(result).toStrictEqual({
+        id: 1,
+        title: "Task 1",
+        description: "Description 1",
+        deadline: new Date("2023-01-01"),
+        status: TaskStatus.active,
+
+        assignee: {
+          id: "user-1",
+          fullName: "User 1",
+          imageUrl: "https://example.com/user-1.jpg",
+        },
+        project: {
+          id: 1,
+          title: "Project 1",
+        },
+        category: {
+          id: 1,
+          name: "Task Category 1",
+        },
+
+        subtasks: expect.arrayContaining([
+          {
+            id: 1,
+            text: "Subtask 1",
+            isDone: false,
+          },
+          {
+            id: 2,
+            text: "Subtask 2",
+            isDone: true,
+          },
+        ]),
+
+        attachments: expect.arrayContaining([
+          {
+            id: 1,
+            fileUrl: "https://example.com/attachment-1.jpg",
+            fileName: "Attachment 1",
+          },
+          {
+            id: 2,
+            fileUrl: "https://example.com/attachment-2.jpg",
+            fileName: "Attachment 2",
+          },
+        ]),
+
+        commentsCount: 2,
+      });
+    });
+
+    it("should return a valid TaskFormDataDTO", async () => {
+      const result = await getTaskFormData(1);
+      expect(result).toStrictEqual({
+        id: 1,
+        title: "Task 1",
+        description: "Description 1",
+        deadline: new Date("2023-01-01"),
+        status: TaskStatus.active,
+        projectId: 1,
+        projectStatus: ProjectStatus.active,
+        categoryId: 1,
+        assigneeId: "user-1",
+      });
     });
 
     it.each([
@@ -187,23 +305,14 @@ describe("Task Service", () => {
   });
 
   describe("getTaskList", () => {
-    it("should return all tasks", async () => {
+    it("should return all tasks with valid TaskListDTO", async () => {
+      // Arrange
       await prisma.task.createMany({
         data: [
           {
             id: 1,
             title: "Task 1",
-            deadline: new Date(),
-            projectId: 1,
-            categoryId: 1,
-            workspaceId: 1,
-            status: TaskStatus.active,
-            assigneeId: "user-3",
-          },
-          {
-            id: 2,
-            title: "Task 2",
-            deadline: new Date(),
+            deadline: new Date("2023-01-01"),
             projectId: 1,
             categoryId: 1,
             workspaceId: 1,
@@ -213,17 +322,91 @@ describe("Task Service", () => {
         ],
       });
 
+      await prisma.attachment.createMany({
+        data: [
+          {
+            id: 1,
+            taskId: 1,
+            fileName: "Attachment 1",
+            fileUrl: "https://example.com/attachment-1.jpg",
+            workspaceId: 1,
+          },
+        ],
+      });
+
+      await prisma.subtask.createMany({
+        data: [
+          {
+            id: 1,
+            taskId: 1,
+            text: "Subtask 1",
+            isDone: false,
+          },
+          {
+            id: 2,
+            taskId: 1,
+            text: "Subtask 2",
+            isDone: true,
+          },
+        ],
+      });
+
+      await prisma.comment.createMany({
+        data: [
+          {
+            id: 1,
+            taskId: 1,
+            content: "Comment 1",
+            senderId: "user-1",
+            workspaceId: 1,
+          },
+        ],
+      });
+
+      // Act
       const result = await getTaskList({
         page: 1,
         pageSize: 50,
         sort: "title",
       });
-      await prisma.task.deleteMany();
 
-      expect(result.items).toHaveLength(2);
-      expect(result.totalCount).toBe(2);
-      expect(result.items[0].title).toBe("Task 1");
-      expect(result.items[1].title).toBe("Task 2");
+      await prisma.task.deleteMany();
+      await prisma.attachment.deleteMany();
+      await prisma.subtask.deleteMany();
+      await prisma.comment.deleteMany();
+
+      // Assert
+      expect(result).toStrictEqual({
+        items: [
+          {
+            id: 1,
+            title: "Task 1",
+            status: TaskStatus.active,
+
+            deadline: new Date("2023-01-01"),
+            assignee: {
+              id: "user-3",
+              fullName: "User 3",
+              imageUrl: "https://example.com/user-3.jpg",
+            },
+            project: {
+              id: 1,
+              title: "Project 1",
+              status: ProjectStatus.active,
+            },
+            category: {
+              id: 1,
+              name: "Task Category 1",
+            },
+            subtasks: {
+              total: 2,
+              done: 1,
+            },
+            commentsCount: 1,
+          },
+        ],
+        totalCount: 1,
+      });
     });
 
     describe("sorting", () => {

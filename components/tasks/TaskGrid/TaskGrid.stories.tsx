@@ -1,8 +1,8 @@
 import { fn } from "storybook/test";
 import { TaskGrid } from "./TaskGrid";
 import { TaskGridItem } from "../TaskGridItem";
+import { TaskStatus } from "@/generated/prisma/enums";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { ProjectStatus, TaskStatus } from "@/generated/prisma/enums";
 import { TaskCommentsModalTrigger } from "../TaskCommentsModalTrigger";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { TaskItemActionMenuTrigger } from "../TaskItemActionMenuTrigger";
@@ -141,7 +141,6 @@ export const Default = {
             status={task.status}
             subtasksTotal={task.total}
             subtasksDone={task.done}
-            projectStatus={ProjectStatus.active}
             commentModalTrigger={
               <TaskCommentsModalTrigger
                 taskId={1}
@@ -155,10 +154,6 @@ export const Default = {
                 taskId={task.id}
                 taskTitle={task.title}
                 taskStatus={task.status}
-                projectStatus={ProjectStatus.active}
-                canDelete
-                canUpdate
-                canUpdateStatus
                 deleteAction={mockedAction}
                 updateStatusAction={mockedAction}
                 className="-mr-2"

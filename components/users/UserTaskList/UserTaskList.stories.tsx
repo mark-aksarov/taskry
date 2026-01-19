@@ -1,11 +1,11 @@
 import { fn } from "storybook/test";
 import { UserTaskList } from "./UserTaskList";
+import { TaskStatus } from "@/generated/prisma/enums";
 import type { Meta, StoryObj } from "@storybook/react";
 import { UserTaskListItem } from "../UserTaskListItem";
-import { ProjectStatus, TaskStatus } from "@/generated/prisma/enums";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { TaskItemActionMenuTrigger } from "@/components/tasks/TaskItemActionMenuTrigger";
 import { TaskCommentsModalTrigger } from "@/components/tasks/TaskCommentsModalTrigger";
+import { TaskItemActionMenuTrigger } from "@/components/tasks/TaskItemActionMenuTrigger";
 
 const mockedTasks = [
   {
@@ -96,7 +96,6 @@ export const Default = {
       <UserTaskListItem
         key={task.id}
         {...task}
-        projectStatus={ProjectStatus.active}
         commentModalTrigger={
           <TaskCommentsModalTrigger
             taskId={task.id}
@@ -110,10 +109,6 @@ export const Default = {
             taskId={task.id}
             taskTitle={task.title}
             taskStatus={task.status}
-            projectStatus={ProjectStatus.active}
-            canDelete={true}
-            canUpdate={true}
-            canUpdateStatus={true}
             deleteAction={fn()}
             updateStatusAction={fn()}
           />

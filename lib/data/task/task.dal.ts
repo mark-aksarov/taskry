@@ -1,30 +1,22 @@
 import {
-  canCreateTask,
-  canDeleteTask,
-  canUpdateTask,
-  canUpdateTaskStatus,
-} from "../user/user.dal";
-
-import {
   createTaskAddedNotifications,
   createTaskDeletedNotifications,
-  createTaskStatusChangedNotifications,
-  createTaskDeadlineChangedNotifications,
+  createTaskChangedNotifications,
 } from "../notification/notification.dal";
 
 import { cache } from "react";
 import prisma from "@/lib/prisma";
-import { isSameDay } from "date-fns";
+import { auth } from "@/lib/auth";
 import { TaskFilters } from "@/lib/types";
+import { AccessDeniedError } from "../utils/error";
 import { buildDateWhere } from "../utils/dateWhere";
 import { verifySession } from "../utils/verifySession";
-import { AccessDeniedError, DomainRuleError } from "../utils/error";
+import { Prisma, TaskStatus } from "@/generated/prisma/client";
 import { UpdateTaskInputDTO, CreateTaskInputDTO } from "./task.dto";
-import { ALLOWED_TASK_STATUSES_BY_PROJECT } from "../utils/statusUtils";
-import { Prisma, ProjectStatus, TaskStatus } from "@/generated/prisma/client";
 
 export const getTask = cache(
   async <T extends Prisma.TaskSelect>(id: number, select: T) => {
+    // Authorization
     const {
       user: { workspaceId },
     } = await verifySession();
@@ -40,6 +32,7 @@ export const getTask = cache(
 
 export const getAllTasks = cache(
   async <T extends Prisma.TaskSelect>({ select }: { select: T }) => {
+    // Authorization
     const {
       user: { workspaceId },
     } = await verifySession();
@@ -67,6 +60,7 @@ export const getPaginatedTasks = cache(
     filters?: TaskFilters;
     select: T;
   }) => {
+    // Authorization
     const {
       user: { id: userId, workspaceId },
     } = await verifySession();
@@ -104,6 +98,7 @@ export const getPaginatedTasks = cache(
 );
 
 export const getTaskCount = cache(async (filters?: TaskFilters) => {
+  // Authorization
   const {
     user: { id: userId, workspaceId },
   } = await verifySession();
@@ -114,29 +109,45 @@ export const getTaskCount = cache(async (filters?: TaskFilters) => {
 });
 
 export const createTask = async (input: CreateTaskInputDTO) => {
+  // Authorization
   const {
     user: { id: creatorId, workspaceId },
   } = await verifySession();
 
-  const canCreate = await canCreateTask();
-  if (!canCreate) {
+  // ACL
+  const permission = await auth.api.userHasPermission({
+    body: {
+      userId: creatorId,
+      permission: {
+        task: ["create"],
+      },
+    },
+  });
+
+  if (!permission.success) {
     throw new AccessDeniedError("You do not have permission to create task.");
   }
 
-  // Validates if category, project, and assignee exist in the current workspace
-  await validateTaskRelations(workspaceId, input);
+  // Check related resources access
+  await checkTaskResourcesAccess(workspaceId, input);
 
   return prisma.$transaction(async (tx) => {
-    // 1. Create task within the workspace
+    // Create task within the workspace
     const task = await tx.task.create({
       data: {
-        ...input,
+        title: input.title,
+        description: input.description,
+        deadline: input.deadline,
+        status: input.status,
+        projectId: input.projectId,
+        categoryId: input.categoryId,
+        assigneeId: input.assigneeId,
         creatorId,
         workspaceId,
       },
     });
 
-    // 2. Send batched notifications (single DB query for recipients)
+    // Send notifications
     await createTaskAddedNotifications(tx, {
       task,
       actorId: creatorId,
@@ -148,68 +159,54 @@ export const createTask = async (input: CreateTaskInputDTO) => {
 };
 
 export const updateTask = async (input: UpdateTaskInputDTO) => {
+  // Authorization
   const {
-    user: { id: actorId, workspaceId },
+    user: { id: userId, workspaceId },
   } = await verifySession();
-  const canUpdate = await canUpdateTask();
-  if (!canUpdate) throw new AccessDeniedError();
+
+  // Check permission
+  const permission = await auth.api.userHasPermission({
+    body: {
+      userId,
+      permission: {
+        task: ["create"],
+      },
+    },
+  });
+
+  if (!permission.success) {
+    throw new AccessDeniedError("You do not have permission to update task.");
+  }
+
+  // Check access to related resources
+  await checkTaskResourcesAccess(workspaceId, input);
 
   return prisma.$transaction(async (tx) => {
-    // 1. Fetch current state
-    const existingTask = await tx.task.findFirst({
-      where: { id: input.id, workspaceId },
-      select: {
-        id: true,
-        title: true,
-        deadline: true,
-        status: true,
-        assigneeId: true,
-        project: { select: { status: true } },
+    // Update task and get new data
+    const updatedTask = await tx.task.update({
+      where: {
+        id: input.id,
+        workspaceId,
+      },
+      data: {
+        title: input.title,
+        description: input.description,
+        deadline: input.deadline,
+        status: input.status,
+        projectId: input.projectId,
+        categoryId: input.categoryId,
+        assigneeId: input.assigneeId,
       },
     });
 
-    if (!existingTask) throw new Error("Task not found");
-
-    // 2. Validate Project/Task status logic
-    if (input.status) {
-      const allowed = getAllowedProjectStatuses(input.status);
-      if (!allowed.includes(existingTask.project.status)) {
-        throw new DomainRuleError(
-          `Status ${input.status} not allowed for project state`,
-        );
-      }
-
-      // Send notification only if status actually changed
-      if (input.status !== existingTask.status) {
-        await createTaskStatusChangedNotifications(tx, {
-          tasks: [existingTask],
-          newStatus: input.status,
-          actorId,
-          workspaceId,
-        });
-      }
-    }
-
-    // 3. Compare deadlines using date-fns
-    // isSameDay returns false if one is null and the other is a date
-    if (input.deadline) {
-      const oldDeadline = existingTask.deadline;
-      const newDeadline = new Date(input.deadline);
-
-      if (!oldDeadline || !isSameDay(oldDeadline, newDeadline)) {
-        await createTaskDeadlineChangedNotifications(tx, {
-          task: existingTask,
-          newDeadline: newDeadline,
-          actorId,
-          workspaceId,
-        });
-      }
-    }
-
-    return tx.task.update({
-      where: { id: input.id },
-      data: input,
+    // Send notifications using the updated task
+    await createTaskChangedNotifications(tx, {
+      tasks: [updatedTask],
+      actorId: userId,
+      workspaceId,
     });
+
+    return updatedTask;
   });
 };
 
@@ -217,71 +214,111 @@ export const updateTaskStatuses = async (
   taskIds: number[],
   status: TaskStatus,
 ) => {
+  // Authorization
   const {
-    user: { id: actorId, workspaceId, role },
+    user: { id: userId, workspaceId },
   } = await verifySession();
-  if (!(await canUpdateTaskStatus())) throw new AccessDeniedError();
+
+  // Check permission
+  const permission = await auth.api.userHasPermission({
+    body: {
+      userId,
+      permission: {
+        task: ["update"],
+      },
+    },
+  });
+
+  if (!permission.success) {
+    throw new AccessDeniedError("You do not have permission to update task.");
+  }
 
   return prisma.$transaction(async (tx) => {
-    const allowedProjectStatuses = getAllowedProjectStatuses(status);
-    const ownershipFilter = role === "user" ? { assigneeId: actorId } : {};
-
-    // 1. Fetch task details before deletion for notification metadata
-    const tasksToUpdate = await tx.task.findMany({
+    // Update tasks and return new data
+    const updatedTasks = await tx.task.updateManyAndReturn({
       where: {
         workspaceId,
-        id: { in: taskIds },
-        ...ownershipFilter,
-        project: { status: { in: allowedProjectStatuses } },
+        id: {
+          in: taskIds,
+        },
       },
-      select: { id: true, title: true, assigneeId: true, status: true },
+      data: {
+        status,
+      },
+      select: {
+        id: true,
+        title: true,
+        status: true,
+      },
     });
 
-    if (tasksToUpdate.length === 0) return { count: 0 };
+    if (updatedTasks.length === 0) {
+      return [];
+    }
 
-    // 2. Bulk delete tasks within the workspace
-    const result = await tx.task.updateMany({
-      where: { id: { in: tasksToUpdate.map((t) => t.id) } },
-      data: { status },
-    });
-
-    // 3. Send batched notifications (single DB query for recipients)
-    await createTaskStatusChangedNotifications(tx, {
-      tasks: tasksToUpdate,
-      actorId,
+    // Send notifications with updated data
+    await createTaskChangedNotifications(tx, {
+      tasks: updatedTasks,
+      actorId: userId,
       workspaceId,
-      newStatus: status,
     });
 
-    return result;
+    return updatedTasks;
   });
 };
 
 export const deleteTasks = async (ids: number[]) => {
+  // Authorization
   const {
     user: { id: actorId, workspaceId },
   } = await verifySession();
 
-  const canDelete = await canDeleteTask();
-  if (!canDelete) {
+  // ACL
+  const permission = await auth.api.userHasPermission({
+    body: {
+      userId: actorId,
+      permission: {
+        task: ["delete"],
+      },
+    },
+  });
+
+  if (!permission.success) {
     throw new AccessDeniedError("You do not have permission to delete tasks.");
   }
 
   return prisma.$transaction(async (tx) => {
-    // 1. Fetch task details before deletion for notification metadata
+    // Fetch task details before deletion for notifications
     const tasksToDelete = await tx.task.findMany({
-      where: { workspaceId, id: { in: ids } },
-      select: { id: true, title: true, assigneeId: true },
+      where: {
+        workspaceId,
+        id: {
+          in: ids,
+        },
+      },
+      select: {
+        title: true,
+        assigneeId: true,
+      },
     });
 
-    if (tasksToDelete.length === 0) return { count: 0 };
+    if (tasksToDelete.length === 0) {
+      return {
+        count: 0,
+      };
+    }
 
-    // 2. Bulk delete tasks within the workspace
+    // Bulk delete tasks within the workspace
     const result = await tx.task.deleteMany({
-      where: { workspaceId, id: { in: ids } },
+      where: {
+        workspaceId,
+        id: {
+          in: ids,
+        },
+      },
     });
 
-    // 3. Send batched notifications (single DB query for recipients)
+    // Send batched notifications
     await createTaskDeletedNotifications(tx, {
       tasks: tasksToDelete,
       actorId,
@@ -296,13 +333,7 @@ export const deleteTasks = async (ids: number[]) => {
  * HELPERS
  */
 
-const getAllowedProjectStatuses = (nextStatus: TaskStatus): ProjectStatus[] => {
-  return (
-    Object.keys(ALLOWED_TASK_STATUSES_BY_PROJECT) as ProjectStatus[]
-  ).filter((ps) => ALLOWED_TASK_STATUSES_BY_PROJECT[ps].includes(nextStatus));
-};
-
-async function validateTaskRelations(
+async function checkTaskResourcesAccess(
   workspaceId: number,
   input: Partial<CreateTaskInputDTO>,
 ) {

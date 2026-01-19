@@ -33,7 +33,7 @@ describe("mark notifications as read", () => {
       cy.checkNotifications(1, [
         {
           target: "Task 1",
-          actor: "Sarah Jenkins",
+          actor: "Michael Chen",
           action: "deleted the task",
         },
       ]);
@@ -58,7 +58,7 @@ describe("mark notifications as read", () => {
             taskTitle: "Task 1",
             workspaceId: 1,
             actorId: "user-2",
-            recipientId: "user-4",
+            recipientId: "user-3",
           },
         ],
       });
@@ -69,7 +69,7 @@ describe("mark notifications as read", () => {
       cy.checkNotifications(1, [
         {
           target: "Task 1",
-          actor: "Sarah Jenkins",
+          actor: "Michael Chen",
           action: "deleted the task",
         },
       ]);
@@ -95,12 +95,11 @@ describe("mark notifications as read", () => {
           },
           {
             id: 2,
-            type: NotificationType.taskStatusChanged,
+            type: NotificationType.taskChanged,
             isRead: false,
             taskTitle: "Task 1",
-            taskStatus: TaskStatus.completed,
             workspaceId: 1,
-            actorId: "user-3",
+            actorId: "user-2",
             recipientId: "user-1",
           },
         ],
@@ -112,13 +111,13 @@ describe("mark notifications as read", () => {
       cy.checkNotifications(2, [
         {
           target: "Task 1",
-          actor: "Sarah Jenkins",
+          actor: "Michael Chen",
           action: "deleted the task",
         },
         {
           target: "Task 1",
           actor: "Michael Chen",
-          action: "changed the task status",
+          action: "changed the task",
         },
       ]);
 
@@ -139,7 +138,7 @@ describe("mark notifications as read", () => {
             taskTitle: "Task 1",
             workspaceId: 1,
             actorId: "user-2",
-            recipientId: "user-4",
+            recipientId: "user-3",
           },
         ],
       });
@@ -150,7 +149,7 @@ describe("mark notifications as read", () => {
       cy.checkNotifications(1, [
         {
           target: "Task 1",
-          actor: "Sarah Jenkins",
+          actor: "Michael Chen",
           action: "deleted the task",
         },
       ]);

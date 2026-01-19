@@ -15,6 +15,7 @@ import {
 
 import Image from "next/image";
 import { TaskDetailModal } from "../TaskDetailModal";
+import { TaskStatus } from "@/generated/prisma/enums";
 import { useFormatter, useTranslations } from "next-intl";
 import { TaskGridItemLayout } from "./TaskGridItemLayout";
 import { UnknownUser } from "@/components/common/UnknownUser";
@@ -22,7 +23,6 @@ import { TaskDetailBottomSheet } from "../TaskDetailBottomSheet";
 import { ImageContainer } from "@/components/common/ImageContainer";
 import { getTaskStatusBadgeColor } from "../getTaskStatusBadgeColor";
 import { UserDetailModal } from "@/components/users/UserDetailModal";
-import { ProjectStatus, TaskStatus } from "@/generated/prisma/enums";
 import { useSyncSelectionTaskItem } from "@/lib/hooks/useTaskSelection";
 import { TaskListItemCheckbox } from "../TaskListItem/TaskListItemCheckbox";
 import { UserDetailBottomSheet } from "@/components/users/UserDetailBottomSheet";
@@ -37,7 +37,6 @@ export interface TaskGridItemProps {
     fullName: string;
   };
   status: TaskStatus;
-  projectStatus: ProjectStatus;
   subtasksTotal: number;
   subtasksDone: number;
   commentModalTrigger?: React.ReactNode;
@@ -50,7 +49,6 @@ export function TaskGridItem({
   deadline,
   assignee,
   status,
-  projectStatus,
   subtasksTotal,
   subtasksDone,
   commentModalTrigger,
@@ -58,7 +56,7 @@ export function TaskGridItem({
 }: TaskGridItemProps) {
   const t = useTranslations("tasks");
 
-  useSyncSelectionTaskItem(id, title, status, projectStatus);
+  useSyncSelectionTaskItem(id, title, status);
 
   const format = useFormatter();
 

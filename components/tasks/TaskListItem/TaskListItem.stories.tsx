@@ -26,10 +26,6 @@ const meta = {
           taskId={args.id}
           taskTitle={args.title}
           taskStatus={args.status}
-          projectStatus={args.project?.status}
-          canDelete={true}
-          canUpdate={true}
-          canUpdateStatus={true}
           deleteAction={fn()}
           updateStatusAction={fn()}
         />
@@ -46,7 +42,7 @@ export const Default = {
     id: 1,
     title: "Design landing page",
     deadline: new Date("2025-09-30"),
-    project: { id: 1, title: "Website Redesign", status: "active" },
+    project: { id: 1, title: "Website Redesign" },
     category: { id: 1, name: "Design" },
     status: "pending",
     assignee: { id: "user1", imageUrl: "/man.jpg", fullName: "John Doe" },

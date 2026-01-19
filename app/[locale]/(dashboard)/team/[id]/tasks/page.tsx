@@ -8,7 +8,6 @@ import { Suspense } from "react";
 import { getTaskCount } from "@/lib/data/task/task.dal";
 import { deleteTasks } from "@/lib/actions/task/deleteTasks";
 import { TaskFormBaseSkeleton } from "@/components/tasks/TaskFormBase";
-import { canCreateTask, canDeleteTask } from "@/lib/data/user/user.dal";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { TeamProfileTasksPageEmpty } from "./TeamProfileTasksPageEmpty";
 import { updateTaskStatuses } from "@/lib/actions/task/updateTaskStatuses";
@@ -66,14 +65,9 @@ export default async function AppProfileTasksPage({
       />
     );
 
-  const canCreate = await canCreateTask();
-  const canDelete = await canDeleteTask();
-
   return (
     <GlobalContainerProvider value={context}>
       <UserTasksPageLayout
-        canCreateTask={canCreate}
-        canDeleteTask={canDelete}
         userTasksContainer={
           <UserTasksContainer
             userId={id}

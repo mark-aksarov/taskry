@@ -32,7 +32,7 @@ describe("deletes a notification", () => {
     cy.checkNotifications(1, [
       {
         target: "Task 1",
-        actor: "Sarah Jenkins",
+        actor: "Michael Chen",
         action: "deleted the task",
       },
     ]);
@@ -55,7 +55,7 @@ describe("deletes a notification", () => {
           taskTitle: "Task 1",
           workspaceId: 1,
           actorId: "user-2",
-          recipientId: "user-4",
+          recipientId: "user-3",
         },
       ],
     });
@@ -66,7 +66,7 @@ describe("deletes a notification", () => {
     cy.checkNotifications(1, [
       {
         target: "Task 1",
-        actor: "Sarah Jenkins",
+        actor: "Michael Chen",
         action: "deleted the task",
       },
     ]);

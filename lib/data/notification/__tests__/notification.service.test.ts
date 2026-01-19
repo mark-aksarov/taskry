@@ -1,11 +1,7 @@
 import prisma from "@/lib/prisma";
-import { getNotifications } from "../notification.service";
 import { resetDatabase } from "@/prisma/resetDatabase";
-import {
-  NotificationType,
-  ProjectStatus,
-  TaskStatus,
-} from "@/generated/prisma/enums";
+import { getNotifications } from "../notification.service";
+import { NotificationType } from "@/generated/prisma/enums";
 import { vi, describe, beforeEach, it, expect } from "vitest";
 import { verifySession } from "@/lib/data/utils/verifySession";
 
@@ -49,24 +45,28 @@ describe("Notification Service", () => {
         {
           id: "user-1",
           fullName: "User 1",
+          imageUrl: "https://example.com/user-1.jpg",
           email: "user-1@test.com",
           workspaceId: 1,
         },
         {
           id: "user-2",
           fullName: "User 2",
+          imageUrl: "https://example.com/user-2.jpg",
           email: "user-2@test.com",
           workspaceId: 1,
         },
         {
           id: "user-3",
           fullName: "User 3",
+          imageUrl: "https://example.com/user-3.jpg",
           email: "user-3@test.com",
           workspaceId: 2,
         },
         {
           id: "user-4",
           fullName: "User 4",
+          imageUrl: "https://example.com/user-4.jpg",
           email: "user-4@test.com",
           workspaceId: 2,
         },
@@ -166,7 +166,7 @@ describe("Notification Service", () => {
           projectTitle: "Project 1",
           commentContent: "Comment Content",
           type: NotificationType.commentDeleted,
-          createdAt: "2025-01-01T00:00:00.000Z",
+          createdAt: new Date("2025-03-01"),
           isRead: true,
         },
         {
@@ -176,10 +176,8 @@ describe("Notification Service", () => {
           recipientId: "user-1",
           taskId: 1,
           taskTitle: "Task 1",
-          taskDeadline: "2026-12-10T00:00:00.000Z",
-          taskStatus: TaskStatus.active,
           type: NotificationType.taskAdded,
-          createdAt: "2025-01-02T00:00:00.000Z",
+          createdAt: new Date("2025-03-02"),
           isRead: false,
         },
         {
@@ -189,10 +187,8 @@ describe("Notification Service", () => {
           recipientId: "user-3",
           projectId: 2,
           projectTitle: "Project 2",
-          projectDeadline: "2027-05-20T00:00:00.000Z",
-          projectStatus: ProjectStatus.active,
           type: NotificationType.projectAdded,
-          createdAt: "2025-01-01T00:00:00.000Z",
+          createdAt: new Date("2025-03-03"),
           isRead: true,
         },
       ],
@@ -204,7 +200,7 @@ describe("Notification Service", () => {
   });
 
   describe("getNotifications", () => {
-    it("should return notifications for user-1 and workspace 1", async () => {
+    it("should return all notifications with valid NotificationsDTO", async () => {
       const result = await getNotifications({
         page: 1,
         pageSize: 2,
@@ -215,17 +211,49 @@ describe("Notification Service", () => {
       expect(result.totalCount).toBe(2);
       expect(result.unreadCount).toBe(1);
 
-      expect(result.items[0].id).toBe(2);
-      expect(result.items[0].isRead).toBe(false);
-      expect(result.items[0].actor!.id).toBe("user-2");
-      expect(result.items[0].task!.id).toBe(1);
+      expect(result).toEqual({
+        items: expect.arrayContaining([
+          {
+            id: 1,
+            type: NotificationType.commentDeleted,
+            createdAt: new Date("2025-03-01"),
+            isRead: true,
+            commentContent: "Comment Content",
 
-      expect(result.items[1].id).toBe(1);
-      expect(result.items[1].isRead).toBe(true);
-      expect(result.items[1].actor!.id).toBe("user-2");
-      expect(result.items[1]).toBeDefined();
-      expect(result.items[1].project).toBeDefined();
-      expect(result.items[1].project!.id).toBe(1);
+            actor: {
+              id: "user-2",
+              fullName: "User 2",
+              imageUrl: "https://example.com/user-2.jpg",
+            },
+
+            project: {
+              id: 1,
+              title: "Project 1",
+            },
+            projectTitle: "Project 1",
+          },
+          {
+            id: 2,
+            type: NotificationType.taskAdded,
+            createdAt: new Date("2025-03-02"),
+            isRead: false,
+
+            actor: {
+              id: "user-2",
+              fullName: "User 2",
+              imageUrl: "https://example.com/user-2.jpg",
+            },
+
+            task: {
+              id: 1,
+              title: "Task 1",
+            },
+            taskTitle: "Task 1",
+          },
+        ]),
+        totalCount: 2,
+        unreadCount: 1,
+      });
     });
 
     it("should filter only unread notifications when filter is set to 'unread'", async () => {
@@ -244,10 +272,15 @@ describe("Notification Service", () => {
     });
 
     it("should handle pagination correctly", async () => {
-      const result = await getNotifications({ page: 1, pageSize: 1 });
+      const firstPage = await getNotifications({ page: 1, pageSize: 1 });
 
-      expect(result.items).toHaveLength(1);
-      expect(result.totalCount).toBe(2);
+      expect(firstPage.items).toHaveLength(1);
+      expect(firstPage.totalCount).toBe(2);
+
+      const secondPage = await getNotifications({ page: 2, pageSize: 1 });
+
+      expect(secondPage.items).toHaveLength(1);
+      expect(secondPage.totalCount).toBe(2);
     });
 
     it("should return notifications for user-3 and workspace 2", async () => {

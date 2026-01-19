@@ -21,14 +21,20 @@
 
     "action": {
       "projectAdded": "added a new project",
-      "projectDeadlineChanged": "changed the project deadline",
-      "projectStatusChanged": "changed the project status",
+      "projectChanged": "changed the project",
       "projectDeleted": "deleted the project",
 
       "taskAdded": "added a new task",
-      "taskDeadlineChanged": "changed the task deadline",
-      "taskStatusChanged": "changed the task status",
+      "taskChanged": "changed the task",
       "taskDeleted": "deleted the task",
+
+      "userAdded": "added a new user",
+      "userChanged": "changed the user",
+      "userDeleted": "deleted a user",
+
+      "customerAdded": "added a new customer",
+      "customerChanged": "changed the customer",
+      "customerDeleted": "deleted the customer",
 
       "commentAdded": "added a comment in",
       "commentChanged": "edited a comment in",

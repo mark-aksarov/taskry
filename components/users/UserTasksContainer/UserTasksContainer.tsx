@@ -1,10 +1,4 @@
 import {
-  canDeleteTask,
-  canUpdateTask,
-  canUpdateTaskStatus,
-} from "@/lib/data/user/user.dal";
-
-import {
   EntityPaginationProvider,
   EntityContainerPagination,
 } from "@/components/common/EntityContainerPagination";
@@ -44,32 +38,17 @@ export async function UserTasksContainer({
     filters,
   });
 
-  const canDelete = await canDeleteTask();
-  const canUpdate = await canUpdateTask();
-
-  const tasksWithPermissions = await Promise.all(
-    tasks.map(async (task) => {
-      const canUpdateStatus = await canUpdateTaskStatus(task.assignee?.id);
-
-      return {
-        ...task,
-        canUpdateStatus,
-      };
-    }),
-  );
-
   return (
     <EntityPaginationProvider>
       <UserTaskList>
-        {tasksWithPermissions.length &&
-          tasksWithPermissions.map((task) => (
+        {tasks.length &&
+          tasks.map((task) => (
             <UserTaskListItem
               key={task.id}
               id={task.id}
               title={task.title}
               deadline={task.deadline}
               status={task.status}
-              projectStatus={task.project.status}
               commentModalTrigger={
                 <TaskCommentsModalTrigger
                   taskId={task.id}
@@ -81,13 +60,9 @@ export async function UserTasksContainer({
                 <TaskItemActionMenuTrigger
                   taskId={task.id}
                   taskTitle={task.title}
-                  canDelete={canDelete}
-                  canUpdate={canUpdate}
-                  canUpdateStatus={task.canUpdateStatus}
                   deleteAction={deleteTasks}
                   updateStatusAction={updateTaskStatuses}
                   taskStatus={task.status}
-                  projectStatus={task.project.status}
                 />
               }
             />

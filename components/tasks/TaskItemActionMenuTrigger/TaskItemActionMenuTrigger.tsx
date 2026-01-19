@@ -1,11 +1,6 @@
 "use client";
 
 import {
-  taskStatuses,
-  ALLOWED_TASK_STATUSES_BY_PROJECT,
-} from "@/lib/data/utils/statusUtils";
-
-import {
   ActionFn,
   ActionState,
   DeleteProjectsPayload,
@@ -15,9 +10,9 @@ import {
 import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
 import { EditTaskModal } from "../EditTaskModal";
+import { TaskStatus } from "@/generated/prisma/enums";
 import { startTransition, useActionState, useState } from "react";
 import { GuestModeModal } from "@/components/common/GuestModeModal";
-import { ProjectStatus, TaskStatus } from "@/generated/prisma/enums";
 import { useActionErrorToast } from "@/lib/hooks/useActionErrorToast";
 import { ItemBaseActionMenuTrigger } from "@/components/common/ItemBase";
 import { DeleteEntityModal } from "@/components/common/DeleteEntityModal";
@@ -27,12 +22,8 @@ export type TaskItemActionMenuTriggerProps = {
   taskId: number;
   taskTitle: string;
   taskStatus: TaskStatus;
-  projectStatus: ProjectStatus;
   className?: string;
   guestMode?: boolean;
-  canDelete: boolean;
-  canUpdate: boolean;
-  canUpdateStatus: boolean;
   deleteAction: ActionFn<ActionState, DeleteProjectsPayload>;
   updateStatusAction: ActionFn<ActionState, UpdateTaskStatusesPayload>;
 };
@@ -46,12 +37,8 @@ export function TaskItemActionMenuTrigger({
   taskId,
   taskTitle,
   taskStatus,
-  projectStatus,
   className,
   guestMode,
-  canDelete,
-  canUpdate,
-  canUpdateStatus,
   deleteAction,
   updateStatusAction,
 }: TaskItemActionMenuTriggerProps) {
@@ -96,26 +83,13 @@ export function TaskItemActionMenuTrigger({
 
   useActionErrorToast(updateTaskStatusState);
 
-  const allowedStatuses = ALLOWED_TASK_STATUSES_BY_PROJECT[projectStatus];
-  const statusDisabledKeys = taskStatuses.filter(
-    (status) => !allowedStatuses.includes(status) || status === taskStatus,
-  );
-
-  const disabledKeys = [...statusDisabledKeys] as Key[];
-
-  if (!canDelete && !guestMode) disabledKeys.push("delete");
-  if (!canUpdate && !guestMode) disabledKeys.push("edit");
-  if (!canUpdateStatus && !guestMode) {
-    disabledKeys.push("pending", "completed", "active");
-  }
-
   return (
     <>
       <ItemBaseActionMenuTrigger
         trigger-data-test={`task-item-${taskId}-action-menu-trigger`}
         className={className}
         onAction={handleAction}
-        disabledKeys={disabledKeys}
+        disabledKeys={[taskStatus]}
       >
         <Item textValue={t("edit")} key="edit">
           <Pencil size={16} /> {t("edit")}

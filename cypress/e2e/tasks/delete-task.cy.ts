@@ -71,7 +71,7 @@ describe("deletes a task", () => {
     cy.checkNotifications(0);
 
     // sign in as user-2
-    cy.signIn("manager@example.com", "12345abc");
+    cy.signIn("user@example.com", "12345abc");
     cy.visit("/en/tasks");
 
     // check notifications
@@ -83,8 +83,8 @@ describe("deletes a task", () => {
       },
     ]);
 
-    // sign in as user-2
-    cy.signIn("user@example.com", "12345abc");
+    // sign in as user-3
+    cy.signIn("guest@example.com", "12345abc");
     cy.visit("/en/tasks");
 
     // check notifications
@@ -125,21 +125,11 @@ describe("deletes a task", () => {
       cy.getByData("delete-entity-modal").should("be.visible");
     });
 
-    it("allows a user with 'manager' role to open the edit modal", () => {
-      cy.signIn("manager@example.com", "12345abc");
+    it("allows a user with 'user' role to open the edit modal", () => {
+      cy.signIn("user@example.com", "12345abc");
       cy.visit("/en/tasks");
       cy.getMenuItem("task-item-1-action-menu-trigger", "delete").click();
       cy.getByData("delete-entity-modal").should("be.visible");
-    });
-
-    it("prevents 'user' from editing by disabling the menu option", () => {
-      cy.signIn("user@example.com", "12345abc");
-      cy.visit("/en/tasks");
-      cy.getMenuItem("task-item-1-action-menu-trigger", "delete").should(
-        "have.attr",
-        "aria-disabled",
-        "true",
-      );
     });
 
     it("shows a restriction modal when a 'guest' attempts to delete", () => {

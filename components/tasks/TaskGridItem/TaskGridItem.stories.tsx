@@ -34,10 +34,6 @@ const meta = {
           taskId={args.id}
           taskTitle={args.title}
           taskStatus={args.status}
-          projectStatus={args.projectStatus}
-          canDelete
-          canUpdate
-          canUpdateStatus
           deleteAction={fn()}
           updateStatusAction={fn()}
           className="-mr-2"
@@ -61,7 +57,6 @@ export const Default = {
       fullName: "John Doe",
     },
     status: TaskStatus.pending,
-    projectStatus: ProjectStatus.active,
     subtasksTotal: 6,
     subtasksDone: 2,
   },

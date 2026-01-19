@@ -28,8 +28,6 @@ import { TaskToolbarSortingMenuTrigger } from "@/components/tasks/TaskToolbarSor
 import { TaskToolbarActionsMenuTrigger } from "@/components/tasks/TaskToolbarActionsMenuTrigger";
 
 interface UserTasksPageLayoutProps {
-  canCreateTask: boolean;
-  canDeleteTask: boolean;
   userTasksContainer: React.ReactNode;
   userHeaderContainer: React.ReactNode;
   newTaskFormContainer: React.ReactNode;
@@ -40,8 +38,6 @@ interface UserTasksPageLayoutProps {
 }
 
 export function UserTasksPageLayout({
-  canCreateTask,
-  canDeleteTask,
   userTasksContainer,
   userHeaderContainer,
   newTaskFormContainer,
@@ -62,13 +58,10 @@ export function UserTasksPageLayout({
               <div className="flex gap-4">
                 <TaskToolbarSortingMenuTrigger />
                 <TaskToolbarActionsMenuTrigger
-                  canDelete={canDeleteTask}
                   deleteAction={deleteTasksAction}
                   updateStatusAction={updateTasksStatusesAction}
                 />
-                {canCreateTask && (
-                  <NewTaskModalTrigger newTaskForm={newTaskFormContainer} />
-                )}
+                <NewTaskModalTrigger newTaskForm={newTaskFormContainer} />
               </div>
             </UserCardHeader>
             {userTasksContainer}
@@ -87,7 +80,6 @@ export function UserTasksPageLayout({
             <ToolbarMobileHeading>{t("title")}</ToolbarMobileHeading>
             <TaskToolbarSortingMenuTrigger />
             <TaskToolbarActionsMenuTrigger
-              canDelete={canDeleteTask}
               deleteAction={deleteTasksAction}
               updateStatusAction={updateTasksStatusesAction}
             />
@@ -95,9 +87,7 @@ export function UserTasksPageLayout({
 
           <ToolbarMobileBottom>
             {navigationMobile}
-            {canCreateTask && (
-              <NewTaskModalTrigger newTaskForm={newTaskFormContainer} />
-            )}
+            <NewTaskModalTrigger newTaskForm={newTaskFormContainer} />
           </ToolbarMobileBottom>
           {userTasksContainer}
         </PageGrid>

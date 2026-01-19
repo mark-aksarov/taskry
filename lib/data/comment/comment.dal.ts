@@ -2,14 +2,15 @@ import "server-only";
 
 import { cache } from "react";
 import prisma from "@/lib/prisma";
+import { auth } from "@/lib/auth";
 import { AccessDeniedError } from "../utils/error";
 import { CreateCommentInputDTO } from "./comment.dto";
 import { verifySession } from "../utils/verifySession";
 import { createCommentAddedNotifications } from "../notification/notification.dal";
-import { canCreateComment } from "../user/user.dal";
 
 export const getAllComments = cache(
   async (taskId?: number, projectId?: number) => {
+    // Authorization
     const {
       user: { workspaceId },
     } = await verifySession();
@@ -44,26 +45,40 @@ export const getAllComments = cache(
 );
 
 export const createComment = async (input: CreateCommentInputDTO) => {
+  // Authorization
   const {
     user: { id: senderId, workspaceId },
   } = await verifySession();
 
-  const canCreate = await canCreateComment();
-  if (!canCreate) throw new AccessDeniedError();
+  // ACL
+  const permission = await auth.api.userHasPermission({
+    body: {
+      userId: senderId,
+      permission: {
+        comment: ["create"],
+      },
+    },
+  });
+
+  if (!permission.success) {
+    throw new AccessDeniedError(
+      "You do not have permission to create comment.",
+    );
+  }
 
   await validateCommentRelations(workspaceId, input);
-
-  const { attachments, ...scalarData } = input;
 
   return await prisma.$transaction(async (tx) => {
     const newComment = await tx.comment.create({
       data: {
-        ...scalarData,
+        content: input.content,
+        taskId: input.taskId,
+        projectId: input.projectId,
         senderId,
         workspaceId,
-        attachments: attachments
+        attachments: input.attachments
           ? {
-              create: attachments.map((file) => ({
+              create: input.attachments.map((file) => ({
                 fileUrl: file.fileUrl,
                 fileName: file.fileName,
                 workspaceId,

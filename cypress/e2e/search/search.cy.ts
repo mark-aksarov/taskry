@@ -95,10 +95,8 @@ describe("search", () => {
 
     const expectedUsers = [
       { name: "John Doe", email: "owner@example.com" },
-      { name: "Sarah Jenkins", email: "manager@example.com" },
       { name: "Michael Chen", email: "user@example.com" },
       { name: "Kevin Lee", email: "guest@example.com" },
-      { name: "Bob Smith", email: "manager-empty@example.com" },
     ];
 
     cy.getByData("search-list-item")
@@ -113,10 +111,7 @@ describe("search", () => {
     cy.getByData("search-modal-trigger").click();
     cy.get("input[name=search]").type("en");
 
-    const expectedUsers = [
-      { name: "Sarah Jenkins", email: "manager@example.com" },
-      { name: "Michael Chen", email: "user@example.com" },
-    ];
+    const expectedUsers = [{ name: "Michael Chen", email: "user@example.com" }];
 
     cy.getByData("search-list-item")
       .should("have.length", expectedUsers.length)
@@ -152,6 +147,6 @@ describe("search", () => {
       });
 
     cy.getByData("users-button").click();
-    cy.getByData("search-list-item").should("have.length", 5);
+    cy.getByData("search-list-item").should("have.length", 3);
   });
 });

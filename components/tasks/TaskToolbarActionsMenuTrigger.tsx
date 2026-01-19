@@ -1,11 +1,6 @@
 "use client";
 
 import {
-  taskStatuses,
-  ALLOWED_TASK_STATUSES_BY_PROJECT,
-} from "@/lib/data/utils/statusUtils";
-
-import {
   ActionFn,
   ActionState,
   DeleteTasksPayload,
@@ -14,19 +9,19 @@ import {
 
 import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
+import { TaskStatus } from "@/generated/prisma/enums";
+import { GuestModeModal } from "../common/GuestModeModal";
 import { ToolbarActionsMenuTrigger } from "../common/Toolbar";
 import { useTaskSelection } from "@/lib/hooks/useTaskSelection";
 import { startTransition, useActionState, useState } from "react";
 import { Check, CircleEllipsis, Clock, Trash } from "lucide-react";
-import { ProjectStatus, TaskStatus } from "@/generated/prisma/enums";
 import { useActionErrorToast } from "@/lib/hooks/useActionErrorToast";
 import { BulkDeleteEntityModal } from "../common/BulkDeleteEntityModal";
 import { UpdateTaskStatusRestrictedModal } from "./UpdateTaskStatusRestrictedModal";
-import { GuestModeModal } from "../common/GuestModeModal";
+import { taskStatuses } from "@/lib/data/utils/statusUtils";
 
 interface TaskToolbarActionsMenuTriggerProps {
   guestMode?: boolean;
-  canDelete: boolean;
   deleteAction: ActionFn<ActionState, DeleteTasksPayload>;
   updateStatusAction: ActionFn<ActionState, UpdateTaskStatusesPayload>;
 }
@@ -41,17 +36,8 @@ const initialState: ActionState = {
   message: null,
 };
 
-const isTaskStatusAllowedByProject = (
-  task: { status: TaskStatus; projectStatus: ProjectStatus },
-  nextStatus: TaskStatus,
-) => {
-  const allowedStatuses = ALLOWED_TASK_STATUSES_BY_PROJECT[task.projectStatus];
-  return allowedStatuses.includes(nextStatus);
-};
-
 export const TaskToolbarActionsMenuTrigger = ({
   guestMode,
-  canDelete,
   deleteAction,
   updateStatusAction,
 }: TaskToolbarActionsMenuTriggerProps) => {
@@ -59,7 +45,7 @@ export const TaskToolbarActionsMenuTrigger = ({
   const {
     selectedIds: selectedTaskIds,
     clearSelectedIds,
-    selectedItems: selectedTaskItems,
+    selectedItems,
   } = useTaskSelection();
 
   // Guest mode modal
@@ -92,31 +78,16 @@ export const TaskToolbarActionsMenuTrigger = ({
 
     const nextStatus = key as TaskStatus;
 
-    const hasSkippedTasks = selectedTaskItems.some((task) => {
-      return !isTaskStatusAllowedByProject(task, nextStatus);
+    startTransition(() => {
+      updateTaskStatusAction({ ids: selectedTaskIds, nextStatus });
     });
-
-    if (hasSkippedTasks) {
-      setUpdateModal({ isOpen: true, nextStatus });
-    } else {
-      startTransition(() => {
-        updateTaskStatusAction({ ids: selectedTaskIds, nextStatus });
-      });
-    }
   };
 
   useActionErrorToast(updateTaskStatusState);
 
-  const statusDisabledKeys = taskStatuses.filter((status) =>
-    selectedTaskItems.every(
-      (task) =>
-        !isTaskStatusAllowedByProject(task, status) || task.status === status,
-    ),
+  const disabledKeys = taskStatuses.filter((status) =>
+    selectedItems.every((task) => task.status === status),
   );
-
-  const disabledKeys = [...statusDisabledKeys] as Key[];
-
-  if (!canDelete && !guestMode) disabledKeys.push("delete");
 
   return (
     <>

@@ -142,7 +142,6 @@ export const getTaskListItems = ({
       project={{
         id: task.id,
         title: task.project,
-        status: ProjectStatus.active,
       }}
       category={{ id: task.id, name: task.category }}
       showCheckbox={showCheckbox}
@@ -159,10 +158,6 @@ export const getTaskListItems = ({
           taskId={task.id}
           taskTitle={task.title}
           taskStatus={task.status}
-          projectStatus={ProjectStatus.active}
-          canDelete
-          canUpdate
-          canUpdateStatus
           deleteAction={mockedAction}
           updateStatusAction={mockedAction}
         />

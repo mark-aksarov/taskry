@@ -30,8 +30,6 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    canCreateTask: true,
-    canDeleteTask: true,
     userTasksContainer: <UserTaskList {...UserTaskListStory.args} />,
     userHeaderContainer: <PersonHeader {...PersonHeaderStory.args} />,
     newTaskFormContainer: <NewTaskForm {...TaskFormBaseStory.args} />,

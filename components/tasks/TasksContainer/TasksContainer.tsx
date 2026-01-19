@@ -1,9 +1,3 @@
-import {
-  canDeleteTask,
-  canUpdateTask,
-  canUpdateTaskStatus,
-} from "@/lib/data/user/user.dal";
-
 import { TaskList } from "../TaskList";
 import { TaskGrid } from "../TaskGrid";
 import { TaskFilters } from "@/lib/types";
@@ -40,22 +34,6 @@ export async function TasksContainer({
     filters,
   });
 
-  const canDelete = await canDeleteTask();
-  const canUpdate = await canUpdateTask();
-
-  const tasksWithPermissions = await Promise.all(
-    tasks.map(async (task) => {
-      const canUpdateStatus = await canUpdateTaskStatus(task.assignee?.id);
-
-      return {
-        ...task,
-        canDelete,
-        canUpdate,
-        canUpdateStatus,
-      };
-    }),
-  );
-
   const getCommonProps = (task: TaskListItemDTO) => ({
     id: task.id,
     title: task.title,
@@ -67,7 +45,7 @@ export async function TasksContainer({
   });
 
   const renderMenuTrigger = (
-    task: (typeof tasksWithPermissions)[number],
+    task: (typeof tasks)[number],
     className?: string,
   ) => {
     return (
@@ -76,10 +54,6 @@ export async function TasksContainer({
         taskId={task.id}
         taskTitle={task.title}
         taskStatus={task.status}
-        projectStatus={task.project.status}
-        canDelete={canDelete}
-        canUpdate={canUpdate}
-        canUpdateStatus={task.canUpdateStatus}
         deleteAction={deleteTasks}
         updateStatusAction={updateTaskStatuses}
         className={className}
@@ -91,7 +65,7 @@ export async function TasksContainer({
     <EntityContainerPresentation
       list={
         <TaskList showCheckbox>
-          {tasksWithPermissions.map((task) => {
+          {tasks.map((task) => {
             return (
               <TaskListItem
                 key={task.id}
@@ -114,11 +88,10 @@ export async function TasksContainer({
       }
       grid={
         <TaskGrid>
-          {tasksWithPermissions.map((task) => (
+          {tasks.map((task) => (
             <TaskGridItem
               key={task.id}
               subtasksDone={task.subtasks.done}
-              projectStatus={task.project.status}
               commentModalTrigger={
                 <TaskCommentsModalTrigger
                   taskId={task.id}

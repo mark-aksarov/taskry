@@ -69,8 +69,6 @@ describe("modals smoke tests", () => {
           recipientId: "user-1",
           taskId: 1,
           taskTitle: "Task 1",
-          taskDeadline: new Date("2022-01-01"),
-          taskStatus: "active",
           type: NotificationType.taskAdded,
           createdAt: "2025-01-01T00:00:00.000Z",
           isRead: true,

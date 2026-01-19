@@ -1,20 +1,11 @@
 import "server-only";
 
-import {
-  Prisma,
-  TaskStatus,
-  NotificationType,
-} from "@/generated/prisma/client";
-
-import {
-  canDeleteNotification,
-  canMarkNotificationAsRead,
-} from "../user/user.dal";
-
 import { cache } from "react";
 import prisma from "@/lib/prisma";
+import { auth } from "@/lib/auth";
 import { AccessDeniedError } from "../utils/error";
 import { verifySession } from "@/lib/data/utils/verifySession";
+import { Prisma, NotificationType } from "@/generated/prisma/client";
 
 export const getAllNotifications = cache(
   async ({
@@ -48,18 +39,13 @@ export const getAllNotifications = cache(
           id: true,
           type: true,
           createdAt: true,
-          updatedAt: true,
           isRead: true,
 
           projectTitle: true,
-          projectDeadline: true,
-          projectStatus: true,
-
           taskTitle: true,
-          taskDeadline: true,
-          taskStatus: true,
-
           commentContent: true,
+          userFullName: true,
+          customerFullName: true,
 
           actor: {
             select: {
@@ -73,8 +59,6 @@ export const getAllNotifications = cache(
             select: {
               id: true,
               title: true,
-              deadline: true,
-              status: true,
             },
           },
 
@@ -82,8 +66,20 @@ export const getAllNotifications = cache(
             select: {
               id: true,
               title: true,
-              deadline: true,
-              status: true,
+            },
+          },
+
+          user: {
+            select: {
+              id: true,
+              fullName: true,
+            },
+          },
+
+          customer: {
+            select: {
+              id: true,
+              fullName: true,
             },
           },
 
@@ -105,12 +101,22 @@ export const getAllNotifications = cache(
 );
 
 export const deleteNotification = async (id: number) => {
+  // Authorization
   const {
     user: { id: recipientId, workspaceId },
   } = await verifySession();
 
-  const canDelete = await canDeleteNotification();
-  if (!canDelete) {
+  // ACL
+  const permission = await auth.api.userHasPermission({
+    body: {
+      userId: recipientId,
+      permission: {
+        notification: ["delete"],
+      },
+    },
+  });
+
+  if (!permission.success) {
     throw new AccessDeniedError(
       "You do not have permission to delete notifications.",
     );
@@ -126,12 +132,22 @@ export const deleteNotification = async (id: number) => {
 };
 
 export const markNotificationsAsRead = async (ids: number[] | null) => {
+  // Authorization
   const {
     user: { id: recipientId, workspaceId },
   } = await verifySession();
 
-  const canMarkAsRead = await canMarkNotificationAsRead();
-  if (!canMarkAsRead) {
+  // ACL
+  const permission = await auth.api.userHasPermission({
+    body: {
+      userId: recipientId,
+      permission: {
+        notification: ["update"],
+      },
+    },
+  });
+
+  if (!permission.success) {
     throw new AccessDeniedError(
       "You do not have permission to mark notifications as read.",
     );
@@ -174,50 +190,55 @@ export async function createCommentAddedNotifications(
 ) {
   let taskTitle: string | undefined;
   let projectTitle: string | undefined;
-  let contextAssigneeId: string | null = null;
 
   if (comment.taskId) {
     const task = await tx.task.findUnique({
-      where: { id: comment.taskId },
-      select: { title: true, assigneeId: true },
+      where: {
+        id: comment.taskId,
+      },
+      select: {
+        title: true,
+      },
     });
     taskTitle = task?.title;
-    contextAssigneeId = task?.assigneeId || null;
   }
 
   if (comment.projectId) {
     const project = await tx.project.findUnique({
-      where: { id: comment.projectId },
-      select: { title: true },
+      where: {
+        id: comment.projectId,
+      },
+      select: {
+        title: true,
+      },
     });
     projectTitle = project?.title;
   }
 
-  const candidates = await getNotificationCandidates(tx, workspaceId, actorId, [
-    contextAssigneeId,
-  ]);
+  const recipients = await getNotificationRecipients(tx, workspaceId, actorId);
 
-  const notificationsData = candidates.map((user) => ({
-    type: NotificationType.commentAdded,
-    actorId,
-    recipientId: user.id,
-    workspaceId,
+  if (recipients.length === 0) return;
 
-    commentId: comment.id,
-    taskId: comment.taskId,
-    projectId: comment.projectId,
-
-    commentContent: comment.content.substring(0, 150),
-    taskTitle: taskTitle,
-    projectTitle: projectTitle,
-
-    isRead: false,
-  }));
-
-  if (notificationsData.length > 0) {
-    await tx.notification.createMany({ data: notificationsData });
-  }
+  await tx.notification.createMany({
+    data: recipients.map((user) => ({
+      type: NotificationType.commentAdded,
+      actorId,
+      recipientId: user.id,
+      workspaceId,
+      commentId: comment.id,
+      taskId: comment.taskId,
+      projectId: comment.projectId,
+      commentContent: comment.content.substring(0, 250),
+      taskTitle: taskTitle,
+      projectTitle: projectTitle,
+      isRead: false,
+    })),
+  });
 }
+
+/**
+ * Task Notifications
+ */
 
 export async function createTaskAddedNotifications(
   tx: Prisma.TransactionClient,
@@ -226,22 +247,20 @@ export async function createTaskAddedNotifications(
     actorId,
     workspaceId,
   }: {
-    task: { id: number; title: string; assigneeId: string | null };
+    task: {
+      id: number;
+      title: string;
+    };
     actorId: string;
     workspaceId: number;
   },
 ) {
-  const candidates = await getNotificationCandidates(tx, workspaceId, actorId, [
-    task.assigneeId,
-  ]);
+  const recipients = await getNotificationRecipients(tx, workspaceId, actorId);
 
-  const notificationsData = candidates
-    .filter((user) => {
-      const isAdmin = user.role === "owner" || user.role === "manager";
-      const isAssignee = user.id === task.assigneeId;
-      return isAdmin || isAssignee;
-    })
-    .map((user) => ({
+  if (recipients.length === 0) return;
+
+  await tx.notification.createMany({
+    data: recipients.map((user) => ({
       type: NotificationType.taskAdded,
       actorId,
       recipientId: user.id,
@@ -249,17 +268,10 @@ export async function createTaskAddedNotifications(
       taskId: task.id,
       taskTitle: task.title,
       isRead: false,
-    }));
-
-  if (notificationsData.length > 0) {
-    await tx.notification.createMany({ data: notificationsData });
-  }
+    })),
+  });
 }
 
-/**
- * Creates notifications for multiple deleted tasks.
- * Logic: owner and manager get all notifications; Assignees only get their own.
- */
 export async function createTaskDeletedNotifications(
   tx: Prisma.TransactionClient,
   {
@@ -267,176 +279,79 @@ export async function createTaskDeletedNotifications(
     actorId,
     workspaceId,
   }: {
-    tasks: { title: string; assigneeId: string | null }[];
+    tasks: {
+      title: string;
+    }[];
     actorId: string;
     workspaceId: number;
   },
 ) {
-  const allAssigneeIds = tasks
-    .map((t) => t.assigneeId)
-    .filter(Boolean) as string[];
+  const recipients = await getNotificationRecipients(tx, workspaceId, actorId);
 
-  const candidates = await getNotificationCandidates(
-    tx,
-    workspaceId,
-    actorId,
-    allAssigneeIds,
-  );
+  if (recipients.length === 0) return;
 
-  const notificationsData: Prisma.NotificationCreateManyInput[] = [];
-
-  for (const task of tasks) {
-    for (const user of candidates) {
-      const isAdmin = user.role === "owner" || user.role === "manager";
-      const isAssignee = user.id === task.assigneeId;
-
-      // Send if user is an owner or manager (sees everything) OR the specific Assignee
-      if (isAdmin || isAssignee) {
-        notificationsData.push({
-          type: NotificationType.taskDeleted,
-          actorId,
-          recipientId: user.id,
-          workspaceId,
-          taskTitle: task.title,
-        });
-      }
-    }
-  }
-
-  if (notificationsData.length > 0) {
-    await tx.notification.createMany({ data: notificationsData });
-  }
+  await tx.notification.createMany({
+    data: tasks.flatMap((task) =>
+      recipients.map((user) => ({
+        type: NotificationType.taskDeleted,
+        actorId,
+        recipientId: user.id,
+        workspaceId,
+        taskTitle: task.title,
+        isRead: false,
+      })),
+    ),
+  });
 }
 
-/**
- * Creates notifications for multiple task status changes.
- * Logic: owner and manager get all updates; Assignees only get updates for their own tasks.
- */
-export async function createTaskStatusChangedNotifications(
+export async function createTaskChangedNotifications(
   tx: Prisma.TransactionClient,
   {
     tasks,
     actorId,
     workspaceId,
-    newStatus,
   }: {
     tasks: {
       id: number;
       title: string;
-      assigneeId: string | null;
     }[];
     actorId: string;
     workspaceId: number;
-    newStatus: TaskStatus;
   },
 ) {
-  const allAssigneeIds = tasks.map((t) => t.assigneeId);
-  const candidates = await getNotificationCandidates(
-    tx,
-    workspaceId,
-    actorId,
-    allAssigneeIds,
-  );
+  const recipients = await getNotificationRecipients(tx, workspaceId, actorId);
 
-  const notificationsData: Prisma.NotificationCreateManyInput[] = [];
+  if (recipients.length === 0) return;
 
-  for (const task of tasks) {
-    for (const user of candidates) {
-      const isAdmin = user.role === "owner" || user.role === "manager";
-      const isAssignee = user.id === task.assigneeId;
-
-      // Only notify if user is an Admin or the specific Assignee for this task
-      if (isAdmin || isAssignee) {
-        notificationsData.push({
-          type: NotificationType.taskStatusChanged,
-          actorId,
-          recipientId: user.id,
-          workspaceId,
-          taskId: task.id,
-          taskTitle: task.title,
-          taskStatus: newStatus,
-          isRead: false,
-        });
-      }
-    }
-  }
-
-  if (notificationsData.length > 0) {
-    await tx.notification.createMany({ data: notificationsData });
-  }
-}
-
-/**
- * Creates notifications for deadline changes.
- * Logic: owner and manager get all notifications; Assignees only get their own.
- */
-export async function createTaskDeadlineChangedNotifications(
-  tx: Prisma.TransactionClient,
-  {
-    task,
-    newDeadline,
-    actorId,
-    workspaceId,
-  }: {
-    task: { id: number; title: string; assigneeId: string | null };
-    newDeadline: Date;
-    actorId: string;
-    workspaceId: number;
-  },
-) {
-  const candidates = await getNotificationCandidates(tx, workspaceId, actorId, [
-    task.assigneeId,
-  ]);
-
-  const notificationsData = candidates
-    .filter((user) => {
-      const isAdmin = user.role === "owner" || user.role === "manager";
-      const isAssignee = user.id === task.assigneeId;
-      return isAdmin || isAssignee;
-    })
-    .map((user) => ({
-      type: NotificationType.taskDeadlineChanged,
-      actorId,
-      recipientId: user.id,
-      workspaceId,
-      taskId: task.id,
-      taskTitle: task.title,
-      taskDeadline: newDeadline,
-      isRead: false,
-    }));
-
-  if (notificationsData.length > 0) {
-    await tx.notification.createMany({ data: notificationsData });
-  }
+  await tx.notification.createMany({
+    data: tasks.flatMap((task) =>
+      recipients.map((user) => ({
+        type: NotificationType.taskChanged,
+        actorId,
+        recipientId: user.id,
+        workspaceId,
+        taskId: task.id,
+        taskTitle: task.title,
+        isRead: false,
+      })),
+    ),
+  });
 }
 
 /**
  * HELPER
  */
 
-/**
- * Fetches all potential notification recipients for the given context.
- * Candidates include workspace owners and managers and specific task assignees.
- */
-async function getNotificationCandidates(
+async function getNotificationRecipients(
   tx: Prisma.TransactionClient,
   workspaceId: number,
   actorId: string,
-  assigneeIds: (string | null)[],
 ) {
-  const uniqueAssigneeIds = Array.from(
-    new Set(assigneeIds.filter(Boolean)),
-  ) as string[];
-
   return tx.user.findMany({
     where: {
       workspaceId,
       id: { not: actorId },
-      OR: [
-        { role: { in: ["owner", "manager"] } },
-        { id: { in: uniqueAssigneeIds } },
-      ],
     },
-    select: { id: true, role: true },
+    select: { id: true },
   });
 }

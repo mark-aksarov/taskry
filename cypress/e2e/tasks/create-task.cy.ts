@@ -67,7 +67,7 @@ describe("creates a new task", () => {
     cy.checkNotifications(0);
 
     // sign in as user-2
-    cy.signIn("manager@example.com", "12345abc");
+    cy.signIn("user@example.com", "12345abc");
     cy.visit("/en/tasks");
 
     // check notifications
@@ -79,8 +79,8 @@ describe("creates a new task", () => {
       },
     ]);
 
-    // sign in as user-2
-    cy.signIn("user@example.com", "12345abc");
+    // sign in as user-3
+    cy.signIn("guest@example.com", "12345abc");
     cy.visit("/en/tasks");
 
     // check notifications

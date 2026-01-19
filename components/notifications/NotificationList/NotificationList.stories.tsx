@@ -9,7 +9,6 @@ import {
 
 import { Meta, StoryObj } from "@storybook/react";
 import { NotificationList } from "./NotificationList";
-import { ProjectStatus, TaskStatus } from "@/generated/prisma/enums";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { NotificationListItemDTO } from "@/lib/data/notification/notification.dto";
 
@@ -31,200 +30,156 @@ const mockedNotifications: NotificationListItemDTO[] = [
   {
     id: 1,
     type: "projectAdded",
-    createdAt: new Date("2026-01-07T09:00:00Z"),
-    updatedAt: new Date("2026-01-07T09:00:00Z"),
+    createdAt: new Date("2026-01-19T09:00:00Z"),
     isRead: false,
     actor: {
       id: "user-1",
       fullName: "Alice Freeman",
       imageUrl: "/woman.jpg",
     },
-
-    project: {
-      id: 50,
-      title: "Mobile App Launch",
-      deadline: new Date("2026-06-01"),
-      status: ProjectStatus.pending,
-    },
-
-    projectTitle: "Mobile App Launch",
-    projectDeadline: new Date("2026-06-01"),
-    projectStatus: ProjectStatus.pending,
+    project: { id: 50, title: "AI Integration Phase" },
+    projectTitle: "AI Integration Phase",
   },
   {
     id: 2,
-    type: "projectDeadlineChanged",
-    createdAt: new Date("2026-01-07T10:30:00Z"),
-    updatedAt: new Date("2026-01-07T10:30:00Z"),
-    isRead: false,
+    type: "projectChanged",
+    createdAt: new Date("2026-01-18T15:30:00Z"),
+    isRead: true,
     actor: { id: "user-2", fullName: "Bob Miller" },
-
-    project: {
-      id: 51,
-      title: "Website Redesign",
-      deadline: new Date("2026-01-16"),
-      status: ProjectStatus.active,
-    },
-
-    projectTitle: "Mobile App Launch",
-    projectDeadline: new Date("2026-01-16"),
-    projectStatus: ProjectStatus.active,
+    project: { id: 51, title: "Global Marketing Campaign" },
+    projectTitle: "Global Marketing Campaign",
   },
   {
     id: 3,
-    type: "projectStatusChanged",
-    createdAt: new Date("2026-01-06T17:00:00Z"),
-    updatedAt: new Date("2026-01-06T17:00:00Z"),
-    isRead: true,
-
-    project: {
-      id: 52,
-      title: "Q1 Audit",
-      deadline: new Date("2025-12-31"),
-      status: ProjectStatus.completed,
-    },
-
-    projectTitle: "Q1 Audit",
-    projectDeadline: new Date("2025-12-31"),
-    projectStatus: ProjectStatus.completed,
-  },
-  {
-    id: 4,
     type: "projectDeleted",
-    createdAt: new Date("2026-01-05T14:20:00Z"),
-    updatedAt: new Date("2026-01-05T14:20:00Z"),
+    createdAt: new Date("2026-01-15T11:00:00Z"),
     isRead: true,
-
-    projectTitle: "Q1 Audit",
-    projectDeadline: new Date("2025-12-31"),
-    projectStatus: ProjectStatus.completed,
+    actor: { id: "user-5", fullName: "Sarah Connor" },
+    projectTitle: "Legacy Support",
   },
 
   // TASK EVENTS
   {
-    id: 5,
+    id: 4,
     type: "taskAdded",
-    createdAt: new Date("2026-01-07T11:15:00Z"),
-    updatedAt: new Date("2026-01-07T11:15:00Z"),
+    createdAt: new Date("2026-01-19T11:15:00Z"),
     isRead: false,
     actor: { id: "user-1", fullName: "Alice Freeman" },
-
-    task: {
-      id: 801,
-      title: "Write Unit Tests",
-      deadline: new Date("2026-01-10"),
-      status: TaskStatus.pending,
-    },
-
-    taskTitle: "Write Unit Tests",
-    taskDeadline: new Date("2026-01-10"),
-    taskStatus: TaskStatus.pending,
+    task: { id: 801, title: "Optimize Database Queries" },
+    taskTitle: "Optimize Database Queries",
+  },
+  {
+    id: 5,
+    type: "taskChanged",
+    createdAt: new Date("2026-01-19T13:45:00Z"),
+    isRead: false,
+    actor: { id: "user-6", fullName: "David Bowie" },
+    task: { id: 802, title: "Refactor Auth Flow" },
+    taskTitle: "Refactor Auth Flow",
   },
   {
     id: 6,
-    type: "taskDeadlineChanged",
-    createdAt: new Date("2026-01-07T13:00:00Z"),
-    updatedAt: new Date("2026-01-07T13:00:00Z"),
-    isRead: false,
-
-    task: {
-      id: 802,
-      title: "API Integration",
-      deadline: new Date("2026-01-20"),
-      status: TaskStatus.completed,
-    },
-
-    taskTitle: "API Integration",
-    taskDeadline: new Date("2026-01-10"),
-    taskStatus: TaskStatus.completed,
+    type: "taskDeleted",
+    createdAt: new Date("2026-01-18T08:45:00Z"),
+    isRead: true,
+    actor: { id: "user-4", fullName: "Charlie Day" },
+    taskTitle: "Fix IE11 CSS Bug",
   },
+
+  // USER EVENTS
   {
     id: 7,
-    type: "taskStatusChanged",
-    createdAt: new Date("2026-01-07T08:45:00Z"),
-    updatedAt: new Date("2026-01-07T08:45:00Z"),
+    type: "userAdded",
+    createdAt: new Date("2026-01-17T14:20:00Z"),
+    isRead: true,
+    actor: { id: "user-7", fullName: "Admin Chief" },
+    user: { id: "user-8", fullName: "Frank Castle" },
+    userFullName: "Frank Castle",
+  },
+  {
+    id: 8,
+    type: "userChanged",
+    createdAt: new Date("2026-01-17T16:00:00Z"),
+    isRead: true,
+    actor: { id: "user-1", fullName: "Alice Freeman" },
+    user: { id: "user-3", fullName: "Charlie Day" },
+    userFullName: "Charlie Day",
+  },
+  {
+    id: 9,
+    type: "userDeleted",
+    createdAt: new Date("2026-01-16T10:00:00Z"),
+    isRead: true,
+    actor: { id: "user-2", fullName: "Bob Miller" },
+    userFullName: "John Doe",
+  },
+
+  // CUSTOMER EVENTS
+  {
+    id: 10,
+    type: "customerAdded",
+    createdAt: new Date("2026-01-19T08:30:00Z"),
     isRead: false,
+    actor: { id: "user-9", fullName: "Grace Hopper" },
+    customer: { id: 101, fullName: "Tesla Motors" },
+    customerFullName: "Tesla Motors",
+  },
+  {
+    id: 11,
+    type: "customerChanged",
+    createdAt: new Date("2026-01-18T12:00:00Z"),
+    isRead: true,
+    actor: { id: "user-1", fullName: "Alice Freeman" },
+    customer: { id: 102, fullName: "SpaceX" },
+    customerFullName: "SpaceX",
+  },
+  {
+    id: 12,
+    type: "customerDeleted",
+    createdAt: new Date("2026-01-14T09:00:00Z"),
+    isRead: true,
     actor: { id: "user-4", fullName: "Charlie Day" },
-
-    task: {
-      id: 803,
-      title: "Fix Header Bug",
-      deadline: new Date("2026-01-08"),
-      status: TaskStatus.active,
-    },
-
-    taskTitle: "Fix Header Bug",
-    taskDeadline: new Date("2026-01-08"),
-    taskStatus: TaskStatus.active,
+    customerFullName: "Acme Corp",
   },
 
   // COMMENT EVENTS
   {
-    id: 8,
+    id: 13,
     type: "commentAdded",
-    createdAt: new Date("2026-01-07T12:00:00Z"),
-    updatedAt: new Date("2026-01-07T12:00:00Z"),
+    createdAt: new Date("2026-01-19T15:10:00Z"),
     isRead: false,
     actor: {
       id: "user-2",
       fullName: "Bob Miller",
       imageUrl: "/man.jpg",
     },
-
-    task: {
-      id: 804,
-      title: "Database Schema",
-      deadline: new Date("2026-01-08"),
-      status: TaskStatus.active,
-    },
-
-    comment: {
-      id: 901,
-      content: "We should consider indexing the email column.",
-    },
-
-    taskTitle: "Database Schema",
-    commentContent: "We should consider indexing the email column.",
+    task: { id: 804, title: "Infrastructure Setup" },
+    comment: { id: 901, content: "Don't forget to setup the S3 buckets." },
+    taskTitle: "Infrastructure Setup",
+    commentContent: "Don't forget to setup the S3 buckets.",
   },
   {
-    id: 9,
+    id: 14,
     type: "commentChanged",
-    createdAt: new Date("2026-01-07T12:30:00Z"),
-    updatedAt: new Date("2026-01-07T12:35:00Z"),
-    isRead: true,
+    createdAt: new Date("2026-01-19T16:05:00Z"),
+    isRead: false,
     actor: { id: "user-1", fullName: "Alice Freeman" },
-
-    project: {
-      id: 51,
-      title: "Website Redesign",
-      deadline: new Date("2026-01-08"),
-      status: TaskStatus.active,
-    },
-
+    project: { id: 51, title: "Website Redesign" },
     comment: {
       id: 902,
-      content: "(Edited) The hex code should be #FF5733.",
+      content: "Actually, let's use the dark theme by default.",
     },
-
     projectTitle: "Website Redesign",
-    commentContent: "(Edited) The hex code should be #FF5733.",
+    commentContent: "Actually, let's use the dark theme by default.",
   },
   {
-    id: 10,
+    id: 15,
     type: "commentDeleted",
-    createdAt: new Date("2026-01-07T09:00:00Z"),
-    updatedAt: new Date("2026-01-07T09:00:00Z"),
+    createdAt: new Date("2026-01-19T10:00:00Z"),
     isRead: true,
-
-    task: {
-      id: 809,
-      title: "Security Audit",
-      deadline: new Date("2026-02-01"),
-      status: TaskStatus.completed,
-    },
-
+    actor: { id: "user-6", fullName: "David Bowie" },
     taskTitle: "Security Audit",
-    commentContent: "The hex code should be #FF5733.",
+    commentContent: "This comment contained sensitive API keys.",
   },
 ];
 

@@ -26,7 +26,6 @@ export interface UserTaskListItemProps {
   title: string;
   deadline?: Date;
   status: TaskStatus;
-  projectStatus: ProjectStatus;
   commentModalTrigger?: React.ReactNode;
   menuTrigger: React.ReactNode;
 }
@@ -36,13 +35,12 @@ export const UserTaskListItem = ({
   title,
   deadline,
   status,
-  projectStatus,
   commentModalTrigger,
   menuTrigger,
 }: UserTaskListItemProps) => {
   const t = useTranslations();
 
-  useSyncSelectionTaskItem(id, title, status, projectStatus);
+  useSyncSelectionTaskItem(id, title, status);
 
   const format = useFormatter();
 

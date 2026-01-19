@@ -1,13 +1,14 @@
-import prisma from "@/lib/prisma";
-import { resetDatabase } from "@/prisma/resetDatabase";
 import {
   deleteNotification,
   markNotificationsAsRead,
 } from "../notification.dal";
+
+import prisma from "@/lib/prisma";
+import { AccessDeniedError } from "../../utils/error";
+import { resetDatabase } from "@/prisma/resetDatabase";
 import { NotificationType } from "@/generated/prisma/enums";
 import { vi, describe, beforeEach, it, expect } from "vitest";
 import { verifySession } from "@/lib/data/utils/verifySession";
-import { AccessDeniedError } from "../../utils/error";
 
 vi.mock("server-only", () => ({}));
 
@@ -38,34 +39,27 @@ describe("Notification DAL", () => {
           id: "user-2",
           fullName: "User 2",
           email: "user-2@test.com",
-          role: "manager",
+          role: "user",
           workspaceId: 1,
         },
         {
           id: "user-3",
           fullName: "User 3",
           email: "user-3@test.com",
-          role: "user",
+          role: "guest",
           workspaceId: 1,
         },
         {
           id: "user-4",
           fullName: "User 4",
           email: "user-4@test.com",
-          role: "guest",
-          workspaceId: 1,
+          role: "manager",
+          workspaceId: 2,
         },
         {
           id: "user-5",
           fullName: "User 5",
           email: "user-5@test.com",
-          role: "manager",
-          workspaceId: 2,
-        },
-        {
-          id: "user-6",
-          fullName: "User 6",
-          email: "user-6@test.com",
           role: "user",
           workspaceId: 2,
         },
@@ -84,8 +78,8 @@ describe("Notification DAL", () => {
           isRead: false,
           taskTitle: "Task 1",
           workspaceId: 2,
-          actorId: "user-5",
-          recipientId: "user-6",
+          actorId: "user-4",
+          recipientId: "user-5",
         },
       });
 
@@ -110,7 +104,7 @@ describe("Notification DAL", () => {
       await expect(deleteNotification(notificationId)).rejects.toThrow();
     });
 
-    describe("notification RBAC Deletion", () => {
+    describe("RBAC: delete notification", () => {
       const notificationId = 100;
 
       const setup = async (userId: string, role: string) => {
@@ -137,20 +131,14 @@ describe("Notification DAL", () => {
         expect(result.taskTitle).toBe("Task 1");
       });
 
-      it("should succeed for manager", async () => {
-        await setup("user-2", "manager");
-        const result = await deleteNotification(notificationId);
-        expect(result.taskTitle).toBe("Task 1");
-      });
-
       it("should succeed for user", async () => {
-        await setup("user-3", "user");
+        await setup("user-2", "user");
         const result = await deleteNotification(notificationId);
         expect(result.taskTitle).toBe("Task 1");
       });
 
       it("should fail for guest", async () => {
-        await setup("user-4", "user");
+        await setup("user-3", "guest");
         await expect(deleteNotification(notificationId)).rejects.toThrow(
           AccessDeniedError,
         );
@@ -170,8 +158,8 @@ describe("Notification DAL", () => {
             isRead: false,
             taskTitle: "Task 1",
             workspaceId: 2,
-            actorId: "user-5",
-            recipientId: "user-6",
+            actorId: "user-4",
+            recipientId: "user-5",
           },
         ],
       });
@@ -205,7 +193,7 @@ describe("Notification DAL", () => {
       expect(notification!.isRead).toBe(false);
     });
 
-    describe("notification RBAC Deletion", () => {
+    describe("RBAC: mark notifications as read", () => {
       const notificationId = 100;
 
       const setup = async (userId: string, role: string) => {
@@ -234,16 +222,8 @@ describe("Notification DAL", () => {
         expect(notification!.isRead).toBe(true);
       });
 
-      it("should succeed for manager", async () => {
-        await setup("user-2", "manager");
-        const result = await markNotificationsAsRead([notificationId]);
-        const notification = await prisma.notification.findFirst();
-        expect(result.count).toBe(1);
-        expect(notification!.isRead).toBe(true);
-      });
-
       it("should succeed for user", async () => {
-        await setup("user-3", "user");
+        await setup("user-2", "user");
         const result = await markNotificationsAsRead([notificationId]);
         const notification = await prisma.notification.findFirst();
         expect(result.count).toBe(1);
@@ -251,7 +231,7 @@ describe("Notification DAL", () => {
       });
 
       it("should fail for guest", async () => {
-        await setup("user-4", "user");
+        await setup("user-3", "guest");
         await expect(markNotificationsAsRead([notificationId])).rejects.toThrow(
           AccessDeniedError,
         );

@@ -63,27 +63,20 @@ describe("Comment DAL", () => {
           id: "user-2",
           fullName: "User 2",
           email: "user-2@test.com",
-          role: "manager",
+          role: "user",
           workspaceId: 1,
         },
         {
           id: "user-3",
           fullName: "User 3",
           email: "user-3@test.com",
-          role: "user",
+          role: "guest",
           workspaceId: 1,
         },
         {
           id: "user-4",
           fullName: "User 4",
           email: "user-4@test.com",
-          role: "guest",
-          workspaceId: 1,
-        },
-        {
-          id: "user-5",
-          fullName: "User 5",
-          email: "user-5@test.com",
           role: "manager",
           workspaceId: 2,
         },
@@ -138,7 +131,7 @@ describe("Comment DAL", () => {
           status: TaskStatus.active,
           projectId: 1,
           categoryId: 1,
-          assigneeId: "user-3",
+          assigneeId: "user-2",
           deadline: new Date(),
           workspaceId: 1,
         },
@@ -148,7 +141,7 @@ describe("Comment DAL", () => {
           status: TaskStatus.active,
           projectId: 1,
           categoryId: 1,
-          assigneeId: "user-5",
+          assigneeId: "user-4",
           deadline: new Date(),
           workspaceId: 2,
         },
@@ -227,16 +220,30 @@ describe("Comment DAL", () => {
 
       expect(result).toBeDefined();
       expect(result!.content).toBe("Comment for Project 1");
-      expect(notifications).toHaveLength(1);
-      expect(notifications[0]).toMatchObject({
+
+      const expectedNotificationData = {
         actorId: "user-1",
-        projectId: 1,
-        projectTitle: "Project 1",
         taskId: null,
         taskTitle: null,
+        projectId: 1,
+        projectTitle: "Project 1",
         type: NotificationType.commentAdded,
-        recipientId: "user-2",
-      });
+      };
+
+      expect(notifications).toHaveLength(2);
+
+      expect(notifications).toEqual(
+        expect.arrayContaining([
+          expect.objectContaining({
+            ...expectedNotificationData,
+            recipientId: "user-2",
+          }),
+          expect.objectContaining({
+            ...expectedNotificationData,
+            recipientId: "user-3",
+          }),
+        ]),
+      );
     });
 
     it("should successfully create a comment without attachments", async () => {
@@ -251,41 +258,6 @@ describe("Comment DAL", () => {
       expect(result).toBeDefined();
       expect(result.content).toBe("Comment 1");
       expect(attachmentsCount).toBe(0);
-    });
-
-    it("should not send a notification to the sender even if they are the task assignee", async () => {
-      // Setup: The assignee (user-3) is the one performing the action
-      (verifySession as any).mockResolvedValue({
-        user: { id: "user-3", workspaceId: 1 },
-      });
-
-      const input = {
-        id: 101,
-        content: "Self-comment by assignee",
-        taskId: 1, // Let's assume user-3 is the assignee for this task
-      };
-
-      const result = await createComment(input);
-
-      // Fetch notifications triggered by this comment
-      const notifications = await prisma.notification.findMany({
-        where: { commentId: result.id },
-      });
-
-      // 1. Verify that the sender (user-3) is NOT in the recipient list
-      const recipientIds = notifications.map((n) => n.recipientId);
-      expect(recipientIds).not.toContain("user-3");
-
-      // 2. Total count should be 2 (owner and manager), excluding the assignee
-      expect(notifications).toHaveLength(2);
-
-      // 3. Verify others (like managers/owners) still received it
-      expect(notifications).toEqual(
-        expect.arrayContaining([
-          expect.objectContaining({ recipientId: "user-1", actorId: "user-3" }),
-          expect.objectContaining({ recipientId: "user-2", actorId: "user-3" }),
-        ]),
-      );
     });
 
     it("should throw Error when both taskId and projectId are provided", async () => {
@@ -339,9 +311,8 @@ describe("Comment DAL", () => {
     describe("Comment RBAC Creation", () => {
       const testCases = [
         { role: "owner", userId: "user-1", shouldSucceed: true },
-        { role: "manager", userId: "user-2", shouldSucceed: true },
-        { role: "user", userId: "user-3", shouldSucceed: true },
-        { role: "guest", userId: "user-4", shouldSucceed: false },
+        { role: "user", userId: "user-2", shouldSucceed: true },
+        { role: "guest", userId: "user-3", shouldSucceed: false },
       ];
 
       testCases.forEach(({ role, userId, shouldSucceed }) => {

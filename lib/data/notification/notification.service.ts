@@ -29,7 +29,6 @@ export const getNotifications = async ({
       id: notification.id,
       type: notification.type,
       createdAt: notification.createdAt,
-      updatedAt: notification.updatedAt,
       isRead: notification.isRead,
 
       actor: notification.actor
@@ -42,15 +41,8 @@ export const getNotifications = async ({
 
       project: notification.project ?? undefined,
       task: notification.task ?? undefined,
-
       projectTitle: notification.projectTitle ?? undefined,
-      projectDeadline: notification.projectDeadline ?? undefined,
-      projectStatus: notification.projectStatus ?? undefined,
-
       taskTitle: notification.taskTitle ?? undefined,
-      taskDeadline: notification.taskDeadline ?? undefined,
-      taskStatus: notification.taskStatus ?? undefined,
-
       commentContent: notification.commentContent ?? undefined,
 
       comment: notification.comment

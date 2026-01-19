@@ -11,10 +11,3 @@ export class UnauthorizedError extends Error {
     this.name = "UnauthorizedError";
   }
 }
-
-export class DomainRuleError extends Error {
-  constructor(message: string) {
-    super(message);
-    this.name = "DomainRuleError";
-  }
-}

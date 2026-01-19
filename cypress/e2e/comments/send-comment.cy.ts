@@ -64,8 +64,8 @@ describe("send comments", () => {
     // verify comment appears
     cy.getByData("comment-item").contains("This is a test comment.");
 
-    //check notifications for user-2 (manager)
-    cy.signIn("manager@example.com", "12345abc");
+    //check notifications for user-2 (user)
+    cy.signIn("user@example.com", "12345abc");
     cy.visit("/en/tasks");
 
     cy.checkNotifications(1, [
@@ -77,8 +77,8 @@ describe("send comments", () => {
       },
     ]);
 
-    //check notifications for user-3 (user)
-    cy.signIn("user@example.com", "12345abc");
+    //check notifications for user-3 (guest)
+    cy.signIn("guest@example.com", "12345abc");
     cy.visit("/en/tasks");
 
     cy.checkNotifications(1, [
@@ -105,8 +105,21 @@ describe("send comments", () => {
     // verify comment appears
     cy.getByData("comment-item").contains("This is a test comment.");
 
-    //check notifications for user-2 (manager)
-    cy.signIn("manager@example.com", "12345abc");
+    //check notifications for user-2 (user)
+    cy.signIn("user@example.com", "12345abc");
+    cy.visit("/en/tasks");
+
+    cy.checkNotifications(1, [
+      {
+        target: "Project 1",
+        actor: "John Doe",
+        action: "added a comment in",
+        content: "This is a test comment.",
+      },
+    ]);
+
+    //check notifications for user-3 (guest)
+    cy.signIn("guest@example.com", "12345abc");
     cy.visit("/en/tasks");
 
     cy.checkNotifications(1, [

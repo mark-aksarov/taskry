@@ -1,7 +1,7 @@
 import { fn } from "storybook/test";
+import { TaskStatus } from "@/generated/prisma/enums";
 import { UserTaskListItem } from "./UserTaskListItem";
 import type { Meta, StoryObj } from "@storybook/react";
-import { ProjectStatus, TaskStatus } from "@/generated/prisma/enums";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { TaskCommentsModalTrigger } from "@/components/tasks/TaskCommentsModalTrigger";
 import { TaskItemActionMenuTrigger } from "@/components/tasks/TaskItemActionMenuTrigger";
@@ -27,10 +27,6 @@ const meta = {
           taskId={args.id}
           taskTitle={args.title}
           taskStatus={args.status}
-          projectStatus={args.projectStatus}
-          canDelete={true}
-          canUpdate={true}
-          canUpdateStatus={true}
           deleteAction={fn()}
           updateStatusAction={fn()}
         />
@@ -48,7 +44,6 @@ export const Default = {
     title: "Design landing page",
     deadline: new Date("2025-09-30"),
     status: TaskStatus.pending,
-    projectStatus: ProjectStatus.active,
   },
 } satisfies Story;
 

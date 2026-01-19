@@ -14,6 +14,7 @@ import {
 
 import Image from "next/image";
 import { TaskDetailModal } from "../TaskDetailModal";
+import { TaskStatus } from "@/generated/prisma/enums";
 import { TaskListItemLayout } from "./TaskListItemLayout";
 import { useFormatter, useTranslations } from "next-intl";
 import { UnknownUser } from "@/components/common/UnknownUser";
@@ -22,7 +23,6 @@ import { TaskDetailBottomSheet } from "../TaskDetailBottomSheet";
 import { ImageContainer } from "@/components/common/ImageContainer";
 import { UserDetailModal } from "@/components/users/UserDetailModal";
 import { getTaskStatusBadgeColor } from "../getTaskStatusBadgeColor";
-import { ProjectStatus, TaskStatus } from "@/generated/prisma/enums";
 import { useSyncSelectionTaskItem } from "@/lib/hooks/useTaskSelection";
 import { ProjectDetailModal } from "@/components/projects/ProjectDetailModal";
 
@@ -42,7 +42,6 @@ export interface TaskListItemProps {
   project: {
     id: number;
     title: string;
-    status: ProjectStatus;
   };
   status: TaskStatus;
   showCheckbox?: boolean;
@@ -64,7 +63,7 @@ export const TaskListItem = ({
 }: TaskListItemProps) => {
   const t = useTranslations("tasks");
 
-  useSyncSelectionTaskItem(id, title, status, project.status);
+  useSyncSelectionTaskItem(id, title, status);
 
   const format = useFormatter();
 

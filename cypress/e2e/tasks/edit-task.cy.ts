@@ -104,38 +104,28 @@ describe("edit a new task", () => {
     cy.checkNotifications(0);
 
     // sign in as user-2
-    cy.signIn("manager@example.com", "12345abc");
-    cy.visit("/en/tasks");
-
-    // check notifications
-    cy.checkNotifications(2, [
-      {
-        target: "Updated Task Title",
-        actor: "John Doe",
-        action: "changed the task status",
-      },
-      {
-        target: "Updated Task Title",
-        actor: "John Doe",
-        action: "changed the task deadline",
-      },
-    ]);
-
-    // sign in as user-3
     cy.signIn("user@example.com", "12345abc");
     cy.visit("/en/tasks");
 
     // check notifications
-    cy.checkNotifications(2, [
+    cy.checkNotifications(1, [
       {
         target: "Updated Task Title",
         actor: "John Doe",
-        action: "changed the task status",
+        action: "changed the task",
       },
+    ]);
+
+    // sign in as user-3
+    cy.signIn("guest@example.com", "12345abc");
+    cy.visit("/en/tasks");
+
+    // check notifications
+    cy.checkNotifications(1, [
       {
         target: "Updated Task Title",
         actor: "John Doe",
-        action: "changed the task deadline",
+        action: "changed the task",
       },
     ]);
   });
@@ -180,21 +170,11 @@ describe("edit a new task", () => {
       cy.getByData("edit-task-modal").should("be.visible");
     });
 
-    it("allows a user with 'manager' role to open the edit modal", () => {
-      cy.signIn("manager@example.com", "12345abc");
+    it("allows a user with 'user' role to open the edit modal", () => {
+      cy.signIn("user@example.com", "12345abc");
       cy.visit("/en/tasks");
       cy.getMenuItem("task-item-1-action-menu-trigger", "edit").click();
       cy.getByData("edit-task-modal").should("be.visible");
-    });
-
-    it("prevents 'user' from editing by disabling the menu option", () => {
-      cy.signIn("user@example.com", "12345abc");
-      cy.visit("/en/tasks");
-      cy.getMenuItem("task-item-1-action-menu-trigger", "edit").should(
-        "have.attr",
-        "aria-disabled",
-        "true",
-      );
     });
 
     it("shows a restriction modal when a 'guest' attempts to edit", () => {
@@ -202,105 +182,6 @@ describe("edit a new task", () => {
       cy.visit("/en/tasks");
       cy.getMenuItem("task-item-1-action-menu-trigger", "edit").click();
       cy.getByData("guest-mode-modal").should("be.visible");
-    });
-  });
-
-  describe("Task Status Transition Logic", () => {
-    const transitionRules = [
-      {
-        pStatus: ProjectStatus.active,
-        tStatus: TaskStatus.active,
-        disabled: ["active"],
-        enabled: ["pending", "completed"],
-      },
-      {
-        pStatus: ProjectStatus.active,
-        tStatus: TaskStatus.pending,
-        disabled: ["pending"],
-        enabled: ["active", "completed"],
-      },
-      {
-        pStatus: ProjectStatus.active,
-        tStatus: TaskStatus.completed,
-        disabled: ["completed"],
-        enabled: ["active", "pending"],
-      },
-      {
-        pStatus: ProjectStatus.pending,
-        tStatus: TaskStatus.pending,
-        disabled: ["active", "pending"],
-        enabled: ["completed"],
-      },
-      {
-        pStatus: ProjectStatus.pending,
-        tStatus: TaskStatus.completed,
-        disabled: ["active", "completed"],
-        enabled: ["pending"],
-      },
-      {
-        pStatus: ProjectStatus.completed,
-        tStatus: TaskStatus.completed,
-        disabled: ["active", "pending", "completed"],
-        enabled: [],
-      },
-    ];
-
-    transitionRules.forEach((rule) => {
-      const contextName = `Project: ${rule.pStatus} | Task: ${rule.tStatus}`;
-
-      describe(contextName, () => {
-        beforeEach(() => {
-          setup(
-            createPayload({
-              projects: [
-                {
-                  id: 1,
-                  title: "Project 1",
-                  status: rule.pStatus,
-                  deadline: new Date("2022-01-01"),
-                  categoryId: 1,
-                  customerId: 1,
-                  workspaceId: 1,
-                  creatorId: "user-1",
-                },
-              ],
-              tasks: [
-                {
-                  id: 1,
-                  title: "Task 1",
-                  status: rule.tStatus,
-                  deadline: new Date("2022-01-01"),
-                  categoryId: 1,
-                  projectId: 1,
-                  workspaceId: 1,
-                  creatorId: "user-1",
-                  assigneeId: "user-1",
-                },
-              ],
-            }),
-          );
-          cy.signIn("owner@example.com", "12345abc");
-          cy.visit("/en/tasks");
-        });
-
-        rule.disabled.forEach((targetStatus) => {
-          it(`should disable the option to transition to '${targetStatus}'`, () => {
-            cy.getMenuItem(
-              "task-item-1-action-menu-trigger",
-              targetStatus,
-            ).should("have.attr", "aria-disabled", "true");
-          });
-        });
-
-        rule.enabled.forEach((targetStatus) => {
-          it(`should allow the option to transition to '${targetStatus}'`, () => {
-            cy.getMenuItem(
-              "task-item-1-action-menu-trigger",
-              targetStatus,
-            ).should("not.have.attr", "aria-disabled");
-          });
-        });
-      });
     });
   });
 });

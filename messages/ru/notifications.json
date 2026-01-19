@@ -21,17 +21,23 @@
 
     "action": {
       "projectAdded": "добавил(а) новый проект",
-      "projectDeadlineChanged": "изменил(а) дедлайн проекта",
-      "projectStatusChanged": "изменил(а) статус проекта",
+      "projectChanged": "изменил(а) проект",
       "projectDeleted": "удалил(а) проект",
 
       "taskAdded": "добавил(а) новую задачу",
-      "taskDeadlineChanged": "изменил(а) дедлайн задачи",
-      "taskStatusChanged": "изменил(а) статус задачи",
+      "taskChanged": "изменил(а) задачу",
       "taskDeleted": "удалил(а) задачу",
 
+      "userAdded": "добавил(а) нового пользователя",
+      "userChanged": "изменил(а) пользователя",
+      "userDeleted": "удалил(а) пользователя",
+
+      "customerAdded": "добавил(а) нового клиента",
+      "customerChanged": "изменил(а) клиента",
+      "customerDeleted": "удалил(а) клиента",
+
       "commentAdded": "добавил(а) комментарий в",
-      "commentChanged": "изменил(а) комментарий в",
+      "commentChanged": "отредактировал(а) комментарий в",
       "commentDeleted": "удалил(а) ваш комментарий в"
     },
 

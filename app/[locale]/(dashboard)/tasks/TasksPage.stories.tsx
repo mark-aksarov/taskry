@@ -32,8 +32,6 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    canCreateTask: true,
-    canDeleteTask: true,
     taskFiltersFormContainer: (
       <TaskFiltersForm {...TaskFiltersFormStory.args} />
     ),
