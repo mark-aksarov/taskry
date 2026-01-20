@@ -13,6 +13,7 @@ import { ImageContainer } from "@/components/common/ImageContainer";
 import { Attachment, Attachments } from "@/components/attachments/Attachments";
 
 interface CommentItemProps {
+  commentId: number;
   content: string;
   createdAt: Date;
   attachments: {
@@ -24,13 +25,16 @@ interface CommentItemProps {
     fullName: string;
     imageUrl?: string;
   };
+  menuTrigger?: React.ReactNode;
 }
 
 export function CommentItem({
+  commentId,
   content,
   createdAt,
   attachments,
   sender,
+  menuTrigger,
 }: CommentItemProps) {
   const t = useTranslations("comments.CommentItem");
 
@@ -89,6 +93,7 @@ export function CommentItem({
           )}
         </>
       }
+      menuTriggerSlot={menuTrigger}
     />
   );
 }

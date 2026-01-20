@@ -175,6 +175,8 @@ export async function createCommentAddedNotifications(
   tx: Prisma.TransactionClient,
   {
     comment,
+    taskTitle,
+    projectTitle,
     actorId,
     workspaceId,
   }: {
@@ -184,48 +186,63 @@ export async function createCommentAddedNotifications(
       taskId?: number | null;
       projectId?: number | null;
     };
+    taskTitle?: string;
+    projectTitle?: string;
     actorId: string;
     workspaceId: number;
   },
 ) {
-  let taskTitle: string | undefined;
-  let projectTitle: string | undefined;
-
-  if (comment.taskId) {
-    const task = await tx.task.findUnique({
-      where: {
-        id: comment.taskId,
-      },
-      select: {
-        title: true,
-      },
-    });
-    taskTitle = task?.title;
-  }
-
-  if (comment.projectId) {
-    const project = await tx.project.findUnique({
-      where: {
-        id: comment.projectId,
-      },
-      select: {
-        title: true,
-      },
-    });
-    projectTitle = project?.title;
-  }
-
   const recipients = await getNotificationRecipients(tx, workspaceId, actorId);
 
   if (recipients.length === 0) return;
 
   await tx.notification.createMany({
     data: recipients.map((user) => ({
-      type: NotificationType.commentAdded,
+      type: "commentAdded",
       actorId,
       recipientId: user.id,
       workspaceId,
       commentId: comment.id,
+      taskId: comment.taskId,
+      projectId: comment.projectId,
+      commentContent: comment.content.substring(0, 250),
+      taskTitle: taskTitle,
+      projectTitle: projectTitle,
+      isRead: false,
+    })),
+  });
+}
+
+export async function createCommentDeletedNotifications(
+  tx: Prisma.TransactionClient,
+  {
+    comment,
+    taskTitle,
+    projectTitle,
+    actorId,
+    workspaceId,
+  }: {
+    comment: {
+      content: string;
+      taskId?: number | null;
+      projectId?: number | null;
+    };
+    taskTitle?: string;
+    projectTitle?: string;
+    actorId: string;
+    workspaceId: number;
+  },
+) {
+  const recipients = await getNotificationRecipients(tx, workspaceId, actorId);
+
+  if (recipients.length === 0) return;
+
+  await tx.notification.createMany({
+    data: recipients.map((user) => ({
+      type: "commentDeleted",
+      actorId,
+      recipientId: user.id,
+      workspaceId,
       taskId: comment.taskId,
       projectId: comment.projectId,
       commentContent: comment.content.substring(0, 250),

@@ -6,7 +6,11 @@ import { auth } from "@/lib/auth";
 import { AccessDeniedError } from "../utils/error";
 import { CreateCommentInputDTO } from "./comment.dto";
 import { verifySession } from "../utils/verifySession";
-import { createCommentAddedNotifications } from "../notification/notification.dal";
+import {
+  createCommentAddedNotifications,
+  createCommentDeletedNotifications,
+} from "../notification/notification.dal";
+import { Prisma } from "@/generated/prisma/client";
 
 export const getAllComments = cache(
   async (taskId?: number, projectId?: number) => {
@@ -66,9 +70,14 @@ export const createComment = async (input: CreateCommentInputDTO) => {
     );
   }
 
-  await validateCommentRelations(workspaceId, input);
-
   return await prisma.$transaction(async (tx) => {
+    // Use the results (titles) for notifications later
+    const { task, project } = await validateCommentRelations(
+      tx,
+      workspaceId,
+      input,
+    );
+
     const newComment = await tx.comment.create({
       data: {
         content: input.content,
@@ -89,12 +98,9 @@ export const createComment = async (input: CreateCommentInputDTO) => {
     });
 
     await createCommentAddedNotifications(tx, {
-      comment: {
-        id: newComment.id,
-        content: newComment.content,
-        taskId: input.taskId,
-        projectId: input.projectId,
-      },
+      comment: newComment,
+      taskTitle: task?.title,
+      projectTitle: project?.title,
       actorId: senderId,
       workspaceId,
     });
@@ -103,35 +109,104 @@ export const createComment = async (input: CreateCommentInputDTO) => {
   });
 };
 
+export const deleteComment = async (commentId: number) => {
+  // Authorization
+  const {
+    user: { id: senderId, workspaceId },
+  } = await verifySession();
+
+  // ACL
+  const permission = await auth.api.userHasPermission({
+    body: {
+      userId: senderId,
+      permission: {
+        comment: ["delete"],
+      },
+    },
+  });
+
+  if (!permission.success) {
+    throw new AccessDeniedError(
+      "You do not have permission to delete comment.",
+    );
+  }
+
+  return prisma.$transaction(async (tx) => {
+    // delete comment within the workspace
+    const deletedComment = await tx.comment.delete({
+      where: {
+        workspaceId,
+        id: commentId,
+      },
+      select: {
+        id: true,
+        content: true,
+        taskId: true,
+        projectId: true,
+        project: {
+          select: { title: true },
+        },
+        task: {
+          select: { title: true },
+        },
+      },
+    });
+
+    // Send notifications
+    await createCommentDeletedNotifications(tx, {
+      comment: deletedComment,
+      taskTitle: deletedComment.task?.title,
+      projectTitle: deletedComment.project?.title,
+      actorId: senderId,
+      workspaceId,
+    });
+
+    return deletedComment;
+  });
+};
+
 /**
  * HELPERS
  */
 
-async function validateCommentRelations(
+export const validateCommentRelations = async (
+  tx: Prisma.TransactionClient,
   workspaceId: number,
-  input: CreateCommentInputDTO,
-) {
-  const { taskId, projectId } = input;
+  input: { taskId?: number | null; projectId?: number | null },
+) => {
+  // Validate Task if taskId is provided
+  if (input.taskId) {
+    const task = await tx.task.findUnique({
+      where: {
+        id: input.taskId,
+        workspaceId,
+      },
+      select: { title: true },
+    });
 
-  if (Boolean(taskId) === Boolean(projectId)) {
-    throw new Error(
-      "Comment must be associated with exactly one task or project.",
-    );
+    if (!task) {
+      throw new Error("Task not found or does not belong to this workspace");
+    }
+
+    return { task };
   }
 
-  const relationId = taskId || projectId;
-  const model = taskId ? prisma.task : prisma.project;
+  // Validate Project if projectId is provided
+  if (input.projectId) {
+    const project = await tx.project.findUnique({
+      where: {
+        id: input.projectId,
+        workspaceId,
+      },
+      select: { title: true },
+    });
 
-  const record = await (model as any).findFirst({
-    where: {
-      id: relationId,
-      workspaceId,
-    },
-    select: { id: true },
-  });
+    if (!project) {
+      throw new Error("Project not found or does not belong to this workspace");
+    }
 
-  if (!record) {
-    const type = taskId ? "Task" : "Project";
-    throw new AccessDeniedError(`${type} access denied or not found`);
+    return { project };
   }
-}
+
+  return {};
+};

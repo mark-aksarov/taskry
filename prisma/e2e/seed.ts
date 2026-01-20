@@ -166,4 +166,10 @@ export async function seedE2E(payload: E2ESeedPayload) {
       data: payload.notifications,
     });
   }
+
+  if (payload.comments) {
+    await prisma.comment.createMany({
+      data: payload.comments,
+    });
+  }
 }

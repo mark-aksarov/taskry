@@ -13,20 +13,17 @@ import {
 
 import {
   ItemBaseBadge,
-  ItemBaseButton,
   ItemBaseDetailModalTrigger,
   ItemBaseDetailBottomSheetTrigger,
 } from "@/components/common/ItemBase";
 
 import Image from "next/image";
+import { Link } from "@/components/ui";
 import { Checkbox } from "@/components/ui";
-import { MessageSquare } from "lucide-react";
 import { ProjectStatus } from "@/generated/prisma/enums";
-import { Link, RACDialogTrigger } from "@/components/ui";
 import { useFormatter, useTranslations } from "next-intl";
 import { ProjectDetailModal } from "../ProjectDetailModal";
 import { UnknownUser } from "@/components/common/UnknownUser";
-import { ProjectCommentsModal } from "../ProjectCommentsModal";
 import { ProjectListItemLayout } from "./ProjectListItemLayout";
 import { ImageContainer } from "@/components/common/ImageContainer";
 import { UserDetailModal } from "@/components/users/UserDetailModal";

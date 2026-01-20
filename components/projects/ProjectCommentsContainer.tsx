@@ -1,21 +1,37 @@
 "use client";
 
+import {
+  CommentItem,
+  CommentItemSkeleton,
+} from "@/components/comments/CommentItem";
+
 import useSWR from "swr";
-import { CommentItem } from "@/components/comments/CommentItem";
+import { Repeat } from "../common/Repeat";
+import { useHasGuestMode } from "@/lib/hooks/useHasGuestMode";
 import { CommentListItemDTO } from "@/lib/data/comment/comment.dto";
+import { deleteComment } from "@/lib/actions/comment/deleteComment";
 import { CommentsEmptySection } from "@/components/comments/CommentsEmptySection";
+import { CommentItemActionMenuTrigger } from "../comments/CommentItem/CommentItemActionMenuTrigger";
 
 export function ProjectCommentsContainer({ projectId }: { projectId: number }) {
-  const { data: comments } = useSWR<CommentListItemDTO[]>(
-    `/api/projects/${projectId}/comments`,
-    {
-      suspense: true,
-    },
-  );
+  const {
+    data: comments,
+    error,
+    isLoading,
+    mutate,
+  } = useSWR<CommentListItemDTO[]>(`/api/projects/${projectId}/comments`, {
+    suspense: true,
+  });
+
+  if (isLoading) {
+    return <Repeat items={10} renderItem={() => <CommentItemSkeleton />} />;
+  }
 
   if (!comments || comments.length === 0) {
     return <CommentsEmptySection />;
   }
+
+  const guestMode = useHasGuestMode();
 
   return (
     <>
@@ -23,10 +39,19 @@ export function ProjectCommentsContainer({ projectId }: { projectId: number }) {
         return (
           <CommentItem
             key={comment.id}
+            commentId={comment.id}
             content={comment.content}
             createdAt={comment.createdAt}
             attachments={comment.attachments}
             sender={comment.sender}
+            menuTrigger={
+              <CommentItemActionMenuTrigger
+                guestMode={guestMode}
+                commentId={comment.id}
+                deleteAction={deleteComment}
+                mutate={mutate}
+              />
+            }
           />
         );
       })}

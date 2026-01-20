@@ -1,9 +1,10 @@
 "use client";
 
+import { Skeleton } from "@/components/ui";
 import { CommentItemLayout } from "./CommentItemLayout";
 import { CommentItemInfoSkeleton } from "./CommentItemInfo";
 import { ImageContainerSkeleton } from "@/components/common/ImageContainer";
-import { Skeleton } from "@/components/ui";
+import { ItemBaseActionMenuTriggerSkeleton } from "@/components/common/ItemBase";
 
 export function CommentItemSkeleton() {
   return (
@@ -17,6 +18,7 @@ export function CommentItemSkeleton() {
           <Skeleton size="sm" />
         </div>
       }
+      menuTriggerSlot={<ItemBaseActionMenuTriggerSkeleton />}
     />
   );
 }

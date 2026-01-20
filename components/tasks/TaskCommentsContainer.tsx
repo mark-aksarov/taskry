@@ -7,14 +7,18 @@ import {
 
 import useSWR from "swr";
 import { Repeat } from "@/components/common/Repeat";
+import { useHasGuestMode } from "@/lib/hooks/useHasGuestMode";
 import { CommentListItemDTO } from "@/lib/data/comment/comment.dto";
+import { deleteComment } from "@/lib/actions/comment/deleteComment";
 import { CommentsEmptySection } from "@/components/comments/CommentsEmptySection";
+import { CommentItemActionMenuTrigger } from "../comments/CommentItem/CommentItemActionMenuTrigger";
 
 export function TaskCommentsContainer({ taskId }: { taskId: number }) {
   const {
     data: comments,
     error,
     isLoading,
+    mutate,
   } = useSWR<CommentListItemDTO[]>(`/api/tasks/${taskId}/comments`);
 
   if (isLoading) {
@@ -25,16 +29,27 @@ export function TaskCommentsContainer({ taskId }: { taskId: number }) {
     return <CommentsEmptySection />;
   }
 
+  const guestMode = useHasGuestMode();
+
   return (
     <>
       {comments.map((comment) => {
         return (
           <CommentItem
             key={comment.id}
+            commentId={comment.id}
             content={comment.content}
             createdAt={comment.createdAt}
             attachments={comment.attachments}
             sender={comment.sender}
+            menuTrigger={
+              <CommentItemActionMenuTrigger
+                guestMode={guestMode}
+                commentId={comment.id}
+                deleteAction={deleteComment}
+                mutate={mutate}
+              />
+            }
           />
         );
       })}

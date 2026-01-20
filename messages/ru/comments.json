@@ -1,4 +1,16 @@
 {
+  "CommentItemActionMenuTrigger": {
+    "edit": "Редактировать",
+    "delete": "Удалить"
+  },
+
+  "DeleteCommentModal": {
+    "heading": "Удалить комментарий",
+    "text": "Вы уверены, что хотите удалить этот комментарий? Это действие нельзя будет отменить.",
+    "cancelButton": "Отмена",
+    "confirmButton": "Удалить"
+  },
+
   "CommentItem": {
     "unknownUser": "Неизвестный пользователь"
   },
