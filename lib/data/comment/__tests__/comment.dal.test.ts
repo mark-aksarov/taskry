@@ -4,12 +4,22 @@ import {
   NotificationType,
 } from "@/generated/prisma/enums";
 
+import {
+  vi,
+  it,
+  expect,
+  describe,
+  beforeAll,
+  afterEach,
+  beforeEach,
+} from "vitest";
+
 import prisma from "@/lib/prisma";
-import { createComment } from "../comment.dal";
 import { resetDatabase } from "@/prisma/resetDatabase";
 import { AccessDeniedError } from "@/lib/data/utils/error";
+import { createComment, deleteComment } from "../comment.dal";
 import { verifySession } from "@/lib/data/utils/verifySession";
-import { vi, describe, it, expect, beforeEach, beforeAll } from "vitest";
+import { PrismaClientKnownRequestError } from "@/generated/prisma/internal/prismaNamespace";
 
 vi.mock("server-only", () => ({}));
 
@@ -153,6 +163,7 @@ describe("Comment DAL", () => {
     beforeEach(async () => {
       await prisma.comment.deleteMany();
       await prisma.notification.deleteMany();
+      await prisma.attachment.deleteMany();
     });
 
     it("should successfully create a comment for a task and send notifications with task metadata", async () => {
@@ -334,6 +345,127 @@ describe("Comment DAL", () => {
             expect(result.senderId).toBe(userId);
           } else {
             await expect(createComment(commentInput)).rejects.toThrow(
+              AccessDeniedError,
+            );
+          }
+        });
+      });
+    });
+  });
+
+  describe.only("deleteComment", () => {
+    beforeEach(async () => {
+      await prisma.comment.createMany({
+        data: [
+          {
+            id: 1,
+            content: "Comment 1",
+            taskId: 1,
+            senderId: "user-1",
+            workspaceId: 1,
+          },
+          {
+            id: 2,
+            content: "Comment 2",
+            projectId: 1,
+            senderId: "user-2",
+            workspaceId: 1,
+          },
+          {
+            id: 3,
+            content: "Comment 3",
+            taskId: 2,
+            senderId: "user-4",
+            workspaceId: 2,
+          },
+          {
+            id: 4,
+            content: "Comment 4",
+            projectId: 2,
+            senderId: "user-4",
+            workspaceId: 2,
+          },
+        ],
+      });
+      await prisma.notification.deleteMany();
+      await prisma.attachment.deleteMany();
+    });
+
+    afterEach(async () => {
+      await prisma.comment.deleteMany();
+      await prisma.notification.deleteMany();
+      await prisma.attachment.deleteMany();
+    });
+
+    it("should successfully delete a comment and send notifications", async () => {
+      const deletedComment = await deleteComment(1);
+
+      const notifications = await prisma.notification.findMany();
+
+      expect(deletedComment.id).toBe(1);
+      expect(deletedComment.content).toBe("Comment 1");
+
+      expect(notifications).toHaveLength(2);
+
+      const expectedNotificationData = {
+        actorId: "user-1",
+        taskId: 1,
+        taskTitle: "Task 1",
+        projectId: null,
+        projectTitle: null,
+        type: NotificationType.commentDeleted,
+      };
+
+      expect(notifications).toEqual(
+        expect.arrayContaining([
+          expect.objectContaining({
+            ...expectedNotificationData,
+            recipientId: "user-2",
+          }),
+          expect.objectContaining({
+            ...expectedNotificationData,
+            recipientId: "user-3",
+          }),
+        ]),
+      );
+    });
+
+    it("should fail when user tries to delete a comment they did not send", async () => {
+      await expect(deleteComment(2)).rejects.toThrow(
+        PrismaClientKnownRequestError,
+      );
+    });
+
+    it("should fail when deleting a comment from a different workspace", async () => {
+      await expect(deleteComment(3)).rejects.toThrow(
+        PrismaClientKnownRequestError,
+      );
+    });
+
+    it("should fail deleting a comment that does not exist", async () => {
+      await expect(deleteComment(999)).rejects.toThrow(
+        PrismaClientKnownRequestError,
+      );
+    });
+
+    describe("Comment RBAC Creation", () => {
+      const testCases = [
+        { role: "owner", userId: "user-1", shouldSucceed: true, commentId: 1 },
+        { role: "user", userId: "user-2", shouldSucceed: true, commentId: 2 },
+        { role: "guest", userId: "user-3", shouldSucceed: false, commentId: 1 },
+      ];
+
+      testCases.forEach(({ role, userId, shouldSucceed, commentId }) => {
+        it(`should ${shouldSucceed ? "allow" : "deny"} comment deletion for role: ${role}`, async () => {
+          (verifySession as any).mockResolvedValue({
+            user: { id: userId, workspaceId: 1 },
+          });
+
+          if (shouldSucceed) {
+            const result = await deleteComment(commentId);
+            expect(result.id).toBe(commentId);
+          } else {
+            await expect(deleteComment(commentId)).rejects.toThrow(
               AccessDeniedError,
             );
           }

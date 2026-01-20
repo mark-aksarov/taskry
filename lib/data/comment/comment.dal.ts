@@ -135,6 +135,7 @@ export const deleteComment = async (commentId: number) => {
     // delete comment within the workspace
     const deletedComment = await tx.comment.delete({
       where: {
+        senderId,
         workspaceId,
         id: commentId,
       },

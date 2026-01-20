@@ -82,7 +82,7 @@ describe("deletes a comment", () => {
     cy.getByData("comment-item").should("not.exist");
   });
 
-  it.only("cannot delete a comment in guest mode", () => {
+  it("cannot delete a comment in guest mode", () => {
     cy.signIn("guest@example.com", "12345abc");
     cy.visit("/en/projects");
     cy.getByData("project-comments-modal-trigger").click();
