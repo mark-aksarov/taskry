@@ -174,6 +174,12 @@ export const validateCommentRelations = async (
   workspaceId: number,
   input: { taskId?: number | null; projectId?: number | null },
 ) => {
+  if (Boolean(input.taskId) === Boolean(input.projectId)) {
+    throw new Error(
+      "Comment must be associated with exactly one task or project.",
+    );
+  }
+
   // Validate Task if taskId is provided
   if (input.taskId) {
     const task = await tx.task.findUnique({
@@ -185,7 +191,7 @@ export const validateCommentRelations = async (
     });
 
     if (!task) {
-      throw new Error("Task not found or does not belong to this workspace");
+      throw new AccessDeniedError("Task access denied or not found");
     }
 
     return { task };
@@ -202,7 +208,7 @@ export const validateCommentRelations = async (
     });
 
     if (!project) {
-      throw new Error("Project not found or does not belong to this workspace");
+      throw new AccessDeniedError("Project access denied or not found");
     }
 
     return { project };
