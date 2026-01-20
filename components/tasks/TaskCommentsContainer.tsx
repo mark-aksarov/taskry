@@ -10,8 +10,8 @@ import { Repeat } from "@/components/common/Repeat";
 import { useHasGuestMode } from "@/lib/hooks/useHasGuestMode";
 import { CommentListItemDTO } from "@/lib/data/comment/comment.dto";
 import { deleteComment } from "@/lib/actions/comment/deleteComment";
+import { CommentItemActionMenuTrigger } from "../comments/CommentItem";
 import { CommentsEmptySection } from "@/components/comments/CommentsEmptySection";
-import { CommentItemActionMenuTrigger } from "../comments/CommentItem/CommentItemActionMenuTrigger";
 
 export function TaskCommentsContainer({ taskId }: { taskId: number }) {
   const {
@@ -37,18 +37,19 @@ export function TaskCommentsContainer({ taskId }: { taskId: number }) {
         return (
           <CommentItem
             key={comment.id}
-            commentId={comment.id}
             content={comment.content}
             createdAt={comment.createdAt}
             attachments={comment.attachments}
             sender={comment.sender}
             menuTrigger={
-              <CommentItemActionMenuTrigger
-                guestMode={guestMode}
-                commentId={comment.id}
-                deleteAction={deleteComment}
-                mutate={mutate}
-              />
+              comment.canEdit && (
+                <CommentItemActionMenuTrigger
+                  guestMode={guestMode}
+                  commentId={comment.id}
+                  deleteAction={deleteComment}
+                  mutate={mutate}
+                />
+              )
             }
           />
         );

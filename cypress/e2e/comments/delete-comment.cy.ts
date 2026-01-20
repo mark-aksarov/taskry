@@ -56,7 +56,7 @@ describe("deletes a comment", () => {
           content: "Comment 2",
           taskId: 1,
           workspaceId: 1,
-          senderId: "user-1",
+          senderId: "user-2",
         },
       ],
     };
@@ -80,6 +80,13 @@ describe("deletes a comment", () => {
     cy.getMenuItem("comment-item-2-action-menu-trigger", "delete").click();
     cy.getByData("confirm-button").click();
     cy.getByData("comment-item").should("not.exist");
+  });
+
+  it("cannot delete a project comment if user has user role and he is not sender", () => {
+    cy.signIn("guest@example.com", "12345abc");
+    cy.visit("/en/projects");
+    cy.getByData("project-comments-modal-trigger").click();
+    cy.getByData("comment-item-1-action-menu-trigger").should("not.exist");
   });
 
   it("cannot delete a comment in guest mode", () => {

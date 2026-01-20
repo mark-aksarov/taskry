@@ -112,7 +112,7 @@ export const createComment = async (input: CreateCommentInputDTO) => {
 export const deleteComment = async (commentId: number) => {
   // Authorization
   const {
-    user: { id: senderId, workspaceId },
+    user: { id: senderId, role, workspaceId },
   } = await verifySession();
 
   // ACL
@@ -135,7 +135,7 @@ export const deleteComment = async (commentId: number) => {
     // delete comment within the workspace
     const deletedComment = await tx.comment.delete({
       where: {
-        senderId,
+        ...(role === "user" ? { senderId } : {}),
         workspaceId,
         id: commentId,
       },

@@ -3,6 +3,8 @@ export interface CommentListItemDTO {
   content: string;
   createdAt: Date;
 
+  canEdit: boolean;
+
   sender: {
     id: string;
     fullName: string;

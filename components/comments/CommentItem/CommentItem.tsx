@@ -13,7 +13,6 @@ import { ImageContainer } from "@/components/common/ImageContainer";
 import { Attachment, Attachments } from "@/components/attachments/Attachments";
 
 interface CommentItemProps {
-  commentId: number;
   content: string;
   createdAt: Date;
   attachments: {
@@ -29,7 +28,6 @@ interface CommentItemProps {
 }
 
 export function CommentItem({
-  commentId,
   content,
   createdAt,
   attachments,

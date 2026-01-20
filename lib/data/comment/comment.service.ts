@@ -1,5 +1,6 @@
 import { getAllComments } from "./comment.dal";
 import { CommentListItemDTO } from "./comment.dto";
+import { verifySession } from "../utils/verifySession";
 
 export const getCommentList = async ({
   taskId,
@@ -8,6 +9,10 @@ export const getCommentList = async ({
   taskId?: number;
   projectId?: number;
 }): Promise<CommentListItemDTO[]> => {
+  const {
+    user: { id: userId, role },
+  } = await verifySession();
+
   const comments = await getAllComments(taskId, projectId);
 
   return comments.map((c) => {
@@ -15,11 +20,15 @@ export const getCommentList = async ({
       id: c.id,
       content: c.content,
       createdAt: c.createdAt,
+
+      canEdit: role === "owner" || c.sender.id === userId,
+
       sender: {
         id: c.sender.id,
         fullName: c.sender.fullName,
         imageUrl: c.sender.imageUrl ?? undefined,
       },
+
       attachments: c.attachments.map((a) => ({
         id: a.id,
         fileUrl: a.fileUrl,

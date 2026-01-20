@@ -353,7 +353,7 @@ describe("Comment DAL", () => {
     });
   });
 
-  describe.only("deleteComment", () => {
+  describe("deleteComment", () => {
     beforeEach(async () => {
       await prisma.comment.createMany({
         data: [
@@ -430,12 +430,6 @@ describe("Comment DAL", () => {
       );
     });
 
-    it("should fail when user tries to delete a comment they did not send", async () => {
-      await expect(deleteComment(2)).rejects.toThrow(
-        PrismaClientKnownRequestError,
-      );
-    });
-
     it("should fail when deleting a comment from a different workspace", async () => {
       await expect(deleteComment(3)).rejects.toThrow(
         PrismaClientKnownRequestError,
@@ -448,26 +442,26 @@ describe("Comment DAL", () => {
       );
     });
 
-    describe("Comment RBAC Creation", () => {
+    describe("Comment RBAC Deletion", () => {
       const testCases = [
         { role: "owner", userId: "user-1", shouldSucceed: true, commentId: 1 },
+        { role: "owner", userId: "user-1", shouldSucceed: true, commentId: 2 },
         { role: "user", userId: "user-2", shouldSucceed: true, commentId: 2 },
+        { role: "user", userId: "user-2", shouldSucceed: false, commentId: 1 },
         { role: "guest", userId: "user-3", shouldSucceed: false, commentId: 1 },
       ];
 
       testCases.forEach(({ role, userId, shouldSucceed, commentId }) => {
         it(`should ${shouldSucceed ? "allow" : "deny"} comment deletion for role: ${role}`, async () => {
           (verifySession as any).mockResolvedValue({
-            user: { id: userId, workspaceId: 1 },
+            user: { id: userId, role, workspaceId: 1 },
           });
 
           if (shouldSucceed) {
             const result = await deleteComment(commentId);
             expect(result.id).toBe(commentId);
           } else {
-            await expect(deleteComment(commentId)).rejects.toThrow(
-              AccessDeniedError,
-            );
+            await expect(deleteComment(commentId)).rejects.toThrow(Error);
           }
         });
       });
