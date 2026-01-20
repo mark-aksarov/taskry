@@ -4,7 +4,7 @@ export default function AppAuthLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <main className="mx-auto flex h-[100dvh] items-center justify-center">
+    <main className="flex h-[100dvh] justify-center max-md:items-start md:items-center">
       {children}
     </main>
   );
