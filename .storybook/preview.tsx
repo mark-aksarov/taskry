@@ -9,7 +9,6 @@ import type { Preview } from "@storybook/nextjs-vite";
 import { MINIMAL_VIEWPORTS } from "storybook/viewport";
 import { useRouter, useSearchParams } from "next/navigation";
 import { withThemeByDataAttribute } from "@storybook/addon-themes";
-import { GlobalContainerDecorator } from "./GlobalContainerDecorator";
 import { SelectionProvider } from "../components/common/SelectionContext";
 import { EntityPaginationProvider } from "../components/common/EntityContainerPagination";
 
@@ -49,7 +48,6 @@ const preview: Preview = {
         </EntityPaginationProvider>
       </SelectionProvider>
     ),
-    GlobalContainerDecorator,
     withThemeByDataAttribute({
       themes: {
         light: "light",

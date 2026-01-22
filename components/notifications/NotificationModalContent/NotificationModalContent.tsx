@@ -1,12 +1,10 @@
 import { NotificationFilter } from "../types";
 import { DialogBody, DialogFooter } from "@/components/ui";
-import { Pagination } from "@/components/common/Pagination";
 import { MarkAllAsReadButton } from "../MarkAllAsReadButton";
 import { NotificationModalActions } from "./NotificationModalActions";
-import { ActionFn, ActionState, MarkAsReadPayload } from "@/lib/actions/types";
-import { NotificationModalContentStatus } from "./NotificationModalContentStatus";
-import { NotificationFilterToggleButtonGroup } from "../NotificationFilterToggleButtonGroup";
 import { ModalPagination } from "@/components/common/ModalPagination";
+import { ActionFn, ActionState, MarkAsReadPayload } from "@/lib/actions/types";
+import { NotificationFilterToggleButtonGroup } from "../NotificationFilterToggleButtonGroup";
 
 interface NotificationModalContentProps {
   guestMode?: boolean;

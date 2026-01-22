@@ -7,12 +7,16 @@ import { usePathname, useRouter } from "next/navigation";
 import { PageDecorator } from "@/.storybook/PageDecorator";
 import { ProjectList } from "@/components/projects/ProjectList";
 import { ProjectGrid } from "@/components/projects/ProjectGrid";
-import { NewProjectForm } from "@/components/projects/NewProjectForm";
+import { ProjectFormBase } from "@/components/projects/ProjectFormBase";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { ProjectFiltersForm } from "@/components/projects/ProjectFiltersForm";
+import { ProjectCategoryFormBase } from "@/components/projects/ProjectCategoryFormBase";
 import { EntityContainerPresentation } from "@/components/common/EntityContainerPresentation";
 import { Default as ProjectListStory } from "@/components/projects/ProjectList/ProjectList.stories";
 import { Default as ProjectGridStory } from "@/components/projects/ProjectGrid/ProjectGrid.stories";
+import { ProjectToolbarActionsMenuTrigger } from "@/components/projects/ProjectToolbarActionsMenuTrigger";
+import { ProjectToolbarFiltersModalTrigger } from "@/components/projects/ProjectToolbarFiltersModalTrigger";
+import { ProjectToolbarCreateNewMenuTrigger } from "@/components/projects/ProjectToolbarCreateNewMenuTrigger";
 import { Default as ProjectFormBaseStory } from "@/components/projects/ProjectFormBase/ProjectFormBase.stories";
 import { Default as ProjectFiltersFormStory } from "@/components/projects/ProjectFiltersForm/ProjectFiltersForm.stories";
 
@@ -32,12 +36,6 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    createProjectCategoryAction: fn(),
-    deleteProjectsAction: fn(),
-    updateProjectStatusesAction: fn(),
-    projectFiltersFormContainer: (
-      <ProjectFiltersForm {...ProjectFiltersFormStory.args} />
-    ),
     projectsContainer: (
       <EntityContainerPresentation
         page={1}
@@ -47,7 +45,25 @@ export const Default = {
         totalPages={3}
       />
     ),
-    newProjectFormContainer: <NewProjectForm {...ProjectFormBaseStory.args} />,
+    projectToolbarCreateNewMenuTrigger: (
+      <ProjectToolbarCreateNewMenuTrigger
+        newProjectFormContainer={
+          <ProjectFormBase {...ProjectFormBaseStory.args} />
+        }
+        newProjectCategoryForm={<ProjectCategoryFormBase formAction={fn()} />}
+      />
+    ),
+    projectToolbarFiltersModalTrigger: (
+      <ProjectToolbarFiltersModalTrigger
+        filtersForm={<ProjectFiltersForm {...ProjectFiltersFormStory.args} />}
+      />
+    ),
+    projectToolbarActionsMenuTrigger: (
+      <ProjectToolbarActionsMenuTrigger
+        deleteAction={fn()}
+        updateStatusAction={fn()}
+      />
+    ),
   },
 } satisfies Story;
 
@@ -61,7 +77,7 @@ export const WithNoProjects = {
   render: () => (
     <ProjectsPageEmpty
       newProjectFormContainer={
-        <NewProjectForm {...ProjectFormBaseStory.args} />
+        <ProjectFormBase {...ProjectFormBaseStory.args} />
       }
     />
   ),

@@ -1,43 +1,38 @@
 "use client";
 
-import { Suspense } from "react";
+import {
+  FormModal,
+  FormModalDialog,
+  FormModalDialogHeader,
+  FormModalSubmitButton,
+} from "@/components/common/FormModal";
+
 import { useTranslations } from "next-intl";
-import { ModalProps } from "@/components/ui";
-import { ProjectFormBaseSkeleton } from "../ProjectFormBase";
-import { FormBaseModal } from "@/components/common/FormBaseModal";
-import { useGlobalContainer } from "@/components/layout/GlobalContainerContext";
+import { ModalProps, DialogBody, DialogFooter } from "@/components/ui";
 
 interface EditProjectModalProps
   extends Pick<ModalProps, "isOpen" | "onOpenChange"> {
-  projectId: number;
+  editProjectFormContainer: React.ReactNode;
 }
 
 export function EditProjectModal({
-  projectId,
+  editProjectFormContainer,
   ...props
 }: EditProjectModalProps) {
   const t = useTranslations("projects.EditProjectModal");
 
-  const { EditProjectFormContainer } = useGlobalContainer();
-
-  if (!EditProjectFormContainer) {
-    throw new Error(
-      "EditProjectFormContainer is missing in GlobalContainerContext",
-    );
-  }
-
   return (
-    <FormBaseModal
-      data-test="edit-project-modal"
-      formId="edit-project-form"
-      title={t("title")}
-      submitButtonLabel={t("submitButtonLabel")}
-      form={
-        <Suspense fallback={<ProjectFormBaseSkeleton />}>
-          <EditProjectFormContainer projectId={projectId} />
-        </Suspense>
-      }
-      {...props}
-    />
+    <FormModal {...props}>
+      <FormModalDialog>
+        <FormModalDialogHeader>{t("title")}</FormModalDialogHeader>
+        <DialogBody>{editProjectFormContainer}</DialogBody>
+        <DialogFooter>
+          <FormModalSubmitButton
+            form="edit-project-form"
+            label={t("submitButtonLabel")}
+          />
+        </DialogFooter>
+      </FormModalDialog>
+    </FormModal>
   );
 }

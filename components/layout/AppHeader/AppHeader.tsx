@@ -1,6 +1,5 @@
 import { ProfileLink } from "../ProfileLink";
 import { AppHeaderTitle } from "./AppHeaderTitle";
-import { SearchModal } from "@/components/search/SearchModal";
 import { AppHeaderLangMenuTrigger } from "./AppHeaderLangMenuTrigger";
 import { AppHeaderThemeToggleButton } from "./AppHeaderThemeToggleButton";
 import { SearchModalTriggerMobile } from "@/components/search/SearchModalTriggerMobile";
@@ -8,23 +7,25 @@ import { SearchModalTriggerDesktop } from "@/components/search/SearchModalTrigge
 import { NotificationModalTrigger } from "@/components/notifications/NotificationModalTrigger";
 
 interface AppHeaderProps {
-  guestMode?: boolean;
   appBottomSheetTrigger: React.ReactNode;
   appSidebarSheetTrigger: React.ReactNode;
+  notificationModalContentContainer: React.ReactNode;
+  searchModal: React.ReactNode;
 }
 
 export const AppHeader = ({
-  guestMode,
   appBottomSheetTrigger,
   appSidebarSheetTrigger,
+  notificationModalContentContainer,
+  searchModal,
 }: AppHeaderProps) => {
   const buttonClasses = "rounded-full p-3";
 
   const notificationModalTrigger = (
-    <NotificationModalTrigger guestMode={guestMode} />
+    <NotificationModalTrigger
+      notificationModalContentContainer={notificationModalContentContainer}
+    />
   );
-
-  const searchModal = <SearchModal />;
 
   return (
     <>

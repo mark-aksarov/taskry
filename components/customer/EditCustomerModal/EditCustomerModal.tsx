@@ -4,7 +4,7 @@ import { Suspense } from "react";
 import { useTranslations } from "next-intl";
 import { ModalProps } from "@/components/ui";
 import { CustomerFormBaseSkeleton } from "../CustomerFormBase";
-import { FormBaseModal } from "@/components/common/FormBaseModal";
+import { FormModal } from "@/components/common/FormModal";
 import { useGlobalContainer } from "@/components/layout/GlobalContainerContext";
 
 interface EditCustomerModalProps
@@ -33,7 +33,7 @@ export function EditCustomerModal({
   }
 
   return (
-    <FormBaseModal
+    <FormModal
       data-test="edit-customer-modal"
       formId="edit-customer-form"
       title={t("title")}

@@ -1,16 +1,18 @@
 import "server-only";
 
+import {
+  getNotificationRecipients,
+  createCommentAddedNotifications,
+  createCommentDeletedNotifications,
+} from "../notification/notification.dal";
+
 import { cache } from "react";
 import prisma from "@/lib/prisma";
 import { auth } from "@/lib/auth";
 import { AccessDeniedError } from "../utils/error";
-import { CreateCommentInputDTO } from "./comment.dto";
 import { verifySession } from "../utils/verifySession";
-import {
-  createCommentAddedNotifications,
-  createCommentDeletedNotifications,
-} from "../notification/notification.dal";
-import { Prisma } from "@/generated/prisma/client";
+import { NotificationType, Prisma } from "@/generated/prisma/client";
+import { CreateCommentInputDTO, UpdateCommentInputDTO } from "./comment.dto";
 
 export const getAllComments = cache(
   async (taskId?: number, projectId?: number) => {
@@ -163,6 +165,77 @@ export const deleteComment = async (commentId: number) => {
     });
 
     return deletedComment;
+  });
+};
+
+export const updateComment = async (input: UpdateCommentInputDTO) => {
+  // Authorization
+  const {
+    user: { id: senderId, role, workspaceId },
+  } = await verifySession();
+
+  // ACL
+  const permission = await auth.api.userHasPermission({
+    body: {
+      userId: senderId,
+      permission: {
+        comment: ["update"],
+      },
+    },
+  });
+
+  if (!permission.success) {
+    throw new AccessDeniedError(
+      "You do not have permission to update comment.",
+    );
+  }
+
+  return prisma.$transaction(async (tx) => {
+    // update comment within the workspace
+    const comment = await prisma.comment.update({
+      where: {
+        workspaceId,
+        ...(role === "user" ? { senderId } : {}),
+        id: input.id,
+      },
+      data: {
+        content: input.content,
+      },
+      include: {
+        task: {
+          select: { title: true },
+        },
+        project: {
+          select: { title: true },
+        },
+      },
+    });
+
+    // Send notifications
+    const recipients = await getNotificationRecipients(
+      tx,
+      workspaceId,
+      senderId,
+    );
+
+    if (recipients.length > 0) {
+      await tx.notification.createMany({
+        data: recipients.map((user) => ({
+          type: NotificationType.commentChanged,
+          actorId: senderId,
+          recipientId: user.id,
+          workspaceId,
+          taskId: comment.taskId,
+          projectId: comment.projectId,
+          commentContent: comment.content.substring(0, 250),
+          taskTitle: comment.task?.title,
+          projectTitle: comment.project?.title,
+          isRead: false,
+        })),
+      });
+    }
+
+    return comment;
   });
 };
 

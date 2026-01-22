@@ -1,5 +1,13 @@
+import {
+  ToolbarFiltersModal,
+  ToolbarFiltersModalDialog,
+  ToolbarFiltersModalTrigger,
+  ToolbarFiltersModalDialogHeader,
+  ToolbarFiltersModalSubmitButton,
+} from "@/components/common/Toolbar";
+
 import { useTranslations } from "next-intl";
-import { ToolbarFiltersModalTrigger } from "@/components/common/Toolbar";
+import { DialogBody, DialogFooter } from "../ui";
 
 export function ProjectToolbarFiltersModalTrigger({
   filtersForm,
@@ -9,10 +17,18 @@ export function ProjectToolbarFiltersModalTrigger({
   const t = useTranslations("projects.ProjectToolbarFiltersModalTrigger");
 
   return (
-    <ToolbarFiltersModalTrigger
-      title={t("title")}
-      filtersForm={filtersForm}
-      formId="project-filter-form"
-    />
+    <ToolbarFiltersModalTrigger>
+      <ToolbarFiltersModal>
+        <ToolbarFiltersModalDialog>
+          <ToolbarFiltersModalDialogHeader>
+            {t("title")}
+          </ToolbarFiltersModalDialogHeader>
+          <DialogBody>{filtersForm}</DialogBody>
+          <DialogFooter>
+            <ToolbarFiltersModalSubmitButton />
+          </DialogFooter>
+        </ToolbarFiltersModalDialog>
+      </ToolbarFiltersModal>
+    </ToolbarFiltersModalTrigger>
   );
 }

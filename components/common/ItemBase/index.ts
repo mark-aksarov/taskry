@@ -1,8 +1,11 @@
 export { ItemBaseBadge } from "./ItemBaseBadge";
 export { ItemBaseButton } from "./ItemBaseButton";
+export { type ItemBaseButtonProps } from "./ItemBaseButton";
 export { ItemBaseBadgeSkeleton } from "./ItemBaseBadgeSkeleton";
 export { ItemBaseButtonSkeleton } from "./ItemBaseButtonSkeleton";
+export { ItemBaseActionMenuButton } from "./ItemBaseActionMenuButton";
 export { ItemBaseActionMenuTrigger } from "./ItemBaseActionMenuTrigger";
 export { ItemBaseDetailModalTrigger } from "./ItemBaseDetailModalTrigger";
+export { ItemBaseActionMenuDialogHeader } from "./ItemBaseActionMenuDialogHeader";
 export { ItemBaseDetailBottomSheetTrigger } from "./ItemBaseDetailBottomSheetTrigger";
 export { ItemBaseActionMenuTriggerSkeleton } from "./ItemBaseActionMenuTriggerSkeleton";

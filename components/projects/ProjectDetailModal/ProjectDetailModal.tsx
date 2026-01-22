@@ -1,56 +1,37 @@
 "use client";
 
 import {
-  Modal,
-  Dialog,
-  Button,
-  DialogBody,
-  DialogFooter,
-  DialogHeader,
-  DialogHeading,
-  DialogCloseButton,
-} from "@/components/ui";
-
+  DetailModal,
+  DetailModalLink,
+  DetailModalDialog,
+  DetailModalDialogHeader,
+} from "@/components/common/DetailModal";
 import { useTranslations } from "next-intl";
-import { Suspense, useContext } from "react";
-import { ProjectDetailSkeleton } from "../ProjectDetail";
-import { useGlobalContainer } from "@/components/layout/GlobalContainerContext";
+import { DialogBody, DialogFooter } from "@/components/ui";
 
-export function ProjectDetailModal({ projectId }: { projectId: number }) {
+interface ProjectDetailModalProps {
+  projectId: number;
+  projectDetailContainer: React.ReactNode;
+}
+
+export function ProjectDetailModal({
+  projectId,
+  projectDetailContainer,
+}: ProjectDetailModalProps) {
   const t = useTranslations("projects.ProjectDetailModal");
 
-  const { ProjectDetailContainer } = useGlobalContainer();
-
-  if (!ProjectDetailContainer) {
-    throw new Error(
-      "ProjectDetailContainer is missing in GlobalContainerContext",
-    );
-  }
-
   return (
-    <Modal isDismissable className="w-[600px]">
-      <Dialog className="max-h-[calc(100dvh-64px)]">
-        <DialogHeader>
-          <DialogHeading>{t("dialogHeading")}</DialogHeading>
-          <DialogCloseButton />
-        </DialogHeader>
-        <DialogBody>
-          <Suspense fallback={<ProjectDetailSkeleton />}>
-            <ProjectDetailContainer projectId={projectId} />
-          </Suspense>
-        </DialogBody>
+    <DetailModal>
+      <DetailModalDialog>
+        <DetailModalDialogHeader>{t("dialogHeading")}</DetailModalDialogHeader>
+        <DialogBody>{projectDetailContainer}</DialogBody>
         <DialogFooter>
-          <Button
-            data-test="open-full-page-button"
-            as="a"
-            href={`/projects?projectId=${projectId}`}
-            variant="primary"
-            size="medium"
+          <DetailModalLink
             label={t("openInFullPage")}
-            className="w-full justify-center"
+            href={`/projects?projectId=${projectId}`}
           />
         </DialogFooter>
-      </Dialog>
-    </Modal>
+      </DetailModalDialog>
+    </DetailModal>
   );
 }

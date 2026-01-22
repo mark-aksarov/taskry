@@ -11,30 +11,31 @@ import {
   DialogCloseButton,
 } from "@/components/ui";
 
-import { Suspense } from "react";
 import { useTranslations } from "next-intl";
-import { OverlayTriggerState } from "react-stately";
+import { Suspense, useContext } from "react";
+import { OverlayTriggerStateContext } from "react-aria-components";
 import { UserDetailSkeleton } from "@/components/users/UserDetail";
 import { PersonHeaderSkeleton } from "@/components/common/PersonHeader";
-import { useGlobalContainer } from "@/components/layout/GlobalContainerContext";
 import { PersonDetailPresentation } from "@/components/common/PersonDetailPresentation";
 
 export interface UserDetailBottomSheetProps {
   userId: string;
-  state: OverlayTriggerState;
+  userDetailContainer: React.ReactNode;
 }
 
 export function UserDetailBottomSheet({
   userId,
-  state,
+  userDetailContainer,
 }: UserDetailBottomSheetProps) {
-  const t = useTranslations("users.UserDetailBottomSheet");
+  const state = useContext(OverlayTriggerStateContext);
 
-  const { UserDetailContainer } = useGlobalContainer();
-
-  if (!UserDetailContainer) {
-    throw new Error("UserDetailContainer is missing in GlobalContainerContext");
+  if (!state) {
+    throw new Error(
+      "UserDetailBottomSheet must be used within a OverlayTriggerProvider",
+    );
   }
+
+  const t = useTranslations("users.UserDetailBottomSheet");
 
   return (
     <BottomSheet isDismissable state={state} className="md:hidden">
@@ -52,7 +53,7 @@ export function UserDetailBottomSheet({
               />
             }
           >
-            <UserDetailContainer userId={userId} />
+            {userDetailContainer}
           </Suspense>
         </DialogBody>
         <DialogFooter>

@@ -22,12 +22,9 @@ import { Link } from "@/components/ui";
 import { Checkbox } from "@/components/ui";
 import { ProjectStatus } from "@/generated/prisma/enums";
 import { useFormatter, useTranslations } from "next-intl";
-import { ProjectDetailModal } from "../ProjectDetailModal";
 import { UnknownUser } from "@/components/common/UnknownUser";
 import { ProjectListItemLayout } from "./ProjectListItemLayout";
 import { ImageContainer } from "@/components/common/ImageContainer";
-import { UserDetailModal } from "@/components/users/UserDetailModal";
-import { ProjectDetailBottomSheet } from "../ProjectDetailBottomSheet";
 import { getProjectStatusBadgeColor } from "../getProjectStatusBadgeColor";
 
 export interface ProjectListItemProps {
@@ -56,6 +53,9 @@ export interface ProjectListItemProps {
   showCheckbox?: boolean;
   commentModalTrigger: React.ReactNode;
   menuTrigger: React.ReactNode;
+  projectDetailModal: React.ReactNode;
+  projectDetailBottomSheet: React.ReactNode;
+  userDetailModal?: React.ReactNode;
 }
 
 export const ProjectListItem = ({
@@ -70,6 +70,9 @@ export const ProjectListItem = ({
   showCheckbox,
   commentModalTrigger,
   menuTrigger,
+  projectDetailModal,
+  projectDetailBottomSheet,
+  userDetailModal,
 }: ProjectListItemProps) => {
   const t = useTranslations("projects");
 
@@ -113,16 +116,14 @@ export const ProjectListItem = ({
           <ListItemTitle data-test="project-list-item-title">
             <ItemBaseDetailModalTrigger
               data-test="project-list-item-title-trigger"
-              modal={<ProjectDetailModal projectId={id} />}
+              modal={projectDetailModal}
               className="truncate"
             >
               {title}
             </ItemBaseDetailModalTrigger>
 
             <ItemBaseDetailBottomSheetTrigger
-              renderBottomSheet={(state) => (
-                <ProjectDetailBottomSheet projectId={id} state={state} />
-              )}
+              bottomSheet={projectDetailBottomSheet}
               className="truncate"
             >
               {title}
@@ -136,7 +137,7 @@ export const ProjectListItem = ({
           {creator ? (
             <ItemBaseDetailModalTrigger
               data-test="project-list-item-creator-image-trigger"
-              modal={<UserDetailModal userId={creator.id} />}
+              modal={userDetailModal}
               className="@max-2xl:hidden"
             >
               {creatorImg}
@@ -150,7 +151,7 @@ export const ProjectListItem = ({
               {creator ? (
                 <ItemBaseDetailModalTrigger
                   data-test="project-list-item-creator-name-trigger"
-                  modal={<UserDetailModal userId={creator.id} />}
+                  modal={userDetailModal}
                   className="truncate"
                 >
                   {creator.fullName}

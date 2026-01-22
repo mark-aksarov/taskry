@@ -7,14 +7,18 @@ import {
   UpdateProjectStatusesPayload,
 } from "@/lib/actions/types";
 
+import {
+  ItemBaseActionMenuButton,
+  ItemBaseActionMenuTrigger,
+  ItemBaseActionMenuDialogHeader,
+} from "../common/ItemBase";
+
 import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
 import { EditProjectModal } from "./EditProjectModal";
 import { ProjectStatus } from "@/generated/prisma/enums";
-import { ItemBaseActionMenuTrigger } from "../common/ItemBase";
-import { DeleteEntityModal } from "../common/DeleteEntityModal";
+import { DeleteProjectModal } from "./DeleteProjectModal";
 import { startTransition, useActionState, useState } from "react";
-import { UpdateProjectStatusModal } from "./UpdateProjectStatusModal";
 import { useActionErrorToast } from "@/lib/hooks/useActionErrorToast";
 import { Check, CircleEllipsis, Clock, Pencil, Trash } from "lucide-react";
 
@@ -25,15 +29,10 @@ export type ProjectItemActionMenuTriggerProps = {
   className?: string;
   deleteAction: ActionFn<ActionState, DeleteProjectsPayload>;
   updateStatusAction: ActionFn<ActionState, UpdateProjectStatusesPayload>;
+  editProjectFormContainer: React.ReactNode;
 };
 
-interface UpdateStatusModalState {
-  isOpen: boolean;
-  textKey: "resume" | "pause" | "complete";
-  nextStatus: ProjectStatus;
-}
-
-const initialState: ActionState = {
+const updateStatusInitialState: ActionState = {
   status: null,
   message: null,
 };
@@ -45,30 +44,27 @@ export function ProjectItemActionMenuTrigger({
   className,
   deleteAction,
   updateStatusAction,
+  editProjectFormContainer,
 }: ProjectItemActionMenuTriggerProps) {
   const t = useTranslations("projects.ProjectItemActionMenuTrigger");
 
-  // Edit State
+  // Modal state for editing the project
   const [isOpenEditModal, setIsOpenEditModal] = useState(false);
 
-  // Delete State
+  // Modal state for deleting the project
   const [isOpenDeleteModal, setIsOpenDeleteModal] = useState(false);
 
-  // Update Status
-  const [updateModal, setUpdateModal] = useState<UpdateStatusModalState>({
-    isOpen: false,
-    textKey: "resume",
-    nextStatus: ProjectStatus.pending,
-  });
-
+  // State and action handler for updating project status
   const [
     updateProjectStatusState,
     updateProjectStatusAction,
     updateProjectStatusPending,
-  ] = useActionState(updateStatusAction, initialState);
+  ] = useActionState(updateStatusAction, updateStatusInitialState);
 
+  // Show toast notifications for status update errors
   useActionErrorToast(updateProjectStatusState);
 
+  // Handle menu actions
   const handleAction = (key: Key) => {
     const action = key.toString();
     if (action === "edit") {
@@ -76,47 +72,27 @@ export function ProjectItemActionMenuTrigger({
     } else if (action === "delete") {
       setIsOpenDeleteModal(true);
     } else {
-      if (projectStatus === action) return;
-
-      const baseModalState = {
-        isOpen: true,
-        nextStatus: action as ProjectStatus,
-        isDone: false,
-      };
-
-      if (action === "completed") {
-        setUpdateModal({
-          ...baseModalState,
-          textKey: "complete",
+      startTransition(() => {
+        updateProjectStatusAction({
+          ids: [projectId],
+          nextStatus: action as ProjectStatus,
         });
-      } else if (projectStatus === "active" && action === "pending") {
-        setUpdateModal({
-          ...baseModalState,
-          textKey: "pause",
-        });
-      } else if (projectStatus === "pending" && action === "active") {
-        setUpdateModal({
-          ...baseModalState,
-          textKey: "resume",
-        });
-      } else {
-        startTransition(() => {
-          updateProjectStatusAction({
-            ids: [projectId],
-            nextStatus: action as ProjectStatus,
-          });
-        });
-      }
+      });
     }
   };
 
   return (
     <>
       <ItemBaseActionMenuTrigger
-        trigger-data-test={`project-item-${projectId}-action-menu-trigger`}
-        className={className}
         onAction={handleAction}
         disabledKeys={[projectStatus]}
+        renderDialogHeader={() => <ItemBaseActionMenuDialogHeader />}
+        renderButton={() => (
+          <ItemBaseActionMenuButton
+            className={className}
+            data-test={`project-item-${projectId}-action-menu-trigger`}
+          />
+        )}
       >
         <Item textValue={t("edit")} key="edit">
           <Pencil size={16} /> {t("edit")}
@@ -135,28 +111,20 @@ export function ProjectItemActionMenuTrigger({
         </Item>
       </ItemBaseActionMenuTrigger>
 
+      {/* Modal for editing project details */}
       <EditProjectModal
-        projectId={projectId}
         isOpen={isOpenEditModal}
         onOpenChange={setIsOpenEditModal}
+        editProjectFormContainer={editProjectFormContainer}
       />
 
-      <DeleteEntityModal
-        entityId={projectId}
+      {/* Modal for confirming project deletion */}
+      <DeleteProjectModal
+        projectId={projectId}
         entityName={projectTitle}
-        translationNamespace="projects.DeleteProjectModal"
         isOpen={isOpenDeleteModal}
         onOpenChange={setIsOpenDeleteModal}
         deleteAction={deleteAction}
-      />
-
-      <UpdateProjectStatusModal
-        projectId={projectId}
-        {...updateModal}
-        onOpenChange={(isOpen) =>
-          setUpdateModal((prev) => ({ ...prev, isOpen }))
-        }
-        updateStatusAction={updateStatusAction}
       />
     </>
   );

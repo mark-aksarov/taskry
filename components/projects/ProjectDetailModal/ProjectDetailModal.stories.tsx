@@ -1,9 +1,9 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { ProjectDetailModal } from "./ProjectDetailModal";
 import { Button, RACDialogTrigger } from "@/components/ui";
+import { ProjectDetail, ProjectDetailSkeleton } from "../ProjectDetail";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { GlobalContainerProvider } from "@/components/layout/GlobalContainerContext";
-import { ProjectDetailSkeleton } from "../ProjectDetail";
+import { Default as ProjectDetailStory } from "../ProjectDetail/ProjectDetail.stories";
 
 const meta = {
   title: "components/projects/ProjectDetailModal",
@@ -18,26 +18,21 @@ const meta = {
     ),
     withThemedBackground,
   ],
-  args: {
-    projectId: 1,
-  },
 } satisfies Meta<typeof ProjectDetailModal>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default = {} satisfies Story;
+export const Default = {
+  args: {
+    projectId: 1,
+    projectDetailContainer: <ProjectDetail {...ProjectDetailStory.args} />,
+  },
+} satisfies Story;
 
 export const WithSkeletonContent = {
-  decorators: [
-    (Story) => (
-      <GlobalContainerProvider
-        value={{
-          ProjectDetailContainer: () => <ProjectDetailSkeleton />,
-        }}
-      >
-        <Story />
-      </GlobalContainerProvider>
-    ),
-  ],
+  args: {
+    projectId: 1,
+    projectDetailContainer: <ProjectDetailSkeleton />,
+  },
 } satisfies Story;

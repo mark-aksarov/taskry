@@ -1,61 +1,50 @@
 "use client";
 
 import {
-  Button,
-  Dialog,
-  DialogBody,
-  BottomSheet,
-  DialogFooter,
-  DialogHeader,
-  DialogHeading,
-  DialogCloseButton,
-} from "@/components/ui";
-import { Suspense } from "react";
+  DetailBottomSheet,
+  DetailBottomSheetLink,
+  DetailBottomSheetDialog,
+  DetailBottomSheetDialogHeader,
+} from "@/components/common/DetailBottomSheet";
+
+import { useContext } from "react";
 import { useTranslations } from "next-intl";
-import { OverlayTriggerState } from "react-stately";
-import { ProjectDetailSkeleton } from "../ProjectDetail";
-import { useGlobalContainer } from "@/components/layout/GlobalContainerContext";
+import { DialogBody, DialogFooter } from "@/components/ui";
+import { OverlayTriggerStateContext } from "react-aria-components";
 
 export interface ProjectDetailBottomSheetProps {
   projectId: number;
-  state: OverlayTriggerState;
+  projectDetailContainer: React.ReactNode;
 }
 
 export function ProjectDetailBottomSheet({
   projectId,
-  state,
+  projectDetailContainer,
 }: ProjectDetailBottomSheetProps) {
-  const t = useTranslations("projects.ProjectDetailBottomSheet");
+  const state = useContext(OverlayTriggerStateContext);
 
-  const { ProjectDetailContainer } = useGlobalContainer();
-
-  if (!ProjectDetailContainer) {
+  if (!state) {
     throw new Error(
-      "ProjectDetailContainer is missing in GlobalContainerContext",
+      "ProjectDetailBottomSheet must be used within a OverlayTriggerProvider",
     );
   }
 
+  const t = useTranslations("projects.ProjectDetailBottomSheet");
+
   return (
-    <BottomSheet isDismissable state={state} className="md:hidden">
-      <Dialog className="max-h-[calc(100dvh-6.25rem)]">
-        <DialogHeader>
-          <DialogHeading>{t("dialogHeading")}</DialogHeading>
-          <DialogCloseButton />
-        </DialogHeader>
-        <DialogBody>
-          <Suspense fallback={<ProjectDetailSkeleton />}>
-            <ProjectDetailContainer projectId={projectId} />
-          </Suspense>
-        </DialogBody>
+    <DetailBottomSheet>
+      <DetailBottomSheetDialog>
+        <DetailBottomSheetDialogHeader>
+          {t("dialogHeading")}
+        </DetailBottomSheetDialogHeader>
+        <DialogBody>{projectDetailContainer}</DialogBody>
         <DialogFooter>
-          <Button
-            variant="primary"
-            size="medium"
-            label={t("editButtonLabel")}
-            className="w-full justify-center"
+          <DetailBottomSheetLink
+            label={t("openInFullPage")}
+            href={`/projects?projectId=${projectId}`}
           />
         </DialogFooter>
-      </Dialog>
-    </BottomSheet>
+      </DetailBottomSheetDialog>
+    </DetailBottomSheet>
   );
 }

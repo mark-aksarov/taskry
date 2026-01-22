@@ -9,29 +9,16 @@ import {
   DialogCloseButton,
 } from "@/components/ui";
 
-import { Suspense } from "react";
 import { Bell } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { ResponsiveModal } from "@/components/common/ResponsiveModal";
-import { useGlobalContainer } from "@/components/layout/GlobalContainerContext";
-import { NotificationModalContentSkeleton } from "../NotificationModalContent";
-
-interface NotificationModalTriggerProps {
-  guestMode?: boolean;
-}
 
 export function NotificationModalTrigger({
-  guestMode,
-}: NotificationModalTriggerProps) {
+  notificationModalContentContainer,
+}: {
+  notificationModalContentContainer: React.ReactNode;
+}) {
   const t = useTranslations("notifications.NotificationModalTrigger");
-
-  const { NotificationModalContentContainer } = useGlobalContainer();
-
-  if (!NotificationModalContentContainer) {
-    throw new Error(
-      "NotificationModalContentContainer is missing in GlobalContainerContext",
-    );
-  }
 
   return (
     <RACDialogTrigger>
@@ -54,9 +41,7 @@ export function NotificationModalTrigger({
             <DialogCloseButton />
           </DialogHeader>
 
-          <Suspense fallback={<NotificationModalContentSkeleton />}>
-            <NotificationModalContentContainer guestMode={guestMode} />
-          </Suspense>
+          {notificationModalContentContainer}
         </Dialog>
       </ResponsiveModal>
     </RACDialogTrigger>

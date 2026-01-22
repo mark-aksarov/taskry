@@ -1,11 +1,18 @@
 import { fn } from "storybook/test";
 import { ProjectList } from "./ProjectList";
+import { ProjectFormBase } from "../ProjectFormBase";
 import { ProjectListItem } from "../ProjectListItem";
 import type { Meta, StoryObj } from "@storybook/react";
 import { ProjectStatus } from "@/generated/prisma/enums";
+import { ProjectDetailModal } from "../ProjectDetailModal";
+import { ProjectDetailBottomSheet } from "../ProjectDetailBottomSheet";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { ProjectItemActionMenuTrigger } from "../ProjectItemActionMenuTrigger";
 import { ProjectCommentsModalTrigger } from "../ProjectCommentsModalTrigger";
+import { ProjectItemActionMenuTrigger } from "../ProjectItemActionMenuTrigger";
+import { MockedCommentsContainer } from "@/components/comments/MockedCommentsContainer";
+import { Default as ProjectFormBaseStory } from "../ProjectFormBase/ProjectFormBase.stories";
+import { Default as ProjectDetailModalStory } from "../ProjectDetailModal/ProjectDetailModal.stories";
+import { Default as ProjectDetailBottomSheetStory } from "../ProjectDetailBottomSheet/ProjectDetailBottomSheet.stories";
 
 const mockedProjects = [
   {
@@ -85,9 +92,11 @@ export const Default = {
         showCheckbox={true}
         commentModalTrigger={
           <ProjectCommentsModalTrigger
-            projectId={project.id}
-            commentsCount={project.commentsCount}
+            projectId={1}
+            commentsCount={10}
+            projectCommentsContainer={<MockedCommentsContainer />}
             sendCommentAction={fn()}
+            updateCommentAction={fn()}
           />
         }
         menuTrigger={
@@ -97,7 +106,16 @@ export const Default = {
             projectStatus={project.status}
             deleteAction={fn()}
             updateStatusAction={fn()}
+            editProjectFormContainer={
+              <ProjectFormBase {...ProjectFormBaseStory.args} />
+            }
           />
+        }
+        projectDetailModal={
+          <ProjectDetailModal {...ProjectDetailModalStory.args} />
+        }
+        projectDetailBottomSheet={
+          <ProjectDetailBottomSheet {...ProjectDetailBottomSheetStory.args} />
         }
       />
     )),

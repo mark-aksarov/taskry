@@ -7,7 +7,6 @@ import {
 import { AppNavigation } from "@/components/layout/AppNavigation";
 
 interface DashboardLayoutProps {
-  guestMode?: boolean;
   children: React.ReactNode;
 }
 

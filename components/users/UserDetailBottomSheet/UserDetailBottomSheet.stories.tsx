@@ -5,12 +5,14 @@ import {
 
 import { Button } from "@/components/ui";
 import { useOverlayTrigger } from "react-aria";
+import { UserDetail } from "../UserDetail/UserDetail";
 import { useOverlayTriggerState } from "react-stately";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { OverlayTriggerStateContext } from "react-aria-components";
 import { UserDetailSkeleton } from "../UserDetail/UserDetailSkeleton";
 import { PersonHeaderSkeleton } from "@/components/common/PersonHeader";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { GlobalContainerProvider } from "@/components/layout/GlobalContainerContext";
+import { Default as UserDetailStory } from "../UserDetail/UserDetail.stories";
 import { PersonDetailPresentation } from "@/components/common/PersonDetailPresentation";
 
 const meta = {
@@ -18,16 +20,6 @@ const meta = {
   component: UserDetailBottomSheet,
   tags: ["autodocs"],
   decorators: [withThemedBackground],
-  args: {
-    userId: "BKs42HvVDEZFoaJUmTqf1gTN0K8pUFjI",
-    state: {
-      isOpen: true,
-      setOpen: () => {},
-      open: () => {},
-      close: () => {},
-      toggle: () => {},
-    },
-  },
   globals: {
     viewport: { value: "mobile2", isRotated: false },
   },
@@ -44,30 +36,28 @@ const UserDetailBottomSheetTemplate = ({
   const { triggerProps } = useOverlayTrigger({ type: "dialog" }, state);
 
   return (
-    <>
+    <OverlayTriggerStateContext.Provider value={state}>
       <Button {...triggerProps} label="User Detail" />
-      <UserDetailBottomSheet {...props} state={state} />
-    </>
+      <UserDetailBottomSheet {...props} />
+    </OverlayTriggerStateContext.Provider>
   );
 };
 
-export const Default = {} satisfies Story;
+export const Default = {
+  args: {
+    userId: "BKs42HvVDEZFoaJUmTqf1gTN0K8pUFjI",
+    userDetailContainer: <UserDetail {...UserDetailStory.args} />,
+  },
+} satisfies Story;
 
 export const WithSkeletonContent = {
-  decorators: [
-    (Story) => (
-      <GlobalContainerProvider
-        value={{
-          UserDetailContainer: () => (
-            <PersonDetailPresentation
-              personHeader={<PersonHeaderSkeleton />}
-              userDetail={<UserDetailSkeleton />}
-            />
-          ),
-        }}
-      >
-        <Story />
-      </GlobalContainerProvider>
+  args: {
+    userId: "BKs42HvVDEZFoaJUmTqf1gTN0K8pUFjI",
+    userDetailContainer: (
+      <PersonDetailPresentation
+        personHeader={<PersonHeaderSkeleton />}
+        userDetail={<UserDetailSkeleton />}
+      />
     ),
-  ],
+  },
 } satisfies Story;

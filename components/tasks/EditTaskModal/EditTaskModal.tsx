@@ -4,7 +4,7 @@ import { Suspense } from "react";
 import { useTranslations } from "next-intl";
 import { ModalProps } from "@/components/ui";
 import { TaskFormBaseSkeleton } from "../TaskFormBase";
-import { FormBaseModal } from "@/components/common/FormBaseModal";
+import { FormModal } from "@/components/common/FormModal";
 import { useGlobalContainer } from "@/components/layout/GlobalContainerContext";
 
 interface EditTaskModalProps
@@ -24,7 +24,7 @@ export function EditTaskModal({ taskId, ...props }: EditTaskModalProps) {
   }
 
   return (
-    <FormBaseModal
+    <FormModal
       data-test="edit-task-modal"
       formId="edit-task-form"
       title={t("title")}

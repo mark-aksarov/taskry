@@ -3,8 +3,13 @@
 import { MenuTrigger, MenuTriggerProps } from "@/components/ui/Menu";
 import { useResponsiveOverlayType } from "@/lib/hooks";
 
+export type ResponsiveMenuTriggerProps<T extends object = any> = Omit<
+  MenuTriggerProps<T>,
+  "overlayType"
+>;
+
 export const ResponsiveMenuTrigger = <T extends object = any>(
-  props: MenuTriggerProps<T>,
+  props: ResponsiveMenuTriggerProps<T>,
 ) => {
   const overlayType = useResponsiveOverlayType();
 

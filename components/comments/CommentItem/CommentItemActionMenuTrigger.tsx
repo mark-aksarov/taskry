@@ -1,30 +1,41 @@
 "use client";
 
+import {
+  ItemBaseActionMenuButton,
+  ItemBaseActionMenuTrigger,
+  ItemBaseActionMenuDialogHeader,
+} from "@/components/common/ItemBase";
+
 import { useState } from "react";
 import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
 import { Pencil, Trash } from "lucide-react";
 import { DeleteCommentModal } from "../DeleteCommentModal";
 import { ActionFn, ActionState } from "@/lib/actions/types";
+import { useHasGuestMode } from "@/lib/hooks/useHasGuestMode";
+import { useCommentFormContext } from "../CommentFormContext";
 import { GuestModeModal } from "@/components/common/GuestModeModal";
-import { ItemBaseActionMenuTrigger } from "@/components/common/ItemBase";
 
 export type CommentItemActionMenuTriggerProps = {
   commentId: number;
+  commentContent: string;
   className?: string;
-  guestMode?: boolean;
   deleteAction: ActionFn<ActionState, number>;
   mutate: () => void;
 };
 
 export function CommentItemActionMenuTrigger({
   commentId,
+  commentContent,
   className,
-  guestMode,
   deleteAction,
   mutate,
 }: CommentItemActionMenuTriggerProps) {
+  const { setEditCommentId, setCommentContent } = useCommentFormContext();
+
   const t = useTranslations("comments.CommentItemActionMenuTrigger");
+
+  const guestMode = useHasGuestMode();
 
   // Guest mode modal
   const [isGuestModeModalOpen, setIsGuestModeModalOpen] = useState(false);
@@ -40,6 +51,8 @@ export function CommentItemActionMenuTrigger({
 
     const action = key.toString();
     if (action === "edit") {
+      setEditCommentId(commentId);
+      setCommentContent(commentContent);
     } else if (action === "delete") {
       setIsOpenDeleteModal(true);
     }
@@ -48,9 +61,14 @@ export function CommentItemActionMenuTrigger({
   return (
     <>
       <ItemBaseActionMenuTrigger
-        trigger-data-test={`comment-item-${commentId}-action-menu-trigger`}
-        className={className}
         onAction={handleAction}
+        renderDialogHeader={() => <ItemBaseActionMenuDialogHeader />}
+        renderButton={() => (
+          <ItemBaseActionMenuButton
+            className={className}
+            data-test={`comment-item-${commentId}-action-menu-trigger`}
+          />
+        )}
       >
         <Item textValue={t("edit")} key="edit">
           <Pencil size={16} /> {t("edit")}

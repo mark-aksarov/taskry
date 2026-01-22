@@ -359,7 +359,7 @@ export async function createTaskChangedNotifications(
  * HELPER
  */
 
-async function getNotificationRecipients(
+export async function getNotificationRecipients(
   tx: Prisma.TransactionClient,
   workspaceId: number,
   actorId: string,

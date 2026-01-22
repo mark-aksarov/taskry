@@ -3,6 +3,7 @@
 import useSWR from "swr";
 import { SearchEmptySection } from "./SearchEmptySection";
 import { SearchPresentation } from "./SearchPresentation";
+import { useSearchModalContext } from "./SearchModal/SearchModalContext";
 import { ModalPagination } from "../common/ModalPagination";
 import { SearchList, SearchListSkeleton } from "./SearchList";
 
@@ -10,11 +11,6 @@ const pageSize = 10;
 
 export interface SearchContainerProps<T> {
   endpoint: string;
-  query: string;
-  page: number;
-  setPage: (page: number) => void;
-  searchField: React.ReactNode;
-  searchToggleButtonGroup: React.ReactNode;
   renderItem: (item: T) => React.ReactNode;
 }
 
@@ -25,13 +21,11 @@ interface PaginatedResponse<T> {
 
 export function SearchContainer<T extends { id: string | number }>({
   endpoint,
-  query,
-  page,
-  setPage,
-  searchField,
-  searchToggleButtonGroup,
   renderItem,
 }: SearchContainerProps<T>) {
+  const { page, setPage, query, searchField, searchToggleButtonGroup } =
+    useSearchModalContext();
+
   const { data, isLoading } = useSWR<PaginatedResponse<T>>(
     `${endpoint}?page=${page}&pageSize=${pageSize}&query=${query}`,
   );

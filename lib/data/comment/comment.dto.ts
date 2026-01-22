@@ -26,3 +26,8 @@ export interface CreateCommentInputDTO {
     fileName: string;
   }[];
 }
+
+export interface UpdateCommentInputDTO {
+  id: number;
+  content: string;
+}

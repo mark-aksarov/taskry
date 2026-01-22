@@ -14,26 +14,18 @@ import {
 
 import {
   ItemBaseBadge,
-  ItemBaseButton,
   ItemBaseDetailModalTrigger,
   ItemBaseDetailBottomSheetTrigger,
 } from "@/components/common/ItemBase";
 
 import Image from "next/image";
-import { MessageSquare } from "lucide-react";
+import { Checkbox } from "@/components/ui";
 import { ProjectStatus } from "@/generated/prisma/enums";
 import { useFormatter, useTranslations } from "next-intl";
-import { ProjectDetailModal } from "../ProjectDetailModal";
-import { Checkbox, RACDialogTrigger } from "@/components/ui";
 import { UnknownUser } from "@/components/common/UnknownUser";
-import { ProjectCommentsModal } from "../ProjectCommentsModal";
 import { ProjectGridItemLayout } from "./ProjectGridItemLayout";
 import { ImageContainer } from "@/components/common/ImageContainer";
-import { UserDetailModal } from "@/components/users/UserDetailModal";
-import { ProjectDetailBottomSheet } from "../ProjectDetailBottomSheet";
 import { getProjectStatusBadgeColor } from "../getProjectStatusBadgeColor";
-import { ProjectItemActionMenuTrigger } from "../ProjectItemActionMenuTrigger";
-import { UserDetailBottomSheet } from "@/components/users/UserDetailBottomSheet";
 
 export interface ProjectGridItemProps {
   id: number;
@@ -49,6 +41,10 @@ export interface ProjectGridItemProps {
   tasksCompleted: number;
   commentModalTrigger: React.ReactNode;
   menuTrigger: React.ReactNode;
+  projectDetailModal: React.ReactNode;
+  projectDetailBottomSheet: React.ReactNode;
+  userDetailModal?: React.ReactNode;
+  userDetailBottomSheet?: React.ReactNode;
 }
 
 export function ProjectGridItem({
@@ -61,6 +57,10 @@ export function ProjectGridItem({
   tasksCompleted,
   commentModalTrigger,
   menuTrigger,
+  projectDetailModal,
+  projectDetailBottomSheet,
+  userDetailModal,
+  userDetailBottomSheet,
 }: ProjectGridItemProps) {
   const t = useTranslations("projects");
 
@@ -101,16 +101,14 @@ export function ProjectGridItem({
         <GridItemInfo className="flex-auto">
           <GridItemTitle>
             <ItemBaseDetailModalTrigger
-              modal={<ProjectDetailModal projectId={id} />}
+              modal={projectDetailModal}
               className="truncate"
             >
               {title}
             </ItemBaseDetailModalTrigger>
 
             <ItemBaseDetailBottomSheetTrigger
-              renderBottomSheet={(state) => (
-                <ProjectDetailBottomSheet projectId={id} state={state} />
-              )}
+              bottomSheet={projectDetailBottomSheet}
               className="truncate"
             >
               {title}
@@ -123,16 +121,12 @@ export function ProjectGridItem({
       creatorImageSlot={
         creator ? (
           <>
-            <ItemBaseDetailModalTrigger
-              modal={<UserDetailModal userId={creator.id} />}
-            >
+            <ItemBaseDetailModalTrigger modal={userDetailModal}>
               {creatorImg}
             </ItemBaseDetailModalTrigger>
 
             <ItemBaseDetailBottomSheetTrigger
-              renderBottomSheet={(state) => (
-                <UserDetailBottomSheet userId={creator.id} state={state} />
-              )}
+              bottomSheet={userDetailBottomSheet}
             >
               {creatorImg}
             </ItemBaseDetailBottomSheetTrigger>

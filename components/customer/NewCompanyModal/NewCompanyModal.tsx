@@ -1,6 +1,6 @@
 import { useTranslations } from "next-intl";
 import { ModalProps } from "@/components/ui";
-import { FormBaseModal } from "@/components/common/FormBaseModal";
+import { FormModal } from "@/components/common/FormModal";
 
 interface NewCompanyModalProps
   extends Pick<ModalProps, "isOpen" | "onOpenChange"> {
@@ -14,7 +14,7 @@ export function NewCompanyModal({
   const t = useTranslations("customers.NewCompanyModal");
 
   return (
-    <FormBaseModal
+    <FormModal
       formId="new-company-form"
       title={t("title")}
       submitButtonLabel={t("submitButtonLabel")}

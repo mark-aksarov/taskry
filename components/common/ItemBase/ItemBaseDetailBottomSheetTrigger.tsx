@@ -4,11 +4,12 @@ import React from "react";
 import { tv } from "tailwind-variants";
 import { useOverlayTrigger } from "react-aria";
 import { focusRing, RACButton } from "@/components/ui";
-import { OverlayTriggerState, useOverlayTriggerState } from "react-stately";
+import { useOverlayTriggerState } from "react-stately";
+import { OverlayTriggerStateContext } from "react-aria-components";
 
 interface ItemBaseDetailBottomSheetTriggerProps {
   children: React.ReactNode;
-  renderBottomSheet: (state: OverlayTriggerState) => React.ReactNode;
+  bottomSheet: React.ReactNode;
   className?: string;
 }
 
@@ -19,14 +20,14 @@ const styles = tv({
 
 export function ItemBaseDetailBottomSheetTrigger({
   children,
-  renderBottomSheet,
+  bottomSheet,
   className,
 }: ItemBaseDetailBottomSheetTriggerProps) {
   const state = useOverlayTriggerState({});
   const { triggerProps } = useOverlayTrigger({ type: "dialog" }, state);
 
   return (
-    <>
+    <OverlayTriggerStateContext.Provider value={state}>
       <RACButton
         {...triggerProps}
         className={(renderProps) =>
@@ -38,7 +39,7 @@ export function ItemBaseDetailBottomSheetTrigger({
       >
         {children}
       </RACButton>
-      {renderBottomSheet(state)}
-    </>
+      {bottomSheet}
+    </OverlayTriggerStateContext.Provider>
   );
 }

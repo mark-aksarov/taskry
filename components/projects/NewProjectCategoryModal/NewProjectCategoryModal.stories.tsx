@@ -1,11 +1,14 @@
+import {
+  ProjectCategoryFormBase,
+  ProjectCategoryFormBaseSkeleton,
+} from "../ProjectCategoryFormBase";
+
 import { Suspense } from "react";
+import { fn } from "storybook/internal/test";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { Button, RACDialogTrigger } from "@/components/ui";
-import { NewProjectCategoryForm } from "../NewProjectCategoryForm";
 import { NewProjectCategoryModal } from "./NewProjectCategoryModal";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { ProjectCategoryFormBaseSkeleton } from "../ProjectCategoryFormBase";
-import { Default as ProjectFormBaseStory } from "../ProjectFormBase/ProjectFormBase.stories";
 
 const meta = {
   title: "Components/projects/NewProjectCategoryModal",
@@ -29,9 +32,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    newProjectCategoryForm: (
-      <NewProjectCategoryForm {...ProjectFormBaseStory.args} />
-    ),
+    newProjectCategoryForm: <ProjectCategoryFormBase formAction={fn()} />,
   },
 } satisfies Story;
 

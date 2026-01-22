@@ -1,26 +1,43 @@
-import { ModalProps } from "@/components/ui";
-import { FormBaseModal } from "@/components/common/FormBaseModal";
+import {
+  ModalProps,
+  DialogBody,
+  DialogFooter,
+  DialogHeading,
+  DialogCloseButton,
+} from "@/components/ui";
+
+import {
+  FormModal,
+  FormModalDialog,
+  FormModalDialogHeader,
+  FormModalSubmitButton,
+} from "@/components/common/FormModal";
+
 import { useTranslations } from "next-intl";
 
 interface NewProjectModalProps
   extends Pick<ModalProps, "isOpen" | "onOpenChange"> {
-  newProjectForm: React.ReactNode;
+  newProjectFormContainer: React.ReactNode;
 }
 
 export function NewProjectModal({
-  newProjectForm,
+  newProjectFormContainer,
   ...props
 }: NewProjectModalProps) {
   const t = useTranslations("projects.NewProjectModal");
 
   return (
-    <FormBaseModal
-      data-test="new-project-modal"
-      formId="new-project-form"
-      title={t("title")}
-      submitButtonLabel={t("submitButtonLabel")}
-      form={newProjectForm}
-      {...props}
-    />
+    <FormModal {...props}>
+      <FormModalDialog>
+        <FormModalDialogHeader>{t("title")}</FormModalDialogHeader>
+        <DialogBody>{newProjectFormContainer}</DialogBody>
+        <DialogFooter>
+          <FormModalSubmitButton
+            form="new-project-form"
+            label={t("submitButtonLabel")}
+          />
+        </DialogFooter>
+      </FormModalDialog>
+    </FormModal>
   );
 }

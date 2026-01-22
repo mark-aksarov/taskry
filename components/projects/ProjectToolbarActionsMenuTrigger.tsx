@@ -7,25 +7,31 @@ import {
   UpdateProjectStatusesPayload,
 } from "@/lib/actions/types";
 
-import { useState } from "react";
+import {
+  ToolbarActionsMenuTrigger,
+  ToolbarActionsButtonMobile,
+  ToolbarActionsButtonDesktop,
+  ToolbarActionsMenuDialogHeader,
+} from "../common/Toolbar";
+
 import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
 import { ProjectStatus } from "@/generated/prisma/enums";
-import { ToolbarActionsMenuTrigger } from "../common/Toolbar";
-import { useTaskSelection } from "@/lib/hooks/useTaskSelection";
+import { DeleteProjectsModal } from "./DeleteProjectsModal";
+import { startTransition, useActionState, useState } from "react";
 import { Check, CircleEllipsis, Clock, Trash } from "lucide-react";
-import { BulkDeleteEntityModal } from "../common/BulkDeleteEntityModal";
-import { BulkUpdateProjectStatusModal } from "./BulkUpdateProjectStatusModal";
+import { useActionErrorToast } from "@/lib/hooks/useActionErrorToast";
+import { useProjectSelection } from "@/lib/hooks/useProjectSelection";
 
 interface ProjectToolbarActionsMenuTriggerProps {
   deleteAction: ActionFn<ActionState, DeleteProjectsPayload>;
   updateStatusAction: ActionFn<ActionState, UpdateProjectStatusesPayload>;
 }
 
-interface UpdateStatusModalState {
-  isOpen: boolean;
-  nextStatus: ProjectStatus;
-}
+const updateStatusInitialState: ActionState = {
+  status: null,
+  message: null,
+};
 
 export const ProjectToolbarActionsMenuTrigger = ({
   deleteAction,
@@ -33,32 +39,52 @@ export const ProjectToolbarActionsMenuTrigger = ({
 }: ProjectToolbarActionsMenuTriggerProps) => {
   const t = useTranslations("projects.ProjectToolbarActionsMenuTrigger");
 
-  // Updated: get selected IDs from the selection map
-  const { selectedIds: projectIds, clearSelectedIds } = useTaskSelection();
-
+  // State for showing/hiding the delete confirmation modal
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
-  const [updateModal, setUpdateModal] = useState<UpdateStatusModalState>({
-    isOpen: false,
-    nextStatus: ProjectStatus.pending,
-  });
+  // State and handlers for updating project status
+  const [updateStatusState, updateStatus, updateStatusPending] = useActionState(
+    updateStatusAction,
+    updateStatusInitialState,
+  );
 
+  // Show toast notification if updating status fails
+  useActionErrorToast(updateStatusState);
+
+  // Handle menu actions: open delete modal or update project status
   const handleAction = (key: Key) => {
     if (key === "delete") {
       setIsDeleteModalOpen(true);
     } else {
-      setUpdateModal({
-        isOpen: true,
-        nextStatus: key as ProjectStatus,
+      startTransition(() => {
+        updateStatus({
+          ids: projectIds,
+          nextStatus: key as ProjectStatus,
+        });
       });
     }
   };
+
+  // get selected project IDs from project selection context
+  const { selectedIds: projectIds, clearSelectedIds } = useProjectSelection();
+
+  const isDisabled = projectIds.length === 0;
 
   return (
     <>
       <ToolbarActionsMenuTrigger
         onAction={handleAction}
-        isDisabled={projectIds.length === 0}
+        renderDialogHeader={() => (
+          <ToolbarActionsMenuDialogHeader>
+            {t("actions")}
+          </ToolbarActionsMenuDialogHeader>
+        )}
+        renderButton={() => (
+          <>
+            <ToolbarActionsButtonMobile isDisabled={isDisabled} />
+            <ToolbarActionsButtonDesktop isDisabled={isDisabled} />
+          </>
+        )}
       >
         <Item textValue={t("delete")} key="delete">
           <Trash size={16} strokeWidth={1.5} absoluteStrokeWidth />
@@ -78,23 +104,13 @@ export const ProjectToolbarActionsMenuTrigger = ({
         </Item>
       </ToolbarActionsMenuTrigger>
 
-      <BulkDeleteEntityModal
-        entityIds={projectIds}
+      {/* Modal for confirming project deletion */}
+      <DeleteProjectsModal
+        projectIds={projectIds}
+        deleteAction={deleteAction}
         isOpen={isDeleteModalOpen}
         onOpenChange={setIsDeleteModalOpen}
-        translationNamespace="projects.BulkDeleteProjectModal"
-        deleteAction={deleteAction}
         onSuccess={clearSelectedIds}
-      />
-
-      <BulkUpdateProjectStatusModal
-        projectIds={projectIds}
-        nextStatus={updateModal.nextStatus}
-        isOpen={updateModal.isOpen}
-        onOpenChange={(open) =>
-          setUpdateModal((prev) => ({ ...prev, isOpen: open }))
-        }
-        updateStatusAction={updateStatusAction}
       />
     </>
   );

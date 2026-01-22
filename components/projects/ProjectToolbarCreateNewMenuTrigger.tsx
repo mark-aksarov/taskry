@@ -1,37 +1,36 @@
 "use client";
 
 import {
-  Button,
-  DialogCloseButton,
-  DialogHeader,
-  DialogHeading,
-} from "@/components/ui";
+  ToolbarCreateNewButton,
+  ToolbarCreateNewMenuTrigger,
+  ToolbarCreateNewMenuDialogHeader,
+} from "../common/Toolbar";
+
 import { useState } from "react";
+import { Key } from "react-aria";
+import { Item } from "react-stately";
 import { useTranslations } from "next-intl";
-import { Key, useOverlayTrigger } from "react-aria";
-import { Blocks, FolderClosed, Plus } from "lucide-react";
-import { Item, useOverlayTriggerState } from "react-stately";
+import { Blocks, FolderClosed } from "lucide-react";
+import { NewProjectCategoryModal } from "./NewProjectCategoryModal";
 import { NewProjectModal } from "@/components/projects/NewProjectModal";
-import { ResponsiveMenuTrigger } from "@/components/common/ResponsiveMenuTrigger";
-import { NewProjectCategoryModal } from "./NewProjectCategoryModal/NewProjectCategoryModal";
 
 interface ProjectToolbarCreateNewMenuTriggerProps {
-  newProjectForm: React.ReactNode;
+  newProjectFormContainer: React.ReactNode;
   newProjectCategoryForm: React.ReactNode;
 }
 
 export function ProjectToolbarCreateNewMenuTrigger({
-  newProjectForm,
+  newProjectFormContainer,
   newProjectCategoryForm,
 }: ProjectToolbarCreateNewMenuTriggerProps) {
-  const state = useOverlayTriggerState({});
-  const { triggerProps } = useOverlayTrigger({ type: "dialog" }, state);
+  const t = useTranslations("projects.ProjectToolbarCreateNewMenuTrigger");
+
+  // Separate modal state for creating a project and a project category
   const [openProjectModal, setOpenProjectModal] = useState(false);
   const [openProjectCategoryModal, setOpenProjectCategoryModal] =
     useState(false);
 
-  const t = useTranslations("projects.ProjectToolbarCreateNewMenuTrigger");
-
+  // Open the corresponding modal based on the selected menu item
   function handleAction(key: Key) {
     if (key === "project") {
       setOpenProjectModal(true);
@@ -42,24 +41,19 @@ export function ProjectToolbarCreateNewMenuTrigger({
 
   return (
     <>
-      <ResponsiveMenuTrigger
+      <ToolbarCreateNewMenuTrigger
         onAction={handleAction}
         renderDialogHeader={() => (
-          <DialogHeader>
-            <DialogHeading>{t("dialogHeading")}</DialogHeading>
-            <DialogCloseButton />
-          </DialogHeader>
+          <ToolbarCreateNewMenuDialogHeader>
+            {t("dialogHeading")}
+          </ToolbarCreateNewMenuDialogHeader>
         )}
-        overlayClassName="md:min-w-[200px]"
         renderButton={() => (
-          <Button
-            {...triggerProps}
+          <ToolbarCreateNewButton
             data-test="project-toolbar-create-new-menu-trigger"
             label={t("label")}
-            iconLeft={<Plus size={16} strokeWidth={1.5} absoluteStrokeWidth />}
           />
         )}
-        placement="bottom right"
       >
         <Item textValue={t("items.project")} key="project">
           <FolderClosed size={16} strokeWidth={1.5} absoluteStrokeWidth />
@@ -69,14 +63,16 @@ export function ProjectToolbarCreateNewMenuTrigger({
           <Blocks size={16} strokeWidth={1.5} absoluteStrokeWidth />
           {t("items.category")}
         </Item>
-      </ResponsiveMenuTrigger>
+      </ToolbarCreateNewMenuTrigger>
 
+      {/* Modal for creating a new project */}
       <NewProjectModal
-        newProjectForm={newProjectForm}
+        newProjectFormContainer={newProjectFormContainer}
         isOpen={openProjectModal}
         onOpenChange={setOpenProjectModal}
       />
 
+      {/* Modal for creating a new project category */}
       <NewProjectCategoryModal
         newProjectCategoryForm={newProjectCategoryForm}
         isOpen={openProjectCategoryModal}

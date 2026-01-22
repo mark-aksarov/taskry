@@ -1,10 +1,19 @@
 import { fn } from "storybook/internal/test";
 import { ProjectListItem } from "./ProjectListItem";
+import { ProjectFormBase } from "../ProjectFormBase";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { ProjectStatus } from "@/generated/prisma/enums";
+import { ProjectDetailModal } from "../ProjectDetailModal";
+import { UserDetailModal } from "@/components/users/UserDetailModal";
+import { ProjectDetailBottomSheet } from "../ProjectDetailBottomSheet";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { ProjectCommentsModalTrigger } from "../ProjectCommentsModalTrigger";
 import { ProjectItemActionMenuTrigger } from "../ProjectItemActionMenuTrigger";
+import { MockedCommentsContainer } from "@/components/comments/MockedCommentsContainer";
+import { Default as ProjectFormBaseStory } from "../ProjectFormBase/ProjectFormBase.stories";
+import { Default as ProjectDetailModalStory } from "../ProjectDetailModal/ProjectDetailModal.stories";
+import { Default as UserDetailModalStory } from "@/components/users/UserDetailModal/UserDetailModal.stories";
+import { Default as ProjectDetailBottomSheetStory } from "../ProjectDetailBottomSheet/ProjectDetailBottomSheet.stories";
 
 const meta = {
   title: "Components/projects/ProjectListItem",
@@ -18,7 +27,9 @@ const meta = {
         <ProjectCommentsModalTrigger
           projectId={1}
           commentsCount={10}
+          projectCommentsContainer={<MockedCommentsContainer />}
           sendCommentAction={fn()}
+          updateCommentAction={fn()}
         />
       }
       menuTrigger={
@@ -28,8 +39,18 @@ const meta = {
           projectStatus={args.status}
           deleteAction={fn()}
           updateStatusAction={fn()}
+          editProjectFormContainer={
+            <ProjectFormBase {...ProjectFormBaseStory.args} />
+          }
         />
       }
+      projectDetailModal={
+        <ProjectDetailModal {...ProjectDetailModalStory.args} />
+      }
+      projectDetailBottomSheet={
+        <ProjectDetailBottomSheet {...ProjectDetailBottomSheetStory.args} />
+      }
+      userDetailModal={<UserDetailModal {...UserDetailModalStory.args} />}
     />
   ),
 } satisfies Meta<typeof ProjectListItem>;

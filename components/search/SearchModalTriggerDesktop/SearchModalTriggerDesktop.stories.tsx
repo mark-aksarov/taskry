@@ -1,9 +1,8 @@
 import { SearchModal } from "../SearchModal";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { SearchEmptySection } from "../SearchEmptySection";
 import { SearchModalTriggerDesktop } from "./SearchModalTriggerDesktop";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { GlobalContainerProvider } from "@/components/layout/GlobalContainerContext";
+import { Default as SearchModalStory } from "../SearchModal/SearchModal.stories";
 
 const meta = {
   title: "Components/search/SearchModalTriggerDesktop",
@@ -16,23 +15,6 @@ export type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    modal: <SearchModal />,
+    modal: <SearchModal {...SearchModalStory.args} />,
   },
-} satisfies Story;
-
-export const WithEmptySection = {
-  args: {
-    modal: <SearchModal />,
-  },
-  decorators: [
-    (Story) => (
-      <GlobalContainerProvider
-        value={{
-          UsersSearchContainer: () => <SearchEmptySection />,
-        }}
-      >
-        <Story />
-      </GlobalContainerProvider>
-    ),
-  ],
 } satisfies Story;

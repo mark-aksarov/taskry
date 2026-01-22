@@ -1,13 +1,13 @@
 "use client";
 
 import { tv } from "tailwind-variants";
-import { focusRing, RACButton, RACDialogTrigger } from "@/components/ui";
+import { focusRing, RACButton } from "@/components/ui";
+import { DialogTrigger, DialogTriggerProps } from "react-aria-components";
 
-interface ItemBaseDetailModalTriggerProps {
+interface ItemBaseDetailModalTriggerProps extends DialogTriggerProps {
   modal: React.ReactNode;
   children: React.ReactNode;
   className?: string;
-  "data-test"?: string;
 }
 
 const styles = tv({
@@ -19,10 +19,10 @@ export function ItemBaseDetailModalTrigger({
   children,
   modal,
   className,
-  "data-test": dataTest,
+  ...props
 }: ItemBaseDetailModalTriggerProps) {
   return (
-    <RACDialogTrigger>
+    <DialogTrigger>
       <RACButton
         className={(renderProps) =>
           styles({
@@ -30,11 +30,11 @@ export function ItemBaseDetailModalTrigger({
             className,
           })
         }
-        data-test={dataTest}
+        {...props}
       >
         {children}
       </RACButton>
       {modal}
-    </RACDialogTrigger>
+    </DialogTrigger>
   );
 }

@@ -1,6 +1,6 @@
 import { Suspense } from "react";
-import { NewProjectForm } from "../NewProjectForm";
 import { NewProjectModal } from "./NewProjectModal";
+import { ProjectFormBase } from "../ProjectFormBase";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { Button, RACDialogTrigger } from "@/components/ui";
 import { ProjectFormBaseSkeleton } from "../ProjectFormBase";
@@ -29,12 +29,12 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    newProjectForm: <NewProjectForm {...ProjectFormBaseStory.args} />,
+    newProjectFormContainer: <ProjectFormBase {...ProjectFormBaseStory.args} />,
   },
 } satisfies Story;
 
 export const Skeleton = {
   args: {
-    newProjectForm: <ProjectFormBaseSkeleton />,
+    newProjectFormContainer: <ProjectFormBaseSkeleton />,
   },
 } satisfies Story;

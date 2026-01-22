@@ -1,6 +1,6 @@
 import { useTranslations } from "next-intl";
 import { ModalProps } from "@/components/ui";
-import { FormBaseModal } from "@/components/common/FormBaseModal";
+import { FormModal } from "@/components/common/FormModal";
 
 interface NewPositionModalProps
   extends Pick<ModalProps, "isOpen" | "onOpenChange"> {
@@ -14,7 +14,7 @@ export function NewPositionModal({
   const t = useTranslations("users.NewPositionModal");
 
   return (
-    <FormBaseModal
+    <FormModal
       formId="new-position-form"
       title={t("title")}
       submitButtonLabel={t("submitButtonLabel")}

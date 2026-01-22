@@ -15,17 +15,18 @@ import { Suspense } from "react";
 import { useTranslations } from "next-intl";
 import { UserDetailSkeleton } from "@/components/users/UserDetail";
 import { PersonHeaderSkeleton } from "@/components/common/PersonHeader";
-import { useGlobalContainer } from "@/components/layout/GlobalContainerContext";
 import { PersonDetailPresentation } from "@/components/common/PersonDetailPresentation";
 
-export function UserDetailModal({ userId }: { userId: string }) {
+interface UserDetailModalProps {
+  userId: string;
+  userDetailContainer: React.ReactNode;
+}
+
+export function UserDetailModal({
+  userId,
+  userDetailContainer,
+}: UserDetailModalProps) {
   const t = useTranslations("users.UserDetailModal");
-
-  const { UserDetailContainer } = useGlobalContainer();
-
-  if (!UserDetailContainer) {
-    throw new Error("UserDetailContainer is missing in GlobalContainerContext");
-  }
 
   return (
     <Modal isDismissable className="w-[600px]">
@@ -43,7 +44,7 @@ export function UserDetailModal({ userId }: { userId: string }) {
               />
             }
           >
-            <UserDetailContainer userId={userId} />
+            {userDetailContainer}
           </Suspense>
         </DialogBody>
         <DialogFooter>

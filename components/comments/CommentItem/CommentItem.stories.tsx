@@ -24,10 +24,12 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
+const content =
+  "I’ve been following this project for a while now, and I must say the recent updates are quite impressive. The new user interface feels smoother and much more intuitive compared to the earlier versions. However, I did notice a few small glitches when resizing the window on mobile devices. Would love to see this fixed in the next patch!";
+
 export const Default = {
   args: {
-    content:
-      "I’ve been following this project for a while now, and I must say the recent updates are quite impressive. The new user interface feels smoother and much more intuitive compared to the earlier versions. However, I did notice a few small glitches when resizing the window on mobile devices. Would love to see this fixed in the next patch!",
+    content,
     createdAt: new Date(2025, 10, 10, 14, 23, 0),
     sender: {
       id: "user_1",
@@ -38,6 +40,7 @@ export const Default = {
     menuTrigger: (
       <CommentItemActionMenuTrigger
         commentId={1}
+        commentContent={content}
         deleteAction={fn()}
         mutate={fn()}
       />

@@ -24,7 +24,9 @@ export function ProjectsPageEmpty({
         <EmptySectionDescription>{t("description")}</EmptySectionDescription>
         <EmptySectionButton
           createNewModal={
-            <NewProjectModal newProjectForm={newProjectFormContainer} />
+            <NewProjectModal
+              newProjectFormContainer={newProjectFormContainer}
+            />
           }
         >
           {t("addButtonLabel")}

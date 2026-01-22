@@ -3,6 +3,8 @@ import { EditProjectModal } from "./EditProjectModal";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { Button, RACDialogTrigger } from "@/components/ui";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { ProjectFormBase, ProjectFormBaseSkeleton } from "../ProjectFormBase";
+import { Default as ProjectFormBaseStory } from "../ProjectFormBase/ProjectFormBase.stories";
 
 const meta = {
   title: "Components/projects/EditProjectModal",
@@ -26,12 +28,15 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    projectId: 1,
+    editProjectFormContainer: (
+      <ProjectFormBase {...ProjectFormBaseStory.args} />
+    ),
   },
 } satisfies Story;
 
 export const Skeleton = {
   args: {
-    projectId: 1,
+    ...Default.args,
+    editProjectFormContainer: <ProjectFormBaseSkeleton />,
   },
 } satisfies Story;

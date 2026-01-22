@@ -16,13 +16,17 @@ import { ProjectsContainer } from "@/components/projects/ProjectsContainer";
 import { UserDetailContainer } from "@/components/users/UserDetailContainer";
 import { ProjectFormBaseSkeleton } from "@/components/projects/ProjectFormBase";
 import { updateProjectStatuses } from "@/lib/actions/project/updateProjectStatuses";
+import { ProjectDetailContainer } from "@/components/projects/ProjectDetailContainer";
 import { ProjectFiltersFormSkeleton } from "@/components/projects/ProjectFiltersForm";
+import { ProjectCategoryFormBase } from "@/components/projects/ProjectCategoryFormBase";
 import { NewProjectFormContainer } from "@/components/projects/NewProjectFormContainer";
 import { ProjectCommentsContainer } from "@/components/projects/ProjectCommentsContainer";
 import { EditProjectFormContainer } from "@/components/projects/EditProjectFormContainer";
 import { createProjectCategory } from "@/lib/actions/projectCategory/createProjectCategory";
 import { ProjectFiltersFormContainer } from "@/components/projects/ProjectFiltersFormContainer";
-import { ProjectDetailContainer } from "@/components/projects/ProjectDetailContainer";
+import { ProjectToolbarActionsMenuTrigger } from "@/components/projects/ProjectToolbarActionsMenuTrigger";
+import { ProjectToolbarFiltersModalTrigger } from "@/components/projects/ProjectToolbarFiltersModalTrigger";
+import { ProjectToolbarCreateNewMenuTrigger } from "@/components/projects/ProjectToolbarCreateNewMenuTrigger";
 
 const searchParamsSchema = z.object({
   page: z.coerce.number().int().positive().catch(1),
@@ -82,14 +86,6 @@ export default async function AppProjectsPage({
   return (
     <GlobalContainerProvider value={context}>
       <ProjectsPage
-        createProjectCategoryAction={createProjectCategory}
-        deleteProjectsAction={deleteProjects}
-        updateProjectStatusesAction={updateProjectStatuses}
-        projectFiltersFormContainer={
-          <Suspense fallback={<ProjectFiltersFormSkeleton />}>
-            <ProjectFiltersFormContainer filters={filters} />
-          </Suspense>
-        }
         projectsContainer={
           <ProjectsContainer
             page={page}
@@ -98,10 +94,32 @@ export default async function AppProjectsPage({
             filters={filters}
           />
         }
-        newProjectFormContainer={
-          <Suspense fallback={<ProjectFormBaseSkeleton />}>
-            <NewProjectFormContainer />
-          </Suspense>
+        projectToolbarCreateNewMenuTrigger={
+          <ProjectToolbarCreateNewMenuTrigger
+            newProjectFormContainer={
+              <Suspense fallback={<ProjectFormBaseSkeleton />}>
+                <NewProjectFormContainer />
+              </Suspense>
+            }
+            newProjectCategoryForm={
+              <ProjectCategoryFormBase formAction={createProjectCategory} />
+            }
+          />
+        }
+        projectToolbarFiltersModalTrigger={
+          <ProjectToolbarFiltersModalTrigger
+            filtersForm={
+              <Suspense fallback={<ProjectFiltersFormSkeleton />}>
+                <ProjectFiltersFormContainer filters={filters} />
+              </Suspense>
+            }
+          />
+        }
+        projectToolbarActionsMenuTrigger={
+          <ProjectToolbarActionsMenuTrigger
+            deleteAction={deleteProjects}
+            updateStatusAction={updateProjectStatuses}
+          />
         }
       />
     </GlobalContainerProvider>

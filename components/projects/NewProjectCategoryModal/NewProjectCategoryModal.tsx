@@ -1,6 +1,13 @@
+import { ModalProps, DialogBody, DialogFooter } from "@/components/ui";
+
+import {
+  FormModal,
+  FormModalDialog,
+  FormModalDialogHeader,
+  FormModalSubmitButton,
+} from "@/components/common/FormModal";
+
 import { useTranslations } from "next-intl";
-import { ModalProps } from "@/components/ui";
-import { FormBaseModal } from "@/components/common/FormBaseModal";
 
 interface NewProjectCategoryModalProps
   extends Pick<ModalProps, "isOpen" | "onOpenChange"> {
@@ -14,13 +21,17 @@ export function NewProjectCategoryModal({
   const t = useTranslations("projects.NewProjectCategoryModal");
 
   return (
-    <FormBaseModal
-      formId="new-project-category-form"
-      title={t("title")}
-      submitButtonLabel={t("submitButtonLabel")}
-      form={newProjectCategoryForm}
-      className="md:w-[350px]"
-      {...props}
-    />
+    <FormModal className="md:w-[350px]" {...props}>
+      <FormModalDialog>
+        <FormModalDialogHeader>{t("title")}</FormModalDialogHeader>
+        <DialogBody>{newProjectCategoryForm}</DialogBody>
+        <DialogFooter>
+          <FormModalSubmitButton
+            form="new-project-category-form"
+            label={t("submitButtonLabel")}
+          />
+        </DialogFooter>
+      </FormModalDialog>
+    </FormModal>
   );
 }

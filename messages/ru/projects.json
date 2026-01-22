@@ -183,7 +183,7 @@
     "cancelButton": "Отменить"
   },
 
-  "BulkDeleteProjectModal": {
+  "DeleteProjectsModal": {
     "heading": "Удалить проекты",
     "text": "Вы уверены, что хотите удалить <strong>{count} выбранных проектов </strong>? Все содержимое будет безвозвратно удалено. Связанные задачи также будут удалены.",
     "deleteButton": "Удалить",
@@ -220,7 +220,7 @@
 
   "ProjectDetailBottomSheet": {
     "dialogHeading": "Детали проекта",
-    "editButtonLabel": "Редактировать Проект"
+    "openInFullPage": "Открыть в полном окне"
   },
 
   "ProjectDetail": {

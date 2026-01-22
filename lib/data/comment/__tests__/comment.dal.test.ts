@@ -17,7 +17,7 @@ import {
 import prisma from "@/lib/prisma";
 import { resetDatabase } from "@/prisma/resetDatabase";
 import { AccessDeniedError } from "@/lib/data/utils/error";
-import { createComment, deleteComment } from "../comment.dal";
+import { createComment, deleteComment, updateComment } from "../comment.dal";
 import { verifySession } from "@/lib/data/utils/verifySession";
 import { PrismaClientKnownRequestError } from "@/generated/prisma/internal/prismaNamespace";
 
@@ -319,35 +319,63 @@ describe("Comment DAL", () => {
       );
     });
 
-    describe("Comment RBAC Creation", () => {
-      const testCases = [
-        { role: "owner", userId: "user-1", shouldSucceed: true },
-        { role: "user", userId: "user-2", shouldSucceed: true },
-        { role: "guest", userId: "user-3", shouldSucceed: false },
-      ];
-
-      testCases.forEach(({ role, userId, shouldSucceed }) => {
-        it(`should ${shouldSucceed ? "allow" : "deny"} comment creation for role: ${role}`, async () => {
+    describe("RBAC: create comment", () => {
+      describe("Owner", () => {
+        beforeEach(() => {
           (verifySession as any).mockResolvedValue({
-            user: { id: userId, workspaceId: 1 },
+            user: { id: "user-1", role: "owner", workspaceId: 1 },
           });
+        });
 
-          const commentInput = {
-            content: `Comment by ${role}`,
+        it("allows creating a comment", async () => {
+          const input = {
+            content: "Comment by owner",
             taskId: 1,
           };
 
-          if (shouldSucceed) {
-            const result = await createComment(commentInput);
+          const result = await createComment(input);
 
-            expect(result).toBeDefined();
-            expect(result.content).toBe(commentInput.content);
-            expect(result.senderId).toBe(userId);
-          } else {
-            await expect(createComment(commentInput)).rejects.toThrow(
-              AccessDeniedError,
-            );
-          }
+          expect(result).toBeDefined();
+          expect(result.content).toBe(input.content);
+          expect(result.senderId).toBe("user-1");
+        });
+      });
+
+      describe("User", () => {
+        beforeEach(() => {
+          (verifySession as any).mockResolvedValue({
+            user: { id: "user-2", role: "user", workspaceId: 1 },
+          });
+        });
+
+        it("allows creating a comment", async () => {
+          const input = {
+            content: "Comment by user",
+            taskId: 1,
+          };
+
+          const result = await createComment(input);
+
+          expect(result).toBeDefined();
+          expect(result.content).toBe(input.content);
+          expect(result.senderId).toBe("user-2");
+        });
+      });
+
+      describe("Guest", () => {
+        beforeEach(() => {
+          (verifySession as any).mockResolvedValue({
+            user: { id: "user-3", role: "guest", workspaceId: 1 },
+          });
+        });
+
+        it("denies creating a comment", async () => {
+          const input = {
+            content: "Comment by guest",
+            taskId: 1,
+          };
+
+          await expect(createComment(input)).rejects.toThrow(AccessDeniedError);
         });
       });
     });
@@ -387,8 +415,6 @@ describe("Comment DAL", () => {
           },
         ],
       });
-      await prisma.notification.deleteMany();
-      await prisma.attachment.deleteMany();
     });
 
     afterEach(async () => {
@@ -442,27 +468,205 @@ describe("Comment DAL", () => {
       );
     });
 
-    describe("Comment RBAC Deletion", () => {
-      const testCases = [
-        { role: "owner", userId: "user-1", shouldSucceed: true, commentId: 1 },
-        { role: "owner", userId: "user-1", shouldSucceed: true, commentId: 2 },
-        { role: "user", userId: "user-2", shouldSucceed: true, commentId: 2 },
-        { role: "user", userId: "user-2", shouldSucceed: false, commentId: 1 },
-        { role: "guest", userId: "user-3", shouldSucceed: false, commentId: 1 },
-      ];
-
-      testCases.forEach(({ role, userId, shouldSucceed, commentId }) => {
-        it(`should ${shouldSucceed ? "allow" : "deny"} comment deletion for role: ${role}`, async () => {
+    describe("RBAC: delete comment", () => {
+      describe("Owner", () => {
+        beforeEach(() => {
           (verifySession as any).mockResolvedValue({
-            user: { id: userId, role, workspaceId: 1 },
+            user: { id: "user-1", role: "owner", workspaceId: 1 },
           });
+        });
 
-          if (shouldSucceed) {
-            const result = await deleteComment(commentId);
-            expect(result.id).toBe(commentId);
-          } else {
-            await expect(deleteComment(commentId)).rejects.toThrow(Error);
-          }
+        it("allows deleting own comment", async () => {
+          const result = await deleteComment(1);
+          expect(result.id).toBe(1);
+        });
+
+        it("allows deleting another comment", async () => {
+          const result = await deleteComment(2);
+          expect(result.id).toBe(2);
+        });
+      });
+
+      describe("User", () => {
+        beforeEach(() => {
+          (verifySession as any).mockResolvedValue({
+            user: { id: "user-2", role: "user", workspaceId: 1 },
+          });
+        });
+
+        it("allows deleting own comment", async () => {
+          const result = await deleteComment(2);
+          expect(result.id).toBe(2);
+        });
+
+        it("denies deleting another comment", async () => {
+          await expect(deleteComment(1)).rejects.toThrow(
+            PrismaClientKnownRequestError,
+          );
+        });
+      });
+
+      describe("Guest", () => {
+        beforeEach(() => {
+          (verifySession as any).mockResolvedValue({
+            user: { id: "user-3", role: "guest", workspaceId: 1 },
+          });
+        });
+
+        it("denies deleting any comment", async () => {
+          await expect(deleteComment(1)).rejects.toThrow(AccessDeniedError);
+        });
+      });
+    });
+  });
+
+  describe("updateComment", () => {
+    beforeEach(async () => {
+      await prisma.comment.createMany({
+        data: [
+          {
+            id: 1,
+            content: "Comment 1",
+            taskId: 1,
+            senderId: "user-1",
+            workspaceId: 1,
+          },
+          {
+            id: 2,
+            content: "Comment 2",
+            projectId: 1,
+            senderId: "user-2",
+            workspaceId: 1,
+          },
+          {
+            id: 3,
+            content: "Comment 3",
+            taskId: 2,
+            senderId: "user-4",
+            workspaceId: 2,
+          },
+        ],
+      });
+    });
+
+    afterEach(async () => {
+      await prisma.comment.deleteMany();
+      await prisma.notification.deleteMany();
+    });
+
+    it("should successfully update a comment and send notifications", async () => {
+      const updatedComment = await updateComment({
+        id: 1,
+        content: "Updated Comment 1",
+      });
+
+      expect(updatedComment).toBeDefined();
+      expect(updatedComment.content).toBe("Updated Comment 1");
+
+      const notifications = await prisma.notification.findMany();
+      expect(notifications).toHaveLength(2);
+
+      const expectedNotificationData = {
+        actorId: "user-1",
+        taskId: 1,
+        taskTitle: "Task 1",
+        projectId: null,
+        projectTitle: null,
+        type: NotificationType.commentChanged,
+      };
+
+      expect(notifications).toEqual(
+        expect.arrayContaining([
+          expect.objectContaining({
+            ...expectedNotificationData,
+            recipientId: "user-2",
+          }),
+          expect.objectContaining({
+            ...expectedNotificationData,
+            recipientId: "user-3",
+          }),
+        ]),
+      );
+    });
+
+    it("should fail updating a comment from a different workspace", async () => {
+      await expect(
+        updateComment({ id: 3, content: "Attempted update" }),
+      ).rejects.toThrow(PrismaClientKnownRequestError);
+
+      await expect(
+        updateComment({ id: 3, content: "Attempted update" }),
+      ).rejects.toMatchObject({ code: "P2025" });
+    });
+
+    it("should fail updating a comment that does not exist", async () => {
+      await expect(
+        updateComment({ id: 999, content: "Nonexistent comment" }),
+      ).rejects.toThrow(PrismaClientKnownRequestError);
+
+      await expect(
+        updateComment({ id: 999, content: "Nonexistent comment" }),
+      ).rejects.toMatchObject({ code: "P2025" });
+    });
+
+    describe("RBAC: update comment", () => {
+      describe("Owner", () => {
+        beforeEach(() => {
+          (verifySession as any).mockResolvedValue({
+            user: { id: "user-1", role: "owner", workspaceId: 1 },
+          });
+        });
+
+        it("allows updating own comment", async () => {
+          const result = await updateComment({
+            id: 1,
+            content: "Owner updated",
+          });
+          expect(result.content).toBe("Owner updated");
+        });
+
+        it("allows updating another comment in same workspace", async () => {
+          const result = await updateComment({
+            id: 2,
+            content: "Owner edits other",
+          });
+          expect(result.content).toBe("Owner edits other");
+        });
+      });
+
+      describe("User", () => {
+        beforeEach(() => {
+          (verifySession as any).mockResolvedValue({
+            user: { id: "user-2", role: "user", workspaceId: 1 },
+          });
+        });
+
+        it("allows updating own comment", async () => {
+          const result = await updateComment({
+            id: 2,
+            content: "User updated own",
+          });
+          expect(result.content).toBe("User updated own");
+        });
+
+        it("denies updating another user's comment", async () => {
+          await expect(
+            updateComment({ id: 1, content: "User tries to update" }),
+          ).rejects.toThrow(PrismaClientKnownRequestError);
+        });
+      });
+
+      describe("Guest", () => {
+        beforeEach(() => {
+          (verifySession as any).mockResolvedValue({
+            user: { id: "user-3", role: "guest", workspaceId: 1 },
+          });
+        });
+
+        it("denies updating any comment", async () => {
+          await expect(
+            updateComment({ id: 1, content: "Guest tries to update" }),
+          ).rejects.toThrow(AccessDeniedError);
         });
       });
     });

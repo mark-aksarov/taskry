@@ -1,2 +1,5 @@
 export { CommentsModal } from "./CommentsModal";
-export { CommentsModalForm } from "./CommentsModalForm";
+export { CommentsModalDialog } from "./CommentsModalDialog";
+export { CommentsModalDialogHeader } from "./CommentsModalDialogHeader";
+export { CommentsModalDialogBody } from "./CommentsModalDialogBody";
+export { CommentsModalDialogFooter } from "./CommentsModalDialogFooter";

@@ -3,9 +3,13 @@ import { AppHeader } from "./AppHeader";
 import { usePathname } from "next/navigation";
 import { AppNavigation } from "../AppNavigation";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { SearchModal } from "@/components/search/SearchModal";
 import { AppBottomSheetTrigger } from "../AppBottomSheetTrigger";
 import { AppSidebarSheetTrigger } from "../AppSidebarSheetTrigger";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { NotificationModalContent } from "@/components/notifications/NotificationModalContent";
+import { Default as SearchModalStory } from "@/components/search/SearchModal/SearchModal.stories";
+import { Default as NotificationModalContentStory } from "@/components/notifications/NotificationModalContent/NotificationModalContent.stories";
 
 const meta = {
   title: "Components/layout/AppHeader",
@@ -30,5 +34,9 @@ export const Default = {
     appSidebarSheetTrigger: (
       <AppSidebarSheetTrigger appNavigation={<AppNavigation />} />
     ),
+    notificationModalContentContainer: (
+      <NotificationModalContent {...NotificationModalContentStory.args} />
+    ),
+    searchModal: <SearchModal {...SearchModalStory.args} />,
   },
 } satisfies Story;

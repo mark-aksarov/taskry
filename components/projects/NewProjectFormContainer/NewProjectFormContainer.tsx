@@ -4,7 +4,7 @@ import {
   ProjectFormBaseCustomerSelect,
 } from "../ProjectFormBase";
 
-import { NewProjectForm } from "../NewProjectForm";
+import { ProjectFormBase } from "../ProjectFormBase";
 import { createProject } from "@/lib/actions/project/createProject";
 import { getCustomerSummaries } from "@/lib/data/customer/customer.service";
 import { getProjectCategorySummaries } from "@/lib/data/projectCategory/projectCategory.service";
@@ -14,7 +14,8 @@ export async function NewProjectFormContainer() {
   const customers = await getCustomerSummaries();
 
   return (
-    <NewProjectForm
+    <ProjectFormBase
+      id="new-project-form"
       projectCategorySelect={
         <ProjectFormBaseCategorySelect categories={categories} />
       }

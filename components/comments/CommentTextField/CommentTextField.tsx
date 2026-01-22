@@ -6,10 +6,10 @@ import {
   TextField as RACTextField,
 } from "react-aria-components";
 
-import { useState } from "react";
 import { tv } from "tailwind-variants";
 import { useTranslations } from "next-intl";
 import { fieldStyles, focusRing } from "@/components/ui";
+import { useCommentFormContext } from "../CommentFormContext";
 import { fieldInputStyles as baseInputStyles } from "@/components/ui";
 import { CommentTextFieldSendButton } from "./CommentTextFieldSendButton";
 import { CommentTextFieldFileTrigger } from "./CommentTextFieldFileTrigger";
@@ -41,7 +41,8 @@ export const CommentTextField = ({
   textAreaClassName,
   ...props
 }: CommentTextFieldProps) => {
-  const [commentContent, setCommentContent] = useState("");
+  const { commentContent, setCommentContent } = useCommentFormContext();
+
   const t = useTranslations("comments.CommentTextField");
 
   const buttonClasses = "absolute top-[1.75rem] -translate-y-1/2 rounded-full";

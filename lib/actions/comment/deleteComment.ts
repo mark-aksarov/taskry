@@ -27,7 +27,9 @@ export async function deleteComment(
     }
 
     await deleteCommentQuery(parsed.data.id);
+
     revalidatePath("/projects");
+    revalidatePath("/tasks");
 
     return actionSuccess();
   });

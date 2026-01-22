@@ -183,7 +183,7 @@
     "cancelButton": "Cancel"
   },
 
-  "BulkDeleteProjectModal": {
+  "DeleteProjectsModal": {
     "heading": "Delete Projects",
     "text": "Are you sure you want to delete <strong>{count} projects</strong>? All contents will be permanently removed, and all related tasks will also be deleted.",
     "deleteButton": "Delete",
@@ -220,7 +220,7 @@
 
   "ProjectDetailBottomSheet": {
     "dialogHeading": "Project Details",
-    "editButtonLabel": "Edit Project"
+    "openInFullPage": "Open in Full Page"
   },
 
   "ProjectDetail": {

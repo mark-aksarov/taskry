@@ -3,7 +3,7 @@
 import { useSWRConfig } from "swr";
 import { Form } from "react-aria-components";
 import { CommentTextField } from "../CommentTextField";
-import { CommentFormAttachments } from "../CommentForm";
+import { CommentFormAttachments } from ".";
 import { ActionFn, ActionState } from "@/lib/actions/types";
 import { startTransition, useActionState, useEffect, useState } from "react";
 
@@ -12,17 +12,17 @@ const initialState: ActionState = {
   message: null,
 };
 
-interface CommentsModalFormProps {
+interface CommentFormProps {
   sendCommentAction: ActionFn<ActionState, FormData>;
   mutateUrl: string;
-  entityIdInputProps: { name: string; value: number };
+  hiddenInput?: React.ReactNode;
 }
 
-export function CommentsModalForm({
+export function CommentForm({
   sendCommentAction,
   mutateUrl,
-  entityIdInputProps,
-}: CommentsModalFormProps) {
+  hiddenInput,
+}: CommentFormProps) {
   let [files, setFiles] = useState<FileList | null>(null);
 
   const { mutate } = useSWRConfig();
@@ -57,7 +57,7 @@ export function CommentsModalForm({
         onFilesSelect={setFiles}
         textAreaClassName="bg-white dark:bg-gray-800 outline-hidden"
       />
-      <input type="hidden" {...entityIdInputProps} />
+      {hiddenInput}
     </Form>
   );
 }

@@ -1,6 +1,6 @@
 import { ModalProps } from "@/components/ui";
 import { useTranslations } from "next-intl";
-import { FormBaseModal } from "@/components/common/FormBaseModal";
+import { FormModal } from "@/components/common/FormModal";
 
 interface NewCustomerModalProps
   extends Pick<ModalProps, "isOpen" | "onOpenChange"> {
@@ -14,7 +14,7 @@ export function NewCustomerModal({
   const t = useTranslations("customers.NewCustomerModal");
 
   return (
-    <FormBaseModal
+    <FormModal
       data-test="new-customer-modal"
       formId="new-customer-form"
       title={t("title")}

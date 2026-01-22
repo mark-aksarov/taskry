@@ -1,6 +1,6 @@
 import { useTranslations } from "next-intl";
 import { ModalProps } from "@/components/ui";
-import { FormBaseModal } from "@/components/common/FormBaseModal";
+import { FormModal } from "@/components/common/FormModal";
 
 interface NewTaskModalProps
   extends Pick<ModalProps, "isOpen" | "onOpenChange"> {
@@ -11,7 +11,7 @@ export function NewTaskModal({ newTaskForm, ...props }: NewTaskModalProps) {
   const t = useTranslations("tasks.NewTaskModal");
 
   return (
-    <FormBaseModal
+    <FormModal
       data-test="new-task-modal"
       formId="new-task-form"
       title={t("title")}

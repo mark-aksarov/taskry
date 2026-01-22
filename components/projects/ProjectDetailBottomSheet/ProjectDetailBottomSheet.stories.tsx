@@ -6,9 +6,10 @@ import { Button } from "@/components/ui";
 import { useOverlayTrigger } from "react-aria";
 import { useOverlayTriggerState } from "react-stately";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { ProjectDetailSkeleton } from "../ProjectDetail";
+import { OverlayTriggerStateContext } from "react-aria-components";
+import { ProjectDetail, ProjectDetailSkeleton } from "../ProjectDetail";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { GlobalContainerProvider } from "@/components/layout/GlobalContainerContext";
+import { Default as ProjectDetailStory } from "../ProjectDetail/ProjectDetail.stories";
 
 const meta = {
   title: "components/projects/ProjectDetailBottomSheet",
@@ -16,14 +17,7 @@ const meta = {
   tags: ["autodocs"],
   decorators: [withThemedBackground],
   args: {
-    projectId: 1,
-    state: {
-      isOpen: true,
-      setOpen: () => {},
-      open: () => {},
-      close: () => {},
-      toggle: () => {},
-    },
+    projectDetailContainer: <ProjectDetail {...ProjectDetailStory.args} />,
   },
   globals: {
     viewport: { value: "mobile2", isRotated: false },
@@ -41,25 +35,23 @@ const ProjectDetailBottomSheetTemplate = ({
   const { triggerProps } = useOverlayTrigger({ type: "dialog" }, state);
 
   return (
-    <>
+    <OverlayTriggerStateContext.Provider value={state}>
       <Button {...triggerProps} label="Open Project Detail" />
-      <ProjectDetailBottomSheet {...props} state={state} />
-    </>
+      <ProjectDetailBottomSheet {...props} />
+    </OverlayTriggerStateContext.Provider>
   );
 };
 
-export const Default = {} satisfies Story;
+export const Default = {
+  args: {
+    projectId: 1,
+    projectDetailContainer: <ProjectDetail {...ProjectDetailStory.args} />,
+  },
+} satisfies Story;
 
 export const WithSkeletonContent = {
-  decorators: [
-    (Story) => (
-      <GlobalContainerProvider
-        value={{
-          ProjectDetailContainer: () => <ProjectDetailSkeleton />,
-        }}
-      >
-        <Story />
-      </GlobalContainerProvider>
-    ),
-  ],
+  args: {
+    projectId: 1,
+    projectDetailContainer: <ProjectDetailSkeleton />,
+  },
 } satisfies Story;

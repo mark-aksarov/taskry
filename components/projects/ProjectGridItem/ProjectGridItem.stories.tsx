@@ -1,9 +1,16 @@
 import { fn } from "storybook/test";
 import { ProjectGridItem } from "./ProjectGridItem";
+import { ProjectFormBase } from "../ProjectFormBase";
 import type { Meta, StoryObj } from "@storybook/react";
+import { ProjectDetailModal } from "../ProjectDetailModal";
+import { ProjectDetailBottomSheet } from "../ProjectDetailBottomSheet";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { ProjectCommentsModalTrigger } from "../ProjectCommentsModalTrigger";
 import { ProjectItemActionMenuTrigger } from "../ProjectItemActionMenuTrigger";
+import { MockedCommentsContainer } from "@/components/comments/MockedCommentsContainer";
+import { Default as ProjectFormBaseStory } from "../ProjectFormBase/ProjectFormBase.stories";
+import { Default as ProjectDetailModalStory } from "../ProjectDetailModal/ProjectDetailModal.stories";
+import { Default as ProjectDetailBottomSheetStory } from "../ProjectDetailBottomSheet/ProjectDetailBottomSheet.stories";
 
 const meta = {
   title: "Components/projects/ProjectGridItem",
@@ -25,7 +32,9 @@ const meta = {
         <ProjectCommentsModalTrigger
           projectId={1}
           commentsCount={10}
+          projectCommentsContainer={<MockedCommentsContainer />}
           sendCommentAction={fn()}
+          updateCommentAction={fn()}
         />
       }
       menuTrigger={
@@ -35,7 +44,17 @@ const meta = {
           projectStatus={args.status}
           deleteAction={fn()}
           updateStatusAction={fn()}
+          className="-mr-2"
+          editProjectFormContainer={
+            <ProjectFormBase {...ProjectFormBaseStory.args} />
+          }
         />
+      }
+      projectDetailModal={
+        <ProjectDetailModal {...ProjectDetailModalStory.args} />
+      }
+      projectDetailBottomSheet={
+        <ProjectDetailBottomSheet {...ProjectDetailBottomSheetStory.args} />
       }
     />
   ),

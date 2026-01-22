@@ -4,7 +4,7 @@ import { Plus } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/Button";
 import { DialogTrigger } from "react-aria-components";
-import { FormBaseModal } from "../common/FormBaseModal";
+import { FormModal } from "../common/FormModal";
 
 interface NewTaskModalTriggerProps {
   newTaskForm: React.ReactNode;
@@ -19,7 +19,7 @@ export function NewTaskModalTrigger({ newTaskForm }: NewTaskModalTriggerProps) {
         label={t("label")}
         iconLeft={<Plus size={16} strokeWidth={1.5} absoluteStrokeWidth />}
       />
-      <FormBaseModal
+      <FormModal
         formId="new-task-form"
         title={t("title")}
         form={newTaskForm}
