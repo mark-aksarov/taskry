@@ -2,14 +2,12 @@ import {
   ModalProps,
   DialogBody,
   DialogFooter,
-  DialogHeading,
-  DialogCloseButton,
+  DialogHeader,
 } from "@/components/ui";
 
 import {
   FormModal,
   FormModalDialog,
-  FormModalDialogHeader,
   FormModalSubmitButton,
 } from "@/components/common/FormModal";
 
@@ -29,7 +27,7 @@ export function NewProjectModal({
   return (
     <FormModal {...props}>
       <FormModalDialog>
-        <FormModalDialogHeader>{t("title")}</FormModalDialogHeader>
+        <DialogHeader>{t("title")}</DialogHeader>
         <DialogBody>{newProjectFormContainer}</DialogBody>
         <DialogFooter>
           <FormModalSubmitButton

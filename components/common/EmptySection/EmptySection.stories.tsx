@@ -32,7 +32,7 @@ export const Default = {
         <EmptySectionButton
           createNewModal={
             <NewTaskModal
-              newTaskForm={<NewTaskForm {...TaskFormBaseStory.args} />}
+              newTaskFormContainer={<NewTaskForm {...TaskFormBaseStory.args} />}
             />
           }
         >

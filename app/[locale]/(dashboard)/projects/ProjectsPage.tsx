@@ -37,7 +37,6 @@ export function ProjectsPage({
               <ProjectToolbarSortingMenuTrigger />
               {projectToolbarFiltersModalTrigger}
               {projectToolbarActionsMenuTrigger}
-
               <ViewModeToggleButtonGroup className="ml-auto" />
               {projectToolbarCreateNewMenuTrigger}
             </ToolbarDesktop>

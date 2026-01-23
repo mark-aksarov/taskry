@@ -1,9 +1,10 @@
+"use client";
+
 import {
   CommentsModal,
   CommentsModalDialog,
   CommentsModalDialogBody,
   CommentsModalDialogFooter,
-  CommentsModalDialogHeader,
 } from "@/components/comments/CommentsModal";
 
 import {
@@ -12,6 +13,7 @@ import {
 } from "@/components/comments/CommentFormContext";
 
 import { useTranslations } from "next-intl";
+import { DialogHeader } from "@/components/ui";
 import { DialogTrigger } from "react-aria-components";
 import { ActionFn, ActionState } from "@/lib/actions/types";
 import { CommentForm } from "@/components/comments/CommentForm";
@@ -55,7 +57,7 @@ function ProjectCommentsModalTriggerInner({
 
       <CommentsModal>
         <CommentsModalDialog>
-          <CommentsModalDialogHeader>{t("title")}</CommentsModalDialogHeader>
+          <DialogHeader>{t("title")}</DialogHeader>
           <CommentsModalDialogBody>
             {projectCommentsContainer}
           </CommentsModalDialogBody>

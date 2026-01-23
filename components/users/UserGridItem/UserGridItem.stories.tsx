@@ -1,8 +1,12 @@
 import { fn } from "storybook/test";
 import { UserGridItem } from "./UserGridItem";
+import { UserDetailModal } from "../UserDetailModal";
 import type { Meta, StoryObj } from "@storybook/react";
+import { UserDetailBottomSheet } from "../UserDetailBottomSheet";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { UserItemActionMenuTrigger } from "../UserItemActionMenuTrigger";
+import { Default as UserDetailModalStory } from "../UserDetailModal/UserDetailModal.stories";
+import { Default as UserDetailBottomSheetStory } from "../UserDetailBottomSheet/UserDetailBottomSheet.stories";
 
 const meta = {
   title: "Components/users/UserGridItem",
@@ -16,19 +20,26 @@ const meta = {
     ),
     withThemedBackground,
   ],
-  render: (args) => <UserGridItem {...args} menuTrigger={renderMenu(args)} />,
+  render: (args) => (
+    <UserGridItem
+      {...args}
+      menuTrigger={
+        <UserItemActionMenuTrigger
+          userId={args.id}
+          userFullName={args.fullName}
+          deleteAction={fn()}
+        />
+      }
+      userDetailModal={<UserDetailModal {...UserDetailModalStory.args} />}
+      userDetailBottomSheet={
+        <UserDetailBottomSheet {...UserDetailBottomSheetStory.args} />
+      }
+    />
+  ),
 } satisfies Meta<typeof UserGridItem>;
 
 export default meta;
 type Story = StoryObj<typeof UserGridItem>;
-
-const renderMenu = (args: any) => (
-  <UserItemActionMenuTrigger
-    userId={args.id}
-    userFullName={args.fullName}
-    deleteAction={fn()}
-  />
-);
 
 export const Default = {
   args: {

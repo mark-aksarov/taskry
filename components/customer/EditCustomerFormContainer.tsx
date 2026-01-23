@@ -2,7 +2,10 @@
 
 import useSWR from "swr";
 import { EditCustomerForm } from "./EditCustomerForm";
-import { CustomerFormBaseCompanySelect } from "./CustomerFormBase";
+import {
+  CustomerFormBase,
+  CustomerFormBaseCompanySelect,
+} from "./CustomerFormBase";
 import { CompanySummaryDTO } from "@/lib/data/company/company.dto";
 import { updateCustomer } from "@/lib/actions/customer/updateCustomer";
 import { CustomerFormDataDTO } from "@/lib/data/customer/customer.dto";
@@ -28,7 +31,8 @@ export function EditCustomerFormContainer({
   }
 
   return (
-    <EditCustomerForm
+    <CustomerFormBase
+      formId="edit-customer-form"
       customerId={customerId}
       fullNameDefaultValue={customer.fullName}
       bioDefaultValue={customer.bio ?? ""}

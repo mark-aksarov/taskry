@@ -1,9 +1,13 @@
-import { ModalProps, DialogBody, DialogFooter } from "@/components/ui";
+import {
+  ModalProps,
+  DialogBody,
+  DialogFooter,
+  DialogHeader,
+} from "@/components/ui";
 
 import {
   FormModal,
   FormModalDialog,
-  FormModalDialogHeader,
   FormModalSubmitButton,
 } from "@/components/common/FormModal";
 
@@ -23,7 +27,7 @@ export function NewProjectCategoryModal({
   return (
     <FormModal className="md:w-[350px]" {...props}>
       <FormModalDialog>
-        <FormModalDialogHeader>{t("title")}</FormModalDialogHeader>
+        <DialogHeader>{t("title")}</DialogHeader>
         <DialogBody>{newProjectCategoryForm}</DialogBody>
         <DialogFooter>
           <FormModalSubmitButton

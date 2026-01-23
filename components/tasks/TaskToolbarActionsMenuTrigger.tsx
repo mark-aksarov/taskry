@@ -7,28 +7,27 @@ import {
   UpdateTaskStatusesPayload,
 } from "@/lib/actions/types";
 
+import {
+  ToolbarActionsMenuTrigger,
+  ToolbarActionsButtonMobile,
+  ToolbarActionsButtonDesktop,
+} from "../common/Toolbar";
+
+import { DialogHeader } from "../ui";
 import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
+import { DeleteTasksModal } from "./DeleteTasksModal";
 import { TaskStatus } from "@/generated/prisma/enums";
 import { GuestModeModal } from "../common/GuestModeModal";
-import { ToolbarActionsMenuTrigger } from "../common/Toolbar";
+import { useHasGuestMode } from "@/lib/hooks/useHasGuestMode";
 import { useTaskSelection } from "@/lib/hooks/useTaskSelection";
 import { startTransition, useActionState, useState } from "react";
 import { Check, CircleEllipsis, Clock, Trash } from "lucide-react";
 import { useActionErrorToast } from "@/lib/hooks/useActionErrorToast";
-import { BulkDeleteEntityModal } from "../common/BulkDeleteEntityModal";
-import { UpdateTaskStatusRestrictedModal } from "./UpdateTaskStatusRestrictedModal";
-import { taskStatuses } from "@/lib/data/utils/statusUtils";
 
 interface TaskToolbarActionsMenuTriggerProps {
-  guestMode?: boolean;
   deleteAction: ActionFn<ActionState, DeleteTasksPayload>;
   updateStatusAction: ActionFn<ActionState, UpdateTaskStatusesPayload>;
-}
-
-interface UpdateStatusModalState {
-  isOpen: boolean;
-  nextStatus: TaskStatus;
 }
 
 const initialState: ActionState = {
@@ -37,34 +36,25 @@ const initialState: ActionState = {
 };
 
 export const TaskToolbarActionsMenuTrigger = ({
-  guestMode,
   deleteAction,
   updateStatusAction,
 }: TaskToolbarActionsMenuTriggerProps) => {
   const t = useTranslations("tasks.TaskToolbarActionsMenuTrigger");
-  const {
-    selectedIds: selectedTaskIds,
-    clearSelectedIds,
-    selectedItems,
-  } = useTaskSelection();
 
-  // Guest mode modal
+  // Guest mode modal state
+  const guestMode = useHasGuestMode();
   const [isGuestModeModalOpen, setIsGuestModeModalOpen] = useState(false);
 
-  // Delete
+  // Delete confirmation modal state
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
-  // Update status modal
-  const [updateModal, setUpdateModal] = useState<UpdateStatusModalState>({
-    isOpen: false,
-    nextStatus: "completed",
-  });
-
+  // State and handlers for updating task status
   const [updateTaskStatusState, updateTaskStatusAction] = useActionState(
     updateStatusAction,
     initialState,
   );
 
+  // Menu actions: show guest modal, show delete modal, update task status
   const handleAction = (key: Key) => {
     if (guestMode) {
       setIsGuestModeModalOpen(true);
@@ -79,22 +69,38 @@ export const TaskToolbarActionsMenuTrigger = ({
     const nextStatus = key as TaskStatus;
 
     startTransition(() => {
-      updateTaskStatusAction({ ids: selectedTaskIds, nextStatus });
+      updateTaskStatusAction({ ids: taskIds, nextStatus });
     });
   };
 
+  // Show toast if updating status fails
   useActionErrorToast(updateTaskStatusState);
 
-  const disabledKeys = taskStatuses.filter((status) =>
+  const {
+    selectedIds: taskIds,
+    clearSelectedIds,
+    selectedItems,
+  } = useTaskSelection();
+
+  // disable actions when selected tasks have the same status
+  const disabledKeys = Object.values(TaskStatus).filter((status) =>
     selectedItems.every((task) => task.status === status),
   );
+
+  const isDisabled = taskIds.length === 0;
 
   return (
     <>
       <ToolbarActionsMenuTrigger
         onAction={handleAction}
-        isDisabled={selectedTaskIds.length === 0}
         disabledKeys={disabledKeys}
+        renderDialogHeader={() => <DialogHeader>{t("actions")}</DialogHeader>}
+        renderButton={() => (
+          <>
+            <ToolbarActionsButtonMobile isDisabled={isDisabled} />
+            <ToolbarActionsButtonDesktop isDisabled={isDisabled} />
+          </>
+        )}
       >
         <Item textValue={t("delete")} key="delete">
           <Trash size={16} strokeWidth={1.5} absoluteStrokeWidth />
@@ -114,25 +120,16 @@ export const TaskToolbarActionsMenuTrigger = ({
         </Item>
       </ToolbarActionsMenuTrigger>
 
-      <BulkDeleteEntityModal
+      {/* Modal for confirming task deletion */}
+      <DeleteTasksModal
+        taskIds={taskIds}
+        deleteAction={deleteAction}
         isOpen={isDeleteModalOpen}
         onOpenChange={setIsDeleteModalOpen}
-        entityIds={selectedTaskIds}
-        deleteAction={deleteAction}
-        translationNamespace="tasks.BulkDeleteTaskModal"
         onSuccess={clearSelectedIds}
       />
 
-      <UpdateTaskStatusRestrictedModal
-        isOpen={updateModal.isOpen}
-        nextStatus={updateModal.nextStatus}
-        onOpenChange={(open) =>
-          setUpdateModal((prev) => ({ ...prev, isOpen: open }))
-        }
-        taskIds={selectedTaskIds}
-        updateStatusAction={updateStatusAction}
-      />
-
+      {/* Guest mode modal */}
       <GuestModeModal
         isOpen={isGuestModeModalOpen}
         onOpenChange={setIsGuestModeModalOpen}

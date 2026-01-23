@@ -13,18 +13,14 @@ import {
 } from "@/components/common/ItemBase";
 
 import Image from "next/image";
-import { TaskDetailModal } from "../TaskDetailModal";
 import { TaskStatus } from "@/generated/prisma/enums";
 import { TaskListItemLayout } from "./TaskListItemLayout";
 import { useFormatter, useTranslations } from "next-intl";
 import { UnknownUser } from "@/components/common/UnknownUser";
 import { TaskListItemCheckbox } from "./TaskListItemCheckbox";
-import { TaskDetailBottomSheet } from "../TaskDetailBottomSheet";
 import { ImageContainer } from "@/components/common/ImageContainer";
-import { UserDetailModal } from "@/components/users/UserDetailModal";
 import { getTaskStatusBadgeColor } from "../getTaskStatusBadgeColor";
 import { useSyncSelectionTaskItem } from "@/lib/hooks/useTaskSelection";
-import { ProjectDetailModal } from "@/components/projects/ProjectDetailModal";
 
 export interface TaskListItemProps {
   id: number;
@@ -45,8 +41,12 @@ export interface TaskListItemProps {
   };
   status: TaskStatus;
   showCheckbox?: boolean;
-  commentModalTrigger?: React.ReactNode;
-  menuTrigger?: React.ReactNode;
+  commentModalTrigger: React.ReactNode;
+  menuTrigger: React.ReactNode;
+  taskDetailModal: React.ReactNode;
+  taskDetailBottomSheet: React.ReactNode;
+  userDetailModal: React.ReactNode;
+  projectDetailModal: React.ReactNode;
 }
 
 export const TaskListItem = ({
@@ -60,6 +60,10 @@ export const TaskListItem = ({
   showCheckbox,
   commentModalTrigger,
   menuTrigger,
+  taskDetailModal,
+  taskDetailBottomSheet,
+  userDetailModal,
+  projectDetailModal,
 }: TaskListItemProps) => {
   const t = useTranslations("tasks");
 
@@ -92,16 +96,14 @@ export const TaskListItem = ({
         <ListItemInfo>
           <ListItemTitle data-test="task-list-item-title">
             <ItemBaseDetailModalTrigger
-              modal={<TaskDetailModal taskId={id} />}
+              modal={taskDetailModal}
               className="truncate"
             >
               {title}
             </ItemBaseDetailModalTrigger>
 
             <ItemBaseDetailBottomSheetTrigger
-              renderBottomSheet={(state) => (
-                <TaskDetailBottomSheet taskId={id} state={state} />
-              )}
+              bottomSheet={taskDetailBottomSheet}
               className="truncate"
             >
               {title}
@@ -115,7 +117,7 @@ export const TaskListItem = ({
         <>
           {assignee ? (
             <ItemBaseDetailModalTrigger
-              modal={<UserDetailModal userId={assignee.id} />}
+              modal={userDetailModal}
               className="@max-2xl:hidden"
             >
               {assigneeImg}
@@ -128,7 +130,7 @@ export const TaskListItem = ({
             <ListItemTitle data-test="task-list-item-user-title">
               {assignee ? (
                 <ItemBaseDetailModalTrigger
-                  modal={<UserDetailModal userId={assignee.id} />}
+                  modal={userDetailModal}
                   className="truncate"
                 >
                   {assignee.fullName}
@@ -152,7 +154,7 @@ export const TaskListItem = ({
         <ListItemInfo className="@max-4xl:hidden">
           <ListItemTitle data-test="task-list-item-project-title">
             <ItemBaseDetailModalTrigger
-              modal={<ProjectDetailModal projectId={project.id} />}
+              modal={projectDetailModal}
               className="truncate"
             >
               {project.title}

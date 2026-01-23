@@ -177,7 +177,7 @@
 
   "UserToolbarCreateNewMenuTrigger": {
     "dialogHeading": "Create New",
-    "triggerLabel": "Create New",
+    "label": "Create New",
 
     "items": {
       "user": "User",

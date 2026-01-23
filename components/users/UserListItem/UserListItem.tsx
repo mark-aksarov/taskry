@@ -20,9 +20,7 @@ import {
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { Checkbox, Link } from "@/components/ui";
-import { UserDetailModal } from "../UserDetailModal";
 import { UnknownUser } from "@/components/common/UnknownUser";
-import { UserDetailBottomSheet } from "../UserDetailBottomSheet";
 import { ImageContainer } from "@/components/common/ImageContainer";
 
 export interface UserListItemProps {
@@ -36,6 +34,8 @@ export interface UserListItemProps {
     name: string;
   };
   menuTrigger: React.ReactNode;
+  userDetailModal: React.ReactNode;
+  userDetailBottomSheet: React.ReactNode;
 }
 
 export function UserListItem({
@@ -47,6 +47,8 @@ export function UserListItem({
   publicLink,
   position,
   menuTrigger,
+  userDetailModal,
+  userDetailBottomSheet,
 }: UserListItemProps) {
   const t = useTranslations("users.UserListItem");
 
@@ -70,17 +72,12 @@ export function UserListItem({
       />
 
       <>
-        <ItemBaseDetailModalTrigger
-          modal={<UserDetailModal userId={id} />}
-          className="h-9 w-9"
-        >
+        <ItemBaseDetailModalTrigger modal={userDetailModal} className="h-9 w-9">
           {userImg}
         </ItemBaseDetailModalTrigger>
 
         <ItemBaseDetailBottomSheetTrigger
-          renderBottomSheet={(state) => (
-            <UserDetailBottomSheet userId={id} state={state} />
-          )}
+          bottomSheet={userDetailBottomSheet}
           className="h-9 w-9"
         >
           {userImg}
@@ -90,16 +87,14 @@ export function UserListItem({
       <ListItemInfo>
         <ListItemTitle>
           <ItemBaseDetailModalTrigger
-            modal={<UserDetailModal userId={id} />}
+            modal={userDetailModal}
             className="truncate"
           >
             {fullName}
           </ItemBaseDetailModalTrigger>
 
           <ItemBaseDetailBottomSheetTrigger
-            renderBottomSheet={(state) => (
-              <UserDetailBottomSheet userId={id} state={state} />
-            )}
+            bottomSheet={userDetailBottomSheet}
             className="truncate"
           >
             {fullName}

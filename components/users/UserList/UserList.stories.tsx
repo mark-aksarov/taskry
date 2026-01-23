@@ -1,9 +1,13 @@
 import { fn } from "storybook/test";
 import { UserList } from "./UserList";
 import { UserListItem } from "../UserListItem";
+import { UserDetailModal } from "../UserDetailModal";
 import type { Meta, StoryObj } from "@storybook/react";
+import { UserDetailBottomSheet } from "../UserDetailBottomSheet";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { UserItemActionMenuTrigger } from "../UserItemActionMenuTrigger";
+import { Default as UserDetailModalStory } from "../UserDetailModal/UserDetailModal.stories";
+import { Default as UserDetailBottomSheetStory } from "../UserDetailBottomSheet/UserDetailBottomSheet.stories";
 
 const mockedUsers = [
   {
@@ -120,6 +124,10 @@ export const Default = {
             userFullName={user.fullName}
             deleteAction={fn()}
           />
+        }
+        userDetailModal={<UserDetailModal {...UserDetailModalStory.args} />}
+        userDetailBottomSheet={
+          <UserDetailBottomSheet {...UserDetailBottomSheetStory.args} />
         }
       />
     )),

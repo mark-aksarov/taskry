@@ -1,5 +1,8 @@
-import { NewCustomerForm } from "./NewCustomerForm";
-import { CustomerFormBaseCompanySelect } from "./CustomerFormBase";
+import {
+  CustomerFormBase,
+  CustomerFormBaseCompanySelect,
+} from "./CustomerFormBase";
+
 import { createCustomer } from "@/lib/actions/customer/createCustomer";
 import { getCompanySummaries } from "@/lib/data/company/company.service";
 
@@ -7,7 +10,8 @@ export async function NewCustomerFormContainer() {
   const companies = await getCompanySummaries();
 
   return (
-    <NewCustomerForm
+    <CustomerFormBase
+      formId="new-customer-form"
       companySelect={<CustomerFormBaseCompanySelect companies={companies} />}
       formAction={createCustomer}
     />

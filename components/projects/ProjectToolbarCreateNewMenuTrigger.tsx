@@ -3,12 +3,12 @@
 import {
   ToolbarCreateNewButton,
   ToolbarCreateNewMenuTrigger,
-  ToolbarCreateNewMenuDialogHeader,
 } from "../common/Toolbar";
 
 import { useState } from "react";
 import { Key } from "react-aria";
 import { Item } from "react-stately";
+import { DialogHeader } from "../ui";
 import { useTranslations } from "next-intl";
 import { Blocks, FolderClosed } from "lucide-react";
 import { NewProjectCategoryModal } from "./NewProjectCategoryModal";
@@ -44,9 +44,7 @@ export function ProjectToolbarCreateNewMenuTrigger({
       <ToolbarCreateNewMenuTrigger
         onAction={handleAction}
         renderDialogHeader={() => (
-          <ToolbarCreateNewMenuDialogHeader>
-            {t("dialogHeading")}
-          </ToolbarCreateNewMenuDialogHeader>
+          <DialogHeader>{t("dialogHeading")}</DialogHeader>
         )}
         renderButton={() => (
           <ToolbarCreateNewButton

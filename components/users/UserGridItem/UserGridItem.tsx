@@ -23,11 +23,9 @@ import {
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { Link2, Mail, Phone } from "lucide-react";
-import { UserDetailModal } from "../UserDetailModal";
 import { UserGridItemLayout } from "./UserGridItemLayout";
 import { Link, Checkbox, Divider } from "@/components/ui";
 import { UnknownUser } from "@/components/common/UnknownUser";
-import { UserDetailBottomSheet } from "../UserDetailBottomSheet";
 import { ImageContainer } from "@/components/common/ImageContainer";
 
 export interface UserGridItemProps {
@@ -41,6 +39,8 @@ export interface UserGridItemProps {
   publicLink?: string;
   email: string;
   menuTrigger: React.ReactNode;
+  userDetailModal: React.ReactNode;
+  userDetailBottomSheet: React.ReactNode;
 }
 
 export function UserGridItem({
@@ -52,6 +52,8 @@ export function UserGridItem({
   publicLink,
   email,
   menuTrigger,
+  userDetailModal,
+  userDetailBottomSheet,
 }: UserGridItemProps) {
   const t = useTranslations("users.UserGridItem");
 
@@ -80,15 +82,11 @@ export function UserGridItem({
       actionMenuSlot={menuTrigger}
       imageSlot={
         <>
-          <ItemBaseDetailModalTrigger modal={<UserDetailModal userId={id} />}>
+          <ItemBaseDetailModalTrigger modal={userDetailModal}>
             {userImg}
           </ItemBaseDetailModalTrigger>
 
-          <ItemBaseDetailBottomSheetTrigger
-            renderBottomSheet={(state) => (
-              <UserDetailBottomSheet userId={id} state={state} />
-            )}
-          >
+          <ItemBaseDetailBottomSheetTrigger bottomSheet={userDetailBottomSheet}>
             {userImg}
           </ItemBaseDetailBottomSheetTrigger>
         </>
@@ -97,16 +95,14 @@ export function UserGridItem({
         <GridItemInfo className="w-full items-center">
           <GridItemTitle>
             <ItemBaseDetailModalTrigger
-              modal={<UserDetailModal userId={id} />}
+              modal={userDetailModal}
               className="truncate"
             >
               {fullName}
             </ItemBaseDetailModalTrigger>
 
             <ItemBaseDetailBottomSheetTrigger
-              renderBottomSheet={(state) => (
-                <UserDetailBottomSheet userId={id} state={state} />
-              )}
+              bottomSheet={userDetailBottomSheet}
               className="truncate"
             >
               {fullName}

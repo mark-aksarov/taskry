@@ -7,15 +7,21 @@ import {
   UpdateTaskStatusesPayload,
 } from "@/lib/actions/types";
 
+import {
+  ItemBaseActionMenuButton,
+  ItemBaseActionMenuTrigger,
+  ItemBaseActionMenuDialogHeader,
+} from "@/components/common/ItemBase";
+
 import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
 import { EditTaskModal } from "../EditTaskModal";
+import { DeleteTaskModal } from "../DeleteTaskModal";
 import { TaskStatus } from "@/generated/prisma/enums";
+import { useHasGuestMode } from "@/lib/hooks/useHasGuestMode";
 import { startTransition, useActionState, useState } from "react";
 import { GuestModeModal } from "@/components/common/GuestModeModal";
 import { useActionErrorToast } from "@/lib/hooks/useActionErrorToast";
-import { ItemBaseActionMenuTrigger } from "@/components/common/ItemBase";
-import { DeleteEntityModal } from "@/components/common/DeleteEntityModal";
 import { Check, CircleEllipsis, Clock, Pencil, Trash } from "lucide-react";
 
 export type TaskItemActionMenuTriggerProps = {
@@ -23,9 +29,9 @@ export type TaskItemActionMenuTriggerProps = {
   taskTitle: string;
   taskStatus: TaskStatus;
   className?: string;
-  guestMode?: boolean;
   deleteAction: ActionFn<ActionState, DeleteProjectsPayload>;
   updateStatusAction: ActionFn<ActionState, UpdateTaskStatusesPayload>;
+  editTaskFormContainer: React.ReactNode;
 };
 
 const initialState: ActionState = {
@@ -38,28 +44,33 @@ export function TaskItemActionMenuTrigger({
   taskTitle,
   taskStatus,
   className,
-  guestMode,
   deleteAction,
   updateStatusAction,
+  editTaskFormContainer,
 }: TaskItemActionMenuTriggerProps) {
   const t = useTranslations("tasks.TaskItemActionMenuTrigger");
 
   // Guest mode modal
+  const guestMode = useHasGuestMode();
   const [isGuestModeModalOpen, setIsGuestModeModalOpen] = useState(false);
 
-  // Edit State
+  // Modal state for editing the task
   const [isOpenEditModal, setIsOpenEditModal] = useState(false);
 
-  // Delete State
+  // Modal state for deleting the task
   const [isOpenDeleteModal, setIsOpenDeleteModal] = useState(false);
 
-  // Update Status
+  // State and action handler for updating task status
   const [
     updateTaskStatusState,
     updateTaskStatusAction,
     updateTaskStatusPending,
   ] = useActionState(updateStatusAction, initialState);
 
+  // Show toast notifications for status update errors
+  useActionErrorToast(updateTaskStatusState);
+
+  // Handle menu actions
   function handleAction(key: Key) {
     if (guestMode) {
       setIsGuestModeModalOpen(true);
@@ -81,15 +92,18 @@ export function TaskItemActionMenuTrigger({
     }
   }
 
-  useActionErrorToast(updateTaskStatusState);
-
   return (
     <>
       <ItemBaseActionMenuTrigger
-        trigger-data-test={`task-item-${taskId}-action-menu-trigger`}
-        className={className}
         onAction={handleAction}
         disabledKeys={[taskStatus]}
+        renderDialogHeader={() => <ItemBaseActionMenuDialogHeader />}
+        renderButton={() => (
+          <ItemBaseActionMenuButton
+            className={className}
+            data-test={`task-item-${taskId}-action-menu-trigger`}
+          />
+        )}
       >
         <Item textValue={t("edit")} key="edit">
           <Pencil size={16} /> {t("edit")}
@@ -108,16 +122,17 @@ export function TaskItemActionMenuTrigger({
         </Item>
       </ItemBaseActionMenuTrigger>
 
+      {/* Modal for editing task details */}
       <EditTaskModal
-        taskId={taskId}
         isOpen={isOpenEditModal}
         onOpenChange={setIsOpenEditModal}
+        editTaskFormContainer={editTaskFormContainer}
       />
 
-      <DeleteEntityModal
-        entityId={taskId}
-        entityName={taskTitle}
-        translationNamespace="tasks.DeleteTaskModal"
+      {/* Modal for confirming task deletion */}
+      <DeleteTaskModal
+        taskId={taskId}
+        taskTitle={taskTitle}
         isOpen={isOpenDeleteModal}
         onOpenChange={setIsOpenDeleteModal}
         deleteAction={deleteAction}

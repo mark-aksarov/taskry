@@ -1,17 +1,10 @@
 "use client";
 
-import {
-  Button,
-  DialogHeader,
-  DialogHeading,
-  MenuTriggerProps,
-  DialogCloseButton,
-} from "@/components/ui";
-
 import { ArrowDownUp } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useOverlayTrigger } from "react-aria";
 import { useOverlayTriggerState } from "react-stately";
+import { Button, DialogHeader, MenuTriggerProps } from "@/components/ui";
 import { ResponsiveMenuTrigger } from "@/components/common/ResponsiveMenuTrigger";
 
 export function ToolbarSortingMenuTrigger<T extends object = any>(
@@ -25,10 +18,7 @@ export function ToolbarSortingMenuTrigger<T extends object = any>(
     <ResponsiveMenuTrigger
       {...props}
       renderDialogHeader={() => (
-        <DialogHeader>
-          <DialogHeading>{t("dialogHeading")}</DialogHeading>
-          <DialogCloseButton />
-        </DialogHeader>
+        <DialogHeader>{t("dialogHeading")}</DialogHeader>
       )}
       overlayClassName="md:min-w-[150px]"
       renderButton={() => (

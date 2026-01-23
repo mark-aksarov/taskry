@@ -15,6 +15,11 @@ import { Default as TaskGridStory } from "@/components/tasks/TaskGrid/TaskGrid.s
 import { EntityContainerPresentation } from "@/components/common/EntityContainerPresentation";
 import { Default as TaskFormBaseStory } from "@/components/tasks/TaskFormBase/TaskFormBase.stories";
 import { Default as TaskFiltersFormStory } from "@/components/tasks/TaskFiltersForm/TaskFiltersForm.stories";
+import { TaskToolbarActionsMenuTrigger } from "@/components/tasks/TaskToolbarActionsMenuTrigger";
+import { TaskToolbarFiltersModalTrigger } from "@/components/tasks/TaskToolbarFiltersModalTrigger";
+import { TaskCategoryFormBase } from "@/components/tasks/TaskCategoryFormBase";
+import { TaskFormBase } from "@/components/tasks/TaskFormBase";
+import { TaskToolbarCreateNewMenuTrigger } from "@/components/tasks/TaskToolbarCreateNewMenuTrigger";
 
 const meta = {
   title: "components/pages/TasksPage",
@@ -32,22 +37,34 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    taskFiltersFormContainer: (
-      <TaskFiltersForm {...TaskFiltersFormStory.args} />
-    ),
-    newTaskFormContainer: <NewTaskForm {...TaskFormBaseStory.args} />,
     tasksContainer: (
       <EntityContainerPresentation
-        list={<TaskList {...TaskListStory.args} />}
-        grid={<TaskGrid {...TaskGridStory.args} />}
         page={1}
         pageSize={3}
+        list={<TaskList {...TaskListStory.args} />}
+        grid={<TaskGrid {...TaskGridStory.args} />}
         totalPages={3}
       />
     ),
-    deleteTasksAction: fn(),
-    updateTasksStatusesAction: fn(),
-    createTaskCategoryAction: fn(),
+    taskToolbarCreateNewMenuTrigger: (
+      <TaskToolbarCreateNewMenuTrigger
+        newTaskFormContainer={<TaskFormBase {...TaskFormBaseStory.args} />}
+        newTaskCategoryForm={<TaskCategoryFormBase formAction={fn()} />}
+      />
+    ),
+    taskToolbarFiltersModalTrigger: (
+      <TaskToolbarFiltersModalTrigger
+        filtersFormContainer={
+          <TaskFiltersForm {...TaskFiltersFormStory.args} />
+        }
+      />
+    ),
+    taskToolbarActionsMenuTrigger: (
+      <TaskToolbarActionsMenuTrigger
+        deleteAction={fn()}
+        updateStatusAction={fn()}
+      />
+    ),
   },
 } satisfies Story;
 

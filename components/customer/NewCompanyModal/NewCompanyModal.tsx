@@ -1,6 +1,17 @@
+import {
+  DialogBody,
+  ModalProps,
+  DialogFooter,
+  DialogHeader,
+} from "@/components/ui";
+
+import {
+  FormModal,
+  FormModalDialog,
+  FormModalSubmitButton,
+} from "@/components/common/FormModal";
+
 import { useTranslations } from "next-intl";
-import { ModalProps } from "@/components/ui";
-import { FormModal } from "@/components/common/FormModal";
 
 interface NewCompanyModalProps
   extends Pick<ModalProps, "isOpen" | "onOpenChange"> {
@@ -14,13 +25,17 @@ export function NewCompanyModal({
   const t = useTranslations("customers.NewCompanyModal");
 
   return (
-    <FormModal
-      formId="new-company-form"
-      title={t("title")}
-      submitButtonLabel={t("submitButtonLabel")}
-      form={newCompanyForm}
-      className="md:w-[350px]"
-      {...props}
-    />
+    <FormModal className="md:w-[350px]" {...props}>
+      <FormModalDialog>
+        <DialogHeader>{t("title")}</DialogHeader>
+        <DialogBody>{newCompanyForm}</DialogBody>
+        <DialogFooter>
+          <FormModalSubmitButton
+            form="new-company-form"
+            label={t("submitButtonLabel")}
+          />
+        </DialogFooter>
+      </FormModalDialog>
+    </FormModal>
   );
 }

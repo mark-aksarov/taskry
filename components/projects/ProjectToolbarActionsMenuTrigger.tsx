@@ -11,9 +11,9 @@ import {
   ToolbarActionsMenuTrigger,
   ToolbarActionsButtonMobile,
   ToolbarActionsButtonDesktop,
-  ToolbarActionsMenuDialogHeader,
 } from "../common/Toolbar";
 
+import { DialogHeader } from "../ui";
 import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
 import { ProjectStatus } from "@/generated/prisma/enums";
@@ -39,7 +39,7 @@ export const ProjectToolbarActionsMenuTrigger = ({
 }: ProjectToolbarActionsMenuTriggerProps) => {
   const t = useTranslations("projects.ProjectToolbarActionsMenuTrigger");
 
-  // State for showing/hiding the delete confirmation modal
+  // Delete confirmation modal state
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
   // State and handlers for updating project status
@@ -48,10 +48,10 @@ export const ProjectToolbarActionsMenuTrigger = ({
     updateStatusInitialState,
   );
 
-  // Show toast notification if updating status fails
+  // Show toast if updating status fails
   useActionErrorToast(updateStatusState);
 
-  // Handle menu actions: open delete modal or update project status
+  // Menu actions: show delete modal, update project status
   const handleAction = (key: Key) => {
     if (key === "delete") {
       setIsDeleteModalOpen(true);
@@ -65,8 +65,16 @@ export const ProjectToolbarActionsMenuTrigger = ({
     }
   };
 
-  // get selected project IDs from project selection context
-  const { selectedIds: projectIds, clearSelectedIds } = useProjectSelection();
+  const {
+    selectedIds: projectIds,
+    clearSelectedIds,
+    selectedItems,
+  } = useProjectSelection();
+
+  // disable actions when selected projects have the same status
+  const disabledKeys = Object.values(ProjectStatus).filter((status) =>
+    selectedItems.every((task) => task.status === status),
+  );
 
   const isDisabled = projectIds.length === 0;
 
@@ -74,11 +82,8 @@ export const ProjectToolbarActionsMenuTrigger = ({
     <>
       <ToolbarActionsMenuTrigger
         onAction={handleAction}
-        renderDialogHeader={() => (
-          <ToolbarActionsMenuDialogHeader>
-            {t("actions")}
-          </ToolbarActionsMenuDialogHeader>
-        )}
+        disabledKeys={disabledKeys}
+        renderDialogHeader={() => <DialogHeader>{t("actions")}</DialogHeader>}
         renderButton={() => (
           <>
             <ToolbarActionsButtonMobile isDisabled={isDisabled} />

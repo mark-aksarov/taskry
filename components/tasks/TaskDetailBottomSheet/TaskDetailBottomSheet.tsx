@@ -1,64 +1,37 @@
 "use client";
 
 import {
-  Button,
-  Dialog,
-  DialogBody,
-  BottomSheet,
-  DialogFooter,
-  DialogHeader,
-  DialogHeading,
-  DialogCloseButton,
-} from "@/components/ui";
-import { Suspense } from "react";
+  DetailBottomSheet,
+  DetailBottomSheetLink,
+  DetailBottomSheetDialog,
+} from "@/components/common/DetailBottomSheet";
+
 import { useTranslations } from "next-intl";
-import { EditTaskModal } from "../EditTaskModal";
-import { OverlayTriggerState } from "react-stately";
-import { DialogTrigger } from "react-aria-components";
-import { TaskDetailSkeleton } from "../TaskDetail";
-import { useGlobalContainer } from "@/components/layout/GlobalContainerContext";
+import { DialogBody, DialogFooter, DialogHeader } from "@/components/ui";
 
 export interface TaskDetailBottomSheetProps {
   taskId: number;
-  state: OverlayTriggerState;
+  taskDetailContainer: React.ReactNode;
 }
 
 export function TaskDetailBottomSheet({
   taskId,
-  state,
+  taskDetailContainer,
 }: TaskDetailBottomSheetProps) {
   const t = useTranslations("tasks.TaskDetailBottomSheet");
 
-  const { TaskDetailContainer } = useGlobalContainer();
-
-  if (!TaskDetailContainer) {
-    throw new Error("TaskDetailContainer is missing in GlobalContainerContext");
-  }
-
   return (
-    <BottomSheet isDismissable state={state} className="md:hidden">
-      <Dialog className="max-h-[calc(100dvh-6.25rem)]">
-        <DialogHeader>
-          <DialogHeading>{t("title")}</DialogHeading>
-          <DialogCloseButton />
-        </DialogHeader>
-        <DialogBody>
-          <Suspense fallback={<TaskDetailSkeleton />}>
-            <TaskDetailContainer taskId={taskId} />
-          </Suspense>
-        </DialogBody>
+    <DetailBottomSheet>
+      <DetailBottomSheetDialog>
+        <DialogHeader>{t("dialogHeading")}</DialogHeader>
+        <DialogBody>{taskDetailContainer}</DialogBody>
         <DialogFooter>
-          <DialogTrigger>
-            <Button
-              variant="primary"
-              size="medium"
-              label={t("editButtonLabel")}
-              className="w-full justify-center"
-            />
-            <EditTaskModal taskId={taskId} />
-          </DialogTrigger>
+          <DetailBottomSheetLink
+            label={t("openInFullPage")}
+            href={`/tasks?taskId=${taskId}`}
+          />
         </DialogFooter>
-      </Dialog>
-    </BottomSheet>
+      </DetailBottomSheetDialog>
+    </DetailBottomSheet>
   );
 }

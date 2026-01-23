@@ -21,7 +21,9 @@ export function TasksPageEmpty({ newTaskFormContainer }: TasksPageEmptyProps) {
         <EmptySectionHeading>{t("heading")}</EmptySectionHeading>
         <EmptySectionDescription>{t("description")}</EmptySectionDescription>
         <EmptySectionButton
-          createNewModal={<NewTaskModal newTaskForm={newTaskFormContainer} />}
+          createNewModal={
+            <NewTaskModal newTaskFormContainer={newTaskFormContainer} />
+          }
         >
           {t("addButtonLabel")}
         </EmptySectionButton>

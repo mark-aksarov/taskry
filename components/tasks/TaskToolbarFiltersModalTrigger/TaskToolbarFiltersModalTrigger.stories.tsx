@@ -16,12 +16,12 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    filtersForm: <TaskFiltersForm {...TaskFiltersFormStory.args} />,
+    filtersFormContainer: <TaskFiltersForm {...TaskFiltersFormStory.args} />,
   },
 } satisfies Story;
 
 export const Skeleton = {
   args: {
-    filtersForm: <TaskFiltersFormSkeleton />,
+    filtersFormContainer: <TaskFiltersFormSkeleton />,
   },
 } satisfies Story;

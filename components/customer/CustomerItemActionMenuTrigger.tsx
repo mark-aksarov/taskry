@@ -6,19 +6,25 @@ import {
   DeleteCustomersPayload,
 } from "@/lib/actions/types";
 
+import {
+  ItemBaseActionMenuButton,
+  ItemBaseActionMenuTrigger,
+  ItemBaseActionMenuDialogHeader,
+} from "../common/ItemBase";
+
 import { useState } from "react";
 import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
 import { Pencil, Trash } from "lucide-react";
 import { EditCustomerModal } from "./EditCustomerModal";
-import { ItemBaseActionMenuTrigger } from "../common/ItemBase";
-import { DeleteEntityModal } from "../common/DeleteEntityModal";
+import { DeleteCustomerModal } from "./DeleteCustomerModal";
 
 export type CustomerItemActionMenuTriggerProps = {
   customerId: number;
   customerFullName: string;
   className?: string;
   deleteAction: ActionFn<ActionState, DeleteCustomersPayload>;
+  editCustomerFormContainer: React.ReactNode;
 };
 
 export function CustomerItemActionMenuTrigger({
@@ -26,8 +32,10 @@ export function CustomerItemActionMenuTrigger({
   customerFullName,
   className,
   deleteAction,
+  editCustomerFormContainer,
 }: CustomerItemActionMenuTriggerProps) {
   const t = useTranslations("customers.CustomerItemActionMenuTrigger");
+
   const [isDeleteCustomerModalOpen, setIsDeleteCustomerModalOpen] =
     useState(false);
   const [isEditCustomerModalOpen, setIsEditCustomerModalOpen] = useState(false);
@@ -43,9 +51,14 @@ export function CustomerItemActionMenuTrigger({
   return (
     <>
       <ItemBaseActionMenuTrigger
-        trigger-data-test={`customer-item-${customerId}-action-menu-trigger`}
-        className={className}
         onAction={handleAction}
+        renderDialogHeader={() => <ItemBaseActionMenuDialogHeader />}
+        renderButton={() => (
+          <ItemBaseActionMenuButton
+            className={className}
+            data-test={`customer-item-${customerId}-action-menu-trigger`}
+          />
+        )}
       >
         <Item textValue={t("edit")} key="edit">
           <Pencil size={16} /> {t("edit")}
@@ -58,13 +71,12 @@ export function CustomerItemActionMenuTrigger({
       <EditCustomerModal
         isOpen={isEditCustomerModalOpen}
         onOpenChange={setIsEditCustomerModalOpen}
-        customerId={customerId}
+        editCustomerFormContainer={editCustomerFormContainer}
       />
 
-      <DeleteEntityModal
-        entityId={customerId}
-        entityName={customerFullName}
-        translationNamespace="customers.DeleteCustomerModal"
+      <DeleteCustomerModal
+        customerId={customerId}
+        customerFullName={customerFullName}
         isOpen={isDeleteCustomerModalOpen}
         onOpenChange={setIsDeleteCustomerModalOpen}
         deleteAction={deleteAction}

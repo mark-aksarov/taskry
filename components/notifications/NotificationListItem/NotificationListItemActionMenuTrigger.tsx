@@ -1,11 +1,16 @@
 "use client";
 
+import {
+  ItemBaseActionMenuButton,
+  ItemBaseActionMenuTrigger,
+  ItemBaseActionMenuDialogHeader,
+} from "@/components/common/ItemBase";
+
 import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
 import { ListCheck, Trash } from "lucide-react";
 import { GuestModeModal } from "@/components/common/GuestModeModal";
 import { useActionErrorToast } from "@/lib/hooks/useActionErrorToast";
-import { ItemBaseActionMenuTrigger } from "@/components/common/ItemBase";
 import { startTransition, useActionState, useEffect, useState } from "react";
 import { ActionFn, ActionState, MarkAsReadPayload } from "@/lib/actions/types";
 
@@ -93,9 +98,14 @@ export function NotificationListItemActionMenuTrigger({
   return (
     <>
       <ItemBaseActionMenuTrigger
-        trigger-data-test="notification-item-action-menu-trigger"
-        className="ml-auto"
         onAction={handleAction}
+        renderDialogHeader={() => <ItemBaseActionMenuDialogHeader />}
+        renderButton={() => (
+          <ItemBaseActionMenuButton
+            className="ml-auto"
+            data-test="notification-item-action-menu-trigger"
+          />
+        )}
       >
         <>
           {!isRead && (

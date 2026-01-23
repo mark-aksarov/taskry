@@ -1,11 +1,17 @@
+import {
+  PersonHeader,
+  PersonHeaderSkeleton,
+} from "@/components/common/PersonHeader";
+
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { Button, RACDialogTrigger } from "@/components/ui";
 import { CustomerDetailModal } from "./CustomerDetailModal";
-import { PersonHeaderSkeleton } from "@/components/common/PersonHeader";
+import { CustomerDetail } from "../CustomerDetail/CustomerDetail";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { CustomerDetailSkeleton } from "../CustomerDetail/CustomerDetailSkeleton";
-import { GlobalContainerProvider } from "@/components/layout/GlobalContainerContext";
 import { PersonDetailPresentation } from "@/components/common/PersonDetailPresentation";
+import { Default as CustomerDetailStory } from "../CustomerDetail/CustomerDetail.stories";
+import { Default as PersonHeaderStory } from "@/components/common/PersonHeader/PersonHeader.stories";
 
 const meta = {
   title: "components/customers/CustomerDetailModal",
@@ -28,23 +34,26 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default = {} satisfies Story;
+export const Default = {
+  args: {
+    customerId: 1,
+    customerDetailContainer: (
+      <PersonDetailPresentation
+        personHeader={<PersonHeader {...PersonHeaderStory.args} />}
+        userDetail={<CustomerDetail {...CustomerDetailStory.args} />}
+      />
+    ),
+  },
+} satisfies Story;
 
 export const WithSkeletonContent = {
-  decorators: [
-    (Story) => (
-      <GlobalContainerProvider
-        value={{
-          CustomerDetailContainer: () => (
-            <PersonDetailPresentation
-              personHeader={<PersonHeaderSkeleton />}
-              userDetail={<CustomerDetailSkeleton />}
-            />
-          ),
-        }}
-      >
-        <Story />
-      </GlobalContainerProvider>
+  args: {
+    customerId: 1,
+    customerDetailContainer: (
+      <PersonDetailPresentation
+        personHeader={<PersonHeaderSkeleton />}
+        userDetail={<CustomerDetailSkeleton />}
+      />
     ),
-  ],
+  },
 } satisfies Story;

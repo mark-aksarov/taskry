@@ -1,8 +1,14 @@
 import { fn } from "storybook/test";
 import { CustomerListItem } from "./CustomerListItem";
 import type { Meta, StoryObj } from "@storybook/react";
+import { CustomerFormBase } from "../CustomerFormBase";
+import { CustomerDetailModal } from "../CustomerDetailModal";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { CustomerDetailBottomSheet } from "../CustomerDetailBottomSheet";
 import { CustomerItemActionMenuTrigger } from "../CustomerItemActionMenuTrigger";
+import { Default as CustomerFormBaseStory } from "../CustomerFormBase/CustomerFormBase.stories";
+import { Default as CustomerDetailModalStory } from "../CustomerDetailModal/CustomerDetailModal.stories";
+import { Default as CustomerDetailBottomSheetStory } from "../CustomerDetailBottomSheet/CustomerDetailBottomSheet.stories";
 
 const meta = {
   title: "Components/customers/CustomerListItem",
@@ -10,20 +16,30 @@ const meta = {
   tags: ["autodocs"],
   decorators: [withThemedBackground],
   render: (args) => (
-    <CustomerListItem {...args} menuTrigger={renderMenu(args)} />
+    <CustomerListItem
+      {...args}
+      menuTrigger={
+        <CustomerItemActionMenuTrigger
+          customerId={args.id}
+          customerFullName={args.fullName}
+          deleteAction={fn()}
+          editCustomerFormContainer={
+            <CustomerFormBase {...CustomerFormBaseStory.args} />
+          }
+        />
+      }
+      customerDetailModal={
+        <CustomerDetailModal {...CustomerDetailModalStory.args} />
+      }
+      customerDetailBottomSheet={
+        <CustomerDetailBottomSheet {...CustomerDetailBottomSheetStory.args} />
+      }
+    />
   ),
 } satisfies Meta<typeof CustomerListItem>;
 
 export default meta;
 type Story = StoryObj<typeof CustomerListItem>;
-
-const renderMenu = (args: any) => (
-  <CustomerItemActionMenuTrigger
-    customerId={args.id}
-    customerFullName={args.fullName}
-    deleteAction={fn()}
-  />
-);
 
 export const Default = {
   args: {

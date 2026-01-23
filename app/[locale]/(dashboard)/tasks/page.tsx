@@ -1,8 +1,3 @@
-import {
-  GlobalContainerProvider,
-  GlobalContainerContextType,
-} from "@/components/layout/GlobalContainerContext";
-
 import { z } from "zod";
 import { Suspense } from "react";
 import { TasksPage } from "./TasksPage";
@@ -10,21 +5,19 @@ import { TasksPageEmpty } from "./TasksPageEmpty";
 import { arrayParam } from "@/lib/utils/arrayParam";
 import { TaskStatus } from "@/generated/prisma/enums";
 import { getTaskCount } from "@/lib/data/task/task.dal";
-import { hasGuestRole } from "@/lib/utils/hasGuestRole";
 import { deleteTasks } from "@/lib/actions/task/deleteTasks";
 import { TasksContainer } from "@/components/tasks/TasksContainer";
 import { TaskFormBaseSkeleton } from "@/components/tasks/TaskFormBase";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { updateTaskStatuses } from "@/lib/actions/task/updateTaskStatuses";
-import { TaskDetailContainer } from "@/components/tasks/TaskDetailContainer";
 import { TaskFiltersFormSkeleton } from "@/components/tasks/TaskFiltersForm";
-import { UserDetailContainer } from "@/components/users/UserDetailContainer";
 import { NewTaskFormContainer } from "@/components/tasks/NewTaskFormContainer";
-import { TaskCommentsContainer } from "@/components/tasks/TaskCommentsContainer";
-import { EditTaskFormContainer } from "@/components/tasks/EditTaskFormContainer";
+import { TaskCategoryFormBase } from "@/components/tasks/TaskCategoryFormBase";
 import { createTaskCategory } from "@/lib/actions/taskCategory/createTaskCategory";
-import { ProjectDetailContainer } from "@/components/projects/ProjectDetailContainer";
 import { TaskFiltersFormContainer } from "@/components/tasks/TaskFiltersFormContainer";
+import { TaskToolbarActionsMenuTrigger } from "@/components/tasks/TaskToolbarActionsMenuTrigger";
+import { TaskToolbarFiltersModalTrigger } from "@/components/tasks/TaskToolbarFiltersModalTrigger";
+import { TaskToolbarCreateNewMenuTrigger } from "@/components/tasks/TaskToolbarCreateNewMenuTrigger";
 
 const searchParamsSchema = z.object({
   onlyMyTasks: z
@@ -45,14 +38,6 @@ const searchParamsSchema = z.object({
   dateStart: z.string().optional().catch(undefined),
   dateEnd: z.string().optional().catch(undefined),
 });
-
-const context: GlobalContainerContextType = {
-  EditTaskFormContainer,
-  TaskDetailContainer,
-  TaskCommentsContainer,
-  ProjectDetailContainer,
-  UserDetailContainer,
-};
 
 export default async function AppTasksPage({
   searchParams,
@@ -79,35 +64,43 @@ export default async function AppTasksPage({
     );
   }
 
-  const guestMode = await hasGuestRole();
-
   return (
-    <GlobalContainerProvider value={context}>
-      <TasksPage
-        guestMode={guestMode}
-        taskFiltersFormContainer={
-          <Suspense fallback={<TaskFiltersFormSkeleton />}>
-            <TaskFiltersFormContainer filters={filters} />
-          </Suspense>
-        }
-        newTaskFormContainer={
-          <Suspense fallback={<TaskFormBaseSkeleton />}>
-            <NewTaskFormContainer />
-          </Suspense>
-        }
-        tasksContainer={
-          <TasksContainer
-            guestMode={guestMode}
-            page={page}
-            pageSize={pageSize}
-            sort={sort}
-            filters={filters}
-          />
-        }
-        deleteTasksAction={deleteTasks}
-        updateTasksStatusesAction={updateTaskStatuses}
-        createTaskCategoryAction={createTaskCategory}
-      />
-    </GlobalContainerProvider>
+    <TasksPage
+      taskToolbarActionsMenuTrigger={
+        <TaskToolbarActionsMenuTrigger
+          deleteAction={deleteTasks}
+          updateStatusAction={updateTaskStatuses}
+        />
+      }
+      taskToolbarCreateNewMenuTrigger={
+        <TaskToolbarCreateNewMenuTrigger
+          newTaskFormContainer={
+            <Suspense fallback={<TaskFormBaseSkeleton />}>
+              <NewTaskFormContainer />
+            </Suspense>
+          }
+          newTaskCategoryForm={
+            <TaskCategoryFormBase formAction={createTaskCategory} />
+          }
+        />
+      }
+      taskToolbarFiltersModalTrigger={
+        <TaskToolbarFiltersModalTrigger
+          filtersFormContainer={
+            <Suspense fallback={<TaskFiltersFormSkeleton />}>
+              <TaskFiltersFormContainer filters={filters} />
+            </Suspense>
+          }
+        />
+      }
+      tasksContainer={
+        <TasksContainer
+          page={page}
+          pageSize={pageSize}
+          sort={sort}
+          filters={filters}
+        />
+      }
+    />
   );
 }

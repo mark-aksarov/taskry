@@ -1,10 +1,19 @@
 import { fn } from "storybook/internal/test";
 import { TaskGridItem } from "./TaskGridItem";
+import { TaskFormBase } from "../TaskFormBase";
+import { TaskDetailModal } from "../TaskDetailModal";
+import { TaskStatus } from "@/generated/prisma/enums";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { ProjectStatus, TaskStatus } from "@/generated/prisma/enums";
+import { TaskDetailBottomSheet } from "../TaskDetailBottomSheet";
+import { UserDetailModal } from "@/components/users/UserDetailModal";
 import { TaskCommentsModalTrigger } from "../TaskCommentsModalTrigger";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { TaskItemActionMenuTrigger } from "../TaskItemActionMenuTrigger";
+import { Default as TaskFormBaseStory } from "../TaskFormBase/TaskFormBase.stories";
+import { MockedCommentsContainer } from "@/components/comments/MockedCommentsContainer";
+import { Default as TaskDetailModalStory } from "../TaskDetailModal/TaskDetailModal.stories";
+import { Default as UserDetailModalStory } from "@/components/users/UserDetailModal/UserDetailModal.stories";
+import { Default as TaskDetailBottomSheetStory } from "../TaskDetailBottomSheet/TaskDetailBottomSheet.stories";
 
 const meta = {
   title: "Components/tasks/TaskGridItem",
@@ -25,20 +34,26 @@ const meta = {
         <TaskCommentsModalTrigger
           taskId={1}
           commentsCount={10}
+          taskCommentsContainer={<MockedCommentsContainer />}
           sendCommentAction={fn()}
+          updateCommentAction={fn()}
         />
       }
       menuTrigger={
         <TaskItemActionMenuTrigger
-          guestMode={false}
           taskId={args.id}
           taskTitle={args.title}
           taskStatus={args.status}
           deleteAction={fn()}
           updateStatusAction={fn()}
-          className="-mr-2"
+          editTaskFormContainer={<TaskFormBase {...TaskFormBaseStory.args} />}
         />
       }
+      taskDetailModal={<TaskDetailModal {...TaskDetailModalStory.args} />}
+      taskDetailBottomSheet={
+        <TaskDetailBottomSheet {...TaskDetailBottomSheetStory.args} />
+      }
+      userDetailModal={<UserDetailModal {...UserDetailModalStory.args} />}
     />
   ),
 } satisfies Meta<typeof TaskGridItem>;

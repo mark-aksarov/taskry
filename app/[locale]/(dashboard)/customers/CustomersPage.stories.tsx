@@ -7,12 +7,16 @@ import { CustomersPageEmpty } from "./CustomersPageEmpty";
 import { PageDecorator } from "@/.storybook/PageDecorator";
 import { CustomerList } from "@/components/customer/CustomerList";
 import { CustomerGrid } from "@/components/customer/CustomerGrid";
-import { NewCustomerForm } from "@/components/customer/NewCustomerForm";
+import { NewCompanyForm } from "@/components/customer/NewCompanyForm";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { CustomerFormBase } from "@/components/customer/CustomerFormBase";
 import { CustomerFiltersForm } from "@/components/customer/CustomerFiltersForm";
 import { EntityContainerPresentation } from "@/components/common/EntityContainerPresentation";
 import { Default as CustomerGridStory } from "@/components/customer/CustomerGrid/CustomerGrid.stories";
 import { Default as CustomerListStory } from "@/components/customer/CustomerList/CustomerList.stories";
+import { CustomerToolbarActionsMenuTrigger } from "@/components/customer/CustomerToolbarActionsMenuTrigger";
+import { CustomerToolbarFiltersModalTrigger } from "@/components/customer/CustomerToolbarFiltersModalTrigger";
+import { CustomerToolbarCreateNewMenuTrigger } from "@/components/customer/CustomerToolbarCreateNewMenuTrigger";
 import { Default as CustomerFormBaseStory } from "@/components/customer/CustomerFormBase/CustomerFormBase.stories";
 import { Default as CustomerFiltersFormStory } from "@/components/customer/CustomerFiltersForm/CustomerFiltersForm.stories";
 
@@ -32,8 +36,23 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    customersFiltersForm: (
-      <CustomerFiltersForm {...CustomerFiltersFormStory.args} />
+    customerToolbarCreateNewMenuTrigger: (
+      <CustomerToolbarCreateNewMenuTrigger
+        newCustomerFormContainer={
+          <CustomerFormBase {...CustomerFormBaseStory.args} />
+        }
+        newCompanyForm={<NewCompanyForm formAction={fn()} />}
+      />
+    ),
+    customerToolbarActionsMenuTrigger: (
+      <CustomerToolbarActionsMenuTrigger deleteAction={fn()} />
+    ),
+    customerToolbarFiltersModalTrigger: (
+      <CustomerToolbarFiltersModalTrigger
+        filtersFormContainer={
+          <CustomerFiltersForm {...CustomerFiltersFormStory.args} />
+        }
+      />
     ),
     customersContainer: (
       <EntityContainerPresentation
@@ -44,12 +63,6 @@ export const Default = {
         totalPages={3}
       />
     ),
-    newCustomerFormContainer: (
-      <NewCustomerForm {...CustomerFormBaseStory.args} />
-    ),
-
-    createCompanyAction: fn(),
-    deleteCustomersAction: fn(),
   },
 } satisfies Story;
 
@@ -63,7 +76,7 @@ export const WithNoCustomers = {
   render: () => (
     <CustomersPageEmpty
       newCustomerFormContainer={
-        <NewCustomerForm {...CustomerFormBaseStory.args} />
+        <CustomerFormBase {...CustomerFormBaseStory.args} />
       }
     />
   ),

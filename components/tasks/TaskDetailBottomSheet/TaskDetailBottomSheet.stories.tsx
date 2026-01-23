@@ -8,8 +8,9 @@ import { Button } from "@/components/ui";
 import { useOverlayTrigger } from "react-aria";
 import { useOverlayTriggerState } from "react-stately";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { TaskDetailSkeleton } from "../TaskDetail";
-import { GlobalContainerProvider } from "@/components/layout/GlobalContainerContext";
+import { TaskDetail, TaskDetailSkeleton } from "../TaskDetail";
+import { OverlayTriggerStateContext } from "react-aria-components";
+import { Default as TaskDetailStory } from "../TaskDetail/TaskDetail.stories";
 
 const meta = {
   title: "components/tasks/TaskDetailBottomSheet",
@@ -18,13 +19,6 @@ const meta = {
   decorators: [withThemedBackground],
   args: {
     taskId: 1,
-    state: {
-      isOpen: true,
-      setOpen: () => {},
-      open: () => {},
-      close: () => {},
-      toggle: () => {},
-    },
   },
   globals: {
     viewport: { value: "mobile2", isRotated: false },
@@ -42,25 +36,23 @@ const TaskDetailBottomSheetTemplate = ({
   const { triggerProps } = useOverlayTrigger({ type: "dialog" }, state);
 
   return (
-    <>
+    <OverlayTriggerStateContext.Provider value={state}>
       <Button {...triggerProps} label="Open Task Detail" />
-      <TaskDetailBottomSheet {...props} state={state} />
-    </>
+      <TaskDetailBottomSheet {...props} />
+    </OverlayTriggerStateContext.Provider>
   );
 };
 
-export const Default = {} satisfies Story;
+export const Default = {
+  args: {
+    taskId: 1,
+    taskDetailContainer: <TaskDetail {...TaskDetailStory.args} />,
+  },
+} satisfies Story;
 
 export const WithSkeletonContent = {
-  decorators: [
-    (Story) => (
-      <GlobalContainerProvider
-        value={{
-          TaskDetailContainer: () => <TaskDetailSkeleton />,
-        }}
-      >
-        <Story />
-      </GlobalContainerProvider>
-    ),
-  ],
+  args: {
+    taskId: 1,
+    taskDetailContainer: <TaskDetailSkeleton />,
+  },
 } satisfies Story;

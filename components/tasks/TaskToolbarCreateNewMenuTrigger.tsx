@@ -1,41 +1,41 @@
 "use client";
 
 import {
-  Button,
-  DialogHeader,
-  DialogHeading,
-  DialogCloseButton,
-} from "@/components/ui";
+  ToolbarCreateNewButton,
+  ToolbarCreateNewMenuTrigger,
+} from "../common/Toolbar";
+
+import { Key } from "react-aria";
 import { useState } from "react";
+import { Item } from "react-stately";
 import { useTranslations } from "next-intl";
-import { Key, useOverlayTrigger } from "react-aria";
+import { DialogHeader } from "@/components/ui";
+import { Blocks, CalendarCheck } from "lucide-react";
 import { GuestModeModal } from "../common/GuestModeModal";
-import { Blocks, CalendarCheck, Plus } from "lucide-react";
-import { Item, useOverlayTriggerState } from "react-stately";
 import { NewTaskCategoryModal } from "./NewTaskCategoryModal";
+import { useHasGuestMode } from "@/lib/hooks/useHasGuestMode";
 import { NewTaskModal } from "@/components/tasks/NewTaskModal";
-import { ResponsiveMenuTrigger } from "@/components/common/ResponsiveMenuTrigger";
 
 interface TaskToolbarCreateNewMenuTriggerProps {
-  guestMode?: boolean;
-  newTaskForm: React.ReactNode;
+  newTaskFormContainer: React.ReactNode;
   newTaskCategoryForm: React.ReactNode;
 }
 
 export function TaskToolbarCreateNewMenuTrigger({
-  guestMode,
-  newTaskForm,
+  newTaskFormContainer,
   newTaskCategoryForm,
 }: TaskToolbarCreateNewMenuTriggerProps) {
-  const state = useOverlayTriggerState({});
-  const { triggerProps } = useOverlayTrigger({ type: "dialog" }, state);
-  const [openTaskModal, setOpenTaskModal] = useState(false);
-  const [openTaskCategoryModal, setOpenTaskCategoryModal] = useState(false);
   const t = useTranslations("tasks.TaskToolbarCreateNewMenuTrigger");
 
-  // Guest mode modal
+  // Separate modal state for creating a task and a task category
+  const [openTaskModal, setOpenTaskModal] = useState(false);
+  const [openTaskCategoryModal, setOpenTaskCategoryModal] = useState(false);
+
+  // Guest mode
+  const guestMode = useHasGuestMode();
   const [isGuestModeModalOpen, setIsGuestModeModalOpen] = useState(false);
 
+  // Menu actions: show guest modal, show task modal, show task category modal
   function handleAction(key: Key) {
     if (guestMode) {
       setIsGuestModeModalOpen(true);
@@ -51,24 +51,17 @@ export function TaskToolbarCreateNewMenuTrigger({
 
   return (
     <>
-      <ResponsiveMenuTrigger
+      <ToolbarCreateNewMenuTrigger
         onAction={handleAction}
         renderDialogHeader={() => (
-          <DialogHeader>
-            <DialogHeading>{t("dialogHeading")}</DialogHeading>
-            <DialogCloseButton />
-          </DialogHeader>
+          <DialogHeader>{t("dialogHeading")}</DialogHeader>
         )}
-        overlayClassName="md:min-w-[200px]"
         renderButton={() => (
-          <Button
-            {...triggerProps}
+          <ToolbarCreateNewButton
             data-test="task-toolbar-create-new-menu-trigger"
             label={t("label")}
-            iconLeft={<Plus size={16} strokeWidth={1.5} absoluteStrokeWidth />}
           />
         )}
-        placement="bottom right"
       >
         <Item textValue={t("items.task")} key="task">
           <CalendarCheck size={16} strokeWidth={1.5} absoluteStrokeWidth />
@@ -78,20 +71,23 @@ export function TaskToolbarCreateNewMenuTrigger({
           <Blocks size={16} strokeWidth={1.5} absoluteStrokeWidth />
           {t("items.category")}
         </Item>
-      </ResponsiveMenuTrigger>
+      </ToolbarCreateNewMenuTrigger>
 
+      {/* Modal for creating a new task */}
       <NewTaskModal
-        newTaskForm={newTaskForm}
+        newTaskFormContainer={newTaskFormContainer}
         isOpen={openTaskModal}
         onOpenChange={setOpenTaskModal}
       />
 
+      {/* Modal for creating a new task category */}
       <NewTaskCategoryModal
         newTaskCategoryForm={newTaskCategoryForm}
         isOpen={openTaskCategoryModal}
         onOpenChange={setOpenTaskCategoryModal}
       />
 
+      {/* Guest mode modal */}
       <GuestModeModal
         isOpen={isGuestModeModalOpen}
         onOpenChange={setIsGuestModeModalOpen}

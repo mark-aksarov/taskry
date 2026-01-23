@@ -14,18 +14,14 @@ import {
 } from "@/components/common/ItemBase";
 
 import Image from "next/image";
-import { TaskDetailModal } from "../TaskDetailModal";
 import { TaskStatus } from "@/generated/prisma/enums";
 import { useFormatter, useTranslations } from "next-intl";
 import { TaskGridItemLayout } from "./TaskGridItemLayout";
 import { UnknownUser } from "@/components/common/UnknownUser";
-import { TaskDetailBottomSheet } from "../TaskDetailBottomSheet";
 import { ImageContainer } from "@/components/common/ImageContainer";
 import { getTaskStatusBadgeColor } from "../getTaskStatusBadgeColor";
-import { UserDetailModal } from "@/components/users/UserDetailModal";
 import { useSyncSelectionTaskItem } from "@/lib/hooks/useTaskSelection";
 import { TaskListItemCheckbox } from "../TaskListItem/TaskListItemCheckbox";
-import { UserDetailBottomSheet } from "@/components/users/UserDetailBottomSheet";
 
 export interface TaskGridItemProps {
   id: number;
@@ -39,8 +35,12 @@ export interface TaskGridItemProps {
   status: TaskStatus;
   subtasksTotal: number;
   subtasksDone: number;
-  commentModalTrigger?: React.ReactNode;
-  menuTrigger?: React.ReactNode;
+  commentModalTrigger: React.ReactNode;
+  menuTrigger: React.ReactNode;
+  taskDetailModal: React.ReactNode;
+  taskDetailBottomSheet: React.ReactNode;
+  userDetailModal: React.ReactNode;
+  userDetailBottomSheet: React.ReactNode;
 }
 
 export function TaskGridItem({
@@ -53,6 +53,10 @@ export function TaskGridItem({
   subtasksDone,
   commentModalTrigger,
   menuTrigger,
+  taskDetailModal,
+  taskDetailBottomSheet,
+  userDetailModal,
+  userDetailBottomSheet,
 }: TaskGridItemProps) {
   const t = useTranslations("tasks");
 
@@ -86,16 +90,14 @@ export function TaskGridItem({
         <GridItemInfo className="flex-auto">
           <GridItemTitle>
             <ItemBaseDetailModalTrigger
-              modal={<TaskDetailModal taskId={id} />}
+              modal={taskDetailModal}
               className="truncate"
             >
               {title}
             </ItemBaseDetailModalTrigger>
 
             <ItemBaseDetailBottomSheetTrigger
-              renderBottomSheet={(state) => (
-                <TaskDetailBottomSheet taskId={id} state={state} />
-              )}
+              bottomSheet={taskDetailBottomSheet}
               className="truncate"
             >
               {title}
@@ -108,16 +110,12 @@ export function TaskGridItem({
       assigneeImageSlot={
         assignee ? (
           <>
-            <ItemBaseDetailModalTrigger
-              modal={<UserDetailModal userId={assignee.id} />}
-            >
+            <ItemBaseDetailModalTrigger modal={userDetailModal}>
               {assigneeImg}
             </ItemBaseDetailModalTrigger>
 
             <ItemBaseDetailBottomSheetTrigger
-              renderBottomSheet={(state) => (
-                <UserDetailBottomSheet userId={assignee.id} state={state} />
-              )}
+              bottomSheet={userDetailBottomSheet}
             >
               {assigneeImg}
             </ItemBaseDetailBottomSheetTrigger>

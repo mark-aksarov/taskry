@@ -116,7 +116,7 @@
   },
 
   "TaskDetailModal": {
-    "title": "Task Details",
+    "dialogHeading": "Task Details",
     "openButtonLabel": "Open in Full Page"
   },
 

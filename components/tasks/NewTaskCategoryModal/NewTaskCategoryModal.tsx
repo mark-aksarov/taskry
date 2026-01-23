@@ -1,6 +1,17 @@
+import {
+  DialogBody,
+  ModalProps,
+  DialogFooter,
+  DialogHeader,
+} from "@/components/ui";
+
+import {
+  FormModal,
+  FormModalDialog,
+  FormModalSubmitButton,
+} from "@/components/common/FormModal";
+
 import { useTranslations } from "next-intl";
-import { ModalProps } from "@/components/ui";
-import { FormModal } from "@/components/common/FormModal";
 
 interface NewTaskCategoryModalProps
   extends Pick<ModalProps, "isOpen" | "onOpenChange"> {
@@ -14,13 +25,17 @@ export function NewTaskCategoryModal({
   const t = useTranslations("tasks.NewTaskCategoryModal");
 
   return (
-    <FormModal
-      formId="new-task-category-form"
-      title={t("title")}
-      submitButtonLabel={t("submitButtonLabel")}
-      form={newTaskCategoryForm}
-      className="md:w-[350px]"
-      {...props}
-    />
+    <FormModal className="md:w-[350px]" {...props}>
+      <FormModalDialog>
+        <DialogHeader>{t("title")}</DialogHeader>
+        <DialogBody>{newTaskCategoryForm}</DialogBody>
+        <DialogFooter>
+          <FormModalSubmitButton
+            form="new-task-category-form"
+            label={t("submitButtonLabel")}
+          />
+        </DialogFooter>
+      </FormModalDialog>
+    </FormModal>
   );
 }

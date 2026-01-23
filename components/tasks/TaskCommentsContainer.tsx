@@ -7,7 +7,6 @@ import {
 
 import useSWR from "swr";
 import { Repeat } from "@/components/common/Repeat";
-import { useHasGuestMode } from "@/lib/hooks/useHasGuestMode";
 import { CommentListItemDTO } from "@/lib/data/comment/comment.dto";
 import { deleteComment } from "@/lib/actions/comment/deleteComment";
 import { CommentItemActionMenuTrigger } from "../comments/CommentItem";
@@ -29,8 +28,6 @@ export function TaskCommentsContainer({ taskId }: { taskId: number }) {
     return <CommentsEmptySection />;
   }
 
-  const guestMode = useHasGuestMode();
-
   return (
     <>
       {comments.map((comment) => {
@@ -44,8 +41,8 @@ export function TaskCommentsContainer({ taskId }: { taskId: number }) {
             menuTrigger={
               comment.canEdit && (
                 <CommentItemActionMenuTrigger
-                  guestMode={guestMode}
                   commentId={comment.id}
+                  commentContent={comment.content}
                   deleteAction={deleteComment}
                   mutate={mutate}
                 />

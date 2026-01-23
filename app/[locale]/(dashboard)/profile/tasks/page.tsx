@@ -1,8 +1,3 @@
-import {
-  GlobalContainerProvider,
-  GlobalContainerContextType,
-} from "@/components/layout/GlobalContainerContext";
-
 import { z } from "zod";
 import { Suspense } from "react";
 import { auth } from "@/lib/auth";
@@ -14,26 +9,18 @@ import { TaskFormBaseSkeleton } from "@/components/tasks/TaskFormBase";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { UserTasksContainer } from "@/components/users/UserTasksContainer";
 import { updateTaskStatuses } from "@/lib/actions/task/updateTaskStatuses";
-import { TaskDetailContainer } from "@/components/tasks/TaskDetailContainer";
 import { UserHeaderContainer } from "@/components/users/UserHeaderContainer";
 import { UserTasksPageLayout } from "@/components/users/UserTasksPageLayout";
 import { NewTaskFormContainer } from "@/components/tasks/NewTaskFormContainer";
-import { EditTaskFormContainer } from "@/components/tasks/EditTaskFormContainer";
-import { TaskCommentsContainer } from "@/components/tasks/TaskCommentsContainer";
 import { ProfileNavigationMobile } from "@/components/users/ProfileNavigationMobile";
 import { ProfileNavigationDesktop } from "@/components/users/ProfileNavigationDesktop";
+import { TaskToolbarActionsMenuTrigger } from "@/components/tasks/TaskToolbarActionsMenuTrigger";
 
 const searchParamsSchema = z.object({
   page: z.coerce.number().int().positive().catch(1),
   pageSize: z.coerce.number().int().min(1).max(100).catch(10),
   sort: z.enum(["title", "deadline", "status", "category"]).catch("title"),
 });
-
-const context: GlobalContainerContextType = {
-  EditTaskFormContainer,
-  TaskDetailContainer,
-  TaskCommentsContainer,
-};
 
 export default async function AppProfileTasksPage({
   searchParams,
@@ -56,7 +43,7 @@ export default async function AppProfileTasksPage({
 
   const taskCount = await getTaskCount();
 
-  if (!taskCount)
+  if (!taskCount) {
     return (
       <ProfileTasksPageEmpty
         userId={userId}
@@ -68,29 +55,27 @@ export default async function AppProfileTasksPage({
         userHeaderContainer={<UserHeaderContainer userId={userId} />}
       />
     );
+  }
 
   return (
-    <GlobalContainerProvider value={context}>
-      <UserTasksPageLayout
-        userTasksContainer={
-          <UserTasksContainer
-            userId={userId}
-            page={page}
-            pageSize={pageSize}
-            sort={sort}
-          />
-        }
-        userHeaderContainer={<UserHeaderContainer userId={userId} />}
-        newTaskFormContainer={
-          <Suspense fallback={<TaskFormBaseSkeleton />}>
-            <NewTaskFormContainer />
-          </Suspense>
-        }
-        deleteTasksAction={deleteTasks}
-        updateTasksStatusesAction={updateTaskStatuses}
-        navigationDesktop={<ProfileNavigationDesktop />}
-        navigationMobile={<ProfileNavigationMobile />}
-      />
-    </GlobalContainerProvider>
+    <UserTasksPageLayout
+      userTasksContainer={
+        <UserTasksContainer
+          userId={userId}
+          page={page}
+          pageSize={pageSize}
+          sort={sort}
+        />
+      }
+      userHeaderContainer={<UserHeaderContainer userId={userId} />}
+      taskToolbarActionsMenuTrigger={
+        <TaskToolbarActionsMenuTrigger
+          deleteAction={deleteTasks}
+          updateStatusAction={updateTaskStatuses}
+        />
+      }
+      navigationDesktop={<ProfileNavigationDesktop />}
+      navigationMobile={<ProfileNavigationMobile />}
+    />
   );
 }

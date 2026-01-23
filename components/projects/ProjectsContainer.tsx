@@ -11,6 +11,7 @@ import { ProjectStatus } from "@/generated/prisma/enums";
 import { ProjectDetailModal } from "./ProjectDetailModal";
 import { UserDetailModal } from "../users/UserDetailModal";
 import { ProjectFormBaseSkeleton } from "./ProjectFormBase";
+import { PersonHeaderSkeleton } from "../common/PersonHeader";
 import { CommentItemSkeleton } from "../comments/CommentItem";
 import { sendComment } from "@/lib/actions/comment/sendComment";
 import { ProjectDetailContainer } from "./ProjectDetailContainer";
@@ -24,6 +25,7 @@ import { ProjectCommentsContainer } from "./ProjectCommentsContainer";
 import { UserDetailBottomSheet } from "../users/UserDetailBottomSheet";
 import { ProjectCommentsModalTrigger } from "./ProjectCommentsModalTrigger";
 import { ProjectItemActionMenuTrigger } from "./ProjectItemActionMenuTrigger";
+import { PersonDetailPresentation } from "../common/PersonDetailPresentation";
 import { updateProjectStatuses } from "@/lib/actions/project/updateProjectStatuses";
 import { EntityContainerPresentation } from "../common/EntityContainerPresentation";
 
@@ -111,15 +113,26 @@ function ProjectDetailBottomSheetSlot({ projectId }: { projectId: number }) {
   );
 }
 
+function UserDetailSlotContent({ userId }: { userId: string }) {
+  return (
+    <Suspense
+      fallback={
+        <PersonDetailPresentation
+          personHeader={<PersonHeaderSkeleton />}
+          userDetail={<UserDetailSkeleton />}
+        />
+      }
+    >
+      <UserDetailContainer userId={userId} />
+    </Suspense>
+  );
+}
+
 function UserDetailModalSlot({ userId }: { userId: string }) {
   return (
     <UserDetailModal
       userId={userId}
-      userDetailContainer={
-        <Suspense fallback={<UserDetailSkeleton />}>
-          <UserDetailContainer userId={userId} />
-        </Suspense>
-      }
+      userDetailContainer={<UserDetailSlotContent userId={userId} />}
     />
   );
 }
@@ -128,11 +141,7 @@ function UserDetailBottomSheetSlot({ userId }: { userId: string }) {
   return (
     <UserDetailBottomSheet
       userId={userId}
-      userDetailContainer={
-        <Suspense fallback={<UserDetailSkeleton />}>
-          <UserDetailContainer userId={userId} />
-        </Suspense>
-      }
+      userDetailContainer={<UserDetailSlotContent userId={userId} />}
     />
   );
 }

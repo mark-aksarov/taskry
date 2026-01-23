@@ -1,4 +1,9 @@
 import {
+  PersonHeader,
+  PersonHeaderSkeleton,
+} from "@/components/common/PersonHeader";
+
+import {
   CustomerDetailBottomSheet,
   CustomerDetailBottomSheetProps,
 } from "./CustomerDetailBottomSheet";
@@ -6,11 +11,13 @@ import { Button } from "@/components/ui";
 import { useOverlayTrigger } from "react-aria";
 import { useOverlayTriggerState } from "react-stately";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { PersonHeaderSkeleton } from "@/components/common/PersonHeader";
+import { CustomerDetail } from "../CustomerDetail/CustomerDetail";
+import { OverlayTriggerStateContext } from "react-aria-components";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { CustomerDetailSkeleton } from "../CustomerDetail/CustomerDetailSkeleton";
-import { GlobalContainerProvider } from "@/components/layout/GlobalContainerContext";
 import { PersonDetailPresentation } from "@/components/common/PersonDetailPresentation";
+import { Default as CustomerDetailStory } from "../CustomerDetail/CustomerDetail.stories";
+import { Default as PersonHeaderStory } from "@/components/common/PersonHeader/PersonHeader.stories";
 
 const meta = {
   title: "components/customers/CustomerDetailBottomSheet",
@@ -19,13 +26,6 @@ const meta = {
   decorators: [withThemedBackground],
   args: {
     customerId: 1,
-    state: {
-      isOpen: true,
-      setOpen: () => {},
-      open: () => {},
-      close: () => {},
-      toggle: () => {},
-    },
   },
   globals: {
     viewport: { value: "mobile2", isRotated: false },
@@ -43,30 +43,33 @@ const CustomerDetailBottomSheetTemplate = ({
   const { triggerProps } = useOverlayTrigger({ type: "dialog" }, state);
 
   return (
-    <>
+    <OverlayTriggerStateContext.Provider value={state}>
       <Button {...triggerProps} label="Customer Detail" />
-      <CustomerDetailBottomSheet {...props} state={state} />
-    </>
+      <CustomerDetailBottomSheet {...props} />
+    </OverlayTriggerStateContext.Provider>
   );
 };
 
-export const Default = {} satisfies Story;
+export const Default = {
+  args: {
+    customerId: 1,
+    customerDetailContainer: (
+      <PersonDetailPresentation
+        personHeader={<PersonHeader {...PersonHeaderStory.args} />}
+        userDetail={<CustomerDetail {...CustomerDetailStory.args} />}
+      />
+    ),
+  },
+} satisfies Story;
 
 export const WithSkeletonContent = {
-  decorators: [
-    (Story) => (
-      <GlobalContainerProvider
-        value={{
-          CustomerDetailContainer: () => (
-            <PersonDetailPresentation
-              personHeader={<PersonHeaderSkeleton />}
-              userDetail={<CustomerDetailSkeleton />}
-            />
-          ),
-        }}
-      >
-        <Story />
-      </GlobalContainerProvider>
+  args: {
+    customerId: 1,
+    customerDetailContainer: (
+      <PersonDetailPresentation
+        personHeader={<PersonHeaderSkeleton />}
+        userDetail={<CustomerDetailSkeleton />}
+      />
     ),
-  ],
+  },
 } satisfies Story;

@@ -1,10 +1,11 @@
-import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { CustomerToolbarFiltersModalTrigger } from "./CustomerToolbarFiltersModalTrigger";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import {
   CustomerFiltersForm,
   CustomerFiltersFormSkeleton,
 } from "../CustomerFiltersForm";
+
+import { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { CustomerToolbarFiltersModalTrigger } from "./CustomerToolbarFiltersModalTrigger";
 import { Default as CustomerFiltersFormStory } from "../CustomerFiltersForm/CustomerFiltersForm.stories";
 
 const meta = {
@@ -19,12 +20,14 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    filtersForm: <CustomerFiltersForm {...CustomerFiltersFormStory.args} />,
+    filtersFormContainer: (
+      <CustomerFiltersForm {...CustomerFiltersFormStory.args} />
+    ),
   },
 } satisfies Story;
 
 export const Skeleton = {
   args: {
-    filtersForm: <CustomerFiltersFormSkeleton />,
+    filtersFormContainer: <CustomerFiltersFormSkeleton />,
   },
 } satisfies Story;

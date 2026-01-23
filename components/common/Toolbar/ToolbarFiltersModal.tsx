@@ -6,7 +6,7 @@ export function ToolbarFiltersModal(props: ModalProps) {
     <ResponsiveModal
       data-test="toolbar-filters-modal"
       isDismissable
-      className="w-[500px]"
+      className="md:w-[500px]"
       {...props}
     />
   );

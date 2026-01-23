@@ -1,11 +1,11 @@
 "use client";
 
 import { useRef } from "react";
-import { Modal, RACDialogTrigger } from "@/components/ui";
 import { useOverlayTrigger } from "react-aria";
-import { useOverlayTriggerState } from "react-stately";
 import { NewSubtaskDialog } from "../NewSubtaskDialog";
+import { useOverlayTriggerState } from "react-stately";
 import { NewSubtasksButton } from "../NewSubtaskButton";
+import { Modal, RACDialogTrigger } from "@/components/ui";
 
 export function NewSubtaskModalTrigger() {
   const state = useOverlayTriggerState({});

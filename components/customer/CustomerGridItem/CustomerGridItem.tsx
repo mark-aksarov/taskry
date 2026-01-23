@@ -28,8 +28,6 @@ import { Link, Checkbox, Divider } from "@/components/ui";
 import { UnknownUser } from "@/components/common/UnknownUser";
 import { CustomerGridItemLayout } from "./CustomerGridItemLayout";
 import { ImageContainer } from "@/components/common/ImageContainer";
-import { CustomerDetailModal } from "../CustomerDetailModal/CustomerDetailModal";
-import { CustomerDetailBottomSheet } from "../CustomerDetailBottomSheet/CustomerDetailBottomSheet";
 
 interface CustomerGridItemProps {
   id: number;
@@ -43,6 +41,8 @@ interface CustomerGridItemProps {
     name: string;
   };
   menuTrigger: React.ReactNode;
+  customerDetailModal: React.ReactNode;
+  customerDetailBottomSheet: React.ReactNode;
 }
 
 export function CustomerGridItem({
@@ -54,6 +54,8 @@ export function CustomerGridItem({
   imageUrl,
   company,
   menuTrigger,
+  customerDetailModal,
+  customerDetailBottomSheet,
 }: CustomerGridItemProps) {
   const t = useTranslations("customers.CustomerGridItem");
 
@@ -84,16 +86,12 @@ export function CustomerGridItem({
       }
       imageSlot={
         <>
-          <ItemBaseDetailModalTrigger
-            modal={<CustomerDetailModal customerId={id} />}
-          >
+          <ItemBaseDetailModalTrigger modal={customerDetailModal}>
             {customerImg}
           </ItemBaseDetailModalTrigger>
 
           <ItemBaseDetailBottomSheetTrigger
-            renderBottomSheet={(state) => (
-              <CustomerDetailBottomSheet customerId={id} state={state} />
-            )}
+            bottomSheet={customerDetailBottomSheet}
           >
             {customerImg}
           </ItemBaseDetailBottomSheetTrigger>
@@ -103,16 +101,14 @@ export function CustomerGridItem({
         <GridItemInfo className="w-full items-center">
           <GridItemTitle>
             <ItemBaseDetailModalTrigger
-              modal={<CustomerDetailModal customerId={id} />}
+              modal={customerDetailModal}
               className="truncate"
             >
               {fullName}
             </ItemBaseDetailModalTrigger>
 
             <ItemBaseDetailBottomSheetTrigger
-              renderBottomSheet={(state) => (
-                <CustomerDetailBottomSheet customerId={id} state={state} />
-              )}
+              bottomSheet={customerDetailBottomSheet}
               className="truncate"
             >
               {fullName}

@@ -1,10 +1,12 @@
 import { Suspense } from "react";
-import { NewCustomerForm } from "../NewCustomerForm";
 import { NewCustomerModal } from "./NewCustomerModal";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { Button, RACDialogTrigger } from "@/components/ui";
-import { CustomerFormBaseSkeleton } from "../CustomerFormBase";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import {
+  CustomerFormBase,
+  CustomerFormBaseSkeleton,
+} from "../CustomerFormBase";
 import { Default as CustomerFormBaseStory } from "../CustomerFormBase/CustomerFormBase.stories";
 
 const meta = {
@@ -29,12 +31,14 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    newCustomerForm: <NewCustomerForm {...CustomerFormBaseStory.args} />,
+    newCustomerFormContainer: (
+      <CustomerFormBase {...CustomerFormBaseStory.args} />
+    ),
   },
 } satisfies Story;
 
 export const Skeleton = {
   args: {
-    newCustomerForm: <CustomerFormBaseSkeleton />,
+    newCustomerFormContainer: <CustomerFormBaseSkeleton />,
   },
 } satisfies Story;

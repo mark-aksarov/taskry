@@ -1,14 +1,9 @@
 "use client";
 
-import {
-  MenuTrigger,
-  DialogHeader,
-  DialogHeading,
-  DialogCloseButton,
-} from "@/components/ui";
 import { Item } from "react-stately";
 import { Languages } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { MenuTrigger, DialogHeader } from "@/components/ui";
 import { NavigationButton } from "@/components/common/NavigationButton";
 
 export const AppNavigationLangMenuTrigger = () => {
@@ -18,10 +13,7 @@ export const AppNavigationLangMenuTrigger = () => {
     <MenuTrigger
       overlayType="bottomsheet"
       renderDialogHeader={() => (
-        <DialogHeader>
-          <DialogHeading>{t("dialogHeading")}</DialogHeading>
-          <DialogCloseButton />
-        </DialogHeader>
+        <DialogHeader>{t("dialogHeading")}</DialogHeader>
       )}
       renderButton={() => (
         <NavigationButton>

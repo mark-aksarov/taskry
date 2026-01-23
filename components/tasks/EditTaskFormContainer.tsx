@@ -1,17 +1,17 @@
 "use client";
 
 import {
+  TaskFormBase,
+  TaskFormBaseStatusSelect,
+  TaskFormBaseProjectSelect,
   TaskFormBaseAssigneeSelect,
   TaskFormBaseCategorySelect,
-  TaskFormBaseProjectSelect,
-  TaskFormBaseStatusSelect,
 } from "./TaskFormBase";
 
 import useSWR from "swr";
 import { CalendarDate } from "@internationalized/date";
 import { UserSummaryDTO } from "@/lib/data/user/user.dto";
 import { updateTask } from "@/lib/actions/task/updateTask";
-import { EditTaskForm } from "./EditTaskForm/EditTaskForm";
 import { TaskFormDataDTO } from "@/lib/data/task/task.dto";
 import { ProjectSummaryDTO } from "@/lib/data/project/project.dto";
 import { TaskCategorySummaryDTO } from "@/lib/data/taskCategory/taskCategory.dto";
@@ -49,7 +49,8 @@ export function EditTaskFormContainer({ taskId }: { taskId: number }) {
   );
 
   return (
-    <EditTaskForm
+    <TaskFormBase
+      id="edit-task-form"
       taskId={taskId}
       taskTitleDefaultValue={task.title}
       taskDescriptionDefaultValue={task.description}

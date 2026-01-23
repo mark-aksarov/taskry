@@ -77,7 +77,7 @@ export const ProjectListItem = ({
   const t = useTranslations("projects");
 
   const { isSelected, toggleItem } = useProjectSelection();
-  useSyncSelectionProjectItem(id, title);
+  useSyncSelectionProjectItem(id, title, status);
 
   const format = useFormatter();
 

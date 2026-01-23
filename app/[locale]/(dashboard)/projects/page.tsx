@@ -1,8 +1,3 @@
-import {
-  GlobalContainerProvider,
-  GlobalContainerContextType,
-} from "@/components/layout/GlobalContainerContext";
-
 import { z } from "zod";
 import { Suspense } from "react";
 import { ProjectsPage } from "./ProjectsPage";
@@ -13,15 +8,11 @@ import { getProjectCount } from "@/lib/data/project/project.dal";
 import { deleteProjects } from "@/lib/actions/project/deleteProjects";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { ProjectsContainer } from "@/components/projects/ProjectsContainer";
-import { UserDetailContainer } from "@/components/users/UserDetailContainer";
 import { ProjectFormBaseSkeleton } from "@/components/projects/ProjectFormBase";
 import { updateProjectStatuses } from "@/lib/actions/project/updateProjectStatuses";
-import { ProjectDetailContainer } from "@/components/projects/ProjectDetailContainer";
 import { ProjectFiltersFormSkeleton } from "@/components/projects/ProjectFiltersForm";
 import { ProjectCategoryFormBase } from "@/components/projects/ProjectCategoryFormBase";
 import { NewProjectFormContainer } from "@/components/projects/NewProjectFormContainer";
-import { ProjectCommentsContainer } from "@/components/projects/ProjectCommentsContainer";
-import { EditProjectFormContainer } from "@/components/projects/EditProjectFormContainer";
 import { createProjectCategory } from "@/lib/actions/projectCategory/createProjectCategory";
 import { ProjectFiltersFormContainer } from "@/components/projects/ProjectFiltersFormContainer";
 import { ProjectToolbarActionsMenuTrigger } from "@/components/projects/ProjectToolbarActionsMenuTrigger";
@@ -47,13 +38,6 @@ const searchParamsSchema = z.object({
     .optional()
     .catch(undefined),
 });
-
-const context: GlobalContainerContextType = {
-  EditProjectFormContainer,
-  ProjectDetailContainer,
-  ProjectCommentsContainer,
-  UserDetailContainer,
-};
 
 export default async function AppProjectsPage({
   searchParams,
@@ -84,44 +68,42 @@ export default async function AppProjectsPage({
   }
 
   return (
-    <GlobalContainerProvider value={context}>
-      <ProjectsPage
-        projectsContainer={
-          <ProjectsContainer
-            page={page}
-            pageSize={pageSize}
-            sort={sort}
-            filters={filters}
-          />
-        }
-        projectToolbarCreateNewMenuTrigger={
-          <ProjectToolbarCreateNewMenuTrigger
-            newProjectFormContainer={
-              <Suspense fallback={<ProjectFormBaseSkeleton />}>
-                <NewProjectFormContainer />
-              </Suspense>
-            }
-            newProjectCategoryForm={
-              <ProjectCategoryFormBase formAction={createProjectCategory} />
-            }
-          />
-        }
-        projectToolbarFiltersModalTrigger={
-          <ProjectToolbarFiltersModalTrigger
-            filtersForm={
-              <Suspense fallback={<ProjectFiltersFormSkeleton />}>
-                <ProjectFiltersFormContainer filters={filters} />
-              </Suspense>
-            }
-          />
-        }
-        projectToolbarActionsMenuTrigger={
-          <ProjectToolbarActionsMenuTrigger
-            deleteAction={deleteProjects}
-            updateStatusAction={updateProjectStatuses}
-          />
-        }
-      />
-    </GlobalContainerProvider>
+    <ProjectsPage
+      projectsContainer={
+        <ProjectsContainer
+          page={page}
+          pageSize={pageSize}
+          sort={sort}
+          filters={filters}
+        />
+      }
+      projectToolbarCreateNewMenuTrigger={
+        <ProjectToolbarCreateNewMenuTrigger
+          newProjectFormContainer={
+            <Suspense fallback={<ProjectFormBaseSkeleton />}>
+              <NewProjectFormContainer />
+            </Suspense>
+          }
+          newProjectCategoryForm={
+            <ProjectCategoryFormBase formAction={createProjectCategory} />
+          }
+        />
+      }
+      projectToolbarFiltersModalTrigger={
+        <ProjectToolbarFiltersModalTrigger
+          filtersFormContainer={
+            <Suspense fallback={<ProjectFiltersFormSkeleton />}>
+              <ProjectFiltersFormContainer filters={filters} />
+            </Suspense>
+          }
+        />
+      }
+      projectToolbarActionsMenuTrigger={
+        <ProjectToolbarActionsMenuTrigger
+          deleteAction={deleteProjects}
+          updateStatusAction={updateProjectStatuses}
+        />
+      }
+    />
   );
 }

@@ -71,10 +71,7 @@ export function SearchModal({
       className="w-[600px]"
     >
       <Dialog className="md:h-[calc(100dvh-64px)]">
-        <DialogHeader>
-          <DialogHeading>{t("dialogHeading")}</DialogHeading>
-          <DialogCloseButton />
-        </DialogHeader>
+        <DialogHeader>{t("dialogHeading")}</DialogHeader>
 
         <SearchModalContext.Provider value={contextValue}>
           {searchCategory === "users" && usersSearchContainer}

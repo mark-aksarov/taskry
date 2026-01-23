@@ -24,7 +24,9 @@ export function CustomersPageEmpty({
         <EmptySectionDescription>{t("description")}</EmptySectionDescription>
         <EmptySectionButton
           createNewModal={
-            <NewCustomerModal newCustomerForm={newCustomerFormContainer} />
+            <NewCustomerModal
+              newCustomerFormContainer={newCustomerFormContainer}
+            />
           }
         >
           {t("addButtonLabel")}

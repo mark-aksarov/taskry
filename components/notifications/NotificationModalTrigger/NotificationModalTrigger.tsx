@@ -4,9 +4,7 @@ import {
   Button,
   Dialog,
   DialogHeader,
-  DialogHeading,
   RACDialogTrigger,
-  DialogCloseButton,
 } from "@/components/ui";
 
 import { Bell } from "lucide-react";
@@ -36,10 +34,7 @@ export function NotificationModalTrigger({
         className="w-[600px]"
       >
         <Dialog className="md:h-[calc(100dvh-64px)]">
-          <DialogHeader>
-            <DialogHeading>{t("dialogHeading")}</DialogHeading>
-            <DialogCloseButton />
-          </DialogHeader>
+          <DialogHeader>{t("dialogHeading")}</DialogHeader>
 
           {notificationModalContentContainer}
         </Dialog>

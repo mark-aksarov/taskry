@@ -29,12 +29,12 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    newTaskForm: <NewTaskForm {...TaskFormBaseStory.args} />,
+    newTaskFormContainer: <NewTaskForm {...TaskFormBaseStory.args} />,
   },
 } satisfies Story;
 
 export const Skeleton = {
   args: {
-    newTaskForm: <TaskFormBaseSkeleton />,
+    newTaskFormContainer: <TaskFormBaseSkeleton />,
   },
 } satisfies Story;

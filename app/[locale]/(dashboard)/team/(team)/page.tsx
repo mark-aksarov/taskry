@@ -1,8 +1,3 @@
-import {
-  GlobalContainerContextType,
-  GlobalContainerProvider,
-} from "@/components/layout/GlobalContainerContext";
-
 import { z } from "zod";
 import { Suspense } from "react";
 import { UsersPage } from "./UsersPage";
@@ -13,9 +8,12 @@ import { deleteUsers } from "@/lib/actions/user/deleteUsers";
 import { UsersContainer } from "@/components/users/UsersContainer";
 import { createPosition } from "@/lib/actions/position/createPosition";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
-import { UserDetailContainer } from "@/components/users/UserDetailContainer";
 import { UserFiltersFormSkeleton } from "@/components/users/UserFiltersForm";
 import { UserFiltersFormContainer } from "@/components/users/UserFiltersFormContainer";
+import { UserToolbarActionsMenuTrigger } from "@/components/users/UserToolbarActionsMenuTrigger";
+import { UserToolbarFiltersModalTrigger } from "@/components/users/UserToolbarFiltersModalTrigger";
+import { UserToolbarCreateNewMenuTrigger } from "@/components/users/UserToolbarCreateNewMenuTrigger";
+import { PositionFormBase } from "@/components/users/PositionFormBase";
 
 const searchParamsSchema = z.object({
   page: z.coerce.number().int().positive().catch(1),
@@ -36,10 +34,6 @@ const searchParamsSchema = z.object({
   position: arrayParam(z.coerce.number()).catch([]),
 });
 
-const context: GlobalContainerContextType = {
-  UserDetailContainer,
-};
-
 export default async function AppUsersPage({
   searchParams,
 }: {
@@ -59,24 +53,38 @@ export default async function AppUsersPage({
   if (!count) return <UsersPageEmpty />;
 
   return (
-    <GlobalContainerProvider value={context}>
-      <UsersPage
-        createPositionAction={createPosition}
-        userFiltersFormContainer={
-          <Suspense fallback={<UserFiltersFormSkeleton />}>
-            <UserFiltersFormContainer filters={filters} />
-          </Suspense>
-        }
-        usersContainer={
-          <UsersContainer
-            page={page}
-            pageSize={pageSize}
-            sort={sort}
-            filters={filters}
-          />
-        }
-        deleteUsersAction={deleteUsers}
-      />
-    </GlobalContainerProvider>
+    <UsersPage
+      userToolbarFiltersModalTrigger={
+        <UserToolbarFiltersModalTrigger
+          filtersFormContainer={
+            <Suspense fallback={<UserFiltersFormSkeleton />}>
+              <UserFiltersFormContainer filters={filters} />
+            </Suspense>
+          }
+        />
+      }
+      userToolbarActionsMenuTrigger={
+        <UserToolbarActionsMenuTrigger deleteAction={deleteUsers} />
+      }
+      userToolbarCreateNewMenuTrigger={
+        <UserToolbarCreateNewMenuTrigger
+          newUserForm={<></>}
+          newPositionForm={
+            <PositionFormBase
+              formId="new-position-form"
+              formAction={createPosition}
+            />
+          }
+        />
+      }
+      usersContainer={
+        <UsersContainer
+          page={page}
+          pageSize={pageSize}
+          sort={sort}
+          filters={filters}
+        />
+      }
+    />
   );
 }

@@ -1,8 +1,3 @@
-import {
-  GlobalContainerProvider,
-  GlobalContainerContextType,
-} from "@/components/layout/GlobalContainerContext";
-
 import { z } from "zod";
 import { Suspense } from "react";
 import { CustomersPage } from "./CustomersPage";
@@ -10,14 +5,17 @@ import { arrayParam } from "@/lib/utils/arrayParam";
 import { CustomersPageEmpty } from "./CustomersPageEmpty";
 import { createCompany } from "@/lib/actions/company/createCompany";
 import { getCustomerCount } from "@/lib/data/customer/customer.dal";
+import { NewCompanyForm } from "@/components/customer/NewCompanyForm";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { deleteCustomers } from "@/lib/actions/customer/deleteCustomers";
 import { CustomersContainer } from "@/components/customer/CustomersContainer";
+import { CustomerFormBaseSkeleton } from "@/components/customer/CustomerFormBase";
 import { CustomerFiltersFormSkeleton } from "@/components/customer/CustomerFiltersForm";
 import { NewCustomerFormContainer } from "@/components/customer/NewCustomerFormContainer";
-import { EditCustomerFormContainer } from "@/components/customer/EditCustomerFormContainer";
 import { CustomerFiltersFormContainer } from "@/components/customer/CustomerFiltersFormContainer";
-import { CustomerDetailContainer } from "@/components/customer/CustomerDetailContainer";
+import { CustomerToolbarActionsMenuTrigger } from "@/components/customer/CustomerToolbarActionsMenuTrigger";
+import { CustomerToolbarFiltersModalTrigger } from "@/components/customer/CustomerToolbarFiltersModalTrigger";
+import { CustomerToolbarCreateNewMenuTrigger } from "@/components/customer/CustomerToolbarCreateNewMenuTrigger";
 
 const searchParamsSchema = z.object({
   page: z.coerce.number().int().positive().catch(1),
@@ -37,11 +35,6 @@ const searchParamsSchema = z.object({
     .catch(undefined),
   company: arrayParam(z.coerce.number()).catch([]),
 });
-
-const context: GlobalContainerContextType = {
-  CustomerDetailContainer,
-  EditCustomerFormContainer,
-};
 
 export default async function AppCustomersPage({
   searchParams,
@@ -68,25 +61,37 @@ export default async function AppCustomersPage({
   }
 
   return (
-    <GlobalContainerProvider value={context}>
-      <CustomersPage
-        customersFiltersForm={
-          <Suspense fallback={<CustomerFiltersFormSkeleton />}>
-            <CustomerFiltersFormContainer filters={filters} />
-          </Suspense>
-        }
-        customersContainer={
-          <CustomersContainer
-            page={page}
-            pageSize={pageSize}
-            sort={sort}
-            filters={filters}
-          />
-        }
-        newCustomerFormContainer={<NewCustomerFormContainer />}
-        createCompanyAction={createCompany}
-        deleteCustomersAction={deleteCustomers}
-      />
-    </GlobalContainerProvider>
+    <CustomersPage
+      customerToolbarCreateNewMenuTrigger={
+        <CustomerToolbarCreateNewMenuTrigger
+          newCustomerFormContainer={
+            <Suspense fallback={<CustomerFormBaseSkeleton />}>
+              <NewCustomerFormContainer />
+            </Suspense>
+          }
+          newCompanyForm={<NewCompanyForm formAction={createCompany} />}
+        />
+      }
+      customerToolbarActionsMenuTrigger={
+        <CustomerToolbarActionsMenuTrigger deleteAction={deleteCustomers} />
+      }
+      customerToolbarFiltersModalTrigger={
+        <CustomerToolbarFiltersModalTrigger
+          filtersFormContainer={
+            <Suspense fallback={<CustomerFiltersFormSkeleton />}>
+              <CustomerFiltersFormContainer filters={filters} />
+            </Suspense>
+          }
+        />
+      }
+      customersContainer={
+        <CustomersContainer
+          page={page}
+          pageSize={pageSize}
+          sort={sort}
+          filters={filters}
+        />
+      }
+    />
   );
 }

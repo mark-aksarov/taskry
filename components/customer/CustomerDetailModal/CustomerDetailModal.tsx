@@ -1,62 +1,37 @@
 "use client";
 
 import {
-  Modal,
-  Button,
-  Dialog,
-  DialogBody,
-  DialogFooter,
-  DialogHeader,
-  DialogHeading,
-  DialogCloseButton,
-} from "@/components/ui";
+  DetailModal,
+  DetailModalDialog,
+} from "@/components/common/DetailModal";
 
-import { Suspense } from "react";
 import { useTranslations } from "next-intl";
-import { PersonHeaderSkeleton } from "@/components/common/PersonHeader";
-import { CustomerDetailSkeleton } from "@/components/customer/CustomerDetail";
-import { useGlobalContainer } from "@/components/layout/GlobalContainerContext";
-import { PersonDetailPresentation } from "@/components/common/PersonDetailPresentation";
+import { DialogBody, DialogFooter, DialogHeader } from "@/components/ui";
+import { DetailBottomSheetLink } from "@/components/common/DetailBottomSheet";
 
-export function CustomerDetailModal({ customerId }: { customerId: number }) {
+interface CustomerDetailModalProps {
+  customerId: number;
+  customerDetailContainer: React.ReactNode;
+}
+
+export function CustomerDetailModal({
+  customerId,
+  customerDetailContainer,
+}: CustomerDetailModalProps) {
   const t = useTranslations("customers.CustomerDetailModal");
 
-  const { CustomerDetailContainer } = useGlobalContainer();
-
-  if (!CustomerDetailContainer) {
-    throw new Error(
-      "CustomerDetailContainer is missing in GlobalContainerContext",
-    );
-  }
-
   return (
-    <Modal isDismissable className="w-[600px]">
-      <Dialog className="max-h-[calc(100dvh-64px)]">
-        <DialogHeader>
-          <DialogHeading>{t("dialogHeading")}</DialogHeading>
-          <DialogCloseButton />
-        </DialogHeader>
-        <DialogBody>
-          <Suspense
-            fallback={
-              <PersonDetailPresentation
-                personHeader={<PersonHeaderSkeleton />}
-                userDetail={<CustomerDetailSkeleton />}
-              />
-            }
-          >
-            <CustomerDetailContainer customerId={customerId} />
-          </Suspense>
-        </DialogBody>
+    <DetailModal>
+      <DetailModalDialog>
+        <DialogHeader>{t("dialogHeading")}</DialogHeader>
+        <DialogBody>{customerDetailContainer}</DialogBody>
         <DialogFooter>
-          <Button
-            variant="primary"
-            size="medium"
-            label={t("editButtonLabel")}
-            className="w-full justify-center"
+          <DetailBottomSheetLink
+            label={t("openInFullPage")}
+            href={`/customers?customerId=${customerId}`}
           />
         </DialogFooter>
-      </Dialog>
-    </Modal>
+      </DetailModalDialog>
+    </DetailModal>
   );
 }

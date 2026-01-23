@@ -12,12 +12,10 @@ import {
   ItemBaseDetailBottomSheetTrigger,
 } from "@/components/common/ItemBase";
 
+import { TaskStatus } from "@/generated/prisma/enums";
 import { useFormatter, useTranslations } from "next-intl";
 import { UserTaskListItemLayout } from "./UserTaskListItemLayout";
-import { ProjectStatus, TaskStatus } from "@/generated/prisma/enums";
-import { TaskDetailModal } from "@/components/tasks/TaskDetailModal";
 import { useSyncSelectionTaskItem } from "@/lib/hooks/useTaskSelection";
-import { TaskDetailBottomSheet } from "@/components/tasks/TaskDetailBottomSheet";
 import { getTaskStatusBadgeColor } from "@/components/tasks/getTaskStatusBadgeColor";
 import { TaskListItemCheckbox } from "@/components/tasks/TaskListItem/TaskListItemCheckbox";
 
@@ -28,6 +26,8 @@ export interface UserTaskListItemProps {
   status: TaskStatus;
   commentModalTrigger?: React.ReactNode;
   menuTrigger: React.ReactNode;
+  taskDetailModal: React.ReactNode;
+  taskDetailBottomSheet: React.ReactNode;
 }
 
 export const UserTaskListItem = ({
@@ -37,6 +37,8 @@ export const UserTaskListItem = ({
   status,
   commentModalTrigger,
   menuTrigger,
+  taskDetailModal,
+  taskDetailBottomSheet,
 }: UserTaskListItemProps) => {
   const t = useTranslations();
 
@@ -61,16 +63,14 @@ export const UserTaskListItem = ({
         <ListItemInfo>
           <ListItemTitle>
             <ItemBaseDetailModalTrigger
-              modal={<TaskDetailModal taskId={id} />}
+              modal={taskDetailModal}
               className="truncate"
             >
               {title}
             </ItemBaseDetailModalTrigger>
 
             <ItemBaseDetailBottomSheetTrigger
-              renderBottomSheet={(state) => (
-                <TaskDetailBottomSheet taskId={id} state={state} />
-              )}
+              bottomSheet={taskDetailBottomSheet}
               className="truncate"
             >
               {title}

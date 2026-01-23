@@ -1,14 +1,8 @@
 "use client";
 
-import {
-  Button,
-  DialogHeader,
-  DialogHeading,
-  DialogCloseButton,
-} from "@/components/ui";
-
 import { useTranslations } from "next-intl";
 import { useOverlayTrigger } from "react-aria";
+import { Button, DialogHeader } from "@/components/ui";
 import { Item, useOverlayTriggerState } from "react-stately";
 import { Check, ChevronDown, CircleEllipsis, Clock } from "lucide-react";
 import { ResponsiveMenuTrigger } from "@/components/common/ResponsiveMenuTrigger";
@@ -21,10 +15,7 @@ export function ProjectDetailStatusMenuTrigger() {
   return (
     <ResponsiveMenuTrigger
       renderDialogHeader={() => (
-        <DialogHeader>
-          <DialogHeading>{t("dialogHeading")}</DialogHeading>
-          <DialogCloseButton />
-        </DialogHeader>
+        <DialogHeader>{t("dialogHeading")}</DialogHeader>
       )}
       renderButton={() => (
         <Button

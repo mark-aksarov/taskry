@@ -8,11 +8,16 @@ import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { usePathname, useRouter } from "next/navigation";
 import { PageDecorator } from "@/.storybook/PageDecorator";
 import { UserFiltersForm } from "@/components/users/UserFiltersForm";
+import { PositionFormBase } from "@/components/users/PositionFormBase";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { Default as UserListStory } from "@/components/users/UserList/UserList.stories";
 import { Default as UserGridStory } from "@/components/users/UserGrid/UserGrid.stories";
 import { EntityContainerPresentation } from "@/components/common/EntityContainerPresentation";
+import { UserToolbarActionsMenuTrigger } from "@/components/users/UserToolbarActionsMenuTrigger";
+import { UserToolbarFiltersModalTrigger } from "@/components/users/UserToolbarFiltersModalTrigger";
+import { UserToolbarCreateNewMenuTrigger } from "@/components/users/UserToolbarCreateNewMenuTrigger";
 import { Default as UserFiltersFormStory } from "@/components/users/UserFiltersForm/UserFiltersForm.stories";
+import { Default as PositionFormBaseStory } from "@/components/users/PositionFormBase/PositionFormBase.stories";
 
 const meta = {
   title: "components/pages/UsersPage",
@@ -30,10 +35,21 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    deleteUsersAction: fn(),
-    createPositionAction: fn(),
-    userFiltersFormContainer: (
-      <UserFiltersForm {...UserFiltersFormStory.args} />
+    userToolbarFiltersModalTrigger: (
+      <UserToolbarFiltersModalTrigger
+        filtersFormContainer={
+          <UserFiltersForm {...UserFiltersFormStory.args} />
+        }
+      />
+    ),
+    userToolbarActionsMenuTrigger: (
+      <UserToolbarActionsMenuTrigger deleteAction={fn()} />
+    ),
+    userToolbarCreateNewMenuTrigger: (
+      <UserToolbarCreateNewMenuTrigger
+        newUserForm={<></>}
+        newPositionForm={<PositionFormBase {...PositionFormBaseStory.args} />}
+      />
     ),
     usersContainer: (
       <EntityContainerPresentation

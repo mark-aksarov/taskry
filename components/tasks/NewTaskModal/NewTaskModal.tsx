@@ -1,23 +1,41 @@
+import {
+  DialogBody,
+  ModalProps,
+  DialogFooter,
+  DialogHeader,
+} from "@/components/ui";
+
+import {
+  FormModal,
+  FormModalDialog,
+  FormModalSubmitButton,
+} from "@/components/common/FormModal";
+
 import { useTranslations } from "next-intl";
-import { ModalProps } from "@/components/ui";
-import { FormModal } from "@/components/common/FormModal";
 
 interface NewTaskModalProps
   extends Pick<ModalProps, "isOpen" | "onOpenChange"> {
-  newTaskForm: React.ReactNode;
+  newTaskFormContainer: React.ReactNode;
 }
 
-export function NewTaskModal({ newTaskForm, ...props }: NewTaskModalProps) {
+export function NewTaskModal({
+  newTaskFormContainer,
+  ...props
+}: NewTaskModalProps) {
   const t = useTranslations("tasks.NewTaskModal");
 
   return (
-    <FormModal
-      data-test="new-task-modal"
-      formId="new-task-form"
-      title={t("title")}
-      submitButtonLabel={t("submitButtonLabel")}
-      form={newTaskForm}
-      {...props}
-    />
+    <FormModal {...props}>
+      <FormModalDialog>
+        <DialogHeader>{t("title")}</DialogHeader>
+        <DialogBody>{newTaskFormContainer}</DialogBody>
+        <DialogFooter>
+          <FormModalSubmitButton
+            form="new-task-form"
+            label={t("submitButtonLabel")}
+          />
+        </DialogFooter>
+      </FormModalDialog>
+    </FormModal>
   );
 }

@@ -4,10 +4,10 @@ import {
   ProjectFormBaseStatusSelect,
   ProjectFormBaseCategorySelect,
   ProjectFormBaseCustomerSelect,
+  ProjectFormBase,
 } from "./ProjectFormBase";
 
 import useSWR from "swr";
-import { EditProjectForm } from "./EditProjectForm";
 import { CalendarDate } from "@internationalized/date";
 import { updateProject } from "@/lib/actions/project/updateProject";
 import { ProjectFormDataDTO } from "@/lib/data/project/project.dto";
@@ -43,7 +43,8 @@ export function EditProjectFormContainer({ projectId }: { projectId: number }) {
   );
 
   return (
-    <EditProjectForm
+    <ProjectFormBase
+      id="edit-project-form"
       projectId={projectId}
       projectTitleDefaultValue={project.title}
       projectDescriptionDefaultValue={project.description}

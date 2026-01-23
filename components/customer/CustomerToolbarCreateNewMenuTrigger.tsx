@@ -1,36 +1,35 @@
 "use client";
 
 import {
-  Button,
-  DialogHeader,
-  DialogHeading,
-  DialogCloseButton,
-} from "@/components/ui";
+  ToolbarCreateNewButton,
+  ToolbarCreateNewMenuTrigger,
+} from "../common/Toolbar";
+
 import { useState } from "react";
+import { Key } from "react-aria";
+import { Item } from "react-stately";
 import { useTranslations } from "next-intl";
-import { Key, useOverlayTrigger } from "react-aria";
-import { Building2, Contact, Plus } from "lucide-react";
-import { Item, useOverlayTriggerState } from "react-stately";
-import { ResponsiveMenuTrigger } from "@/components/common/ResponsiveMenuTrigger";
+import { DialogHeader } from "@/components/ui";
+import { Building2, Contact } from "lucide-react";
 import { NewCustomerModal } from "./NewCustomerModal";
 import { NewCompanyModal } from "./NewCompanyModal/NewCompanyModal";
 
 interface CustomerToolbarCreateNewMenuTriggerProps {
-  newCustomerForm: React.ReactNode;
+  newCustomerFormContainer: React.ReactNode;
   newCompanyForm: React.ReactNode;
 }
 
 export function CustomerToolbarCreateNewMenuTrigger({
-  newCustomerForm,
+  newCustomerFormContainer,
   newCompanyForm,
 }: CustomerToolbarCreateNewMenuTriggerProps) {
   const t = useTranslations("customers.CustomerToolbarCreateNewMenuTrigger");
 
-  const state = useOverlayTriggerState({});
-  const { triggerProps } = useOverlayTrigger({ type: "dialog" }, state);
+  // Separate modal state for creating a customer and a company
   const [isOpenCustomerModal, setIsOpenCustomerModal] = useState(false);
   const [isOpenCompanyModal, setIsOpenCompanyModal] = useState(false);
 
+  // Open the corresponding modal based on the selected menu item
   function handleAction(key: Key) {
     if (key === "customer") {
       setIsOpenCustomerModal(true);
@@ -41,24 +40,17 @@ export function CustomerToolbarCreateNewMenuTrigger({
 
   return (
     <>
-      <ResponsiveMenuTrigger
+      <ToolbarCreateNewMenuTrigger
         onAction={handleAction}
         renderDialogHeader={() => (
-          <DialogHeader>
-            <DialogHeading>{t("dialogHeading")}</DialogHeading>
-            <DialogCloseButton />
-          </DialogHeader>
+          <DialogHeader>{t("dialogHeading")}</DialogHeader>
         )}
-        overlayClassName="md:min-w-[200px]"
         renderButton={() => (
-          <Button
-            {...triggerProps}
+          <ToolbarCreateNewButton
             data-test="customer-toolbar-create-new-menu-trigger"
             label={t("label")}
-            iconLeft={<Plus size={16} strokeWidth={1.5} absoluteStrokeWidth />}
           />
         )}
-        placement="bottom right"
       >
         <Item textValue={t("items.customer")} key="customer">
           <Contact size={16} strokeWidth={1.5} absoluteStrokeWidth />
@@ -68,14 +60,16 @@ export function CustomerToolbarCreateNewMenuTrigger({
           <Building2 size={16} strokeWidth={1.5} absoluteStrokeWidth />
           {t("items.company")}
         </Item>
-      </ResponsiveMenuTrigger>
+      </ToolbarCreateNewMenuTrigger>
 
+      {/* Modal for creating a new customer */}
       <NewCustomerModal
-        newCustomerForm={newCustomerForm}
+        newCustomerFormContainer={newCustomerFormContainer}
         isOpen={isOpenCustomerModal}
         onOpenChange={setIsOpenCustomerModal}
       />
 
+      {/* Modal for creating a new company */}
       <NewCompanyModal
         newCompanyForm={newCompanyForm}
         isOpen={isOpenCompanyModal}

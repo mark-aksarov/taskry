@@ -1,11 +1,16 @@
 "use client";
 
+import {
+  ItemBaseActionMenuButton,
+  ItemBaseActionMenuTrigger,
+  ItemBaseActionMenuDialogHeader,
+} from "../common/ItemBase";
+
 import { useState } from "react";
 import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
 import { Pencil, Trash } from "lucide-react";
-import { ItemBaseActionMenuTrigger } from "../common/ItemBase";
-import { DeleteEntityModal } from "../common/DeleteEntityModal";
+import { DeleteUserModal } from "./DeleteUserModal";
 import { ActionFn, ActionState, DeleteUsersPayload } from "@/lib/actions/types";
 
 export function UserItemActionMenuTrigger({
@@ -30,7 +35,16 @@ export function UserItemActionMenuTrigger({
 
   return (
     <>
-      <ItemBaseActionMenuTrigger className={className} onAction={handleAction}>
+      <ItemBaseActionMenuTrigger
+        onAction={handleAction}
+        renderDialogHeader={() => <ItemBaseActionMenuDialogHeader />}
+        renderButton={() => (
+          <ItemBaseActionMenuButton
+            className={className}
+            data-test={`user-item-${userId}-action-menu-trigger`}
+          />
+        )}
+      >
         <Item textValue={t("edit")} key="edit">
           <Pencil size={16} /> {t("edit")}
         </Item>
@@ -39,10 +53,9 @@ export function UserItemActionMenuTrigger({
         </Item>
       </ItemBaseActionMenuTrigger>
 
-      <DeleteEntityModal
-        entityId={userId}
-        entityName={userFullName}
-        translationNamespace="users.DeleteUserModal"
+      <DeleteUserModal
+        userId={userId}
+        userFullName={userFullName}
         isOpen={isDeleteUserModalOpen}
         onOpenChange={setIsDeleteUserModalOpen}
         deleteAction={deleteAction}

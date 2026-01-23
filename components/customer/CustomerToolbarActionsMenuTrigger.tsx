@@ -10,9 +10,14 @@ import { useState } from "react";
 import { Trash } from "lucide-react";
 import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
-import { ToolbarActionsMenuTrigger } from "../common/Toolbar";
+import { DeleteCustomersModal } from "./DeleteCustomersModal";
+import {
+  ToolbarActionsButtonDesktop,
+  ToolbarActionsButtonMobile,
+  ToolbarActionsMenuTrigger,
+} from "../common/Toolbar";
 import { useCustomerSelection } from "@/lib/hooks/useCustomerSelection";
-import { BulkDeleteEntityModal } from "../common/BulkDeleteEntityModal";
+import { DialogHeader } from "../ui";
 
 interface CustomerToolbarActionsMenuTriggerProps {
   deleteAction: ActionFn<ActionState, DeleteCustomersPayload>;
@@ -23,31 +28,44 @@ export const CustomerToolbarActionsMenuTrigger = ({
 }: CustomerToolbarActionsMenuTriggerProps) => {
   const t = useTranslations("customers.CustomerToolbarActionsMenuTrigger");
 
-  const { selectedIds: projectIds, clearSelectedIds } = useCustomerSelection();
-
+  // Delete confirmation modal state
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
+  // Menu actions: show delete modal
   const handleAction = (key: Key) => {
     if (key === "delete") {
       setIsDeleteModalOpen(true);
     }
   };
 
+  const { selectedIds: customerIds, clearSelectedIds } = useCustomerSelection();
+
+  const isDisabled = customerIds.length === 0;
+
   return (
     <>
-      <ToolbarActionsMenuTrigger onAction={handleAction}>
+      <ToolbarActionsMenuTrigger
+        onAction={handleAction}
+        renderDialogHeader={() => <DialogHeader>{t("actions")}</DialogHeader>}
+        renderButton={() => (
+          <>
+            <ToolbarActionsButtonMobile isDisabled={isDisabled} />
+            <ToolbarActionsButtonDesktop isDisabled={isDisabled} />
+          </>
+        )}
+      >
         <Item textValue={t("delete")} key="delete">
           <Trash size={16} strokeWidth={1.5} absoluteStrokeWidth />
           {t("delete")}
         </Item>
       </ToolbarActionsMenuTrigger>
 
-      <BulkDeleteEntityModal
-        entityIds={projectIds}
+      {/* Modal for confirming customer deletion */}
+      <DeleteCustomersModal
+        customerIds={customerIds}
+        deleteAction={deleteAction}
         isOpen={isDeleteModalOpen}
         onOpenChange={setIsDeleteModalOpen}
-        translationNamespace="customers.BulkDeleteCustomerModal"
-        deleteAction={deleteAction}
         onSuccess={clearSelectedIds}
       />
     </>

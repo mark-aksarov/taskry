@@ -26,14 +26,14 @@ const initialState: ActionState = {
 
 interface DeleteProjectModalProps extends ModalProps {
   projectId: number;
-  entityName: string;
+  projectTitle: string;
   deleteAction: ActionFn<ActionState, DeleteProjectsPayload>;
   onSuccess?: () => void;
 }
 
 export function DeleteProjectModal({
   projectId,
-  entityName,
+  projectTitle,
   isOpen,
   onOpenChange,
   deleteAction,
@@ -65,7 +65,7 @@ export function DeleteProjectModal({
       <ConfirmModalText>
         {t.rich("text", {
           strong: (chunks) => <strong>{chunks}</strong>,
-          name: entityName,
+          name: projectTitle,
         })}
       </ConfirmModalText>
       <ConfirmModalActions>

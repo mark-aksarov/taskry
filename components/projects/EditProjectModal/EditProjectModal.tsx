@@ -3,12 +3,17 @@
 import {
   FormModal,
   FormModalDialog,
-  FormModalDialogHeader,
   FormModalSubmitButton,
 } from "@/components/common/FormModal";
 
+import {
+  ModalProps,
+  DialogBody,
+  DialogFooter,
+  DialogHeader,
+} from "@/components/ui";
+
 import { useTranslations } from "next-intl";
-import { ModalProps, DialogBody, DialogFooter } from "@/components/ui";
 
 interface EditProjectModalProps
   extends Pick<ModalProps, "isOpen" | "onOpenChange"> {
@@ -24,7 +29,7 @@ export function EditProjectModal({
   return (
     <FormModal {...props}>
       <FormModalDialog>
-        <FormModalDialogHeader>{t("title")}</FormModalDialogHeader>
+        <DialogHeader>{t("title")}</DialogHeader>
         <DialogBody>{editProjectFormContainer}</DialogBody>
         <DialogFooter>
           <FormModalSubmitButton

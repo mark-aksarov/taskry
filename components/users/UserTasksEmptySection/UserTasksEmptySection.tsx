@@ -24,7 +24,9 @@ export function UserTasksEmptySection({
         </EmptySectionHeading>
         <EmptySectionDescription>{t("description")}</EmptySectionDescription>
         <EmptySectionButton
-          createNewModal={<NewTaskModal newTaskForm={newTaskFormContainer} />}
+          createNewModal={
+            <NewTaskModal newTaskFormContainer={newTaskFormContainer} />
+          }
         >
           {t("editButtonLabel")}
         </EmptySectionButton>

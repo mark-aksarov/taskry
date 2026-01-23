@@ -11,7 +11,4 @@ export { ToolbarFiltersModalTrigger } from "./ToolbarFiltersModalTrigger";
 export { ToolbarActionsButtonMobile } from "./ToolbarActionsButtonMobile";
 export { ToolbarActionsButtonDesktop } from "./ToolbarActionsButtonDesktop";
 export { ToolbarCreateNewMenuTrigger } from "./ToolbarCreateNewMenuTrigger";
-export { ToolbarActionsMenuDialogHeader } from "./ToolbarActionsMenuDialogHeader";
 export { ToolbarFiltersModalSubmitButton } from "./ToolbarFiltersModalSubmitButton";
-export { ToolbarFiltersModalDialogHeader } from "./ToolbarFiltersModalDialogHeader";
-export { ToolbarCreateNewMenuDialogHeader } from "./ToolbarCreateNewMenuDialogHeader";

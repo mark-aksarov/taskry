@@ -12,39 +12,26 @@ import {
   ToolbarMobileHeading,
 } from "@/components/common/Toolbar";
 
-import {
-  ActionFn,
-  ActionState,
-  DeleteTasksPayload,
-  UpdateTaskStatusesPayload,
-} from "@/lib/actions/types";
-
 import { useTranslations } from "next-intl";
 import { PageGrid } from "@/components/common/PageGrid";
 import { PageContainer } from "@/components/common/PageContainer";
 import { SelectionProvider } from "@/components/common/SelectionContext";
-import { NewTaskModalTrigger } from "@/components/tasks/NewTaskModalTrigger";
 import { TaskToolbarSortingMenuTrigger } from "@/components/tasks/TaskToolbarSortingMenuTrigger";
-import { TaskToolbarActionsMenuTrigger } from "@/components/tasks/TaskToolbarActionsMenuTrigger";
 
 interface UserTasksPageLayoutProps {
   userTasksContainer: React.ReactNode;
   userHeaderContainer: React.ReactNode;
-  newTaskFormContainer: React.ReactNode;
   navigationDesktop: React.ReactNode;
   navigationMobile: React.ReactNode;
-  deleteTasksAction: ActionFn<ActionState, DeleteTasksPayload>;
-  updateTasksStatusesAction: ActionFn<ActionState, UpdateTaskStatusesPayload>;
+  taskToolbarActionsMenuTrigger: React.ReactNode;
 }
 
 export function UserTasksPageLayout({
   userTasksContainer,
   userHeaderContainer,
-  newTaskFormContainer,
   navigationDesktop,
   navigationMobile,
-  deleteTasksAction,
-  updateTasksStatusesAction,
+  taskToolbarActionsMenuTrigger,
 }: UserTasksPageLayoutProps) {
   const t = useTranslations("users.UserTasksPageLayout");
 
@@ -57,11 +44,7 @@ export function UserTasksPageLayout({
               <UserCardTitle>{t("title")}</UserCardTitle>
               <div className="flex gap-4">
                 <TaskToolbarSortingMenuTrigger />
-                <TaskToolbarActionsMenuTrigger
-                  deleteAction={deleteTasksAction}
-                  updateStatusAction={updateTasksStatusesAction}
-                />
-                <NewTaskModalTrigger newTaskForm={newTaskFormContainer} />
+                {taskToolbarActionsMenuTrigger}
               </div>
             </UserCardHeader>
             {userTasksContainer}
@@ -79,16 +62,10 @@ export function UserTasksPageLayout({
           <ToolbarMobileTop>
             <ToolbarMobileHeading>{t("title")}</ToolbarMobileHeading>
             <TaskToolbarSortingMenuTrigger />
-            <TaskToolbarActionsMenuTrigger
-              deleteAction={deleteTasksAction}
-              updateStatusAction={updateTasksStatusesAction}
-            />
+            {taskToolbarActionsMenuTrigger}
           </ToolbarMobileTop>
 
-          <ToolbarMobileBottom>
-            {navigationMobile}
-            <NewTaskModalTrigger newTaskForm={newTaskFormContainer} />
-          </ToolbarMobileBottom>
+          <ToolbarMobileBottom>{navigationMobile}</ToolbarMobileBottom>
           {userTasksContainer}
         </PageGrid>
       </PageContainer>

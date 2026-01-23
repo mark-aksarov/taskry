@@ -3,9 +3,16 @@ import { UserTaskList } from "./UserTaskList";
 import { TaskStatus } from "@/generated/prisma/enums";
 import type { Meta, StoryObj } from "@storybook/react";
 import { UserTaskListItem } from "../UserTaskListItem";
+import { TaskFormBase } from "@/components/tasks/TaskFormBase";
+import { TaskDetailModal } from "@/components/tasks/TaskDetailModal";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { TaskDetailBottomSheet } from "@/components/tasks/TaskDetailBottomSheet";
 import { TaskCommentsModalTrigger } from "@/components/tasks/TaskCommentsModalTrigger";
 import { TaskItemActionMenuTrigger } from "@/components/tasks/TaskItemActionMenuTrigger";
+import { MockedCommentsContainer } from "@/components/comments/MockedCommentsContainer";
+import { Default as TaskFormBaseStory } from "@/components/tasks/TaskFormBase/TaskFormBase.stories";
+import { Default as TaskDetailModalStory } from "@/components/tasks/TaskDetailModal/TaskDetailModal.stories";
+import { Default as TaskDetailBottomSheetStory } from "@/components/tasks/TaskDetailBottomSheet/TaskDetailBottomSheet.stories";
 
 const mockedTasks = [
   {
@@ -98,20 +105,26 @@ export const Default = {
         {...task}
         commentModalTrigger={
           <TaskCommentsModalTrigger
-            taskId={task.id}
-            commentsCount={task.commentsCount}
+            taskId={1}
+            commentsCount={10}
+            taskCommentsContainer={<MockedCommentsContainer />}
             sendCommentAction={fn()}
+            updateCommentAction={fn()}
           />
         }
         menuTrigger={
           <TaskItemActionMenuTrigger
-            guestMode={false}
             taskId={task.id}
             taskTitle={task.title}
             taskStatus={task.status}
             deleteAction={fn()}
             updateStatusAction={fn()}
+            editTaskFormContainer={<TaskFormBase {...TaskFormBaseStory.args} />}
           />
+        }
+        taskDetailModal={<TaskDetailModal {...TaskDetailModalStory.args} />}
+        taskDetailBottomSheet={
+          <TaskDetailBottomSheet {...TaskDetailBottomSheetStory.args} />
         }
       />
     )),

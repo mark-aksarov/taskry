@@ -121,7 +121,7 @@ export function ProjectItemActionMenuTrigger({
       {/* Modal for confirming project deletion */}
       <DeleteProjectModal
         projectId={projectId}
-        entityName={projectTitle}
+        projectTitle={projectTitle}
         isOpen={isOpenDeleteModal}
         onOpenChange={setIsOpenDeleteModal}
         deleteAction={deleteAction}

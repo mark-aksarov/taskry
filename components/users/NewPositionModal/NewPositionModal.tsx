@@ -1,6 +1,17 @@
+import {
+  DialogBody,
+  ModalProps,
+  DialogFooter,
+  DialogHeader,
+} from "@/components/ui";
+
+import {
+  FormModal,
+  FormModalDialog,
+  FormModalSubmitButton,
+} from "@/components/common/FormModal";
+
 import { useTranslations } from "next-intl";
-import { ModalProps } from "@/components/ui";
-import { FormModal } from "@/components/common/FormModal";
 
 interface NewPositionModalProps
   extends Pick<ModalProps, "isOpen" | "onOpenChange"> {
@@ -14,13 +25,17 @@ export function NewPositionModal({
   const t = useTranslations("users.NewPositionModal");
 
   return (
-    <FormModal
-      formId="new-position-form"
-      title={t("title")}
-      submitButtonLabel={t("submitButtonLabel")}
-      form={newPositionForm}
-      className="md:w-[350px]"
-      {...props}
-    />
+    <FormModal className="md:w-[350px]" {...props}>
+      <FormModalDialog>
+        <DialogHeader>{t("title")}</DialogHeader>
+        <DialogBody>{newPositionForm}</DialogBody>
+        <DialogFooter>
+          <FormModalSubmitButton
+            form="new-position-form"
+            label={t("submitButtonLabel")}
+          />
+        </DialogFooter>
+      </FormModalDialog>
+    </FormModal>
   );
 }

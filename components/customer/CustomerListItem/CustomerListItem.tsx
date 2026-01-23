@@ -20,10 +20,8 @@ import {
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { Checkbox, Link } from "@/components/ui";
-import { CustomerDetailModal } from "../CustomerDetailModal";
 import { UnknownUser } from "@/components/common/UnknownUser";
 import { ImageContainer } from "@/components/common/ImageContainer";
-import { CustomerDetailBottomSheet } from "../CustomerDetailBottomSheet";
 
 export type CustomerListItemProps = {
   id: number;
@@ -37,6 +35,8 @@ export type CustomerListItemProps = {
     name: string;
   };
   menuTrigger: React.ReactNode;
+  customerDetailModal: React.ReactNode;
+  customerDetailBottomSheet: React.ReactNode;
 };
 
 export function CustomerListItem({
@@ -48,6 +48,8 @@ export function CustomerListItem({
   imageUrl,
   company,
   menuTrigger,
+  customerDetailModal,
+  customerDetailBottomSheet,
 }: CustomerListItemProps) {
   const t = useTranslations("customers.CustomerListItem");
 
@@ -72,16 +74,14 @@ export function CustomerListItem({
 
       <>
         <ItemBaseDetailModalTrigger
-          modal={<CustomerDetailModal customerId={id} />}
+          modal={customerDetailModal}
           className="h-9 w-9"
         >
           {userImg}
         </ItemBaseDetailModalTrigger>
 
         <ItemBaseDetailBottomSheetTrigger
-          renderBottomSheet={(state) => (
-            <CustomerDetailBottomSheet customerId={id} state={state} />
-          )}
+          bottomSheet={customerDetailBottomSheet}
           className="h-9 w-9"
         >
           {userImg}
@@ -91,16 +91,14 @@ export function CustomerListItem({
       <ListItemInfo>
         <ListItemTitle>
           <ItemBaseDetailModalTrigger
-            modal={<CustomerDetailModal customerId={id} />}
+            modal={customerDetailModal}
             className="truncate"
           >
             {fullName}
           </ItemBaseDetailModalTrigger>
 
           <ItemBaseDetailBottomSheetTrigger
-            renderBottomSheet={(state) => (
-              <CustomerDetailBottomSheet customerId={id} state={state} />
-            )}
+            bottomSheet={customerDetailBottomSheet}
             className="truncate"
           >
             {fullName}

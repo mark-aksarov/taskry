@@ -9,26 +9,21 @@ import { useTranslations } from "next-intl";
 import { PageGrid } from "@/components/common/PageGrid";
 import { ViewModeProvider } from "@/components/common/ViewMode";
 import { PageContainer } from "@/components/common/PageContainer";
-import { NewPositionForm } from "@/components/users/NewPositionForm";
 import { ViewModeToggleButtonGroup } from "@/components/common/ViewMode";
 import { SelectionProvider } from "@/components/common/SelectionContext";
-import { ActionFn, ActionState, DeleteUsersPayload } from "@/lib/actions/types";
-import { UserToolbarActionsMenuTrigger } from "@/components/users/UserToolbarActionsMenuTrigger";
 import { UserToolbarSortingMenuTrigger } from "@/components/users/UserToolbarSortingMenuTrigger";
-import { UserToolbarFiltersModalTrigger } from "@/components/users/UserToolbarFiltersModalTrigger";
-import { UserToolbarCreateNewMenuTrigger } from "@/components/users/UserToolbarCreateNewMenuTrigger";
 
 interface UsersPageProps {
-  createPositionAction: ActionFn<ActionState, FormData>;
-  deleteUsersAction: ActionFn<ActionState, DeleteUsersPayload>;
-  userFiltersFormContainer: React.ReactNode;
+  userToolbarFiltersModalTrigger: React.ReactNode;
+  userToolbarActionsMenuTrigger: React.ReactNode;
+  userToolbarCreateNewMenuTrigger: React.ReactNode;
   usersContainer: React.ReactNode;
 }
 
 export function UsersPage({
-  createPositionAction,
-  deleteUsersAction,
-  userFiltersFormContainer,
+  userToolbarFiltersModalTrigger,
+  userToolbarActionsMenuTrigger,
+  userToolbarCreateNewMenuTrigger,
   usersContainer,
 }: UsersPageProps) {
   const t = useTranslations("app.UsersPage");
@@ -40,36 +35,22 @@ export function UsersPage({
           <SelectionProvider>
             <ToolbarDesktop>
               <UserToolbarSortingMenuTrigger />
-              <UserToolbarFiltersModalTrigger
-                filtersForm={userFiltersFormContainer}
-              />
-              <UserToolbarActionsMenuTrigger deleteAction={deleteUsersAction} />
+              {userToolbarFiltersModalTrigger}
+              {userToolbarActionsMenuTrigger}
               <ViewModeToggleButtonGroup className="ml-auto" />
-              <UserToolbarCreateNewMenuTrigger
-                newUserForm={<></>}
-                newPositionForm={
-                  <NewPositionForm formAction={createPositionAction} />
-                }
-              />
+              {userToolbarCreateNewMenuTrigger}
             </ToolbarDesktop>
 
             <ToolbarMobileTop>
               <ToolbarMobileHeading>{t("heading")}</ToolbarMobileHeading>
               <UserToolbarSortingMenuTrigger />
-              <UserToolbarFiltersModalTrigger
-                filtersForm={userFiltersFormContainer}
-              />
-              <UserToolbarActionsMenuTrigger deleteAction={deleteUsersAction} />
+              {userToolbarFiltersModalTrigger}
+              {userToolbarActionsMenuTrigger}
             </ToolbarMobileTop>
 
             <ToolbarMobileBottom>
               <ViewModeToggleButtonGroup />
-              <UserToolbarCreateNewMenuTrigger
-                newUserForm={<></>}
-                newPositionForm={
-                  <NewPositionForm formAction={createPositionAction} />
-                }
-              />
+              {userToolbarCreateNewMenuTrigger}
             </ToolbarMobileBottom>
             {usersContainer}
           </SelectionProvider>

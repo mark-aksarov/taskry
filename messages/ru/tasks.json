@@ -116,7 +116,7 @@
   },
 
   "TaskDetailModal": {
-    "title": "Детали задачи",
+    "dialogHeading": "Детали задачи",
     "openButtonLabel": "Открыть на полной странице"
   },
 

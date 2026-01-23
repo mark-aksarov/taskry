@@ -1,16 +1,12 @@
 "use client";
 
-import {
-  Button,
-  DialogHeader,
-  DialogHeading,
-  DialogCloseButton,
-} from "@/components/ui";
 import { useState } from "react";
+import { Key } from "react-aria";
+import { Item } from "react-stately";
 import { useTranslations } from "next-intl";
-import { Key, useOverlayTrigger } from "react-aria";
-import { Item, useOverlayTriggerState } from "react-stately";
-import { BriefcaseBusiness, Plus, Users } from "lucide-react";
+import { DialogHeader } from "@/components/ui";
+import { BriefcaseBusiness, Users } from "lucide-react";
+import { ToolbarCreateNewButton } from "../common/Toolbar";
 import { NewPositionModal } from "./NewPositionModal/NewPositionModal";
 import { ResponsiveMenuTrigger } from "@/components/common/ResponsiveMenuTrigger";
 
@@ -25,11 +21,11 @@ export function UserToolbarCreateNewMenuTrigger({
 }: UserToolbarCreateNewMenuTriggerProps) {
   const t = useTranslations("users.UserToolbarCreateNewMenuTrigger");
 
-  const state = useOverlayTriggerState({});
-  const { triggerProps } = useOverlayTrigger({ type: "dialog" }, state);
+  // Separate modal state for creating an user and a position
   const [isOpenUserModal, setIsOpenUserModal] = useState(false);
   const [isOpenPositionModal, setIsOpenPositionModal] = useState(false);
 
+  // Menu actions: show user modal, show position modal
   function handleAction(key: Key) {
     if (key === "user") {
       setIsOpenUserModal(true);
@@ -43,20 +39,14 @@ export function UserToolbarCreateNewMenuTrigger({
       <ResponsiveMenuTrigger
         onAction={handleAction}
         renderDialogHeader={() => (
-          <DialogHeader>
-            <DialogHeading>{t("dialogHeading")}</DialogHeading>
-            <DialogCloseButton />
-          </DialogHeader>
+          <DialogHeader>{t("dialogHeading")}</DialogHeader>
         )}
-        overlayClassName="md:min-w-[200px]"
         renderButton={() => (
-          <Button
-            {...triggerProps}
-            label={t("triggerLabel")}
-            iconLeft={<Plus size={16} strokeWidth={1.5} absoluteStrokeWidth />}
+          <ToolbarCreateNewButton
+            data-test="user-toolbar-create-new-menu-trigger"
+            label={t("label")}
           />
         )}
-        placement="bottom right"
       >
         <Item textValue={t("items.user")} key="user">
           <Users size={16} strokeWidth={1.5} absoluteStrokeWidth />
@@ -68,6 +58,7 @@ export function UserToolbarCreateNewMenuTrigger({
         </Item>
       </ResponsiveMenuTrigger>
 
+      {/* Modal for creating a position */}
       <NewPositionModal
         newPositionForm={newPositionForm}
         isOpen={isOpenPositionModal}

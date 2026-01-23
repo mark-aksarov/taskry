@@ -3,17 +3,77 @@ import {
   EntityPaginationProvider,
 } from "@/components/common/EntityContainerPagination";
 
+import { Suspense } from "react";
 import { UserList } from "../UserList";
 import { UserGrid } from "../UserGrid";
 import { UserFilters } from "@/lib/types";
 import { UserListItem } from "../UserListItem";
 import { UserGridItem } from "../UserGridItem";
-import { getUserCount } from "@/lib/data/user/user.dal";
+import { UserDetailSkeleton } from "../UserDetail";
+import { UserDetailModal } from "../UserDetailModal";
 import { getUserList } from "@/lib/data/user/user.service";
 import { UserListItemDTO } from "@/lib/data/user/user.dto";
 import { deleteUsers } from "@/lib/actions/user/deleteUsers";
 import { ViewModeLayout } from "@/components/common/ViewMode";
+import { UserDetailContainer } from "../UserDetailContainer";
+import { UserDetailBottomSheet } from "../UserDetailBottomSheet";
+import { PersonHeaderSkeleton } from "@/components/common/PersonHeader";
 import { UserItemActionMenuTrigger } from "../UserItemActionMenuTrigger";
+import { PersonDetailPresentation } from "@/components/common/PersonDetailPresentation";
+
+interface UserItemActionMenuTriggerSlotProps {
+  userId: string;
+  userFullName: string;
+  className?: string;
+}
+
+function UserItemActionMenuTriggerSlot({
+  userId,
+  userFullName,
+  className,
+}: UserItemActionMenuTriggerSlotProps) {
+  return (
+    <UserItemActionMenuTrigger
+      userId={userId}
+      userFullName={userFullName}
+      deleteAction={deleteUsers}
+      className={className}
+    />
+  );
+}
+
+function UserDetailSlotContent({ userId }: { userId: string }) {
+  return (
+    <Suspense
+      fallback={
+        <PersonDetailPresentation
+          personHeader={<PersonHeaderSkeleton />}
+          userDetail={<UserDetailSkeleton />}
+        />
+      }
+    >
+      <UserDetailContainer userId={userId} />
+    </Suspense>
+  );
+}
+
+function UserDetailModalSlot({ userId }: { userId: string }) {
+  return (
+    <UserDetailModal
+      userId={userId}
+      userDetailContainer={<UserDetailSlotContent userId={userId} />}
+    />
+  );
+}
+
+function UserDetailBottomSheetSlot({ userId }: { userId: string }) {
+  return (
+    <UserDetailBottomSheet
+      userId={userId}
+      userDetailContainer={<UserDetailSlotContent userId={userId} />}
+    />
+  );
+}
 
 interface UsersContainerProps {
   page: number;
@@ -45,17 +105,6 @@ export async function UsersContainer({
     position: user.position,
   });
 
-  function renderMenuTrigger(user: UserListItemDTO, className?: string) {
-    return (
-      <UserItemActionMenuTrigger
-        userId={user.id}
-        userFullName={user.fullName}
-        deleteAction={deleteUsers}
-        className={className}
-      />
-    );
-  }
-
   return (
     <EntityPaginationProvider>
       <ViewModeLayout
@@ -64,7 +113,16 @@ export async function UsersContainer({
             {users.map((user) => (
               <UserListItem
                 key={user.id}
-                menuTrigger={renderMenuTrigger(user)}
+                menuTrigger={
+                  <UserItemActionMenuTriggerSlot
+                    userId={user.id}
+                    userFullName={user.fullName}
+                  />
+                }
+                userDetailModal={<UserDetailModalSlot userId={user.id} />}
+                userDetailBottomSheet={
+                  <UserDetailBottomSheetSlot userId={user.id} />
+                }
                 {...getUserCommonProps(user)}
               />
             ))}
@@ -75,7 +133,17 @@ export async function UsersContainer({
             {users.map((user) => (
               <UserGridItem
                 key={user.id}
-                menuTrigger={(renderMenuTrigger(user), "-mr-2")}
+                menuTrigger={
+                  <UserItemActionMenuTriggerSlot
+                    userId={user.id}
+                    userFullName={user.fullName}
+                    className="-mr-2"
+                  />
+                }
+                userDetailModal={<UserDetailModalSlot userId={user.id} />}
+                userDetailBottomSheet={
+                  <UserDetailBottomSheetSlot userId={user.id} />
+                }
                 {...getUserCommonProps(user)}
               />
             ))}

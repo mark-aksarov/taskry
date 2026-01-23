@@ -1,11 +1,4 @@
 import {
-  ActionFn,
-  ActionState,
-  DeleteTasksPayload,
-  UpdateTaskStatusesPayload,
-} from "@/lib/actions/types";
-
-import {
   ToolbarDesktop,
   ToolbarMobileTop,
   ToolbarMobileBottom,
@@ -18,30 +11,20 @@ import { ViewModeProvider } from "@/components/common/ViewMode";
 import { PageContainer } from "@/components/common/PageContainer";
 import { ViewModeToggleButtonGroup } from "@/components/common/ViewMode";
 import { SelectionProvider } from "@/components/common/SelectionContext";
-import { NewTaskCategoryForm } from "@/components/tasks/NewTaskCategoryForm";
 import { TaskToolbarSortingMenuTrigger } from "@/components/tasks/TaskToolbarSortingMenuTrigger";
-import { TaskToolbarActionsMenuTrigger } from "@/components/tasks/TaskToolbarActionsMenuTrigger";
-import { TaskToolbarFiltersModalTrigger } from "@/components/tasks/TaskToolbarFiltersModalTrigger";
-import { TaskToolbarCreateNewMenuTrigger } from "@/components/tasks/TaskToolbarCreateNewMenuTrigger";
 
 interface TasksPageProps {
-  guestMode?: boolean;
-  taskFiltersFormContainer: React.ReactNode;
-  newTaskFormContainer: React.ReactNode;
   tasksContainer: React.ReactNode;
-  deleteTasksAction: ActionFn<ActionState, DeleteTasksPayload>;
-  updateTasksStatusesAction: ActionFn<ActionState, UpdateTaskStatusesPayload>;
-  createTaskCategoryAction: ActionFn<ActionState, FormData>;
+  taskToolbarActionsMenuTrigger: React.ReactNode;
+  taskToolbarCreateNewMenuTrigger: React.ReactNode;
+  taskToolbarFiltersModalTrigger: React.ReactNode;
 }
 
 export function TasksPage({
-  guestMode,
-  taskFiltersFormContainer,
-  newTaskFormContainer,
   tasksContainer,
-  deleteTasksAction,
-  updateTasksStatusesAction,
-  createTaskCategoryAction,
+  taskToolbarActionsMenuTrigger,
+  taskToolbarCreateNewMenuTrigger,
+  taskToolbarFiltersModalTrigger,
 }: TasksPageProps) {
   const t = useTranslations("app.TasksPage");
 
@@ -52,47 +35,22 @@ export function TasksPage({
           <SelectionProvider>
             <ToolbarDesktop>
               <TaskToolbarSortingMenuTrigger />
-              <TaskToolbarFiltersModalTrigger
-                filtersForm={taskFiltersFormContainer}
-              />
-              <TaskToolbarActionsMenuTrigger
-                guestMode={guestMode}
-                deleteAction={deleteTasksAction}
-                updateStatusAction={updateTasksStatusesAction}
-              />
+              {taskToolbarFiltersModalTrigger}
+              {taskToolbarActionsMenuTrigger}
               <ViewModeToggleButtonGroup className="ml-auto" />
-
-              <TaskToolbarCreateNewMenuTrigger
-                guestMode={guestMode}
-                newTaskForm={newTaskFormContainer}
-                newTaskCategoryForm={
-                  <NewTaskCategoryForm formAction={createTaskCategoryAction} />
-                }
-              />
+              {taskToolbarCreateNewMenuTrigger}
             </ToolbarDesktop>
 
             <ToolbarMobileTop>
               <ToolbarMobileHeading>{t("heading")}</ToolbarMobileHeading>
               <TaskToolbarSortingMenuTrigger />
-              <TaskToolbarFiltersModalTrigger
-                filtersForm={taskFiltersFormContainer}
-              />
-              <TaskToolbarActionsMenuTrigger
-                guestMode={guestMode}
-                deleteAction={deleteTasksAction}
-                updateStatusAction={updateTasksStatusesAction}
-              />
+              {taskToolbarFiltersModalTrigger}
+              {taskToolbarActionsMenuTrigger}
             </ToolbarMobileTop>
 
             <ToolbarMobileBottom>
               <ViewModeToggleButtonGroup />
-              <TaskToolbarCreateNewMenuTrigger
-                guestMode={guestMode}
-                newTaskForm={newTaskFormContainer}
-                newTaskCategoryForm={
-                  <NewTaskCategoryForm formAction={createTaskCategoryAction} />
-                }
-              />
+              {taskToolbarCreateNewMenuTrigger}
             </ToolbarMobileBottom>
 
             {tasksContainer}

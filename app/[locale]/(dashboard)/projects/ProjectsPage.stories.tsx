@@ -55,7 +55,9 @@ export const Default = {
     ),
     projectToolbarFiltersModalTrigger: (
       <ProjectToolbarFiltersModalTrigger
-        filtersForm={<ProjectFiltersForm {...ProjectFiltersFormStory.args} />}
+        filtersFormContainer={
+          <ProjectFiltersForm {...ProjectFiltersFormStory.args} />
+        }
       />
     ),
     projectToolbarActionsMenuTrigger: (

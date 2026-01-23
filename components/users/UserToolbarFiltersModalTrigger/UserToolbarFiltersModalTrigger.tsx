@@ -1,20 +1,33 @@
 "use client";
 
-import { ToolbarFiltersModalTrigger } from "@/components/common/Toolbar";
+import {
+  ToolbarFiltersModal,
+  ToolbarFiltersModalDialog,
+  ToolbarFiltersModalTrigger,
+  ToolbarFiltersModalSubmitButton,
+} from "@/components/common/Toolbar";
+
 import { useTranslations } from "next-intl";
+import { DialogBody, DialogFooter, DialogHeader } from "@/components/ui";
 
 export function UserToolbarFiltersModalTrigger({
-  filtersForm,
+  filtersFormContainer,
 }: {
-  filtersForm: React.ReactNode;
+  filtersFormContainer: React.ReactNode;
 }) {
   const t = useTranslations("users.UserToolbarFiltersModalTrigger");
 
   return (
-    <ToolbarFiltersModalTrigger
-      title={t("title")}
-      filtersForm={filtersForm}
-      formId="user-filter-form"
-    />
+    <ToolbarFiltersModalTrigger>
+      <ToolbarFiltersModal>
+        <ToolbarFiltersModalDialog>
+          <DialogHeader>title={t("title")}</DialogHeader>
+          <DialogBody>{filtersFormContainer}</DialogBody>
+          <DialogFooter>
+            <ToolbarFiltersModalSubmitButton form="user-filter-form" />
+          </DialogFooter>
+        </ToolbarFiltersModalDialog>
+      </ToolbarFiltersModal>
+    </ToolbarFiltersModalTrigger>
   );
 }

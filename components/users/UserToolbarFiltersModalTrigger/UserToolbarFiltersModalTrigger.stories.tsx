@@ -16,12 +16,12 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    filtersForm: <UserFiltersForm {...UserFiltersFormStory.args} />,
+    filtersFormContainer: <UserFiltersForm {...UserFiltersFormStory.args} />,
   },
 } satisfies Story;
 
 export const Skeleton = {
   args: {
-    filtersForm: <UserFiltersFormSkeleton />,
+    filtersFormContainer: <UserFiltersFormSkeleton />,
   },
 } satisfies Story;

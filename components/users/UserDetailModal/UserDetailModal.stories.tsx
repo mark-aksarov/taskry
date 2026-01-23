@@ -1,12 +1,17 @@
+import {
+  PersonHeader,
+  PersonHeaderSkeleton,
+} from "@/components/common/PersonHeader";
+
 import { UserDetailModal } from "./UserDetailModal";
 import { UserDetail } from "../UserDetail/UserDetail";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { Button, RACDialogTrigger } from "@/components/ui";
 import { UserDetailSkeleton } from "../UserDetail/UserDetailSkeleton";
-import { PersonHeaderSkeleton } from "@/components/common/PersonHeader";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { Default as UserDetailStory } from "../UserDetail/UserDetail.stories";
 import { PersonDetailPresentation } from "@/components/common/PersonDetailPresentation";
+import { Default as UserDetailStory } from "@/components/users/UserDetail/UserDetail.stories";
+import { Default as PersonHeaderStory } from "@/components/common/PersonHeader/PersonHeader.stories";
 
 const meta = {
   title: "components/users/UserDetailModal",
@@ -29,7 +34,12 @@ type Story = StoryObj<typeof meta>;
 export const Default = {
   args: {
     userId: "BKs42HvVDEZFoaJUmTqf1gTN0K8pUFjI",
-    userDetailContainer: <UserDetail {...UserDetailStory.args} />,
+    userDetailContainer: (
+      <PersonDetailPresentation
+        personHeader={<PersonHeader {...PersonHeaderStory.args} />}
+        userDetail={<UserDetail {...UserDetailStory.args} />}
+      />
+    ),
   },
 } satisfies Story;
 

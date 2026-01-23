@@ -39,7 +39,6 @@ export function UserTasksPageLoadingLayout({
               <div className="flex gap-4">
                 <Skeleton className="h-8 w-[5.5rem] rounded-lg" />
                 <Skeleton className="h-8 w-[5.5rem] rounded-lg" />
-                <Skeleton className="h-8 w-[6.25rem] rounded-lg" />
               </div>
             </UserCardHeader>
             <UserTaskListLayout>
@@ -65,10 +64,7 @@ export function UserTasksPageLoadingLayout({
             <Skeleton className="h-8 w-8 rounded-lg" />
           </ToolbarMobileTop>
 
-          <ToolbarMobileBottom>
-            {navigationMobile}
-            <Skeleton className="h-8 w-[6.25rem] rounded-lg" />
-          </ToolbarMobileBottom>
+          <ToolbarMobileBottom>{navigationMobile}</ToolbarMobileBottom>
 
           <UserTaskListLayout>
             <Repeat

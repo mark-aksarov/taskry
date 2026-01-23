@@ -2,8 +2,14 @@ import { fn } from "storybook/test";
 import { CustomerGrid } from "./CustomerGrid";
 import type { Meta, StoryObj } from "@storybook/react";
 import { CustomerGridItem } from "../CustomerGridItem";
+import { CustomerFormBase } from "../CustomerFormBase";
+import { CustomerDetailModal } from "../CustomerDetailModal";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { CustomerDetailBottomSheet } from "../CustomerDetailBottomSheet";
 import { CustomerItemActionMenuTrigger } from "../CustomerItemActionMenuTrigger";
+import { Default as CustomerFormBaseStory } from "../CustomerFormBase/CustomerFormBase.stories";
+import { Default as CustomerDetailModalStory } from "../CustomerDetailModal/CustomerDetailModal.stories";
+import { Default as CustomerDetailBottomSheetStory } from "../CustomerDetailBottomSheet/CustomerDetailBottomSheet.stories";
 
 const mockedCustomers = [
   {
@@ -74,8 +80,16 @@ export const Default = {
             customerId={customer.id}
             customerFullName={customer.fullName}
             deleteAction={fn()}
-            className="-mr-2"
+            editCustomerFormContainer={
+              <CustomerFormBase {...CustomerFormBaseStory.args} />
+            }
           />
+        }
+        customerDetailModal={
+          <CustomerDetailModal {...CustomerDetailModalStory.args} />
+        }
+        customerDetailBottomSheet={
+          <CustomerDetailBottomSheet {...CustomerDetailBottomSheetStory.args} />
         }
       />
     )),
