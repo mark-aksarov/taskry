@@ -1,6 +1,6 @@
 import { useTranslations } from "next-intl";
 import { SlidersHorizontal } from "lucide-react";
-import { Button, ButtonProps } from "@/components/ui";
+import { Button, ButtonProps } from "@/components/ui/Button";
 
 export function ToolbarFiltersButtonDesktop(props: ButtonProps) {
   const t = useTranslations("common.ToolbarFiltersButtonDesktop");

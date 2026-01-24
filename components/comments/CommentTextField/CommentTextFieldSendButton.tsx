@@ -1,7 +1,7 @@
-import { Button } from "@/components/ui";
 import { twMerge } from "tailwind-merge";
 import { useTranslations } from "next-intl";
 import { SendHorizonal } from "lucide-react";
+import { Button } from "@/components/ui/Button";
 
 interface CommentTextFieldSendButtonProps {
   buttonClasses: string;

@@ -1,8 +1,8 @@
 "use client";
 
 import { Sun } from "lucide-react";
-import { Button } from "@/components/ui";
 import { useTranslations } from "next-intl";
+import { Button } from "@/components/ui/Button";
 
 export interface AppHeaderThemeToggleButtonProps {
   className?: string;

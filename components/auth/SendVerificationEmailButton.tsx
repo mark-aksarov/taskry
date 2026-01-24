@@ -1,5 +1,5 @@
-import { Button } from "../ui";
 import { Mail } from "lucide-react";
+import { Button } from "../ui/Button";
 import { useTranslations } from "next-intl";
 import { authClient } from "@/lib/auth-client";
 

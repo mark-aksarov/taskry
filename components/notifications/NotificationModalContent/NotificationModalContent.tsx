@@ -1,6 +1,6 @@
 import { NotificationFilter } from "../types";
-import { DialogBody, DialogFooter } from "@/components/ui";
 import { MarkAllAsReadButton } from "../MarkAllAsReadButton";
+import { DialogBody, DialogFooter } from "@/components/ui/Dialog";
 import { NotificationModalActions } from "./NotificationModalActions";
 import { ModalPagination } from "@/components/common/ModalPagination";
 import { ActionFn, ActionState, MarkAsReadPayload } from "@/lib/actions/types";

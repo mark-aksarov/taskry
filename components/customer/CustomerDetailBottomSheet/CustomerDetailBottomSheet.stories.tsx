@@ -8,8 +8,8 @@ import {
   CustomerDetailBottomSheetProps,
 } from "./CustomerDetailBottomSheet";
 
-import { Button } from "@/components/ui";
 import { useOverlayTrigger } from "react-aria";
+import { Button } from "@/components/ui/Button";
 import { useOverlayTriggerState } from "react-stately";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { CustomerDetail } from "../CustomerDetail/CustomerDetail";

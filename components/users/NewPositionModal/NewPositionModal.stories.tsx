@@ -1,8 +1,9 @@
 import { Suspense } from "react";
+import { Button } from "@/components/ui/Button";
 import { NewPositionForm } from "../NewPositionForm";
 import { NewPositionModal } from "./NewPositionModal";
+import { DialogTrigger } from "react-aria-components";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { Button, RACDialogTrigger } from "@/components/ui";
 import { PositionFormBaseSkeleton } from "../PositionFormBase";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { Default as PositionFormBaseStory } from "../PositionFormBase/PositionFormBase.stories";
@@ -13,12 +14,12 @@ const meta = {
   tags: ["autodocs"],
   decorators: [
     (Story) => (
-      <RACDialogTrigger>
+      <DialogTrigger>
         <Button label="New Position" />
         <Suspense>
           <Story />
         </Suspense>
-      </RACDialogTrigger>
+      </DialogTrigger>
     ),
     withThemedBackground,
   ],

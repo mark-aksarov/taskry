@@ -2,7 +2,7 @@ import {
   GridItemInfoSkeleton,
   GridItemContactListSkeleton,
 } from "@/components/common/Grid";
-import { Skeleton } from "@/components/ui";
+import { Skeleton } from "@/components/ui/Skeleton";
 import { UserGridItemLayout } from "./UserGridItemLayout";
 import { ImageContainerSkeleton } from "@/components/common/ImageContainer";
 import { ItemBaseActionMenuTriggerSkeleton } from "@/components/common/ItemBase";

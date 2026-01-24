@@ -1,10 +1,11 @@
 "use client";
 
 import { tv } from "tailwind-variants";
+import { linkStyles } from "../ui/Link";
 import { CheckCheck } from "lucide-react";
 import { GuestModeModal } from "../common/GuestModeModal";
+import { Button, ButtonProps } from "react-aria-components";
 import { useActionErrorToast } from "@/lib/hooks/useActionErrorToast";
-import { RACButtonProps, linkStyles, RACButton } from "@/components/ui";
 import { startTransition, useActionState, useEffect, useState } from "react";
 import { ActionFn, ActionState, MarkAsReadPayload } from "@/lib/actions/types";
 
@@ -18,7 +19,7 @@ const markAsReadActionInitialState: ActionState = {
   message: null,
 };
 
-interface MarkAllAsReadButtonProps extends RACButtonProps {
+interface MarkAllAsReadButtonProps extends ButtonProps {
   guestMode?: boolean;
   markAsReadAction: ActionFn<ActionState, MarkAsReadPayload>;
   mutate: () => void;
@@ -59,7 +60,7 @@ export function MarkAllAsReadButton({
 
   return (
     <>
-      <RACButton
+      <Button
         {...props}
         className={(renderProps) =>
           styles({ ...renderProps, variant: "primary" })
@@ -69,7 +70,7 @@ export function MarkAllAsReadButton({
       >
         <CheckCheck size={16} strokeWidth={1.5} absoluteStrokeWidth />
         Mark all as read
-      </RACButton>
+      </Button>
 
       <GuestModeModal
         isOpen={isGuestModeModalOpen}

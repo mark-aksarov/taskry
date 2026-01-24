@@ -2,8 +2,8 @@ import {
   ProjectDetailBottomSheet,
   ProjectDetailBottomSheetProps,
 } from "./ProjectDetailBottomSheet";
-import { Button } from "@/components/ui";
 import { useOverlayTrigger } from "react-aria";
+import { Button } from "@/components/ui/Button";
 import { useOverlayTriggerState } from "react-stately";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { OverlayTriggerStateContext } from "react-aria-components";

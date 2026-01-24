@@ -13,8 +13,8 @@ import {
   ToolbarActionsButtonDesktop,
 } from "../common/Toolbar";
 
-import { DialogHeader } from "../ui";
 import { Item, Key } from "react-stately";
+import { DialogHeader } from "../ui/Dialog";
 import { useTranslations } from "next-intl";
 import { DeleteTasksModal } from "./DeleteTasksModal";
 import { TaskStatus } from "@/generated/prisma/enums";

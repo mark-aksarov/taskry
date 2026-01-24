@@ -4,6 +4,7 @@ import {
   EmptySectionHeading,
   EmptySectionDescription,
 } from "@/components/common/EmptySection";
+
 import { useTranslations } from "next-intl";
 import { NewTaskModal } from "@/components/tasks/NewTaskModal";
 import { PageContainer } from "@/components/common/PageContainer";

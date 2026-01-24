@@ -2,10 +2,10 @@
 
 import { tv } from "tailwind-variants";
 import { CirclePlus } from "lucide-react";
-import { DialogTrigger } from "react-aria-components";
-import { RACButtonProps, linkStyles, RACButton } from "@/components/ui";
+import { linkStyles } from "@/components/ui/Link";
+import { Button, ButtonProps, DialogTrigger } from "react-aria-components";
 
-interface EmptySectionButtonProps extends RACButtonProps {
+interface EmptySectionButtonProps extends ButtonProps {
   createNewModal: React.ReactNode;
   children: React.ReactNode;
 }
@@ -22,7 +22,7 @@ export function EmptySectionButton({
 }: EmptySectionButtonProps) {
   return (
     <DialogTrigger>
-      <RACButton
+      <Button
         {...props}
         className={(renderProps) =>
           styles({ ...renderProps, variant: "primary" })
@@ -30,7 +30,7 @@ export function EmptySectionButton({
       >
         <CirclePlus size={16} strokeWidth={1.5} absoluteStrokeWidth />
         {children}
-      </RACButton>
+      </Button>
 
       {createNewModal}
     </DialogTrigger>

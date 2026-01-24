@@ -9,9 +9,9 @@ import {
 } from "@/components/common/ConfirmModal";
 
 import { useTranslations } from "next-intl";
-import { DialogHeading } from "@/components/ui";
-import { startTransition, useActionState, useEffect } from "react";
+import { DialogHeading } from "@/components/ui/Dialog";
 import { ActionFn, ActionState } from "@/lib/actions/types";
+import { startTransition, useActionState, useEffect } from "react";
 import { useActionErrorToast } from "@/lib/hooks/useActionErrorToast";
 
 const initialState: ActionState = {

@@ -9,8 +9,8 @@ import { useState } from "react";
 import { Key } from "react-aria";
 import { Item } from "react-stately";
 import { useTranslations } from "next-intl";
-import { DialogHeader } from "@/components/ui";
 import { Building2, Contact } from "lucide-react";
+import { DialogHeader } from "@/components/ui/Dialog";
 import { NewCustomerModal } from "./NewCustomerModal";
 import { NewCompanyModal } from "./NewCompanyModal/NewCompanyModal";
 

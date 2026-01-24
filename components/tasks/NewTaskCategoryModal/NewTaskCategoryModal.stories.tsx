@@ -5,8 +5,9 @@ import {
 
 import { Suspense } from "react";
 import { fn } from "storybook/test";
+import { Button } from "@/components/ui/Button";
+import { DialogTrigger } from "react-aria-components";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { Button, RACDialogTrigger } from "@/components/ui";
 import { NewTaskCategoryModal } from "./NewTaskCategoryModal";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
@@ -16,12 +17,12 @@ const meta = {
   tags: ["autodocs"],
   decorators: [
     (Story) => (
-      <RACDialogTrigger>
+      <DialogTrigger>
         <Button label="New Task" />
         <Suspense>
           <Story />
         </Suspense>
-      </RACDialogTrigger>
+      </DialogTrigger>
     ),
     withThemedBackground,
   ],

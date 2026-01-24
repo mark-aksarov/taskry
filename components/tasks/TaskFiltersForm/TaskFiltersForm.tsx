@@ -3,13 +3,14 @@
 import { useState } from "react";
 import { DateValue } from "react-aria";
 import { TaskFilters } from "@/lib/types";
-import { Divider, RACForm } from "@/components/ui";
+import { Form } from "react-aria-components";
+import { Switch } from "@/components/ui/Switch";
+import { Divider } from "@/components/ui/Divider";
 import { parseDate } from "@internationalized/date";
 import { useLocale, useTranslations } from "next-intl";
 import { usePathname, useRouter } from "@/i18n/navigation";
 import { TaskFiltersFormDeadlineRange } from "./TaskFiltersFormDeadlineRange";
 import { TaskFiltersFormDeadlineCheckboxGroup } from "./TaskFiltersFormDeadlineCheckboxGroup";
-import { Switch } from "@/components/ui/Switch";
 
 interface TaskFiltersFormProps {
   filters: TaskFilters;
@@ -109,7 +110,7 @@ export function TaskFiltersForm({
   };
 
   return (
-    <RACForm id="task-filter-form" onSubmit={handleSubmit}>
+    <Form id="task-filter-form" onSubmit={handleSubmit}>
       <div className="flex flex-col gap-4">
         <Switch
           data-test="show-only-my-tasks"
@@ -145,6 +146,6 @@ export function TaskFiltersForm({
         <Divider />
         {assigneeCheckboxGroup}
       </div>
-    </RACForm>
+    </Form>
   );
 }

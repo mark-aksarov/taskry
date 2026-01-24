@@ -2,9 +2,9 @@
 
 import { Plus } from "lucide-react";
 import { tv } from "tailwind-variants";
-import { composeRenderProps } from "react-aria-components";
-import { RACButton, RACButtonProps, linkStyles } from "../ui";
+import { linkStyles } from "../ui/Link";
 import { useTranslations } from "next-intl";
+import { composeRenderProps, ButtonProps, Button } from "react-aria-components";
 
 const styles = tv({
   extend: linkStyles,
@@ -14,11 +14,11 @@ const styles = tv({
 export function NewSubtasksButton({
   className,
   ...props
-}: RACButtonProps & React.RefAttributes<HTMLButtonElement>) {
+}: ButtonProps & React.RefAttributes<HTMLButtonElement>) {
   const t = useTranslations("subtasks.NewSubtasksButton");
 
   return (
-    <RACButton
+    <Button
       {...props}
       className={composeRenderProps(className, (className, renderProps) =>
         styles({ ...renderProps, variant: "primary", className }),
@@ -26,6 +26,6 @@ export function NewSubtasksButton({
     >
       <Plus size={16} strokeWidth={1.5} absoluteStrokeWidth />
       {t("label")}
-    </RACButton>
+    </Button>
   );
 }

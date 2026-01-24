@@ -1,7 +1,8 @@
 "use client";
 
-import { Skeleton, fieldGroupStyles, fieldStyles } from "@/components/ui";
 import { twMerge } from "tailwind-merge";
+import { Skeleton } from "@/components/ui/Skeleton";
+import { fieldGroupStyles, fieldStyles } from "@/components/ui/Field";
 
 export function FieldSkeleton({
   className,

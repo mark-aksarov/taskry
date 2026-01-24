@@ -9,9 +9,9 @@ import {
   LayoutDashboard,
 } from "lucide-react";
 
-import { Divider } from "@/components/ui";
 import { useTranslations } from "next-intl";
 import { usePathname } from "@/i18n/navigation";
+import { Divider } from "@/components/ui/Divider";
 import { NavigationButton } from "@/components/common/NavigationButton";
 import { AppNavigationLogoutButton } from "./AppNavigationLogoutButton";
 import { AppNavigationLangMenuTrigger } from "./AppNavigationLangMenuTrigger";

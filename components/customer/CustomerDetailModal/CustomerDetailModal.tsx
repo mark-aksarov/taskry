@@ -6,8 +6,8 @@ import {
 } from "@/components/common/DetailModal";
 
 import { useTranslations } from "next-intl";
-import { DialogBody, DialogFooter, DialogHeader } from "@/components/ui";
 import { DetailBottomSheetLink } from "@/components/common/DetailBottomSheet";
+import { DialogBody, DialogFooter, DialogHeader } from "@/components/ui/Dialog";
 
 interface CustomerDetailModalProps {
   customerId: number;

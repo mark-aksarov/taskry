@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Link } from "@/components/ui";
+import { Link } from "@/components/ui/Link";
 import { UnknownUser } from "@/components/common/UnknownUser";
 import { ImageContainer } from "@/components/common/ImageContainer";
 

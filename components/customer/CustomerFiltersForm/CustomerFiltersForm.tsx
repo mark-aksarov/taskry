@@ -1,9 +1,10 @@
 "use client";
 
 import { useState } from "react";
+import { Form } from "react-aria-components";
 import { CustomerFilters } from "@/lib/types";
 import { Switch } from "@/components/ui/Switch";
-import { Divider, RACForm } from "@/components/ui";
+import { Divider } from "@/components/ui/Divider";
 import { useLocale, useTranslations } from "next-intl";
 import { usePathname, useRouter } from "@/i18n/navigation";
 
@@ -50,7 +51,7 @@ export function CustomerFiltersForm({
   };
 
   return (
-    <RACForm id="customer-filter-form" onSubmit={handleSubmit}>
+    <Form id="customer-filter-form" onSubmit={handleSubmit}>
       <div className="flex flex-col gap-4">
         <Switch
           className="justify-between"
@@ -84,6 +85,6 @@ export function CustomerFiltersForm({
 
         {companyCheckboxGroup}
       </div>
-    </RACForm>
+    </Form>
   );
 }

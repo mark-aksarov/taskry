@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { tv } from "tailwind-variants";
-import { focusRing } from "@/components/ui";
 import { default as NextLink } from "next/link";
+import { focusRing } from "@/components/ui/styles";
 
 const styles = tv({
   extend: focusRing,

@@ -1,11 +1,10 @@
 "use client";
 
-import { RACForm } from "@/components/ui";
 import { ActionFn, ActionState } from "@/lib/actions/types";
 import { FormErrorText } from "@/components/common/FormErrorText";
-import { OverlayTriggerStateContext } from "react-aria-components";
-import { PositionFormBaseNameTextField } from "./PositionFormBaseNameTextField";
+import { Form, OverlayTriggerStateContext } from "react-aria-components";
 import { startTransition, useActionState, useContext, useEffect } from "react";
+import { PositionFormBaseNameTextField } from "./PositionFormBaseNameTextField";
 
 const initialState: ActionState = {
   status: null,
@@ -42,7 +41,7 @@ export function PositionFormBase({
   }
 
   return (
-    <RACForm id={id} onSubmit={handleSubmit}>
+    <Form id={id} onSubmit={handleSubmit}>
       <div className="flex flex-col gap-4">
         {state.status === "error" && (
           <FormErrorText>{state.message}</FormErrorText>
@@ -52,6 +51,6 @@ export function PositionFormBase({
 
         <PositionFormBaseNameTextField defaultValue={nameDefaultValue} />
       </div>
-    </RACForm>
+    </Form>
   );
 }

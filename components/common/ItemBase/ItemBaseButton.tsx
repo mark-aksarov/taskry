@@ -1,5 +1,5 @@
 import { twMerge } from "tailwind-merge";
-import { Button, ButtonProps } from "@/components/ui";
+import { Button, ButtonProps } from "@/components/ui/Button";
 
 export interface ItemBaseButtonProps
   extends Pick<ButtonProps, "label" | "iconLeft" | "className">,

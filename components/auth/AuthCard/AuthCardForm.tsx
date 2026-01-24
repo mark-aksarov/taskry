@@ -1,6 +1,6 @@
 "use client";
 
-import { RACForm } from "@/components/ui";
+import { Form } from "react-aria-components";
 
 interface AuthCardFormProps {
   onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
@@ -9,8 +9,8 @@ interface AuthCardFormProps {
 
 export function AuthCardForm({ onSubmit, children }: AuthCardFormProps) {
   return (
-    <RACForm onSubmit={onSubmit} className="flex flex-col gap-6">
+    <Form onSubmit={onSubmit} className="flex flex-col gap-6">
       {children}
-    </RACForm>
+    </Form>
   );
 }

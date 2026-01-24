@@ -1,8 +1,9 @@
 "use client";
 
-import { Checkbox, CheckboxGroup } from "@/components/ui";
 import { useTranslations } from "next-intl";
 import { useSearchParams } from "next/navigation";
+import { Checkbox } from "@/components/ui/Checkbox";
+import { CheckboxGroup } from "@/components/ui/CheckboxGroup";
 
 export function ProjectFiltersFormCustomerCheckboxGroup({
   customers,

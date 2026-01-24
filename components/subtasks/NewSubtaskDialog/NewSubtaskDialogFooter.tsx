@@ -1,4 +1,4 @@
-import { DialogFooter } from "@/components/ui";
+import { DialogFooter } from "@/components/ui/Dialog";
 
 export function NewSubtaskDialogFooter({
   children,

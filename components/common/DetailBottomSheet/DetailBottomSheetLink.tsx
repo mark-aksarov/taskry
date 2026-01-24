@@ -1,4 +1,4 @@
-import { Button, ButtonProps } from "@/components/ui";
+import { Button, ButtonProps } from "@/components/ui/Button";
 
 export function DetailBottomSheetLink(props: ButtonProps<"a">) {
   return (

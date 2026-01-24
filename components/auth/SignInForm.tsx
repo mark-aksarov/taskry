@@ -1,7 +1,9 @@
 "use client";
 
+import { Button } from "../ui/Button";
+import { Checkbox } from "../ui/Checkbox";
 import { useTranslations } from "next-intl";
-import { Button, Checkbox, TextField } from "../ui";
+import { TextField } from "../ui/TextField";
 import { startTransition, useActionState } from "react";
 import { ActionFn, ActionState } from "@/lib/actions/types";
 import { AuthCardForm, AuthCardFormErrorText } from "./AuthCard";

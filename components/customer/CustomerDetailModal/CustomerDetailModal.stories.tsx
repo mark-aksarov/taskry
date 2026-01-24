@@ -3,8 +3,9 @@ import {
   PersonHeaderSkeleton,
 } from "@/components/common/PersonHeader";
 
+import { Button } from "@/components/ui/Button";
+import { DialogTrigger } from "react-aria-components";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { Button, RACDialogTrigger } from "@/components/ui";
 import { CustomerDetailModal } from "./CustomerDetailModal";
 import { CustomerDetail } from "../CustomerDetail/CustomerDetail";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
@@ -19,10 +20,10 @@ const meta = {
   tags: ["autodocs"],
   decorators: [
     (Story) => (
-      <RACDialogTrigger>
+      <DialogTrigger>
         <Button label="Customer detail" />
         <Story />
-      </RACDialogTrigger>
+      </DialogTrigger>
     ),
     withThemedBackground,
   ],

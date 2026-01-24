@@ -13,7 +13,7 @@ import {
 } from "@/components/comments/CommentFormContext";
 
 import { useTranslations } from "next-intl";
-import { DialogHeader } from "@/components/ui";
+import { DialogHeader } from "@/components/ui/Dialog";
 import { DialogTrigger } from "react-aria-components";
 import { ActionFn, ActionState } from "@/lib/actions/types";
 import { CommentForm } from "@/components/comments/CommentForm";

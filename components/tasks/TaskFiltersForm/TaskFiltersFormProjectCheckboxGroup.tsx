@@ -1,8 +1,9 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { CheckboxGroup, Checkbox } from "@/components/ui";
 import { useSearchParams } from "next/navigation";
+import { Checkbox } from "@/components/ui/Checkbox";
+import { CheckboxGroup } from "@/components/ui/CheckboxGroup";
 
 export function TaskFiltersFormProjectCheckboxGroup({
   projects,

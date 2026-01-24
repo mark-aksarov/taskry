@@ -1,6 +1,7 @@
+import { Button } from "@/components/ui/Button";
+import { DialogTrigger } from "react-aria-components";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { ProjectDetailModal } from "./ProjectDetailModal";
-import { Button, RACDialogTrigger } from "@/components/ui";
 import { ProjectDetail, ProjectDetailSkeleton } from "../ProjectDetail";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { Default as ProjectDetailStory } from "../ProjectDetail/ProjectDetail.stories";
@@ -11,10 +12,10 @@ const meta = {
   tags: ["autodocs"],
   decorators: [
     (Story) => (
-      <RACDialogTrigger>
+      <DialogTrigger>
         <Button label="Project detail" />
         <Story />
-      </RACDialogTrigger>
+      </DialogTrigger>
     ),
     withThemedBackground,
   ],

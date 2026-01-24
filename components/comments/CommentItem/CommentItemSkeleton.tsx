@@ -1,6 +1,6 @@
 "use client";
 
-import { Skeleton } from "@/components/ui";
+import { Skeleton } from "@/components/ui/Skeleton";
 import { CommentItemLayout } from "./CommentItemLayout";
 import { CommentItemInfoSkeleton } from "./CommentItemInfo";
 import { ImageContainerSkeleton } from "@/components/common/ImageContainer";

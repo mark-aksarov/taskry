@@ -2,7 +2,8 @@
 
 import { useTranslations } from "next-intl";
 import { useOverlayTrigger } from "react-aria";
-import { Button, DialogHeader } from "@/components/ui";
+import { Button } from "@/components/ui/Button";
+import { DialogHeader } from "@/components/ui/Dialog";
 import { Item, useOverlayTriggerState } from "react-stately";
 import { Check, ChevronDown, CircleEllipsis, Clock } from "lucide-react";
 import { ResponsiveMenuTrigger } from "@/components/common/ResponsiveMenuTrigger";

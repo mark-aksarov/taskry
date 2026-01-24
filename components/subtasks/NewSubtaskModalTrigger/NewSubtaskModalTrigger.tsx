@@ -1,11 +1,12 @@
 "use client";
 
 import { useRef } from "react";
+import { Modal } from "@/components/ui/Modal";
 import { useOverlayTrigger } from "react-aria";
+import { DialogTrigger } from "react-aria-components";
 import { NewSubtaskDialog } from "../NewSubtaskDialog";
 import { useOverlayTriggerState } from "react-stately";
 import { NewSubtasksButton } from "../NewSubtaskButton";
-import { Modal, RACDialogTrigger } from "@/components/ui";
 
 export function NewSubtaskModalTrigger() {
   const state = useOverlayTriggerState({});
@@ -17,7 +18,7 @@ export function NewSubtaskModalTrigger() {
   );
 
   return (
-    <RACDialogTrigger>
+    <DialogTrigger>
       <NewSubtasksButton
         {...triggerProps}
         ref={triggerRef}
@@ -26,6 +27,6 @@ export function NewSubtaskModalTrigger() {
       <Modal isDismissable className="w-[300px]">
         <NewSubtaskDialog />
       </Modal>
-    </RACDialogTrigger>
+    </DialogTrigger>
   );
 }

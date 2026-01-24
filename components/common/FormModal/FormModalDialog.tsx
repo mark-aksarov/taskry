@@ -1,4 +1,4 @@
-import { Dialog } from "@/components/ui";
+import { Dialog } from "@/components/ui/Dialog";
 
 interface FormModalDialogProps {
   className?: string;

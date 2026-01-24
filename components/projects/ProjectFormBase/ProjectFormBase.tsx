@@ -1,9 +1,13 @@
 "use client";
 
-import { RACForm } from "@/components/ui";
+import {
+  Form,
+  DateValue,
+  OverlayTriggerStateContext,
+} from "react-aria-components";
+
 import { ActionFn, ActionState } from "@/lib/actions/types";
 import { FormErrorText } from "@/components/common/FormErrorText";
-import { DateValue, OverlayTriggerStateContext } from "react-aria-components";
 import { startTransition, useActionState, useContext, useEffect } from "react";
 import { ProjectFormBaseTitleTextField } from "./ProjectFormBaseTitleTextField";
 import { ProjectFormBaseDeadlineDatePicker } from "./ProjectFormBaseDeadlineDatePicker";
@@ -54,7 +58,7 @@ export function ProjectFormBase({
   }
 
   return (
-    <RACForm id={id} onSubmit={handleSubmit}>
+    <Form id={id} onSubmit={handleSubmit}>
       <div className="flex flex-col gap-4">
         {state.status === "error" && (
           <FormErrorText>{state.message}</FormErrorText>
@@ -75,6 +79,6 @@ export function ProjectFormBase({
         {projectCategorySelect}
         {projectCustomerSelect}
       </div>
-    </RACForm>
+    </Form>
   );
 }

@@ -7,7 +7,7 @@ import {
 } from "@/components/common/DetailModal";
 
 import { useTranslations } from "next-intl";
-import { DialogBody, DialogFooter, DialogHeader } from "@/components/ui";
+import { DialogBody, DialogFooter, DialogHeader } from "@/components/ui/Dialog";
 
 interface ProjectDetailModalProps {
   projectId: number;

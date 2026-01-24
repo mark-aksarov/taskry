@@ -1,4 +1,4 @@
-import { Link } from "@/components/ui";
+import { Link } from "@/components/ui/Link";
 import { useTranslations } from "next-intl";
 
 const styles = "text-sm font-semibold text-black dark:text-white";

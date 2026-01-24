@@ -1,9 +1,10 @@
 import { Suspense } from "react";
 import { NewTaskForm } from "../NewTaskForm";
 import { NewTaskModal } from "./NewTaskModal";
+import { Button } from "@/components/ui/Button";
+import { DialogTrigger } from "react-aria-components";
 import { TaskFormBaseSkeleton } from "../TaskFormBase";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { Button, RACDialogTrigger } from "@/components/ui";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { Default as TaskFormBaseStory } from "@/components/tasks/TaskFormBase/TaskFormBase.stories";
 
@@ -13,12 +14,12 @@ const meta = {
   tags: ["autodocs"],
   decorators: [
     (Story) => (
-      <RACDialogTrigger>
+      <DialogTrigger>
         <Button label="New task" />
         <Suspense>
           <Story />
         </Suspense>
-      </RACDialogTrigger>
+      </DialogTrigger>
     ),
     withThemedBackground,
   ],

@@ -1,6 +1,7 @@
 import { UserFilters } from "@/lib/types";
 import { useTranslations } from "next-intl";
-import { CheckboxGroup, Checkbox } from "@/components/ui";
+import { Checkbox } from "@/components/ui/Checkbox";
+import { CheckboxGroup } from "@/components/ui/CheckboxGroup";
 
 interface UserFiltersFormPositionCheckboxGroupProps {
   filters: UserFilters;

@@ -1,10 +1,14 @@
 "use client";
 
-import { RACForm } from "@/components/ui";
+import {
+  Form,
+  DateValue,
+  OverlayTriggerStateContext,
+} from "react-aria-components";
+
 import { ActionFn, ActionState } from "@/lib/actions/types";
 import { FormErrorText } from "@/components/common/FormErrorText";
 import { TaskFormBaseTitleTextField } from "./TaskFormBaseTitleTextField";
-import { DateValue, OverlayTriggerStateContext } from "react-aria-components";
 import { startTransition, useActionState, useContext, useEffect } from "react";
 import { TaskFormBaseDeadlineDatePicker } from "./TaskFormBaseDeadlineDatePicker";
 import { TaskFormBaseDescriptionTextField } from "./TaskFormBaseDescriptionTextField";
@@ -56,7 +60,7 @@ export function TaskFormBase({
   }
 
   return (
-    <RACForm id={id} onSubmit={handleSubmit}>
+    <Form id={id} onSubmit={handleSubmit}>
       <div className="flex flex-col gap-4">
         {state.status === "error" && (
           <FormErrorText>{state.message}</FormErrorText>
@@ -76,6 +80,6 @@ export function TaskFormBase({
         {projectSelect}
         {assigneeSelect}
       </div>
-    </RACForm>
+    </Form>
   );
 }

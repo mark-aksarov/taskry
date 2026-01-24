@@ -2,7 +2,7 @@
 
 import { twMerge } from "tailwind-merge";
 import { PaginationSize } from "./Pagination";
-import { Button, ButtonProps } from "@/components/ui";
+import { Button, ButtonProps } from "@/components/ui/Button";
 
 export type PaginationButtonProps = {
   size?: PaginationSize;

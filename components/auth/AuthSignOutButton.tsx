@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "../ui";
+import { Button } from "../ui/Button";
 import { useTranslations } from "next-intl";
 import { useRouter } from "@/i18n/navigation";
 import { authClient } from "@/lib/auth-client";

@@ -1,4 +1,4 @@
-import { BadgeColor } from "@/components/ui";
+import { BadgeColor } from "@/components/ui/Badge";
 import { TaskStatus } from "@/generated/prisma/enums";
 
 export function getTaskStatusBadgeColor(status: TaskStatus): BadgeColor {

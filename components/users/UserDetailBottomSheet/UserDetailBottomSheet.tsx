@@ -6,7 +6,7 @@ import {
   DialogHeader,
   DialogHeading,
   DialogCloseButton,
-} from "@/components/ui";
+} from "@/components/ui/Dialog";
 
 import {
   DetailBottomSheet,

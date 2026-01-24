@@ -7,12 +7,13 @@ import {
 } from "@/components/common/Detail";
 
 import Image from "next/image";
-import { Badge, Link } from "@/components/ui";
+import { Link } from "@/components/ui/Link";
+import { Badge } from "@/components/ui/Badge";
 import { ProjectStatus } from "@/generated/prisma/enums";
 import { useFormatter, useTranslations } from "next-intl";
+import { ProjectDetailLayout } from "./ProjectDetailLayout";
 import { UnknownUser } from "@/components/common/UnknownUser";
 import { ImageContainer } from "@/components/common/ImageContainer";
-import { ProjectDetailLayout } from "./ProjectDetailLayout";
 import { Attachment, Attachments } from "@/components/attachments/Attachments";
 import { ProjectDetailStatusMenuTrigger } from "./ProjectDetailStatusMenuTrigger";
 

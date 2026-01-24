@@ -7,9 +7,9 @@ import {
 } from "../common/Toolbar";
 
 import { useState } from "react";
-import { DialogHeader } from "../ui";
 import { Trash } from "lucide-react";
 import { Item, Key } from "react-stately";
+import { DialogHeader } from "../ui/Dialog";
 import { useTranslations } from "next-intl";
 import { DeleteUsersModal } from "./DeleteUsersModal";
 import { useUserSelection } from "@/lib/hooks/useUserSelection";

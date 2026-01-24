@@ -1,6 +1,6 @@
 "use client";
 
-import { Link } from "@/components/ui";
+import { Link } from "@/components/ui/Link";
 import { NotificationListItemDTO } from "@/lib/data/notification/notification.dto";
 
 type Props = {

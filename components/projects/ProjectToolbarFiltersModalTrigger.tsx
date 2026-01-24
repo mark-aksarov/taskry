@@ -1,3 +1,5 @@
+"use client";
+
 import {
   ToolbarFiltersModal,
   ToolbarFiltersModalDialog,
@@ -6,7 +8,7 @@ import {
 
 import { useTranslations } from "next-intl";
 import { DialogTrigger } from "react-aria-components";
-import { DialogBody, DialogFooter, DialogHeader } from "../ui";
+import { DialogBody, DialogFooter, DialogHeader } from "../ui/Dialog";
 import { ToolbarFiltersButtonMobile } from "../common/Toolbar/ToolbarFiltersButtonMobile";
 import { ToolbarFiltersButtonDesktop } from "../common/Toolbar/ToolbarFiltersButtonDesktop";
 

@@ -1,5 +1,6 @@
-import { CheckboxGroup, Checkbox } from "@/components/ui";
 import { useTranslations } from "next-intl";
+import { Checkbox } from "@/components/ui/Checkbox";
+import { CheckboxGroup } from "@/components/ui/CheckboxGroup";
 
 export function UserFiltersFormRoleCheckboxGroup() {
   const t = useTranslations("users.UserFiltersFormRoleCheckboxGroup");

@@ -1,7 +1,7 @@
 import { Ellipsis } from "lucide-react";
 import { twMerge } from "tailwind-merge";
 import { useTranslations } from "next-intl";
-import { Button, ButtonProps } from "@/components/ui";
+import { Button, ButtonProps } from "@/components/ui/Button";
 
 export function ItemBaseActionMenuButton({ className, ...props }: ButtonProps) {
   const t = useTranslations("common.ItemBaseActionMenuTrigger");

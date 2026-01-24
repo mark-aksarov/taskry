@@ -1,5 +1,5 @@
-import { Skeleton } from "@/components/ui";
 import { twMerge } from "tailwind-merge";
+import { Skeleton } from "@/components/ui/Skeleton";
 
 const styles = "rounded-full overflow-hidden relative flex-none";
 

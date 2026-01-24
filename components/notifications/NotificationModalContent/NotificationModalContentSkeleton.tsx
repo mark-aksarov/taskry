@@ -1,4 +1,4 @@
-import { DialogBody } from "@/components/ui";
+import { DialogBody } from "@/components/ui/Dialog";
 import { Repeat } from "@/components/common/Repeat";
 import { NotificationList } from "../NotificationList";
 import { NotificationModalActions } from "./NotificationModalActions";

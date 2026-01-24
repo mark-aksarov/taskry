@@ -2,9 +2,10 @@
 
 import { useState } from "react";
 import { DateValue } from "react-aria";
+import { Form } from "react-aria-components";
 import { ProjectFilters } from "@/lib/types";
 import { Switch } from "@/components/ui/Switch";
-import { Divider, RACForm } from "@/components/ui";
+import { Divider } from "@/components/ui/Divider";
 import { parseDate } from "@internationalized/date";
 import { useLocale, useTranslations } from "next-intl";
 import { usePathname, useRouter } from "@/i18n/navigation";
@@ -106,7 +107,7 @@ export function ProjectFiltersForm({
   };
 
   return (
-    <RACForm id="project-filter-form" onSubmit={handleSubmit}>
+    <Form id="project-filter-form" onSubmit={handleSubmit}>
       <div className="flex flex-col gap-4">
         <Switch
           data-test="no-active-tasks-switch"
@@ -143,6 +144,6 @@ export function ProjectFiltersForm({
         <Divider />
         {userCheckboxGroup}
       </div>
-    </RACForm>
+    </Form>
   );
 }

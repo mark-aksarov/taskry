@@ -8,11 +8,12 @@ import {
 
 import { tv } from "tailwind-variants";
 import { useTranslations } from "next-intl";
-import { fieldStyles, focusRing } from "@/components/ui";
+import { focusRing } from "@/components/ui/styles";
+import { fieldStyles } from "@/components/ui/Field";
 import { useCommentFormContext } from "../CommentFormContext";
-import { fieldInputStyles as baseInputStyles } from "@/components/ui";
 import { CommentTextFieldSendButton } from "./CommentTextFieldSendButton";
 import { CommentTextFieldFileTrigger } from "./CommentTextFieldFileTrigger";
+import { fieldInputStyles as baseInputStyles } from "@/components/ui/TextField";
 import type { TextFieldProps as RACTextFieldProps } from "react-aria-components";
 
 export const fieldInputStyles = tv({

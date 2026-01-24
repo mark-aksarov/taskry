@@ -2,14 +2,14 @@ import {
   TaskDetailBottomSheet,
   TaskDetailBottomSheetProps,
 } from "./TaskDetailBottomSheet";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
-import { Button } from "@/components/ui";
 import { useOverlayTrigger } from "react-aria";
+import { Button } from "@/components/ui/Button";
 import { useOverlayTriggerState } from "react-stately";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { TaskDetail, TaskDetailSkeleton } from "../TaskDetail";
 import { OverlayTriggerStateContext } from "react-aria-components";
+import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { Default as TaskDetailStory } from "../TaskDetail/TaskDetail.stories";
 
 const meta = {

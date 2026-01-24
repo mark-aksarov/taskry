@@ -12,7 +12,7 @@ import {
   ToolbarMobileHeading,
 } from "@/components/common/Toolbar";
 
-import { Skeleton } from "@/components/ui";
+import { Skeleton } from "@/components/ui/Skeleton";
 import { Repeat } from "@/components/common/Repeat";
 import { PageGrid } from "@/components/common/PageGrid";
 import { PageContainer } from "@/components/common/PageContainer";

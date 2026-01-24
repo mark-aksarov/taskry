@@ -2,8 +2,9 @@ import { Suspense } from "react";
 import { SearchModal } from "./SearchModal";
 import { SearchField } from "../SearchField";
 import { fn } from "storybook/internal/test";
+import { Button } from "@/components/ui/Button";
+import { DialogTrigger } from "react-aria-components";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { Button, RACDialogTrigger } from "@/components/ui";
 import { SearchPresentation } from "../SearchPresentation";
 import { SearchEmptySection } from "../SearchEmptySection";
 import { SearchList, SearchListSkeleton } from "../SearchList";
@@ -21,12 +22,12 @@ const meta = {
   tags: ["autodocs"],
   decorators: [
     (Story) => (
-      <RACDialogTrigger>
+      <DialogTrigger>
         <Button label="New project" />
         <Suspense>
           <Story />
         </Suspense>
-      </RACDialogTrigger>
+      </DialogTrigger>
     ),
     withThemedBackground,
   ],

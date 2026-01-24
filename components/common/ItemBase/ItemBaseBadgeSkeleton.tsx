@@ -1,5 +1,5 @@
-import { Skeleton } from "@/components/ui";
 import { twMerge } from "tailwind-merge";
+import { Skeleton } from "@/components/ui/Skeleton";
 
 export function ItemBaseBadgeSkeleton({ className }: { className?: string }) {
   return (

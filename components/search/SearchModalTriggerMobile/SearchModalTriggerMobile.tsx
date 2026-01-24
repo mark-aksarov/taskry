@@ -2,7 +2,8 @@
 
 import { Search } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { Button, RACDialogTrigger } from "@/components/ui";
+import { Button } from "@/components/ui/Button";
+import { DialogTrigger } from "react-aria-components";
 
 interface SearchModalTriggerMobileProps {
   modal: React.ReactNode;
@@ -16,7 +17,7 @@ export function SearchModalTriggerMobile({
   const t = useTranslations("search.SearchModalTriggerMobile");
 
   return (
-    <RACDialogTrigger>
+    <DialogTrigger>
       <Button
         aria-label={t("ariaLabel")}
         variant="ghost"
@@ -24,6 +25,6 @@ export function SearchModalTriggerMobile({
         className={className}
       />
       {modal}
-    </RACDialogTrigger>
+    </DialogTrigger>
   );
 }

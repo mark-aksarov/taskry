@@ -3,7 +3,8 @@
 import { Item } from "react-stately";
 import { Languages } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { MenuTrigger, DialogHeader } from "@/components/ui";
+import { MenuTrigger } from "@/components/ui/Menu";
+import { DialogHeader } from "@/components/ui/Dialog";
 import { NavigationButton } from "@/components/common/NavigationButton";
 
 export const AppNavigationLangMenuTrigger = () => {

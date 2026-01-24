@@ -18,8 +18,8 @@ import {
 } from "@/components/common/ItemBase";
 
 import Image from "next/image";
-import { Link } from "@/components/ui";
-import { Checkbox } from "@/components/ui";
+import { Link } from "@/components/ui/Link";
+import { Checkbox } from "@/components/ui/Checkbox";
 import { ProjectStatus } from "@/generated/prisma/enums";
 import { useFormatter, useTranslations } from "next-intl";
 import { UnknownUser } from "@/components/common/UnknownUser";

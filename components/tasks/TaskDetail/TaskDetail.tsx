@@ -7,7 +7,8 @@ import {
 } from "@/components/common/Detail";
 
 import Image from "next/image";
-import { Badge, Link } from "@/components/ui";
+import { Link } from "@/components/ui/Link";
+import { Badge } from "@/components/ui/Badge";
 import { TaskDetailLayout } from "./TaskDetailLayout";
 import { TaskStatus } from "@/generated/prisma/enums";
 import { useFormatter, useTranslations } from "next-intl";

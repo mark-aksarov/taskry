@@ -4,8 +4,10 @@ import { useRef } from "react";
 import { Menu } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useOverlayTrigger } from "react-aria";
+import { Button } from "@/components/ui/Button";
 import { useOverlayTriggerState } from "react-stately";
-import { Button, BottomSheet, Dialog, DialogBody } from "@/components/ui";
+import { BottomSheet } from "@/components/ui/BottomSheet";
+import { Dialog, DialogBody } from "@/components/ui/Dialog";
 
 export function AppBottomSheetTrigger({
   appNavigation,

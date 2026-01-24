@@ -1,4 +1,4 @@
-import { Dialog } from "@/components/ui";
+import { Dialog } from "@/components/ui/Dialog";
 import { NewSubtaskForm } from "../NewSubtaskForm";
 import { NewSubtaskDialogBody } from "./NewSubtaskDialogBody";
 import { NewSubtaskDialogHeader } from "./NewSubtaskDialogHeader";

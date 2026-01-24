@@ -1,4 +1,4 @@
-import { DialogBody } from "../ui";
+import { DialogBody } from "../ui/Dialog";
 import { SearchEmptySection } from "./SearchEmptySection";
 
 export interface SearchEmptyPresentationProps {

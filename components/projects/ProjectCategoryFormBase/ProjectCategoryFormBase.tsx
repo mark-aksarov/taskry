@@ -1,9 +1,8 @@
 "use client";
 
 import { ActionFn, ActionState } from "@/lib/actions/types";
-import { RACForm } from "@/components/ui";
 import { FormErrorText } from "@/components/common/FormErrorText";
-import { OverlayTriggerStateContext } from "react-aria-components";
+import { Form, OverlayTriggerStateContext } from "react-aria-components";
 import { startTransition, useActionState, useContext, useEffect } from "react";
 import { ProjectCategoryFormBaseNameTextField } from "./ProjectCategoryFormBaseNameTextField";
 
@@ -40,7 +39,7 @@ export function ProjectCategoryFormBase({
   }
 
   return (
-    <RACForm id="new-project-category-form" onSubmit={handleSubmit}>
+    <Form id="new-project-category-form" onSubmit={handleSubmit}>
       <div className="flex flex-col gap-4">
         {state.status === "error" && (
           <FormErrorText>{state.message}</FormErrorText>
@@ -52,6 +51,6 @@ export function ProjectCategoryFormBase({
           defaultValue={projectTitleDefaultValue}
         />
       </div>
-    </RACForm>
+    </Form>
   );
 }

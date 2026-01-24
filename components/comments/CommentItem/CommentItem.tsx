@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { Link } from "@/components/ui";
+import { Link } from "@/components/ui/Link";
 import { CommentItemDate } from "./CommentItemDate";
 import { CommentItemText } from "./CommentItemText";
 import { CommentItemInfo } from "./CommentItemInfo";

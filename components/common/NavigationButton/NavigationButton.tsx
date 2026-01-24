@@ -2,7 +2,9 @@
 
 import Link from "next/link";
 import { tv } from "tailwind-variants";
-import { baseButtonStyles, focusRing, RACButton } from "@/components/ui";
+import { Button } from "react-aria-components";
+import { focusRing } from "@/components/ui/styles";
+import { baseButtonStyles } from "@/components/ui/Button";
 
 export const styles = tv({
   extend: focusRing,
@@ -77,12 +79,12 @@ export const NavigationButton = ({
   }
 
   return (
-    <RACButton
+    <Button
       data-test={dataTest}
       onPress={onPress}
       className={styles({ variant, isActive, className })}
     >
       {children}
-    </RACButton>
+    </Button>
   );
 };

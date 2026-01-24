@@ -1,4 +1,4 @@
-import { Skeleton } from "@/components/ui";
+import { Skeleton } from "@/components/ui/Skeleton";
 
 const styles = "flex flex-col gap-1";
 

@@ -3,8 +3,8 @@
 import { useMemo, useState } from "react";
 import { SearchField } from "../SearchField";
 import { useTranslations } from "next-intl";
-import { Dialog, DialogHeader } from "@/components/ui";
 import { SearchModalContext } from "./SearchModalContext";
+import { Dialog, DialogHeader } from "@/components/ui/Dialog";
 import { SearchToggleButtonGroup } from "../SearchToggleButtonGroup";
 import { ResponsiveModal } from "@/components/common/ResponsiveModal";
 

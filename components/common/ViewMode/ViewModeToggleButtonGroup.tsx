@@ -1,8 +1,12 @@
 "use client";
 
+import {
+  ToggleButton,
+  ToggleButtonGroup,
+} from "@/components/ui/ToggleButtonGroup";
+
 import { useTranslations } from "next-intl";
 import { useViewMode, ViewMode } from "./ViewModeContext";
-import { ToggleButton, ToggleButtonGroup } from "@/components/ui";
 
 export const ViewModeToggleButtonGroup = ({
   className,

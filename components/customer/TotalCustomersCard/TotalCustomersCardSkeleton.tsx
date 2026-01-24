@@ -1,4 +1,4 @@
-import { Skeleton } from "@/components/ui";
+import { Skeleton } from "@/components/ui/Skeleton";
 import { TotalCustomersCardLayout } from "./TotalCustomersCardLayout";
 
 export const TotalCustomersCardSkeleton = () => {

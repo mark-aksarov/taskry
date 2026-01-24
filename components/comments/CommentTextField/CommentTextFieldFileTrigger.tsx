@@ -1,7 +1,9 @@
+"use client";
+
 import { Paperclip } from "lucide-react";
 import { twMerge } from "tailwind-merge";
-import { Button } from "@/components/ui";
 import { useTranslations } from "next-intl";
+import { Button } from "@/components/ui/Button";
 import { FileTrigger } from "react-aria-components";
 
 type CommentTextFieldFileTriggerProps = {

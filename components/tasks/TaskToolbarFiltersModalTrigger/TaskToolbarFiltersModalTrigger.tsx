@@ -7,10 +7,10 @@ import {
 } from "@/components/common/Toolbar";
 
 import { useTranslations } from "next-intl";
-import { DialogBody, DialogFooter, DialogHeader } from "@/components/ui";
+import { DialogTrigger } from "react-aria-components";
+import { DialogBody, DialogFooter, DialogHeader } from "@/components/ui/Dialog";
 import { ToolbarFiltersButtonMobile } from "@/components/common/Toolbar/ToolbarFiltersButtonMobile";
 import { ToolbarFiltersButtonDesktop } from "@/components/common/Toolbar/ToolbarFiltersButtonDesktop";
-import { DialogTrigger } from "react-aria-components";
 
 export function TaskToolbarFiltersModalTrigger({
   filtersFormContainer,

@@ -1,8 +1,8 @@
 "use client";
 
-import { Divider } from "@/components/ui";
 import { useTranslations } from "next-intl";
 import { usePathname } from "@/i18n/navigation";
+import { Divider } from "@/components/ui/Divider";
 import { CalendarCheck, Info } from "lucide-react";
 import { ProfileActions } from "../ProfileActions";
 import { NavigationButton } from "@/components/common/NavigationButton";

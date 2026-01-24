@@ -2,8 +2,9 @@
 
 import { Item } from "react-stately";
 import { Languages } from "lucide-react";
-import { Button, MenuTrigger } from "@/components/ui";
 import { useTranslations } from "next-intl";
+import { Button } from "@/components/ui/Button";
+import { MenuTrigger } from "@/components/ui/Menu";
 
 export const AppHeaderLangMenuTrigger = () => {
   const t = useTranslations("layout.AppHeaderLangMenuTrigger");

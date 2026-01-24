@@ -1,5 +1,6 @@
+import { Checkbox } from "../ui/Checkbox";
 import { useTranslations } from "next-intl";
-import { CheckboxGroup, Checkbox } from "../ui";
+import { CheckboxGroup } from "../ui/CheckboxGroup";
 import { SubtaskActionMenuTrigger } from "./SubtaskActionMenuTrigger";
 
 export function SubtasksCheckboxGroup({

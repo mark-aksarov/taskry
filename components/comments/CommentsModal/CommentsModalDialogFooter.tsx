@@ -1,6 +1,6 @@
 "use client";
 
-import { DialogFooter } from "@/components/ui";
+import { DialogFooter } from "@/components/ui/Dialog";
 
 export function CommentsModalDialogFooter({
   children,

@@ -1,4 +1,4 @@
-import { Skeleton } from "@/components/ui";
+import { Skeleton } from "@/components/ui/Skeleton";
 import { ProjectDetailLayout } from "./ProjectDetailLayout";
 import { FieldSkeleton } from "@/components/common/FieldSkeleton";
 import { DetailInfo, DetailInfoSkeleton } from "@/components/common/Detail";

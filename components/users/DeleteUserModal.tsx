@@ -9,7 +9,8 @@ import {
 } from "@/components/common/ConfirmModal";
 
 import { useTranslations } from "next-intl";
-import { DialogHeading, ModalProps } from "@/components/ui";
+import { ModalProps } from "@/components/ui/Modal";
+import { DialogHeading } from "@/components/ui/Dialog";
 import { startTransition, useActionState, useEffect } from "react";
 import { useActionErrorToast } from "@/lib/hooks/useActionErrorToast";
 import { ActionFn, ActionState, DeleteUsersPayload } from "@/lib/actions/types";

@@ -1,8 +1,9 @@
 import {
-  GridItemContactListSkeleton,
   GridItemInfoSkeleton,
+  GridItemContactListSkeleton,
 } from "@/components/common/Grid";
-import { Skeleton } from "@/components/ui";
+
+import { Skeleton } from "@/components/ui/Skeleton";
 import { CustomerGridItemLayout } from "./CustomerGridItemLayout";
 import { ImageContainerSkeleton } from "@/components/common/ImageContainer";
 import { ItemBaseActionMenuTriggerSkeleton } from "@/components/common/ItemBase";

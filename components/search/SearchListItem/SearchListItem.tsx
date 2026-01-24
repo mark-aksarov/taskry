@@ -2,8 +2,9 @@
 
 import { tv } from "tailwind-variants";
 import { ChevronRight } from "lucide-react";
-import { itemStyles, RACLink } from "@/components/ui";
+import { itemStyles } from "@/components/ui/styles";
 import { ListItem, ListItemInfo } from "@/components/common/List";
+import { Link } from "react-aria-components";
 
 const styles = tv({
   base: "w-full cursor-pointer outline-none",
@@ -32,10 +33,7 @@ export function SearchListItem({
   href,
 }: SearchListItemProps) {
   return (
-    <RACLink
-      className={(renderProps) => styles({ ...renderProps })}
-      href={href}
-    >
+    <Link className={(renderProps) => styles({ ...renderProps })} href={href}>
       <ListItem
         data-test="search-list-item"
         className="rounded-none bg-inherit! pr-3 shadow-none"
@@ -52,6 +50,6 @@ export function SearchListItem({
           className="text-black dark:text-white"
         />
       </ListItem>
-    </RACLink>
+    </Link>
   );
 }

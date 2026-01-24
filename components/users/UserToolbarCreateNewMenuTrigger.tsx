@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Key } from "react-aria";
 import { Item } from "react-stately";
 import { useTranslations } from "next-intl";
-import { DialogHeader } from "@/components/ui";
+import { DialogHeader } from "@/components/ui/Dialog";
 import { BriefcaseBusiness, Users } from "lucide-react";
 import { ToolbarCreateNewButton } from "../common/Toolbar";
 import { NewPositionModal } from "./NewPositionModal/NewPositionModal";

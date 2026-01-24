@@ -1,8 +1,9 @@
 import { Suspense } from "react";
+import { Button } from "@/components/ui/Button";
 import { NewCompanyForm } from "../NewCompanyForm";
 import { NewCompanyModal } from "./NewCompanyModal";
+import { DialogTrigger } from "react-aria-components";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { Button, RACDialogTrigger } from "@/components/ui";
 import { CompanyFormBaseSkeleton } from "../CompanyFormBase";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { Default as CompanyFormBaseStory } from "../CompanyFormBase/CompanyFormBase.stories";
@@ -13,12 +14,12 @@ const meta = {
   tags: ["autodocs"],
   decorators: [
     (Story) => (
-      <RACDialogTrigger>
+      <DialogTrigger>
         <Button label="New company" />
         <Suspense>
           <Story />
         </Suspense>
-      </RACDialogTrigger>
+      </DialogTrigger>
     ),
     withThemedBackground,
   ],

@@ -1,7 +1,5 @@
 "use client";
 
-import { DialogBody, DialogFooter, DialogHeader } from "@/components/ui";
-
 import {
   DetailModal,
   DetailModalDialog,
@@ -12,6 +10,7 @@ import { Suspense } from "react";
 import { useTranslations } from "next-intl";
 import { UserDetailSkeleton } from "@/components/users/UserDetail";
 import { PersonHeaderSkeleton } from "@/components/common/PersonHeader";
+import { DialogBody, DialogFooter, DialogHeader } from "@/components/ui/Dialog";
 import { PersonDetailPresentation } from "@/components/common/PersonDetailPresentation";
 
 interface UserDetailModalProps {

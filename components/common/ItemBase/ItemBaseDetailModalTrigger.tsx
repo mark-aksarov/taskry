@@ -1,8 +1,12 @@
 "use client";
 
+import {
+  Button,
+  DialogTrigger,
+  DialogTriggerProps,
+} from "react-aria-components";
 import { tv } from "tailwind-variants";
-import { focusRing, RACButton } from "@/components/ui";
-import { DialogTrigger, DialogTriggerProps } from "react-aria-components";
+import { focusRing } from "@/components/ui/styles";
 
 interface ItemBaseDetailModalTriggerProps extends DialogTriggerProps {
   modal: React.ReactNode;
@@ -23,7 +27,7 @@ export function ItemBaseDetailModalTrigger({
 }: ItemBaseDetailModalTriggerProps) {
   return (
     <DialogTrigger>
-      <RACButton
+      <Button
         className={(renderProps) =>
           styles({
             ...renderProps,
@@ -33,7 +37,7 @@ export function ItemBaseDetailModalTrigger({
         {...props}
       >
         {children}
-      </RACButton>
+      </Button>
       {modal}
     </DialogTrigger>
   );

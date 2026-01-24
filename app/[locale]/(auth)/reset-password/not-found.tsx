@@ -4,9 +4,9 @@ import {
   AuthCardHeader,
   AuthCardHeading,
 } from "@/components/auth/AuthCard";
-import { Button } from "@/components/ui";
 import { LogIn } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { Button } from "@/components/ui/Button";
 
 export default function ResetPasswordNotFound() {
   const t = useTranslations("app.ResetPasswordNotFound");

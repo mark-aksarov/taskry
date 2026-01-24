@@ -1,8 +1,9 @@
 import React from "react";
 import { Reply } from "lucide-react";
 import { tv } from "tailwind-variants";
-import { focusRing, RACButton } from "@/components/ui";
 import { useTranslations } from "next-intl";
+import { Button } from "react-aria-components";
+import { focusRing } from "@/components/ui/styles";
 
 interface ReplyButtonProps {
   isDisabled?: boolean;
@@ -22,12 +23,12 @@ export function ReplyButton({ isDisabled }: ReplyButtonProps) {
   const t = useTranslations("comments");
 
   return (
-    <RACButton
+    <Button
       className={(renderProps) => styles({ ...renderProps })}
       isDisabled={isDisabled}
     >
       <Reply size={16} strokeWidth={1.5} absoluteStrokeWidth />
       {t("ReplyButton")}
-    </RACButton>
+    </Button>
   );
 }

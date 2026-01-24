@@ -1,8 +1,8 @@
-import { Skeleton } from "@/components/ui";
 import {
-  FieldGroupSkeleton,
   FieldSkeleton,
+  FieldGroupSkeleton,
 } from "@/components/common/FieldSkeleton";
+import { Skeleton } from "@/components/ui/Skeleton";
 
 export function TaskFiltersFormSkeleton() {
   return (

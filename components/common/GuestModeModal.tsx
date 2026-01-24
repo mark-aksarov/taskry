@@ -5,8 +5,8 @@ import {
   ConfirmModalCancelButton,
 } from "./ConfirmModal";
 
-import { DialogHeading } from "../ui";
 import { useTranslations } from "next-intl";
+import { DialogHeading } from "../ui/Dialog";
 
 interface GuestModeModalProps {
   isOpen: boolean;

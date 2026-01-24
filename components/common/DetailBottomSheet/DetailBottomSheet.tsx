@@ -1,6 +1,8 @@
+"use client";
+
 import { useContext } from "react";
-import { BottomSheet, BottomSheetProps } from "@/components/ui";
 import { OverlayTriggerStateContext } from "react-aria-components";
+import { BottomSheet, BottomSheetProps } from "@/components/ui/BottomSheet";
 
 export function DetailBottomSheet(props: Omit<BottomSheetProps, "state">) {
   const state = useContext(OverlayTriggerStateContext);

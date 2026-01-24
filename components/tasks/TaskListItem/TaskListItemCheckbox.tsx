@@ -1,4 +1,4 @@
-import { Checkbox } from "@/components/ui";
+import { Checkbox } from "@/components/ui/Checkbox";
 import { useTaskSelection } from "@/lib/hooks/useTaskSelection";
 
 export function TaskListItemCheckbox({ id }: { id: number }) {

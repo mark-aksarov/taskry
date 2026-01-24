@@ -1,10 +1,13 @@
-import { fieldStyles, Label } from "../Field";
+"use client";
+
 import {
   composeRenderProps,
   CheckboxGroup as RACCheckboxGroup,
 } from "react-aria-components";
-import type { CheckboxGroupProps as RACCheckboxGroupProps } from "react-aria-components";
+
 import { twMerge } from "tailwind-merge";
+import { fieldStyles, Label } from "../Field";
+import type { CheckboxGroupProps as RACCheckboxGroupProps } from "react-aria-components";
 
 type CheckboxGroupProps = RACCheckboxGroupProps &
   React.RefAttributes<HTMLDivElement> & {

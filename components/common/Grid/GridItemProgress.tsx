@@ -1,5 +1,6 @@
-import { ProgressBar, ProgressBarProps, Skeleton } from "@/components/ui";
 import { twMerge } from "tailwind-merge";
+import { Skeleton } from "@/components/ui/Skeleton";
+import { ProgressBar, ProgressBarProps } from "@/components/ui/ProgressBar";
 
 interface GridItemProgressProps extends Omit<ProgressBarProps, "className"> {
   className?: string;

@@ -1,8 +1,9 @@
-import { Attachment, Attachments } from "@/components/attachments/Attachments";
-import { DropZone, fieldStyles, Label } from "@/components/ui";
-import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
+import { DropZone } from "@/components/ui/DropZone";
+import { fieldStyles, Label } from "@/components/ui/Field";
+import { Attachment, Attachments } from "@/components/attachments/Attachments";
 
 export function AttachmentsField() {
   const [files, setFiles] = useState<FileList | null>(null);

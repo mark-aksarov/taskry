@@ -1,5 +1,5 @@
 import { Plus } from "lucide-react";
-import { Button, ButtonProps } from "@/components/ui";
+import { Button, ButtonProps } from "@/components/ui/Button";
 
 export function ToolbarCreateNewButton(props: ButtonProps) {
   return (

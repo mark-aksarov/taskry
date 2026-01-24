@@ -1,12 +1,14 @@
-import { Suspense } from "react";
-import { NewCustomerModal } from "./NewCustomerModal";
-import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { Button, RACDialogTrigger } from "@/components/ui";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import {
   CustomerFormBase,
   CustomerFormBaseSkeleton,
 } from "../CustomerFormBase";
+
+import { Suspense } from "react";
+import { Button } from "@/components/ui/Button";
+import { DialogTrigger } from "react-aria-components";
+import { NewCustomerModal } from "./NewCustomerModal";
+import { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { Default as CustomerFormBaseStory } from "../CustomerFormBase/CustomerFormBase.stories";
 
 const meta = {
@@ -15,12 +17,12 @@ const meta = {
   tags: ["autodocs"],
   decorators: [
     (Story) => (
-      <RACDialogTrigger>
+      <DialogTrigger>
         <Button label="New project" />
         <Suspense>
           <Story />
         </Suspense>
-      </RACDialogTrigger>
+      </DialogTrigger>
     ),
     withThemedBackground,
   ],

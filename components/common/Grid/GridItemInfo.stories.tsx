@@ -1,9 +1,10 @@
-import { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { Link } from "@/components/ui/Link";
 import { GridItemInfo } from "./GridItemInfo";
-import { GridItemTitle } from "./GridItemTitle";
 import { GridItemText } from "./GridItemText";
+import { Button } from "react-aria-components";
+import { GridItemTitle } from "./GridItemTitle";
+import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { Link, RACButton } from "@/components/ui";
 
 const meta = {
   title: "Components/common/GridItemInfo",
@@ -44,9 +45,7 @@ export const TruncateWithButtonAndLinkInside = {
     children: (
       <>
         <GridItemTitle>
-          <RACButton className="max-w-full truncate">
-            Design landing page
-          </RACButton>
+          <Button className="max-w-full truncate">Design landing page</Button>
         </GridItemTitle>
         <GridItemText>
           <Link href="#" className="block truncate">

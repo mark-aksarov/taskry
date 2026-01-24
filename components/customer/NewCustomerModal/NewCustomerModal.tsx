@@ -1,15 +1,11 @@
 import {
-  DialogBody,
-  ModalProps,
-  DialogFooter,
-  DialogHeader,
-} from "@/components/ui";
-
-import {
   FormModal,
   FormModalDialog,
   FormModalSubmitButton,
 } from "@/components/common/FormModal";
+
+import { ModalProps } from "@/components/ui/Modal";
+import { DialogBody, DialogFooter, DialogHeader } from "@/components/ui/Dialog";
 
 import { useTranslations } from "next-intl";
 

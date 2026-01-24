@@ -1,13 +1,14 @@
 import { useState } from "react";
-import { Button, DialogHeading } from "@/components/ui";
 import { ConfirmModal } from "./ConfirmModal";
-import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { ConfirmModalError } from "./ConfirmModalError";
+import { Button } from "@/components/ui/Button";
 import { ConfirmModalText } from "./ConfirmModalText";
+import { DialogHeading } from "@/components/ui/Dialog";
+import { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { ConfirmModalError } from "./ConfirmModalError";
 import { ConfirmModalActions } from "./ConfirmModalActions";
 import { ConfirmModalCancelButton } from "./ConfirmModalCancelButton";
 import { ConfirmModalConfirmButton } from "./ConfirmModalConfirmButton";
+import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {
   title: "Components/common/ConfirmModal",

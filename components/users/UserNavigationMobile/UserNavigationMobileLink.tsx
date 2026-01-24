@@ -1,8 +1,9 @@
 "use client";
 
-import { toggleButtonStyles, RACLink, RACLinkProps } from "@/components/ui";
+import { Link, LinkProps } from "react-aria-components";
+import { toggleButtonStyles } from "@/components/ui/ToggleButtonGroup";
 
-interface UserNavigationMobileLinkProps extends RACLinkProps {
+interface UserNavigationMobileLinkProps extends LinkProps {
   isSelected: boolean;
 }
 
@@ -11,7 +12,7 @@ export function UserNavigationMobileLink({
   ...props
 }: UserNavigationMobileLinkProps) {
   return (
-    <RACLink
+    <Link
       {...props}
       className={(renderProps) =>
         toggleButtonStyles({ ...renderProps, variant: "contrast", isSelected })

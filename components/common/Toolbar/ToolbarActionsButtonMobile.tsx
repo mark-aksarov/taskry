@@ -1,6 +1,6 @@
 import { Ellipsis } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { Button, ButtonProps } from "@/components/ui";
+import { Button, ButtonProps } from "@/components/ui/Button";
 
 export function ToolbarActionsButtonMobile(props: ButtonProps) {
   const t = useTranslations("common.ToolbarActionsButtonMobile");

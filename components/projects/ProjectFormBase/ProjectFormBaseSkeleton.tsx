@@ -2,7 +2,7 @@ import {
   FieldSkeleton,
   FieldGroupSkeleton,
 } from "@/components/common/FieldSkeleton";
-import { Skeleton } from "@/components/ui";
+import { Skeleton } from "@/components/ui/Skeleton";
 
 export function ProjectFormBaseSkeleton() {
   return (

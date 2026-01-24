@@ -1,9 +1,10 @@
-import { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { Link } from "@/components/ui/Link";
 import { ListItemInfo } from "./ListItemInfo";
-import { ListItemTitle } from "./ListItemTitle";
 import { ListItemText } from "./ListItemText";
+import { Button } from "react-aria-components";
+import { ListItemTitle } from "./ListItemTitle";
+import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { Link, RACButton } from "@/components/ui";
 
 const meta = {
   title: "Components/common/ListItemInfo",
@@ -44,9 +45,7 @@ export const TruncateWithButtonAndLinkInside = {
     children: (
       <>
         <ListItemTitle>
-          <RACButton className="max-w-full truncate">
-            Design landing page
-          </RACButton>
+          <Button className="max-w-full truncate">Design landing page</Button>
         </ListItemTitle>
         <ListItemText>
           <Link href="#" className="block truncate">

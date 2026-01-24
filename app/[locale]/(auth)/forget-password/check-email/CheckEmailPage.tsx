@@ -6,8 +6,8 @@ import {
   AuthCardHeading,
   AuthCardSubtitle,
 } from "@/components/auth/AuthCard";
-import { Button } from "@/components/ui";
 import { useTranslations } from "next-intl";
+import { Button } from "@/components/ui/Button";
 import { AuthCardFooterSignInItem } from "@/components/auth/AuthCardFooterSignInItem";
 
 export function CheckEmailPage() {

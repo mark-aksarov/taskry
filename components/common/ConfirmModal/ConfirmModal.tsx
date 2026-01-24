@@ -1,4 +1,5 @@
-import { Modal, Dialog, DialogBody, ModalProps } from "@/components/ui";
+import { Modal, ModalProps } from "@/components/ui/Modal";
+import { Dialog, DialogBody } from "@/components/ui/Dialog";
 
 interface ConfirmModalProps
   extends Pick<ModalProps, "isOpen" | "onOpenChange"> {

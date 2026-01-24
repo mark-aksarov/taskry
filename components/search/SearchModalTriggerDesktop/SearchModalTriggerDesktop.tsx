@@ -3,7 +3,8 @@
 import { Search } from "lucide-react";
 import { tv } from "tailwind-variants";
 import { useTranslations } from "next-intl";
-import { focusRing, RACButton, RACDialogTrigger } from "@/components/ui";
+import { focusRing } from "@/components/ui/styles";
+import { Button, DialogTrigger } from "react-aria-components";
 
 export const styles = tv({
   extend: focusRing,
@@ -18,8 +19,8 @@ export function SearchModalTriggerDesktop({
   const t = useTranslations("search.SearchModalTriggerDesktop");
 
   return (
-    <RACDialogTrigger>
-      <RACButton data-test="search-modal-trigger" className={styles}>
+    <DialogTrigger>
+      <Button data-test="search-modal-trigger" className={styles}>
         {t("label")}
         <Search
           size={18}
@@ -27,8 +28,8 @@ export function SearchModalTriggerDesktop({
           absoluteStrokeWidth
           className="text-black dark:text-white"
         />
-      </RACButton>
+      </Button>
       {modal}
-    </RACDialogTrigger>
+    </DialogTrigger>
   );
 }

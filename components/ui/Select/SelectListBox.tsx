@@ -1,9 +1,11 @@
+"use client";
+
 import React from "react";
 import { itemStyles } from "../styles";
+import { twMerge } from "tailwind-merge";
 import { ListState, Node } from "react-stately";
 import { ListBoxProps } from "react-aria-components";
 import { mergeProps, useHover, useListBox, useOption } from "react-aria";
-import { twMerge } from "tailwind-merge";
 
 export type SelectListBoxProps<T extends object = any> = Omit<
   ListBoxProps<T>,

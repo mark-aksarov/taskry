@@ -8,7 +8,7 @@ import {
 import { useState } from "react";
 import { Key } from "react-aria";
 import { Item } from "react-stately";
-import { DialogHeader } from "../ui";
+import { DialogHeader } from "../ui/Dialog";
 import { useTranslations } from "next-intl";
 import { Blocks, FolderClosed } from "lucide-react";
 import { NewProjectCategoryModal } from "./NewProjectCategoryModal";

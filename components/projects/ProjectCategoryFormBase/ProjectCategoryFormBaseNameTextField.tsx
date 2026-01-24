@@ -1,5 +1,5 @@
-import { TextField } from "@/components/ui";
 import { useTranslations } from "next-intl";
+import { TextField } from "@/components/ui/TextField";
 
 interface ProjectCategoryFormBaseNameTextFieldProps {
   defaultValue?: string;

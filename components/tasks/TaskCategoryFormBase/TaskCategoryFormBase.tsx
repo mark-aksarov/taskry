@@ -1,9 +1,8 @@
 "use client";
 
-import { RACForm } from "@/components/ui";
 import { ActionFn, ActionState } from "@/lib/actions/types";
 import { FormErrorText } from "@/components/common/FormErrorText";
-import { OverlayTriggerStateContext } from "react-aria-components";
+import { Form, OverlayTriggerStateContext } from "react-aria-components";
 import { startTransition, useActionState, useContext, useEffect } from "react";
 import { TaskCategoryFormBaseNameTextField } from "./TaskCategoryFormBaseNameTextField";
 
@@ -40,7 +39,7 @@ export function TaskCategoryFormBase({
   }
 
   return (
-    <RACForm id="new-task-category-form" onSubmit={handleSubmit}>
+    <Form id="new-task-category-form" onSubmit={handleSubmit}>
       <div className="flex flex-col gap-4">
         {state.status === "error" && (
           <FormErrorText>{state.message}</FormErrorText>
@@ -52,6 +51,6 @@ export function TaskCategoryFormBase({
           defaultValue={taskTitleDefaultValue}
         />
       </div>
-    </RACForm>
+    </Form>
   );
 }

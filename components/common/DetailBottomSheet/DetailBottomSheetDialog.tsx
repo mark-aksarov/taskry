@@ -1,4 +1,4 @@
-import { Dialog } from "@/components/ui";
+import { Dialog } from "@/components/ui/Dialog";
 
 interface DetailBottomSheetDialogProps {
   className?: string;

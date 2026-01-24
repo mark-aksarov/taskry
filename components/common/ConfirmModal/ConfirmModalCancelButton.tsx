@@ -1,6 +1,8 @@
+"use client";
+
 import { useContext } from "react";
 import { PressEvent } from "react-aria";
-import { Button } from "@/components/ui";
+import { Button } from "@/components/ui/Button";
 import { OverlayTriggerStateContext } from "react-aria-components";
 
 interface ConfirmModalProps {

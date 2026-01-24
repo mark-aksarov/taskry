@@ -1,11 +1,11 @@
 "use client";
 
 import { useRef } from "react";
-import { BottomSheet } from "@/components/ui";
 import { useOverlayTrigger } from "react-aria";
 import { useOverlayTriggerState } from "react-stately";
 import { NewSubtaskDialog } from "../NewSubtaskDialog";
 import { NewSubtasksButton } from "../NewSubtaskButton";
+import { BottomSheet } from "@/components/ui/BottomSheet";
 
 export function NewSubtaskBottomSheetTrigger() {
   const state = useOverlayTriggerState({});

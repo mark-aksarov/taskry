@@ -1,4 +1,4 @@
-import { ModalProps } from "@/components/ui";
+import { ModalProps } from "@/components/ui/Modal";
 import { ResponsiveModal } from "../ResponsiveModal";
 
 export function ToolbarFiltersModal(props: ModalProps) {

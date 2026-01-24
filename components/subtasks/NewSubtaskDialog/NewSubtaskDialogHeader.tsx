@@ -1,5 +1,5 @@
 import { useTranslations } from "next-intl";
-import { DialogHeader } from "@/components/ui";
+import { DialogHeader } from "@/components/ui/Dialog";
 
 export function NewSubtaskDialogHeader() {
   const t = useTranslations("subtasks.NewSubtaskDialogHeader");

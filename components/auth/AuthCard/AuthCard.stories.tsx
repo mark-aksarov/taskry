@@ -2,15 +2,17 @@ import { fn } from "storybook/test";
 import { AuthCard } from "./AuthCard";
 import { AuthCardBody } from "./AuthCardBody";
 import { AuthCardForm } from "./AuthCardForm";
+import { Button } from "@/components/ui/Button";
 import { AuthCardHeader } from "./AuthCardHeader";
 import { AuthCardFooter } from "./AuthCardFooter";
+import { Checkbox } from "@/components/ui/Checkbox";
 import { AuthCardHeading } from "./AuthCardHeading";
+import { TextField } from "@/components/ui/TextField";
 import { AuthCardSubtitle } from "./AuthCardSubtitle";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { AuthCardFooterItem } from "./AuthCardFooterItem";
 import { AuthCardFooterLink } from "./AuthCardFooterLink";
 import { AuthCardFooterText } from "./AuthCardFooterText";
-import { Button, Checkbox, TextField } from "@/components/ui";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {

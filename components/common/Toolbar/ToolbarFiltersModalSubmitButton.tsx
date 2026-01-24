@@ -1,5 +1,5 @@
-import { Button, ButtonProps } from "@/components/ui";
 import { useTranslations } from "next-intl";
+import { Button, ButtonProps } from "@/components/ui/Button";
 
 export function ToolbarFiltersModalSubmitButton(props: ButtonProps) {
   const t = useTranslations("common.ToolbarFiltersModalSubmitButton");

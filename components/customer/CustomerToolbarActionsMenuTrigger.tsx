@@ -16,9 +16,9 @@ import { useState } from "react";
 import { Trash } from "lucide-react";
 import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
+import { DialogHeader } from "../ui/Dialog";
 import { DeleteCustomersModal } from "./DeleteCustomersModal";
 import { useCustomerSelection } from "@/lib/hooks/useCustomerSelection";
-import { DialogHeader } from "../ui";
 
 interface CustomerToolbarActionsMenuTriggerProps {
   deleteAction: ActionFn<ActionState, DeleteCustomersPayload>;

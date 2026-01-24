@@ -1,5 +1,5 @@
 import { twMerge } from "tailwind-merge";
-import { Badge, BadgeProps } from "@/components/ui";
+import { Badge, BadgeProps } from "@/components/ui/Badge";
 
 export function ItemBaseBadge({
   className,

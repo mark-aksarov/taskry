@@ -1,16 +1,17 @@
 "use client";
 
 import {
-  Button,
   DialogHeader,
   DialogHeading,
   DialogCloseButton,
-} from "@/components/ui";
+} from "@/components/ui/Dialog";
+
+import { useTranslations } from "next-intl";
 import { useOverlayTrigger } from "react-aria";
+import { Button } from "@/components/ui/Button";
 import { Item, useOverlayTriggerState } from "react-stately";
 import { Check, ChevronDown, CircleEllipsis, Clock } from "lucide-react";
 import { ResponsiveMenuTrigger } from "@/components/common/ResponsiveMenuTrigger";
-import { useTranslations } from "next-intl";
 
 export function TaskDetailStatusMenuTrigger() {
   const state = useOverlayTriggerState({});

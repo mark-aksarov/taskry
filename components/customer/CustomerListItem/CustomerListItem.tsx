@@ -19,7 +19,8 @@ import {
 
 import Image from "next/image";
 import { useTranslations } from "next-intl";
-import { Checkbox, Link } from "@/components/ui";
+import { Link } from "@/components/ui/Link";
+import { Checkbox } from "@/components/ui/Checkbox";
 import { UnknownUser } from "@/components/common/UnknownUser";
 import { ImageContainer } from "@/components/common/ImageContainer";
 

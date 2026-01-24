@@ -3,9 +3,9 @@
 import React from "react";
 import { tv } from "tailwind-variants";
 import { useOverlayTrigger } from "react-aria";
-import { focusRing, RACButton } from "@/components/ui";
+import { focusRing } from "@/components/ui/styles";
 import { useOverlayTriggerState } from "react-stately";
-import { OverlayTriggerStateContext } from "react-aria-components";
+import { Button, OverlayTriggerStateContext } from "react-aria-components";
 
 interface ItemBaseDetailBottomSheetTriggerProps {
   children: React.ReactNode;
@@ -28,7 +28,7 @@ export function ItemBaseDetailBottomSheetTrigger({
 
   return (
     <OverlayTriggerStateContext.Provider value={state}>
-      <RACButton
+      <Button
         {...triggerProps}
         className={(renderProps) =>
           styles({
@@ -38,7 +38,7 @@ export function ItemBaseDetailBottomSheetTrigger({
         }
       >
         {children}
-      </RACButton>
+      </Button>
       {bottomSheet}
     </OverlayTriggerStateContext.Provider>
   );

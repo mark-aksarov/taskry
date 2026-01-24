@@ -2,8 +2,9 @@
 
 import { useState } from "react";
 import { UserFilters } from "@/lib/types";
+import { Form } from "react-aria-components";
 import { Switch } from "@/components/ui/Switch";
-import { Divider, RACForm } from "@/components/ui";
+import { Divider } from "@/components/ui/Divider";
 import { useLocale, useTranslations } from "next-intl";
 import { usePathname, useRouter } from "@/i18n/navigation";
 import { UserFiltersFormRoleCheckboxGroup } from "./UserFiltersFormRoleCheckboxGroup";
@@ -51,7 +52,7 @@ export function UserFiltersForm({
   };
 
   return (
-    <RACForm id="user-filter-form" onSubmit={handleSubmit}>
+    <Form id="user-filter-form" onSubmit={handleSubmit}>
       <div className="flex flex-col gap-4">
         <Switch
           className="justify-between"
@@ -88,6 +89,6 @@ export function UserFiltersForm({
 
         {positionCheckboxGroup}
       </div>
-    </RACForm>
+    </Form>
   );
 }

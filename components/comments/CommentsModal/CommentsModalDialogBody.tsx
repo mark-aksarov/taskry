@@ -1,6 +1,6 @@
 "use client";
 
-import { DialogBody } from "@/components/ui";
+import { DialogBody } from "@/components/ui/Dialog";
 
 export function CommentsModalDialogBody({
   children,

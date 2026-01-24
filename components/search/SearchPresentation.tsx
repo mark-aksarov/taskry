@@ -1,4 +1,4 @@
-import { DialogBody, DialogFooter } from "../ui";
+import { DialogBody, DialogFooter } from "../ui/Dialog";
 
 export interface SearchPresentationProps {
   searchField: React.ReactNode;

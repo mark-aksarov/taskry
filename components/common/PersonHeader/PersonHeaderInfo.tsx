@@ -1,4 +1,5 @@
-import { Skeleton } from "@/components/ui";
+import { Skeleton } from "@/components/ui/Skeleton";
+
 const styles = "flex flex-col items-center gap-1.5";
 
 export function PersonHeaderInfo({ children }: { children: React.ReactNode }) {

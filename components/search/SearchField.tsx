@@ -3,7 +3,7 @@
 import {
   SearchField as BaseSearchField,
   searchInputStyles as baseSearchInputStyles,
-} from "@/components/ui";
+} from "@/components/ui/SearchField";
 
 import { tv } from "tailwind-variants";
 import { useTranslations } from "next-intl";

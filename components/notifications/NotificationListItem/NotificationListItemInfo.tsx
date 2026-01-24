@@ -1,5 +1,5 @@
 import { twMerge } from "tailwind-merge";
-import { Skeleton } from "@/components/ui";
+import { Skeleton } from "@/components/ui/Skeleton";
 
 interface NotificationListItemInfoProps {
   className?: string;

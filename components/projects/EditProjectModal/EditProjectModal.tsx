@@ -6,14 +6,9 @@ import {
   FormModalSubmitButton,
 } from "@/components/common/FormModal";
 
-import {
-  ModalProps,
-  DialogBody,
-  DialogFooter,
-  DialogHeader,
-} from "@/components/ui";
-
 import { useTranslations } from "next-intl";
+import { ModalProps } from "@/components/ui/Modal";
+import { DialogBody, DialogFooter, DialogHeader } from "@/components/ui/Dialog";
 
 interface EditProjectModalProps
   extends Pick<ModalProps, "isOpen" | "onOpenChange"> {

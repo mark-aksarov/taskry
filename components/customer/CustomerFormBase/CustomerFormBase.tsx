@@ -1,9 +1,8 @@
 "use client";
 
-import { RACForm } from "@/components/ui";
 import { ActionFn, ActionState } from "@/lib/actions/types";
 import { FormErrorText } from "@/components/common/FormErrorText";
-import { OverlayTriggerStateContext } from "react-aria-components";
+import { Form, OverlayTriggerStateContext } from "react-aria-components";
 import { CustomerFormBaseBioTextField } from "./CustomerFormBaseBioTextField";
 import { startTransition, useActionState, useContext, useEffect } from "react";
 import { CustomerFormBaseEmailTextField } from "./CustomerFormBaseEmailTextField";
@@ -56,7 +55,7 @@ export function CustomerFormBase({
   }
 
   return (
-    <RACForm id={formId} onSubmit={handleSubmit}>
+    <Form id={formId} onSubmit={handleSubmit}>
       <div className="flex flex-col gap-4">
         {state.status === "error" && (
           <FormErrorText>{state.message}</FormErrorText>
@@ -77,6 +76,6 @@ export function CustomerFormBase({
         />
         {companySelect}
       </div>
-    </RACForm>
+    </Form>
   );
 }

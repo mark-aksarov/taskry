@@ -1,4 +1,4 @@
-import { BadgeColor } from "@/components/ui";
+import { BadgeColor } from "@/components/ui/Badge";
 import { ProjectStatus } from "@/generated/prisma/enums";
 
 export function getProjectStatusBadgeColor(status: ProjectStatus): BadgeColor {

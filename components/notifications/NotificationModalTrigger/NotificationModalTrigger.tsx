@@ -1,14 +1,10 @@
 "use client";
 
-import {
-  Button,
-  Dialog,
-  DialogHeader,
-  RACDialogTrigger,
-} from "@/components/ui";
-
 import { Bell } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { Button } from "@/components/ui/Button";
+import { DialogTrigger } from "react-aria-components";
+import { Dialog, DialogHeader } from "@/components/ui/Dialog";
 import { ResponsiveModal } from "@/components/common/ResponsiveModal";
 
 export function NotificationModalTrigger({
@@ -19,7 +15,7 @@ export function NotificationModalTrigger({
   const t = useTranslations("notifications.NotificationModalTrigger");
 
   return (
-    <RACDialogTrigger>
+    <DialogTrigger>
       <Button
         data-test="notification-modal-trigger"
         aria-label={t("ariaLabel")}
@@ -39,6 +35,6 @@ export function NotificationModalTrigger({
           {notificationModalContentContainer}
         </Dialog>
       </ResponsiveModal>
-    </RACDialogTrigger>
+    </DialogTrigger>
   );
 }
