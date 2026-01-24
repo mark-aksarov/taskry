@@ -1,11 +1,16 @@
 "use client";
 
+import {
+  ToolbarSortingMenuTrigger,
+  ToolbarSortingButtonMobile,
+  ToolbarSortingButtonDesktop,
+} from "@/components/common/Toolbar";
+
 import { Item, Key } from "react-stately";
 import { useSearchParams } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import { usePathname, useRouter } from "@/i18n/navigation";
 import { ALargeSmall, BriefcaseBusiness } from "lucide-react";
-import { ToolbarSortingMenuTrigger } from "@/components/common/Toolbar";
 
 export function UserToolbarSortingMenuTrigger() {
   const t = useTranslations("users.UserToolbarSortingMenuTrigger");
@@ -22,7 +27,15 @@ export function UserToolbarSortingMenuTrigger() {
   };
 
   return (
-    <ToolbarSortingMenuTrigger onAction={handleAction}>
+    <ToolbarSortingMenuTrigger
+      onAction={handleAction}
+      renderButton={() => (
+        <>
+          <ToolbarSortingButtonMobile data-test="user-toolbar-sorting-button-mobile" />
+          <ToolbarSortingButtonDesktop data-test="user-toolbar-sorting-button-desktop" />
+        </>
+      )}
+    >
       <Item textValue={t("byFullName")} key="fullName">
         <ALargeSmall size={16} strokeWidth={1.5} absoluteStrokeWidth />
         {t("byFullName")}

@@ -14,7 +14,7 @@ const initialState: ActionState = {
   message: null,
 };
 
-interface ProjectFormBaseProps {
+export interface TaskFormBaseProps {
   id: string;
   taskId?: number;
   taskTitleDefaultValue?: string;
@@ -38,7 +38,7 @@ export function TaskFormBase({
   projectSelect,
   assigneeSelect,
   formAction,
-}: ProjectFormBaseProps) {
+}: TaskFormBaseProps) {
   const { close } = useContext(OverlayTriggerStateContext)!;
 
   const [state, action, pending] = useActionState(formAction, initialState);

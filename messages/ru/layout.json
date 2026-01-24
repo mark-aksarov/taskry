@@ -1,34 +1,27 @@
 {
-  "AppHeader": {
-    "title": {
-      "dashboard": "Панель управления",
-      "projects": "Все проекты",
-      "tasks": "Все задачи",
-      "team": "Команда",
-      "customers": "Все клиенты",
-      "profileSettings": "Настройки профиля",
-      "taskDetails": "Детали задачи",
-      "projectDetails": "Детали проекта",
-      "userInfo": "Информация о пользователе"
-    },
+  "AppHeaderTitle": {
+    "dashboard": "Панель управления",
+    "projects": "Все проекты",
+    "tasks": "Все задачи",
+    "team": "Команда",
+    "customers": "Все клиенты",
+    "profileSettings": "Настройки профиля",
+    "taskDetails": "Детали задачи",
+    "projectDetails": "Детали проекта",
+    "userInfo": "Информация о пользователе"
+  },
 
-    "themeToggleButton": {
-      "label": "Переключить на тёмную тему"
-    },
+  "AppHeaderLangMenuTrigger": {
+    "label": "Английский",
 
-    "searchForm": {
-      "ariaLabel": "Поиск",
-      "placeholder": "Поиск"
-    },
-
-    "langMenuTrigger": {
-      "label": "Английский",
-
-      "items": {
-        "english": "Английский",
-        "russian": "Русский"
-      }
+    "items": {
+      "english": "Английский",
+      "russian": "Русский"
     }
+  },
+
+  "AppHeaderThemeToggleButton": {
+    "label": "Переключить на тёмную тему"
   },
 
   "AppNavigation": {
@@ -37,25 +30,25 @@
     "tasks": "Задачи",
     "team": "Команда",
     "customers": "Клиенты",
-    "profile": "Профиль",
+    "profile": "Профиль"
+  },
 
-    "themeToggleButton": {
-      "label": "Темный режим"
-    },
+  "AppNavigationLangMenuTrigger": {
+    "dialogHeading": "Язык",
+    "label": "Английский",
 
-    "logoutButton": {
-      "logout": "Выйти"
-    },
-
-    "langMenuTrigger": {
-      "dialogHeading": "Язык",
-      "label": "Английский",
-
-      "items": {
-        "english": "Английский",
-        "russian": "Русский"
-      }
+    "items": {
+      "english": "Английский",
+      "russian": "Русский"
     }
+  },
+
+  "AppNavigationLogoutButton": {
+    "logout": "Выйти"
+  },
+
+  "AppNavigationThemeToggleButton": {
+    "label": "Темный режим"
   },
 
   "AppBottomSheetTrigger": {

@@ -5,26 +5,36 @@
     "cancelButton": "Cancel"
   },
 
-  "Toolbar": {
-    "ToolbarSortingMenuTrigger": {
-      "dialogHeading": "Sorting",
-      "ariaLabel": "Sort projects by",
-      "label": "Sorting"
-    },
+  "ToolbarSortingMenuTrigger": {
+    "dialogHeading": "Sorting"
+  },
 
-    "ToolbarFiltersModalTrigger": {
-      "trigger": {
-        "ariaLabel": "Filter projects",
-        "label": "Filters"
-      },
-      "applyButtonLabel": "Apply Filters"
-    },
+  "ToolbarSortingButtonMobile": {
+    "ariaLabel": "Sort projects by"
+  },
 
-    "ToolbarActionsMenuTrigger": {
-      "heading": "Actions",
-      "ariaLabel": "Actions",
-      "label": "Actions"
-    }
+  "ToolbarSortingButtonDesktop": {
+    "label": "Sorting"
+  },
+
+  "ToolbarFiltersButtonDesktop": {
+    "label": "Filters"
+  },
+
+  "ToolbarFiltersButtonMobile": {
+    "ariaLabel": "Filter projects"
+  },
+
+  "ToolbarFiltersModalSubmitButton": {
+    "label": "Apply Filters"
+  },
+
+  "ToolbarActionsButtonDesktop": {
+    "label": "Actions"
+  },
+
+  "ToolbarActionsButtonMobile": {
+    "ariaLabel": "Actions"
   },
 
   "ViewModeToggleButtonGroup": {
@@ -37,15 +47,12 @@
     "maxSize": "Max size: 10 MB"
   },
 
-  "ItemBase": {
-    "ItemBaseActionMenuTrigger": {
-      "heading": "Actions",
-      "ariaLabel": "Actions"
-    }
+  "ItemBaseActionMenuTrigger": {
+    "ariaLabel": "Actions"
   },
 
-  "DetailCommentInput": {
-    "placeholder": "Type a comment..."
+  "ItemBaseActionMenuDialogHeader": {
+    "heading": "Actions"
   },
 
   "Pagination": {

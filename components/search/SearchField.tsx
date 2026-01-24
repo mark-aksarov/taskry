@@ -20,7 +20,7 @@ export interface SearchFieldProps {
 }
 
 export const SearchField = ({ value, onChange }: SearchFieldProps) => {
-  const t = useTranslations("layout.AppHeader.searchForm");
+  const t = useTranslations("search.SearchField");
 
   const debouncedSetQuery = useDebouncedCallback((value: string) => {
     onChange(value);

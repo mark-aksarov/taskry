@@ -37,7 +37,7 @@ export function DeleteCustomersModal({
   deleteAction,
   onSuccess,
 }: DeleteCustomersModalProps) {
-  const t = useTranslations("projects.DeleteCustomersModal");
+  const t = useTranslations("customers.DeleteCustomersModal");
   const [state, action, pending] = useActionState(deleteAction, initialState);
 
   useEffect(() => {

@@ -11,7 +11,9 @@ export function CustomerFiltersFormCompanyCheckboxGroup({
   filters,
   companies,
 }: CustomerFiltersFormCompanyCheckboxGroupProps) {
-  const t = useTranslations("customers.CustomerFiltersForm.company");
+  const t = useTranslations(
+    "customers.CustomerFiltersFormCompanyCheckboxGroup",
+  );
 
   return (
     <CheckboxGroup

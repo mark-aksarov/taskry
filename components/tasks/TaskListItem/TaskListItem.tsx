@@ -65,21 +65,22 @@ export const TaskListItem = ({
   userDetailModal,
   projectDetailModal,
 }: TaskListItemProps) => {
-  const t = useTranslations("tasks");
+  const t = useTranslations("tasks.TaskListItem");
+  const tStatus = useTranslations("tasks.TaskStatus");
 
   useSyncSelectionTaskItem(id, title, status);
 
   const format = useFormatter();
 
   const deadlineOn = deadline
-    ? t("TaskListItem.deadlineOn", {
+    ? t("deadlineOn", {
         date: format.dateTime(deadline, {
           day: "2-digit",
           month: "short",
           year: "numeric",
         }),
       })
-    : t("TaskListItem.noDeadline");
+    : t("noDeadline");
 
   const assigneeImg = assignee?.imageUrl ? (
     <ImageContainer className="h-9 w-9">
@@ -136,18 +137,18 @@ export const TaskListItem = ({
                   {assignee.fullName}
                 </ItemBaseDetailModalTrigger>
               ) : (
-                t("TaskListItem.unknownAssignee")
+                t("unknownAssignee")
               )}
             </ListItemTitle>
 
-            <ListItemText>{t("TaskListItem.assignee")}</ListItemText>
+            <ListItemText>{t("assignee")}</ListItemText>
           </ListItemInfo>
         </>
       }
       categorySlot={
         <ListItemInfo className="@max-3xl:hidden">
           <ListItemTitle>{category.name}</ListItemTitle>
-          <ListItemText>{t("TaskListItem.category")}</ListItemText>
+          <ListItemText>{t("category")}</ListItemText>
         </ListItemInfo>
       }
       projectSlot={
@@ -160,7 +161,7 @@ export const TaskListItem = ({
               {project.title}
             </ItemBaseDetailModalTrigger>
           </ListItemTitle>
-          <ListItemText>{t("TaskListItem.project")}</ListItemText>
+          <ListItemText>{t("project")}</ListItemText>
         </ListItemInfo>
       }
       statusSlot={
@@ -168,7 +169,7 @@ export const TaskListItem = ({
           className="@max-lg:hidden"
           color={getTaskStatusBadgeColor(status)}
         >
-          {t(`TaskStatus.${status}`)}
+          {tStatus(`${status}`)}
         </ItemBaseBadge>
       }
       commentsModalTriggerSlot={commentModalTrigger}

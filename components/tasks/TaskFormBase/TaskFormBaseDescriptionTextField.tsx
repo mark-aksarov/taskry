@@ -8,7 +8,7 @@ interface TaskFormBaseDescriptionTextFieldProps {
 export function TaskFormBaseDescriptionTextField({
   defaultValue,
 }: TaskFormBaseDescriptionTextFieldProps) {
-  const t = useTranslations("tasks.TaskFormBase.description");
+  const t = useTranslations("tasks.TaskFormBaseDescriptionTextField");
 
   return (
     <TextField

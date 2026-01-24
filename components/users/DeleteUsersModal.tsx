@@ -32,7 +32,7 @@ export function DeleteUsersModal({
   deleteAction,
   onSuccess,
 }: DeleteUsersModalProps) {
-  const t = useTranslations("projects.DeleteUsersModal");
+  const t = useTranslations("users.DeleteUsersModal");
   const [state, action, pending] = useActionState(deleteAction, initialState);
 
   useEffect(() => {

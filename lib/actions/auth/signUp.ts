@@ -18,6 +18,8 @@ const schema = z.object({
   rememberMe: z.coerce.boolean(),
 });
 
+type KnownStatusKey = "bad_request" | "unprocessable_entity";
+
 export async function signUp(
   _prevState: ActionState,
   formData: FormData,
@@ -25,20 +27,14 @@ export async function signUp(
   const locale = await getLocale();
   const t = await getTranslations("actions.signUp");
 
-  // Check if user is already signed in
-  const session = await auth.api.getSession({
-    headers: await headers(),
-  });
-
+  const session = await auth.api.getSession({ headers: await headers() });
   if (session) {
     redirect({ href: "/", locale });
     return actionSuccess();
   }
 
-  // Parse and validate form data
   const input = Object.fromEntries(formData.entries());
   const parsed = validateActionInput(schema, input);
-
   if (!parsed.success) {
     return actionError(t("validation.invalidInput"));
   }
@@ -46,41 +42,28 @@ export async function signUp(
   const { name, email, password, rememberMe } = parsed.data;
 
   try {
-    // Create workspace
-    const workspace = await prisma.workspace.create({
-      data: {}, // Adjust as needed
-    });
+    const workspace = await prisma.workspace.create({ data: {} });
 
-    // Sign-up
     await auth.api.signUpEmail({
-      body: {
-        name,
-        email,
-        password,
-        rememberMe,
-        workspaceId: workspace.id,
-      },
+      body: { name, email, password, rememberMe, workspaceId: workspace.id },
     });
   } catch (error: unknown) {
     console.error("Sign-up Error:", error);
 
     if (error instanceof APIError) {
-      const statusKey = String(error.status).toLowerCase();
-      const knownKeys = ["bad_request", "unprocessable_entity"];
+      const statusKey = String(error.status).toLowerCase() as KnownStatusKey;
 
-      if (knownKeys.includes(statusKey)) {
-        return actionError(t(`validation.${statusKey}`));
+      if (statusKey === "bad_request") {
+        return actionError(t("validation.bad_request"));
+      }
+      if (statusKey === "unprocessable_entity") {
+        return actionError(t("validation.unprocessable_entity"));
       }
     }
 
     return actionError(t("validation.internalServerError"));
   }
 
-  // Redirect to verify email
-  redirect({
-    href: "/verify-email",
-    locale,
-  });
-
+  redirect({ href: "/verify-email", locale });
   return actionSuccess();
 }

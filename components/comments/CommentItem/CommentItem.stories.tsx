@@ -1,6 +1,7 @@
 import { CommentItem } from "./CommentItem";
 import { fn } from "storybook/internal/test";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { withCommentFormProvider } from "../withCommentFormProvider";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { CommentItemActionMenuTrigger } from "./CommentItemActionMenuTrigger";
 
@@ -14,6 +15,7 @@ const meta = {
         <Story />
       </div>
     ),
+    withCommentFormProvider,
     withThemedBackground,
   ],
   parameters: {

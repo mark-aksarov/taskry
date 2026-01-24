@@ -26,7 +26,7 @@ export async function updateTaskStatuses(
     const parsed = validateActionInput(schema, { ids, nextStatus });
 
     if (!parsed.success) {
-      return actionError(t("error"));
+      return actionError(t("validation.invalidInput"));
     }
 
     // Execute update

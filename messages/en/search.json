@@ -24,5 +24,10 @@
 
   "SearchModal": {
     "dialogHeading": "Search result"
+  },
+
+  "SearchField": {
+    "ariaLabel": "Search",
+    "placeholder": "Search"
   }
 }

@@ -23,7 +23,7 @@ export function TaskDetailBottomSheet({
   return (
     <DetailBottomSheet>
       <DetailBottomSheetDialog>
-        <DialogHeader>{t("dialogHeading")}</DialogHeader>
+        <DialogHeader>{t("title")}</DialogHeader>
         <DialogBody>{taskDetailContainer}</DialogBody>
         <DialogFooter>
           <DetailBottomSheetLink

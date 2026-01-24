@@ -11,7 +11,7 @@ export function TaskFormBaseProjectSelect({
   defaultSelectedKey?: string;
   projects: { id: number; title: string }[];
 }) {
-  const t = useTranslations("tasks.TaskFormBase.project");
+  const t = useTranslations("tasks.TaskFormBaseProjectSelect");
 
   return (
     <ResponsiveSelect

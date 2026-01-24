@@ -8,7 +8,7 @@ interface ProjectCategoryFormBaseNameTextFieldProps {
 export function ProjectCategoryFormBaseNameTextField({
   defaultValue,
 }: ProjectCategoryFormBaseNameTextFieldProps) {
-  const t = useTranslations("projects.ProjectCategoryFormBase.title");
+  const t = useTranslations("projects.ProjectCategoryFormBaseNameTextField");
 
   return (
     <TextField

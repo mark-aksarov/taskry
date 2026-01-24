@@ -1,34 +1,27 @@
 {
-  "AppHeader": {
-    "title": {
-      "dashboard": "Dashboard",
-      "projects": "All Projects",
-      "tasks": "All Tasks",
-      "team": "Team",
-      "customers": "All Customers",
-      "profileSettings": "Profile Settings",
-      "taskDetails": "Task Details",
-      "projectDetails": "Project Details",
-      "userInfo": "User Information"
-    },
+  "AppHeaderTitle": {
+    "dashboard": "Dashboard",
+    "projects": "All Projects",
+    "tasks": "All Tasks",
+    "team": "Team",
+    "customers": "All Customers",
+    "profileSettings": "Profile Settings",
+    "taskDetails": "Task Details",
+    "projectDetails": "Project Details",
+    "userInfo": "User Information"
+  },
 
-    "themeToggleButton": {
-      "label": "Switch to dark theme"
-    },
+  "AppHeaderLangMenuTrigger": {
+    "label": "English",
 
-    "searchForm": {
-      "ariaLabel": "Search",
-      "placeholder": "Search"
-    },
-
-    "langMenuTrigger": {
-      "label": "English",
-
-      "items": {
-        "english": "English",
-        "russian": "Russian"
-      }
+    "items": {
+      "english": "English",
+      "russian": "Russian"
     }
+  },
+
+  "AppHeaderThemeToggleButton": {
+    "label": "Switch to dark theme"
   },
 
   "AppNavigation": {
@@ -37,25 +30,25 @@
     "tasks": "Tasks",
     "team": "Team",
     "customers": "Customers",
-    "profile": "Profile",
+    "profile": "Profile"
+  },
 
-    "themeToggleButton": {
-      "label": "Dark mode"
-    },
+  "AppNavigationLangMenuTrigger": {
+    "dialogHeading": "Language",
+    "label": "English",
 
-    "logoutButton": {
-      "logout": "Logout"
-    },
-
-    "langMenuTrigger": {
-      "dialogHeading": "Language",
-      "label": "English",
-
-      "items": {
-        "english": "English",
-        "russian": "Russian"
-      }
+    "items": {
+      "english": "English",
+      "russian": "Russian"
     }
+  },
+
+  "AppNavigationLogoutButton": {
+    "logout": "Logout"
+  },
+
+  "AppNavigationThemeToggleButton": {
+    "label": "Dark mode"
   },
 
   "AppBottomSheetTrigger": {

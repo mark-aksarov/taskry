@@ -8,7 +8,7 @@ interface CustomerFormBaseBioTextFieldProps {
 export function CustomerFormBaseBioTextField({
   defaultValue,
 }: CustomerFormBaseBioTextFieldProps) {
-  const t = useTranslations("customers.CustomerFormBase.bio");
+  const t = useTranslations("customers.CustomerFormBaseBioTextField");
 
   return (
     <TextField

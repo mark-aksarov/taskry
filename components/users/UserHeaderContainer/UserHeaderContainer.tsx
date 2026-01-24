@@ -15,7 +15,7 @@ export async function UserHeaderContainer({ userId }: { userId: string }) {
   return (
     <PersonHeader
       title={user.fullName}
-      imageUrl={user.imageUrl ?? undefined}
+      imageUrl={user.imageUrl}
       subtitle={user.position ? user.position.name : t("unknownPosition")}
     />
   );

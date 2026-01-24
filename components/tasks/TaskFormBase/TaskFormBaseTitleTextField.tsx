@@ -8,7 +8,7 @@ interface TaskFormBaseTitleTextFieldProps {
 export function TaskFormBaseTitleTextField({
   defaultValue,
 }: TaskFormBaseTitleTextFieldProps) {
-  const t = useTranslations("tasks.TaskFormBase.title");
+  const t = useTranslations("tasks.TaskFormBaseTitleTextField");
 
   return (
     <TextField

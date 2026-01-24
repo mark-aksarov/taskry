@@ -40,6 +40,7 @@
   },
 
   "TaskToolbarActionsMenuTrigger": {
+    "dialogHeading": "Действия",
     "delete": "Удалить",
     "pending": "Отметить как «В ожидании»",
     "active": "Отметить как «Активно»",
@@ -106,130 +107,117 @@
 
   "TaskDetailBottomSheet": {
     "title": "Детали задачи",
-    "editButtonLabel": "Редактировать задачу"
+    "openInFullPage": "Открыть на полной странице"
   },
 
   "NewTaskModalTrigger": {
-    "label": "Новая задача",
-    "title": "Новая задача",
-    "submitButtonLabel": "Создать задачу"
+    "label": "Новая задача"
   },
 
   "TaskDetailModal": {
     "dialogHeading": "Детали задачи",
-    "openButtonLabel": "Открыть на полной странице"
+    "openInFullPage": "Открыть на полной странице"
   },
 
   "TaskFiltersForm": {
-    "showOnlyAssignedSwitchText": "Только мои задачи",
-
-    "TaskFiltersFormDeadlineCheckboxGroup": {
-      "label": "Срок",
-      "today": "Сегодня",
-      "tomorrow": "Завтра",
-      "thisWeek": "На этой неделе",
-      "overdue": "Просрочено"
-    },
-
-    "TaskFiltersFormDeadlineRange": {
-      "label": "Диапазон срока",
-      "labelTo": "Диапазон срока до"
-    },
-
-    "TaskFiltersFormStatusCheckboxGroup": {
-      "label": "Статус"
-    },
-
-    "TaskFiltersFormCategoryCheckboxGroup": {
-      "label": "Категория"
-    },
-
-    "TaskFiltersFormProjectCheckboxGroup": {
-      "label": "Проект"
-    },
-
-    "TaskFiltersFormAssigneeCheckboxGroup": {
-      "label": "Исполнитель"
-    }
+    "showOnlyAssignedSwitchText": "Только мои задачи"
   },
 
-  "TaskFormBase": {
-    "title": {
-      "label": "Заголовок",
-      "placeholder": "Введите заголовок",
+  "TaskFiltersFormDeadlineCheckboxGroup": {
+    "label": "Срок",
+    "today": "Сегодня",
+    "tomorrow": "Завтра",
+    "thisWeek": "На этой неделе",
+    "overdue": "Просрочено"
+  },
 
-      "validation": {
-        "required": "Заголовок обязателен",
-        "tooLong": "Заголовок слишком длинный"
-      }
-    },
+  "TaskFiltersFormDeadlineRange": {
+    "label": "Диапазон срока",
+    "labelTo": "Диапазон срока до"
+  },
 
-    "description": {
-      "label": "Описание",
-      "placeholder": "Введите описание"
-    },
+  "TaskFiltersFormStatusCheckboxGroup": {
+    "label": "Статус"
+  },
 
-    "deadline": {
-      "label": "Срок выполнения",
+  "TaskFiltersFormCategoryCheckboxGroup": {
+    "label": "Категория"
+  },
 
-      "validation": {
-        "required": "Укажите срок выполнения"
-      }
-    },
+  "TaskFiltersFormProjectCheckboxGroup": {
+    "label": "Проект"
+  },
 
-    "category": {
-      "label": "Категория",
-      "placeholder": "Выберите категорию",
+  "TaskFiltersFormAssigneeCheckboxGroup": {
+    "label": "Исполнитель"
+  },
 
-      "validation": {
-        "required": "Пожалуйста, выберите категорию"
-      }
-    },
-
-    "project": {
-      "label": "Проект",
-      "placeholder": "Выберите проект",
-
-      "validation": {
-        "required": "Проект обязателен"
-      }
-    },
-
-    "assignee": {
-      "label": "Исполнитель",
-      "placeholder": "Выберите исполнителя",
-
-      "validation": {
-        "required": "Исполнитель обязателен"
-      }
-    },
-
-    "status": {
-      "label": "Статус",
-      "placeholder": "Выберите статус",
-
-      "validation": {
-        "required": "Пожалуйста, выберите статус"
-      }
-    },
+  "TaskFormBaseAssigneeSelect": {
+    "label": "Исполнитель",
+    "placeholder": "Выберите исполнителя",
 
     "validation": {
-      "server": {
-        "invalidInput": "Некорректные данные. Пожалуйста, проверьте введённую информацию и попробуйте снова.",
-        "internalServerError": "Произошла внутренняя ошибка сервера. Пожалуйста, попробуйте позже."
-      }
+      "required": "Исполнитель обязателен"
     }
   },
 
-  "TaskCategoryFormBase": {
-    "title": {
-      "label": "Название",
-      "placeholder": "Введите название",
+  "TaskFormBaseCategorySelect": {
+    "label": "Категория",
+    "placeholder": "Выберите категорию",
 
-      "validation": {
-        "required": "Требуется название",
-        "tooLong": "Название слишком длинное"
-      }
+    "validation": {
+      "required": "Пожалуйста, выберите категорию"
+    }
+  },
+
+  "TaskFormBaseDeadlineDatePicker": {
+    "label": "Срок выполнения",
+
+    "validation": {
+      "required": "Укажите срок выполнения"
+    }
+  },
+
+  "TaskFormBaseDescriptionTextField": {
+    "label": "Описание",
+    "placeholder": "Введите описание"
+  },
+
+  "TaskFormBaseProjectSelect": {
+    "label": "Проект",
+    "placeholder": "Выберите проект",
+
+    "validation": {
+      "required": "Проект обязателен"
+    }
+  },
+
+  "TaskFormBaseStatusSelect": {
+    "label": "Статус",
+    "placeholder": "Выберите статус",
+
+    "validation": {
+      "required": "Пожалуйста, выберите статус"
+    }
+  },
+
+  "TaskFormBaseTitleTextField": {
+    "label": "Заголовок",
+    "placeholder": "Введите заголовок",
+
+    "validation": {
+      "required": "Заголовок обязателен",
+      "tooLong": "Заголовок слишком длинный"
+    }
+  },
+
+  "TaskCategoryFormBaseNameTextField": {
+    "label": "Название",
+    "placeholder": "Введите название",
+
+    "validation": {
+      "required": "Требуется название",
+      "tooLong": "Название слишком длинное"
     }
   },
 
@@ -244,16 +232,16 @@
     "project": "Проект",
     "attachments": "Вложения",
     "assignee": "Исполнитель",
-    "noAssignee": "Нет исполнителя",
+    "noAssignee": "Нет исполнителя"
+  },
 
-    "TaskDetailStatusMenuTrigger": {
-      "dialogHeading": "Статус задачи",
+  "TaskDetailStatusMenuTrigger": {
+    "dialogHeading": "Статус задачи",
 
-      "items": {
-        "pending": "В ожидании",
-        "active": "Активная",
-        "completed": "Завершённая"
-      }
+    "items": {
+      "pending": "В ожидании",
+      "active": "Активная",
+      "completed": "Завершённая"
     }
   },
 

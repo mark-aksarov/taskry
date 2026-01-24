@@ -10,7 +10,7 @@ interface ProjectFormBaseDeadlineDatePickerProps {
 export function ProjectFormBaseDeadlineDatePicker({
   defaultValue,
 }: ProjectFormBaseDeadlineDatePickerProps) {
-  const t = useTranslations("projects.ProjectFormBase.deadline");
+  const t = useTranslations("projects.ProjectFormBaseDeadlineDatePicker");
 
   const now = today(getLocalTimeZone());
 

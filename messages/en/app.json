@@ -17,28 +17,19 @@
 
   "ResetPasswordPage": {
     "heading": "Reset Password",
-    "subtitle": "Provide a new password for your account.",
+    "subtitle": "Provide a new password for your account."
+  },
 
-    "notFound": {
-      "heading": "Invalid Link",
-      "body": "The password reset link has expired or is invalid. Please request a password reset again.",
-      "signInButtonLabel": "Sign in with email"
-    }
+  "ResetPasswordNotFound": {
+    "heading": "Invalid Link",
+    "body": "The password reset link has expired or is invalid. Please request a password reset again.",
+    "signInButtonLabel": "Sign in with email"
   },
 
   "SignInPage": {
     "heading": "Sign In",
     "subtitle": "Please sign in to your account.",
     "resetPasswordSubtitle": "Your password has been reset successfully. You can now sign in with your new password."
-  },
-
-  "SignInPageError": {
-    "heading": "Something went wrong",
-    "subtitle": {
-      "emailNotVerified": "We sent a verification link to your email. Please check your inbox and click the link to continue",
-      "otherError": "Something went wrong. Please check your internet or try again"
-    },
-    "signInButtonLabel": "Sign in with email"
   },
 
   "SignUpPage": {
@@ -56,15 +47,15 @@
   },
 
   "ProjectsPage": {
-    "heading": "Projects"
+    "heading": "All Projects"
   },
 
   "TasksPage": {
-    "heading": "Tasks"
+    "heading": "All Tasks"
   },
 
   "CustomersPage": {
-    "heading": "Customers"
+    "heading": "All Customers"
   },
 
   "CustomersPageEmpty": {

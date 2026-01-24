@@ -8,7 +8,7 @@ import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { usePathname, useRouter } from "next/navigation";
 import { PageDecorator } from "@/.storybook/PageDecorator";
 import { UserFiltersForm } from "@/components/users/UserFiltersForm";
-import { PositionFormBase } from "@/components/users/PositionFormBase";
+import { NewPositionForm } from "@/components/users/NewPositionForm";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { Default as UserListStory } from "@/components/users/UserList/UserList.stories";
 import { Default as UserGridStory } from "@/components/users/UserGrid/UserGrid.stories";
@@ -48,7 +48,7 @@ export const Default = {
     userToolbarCreateNewMenuTrigger: (
       <UserToolbarCreateNewMenuTrigger
         newUserForm={<></>}
-        newPositionForm={<PositionFormBase {...PositionFormBaseStory.args} />}
+        newPositionForm={<NewPositionForm {...PositionFormBaseStory.args} />}
       />
     ),
     usersContainer: (

@@ -12,15 +12,15 @@ const initialState: ActionState = {
   message: null,
 };
 
-interface PositionFormBaseProps {
-  formId: string;
+export interface PositionFormBaseProps {
+  id: string;
   positionId?: number;
   nameDefaultValue?: string;
   formAction: ActionFn<ActionState, FormData>;
 }
 
 export function PositionFormBase({
-  formId,
+  id,
   positionId,
   nameDefaultValue,
   formAction,
@@ -42,7 +42,7 @@ export function PositionFormBase({
   }
 
   return (
-    <RACForm id={formId} onSubmit={handleSubmit}>
+    <RACForm id={id} onSubmit={handleSubmit}>
       <div className="flex flex-col gap-4">
         {state.status === "error" && (
           <FormErrorText>{state.message}</FormErrorText>

@@ -11,7 +11,7 @@ interface NotificationListItemActorLinkProps {
 export function NotificationListItemActorLink({
   actor,
 }: NotificationListItemActorLinkProps) {
-  const t = useTranslations("notifications.NotificationItem");
+  const t = useTranslations("notifications.NotificationListItemActor");
 
   return (
     <span className="text-sm font-semibold text-black dark:text-white">

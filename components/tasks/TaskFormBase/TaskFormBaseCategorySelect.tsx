@@ -11,7 +11,7 @@ export function TaskFormBaseCategorySelect({
   defaultSelectedKey?: string;
   categories: { id: number; name: string }[];
 }) {
-  const t = useTranslations("tasks.TaskFormBase.category");
+  const t = useTranslations("tasks.TaskFormBaseCategorySelect");
 
   return (
     <ResponsiveSelect

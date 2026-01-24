@@ -7,7 +7,7 @@ import { authClient } from "@/lib/auth-client";
 import { NavigationButton } from "@/components/common/NavigationButton";
 
 export function AppNavigationLogoutButton() {
-  const t = useTranslations("layout.AppNavigation.logoutButton");
+  const t = useTranslations("layout.AppNavigationLogoutButton");
 
   const router = useRouter();
 

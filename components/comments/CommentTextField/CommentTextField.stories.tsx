@@ -3,6 +3,7 @@ import { fn } from "storybook/test";
 import { useState } from "react";
 import { CommentTextField } from "./CommentTextField";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { withCommentFormProvider } from "../withCommentFormProvider";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { Attachment, Attachments } from "@/components/attachments/Attachments";
 
@@ -16,6 +17,7 @@ const meta = {
         <Story />
       </div>
     ),
+    withCommentFormProvider,
     withThemedBackground,
   ],
   parameters: {

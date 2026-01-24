@@ -15,9 +15,7 @@ export function TaskFiltersFormDeadlineRange({
   onDateChange,
   isDisabled,
 }: RangeProps) {
-  const t = useTranslations(
-    "tasks.TaskFiltersForm.TaskFiltersFormDeadlineRange",
-  );
+  const t = useTranslations("tasks.TaskFiltersFormDeadlineRange");
 
   return (
     <div

@@ -48,15 +48,13 @@
     "submitButtonLabel": "Создать должность"
   },
 
-  "PositionFormBase": {
-    "title": {
-      "label": "Название",
-      "placeholder": "Введите название",
+  "PositionFormBaseNameTextField": {
+    "label": "Название",
+    "placeholder": "Введите название",
 
-      "validation": {
-        "required": "Требуется название",
-        "tooLong": "Название слишком длинное"
-      }
+    "validation": {
+      "required": "Требуется название",
+      "tooLong": "Название слишком длинное"
     }
   },
 
@@ -81,21 +79,21 @@
   "UserFiltersForm": {
     "hasNoActiveTasks": "Нет активных задач",
     "hasActiveTasks": "Есть активные задачи",
-    "hasOverdueTasks": "Есть просроченные задачи",
+    "hasOverdueTasks": "Есть просроченные задачи"
+  },
 
-    "roleCheckboxGroup": {
-      "label": "Роль",
+  "UserFiltersFormRoleCheckboxGroup": {
+    "label": "Роль",
 
-      "items": {
-        "admin": "Администратор",
-        "manager": "Менеджер",
-        "user": "Пользователь"
-      }
-    },
-
-    "positionCheckboxGroup": {
-      "label": "Должность"
+    "items": {
+      "admin": "Администратор",
+      "manager": "Менеджер",
+      "user": "Пользователь"
     }
+  },
+
+  "UserFiltersFormPositionCheckboxGroup": {
+    "label": "Должность"
   },
 
   "UserItemActionMenuTrigger": {
@@ -172,6 +170,7 @@
   },
 
   "UserToolbarActionsMenuTrigger": {
+    "dialogHeading": "Действия",
     "delete": "Удалить"
   },
 

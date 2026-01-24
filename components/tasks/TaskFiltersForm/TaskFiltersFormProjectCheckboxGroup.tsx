@@ -10,9 +10,7 @@ export function TaskFiltersFormProjectCheckboxGroup({
   projects: { id: number; title: string }[];
 }) {
   const searchParams = useSearchParams();
-  const t = useTranslations(
-    "tasks.TaskFiltersForm.TaskFiltersFormProjectCheckboxGroup",
-  );
+  const t = useTranslations("tasks.TaskFiltersFormProjectCheckboxGroup");
   const initialValues = searchParams.get("project")?.split(",") || [];
 
   return (

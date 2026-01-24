@@ -16,6 +16,8 @@ const schema = z.object({
   rememberMe: z.coerce.boolean(),
 });
 
+type KnownStatusKey = "bad_request" | "forbidden" | "unauthorized";
+
 export async function signIn(
   callbackUrl: string,
   _prevState: ActionState,
@@ -24,49 +26,40 @@ export async function signIn(
   const locale = await getLocale();
   const t = await getTranslations("actions.signIn");
 
-  // Check if user is already signed in
-  const session = await auth.api.getSession({
-    headers: await headers(),
-  });
-
+  const session = await auth.api.getSession({ headers: await headers() });
   if (session) {
     redirect({ href: "/", locale });
     return actionSuccess();
   }
 
-  // Parse form data
   const input = Object.fromEntries(formData.entries());
   const parsed = validateActionInput(schema, input);
-
   if (!parsed.success) {
     return actionError(t("validation.invalidInput"));
   }
 
-  // Authenticate
   try {
-    await auth.api.signInEmail({
-      body: parsed.data,
-    });
+    await auth.api.signInEmail({ body: parsed.data });
   } catch (error: unknown) {
     console.error("Sign-in Error:", error);
 
     if (error instanceof APIError) {
-      const statusKey = String(error.status).toLowerCase();
-      const knownKeys = ["bad_request", "forbidden", "unauthorized"];
+      const statusKey = String(error.status).toLowerCase() as KnownStatusKey;
 
-      if (knownKeys.includes(statusKey)) {
-        return actionError(t(`validation.${statusKey}`));
+      if (statusKey === "bad_request") {
+        return actionError(t("validation.bad_request"));
+      }
+      if (statusKey === "forbidden") {
+        return actionError(t("validation.forbidden"));
+      }
+      if (statusKey === "unauthorized") {
+        return actionError(t("validation.unauthorized"));
       }
     }
 
     return actionError(t("validation.internalServerError"));
   }
 
-  // Redirect to callbackUrl or default "/"
-  redirect({
-    href: callbackUrl || "/",
-    locale,
-  });
-
+  redirect({ href: callbackUrl || "/", locale });
   return actionSuccess();
 }

@@ -14,6 +14,7 @@ import { TaskFormBaseSkeleton } from "../TaskFormBase";
 import { getTaskList } from "@/lib/data/task/task.service";
 import { deleteTasks } from "@/lib/actions/task/deleteTasks";
 import { TaskDetailContainer } from "../TaskDetailContainer";
+import { NewTaskFormContainer } from "../NewTaskFormContainer";
 import { sendComment } from "@/lib/actions/comment/sendComment";
 import { TaskDetailBottomSheet } from "../TaskDetailBottomSheet";
 import { EditTaskFormContainer } from "../EditTaskFormContainer";
@@ -33,13 +34,11 @@ import { ProjectDetailContainer } from "@/components/projects/ProjectDetailConta
 interface AssignedTasksContainerProps {
   page: number;
   pageSize: number;
-  newTaskFormContainer: React.ReactNode;
 }
 
 export async function AssignedTasksContainer({
   page,
   pageSize,
-  newTaskFormContainer,
 }: AssignedTasksContainerProps) {
   const session = await auth.api.getSession({
     headers: await headers(),
@@ -60,7 +59,9 @@ export async function AssignedTasksContainer({
 
   if (!totalCount) {
     return (
-      <AssignedTasksEmptySection newTaskFormContainer={newTaskFormContainer} />
+      <AssignedTasksEmptySection
+        newTaskFormContainer={<NewTaskFormContainer />}
+      />
     );
   }
 

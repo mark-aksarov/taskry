@@ -8,7 +8,7 @@ interface ProjectFormBaseTitleTextFieldProps {
 export function ProjectFormBaseTitleTextField({
   defaultValue,
 }: ProjectFormBaseTitleTextFieldProps) {
-  const t = useTranslations("projects.ProjectFormBase.title");
+  const t = useTranslations("projects.ProjectFormBaseTitleTextField");
 
   return (
     <TextField

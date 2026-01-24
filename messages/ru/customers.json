@@ -39,73 +39,74 @@
     "submitButtonLabel": "Обновить клиента"
   },
 
-  "CustomerFormBase": {
-    "fullName": {
-      "label": "Полное имя",
-      "placeholder": "Введите полное имя",
+  "CustomerFormBaseBioTextField": {
+    "label": "О себе",
+    "placeholder": "Введите информацию о себе"
+  },
 
-      "validation": {
-        "required": "Полное имя обязательно для заполнения",
-        "tooLong": "Полное имя слишком длинное"
-      }
-    },
+  "CustomerFormBaseCompanySelect": {
+    "label": "Компания",
+    "placeholder": "Введите название компании",
 
-    "bio": {
-      "label": "О себе",
-      "placeholder": "Введите информацию о себе"
-    },
-
-    "email": {
-      "label": "Email",
-      "placeholder": "Введите email",
-
-      "validation": {
-        "required": "Пожалуйста, введите адрес электронной почты.",
-        "format": "Неверный формат. Email должен быть в формате `user@example.com`.",
-        "tooLong": "Этот адрес слишком длинный. Максимально допустимая длина — {maxLength} символов."
-      }
-    },
-
-    "phoneNumber": {
-      "label": "Номер телефона",
-      "placeholder": "Введите номер телефона"
-    },
-
-    "publicLink": {
-      "label": "Публичная ссылка",
-      "placeholder": "Введите публичную ссылку",
-
-      "validation": {
-        "format": "Неверный формат. Публичная ссылка должна быть в формате `https://example.com`."
-      }
-    },
-
-    "company": {
-      "label": "Компания",
-      "placeholder": "Введите название компании",
-
-      "validation": {
-        "required": "Название компании обязательно для заполнения",
-        "tooLong": "Название компании слишком длинное"
-      }
+    "validation": {
+      "required": "Название компании обязательно для заполнения",
+      "tooLong": "Название компании слишком длинное"
     }
   },
 
-  "CompanyFormBase": {
-    "title": {
-      "label": "Название",
-      "placeholder": "Введите название",
+  "CustomerFormBaseEmailTextField": {
+    "label": "Email",
+    "placeholder": "Введите email",
 
-      "validation": {
-        "required": "Требуется название",
-        "tooLong": "Название слишком длинное"
-      }
+    "validation": {
+      "required": "Пожалуйста, введите адрес электронной почты.",
+      "format": "Неверный формат. Email должен быть в формате `user@example.com`.",
+      "tooLong": "Этот адрес слишком длинный. Максимально допустимая длина — {maxLength} символов."
+    }
+  },
+
+  "CustomerFormBaseFullNameTextField": {
+    "label": "Полное имя",
+    "placeholder": "Введите полное имя",
+
+    "validation": {
+      "required": "Полное имя обязательно для заполнения",
+      "tooLong": "Полное имя слишком длинное"
+    }
+  },
+
+  "CustomerFormBasePhoneNumberTextField": {
+    "label": "Номер телефона",
+    "placeholder": "Введите номер телефона",
+
+    "validation": {
+      "required": "Номер телефона обязателен для заполнения",
+      "tooLong": "Номер телефона слишком длинный"
+    }
+  },
+
+  "CustomerFormBasePublicLinkTextField": {
+    "label": "Публичная ссылка",
+    "placeholder": "Введите публичную ссылку",
+
+    "validation": {
+      "format": "Неверный формат. Публичная ссылка должна быть в формате `https://example.com`."
+    }
+  },
+
+  "CompanyFormBaseNameTextField": {
+    "label": "Название",
+    "placeholder": "Введите название",
+
+    "validation": {
+      "required": "Требуется название",
+      "tooLong": "Название слишком длинное"
     }
   },
 
   "CustomerDetailBottomSheet": {
     "dialogHeading": "Детали клиента",
-    "editButtonLabel": "Редактировать"
+    "openInFullPage": "Открыть в полном окне"
   },
 
   "CustomerDetailContainer": {
@@ -114,17 +115,17 @@
 
   "CustomerDetailModal": {
     "dialogHeading": "Детали клиента",
-    "editButtonLabel": "Редактировать"
+    "openInFullPage": "Открыть в полном окне"
   },
 
   "CustomerFiltersForm": {
     "hasNoActiveProjects": "Не имеет активных проектов",
     "hasActiveProjects": "Имеет активные проекты",
-    "hasOverdueProjects": "Имеет просроченные проекты",
+    "hasOverdueProjects": "Имеет просроченные проекты"
+  },
 
-    "company": {
-      "label": "Компания"
-    }
+  "CustomerFiltersFormCompanyCheckboxGroup": {
+    "label": "Компания"
   },
 
   "CustomerItemActionMenuTrigger": {
@@ -139,7 +140,7 @@
     "cancelButton": "Отменить"
   },
 
-  "BulkDeleteCustomerModal": {
+  "DeleteCustomersModal": {
     "heading": "Удалить клиентов",
     "text": "Вы уверены, что хотите удалить <strong>{count} выбранных клиентов </strong>? Все содержимое будет безвозвратно удалено.",
     "deleteButton": "Удалить",
@@ -165,6 +166,7 @@
   },
 
   "CustomerToolbarActionsMenuTrigger": {
+    "dialogHeading": "Действия",
     "delete": "Удалить"
   },
 

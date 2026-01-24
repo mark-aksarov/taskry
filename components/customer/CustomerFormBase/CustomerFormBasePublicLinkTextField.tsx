@@ -8,7 +8,7 @@ interface CustomerFormBasePublicLinkTextFieldProps {
 export function CustomerFormBasePublicLinkTextField({
   defaultValue,
 }: CustomerFormBasePublicLinkTextFieldProps) {
-  const t = useTranslations("customers.CustomerFormBase.publicLink");
+  const t = useTranslations("customers.CustomerFormBasePublicLinkTextField");
 
   return (
     <TextField

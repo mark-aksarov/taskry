@@ -10,7 +10,7 @@ interface TaskFormBaseDeadlineDatePickerProps {
 export function TaskFormBaseDeadlineDatePicker({
   defaultValue,
 }: TaskFormBaseDeadlineDatePickerProps) {
-  const t = useTranslations("tasks.TaskFormBase.deadline");
+  const t = useTranslations("tasks.TaskFormBaseDeadlineDatePicker");
 
   const now = today(getLocalTimeZone());
 

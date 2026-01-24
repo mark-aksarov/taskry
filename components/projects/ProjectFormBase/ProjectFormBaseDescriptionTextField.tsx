@@ -8,7 +8,7 @@ interface ProjectFormBaseDescriptionTextFieldProps {
 export function ProjectFormBaseDescriptionTextField({
   defaultValue,
 }: ProjectFormBaseDescriptionTextFieldProps) {
-  const t = useTranslations("projects.ProjectFormBase.description");
+  const t = useTranslations("projects.ProjectFormBaseDescriptionTextField");
 
   return (
     <TextField

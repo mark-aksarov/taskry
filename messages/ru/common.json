@@ -5,26 +5,36 @@
     "cancelButton": "Отмена"
   },
 
-  "Toolbar": {
-    "ToolbarSortingMenuTrigger": {
-      "dialogHeading": "Сортировка",
-      "ariaLabel": "Сортировать проекты по",
-      "label": "Сортировка"
-    },
+  "ToolbarSortingMenuTrigger": {
+    "dialogHeading": "Сортировка"
+  },
 
-    "ToolbarFiltersModalTrigger": {
-      "trigger": {
-        "ariaLabel": "Фильтровать проекты",
-        "label": "Фильтры"
-      },
-      "applyButtonLabel": "Применить фильтры"
-    },
+  "ToolbarSortingButtonMobile": {
+    "ariaLabel": "Сортировать проекты по"
+  },
 
-    "ToolbarActionsMenuTrigger": {
-      "heading": "Действия",
-      "ariaLabel": "Действия",
-      "label": "Действия"
-    }
+  "ToolbarSortingButtonDesktop": {
+    "label": "Сортировка"
+  },
+
+  "ToolbarFiltersButtonDesktop": {
+    "label": "Фильтры"
+  },
+
+  "ToolbarFiltersButtonMobile": {
+    "ariaLabel": "Фильтровать проекты"
+  },
+
+  "ToolbarFiltersModalSubmitButton": {
+    "label": "Применить фильтры"
+  },
+
+  "ToolbarActionsButtonDesktop": {
+    "label": "Действия"
+  },
+
+  "ToolbarActionsButtonMobile": {
+    "ariaLabel": "Действия"
   },
 
   "ViewModeToggleButtonGroup": {
@@ -37,15 +47,12 @@
     "maxSize": "Максимальный размер: 10 МБ"
   },
 
-  "ItemBase": {
-    "ItemBaseActionMenuTrigger": {
-      "heading": "Действия",
-      "ariaLabel": "Действия"
-    }
+  "ItemBaseActionMenuTrigger": {
+    "ariaLabel": "Действия"
   },
 
-  "DetailCommentInput": {
-    "placeholder": "Напишите комментарий..."
+  "ItemBaseActionMenuDialogHeader": {
+    "heading": "Действия"
   },
 
   "Pagination": {

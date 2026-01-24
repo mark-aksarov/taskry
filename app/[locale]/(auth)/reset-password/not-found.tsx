@@ -9,7 +9,7 @@ import { LogIn } from "lucide-react";
 import { useTranslations } from "next-intl";
 
 export default function ResetPasswordNotFound() {
-  const t = useTranslations("app.ResetPasswordPage.notFound");
+  const t = useTranslations("app.ResetPasswordNotFound");
 
   return (
     <AuthCard>

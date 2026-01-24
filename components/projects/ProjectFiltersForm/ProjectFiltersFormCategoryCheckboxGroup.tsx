@@ -9,9 +9,7 @@ export function ProjectFiltersFormCategoryCheckboxGroup({
 }: {
   categories: { id: number; name: string }[];
 }) {
-  const t = useTranslations(
-    "projects.ProjectFiltersForm.ProjectFiltersFormCategoryCheckboxGroup",
-  );
+  const t = useTranslations("projects.ProjectFiltersFormCategoryCheckboxGroup");
 
   const searchParams = useSearchParams();
   const initialValues = searchParams.get("category")?.split(",") || [];

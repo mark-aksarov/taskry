@@ -3,7 +3,7 @@ import { useTranslations } from "next-intl";
 import { Button, ButtonProps } from "@/components/ui";
 
 export function ToolbarActionsButtonMobile(props: ButtonProps) {
-  const t = useTranslations("common.Toolbar.ToolbarActionsMenuTrigger");
+  const t = useTranslations("common.ToolbarActionsButtonMobile");
 
   return (
     <Button

@@ -13,7 +13,7 @@ export function ProjectFormBaseCategorySelect({
   defaultSelectedKey,
   categories,
 }: ProjectFormBaseCategorySelectProps) {
-  const t = useTranslations("projects.ProjectFormBase.category");
+  const t = useTranslations("projects.ProjectFormBaseCategorySelect");
 
   return (
     <ResponsiveSelect

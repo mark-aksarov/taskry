@@ -5,7 +5,7 @@ import { usePathname } from "@/i18n/navigation";
 
 export function AppHeaderTitle() {
   const pathname = usePathname();
-  const t = useTranslations("layout.AppHeader.title");
+  const t = useTranslations("layout.AppHeaderTitle");
 
   let title = t("dashboard");
 

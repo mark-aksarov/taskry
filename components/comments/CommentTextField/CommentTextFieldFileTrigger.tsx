@@ -15,7 +15,7 @@ export function CommentTextFieldFileTrigger({
   buttonClasses,
   isDisabled,
 }: CommentTextFieldFileTriggerProps) {
-  const t = useTranslations("comments.CommentTextField");
+  const t = useTranslations("comments.CommentTextFieldFileTrigger");
 
   return (
     <FileTrigger
@@ -32,7 +32,7 @@ export function CommentTextFieldFileTrigger({
         iconLeft={<Paperclip size={16} strokeWidth={1} absoluteStrokeWidth />}
         className={twMerge(buttonClasses, "translate-x-2")}
         isDisabled={isDisabled}
-        aria-label={t("attachFileButton.ariaLabel")}
+        aria-label={t("ariaLabel")}
       />
     </FileTrigger>
   );

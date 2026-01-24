@@ -18,7 +18,7 @@ export function SearchModalTriggerMobile({
   return (
     <RACDialogTrigger>
       <Button
-        aria-label="theme"
+        aria-label={t("ariaLabel")}
         variant="ghost"
         iconLeft={<Search size={16} strokeWidth={1.5} absoluteStrokeWidth />}
         className={className}

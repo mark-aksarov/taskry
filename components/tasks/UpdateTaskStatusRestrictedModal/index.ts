@@ -1,1 +1,0 @@
-export { UpdateTaskStatusRestrictedModal } from "./UpdateTaskStatusRestrictedModal";

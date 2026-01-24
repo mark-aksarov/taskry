@@ -62,7 +62,8 @@ export function ProjectGridItem({
   userDetailModal,
   userDetailBottomSheet,
 }: ProjectGridItemProps) {
-  const t = useTranslations("projects");
+  const tStatus = useTranslations("projects.ProjectStatus");
+  const t = useTranslations("projects.ProjectGridItem");
 
   const { isSelected, toggleItem } = useProjectSelection();
   useSyncSelectionProjectItem(id, title, status);
@@ -70,14 +71,14 @@ export function ProjectGridItem({
   const format = useFormatter();
 
   const deadlineOn = deadline
-    ? t("ProjectGridItem.deadlineOn", {
+    ? t("deadlineOn", {
         date: format.dateTime(deadline, {
           day: "2-digit",
           month: "short",
           year: "numeric",
         }),
       })
-    : t("ProjectGridItem.noDeadline");
+    : t("noDeadline");
 
   const creatorImg = creator?.imageUrl ? (
     <ImageContainer className="h-9 w-9">
@@ -138,14 +139,14 @@ export function ProjectGridItem({
       commentsSlot={commentModalTrigger}
       statusSlot={
         <ItemBaseBadge color={getProjectStatusBadgeColor(status)}>
-          {t(`ProjectStatus.${status}`)}
+          {tStatus(`${status}`)}
         </ItemBaseBadge>
       }
       progressSlot={
         <GridItemProgress
           value={(tasksCompleted / tasksTotal) * 100}
           showValueText={false}
-          aria-label={t("ProjectGridItem.progressAriaLabel")}
+          aria-label={t("progressAriaLabel")}
         />
       }
     />

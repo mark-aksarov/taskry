@@ -1,10 +1,15 @@
 "use client";
 
+import {
+  ToolbarSortingMenuTrigger,
+  ToolbarSortingButtonMobile,
+  ToolbarSortingButtonDesktop,
+} from "@/components/common/Toolbar";
+
 import { Item, Key } from "react-stately";
 import { useSearchParams } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import { usePathname, useRouter } from "@/i18n/navigation";
-import { ToolbarSortingMenuTrigger } from "@/components/common/Toolbar";
 import { ALargeSmall, Blocks, Calendar, CircleCheck } from "lucide-react";
 
 export function ProjectToolbarSortingMenuTrigger() {
@@ -22,7 +27,15 @@ export function ProjectToolbarSortingMenuTrigger() {
   };
 
   return (
-    <ToolbarSortingMenuTrigger onAction={handleAction}>
+    <ToolbarSortingMenuTrigger
+      onAction={handleAction}
+      renderButton={() => (
+        <>
+          <ToolbarSortingButtonMobile data-test="project-toolbar-sorting-button-mobile" />
+          <ToolbarSortingButtonDesktop data-test="project-toolbar-sorting-button-desktop" />
+        </>
+      )}
+    >
       <Item textValue={t("byTitle")} key="title">
         <ALargeSmall size={16} strokeWidth={1.5} absoluteStrokeWidth />
         {t("byTitle")}

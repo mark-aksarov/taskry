@@ -5,7 +5,6 @@ import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { AssignedTasksSkeleton } from "@/components/tasks/AssignedTasks";
 import { TotalTasksCardSkeleton } from "@/components/tasks/TotalTasksCard";
 import { TotalUsersCardSkeleton } from "@/components/users/TotalUsersCard";
-import { NewTaskFormContainer } from "@/components/tasks/NewTaskFormContainer";
 import { AssignedTasksContainer } from "@/components/tasks/AssignedTasksContainer";
 import { TotalProjectsCardSkeleton } from "@/components/projects/TotalProjectsCard";
 import { TotalTasksCardContainer } from "@/components/tasks/TotalTasksCardContainer";
@@ -55,11 +54,7 @@ export default async function AppDashboardPage({
       }
       assignedTasksContainer={
         <Suspense fallback={<AssignedTasksSkeleton />}>
-          <AssignedTasksContainer
-            page={page}
-            pageSize={pageSize}
-            newTaskFormContainer={<NewTaskFormContainer />}
-          />
+          <AssignedTasksContainer page={page} pageSize={pageSize} />
         </Suspense>
       }
     />

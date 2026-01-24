@@ -3,12 +3,11 @@ import { SlidersHorizontal } from "lucide-react";
 import { Button, ButtonProps } from "@/components/ui";
 
 export function ToolbarFiltersButtonDesktop(props: ButtonProps) {
-  const t = useTranslations("common.Toolbar.ToolbarFiltersModalTrigger");
+  const t = useTranslations("common.ToolbarFiltersButtonDesktop");
 
   return (
     <Button
-      data-test="toolbar-filters-modal-trigger"
-      label={t("trigger.label")}
+      label={t("label")}
       variant="outlined"
       iconLeft={
         <SlidersHorizontal size={16} strokeWidth={1.5} absoluteStrokeWidth />

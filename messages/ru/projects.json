@@ -30,114 +30,104 @@
   },
 
   "ProjectToolbarActionsMenuTrigger": {
+    "dialogHeading": "Действия",
     "delete": "Удалить",
     "pending": "Отметить как «В ожидании»",
     "active": "Отметить как «Активно»",
     "completed": "Отметить как «Завершено»"
   },
 
-  "ProjectFormBase": {
-    "title": {
-      "label": "Название",
-      "placeholder": "Введите название",
-
-      "validation": {
-        "required": "Заголовок обязателен для заполнения",
-        "tooLong": "Заголовок слишком длинный"
-      }
-    },
-
-    "description": {
-      "label": "Описание",
-      "placeholder": "Введите описание"
-    },
-
-    "deadline": {
-      "label": "Срок",
-
-      "validation": {
-        "required": "Необходимо указать срок исполнения"
-      }
-    },
-
-    "category": {
-      "label": "Категория",
-      "placeholder": "Выберите категорию",
-
-      "validation": {
-        "required": "Выберите категорию"
-      }
-    },
-
-    "customer": {
-      "label": "Клиент",
-      "placeholder": "Выберите клиента",
-
-      "validation": {
-        "required": "Необходимо указать заказчика"
-      }
-    },
-
-    "status": {
-      "label": "Статус",
-      "placeholder": "Выберите статус",
-
-      "validation": {
-        "required": "Укажите статус"
-      }
-    },
+  "ProjectFormBaseCustomerSelect": {
+    "label": "Клиент",
+    "placeholder": "Выберите клиента",
 
     "validation": {
-      "server": {
-        "invalidInput": "Некорректный ввод. Пожалуйста, проверьте данные и попробуйте снова.",
-        "internalServerError": "Произошла внутренняя ошибка сервера. Пожалуйста, попробуйте позже."
-      }
+      "required": "Клиент обязателен для заполнения"
     }
   },
 
-  "ProjectCategoryFormBase": {
-    "title": {
-      "label": "Название",
-      "placeholder": "Введите название",
+  "ProjectFormBaseCategorySelect": {
+    "label": "Категория",
+    "placeholder": "Выберите категорию",
 
-      "validation": {
-        "required": "Требуется название",
-        "tooLong": "Название слишком длинное"
-      }
+    "validation": {
+      "required": "Пожалуйста, выберите категорию"
+    }
+  },
+
+  "ProjectFormBaseDeadlineDatePicker": {
+    "label": "Дедлайн",
+
+    "validation": {
+      "required": "Дедлайн обязателен для заполнения"
+    }
+  },
+
+  "ProjectFormBaseDescriptionTextField": {
+    "label": "Описание",
+    "placeholder": "Введите описание"
+  },
+
+  "ProjectFormBaseStatusSelect": {
+    "label": "Статус",
+    "placeholder": "Выберите статус",
+
+    "validation": {
+      "required": "Пожалуйста, выберите статус"
+    }
+  },
+
+  "ProjectFormBaseTitleTextField": {
+    "label": "Название",
+    "placeholder": "Введите название",
+
+    "validation": {
+      "required": "Название обязательно для заполнения",
+      "tooLong": "Название слишком длинное"
+    }
+  },
+
+  "ProjectCategoryFormBaseNameTextField": {
+    "label": "Название",
+    "placeholder": "Введите название",
+
+    "validation": {
+      "required": "Требуется название",
+      "tooLong": "Название слишком длинное"
     }
   },
 
   "ProjectFiltersForm": {
-    "switchText": "Не имеет активных задач",
+    "switchText": "Не имеет активных задач"
+  },
 
-    "ProjectFiltersFormDeadlineCheckboxGroup": {
-      "label": "Срок",
-      "today": "Сегодня",
-      "tomorrow": "Завтра",
-      "thisWeek": "На этой неделе",
-      "overdue": "Просрочено"
-    },
+  "ProjectFiltersFormDeadlineCheckboxGroup": {
+    "label": "Срок",
+    "today": "Сегодня",
+    "tomorrow": "Завтра",
+    "thisWeek": "На этой неделе",
+    "overdue": "Просрочено"
+  },
 
-    "ProjectFiltersFormStatusCheckboxGroup": {
-      "label": "Статус"
-    },
+  "ProjectFiltersFormStatusCheckboxGroup": {
+    "label": "Статус"
+  },
 
-    "ProjectFiltersFormDeadlineRange": {
-      "label": "Диапазон срока",
-      "labelTo": "Диапазон срока до"
-    },
+  "ProjectFiltersFormDeadlineRange": {
+    "label": "Диапазон срока",
+    "labelTo": "Диапазон срока до"
+  },
 
-    "ProjectFiltersFormCategoryCheckboxGroup": {
-      "label": "Категория"
-    },
+  "ProjectFiltersFormCategoryCheckboxGroup": {
+    "label": "Категория"
+  },
 
-    "ProjectFiltersFormCustomerCheckboxGroup": {
-      "label": "Клиент"
-    },
+  "ProjectFiltersFormCustomerCheckboxGroup": {
+    "label": "Клиент"
+  },
 
-    "ProjectFiltersFormUserCheckboxGroup": {
-      "label": "Создатель"
-    }
+  "ProjectFiltersFormUserCheckboxGroup": {
+    "label": "Создатель"
   },
 
   "ProjectToolbarCreateNewMenuTrigger": {
@@ -190,24 +180,6 @@
     "cancelButton": "Отменить"
   },
 
-  "UpdateProjectStatusModal": {
-    "heading": "Обновить статус проекта",
-    "text": {
-      "complete": "При изменении статуса проекта на «Завершён» все задачи в этом проекте будут помечены как завершённые.",
-      "pause": "При изменении статуса проекта на «В ожидании» все активные задачи будут приостановлены.",
-      "resume": "При изменении статуса проекта на «Активный» все приостановленные задачи будут возобновлены."
-    },
-    "updateButton": "Обновить",
-    "cancelButton": "Отменить"
-  },
-
-  "BulkUpdateProjectStatusModal": {
-    "heading": "Изменить статус проектов",
-    "text": "При изменении статуса выбранных проектов связанные задачи будут автоматически обновлены в соответствии с новым статусом проекта.",
-    "updateButton": "Обновить",
-    "cancelButton": "Отмена"
-  },
-
   "ProjectStatus": {
     "pending": "В ожидании",
     "active": "Активный",
@@ -233,16 +205,16 @@
     "customer": "Клиент",
     "unknownCustomer": "Неизвестный клиент",
     "category": "Категория",
-    "attachments": "Вложения",
+    "attachments": "Вложения"
+  },
 
-    "statusMenuTrigger": {
-      "dialogHeading": "Статус проекта",
+  "ProjectDetailStatusMenuTrigger": {
+    "dialogHeading": "Статус проекта",
 
-      "items": {
-        "pending": "В ожидании",
-        "active": "Активен",
-        "completed": "Завершен"
-      }
+    "items": {
+      "pending": "В ожидании",
+      "active": "Активен",
+      "completed": "Завершен"
     }
   },
 

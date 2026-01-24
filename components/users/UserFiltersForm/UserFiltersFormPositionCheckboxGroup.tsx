@@ -11,7 +11,7 @@ export function UserFiltersFormPositionCheckboxGroup({
   filters,
   positions,
 }: UserFiltersFormPositionCheckboxGroupProps) {
-  const t = useTranslations("users.UserFiltersForm.positionCheckboxGroup");
+  const t = useTranslations("users.UserFiltersFormPositionCheckboxGroup");
 
   return (
     <CheckboxGroup

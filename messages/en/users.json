@@ -48,15 +48,13 @@
     "submitButtonLabel": "Create Position"
   },
 
-  "CompanyFormBase": {
-    "title": {
-      "label": "Name",
-      "placeholder": "Typing name",
+  "PositionFormBaseNameTextField": {
+    "label": "Name",
+    "placeholder": "Typing name",
 
-      "validation": {
-        "required": "Name is required",
-        "tooLong": "Name is too long"
-      }
+    "validation": {
+      "required": "Name is required",
+      "tooLong": "Name is too long"
     }
   },
 
@@ -81,21 +79,21 @@
   "UserFiltersForm": {
     "hasNoActiveTasks": "Has no active tasks",
     "hasActiveTasks": "Has active tasks",
-    "hasOverdueTasks": "Has overdue tasks",
+    "hasOverdueTasks": "Has overdue tasks"
+  },
 
-    "roleCheckboxGroup": {
-      "label": "Role",
+  "UserFiltersFormRoleCheckboxGroup": {
+    "label": "Role",
 
-      "items": {
-        "admin": "Admin",
-        "manager": "Manager",
-        "user": "User"
-      }
-    },
-
-    "positionCheckboxGroup": {
-      "label": "Position"
+    "items": {
+      "admin": "Admin",
+      "manager": "Manager",
+      "user": "User"
     }
+  },
+
+  "UserFiltersFormPositionCheckboxGroup": {
+    "label": "Position"
   },
 
   "UserItemActionMenuTrigger": {
@@ -110,7 +108,7 @@
     "cancelButton": "Cancel"
   },
 
-  "BulkDeleteUserModal": {
+  "DeleteUsersModal": {
     "heading": "Delete users",
     "text": "Are you sure you want to delete <strong>{count} users</strong>? All contents will be permanently removed.",
     "deleteButton": "Delete",
@@ -172,6 +170,7 @@
   },
 
   "UserToolbarActionsMenuTrigger": {
+    "dialogHeading": "Actions",
     "delete": "Delete"
   },
 

@@ -13,7 +13,7 @@ export function ProjectFormBaseCustomerSelect({
   defaultSelectedKey,
   customers,
 }: ProjectFormBaseCustomerSelectProps) {
-  const t = useTranslations("projects.ProjectFormBase.customer");
+  const t = useTranslations("projects.ProjectFormBaseCustomerSelect");
 
   return (
     <ResponsiveSelect

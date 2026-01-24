@@ -4,7 +4,7 @@ import { useTranslations } from "next-intl";
 import { Button, ButtonProps } from "@/components/ui";
 
 export function ItemBaseActionMenuButton({ className, ...props }: ButtonProps) {
-  const t = useTranslations("common.ItemBase.ItemBaseActionMenuTrigger");
+  const t = useTranslations("common.ItemBaseActionMenuTrigger");
 
   return (
     <Button

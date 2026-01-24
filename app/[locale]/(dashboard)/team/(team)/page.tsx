@@ -9,11 +9,11 @@ import { UsersContainer } from "@/components/users/UsersContainer";
 import { createPosition } from "@/lib/actions/position/createPosition";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { UserFiltersFormSkeleton } from "@/components/users/UserFiltersForm";
+import { NewPositionForm } from "@/components/users/NewPositionForm/NewPositionForm";
 import { UserFiltersFormContainer } from "@/components/users/UserFiltersFormContainer";
 import { UserToolbarActionsMenuTrigger } from "@/components/users/UserToolbarActionsMenuTrigger";
 import { UserToolbarFiltersModalTrigger } from "@/components/users/UserToolbarFiltersModalTrigger";
 import { UserToolbarCreateNewMenuTrigger } from "@/components/users/UserToolbarCreateNewMenuTrigger";
-import { PositionFormBase } from "@/components/users/PositionFormBase";
 
 const searchParamsSchema = z.object({
   page: z.coerce.number().int().positive().catch(1),
@@ -69,12 +69,7 @@ export default async function AppUsersPage({
       userToolbarCreateNewMenuTrigger={
         <UserToolbarCreateNewMenuTrigger
           newUserForm={<></>}
-          newPositionForm={
-            <PositionFormBase
-              formId="new-position-form"
-              formAction={createPosition}
-            />
-          }
+          newPositionForm={<NewPositionForm formAction={createPosition} />}
         />
       }
       usersContainer={

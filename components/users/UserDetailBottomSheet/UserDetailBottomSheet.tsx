@@ -13,8 +13,8 @@ import {
   DetailBottomSheetDialog,
 } from "@/components/common/DetailBottomSheet";
 
-import { useTranslations } from "next-intl";
 import { Suspense } from "react";
+import { useTranslations } from "next-intl";
 import { DetailModalLink } from "@/components/common/DetailModal";
 import { UserDetailSkeleton } from "@/components/users/UserDetail";
 import { PersonHeaderSkeleton } from "@/components/common/PersonHeader";

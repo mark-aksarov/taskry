@@ -40,6 +40,7 @@
   },
 
   "TaskToolbarActionsMenuTrigger": {
+    "dialogHeading": "Actions",
     "delete": "Delete",
     "pending": "Mark as Pending",
     "active": "Mark as Active",
@@ -71,14 +72,7 @@
     "cancelButton": "Cancel"
   },
 
-  "UpdateTaskStatusRestrictedModal": {
-    "heading": "Task Status Update",
-    "text": "For some tasks, the status cannot be changed because the project is pending or completed",
-    "confirmButton": "Continue",
-    "cancelButton": "Cancel"
-  },
-
-  "BulkDeleteTaskModal": {
+  "DeleteTasksModal": {
     "heading": "Delete Tasks",
     "text": "Are you sure you want to delete <strong>{count} tasks</strong>? All contents will be permanently removed.",
     "deleteButton": "Delete",
@@ -106,130 +100,117 @@
 
   "TaskDetailBottomSheet": {
     "title": "Task Details",
-    "editButtonLabel": "Edit Task"
+    "openInFullPage": "Open in Full Page"
   },
 
   "NewTaskModalTrigger": {
-    "label": "New Task",
-    "title": "New Task",
-    "submitButtonLabel": "Create Task"
+    "label": "New Task"
   },
 
   "TaskDetailModal": {
     "dialogHeading": "Task Details",
-    "openButtonLabel": "Open in Full Page"
+    "openInFullPage": "Open in Full Page"
   },
 
   "TaskFiltersForm": {
-    "showOnlyAssignedSwitchText": "Show only my tasks",
-
-    "TaskFiltersFormDeadlineCheckboxGroup": {
-      "label": "Deadline",
-      "today": "Today",
-      "tomorrow": "Tomorrow",
-      "thisWeek": "This week",
-      "overdue": "Overdue"
-    },
-
-    "TaskFiltersFormDeadlineRange": {
-      "label": "Deadline range",
-      "labelTo": "Deadline range to"
-    },
-
-    "TaskFiltersFormStatusCheckboxGroup": {
-      "label": "Status"
-    },
-
-    "TaskFiltersFormCategoryCheckboxGroup": {
-      "label": "Category"
-    },
-
-    "TaskFiltersFormProjectCheckboxGroup": {
-      "label": "Project"
-    },
-
-    "TaskFiltersFormAssigneeCheckboxGroup": {
-      "label": "Assignee"
-    }
+    "showOnlyAssignedSwitchText": "Show only my tasks"
   },
 
-  "TaskFormBase": {
-    "title": {
-      "label": "Title",
-      "placeholder": "Typing title",
+  "TaskFiltersFormDeadlineCheckboxGroup": {
+    "label": "Deadline",
+    "today": "Today",
+    "tomorrow": "Tomorrow",
+    "thisWeek": "This week",
+    "overdue": "Overdue"
+  },
 
-      "validation": {
-        "required": "Title is required",
-        "tooLong": "Title is too long"
-      }
-    },
+  "TaskFiltersFormDeadlineRange": {
+    "label": "Deadline range",
+    "labelTo": "Deadline range to"
+  },
 
-    "description": {
-      "label": "Description",
-      "placeholder": "Typing description"
-    },
+  "TaskFiltersFormStatusCheckboxGroup": {
+    "label": "Status"
+  },
 
-    "deadline": {
-      "label": "Deadline",
+  "TaskFiltersFormCategoryCheckboxGroup": {
+    "label": "Category"
+  },
 
-      "validation": {
-        "required": "Deadline is required"
-      }
-    },
+  "TaskFiltersFormProjectCheckboxGroup": {
+    "label": "Project"
+  },
 
-    "category": {
-      "label": "Category",
-      "placeholder": "Select category",
+  "TaskFiltersFormAssigneeCheckboxGroup": {
+    "label": "Assignee"
+  },
 
-      "validation": {
-        "required": "Please select a category"
-      }
-    },
-
-    "project": {
-      "label": "Project",
-      "placeholder": "Select project",
-
-      "validation": {
-        "required": "Project is required"
-      }
-    },
-
-    "assignee": {
-      "label": "Assignee",
-      "placeholder": "Select assignee",
-
-      "validation": {
-        "required": "Assignee is required"
-      }
-    },
-
-    "status": {
-      "label": "Status",
-      "placeholder": "Select status",
-
-      "validation": {
-        "required": "Please select a status"
-      }
-    },
+  "TaskFormBaseAssigneeSelect": {
+    "label": "Assignee",
+    "placeholder": "Select assignee",
 
     "validation": {
-      "server": {
-        "invalidInput": "Invalid input. Please check your data and try again.",
-        "internalServerError": "An internal server error occurred. Please try again later."
-      }
+      "required": "Assignee is required"
     }
   },
 
-  "TaskCategoryFormBase": {
-    "title": {
-      "label": "Name",
-      "placeholder": "Typing name",
+  "TaskFormBaseCategorySelect": {
+    "label": "Category",
+    "placeholder": "Select category",
 
-      "validation": {
-        "required": "Name is required",
-        "tooLong": "Name is too long"
-      }
+    "validation": {
+      "required": "Please select a category"
+    }
+  },
+
+  "TaskFormBaseDeadlineDatePicker": {
+    "label": "Deadline",
+
+    "validation": {
+      "required": "Deadline is required"
+    }
+  },
+
+  "TaskFormBaseDescriptionTextField": {
+    "label": "Description",
+    "placeholder": "Typing description"
+  },
+
+  "TaskFormBaseProjectSelect": {
+    "label": "Project",
+    "placeholder": "Select project",
+
+    "validation": {
+      "required": "Project is required"
+    }
+  },
+
+  "TaskFormBaseStatusSelect": {
+    "label": "Status",
+    "placeholder": "Select status",
+
+    "validation": {
+      "required": "Please select a status"
+    }
+  },
+
+  "TaskFormBaseTitleTextField": {
+    "label": "Title",
+    "placeholder": "Typing title",
+
+    "validation": {
+      "required": "Title is required",
+      "tooLong": "Title is too long"
+    }
+  },
+
+  "TaskCategoryFormBaseNameTextField": {
+    "label": "Name",
+    "placeholder": "Typing name",
+
+    "validation": {
+      "required": "Name is required",
+      "tooLong": "Name is too long"
     }
   },
 
@@ -244,16 +225,16 @@
     "project": "Project",
     "attachments": "Attachments",
     "assignee": "Assignee",
-    "noAssignee": "No assignee",
+    "noAssignee": "No assignee"
+  },
 
-    "TaskDetailStatusMenuTrigger": {
-      "dialogHeading": "Task Status",
+  "TaskDetailStatusMenuTrigger": {
+    "dialogHeading": "Task Status",
 
-      "items": {
-        "pending": "Pending",
-        "active": "Active",
-        "completed": "Completed"
-      }
+    "items": {
+      "pending": "Pending",
+      "active": "Active",
+      "completed": "Completed"
     }
   },
 

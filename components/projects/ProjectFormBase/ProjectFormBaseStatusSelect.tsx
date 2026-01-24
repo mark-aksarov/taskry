@@ -11,7 +11,7 @@ interface ProjectFormBaseStatusSelectProps {
 export function ProjectFormBaseStatusSelect({
   defaultSelectedKey,
 }: ProjectFormBaseStatusSelectProps) {
-  const t = useTranslations("projects.ProjectFormBase.status");
+  const t = useTranslations("projects.ProjectFormBaseStatusSelect");
   const tStatus = useTranslations("projects.ProjectStatus");
 
   return (

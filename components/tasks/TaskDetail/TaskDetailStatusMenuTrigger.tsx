@@ -15,7 +15,7 @@ import { useTranslations } from "next-intl";
 export function TaskDetailStatusMenuTrigger() {
   const state = useOverlayTriggerState({});
   const { triggerProps } = useOverlayTrigger({ type: "dialog" }, state);
-  const t = useTranslations("tasks.TaskDetail.TaskDetailStatusMenuTrigger");
+  const t = useTranslations("tasks.TaskDetailStatusMenuTrigger");
 
   return (
     <ResponsiveMenuTrigger

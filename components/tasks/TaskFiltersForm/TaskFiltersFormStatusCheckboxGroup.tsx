@@ -5,14 +5,16 @@ import { useSearchParams } from "next/navigation";
 import { CheckboxGroup, Checkbox } from "@/components/ui";
 
 export function TaskFiltersFormStatusCheckboxGroup() {
-  const t = useTranslations("tasks");
+  const t = useTranslations("tasks.TaskFiltersFormStatusCheckboxGroup");
+  const tStatus = useTranslations("tasks.TaskStatus");
+
   const searchParams = useSearchParams();
   const initialValues = searchParams.get("status")?.split(",") || [];
 
   return (
     <CheckboxGroup
       name="status"
-      label={t("TaskFiltersForm.TaskFiltersFormStatusCheckboxGroup.label")}
+      label={t("label")}
       defaultValue={initialValues}
     >
       <Checkbox
@@ -21,7 +23,7 @@ export function TaskFiltersFormStatusCheckboxGroup() {
         value="pending"
         className="font-normal capitalize"
       >
-        {t("TaskStatus.pending")}
+        {tStatus("pending")}
       </Checkbox>
 
       <Checkbox
@@ -30,7 +32,7 @@ export function TaskFiltersFormStatusCheckboxGroup() {
         value="active"
         className="font-normal capitalize"
       >
-        {t("TaskStatus.active")}
+        {tStatus("active")}
       </Checkbox>
 
       <Checkbox
@@ -39,7 +41,7 @@ export function TaskFiltersFormStatusCheckboxGroup() {
         value="completed"
         className="font-normal capitalize"
       >
-        {t("TaskStatus.completed")}
+        {tStatus("completed")}
       </Checkbox>
     </CheckboxGroup>
   );

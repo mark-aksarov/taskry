@@ -15,9 +15,7 @@ export function ProjectFiltersFormDeadlineRange({
   onDateChange,
   isDisabled,
 }: RangeProps) {
-  const t = useTranslations(
-    "projects.ProjectFiltersForm.ProjectFiltersFormDeadlineRange",
-  );
+  const t = useTranslations("projects.ProjectFiltersFormDeadlineRange");
 
   return (
     <div

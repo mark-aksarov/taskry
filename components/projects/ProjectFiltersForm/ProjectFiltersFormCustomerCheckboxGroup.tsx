@@ -9,9 +9,7 @@ export function ProjectFiltersFormCustomerCheckboxGroup({
 }: {
   customers: { id: number; fullName: string }[];
 }) {
-  const t = useTranslations(
-    "projects.ProjectFiltersForm.ProjectFiltersFormCustomerCheckboxGroup",
-  );
+  const t = useTranslations("projects.ProjectFiltersFormCustomerCheckboxGroup");
 
   const searchParams = useSearchParams();
   const initialValues = searchParams.get("customer")?.split(",") || [];

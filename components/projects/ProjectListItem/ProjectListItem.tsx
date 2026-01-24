@@ -74,7 +74,8 @@ export const ProjectListItem = ({
   projectDetailBottomSheet,
   userDetailModal,
 }: ProjectListItemProps) => {
-  const t = useTranslations("projects");
+  const tStatus = useTranslations("projects.ProjectStatus");
+  const t = useTranslations("projects.ProjectListItem");
 
   const { isSelected, toggleItem } = useProjectSelection();
   useSyncSelectionProjectItem(id, title, status);
@@ -82,14 +83,14 @@ export const ProjectListItem = ({
   const format = useFormatter();
 
   const deadlineOn = deadline
-    ? t("ProjectListItem.deadlineOn", {
+    ? t("deadlineOn", {
         date: format.dateTime(deadline, {
           day: "2-digit",
           month: "short",
           year: "numeric",
         }),
       })
-    : t("ProjectListItem.noDeadline");
+    : t("noDeadline");
 
   const creatorImg = creator?.imageUrl ? (
     <ImageContainer className="h-9 w-9">
@@ -157,10 +158,10 @@ export const ProjectListItem = ({
                   {creator.fullName}
                 </ItemBaseDetailModalTrigger>
               ) : (
-                t("ProjectListItem.unknownCreator")
+                t("unknownCreator")
               )}
             </ListItemTitle>
-            <ListItemText>{t("ProjectListItem.creator")}</ListItemText>
+            <ListItemText>{t("creator")}</ListItemText>
           </ListItemInfo>
         </>
       }
@@ -184,11 +185,11 @@ export const ProjectListItem = ({
                   {customer.fullName}
                 </Link>
               ) : (
-                t("ProjectListItem.unknownCustomer")
+                t("unknownCustomer")
               )}
             </ListItemTitle>
 
-            <ListItemText>{t("ProjectListItem.customer")}</ListItemText>
+            <ListItemText>{t("customer")}</ListItemText>
           </ListItemInfo>
         </>
       }
@@ -196,16 +197,16 @@ export const ProjectListItem = ({
         <ListItemInfo className="@max-4xl:hidden">
           <ListItemTitle>{category.name}</ListItemTitle>
 
-          <ListItemText>{t("ProjectListItem.category")}</ListItemText>
+          <ListItemText>{t("category")}</ListItemText>
         </ListItemInfo>
       }
       companySlot={
         <ListItemInfo className="@max-5xl:hidden">
           <ListItemTitle>
-            {company ? company.name : t("ProjectListItem.unknownCompany")}
+            {company ? company.name : t("unknownCompany")}
           </ListItemTitle>
 
-          <ListItemText>{t("ProjectListItem.company")}</ListItemText>
+          <ListItemText>{t("company")}</ListItemText>
         </ListItemInfo>
       }
       statusSlot={
@@ -213,7 +214,7 @@ export const ProjectListItem = ({
           className="@max-lg:hidden"
           color={getProjectStatusBadgeColor(status)}
         >
-          {t(`ProjectStatus.${status}`)}
+          {tStatus(`${status}`)}
         </ItemBaseBadge>
       }
       commentsModalTriggerSlot={commentModalTrigger}

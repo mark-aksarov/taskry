@@ -10,9 +10,7 @@ export function TaskFiltersFormDeadlineCheckboxGroup({
   value,
   onChange,
 }: TaskFiltersFormDeadlineCheckboxGroupProps) {
-  const t = useTranslations(
-    "tasks.TaskFiltersForm.TaskFiltersFormDeadlineCheckboxGroup",
-  );
+  const t = useTranslations("tasks.TaskFiltersFormDeadlineCheckboxGroup");
 
   return (
     <CheckboxGroup

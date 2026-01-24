@@ -6,16 +6,17 @@ import {
   DeleteCustomersPayload,
 } from "@/lib/actions/types";
 
+import {
+  ToolbarActionsMenuTrigger,
+  ToolbarActionsButtonMobile,
+  ToolbarActionsButtonDesktop,
+} from "../common/Toolbar";
+
 import { useState } from "react";
 import { Trash } from "lucide-react";
 import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
 import { DeleteCustomersModal } from "./DeleteCustomersModal";
-import {
-  ToolbarActionsButtonDesktop,
-  ToolbarActionsButtonMobile,
-  ToolbarActionsMenuTrigger,
-} from "../common/Toolbar";
 import { useCustomerSelection } from "@/lib/hooks/useCustomerSelection";
 import { DialogHeader } from "../ui";
 
@@ -46,11 +47,19 @@ export const CustomerToolbarActionsMenuTrigger = ({
     <>
       <ToolbarActionsMenuTrigger
         onAction={handleAction}
-        renderDialogHeader={() => <DialogHeader>{t("actions")}</DialogHeader>}
+        renderDialogHeader={() => (
+          <DialogHeader>{t("dialogHeading")}</DialogHeader>
+        )}
         renderButton={() => (
           <>
-            <ToolbarActionsButtonMobile isDisabled={isDisabled} />
-            <ToolbarActionsButtonDesktop isDisabled={isDisabled} />
+            <ToolbarActionsButtonMobile
+              data-test="customer-toolbar-actions-button-mobile"
+              isDisabled={isDisabled}
+            />
+            <ToolbarActionsButtonDesktop
+              data-test="customer-toolbar-actions-button-desktop"
+              isDisabled={isDisabled}
+            />
           </>
         )}
       >

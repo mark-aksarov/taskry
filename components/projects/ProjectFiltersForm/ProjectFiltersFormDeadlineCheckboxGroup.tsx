@@ -10,9 +10,7 @@ export function ProjectFiltersFormDeadlineCheckboxGroup({
   value,
   onChange,
 }: ProjectFiltersFormDeadlineCheckboxGroupProps) {
-  const t = useTranslations(
-    "projects.ProjectFiltersForm.ProjectFiltersFormDeadlineCheckboxGroup",
-  );
+  const t = useTranslations("projects.ProjectFiltersFormDeadlineCheckboxGroup");
 
   return (
     <CheckboxGroup

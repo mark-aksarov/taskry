@@ -8,7 +8,7 @@ interface CustomerFormBasePhoneNumberTextFieldProps {
 export function CustomerFormBasePhoneNumberTextField({
   defaultValue,
 }: CustomerFormBasePhoneNumberTextFieldProps) {
-  const t = useTranslations("customers.CustomerFormBase.phoneNumber");
+  const t = useTranslations("customers.CustomerFormBasePhoneNumberTextField");
 
   return (
     <TextField

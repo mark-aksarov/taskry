@@ -42,7 +42,7 @@ export async function resetPassword(
     console.error("Reset Password Error:", error);
 
     if (error instanceof APIError && error.status === "BAD_REQUEST") {
-      return actionError(t(`validation.${error.status.toLowerCase()}`));
+      return actionError(t("validation.bad_request"));
     }
 
     return actionError(t("validation.internalServerError"));

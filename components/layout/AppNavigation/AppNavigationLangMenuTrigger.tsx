@@ -7,7 +7,7 @@ import { MenuTrigger, DialogHeader } from "@/components/ui";
 import { NavigationButton } from "@/components/common/NavigationButton";
 
 export const AppNavigationLangMenuTrigger = () => {
-  const t = useTranslations("layout.AppNavigation.langMenuTrigger");
+  const t = useTranslations("layout.AppNavigationLangMenuTrigger");
 
   return (
     <MenuTrigger

@@ -2,7 +2,7 @@ import { Button, ButtonProps } from "@/components/ui";
 import { useTranslations } from "next-intl";
 
 export function ToolbarFiltersModalSubmitButton(props: ButtonProps) {
-  const t = useTranslations("common.Toolbar.ToolbarFiltersModalTrigger");
+  const t = useTranslations("common.ToolbarFiltersModalSubmitButton");
 
   return (
     <Button
@@ -10,7 +10,7 @@ export function ToolbarFiltersModalSubmitButton(props: ButtonProps) {
       type="submit"
       variant="primary"
       size="medium"
-      label={t("applyButtonLabel")}
+      label={t("label")}
       className="w-full justify-center"
       {...props}
     />

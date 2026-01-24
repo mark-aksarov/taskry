@@ -94,11 +94,19 @@ export const TaskToolbarActionsMenuTrigger = ({
       <ToolbarActionsMenuTrigger
         onAction={handleAction}
         disabledKeys={disabledKeys}
-        renderDialogHeader={() => <DialogHeader>{t("actions")}</DialogHeader>}
+        renderDialogHeader={() => (
+          <DialogHeader>{t("dialogHeading")}</DialogHeader>
+        )}
         renderButton={() => (
           <>
-            <ToolbarActionsButtonMobile isDisabled={isDisabled} />
-            <ToolbarActionsButtonDesktop isDisabled={isDisabled} />
+            <ToolbarActionsButtonMobile
+              data-test="task-toolbar-actions-button-mobile"
+              isDisabled={isDisabled}
+            />
+            <ToolbarActionsButtonDesktop
+              data-test="task-toolbar-actions-button-desktop"
+              isDisabled={isDisabled}
+            />
           </>
         )}
       >

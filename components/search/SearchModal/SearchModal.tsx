@@ -1,15 +1,9 @@
 "use client";
 
-import {
-  Dialog,
-  DialogHeader,
-  DialogHeading,
-  DialogCloseButton,
-} from "@/components/ui";
-
 import { useMemo, useState } from "react";
 import { SearchField } from "../SearchField";
 import { useTranslations } from "next-intl";
+import { Dialog, DialogHeader } from "@/components/ui";
 import { SearchModalContext } from "./SearchModalContext";
 import { SearchToggleButtonGroup } from "../SearchToggleButtonGroup";
 import { ResponsiveModal } from "@/components/common/ResponsiveModal";

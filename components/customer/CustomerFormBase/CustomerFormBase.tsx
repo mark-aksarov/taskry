@@ -16,7 +16,7 @@ const initialState: ActionState = {
   message: null,
 };
 
-interface CustomerFormBaseProps {
+export interface CustomerFormBaseProps {
   formId: string;
   customerId?: number;
   fullNameDefaultValue?: string;

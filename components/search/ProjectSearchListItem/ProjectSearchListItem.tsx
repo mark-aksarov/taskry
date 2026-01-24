@@ -15,11 +15,11 @@ export function ProjectSearchListItem({
   title,
   deadline,
 }: ProjectSearchListItemProps) {
-  const t = useTranslations();
+  const t = useTranslations("search.SearchListItem");
 
   const format = useFormatter();
 
-  const deadlineOn = t("search.SearchListItem.deadlineOn", {
+  const deadlineOn = t("deadlineOn", {
     date: format.dateTime(deadline, {
       day: "2-digit",
       month: "short",

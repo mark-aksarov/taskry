@@ -10,9 +10,7 @@ export function TaskFiltersFormAssigneeCheckboxGroup({
   users: { id: string; fullName: string }[];
 }) {
   const searchParams = useSearchParams();
-  const t = useTranslations(
-    "tasks.TaskFiltersForm.TaskFiltersFormAssigneeCheckboxGroup",
-  );
+  const t = useTranslations("tasks.TaskFiltersFormAssigneeCheckboxGroup");
   const initialValues = searchParams.get("assignee")?.split(",") || [];
 
   return (

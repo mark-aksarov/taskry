@@ -1,7 +1,7 @@
 import React from "react";
 import { Pagination, createPageArray } from "./Pagination";
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen, fireEvent } from "@/lib/utils/test-utils";
 
 describe("Pagination Logic (createPageArray)", () => {
   it("should return all pages if totalPages is 7 or less", () => {

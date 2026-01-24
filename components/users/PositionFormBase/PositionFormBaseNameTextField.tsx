@@ -8,7 +8,7 @@ interface PositionFormBaseNameTextFieldProps {
 export function PositionFormBaseNameTextField({
   defaultValue,
 }: PositionFormBaseNameTextFieldProps) {
-  const t = useTranslations("users.PositionFormBase.title");
+  const t = useTranslations("users.PositionFormBaseNameTextField");
 
   return (
     <TextField

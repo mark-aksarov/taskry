@@ -8,7 +8,7 @@ interface CustomerFormBaseFullNameTextFieldProps {
 export function CustomerFormBaseFullNameTextField({
   defaultValue,
 }: CustomerFormBaseFullNameTextFieldProps) {
-  const t = useTranslations("customers.CustomerFormBase.fullName");
+  const t = useTranslations("customers.CustomerFormBaseFullNameTextField");
 
   return (
     <TextField

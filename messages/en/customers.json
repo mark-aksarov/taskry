@@ -39,73 +39,74 @@
     "submitButtonLabel": "Update Customer"
   },
 
-  "CustomerFormBase": {
-    "fullName": {
-      "label": "Full name",
-      "placeholder": "Typing full name",
+  "CustomerFormBaseBioTextField": {
+    "label": "Bio",
+    "placeholder": "Typing bio"
+  },
 
-      "validation": {
-        "required": "Full name is required",
-        "tooLong": "Full name is too long"
-      }
-    },
+  "CustomerFormBaseCompanySelect": {
+    "label": "Company",
+    "placeholder": "Typing company",
 
-    "bio": {
-      "label": "Bio",
-      "placeholder": "Typing bio"
-    },
-
-    "email": {
-      "label": "Email",
-      "placeholder": "Typing email",
-
-      "validation": {
-        "required": "Please enter your email address.",
-        "format": "Invalid format. The email address must be in the format `user@example.com`.",
-        "tooLong": "This email address is too long. The maximum allowed length is {maxLength} characters."
-      }
-    },
-
-    "phoneNumber": {
-      "label": "Phone number",
-      "placeholder": "Typing phone number"
-    },
-
-    "publicLink": {
-      "label": "Public link",
-      "placeholder": "Typing public link",
-
-      "validation": {
-        "format": "Invalid format. The public link must be in the format `https://example.com`."
-      }
-    },
-
-    "company": {
-      "label": "Company",
-      "placeholder": "Typing company",
-
-      "validation": {
-        "required": "Company is required",
-        "tooLong": "Company is too long"
-      }
+    "validation": {
+      "required": "Company is required",
+      "tooLong": "Company is too long"
     }
   },
 
-  "CompanyFormBase": {
-    "title": {
-      "label": "Name",
-      "placeholder": "Typing name",
+  "CustomerFormBaseEmailTextField": {
+    "label": "Email",
+    "placeholder": "Typing email",
 
-      "validation": {
-        "required": "Name is required",
-        "tooLong": "Name is too long"
-      }
+    "validation": {
+      "required": "Please enter your email address.",
+      "format": "Invalid format. The email address must be in the format `user@example.com`.",
+      "tooLong": "This email address is too long. The maximum allowed length is {maxLength} characters."
+    }
+  },
+
+  "CustomerFormBaseFullNameTextField": {
+    "label": "Full name",
+    "placeholder": "Typing full name",
+
+    "validation": {
+      "required": "Full name is required",
+      "tooLong": "Full name is too long"
+    }
+  },
+
+  "CustomerFormBasePhoneNumberTextField": {
+    "label": "Phone number",
+    "placeholder": "Typing phone number",
+
+    "validation": {
+      "required": "Phone number is required",
+      "tooLong": "Phone number is too long"
+    }
+  },
+
+  "CustomerFormBasePublicLinkTextField": {
+    "label": "Public link",
+    "placeholder": "Typing public link",
+
+    "validation": {
+      "format": "Invalid format. The public link must be in the format `https://example.com`."
+    }
+  },
+
+  "CompanyFormBaseNameTextField": {
+    "label": "Name",
+    "placeholder": "Typing name",
+
+    "validation": {
+      "required": "Name is required",
+      "tooLong": "Name is too long"
     }
   },
 
   "CustomerDetailBottomSheet": {
     "dialogHeading": "Customer Details",
-    "editButtonLabel": "Edit"
+    "openInFullPage": "Open in Full Page"
   },
 
   "CustomerDetailContainer": {
@@ -114,17 +115,17 @@
 
   "CustomerDetailModal": {
     "dialogHeading": "Customer Details",
-    "editButtonLabel": "Edit"
+    "openInFullPage": "Open in Full Page"
   },
 
   "CustomerFiltersForm": {
     "hasNoActiveProjects": "Has no active projects",
     "hasActiveProjects": "Has active projects",
-    "hasOverdueProjects": "Has overdue projects",
+    "hasOverdueProjects": "Has overdue projects"
+  },
 
-    "company": {
-      "label": "Company"
-    }
+  "CustomerFiltersFormCompanyCheckboxGroup": {
+    "label": "Company"
   },
 
   "CustomerItemActionMenuTrigger": {
@@ -139,7 +140,7 @@
     "cancelButton": "Cancel"
   },
 
-  "BulkDeleteCustomerModal": {
+  "DeleteCustomersModal": {
     "heading": "Delete customers",
     "text": "Are you sure you want to delete <strong>{count} customers</strong>? All contents will be permanently removed.",
     "deleteButton": "Delete",
@@ -165,6 +166,7 @@
   },
 
   "CustomerToolbarActionsMenuTrigger": {
+    "dialogHeading": "Actions",
     "delete": "Delete"
   },
 

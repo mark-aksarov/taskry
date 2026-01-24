@@ -8,15 +8,15 @@ import {
 
 import Image from "next/image";
 import { Badge, Link } from "@/components/ui";
+import { TaskDetailLayout } from "./TaskDetailLayout";
 import { TaskStatus } from "@/generated/prisma/enums";
 import { useFormatter, useTranslations } from "next-intl";
 import { UnknownUser } from "@/components/common/UnknownUser";
 import { ImageContainer } from "@/components/common/ImageContainer";
-import { TaskDetailLayout } from "./TaskDetailLayout";
+import { TaskDetailStatusMenuTrigger } from "./TaskDetailStatusMenuTrigger";
 import { Attachment, Attachments } from "@/components/attachments/Attachments";
 import { SubtasksCheckboxGroup } from "@/components/subtasks/SubtasksCheckboxGroup";
 import { NewSubtaskModalTrigger } from "@/components/subtasks/NewSubtaskModalTrigger";
-import { TaskDetailStatusMenuTrigger } from "./TaskDetailStatusMenuTrigger";
 import { NewSubtaskBottomSheetTrigger } from "@/components/subtasks/NewSubtaskBottomSheetTrigger";
 
 interface TaskDetailProps {

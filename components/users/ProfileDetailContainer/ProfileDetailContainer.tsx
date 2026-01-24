@@ -13,13 +13,13 @@ export async function ProfileDetailContainer({ userId }: { userId: string }) {
     <UserDetail
       id={user.id}
       fullName={user.fullName}
-      bio={user.bio ?? undefined}
+      bio={user.bio}
       email={user.email}
-      phoneNumber={user.phoneNumber ?? undefined}
-      address={user.address ?? undefined}
-      publicLink={user.publicLink ?? undefined}
-      birthdate={user.birthdate ?? undefined}
-      position={user.position ?? undefined}
+      phoneNumber={user.phoneNumber}
+      address={user.address}
+      publicLink={user.publicLink}
+      birthdate={user.birthdate}
+      position={user.position}
     />
   );
 }

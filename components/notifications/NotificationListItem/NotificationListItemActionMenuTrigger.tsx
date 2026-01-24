@@ -41,7 +41,9 @@ export function NotificationListItemActionMenuTrigger({
   markAsReadAction,
   mutate,
 }: NotificationListItemActionMenuTriggerProps) {
-  const t = useTranslations("notifications.NotificationItem");
+  const t = useTranslations(
+    "notifications.NotificationListItemActionMenuTrigger",
+  );
 
   // Guest mode modal
   const [isGuestModeModalOpen, setIsGuestModeModalOpen] = useState(false);

@@ -13,9 +13,12 @@
     "placeholder": "Введите новую подзадачу..."
   },
 
-  "NewSubtaskDialog": {
-    "dialogHeading": "Новая подзадача",
-    "addButtonLabel": "Добавить подзадачу"
+  "NewSubtaskDialogHeader": {
+    "heading": "Новая подзадача"
+  },
+
+  "NewSubtaskDialogAddButton": {
+    "label": "Добавить подзадачу"
   },
 
   "NewSubtasksButton": {

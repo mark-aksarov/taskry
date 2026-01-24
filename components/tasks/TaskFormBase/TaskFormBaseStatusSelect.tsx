@@ -19,7 +19,7 @@ export function TaskFormBaseStatusSelect({
   projectStatus,
   defaultSelectedKey,
 }: TaskFormBaseStatusSelectProps) {
-  const t = useTranslations("tasks.TaskFormBase.status");
+  const t = useTranslations("tasks.TaskFormBaseStatusSelect");
   const tStatus = useTranslations("tasks.TaskStatus");
 
   let disabledKeys: string[] = [];

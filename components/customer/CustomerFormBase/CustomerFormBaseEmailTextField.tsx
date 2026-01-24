@@ -8,7 +8,7 @@ interface CustomerFormBaseEmailTextFieldProps {
 export function CustomerFormBaseEmailTextField({
   defaultValue,
 }: CustomerFormBaseEmailTextFieldProps) {
-  const t = useTranslations("customers.CustomerFormBase.email");
+  const t = useTranslations("customers.CustomerFormBaseEmailTextField");
 
   return (
     <TextField

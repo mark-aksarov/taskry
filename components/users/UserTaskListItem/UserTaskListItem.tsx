@@ -40,21 +40,22 @@ export const UserTaskListItem = ({
   taskDetailModal,
   taskDetailBottomSheet,
 }: UserTaskListItemProps) => {
-  const t = useTranslations();
+  const t = useTranslations("users.UserTaskListItem");
+  const tStatus = useTranslations("tasks.TaskStatus");
 
   useSyncSelectionTaskItem(id, title, status);
 
   const format = useFormatter();
 
   const deadlineOn = deadline
-    ? t("users.UserTaskListItem.deadlineOn", {
+    ? t("deadlineOn", {
         date: format.dateTime(deadline, {
           day: "2-digit",
           month: "short",
           year: "numeric",
         }),
       })
-    : t("users.UserTaskListItem.noDeadline");
+    : t("noDeadline");
 
   return (
     <UserTaskListItemLayout
@@ -84,7 +85,7 @@ export const UserTaskListItem = ({
           color={getTaskStatusBadgeColor(status)}
           className="@max-lg:hidden"
         >
-          {t(`tasks.TaskStatus.${status}`)}
+          {tStatus(`${status}`)}
         </ItemBaseBadge>
       }
       commentsSlot={commentModalTrigger}

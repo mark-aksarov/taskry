@@ -58,21 +58,22 @@ export function TaskGridItem({
   userDetailModal,
   userDetailBottomSheet,
 }: TaskGridItemProps) {
-  const t = useTranslations("tasks");
+  const t = useTranslations("tasks.TaskGridItem");
+  const tStatus = useTranslations("tasks.TaskStatus");
 
   useSyncSelectionTaskItem(id, title, status);
 
   const format = useFormatter();
 
   const deadlineOn = deadline
-    ? t("TaskGridItem.deadlineOn", {
+    ? t("deadlineOn", {
         date: format.dateTime(deadline, {
           day: "2-digit",
           month: "short",
           year: "numeric",
         }),
       })
-    : t("TaskGridItem.noDeadline");
+    : t("noDeadline");
 
   const assigneeImg = assignee?.imageUrl ? (
     <ImageContainer className="h-9 w-9">
@@ -127,14 +128,14 @@ export function TaskGridItem({
       commentsSlot={commentModalTrigger}
       statusSlot={
         <ItemBaseBadge color={getTaskStatusBadgeColor(status)}>
-          {t(`TaskStatus.${status}`)}
+          {tStatus(`${status}`)}
         </ItemBaseBadge>
       }
       progressSlot={
         <GridItemProgress
           value={(subtasksDone / subtasksTotal) * 100}
           showValueText={false}
-          aria-label={t("TaskGridItem.progressAriaLabel")}
+          aria-label={t("progressAriaLabel")}
         />
       }
     />

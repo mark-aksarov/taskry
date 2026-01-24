@@ -30,114 +30,104 @@
   },
 
   "ProjectToolbarActionsMenuTrigger": {
+    "dialogHeading": "Actions",
     "delete": "Delete",
     "pending": "Mark as Pending",
     "active": "Mark as Active",
     "completed": "Mark as Completed"
   },
 
-  "ProjectFormBase": {
-    "title": {
-      "label": "Title",
-      "placeholder": "Typing title",
-
-      "validation": {
-        "required": "Title is required",
-        "tooLong": "Title is too long"
-      }
-    },
-
-    "description": {
-      "label": "Description",
-      "placeholder": "Typing description"
-    },
-
-    "deadline": {
-      "label": "Deadline",
-
-      "validation": {
-        "required": "Deadline is required"
-      }
-    },
-
-    "category": {
-      "label": "Category",
-      "placeholder": "Select category",
-
-      "validation": {
-        "required": "Please select a category"
-      }
-    },
-
-    "customer": {
-      "label": "Customer",
-      "placeholder": "Select customer",
-
-      "validation": {
-        "required": "Customer is required"
-      }
-    },
-
-    "status": {
-      "label": "Status",
-      "placeholder": "Select status",
-
-      "validation": {
-        "required": "Please select a status"
-      }
-    },
+  "ProjectFormBaseCustomerSelect": {
+    "label": "Customer",
+    "placeholder": "Select customer",
 
     "validation": {
-      "server": {
-        "invalidInput": "Invalid input. Please check your data and try again.",
-        "internalServerError": "An internal server error occurred. Please try again later."
-      }
+      "required": "Customer is required"
     }
   },
 
-  "ProjectCategoryFormBase": {
-    "title": {
-      "label": "Name",
-      "placeholder": "Typing name",
+  "ProjectFormBaseCategorySelect": {
+    "label": "Category",
+    "placeholder": "Select category",
 
-      "validation": {
-        "required": "Name is required",
-        "tooLong": "Name is too long"
-      }
+    "validation": {
+      "required": "Please select a category"
+    }
+  },
+
+  "ProjectFormBaseDeadlineDatePicker": {
+    "label": "Deadline",
+
+    "validation": {
+      "required": "Deadline is required"
+    }
+  },
+
+  "ProjectFormBaseDescriptionTextField": {
+    "label": "Description",
+    "placeholder": "Typing description"
+  },
+
+  "ProjectFormBaseStatusSelect": {
+    "label": "Status",
+    "placeholder": "Select status",
+
+    "validation": {
+      "required": "Please select a status"
+    }
+  },
+
+  "ProjectFormBaseTitleTextField": {
+    "label": "Title",
+    "placeholder": "Typing title",
+
+    "validation": {
+      "required": "Title is required",
+      "tooLong": "Title is too long"
+    }
+  },
+
+  "ProjectCategoryFormBaseNameTextField": {
+    "label": "Name",
+    "placeholder": "Typing name",
+
+    "validation": {
+      "required": "Name is required",
+      "tooLong": "Name is too long"
     }
   },
 
   "ProjectFiltersForm": {
-    "switchText": "Has not active tasks",
+    "switchText": "Has not active tasks"
+  },
 
-    "ProjectFiltersFormDeadlineCheckboxGroup": {
-      "label": "Deadline",
-      "today": "Today",
-      "tomorrow": "Tomorrow",
-      "thisWeek": "This week",
-      "overdue": "Overdue"
-    },
+  "ProjectFiltersFormDeadlineCheckboxGroup": {
+    "label": "Deadline",
+    "today": "Today",
+    "tomorrow": "Tomorrow",
+    "thisWeek": "This week",
+    "overdue": "Overdue"
+  },
 
-    "ProjectFiltersFormStatusCheckboxGroup": {
-      "label": "Status"
-    },
+  "ProjectFiltersFormStatusCheckboxGroup": {
+    "label": "Status"
+  },
 
-    "ProjectFiltersFormDeadlineRange": {
-      "label": "Deadline range",
-      "labelTo": "Deadline range to"
-    },
+  "ProjectFiltersFormDeadlineRange": {
+    "label": "Deadline range",
+    "labelTo": "Deadline range to"
+  },
 
-    "ProjectFiltersFormCategoryCheckboxGroup": {
-      "label": "Category"
-    },
+  "ProjectFiltersFormCategoryCheckboxGroup": {
+    "label": "Category"
+  },
 
-    "ProjectFiltersFormCustomerCheckboxGroup": {
-      "label": "Customer"
-    },
+  "ProjectFiltersFormCustomerCheckboxGroup": {
+    "label": "Customer"
+  },
 
-    "ProjectFiltersFormUserCheckboxGroup": {
-      "label": "Creator"
-    }
+  "ProjectFiltersFormUserCheckboxGroup": {
+    "label": "Creator"
   },
 
   "ProjectToolbarCreateNewMenuTrigger": {
@@ -190,24 +180,6 @@
     "cancelButton": "Cancel"
   },
 
-  "UpdateProjectStatusModal": {
-    "heading": "Update Project Status",
-    "text": {
-      "complete": "Changing the project status to Completed will mark all tasks in this project as Completed.",
-      "pause": "Changing the project status to Pending will pause all active tasks in this project.",
-      "resume": "Changing the project status to Active will resume all pending tasks in this project."
-    },
-    "updateButton": "Update",
-    "cancelButton": "Cancel"
-  },
-
-  "BulkUpdateProjectStatusModal": {
-    "heading": "Update Project Statuses",
-    "text": "Changing the status of selected projects will automatically update related tasks according to the new project status.",
-    "updateButton": "Update",
-    "cancelButton": "Cancel"
-  },
-
   "ProjectStatus": {
     "pending": "Pending",
     "active": "Active",
@@ -233,16 +205,16 @@
     "customer": "Customer",
     "unknownCustomer": "Unknown customer",
     "category": "Category",
-    "attachments": "Attachments",
+    "attachments": "Attachments"
+  },
 
-    "statusMenuTrigger": {
-      "dialogHeading": "Project Status",
+  "ProjectDetailStatusMenuTrigger": {
+    "dialogHeading": "Project Status",
 
-      "items": {
-        "pending": "Pending",
-        "active": "Active",
-        "completed": "Completed"
-      }
+    "items": {
+      "pending": "Pending",
+      "active": "Active",
+      "completed": "Completed"
     }
   },
 

@@ -37,7 +37,7 @@ export function DeleteTasksModal({
   deleteAction,
   onSuccess,
 }: DeleteTasksModalProps) {
-  const t = useTranslations("projects.DeleteTasksModal");
+  const t = useTranslations("tasks.DeleteTasksModal");
   const [state, action, pending] = useActionState(deleteAction, initialState);
 
   useEffect(() => {

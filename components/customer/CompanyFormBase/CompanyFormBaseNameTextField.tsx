@@ -8,7 +8,7 @@ interface CompanyFormBaseNameTextFieldProps {
 export function CompanyFormBaseNameTextField({
   defaultValue,
 }: CompanyFormBaseNameTextFieldProps) {
-  const t = useTranslations("customers.CompanyFormBase.title");
+  const t = useTranslations("customers.CompanyFormBaseNameTextField");
 
   return (
     <TextField

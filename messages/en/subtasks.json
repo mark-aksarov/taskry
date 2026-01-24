@@ -13,9 +13,12 @@
     "placeholder": "Typing a new subtask..."
   },
 
-  "NewSubtaskDialog": {
-    "dialogHeading": "New Subtask",
-    "addButtonLabel": "Add Subtask"
+  "NewSubtaskDialogHeader": {
+    "heading": "New Subtask"
+  },
+
+  "NewSubtaskDialogAddButton": {
+    "label": "Add Subtask"
   },
 
   "NewSubtasksButton": {

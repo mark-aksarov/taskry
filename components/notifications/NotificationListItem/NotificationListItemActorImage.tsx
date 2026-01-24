@@ -13,7 +13,7 @@ interface NotificationListItemActorProps {
 export function NotificationListItemActor({
   actor,
 }: NotificationListItemActorProps) {
-  const t = useTranslations("notifications.NotificationItem");
+  const t = useTranslations("notifications.NotificationListItemActor");
 
   return (
     <span className={styles}>

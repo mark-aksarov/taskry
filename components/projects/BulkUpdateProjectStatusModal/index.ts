@@ -1,1 +1,0 @@
-export { BulkUpdateProjectStatusModal } from "./BulkUpdateProjectStatusModal";

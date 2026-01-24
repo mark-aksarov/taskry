@@ -42,7 +42,7 @@ function TaskCommentsModalTriggerInner({
   sendCommentAction,
   updateCommentAction,
 }: TaskCommentsModalTriggerProps) {
-  const t = useTranslations("projects.TaskCommentsModal");
+  const t = useTranslations("tasks.TaskCommentsModal");
 
   const { editCommentId } = useCommentFormContext();
 

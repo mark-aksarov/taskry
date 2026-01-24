@@ -13,7 +13,7 @@ export function CustomerFormBaseCompanySelect({
   defaultSelectedKey,
   companies,
 }: CustomerFormBaseCompanySelectProps) {
-  const t = useTranslations("customers.CustomerFormBase.company");
+  const t = useTranslations("customers.CustomerFormBaseCompanySelect");
 
   return (
     <ResponsiveSelect

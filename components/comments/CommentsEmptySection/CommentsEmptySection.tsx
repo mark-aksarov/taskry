@@ -10,7 +10,10 @@ export function CommentsEmptySection() {
 
   return (
     <div className="flex min-h-[400px] flex-auto items-center justify-center">
-      <EmptySection className="max-w-[375px]">
+      <EmptySection
+        data-test="comments-empty-section"
+        className="max-w-[375px]"
+      >
         <EmptySectionHeading tag="h3" className="text-3xl!">
           {t("heading")}
         </EmptySectionHeading>

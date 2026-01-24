@@ -6,7 +6,7 @@ import { Button, MenuTrigger } from "@/components/ui";
 import { useTranslations } from "next-intl";
 
 export const AppHeaderLangMenuTrigger = () => {
-  const t = useTranslations("layout.AppHeader.langMenuTrigger");
+  const t = useTranslations("layout.AppHeaderLangMenuTrigger");
 
   return (
     <MenuTrigger

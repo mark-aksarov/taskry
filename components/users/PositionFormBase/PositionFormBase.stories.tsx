@@ -29,6 +29,6 @@ type Story = StoryObj<typeof meta>;
 export const Default = {
   args: {
     formAction: fn(),
-    formId: "new-user-form",
+    id: "new-position-form",
   },
 } satisfies Story;

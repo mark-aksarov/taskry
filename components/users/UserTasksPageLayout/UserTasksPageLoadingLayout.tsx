@@ -19,6 +19,7 @@ import { PageContainer } from "@/components/common/PageContainer";
 import { UserTaskListLayout } from "@/components/users/UserTaskList";
 import { PersonHeaderSkeleton } from "@/components/common/PersonHeader";
 import { UserTaskListItemSkeleton } from "@/components/users/UserTaskListItem";
+import { useTranslations } from "next-intl";
 
 interface UserTasksPageLoadingLayoutProps {
   navigationDesktop: React.ReactNode;
@@ -29,13 +30,15 @@ export function UserTasksPageLoadingLayout({
   navigationDesktop,
   navigationMobile,
 }: UserTasksPageLoadingLayoutProps) {
+  const t = useTranslations("users.UserTasksPageLayout");
+
   return (
     <>
       <PageContainer className="max-md:hidden">
         <UserCard>
           <UserCardLeft>
             <UserCardHeader>
-              <UserCardTitle>Assigned tasks</UserCardTitle>
+              <UserCardTitle>{t("title")}</UserCardTitle>
               <div className="flex gap-4">
                 <Skeleton className="h-8 w-[5.5rem] rounded-lg" />
                 <Skeleton className="h-8 w-[5.5rem] rounded-lg" />
@@ -59,7 +62,7 @@ export function UserTasksPageLoadingLayout({
       <PageContainer className="md:hidden">
         <PageGrid>
           <ToolbarMobileTop>
-            <ToolbarMobileHeading>Assigned tasks</ToolbarMobileHeading>
+            <ToolbarMobileHeading>{t("title")}</ToolbarMobileHeading>
             <Skeleton className="h-8 w-8 rounded-lg" />
             <Skeleton className="h-8 w-8 rounded-lg" />
           </ToolbarMobileTop>

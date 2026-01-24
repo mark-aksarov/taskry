@@ -27,7 +27,6 @@ export function EmptySectionButton({
         className={(renderProps) =>
           styles({ ...renderProps, variant: "primary" })
         }
-        data-test="empty-section-button"
       >
         <CirclePlus size={16} strokeWidth={1.5} absoluteStrokeWidth />
         {children}

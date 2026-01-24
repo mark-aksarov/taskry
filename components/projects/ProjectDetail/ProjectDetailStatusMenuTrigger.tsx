@@ -10,7 +10,7 @@ import { ResponsiveMenuTrigger } from "@/components/common/ResponsiveMenuTrigger
 export function ProjectDetailStatusMenuTrigger() {
   const state = useOverlayTriggerState({});
   const { triggerProps } = useOverlayTrigger({ type: "dialog" }, state);
-  const t = useTranslations("projects.ProjectDetail.statusMenuTrigger");
+  const t = useTranslations("projects.ProjectDetailStatusMenuTrigger");
 
   return (
     <ResponsiveMenuTrigger

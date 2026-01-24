@@ -5,7 +5,7 @@ import { NavigationButton } from "@/components/common/NavigationButton";
 import { useTranslations } from "next-intl";
 
 export function AppNavigationThemeToggleButton() {
-  const t = useTranslations("layout.AppNavigation.themeToggleButton");
+  const t = useTranslations("layout.AppNavigationThemeToggleButton");
 
   return (
     <>

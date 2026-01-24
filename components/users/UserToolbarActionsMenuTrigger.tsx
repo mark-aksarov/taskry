@@ -40,11 +40,19 @@ export const UserToolbarActionsMenuTrigger = ({
     <>
       <ToolbarActionsMenuTrigger
         onAction={handleAction}
-        renderDialogHeader={() => <DialogHeader>{t("actions")}</DialogHeader>}
+        renderDialogHeader={() => (
+          <DialogHeader>{t("dialogHeading")}</DialogHeader>
+        )}
         renderButton={() => (
           <>
-            <ToolbarActionsButtonMobile isDisabled={isDisabled} />
-            <ToolbarActionsButtonDesktop isDisabled={isDisabled} />
+            <ToolbarActionsButtonMobile
+              data-test="user-toolbar-actions-button-mobile"
+              isDisabled={isDisabled}
+            />
+            <ToolbarActionsButtonDesktop
+              data-test="user-toolbar-actions-button-desktop"
+              isDisabled={isDisabled}
+            />
           </>
         )}
       >

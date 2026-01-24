@@ -11,7 +11,7 @@ export function TaskFormBaseAssigneeSelect({
   defaultSelectedKey?: string;
   users: { id: string; fullName: string }[];
 }) {
-  const t = useTranslations("tasks.TaskFormBase.assignee");
+  const t = useTranslations("tasks.TaskFormBaseAssigneeSelect");
 
   return (
     <ResponsiveSelect

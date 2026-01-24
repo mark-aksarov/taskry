@@ -21,14 +21,15 @@
   },
 
   "CommentTextField": {
-    "placeholder": "Type a comment...",
+    "placeholder": "Type a comment..."
+  },
 
-    "attachFileButton": {
-      "ariaLabel": "Add attachments"
-    },
-    "sendButton": {
-      "ariaLabel": "Send Message"
-    }
+  "CommentTextFieldFileTrigger": {
+    "ariaLabel": "Add attachments"
+  },
+
+  "CommentTextFieldSendButton": {
+    "ariaLabel": "Send Message"
   },
 
   "ReplyButton": "Reply"

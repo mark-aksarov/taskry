@@ -8,7 +8,7 @@ interface TaskCategoryFormBaseNameTextFieldProps {
 export function TaskCategoryFormBaseNameTextField({
   defaultValue,
 }: TaskCategoryFormBaseNameTextFieldProps) {
-  const t = useTranslations("tasks.TaskCategoryFormBase.title");
+  const t = useTranslations("tasks.TaskCategoryFormBaseNameTextField");
 
   return (
     <TextField

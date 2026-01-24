@@ -10,9 +10,7 @@ export function TaskFiltersFormCategoryCheckboxGroup({
   categories: { id: number; name: string }[];
 }) {
   const searchParams = useSearchParams();
-  const t = useTranslations(
-    "tasks.TaskFiltersForm.TaskFiltersFormCategoryCheckboxGroup",
-  );
+  const t = useTranslations("tasks.TaskFiltersFormCategoryCheckboxGroup");
   const initialValues = searchParams.get("category")?.split(",") || [];
 
   return (

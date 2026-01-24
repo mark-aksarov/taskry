@@ -12,7 +12,7 @@ export function CommentTextFieldSendButton({
   buttonClasses,
   isDisabled,
 }: CommentTextFieldSendButtonProps) {
-  const t = useTranslations("comments.CommentTextField");
+  const t = useTranslations("comments.CommentTextFieldSendButton");
 
   return (
     <Button
@@ -21,7 +21,7 @@ export function CommentTextFieldSendButton({
       iconLeft={<SendHorizonal size={16} strokeWidth={1} absoluteStrokeWidth />}
       className={twMerge(buttonClasses, "right-0 -translate-x-2")}
       isDisabled={isDisabled}
-      aria-label={t("sendButton.ariaLabel")}
+      aria-label={t("ariaLabel")}
     />
   );
 }

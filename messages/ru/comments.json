@@ -21,14 +21,15 @@
   },
 
   "CommentTextField": {
-    "placeholder": "Напишите комментарий...",
+    "placeholder": "Напишите комментарий..."
+  },
 
-    "attachFileButton": {
-      "ariaLabel": "Добавить вложения"
-    },
-    "sendButton": {
-      "ariaLabel": "Отправить сообщение"
-    }
+  "CommentTextFieldFileTrigger": {
+    "ariaLabel": "Добавить вложения"
+  },
+
+  "CommentTextFieldSendButton": {
+    "ariaLabel": "Отправить сообщение"
   },
 
   "ReplyButton": "Ответить"

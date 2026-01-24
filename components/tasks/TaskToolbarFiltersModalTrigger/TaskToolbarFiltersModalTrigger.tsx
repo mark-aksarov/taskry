@@ -3,11 +3,14 @@
 import {
   ToolbarFiltersModal,
   ToolbarFiltersModalDialog,
-  ToolbarFiltersModalTrigger,
   ToolbarFiltersModalSubmitButton,
 } from "@/components/common/Toolbar";
+
 import { useTranslations } from "next-intl";
 import { DialogBody, DialogFooter, DialogHeader } from "@/components/ui";
+import { ToolbarFiltersButtonMobile } from "@/components/common/Toolbar/ToolbarFiltersButtonMobile";
+import { ToolbarFiltersButtonDesktop } from "@/components/common/Toolbar/ToolbarFiltersButtonDesktop";
+import { DialogTrigger } from "react-aria-components";
 
 export function TaskToolbarFiltersModalTrigger({
   filtersFormContainer,
@@ -17,7 +20,10 @@ export function TaskToolbarFiltersModalTrigger({
   const t = useTranslations("tasks.TaskToolbarFiltersModalTrigger");
 
   return (
-    <ToolbarFiltersModalTrigger>
+    <DialogTrigger>
+      <ToolbarFiltersButtonMobile data-test="task-toolbar-filters-button-mobile" />
+      <ToolbarFiltersButtonDesktop data-test="task-toolbar-filters-button-desktop" />
+
       <ToolbarFiltersModal>
         <ToolbarFiltersModalDialog>
           <DialogHeader>title={t("title")}</DialogHeader>
@@ -27,6 +33,6 @@ export function TaskToolbarFiltersModalTrigger({
           </DialogFooter>
         </ToolbarFiltersModalDialog>
       </ToolbarFiltersModal>
-    </ToolbarFiltersModalTrigger>
+    </DialogTrigger>
   );
 }
