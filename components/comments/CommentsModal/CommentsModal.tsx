@@ -1,5 +1,3 @@
-"use client";
-
 import { ModalProps } from "@/components/ui/Modal";
 import { ResponsiveModal } from "@/components/common/ResponsiveModal";
 

@@ -3,8 +3,8 @@
 import { useSWRConfig } from "swr";
 import { Form } from "react-aria-components";
 import { CommentTextField } from "../CommentTextField";
-import { CommentFormAttachments } from ".";
 import { ActionFn, ActionState } from "@/lib/actions/types";
+import { CommentFormAttachments } from "./CommentFormAttachments";
 import { startTransition, useActionState, useEffect, useState } from "react";
 
 const initialState: ActionState = {

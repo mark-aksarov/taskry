@@ -1,21 +1,23 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { useSearchParams } from "next/navigation";
+import { ProjectFilters } from "@/lib/types";
 import { Checkbox } from "@/components/ui/Checkbox";
 import { CheckboxGroup } from "@/components/ui/CheckboxGroup";
 
-export function ProjectFiltersFormStatusCheckboxGroup() {
+export function ProjectFiltersFormStatusCheckboxGroup({
+  filters,
+}: {
+  filters: ProjectFilters;
+}) {
   const t = useTranslations("projects.ProjectFiltersFormStatusCheckboxGroup");
   const tStatus = useTranslations("projects.ProjectStatus");
-  const searchParams = useSearchParams();
-  const initialValues = searchParams.get("status")?.split(",") || [];
 
   return (
     <CheckboxGroup
       name="status"
       label={t("label")}
-      defaultValue={initialValues}
+      defaultValue={filters.status?.map((id) => id.toString())}
     >
       <Checkbox
         data-test="pending-checkbox"

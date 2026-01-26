@@ -1,5 +1,3 @@
-"use client";
-
 import { DialogFooter } from "@/components/ui/Dialog";
 
 export function CommentsModalDialogFooter({

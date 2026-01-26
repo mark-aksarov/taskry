@@ -1,3 +1,5 @@
+"use client";
+
 import {
   UserCard,
   UserCardLeft,
@@ -12,6 +14,7 @@ import {
   ToolbarMobileHeading,
 } from "@/components/common/Toolbar";
 
+import { useTranslations } from "next-intl";
 import { Skeleton } from "@/components/ui/Skeleton";
 import { Repeat } from "@/components/common/Repeat";
 import { PageGrid } from "@/components/common/PageGrid";
@@ -19,7 +22,6 @@ import { PageContainer } from "@/components/common/PageContainer";
 import { UserTaskListLayout } from "@/components/users/UserTaskList";
 import { PersonHeaderSkeleton } from "@/components/common/PersonHeader";
 import { UserTaskListItemSkeleton } from "@/components/users/UserTaskListItem";
-import { useTranslations } from "next-intl";
 
 interface UserTasksPageLoadingLayoutProps {
   navigationDesktop: React.ReactNode;

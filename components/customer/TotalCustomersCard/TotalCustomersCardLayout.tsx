@@ -3,8 +3,9 @@ import {
   DashboardCardIcon,
   DashboardCardText,
 } from "@/components/common/DashboardCard";
-import { IconlyUser3 } from "@/components/icons/IconlyUser3";
+
 import { useTranslations } from "next-intl";
+import { IconlyUser3 } from "@/components/icons/IconlyUser3";
 
 export const TotalCustomersCardLayout = ({
   children,

@@ -1,3 +1,5 @@
+"use client";
+
 import { Checkbox } from "@/components/ui/Checkbox";
 import { useTaskSelection } from "@/lib/hooks/useTaskSelection";
 

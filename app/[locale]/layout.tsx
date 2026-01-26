@@ -5,10 +5,10 @@ import { notFound } from "next/navigation";
 import { SWRProvider } from "./SWRProvider";
 import type { Metadata, Viewport } from "next";
 import { Nunito_Sans } from "next/font/google";
+import { ToastRegion } from "@/components/ui/Toast";
 import { I18nProvider } from "@/components/ui/I18nProvider";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { RouterProvider } from "@/components/ui/RouterProvider";
-import { ToastRegion } from "@/components/ui/Toast/Toast";
 
 const nunitoSans = Nunito_Sans({
   variable: "--font-nunito-sans",

@@ -1,8 +1,8 @@
-import { ViewModeLayout } from "@/components/common/ViewMode";
 import {
   EntityPaginationProvider,
   EntityContainerPagination,
 } from "../common/EntityContainerPagination";
+import { ViewModeLayout } from "@/components/common/ViewMode";
 
 interface EntityContainerPresentationProps {
   page: number;

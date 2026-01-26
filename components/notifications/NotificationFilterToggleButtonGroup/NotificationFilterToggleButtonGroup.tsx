@@ -1,11 +1,11 @@
 import {
   ToggleButton,
   ToggleButtonGroup,
+  ToggleButtonGroupProps,
 } from "@/components/ui/ToggleButtonGroup";
 
 import { useTranslations } from "next-intl";
 import { Skeleton } from "@/components/ui/Skeleton";
-import { ToggleButtonGroupProps } from "@/components/ui/ToggleButtonGroup/ToggleButtonGroup";
 
 interface NotificationFilterToggleButtonGroupProps
   extends Pick<ToggleButtonGroupProps, "selectedKeys" | "onSelectionChange"> {

@@ -1,5 +1,3 @@
-"use client";
-
 import { ArrowDownUp } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Button, ButtonProps } from "@/components/ui/Button";

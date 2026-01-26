@@ -19,7 +19,7 @@ export function SubtasksCheckboxGroup({
       isReadOnly
     >
       {subtasks.map((subtask) => (
-        <div className="flex items-start gap-2">
+        <div key={subtask.id} className="flex items-start gap-2">
           <Checkbox
             key={subtask.id}
             value={subtask.id.toString()}

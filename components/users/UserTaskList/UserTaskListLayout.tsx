@@ -1,5 +1,3 @@
-"use client";
-
 import { twMerge } from "tailwind-merge";
 import { List } from "@/components/common/List";
 

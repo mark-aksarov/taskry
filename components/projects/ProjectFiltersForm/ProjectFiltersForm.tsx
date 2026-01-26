@@ -136,13 +136,13 @@ export function ProjectFiltersForm({
         />
 
         <Divider />
-        {projectStatusCheckboxGroup}
+        <div>{projectStatusCheckboxGroup}</div>
         <Divider />
-        {projectCategoryCheckboxGroup}
+        <div>{projectCategoryCheckboxGroup}</div>
         <Divider />
-        {customerCheckboxGroup}
+        <div>{customerCheckboxGroup}</div>
         <Divider />
-        {userCheckboxGroup}
+        <div>{userCheckboxGroup}</div>
       </div>
     </Form>
   );

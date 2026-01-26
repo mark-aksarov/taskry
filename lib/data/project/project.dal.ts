@@ -1,4 +1,4 @@
-"server-only";
+import "server-only";
 
 import { cache } from "react";
 import prisma from "@/lib/prisma";
@@ -6,7 +6,6 @@ import { ProjectFilters } from "@/lib/types";
 import { AccessDeniedError } from "../utils/error";
 import { buildDateWhere } from "../utils/dateWhere";
 import { verifySession } from "../utils/verifySession";
-import { TRANSITION_TASK_STATUSES_BY_PROJECT } from "../utils/statusUtils";
 import { CreateProjectInputDTO, UpdateProjectInputDTO } from "./project.dto";
 import { Prisma, ProjectStatus, TaskStatus } from "@/generated/prisma/client";
 
@@ -133,10 +132,6 @@ export const updateProject = async (input: UpdateProjectInputDTO) => {
       },
       data: input,
     });
-
-    if (input.status) {
-      await applyProjectStatusTaskTransitions(tx, [input.id], input.status);
-    }
   });
 };
 
@@ -155,8 +150,6 @@ export const updateProjects = async (ids: number[], status: ProjectStatus) => {
         status,
       },
     });
-
-    await applyProjectStatusTaskTransitions(tx, ids, status);
   });
 };
 
@@ -176,29 +169,6 @@ export const deleteProjects = async (ids: number[]) => {
 /**
  * HELPERS
  */
-
-const applyProjectStatusTaskTransitions = async (
-  tx: Prisma.TransactionClient,
-  projectIds: number[],
-  nextStatus: ProjectStatus,
-) => {
-  const taskRules = TRANSITION_TASK_STATUSES_BY_PROJECT[nextStatus];
-  if (!taskRules) return;
-
-  for (const [current, target] of Object.entries(taskRules)) {
-    if (current === target) continue;
-
-    await tx.task.updateMany({
-      where: {
-        projectId: { in: projectIds },
-        status: current as TaskStatus,
-      },
-      data: {
-        status: target as TaskStatus,
-      },
-    });
-  }
-};
 
 async function validateRelations(
   workspaceId: number,

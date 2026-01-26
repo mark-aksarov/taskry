@@ -1,5 +1,4 @@
 import { ModalProps } from "@/components/ui/Modal";
-
 import { ResponsiveModal } from "@/components/common/ResponsiveModal";
 
 export function FormModal(props: ModalProps) {

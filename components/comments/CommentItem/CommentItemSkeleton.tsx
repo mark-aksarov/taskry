@@ -1,5 +1,3 @@
-"use client";
-
 import { Skeleton } from "@/components/ui/Skeleton";
 import { CommentItemLayout } from "./CommentItemLayout";
 import { CommentItemInfoSkeleton } from "./CommentItemInfo";

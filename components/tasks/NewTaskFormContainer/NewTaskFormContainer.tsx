@@ -1,3 +1,5 @@
+import "server-only";
+
 import {
   TaskFormBaseStatusSelect,
   TaskFormBaseProjectSelect,
@@ -6,7 +8,6 @@ import {
 } from "../TaskFormBase";
 
 import { NewTaskForm } from "../NewTaskForm";
-
 import { createTask } from "@/lib/actions/task/createTask";
 import { getUserSummaries } from "@/lib/data/user/user.service";
 import { getProjectSummaries } from "@/lib/data/project/project.service";

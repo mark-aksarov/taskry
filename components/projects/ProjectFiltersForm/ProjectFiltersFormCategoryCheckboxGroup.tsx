@@ -1,25 +1,22 @@
-"use client";
-
 import { useTranslations } from "next-intl";
-import { useSearchParams } from "next/navigation";
+import { ProjectFilters } from "@/lib/types";
 import { Checkbox } from "@/components/ui/Checkbox";
 import { CheckboxGroup } from "@/components/ui/CheckboxGroup";
 
 export function ProjectFiltersFormCategoryCheckboxGroup({
+  filters,
   categories,
 }: {
+  filters: ProjectFilters;
   categories: { id: number; name: string }[];
 }) {
   const t = useTranslations("projects.ProjectFiltersFormCategoryCheckboxGroup");
-
-  const searchParams = useSearchParams();
-  const initialValues = searchParams.get("category")?.split(",") || [];
 
   return (
     <CheckboxGroup
       name="category"
       label={t("label")}
-      defaultValue={initialValues}
+      defaultValue={filters.category?.map((id) => id.toString())}
     >
       {categories.map((item) => (
         <Checkbox

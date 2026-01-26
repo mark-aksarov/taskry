@@ -61,7 +61,7 @@ export const NavigationButton = ({
   onPress,
   children,
   className,
-  "data-test": dataTest,
+  ...props
 }: NavigationButtonProps) => {
   if (href) {
     return (
@@ -72,6 +72,7 @@ export const NavigationButton = ({
           isActive,
           className,
         })}
+        {...props}
       >
         {children}
       </Link>
@@ -80,7 +81,7 @@ export const NavigationButton = ({
 
   return (
     <Button
-      data-test={dataTest}
+      {...props}
       onPress={onPress}
       className={styles({ variant, isActive, className })}
     >

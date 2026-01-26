@@ -138,13 +138,13 @@ export function TaskFiltersForm({
 
         <Divider />
 
-        {statusCheckboxGroup}
+        <div>{statusCheckboxGroup}</div>
         <Divider />
-        {categoryCheckboxGroup}
+        <div>{categoryCheckboxGroup}</div>
         <Divider />
-        {projectCheckboxGroup}
+        <div>{projectCheckboxGroup}</div>
         <Divider />
-        {assigneeCheckboxGroup}
+        <div>{assigneeCheckboxGroup}</div>
       </div>
     </Form>
   );

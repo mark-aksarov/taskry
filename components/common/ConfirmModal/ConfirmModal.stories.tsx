@@ -48,7 +48,11 @@ export const Default = {
 
         <ConfirmModalActions>
           <ConfirmModalCancelButton label="Cancel" />
-          <ConfirmModalConfirmButton label="Delete" onConfirm={() => {}} />
+          <ConfirmModalConfirmButton
+            label="Delete"
+            onConfirm={() => {}}
+            data-test="confirm-button"
+          />
         </ConfirmModalActions>
       </>
     ),

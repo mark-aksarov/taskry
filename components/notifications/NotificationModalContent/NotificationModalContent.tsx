@@ -1,3 +1,5 @@
+"use client";
+
 import { NotificationFilter } from "../types";
 import { MarkAllAsReadButton } from "../MarkAllAsReadButton";
 import { DialogBody, DialogFooter } from "@/components/ui/Dialog";

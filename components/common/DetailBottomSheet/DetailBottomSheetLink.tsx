@@ -1,9 +1,12 @@
 import { Button, ButtonProps } from "@/components/ui/Button";
 
-export function DetailBottomSheetLink(props: ButtonProps<"a">) {
+interface DetailBottomSheetLinkProps extends ButtonProps<"a"> {
+  "data-test"?: string;
+}
+
+export function DetailBottomSheetLink(props: DetailBottomSheetLinkProps) {
   return (
     <Button
-      data-test="detail-bottomsheet-link"
       as="a"
       variant="primary"
       size="medium"

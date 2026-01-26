@@ -1,3 +1,5 @@
+import "server-only";
+
 import {
   ProjectFiltersForm,
   ProjectFiltersFormUserCheckboxGroup,
@@ -24,13 +26,23 @@ export async function ProjectFiltersFormContainer({
 
   return (
     <ProjectFiltersForm
-      projectStatusCheckboxGroup={<ProjectFiltersFormStatusCheckboxGroup />}
-      userCheckboxGroup={<ProjectFiltersFormUserCheckboxGroup users={users} />}
+      projectStatusCheckboxGroup={
+        <ProjectFiltersFormStatusCheckboxGroup filters={filters} />
+      }
+      userCheckboxGroup={
+        <ProjectFiltersFormUserCheckboxGroup filters={filters} users={users} />
+      }
       projectCategoryCheckboxGroup={
-        <ProjectFiltersFormCategoryCheckboxGroup categories={categories} />
+        <ProjectFiltersFormCategoryCheckboxGroup
+          filters={filters}
+          categories={categories}
+        />
       }
       customerCheckboxGroup={
-        <ProjectFiltersFormCustomerCheckboxGroup customers={customers} />
+        <ProjectFiltersFormCustomerCheckboxGroup
+          filters={filters}
+          customers={customers}
+        />
       }
       filters={filters}
     />

@@ -39,7 +39,7 @@ export function ProjectCategoryFormBase({
   }
 
   return (
-    <Form id="new-project-category-form" onSubmit={handleSubmit}>
+    <Form onSubmit={handleSubmit}>
       <div className="flex flex-col gap-4">
         {state.status === "error" && (
           <FormErrorText>{state.message}</FormErrorText>

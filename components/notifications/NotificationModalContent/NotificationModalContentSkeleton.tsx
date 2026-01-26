@@ -1,3 +1,5 @@
+"use client";
+
 import { DialogBody } from "@/components/ui/Dialog";
 import { Repeat } from "@/components/common/Repeat";
 import { NotificationList } from "../NotificationList";

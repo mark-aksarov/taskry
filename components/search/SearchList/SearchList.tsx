@@ -1,3 +1,5 @@
+"use client";
+
 import { List } from "@/components/common/List";
 import { Repeat } from "@/components/common/Repeat";
 import { SearchListItemSkeleton } from "../SearchListItem";

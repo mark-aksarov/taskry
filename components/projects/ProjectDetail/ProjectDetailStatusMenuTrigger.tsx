@@ -1,16 +1,13 @@
 "use client";
 
+import { Item } from "react-stately";
 import { useTranslations } from "next-intl";
-import { useOverlayTrigger } from "react-aria";
 import { Button } from "@/components/ui/Button";
 import { DialogHeader } from "@/components/ui/Dialog";
-import { Item, useOverlayTriggerState } from "react-stately";
 import { Check, ChevronDown, CircleEllipsis, Clock } from "lucide-react";
 import { ResponsiveMenuTrigger } from "@/components/common/ResponsiveMenuTrigger";
 
 export function ProjectDetailStatusMenuTrigger() {
-  const state = useOverlayTriggerState({});
-  const { triggerProps } = useOverlayTrigger({ type: "dialog" }, state);
   const t = useTranslations("projects.ProjectDetailStatusMenuTrigger");
 
   return (
@@ -20,7 +17,6 @@ export function ProjectDetailStatusMenuTrigger() {
       )}
       renderButton={() => (
         <Button
-          {...triggerProps}
           variant="outlined"
           label={t("items.active")}
           className="rounded-lg"

@@ -2,9 +2,9 @@
 
 import { tv } from "tailwind-variants";
 import { ChevronRight } from "lucide-react";
+import { Link } from "react-aria-components";
 import { itemStyles } from "@/components/ui/styles";
 import { ListItem, ListItemInfo } from "@/components/common/List";
-import { Link } from "react-aria-components";
 
 const styles = tv({
   base: "w-full cursor-pointer outline-none",

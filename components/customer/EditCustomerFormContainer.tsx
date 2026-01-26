@@ -1,11 +1,11 @@
 "use client";
 
-import useSWR from "swr";
-import { EditCustomerForm } from "./EditCustomerForm";
 import {
   CustomerFormBase,
   CustomerFormBaseCompanySelect,
 } from "./CustomerFormBase";
+
+import useSWR from "swr";
 import { CompanySummaryDTO } from "@/lib/data/company/company.dto";
 import { updateCustomer } from "@/lib/actions/customer/updateCustomer";
 import { CustomerFormDataDTO } from "@/lib/data/customer/customer.dto";

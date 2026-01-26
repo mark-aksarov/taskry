@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "../ui/Button";
 import { TextField } from "../ui/TextField";
 import { useTranslations } from "next-intl";

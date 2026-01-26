@@ -1,3 +1,5 @@
+"use client";
+
 import { Pagination } from "../Pagination";
 import { NotificationModalContentStatus } from "@/components/notifications/NotificationModalContent";
 

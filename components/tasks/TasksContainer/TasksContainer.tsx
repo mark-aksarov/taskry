@@ -1,3 +1,5 @@
+import "server-only";
+
 import { Suspense } from "react";
 import { TaskList } from "../TaskList";
 import { TaskGrid } from "../TaskGrid";

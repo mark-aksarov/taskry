@@ -1,5 +1,3 @@
-"use client";
-
 import { Link, LinkProps } from "@/components/ui/Link";
 
 export function AuthCardFooterLink(props: LinkProps) {

@@ -1,3 +1,5 @@
+import "server-only";
+
 import { notFound } from "next/navigation";
 import { UserDetail } from "../UserDetail";
 import { getUserDetail } from "@/lib/data/user/user.service";

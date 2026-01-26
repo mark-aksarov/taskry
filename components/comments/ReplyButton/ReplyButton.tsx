@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import { Reply } from "lucide-react";
 import { tv } from "tailwind-variants";

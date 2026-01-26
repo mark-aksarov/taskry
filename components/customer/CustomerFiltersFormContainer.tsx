@@ -1,3 +1,5 @@
+import "server-only";
+
 import { CustomerFilters } from "@/lib/types";
 import { CustomerFiltersForm } from "./CustomerFiltersForm";
 import { getCompanySummaries } from "@/lib/data/company/company.service";

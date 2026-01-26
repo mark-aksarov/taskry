@@ -1,3 +1,5 @@
+import "server-only";
+
 import { Suspense } from "react";
 import { Repeat } from "../common/Repeat";
 import { ProjectList } from "./ProjectList";

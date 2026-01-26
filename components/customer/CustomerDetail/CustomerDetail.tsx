@@ -1,12 +1,11 @@
-"use client";
-
 import {
   DetailInfo,
   DetailText,
   DetailTitle,
 } from "@/components/common/Detail";
-import { CustomerDetailLayout } from "./CustomerDetailLayout";
+
 import { useTranslations } from "next-intl";
+import { CustomerDetailLayout } from "./CustomerDetailLayout";
 
 interface CustomerDetailProps {
   fullName: string;

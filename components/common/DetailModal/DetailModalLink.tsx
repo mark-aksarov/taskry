@@ -1,6 +1,10 @@
 import { Button, ButtonProps } from "@/components/ui/Button";
 
-export function DetailModalLink(props: ButtonProps<"a">) {
+interface DetailModalLinkProps extends ButtonProps<"a"> {
+  "data-test"?: string;
+}
+
+export function DetailModalLink(props: DetailModalLinkProps) {
   return (
     <Button
       as="a"

@@ -1,5 +1,3 @@
-"use client";
-
 import { Item } from "react-stately";
 import { useTranslations } from "next-intl";
 import { ResponsiveSelect } from "@/components/common/ResponsiveSelect";

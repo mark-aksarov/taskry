@@ -1,7 +1,6 @@
 import { fn } from "storybook/test";
 import { TaskFormBase } from "./TaskFormBase";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { ProjectStatus } from "@/generated/prisma/enums";
 import { OverlayTriggerStateContext } from "react-aria-components";
 import { TaskFormBaseStatusSelect } from "./TaskFormBaseStatusSelect";
 import { TaskFormBaseProjectSelect } from "./TaskFormBaseProjectSelect";
@@ -36,9 +35,7 @@ export const Default = {
   args: {
     id: "new-task-form",
     formAction: fn(),
-    taskStatusSelect: (
-      <TaskFormBaseStatusSelect projectStatus={ProjectStatus.active} />
-    ),
+    taskStatusSelect: <TaskFormBaseStatusSelect />,
     taskCategorySelect: (
       <TaskFormBaseCategorySelect
         categories={[

@@ -1,3 +1,5 @@
+"use client";
+
 import { DateValue } from "react-aria";
 import { useTranslations } from "next-intl";
 import { ResponsiveDatePicker } from "@/components/common/ResponsiveDatePicker";

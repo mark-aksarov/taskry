@@ -1,20 +1,15 @@
 "use client";
 
-import {
-  TextArea,
-  composeRenderProps,
-  TextField as RACTextField,
-} from "react-aria-components";
-
 import { tv } from "tailwind-variants";
 import { useTranslations } from "next-intl";
 import { focusRing } from "@/components/ui/styles";
 import { fieldStyles } from "@/components/ui/Field";
+import type { TextFieldProps } from "react-aria-components";
 import { useCommentFormContext } from "../CommentFormContext";
 import { CommentTextFieldSendButton } from "./CommentTextFieldSendButton";
 import { CommentTextFieldFileTrigger } from "./CommentTextFieldFileTrigger";
 import { fieldInputStyles as baseInputStyles } from "@/components/ui/TextField";
-import type { TextFieldProps as RACTextFieldProps } from "react-aria-components";
+import { TextArea, composeRenderProps, TextField } from "react-aria-components";
 
 export const fieldInputStyles = tv({
   base: [
@@ -27,7 +22,7 @@ export const fieldInputStyles = tv({
   },
 });
 
-type CommentTextFieldProps = RACTextFieldProps &
+type CommentTextFieldProps = TextFieldProps &
   React.RefAttributes<HTMLDivElement> & {
     isLoading?: boolean;
     textAreaClassName?: string;
@@ -55,7 +50,7 @@ export const CommentTextField = ({
         buttonClasses={buttonClasses}
       />
 
-      <RACTextField
+      <TextField
         {...props}
         id="content"
         name="content"
@@ -72,7 +67,7 @@ export const CommentTextField = ({
               fieldInputStyles({ ...renderProps, className }),
           )}
         />
-      </RACTextField>
+      </TextField>
 
       <CommentTextFieldSendButton
         buttonClasses={buttonClasses}

@@ -1,3 +1,5 @@
+import "server-only";
+
 import {
   TaskFiltersForm,
   TaskFiltersFormStatusCheckboxGroup,
@@ -25,15 +27,23 @@ export async function TaskFiltersFormContainer({
   return (
     <TaskFiltersForm
       assigneeCheckboxGroup={
-        <TaskFiltersFormAssigneeCheckboxGroup users={users} />
+        <TaskFiltersFormAssigneeCheckboxGroup filters={filters} users={users} />
       }
       categoryCheckboxGroup={
-        <TaskFiltersFormCategoryCheckboxGroup categories={categories} />
+        <TaskFiltersFormCategoryCheckboxGroup
+          filters={filters}
+          categories={categories}
+        />
       }
       projectCheckboxGroup={
-        <TaskFiltersFormProjectCheckboxGroup projects={projects} />
+        <TaskFiltersFormProjectCheckboxGroup
+          filters={filters}
+          projects={projects}
+        />
       }
-      statusCheckboxGroup={<TaskFiltersFormStatusCheckboxGroup />}
+      statusCheckboxGroup={
+        <TaskFiltersFormStatusCheckboxGroup filters={filters} />
+      }
       filters={filters}
     />
   );

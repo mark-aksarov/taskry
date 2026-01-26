@@ -1,3 +1,5 @@
+"use client";
+
 import { useTranslations } from "next-intl";
 import { TextField } from "@/components/ui/TextField";
 

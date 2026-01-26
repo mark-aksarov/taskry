@@ -1,5 +1,3 @@
-"use client";
-
 import { ListItem } from "@/components/common/List";
 
 interface TaskListItemLayoutProps {

@@ -13,3 +13,5 @@ export { ToolbarActionsButtonDesktop } from "./ToolbarActionsButtonDesktop";
 export { ToolbarCreateNewMenuTrigger } from "./ToolbarCreateNewMenuTrigger";
 export { ToolbarSortingButtonDesktop } from "./ToolbarSortingButtonDesktop";
 export { ToolbarFiltersModalSubmitButton } from "./ToolbarFiltersModalSubmitButton";
+export { ToolbarFiltersButtonMobile } from "./ToolbarFiltersButtonMobile";
+export { ToolbarFiltersButtonDesktop } from "./ToolbarFiltersButtonDesktop";

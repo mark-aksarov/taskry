@@ -1,5 +1,3 @@
-"use client";
-
 import { twMerge } from "tailwind-merge";
 import { useFormatter } from "next-intl";
 import { NotificationListItemDate } from "./NotificationListItemDate";

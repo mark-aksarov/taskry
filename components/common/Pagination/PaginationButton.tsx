@@ -1,5 +1,3 @@
-"use client";
-
 import { twMerge } from "tailwind-merge";
 import { PaginationSize } from "./Pagination";
 import { Button, ButtonProps } from "@/components/ui/Button";
