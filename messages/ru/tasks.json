@@ -79,7 +79,7 @@
     "cancelButton": "Отмена"
   },
 
-  "BulkDeleteTaskModal": {
+  "DeleteTasksModal": {
     "heading": "Удалить задачи",
     "text": "Вы уверены, что хотите удалить <strong>{count} выбранных задач</strong>? Всё содержимое будет безвозвратно удалено.",
     "deleteButton": "Удалить",

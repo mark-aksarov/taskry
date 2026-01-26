@@ -108,7 +108,7 @@
     "cancelButton": "Отменить"
   },
 
-  "BulkDeleteUserModal": {
+  "DeleteUsersModal": {
     "heading": "Удалить пользователей",
     "text": "Вы уверены, что хотите удалить <strong>{count} выбранных пользователей </strong>? Все содержимое будет безвозвратно удалено.",
     "deleteButton": "Удалить",
