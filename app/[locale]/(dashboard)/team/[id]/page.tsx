@@ -1,6 +1,4 @@
-import { Suspense } from "react";
 import { TeamProfilePage } from "./TeamProfilePage";
-import { UserDetailSkeleton } from "@/components/users/UserDetail";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { UserHeaderContainer } from "@/components/users/UserHeaderContainer";
 import { ProfileDetailContainer } from "@/components/users/ProfileDetailContainer";
@@ -16,11 +14,7 @@ export default async function AppProfilePage({
 
   return (
     <TeamProfilePage
-      profileDetailContainer={
-        <Suspense fallback={<UserDetailSkeleton />}>
-          <ProfileDetailContainer userId={id} />
-        </Suspense>
-      }
+      profileDetailContainer={<ProfileDetailContainer userId={id} />}
       userHeaderContainer={<UserHeaderContainer userId={id} />}
     />
   );

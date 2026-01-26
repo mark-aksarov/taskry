@@ -3,7 +3,6 @@ import {
   TaskCategoryFormBaseSkeleton,
 } from "../TaskCategoryFormBase";
 
-import { Suspense } from "react";
 import { fn } from "storybook/test";
 import { Button } from "@/components/ui/Button";
 import { DialogTrigger } from "react-aria-components";
@@ -19,9 +18,7 @@ const meta = {
     (Story) => (
       <DialogTrigger>
         <Button label="New Task" />
-        <Suspense>
-          <Story />
-        </Suspense>
+        <Story />
       </DialogTrigger>
     ),
     withThemedBackground,

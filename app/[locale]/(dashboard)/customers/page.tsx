@@ -1,5 +1,4 @@
 import { z } from "zod";
-import { Suspense } from "react";
 import { CustomersPage } from "./CustomersPage";
 import { arrayParam } from "@/lib/utils/arrayParam";
 import { CustomersPageEmpty } from "./CustomersPageEmpty";
@@ -9,8 +8,6 @@ import { NewCompanyForm } from "@/components/customer/NewCompanyForm";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { deleteCustomers } from "@/lib/actions/customer/deleteCustomers";
 import { CustomersContainer } from "@/components/customer/CustomersContainer";
-import { CustomerFormBaseSkeleton } from "@/components/customer/CustomerFormBase";
-import { CustomerFiltersFormSkeleton } from "@/components/customer/CustomerFiltersForm";
 import { NewCustomerFormContainer } from "@/components/customer/NewCustomerFormContainer";
 import { CustomerFiltersFormContainer } from "@/components/customer/CustomerFiltersFormContainer";
 import { CustomerToolbarActionsMenuTrigger } from "@/components/customer/CustomerToolbarActionsMenuTrigger";
@@ -64,11 +61,7 @@ export default async function AppCustomersPage({
     <CustomersPage
       customerToolbarCreateNewMenuTrigger={
         <CustomerToolbarCreateNewMenuTrigger
-          newCustomerFormContainer={
-            <Suspense fallback={<CustomerFormBaseSkeleton />}>
-              <NewCustomerFormContainer />
-            </Suspense>
-          }
+          newCustomerFormContainer={<NewCustomerFormContainer />}
           newCompanyForm={<NewCompanyForm formAction={createCompany} />}
         />
       }
@@ -78,9 +71,7 @@ export default async function AppCustomersPage({
       customerToolbarFiltersModalTrigger={
         <CustomerToolbarFiltersModalTrigger
           filtersFormContainer={
-            <Suspense fallback={<CustomerFiltersFormSkeleton />}>
-              <CustomerFiltersFormContainer filters={filters} />
-            </Suspense>
+            <CustomerFiltersFormContainer filters={filters} />
           }
         />
       }

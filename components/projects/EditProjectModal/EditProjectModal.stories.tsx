@@ -1,4 +1,3 @@
-import { Suspense } from "react";
 import { Button } from "@/components/ui/Button";
 import { EditProjectModal } from "./EditProjectModal";
 import { DialogTrigger } from "react-aria-components";
@@ -15,9 +14,7 @@ const meta = {
     (Story) => (
       <DialogTrigger>
         <Button label="New project" />
-        <Suspense>
-          <Story />
-        </Suspense>
+        <Story />
       </DialogTrigger>
     ),
     withThemedBackground,

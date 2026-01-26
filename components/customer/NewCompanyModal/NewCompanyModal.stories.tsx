@@ -1,4 +1,3 @@
-import { Suspense } from "react";
 import { Button } from "@/components/ui/Button";
 import { NewCompanyForm } from "../NewCompanyForm";
 import { NewCompanyModal } from "./NewCompanyModal";
@@ -16,9 +15,7 @@ const meta = {
     (Story) => (
       <DialogTrigger>
         <Button label="New company" />
-        <Suspense>
-          <Story />
-        </Suspense>
+        <Story />
       </DialogTrigger>
     ),
     withThemedBackground,

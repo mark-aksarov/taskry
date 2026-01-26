@@ -1,17 +1,34 @@
 "use client";
 
 import useSWR from "swr";
+import { Suspense } from "react";
 import { useTranslations } from "next-intl";
 import { UserDetail } from "./UserDetail/UserDetail";
-import { PersonHeader } from "../common/PersonHeader";
 import { UserDetailDTO } from "@/lib/data/user/user.dto";
+import { UserDetailSkeleton } from "./UserDetail/UserDetailSkeleton";
+import { PersonHeader, PersonHeaderSkeleton } from "../common/PersonHeader";
 import { PersonDetailPresentation } from "../common/PersonDetailPresentation";
 
 interface UserDetailContainerProps {
   userId: string;
 }
 
-export function UserDetailContainer({ userId }: UserDetailContainerProps) {
+export function UserDetailContainer(props: UserDetailContainerProps) {
+  return (
+    <Suspense
+      fallback={
+        <PersonDetailPresentation
+          personHeader={<PersonHeaderSkeleton />}
+          userDetail={<UserDetailSkeleton />}
+        />
+      }
+    >
+      <UserDetailContainerInner {...props} />
+    </Suspense>
+  );
+}
+
+function UserDetailContainerInner({ userId }: UserDetailContainerProps) {
   const t = useTranslations("users.UserDetailContainer");
 
   const { data: user } = useSWR<UserDetailDTO>(`/api/users/${userId}`, {

@@ -1,4 +1,3 @@
-import { Suspense } from "react";
 import { SearchModal } from "./SearchModal";
 import { SearchField } from "../SearchField";
 import { fn } from "storybook/internal/test";
@@ -24,9 +23,7 @@ const meta = {
     (Story) => (
       <DialogTrigger>
         <Button label="New project" />
-        <Suspense>
-          <Story />
-        </Suspense>
+        <Story />
       </DialogTrigger>
     ),
     withThemedBackground,

@@ -6,13 +6,32 @@ import {
 } from "@/components/comments/CommentItem";
 
 import useSWR from "swr";
+import { Suspense } from "react";
 import { Repeat } from "../common/Repeat";
 import { CommentListItemDTO } from "@/lib/data/comment/comment.dto";
 import { deleteComment } from "@/lib/actions/comment/deleteComment";
 import { CommentItemActionMenuTrigger } from "../comments/CommentItem";
 import { CommentsEmptySection } from "@/components/comments/CommentsEmptySection";
 
-export function ProjectCommentsContainer({ projectId }: { projectId: number }) {
+interface ProjectCommentsContainerProps {
+  projectId: number;
+}
+
+export function ProjectCommentsContainer(props: ProjectCommentsContainerProps) {
+  return (
+    <Suspense
+      fallback={
+        <Repeat items={10} renderItem={() => <CommentItemSkeleton />} />
+      }
+    >
+      <ProjectCommentsContainerInner {...props} />
+    </Suspense>
+  );
+}
+
+function ProjectCommentsContainerInner({
+  projectId,
+}: ProjectCommentsContainerProps) {
   const {
     data: comments,
     error,

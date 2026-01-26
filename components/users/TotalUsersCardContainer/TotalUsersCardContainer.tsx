@@ -1,9 +1,18 @@
 import "server-only";
 
-import { TotalUsersCard } from "../TotalUsersCard";
+import { Suspense } from "react";
 import { getUserCount } from "@/lib/data/user/user.dal";
+import { TotalUsersCard, TotalUsersCardSkeleton } from "../TotalUsersCard";
 
-export const TotalUsersCardContainer = async () => {
+export const TotalUsersCardContainer = () => {
+  return (
+    <Suspense fallback={<TotalUsersCardSkeleton />}>
+      <TotalUsersCardContainerInner />
+    </Suspense>
+  );
+};
+
+const TotalUsersCardContainerInner = async () => {
   const totalUsers = await getUserCount();
 
   return <TotalUsersCard totalUsers={totalUsers} />;

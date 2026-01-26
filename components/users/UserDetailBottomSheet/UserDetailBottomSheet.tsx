@@ -11,12 +11,8 @@ import {
   DetailBottomSheetDialog,
 } from "@/components/common/DetailBottomSheet";
 
-import { Suspense } from "react";
 import { useTranslations } from "next-intl";
 import { DetailModalLink } from "@/components/common/DetailModal";
-import { UserDetailSkeleton } from "@/components/users/UserDetail";
-import { PersonHeaderSkeleton } from "@/components/common/PersonHeader";
-import { PersonDetailPresentation } from "@/components/common/PersonDetailPresentation";
 
 export interface UserDetailBottomSheetProps {
   userId: string;
@@ -36,18 +32,7 @@ export function UserDetailBottomSheet({
           <DialogHeading>{t("dialogHeading")}</DialogHeading>
           <DialogCloseButton />
         </DialogHeader>
-        <DialogBody>
-          <Suspense
-            fallback={
-              <PersonDetailPresentation
-                personHeader={<PersonHeaderSkeleton />}
-                userDetail={<UserDetailSkeleton />}
-              />
-            }
-          >
-            {userDetailContainer}
-          </Suspense>
-        </DialogBody>
+        <DialogBody>{userDetailContainer}</DialogBody>
         <DialogFooter>
           <DetailModalLink
             label={t("openInFullPage")}

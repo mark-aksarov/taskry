@@ -2,12 +2,14 @@ import "server-only";
 
 import {
   ProjectFiltersForm,
+  ProjectFiltersFormSkeleton,
   ProjectFiltersFormUserCheckboxGroup,
   ProjectFiltersFormStatusCheckboxGroup,
   ProjectFiltersFormCategoryCheckboxGroup,
   ProjectFiltersFormCustomerCheckboxGroup,
 } from "../ProjectFiltersForm";
 
+import { Suspense } from "react";
 import { ProjectFilters } from "@/lib/types";
 import { getUserSummaries } from "@/lib/data/user/user.service";
 import { getCustomerSummaries } from "@/lib/data/customer/customer.service";
@@ -17,7 +19,17 @@ interface ProjectFiltersFormContainerProps {
   filters: ProjectFilters;
 }
 
-export async function ProjectFiltersFormContainer({
+export function ProjectFiltersFormContainer(
+  props: ProjectFiltersFormContainerProps,
+) {
+  return (
+    <Suspense fallback={<ProjectFiltersFormSkeleton />}>
+      <ProjectFiltersFormContainerInner {...props} />
+    </Suspense>
+  );
+}
+
+async function ProjectFiltersFormContainerInner({
   filters,
 }: ProjectFiltersFormContainerProps) {
   const categories = await getProjectCategorySummaries();

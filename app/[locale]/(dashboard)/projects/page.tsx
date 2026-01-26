@@ -1,5 +1,4 @@
 import { z } from "zod";
-import { Suspense } from "react";
 import { ProjectsPage } from "./ProjectsPage";
 import { arrayParam } from "@/lib/utils/arrayParam";
 import { ProjectsPageEmpty } from "./ProjectsPageEmpty";
@@ -8,9 +7,7 @@ import { getProjectCount } from "@/lib/data/project/project.dal";
 import { deleteProjects } from "@/lib/actions/project/deleteProjects";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { ProjectsContainer } from "@/components/projects/ProjectsContainer";
-import { ProjectFormBaseSkeleton } from "@/components/projects/ProjectFormBase";
 import { updateProjectStatuses } from "@/lib/actions/project/updateProjectStatuses";
-import { ProjectFiltersFormSkeleton } from "@/components/projects/ProjectFiltersForm";
 import { ProjectCategoryFormBase } from "@/components/projects/ProjectCategoryFormBase";
 import { NewProjectFormContainer } from "@/components/projects/NewProjectFormContainer";
 import { createProjectCategory } from "@/lib/actions/projectCategory/createProjectCategory";
@@ -58,11 +55,7 @@ export default async function AppProjectsPage({
   if (!projectCount) {
     return (
       <ProjectsPageEmpty
-        newProjectFormContainer={
-          <Suspense fallback={<ProjectFormBaseSkeleton />}>
-            <NewProjectFormContainer />
-          </Suspense>
-        }
+        newProjectFormContainer={<NewProjectFormContainer />}
       />
     );
   }
@@ -79,11 +72,7 @@ export default async function AppProjectsPage({
       }
       projectToolbarCreateNewMenuTrigger={
         <ProjectToolbarCreateNewMenuTrigger
-          newProjectFormContainer={
-            <Suspense fallback={<ProjectFormBaseSkeleton />}>
-              <NewProjectFormContainer />
-            </Suspense>
-          }
+          newProjectFormContainer={<NewProjectFormContainer />}
           newProjectCategoryForm={
             <ProjectCategoryFormBase formAction={createProjectCategory} />
           }
@@ -92,9 +81,7 @@ export default async function AppProjectsPage({
       projectToolbarFiltersModalTrigger={
         <ProjectToolbarFiltersModalTrigger
           filtersFormContainer={
-            <Suspense fallback={<ProjectFiltersFormSkeleton />}>
-              <ProjectFiltersFormContainer filters={filters} />
-            </Suspense>
+            <ProjectFiltersFormContainer filters={filters} />
           }
         />
       }

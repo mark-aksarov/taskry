@@ -1,14 +1,24 @@
 "use client";
 
 import useSWR from "swr";
-import { TaskDetailDTO } from "@/lib/data/task/task.dto";
+import { Suspense } from "react";
 import { TaskDetail } from "./TaskDetail/TaskDetail";
+import { TaskDetailDTO } from "@/lib/data/task/task.dto";
+import { TaskDetailSkeleton } from "./TaskDetail/TaskDetailSkeleton";
 
 interface TaskDetailContainerProps {
   taskId: number;
 }
 
-export function TaskDetailContainer({ taskId }: TaskDetailContainerProps) {
+export function TaskDetailContainer(props: TaskDetailContainerProps) {
+  return (
+    <Suspense fallback={<TaskDetailSkeleton />}>
+      <TaskDetailContainerInner {...props} />
+    </Suspense>
+  );
+}
+
+function TaskDetailContainerInner({ taskId }: TaskDetailContainerProps) {
   const { data: task } = useSWR<TaskDetailDTO>(`/api/tasks/${taskId}`, {
     suspense: true,
   });

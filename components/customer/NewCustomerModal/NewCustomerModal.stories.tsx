@@ -3,7 +3,6 @@ import {
   CustomerFormBaseSkeleton,
 } from "../CustomerFormBase";
 
-import { Suspense } from "react";
 import { Button } from "@/components/ui/Button";
 import { DialogTrigger } from "react-aria-components";
 import { NewCustomerModal } from "./NewCustomerModal";
@@ -19,9 +18,7 @@ const meta = {
     (Story) => (
       <DialogTrigger>
         <Button label="New project" />
-        <Suspense>
-          <Story />
-        </Suspense>
+        <Story />
       </DialogTrigger>
     ),
     withThemedBackground,

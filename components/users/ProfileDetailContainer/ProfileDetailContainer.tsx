@@ -1,10 +1,25 @@
 import "server-only";
 
+import { Suspense } from "react";
 import { notFound } from "next/navigation";
-import { UserDetail } from "../UserDetail";
 import { getUserDetail } from "@/lib/data/user/user.service";
+import { UserDetail, UserDetailSkeleton } from "../UserDetail";
 
-export async function ProfileDetailContainer({ userId }: { userId: string }) {
+interface ProfileDetailContainerProps {
+  userId: string;
+}
+
+export function ProfileDetailContainer(props: ProfileDetailContainerProps) {
+  return (
+    <Suspense fallback={<UserDetailSkeleton />}>
+      <ProfileDetailContainerInner {...props} />
+    </Suspense>
+  );
+}
+
+async function ProfileDetailContainerInner({
+  userId,
+}: ProfileDetailContainerProps) {
   const user = await getUserDetail(userId);
 
   if (!user) {

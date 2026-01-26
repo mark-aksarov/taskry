@@ -3,7 +3,6 @@ import {
   ProjectCategoryFormBaseSkeleton,
 } from "../ProjectCategoryFormBase";
 
-import { Suspense } from "react";
 import { fn } from "storybook/internal/test";
 import { Button } from "@/components/ui/Button";
 import { DialogTrigger } from "react-aria-components";
@@ -19,9 +18,7 @@ const meta = {
     (Story) => (
       <DialogTrigger>
         <Button label="New project" />
-        <Suspense>
-          <Story />
-        </Suspense>
+        <Story />
       </DialogTrigger>
     ),
     withThemedBackground,

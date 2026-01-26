@@ -1,11 +1,9 @@
 import { z } from "zod";
-import { Suspense } from "react";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import { getTaskCount } from "@/lib/data/task/task.dal";
 import { deleteTasks } from "@/lib/actions/task/deleteTasks";
 import { ProfileTasksPageEmpty } from "./ProfileTasksPageEmpty";
-import { TaskFormBaseSkeleton } from "@/components/tasks/TaskFormBase";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { UserTasksContainer } from "@/components/users/UserTasksContainer";
 import { updateTaskStatuses } from "@/lib/actions/task/updateTaskStatuses";
@@ -47,11 +45,7 @@ export default async function AppProfileTasksPage({
     return (
       <ProfileTasksPageEmpty
         userId={userId}
-        newTaskFormContainer={
-          <Suspense fallback={<TaskFormBaseSkeleton />}>
-            <NewTaskFormContainer />
-          </Suspense>
-        }
+        newTaskFormContainer={<NewTaskFormContainer />}
         userHeaderContainer={<UserHeaderContainer userId={userId} />}
       />
     );

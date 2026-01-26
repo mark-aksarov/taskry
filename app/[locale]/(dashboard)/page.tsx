@@ -1,15 +1,9 @@
 import { z } from "zod";
-import { Suspense } from "react";
 import { DashboardPage } from "./DashboardPage";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
-import { AssignedTasksSkeleton } from "@/components/tasks/AssignedTasks";
-import { TotalTasksCardSkeleton } from "@/components/tasks/TotalTasksCard";
-import { TotalUsersCardSkeleton } from "@/components/users/TotalUsersCard";
 import { AssignedTasksContainer } from "@/components/tasks/AssignedTasksContainer";
-import { TotalProjectsCardSkeleton } from "@/components/projects/TotalProjectsCard";
 import { TotalTasksCardContainer } from "@/components/tasks/TotalTasksCardContainer";
 import { TotalUsersCardContainer } from "@/components/users/TotalUsersCardContainer";
-import { TotalCustomersCardSkeleton } from "@/components/customer/TotalCustomersCard";
 import { TotalProjectsCardContainer } from "@/components/projects/TotalProjectsCardContainer";
 import { TotalCustomersCardContainer } from "@/components/customer/TotalCustomersCardContainer";
 
@@ -32,30 +26,12 @@ export default async function AppDashboardPage({
 
   return (
     <DashboardPage
-      totalProjectsCardContainer={
-        <Suspense fallback={<TotalProjectsCardSkeleton />}>
-          <TotalProjectsCardContainer />
-        </Suspense>
-      }
-      totalTasksCardContainer={
-        <Suspense fallback={<TotalTasksCardSkeleton />}>
-          <TotalTasksCardContainer />
-        </Suspense>
-      }
-      totalUsersCardContainer={
-        <Suspense fallback={<TotalUsersCardSkeleton />}>
-          <TotalUsersCardContainer />
-        </Suspense>
-      }
-      totalCustomersCardContainer={
-        <Suspense fallback={<TotalCustomersCardSkeleton />}>
-          <TotalCustomersCardContainer />
-        </Suspense>
-      }
+      totalProjectsCardContainer={<TotalProjectsCardContainer />}
+      totalTasksCardContainer={<TotalTasksCardContainer />}
+      totalUsersCardContainer={<TotalUsersCardContainer />}
+      totalCustomersCardContainer={<TotalCustomersCardContainer />}
       assignedTasksContainer={
-        <Suspense fallback={<AssignedTasksSkeleton />}>
-          <AssignedTasksContainer page={page} pageSize={pageSize} />
-        </Suspense>
+        <AssignedTasksContainer page={page} pageSize={pageSize} />
       }
     />
   );

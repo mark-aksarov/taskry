@@ -1,20 +1,12 @@
 import "server-only";
 
-import { Suspense } from "react";
-import { Repeat } from "../common/Repeat";
 import { ProjectList } from "./ProjectList";
 import { ProjectGrid } from "./ProjectGrid";
 import { ProjectFilters } from "@/lib/types";
 import { ProjectListItem } from "./ProjectListItem";
 import { ProjectGridItem } from "./ProjectGridItem";
-import { ProjectDetailSkeleton } from "./ProjectDetail";
-import { UserDetailSkeleton } from "../users/UserDetail";
-import { ProjectStatus } from "@/generated/prisma/enums";
 import { ProjectDetailModal } from "./ProjectDetailModal";
 import { UserDetailModal } from "../users/UserDetailModal";
-import { ProjectFormBaseSkeleton } from "./ProjectFormBase";
-import { PersonHeaderSkeleton } from "../common/PersonHeader";
-import { CommentItemSkeleton } from "../comments/CommentItem";
 import { sendComment } from "@/lib/actions/comment/sendComment";
 import { ProjectDetailContainer } from "./ProjectDetailContainer";
 import { UserDetailContainer } from "../users/UserDetailContainer";
@@ -27,126 +19,8 @@ import { ProjectCommentsContainer } from "./ProjectCommentsContainer";
 import { UserDetailBottomSheet } from "../users/UserDetailBottomSheet";
 import { ProjectCommentsModalTrigger } from "./ProjectCommentsModalTrigger";
 import { ProjectItemActionMenuTrigger } from "./ProjectItemActionMenuTrigger";
-import { PersonDetailPresentation } from "../common/PersonDetailPresentation";
 import { updateProjectStatuses } from "@/lib/actions/project/updateProjectStatuses";
 import { EntityContainerPresentation } from "../common/EntityContainerPresentation";
-
-interface ProjectItemActionMenuTriggerSlotProps {
-  projectId: number;
-  projectTitle: string;
-  projectStatus: ProjectStatus;
-  className?: string;
-}
-
-function ProjectItemActionMenuTriggerSlot({
-  projectId,
-  projectTitle,
-  projectStatus,
-  className,
-}: ProjectItemActionMenuTriggerSlotProps) {
-  return (
-    <ProjectItemActionMenuTrigger
-      projectId={projectId}
-      projectTitle={projectTitle}
-      projectStatus={projectStatus}
-      deleteAction={deleteProjects}
-      updateStatusAction={updateProjectStatuses}
-      editProjectFormContainer={
-        <Suspense fallback={<ProjectFormBaseSkeleton />}>
-          <EditProjectFormContainer projectId={projectId} />
-        </Suspense>
-      }
-      className={className}
-    />
-  );
-}
-
-interface ProjectCommentsModalTriggerSlotProps {
-  projectId: number;
-  commentsCount: number;
-}
-
-function ProjectCommentsModalTriggerSlot({
-  projectId,
-  commentsCount,
-}: ProjectCommentsModalTriggerSlotProps) {
-  return (
-    <ProjectCommentsModalTrigger
-      projectId={projectId}
-      commentsCount={commentsCount}
-      projectCommentsContainer={
-        <Suspense
-          fallback={
-            <Repeat items={10} renderItem={() => <CommentItemSkeleton />} />
-          }
-        >
-          <ProjectCommentsContainer projectId={projectId} />
-        </Suspense>
-      }
-      sendCommentAction={sendComment}
-      updateCommentAction={updateComment}
-    />
-  );
-}
-
-function ProjectDetailModalSlot({ projectId }: { projectId: number }) {
-  return (
-    <ProjectDetailModal
-      projectId={projectId}
-      projectDetailContainer={
-        <Suspense fallback={<ProjectDetailSkeleton />}>
-          <ProjectDetailContainer projectId={projectId} />
-        </Suspense>
-      }
-    />
-  );
-}
-
-function ProjectDetailBottomSheetSlot({ projectId }: { projectId: number }) {
-  return (
-    <ProjectDetailBottomSheet
-      projectId={projectId}
-      projectDetailContainer={
-        <Suspense fallback={<ProjectDetailSkeleton />}>
-          <ProjectDetailContainer projectId={projectId} />
-        </Suspense>
-      }
-    />
-  );
-}
-
-function UserDetailSlotContent({ userId }: { userId: string }) {
-  return (
-    <Suspense
-      fallback={
-        <PersonDetailPresentation
-          personHeader={<PersonHeaderSkeleton />}
-          userDetail={<UserDetailSkeleton />}
-        />
-      }
-    >
-      <UserDetailContainer userId={userId} />
-    </Suspense>
-  );
-}
-
-function UserDetailModalSlot({ userId }: { userId: string }) {
-  return (
-    <UserDetailModal
-      userId={userId}
-      userDetailContainer={<UserDetailSlotContent userId={userId} />}
-    />
-  );
-}
-
-function UserDetailBottomSheetSlot({ userId }: { userId: string }) {
-  return (
-    <UserDetailBottomSheet
-      userId={userId}
-      userDetailContainer={<UserDetailSlotContent userId={userId} />}
-    />
-  );
-}
 
 interface ProjectsContainerProps {
   page: number;
@@ -193,27 +67,52 @@ export async function ProjectsContainer({
                 company={project.customer?.company}
                 category={project.category}
                 menuTrigger={
-                  <ProjectItemActionMenuTriggerSlot
+                  <ProjectItemActionMenuTrigger
                     projectId={project.id}
                     projectTitle={project.title}
                     projectStatus={project.status}
+                    deleteAction={deleteProjects}
+                    updateStatusAction={updateProjectStatuses}
+                    editProjectFormContainer={
+                      <EditProjectFormContainer projectId={project.id} />
+                    }
                   />
                 }
                 commentModalTrigger={
-                  <ProjectCommentsModalTriggerSlot
+                  <ProjectCommentsModalTrigger
                     projectId={project.id}
                     commentsCount={project.commentsCount}
+                    projectCommentsContainer={
+                      <ProjectCommentsContainer projectId={project.id} />
+                    }
+                    sendCommentAction={sendComment}
+                    updateCommentAction={updateComment}
                   />
                 }
                 projectDetailModal={
-                  <ProjectDetailModalSlot projectId={project.id} />
+                  <ProjectDetailModal
+                    projectId={project.id}
+                    projectDetailContainer={
+                      <ProjectDetailContainer projectId={project.id} />
+                    }
+                  />
                 }
                 projectDetailBottomSheet={
-                  <ProjectDetailBottomSheetSlot projectId={project.id} />
+                  <ProjectDetailBottomSheet
+                    projectId={project.id}
+                    projectDetailContainer={
+                      <ProjectDetailContainer projectId={project.id} />
+                    }
+                  />
                 }
                 userDetailModal={
                   project.creator && (
-                    <UserDetailModalSlot userId={project.creator.id} />
+                    <UserDetailModal
+                      userId={project.creator.id}
+                      userDetailContainer={
+                        <UserDetailContainer userId={project.creator.id} />
+                      }
+                    />
                   )
                 }
                 {...commonProps}
@@ -240,33 +139,63 @@ export async function ProjectsContainer({
                 tasksTotal={project.tasks.total}
                 tasksCompleted={project.tasks.completed}
                 menuTrigger={
-                  <ProjectItemActionMenuTriggerSlot
+                  <ProjectItemActionMenuTrigger
                     projectId={project.id}
                     projectTitle={project.title}
                     projectStatus={project.status}
+                    deleteAction={deleteProjects}
+                    updateStatusAction={updateProjectStatuses}
+                    editProjectFormContainer={
+                      <EditProjectFormContainer projectId={project.id} />
+                    }
                     className="-mr-2"
                   />
                 }
                 commentModalTrigger={
-                  <ProjectCommentsModalTriggerSlot
+                  <ProjectCommentsModalTrigger
                     projectId={project.id}
                     commentsCount={project.commentsCount}
+                    projectCommentsContainer={
+                      <ProjectCommentsContainer projectId={project.id} />
+                    }
+                    sendCommentAction={sendComment}
+                    updateCommentAction={updateComment}
                   />
                 }
                 projectDetailModal={
-                  <ProjectDetailModalSlot projectId={project.id} />
+                  <ProjectDetailModal
+                    projectId={project.id}
+                    projectDetailContainer={
+                      <ProjectDetailContainer projectId={project.id} />
+                    }
+                  />
                 }
                 projectDetailBottomSheet={
-                  <ProjectDetailBottomSheetSlot projectId={project.id} />
+                  <ProjectDetailBottomSheet
+                    projectId={project.id}
+                    projectDetailContainer={
+                      <ProjectDetailContainer projectId={project.id} />
+                    }
+                  />
                 }
                 userDetailModal={
                   project.creator && (
-                    <UserDetailModalSlot userId={project.creator.id} />
+                    <UserDetailModal
+                      userId={project.creator.id}
+                      userDetailContainer={
+                        <UserDetailContainer userId={project.creator.id} />
+                      }
+                    />
                   )
                 }
                 userDetailBottomSheet={
                   project.creator && (
-                    <UserDetailBottomSheetSlot userId={project.creator.id} />
+                    <UserDetailBottomSheet
+                      userId={project.creator.id}
+                      userDetailContainer={
+                        <UserDetailContainer userId={project.creator.id} />
+                      }
+                    />
                   )
                 }
                 {...commonProps}

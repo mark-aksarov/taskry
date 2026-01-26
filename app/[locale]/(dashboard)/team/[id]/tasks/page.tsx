@@ -1,8 +1,6 @@
 import { z } from "zod";
-import { Suspense } from "react";
 import { getTaskCount } from "@/lib/data/task/task.dal";
 import { deleteTasks } from "@/lib/actions/task/deleteTasks";
-import { TaskFormBaseSkeleton } from "@/components/tasks/TaskFormBase";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { TeamProfileTasksPageEmpty } from "./TeamProfileTasksPageEmpty";
 import { updateTaskStatuses } from "@/lib/actions/task/updateTaskStatuses";
@@ -43,11 +41,7 @@ export default async function AppProfileTasksPage({
     return (
       <TeamProfileTasksPageEmpty
         userId={id}
-        newTaskFormContainer={
-          <Suspense fallback={<TaskFormBaseSkeleton />}>
-            <NewTaskFormContainer />
-          </Suspense>
-        }
+        newTaskFormContainer={<NewTaskFormContainer />}
         userHeaderContainer={<UserHeaderContainer userId={id} />}
       />
     );

@@ -2,19 +2,33 @@
 
 import {
   CustomerFormBase,
+  CustomerFormBaseSkeleton,
   CustomerFormBaseCompanySelect,
 } from "./CustomerFormBase";
 
 import useSWR from "swr";
+import { Suspense } from "react";
 import { CompanySummaryDTO } from "@/lib/data/company/company.dto";
 import { updateCustomer } from "@/lib/actions/customer/updateCustomer";
 import { CustomerFormDataDTO } from "@/lib/data/customer/customer.dto";
 
-export function EditCustomerFormContainer({
-  customerId,
-}: {
+interface EditCustomerFormContainerProps {
   customerId: number;
-}) {
+}
+
+export function EditCustomerFormContainer(
+  props: EditCustomerFormContainerProps,
+) {
+  return (
+    <Suspense fallback={<CustomerFormBaseSkeleton />}>
+      <EditCustomerFormContainerInner {...props} />
+    </Suspense>
+  );
+}
+
+function EditCustomerFormContainerInner({
+  customerId,
+}: EditCustomerFormContainerProps) {
   const { data: companies } = useSWR<CompanySummaryDTO[]>(`/api/companies`, {
     suspense: true,
   });

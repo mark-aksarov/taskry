@@ -1,7 +1,12 @@
 import "server-only";
 
+import {
+  CustomerFiltersForm,
+  CustomerFiltersFormSkeleton,
+} from "./CustomerFiltersForm";
+
+import { Suspense } from "react";
 import { CustomerFilters } from "@/lib/types";
-import { CustomerFiltersForm } from "./CustomerFiltersForm";
 import { getCompanySummaries } from "@/lib/data/company/company.service";
 import { CustomerFiltersFormCompanyCheckboxGroup } from "./CustomerFiltersForm";
 
@@ -9,7 +14,17 @@ interface CustomerFiltersFormContainerProps {
   filters: CustomerFilters;
 }
 
-export async function CustomerFiltersFormContainer({
+export function CustomerFiltersFormContainer(
+  props: CustomerFiltersFormContainerProps,
+) {
+  return (
+    <Suspense fallback={<CustomerFiltersFormSkeleton />}>
+      <CustomerFiltersFormContainerInner {...props} />
+    </Suspense>
+  );
+}
+
+async function CustomerFiltersFormContainerInner({
   filters,
 }: CustomerFiltersFormContainerProps) {
   const companies = await getCompanySummaries();

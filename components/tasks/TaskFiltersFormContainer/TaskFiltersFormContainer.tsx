@@ -6,8 +6,10 @@ import {
   TaskFiltersFormProjectCheckboxGroup,
   TaskFiltersFormCategoryCheckboxGroup,
   TaskFiltersFormAssigneeCheckboxGroup,
+  TaskFiltersFormSkeleton,
 } from "../TaskFiltersForm";
 
+import { Suspense } from "react";
 import { TaskFilters } from "@/lib/types";
 import { getUserSummaries } from "@/lib/data/user/user.service";
 import { getProjectSummaries } from "@/lib/data/project/project.service";
@@ -17,7 +19,15 @@ interface TaskFiltersFormContainerProps {
   filters: TaskFilters;
 }
 
-export async function TaskFiltersFormContainer({
+export function TaskFiltersFormContainer(props: TaskFiltersFormContainerProps) {
+  return (
+    <Suspense fallback={<TaskFiltersFormSkeleton />}>
+      <TaskFiltersFormContainerInner {...props} />
+    </Suspense>
+  );
+}
+
+async function TaskFiltersFormContainerInner({
   filters,
 }: TaskFiltersFormContainerProps) {
   const categories = await getTaskCategorySummaries();

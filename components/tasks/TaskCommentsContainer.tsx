@@ -6,13 +6,30 @@ import {
 } from "@/components/comments/CommentItem";
 
 import useSWR from "swr";
+import { Suspense } from "react";
 import { Repeat } from "@/components/common/Repeat";
 import { CommentListItemDTO } from "@/lib/data/comment/comment.dto";
 import { deleteComment } from "@/lib/actions/comment/deleteComment";
 import { CommentItemActionMenuTrigger } from "../comments/CommentItem";
 import { CommentsEmptySection } from "@/components/comments/CommentsEmptySection";
 
-export function TaskCommentsContainer({ taskId }: { taskId: number }) {
+interface TaskCommentsContainerProps {
+  taskId: number;
+}
+
+export function TaskCommentsContainer(props: TaskCommentsContainerProps) {
+  return (
+    <Suspense
+      fallback={
+        <Repeat items={10} renderItem={() => <CommentItemSkeleton />} />
+      }
+    >
+      <TaskCommentsContainerInner {...props} />
+    </Suspense>
+  );
+}
+
+function TaskCommentsContainerInner({ taskId }: { taskId: number }) {
   const {
     data: comments,
     error,

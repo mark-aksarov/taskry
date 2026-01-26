@@ -26,7 +26,7 @@ export function TaskToolbarFiltersModalTrigger({
 
       <ToolbarFiltersModal>
         <ToolbarFiltersModalDialog>
-          <DialogHeader>title={t("title")}</DialogHeader>
+          <DialogHeader>{t("title")}</DialogHeader>
           <DialogBody>{filtersFormContainer}</DialogBody>
           <DialogFooter>
             <ToolbarFiltersModalSubmitButton form="task-filter-form" />

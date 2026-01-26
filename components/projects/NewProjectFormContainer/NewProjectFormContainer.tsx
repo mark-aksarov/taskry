@@ -4,14 +4,24 @@ import {
   ProjectFormBaseStatusSelect,
   ProjectFormBaseCategorySelect,
   ProjectFormBaseCustomerSelect,
+  ProjectFormBaseSkeleton,
 } from "../ProjectFormBase";
 
 import { ProjectFormBase } from "../ProjectFormBase";
 import { createProject } from "@/lib/actions/project/createProject";
 import { getCustomerSummaries } from "@/lib/data/customer/customer.service";
 import { getProjectCategorySummaries } from "@/lib/data/projectCategory/projectCategory.service";
+import { Suspense } from "react";
 
-export async function NewProjectFormContainer() {
+export function NewProjectFormContainer() {
+  return (
+    <Suspense fallback={<ProjectFormBaseSkeleton />}>
+      <NewProjectFormContainerInner />
+    </Suspense>
+  );
+}
+
+async function NewProjectFormContainerInner() {
   const categories = await getProjectCategorySummaries();
   const customers = await getCustomerSummaries();
 

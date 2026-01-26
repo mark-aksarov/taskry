@@ -26,7 +26,7 @@ export function UserToolbarFiltersModalTrigger({
 
       <ToolbarFiltersModal>
         <ToolbarFiltersModalDialog>
-          <DialogHeader>title={t("title")}</DialogHeader>
+          <DialogHeader>{t("title")}</DialogHeader>
           <DialogBody>{filtersFormContainer}</DialogBody>
           <DialogFooter>
             <ToolbarFiltersModalSubmitButton form="user-toolbar-filters-modal-submit-button" />

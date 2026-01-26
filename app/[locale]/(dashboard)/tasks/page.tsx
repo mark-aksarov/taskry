@@ -1,5 +1,4 @@
 import { z } from "zod";
-import { Suspense } from "react";
 import { TasksPage } from "./TasksPage";
 import { TasksPageEmpty } from "./TasksPageEmpty";
 import { arrayParam } from "@/lib/utils/arrayParam";
@@ -7,10 +6,8 @@ import { TaskStatus } from "@/generated/prisma/enums";
 import { getTaskCount } from "@/lib/data/task/task.dal";
 import { deleteTasks } from "@/lib/actions/task/deleteTasks";
 import { TasksContainer } from "@/components/tasks/TasksContainer";
-import { TaskFormBaseSkeleton } from "@/components/tasks/TaskFormBase";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { updateTaskStatuses } from "@/lib/actions/task/updateTaskStatuses";
-import { TaskFiltersFormSkeleton } from "@/components/tasks/TaskFiltersForm";
 import { NewTaskFormContainer } from "@/components/tasks/NewTaskFormContainer";
 import { TaskCategoryFormBase } from "@/components/tasks/TaskCategoryFormBase";
 import { createTaskCategory } from "@/lib/actions/taskCategory/createTaskCategory";
@@ -53,15 +50,7 @@ export default async function AppTasksPage({
   const taskCount = await getTaskCount();
 
   if (!taskCount) {
-    return (
-      <TasksPageEmpty
-        newTaskFormContainer={
-          <Suspense fallback={<TaskFormBaseSkeleton />}>
-            <NewTaskFormContainer />
-          </Suspense>
-        }
-      />
-    );
+    return <TasksPageEmpty newTaskFormContainer={<NewTaskFormContainer />} />;
   }
 
   return (
@@ -74,11 +63,7 @@ export default async function AppTasksPage({
       }
       taskToolbarCreateNewMenuTrigger={
         <TaskToolbarCreateNewMenuTrigger
-          newTaskFormContainer={
-            <Suspense fallback={<TaskFormBaseSkeleton />}>
-              <NewTaskFormContainer />
-            </Suspense>
-          }
+          newTaskFormContainer={<NewTaskFormContainer />}
           newTaskCategoryForm={
             <TaskCategoryFormBase formAction={createTaskCategory} />
           }
@@ -86,11 +71,7 @@ export default async function AppTasksPage({
       }
       taskToolbarFiltersModalTrigger={
         <TaskToolbarFiltersModalTrigger
-          filtersFormContainer={
-            <Suspense fallback={<TaskFiltersFormSkeleton />}>
-              <TaskFiltersFormContainer filters={filters} />
-            </Suspense>
-          }
+          filtersFormContainer={<TaskFiltersFormContainer filters={filters} />}
         />
       }
       tasksContainer={

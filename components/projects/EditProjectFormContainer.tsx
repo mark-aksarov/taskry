@@ -1,20 +1,36 @@
 "use client";
 
 import {
+  ProjectFormBase,
+  ProjectFormBaseSkeleton,
   ProjectFormBaseStatusSelect,
   ProjectFormBaseCategorySelect,
   ProjectFormBaseCustomerSelect,
-  ProjectFormBase,
 } from "./ProjectFormBase";
 
 import useSWR from "swr";
+import { Suspense } from "react";
 import { CalendarDate } from "@internationalized/date";
 import { updateProject } from "@/lib/actions/project/updateProject";
 import { ProjectFormDataDTO } from "@/lib/data/project/project.dto";
 import { CustomerSummaryDTO } from "@/lib/data/customer/customer.dto";
 import { ProjectCategorySummaryDTO } from "@/lib/data/projectCategory/projectCategory.dto";
 
-export function EditProjectFormContainer({ projectId }: { projectId: number }) {
+interface EditProjectFormContainerProps {
+  projectId: number;
+}
+
+export function EditProjectFormContainer(props: EditProjectFormContainerProps) {
+  return (
+    <Suspense fallback={<ProjectFormBaseSkeleton />}>
+      <EditProjectFormContainerInner {...props} />
+    </Suspense>
+  );
+}
+
+function EditProjectFormContainerInner({
+  projectId,
+}: EditProjectFormContainerProps) {
   const { data: categories } = useSWR<ProjectCategorySummaryDTO[]>(
     `/api/project-categories`,
     { suspense: true },

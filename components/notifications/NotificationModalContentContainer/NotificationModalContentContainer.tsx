@@ -10,23 +10,30 @@ import {
   NotificationListItemActionMenuTrigger,
 } from "../NotificationListItem";
 
+import {
+  NotificationModalContent,
+  NotificationModalContentSkeleton,
+} from "../NotificationModalContent";
+
 import useSWR from "swr";
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import { NotificationFilter } from "../types";
 import { NotificationList } from "../NotificationList";
-import { NotificationModalContent } from "../NotificationModalContent";
+import { useHasGuestMode } from "@/lib/hooks/useHasGuestMode";
 import { NotificationEmptySection } from "../NotificationEmptySection";
 import { NotificationsDTO } from "@/lib/data/notification/notification.dto";
 import { deleteNotification } from "@/lib/actions/notification/deleteNotification";
 import { markNotificationsAsRead } from "@/lib/actions/notification/markNotificationsAsRead";
 
-interface NotificationModalContentContainerProps {
-  guestMode?: boolean;
+export function NotificationModalContentContainer() {
+  return (
+    <Suspense fallback={<NotificationModalContentSkeleton />}>
+      <NotificationModalContentContainerInner />
+    </Suspense>
+  );
 }
 
-export function NotificationModalContentContainer({
-  guestMode,
-}: NotificationModalContentContainerProps) {
+function NotificationModalContentContainerInner() {
   const [page, setPage] = useState(1);
   const [filter, setFilter] = useState<NotificationFilter>("all");
   const pageSize = 10;
@@ -46,6 +53,8 @@ export function NotificationModalContentContainer({
 
   const countForPagination = filter === "unread" ? unreadCount : totalCount;
   const totalPages = Math.ceil(countForPagination / pageSize);
+
+  const guestMode = useHasGuestMode();
 
   return (
     <NotificationModalContent

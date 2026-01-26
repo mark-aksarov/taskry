@@ -1,17 +1,37 @@
 "use client";
 
+import {
+  PersonHeader,
+  PersonHeaderSkeleton,
+} from "@/components/common/PersonHeader";
+
 import useSWR from "swr";
+import { Suspense } from "react";
 import { useTranslations } from "next-intl";
-import { CustomerDetail } from "./CustomerDetail";
-import { PersonHeader } from "@/components/common/PersonHeader";
 import { CustomerDetailDTO } from "@/lib/data/customer/customer.dto";
+import { CustomerDetail, CustomerDetailSkeleton } from "./CustomerDetail";
 import { PersonDetailPresentation } from "../common/PersonDetailPresentation";
 
 interface CustomerDetailContainerProps {
   customerId: number;
 }
 
-export function CustomerDetailContainer({
+export function CustomerDetailContainer(props: CustomerDetailContainerProps) {
+  return (
+    <Suspense
+      fallback={
+        <PersonDetailPresentation
+          personHeader={<PersonHeaderSkeleton />}
+          userDetail={<CustomerDetailSkeleton />}
+        />
+      }
+    >
+      <CustomerDetailContainerInner {...props} />
+    </Suspense>
+  );
+}
+
+function CustomerDetailContainerInner({
   customerId,
 }: CustomerDetailContainerProps) {
   const t = useTranslations("customers.CustomerDetailContainer");

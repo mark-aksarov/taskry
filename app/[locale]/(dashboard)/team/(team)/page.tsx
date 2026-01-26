@@ -1,5 +1,4 @@
 import { z } from "zod";
-import { Suspense } from "react";
 import { UsersPage } from "./UsersPage";
 import { UsersPageEmpty } from "./UsersPageEmpty";
 import { arrayParam } from "@/lib/utils/arrayParam";
@@ -8,7 +7,6 @@ import { deleteUsers } from "@/lib/actions/user/deleteUsers";
 import { UsersContainer } from "@/components/users/UsersContainer";
 import { createPosition } from "@/lib/actions/position/createPosition";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
-import { UserFiltersFormSkeleton } from "@/components/users/UserFiltersForm";
 import { NewPositionForm } from "@/components/users/NewPositionForm/NewPositionForm";
 import { UserFiltersFormContainer } from "@/components/users/UserFiltersFormContainer";
 import { UserToolbarActionsMenuTrigger } from "@/components/users/UserToolbarActionsMenuTrigger";
@@ -56,11 +54,7 @@ export default async function AppUsersPage({
     <UsersPage
       userToolbarFiltersModalTrigger={
         <UserToolbarFiltersModalTrigger
-          filtersFormContainer={
-            <Suspense fallback={<UserFiltersFormSkeleton />}>
-              <UserFiltersFormContainer filters={filters} />
-            </Suspense>
-          }
+          filtersFormContainer={<UserFiltersFormContainer filters={filters} />}
         />
       }
       userToolbarActionsMenuTrigger={

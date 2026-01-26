@@ -2,6 +2,7 @@
 
 import {
   TaskFormBase,
+  TaskFormBaseSkeleton,
   TaskFormBaseStatusSelect,
   TaskFormBaseProjectSelect,
   TaskFormBaseAssigneeSelect,
@@ -9,6 +10,7 @@ import {
 } from "./TaskFormBase";
 
 import useSWR from "swr";
+import { Suspense } from "react";
 import { CalendarDate } from "@internationalized/date";
 import { UserSummaryDTO } from "@/lib/data/user/user.dto";
 import { updateTask } from "@/lib/actions/task/updateTask";
@@ -16,7 +18,19 @@ import { TaskFormDataDTO } from "@/lib/data/task/task.dto";
 import { ProjectSummaryDTO } from "@/lib/data/project/project.dto";
 import { TaskCategorySummaryDTO } from "@/lib/data/taskCategory/taskCategory.dto";
 
-export function EditTaskFormContainer({ taskId }: { taskId: number }) {
+interface EditTaskFormContainerProps {
+  taskId: number;
+}
+
+export function EditTaskFormContainer(props: EditTaskFormContainerProps) {
+  return (
+    <Suspense fallback={<TaskFormBaseSkeleton />}>
+      <EditTaskFormContainerInner {...props} />
+    </Suspense>
+  );
+}
+
+function EditTaskFormContainerInner({ taskId }: EditTaskFormContainerProps) {
   const { data: categories } = useSWR<TaskCategorySummaryDTO[]>(
     `/api/task-categories`,
     { suspense: true },

@@ -1,10 +1,8 @@
-import { Suspense } from "react";
 import DashboardTemplate from "./DashboardTemplate";
 import { SearchModal } from "@/components/search/SearchModal";
 import { UsersSearchContainer } from "@/components/search/UsersSearchContainer";
 import { TasksSearchContainer } from "@/components/search/TasksSearchContainer";
 import { ProjectsSearchContainer } from "@/components/search/ProjectsSearchContainer";
-import { NotificationModalContentSkeleton } from "@/components/notifications/NotificationModalContent";
 import { NotificationModalContentContainer } from "@/components/notifications/NotificationModalContentContainer";
 
 interface DashboardTemplateProps {
@@ -16,11 +14,7 @@ export default async function AppDashboardTemplate({
 }: DashboardTemplateProps) {
   return (
     <DashboardTemplate
-      notificationModalContentContainer={
-        <Suspense fallback={<NotificationModalContentSkeleton />}>
-          <NotificationModalContentContainer />
-        </Suspense>
-      }
+      notificationModalContentContainer={<NotificationModalContentContainer />}
       searchModal={
         <SearchModal
           usersSearchContainer={<UsersSearchContainer />}
