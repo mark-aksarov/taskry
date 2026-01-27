@@ -118,10 +118,16 @@
     "openInFullPage": "Open in Full Page"
   },
 
-  "CustomerFiltersForm": {
-    "hasNoActiveProjects": "Has no active projects",
-    "hasActiveProjects": "Has active projects",
-    "hasOverdueProjects": "Has overdue projects"
+  "CustomerFiltersFormNoActiveProjectsSwitch": {
+    "text": "Has no active projects"
+  },
+
+  "CustomerFiltersFormActiveProjectsSwitch": {
+    "text": "Has active projects"
+  },
+
+  "CustomerFiltersFormOverdueProjectsSwitch": {
+    "text": "Has overdue projects"
   },
 
   "CustomerFiltersFormCompanyCheckboxGroup": {

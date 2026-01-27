@@ -1,16 +1,14 @@
-export type DeadlineQuickFilter = "today" | "tomorrow" | "thisWeek" | "overdue";
 import { ProjectStatus, TaskStatus } from "@/generated/prisma/enums";
 
 export interface ProjectFilters {
   query?: string;
+  noActiveTasks?: boolean;
   status?: ProjectStatus[];
   category?: number[];
   customer?: number[];
   user?: string[];
-  deadline?: DeadlineQuickFilter;
-  dateStart?: string;
-  dateEnd?: string;
-  noActiveTasks?: boolean;
+  deadlineFrom?: Date;
+  deadlineTo?: Date;
 }
 
 export interface TaskFilters {
@@ -20,9 +18,8 @@ export interface TaskFilters {
   category?: number[];
   project?: number[];
   assignee?: string[];
-  deadline?: DeadlineQuickFilter;
-  dateStart?: string;
-  dateEnd?: string;
+  deadlineFrom?: Date;
+  deadlineTo?: Date;
 }
 
 export interface UserFilters {
@@ -37,5 +34,5 @@ export interface CustomerFilters {
   hasNoActiveProjects?: boolean;
   hasActiveProjects?: boolean;
   hasOverdueProjects?: boolean;
-  company: number[];
+  company?: number[];
 }

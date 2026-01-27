@@ -119,21 +119,16 @@
     "openInFullPage": "Открыть на полной странице"
   },
 
-  "TaskFiltersForm": {
-    "showOnlyAssignedSwitchText": "Только мои задачи"
+  "TaskFiltersFormOnlyMyTaskSwitch": {
+    "text": "Только мои задачи"
   },
 
-  "TaskFiltersFormDeadlineCheckboxGroup": {
-    "label": "Срок",
-    "today": "Сегодня",
-    "tomorrow": "Завтра",
-    "thisWeek": "На этой неделе",
-    "overdue": "Просрочено"
+  "TaskFiltersFormDeadlineFromDatePicker": {
+    "label": "Срок от"
   },
 
-  "TaskFiltersFormDeadlineRange": {
-    "label": "Диапазон срока",
-    "labelTo": "Диапазон срока до"
+  "TaskFiltersFormDeadlineToDatePicker": {
+    "label": "Срок до"
   },
 
   "TaskFiltersFormStatusCheckboxGroup": {

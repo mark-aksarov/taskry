@@ -16,7 +16,7 @@ import { getCustomerSummaries } from "@/lib/data/customer/customer.service";
 import { getProjectCategorySummaries } from "@/lib/data/projectCategory/projectCategory.service";
 
 interface ProjectFiltersFormContainerProps {
-  filters: ProjectFilters;
+  filters?: ProjectFilters;
 }
 
 export function ProjectFiltersFormContainer(

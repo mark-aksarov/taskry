@@ -1,7 +1,13 @@
+import {
+  arraySearchParam,
+  booleanSearchParam,
+  pageSearchParam,
+  pageSizeSearchParam,
+} from "@/lib/schemas/base";
+
 import { z } from "zod";
 import { UsersPage } from "./UsersPage";
 import { UsersPageEmpty } from "./UsersPageEmpty";
-import { arrayParam } from "@/lib/utils/arrayParam";
 import { getUserCount } from "@/lib/data/user/user.dal";
 import { deleteUsers } from "@/lib/actions/user/deleteUsers";
 import { UsersContainer } from "@/components/users/UsersContainer";
@@ -14,22 +20,13 @@ import { UserToolbarFiltersModalTrigger } from "@/components/users/UserToolbarFi
 import { UserToolbarCreateNewMenuTrigger } from "@/components/users/UserToolbarCreateNewMenuTrigger";
 
 const searchParamsSchema = z.object({
-  page: z.coerce.number().int().positive().catch(1),
-  pageSize: z.coerce.number().int().min(1).max(100).catch(20),
+  page: pageSearchParam,
+  pageSize: pageSizeSearchParam,
+  hasNoActiveTasks: booleanSearchParam,
+  hasActiveTasks: booleanSearchParam,
+  hasOverdueTasks: booleanSearchParam,
   sort: z.enum(["fullName", "position"]).catch("fullName"),
-  hasNoActiveTasks: z
-    .preprocess((val) => val === "true", z.boolean())
-    .optional()
-    .catch(undefined),
-  hasActiveTasks: z
-    .preprocess((val) => val === "true", z.boolean())
-    .optional()
-    .catch(undefined),
-  hasOverdueTasks: z
-    .preprocess((val) => val === "true", z.boolean())
-    .optional()
-    .catch(undefined),
-  position: arrayParam(z.coerce.number()).catch([]),
+  position: arraySearchParam(z.coerce.number()),
 });
 
 export default async function AppUsersPage({

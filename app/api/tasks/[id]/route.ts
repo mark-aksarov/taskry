@@ -1,5 +1,6 @@
 import z from "zod";
 import { NextResponse, NextRequest } from "next/server";
+import { coercedPositiveInt } from "@/lib/schemas/base";
 import { getTaskDetail } from "@/lib/data/task/task.service";
 import { getTaskFormData } from "@/lib/data/task/task.service";
 import { withAuthRouteHandler } from "@/lib/utils/withAuthRouteHandler";
@@ -12,7 +13,7 @@ export async function GET(
     // Validation
     const data = await params;
     const schema = z.object({
-      id: z.coerce.number().int().positive(),
+      id: coercedPositiveInt,
     });
 
     const parse = schema.safeParse({ id: data.id });

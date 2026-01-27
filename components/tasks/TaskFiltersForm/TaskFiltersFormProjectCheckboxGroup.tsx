@@ -9,16 +9,18 @@ export function TaskFiltersFormProjectCheckboxGroup({
   filters,
   projects,
 }: {
-  filters: TaskFilters;
+  filters?: TaskFilters;
   projects: { id: number; title: string }[];
 }) {
   const t = useTranslations("tasks.TaskFiltersFormProjectCheckboxGroup");
+
+  const defaultValue = filters?.project?.map((id) => id.toString());
 
   return (
     <CheckboxGroup
       label={t("label")}
       name="project"
-      defaultValue={filters.project?.map((id) => id.toString())}
+      defaultValue={defaultValue}
     >
       {projects.map((item) => (
         <Checkbox

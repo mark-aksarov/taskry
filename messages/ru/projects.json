@@ -97,25 +97,20 @@
     }
   },
 
-  "ProjectFiltersForm": {
-    "switchText": "Не имеет активных задач"
+  "ProjectFiltersFormNoActiveTasksSwitch": {
+    "text": "Не имеет активных задач"
   },
 
-  "ProjectFiltersFormDeadlineCheckboxGroup": {
-    "label": "Срок",
-    "today": "Сегодня",
-    "tomorrow": "Завтра",
-    "thisWeek": "На этой неделе",
-    "overdue": "Просрочено"
+  "ProjectFiltersFormDeadlineFromDatePicker": {
+    "label": "Срок от"
+  },
+
+  "ProjectFiltersFormDeadlineToDatePicker": {
+    "label": "Срок до"
   },
 
   "ProjectFiltersFormStatusCheckboxGroup": {
     "label": "Статус"
-  },
-
-  "ProjectFiltersFormDeadlineRange": {
-    "label": "Диапазон срока",
-    "labelTo": "Диапазон срока до"
   },
 
   "ProjectFiltersFormCategoryCheckboxGroup": {

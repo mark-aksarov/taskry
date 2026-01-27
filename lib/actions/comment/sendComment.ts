@@ -1,35 +1,15 @@
 "use server";
 
-import z from "zod";
 import { ActionState } from "../types";
+import { revalidatePath } from "next/cache";
 import { getTranslations } from "next-intl/server";
+import { commentSchema } from "@/lib/schemas/comment";
 import { withAuthAction } from "../utils/withAuthAction";
 import { createComment } from "@/lib/data/comment/comment.dal";
 import { validateActionInput } from "../utils/validateActionInput";
 import { actionError, actionSuccess } from "../utils/actionResult";
-import { revalidatePath } from "next/cache";
 
-const schema = z.object({
-  content: z.string().min(1).max(1000),
-  taskId: z.preprocess(
-    (val) =>
-      val === "" || val === undefined || val === null ? undefined : val,
-    z.coerce.number().optional(),
-  ),
-  projectId: z.preprocess(
-    (val) =>
-      val === "" || val === undefined || val === null ? undefined : val,
-    z.coerce.number().optional(),
-  ),
-
-  /*attachments: z
-    .array(
-      z.object({
-        fileName: z.string().min(1).max(255),
-      }),
-    )
-    .optional(),*/
-});
+const schema = commentSchema.omit({ id: true });
 
 export async function sendComment(
   _prevState: ActionState,

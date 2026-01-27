@@ -1,6 +1,13 @@
+import {
+  pageSearchParam,
+  dateSearchParam,
+  arraySearchParam,
+  booleanSearchParam,
+  pageSizeSearchParam,
+} from "@/lib/schemas/base";
+
 import { z } from "zod";
 import { ProjectsPage } from "./ProjectsPage";
-import { arrayParam } from "@/lib/utils/arrayParam";
 import { ProjectsPageEmpty } from "./ProjectsPageEmpty";
 import { ProjectStatus } from "@/generated/prisma/enums";
 import { getProjectCount } from "@/lib/data/project/project.dal";
@@ -17,23 +24,16 @@ import { ProjectToolbarFiltersModalTrigger } from "@/components/projects/Project
 import { ProjectToolbarCreateNewMenuTrigger } from "@/components/projects/ProjectToolbarCreateNewMenuTrigger";
 
 const searchParamsSchema = z.object({
-  page: z.coerce.number().int().positive().catch(1),
-  pageSize: z.coerce.number().int().min(1).max(100).catch(20),
+  page: pageSearchParam,
+  pageSize: pageSizeSearchParam,
+  deadlineFrom: dateSearchParam,
+  deadlineTo: dateSearchParam,
+  noActiveTasks: booleanSearchParam,
   sort: z.enum(["title", "deadline", "status", "category"]).catch("title"),
-  status: arrayParam(z.enum(ProjectStatus)).catch([]),
-  category: arrayParam(z.coerce.number()).catch([]),
-  customer: arrayParam(z.coerce.number()).catch([]),
-  user: arrayParam(z.string()).catch([]),
-  deadline: z
-    .enum(["today", "tomorrow", "thisWeek", "overdue"])
-    .optional()
-    .catch(undefined),
-  dateStart: z.string().optional().catch(undefined),
-  dateEnd: z.string().optional().catch(undefined),
-  noActiveTasks: z
-    .preprocess((val) => val === "true", z.boolean())
-    .optional()
-    .catch(undefined),
+  status: arraySearchParam(z.enum(ProjectStatus)),
+  category: arraySearchParam(z.coerce.number()),
+  customer: arraySearchParam(z.coerce.number()),
+  user: arraySearchParam(z.string()),
 });
 
 export default async function AppProjectsPage({

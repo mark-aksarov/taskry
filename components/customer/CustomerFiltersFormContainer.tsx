@@ -11,7 +11,7 @@ import { getCompanySummaries } from "@/lib/data/company/company.service";
 import { CustomerFiltersFormCompanyCheckboxGroup } from "./CustomerFiltersForm";
 
 interface CustomerFiltersFormContainerProps {
-  filters: CustomerFilters;
+  filters?: CustomerFilters;
 }
 
 export function CustomerFiltersFormContainer(

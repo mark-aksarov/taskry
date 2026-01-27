@@ -112,21 +112,16 @@
     "openInFullPage": "Open in Full Page"
   },
 
-  "TaskFiltersForm": {
-    "showOnlyAssignedSwitchText": "Show only my tasks"
+  "TaskFiltersFormOnlyMyTaskSwitch": {
+    "text": "Show only my tasks"
   },
 
-  "TaskFiltersFormDeadlineCheckboxGroup": {
-    "label": "Deadline",
-    "today": "Today",
-    "tomorrow": "Tomorrow",
-    "thisWeek": "This week",
-    "overdue": "Overdue"
+  "TaskFiltersFormDeadlineFromDatePicker": {
+    "label": "Deadline from"
   },
 
-  "TaskFiltersFormDeadlineRange": {
-    "label": "Deadline range",
-    "labelTo": "Deadline range to"
+  "TaskFiltersFormDeadlineToDatePicker": {
+    "label": "Deadline to"
   },
 
   "TaskFiltersFormStatusCheckboxGroup": {

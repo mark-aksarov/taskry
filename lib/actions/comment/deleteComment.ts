@@ -1,17 +1,15 @@
 "use server";
 
-import z from "zod";
 import { ActionState } from "../types";
 import { revalidatePath } from "next/cache";
 import { getTranslations } from "next-intl/server";
+import { commentSchema } from "@/lib/schemas/comment";
 import { withAuthAction } from "../utils/withAuthAction";
 import { validateActionInput } from "../utils/validateActionInput";
 import { actionError, actionSuccess } from "../utils/actionResult";
 import { deleteComment as deleteCommentQuery } from "@/lib/data/comment/comment.dal";
 
-const schema = z.object({
-  id: z.coerce.number().int().positive(),
-});
+const schema = commentSchema.pick({ id: true });
 
 export async function deleteComment(
   _prevState: ActionState,

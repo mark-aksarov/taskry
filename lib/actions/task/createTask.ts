@@ -1,24 +1,15 @@
 "use server";
 
-import z from "zod";
 import { ActionState } from "../types";
 import { revalidatePath } from "next/cache";
+import { taskSchema } from "@/lib/schemas/task";
 import { getTranslations } from "next-intl/server";
-import { TaskStatus } from "@/generated/prisma/enums";
 import { withAuthAction } from "../utils/withAuthAction";
 import { validateActionInput } from "../utils/validateActionInput";
 import { actionError, actionSuccess } from "../utils/actionResult";
 import { createTask as createTaskQuery } from "@/lib/data/task/task.dal";
 
-const schema = z.object({
-  title: z.string().min(1).max(255),
-  description: z.string().max(5000).optional(),
-  deadline: z.coerce.date(),
-  status: z.enum(TaskStatus),
-  categoryId: z.coerce.number(),
-  projectId: z.coerce.number(),
-  assigneeId: z.coerce.string().optional(),
-});
+const schema = taskSchema.omit({ id: true });
 
 export async function createTask(
   _prevState: ActionState,

@@ -1,10 +1,11 @@
 import z from "zod";
 import { NextRequest, NextResponse } from "next/server";
+import { coercedPositiveInt } from "@/lib/schemas/base";
 import { withAuthRouteHandler } from "@/lib/utils/withAuthRouteHandler";
 import { getCustomerDetail } from "@/lib/data/customer/customer.service";
 import { getCustomerFormData } from "@/lib/data/customer/customer.service";
 
-const schema = z.object({ id: z.coerce.number().int().positive() });
+const schema = z.object({ id: coercedPositiveInt });
 
 export async function GET(
   req: NextRequest,

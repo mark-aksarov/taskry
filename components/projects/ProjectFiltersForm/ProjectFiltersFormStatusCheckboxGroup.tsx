@@ -8,17 +8,15 @@ import { CheckboxGroup } from "@/components/ui/CheckboxGroup";
 export function ProjectFiltersFormStatusCheckboxGroup({
   filters,
 }: {
-  filters: ProjectFilters;
+  filters?: ProjectFilters;
 }) {
   const t = useTranslations("projects.ProjectFiltersFormStatusCheckboxGroup");
   const tStatus = useTranslations("projects.ProjectStatus");
 
+  const defaultValue = filters?.status?.map((id) => id.toString());
+
   return (
-    <CheckboxGroup
-      name="status"
-      label={t("label")}
-      defaultValue={filters.status?.map((id) => id.toString())}
-    >
+    <CheckboxGroup name="status" label={t("label")} defaultValue={defaultValue}>
       <Checkbox
         data-test="pending-checkbox"
         key="pending"

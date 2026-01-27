@@ -9,7 +9,6 @@ import prisma from "@/lib/prisma";
 import { auth } from "@/lib/auth";
 import { TaskFilters } from "@/lib/types";
 import { AccessDeniedError } from "../utils/error";
-import { buildDateWhere } from "../utils/dateWhere";
 import { verifySession } from "../utils/verifySession";
 import { Prisma, TaskStatus } from "@/generated/prisma/client";
 import { UpdateTaskInputDTO, CreateTaskInputDTO } from "./task.dto";
@@ -369,12 +368,6 @@ export function buildTaskWhereClause(
 ): Prisma.TaskWhereInput {
   if (!filters) return { workspaceId };
 
-  const datesWhere = buildDateWhere({
-    quick: filters.deadline,
-    dateStart: filters.dateStart,
-    dateEnd: filters.dateEnd,
-  });
-
   return {
     workspaceId,
 
@@ -389,6 +382,9 @@ export function buildTaskWhereClause(
     ...(filters.category?.length && { categoryId: { in: filters.category } }),
     ...(filters.project?.length && { projectId: { in: filters.project } }),
     ...(filters.assignee?.length && { assigneeId: { in: filters.assignee } }),
-    ...(datesWhere && { deadline: datesWhere }),
+    deadline: {
+      ...(filters.deadlineFrom && { gte: filters.deadlineFrom }),
+      ...(filters.deadlineTo && { lte: filters.deadlineTo }),
+    },
   };
 }

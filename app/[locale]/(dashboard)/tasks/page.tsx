@@ -1,7 +1,14 @@
+import {
+  pageSearchParam,
+  dateSearchParam,
+  arraySearchParam,
+  booleanSearchParam,
+  pageSizeSearchParam,
+} from "@/lib/schemas/base";
+
 import { z } from "zod";
 import { TasksPage } from "./TasksPage";
 import { TasksPageEmpty } from "./TasksPageEmpty";
-import { arrayParam } from "@/lib/utils/arrayParam";
 import { TaskStatus } from "@/generated/prisma/enums";
 import { getTaskCount } from "@/lib/data/task/task.dal";
 import { deleteTasks } from "@/lib/actions/task/deleteTasks";
@@ -17,23 +24,16 @@ import { TaskToolbarFiltersModalTrigger } from "@/components/tasks/TaskToolbarFi
 import { TaskToolbarCreateNewMenuTrigger } from "@/components/tasks/TaskToolbarCreateNewMenuTrigger";
 
 const searchParamsSchema = z.object({
-  onlyMyTasks: z
-    .preprocess((val) => val === "true", z.boolean())
-    .optional()
-    .catch(undefined),
-  page: z.coerce.number().int().positive().catch(1),
-  pageSize: z.coerce.number().int().min(1).max(100).catch(20),
+  page: pageSearchParam,
+  pageSize: pageSizeSearchParam,
+  deadlineFrom: dateSearchParam,
+  deadlineTo: dateSearchParam,
+  onlyMyTasks: booleanSearchParam,
   sort: z.enum(["title", "deadline", "status", "category"]).catch("title"),
-  status: arrayParam(z.enum(TaskStatus)).catch([]),
-  category: arrayParam(z.coerce.number()).catch([]),
-  project: arrayParam(z.coerce.number()).catch([]),
-  assignee: arrayParam(z.string()).catch([]),
-  deadline: z
-    .enum(["today", "tomorrow", "thisWeek", "overdue"])
-    .optional()
-    .catch(undefined),
-  dateStart: z.string().optional().catch(undefined),
-  dateEnd: z.string().optional().catch(undefined),
+  status: arraySearchParam(z.enum(TaskStatus)),
+  category: arraySearchParam(z.coerce.number()),
+  project: arraySearchParam(z.coerce.number()),
+  assignee: arraySearchParam(z.string()),
 });
 
 export default async function AppTasksPage({

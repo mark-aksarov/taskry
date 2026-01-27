@@ -4,7 +4,7 @@ import { Checkbox } from "@/components/ui/Checkbox";
 import { CheckboxGroup } from "@/components/ui/CheckboxGroup";
 
 interface CustomerFiltersFormCompanyCheckboxGroupProps {
-  filters: CustomerFilters;
+  filters?: CustomerFilters;
   companies: { id: number; name: string }[];
 }
 
@@ -16,11 +16,13 @@ export function CustomerFiltersFormCompanyCheckboxGroup({
     "customers.CustomerFiltersFormCompanyCheckboxGroup",
   );
 
+  const defaultValue = filters?.company?.map((id) => id.toString());
+
   return (
     <CheckboxGroup
       name="company"
       label={t("label")}
-      defaultValue={filters.company.map((id) => id.toString())}
+      defaultValue={defaultValue}
     >
       {companies.map((customer) => (
         <Checkbox

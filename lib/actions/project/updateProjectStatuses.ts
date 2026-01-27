@@ -4,15 +4,17 @@ import z from "zod";
 import { ActionState } from "../types";
 import { revalidatePath } from "next/cache";
 import { getTranslations } from "next-intl/server";
+import { coercedPositiveInt } from "@/lib/schemas/base";
 import { ProjectStatus } from "@/generated/prisma/enums";
 import { withAuthAction } from "../utils/withAuthAction";
+import { projectStatusParam } from "@/lib/schemas/project";
 import { validateActionInput } from "../utils/validateActionInput";
 import { actionError, actionSuccess } from "../utils/actionResult";
 import { updateProjects as updateProjectsQuery } from "@/lib/data/project/project.dal";
 
 const schema = z.object({
-  ids: z.array(z.coerce.number().int().positive()).min(1),
-  nextStatus: z.enum(ProjectStatus),
+  ids: z.array(coercedPositiveInt).min(1),
+  nextStatus: projectStatusParam,
 });
 
 export async function updateProjectStatuses(

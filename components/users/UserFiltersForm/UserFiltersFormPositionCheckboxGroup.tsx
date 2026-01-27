@@ -4,7 +4,7 @@ import { Checkbox } from "@/components/ui/Checkbox";
 import { CheckboxGroup } from "@/components/ui/CheckboxGroup";
 
 interface UserFiltersFormPositionCheckboxGroupProps {
-  filters: UserFilters;
+  filters?: UserFilters;
   positions: { id: number; name: string }[];
 }
 
@@ -14,13 +14,13 @@ export function UserFiltersFormPositionCheckboxGroup({
 }: UserFiltersFormPositionCheckboxGroupProps) {
   const t = useTranslations("users.UserFiltersFormPositionCheckboxGroup");
 
+  const defaultValue = filters?.position?.map((id) => id.toString());
+
   return (
     <CheckboxGroup
       name="position"
       label={t("label")}
-      defaultValue={
-        filters.position && filters.position.map((p) => p.toString())
-      }
+      defaultValue={defaultValue}
     >
       {positions.map((item) => (
         <Checkbox

@@ -11,7 +11,7 @@ import { UserFilters } from "@/lib/types";
 import { getPositionSummaries } from "@/lib/data/position/position.service";
 
 interface UserFiltersFormContainerProps {
-  filters: UserFilters;
+  filters?: UserFilters;
 }
 
 export function UserFiltersFormContainer(props: UserFiltersFormContainerProps) {

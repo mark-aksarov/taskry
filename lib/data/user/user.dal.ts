@@ -111,34 +111,39 @@ export function buildUserWhereClause(
   workspaceId: number,
   filters?: UserFilters,
 ): Prisma.UserWhereInput {
-  if (!filters) return { workspaceId };
+  const taskFilters: Prisma.UserWhereInput[] = [];
 
-  return {
-    workspaceId,
-
-    ...(filters.query && {
-      OR: [
-        { fullName: { contains: filters.query, mode: "insensitive" as const } },
-      ],
-    }),
-
-    ...(filters.hasNoActiveTasks && {
+  if (filters?.hasNoActiveTasks) {
+    taskFilters.push({
       assignedTasks: { none: { status: TaskStatus.active } },
-    }),
+    });
+  }
 
-    ...(filters.hasActiveTasks && {
+  if (filters?.hasActiveTasks) {
+    taskFilters.push({
       assignedTasks: { some: { status: TaskStatus.active } },
-    }),
+    });
+  }
 
-    ...(filters.hasOverdueTasks && {
+  if (filters?.hasOverdueTasks) {
+    taskFilters.push({
       assignedTasks: {
         some: {
           status: { not: TaskStatus.completed },
           deadline: { lt: new Date() },
         },
       },
-    }),
+    });
+  }
 
-    ...(filters.position?.length && { positionId: { in: filters.position } }),
+  return {
+    workspaceId,
+    ...(filters?.query && {
+      OR: [
+        { fullName: { contains: filters.query, mode: "insensitive" as const } },
+      ],
+    }),
+    ...(filters?.position?.length && { positionId: { in: filters.position } }),
+    ...(taskFilters.length > 0 && { OR: taskFilters }),
   };
 }

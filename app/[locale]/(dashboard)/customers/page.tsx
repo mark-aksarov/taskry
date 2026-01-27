@@ -1,6 +1,13 @@
+import {
+  dateSearchParam,
+  pageSearchParam,
+  arraySearchParam,
+  booleanSearchParam,
+  pageSizeSearchParam,
+} from "@/lib/schemas/base";
+
 import { z } from "zod";
 import { CustomersPage } from "./CustomersPage";
-import { arrayParam } from "@/lib/utils/arrayParam";
 import { CustomersPageEmpty } from "./CustomersPageEmpty";
 import { createCompany } from "@/lib/actions/company/createCompany";
 import { getCustomerCount } from "@/lib/data/customer/customer.dal";
@@ -15,22 +22,15 @@ import { CustomerToolbarFiltersModalTrigger } from "@/components/customer/Custom
 import { CustomerToolbarCreateNewMenuTrigger } from "@/components/customer/CustomerToolbarCreateNewMenuTrigger";
 
 const searchParamsSchema = z.object({
-  page: z.coerce.number().int().positive().catch(1),
-  pageSize: z.coerce.number().int().min(1).max(100).catch(20),
+  page: pageSearchParam,
+  pageSize: pageSizeSearchParam,
+  deadlineFrom: dateSearchParam,
+  deadlineTo: dateSearchParam,
   sort: z.enum(["fullName", "company"]).catch("fullName"),
-  hasNoActiveProjects: z
-    .preprocess((val) => val === "true", z.boolean())
-    .optional()
-    .catch(undefined),
-  hasActiveProjects: z
-    .preprocess((val) => val === "true", z.boolean())
-    .optional()
-    .catch(undefined),
-  hasOverdueProjects: z
-    .preprocess((val) => val === "true", z.boolean())
-    .optional()
-    .catch(undefined),
-  company: arrayParam(z.coerce.number()).catch([]),
+  hasNoActiveProjects: booleanSearchParam,
+  hasActiveProjects: booleanSearchParam,
+  hasOverdueProjects: booleanSearchParam,
+  company: arraySearchParam(z.coerce.number()),
 });
 
 export default async function AppCustomersPage({

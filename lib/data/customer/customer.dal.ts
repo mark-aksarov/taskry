@@ -139,27 +139,34 @@ export function buildCustomerWhereClause(
   workspaceId: number,
   filters?: CustomerFilters,
 ): Prisma.CustomerWhereInput {
-  if (!filters) return { workspaceId };
+  const projectFilters: Prisma.CustomerWhereInput[] = [];
 
-  return {
-    workspaceId,
-    ...(filters.hasNoActiveProjects && {
+  if (filters?.hasNoActiveProjects) {
+    projectFilters.push({
       projects: { none: { status: ProjectStatus.active } },
-    }),
+    });
+  }
 
-    ...(filters.hasActiveProjects && {
+  if (filters?.hasActiveProjects) {
+    projectFilters.push({
       projects: { some: { status: ProjectStatus.active } },
-    }),
+    });
+  }
 
-    ...(filters.hasOverdueProjects && {
+  if (filters?.hasOverdueProjects) {
+    projectFilters.push({
       projects: {
         some: {
           status: { not: ProjectStatus.completed },
           deadline: { lt: new Date() },
         },
       },
-    }),
+    });
+  }
 
-    ...(filters.company?.length && { companyId: { in: filters.company } }),
+  return {
+    workspaceId,
+    ...(filters?.company?.length && { companyId: { in: filters.company } }),
+    ...(projectFilters.length > 0 && { OR: projectFilters }),
   };
 }

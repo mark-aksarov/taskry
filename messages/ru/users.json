@@ -76,10 +76,16 @@
     "openInFullPage": "Открыть в полном окне"
   },
 
-  "UserFiltersForm": {
-    "hasNoActiveTasks": "Нет активных задач",
-    "hasActiveTasks": "Есть активные задачи",
-    "hasOverdueTasks": "Есть просроченные задачи"
+  "UserFiltersFormNoActiveTasksSwitch": {
+    "text": "Нет активных задач"
+  },
+
+  "UserFiltersFormActiveTasksSwitch": {
+    "text": "Есть активные задачи"
+  },
+
+  "UserFiltersFormOverdueTasksSwitch": {
+    "text": "Есть просроченные задачи"
   },
 
   "UserFiltersFormRoleCheckboxGroup": {

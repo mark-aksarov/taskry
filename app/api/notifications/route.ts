@@ -1,14 +1,14 @@
 import z from "zod";
 import { NextRequest, NextResponse } from "next/server";
+import { FilterEnumParam } from "@/lib/schemas/notification";
 import { withAuthRouteHandler } from "@/lib/utils/withAuthRouteHandler";
+import { pageSearchParam, pageSizeSearchParam } from "@/lib/schemas/base";
 import { getNotifications } from "@/lib/data/notification/notification.service";
 
-const FilterEnum = z.enum(["all", "unread"]);
-
 export const searchParamsSchema = z.object({
-  page: z.coerce.number().int().positive().catch(1),
-  pageSize: z.coerce.number().int().min(1).max(100).catch(20),
-  filter: FilterEnum.default("all"),
+  page: pageSearchParam,
+  pageSize: pageSizeSearchParam,
+  filter: FilterEnumParam.default("all"),
 });
 
 export const GET = (req: NextRequest) =>

@@ -698,82 +698,6 @@ describe("Task Service", () => {
           });
         }
 
-        it("should filter tasks by 'overdue' deadline", async () => {
-          await setup([dates.overdue, dates.today, dates.tomorrow]);
-
-          const filters: TaskFilters = {
-            deadline: "overdue",
-          };
-
-          const result = await getTaskList({
-            page: 1,
-            pageSize: 10,
-            sort: "title",
-            filters,
-          });
-
-          expect(result.items).toHaveLength(1);
-          expect(result.totalCount).toBe(1);
-          expect(result.items[0].title).toBe("Task A");
-        });
-
-        it("should filter tasks by 'today' deadline", async () => {
-          await setup([dates.overdue, dates.today, dates.tomorrow]);
-
-          const filters: TaskFilters = {
-            deadline: "today",
-          };
-
-          const result = await getTaskList({
-            page: 1,
-            pageSize: 10,
-            sort: "title",
-            filters,
-          });
-
-          expect(result.items).toHaveLength(1);
-          expect(result.totalCount).toBe(1);
-          expect(result.items[0].title).toBe("Task B");
-        });
-
-        it("should filter tasks by 'tomorrow' deadline", async () => {
-          await setup([dates.overdue, dates.today, dates.tomorrow]);
-
-          const filters: TaskFilters = {
-            deadline: "tomorrow",
-          };
-
-          const result = await getTaskList({
-            page: 1,
-            pageSize: 10,
-            sort: "title",
-            filters,
-          });
-
-          expect(result.items).toHaveLength(1);
-          expect(result.totalCount).toBe(1);
-          expect(result.items[0].title).toBe("Task C");
-        });
-
-        it("should filter tasks by 'thisWeek' deadline", async () => {
-          await setup([dates.prevWeek, dates.today, dates.nextWeek]);
-
-          const filters: TaskFilters = {
-            deadline: "thisWeek",
-          };
-
-          const result = await getTaskList({
-            page: 1,
-            pageSize: 10,
-            sort: "title",
-            filters,
-          });
-
-          expect(result.items).toHaveLength(1);
-          expect(result.totalCount).toBe(1);
-          expect(result.items[0].title).toBe("Task B");
-        });
-
         it("should filter tasks by deadline range", async () => {
           await setup([
             new Date("2023-01-01"),
@@ -782,8 +706,8 @@ describe("Task Service", () => {
           ]);
 
           const filters: TaskFilters = {
-            dateStart: "2023-01-01",
-            dateEnd: "2023-01-02",
+            deadlineFrom: new Date("2023-01-01"),
+            deadlineTo: new Date("2023-01-02"),
           };
 
           const result = await getTaskList({

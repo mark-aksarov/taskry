@@ -2,10 +2,11 @@ import z from "zod";
 import { NextRequest, NextResponse } from "next/server";
 import { searchTasks } from "@/lib/data/task/task.service";
 import { withAuthRouteHandler } from "@/lib/utils/withAuthRouteHandler";
+import { pageSearchParam, pageSizeSearchParam } from "@/lib/schemas/base";
 
 const schema = z.object({
-  page: z.coerce.number().int().positive().catch(1),
-  pageSize: z.coerce.number().int().positive().max(100).catch(10),
+  page: pageSearchParam,
+  pageSize: pageSizeSearchParam,
   query: z.string().optional(),
 });
 

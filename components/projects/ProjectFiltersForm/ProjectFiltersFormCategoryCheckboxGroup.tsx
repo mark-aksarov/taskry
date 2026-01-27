@@ -7,16 +7,18 @@ export function ProjectFiltersFormCategoryCheckboxGroup({
   filters,
   categories,
 }: {
-  filters: ProjectFilters;
+  filters?: ProjectFilters;
   categories: { id: number; name: string }[];
 }) {
   const t = useTranslations("projects.ProjectFiltersFormCategoryCheckboxGroup");
+
+  const defaultValue = filters?.category?.map((id) => id.toString());
 
   return (
     <CheckboxGroup
       name="category"
       label={t("label")}
-      defaultValue={filters.category?.map((id) => id.toString())}
+      defaultValue={defaultValue}
     >
       {categories.map((item) => (
         <Checkbox

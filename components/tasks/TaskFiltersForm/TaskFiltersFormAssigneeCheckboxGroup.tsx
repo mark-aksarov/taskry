@@ -9,16 +9,18 @@ export function TaskFiltersFormAssigneeCheckboxGroup({
   filters,
   users,
 }: {
-  filters: TaskFilters;
+  filters?: TaskFilters;
   users: { id: string; fullName: string }[];
 }) {
   const t = useTranslations("tasks.TaskFiltersFormAssigneeCheckboxGroup");
+
+  const defaultValue = filters?.assignee?.map((id) => id.toString());
 
   return (
     <CheckboxGroup
       label={t("label")}
       name="assignee"
-      defaultValue={filters.assignee?.map((id) => id.toString())}
+      defaultValue={defaultValue}
     >
       {users.map((user) => (
         <Checkbox

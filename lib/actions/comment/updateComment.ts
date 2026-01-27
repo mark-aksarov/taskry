@@ -1,17 +1,14 @@
 "use server";
 
-import z from "zod";
 import { ActionState } from "../types";
 import { getTranslations } from "next-intl/server";
+import { commentSchema } from "@/lib/schemas/comment";
 import { withAuthAction } from "../utils/withAuthAction";
 import { validateActionInput } from "../utils/validateActionInput";
 import { actionError, actionSuccess } from "../utils/actionResult";
 import { updateComment as updateCommentQuery } from "@/lib/data/comment/comment.dal";
 
-const schema = z.object({
-  id: z.coerce.number().int().positive(),
-  content: z.string().min(1).max(1000),
-});
+const schema = commentSchema.pick({ id: true, content: true });
 
 export async function updateComment(
   _prevState: ActionState,

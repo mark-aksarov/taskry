@@ -97,25 +97,20 @@
     }
   },
 
-  "ProjectFiltersForm": {
-    "switchText": "Has not active tasks"
+  "ProjectFiltersFormNoActiveTasksSwitch": {
+    "text": "Has not active tasks"
   },
 
-  "ProjectFiltersFormDeadlineCheckboxGroup": {
-    "label": "Deadline",
-    "today": "Today",
-    "tomorrow": "Tomorrow",
-    "thisWeek": "This week",
-    "overdue": "Overdue"
+  "ProjectFiltersFormDeadlineFromDatePicker": {
+    "label": "Deadline from"
+  },
+
+  "ProjectFiltersFormDeadlineToDatePicker": {
+    "label": "Deadline to"
   },
 
   "ProjectFiltersFormStatusCheckboxGroup": {
     "label": "Status"
-  },
-
-  "ProjectFiltersFormDeadlineRange": {
-    "label": "Deadline range",
-    "labelTo": "Deadline range to"
   },
 
   "ProjectFiltersFormCategoryCheckboxGroup": {

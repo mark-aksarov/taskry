@@ -791,82 +791,6 @@ describe("Project Service", () => {
           });
         }
 
-        it("should filter projects by 'overdue' deadline", async () => {
-          await setup([dates.overdue, dates.today, dates.tomorrow]);
-
-          const filters: ProjectFilters = {
-            deadline: "overdue",
-          };
-
-          const result = await getProjectList({
-            page: 1,
-            pageSize: 10,
-            sort: "title",
-            filters,
-          });
-
-          expect(result.items).toHaveLength(1);
-          expect(result.totalCount).toBe(1);
-          expect(result.items[0].title).toBe("Project A");
-        });
-
-        it("should filter projects by 'today' deadline", async () => {
-          await setup([dates.overdue, dates.today, dates.tomorrow]);
-
-          const filters: ProjectFilters = {
-            deadline: "today",
-          };
-
-          const result = await getProjectList({
-            page: 1,
-            pageSize: 10,
-            sort: "title",
-            filters,
-          });
-
-          expect(result.items).toHaveLength(1);
-          expect(result.totalCount).toBe(1);
-          expect(result.items[0].title).toBe("Project B");
-        });
-
-        it("should filter projects by 'tomorrow' deadline", async () => {
-          await setup([dates.overdue, dates.today, dates.tomorrow]);
-
-          const filters: ProjectFilters = {
-            deadline: "tomorrow",
-          };
-
-          const result = await getProjectList({
-            page: 1,
-            pageSize: 10,
-            sort: "title",
-            filters,
-          });
-
-          expect(result.items).toHaveLength(1);
-          expect(result.totalCount).toBe(1);
-          expect(result.items[0].title).toBe("Project C");
-        });
-
-        it("should filter projects by 'thisWeek' deadline", async () => {
-          await setup([dates.prevWeek, dates.today, dates.nextWeek]);
-
-          const filters: ProjectFilters = {
-            deadline: "thisWeek",
-          };
-
-          const result = await getProjectList({
-            page: 1,
-            pageSize: 10,
-            sort: "title",
-            filters,
-          });
-
-          expect(result.items).toHaveLength(1);
-          expect(result.totalCount).toBe(1);
-          expect(result.items[0].title).toBe("Project B");
-        });
-
         it("should filter projects by deadline range", async () => {
           await setup([
             new Date("2023-01-01"),
@@ -875,8 +799,8 @@ describe("Project Service", () => {
           ]);
 
           const filters: ProjectFilters = {
-            dateStart: "2023-01-01",
-            dateEnd: "2023-01-02",
+            deadlineFrom: new Date("2023-01-01"),
+            deadlineTo: new Date("2023-01-02"),
           };
 
           const result = await getProjectList({

@@ -5,6 +5,7 @@ import { getTaskCount } from "@/lib/data/task/task.dal";
 import { deleteTasks } from "@/lib/actions/task/deleteTasks";
 import { ProfileTasksPageEmpty } from "./ProfileTasksPageEmpty";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
+import { pageSearchParam, pageSizeSearchParam } from "@/lib/schemas/base";
 import { UserTasksContainer } from "@/components/users/UserTasksContainer";
 import { updateTaskStatuses } from "@/lib/actions/task/updateTaskStatuses";
 import { UserHeaderContainer } from "@/components/users/UserHeaderContainer";
@@ -15,8 +16,8 @@ import { ProfileNavigationDesktop } from "@/components/users/ProfileNavigationDe
 import { TaskToolbarActionsMenuTrigger } from "@/components/tasks/TaskToolbarActionsMenuTrigger";
 
 const searchParamsSchema = z.object({
-  page: z.coerce.number().int().positive().catch(1),
-  pageSize: z.coerce.number().int().min(1).max(100).catch(10),
+  page: pageSearchParam,
+  pageSize: pageSizeSearchParam,
   sort: z.enum(["title", "deadline", "status", "category"]).catch("title"),
 });
 

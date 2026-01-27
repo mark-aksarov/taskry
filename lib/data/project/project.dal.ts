@@ -4,7 +4,6 @@ import { cache } from "react";
 import prisma from "@/lib/prisma";
 import { ProjectFilters } from "@/lib/types";
 import { AccessDeniedError } from "../utils/error";
-import { buildDateWhere } from "../utils/dateWhere";
 import { verifySession } from "../utils/verifySession";
 import { CreateProjectInputDTO, UpdateProjectInputDTO } from "./project.dto";
 import { Prisma, ProjectStatus, TaskStatus } from "@/generated/prisma/client";
@@ -202,12 +201,6 @@ export function buildProjectWhereClause(
 ): Prisma.ProjectWhereInput {
   if (!filters) return { workspaceId };
 
-  const datesWhere = buildDateWhere({
-    quick: filters.deadline as any,
-    dateStart: filters.dateStart,
-    dateEnd: filters.dateEnd,
-  });
-
   return {
     workspaceId,
 
@@ -225,6 +218,9 @@ export function buildProjectWhereClause(
     ...(filters.category?.length && { categoryId: { in: filters.category } }),
     ...(filters.customer?.length && { customerId: { in: filters.customer } }),
     ...(filters.user?.length && { creatorId: { in: filters.user } }),
-    ...(datesWhere && { deadline: datesWhere }),
+    deadline: {
+      ...(filters.deadlineFrom && { gte: filters.deadlineFrom }),
+      ...(filters.deadlineTo && { lte: filters.deadlineTo }),
+    },
   };
 }

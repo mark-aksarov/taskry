@@ -16,7 +16,7 @@ import { getProjectSummaries } from "@/lib/data/project/project.service";
 import { getTaskCategorySummaries } from "@/lib/data/taskCategory/taskCategory.service";
 
 interface TaskFiltersFormContainerProps {
-  filters: TaskFilters;
+  filters?: TaskFilters;
 }
 
 export function TaskFiltersFormContainer(props: TaskFiltersFormContainerProps) {

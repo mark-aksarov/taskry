@@ -76,10 +76,16 @@
     "openInFullPage": "Open in Full Page"
   },
 
-  "UserFiltersForm": {
-    "hasNoActiveTasks": "Has no active tasks",
-    "hasActiveTasks": "Has active tasks",
-    "hasOverdueTasks": "Has overdue tasks"
+  "UserFiltersFormNoActiveTasksSwitch": {
+    "text": "Has no active tasks"
+  },
+
+  "UserFiltersFormActiveTasksSwitch": {
+    "text": "Has active tasks"
+  },
+
+  "UserFiltersFormOverdueTasksSwitch": {
+    "text": "Has overdue tasks"
   },
 
   "UserFiltersFormRoleCheckboxGroup": {
