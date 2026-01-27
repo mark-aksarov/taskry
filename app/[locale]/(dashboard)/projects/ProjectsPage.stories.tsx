@@ -10,7 +10,7 @@ import { ProjectGrid } from "@/components/projects/ProjectGrid";
 import { ProjectFormBase } from "@/components/projects/ProjectFormBase";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { ProjectFiltersForm } from "@/components/projects/ProjectFiltersForm";
-import { ProjectCategoryFormBase } from "@/components/projects/ProjectCategoryFormBase";
+import { NewProjectCategoryForm } from "@/components/projects/NewProjectCategoryForm";
 import { EntityContainerPresentation } from "@/components/common/EntityContainerPresentation";
 import { Default as ProjectListStory } from "@/components/projects/ProjectList/ProjectList.stories";
 import { Default as ProjectGridStory } from "@/components/projects/ProjectGrid/ProjectGrid.stories";
@@ -50,7 +50,7 @@ export const Default = {
         newProjectFormContainer={
           <ProjectFormBase {...ProjectFormBaseStory.args} />
         }
-        newProjectCategoryForm={<ProjectCategoryFormBase formAction={fn()} />}
+        newProjectCategoryForm={<NewProjectCategoryForm formAction={fn()} />}
       />
     ),
     projectToolbarFiltersModalTrigger: (

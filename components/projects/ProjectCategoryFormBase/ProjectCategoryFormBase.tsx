@@ -11,13 +11,15 @@ const initialState: ActionState = {
   message: null,
 };
 
-interface ProjectCategoryFormBaseProps {
+export interface ProjectCategoryFormBaseProps {
+  id: string;
   projectId?: number;
   projectTitleDefaultValue?: string;
   formAction: ActionFn<ActionState, FormData>;
 }
 
 export function ProjectCategoryFormBase({
+  id,
   projectId,
   projectTitleDefaultValue,
   formAction,
@@ -39,7 +41,7 @@ export function ProjectCategoryFormBase({
   }
 
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form id={id} onSubmit={handleSubmit}>
       <div className="flex flex-col gap-4">
         {state.status === "error" && (
           <FormErrorText>{state.message}</FormErrorText>

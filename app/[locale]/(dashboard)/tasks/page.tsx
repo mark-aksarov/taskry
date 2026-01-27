@@ -8,8 +8,8 @@ import { deleteTasks } from "@/lib/actions/task/deleteTasks";
 import { TasksContainer } from "@/components/tasks/TasksContainer";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { updateTaskStatuses } from "@/lib/actions/task/updateTaskStatuses";
+import { NewTaskCategoryForm } from "@/components/tasks/NewTaskCategoryForm";
 import { NewTaskFormContainer } from "@/components/tasks/NewTaskFormContainer";
-import { TaskCategoryFormBase } from "@/components/tasks/TaskCategoryFormBase";
 import { createTaskCategory } from "@/lib/actions/taskCategory/createTaskCategory";
 import { TaskFiltersFormContainer } from "@/components/tasks/TaskFiltersFormContainer";
 import { TaskToolbarActionsMenuTrigger } from "@/components/tasks/TaskToolbarActionsMenuTrigger";
@@ -65,7 +65,7 @@ export default async function AppTasksPage({
         <TaskToolbarCreateNewMenuTrigger
           newTaskFormContainer={<NewTaskFormContainer />}
           newTaskCategoryForm={
-            <TaskCategoryFormBase formAction={createTaskCategory} />
+            <NewTaskCategoryForm formAction={createTaskCategory} />
           }
         />
       }

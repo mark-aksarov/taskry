@@ -7,11 +7,11 @@ import {
   ProjectFormBaseSkeleton,
 } from "../ProjectFormBase";
 
-import { ProjectFormBase } from "../ProjectFormBase";
+import { Suspense } from "react";
+import { NewProjectForm } from "../NewProjectForm";
 import { createProject } from "@/lib/actions/project/createProject";
 import { getCustomerSummaries } from "@/lib/data/customer/customer.service";
 import { getProjectCategorySummaries } from "@/lib/data/projectCategory/projectCategory.service";
-import { Suspense } from "react";
 
 export function NewProjectFormContainer() {
   return (
@@ -26,8 +26,7 @@ async function NewProjectFormContainerInner() {
   const customers = await getCustomerSummaries();
 
   return (
-    <ProjectFormBase
-      id="new-project-form"
+    <NewProjectForm
       projectCategorySelect={
         <ProjectFormBaseCategorySelect categories={categories} />
       }

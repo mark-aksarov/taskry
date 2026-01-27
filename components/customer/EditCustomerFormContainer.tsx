@@ -1,13 +1,13 @@
 "use client";
 
 import {
-  CustomerFormBase,
   CustomerFormBaseSkeleton,
   CustomerFormBaseCompanySelect,
 } from "./CustomerFormBase";
 
 import useSWR from "swr";
 import { Suspense } from "react";
+import { EditCustomerForm } from "./EditCustomerForm";
 import { CompanySummaryDTO } from "@/lib/data/company/company.dto";
 import { updateCustomer } from "@/lib/actions/customer/updateCustomer";
 import { CustomerFormDataDTO } from "@/lib/data/customer/customer.dto";
@@ -45,8 +45,7 @@ function EditCustomerFormContainerInner({
   }
 
   return (
-    <CustomerFormBase
-      formId="edit-customer-form"
+    <EditCustomerForm
       customerId={customerId}
       fullNameDefaultValue={customer.fullName}
       bioDefaultValue={customer.bio ?? ""}

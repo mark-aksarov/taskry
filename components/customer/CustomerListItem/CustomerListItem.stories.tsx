@@ -1,7 +1,7 @@
 import { fn } from "storybook/test";
 import { CustomerListItem } from "./CustomerListItem";
 import type { Meta, StoryObj } from "@storybook/react";
-import { CustomerFormBase } from "../CustomerFormBase";
+import { EditCustomerForm } from "../EditCustomerForm";
 import { CustomerDetailModal } from "../CustomerDetailModal";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { CustomerDetailBottomSheet } from "../CustomerDetailBottomSheet";
@@ -24,7 +24,7 @@ const meta = {
           customerFullName={args.fullName}
           deleteAction={fn()}
           editCustomerFormContainer={
-            <CustomerFormBase {...CustomerFormBaseStory.args} />
+            <EditCustomerForm {...CustomerFormBaseStory.args} />
           }
         />
       }

@@ -1,13 +1,10 @@
-import {
-  TaskCategoryFormBase,
-  TaskCategoryFormBaseSkeleton,
-} from "../TaskCategoryFormBase";
-
 import { fn } from "storybook/test";
 import { Button } from "@/components/ui/Button";
 import { DialogTrigger } from "react-aria-components";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { NewTaskCategoryForm } from "../NewTaskCategoryForm";
 import { NewTaskCategoryModal } from "./NewTaskCategoryModal";
+import { TaskCategoryFormBaseSkeleton } from "../TaskCategoryFormBase";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {
@@ -30,7 +27,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    newTaskCategoryForm: <TaskCategoryFormBase formAction={fn()} />,
+    newTaskCategoryForm: <NewTaskCategoryForm formAction={fn()} />,
   },
 } satisfies Story;
 

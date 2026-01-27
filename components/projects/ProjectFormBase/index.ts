@@ -1,4 +1,5 @@
 export { ProjectFormBase } from "./ProjectFormBase";
+export { type ProjectFormBaseProps } from "./ProjectFormBase";
 export { ProjectFormBaseSkeleton } from "./ProjectFormBaseSkeleton";
 export { ProjectFormBaseStatusSelect } from "./ProjectFormBaseStatusSelect";
 export { ProjectFormBaseCategorySelect } from "./ProjectFormBaseCategorySelect";

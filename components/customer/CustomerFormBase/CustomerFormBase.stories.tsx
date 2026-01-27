@@ -52,6 +52,6 @@ export const Default = {
       />
     ),
     formAction: fn(),
-    formId: "new-customer-form",
+    id: "new-customer-form",
   },
 } satisfies Story;

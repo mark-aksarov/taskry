@@ -1,7 +1,6 @@
 "use client";
 
 import {
-  ProjectFormBase,
   ProjectFormBaseSkeleton,
   ProjectFormBaseStatusSelect,
   ProjectFormBaseCategorySelect,
@@ -10,6 +9,7 @@ import {
 
 import useSWR from "swr";
 import { Suspense } from "react";
+import { EditProjectForm } from "./EditProjectForm";
 import { CalendarDate } from "@internationalized/date";
 import { updateProject } from "@/lib/actions/project/updateProject";
 import { ProjectFormDataDTO } from "@/lib/data/project/project.dto";
@@ -59,8 +59,7 @@ function EditProjectFormContainerInner({
   );
 
   return (
-    <ProjectFormBase
-      id="edit-project-form"
+    <EditProjectForm
       projectId={projectId}
       projectTitleDefaultValue={project.title}
       projectDescriptionDefaultValue={project.description}

@@ -16,7 +16,7 @@ const initialState: ActionState = {
 };
 
 export interface CustomerFormBaseProps {
-  formId: string;
+  id: string;
   customerId?: number;
   fullNameDefaultValue?: string;
   bioDefaultValue?: string;
@@ -28,7 +28,7 @@ export interface CustomerFormBaseProps {
 }
 
 export function CustomerFormBase({
-  formId,
+  id,
   customerId,
   fullNameDefaultValue,
   bioDefaultValue,
@@ -55,7 +55,7 @@ export function CustomerFormBase({
   }
 
   return (
-    <Form id={formId} onSubmit={handleSubmit}>
+    <Form id={id} onSubmit={handleSubmit}>
       <div className="flex flex-col gap-4">
         {state.status === "error" && (
           <FormErrorText>{state.message}</FormErrorText>

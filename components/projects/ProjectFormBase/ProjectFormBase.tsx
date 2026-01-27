@@ -18,7 +18,7 @@ const initialState: ActionState = {
   message: null,
 };
 
-interface ProjectFormBaseProps {
+export interface ProjectFormBaseProps {
   id: string;
   projectId?: number;
   projectTitleDefaultValue?: string;

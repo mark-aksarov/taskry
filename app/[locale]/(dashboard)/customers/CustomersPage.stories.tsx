@@ -8,8 +8,8 @@ import { PageDecorator } from "@/.storybook/PageDecorator";
 import { CustomerList } from "@/components/customer/CustomerList";
 import { CustomerGrid } from "@/components/customer/CustomerGrid";
 import { NewCompanyForm } from "@/components/customer/NewCompanyForm";
+import { NewCustomerForm } from "@/components/customer/NewCustomerForm";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { CustomerFormBase } from "@/components/customer/CustomerFormBase";
 import { CustomerFiltersForm } from "@/components/customer/CustomerFiltersForm";
 import { EntityContainerPresentation } from "@/components/common/EntityContainerPresentation";
 import { Default as CustomerGridStory } from "@/components/customer/CustomerGrid/CustomerGrid.stories";
@@ -39,7 +39,7 @@ export const Default = {
     customerToolbarCreateNewMenuTrigger: (
       <CustomerToolbarCreateNewMenuTrigger
         newCustomerFormContainer={
-          <CustomerFormBase {...CustomerFormBaseStory.args} />
+          <NewCustomerForm {...CustomerFormBaseStory.args} />
         }
         newCompanyForm={<NewCompanyForm formAction={fn()} />}
       />
@@ -76,7 +76,7 @@ export const WithNoCustomers = {
   render: () => (
     <CustomersPageEmpty
       newCustomerFormContainer={
-        <CustomerFormBase {...CustomerFormBaseStory.args} />
+        <NewCustomerForm {...CustomerFormBaseStory.args} />
       }
     />
   ),

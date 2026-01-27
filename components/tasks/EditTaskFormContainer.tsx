@@ -1,7 +1,6 @@
 "use client";
 
 import {
-  TaskFormBase,
   TaskFormBaseSkeleton,
   TaskFormBaseStatusSelect,
   TaskFormBaseProjectSelect,
@@ -11,6 +10,7 @@ import {
 
 import useSWR from "swr";
 import { Suspense } from "react";
+import { EditTaskForm } from "./EditTaskForm";
 import { CalendarDate } from "@internationalized/date";
 import { UserSummaryDTO } from "@/lib/data/user/user.dto";
 import { updateTask } from "@/lib/actions/task/updateTask";
@@ -63,8 +63,7 @@ function EditTaskFormContainerInner({ taskId }: EditTaskFormContainerProps) {
   );
 
   return (
-    <TaskFormBase
-      id="edit-task-form"
+    <EditTaskForm
       taskId={taskId}
       taskTitleDefaultValue={task.title}
       taskDescriptionDefaultValue={task.description}

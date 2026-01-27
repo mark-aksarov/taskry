@@ -11,13 +11,15 @@ const initialState: ActionState = {
   message: null,
 };
 
-interface TaskCategoryFormBaseProps {
+export interface TaskCategoryFormBaseProps {
+  id: string;
   taskId?: number;
   taskTitleDefaultValue?: string;
   formAction: ActionFn<ActionState, FormData>;
 }
 
 export function TaskCategoryFormBase({
+  id,
   taskId,
   taskTitleDefaultValue,
   formAction,
@@ -39,7 +41,7 @@ export function TaskCategoryFormBase({
   }
 
   return (
-    <Form id="new-task-category-form" onSubmit={handleSubmit}>
+    <Form id={id} onSubmit={handleSubmit}>
       <div className="flex flex-col gap-4">
         {state.status === "error" && (
           <FormErrorText>{state.message}</FormErrorText>
