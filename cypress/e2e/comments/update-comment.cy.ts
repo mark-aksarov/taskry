@@ -1,7 +1,7 @@
 import { E2ESeedPayload } from "@/prisma/e2e/types";
 import { ProjectStatus, TaskStatus } from "@/generated/prisma/enums";
 
-describe("deletes a comment", () => {
+describe("update a comment", () => {
   beforeEach(() => {
     cy.viewport(1440, 900);
 
@@ -66,28 +66,54 @@ describe("deletes a comment", () => {
     cy.signIn("owner@example.com", "12345abc");
   });
 
-  it("can delete a project comment", () => {
+  it("can update a project comment", () => {
     cy.visit("/en/projects");
     cy.getByData("project-comments-modal-trigger").click();
+
+    // click on the edit menu item
     cy.getByData("comment-item-1-action-menu-trigger").click();
-    cy.getMenuItem("delete").click();
-    cy.getByData("delete-comment-modal-confirm-button").click();
-    cy.getByData("comment-item").should("not.exist");
+    cy.getMenuItem("edit").click();
+
+    // update the comment
+    cy.getByData("comment-text-field-textarea")
+      .should("have.value", "Comment 1")
+      .clear()
+      .type("Updated Comment 1");
+
+    cy.getByData("comment-text-field-send-button").click();
+    cy.getByData("comment-item").contains("Updated Comment 1");
   });
 
-  it("can delete a task comment", () => {
+  it("can update a task comment", () => {
     cy.visit("/en/tasks");
+    cy.getByData("task-comments-modal-trigger").click();
+
+    // click on the edit menu item
     cy.getByData("comment-item-2-action-menu-trigger").click();
-    cy.getMenuItem("delete").click();
-    cy.getByData("delete-comment-modal-confirm-button").click();
-    cy.getByData("comment-item").should("not.exist");
+    cy.getMenuItem("edit").click();
+
+    // update the comment
+    cy.getByData("comment-text-field-textarea")
+      .should("have.value", "Comment 2")
+      .clear()
+      .type("Updated Comment 2");
+
+    cy.getByData("comment-text-field-send-button").click();
+    cy.getByData("comment-item").contains("Updated Comment 2");
   });
 
-  it("cannot delete a project comment if user has user role and he is not sender", () => {
+  it("cannot edit a project comment if user has user role and he is not sender", () => {
     cy.signIn("user@example.com", "12345abc");
     cy.visit("/en/projects");
     cy.getByData("project-comments-modal-trigger").click();
     cy.getByData("comment-item-1-action-menu-trigger").should("not.exist");
+  });
+
+  it("can edit a project comment if user has user role and he is sender", () => {
+    cy.signIn("user@example.com", "12345abc");
+    cy.visit("/en/tasks");
+    cy.getByData("task-comments-modal-trigger").click();
+    cy.getByData("comment-item-2-action-menu-trigger").should("not.exist");
   });
 
   it("cannot delete a comment in guest mode", () => {
@@ -95,7 +121,7 @@ describe("deletes a comment", () => {
     cy.visit("/en/projects");
     cy.getByData("project-comments-modal-trigger").click();
     cy.getByData("comment-item-1-action-menu-trigger").click();
-    cy.getMenuItem("delete").click();
+    cy.getMenuItem("edit").click();
     cy.getByData("guest-mode-modal").should("be.visible");
   });
 });

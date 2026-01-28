@@ -60,6 +60,7 @@ export const CommentTextField = ({
         isDisabled={isLoading}
       >
         <TextArea
+          data-test="comment-text-field-textarea"
           placeholder={t("placeholder")}
           className={composeRenderProps(
             textAreaClassName,
