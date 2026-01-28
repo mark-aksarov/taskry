@@ -10,7 +10,7 @@ import { cache } from "react";
 import prisma from "@/lib/prisma";
 import { auth } from "@/lib/auth";
 import { AccessDeniedError } from "../utils/error";
-import { verifySession } from "../utils/verifySession";
+import { requireSession } from "../utils/requireSession";
 import { NotificationType, Prisma } from "@/generated/prisma/client";
 import { CreateCommentInputDTO, UpdateCommentInputDTO } from "./comment.dto";
 
@@ -19,7 +19,7 @@ export const getAllComments = cache(
     // Authorization
     const {
       user: { workspaceId },
-    } = await verifySession();
+    } = await requireSession();
 
     return await prisma.comment.findMany({
       where: {
@@ -54,7 +54,7 @@ export const createComment = async (input: CreateCommentInputDTO) => {
   // Authorization
   const {
     user: { id: senderId, workspaceId },
-  } = await verifySession();
+  } = await requireSession();
 
   // ACL
   const permission = await auth.api.userHasPermission({
@@ -115,7 +115,7 @@ export const deleteComment = async (commentId: number) => {
   // Authorization
   const {
     user: { id: senderId, role, workspaceId },
-  } = await verifySession();
+  } = await requireSession();
 
   // ACL
   const permission = await auth.api.userHasPermission({
@@ -172,7 +172,7 @@ export const updateComment = async (input: UpdateCommentInputDTO) => {
   // Authorization
   const {
     user: { id: senderId, role, workspaceId },
-  } = await verifySession();
+  } = await requireSession();
 
   // ACL
   const permission = await auth.api.userHasPermission({

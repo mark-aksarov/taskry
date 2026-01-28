@@ -2,12 +2,12 @@ import prisma from "@/lib/prisma";
 import { resetDatabase } from "@/prisma/resetDatabase";
 import { vi, describe, beforeEach, it, expect } from "vitest";
 import { createProjectCategory } from "../projectCategory.dal";
-import { verifySession } from "@/lib/data/utils/verifySession";
+import { requireSession } from "@/lib/data/utils/requireSession";
 
 vi.mock("server-only", () => ({}));
 
-vi.mock("@/lib/data/utils/verifySession", () => ({
-  verifySession: vi.fn(),
+vi.mock("@/lib/data/utils/requireSession", () => ({
+  requireSession: vi.fn(),
 }));
 
 describe("ProjectCategory DAL", () => {
@@ -16,7 +16,7 @@ describe("ProjectCategory DAL", () => {
 
     await resetDatabase();
 
-    (verifySession as any).mockResolvedValue({
+    (requireSession as any).mockResolvedValue({
       user: { id: "user-1", workspaceId: 1 },
     });
 

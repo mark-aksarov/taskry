@@ -2,14 +2,14 @@ import { cache } from "react";
 import { auth } from "@/lib/auth";
 import prisma from "@/lib/prisma";
 import { UserFilters } from "@/lib/types";
-import { verifySession } from "../utils/verifySession";
+import { requireSession } from "../utils/requireSession";
 import { Prisma, TaskStatus } from "@/generated/prisma/client";
 
 export const getUser = cache(
   async <T extends Prisma.UserSelect>(id: string, select: T) => {
     const {
       user: { workspaceId },
-    } = await verifySession();
+    } = await requireSession();
 
     let where = { id, workspaceId };
 
@@ -24,7 +24,7 @@ export const getAllUsers = cache(
   async <T extends Prisma.UserSelect>({ select }: { select: T }) => {
     const {
       user: { workspaceId },
-    } = await verifySession();
+    } = await requireSession();
 
     let where = { workspaceId };
 
@@ -51,7 +51,7 @@ export const getPaginatedUsers = cache(
   }) => {
     const {
       user: { workspaceId },
-    } = await verifySession();
+    } = await requireSession();
 
     const skip = page && pageSize ? (page - 1) * pageSize : undefined;
     const take = pageSize ? pageSize : undefined;
@@ -86,7 +86,7 @@ export const getPaginatedUsers = cache(
 export const getUserCount = cache(async (filters?: UserFilters) => {
   const {
     user: { workspaceId },
-  } = await verifySession();
+  } = await requireSession();
 
   return prisma.user.count({
     where: buildUserWhereClause(workspaceId, filters),
@@ -96,7 +96,7 @@ export const getUserCount = cache(async (filters?: UserFilters) => {
 export const deleteUsers = async (ids: string[]) => {
   const {
     user: { workspaceId },
-  } = await verifySession();
+  } = await requireSession();
 
   return await prisma.user.deleteMany({
     where: { workspaceId, id: { in: ids } },

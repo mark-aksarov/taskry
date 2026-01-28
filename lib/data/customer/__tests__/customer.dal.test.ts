@@ -8,12 +8,12 @@ import {
 import prisma from "@/lib/prisma";
 import { resetDatabase } from "@/prisma/resetDatabase";
 import { describe, it, expect, beforeEach, vi } from "vitest";
-import { verifySession } from "@/lib/data/utils/verifySession";
+import { requireSession } from "@/lib/data/utils/requireSession";
 
 vi.mock("server-only", () => ({}));
 
-vi.mock("@/lib/data/utils/verifySession", () => ({
-  verifySession: vi.fn(),
+vi.mock("@/lib/data/utils/requireSession", () => ({
+  requireSession: vi.fn(),
 }));
 
 describe("Customer DAL", () => {
@@ -25,7 +25,7 @@ describe("Customer DAL", () => {
     const mockSession = {
       user: { id: "user-1", workspaceId: 1 },
     };
-    (verifySession as any).mockResolvedValue(mockSession);
+    (requireSession as any).mockResolvedValue(mockSession);
 
     await prisma.workspace.create({ data: { id: 1 } });
     await prisma.company.create({
@@ -102,7 +102,7 @@ describe("Customer DAL", () => {
     });
 
     it("should correctly count customers in a different workspace", async () => {
-      (verifySession as any).mockResolvedValue({
+      (requireSession as any).mockResolvedValue({
         user: { id: "user-2", workspaceId: 2 },
       });
 
@@ -197,7 +197,7 @@ describe("Customer DAL", () => {
     });
 
     it("should fail if session is missing", async () => {
-      (verifySession as any).mockRejectedValue(new Error("Unauthorized"));
+      (requireSession as any).mockRejectedValue(new Error("Unauthorized"));
 
       const input = {
         fullName: "No Session",
@@ -254,7 +254,7 @@ describe("Customer DAL", () => {
     });
 
     it("should fail if session is invalid", async () => {
-      (verifySession as any).mockRejectedValue(new Error("Unauthorized"));
+      (requireSession as any).mockRejectedValue(new Error("Unauthorized"));
 
       const input = { id: 1, fullName: "New Name" };
 

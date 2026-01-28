@@ -18,18 +18,18 @@ import prisma from "@/lib/prisma";
 import { resetDatabase } from "@/prisma/resetDatabase";
 import { AccessDeniedError } from "@/lib/data/utils/error";
 import { createComment, deleteComment, updateComment } from "../comment.dal";
-import { verifySession } from "@/lib/data/utils/verifySession";
+import { requireSession } from "@/lib/data/utils/requireSession";
 import { PrismaClientKnownRequestError } from "@/generated/prisma/internal/prismaNamespace";
 
 vi.mock("server-only", () => ({}));
 
-vi.mock("@/lib/data/utils/verifySession", () => ({
-  verifySession: vi.fn(),
+vi.mock("@/lib/data/utils/requireSession", () => ({
+  requireSession: vi.fn(),
 }));
 
 describe("Comment DAL", () => {
   beforeEach(() => {
-    (verifySession as any).mockResolvedValue({
+    (requireSession as any).mockResolvedValue({
       user: { id: "user-1", workspaceId: 1 },
     });
   });
@@ -322,7 +322,7 @@ describe("Comment DAL", () => {
     describe("RBAC: create comment", () => {
       describe("Owner", () => {
         beforeEach(() => {
-          (verifySession as any).mockResolvedValue({
+          (requireSession as any).mockResolvedValue({
             user: { id: "user-1", role: "owner", workspaceId: 1 },
           });
         });
@@ -343,7 +343,7 @@ describe("Comment DAL", () => {
 
       describe("User", () => {
         beforeEach(() => {
-          (verifySession as any).mockResolvedValue({
+          (requireSession as any).mockResolvedValue({
             user: { id: "user-2", role: "user", workspaceId: 1 },
           });
         });
@@ -364,7 +364,7 @@ describe("Comment DAL", () => {
 
       describe("Guest", () => {
         beforeEach(() => {
-          (verifySession as any).mockResolvedValue({
+          (requireSession as any).mockResolvedValue({
             user: { id: "user-3", role: "guest", workspaceId: 1 },
           });
         });
@@ -471,7 +471,7 @@ describe("Comment DAL", () => {
     describe("RBAC: delete comment", () => {
       describe("Owner", () => {
         beforeEach(() => {
-          (verifySession as any).mockResolvedValue({
+          (requireSession as any).mockResolvedValue({
             user: { id: "user-1", role: "owner", workspaceId: 1 },
           });
         });
@@ -489,7 +489,7 @@ describe("Comment DAL", () => {
 
       describe("User", () => {
         beforeEach(() => {
-          (verifySession as any).mockResolvedValue({
+          (requireSession as any).mockResolvedValue({
             user: { id: "user-2", role: "user", workspaceId: 1 },
           });
         });
@@ -508,7 +508,7 @@ describe("Comment DAL", () => {
 
       describe("Guest", () => {
         beforeEach(() => {
-          (verifySession as any).mockResolvedValue({
+          (requireSession as any).mockResolvedValue({
             user: { id: "user-3", role: "guest", workspaceId: 1 },
           });
         });
@@ -612,7 +612,7 @@ describe("Comment DAL", () => {
     describe("RBAC: update comment", () => {
       describe("Owner", () => {
         beforeEach(() => {
-          (verifySession as any).mockResolvedValue({
+          (requireSession as any).mockResolvedValue({
             user: { id: "user-1", role: "owner", workspaceId: 1 },
           });
         });
@@ -636,7 +636,7 @@ describe("Comment DAL", () => {
 
       describe("User", () => {
         beforeEach(() => {
-          (verifySession as any).mockResolvedValue({
+          (requireSession as any).mockResolvedValue({
             user: { id: "user-2", role: "user", workspaceId: 1 },
           });
         });
@@ -658,7 +658,7 @@ describe("Comment DAL", () => {
 
       describe("Guest", () => {
         beforeEach(() => {
-          (verifySession as any).mockResolvedValue({
+          (requireSession as any).mockResolvedValue({
             user: { id: "user-3", role: "guest", workspaceId: 1 },
           });
         });

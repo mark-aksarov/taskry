@@ -16,17 +16,17 @@ import prisma from "@/lib/prisma";
 import { resetDatabase } from "@/prisma/resetDatabase";
 import { AccessDeniedError } from "@/lib/data/utils/error";
 import { vi, describe, it, expect, beforeEach } from "vitest";
-import { verifySession } from "@/lib/data/utils/verifySession";
+import { requireSession } from "@/lib/data/utils/requireSession";
 
 vi.mock("server-only", () => ({}));
 
-vi.mock("@/lib/data/utils/verifySession", () => ({
-  verifySession: vi.fn(),
+vi.mock("@/lib/data/utils/requireSession", () => ({
+  requireSession: vi.fn(),
 }));
 
 describe("Task DAL", () => {
   beforeEach(async () => {
-    (verifySession as any).mockResolvedValue({
+    (requireSession as any).mockResolvedValue({
       user: { id: "user-1", workspaceId: 1 },
     });
 
@@ -272,7 +272,7 @@ describe("Task DAL", () => {
 
     describe("RBAC: create task", () => {
       const setup = async (userId: string, role: string) => {
-        (verifySession as any).mockResolvedValue({
+        (requireSession as any).mockResolvedValue({
           user: { id: userId, workspaceId: 1, role },
         });
 
@@ -394,7 +394,7 @@ describe("Task DAL", () => {
 
     describe("RBAC: update task", () => {
       const setup = async (userId: string, role: string) => {
-        (verifySession as any).mockResolvedValue({
+        (requireSession as any).mockResolvedValue({
           user: { id: userId, workspaceId: 1, role },
         });
 
@@ -590,7 +590,7 @@ describe("Task DAL", () => {
         role: string,
         assigneeId?: string,
       ) => {
-        (verifySession as any).mockResolvedValue({
+        (requireSession as any).mockResolvedValue({
           user: { id: userId, role, workspaceId: 1 },
         });
 
@@ -803,7 +803,7 @@ describe("Task DAL", () => {
       const taskId = 100;
 
       const setup = async (userId: string, role: string) => {
-        (verifySession as any).mockResolvedValue({
+        (requireSession as any).mockResolvedValue({
           user: { id: userId, workspaceId: 1, role },
         });
 

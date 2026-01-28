@@ -4,7 +4,7 @@ import { cache } from "react";
 import prisma from "@/lib/prisma";
 import { ProjectFilters } from "@/lib/types";
 import { AccessDeniedError } from "../utils/error";
-import { verifySession } from "../utils/verifySession";
+import { requireSession } from "../utils/requireSession";
 import { CreateProjectInputDTO, UpdateProjectInputDTO } from "./project.dto";
 import { Prisma, ProjectStatus, TaskStatus } from "@/generated/prisma/client";
 
@@ -12,7 +12,7 @@ export const getProject = cache(
   async <T extends Prisma.ProjectSelect>(id: number, select: T) => {
     const {
       user: { workspaceId },
-    } = await verifySession();
+    } = await requireSession();
 
     let where = { id, workspaceId };
 
@@ -27,7 +27,7 @@ export const getAllProjects = cache(
   async <T extends Prisma.ProjectSelect>({ select }: { select: T }) => {
     const {
       user: { workspaceId },
-    } = await verifySession();
+    } = await requireSession();
 
     let where = { workspaceId };
 
@@ -54,7 +54,7 @@ export const getPaginatedProjects = cache(
   }) => {
     const {
       user: { workspaceId },
-    } = await verifySession();
+    } = await requireSession();
 
     const skip = page && pageSize ? (page - 1) * pageSize : undefined;
     const take = pageSize ? pageSize : undefined;
@@ -93,7 +93,7 @@ export const getPaginatedProjects = cache(
 export const getProjectCount = cache(async (filters?: ProjectFilters) => {
   const {
     user: { workspaceId },
-  } = await verifySession();
+  } = await requireSession();
 
   return prisma.project.count({
     where: buildProjectWhereClause(workspaceId, filters),
@@ -103,7 +103,7 @@ export const getProjectCount = cache(async (filters?: ProjectFilters) => {
 export const createProject = async (input: CreateProjectInputDTO) => {
   const {
     user: { id: creatorId, workspaceId },
-  } = await verifySession();
+  } = await requireSession();
 
   await validateRelations(workspaceId, input.categoryId, input.customerId);
 
@@ -119,7 +119,7 @@ export const createProject = async (input: CreateProjectInputDTO) => {
 export const updateProject = async (input: UpdateProjectInputDTO) => {
   const {
     user: { workspaceId },
-  } = await verifySession();
+  } = await requireSession();
 
   await validateRelations(workspaceId, input.categoryId, input.customerId);
 
@@ -137,7 +137,7 @@ export const updateProject = async (input: UpdateProjectInputDTO) => {
 export const updateProjects = async (ids: number[], status: ProjectStatus) => {
   const {
     user: { workspaceId },
-  } = await verifySession();
+  } = await requireSession();
 
   return await prisma.$transaction(async (tx) => {
     await tx.project.updateMany({
@@ -155,7 +155,7 @@ export const updateProjects = async (ids: number[], status: ProjectStatus) => {
 export const deleteProjects = async (ids: number[]) => {
   const {
     user: { workspaceId },
-  } = await verifySession();
+  } = await requireSession();
 
   return await prisma.project.deleteMany({
     where: {

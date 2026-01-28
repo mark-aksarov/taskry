@@ -3,12 +3,12 @@ import { resetDatabase } from "@/prisma/resetDatabase";
 import { getNotifications } from "../notification.service";
 import { NotificationType } from "@/generated/prisma/enums";
 import { vi, describe, beforeEach, it, expect } from "vitest";
-import { verifySession } from "@/lib/data/utils/verifySession";
+import { requireSession } from "@/lib/data/utils/requireSession";
 
 vi.mock("server-only", () => ({}));
 
-vi.mock("@/lib/data/utils/verifySession", () => ({
-  verifySession: vi.fn(),
+vi.mock("@/lib/data/utils/requireSession", () => ({
+  requireSession: vi.fn(),
 }));
 
 describe("Notification Service", () => {
@@ -194,7 +194,7 @@ describe("Notification Service", () => {
       ],
     });
 
-    (verifySession as any).mockResolvedValue({
+    (requireSession as any).mockResolvedValue({
       user: { id: "user-1", workspaceId: 1 },
     });
   });
@@ -284,7 +284,7 @@ describe("Notification Service", () => {
     });
 
     it("should return notifications for user-3 and workspace 2", async () => {
-      (verifySession as any).mockResolvedValue({
+      (requireSession as any).mockResolvedValue({
         user: { id: "user-3", workspaceId: 2 },
       });
 

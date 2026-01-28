@@ -4,7 +4,7 @@ import { cache } from "react";
 import prisma from "@/lib/prisma";
 import { CustomerFilters } from "@/lib/types";
 import { AccessDeniedError } from "../utils/error";
-import { verifySession } from "../utils/verifySession";
+import { requireSession } from "../utils/requireSession";
 import { Prisma, ProjectStatus } from "@/generated/prisma/client";
 import { CreateCustomerInputDTO, UpdateCustomerInputDTO } from "./customer.dto";
 
@@ -12,7 +12,7 @@ export const getCustomer = cache(
   async <T extends Prisma.CustomerSelect>(id: number, select: T) => {
     const {
       user: { workspaceId },
-    } = await verifySession();
+    } = await requireSession();
 
     return await prisma.customer.findFirst({
       where: { id, workspaceId },
@@ -37,7 +37,7 @@ export const getAllCustomers = cache(
   }) => {
     const {
       user: { workspaceId },
-    } = await verifySession();
+    } = await requireSession();
 
     const skip = page && pageSize ? (page - 1) * pageSize : undefined;
     const take = pageSize ? pageSize : undefined;
@@ -65,7 +65,7 @@ export const getAllCustomers = cache(
 export const getCustomerCount = cache(async (filters?: CustomerFilters) => {
   const {
     user: { workspaceId },
-  } = await verifySession();
+  } = await requireSession();
 
   return prisma.customer.count({
     where: buildCustomerWhereClause(workspaceId, filters),
@@ -75,7 +75,7 @@ export const getCustomerCount = cache(async (filters?: CustomerFilters) => {
 export const deleteCustomers = async (ids: number[]) => {
   const {
     user: { workspaceId },
-  } = await verifySession();
+  } = await requireSession();
 
   return await prisma.customer.deleteMany({
     where: {
@@ -88,7 +88,7 @@ export const deleteCustomers = async (ids: number[]) => {
 export const createCustomer = async (input: CreateCustomerInputDTO) => {
   const {
     user: { workspaceId },
-  } = await verifySession();
+  } = await requireSession();
 
   await validateCustomerRelations(workspaceId, input);
 
@@ -103,7 +103,7 @@ export const createCustomer = async (input: CreateCustomerInputDTO) => {
 export const updateCustomer = async (input: UpdateCustomerInputDTO) => {
   const {
     user: { workspaceId },
-  } = await verifySession();
+  } = await requireSession();
 
   await validateCustomerRelations(workspaceId, input);
 

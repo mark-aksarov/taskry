@@ -8,17 +8,17 @@ import { AccessDeniedError } from "../../utils/error";
 import { resetDatabase } from "@/prisma/resetDatabase";
 import { NotificationType } from "@/generated/prisma/enums";
 import { vi, describe, beforeEach, it, expect } from "vitest";
-import { verifySession } from "@/lib/data/utils/verifySession";
+import { requireSession } from "@/lib/data/utils/requireSession";
 
 vi.mock("server-only", () => ({}));
 
-vi.mock("@/lib/data/utils/verifySession", () => ({
-  verifySession: vi.fn(),
+vi.mock("@/lib/data/utils/requireSession", () => ({
+  requireSession: vi.fn(),
 }));
 
 describe("Notification DAL", () => {
   beforeEach(async () => {
-    (verifySession as any).mockResolvedValue({
+    (requireSession as any).mockResolvedValue({
       user: { id: "user-1", workspaceId: 1 },
     });
 
@@ -108,7 +108,7 @@ describe("Notification DAL", () => {
       const notificationId = 100;
 
       const setup = async (userId: string, role: string) => {
-        (verifySession as any).mockResolvedValue({
+        (requireSession as any).mockResolvedValue({
           user: { id: userId, workspaceId: 1, role },
         });
 
@@ -197,7 +197,7 @@ describe("Notification DAL", () => {
       const notificationId = 100;
 
       const setup = async (userId: string, role: string) => {
-        (verifySession as any).mockResolvedValue({
+        (requireSession as any).mockResolvedValue({
           user: { id: userId, workspaceId: 1, role },
         });
 

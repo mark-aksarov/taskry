@@ -2,12 +2,12 @@ import prisma from "@/lib/prisma";
 import { resetDatabase } from "@/prisma/resetDatabase";
 import { getPositionSummaries } from "../position.service";
 import { vi, describe, beforeEach, it, expect } from "vitest";
-import { verifySession } from "@/lib/data/utils/verifySession";
+import { requireSession } from "@/lib/data/utils/requireSession";
 
 vi.mock("server-only", () => ({}));
 
-vi.mock("@/lib/data/utils/verifySession", () => ({
-  verifySession: vi.fn(),
+vi.mock("@/lib/data/utils/requireSession", () => ({
+  requireSession: vi.fn(),
 }));
 
 describe("Position DAL", () => {
@@ -19,7 +19,7 @@ describe("Position DAL", () => {
     const mockSession = {
       user: { id: "user-1", workspaceId: 1 },
     };
-    (verifySession as any).mockResolvedValue(mockSession);
+    (requireSession as any).mockResolvedValue(mockSession);
 
     await prisma.workspace.create({ data: { id: 1 } });
     await prisma.workspace.create({ data: { id: 2 } });
@@ -56,7 +56,7 @@ describe("Position DAL", () => {
     });
 
     it("should return an empty array if the workspace has no positions", async () => {
-      (verifySession as any).mockResolvedValue({
+      (requireSession as any).mockResolvedValue({
         user: { id: "user-3", workspaceId: 3 },
       });
 

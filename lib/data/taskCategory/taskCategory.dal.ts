@@ -2,13 +2,13 @@ import "server-only";
 
 import { cache } from "react";
 import prisma from "@/lib/prisma";
-import { verifySession } from "../utils/verifySession";
+import { requireSession } from "../utils/requireSession";
 import { CreateTaskCategoryInputDTO } from "./taskCategory.dto";
 
 export const getAllTaskCategories = cache(async () => {
   const {
     user: { workspaceId },
-  } = await verifySession();
+  } = await requireSession();
 
   return await prisma.taskCategory.findMany({
     where: { workspaceId },
@@ -21,7 +21,7 @@ export const createTaskCategory = async (
 ) => {
   const {
     user: { workspaceId },
-  } = await verifySession();
+  } = await requireSession();
 
   return await prisma.taskCategory.create({
     data: {

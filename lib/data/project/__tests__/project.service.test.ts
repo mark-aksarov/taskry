@@ -22,18 +22,18 @@ import prisma from "@/lib/prisma";
 import { ProjectFilters } from "@/lib/types";
 import { dates } from "@/lib/data/utils/test-utils";
 import { resetDatabase } from "@/prisma/resetDatabase";
-import { verifySession } from "@/lib/data/utils/verifySession";
+import { requireSession } from "@/lib/data/utils/requireSession";
 import { ProjectStatus, TaskStatus } from "@/generated/prisma/enums";
 
 vi.mock("server-only", () => ({}));
 
-vi.mock("@/lib/data/utils/verifySession", () => ({
-  verifySession: vi.fn(),
+vi.mock("@/lib/data/utils/requireSession", () => ({
+  requireSession: vi.fn(),
 }));
 
 describe("Project Service", () => {
   beforeAll(async () => {
-    (verifySession as any).mockResolvedValue({
+    (requireSession as any).mockResolvedValue({
       user: { id: "user-1", workspaceId: 1 },
     });
 

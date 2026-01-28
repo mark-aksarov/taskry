@@ -2,12 +2,12 @@ import prisma from "@/lib/prisma";
 import { createCompany } from "../company.dal";
 import { resetDatabase } from "@/prisma/resetDatabase";
 import { describe, it, expect, beforeEach, vi } from "vitest";
-import { verifySession } from "@/lib/data/utils/verifySession";
+import { requireSession } from "@/lib/data/utils/requireSession";
 
 vi.mock("server-only", () => ({}));
 
-vi.mock("@/lib/data/utils/verifySession", () => ({
-  verifySession: vi.fn(),
+vi.mock("@/lib/data/utils/requireSession", () => ({
+  requireSession: vi.fn(),
 }));
 
 describe("Company DAL", () => {
@@ -19,7 +19,7 @@ describe("Company DAL", () => {
     const mockSession = {
       user: { id: "user-1", workspaceId: 1 },
     };
-    (verifySession as any).mockResolvedValue(mockSession);
+    (requireSession as any).mockResolvedValue(mockSession);
 
     await prisma.workspace.create({ data: { id: 1 } });
 
@@ -65,7 +65,7 @@ describe("Company DAL", () => {
     });
 
     it("should fail to create company if session is missing or expired", async () => {
-      (verifySession as any).mockRejectedValue(new Error("Unauthorized"));
+      (requireSession as any).mockRejectedValue(new Error("Unauthorized"));
 
       const input = { name: "Failure Inc" };
 

@@ -9,7 +9,7 @@ import prisma from "@/lib/prisma";
 import { auth } from "@/lib/auth";
 import { TaskFilters } from "@/lib/types";
 import { AccessDeniedError } from "../utils/error";
-import { verifySession } from "../utils/verifySession";
+import { requireSession } from "../utils/requireSession";
 import { Prisma, TaskStatus } from "@/generated/prisma/client";
 import { UpdateTaskInputDTO, CreateTaskInputDTO } from "./task.dto";
 
@@ -18,7 +18,7 @@ export const getTask = cache(
     // Authorization
     const {
       user: { workspaceId },
-    } = await verifySession();
+    } = await requireSession();
 
     let where = { id, workspaceId };
 
@@ -34,7 +34,7 @@ export const getAllTasks = cache(
     // Authorization
     const {
       user: { workspaceId },
-    } = await verifySession();
+    } = await requireSession();
 
     let where = { workspaceId };
 
@@ -62,7 +62,7 @@ export const getPaginatedTasks = cache(
     // Authorization
     const {
       user: { id: userId, workspaceId },
-    } = await verifySession();
+    } = await requireSession();
 
     const skip = page && pageSize ? (page - 1) * pageSize : undefined;
     const take = pageSize ? pageSize : undefined;
@@ -100,7 +100,7 @@ export const getTaskCount = cache(async (filters?: TaskFilters) => {
   // Authorization
   const {
     user: { id: userId, workspaceId },
-  } = await verifySession();
+  } = await requireSession();
 
   const where = buildTaskWhereClause(userId, workspaceId, filters);
 
@@ -111,7 +111,7 @@ export const createTask = async (input: CreateTaskInputDTO) => {
   // Authorization
   const {
     user: { id: creatorId, workspaceId },
-  } = await verifySession();
+  } = await requireSession();
 
   // ACL
   const permission = await auth.api.userHasPermission({
@@ -161,7 +161,7 @@ export const updateTask = async (input: UpdateTaskInputDTO) => {
   // Authorization
   const {
     user: { id: userId, workspaceId },
-  } = await verifySession();
+  } = await requireSession();
 
   // Check permission
   const permission = await auth.api.userHasPermission({
@@ -216,7 +216,7 @@ export const updateTaskStatuses = async (
   // Authorization
   const {
     user: { id: userId, workspaceId },
-  } = await verifySession();
+  } = await requireSession();
 
   // Check permission
   const permission = await auth.api.userHasPermission({
@@ -270,7 +270,7 @@ export const deleteTasks = async (ids: number[]) => {
   // Authorization
   const {
     user: { id: actorId, workspaceId },
-  } = await verifySession();
+  } = await requireSession();
 
   // ACL
   const permission = await auth.api.userHasPermission({

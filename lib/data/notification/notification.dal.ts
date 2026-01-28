@@ -4,7 +4,7 @@ import { cache } from "react";
 import prisma from "@/lib/prisma";
 import { auth } from "@/lib/auth";
 import { AccessDeniedError } from "../utils/error";
-import { verifySession } from "@/lib/data/utils/verifySession";
+import { requireSession } from "@/lib/data/utils/requireSession";
 import { Prisma, NotificationType } from "@/generated/prisma/client";
 
 export const getAllNotifications = cache(
@@ -19,7 +19,7 @@ export const getAllNotifications = cache(
   }) => {
     const {
       user: { workspaceId, id: recipientId },
-    } = await verifySession();
+    } = await requireSession();
 
     const skip = (page - 1) * pageSize;
     const baseWhere = { recipientId, workspaceId };
@@ -104,7 +104,7 @@ export const deleteNotification = async (id: number) => {
   // Authorization
   const {
     user: { id: recipientId, workspaceId },
-  } = await verifySession();
+  } = await requireSession();
 
   // ACL
   const permission = await auth.api.userHasPermission({
@@ -135,7 +135,7 @@ export const markNotificationsAsRead = async (ids: number[] | null) => {
   // Authorization
   const {
     user: { id: recipientId, workspaceId },
-  } = await verifySession();
+  } = await requireSession();
 
   // ACL
   const permission = await auth.api.userHasPermission({

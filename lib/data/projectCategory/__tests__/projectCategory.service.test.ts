@@ -1,13 +1,13 @@
 import prisma from "@/lib/prisma";
 import { resetDatabase } from "@/prisma/resetDatabase";
 import { vi, describe, beforeEach, it, expect } from "vitest";
-import { verifySession } from "@/lib/data/utils/verifySession";
+import { requireSession } from "@/lib/data/utils/requireSession";
 import { getProjectCategorySummaries } from "../projectCategory.service";
 
 vi.mock("server-only", () => ({}));
 
-vi.mock("@/lib/data/utils/verifySession", () => ({
-  verifySession: vi.fn(),
+vi.mock("@/lib/data/utils/requireSession", () => ({
+  requireSession: vi.fn(),
 }));
 
 describe("ProjectCategory Service", () => {
@@ -16,7 +16,7 @@ describe("ProjectCategory Service", () => {
 
     await resetDatabase();
 
-    (verifySession as any).mockResolvedValue({
+    (requireSession as any).mockResolvedValue({
       user: { id: "user-1", workspaceId: 1 },
     });
 
@@ -56,7 +56,7 @@ describe("ProjectCategory Service", () => {
 
     it("should return an empty array if the current workspace has no categories", async () => {
       await prisma.workspace.create({ data: { id: 3 } });
-      (verifySession as any).mockResolvedValue({
+      (requireSession as any).mockResolvedValue({
         user: { id: "user-3", workspaceId: 3 },
       });
 

@@ -7,12 +7,12 @@ import {
 import prisma from "@/lib/prisma";
 import { resetDatabase } from "@/prisma/resetDatabase";
 import { describe, it, expect, beforeEach, vi } from "vitest";
-import { verifySession } from "@/lib/data/utils/verifySession";
+import { requireSession } from "@/lib/data/utils/requireSession";
 
 vi.mock("server-only", () => ({}));
 
-vi.mock("@/lib/data/utils/verifySession", () => ({
-  verifySession: vi.fn(),
+vi.mock("@/lib/data/utils/requireSession", () => ({
+  requireSession: vi.fn(),
 }));
 
 describe("Customer Service", () => {
@@ -24,7 +24,7 @@ describe("Customer Service", () => {
     const mockSession = {
       user: { id: "user-1", workspaceId: 1 },
     };
-    (verifySession as any).mockResolvedValue(mockSession);
+    (requireSession as any).mockResolvedValue(mockSession);
 
     await prisma.workspace.create({ data: { id: 1 } });
     await prisma.company.create({
@@ -79,7 +79,7 @@ describe("Customer Service", () => {
     });
 
     it("should ensure strict isolation between workspaces", async () => {
-      (verifySession as any).mockResolvedValue({
+      (requireSession as any).mockResolvedValue({
         user: { id: "user-2", workspaceId: 2 },
       });
 
@@ -93,7 +93,7 @@ describe("Customer Service", () => {
 
     it("should return an empty array if no customers exist in workspace", async () => {
       await prisma.workspace.create({ data: { id: 3 } });
-      (verifySession as any).mockResolvedValue({
+      (requireSession as any).mockResolvedValue({
         user: { id: "user-3", workspaceId: 3 },
       });
 
@@ -103,7 +103,7 @@ describe("Customer Service", () => {
     });
 
     it("should fail if the session is not found", async () => {
-      (verifySession as any).mockRejectedValue(new Error("Unauthorized"));
+      (requireSession as any).mockRejectedValue(new Error("Unauthorized"));
 
       await expect(getCustomerSummaries()).rejects.toThrow("Unauthorized");
     });

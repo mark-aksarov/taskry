@@ -1,6 +1,6 @@
 import { getAllComments } from "./comment.dal";
 import { CommentListItemDTO } from "./comment.dto";
-import { verifySession } from "../utils/verifySession";
+import { requireSession } from "../utils/requireSession";
 
 export const getCommentList = async ({
   taskId,
@@ -11,7 +11,7 @@ export const getCommentList = async ({
 }): Promise<CommentListItemDTO[]> => {
   const {
     user: { id: userId, role },
-  } = await verifySession();
+  } = await requireSession();
 
   const comments = await getAllComments(taskId, projectId);
 

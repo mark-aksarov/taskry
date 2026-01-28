@@ -2,13 +2,13 @@ import prisma from "@/lib/prisma";
 import { getCommentList } from "../comment.service";
 import { resetDatabase } from "@/prisma/resetDatabase";
 import { describe, it, expect, vi, beforeAll } from "vitest";
-import { verifySession } from "@/lib/data/utils/verifySession";
+import { requireSession } from "@/lib/data/utils/requireSession";
 import { ProjectStatus, TaskStatus } from "@/generated/prisma/enums";
 
 vi.mock("server-only", () => ({}));
 
-vi.mock("@/lib/data/utils/verifySession", () => ({
-  verifySession: vi.fn(),
+vi.mock("@/lib/data/utils/requireSession", () => ({
+  requireSession: vi.fn(),
 }));
 
 describe("Comment Service", () => {
@@ -16,7 +16,7 @@ describe("Comment Service", () => {
     const mockSession = {
       user: { id: "user-1", workspaceId: 1 },
     };
-    (verifySession as any).mockResolvedValue(mockSession);
+    (requireSession as any).mockResolvedValue(mockSession);
 
     await resetDatabase();
 

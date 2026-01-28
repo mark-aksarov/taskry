@@ -8,18 +8,18 @@ import {
 import prisma from "@/lib/prisma";
 import { resetDatabase } from "@/prisma/resetDatabase";
 import { describe, it, expect, beforeEach, vi } from "vitest";
-import { verifySession } from "@/lib/data/utils/verifySession";
+import { requireSession } from "@/lib/data/utils/requireSession";
 import { ProjectStatus, TaskStatus } from "@/generated/prisma/enums";
 
 vi.mock("server-only", () => ({}));
 
-vi.mock("@/lib/data/utils/verifySession", () => ({
-  verifySession: vi.fn(),
+vi.mock("@/lib/data/utils/requireSession", () => ({
+  requireSession: vi.fn(),
 }));
 
 describe("Project DAL", () => {
   beforeEach(async () => {
-    (verifySession as any).mockResolvedValue({
+    (requireSession as any).mockResolvedValue({
       user: { id: "user-1", workspaceId: 1 },
     });
 
@@ -174,7 +174,7 @@ describe("Project DAL", () => {
     });
 
     it("should return total count of projects for workspace 2", async () => {
-      (verifySession as any).mockResolvedValue({
+      (requireSession as any).mockResolvedValue({
         user: { workspaceId: 2 },
       });
 
@@ -206,7 +206,7 @@ describe("Project DAL", () => {
     });
 
     it("should return filtered count by category", async () => {
-      (verifySession as any).mockResolvedValue({
+      (requireSession as any).mockResolvedValue({
         user: { workspaceId: 2 },
       });
 
@@ -282,7 +282,7 @@ describe("Project DAL", () => {
     });
 
     it("should fail if getSessionOrThrow fails", async () => {
-      (verifySession as any).mockRejectedValue(new Error("Unauthorized"));
+      (requireSession as any).mockRejectedValue(new Error("Unauthorized"));
 
       const input = { title: "Should not be created" } as any;
 
@@ -339,7 +339,7 @@ describe("Project DAL", () => {
     });
 
     it("should fail and rollback if validateRelations fails", async () => {
-      (verifySession as any).mockResolvedValue({
+      (requireSession as any).mockResolvedValue({
         user: { workspaceId: 1 },
       });
 
@@ -404,7 +404,7 @@ describe("Project DAL", () => {
     });
 
     it("should only update projects belonging to the user's workspace", async () => {
-      (verifySession as any).mockResolvedValue({
+      (requireSession as any).mockResolvedValue({
         user: { workspaceId: 1 },
       });
 
@@ -475,7 +475,7 @@ describe("Project DAL", () => {
     });
 
     it("should fail and not delete anything if authorization fails", async () => {
-      (verifySession as any).mockRejectedValue(new Error("Unauthorized"));
+      (requireSession as any).mockRejectedValue(new Error("Unauthorized"));
 
       await expect(deleteProjects([1])).rejects.toThrow("Unauthorized");
 

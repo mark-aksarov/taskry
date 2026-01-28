@@ -3,12 +3,12 @@ import "server-only";
 import { cache } from "react";
 import prisma from "@/lib/prisma";
 import { CreateCompanyInputDTO } from "./company.dto";
-import { verifySession } from "../utils/verifySession";
+import { requireSession } from "../utils/requireSession";
 
 export const getAllCompanies = cache(async () => {
   const {
     user: { workspaceId },
-  } = await verifySession();
+  } = await requireSession();
 
   return await prisma.company.findMany({
     where: {
@@ -24,7 +24,7 @@ export const getAllCompanies = cache(async () => {
 export const createCompany = async (company: CreateCompanyInputDTO) => {
   const {
     user: { workspaceId },
-  } = await verifySession();
+  } = await requireSession();
 
   return await prisma.company.create({
     data: {

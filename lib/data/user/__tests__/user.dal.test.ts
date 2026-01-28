@@ -2,12 +2,12 @@ import prisma from "@/lib/prisma";
 import { deleteUsers, getUserCount } from "../user.dal";
 import { resetDatabase } from "@/prisma/resetDatabase";
 import { describe, it, expect, beforeEach, vi } from "vitest";
-import { verifySession } from "@/lib/data/utils/verifySession";
+import { requireSession } from "@/lib/data/utils/requireSession";
 
 vi.mock("server-only", () => ({}));
 
-vi.mock("@/lib/data/utils/verifySession", () => ({
-  verifySession: vi.fn(),
+vi.mock("@/lib/data/utils/requireSession", () => ({
+  requireSession: vi.fn(),
 }));
 
 describe("User DAL", () => {
@@ -19,7 +19,7 @@ describe("User DAL", () => {
     const mockSession = {
       user: { id: "user-1", workspaceId: 1 },
     };
-    (verifySession as any).mockResolvedValue(mockSession);
+    (requireSession as any).mockResolvedValue(mockSession);
 
     await prisma.workspace.create({ data: { id: 1 } });
     await prisma.workspace.create({ data: { id: 2 } });
@@ -128,7 +128,7 @@ describe("User DAL", () => {
       ],
     });
 
-    (verifySession as any).mockResolvedValue({
+    (requireSession as any).mockResolvedValue({
       user: { id: "user-1", workspaceId: 1 },
     });
   });
@@ -164,7 +164,7 @@ describe("User DAL", () => {
 
     it("should return 0 for workspace with no users", async () => {
       await prisma.workspace.create({ data: { id: 3 } });
-      (verifySession as any).mockResolvedValue({
+      (requireSession as any).mockResolvedValue({
         user: { id: "user-new", workspaceId: 3 },
       });
 
@@ -173,7 +173,7 @@ describe("User DAL", () => {
     });
 
     it("should strictly isolate count by workspace", async () => {
-      (verifySession as any).mockResolvedValue({
+      (requireSession as any).mockResolvedValue({
         user: { id: "user-3", workspaceId: 2 },
       });
 
@@ -218,7 +218,7 @@ describe("User DAL", () => {
     });
 
     it("should fail if the session is missing", async () => {
-      (verifySession as any).mockRejectedValue(new Error("Unauthorized"));
+      (requireSession as any).mockRejectedValue(new Error("Unauthorized"));
 
       await expect(deleteUsers(["user-2"])).rejects.toThrow("Unauthorized");
     });
