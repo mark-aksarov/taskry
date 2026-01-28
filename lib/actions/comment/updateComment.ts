@@ -1,14 +1,11 @@
 "use server";
 
-import { auth } from "@/lib/auth";
-import { headers } from "next/headers";
 import { ActionState } from "../types";
-import { redirect } from "@/i18n/navigation";
+import { getTranslations } from "next-intl/server";
 import { commentSchema } from "@/lib/schemas/comment";
-import { getLocale, getTranslations } from "next-intl/server";
-import { validateActionInput } from "../utils/validateActionInput";
 import { actionError, actionSuccess } from "../utils/actionResult";
 import { updateComment as updateCommentQuery } from "@/lib/data/comment/comment.dal";
+import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedirect";
 
 const schema = commentSchema.pick({ id: true, content: true });
 
@@ -16,38 +13,29 @@ export async function updateComment(
   _prevState: ActionState,
   formData: FormData,
 ): Promise<ActionState> {
+  // Authorization
+  await requireSessionOrRedirect();
+
   const t = await getTranslations("actions.common");
 
-  // Authorization
-  const session = await auth.api.getSession({
-    headers: await headers(),
-  });
-
-  if (!session) {
-    const locale = await getLocale();
-    redirect({ href: "/sign-in", locale });
-    return { status: "error", message: null };
-  }
-
   try {
-    const parsed = validateActionInput(schema, {
+    // Parse and validate form data
+    const parsed = schema.safeParse({
       id: formData.get("id"),
       content: formData.get("content"),
     });
 
     if (!parsed.success) {
+      console.error("Validation error", parsed.error);
       return actionError(t("validation.invalidInput"));
     }
 
+    // Update comment
     await updateCommentQuery(parsed.data);
 
     return actionSuccess();
   } catch (error) {
     console.error("Server Action Error:", error);
-
-    return {
-      status: "error",
-      message: t("validation.internalServerError"),
-    };
+    return actionError(t("validation.internalServerError"));
   }
 }

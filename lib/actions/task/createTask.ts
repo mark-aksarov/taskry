@@ -4,10 +4,9 @@ import { ActionState } from "../types";
 import { revalidatePath } from "next/cache";
 import { taskSchema } from "@/lib/schemas/task";
 import { getTranslations } from "next-intl/server";
-import { withAuthAction } from "../utils/withAuthAction";
-import { validateActionInput } from "../utils/validateActionInput";
 import { actionError, actionSuccess } from "../utils/actionResult";
 import { createTask as createTaskQuery } from "@/lib/data/task/task.dal";
+import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedirect";
 
 const schema = taskSchema.omit({ id: true });
 
@@ -15,14 +14,18 @@ export async function createTask(
   _prevState: ActionState,
   formData: FormData,
 ): Promise<ActionState> {
-  return withAuthAction(async () => {
-    const t = await getTranslations("actions.common");
+  // Authorization
+  await requireSessionOrRedirect();
 
+  const t = await getTranslations("actions.common");
+
+  try {
     // Parse and validate form data
     const input = Object.fromEntries(formData.entries());
-    const parsed = validateActionInput(schema, input);
+    const parsed = schema.safeParse(input);
 
     if (!parsed.success) {
+      console.error("Validation error", parsed.error);
       return actionError(t("validation.invalidInput"));
     }
 
@@ -33,5 +36,8 @@ export async function createTask(
     revalidatePath("/projects");
 
     return actionSuccess();
-  });
+  } catch (error) {
+    console.error("Server Action Error:", error);
+    return actionError(t("validation.internalServerError"));
+  }
 }

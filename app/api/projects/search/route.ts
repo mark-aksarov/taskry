@@ -1,7 +1,14 @@
+import {
+  badRequest,
+  unauthorized,
+  internalServerError,
+} from "@/lib/utils/routeHandlerErrors";
+
 import z from "zod";
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 import { searchProjects } from "@/lib/data/project/project.service";
-import { withAuthRouteHandler } from "@/lib/utils/withAuthRouteHandler";
 import { pageSearchParam, pageSizeSearchParam } from "@/lib/schemas/base";
 
 const schema = z.object({
@@ -11,13 +18,22 @@ const schema = z.object({
 });
 
 export async function GET(req: NextRequest) {
-  return withAuthRouteHandler(async () => {
-    // Validation
+  // Authorization
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
+
+  if (!session) {
+    return unauthorized();
+  }
+
+  try {
+    // Parse and validate
     const searchParams = Object.fromEntries(req.nextUrl.searchParams);
     const parse = schema.safeParse(searchParams);
 
     if (!parse.success) {
-      return NextResponse.json({ error: "Invalid data" }, { status: 400 });
+      return badRequest("Invalid query params");
     }
 
     const { page, pageSize, query } = parse.data;
@@ -25,5 +41,8 @@ export async function GET(req: NextRequest) {
     // Fetch tasks
     const users = await searchProjects({ page, pageSize, query });
     return NextResponse.json(users);
-  });
+  } catch (error) {
+    console.error("API Error:", error);
+    return internalServerError();
+  }
 }

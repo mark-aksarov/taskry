@@ -6,11 +6,10 @@ import { revalidatePath } from "next/cache";
 import { getTranslations } from "next-intl/server";
 import { coercedPositiveInt } from "@/lib/schemas/base";
 import { ProjectStatus } from "@/generated/prisma/enums";
-import { withAuthAction } from "../utils/withAuthAction";
 import { projectStatusParam } from "@/lib/schemas/project";
-import { validateActionInput } from "../utils/validateActionInput";
 import { actionError, actionSuccess } from "../utils/actionResult";
 import { updateProjects as updateProjectsQuery } from "@/lib/data/project/project.dal";
+import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedirect";
 
 const schema = z.object({
   ids: z.array(coercedPositiveInt).min(1),
@@ -21,13 +20,17 @@ export async function updateProjectStatuses(
   _prevState: ActionState,
   { ids, nextStatus }: { ids: number[]; nextStatus: ProjectStatus },
 ): Promise<ActionState> {
-  return withAuthAction(async () => {
-    const t = await getTranslations("actions.common");
+  // Authorization
+  await requireSessionOrRedirect();
 
-    // Validation
-    const parsed = validateActionInput(schema, { ids, nextStatus });
+  const t = await getTranslations("actions.common");
+
+  try {
+    // Parse and validate form data
+    const parsed = schema.safeParse({ ids, nextStatus });
 
     if (!parsed.success) {
+      console.error("Validation error", parsed.error);
       return actionError(t("validation.invalidInput"));
     }
 
@@ -38,5 +41,8 @@ export async function updateProjectStatuses(
     revalidatePath("/projects");
 
     return actionSuccess();
-  });
+  } catch (error) {
+    console.error("Server Action Error:", error);
+    return actionError(t("validation.internalServerError"));
+  }
 }

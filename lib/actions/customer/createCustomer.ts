@@ -4,9 +4,8 @@ import { ActionState } from "../types";
 import { revalidatePath } from "next/cache";
 import { getTranslations } from "next-intl/server";
 import { customerSchema } from "@/lib/schemas/customer";
-import { withAuthAction } from "../utils/withAuthAction";
-import { validateActionInput } from "../utils/validateActionInput";
 import { actionError, actionSuccess } from "../utils/actionResult";
+import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedirect";
 import { createCustomer as createCustomerQuery } from "@/lib/data/customer/customer.dal";
 
 const schema = customerSchema.omit({ id: true });
@@ -15,19 +14,28 @@ export async function createCustomer(
   _prevState: ActionState,
   formData: FormData,
 ): Promise<ActionState> {
-  return withAuthAction(async () => {
-    const t = await getTranslations("actions.common");
+  // Authorization
+  await requireSessionOrRedirect();
 
+  const t = await getTranslations("actions.common");
+
+  try {
+    // Parse and validate form data
     const input = Object.fromEntries(formData.entries());
-    const parsed = validateActionInput(schema, input);
+    const parsed = schema.safeParse(input);
 
     if (!parsed.success) {
+      console.error("Validation error", parsed.error);
       return actionError(t("validation.invalidInput"));
     }
 
+    // Create customer
     await createCustomerQuery(parsed.data);
     revalidatePath("/customers");
 
     return actionSuccess();
-  });
+  } catch (error) {
+    console.error("Server Action Error:", error);
+    return actionError(t("validation.internalServerError"));
+  }
 }

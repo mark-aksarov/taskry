@@ -1,11 +1,28 @@
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
-import { withAuthRouteHandler } from "@/lib/utils/withAuthRouteHandler";
 import { getCompanySummaries } from "@/lib/data/company/company.service";
+import {
+  internalServerError,
+  unauthorized,
+} from "@/lib/utils/routeHandlerErrors";
 
 export async function GET(req: NextRequest) {
-  return withAuthRouteHandler(async () => {
+  // Authorization
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
+
+  if (!session) {
+    return unauthorized();
+  }
+
+  try {
     // Fetch companies
     const companies = await getCompanySummaries();
     return NextResponse.json(companies);
-  });
+  } catch (error) {
+    console.error("API Error:", error);
+    return internalServerError();
+  }
 }

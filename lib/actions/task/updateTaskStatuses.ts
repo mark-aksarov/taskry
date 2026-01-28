@@ -7,9 +7,8 @@ import { getTranslations } from "next-intl/server";
 import { taskStatusParam } from "@/lib/schemas/task";
 import { TaskStatus } from "@/generated/prisma/enums";
 import { coercedPositiveInt } from "@/lib/schemas/base";
-import { withAuthAction } from "../utils/withAuthAction";
-import { validateActionInput } from "../utils/validateActionInput";
 import { actionError, actionSuccess } from "../utils/actionResult";
+import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedirect";
 import { updateTaskStatuses as updateTaskStatusesQuery } from "@/lib/data/task/task.dal";
 
 const schema = z.object({
@@ -21,22 +20,28 @@ export async function updateTaskStatuses(
   _prevState: ActionState,
   { ids, nextStatus }: { ids: number[]; nextStatus: TaskStatus },
 ): Promise<ActionState> {
-  return withAuthAction(async () => {
-    const t = await getTranslations("actions.common");
+  // Authorization
+  await requireSessionOrRedirect();
 
-    // Validation
-    const parsed = validateActionInput(schema, { ids, nextStatus });
+  const t = await getTranslations("actions.common");
+
+  try {
+    // Parse and validate form data
+    const parsed = schema.safeParse({ ids, nextStatus });
 
     if (!parsed.success) {
+      console.error("Validation error", parsed.error);
       return actionError(t("validation.invalidInput"));
     }
 
-    // Execute update
+    // Update tasks
     await updateTaskStatusesQuery(parsed.data.ids, parsed.data.nextStatus);
 
-    // Revalidation
     revalidatePath("/tasks");
 
     return actionSuccess();
-  });
+  } catch (error) {
+    console.error("Server Action Error:", error);
+    return actionError(t("validation.internalServerError"));
+  }
 }

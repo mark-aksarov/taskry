@@ -1,16 +1,32 @@
+import {
+  badRequest,
+  unauthorized,
+  internalServerError,
+} from "@/lib/utils/routeHandlerErrors";
+
 import z from "zod";
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
 import { NextResponse, NextRequest } from "next/server";
 import { coercedPositiveInt } from "@/lib/schemas/base";
 import { getTaskDetail } from "@/lib/data/task/task.service";
 import { getTaskFormData } from "@/lib/data/task/task.service";
-import { withAuthRouteHandler } from "@/lib/utils/withAuthRouteHandler";
 
 export async function GET(
   req: NextRequest,
   { params }: { params: Promise<{ id: string }> },
 ) {
-  return withAuthRouteHandler(async () => {
-    // Validation
+  // Authorization
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
+
+  if (!session) {
+    return unauthorized();
+  }
+
+  try {
+    // Parse and validate
     const data = await params;
     const schema = z.object({
       id: coercedPositiveInt,
@@ -18,7 +34,7 @@ export async function GET(
 
     const parse = schema.safeParse({ id: data.id });
     if (!parse.success) {
-      return NextResponse.json({ error: "Invalid task ID" }, { status: 400 });
+      return badRequest("Invalid task ID");
     }
 
     const { id } = parse.data;
@@ -35,5 +51,8 @@ export async function GET(
     const task = await getTaskDetail(id);
 
     return NextResponse.json(task);
-  });
+  } catch (error) {
+    console.error("API Error:", error);
+    return internalServerError();
+  }
 }

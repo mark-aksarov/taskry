@@ -1,7 +1,14 @@
+import {
+  badRequest,
+  unauthorized,
+  internalServerError,
+} from "@/lib/utils/routeHandlerErrors";
+
 import z from "zod";
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 import { coercedPositiveInt } from "@/lib/schemas/base";
-import { withAuthRouteHandler } from "@/lib/utils/withAuthRouteHandler";
 import { getCustomerDetail } from "@/lib/data/customer/customer.service";
 import { getCustomerFormData } from "@/lib/data/customer/customer.service";
 
@@ -11,16 +18,22 @@ export async function GET(
   req: NextRequest,
   { params }: { params: Promise<{ id: string }> },
 ) {
-  return withAuthRouteHandler(async () => {
-    // Validation
+  // Authorization
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
+
+  if (!session) {
+    return unauthorized();
+  }
+
+  try {
+    // Parse and validate
     const data = await params;
     const parse = schema.safeParse({ id: data.id });
 
     if (!parse.success) {
-      return NextResponse.json(
-        { error: "Invalid customer ID" },
-        { status: 400 },
-      );
+      return badRequest("Invalid customer ID");
     }
 
     const { id } = parse.data;
@@ -36,5 +49,8 @@ export async function GET(
 
     const customer = await getCustomerDetail(id);
     return NextResponse.json(customer);
-  });
+  } catch (error) {
+    console.error("API Error:", error);
+    return internalServerError();
+  }
 }

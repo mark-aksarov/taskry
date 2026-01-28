@@ -1,16 +1,32 @@
+import {
+  badRequest,
+  unauthorized,
+  internalServerError,
+} from "@/lib/utils/routeHandlerErrors";
+
 import z from "zod";
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
 import { NextResponse, NextRequest } from "next/server";
 import { coercedPositiveInt } from "@/lib/schemas/base";
 import { getProjectDetail } from "@/lib/data/project/project.service";
-import { withAuthRouteHandler } from "@/lib/utils/withAuthRouteHandler";
 import { getProjectFormData } from "@/lib/data/project/project.service";
 
 export async function GET(
   req: NextRequest,
   { params }: { params: Promise<{ id: string }> },
 ) {
-  return withAuthRouteHandler(async () => {
-    // Validation
+  // Authorization
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
+
+  if (!session) {
+    return unauthorized();
+  }
+
+  try {
+    // Parse and validate
     const rawParams = await params;
     const schema = z.object({
       id: coercedPositiveInt,
@@ -19,10 +35,7 @@ export async function GET(
     const parse = schema.safeParse({ id: rawParams.id });
 
     if (!parse.success) {
-      return NextResponse.json(
-        { error: "Invalid project ID" },
-        { status: 400 },
-      );
+      return badRequest("Invalid project ID");
     }
 
     const { id } = parse.data;
@@ -38,5 +51,8 @@ export async function GET(
 
     const project = await getProjectDetail(id);
     return NextResponse.json(project);
-  });
+  } catch (error) {
+    console.error("API Error:", error);
+    return internalServerError();
+  }
 }

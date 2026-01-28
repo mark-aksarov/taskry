@@ -1,15 +1,31 @@
+import {
+  badRequest,
+  unauthorized,
+  internalServerError,
+} from "@/lib/utils/routeHandlerErrors";
+
 import z from "zod";
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 import { coercedPositiveInt } from "@/lib/schemas/base";
 import { getCommentList } from "@/lib/data/comment/comment.service";
-import { withAuthRouteHandler } from "@/lib/utils/withAuthRouteHandler";
 
 export async function GET(
   req: NextRequest,
   { params }: { params: Promise<{ id: string }> },
 ) {
-  return withAuthRouteHandler(async () => {
-    // Validation
+  // Authorization
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
+
+  if (!session) {
+    return unauthorized();
+  }
+
+  try {
+    // Parse and validate
     const data = await params;
 
     const schema = z.object({
@@ -17,8 +33,9 @@ export async function GET(
     });
 
     const parse = schema.safeParse({ id: data.id });
+
     if (!parse.success) {
-      return NextResponse.json({ error: "Invalid task ID" }, { status: 400 });
+      return badRequest("Invalid task ID");
     }
 
     const { id: taskId } = parse.data;
@@ -29,5 +46,8 @@ export async function GET(
     });
 
     return NextResponse.json(comments);
-  });
+  } catch (error) {
+    console.error("API Error:", error);
+    return internalServerError();
+  }
 }
