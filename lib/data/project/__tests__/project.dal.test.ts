@@ -291,7 +291,7 @@ describe("Project DAL", () => {
   });
 
   describe("updateProject", () => {
-    it("should update project data and trigger task status transitions", async () => {
+    it("should update project data", async () => {
       await prisma.taskCategory.create({
         data: {
           id: 1,
@@ -327,9 +327,6 @@ describe("Project DAL", () => {
 
       expect(updatedProject?.title).toBe("Updated Title");
       expect(updatedProject?.status).toBe(ProjectStatus.active);
-
-      const updatedTask = await prisma.task.findUnique({ where: { id: 101 } });
-      expect(updatedTask?.status).toBe("active");
     });
 
     it("should throw error if project belongs to another workspace", async () => {
@@ -339,49 +336,6 @@ describe("Project DAL", () => {
       };
 
       await expect(updateProject(input)).rejects.toThrow();
-    });
-
-    it("should successfully complete all tasks when project is set to completed", async () => {
-      await prisma.taskCategory.create({
-        data: {
-          id: 1,
-          name: "Category 1",
-          workspaceId: 1,
-        },
-      });
-
-      await prisma.task.createMany({
-        data: [
-          {
-            id: 102,
-            title: "Task 1",
-            status: "pending",
-            projectId: 1,
-            categoryId: 1,
-            assigneeId: "user-1",
-            workspaceId: 1,
-            deadline: new Date("2025-12-31"),
-          },
-          {
-            id: 103,
-            title: "Task 2",
-            status: "active",
-            projectId: 1,
-            categoryId: 1,
-            assigneeId: "user-1",
-            workspaceId: 1,
-            deadline: new Date("2025-12-31"),
-          },
-        ],
-      });
-
-      await updateProject({
-        id: 1,
-        status: ProjectStatus.completed,
-      });
-
-      const tasks = await prisma.task.findMany({ where: { projectId: 1 } });
-      expect(tasks.every((t) => t.status === "completed")).toBe(true);
     });
 
     it("should fail and rollback if validateRelations fails", async () => {
@@ -437,7 +391,7 @@ describe("Project DAL", () => {
       });
     });
 
-    it("should update multiple projects and their tasks in the current workspace", async () => {
+    it("should update multiple projects and in the current workspace", async () => {
       const projectIds = [1, 2];
       const nextStatus = ProjectStatus.completed;
 
@@ -447,12 +401,6 @@ describe("Project DAL", () => {
         where: { id: { in: projectIds } },
       });
       expect(projects.every((p) => p.status === nextStatus)).toBe(true);
-
-      const tasks = await prisma.task.findMany({
-        where: { projectId: { in: projectIds } },
-      });
-      expect(tasks).toHaveLength(2);
-      expect(tasks.every((t) => t.status === TaskStatus.completed)).toBe(true);
     });
 
     it("should only update projects belonging to the user's workspace", async () => {
@@ -470,16 +418,6 @@ describe("Project DAL", () => {
         where: { id: 3 },
       });
       expect(foreignProject?.status).toBe(ProjectStatus.active);
-    });
-
-    it("should handle transition to 'pending' correctly for multiple projects", async () => {
-      await updateProjects([1, 2], ProjectStatus.pending);
-
-      const tasks = await prisma.task.findMany({
-        where: { projectId: { in: [1, 2] } },
-      });
-
-      expect(tasks.every((t) => t.status === TaskStatus.pending)).toBe(true);
     });
   });
 

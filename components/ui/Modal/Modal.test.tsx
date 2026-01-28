@@ -1,19 +1,12 @@
-import {
-  Dialog,
-  DialogBody,
-  DialogHeader,
-  DialogHeading,
-  DialogCloseButton,
-} from "../Dialog";
-
 import React from "react";
 import { Button } from "../Button";
 import { TextField } from "../TextField";
 import { Modal, ModalProps } from "./Modal";
+import { describe, expect, test } from "vitest";
 import userEvent from "@testing-library/user-event";
 import { DialogTrigger } from "react-aria-components";
+import { Dialog, DialogBody, DialogHeader } from "../Dialog";
 import { render, screen, waitFor } from "@testing-library/react";
-import { describe, expect, test } from "vitest";
 
 const TestModal = (props: Omit<ModalProps, "children">) => {
   return (
@@ -21,10 +14,7 @@ const TestModal = (props: Omit<ModalProps, "children">) => {
       <Button label="Open modal" />
       <Modal {...props}>
         <Dialog>
-          <DialogHeader>
-            <DialogHeading>Modal title</DialogHeading>
-            <DialogCloseButton />
-          </DialogHeader>
+          <DialogHeader>Modal title</DialogHeader>
           <DialogBody>
             <TextField label="Name" placeholder="Start typing ..." />
           </DialogBody>

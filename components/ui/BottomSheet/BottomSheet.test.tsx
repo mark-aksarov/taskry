@@ -1,11 +1,3 @@
-import {
-  Dialog,
-  DialogBody,
-  DialogHeader,
-  DialogHeading,
-  DialogCloseButton,
-} from "../Dialog";
-
 import React from "react";
 import { Button } from "../Button";
 import { TextField } from "../TextField";
@@ -13,6 +5,7 @@ import { useOverlayTrigger } from "react-aria";
 import { describe, expect, test } from "vitest";
 import userEvent from "@testing-library/user-event";
 import { useOverlayTriggerState } from "react-stately";
+import { Dialog, DialogBody, DialogHeader } from "../Dialog";
 import { BottomSheet, BottomSheetProps } from "./BottomSheet";
 import { render, screen, waitFor } from "@testing-library/react";
 
@@ -27,12 +20,7 @@ const TestBottomSheet = (
       <Button {...triggerProps} label="Open Bottom Sheet" />
       <BottomSheet {...props} state={state}>
         <Dialog>
-          <DialogHeader>
-            <DialogHeading className="text-base">
-              Bottom sheet title
-            </DialogHeading>
-            <DialogCloseButton />
-          </DialogHeader>
+          <DialogHeader>Bottom sheet title</DialogHeader>
           <DialogBody>
             <TextField label="Name" placeholder="Start typing ..." />
           </DialogBody>
