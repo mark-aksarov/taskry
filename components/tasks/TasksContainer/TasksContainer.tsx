@@ -6,6 +6,7 @@ import { TaskFilters } from "@/lib/types";
 import { TaskListItem } from "../TaskListItem";
 import { TaskGridItem } from "../TaskGridItem";
 import { TaskDetailModal } from "../TaskDetailModal";
+import { hasGuestRole } from "@/lib/utils/hasGuestRole";
 import { getTaskList } from "@/lib/data/task/task.service";
 import { TaskListItemDTO } from "@/lib/data/task/task.dto";
 import { deleteTasks } from "@/lib/actions/task/deleteTasks";
@@ -55,6 +56,8 @@ export async function TasksContainer({
     subtasksTotal: task.subtasks.total,
   });
 
+  const guestMode = await hasGuestRole();
+
   return (
     <EntityContainerPresentation
       list={
@@ -86,7 +89,10 @@ export async function TasksContainer({
                     taskId={task.id}
                     commentsCount={task.commentsCount}
                     taskCommentsContainer={
-                      <TaskCommentsContainer taskId={task.id} />
+                      <TaskCommentsContainer
+                        guestMode={guestMode}
+                        taskId={task.id}
+                      />
                     }
                     sendCommentAction={sendComment}
                     updateCommentAction={updateComment}
@@ -112,6 +118,7 @@ export async function TasksContainer({
                 }
                 menuTrigger={
                   <TaskItemActionMenuTrigger
+                    guestMode={guestMode}
                     taskId={task.id}
                     taskTitle={task.title}
                     taskStatus={task.status}
@@ -152,7 +159,10 @@ export async function TasksContainer({
                   taskId={task.id}
                   commentsCount={task.commentsCount}
                   taskCommentsContainer={
-                    <TaskCommentsContainer taskId={task.id} />
+                    <TaskCommentsContainer
+                      guestMode={guestMode}
+                      taskId={task.id}
+                    />
                   }
                   sendCommentAction={sendComment}
                   updateCommentAction={updateComment}
@@ -160,6 +170,7 @@ export async function TasksContainer({
               }
               menuTrigger={
                 <TaskItemActionMenuTrigger
+                  guestMode={guestMode}
                   taskId={task.id}
                   taskTitle={task.title}
                   taskStatus={task.status}

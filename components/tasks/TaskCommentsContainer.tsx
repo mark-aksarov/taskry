@@ -14,6 +14,7 @@ import { CommentItemActionMenuTrigger } from "../comments/CommentItem";
 import { CommentsEmptySection } from "@/components/comments/CommentsEmptySection";
 
 interface TaskCommentsContainerProps {
+  guestMode: boolean;
   taskId: number;
 }
 
@@ -29,7 +30,10 @@ export function TaskCommentsContainer(props: TaskCommentsContainerProps) {
   );
 }
 
-function TaskCommentsContainerInner({ taskId }: { taskId: number }) {
+function TaskCommentsContainerInner({
+  guestMode,
+  taskId,
+}: TaskCommentsContainerProps) {
   const {
     data: comments,
     error,
@@ -58,6 +62,7 @@ function TaskCommentsContainerInner({ taskId }: { taskId: number }) {
             menuTrigger={
               comment.canEdit && (
                 <CommentItemActionMenuTrigger
+                  guestMode={guestMode}
                   commentId={comment.id}
                   commentContent={comment.content}
                   deleteAction={deleteComment}

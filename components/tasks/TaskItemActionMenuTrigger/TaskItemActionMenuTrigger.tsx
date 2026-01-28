@@ -18,13 +18,13 @@ import { useTranslations } from "next-intl";
 import { EditTaskModal } from "../EditTaskModal";
 import { DeleteTaskModal } from "../DeleteTaskModal";
 import { TaskStatus } from "@/generated/prisma/enums";
-import { useHasGuestMode } from "@/lib/hooks/useHasGuestMode";
 import { startTransition, useActionState, useState } from "react";
 import { GuestModeModal } from "@/components/common/GuestModeModal";
 import { useActionErrorToast } from "@/lib/hooks/useActionErrorToast";
 import { Check, CircleEllipsis, Clock, Pencil, Trash } from "lucide-react";
 
 export type TaskItemActionMenuTriggerProps = {
+  guestMode: boolean;
   taskId: number;
   taskTitle: string;
   taskStatus: TaskStatus;
@@ -40,6 +40,7 @@ const initialState: ActionState = {
 };
 
 export function TaskItemActionMenuTrigger({
+  guestMode,
   taskId,
   taskTitle,
   taskStatus,
@@ -51,7 +52,6 @@ export function TaskItemActionMenuTrigger({
   const t = useTranslations("tasks.TaskItemActionMenuTrigger");
 
   // Guest mode modal
-  const guestMode = useHasGuestMode();
   const [isGuestModeModalOpen, setIsGuestModeModalOpen] = useState(false);
 
   // Modal state for editing the task

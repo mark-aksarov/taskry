@@ -19,13 +19,13 @@ import { useTranslations } from "next-intl";
 import { DeleteTasksModal } from "./DeleteTasksModal";
 import { TaskStatus } from "@/generated/prisma/enums";
 import { GuestModeModal } from "../common/GuestModeModal";
-import { useHasGuestMode } from "@/lib/hooks/useHasGuestMode";
 import { useTaskSelection } from "@/lib/hooks/useTaskSelection";
 import { startTransition, useActionState, useState } from "react";
 import { Check, CircleEllipsis, Clock, Trash } from "lucide-react";
 import { useActionErrorToast } from "@/lib/hooks/useActionErrorToast";
 
 interface TaskToolbarActionsMenuTriggerProps {
+  guestMode: boolean;
   deleteAction: ActionFn<ActionState, DeleteTasksPayload>;
   updateStatusAction: ActionFn<ActionState, UpdateTaskStatusesPayload>;
 }
@@ -36,13 +36,13 @@ const initialState: ActionState = {
 };
 
 export const TaskToolbarActionsMenuTrigger = ({
+  guestMode,
   deleteAction,
   updateStatusAction,
 }: TaskToolbarActionsMenuTriggerProps) => {
   const t = useTranslations("tasks.TaskToolbarActionsMenuTrigger");
 
   // Guest mode modal state
-  const guestMode = useHasGuestMode();
   const [isGuestModeModalOpen, setIsGuestModeModalOpen] = useState(false);
 
   // Delete confirmation modal state

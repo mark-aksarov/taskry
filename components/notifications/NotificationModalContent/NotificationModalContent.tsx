@@ -9,7 +9,7 @@ import { ActionFn, ActionState, MarkAsReadPayload } from "@/lib/actions/types";
 import { NotificationFilterToggleButtonGroup } from "../NotificationFilterToggleButtonGroup";
 
 interface NotificationModalContentProps {
-  guestMode?: boolean;
+  guestMode: boolean;
   notificationList: React.ReactNode;
   totalCount: number;
   unreadCount: number;

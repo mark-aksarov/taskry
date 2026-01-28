@@ -19,21 +19,28 @@ import useSWR from "swr";
 import { Suspense, useState } from "react";
 import { NotificationFilter } from "../types";
 import { NotificationList } from "../NotificationList";
-import { useHasGuestMode } from "@/lib/hooks/useHasGuestMode";
 import { NotificationEmptySection } from "../NotificationEmptySection";
 import { NotificationsDTO } from "@/lib/data/notification/notification.dto";
 import { deleteNotification } from "@/lib/actions/notification/deleteNotification";
 import { markNotificationsAsRead } from "@/lib/actions/notification/markNotificationsAsRead";
 
-export function NotificationModalContentContainer() {
+interface NotificationModalContentContainerProps {
+  guestMode: boolean;
+}
+
+export function NotificationModalContentContainer(
+  props: NotificationModalContentContainerProps,
+) {
   return (
     <Suspense fallback={<NotificationModalContentSkeleton />}>
-      <NotificationModalContentContainerInner />
+      <NotificationModalContentContainerInner {...props} />
     </Suspense>
   );
 }
 
-function NotificationModalContentContainerInner() {
+function NotificationModalContentContainerInner({
+  guestMode,
+}: NotificationModalContentContainerProps) {
   const [page, setPage] = useState(1);
   const [filter, setFilter] = useState<NotificationFilter>("all");
   const pageSize = 10;
@@ -53,8 +60,6 @@ function NotificationModalContentContainerInner() {
 
   const countForPagination = filter === "unread" ? unreadCount : totalCount;
   const totalPages = Math.ceil(countForPagination / pageSize);
-
-  const guestMode = useHasGuestMode();
 
   return (
     <NotificationModalContent
@@ -91,9 +96,9 @@ function NotificationModalContentContainerInner() {
                 }
                 menuTrigger={
                   <NotificationListItemActionMenuTrigger
+                    guestMode={guestMode}
                     notificaitonId={notification.id}
                     isRead={notification.isRead}
-                    guestMode={guestMode}
                     deleteAction={deleteNotification}
                     markAsReadAction={markNotificationsAsRead}
                     mutate={mutate}

@@ -12,11 +12,11 @@ import { useTranslations } from "next-intl";
 import { Pencil, Trash } from "lucide-react";
 import { DeleteCommentModal } from "../DeleteCommentModal";
 import { ActionFn, ActionState } from "@/lib/actions/types";
-import { useHasGuestMode } from "@/lib/hooks/useHasGuestMode";
 import { useCommentFormContext } from "../CommentFormContext";
 import { GuestModeModal } from "@/components/common/GuestModeModal";
 
 export type CommentItemActionMenuTriggerProps = {
+  guestMode: boolean;
   commentId: number;
   commentContent: string;
   className?: string;
@@ -25,6 +25,7 @@ export type CommentItemActionMenuTriggerProps = {
 };
 
 export function CommentItemActionMenuTrigger({
+  guestMode,
   commentId,
   commentContent,
   className,
@@ -34,8 +35,6 @@ export function CommentItemActionMenuTrigger({
   const { setEditCommentId, setCommentContent } = useCommentFormContext();
 
   const t = useTranslations("comments.CommentItemActionMenuTrigger");
-
-  const guestMode = useHasGuestMode();
 
   // Guest mode modal
   const [isGuestModeModalOpen, setIsGuestModeModalOpen] = useState(false);

@@ -4,6 +4,7 @@ import {
   arraySearchParam,
   booleanSearchParam,
   pageSizeSearchParam,
+  coercedPositiveInt,
 } from "@/lib/schemas/base";
 
 import { z } from "zod";
@@ -31,8 +32,8 @@ const searchParamsSchema = z.object({
   noActiveTasks: booleanSearchParam,
   sort: z.enum(["title", "deadline", "status", "category"]).catch("title"),
   status: arraySearchParam(z.enum(ProjectStatus)),
-  category: arraySearchParam(z.coerce.number()),
-  customer: arraySearchParam(z.coerce.number()),
+  category: arraySearchParam(coercedPositiveInt),
+  customer: arraySearchParam(coercedPositiveInt),
   user: arraySearchParam(z.string()),
 });
 

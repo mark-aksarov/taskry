@@ -261,6 +261,7 @@ export const getTaskListItems = ({
       }
       menuTrigger={
         <TaskItemActionMenuTrigger
+          guestMode={false}
           taskId={task.id}
           taskTitle={task.title}
           taskStatus={task.status}

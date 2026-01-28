@@ -48,6 +48,7 @@ export const Default = {
     ),
     taskToolbarCreateNewMenuTrigger: (
       <TaskToolbarCreateNewMenuTrigger
+        guestMode={false}
         newTaskFormContainer={<TaskFormBase {...TaskFormBaseStory.args} />}
         newTaskCategoryForm={<NewTaskCategoryForm formAction={fn()} />}
       />
@@ -61,6 +62,7 @@ export const Default = {
     ),
     taskToolbarActionsMenuTrigger: (
       <TaskToolbarActionsMenuTrigger
+        guestMode={false}
         deleteAction={fn()}
         updateStatusAction={fn()}
       />

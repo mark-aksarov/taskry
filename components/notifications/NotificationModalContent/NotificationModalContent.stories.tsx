@@ -16,6 +16,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
+    guestMode: false,
     notificationList: <NotificationList {...NotificationListStory.args} />,
     totalCount: 20,
     unreadCount: 10,

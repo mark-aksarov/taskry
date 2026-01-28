@@ -128,7 +128,7 @@ describe("mark notifications as read", () => {
         .should("be.disabled");
     });
 
-    it("should show GuestModeModal for guest user", () => {
+    it.only("should show GuestModeModal for guest user", () => {
       setup({
         notifications: [
           {

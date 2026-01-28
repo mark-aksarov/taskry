@@ -4,6 +4,7 @@ import {
   arraySearchParam,
   booleanSearchParam,
   pageSizeSearchParam,
+  coercedPositiveInt,
 } from "@/lib/schemas/base";
 
 import { z } from "zod";
@@ -30,7 +31,7 @@ const searchParamsSchema = z.object({
   hasNoActiveProjects: booleanSearchParam,
   hasActiveProjects: booleanSearchParam,
   hasOverdueProjects: booleanSearchParam,
-  company: arraySearchParam(z.coerce.number()),
+  company: arraySearchParam(coercedPositiveInt),
 });
 
 export default async function AppCustomersPage({

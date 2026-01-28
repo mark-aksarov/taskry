@@ -6,6 +6,7 @@ import {
 } from "@/components/common/EntityContainerPagination";
 
 import { UserTaskList } from "../UserTaskList";
+import { hasGuestRole } from "@/lib/utils/hasGuestRole";
 import { UserTaskListItem } from "../UserTaskListItem";
 import { getTaskList } from "@/lib/data/task/task.service";
 import { deleteTasks } from "@/lib/actions/task/deleteTasks";
@@ -46,6 +47,8 @@ export async function UserTasksContainer({
     filters,
   });
 
+  const guestMode = await hasGuestRole();
+
   return (
     <EntityPaginationProvider>
       <UserTaskList>
@@ -74,7 +77,10 @@ export async function UserTasksContainer({
                   taskId={task.id}
                   commentsCount={task.commentsCount}
                   taskCommentsContainer={
-                    <TaskCommentsContainer taskId={task.id} />
+                    <TaskCommentsContainer
+                      guestMode={guestMode}
+                      taskId={task.id}
+                    />
                   }
                   sendCommentAction={sendComment}
                   updateCommentAction={updateComment}
@@ -82,6 +88,7 @@ export async function UserTasksContainer({
               }
               menuTrigger={
                 <TaskItemActionMenuTrigger
+                  guestMode={guestMode}
                   taskId={task.id}
                   taskTitle={task.title}
                   taskStatus={task.status}

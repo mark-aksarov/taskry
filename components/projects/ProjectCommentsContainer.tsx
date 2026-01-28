@@ -14,6 +14,7 @@ import { CommentItemActionMenuTrigger } from "../comments/CommentItem";
 import { CommentsEmptySection } from "@/components/comments/CommentsEmptySection";
 
 interface ProjectCommentsContainerProps {
+  guestMode: boolean;
   projectId: number;
 }
 
@@ -30,6 +31,7 @@ export function ProjectCommentsContainer(props: ProjectCommentsContainerProps) {
 }
 
 function ProjectCommentsContainerInner({
+  guestMode,
   projectId,
 }: ProjectCommentsContainerProps) {
   const {
@@ -62,6 +64,7 @@ function ProjectCommentsContainerInner({
             menuTrigger={
               comment.canEdit && (
                 <CommentItemActionMenuTrigger
+                  guestMode={guestMode}
                   commentId={comment.id}
                   commentContent={comment.content}
                   deleteAction={deleteComment}

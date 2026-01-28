@@ -28,6 +28,7 @@ import { updateTaskStatuses } from "@/lib/actions/task/updateTaskStatuses";
 import { UserDetailContainer } from "@/components/users/UserDetailContainer";
 import { ProjectDetailModal } from "@/components/projects/ProjectDetailModal";
 import { ProjectDetailContainer } from "@/components/projects/ProjectDetailContainer";
+import { hasGuestRole } from "@/lib/utils/hasGuestRole";
 
 interface AssignedTasksContainerProps {
   page: number;
@@ -62,6 +63,7 @@ async function AssignedTasksContainerInner({
     sort: "deadline",
     filters,
   });
+  const guestMode = await hasGuestRole();
 
   if (!totalCount) {
     return (
@@ -105,7 +107,10 @@ async function AssignedTasksContainerInner({
                   taskId={task.id}
                   commentsCount={task.commentsCount}
                   taskCommentsContainer={
-                    <TaskCommentsContainer taskId={task.id} />
+                    <TaskCommentsContainer
+                      guestMode={guestMode}
+                      taskId={task.id}
+                    />
                   }
                   sendCommentAction={sendComment}
                   updateCommentAction={updateComment}
@@ -131,6 +136,7 @@ async function AssignedTasksContainerInner({
               }
               menuTrigger={
                 <TaskItemActionMenuTrigger
+                  guestMode={guestMode}
                   taskId={task.id}
                   taskTitle={task.title}
                   taskStatus={task.status}

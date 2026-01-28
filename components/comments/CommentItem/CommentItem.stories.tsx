@@ -41,6 +41,7 @@ export const Default = {
     attachments: [],
     menuTrigger: (
       <CommentItemActionMenuTrigger
+        guestMode={false}
         commentId={1}
         commentContent={content}
         deleteAction={fn()}

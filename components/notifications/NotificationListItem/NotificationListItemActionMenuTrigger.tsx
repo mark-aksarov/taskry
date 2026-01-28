@@ -25,18 +25,18 @@ const markAsReadActionInitialState: ActionState = {
 };
 
 interface NotificationListItemActionMenuTriggerProps {
+  guestMode: boolean | null;
   notificaitonId: number;
   isRead: boolean;
-  guestMode?: boolean;
   deleteAction: ActionFn<ActionState, number>;
   markAsReadAction: ActionFn<ActionState, MarkAsReadPayload>;
   mutate: () => void;
 }
 
 export function NotificationListItemActionMenuTrigger({
+  guestMode,
   notificaitonId,
   isRead,
-  guestMode,
   deleteAction,
   markAsReadAction,
   mutate,

@@ -32,6 +32,7 @@ const meta = {
       }
       menuTrigger={
         <TaskItemActionMenuTrigger
+          guestMode={false}
           taskId={args.id}
           taskTitle={args.title}
           taskStatus={args.status}

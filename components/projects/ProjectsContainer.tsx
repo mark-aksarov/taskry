@@ -5,6 +5,7 @@ import { ProjectGrid } from "./ProjectGrid";
 import { ProjectFilters } from "@/lib/types";
 import { ProjectListItem } from "./ProjectListItem";
 import { ProjectGridItem } from "./ProjectGridItem";
+import { hasGuestRole } from "@/lib/utils/hasGuestRole";
 import { ProjectDetailModal } from "./ProjectDetailModal";
 import { UserDetailModal } from "../users/UserDetailModal";
 import { sendComment } from "@/lib/actions/comment/sendComment";
@@ -41,6 +42,7 @@ export async function ProjectsContainer({
     sort,
     filters,
   });
+  const guestMode = await hasGuestRole();
 
   return (
     <EntityContainerPresentation
@@ -83,7 +85,10 @@ export async function ProjectsContainer({
                     projectId={project.id}
                     commentsCount={project.commentsCount}
                     projectCommentsContainer={
-                      <ProjectCommentsContainer projectId={project.id} />
+                      <ProjectCommentsContainer
+                        guestMode={guestMode}
+                        projectId={project.id}
+                      />
                     }
                     sendCommentAction={sendComment}
                     updateCommentAction={updateComment}
@@ -156,7 +161,10 @@ export async function ProjectsContainer({
                     projectId={project.id}
                     commentsCount={project.commentsCount}
                     projectCommentsContainer={
-                      <ProjectCommentsContainer projectId={project.id} />
+                      <ProjectCommentsContainer
+                        guestMode={guestMode}
+                        projectId={project.id}
+                      />
                     }
                     sendCommentAction={sendComment}
                     updateCommentAction={updateComment}

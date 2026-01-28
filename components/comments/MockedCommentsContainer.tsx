@@ -95,6 +95,7 @@ export function MockedCommentsContainer() {
           sender={comment.sender}
           menuTrigger={
             <CommentItemActionMenuTrigger
+              guestMode={false}
               commentId={comment.id}
               commentContent={comment.content}
               deleteAction={fn()}

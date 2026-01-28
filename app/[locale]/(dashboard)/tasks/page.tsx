@@ -4,6 +4,7 @@ import {
   arraySearchParam,
   booleanSearchParam,
   pageSizeSearchParam,
+  coercedPositiveInt,
 } from "@/lib/schemas/base";
 
 import { z } from "zod";
@@ -11,6 +12,7 @@ import { TasksPage } from "./TasksPage";
 import { TasksPageEmpty } from "./TasksPageEmpty";
 import { TaskStatus } from "@/generated/prisma/enums";
 import { getTaskCount } from "@/lib/data/task/task.dal";
+import { hasGuestRole } from "@/lib/utils/hasGuestRole";
 import { deleteTasks } from "@/lib/actions/task/deleteTasks";
 import { TasksContainer } from "@/components/tasks/TasksContainer";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
@@ -31,8 +33,8 @@ const searchParamsSchema = z.object({
   onlyMyTasks: booleanSearchParam,
   sort: z.enum(["title", "deadline", "status", "category"]).catch("title"),
   status: arraySearchParam(z.enum(TaskStatus)),
-  category: arraySearchParam(z.coerce.number()),
-  project: arraySearchParam(z.coerce.number()),
+  category: arraySearchParam(coercedPositiveInt),
+  project: arraySearchParam(coercedPositiveInt),
   assignee: arraySearchParam(z.string()),
 });
 
@@ -48,6 +50,7 @@ export default async function AppTasksPage({
   const { page, pageSize, sort, ...filters } = validated;
 
   const taskCount = await getTaskCount();
+  const guestMode = await hasGuestRole();
 
   if (!taskCount) {
     return <TasksPageEmpty newTaskFormContainer={<NewTaskFormContainer />} />;
@@ -57,12 +60,14 @@ export default async function AppTasksPage({
     <TasksPage
       taskToolbarActionsMenuTrigger={
         <TaskToolbarActionsMenuTrigger
+          guestMode={guestMode}
           deleteAction={deleteTasks}
           updateStatusAction={updateTaskStatuses}
         />
       }
       taskToolbarCreateNewMenuTrigger={
         <TaskToolbarCreateNewMenuTrigger
+          guestMode={guestMode}
           newTaskFormContainer={<NewTaskFormContainer />}
           newTaskCategoryForm={
             <NewTaskCategoryForm formAction={createTaskCategory} />

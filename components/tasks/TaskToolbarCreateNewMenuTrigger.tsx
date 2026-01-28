@@ -13,15 +13,16 @@ import { Blocks, CalendarCheck } from "lucide-react";
 import { DialogHeader } from "@/components/ui/Dialog";
 import { GuestModeModal } from "../common/GuestModeModal";
 import { NewTaskCategoryModal } from "./NewTaskCategoryModal";
-import { useHasGuestMode } from "@/lib/hooks/useHasGuestMode";
 import { NewTaskModal } from "@/components/tasks/NewTaskModal";
 
 interface TaskToolbarCreateNewMenuTriggerProps {
+  guestMode: boolean;
   newTaskFormContainer: React.ReactNode;
   newTaskCategoryForm: React.ReactNode;
 }
 
 export function TaskToolbarCreateNewMenuTrigger({
+  guestMode,
   newTaskFormContainer,
   newTaskCategoryForm,
 }: TaskToolbarCreateNewMenuTriggerProps) {
@@ -32,7 +33,6 @@ export function TaskToolbarCreateNewMenuTrigger({
   const [openTaskCategoryModal, setOpenTaskCategoryModal] = useState(false);
 
   // Guest mode
-  const guestMode = useHasGuestMode();
   const [isGuestModeModalOpen, setIsGuestModeModalOpen] = useState(false);
 
   // Menu actions: show guest modal, show task modal, show task category modal

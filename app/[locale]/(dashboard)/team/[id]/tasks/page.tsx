@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { hasGuestRole } from "@/lib/utils/hasGuestRole";
 import { getTaskCount } from "@/lib/data/task/task.dal";
 import { deleteTasks } from "@/lib/actions/task/deleteTasks";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
@@ -37,6 +38,7 @@ export default async function AppProfileTasksPage({
 
   // Get count
   const taskCount = await getTaskCount();
+  const guestMode = await hasGuestRole();
 
   if (!taskCount)
     return (
@@ -60,6 +62,7 @@ export default async function AppProfileTasksPage({
       userHeaderContainer={<UserHeaderContainer userId={id} />}
       taskToolbarActionsMenuTrigger={
         <TaskToolbarActionsMenuTrigger
+          guestMode={guestMode}
           deleteAction={deleteTasks}
           updateStatusAction={updateTaskStatuses}
         />

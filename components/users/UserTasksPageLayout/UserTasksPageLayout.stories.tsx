@@ -35,6 +35,7 @@ export const Default = {
     userHeaderContainer: <PersonHeader {...PersonHeaderStory.args} />,
     taskToolbarActionsMenuTrigger: (
       <TaskToolbarActionsMenuTrigger
+        guestMode={false}
         deleteAction={fn()}
         updateStatusAction={fn()}
       />

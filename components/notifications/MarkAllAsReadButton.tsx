@@ -20,7 +20,7 @@ const markAsReadActionInitialState: ActionState = {
 };
 
 interface MarkAllAsReadButtonProps extends ButtonProps {
-  guestMode?: boolean;
+  guestMode: boolean;
   markAsReadAction: ActionFn<ActionState, MarkAsReadPayload>;
   mutate: () => void;
 }
@@ -41,6 +41,14 @@ export function MarkAllAsReadButton({
     markAsReadNotificationPending,
   ] = useActionState(markAsReadAction, markAsReadActionInitialState);
 
+  useEffect(() => {
+    if (markAsReadNotificationState.status === "success") {
+      mutate();
+    }
+  }, [markAsReadNotificationState, mutate]);
+
+  useActionErrorToast(markAsReadNotificationState);
+
   function handlePress() {
     if (guestMode) {
       setIsGuestModeModalOpen(true);
@@ -49,14 +57,6 @@ export function MarkAllAsReadButton({
 
     startTransition(() => markAsReadNotificationAction(null));
   }
-
-  useEffect(() => {
-    if (markAsReadNotificationState.status === "success") {
-      mutate();
-    }
-  }, [markAsReadNotificationState, mutate]);
-
-  useActionErrorToast(markAsReadNotificationState);
 
   return (
     <>
