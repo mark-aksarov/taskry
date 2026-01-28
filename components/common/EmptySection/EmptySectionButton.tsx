@@ -8,6 +8,7 @@ import { Button, ButtonProps, DialogTrigger } from "react-aria-components";
 interface EmptySectionButtonProps extends ButtonProps {
   createNewModal: React.ReactNode;
   children: React.ReactNode;
+  "data-test"?: string;
 }
 
 const styles = tv({

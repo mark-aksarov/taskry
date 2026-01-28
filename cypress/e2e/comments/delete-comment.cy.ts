@@ -69,16 +69,18 @@ describe("deletes a comment", () => {
   it("can delete a project comment", () => {
     cy.visit("/en/projects");
     cy.getByData("project-comments-modal-trigger").click();
-    cy.getMenuItem("comment-item-1-action-menu-trigger", "delete").click();
-    cy.getByData("confirm-button").click();
+    cy.getByData("comment-item-1-action-menu-trigger").click();
+    cy.getMenuItem("delete").click();
+    cy.getByData("delete-comment-modal-confirm-button").click();
     cy.getByData("comment-item").should("not.exist");
   });
 
   it("can delete a task comment", () => {
     cy.visit("/en/tasks");
     cy.getByData("task-comments-modal-trigger").click();
-    cy.getMenuItem("comment-item-2-action-menu-trigger", "delete").click();
-    cy.getByData("confirm-button").click();
+    cy.getByData("comment-item-2-action-menu-trigger").click();
+    cy.getMenuItem("delete").click();
+    cy.getByData("delete-comment-modal-confirm-button").click();
     cy.getByData("comment-item").should("not.exist");
   });
 
@@ -93,7 +95,8 @@ describe("deletes a comment", () => {
     cy.signIn("guest@example.com", "12345abc");
     cy.visit("/en/projects");
     cy.getByData("project-comments-modal-trigger").click();
-    cy.getMenuItem("comment-item-1-action-menu-trigger", "delete").click();
+    cy.getByData("comment-item-1-action-menu-trigger").click();
+    cy.getMenuItem("delete").click();
     cy.getByData("guest-mode-modal").should("be.visible");
   });
 });

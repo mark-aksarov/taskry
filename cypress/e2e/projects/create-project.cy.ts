@@ -25,7 +25,7 @@ describe("creates a new project", () => {
   });
 
   it("can create a project", () => {
-    cy.getByData("empty-section-button").click();
+    cy.getByData("projects-page-empty-add-button").click();
 
     // fill form
     cy.get('input[name="title"]').clear().type("Updated Project Title");
@@ -33,9 +33,15 @@ describe("creates a new project", () => {
       .clear()
       .type("Updated Project Description");
     cy.setDatePickerDate("deadline-date-picker", "12", "31", "2025");
-    cy.changeSelection("status-select", "active");
-    cy.changeSelection("category-select", "1");
-    cy.changeSelection("customer-select", "1");
+
+    cy.getByData("status-select").click();
+    cy.getSelectOption("active").click();
+
+    cy.getByData("category-select").click();
+    cy.getSelectOption("1").click();
+
+    cy.getByData("customer-select").click();
+    cy.getSelectOption("1").click();
 
     // submit
     cy.get('button[type="submit"]').click();

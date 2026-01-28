@@ -24,7 +24,7 @@ export function ProjectToolbarFiltersModalTrigger({
       <ToolbarFiltersButtonMobile data-test="project-toolbar-filters-button-mobile" />
       <ToolbarFiltersButtonDesktop data-test="project-toolbar-filters-button-desktop" />
 
-      <ToolbarFiltersModal>
+      <ToolbarFiltersModal data-test="project-toolbar-filters-modal">
         <ToolbarFiltersModalDialog>
           <DialogHeader>{t("title")}</DialogHeader>
           <DialogBody>{filtersFormContainer}</DialogBody>

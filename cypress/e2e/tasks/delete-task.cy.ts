@@ -63,8 +63,9 @@ describe("deletes a task", () => {
     cy.signIn("owner@example.com", "12345abc");
     cy.visit("/en/tasks");
 
-    cy.getMenuItem("task-item-1-action-menu-trigger", "delete").click();
-    cy.getByData("confirm-button").click();
+    cy.getByData("task-item-1-action-menu-trigger").click();
+    cy.getMenuItem("delete").click();
+    cy.getByData("delete-task-modal-confirm-button").click();
     cy.getByData("task-list-item").should("not.exist");
 
     // check notifications
@@ -121,21 +122,27 @@ describe("deletes a task", () => {
     it("allows a user with 'owner' role to open the edit modal", () => {
       cy.signIn("owner@example.com", "12345abc");
       cy.visit("/en/tasks");
-      cy.getMenuItem("task-item-1-action-menu-trigger", "delete").click();
-      cy.getByData("delete-entity-modal").should("be.visible");
+
+      cy.getByData("task-item-1-action-menu-trigger").click();
+      cy.getMenuItem("delete").click();
+      cy.getByData("delete-task-modal").should("be.visible");
     });
 
     it("allows a user with 'user' role to open the edit modal", () => {
       cy.signIn("user@example.com", "12345abc");
       cy.visit("/en/tasks");
-      cy.getMenuItem("task-item-1-action-menu-trigger", "delete").click();
-      cy.getByData("delete-entity-modal").should("be.visible");
+
+      cy.getByData("task-item-1-action-menu-trigger").click();
+      cy.getMenuItem("delete").click();
+      cy.getByData("delete-task-modal").should("be.visible");
     });
 
     it("shows a restriction modal when a 'guest' attempts to delete", () => {
       cy.signIn("guest@example.com", "12345abc");
       cy.visit("/en/tasks");
-      cy.getMenuItem("task-item-1-action-menu-trigger", "edit").click();
+
+      cy.getByData("task-item-1-action-menu-trigger").click();
+      cy.getMenuItem("edit").click();
       cy.getByData("guest-mode-modal").should("be.visible");
     });
   });

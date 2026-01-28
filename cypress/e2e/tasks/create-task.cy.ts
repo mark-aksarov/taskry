@@ -39,7 +39,7 @@ describe("creates a new task", () => {
   });
 
   it("can create a task and send notifications", () => {
-    cy.getByData("empty-section-button").click();
+    cy.getByData("tasks-page-empty-add-button").click();
 
     // fill form
     cy.get('input[name="title"]').clear().type("Created Task Title");
@@ -47,10 +47,18 @@ describe("creates a new task", () => {
       .clear()
       .type("Updated Task Description");
     cy.setDatePickerDate("deadline-date-picker", "12", "31", "2025");
-    cy.changeSelection("status-select", "active");
-    cy.changeSelection("category-select", "1");
-    cy.changeSelection("project-select", "1");
-    cy.changeSelection("assignee-select", "user-3");
+
+    cy.getByData("status-select").click();
+    cy.getSelectOption("active").click();
+
+    cy.getByData("category-select").click();
+    cy.getSelectOption("1").click();
+
+    cy.getByData("project-select").click();
+    cy.getSelectOption("1").click();
+
+    cy.getByData("assignee-select").click();
+    cy.getSelectOption("user-3").click();
 
     // submit
     cy.get('button[type="submit"]').click();

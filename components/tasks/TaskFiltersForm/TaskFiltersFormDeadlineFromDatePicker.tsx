@@ -20,7 +20,7 @@ export function TaskFiltersFormDeadlineFromDatePicker({
 
   return (
     <ResponsiveDatePicker
-      data-test="deadline-date-picker"
+      data-test="deadline-from-date-picker"
       label={t("label")}
       defaultValue={defaultValue}
       name="deadlineFrom"

@@ -72,6 +72,7 @@ export function DeleteTasksModal({
         <ConfirmModalConfirmButton
           label={t("deleteButton")}
           onConfirm={handleDelete}
+          data-test="delete-tasks-modal-confirm-button"
         />
       </ConfirmModalActions>
     </ConfirmModal>

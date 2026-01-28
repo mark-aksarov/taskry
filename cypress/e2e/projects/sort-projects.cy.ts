@@ -69,7 +69,11 @@ describe("sort projects", () => {
       }),
     );
 
-    cy.getMenuItem("toolbar-sorting-menu-trigger", "title").click();
+    cy.getByData("project-toolbar-sorting-button-desktop")
+      .filter(":visible")
+      .click();
+
+    cy.getMenuItem("title").click();
 
     cy.getByData("project-list-item-title").eq(0).should("contain", "A");
     cy.getByData("project-list-item-title").eq(1).should("contain", "B");
@@ -114,7 +118,11 @@ describe("sort projects", () => {
       }),
     );
 
-    cy.getMenuItem("toolbar-sorting-menu-trigger", "deadline").click();
+    cy.getByData("project-toolbar-sorting-button-desktop")
+      .filter(":visible")
+      .click();
+
+    cy.getMenuItem("deadline").click();
 
     cy.getByData("project-list-item-title").eq(0).should("contain", "C");
     cy.getByData("project-list-item-title").eq(1).should("contain", "B");
@@ -159,7 +167,11 @@ describe("sort projects", () => {
       }),
     );
 
-    cy.getMenuItem("toolbar-sorting-menu-trigger", "status").click();
+    cy.getByData("project-toolbar-sorting-button-desktop")
+      .filter(":visible")
+      .click();
+
+    cy.getMenuItem("status").click();
 
     cy.getByData("project-list-item-title")
       .eq(0)
@@ -227,7 +239,11 @@ describe("sort projects", () => {
       }),
     );
 
-    cy.getMenuItem("toolbar-sorting-menu-trigger", "category").click();
+    cy.getByData("project-toolbar-sorting-button-desktop")
+      .filter(":visible")
+      .click();
+
+    cy.getMenuItem("category").click();
 
     cy.getByData("project-list-item-title")
       .eq(0)

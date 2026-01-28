@@ -1,21 +1,9 @@
-Cypress.Commands.add("changeSelection", (dataTestAttribute, key) => {
-  cy.getByData(dataTestAttribute).eq(0).click();
-  return cy
-    .get('li[role="option"]')
-    .filter(':not([aria-selected="true"])')
-    .filter(`[data-key=${key}]`)
-    .first()
-    .click();
+Cypress.Commands.add("getMenuItem", (key) => {
+  return cy.get(`[data-key="${key}"]`);
 });
 
-Cypress.Commands.add("getMenuItem", (dataTestAttribute, key) => {
-  cy.getByData(dataTestAttribute).eq(0).click();
-  return cy.get('li[role="menuitem"]').filter(`[data-key=${key}]`).first();
-});
-
-Cypress.Commands.add("getSelectOption", (dataTestAttribute, key) => {
-  cy.getByData(dataTestAttribute).eq(0).click();
-  return cy.get('li[role="option"]').filter(`[data-key=${key}]`).first();
+Cypress.Commands.add("getSelectOption", (key) => {
+  return cy.get(`[data-key="${key}"]`);
 });
 
 Cypress.Commands.add(

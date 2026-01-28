@@ -75,11 +75,17 @@ describe("delete multiple projects", () => {
   it("can delete projects", () => {
     cy.getByData("project-1-checkbox").click();
     cy.getByData("project-2-checkbox").click();
-    cy.getMenuItem("toolbar-action-menu-trigger", "delete").click();
-    cy.getByData("bulk-delete-entity-modal")
+
+    cy.getByData("project-toolbar-actions-button-desktop")
+      .filter(":visible")
+      .click();
+    cy.getMenuItem("delete").click();
+
+    cy.getByData("delete-projects-modal")
       .should("be.visible")
       .contains("2 projects");
-    cy.getByData("confirm-button").click();
+
+    cy.getByData("delete-projects-modal-confirm-button").click();
     cy.getByData("project-list-item").should("not.exist");
   });
 });

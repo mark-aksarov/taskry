@@ -85,7 +85,11 @@ describe("sort tasks", () => {
       }),
     );
 
-    cy.getMenuItem("toolbar-sorting-menu-trigger", "title").click();
+    cy.getByData("task-toolbar-sorting-button-desktop")
+      .filter(":visible")
+      .click();
+
+    cy.getMenuItem("title").click();
 
     cy.getByData("task-list-item-title").eq(0).should("contain", "A");
     cy.getByData("task-list-item-title").eq(1).should("contain", "B");
@@ -133,7 +137,11 @@ describe("sort tasks", () => {
       }),
     );
 
-    cy.getMenuItem("toolbar-sorting-menu-trigger", "deadline").click();
+    cy.getByData("task-toolbar-sorting-button-desktop")
+      .filter(":visible")
+      .click();
+
+    cy.getMenuItem("deadline").click();
 
     cy.getByData("task-list-item-title").eq(0).should("contain", "Task 3");
     cy.getByData("task-list-item-title").eq(1).should("contain", "Task 2");
@@ -181,7 +189,10 @@ describe("sort tasks", () => {
       }),
     );
 
-    cy.getMenuItem("toolbar-sorting-menu-trigger", "status").click();
+    cy.getByData("task-toolbar-sorting-button-desktop")
+      .filter(":visible")
+      .click();
+    cy.getMenuItem("status").click();
 
     cy.getByData("task-list-item-title").eq(0).should("contain", "Task Active");
     cy.getByData("task-list-item-title")
@@ -250,7 +261,10 @@ describe("sort tasks", () => {
       }),
     );
 
-    cy.getMenuItem("toolbar-sorting-menu-trigger", "category").click();
+    cy.getByData("task-toolbar-sorting-button-desktop")
+      .filter(":visible")
+      .click();
+    cy.getMenuItem("category").click();
 
     cy.getByData("task-list-item-title")
       .eq(0)

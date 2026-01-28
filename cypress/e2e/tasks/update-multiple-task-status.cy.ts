@@ -129,7 +129,11 @@ describe("update multiple task status", () => {
   describe("should change status for all tasks", () => {
     it("should change status for active task to pending", () => {
       cy.getByData("task-1-checkbox").click();
-      cy.getMenuItem("toolbar-action-menu-trigger", "pending").click();
+
+      cy.getByData("task-toolbar-actions-button-desktop")
+        .filter(":visible")
+        .click();
+      cy.getMenuItem("pending").click();
       cy.getByData("task-list-item")
         .eq(0)
         .contains(/pending/i);
@@ -137,7 +141,11 @@ describe("update multiple task status", () => {
 
     it("should change status for completed task to pending", () => {
       cy.getByData("task-3-checkbox").click();
-      cy.getMenuItem("toolbar-action-menu-trigger", "pending").click();
+
+      cy.getByData("task-toolbar-actions-button-desktop")
+        .filter(":visible")
+        .click();
+      cy.getMenuItem("pending").click();
       cy.getByData("task-list-item")
         .eq(2)
         .contains(/pending/i);
@@ -145,7 +153,11 @@ describe("update multiple task status", () => {
 
     it("should change status for active task to completed", () => {
       cy.getByData("task-1-checkbox").click();
-      cy.getMenuItem("toolbar-action-menu-trigger", "completed").click();
+
+      cy.getByData("task-toolbar-actions-button-desktop")
+        .filter(":visible")
+        .click();
+      cy.getMenuItem("completed").click();
       cy.getByData("task-list-item")
         .eq(0)
         .contains(/completed/i);
@@ -154,7 +166,11 @@ describe("update multiple task status", () => {
     it("should change status for active task + pending task to completed", () => {
       cy.getByData("task-1-checkbox").click();
       cy.getByData("task-4-checkbox").click();
-      cy.getMenuItem("toolbar-action-menu-trigger", "completed").click();
+
+      cy.getByData("task-toolbar-actions-button-desktop")
+        .filter(":visible")
+        .click();
+      cy.getMenuItem("completed").click();
 
       cy.getByData("task-list-item")
         .eq(0)
@@ -167,7 +183,11 @@ describe("update multiple task status", () => {
     it("should change status for pending + completed tasks to active", () => {
       cy.getByData("task-2-checkbox").click();
       cy.getByData("task-3-checkbox").click();
-      cy.getMenuItem("toolbar-action-menu-trigger", "active").click();
+
+      cy.getByData("task-toolbar-actions-button-desktop")
+        .filter(":visible")
+        .click();
+      cy.getMenuItem("active").click();
 
       cy.getByData("task-list-item")
         .eq(1)
@@ -181,7 +201,11 @@ describe("update multiple task status", () => {
       cy.getByData("task-1-checkbox").click();
       cy.getByData("task-3-checkbox").click();
       cy.getByData("task-4-checkbox").click();
-      cy.getMenuItem("toolbar-action-menu-trigger", "pending").click();
+
+      cy.getByData("task-toolbar-actions-button-desktop")
+        .filter(":visible")
+        .click();
+      cy.getMenuItem("pending").click();
 
       cy.getByData("task-list-item")
         .eq(0)
@@ -198,7 +222,11 @@ describe("update multiple task status", () => {
       cy.getByData("task-1-checkbox").click();
       cy.getByData("task-3-checkbox").click();
       cy.getByData("task-5-checkbox").click();
-      cy.getMenuItem("toolbar-action-menu-trigger", "completed").click();
+
+      cy.getByData("task-toolbar-actions-button-desktop")
+        .filter(":visible")
+        .click();
+      cy.getMenuItem("completed").click();
 
       cy.getByData("task-list-item")
         .eq(0)
@@ -215,7 +243,11 @@ describe("update multiple task status", () => {
       cy.getByData("task-2-checkbox").click();
       cy.getByData("task-3-checkbox").click();
       cy.getByData("task-6-checkbox").click();
-      cy.getMenuItem("toolbar-action-menu-trigger", "completed").click();
+
+      cy.getByData("task-toolbar-actions-button-desktop")
+        .filter(":visible")
+        .click();
+      cy.getMenuItem("completed").click();
 
       cy.getByData("task-list-item")
         .eq(1)
@@ -280,22 +312,20 @@ describe("update multiple task status", () => {
     it("should disable 'active' item when all selected tasks are active", () => {
       cy.getByData("task-1-checkbox").click();
 
-      cy.getMenuItem("toolbar-action-menu-trigger", "active").should(
-        "have.attr",
-        "aria-disabled",
-        "true",
-      );
+      cy.getByData("task-toolbar-actions-button-desktop")
+        .filter(":visible")
+        .click();
+      cy.getMenuItem("active").should("have.attr", "aria-disabled", "true");
     });
 
     it("should disable 'pending' item when all selected tasks are pending", () => {
       cy.getByData("task-2-checkbox").click();
       cy.getByData("task-4-checkbox").click();
 
-      cy.getMenuItem("toolbar-action-menu-trigger", "pending").should(
-        "have.attr",
-        "aria-disabled",
-        "true",
-      );
+      cy.getByData("task-toolbar-actions-button-desktop")
+        .filter(":visible")
+        .click();
+      cy.getMenuItem("pending").should("have.attr", "aria-disabled", "true");
     });
 
     it("should disable 'completed' item when all selected tasks are pending", () => {
@@ -303,11 +333,10 @@ describe("update multiple task status", () => {
       cy.getByData("task-5-checkbox").click();
       cy.getByData("task-6-checkbox").click();
 
-      cy.getMenuItem("toolbar-action-menu-trigger", "completed").should(
-        "have.attr",
-        "aria-disabled",
-        "true",
-      );
+      cy.getByData("task-toolbar-actions-button-desktop")
+        .filter(":visible")
+        .click();
+      cy.getMenuItem("completed").should("have.attr", "aria-disabled", "true");
     });
   });
 });

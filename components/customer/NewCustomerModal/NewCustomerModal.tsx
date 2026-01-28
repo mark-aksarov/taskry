@@ -21,7 +21,7 @@ export function NewCustomerModal({
   const t = useTranslations("customers.NewCustomerModal");
 
   return (
-    <FormModal {...props}>
+    <FormModal data-test="new-customer-modal" {...props}>
       <FormModalDialog>
         <DialogHeader>{t("title")}</DialogHeader>
         <DialogBody>{newCustomerFormContainer}</DialogBody>

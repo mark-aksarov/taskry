@@ -38,10 +38,8 @@ describe("mark notifications as read", () => {
         },
       ]);
 
-      cy.getMenuItem(
-        "notification-item-action-menu-trigger",
-        "markAsRead",
-      ).click();
+      cy.getByData("notification-item-action-menu-trigger").click();
+      cy.getMenuItem("markAsRead").click();
 
       cy.getByData("unread-notification-button")
         .contains(0)
@@ -74,7 +72,8 @@ describe("mark notifications as read", () => {
         },
       ]);
 
-      cy.getMenuItem("notification-item-action-menu-trigger", "delete").click();
+      cy.getByData("notification-item-action-menu-trigger").click();
+      cy.getMenuItem("delete").click();
 
       cy.getByData("guest-mode-modal").should("be.visible");
     });
@@ -128,7 +127,7 @@ describe("mark notifications as read", () => {
         .should("be.disabled");
     });
 
-    it.only("should show GuestModeModal for guest user", () => {
+    it("should show GuestModeModal for guest user", () => {
       setup({
         notifications: [
           {

@@ -52,8 +52,14 @@ describe("deletes a project", () => {
   });
 
   it("can delete a project", () => {
-    cy.getMenuItem("project-item-1-action-menu-trigger", "delete").click();
-    cy.getByData("confirm-button").click();
+    cy.getByData("project-item-1-action-menu-trigger").click();
+    cy.getMenuItem("delete").click();
+
+    cy.getByData("delete-project-modal")
+      .should("be.visible")
+      .contains("Project 1");
+
+    cy.getByData("delete-project-modal-confirm-button").click();
     cy.getByData("project-list-item").should("not.exist");
   });
 });

@@ -1,6 +1,10 @@
 import { ModalProps } from "@/components/ui/Modal";
 import { ResponsiveModal } from "@/components/common/ResponsiveModal";
 
-export function FormModal(props: ModalProps) {
+interface FormModalProps extends ModalProps {
+  "data-test"?: string;
+}
+
+export function FormModal(props: FormModalProps) {
   return <ResponsiveModal isDismissable className="md:w-[500px]" {...props} />;
 }

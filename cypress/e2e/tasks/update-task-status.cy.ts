@@ -114,28 +114,32 @@ describe("update task status", () => {
 
   describe("can update task status", () => {
     it("should update 'active' task status to 'pending'", () => {
-      cy.getMenuItem("task-item-1-action-menu-trigger", "pending").click();
+      cy.getByData("task-item-1-action-menu-trigger").click();
+      cy.getMenuItem("pending").click();
       cy.getByData("task-list-item")
         .eq(0)
         .contains(/pending/i);
     });
 
     it("should update 'active' task status to 'completed'", () => {
-      cy.getMenuItem("task-item-1-action-menu-trigger", "completed").click();
+      cy.getByData("task-item-1-action-menu-trigger").click();
+      cy.getMenuItem("completed").click();
       cy.getByData("task-list-item")
         .eq(0)
         .contains(/completed/i);
     });
 
     it("should update 'pending' task status to 'active'", () => {
-      cy.getMenuItem("task-item-2-action-menu-trigger", "active").click();
+      cy.getByData("task-item-2-action-menu-trigger").click();
+      cy.getMenuItem("active").click();
       cy.getByData("task-list-item")
         .eq(1)
         .contains(/active/i);
     });
 
     it("should send notifications when task status is updated", () => {
-      cy.getMenuItem("task-item-1-action-menu-trigger", "pending").click();
+      cy.getByData("task-item-1-action-menu-trigger").click();
+      cy.getMenuItem("pending").click();
       cy.getByData("task-list-item")
         .eq(0)
         .contains(/pending/i);
@@ -162,7 +166,8 @@ describe("update task status", () => {
     it("allows a user with 'owner' role to open the edit modal", () => {
       cy.signIn("owner@example.com", "12345abc");
       cy.visit("/en/tasks");
-      cy.getMenuItem("task-item-1-action-menu-trigger", "pending").click();
+      cy.getByData("task-item-1-action-menu-trigger").click();
+      cy.getMenuItem("pending").click();
       cy.getByData("task-list-item")
         .eq(0)
         .contains(/pending/i);
@@ -171,7 +176,8 @@ describe("update task status", () => {
     it("allows a user with 'user' role to open the edit modal", () => {
       cy.signIn("user@example.com", "12345abc");
       cy.visit("/en/tasks");
-      cy.getMenuItem("task-item-1-action-menu-trigger", "pending").click();
+      cy.getByData("task-item-1-action-menu-trigger").click();
+      cy.getMenuItem("pending").click();
       cy.getByData("task-list-item")
         .eq(0)
         .contains(/pending/i);
@@ -180,7 +186,8 @@ describe("update task status", () => {
     it("shows a restriction modal when a 'guest' attempts to edit", () => {
       cy.signIn("guest@example.com", "12345abc");
       cy.visit("/en/tasks");
-      cy.getMenuItem("task-item-1-action-menu-trigger", "pending").click();
+      cy.getByData("task-item-1-action-menu-trigger").click();
+      cy.getMenuItem("pending").click();
       cy.getByData("guest-mode-modal").should("be.visible");
     });
   });

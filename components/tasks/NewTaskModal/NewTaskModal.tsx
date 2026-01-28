@@ -20,7 +20,7 @@ export function NewTaskModal({
   const t = useTranslations("tasks.NewTaskModal");
 
   return (
-    <FormModal {...props}>
+    <FormModal data-test="new-task-modal" {...props}>
       <FormModalDialog>
         <DialogHeader>{t("title")}</DialogHeader>
         <DialogBody>{newTaskFormContainer}</DialogBody>

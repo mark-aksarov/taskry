@@ -25,6 +25,7 @@ export function TasksPageEmpty({ newTaskFormContainer }: TasksPageEmptyProps) {
           createNewModal={
             <NewTaskModal newTaskFormContainer={newTaskFormContainer} />
           }
+          data-test="tasks-page-empty-add-button"
         >
           {t("addButtonLabel")}
         </EmptySectionButton>

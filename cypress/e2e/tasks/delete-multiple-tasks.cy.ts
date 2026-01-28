@@ -65,11 +65,14 @@ describe("delete multiple tasks", () => {
   it("can delete tasks", () => {
     cy.getByData("task-1-checkbox").click();
     cy.getByData("task-2-checkbox").click();
-    cy.getMenuItem("toolbar-action-menu-trigger", "delete").click();
-    cy.getByData("bulk-delete-entity-modal")
-      .should("be.visible")
-      .contains("2 tasks");
-    cy.getByData("confirm-button").click();
+
+    cy.getByData("task-toolbar-actions-button-desktop")
+      .filter(":visible")
+      .click();
+    cy.getMenuItem("delete").click();
+
+    cy.getByData("delete-tasks-modal").should("be.visible").contains("2 tasks");
+    cy.getByData("delete-tasks-modal-confirm-button").click();
     cy.getByData("task-list-item").should("not.exist");
   });
 });

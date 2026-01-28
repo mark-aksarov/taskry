@@ -62,7 +62,7 @@ function ProjectCommentsContainerInner({
             attachments={comment.attachments}
             sender={comment.sender}
             menuTrigger={
-              comment.canEdit && (
+              (comment.canEdit || guestMode) && (
                 <CommentItemActionMenuTrigger
                   guestMode={guestMode}
                   commentId={comment.id}

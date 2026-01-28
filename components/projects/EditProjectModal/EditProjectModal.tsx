@@ -20,7 +20,7 @@ export function EditProjectModal({
   const t = useTranslations("projects.EditProjectModal");
 
   return (
-    <FormModal {...props}>
+    <FormModal data-test="edit-project-modal" {...props}>
       <FormModalDialog>
         <DialogHeader>{t("title")}</DialogHeader>
         <DialogBody>{editProjectFormContainer}</DialogBody>

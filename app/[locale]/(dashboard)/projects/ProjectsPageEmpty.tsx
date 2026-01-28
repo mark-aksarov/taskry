@@ -28,6 +28,7 @@ export function ProjectsPageEmpty({
               newProjectFormContainer={newProjectFormContainer}
             />
           }
+          data-test="projects-page-empty-add-button"
         >
           {t("addButtonLabel")}
         </EmptySectionButton>

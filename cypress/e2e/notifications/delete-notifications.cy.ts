@@ -37,7 +37,8 @@ describe("deletes a notification", () => {
       },
     ]);
 
-    cy.getMenuItem("notification-item-action-menu-trigger", "delete").click();
+    cy.getByData("notification-item-action-menu-trigger").click();
+    cy.getMenuItem("delete").click();
 
     cy.getByData("notification-empty-section").should(
       "contain",
@@ -71,7 +72,8 @@ describe("deletes a notification", () => {
       },
     ]);
 
-    cy.getMenuItem("notification-item-action-menu-trigger", "delete").click();
+    cy.getByData("notification-item-action-menu-trigger").click();
+    cy.getMenuItem("delete").click();
 
     cy.getByData("guest-mode-modal").should("be.visible");
   });

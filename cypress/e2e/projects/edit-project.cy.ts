@@ -52,7 +52,8 @@ describe("edit a new project", () => {
   });
 
   it("can edit a task", () => {
-    cy.getMenuItem("project-item-1-action-menu-trigger", "edit").click();
+    cy.getByData("project-item-1-action-menu-trigger").click();
+    cy.getMenuItem("edit").click();
 
     // fill form
     cy.get('input[name="title"]').clear().type("Updated Project Title");
@@ -60,9 +61,15 @@ describe("edit a new project", () => {
       .clear()
       .type("Updated Project Description");
     cy.setDatePickerDate("deadline-date-picker", "12", "31", "2025");
-    cy.changeSelection("status-select", "pending");
-    cy.changeSelection("category-select", "2");
-    cy.changeSelection("customer-select", "2");
+
+    cy.getByData("status-select").click();
+    cy.getSelectOption("pending").click();
+
+    cy.getByData("category-select").click();
+    cy.getSelectOption("2").click();
+
+    cy.getByData("customer-select").click();
+    cy.getSelectOption("2").click();
 
     // submit
     cy.get('button[type="submit"]').click();

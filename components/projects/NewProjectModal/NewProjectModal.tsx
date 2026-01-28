@@ -20,7 +20,7 @@ export function NewProjectModal({
   const t = useTranslations("projects.NewProjectModal");
 
   return (
-    <FormModal {...props}>
+    <FormModal data-test="new-project-modal" {...props}>
       <FormModalDialog>
         <DialogHeader>{t("title")}</DialogHeader>
         <DialogBody>{newProjectFormContainer}</DialogBody>

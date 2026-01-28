@@ -76,7 +76,8 @@ describe("edit a new task", () => {
     cy.signIn("owner@example.com", "12345abc");
     cy.visit("/en/tasks");
 
-    cy.getMenuItem("task-item-1-action-menu-trigger", "edit").click();
+    cy.getByData("task-item-1-action-menu-trigger").click();
+    cy.getMenuItem("edit").click();
 
     // fill form
     cy.get('input[name="title"]').clear().type("Updated Task Title");
@@ -84,10 +85,18 @@ describe("edit a new task", () => {
       .clear()
       .type("Updated Task Description");
     cy.setDatePickerDate("deadline-date-picker", "12", "31", "2025");
-    cy.changeSelection("status-select", "pending");
-    cy.changeSelection("category-select", "2");
-    cy.changeSelection("project-select", "2");
-    cy.changeSelection("assignee-select", "user-2");
+
+    cy.getByData("status-select").click();
+    cy.getSelectOption("pending").click();
+
+    cy.getByData("category-select").click();
+    cy.getSelectOption("2").click();
+
+    cy.getByData("project-select").click();
+    cy.getSelectOption("2").click();
+
+    cy.getByData("assignee-select").click();
+    cy.getSelectOption("user-2").click();
 
     // submit
     cy.get('button[type="submit"]').click();
@@ -166,21 +175,27 @@ describe("edit a new task", () => {
     it("allows a user with 'owner' role to open the edit modal", () => {
       cy.signIn("owner@example.com", "12345abc");
       cy.visit("/en/tasks");
-      cy.getMenuItem("task-item-1-action-menu-trigger", "edit").click();
+
+      cy.getByData("task-item-1-action-menu-trigger").click();
+      cy.getMenuItem("edit").click();
       cy.getByData("edit-task-modal").should("be.visible");
     });
 
     it("allows a user with 'user' role to open the edit modal", () => {
       cy.signIn("user@example.com", "12345abc");
       cy.visit("/en/tasks");
-      cy.getMenuItem("task-item-1-action-menu-trigger", "edit").click();
+
+      cy.getByData("task-item-1-action-menu-trigger").click();
+      cy.getMenuItem("edit").click();
       cy.getByData("edit-task-modal").should("be.visible");
     });
 
     it("shows a restriction modal when a 'guest' attempts to edit", () => {
       cy.signIn("guest@example.com", "12345abc");
       cy.visit("/en/tasks");
-      cy.getMenuItem("task-item-1-action-menu-trigger", "edit").click();
+
+      cy.getByData("task-item-1-action-menu-trigger").click();
+      cy.getMenuItem("edit").click();
       cy.getByData("guest-mode-modal").should("be.visible");
     });
   });

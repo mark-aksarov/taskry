@@ -20,7 +20,7 @@ export function EditCustomerModal({
   const t = useTranslations("customers.EditCustomerModal");
 
   return (
-    <FormModal {...props}>
+    <FormModal data-test="edit-customer-modal" {...props}>
       <FormModalDialog>
         <DialogHeader>{t("title")}</DialogHeader>
         <DialogBody>{editCustomerFormContainer}</DialogBody>

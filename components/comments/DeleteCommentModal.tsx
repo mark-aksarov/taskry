@@ -63,6 +63,7 @@ export function DeleteCommentModal({
         <ConfirmModalConfirmButton
           label={t("confirmButton")}
           onConfirm={handleDelete}
+          data-test="delete-comment-modal-confirm-button"
         />
       </ConfirmModalActions>
     </ConfirmModal>
