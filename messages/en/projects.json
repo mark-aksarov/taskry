@@ -1,4 +1,14 @@
 {
+  "ProjectDetailCard": {
+    "title": "Project Information"
+  },
+
+  "ProjectDetailActions": {
+    "delete": "Delete project",
+    "edit": "Edit project",
+    "comments": "Comments"
+  },
+
   "TotalProjectsCard": {
     "text": "Total Projects"
   },
@@ -200,7 +210,8 @@
     "customer": "Customer",
     "unknownCustomer": "Unknown customer",
     "category": "Category",
-    "attachments": "Attachments"
+    "attachments": "Attachments",
+    "status": "Status"
   },
 
   "ProjectDetailStatusMenuTrigger": {

@@ -1,4 +1,14 @@
 {
+  "ProjectDetailCard": {
+    "title": "Информация о проекте"
+  },
+
+  "ProjectDetailActions": {
+    "delete": "Удалить проект",
+    "edit": "Редактировать проект",
+    "comments": "Комментарии"
+  },
+
   "TotalProjectsCard": {
     "text": "Всего проектов"
   },
@@ -200,7 +210,8 @@
     "customer": "Клиент",
     "unknownCustomer": "Неизвестный клиент",
     "category": "Категория",
-    "attachments": "Вложения"
+    "attachments": "Вложения",
+    "status": "Статус"
   },
 
   "ProjectDetailStatusMenuTrigger": {
