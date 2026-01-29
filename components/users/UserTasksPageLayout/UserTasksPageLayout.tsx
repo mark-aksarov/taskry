@@ -1,10 +1,10 @@
 import {
-  UserCard,
-  UserCardLeft,
-  UserCardRight,
-  UserCardTitle,
-  UserCardHeader,
-} from "@/components/users/UserCard";
+  DetailCard,
+  DetailCardLeft,
+  DetailCardRight,
+  DetailCardTitle,
+  DetailCardHeader,
+} from "@/components/common/DetailCard";
 
 import {
   ToolbarMobileTop,
@@ -38,23 +38,23 @@ export function UserTasksPageLayout({
   return (
     <SelectionProvider>
       <PageContainer className="max-md:hidden">
-        <UserCard>
-          <UserCardLeft>
-            <UserCardHeader>
-              <UserCardTitle>{t("title")}</UserCardTitle>
+        <DetailCard>
+          <DetailCardLeft>
+            <DetailCardHeader>
+              <DetailCardTitle>{t("title")}</DetailCardTitle>
               <div className="flex gap-4">
                 <TaskToolbarSortingMenuTrigger />
                 {taskToolbarActionsMenuTrigger}
               </div>
-            </UserCardHeader>
+            </DetailCardHeader>
             {userTasksContainer}
-          </UserCardLeft>
+          </DetailCardLeft>
 
-          <UserCardRight>
+          <DetailCardRight>
             {userHeaderContainer}
             {navigationDesktop}
-          </UserCardRight>
-        </UserCard>
+          </DetailCardRight>
+        </DetailCard>
       </PageContainer>
 
       <PageContainer className="md:hidden">

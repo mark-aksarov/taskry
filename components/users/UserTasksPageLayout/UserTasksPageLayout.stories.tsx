@@ -5,16 +5,16 @@ import { PageDecorator } from "@/.storybook/PageDecorator";
 import { UserTasksPageLayout } from "./UserTasksPageLayout";
 import { NewTaskForm } from "@/components/tasks/NewTaskForm";
 import { UserTaskList } from "@/components/users/UserTaskList";
-import { PersonHeader } from "@/components/common/PersonHeader";
+import { DetailHeader } from "@/components/common/DetailHeader";
 import { UserTasksPageEmptyLayout } from "./UserTasksPageEmptyLayout";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { UserTasksPageLoadingLayout } from "./UserTasksPageLoadingLayout";
 import { ProfileNavigationMobile } from "@/components/users/ProfileNavigationMobile";
+import { PersonDetailHeaderImage } from "@/components/common/PersonDetailHeaderImage";
 import { ProfileNavigationDesktop } from "@/components/users/ProfileNavigationDesktop";
 import { TaskToolbarActionsMenuTrigger } from "@/components/tasks/TaskToolbarActionsMenuTrigger";
 import { Default as UserTaskListStory } from "@/components/users/UserTaskList/UserTaskList.stories";
 import { Default as TaskFormBaseStory } from "@/components/tasks/TaskFormBase/TaskFormBase.stories";
-import { Default as PersonHeaderStory } from "@/components/common/PersonHeader/PersonHeader.stories";
 
 const meta = {
   title: "components/users/UserTasksPageLayout",
@@ -32,7 +32,13 @@ type Story = StoryObj<typeof meta>;
 export const Default = {
   args: {
     userTasksContainer: <UserTaskList {...UserTaskListStory.args} />,
-    userHeaderContainer: <PersonHeader {...PersonHeaderStory.args} />,
+    userHeaderContainer: (
+      <DetailHeader
+        title="John Doe"
+        image={<PersonDetailHeaderImage imageUrl="/man.jpg" alt="John Doe" />}
+        subtitle="Developer"
+      />
+    ),
     taskToolbarActionsMenuTrigger: (
       <TaskToolbarActionsMenuTrigger
         guestMode={false}

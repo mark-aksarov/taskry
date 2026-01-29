@@ -43,11 +43,11 @@ export function ProfilePage({
 
         <div className="flex flex-col px-1.5">{userHeaderContainer}</div>
 
-        <Card className="flex flex-col gap-6 px-1.5">
+        <Card className="flex flex-col px-1.5">
           <ProfileActions />
         </Card>
 
-        <Card className="flex flex-col gap-6">{profileDetailContainer}</Card>
+        <Card className="flex flex-col">{profileDetailContainer}</Card>
       </PageGrid>
     </PageContainer>
   );

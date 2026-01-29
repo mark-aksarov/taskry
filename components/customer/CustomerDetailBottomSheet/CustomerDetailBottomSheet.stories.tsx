@@ -1,12 +1,12 @@
 import {
-  PersonHeader,
-  PersonHeaderSkeleton,
-} from "@/components/common/PersonHeader";
-
-import {
   CustomerDetailBottomSheet,
   CustomerDetailBottomSheetProps,
 } from "./CustomerDetailBottomSheet";
+
+import {
+  DetailHeader,
+  DetailHeaderSkeleton,
+} from "@/components/common/DetailHeader";
 
 import { useOverlayTrigger } from "react-aria";
 import { Button } from "@/components/ui/Button";
@@ -16,9 +16,9 @@ import { CustomerDetail } from "../CustomerDetail/CustomerDetail";
 import { OverlayTriggerStateContext } from "react-aria-components";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { CustomerDetailSkeleton } from "../CustomerDetail/CustomerDetailSkeleton";
+import { PersonDetailHeaderImage } from "@/components/common/PersonDetailHeaderImage";
 import { PersonDetailPresentation } from "@/components/common/PersonDetailPresentation";
 import { Default as CustomerDetailStory } from "../CustomerDetail/CustomerDetail.stories";
-import { Default as PersonHeaderStory } from "@/components/common/PersonHeader/PersonHeader.stories";
 
 const meta = {
   title: "components/customers/CustomerDetailBottomSheet",
@@ -56,7 +56,15 @@ export const Default = {
     customerId: 1,
     customerDetailContainer: (
       <PersonDetailPresentation
-        personHeader={<PersonHeader {...PersonHeaderStory.args} />}
+        personHeader={
+          <DetailHeader
+            title={CustomerDetailStory.args.fullName}
+            image={
+              <PersonDetailHeaderImage imageUrl="/man.jpg" alt="John Doe" />
+            }
+            subtitle={CustomerDetailStory.args.company?.name}
+          />
+        }
         userDetail={<CustomerDetail {...CustomerDetailStory.args} />}
       />
     ),
@@ -68,7 +76,7 @@ export const WithSkeletonContent = {
     customerId: 1,
     customerDetailContainer: (
       <PersonDetailPresentation
-        personHeader={<PersonHeaderSkeleton />}
+        personHeader={<DetailHeaderSkeleton />}
         userDetail={<CustomerDetailSkeleton />}
       />
     ),

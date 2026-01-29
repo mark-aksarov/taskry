@@ -6,19 +6,18 @@ import {
   DetailCardHeader,
 } from "@/components/common/DetailCard";
 import { useTranslations } from "next-intl";
+import { TaskDetailActions } from "../TaskDetailActions";
 
 interface UserDetailCardProps {
-  profileHeader: React.ReactNode;
-  profileDetail: React.ReactNode;
-  navigationDesktop: React.ReactNode;
+  taskDetailHeader: React.ReactNode;
+  taskDetail: React.ReactNode;
 }
 
-export function UserDetailCard({
-  profileHeader,
-  profileDetail,
-  navigationDesktop,
+export function TaskDetailCard({
+  taskDetailHeader,
+  taskDetail,
 }: UserDetailCardProps) {
-  const t = useTranslations("users.UserDetailCard");
+  const t = useTranslations("tasks.TaskDetailCard");
 
   return (
     <DetailCard>
@@ -26,12 +25,12 @@ export function UserDetailCard({
         <DetailCardHeader>
           <DetailCardTitle>{t("title")}</DetailCardTitle>
         </DetailCardHeader>
-        <div className="p-6">{profileDetail}</div>
+        <div className="p-6">{taskDetail}</div>
       </DetailCardLeft>
 
       <DetailCardRight>
-        {profileHeader}
-        {navigationDesktop}
+        {taskDetailHeader}
+        <TaskDetailActions />
       </DetailCardRight>
     </DetailCard>
   );

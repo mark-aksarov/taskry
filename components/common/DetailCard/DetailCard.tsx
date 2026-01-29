@@ -1,12 +1,12 @@
 import { twMerge } from "tailwind-merge";
 import { Card } from "@/components/common/Card";
 
-interface UserCardProps {
+interface DetailCardProps {
   className?: string;
   children: React.ReactNode;
 }
 
-export function UserCard({ className, children }: UserCardProps) {
+export function DetailCard({ className, children }: DetailCardProps) {
   return (
     <Card
       data-test="user-card"

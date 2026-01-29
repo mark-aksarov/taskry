@@ -1,0 +1,1 @@
+export { TaskDetailCard } from "./TaskDetailCard";

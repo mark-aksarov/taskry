@@ -38,6 +38,11 @@ export const Default = {
       id: 1,
       name: "Design",
     },
+    creator: {
+      id: "u2",
+      fullName: "John Doe",
+      imageUrl: "/man.jpg",
+    },
     project: {
       id: 2,
       title: "Website Redesign",
@@ -67,8 +72,6 @@ export const WithoutSomeData = {
   args: {
     id: 1,
     title: "Design homepage layout",
-    description:
-      "Create a modern and responsive homepage layout for the new project. The design should include a hero section with a clear call-to-action, a features section highlighting the main benefits, a testimonials section, and a footer with all necessary links. Pay attention to typography, color schemes, and responsive behavior on both desktop and mobile devices. Ensure the design aligns with the overall branding guidelines and provides an intuitive user experience. Collaboration with the UX and content teams is required to finalize the layout and assets before development begins.",
     deadline: new Date("2025-11-20T17:00:00"),
     category: {
       id: 1,

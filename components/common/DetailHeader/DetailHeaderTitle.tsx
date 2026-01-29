@@ -1,15 +1,16 @@
 import { twMerge } from "tailwind-merge";
 
-export const titleStyles = "text-lg font-extrabold text-black dark:text-white";
+export const titleStyles =
+  "text-lg font-extrabold text-black dark:text-white text-center";
 
-interface PersonHeaderTitleProps {
+interface DetailHeaderTitleProps {
   className?: string;
   children: React.ReactNode;
 }
 
-export function PersonHeaderTitle({
+export function DetailHeaderTitle({
   className,
   children,
-}: PersonHeaderTitleProps) {
+}: DetailHeaderTitleProps) {
   return <h2 className={twMerge(titleStyles, className)}>{children}</h2>;
 }

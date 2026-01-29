@@ -2,11 +2,11 @@ import { Skeleton } from "@/components/ui/Skeleton";
 
 const styles = "flex flex-col items-center gap-1.5";
 
-export function PersonHeaderInfo({ children }: { children: React.ReactNode }) {
+export function DetailHeaderInfo({ children }: { children: React.ReactNode }) {
   return <div className={styles}>{children}</div>;
 }
 
-export function PersonHeaderInfoSkeleton() {
+export function DetailHeaderInfoSkeleton() {
   return (
     <div className={styles}>
       <Skeleton className="w-[7rem]" size="lg" />

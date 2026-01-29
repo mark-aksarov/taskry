@@ -1,4 +1,14 @@
 {
+  "TaskDetailCard": {
+    "title": "Task Information"
+  },
+
+  "TaskDetailActions": {
+    "delete": "Delete task",
+    "edit": "Edit task",
+    "comments": "Comments"
+  },
+
   "AssignedTasksSectionHeading": {
     "text": "Assigned Tasks"
   },
@@ -220,7 +230,8 @@
     "project": "Project",
     "attachments": "Attachments",
     "assignee": "Assignee",
-    "noAssignee": "No assignee"
+    "noAssignee": "No assignee",
+    "status": "Status"
   },
 
   "TaskDetailStatusMenuTrigger": {

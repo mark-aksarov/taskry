@@ -10,7 +10,7 @@ import { useOverlayTriggerState } from "react-stately";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { OverlayTriggerStateContext } from "react-aria-components";
 import { UserDetailSkeleton } from "../UserDetail/UserDetailSkeleton";
-import { PersonHeaderSkeleton } from "@/components/common/PersonHeader";
+import { DetailHeaderSkeleton } from "@/components/common/DetailHeader";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { Default as UserDetailStory } from "../UserDetail/UserDetail.stories";
 import { PersonDetailPresentation } from "@/components/common/PersonDetailPresentation";
@@ -55,7 +55,7 @@ export const WithSkeletonContent = {
     userId: "BKs42HvVDEZFoaJUmTqf1gTN0K8pUFjI",
     userDetailContainer: (
       <PersonDetailPresentation
-        personHeader={<PersonHeaderSkeleton />}
+        personHeader={<DetailHeaderSkeleton />}
         userDetail={<UserDetailSkeleton />}
       />
     ),

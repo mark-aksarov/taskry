@@ -1,16 +1,16 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { PersonHeaderSkeleton } from "./PersonHeaderSkeleton";
+import { DetailHeaderSkeleton } from "./DetailHeaderSkeleton";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {
-  title: "components/common/PersonHeaderSkeleton",
-  component: PersonHeaderSkeleton,
+  title: "components/common/DetailHeaderSkeleton",
+  component: DetailHeaderSkeleton,
   tags: ["autodocs"],
   decorators: [withThemedBackground],
   parameters: {
     backgroundVariant: "alt",
   },
-} satisfies Meta<typeof PersonHeaderSkeleton>;
+} satisfies Meta<typeof DetailHeaderSkeleton>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;

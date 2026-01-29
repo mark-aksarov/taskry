@@ -1,17 +1,12 @@
 import {
-  Default as PersonHeaderStory,
-  WithoutImageUrl as PersonHeaderWithoutImageUrlStory,
-} from "@/components/common/PersonHeader/PersonHeader.stories";
-
-import {
   Default as UserDetailStory,
   WithoutSomeData as UserDetailWithoutSomeDataStory,
 } from "@/components/users/UserDetail/UserDetail.stories";
 
 import {
-  PersonHeader,
-  PersonHeaderSkeleton,
-} from "@/components/common/PersonHeader";
+  DetailHeader,
+  DetailHeaderSkeleton,
+} from "@/components/common/DetailHeader";
 
 import { mocked } from "storybook/test";
 import { TeamProfilePage } from "./TeamProfilePage";
@@ -20,6 +15,7 @@ import { useParams, usePathname } from "next/navigation";
 import { PageDecorator } from "@/.storybook/PageDecorator";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { UserDetail, UserDetailSkeleton } from "@/components/users/UserDetail";
+import { PersonDetailHeaderImage } from "@/components/common/PersonDetailHeaderImage";
 
 const userId = "BKs42HvVDEZFoaJUmTqf1gTN0K8pUFjI";
 
@@ -42,14 +38,20 @@ type Story = StoryObj<typeof meta>;
 export const Default = {
   args: {
     profileDetailContainer: <UserDetail {...UserDetailStory.args} />,
-    userHeaderContainer: <PersonHeader {...PersonHeaderStory.args} />,
+    userHeaderContainer: (
+      <DetailHeader
+        title={UserDetailStory.args.fullName}
+        image={<PersonDetailHeaderImage imageUrl="/man.jpg" alt="John Doe" />}
+        subtitle={UserDetailStory.args.position?.name}
+      />
+    ),
   },
 } satisfies Story;
 
 export const Loading = {
   args: {
     profileDetailContainer: <UserDetailSkeleton />,
-    userHeaderContainer: <PersonHeaderSkeleton />,
+    userHeaderContainer: <DetailHeaderSkeleton />,
   },
 } satisfies Story;
 
@@ -59,7 +61,11 @@ export const WithoutSomeData = {
       <UserDetail {...UserDetailWithoutSomeDataStory.args} />
     ),
     userHeaderContainer: (
-      <PersonHeader {...PersonHeaderWithoutImageUrlStory.args} />
+      <DetailHeader
+        title={UserDetailStory.args.fullName}
+        image={<PersonDetailHeaderImage />}
+        subtitle={UserDetailStory.args.position?.name}
+      />
     ),
   },
 } satisfies Story;

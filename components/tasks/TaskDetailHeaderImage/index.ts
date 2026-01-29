@@ -1,0 +1,1 @@
+export { TaskDetailHeaderImage } from "./TaskDetailHeaderImage";

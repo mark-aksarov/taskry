@@ -1,4 +1,14 @@
 {
+  "TaskDetailCard": {
+    "title": "Информация о задаче"
+  },
+
+  "TaskDetailActions": {
+    "delete": "Удалить задачу",
+    "edit": "Редактировать задачу",
+    "comments": "Комментарии"
+  },
+
   "AssignedTasksSectionHeading": {
     "text": "Назначенные задачи"
   },
@@ -227,7 +237,8 @@
     "project": "Проект",
     "attachments": "Вложения",
     "assignee": "Исполнитель",
-    "noAssignee": "Нет исполнителя"
+    "noAssignee": "Нет исполнителя",
+    "status": "Статус"
   },
 
   "TaskDetailStatusMenuTrigger": {

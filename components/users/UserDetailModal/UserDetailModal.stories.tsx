@@ -1,7 +1,7 @@
 import {
-  PersonHeader,
-  PersonHeaderSkeleton,
-} from "@/components/common/PersonHeader";
+  DetailHeader,
+  DetailHeaderSkeleton,
+} from "@/components/common/DetailHeader";
 
 import { Button } from "@/components/ui/Button";
 import { UserDetailModal } from "./UserDetailModal";
@@ -10,9 +10,9 @@ import { DialogTrigger } from "react-aria-components";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { UserDetailSkeleton } from "../UserDetail/UserDetailSkeleton";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { PersonDetailHeaderImage } from "@/components/common/PersonDetailHeaderImage";
 import { PersonDetailPresentation } from "@/components/common/PersonDetailPresentation";
 import { Default as UserDetailStory } from "@/components/users/UserDetail/UserDetail.stories";
-import { Default as PersonHeaderStory } from "@/components/common/PersonHeader/PersonHeader.stories";
 
 const meta = {
   title: "components/users/UserDetailModal",
@@ -37,7 +37,15 @@ export const Default = {
     userId: "BKs42HvVDEZFoaJUmTqf1gTN0K8pUFjI",
     userDetailContainer: (
       <PersonDetailPresentation
-        personHeader={<PersonHeader {...PersonHeaderStory.args} />}
+        personHeader={
+          <DetailHeader
+            title={UserDetailStory.args.fullName}
+            image={
+              <PersonDetailHeaderImage imageUrl="/man.jpg" alt="John Doe" />
+            }
+            subtitle={UserDetailStory.args.position?.name}
+          />
+        }
         userDetail={<UserDetail {...UserDetailStory.args} />}
       />
     ),
@@ -49,7 +57,7 @@ export const WithSkeletonContent = {
     userId: "BKs42HvVDEZFoaJUmTqf1gTN0K8pUFjI",
     userDetailContainer: (
       <PersonDetailPresentation
-        personHeader={<PersonHeaderSkeleton />}
+        personHeader={<DetailHeaderSkeleton />}
         userDetail={<UserDetailSkeleton />}
       />
     ),

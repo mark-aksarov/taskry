@@ -6,7 +6,8 @@ import { useTranslations } from "next-intl";
 import { UserDetail } from "./UserDetail/UserDetail";
 import { UserDetailDTO } from "@/lib/data/user/user.dto";
 import { UserDetailSkeleton } from "./UserDetail/UserDetailSkeleton";
-import { PersonHeader, PersonHeaderSkeleton } from "../common/PersonHeader";
+import { DetailHeader, DetailHeaderSkeleton } from "../common/DetailHeader";
+import { PersonDetailHeaderImage } from "../common/PersonDetailHeaderImage";
 import { PersonDetailPresentation } from "../common/PersonDetailPresentation";
 
 interface UserDetailContainerProps {
@@ -18,7 +19,7 @@ export function UserDetailContainer(props: UserDetailContainerProps) {
     <Suspense
       fallback={
         <PersonDetailPresentation
-          personHeader={<PersonHeaderSkeleton />}
+          personHeader={<DetailHeaderSkeleton />}
           userDetail={<UserDetailSkeleton />}
         />
       }
@@ -42,9 +43,14 @@ function UserDetailContainerInner({ userId }: UserDetailContainerProps) {
   return (
     <PersonDetailPresentation
       personHeader={
-        <PersonHeader
+        <DetailHeader
           title={user.fullName}
-          imageUrl={user.imageUrl}
+          image={
+            <PersonDetailHeaderImage
+              imageUrl={user.imageUrl}
+              alt={user.fullName}
+            />
+          }
           subtitle={user.position ? user.position.name : t("unknownPosition")}
         />
       }

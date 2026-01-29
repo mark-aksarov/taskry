@@ -1,4 +1,8 @@
 {
+  "TaskDetailPage": {
+    "heading": "Task Information"
+  },
+
   "DashboardErrorPage": {
     "heading": "Something went wrong",
     "description": "We encountered an unexpected error. Please try refreshing the page or contact support if the issue persists."

@@ -1,15 +1,12 @@
 "use client";
 
-import {
-  PersonHeader,
-  PersonHeaderSkeleton,
-} from "@/components/common/PersonHeader";
-
 import useSWR from "swr";
 import { Suspense } from "react";
 import { useTranslations } from "next-intl";
 import { CustomerDetailDTO } from "@/lib/data/customer/customer.dto";
 import { CustomerDetail, CustomerDetailSkeleton } from "./CustomerDetail";
+import { PersonDetailHeaderImage } from "../common/PersonDetailHeaderImage";
+import { DetailHeader, DetailHeaderSkeleton } from "../common/DetailHeader";
 import { PersonDetailPresentation } from "../common/PersonDetailPresentation";
 
 interface CustomerDetailContainerProps {
@@ -21,7 +18,7 @@ export function CustomerDetailContainer(props: CustomerDetailContainerProps) {
     <Suspense
       fallback={
         <PersonDetailPresentation
-          personHeader={<PersonHeaderSkeleton />}
+          personHeader={<DetailHeaderSkeleton />}
           userDetail={<CustomerDetailSkeleton />}
         />
       }
@@ -48,9 +45,14 @@ function CustomerDetailContainerInner({
   return (
     <PersonDetailPresentation
       personHeader={
-        <PersonHeader
+        <DetailHeader
           title={customer.fullName}
-          imageUrl={customer.imageUrl ?? undefined}
+          image={
+            <PersonDetailHeaderImage
+              imageUrl={customer.imageUrl}
+              alt={customer.fullName}
+            />
+          }
           subtitle={
             customer.company ? customer.company.name : t("unknownCompany")
           }

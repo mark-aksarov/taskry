@@ -1,7 +1,7 @@
 import {
-  PersonHeader,
-  PersonHeaderSkeleton,
-} from "@/components/common/PersonHeader";
+  DetailHeader,
+  DetailHeaderSkeleton,
+} from "@/components/common/DetailHeader";
 
 import { mocked } from "storybook/test";
 import { UserDetail } from "../UserDetail";
@@ -11,10 +11,9 @@ import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { useParams, usePathname } from "next/navigation";
 import { UserNavigationDesktop } from "../UserNavigationDesktop";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { PersonDetailHeaderImage } from "@/components/common/PersonDetailHeaderImage";
 import { Default as UserDetailStory } from "@/components/users/UserDetail/UserDetail.stories";
-import { Default as PersonHeaderStory } from "@/components/common/PersonHeader/PersonHeader.stories";
 import { WithoutSomeData as UserDetailWithoutSomeDataStory } from "@/components/users/UserDetail/UserDetail.stories";
-import { WithoutImageUrl as PersonHeaderWithoutImageUrlStory } from "@/components/common/PersonHeader/PersonHeader.stories";
 
 const meta = {
   title: "components/users/UserDetailCard",
@@ -34,7 +33,13 @@ type Story = StoryObj<typeof meta>;
 export const Default = {
   args: {
     profileDetail: <UserDetail {...UserDetailStory.args} />,
-    profileHeader: <PersonHeader {...PersonHeaderStory.args} />,
+    profileHeader: (
+      <DetailHeader
+        title={UserDetailStory.args.fullName}
+        image={<PersonDetailHeaderImage imageUrl="/man.jpg" alt="John Doe" />}
+        subtitle={UserDetailStory.args.position?.name}
+      />
+    ),
     navigationDesktop: <UserNavigationDesktop />,
   },
 } satisfies Story;
@@ -42,7 +47,7 @@ export const Default = {
 export const Loading = {
   args: {
     profileDetail: <UserDetailSkeleton />,
-    profileHeader: <PersonHeaderSkeleton />,
+    profileHeader: <DetailHeaderSkeleton />,
     navigationDesktop: <UserNavigationDesktop />,
   },
 } satisfies Story;
@@ -50,7 +55,13 @@ export const Loading = {
 export const WithoutSomeData = {
   args: {
     profileDetail: <UserDetail {...UserDetailWithoutSomeDataStory.args} />,
-    profileHeader: <PersonHeader {...PersonHeaderWithoutImageUrlStory.args} />,
+    profileHeader: (
+      <DetailHeader
+        title={UserDetailStory.args.fullName}
+        image={<PersonDetailHeaderImage />}
+        subtitle={UserDetailStory.args.position?.name}
+      />
+    ),
     navigationDesktop: <UserNavigationDesktop />,
   },
 } satisfies Story;

@@ -1,9 +1,9 @@
 const styles = "text-sm font-medium text-gray-500 dark:text-gray-400";
 
-interface PersonHeaderTextProps {
+interface DetailHeaderTextProps {
   children: React.ReactNode;
 }
 
-export function PersonHeaderText({ children }: PersonHeaderTextProps) {
+export function DetailHeaderText({ children }: DetailHeaderTextProps) {
   return <span className={styles}>{children}</span>;
 }

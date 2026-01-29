@@ -5,12 +5,12 @@ import {
 } from "@/components/common/Toolbar";
 
 import {
-  UserCard,
-  UserCardLeft,
-  UserCardRight,
-  UserCardTitle,
-  UserCardHeader,
-} from "@/components/users/UserCard";
+  DetailCard,
+  DetailCardLeft,
+  DetailCardRight,
+  DetailCardTitle,
+  DetailCardHeader,
+} from "@/components/common/DetailCard";
 
 import { useTranslations } from "next-intl";
 import { PageGrid } from "@/components/common/PageGrid";
@@ -35,22 +35,22 @@ export function UserTasksPageEmptyLayout({
   return (
     <>
       <PageContainer className="max-md:hidden">
-        <UserCard>
-          <UserCardLeft>
-            <UserCardHeader>
-              <UserCardTitle>{t("title")}</UserCardTitle>
-            </UserCardHeader>
+        <DetailCard>
+          <DetailCardLeft>
+            <DetailCardHeader>
+              <DetailCardTitle>{t("title")}</DetailCardTitle>
+            </DetailCardHeader>
 
             <UserTasksEmptySection
               newTaskFormContainer={newTaskFormContainer}
             />
-          </UserCardLeft>
+          </DetailCardLeft>
 
-          <UserCardRight>
+          <DetailCardRight>
             {userHeaderContainer}
             {navigationDesktop}
-          </UserCardRight>
-        </UserCard>
+          </DetailCardRight>
+        </DetailCard>
       </PageContainer>
 
       <PageContainer fullscreen className="md:hidden">

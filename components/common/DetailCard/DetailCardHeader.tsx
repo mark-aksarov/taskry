@@ -1,11 +1,14 @@
 import { twMerge } from "tailwind-merge";
 
-interface UserCardHeaderProps {
+interface DetailCardHeaderProps {
   className?: string;
   children: React.ReactNode;
 }
 
-export function UserCardHeader({ className, children }: UserCardHeaderProps) {
+export function DetailCardHeader({
+  className,
+  children,
+}: DetailCardHeaderProps) {
   return (
     <div
       className={twMerge(

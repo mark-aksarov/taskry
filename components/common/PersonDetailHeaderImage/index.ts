@@ -1,0 +1,1 @@
+export { PersonDetailHeaderImage } from "./PersonDetailHeaderImage";
