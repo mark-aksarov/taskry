@@ -1,6 +1,6 @@
 import { DialogBody } from "@/components/ui/Dialog";
 
-export function NewSubtaskDialogBody({
+export function SubtaskFormDialogBody({
   children,
 }: {
   children: React.ReactNode;

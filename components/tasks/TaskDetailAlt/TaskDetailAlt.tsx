@@ -10,8 +10,6 @@ import { useFormatter, useTranslations } from "next-intl";
 import { TaskDetailAltLayout } from "./TaskDetailAltLayout";
 import { Attachment, Attachments } from "@/components/attachments/Attachments";
 import { SubtasksCheckboxGroup } from "@/components/subtasks/SubtasksCheckboxGroup";
-import { NewSubtaskModalTrigger } from "@/components/subtasks/NewSubtaskModalTrigger";
-import { NewSubtaskBottomSheetTrigger } from "@/components/subtasks/NewSubtaskBottomSheetTrigger";
 
 interface TaskDetailAltProps {
   id: number;
@@ -46,6 +44,8 @@ interface TaskDetailAltProps {
     fileUrl: string;
     fileName: string;
   }[];
+  newSubtaskBottomSheetTrigger: React.ReactNode;
+  newSubtaskModalTrigger: React.ReactNode;
 }
 
 export function TaskDetailAlt({
@@ -59,6 +59,8 @@ export function TaskDetailAlt({
   status,
   subtasks,
   attachments,
+  newSubtaskBottomSheetTrigger,
+  newSubtaskModalTrigger,
 }: TaskDetailAltProps) {
   const t = useTranslations("tasks.TaskDetail");
   const tStatus = useTranslations("tasks.TaskStatus");
@@ -126,8 +128,8 @@ export function TaskDetailAlt({
       subtasksSlot={
         <DetailInfo>
           <SubtasksCheckboxGroup subtasks={subtasks} />
-          <NewSubtaskBottomSheetTrigger />
-          <NewSubtaskModalTrigger />
+          {newSubtaskBottomSheetTrigger}
+          {newSubtaskModalTrigger}
         </DetailInfo>
       }
       attachmentsSlot={

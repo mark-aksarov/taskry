@@ -3,11 +3,17 @@
 import { useRef } from "react";
 import { useOverlayTrigger } from "react-aria";
 import { useOverlayTriggerState } from "react-stately";
-import { NewSubtaskDialog } from "../NewSubtaskDialog";
 import { NewSubtasksButton } from "../NewSubtaskButton";
 import { BottomSheet } from "@/components/ui/BottomSheet";
+import { NewSubtaskFormDialog } from "../NewSubtaskFormDialog";
 
-export function NewSubtaskBottomSheetTrigger() {
+interface NewSubtaskBottomSheetTriggerProps {
+  newSubtaskFormContainer: React.ReactNode;
+}
+
+export function NewSubtaskBottomSheetTrigger({
+  newSubtaskFormContainer,
+}: NewSubtaskBottomSheetTriggerProps) {
   const state = useOverlayTriggerState({});
   const triggerRef = useRef<HTMLButtonElement>(null);
   const { triggerProps } = useOverlayTrigger(
@@ -24,7 +30,7 @@ export function NewSubtaskBottomSheetTrigger() {
         className="md:hidden"
       />
       <BottomSheet isDismissable state={state}>
-        <NewSubtaskDialog />
+        <NewSubtaskFormDialog>{newSubtaskFormContainer}</NewSubtaskFormDialog>
       </BottomSheet>
     </>
   );

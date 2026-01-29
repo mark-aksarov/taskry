@@ -5,6 +5,10 @@ import { Suspense } from "react";
 import { TaskDetail } from "./TaskDetail/TaskDetail";
 import { TaskDetailDTO } from "@/lib/data/task/task.dto";
 import { TaskDetailSkeleton } from "./TaskDetail/TaskDetailSkeleton";
+import { NewSubtaskModalTrigger } from "../subtasks/NewSubtaskModalTrigger";
+import { NewSubtaskBottomSheetTrigger } from "../subtasks/NewSubtaskBottomSheetTrigger";
+import { NewSubtaskForm } from "../subtasks/NewSubtaskForm";
+import { createSubtask } from "@/lib/actions/subtask/createSubtask";
 
 interface TaskDetailContainerProps {
   taskId: number;
@@ -19,13 +23,21 @@ export function TaskDetailContainer(props: TaskDetailContainerProps) {
 }
 
 function TaskDetailContainerInner({ taskId }: TaskDetailContainerProps) {
-  const { data: task } = useSWR<TaskDetailDTO>(`/api/tasks/${taskId}`, {
+  const { data: task, mutate } = useSWR<TaskDetailDTO>(`/api/tasks/${taskId}`, {
     suspense: true,
   });
 
   if (!task) {
     throw new Error("Task not found");
   }
+
+  const newSubtaskForm = (
+    <NewSubtaskForm
+      taskId={task.id}
+      formAction={createSubtask}
+      mutate={mutate}
+    />
+  );
 
   return (
     <TaskDetail
@@ -39,6 +51,14 @@ function TaskDetailContainerInner({ taskId }: TaskDetailContainerProps) {
       status={task.status}
       subtasks={task.subtasks}
       attachments={task.attachments}
+      newSubtaskBottomSheetTrigger={
+        <NewSubtaskBottomSheetTrigger
+          newSubtaskFormContainer={newSubtaskForm}
+        />
+      }
+      newSubtaskModalTrigger={
+        <NewSubtaskModalTrigger newSubtaskFormContainer={newSubtaskForm} />
+      }
     />
   );
 }

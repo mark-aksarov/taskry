@@ -1,19 +1,11 @@
 "use client";
 
-import { useTranslations } from "next-intl";
-import { Form } from "react-aria-components";
-import { TextField } from "@/components/ui/TextField";
+import { SubtaskFormBase, SubtaskFormBaseProps } from "../SubtaskFormBase";
 
-export function NewSubtaskForm() {
-  const t = useTranslations("subtasks.NewSubtaskForm");
+interface NewSubtaskFormProps extends Omit<SubtaskFormBaseProps, "id"> {
+  taskId: number;
+}
 
-  return (
-    <Form>
-      <TextField
-        inputClassName="p-3 rounded-lg"
-        label={t("label")}
-        placeholder={t("placeholder")}
-      />
-    </Form>
-  );
+export function NewSubtaskForm(props: NewSubtaskFormProps) {
+  return <SubtaskFormBase id="new-subtask-form" {...props} />;
 }

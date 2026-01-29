@@ -4,6 +4,7 @@ import {
   DetailTitle,
 } from "@/components/common/Detail";
 
+import React from "react";
 import Image from "next/image";
 import { Link } from "@/components/ui/Link";
 import { Badge } from "@/components/ui/Badge";
@@ -15,8 +16,6 @@ import { ImageContainer } from "@/components/common/ImageContainer";
 import { TaskDetailStatusMenuTrigger } from "./TaskDetailStatusMenuTrigger";
 import { Attachment, Attachments } from "@/components/attachments/Attachments";
 import { SubtasksCheckboxGroup } from "@/components/subtasks/SubtasksCheckboxGroup";
-import { NewSubtaskModalTrigger } from "@/components/subtasks/NewSubtaskModalTrigger";
-import { NewSubtaskBottomSheetTrigger } from "@/components/subtasks/NewSubtaskBottomSheetTrigger";
 
 interface TaskDetailProps {
   id: number;
@@ -52,6 +51,8 @@ interface TaskDetailProps {
     fileUrl: string;
     fileName: string;
   }[];
+  newSubtaskBottomSheetTrigger: React.ReactNode;
+  newSubtaskModalTrigger: React.ReactNode;
 }
 
 export function TaskDetail({
@@ -66,6 +67,8 @@ export function TaskDetail({
   status,
   subtasks,
   attachments,
+  newSubtaskBottomSheetTrigger,
+  newSubtaskModalTrigger,
 }: TaskDetailProps) {
   const t = useTranslations("tasks.TaskDetail");
 
@@ -145,8 +148,8 @@ export function TaskDetail({
       subtasksSlot={
         <DetailInfo>
           <SubtasksCheckboxGroup subtasks={subtasks} />
-          <NewSubtaskBottomSheetTrigger />
-          <NewSubtaskModalTrigger />
+          {newSubtaskBottomSheetTrigger}
+          {newSubtaskModalTrigger}
         </DetailInfo>
       }
       attachmentsSlot={

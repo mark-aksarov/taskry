@@ -8,13 +8,23 @@
     "label": "Subtasks"
   },
 
-  "NewSubtaskForm": {
+  "SubtaskFormBaseTextField": {
     "label": "Text",
-    "placeholder": "Typing a new subtask..."
+    "placeholder": "Typing a new subtask...",
+
+    "validation": {
+      "required": "Title is required",
+      "tooLong": "Title is too long"
+    }
   },
 
-  "NewSubtaskDialogHeader": {
+  "SubtaskFormDialogHeader": {
     "heading": "New Subtask"
+  },
+
+  "NewSubtaskFormDialog": {
+    "heading": "New Subtask",
+    "submitButtonLabel": "Add Subtask"
   },
 
   "NewSubtaskDialogAddButton": {

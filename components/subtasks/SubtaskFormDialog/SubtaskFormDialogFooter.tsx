@@ -1,6 +1,6 @@
 import { DialogFooter } from "@/components/ui/Dialog";
 
-export function NewSubtaskDialogFooter({
+export function SubtaskFormDialogFooter({
   children,
 }: {
   children: React.ReactNode;

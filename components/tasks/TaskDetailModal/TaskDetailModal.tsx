@@ -26,7 +26,7 @@ export function TaskDetailModal({
         <DialogFooter>
           <DetailModalLink
             label={t("openInFullPage")}
-            href={`/tasks?taskId=${taskId}`}
+            href={`/tasks/${taskId}`}
           />
         </DialogFooter>
       </DetailModalDialog>

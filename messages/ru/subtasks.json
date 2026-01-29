@@ -8,13 +8,23 @@
     "label": "Подзадачи"
   },
 
-  "NewSubtaskForm": {
+  "SubtaskFormBaseTextField": {
     "label": "Текст",
-    "placeholder": "Введите новую подзадачу..."
+    "placeholder": "Введите новую подзадачу...",
+
+    "validation": {
+      "required": "Заголовок обязателен",
+      "tooLong": "Заголовок слишком длинный"
+    }
   },
 
-  "NewSubtaskDialogHeader": {
+  "SubtaskFormDialogHeader": {
     "heading": "Новая подзадача"
+  },
+
+  "NewSubtaskFormDialog": {
+    "heading": "Новая подзадача",
+    "submitButtonLabel": "Добавить подзадачу"
   },
 
   "NewSubtaskDialogAddButton": {

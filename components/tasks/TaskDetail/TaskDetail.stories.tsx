@@ -1,6 +1,10 @@
 import { TaskDetail } from "./TaskDetail";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { NewSubtaskModalTrigger } from "@/components/subtasks/NewSubtaskModalTrigger";
+import { NewSubtaskBottomSheetTrigger } from "@/components/subtasks/NewSubtaskBottomSheetTrigger";
+import { Default as NewSubtaskModalTriggerStory } from "@/components/subtasks/NewSubtaskModalTrigger/NewSubtaskModalTrigger.stories";
+import { Default as NewSubtaskBottomSheetTriggerStory } from "@/components/subtasks/NewSubtaskBottomSheetTrigger/NewSubtaskBottomSheetTrigger.stories";
 
 const meta = {
   title: "components/tasks/TaskDetail",
@@ -65,6 +69,14 @@ export const Default = {
         fileName: "placeholder.jpg",
       },
     ],
+    newSubtaskBottomSheetTrigger: (
+      <NewSubtaskBottomSheetTrigger
+        {...NewSubtaskBottomSheetTriggerStory.args}
+      />
+    ),
+    newSubtaskModalTrigger: (
+      <NewSubtaskModalTrigger {...NewSubtaskModalTriggerStory.args} />
+    ),
   },
 } satisfies Story;
 
@@ -84,5 +96,13 @@ export const WithoutSomeData = {
     status: "active",
     subtasks: [],
     attachments: [],
+    newSubtaskBottomSheetTrigger: (
+      <NewSubtaskBottomSheetTrigger
+        {...NewSubtaskBottomSheetTriggerStory.args}
+      />
+    ),
+    newSubtaskModalTrigger: (
+      <NewSubtaskModalTrigger {...NewSubtaskModalTriggerStory.args} />
+    ),
   },
 } satisfies Story;
