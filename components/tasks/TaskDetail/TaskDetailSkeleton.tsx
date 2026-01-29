@@ -20,6 +20,7 @@ export function TaskDetailSkeleton() {
       assigneesSlot={<DetailInfoSkeleton />}
       deadlineSlot={<DetailInfoSkeleton />}
       creatorSlot={<DetailInfoSkeleton />}
+      statusSlot={<DetailInfoSkeleton />}
       categoryNameSlot={<DetailInfoSkeleton />}
       projectTitleSlot={<DetailInfoSkeleton />}
       subtasksSlot={
@@ -39,11 +40,6 @@ export function TaskDetailSkeleton() {
             <Skeleton size="sm" />
           </FieldSkeleton>
         </DetailInfo>
-      }
-      actionsSlot={
-        <>
-          <Skeleton className="h-8 w-[5rem] rounded-lg" />
-        </>
       }
     />
   );

@@ -40,6 +40,36 @@ export const createSubtask = async (input: CreateSubtaskInputDTO) => {
   return subtask;
 };
 
+export const deleteSubtask = async (id: number) => {
+  // Authorization
+  const {
+    user: { id: userId, workspaceId },
+  } = await requireSession();
+
+  // ACL
+  const permission = await auth.api.userHasPermission({
+    body: {
+      userId,
+      permission: {
+        subtask: ["delete"],
+      },
+    },
+  });
+
+  if (!permission.success) {
+    throw new AccessDeniedError(
+      "You do not have permission to delete subtask.",
+    );
+  }
+
+  return await prisma.subtask.delete({
+    where: {
+      id,
+      task: { workspaceId },
+    },
+  });
+};
+
 /**
  * HELPERS
  */

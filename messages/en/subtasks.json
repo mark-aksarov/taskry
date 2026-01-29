@@ -1,4 +1,11 @@
 {
+  "DeleteSubtaskModal": {
+    "heading": "Delete Subtask",
+    "text": "Are you sure you want to delete subtask <strong>«{text}»</strong>?",
+    "deleteButton": "Delete",
+    "cancelButton": "Cancel"
+  },
+
   "SubtaskActionMenuTrigger": {
     "edit": "Edit",
     "delete": "Delete"

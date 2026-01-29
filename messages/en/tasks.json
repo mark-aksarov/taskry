@@ -231,7 +231,8 @@
     "attachments": "Attachments",
     "assignee": "Assignee",
     "noAssignee": "No assignee",
-    "status": "Status"
+    "status": "Status",
+    "subtasks": "Subtasks"
   },
 
   "TaskDetailStatusMenuTrigger": {

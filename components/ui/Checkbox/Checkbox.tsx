@@ -9,7 +9,7 @@ import { tv } from "tailwind-variants";
 import { focusRing } from "../styles";
 import { Check } from "lucide-react";
 
-type CheckboxProps = Omit<RACCheckboxProps, "children"> &
+export type CheckboxProps = Omit<RACCheckboxProps, "children"> &
   React.RefAttributes<HTMLLabelElement> & {
     errorMessage?: string;
     children?: React.ReactNode;

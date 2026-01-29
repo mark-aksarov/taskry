@@ -9,7 +9,6 @@ import { TaskStatus } from "@/generated/prisma/enums";
 import { useFormatter, useTranslations } from "next-intl";
 import { TaskDetailAltLayout } from "./TaskDetailAltLayout";
 import { Attachment, Attachments } from "@/components/attachments/Attachments";
-import { SubtasksCheckboxGroup } from "@/components/subtasks/SubtasksCheckboxGroup";
 
 interface TaskDetailAltProps {
   id: number;
@@ -34,16 +33,12 @@ interface TaskDetailAltProps {
     title: string;
   };
   status: TaskStatus;
-  subtasks: {
-    id: number;
-    text: string;
-    isDone: boolean;
-  }[];
   attachments: {
     id: number;
     fileUrl: string;
     fileName: string;
   }[];
+  subtasksCheckboxGroup?: React.ReactNode;
   newSubtaskBottomSheetTrigger: React.ReactNode;
   newSubtaskModalTrigger: React.ReactNode;
 }
@@ -57,8 +52,8 @@ export function TaskDetailAlt({
   category,
   project,
   status,
-  subtasks,
   attachments,
+  subtasksCheckboxGroup,
   newSubtaskBottomSheetTrigger,
   newSubtaskModalTrigger,
 }: TaskDetailAltProps) {
@@ -127,7 +122,11 @@ export function TaskDetailAlt({
       }
       subtasksSlot={
         <DetailInfo>
-          <SubtasksCheckboxGroup subtasks={subtasks} />
+          {subtasksCheckboxGroup ? (
+            subtasksCheckboxGroup
+          ) : (
+            <DetailTitle>{t("subtasks")}</DetailTitle>
+          )}
           {newSubtaskBottomSheetTrigger}
           {newSubtaskModalTrigger}
         </DetailInfo>

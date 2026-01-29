@@ -15,7 +15,6 @@ import { UnknownUser } from "@/components/common/UnknownUser";
 import { ImageContainer } from "@/components/common/ImageContainer";
 import { TaskDetailStatusMenuTrigger } from "./TaskDetailStatusMenuTrigger";
 import { Attachment, Attachments } from "@/components/attachments/Attachments";
-import { SubtasksCheckboxGroup } from "@/components/subtasks/SubtasksCheckboxGroup";
 
 interface TaskDetailProps {
   id: number;
@@ -36,21 +35,17 @@ interface TaskDetailProps {
     id: number;
     name: string;
   };
+  status: TaskStatus;
   project: {
     id: number;
     title: string;
   };
-  status: TaskStatus;
-  subtasks: {
-    id: number;
-    text: string;
-    isDone: boolean;
-  }[];
   attachments: {
     id: number;
     fileUrl: string;
     fileName: string;
   }[];
+  subtasksCheckboxGroup?: React.ReactNode;
   newSubtaskBottomSheetTrigger: React.ReactNode;
   newSubtaskModalTrigger: React.ReactNode;
 }
@@ -63,14 +58,15 @@ export function TaskDetail({
   deadline,
   description,
   category,
-  project,
   status,
-  subtasks,
+  project,
   attachments,
+  subtasksCheckboxGroup,
   newSubtaskBottomSheetTrigger,
   newSubtaskModalTrigger,
 }: TaskDetailProps) {
   const t = useTranslations("tasks.TaskDetail");
+  const tStatus = useTranslations("tasks.TaskStatus");
 
   const format = useFormatter();
 
@@ -89,7 +85,6 @@ export function TaskDetail({
           {title}
         </h2>
       }
-      actionsSlot={<TaskDetailStatusMenuTrigger />}
       assigneesSlot={
         <DetailInfo>
           <DetailTitle>{t("assignee")}</DetailTitle>
@@ -139,6 +134,12 @@ export function TaskDetail({
           <DetailText>{category.name}</DetailText>
         </DetailInfo>
       }
+      statusSlot={
+        <DetailInfo>
+          <DetailTitle>{t("status")}</DetailTitle>
+          <DetailText>{tStatus(status)}</DetailText>
+        </DetailInfo>
+      }
       projectTitleSlot={
         <DetailInfo>
           <DetailTitle>{t("project")}</DetailTitle>
@@ -147,7 +148,11 @@ export function TaskDetail({
       }
       subtasksSlot={
         <DetailInfo>
-          <SubtasksCheckboxGroup subtasks={subtasks} />
+          {subtasksCheckboxGroup ? (
+            subtasksCheckboxGroup
+          ) : (
+            <DetailTitle>{t("subtasks")}</DetailTitle>
+          )}
           {newSubtaskBottomSheetTrigger}
           {newSubtaskModalTrigger}
         </DetailInfo>

@@ -2,12 +2,12 @@ import { DetailRow } from "@/components/common/Detail";
 
 interface TaskDetailLayoutProps {
   titleSlot: React.ReactNode;
-  actionsSlot: React.ReactNode;
   descriptionSlot: React.ReactNode;
   assigneesSlot: React.ReactNode;
   deadlineSlot: React.ReactNode;
   creatorSlot: React.ReactNode;
   categoryNameSlot: React.ReactNode;
+  statusSlot: React.ReactNode;
   projectTitleSlot: React.ReactNode;
   subtasksSlot: React.ReactNode;
   attachmentsSlot: React.ReactNode;
@@ -15,12 +15,12 @@ interface TaskDetailLayoutProps {
 
 export function TaskDetailLayout({
   titleSlot,
-  actionsSlot,
   assigneesSlot,
   deadlineSlot,
   descriptionSlot,
   creatorSlot,
   categoryNameSlot,
+  statusSlot,
   projectTitleSlot,
   subtasksSlot,
   attachmentsSlot,
@@ -29,11 +29,7 @@ export function TaskDetailLayout({
 
   return (
     <div className="flex flex-col gap-6">
-      <div className="flex flex-col gap-4">
-        {titleSlot}
-
-        <div className="flex gap-3">{actionsSlot}</div>
-      </div>
+      {titleSlot}
       <div className="flex flex-col gap-4">
         <DetailRow className={rowStyles}>
           {assigneesSlot}
@@ -41,10 +37,13 @@ export function TaskDetailLayout({
         </DetailRow>
         <DetailRow className={rowStyles}>{descriptionSlot}</DetailRow>
         <DetailRow className={rowStyles}>
-          {creatorSlot}
+          {statusSlot}
           {categoryNameSlot}
         </DetailRow>
-        <DetailRow>{projectTitleSlot}</DetailRow>
+        <DetailRow className={rowStyles}>
+          {projectTitleSlot}
+          {creatorSlot}
+        </DetailRow>
         <DetailRow>{subtasksSlot}</DetailRow>
         <DetailRow>{attachmentsSlot}</DetailRow>
       </div>

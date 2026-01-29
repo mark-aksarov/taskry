@@ -1,8 +1,11 @@
 import { TaskDetail } from "./TaskDetail";
+import { TaskStatus } from "@/generated/prisma/enums";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { SubtasksCheckboxGroup } from "@/components/subtasks/SubtasksCheckboxGroup";
 import { NewSubtaskModalTrigger } from "@/components/subtasks/NewSubtaskModalTrigger";
 import { NewSubtaskBottomSheetTrigger } from "@/components/subtasks/NewSubtaskBottomSheetTrigger";
+import { Default as SubtasksCheckboxGroupStory } from "@/components/subtasks/SubtasksCheckboxGroup/SubtasksCheckboxGroup.stories";
 import { Default as NewSubtaskModalTriggerStory } from "@/components/subtasks/NewSubtaskModalTrigger/NewSubtaskModalTrigger.stories";
 import { Default as NewSubtaskBottomSheetTriggerStory } from "@/components/subtasks/NewSubtaskBottomSheetTrigger/NewSubtaskBottomSheetTrigger.stories";
 
@@ -42,6 +45,7 @@ export const Default = {
       id: 1,
       name: "Design",
     },
+    status: TaskStatus.active,
     creator: {
       id: "u2",
       fullName: "John Doe",
@@ -51,12 +55,6 @@ export const Default = {
       id: 2,
       title: "Website Redesign",
     },
-    status: "active",
-    subtasks: [
-      { id: 1, text: "Wireframe the layout", isDone: true },
-      { id: 2, text: "Create high-fidelity mockups", isDone: false },
-      { id: 3, text: "Review with stakeholders", isDone: false },
-    ],
     attachments: [
       {
         id: 1,
@@ -69,6 +67,9 @@ export const Default = {
         fileName: "placeholder.jpg",
       },
     ],
+    subtasksCheckboxGroup: (
+      <SubtasksCheckboxGroup {...SubtasksCheckboxGroupStory.args} />
+    ),
     newSubtaskBottomSheetTrigger: (
       <NewSubtaskBottomSheetTrigger
         {...NewSubtaskBottomSheetTriggerStory.args}
@@ -89,12 +90,11 @@ export const WithoutSomeData = {
       id: 1,
       name: "Design",
     },
+    status: TaskStatus.active,
     project: {
       id: 1,
       title: "Website Redesign",
     },
-    status: "active",
-    subtasks: [],
     attachments: [],
     newSubtaskBottomSheetTrigger: (
       <NewSubtaskBottomSheetTrigger

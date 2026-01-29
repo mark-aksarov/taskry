@@ -12,6 +12,7 @@ import { headers } from "next/headers";
 import { TaskList } from "../TaskList";
 import { TaskListItem } from "../TaskListItem";
 import { TaskDetailModal } from "../TaskDetailModal";
+import { hasGuestRole } from "@/lib/utils/hasGuestRole";
 import { getTaskList } from "@/lib/data/task/task.service";
 import { deleteTasks } from "@/lib/actions/task/deleteTasks";
 import { TaskDetailContainer } from "../TaskDetailContainer";
@@ -28,7 +29,6 @@ import { updateTaskStatuses } from "@/lib/actions/task/updateTaskStatuses";
 import { UserDetailContainer } from "@/components/users/UserDetailContainer";
 import { ProjectDetailModal } from "@/components/projects/ProjectDetailModal";
 import { ProjectDetailContainer } from "@/components/projects/ProjectDetailContainer";
-import { hasGuestRole } from "@/lib/utils/hasGuestRole";
 
 interface AssignedTasksContainerProps {
   page: number;
@@ -93,13 +93,23 @@ async function AssignedTasksContainerInner({
               taskDetailModal={
                 <TaskDetailModal
                   taskId={task.id}
-                  taskDetailContainer={<TaskDetailContainer taskId={task.id} />}
+                  taskDetailContainer={
+                    <TaskDetailContainer
+                      guestMode={guestMode}
+                      taskId={task.id}
+                    />
+                  }
                 />
               }
               taskDetailBottomSheet={
                 <TaskDetailBottomSheet
                   taskId={task.id}
-                  taskDetailContainer={<TaskDetailContainer taskId={task.id} />}
+                  taskDetailContainer={
+                    <TaskDetailContainer
+                      guestMode={guestMode}
+                      taskId={task.id}
+                    />
+                  }
                 />
               }
               commentModalTrigger={

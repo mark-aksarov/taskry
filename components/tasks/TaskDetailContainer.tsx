@@ -4,14 +4,19 @@ import useSWR from "swr";
 import { Suspense } from "react";
 import { TaskDetail } from "./TaskDetail/TaskDetail";
 import { TaskDetailDTO } from "@/lib/data/task/task.dto";
-import { TaskDetailSkeleton } from "./TaskDetail/TaskDetailSkeleton";
-import { NewSubtaskModalTrigger } from "../subtasks/NewSubtaskModalTrigger";
-import { NewSubtaskBottomSheetTrigger } from "../subtasks/NewSubtaskBottomSheetTrigger";
 import { NewSubtaskForm } from "../subtasks/NewSubtaskForm";
+import { SubtasksCheckbox } from "../subtasks/SubtasksCheckbox";
 import { createSubtask } from "@/lib/actions/subtask/createSubtask";
+import { deleteSubtask } from "@/lib/actions/subtask/deleteSubtask";
+import { TaskDetailSkeleton } from "./TaskDetail/TaskDetailSkeleton";
+import { SubtasksCheckboxGroup } from "../subtasks/SubtasksCheckboxGroup";
+import { NewSubtaskModalTrigger } from "../subtasks/NewSubtaskModalTrigger";
+import { SubtaskActionMenuTrigger } from "../subtasks/SubtaskActionMenuTrigger";
+import { NewSubtaskBottomSheetTrigger } from "../subtasks/NewSubtaskBottomSheetTrigger";
 
 interface TaskDetailContainerProps {
   taskId: number;
+  guestMode: boolean;
 }
 
 export function TaskDetailContainer(props: TaskDetailContainerProps) {
@@ -22,7 +27,10 @@ export function TaskDetailContainer(props: TaskDetailContainerProps) {
   );
 }
 
-function TaskDetailContainerInner({ taskId }: TaskDetailContainerProps) {
+function TaskDetailContainerInner({
+  taskId,
+  guestMode,
+}: TaskDetailContainerProps) {
   const { data: task, mutate } = useSWR<TaskDetailDTO>(`/api/tasks/${taskId}`, {
     suspense: true,
   });
@@ -45,12 +53,37 @@ function TaskDetailContainerInner({ taskId }: TaskDetailContainerProps) {
       title={task.title}
       assignee={task.assignee}
       deadline={task.deadline}
-      description={task.description ?? undefined}
+      description={task.description}
       category={task.category}
-      project={task.project}
       status={task.status}
-      subtasks={task.subtasks}
+      project={task.project}
       attachments={task.attachments}
+      subtasksCheckboxGroup={
+        task.subtasks.length && (
+          <SubtasksCheckboxGroup
+            defaultValue={task.subtasks
+              .filter((subtask) => subtask.isDone)
+              .map((subtask) => subtask.id.toString())}
+          >
+            {task.subtasks.map((subtask) => (
+              <SubtasksCheckbox
+                key={subtask.id}
+                value={subtask.id.toString()}
+                actionMenuTrigger={
+                  <SubtaskActionMenuTrigger
+                    guestMode={guestMode}
+                    subtaskId={subtask.id}
+                    subtaskText={subtask.text}
+                    deleteAction={deleteSubtask}
+                  />
+                }
+              >
+                {subtask.text}
+              </SubtasksCheckbox>
+            ))}
+          </SubtasksCheckboxGroup>
+        )
+      }
       newSubtaskBottomSheetTrigger={
         <NewSubtaskBottomSheetTrigger
           newSubtaskFormContainer={newSubtaskForm}

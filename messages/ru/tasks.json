@@ -238,7 +238,8 @@
     "attachments": "Вложения",
     "assignee": "Исполнитель",
     "noAssignee": "Нет исполнителя",
-    "status": "Статус"
+    "status": "Статус",
+    "subtasks": "Подзадачи"
   },
 
   "TaskDetailStatusMenuTrigger": {

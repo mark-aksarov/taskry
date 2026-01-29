@@ -63,13 +63,23 @@ export async function UserTasksContainer({
               taskDetailModal={
                 <TaskDetailModal
                   taskId={task.id}
-                  taskDetailContainer={<TaskDetailContainer taskId={task.id} />}
+                  taskDetailContainer={
+                    <TaskDetailContainer
+                      guestMode={guestMode}
+                      taskId={task.id}
+                    />
+                  }
                 />
               }
               taskDetailBottomSheet={
                 <TaskDetailBottomSheet
                   taskId={task.id}
-                  taskDetailContainer={<TaskDetailContainer taskId={task.id} />}
+                  taskDetailContainer={
+                    <TaskDetailContainer
+                      guestMode={guestMode}
+                      taskId={task.id}
+                    />
+                  }
                 />
               }
               commentModalTrigger={

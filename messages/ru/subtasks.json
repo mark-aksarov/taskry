@@ -1,4 +1,11 @@
 {
+  "DeleteSubtaskModal": {
+    "heading": "Удалить подзадачу",
+    "text": "Вы уверены, что хотите удалить подзадачу <strong>«{text}»</strong>?",
+    "deleteButton": "Удалить",
+    "cancelButton": "Отмена"
+  },
+
   "SubtaskActionMenuTrigger": {
     "edit": "Редактировать",
     "delete": "Удалить"

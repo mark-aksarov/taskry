@@ -72,7 +72,10 @@ export async function TasksContainer({
                   <TaskDetailModal
                     taskId={task.id}
                     taskDetailContainer={
-                      <TaskDetailContainer taskId={task.id} />
+                      <TaskDetailContainer
+                        taskId={task.id}
+                        guestMode={guestMode}
+                      />
                     }
                   />
                 }
@@ -80,7 +83,10 @@ export async function TasksContainer({
                   <TaskDetailBottomSheet
                     taskId={task.id}
                     taskDetailContainer={
-                      <TaskDetailContainer taskId={task.id} />
+                      <TaskDetailContainer
+                        taskId={task.id}
+                        guestMode={guestMode}
+                      />
                     }
                   />
                 }
@@ -145,13 +151,23 @@ export async function TasksContainer({
               taskDetailModal={
                 <TaskDetailModal
                   taskId={task.id}
-                  taskDetailContainer={<TaskDetailContainer taskId={task.id} />}
+                  taskDetailContainer={
+                    <TaskDetailContainer
+                      taskId={task.id}
+                      guestMode={guestMode}
+                    />
+                  }
                 />
               }
               taskDetailBottomSheet={
                 <TaskDetailBottomSheet
                   taskId={task.id}
-                  taskDetailContainer={<TaskDetailContainer taskId={task.id} />}
+                  taskDetailContainer={
+                    <TaskDetailContainer
+                      taskId={task.id}
+                      guestMode={guestMode}
+                    />
+                  }
                 />
               }
               commentModalTrigger={

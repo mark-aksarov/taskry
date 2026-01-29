@@ -9,7 +9,7 @@ import { twMerge } from "tailwind-merge";
 import { fieldStyles, Label } from "../Field";
 import type { CheckboxGroupProps as RACCheckboxGroupProps } from "react-aria-components";
 
-type CheckboxGroupProps = RACCheckboxGroupProps &
+export type CheckboxGroupProps = RACCheckboxGroupProps &
   React.RefAttributes<HTMLDivElement> & {
     label: string;
   };
