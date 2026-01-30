@@ -3,6 +3,7 @@ import { coercedPositiveInt } from "./base";
 
 export const subtaskSchema = z.object({
   id: coercedPositiveInt,
+  isDone: z.stringbool().optional(),
   text: z.string().min(1).max(255),
   taskId: coercedPositiveInt,
 });

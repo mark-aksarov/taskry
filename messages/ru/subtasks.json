@@ -29,9 +29,14 @@
     "heading": "Новая подзадача"
   },
 
-  "NewSubtaskFormDialog": {
+  "NewSubtaskModal": {
     "heading": "Новая подзадача",
     "submitButtonLabel": "Добавить подзадачу"
+  },
+
+  "EditSubtaskModal": {
+    "heading": "Редактировать подзадачу",
+    "submitButtonLabel": "Обновить подзадачу"
   },
 
   "NewSubtaskDialogAddButton": {

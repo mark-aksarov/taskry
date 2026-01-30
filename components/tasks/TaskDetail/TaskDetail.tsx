@@ -13,7 +13,6 @@ import { TaskStatus } from "@/generated/prisma/enums";
 import { useFormatter, useTranslations } from "next-intl";
 import { UnknownUser } from "@/components/common/UnknownUser";
 import { ImageContainer } from "@/components/common/ImageContainer";
-import { TaskDetailStatusMenuTrigger } from "./TaskDetailStatusMenuTrigger";
 import { Attachment, Attachments } from "@/components/attachments/Attachments";
 
 interface TaskDetailProps {
@@ -46,7 +45,6 @@ interface TaskDetailProps {
     fileName: string;
   }[];
   subtasksCheckboxGroup?: React.ReactNode;
-  newSubtaskBottomSheetTrigger: React.ReactNode;
   newSubtaskModalTrigger: React.ReactNode;
 }
 
@@ -62,7 +60,6 @@ export function TaskDetail({
   project,
   attachments,
   subtasksCheckboxGroup,
-  newSubtaskBottomSheetTrigger,
   newSubtaskModalTrigger,
 }: TaskDetailProps) {
   const t = useTranslations("tasks.TaskDetail");
@@ -153,7 +150,6 @@ export function TaskDetail({
           ) : (
             <DetailTitle>{t("subtasks")}</DetailTitle>
           )}
-          {newSubtaskBottomSheetTrigger}
           {newSubtaskModalTrigger}
         </DetailInfo>
       }

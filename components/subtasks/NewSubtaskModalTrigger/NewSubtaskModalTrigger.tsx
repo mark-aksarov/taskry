@@ -1,23 +1,20 @@
 "use client";
 
+import { NewSubtaskModal } from "../NewSubtaskModal";
 import { DialogTrigger } from "react-aria-components";
-import { SubtaskFormModal } from "../SubtaskFormModal";
 import { NewSubtasksButton } from "../NewSubtaskButton";
-import { NewSubtaskFormDialog } from "../NewSubtaskFormDialog";
 
 interface NewSubtaskModalTriggerProps {
-  newSubtaskFormContainer: React.ReactNode;
+  newSubtaskForm: React.ReactNode;
 }
 
 export function NewSubtaskModalTrigger({
-  newSubtaskFormContainer,
+  newSubtaskForm,
 }: NewSubtaskModalTriggerProps) {
   return (
     <DialogTrigger>
-      <NewSubtasksButton className="max-md:hidden" />
-      <SubtaskFormModal>
-        <NewSubtaskFormDialog>{newSubtaskFormContainer}</NewSubtaskFormDialog>
-      </SubtaskFormModal>
+      <NewSubtasksButton />
+      <NewSubtaskModal newSubtaskForm={newSubtaskForm} />
     </DialogTrigger>
   );
 }

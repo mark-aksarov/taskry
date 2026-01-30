@@ -4,10 +4,8 @@ import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { SubtasksCheckboxGroup } from "@/components/subtasks/SubtasksCheckboxGroup";
 import { NewSubtaskModalTrigger } from "@/components/subtasks/NewSubtaskModalTrigger";
-import { NewSubtaskBottomSheetTrigger } from "@/components/subtasks/NewSubtaskBottomSheetTrigger";
 import { Default as SubtasksCheckboxGroupStory } from "@/components/subtasks/SubtasksCheckboxGroup/SubtasksCheckboxGroup.stories";
 import { Default as NewSubtaskModalTriggerStory } from "@/components/subtasks/NewSubtaskModalTrigger/NewSubtaskModalTrigger.stories";
-import { Default as NewSubtaskBottomSheetTriggerStory } from "@/components/subtasks/NewSubtaskBottomSheetTrigger/NewSubtaskBottomSheetTrigger.stories";
 
 const meta = {
   title: "components/tasks/TaskDetail",
@@ -70,11 +68,6 @@ export const Default = {
     subtasksCheckboxGroup: (
       <SubtasksCheckboxGroup {...SubtasksCheckboxGroupStory.args} />
     ),
-    newSubtaskBottomSheetTrigger: (
-      <NewSubtaskBottomSheetTrigger
-        {...NewSubtaskBottomSheetTriggerStory.args}
-      />
-    ),
     newSubtaskModalTrigger: (
       <NewSubtaskModalTrigger {...NewSubtaskModalTriggerStory.args} />
     ),
@@ -96,11 +89,6 @@ export const WithoutSomeData = {
       title: "Website Redesign",
     },
     attachments: [],
-    newSubtaskBottomSheetTrigger: (
-      <NewSubtaskBottomSheetTrigger
-        {...NewSubtaskBottomSheetTriggerStory.args}
-      />
-    ),
     newSubtaskModalTrigger: (
       <NewSubtaskModalTrigger {...NewSubtaskModalTriggerStory.args} />
     ),

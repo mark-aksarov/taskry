@@ -13,6 +13,7 @@ const initialState: ActionState = {
 
 export interface SubtaskFormBaseProps {
   id: string;
+  subtaskId?: number;
   taskId?: number;
   subtaskTextDefaultValue?: string;
   formAction: ActionFn<ActionState, FormData>;
@@ -21,6 +22,7 @@ export interface SubtaskFormBaseProps {
 
 export function SubtaskFormBase({
   id,
+  subtaskId,
   taskId,
   subtaskTextDefaultValue,
   formAction,
@@ -50,6 +52,7 @@ export function SubtaskFormBase({
           <FormErrorText>{state.message}</FormErrorText>
         )}
 
+        {subtaskId && <input type="hidden" name="id" value={subtaskId} />}
         {taskId && <input type="hidden" name="taskId" value={taskId} />}
 
         <SubtaskFormBaseTextField defaultValue={subtaskTextDefaultValue} />

@@ -19,6 +19,6 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    newSubtaskFormContainer: <NewSubtaskForm {...SubtaskFormBaseStory.args} />,
+    newSubtaskForm: <NewSubtaskForm {...SubtaskFormBaseStory.args} />,
   },
 } satisfies Story;

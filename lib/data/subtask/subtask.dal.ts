@@ -1,8 +1,9 @@
 import { auth } from "@/lib/auth";
 import prisma from "@/lib/prisma";
 import { AccessDeniedError } from "../utils/error";
-import { CreateSubtaskInputDTO } from "./subtask.dto";
+import { Prisma } from "@/generated/prisma/client";
 import { requireSession } from "../utils/requireSession";
+import { CreateSubtaskInputDTO, UpdateSubtaskInputDTO } from "./subtask.dto";
 
 export const createSubtask = async (input: CreateSubtaskInputDTO) => {
   // Authorization
@@ -38,6 +39,46 @@ export const createSubtask = async (input: CreateSubtaskInputDTO) => {
   });
 
   return subtask;
+};
+
+export const updateSubtask = async (input: UpdateSubtaskInputDTO) => {
+  // Authorization
+  const {
+    user: { id: userId, workspaceId },
+  } = await requireSession();
+
+  // Check permission
+  const permission = await auth.api.userHasPermission({
+    body: {
+      userId,
+      permission: {
+        subtask: ["update"],
+      },
+    },
+  });
+
+  if (!permission.success) {
+    throw new AccessDeniedError(
+      "You do not have permission to update subtask.",
+    );
+  }
+
+  // Check access to related resources
+  await checkSubtaskResourcesAccess(workspaceId, input.taskId);
+
+  // Update task and get new data
+  const updatedTask = await prisma.subtask.update({
+    where: {
+      id: input.id,
+      taskId: input.taskId,
+    },
+    data: {
+      text: input.text ?? Prisma.skip,
+      isDone: input.isDone === undefined ? Prisma.skip : input.isDone,
+    },
+  });
+
+  return updatedTask;
 };
 
 export const deleteSubtask = async (id: number) => {

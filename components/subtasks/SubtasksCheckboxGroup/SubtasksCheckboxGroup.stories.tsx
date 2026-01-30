@@ -1,4 +1,5 @@
 import { fn } from "storybook/internal/test";
+import { EditSubtaskForm } from "../EditSubtaskForm";
 import { SubtasksCheckbox } from "../SubtasksCheckbox";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { SubtasksCheckboxGroup } from "./SubtasksCheckboxGroup";
@@ -39,6 +40,9 @@ export const Default = {
                 subtaskId={subtask.id}
                 subtaskText={subtask.text}
                 deleteAction={fn()}
+                editSubtaskForm={
+                  <EditSubtaskForm taskId={subtask.id} formAction={fn()} />
+                }
               />
             }
           >

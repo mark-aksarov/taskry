@@ -39,7 +39,6 @@ interface TaskDetailAltProps {
     fileName: string;
   }[];
   subtasksCheckboxGroup?: React.ReactNode;
-  newSubtaskBottomSheetTrigger: React.ReactNode;
   newSubtaskModalTrigger: React.ReactNode;
 }
 
@@ -54,7 +53,6 @@ export function TaskDetailAlt({
   status,
   attachments,
   subtasksCheckboxGroup,
-  newSubtaskBottomSheetTrigger,
   newSubtaskModalTrigger,
 }: TaskDetailAltProps) {
   const t = useTranslations("tasks.TaskDetail");
@@ -127,7 +125,6 @@ export function TaskDetailAlt({
           ) : (
             <DetailTitle>{t("subtasks")}</DetailTitle>
           )}
-          {newSubtaskBottomSheetTrigger}
           {newSubtaskModalTrigger}
         </DetailInfo>
       }

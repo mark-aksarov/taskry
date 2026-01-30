@@ -5,14 +5,15 @@ import { Suspense } from "react";
 import { TaskDetail } from "./TaskDetail/TaskDetail";
 import { TaskDetailDTO } from "@/lib/data/task/task.dto";
 import { NewSubtaskForm } from "../subtasks/NewSubtaskForm";
+import { EditSubtaskForm } from "../subtasks/EditSubtaskForm";
 import { SubtasksCheckbox } from "../subtasks/SubtasksCheckbox";
 import { createSubtask } from "@/lib/actions/subtask/createSubtask";
 import { deleteSubtask } from "@/lib/actions/subtask/deleteSubtask";
+import { updateSubtask } from "@/lib/actions/subtask/updateSubtask";
 import { TaskDetailSkeleton } from "./TaskDetail/TaskDetailSkeleton";
 import { SubtasksCheckboxGroup } from "../subtasks/SubtasksCheckboxGroup";
 import { NewSubtaskModalTrigger } from "../subtasks/NewSubtaskModalTrigger";
 import { SubtaskActionMenuTrigger } from "../subtasks/SubtaskActionMenuTrigger";
-import { NewSubtaskBottomSheetTrigger } from "../subtasks/NewSubtaskBottomSheetTrigger";
 
 interface TaskDetailContainerProps {
   taskId: number;
@@ -38,14 +39,6 @@ function TaskDetailContainerInner({
   if (!task) {
     throw new Error("Task not found");
   }
-
-  const newSubtaskForm = (
-    <NewSubtaskForm
-      taskId={task.id}
-      formAction={createSubtask}
-      mutate={mutate}
-    />
-  );
 
   return (
     <TaskDetail
@@ -75,6 +68,15 @@ function TaskDetailContainerInner({
                     subtaskId={subtask.id}
                     subtaskText={subtask.text}
                     deleteAction={deleteSubtask}
+                    editSubtaskForm={
+                      <EditSubtaskForm
+                        taskId={task.id}
+                        subtaskId={subtask.id}
+                        formAction={updateSubtask}
+                        subtaskTextDefaultValue={subtask.text}
+                        mutate={mutate}
+                      />
+                    }
                   />
                 }
               >
@@ -84,13 +86,16 @@ function TaskDetailContainerInner({
           </SubtasksCheckboxGroup>
         )
       }
-      newSubtaskBottomSheetTrigger={
-        <NewSubtaskBottomSheetTrigger
-          newSubtaskFormContainer={newSubtaskForm}
-        />
-      }
       newSubtaskModalTrigger={
-        <NewSubtaskModalTrigger newSubtaskFormContainer={newSubtaskForm} />
+        <NewSubtaskModalTrigger
+          newSubtaskForm={
+            <NewSubtaskForm
+              taskId={task.id}
+              formAction={createSubtask}
+              mutate={mutate}
+            />
+          }
+        />
       }
     />
   );

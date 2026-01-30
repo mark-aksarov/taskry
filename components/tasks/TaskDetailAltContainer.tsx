@@ -5,15 +5,16 @@ import { notFound } from "next/navigation";
 import { hasGuestRole } from "@/lib/utils/hasGuestRole";
 import { NewSubtaskForm } from "../subtasks/NewSubtaskForm";
 import { getTaskDetail } from "@/lib/data/task/task.service";
+import { EditSubtaskForm } from "../subtasks/EditSubtaskForm";
 import { TaskDetailAlt } from "./TaskDetailAlt/TaskDetailAlt";
 import { SubtasksCheckbox } from "../subtasks/SubtasksCheckbox";
 import { createSubtask } from "@/lib/actions/subtask/createSubtask";
 import { deleteSubtask } from "@/lib/actions/subtask/deleteSubtask";
+import { updateSubtask } from "@/lib/actions/subtask/updateSubtask";
 import { SubtasksCheckboxGroup } from "../subtasks/SubtasksCheckboxGroup";
 import { NewSubtaskModalTrigger } from "../subtasks/NewSubtaskModalTrigger";
 import { TaskDetailAltSkeleton } from "./TaskDetailAlt/TaskDetailAltSkeleton";
 import { SubtaskActionMenuTrigger } from "../subtasks/SubtaskActionMenuTrigger";
-import { NewSubtaskBottomSheetTrigger } from "../subtasks/NewSubtaskBottomSheetTrigger";
 
 interface TaskDetailAltContainerProps {
   taskId: number;
@@ -35,10 +36,6 @@ async function TaskDetailAltContainerInner({
   if (!task) {
     notFound();
   }
-
-  const newSubtaskForm = (
-    <NewSubtaskForm taskId={task.id} formAction={createSubtask} />
-  );
 
   const guestMode = await hasGuestRole();
 
@@ -69,6 +66,14 @@ async function TaskDetailAltContainerInner({
                     subtaskId={subtask.id}
                     subtaskText={subtask.text}
                     deleteAction={deleteSubtask}
+                    editSubtaskForm={
+                      <EditSubtaskForm
+                        taskId={task.id}
+                        subtaskId={subtask.id}
+                        formAction={updateSubtask}
+                        subtaskTextDefaultValue={subtask.text}
+                      />
+                    }
                   />
                 }
               >
@@ -78,13 +83,12 @@ async function TaskDetailAltContainerInner({
           </SubtasksCheckboxGroup>
         )
       }
-      newSubtaskBottomSheetTrigger={
-        <NewSubtaskBottomSheetTrigger
-          newSubtaskFormContainer={newSubtaskForm}
-        />
-      }
       newSubtaskModalTrigger={
-        <NewSubtaskModalTrigger newSubtaskFormContainer={newSubtaskForm} />
+        <NewSubtaskModalTrigger
+          newSubtaskForm={
+            <NewSubtaskForm taskId={task.id} formAction={createSubtask} />
+          }
+        />
       }
     />
   );

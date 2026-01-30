@@ -29,9 +29,14 @@
     "heading": "New Subtask"
   },
 
-  "NewSubtaskFormDialog": {
+  "NewSubtaskModal": {
     "heading": "New Subtask",
     "submitButtonLabel": "Add Subtask"
+  },
+
+  "EditSubtaskModal": {
+    "heading": "Edit Subtask",
+    "submitButtonLabel": "Edit Subtask"
   },
 
   "NewSubtaskDialogAddButton": {

@@ -13,12 +13,14 @@ import { DeleteSubtaskModal } from "./DeleteSubtaskModal";
 import { GuestModeModal } from "../common/GuestModeModal";
 import { ActionFn, ActionState } from "@/lib/actions/types";
 import { EllipsisVertical, Pencil, Trash } from "lucide-react";
+import { EditSubtaskModal } from "./EditSubtaskModal";
 
 interface SubtaskActionMenuTriggerProps {
   subtaskId: number;
   subtaskText: string;
   guestMode: boolean;
   deleteAction: ActionFn<ActionState, number>;
+  editSubtaskForm: React.ReactNode;
 }
 
 export function SubtaskActionMenuTrigger({
@@ -26,6 +28,7 @@ export function SubtaskActionMenuTrigger({
   subtaskText,
   guestMode,
   deleteAction,
+  editSubtaskForm,
 }: SubtaskActionMenuTriggerProps) {
   const t = useTranslations("subtasks.SubtaskActionMenuTrigger");
 
@@ -35,6 +38,9 @@ export function SubtaskActionMenuTrigger({
   // Delete State
   const [isOpenDeleteModal, setIsOpenDeleteModal] = useState(false);
 
+  // Edit modal / bottom sheet
+  const [isOpenEditModal, setIsOpenEditModal] = useState(false);
+
   function handleAction(key: Key) {
     if (guestMode) {
       setIsGuestModeModalOpen(true);
@@ -43,6 +49,8 @@ export function SubtaskActionMenuTrigger({
 
     if (key === "delete") {
       setIsOpenDeleteModal(true);
+    } else {
+      setIsOpenEditModal(true);
     }
   }
 
@@ -71,6 +79,12 @@ export function SubtaskActionMenuTrigger({
           <Trash size={16} /> {t("delete")}
         </Item>
       </ItemBaseActionMenuTrigger>
+
+      <EditSubtaskModal
+        isOpen={isOpenEditModal}
+        onOpenChange={setIsOpenEditModal}
+        editSubtaskForm={editSubtaskForm}
+      />
 
       <DeleteSubtaskModal
         subtaskId={subtaskId}

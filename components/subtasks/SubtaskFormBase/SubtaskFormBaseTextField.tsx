@@ -17,7 +17,6 @@ export function SubtaskFormBaseTextField({
       name="text"
       label={t("label")}
       placeholder={t("placeholder")}
-      inputClassName="p-3 rounded-lg"
       errorMessage={(validation) => {
         const details = validation.validationDetails;
         if (details.valueMissing) {
