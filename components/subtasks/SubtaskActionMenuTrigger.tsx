@@ -21,6 +21,7 @@ interface SubtaskActionMenuTriggerProps {
   guestMode: boolean;
   deleteAction: ActionFn<ActionState, number>;
   editSubtaskForm: React.ReactNode;
+  mutate?: () => void;
 }
 
 export function SubtaskActionMenuTrigger({
@@ -29,6 +30,7 @@ export function SubtaskActionMenuTrigger({
   guestMode,
   deleteAction,
   editSubtaskForm,
+  mutate,
 }: SubtaskActionMenuTriggerProps) {
   const t = useTranslations("subtasks.SubtaskActionMenuTrigger");
 
@@ -92,6 +94,7 @@ export function SubtaskActionMenuTrigger({
         isOpen={isOpenDeleteModal}
         onOpenChange={setIsOpenDeleteModal}
         deleteAction={deleteAction}
+        mutate={mutate}
       />
 
       <GuestModeModal

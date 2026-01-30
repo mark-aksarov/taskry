@@ -68,6 +68,7 @@ function TaskDetailContainerInner({
                     subtaskId={subtask.id}
                     subtaskText={subtask.text}
                     deleteAction={deleteSubtask}
+                    mutate={mutate}
                     editSubtaskForm={
                       <EditSubtaskForm
                         taskId={task.id}

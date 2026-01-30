@@ -43,6 +43,7 @@ export const Default = {
                 editSubtaskForm={
                   <EditSubtaskForm taskId={subtask.id} formAction={fn()} />
                 }
+                mutate={fn()}
               />
             }
           >
