@@ -6,33 +6,60 @@ import {
   ItemBaseActionMenuDialogHeader,
 } from "../common/ItemBase";
 
-import { useState } from "react";
+import {
+  ActionFn,
+  ActionState,
+  ToggleSubtaskPayload,
+} from "@/lib/actions/types";
+
 import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
+import { EditSubtaskModal } from "./EditSubtaskModal";
 import { DeleteSubtaskModal } from "./DeleteSubtaskModal";
 import { GuestModeModal } from "../common/GuestModeModal";
-import { ActionFn, ActionState } from "@/lib/actions/types";
-import { EllipsisVertical, Pencil, Trash } from "lucide-react";
-import { EditSubtaskModal } from "./EditSubtaskModal";
+import { startTransition, useActionState, useEffect, useState } from "react";
+import { useActionErrorToast } from "@/lib/hooks/useActionErrorToast";
+import { CheckCheck, EllipsisVertical, Pencil, Trash } from "lucide-react";
+
+const toggleSubtaskInitialState: ActionState = {
+  status: null,
+  message: null,
+};
 
 interface SubtaskActionMenuTriggerProps {
   subtaskId: number;
+  isDone: boolean;
   subtaskText: string;
   guestMode: boolean;
   deleteAction: ActionFn<ActionState, number>;
+  toggleSubtaskAction: ActionFn<ActionState, ToggleSubtaskPayload>;
   editSubtaskForm: React.ReactNode;
   mutate?: () => void;
 }
 
 export function SubtaskActionMenuTrigger({
   subtaskId,
+  isDone,
   subtaskText,
   guestMode,
   deleteAction,
+  toggleSubtaskAction,
   editSubtaskForm,
   mutate,
 }: SubtaskActionMenuTriggerProps) {
   const t = useTranslations("subtasks.SubtaskActionMenuTrigger");
+
+  // Toggle IsDone
+  const [toggleSubtaskState, toggleSubtask, toggleSubtaskIsPending] =
+    useActionState(toggleSubtaskAction, toggleSubtaskInitialState);
+
+  useEffect(() => {
+    if (toggleSubtaskState.status === "success") {
+      mutate?.();
+    }
+  }, [toggleSubtaskState, mutate]);
+
+  useActionErrorToast(toggleSubtaskState);
 
   // Guest mode modal
   const [isGuestModeModalOpen, setIsGuestModeModalOpen] = useState(false);
@@ -51,8 +78,10 @@ export function SubtaskActionMenuTrigger({
 
     if (key === "delete") {
       setIsOpenDeleteModal(true);
-    } else {
+    } else if (key === "edit") {
       setIsOpenEditModal(true);
+    } else if (key === "toggle") {
+      startTransition(() => toggleSubtask({ id: subtaskId, isDone: !isDone }));
     }
   }
 
@@ -76,6 +105,9 @@ export function SubtaskActionMenuTrigger({
       >
         <Item textValue={t("edit")} key="edit">
           <Pencil size={16} /> {t("edit")}
+        </Item>
+        <Item textValue={isDone ? t("undone") : t("done")} key="toggle">
+          <CheckCheck size={16} /> {isDone ? t("undone") : t("done")}
         </Item>
         <Item textValue={t("delete")} key="delete">
           <Trash size={16} /> {t("delete")}

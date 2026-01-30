@@ -77,7 +77,6 @@ const meta = {
   component: ProjectList,
   tags: ["autodocs"],
   decorators: [withThemedBackground],
-  excludeStories: ["ProjectListItemsTemplate"],
 } satisfies Meta<typeof ProjectList & { showCheckbox?: boolean }>;
 
 export default meta;

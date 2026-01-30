@@ -8,6 +8,8 @@
 
   "SubtaskActionMenuTrigger": {
     "edit": "Edit",
+    "done": "Mark as Done",
+    "undone": "Mark as Undone",
     "delete": "Delete"
   },
 

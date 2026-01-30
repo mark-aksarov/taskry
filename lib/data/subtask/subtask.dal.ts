@@ -63,14 +63,11 @@ export const updateSubtask = async (input: UpdateSubtaskInputDTO) => {
     );
   }
 
-  // Check access to related resources
-  await checkSubtaskResourcesAccess(workspaceId, input.taskId);
-
   // Update task and get new data
   const updatedTask = await prisma.subtask.update({
     where: {
       id: input.id,
-      taskId: input.taskId,
+      task: { workspaceId },
     },
     data: {
       text: input.text ?? Prisma.skip,

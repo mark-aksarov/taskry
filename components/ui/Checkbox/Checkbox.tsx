@@ -1,13 +1,14 @@
 "use client";
 
 import {
-  CheckboxProps as RACCheckboxProps,
   composeRenderProps,
   Checkbox as RACCheckbox,
+  CheckboxProps as RACCheckboxProps,
 } from "react-aria-components";
-import { tv } from "tailwind-variants";
-import { focusRing } from "../styles";
+
 import { Check } from "lucide-react";
+import { focusRing } from "../styles";
+import { tv } from "tailwind-variants";
 
 export type CheckboxProps = Omit<RACCheckboxProps, "children"> &
   React.RefAttributes<HTMLLabelElement> & {
@@ -34,7 +35,7 @@ const boxStyles = tv({
       true: "",
     },
     isDisabled: {
-      true: "",
+      true: "bg-gray-100 dark:bg-gray-700",
     },
   },
   compoundVariants: [

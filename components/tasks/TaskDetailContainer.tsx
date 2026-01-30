@@ -2,16 +2,17 @@
 
 import useSWR from "swr";
 import { Suspense } from "react";
+import { SubtaskList } from "../subtasks/SubtaskList";
 import { TaskDetail } from "./TaskDetail/TaskDetail";
 import { TaskDetailDTO } from "@/lib/data/task/task.dto";
 import { NewSubtaskForm } from "../subtasks/NewSubtaskForm";
+import { SubtaskListItem } from "../subtasks/SubtaskListItem";
 import { EditSubtaskForm } from "../subtasks/EditSubtaskForm";
-import { SubtasksCheckbox } from "../subtasks/SubtasksCheckbox";
 import { createSubtask } from "@/lib/actions/subtask/createSubtask";
 import { deleteSubtask } from "@/lib/actions/subtask/deleteSubtask";
 import { updateSubtask } from "@/lib/actions/subtask/updateSubtask";
+import { toggleSubtask } from "@/lib/actions/subtask/toggleSubtask";
 import { TaskDetailSkeleton } from "./TaskDetail/TaskDetailSkeleton";
-import { SubtasksCheckboxGroup } from "../subtasks/SubtasksCheckboxGroup";
 import { NewSubtaskModalTrigger } from "../subtasks/NewSubtaskModalTrigger";
 import { SubtaskActionMenuTrigger } from "../subtasks/SubtaskActionMenuTrigger";
 
@@ -53,21 +54,20 @@ function TaskDetailContainerInner({
       attachments={task.attachments}
       subtasksCheckboxGroup={
         task.subtasks.length && (
-          <SubtasksCheckboxGroup
-            defaultValue={task.subtasks
-              .filter((subtask) => subtask.isDone)
-              .map((subtask) => subtask.id.toString())}
-          >
+          <SubtaskList>
             {task.subtasks.map((subtask) => (
-              <SubtasksCheckbox
+              <SubtaskListItem
                 key={subtask.id}
-                value={subtask.id.toString()}
+                isDone={subtask.isDone}
+                subtaskText={subtask.text}
                 actionMenuTrigger={
                   <SubtaskActionMenuTrigger
                     guestMode={guestMode}
                     subtaskId={subtask.id}
+                    isDone={subtask.isDone}
                     subtaskText={subtask.text}
                     deleteAction={deleteSubtask}
+                    toggleSubtaskAction={toggleSubtask}
                     mutate={mutate}
                     editSubtaskForm={
                       <EditSubtaskForm
@@ -80,11 +80,9 @@ function TaskDetailContainerInner({
                     }
                   />
                 }
-              >
-                {subtask.text}
-              </SubtasksCheckbox>
+              />
             ))}
-          </SubtasksCheckboxGroup>
+          </SubtaskList>
         )
       }
       newSubtaskModalTrigger={

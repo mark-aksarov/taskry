@@ -31,3 +31,5 @@ export interface UpdateTaskStatusesPayload {
 }
 
 export type MarkAsReadPayload = number[] | null;
+
+export type ToggleSubtaskPayload = { id: number; isDone: boolean };

@@ -7,5 +7,5 @@ export interface UpdateSubtaskInputDTO {
   id: number;
   isDone?: boolean;
   text?: string;
-  taskId: number;
+  taskId?: number;
 }
