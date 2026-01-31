@@ -52,7 +52,7 @@ function TaskDetailContainerInner({
       status={task.status}
       project={task.project}
       attachments={task.attachments}
-      subtasksCheckboxGroup={
+      subtasksList={
         task.subtasks.length && (
           <SubtaskList>
             {task.subtasks.map((subtask) => (

@@ -145,11 +145,8 @@ export function TaskDetail({
       }
       subtasksSlot={
         <DetailInfo>
-          {subtasksList ? (
-            subtasksList
-          ) : (
-            <DetailTitle>{t("subtasks")}</DetailTitle>
-          )}
+          <DetailTitle>{t("subtasks")}</DetailTitle>
+          {subtasksList}
           {newSubtaskModalTrigger}
         </DetailInfo>
       }
