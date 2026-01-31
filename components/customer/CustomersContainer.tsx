@@ -7,7 +7,6 @@ import { CustomerListItem } from "./CustomerListItem";
 import { CustomerGridItem } from "./CustomerGridItem";
 import { CustomerDetailModal } from "./CustomerDetailModal";
 import { CustomerDetailContainer } from "./CustomerDetailContainer";
-import { getCustomerCount } from "@/lib/data/customer/customer.dal";
 import { deleteProjects } from "@/lib/actions/project/deleteProjects";
 import { getCustomerList } from "@/lib/data/customer/customer.service";
 import { CustomerListItemDTO } from "@/lib/data/customer/customer.dto";
@@ -29,8 +28,12 @@ export async function CustomersContainer({
   sort,
   filters,
 }: CustomersContainerProps) {
-  const customers = await getCustomerList({ page, pageSize, sort, filters });
-  const count = await getCustomerCount(filters);
+  const { items: customers, totalCount } = await getCustomerList({
+    page,
+    pageSize,
+    sort,
+    filters,
+  });
 
   const getCustomerCommonProps = (customer: CustomerListItemDTO) => ({
     id: customer.id,
@@ -119,7 +122,7 @@ export async function CustomersContainer({
           ))}
         </CustomerGrid>
       }
-      totalPages={Math.ceil(count / pageSize)}
+      totalPages={Math.ceil(totalCount / pageSize)}
     />
   );
 }

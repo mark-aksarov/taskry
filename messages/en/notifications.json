@@ -33,7 +33,27 @@
 
     "commentAdded": "added a comment in",
     "commentChanged": "edited a comment in",
-    "commentDeleted": "deleted your comment in"
+    "commentDeleted": "deleted your comment in",
+
+    "companyAdded": "added a new company",
+    "companyChanged": "changed the company",
+    "companyDeleted": "deleted the company",
+
+    "positionAdded": "added a new position",
+    "positionChanged": "changed the position",
+    "positionDeleted": "deleted the position",
+
+    "subtaskAdded": "added a new subtask",
+    "subtaskChanged": "changed the subtask",
+    "subtaskDeleted": "deleted the subtask",
+
+    "projectCategoryAdded": "added a new project category",
+    "projectCategoryChanged": "changed the project category",
+    "projectCategoryDeleted": "deleted the project category",
+
+    "taskCategoryAdded": "added a new task category",
+    "taskCategoryChanged": "changed the task category",
+    "taskCategoryDeleted": "deleted the task category"
   },
 
   "NotificationListItemActionMenuTrigger": {

@@ -1,8 +1,8 @@
 import {
-  createTaskAddedNotifications,
-  createTaskDeletedNotifications,
-  createTaskChangedNotifications,
-} from "../notification/notification.dal";
+  Prisma,
+  TaskStatus,
+  NotificationType,
+} from "@/generated/prisma/client";
 
 import { cache } from "react";
 import prisma from "@/lib/prisma";
@@ -10,8 +10,8 @@ import { auth } from "@/lib/auth";
 import { TaskFilters } from "@/lib/types";
 import { AccessDeniedError } from "../utils/error";
 import { requireSession } from "../utils/requireSession";
-import { Prisma, TaskStatus } from "@/generated/prisma/client";
 import { UpdateTaskInputDTO, CreateTaskInputDTO } from "./task.dto";
+import { getNotificationRecipients } from "../notification/notification.dal";
 
 export const getTask = cache(
   async <T extends Prisma.TaskSelect>(id: number, select: T) => {
@@ -64,8 +64,8 @@ export const getPaginatedTasks = cache(
       user: { id: userId, workspaceId },
     } = await requireSession();
 
-    const skip = page && pageSize ? (page - 1) * pageSize : undefined;
-    const take = pageSize ? pageSize : undefined;
+    const skip = page && pageSize ? (page - 1) * pageSize : Prisma.skip;
+    const take = pageSize ? pageSize : Prisma.skip;
 
     const orderByMapping: Record<string, Prisma.TaskOrderByWithRelationInput> =
       {
@@ -75,7 +75,7 @@ export const getPaginatedTasks = cache(
         category: { category: { name: "asc" } },
       };
 
-    const orderBy = sort ? orderByMapping[sort] : undefined;
+    const orderBy = sort ? orderByMapping[sort] : Prisma.skip;
     const where = buildTaskWhereClause(userId, workspaceId, filters);
 
     const [items, totalCount] = await prisma.$transaction([
@@ -110,13 +110,13 @@ export const getTaskCount = cache(async (filters?: TaskFilters) => {
 export const createTask = async (input: CreateTaskInputDTO) => {
   // Authorization
   const {
-    user: { id: creatorId, workspaceId },
+    user: { id: userId, workspaceId },
   } = await requireSession();
 
   // ACL
   const permission = await auth.api.userHasPermission({
     body: {
-      userId: creatorId,
+      userId: userId,
       permission: {
         task: ["create"],
       },
@@ -128,30 +128,45 @@ export const createTask = async (input: CreateTaskInputDTO) => {
   }
 
   // Check related resources access
-  await checkTaskResourcesAccess(workspaceId, input);
+  await checkTaskResourcesAccess(
+    workspaceId,
+    input.categoryId,
+    input.projectId,
+    input.assigneeId,
+  );
 
   return prisma.$transaction(async (tx) => {
     // Create task within the workspace
     const task = await tx.task.create({
       data: {
         title: input.title,
-        description: input.description,
+        description: input.description ?? Prisma.skip,
         deadline: input.deadline,
         status: input.status,
         projectId: input.projectId,
         categoryId: input.categoryId,
-        assigneeId: input.assigneeId,
-        creatorId,
+        assigneeId: input.assigneeId ?? Prisma.skip,
+        creatorId: userId,
         workspaceId,
       },
     });
 
     // Send notifications
-    await createTaskAddedNotifications(tx, {
-      task,
-      actorId: creatorId,
-      workspaceId,
-    });
+    const recipients = await getNotificationRecipients(tx, workspaceId, userId);
+
+    if (recipients.length > 0) {
+      await tx.notification.createMany({
+        data: recipients.map((user) => ({
+          type: NotificationType.taskAdded,
+          actorId: userId,
+          recipientId: user.id,
+          workspaceId,
+          taskId: task.id,
+          taskTitle: task.title,
+          isRead: false,
+        })),
+      });
+    }
 
     return task;
   });
@@ -178,7 +193,12 @@ export const updateTask = async (input: UpdateTaskInputDTO) => {
   }
 
   // Check access to related resources
-  await checkTaskResourcesAccess(workspaceId, input);
+  await checkTaskResourcesAccess(
+    workspaceId,
+    input.categoryId,
+    input.projectId,
+    input.assigneeId,
+  );
 
   return prisma.$transaction(async (tx) => {
     // Update task and get new data
@@ -188,22 +208,32 @@ export const updateTask = async (input: UpdateTaskInputDTO) => {
         workspaceId,
       },
       data: {
-        title: input.title,
-        description: input.description,
-        deadline: input.deadline,
-        status: input.status,
-        projectId: input.projectId,
-        categoryId: input.categoryId,
-        assigneeId: input.assigneeId,
+        title: input.title ?? Prisma.skip,
+        description: input.description ?? Prisma.skip,
+        deadline: input.deadline ?? Prisma.skip,
+        status: input.status ?? Prisma.skip,
+        projectId: input.projectId ?? Prisma.skip,
+        categoryId: input.categoryId ?? Prisma.skip,
+        assigneeId: input.assigneeId ?? Prisma.skip,
       },
     });
 
     // Send notifications using the updated task
-    await createTaskChangedNotifications(tx, {
-      tasks: [updatedTask],
-      actorId: userId,
-      workspaceId,
-    });
+    const recipients = await getNotificationRecipients(tx, workspaceId, userId);
+
+    if (recipients.length > 0) {
+      await tx.notification.createMany({
+        data: recipients.map((user) => ({
+          type: NotificationType.taskChanged,
+          actorId: userId,
+          recipientId: user.id,
+          workspaceId,
+          taskId: updatedTask.id,
+          taskTitle: updatedTask.title,
+          isRead: false,
+        })),
+      });
+    }
 
     return updatedTask;
   });
@@ -256,11 +286,23 @@ export const updateTaskStatuses = async (
     }
 
     // Send notifications with updated data
-    await createTaskChangedNotifications(tx, {
-      tasks: updatedTasks,
-      actorId: userId,
-      workspaceId,
-    });
+    const recipients = await getNotificationRecipients(tx, workspaceId, userId);
+
+    if (recipients.length > 0) {
+      await tx.notification.createMany({
+        data: updatedTasks.flatMap((task) =>
+          recipients.map((user) => ({
+            type: NotificationType.taskChanged,
+            actorId: userId,
+            recipientId: user.id,
+            workspaceId,
+            taskId: task.id,
+            taskTitle: task.title,
+            isRead: false,
+          })),
+        ),
+      });
+    }
 
     return updatedTasks;
   });
@@ -318,11 +360,26 @@ export const deleteTasks = async (ids: number[]) => {
     });
 
     // Send batched notifications
-    await createTaskDeletedNotifications(tx, {
-      tasks: tasksToDelete,
-      actorId,
+    const recipients = await getNotificationRecipients(
+      tx,
       workspaceId,
-    });
+      actorId,
+    );
+
+    if (recipients.length > 0) {
+      await tx.notification.createMany({
+        data: tasksToDelete.flatMap((task) =>
+          recipients.map((user) => ({
+            type: NotificationType.taskDeleted,
+            actorId,
+            recipientId: user.id,
+            workspaceId,
+            taskTitle: task.title,
+            isRead: false,
+          })),
+        ),
+      });
+    }
 
     return result;
   });
@@ -334,30 +391,38 @@ export const deleteTasks = async (ids: number[]) => {
 
 async function checkTaskResourcesAccess(
   workspaceId: number,
-  input: Partial<CreateTaskInputDTO>,
+  categoryId?: number,
+  projectId?: number,
+  assigneeId?: string,
 ) {
-  const checks = [
-    prisma.taskCategory.findFirst({
-      where: { id: input.categoryId, workspaceId },
-    }),
-    prisma.project.findFirst({ where: { id: input.projectId, workspaceId } }),
-    input.assigneeId
-      ? prisma.user.findFirst({ where: { id: input.assigneeId, workspaceId } })
-      : Promise.resolve(true),
-  ];
+  if (categoryId) {
+    const category = await prisma.taskCategory.findFirst({
+      where: { id: categoryId, workspaceId },
+    });
 
-  const [category, project, assignee] = await Promise.all(checks);
-
-  if (!category) {
-    throw new AccessDeniedError("Category access denied or not found");
+    if (!category) {
+      throw new AccessDeniedError("Category access denied or not found");
+    }
   }
 
-  if (!project) {
-    throw new AccessDeniedError("Project access denied or not found");
+  if (projectId) {
+    const project = await prisma.project.findFirst({
+      where: { id: projectId, workspaceId },
+    });
+
+    if (!project) {
+      throw new AccessDeniedError("Project access denied or not found");
+    }
   }
 
-  if (!assignee) {
-    throw new AccessDeniedError("Assignee access denied or not found");
+  if (assigneeId) {
+    const assignee = await prisma.user.findFirst({
+      where: { id: assigneeId, workspaceId },
+    });
+
+    if (!assignee) {
+      throw new AccessDeniedError("Assignee access denied or not found");
+    }
   }
 }
 

@@ -1,12 +1,17 @@
 import {
+  CustomerListDTO,
   CustomerDetailDTO,
   CustomerSummaryDTO,
   CustomerFormDataDTO,
-  CustomerListItemDTO,
+  CustomerSearchDTO,
 } from "./customer.dto";
 
 import { CustomerFilters } from "@/lib/types";
-import { getAllCustomers, getCustomer } from "./customer.dal";
+import {
+  getAllCustomers,
+  getCustomer,
+  getPaginatedCustomers,
+} from "./customer.dal";
 
 export const getCustomerDetail = async (
   id: number,
@@ -85,8 +90,8 @@ export const getCustomerList = async ({
   pageSize: number;
   sort: string;
   filters?: CustomerFilters;
-}): Promise<CustomerListItemDTO[]> => {
-  const customers = await getAllCustomers({
+}): Promise<CustomerListDTO> => {
+  const { items: customers, totalCount } = await getPaginatedCustomers({
     page,
     pageSize,
     sort,
@@ -108,15 +113,51 @@ export const getCustomerList = async ({
     },
   });
 
-  return customers.map((customer) => ({
-    id: customer.id,
-    fullName: customer.fullName,
-    email: customer.email,
-    phoneNumber: customer.phoneNumber ?? undefined,
-    imageUrl: customer.imageUrl ?? undefined,
-    publicLink: customer.publicLink ?? undefined,
-    company: customer.company ?? undefined,
-  }));
+  return {
+    items: customers.map((customer) => ({
+      id: customer.id,
+      fullName: customer.fullName,
+      email: customer.email,
+      phoneNumber: customer.phoneNumber ?? undefined,
+      imageUrl: customer.imageUrl ?? undefined,
+      publicLink: customer.publicLink ?? undefined,
+      company: customer.company ?? undefined,
+    })),
+    totalCount,
+  };
+};
+
+export const searchCustomers = async ({
+  query,
+  page,
+  pageSize,
+}: {
+  query?: string;
+  page: number;
+  pageSize: number;
+}): Promise<CustomerSearchDTO> => {
+  const { items, totalCount } = await getPaginatedCustomers({
+    page,
+    pageSize,
+    select: {
+      id: true,
+      fullName: true,
+      email: true,
+      imageUrl: true,
+    },
+    filters: { query },
+  });
+
+  return {
+    items: items.map((c) => ({
+      id: c.id,
+      fullName: c.fullName,
+      email: c.email,
+      imageUrl: c.imageUrl ?? undefined,
+    })),
+
+    totalCount,
+  };
 };
 
 export const getCustomerSummaries = async (): Promise<CustomerSummaryDTO[]> => {

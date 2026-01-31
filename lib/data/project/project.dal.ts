@@ -1,12 +1,20 @@
 import "server-only";
 
+import {
+  Prisma,
+  TaskStatus,
+  ProjectStatus,
+  NotificationType,
+} from "@/generated/prisma/client";
+
 import { cache } from "react";
+import { auth } from "@/lib/auth";
 import prisma from "@/lib/prisma";
 import { ProjectFilters } from "@/lib/types";
 import { AccessDeniedError } from "../utils/error";
 import { requireSession } from "../utils/requireSession";
 import { CreateProjectInputDTO, UpdateProjectInputDTO } from "./project.dto";
-import { Prisma, ProjectStatus, TaskStatus } from "@/generated/prisma/client";
+import { getNotificationRecipients } from "../notification/notification.dal";
 
 export const getProject = cache(
   async <T extends Prisma.ProjectSelect>(id: number, select: T) => {
@@ -56,8 +64,8 @@ export const getPaginatedProjects = cache(
       user: { workspaceId },
     } = await requireSession();
 
-    const skip = page && pageSize ? (page - 1) * pageSize : undefined;
-    const take = pageSize ? pageSize : undefined;
+    const skip = page && pageSize ? (page - 1) * pageSize : Prisma.skip;
+    const take = pageSize ? pageSize : Prisma.skip;
 
     const orderByMapping: Record<
       string,
@@ -69,7 +77,7 @@ export const getPaginatedProjects = cache(
       category: { category: { name: "asc" } },
     };
 
-    const orderBy = sort ? orderByMapping[sort] : undefined;
+    const orderBy = sort ? orderByMapping[sort] : Prisma.skip;
     const where = buildProjectWhereClause(workspaceId, filters);
 
     const [items, totalCount] = await prisma.$transaction([
@@ -91,6 +99,7 @@ export const getPaginatedProjects = cache(
 );
 
 export const getProjectCount = cache(async (filters?: ProjectFilters) => {
+  // Authorization
   const {
     user: { workspaceId },
   } = await requireSession();
@@ -101,46 +110,160 @@ export const getProjectCount = cache(async (filters?: ProjectFilters) => {
 });
 
 export const createProject = async (input: CreateProjectInputDTO) => {
+  // Authorization
   const {
-    user: { id: creatorId, workspaceId },
+    user: { id: userId, workspaceId },
   } = await requireSession();
 
-  await validateRelations(workspaceId, input.categoryId, input.customerId);
-
-  return await prisma.project.create({
-    data: {
-      ...input,
-      creatorId,
-      workspaceId,
+  // ACL
+  const permission = await auth.api.userHasPermission({
+    body: {
+      userId,
+      permission: {
+        project: ["create"],
+      },
     },
+  });
+
+  if (!permission.success) {
+    throw new AccessDeniedError(
+      "You do not have permission to create project.",
+    );
+  }
+
+  // Check related resources access
+  await checkProjectResourcesAccess(
+    workspaceId,
+    input.categoryId,
+    input.customerId,
+  );
+
+  return prisma.$transaction(async (tx) => {
+    const project = await prisma.project.create({
+      data: {
+        title: input.title,
+        description: input.description ?? Prisma.skip,
+        deadline: input.deadline,
+        customerId: input.customerId ?? Prisma.skip,
+        categoryId: input.categoryId,
+        status: input.status,
+        creatorId: userId,
+        workspaceId,
+      },
+    });
+
+    const recipients = await getNotificationRecipients(tx, workspaceId, userId);
+
+    if (recipients.length > 0) {
+      await tx.notification.createMany({
+        data: recipients.map((user) => ({
+          type: NotificationType.projectAdded,
+          actorId: userId,
+          recipientId: user.id,
+          workspaceId,
+          projectId: project.id,
+          projectTitle: project.title,
+          isRead: false,
+        })),
+      });
+    }
+
+    return project;
   });
 };
 
 export const updateProject = async (input: UpdateProjectInputDTO) => {
+  // Authorization
   const {
-    user: { workspaceId },
+    user: { id: userId, workspaceId },
   } = await requireSession();
 
-  await validateRelations(workspaceId, input.categoryId, input.customerId);
+  // ACL
+  const permission = await auth.api.userHasPermission({
+    body: {
+      userId,
+      permission: {
+        project: ["update"],
+      },
+    },
+  });
+
+  if (!permission.success) {
+    throw new AccessDeniedError(
+      "You do not have permission to update project.",
+    );
+  }
+
+  // Check related resources access
+  await checkProjectResourcesAccess(
+    workspaceId,
+    input.categoryId,
+    input.customerId,
+  );
 
   return await prisma.$transaction(async (tx) => {
-    await tx.project.update({
+    const updatedProject = await tx.project.update({
       where: {
         id: input.id,
         workspaceId,
       },
-      data: input,
+      data: {
+        title: input.title ?? Prisma.skip,
+        description: input.description ?? Prisma.skip,
+        deadline: input.deadline ?? Prisma.skip,
+        customerId: input.customerId ?? Prisma.skip,
+        categoryId: input.categoryId ?? Prisma.skip,
+        status: input.status ?? Prisma.skip,
+      },
     });
+
+    const recipients = await getNotificationRecipients(tx, workspaceId, userId);
+
+    if (recipients.length > 0) {
+      await tx.notification.createMany({
+        data: recipients.map((user) => ({
+          type: NotificationType.projectChanged,
+          actorId: userId,
+          recipientId: user.id,
+          workspaceId,
+          projectId: updatedProject.id,
+          projectTitle: updatedProject.title,
+          isRead: false,
+        })),
+      });
+    }
+
+    return updatedProject;
   });
 };
 
-export const updateProjects = async (ids: number[], status: ProjectStatus) => {
+export const updateProjectStatuses = async (
+  ids: number[],
+  status: ProjectStatus,
+) => {
+  // Authorization
   const {
-    user: { workspaceId },
+    user: { id: userId, workspaceId },
   } = await requireSession();
 
+  // ACL
+  const permission = await auth.api.userHasPermission({
+    body: {
+      userId,
+      permission: {
+        project: ["update"],
+      },
+    },
+  });
+
+  if (!permission.success) {
+    throw new AccessDeniedError(
+      "You do not have permission to update project.",
+    );
+  }
+
   return await prisma.$transaction(async (tx) => {
-    await tx.project.updateMany({
+    const updatedProjects = await tx.project.updateManyAndReturn({
       where: {
         id: { in: ids },
         workspaceId,
@@ -149,19 +272,99 @@ export const updateProjects = async (ids: number[], status: ProjectStatus) => {
         status,
       },
     });
+
+    if (updatedProjects.length === 0) {
+      return [];
+    }
+
+    const recipients = await getNotificationRecipients(tx, workspaceId, userId);
+
+    if (recipients.length > 0) {
+      await tx.notification.createMany({
+        data: updatedProjects.flatMap((project) =>
+          recipients.map((user) => ({
+            type: NotificationType.projectChanged,
+            actorId: userId,
+            recipientId: user.id,
+            workspaceId,
+            projectId: project.id,
+            projectTitle: project.title,
+            isRead: false,
+          })),
+        ),
+      });
+    }
+
+    return updatedProjects;
   });
 };
 
 export const deleteProjects = async (ids: number[]) => {
+  // Authorization
   const {
-    user: { workspaceId },
+    user: { id: userId, workspaceId },
   } = await requireSession();
 
-  return await prisma.project.deleteMany({
-    where: {
-      workspaceId,
-      id: { in: ids },
+  // ACL
+  const permission = await auth.api.userHasPermission({
+    body: {
+      userId: userId,
+      permission: {
+        project: ["delete"],
+      },
     },
+  });
+
+  if (!permission.success) {
+    throw new AccessDeniedError("You do not have permission to delete tasks.");
+  }
+
+  return await prisma.$transaction(async (tx) => {
+    // Fetch projects before deletion for notifications
+    const projectsToDelete = await tx.project.findMany({
+      where: {
+        workspaceId,
+        id: {
+          in: ids,
+        },
+      },
+      select: {
+        title: true,
+      },
+    });
+
+    if (projectsToDelete.length === 0) {
+      return {
+        count: 0,
+      };
+    }
+
+    // Bulk delete projects within the workspace
+    const result = await tx.project.deleteMany({
+      where: {
+        workspaceId,
+        id: { in: ids },
+      },
+    });
+
+    const recipients = await getNotificationRecipients(tx, workspaceId, userId);
+
+    if (recipients.length > 0) {
+      await tx.notification.createMany({
+        data: projectsToDelete.flatMap((project) =>
+          recipients.map((user) => ({
+            type: NotificationType.projectDeleted,
+            actorId: userId,
+            recipientId: user.id,
+            workspaceId,
+            projectTitle: project.title,
+            isRead: false,
+          })),
+        ),
+      });
+    }
+
+    return result;
   });
 };
 
@@ -169,13 +372,13 @@ export const deleteProjects = async (ids: number[]) => {
  * HELPERS
  */
 
-async function validateRelations(
+async function checkProjectResourcesAccess(
   workspaceId: number,
   categoryId?: number,
   customerId?: number,
 ) {
   if (categoryId) {
-    const category = await prisma.projectCategory.findFirst({
+    const category = await prisma.projectCategory.findUnique({
       where: { id: categoryId, workspaceId },
     });
 
@@ -185,7 +388,7 @@ async function validateRelations(
   }
 
   if (customerId) {
-    const customer = await prisma.customer.findFirst({
+    const customer = await prisma.customer.findUnique({
       where: { id: customerId, workspaceId },
     });
 

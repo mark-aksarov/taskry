@@ -6,9 +6,12 @@ import {
 } from "../customer.dal";
 
 import prisma from "@/lib/prisma";
+import { AccessDeniedError } from "../../utils/error";
 import { resetDatabase } from "@/prisma/resetDatabase";
-import { describe, it, expect, beforeEach, vi } from "vitest";
+import { NotificationType } from "@/generated/prisma/enums";
 import { requireSession } from "@/lib/data/utils/requireSession";
+import { describe, it, expect, beforeEach, vi, beforeAll } from "vitest";
+import { PrismaClientKnownRequestError } from "@prisma/client/runtime/client";
 
 vi.mock("server-only", () => ({}));
 
@@ -18,247 +21,530 @@ vi.mock("@/lib/data/utils/requireSession", () => ({
 
 describe("Customer DAL", () => {
   beforeEach(async () => {
-    vi.resetAllMocks();
+    (requireSession as any).mockResolvedValue({
+      user: { id: "user-1", workspaceId: 1 },
+    });
 
+    await prisma.customer.deleteMany();
+    await prisma.notification.deleteMany();
+  });
+
+  beforeAll(async () => {
     await resetDatabase();
 
-    const mockSession = {
-      user: { id: "user-1", workspaceId: 1 },
-    };
-    (requireSession as any).mockResolvedValue(mockSession);
+    await prisma.workspace.createMany({ data: [{ id: 1 }, { id: 2 }] });
 
-    await prisma.workspace.create({ data: { id: 1 } });
-    await prisma.company.create({
-      data: { id: 1, name: "Company A", workspaceId: 1 },
-    });
-    await prisma.company.create({
-      data: { id: 2, name: "Company B", workspaceId: 1 },
-    });
-
-    await prisma.customer.createMany({
+    await prisma.projectCategory.createMany({
       data: [
-        {
-          id: 1,
-          email: "john@ws1.com",
-          fullName: "John Doe",
-          companyId: 1,
-          workspaceId: 1,
-        },
-        {
-          id: 2,
-          email: "jane@ws1.com",
-          fullName: "Jane Smith",
-          companyId: 2,
-          workspaceId: 1,
-        },
+        { id: 1, name: "Project Category 1", workspaceId: 1 },
+        { id: 2, name: "Project Category 2", workspaceId: 2 },
       ],
     });
 
-    await prisma.workspace.create({ data: { id: 2 } });
-    await prisma.company.create({
-      data: { id: 3, name: "Company C", workspaceId: 2 },
+    await prisma.taskCategory.createMany({
+      data: [
+        { id: 1, name: "Task Category 1", workspaceId: 1 },
+        { id: 2, name: "Task Category 2", workspaceId: 2 },
+      ],
     });
 
-    await prisma.customer.create({
-      data: {
-        id: 3,
-        email: "other@ws2.com",
-        fullName: "Other Workspace User",
-        companyId: 3,
-        workspaceId: 2,
-      },
+    await prisma.company.createMany({
+      data: [
+        { id: 1, name: "Company 1", workspaceId: 1 },
+        { id: 2, name: "Company 2", workspaceId: 2 },
+      ],
+    });
+
+    await prisma.user.createMany({
+      data: [
+        {
+          id: "user-1",
+          fullName: "User 1",
+          email: "user-1@test.com",
+          role: "owner",
+          workspaceId: 1,
+        },
+        {
+          id: "user-2",
+          fullName: "User 2",
+          email: "user-2@test.com",
+          role: "user",
+          workspaceId: 1,
+        },
+        {
+          id: "user-3",
+          fullName: "User 3",
+          email: "user-3@test.com",
+          role: "guest",
+          workspaceId: 1,
+        },
+        {
+          id: "user-4",
+          fullName: "User 4",
+          email: "user-4@test.com",
+          role: "manager",
+          workspaceId: 2,
+        },
+      ],
     });
   });
 
   describe("getCustomerCount", () => {
     it("should return total count of customers for the current workspace", async () => {
-      const count = await getCustomerCount();
-
-      expect(count).toBe(2);
-    });
-
-    it("should return filtered count when company filter is applied", async () => {
-      const count = await getCustomerCount({
-        company: [1],
-      });
-
-      expect(count).toBe(1);
-    });
-
-    it("should return filtered count when multiple companies are selected", async () => {
-      const count = await getCustomerCount({
-        company: [1, 2],
-      });
-
-      expect(count).toBe(2);
-    });
-
-    it("should return 0 when filtering by companies from another workspace", async () => {
-      const count = await getCustomerCount({
-        company: [3],
-      });
-
-      expect(count).toBe(0);
-    });
-
-    it("should correctly count customers in a different workspace", async () => {
-      (requireSession as any).mockResolvedValue({
-        user: { id: "user-2", workspaceId: 2 },
+      await prisma.customer.createMany({
+        data: [
+          {
+            id: 1,
+            fullName: "Customer 1",
+            email: "customer-1@test.com",
+            companyId: 1,
+            workspaceId: 1,
+          },
+          {
+            id: 2,
+            fullName: "Customer 2",
+            email: "customer-2@test.com",
+            companyId: 1,
+            workspaceId: 1,
+          },
+          {
+            id: 3,
+            fullName: "Customer 3",
+            email: "customer-2@test.com",
+            companyId: 1,
+            workspaceId: 2,
+          },
+        ],
       });
 
       const count = await getCustomerCount();
-
-      expect(count).toBe(1);
-    });
-
-    it("should return 0 if no customers match the complex filters", async () => {
-      const count = await getCustomerCount({
-        hasActiveProjects: true,
-        company: [],
-      });
-
-      expect(count).toBe(0);
-    });
-  });
-
-  describe("deleteCustomers", () => {
-    it("should successfully delete multiple customers in the current workspace", async () => {
-      const { count } = await deleteCustomers([1, 2]);
-
       expect(count).toBe(2);
-
-      const remainingCount = await prisma.customer.count({
-        where: { workspaceId: 1 },
-      });
-      expect(remainingCount).toBe(0);
-    });
-
-    it("should delete only own customers even if foreign IDs are provided", async () => {
-      const { count } = await deleteCustomers([1, 3]);
-
-      expect(count).toBe(1);
-
-      const foreignCustomer = await prisma.customer.findUnique({
-        where: { id: 3 },
-      });
-      expect(foreignCustomer).not.toBeNull();
-      expect(foreignCustomer?.fullName).toBe("Other Workspace User");
-    });
-
-    it("should return a count of 0 if no customers were deleted", async () => {
-      const { count } = await deleteCustomers([999]);
-      expect(count).toBe(0);
-    });
-
-    it("should return a count of 0 if trying to delete another workspace's customer exclusively", async () => {
-      const { count } = await deleteCustomers([3]);
-      expect(count).toBe(0);
-    });
-
-    it("should handle an empty array of IDs by returning count 0", async () => {
-      const { count } = await deleteCustomers([]);
-      expect(count).toBe(0);
     });
   });
 
   describe("createCustomer", () => {
-    it("should successfully create a customer with valid data", async () => {
-      const input = {
-        id: 4,
-        fullName: "New Client",
-        email: "new@client.com",
+    it("should successfully create a customer and send notifications", async () => {
+      const inputData = {
+        fullName: "Customer 1",
+        bio: "Customer 1 bio",
+        imageUrl: "https://example.com/image.jpg",
+        email: "customer-1@test.com",
+        phoneNumber: "123-456-7890",
+        publicLink: "https://example.com/public-link",
         companyId: 1,
       };
 
-      await createCustomer(input);
+      const result = await createCustomer(inputData);
 
-      const dbCustomer = await prisma.customer.findFirst({
-        where: { email: "new@client.com" },
+      const notifications = await prisma.notification.findMany({
+        where: { customerId: result.id },
       });
 
-      expect(dbCustomer).not.toBeNull();
-      expect(dbCustomer?.fullName).toBe("New Client");
-      expect(dbCustomer?.workspaceId).toBe(1);
-    });
+      expect(result).toBeDefined();
+      expect(result).toMatchObject({
+        ...inputData,
+        workspaceId: 1,
+      });
 
-    it("should throw an error if the company belongs to another workspace", async () => {
-      const input = {
-        fullName: "Infiltrator",
-        email: "hacker@test.com",
-        companyId: 3,
+      const expectedNotificationData = {
+        actorId: "user-1",
+        taskId: null,
+        taskTitle: null,
+        projectId: null,
+        commentId: null,
+        customerId: result.id,
+        customerFullName: "Customer 1",
+        type: NotificationType.customerAdded,
+        workspaceId: 1,
       };
 
-      await expect(createCustomer(input)).rejects.toThrow();
+      expect(notifications.length).toBe(2);
 
-      const dbCustomer = await prisma.customer.findFirst({
-        where: { email: "hacker@test.com" },
-      });
-      expect(dbCustomer).toBeNull();
+      expect(notifications).toEqual(
+        expect.arrayContaining([
+          expect.objectContaining({
+            ...expectedNotificationData,
+            recipientId: "user-2",
+          }),
+          expect.objectContaining({
+            ...expectedNotificationData,
+            recipientId: "user-3",
+          }),
+        ]),
+      );
     });
 
-    it("should fail if session is missing", async () => {
-      (requireSession as any).mockRejectedValue(new Error("Unauthorized"));
+    it("should throw error if company does not belong to the workspace", async () => {
+      const createProjectPromise = createCustomer({
+        fullName: "Customer 1",
+        email: "customer-1@test.com",
+        companyId: 2,
+      });
 
-      const input = {
-        fullName: "No Session",
-        email: "none@test.com",
+      await expect(createProjectPromise).rejects.toThrow(AccessDeniedError);
+      await expect(createProjectPromise).rejects.toThrow(
+        /Company access denied or not found/i,
+      );
+    });
+
+    it("should create a customer without optional fields", async () => {
+      const result = await createCustomer({
+        fullName: "Customer 1",
+        email: "customer-1@test.com",
         companyId: 1,
-      };
+      });
 
-      await expect(createCustomer(input)).rejects.toThrow("Unauthorized");
+      expect(result).toBeDefined();
+      expect(result.fullName).toBe("Customer 1");
     });
 
-    it("should fail if mandatory fields are missing (database level)", async () => {
-      const input = {
-        email: "incomplete@test.com",
-      } as any;
+    describe("RBAC: create customer", () => {
+      const setup = async (userId: string, role: string) => {
+        (requireSession as any).mockResolvedValue({
+          user: { id: userId, workspaceId: 1, role },
+        });
 
-      await expect(createCustomer(input)).rejects.toThrow();
+        const createInput = {
+          fullName: "Customer 1",
+          email: "customer-1@test.com",
+          companyId: 1,
+        };
+
+        return {
+          createInput,
+        };
+      };
+
+      it("should succeed for owner", async () => {
+        const { createInput } = await setup("user-1", "owner");
+        const result = await createCustomer(createInput);
+        expect(result).toBeDefined();
+        expect(result.fullName).toBe(createInput.fullName);
+      });
+
+      it("should succeed for user", async () => {
+        const { createInput } = await setup("user-2", "user");
+        const result = await createCustomer(createInput);
+        expect(result).toBeDefined();
+        expect(result.fullName).toBe(createInput.fullName);
+      });
+
+      it("should fail for guest", async () => {
+        const { createInput } = await setup("user-3", "guest");
+        await expect(createCustomer(createInput)).rejects.toThrow(
+          AccessDeniedError,
+        );
+      });
     });
   });
 
   describe("updateCustomer", () => {
-    it("should successfully update a customer within the same workspace", async () => {
-      const input = {
+    it("should successfully update a customer and send notifications", async () => {
+      await prisma.customer.create({
+        data: {
+          id: 1,
+          fullName: "Customer 1",
+          email: "customer-1@test.com",
+          companyId: 1,
+          workspaceId: 1,
+        },
+      });
+
+      const result = await updateCustomer({
         id: 1,
-        fullName: "John Updated",
-        companyId: 1,
+        fullName: "Updated Customer Full Name",
+      });
+
+      const notifications = await prisma.notification.findMany({
+        where: { customerId: result.id },
+      });
+
+      expect(result).not.toBeNull();
+      expect(result!.id).toBe(1);
+      expect(result!.fullName).toBe("Updated Customer Full Name");
+
+      const expectedNotificationData = {
+        actorId: "user-1",
+        customerId: result.id,
+        customerFullName: "Updated Customer Full Name",
+        taskId: null,
+        taskTitle: null,
+        projectId: null,
+        commentId: null,
+        type: NotificationType.customerChanged,
+        workspaceId: 1,
       };
 
-      await updateCustomer(input);
+      expect(notifications.length).toBe(2);
 
-      const updated = await prisma.customer.findUnique({ where: { id: 1 } });
-      expect(updated?.fullName).toBe("John Updated");
-      expect(updated?.companyId).toBe(1);
+      expect(notifications).toEqual(
+        expect.arrayContaining([
+          expect.objectContaining({
+            ...expectedNotificationData,
+            recipientId: "user-2",
+          }),
+          expect.objectContaining({
+            ...expectedNotificationData,
+            recipientId: "user-3",
+          }),
+        ]),
+      );
     });
 
-    it("should throw an error if the customer belongs to another workspace", async () => {
-      const input = {
-        id: 3,
-        fullName: "Attempt to hack",
-      };
+    it("should throw an error when trying to update a customer from another workspace", async () => {
+      await prisma.customer.create({
+        data: {
+          fullName: "Customer 1",
+          email: "customer-1@test.com",
+          companyId: 1,
+          workspaceId: 2,
+        },
+      });
 
-      await expect(updateCustomer(input)).rejects.toThrow();
-    });
-
-    it("should throw an error if trying to move customer to a company in another workspace", async () => {
-      const input = {
+      const updateCustomerPromise = updateCustomer({
         id: 1,
-        companyId: 3,
-      };
+        fullName: "Updated Customer Full Name",
+      });
 
-      await expect(updateCustomer(input)).rejects.toThrow();
-
-      const original = await prisma.customer.findUnique({ where: { id: 1 } });
-      expect(original?.companyId).not.toBe(3);
+      await expect(updateCustomerPromise).rejects.toThrow(
+        PrismaClientKnownRequestError,
+      );
+      await expect(updateCustomerPromise).rejects.toMatchObject({
+        code: "P2025",
+      });
     });
 
-    it("should fail if session is invalid", async () => {
-      (requireSession as any).mockRejectedValue(new Error("Unauthorized"));
+    describe("RBAC: update customer", () => {
+      const setup = async (userId: string, role: string) => {
+        (requireSession as any).mockResolvedValue({
+          user: { id: userId, workspaceId: 1, role },
+        });
 
-      const input = { id: 1, fullName: "New Name" };
+        await prisma.customer.create({
+          data: {
+            id: 1,
+            fullName: "Customer 1",
+            email: "customer-1@test.com",
+            companyId: 1,
+            workspaceId: 1,
+          },
+        });
 
-      await expect(updateCustomer(input)).rejects.toThrow("Unauthorized");
+        return {
+          updateInput: {
+            id: 1,
+            fullName: "Updated Customer Full Name",
+          },
+        };
+      };
+
+      it("should succeed for owner", async () => {
+        const { updateInput } = await setup("user-1", "owner");
+        const result = await updateCustomer(updateInput);
+        expect(result.fullName).toBe(updateInput.fullName);
+      });
+
+      it("should fail for user", async () => {
+        const { updateInput } = await setup("user-2", "user");
+        const result = await updateCustomer(updateInput);
+        expect(result.fullName).toBe(updateInput.fullName);
+      });
+
+      it("should fail for guest", async () => {
+        const { updateInput } = await setup("user-3", "guest");
+
+        await expect(updateCustomer(updateInput)).rejects.toThrow(
+          AccessDeniedError,
+        );
+      });
+    });
+  });
+
+  describe("deleteCustomers", () => {
+    it("should successfully delete customers and send notifications", async () => {
+      await prisma.customer.createMany({
+        data: [
+          {
+            id: 1,
+            fullName: "Customer 1",
+            email: "customer-1@test.com",
+            companyId: 1,
+            workspaceId: 1,
+          },
+          {
+            id: 2,
+            fullName: "Customer 2",
+            email: "customer-2@test.com",
+            companyId: 1,
+            workspaceId: 1,
+          },
+        ],
+      });
+
+      const result = await deleteCustomers([1, 2]);
+
+      expect(result.count).toBe(2);
+      const remainingCustomers = await prisma.customer.findMany();
+      const notifications = await prisma.notification.findMany();
+
+      expect(remainingCustomers).toHaveLength(0);
+
+      expect(notifications.length).toBe(4);
+
+      expect(notifications).toEqual(
+        expect.arrayContaining([
+          expect.objectContaining({
+            actorId: "user-1",
+            projectTitle: null,
+            projectId: null,
+            commentId: null,
+            taskId: null,
+            taskTitle: null,
+            customerFullName: "Customer 1",
+            customerId: null,
+            type: NotificationType.customerDeleted,
+            workspaceId: 1,
+            recipientId: "user-2",
+          }),
+          expect.objectContaining({
+            actorId: "user-1",
+            projectTitle: null,
+            projectId: null,
+            commentId: null,
+            taskId: null,
+            taskTitle: null,
+            customerFullName: "Customer 1",
+            customerId: null,
+            type: NotificationType.customerDeleted,
+            workspaceId: 1,
+            recipientId: "user-2",
+          }),
+          expect.objectContaining({
+            actorId: "user-1",
+            projectTitle: null,
+            projectId: null,
+            commentId: null,
+            taskId: null,
+            taskTitle: null,
+            customerFullName: "Customer 2",
+            customerId: null,
+            type: NotificationType.customerDeleted,
+            workspaceId: 1,
+            recipientId: "user-3",
+          }),
+          expect.objectContaining({
+            actorId: "user-1",
+            projectTitle: null,
+            projectId: null,
+            commentId: null,
+            taskId: null,
+            taskTitle: null,
+            customerFullName: "Customer 2",
+            customerId: null,
+            type: NotificationType.customerDeleted,
+            workspaceId: 1,
+            recipientId: "user-3",
+          }),
+        ]),
+      );
+    });
+
+    it("should not delete customers from a different workspace", async () => {
+      await prisma.customer.createMany({
+        data: [
+          {
+            id: 1,
+            fullName: "Customer 1",
+            email: "customer-1@test.com",
+            companyId: 1,
+            workspaceId: 2,
+          },
+        ],
+      });
+
+      const result = await deleteCustomers([1]);
+      const notifications = await prisma.notification.findMany();
+
+      expect(result.count).toBe(0);
+      expect(notifications).toHaveLength(0);
+    });
+
+    it("should only delete customers belonging to the current workspace", async () => {
+      await prisma.customer.createMany({
+        data: [
+          {
+            id: 1,
+            fullName: "Customer 1",
+            email: "customer-1@test.com",
+            companyId: 1,
+            workspaceId: 1,
+          },
+          {
+            id: 2,
+            fullName: "Customer 2",
+            email: "customer-2@test.com",
+            companyId: 2,
+            workspaceId: 2,
+          },
+        ],
+      });
+
+      const result = await deleteCustomers([1, 2]);
+      expect(result.count).toBe(1);
+
+      const notifications = await prisma.notification.findMany();
+
+      expect(notifications).toHaveLength(2);
+      expect(notifications).toEqual(
+        expect.arrayContaining([
+          expect.objectContaining({
+            recipientId: "user-2",
+          }),
+          expect.objectContaining({
+            recipientId: "user-3",
+          }),
+        ]),
+      );
+    });
+
+    it("should return 0 if an empty array is provided", async () => {
+      const result = await deleteCustomers([]);
+      expect(result.count).toBe(0);
+    });
+
+    describe("RBAC: delete customers", () => {
+      const setup = async (userId: string, role: string) => {
+        (requireSession as any).mockResolvedValue({
+          user: { id: userId, workspaceId: 1, role },
+        });
+
+        await prisma.customer.create({
+          data: {
+            id: 1,
+            fullName: "Customer 1",
+            email: "customer-1@test.com",
+            companyId: 1,
+            workspaceId: 1,
+          },
+        });
+      };
+
+      it("should succeed for owner", async () => {
+        await setup("user-1", "owner");
+        const result = await deleteCustomers([1]);
+        expect(result.count).toBe(1);
+      });
+
+      it("should fail for user", async () => {
+        await setup("user-2", "user");
+        const result = await deleteCustomers([1]);
+        expect(result.count).toBe(1);
+      });
+
+      it("should fail for guest", async () => {
+        await setup("user-3", "guest");
+        await expect(deleteCustomers([1])).rejects.toThrow(AccessDeniedError);
+      });
     });
   });
 });

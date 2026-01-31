@@ -114,7 +114,7 @@ describe("User Service", () => {
       await prisma.user.deleteMany();
     });
 
-    it("should succsessfully return a user", async () => {
+    it("should succsessfully return a valid UserDetailDTO", async () => {
       const result = await getUserDetail("user-1");
 
       expect(result).toBeDefined();

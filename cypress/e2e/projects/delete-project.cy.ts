@@ -51,7 +51,7 @@ describe("deletes a project", () => {
     cy.visit("/en/projects");
   });
 
-  it("can delete a project", () => {
+  it("can delete a project and send notifications", () => {
     cy.getByData("project-item-1-action-menu-trigger").click();
     cy.getMenuItem("delete").click();
 
@@ -61,5 +61,34 @@ describe("deletes a project", () => {
 
     cy.getByData("delete-project-modal-confirm-button").click();
     cy.getByData("project-list-item").should("not.exist");
+
+    // check notifications
+    cy.checkNotifications(0);
+
+    // sign in as user-2
+    cy.signIn("user@example.com", "12345abc");
+    cy.visit("/en/projects");
+
+    // check notifications
+    cy.checkNotifications(1, [
+      {
+        target: "Project 1",
+        actor: "John Doe",
+        action: "deleted the project",
+      },
+    ]);
+
+    // sign in as user-3
+    cy.signIn("guest@example.com", "12345abc");
+    cy.visit("/en/projects");
+
+    // check notifications
+    cy.checkNotifications(1, [
+      {
+        target: "Project 1",
+        actor: "John Doe",
+        action: "deleted the project",
+      },
+    ]);
   });
 });

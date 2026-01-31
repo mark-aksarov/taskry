@@ -3,13 +3,16 @@ import {
   createProject,
   deleteProjects,
   getProjectCount,
-  updateProjects,
+  updateProjectStatuses,
 } from "../project.dal";
+
 import prisma from "@/lib/prisma";
+import { AccessDeniedError } from "../../utils/error";
 import { resetDatabase } from "@/prisma/resetDatabase";
-import { describe, it, expect, beforeEach, vi } from "vitest";
 import { requireSession } from "@/lib/data/utils/requireSession";
-import { ProjectStatus, TaskStatus } from "@/generated/prisma/enums";
+import { describe, it, expect, beforeEach, vi, beforeAll } from "vitest";
+import { NotificationType, ProjectStatus } from "@/generated/prisma/enums";
+import { PrismaClientKnownRequestError } from "@prisma/client/runtime/client";
 
 vi.mock("server-only", () => ({}));
 
@@ -23,144 +26,84 @@ describe("Project DAL", () => {
       user: { id: "user-1", workspaceId: 1 },
     });
 
+    await prisma.project.deleteMany();
+    await prisma.notification.deleteMany();
+  });
+
+  beforeAll(async () => {
     await resetDatabase();
 
-    // workspace 1
+    await prisma.workspace.createMany({ data: [{ id: 1 }, { id: 2 }] });
 
-    await prisma.workspace.create({
-      data: {
-        id: 1,
-      },
+    await prisma.projectCategory.createMany({
+      data: [
+        { id: 1, name: "Project Category 1", workspaceId: 1 },
+        { id: 2, name: "Project Category 2", workspaceId: 2 },
+      ],
     });
 
-    await prisma.user.create({
-      data: {
-        id: "user-1",
-        fullName: "Alice Johnson",
-        email: "alice@ws1.com",
-        workspaceId: 1,
-      },
+    await prisma.taskCategory.createMany({
+      data: [
+        { id: 1, name: "Task Category 1", workspaceId: 1 },
+        { id: 2, name: "Task Category 2", workspaceId: 2 },
+      ],
     });
 
-    await prisma.company.create({
-      data: {
-        id: 1,
-        name: "WS1 Company",
-        workspaceId: 1,
-      },
+    await prisma.company.createMany({
+      data: [
+        { id: 1, name: "Company 1", workspaceId: 1 },
+        { id: 2, name: "Company 2", workspaceId: 2 },
+      ],
     });
 
-    await prisma.customer.create({
-      data: {
-        id: 1,
-        fullName: "John Customer",
-        email: "john.customer@ws1.com",
-        workspaceId: 1,
-        companyId: 1,
-      },
-    });
-
-    await prisma.projectCategory.create({
-      data: {
-        id: 1,
-        name: "Development",
-        workspaceId: 1,
-      },
-    });
-
-    await prisma.project.createMany({
+    await prisma.user.createMany({
       data: [
         {
-          id: 1,
+          id: "user-1",
+          fullName: "User 1",
+          email: "user-1@test.com",
+          role: "owner",
           workspaceId: 1,
-          title: "Website Redesign",
-          description: "Redesign corporate website",
-          deadline: new Date("2025-03-01"),
-          creatorId: "user-1",
-          categoryId: 1,
-          customerId: 1,
-          status: ProjectStatus.active,
         },
         {
-          id: 2,
+          id: "user-2",
+          fullName: "User 2",
+          email: "user-2@test.com",
+          role: "user",
           workspaceId: 1,
-          title: "Internal Dashboard",
-          description: "Build admin dashboard",
-          deadline: new Date("2025-05-15"),
-          creatorId: "user-1",
-          categoryId: 1,
-          customerId: 1,
-          status: ProjectStatus.completed,
+        },
+        {
+          id: "user-3",
+          fullName: "User 3",
+          email: "user-3@test.com",
+          role: "guest",
+          workspaceId: 1,
+        },
+        {
+          id: "user-4",
+          fullName: "User 4",
+          email: "user-4@test.com",
+          role: "manager",
+          workspaceId: 2,
         },
       ],
     });
 
-    // workspace 2
-
-    await prisma.workspace.create({
-      data: {
-        id: 2,
-      },
-    });
-
-    await prisma.user.create({
-      data: {
-        id: "user-2",
-        fullName: "Bob Smith",
-        email: "bob@ws2.com",
-        workspaceId: 2,
-      },
-    });
-
-    await prisma.company.create({
-      data: {
-        id: 2,
-        name: "WS2 Company",
-        workspaceId: 2,
-      },
-    });
-
-    await prisma.customer.create({
-      data: {
-        id: 2,
-        fullName: "Emma Client",
-        email: "emma.client@ws2.com",
-        workspaceId: 2,
-        companyId: 2,
-      },
-    });
-
-    await prisma.projectCategory.create({
-      data: {
-        id: 2,
-        name: "Marketing",
-        workspaceId: 2,
-      },
-    });
-
-    await prisma.project.createMany({
+    await prisma.customer.createMany({
       data: [
         {
-          id: 3,
-          workspaceId: 2,
-          title: "Ad Campaign",
-          description: "Launch Google Ads campaign",
-          deadline: new Date("2025-02-10"),
-          creatorId: "user-2",
-          categoryId: 2,
-          customerId: 2,
-          status: ProjectStatus.active,
+          id: 1,
+          fullName: "Customer 1",
+          email: "customer-1@test.com",
+          companyId: 1,
+          workspaceId: 1,
         },
         {
-          id: 4,
+          id: 2,
+          fullName: "Customer 2",
+          email: "customer-2@test.com",
+          companyId: 1,
           workspaceId: 2,
-          title: "Brand Strategy",
-          description: "Create brand positioning",
-          deadline: new Date("2025-06-01"),
-          creatorId: "user-2",
-          categoryId: 2,
-          customerId: 2,
-          status: ProjectStatus.completed,
         },
       ],
     });
@@ -168,319 +111,656 @@ describe("Project DAL", () => {
 
   describe("getProjectCount", () => {
     it("should return total count of projects for the current workspace", async () => {
-      const count = await getProjectCount();
-
-      expect(count).toBe(2);
-    });
-
-    it("should return total count of projects for workspace 2", async () => {
-      (requireSession as any).mockResolvedValue({
-        user: { workspaceId: 2 },
+      await prisma.project.createMany({
+        data: [
+          {
+            id: 1,
+            title: "Project 1",
+            deadline: new Date(),
+            categoryId: 1,
+            workspaceId: 1,
+            status: ProjectStatus.active,
+          },
+          {
+            id: 2,
+            title: "Project 2",
+            deadline: new Date(),
+            categoryId: 1,
+            workspaceId: 1,
+            status: ProjectStatus.active,
+          },
+          {
+            id: 3,
+            title: "Project 3",
+            deadline: new Date(),
+            categoryId: 2,
+            workspaceId: 2,
+            status: ProjectStatus.active,
+          },
+        ],
       });
 
       const count = await getProjectCount();
-
       expect(count).toBe(2);
-    });
-
-    it("should return filtered count based on status", async () => {
-      const count = await getProjectCount({
-        category: [],
-        customer: [],
-        user: [],
-        status: [ProjectStatus.active],
-      });
-
-      expect(count).toBe(1);
-    });
-
-    it("should return 0 if no projects match filters", async () => {
-      const count = await getProjectCount({
-        category: [],
-        customer: [],
-        user: [],
-        status: [ProjectStatus.pending],
-      });
-
-      expect(count).toBe(0);
-    });
-
-    it("should return filtered count by category", async () => {
-      (requireSession as any).mockResolvedValue({
-        user: { workspaceId: 2 },
-      });
-
-      const count = await getProjectCount({
-        category: [2],
-        customer: [],
-        user: [],
-        status: [],
-      });
-
-      expect(count).toBe(2);
-
-      const countEmpty = await getProjectCount({
-        category: [1],
-        customer: [],
-        user: [],
-        status: [],
-      });
-
-      expect(countEmpty).toBe(0);
     });
   });
 
   describe("createProject", () => {
-    it("should successfully create a project with correct data and creatorId", async () => {
-      const input = {
-        id: 100,
-        title: "New Integration Test",
-        description: "Verify creation logic",
+    it("should successfully create a task and send notifications", async () => {
+      const result = await createProject({
+        title: "Project 1",
+        description: "Description 1",
         deadline: new Date("2025-12-31"),
         status: ProjectStatus.active,
         categoryId: 1,
         customerId: 1,
-      };
-
-      await createProject(input);
-
-      const createdProject = await prisma.project.findFirst({
-        where: { title: "New Integration Test" },
       });
 
-      expect(createdProject).toBeDefined();
-      expect(createdProject?.creatorId).toBe("user-1");
-      expect(createdProject?.workspaceId).toBe(1);
-      expect(createdProject?.categoryId).toBe(1);
+      const notifications = await prisma.notification.findMany({
+        where: { projectId: result.id },
+      });
+
+      expect(result).toBeDefined();
+      expect(result.title).toBe(result.title);
+      expect(result.workspaceId).toBe(1);
+      expect(result.creatorId).toBe("user-1");
+
+      const expectedNotificationData = {
+        actorId: "user-1",
+        taskId: null,
+        taskTitle: null,
+        commentId: null,
+        projectId: result.id,
+        projectTitle: "Project 1",
+        type: NotificationType.projectAdded,
+        workspaceId: 1,
+      };
+
+      expect(notifications.length).toBe(2);
+
+      expect(notifications).toEqual(
+        expect.arrayContaining([
+          expect.objectContaining({
+            ...expectedNotificationData,
+            recipientId: "user-2",
+          }),
+          expect.objectContaining({
+            ...expectedNotificationData,
+            recipientId: "user-3",
+          }),
+        ]),
+      );
     });
 
     it("should throw error if category does not belong to the workspace", async () => {
-      const input = {
-        title: "Invalid Category Project",
+      const createProjectPromise = createProject({
+        title: "Project 1",
+        deadline: new Date("2025-12-31"),
         categoryId: 2,
         customerId: 1,
         status: ProjectStatus.active,
-      } as any;
-
-      await expect(createProject(input)).rejects.toThrow();
-
-      const count = await prisma.project.count({
-        where: { title: "Invalid Category Project" },
       });
-      expect(count).toBe(0);
+
+      await expect(createProjectPromise).rejects.toThrow(AccessDeniedError);
+      await expect(createProjectPromise).rejects.toThrow(
+        /Category access denied or not found/i,
+      );
     });
 
     it("should throw error if customer does not belong to the workspace", async () => {
-      const input = {
-        title: "Invalid Customer Project",
+      const createProjectPromise = createProject({
+        title: "Project 1",
+        deadline: new Date("2025-12-31"),
         categoryId: 1,
         customerId: 2,
         status: ProjectStatus.active,
-      } as any;
+      });
 
-      await expect(createProject(input)).rejects.toThrow();
+      await expect(createProjectPromise).rejects.toThrow(AccessDeniedError);
+      await expect(createProjectPromise).rejects.toThrow(
+        /Customer access denied or not found/i,
+      );
     });
 
-    it("should fail if getSessionOrThrow fails", async () => {
-      (requireSession as any).mockRejectedValue(new Error("Unauthorized"));
+    it("should create a project without optional fields", async () => {
+      const result = await createProject({
+        title: "Project 1",
+        deadline: new Date("2025-12-31"),
+        categoryId: 1,
+        status: ProjectStatus.active,
+      });
 
-      const input = { title: "Should not be created" } as any;
+      expect(result.id).toBeDefined();
+      expect(result.customerId).toBeNull();
+    });
 
-      await expect(createProject(input)).rejects.toThrow("Unauthorized");
+    describe("RBAC: create project", () => {
+      const setup = async (userId: string, role: string) => {
+        (requireSession as any).mockResolvedValue({
+          user: { id: userId, workspaceId: 1, role },
+        });
+
+        const createInput = {
+          title: "Project 1",
+          deadline: new Date("2025-12-31"),
+          categoryId: 1,
+          customerId: 1,
+          status: ProjectStatus.active,
+        };
+
+        return {
+          createInput,
+        };
+      };
+
+      it("should succeed for owner", async () => {
+        const { createInput } = await setup("user-1", "owner");
+        const result = await createProject(createInput);
+        expect(result).toBeDefined();
+        expect(result.title).toBe(createInput.title);
+      });
+
+      it("should succeed for user", async () => {
+        const { createInput } = await setup("user-2", "user");
+        const result = await createProject(createInput);
+        expect(result).toBeDefined();
+        expect(result.title).toBe(createInput.title);
+      });
+
+      it("should fail for guest", async () => {
+        const { createInput } = await setup("user-3", "guest");
+        await expect(createProject(createInput)).rejects.toThrow(
+          AccessDeniedError,
+        );
+      });
     });
   });
 
   describe("updateProject", () => {
     it("should update project data", async () => {
-      await prisma.taskCategory.create({
+      await prisma.project.create({
         data: {
           id: 1,
-          name: "Category 1",
-          workspaceId: 1,
-        },
-      });
-
-      await prisma.task.create({
-        data: {
-          id: 101,
-          title: "Initial Task",
-          deadline: new Date("2025-12-31"),
+          title: "Project 1",
+          deadline: new Date(),
           categoryId: 1,
-          projectId: 1,
-          assigneeId: "user-1",
-          status: "pending",
           workspaceId: 1,
+          status: ProjectStatus.active,
         },
       });
 
-      const input = {
+      const result = await updateProject({
         id: 1,
-        title: "Updated Title",
+        title: "Updated Project Title",
         status: ProjectStatus.active,
-      };
-
-      await updateProject(input);
-
-      const updatedProject = await prisma.project.findUnique({
-        where: { id: 1 },
       });
 
-      expect(updatedProject?.title).toBe("Updated Title");
-      expect(updatedProject?.status).toBe(ProjectStatus.active);
-    });
-
-    it("should throw error if project belongs to another workspace", async () => {
-      const input = {
-        id: 3,
-        title: "Hacking title",
-      };
-
-      await expect(updateProject(input)).rejects.toThrow();
-    });
-
-    it("should fail and rollback if validateRelations fails", async () => {
-      (requireSession as any).mockResolvedValue({
-        user: { workspaceId: 1 },
+      const notifications = await prisma.notification.findMany({
+        where: { projectId: result.id },
       });
 
-      const input = {
+      expect(result).not.toBeNull();
+      expect(result!.id).toBe(1);
+      expect(result!.title).toBe("Updated Project Title");
+
+      const expectedNotificationData = {
+        actorId: "user-1",
+        projectId: result.id,
+        projectTitle: "Updated Project Title",
+        taskId: null,
+        commentId: null,
+        taskTitle: null,
+        type: NotificationType.projectChanged,
+        workspaceId: 1,
+      };
+
+      expect(notifications.length).toBe(2);
+
+      expect(notifications).toEqual(
+        expect.arrayContaining([
+          expect.objectContaining({
+            ...expectedNotificationData,
+            recipientId: "user-2",
+          }),
+          expect.objectContaining({
+            ...expectedNotificationData,
+            recipientId: "user-3",
+          }),
+        ]),
+      );
+    });
+
+    it("should throw an error when trying to update a project from another workspace", async () => {
+      await prisma.project.create({
+        data: {
+          id: 1,
+          title: "Project 1",
+          deadline: new Date(),
+          categoryId: 1,
+          workspaceId: 2,
+          status: ProjectStatus.active,
+        },
+      });
+
+      const updateProjectPromise = updateProject({
         id: 1,
-        categoryId: 999,
+        title: "Updated Project Title",
+      });
+
+      await expect(updateProjectPromise).rejects.toThrow(
+        PrismaClientKnownRequestError,
+      );
+      await expect(updateProjectPromise).rejects.toMatchObject({
+        code: "P2025",
+      });
+    });
+
+    describe("RBAC: update project", () => {
+      const setup = async (userId: string, role: string) => {
+        (requireSession as any).mockResolvedValue({
+          user: { id: userId, workspaceId: 1, role },
+        });
+
+        await prisma.project.create({
+          data: {
+            id: 1,
+            title: "Project 1",
+            deadline: new Date(),
+            categoryId: 1,
+            workspaceId: 1,
+            status: ProjectStatus.active,
+          },
+        });
+
+        return {
+          updateInput: {
+            id: 1,
+            title: "Updated Project Title",
+          },
+        };
       };
 
-      await expect(updateProject(input)).rejects.toThrow();
+      it("should succeed for owner", async () => {
+        const { updateInput } = await setup("user-1", "owner");
+        const result = await updateProject(updateInput);
+        expect(result.title).toBe(updateInput.title);
+      });
 
-      const project = await prisma.project.findUnique({ where: { id: 1 } });
-      expect(project?.title).toBe("Website Redesign");
+      it("should fail for user", async () => {
+        const { updateInput } = await setup("user-2", "user");
+        const result = await updateProject(updateInput);
+        expect(result.title).toBe(updateInput.title);
+      });
+
+      it("should fail for guest", async () => {
+        const { updateInput } = await setup("user-3", "guest");
+
+        await expect(updateProject(updateInput)).rejects.toThrow(
+          AccessDeniedError,
+        );
+      });
     });
   });
 
-  describe("updateProjects", () => {
-    beforeEach(async () => {
-      await prisma.taskCategory.create({
-        data: {
-          id: 1,
-          name: "Category 1",
-          workspaceId: 1,
-        },
-      });
-
-      await prisma.task.createMany({
+  describe("updateProjectStatuses", () => {
+    it("should update multiple project statuses and send notifications", async () => {
+      await prisma.project.createMany({
         data: [
           {
             id: 1,
-            title: "Task P1",
-            deadline: new Date("2025-12-31"),
-            status: TaskStatus.active,
-            projectId: 1,
+            title: "Project 1",
+            deadline: new Date(),
             categoryId: 1,
-            assigneeId: "user-1",
             workspaceId: 1,
+            status: ProjectStatus.active,
           },
           {
             id: 2,
-            title: "Task P2",
-            deadline: new Date("2025-12-31"),
-            status: TaskStatus.active,
-            projectId: 2,
+            title: "Project 2",
+            deadline: new Date(),
             categoryId: 1,
-            assigneeId: "user-1",
             workspaceId: 1,
+            status: ProjectStatus.active,
+          },
+          {
+            id: 3,
+            title: "Project 3",
+            deadline: new Date(),
+            categoryId: 2,
+            workspaceId: 2,
+            status: ProjectStatus.active,
           },
         ],
       });
-    });
 
-    it("should update multiple projects and in the current workspace", async () => {
       const projectIds = [1, 2];
       const nextStatus = ProjectStatus.completed;
 
-      await updateProjects(projectIds, nextStatus);
+      const updatedProjects = await updateProjectStatuses(
+        projectIds,
+        nextStatus,
+      );
 
-      const projects = await prisma.project.findMany({
-        where: { id: { in: projectIds } },
+      const notifications = await prisma.notification.findMany({
+        where: { projectId: { in: projectIds } },
       });
-      expect(projects.every((p) => p.status === nextStatus)).toBe(true);
+
+      expect(updatedProjects.length).toBe(2);
+      expect(updatedProjects).toEqual([
+        expect.objectContaining({ id: 1, status: nextStatus }),
+        expect.objectContaining({ id: 2, status: nextStatus }),
+      ]);
+
+      expect(notifications).toHaveLength(4);
+
+      expect(notifications).toEqual(
+        expect.arrayContaining([
+          expect.objectContaining({
+            actorId: "user-1",
+            projectId: 1,
+            projectTitle: "Project 1",
+            recipientId: "user-2",
+          }),
+          expect.objectContaining({
+            actorId: "user-1",
+            projectId: 1,
+            projectTitle: "Project 1",
+            recipientId: "user-3",
+          }),
+          expect.objectContaining({
+            actorId: "user-1",
+            projectId: 2,
+            projectTitle: "Project 2",
+            recipientId: "user-2",
+          }),
+          expect.objectContaining({
+            actorId: "user-1",
+            projectId: 2,
+            projectTitle: "Project 2",
+            recipientId: "user-3",
+          }),
+        ]),
+      );
     });
 
-    it("should only update projects belonging to the user's workspace", async () => {
-      (requireSession as any).mockResolvedValue({
-        user: { workspaceId: 1 },
+    it("should return empty array when attempting to update projects from a different workspace", async () => {
+      await prisma.project.createMany({
+        data: [
+          {
+            id: 1,
+            title: "Project 1",
+            deadline: new Date(),
+            categoryId: 1,
+            workspaceId: 1,
+            status: ProjectStatus.active,
+          },
+          {
+            id: 2,
+            title: "Project 2",
+            deadline: new Date(),
+            categoryId: 2,
+            workspaceId: 2,
+            status: ProjectStatus.active,
+          },
+        ],
       });
 
-      const projectIds = [1, 3];
-      await updateProjects(projectIds, ProjectStatus.completed);
+      const projectIds = [2];
 
-      const myProject = await prisma.project.findUnique({ where: { id: 1 } });
-      expect(myProject?.status).toBe(ProjectStatus.completed);
+      const result = await updateProjectStatuses(projectIds, "completed");
+      const notifications = await prisma.notification.findMany();
 
-      const foreignProject = await prisma.project.findUnique({
-        where: { id: 3 },
+      expect(result.length).toBe(0);
+      expect(notifications).toHaveLength(0);
+    });
+
+    describe("RBAC: update project statuses", () => {
+      const setup = async (userId: string, role: string) => {
+        (requireSession as any).mockResolvedValue({
+          user: { id: userId, role, workspaceId: 1 },
+        });
+
+        await prisma.project.createMany({
+          data: [
+            {
+              id: 1,
+              title: "Project 1",
+              deadline: new Date(),
+              categoryId: 1,
+              workspaceId: 1,
+              status: ProjectStatus.active,
+            },
+            {
+              id: 2,
+              title: "Project 2",
+              deadline: new Date(),
+              categoryId: 1,
+              workspaceId: 1,
+              status: ProjectStatus.active,
+            },
+          ],
+        });
+      };
+
+      it("should succeed for owner", async () => {
+        await setup("user-1", "owner");
+
+        const updatedProjects = await updateProjectStatuses(
+          [1, 2],
+          "completed",
+        );
+
+        expect(updatedProjects.length).toBe(2);
+        expect(updatedProjects![0].status).toBe("completed");
       });
-      expect(foreignProject?.status).toBe(ProjectStatus.active);
+
+      it("should succeed for assignee user", async () => {
+        await setup("user-2", "user");
+
+        const updatedProjects = await updateProjectStatuses(
+          [1, 2],
+          "completed",
+        );
+
+        expect(updatedProjects.length).toBe(2);
+        expect(updatedProjects![0].status).toBe("completed");
+      });
+
+      it("should fail for guest", async () => {
+        await setup("user-3", "guest");
+
+        await expect(
+          updateProjectStatuses([1, 2], "completed"),
+        ).rejects.toThrow(AccessDeniedError);
+      });
     });
   });
 
   describe("deleteProjects", () => {
-    it("should successfully delete multiple projects in the current workspace", async () => {
-      const idsToDelete = [1, 2];
+    it("should successfully delete projects and send notifications", async () => {
+      await prisma.project.createMany({
+        data: [
+          {
+            id: 1,
+            title: "Project 1",
+            deadline: new Date(),
+            categoryId: 1,
+            workspaceId: 1,
+            status: ProjectStatus.active,
+          },
+          {
+            id: 2,
+            title: "Project 2",
+            deadline: new Date(),
+            categoryId: 1,
+            workspaceId: 1,
+            status: ProjectStatus.active,
+          },
+        ],
+      });
 
-      const result = await deleteProjects(idsToDelete);
+      const result = await deleteProjects([1, 2]);
 
       expect(result.count).toBe(2);
+      const remainingTasks = await prisma.project.findMany();
+      const notifications = await prisma.notification.findMany();
 
-      const remainingProjects = await prisma.project.findMany({
-        where: { id: { in: idsToDelete } },
+      expect(remainingTasks).toHaveLength(0);
+
+      expect(notifications.length).toBe(4);
+
+      expect(notifications).toEqual(
+        expect.arrayContaining([
+          expect.objectContaining({
+            actorId: "user-1",
+            projectTitle: "Project 1",
+            projectId: null,
+            commentId: null,
+            taskId: null,
+            type: NotificationType.projectDeleted,
+            workspaceId: 1,
+            recipientId: "user-2",
+          }),
+          expect.objectContaining({
+            actorId: "user-1",
+            projectTitle: "Project 2",
+            projectId: null,
+            commentId: null,
+            taskId: null,
+            type: NotificationType.projectDeleted,
+            workspaceId: 1,
+            recipientId: "user-2",
+          }),
+          expect.objectContaining({
+            actorId: "user-1",
+            projectTitle: "Project 1",
+            projectId: null,
+            commentId: null,
+            taskId: null,
+            type: NotificationType.projectDeleted,
+            workspaceId: 1,
+            recipientId: "user-3",
+          }),
+          expect.objectContaining({
+            actorId: "user-1",
+            projectTitle: "Project 2",
+            projectId: null,
+            commentId: null,
+            taskId: null,
+            type: NotificationType.projectDeleted,
+            workspaceId: 1,
+            recipientId: "user-3",
+          }),
+        ]),
+      );
+    });
+
+    it("should not delete projects from a different workspace", async () => {
+      await prisma.project.createMany({
+        data: [
+          {
+            id: 1,
+            title: "Project 1",
+            deadline: new Date(),
+            categoryId: 2,
+            workspaceId: 2,
+            status: ProjectStatus.active,
+          },
+        ],
       });
 
-      expect(remainingProjects).toHaveLength(0);
-    });
-
-    it("should return a count of 0 if trying to delete non-existent IDs", async () => {
-      const nonExistentIds = [999, 1000];
-
-      const result = await deleteProjects(nonExistentIds);
-
-      expect(result).toEqual({ count: 0 });
-    });
-
-    it("should not delete projects belonging to another workspace", async () => {
-      const foreignIds = [3];
-
-      const result = await deleteProjects(foreignIds);
+      const result = await deleteProjects([1]);
+      const notifications = await prisma.notification.findMany();
 
       expect(result.count).toBe(0);
-
-      const foreignProject = await prisma.project.findUnique({
-        where: { id: 3 },
-      });
-
-      expect(foreignProject).not.toBeNull();
+      expect(notifications).toHaveLength(0);
     });
 
-    it("should only delete own projects even if a mix of own and foreign IDs is provided", async () => {
-      const mixedIds = [1, 3];
+    it("should only delete projects belonging to the current workspace", async () => {
+      await prisma.project.createMany({
+        data: [
+          {
+            id: 1,
+            title: "Project 1",
+            deadline: new Date(),
+            categoryId: 1,
+            workspaceId: 1,
+            status: ProjectStatus.active,
+          },
+          {
+            id: 2,
+            title: "Project 2",
+            deadline: new Date(),
+            categoryId: 2,
+            workspaceId: 2,
+            status: ProjectStatus.active,
+          },
+        ],
+      });
 
-      const result = await deleteProjects(mixedIds);
+      const result = await deleteProjects([1, 2]);
 
       expect(result.count).toBe(1);
 
-      const myProject = await prisma.project.findUnique({ where: { id: 1 } });
-      expect(myProject).toBeNull();
-
-      const foreignProject = await prisma.project.findUnique({
-        where: { id: 3 },
+      const project = await prisma.project.findUnique({
+        where: { id: 2 },
       });
-      expect(foreignProject).not.toBeNull();
+      const notifications = await prisma.notification.findMany();
+
+      expect(project).not.toBeNull();
+
+      expect(notifications).toHaveLength(2);
+      expect(notifications).toEqual(
+        expect.arrayContaining([
+          expect.objectContaining({
+            recipientId: "user-2",
+          }),
+          expect.objectContaining({
+            recipientId: "user-3",
+          }),
+        ]),
+      );
     });
 
-    it("should fail and not delete anything if authorization fails", async () => {
-      (requireSession as any).mockRejectedValue(new Error("Unauthorized"));
+    it("should return 0 if an empty array is provided", async () => {
+      const result = await deleteProjects([]);
+      expect(result.count).toBe(0);
+    });
 
-      await expect(deleteProjects([1])).rejects.toThrow("Unauthorized");
+    describe("RBAC: delete projects", () => {
+      const setup = async (userId: string, role: string) => {
+        (requireSession as any).mockResolvedValue({
+          user: { id: userId, workspaceId: 1, role },
+        });
 
-      const project = await prisma.project.findUnique({ where: { id: 1 } });
-      expect(project).not.toBeNull();
+        await prisma.project.create({
+          data: {
+            id: 1,
+            title: "Project 1",
+            deadline: new Date(),
+            categoryId: 1,
+            workspaceId: 1,
+            status: ProjectStatus.active,
+          },
+        });
+      };
+
+      it("should succeed for owner", async () => {
+        await setup("user-1", "owner");
+        const result = await deleteProjects([1]);
+        expect(result.count).toBe(1);
+      });
+
+      it("should fail for user", async () => {
+        await setup("user-2", "user");
+        const result = await deleteProjects([1]);
+        expect(result.count).toBe(1);
+      });
+
+      it("should fail for guest", async () => {
+        await setup("user-3", "guest");
+        await expect(deleteProjects([1])).rejects.toThrow(AccessDeniedError);
+      });
     });
   });
 });

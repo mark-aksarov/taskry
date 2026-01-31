@@ -32,6 +32,31 @@ export type NotificationListItemDTO = {
     fullName: string;
   };
 
+  company?: {
+    id: number;
+    name: string;
+  };
+
+  projectCategory?: {
+    id: number;
+    name: string;
+  };
+
+  taskCategory?: {
+    id: number;
+    name: string;
+  };
+
+  position?: {
+    id: number;
+    name: string;
+  };
+
+  subtask?: {
+    id: number;
+    text: string;
+  };
+
   comment?: {
     id: number;
     content: string;
@@ -42,6 +67,11 @@ export type NotificationListItemDTO = {
   userFullName?: string;
   customerFullName?: string;
   commentContent?: string;
+  companyName?: string;
+  positionName?: string;
+  subtaskText?: string;
+  projectCategoryName?: string;
+  taskCategoryName?: string;
 };
 
 export type NotificationsDTO = {

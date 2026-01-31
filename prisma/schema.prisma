@@ -94,8 +94,9 @@ model Company {
 
   customers Customer[]
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  notifications Notification[]
 
   @@index([workspaceId])
   @@map("company")
@@ -169,8 +170,9 @@ model ProjectCategory {
 
   projects Project[]
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  notifications Notification[]
 
   @@index(workspaceId)
   @@map("project_category")
@@ -225,8 +227,9 @@ model TaskCategory {
 
   tasks Task[]
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  notifications Notification[]
 
   @@index(workspaceId)
   @@map("task_category")
@@ -247,8 +250,9 @@ model Subtask {
 
   task Task @relation(fields: [taskId], references: [id], onDelete: Cascade)
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  notifications Notification[]
 
   @@index([taskId])
   @@map("subtask")
@@ -276,6 +280,26 @@ enum NotificationType {
   customerAdded
   customerChanged
   customerDeleted
+
+  companyAdded
+  companyChanged
+  companyDeleted
+
+  positionAdded
+  positionChanged
+  positionDeleted
+
+  subtaskAdded
+  subtaskChanged
+  subtaskDeleted
+
+  projectCategoryAdded
+  projectCategoryChanged
+  projectCategoryDeleted
+
+  taskCategoryAdded
+  taskCategoryChanged
+  taskCategoryDeleted
 }
 
 model Notification {
@@ -290,23 +314,38 @@ model Notification {
   recipientId String?
   recipient   User?   @relation("Recipient", fields: [recipientId], references: [id], onDelete: SetNull)
 
-  projectId  Int?
-  userId     String?
-  customerId Int?
-  taskId     Int?
-  commentId  Int?
+  projectId         Int?
+  userId            String?
+  customerId        Int?
+  taskId            Int?
+  commentId         Int?
+  companyId         Int?
+  positionId        Int?
+  subtaskId         Int?
+  projectCategoryId Int?
+  taskCategoryId    Int?
 
-  project  Project?  @relation(fields: [projectId], references: [id], onDelete: SetNull)
-  task     Task?     @relation(fields: [taskId], references: [id], onDelete: SetNull)
-  user     User?     @relation(fields: [userId], references: [id], onDelete: SetNull)
-  customer Customer? @relation(fields: [customerId], references: [id], onDelete: SetNull)
-  comment  Comment?  @relation(fields: [commentId], references: [id], onDelete: SetNull)
+  subtask         Subtask?         @relation(fields: [subtaskId], references: [id], onDelete: SetNull)
+  projectCategory ProjectCategory? @relation(fields: [projectCategoryId], references: [id], onDelete: SetNull)
+  taskCategory    TaskCategory?    @relation(fields: [taskCategoryId], references: [id], onDelete: SetNull)
+  company         Company?         @relation(fields: [companyId], references: [id], onDelete: SetNull)
+  position        Position?        @relation(fields: [positionId], references: [id], onDelete: SetNull)
+  project         Project?         @relation(fields: [projectId], references: [id], onDelete: SetNull)
+  task            Task?            @relation(fields: [taskId], references: [id], onDelete: SetNull)
+  user            User?            @relation(fields: [userId], references: [id], onDelete: SetNull)
+  customer        Customer?        @relation(fields: [customerId], references: [id], onDelete: SetNull)
+  comment         Comment?         @relation(fields: [commentId], references: [id], onDelete: SetNull)
 
-  projectTitle     String?
-  taskTitle        String?
-  userFullName     String?
-  customerFullName String?
-  commentContent   String?
+  projectTitle        String?
+  taskTitle           String?
+  userFullName        String?
+  customerFullName    String?
+  commentContent      String?
+  companyName         String?
+  positionName        String?
+  subtaskText         String?
+  projectCategoryName String?
+  taskCategoryName    String?
 
   workspaceId Int
   workspace   Workspace @relation(fields: [workspaceId], references: [id])
@@ -329,8 +368,9 @@ model Position {
   workspace Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
   users     User[]
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  notifications Notification[]
 
   @@index([workspaceId])
   @@map("position")

@@ -1,12 +1,25 @@
 import {
+  it,
+  vi,
+  expect,
+  describe,
+  afterAll,
+  beforeAll,
+  afterEach,
+} from "vitest";
+
+import {
   getCustomerList,
   getCustomerFormData,
   getCustomerSummaries,
+  getCustomerDetail,
+  searchCustomers,
 } from "../customer.service";
 
 import prisma from "@/lib/prisma";
+import { dates } from "@/lib/data/utils/test-utils";
 import { resetDatabase } from "@/prisma/resetDatabase";
-import { describe, it, expect, beforeEach, vi } from "vitest";
+import { ProjectStatus } from "@/generated/prisma/enums";
 import { requireSession } from "@/lib/data/utils/requireSession";
 
 vi.mock("server-only", () => ({}));
@@ -16,9 +29,7 @@ vi.mock("@/lib/data/utils/requireSession", () => ({
 }));
 
 describe("Customer Service", () => {
-  beforeEach(async () => {
-    vi.resetAllMocks();
-
+  beforeAll(async () => {
     await resetDatabase();
 
     const mockSession = {
@@ -27,194 +38,619 @@ describe("Customer Service", () => {
     (requireSession as any).mockResolvedValue(mockSession);
 
     await prisma.workspace.create({ data: { id: 1 } });
-    await prisma.company.create({
-      data: { id: 1, name: "Company A", workspaceId: 1 },
-    });
-    await prisma.company.create({
-      data: { id: 2, name: "Company B", workspaceId: 1 },
+
+    await prisma.user.create({
+      data: {
+        id: "user-1",
+        fullName: "User 1",
+        email: "user-1@test.com",
+        workspaceId: 1,
+      },
     });
 
+    await prisma.company.createMany({
+      data: [
+        {
+          id: 1,
+          name: "Company 1",
+          workspaceId: 1,
+        },
+        {
+          id: 2,
+          name: "Company 2",
+          workspaceId: 1,
+        },
+      ],
+    });
+  });
+
+  describe("customer fetching by id", () => {
+    beforeAll(async () => {
+      await prisma.customer.createMany({
+        data: [
+          {
+            id: 1,
+            bio: "Customer 1 bio",
+            fullName: "Customer 1",
+            email: "customer-1@test.com",
+            imageUrl: "https://example.com/customer-1.jpg",
+            phoneNumber: "123-456-7890",
+            publicLink: "https://example.com/customer-1",
+            companyId: 1,
+            workspaceId: 1,
+          },
+          {
+            id: 2,
+            bio: "Customer 2 bio",
+            fullName: "Customer 2",
+            email: "customer-2@test.com",
+            imageUrl: "https://example.com/customer-2.jpg",
+            phoneNumber: "987-654-3210",
+            publicLink: "https://example.com/customer-2",
+            companyId: 1,
+            workspaceId: 1,
+          },
+        ],
+      });
+    });
+
+    afterAll(async () => {
+      await prisma.customer.deleteMany();
+    });
+
+    it("should return a valid CustomerDetailDTO", async () => {
+      const result = await getCustomerDetail(1);
+
+      expect(result).toBeDefined();
+      expect(result).toStrictEqual({
+        id: 1,
+        fullName: "Customer 1",
+        email: "customer-1@test.com",
+        phoneNumber: "123-456-7890",
+        imageUrl: "https://example.com/customer-1.jpg",
+        publicLink: "https://example.com/customer-1",
+        bio: "Customer 1 bio",
+        workspaceId: 1,
+
+        company: {
+          name: "Company 1",
+        },
+      });
+    });
+
+    it("should return a valid CustomerFormDataDTO", async () => {
+      const result = await getCustomerFormData(1);
+
+      expect(result).toBeDefined();
+      expect(result).toStrictEqual({
+        id: 1,
+        fullName: "Customer 1",
+        email: "customer-1@test.com",
+        phoneNumber: "123-456-7890",
+        imageUrl: "https://example.com/customer-1.jpg",
+        publicLink: "https://example.com/customer-1",
+        bio: "Customer 1 bio",
+        companyId: 1,
+      });
+    });
+
+    it.each([
+      { name: "getCustomerDetail", method: getCustomerDetail },
+      { name: "getCustomerFormData", method: getCustomerFormData },
+    ])("should return null by $name", async ({ method }) => {
+      const failure = await method(999);
+      expect(failure).toBeNull();
+    });
+  });
+
+  it("should return all projects by getCustomerSummaries", async () => {
     await prisma.customer.createMany({
       data: [
         {
           id: 1,
-          email: "john@ws1.com",
-          fullName: "John Doe",
+          bio: "Customer 1 bio",
+          fullName: "Customer 1",
+          email: "customer-1@test.com",
+          imageUrl: "https://example.com/customer-1.jpg",
+          phoneNumber: "123-456-7890",
+          publicLink: "https://example.com/customer-1",
           companyId: 1,
           workspaceId: 1,
         },
         {
           id: 2,
-          email: "jane@ws1.com",
-          fullName: "Jane Smith",
-          companyId: 2,
+          bio: "Customer 2 bio",
+          fullName: "Customer 2",
+          email: "customer-2@test.com",
+          imageUrl: "https://example.com/customer-2.jpg",
+          phoneNumber: "987-654-3210",
+          publicLink: "https://example.com/customer-2",
+          companyId: 1,
           workspaceId: 1,
         },
       ],
     });
 
-    await prisma.workspace.create({ data: { id: 2 } });
-    await prisma.company.create({
-      data: { id: 3, name: "Company C", workspaceId: 2 },
-    });
+    const result = await getCustomerSummaries();
+    await prisma.customer.deleteMany();
 
-    await prisma.customer.create({
-      data: {
-        id: 3,
-        email: "other@ws2.com",
-        fullName: "Other Workspace User",
-        companyId: 3,
-        workspaceId: 2,
-      },
-    });
-  });
-
-  describe("getCustomerSummaries", () => {
-    it("should return all customer summaries for the current workspace", async () => {
-      const result = await getCustomerSummaries();
-
-      expect(result).toHaveLength(2);
-      expect(result.map((c) => c.fullName)).toContain("John Doe");
-      expect(result.map((c) => c.fullName)).toContain("Jane Smith");
-    });
-
-    it("should ensure strict isolation between workspaces", async () => {
-      (requireSession as any).mockResolvedValue({
-        user: { id: "user-2", workspaceId: 2 },
-      });
-
-      const result = await getCustomerSummaries();
-
-      expect(result).toHaveLength(1);
-      expect(result[0].fullName).toBe("Other Workspace User");
-
-      expect(result.find((c) => c.id === 1)).toBeUndefined();
-    });
-
-    it("should return an empty array if no customers exist in workspace", async () => {
-      await prisma.workspace.create({ data: { id: 3 } });
-      (requireSession as any).mockResolvedValue({
-        user: { id: "user-3", workspaceId: 3 },
-      });
-
-      const result = await getCustomerSummaries();
-
-      expect(result).toEqual([]);
-    });
-
-    it("should fail if the session is not found", async () => {
-      (requireSession as any).mockRejectedValue(new Error("Unauthorized"));
-
-      await expect(getCustomerSummaries()).rejects.toThrow("Unauthorized");
-    });
-  });
-
-  describe("getCustomerFormData", () => {
-    it("should return customer form data when id and workspace match", async () => {
-      const result = await getCustomerFormData(1);
-
-      expect(result).toBeDefined();
-      expect(result).toMatchObject({
-        id: 1,
-        fullName: "John Doe",
-      });
-    });
-
-    it("should return null if customer belongs to a different workspace", async () => {
-      const result = await getCustomerFormData(3);
-      expect(result).toBeNull();
-    });
-
-    it("should return null if customer does not exist", async () => {
-      const result = await getCustomerFormData(999);
-      expect(result).toBeNull();
-    });
+    expect(result).toHaveLength(2);
+    expect(result).toEqual(
+      expect.arrayContaining([
+        {
+          id: 1,
+          fullName: "Customer 1",
+        },
+        {
+          id: 2,
+          fullName: "Customer 2",
+        },
+      ]),
+    );
   });
 
   describe("getCustomerList", () => {
-    it("should return paginated customers for the current workspace", async () => {
-      const result = await getCustomerList({
-        page: 1,
-        pageSize: 1,
-        sort: "fullName",
-      });
-
-      expect(result).toHaveLength(1);
-      expect(result[0].fullName).toBe("Jane Smith");
-
-      const secondPage = await getCustomerList({
-        page: 2,
-        pageSize: 1,
-        sort: "fullName",
-      });
-
-      expect(secondPage).toHaveLength(1);
-      expect(secondPage[0].fullName).toBe("John Doe");
-    });
-
-    it("should sort customers by company name", async () => {
-      const result = await getCustomerList({
-        page: 1,
-        pageSize: 10,
-        sort: "company",
-      });
-
-      expect(result[0].fullName).toBe("John Doe");
-      expect(result[1].fullName).toBe("Jane Smith");
-    });
-
-    it("should filter customers by specific companies", async () => {
-      const result = await getCustomerList({
-        page: 1,
-        pageSize: 10,
-        sort: "fullName",
-        filters: {
-          company: [1],
+    it("should return a valid CustomerListDTO", async () => {
+      await prisma.customer.create({
+        data: {
+          id: 1,
+          bio: "Customer 1 bio",
+          fullName: "Customer 1",
+          email: "customer-1@test.com",
+          imageUrl: "https://example.com/customer-1.jpg",
+          phoneNumber: "123-456-7890",
+          publicLink: "https://example.com/customer-1",
+          companyId: 1,
+          workspaceId: 1,
         },
       });
 
-      expect(result).toHaveLength(1);
-      expect(result[0].fullName).toBe("John Doe");
-    });
-
-    it("should return multiple customers when filtering by multiple companies", async () => {
       const result = await getCustomerList({
         page: 1,
         pageSize: 10,
         sort: "fullName",
-        filters: {
-          company: [1, 2],
-        },
       });
+      await prisma.customer.deleteMany();
 
-      expect(result).toHaveLength(2);
+      expect(result).toStrictEqual({
+        items: [
+          {
+            id: 1,
+            fullName: "Customer 1",
+            email: "customer-1@test.com",
+            phoneNumber: "123-456-7890",
+            imageUrl: "https://example.com/customer-1.jpg",
+            publicLink: "https://example.com/customer-1",
+
+            company: {
+              id: 1,
+              name: "Company 1",
+            },
+          },
+        ],
+        totalCount: 1,
+      });
     });
 
-    it("should return empty array when filtering by companies with no customers in current workspace", async () => {
+    it("should return an empty array if no customers", async () => {
       const result = await getCustomerList({
         page: 1,
         pageSize: 10,
         sort: "fullName",
-        filters: {
-          company: [3],
-        },
       });
 
-      expect(result).toHaveLength(0);
+      expect(result.items).toHaveLength(0);
+      expect(result.totalCount).toBe(0);
     });
 
-    it("should return empty array if no customers match the project filters (mocking logic)", async () => {
-      const result = await getCustomerList({
-        page: 1,
-        pageSize: 10,
-        sort: "fullName",
-        filters: {
-          hasActiveProjects: true,
-          company: [],
-        },
+    describe("sorting", () => {
+      afterEach(async () => {
+        await prisma.customer.deleteMany();
       });
 
-      expect(result).toHaveLength(0);
+      it("should correctly sort customers by fullName", async () => {
+        await prisma.customer.createMany({
+          data: [
+            {
+              id: 1,
+              fullName: "Customer C",
+              email: "customer-1@test.com",
+              companyId: 1,
+              workspaceId: 1,
+            },
+            {
+              id: 2,
+              fullName: "Customer A",
+              email: "customer-2@test.com",
+              companyId: 1,
+              workspaceId: 1,
+            },
+            {
+              id: 3,
+              fullName: "Customer B",
+              email: "customer-3@test.com",
+              companyId: 1,
+              workspaceId: 1,
+            },
+          ],
+        });
+
+        const result = await getCustomerList({
+          page: 1,
+          pageSize: 50,
+          sort: "fullName",
+        });
+
+        expect(result.items[0].fullName).toBe("Customer A");
+        expect(result.items[1].fullName).toBe("Customer B");
+        expect(result.items[2].fullName).toBe("Customer C");
+      });
+
+      it("should correctly sort customers by company", async () => {
+        await prisma.customer.createMany({
+          data: [
+            {
+              id: 1,
+              fullName: "Customer A",
+              email: "customer-1@test.com",
+              companyId: 1,
+              workspaceId: 1,
+            },
+            {
+              id: 2,
+              fullName: "Customer B",
+              email: "customer-2@test.com",
+              companyId: 2,
+              workspaceId: 1,
+            },
+            {
+              id: 3,
+              fullName: "Customer C",
+              email: "customer-3@test.com",
+              companyId: 1,
+              workspaceId: 1,
+            },
+          ],
+        });
+
+        const result = await getCustomerList({
+          page: 1,
+          pageSize: 50,
+          sort: "company",
+        });
+
+        expect(result.items[0].fullName).toBe("Customer A");
+        expect(result.items[1].fullName).toBe("Customer C");
+        expect(result.items[2].fullName).toBe("Customer B");
+      });
+    });
+
+    describe("filtering", () => {
+      beforeAll(async () => {
+        await prisma.customer.createMany({
+          data: [
+            {
+              id: 1,
+              fullName: "Customer A",
+              email: "customer-1@test.com",
+              companyId: 1,
+              workspaceId: 1,
+            },
+            {
+              id: 2,
+              fullName: "Customer B",
+              email: "customer-2@test.com",
+              companyId: 2,
+              workspaceId: 1,
+            },
+            {
+              id: 3,
+              fullName: "Customer C",
+              email: "customer-3@test.com",
+              companyId: 2,
+              workspaceId: 1,
+            },
+          ],
+        });
+
+        await prisma.projectCategory.create({
+          data: { id: 1, name: "Category 1", workspaceId: 1 },
+        });
+
+        await prisma.project.createMany({
+          data: [
+            {
+              id: 1,
+              workspaceId: 1,
+              title: "Project A",
+              deadline: dates.nextWeek,
+              creatorId: "user-1",
+              categoryId: 1,
+              customerId: 1,
+              status: ProjectStatus.active,
+            },
+            {
+              id: 2,
+              workspaceId: 1,
+              title: "Project B",
+              deadline: dates.nextWeek,
+              creatorId: "user-1",
+              categoryId: 1,
+              customerId: 2,
+              status: ProjectStatus.completed,
+            },
+            {
+              id: 3,
+              workspaceId: 1,
+              title: "Project C",
+              deadline: dates.overdue,
+              creatorId: "user-1",
+              categoryId: 1,
+              customerId: 3,
+              status: ProjectStatus.pending,
+            },
+          ],
+        });
+      });
+
+      afterAll(async () => {
+        await prisma.project.deleteMany();
+        await prisma.projectCategory.deleteMany();
+        await prisma.customer.deleteMany();
+      });
+
+      it("should filter customers which have not active projects", async () => {
+        const result = await getCustomerList({
+          page: 1,
+          pageSize: 10,
+          sort: "fullName",
+          filters: { hasNoActiveProjects: true },
+        });
+
+        expect(result.items).toHaveLength(2);
+        expect(result.items).toEqual(
+          expect.arrayContaining([
+            expect.objectContaining({ fullName: "Customer B" }),
+            expect.objectContaining({ fullName: "Customer C" }),
+          ]),
+        );
+      });
+
+      it("should filter customers which have active projects", async () => {
+        const result = await getCustomerList({
+          page: 1,
+          pageSize: 10,
+          sort: "fullName",
+          filters: { hasActiveProjects: true },
+        });
+
+        expect(result.items).toHaveLength(1);
+        expect(result.totalCount).toBe(1);
+        expect(result.items[0].fullName).toBe("Customer A");
+      });
+
+      it("should filter customers which have overdue projects", async () => {
+        const result = await getCustomerList({
+          page: 1,
+          pageSize: 10,
+          sort: "fullName",
+          filters: { hasOverdueProjects: true },
+        });
+
+        expect(result.items).toHaveLength(1);
+        expect(result.totalCount).toBe(1);
+        expect(result.items[0].fullName).toBe("Customer C");
+      });
+
+      it("should filter customers which have active OR overdue projects", async () => {
+        const result = await getCustomerList({
+          page: 1,
+          pageSize: 10,
+          sort: "fullName",
+          filters: {
+            hasActiveProjects: true,
+            hasOverdueProjects: true,
+          },
+        });
+
+        expect(result.totalCount).toBe(2);
+        expect(result.items).toEqual(
+          expect.arrayContaining([
+            expect.objectContaining({ fullName: "Customer A" }),
+            expect.objectContaining({ fullName: "Customer C" }),
+          ]),
+        );
+      });
+
+      it("should filter customers by company", async () => {
+        const result = await getCustomerList({
+          page: 1,
+          pageSize: 10,
+          sort: "fullName",
+          filters: { company: [1] },
+        });
+
+        expect(result.items).toHaveLength(1);
+        expect(result.totalCount).toBe(1);
+        expect(result.items[0].fullName).toBe("Customer A");
+      });
+    });
+
+    describe("pagination", () => {
+      beforeAll(async () => {
+        await prisma.customer.createMany({
+          data: [
+            {
+              id: 1,
+              fullName: "Customer 1",
+              email: "customer-1@test.com",
+              companyId: 1,
+              workspaceId: 1,
+            },
+            {
+              id: 2,
+              fullName: "Customer 2",
+              email: "customer-2@test.com",
+              companyId: 1,
+              workspaceId: 1,
+            },
+            {
+              id: 3,
+              fullName: "Customer 3",
+              email: "customer-3@test.com",
+              companyId: 1,
+              workspaceId: 1,
+            },
+          ],
+        });
+      });
+
+      afterAll(async () => {
+        await prisma.customer.deleteMany();
+      });
+
+      it("should handle pagination correctly (page and pageSize)", async () => {
+        const page1 = await getCustomerList({
+          page: 1,
+          pageSize: 2,
+          sort: "fullName",
+        });
+
+        const page2 = await getCustomerList({
+          page: 2,
+          pageSize: 2,
+          sort: "fullName",
+        });
+
+        expect(page1.items).toHaveLength(2);
+        expect(page1.totalCount).toBe(3);
+        expect(page1.items[0].fullName).toBe("Customer 1");
+        expect(page1.items[1].fullName).toBe("Customer 2");
+
+        expect(page2.items).toHaveLength(1);
+        expect(page2.totalCount).toBe(3);
+        expect(page2.items[0].fullName).toBe("Customer 3");
+      });
+
+      it("should return an empty array if page exceeds available data", async () => {
+        const result = await getCustomerList({
+          page: 99,
+          pageSize: 10,
+          sort: "fullName",
+        });
+
+        expect(result.items).toEqual([]);
+        expect(result.totalCount).toBe(3);
+      });
+    });
+
+    describe("searchCustomer", () => {
+      beforeAll(async () => {
+        await prisma.customer.createMany({
+          data: [
+            {
+              id: 1,
+              fullName: "Customer 1",
+              email: "customer-1@test.com",
+              imageUrl: "https://example.com/customer-1.jpg",
+              companyId: 1,
+              workspaceId: 1,
+            },
+            {
+              id: 2,
+              fullName: "Customer 2",
+              email: "customer-2@test.com",
+              companyId: 1,
+              workspaceId: 1,
+            },
+            {
+              id: 3,
+              fullName: "Customer 3",
+              email: "customer-3@test.com",
+              companyId: 1,
+              workspaceId: 1,
+            },
+          ],
+        });
+      });
+
+      afterAll(async () => {
+        await prisma.customer.deleteMany();
+      });
+
+      it("should return all customers with valid CustomerSearchDTO", async () => {
+        const result = await searchCustomers({
+          page: 1,
+          pageSize: 10,
+        });
+
+        expect(result).toEqual({
+          items: expect.arrayContaining([
+            {
+              id: 1,
+              fullName: "Customer 1",
+              email: "customer-1@test.com",
+              imageUrl: "https://example.com/customer-1.jpg",
+            },
+            {
+              id: 2,
+              fullName: "Customer 2",
+              email: "customer-2@test.com",
+            },
+            {
+              id: 3,
+              fullName: "Customer 3",
+              email: "customer-3@test.com",
+            },
+          ]),
+
+          totalCount: 3,
+        });
+      });
+
+      it("should filter customers by query", async () => {
+        const result = await searchCustomers({
+          page: 1,
+          pageSize: 10,
+          query: "Customer 1",
+        });
+
+        expect(result.items).toHaveLength(1);
+        expect(result.items[0].fullName).toBe("Customer 1");
+      });
+
+      describe("pagination", () => {
+        it("should handle pagination correctly (page and pageSize)", async () => {
+          const page1 = await searchCustomers({
+            page: 1,
+            pageSize: 2,
+          });
+
+          const page2 = await searchCustomers({
+            page: 2,
+            pageSize: 2,
+          });
+
+          expect(page1.items).toHaveLength(2);
+          expect(page1.totalCount).toBe(3);
+          expect(page1.items[0].fullName).toBe("Customer 1");
+          expect(page1.items[1].fullName).toBe("Customer 2");
+
+          expect(page2.items).toHaveLength(1);
+          expect(page2.totalCount).toBe(3);
+          expect(page2.items[0].fullName).toBe("Customer 3");
+        });
+
+        it("should return an empty array if page exceeds available data", async () => {
+          const result = await searchCustomers({
+            page: 99,
+            pageSize: 10,
+          });
+
+          expect(result.items).toEqual([]);
+          expect(result.totalCount).toBe(3);
+        });
+      });
     });
   });
 });

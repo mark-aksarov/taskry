@@ -691,7 +691,7 @@ describe("Project Service", () => {
         const result = await getProjectList({
           page: 1,
           pageSize: 10,
-          sort: "fullName",
+          sort: "title",
           filters: { noActiveTasks: true },
         });
 

@@ -24,14 +24,14 @@ describe("creates a new project", () => {
     cy.visit("/en/projects");
   });
 
-  it("can create a project", () => {
+  it("can create a project and send notifications", () => {
     cy.getByData("projects-page-empty-add-button").click();
 
     // fill form
-    cy.get('input[name="title"]').clear().type("Updated Project Title");
+    cy.get('input[name="title"]').clear().type("Created Project Title");
     cy.get('textarea[name="description"]')
       .clear()
-      .type("Updated Project Description");
+      .type("Created Project Description");
     cy.setDatePickerDate("deadline-date-picker", "12", "31", "2025");
 
     cy.getByData("status-select").click();
@@ -48,11 +48,40 @@ describe("creates a new project", () => {
 
     // assert
     cy.getByData("project-list-item").within(() => {
-      cy.contains("Updated Project Title");
+      cy.contains("Created Project Title");
       cy.contains("Category 1");
       cy.contains("Larry Doe");
       cy.contains("Company 1");
       cy.contains("Active");
     });
+
+    // check notifications
+    cy.checkNotifications(0);
+
+    // sign in as user-2
+    cy.signIn("user@example.com", "12345abc");
+    cy.visit("/en/projects");
+
+    // check notifications
+    cy.checkNotifications(1, [
+      {
+        target: "Created Project Title",
+        actor: "John Doe",
+        action: "added a new project",
+      },
+    ]);
+
+    // sign in as user-3
+    cy.signIn("guest@example.com", "12345abc");
+    cy.visit("/en/projects");
+
+    // check notifications
+    cy.checkNotifications(1, [
+      {
+        target: "Created Project Title",
+        actor: "John Doe",
+        action: "added a new project",
+      },
+    ]);
   });
 });

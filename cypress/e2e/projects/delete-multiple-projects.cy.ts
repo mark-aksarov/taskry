@@ -87,5 +87,44 @@ describe("delete multiple projects", () => {
 
     cy.getByData("delete-projects-modal-confirm-button").click();
     cy.getByData("project-list-item").should("not.exist");
+
+    // check notifications
+    cy.checkNotifications(0);
+
+    // sign in as user-2
+    cy.signIn("user@example.com", "12345abc");
+    cy.visit("/en/projects");
+
+    // check notifications
+    cy.checkNotifications(2, [
+      {
+        target: "Project 1",
+        actor: "John Doe",
+        action: "deleted the project",
+      },
+      {
+        target: "Project 2",
+        actor: "John Doe",
+        action: "deleted the project",
+      },
+    ]);
+
+    // sign in as user-3
+    cy.signIn("guest@example.com", "12345abc");
+    cy.visit("/en/projects");
+
+    // check notifications
+    cy.checkNotifications(2, [
+      {
+        target: "Project 1",
+        actor: "John Doe",
+        action: "deleted the project",
+      },
+      {
+        target: "Project 2",
+        actor: "John Doe",
+        action: "deleted the project",
+      },
+    ]);
   });
 });

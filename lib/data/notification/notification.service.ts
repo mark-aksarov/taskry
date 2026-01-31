@@ -41,16 +41,25 @@ export const getNotifications = async ({
 
       project: notification.project ?? undefined,
       task: notification.task ?? undefined,
+      user: notification.user ?? undefined,
+      customer: notification.customer ?? undefined,
+      position: notification.position ?? undefined,
+      company: notification.company ?? undefined,
+      projectCategory: notification.projectCategory ?? undefined,
+      taskCategory: notification.taskCategory ?? undefined,
+      subtask: notification.subtask ?? undefined,
+      comment: notification.comment ?? undefined,
+
       projectTitle: notification.projectTitle ?? undefined,
       taskTitle: notification.taskTitle ?? undefined,
+      companyName: notification.companyName ?? undefined,
+      positionName: notification.positionName ?? undefined,
+      taskCategoryName: notification.taskCategoryName ?? undefined,
+      projectCategoryName: notification.projectCategoryName ?? undefined,
+      subtaskText: notification.subtaskText ?? undefined,
       commentContent: notification.commentContent ?? undefined,
-
-      comment: notification.comment
-        ? {
-            id: notification.comment.id,
-            content: notification.comment.content,
-          }
-        : undefined,
+      userFullName: notification.userFullName ?? undefined,
+      customerFullName: notification.customerFullName ?? undefined,
     })),
     totalCount,
     unreadCount,

@@ -31,6 +31,7 @@ export interface UserFilters {
 }
 
 export interface CustomerFilters {
+  query?: string;
   hasNoActiveProjects?: boolean;
   hasActiveProjects?: boolean;
   hasOverdueProjects?: boolean;

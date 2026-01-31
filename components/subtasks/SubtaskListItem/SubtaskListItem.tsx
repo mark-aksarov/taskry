@@ -18,11 +18,11 @@ export function SubtaskListItem({
         size={20}
         strokeWidth={1.5}
         absoluteStrokeWidth
-        className={
-          isDone
-            ? "text-blue-600 dark:text-blue-700"
-            : "text-gray-500 dark:text-gray-400"
-        }
+        className={twMerge(
+          "shrink-0",
+          isDone && "text-blue-600 dark:text-blue-700",
+          !isDone && "text-gray-500 dark:text-gray-400",
+        )}
       />
       <span
         className={twMerge(

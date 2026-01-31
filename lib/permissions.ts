@@ -8,6 +8,10 @@ const statements = {
   customer: ["create", "update", "delete"],
   user: ["create", "update", "delete"],
   notification: ["delete", "update"],
+  company: ["create", "update", "delete"],
+  position: ["create", "update", "delete"],
+  projectCategory: ["create", "update", "delete"],
+  taskCategory: ["create", "update", "delete"],
 };
 
 export const ac = createAccessControl(statements);
@@ -28,4 +32,8 @@ export const guest = ac.newRole({
   customer: [],
   user: [],
   notification: [],
+  company: [],
+  position: [],
+  projectCategory: [],
+  taskCategory: [],
 });

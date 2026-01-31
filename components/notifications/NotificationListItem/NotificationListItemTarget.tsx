@@ -77,6 +77,38 @@ const CustomerTarget = ({
   />
 );
 
+const CompanyTarget = ({
+  entity,
+  name,
+}: {
+  entity?: { id: number; name: string } | null;
+  name?: string | null;
+}) => <Target label={entity?.name || name} />;
+
+const PositionTarget = ({
+  entity,
+  name,
+}: {
+  entity?: { id: number; name: string } | null;
+  name?: string | null;
+}) => <Target label={entity?.name || name} />;
+
+const TaskCategoryTarget = ({
+  entity,
+  name,
+}: {
+  entity?: { id: number; name: string } | null;
+  name?: string | null;
+}) => <Target label={entity?.name || name} />;
+
+const ProjectCategoryTarget = ({
+  entity,
+  name,
+}: {
+  entity?: { id: number; name: string } | null;
+  name?: string | null;
+}) => <Target label={entity?.name || name} />;
+
 export function NotificationListItemTarget({ notification }: Props) {
   const { type } = notification;
 
@@ -134,6 +166,77 @@ export function NotificationListItemTarget({ notification }: Props) {
         entity={notification.customer}
         fullName={notification.customerFullName}
       />
+    );
+  }
+
+  // company related
+
+  if (type === "companyDeleted") {
+    return <span className={styles}>{notification.companyName}</span>;
+  }
+
+  if (type === "companyAdded" || type === "companyChanged") {
+    return (
+      <CompanyTarget
+        entity={notification.company}
+        name={notification.companyName}
+      />
+    );
+  }
+
+  // task category related
+
+  if (type === "taskCategoryDeleted") {
+    return <span className={styles}>{notification.taskCategoryName}</span>;
+  }
+
+  if (type === "taskCategoryAdded" || type === "taskCategoryChanged") {
+    return (
+      <TaskCategoryTarget
+        entity={notification.taskCategory}
+        name={notification.taskCategoryName}
+      />
+    );
+  }
+
+  // project category related
+
+  if (type === "projectCategoryDeleted") {
+    return <span className={styles}>{notification.projectCategoryName}</span>;
+  }
+
+  if (type === "projectCategoryAdded" || type === "projectCategoryChanged") {
+    return (
+      <ProjectCategoryTarget
+        entity={notification.projectCategory}
+        name={notification.projectCategoryName}
+      />
+    );
+  }
+
+  // position related
+
+  if (type === "positionDeleted") {
+    return <span className={styles}>{notification.positionName}</span>;
+  }
+
+  if (type === "positionAdded" || type === "positionChanged") {
+    return (
+      <PositionTarget
+        entity={notification.position}
+        name={notification.positionName}
+      />
+    );
+  }
+
+  // subtask-related
+  if (
+    type === "subtaskAdded" ||
+    type === "subtaskChanged" ||
+    type === "subtaskDeleted"
+  ) {
+    return (
+      <TaskTarget entity={notification.task} title={notification.taskTitle} />
     );
   }
 

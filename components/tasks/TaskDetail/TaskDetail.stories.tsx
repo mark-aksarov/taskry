@@ -1,10 +1,10 @@
 import { TaskDetail } from "./TaskDetail";
 import { TaskStatus } from "@/generated/prisma/enums";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { SubtaskList } from "@/components/subtasks/SubtaskList";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { SubtasksCheckboxGroup } from "@/components/subtasks/SubtasksCheckboxGroup";
 import { NewSubtaskModalTrigger } from "@/components/subtasks/NewSubtaskModalTrigger";
-import { Default as SubtasksCheckboxGroupStory } from "@/components/subtasks/SubtasksCheckboxGroup/SubtasksCheckboxGroup.stories";
+import { Default as SubtaskListStory } from "@/components/subtasks/SubtaskList/SubtaskList.stories";
 import { Default as NewSubtaskModalTriggerStory } from "@/components/subtasks/NewSubtaskModalTrigger/NewSubtaskModalTrigger.stories";
 
 const meta = {
@@ -65,9 +65,7 @@ export const Default = {
         fileName: "placeholder.jpg",
       },
     ],
-    subtasksCheckboxGroup: (
-      <SubtasksCheckboxGroup {...SubtasksCheckboxGroupStory.args} />
-    ),
+    subtasksList: <SubtaskList {...SubtaskListStory.args} />,
     newSubtaskModalTrigger: (
       <NewSubtaskModalTrigger {...NewSubtaskModalTriggerStory.args} />
     ),

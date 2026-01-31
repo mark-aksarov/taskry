@@ -7,7 +7,7 @@ import prisma from "@/lib/prisma";
 import { AccessDeniedError } from "../../utils/error";
 import { resetDatabase } from "@/prisma/resetDatabase";
 import { NotificationType } from "@/generated/prisma/enums";
-import { vi, describe, beforeEach, it, expect } from "vitest";
+import { vi, describe, beforeEach, it, expect, beforeAll } from "vitest";
 import { requireSession } from "@/lib/data/utils/requireSession";
 
 vi.mock("server-only", () => ({}));
@@ -22,6 +22,10 @@ describe("Notification DAL", () => {
       user: { id: "user-1", workspaceId: 1 },
     });
 
+    await prisma.notification.deleteMany();
+  });
+
+  beforeAll(async () => {
     await resetDatabase();
 
     await prisma.workspace.createMany({ data: [{ id: 1 }, { id: 2 }] });

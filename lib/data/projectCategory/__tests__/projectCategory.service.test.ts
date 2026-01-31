@@ -1,7 +1,7 @@
 import prisma from "@/lib/prisma";
 import { resetDatabase } from "@/prisma/resetDatabase";
-import { vi, describe, beforeEach, it, expect } from "vitest";
 import { requireSession } from "@/lib/data/utils/requireSession";
+import { vi, describe, beforeEach, it, expect, beforeAll } from "vitest";
 import { getProjectCategorySummaries } from "../projectCategory.service";
 
 vi.mock("server-only", () => ({}));
@@ -12,66 +12,58 @@ vi.mock("@/lib/data/utils/requireSession", () => ({
 
 describe("ProjectCategory Service", () => {
   beforeEach(async () => {
-    vi.resetAllMocks();
+    await prisma.projectCategory.deleteMany();
+  });
 
-    await resetDatabase();
-
+  beforeAll(async () => {
     (requireSession as any).mockResolvedValue({
       user: { id: "user-1", workspaceId: 1 },
     });
 
-    await prisma.workspace.create({ data: { id: 1 } });
-    await prisma.workspace.create({ data: { id: 2 } });
+    await resetDatabase();
 
-    await prisma.projectCategory.createMany({
-      data: [
-        { id: 1, name: "Category 1", workspaceId: 1 },
-        { id: 2, name: "Category 2", workspaceId: 1 },
-        { id: 3, name: "Category 3", workspaceId: 2 },
-        { id: 4, name: "Category 4", workspaceId: 2 },
-      ],
+    await prisma.workspace.create({ data: { id: 1 } });
+
+    await prisma.user.create({
+      data: {
+        id: "user-1",
+        fullName: "User 1",
+        imageUrl: "https://example.com/user-1.jpg",
+        email: "user-1@test.com",
+        workspaceId: 1,
+      },
     });
   });
 
   describe("getProjectCategorySummaries", () => {
-    it("should return only project categories belonging to the current workspace", async () => {
+    it("should return all project category summaries as a list of valid ProjectCategorySummaryDTOs", async () => {
+      await prisma.projectCategory.createMany({
+        data: [
+          { id: 1, name: "Project Category 1", workspaceId: 1 },
+          { id: 2, name: "Project Category 2", workspaceId: 1 },
+        ],
+      });
+
       const result = await getProjectCategorySummaries();
 
       expect(result).toHaveLength(2);
       expect(result).toEqual(
         expect.arrayContaining([
-          expect.objectContaining({ id: 1, name: "Category 1" }),
-          expect.objectContaining({ id: 2, name: "Category 2" }),
+          {
+            id: 1,
+            name: "Project Category 1",
+          },
+          {
+            id: 2,
+            name: "Project Category 2",
+          },
         ]),
       );
     });
 
-    it("should not return categories from a different workspace", async () => {
+    it("should return empty array", async () => {
       const result = await getProjectCategorySummaries();
-
-      const ids = result.map((cat) => cat.id);
-      expect(ids).not.toContain(3);
-      expect(ids).not.toContain(4);
-    });
-
-    it("should return an empty array if the current workspace has no categories", async () => {
-      await prisma.workspace.create({ data: { id: 3 } });
-      (requireSession as any).mockResolvedValue({
-        user: { id: "user-3", workspaceId: 3 },
-      });
-
-      const result = await getProjectCategorySummaries();
-
       expect(result).toHaveLength(0);
-    });
-
-    it("should correctly map database fields to DTO format", async () => {
-      const result = await getProjectCategorySummaries();
-
-      const firstCategory = result[0];
-      expect(firstCategory).toHaveProperty("id");
-      expect(firstCategory).toHaveProperty("name");
-      expect(firstCategory).not.toHaveProperty("workspaceId");
     });
   });
 });

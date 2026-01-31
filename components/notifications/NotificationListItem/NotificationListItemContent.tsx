@@ -20,5 +20,14 @@ export function NotificationListItemContent({ notification }: Props) {
     );
   }
 
+  // subtask-related
+  if (type.includes("subtask")) {
+    return (
+      <CommentItemContent className="ml-0">
+        <CommentItemText>{notification.subtaskText}</CommentItemText>
+      </CommentItemContent>
+    );
+  }
+
   return null;
 }

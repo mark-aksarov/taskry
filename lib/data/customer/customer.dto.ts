@@ -50,6 +50,11 @@ export type CustomerDetailDTO = {
   };
 };
 
+export type CustomerListDTO = {
+  items: CustomerListItemDTO[];
+  totalCount: number;
+};
+
 export type CustomerListItemDTO = {
   id: number;
   fullName: string;
@@ -63,3 +68,15 @@ export type CustomerListItemDTO = {
     name: string;
   };
 };
+
+export interface CustomerSearchDTO {
+  items: CustomerSearchItemDTO[];
+  totalCount: number;
+}
+
+export interface CustomerSearchItemDTO {
+  id: number;
+  fullName: string;
+  email: string;
+  imageUrl?: string;
+}

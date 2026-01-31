@@ -1,17 +1,12 @@
 import "server-only";
 
-import {
-  getNotificationRecipients,
-  createCommentAddedNotifications,
-  createCommentDeletedNotifications,
-} from "../notification/notification.dal";
-
 import { cache } from "react";
 import prisma from "@/lib/prisma";
 import { auth } from "@/lib/auth";
 import { AccessDeniedError } from "../utils/error";
 import { requireSession } from "../utils/requireSession";
 import { NotificationType, Prisma } from "@/generated/prisma/client";
+import { getNotificationRecipients } from "../notification/notification.dal";
 import { CreateCommentInputDTO, UpdateCommentInputDTO } from "./comment.dto";
 
 export const getAllComments = cache(
@@ -23,8 +18,8 @@ export const getAllComments = cache(
 
     return await prisma.comment.findMany({
       where: {
-        taskId,
-        projectId,
+        taskId: taskId ?? Prisma.skip,
+        projectId: projectId ?? Prisma.skip,
         workspaceId,
       },
       select: {
@@ -83,8 +78,8 @@ export const createComment = async (input: CreateCommentInputDTO) => {
     const newComment = await tx.comment.create({
       data: {
         content: input.content,
-        taskId: input.taskId,
-        projectId: input.projectId,
+        taskId: input.taskId ?? Prisma.skip,
+        projectId: input.projectId ?? Prisma.skip,
         senderId,
         workspaceId,
         attachments: input.attachments
@@ -95,17 +90,33 @@ export const createComment = async (input: CreateCommentInputDTO) => {
                 workspaceId,
               })),
             }
-          : undefined,
+          : Prisma.skip,
       },
     });
 
-    await createCommentAddedNotifications(tx, {
-      comment: newComment,
-      taskTitle: task?.title,
-      projectTitle: project?.title,
-      actorId: senderId,
+    const recipients = await getNotificationRecipients(
+      tx,
       workspaceId,
-    });
+      senderId,
+    );
+
+    if (recipients.length > 0) {
+      await tx.notification.createMany({
+        data: recipients.map((user) => ({
+          type: "commentAdded",
+          actorId: senderId,
+          recipientId: user.id,
+          workspaceId,
+          commentId: newComment.id,
+          taskId: newComment.taskId,
+          projectId: newComment.projectId,
+          commentContent: newComment.content.substring(0, 250),
+          taskTitle: task ? task.title : Prisma.skip,
+          projectTitle: project ? project.title : Prisma.skip,
+          isRead: false,
+        })),
+      });
+    }
 
     return newComment;
   });
@@ -156,13 +167,32 @@ export const deleteComment = async (commentId: number) => {
     });
 
     // Send notifications
-    await createCommentDeletedNotifications(tx, {
-      comment: deletedComment,
-      taskTitle: deletedComment.task?.title,
-      projectTitle: deletedComment.project?.title,
-      actorId: senderId,
+    const recipients = await getNotificationRecipients(
+      tx,
       workspaceId,
-    });
+      senderId,
+    );
+
+    if (recipients.length > 0) {
+      await tx.notification.createMany({
+        data: recipients.map((user) => ({
+          type: "commentDeleted",
+          actorId: senderId,
+          recipientId: user.id,
+          workspaceId,
+          taskId: deletedComment.taskId,
+          projectId: deletedComment.projectId,
+          commentContent: deletedComment.content.substring(0, 250),
+          taskTitle: deletedComment.task
+            ? deletedComment.task.title
+            : Prisma.skip,
+          projectTitle: deletedComment.project
+            ? deletedComment.project.title
+            : Prisma.skip,
+          isRead: false,
+        })),
+      });
+    }
 
     return deletedComment;
   });
@@ -228,8 +258,8 @@ export const updateComment = async (input: UpdateCommentInputDTO) => {
           taskId: comment.taskId,
           projectId: comment.projectId,
           commentContent: comment.content.substring(0, 250),
-          taskTitle: comment.task?.title,
-          projectTitle: comment.project?.title,
+          taskTitle: comment.task ? comment.task.title : Prisma.skip,
+          projectTitle: comment.project ? comment.project.title : Prisma.skip,
           isRead: false,
         })),
       });

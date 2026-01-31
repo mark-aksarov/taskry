@@ -15,8 +15,9 @@ import {
 import prisma from "@/lib/prisma";
 import { resetDatabase } from "@/prisma/resetDatabase";
 import { AccessDeniedError } from "@/lib/data/utils/error";
-import { vi, describe, it, expect, beforeEach } from "vitest";
+import { vi, describe, it, expect, beforeEach, beforeAll } from "vitest";
 import { requireSession } from "@/lib/data/utils/requireSession";
+import { Prisma } from "@/generated/prisma/client";
 
 vi.mock("server-only", () => ({}));
 
@@ -30,6 +31,11 @@ describe("Task DAL", () => {
       user: { id: "user-1", workspaceId: 1 },
     });
 
+    await prisma.task.deleteMany();
+    await prisma.notification.deleteMany();
+  });
+
+  beforeAll(async () => {
     await resetDatabase();
 
     await prisma.workspace.createMany({ data: [{ id: 1 }, { id: 2 }] });
@@ -392,6 +398,75 @@ describe("Task DAL", () => {
       await expect(updateTask(updateInput)).rejects.toThrow();
     });
 
+    it("should fail if the project belongs to a different workspace", async () => {
+      const taskId = 100;
+
+      await prisma.task.create({
+        data: {
+          id: taskId,
+          title: "Task 1",
+          deadline: new Date(),
+          projectId: 1,
+          categoryId: 1,
+          workspaceId: 1,
+          status: TaskStatus.active,
+        },
+      });
+
+      await expect(
+        updateTask({
+          id: taskId,
+          projectId: 2,
+        }),
+      ).rejects.toThrow();
+    });
+
+    it("should fail if the assignee belongs to a different workspace", async () => {
+      const taskId = 100;
+
+      await prisma.task.create({
+        data: {
+          id: taskId,
+          title: "Task 1",
+          deadline: new Date(),
+          projectId: 1,
+          categoryId: 1,
+          workspaceId: 1,
+          status: TaskStatus.active,
+        },
+      });
+
+      await expect(
+        updateTask({
+          id: taskId,
+          assigneeId: "user-4",
+        }),
+      ).rejects.toThrow();
+    });
+
+    it("should fail if the task category belongs to a different workspace", async () => {
+      const taskId = 100;
+
+      await prisma.task.create({
+        data: {
+          id: taskId,
+          title: "Task 1",
+          deadline: new Date(),
+          projectId: 1,
+          categoryId: 1,
+          workspaceId: 1,
+          status: TaskStatus.active,
+        },
+      });
+
+      await expect(
+        updateTask({
+          id: taskId,
+          categoryId: 2,
+        }),
+      ).rejects.toThrow();
+    });
+
     describe("RBAC: update task", () => {
       const setup = async (userId: string, role: string) => {
         (requireSession as any).mockResolvedValue({
@@ -605,7 +680,7 @@ describe("Task DAL", () => {
             categoryId: 1,
             workspaceId: 1,
             status: TaskStatus.active,
-            assigneeId,
+            assigneeId: assigneeId ?? Prisma.skip,
           },
         });
       };

@@ -8,8 +8,8 @@ import { coercedPositiveInt } from "@/lib/schemas/base";
 import { ProjectStatus } from "@/generated/prisma/enums";
 import { projectStatusParam } from "@/lib/schemas/project";
 import { actionError, actionSuccess } from "../utils/actionResult";
-import { updateProjects as updateProjectsQuery } from "@/lib/data/project/project.dal";
 import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedirect";
+import { updateProjectStatuses as updateProjectStatusesQuery } from "@/lib/data/project/project.dal";
 
 const schema = z.object({
   ids: z.array(coercedPositiveInt).min(1),
@@ -35,7 +35,7 @@ export async function updateProjectStatuses(
     }
 
     // Execute update
-    await updateProjectsQuery(parsed.data.ids, parsed.data.nextStatus);
+    await updateProjectStatusesQuery(parsed.data.ids, parsed.data.nextStatus);
 
     // Revalidation
     revalidatePath("/projects");

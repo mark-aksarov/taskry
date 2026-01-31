@@ -30,11 +30,13 @@ vi.mock("@/lib/data/utils/requireSession", () => ({
 }));
 
 describe("Task Service", () => {
-  beforeAll(async () => {
+  beforeEach(async () => {
     (requireSession as any).mockResolvedValue({
       user: { id: "user-1", workspaceId: 1 },
     });
+  });
 
+  beforeAll(async () => {
     await resetDatabase();
 
     await prisma.workspace.createMany({ data: [{ id: 1 }] });

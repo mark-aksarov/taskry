@@ -4,8 +4,8 @@ import { cache } from "react";
 import prisma from "@/lib/prisma";
 import { auth } from "@/lib/auth";
 import { AccessDeniedError } from "../utils/error";
+import { Prisma } from "@/generated/prisma/client";
 import { requireSession } from "@/lib/data/utils/requireSession";
-import { Prisma, NotificationType } from "@/generated/prisma/client";
 
 export const getAllNotifications = cache(
   async ({
@@ -46,6 +46,11 @@ export const getAllNotifications = cache(
           commentContent: true,
           userFullName: true,
           customerFullName: true,
+          companyName: true,
+          positionName: true,
+          taskCategoryName: true,
+          projectCategoryName: true,
+          subtaskText: true,
 
           actor: {
             select: {
@@ -80,6 +85,41 @@ export const getAllNotifications = cache(
             select: {
               id: true,
               fullName: true,
+            },
+          },
+
+          company: {
+            select: {
+              id: true,
+              name: true,
+            },
+          },
+
+          position: {
+            select: {
+              id: true,
+              name: true,
+            },
+          },
+
+          taskCategory: {
+            select: {
+              id: true,
+              name: true,
+            },
+          },
+
+          projectCategory: {
+            select: {
+              id: true,
+              name: true,
+            },
+          },
+
+          subtask: {
+            select: {
+              id: true,
+              text: true,
             },
           },
 
@@ -166,194 +206,6 @@ export const markNotificationsAsRead = async (ids: number[] | null) => {
 
   return result;
 };
-
-/**
- * Send notifications
- */
-
-export async function createCommentAddedNotifications(
-  tx: Prisma.TransactionClient,
-  {
-    comment,
-    taskTitle,
-    projectTitle,
-    actorId,
-    workspaceId,
-  }: {
-    comment: {
-      id: number;
-      content: string;
-      taskId?: number | null;
-      projectId?: number | null;
-    };
-    taskTitle?: string;
-    projectTitle?: string;
-    actorId: string;
-    workspaceId: number;
-  },
-) {
-  const recipients = await getNotificationRecipients(tx, workspaceId, actorId);
-
-  if (recipients.length === 0) return;
-
-  await tx.notification.createMany({
-    data: recipients.map((user) => ({
-      type: "commentAdded",
-      actorId,
-      recipientId: user.id,
-      workspaceId,
-      commentId: comment.id,
-      taskId: comment.taskId,
-      projectId: comment.projectId,
-      commentContent: comment.content.substring(0, 250),
-      taskTitle: taskTitle,
-      projectTitle: projectTitle,
-      isRead: false,
-    })),
-  });
-}
-
-export async function createCommentDeletedNotifications(
-  tx: Prisma.TransactionClient,
-  {
-    comment,
-    taskTitle,
-    projectTitle,
-    actorId,
-    workspaceId,
-  }: {
-    comment: {
-      content: string;
-      taskId?: number | null;
-      projectId?: number | null;
-    };
-    taskTitle?: string;
-    projectTitle?: string;
-    actorId: string;
-    workspaceId: number;
-  },
-) {
-  const recipients = await getNotificationRecipients(tx, workspaceId, actorId);
-
-  if (recipients.length === 0) return;
-
-  await tx.notification.createMany({
-    data: recipients.map((user) => ({
-      type: "commentDeleted",
-      actorId,
-      recipientId: user.id,
-      workspaceId,
-      taskId: comment.taskId,
-      projectId: comment.projectId,
-      commentContent: comment.content.substring(0, 250),
-      taskTitle: taskTitle,
-      projectTitle: projectTitle,
-      isRead: false,
-    })),
-  });
-}
-
-/**
- * Task Notifications
- */
-
-export async function createTaskAddedNotifications(
-  tx: Prisma.TransactionClient,
-  {
-    task,
-    actorId,
-    workspaceId,
-  }: {
-    task: {
-      id: number;
-      title: string;
-    };
-    actorId: string;
-    workspaceId: number;
-  },
-) {
-  const recipients = await getNotificationRecipients(tx, workspaceId, actorId);
-
-  if (recipients.length === 0) return;
-
-  await tx.notification.createMany({
-    data: recipients.map((user) => ({
-      type: NotificationType.taskAdded,
-      actorId,
-      recipientId: user.id,
-      workspaceId,
-      taskId: task.id,
-      taskTitle: task.title,
-      isRead: false,
-    })),
-  });
-}
-
-export async function createTaskDeletedNotifications(
-  tx: Prisma.TransactionClient,
-  {
-    tasks,
-    actorId,
-    workspaceId,
-  }: {
-    tasks: {
-      title: string;
-    }[];
-    actorId: string;
-    workspaceId: number;
-  },
-) {
-  const recipients = await getNotificationRecipients(tx, workspaceId, actorId);
-
-  if (recipients.length === 0) return;
-
-  await tx.notification.createMany({
-    data: tasks.flatMap((task) =>
-      recipients.map((user) => ({
-        type: NotificationType.taskDeleted,
-        actorId,
-        recipientId: user.id,
-        workspaceId,
-        taskTitle: task.title,
-        isRead: false,
-      })),
-    ),
-  });
-}
-
-export async function createTaskChangedNotifications(
-  tx: Prisma.TransactionClient,
-  {
-    tasks,
-    actorId,
-    workspaceId,
-  }: {
-    tasks: {
-      id: number;
-      title: string;
-    }[];
-    actorId: string;
-    workspaceId: number;
-  },
-) {
-  const recipients = await getNotificationRecipients(tx, workspaceId, actorId);
-
-  if (recipients.length === 0) return;
-
-  await tx.notification.createMany({
-    data: tasks.flatMap((task) =>
-      recipients.map((user) => ({
-        type: NotificationType.taskChanged,
-        actorId,
-        recipientId: user.id,
-        workspaceId,
-        taskId: task.id,
-        taskTitle: task.title,
-        isRead: false,
-      })),
-    ),
-  });
-}
 
 /**
  * HELPER

@@ -1,5 +1,4 @@
 import { cache } from "react";
-import { auth } from "@/lib/auth";
 import prisma from "@/lib/prisma";
 import { UserFilters } from "@/lib/types";
 import { requireSession } from "../utils/requireSession";
@@ -53,8 +52,8 @@ export const getPaginatedUsers = cache(
       user: { workspaceId },
     } = await requireSession();
 
-    const skip = page && pageSize ? (page - 1) * pageSize : undefined;
-    const take = pageSize ? pageSize : undefined;
+    const skip = page && pageSize ? (page - 1) * pageSize : Prisma.skip;
+    const take = pageSize ? pageSize : Prisma.skip;
 
     const orderByMapping: Record<string, Prisma.UserOrderByWithRelationInput> =
       {
@@ -62,7 +61,7 @@ export const getPaginatedUsers = cache(
         position: { position: { name: "asc" } },
       };
 
-    const orderBy = sort ? orderByMapping[sort] : undefined;
+    const orderBy = sort ? orderByMapping[sort] : Prisma.skip;
     const where = buildUserWhereClause(workspaceId, filters);
 
     const [items, totalCount] = await prisma.$transaction([

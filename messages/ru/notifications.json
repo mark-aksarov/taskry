@@ -33,7 +33,27 @@
 
     "commentAdded": "добавил(а) комментарий в",
     "commentChanged": "отредактировал(а) комментарий в",
-    "commentDeleted": "удалил(а) ваш комментарий в"
+    "commentDeleted": "удалил(а) ваш комментарий в",
+
+    "companyAdded": "добавил(а) новую компанию",
+    "companyChanged": "изменил(а) компанию",
+    "companyDeleted": "удалил(а) компанию",
+
+    "positionAdded": "добавил(а) новую должность",
+    "positionChanged": "изменил(а) должность",
+    "positionDeleted": "удалил(а) должность",
+
+    "subtaskAdded": "добавил(а) новую подзадачу",
+    "subtaskChanged": "изменил(а) подзадачу",
+    "subtaskDeleted": "удалил(а) подзадачу",
+
+    "projectCategoryAdded": "добавил(а) новую категорию проектов",
+    "projectCategoryChanged": "изменил(а) категорию проектов",
+    "projectCategoryDeleted": "удалил(а) категорию проектов",
+
+    "taskCategoryAdded": "добавил(а) новую категорию задач",
+    "taskCategoryChanged": "изменил(а) категорию задач",
+    "taskCategoryDeleted": "удалил(а) категорию задач"
   },
 
   "NotificationListItemActionMenuTrigger": {
