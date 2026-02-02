@@ -33,11 +33,12 @@ export function SearchListItem({
   href,
 }: SearchListItemProps) {
   return (
-    <Link className={(renderProps) => styles({ ...renderProps })} href={href}>
-      <ListItem
-        data-test="search-list-item"
-        className="rounded-none bg-inherit! pr-3 shadow-none"
-      >
+    <Link
+      data-test="search-list-item"
+      className={(renderProps) => styles({ ...renderProps })}
+      href={href}
+    >
+      <ListItem className="rounded-none bg-inherit! pr-3 shadow-none">
         {imageSlot}
         <ListItemInfo>
           {titleSlot}

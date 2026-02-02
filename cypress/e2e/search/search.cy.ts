@@ -149,4 +149,22 @@ describe("search", () => {
     cy.getByData("users-button").click();
     cy.getByData("search-list-item").should("have.length", 3);
   });
+
+  it.only("navigate through links", () => {
+    cy.getByData("search-modal-trigger").click();
+    cy.getByData("search-list-item").first().click();
+    cy.location("pathname").should("contain", "/team/user-1");
+
+    cy.getByData("search-modal").should("not.exist");
+    cy.getByData("search-modal-trigger").click();
+    cy.getByData("tasks-button").click();
+    cy.getByData("search-list-item").first().click();
+    cy.location("pathname").should("contain", "/tasks/1");
+
+    cy.getByData("search-modal").should("not.exist");
+    cy.getByData("search-modal-trigger").click();
+    cy.getByData("projects-button").click();
+    cy.getByData("search-list-item").first().click();
+    cy.location("pathname").should("contain", "/projects/1");
+  });
 });
