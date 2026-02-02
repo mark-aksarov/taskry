@@ -6,7 +6,8 @@
   "SearchToggleButtonGroup": {
     "users": "Users",
     "tasks": "Tasks",
-    "projects": "Projects"
+    "projects": "Projects",
+    "customers": "Customers"
   },
 
   "SearchModalTriggerDesktop": {

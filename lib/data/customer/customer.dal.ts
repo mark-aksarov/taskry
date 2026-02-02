@@ -65,10 +65,11 @@ export const getPaginatedCustomers = cache(
 
     const orderByMapping: Record<
       string,
-      Prisma.CustomerOrderByWithRelationInput
+      | Prisma.CustomerOrderByWithRelationInput
+      | Prisma.CustomerOrderByWithRelationInput[]
     > = {
       fullName: { fullName: "asc" },
-      company: { company: { name: "asc" } },
+      company: [{ company: { name: "asc" } }, { fullName: "asc" }],
     };
 
     const orderBy = sort ? orderByMapping[sort] : Prisma.skip;

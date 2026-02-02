@@ -9,8 +9,22 @@ describe("search", () => {
       customers: [
         {
           id: 1,
-          email: "owner@example.com",
-          fullName: "John Doe",
+          email: "customer-1@example.com",
+          fullName: "Customer 1",
+          companyId: 1,
+          workspaceId: 1,
+        },
+        {
+          id: 2,
+          email: "customer-2@example.com",
+          fullName: "Customer 2",
+          companyId: 1,
+          workspaceId: 1,
+        },
+        {
+          id: 3,
+          email: "customer-3@example.com",
+          fullName: "Customer 3",
           companyId: 1,
           workspaceId: 1,
         },
@@ -121,7 +135,7 @@ describe("search", () => {
       });
   });
 
-  it("navigate through search tabs: tasks, projects, and users", () => {
+  it("navigate through search tabs: tasks, projects, users, and customers", () => {
     cy.getByData("search-modal-trigger").click();
 
     cy.getByData("tasks-button").click();
@@ -146,11 +160,24 @@ describe("search", () => {
         cy.wrap($el).should("contain", expectedProjects[index].title);
       });
 
+    cy.getByData("customers-button").click();
+    const expectedCustomers = [
+      { fullName: "Customer 1" },
+      { fullName: "Customer 2" },
+      { fullName: "Customer 3" },
+    ];
+
+    cy.getByData("search-list-item")
+      .should("have.length", expectedCustomers.length)
+      .each(($el, index) => {
+        cy.wrap($el).should("contain", expectedCustomers[index].fullName);
+      });
+
     cy.getByData("users-button").click();
     cy.getByData("search-list-item").should("have.length", 3);
   });
 
-  it.only("navigate through links", () => {
+  it("navigate through links", () => {
     cy.getByData("search-modal-trigger").click();
     cy.getByData("search-list-item").first().click();
     cy.location("pathname").should("contain", "/team/user-1");
@@ -166,5 +193,11 @@ describe("search", () => {
     cy.getByData("projects-button").click();
     cy.getByData("search-list-item").first().click();
     cy.location("pathname").should("contain", "/projects/1");
+
+    cy.getByData("search-modal").should("not.exist");
+    cy.getByData("search-modal-trigger").click();
+    cy.getByData("customers-button").click();
+    cy.getByData("search-list-item").first().click();
+    cy.location("pathname").should("contain", "/customers/1");
   });
 });

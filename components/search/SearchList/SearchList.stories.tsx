@@ -4,6 +4,7 @@ import { UserSearchListItem } from "../UserSearchListItem";
 import { TaskSearchListItem } from "../TaskSearchListItem";
 import { ProjectSearchListItem } from "../ProjectSearchListItem";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { CustomerSearchListItem } from "../CustomerSearchListItem";
 
 const mockedUsers = [
   {
@@ -149,6 +150,69 @@ const mockedProjects = [
   },
 ];
 
+const mockedCustomers = [
+  {
+    id: 1,
+    fullName: "Liam Henderson",
+    email: "liam.h89@gmail.com",
+    imageUrl: "https://i.pravatar.cc/150?u=101",
+  },
+  {
+    id: 2,
+    fullName: "Sarah Jenkins",
+    email: "s.jenkins@outlook.com",
+    imageUrl: "https://i.pravatar.cc/150?u=102",
+  },
+  {
+    id: 3,
+    fullName: "Kaito Tanaka",
+    email: "kaito.tanaka@icloud.com",
+    imageUrl: undefined,
+  },
+  {
+    id: 4,
+    fullName: "Amara Okoro",
+    email: "amara.design@yahoo.com",
+    imageUrl: undefined,
+  },
+  {
+    id: 5,
+    fullName: "Benjamin Foster",
+    email: "benny.foster@protonmail.com",
+    imageUrl: "/man.jpg",
+  },
+  {
+    id: 6,
+    fullName: "Isabella Rossi",
+    email: "i.rossi@me.com",
+    imageUrl: "/woman.jpg",
+  },
+  {
+    id: 7,
+    fullName: "Lucas Silva",
+    email: "lucas.silva92@gmail.com",
+    imageUrl: "/man.jpg",
+  },
+  {
+    id: 8,
+    fullName: "Chloe Zhang",
+    email: "chloe.zhang@fastmail.com",
+    imageUrl: undefined,
+  },
+  {
+    id: 9,
+    fullName: "Noah Williams",
+    email: "nwilliams.dev@gmail.com",
+    imageUrl: "/man.jpg",
+  },
+  {
+    id: 10,
+    fullName: "Zoe Kravitz",
+    email: "zoe.k@hushmail.com",
+    imageUrl: "/woman.jpg",
+  },
+];
+
 const meta = {
   title: "Components/search/SearchList",
   component: SearchList,
@@ -179,6 +243,14 @@ export const ProjectsSearchList = {
   args: {
     children: mockedProjects.map((project) => (
       <ProjectSearchListItem key={project.id} {...project} />
+    )),
+  },
+} satisfies Story;
+
+export const CustomersSearchList = {
+  args: {
+    children: mockedCustomers.map((customer) => (
+      <CustomerSearchListItem key={customer.id} {...customer} />
     )),
   },
 } satisfies Story;

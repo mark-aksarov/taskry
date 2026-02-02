@@ -1,6 +1,6 @@
 {
-  "TaskDetailPage": {
-    "heading": "Информация о задаче"
+  "CustomerDetailPage": {
+    "heading": "Информация о клиенте"
   },
 
   "DashboardErrorPage": {

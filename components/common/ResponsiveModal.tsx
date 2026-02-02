@@ -4,7 +4,7 @@ import { Modal, ModalProps } from "../ui/Modal";
 import { useMediaQuery } from "react-responsive";
 
 export const ResponsiveModal = (props: ModalProps) => {
-  const isMd = useMediaQuery({ query: "(max-width: 48rem)" });
+  const isMd = useMediaQuery({ query: "(max-width: 47.999rem)" });
 
   return <Modal fullscreen={isMd} {...props} />;
 };

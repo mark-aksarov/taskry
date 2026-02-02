@@ -20,7 +20,7 @@ export function CustomerDetailPage({
   customerDetailContainer,
   customerHeaderContainer,
 }: CustomerDetailPageProps) {
-  const t = useTranslations("app.TeamProfilePage");
+  const t = useTranslations("app.CustomerDetailPage");
 
   return (
     <PageContainer>

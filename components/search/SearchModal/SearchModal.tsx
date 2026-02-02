@@ -1,25 +1,27 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { SearchField } from "../SearchField";
 import { useTranslations } from "next-intl";
+import { SearchField } from "../SearchField";
 import { SearchModalContext } from "./SearchModalContext";
 import { Dialog, DialogHeader } from "@/components/ui/Dialog";
 import { SearchToggleButtonGroup } from "../SearchToggleButtonGroup";
 import { ResponsiveModal } from "@/components/common/ResponsiveModal";
 
-type SearchCategory = "users" | "projects" | "tasks";
+type SearchCategory = "users" | "projects" | "tasks" | "customers";
 
 interface SearchModalProps {
   usersSearchContainer: React.ReactNode;
   tasksSearchContainer: React.ReactNode;
   projectsSearchContainer: React.ReactNode;
+  customersSearchContainer: React.ReactNode;
 }
 
 export function SearchModal({
   usersSearchContainer,
   tasksSearchContainer,
   projectsSearchContainer,
+  customersSearchContainer,
 }: SearchModalProps) {
   const t = useTranslations("search.SearchModal");
 
@@ -62,7 +64,7 @@ export function SearchModal({
     <ResponsiveModal
       data-test="search-modal"
       isDismissable
-      className="w-[600px]"
+      className="md:w-[600px]"
     >
       <Dialog className="md:h-[calc(100dvh-64px)]">
         <DialogHeader>{t("dialogHeading")}</DialogHeader>
@@ -71,6 +73,7 @@ export function SearchModal({
           {searchCategory === "users" && usersSearchContainer}
           {searchCategory === "tasks" && tasksSearchContainer}
           {searchCategory === "projects" && projectsSearchContainer}
+          {searchCategory === "customers" && customersSearchContainer}
         </SearchModalContext.Provider>
       </Dialog>
     </ResponsiveModal>

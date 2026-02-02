@@ -13,6 +13,7 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { UsersSearchList as UsersSearchListStory } from "../SearchList/SearchList.stories";
 import { TasksSearchList as TasksSearchListStory } from "../SearchList/SearchList.stories";
 import { ProjectsSearchList as ProjectsSearchListStory } from "../SearchList/SearchList.stories";
+import { CustomersSearchList as CustomersSearchListStory } from "../SearchList/SearchList.stories";
 import { Default as SearchToggleButtonGroupStory } from "../SearchToggleButtonGroup/SearchToggleButtonGroup.stories";
 
 const meta = {
@@ -82,6 +83,12 @@ export const Default = {
         selectedToggleKey="projects"
       />
     ),
+    customersSearchContainer: (
+      <SearchContainer
+        searchResultList={<SearchList {...CustomersSearchListStory.args} />}
+        selectedToggleKey="customers"
+      />
+    ),
   },
 } satisfies Story;
 
@@ -105,6 +112,12 @@ export const WithEmptySection = {
         selectedToggleKey="projects"
       />
     ),
+    customersSearchContainer: (
+      <SearchContainer
+        searchResultList={<SearchEmptySection />}
+        selectedToggleKey="customers"
+      />
+    ),
   },
 } satisfies Story;
 
@@ -126,6 +139,12 @@ export const WithSkeletonContent = {
       <SearchContainer
         searchResultList={<SearchListSkeleton />}
         selectedToggleKey="projects"
+      />
+    ),
+    customersSearchContainer: (
+      <SearchContainer
+        searchResultList={<SearchListSkeleton />}
+        selectedToggleKey="customers"
       />
     ),
   },
