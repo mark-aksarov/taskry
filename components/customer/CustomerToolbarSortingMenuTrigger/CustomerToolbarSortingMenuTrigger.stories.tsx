@@ -3,7 +3,7 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { CustomerToolbarSortingMenuTrigger } from "./CustomerToolbarSortingMenuTrigger";
 
 const meta = {
-  title: "Components/projects/CustomerToolbarSortingMenuTrigger",
+  title: "Components/customers/CustomerToolbarSortingMenuTrigger",
   component: CustomerToolbarSortingMenuTrigger,
   tags: ["autodocs"],
   decorators: [withThemedBackground],

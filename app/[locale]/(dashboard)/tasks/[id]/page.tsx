@@ -3,7 +3,7 @@ import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { TaskDetailAltContainer } from "@/components/tasks/TaskDetailAltContainer";
 import { TaskDetailHeaderContainer } from "@/components/tasks/TaskDetailHeaderContainer";
 
-export default async function AppProfilePage({
+export default async function AppTaskDetailPage({
   params,
 }: {
   params: Promise<{ id: string }>;

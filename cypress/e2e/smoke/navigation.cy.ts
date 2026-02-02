@@ -16,7 +16,7 @@ describe("navigation smoke tests", () => {
         {
           id: 1,
           email: "owner@example.com",
-          fullName: "John Doe",
+          fullName: "Kevin Doe",
           companyId: 1,
           workspaceId: 1,
         },
@@ -88,5 +88,14 @@ describe("navigation smoke tests", () => {
 
     cy.visit("/en/profile");
     cy.getByData("user-card").should("contain", "John Doe");
+
+    cy.visit("/en/tasks/1");
+    cy.getByData("task-card").should("contain", "Task 1");
+
+    cy.visit("/en/projects/1");
+    cy.getByData("project-card").should("contain", "Project 1");
+
+    cy.visit("/en/customers/1");
+    cy.getByData("customer-card").should("contain", "Kevin Doe");
   });
 });

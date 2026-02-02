@@ -10,7 +10,7 @@ import { PageContainer } from "@/components/common/PageContainer";
 import { TaskDetailCard } from "@/components/tasks/TaskDetailCard";
 import { TaskDetailActions } from "@/components/tasks/TaskDetailActions";
 
-interface TaskPageProps {
+interface TaskDetailPageProps {
   taskDetailContainer: React.ReactNode;
   taskHeaderContainer: React.ReactNode;
 }
@@ -18,7 +18,7 @@ interface TaskPageProps {
 export function TaskDetailPage({
   taskDetailContainer,
   taskHeaderContainer,
-}: TaskPageProps) {
+}: TaskDetailPageProps) {
   const t = useTranslations("app.TaskDetailPage");
 
   return (

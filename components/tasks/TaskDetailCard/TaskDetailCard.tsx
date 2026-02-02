@@ -20,7 +20,7 @@ export function TaskDetailCard({
   const t = useTranslations("tasks.TaskDetailCard");
 
   return (
-    <DetailCard>
+    <DetailCard data-test="task-card">
       <DetailCardLeft>
         <DetailCardHeader>
           <DetailCardTitle>{t("title")}</DetailCardTitle>

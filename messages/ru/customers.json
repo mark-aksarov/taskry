@@ -3,6 +3,11 @@
     "text": "Всего клиентов"
   },
 
+  "CustomerDetailActions": {
+    "delete": "Удалить клиента",
+    "edit": "Редактировать клиента"
+  },
+
   "CustomerToolbarSortingMenuTrigger": {
     "byFullName": "По полному имени",
     "byCompany": "По компании"
@@ -65,6 +70,10 @@
     }
   },
 
+  "CustomerDetailCard": {
+    "title": "Информация о клиенте"
+  },
+
   "CustomerFormBaseFullNameTextField": {
     "label": "Полное имя",
     "placeholder": "Введите полное имя",
@@ -110,6 +119,10 @@
   },
 
   "CustomerDetailContainer": {
+    "unknownCompany": "Неизвестная компания"
+  },
+
+  "CustomerHeaderContainer": {
     "unknownCompany": "Неизвестная компания"
   },
 

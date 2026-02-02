@@ -51,7 +51,7 @@ async function TaskDetailAltContainerInner({
       status={task.status}
       attachments={task.attachments}
       subtasksList={
-        task.subtasks.length && (
+        task.subtasks.length !== 0 && (
           <SubtaskList>
             {task.subtasks.map((subtask) => (
               <SubtaskListItem

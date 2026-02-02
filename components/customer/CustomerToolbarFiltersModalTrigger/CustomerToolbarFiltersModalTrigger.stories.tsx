@@ -9,7 +9,7 @@ import { CustomerToolbarFiltersModalTrigger } from "./CustomerToolbarFiltersModa
 import { Default as CustomerFiltersFormStory } from "../CustomerFiltersForm/CustomerFiltersForm.stories";
 
 const meta = {
-  title: "Components/users/CustomerToolbarFiltersModalTrigger ",
+  title: "Components/customers/CustomerToolbarFiltersModalTrigger ",
   component: CustomerToolbarFiltersModalTrigger,
   tags: ["autodocs"],
   decorators: [withThemedBackground],

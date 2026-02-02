@@ -1,0 +1,37 @@
+import {
+  DetailCard,
+  DetailCardLeft,
+  DetailCardTitle,
+  DetailCardRight,
+  DetailCardHeader,
+} from "@/components/common/DetailCard";
+import { useTranslations } from "next-intl";
+import { CustomerDetailActions } from "../CustomerDetailActions";
+
+interface CustomerDetailCardProps {
+  customerHeader: React.ReactNode;
+  customerDetail: React.ReactNode;
+}
+
+export function CustomerDetailCard({
+  customerHeader,
+  customerDetail,
+}: CustomerDetailCardProps) {
+  const t = useTranslations("customers.CustomerDetailCard");
+
+  return (
+    <DetailCard data-test="customer-card">
+      <DetailCardLeft>
+        <DetailCardHeader>
+          <DetailCardTitle>{t("title")}</DetailCardTitle>
+        </DetailCardHeader>
+        <div className="p-6">{customerDetail}</div>
+      </DetailCardLeft>
+
+      <DetailCardRight>
+        {customerHeader}
+        <CustomerDetailActions />
+      </DetailCardRight>
+    </DetailCard>
+  );
+}

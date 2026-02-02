@@ -3,6 +3,11 @@
     "text": "Total Customers"
   },
 
+  "CustomerDetailActions": {
+    "delete": "Delete customer",
+    "edit": "Edit customer"
+  },
+
   "CustomerToolbarSortingMenuTrigger": {
     "byFullName": "By full name",
     "byCompany": "By company"
@@ -65,6 +70,10 @@
     }
   },
 
+  "CustomerDetailCard": {
+    "title": "Customer Information"
+  },
+
   "CustomerFormBaseFullNameTextField": {
     "label": "Full name",
     "placeholder": "Typing full name",
@@ -110,6 +119,10 @@
   },
 
   "CustomerDetailContainer": {
+    "unknownCompany": "Unknown company"
+  },
+
+  "CustomerHeaderContainer": {
     "unknownCompany": "Unknown company"
   },
 

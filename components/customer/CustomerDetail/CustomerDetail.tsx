@@ -7,7 +7,7 @@ import {
 import { useTranslations } from "next-intl";
 import { CustomerDetailLayout } from "./CustomerDetailLayout";
 
-interface CustomerDetailProps {
+export interface CustomerDetailProps {
   fullName: string;
   bio?: string;
   email: string;
@@ -55,13 +55,13 @@ export function CustomerDetail({
         </DetailInfo>
       }
       publicLinkSlot={
-        <DetailInfo className="md:border-none md:pb-0">
+        <DetailInfo className="border-none pb-0">
           <DetailTitle>{t("publicLink")}</DetailTitle>
           <DetailText>{publicLink || t("noPublicLink")}</DetailText>
         </DetailInfo>
       }
       companySlot={
-        <DetailInfo className="border-none pb-0">
+        <DetailInfo>
           <DetailTitle>{t("company")}</DetailTitle>
           <DetailText>{company?.name || t("noCompany")}</DetailText>
         </DetailInfo>

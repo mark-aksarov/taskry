@@ -3,7 +3,7 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { CustomerFiltersFormSkeleton } from "./CustomerFiltersFormSkeleton";
 
 const meta = {
-  title: "components/tasks/CustomerFiltersFormSkeleton",
+  title: "components/customers/CustomerFiltersFormSkeleton",
   component: CustomerFiltersFormSkeleton,
   tags: ["autodocs"],
   decorators: [

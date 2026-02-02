@@ -21,7 +21,7 @@ export function UserDetailCard({
   const t = useTranslations("users.UserDetailCard");
 
   return (
-    <DetailCard>
+    <DetailCard data-test="user-card">
       <DetailCardLeft>
         <DetailCardHeader>
           <DetailCardTitle>{t("title")}</DetailCardTitle>

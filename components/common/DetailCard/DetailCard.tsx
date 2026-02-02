@@ -3,15 +3,20 @@ import { Card } from "@/components/common/Card";
 
 interface DetailCardProps {
   className?: string;
+  "data-test"?: string;
   children: React.ReactNode;
 }
 
-export function DetailCard({ className, children }: DetailCardProps) {
+export function DetailCard({
+  className,
+  "data-test": dataTest,
+  children,
+}: DetailCardProps) {
   return (
     <Card
-      data-test="user-card"
+      data-test={dataTest}
       className={twMerge(
-        "m-auto flex max-h-full min-h-[500px] p-0 max-2xl:w-full max-md:hidden 2xl:w-[1024px]",
+        "m-auto flex max-h-full p-0 max-2xl:w-full max-md:hidden 2xl:w-[1024px]",
         className,
       )}
     >
