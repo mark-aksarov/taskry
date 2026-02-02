@@ -1,4 +1,4 @@
-import { SquareCheckBig } from "lucide-react";
+import { Check } from "lucide-react";
 import { twMerge } from "tailwind-merge";
 
 interface SubtaskListItemProps {
@@ -15,12 +15,10 @@ export function SubtaskListItem({
   return (
     <div className="flex items-start justify-between">
       <div className="flex items-start gap-2">
-        <SquareCheckBig
-          size={20}
-          strokeWidth={1.5}
-          absoluteStrokeWidth
+        <Check
+          size={16}
           className={twMerge(
-            "shrink-0",
+            "mt-0.5 shrink-0",
             isDone && "text-blue-600 dark:text-blue-700",
             !isDone && "text-gray-500 dark:text-gray-400",
           )}

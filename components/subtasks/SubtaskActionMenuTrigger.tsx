@@ -92,12 +92,12 @@ export function SubtaskActionMenuTrigger({
         renderDialogHeader={() => <ItemBaseActionMenuDialogHeader />}
         renderButton={() => (
           <ItemBaseActionMenuButton
-            className="-m-1.25 rounded-full"
+            className="-m-1.25 rounded-full text-gray-500 dark:text-gray-400"
             iconLeft={
               <EllipsisVertical
                 size={16}
                 absoluteStrokeWidth
-                strokeWidth={1.5}
+                strokeWidth={1.25}
               />
             }
           />

@@ -45,12 +45,12 @@ async function TaskDetailAltContainerInner({
       id={task.id}
       assignee={task.assignee}
       deadline={task.deadline}
-      description={task.description ?? undefined}
+      description={task.description}
       category={task.category}
       project={task.project}
       status={task.status}
       attachments={task.attachments}
-      subtasksCheckboxGroup={
+      subtasksList={
         task.subtasks.length && (
           <SubtaskList>
             {task.subtasks.map((subtask) => (
