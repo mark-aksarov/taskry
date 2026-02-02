@@ -2,7 +2,15 @@ import { cache } from "react";
 import prisma from "@/lib/prisma";
 import { UserFilters } from "@/lib/types";
 import { requireSession } from "../utils/requireSession";
-import { Prisma, TaskStatus } from "@/generated/prisma/client";
+import {
+  NotificationType,
+  Prisma,
+  TaskStatus,
+} from "@/generated/prisma/client";
+import { AccessDeniedError } from "../utils/error";
+import { CreateUserInputDTO } from "./user.dto";
+import { auth } from "@/lib/auth";
+import { getNotificationRecipients } from "../notification/notification.dal";
 
 export const getUser = cache(
   async <T extends Prisma.UserSelect>(id: string, select: T) => {
@@ -92,6 +100,71 @@ export const getUserCount = cache(async (filters?: UserFilters) => {
   });
 });
 
+export const createUser = async (input: CreateUserInputDTO) => {
+  // Authorization
+  const {
+    user: { id: userId, workspaceId },
+  } = await requireSession();
+
+  // ACL
+  const permission = await auth.api.userHasPermission({
+    body: {
+      userId,
+      permission: {
+        user: ["create"],
+      },
+    },
+  });
+
+  if (!permission.success) {
+    throw new AccessDeniedError("You do not have permission to create user.");
+  }
+
+  // Check related resources access
+  await checkUserResourcesAccess(workspaceId, input.positionId);
+
+  return await prisma.$transaction(async (tx) => {
+    const { user } = await auth.api.createUser({
+      body: {
+        email: input.email,
+        password: input.password,
+        name: input.fullName,
+        role: "user",
+
+        data: {
+          workspaceId,
+          positionId: input.positionId,
+          bio: input.bio,
+          birthdate: input.birthdate,
+          phoneNumber: input.phoneNumber,
+          address: input.address,
+          publicLink: input.publicLink,
+        },
+      },
+    });
+
+    auth.api.sendVerificationEmail({ body: { email: input.email } });
+
+    const recipients = await getNotificationRecipients(tx, workspaceId, userId);
+
+    if (recipients.length > 0) {
+      await tx.notification.createMany({
+        data: recipients.map((recipient) => ({
+          type: NotificationType.userAdded,
+          actorId: userId,
+          recipientId: recipient.id,
+          workspaceId,
+          userId: user.id,
+          userFullName: user.name,
+          isRead: false,
+        })),
+      });
+    }
+
+    return user;
+  });
+};
+
 export const deleteUsers = async (ids: string[]) => {
   const {
     user: { workspaceId },
@@ -105,6 +178,21 @@ export const deleteUsers = async (ids: string[]) => {
 /**
  * HELPERS
  */
+
+async function checkUserResourcesAccess(
+  workspaceId: number,
+  positionId?: number,
+) {
+  if (positionId) {
+    const category = await prisma.position.findUnique({
+      where: { id: positionId, workspaceId },
+    });
+
+    if (!category) {
+      throw new AccessDeniedError("Position access denied or not found");
+    }
+  }
+}
 
 export function buildUserWhereClause(
   workspaceId: number,

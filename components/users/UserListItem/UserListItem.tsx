@@ -65,7 +65,7 @@ export function UserListItem({
   );
 
   return (
-    <ListItem>
+    <ListItem data-test="user-list-item">
       <Checkbox
         aria-label={t("checkboxAriaLabel")}
         isSelected={isSelected(id)}

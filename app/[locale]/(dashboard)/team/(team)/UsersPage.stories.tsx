@@ -7,6 +7,7 @@ import { UserGrid } from "@/components/users/UserGrid";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { usePathname, useRouter } from "next/navigation";
 import { PageDecorator } from "@/.storybook/PageDecorator";
+import { NewUserForm } from "@/components/users/NewUserForm";
 import { UserFiltersForm } from "@/components/users/UserFiltersForm";
 import { NewPositionForm } from "@/components/users/NewPositionForm";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
@@ -15,6 +16,7 @@ import { Default as UserGridStory } from "@/components/users/UserGrid/UserGrid.s
 import { EntityContainerPresentation } from "@/components/common/EntityContainerPresentation";
 import { UserToolbarActionsMenuTrigger } from "@/components/users/UserToolbarActionsMenuTrigger";
 import { UserToolbarFiltersModalTrigger } from "@/components/users/UserToolbarFiltersModalTrigger";
+import { Default as UserFormBaseStory } from "@/components/users/UserFormBase/UserFormBase.stories";
 import { UserToolbarCreateNewMenuTrigger } from "@/components/users/UserToolbarCreateNewMenuTrigger";
 import { Default as UserFiltersFormStory } from "@/components/users/UserFiltersForm/UserFiltersForm.stories";
 import { Default as PositionFormBaseStory } from "@/components/users/PositionFormBase/PositionFormBase.stories";
@@ -47,7 +49,8 @@ export const Default = {
     ),
     userToolbarCreateNewMenuTrigger: (
       <UserToolbarCreateNewMenuTrigger
-        newUserForm={<></>}
+        canCreateUser
+        newUserFormContainer={<NewUserForm {...UserFormBaseStory.args} />}
         newPositionForm={<NewPositionForm {...PositionFormBaseStory.args} />}
       />
     ),

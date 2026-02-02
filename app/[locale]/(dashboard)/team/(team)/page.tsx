@@ -8,11 +8,14 @@ import {
 import { z } from "zod";
 import { UsersPage } from "./UsersPage";
 import { UsersPageEmpty } from "./UsersPageEmpty";
+import { hasOwnerRole } from "@/lib/utils/hasOwnerRole";
 import { getUserCount } from "@/lib/data/user/user.dal";
+import { hasGuestRole } from "@/lib/utils/hasGuestRole";
 import { deleteUsers } from "@/lib/actions/user/deleteUsers";
 import { UsersContainer } from "@/components/users/UsersContainer";
 import { createPosition } from "@/lib/actions/position/createPosition";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
+import { NewUserFormContainer } from "@/components/users/NewUserFormContainer";
 import { NewPositionForm } from "@/components/users/NewPositionForm/NewPositionForm";
 import { UserFiltersFormContainer } from "@/components/users/UserFiltersFormContainer";
 import { UserToolbarActionsMenuTrigger } from "@/components/users/UserToolbarActionsMenuTrigger";
@@ -45,6 +48,9 @@ export default async function AppUsersPage({
   // Get count
   const count = await getUserCount();
 
+  const isOwner = await hasOwnerRole();
+  const guestMode = await hasGuestRole();
+
   if (!count) return <UsersPageEmpty />;
 
   return (
@@ -59,7 +65,9 @@ export default async function AppUsersPage({
       }
       userToolbarCreateNewMenuTrigger={
         <UserToolbarCreateNewMenuTrigger
-          newUserForm={<></>}
+          showUserMenuItem={isOwner || guestMode}
+          guestMode={guestMode}
+          newUserFormContainer={<NewUserFormContainer />}
           newPositionForm={<NewPositionForm formAction={createPosition} />}
         />
       }

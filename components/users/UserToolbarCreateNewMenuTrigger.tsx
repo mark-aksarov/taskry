@@ -1,22 +1,31 @@
 "use client";
 
+import {
+  ToolbarCreateNewButton,
+  ToolbarCreateNewMenuTrigger,
+} from "../common/Toolbar";
+
 import { useState } from "react";
 import { Key } from "react-aria";
 import { Item } from "react-stately";
 import { useTranslations } from "next-intl";
+import { NewUserModal } from "./NewUserModal";
 import { DialogHeader } from "@/components/ui/Dialog";
+import { NewPositionModal } from "./NewPositionModal";
 import { BriefcaseBusiness, Users } from "lucide-react";
-import { ToolbarCreateNewButton } from "../common/Toolbar";
-import { NewPositionModal } from "./NewPositionModal/NewPositionModal";
-import { ResponsiveMenuTrigger } from "@/components/common/ResponsiveMenuTrigger";
+import { GuestModeModal } from "../common/GuestModeModal";
 
 interface UserToolbarCreateNewMenuTriggerProps {
-  newUserForm: React.ReactNode;
+  showUserMenuItem: boolean;
+  guestMode: boolean;
+  newUserFormContainer: React.ReactNode;
   newPositionForm: React.ReactNode;
 }
 
 export function UserToolbarCreateNewMenuTrigger({
-  newUserForm,
+  showUserMenuItem,
+  guestMode,
+  newUserFormContainer,
   newPositionForm,
 }: UserToolbarCreateNewMenuTriggerProps) {
   const t = useTranslations("users.UserToolbarCreateNewMenuTrigger");
@@ -25,8 +34,16 @@ export function UserToolbarCreateNewMenuTrigger({
   const [isOpenUserModal, setIsOpenUserModal] = useState(false);
   const [isOpenPositionModal, setIsOpenPositionModal] = useState(false);
 
-  // Menu actions: show user modal, show position modal
+  // Guest mode
+  const [isGuestModeModalOpen, setIsGuestModeModalOpen] = useState(false);
+
+  // Menu actions: show guest modal, show user modal, show position modal
   function handleAction(key: Key) {
+    if (guestMode) {
+      setIsGuestModeModalOpen(true);
+      return;
+    }
+
     if (key === "user") {
       setIsOpenUserModal(true);
     } else if (key === "position") {
@@ -36,7 +53,7 @@ export function UserToolbarCreateNewMenuTrigger({
 
   return (
     <>
-      <ResponsiveMenuTrigger
+      <ToolbarCreateNewMenuTrigger
         onAction={handleAction}
         renderDialogHeader={() => (
           <DialogHeader>{t("dialogHeading")}</DialogHeader>
@@ -48,21 +65,36 @@ export function UserToolbarCreateNewMenuTrigger({
           />
         )}
       >
-        <Item textValue={t("items.user")} key="user">
-          <Users size={16} strokeWidth={1.5} absoluteStrokeWidth />
-          {t("items.user")}
-        </Item>
+        {showUserMenuItem ? (
+          <Item textValue={t("items.user")} key="user">
+            <Users size={16} strokeWidth={1.5} absoluteStrokeWidth />
+            {t("items.user")}
+          </Item>
+        ) : null}
         <Item textValue={t("items.position")} key="position">
           <BriefcaseBusiness size={16} strokeWidth={1.5} absoluteStrokeWidth />
           {t("items.position")}
         </Item>
-      </ResponsiveMenuTrigger>
+      </ToolbarCreateNewMenuTrigger>
+
+      {/* Modal for creating a user */}
+      <NewUserModal
+        newUserFormContainer={newUserFormContainer}
+        isOpen={isOpenUserModal}
+        onOpenChange={setIsOpenUserModal}
+      />
 
       {/* Modal for creating a position */}
       <NewPositionModal
         newPositionForm={newPositionForm}
         isOpen={isOpenPositionModal}
         onOpenChange={setIsOpenPositionModal}
+      />
+
+      {/* Guest mode modal */}
+      <GuestModeModal
+        isOpen={isGuestModeModalOpen}
+        onOpenChange={setIsGuestModeModalOpen}
       />
     </>
   );

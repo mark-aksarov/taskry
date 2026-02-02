@@ -16,7 +16,7 @@ export function VerifyEmailPage({ email }: VerifyEmailPageProps) {
   const t = useTranslations("app.VerifyEmailPage");
 
   return (
-    <AuthCard>
+    <AuthCard data-test="verify-email-card">
       <AuthCardHeader>
         <AuthCardHeading>{t("heading")}</AuthCardHeading>
         <AuthCardSubtitle>{t("subtitle", { email })}</AuthCardSubtitle>

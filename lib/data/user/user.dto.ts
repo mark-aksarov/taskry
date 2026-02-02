@@ -48,3 +48,15 @@ export interface UserSearchItemDTO {
   email: string;
   imageUrl?: string;
 }
+
+export interface CreateUserInputDTO {
+  email: string;
+  password: string;
+  fullName: string;
+  positionId?: number;
+  bio?: string;
+  birthdate?: Date;
+  phoneNumber?: string;
+  address?: string;
+  publicLink?: string;
+}

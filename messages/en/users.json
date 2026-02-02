@@ -1,4 +1,74 @@
 {
+  "NewUserModal": {
+    "title": "New User",
+    "submitButtonLabel": "Create User"
+  },
+
+  "UserFormBaseFullNameTextField": {
+    "label": "Full name",
+    "placeholder": "Typing full name",
+
+    "validation": {
+      "required": "Full name is required",
+      "tooLong": "Full name is too long"
+    }
+  },
+
+  "UserFormBaseBioTextField": {
+    "label": "Bio",
+    "placeholder": "Typing bio"
+  },
+
+  "UserFormBaseAddressTextField": {
+    "label": "Address",
+    "placeholder": "Typing address"
+  },
+
+  "UserFormBaseBirthdateDatePicker": {
+    "label": "Birthdate"
+  },
+
+  "UserFormBaseEmailTextField": {
+    "label": "Email",
+    "placeholder": "Typing email",
+
+    "validation": {
+      "required": "Please enter your email address.",
+      "format": "Invalid format. The email address must be in the format `user@example.com`."
+    }
+  },
+
+  "UserFormBasePasswordTextField": {
+    "password": {
+      "label": "Password",
+      "placeholder": "Enter your password"
+    },
+
+    "validation": {
+      "required": "Please enter your password.",
+      "tooShort": "The password is too short. It must contain at least {minLength} characters."
+    }
+  },
+
+  "UserFormBasePhoneNumberTextField": {
+    "label": "Phone number",
+    "placeholder": "Typing phone number"
+  },
+
+  "UserFormBasePublicLinkTextField": {
+    "label": "Public link",
+    "placeholder": "Typing public link",
+
+    "validation": {
+      "format": "Invalid format. The public link must be in the format `https://example.com`."
+    }
+  },
+
+  "UserFormBasePositionSelect": {
+    "label": "Position",
+    "placeholder": "Typing position"
+  },
+
   "TotalUsersCard": {
     "text": "Total Users"
   },

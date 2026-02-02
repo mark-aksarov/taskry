@@ -1,4 +1,74 @@
 {
+  "NewUserModal": {
+    "title": "Новый пользователь",
+    "submitButtonLabel": "Создать пользователя"
+  },
+
+  "UserFormBaseFullNameTextField": {
+    "label": "Полное имя",
+    "placeholder": "Введите полное имя",
+
+    "validation": {
+      "required": "Полное имя обязательно для заполнения",
+      "tooLong": "Полное имя слишком длинное"
+    }
+  },
+
+  "UserFormBaseBioTextField": {
+    "label": "О себе",
+    "placeholder": "Введите информацию о себе"
+  },
+
+  "UserFormBaseAddressTextField": {
+    "label": "Адрес",
+    "placeholder": "Введите адрес"
+  },
+
+  "UserFormBaseBirthdateDatePicker": {
+    "label": "Дата рождения"
+  },
+
+  "UserFormBaseEmailTextField": {
+    "label": "Электронная почта",
+    "placeholder": "Введите адрес электронной почты",
+
+    "validation": {
+      "required": "Пожалуйста, укажите адрес электронной почты",
+      "format": "Неверный формат. Адрес электронной почты должен быть в формате `user@example.com`."
+    }
+  },
+
+  "UserFormBasePasswordTextField": {
+    "password": {
+      "label": "Пароль",
+      "placeholder": "Введите ваш пароль"
+    },
+
+    "validation": {
+      "required": "Пожалуйста, введите ваш пароль.",
+      "tooShort": "Пароль слишком короткий. Он должен содержать не менее {minLength} символов."
+    }
+  },
+
+  "UserFormBasePhoneNumberTextField": {
+    "label": "Номер телефона",
+    "placeholder": "Введите номер телефона"
+  },
+
+  "UserFormBasePublicLinkTextField": {
+    "label": "Публичная ссылка",
+    "placeholder": "Введите публичную ссылку",
+
+    "validation": {
+      "format": "Неверный формат. Публичная ссылка должна быть в формате `https://example.com`."
+    }
+  },
+
+  "UserFormBasePositionSelect": {
+    "label": "Должность",
+    "placeholder": "Выберите должность"
+  },
+
   "TotalUsersCard": {
     "text": "Всего пользователей"
   },

@@ -11,6 +11,7 @@ export async function requireSessionOrRedirect() {
   if (!session) {
     const locale = await getLocale();
     redirect({ href: "/sign-in", locale });
-    return { status: "error", message: null };
   }
+
+  return session;
 }

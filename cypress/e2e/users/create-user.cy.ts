@@ -1,0 +1,115 @@
+describe("creates a new project", () => {
+  beforeEach(() => {
+    cy.viewport(1440, 900);
+
+    cy.task("db:reset");
+    cy.task("db:seed", {});
+    cy.signIn("owner@example.com", "12345abc");
+    cy.visit("/en/team");
+  });
+
+  it("can create an user and send notifications", () => {
+    cy.getByData("user-toolbar-create-new-menu-trigger")
+      .filter(":visible")
+      .click();
+    cy.getMenuItem("user").click();
+
+    // fill form
+    cy.get('input[name="fullName"]').clear().type("Created User Name");
+    cy.get('textarea[name="bio"]').clear().type("Created User Bio");
+    cy.setDatePickerDate("birthdate-date-picker", "01", "07", "1997");
+    cy.get('input[name="email"]').clear().type("created-user@test.com");
+    cy.get('input[name="password"]').clear().type("12345abc");
+    cy.get('input[name="phoneNumber"]').clear().type("+380990000001");
+    cy.get('input[name="publicLink"]')
+      .clear()
+      .type("https://example.com/public-link");
+    cy.get('input[name="address"]').clear().type("Created User Address");
+    cy.getByData("position-select").click();
+    cy.getSelectOption("3").click();
+
+    // submit
+    cy.get('button[type="submit"]').click();
+
+    // assert
+    cy.getByData("users-list").within(() => {
+      cy.contains("Created User Name");
+      cy.contains("created-user@test.com");
+      cy.contains("Developer");
+    });
+
+    // check notifications
+    cy.checkNotifications(0);
+
+    // sign in as user-2
+    cy.signIn("user@example.com", "12345abc");
+    cy.visit("/en/team");
+
+    // check notifications
+    cy.checkNotifications(1, [
+      {
+        target: "Created User Name",
+        actor: "John Doe",
+        action: "added a new user",
+      },
+    ]);
+
+    // sign in as user-3
+    cy.signIn("guest@example.com", "12345abc");
+    cy.visit("/en/team");
+
+    // check notifications
+    cy.checkNotifications(1, [
+      {
+        target: "Created User Name",
+        actor: "John Doe",
+        action: "added a new user",
+      },
+    ]);
+
+    // sign in as Created User
+    cy.signIn("created-user@test.com", "12345abc");
+    cy.visit("/en/profile");
+    cy.getByData("verify-email-card").should(
+      "contain",
+      "created-user@test.com",
+    );
+  });
+
+  describe.only("access control (RBAC)", () => {
+    it("allows a user with 'owner' role to open the create user modal", () => {
+      cy.signIn("owner@example.com", "12345abc");
+      cy.visit("/en/team");
+
+      cy.getByData("user-toolbar-create-new-menu-trigger")
+        .filter(":visible")
+        .click();
+      cy.getMenuItem("user").should("be.visible").click();
+      cy.getByData("new-user-modal").should("be.visible");
+    });
+
+    it("hides the 'user' menu item for a user with 'user' role", () => {
+      cy.signIn("user@example.com", "12345abc");
+      cy.visit("/en/team");
+
+      cy.getByData("user-toolbar-create-new-menu-trigger")
+        .filter(":visible")
+        .click();
+
+      // Verify the 'user' option does not exist or is not visible
+      cy.getMenuItem("user").should("not.exist");
+    });
+
+    it("shows a restriction modal when a 'guest' attempts to edit", () => {
+      cy.signIn("guest@example.com", "12345abc");
+      cy.visit("/en/team");
+
+      cy.getByData("user-toolbar-create-new-menu-trigger")
+        .filter(":visible")
+        .click();
+
+      cy.getMenuItem("user").click();
+      cy.getByData("guest-mode-modal").should("be.visible");
+    });
+  });
+});
