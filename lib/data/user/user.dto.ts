@@ -3,6 +3,18 @@ export type UserSummaryDTO = {
   fullName: string;
 };
 
+export interface UserFormDataDTO {
+  id: string;
+  fullName: string;
+  bio?: string;
+  imageUrl?: string;
+  phoneNumber?: string;
+  address?: string;
+  publicLink?: string;
+  birthdate?: Date;
+  positionId?: number;
+}
+
 export interface UserDetailDTO {
   id: string;
   fullName: string;
@@ -53,6 +65,17 @@ export interface CreateUserInputDTO {
   email: string;
   password: string;
   fullName: string;
+  positionId?: number;
+  bio?: string;
+  birthdate?: Date;
+  phoneNumber?: string;
+  address?: string;
+  publicLink?: string;
+}
+
+export interface UpdateUserInputDTO {
+  id: string;
+  fullName?: string;
   positionId?: number;
   bio?: string;
   birthdate?: Date;

@@ -1,15 +1,16 @@
-import { cache } from "react";
-import prisma from "@/lib/prisma";
-import { UserFilters } from "@/lib/types";
-import { requireSession } from "../utils/requireSession";
 import {
-  NotificationType,
   Prisma,
   TaskStatus,
+  NotificationType,
 } from "@/generated/prisma/client";
-import { AccessDeniedError } from "../utils/error";
-import { CreateUserInputDTO } from "./user.dto";
+
+import { cache } from "react";
+import prisma from "@/lib/prisma";
 import { auth } from "@/lib/auth";
+import { UserFilters } from "@/lib/types";
+import { AccessDeniedError } from "../utils/error";
+import { requireSession } from "../utils/requireSession";
+import { CreateUserInputDTO, UpdateUserInputDTO } from "./user.dto";
 import { getNotificationRecipients } from "../notification/notification.dal";
 
 export const getUser = cache(
@@ -162,6 +163,66 @@ export const createUser = async (input: CreateUserInputDTO) => {
     }
 
     return user;
+  });
+};
+
+export const updateUser = async (input: UpdateUserInputDTO) => {
+  // Authorization
+  const {
+    user: { id: userId, workspaceId },
+  } = await requireSession();
+
+  // ACL
+  const permission = await auth.api.userHasPermission({
+    body: {
+      userId: userId,
+      permission: {
+        user: ["update"],
+      },
+    },
+  });
+
+  if (!permission.success) {
+    throw new AccessDeniedError("You do not have permission to update users.");
+  }
+
+  // Check related resources access
+  await checkUserResourcesAccess(workspaceId, input.positionId);
+
+  return await prisma.$transaction(async (tx) => {
+    const updatedUser = await tx.user.update({
+      where: {
+        id: input.id,
+        workspaceId,
+      },
+      data: {
+        fullName: input.fullName ?? Prisma.skip,
+        bio: input.bio ?? Prisma.skip,
+        positionId: input.positionId ?? Prisma.skip,
+        phoneNumber: input.phoneNumber ?? Prisma.skip,
+        publicLink: input.publicLink ?? Prisma.skip,
+        birthdate: input.birthdate ?? Prisma.skip,
+        address: input.address ?? Prisma.skip,
+      },
+    });
+
+    const recipients = await getNotificationRecipients(tx, workspaceId, userId);
+
+    if (recipients.length > 0) {
+      await tx.notification.createMany({
+        data: recipients.map((recipient) => ({
+          type: NotificationType.customerChanged,
+          actorId: userId,
+          recipientId: recipient.id,
+          workspaceId,
+          userId: updatedUser.id,
+          userFullName: updatedUser.fullName,
+          isRead: false,
+        })),
+      });
+    }
+
+    return updatedUser;
   });
 };
 

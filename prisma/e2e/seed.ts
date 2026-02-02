@@ -172,4 +172,10 @@ export async function seedE2E(payload: E2ESeedPayload) {
       data: payload.comments,
     });
   }
+
+  if (payload.users) {
+    await prisma.user.createMany({
+      data: payload.users,
+    });
+  }
 }

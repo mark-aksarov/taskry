@@ -49,7 +49,8 @@ export const Default = {
     ),
     userToolbarCreateNewMenuTrigger: (
       <UserToolbarCreateNewMenuTrigger
-        canCreateUser
+        showUserMenuItem
+        guestMode={false}
         newUserFormContainer={<NewUserForm {...UserFormBaseStory.args} />}
         newPositionForm={<NewPositionForm {...PositionFormBaseStory.args} />}
       />

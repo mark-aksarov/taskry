@@ -8,7 +8,7 @@ import z from "zod";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
-import { getUserDetail } from "@/lib/data/user/user.service";
+import { getUserDetail, getUserFormData } from "@/lib/data/user/user.service";
 
 export async function GET(
   req: NextRequest,
@@ -39,6 +39,14 @@ export async function GET(
     const { id } = parse.data;
 
     // Fetch user
+    const { searchParams } = req.nextUrl;
+    const view = searchParams.get("view");
+
+    if (view === "edit") {
+      const project = await getUserFormData(id);
+      return NextResponse.json(project);
+    }
+
     const user = await getUserDetail(id);
 
     return NextResponse.json(user);

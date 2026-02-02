@@ -3,6 +3,7 @@ import {
   UserDetailDTO,
   UserSearchDTO,
   UserSummaryDTO,
+  UserFormDataDTO,
 } from "./user.dto";
 
 import { UserFilters } from "@/lib/types";
@@ -44,6 +45,38 @@ export const getUserDetail = async (
     bio: user.bio ?? undefined,
     address: user.address ?? undefined,
     position: user.position ? user.position : undefined,
+  };
+};
+
+export const getUserFormData = async (
+  id: string,
+): Promise<UserFormDataDTO | null> => {
+  const user = await getUser(id, {
+    id: true,
+    fullName: true,
+    phoneNumber: true,
+    imageUrl: true,
+    publicLink: true,
+    birthdate: true,
+    bio: true,
+    address: true,
+    positionId: true,
+  });
+
+  if (!user) {
+    return null;
+  }
+
+  return {
+    id: user.id,
+    fullName: user.fullName,
+    phoneNumber: user.phoneNumber ?? undefined,
+    imageUrl: user.imageUrl ?? undefined,
+    publicLink: user.publicLink ?? undefined,
+    birthdate: user.birthdate ?? undefined,
+    bio: user.bio ?? undefined,
+    address: user.address ?? undefined,
+    positionId: user.positionId ?? undefined,
   };
 };
 

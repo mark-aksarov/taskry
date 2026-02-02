@@ -4,6 +4,11 @@
     "submitButtonLabel": "Создать пользователя"
   },
 
+  "EditUserModal": {
+    "title": "Изменить пользователя",
+    "submitButtonLabel": "Обновить пользователя"
+  },
+
   "UserFormBaseFullNameTextField": {
     "label": "Полное имя",
     "placeholder": "Введите полное имя",

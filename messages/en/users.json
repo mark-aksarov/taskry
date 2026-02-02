@@ -4,6 +4,11 @@
     "submitButtonLabel": "Create User"
   },
 
+  "EditUserModal": {
+    "title": "Edit user",
+    "submitButtonLabel": "Update user"
+  },
+
   "UserFormBaseFullNameTextField": {
     "label": "Full name",
     "placeholder": "Typing full name",

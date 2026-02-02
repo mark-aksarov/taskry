@@ -1,11 +1,13 @@
 import { fn } from "storybook/test";
 import { UserGrid } from "./UserGrid";
 import { UserGridItem } from "../UserGridItem";
+import { EditUserForm } from "../EditUserForm";
 import { UserDetailModal } from "../UserDetailModal";
 import type { Meta, StoryObj } from "@storybook/react";
 import { UserDetailBottomSheet } from "../UserDetailBottomSheet";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { UserItemActionMenuTrigger } from "../UserItemActionMenuTrigger";
+import { Default as UserFormBaseStory } from "../UserFormBase/UserFormBase.stories";
 import { Default as UserDetailModalStory } from "../UserDetailModal/UserDetailModal.stories";
 import { Default as UserDetailBottomSheetStory } from "../UserDetailBottomSheet/UserDetailBottomSheet.stories";
 
@@ -120,6 +122,9 @@ export const Default = {
         {...user}
         menuTrigger={
           <UserItemActionMenuTrigger
+            showUserMenuItem
+            guestMode={false}
+            editUserFormContainer={<EditUserForm {...UserFormBaseStory.args} />}
             userId={user.id}
             userFullName={user.fullName}
             deleteAction={fn()}

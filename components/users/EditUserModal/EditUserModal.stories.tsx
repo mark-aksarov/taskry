@@ -1,5 +1,5 @@
-import { NewUserForm } from "../NewUserForm";
-import { NewUserModal } from "./NewUserModal";
+import { EditUserForm } from "../EditUserForm";
+import { EditUserModal } from "./EditUserModal";
 import { Button } from "@/components/ui/Button";
 import { DialogTrigger } from "react-aria-components";
 import { UserFormBaseSkeleton } from "../UserFormBase";
@@ -8,31 +8,31 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { Default as UserFormBaseStory } from "../UserFormBase/UserFormBase.stories";
 
 const meta = {
-  title: "Components/users/NewUserModal",
-  component: NewUserModal,
+  title: "Components/users/EditUserModal",
+  component: EditUserModal,
   tags: ["autodocs"],
   decorators: [
     (Story) => (
       <DialogTrigger>
-        <Button label="New user" />
+        <Button label="Edit user" />
         <Story />
       </DialogTrigger>
     ),
     withThemedBackground,
   ],
-} satisfies Meta<typeof NewUserModal>;
+} satisfies Meta<typeof EditUserModal>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    newUserFormContainer: <NewUserForm {...UserFormBaseStory.args} />,
+    editUserFormContainer: <EditUserForm {...UserFormBaseStory.args} />,
   },
 } satisfies Story;
 
 export const Skeleton = {
   args: {
-    newUserFormContainer: <UserFormBaseSkeleton />,
+    editUserFormContainer: <UserFormBaseSkeleton />,
   },
 } satisfies Story;

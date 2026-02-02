@@ -11,12 +11,15 @@ import { UserFilters } from "@/lib/types";
 import { UserListItem } from "../UserListItem";
 import { UserGridItem } from "../UserGridItem";
 import { UserDetailModal } from "../UserDetailModal";
+import { hasOwnerRole } from "@/lib/utils/hasOwnerRole";
+import { hasGuestRole } from "@/lib/utils/hasGuestRole";
 import { getUserList } from "@/lib/data/user/user.service";
 import { UserListItemDTO } from "@/lib/data/user/user.dto";
 import { deleteUsers } from "@/lib/actions/user/deleteUsers";
-import { ViewModeLayout } from "@/components/common/ViewMode";
 import { UserDetailContainer } from "../UserDetailContainer";
+import { ViewModeLayout } from "@/components/common/ViewMode";
 import { UserDetailBottomSheet } from "../UserDetailBottomSheet";
+import { EditUserFormContainer } from "../EditUserFormContainer";
 import { UserItemActionMenuTrigger } from "../UserItemActionMenuTrigger";
 
 interface UsersContainerProps {
@@ -49,6 +52,9 @@ export async function UsersContainer({
     position: user.position,
   });
 
+  const isOwner = await hasOwnerRole();
+  const guestMode = await hasGuestRole();
+
   return (
     <EntityPaginationProvider>
       <ViewModeLayout
@@ -59,6 +65,11 @@ export async function UsersContainer({
                 key={user.id}
                 menuTrigger={
                   <UserItemActionMenuTrigger
+                    showUserMenuItem={isOwner || guestMode}
+                    guestMode={guestMode}
+                    editUserFormContainer={
+                      <EditUserFormContainer userId={user.id} />
+                    }
                     userId={user.id}
                     userFullName={user.fullName}
                     deleteAction={deleteUsers}
@@ -92,6 +103,11 @@ export async function UsersContainer({
                 key={user.id}
                 menuTrigger={
                   <UserItemActionMenuTrigger
+                    showUserMenuItem={isOwner || guestMode}
+                    guestMode={guestMode}
+                    editUserFormContainer={
+                      <EditUserFormContainer userId={user.id} />
+                    }
                     userId={user.id}
                     userFullName={user.fullName}
                     deleteAction={deleteUsers}

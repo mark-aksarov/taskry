@@ -10,12 +10,13 @@ import { ActionFn, ActionState } from "@/lib/actions/types";
 import { FormErrorText } from "@/components/common/FormErrorText";
 import { UserFormBaseBioTextField } from "./UserFormBaseBioTextField";
 import { UserFormBaseEmailTextField } from "./UserFormBaseEmailTextField";
+import { UserFormBaseAddressTextField } from "./UserFormBaseAddressTextField";
 import { startTransition, useActionState, useContext, useEffect } from "react";
+import { UserFormBasePasswordTextField } from "./UserFormBasePasswordTextField";
 import { UserFormBaseFullNameTextField } from "./UserFormBaseFullNameTextField";
 import { UserFormBasePublicLinkTextField } from "./UserFormBasePublicLinkTextField";
 import { UserFormBaseBirthdateDatePicker } from "./UserFormBaseBirthdateDatePicker";
 import { UserFormBasePhoneNumberTextField } from "./UserFormBasePhoneNumberTextField";
-import { UserFormBaseAddressTextField } from "./UserFormBaseAddressTextField";
 
 const initialState: ActionState = {
   status: null,
@@ -32,7 +33,8 @@ export interface UserFormBaseProps {
   phoneNumberDefaultValue?: string;
   publicLinkDefaultValue?: string;
   addressDefaultValue?: string;
-  passwordTextField?: React.ReactNode;
+  showPasswordTextField?: React.ReactNode;
+  showEmailTextField?: React.ReactNode;
   positionSelect: React.ReactNode;
   formAction: ActionFn<ActionState, FormData>;
 }
@@ -47,7 +49,8 @@ export function UserFormBase({
   phoneNumberDefaultValue,
   publicLinkDefaultValue,
   addressDefaultValue,
-  passwordTextField,
+  showPasswordTextField,
+  showEmailTextField,
   positionSelect,
   formAction,
 }: UserFormBaseProps) {
@@ -79,8 +82,10 @@ export function UserFormBase({
         <UserFormBaseFullNameTextField defaultValue={fullNameDefaultValue} />
         <UserFormBaseBioTextField defaultValue={bioDefaultValue} />
         <UserFormBaseBirthdateDatePicker defaultValue={birthdateDefaultValue} />
-        <UserFormBaseEmailTextField defaultValue={emailDefaultValue} />
-        {passwordTextField}
+        {showEmailTextField && (
+          <UserFormBaseEmailTextField defaultValue={emailDefaultValue} />
+        )}
+        {showPasswordTextField && <UserFormBasePasswordTextField />}
         <UserFormBasePhoneNumberTextField
           defaultValue={phoneNumberDefaultValue}
         />
