@@ -63,30 +63,6 @@ export const auth = betterAuth({
         type: "string",
         input: false,
       },
-      positionId: {
-        type: "number",
-        input: false,
-      },
-      bio: {
-        type: "string",
-        input: false,
-      },
-      birthdate: {
-        type: "date",
-        input: false,
-      },
-      phoneNumber: {
-        type: "string",
-        input: false,
-      },
-      address: {
-        type: "string",
-        input: false,
-      },
-      publicLink: {
-        type: "string",
-        input: false,
-      },
     },
   },
 });

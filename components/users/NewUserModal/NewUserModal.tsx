@@ -11,20 +11,17 @@ import { useTranslations } from "next-intl";
 
 interface NewUserModalProps
   extends Pick<ModalProps, "isOpen" | "onOpenChange"> {
-  newUserFormContainer: React.ReactNode;
+  newUserForm: React.ReactNode;
 }
 
-export function NewUserModal({
-  newUserFormContainer,
-  ...props
-}: NewUserModalProps) {
+export function NewUserModal({ newUserForm, ...props }: NewUserModalProps) {
   const t = useTranslations("users.NewUserModal");
 
   return (
     <FormModal data-test="new-user-modal" {...props}>
       <FormModalDialog>
         <DialogHeader>{t("title")}</DialogHeader>
-        <DialogBody>{newUserFormContainer}</DialogBody>
+        <DialogBody>{newUserForm}</DialogBody>
         <DialogFooter>
           <FormModalSubmitButton
             form="new-user-form"

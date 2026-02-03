@@ -11,11 +11,12 @@ import { UsersPageEmpty } from "./UsersPageEmpty";
 import { hasOwnerRole } from "@/lib/utils/hasOwnerRole";
 import { getUserCount } from "@/lib/data/user/user.dal";
 import { hasGuestRole } from "@/lib/utils/hasGuestRole";
+import { createUser } from "@/lib/actions/user/createUser";
 import { deleteUsers } from "@/lib/actions/user/deleteUsers";
+import { NewUserForm } from "@/components/users/NewUserForm";
 import { UsersContainer } from "@/components/users/UsersContainer";
 import { createPosition } from "@/lib/actions/position/createPosition";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
-import { NewUserFormContainer } from "@/components/users/NewUserFormContainer";
 import { NewPositionForm } from "@/components/users/NewPositionForm/NewPositionForm";
 import { UserFiltersFormContainer } from "@/components/users/UserFiltersFormContainer";
 import { UserToolbarActionsMenuTrigger } from "@/components/users/UserToolbarActionsMenuTrigger";
@@ -67,7 +68,7 @@ export default async function AppUsersPage({
         <UserToolbarCreateNewMenuTrigger
           showUserMenuItem={isOwner || guestMode}
           guestMode={guestMode}
-          newUserFormContainer={<NewUserFormContainer />}
+          newUserForm={<NewUserForm formAction={createUser} />}
           newPositionForm={<NewPositionForm formAction={createPosition} />}
         />
       }

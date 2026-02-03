@@ -2,10 +2,10 @@ import { EditUserForm } from "../EditUserForm";
 import { EditUserModal } from "./EditUserModal";
 import { Button } from "@/components/ui/Button";
 import { DialogTrigger } from "react-aria-components";
-import { UserFormBaseSkeleton } from "../UserFormBase";
+import { EditUserFormSkeleton } from "../EditUserForm";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { Default as UserFormBaseStory } from "../UserFormBase/UserFormBase.stories";
+import { Default as EditUserFormStory } from "../EditUserForm/EditUserForm.stories";
 
 const meta = {
   title: "Components/users/EditUserModal",
@@ -27,12 +27,12 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    editUserFormContainer: <EditUserForm {...UserFormBaseStory.args} />,
+    editUserFormContainer: <EditUserForm {...EditUserFormStory.args} />,
   },
 } satisfies Story;
 
 export const Skeleton = {
   args: {
-    editUserFormContainer: <UserFormBaseSkeleton />,
+    editUserFormContainer: <EditUserFormSkeleton />,
   },
 } satisfies Story;

@@ -1,13 +1,13 @@
 import { fn } from "storybook/test";
-import { UserFormBase } from "./UserFormBase";
+import { EditUserForm } from "../EditUserForm";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { UserFormBasePositionSelect } from "../UserFormBase";
 import { OverlayTriggerStateContext } from "react-aria-components";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { UserFormBasePositionSelect } from "./UserFormBasePositionSelect";
 
 const meta = {
-  title: "components/users/UserFormBase",
-  component: UserFormBase,
+  title: "components/users/EditUserForm",
+  component: EditUserForm,
   tags: ["autodocs"],
   decorators: [
     (Story) => (
@@ -22,14 +22,13 @@ const meta = {
   parameters: {
     backgroundVariant: "alt",
   },
-} satisfies Meta<typeof UserFormBase>;
+} satisfies Meta<typeof EditUserForm>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    id: "new-user-form",
     formAction: fn(),
     positionSelect: (
       <UserFormBasePositionSelect

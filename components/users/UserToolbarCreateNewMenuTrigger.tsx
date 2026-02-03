@@ -18,14 +18,14 @@ import { GuestModeModal } from "../common/GuestModeModal";
 interface UserToolbarCreateNewMenuTriggerProps {
   showUserMenuItem: boolean;
   guestMode: boolean;
-  newUserFormContainer: React.ReactNode;
+  newUserForm: React.ReactNode;
   newPositionForm: React.ReactNode;
 }
 
 export function UserToolbarCreateNewMenuTrigger({
   showUserMenuItem,
   guestMode,
-  newUserFormContainer,
+  newUserForm,
   newPositionForm,
 }: UserToolbarCreateNewMenuTriggerProps) {
   const t = useTranslations("users.UserToolbarCreateNewMenuTrigger");
@@ -79,7 +79,7 @@ export function UserToolbarCreateNewMenuTrigger({
 
       {/* Modal for creating a user */}
       <NewUserModal
-        newUserFormContainer={newUserFormContainer}
+        newUserForm={newUserForm}
         isOpen={isOpenUserModal}
         onOpenChange={setIsOpenUserModal}
       />

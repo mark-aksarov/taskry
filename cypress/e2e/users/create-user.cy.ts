@@ -16,16 +16,8 @@ describe("creates a new project", () => {
 
     // fill form
     cy.get('input[name="fullName"]').clear().type("Created User Name");
-    cy.get('textarea[name="bio"]').clear().type("Created User Bio");
-    cy.setDatePickerDate("birthdate-date-picker", "01", "07", "1997");
     cy.get('input[name="email"]').clear().type("created-user@test.com");
     cy.get('input[name="password"]').clear().type("12345abc");
-    cy.get('input[name="phoneNumber"]').clear().type("+380990000001");
-    cy.get('input[name="publicLink"]')
-      .clear()
-      .type("https://example.com/public-link");
-    cy.get('input[name="address"]').clear().type("Created User Address");
-    cy.getByData("position-select").click();
     cy.getSelectOption("3").click();
 
     // submit
@@ -35,7 +27,6 @@ describe("creates a new project", () => {
     cy.getByData("users-list").within(() => {
       cy.contains("Created User Name");
       cy.contains("created-user@test.com");
-      cy.contains("Developer");
     });
 
     // sign in as Created User

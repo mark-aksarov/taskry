@@ -3,7 +3,7 @@ import {
   FieldGroupSkeleton,
 } from "@/components/common/FieldSkeleton";
 
-export function UserFormBaseSkeleton() {
+export function EditUserFormSkeleton() {
   return (
     <div className="flex flex-col gap-4">
       <FieldSkeleton>

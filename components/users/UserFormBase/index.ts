@@ -1,9 +1,11 @@
 export { UserFormBase } from "./UserFormBase";
 export { type UserFormBaseProps } from "./UserFormBase";
-export { UserFormBaseSkeleton } from "./UserFormBaseSkeleton";
 export { UserFormBaseBioTextField } from "./UserFormBaseBioTextField";
 export { UserFormBasePositionSelect } from "./UserFormBasePositionSelect";
 export { UserFormBaseEmailTextField } from "./UserFormBaseEmailTextField";
+export { UserFormBaseAddressTextField } from "./UserFormBaseAddressTextField";
+export { UserFormBasePasswordTextField } from "./UserFormBasePasswordTextField";
 export { UserFormBaseFullNameTextField } from "./UserFormBaseFullNameTextField";
+export { UserFormBaseBirthdateDatePicker } from "./UserFormBaseBirthdateDatePicker";
 export { UserFormBasePublicLinkTextField } from "./UserFormBasePublicLinkTextField";
 export { UserFormBasePhoneNumberTextField } from "./UserFormBasePhoneNumberTextField";

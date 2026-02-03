@@ -53,6 +53,9 @@ describe("edit a new user", () => {
     cy.getByData("users-list").within(() => {
       cy.contains("Updated User Name");
       cy.contains("Developer");
+      cy.contains("https://example.com/updated-public-link");
+      cy.contains("CEO");
+      cy.contains("+654321");
     });
   });
 });

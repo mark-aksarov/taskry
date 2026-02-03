@@ -1,12 +1,22 @@
-import { UserFormBase, UserFormBaseProps } from "../UserFormBase";
+import {
+  UserFormBase,
+  UserFormBaseEmailTextField,
+  UserFormBasePasswordTextField,
+  UserFormBaseFullNameTextField,
+} from "../UserFormBase";
 
-export function NewUserForm(props: Omit<UserFormBaseProps, "id">) {
+import { ActionFn, ActionState } from "@/lib/actions/types";
+
+interface NewUserFormProps {
+  formAction: ActionFn<ActionState, FormData>;
+}
+
+export function NewUserForm({ formAction }: NewUserFormProps) {
   return (
-    <UserFormBase
-      id="new-user-form"
-      showPasswordTextField={true}
-      showEmailTextField={true}
-      {...props}
-    />
+    <UserFormBase id="new-user-form" formAction={formAction}>
+      <UserFormBaseFullNameTextField />
+      <UserFormBaseEmailTextField />
+      <UserFormBasePasswordTextField />
+    </UserFormBase>
   );
 }

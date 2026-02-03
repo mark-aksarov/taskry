@@ -7,10 +7,13 @@ import { revalidatePath } from "next/cache";
 import { userSchema } from "@/lib/schemas/user";
 import { getTranslations } from "next-intl/server";
 import { actionError, actionSuccess } from "../utils/actionResult";
-import { checkUserResourcesAccess } from "@/lib/data/user/user.dal";
 import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedirect";
 
-const schema = userSchema.omit({ id: true });
+const schema = userSchema.omit({ id: true }).pick({
+  email: true,
+  password: true,
+  fullName: true,
+});
 
 type KnownStatusKey = "forbidden" | "bad_request" | "internalServerError";
 
@@ -34,7 +37,6 @@ export async function createUser(
     }
 
     // Create user
-    await checkUserResourcesAccess(parsed.data.positionId);
 
     const { user } = await auth.api.createUser({
       body: {
@@ -45,12 +47,6 @@ export async function createUser(
 
         data: {
           workspaceId: session!.user.workspaceId,
-          positionId: parsed.data.positionId,
-          bio: parsed.data.bio,
-          birthdate: parsed.data.birthdate,
-          phoneNumber: parsed.data.phoneNumber,
-          address: parsed.data.address,
-          publicLink: parsed.data.publicLink,
         },
       },
     });

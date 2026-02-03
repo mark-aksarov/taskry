@@ -15,8 +15,8 @@ import { Default as UserListStory } from "@/components/users/UserList/UserList.s
 import { Default as UserGridStory } from "@/components/users/UserGrid/UserGrid.stories";
 import { EntityContainerPresentation } from "@/components/common/EntityContainerPresentation";
 import { UserToolbarActionsMenuTrigger } from "@/components/users/UserToolbarActionsMenuTrigger";
+import { Default as NewUserFormStory } from "@/components/users/NewUserForm/NewUserForm.stories";
 import { UserToolbarFiltersModalTrigger } from "@/components/users/UserToolbarFiltersModalTrigger";
-import { Default as UserFormBaseStory } from "@/components/users/UserFormBase/UserFormBase.stories";
 import { UserToolbarCreateNewMenuTrigger } from "@/components/users/UserToolbarCreateNewMenuTrigger";
 import { Default as UserFiltersFormStory } from "@/components/users/UserFiltersForm/UserFiltersForm.stories";
 import { Default as PositionFormBaseStory } from "@/components/users/PositionFormBase/PositionFormBase.stories";
@@ -51,7 +51,7 @@ export const Default = {
       <UserToolbarCreateNewMenuTrigger
         showUserMenuItem
         guestMode={false}
-        newUserFormContainer={<NewUserForm {...UserFormBaseStory.args} />}
+        newUserForm={<NewUserForm {...NewUserFormStory.args} />}
         newPositionForm={<NewPositionForm {...PositionFormBaseStory.args} />}
       />
     ),

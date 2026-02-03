@@ -7,7 +7,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { UserDetailBottomSheet } from "../UserDetailBottomSheet";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { UserItemActionMenuTrigger } from "../UserItemActionMenuTrigger";
-import { Default as UserFormBaseStory } from "../UserFormBase/UserFormBase.stories";
+import { Default as EditUserFormStory } from "../EditUserForm/EditUserForm.stories";
 import { Default as UserDetailModalStory } from "../UserDetailModal/UserDetailModal.stories";
 import { Default as UserDetailBottomSheetStory } from "../UserDetailBottomSheet/UserDetailBottomSheet.stories";
 
@@ -124,7 +124,7 @@ export const Default = {
           <UserItemActionMenuTrigger
             showUserMenuItem
             guestMode={false}
-            editUserFormContainer={<EditUserForm {...UserFormBaseStory.args} />}
+            editUserFormContainer={<EditUserForm {...EditUserFormStory.args} />}
             userId={user.id}
             userFullName={user.fullName}
             deleteAction={fn()}

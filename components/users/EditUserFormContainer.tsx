@@ -1,17 +1,13 @@
 "use client";
 
-import {
-  UserFormBaseSkeleton,
-  UserFormBasePositionSelect,
-} from "./UserFormBase";
-
 import useSWR from "swr";
 import { Suspense } from "react";
-import { EditUserForm } from "./EditUserForm";
+import { CalendarDate } from "@internationalized/date";
 import { updateUser } from "@/lib/actions/user/updateUser";
 import { UserFormDataDTO } from "@/lib/data/user/user.dto";
+import { UserFormBasePositionSelect } from "./UserFormBase";
+import { EditUserForm, EditUserFormSkeleton } from "./EditUserForm";
 import { PositionSummaryDTO } from "@/lib/data/position/position.dto";
-import { CalendarDate } from "@internationalized/date";
 
 interface EditUserFormContainerProps {
   userId: string;
@@ -19,7 +15,7 @@ interface EditUserFormContainerProps {
 
 export function EditUserFormContainer(props: EditUserFormContainerProps) {
   return (
-    <Suspense fallback={<UserFormBaseSkeleton />}>
+    <Suspense fallback={<EditUserFormSkeleton />}>
       <EditUserFormContainerInner {...props} />
     </Suspense>
   );
