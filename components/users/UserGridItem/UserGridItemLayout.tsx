@@ -1,7 +1,6 @@
 import { GridItem, GridItemRow } from "@/components/common/Grid";
 
 export interface UserGridItemProps {
-  checkboxSlot?: React.ReactNode;
   actionMenuSlot: React.ReactNode;
   imageSlot: React.ReactNode;
   titleSlot: React.ReactNode;
@@ -9,7 +8,6 @@ export interface UserGridItemProps {
 }
 
 export function UserGridItemLayout({
-  checkboxSlot,
   actionMenuSlot,
   imageSlot,
   titleSlot,
@@ -17,10 +15,7 @@ export function UserGridItemLayout({
 }: UserGridItemProps) {
   return (
     <GridItem>
-      <GridItemRow>
-        {checkboxSlot}
-        {actionMenuSlot}
-      </GridItemRow>
+      <GridItemRow className="justify-end">{actionMenuSlot}</GridItemRow>
 
       <div className="flex flex-col items-center justify-between gap-4">
         {imageSlot}

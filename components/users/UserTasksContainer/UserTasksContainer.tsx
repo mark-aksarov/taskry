@@ -6,9 +6,9 @@ import {
 } from "@/components/common/EntityContainerPagination";
 
 import { UserTaskList } from "../UserTaskList";
-import { hasGuestRole } from "@/lib/utils/hasGuestRole";
 import { UserTaskListItem } from "../UserTaskListItem";
-import { getTaskList } from "@/lib/data/task/task.service";
+import { getTaskList } from "@/lib/data/task/task.dal";
+import { hasGuestRole } from "@/lib/utils/hasGuestRole";
 import { deleteTasks } from "@/lib/actions/task/deleteTasks";
 import { sendComment } from "@/lib/actions/comment/sendComment";
 import { updateComment } from "@/lib/actions/comment/updateComment";

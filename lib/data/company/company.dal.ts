@@ -4,25 +4,30 @@ import { cache } from "react";
 import prisma from "@/lib/prisma";
 import { auth } from "@/lib/auth";
 import { AccessDeniedError } from "../utils/error";
-import { CreateCompanyInputDTO } from "./company.dto";
 import { requireSession } from "../utils/requireSession";
+import { CompanySummaryDTO, CreateCompanyInputDTO } from "./company.dto";
 
-export const getAllCompanies = cache(async () => {
-  // Authorization
-  const {
-    user: { workspaceId },
-  } = await requireSession();
+export const getCompanySummaries = cache(
+  async (): Promise<CompanySummaryDTO[]> => {
+    // Authorization
+    const {
+      user: { workspaceId },
+    } = await requireSession();
 
-  return await prisma.company.findMany({
-    where: {
-      workspaceId,
-    },
-    select: {
-      id: true,
-      name: true,
-    },
-  });
-});
+    // Get companies
+    const companies = await prisma.company.findMany({
+      where: {
+        workspaceId,
+      },
+      select: {
+        id: true,
+        name: true,
+      },
+    });
+
+    return companies;
+  },
+);
 
 export const createCompany = async (input: CreateCompanyInputDTO) => {
   // Authorization

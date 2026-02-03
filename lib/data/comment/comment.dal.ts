@@ -1,24 +1,40 @@
 import "server-only";
 
+import {
+  NotFoundError,
+  ValidationError,
+  AccessDeniedError,
+} from "../utils/error";
+
+import {
+  CommentListItemDTO,
+  CreateCommentInputDTO,
+  UpdateCommentInputDTO,
+} from "./comment.dto";
+
 import { cache } from "react";
 import prisma from "@/lib/prisma";
 import { auth } from "@/lib/auth";
-import { AccessDeniedError } from "../utils/error";
-import { Prisma } from "@/generated/prisma/client";
 import { requireSession } from "../utils/requireSession";
-import { CreateCommentInputDTO, UpdateCommentInputDTO } from "./comment.dto";
 
-export const getAllComments = cache(
-  async (taskId?: number, projectId?: number) => {
+export const getCommentList = cache(
+  async ({
+    taskId,
+    projectId,
+  }: {
+    taskId?: number;
+    projectId?: number;
+  }): Promise<CommentListItemDTO[]> => {
     // Authorization
     const {
-      user: { workspaceId },
+      user: { id: userId, role, workspaceId },
     } = await requireSession();
 
-    return await prisma.comment.findMany({
+    // Get comments
+    const comments = await prisma.comment.findMany({
       where: {
-        taskId: taskId ?? Prisma.skip,
-        projectId: projectId ?? Prisma.skip,
+        taskId,
+        projectId,
         workspaceId,
       },
       select: {
@@ -40,6 +56,28 @@ export const getAllComments = cache(
           },
         },
       },
+    });
+
+    // Map to DTO
+    return comments.map((c) => {
+      return {
+        id: c.id,
+        content: c.content,
+        createdAt: c.createdAt,
+
+        canEdit: role === "owner" || c.sender.id === userId,
+
+        sender: {
+          id: c.sender.id,
+          fullName: c.sender.fullName,
+          imageUrl: c.sender.imageUrl ?? undefined,
+        },
+
+        attachments: c.attachments.map((a) => ({
+          id: a.id,
+          fileUrl: a.fileUrl,
+        })),
+      };
     });
   },
 );
@@ -66,13 +104,29 @@ export const createComment = async (input: CreateCommentInputDTO) => {
     );
   }
 
-  await validateCommentRelations(workspaceId, input);
+  // Validate that comment is associated with exactly one task or project
+  if (Boolean(input.taskId) === Boolean(input.projectId)) {
+    throw new ValidationError(
+      "Comment must be associated with exactly one task or project.",
+    );
+  }
 
+  // Validate task
+  if (input.taskId) {
+    await validateTask(workspaceId, input.taskId);
+  }
+
+  // Validate project
+  if (input.projectId) {
+    await validateProject(workspaceId, input.projectId);
+  }
+
+  // Create comment
   const newComment = await prisma.comment.create({
     data: {
       content: input.content,
-      taskId: input.taskId ?? Prisma.skip,
-      projectId: input.projectId ?? Prisma.skip,
+      taskId: input.taskId,
+      projectId: input.projectId,
       senderId,
       workspaceId,
       attachments: input.attachments
@@ -83,7 +137,7 @@ export const createComment = async (input: CreateCommentInputDTO) => {
               workspaceId,
             })),
           }
-        : Prisma.skip,
+        : undefined,
     },
   });
 
@@ -185,43 +239,38 @@ export const updateComment = async (input: UpdateCommentInputDTO) => {
  * HELPERS
  */
 
-export const validateCommentRelations = async (
-  workspaceId: number,
-  input: { taskId?: number | null; projectId?: number | null },
-) => {
-  if (Boolean(input.taskId) === Boolean(input.projectId)) {
-    throw new Error(
-      "Comment must be associated with exactly one task or project.",
-    );
+// Validate that task exists and belongs to the workspace
+async function validateTask(workspaceId: number, taskId: number) {
+  const task = await prisma.task.findUnique({
+    where: {
+      id: taskId,
+    },
+    select: { title: true, workspaceId: true },
+  });
+
+  if (!task) {
+    throw new NotFoundError("Task not found");
   }
 
-  // Validate Task if taskId is provided
-  if (input.taskId) {
-    const task = await prisma.task.findUnique({
-      where: {
-        id: input.taskId,
-        workspaceId,
-      },
-      select: { title: true },
-    });
+  if (task.workspaceId !== workspaceId) {
+    throw new AccessDeniedError("Task access denied");
+  }
+}
 
-    if (!task) {
-      throw new AccessDeniedError("Task access denied or not found");
-    }
+// Validate that project exists and belongs to the workspace
+async function validateProject(workspaceId: number, projectId: number) {
+  const project = await prisma.project.findUnique({
+    where: {
+      id: projectId,
+    },
+    select: { title: true, workspaceId: true },
+  });
+
+  if (!project) {
+    throw new NotFoundError("Project not found");
   }
 
-  // Validate Project if projectId is provided
-  if (input.projectId) {
-    const project = await prisma.project.findUnique({
-      where: {
-        id: input.projectId,
-        workspaceId,
-      },
-      select: { title: true },
-    });
-
-    if (!project) {
-      throw new AccessDeniedError("Project access denied or not found");
-    }
+  if (project.workspaceId !== workspaceId) {
+    throw new AccessDeniedError("Project access denied");
   }
-};
+}

@@ -128,6 +128,7 @@ export const Default = {
             userId={user.id}
             userFullName={user.fullName}
             deleteAction={fn()}
+            className="-mr-2"
           />
         }
         userDetailModal={<UserDetailModal {...UserDetailModalStory.args} />}

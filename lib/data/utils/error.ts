@@ -11,3 +11,17 @@ export class UnauthorizedError extends Error {
     this.name = "UnauthorizedError";
   }
 }
+
+export class NotFoundError extends Error {
+  constructor(message?: string) {
+    super(message || "Not found");
+    this.name = "NotFoundError";
+  }
+}
+
+export class ValidationError extends Error {
+  constructor(message?: string) {
+    super(message || "Validation error");
+    this.name = "ValidationError";
+  }
+}

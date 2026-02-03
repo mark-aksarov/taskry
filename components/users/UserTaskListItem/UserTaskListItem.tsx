@@ -15,7 +15,6 @@ import {
 import { TaskStatus } from "@/generated/prisma/enums";
 import { useFormatter, useTranslations } from "next-intl";
 import { UserTaskListItemLayout } from "./UserTaskListItemLayout";
-import { useSyncSelectionTaskItem } from "@/lib/hooks/useTaskSelection";
 import { getTaskStatusBadgeColor } from "@/components/tasks/getTaskStatusBadgeColor";
 import { TaskListItemCheckbox } from "@/components/tasks/TaskListItem/TaskListItemCheckbox";
 
@@ -43,8 +42,6 @@ export const UserTaskListItem = ({
   const t = useTranslations("users.UserTaskListItem");
   const tStatus = useTranslations("tasks.TaskStatus");
 
-  useSyncSelectionTaskItem(id, title, status);
-
   const format = useFormatter();
 
   const deadlineOn = deadline
@@ -59,7 +56,6 @@ export const UserTaskListItem = ({
 
   return (
     <UserTaskListItemLayout
-      checkboxSlot={<TaskListItemCheckbox id={id} />}
       deadlineSlot={
         <ListItemInfo>
           <ListItemTitle>

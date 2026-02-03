@@ -1,175 +1,123 @@
-import {
-  UserListDTO,
-  UserDetailDTO,
-  UserSearchDTO,
-  UserSummaryDTO,
-  UserFormDataDTO,
-} from "./user.dto";
+import { auth } from "@/lib/auth";
+import prisma from "@/lib/prisma";
+import { headers } from "next/headers";
+import { requireSession } from "../utils/requireSession";
+import { AccessDeniedError, NotFoundError } from "../utils/error";
+import { UpdateUserInputDTO, CreateUserInputDTO } from "./user.dto";
 
-import { UserFilters } from "@/lib/types";
-import { getAllUsers, getPaginatedUsers, getUser } from "./user.dal";
+export const createUser = async (input: CreateUserInputDTO) => {
+  // Authorization
+  const {
+    user: { workspaceId },
+  } = await requireSession();
 
-export const getUserDetail = async (
-  id: string,
-): Promise<UserDetailDTO | null> => {
-  const user = await getUser(id, {
-    id: true,
-    fullName: true,
-    email: true,
-    phoneNumber: true,
-    imageUrl: true,
-    publicLink: true,
-    birthdate: true,
-    bio: true,
-    address: true,
+  // Create user
+  const { user } = await auth.api.createUser({
+    body: {
+      email: input.email,
+      password: input.password,
+      name: input.fullName,
+      role: "user",
 
-    position: {
-      select: {
-        name: true,
+      data: {
+        workspaceId,
       },
     },
   });
 
-  if (!user) {
-    return null;
-  }
-
-  return {
-    id: user.id,
-    fullName: user.fullName,
-    email: user.email,
-    phoneNumber: user.phoneNumber ?? undefined,
-    imageUrl: user.imageUrl ?? undefined,
-    publicLink: user.publicLink ?? undefined,
-    birthdate: user.birthdate ?? undefined,
-    bio: user.bio ?? undefined,
-    address: user.address ?? undefined,
-    position: user.position ? user.position : undefined,
-  };
+  // Send verification email in the background
+  auth.api.sendVerificationEmail({ body: { email: user.email } });
 };
 
-export const getUserFormData = async (
-  id: string,
-): Promise<UserFormDataDTO | null> => {
-  const user = await getUser(id, {
-    id: true,
-    fullName: true,
-    phoneNumber: true,
-    imageUrl: true,
-    publicLink: true,
-    birthdate: true,
-    bio: true,
-    address: true,
-    positionId: true,
-  });
+export const updateUser = async (input: UpdateUserInputDTO) => {
+  // Authorization
+  const {
+    user: { id: userId, workspaceId },
+  } = await requireSession();
 
-  if (!user) {
-    return null;
-  }
-
-  return {
-    id: user.id,
-    fullName: user.fullName,
-    phoneNumber: user.phoneNumber ?? undefined,
-    imageUrl: user.imageUrl ?? undefined,
-    publicLink: user.publicLink ?? undefined,
-    birthdate: user.birthdate ?? undefined,
-    bio: user.bio ?? undefined,
-    address: user.address ?? undefined,
-    positionId: user.positionId ?? undefined,
-  };
-};
-
-export const getUserList = async ({
-  page,
-  pageSize,
-  sort,
-  filters,
-}: {
-  page: number;
-  pageSize: number;
-  sort: string;
-  filters?: UserFilters;
-}): Promise<UserListDTO> => {
-  const { items, totalCount } = await getPaginatedUsers({
-    page,
-    pageSize,
-    sort,
-    filters,
-    select: {
-      id: true,
-      fullName: true,
-      email: true,
-      phoneNumber: true,
-      imageUrl: true,
-      publicLink: true,
-
-      position: {
-        select: {
-          name: true,
-        },
+  // Check permission
+  const permission = await auth.api.userHasPermission({
+    body: {
+      userId,
+      permission: {
+        user: ["update"],
       },
     },
   });
 
-  return {
-    items: items.map((u) => ({
-      id: u.id,
-      fullName: u.fullName,
-      email: u.email,
-      phoneNumber: u.phoneNumber ?? undefined,
-      imageUrl: u.imageUrl ?? undefined,
-      publicLink: u.publicLink ?? undefined,
-      position: u.position ?? undefined,
-    })),
+  if (!permission.success) {
+    throw new AccessDeniedError("You do not have permission to update user.");
+  }
 
-    totalCount,
-  };
+  // Validate updated user. Since we use the better-auth API, we can't check users in the database directly.
+  await validateUser(workspaceId, input.id);
+
+  // Use better auth admin api to update user
+  const updatedUser = await auth.api.adminUpdateUser({
+    body: {
+      userId: input.id,
+      data: {
+        positionId: input.positionId,
+        name: input.fullName,
+        bio: input.bio,
+        address: input.address,
+        phoneNumber: input.phoneNumber,
+        birthdate: input.birthdate,
+        publicLink: input.publicLink,
+      },
+    },
+    headers: await headers(),
+  });
+
+  return updatedUser;
 };
 
-export const getUserSummaries = async (): Promise<UserSummaryDTO[]> => {
-  const projects = await getAllUsers({
-    select: {
-      id: true,
-      fullName: true,
+export const deleteUser = async (deletedUserId: string) => {
+  // Authorization
+  const {
+    user: { id: userId, workspaceId },
+  } = await requireSession();
+
+  // Check permission
+  const permission = await auth.api.userHasPermission({
+    body: {
+      userId,
+      permission: {
+        user: ["update"],
+      },
     },
   });
 
-  return projects.map((p) => ({
-    id: p.id,
-    fullName: p.fullName,
-  }));
+  if (!permission.success) {
+    throw new AccessDeniedError("You do not have permission to delete user.");
+  }
+
+  // Validate deleted user. Since we use the better-auth API, we can't check users in the database directly.
+  await validateUser(workspaceId, deletedUserId);
+
+  // Use better auth admin api to delete user
+  return await auth.api.removeUser({
+    body: {
+      userId: deletedUserId,
+    },
+    headers: await headers(),
+  });
 };
 
-export const searchUsers = async ({
-  page,
-  pageSize,
-  query,
-}: {
-  page: number;
-  pageSize: number;
-  query?: string;
-}): Promise<UserSearchDTO> => {
-  const { items, totalCount } = await getPaginatedUsers({
-    page,
-    pageSize,
+// Validate that user exists and belongs to the workspace
+async function validateUser(workspaceId: number, userId: string) {
+  const user = await prisma.user.findFirst({
+    where: { id: userId },
     select: {
-      id: true,
-      fullName: true,
-      email: true,
-      imageUrl: true,
+      workspaceId: true,
     },
-    filters: { query },
   });
 
-  return {
-    items: items.map((p) => ({
-      id: p.id,
-      fullName: p.fullName,
-      email: p.email,
-      imageUrl: p.imageUrl ?? undefined,
-    })),
+  if (!user) {
+    throw new NotFoundError("User not found");
+  }
 
-    totalCount,
-  };
-};
+  if (user.workspaceId !== workspaceId) {
+    throw new AccessDeniedError("User access denied");
+  }
+}

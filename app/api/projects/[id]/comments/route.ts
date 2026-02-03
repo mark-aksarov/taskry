@@ -9,7 +9,7 @@ import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 import { coercedPositiveInt } from "@/lib/schemas/base";
-import { getCommentList } from "@/lib/data/comment/comment.service";
+import { getCommentList } from "@/lib/data/comment/comment.dal";
 
 export async function GET(
   req: NextRequest,

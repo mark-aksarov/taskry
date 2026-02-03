@@ -1,90 +1,329 @@
+import {
+  TaskListDTO,
+  TaskSearchDTO,
+  TaskDetailDTO,
+  TaskSummaryDTO,
+  TaskFormDataDTO,
+  UpdateTaskInputDTO,
+  CreateTaskInputDTO,
+} from "./task.dto";
+
 import { cache } from "react";
 import prisma from "@/lib/prisma";
 import { auth } from "@/lib/auth";
 import { TaskFilters } from "@/lib/types";
-import { AccessDeniedError } from "../utils/error";
 import { requireSession } from "../utils/requireSession";
 import { Prisma, TaskStatus } from "@/generated/prisma/client";
-import { UpdateTaskInputDTO, CreateTaskInputDTO } from "./task.dto";
+import { AccessDeniedError, NotFoundError } from "../utils/error";
 
-export const getTask = cache(
-  async <T extends Prisma.TaskSelect>(id: number, select: T) => {
+export const getTaskDetail = cache(
+  async (id: number): Promise<TaskDetailDTO | null> => {
     // Authorization
     const {
       user: { workspaceId },
     } = await requireSession();
 
-    let where = { id, workspaceId };
+    const task = await prisma.task.findFirst({
+      where: { id, workspaceId },
+      select: {
+        id: true,
+        title: true,
+        description: true,
+        deadline: true,
 
-    return prisma.task.findFirst({
-      where,
-      select,
+        assignee: {
+          select: {
+            id: true,
+            fullName: true,
+            imageUrl: true,
+          },
+        },
+        status: true,
+        project: {
+          select: {
+            id: true,
+            title: true,
+          },
+        },
+        category: {
+          select: {
+            id: true,
+            name: true,
+          },
+        },
+        subtasks: {
+          select: {
+            id: true,
+            text: true,
+            isDone: true,
+          },
+        },
+        attachments: {
+          select: {
+            id: true,
+            fileUrl: true,
+            fileName: true,
+          },
+        },
+        _count: {
+          select: {
+            comments: true,
+          },
+        },
+      },
     });
+
+    if (!task) {
+      return null;
+    }
+
+    return {
+      id: task.id,
+      title: task.title,
+      description: task.description ?? undefined,
+      deadline: task.deadline,
+      assignee: task.assignee
+        ? {
+            id: task.assignee.id,
+            fullName: task.assignee.fullName,
+            imageUrl: task.assignee.imageUrl ?? undefined,
+          }
+        : undefined,
+      status: task.status,
+      project: task.project,
+      category: task.category,
+      subtasks: task.subtasks,
+      attachments: task.attachments,
+      commentsCount: task._count.comments,
+    };
   },
 );
 
-export const getAllTasks = cache(
-  async <T extends Prisma.TaskSelect>({ select }: { select: T }) => {
+export const getTaskFormData = cache(
+  async (id: number): Promise<TaskFormDataDTO | null> => {
     // Authorization
     const {
       user: { workspaceId },
     } = await requireSession();
 
-    let where = { workspaceId };
-
-    return await prisma.task.findMany({
-      where,
-      select,
+    const task = await prisma.task.findFirst({
+      where: { id, workspaceId },
+      select: {
+        id: true,
+        title: true,
+        description: true,
+        deadline: true,
+        status: true,
+        categoryId: true,
+        projectId: true,
+        project: {
+          select: {
+            status: true,
+          },
+        },
+        assigneeId: true,
+      },
     });
+
+    if (!task) {
+      return null;
+    }
+
+    return {
+      id: task.id,
+      title: task.title,
+      description: task.description ?? undefined,
+      deadline: task.deadline,
+      status: task.status,
+      categoryId: task.categoryId ?? undefined,
+      projectId: task.projectId ?? undefined,
+      projectStatus: task.project.status,
+      assigneeId: task.assigneeId ?? undefined,
+    };
   },
 );
 
-export const getPaginatedTasks = cache(
-  async <T extends Prisma.TaskSelect>({
+export const getTaskSummary = cache(
+  async (id: number): Promise<TaskSummaryDTO | null> => {
+    // Authorization
+    const {
+      user: { workspaceId },
+    } = await requireSession();
+
+    const task = await prisma.task.findFirst({
+      where: { id, workspaceId },
+      select: {
+        id: true,
+        title: true,
+      },
+    });
+
+    if (!task) {
+      return null;
+    }
+
+    return {
+      id: task.id,
+      title: task.title,
+    };
+  },
+);
+
+export const getTaskList = cache(
+  async ({
     page,
     pageSize,
     sort,
     filters,
-    select,
   }: {
     page?: number;
     pageSize?: number;
     sort?: string;
     filters?: TaskFilters;
-    select: T;
-  }) => {
+  }): Promise<TaskListDTO> => {
     // Authorization
     const {
       user: { id: userId, workspaceId },
     } = await requireSession();
 
-    const skip = page && pageSize ? (page - 1) * pageSize : Prisma.skip;
-    const take = pageSize ? pageSize : Prisma.skip;
+    // Sorting
+    let orderBy: Prisma.ProjectOrderByWithRelationInput;
 
-    const orderByMapping: Record<string, Prisma.TaskOrderByWithRelationInput> =
-      {
-        title: { title: "asc" },
-        deadline: { deadline: "asc" },
-        status: { status: "asc" },
-        category: { category: { name: "asc" } },
-      };
+    if (sort === "title") {
+      orderBy = { title: "asc" };
+    } else if (sort === "deadline") {
+      orderBy = { deadline: "asc" };
+    } else if (sort === "status") {
+      orderBy = { status: "asc" };
+    } else if (sort === "category") {
+      orderBy = { category: { name: "asc" } };
+    } else {
+      orderBy = { createdAt: "desc" };
+    }
 
-    const orderBy = sort ? orderByMapping[sort] : Prisma.skip;
+    // Get tasks
     const where = buildTaskWhereClause(userId, workspaceId, filters);
 
     const [items, totalCount] = await Promise.all([
       prisma.task.findMany({
         where,
         orderBy,
-        skip,
-        take,
-        select,
+        skip: page && pageSize ? (page - 1) * pageSize : undefined,
+        take: pageSize,
+        select: {
+          id: true,
+          title: true,
+          deadline: true,
+
+          assignee: {
+            select: {
+              id: true,
+              fullName: true,
+              imageUrl: true,
+            },
+          },
+          status: true,
+          project: {
+            select: {
+              id: true,
+              title: true,
+              status: true,
+            },
+          },
+          category: {
+            select: {
+              id: true,
+              name: true,
+            },
+          },
+          subtasks: {
+            select: {
+              isDone: true,
+            },
+          },
+          _count: {
+            select: {
+              comments: true,
+              subtasks: true,
+            },
+          },
+        },
       }),
       prisma.task.count({ where }),
     ]);
 
+    // Map to DTO
     return {
-      items,
+      items: items.map((task) => ({
+        id: task.id,
+        title: task.title,
+        status: task.status,
+        deadline: task.deadline ?? undefined,
+        assignee: task.assignee
+          ? {
+              id: task.assignee.id,
+              fullName: task.assignee.fullName,
+              imageUrl: task.assignee.imageUrl ?? undefined,
+            }
+          : undefined,
+        project: task.project,
+        category: task.category,
+        commentsCount: task._count.comments,
+        subtasks: {
+          total: task._count.subtasks,
+          done: task.subtasks.filter((s) => s.isDone).length,
+        },
+      })),
+
+      totalCount,
+    };
+  },
+);
+
+export const searchTasks = cache(
+  async ({
+    query,
+    page,
+    pageSize,
+  }: {
+    query?: string;
+    page?: number;
+    pageSize?: number;
+  }): Promise<TaskSearchDTO> => {
+    // Authorization
+    const {
+      user: { workspaceId },
+    } = await requireSession();
+
+    // Get tasks
+    const where = {
+      workspaceId,
+      title: { contains: query, mode: "insensitive" as const },
+    };
+
+    const [items, totalCount] = await Promise.all([
+      prisma.task.findMany({
+        where,
+        orderBy: { createdAt: "desc" },
+        skip: page && pageSize ? (page - 1) * pageSize : undefined,
+        take: pageSize,
+        select: {
+          id: true,
+          title: true,
+          deadline: true,
+        },
+      }),
+      prisma.task.count({ where }),
+    ]);
+
+    //Map to DTO
+    return {
+      items: items.map((t) => ({
+        id: t.id,
+        title: t.title,
+        deadline: t.deadline,
+      })),
+
       totalCount,
     };
   },
@@ -121,24 +360,31 @@ export const createTask = async (input: CreateTaskInputDTO) => {
     throw new AccessDeniedError("You do not have permission to create task.");
   }
 
-  // Check related resources access
-  await checkTaskResourcesAccess(
-    workspaceId,
-    input.categoryId,
-    input.projectId,
-    input.assigneeId,
-  );
+  // Validate category
+  if (input.categoryId) {
+    await validateTaskCategory(workspaceId, input.categoryId);
+  }
+
+  // Validate project
+  if (input.projectId) {
+    await validateProject(workspaceId, input.projectId);
+  }
+
+  // Validate assignee
+  if (input.assigneeId) {
+    await validateAssignee(workspaceId, input.assigneeId);
+  }
 
   // Create task
   const task = await prisma.task.create({
     data: {
       title: input.title,
-      description: input.description ?? Prisma.skip,
+      description: input.description,
       deadline: input.deadline,
       status: input.status,
       projectId: input.projectId,
       categoryId: input.categoryId,
-      assigneeId: input.assigneeId ?? Prisma.skip,
+      assigneeId: input.assigneeId,
       creatorId: userId,
       workspaceId,
     },
@@ -167,13 +413,20 @@ export const updateTask = async (input: UpdateTaskInputDTO) => {
     throw new AccessDeniedError("You do not have permission to update task.");
   }
 
-  // Check access to related resources
-  await checkTaskResourcesAccess(
-    workspaceId,
-    input.categoryId,
-    input.projectId,
-    input.assigneeId,
-  );
+  // Validate category
+  if (input.categoryId) {
+    await validateTaskCategory(workspaceId, input.categoryId);
+  }
+
+  // Validate project
+  if (input.projectId) {
+    await validateProject(workspaceId, input.projectId);
+  }
+
+  // Validate assignee
+  if (input.assigneeId) {
+    await validateAssignee(workspaceId, input.assigneeId);
+  }
 
   // Update task
   const updatedTask = await prisma.task.update({
@@ -182,13 +435,13 @@ export const updateTask = async (input: UpdateTaskInputDTO) => {
       workspaceId,
     },
     data: {
-      title: input.title ?? Prisma.skip,
-      description: input.description ?? Prisma.skip,
-      deadline: input.deadline ?? Prisma.skip,
-      status: input.status ?? Prisma.skip,
-      projectId: input.projectId ?? Prisma.skip,
-      categoryId: input.categoryId ?? Prisma.skip,
-      assigneeId: input.assigneeId ?? Prisma.skip,
+      title: input.title,
+      description: input.description,
+      deadline: input.deadline,
+      status: input.status,
+      projectId: input.projectId,
+      categoryId: input.categoryId,
+      assigneeId: input.assigneeId,
     },
   });
 
@@ -276,40 +529,51 @@ export const deleteTasks = async (ids: number[]) => {
  * HELPERS
  */
 
-async function checkTaskResourcesAccess(
-  workspaceId: number,
-  categoryId?: number,
-  projectId?: number,
-  assigneeId?: string,
-) {
-  if (categoryId) {
-    const category = await prisma.taskCategory.findFirst({
-      where: { id: categoryId, workspaceId },
-    });
+// Validate that task category exists and belongs to the workspace
+async function validateTaskCategory(workspaceId: number, categoryId: number) {
+  const category = await prisma.taskCategory.findUnique({
+    where: { id: categoryId },
+    select: { workspaceId: true },
+  });
 
-    if (!category) {
-      throw new AccessDeniedError("Category access denied or not found");
-    }
+  if (!category) {
+    throw new NotFoundError("Task category not found");
   }
 
-  if (projectId) {
-    const project = await prisma.project.findFirst({
-      where: { id: projectId, workspaceId },
-    });
+  if (category.workspaceId !== workspaceId) {
+    throw new AccessDeniedError("Task category access denied");
+  }
+}
 
-    if (!project) {
-      throw new AccessDeniedError("Project access denied or not found");
-    }
+// Validate that project exists and belongs to the workspace
+async function validateProject(workspaceId: number, projectId: number) {
+  const project = await prisma.project.findUnique({
+    where: { id: projectId },
+    select: { workspaceId: true },
+  });
+
+  if (!project) {
+    throw new NotFoundError("Project not found");
   }
 
-  if (assigneeId) {
-    const assignee = await prisma.user.findFirst({
-      where: { id: assigneeId, workspaceId },
-    });
+  if (project.workspaceId !== workspaceId) {
+    throw new AccessDeniedError("Project access denied");
+  }
+}
 
-    if (!assignee) {
-      throw new AccessDeniedError("Assignee access denied or not found");
-    }
+// Validate that assignee exists and belongs to the workspace
+async function validateAssignee(workspaceId: number, assigneeId: string) {
+  const assignee = await prisma.user.findFirst({
+    where: { id: assigneeId },
+    select: { workspaceId: true },
+  });
+
+  if (!assignee) {
+    throw new NotFoundError("Assignee not found");
+  }
+
+  if (assignee.workspaceId !== workspaceId) {
+    throw new AccessDeniedError("Assignee access denied");
   }
 }
 
@@ -322,12 +586,6 @@ export function buildTaskWhereClause(
 
   return {
     workspaceId,
-
-    ...(filters.query && {
-      OR: [
-        { title: { contains: filters.query, mode: "insensitive" as const } },
-      ],
-    }),
 
     ...(filters.onlyMyTasks && { assigneeId: userId }),
     ...(filters.status?.length && { status: { in: filters.status } }),

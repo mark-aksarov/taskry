@@ -8,7 +8,7 @@ import z from "zod";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
-import { searchProjects } from "@/lib/data/project/project.service";
+import { searchProjects } from "@/lib/data/project/project.dal";
 import { pageSearchParam, pageSizeSearchParam } from "@/lib/schemas/base";
 
 const schema = z.object({

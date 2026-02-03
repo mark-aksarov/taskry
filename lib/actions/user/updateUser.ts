@@ -5,7 +5,7 @@ import { revalidatePath } from "next/cache";
 import { userSchema } from "@/lib/schemas/user";
 import { getTranslations } from "next-intl/server";
 import { actionError, actionSuccess } from "../utils/actionResult";
-import { updateUser as updateUserQuery } from "@/lib/data/user/user.dal";
+import { updateUser as updateUserService } from "@/lib/data/user/user.service";
 import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedirect";
 
 const schema = userSchema.omit({ email: true, password: true });
@@ -30,7 +30,7 @@ export async function updateUser(
     }
 
     // Update customer
-    await updateUserQuery(parsed.data);
+    await updateUserService(parsed.data);
 
     revalidatePath("/team");
 

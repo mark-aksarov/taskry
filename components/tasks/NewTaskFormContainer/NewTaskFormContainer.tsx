@@ -11,9 +11,9 @@ import {
 import { Suspense } from "react";
 import { NewTaskForm } from "../NewTaskForm";
 import { createTask } from "@/lib/actions/task/createTask";
-import { getUserSummaries } from "@/lib/data/user/user.service";
-import { getProjectSummaries } from "@/lib/data/project/project.service";
-import { getTaskCategorySummaries } from "@/lib/data/taskCategory/taskCategory.service";
+import { getUserSummaries } from "@/lib/data/user/user.dal";
+import { getProjectSummaries } from "@/lib/data/project/project.dal";
+import { getTaskCategorySummaries } from "@/lib/data/taskCategory/taskCategory.dal";
 
 export function NewTaskFormContainer() {
   return (

@@ -33,6 +33,7 @@ const meta = {
           userId={args.id}
           userFullName={args.fullName}
           deleteAction={fn()}
+          className="-mr-2"
         />
       }
       userDetailModal={<UserDetailModal {...UserDetailModalStory.args} />}

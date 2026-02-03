@@ -40,6 +40,7 @@ export default defineConfig({
         test: {
           name: "database",
           environment: "node",
+          setupFiles: "./vitest.setup.database.ts",
           include: ["lib/data/**/*.test.ts"],
           root: dirname,
         },
@@ -50,7 +51,7 @@ export default defineConfig({
           globals: true,
           name: "ui",
           environment: "jsdom",
-          setupFiles: "./vitest.setup.ts",
+          setupFiles: "./vitest.setup.ui.ts",
           include: ["components/**/*.test.tsx"],
         },
       },

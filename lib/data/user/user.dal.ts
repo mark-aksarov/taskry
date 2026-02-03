@@ -1,85 +1,234 @@
+import {
+  UserDetailDTO,
+  UserSearchDTO,
+  UserSummaryDTO,
+  UserFormDataDTO,
+} from "./user.dto";
+
 import { cache } from "react";
 import prisma from "@/lib/prisma";
-import { auth } from "@/lib/auth";
 import { UserFilters } from "@/lib/types";
-import { UpdateUserInputDTO } from "./user.dto";
-import { AccessDeniedError } from "../utils/error";
 import { requireSession } from "../utils/requireSession";
 import { Prisma, TaskStatus } from "@/generated/prisma/client";
 
-export const getUser = cache(
-  async <T extends Prisma.UserSelect>(id: string, select: T) => {
+export const getUserDetail = cache(
+  async (id: string): Promise<UserDetailDTO | null> => {
     const {
       user: { workspaceId },
     } = await requireSession();
 
-    let where = { id, workspaceId };
+    const user = await prisma.user.findFirst({
+      where: { id, workspaceId },
+      select: {
+        id: true,
+        fullName: true,
+        email: true,
+        phoneNumber: true,
+        imageUrl: true,
+        publicLink: true,
+        birthdate: true,
+        bio: true,
+        address: true,
 
-    return prisma.user.findFirst({
-      where,
-      select,
+        position: {
+          select: {
+            name: true,
+          },
+        },
+      },
     });
+
+    if (!user) {
+      return null;
+    }
+
+    return {
+      id: user.id,
+      fullName: user.fullName,
+      email: user.email,
+      phoneNumber: user.phoneNumber ?? undefined,
+      imageUrl: user.imageUrl ?? undefined,
+      publicLink: user.publicLink ?? undefined,
+      birthdate: user.birthdate ?? undefined,
+      bio: user.bio ?? undefined,
+      address: user.address ?? undefined,
+      position: user.position ? user.position : undefined,
+    };
   },
 );
 
-export const getAllUsers = cache(
-  async <T extends Prisma.UserSelect>({ select }: { select: T }) => {
+export const getUserFormData = cache(
+  async (id: string): Promise<UserFormDataDTO | null> => {
     const {
       user: { workspaceId },
     } = await requireSession();
 
-    let where = { workspaceId };
-
-    return await prisma.user.findMany({
-      where,
-      select,
+    const user = await prisma.user.findFirst({
+      where: { id, workspaceId },
+      select: {
+        id: true,
+        fullName: true,
+        phoneNumber: true,
+        imageUrl: true,
+        publicLink: true,
+        birthdate: true,
+        bio: true,
+        address: true,
+        positionId: true,
+      },
     });
+
+    if (!user) {
+      return null;
+    }
+
+    return {
+      id: user.id,
+      fullName: user.fullName,
+      phoneNumber: user.phoneNumber ?? undefined,
+      imageUrl: user.imageUrl ?? undefined,
+      publicLink: user.publicLink ?? undefined,
+      birthdate: user.birthdate ?? undefined,
+      bio: user.bio ?? undefined,
+      address: user.address ?? undefined,
+      positionId: user.positionId ?? undefined,
+    };
   },
 );
 
-export const getPaginatedUsers = cache(
-  async <T extends Prisma.UserSelect>({
+export const getUserSummaries = cache(async (): Promise<UserSummaryDTO[]> => {
+  const {
+    user: { workspaceId },
+  } = await requireSession();
+
+  let where = { workspaceId };
+
+  const users = await prisma.user.findMany({
+    where,
+    select: {
+      id: true,
+      fullName: true,
+    },
+  });
+
+  return users.map((u) => ({
+    id: u.id,
+    fullName: u.fullName,
+  }));
+});
+
+export const searchUsers = cache(
+  async ({
+    query,
+    page,
+    pageSize,
+  }: {
+    query?: string;
+    page?: number;
+    pageSize?: number;
+  }): Promise<UserSearchDTO> => {
+    // Authorization
+    const {
+      user: { workspaceId },
+    } = await requireSession();
+
+    // Get users
+    const where = {
+      workspaceId,
+      fullName: { contains: query, mode: "insensitive" as const },
+    };
+
+    const [items, totalCount] = await Promise.all([
+      prisma.user.findMany({
+        where,
+        orderBy: { fullName: "asc" },
+        skip: page && pageSize ? (page - 1) * pageSize : undefined,
+        take: pageSize,
+        select: {
+          id: true,
+          fullName: true,
+          email: true,
+          imageUrl: true,
+        },
+      }),
+      prisma.user.count({ where }),
+    ]);
+
+    //Map to DTO
+    return {
+      items: items.map((p) => ({
+        id: p.id,
+        fullName: p.fullName,
+        email: p.email,
+        imageUrl: p.imageUrl ?? undefined,
+      })),
+
+      totalCount,
+    };
+  },
+);
+
+export const getUserList = cache(
+  async ({
     page,
     pageSize,
     sort,
     filters,
-    select,
   }: {
     page?: number;
     pageSize?: number;
     sort?: string;
     filters?: UserFilters;
-    select: T;
-  }) => {
+  }): Promise<UserSearchDTO> => {
     const {
       user: { workspaceId },
     } = await requireSession();
 
-    const skip = page && pageSize ? (page - 1) * pageSize : Prisma.skip;
-    const take = pageSize ? pageSize : Prisma.skip;
+    let orderBy: Prisma.UserOrderByWithRelationInput | undefined;
 
-    const orderByMapping: Record<string, Prisma.UserOrderByWithRelationInput> =
-      {
-        fullName: { fullName: "asc" },
-        position: { position: { name: "asc" } },
-      };
+    if (sort === "fullName") {
+      orderBy = { fullName: "asc" };
+    } else if (sort === "position") {
+      orderBy = { position: { name: "asc" } };
+    }
 
-    const orderBy = sort ? orderByMapping[sort] : Prisma.skip;
     const where = buildUserWhereClause(workspaceId, filters);
 
     const [items, totalCount] = await Promise.all([
       prisma.user.findMany({
         where,
         orderBy,
-        skip,
-        take,
-        select,
+        skip: page && pageSize ? (page - 1) * pageSize : undefined,
+        take: pageSize,
+        select: {
+          id: true,
+          fullName: true,
+          email: true,
+          phoneNumber: true,
+          imageUrl: true,
+          publicLink: true,
+
+          position: {
+            select: {
+              name: true,
+            },
+          },
+        },
       }),
       prisma.user.count({ where }),
     ]);
 
     return {
-      items,
+      items: items.map((u) => ({
+        id: u.id,
+        fullName: u.fullName,
+        email: u.email,
+        phoneNumber: u.phoneNumber ?? undefined,
+        imageUrl: u.imageUrl ?? undefined,
+        publicLink: u.publicLink ?? undefined,
+        position: u.position ?? undefined,
+      })),
+
       totalCount,
     };
   },
@@ -94,74 +243,6 @@ export const getUserCount = cache(async (filters?: UserFilters) => {
     where: buildUserWhereClause(workspaceId, filters),
   });
 });
-
-export const updateUser = async (input: UpdateUserInputDTO) => {
-  // Authorization
-  const {
-    user: { id: userId, workspaceId },
-  } = await requireSession();
-
-  // ACL
-  const permission = await auth.api.userHasPermission({
-    body: {
-      userId: userId,
-      permission: {
-        user: ["update"],
-      },
-    },
-  });
-
-  if (!permission.success) {
-    throw new AccessDeniedError("You do not have permission to update users.");
-  }
-
-  // Check related resources access
-  await checkUserResourcesAccess(input.positionId);
-
-  const updatedUser = await prisma.user.update({
-    where: {
-      id: input.id,
-      workspaceId,
-    },
-    data: {
-      fullName: input.fullName ?? Prisma.skip,
-      bio: input.bio ?? Prisma.skip,
-      positionId: input.positionId ?? Prisma.skip,
-      phoneNumber: input.phoneNumber ?? Prisma.skip,
-      publicLink: input.publicLink ?? Prisma.skip,
-      birthdate: input.birthdate ?? Prisma.skip,
-      address: input.address ?? Prisma.skip,
-    },
-  });
-
-  return updatedUser;
-};
-
-export const deleteUsers = async (ids: string[]) => {
-  const {
-    user: { workspaceId },
-  } = await requireSession();
-
-  return await prisma.user.deleteMany({
-    where: { workspaceId, id: { in: ids } },
-  });
-};
-
-export async function checkUserResourcesAccess(positionId?: number) {
-  const {
-    user: { workspaceId },
-  } = await requireSession();
-
-  if (positionId) {
-    const category = await prisma.position.findUnique({
-      where: { id: positionId, workspaceId },
-    });
-
-    if (!category) {
-      throw new AccessDeniedError("Position access denied or not found");
-    }
-  }
-}
 
 export function buildUserWhereClause(
   workspaceId: number,
@@ -194,11 +275,7 @@ export function buildUserWhereClause(
 
   return {
     workspaceId,
-    ...(filters?.query && {
-      OR: [
-        { fullName: { contains: filters.query, mode: "insensitive" as const } },
-      ],
-    }),
+
     ...(filters?.position?.length && { positionId: { in: filters.position } }),
     ...(taskFilters.length > 0 && { OR: taskFilters }),
   };

@@ -15,14 +15,12 @@ import { UserToolbarSortingMenuTrigger } from "@/components/users/UserToolbarSor
 
 interface UsersPageProps {
   userToolbarFiltersModalTrigger: React.ReactNode;
-  userToolbarActionsMenuTrigger: React.ReactNode;
   userToolbarCreateNewMenuTrigger: React.ReactNode;
   usersContainer: React.ReactNode;
 }
 
 export function UsersPage({
   userToolbarFiltersModalTrigger,
-  userToolbarActionsMenuTrigger,
   userToolbarCreateNewMenuTrigger,
   usersContainer,
 }: UsersPageProps) {
@@ -36,7 +34,6 @@ export function UsersPage({
             <ToolbarDesktop>
               <UserToolbarSortingMenuTrigger />
               {userToolbarFiltersModalTrigger}
-              {userToolbarActionsMenuTrigger}
               <ViewModeToggleButtonGroup className="ml-auto" />
               {userToolbarCreateNewMenuTrigger}
             </ToolbarDesktop>
@@ -45,7 +42,6 @@ export function UsersPage({
               <ToolbarMobileHeading>{t("heading")}</ToolbarMobileHeading>
               <UserToolbarSortingMenuTrigger />
               {userToolbarFiltersModalTrigger}
-              {userToolbarActionsMenuTrigger}
             </ToolbarMobileTop>
 
             <ToolbarMobileBottom>

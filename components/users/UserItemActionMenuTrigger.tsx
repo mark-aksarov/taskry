@@ -13,7 +13,7 @@ import { Pencil, Trash } from "lucide-react";
 import { EditUserModal } from "./EditUserModal";
 import { DeleteUserModal } from "./DeleteUserModal";
 import { GuestModeModal } from "../common/GuestModeModal";
-import { ActionFn, ActionState, DeleteUsersPayload } from "@/lib/actions/types";
+import { ActionFn, ActionState } from "@/lib/actions/types";
 
 interface UserItemActionMenuTriggerProps {
   showUserMenuItem: boolean;
@@ -21,7 +21,7 @@ interface UserItemActionMenuTriggerProps {
   userId: string;
   userFullName: string;
   className?: string;
-  deleteAction: ActionFn<ActionState, DeleteUsersPayload>;
+  deleteAction: ActionFn<ActionState, string>;
   editUserFormContainer: React.ReactNode;
 }
 

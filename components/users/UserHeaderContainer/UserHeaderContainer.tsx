@@ -8,7 +8,7 @@ import {
 import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import { useTranslations } from "next-intl";
-import { getUserDetail } from "@/lib/data/user/user.service";
+import { getUserDetail } from "@/lib/data/user/user.dal";
 import { PersonDetailHeaderImage } from "@/components/common/PersonDetailHeaderImage";
 
 interface UserHeaderContainerProps {

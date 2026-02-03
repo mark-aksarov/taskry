@@ -4,22 +4,27 @@ import { cache } from "react";
 import prisma from "@/lib/prisma";
 import { auth } from "@/lib/auth";
 import { AccessDeniedError } from "../utils/error";
-import { CreatePositionInputDTO } from "./position.dto";
 import { requireSession } from "../utils/requireSession";
+import { CreatePositionInputDTO, PositionSummaryDTO } from "./position.dto";
 
-export const getAllPositions = cache(async () => {
-  const {
-    user: { workspaceId },
-  } = await requireSession();
+export const getPositionSummaries = cache(
+  async (): Promise<PositionSummaryDTO[]> => {
+    // Authorization
+    const {
+      user: { workspaceId },
+    } = await requireSession();
 
-  return await prisma.position.findMany({
-    where: { workspaceId },
-    select: {
-      id: true,
-      name: true,
-    },
-  });
-});
+    const positions = await prisma.position.findMany({
+      where: { workspaceId },
+      select: {
+        id: true,
+        name: true,
+      },
+    });
+
+    return positions;
+  },
+);
 
 export const createPosition = async (input: CreatePositionInputDTO) => {
   // Authorization

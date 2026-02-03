@@ -2,7 +2,7 @@ import "server-only";
 
 import { Suspense } from "react";
 import { notFound } from "next/navigation";
-import { getProjectDetail } from "@/lib/data/project/project.service";
+import { getProjectDetail } from "@/lib/data/project/project.dal";
 import { ProjectDetailAlt, ProjectDetailAltSkeleton } from "./ProjectDetailAlt";
 
 interface ProjectDetailAltContainerProps {

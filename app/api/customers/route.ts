@@ -1,7 +1,7 @@
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
-import { getCustomerSummaries } from "@/lib/data/customer/customer.service";
+import { getCustomerSummaries } from "@/lib/data/customer/customer.dal";
 import {
   internalServerError,
   unauthorized,

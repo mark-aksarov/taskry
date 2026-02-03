@@ -1,94 +1,269 @@
 import "server-only";
 
+import {
+  CustomerDetailDTO,
+  CreateCustomerInputDTO,
+  UpdateCustomerInputDTO,
+  CustomerFormDataDTO,
+  CustomerSummaryDTO,
+  CustomerSearchDTO,
+  CustomerListDTO,
+} from "./customer.dto";
+
 import { cache } from "react";
 import { auth } from "@/lib/auth";
 import prisma from "@/lib/prisma";
 import { CustomerFilters } from "@/lib/types";
-import { AccessDeniedError } from "../utils/error";
 import { requireSession } from "../utils/requireSession";
+import { AccessDeniedError, NotFoundError } from "../utils/error";
 import { Prisma, ProjectStatus } from "@/generated/prisma/client";
-import { CreateCustomerInputDTO, UpdateCustomerInputDTO } from "./customer.dto";
 
-export const getCustomer = cache(
-  async <T extends Prisma.CustomerSelect>(id: number, select: T) => {
+export const getCustomerDetail = cache(
+  async (id: number): Promise<CustomerDetailDTO | null> => {
+    // Authorization
     const {
       user: { workspaceId },
     } = await requireSession();
 
-    return await prisma.customer.findFirst({
+    // Get customer
+    const customer = await prisma.customer.findFirst({
       where: { id, workspaceId },
-      select,
+      select: {
+        id: true,
+        fullName: true,
+        email: true,
+        phoneNumber: true,
+        imageUrl: true,
+        publicLink: true,
+        bio: true,
+        workspaceId: true,
+
+        company: {
+          select: {
+            name: true,
+          },
+        },
+      },
     });
+
+    if (!customer) {
+      return null;
+    }
+
+    //Map to DTO
+    return {
+      id: customer.id,
+      fullName: customer.fullName,
+      email: customer.email,
+      phoneNumber: customer.phoneNumber ?? undefined,
+      imageUrl: customer.imageUrl ?? undefined,
+      publicLink: customer.publicLink ?? undefined,
+      bio: customer.bio ?? undefined,
+      workspaceId: customer.workspaceId,
+      company: customer.company ? customer.company : undefined,
+    };
   },
 );
 
-export const getAllCustomers = cache(
-  async <T extends Prisma.CustomerSelect>({ select }: { select: T }) => {
+export const getCustomerFormData = cache(
+  async (id: number): Promise<CustomerFormDataDTO | null> => {
+    // Authorization
+    const {
+      user: { workspaceId },
+    } = await requireSession();
+
+    // Get customer
+    const customer = await prisma.customer.findFirst({
+      where: { id, workspaceId },
+      select: {
+        id: true,
+        fullName: true,
+        email: true,
+        phoneNumber: true,
+        imageUrl: true,
+        publicLink: true,
+        bio: true,
+        companyId: true,
+      },
+    });
+
+    if (!customer) {
+      return null;
+    }
+
+    //Map to DTO
+    return {
+      id: customer.id,
+      fullName: customer.fullName,
+      email: customer.email,
+      phoneNumber: customer.phoneNumber ?? undefined,
+      imageUrl: customer.imageUrl ?? undefined,
+      publicLink: customer.publicLink ?? undefined,
+      bio: customer.bio ?? undefined,
+      companyId: customer.companyId,
+    };
+  },
+);
+
+export const getCustomerSummaries = cache(
+  async (): Promise<CustomerSummaryDTO[]> => {
+    // Authorization
     const {
       user: { workspaceId },
     } = await requireSession();
 
     let where = { workspaceId };
 
-    return await prisma.customer.findMany({
+    // Get customers
+    const customers = await prisma.customer.findMany({
       where,
-      select,
+      select: {
+        id: true,
+        fullName: true,
+      },
     });
+
+    //Map to DTO
+    return customers.map((customer) => ({
+      id: customer.id,
+      fullName: customer.fullName,
+    }));
   },
 );
 
-export const getPaginatedCustomers = cache(
-  async <T extends Prisma.CustomerSelect>({
+export const searchCustomers = cache(
+  async ({
+    query,
+    page,
+    pageSize,
+  }: {
+    query?: string;
+    page?: number;
+    pageSize?: number;
+  }): Promise<CustomerSearchDTO> => {
+    // Authorization
+    const {
+      user: { workspaceId },
+    } = await requireSession();
+
+    // Get customers
+    const where = {
+      workspaceId,
+      fullName: { contains: query, mode: "insensitive" as const },
+    };
+
+    const [items, totalCount] = await Promise.all([
+      prisma.customer.findMany({
+        where,
+        orderBy: { fullName: "asc" },
+        skip: page && pageSize ? (page - 1) * pageSize : undefined,
+        take: pageSize,
+        select: {
+          id: true,
+          fullName: true,
+          email: true,
+          imageUrl: true,
+        },
+      }),
+      prisma.customer.count({ where }),
+    ]);
+
+    //Map to DTO
+    return {
+      items: items.map((c) => ({
+        id: c.id,
+        fullName: c.fullName,
+        email: c.email,
+        imageUrl: c.imageUrl ?? undefined,
+      })),
+      totalCount,
+    };
+  },
+);
+
+export const getCustomerList = cache(
+  async ({
     page,
     pageSize,
     sort,
     filters,
-    select,
   }: {
     page?: number;
     pageSize?: number;
     sort?: string;
     filters?: CustomerFilters;
-    select: T;
-  }) => {
+  }): Promise<CustomerListDTO> => {
+    // Authorization
     const {
       user: { workspaceId },
     } = await requireSession();
 
-    const skip = page && pageSize ? (page - 1) * pageSize : Prisma.skip;
-    const take = pageSize ? pageSize : Prisma.skip;
-
-    const orderByMapping: Record<
-      string,
-      | Prisma.CustomerOrderByWithRelationInput
-      | Prisma.CustomerOrderByWithRelationInput[]
-    > = {
-      fullName: { fullName: "asc" },
-      company: [{ company: { name: "asc" } }, { fullName: "asc" }],
-    };
-
-    const orderBy = sort ? orderByMapping[sort] : Prisma.skip;
     const where = buildCustomerWhereClause(workspaceId, filters);
 
+    // Sorting
+    let orderBy;
+
+    if (sort === "company") {
+      orderBy = [
+        {
+          company: {
+            name: "asc",
+          },
+        },
+        {
+          fullName: "asc",
+        },
+      ] as Prisma.CustomerOrderByWithRelationInput[];
+    } else if (sort === "fullName") {
+      orderBy = {
+        fullName: "asc",
+      } as Prisma.CustomerOrderByWithRelationInput;
+    }
+
+    // Get customers
     const [items, totalCount] = await Promise.all([
       prisma.customer.findMany({
         where,
         orderBy,
-        skip,
-        take,
-        select,
+        skip: page && pageSize ? (page - 1) * pageSize : undefined,
+        take: pageSize,
+        select: {
+          id: true,
+          fullName: true,
+          email: true,
+          phoneNumber: true,
+          publicLink: true,
+          imageUrl: true,
+
+          company: {
+            select: {
+              id: true,
+              name: true,
+            },
+          },
+        },
       }),
       prisma.customer.count({ where }),
     ]);
 
+    //Map to DTO
     return {
-      items,
+      items: items.map((customer) => ({
+        id: customer.id,
+        fullName: customer.fullName,
+        email: customer.email,
+        phoneNumber: customer.phoneNumber ?? undefined,
+        imageUrl: customer.imageUrl ?? undefined,
+        publicLink: customer.publicLink ?? undefined,
+        company: customer.company ?? undefined,
+      })),
       totalCount,
     };
   },
 );
 
 export const getCustomerCount = cache(async (filters?: CustomerFilters) => {
+  // Authorization
   const {
     user: { workspaceId },
   } = await requireSession();
@@ -153,19 +328,19 @@ export const createCustomer = async (input: CreateCustomerInputDTO) => {
     );
   }
 
-  // Check related resources access
-  await checkCustomerResourcesAccess(workspaceId, input.companyId);
+  // Validate company
+  await validateCompany(workspaceId, input.companyId);
 
   // Create customer
   const customer = await prisma.customer.create({
     data: {
       fullName: input.fullName,
-      bio: input.bio ?? Prisma.skip,
-      imageUrl: input.imageUrl ?? Prisma.skip,
+      bio: input.bio,
+      imageUrl: input.imageUrl,
       companyId: input.companyId,
       email: input.email,
-      phoneNumber: input.phoneNumber ?? Prisma.skip,
-      publicLink: input.publicLink ?? Prisma.skip,
+      phoneNumber: input.phoneNumber,
+      publicLink: input.publicLink,
       workspaceId,
     },
   });
@@ -195,8 +370,10 @@ export const updateCustomer = async (input: UpdateCustomerInputDTO) => {
     );
   }
 
-  // Check related resources access
-  await checkCustomerResourcesAccess(workspaceId, input.companyId);
+  // Validate company
+  if (input.companyId) {
+    await validateCompany(workspaceId, input.companyId);
+  }
 
   // Update customer
   const updatedCustomer = await prisma.customer.update({
@@ -205,13 +382,13 @@ export const updateCustomer = async (input: UpdateCustomerInputDTO) => {
       workspaceId,
     },
     data: {
-      fullName: input.fullName ?? Prisma.skip,
-      bio: input.bio ?? Prisma.skip,
-      imageUrl: input.imageUrl ?? Prisma.skip,
-      companyId: input.companyId ?? Prisma.skip,
-      email: input.email ?? Prisma.skip,
-      phoneNumber: input.phoneNumber ?? Prisma.skip,
-      publicLink: input.publicLink ?? Prisma.skip,
+      fullName: input.fullName,
+      bio: input.bio,
+      imageUrl: input.imageUrl,
+      companyId: input.companyId,
+      email: input.email,
+      phoneNumber: input.phoneNumber,
+      publicLink: input.publicLink,
     },
   });
 
@@ -222,18 +399,19 @@ export const updateCustomer = async (input: UpdateCustomerInputDTO) => {
  * HELPERS
  */
 
-async function checkCustomerResourcesAccess(
-  workspaceId: number,
-  companyId?: number,
-) {
-  if (companyId) {
-    const company = await prisma.company.findFirst({
-      where: { id: companyId, workspaceId },
-    });
+// Validate that company exists and belongs to the workspace
+async function validateCompany(workspaceId: number, companyId: number) {
+  const company = await prisma.company.findUnique({
+    where: { id: companyId },
+    select: { workspaceId: true },
+  });
 
-    if (!company) {
-      throw new AccessDeniedError("Company access denied or not found");
-    }
+  if (!company) {
+    throw new NotFoundError("Company not found");
+  }
+
+  if (company.workspaceId !== workspaceId) {
+    throw new AccessDeniedError("Company access denied");
   }
 }
 
@@ -270,13 +448,6 @@ export function buildCustomerWhereClause(
 
   return {
     workspaceId,
-
-    ...(filters.query && {
-      OR: [
-        { fullName: { contains: filters.query, mode: "insensitive" as const } },
-      ],
-    }),
-
     ...(filters?.company?.length && { companyId: { in: filters.company } }),
     ...(projectFilters.length > 0 && { OR: projectFilters }),
   };

@@ -1,11 +1,12 @@
+import {
+  unauthorized,
+  internalServerError,
+} from "@/lib/utils/routeHandlerErrors";
+
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import { NextResponse, NextRequest } from "next/server";
-import { getProjectSummaries } from "@/lib/data/project/project.service";
-import {
-  internalServerError,
-  unauthorized,
-} from "@/lib/utils/routeHandlerErrors";
+import { getProjectSummaries } from "@/lib/data/project/project.dal";
 
 export async function GET(req: NextRequest) {
   // Authorization

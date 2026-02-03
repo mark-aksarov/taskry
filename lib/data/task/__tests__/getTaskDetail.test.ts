@@ -1,0 +1,158 @@
+import {
+  seedUsers,
+  seedTasks,
+  seedProjects,
+  seedCustomers,
+  seedCompanies,
+  seedWorkspaces,
+  seedTaskCategories,
+  seedProjectCategories,
+  seedPositions,
+} from "@/lib/data/utils/test-utils";
+
+import prisma from "@/lib/prisma";
+import { getTaskDetail } from "../task.dal";
+import { TaskStatus } from "@/generated/prisma/enums";
+import { resetDatabase } from "@/prisma/resetDatabase";
+import { requireSession } from "@/lib/data/utils/requireSession";
+import { it, expect, describe, beforeAll, afterAll } from "vitest";
+
+describe("getTaskDetail", () => {
+  beforeAll(async () => {
+    (requireSession as any).mockResolvedValue({
+      user: { id: "user-1", workspaceId: 1 },
+    });
+
+    await resetDatabase();
+    await seedWorkspaces();
+    await seedPositions();
+    await seedUsers();
+    await seedProjectCategories();
+    await seedTaskCategories();
+    await seedCompanies();
+    await seedCustomers();
+    await seedProjects();
+    await seedTasks();
+
+    await prisma.attachment.createMany({
+      data: [
+        {
+          id: 1,
+          taskId: 1,
+          fileName: "Attachment 1",
+          fileUrl: "https://example.com/attachment-1.jpg",
+          workspaceId: 1,
+        },
+        {
+          id: 2,
+          taskId: 1,
+          fileName: "Attachment 2",
+          fileUrl: "https://example.com/attachment-2.jpg",
+          workspaceId: 1,
+        },
+      ],
+    });
+
+    await prisma.subtask.createMany({
+      data: [
+        {
+          id: 1,
+          taskId: 1,
+          text: "Subtask 1",
+          isDone: false,
+        },
+        {
+          id: 2,
+          taskId: 1,
+          text: "Subtask 2",
+          isDone: true,
+        },
+      ],
+    });
+
+    await prisma.comment.createMany({
+      data: [
+        {
+          id: 1,
+          taskId: 1,
+          content: "Comment 1",
+          senderId: "user-1",
+          workspaceId: 1,
+        },
+        {
+          id: 2,
+          taskId: 1,
+          content: "Comment 2",
+          senderId: "user-2",
+          workspaceId: 1,
+        },
+      ],
+    });
+  });
+
+  afterAll(async () => {
+    await prisma.task.deleteMany();
+    await prisma.attachment.deleteMany();
+    await prisma.subtask.deleteMany();
+    await prisma.comment.deleteMany();
+  });
+
+  it("should return a valid TaskDetailDTO", async () => {
+    const result = await getTaskDetail(1);
+
+    expect(result).toStrictEqual({
+      id: 1,
+      title: "Task 1",
+      description: "Description 1",
+      deadline: new Date("2025-12-31"),
+      status: TaskStatus.active,
+
+      assignee: {
+        id: "user-1",
+        fullName: "User 1",
+        imageUrl: "https://example.com/user-1.jpg",
+      },
+      project: {
+        id: 1,
+        title: "Project 1",
+      },
+      category: {
+        id: 1,
+        name: "Task Category 1",
+      },
+
+      subtasks: expect.arrayContaining([
+        {
+          id: 1,
+          text: "Subtask 1",
+          isDone: false,
+        },
+        {
+          id: 2,
+          text: "Subtask 2",
+          isDone: true,
+        },
+      ]),
+
+      attachments: expect.arrayContaining([
+        {
+          id: 1,
+          fileUrl: "https://example.com/attachment-1.jpg",
+          fileName: "Attachment 1",
+        },
+        {
+          id: 2,
+          fileUrl: "https://example.com/attachment-2.jpg",
+          fileName: "Attachment 2",
+        },
+      ]),
+
+      commentsCount: 2,
+    });
+  });
+
+  it("should return null", async () => {
+    const failure = await getTaskDetail(999);
+    expect(failure).toBeNull();
+  });
+});

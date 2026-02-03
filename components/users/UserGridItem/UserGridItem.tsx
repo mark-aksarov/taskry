@@ -15,11 +15,6 @@ import {
   ItemBaseDetailBottomSheetTrigger,
 } from "@/components/common/ItemBase";
 
-import {
-  useSyncSelectionUserItem,
-  useUserSelection,
-} from "@/lib/hooks/useUserSelection";
-
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { Link } from "@/components/ui/Link";
@@ -59,9 +54,6 @@ export function UserGridItem({
 }: UserGridItemProps) {
   const t = useTranslations("users.UserGridItem");
 
-  const { isSelected, toggleItem } = useUserSelection();
-  useSyncSelectionUserItem(id, fullName);
-
   const contactLinkClasses = "max-w-full overflow-hidden";
 
   const userImg = imageUrl ? (
@@ -74,13 +66,6 @@ export function UserGridItem({
 
   return (
     <UserGridItemLayout
-      checkboxSlot={
-        <Checkbox
-          aria-label={`${fullName} checkbox`}
-          isSelected={isSelected(id)}
-          onChange={() => toggleItem(id)}
-        />
-      }
       actionMenuSlot={menuTrigger}
       imageSlot={
         <>

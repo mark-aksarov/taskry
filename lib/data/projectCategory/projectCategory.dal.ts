@@ -1,23 +1,37 @@
 import "server-only";
 
+import {
+  ProjectCategorySummaryDTO,
+  CreateProjectCategoryInputDTO,
+} from "./projectCategory.dto";
+
 import { cache } from "react";
 import prisma from "@/lib/prisma";
 import { auth } from "@/lib/auth";
 import { AccessDeniedError } from "../utils/error";
 import { requireSession } from "../utils/requireSession";
-import { CreateProjectCategoryInputDTO } from "./projectCategory.dto";
 
-export const getAllProjectCategories = cache(async () => {
-  // Authorization
-  const {
-    user: { workspaceId },
-  } = await requireSession();
+export const getProjectCategorySummaries = cache(
+  async (): Promise<ProjectCategorySummaryDTO[]> => {
+    // Authorization
+    const {
+      user: { workspaceId },
+    } = await requireSession();
 
-  return await prisma.projectCategory.findMany({
-    where: { workspaceId },
-    select: { id: true, name: true },
-  });
-});
+    // Get project categories
+    const projectCategories = await prisma.projectCategory.findMany({
+      where: { workspaceId },
+      select: { id: true, name: true },
+    });
+
+    return projectCategories.map((p) => {
+      return {
+        id: p.id,
+        name: p.name,
+      };
+    });
+  },
+);
 
 export const createProjectCategory = async (
   input: CreateProjectCategoryInputDTO,

@@ -1,7 +1,6 @@
 import { ProjectStatus, TaskStatus } from "@/generated/prisma/enums";
 
 export interface ProjectFilters {
-  query?: string;
   noActiveTasks?: boolean;
   status?: ProjectStatus[];
   category?: number[];
@@ -12,7 +11,6 @@ export interface ProjectFilters {
 }
 
 export interface TaskFilters {
-  query?: string;
   onlyMyTasks?: boolean;
   status?: TaskStatus[];
   category?: number[];
@@ -23,7 +21,6 @@ export interface TaskFilters {
 }
 
 export interface UserFilters {
-  query?: string;
   hasNoActiveTasks?: boolean;
   hasActiveTasks?: boolean;
   hasOverdueTasks?: boolean;
@@ -31,7 +28,6 @@ export interface UserFilters {
 }
 
 export interface CustomerFilters {
-  query?: string;
   hasNoActiveProjects?: boolean;
   hasActiveProjects?: boolean;
   hasOverdueProjects?: boolean;

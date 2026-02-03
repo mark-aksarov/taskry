@@ -1,17 +1,17 @@
 import "server-only";
 
 import {
+  ProjectFormBaseSkeleton,
   ProjectFormBaseStatusSelect,
   ProjectFormBaseCategorySelect,
   ProjectFormBaseCustomerSelect,
-  ProjectFormBaseSkeleton,
 } from "../ProjectFormBase";
 
 import { Suspense } from "react";
 import { NewProjectForm } from "../NewProjectForm";
 import { createProject } from "@/lib/actions/project/createProject";
-import { getCustomerSummaries } from "@/lib/data/customer/customer.service";
-import { getProjectCategorySummaries } from "@/lib/data/projectCategory/projectCategory.service";
+import { getCustomerSummaries } from "@/lib/data/customer/customer.dal";
+import { getProjectCategorySummaries } from "@/lib/data/projectCategory/projectCategory.dal";
 
 export function NewProjectFormContainer() {
   return (

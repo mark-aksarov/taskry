@@ -11,11 +11,11 @@ import { UserFilters } from "@/lib/types";
 import { UserListItem } from "../UserListItem";
 import { UserGridItem } from "../UserGridItem";
 import { UserDetailModal } from "../UserDetailModal";
+import { getUserList } from "@/lib/data/user/user.dal";
 import { hasOwnerRole } from "@/lib/utils/hasOwnerRole";
 import { hasGuestRole } from "@/lib/utils/hasGuestRole";
-import { getUserList } from "@/lib/data/user/user.service";
 import { UserListItemDTO } from "@/lib/data/user/user.dto";
-import { deleteUsers } from "@/lib/actions/user/deleteUsers";
+import { deleteUser } from "@/lib/actions/user/deleteUser";
 import { UserDetailContainer } from "../UserDetailContainer";
 import { ViewModeLayout } from "@/components/common/ViewMode";
 import { UserDetailBottomSheet } from "../UserDetailBottomSheet";
@@ -72,7 +72,7 @@ export async function UsersContainer({
                     }
                     userId={user.id}
                     userFullName={user.fullName}
-                    deleteAction={deleteUsers}
+                    deleteAction={deleteUser}
                   />
                 }
                 userDetailModal={
@@ -110,7 +110,7 @@ export async function UsersContainer({
                     }
                     userId={user.id}
                     userFullName={user.fullName}
-                    deleteAction={deleteUsers}
+                    deleteAction={deleteUser}
                     className="-mr-2"
                   />
                 }

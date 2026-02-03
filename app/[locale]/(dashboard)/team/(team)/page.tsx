@@ -12,14 +12,12 @@ import { hasOwnerRole } from "@/lib/utils/hasOwnerRole";
 import { getUserCount } from "@/lib/data/user/user.dal";
 import { hasGuestRole } from "@/lib/utils/hasGuestRole";
 import { createUser } from "@/lib/actions/user/createUser";
-import { deleteUsers } from "@/lib/actions/user/deleteUsers";
 import { NewUserForm } from "@/components/users/NewUserForm";
 import { UsersContainer } from "@/components/users/UsersContainer";
 import { createPosition } from "@/lib/actions/position/createPosition";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { NewPositionForm } from "@/components/users/NewPositionForm/NewPositionForm";
 import { UserFiltersFormContainer } from "@/components/users/UserFiltersFormContainer";
-import { UserToolbarActionsMenuTrigger } from "@/components/users/UserToolbarActionsMenuTrigger";
 import { UserToolbarFiltersModalTrigger } from "@/components/users/UserToolbarFiltersModalTrigger";
 import { UserToolbarCreateNewMenuTrigger } from "@/components/users/UserToolbarCreateNewMenuTrigger";
 
@@ -60,9 +58,6 @@ export default async function AppUsersPage({
         <UserToolbarFiltersModalTrigger
           filtersFormContainer={<UserFiltersFormContainer filters={filters} />}
         />
-      }
-      userToolbarActionsMenuTrigger={
-        <UserToolbarActionsMenuTrigger deleteAction={deleteUsers} />
       }
       userToolbarCreateNewMenuTrigger={
         <UserToolbarCreateNewMenuTrigger

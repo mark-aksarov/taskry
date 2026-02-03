@@ -20,7 +20,7 @@ export const owner = ac.newRole(statements);
 
 export const user = ac.newRole({
   ...statements,
-  user: [],
+  user: ["update"],
 });
 
 export const guest = ac.newRole({

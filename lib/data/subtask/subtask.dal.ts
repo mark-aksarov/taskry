@@ -1,7 +1,6 @@
 import { auth } from "@/lib/auth";
 import prisma from "@/lib/prisma";
-import { AccessDeniedError } from "../utils/error";
-import { Prisma } from "@/generated/prisma/client";
+import { AccessDeniedError, NotFoundError } from "../utils/error";
 import { requireSession } from "../utils/requireSession";
 import { CreateSubtaskInputDTO, UpdateSubtaskInputDTO } from "./subtask.dto";
 
@@ -27,8 +26,8 @@ export const createSubtask = async (input: CreateSubtaskInputDTO) => {
     );
   }
 
-  // Check related resources access
-  await checkSubtaskResourcesAccess(workspaceId, input.taskId);
+  // Validate task
+  await validateTask(workspaceId, input.taskId);
 
   // Create subtask
   const subtask = await prisma.subtask.create({
@@ -83,8 +82,8 @@ export const updateSubtask = async (input: UpdateSubtaskInputDTO) => {
       task: { workspaceId },
     },
     data: {
-      text: input.text ?? Prisma.skip,
-      isDone: input.isDone === undefined ? Prisma.skip : input.isDone,
+      text: input.text,
+      isDone: input.isDone,
     },
     select: {
       id: true,
@@ -150,18 +149,18 @@ export const deleteSubtask = async (id: number) => {
  * HELPERS
  */
 
-async function checkSubtaskResourcesAccess(
-  workspaceId: number,
-  taskId: number,
-) {
-  const task = await prisma.task.findFirst({
-    where: {
-      id: taskId,
-      workspaceId,
-    },
+// Validate that task exists and belongs to the workspace
+async function validateTask(workspaceId: number, taskId: number) {
+  const project = await prisma.task.findUnique({
+    where: { id: taskId },
+    select: { workspaceId: true },
   });
 
-  if (!task) {
-    throw new AccessDeniedError("Task access denied or not found");
+  if (!project) {
+    throw new NotFoundError("Task not found");
+  }
+
+  if (project.workspaceId !== workspaceId) {
+    throw new AccessDeniedError("Task access denied");
   }
 }

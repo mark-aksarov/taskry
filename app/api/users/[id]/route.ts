@@ -8,7 +8,7 @@ import z from "zod";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
-import { getUserDetail, getUserFormData } from "@/lib/data/user/user.service";
+import { getUserDetail, getUserFormData } from "@/lib/data/user/user.dal";
 
 export async function GET(
   req: NextRequest,

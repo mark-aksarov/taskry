@@ -11,9 +11,9 @@ import {
 import { useTranslations } from "next-intl";
 import { ModalProps } from "@/components/ui/Modal";
 import { DialogHeading } from "@/components/ui/Dialog";
+import { ActionFn, ActionState } from "@/lib/actions/types";
 import { startTransition, useActionState, useEffect } from "react";
 import { useActionErrorToast } from "@/lib/hooks/useActionErrorToast";
-import { ActionFn, ActionState, DeleteUsersPayload } from "@/lib/actions/types";
 
 const initialState: ActionState = {
   status: null,
@@ -23,7 +23,7 @@ const initialState: ActionState = {
 interface DeleteUserModalProps extends ModalProps {
   userId: string;
   userFullName: string;
-  deleteAction: ActionFn<ActionState, DeleteUsersPayload>;
+  deleteAction: ActionFn<ActionState, string>;
   onSuccess?: () => void;
 }
 
@@ -45,7 +45,7 @@ export function DeleteUserModal({
   }, [state.status, onSuccess]);
 
   const handleDelete = () => {
-    startTransition(() => action([userId]));
+    startTransition(() => action(userId));
     onOpenChange?.(false);
   };
 

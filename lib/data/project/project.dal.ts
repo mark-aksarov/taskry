@@ -1,91 +1,378 @@
 import "server-only";
 
+import {
+  ProjectDetailDTO,
+  ProjectSummaryDTO,
+  ProjectFormDataDTO,
+  UpdateProjectInputDTO,
+  CreateProjectInputDTO,
+  ProjectListDTO,
+  ProjectSearchDTO,
+} from "./project.dto";
+
 import { cache } from "react";
 import { auth } from "@/lib/auth";
 import prisma from "@/lib/prisma";
 import { ProjectFilters } from "@/lib/types";
-import { AccessDeniedError } from "../utils/error";
 import { requireSession } from "../utils/requireSession";
-import { CreateProjectInputDTO, UpdateProjectInputDTO } from "./project.dto";
+import { AccessDeniedError, NotFoundError } from "../utils/error";
 import { Prisma, TaskStatus, ProjectStatus } from "@/generated/prisma/client";
 
-export const getProject = cache(
-  async <T extends Prisma.ProjectSelect>(id: number, select: T) => {
+export const getProjectDetail = cache(
+  async (id: number): Promise<ProjectDetailDTO | null> => {
+    // Authorization
     const {
       user: { workspaceId },
     } = await requireSession();
 
-    let where = { id, workspaceId };
+    // Get project
+    const project = await prisma.project.findFirst({
+      where: { id, workspaceId },
+      select: {
+        id: true,
+        title: true,
+        description: true,
+        deadline: true,
+        status: true,
 
-    return prisma.project.findFirst({
-      where,
-      select,
+        creator: {
+          select: {
+            id: true,
+            fullName: true,
+            imageUrl: true,
+          },
+        },
+
+        customer: {
+          select: {
+            id: true,
+            fullName: true,
+          },
+        },
+
+        category: {
+          select: {
+            id: true,
+            name: true,
+          },
+        },
+
+        attachments: {
+          select: {
+            id: true,
+            fileUrl: true,
+            fileName: true,
+          },
+        },
+      },
     });
+
+    if (!project) {
+      return null;
+    }
+
+    // Map to DTO
+    return {
+      id: project.id,
+      title: project.title,
+      description: project.description ?? undefined,
+      deadline: project.deadline,
+      status: project.status,
+      categoryId: project.category.id,
+      customerId: project.customer?.id ?? undefined,
+      creator: project.creator
+        ? {
+            id: project.creator.id,
+            fullName: project.creator.fullName,
+            imageUrl: project.creator.imageUrl ?? undefined,
+          }
+        : undefined,
+      customer: project.customer
+        ? {
+            id: project.customer.id,
+            fullName: project.customer.fullName,
+          }
+        : undefined,
+      category: project.category,
+      attachments: project.attachments,
+    };
   },
 );
 
-export const getAllProjects = cache(
-  async <T extends Prisma.ProjectSelect>({ select }: { select: T }) => {
+export const getProjectFormData = cache(
+  async (id: number): Promise<ProjectFormDataDTO | null> => {
+    // Authorization
+    const {
+      user: { workspaceId },
+    } = await requireSession();
+
+    // Get project
+    const project = await prisma.project.findFirst({
+      where: { id, workspaceId },
+      select: {
+        id: true,
+        title: true,
+        description: true,
+        deadline: true,
+        status: true,
+        categoryId: true,
+        customerId: true,
+      },
+    });
+
+    if (!project) {
+      return null;
+    }
+
+    // Map to DTO
+    return {
+      id: project.id,
+      title: project.title,
+      description: project.description ?? undefined,
+      deadline: project.deadline,
+      status: project.status,
+      categoryId: project.categoryId ?? undefined,
+      customerId: project.customerId ?? undefined,
+    };
+  },
+);
+
+export const getProjectSummary = cache(
+  async (id: number): Promise<ProjectSummaryDTO | null> => {
+    // Authorization
+    const {
+      user: { workspaceId },
+    } = await requireSession();
+
+    // Get project
+    const project = await prisma.project.findFirst({
+      where: { id, workspaceId },
+      select: {
+        id: true,
+        title: true,
+      },
+    });
+
+    if (!project) {
+      return null;
+    }
+
+    // Map to DTO
+    return {
+      id: project.id,
+      title: project.title,
+    };
+  },
+);
+
+export const getProjectSummaries = cache(
+  async (): Promise<ProjectSummaryDTO[]> => {
+    // Authorization
     const {
       user: { workspaceId },
     } = await requireSession();
 
     let where = { workspaceId };
 
-    return await prisma.project.findMany({
+    // Get projects
+    const projects = await prisma.project.findMany({
       where,
-      select,
+      select: {
+        id: true,
+        title: true,
+      },
     });
+
+    // Map to DTO
+    return projects.map((p) => ({
+      id: p.id,
+      title: p.title,
+    }));
   },
 );
 
-export const getPaginatedProjects = cache(
-  async <T extends Prisma.ProjectSelect>({
+export const searchProjects = cache(
+  async ({
+    query,
+    page,
+    pageSize,
+  }: {
+    query?: string;
+    page?: number;
+    pageSize?: number;
+  }): Promise<ProjectSearchDTO> => {
+    // Authorization
+    const {
+      user: { workspaceId },
+    } = await requireSession();
+
+    // Get projects
+    const where = {
+      workspaceId,
+      title: { contains: query, mode: "insensitive" as const },
+    };
+
+    const [items, totalCount] = await Promise.all([
+      prisma.project.findMany({
+        where,
+        orderBy: { createdAt: "desc" },
+        skip: page && pageSize ? (page - 1) * pageSize : undefined,
+        take: pageSize,
+        select: {
+          id: true,
+          title: true,
+          deadline: true,
+        },
+      }),
+      prisma.project.count({ where }),
+    ]);
+
+    //Map to DTO
+    return {
+      items: items.map((p) => ({
+        id: p.id,
+        title: p.title,
+        deadline: p.deadline,
+      })),
+
+      totalCount,
+    };
+  },
+);
+
+export const getProjectList = cache(
+  async ({
     page,
     pageSize,
     sort,
     filters,
-    select,
   }: {
     page?: number;
     pageSize?: number;
     sort?: string;
     filters?: ProjectFilters;
-    select: T;
-  }) => {
+  }): Promise<ProjectListDTO> => {
+    // Authorization
     const {
       user: { workspaceId },
     } = await requireSession();
 
-    const skip = page && pageSize ? (page - 1) * pageSize : Prisma.skip;
-    const take = pageSize ? pageSize : Prisma.skip;
+    // Sorting
+    let orderBy: Prisma.ProjectOrderByWithRelationInput;
 
-    const orderByMapping: Record<
-      string,
-      Prisma.ProjectOrderByWithRelationInput
-    > = {
-      title: { title: "asc" },
-      deadline: { deadline: "asc" },
-      status: { status: "asc" },
-      category: { category: { name: "asc" } },
-    };
+    if (sort === "title") {
+      orderBy = { title: "asc" };
+    } else if (sort === "deadline") {
+      orderBy = { deadline: "asc" };
+    } else if (sort === "status") {
+      orderBy = { status: "asc" };
+    } else if (sort === "category") {
+      orderBy = { category: { name: "asc" } };
+    } else {
+      orderBy = { createdAt: "desc" };
+    }
 
-    const orderBy = sort ? orderByMapping[sort] : Prisma.skip;
     const where = buildProjectWhereClause(workspaceId, filters);
 
+    // Get projects
     const [items, totalCount] = await Promise.all([
       prisma.project.findMany({
         where,
         orderBy,
-        skip,
-        take,
-        select,
+        skip: page && pageSize ? (page - 1) * pageSize : undefined,
+        take: pageSize,
+        select: {
+          id: true,
+          title: true,
+          deadline: true,
+          status: true,
+
+          creator: {
+            select: {
+              id: true,
+              fullName: true,
+              imageUrl: true,
+            },
+          },
+          category: {
+            select: {
+              id: true,
+              name: true,
+            },
+          },
+          customer: {
+            select: {
+              id: true,
+              fullName: true,
+              imageUrl: true,
+              company: {
+                select: {
+                  id: true,
+                  name: true,
+                },
+              },
+            },
+          },
+          _count: {
+            select: {
+              comments: true,
+            },
+          },
+          tasks: {
+            select: {
+              status: true,
+            },
+          },
+        },
       }),
       prisma.project.count({ where }),
     ]);
 
+    // Map to DTO
     return {
-      items,
+      items: items.map((p) => {
+        const totalTasks = p.tasks.length;
+        const completedTasks = p.tasks.filter(
+          (t: any) => t.status === "completed",
+        ).length;
+
+        return {
+          id: p.id,
+          title: p.title,
+          status: p.status,
+          deadline: p.deadline,
+          creator: p.creator
+            ? {
+                id: p.creator.id,
+                fullName: p.creator.fullName,
+                imageUrl: p.creator.imageUrl ?? undefined,
+              }
+            : undefined,
+          customer: p.customer
+            ? {
+                id: p.customer.id,
+                fullName: p.customer.fullName,
+                imageUrl: p.customer.imageUrl ?? undefined,
+                company: p.customer.company
+                  ? {
+                      id: p.customer.company.id,
+                      name: p.customer.company.name,
+                    }
+                  : undefined,
+              }
+            : undefined,
+          category: {
+            id: p.category.id,
+            name: p.category.name,
+          },
+          commentsCount: p._count.comments,
+          tasks: {
+            total: totalTasks,
+            completed: completedTasks,
+          },
+        };
+      }),
+
       totalCount,
     };
   },
@@ -124,19 +411,22 @@ export const createProject = async (input: CreateProjectInputDTO) => {
     );
   }
 
-  // Check related resources access
-  await checkProjectResourcesAccess(
-    workspaceId,
-    input.categoryId,
-    input.customerId,
-  );
+  // Validate category
+  if (input.categoryId) {
+    await validateProjectCategory(workspaceId, input.categoryId);
+  }
+
+  // Validate customer
+  if (input.customerId) {
+    await validateCustomer(workspaceId, input.customerId);
+  }
 
   const project = await prisma.project.create({
     data: {
       title: input.title,
-      description: input.description ?? Prisma.skip,
+      description: input.description,
       deadline: input.deadline,
-      customerId: input.customerId ?? Prisma.skip,
+      customerId: input.customerId,
       categoryId: input.categoryId,
       status: input.status,
       creatorId: userId,
@@ -169,25 +459,29 @@ export const updateProject = async (input: UpdateProjectInputDTO) => {
     );
   }
 
-  // Check related resources access
-  await checkProjectResourcesAccess(
-    workspaceId,
-    input.categoryId,
-    input.customerId,
-  );
+  // Validate category
+  if (input.categoryId) {
+    await validateProjectCategory(workspaceId, input.categoryId);
+  }
 
+  // Validate customer
+  if (input.customerId) {
+    await validateCustomer(workspaceId, input.customerId);
+  }
+
+  // Update project
   const updatedProject = await prisma.project.update({
     where: {
       id: input.id,
       workspaceId,
     },
     data: {
-      title: input.title ?? Prisma.skip,
-      description: input.description ?? Prisma.skip,
-      deadline: input.deadline ?? Prisma.skip,
-      customerId: input.customerId ?? Prisma.skip,
-      categoryId: input.categoryId ?? Prisma.skip,
-      status: input.status ?? Prisma.skip,
+      title: input.title,
+      description: input.description,
+      deadline: input.deadline,
+      customerId: input.customerId,
+      categoryId: input.categoryId,
+      status: input.status,
     },
   });
 
@@ -268,29 +562,38 @@ export const deleteProjects = async (ids: number[]) => {
  * HELPERS
  */
 
-async function checkProjectResourcesAccess(
+// Validate that project category exists and belongs to the workspace
+async function validateProjectCategory(
   workspaceId: number,
-  categoryId?: number,
-  customerId?: number,
+  categoryId: number,
 ) {
-  if (categoryId) {
-    const category = await prisma.projectCategory.findUnique({
-      where: { id: categoryId, workspaceId },
-    });
+  const category = await prisma.projectCategory.findUnique({
+    where: { id: categoryId },
+    select: { workspaceId: true },
+  });
 
-    if (!category) {
-      throw new AccessDeniedError("Category access denied or not found");
-    }
+  if (!category) {
+    throw new NotFoundError("Project category not found");
   }
 
-  if (customerId) {
-    const customer = await prisma.customer.findUnique({
-      where: { id: customerId, workspaceId },
-    });
+  if (category.workspaceId !== workspaceId) {
+    throw new AccessDeniedError("Project category access denied");
+  }
+}
 
-    if (!customer) {
-      throw new AccessDeniedError("Customer access denied or not found");
-    }
+// Validate that customer exists and belongs to the workspace
+async function validateCustomer(workspaceId: number, customerId: number) {
+  const customer = await prisma.customer.findUnique({
+    where: { id: customerId },
+    select: { workspaceId: true },
+  });
+
+  if (!customer) {
+    throw new NotFoundError("Customer not found");
+  }
+
+  if (customer.workspaceId !== workspaceId) {
+    throw new AccessDeniedError("Customer access denied");
   }
 }
 
@@ -302,12 +605,6 @@ export function buildProjectWhereClause(
 
   return {
     workspaceId,
-
-    ...(filters.query && {
-      OR: [
-        { title: { contains: filters.query, mode: "insensitive" as const } },
-      ],
-    }),
 
     ...(filters.noActiveTasks && {
       status: ProjectStatus.active,

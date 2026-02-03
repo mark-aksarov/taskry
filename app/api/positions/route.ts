@@ -6,7 +6,7 @@ import {
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
-import { getPositionSummaries } from "@/lib/data/position/position.service";
+import { getPositionSummaries } from "@/lib/data/position/position.dal";
 
 export async function GET(req: NextRequest) {
   // Authorization

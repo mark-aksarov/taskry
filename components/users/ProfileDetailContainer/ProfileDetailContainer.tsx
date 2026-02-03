@@ -2,7 +2,7 @@ import "server-only";
 
 import { Suspense } from "react";
 import { notFound } from "next/navigation";
-import { getUserDetail } from "@/lib/data/user/user.service";
+import { getUserDetail } from "@/lib/data/user/user.dal";
 import { UserDetail, UserDetailSkeleton } from "../UserDetail";
 
 interface ProfileDetailContainerProps {

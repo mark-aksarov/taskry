@@ -33,7 +33,7 @@ describe("edit a new user", () => {
   it("can edit a user", () => {
     cy.getByData("user-item-user-test-action-menu-trigger").click();
     cy.getMenuItem("edit").click();
-
+    
     // fill form
     cy.get('input[name="fullName"]').clear().type("Updated User Name");
     cy.get('textarea[name="bio"]').clear().type("Updated User Bio");
@@ -45,10 +45,10 @@ describe("edit a new user", () => {
     cy.get('input[name="address"]').clear().type("Updated User Address");
     cy.getByData("position-select").click();
     cy.getSelectOption("3").click();
-
+    
     // submit
     cy.get('button[type="submit"]').click();
-
+    
     // assert
     cy.getByData("users-list").within(() => {
       cy.contains("Updated User Name");

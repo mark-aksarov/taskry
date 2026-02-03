@@ -5,7 +5,7 @@ import {
   internalServerError,
   unauthorized,
 } from "@/lib/utils/routeHandlerErrors";
-import { getProjectCategorySummaries } from "@/lib/data/projectCategory/projectCategory.service";
+import { getProjectCategorySummaries } from "@/lib/data/projectCategory/projectCategory.dal";
 
 export async function GET(req: NextRequest) {
   // Authorization

@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 import { notFound } from "next/navigation";
-import { getCustomerDetail } from "@/lib/data/customer/customer.service";
+import { getCustomerDetail } from "@/lib/data/customer/customer.dal";
 import { CustomerDetail, CustomerDetailSkeleton } from "./CustomerDetail";
 
 interface CustomerDetailAltContainerProps {

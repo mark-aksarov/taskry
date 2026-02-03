@@ -9,8 +9,8 @@ import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import { NextResponse, NextRequest } from "next/server";
 import { coercedPositiveInt } from "@/lib/schemas/base";
-import { getTaskDetail } from "@/lib/data/task/task.service";
-import { getTaskFormData } from "@/lib/data/task/task.service";
+import { getTaskDetail } from "@/lib/data/task/task.dal";
+import { getTaskFormData } from "@/lib/data/task/task.dal";
 
 export async function GET(
   req: NextRequest,

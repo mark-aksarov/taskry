@@ -8,7 +8,7 @@ import {
 
 import { Suspense } from "react";
 import { UserFilters } from "@/lib/types";
-import { getPositionSummaries } from "@/lib/data/position/position.service";
+import { getPositionSummaries } from "@/lib/data/position/position.dal";
 
 interface UserFiltersFormContainerProps {
   filters?: UserFilters;

@@ -14,7 +14,6 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { Default as UserListStory } from "@/components/users/UserList/UserList.stories";
 import { Default as UserGridStory } from "@/components/users/UserGrid/UserGrid.stories";
 import { EntityContainerPresentation } from "@/components/common/EntityContainerPresentation";
-import { UserToolbarActionsMenuTrigger } from "@/components/users/UserToolbarActionsMenuTrigger";
 import { Default as NewUserFormStory } from "@/components/users/NewUserForm/NewUserForm.stories";
 import { UserToolbarFiltersModalTrigger } from "@/components/users/UserToolbarFiltersModalTrigger";
 import { UserToolbarCreateNewMenuTrigger } from "@/components/users/UserToolbarCreateNewMenuTrigger";
@@ -43,9 +42,6 @@ export const Default = {
           <UserFiltersForm {...UserFiltersFormStory.args} />
         }
       />
-    ),
-    userToolbarActionsMenuTrigger: (
-      <UserToolbarActionsMenuTrigger deleteAction={fn()} />
     ),
     userToolbarCreateNewMenuTrigger: (
       <UserToolbarCreateNewMenuTrigger

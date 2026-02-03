@@ -2,7 +2,7 @@ import "server-only";
 
 import { Suspense } from "react";
 import { notFound } from "next/navigation";
-import { getTaskDetail } from "@/lib/data/task/task.service";
+import { getTaskDetail } from "@/lib/data/task/task.dal";
 import { DetailHeaderSkeleton } from "../common/DetailHeader";
 import { DetailHeader } from "@/components/common/DetailHeader";
 import { TaskDetailHeaderImage } from "./TaskDetailHeaderImage";

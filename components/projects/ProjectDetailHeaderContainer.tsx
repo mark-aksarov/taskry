@@ -4,7 +4,7 @@ import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import { DetailHeaderSkeleton } from "../common/DetailHeader";
 import { DetailHeader } from "@/components/common/DetailHeader";
-import { getProjectDetail } from "@/lib/data/project/project.service";
+import { getProjectDetail } from "@/lib/data/project/project.dal";
 import { ProjectDetailHeaderImage } from "./ProjectDetailHeaderImage";
 
 interface ProjectDetailHeaderContainerProps {

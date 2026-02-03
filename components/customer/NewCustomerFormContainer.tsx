@@ -7,8 +7,8 @@ import {
 
 import { Suspense } from "react";
 import { NewCustomerForm } from "./NewCustomerForm";
+import { getCompanySummaries } from "@/lib/data/company/company.dal";
 import { createCustomer } from "@/lib/actions/customer/createCustomer";
-import { getCompanySummaries } from "@/lib/data/company/company.service";
 
 export function NewCustomerFormContainer() {
   return (
