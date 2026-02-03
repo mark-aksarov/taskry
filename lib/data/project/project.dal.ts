@@ -73,7 +73,7 @@ export const getPaginatedProjects = cache(
     const orderBy = sort ? orderByMapping[sort] : Prisma.skip;
     const where = buildProjectWhereClause(workspaceId, filters);
 
-    const [items, totalCount] = await prisma.$transaction([
+    const [items, totalCount] = await Promise.all([
       prisma.project.findMany({
         where,
         orderBy,

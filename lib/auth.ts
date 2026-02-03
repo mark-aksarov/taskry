@@ -9,7 +9,6 @@ import { ac, admin, owner, user, guest } from "@/lib/permissions";
 export const auth = betterAuth({
   database: prismaAdapter(prisma, {
     provider: "postgresql",
-    transaction: true,
   }),
   emailVerification: {
     sendVerificationEmail: async ({ user, url }) => {

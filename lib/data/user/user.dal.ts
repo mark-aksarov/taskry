@@ -67,7 +67,7 @@ export const getPaginatedUsers = cache(
     const orderBy = sort ? orderByMapping[sort] : Prisma.skip;
     const where = buildUserWhereClause(workspaceId, filters);
 
-    const [items, totalCount] = await prisma.$transaction([
+    const [items, totalCount] = await Promise.all([
       prisma.user.findMany({
         where,
         orderBy,
