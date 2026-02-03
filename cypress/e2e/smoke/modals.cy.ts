@@ -1,4 +1,3 @@
-import { NotificationType } from "@/generated/prisma/enums";
 import { E2ESeedPayload } from "@/prisma/e2e/types";
 
 describe("modals smoke tests", () => {
@@ -61,31 +60,11 @@ describe("modals smoke tests", () => {
           assigneeId: "user-1",
         },
       ],
-      notifications: [
-        {
-          id: 1,
-          workspaceId: 1,
-          actorId: "user-2",
-          recipientId: "user-1",
-          taskId: 1,
-          taskTitle: "Task 1",
-          type: NotificationType.taskAdded,
-          createdAt: "2025-01-01T00:00:00.000Z",
-          isRead: true,
-        },
-      ],
     };
 
     cy.task("db:reset");
     cy.task("db:seed", payload);
     cy.signIn("owner@example.com", "12345abc");
-  });
-
-  it("should open notification modals", () => {
-    cy.visit("/en");
-    cy.getByData("notification-modal-trigger").first().click();
-    cy.getByData("notification-modal").should("be.visible");
-    cy.getByData("notification-list").should("exist");
   });
 
   it("should open filter modals", () => {

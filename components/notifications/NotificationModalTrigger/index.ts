@@ -1,1 +1,0 @@
-export { NotificationModalTrigger } from "./NotificationModalTrigger";

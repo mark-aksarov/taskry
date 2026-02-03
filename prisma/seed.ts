@@ -22,8 +22,6 @@ import { workspace as ruWorkspace } from "./seed/ru/workspace";
 import { workspace as enWorkspace } from "./seed/en/workspace";
 import { taskComments as ruTaskComments } from "./seed/ru/taskComments";
 import { taskComments as enTaskComments } from "./seed/en/taskComments";
-import { notifications as ruNotifications } from "./seed/ru/notifications";
-import { notifications as enNotifications } from "./seed/en/notifications";
 import { taskCategories as ruTaskCategories } from "./seed/ru/taskCategories";
 import { taskCategories as enTaskCategories } from "./seed/en/taskCategories";
 import { taskAttachments as ruTaskAttachments } from "./seed/ru/taskAttachments";
@@ -118,12 +116,6 @@ async function main() {
     data: [...ruSubtasks, ...enSubtasks],
   });
 
-  // ----------------- Notifications -----------------
-
-  await prisma.notification.createMany({
-    data: [...ruNotifications, ...enNotifications],
-  });
-
   // ----------------- Reset IDs -----------------
 
   const tables = [
@@ -131,7 +123,6 @@ async function main() {
     "comment",
     "company",
     "customer",
-    "notification",
     "position",
     "project",
     "project_category",

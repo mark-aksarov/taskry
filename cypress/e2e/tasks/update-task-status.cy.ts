@@ -136,30 +136,6 @@ describe("update task status", () => {
         .eq(1)
         .contains(/active/i);
     });
-
-    it("should send notifications when task status is updated", () => {
-      cy.getByData("task-item-1-action-menu-trigger").click();
-      cy.getMenuItem("pending").click();
-      cy.getByData("task-list-item")
-        .eq(0)
-        .contains(/pending/i);
-
-      // check notifications
-      cy.checkNotifications(0);
-
-      // sign in as user-2
-      cy.signIn("user@example.com", "12345abc");
-      cy.visit("/en/tasks");
-
-      // check notifications
-      cy.checkNotifications(1, [
-        {
-          target: "Task 1",
-          actor: "John Doe",
-          action: "changed the task",
-        },
-      ]);
-    });
   });
 
   describe("access control (RBAC)", () => {

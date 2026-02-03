@@ -50,7 +50,7 @@ describe("send comments", () => {
     cy.signIn("owner@example.com", "12345abc");
   });
 
-  it("send a comment to a task and receive notifications", () => {
+  it("send a comment to a task", () => {
     cy.visit("/en/tasks");
 
     cy.getByData("task-comments-modal-trigger").first().click();
@@ -63,35 +63,9 @@ describe("send comments", () => {
 
     // verify comment appears
     cy.getByData("comment-item").contains("This is a test comment.");
-
-    //check notifications for user-2 (user)
-    cy.signIn("user@example.com", "12345abc");
-    cy.visit("/en/tasks");
-
-    cy.checkNotifications(1, [
-      {
-        target: "Task 1",
-        actor: "John Doe",
-        action: "added a comment in",
-        content: "This is a test comment.",
-      },
-    ]);
-
-    //check notifications for user-3 (guest)
-    cy.signIn("guest@example.com", "12345abc");
-    cy.visit("/en/tasks");
-
-    cy.checkNotifications(1, [
-      {
-        target: "Task 1",
-        actor: "John Doe",
-        action: "added a comment in",
-        content: "This is a test comment.",
-      },
-    ]);
   });
 
-  it("send a comment to a project and receive notifications", () => {
+  it("send a comment to a project", () => {
     cy.visit("/en/projects");
 
     cy.getByData("project-comments-modal-trigger").first().click();
@@ -104,31 +78,5 @@ describe("send comments", () => {
 
     // verify comment appears
     cy.getByData("comment-item").contains("This is a test comment.");
-
-    //check notifications for user-2 (user)
-    cy.signIn("user@example.com", "12345abc");
-    cy.visit("/en/tasks");
-
-    cy.checkNotifications(1, [
-      {
-        target: "Project 1",
-        actor: "John Doe",
-        action: "added a comment in",
-        content: "This is a test comment.",
-      },
-    ]);
-
-    //check notifications for user-3 (guest)
-    cy.signIn("guest@example.com", "12345abc");
-    cy.visit("/en/tasks");
-
-    cy.checkNotifications(1, [
-      {
-        target: "Project 1",
-        actor: "John Doe",
-        action: "added a comment in",
-        content: "This is a test comment.",
-      },
-    ]);
   });
 });

@@ -23,7 +23,6 @@ model Workspace {
   taskCategories    TaskCategory[]
   positions         Position[]
   users             User[]
-  notifications     Notification[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -74,8 +73,7 @@ model Comment {
   project   Project?  @relation(fields: [projectId], references: [id], onDelete: Cascade)
   task      Task?     @relation(fields: [taskId], references: [id], onDelete: Cascade)
 
-  attachments   Attachment[]
-  notifications Notification[]
+  attachments Attachment[]
 
   @@index([projectId])
   @@index([taskId])
@@ -94,9 +92,8 @@ model Company {
 
   customers Customer[]
 
-  createdAt     DateTime       @default(now())
-  updatedAt     DateTime       @updatedAt
-  notifications Notification[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@index([workspaceId])
   @@map("company")
@@ -122,8 +119,7 @@ model Customer {
   workspace Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
   company   Company   @relation(fields: [companyId], references: [id], onDelete: Cascade)
 
-  projects      Project[]
-  notifications Notification[]
+  projects Project[]
 
   @@index(workspaceId)
   @@map("customer")
@@ -148,10 +144,9 @@ model Project {
   category  ProjectCategory @relation(fields: [categoryId], references: [id], onDelete: Cascade)
   status    ProjectStatus
 
-  attachments   Attachment[]
-  tasks         Task[]
-  comments      Comment[]
-  notifications Notification[]
+  attachments Attachment[]
+  tasks       Task[]
+  comments    Comment[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -170,9 +165,8 @@ model ProjectCategory {
 
   projects Project[]
 
-  createdAt     DateTime       @default(now())
-  updatedAt     DateTime       @updatedAt
-  notifications Notification[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@index(workspaceId)
   @@map("project_category")
@@ -205,10 +199,9 @@ model Task {
   category  TaskCategory @relation(fields: [categoryId], references: [id], onDelete: Cascade)
   status    TaskStatus
 
-  subtasks      Subtask[]
-  attachments   Attachment[]
-  comments      Comment[]
-  notifications Notification[]
+  subtasks    Subtask[]
+  attachments Attachment[]
+  comments    Comment[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -227,9 +220,8 @@ model TaskCategory {
 
   tasks Task[]
 
-  createdAt     DateTime       @default(now())
-  updatedAt     DateTime       @updatedAt
-  notifications Notification[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@index(workspaceId)
   @@map("task_category")
@@ -250,111 +242,11 @@ model Subtask {
 
   task Task @relation(fields: [taskId], references: [id], onDelete: Cascade)
 
-  createdAt     DateTime       @default(now())
-  updatedAt     DateTime       @updatedAt
-  notifications Notification[]
-
-  @@index([taskId])
-  @@map("subtask")
-}
-
-// Notifications
-
-enum NotificationType {
-  projectAdded
-  projectChanged
-  projectDeleted
-
-  taskAdded
-  taskChanged
-  taskDeleted
-
-  commentAdded
-  commentChanged
-  commentDeleted
-
-  userAdded
-  userChanged
-  userDeleted
-
-  customerAdded
-  customerChanged
-  customerDeleted
-
-  companyAdded
-  companyChanged
-  companyDeleted
-
-  positionAdded
-  positionChanged
-  positionDeleted
-
-  subtaskAdded
-  subtaskChanged
-  subtaskDeleted
-
-  projectCategoryAdded
-  projectCategoryChanged
-  projectCategoryDeleted
-
-  taskCategoryAdded
-  taskCategoryChanged
-  taskCategoryDeleted
-}
-
-model Notification {
-  id   Int              @id @default(autoincrement())
-  type NotificationType
-
-  isRead Boolean @default(false)
-
-  actorId String?
-  actor   User?   @relation("Actor", fields: [actorId], references: [id], onDelete: SetNull)
-
-  recipientId String?
-  recipient   User?   @relation("Recipient", fields: [recipientId], references: [id], onDelete: SetNull)
-
-  projectId         Int?
-  userId            String?
-  customerId        Int?
-  taskId            Int?
-  commentId         Int?
-  companyId         Int?
-  positionId        Int?
-  subtaskId         Int?
-  projectCategoryId Int?
-  taskCategoryId    Int?
-
-  subtask         Subtask?         @relation(fields: [subtaskId], references: [id], onDelete: SetNull)
-  projectCategory ProjectCategory? @relation(fields: [projectCategoryId], references: [id], onDelete: SetNull)
-  taskCategory    TaskCategory?    @relation(fields: [taskCategoryId], references: [id], onDelete: SetNull)
-  company         Company?         @relation(fields: [companyId], references: [id], onDelete: SetNull)
-  position        Position?        @relation(fields: [positionId], references: [id], onDelete: SetNull)
-  project         Project?         @relation(fields: [projectId], references: [id], onDelete: SetNull)
-  task            Task?            @relation(fields: [taskId], references: [id], onDelete: SetNull)
-  user            User?            @relation(fields: [userId], references: [id], onDelete: SetNull)
-  customer        Customer?        @relation(fields: [customerId], references: [id], onDelete: SetNull)
-  comment         Comment?         @relation(fields: [commentId], references: [id], onDelete: SetNull)
-
-  projectTitle        String?
-  taskTitle           String?
-  userFullName        String?
-  customerFullName    String?
-  commentContent      String?
-  companyName         String?
-  positionName        String?
-  subtaskText         String?
-  projectCategoryName String?
-  taskCategoryName    String?
-
-  workspaceId Int
-  workspace   Workspace @relation(fields: [workspaceId], references: [id])
-
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  @@index([workspaceId, recipientId])
-  @@map("notification")
+  @@index([taskId])
+  @@map("subtask")
 }
 
 // User
@@ -368,9 +260,8 @@ model Position {
   workspace Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
   users     User[]
 
-  createdAt     DateTime       @default(now())
-  updatedAt     DateTime       @updatedAt
-  notifications Notification[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@index([workspaceId])
   @@map("position")
@@ -404,13 +295,10 @@ model User {
   sessions      Session[]
   accounts      Account[]
 
-  comments              Comment[]
-  notificationsCreated  Notification[] @relation("Actor")
-  notificationsReceived Notification[] @relation("Recipient")
+  comments Comment[]
 
-  createdAt     DateTime       @default(now())
-  updatedAt     DateTime       @updatedAt
-  notifications Notification[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@unique([email])
   @@index([workspaceId])

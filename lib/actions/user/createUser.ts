@@ -1,12 +1,13 @@
 "use server";
 
+import { auth } from "@/lib/auth";
 import { ActionState } from "../types";
 import { APIError } from "better-auth";
 import { revalidatePath } from "next/cache";
 import { userSchema } from "@/lib/schemas/user";
 import { getTranslations } from "next-intl/server";
 import { actionError, actionSuccess } from "../utils/actionResult";
-import { createUser as createUserQuery } from "@/lib/data/user/user.dal";
+import { checkUserResourcesAccess } from "@/lib/data/user/user.dal";
 import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedirect";
 
 const schema = userSchema.omit({ id: true });
@@ -18,7 +19,7 @@ export async function createUser(
   formData: FormData,
 ): Promise<ActionState> {
   // Authorization
-  await requireSessionOrRedirect();
+  const session = await requireSessionOrRedirect();
 
   const t = await getTranslations("actions.createUser");
 
@@ -33,7 +34,29 @@ export async function createUser(
     }
 
     // Create user
-    await createUserQuery(parsed.data);
+    await checkUserResourcesAccess(parsed.data.positionId);
+
+    const { user } = await auth.api.createUser({
+      body: {
+        email: parsed.data.email,
+        password: parsed.data.password,
+        name: parsed.data.fullName,
+        role: "user",
+
+        data: {
+          workspaceId: session!.user.workspaceId,
+          positionId: parsed.data.positionId,
+          bio: parsed.data.bio,
+          birthdate: parsed.data.birthdate,
+          phoneNumber: parsed.data.phoneNumber,
+          address: parsed.data.address,
+          publicLink: parsed.data.publicLink,
+        },
+      },
+    });
+
+    auth.api.sendVerificationEmail({ body: { email: user.email } });
+
     revalidatePath("/team");
     return actionSuccess();
   } catch (error: unknown) {

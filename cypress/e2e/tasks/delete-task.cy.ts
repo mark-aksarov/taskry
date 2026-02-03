@@ -67,35 +67,6 @@ describe("deletes a task", () => {
     cy.getMenuItem("delete").click();
     cy.getByData("delete-task-modal-confirm-button").click();
     cy.getByData("task-list-item").should("not.exist");
-
-    // check notifications
-    cy.checkNotifications(0);
-
-    // sign in as user-2
-    cy.signIn("user@example.com", "12345abc");
-    cy.visit("/en/tasks");
-
-    // check notifications
-    cy.checkNotifications(1, [
-      {
-        target: "Task 1",
-        actor: "John Doe",
-        action: "deleted the task",
-      },
-    ]);
-
-    // sign in as user-3
-    cy.signIn("guest@example.com", "12345abc");
-    cy.visit("/en/tasks");
-
-    // check notifications
-    cy.checkNotifications(1, [
-      {
-        target: "Task 1",
-        actor: "John Doe",
-        action: "deleted the task",
-      },
-    ]);
   });
 
   describe("access control (RBAC)", () => {

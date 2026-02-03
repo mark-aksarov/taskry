@@ -4,9 +4,8 @@ import { cache } from "react";
 import prisma from "@/lib/prisma";
 import { auth } from "@/lib/auth";
 import { AccessDeniedError } from "../utils/error";
+import { Prisma } from "@/generated/prisma/client";
 import { requireSession } from "../utils/requireSession";
-import { NotificationType, Prisma } from "@/generated/prisma/client";
-import { getNotificationRecipients } from "../notification/notification.dal";
 import { CreateCommentInputDTO, UpdateCommentInputDTO } from "./comment.dto";
 
 export const getAllComments = cache(
@@ -67,59 +66,28 @@ export const createComment = async (input: CreateCommentInputDTO) => {
     );
   }
 
-  return await prisma.$transaction(async (tx) => {
-    // Use the results (titles) for notifications later
-    const { task, project } = await validateCommentRelations(
-      tx,
-      workspaceId,
-      input,
-    );
+  await validateCommentRelations(workspaceId, input);
 
-    const newComment = await tx.comment.create({
-      data: {
-        content: input.content,
-        taskId: input.taskId ?? Prisma.skip,
-        projectId: input.projectId ?? Prisma.skip,
-        senderId,
-        workspaceId,
-        attachments: input.attachments
-          ? {
-              create: input.attachments.map((file) => ({
-                fileUrl: file.fileUrl,
-                fileName: file.fileName,
-                workspaceId,
-              })),
-            }
-          : Prisma.skip,
-      },
-    });
-
-    const recipients = await getNotificationRecipients(
-      tx,
-      workspaceId,
+  const newComment = await prisma.comment.create({
+    data: {
+      content: input.content,
+      taskId: input.taskId ?? Prisma.skip,
+      projectId: input.projectId ?? Prisma.skip,
       senderId,
-    );
-
-    if (recipients.length > 0) {
-      await tx.notification.createMany({
-        data: recipients.map((user) => ({
-          type: "commentAdded",
-          actorId: senderId,
-          recipientId: user.id,
-          workspaceId,
-          commentId: newComment.id,
-          taskId: newComment.taskId,
-          projectId: newComment.projectId,
-          commentContent: newComment.content.substring(0, 250),
-          taskTitle: task ? task.title : Prisma.skip,
-          projectTitle: project ? project.title : Prisma.skip,
-          isRead: false,
-        })),
-      });
-    }
-
-    return newComment;
+      workspaceId,
+      attachments: input.attachments
+        ? {
+            create: input.attachments.map((file) => ({
+              fileUrl: file.fileUrl,
+              fileName: file.fileName,
+              workspaceId,
+            })),
+          }
+        : Prisma.skip,
+    },
   });
+
+  return newComment;
 };
 
 export const deleteComment = async (commentId: number) => {
@@ -144,58 +112,28 @@ export const deleteComment = async (commentId: number) => {
     );
   }
 
-  return prisma.$transaction(async (tx) => {
-    // delete comment within the workspace
-    const deletedComment = await tx.comment.delete({
-      where: {
-        ...(role === "user" ? { senderId } : {}),
-        workspaceId,
-        id: commentId,
-      },
-      select: {
-        id: true,
-        content: true,
-        taskId: true,
-        projectId: true,
-        project: {
-          select: { title: true },
-        },
-        task: {
-          select: { title: true },
-        },
-      },
-    });
-
-    // Send notifications
-    const recipients = await getNotificationRecipients(
-      tx,
+  // Delete comment
+  const deletedComment = await prisma.comment.delete({
+    where: {
+      ...(role === "user" ? { senderId } : {}),
       workspaceId,
-      senderId,
-    );
-
-    if (recipients.length > 0) {
-      await tx.notification.createMany({
-        data: recipients.map((user) => ({
-          type: "commentDeleted",
-          actorId: senderId,
-          recipientId: user.id,
-          workspaceId,
-          taskId: deletedComment.taskId,
-          projectId: deletedComment.projectId,
-          commentContent: deletedComment.content.substring(0, 250),
-          taskTitle: deletedComment.task
-            ? deletedComment.task.title
-            : Prisma.skip,
-          projectTitle: deletedComment.project
-            ? deletedComment.project.title
-            : Prisma.skip,
-          isRead: false,
-        })),
-      });
-    }
-
-    return deletedComment;
+      id: commentId,
+    },
+    select: {
+      id: true,
+      content: true,
+      taskId: true,
+      projectId: true,
+      project: {
+        select: { title: true },
+      },
+      task: {
+        select: { title: true },
+      },
+    },
   });
+
+  return deletedComment;
 };
 
 export const updateComment = async (input: UpdateCommentInputDTO) => {
@@ -220,53 +158,27 @@ export const updateComment = async (input: UpdateCommentInputDTO) => {
     );
   }
 
-  return prisma.$transaction(async (tx) => {
-    // update comment within the workspace
-    const comment = await prisma.comment.update({
-      where: {
-        workspaceId,
-        ...(role === "user" ? { senderId } : {}),
-        id: input.id,
-      },
-      data: {
-        content: input.content,
-      },
-      include: {
-        task: {
-          select: { title: true },
-        },
-        project: {
-          select: { title: true },
-        },
-      },
-    });
-
-    // Send notifications
-    const recipients = await getNotificationRecipients(
-      tx,
+  // Update comment
+  const comment = await prisma.comment.update({
+    where: {
       workspaceId,
-      senderId,
-    );
-
-    if (recipients.length > 0) {
-      await tx.notification.createMany({
-        data: recipients.map((user) => ({
-          type: NotificationType.commentChanged,
-          actorId: senderId,
-          recipientId: user.id,
-          workspaceId,
-          taskId: comment.taskId,
-          projectId: comment.projectId,
-          commentContent: comment.content.substring(0, 250),
-          taskTitle: comment.task ? comment.task.title : Prisma.skip,
-          projectTitle: comment.project ? comment.project.title : Prisma.skip,
-          isRead: false,
-        })),
-      });
-    }
-
-    return comment;
+      ...(role === "user" ? { senderId } : {}),
+      id: input.id,
+    },
+    data: {
+      content: input.content,
+    },
+    include: {
+      task: {
+        select: { title: true },
+      },
+      project: {
+        select: { title: true },
+      },
+    },
   });
+
+  return comment;
 };
 
 /**
@@ -274,7 +186,6 @@ export const updateComment = async (input: UpdateCommentInputDTO) => {
  */
 
 export const validateCommentRelations = async (
-  tx: Prisma.TransactionClient,
   workspaceId: number,
   input: { taskId?: number | null; projectId?: number | null },
 ) => {
@@ -286,7 +197,7 @@ export const validateCommentRelations = async (
 
   // Validate Task if taskId is provided
   if (input.taskId) {
-    const task = await tx.task.findUnique({
+    const task = await prisma.task.findUnique({
       where: {
         id: input.taskId,
         workspaceId,
@@ -297,13 +208,11 @@ export const validateCommentRelations = async (
     if (!task) {
       throw new AccessDeniedError("Task access denied or not found");
     }
-
-    return { task };
   }
 
   // Validate Project if projectId is provided
   if (input.projectId) {
-    const project = await tx.project.findUnique({
+    const project = await prisma.project.findUnique({
       where: {
         id: input.projectId,
         workspaceId,
@@ -314,9 +223,5 @@ export const validateCommentRelations = async (
     if (!project) {
       throw new AccessDeniedError("Project access denied or not found");
     }
-
-    return { project };
   }
-
-  return {};
 };

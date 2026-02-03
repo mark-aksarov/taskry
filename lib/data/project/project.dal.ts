@@ -1,12 +1,5 @@
 import "server-only";
 
-import {
-  Prisma,
-  TaskStatus,
-  ProjectStatus,
-  NotificationType,
-} from "@/generated/prisma/client";
-
 import { cache } from "react";
 import { auth } from "@/lib/auth";
 import prisma from "@/lib/prisma";
@@ -14,7 +7,7 @@ import { ProjectFilters } from "@/lib/types";
 import { AccessDeniedError } from "../utils/error";
 import { requireSession } from "../utils/requireSession";
 import { CreateProjectInputDTO, UpdateProjectInputDTO } from "./project.dto";
-import { getNotificationRecipients } from "../notification/notification.dal";
+import { Prisma, TaskStatus, ProjectStatus } from "@/generated/prisma/client";
 
 export const getProject = cache(
   async <T extends Prisma.ProjectSelect>(id: number, select: T) => {
@@ -138,38 +131,20 @@ export const createProject = async (input: CreateProjectInputDTO) => {
     input.customerId,
   );
 
-  return prisma.$transaction(async (tx) => {
-    const project = await prisma.project.create({
-      data: {
-        title: input.title,
-        description: input.description ?? Prisma.skip,
-        deadline: input.deadline,
-        customerId: input.customerId ?? Prisma.skip,
-        categoryId: input.categoryId,
-        status: input.status,
-        creatorId: userId,
-        workspaceId,
-      },
-    });
-
-    const recipients = await getNotificationRecipients(tx, workspaceId, userId);
-
-    if (recipients.length > 0) {
-      await tx.notification.createMany({
-        data: recipients.map((user) => ({
-          type: NotificationType.projectAdded,
-          actorId: userId,
-          recipientId: user.id,
-          workspaceId,
-          projectId: project.id,
-          projectTitle: project.title,
-          isRead: false,
-        })),
-      });
-    }
-
-    return project;
+  const project = await prisma.project.create({
+    data: {
+      title: input.title,
+      description: input.description ?? Prisma.skip,
+      deadline: input.deadline,
+      customerId: input.customerId ?? Prisma.skip,
+      categoryId: input.categoryId,
+      status: input.status,
+      creatorId: userId,
+      workspaceId,
+    },
   });
+
+  return project;
 };
 
 export const updateProject = async (input: UpdateProjectInputDTO) => {
@@ -201,40 +176,22 @@ export const updateProject = async (input: UpdateProjectInputDTO) => {
     input.customerId,
   );
 
-  return await prisma.$transaction(async (tx) => {
-    const updatedProject = await tx.project.update({
-      where: {
-        id: input.id,
-        workspaceId,
-      },
-      data: {
-        title: input.title ?? Prisma.skip,
-        description: input.description ?? Prisma.skip,
-        deadline: input.deadline ?? Prisma.skip,
-        customerId: input.customerId ?? Prisma.skip,
-        categoryId: input.categoryId ?? Prisma.skip,
-        status: input.status ?? Prisma.skip,
-      },
-    });
-
-    const recipients = await getNotificationRecipients(tx, workspaceId, userId);
-
-    if (recipients.length > 0) {
-      await tx.notification.createMany({
-        data: recipients.map((user) => ({
-          type: NotificationType.projectChanged,
-          actorId: userId,
-          recipientId: user.id,
-          workspaceId,
-          projectId: updatedProject.id,
-          projectTitle: updatedProject.title,
-          isRead: false,
-        })),
-      });
-    }
-
-    return updatedProject;
+  const updatedProject = await prisma.project.update({
+    where: {
+      id: input.id,
+      workspaceId,
+    },
+    data: {
+      title: input.title ?? Prisma.skip,
+      description: input.description ?? Prisma.skip,
+      deadline: input.deadline ?? Prisma.skip,
+      customerId: input.customerId ?? Prisma.skip,
+      categoryId: input.categoryId ?? Prisma.skip,
+      status: input.status ?? Prisma.skip,
+    },
   });
+
+  return updatedProject;
 };
 
 export const updateProjectStatuses = async (
@@ -262,41 +219,18 @@ export const updateProjectStatuses = async (
     );
   }
 
-  return await prisma.$transaction(async (tx) => {
-    const updatedProjects = await tx.project.updateManyAndReturn({
-      where: {
-        id: { in: ids },
-        workspaceId,
-      },
-      data: {
-        status,
-      },
-    });
-
-    if (updatedProjects.length === 0) {
-      return [];
-    }
-
-    const recipients = await getNotificationRecipients(tx, workspaceId, userId);
-
-    if (recipients.length > 0) {
-      await tx.notification.createMany({
-        data: updatedProjects.flatMap((project) =>
-          recipients.map((user) => ({
-            type: NotificationType.projectChanged,
-            actorId: userId,
-            recipientId: user.id,
-            workspaceId,
-            projectId: project.id,
-            projectTitle: project.title,
-            isRead: false,
-          })),
-        ),
-      });
-    }
-
-    return updatedProjects;
+  // Update projects
+  const updatedProjects = await prisma.project.updateManyAndReturn({
+    where: {
+      id: { in: ids },
+      workspaceId,
+    },
+    data: {
+      status,
+    },
   });
+
+  return updatedProjects;
 };
 
 export const deleteProjects = async (ids: number[]) => {
@@ -319,53 +253,15 @@ export const deleteProjects = async (ids: number[]) => {
     throw new AccessDeniedError("You do not have permission to delete tasks.");
   }
 
-  return await prisma.$transaction(async (tx) => {
-    // Fetch projects before deletion for notifications
-    const projectsToDelete = await tx.project.findMany({
-      where: {
-        workspaceId,
-        id: {
-          in: ids,
-        },
-      },
-      select: {
-        title: true,
-      },
-    });
-
-    if (projectsToDelete.length === 0) {
-      return {
-        count: 0,
-      };
-    }
-
-    // Bulk delete projects within the workspace
-    const result = await tx.project.deleteMany({
-      where: {
-        workspaceId,
-        id: { in: ids },
-      },
-    });
-
-    const recipients = await getNotificationRecipients(tx, workspaceId, userId);
-
-    if (recipients.length > 0) {
-      await tx.notification.createMany({
-        data: projectsToDelete.flatMap((project) =>
-          recipients.map((user) => ({
-            type: NotificationType.projectDeleted,
-            actorId: userId,
-            recipientId: user.id,
-            workspaceId,
-            projectTitle: project.title,
-            isRead: false,
-          })),
-        ),
-      });
-    }
-
-    return result;
+  // Bulk delete projects
+  const deletedProjects = await prisma.project.deleteMany({
+    where: {
+      workspaceId,
+      id: { in: ids },
+    },
   });
+
+  return deletedProjects;
 };
 
 /**

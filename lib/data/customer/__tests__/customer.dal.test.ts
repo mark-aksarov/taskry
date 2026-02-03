@@ -8,7 +8,6 @@ import {
 import prisma from "@/lib/prisma";
 import { AccessDeniedError } from "../../utils/error";
 import { resetDatabase } from "@/prisma/resetDatabase";
-import { NotificationType } from "@/generated/prisma/enums";
 import { requireSession } from "@/lib/data/utils/requireSession";
 import { describe, it, expect, beforeEach, vi, beforeAll } from "vitest";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/client";
@@ -26,7 +25,6 @@ describe("Customer DAL", () => {
     });
 
     await prisma.customer.deleteMany();
-    await prisma.notification.deleteMany();
   });
 
   beforeAll(async () => {
@@ -90,7 +88,7 @@ describe("Customer DAL", () => {
   });
 
   describe("getCustomerCount", () => {
-    it("should return total count of customers for the current workspace", async () => {
+    it("should return total count of customers", async () => {
       await prisma.customer.createMany({
         data: [
           {
@@ -123,7 +121,7 @@ describe("Customer DAL", () => {
   });
 
   describe("createCustomer", () => {
-    it("should successfully create a customer and send notifications", async () => {
+    it("should successfully create a customer", async () => {
       const inputData = {
         fullName: "Customer 1",
         bio: "Customer 1 bio",
@@ -136,42 +134,11 @@ describe("Customer DAL", () => {
 
       const result = await createCustomer(inputData);
 
-      const notifications = await prisma.notification.findMany({
-        where: { customerId: result.id },
-      });
-
       expect(result).toBeDefined();
       expect(result).toMatchObject({
         ...inputData,
         workspaceId: 1,
       });
-
-      const expectedNotificationData = {
-        actorId: "user-1",
-        taskId: null,
-        taskTitle: null,
-        projectId: null,
-        commentId: null,
-        customerId: result.id,
-        customerFullName: "Customer 1",
-        type: NotificationType.customerAdded,
-        workspaceId: 1,
-      };
-
-      expect(notifications.length).toBe(2);
-
-      expect(notifications).toEqual(
-        expect.arrayContaining([
-          expect.objectContaining({
-            ...expectedNotificationData,
-            recipientId: "user-2",
-          }),
-          expect.objectContaining({
-            ...expectedNotificationData,
-            recipientId: "user-3",
-          }),
-        ]),
-      );
     });
 
     it("should throw error if company does not belong to the workspace", async () => {
@@ -239,7 +206,7 @@ describe("Customer DAL", () => {
   });
 
   describe("updateCustomer", () => {
-    it("should successfully update a customer and send notifications", async () => {
+    it("should successfully update a customer", async () => {
       await prisma.customer.create({
         data: {
           id: 1,
@@ -255,40 +222,9 @@ describe("Customer DAL", () => {
         fullName: "Updated Customer Full Name",
       });
 
-      const notifications = await prisma.notification.findMany({
-        where: { customerId: result.id },
-      });
-
       expect(result).not.toBeNull();
       expect(result!.id).toBe(1);
       expect(result!.fullName).toBe("Updated Customer Full Name");
-
-      const expectedNotificationData = {
-        actorId: "user-1",
-        customerId: result.id,
-        customerFullName: "Updated Customer Full Name",
-        taskId: null,
-        taskTitle: null,
-        projectId: null,
-        commentId: null,
-        type: NotificationType.customerChanged,
-        workspaceId: 1,
-      };
-
-      expect(notifications.length).toBe(2);
-
-      expect(notifications).toEqual(
-        expect.arrayContaining([
-          expect.objectContaining({
-            ...expectedNotificationData,
-            recipientId: "user-2",
-          }),
-          expect.objectContaining({
-            ...expectedNotificationData,
-            recipientId: "user-3",
-          }),
-        ]),
-      );
     });
 
     it("should throw an error when trying to update a customer from another workspace", async () => {
@@ -361,7 +297,7 @@ describe("Customer DAL", () => {
   });
 
   describe("deleteCustomers", () => {
-    it("should successfully delete customers and send notifications", async () => {
+    it("should successfully delete customers", async () => {
       await prisma.customer.createMany({
         data: [
           {
@@ -385,68 +321,8 @@ describe("Customer DAL", () => {
 
       expect(result.count).toBe(2);
       const remainingCustomers = await prisma.customer.findMany();
-      const notifications = await prisma.notification.findMany();
 
       expect(remainingCustomers).toHaveLength(0);
-
-      expect(notifications.length).toBe(4);
-
-      expect(notifications).toEqual(
-        expect.arrayContaining([
-          expect.objectContaining({
-            actorId: "user-1",
-            projectTitle: null,
-            projectId: null,
-            commentId: null,
-            taskId: null,
-            taskTitle: null,
-            customerFullName: "Customer 1",
-            customerId: null,
-            type: NotificationType.customerDeleted,
-            workspaceId: 1,
-            recipientId: "user-2",
-          }),
-          expect.objectContaining({
-            actorId: "user-1",
-            projectTitle: null,
-            projectId: null,
-            commentId: null,
-            taskId: null,
-            taskTitle: null,
-            customerFullName: "Customer 1",
-            customerId: null,
-            type: NotificationType.customerDeleted,
-            workspaceId: 1,
-            recipientId: "user-2",
-          }),
-          expect.objectContaining({
-            actorId: "user-1",
-            projectTitle: null,
-            projectId: null,
-            commentId: null,
-            taskId: null,
-            taskTitle: null,
-            customerFullName: "Customer 2",
-            customerId: null,
-            type: NotificationType.customerDeleted,
-            workspaceId: 1,
-            recipientId: "user-3",
-          }),
-          expect.objectContaining({
-            actorId: "user-1",
-            projectTitle: null,
-            projectId: null,
-            commentId: null,
-            taskId: null,
-            taskTitle: null,
-            customerFullName: "Customer 2",
-            customerId: null,
-            type: NotificationType.customerDeleted,
-            workspaceId: 1,
-            recipientId: "user-3",
-          }),
-        ]),
-      );
     });
 
     it("should not delete customers from a different workspace", async () => {
@@ -463,10 +339,8 @@ describe("Customer DAL", () => {
       });
 
       const result = await deleteCustomers([1]);
-      const notifications = await prisma.notification.findMany();
 
       expect(result.count).toBe(0);
-      expect(notifications).toHaveLength(0);
     });
 
     it("should only delete customers belonging to the current workspace", async () => {
@@ -491,20 +365,6 @@ describe("Customer DAL", () => {
 
       const result = await deleteCustomers([1, 2]);
       expect(result.count).toBe(1);
-
-      const notifications = await prisma.notification.findMany();
-
-      expect(notifications).toHaveLength(2);
-      expect(notifications).toEqual(
-        expect.arrayContaining([
-          expect.objectContaining({
-            recipientId: "user-2",
-          }),
-          expect.objectContaining({
-            recipientId: "user-3",
-          }),
-        ]),
-      );
     });
 
     it("should return 0 if an empty array is provided", async () => {

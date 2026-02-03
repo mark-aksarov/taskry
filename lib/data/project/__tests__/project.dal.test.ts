@@ -9,9 +9,9 @@ import {
 import prisma from "@/lib/prisma";
 import { AccessDeniedError } from "../../utils/error";
 import { resetDatabase } from "@/prisma/resetDatabase";
+import { ProjectStatus } from "@/generated/prisma/enums";
 import { requireSession } from "@/lib/data/utils/requireSession";
 import { describe, it, expect, beforeEach, vi, beforeAll } from "vitest";
-import { NotificationType, ProjectStatus } from "@/generated/prisma/enums";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/client";
 
 vi.mock("server-only", () => ({}));
@@ -27,7 +27,6 @@ describe("Project DAL", () => {
     });
 
     await prisma.project.deleteMany();
-    await prisma.notification.deleteMany();
   });
 
   beforeAll(async () => {
@@ -146,7 +145,7 @@ describe("Project DAL", () => {
   });
 
   describe("createProject", () => {
-    it("should successfully create a task and send notifications", async () => {
+    it("should successfully create a task", async () => {
       const result = await createProject({
         title: "Project 1",
         description: "Description 1",
@@ -156,40 +155,10 @@ describe("Project DAL", () => {
         customerId: 1,
       });
 
-      const notifications = await prisma.notification.findMany({
-        where: { projectId: result.id },
-      });
-
       expect(result).toBeDefined();
       expect(result.title).toBe(result.title);
       expect(result.workspaceId).toBe(1);
       expect(result.creatorId).toBe("user-1");
-
-      const expectedNotificationData = {
-        actorId: "user-1",
-        taskId: null,
-        taskTitle: null,
-        commentId: null,
-        projectId: result.id,
-        projectTitle: "Project 1",
-        type: NotificationType.projectAdded,
-        workspaceId: 1,
-      };
-
-      expect(notifications.length).toBe(2);
-
-      expect(notifications).toEqual(
-        expect.arrayContaining([
-          expect.objectContaining({
-            ...expectedNotificationData,
-            recipientId: "user-2",
-          }),
-          expect.objectContaining({
-            ...expectedNotificationData,
-            recipientId: "user-3",
-          }),
-        ]),
-      );
     });
 
     it("should throw error if category does not belong to the workspace", async () => {
@@ -295,39 +264,9 @@ describe("Project DAL", () => {
         status: ProjectStatus.active,
       });
 
-      const notifications = await prisma.notification.findMany({
-        where: { projectId: result.id },
-      });
-
       expect(result).not.toBeNull();
       expect(result!.id).toBe(1);
       expect(result!.title).toBe("Updated Project Title");
-
-      const expectedNotificationData = {
-        actorId: "user-1",
-        projectId: result.id,
-        projectTitle: "Updated Project Title",
-        taskId: null,
-        commentId: null,
-        taskTitle: null,
-        type: NotificationType.projectChanged,
-        workspaceId: 1,
-      };
-
-      expect(notifications.length).toBe(2);
-
-      expect(notifications).toEqual(
-        expect.arrayContaining([
-          expect.objectContaining({
-            ...expectedNotificationData,
-            recipientId: "user-2",
-          }),
-          expect.objectContaining({
-            ...expectedNotificationData,
-            recipientId: "user-3",
-          }),
-        ]),
-      );
     });
 
     it("should throw an error when trying to update a project from another workspace", async () => {
@@ -403,7 +342,7 @@ describe("Project DAL", () => {
   });
 
   describe("updateProjectStatuses", () => {
-    it("should update multiple project statuses and send notifications", async () => {
+    it("should update multiple project statuses", async () => {
       await prisma.project.createMany({
         data: [
           {
@@ -441,46 +380,11 @@ describe("Project DAL", () => {
         nextStatus,
       );
 
-      const notifications = await prisma.notification.findMany({
-        where: { projectId: { in: projectIds } },
-      });
-
       expect(updatedProjects.length).toBe(2);
       expect(updatedProjects).toEqual([
         expect.objectContaining({ id: 1, status: nextStatus }),
         expect.objectContaining({ id: 2, status: nextStatus }),
       ]);
-
-      expect(notifications).toHaveLength(4);
-
-      expect(notifications).toEqual(
-        expect.arrayContaining([
-          expect.objectContaining({
-            actorId: "user-1",
-            projectId: 1,
-            projectTitle: "Project 1",
-            recipientId: "user-2",
-          }),
-          expect.objectContaining({
-            actorId: "user-1",
-            projectId: 1,
-            projectTitle: "Project 1",
-            recipientId: "user-3",
-          }),
-          expect.objectContaining({
-            actorId: "user-1",
-            projectId: 2,
-            projectTitle: "Project 2",
-            recipientId: "user-2",
-          }),
-          expect.objectContaining({
-            actorId: "user-1",
-            projectId: 2,
-            projectTitle: "Project 2",
-            recipientId: "user-3",
-          }),
-        ]),
-      );
     });
 
     it("should return empty array when attempting to update projects from a different workspace", async () => {
@@ -508,10 +412,8 @@ describe("Project DAL", () => {
       const projectIds = [2];
 
       const result = await updateProjectStatuses(projectIds, "completed");
-      const notifications = await prisma.notification.findMany();
 
       expect(result.length).toBe(0);
-      expect(notifications).toHaveLength(0);
     });
 
     describe("RBAC: update project statuses", () => {
@@ -577,7 +479,7 @@ describe("Project DAL", () => {
   });
 
   describe("deleteProjects", () => {
-    it("should successfully delete projects and send notifications", async () => {
+    it("should successfully delete projects", async () => {
       await prisma.project.createMany({
         data: [
           {
@@ -603,56 +505,8 @@ describe("Project DAL", () => {
 
       expect(result.count).toBe(2);
       const remainingTasks = await prisma.project.findMany();
-      const notifications = await prisma.notification.findMany();
 
       expect(remainingTasks).toHaveLength(0);
-
-      expect(notifications.length).toBe(4);
-
-      expect(notifications).toEqual(
-        expect.arrayContaining([
-          expect.objectContaining({
-            actorId: "user-1",
-            projectTitle: "Project 1",
-            projectId: null,
-            commentId: null,
-            taskId: null,
-            type: NotificationType.projectDeleted,
-            workspaceId: 1,
-            recipientId: "user-2",
-          }),
-          expect.objectContaining({
-            actorId: "user-1",
-            projectTitle: "Project 2",
-            projectId: null,
-            commentId: null,
-            taskId: null,
-            type: NotificationType.projectDeleted,
-            workspaceId: 1,
-            recipientId: "user-2",
-          }),
-          expect.objectContaining({
-            actorId: "user-1",
-            projectTitle: "Project 1",
-            projectId: null,
-            commentId: null,
-            taskId: null,
-            type: NotificationType.projectDeleted,
-            workspaceId: 1,
-            recipientId: "user-3",
-          }),
-          expect.objectContaining({
-            actorId: "user-1",
-            projectTitle: "Project 2",
-            projectId: null,
-            commentId: null,
-            taskId: null,
-            type: NotificationType.projectDeleted,
-            workspaceId: 1,
-            recipientId: "user-3",
-          }),
-        ]),
-      );
     });
 
     it("should not delete projects from a different workspace", async () => {
@@ -670,10 +524,8 @@ describe("Project DAL", () => {
       });
 
       const result = await deleteProjects([1]);
-      const notifications = await prisma.notification.findMany();
 
       expect(result.count).toBe(0);
-      expect(notifications).toHaveLength(0);
     });
 
     it("should only delete projects belonging to the current workspace", async () => {
@@ -705,21 +557,7 @@ describe("Project DAL", () => {
       const project = await prisma.project.findUnique({
         where: { id: 2 },
       });
-      const notifications = await prisma.notification.findMany();
-
       expect(project).not.toBeNull();
-
-      expect(notifications).toHaveLength(2);
-      expect(notifications).toEqual(
-        expect.arrayContaining([
-          expect.objectContaining({
-            recipientId: "user-2",
-          }),
-          expect.objectContaining({
-            recipientId: "user-3",
-          }),
-        ]),
-      );
     });
 
     it("should return 0 if an empty array is provided", async () => {

@@ -1,17 +1,11 @@
-import {
-  Prisma,
-  TaskStatus,
-  NotificationType,
-} from "@/generated/prisma/client";
-
 import { cache } from "react";
 import prisma from "@/lib/prisma";
 import { auth } from "@/lib/auth";
 import { UserFilters } from "@/lib/types";
+import { UpdateUserInputDTO } from "./user.dto";
 import { AccessDeniedError } from "../utils/error";
 import { requireSession } from "../utils/requireSession";
-import { CreateUserInputDTO, UpdateUserInputDTO } from "./user.dto";
-import { getNotificationRecipients } from "../notification/notification.dal";
+import { Prisma, TaskStatus } from "@/generated/prisma/client";
 
 export const getUser = cache(
   async <T extends Prisma.UserSelect>(id: string, select: T) => {
@@ -101,71 +95,6 @@ export const getUserCount = cache(async (filters?: UserFilters) => {
   });
 });
 
-export const createUser = async (input: CreateUserInputDTO) => {
-  // Authorization
-  const {
-    user: { id: userId, workspaceId },
-  } = await requireSession();
-
-  // ACL
-  const permission = await auth.api.userHasPermission({
-    body: {
-      userId,
-      permission: {
-        user: ["create"],
-      },
-    },
-  });
-
-  if (!permission.success) {
-    throw new AccessDeniedError("You do not have permission to create user.");
-  }
-
-  // Check related resources access
-  await checkUserResourcesAccess(workspaceId, input.positionId);
-
-  return await prisma.$transaction(async (tx) => {
-    const { user } = await auth.api.createUser({
-      body: {
-        email: input.email,
-        password: input.password,
-        name: input.fullName,
-        role: "user",
-
-        data: {
-          workspaceId,
-          positionId: input.positionId,
-          bio: input.bio,
-          birthdate: input.birthdate,
-          phoneNumber: input.phoneNumber,
-          address: input.address,
-          publicLink: input.publicLink,
-        },
-      },
-    });
-
-    auth.api.sendVerificationEmail({ body: { email: input.email } });
-
-    const recipients = await getNotificationRecipients(tx, workspaceId, userId);
-
-    if (recipients.length > 0) {
-      await tx.notification.createMany({
-        data: recipients.map((recipient) => ({
-          type: NotificationType.userAdded,
-          actorId: userId,
-          recipientId: recipient.id,
-          workspaceId,
-          userId: user.id,
-          userFullName: user.name,
-          isRead: false,
-        })),
-      });
-    }
-
-    return user;
-  });
-};
-
 export const updateUser = async (input: UpdateUserInputDTO) => {
   // Authorization
   const {
@@ -187,43 +116,25 @@ export const updateUser = async (input: UpdateUserInputDTO) => {
   }
 
   // Check related resources access
-  await checkUserResourcesAccess(workspaceId, input.positionId);
+  await checkUserResourcesAccess(input.positionId);
 
-  return await prisma.$transaction(async (tx) => {
-    const updatedUser = await tx.user.update({
-      where: {
-        id: input.id,
-        workspaceId,
-      },
-      data: {
-        fullName: input.fullName ?? Prisma.skip,
-        bio: input.bio ?? Prisma.skip,
-        positionId: input.positionId ?? Prisma.skip,
-        phoneNumber: input.phoneNumber ?? Prisma.skip,
-        publicLink: input.publicLink ?? Prisma.skip,
-        birthdate: input.birthdate ?? Prisma.skip,
-        address: input.address ?? Prisma.skip,
-      },
-    });
-
-    const recipients = await getNotificationRecipients(tx, workspaceId, userId);
-
-    if (recipients.length > 0) {
-      await tx.notification.createMany({
-        data: recipients.map((recipient) => ({
-          type: NotificationType.customerChanged,
-          actorId: userId,
-          recipientId: recipient.id,
-          workspaceId,
-          userId: updatedUser.id,
-          userFullName: updatedUser.fullName,
-          isRead: false,
-        })),
-      });
-    }
-
-    return updatedUser;
+  const updatedUser = await prisma.user.update({
+    where: {
+      id: input.id,
+      workspaceId,
+    },
+    data: {
+      fullName: input.fullName ?? Prisma.skip,
+      bio: input.bio ?? Prisma.skip,
+      positionId: input.positionId ?? Prisma.skip,
+      phoneNumber: input.phoneNumber ?? Prisma.skip,
+      publicLink: input.publicLink ?? Prisma.skip,
+      birthdate: input.birthdate ?? Prisma.skip,
+      address: input.address ?? Prisma.skip,
+    },
   });
+
+  return updatedUser;
 };
 
 export const deleteUsers = async (ids: string[]) => {
@@ -236,14 +147,11 @@ export const deleteUsers = async (ids: string[]) => {
   });
 };
 
-/**
- * HELPERS
- */
+export async function checkUserResourcesAccess(positionId?: number) {
+  const {
+    user: { workspaceId },
+  } = await requireSession();
 
-async function checkUserResourcesAccess(
-  workspaceId: number,
-  positionId?: number,
-) {
   if (positionId) {
     const category = await prisma.position.findUnique({
       where: { id: positionId, workspaceId },

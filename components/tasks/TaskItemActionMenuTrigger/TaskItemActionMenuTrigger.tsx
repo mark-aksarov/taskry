@@ -67,7 +67,7 @@ export function TaskItemActionMenuTrigger({
     updateTaskStatusPending,
   ] = useActionState(updateStatusAction, initialState);
 
-  // Show toast notifications for status update errors
+  // Show toast for status update errors
   useActionErrorToast(updateTaskStatusState);
 
   // Handle menu actions

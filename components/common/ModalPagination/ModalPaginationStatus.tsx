@@ -1,16 +1,16 @@
 import React from "react";
 
-interface NotificationModalContentStatusProps {
+interface ModalPaginationStatusProps {
   page: number;
   pageSize: number;
   totalCount: number;
 }
 
-export function NotificationModalContentStatus({
+export function ModalPaginationStatus({
   page,
   pageSize,
   totalCount,
-}: NotificationModalContentStatusProps) {
+}: ModalPaginationStatusProps) {
   if (totalCount === 0) {
     return null;
   }

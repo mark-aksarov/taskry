@@ -5,7 +5,6 @@ import comments from "./comments.json";
 import common from "./common.json";
 import customers from "./customers.json";
 import layout from "./layout.json";
-import notifications from "./notifications.json";
 import search from "./search.json";
 import projects from "./projects.json";
 import subtasks from "./subtasks.json";
@@ -20,7 +19,6 @@ const en = {
   common,
   customers,
   layout,
-  notifications,
   search,
   projects,
   subtasks,

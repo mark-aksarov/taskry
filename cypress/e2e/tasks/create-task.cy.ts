@@ -38,7 +38,7 @@ describe("creates a new task", () => {
     cy.visit("/en/tasks");
   });
 
-  it("can create a task and send notifications", () => {
+  it("can create a task", () => {
     cy.getByData("tasks-page-empty-add-button").click();
 
     // fill form
@@ -70,34 +70,5 @@ describe("creates a new task", () => {
       cy.contains("Project 1");
       cy.contains("Active");
     });
-
-    // check notifications
-    cy.checkNotifications(0);
-
-    // sign in as user-2
-    cy.signIn("user@example.com", "12345abc");
-    cy.visit("/en/tasks");
-
-    // check notifications
-    cy.checkNotifications(1, [
-      {
-        target: "Created Task Title",
-        actor: "John Doe",
-        action: "added a new task",
-      },
-    ]);
-
-    // sign in as user-3
-    cy.signIn("guest@example.com", "12345abc");
-    cy.visit("/en/tasks");
-
-    // check notifications
-    cy.checkNotifications(1, [
-      {
-        target: "Created Task Title",
-        actor: "John Doe",
-        action: "added a new task",
-      },
-    ]);
   });
 });

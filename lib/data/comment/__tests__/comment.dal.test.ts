@@ -1,10 +1,4 @@
 import {
-  TaskStatus,
-  ProjectStatus,
-  NotificationType,
-} from "@/generated/prisma/enums";
-
-import {
   vi,
   it,
   expect,
@@ -17,8 +11,9 @@ import {
 import prisma from "@/lib/prisma";
 import { resetDatabase } from "@/prisma/resetDatabase";
 import { AccessDeniedError } from "@/lib/data/utils/error";
-import { createComment, deleteComment, updateComment } from "../comment.dal";
 import { requireSession } from "@/lib/data/utils/requireSession";
+import { TaskStatus, ProjectStatus } from "@/generated/prisma/enums";
+import { createComment, deleteComment, updateComment } from "../comment.dal";
 import { PrismaClientKnownRequestError } from "@/generated/prisma/internal/prismaNamespace";
 
 vi.mock("server-only", () => ({}));
@@ -162,11 +157,10 @@ describe("Comment DAL", () => {
   describe("createComment", () => {
     beforeEach(async () => {
       await prisma.comment.deleteMany();
-      await prisma.notification.deleteMany();
       await prisma.attachment.deleteMany();
     });
 
-    it("should successfully create a comment for a task and send notifications with task metadata", async () => {
+    it("should successfully create a comment for a task", async () => {
       const input = {
         id: 101,
         content: "Comment for Task 1",
@@ -177,46 +171,17 @@ describe("Comment DAL", () => {
       };
 
       const result = await createComment(input);
-
-      const [notifications, attachments] = await Promise.all([
-        prisma.notification.findMany(),
-        prisma.attachment.findMany(),
-      ]);
+      const attachments = await prisma.attachment.findMany();
 
       expect(result).toBeDefined();
       expect(result!.content).toBe("Comment for Task 1");
-
-      const expectedNotificationData = {
-        actorId: "user-1",
-        taskId: 1,
-        taskTitle: "Task 1",
-        projectId: null,
-        projectTitle: null,
-        type: NotificationType.commentAdded,
-      };
-
-      expect(notifications).toHaveLength(2);
-
-      expect(notifications).toEqual(
-        expect.arrayContaining([
-          expect.objectContaining({
-            ...expectedNotificationData,
-            recipientId: "user-2",
-          }),
-          expect.objectContaining({
-            ...expectedNotificationData,
-            recipientId: "user-3",
-          }),
-        ]),
-      );
-
       expect(attachments[0]).toMatchObject({
         fileName: "task.png",
         workspaceId: 1,
       });
     });
 
-    it("should successfully create a comment for a project and send notifications with project metadata", async () => {
+    it("should successfully create a comment for a project", async () => {
       const input = {
         id: 202,
         content: "Comment for Project 1",
@@ -225,36 +190,8 @@ describe("Comment DAL", () => {
 
       const result = await createComment(input);
 
-      const notifications = await prisma.notification.findMany({
-        orderBy: { recipientId: "asc" },
-      });
-
       expect(result).toBeDefined();
       expect(result!.content).toBe("Comment for Project 1");
-
-      const expectedNotificationData = {
-        actorId: "user-1",
-        taskId: null,
-        taskTitle: null,
-        projectId: 1,
-        projectTitle: "Project 1",
-        type: NotificationType.commentAdded,
-      };
-
-      expect(notifications).toHaveLength(2);
-
-      expect(notifications).toEqual(
-        expect.arrayContaining([
-          expect.objectContaining({
-            ...expectedNotificationData,
-            recipientId: "user-2",
-          }),
-          expect.objectContaining({
-            ...expectedNotificationData,
-            recipientId: "user-3",
-          }),
-        ]),
-      );
     });
 
     it("should successfully create a comment without attachments", async () => {
@@ -419,41 +356,14 @@ describe("Comment DAL", () => {
 
     afterEach(async () => {
       await prisma.comment.deleteMany();
-      await prisma.notification.deleteMany();
       await prisma.attachment.deleteMany();
     });
 
-    it("should successfully delete a comment and send notifications", async () => {
+    it("should successfully delete a comment", async () => {
       const deletedComment = await deleteComment(1);
-
-      const notifications = await prisma.notification.findMany();
 
       expect(deletedComment.id).toBe(1);
       expect(deletedComment.content).toBe("Comment 1");
-
-      expect(notifications).toHaveLength(2);
-
-      const expectedNotificationData = {
-        actorId: "user-1",
-        taskId: 1,
-        taskTitle: "Task 1",
-        projectId: null,
-        projectTitle: null,
-        type: NotificationType.commentDeleted,
-      };
-
-      expect(notifications).toEqual(
-        expect.arrayContaining([
-          expect.objectContaining({
-            ...expectedNotificationData,
-            recipientId: "user-2",
-          }),
-          expect.objectContaining({
-            ...expectedNotificationData,
-            recipientId: "user-3",
-          }),
-        ]),
-      );
     });
 
     it("should fail when deleting a comment from a different workspace", async () => {
@@ -551,10 +461,9 @@ describe("Comment DAL", () => {
 
     afterEach(async () => {
       await prisma.comment.deleteMany();
-      await prisma.notification.deleteMany();
     });
 
-    it("should successfully update a comment and send notifications", async () => {
+    it("should successfully update a comment", async () => {
       const updatedComment = await updateComment({
         id: 1,
         content: "Updated Comment 1",
@@ -562,31 +471,6 @@ describe("Comment DAL", () => {
 
       expect(updatedComment).toBeDefined();
       expect(updatedComment.content).toBe("Updated Comment 1");
-
-      const notifications = await prisma.notification.findMany();
-      expect(notifications).toHaveLength(2);
-
-      const expectedNotificationData = {
-        actorId: "user-1",
-        taskId: 1,
-        taskTitle: "Task 1",
-        projectId: null,
-        projectTitle: null,
-        type: NotificationType.commentChanged,
-      };
-
-      expect(notifications).toEqual(
-        expect.arrayContaining([
-          expect.objectContaining({
-            ...expectedNotificationData,
-            recipientId: "user-2",
-          }),
-          expect.objectContaining({
-            ...expectedNotificationData,
-            recipientId: "user-3",
-          }),
-        ]),
-      );
     });
 
     it("should fail updating a comment from a different workspace", async () => {

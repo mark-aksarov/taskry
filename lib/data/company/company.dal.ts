@@ -6,8 +6,6 @@ import { auth } from "@/lib/auth";
 import { AccessDeniedError } from "../utils/error";
 import { CreateCompanyInputDTO } from "./company.dto";
 import { requireSession } from "../utils/requireSession";
-import { NotificationType } from "@/generated/prisma/enums";
-import { getNotificationRecipients } from "../notification/notification.dal";
 
 export const getAllCompanies = cache(async () => {
   // Authorization
@@ -48,30 +46,13 @@ export const createCompany = async (input: CreateCompanyInputDTO) => {
     );
   }
 
-  return prisma.$transaction(async (tx) => {
-    const company = await tx.company.create({
-      data: {
-        name: input.name,
-        workspaceId,
-      },
-    });
-
-    const recipients = await getNotificationRecipients(tx, workspaceId, userId);
-
-    if (recipients.length > 0) {
-      await tx.notification.createMany({
-        data: recipients.map((user) => ({
-          type: NotificationType.companyAdded,
-          actorId: userId,
-          recipientId: user.id,
-          workspaceId,
-          companyId: company.id,
-          companyName: company.name,
-          isRead: false,
-        })),
-      });
-    }
-
-    return company;
+  // Create company
+  const company = await prisma.company.create({
+    data: {
+      name: input.name,
+      workspaceId,
+    },
   });
+
+  return company;
 };

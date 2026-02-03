@@ -8,7 +8,7 @@ describe("creates a new project", () => {
     cy.visit("/en/team");
   });
 
-  it("can create an user and send notifications", () => {
+  it("can create an user", () => {
     cy.getByData("user-toolbar-create-new-menu-trigger")
       .filter(":visible")
       .click();
@@ -37,35 +37,6 @@ describe("creates a new project", () => {
       cy.contains("created-user@test.com");
       cy.contains("Developer");
     });
-
-    // check notifications
-    cy.checkNotifications(0);
-
-    // sign in as user-2
-    cy.signIn("user@example.com", "12345abc");
-    cy.visit("/en/team");
-
-    // check notifications
-    cy.checkNotifications(1, [
-      {
-        target: "Created User Name",
-        actor: "John Doe",
-        action: "added a new user",
-      },
-    ]);
-
-    // sign in as user-3
-    cy.signIn("guest@example.com", "12345abc");
-    cy.visit("/en/team");
-
-    // check notifications
-    cy.checkNotifications(1, [
-      {
-        target: "Created User Name",
-        actor: "John Doe",
-        action: "added a new user",
-      },
-    ]);
 
     // sign in as Created User
     cy.signIn("created-user@test.com", "12345abc");

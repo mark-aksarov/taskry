@@ -13,10 +13,5 @@ declare namespace Cypress {
       month: string,
       year: string,
     ): Chainable<JQuery<HTMLElement>>;
-
-    checkNotifications(
-      expectedCount: number,
-      expectedNotifications?: NotificationCheck[],
-    ): Chainable<JQuery<HTMLElement>>;
   }
 }

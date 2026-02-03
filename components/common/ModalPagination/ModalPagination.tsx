@@ -1,7 +1,7 @@
 "use client";
 
 import { Pagination } from "../Pagination";
-import { NotificationModalContentStatus } from "@/components/notifications/NotificationModalContent";
+import { ModalPaginationStatus } from "./ModalPaginationStatus";
 
 export interface ModalPaginationProps {
   page: number;
@@ -20,7 +20,7 @@ export function ModalPagination({
 }: ModalPaginationProps) {
   return (
     <div className="flex w-full items-center justify-between">
-      <NotificationModalContentStatus
+      <ModalPaginationStatus
         page={page}
         pageSize={pageSize}
         totalCount={totalCount}

@@ -1,15 +1,10 @@
-import {
-  TaskStatus,
-  ProjectStatus,
-  NotificationType,
-} from "@/generated/prisma/enums";
-
 import prisma from "@/lib/prisma";
 import { resetDatabase } from "@/prisma/resetDatabase";
 import { AccessDeniedError } from "@/lib/data/utils/error";
-import { createSubtask, deleteSubtask, updateSubtask } from "../subtask.dal";
 import { requireSession } from "@/lib/data/utils/requireSession";
+import { TaskStatus, ProjectStatus } from "@/generated/prisma/enums";
 import { vi, describe, beforeEach, it, expect, beforeAll } from "vitest";
+import { createSubtask, deleteSubtask, updateSubtask } from "../subtask.dal";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/client";
 
 vi.mock("server-only", () => ({}));
@@ -25,7 +20,6 @@ describe("Subtask DAL", () => {
     });
 
     await prisma.subtask.deleteMany();
-    await prisma.notification.deleteMany();
   });
 
   beforeAll(async () => {
@@ -152,42 +146,15 @@ describe("Subtask DAL", () => {
   });
 
   describe("createSubtask", () => {
-    it("should successfully create a subtask and send notifications", async () => {
+    it("should successfully create a subtask", async () => {
       const result = await createSubtask({
         text: "Subtask 1",
         taskId: 1,
       });
 
-      const notifications = await prisma.notification.findMany();
-
       expect(result).toBeDefined();
       expect(result.text).toBe("Subtask 1");
       expect(result.taskId).toBe(1);
-
-      const expectedNotificationData = {
-        actorId: "user-1",
-        taskId: 1,
-        taskTitle: "Task 1",
-        subtaskId: result.id,
-        subtaskText: "Subtask 1",
-        type: NotificationType.subtaskAdded,
-        workspaceId: 1,
-      };
-
-      expect(notifications.length).toBe(2);
-
-      expect(notifications).toEqual(
-        expect.arrayContaining([
-          expect.objectContaining({
-            ...expectedNotificationData,
-            recipientId: "user-2",
-          }),
-          expect.objectContaining({
-            ...expectedNotificationData,
-            recipientId: "user-3",
-          }),
-        ]),
-      );
     });
 
     it("should fail if the task belongs to a different workspace", async () => {
@@ -239,7 +206,7 @@ describe("Subtask DAL", () => {
   });
 
   describe("updateSubtask", () => {
-    it("should successfully update subtask and send notifications", async () => {
+    it("should successfully update subtask", async () => {
       await prisma.subtask.create({
         data: {
           id: 1,
@@ -254,36 +221,9 @@ describe("Subtask DAL", () => {
         text: "Updated Subtask Text",
       });
 
-      const notifications = await prisma.notification.findMany();
-
       expect(result).not.toBeNull();
       expect(result!.id).toBe(1);
       expect(result!.text).toBe("Updated Subtask Text");
-
-      const expectedNotificationData = {
-        actorId: "user-1",
-        taskId: 1,
-        taskTitle: "Task 1",
-        subtaskId: result.id,
-        subtaskText: "Updated Subtask Text",
-        type: NotificationType.subtaskChanged,
-        workspaceId: 1,
-      };
-
-      expect(notifications.length).toBe(2);
-
-      expect(notifications).toEqual(
-        expect.arrayContaining([
-          expect.objectContaining({
-            ...expectedNotificationData,
-            recipientId: "user-2",
-          }),
-          expect.objectContaining({
-            ...expectedNotificationData,
-            recipientId: "user-3",
-          }),
-        ]),
-      );
     });
 
     it("should throw an error when trying to update a subtask from another workspace", async () => {
@@ -350,7 +290,7 @@ describe("Subtask DAL", () => {
   });
 
   describe("deleteSubtask", () => {
-    it("should successfully delete subtask and send notifications", async () => {
+    it("should successfully delete subtask", async () => {
       await prisma.subtask.createMany({
         data: [
           {
@@ -365,32 +305,6 @@ describe("Subtask DAL", () => {
       const result = await deleteSubtask(1);
 
       expect(result.text).toBe("Subtask 1");
-      const notifications = await prisma.notification.findMany();
-
-      expect(notifications.length).toBe(2);
-
-      expect(notifications).toEqual(
-        expect.arrayContaining([
-          expect.objectContaining({
-            actorId: "user-1",
-            taskId: 1,
-            taskTitle: "Task 1",
-            subtaskText: "Subtask 1",
-            type: NotificationType.subtaskDeleted,
-            workspaceId: 1,
-            recipientId: "user-2",
-          }),
-          expect.objectContaining({
-            actorId: "user-1",
-            taskId: 1,
-            taskTitle: "Task 1",
-            subtaskText: "Subtask 1",
-            type: NotificationType.subtaskDeleted,
-            workspaceId: 1,
-            recipientId: "user-3",
-          }),
-        ]),
-      );
     });
 
     it("should not delete subtasks from a different workspace", async () => {
@@ -406,7 +320,6 @@ describe("Subtask DAL", () => {
       });
 
       const deleteSubtaskPromise = deleteSubtask(1);
-      const notifications = await prisma.notification.findMany();
 
       await expect(deleteSubtaskPromise).rejects.toThrow(
         PrismaClientKnownRequestError,
@@ -414,7 +327,6 @@ describe("Subtask DAL", () => {
       await expect(deleteSubtaskPromise).rejects.toMatchObject({
         code: "P2025",
       });
-      expect(notifications).toHaveLength(0);
     });
 
     describe("RBAC: delete subtask", () => {

@@ -4,28 +4,19 @@ import { AppHeaderLangMenuTrigger } from "./AppHeaderLangMenuTrigger";
 import { AppHeaderThemeToggleButton } from "./AppHeaderThemeToggleButton";
 import { SearchModalTriggerMobile } from "@/components/search/SearchModalTriggerMobile";
 import { SearchModalTriggerDesktop } from "@/components/search/SearchModalTriggerDesktop";
-import { NotificationModalTrigger } from "@/components/notifications/NotificationModalTrigger";
 
 interface AppHeaderProps {
   appBottomSheetTrigger: React.ReactNode;
   appSidebarSheetTrigger: React.ReactNode;
-  notificationModalContentContainer: React.ReactNode;
   searchModal: React.ReactNode;
 }
 
 export const AppHeader = ({
   appBottomSheetTrigger,
   appSidebarSheetTrigger,
-  notificationModalContentContainer,
   searchModal,
 }: AppHeaderProps) => {
   const buttonClasses = "rounded-full p-3";
-
-  const notificationModalTrigger = (
-    <NotificationModalTrigger
-      notificationModalContentContainer={notificationModalContentContainer}
-    />
-  );
 
   return (
     <>
@@ -39,10 +30,7 @@ export const AppHeader = ({
           }
           <div className="flex flex-auto items-center justify-end gap-4">
             <SearchModalTriggerDesktop modal={searchModal} />
-            {notificationModalTrigger}
-
             <AppHeaderThemeToggleButton className={buttonClasses} />
-
             <AppHeaderLangMenuTrigger />
             <ProfileLink />
           </div>
@@ -55,7 +43,6 @@ export const AppHeader = ({
               modal={searchModal}
               className={buttonClasses}
             />
-            {notificationModalTrigger}
             {appBottomSheetTrigger}
           </div>
         </div>

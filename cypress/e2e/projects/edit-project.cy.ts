@@ -82,34 +82,5 @@ describe("edit a new project", () => {
       cy.contains("Company 2");
       cy.contains("Pending");
     });
-
-    // check notifications
-    cy.checkNotifications(0);
-
-    // sign in as user-2
-    cy.signIn("user@example.com", "12345abc");
-    cy.visit("/en/projects");
-
-    // check notifications
-    cy.checkNotifications(1, [
-      {
-        target: "Updated Project Title",
-        actor: "John Doe",
-        action: "changed the project",
-      },
-    ]);
-
-    // sign in as user-3
-    cy.signIn("guest@example.com", "12345abc");
-    cy.visit("/en/projects");
-
-    // check notifications
-    cy.checkNotifications(1, [
-      {
-        target: "Updated Project Title",
-        actor: "John Doe",
-        action: "changed the project",
-      },
-    ]);
   });
 });

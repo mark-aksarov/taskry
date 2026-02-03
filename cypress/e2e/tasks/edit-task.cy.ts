@@ -108,35 +108,6 @@ describe("edit a new task", () => {
       cy.contains("Project 2");
       cy.contains("Pending");
     });
-
-    // check notifications
-    cy.checkNotifications(0);
-
-    // sign in as user-2
-    cy.signIn("user@example.com", "12345abc");
-    cy.visit("/en/tasks");
-
-    // check notifications
-    cy.checkNotifications(1, [
-      {
-        target: "Updated Task Title",
-        actor: "John Doe",
-        action: "changed the task",
-      },
-    ]);
-
-    // sign in as user-3
-    cy.signIn("guest@example.com", "12345abc");
-    cy.visit("/en/tasks");
-
-    // check notifications
-    cy.checkNotifications(1, [
-      {
-        target: "Updated Task Title",
-        actor: "John Doe",
-        action: "changed the task",
-      },
-    ]);
   });
 
   describe("access control (RBAC)", () => {

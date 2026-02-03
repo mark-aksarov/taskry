@@ -6,18 +6,13 @@ import {
   updateTaskStatuses,
 } from "../task.dal";
 
-import {
-  TaskStatus,
-  ProjectStatus,
-  NotificationType,
-} from "@/generated/prisma/enums";
-
 import prisma from "@/lib/prisma";
+import { Prisma } from "@/generated/prisma/client";
 import { resetDatabase } from "@/prisma/resetDatabase";
 import { AccessDeniedError } from "@/lib/data/utils/error";
-import { vi, describe, it, expect, beforeEach, beforeAll } from "vitest";
 import { requireSession } from "@/lib/data/utils/requireSession";
-import { Prisma } from "@/generated/prisma/client";
+import { TaskStatus, ProjectStatus } from "@/generated/prisma/enums";
+import { vi, describe, it, expect, beforeEach, beforeAll } from "vitest";
 
 vi.mock("server-only", () => ({}));
 
@@ -32,7 +27,6 @@ describe("Task DAL", () => {
     });
 
     await prisma.task.deleteMany();
-    await prisma.notification.deleteMany();
   });
 
   beforeAll(async () => {
@@ -175,7 +169,7 @@ describe("Task DAL", () => {
   });
 
   describe("createTask", () => {
-    it("should successfully create a task and send notifications", async () => {
+    it("should successfully create a task", async () => {
       const projectId = 1;
 
       const result = await createTask({
@@ -187,41 +181,11 @@ describe("Task DAL", () => {
         deadline: new Date(),
       });
 
-      const notifications = await prisma.notification.findMany({
-        where: { taskId: result.id },
-      });
-
       expect(result).toBeDefined();
       expect(result.title).toBe(result.title);
       expect(result.workspaceId).toBe(1);
       expect(result.creatorId).toBe("user-1");
       expect(result.projectId).toBe(projectId);
-
-      const expectedNotificationData = {
-        actorId: "user-1",
-        taskId: result.id,
-        taskTitle: "New Task",
-        projectId: null,
-        commentId: null,
-        projectTitle: null,
-        type: NotificationType.taskAdded,
-        workspaceId: 1,
-      };
-
-      expect(notifications.length).toBe(2);
-
-      expect(notifications).toEqual(
-        expect.arrayContaining([
-          expect.objectContaining({
-            ...expectedNotificationData,
-            recipientId: "user-2",
-          }),
-          expect.objectContaining({
-            ...expectedNotificationData,
-            recipientId: "user-3",
-          }),
-        ]),
-      );
     });
 
     it("should fail if the project belongs to a different workspace", async () => {
@@ -320,7 +284,7 @@ describe("Task DAL", () => {
   });
 
   describe("updateTask", () => {
-    it("should successfully update task and send notifications", async () => {
+    it("should successfully update task", async () => {
       const taskId = 100;
 
       await prisma.task.create({
@@ -340,39 +304,9 @@ describe("Task DAL", () => {
         title: "Updated Task Title",
       });
 
-      const notifications = await prisma.notification.findMany({
-        where: { taskId: result.id },
-      });
-
       expect(result).not.toBeNull();
       expect(result!.id).toBe(taskId);
       expect(result!.title).toBe("Updated Task Title");
-
-      const expectedNotificationData = {
-        actorId: "user-1",
-        taskId: result.id,
-        taskTitle: "Updated Task Title",
-        projectId: null,
-        commentId: null,
-        projectTitle: null,
-        type: NotificationType.taskChanged,
-        workspaceId: 1,
-      };
-
-      expect(notifications.length).toBe(2);
-
-      expect(notifications).toEqual(
-        expect.arrayContaining([
-          expect.objectContaining({
-            ...expectedNotificationData,
-            recipientId: "user-2",
-          }),
-          expect.objectContaining({
-            ...expectedNotificationData,
-            recipientId: "user-3",
-          }),
-        ]),
-      );
     });
 
     it("should throw an error when trying to update a task from another workspace", async () => {
@@ -545,7 +479,7 @@ describe("Task DAL", () => {
   });
 
   describe("updateTaskStatuses", () => {
-    it("should update multiple task statuses and send notifications", async () => {
+    it("should update multiple task statuses", async () => {
       await prisma.task.createMany({
         data: [
           {
@@ -584,46 +518,11 @@ describe("Task DAL", () => {
 
       const updatedTasks = await updateTaskStatuses(taskIds, nextStatus);
 
-      const notifications = await prisma.notification.findMany({
-        where: { taskId: { in: taskIds } },
-      });
-
       expect(updatedTasks.length).toBe(2);
       expect(updatedTasks).toEqual([
         expect.objectContaining({ id: 1, status: nextStatus }),
         expect.objectContaining({ id: 2, status: nextStatus }),
       ]);
-
-      expect(notifications).toHaveLength(4);
-
-      expect(notifications).toEqual(
-        expect.arrayContaining([
-          expect.objectContaining({
-            actorId: "user-1",
-            taskId: 1,
-            taskTitle: "Task 1",
-            recipientId: "user-2",
-          }),
-          expect.objectContaining({
-            actorId: "user-1",
-            taskId: 1,
-            taskTitle: "Task 1",
-            recipientId: "user-3",
-          }),
-          expect.objectContaining({
-            actorId: "user-1",
-            taskId: 2,
-            taskTitle: "Task 2",
-            recipientId: "user-2",
-          }),
-          expect.objectContaining({
-            actorId: "user-1",
-            taskId: 2,
-            taskTitle: "Task 2",
-            recipientId: "user-3",
-          }),
-        ]),
-      );
     });
 
     it("should return empty array when attempting to update tasks from a different workspace", async () => {
@@ -653,10 +552,8 @@ describe("Task DAL", () => {
       const taskIds = [2];
 
       const result = await updateTaskStatuses(taskIds, "completed");
-      const notifications = await prisma.notification.findMany();
 
       expect(result.length).toBe(0);
-      expect(notifications).toHaveLength(0);
     });
 
     describe("RBAC: update task status", () => {
@@ -714,7 +611,7 @@ describe("Task DAL", () => {
   });
 
   describe("deleteTasks", () => {
-    it("should successfully delete tasks and send notifications", async () => {
+    it("should successfully delete tasks", async () => {
       await prisma.task.createMany({
         data: [
           {
@@ -743,56 +640,8 @@ describe("Task DAL", () => {
 
       expect(result.count).toBe(2);
       const remainingTasks = await prisma.task.findMany();
-      const notifications = await prisma.notification.findMany();
 
       expect(remainingTasks).toHaveLength(0);
-
-      expect(notifications.length).toBe(4);
-
-      expect(notifications).toEqual(
-        expect.arrayContaining([
-          expect.objectContaining({
-            actorId: "user-1",
-            taskTitle: "Task 1",
-            projectId: null,
-            commentId: null,
-            projectTitle: null,
-            type: NotificationType.taskDeleted,
-            workspaceId: 1,
-            recipientId: "user-2",
-          }),
-          expect.objectContaining({
-            actorId: "user-1",
-            taskTitle: "Task 2",
-            projectId: null,
-            commentId: null,
-            projectTitle: null,
-            type: NotificationType.taskDeleted,
-            workspaceId: 1,
-            recipientId: "user-2",
-          }),
-          expect.objectContaining({
-            actorId: "user-1",
-            taskTitle: "Task 1",
-            projectId: null,
-            commentId: null,
-            projectTitle: null,
-            type: NotificationType.taskDeleted,
-            workspaceId: 1,
-            recipientId: "user-3",
-          }),
-          expect.objectContaining({
-            actorId: "user-1",
-            taskTitle: "Task 2",
-            projectId: null,
-            commentId: null,
-            projectTitle: null,
-            type: NotificationType.taskDeleted,
-            workspaceId: 1,
-            recipientId: "user-3",
-          }),
-        ]),
-      );
     });
 
     it("should not delete tasks from a different workspace", async () => {
@@ -811,10 +660,8 @@ describe("Task DAL", () => {
       });
 
       const result = await deleteTasks([1]);
-      const notifications = await prisma.notification.findMany();
 
       expect(result.count).toBe(0);
-      expect(notifications).toHaveLength(0);
     });
 
     it("should only delete tasks belonging to the current workspace", async () => {
@@ -852,21 +699,8 @@ describe("Task DAL", () => {
       const task = await prisma.task.findUnique({
         where: { id: invalidId },
       });
-      const notifications = await prisma.notification.findMany();
 
       expect(task).not.toBeNull();
-
-      expect(notifications).toHaveLength(2);
-      expect(notifications).toEqual(
-        expect.arrayContaining([
-          expect.objectContaining({
-            recipientId: "user-2",
-          }),
-          expect.objectContaining({
-            recipientId: "user-3",
-          }),
-        ]),
-      );
     });
 
     it("should return 0 if an empty array is provided", async () => {

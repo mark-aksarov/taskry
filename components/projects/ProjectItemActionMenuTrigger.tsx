@@ -61,7 +61,7 @@ export function ProjectItemActionMenuTrigger({
     updateProjectStatusPending,
   ] = useActionState(updateStatusAction, updateStatusInitialState);
 
-  // Show toast notifications for status update errors
+  // Show toast for status update errors
   useActionErrorToast(updateProjectStatusState);
 
   // Handle menu actions

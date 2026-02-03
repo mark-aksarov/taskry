@@ -1,7 +1,6 @@
 import prisma from "@/lib/prisma";
 import { resetDatabase } from "@/prisma/resetDatabase";
 import { AccessDeniedError } from "@/lib/data/utils/error";
-import { NotificationType } from "@/generated/prisma/enums";
 import { createProjectCategory } from "../projectCategory.dal";
 import { requireSession } from "@/lib/data/utils/requireSession";
 import { vi, describe, beforeEach, beforeAll, it, expect } from "vitest";
@@ -19,7 +18,6 @@ describe("ProjectCategory DAL", () => {
     });
 
     await prisma.projectCategory.deleteMany();
-    await prisma.notification.deleteMany();
   });
 
   beforeAll(async () => {
@@ -62,41 +60,17 @@ describe("ProjectCategory DAL", () => {
   });
 
   describe("createProjectCategory", () => {
-    it("should successfully create a projectCategory and send notifications", async () => {
+    it("should successfully create a projectCategory", async () => {
       const input = {
         id: 1,
         name: "Project Category 1",
       };
 
       const result = await createProjectCategory(input);
-      const notifications = await prisma.notification.findMany();
 
       expect(result).toBeDefined();
       expect(result.name).toBe("Project Category 1");
       expect(result.workspaceId).toBe(1);
-
-      const expectedNotificationData = {
-        actorId: "user-1",
-        projectCategoryId: result.id,
-        projectCategoryName: "Project Category 1",
-        type: NotificationType.projectCategoryAdded,
-        workspaceId: 1,
-      };
-
-      expect(notifications.length).toBe(2);
-
-      expect(notifications).toEqual(
-        expect.arrayContaining([
-          expect.objectContaining({
-            ...expectedNotificationData,
-            recipientId: "user-2",
-          }),
-          expect.objectContaining({
-            ...expectedNotificationData,
-            recipientId: "user-3",
-          }),
-        ]),
-      );
     });
 
     describe("RBAC: create project category", () => {

@@ -24,7 +24,7 @@ describe("creates a new project", () => {
     cy.visit("/en/projects");
   });
 
-  it("can create a project and send notifications", () => {
+  it("can create a project", () => {
     cy.getByData("projects-page-empty-add-button").click();
 
     // fill form
@@ -54,34 +54,5 @@ describe("creates a new project", () => {
       cy.contains("Company 1");
       cy.contains("Active");
     });
-
-    // check notifications
-    cy.checkNotifications(0);
-
-    // sign in as user-2
-    cy.signIn("user@example.com", "12345abc");
-    cy.visit("/en/projects");
-
-    // check notifications
-    cy.checkNotifications(1, [
-      {
-        target: "Created Project Title",
-        actor: "John Doe",
-        action: "added a new project",
-      },
-    ]);
-
-    // sign in as user-3
-    cy.signIn("guest@example.com", "12345abc");
-    cy.visit("/en/projects");
-
-    // check notifications
-    cy.checkNotifications(1, [
-      {
-        target: "Created Project Title",
-        actor: "John Doe",
-        action: "added a new project",
-      },
-    ]);
   });
 });

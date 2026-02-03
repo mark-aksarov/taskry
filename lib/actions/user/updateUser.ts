@@ -31,6 +31,7 @@ export async function updateUser(
 
     // Update customer
     await updateUserQuery(parsed.data);
+
     revalidatePath("/team");
 
     return actionSuccess();

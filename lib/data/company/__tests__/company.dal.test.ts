@@ -4,7 +4,6 @@ import { AccessDeniedError } from "../../utils/error";
 import { resetDatabase } from "@/prisma/resetDatabase";
 import { requireSession } from "@/lib/data/utils/requireSession";
 import { describe, it, expect, beforeEach, beforeAll, vi } from "vitest";
-import { NotificationType } from "@/generated/prisma/enums";
 
 vi.mock("server-only", () => ({}));
 
@@ -19,7 +18,6 @@ describe("Company DAL", () => {
     });
 
     await prisma.company.deleteMany();
-    await prisma.notification.deleteMany();
   });
 
   beforeAll(async () => {
@@ -62,41 +60,17 @@ describe("Company DAL", () => {
   });
 
   describe("createCompany", () => {
-    it("should successfully create a company and send notifications", async () => {
+    it("should successfully create a company", async () => {
       const input = {
         id: 1,
         name: "Company 1",
       };
 
       const result = await createCompany(input);
-      const notifications = await prisma.notification.findMany();
 
       expect(result).toBeDefined();
       expect(result.name).toBe("Company 1");
       expect(result.workspaceId).toBe(1);
-
-      const expectedNotificationData = {
-        actorId: "user-1",
-        companyId: result.id,
-        companyName: "Company 1",
-        type: NotificationType.companyAdded,
-        workspaceId: 1,
-      };
-
-      expect(notifications.length).toBe(2);
-
-      expect(notifications).toEqual(
-        expect.arrayContaining([
-          expect.objectContaining({
-            ...expectedNotificationData,
-            recipientId: "user-2",
-          }),
-          expect.objectContaining({
-            ...expectedNotificationData,
-            recipientId: "user-3",
-          }),
-        ]),
-      );
     });
 
     describe("RBAC: create company", () => {

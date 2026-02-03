@@ -5,9 +5,7 @@ import prisma from "@/lib/prisma";
 import { auth } from "@/lib/auth";
 import { AccessDeniedError } from "../utils/error";
 import { requireSession } from "../utils/requireSession";
-import { NotificationType } from "@/generated/prisma/enums";
 import { CreateTaskCategoryInputDTO } from "./taskCategory.dto";
-import { getNotificationRecipients } from "../notification/notification.dal";
 
 export const getAllTaskCategories = cache(async () => {
   // Authorization
@@ -43,30 +41,13 @@ export const createTaskCategory = async (input: CreateTaskCategoryInputDTO) => {
     );
   }
 
-  return prisma.$transaction(async (tx) => {
-    const taskCategory = await tx.taskCategory.create({
-      data: {
-        name: input.name,
-        workspaceId,
-      },
-    });
-
-    const recipients = await getNotificationRecipients(tx, workspaceId, userId);
-
-    if (recipients.length > 0) {
-      await tx.notification.createMany({
-        data: recipients.map((user) => ({
-          type: NotificationType.taskCategoryAdded,
-          actorId: userId,
-          recipientId: user.id,
-          workspaceId,
-          taskCategoryId: taskCategory.id,
-          taskCategoryName: taskCategory.name,
-          isRead: false,
-        })),
-      });
-    }
-
-    return taskCategory;
+  // Create task category
+  const taskCategory = await prisma.taskCategory.create({
+    data: {
+      name: input.name,
+      workspaceId,
+    },
   });
+
+  return taskCategory;
 };

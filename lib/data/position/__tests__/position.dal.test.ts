@@ -1,10 +1,9 @@
 import prisma from "@/lib/prisma";
 import { createPosition } from "../position.dal";
+import { AccessDeniedError } from "../../utils/error";
 import { resetDatabase } from "@/prisma/resetDatabase";
-import { NotificationType } from "@/generated/prisma/enums";
 import { requireSession } from "@/lib/data/utils/requireSession";
 import { vi, describe, beforeEach, beforeAll, it, expect } from "vitest";
-import { AccessDeniedError } from "../../utils/error";
 
 vi.mock("server-only", () => ({}));
 
@@ -19,7 +18,6 @@ describe("Position DAL", () => {
     });
 
     await prisma.position.deleteMany();
-    await prisma.notification.deleteMany();
   });
 
   beforeAll(async () => {
@@ -62,41 +60,17 @@ describe("Position DAL", () => {
   });
 
   describe("createPosition", () => {
-    it("should successfully create a position and send notifications", async () => {
+    it("should successfully create a position", async () => {
       const input = {
         id: 1,
         name: "Position 1",
       };
 
       const result = await createPosition(input);
-      const notifications = await prisma.notification.findMany();
 
       expect(result).toBeDefined();
       expect(result.name).toBe("Position 1");
       expect(result.workspaceId).toBe(1);
-
-      const expectedNotificationData = {
-        actorId: "user-1",
-        positionId: result.id,
-        positionName: "Position 1",
-        type: NotificationType.positionAdded,
-        workspaceId: 1,
-      };
-
-      expect(notifications.length).toBe(2);
-
-      expect(notifications).toEqual(
-        expect.arrayContaining([
-          expect.objectContaining({
-            ...expectedNotificationData,
-            recipientId: "user-2",
-          }),
-          expect.objectContaining({
-            ...expectedNotificationData,
-            recipientId: "user-3",
-          }),
-        ]),
-      );
     });
 
     describe("RBAC: create position", () => {
