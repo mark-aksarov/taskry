@@ -1,4 +1,16 @@
 {
+  "EditProjectForm": {
+    "error": {
+      "updateError": "A server error occurred. Failed to update project."
+    }
+  },
+
+  "NewProjectForm": {
+    "error": {
+      "creationError": "A server error occurred. Failed to create project."
+    }
+  },
+
   "ProjectDetailCard": {
     "title": "Project Information"
   },
@@ -25,11 +37,6 @@
     "submitButtonLabel": "Create Project"
   },
 
-  "NewProjectCategoryModal": {
-    "title": "New project category",
-    "submitButtonLabel": "Create category"
-  },
-
   "EditProjectModal": {
     "title": "Edit Project",
     "submitButtonLabel": "Update Project"
@@ -44,10 +51,14 @@
     "delete": "Delete",
     "pending": "Mark as Pending",
     "active": "Mark as Active",
-    "completed": "Mark as Completed"
+    "completed": "Mark as Completed",
+
+    "error": {
+      "updateStatusError": "A server error occurred. Failed to change project statuses."
+    }
   },
 
-  "ProjectFormBaseCustomerSelect": {
+  "ProjectCustomerSelect": {
     "label": "Customer",
     "placeholder": "Select customer",
 
@@ -56,7 +67,7 @@
     }
   },
 
-  "ProjectFormBaseCategorySelect": {
+  "ProjectCategorySelect": {
     "label": "Category",
     "placeholder": "Select category",
 
@@ -65,7 +76,7 @@
     }
   },
 
-  "ProjectFormBaseDeadlineDatePicker": {
+  "ProjectDeadlineDatePicker": {
     "label": "Deadline",
 
     "validation": {
@@ -73,12 +84,12 @@
     }
   },
 
-  "ProjectFormBaseDescriptionTextField": {
+  "ProjectDescriptionTextField": {
     "label": "Description",
     "placeholder": "Typing description"
   },
 
-  "ProjectFormBaseStatusSelect": {
+  "ProjectStatusSelect": {
     "label": "Status",
     "placeholder": "Select status",
 
@@ -87,23 +98,13 @@
     }
   },
 
-  "ProjectFormBaseTitleTextField": {
+  "ProjectTitleTextField": {
     "label": "Title",
     "placeholder": "Typing title",
 
     "validation": {
       "required": "Title is required",
       "tooLong": "Title is too long"
-    }
-  },
-
-  "ProjectCategoryFormBaseNameTextField": {
-    "label": "Name",
-    "placeholder": "Typing name",
-
-    "validation": {
-      "required": "Name is required",
-      "tooLong": "Name is too long"
     }
   },
 
@@ -168,21 +169,33 @@
     "delete": "Delete",
     "markPending": "Mark as Pending",
     "markCompleted": "Mark as Completed",
-    "markActive": "Mark as Active"
+    "markActive": "Mark as Active",
+
+    "error": {
+      "updateStatusError": "A server error occurred. Failed to change project status."
+    }
   },
 
   "DeleteProjectModal": {
     "heading": "Delete Project",
     "text": "Are you sure you want to delete <strong>«{name}»</strong>? All contents will be permanently removed, and all related tasks will also be deleted.",
     "deleteButton": "Delete",
-    "cancelButton": "Cancel"
+    "cancelButton": "Cancel",
+
+    "error": {
+      "deleteError": "A server error occurred. Failed to delete project."
+    }
   },
 
   "DeleteProjectsModal": {
     "heading": "Delete Projects",
     "text": "Are you sure you want to delete <strong>{count} projects</strong>? All contents will be permanently removed, and all related tasks will also be deleted.",
     "deleteButton": "Delete",
-    "cancelButton": "Cancel"
+    "cancelButton": "Cancel",
+
+    "error": {
+      "deleteError": "A server error occurred. Failed to delete project."
+    }
   },
 
   "ProjectStatus": {

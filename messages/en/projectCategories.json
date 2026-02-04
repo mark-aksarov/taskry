@@ -1,0 +1,22 @@
+{
+  "NewProjectCategoryForm": {
+    "error": {
+      "creationError": "A server error occurred. Failed to create project category."
+    }
+  },
+
+  "NewProjectCategoryModal": {
+    "title": "New project category",
+    "submitButtonLabel": "Create category"
+  },
+
+  "ProjectCategoryNameTextField": {
+    "label": "Name",
+    "placeholder": "Typing name",
+
+    "validation": {
+      "required": "Name is required",
+      "tooLong": "Name is too long"
+    }
+  }
+}

@@ -2,14 +2,14 @@ import { fn } from "storybook/test";
 import { TaskStatus } from "@/generated/prisma/enums";
 import { UserTaskListItem } from "./UserTaskListItem";
 import type { Meta, StoryObj } from "@storybook/react";
-import { TaskFormBase } from "@/components/tasks/TaskFormBase";
+import { EditTaskForm } from "@/components/tasks/EditTaskForm";
 import { TaskDetailModal } from "@/components/tasks/TaskDetailModal";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { TaskDetailBottomSheet } from "@/components/tasks/TaskDetailBottomSheet";
 import { TaskCommentsModalTrigger } from "@/components/tasks/TaskCommentsModalTrigger";
 import { TaskItemActionMenuTrigger } from "@/components/tasks/TaskItemActionMenuTrigger";
 import { MockedCommentsContainer } from "@/components/comments/MockedCommentsContainer";
-import { Default as TaskFormBaseStory } from "@/components/tasks/TaskFormBase/TaskFormBase.stories";
+import { Default as EditTaskFormStory } from "@/components/tasks/EditTaskForm/EditTaskForm.stories";
 import { Default as TaskDetailModalStory } from "@/components/tasks/TaskDetailModal/TaskDetailModal.stories";
 import { Default as TaskDetailBottomSheetStory } from "@/components/tasks/TaskDetailBottomSheet/TaskDetailBottomSheet.stories";
 
@@ -38,7 +38,7 @@ const meta = {
           taskStatus={args.status}
           deleteAction={fn()}
           updateStatusAction={fn()}
-          editTaskFormContainer={<TaskFormBase {...TaskFormBaseStory.args} />}
+          editTaskFormContainer={<EditTaskForm {...EditTaskFormStory.args} />}
         />
       }
       taskDetailModal={<TaskDetailModal {...TaskDetailModalStory.args} />}

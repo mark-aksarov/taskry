@@ -1,16 +1,12 @@
 "use client";
 
-import {
-  ProjectFormBaseSkeleton,
-  ProjectFormBaseStatusSelect,
-  ProjectFormBaseCategorySelect,
-  ProjectFormBaseCustomerSelect,
-} from "./ProjectFormBase";
-
 import useSWR from "swr";
 import { Suspense } from "react";
 import { EditProjectForm } from "./EditProjectForm";
 import { CalendarDate } from "@internationalized/date";
+import { ProjectFormSkeleton } from "./ProjectFormSkeleton";
+import { ProjectCategorySelect } from "./ProjectCategorySelect";
+import { ProjectCustomerSelect } from "./ProjectCustomerSelect";
 import { updateProject } from "@/lib/actions/project/updateProject";
 import { ProjectFormDataDTO } from "@/lib/data/project/project.dto";
 import { CustomerSummaryDTO } from "@/lib/data/customer/customer.dto";
@@ -22,7 +18,7 @@ interface EditProjectFormContainerProps {
 
 export function EditProjectFormContainer(props: EditProjectFormContainerProps) {
   return (
-    <Suspense fallback={<ProjectFormBaseSkeleton />}>
+    <Suspense fallback={<ProjectFormSkeleton />}>
       <EditProjectFormContainerInner {...props} />
     </Suspense>
   );
@@ -64,22 +60,20 @@ function EditProjectFormContainerInner({
       projectTitleDefaultValue={project.title}
       projectDescriptionDefaultValue={project.description}
       projectDeadlineDefaultValue={dateValue}
+      projectStatusDefaultValue={project.status}
       projectCategorySelect={
-        <ProjectFormBaseCategorySelect
+        <ProjectCategorySelect
           defaultSelectedKey={project.categoryId.toString()}
           categories={categories}
         />
       }
       projectCustomerSelect={
-        <ProjectFormBaseCustomerSelect
+        <ProjectCustomerSelect
           defaultSelectedKey={project.customerId?.toString()}
           customers={customers}
         />
       }
-      projectStatusSelect={
-        <ProjectFormBaseStatusSelect defaultSelectedKey={project.status} />
-      }
-      formAction={updateProject}
+      updateProject={updateProject}
     />
   );
 }

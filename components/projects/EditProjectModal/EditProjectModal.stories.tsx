@@ -1,10 +1,11 @@
 import { Button } from "@/components/ui/Button";
+import { EditProjectForm } from "../EditProjectForm";
 import { EditProjectModal } from "./EditProjectModal";
 import { DialogTrigger } from "react-aria-components";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { ProjectFormSkeleton } from "../ProjectFormSkeleton";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { ProjectFormBase, ProjectFormBaseSkeleton } from "../ProjectFormBase";
-import { Default as ProjectFormBaseStory } from "../ProjectFormBase/ProjectFormBase.stories";
+import { Default as EditProjectFormStory } from "../EditProjectForm/EditProjectForm.stories";
 
 const meta = {
   title: "Components/projects/EditProjectModal",
@@ -27,7 +28,7 @@ type Story = StoryObj<typeof meta>;
 export const Default = {
   args: {
     editProjectFormContainer: (
-      <ProjectFormBase {...ProjectFormBaseStory.args} />
+      <EditProjectForm {...EditProjectFormStory.args} />
     ),
   },
 } satisfies Story;
@@ -35,6 +36,6 @@ export const Default = {
 export const Skeleton = {
   args: {
     ...Default.args,
-    editProjectFormContainer: <ProjectFormBaseSkeleton />,
+    editProjectFormContainer: <ProjectFormSkeleton />,
   },
 } satisfies Story;

@@ -1,4 +1,16 @@
 {
+  "EditUserForm": {
+    "error": {
+      "updateError": "Произошла ошибка на сервере. Не удалось обновить пользователя."
+    }
+  },
+
+  "NewUserForm": {
+    "error": {
+      "creationError": "Произошла ошибка на сервере. Не удалось создать пользователя."
+    }
+  },
+
   "NewUserModal": {
     "title": "Новый пользователь",
     "submitButtonLabel": "Создать пользователя"
@@ -9,7 +21,7 @@
     "submitButtonLabel": "Обновить пользователя"
   },
 
-  "UserFormBaseFullNameTextField": {
+  "UserFullNameTextField": {
     "label": "Полное имя",
     "placeholder": "Введите полное имя",
 
@@ -19,21 +31,21 @@
     }
   },
 
-  "UserFormBaseBioTextField": {
+  "UserBioTextField": {
     "label": "О себе",
     "placeholder": "Введите информацию о себе"
   },
 
-  "UserFormBaseAddressTextField": {
+  "UserAddressTextField": {
     "label": "Адрес",
     "placeholder": "Введите адрес"
   },
 
-  "UserFormBaseBirthdateDatePicker": {
+  "UserBirthdateDatePicker": {
     "label": "Дата рождения"
   },
 
-  "UserFormBaseEmailTextField": {
+  "UserEmailTextField": {
     "label": "Электронная почта",
     "placeholder": "Введите адрес электронной почты",
 
@@ -43,7 +55,7 @@
     }
   },
 
-  "UserFormBasePasswordTextField": {
+  "UserPasswordTextField": {
     "password": {
       "label": "Пароль",
       "placeholder": "Введите ваш пароль"
@@ -55,12 +67,12 @@
     }
   },
 
-  "UserFormBasePhoneNumberTextField": {
+  "UserPhoneNumberTextField": {
     "label": "Номер телефона",
     "placeholder": "Введите номер телефона"
   },
 
-  "UserFormBasePublicLinkTextField": {
+  "UserPublicLinkTextField": {
     "label": "Публичная ссылка",
     "placeholder": "Введите публичную ссылку",
 
@@ -69,7 +81,7 @@
     }
   },
 
-  "UserFormBasePositionSelect": {
+  "UserPositionSelect": {
     "label": "Должность",
     "placeholder": "Выберите должность"
   },
@@ -116,21 +128,6 @@
     "noPosition": "Должность не указана",
     "birthdate": "Дата рождения",
     "noBirthdate": "Дата рождения не указана"
-  },
-
-  "NewPositionModal": {
-    "title": "Новая должность",
-    "submitButtonLabel": "Создать должность"
-  },
-
-  "PositionFormBaseNameTextField": {
-    "label": "Название",
-    "placeholder": "Введите название",
-
-    "validation": {
-      "required": "Требуется название",
-      "tooLong": "Название слишком длинное"
-    }
   },
 
   "UserDetailCard": {
@@ -186,7 +183,11 @@
     "heading": "Удалить пользователя",
     "text": "Вы уверены, что хотите удалить пользователя <strong>«{name}»</strong>? Все содержимое будет безвозвратно удалено.",
     "deleteButton": "Удалить",
-    "cancelButton": "Отменить"
+    "cancelButton": "Отменить",
+
+    "error": {
+      "deleteError": "Произошла ошибка на сервере. Не удалось удалить пользователя."
+    }
   },
 
   "UserGridItem": {

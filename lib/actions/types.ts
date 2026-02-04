@@ -9,7 +9,8 @@ type ActionStatus = "error" | "success" | null;
 
 export type ActionState = {
   status: ActionStatus;
-  message: string | null;
+  errorCode?: string;
+  message?: string;
 };
 
 export type DeleteCustomersPayload = number[];

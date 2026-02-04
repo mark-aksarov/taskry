@@ -4,6 +4,7 @@ import { EditSubtaskForm } from "../EditSubtaskForm";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { SubtaskActionMenuTrigger } from "../SubtaskActionMenuTrigger";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { Default as EditSubtaskFormStory } from "../EditSubtaskForm/EditSubtaskForm.stories";
 
 interface SubtaskListItemStoryArgs {
   id: number;
@@ -12,7 +13,7 @@ interface SubtaskListItemStoryArgs {
 }
 
 const meta = {
-  title: "Components/subtasks/SubtaskListItem",
+  title: "components/subtasks/SubtaskListItem",
   tags: ["autodocs"],
   decorators: [withThemedBackground],
   render: (args) => (
@@ -27,9 +28,7 @@ const meta = {
           subtaskText={args.text}
           deleteAction={fn()}
           toggleSubtaskAction={fn()}
-          editSubtaskForm={
-            <EditSubtaskForm taskId={args.id} formAction={fn()} />
-          }
+          editSubtaskForm={<EditSubtaskForm {...EditSubtaskFormStory.args} />}
           mutate={fn()}
         />
       }

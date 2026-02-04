@@ -5,6 +5,7 @@ import { SubtaskListItem } from "../SubtaskListItem";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { SubtaskActionMenuTrigger } from "../SubtaskActionMenuTrigger";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { Default as EditSubtaskFormStory } from "../EditSubtaskForm/EditSubtaskForm.stories";
 
 const mockedSubtasks = [
   { id: 2, text: "Define user persona and primary CTA", isDone: false },
@@ -15,7 +16,7 @@ const mockedSubtasks = [
 ];
 
 const meta = {
-  title: "Components/subtasks/SubtaskList",
+  title: "components/subtasks/SubtaskList",
   component: SubtaskList,
   tags: ["autodocs"],
   decorators: [withThemedBackground],
@@ -41,9 +42,7 @@ export const Default = {
             subtaskText={subtask.text}
             deleteAction={fn()}
             toggleSubtaskAction={fn()}
-            editSubtaskForm={
-              <EditSubtaskForm taskId={subtask.id} formAction={fn()} />
-            }
+            editSubtaskForm={<EditSubtaskForm {...EditSubtaskFormStory.args} />}
             mutate={fn()}
           />
         }

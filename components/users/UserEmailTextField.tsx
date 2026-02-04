@@ -1,0 +1,33 @@
+"use client";
+
+import { useTranslations } from "next-intl";
+import { TextField } from "@/components/ui/TextField";
+
+interface UserEmailTextFieldProps {
+  defaultValue?: string;
+}
+
+export function UserEmailTextField({ defaultValue }: UserEmailTextFieldProps) {
+  const t = useTranslations("users.UserEmailTextField");
+
+  return (
+    <TextField
+      name="email"
+      label={t("label")}
+      placeholder={t("placeholder")}
+      type="email"
+      errorMessage={(validation) => {
+        const details = validation.validationDetails;
+        if (details.valueMissing) {
+          return t("validation.required");
+        }
+        if (details.typeMismatch) {
+          return t("validation.format");
+        }
+        return "";
+      }}
+      defaultValue={defaultValue}
+      isRequired
+    />
+  );
+}

@@ -7,18 +7,19 @@ import { usePathname, useRouter } from "next/navigation";
 import { PageDecorator } from "@/.storybook/PageDecorator";
 import { ProjectList } from "@/components/projects/ProjectList";
 import { ProjectGrid } from "@/components/projects/ProjectGrid";
-import { ProjectFormBase } from "@/components/projects/ProjectFormBase";
+import { NewProjectForm } from "@/components/projects/NewProjectForm";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { ProjectFiltersForm } from "@/components/projects/ProjectFiltersForm";
-import { NewProjectCategoryForm } from "@/components/projects/NewProjectCategoryForm";
+import { NewProjectCategoryForm } from "@/components/projectCategory/NewProjectCategoryForm";
 import { EntityContainerPresentation } from "@/components/common/EntityContainerPresentation";
 import { Default as ProjectListStory } from "@/components/projects/ProjectList/ProjectList.stories";
 import { Default as ProjectGridStory } from "@/components/projects/ProjectGrid/ProjectGrid.stories";
 import { ProjectToolbarActionsMenuTrigger } from "@/components/projects/ProjectToolbarActionsMenuTrigger";
 import { ProjectToolbarFiltersModalTrigger } from "@/components/projects/ProjectToolbarFiltersModalTrigger";
+import { Default as NewProjectFormStory } from "@/components/projects/NewProjectForm/NewProjectForm.stories";
 import { ProjectToolbarCreateNewMenuTrigger } from "@/components/projects/ProjectToolbarCreateNewMenuTrigger";
-import { Default as ProjectFormBaseStory } from "@/components/projects/ProjectFormBase/ProjectFormBase.stories";
 import { Default as ProjectFiltersFormStory } from "@/components/projects/ProjectFiltersForm/ProjectFiltersForm.stories";
+import { Default as NewProjectCategoryFormStory } from "@/components/projectCategory/NewProjectCategoryForm/NewProjectCategoryForm.stories";
 
 const meta = {
   title: "components/pages/ProjectsPage",
@@ -48,9 +49,11 @@ export const Default = {
     projectToolbarCreateNewMenuTrigger: (
       <ProjectToolbarCreateNewMenuTrigger
         newProjectFormContainer={
-          <ProjectFormBase {...ProjectFormBaseStory.args} />
+          <NewProjectForm {...NewProjectFormStory.args} />
         }
-        newProjectCategoryForm={<NewProjectCategoryForm formAction={fn()} />}
+        newProjectCategoryForm={
+          <NewProjectCategoryForm {...NewProjectCategoryFormStory.args} />
+        }
       />
     ),
     projectToolbarFiltersModalTrigger: (
@@ -78,9 +81,7 @@ export const WithNoProjects = {
   args: { ...Default.args },
   render: () => (
     <ProjectsPageEmpty
-      newProjectFormContainer={
-        <ProjectFormBase {...ProjectFormBaseStory.args} />
-      }
+      newProjectFormContainer={<NewProjectForm {...NewProjectFormStory.args} />}
     />
   ),
 } satisfies Story;

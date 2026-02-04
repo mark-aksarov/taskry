@@ -9,7 +9,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { PageDecorator } from "@/.storybook/PageDecorator";
 import { NewUserForm } from "@/components/users/NewUserForm";
 import { UserFiltersForm } from "@/components/users/UserFiltersForm";
-import { NewPositionForm } from "@/components/users/NewPositionForm";
+import { NewPositionForm } from "@/components/position/NewPositionForm";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { Default as UserListStory } from "@/components/users/UserList/UserList.stories";
 import { Default as UserGridStory } from "@/components/users/UserGrid/UserGrid.stories";
@@ -18,7 +18,6 @@ import { Default as NewUserFormStory } from "@/components/users/NewUserForm/NewU
 import { UserToolbarFiltersModalTrigger } from "@/components/users/UserToolbarFiltersModalTrigger";
 import { UserToolbarCreateNewMenuTrigger } from "@/components/users/UserToolbarCreateNewMenuTrigger";
 import { Default as UserFiltersFormStory } from "@/components/users/UserFiltersForm/UserFiltersForm.stories";
-import { Default as PositionFormBaseStory } from "@/components/users/PositionFormBase/PositionFormBase.stories";
 
 const meta = {
   title: "components/pages/UsersPage",
@@ -48,7 +47,7 @@ export const Default = {
         showUserMenuItem
         guestMode={false}
         newUserForm={<NewUserForm {...NewUserFormStory.args} />}
-        newPositionForm={<NewPositionForm {...PositionFormBaseStory.args} />}
+        newPositionForm={<NewPositionForm createPosition={fn()} />}
       />
     ),
     usersContainer: (

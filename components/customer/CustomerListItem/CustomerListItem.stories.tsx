@@ -6,7 +6,7 @@ import { CustomerDetailModal } from "../CustomerDetailModal";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { CustomerDetailBottomSheet } from "../CustomerDetailBottomSheet";
 import { CustomerItemActionMenuTrigger } from "../CustomerItemActionMenuTrigger";
-import { Default as CustomerFormBaseStory } from "../CustomerFormBase/CustomerFormBase.stories";
+import { Default as EditCustomerFormStory } from "../EditCustomerForm/EditCustomerForm.stories";
 import { Default as CustomerDetailModalStory } from "../CustomerDetailModal/CustomerDetailModal.stories";
 import { Default as CustomerDetailBottomSheetStory } from "../CustomerDetailBottomSheet/CustomerDetailBottomSheet.stories";
 
@@ -24,7 +24,7 @@ const meta = {
           customerFullName={args.fullName}
           deleteAction={fn()}
           editCustomerFormContainer={
-            <EditCustomerForm {...CustomerFormBaseStory.args} />
+            <EditCustomerForm {...EditCustomerFormStory.args} />
           }
         />
       }

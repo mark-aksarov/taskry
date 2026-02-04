@@ -16,9 +16,9 @@ import { deleteProjects } from "@/lib/actions/project/deleteProjects";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { ProjectsContainer } from "@/components/projects/ProjectsContainer";
 import { updateProjectStatuses } from "@/lib/actions/project/updateProjectStatuses";
-import { NewProjectCategoryForm } from "@/components/projects/NewProjectCategoryForm";
 import { NewProjectFormContainer } from "@/components/projects/NewProjectFormContainer";
 import { createProjectCategory } from "@/lib/actions/projectCategory/createProjectCategory";
+import { NewProjectCategoryForm } from "@/components/projectCategory/NewProjectCategoryForm";
 import { ProjectFiltersFormContainer } from "@/components/projects/ProjectFiltersFormContainer";
 import { ProjectToolbarActionsMenuTrigger } from "@/components/projects/ProjectToolbarActionsMenuTrigger";
 import { ProjectToolbarFiltersModalTrigger } from "@/components/projects/ProjectToolbarFiltersModalTrigger";
@@ -75,7 +75,9 @@ export default async function AppProjectsPage({
         <ProjectToolbarCreateNewMenuTrigger
           newProjectFormContainer={<NewProjectFormContainer />}
           newProjectCategoryForm={
-            <NewProjectCategoryForm formAction={createProjectCategory} />
+            <NewProjectCategoryForm
+              createProjectCategory={createProjectCategory}
+            />
           }
         />
       }

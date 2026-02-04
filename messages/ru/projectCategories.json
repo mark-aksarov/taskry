@@ -1,0 +1,22 @@
+{
+  "NewProjectCategoryForm": {
+    "error": {
+      "creationError": "Произошла ошибка на сервере. Не удалось создать категорию проекта."
+    }
+  },
+
+  "NewProjectCategoryModal": {
+    "title": "Новая категория проекта",
+    "submitButtonLabel": "Создать категорию"
+  },
+
+  "ProjectCategoryNameTextField": {
+    "label": "Название",
+    "placeholder": "Введите название",
+
+    "validation": {
+      "required": "Требуется название",
+      "tooLong": "Название слишком длинное"
+    }
+  }
+}

@@ -1,4 +1,16 @@
 {
+  "EditCustomerForm": {
+    "error": {
+      "updateError": "Произошла ошибка на сервере. Не удалось обновить клиента."
+    }
+  },
+
+  "NewCustomerForm": {
+    "error": {
+      "creationError": "Произошла ошибка на сервере. Не удалось создать клиента."
+    }
+  },
+
   "TotalCustomersCard": {
     "text": "Всего клиентов"
   },
@@ -34,17 +46,12 @@
     "submitButtonLabel": "Создать клиента"
   },
 
-  "NewCompanyModal": {
-    "title": "Новая компания",
-    "submitButtonLabel": "Создать компанию"
-  },
-
   "EditCustomerModal": {
     "title": "Изменить клиента",
     "submitButtonLabel": "Обновить клиента"
   },
 
-  "CustomerFormBaseBioTextField": {
+  "CustomerBioTextField": {
     "label": "О себе",
     "placeholder": "Введите информацию о себе"
   },
@@ -59,7 +66,7 @@
     }
   },
 
-  "CustomerFormBaseEmailTextField": {
+  "CustomerEmailTextField": {
     "label": "Email",
     "placeholder": "Введите email",
 
@@ -74,7 +81,7 @@
     "title": "Информация о клиенте"
   },
 
-  "CustomerFormBaseFullNameTextField": {
+  "CustomerFullNameTextField": {
     "label": "Полное имя",
     "placeholder": "Введите полное имя",
 
@@ -84,7 +91,7 @@
     }
   },
 
-  "CustomerFormBasePhoneNumberTextField": {
+  "CustomerPhoneNumberTextField": {
     "label": "Номер телефона",
     "placeholder": "Введите номер телефона",
 
@@ -94,22 +101,12 @@
     }
   },
 
-  "CustomerFormBasePublicLinkTextField": {
+  "CustomerPublicLinkTextField": {
     "label": "Публичная ссылка",
     "placeholder": "Введите публичную ссылку",
 
     "validation": {
       "format": "Неверный формат. Публичная ссылка должна быть в формате `https://example.com`."
-    }
-  },
-
-  "CompanyFormBaseNameTextField": {
-    "label": "Название",
-    "placeholder": "Введите название",
-
-    "validation": {
-      "required": "Требуется название",
-      "tooLong": "Название слишком длинное"
     }
   },
 
@@ -156,14 +153,22 @@
     "heading": "Удалить клиента",
     "text": "Вы уверены, что хотите удалить клиента <strong>«{name}»</strong>? Все содержимое будет безвозвратно удалено.",
     "deleteButton": "Удалить",
-    "cancelButton": "Отменить"
+    "cancelButton": "Отменить",
+
+    "error": {
+      "deleteFailed": "Произошла ошибка на сервере. Не удалось удалить клиента."
+    }
   },
 
   "DeleteCustomersModal": {
     "heading": "Удалить клиентов",
     "text": "Вы уверены, что хотите удалить <strong>{count} выбранных клиентов </strong>? Все содержимое будет безвозвратно удалено.",
     "deleteButton": "Удалить",
-    "cancelButton": "Отменить"
+    "cancelButton": "Отменить",
+
+    "error": {
+      "deleteFailed": "Произошла ошибка на сервере. Не удалось удалить клиентов."
+    }
   },
 
   "CustomerGridItem": {

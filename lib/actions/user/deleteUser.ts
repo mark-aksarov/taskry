@@ -1,10 +1,10 @@
 "use server";
 
 import { ActionState } from "../types";
+import { APIError } from "better-auth";
 import { revalidatePath } from "next/cache";
 import { userSchema } from "@/lib/schemas/user";
 import { getTranslations } from "next-intl/server";
-import { actionError, actionSuccess } from "../utils/actionResult";
 import { deleteUser as deleteUserService } from "@/lib/data/user/user.service";
 import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedirect";
 
@@ -25,15 +25,33 @@ export async function deleteUser(
 
     if (!parsed.success) {
       console.error("Validation error", parsed.error);
-      return actionError(t("validation.invalidInput"));
+
+      return {
+        status: "error",
+        errorCode: "validationError",
+      };
     }
 
     await deleteUserService(parsed.data.id);
     revalidatePath("/users");
 
-    return actionSuccess();
+    return {
+      status: "success",
+    };
   } catch (error) {
     console.error("Server Action Error:", error);
-    return actionError(t("validation.internalServerError"));
+
+    if (error instanceof APIError) {
+      return {
+        status: "error",
+        errorCode: "authServiceError",
+        message: error.message,
+      };
+    }
+
+    return {
+      status: "error",
+      errorCode: "internalServerError",
+    };
   }
 }

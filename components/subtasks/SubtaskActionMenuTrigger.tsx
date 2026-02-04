@@ -17,13 +17,12 @@ import { useTranslations } from "next-intl";
 import { EditSubtaskModal } from "./EditSubtaskModal";
 import { DeleteSubtaskModal } from "./DeleteSubtaskModal";
 import { GuestModeModal } from "../common/GuestModeModal";
-import { startTransition, useActionState, useEffect, useState } from "react";
 import { useActionErrorToast } from "@/lib/hooks/useActionErrorToast";
 import { CheckCheck, EllipsisVertical, Pencil, Trash } from "lucide-react";
+import { startTransition, useActionState, useEffect, useState } from "react";
 
 const toggleSubtaskInitialState: ActionState = {
   status: null,
-  message: null,
 };
 
 interface SubtaskActionMenuTriggerProps {
@@ -59,7 +58,7 @@ export function SubtaskActionMenuTrigger({
     }
   }, [toggleSubtaskState, mutate]);
 
-  useActionErrorToast(toggleSubtaskState);
+  useActionErrorToast(toggleSubtaskState, t("error.updateStatusError"));
 
   // Guest mode modal
   const [isGuestModeModalOpen, setIsGuestModeModalOpen] = useState(false);

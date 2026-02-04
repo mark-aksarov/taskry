@@ -33,7 +33,7 @@ import { PageDecorator } from "@/.storybook/PageDecorator";
 import { NewTaskForm } from "@/components/tasks/NewTaskForm";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { getTaskListItems } from "@/components/tasks/TaskList/TaskList.stories";
-import { Default as TaskFormBaseStory } from "@/components/tasks/TaskFormBase/TaskFormBase.stories";
+import { Default as NewTaskFormStory } from "@/components/tasks/NewTaskForm/NewTaskForm.stories";
 
 const meta = {
   title: "components/pages/DashboardPage",
@@ -96,7 +96,7 @@ export const WithNoTasks = {
       totalCustomersCardContainer={<TotalCustomersCard totalCustomers={20} />}
       assignedTasksContainer={
         <AssignedTasksEmptySection
-          newTaskFormContainer={<NewTaskForm {...TaskFormBaseStory.args} />}
+          newTaskFormContainer={<NewTaskForm {...NewTaskFormStory.args} />}
         />
       }
     />

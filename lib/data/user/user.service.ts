@@ -27,6 +27,8 @@ export const createUser = async (input: CreateUserInputDTO) => {
 
   // Send verification email in the background
   auth.api.sendVerificationEmail({ body: { email: user.email } });
+
+  return user;
 };
 
 export const updateUser = async (input: UpdateUserInputDTO) => {
@@ -96,12 +98,14 @@ export const deleteUser = async (deletedUserId: string) => {
   await validateUser(workspaceId, deletedUserId);
 
   // Use better auth admin api to delete user
-  return await auth.api.removeUser({
+  const deletedUser = await auth.api.removeUser({
     body: {
       userId: deletedUserId,
     },
     headers: await headers(),
   });
+
+  return deletedUser;
 };
 
 // Validate that user exists and belongs to the workspace

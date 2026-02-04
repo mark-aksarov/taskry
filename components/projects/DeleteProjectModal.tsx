@@ -22,7 +22,6 @@ import { useActionErrorToast } from "@/lib/hooks/useActionErrorToast";
 
 const initialState: ActionState = {
   status: null,
-  message: null,
 };
 
 interface DeleteProjectModalProps extends ModalProps {
@@ -54,7 +53,7 @@ export function DeleteProjectModal({
     onOpenChange?.(false);
   };
 
-  useActionErrorToast(state);
+  useActionErrorToast(state, t("error.deleteError"));
 
   return (
     <ConfirmModal

@@ -8,18 +8,18 @@ import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { usePathname, useRouter } from "next/navigation";
 import { PageDecorator } from "@/.storybook/PageDecorator";
 import { NewTaskForm } from "@/components/tasks/NewTaskForm";
-import { TaskFormBase } from "@/components/tasks/TaskFormBase";
 import { TaskFiltersForm } from "@/components/tasks/TaskFiltersForm";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { NewTaskCategoryForm } from "@/components/tasks/NewTaskCategoryForm";
+import { NewTaskCategoryForm } from "@/components/taskCategory/NewTaskCategoryForm";
 import { Default as TaskListStory } from "@/components/tasks/TaskList/TaskList.stories";
 import { Default as TaskGridStory } from "@/components/tasks/TaskGrid/TaskGrid.stories";
 import { EntityContainerPresentation } from "@/components/common/EntityContainerPresentation";
 import { TaskToolbarActionsMenuTrigger } from "@/components/tasks/TaskToolbarActionsMenuTrigger";
+import { Default as NewTaskFormStory } from "@/components/tasks/NewTaskForm/NewTaskForm.stories";
 import { TaskToolbarFiltersModalTrigger } from "@/components/tasks/TaskToolbarFiltersModalTrigger";
-import { Default as TaskFormBaseStory } from "@/components/tasks/TaskFormBase/TaskFormBase.stories";
 import { TaskToolbarCreateNewMenuTrigger } from "@/components/tasks/TaskToolbarCreateNewMenuTrigger";
 import { Default as TaskFiltersFormStory } from "@/components/tasks/TaskFiltersForm/TaskFiltersForm.stories";
+import { Default as NewTaskCategoryFormStory } from "@/components/taskCategory/NewTaskCategoryForm/NewTaskCategoryForm.stories";
 
 const meta = {
   title: "components/pages/TasksPage",
@@ -49,8 +49,10 @@ export const Default = {
     taskToolbarCreateNewMenuTrigger: (
       <TaskToolbarCreateNewMenuTrigger
         guestMode={false}
-        newTaskFormContainer={<TaskFormBase {...TaskFormBaseStory.args} />}
-        newTaskCategoryForm={<NewTaskCategoryForm formAction={fn()} />}
+        newTaskFormContainer={<NewTaskForm {...NewTaskFormStory.args} />}
+        newTaskCategoryForm={
+          <NewTaskCategoryForm {...NewTaskCategoryFormStory.args} />
+        }
       />
     ),
     taskToolbarFiltersModalTrigger: (
@@ -79,7 +81,7 @@ export const WithNoTasks = {
   args: { ...Default.args },
   render: () => (
     <TasksPageEmpty
-      newTaskFormContainer={<NewTaskForm {...TaskFormBaseStory.args} />}
+      newTaskFormContainer={<NewTaskForm {...NewTaskFormStory.args} />}
     />
   ),
 } satisfies Story;

@@ -1,0 +1,22 @@
+{
+  "NewPositionForm": {
+    "error": {
+      "creationError": "Произошла ошибка на сервере. Не удалось создать должность."
+    }
+  },
+
+  "NewPositionModal": {
+    "title": "Новая должность",
+    "submitButtonLabel": "Создать должность"
+  },
+
+  "PositionNameTextField": {
+    "label": "Название",
+    "placeholder": "Введите название",
+
+    "validation": {
+      "required": "Требуется название",
+      "tooLong": "Название слишком длинное"
+    }
+  }
+}

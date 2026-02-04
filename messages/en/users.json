@@ -1,4 +1,16 @@
 {
+  "EditUserForm": {
+    "error": {
+      "updateError": "A server error occurred. Failed to update user."
+    }
+  },
+
+  "NewUserForm": {
+    "error": {
+      "creationError": "A server error occurred. Failed to create user."
+    }
+  },
+
   "NewUserModal": {
     "title": "New User",
     "submitButtonLabel": "Create User"
@@ -9,7 +21,7 @@
     "submitButtonLabel": "Update user"
   },
 
-  "UserFormBaseFullNameTextField": {
+  "UserFullNameTextField": {
     "label": "Full name",
     "placeholder": "Typing full name",
 
@@ -19,21 +31,21 @@
     }
   },
 
-  "UserFormBaseBioTextField": {
+  "UserBioTextField": {
     "label": "Bio",
     "placeholder": "Typing bio"
   },
 
-  "UserFormBaseAddressTextField": {
+  "UserAddressTextField": {
     "label": "Address",
     "placeholder": "Typing address"
   },
 
-  "UserFormBaseBirthdateDatePicker": {
+  "UserBirthdateDatePicker": {
     "label": "Birthdate"
   },
 
-  "UserFormBaseEmailTextField": {
+  "UserEmailTextField": {
     "label": "Email",
     "placeholder": "Typing email",
 
@@ -43,7 +55,7 @@
     }
   },
 
-  "UserFormBasePasswordTextField": {
+  "UserPasswordTextField": {
     "password": {
       "label": "Password",
       "placeholder": "Enter your password"
@@ -55,12 +67,12 @@
     }
   },
 
-  "UserFormBasePhoneNumberTextField": {
+  "UserPhoneNumberTextField": {
     "label": "Phone number",
     "placeholder": "Typing phone number"
   },
 
-  "UserFormBasePublicLinkTextField": {
+  "UserPublicLinkTextField": {
     "label": "Public link",
     "placeholder": "Typing public link",
 
@@ -69,7 +81,7 @@
     }
   },
 
-  "UserFormBasePositionSelect": {
+  "UserPositionSelect": {
     "label": "Position",
     "placeholder": "Typing position"
   },
@@ -116,21 +128,6 @@
     "noPosition": "Position not specified",
     "birthdate": "Birthdate",
     "noBirthdate": "No birthdate"
-  },
-
-  "NewPositionModal": {
-    "title": "New Position",
-    "submitButtonLabel": "Create Position"
-  },
-
-  "PositionFormBaseNameTextField": {
-    "label": "Name",
-    "placeholder": "Typing name",
-
-    "validation": {
-      "required": "Name is required",
-      "tooLong": "Name is too long"
-    }
   },
 
   "UserDetailCard": {
@@ -186,7 +183,11 @@
     "heading": "Delete user",
     "text": "Are you sure you want to delete user <strong>«{name}»</strong>? All contents will be permanently removed.",
     "deleteButton": "Delete",
-    "cancelButton": "Cancel"
+    "cancelButton": "Cancel",
+
+    "error": {
+      "deleteError": "A server error occurred. Failed to delete user."
+    }
   },
 
   "UserGridItem": {

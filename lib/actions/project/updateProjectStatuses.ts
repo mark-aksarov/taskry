@@ -3,11 +3,9 @@
 import z from "zod";
 import { ActionState } from "../types";
 import { revalidatePath } from "next/cache";
-import { getTranslations } from "next-intl/server";
 import { coercedPositiveInt } from "@/lib/schemas/base";
 import { ProjectStatus } from "@/generated/prisma/enums";
 import { projectStatusParam } from "@/lib/schemas/project";
-import { actionError, actionSuccess } from "../utils/actionResult";
 import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedirect";
 import { updateProjectStatuses as updateProjectStatusesQuery } from "@/lib/data/project/project.dal";
 
@@ -23,15 +21,17 @@ export async function updateProjectStatuses(
   // Authorization
   await requireSessionOrRedirect();
 
-  const t = await getTranslations("actions.common");
-
   try {
     // Parse and validate form data
     const parsed = schema.safeParse({ ids, nextStatus });
 
     if (!parsed.success) {
       console.error("Validation error", parsed.error);
-      return actionError(t("validation.invalidInput"));
+
+      return {
+        status: "error",
+        errorCode: "validationError",
+      };
     }
 
     // Execute update
@@ -40,9 +40,15 @@ export async function updateProjectStatuses(
     // Revalidation
     revalidatePath("/projects");
 
-    return actionSuccess();
+    return {
+      status: "success",
+    };
   } catch (error) {
     console.error("Server Action Error:", error);
-    return actionError(t("validation.internalServerError"));
+
+    return {
+      status: "error",
+      errorCode: "internalServerError",
+    };
   }
 }

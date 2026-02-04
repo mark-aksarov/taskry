@@ -1,0 +1,22 @@
+{
+  "NewPositionForm": {
+    "error": {
+      "creationError": "A server error occurred. Failed to create position."
+    }
+  },
+
+  "NewPositionModal": {
+    "title": "New Position",
+    "submitButtonLabel": "Create Position"
+  },
+
+  "PositionNameTextField": {
+    "label": "Name",
+    "placeholder": "Typing name",
+
+    "validation": {
+      "required": "Name is required",
+      "tooLong": "Name is too long"
+    }
+  }
+}

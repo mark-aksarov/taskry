@@ -7,17 +7,18 @@ import { CustomersPageEmpty } from "./CustomersPageEmpty";
 import { PageDecorator } from "@/.storybook/PageDecorator";
 import { CustomerList } from "@/components/customer/CustomerList";
 import { CustomerGrid } from "@/components/customer/CustomerGrid";
-import { NewCompanyForm } from "@/components/customer/NewCompanyForm";
+import { NewCompanyForm } from "@/components/company/NewCompanyForm";
 import { NewCustomerForm } from "@/components/customer/NewCustomerForm";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { CustomerFiltersForm } from "@/components/customer/CustomerFiltersForm";
 import { EntityContainerPresentation } from "@/components/common/EntityContainerPresentation";
 import { Default as CustomerGridStory } from "@/components/customer/CustomerGrid/CustomerGrid.stories";
 import { Default as CustomerListStory } from "@/components/customer/CustomerList/CustomerList.stories";
+import { Default as NewCompanyFormStory } from "@/components/company/NewCompanyForm/NewCompanyForm.stories";
 import { CustomerToolbarActionsMenuTrigger } from "@/components/customer/CustomerToolbarActionsMenuTrigger";
 import { CustomerToolbarFiltersModalTrigger } from "@/components/customer/CustomerToolbarFiltersModalTrigger";
 import { CustomerToolbarCreateNewMenuTrigger } from "@/components/customer/CustomerToolbarCreateNewMenuTrigger";
-import { Default as CustomerFormBaseStory } from "@/components/customer/CustomerFormBase/CustomerFormBase.stories";
+import { Default as NewCustomerFormStory } from "@/components/customer/NewCustomerForm/NewCustomerForm.stories";
 import { Default as CustomerFiltersFormStory } from "@/components/customer/CustomerFiltersForm/CustomerFiltersForm.stories";
 
 const meta = {
@@ -39,9 +40,9 @@ export const Default = {
     customerToolbarCreateNewMenuTrigger: (
       <CustomerToolbarCreateNewMenuTrigger
         newCustomerFormContainer={
-          <NewCustomerForm {...CustomerFormBaseStory.args} />
+          <NewCustomerForm {...NewCustomerFormStory.args} />
         }
-        newCompanyForm={<NewCompanyForm formAction={fn()} />}
+        newCompanyForm={<NewCompanyForm {...NewCompanyFormStory.args} />}
       />
     ),
     customerToolbarActionsMenuTrigger: (
@@ -76,7 +77,7 @@ export const WithNoCustomers = {
   render: () => (
     <CustomersPageEmpty
       newCustomerFormContainer={
-        <NewCustomerForm {...CustomerFormBaseStory.args} />
+        <NewCustomerForm {...NewCustomerFormStory.args} />
       }
     />
   ),

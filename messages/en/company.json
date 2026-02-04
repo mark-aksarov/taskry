@@ -1,0 +1,22 @@
+{
+  "NewCompanyForm": {
+    "error": {
+      "creationError": "A server error occurred. Failed to create company."
+    }
+  },
+
+  "NewCompanyModal": {
+    "title": "New company",
+    "submitButtonLabel": "Create company"
+  },
+
+  "CompanyNameTextField": {
+    "label": "Name",
+    "placeholder": "Typing name",
+
+    "validation": {
+      "required": "Name is required",
+      "tooLong": "Name is too long"
+    }
+  }
+}

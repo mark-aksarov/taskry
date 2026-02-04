@@ -6,10 +6,11 @@ import { CommentTextField } from "../CommentTextField";
 import { ActionFn, ActionState } from "@/lib/actions/types";
 import { CommentFormAttachments } from "./CommentFormAttachments";
 import { startTransition, useActionState, useEffect, useState } from "react";
+import { useActionErrorToast } from "@/lib/hooks/useActionErrorToast";
+import { useTranslations } from "next-intl";
 
 const initialState: ActionState = {
   status: null,
-  message: null,
 };
 
 interface CommentFormProps {
@@ -23,6 +24,8 @@ export function CommentForm({
   mutateUrl,
   hiddenInput,
 }: CommentFormProps) {
+  const t = useTranslations("comments.CommentForm");
+
   let [files, setFiles] = useState<FileList | null>(null);
 
   const { mutate } = useSWRConfig();
@@ -37,6 +40,8 @@ export function CommentForm({
       mutate(mutateUrl);
     }
   }, [state, mutateUrl]);
+
+  useActionErrorToast(state, t("error.sendFailed"));
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();

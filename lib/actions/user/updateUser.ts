@@ -1,10 +1,9 @@
 "use server";
 
 import { ActionState } from "../types";
+import { APIError } from "better-auth";
 import { revalidatePath } from "next/cache";
 import { userSchema } from "@/lib/schemas/user";
-import { getTranslations } from "next-intl/server";
-import { actionError, actionSuccess } from "../utils/actionResult";
 import { updateUser as updateUserService } from "@/lib/data/user/user.service";
 import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedirect";
 
@@ -17,8 +16,6 @@ export async function updateUser(
   // Authorization
   await requireSessionOrRedirect();
 
-  const t = await getTranslations("actions.common");
-
   try {
     // Parse and validate form data
     const input = Object.fromEntries(formData.entries());
@@ -26,7 +23,11 @@ export async function updateUser(
 
     if (!parsed.success) {
       console.error("Validation error", parsed.error);
-      return actionError(t("validation.invalidInput"));
+
+      return {
+        status: "error",
+        errorCode: "validationError",
+      };
     }
 
     // Update customer
@@ -34,9 +35,23 @@ export async function updateUser(
 
     revalidatePath("/team");
 
-    return actionSuccess();
+    return {
+      status: "success",
+    };
   } catch (error) {
     console.error("Server Action Error:", error);
-    return actionError(t("validation.internalServerError"));
+
+    if (error instanceof APIError) {
+      return {
+        status: "error",
+        errorCode: "authServiceError",
+        message: error.message,
+      };
+    }
+
+    return {
+      status: "error",
+      errorCode: "internalServerError",
+    };
   }
 }

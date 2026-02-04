@@ -1,5 +1,4 @@
 import DashboardTemplate from "./DashboardTemplate";
-import { hasGuestRole } from "@/lib/utils/hasGuestRole";
 import { SearchModal } from "@/components/search/SearchModal";
 import { UsersSearchContainer } from "@/components/search/UsersSearchContainer";
 import { TasksSearchContainer } from "@/components/search/TasksSearchContainer";
@@ -13,8 +12,6 @@ interface DashboardTemplateProps {
 export default async function AppDashboardTemplate({
   children,
 }: DashboardTemplateProps) {
-  const guestMode = await hasGuestRole();
-
   return (
     <DashboardTemplate
       searchModal={

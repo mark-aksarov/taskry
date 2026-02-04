@@ -1,4 +1,16 @@
 {
+  "EditTaskForm": {
+    "error": {
+      "updateError": "A server error occurred. Failed to update task."
+    }
+  },
+
+  "NewTaskForm": {
+    "error": {
+      "creationError": "A server error occurred. Failed to create task."
+    }
+  },
+
   "TaskDetailCard": {
     "title": "Task Information"
   },
@@ -54,7 +66,11 @@
     "delete": "Delete",
     "pending": "Mark as Pending",
     "active": "Mark as Active",
-    "completed": "Mark as Completed"
+    "completed": "Mark as Completed",
+
+    "error": {
+      "updateStatusError": "A server error occurred. Failed to change task statuses."
+    }
   },
 
   "TaskItemActionMenuTrigger": {
@@ -62,7 +78,11 @@
     "delete": "Delete",
     "markPending": "Mark as Pending",
     "markCompleted": "Mark as Completed",
-    "markActive": "Mark as Active"
+    "markActive": "Mark as Active",
+
+    "error": {
+      "updateStatusError": "A server error occurred. Failed to change task status."
+    }
   },
 
   "TaskToolbarCreateNewMenuTrigger": {
@@ -79,24 +99,27 @@
     "heading": "Delete Task",
     "text": "Are you sure you want to delete <strong>«{name}»</strong>? All contents will be permanently removed.",
     "deleteButton": "Delete",
-    "cancelButton": "Cancel"
+    "cancelButton": "Cancel",
+
+    "error": {
+      "deleteError": "A server error occurred. Failed to delete task."
+    }
   },
 
   "DeleteTasksModal": {
     "heading": "Delete Tasks",
     "text": "Are you sure you want to delete <strong>{count} tasks</strong>? All contents will be permanently removed.",
     "deleteButton": "Delete",
-    "cancelButton": "Cancel"
+    "cancelButton": "Cancel",
+
+    "error": {
+      "deleteError": "A server error occurred. Failed to delete tasks."
+    }
   },
 
   "NewTaskModal": {
     "title": "New Task",
     "submitButtonLabel": "Create Task"
-  },
-
-  "NewTaskCategoryModal": {
-    "title": "New task category",
-    "submitButtonLabel": "Create category"
   },
 
   "EditTaskModal": {
@@ -150,7 +173,7 @@
     "label": "Assignee"
   },
 
-  "TaskFormBaseAssigneeSelect": {
+  "TaskAssigneeSelect": {
     "label": "Assignee",
     "placeholder": "Select assignee",
 
@@ -159,7 +182,7 @@
     }
   },
 
-  "TaskFormBaseCategorySelect": {
+  "TaskCategorySelect": {
     "label": "Category",
     "placeholder": "Select category",
 
@@ -168,7 +191,7 @@
     }
   },
 
-  "TaskFormBaseDeadlineDatePicker": {
+  "TaskDeadlineDatePicker": {
     "label": "Deadline",
 
     "validation": {
@@ -176,12 +199,12 @@
     }
   },
 
-  "TaskFormBaseDescriptionTextField": {
+  "TaskDescriptionTextField": {
     "label": "Description",
     "placeholder": "Typing description"
   },
 
-  "TaskFormBaseProjectSelect": {
+  "TaskProjectSelect": {
     "label": "Project",
     "placeholder": "Select project",
 
@@ -190,7 +213,7 @@
     }
   },
 
-  "TaskFormBaseStatusSelect": {
+  "TaskStatusSelect": {
     "label": "Status",
     "placeholder": "Select status",
 
@@ -199,23 +222,13 @@
     }
   },
 
-  "TaskFormBaseTitleTextField": {
+  "TaskTitleTextField": {
     "label": "Title",
     "placeholder": "Typing title",
 
     "validation": {
       "required": "Title is required",
       "tooLong": "Title is too long"
-    }
-  },
-
-  "TaskCategoryFormBaseNameTextField": {
-    "label": "Name",
-    "placeholder": "Typing name",
-
-    "validation": {
-      "required": "Name is required",
-      "tooLong": "Name is too long"
     }
   },
 

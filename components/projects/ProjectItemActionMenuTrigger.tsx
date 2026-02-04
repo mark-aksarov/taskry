@@ -34,7 +34,6 @@ export type ProjectItemActionMenuTriggerProps = {
 
 const updateStatusInitialState: ActionState = {
   status: null,
-  message: null,
 };
 
 export function ProjectItemActionMenuTrigger({
@@ -62,7 +61,7 @@ export function ProjectItemActionMenuTrigger({
   ] = useActionState(updateStatusAction, updateStatusInitialState);
 
   // Show toast for status update errors
-  useActionErrorToast(updateProjectStatusState);
+  useActionErrorToast(updateProjectStatusState, t("error.updateStatusError"));
 
   // Handle menu actions
   const handleAction = (key: Key) => {

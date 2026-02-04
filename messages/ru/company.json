@@ -1,0 +1,22 @@
+{
+  "NewCompanyForm": {
+    "error": {
+      "creationError": "Произошла ошибка на сервере. Не удалось создать компанию."
+    }
+  },
+
+  "NewCompanyModal": {
+    "title": "Новая компания",
+    "submitButtonLabel": "Создать компанию"
+  },
+
+  "CompanyNameTextField": {
+    "label": "Название",
+    "placeholder": "Введите название",
+
+    "validation": {
+      "required": "Требуется название",
+      "tooLong": "Название слишком длинное"
+    }
+  }
+}

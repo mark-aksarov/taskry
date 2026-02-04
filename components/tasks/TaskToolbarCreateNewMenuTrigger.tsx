@@ -12,8 +12,8 @@ import { useTranslations } from "next-intl";
 import { Blocks, CalendarCheck } from "lucide-react";
 import { DialogHeader } from "@/components/ui/Dialog";
 import { GuestModeModal } from "../common/GuestModeModal";
-import { NewTaskCategoryModal } from "./NewTaskCategoryModal";
 import { NewTaskModal } from "@/components/tasks/NewTaskModal";
+import { NewTaskCategoryModal } from "../taskCategory/NewTaskCategoryModal";
 
 interface TaskToolbarCreateNewMenuTriggerProps {
   guestMode: boolean;

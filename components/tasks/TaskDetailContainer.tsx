@@ -73,8 +73,8 @@ function TaskDetailContainerInner({
                       <EditSubtaskForm
                         taskId={task.id}
                         subtaskId={subtask.id}
-                        formAction={updateSubtask}
-                        subtaskTextDefaultValue={subtask.text}
+                        updateSubtask={updateSubtask}
+                        textDefaultValue={subtask.text}
                         mutate={mutate}
                       />
                     }
@@ -90,7 +90,7 @@ function TaskDetailContainerInner({
           newSubtaskForm={
             <NewSubtaskForm
               taskId={task.id}
-              formAction={createSubtask}
+              createSubtask={createSubtask}
               mutate={mutate}
             />
           }

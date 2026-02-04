@@ -41,7 +41,7 @@ export const Default = {
           onPress={() =>
             toastQueue.add(
               {
-                title: "Something went wrong. Delete failed.",
+                title: "A server error occurred. ",
                 iconLeft: (
                   <CircleX size={16} strokeWidth={1.5} absoluteStrokeWidth />
                 ),

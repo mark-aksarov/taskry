@@ -1,13 +1,10 @@
 "use client";
 
-import {
-  CustomerFormBaseSkeleton,
-  CustomerFormBaseCompanySelect,
-} from "./CustomerFormBase";
-
 import useSWR from "swr";
 import { Suspense } from "react";
 import { EditCustomerForm } from "./EditCustomerForm";
+import { CustomerFormSkeleton } from "./CustomerFormSkeleton";
+import { CustomerCompanySelect } from "./CustomerCompanySelect";
 import { CompanySummaryDTO } from "@/lib/data/company/company.dto";
 import { updateCustomer } from "@/lib/actions/customer/updateCustomer";
 import { CustomerFormDataDTO } from "@/lib/data/customer/customer.dto";
@@ -20,7 +17,7 @@ export function EditCustomerFormContainer(
   props: EditCustomerFormContainerProps,
 ) {
   return (
-    <Suspense fallback={<CustomerFormBaseSkeleton />}>
+    <Suspense fallback={<CustomerFormSkeleton />}>
       <EditCustomerFormContainerInner {...props} />
     </Suspense>
   );
@@ -48,17 +45,17 @@ function EditCustomerFormContainerInner({
     <EditCustomerForm
       customerId={customerId}
       fullNameDefaultValue={customer.fullName}
-      bioDefaultValue={customer.bio ?? ""}
+      bioDefaultValue={customer.bio}
       emailDefaultValue={customer.email}
-      phoneNumberDefaultValue={customer.phoneNumber ?? ""}
-      publicLinkDefaultValue={customer.publicLink ?? ""}
+      phoneNumberDefaultValue={customer.phoneNumber}
+      publicLinkDefaultValue={customer.publicLink}
       companySelect={
-        <CustomerFormBaseCompanySelect
+        <CustomerCompanySelect
           defaultSelectedKey={customer.companyId.toString()}
           companies={companies}
         />
       }
-      formAction={updateCustomer}
+      updateCustomer={updateCustomer}
     />
   );
 }

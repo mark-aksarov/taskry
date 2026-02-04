@@ -5,7 +5,7 @@ import { NewUserFormSkeleton } from "../NewUserForm";
 import { DialogTrigger } from "react-aria-components";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { Default as UserFormBaseStory } from "../NewUserForm/NewUserForm.stories";
+import { Default as NewUserFormStory } from "../NewUserForm/NewUserForm.stories";
 
 const meta = {
   title: "Components/users/NewUserModal",
@@ -27,7 +27,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    newUserForm: <NewUserForm {...UserFormBaseStory.args} />,
+    newUserForm: <NewUserForm {...NewUserFormStory.args} />,
   },
 } satisfies Story;
 

@@ -1,23 +1,19 @@
 import "server-only";
 
-import {
-  TaskFormBaseSkeleton,
-  TaskFormBaseStatusSelect,
-  TaskFormBaseProjectSelect,
-  TaskFormBaseAssigneeSelect,
-  TaskFormBaseCategorySelect,
-} from "../TaskFormBase";
-
 import { Suspense } from "react";
 import { NewTaskForm } from "../NewTaskForm";
+import { TaskFormSkeleton } from "../TaskFormSkeleton";
+import { TaskProjectSelect } from "../TaskProjectSelect";
+import { TaskAssigneeSelect } from "../TaskAssigneeSelect";
 import { createTask } from "@/lib/actions/task/createTask";
+import { TaskCategorySelect } from "../TaskCategorySelect";
 import { getUserSummaries } from "@/lib/data/user/user.dal";
 import { getProjectSummaries } from "@/lib/data/project/project.dal";
 import { getTaskCategorySummaries } from "@/lib/data/taskCategory/taskCategory.dal";
 
 export function NewTaskFormContainer() {
   return (
-    <Suspense fallback={<TaskFormBaseSkeleton />}>
+    <Suspense fallback={<TaskFormSkeleton />}>
       <NewTaskFormContainerInner />
     </Suspense>
   );
@@ -30,13 +26,10 @@ async function NewTaskFormContainerInner() {
 
   return (
     <NewTaskForm
-      taskStatusSelect={<TaskFormBaseStatusSelect />}
-      taskCategorySelect={
-        <TaskFormBaseCategorySelect categories={categories} />
-      }
-      projectSelect={<TaskFormBaseProjectSelect projects={projects} />}
-      assigneeSelect={<TaskFormBaseAssigneeSelect users={users} />}
-      formAction={createTask}
+      taskCategorySelect={<TaskCategorySelect categories={categories} />}
+      projectSelect={<TaskProjectSelect projects={projects} />}
+      assigneeSelect={<TaskAssigneeSelect users={users} />}
+      createTask={createTask}
     />
   );
 }

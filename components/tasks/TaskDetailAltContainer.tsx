@@ -70,8 +70,8 @@ async function TaskDetailAltContainerInner({
                       <EditSubtaskForm
                         taskId={task.id}
                         subtaskId={subtask.id}
-                        formAction={updateSubtask}
-                        subtaskTextDefaultValue={subtask.text}
+                        updateSubtask={updateSubtask}
+                        textDefaultValue={subtask.text}
                       />
                     }
                   />
@@ -84,7 +84,7 @@ async function TaskDetailAltContainerInner({
       newSubtaskModalTrigger={
         <NewSubtaskModalTrigger
           newSubtaskForm={
-            <NewSubtaskForm taskId={task.id} formAction={createSubtask} />
+            <NewSubtaskForm taskId={task.id} createSubtask={createSubtask} />
           }
         />
       }

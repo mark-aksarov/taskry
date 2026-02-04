@@ -16,7 +16,6 @@ import { useActionErrorToast } from "@/lib/hooks/useActionErrorToast";
 
 const initialState: ActionState = {
   status: null,
-  message: null,
 };
 
 interface DeleteSubtaskModalProps {
@@ -51,7 +50,7 @@ export function DeleteSubtaskModal({
     }
   }, [state, mutate]);
 
-  useActionErrorToast(state);
+  useActionErrorToast(state, t("error.deleteError"));
 
   return (
     <ConfirmModal

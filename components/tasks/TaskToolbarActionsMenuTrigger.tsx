@@ -32,7 +32,6 @@ interface TaskToolbarActionsMenuTriggerProps {
 
 const initialState: ActionState = {
   status: null,
-  message: null,
 };
 
 export const TaskToolbarActionsMenuTrigger = ({
@@ -74,7 +73,7 @@ export const TaskToolbarActionsMenuTrigger = ({
   };
 
   // Show toast if updating status fails
-  useActionErrorToast(updateTaskStatusState);
+  useActionErrorToast(updateTaskStatusState, t("error.updateStatusError"));
 
   const {
     selectedIds: taskIds,

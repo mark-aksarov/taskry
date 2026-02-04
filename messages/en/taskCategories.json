@@ -1,0 +1,22 @@
+{
+  "NewTaskCategoryForm": {
+    "error": {
+      "creationError": "A server error occurred. Failed to create task category."
+    }
+  },
+
+  "NewTaskCategoryModal": {
+    "title": "New task category",
+    "submitButtonLabel": "Create category"
+  },
+
+  "TaskCategoryNameTextField": {
+    "label": "Name",
+    "placeholder": "Typing name",
+
+    "validation": {
+      "required": "Name is required",
+      "tooLong": "Name is too long"
+    }
+  }
+}

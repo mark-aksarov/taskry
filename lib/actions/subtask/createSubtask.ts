@@ -2,9 +2,7 @@
 
 import { ActionState } from "../types";
 import { revalidatePath } from "next/cache";
-import { getTranslations } from "next-intl/server";
 import { subtaskSchema } from "@/lib/schemas/subtask";
-import { actionError, actionSuccess } from "../utils/actionResult";
 import { createSubtask as createSubtaskQuery } from "@/lib/data/subtask/subtask.dal";
 import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedirect";
 
@@ -17,8 +15,6 @@ export async function createSubtask(
   // Authorization
   await requireSessionOrRedirect();
 
-  const t = await getTranslations("actions.common");
-
   try {
     // Parse and validate form data
     const input = Object.fromEntries(formData.entries());
@@ -26,7 +22,11 @@ export async function createSubtask(
 
     if (!parsed.success) {
       console.error("Validation error", parsed.error);
-      return actionError(t("validation.invalidInput"));
+
+      return {
+        status: "error",
+        errorCode: "validationError",
+      };
     }
 
     // Execute create
@@ -35,9 +35,15 @@ export async function createSubtask(
     // Revalidation
     revalidatePath(`/tasks/${parsed.data.taskId}`);
 
-    return actionSuccess();
+    return {
+      status: "success",
+    };
   } catch (error) {
     console.error("Server Action Error:", error);
-    return actionError(t("validation.internalServerError"));
+
+    return {
+      status: "error",
+      errorCode: "internalServerError",
+    };
   }
 }

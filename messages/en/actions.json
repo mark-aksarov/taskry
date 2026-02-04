@@ -1,47 +1,7 @@
 {
   "common": {
     "validation": {
-      "invalidInput": "Invalid input data. Please check your input and try again.",
       "internalServerError": "An internal server error occurred. Please try again later."
-    }
-  },
-  "forgetPassword": {
-    "validation": {
-      "invalidInput": "Please check your email",
-      "internalServerError": "An internal server error occurred. Please try again later.",
-      "bad_request": "Reset password isn't enabled"
-    }
-  },
-  "resetPassword": {
-    "validation": {
-      "invalidInput": "Please check your password",
-      "internalServerError": "An internal server error occurred. Please try again later.",
-      "bad_request": "Invalid or expired token or invalid password length"
-    }
-  },
-  "signIn": {
-    "validation": {
-      "invalidInput": "The input data is invalid.",
-      "internalServerError": "An internal server error occurred. Please try again later.",
-      "unauthorized": "Login failed. Please check your email and password or try again later.",
-      "forbidden": "Email not verified.",
-      "bad_request": "Invalid email format or this sign-in method is not enabled."
-    }
-  },
-  "signUp": {
-    "validation": {
-      "invalidInput": "The input data is invalid.",
-      "internalServerError": "An internal server error occurred. Please try again later.",
-      "unprocessable_entity": "This email is already in use or a registration error occurred.",
-      "bad_request": "Could not create account. Please check your email or try another sign-up method."
-    }
-  },
-  "createUser": {
-    "validation": {
-      "invalidInput": "The input data is invalid.",
-      "forbidden": "You are not allowed to create users.",
-      "bad_request": "Invalid email format or a user with this address already exists.",
-      "internalServerError": "Failed to create user."
     }
   }
 }

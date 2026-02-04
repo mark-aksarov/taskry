@@ -1,18 +1,14 @@
 "use client";
 
-import {
-  TaskFormBaseSkeleton,
-  TaskFormBaseStatusSelect,
-  TaskFormBaseProjectSelect,
-  TaskFormBaseAssigneeSelect,
-  TaskFormBaseCategorySelect,
-} from "./TaskFormBase";
-
 import useSWR from "swr";
 import { Suspense } from "react";
 import { EditTaskForm } from "./EditTaskForm";
+import { TaskFormSkeleton } from "./TaskFormSkeleton";
 import { CalendarDate } from "@internationalized/date";
+import { TaskProjectSelect } from "./TaskProjectSelect";
+import { TaskAssigneeSelect } from "./TaskAssigneeSelect";
 import { UserSummaryDTO } from "@/lib/data/user/user.dto";
+import { TaskCategorySelect } from "./TaskCategorySelect";
 import { updateTask } from "@/lib/actions/task/updateTask";
 import { TaskFormDataDTO } from "@/lib/data/task/task.dto";
 import { ProjectSummaryDTO } from "@/lib/data/project/project.dto";
@@ -24,7 +20,7 @@ interface EditTaskFormContainerProps {
 
 export function EditTaskFormContainer(props: EditTaskFormContainerProps) {
   return (
-    <Suspense fallback={<TaskFormBaseSkeleton />}>
+    <Suspense fallback={<TaskFormSkeleton />}>
       <EditTaskFormContainerInner {...props} />
     </Suspense>
   );
@@ -65,31 +61,29 @@ function EditTaskFormContainerInner({ taskId }: EditTaskFormContainerProps) {
   return (
     <EditTaskForm
       taskId={taskId}
-      taskTitleDefaultValue={task.title}
-      taskDescriptionDefaultValue={task.description}
-      taskDeadlineDefaultValue={dateValue}
-      taskStatusSelect={
-        <TaskFormBaseStatusSelect defaultSelectedKey={task.status} />
-      }
+      titleDefaultValue={task.title}
+      descriptionDefaultValue={task.description}
+      deadlineDefaultValue={dateValue}
+      statusSelectDefaultValue={task.status}
       taskCategorySelect={
-        <TaskFormBaseCategorySelect
+        <TaskCategorySelect
           defaultSelectedKey={task.categoryId.toString()}
           categories={categories}
         />
       }
       projectSelect={
-        <TaskFormBaseProjectSelect
+        <TaskProjectSelect
           defaultSelectedKey={task.projectId.toString()}
           projects={projects}
         />
       }
       assigneeSelect={
-        <TaskFormBaseAssigneeSelect
+        <TaskAssigneeSelect
           defaultSelectedKey={task.assigneeId?.toString()}
           users={users}
         />
       }
-      formAction={updateTask}
+      updateTask={updateTask}
     />
   );
 }

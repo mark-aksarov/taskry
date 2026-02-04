@@ -16,7 +16,7 @@ import { NewUserForm } from "@/components/users/NewUserForm";
 import { UsersContainer } from "@/components/users/UsersContainer";
 import { createPosition } from "@/lib/actions/position/createPosition";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
-import { NewPositionForm } from "@/components/users/NewPositionForm/NewPositionForm";
+import { NewPositionForm } from "@/components/position/NewPositionForm";
 import { UserFiltersFormContainer } from "@/components/users/UserFiltersFormContainer";
 import { UserToolbarFiltersModalTrigger } from "@/components/users/UserToolbarFiltersModalTrigger";
 import { UserToolbarCreateNewMenuTrigger } from "@/components/users/UserToolbarCreateNewMenuTrigger";
@@ -63,8 +63,8 @@ export default async function AppUsersPage({
         <UserToolbarCreateNewMenuTrigger
           showUserMenuItem={isOwner || guestMode}
           guestMode={guestMode}
-          newUserForm={<NewUserForm formAction={createUser} />}
-          newPositionForm={<NewPositionForm formAction={createPosition} />}
+          newUserForm={<NewUserForm createUser={createUser} />}
+          newPositionForm={<NewPositionForm createPosition={createPosition} />}
         />
       }
       usersContainer={

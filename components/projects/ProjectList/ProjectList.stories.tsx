@@ -1,6 +1,6 @@
 import { fn } from "storybook/test";
 import { ProjectList } from "./ProjectList";
-import { ProjectFormBase } from "../ProjectFormBase";
+import { EditProjectForm } from "../EditProjectForm";
 import { ProjectListItem } from "../ProjectListItem";
 import type { Meta, StoryObj } from "@storybook/react";
 import { ProjectStatus } from "@/generated/prisma/enums";
@@ -10,7 +10,7 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { ProjectCommentsModalTrigger } from "../ProjectCommentsModalTrigger";
 import { ProjectItemActionMenuTrigger } from "../ProjectItemActionMenuTrigger";
 import { MockedCommentsContainer } from "@/components/comments/MockedCommentsContainer";
-import { Default as ProjectFormBaseStory } from "../ProjectFormBase/ProjectFormBase.stories";
+import { Default as EditProjectFormStory } from "../EditProjectForm/EditProjectForm.stories";
 import { Default as ProjectDetailModalStory } from "../ProjectDetailModal/ProjectDetailModal.stories";
 import { Default as ProjectDetailBottomSheetStory } from "../ProjectDetailBottomSheet/ProjectDetailBottomSheet.stories";
 
@@ -106,7 +106,7 @@ export const Default = {
             deleteAction={fn()}
             updateStatusAction={fn()}
             editProjectFormContainer={
-              <ProjectFormBase {...ProjectFormBaseStory.args} />
+              <EditProjectForm {...EditProjectFormStory.args} />
             }
           />
         }

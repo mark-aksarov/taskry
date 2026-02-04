@@ -2,10 +2,10 @@ import { NewSubtaskForm } from "../NewSubtaskForm";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { NewSubtaskModalTrigger } from "./NewSubtaskModalTrigger";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { Default as SubtaskFormBaseStory } from "@/components/subtasks/SubtaskFormBase/SubtaskFormBase.stories";
+import { Default as NewSubtaskFormStory } from "../NewSubtaskForm/NewSubtaskForm.stories";
 
 const meta = {
-  title: "Components/subtasks/NewSubtaskModalTrigger",
+  title: "components/subtasks/NewSubtaskModalTrigger",
   component: NewSubtaskModalTrigger,
   tags: ["autodocs"],
   decorators: [withThemedBackground],
@@ -19,6 +19,6 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    newSubtaskForm: <NewSubtaskForm {...SubtaskFormBaseStory.args} />,
+    newSubtaskForm: <NewSubtaskForm {...NewSubtaskFormStory.args} />,
   },
 } satisfies Story;

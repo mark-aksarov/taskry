@@ -12,7 +12,7 @@ import { CustomersPage } from "./CustomersPage";
 import { CustomersPageEmpty } from "./CustomersPageEmpty";
 import { createCompany } from "@/lib/actions/company/createCompany";
 import { getCustomerCount } from "@/lib/data/customer/customer.dal";
-import { NewCompanyForm } from "@/components/customer/NewCompanyForm";
+import { NewCompanyForm } from "@/components/company/NewCompanyForm";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { deleteCustomers } from "@/lib/actions/customer/deleteCustomers";
 import { CustomersContainer } from "@/components/customer/CustomersContainer";
@@ -63,7 +63,7 @@ export default async function AppCustomersPage({
       customerToolbarCreateNewMenuTrigger={
         <CustomerToolbarCreateNewMenuTrigger
           newCustomerFormContainer={<NewCustomerFormContainer />}
-          newCompanyForm={<NewCompanyForm formAction={createCompany} />}
+          newCompanyForm={<NewCompanyForm createCompany={createCompany} />}
         />
       }
       customerToolbarActionsMenuTrigger={

@@ -1,9 +1,10 @@
 import { fn } from "storybook/test";
 import { EditUserForm } from "../EditUserForm";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { UserFormBasePositionSelect } from "../UserFormBase";
+import { UserPositionSelect } from "../UserPositionSelect";
 import { OverlayTriggerStateContext } from "react-aria-components";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { Default as UserPositionSelectStory } from "../UserPositionSelect/UserPositionSelect.stories";
 
 const meta = {
   title: "components/users/EditUserForm",
@@ -29,15 +30,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    formAction: fn(),
-    positionSelect: (
-      <UserFormBasePositionSelect
-        positions={[
-          { id: 1, name: "Developer" },
-          { id: 2, name: "Designer" },
-          { id: 3, name: "Product Manager" },
-        ]}
-      />
-    ),
+    positionSelect: <UserPositionSelect {...UserPositionSelectStory.args} />,
+    updateUser: () => ({ status: "success" }),
   },
 } satisfies Story;

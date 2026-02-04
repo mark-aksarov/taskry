@@ -6,9 +6,7 @@ import { ActionState } from "../types";
 import { APIError } from "better-auth";
 import { headers } from "next/headers";
 import { redirect } from "@/i18n/navigation";
-import { getLocale, getTranslations } from "next-intl/server";
-import { actionError, actionSuccess } from "../utils/actionResult";
-import { validateActionInput } from "../utils/validateActionInput";
+import { getLocale } from "next-intl/server";
 
 const schema = z.object({
   email: z.email().min(1).max(254),
@@ -16,26 +14,33 @@ const schema = z.object({
   rememberMe: z.coerce.boolean(),
 });
 
-type KnownStatusKey = "bad_request" | "forbidden" | "unauthorized";
-
 export async function signIn(
   callbackUrl: string,
   _prevState: ActionState,
   formData: FormData,
 ): Promise<ActionState> {
   const locale = await getLocale();
-  const t = await getTranslations("actions.signIn");
 
+  // Redirect if already signed in
   const session = await auth.api.getSession({ headers: await headers() });
+
   if (session) {
     redirect({ href: "/", locale });
-    return actionSuccess();
+
+    return {
+      status: "success",
+    };
   }
 
+  // Parse form data
   const input = Object.fromEntries(formData.entries());
-  const parsed = validateActionInput(schema, input);
+  const parsed = schema.safeParse(input);
+
   if (!parsed.success) {
-    return actionError(t("validation.invalidInput"));
+    return {
+      status: "error",
+      errorCode: "validationError",
+    };
   }
 
   try {
@@ -43,23 +48,25 @@ export async function signIn(
   } catch (error: unknown) {
     console.error("Sign-in Error:", error);
 
+    //Better auth error
     if (error instanceof APIError) {
-      const statusKey = String(error.status).toLowerCase() as KnownStatusKey;
-
-      if (statusKey === "bad_request") {
-        return actionError(t("validation.bad_request"));
-      }
-      if (statusKey === "forbidden") {
-        return actionError(t("validation.forbidden"));
-      }
-      if (statusKey === "unauthorized") {
-        return actionError(t("validation.unauthorized"));
-      }
+      return {
+        status: "error",
+        errorCode: "authServiceError",
+        message: error.message,
+      };
     }
 
-    return actionError(t("validation.internalServerError"));
+    return {
+      status: "error",
+      errorCode: "internalServerError",
+    };
   }
 
+  //we cannot call redirect in try/catch block
   redirect({ href: callbackUrl || "/", locale });
-  return actionSuccess();
+
+  return {
+    status: "success",
+  };
 }

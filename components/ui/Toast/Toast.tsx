@@ -30,23 +30,20 @@ export function ToastRegion() {
     >
       {({ toast }) => (
         <Toast toast={toast}>
-          <RACToastContent className="flex items-center gap-3 overflow-hidden text-red-700 dark:text-red-100">
+          <RACToastContent className="flex w-full gap-3 text-red-700 dark:text-red-100">
             <div className="shrink-0">{toast.content.iconLeft}</div>
-            <Text
-              slot="title"
-              className="truncate text-xs font-bold text-nowrap"
-            >
+            <Text slot="title" className="text-xs font-bold">
               {toast.content.title}
             </Text>
-          </RACToastContent>
 
-          <Button
-            slot="close"
-            variant="ghost"
-            iconLeft={<X size={16} strokeWidth={1.5} absoluteStrokeWidth />}
-            className="-mr-2 rounded-full bg-transparent! text-red-700 dark:text-red-100"
-            aria-label="Close"
-          />
+            <Button
+              slot="close"
+              variant="ghost"
+              iconLeft={<X size={16} strokeWidth={1.5} absoluteStrokeWidth />}
+              className="ml-auto flex items-start rounded-full bg-transparent! p-0 text-red-700 dark:text-red-100"
+              aria-label="Close"
+            />
+          </RACToastContent>
         </Toast>
       )}
     </RACToastRegion>
@@ -61,7 +58,7 @@ export function Toast(props: RACToastProps<ToastContent>) {
       className={composeRenderProps(props.className, (className) =>
         twMerge(
           className,
-          "flex w-[330px] items-center justify-between gap-4 rounded-lg bg-red-100 px-4 py-2 shadow-sm dark:bg-red-900",
+          "flex w-[330px] rounded-lg bg-red-100 p-4 shadow-sm dark:bg-red-900",
         ),
       )}
     />

@@ -3,9 +3,7 @@
 import z from "zod";
 import { ActionState } from "../types";
 import { revalidatePath } from "next/cache";
-import { getTranslations } from "next-intl/server";
 import { coercedPositiveInt } from "@/lib/schemas/base";
-import { actionError, actionSuccess } from "../utils/actionResult";
 import { deleteTasks as deleteTasksQuery } from "@/lib/data/task/task.dal";
 import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedirect";
 
@@ -20,24 +18,32 @@ export async function deleteTasks(
   // Authorization
   await requireSessionOrRedirect();
 
-  const t = await getTranslations("actions.common");
-
   try {
     // Parse and validate form data
     const parsed = schema.safeParse({ ids });
 
     if (!parsed.success) {
       console.error("Validation error", parsed.error);
-      return actionError(t("validation.invalidInput"));
+
+      return {
+        status: "error",
+        errorCode: "validationError",
+      };
     }
 
     // Delete tasks
     await deleteTasksQuery(parsed.data.ids);
     revalidatePath("/tasks");
 
-    return actionSuccess();
+    return {
+      status: "success",
+    };
   } catch (error) {
     console.error("Server Action Error:", error);
-    return actionError(t("validation.internalServerError"));
+
+    return {
+      status: "error",
+      errorCode: "internalServerError",
+    };
   }
 }

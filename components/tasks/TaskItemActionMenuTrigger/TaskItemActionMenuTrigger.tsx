@@ -36,7 +36,6 @@ export type TaskItemActionMenuTriggerProps = {
 
 const initialState: ActionState = {
   status: null,
-  message: null,
 };
 
 export function TaskItemActionMenuTrigger({
@@ -68,7 +67,7 @@ export function TaskItemActionMenuTrigger({
   ] = useActionState(updateStatusAction, initialState);
 
   // Show toast for status update errors
-  useActionErrorToast(updateTaskStatusState);
+  useActionErrorToast(updateTaskStatusState, t("error.updateStatusError"));
 
   // Handle menu actions
   function handleAction(key: Key) {

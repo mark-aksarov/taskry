@@ -13,8 +13,8 @@ import { ProfileNavigationMobile } from "@/components/users/ProfileNavigationMob
 import { PersonDetailHeaderImage } from "@/components/common/PersonDetailHeaderImage";
 import { ProfileNavigationDesktop } from "@/components/users/ProfileNavigationDesktop";
 import { TaskToolbarActionsMenuTrigger } from "@/components/tasks/TaskToolbarActionsMenuTrigger";
+import { Default as NewTaskFormStory } from "@/components/tasks/NewTaskForm/NewTaskForm.stories";
 import { Default as UserTaskListStory } from "@/components/users/UserTaskList/UserTaskList.stories";
-import { Default as TaskFormBaseStory } from "@/components/tasks/TaskFormBase/TaskFormBase.stories";
 
 const meta = {
   title: "components/users/UserTasksPageLayout",
@@ -59,7 +59,7 @@ export const WithNoTasks = {
   render: () => (
     <UserTasksPageEmptyLayout
       {...Default.args}
-      newTaskFormContainer={<NewTaskForm {...TaskFormBaseStory.args} />}
+      newTaskFormContainer={<NewTaskForm {...NewTaskFormStory.args} />}
     />
   ),
 };

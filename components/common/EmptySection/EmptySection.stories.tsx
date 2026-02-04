@@ -6,7 +6,7 @@ import { NewTaskForm } from "@/components/tasks/NewTaskForm";
 import { NewTaskModal } from "@/components/tasks/NewTaskModal";
 import { EmptySectionDescription } from "./EmptySectionDescription";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { Default as TaskFormBaseStory } from "@/components/tasks/TaskFormBase/TaskFormBase.stories";
+import { Default as NewTaskFormStory } from "@/components/tasks/NewTaskForm/NewTaskForm.stories";
 
 const meta = {
   title: "Components/common/EmptySection",
@@ -32,7 +32,7 @@ export const Default = {
         <EmptySectionButton
           createNewModal={
             <NewTaskModal
-              newTaskFormContainer={<NewTaskForm {...TaskFormBaseStory.args} />}
+              newTaskFormContainer={<NewTaskForm {...NewTaskFormStory.args} />}
             />
           }
         >

@@ -2,9 +2,7 @@
 
 import { ActionState } from "../types";
 import { revalidatePath } from "next/cache";
-import { getTranslations } from "next-intl/server";
 import { commentSchema } from "@/lib/schemas/comment";
-import { actionError, actionSuccess } from "../utils/actionResult";
 import { deleteComment as deleteCommentQuery } from "@/lib/data/comment/comment.dal";
 import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedirect";
 
@@ -17,15 +15,17 @@ export async function deleteComment(
   // Authorization
   await requireSessionOrRedirect();
 
-  const t = await getTranslations("actions.common");
-
   try {
     // Parse and validate form data
     const parsed = schema.safeParse({ id });
 
     if (!parsed.success) {
       console.error("Validation error", parsed.error);
-      return actionError(t("validation.invalidInput"));
+
+      return {
+        status: "error",
+        errorCode: "validationError",
+      };
     }
 
     // Delete comment
@@ -34,9 +34,15 @@ export async function deleteComment(
     revalidatePath("/projects");
     revalidatePath("/tasks");
 
-    return actionSuccess();
+    return {
+      status: "success",
+    };
   } catch (error) {
     console.error("Server Action Error:", error);
-    return actionError(t("validation.internalServerError"));
+
+    return {
+      status: "error",
+      errorCode: "internalServerError",
+    };
   }
 }

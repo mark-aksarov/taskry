@@ -34,7 +34,7 @@ export const Default = {
           <AuthCardSubtitle>Please sign in to your account.</AuthCardSubtitle>
         </AuthCardHeader>
         <AuthCardBody>
-          <AuthCardForm onSubmit={fn()}>
+          <AuthCardForm action={fn()}>
             <TextField label="Email" placeholder="Enter your email" />
             <TextField
               label="Password"

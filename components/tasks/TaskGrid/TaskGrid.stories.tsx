@@ -1,7 +1,7 @@
 import { fn } from "storybook/test";
 import { TaskGrid } from "./TaskGrid";
 import { TaskGridItem } from "../TaskGridItem";
-import { TaskFormBase } from "../TaskFormBase";
+import { EditTaskForm } from "../EditTaskForm";
 import { TaskDetailModal } from "../TaskDetailModal";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { mockedTasks } from "../TaskList/TaskList.stories";
@@ -11,7 +11,7 @@ import { TaskCommentsModalTrigger } from "../TaskCommentsModalTrigger";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { TaskItemActionMenuTrigger } from "../TaskItemActionMenuTrigger";
 import { UserDetailBottomSheet } from "@/components/users/UserDetailBottomSheet";
-import { Default as TaskFormBaseStory } from "../TaskFormBase/TaskFormBase.stories";
+import { Default as EditTaskFormStory } from "../EditTaskForm/EditTaskForm.stories";
 import { MockedCommentsContainer } from "@/components/comments/MockedCommentsContainer";
 import { Default as TaskDetailModalStory } from "../TaskDetailModal/TaskDetailModal.stories";
 import { Default as UserDetailModalStory } from "@/components/users/UserDetailModal/UserDetailModal.stories";
@@ -56,7 +56,7 @@ export const Default = {
                 deleteAction={fn()}
                 updateStatusAction={fn()}
                 editTaskFormContainer={
-                  <TaskFormBase {...TaskFormBaseStory.args} />
+                  <EditTaskForm {...EditTaskFormStory.args} />
                 }
               />
             }

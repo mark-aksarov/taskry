@@ -1,15 +1,21 @@
-import {
-  UserFormBase,
-  UserFormBaseBioTextField,
-  UserFormBaseAddressTextField,
-  UserFormBaseFullNameTextField,
-  UserFormBaseBirthdateDatePicker,
-  UserFormBasePublicLinkTextField,
-  UserFormBasePhoneNumberTextField,
-} from "../UserFormBase";
+"use client";
 
 import { DateValue } from "react-aria";
+import { useActionState } from "react";
+import { useTranslations } from "next-intl";
+import { UserBioTextField } from "../UserBioTextField";
+import { FormBase } from "@/components/common/FormBase";
 import { ActionFn, ActionState } from "@/lib/actions/types";
+import { ErrorBanner } from "@/components/common/ErrorBanner";
+import { UserAddressTextField } from "../UserAddressTextField";
+import { UserFullNameTextField } from "../UserFullNameTextField";
+import { UserBirthdateDatePicker } from "../UserBirthdateDatePicker";
+import { UserPublicLinkTextField } from "../UserPublicLinkTextField";
+import { UserPhoneNumberTextField } from "../UserPhoneNumberTextField";
+
+const initialState: ActionState = {
+  status: null,
+};
 
 interface EditUserFormProps {
   userId?: string;
@@ -21,7 +27,7 @@ interface EditUserFormProps {
   publicLinkDefaultValue?: string;
   addressDefaultValue?: string;
   positionSelect: React.ReactNode;
-  formAction: ActionFn<ActionState, FormData>;
+  updateUser: ActionFn<ActionState, FormData>;
 }
 
 export function EditUserForm({
@@ -33,20 +39,26 @@ export function EditUserForm({
   publicLinkDefaultValue,
   addressDefaultValue,
   positionSelect,
-  formAction,
+  updateUser,
 }: EditUserFormProps) {
+  const t = useTranslations("users.EditUserForm");
+
+  const [state, action, pending] = useActionState(updateUser, initialState);
+
   return (
-    <UserFormBase id="edit-user-form" formAction={formAction}>
+    <FormBase id="edit-user-form" state={state} action={action}>
       {userId && <input type="hidden" name="id" value={userId} />}
-      <UserFormBaseFullNameTextField defaultValue={fullNameDefaultValue} />
-      <UserFormBaseBioTextField defaultValue={bioDefaultValue} />
-      <UserFormBaseBirthdateDatePicker defaultValue={birthdateDefaultValue} />
-      <UserFormBasePhoneNumberTextField
-        defaultValue={phoneNumberDefaultValue}
-      />
-      <UserFormBasePublicLinkTextField defaultValue={publicLinkDefaultValue} />
-      <UserFormBaseAddressTextField defaultValue={addressDefaultValue} />
+      <UserFullNameTextField defaultValue={fullNameDefaultValue} />
+      <UserBioTextField defaultValue={bioDefaultValue} />
+      <UserBirthdateDatePicker defaultValue={birthdateDefaultValue} />
+      <UserPhoneNumberTextField defaultValue={phoneNumberDefaultValue} />
+      <UserPublicLinkTextField defaultValue={publicLinkDefaultValue} />
+      <UserAddressTextField defaultValue={addressDefaultValue} />
       {positionSelect}
-    </UserFormBase>
+
+      {state.status === "error" && (
+        <ErrorBanner>{t("error.updateError")}</ErrorBanner>
+      )}
+    </FormBase>
   );
 }

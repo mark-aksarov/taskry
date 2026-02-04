@@ -11,9 +11,9 @@ import { Item } from "react-stately";
 import { useTranslations } from "next-intl";
 import { NewUserModal } from "./NewUserModal";
 import { DialogHeader } from "@/components/ui/Dialog";
-import { NewPositionModal } from "./NewPositionModal";
 import { BriefcaseBusiness, Users } from "lucide-react";
 import { GuestModeModal } from "../common/GuestModeModal";
+import { NewPositionModal } from "../position/NewPositionModal";
 
 interface UserToolbarCreateNewMenuTriggerProps {
   showUserMenuItem: boolean;

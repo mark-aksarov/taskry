@@ -28,6 +28,6 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    formAction: fn(),
+    createUser: () => ({ status: "success" }),
   },
 } satisfies Story;

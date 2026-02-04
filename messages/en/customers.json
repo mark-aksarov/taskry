@@ -1,4 +1,16 @@
 {
+  "EditCustomerForm": {
+    "error": {
+      "updateError": "A server error occurred. Failed to update customer."
+    }
+  },
+
+  "NewCustomerForm": {
+    "error": {
+      "creationError": "A server error occurred. Failed to create customer."
+    }
+  },
+
   "TotalCustomersCard": {
     "text": "Total Customers"
   },
@@ -34,22 +46,17 @@
     "submitButtonLabel": "Create Customer"
   },
 
-  "NewCompanyModal": {
-    "title": "New company",
-    "submitButtonLabel": "Create company"
-  },
-
   "EditCustomerModal": {
     "title": "Edit Customer",
     "submitButtonLabel": "Update Customer"
   },
 
-  "CustomerFormBaseBioTextField": {
+  "CustomerBioTextField": {
     "label": "Bio",
     "placeholder": "Typing bio"
   },
 
-  "CustomerFormBaseCompanySelect": {
+  "CustomerCompanySelect": {
     "label": "Company",
     "placeholder": "Typing company",
 
@@ -59,7 +66,7 @@
     }
   },
 
-  "CustomerFormBaseEmailTextField": {
+  "CustomerEmailTextField": {
     "label": "Email",
     "placeholder": "Typing email",
 
@@ -74,7 +81,7 @@
     "title": "Customer Information"
   },
 
-  "CustomerFormBaseFullNameTextField": {
+  "CustomerFullNameTextField": {
     "label": "Full name",
     "placeholder": "Typing full name",
 
@@ -84,7 +91,7 @@
     }
   },
 
-  "CustomerFormBasePhoneNumberTextField": {
+  "CustomerPhoneNumberTextField": {
     "label": "Phone number",
     "placeholder": "Typing phone number",
 
@@ -94,22 +101,12 @@
     }
   },
 
-  "CustomerFormBasePublicLinkTextField": {
+  "CustomerPublicLinkTextField": {
     "label": "Public link",
     "placeholder": "Typing public link",
 
     "validation": {
       "format": "Invalid format. The public link must be in the format `https://example.com`."
-    }
-  },
-
-  "CompanyFormBaseNameTextField": {
-    "label": "Name",
-    "placeholder": "Typing name",
-
-    "validation": {
-      "required": "Name is required",
-      "tooLong": "Name is too long"
     }
   },
 
@@ -156,14 +153,22 @@
     "heading": "Delete customer",
     "text": "Are you sure you want to delete customer <strong>«{name}»</strong>? All contents will be permanently removed.",
     "deleteButton": "Delete",
-    "cancelButton": "Cancel"
+    "cancelButton": "Cancel",
+
+    "error": {
+      "deleteError": "A server error occurred. Failed to delete customer."
+    }
   },
 
   "DeleteCustomersModal": {
     "heading": "Delete customers",
     "text": "Are you sure you want to delete <strong>{count} customers</strong>? All contents will be permanently removed.",
     "deleteButton": "Delete",
-    "cancelButton": "Cancel"
+    "cancelButton": "Cancel",
+
+    "error": {
+      "deleteError": "A server error occurred. Failed to delete customers."
+    }
   },
 
   "CustomerGridItem": {

@@ -1,4 +1,16 @@
 {
+  "EditProjectForm": {
+    "error": {
+      "updateError": "Произошла ошибка на сервере. Не удалось обновить проект."
+    }
+  },
+
+  "NewProjectForm": {
+    "error": {
+      "creationError": "Произошла ошибка на сервере. Не удалось создать проект."
+    }
+  },
+
   "ProjectDetailCard": {
     "title": "Информация о проекте"
   },
@@ -25,11 +37,6 @@
     "submitButtonLabel": "Создать проект"
   },
 
-  "NewProjectCategoryModal": {
-    "title": "Новая категория проекта",
-    "submitButtonLabel": "Создать категорию"
-  },
-
   "EditProjectModal": {
     "title": "Изменить проект",
     "submitButtonLabel": "Обновить проект"
@@ -44,10 +51,14 @@
     "delete": "Удалить",
     "pending": "Отметить как «В ожидании»",
     "active": "Отметить как «Активно»",
-    "completed": "Отметить как «Завершено»"
+    "completed": "Отметить как «Завершено»",
+
+    "error": {
+      "updateStatusError": "Произошла ошибка на сервере. Не удалось изменить статусы проектов."
+    }
   },
 
-  "ProjectFormBaseCustomerSelect": {
+  "ProjectCustomerSelect": {
     "label": "Клиент",
     "placeholder": "Выберите клиента",
 
@@ -56,7 +67,7 @@
     }
   },
 
-  "ProjectFormBaseCategorySelect": {
+  "ProjectCategorySelect": {
     "label": "Категория",
     "placeholder": "Выберите категорию",
 
@@ -65,7 +76,7 @@
     }
   },
 
-  "ProjectFormBaseDeadlineDatePicker": {
+  "ProjectDeadlineDatePicker": {
     "label": "Дедлайн",
 
     "validation": {
@@ -73,12 +84,12 @@
     }
   },
 
-  "ProjectFormBaseDescriptionTextField": {
+  "ProjectDescriptionTextField": {
     "label": "Описание",
     "placeholder": "Введите описание"
   },
 
-  "ProjectFormBaseStatusSelect": {
+  "ProjectStatusSelect": {
     "label": "Статус",
     "placeholder": "Выберите статус",
 
@@ -87,22 +98,12 @@
     }
   },
 
-  "ProjectFormBaseTitleTextField": {
+  "ProjectTitleTextField": {
     "label": "Название",
     "placeholder": "Введите название",
 
     "validation": {
       "required": "Название обязательно для заполнения",
-      "tooLong": "Название слишком длинное"
-    }
-  },
-
-  "ProjectCategoryFormBaseNameTextField": {
-    "label": "Название",
-    "placeholder": "Введите название",
-
-    "validation": {
-      "required": "Требуется название",
       "tooLong": "Название слишком длинное"
     }
   },
@@ -168,21 +169,33 @@
     "delete": "Удалить",
     "markPending": "Отметить как «В ожидании»",
     "markCompleted": "Отметить как «Готово»",
-    "markActive": "Отметить как «Активно»"
+    "markActive": "Отметить как «Активно»",
+
+    "error": {
+      "updateStatusError": "Произошла ошибка на сервере. Не удалось изменить статус проекта."
+    }
   },
 
   "DeleteProjectModal": {
     "heading": "Удалить проект",
     "text": "Вы уверены, что хотите удалить <strong>«{name}»</strong>? Все содержимое будет безвозвратно удалено. Связанные задачи также будут удалены.",
     "deleteButton": "Удалить",
-    "cancelButton": "Отменить"
+    "cancelButton": "Отменить",
+
+    "error": {
+      "deleteError": "Произошла ошибка на сервере. Не удалось удалить проект."
+    }
   },
 
   "DeleteProjectsModal": {
     "heading": "Удалить проекты",
     "text": "Вы уверены, что хотите удалить <strong>{count} выбранных проектов </strong>? Все содержимое будет безвозвратно удалено. Связанные задачи также будут удалены.",
     "deleteButton": "Удалить",
-    "cancelButton": "Отменить"
+    "cancelButton": "Отменить",
+
+    "error": {
+      "deleteError": "Произошла ошибка на сервере. Не удалось удалить проекты."
+    }
   },
 
   "ProjectStatus": {

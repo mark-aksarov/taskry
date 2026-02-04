@@ -3,9 +3,9 @@ import { NewCustomerForm } from "../NewCustomerForm";
 import { DialogTrigger } from "react-aria-components";
 import { NewCustomerModal } from "./NewCustomerModal";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { CustomerFormBaseSkeleton } from "../CustomerFormBase";
+import { CustomerFormSkeleton } from "../CustomerFormSkeleton";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { Default as CustomerFormBaseStory } from "../CustomerFormBase/CustomerFormBase.stories";
+import { Default as NewCustomerFormStory } from "../NewCustomerForm/NewCustomerForm.stories";
 
 const meta = {
   title: "Components/customers/NewCustomerModal",
@@ -28,13 +28,13 @@ type Story = StoryObj<typeof meta>;
 export const Default = {
   args: {
     newCustomerFormContainer: (
-      <NewCustomerForm {...CustomerFormBaseStory.args} />
+      <NewCustomerForm {...NewCustomerFormStory.args} />
     ),
   },
 } satisfies Story;
 
 export const Skeleton = {
   args: {
-    newCustomerFormContainer: <CustomerFormBaseSkeleton />,
+    newCustomerFormContainer: <CustomerFormSkeleton />,
   },
 } satisfies Story;

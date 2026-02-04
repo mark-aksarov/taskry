@@ -4,8 +4,6 @@ import { ActionState } from "../types";
 import { APIError } from "better-auth";
 import { revalidatePath } from "next/cache";
 import { userSchema } from "@/lib/schemas/user";
-import { getTranslations } from "next-intl/server";
-import { actionError, actionSuccess } from "../utils/actionResult";
 import { createUser as createUserService } from "@/lib/data/user/user.service";
 import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedirect";
 
@@ -22,8 +20,6 @@ export async function createUser(
   // Authorization
   await requireSessionOrRedirect();
 
-  const t = await getTranslations("actions.createUser");
-
   try {
     // Parse and validate form data
     const input = Object.fromEntries(formData.entries());
@@ -31,21 +27,35 @@ export async function createUser(
 
     if (!parsed.success) {
       console.error("Validation error", parsed.error);
-      return actionError(t("validation.invalidInput"));
+
+      return {
+        status: "error",
+        errorCode: "validationError",
+      };
     }
 
     // Create user
     await createUserService(parsed.data);
 
     revalidatePath("/team");
-    return actionSuccess();
+
+    return {
+      status: "success",
+    };
   } catch (error: unknown) {
     console.error("Create User Error:", error);
 
     if (error instanceof APIError) {
-      return actionError(error.message);
+      return {
+        status: "error",
+        errorCode: "authServiceError",
+        message: error.message,
+      };
     }
 
-    return actionError(t("validation.internalServerError"));
+    return {
+      status: "error",
+      errorCode: "internalServerError",
+    };
   }
 }

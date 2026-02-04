@@ -2,10 +2,10 @@ import { NewTaskForm } from "../NewTaskForm";
 import { NewTaskModal } from "./NewTaskModal";
 import { Button } from "@/components/ui/Button";
 import { DialogTrigger } from "react-aria-components";
-import { TaskFormBaseSkeleton } from "../TaskFormBase";
+import { TaskFormSkeleton } from "../TaskFormSkeleton";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { Default as TaskFormBaseStory } from "@/components/tasks/TaskFormBase/TaskFormBase.stories";
+import { Default as NewTaskFormStory } from "../NewTaskForm/NewTaskForm.stories";
 
 const meta = {
   title: "Components/tasks/NewTaskModal",
@@ -27,12 +27,12 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    newTaskFormContainer: <NewTaskForm {...TaskFormBaseStory.args} />,
+    newTaskFormContainer: <NewTaskForm {...NewTaskFormStory.args} />,
   },
 } satisfies Story;
 
 export const Skeleton = {
   args: {
-    newTaskFormContainer: <TaskFormBaseSkeleton />,
+    newTaskFormContainer: <TaskFormSkeleton />,
   },
 } satisfies Story;
