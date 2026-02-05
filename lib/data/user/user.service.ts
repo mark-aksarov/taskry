@@ -8,8 +8,22 @@ import { UpdateUserInputDTO, CreateUserInputDTO } from "./user.dto";
 export const createUser = async (input: CreateUserInputDTO) => {
   // Authorization
   const {
-    user: { workspaceId },
+    user: { id: userId, workspaceId },
   } = await requireSession();
+
+  // Check permission
+  const permission = await auth.api.userHasPermission({
+    body: {
+      userId,
+      permission: {
+        user: ["create"],
+      },
+    },
+  });
+
+  if (!permission.success) {
+    throw new AccessDeniedError("You do not have permission to create user.");
+  }
 
   // Create user
   const { user } = await auth.api.createUser({
@@ -34,7 +48,7 @@ export const createUser = async (input: CreateUserInputDTO) => {
 export const updateUser = async (input: UpdateUserInputDTO) => {
   // Authorization
   const {
-    user: { id: userId, workspaceId },
+    user: { id: userId, role, workspaceId },
   } = await requireSession();
 
   // Check permission
@@ -47,7 +61,7 @@ export const updateUser = async (input: UpdateUserInputDTO) => {
     },
   });
 
-  if (!permission.success) {
+  if (!permission.success || (role === "user" && userId !== input.id)) {
     throw new AccessDeniedError("You do not have permission to update user.");
   }
 
