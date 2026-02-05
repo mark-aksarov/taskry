@@ -65,12 +65,6 @@ export interface CreateUserInputDTO {
   email: string;
   password: string;
   fullName: string;
-  positionId?: number;
-  bio?: string;
-  birthdate?: Date;
-  phoneNumber?: string;
-  address?: string;
-  publicLink?: string;
 }
 
 export interface UpdateUserInputDTO {
@@ -82,4 +76,9 @@ export interface UpdateUserInputDTO {
   phoneNumber?: string;
   address?: string;
   publicLink?: string;
+}
+
+export interface ChangePasswordInputDTO {
+  id: string;
+  newPassword: string;
 }

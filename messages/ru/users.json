@@ -1,4 +1,18 @@
 {
+  "ChangePasswordModal": {
+    "title": "Изменить пароль",
+    "submitButtonLabel": "Изменить пароль"
+  },
+
+  "ChangePasswordForm": {
+    "error": {
+      "accessDenied": "Вам запрещено устанавливать пароли для пользователей.",
+      "passwordTooShort": "Пароль слишком короткий",
+      "passwordTooLong": "Пароль слишком длинный",
+      "internalServerError": "Произошла ошибка на сервере. Не удалось изменить пароль пользователя."
+    }
+  },
+
   "EditUserForm": {
     "error": {
       "accessDenied": "У вас нет прав на создание пользователей",

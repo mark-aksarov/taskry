@@ -1,8 +1,8 @@
+import { UserTasksPageLoadingLayout } from "@/components/users/UserTasksPageLayout";
 import { ProfileNavigationMobile } from "@/components/users/ProfileNavigationMobile";
 import { ProfileNavigationDesktop } from "@/components/users/ProfileNavigationDesktop";
-import { UserTasksPageLoadingLayout } from "@/components/users/UserTasksPageLayout";
 
-export default function AppProfileTasksPageLoading() {
+export default async function AppProfileTasksPageLoading() {
   return (
     <UserTasksPageLoadingLayout
       navigationDesktop={<ProfileNavigationDesktop />}

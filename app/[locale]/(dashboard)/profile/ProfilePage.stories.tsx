@@ -13,9 +13,11 @@ import { ProfilePage } from "./ProfilePage";
 import { usePathname } from "next/navigation";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { PageDecorator } from "@/.storybook/PageDecorator";
+import { ProfileActions } from "@/components/users/ProfileActions";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { UserDetail, UserDetailSkeleton } from "@/components/users/UserDetail";
-import { PersonDetailHeaderImage } from "@/components/common/PersonDetailHeaderImage";
+import { Default as ProfileActionsStory } from "@/components/users/ProfileActions/ProfileActions.stories";
+import { PersonDetailHeader as PersonDetailHeaderStory } from "@/components/common/DetailHeader/DetailHeader.stories";
 
 const meta = {
   title: "components/pages/ProfilePage",
@@ -33,13 +35,8 @@ type Story = StoryObj<typeof meta>;
 export const Default = {
   args: {
     profileDetailContainer: <UserDetail {...UserDetailStory.args} />,
-    userHeaderContainer: (
-      <DetailHeader
-        title={UserDetailStory.args.fullName}
-        image={<PersonDetailHeaderImage imageUrl="/man.jpg" alt="John Doe" />}
-        subtitle={UserDetailStory.args.position?.name}
-      />
-    ),
+    userHeaderContainer: <DetailHeader {...PersonDetailHeaderStory.args} />,
+    profileActions: <ProfileActions {...ProfileActionsStory.args} />,
   },
 } satisfies Story;
 
@@ -56,12 +53,7 @@ export const WithoutSomeData = {
     profileDetailContainer: (
       <UserDetail {...UserDetailWithoutSomeDataStory.args} />
     ),
-    userHeaderContainer: (
-      <DetailHeader
-        title={UserDetailStory.args.fullName}
-        image={<PersonDetailHeaderImage />}
-        subtitle={UserDetailStory.args.position?.name}
-      />
-    ),
+    userHeaderContainer: <DetailHeader {...PersonDetailHeaderStory.args} />,
+    profileActions: <ProfileActions {...ProfileActionsStory.args} />,
   },
 } satisfies Story;

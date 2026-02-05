@@ -18,7 +18,7 @@ const initialState: ActionState = {
 };
 
 interface EditUserFormProps {
-  userId?: string;
+  userId: string;
   fullNameDefaultValue?: string;
   bioDefaultValue?: string;
   birthdateDefaultValue?: DateValue;

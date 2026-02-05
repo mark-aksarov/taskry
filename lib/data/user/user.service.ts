@@ -3,7 +3,11 @@ import prisma from "@/lib/prisma";
 import { headers } from "next/headers";
 import { requireSession } from "../utils/requireSession";
 import { AccessDeniedError, NotFoundError } from "../utils/error";
-import { UpdateUserInputDTO, CreateUserInputDTO } from "./user.dto";
+import {
+  UpdateUserInputDTO,
+  CreateUserInputDTO,
+  ChangePasswordInputDTO,
+} from "./user.dto";
 
 export const createUser = async (input: CreateUserInputDTO) => {
   // Authorization
@@ -81,6 +85,43 @@ export const updateUser = async (input: UpdateUserInputDTO) => {
         birthdate: input.birthdate,
         publicLink: input.publicLink,
       },
+    },
+    headers: await headers(),
+  });
+
+  return updatedUser;
+};
+
+export const changePassword = async (input: ChangePasswordInputDTO) => {
+  // Authorization
+  const {
+    user: { id: userId, role, workspaceId },
+  } = await requireSession();
+
+  // Check permission
+  const permission = await auth.api.userHasPermission({
+    body: {
+      userId,
+      permission: {
+        user: ["set-password"],
+      },
+    },
+  });
+
+  if (!permission.success || (role === "user" && userId !== input.id)) {
+    throw new AccessDeniedError(
+      "You do not have permission to change password.",
+    );
+  }
+
+  // Validate updated user. Since we use the better-auth API, we can't check users in the database directly.
+  await validateUser(workspaceId, input.id);
+
+  // Use better auth admin api to update user
+  const updatedUser = await auth.api.setUserPassword({
+    body: {
+      userId: input.id,
+      newPassword: input.newPassword,
     },
     headers: await headers(),
   });

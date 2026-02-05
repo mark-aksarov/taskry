@@ -3,12 +3,13 @@ import { ProfileNavigationMobile } from "@/components/users/ProfileNavigationMob
 import { ProfileNavigationDesktop } from "@/components/users/ProfileNavigationDesktop";
 
 interface ProfileTasksPageEmptyProps {
-  userId: string;
+  profileActions: React.ReactNode;
   newTaskFormContainer: React.ReactNode;
   userHeaderContainer: React.ReactNode;
 }
 
-export function ProfileTasksPageEmpty({
+export async function ProfileTasksPageEmpty({
+  profileActions,
   newTaskFormContainer,
   userHeaderContainer,
 }: ProfileTasksPageEmptyProps) {
@@ -16,7 +17,9 @@ export function ProfileTasksPageEmpty({
     <UserTasksPageEmptyLayout
       newTaskFormContainer={newTaskFormContainer}
       userHeaderContainer={userHeaderContainer}
-      navigationDesktop={<ProfileNavigationDesktop />}
+      navigationDesktop={
+        <ProfileNavigationDesktop profileActions={profileActions} />
+      }
       navigationMobile={<ProfileNavigationMobile />}
     />
   );

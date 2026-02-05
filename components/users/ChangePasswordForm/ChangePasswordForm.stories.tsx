@@ -1,14 +1,12 @@
 import { fn } from "storybook/test";
-import { EditUserForm } from "../EditUserForm";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { UserPositionSelect } from "../UserPositionSelect";
+import { ChangePasswordForm } from "../ChangePasswordForm";
 import { OverlayTriggerStateContext } from "react-aria-components";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { Default as UserPositionSelectStory } from "../UserPositionSelect/UserPositionSelect.stories";
 
 const meta = {
-  title: "components/users/EditUserForm",
-  component: EditUserForm,
+  title: "components/users/ChangePasswordForm",
+  component: ChangePasswordForm,
   tags: ["autodocs"],
   decorators: [
     (Story) => (
@@ -23,7 +21,7 @@ const meta = {
   parameters: {
     backgroundVariant: "alt",
   },
-} satisfies Meta<typeof EditUserForm>;
+} satisfies Meta<typeof ChangePasswordForm>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
@@ -31,7 +29,6 @@ type Story = StoryObj<typeof meta>;
 export const Default = {
   args: {
     userId: "user-1",
-    positionSelect: <UserPositionSelect {...UserPositionSelectStory.args} />,
-    updateUser: () => ({ status: "success" }),
+    changePassword: () => ({ status: "success" }),
   },
 } satisfies Story;

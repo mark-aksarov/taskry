@@ -13,11 +13,11 @@ import { TeamProfilePage } from "./TeamProfilePage";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { useParams, usePathname } from "next/navigation";
 import { PageDecorator } from "@/.storybook/PageDecorator";
+import { ProfileActions } from "@/components/users/ProfileActions";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { UserDetail, UserDetailSkeleton } from "@/components/users/UserDetail";
-import { PersonDetailHeaderImage } from "@/components/common/PersonDetailHeaderImage";
-
-const userId = "BKs42HvVDEZFoaJUmTqf1gTN0K8pUFjI";
+import { Default as ProfileActionsStory } from "@/components/users/ProfileActions/ProfileActions.stories";
+import { PersonDetailHeader as PersonDetailHeaderStory } from "@/components/common/DetailHeader/DetailHeader.stories";
 
 const meta = {
   title: "components/pages/TeamProfilePage",
@@ -25,9 +25,9 @@ const meta = {
   parameters: { layout: "fullscreen" },
   decorators: [PageDecorator, withThemedBackground],
   beforeEach: () => {
-    mocked(usePathname).mockReturnValue(`/team/${userId}`);
+    mocked(usePathname).mockReturnValue(`/team/user-1`);
     mocked(useParams).mockReturnValue({
-      id: userId,
+      id: "user-1",
     });
   },
 } satisfies Meta<typeof TeamProfilePage>;
@@ -38,13 +38,8 @@ type Story = StoryObj<typeof meta>;
 export const Default = {
   args: {
     profileDetailContainer: <UserDetail {...UserDetailStory.args} />,
-    userHeaderContainer: (
-      <DetailHeader
-        title={UserDetailStory.args.fullName}
-        image={<PersonDetailHeaderImage imageUrl="/man.jpg" alt="John Doe" />}
-        subtitle={UserDetailStory.args.position?.name}
-      />
-    ),
+    userHeaderContainer: <DetailHeader {...PersonDetailHeaderStory.args} />,
+    userActions: <ProfileActions {...ProfileActionsStory.args} />,
   },
 } satisfies Story;
 
@@ -52,6 +47,7 @@ export const Loading = {
   args: {
     profileDetailContainer: <UserDetailSkeleton />,
     userHeaderContainer: <DetailHeaderSkeleton />,
+    userActions: <ProfileActions {...ProfileActionsStory.args} />,
   },
 } satisfies Story;
 
@@ -60,12 +56,7 @@ export const WithoutSomeData = {
     profileDetailContainer: (
       <UserDetail {...UserDetailWithoutSomeDataStory.args} />
     ),
-    userHeaderContainer: (
-      <DetailHeader
-        title={UserDetailStory.args.fullName}
-        image={<PersonDetailHeaderImage />}
-        subtitle={UserDetailStory.args.position?.name}
-      />
-    ),
+    userHeaderContainer: <DetailHeader {...PersonDetailHeaderStory.args} />,
+    userActions: <ProfileActions {...ProfileActionsStory.args} />,
   },
 } satisfies Story;

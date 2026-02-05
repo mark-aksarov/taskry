@@ -1,10 +1,14 @@
 import { z } from "zod";
 import { hasGuestRole } from "@/lib/utils/hasGuestRole";
 import { getTaskCount } from "@/lib/data/task/task.dal";
+import { hasOwnerRole } from "@/lib/utils/hasOwnerRole";
 import { deleteTasks } from "@/lib/actions/task/deleteTasks";
+import { ProfileActions } from "@/components/users/ProfileActions";
+import { changePassword } from "@/lib/actions/user/changePassword";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { TeamProfileTasksPageEmpty } from "./TeamProfileTasksPageEmpty";
 import { pageSearchParam, pageSizeSearchParam } from "@/lib/schemas/base";
+import { ChangePasswordForm } from "@/components/users/ChangePasswordForm";
 import { updateTaskStatuses } from "@/lib/actions/task/updateTaskStatuses";
 import { UserTasksContainer } from "@/components/users/UserTasksContainer";
 import { UserTasksPageLayout } from "@/components/users/UserTasksPageLayout";
@@ -28,9 +32,9 @@ export default async function AppProfileTasksPage({
   searchParams: Promise<{ page?: string; pageSize?: string; sort?: string }>;
 }) {
   // Authorization
-  await requireProtectedPage();
+  const session = await requireProtectedPage();
 
-  const { id } = await params;
+  const { id: userId } = await params;
 
   // Validation
   const rawParams = await searchParams;
@@ -38,14 +42,29 @@ export default async function AppProfileTasksPage({
 
   // Get count
   const taskCount = await getTaskCount();
+
+  const isOwner = await hasOwnerRole();
   const guestMode = await hasGuestRole();
+
+  const userActions = (
+    <ProfileActions
+      guestMode={guestMode}
+      changePasswordForm={
+        <ChangePasswordForm userId={userId} changePassword={changePassword} />
+      }
+    />
+  );
+
+  const isAuthUser = session?.user.id === userId;
+  const showUserActions = isOwner || guestMode || isAuthUser;
 
   if (!taskCount)
     return (
       <TeamProfileTasksPageEmpty
-        userId={id}
+        userId={userId}
+        userActions={showUserActions && userActions}
         newTaskFormContainer={<NewTaskFormContainer />}
-        userHeaderContainer={<UserHeaderContainer userId={id} />}
+        userHeaderContainer={<UserHeaderContainer userId={userId} />}
       />
     );
 
@@ -53,13 +72,13 @@ export default async function AppProfileTasksPage({
     <UserTasksPageLayout
       userTasksContainer={
         <UserTasksContainer
-          userId={id}
+          userId={userId}
           page={page}
           pageSize={pageSize}
           sort={sort}
         />
       }
-      userHeaderContainer={<UserHeaderContainer userId={id} />}
+      userHeaderContainer={<UserHeaderContainer userId={userId} />}
       taskToolbarActionsMenuTrigger={
         <TaskToolbarActionsMenuTrigger
           guestMode={guestMode}
@@ -67,7 +86,9 @@ export default async function AppProfileTasksPage({
           updateStatusAction={updateTaskStatuses}
         />
       }
-      navigationDesktop={<UserNavigationDesktop />}
+      navigationDesktop={
+        <UserNavigationDesktop userActions={showUserActions && userActions} />
+      }
       navigationMobile={<UserNavigationMobile />}
     />
   );

@@ -15,6 +15,7 @@ import { ProfileNavigationDesktop } from "@/components/users/ProfileNavigationDe
 import { TaskToolbarActionsMenuTrigger } from "@/components/tasks/TaskToolbarActionsMenuTrigger";
 import { Default as NewTaskFormStory } from "@/components/tasks/NewTaskForm/NewTaskForm.stories";
 import { Default as UserTaskListStory } from "@/components/users/UserTaskList/UserTaskList.stories";
+import { Default as ProfileNavigationDesktopStory } from "../ProfileNavigationDesktop/ProfileNavigationDesktop.stories";
 
 const meta = {
   title: "components/users/UserTasksPageLayout",
@@ -46,7 +47,9 @@ export const Default = {
         updateStatusAction={fn()}
       />
     ),
-    navigationDesktop: <ProfileNavigationDesktop />,
+    navigationDesktop: (
+      <ProfileNavigationDesktop {...ProfileNavigationDesktopStory.args} />
+    ),
     navigationMobile: <ProfileNavigationMobile />,
   },
 } satisfies Story;

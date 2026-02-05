@@ -5,10 +5,13 @@ import { getTaskCount } from "@/lib/data/task/task.dal";
 import { hasGuestRole } from "@/lib/utils/hasGuestRole";
 import { deleteTasks } from "@/lib/actions/task/deleteTasks";
 import { ProfileTasksPageEmpty } from "./ProfileTasksPageEmpty";
+import { ProfileActions } from "@/components/users/ProfileActions";
+import { changePassword } from "@/lib/actions/user/changePassword";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { pageSearchParam, pageSizeSearchParam } from "@/lib/schemas/base";
 import { UserTasksContainer } from "@/components/users/UserTasksContainer";
 import { updateTaskStatuses } from "@/lib/actions/task/updateTaskStatuses";
+import { ChangePasswordForm } from "@/components/users/ChangePasswordForm";
 import { UserHeaderContainer } from "@/components/users/UserHeaderContainer";
 import { UserTasksPageLayout } from "@/components/users/UserTasksPageLayout";
 import { NewTaskFormContainer } from "@/components/tasks/NewTaskFormContainer";
@@ -44,10 +47,19 @@ export default async function AppProfileTasksPage({
   const taskCount = await getTaskCount();
   const guestMode = await hasGuestRole();
 
+  const profileActions = (
+    <ProfileActions
+      guestMode={guestMode}
+      changePasswordForm={
+        <ChangePasswordForm userId={userId} changePassword={changePassword} />
+      }
+    />
+  );
+
   if (!taskCount) {
     return (
       <ProfileTasksPageEmpty
-        userId={userId}
+        profileActions={profileActions}
         newTaskFormContainer={<NewTaskFormContainer />}
         userHeaderContainer={<UserHeaderContainer userId={userId} />}
       />
@@ -72,7 +84,9 @@ export default async function AppProfileTasksPage({
           updateStatusAction={updateTaskStatuses}
         />
       }
-      navigationDesktop={<ProfileNavigationDesktop />}
+      navigationDesktop={
+        <ProfileNavigationDesktop profileActions={profileActions} />
+      }
       navigationMobile={<ProfileNavigationMobile />}
     />
   );

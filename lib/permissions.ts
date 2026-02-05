@@ -6,7 +6,7 @@ const statements = {
   subtask: ["create", "update", "delete"],
   comment: ["create", "update", "delete"],
   customer: ["create", "update", "delete"],
-  user: ["create", "update", "delete"],
+  user: ["create", "update", "set-password", "delete"],
   company: ["create", "update", "delete"],
   position: ["create", "update", "delete"],
   projectCategory: ["create", "update", "delete"],
@@ -20,7 +20,7 @@ export const owner = ac.newRole(statements);
 
 export const user = ac.newRole({
   ...statements,
-  user: ["update"],
+  user: ["update", "set-password"],
 });
 
 export const guest = ac.newRole({

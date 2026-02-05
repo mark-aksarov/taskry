@@ -1,7 +1,9 @@
 import { DetailHeader } from "./DetailHeader";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { PersonDetailHeaderImage } from "../PersonDetailHeaderImage";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { TaskDetailHeaderImage } from "@/components/tasks/TaskDetailHeaderImage";
+import { ProjectDetailHeaderImage } from "@/components/projects/ProjectDetailHeaderImage";
 
 const meta = {
   title: "components/common/DetailHeader",
@@ -15,10 +17,26 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default = {
+export const TaskDetailHeader = {
   args: {
     title: "Design landing page",
     image: <TaskDetailHeaderImage />,
     subtitle: "Design",
+  },
+} satisfies Story;
+
+export const ProjectDetailHeader = {
+  args: {
+    title: "Web app",
+    image: <ProjectDetailHeaderImage />,
+    subtitle: "Design",
+  },
+} satisfies Story;
+
+export const PersonDetailHeader = {
+  args: {
+    title: "John Doe",
+    image: <PersonDetailHeaderImage imageUrl="/man.jpg" alt="John Doe" />,
+    subtitle: "Developer",
   },
 } satisfies Story;

@@ -1,12 +1,19 @@
 "use client";
 
 import { useParams } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { usePathname } from "@/i18n/navigation";
+import { Divider } from "@/components/ui/Divider";
 import { CalendarCheck, Info } from "lucide-react";
 import { NavigationButton } from "@/components/common/NavigationButton";
-import { useTranslations } from "next-intl";
 
-export function UserNavigationDesktop() {
+interface UserNavigationDesktopProps {
+  userActions?: React.ReactNode;
+}
+
+export function UserNavigationDesktop({
+  userActions,
+}: UserNavigationDesktopProps) {
   const t = useTranslations("users.UserNavigationDesktop");
 
   const pathname = usePathname();
@@ -31,6 +38,13 @@ export function UserNavigationDesktop() {
         <CalendarCheck size={18} strokeWidth={1.5} absoluteStrokeWidth />
         {t("assignedTasks")}
       </NavigationButton>
+
+      {userActions && (
+        <>
+          <Divider />
+          {userActions}
+        </>
+      )}
     </nav>
   );
 }

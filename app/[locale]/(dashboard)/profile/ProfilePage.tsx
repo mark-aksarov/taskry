@@ -8,7 +8,6 @@ import { useTranslations } from "next-intl";
 import { Card } from "@/components/common/Card";
 import { PageGrid } from "@/components/common/PageGrid";
 import { PageContainer } from "@/components/common/PageContainer";
-import { ProfileActions } from "@/components/users/ProfileActions";
 import { UserDetailCard } from "@/components/users/UserDetailCard";
 import { ProfileNavigationMobile } from "@/components/users/ProfileNavigationMobile";
 import { ProfileNavigationDesktop } from "@/components/users/ProfileNavigationDesktop";
@@ -16,11 +15,13 @@ import { ProfileNavigationDesktop } from "@/components/users/ProfileNavigationDe
 interface ProfilePageProps {
   profileDetailContainer: React.ReactNode;
   userHeaderContainer: React.ReactNode;
+  profileActions: React.ReactNode;
 }
 
 export function ProfilePage({
   profileDetailContainer,
   userHeaderContainer,
+  profileActions,
 }: ProfilePageProps) {
   const t = useTranslations("app.ProfilePage");
 
@@ -29,7 +30,9 @@ export function ProfilePage({
       <UserDetailCard
         profileDetail={profileDetailContainer}
         profileHeader={userHeaderContainer}
-        navigationDesktop={<ProfileNavigationDesktop />}
+        navigationDesktop={
+          <ProfileNavigationDesktop profileActions={profileActions} />
+        }
       />
 
       <PageGrid className="md:hidden">
@@ -42,11 +45,7 @@ export function ProfilePage({
         </ToolbarMobileBottom>
 
         <div className="flex flex-col px-1.5">{userHeaderContainer}</div>
-
-        <Card className="flex flex-col px-1.5">
-          <ProfileActions />
-        </Card>
-
+        <Card className="flex flex-col px-1.5">{profileActions}</Card>
         <Card className="flex flex-col">{profileDetailContainer}</Card>
       </PageGrid>
     </PageContainer>

@@ -9,16 +9,17 @@ import { Card } from "@/components/common/Card";
 import { PageGrid } from "@/components/common/PageGrid";
 import { PageContainer } from "@/components/common/PageContainer";
 import { UserDetailCard } from "@/components/users/UserDetailCard";
-import { ProfileActions } from "@/components/users/ProfileActions";
 import { UserNavigationMobile } from "@/components/users/UserNavigationMobile";
 import { UserNavigationDesktop } from "@/components/users/UserNavigationDesktop";
 
 interface TeamProfilePageProps {
+  userActions: React.ReactNode;
   profileDetailContainer: React.ReactNode;
   userHeaderContainer: React.ReactNode;
 }
 
 export function TeamProfilePage({
+  userActions,
   profileDetailContainer,
   userHeaderContainer,
 }: TeamProfilePageProps) {
@@ -29,7 +30,7 @@ export function TeamProfilePage({
       <UserDetailCard
         profileDetail={profileDetailContainer}
         profileHeader={userHeaderContainer}
-        navigationDesktop={<UserNavigationDesktop />}
+        navigationDesktop={<UserNavigationDesktop userActions={userActions} />}
       />
 
       <PageGrid className="md:hidden">
@@ -42,11 +43,9 @@ export function TeamProfilePage({
         </ToolbarMobileBottom>
 
         <div className="flex flex-col px-1.5">{userHeaderContainer}</div>
-
-        <Card className="flex flex-col px-1.5">
-          <ProfileActions />
-        </Card>
-
+        {userActions && (
+          <Card className="flex flex-col px-1.5">{userActions}</Card>
+        )}
         <Card className="flex flex-col">{profileDetailContainer}</Card>
       </PageGrid>
     </PageContainer>

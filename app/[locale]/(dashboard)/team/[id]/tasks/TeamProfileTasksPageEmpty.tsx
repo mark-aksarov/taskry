@@ -4,11 +4,13 @@ import { UserTasksPageEmptyLayout } from "@/components/users/UserTasksPageLayout
 
 interface TeamProfileTasksPageEmptyProps {
   userId: string;
+  userActions?: React.ReactNode;
   newTaskFormContainer: React.ReactNode;
   userHeaderContainer: React.ReactNode;
 }
 
 export function TeamProfileTasksPageEmpty({
+  userActions,
   newTaskFormContainer,
   userHeaderContainer,
 }: TeamProfileTasksPageEmptyProps) {
@@ -16,7 +18,7 @@ export function TeamProfileTasksPageEmpty({
     <UserTasksPageEmptyLayout
       newTaskFormContainer={newTaskFormContainer}
       userHeaderContainer={userHeaderContainer}
-      navigationDesktop={<UserNavigationDesktop />}
+      navigationDesktop={<UserNavigationDesktop userActions={userActions} />}
       navigationMobile={<UserNavigationMobile />}
     />
   );
