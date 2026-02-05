@@ -1,8 +1,8 @@
 import {
-  FormModal,
-  FormModalDialog,
-  FormModalSubmitButton,
-} from "@/components/common/FormModal";
+  FormBaseModal,
+  FormBaseModalDialog,
+  FormBaseModalSubmitButton,
+} from "@/components/common/FormBaseModal";
 
 import { useTranslations } from "next-intl";
 import { ModalProps } from "@/components/ui/Modal";
@@ -20,17 +20,17 @@ export function NewProjectModal({
   const t = useTranslations("projects.NewProjectModal");
 
   return (
-    <FormModal data-test="new-project-modal" {...props}>
-      <FormModalDialog>
+    <FormBaseModal data-test="new-project-modal" {...props}>
+      <FormBaseModalDialog>
         <DialogHeader>{t("title")}</DialogHeader>
         <DialogBody>{newProjectFormContainer}</DialogBody>
         <DialogFooter>
-          <FormModalSubmitButton
+          <FormBaseModalSubmitButton
             form="new-project-form"
             label={t("submitButtonLabel")}
           />
         </DialogFooter>
-      </FormModalDialog>
-    </FormModal>
+      </FormBaseModalDialog>
+    </FormBaseModal>
   );
 }

@@ -1,8 +1,8 @@
 import {
-  FormModal,
-  FormModalDialog,
-  FormModalSubmitButton,
-} from "@/components/common/FormModal";
+  FormBaseModal,
+  FormBaseModalDialog,
+  FormBaseModalSubmitButton,
+} from "@/components/common/FormBaseModal";
 
 import { ModalProps } from "@/components/ui/Modal";
 import { DialogBody, DialogFooter, DialogHeader } from "@/components/ui/Dialog";
@@ -21,17 +21,17 @@ export function EditUserModal({
   const t = useTranslations("users.EditUserModal");
 
   return (
-    <FormModal data-test="edit-user-modal" {...props}>
-      <FormModalDialog>
+    <FormBaseModal data-test="edit-user-modal" {...props}>
+      <FormBaseModalDialog>
         <DialogHeader>{t("title")}</DialogHeader>
         <DialogBody>{editUserFormContainer}</DialogBody>
         <DialogFooter>
-          <FormModalSubmitButton
+          <FormBaseModalSubmitButton
             form="edit-user-form"
             label={t("submitButtonLabel")}
           />
         </DialogFooter>
-      </FormModalDialog>
-    </FormModal>
+      </FormBaseModalDialog>
+    </FormBaseModal>
   );
 }

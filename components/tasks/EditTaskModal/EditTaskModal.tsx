@@ -1,8 +1,8 @@
 import {
-  FormModal,
-  FormModalDialog,
-  FormModalSubmitButton,
-} from "@/components/common/FormModal";
+  FormBaseModal,
+  FormBaseModalDialog,
+  FormBaseModalSubmitButton,
+} from "@/components/common/FormBaseModal";
 
 import { useTranslations } from "next-intl";
 import { ModalProps } from "@/components/ui/Modal";
@@ -20,17 +20,17 @@ export function EditTaskModal({
   const t = useTranslations("tasks.EditTaskModal");
 
   return (
-    <FormModal data-test="edit-task-modal" {...props}>
-      <FormModalDialog>
+    <FormBaseModal data-test="edit-task-modal" {...props}>
+      <FormBaseModalDialog>
         <DialogHeader>{t("title")}</DialogHeader>
         <DialogBody>{editTaskFormContainer}</DialogBody>
         <DialogFooter>
-          <FormModalSubmitButton
+          <FormBaseModalSubmitButton
             form="edit-task-form"
             label={t("submitButtonLabel")}
           />
         </DialogFooter>
-      </FormModalDialog>
-    </FormModal>
+      </FormBaseModalDialog>
+    </FormBaseModal>
   );
 }

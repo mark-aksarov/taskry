@@ -1,8 +1,8 @@
 import {
-  FormModal,
-  FormModalDialog,
-  FormModalSubmitButton,
-} from "@/components/common/FormModal";
+  FormBaseModal,
+  FormBaseModalDialog,
+  FormBaseModalSubmitButton,
+} from "@/components/common/FormBaseModal";
 
 import { ModalProps } from "@/components/ui/Modal";
 import { DialogBody, DialogFooter, DialogHeader } from "@/components/ui/Dialog";
@@ -21,17 +21,17 @@ export function NewCustomerModal({
   const t = useTranslations("customers.NewCustomerModal");
 
   return (
-    <FormModal data-test="new-customer-modal" {...props}>
-      <FormModalDialog>
+    <FormBaseModal data-test="new-customer-modal" {...props}>
+      <FormBaseModalDialog>
         <DialogHeader>{t("title")}</DialogHeader>
         <DialogBody>{newCustomerFormContainer}</DialogBody>
         <DialogFooter>
-          <FormModalSubmitButton
+          <FormBaseModalSubmitButton
             form="new-customer-form"
             label={t("submitButtonLabel")}
           />
         </DialogFooter>
-      </FormModalDialog>
-    </FormModal>
+      </FormBaseModalDialog>
+    </FormBaseModal>
   );
 }
