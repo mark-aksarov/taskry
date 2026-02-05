@@ -1,13 +1,19 @@
 {
   "EditUserForm": {
     "error": {
-      "updateError": "A server error occurred. Failed to update user."
+      "accessDenied": "You are not allowed to create users",
+      "invalidEmail": "Invalid email address",
+      "userAlreadyExists": "User already exists with this email",
+      "userCreationFailed": "Failed to create user",
+      "internalServerError": "A server error occurred. Failed to update user."
     }
   },
 
   "NewUserForm": {
     "error": {
-      "creationError": "A server error occurred. Failed to create user."
+      "accessDenied": "You are not allowed to update users",
+      "noDataToUpdate": "No data to update",
+      "internalServerError": "A server error occurred. Failed to create user."
     }
   },
 

@@ -10,6 +10,7 @@ export function ForgetPasswordFormEmailField() {
     <TextField
       label={t("label")}
       type="email"
+      data-testid="email-field"
       placeholder={t("placeholder")}
       isRequired
       maxLength={254}
