@@ -21,6 +21,7 @@ import { TaskListItemCheckbox } from "./TaskListItemCheckbox";
 import { ImageContainer } from "@/components/common/ImageContainer";
 import { getTaskStatusBadgeColor } from "../getTaskStatusBadgeColor";
 import { useSyncSelectionTaskItem } from "@/lib/hooks/useTaskSelection";
+import { TaskCommentsModalTrigger } from "../TaskCommentsModalTrigger";
 
 export interface TaskListItemProps {
   id: number;
@@ -39,9 +40,10 @@ export interface TaskListItemProps {
     id: number;
     title: string;
   };
+  commentsCount: number;
   status: TaskStatus;
   showCheckbox?: boolean;
-  commentModalTrigger: React.ReactNode;
+  taskCommentsModal: React.ReactNode;
   menuTrigger: React.ReactNode;
   taskDetailModal: React.ReactNode;
   taskDetailBottomSheet: React.ReactNode;
@@ -56,9 +58,10 @@ export const TaskListItem = ({
   assignee,
   category,
   project,
+  commentsCount,
   status,
   showCheckbox,
-  commentModalTrigger,
+  taskCommentsModal,
   menuTrigger,
   taskDetailModal,
   taskDetailBottomSheet,
@@ -172,7 +175,12 @@ export const TaskListItem = ({
           {tStatus(`${status}`)}
         </ItemBaseBadge>
       }
-      commentsModalTriggerSlot={commentModalTrigger}
+      commentsModalTriggerSlot={
+        <TaskCommentsModalTrigger
+          commentsCount={commentsCount}
+          modal={taskCommentsModal}
+        />
+      }
       menuTriggerSlot={menuTrigger}
     />
   );

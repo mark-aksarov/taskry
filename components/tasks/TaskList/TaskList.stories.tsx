@@ -4,10 +4,10 @@ import { TaskListItem } from "../TaskListItem";
 import { EditTaskForm } from "../EditTaskForm";
 import { TaskDetailModal } from "../TaskDetailModal";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { TaskCommentsModal } from "../TaskCommentsModal";
 import { TaskDetailBottomSheet } from "../TaskDetailBottomSheet";
 import { ProjectStatus, TaskStatus } from "@/generated/prisma/enums";
 import { UserDetailModal } from "@/components/users/UserDetailModal";
-import { TaskCommentsModalTrigger } from "../TaskCommentsModalTrigger";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { TaskItemActionMenuTrigger } from "../TaskItemActionMenuTrigger";
 import { ProjectDetailModal } from "@/components/projects/ProjectDetailModal";
@@ -250,10 +250,10 @@ export const getTaskListItems = ({
       key={task.id}
       {...task}
       showCheckbox={showCheckbox}
-      commentModalTrigger={
-        <TaskCommentsModalTrigger
+      commentsCount={task.commentsCount}
+      taskCommentsModal={
+        <TaskCommentsModal
           taskId={1}
-          commentsCount={10}
           taskCommentsContainer={<MockedCommentsContainer />}
           sendCommentAction={fn()}
           updateCommentAction={fn()}

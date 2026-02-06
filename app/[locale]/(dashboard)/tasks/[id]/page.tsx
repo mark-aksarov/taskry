@@ -1,5 +1,15 @@
+import { notFound } from "next/navigation";
 import { TaskDetailPage } from "./TaskDetailPage";
+import { hasGuestRole } from "@/lib/utils/hasGuestRole";
+import { getTaskSummary } from "@/lib/data/task/task.dal";
+import { deleteTasks } from "@/lib/actions/task/deleteTasks";
+import { sendComment } from "@/lib/actions/comment/sendComment";
+import { updateComment } from "@/lib/actions/comment/updateComment";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
+import { TaskDetailActions } from "@/components/tasks/TaskDetailActions";
+import { TaskCommentsModal } from "@/components/tasks/TaskCommentsModal";
+import { TaskCommentsContainer } from "@/components/tasks/TaskCommentsContainer";
+import { EditTaskFormContainer } from "@/components/tasks/EditTaskFormContainer";
 import { TaskDetailAltContainer } from "@/components/tasks/TaskDetailAltContainer";
 import { TaskDetailHeaderContainer } from "@/components/tasks/TaskDetailHeaderContainer";
 
@@ -11,11 +21,42 @@ export default async function AppTaskDetailPage({
   await requireProtectedPage();
 
   const { id } = await params;
+  const numberId = Number(id);
+
+  const taskSummary = await getTaskSummary(numberId);
+
+  if (!taskSummary) {
+    notFound();
+  }
+
+  const guestMode = await hasGuestRole();
 
   return (
     <TaskDetailPage
-      taskDetailContainer={<TaskDetailAltContainer taskId={Number(id)} />}
-      taskHeaderContainer={<TaskDetailHeaderContainer taskId={Number(id)} />}
+      taskDetailContainer={<TaskDetailAltContainer taskId={numberId} />}
+      taskHeaderContainer={<TaskDetailHeaderContainer taskId={numberId} />}
+      taskDetailActions={
+        <TaskDetailActions
+          guestMode={guestMode}
+          deleteTask={deleteTasks}
+          editTaskFormContainer={<EditTaskFormContainer taskId={numberId} />}
+          taskId={numberId}
+          taskTitle={taskSummary.title}
+          commentsModal={
+            <TaskCommentsModal
+              taskId={numberId}
+              taskCommentsContainer={
+                <TaskCommentsContainer
+                  guestMode={guestMode}
+                  taskId={numberId}
+                />
+              }
+              sendCommentAction={sendComment}
+              updateCommentAction={updateComment}
+            />
+          }
+        />
+      }
     />
   );
 }

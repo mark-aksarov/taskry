@@ -13,12 +13,12 @@ import { deleteTasks } from "@/lib/actions/task/deleteTasks";
 import { sendComment } from "@/lib/actions/comment/sendComment";
 import { updateComment } from "@/lib/actions/comment/updateComment";
 import { TaskDetailModal } from "@/components/tasks/TaskDetailModal";
+import { TaskCommentsModal } from "@/components/tasks/TaskCommentsModal";
 import { updateTaskStatuses } from "@/lib/actions/task/updateTaskStatuses";
 import { TaskDetailContainer } from "@/components/tasks/TaskDetailContainer";
 import { TaskCommentsContainer } from "@/components/tasks/TaskCommentsContainer";
 import { TaskDetailBottomSheet } from "@/components/tasks/TaskDetailBottomSheet";
 import { EditTaskFormContainer } from "@/components/tasks/EditTaskFormContainer";
-import { TaskCommentsModalTrigger } from "@/components/tasks/TaskCommentsModalTrigger";
 import { TaskItemActionMenuTrigger } from "@/components/tasks/TaskItemActionMenuTrigger";
 
 interface UserTasksContainerProps {
@@ -82,10 +82,10 @@ export async function UserTasksContainer({
                   }
                 />
               }
-              commentModalTrigger={
-                <TaskCommentsModalTrigger
+              commentsCount={task.commentsCount}
+              taskCommentsModal={
+                <TaskCommentsModal
                   taskId={task.id}
-                  commentsCount={task.commentsCount}
                   taskCommentsContainer={
                     <TaskCommentsContainer
                       guestMode={guestMode}

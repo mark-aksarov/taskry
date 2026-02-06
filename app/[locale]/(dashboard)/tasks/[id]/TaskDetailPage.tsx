@@ -8,16 +8,17 @@ import { Card } from "@/components/common/Card";
 import { PageGrid } from "@/components/common/PageGrid";
 import { PageContainer } from "@/components/common/PageContainer";
 import { TaskDetailCard } from "@/components/tasks/TaskDetailCard";
-import { TaskDetailActions } from "@/components/tasks/TaskDetailActions";
 
 interface TaskDetailPageProps {
   taskDetailContainer: React.ReactNode;
   taskHeaderContainer: React.ReactNode;
+  taskDetailActions: React.ReactNode;
 }
 
 export function TaskDetailPage({
   taskDetailContainer,
   taskHeaderContainer,
+  taskDetailActions,
 }: TaskDetailPageProps) {
   const t = useTranslations("app.TaskDetailPage");
 
@@ -26,6 +27,7 @@ export function TaskDetailPage({
       <TaskDetailCard
         taskDetail={taskDetailContainer}
         taskDetailHeader={taskHeaderContainer}
+        taskDetailActions={taskDetailActions}
       />
 
       <PageGrid className="md:hidden">
@@ -34,11 +36,7 @@ export function TaskDetailPage({
         </ToolbarMobileTop>
 
         <div className="flex flex-col px-1.5">{taskHeaderContainer}</div>
-
-        <Card className="flex flex-col px-1.5">
-          <TaskDetailActions />
-        </Card>
-
+        <Card className="flex flex-col px-1.5">{taskDetailActions}</Card>
         <Card className="flex flex-col">{taskDetailContainer}</Card>
       </PageGrid>
     </PageContainer>

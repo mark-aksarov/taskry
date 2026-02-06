@@ -9,19 +9,29 @@ declare namespace Cypress {
 
     setDatePickerDate(
       dataTestAttribute: string,
-      day: string,
       month: string,
+      day: string,
       year: string,
     ): Chainable<JQuery<HTMLElement>>;
 
-    fillEditForm(data: {
+    fillEditUserForm(data: {
       fullName: string;
       bio: string;
       birthdate: { month: string; day: string; year: string };
       phoneNumber: string;
       publicLink: string;
       address: string;
-      positionId: string;
+      positionKey: string;
+    }): Chainable<JQuery<HTMLElement>>;
+
+    fillEditTaskForm(data: {
+      title: string;
+      description: string;
+      deadline: { day: string; month: string; year: string };
+      statusKey: string;
+      categoryKey: string;
+      projectKey: string;
+      assigneeKey: string;
     }): Chainable<JQuery<HTMLElement>>;
 
     changePassword(newPassword: string): Chainable<JQuery<HTMLElement>>;

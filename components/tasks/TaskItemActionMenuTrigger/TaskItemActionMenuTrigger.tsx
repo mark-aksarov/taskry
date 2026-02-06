@@ -3,7 +3,7 @@
 import {
   ActionFn,
   ActionState,
-  DeleteProjectsPayload,
+  DeleteTasksPayload,
   UpdateTaskStatusesPayload,
 } from "@/lib/actions/types";
 
@@ -29,7 +29,7 @@ export type TaskItemActionMenuTriggerProps = {
   taskTitle: string;
   taskStatus: TaskStatus;
   className?: string;
-  deleteAction: ActionFn<ActionState, DeleteProjectsPayload>;
+  deleteAction: ActionFn<ActionState, DeleteTasksPayload>;
   updateStatusAction: ActionFn<ActionState, UpdateTaskStatusesPayload>;
   editTaskFormContainer: React.ReactNode;
 };

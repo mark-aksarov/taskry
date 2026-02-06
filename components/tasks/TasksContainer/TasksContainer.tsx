@@ -8,6 +8,7 @@ import { TaskGridItem } from "../TaskGridItem";
 import { TaskDetailModal } from "../TaskDetailModal";
 import { getTaskList } from "@/lib/data/task/task.dal";
 import { hasGuestRole } from "@/lib/utils/hasGuestRole";
+import { TaskCommentsModal } from "../TaskCommentsModal";
 import { TaskListItemDTO } from "@/lib/data/task/task.dto";
 import { deleteTasks } from "@/lib/actions/task/deleteTasks";
 import { TaskDetailContainer } from "../TaskDetailContainer";
@@ -17,7 +18,6 @@ import { TaskDetailBottomSheet } from "../TaskDetailBottomSheet";
 import { TaskCommentsContainer } from "../TaskCommentsContainer";
 import { updateComment } from "@/lib/actions/comment/updateComment";
 import { UserDetailModal } from "@/components/users/UserDetailModal";
-import { TaskCommentsModalTrigger } from "../TaskCommentsModalTrigger";
 import { TaskItemActionMenuTrigger } from "../TaskItemActionMenuTrigger";
 import { updateTaskStatuses } from "@/lib/actions/task/updateTaskStatuses";
 import { UserDetailContainer } from "@/components/users/UserDetailContainer";
@@ -90,10 +90,9 @@ export async function TasksContainer({
                     }
                   />
                 }
-                commentModalTrigger={
-                  <TaskCommentsModalTrigger
+                taskCommentsModal={
+                  <TaskCommentsModal
                     taskId={task.id}
-                    commentsCount={task.commentsCount}
                     taskCommentsContainer={
                       <TaskCommentsContainer
                         guestMode={guestMode}
@@ -170,10 +169,9 @@ export async function TasksContainer({
                   }
                 />
               }
-              commentModalTrigger={
-                <TaskCommentsModalTrigger
+              taskCommentsModal={
+                <TaskCommentsModal
                   taskId={task.id}
-                  commentsCount={task.commentsCount}
                   taskCommentsContainer={
                     <TaskCommentsContainer
                       guestMode={guestMode}

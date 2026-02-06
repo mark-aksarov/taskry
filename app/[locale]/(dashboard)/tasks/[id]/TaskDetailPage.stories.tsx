@@ -19,7 +19,9 @@ import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { useParams, usePathname } from "next/navigation";
 import { PageDecorator } from "@/.storybook/PageDecorator";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { TaskDetailActions } from "@/components/tasks/TaskDetailActions";
 import { TaskDetailHeader as TaskDetailHeaderStory } from "@/components/common/DetailHeader/DetailHeader.stories";
+import { Default as TaskDetailActionsStory } from "@/components/tasks/TaskDetailActions/TaskDetailActions.stories";
 
 const meta = {
   title: "components/pages/TaskDetailPage",
@@ -41,6 +43,7 @@ export const Default = {
   args: {
     taskDetailContainer: <TaskDetailAlt {...TaskDetailStory.args} />,
     taskHeaderContainer: <DetailHeader {...TaskDetailHeaderStory.args} />,
+    taskDetailActions: <TaskDetailActions {...TaskDetailActionsStory.args} />,
   },
 } satisfies Story;
 
@@ -48,6 +51,7 @@ export const Loading = {
   args: {
     taskDetailContainer: <TaskDetailAltSkeleton />,
     taskHeaderContainer: <DetailHeaderSkeleton />,
+    taskDetailActions: <TaskDetailActions {...TaskDetailActionsStory.args} />,
   },
 } satisfies Story;
 
@@ -57,5 +61,6 @@ export const WithoutSomeData = {
       <TaskDetailAlt {...TaskDetailWithoutSomeDataStory.args} />
     ),
     taskHeaderContainer: <DetailHeaderSkeleton />,
+    taskDetailActions: <TaskDetailActions {...TaskDetailActionsStory.args} />,
   },
 } satisfies Story;

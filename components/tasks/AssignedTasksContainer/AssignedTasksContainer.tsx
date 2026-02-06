@@ -14,6 +14,7 @@ import { TaskListItem } from "../TaskListItem";
 import { TaskDetailModal } from "../TaskDetailModal";
 import { getTaskList } from "@/lib/data/task/task.dal";
 import { hasGuestRole } from "@/lib/utils/hasGuestRole";
+import { TaskCommentsModal } from "../TaskCommentsModal";
 import { deleteTasks } from "@/lib/actions/task/deleteTasks";
 import { TaskDetailContainer } from "../TaskDetailContainer";
 import { NewTaskFormContainer } from "../NewTaskFormContainer";
@@ -23,7 +24,6 @@ import { EditTaskFormContainer } from "../EditTaskFormContainer";
 import { TaskCommentsContainer } from "../TaskCommentsContainer";
 import { updateComment } from "@/lib/actions/comment/updateComment";
 import { UserDetailModal } from "@/components/users/UserDetailModal";
-import { TaskCommentsModalTrigger } from "../TaskCommentsModalTrigger";
 import { TaskItemActionMenuTrigger } from "../TaskItemActionMenuTrigger";
 import { updateTaskStatuses } from "@/lib/actions/task/updateTaskStatuses";
 import { UserDetailContainer } from "@/components/users/UserDetailContainer";
@@ -112,10 +112,10 @@ async function AssignedTasksContainerInner({
                   }
                 />
               }
-              commentModalTrigger={
-                <TaskCommentsModalTrigger
+              commentsCount={task.commentsCount}
+              taskCommentsModal={
+                <TaskCommentsModal
                   taskId={task.id}
-                  commentsCount={task.commentsCount}
                   taskCommentsContainer={
                     <TaskCommentsContainer
                       guestMode={guestMode}

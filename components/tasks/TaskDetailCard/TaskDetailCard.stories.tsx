@@ -5,11 +5,13 @@ import {
 
 import { TaskDetailCard } from "./TaskDetailCard";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { TaskDetailActions } from "../TaskDetailActions";
 import { TaskDetailAlt, TaskDetailAltSkeleton } from "../TaskDetailAlt";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { Default as TaskDetailStory } from "../TaskDetail/TaskDetail.stories";
 import { WithoutSomeData as TaskDetailWithoutSomeDataStory } from "../TaskDetail/TaskDetail.stories";
 import { TaskDetailHeader as TaskDetailHeaderStory } from "@/components/common/DetailHeader/DetailHeader.stories";
+import { Default as TaskDetailActionsStory } from "@/components/tasks/TaskDetailActions/TaskDetailActions.stories";
 
 const meta = {
   title: "components/tasks/TaskDetailCard",
@@ -24,6 +26,7 @@ export const Default = {
   args: {
     taskDetail: <TaskDetailAlt {...TaskDetailStory.args} />,
     taskDetailHeader: <DetailHeader {...TaskDetailHeaderStory.args} />,
+    taskDetailActions: <TaskDetailActions {...TaskDetailActionsStory.args} />,
   },
 } satisfies Story;
 
@@ -31,6 +34,7 @@ export const Loading = {
   args: {
     taskDetail: <TaskDetailAltSkeleton />,
     taskDetailHeader: <DetailHeaderSkeleton />,
+    taskDetailActions: <TaskDetailActions {...TaskDetailActionsStory.args} />,
   },
 } satisfies Story;
 

@@ -4,9 +4,9 @@ import { EditTaskForm } from "../EditTaskForm";
 import { TaskDetailModal } from "../TaskDetailModal";
 import { TaskStatus } from "@/generated/prisma/enums";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { TaskCommentsModal } from "../TaskCommentsModal";
 import { TaskDetailBottomSheet } from "../TaskDetailBottomSheet";
 import { UserDetailModal } from "@/components/users/UserDetailModal";
-import { TaskCommentsModalTrigger } from "../TaskCommentsModalTrigger";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { TaskItemActionMenuTrigger } from "../TaskItemActionMenuTrigger";
 import { Default as EditTaskFormStory } from "../EditTaskForm/EditTaskForm.stories";
@@ -30,10 +30,9 @@ const meta = {
   render: (args) => (
     <TaskGridItem
       {...args}
-      commentModalTrigger={
-        <TaskCommentsModalTrigger
+      taskCommentsModal={
+        <TaskCommentsModal
           taskId={1}
-          commentsCount={10}
           taskCommentsContainer={<MockedCommentsContainer />}
           sendCommentAction={fn()}
           updateCommentAction={fn()}
@@ -75,6 +74,7 @@ export const Default = {
     status: TaskStatus.pending,
     subtasksTotal: 6,
     subtasksDone: 2,
+    commentsCount: 5,
   },
 } satisfies Story;
 

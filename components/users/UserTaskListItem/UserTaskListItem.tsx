@@ -15,7 +15,9 @@ import {
 import { TaskStatus } from "@/generated/prisma/enums";
 import { useFormatter, useTranslations } from "next-intl";
 import { UserTaskListItemLayout } from "./UserTaskListItemLayout";
+import { useSyncSelectionTaskItem } from "@/lib/hooks/useTaskSelection";
 import { getTaskStatusBadgeColor } from "@/components/tasks/getTaskStatusBadgeColor";
+import { TaskCommentsModalTrigger } from "@/components/tasks/TaskCommentsModalTrigger";
 import { TaskListItemCheckbox } from "@/components/tasks/TaskListItem/TaskListItemCheckbox";
 
 export interface UserTaskListItemProps {
@@ -23,7 +25,8 @@ export interface UserTaskListItemProps {
   title: string;
   deadline?: Date;
   status: TaskStatus;
-  commentModalTrigger?: React.ReactNode;
+  commentsCount: number;
+  taskCommentsModal: React.ReactNode;
   menuTrigger: React.ReactNode;
   taskDetailModal: React.ReactNode;
   taskDetailBottomSheet: React.ReactNode;
@@ -34,13 +37,16 @@ export const UserTaskListItem = ({
   title,
   deadline,
   status,
-  commentModalTrigger,
+  commentsCount,
+  taskCommentsModal,
   menuTrigger,
   taskDetailModal,
   taskDetailBottomSheet,
 }: UserTaskListItemProps) => {
   const t = useTranslations("users.UserTaskListItem");
   const tStatus = useTranslations("tasks.TaskStatus");
+
+  useSyncSelectionTaskItem(id, title, status);
 
   const format = useFormatter();
 
@@ -56,6 +62,7 @@ export const UserTaskListItem = ({
 
   return (
     <UserTaskListItemLayout
+      checkboxSlot={<TaskListItemCheckbox id={id} />}
       deadlineSlot={
         <ListItemInfo>
           <ListItemTitle>
@@ -84,7 +91,12 @@ export const UserTaskListItem = ({
           {tStatus(`${status}`)}
         </ItemBaseBadge>
       }
-      commentsSlot={commentModalTrigger}
+      commentsSlot={
+        <TaskCommentsModalTrigger
+          commentsCount={commentsCount}
+          modal={taskCommentsModal}
+        />
+      }
       actionMenuSlot={menuTrigger}
     />
   );

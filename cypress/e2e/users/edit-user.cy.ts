@@ -12,7 +12,7 @@ describe("edit an user", () => {
     phoneNumber: "+654321",
     publicLink: "https://example.com/updated-public-link",
     address: "Updated User Address",
-    positionId: "3",
+    positionKey: "3",
   };
 
   describe("team page", () => {
@@ -23,7 +23,7 @@ describe("edit an user", () => {
       cy.getByData("user-item-user-1-action-menu-trigger").click();
       cy.getMenuItem("edit").click();
 
-      cy.fillEditForm(userData);
+      cy.fillEditUserForm(userData);
 
       // assert
       cy.getByData("users-list").within(() => {
@@ -68,7 +68,7 @@ describe("edit an user", () => {
 
       cy.getByData("edit-user-button").filter(":visible").click();
 
-      cy.fillEditForm(userData);
+      cy.fillEditUserForm(userData);
 
       // assert
       cy.getByData("user-card").within(() => {
@@ -119,7 +119,7 @@ describe("edit an user", () => {
 
       cy.getByData("edit-user-button").filter(":visible").click();
 
-      cy.fillEditForm(userData);
+      cy.fillEditUserForm(userData);
 
       // assert
       cy.getByData("user-card").within(() => {

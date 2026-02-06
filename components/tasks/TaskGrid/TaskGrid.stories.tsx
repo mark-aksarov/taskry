@@ -17,6 +17,7 @@ import { Default as TaskDetailModalStory } from "../TaskDetailModal/TaskDetailMo
 import { Default as UserDetailModalStory } from "@/components/users/UserDetailModal/UserDetailModal.stories";
 import { Default as TaskDetailBottomSheetStory } from "../TaskDetailBottomSheet/TaskDetailBottomSheet.stories";
 import { Default as UserDetailBottomSheetStory } from "@/components/users/UserDetailBottomSheet/UserDetailBottomSheet.stories";
+import { TaskCommentsModal } from "../TaskCommentsModal";
 
 const meta = {
   title: "Components/tasks/TaskGrid",
@@ -36,12 +37,12 @@ export const Default = {
           <TaskGridItem
             key={task.id}
             {...task}
+            commentsCount={task.commentsCount}
             subtasksDone={task.subtasks.done}
             subtasksTotal={task.subtasks.total}
-            commentModalTrigger={
-              <TaskCommentsModalTrigger
+            taskCommentsModal={
+              <TaskCommentsModal
                 taskId={1}
-                commentsCount={10}
                 taskCommentsContainer={<MockedCommentsContainer />}
                 sendCommentAction={fn()}
                 updateCommentAction={fn()}

@@ -6,8 +6,8 @@ import { UserTaskListItem } from "../UserTaskListItem";
 import { EditTaskForm } from "@/components/tasks/EditTaskForm";
 import { TaskDetailModal } from "@/components/tasks/TaskDetailModal";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { TaskCommentsModal } from "@/components/tasks/TaskCommentsModal";
 import { TaskDetailBottomSheet } from "@/components/tasks/TaskDetailBottomSheet";
-import { TaskCommentsModalTrigger } from "@/components/tasks/TaskCommentsModalTrigger";
 import { TaskItemActionMenuTrigger } from "@/components/tasks/TaskItemActionMenuTrigger";
 import { MockedCommentsContainer } from "@/components/comments/MockedCommentsContainer";
 import { Default as EditTaskFormStory } from "@/components/tasks/EditTaskForm/EditTaskForm.stories";
@@ -103,10 +103,9 @@ export const Default = {
       <UserTaskListItem
         key={task.id}
         {...task}
-        commentModalTrigger={
-          <TaskCommentsModalTrigger
+        taskCommentsModal={
+          <TaskCommentsModal
             taskId={1}
-            commentsCount={10}
             taskCommentsContainer={<MockedCommentsContainer />}
             sendCommentAction={fn()}
             updateCommentAction={fn()}

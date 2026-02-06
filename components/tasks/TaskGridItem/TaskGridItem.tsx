@@ -22,6 +22,7 @@ import { ImageContainer } from "@/components/common/ImageContainer";
 import { getTaskStatusBadgeColor } from "../getTaskStatusBadgeColor";
 import { useSyncSelectionTaskItem } from "@/lib/hooks/useTaskSelection";
 import { TaskListItemCheckbox } from "../TaskListItem/TaskListItemCheckbox";
+import { TaskCommentsModalTrigger } from "../TaskCommentsModalTrigger";
 
 export interface TaskGridItemProps {
   id: number;
@@ -32,10 +33,11 @@ export interface TaskGridItemProps {
     imageUrl?: string;
     fullName: string;
   };
+  commentsCount: number;
   status: TaskStatus;
   subtasksTotal: number;
   subtasksDone: number;
-  commentModalTrigger: React.ReactNode;
+  taskCommentsModal: React.ReactNode;
   menuTrigger: React.ReactNode;
   taskDetailModal: React.ReactNode;
   taskDetailBottomSheet: React.ReactNode;
@@ -48,10 +50,11 @@ export function TaskGridItem({
   title,
   deadline,
   assignee,
+  commentsCount,
   status,
   subtasksTotal,
   subtasksDone,
-  commentModalTrigger,
+  taskCommentsModal,
   menuTrigger,
   taskDetailModal,
   taskDetailBottomSheet,
@@ -125,7 +128,12 @@ export function TaskGridItem({
           <UnknownUser className="h-9 w-9" />
         )
       }
-      commentsSlot={commentModalTrigger}
+      commentsSlot={
+        <TaskCommentsModalTrigger
+          commentsCount={commentsCount}
+          modal={taskCommentsModal}
+        />
+      }
       statusSlot={
         <ItemBaseBadge color={getTaskStatusBadgeColor(status)}>
           {tStatus(`${status}`)}

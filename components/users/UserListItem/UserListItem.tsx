@@ -15,7 +15,6 @@ import {
 import Image from "next/image";
 import { Link } from "@/components/ui/Link";
 import { useTranslations } from "next-intl";
-import { Checkbox } from "@/components/ui/Checkbox";
 import { UnknownUser } from "@/components/common/UnknownUser";
 import { ImageContainer } from "@/components/common/ImageContainer";
 

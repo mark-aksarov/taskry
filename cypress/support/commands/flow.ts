@@ -1,5 +1,5 @@
 Cypress.Commands.add(
-  "fillEditForm",
+  "fillEditUserForm",
   (data: {
     fullName: string;
     bio: string;
@@ -7,7 +7,7 @@ Cypress.Commands.add(
     phoneNumber: string;
     publicLink: string;
     address: string;
-    positionId: string;
+    positionKey: string;
   }) => {
     const birthdate = data.birthdate;
 
@@ -15,15 +15,56 @@ Cypress.Commands.add(
     cy.get('textarea[name="bio"]').clear().type(data.bio);
     cy.setDatePickerDate(
       "birthdate-date-picker",
-      birthdate.day,
       birthdate.month,
+      birthdate.day,
       birthdate.year,
     );
     cy.get('input[name="phoneNumber"]').clear().type(data.phoneNumber);
     cy.get('input[name="publicLink"]').clear().type(data.publicLink);
     cy.get('input[name="address"]').clear().type(data.address);
     cy.getByData("position-select").click();
-    cy.getSelectOption(data.positionId).click();
+    cy.getSelectOption(data.positionKey).click();
+    cy.get('button[type="submit"]').click();
+  },
+);
+
+Cypress.Commands.add(
+  "fillEditTaskForm",
+  (data: {
+    title: string;
+    description: string;
+    deadline: { day: string; month: string; year: string };
+    statusKey: string;
+    categoryKey: string;
+    projectKey: string;
+    assigneeKey: string;
+  }) => {
+    const deadline = data.deadline;
+
+    // fill form
+    cy.get('input[name="title"]').clear().type(data.title);
+    cy.get('textarea[name="description"]').clear().type(data.description);
+
+    cy.setDatePickerDate(
+      "deadline-date-picker",
+      deadline.month,
+      deadline.day,
+      deadline.year,
+    );
+
+    cy.getByData("status-select").click();
+    cy.getSelectOption(data.statusKey).click();
+
+    cy.getByData("category-select").click();
+    cy.getSelectOption(data.categoryKey).click();
+
+    cy.getByData("project-select").click();
+    cy.getSelectOption(data.projectKey).click();
+
+    cy.getByData("assignee-select").click();
+    cy.getSelectOption(data.assigneeKey).click();
+
+    // submit
     cy.get('button[type="submit"]').click();
   },
 );

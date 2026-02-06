@@ -5,8 +5,8 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { EditTaskForm } from "@/components/tasks/EditTaskForm";
 import { TaskDetailModal } from "@/components/tasks/TaskDetailModal";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { TaskCommentsModal } from "@/components/tasks/TaskCommentsModal";
 import { TaskDetailBottomSheet } from "@/components/tasks/TaskDetailBottomSheet";
-import { TaskCommentsModalTrigger } from "@/components/tasks/TaskCommentsModalTrigger";
 import { TaskItemActionMenuTrigger } from "@/components/tasks/TaskItemActionMenuTrigger";
 import { MockedCommentsContainer } from "@/components/comments/MockedCommentsContainer";
 import { Default as EditTaskFormStory } from "@/components/tasks/EditTaskForm/EditTaskForm.stories";
@@ -21,10 +21,9 @@ const meta = {
   render: (args) => (
     <UserTaskListItem
       {...args}
-      commentModalTrigger={
-        <TaskCommentsModalTrigger
+      taskCommentsModal={
+        <TaskCommentsModal
           taskId={1}
-          commentsCount={10}
           taskCommentsContainer={<MockedCommentsContainer />}
           sendCommentAction={fn()}
           updateCommentAction={fn()}
