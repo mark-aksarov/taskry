@@ -23,6 +23,7 @@ import { EditUserFormContainer } from "../EditUserFormContainer";
 import { UserItemActionMenuTrigger } from "../UserItemActionMenuTrigger";
 
 interface UsersContainerProps {
+  showUserActionMenuTrigger: boolean;
   page: number;
   pageSize: number;
   sort: string;
@@ -30,6 +31,7 @@ interface UsersContainerProps {
 }
 
 export async function UsersContainer({
+  showUserActionMenuTrigger,
   page,
   pageSize,
   sort,
@@ -64,16 +66,18 @@ export async function UsersContainer({
               <UserListItem
                 key={user.id}
                 menuTrigger={
-                  <UserItemActionMenuTrigger
-                    showUserMenuItem={isOwner || guestMode}
-                    guestMode={guestMode}
-                    editUserFormContainer={
-                      <EditUserFormContainer userId={user.id} />
-                    }
-                    userId={user.id}
-                    userFullName={user.fullName}
-                    deleteAction={deleteUser}
-                  />
+                  showUserActionMenuTrigger && (
+                    <UserItemActionMenuTrigger
+                      showUserMenuItem={isOwner || guestMode}
+                      guestMode={guestMode}
+                      editUserFormContainer={
+                        <EditUserFormContainer userId={user.id} />
+                      }
+                      userId={user.id}
+                      userFullName={user.fullName}
+                      deleteAction={deleteUser}
+                    />
+                  )
                 }
                 userDetailModal={
                   <UserDetailModal
@@ -102,17 +106,19 @@ export async function UsersContainer({
               <UserGridItem
                 key={user.id}
                 menuTrigger={
-                  <UserItemActionMenuTrigger
-                    showUserMenuItem={isOwner || guestMode}
-                    guestMode={guestMode}
-                    editUserFormContainer={
-                      <EditUserFormContainer userId={user.id} />
-                    }
-                    userId={user.id}
-                    userFullName={user.fullName}
-                    deleteAction={deleteUser}
-                    className="-mr-2"
-                  />
+                  showUserActionMenuTrigger && (
+                    <UserItemActionMenuTrigger
+                      showUserMenuItem={isOwner || guestMode}
+                      guestMode={guestMode}
+                      editUserFormContainer={
+                        <EditUserFormContainer userId={user.id} />
+                      }
+                      userId={user.id}
+                      userFullName={user.fullName}
+                      deleteAction={deleteUser}
+                      className="-mr-2"
+                    />
+                  )
                 }
                 userDetailModal={
                   <UserDetailModal

@@ -18,6 +18,7 @@ import { NewTaskFormContainer } from "@/components/tasks/NewTaskFormContainer";
 import { ProfileNavigationMobile } from "@/components/users/ProfileNavigationMobile";
 import { ProfileNavigationDesktop } from "@/components/users/ProfileNavigationDesktop";
 import { TaskToolbarActionsMenuTrigger } from "@/components/tasks/TaskToolbarActionsMenuTrigger";
+import { EditUserFormContainer } from "@/components/users/EditUserFormContainer";
 
 const searchParamsSchema = z.object({
   page: pageSearchParam,
@@ -53,9 +54,11 @@ export default async function AppProfileTasksPage({
       changePasswordForm={
         <ChangePasswordForm userId={userId} changePassword={changePassword} />
       }
+      editUserFormContainer={<EditUserFormContainer userId={userId} />}
     />
   );
 
+  // Render the page with an empty tasks section.
   if (!taskCount) {
     return (
       <ProfileTasksPageEmpty

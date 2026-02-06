@@ -1,7 +1,9 @@
+import { EditUserForm } from "../EditUserForm";
 import { ProfileActions } from "../ProfileActions";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { ChangePasswordForm } from "../ChangePasswordForm";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { Default as EditUserFormStory } from "../EditUserForm/EditUserForm.stories";
 import { Default as ChangePasswordFormStory } from "../ChangePasswordForm/ChangePasswordForm.stories";
 
 const meta = {
@@ -23,5 +25,6 @@ export const Default = {
     changePasswordForm: (
       <ChangePasswordForm {...ChangePasswordFormStory.args} />
     ),
+    editUserFormContainer: <EditUserForm {...EditUserFormStory.args} />,
   },
 } satisfies Story;

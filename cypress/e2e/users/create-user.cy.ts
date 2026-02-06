@@ -38,7 +38,7 @@ describe("creates a new project", () => {
     );
   });
 
-  describe.only("access control (RBAC)", () => {
+  describe("access control (RBAC)", () => {
     it("allows a user with 'owner' role to open the create user modal", () => {
       cy.signIn("owner@example.com", "12345abc");
       cy.visit("/en/team");

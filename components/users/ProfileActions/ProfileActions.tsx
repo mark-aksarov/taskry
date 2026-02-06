@@ -3,18 +3,21 @@
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { KeyRound, Pencil } from "lucide-react";
+import { EditUserModal } from "../EditUserModal";
 import { ChangePasswordModal } from "../ChangePasswordModal";
-import { NavigationButton } from "@/components/common/NavigationButton";
 import { GuestModeModal } from "@/components/common/GuestModeModal";
+import { NavigationButton } from "@/components/common/NavigationButton";
 
 interface ProfileActionsProps {
   guestMode: boolean;
   changePasswordForm: React.ReactNode;
+  editUserFormContainer: React.ReactNode;
 }
 
 export function ProfileActions({
   guestMode,
   changePasswordForm,
+  editUserFormContainer,
 }: ProfileActionsProps) {
   const t = useTranslations("users.ProfileActions");
 
@@ -25,12 +28,23 @@ export function ProfileActions({
   const [isChangePasswordModalOpen, setIsChangePasswordModalOpen] =
     useState(false);
 
+  // Edit user modal state
+  const [isEditUserModalOpen, setIsEditUserModalOpen] = useState(false);
+
   function handlePasswordChangePress() {
     if (guestMode) {
       setIsGuestModeModalOpen(true);
       return;
     }
     setIsChangePasswordModalOpen(true);
+  }
+
+  function handleEditPress() {
+    if (guestMode) {
+      setIsGuestModeModalOpen(true);
+      return;
+    }
+    setIsEditUserModalOpen(true);
   }
 
   return (
@@ -44,7 +58,11 @@ export function ProfileActions({
           <KeyRound size={18} strokeWidth={1.5} absoluteStrokeWidth />
           {t("changePassword")}
         </NavigationButton>
-        <NavigationButton variant="secondary">
+        <NavigationButton
+          data-test="edit-user-button"
+          onPress={handleEditPress}
+          variant="secondary"
+        >
           <Pencil size={18} strokeWidth={1.5} absoluteStrokeWidth />
           {t("editAccount")}
         </NavigationButton>
@@ -54,6 +72,12 @@ export function ProfileActions({
         isOpen={isChangePasswordModalOpen}
         onOpenChange={setIsChangePasswordModalOpen}
         changePasswordForm={changePasswordForm}
+      />
+
+      <EditUserModal
+        isOpen={isEditUserModalOpen}
+        onOpenChange={setIsEditUserModalOpen}
+        editUserFormContainer={editUserFormContainer}
       />
 
       <GuestModeModal

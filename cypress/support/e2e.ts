@@ -17,3 +17,4 @@
 import "./commands/selectors";
 import "./commands/components";
 import "./commands/auth";
+import "./commands/flow";

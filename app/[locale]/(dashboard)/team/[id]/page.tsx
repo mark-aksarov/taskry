@@ -6,6 +6,7 @@ import { changePassword } from "@/lib/actions/user/changePassword";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { ChangePasswordForm } from "@/components/users/ChangePasswordForm";
 import { UserHeaderContainer } from "@/components/users/UserHeaderContainer";
+import { EditUserFormContainer } from "@/components/users/EditUserFormContainer";
 import { ProfileDetailContainer } from "@/components/users/ProfileDetailContainer";
 
 export default async function AppProfilePage({
@@ -13,27 +14,34 @@ export default async function AppProfilePage({
 }: {
   params: Promise<{ id: string }>;
 }) {
-  await requireProtectedPage();
+  const session = await requireProtectedPage();
 
-  const { id } = await params;
+  const { id: userId } = await params;
 
   const isOwner = await hasOwnerRole();
   const guestMode = await hasGuestRole();
 
+  const isAuthUser = session?.user.id === userId;
+  const showUserActions = isOwner || guestMode || isAuthUser;
+
   return (
     <TeamProfilePage
       userActions={
-        (isOwner || guestMode) && (
+        showUserActions ? (
           <ProfileActions
             guestMode={guestMode}
             changePasswordForm={
-              <ChangePasswordForm changePassword={changePassword} userId={id} />
+              <ChangePasswordForm
+                changePassword={changePassword}
+                userId={userId}
+              />
             }
+            editUserFormContainer={<EditUserFormContainer userId={userId} />}
           />
-        )
+        ) : null
       }
-      profileDetailContainer={<ProfileDetailContainer userId={id} />}
-      userHeaderContainer={<UserHeaderContainer userId={id} />}
+      profileDetailContainer={<ProfileDetailContainer userId={userId} />}
+      userHeaderContainer={<UserHeaderContainer userId={userId} />}
     />
   );
 }

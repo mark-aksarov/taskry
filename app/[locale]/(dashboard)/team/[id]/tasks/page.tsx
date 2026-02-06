@@ -16,6 +16,7 @@ import { UserHeaderContainer } from "@/components/users/UserHeaderContainer";
 import { NewTaskFormContainer } from "@/components/tasks/NewTaskFormContainer";
 import { UserNavigationMobile } from "@/components/users/UserNavigationMobile";
 import { UserNavigationDesktop } from "@/components/users/UserNavigationDesktop";
+import { EditUserFormContainer } from "@/components/users/EditUserFormContainer";
 import { TaskToolbarActionsMenuTrigger } from "@/components/tasks/TaskToolbarActionsMenuTrigger";
 
 const searchParamsSchema = z.object({
@@ -43,26 +44,29 @@ export default async function AppProfileTasksPage({
   // Get count
   const taskCount = await getTaskCount();
 
+  // Render user actions for the owner, guest, or authenticated user
   const isOwner = await hasOwnerRole();
   const guestMode = await hasGuestRole();
 
-  const userActions = (
+  const isAuthUser = session?.user.id === userId;
+  const showUserActions = isOwner || guestMode || isAuthUser;
+
+  const userActions = showUserActions ? (
     <ProfileActions
       guestMode={guestMode}
       changePasswordForm={
         <ChangePasswordForm userId={userId} changePassword={changePassword} />
       }
+      editUserFormContainer={<EditUserFormContainer userId={userId} />}
     />
-  );
+  ) : null;
 
-  const isAuthUser = session?.user.id === userId;
-  const showUserActions = isOwner || guestMode || isAuthUser;
-
+  // Render the page with an empty tasks section.
   if (!taskCount)
     return (
       <TeamProfileTasksPageEmpty
         userId={userId}
-        userActions={showUserActions && userActions}
+        userActions={userActions}
         newTaskFormContainer={<NewTaskFormContainer />}
         userHeaderContainer={<UserHeaderContainer userId={userId} />}
       />
@@ -86,9 +90,7 @@ export default async function AppProfileTasksPage({
           updateStatusAction={updateTaskStatuses}
         />
       }
-      navigationDesktop={
-        <UserNavigationDesktop userActions={showUserActions && userActions} />
-      }
+      navigationDesktop={<UserNavigationDesktop userActions={userActions} />}
       navigationMobile={<UserNavigationMobile />}
     />
   );

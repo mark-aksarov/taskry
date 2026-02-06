@@ -69,6 +69,7 @@ export default async function AppUsersPage({
       }
       usersContainer={
         <UsersContainer
+          showUserActionMenuTrigger={isOwner || guestMode}
           page={page}
           pageSize={pageSize}
           sort={sort}

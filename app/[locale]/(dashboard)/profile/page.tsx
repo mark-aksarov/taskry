@@ -7,6 +7,7 @@ import { ProfileActions } from "@/components/users/ProfileActions";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { ChangePasswordForm } from "@/components/users/ChangePasswordForm";
 import { UserHeaderContainer } from "@/components/users/UserHeaderContainer";
+import { EditUserFormContainer } from "@/components/users/EditUserFormContainer";
 import { ProfileDetailContainer } from "@/components/users/ProfileDetailContainer";
 
 export default async function AppProfilePage() {
@@ -31,6 +32,7 @@ export default async function AppProfilePage() {
               changePassword={changePassword}
             />
           }
+          editUserFormContainer={<EditUserFormContainer userId={userId} />}
         />
       }
       profileDetailContainer={<ProfileDetailContainer userId={userId} />}
