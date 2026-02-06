@@ -10,9 +10,9 @@ import { DialogTrigger } from "react-aria-components";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { UserDetailSkeleton } from "../UserDetail/UserDetailSkeleton";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { PersonDetailHeaderImage } from "@/components/common/PersonDetailHeaderImage";
 import { PersonDetailPresentation } from "@/components/common/PersonDetailPresentation";
 import { Default as UserDetailStory } from "@/components/users/UserDetail/UserDetail.stories";
+import { PersonDetailHeader as PersonDetailHeaderStory } from "@/components/common/DetailHeader/DetailHeader.stories";
 
 const meta = {
   title: "components/users/UserDetailModal",
@@ -37,15 +37,7 @@ export const Default = {
     userId: "BKs42HvVDEZFoaJUmTqf1gTN0K8pUFjI",
     userDetailContainer: (
       <PersonDetailPresentation
-        personHeader={
-          <DetailHeader
-            title={UserDetailStory.args.fullName}
-            image={
-              <PersonDetailHeaderImage imageUrl="/man.jpg" alt="John Doe" />
-            }
-            subtitle={UserDetailStory.args.position?.name}
-          />
-        }
+        personHeader={<DetailHeader {...PersonDetailHeaderStory.args} />}
         userDetail={<UserDetail {...UserDetailStory.args} />}
       />
     ),

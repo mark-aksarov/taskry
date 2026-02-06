@@ -10,10 +10,10 @@ import {
 
 import { ProjectDetailCard } from "./ProjectDetailCard";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { ProjectDetailHeaderImage } from "../ProjectDetailHeaderImage";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { Default as ProjectDetailStory } from "../ProjectDetail/ProjectDetail.stories";
 import { WithoutSomeData as ProjectDetailWithoutSomeDataStory } from "../ProjectDetail/ProjectDetail.stories";
+import { ProjectDetailHeader as ProjectDetailHeaderStory } from "@/components/common/DetailHeader/DetailHeader.stories";
 
 const meta = {
   title: "components/projects/ProjectDetailCard",
@@ -27,13 +27,7 @@ type Story = StoryObj<typeof meta>;
 export const Default = {
   args: {
     projectDetail: <ProjectDetailAlt {...ProjectDetailStory.args} />,
-    projectDetailHeader: (
-      <DetailHeader
-        title={ProjectDetailStory.args.title}
-        image={<ProjectDetailHeaderImage />}
-        subtitle={ProjectDetailStory.args.category.name}
-      />
-    ),
+    projectDetailHeader: <DetailHeader {...ProjectDetailHeaderStory.args} />,
   },
 } satisfies Story;
 

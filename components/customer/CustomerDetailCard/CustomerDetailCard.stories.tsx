@@ -10,6 +10,7 @@ import { CustomerDetailSkeleton } from "../CustomerDetail";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { PersonDetailHeaderImage } from "@/components/common/PersonDetailHeaderImage";
 import { Default as CustomerDetailStory } from "@/components/customer/CustomerDetail/CustomerDetail.stories";
+import { PersonDetailHeader as PersonDetailHeaderStory } from "@/components/common/DetailHeader/DetailHeader.stories";
 import { WithoutSomeData as CustomerDetailWithoutSomeDataStory } from "@/components/customer/CustomerDetail/CustomerDetail.stories";
 
 const meta = {
@@ -24,13 +25,7 @@ type Story = StoryObj<typeof meta>;
 export const Default = {
   args: {
     customerDetail: <CustomerDetail {...CustomerDetailStory.args} />,
-    customerHeader: (
-      <DetailHeader
-        title={CustomerDetailStory.args.fullName}
-        image={<PersonDetailHeaderImage imageUrl="/man.jpg" alt="John Doe" />}
-        subtitle={CustomerDetailStory.args.company?.name}
-      />
-    ),
+    customerHeader: <DetailHeader {...PersonDetailHeaderStory.args} />,
   },
 } satisfies Story;
 

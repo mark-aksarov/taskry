@@ -14,6 +14,7 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { PersonDetailHeaderImage } from "@/components/common/PersonDetailHeaderImage";
 import { Default as UserDetailStory } from "@/components/users/UserDetail/UserDetail.stories";
 import { WithoutSomeData as UserDetailWithoutSomeDataStory } from "@/components/users/UserDetail/UserDetail.stories";
+import { PersonDetailHeader as PersonDetailHeaderStory } from "@/components/common/DetailHeader/DetailHeader.stories";
 
 const meta = {
   title: "components/users/UserDetailCard",
@@ -33,13 +34,7 @@ type Story = StoryObj<typeof meta>;
 export const Default = {
   args: {
     profileDetail: <UserDetail {...UserDetailStory.args} />,
-    profileHeader: (
-      <DetailHeader
-        title={UserDetailStory.args.fullName}
-        image={<PersonDetailHeaderImage imageUrl="/man.jpg" alt="John Doe" />}
-        subtitle={UserDetailStory.args.position?.name}
-      />
-    ),
+    profileHeader: <DetailHeader {...PersonDetailHeaderStory.args} />,
     navigationDesktop: <UserNavigationDesktop />,
   },
 } satisfies Story;

@@ -5,11 +5,11 @@ import {
 
 import { TaskDetailCard } from "./TaskDetailCard";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { TaskDetailHeaderImage } from "../TaskDetailHeaderImage";
 import { TaskDetailAlt, TaskDetailAltSkeleton } from "../TaskDetailAlt";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { Default as TaskDetailStory } from "../TaskDetail/TaskDetail.stories";
 import { WithoutSomeData as TaskDetailWithoutSomeDataStory } from "../TaskDetail/TaskDetail.stories";
+import { TaskDetailHeader as TaskDetailHeaderStory } from "@/components/common/DetailHeader/DetailHeader.stories";
 
 const meta = {
   title: "components/tasks/TaskDetailCard",
@@ -23,13 +23,7 @@ type Story = StoryObj<typeof meta>;
 export const Default = {
   args: {
     taskDetail: <TaskDetailAlt {...TaskDetailStory.args} />,
-    taskDetailHeader: (
-      <DetailHeader
-        title={TaskDetailStory.args.title}
-        image={<TaskDetailHeaderImage />}
-        subtitle={TaskDetailStory.args.category.name}
-      />
-    ),
+    taskDetailHeader: <DetailHeader {...TaskDetailHeaderStory.args} />,
   },
 } satisfies Story;
 

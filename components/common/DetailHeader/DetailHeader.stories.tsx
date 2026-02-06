@@ -19,7 +19,7 @@ type Story = StoryObj<typeof meta>;
 
 export const TaskDetailHeader = {
   args: {
-    title: "Design landing page",
+    title: "Design homepage layout",
     image: <TaskDetailHeaderImage />,
     subtitle: "Design",
   },
@@ -27,7 +27,7 @@ export const TaskDetailHeader = {
 
 export const ProjectDetailHeader = {
   args: {
-    title: "Web app",
+    title: "Website Redesign",
     image: <ProjectDetailHeaderImage />,
     subtitle: "Design",
   },

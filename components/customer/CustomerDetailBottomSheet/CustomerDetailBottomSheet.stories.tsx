@@ -16,9 +16,9 @@ import { CustomerDetail } from "../CustomerDetail/CustomerDetail";
 import { OverlayTriggerStateContext } from "react-aria-components";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { CustomerDetailSkeleton } from "../CustomerDetail/CustomerDetailSkeleton";
-import { PersonDetailHeaderImage } from "@/components/common/PersonDetailHeaderImage";
 import { PersonDetailPresentation } from "@/components/common/PersonDetailPresentation";
 import { Default as CustomerDetailStory } from "../CustomerDetail/CustomerDetail.stories";
+import { PersonDetailHeader as PersonDetailHeaderStory } from "@/components/common/DetailHeader/DetailHeader.stories";
 
 const meta = {
   title: "components/customers/CustomerDetailBottomSheet",
@@ -56,15 +56,7 @@ export const Default = {
     customerId: 1,
     customerDetailContainer: (
       <PersonDetailPresentation
-        personHeader={
-          <DetailHeader
-            title={CustomerDetailStory.args.fullName}
-            image={
-              <PersonDetailHeaderImage imageUrl="/man.jpg" alt="John Doe" />
-            }
-            subtitle={CustomerDetailStory.args.company?.name}
-          />
-        }
+        personHeader={<DetailHeader {...PersonDetailHeaderStory.args} />}
         userDetail={<CustomerDetail {...CustomerDetailStory.args} />}
       />
     ),

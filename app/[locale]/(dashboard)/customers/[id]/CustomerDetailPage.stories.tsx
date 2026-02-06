@@ -19,7 +19,7 @@ import { useParams, usePathname } from "next/navigation";
 import { CustomerDetailPage } from "./CustomerDetailPage";
 import { PageDecorator } from "@/.storybook/PageDecorator";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { PersonDetailHeaderImage } from "@/components/common/PersonDetailHeaderImage";
+import { PersonDetailHeader as PersonDetailHeaderStory } from "@/components/common/DetailHeader/DetailHeader.stories";
 
 const meta = {
   title: "components/pages/CustomerDetailPage",
@@ -40,13 +40,7 @@ type Story = StoryObj<typeof meta>;
 export const Default = {
   args: {
     customerDetailContainer: <CustomerDetail {...CustomerDetailStory.args} />,
-    customerHeaderContainer: (
-      <DetailHeader
-        title={CustomerDetailStory.args.fullName}
-        image={<PersonDetailHeaderImage imageUrl="/man.jpg" alt="John Doe" />}
-        subtitle={CustomerDetailStory.args.company.name}
-      />
-    ),
+    customerHeaderContainer: <DetailHeader {...PersonDetailHeaderStory.args} />,
   },
 } satisfies Story;
 

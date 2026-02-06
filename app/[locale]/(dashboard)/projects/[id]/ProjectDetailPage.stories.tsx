@@ -19,7 +19,7 @@ import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { useParams, usePathname } from "next/navigation";
 import { PageDecorator } from "@/.storybook/PageDecorator";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { ProjectDetailHeaderImage } from "@/components/projects/ProjectDetailHeaderImage";
+import { ProjectDetailHeader as ProjectDetailHeaderStory } from "@/components/common/DetailHeader/DetailHeader.stories";
 
 const meta = {
   title: "components/pages/ProjectDetailPage",
@@ -40,13 +40,7 @@ type Story = StoryObj<typeof meta>;
 export const Default = {
   args: {
     projectDetailContainer: <ProjectDetailAlt {...ProjectDetailStory.args} />,
-    projectHeaderContainer: (
-      <DetailHeader
-        title={ProjectDetailStory.args.title}
-        image={<ProjectDetailHeaderImage />}
-        subtitle={ProjectDetailStory.args.category.name}
-      />
-    ),
+    projectHeaderContainer: <DetailHeader {...ProjectDetailHeaderStory.args} />,
   },
 } satisfies Story;
 
