@@ -5,6 +5,8 @@ import {
   EntityContainerPagination,
 } from "@/components/common/EntityContainerPagination";
 
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
 import { UserList } from "../UserList";
 import { UserGrid } from "../UserGrid";
 import { UserFilters } from "@/lib/types";
@@ -12,7 +14,6 @@ import { UserListItem } from "../UserListItem";
 import { UserGridItem } from "../UserGridItem";
 import { UserDetailModal } from "../UserDetailModal";
 import { getUserList } from "@/lib/data/user/user.dal";
-import { hasOwnerRole } from "@/lib/utils/hasOwnerRole";
 import { hasGuestRole } from "@/lib/utils/hasGuestRole";
 import { UserListItemDTO } from "@/lib/data/user/user.dto";
 import { deleteUser } from "@/lib/actions/user/deleteUser";
@@ -54,8 +55,14 @@ export async function UsersContainer({
     position: user.position,
   });
 
-  const isOwner = await hasOwnerRole();
   const guestMode = await hasGuestRole();
+
+  // The user can't delete themselves, so we need to make sure the user sees the "Delete" menu item.
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
+
+  const authUser = session!.user;
 
   return (
     <EntityPaginationProvider>
@@ -68,7 +75,7 @@ export async function UsersContainer({
                 menuTrigger={
                   showUserActionMenuTrigger && (
                     <UserItemActionMenuTrigger
-                      showUserMenuItem={isOwner || guestMode}
+                      showDeleteMenuItem={user.id !== authUser.id}
                       guestMode={guestMode}
                       editUserFormContainer={
                         <EditUserFormContainer userId={user.id} />
@@ -108,7 +115,7 @@ export async function UsersContainer({
                 menuTrigger={
                   showUserActionMenuTrigger && (
                     <UserItemActionMenuTrigger
-                      showUserMenuItem={isOwner || guestMode}
+                      showDeleteMenuItem={user.id !== authUser.id}
                       guestMode={guestMode}
                       editUserFormContainer={
                         <EditUserFormContainer userId={user.id} />

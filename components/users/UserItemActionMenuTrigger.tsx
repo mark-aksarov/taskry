@@ -16,7 +16,7 @@ import { GuestModeModal } from "../common/GuestModeModal";
 import { ActionFn, ActionState } from "@/lib/actions/types";
 
 interface UserItemActionMenuTriggerProps {
-  showUserMenuItem: boolean;
+  showDeleteMenuItem: boolean;
   guestMode: boolean;
   userId: string;
   userFullName: string;
@@ -26,7 +26,7 @@ interface UserItemActionMenuTriggerProps {
 }
 
 export function UserItemActionMenuTrigger({
-  showUserMenuItem,
+  showDeleteMenuItem,
   guestMode,
   userId,
   userFullName,
@@ -71,14 +71,14 @@ export function UserItemActionMenuTrigger({
           />
         )}
       >
-        {showUserMenuItem ? (
-          <Item textValue={t("edit")} key="edit">
-            <Pencil size={16} /> {t("edit")}
+        <Item textValue={t("edit")} key="edit">
+          <Pencil size={16} /> {t("edit")}
+        </Item>
+        {showDeleteMenuItem ? (
+          <Item textValue={t("delete")} key="delete">
+            <Trash size={16} /> {t("delete")}
           </Item>
         ) : null}
-        <Item textValue={t("delete")} key="delete">
-          <Trash size={16} /> {t("delete")}
-        </Item>
       </ItemBaseActionMenuTrigger>
 
       {/* Modal for editing task details */}

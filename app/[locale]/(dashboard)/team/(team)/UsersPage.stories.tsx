@@ -44,7 +44,7 @@ export const Default = {
     ),
     userToolbarCreateNewMenuTrigger: (
       <UserToolbarCreateNewMenuTrigger
-        showUserMenuItem
+        showCreateNewUserMenuItem
         guestMode={false}
         newUserForm={<NewUserForm {...NewUserFormStory.args} />}
         newPositionForm={<NewPositionForm createPosition={fn()} />}

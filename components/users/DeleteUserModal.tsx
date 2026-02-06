@@ -66,6 +66,7 @@ export function DeleteUserModal({
       <ConfirmModalActions>
         <ConfirmModalCancelButton label={t("cancelButton")} />
         <ConfirmModalConfirmButton
+          data-test="delete-user-modal-confirm-button"
           label={t("deleteButton")}
           onConfirm={handleDelete}
         />

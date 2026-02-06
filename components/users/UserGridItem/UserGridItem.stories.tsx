@@ -27,7 +27,7 @@ const meta = {
       {...args}
       menuTrigger={
         <UserItemActionMenuTrigger
-          showUserMenuItem
+          showDeleteMenuItem
           guestMode={false}
           editUserFormContainer={<EditUserForm {...EditUserFormStory.args} />}
           userId={args.id}

@@ -47,10 +47,16 @@ export default async function AppUsersPage({
   // Get count
   const count = await getUserCount();
 
+  if (!count) return <UsersPageEmpty />;
+
   const isOwner = await hasOwnerRole();
   const guestMode = await hasGuestRole();
 
-  if (!count) return <UsersPageEmpty />;
+  // Only the owner and guests can see the user menu item
+  const showCreateNewUserMenuItem = isOwner || guestMode;
+
+  // Only the owner and guests can see the user action menu trigger
+  const showUserActionMenuTrigger = isOwner || guestMode;
 
   return (
     <UsersPage
@@ -61,7 +67,7 @@ export default async function AppUsersPage({
       }
       userToolbarCreateNewMenuTrigger={
         <UserToolbarCreateNewMenuTrigger
-          showUserMenuItem={isOwner || guestMode}
+          showCreateNewUserMenuItem={showCreateNewUserMenuItem}
           guestMode={guestMode}
           newUserForm={<NewUserForm createUser={createUser} />}
           newPositionForm={<NewPositionForm createPosition={createPosition} />}
@@ -69,7 +75,7 @@ export default async function AppUsersPage({
       }
       usersContainer={
         <UsersContainer
-          showUserActionMenuTrigger={isOwner || guestMode}
+          showUserActionMenuTrigger={showUserActionMenuTrigger}
           page={page}
           pageSize={pageSize}
           sort={sort}

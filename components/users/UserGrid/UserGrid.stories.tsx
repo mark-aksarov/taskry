@@ -122,7 +122,7 @@ export const Default = {
         {...user}
         menuTrigger={
           <UserItemActionMenuTrigger
-            showUserMenuItem
+            showDeleteMenuItem
             guestMode={false}
             editUserFormContainer={<EditUserForm {...EditUserFormStory.args} />}
             userId={user.id}

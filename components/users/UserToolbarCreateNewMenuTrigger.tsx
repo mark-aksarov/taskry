@@ -16,14 +16,14 @@ import { GuestModeModal } from "../common/GuestModeModal";
 import { NewPositionModal } from "../position/NewPositionModal";
 
 interface UserToolbarCreateNewMenuTriggerProps {
-  showUserMenuItem: boolean;
+  showCreateNewUserMenuItem: boolean;
   guestMode: boolean;
   newUserForm: React.ReactNode;
   newPositionForm: React.ReactNode;
 }
 
 export function UserToolbarCreateNewMenuTrigger({
-  showUserMenuItem,
+  showCreateNewUserMenuItem,
   guestMode,
   newUserForm,
   newPositionForm,
@@ -65,7 +65,7 @@ export function UserToolbarCreateNewMenuTrigger({
           />
         )}
       >
-        {showUserMenuItem ? (
+        {showCreateNewUserMenuItem ? (
           <Item textValue={t("items.user")} key="user">
             <Users size={16} strokeWidth={1.5} absoluteStrokeWidth />
             {t("items.user")}
