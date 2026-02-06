@@ -59,7 +59,11 @@ export function TaskDetailActions({
   return (
     <>
       <div data-test="task-detail-actions" className="flex flex-col gap-2.5">
-        <NavigationButton onPress={handleDeletePress} variant="secondary">
+        <NavigationButton
+          data-test="delete-task-button"
+          onPress={handleDeletePress}
+          variant="secondary"
+        >
           <Trash size={18} strokeWidth={1.5} absoluteStrokeWidth />
           {t("delete")}
         </NavigationButton>

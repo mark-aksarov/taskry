@@ -1,39 +1,6 @@
 import { E2ESeedPayload } from "@/prisma/e2e/types";
 import { ProjectStatus, TaskStatus } from "@/generated/prisma/enums";
 
-const createPayload = (payload: E2ESeedPayload): E2ESeedPayload => {
-  const basePayload: E2ESeedPayload = {
-    companies: [{ id: 1, name: "Company 1", workspaceId: 1 }],
-    customers: [
-      {
-        id: 1,
-        email: "customer@example.com",
-        fullName: "John Doe",
-        companyId: 1,
-        workspaceId: 1,
-      },
-    ],
-    projectCategories: [{ id: 1, name: "Category 1", workspaceId: 1 }],
-    taskCategories: [{ id: 1, name: "Category 1", workspaceId: 1 }],
-    projects: [
-      {
-        id: 1,
-        title: "Project 1",
-        status: ProjectStatus.active,
-        deadline: new Date("2022-01-01"),
-        categoryId: 1,
-        customerId: 1,
-        workspaceId: 1,
-        creatorId: "user-1",
-      },
-    ],
-  };
-
-  return { ...basePayload, ...payload };
-};
-
-const setup = (payload: E2ESeedPayload) => {};
-
 describe("deletes a task", () => {
   beforeEach(() => {
     cy.viewport(1440, 900);
@@ -51,6 +18,18 @@ describe("deletes a task", () => {
       ],
       projectCategories: [{ id: 1, name: "Category 1", workspaceId: 1 }],
       taskCategories: [{ id: 1, name: "Category 1", workspaceId: 1 }],
+      projects: [
+        {
+          id: 1,
+          title: "Project 1",
+          status: ProjectStatus.active,
+          deadline: new Date("2022-01-01"),
+          categoryId: 1,
+          customerId: 1,
+          workspaceId: 1,
+          creatorId: "user-1",
+        },
+      ],
       tasks: [
         {
           id: 1,
@@ -106,6 +85,43 @@ describe("deletes a task", () => {
 
         cy.getByData("task-item-1-action-menu-trigger").click();
         cy.getMenuItem("edit").click();
+        cy.getByData("guest-mode-modal").should("be.visible");
+      });
+    });
+  });
+
+  describe("task detail page", () => {
+    it("can delete a task", () => {
+      cy.signIn("owner@example.com", "12345abc");
+      cy.visit("/en/tasks/1");
+
+      cy.getByData("delete-task-button").filter(":visible").click();
+      cy.getByData("delete-task-modal-confirm-button").click();
+      cy.url().should("include", "/tasks");
+    });
+
+    describe("access control (RBAC)", () => {
+      it("allows a user with 'owner' role to open the edit modal", () => {
+        cy.signIn("owner@example.com", "12345abc");
+        cy.visit("/en/tasks/1");
+
+        cy.getByData("delete-task-button").filter(":visible").click();
+        cy.getByData("delete-task-modal").should("be.visible");
+      });
+
+      it("allows a user with 'user' role to open the edit modal", () => {
+        cy.signIn("user@example.com", "12345abc");
+        cy.visit("/en/tasks/1");
+
+        cy.getByData("delete-task-button").filter(":visible").click();
+        cy.getByData("delete-task-modal").should("be.visible");
+      });
+
+      it("shows a restriction modal when a 'guest' attempts to delete", () => {
+        cy.signIn("guest@example.com", "12345abc");
+        cy.visit("/en/tasks/1");
+
+        cy.getByData("delete-task-button").filter(":visible").click();
         cy.getByData("guest-mode-modal").should("be.visible");
       });
     });

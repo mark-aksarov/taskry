@@ -3,6 +3,8 @@
 import z from "zod";
 import { ActionState } from "../types";
 import { revalidatePath } from "next/cache";
+import { redirect } from "@/i18n/navigation";
+import { getLocale } from "next-intl/server";
 import { coercedPositiveInt } from "@/lib/schemas/base";
 import { deleteTasks as deleteTasksQuery } from "@/lib/data/task/task.dal";
 import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedirect";
@@ -15,6 +17,8 @@ export async function deleteTasks(
   _prevState: ActionState,
   ids: number[],
 ): Promise<ActionState> {
+  const locale = await getLocale();
+
   // Authorization
   await requireSessionOrRedirect();
 
@@ -34,10 +38,6 @@ export async function deleteTasks(
     // Delete tasks
     await deleteTasksQuery(parsed.data.ids);
     revalidatePath("/tasks");
-
-    return {
-      status: "success",
-    };
   } catch (error) {
     console.error("Server Action Error:", error);
 
@@ -46,4 +46,14 @@ export async function deleteTasks(
       errorCode: "internalServerError",
     };
   }
+
+  // Redirect to check email
+  redirect({
+    href: "/tasks",
+    locale,
+  });
+
+  return {
+    status: "success",
+  };
 }
