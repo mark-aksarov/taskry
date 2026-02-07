@@ -8,7 +8,7 @@ import { DeleteTaskModal } from "../DeleteTaskModal";
 import { GuestModeModal } from "@/components/common/GuestModeModal";
 import { NavigationButton } from "@/components/common/NavigationButton";
 import { ActionFn, ActionState, DeleteTasksPayload } from "@/lib/actions/types";
-import { TaskDetailActionsCommentsModalTrigger } from "./TaskDetailActionsCommentsModalTrigger";
+import { DetailActionsCommentsModalTrigger } from "@/components/common/DetailActionsCommentsModalTrigger";
 
 interface TaskDetailActionsProps {
   guestMode: boolean;
@@ -75,9 +75,9 @@ export function TaskDetailActions({
           <KeyRound size={18} strokeWidth={1.5} absoluteStrokeWidth />
           {t("edit")}
         </NavigationButton>
-        <TaskDetailActionsCommentsModalTrigger modal={commentsModal}>
+        <DetailActionsCommentsModalTrigger modal={commentsModal}>
           {t("comments")}
-        </TaskDetailActionsCommentsModalTrigger>
+        </DetailActionsCommentsModalTrigger>
       </div>
 
       {/* Modal for editing task details */}

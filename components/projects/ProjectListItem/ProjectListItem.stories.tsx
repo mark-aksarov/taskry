@@ -4,10 +4,10 @@ import { EditProjectForm } from "../EditProjectForm";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { ProjectStatus } from "@/generated/prisma/enums";
 import { ProjectDetailModal } from "../ProjectDetailModal";
+import { ProjectCommentsModal } from "../ProjectCommentsModal";
 import { UserDetailModal } from "@/components/users/UserDetailModal";
 import { ProjectDetailBottomSheet } from "../ProjectDetailBottomSheet";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { ProjectCommentsModalTrigger } from "../ProjectCommentsModalTrigger";
 import { ProjectItemActionMenuTrigger } from "../ProjectItemActionMenuTrigger";
 import { MockedCommentsContainer } from "@/components/comments/MockedCommentsContainer";
 import { Default as EditProjectFormStory } from "../EditProjectForm/EditProjectForm.stories";
@@ -23,10 +23,9 @@ const meta = {
   render: (args) => (
     <ProjectListItem
       {...args}
-      commentModalTrigger={
-        <ProjectCommentsModalTrigger
+      projectCommentsModal={
+        <ProjectCommentsModal
           projectId={1}
-          commentsCount={10}
           projectCommentsContainer={<MockedCommentsContainer />}
           sendCommentAction={fn()}
           updateCommentAction={fn()}
@@ -34,6 +33,7 @@ const meta = {
       }
       menuTrigger={
         <ProjectItemActionMenuTrigger
+          guestMode={false}
           projectId={args.id}
           projectTitle={args.title}
           projectStatus={args.status}
@@ -79,6 +79,7 @@ export const Default = {
       id: 1,
       name: "Doe Inc.",
     },
+    commentsCount: 5,
     showCheckbox: false,
   },
 } satisfies Story;

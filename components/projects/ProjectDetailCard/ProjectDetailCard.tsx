@@ -6,16 +6,17 @@ import {
   DetailCardHeader,
 } from "@/components/common/DetailCard";
 import { useTranslations } from "next-intl";
-import { ProjectDetailActions } from "../ProjectDetailActions";
 
 interface ProjectDetailCardProps {
   projectDetailHeader: React.ReactNode;
   projectDetail: React.ReactNode;
+  projectDetailActions: React.ReactNode;
 }
 
 export function ProjectDetailCard({
   projectDetailHeader,
   projectDetail,
+  projectDetailActions,
 }: ProjectDetailCardProps) {
   const t = useTranslations("projects.ProjectDetailCard");
 
@@ -30,7 +31,7 @@ export function ProjectDetailCard({
 
       <DetailCardRight>
         {projectDetailHeader}
-        <ProjectDetailActions />
+        {projectDetailActions}
       </DetailCardRight>
     </DetailCard>
   );

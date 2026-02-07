@@ -26,6 +26,7 @@ import { UnknownUser } from "@/components/common/UnknownUser";
 import { ProjectListItemLayout } from "./ProjectListItemLayout";
 import { ImageContainer } from "@/components/common/ImageContainer";
 import { getProjectStatusBadgeColor } from "../getProjectStatusBadgeColor";
+import { ProjectCommentsModalTrigger } from "../ProjectCommentsModalTrigger";
 
 export interface ProjectListItemProps {
   id: number;
@@ -49,9 +50,10 @@ export interface ProjectListItemProps {
     id: number;
     name: string;
   };
+  commentsCount: number;
   status: ProjectStatus;
   showCheckbox?: boolean;
-  commentModalTrigger: React.ReactNode;
+  projectCommentsModal: React.ReactNode;
   menuTrigger: React.ReactNode;
   projectDetailModal: React.ReactNode;
   projectDetailBottomSheet: React.ReactNode;
@@ -65,10 +67,11 @@ export const ProjectListItem = ({
   category,
   customer,
   company,
+  commentsCount,
   status,
   creator,
   showCheckbox,
-  commentModalTrigger,
+  projectCommentsModal,
   menuTrigger,
   projectDetailModal,
   projectDetailBottomSheet,
@@ -217,7 +220,12 @@ export const ProjectListItem = ({
           {tStatus(`${status}`)}
         </ItemBaseBadge>
       }
-      commentsModalTriggerSlot={commentModalTrigger}
+      commentsModalTriggerSlot={
+        <ProjectCommentsModalTrigger
+          commentsCount={commentsCount}
+          modal={projectCommentsModal}
+        />
+      }
       menuTriggerSlot={menuTrigger}
     />
   );

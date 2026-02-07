@@ -3,9 +3,9 @@ import { ProjectGridItem } from "./ProjectGridItem";
 import { EditProjectForm } from "../EditProjectForm";
 import type { Meta, StoryObj } from "@storybook/react";
 import { ProjectDetailModal } from "../ProjectDetailModal";
+import { ProjectCommentsModal } from "../ProjectCommentsModal";
 import { ProjectDetailBottomSheet } from "../ProjectDetailBottomSheet";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { ProjectCommentsModalTrigger } from "../ProjectCommentsModalTrigger";
 import { ProjectItemActionMenuTrigger } from "../ProjectItemActionMenuTrigger";
 import { MockedCommentsContainer } from "@/components/comments/MockedCommentsContainer";
 import { Default as EditProjectFormStory } from "../EditProjectForm/EditProjectForm.stories";
@@ -28,10 +28,9 @@ const meta = {
   render: (args) => (
     <ProjectGridItem
       {...args}
-      commentModalTrigger={
-        <ProjectCommentsModalTrigger
+      projectCommentsModal={
+        <ProjectCommentsModal
           projectId={1}
-          commentsCount={10}
           projectCommentsContainer={<MockedCommentsContainer />}
           sendCommentAction={fn()}
           updateCommentAction={fn()}
@@ -39,6 +38,7 @@ const meta = {
       }
       menuTrigger={
         <ProjectItemActionMenuTrigger
+          guestMode={false}
           projectId={args.id}
           projectTitle={args.title}
           projectStatus={args.status}
@@ -76,6 +76,7 @@ export const Default = {
     status: "pending",
     tasksTotal: 10,
     tasksCompleted: 8,
+    commentsCount: 5,
   },
 } satisfies Story;
 

@@ -26,6 +26,7 @@ import { UnknownUser } from "@/components/common/UnknownUser";
 import { ProjectGridItemLayout } from "./ProjectGridItemLayout";
 import { ImageContainer } from "@/components/common/ImageContainer";
 import { getProjectStatusBadgeColor } from "../getProjectStatusBadgeColor";
+import { ProjectCommentsModalTrigger } from "../ProjectCommentsModalTrigger";
 
 export interface ProjectGridItemProps {
   id: number;
@@ -36,10 +37,11 @@ export interface ProjectGridItemProps {
     fullName: string;
     imageUrl?: string;
   };
+  commentsCount: number;
   status: ProjectStatus;
   tasksTotal: number;
   tasksCompleted: number;
-  commentModalTrigger: React.ReactNode;
+  projectCommentsModal: React.ReactNode;
   menuTrigger: React.ReactNode;
   projectDetailModal: React.ReactNode;
   projectDetailBottomSheet: React.ReactNode;
@@ -52,10 +54,11 @@ export function ProjectGridItem({
   title,
   deadline,
   creator,
+  commentsCount,
   status,
   tasksTotal,
   tasksCompleted,
-  commentModalTrigger,
+  projectCommentsModal,
   menuTrigger,
   projectDetailModal,
   projectDetailBottomSheet,
@@ -136,7 +139,12 @@ export function ProjectGridItem({
           <UnknownUser className="h-9 w-9" />
         )
       }
-      commentsSlot={commentModalTrigger}
+      commentsSlot={
+        <ProjectCommentsModalTrigger
+          commentsCount={commentsCount}
+          modal={projectCommentsModal}
+        />
+      }
       statusSlot={
         <ItemBaseBadge color={getProjectStatusBadgeColor(status)}>
           {tStatus(`${status}`)}

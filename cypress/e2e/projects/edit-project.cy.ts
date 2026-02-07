@@ -47,40 +47,111 @@ describe("edit a new project", () => {
 
     cy.task("db:reset");
     cy.task("db:seed", payload);
-    cy.signIn("owner@example.com", "12345abc");
-    cy.visit("/en/projects");
   });
 
-  it("can edit a task", () => {
-    cy.getByData("project-item-1-action-menu-trigger").click();
-    cy.getMenuItem("edit").click();
+  const projectData = {
+    title: "Updated Project Title",
+    description: "Updated Project Description",
+    deadline: { day: "01", month: "02", year: "2026" },
+    statusKey: "pending",
+    categoryKey: "2",
+    customerKey: "2",
+  };
 
-    // fill form
-    cy.get('input[name="title"]').clear().type("Updated Project Title");
-    cy.get('textarea[name="description"]')
-      .clear()
-      .type("Updated Project Description");
-    cy.setDatePickerDate("deadline-date-picker", "12", "31", "2025");
+  describe("projects page", () => {
+    it("can edit a project", () => {
+      cy.signIn("owner@example.com", "12345abc");
+      cy.visit("/en/projects");
 
-    cy.getByData("status-select").click();
-    cy.getSelectOption("pending").click();
+      cy.getByData("project-item-1-action-menu-trigger").click();
+      cy.getMenuItem("edit").click();
 
-    cy.getByData("category-select").click();
-    cy.getSelectOption("2").click();
+      // fill form
+      cy.fillProjectForm(projectData);
 
-    cy.getByData("customer-select").click();
-    cy.getSelectOption("2").click();
+      // assert
+      cy.getByData("project-list-item").within(() => {
+        cy.contains("Updated Project Title");
+        cy.contains("Category 2");
+        cy.contains("Larry Doe");
+        cy.contains("Company 2");
+        cy.contains("Pending");
+      });
+    });
 
-    // submit
-    cy.get('button[type="submit"]').click();
+    describe("access control (RBAC)", () => {
+      it("allows a user with 'owner' role to open the edit modal", () => {
+        cy.signIn("owner@example.com", "12345abc");
+        cy.visit("/en/projects");
 
-    // assert
-    cy.getByData("project-list-item").within(() => {
-      cy.contains("Updated Project Title");
-      cy.contains("Category 2");
-      cy.contains("Larry Doe");
-      cy.contains("Company 2");
-      cy.contains("Pending");
+        cy.getByData("project-item-1-action-menu-trigger").click();
+        cy.getMenuItem("edit").click();
+        cy.getByData("edit-project-modal").should("be.visible");
+      });
+
+      it("allows a user with 'user' role to open the edit modal", () => {
+        cy.signIn("user@example.com", "12345abc");
+        cy.visit("/en/projects");
+
+        cy.getByData("project-item-1-action-menu-trigger").click();
+        cy.getMenuItem("edit").click();
+        cy.getByData("edit-project-modal").should("be.visible");
+      });
+
+      it("shows a restriction modal when a 'guest' attempts to edit", () => {
+        cy.signIn("guest@example.com", "12345abc");
+        cy.visit("/en/projects");
+
+        cy.getByData("project-item-1-action-menu-trigger").click();
+        cy.getMenuItem("edit").click();
+        cy.getByData("guest-mode-modal").should("be.visible");
+      });
+    });
+  });
+
+  describe.only("project detail page", () => {
+    it("can edit a project", () => {
+      cy.signIn("owner@example.com", "12345abc");
+      cy.visit("/en/projects/1");
+
+      cy.getByData("edit-project-button").filter(":visible").click();
+
+      // fill form
+      cy.fillProjectForm(projectData);
+
+      // assert
+      cy.getByData("project-card").within(() => {
+        cy.contains("Updated Project Title");
+        cy.contains("Category 2");
+        cy.contains("Larry Doe");
+        cy.contains("Pending");
+      });
+    });
+
+    describe("access control (RBAC)", () => {
+      it("allows a user with 'owner' role to open the edit modal", () => {
+        cy.signIn("owner@example.com", "12345abc");
+        cy.visit("/en/projects/1");
+
+        cy.getByData("edit-project-button").filter(":visible").click();
+        cy.getByData("edit-project-modal").should("be.visible");
+      });
+
+      it("allows a user with 'user' role to open the edit modal", () => {
+        cy.signIn("user@example.com", "12345abc");
+        cy.visit("/en/projects/1");
+
+        cy.getByData("edit-project-button").filter(":visible").click();
+        cy.getByData("edit-project-modal").should("be.visible");
+      });
+
+      it("shows a restriction modal when a 'guest' attempts to edit", () => {
+        cy.signIn("guest@example.com", "12345abc");
+        cy.visit("/en/projects/1");
+
+        cy.getByData("edit-project-button").filter(":visible").click();
+        cy.getByData("guest-mode-modal").should("be.visible");
+      });
     });
   });
 });

@@ -1,33 +1,15 @@
-"use client";
+import {
+  ItemBaseCommentsModalTrigger,
+  ItemBaseCommentsModalTriggerProps,
+} from "@/components/common/ItemBase";
 
-import { DialogTrigger } from "react-aria-components";
-import { CommentButton } from "@/components/comments/CommentButton";
-import { CommentFormProvider } from "@/components/comments/CommentFormContext";
-
-interface TaskCommentsModalTriggerProps {
-  commentsCount: number;
-  modal: React.ReactNode;
-}
-
-export function TaskCommentsModalTrigger(props: TaskCommentsModalTriggerProps) {
+export function TaskCommentsModalTrigger(
+  props: ItemBaseCommentsModalTriggerProps,
+) {
   return (
-    <CommentFormProvider>
-      <TaskCommentsModalTriggerInner {...props} />
-    </CommentFormProvider>
-  );
-}
-
-function TaskCommentsModalTriggerInner({
-  commentsCount,
-  modal,
-}: TaskCommentsModalTriggerProps) {
-  return (
-    <DialogTrigger>
-      <CommentButton
-        data-test="task-comments-modal-trigger"
-        label={commentsCount}
-      />
-      {modal}
-    </DialogTrigger>
+    <ItemBaseCommentsModalTrigger
+      {...props}
+      data-test="task-comments-modal-trigger"
+    />
   );
 }

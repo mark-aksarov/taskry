@@ -4,7 +4,7 @@ import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { TaskDetailActions } from "../TaskDetailActions";
 import { TaskCommentsModal } from "../TaskCommentsModal";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { Default as EditUserFormStory } from "../EditTaskForm/EditTaskForm.stories";
+import { Default as EditTaskFormStory } from "../EditTaskForm/EditTaskForm.stories";
 import { MockedCommentsContainer } from "@/components/comments/MockedCommentsContainer";
 
 const meta = {
@@ -24,7 +24,7 @@ export const Default = {
   args: {
     guestMode: false,
     taskId: 1,
-    taskTitle: "Design landing page",
+    taskTitle: "Design homepage layout",
     deleteTask: fn(),
     commentsModal: (
       <TaskCommentsModal
@@ -34,6 +34,6 @@ export const Default = {
         updateCommentAction={fn()}
       />
     ),
-    editTaskFormContainer: <EditTaskForm {...EditUserFormStory.args} />,
+    editTaskFormContainer: <EditTaskForm {...EditTaskFormStory.args} />,
   },
 } satisfies Story;

@@ -6,6 +6,8 @@ export { ItemBaseButtonSkeleton } from "./ItemBaseButtonSkeleton";
 export { ItemBaseActionMenuButton } from "./ItemBaseActionMenuButton";
 export { ItemBaseActionMenuTrigger } from "./ItemBaseActionMenuTrigger";
 export { ItemBaseDetailModalTrigger } from "./ItemBaseDetailModalTrigger";
+export { ItemBaseCommentsModalTrigger } from "./ItemBaseCommentsModalTrigger";
 export { ItemBaseActionMenuDialogHeader } from "./ItemBaseActionMenuDialogHeader";
 export { ItemBaseDetailBottomSheetTrigger } from "./ItemBaseDetailBottomSheetTrigger";
 export { ItemBaseActionMenuTriggerSkeleton } from "./ItemBaseActionMenuTriggerSkeleton";
+export { type ItemBaseCommentsModalTriggerProps } from "./ItemBaseCommentsModalTrigger";

@@ -5,25 +5,25 @@ import { DialogTrigger } from "react-aria-components";
 import { NavigationButton } from "@/components/common/NavigationButton";
 import { CommentFormProvider } from "@/components/comments/CommentFormContext";
 
-interface TaskDetailActionsCommentsModalTriggerProps {
+interface DetailActionsCommentsModalTriggerProps {
   children: React.ReactNode;
   modal: React.ReactNode;
 }
 
-export function TaskDetailActionsCommentsModalTrigger(
-  props: TaskDetailActionsCommentsModalTriggerProps,
+export function DetailActionsCommentsModalTrigger(
+  props: DetailActionsCommentsModalTriggerProps,
 ) {
   return (
     <CommentFormProvider>
-      <TaskDetailActionsCommentsModalTriggerInner {...props} />
+      <DetailActionsCommentsModalTriggerInner {...props} />
     </CommentFormProvider>
   );
 }
 
-function TaskDetailActionsCommentsModalTriggerInner({
+function DetailActionsCommentsModalTriggerInner({
   children,
   modal,
-}: TaskDetailActionsCommentsModalTriggerProps) {
+}: DetailActionsCommentsModalTriggerProps) {
   return (
     <DialogTrigger>
       <NavigationButton variant="secondary">

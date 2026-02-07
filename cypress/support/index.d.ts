@@ -34,6 +34,15 @@ declare namespace Cypress {
       assigneeKey: string;
     }): Chainable<JQuery<HTMLElement>>;
 
+    fillProjectForm(data: {
+      title: string;
+      description: string;
+      deadline: { day: string; month: string; year: string };
+      statusKey: string;
+      categoryKey: string;
+      customerKey: string;
+    }): Chainable<JQuery<HTMLElement>>;
+
     changePassword(newPassword: string): Chainable<JQuery<HTMLElement>>;
     signInViaUI(
       email: string,

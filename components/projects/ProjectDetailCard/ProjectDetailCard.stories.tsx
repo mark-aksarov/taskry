@@ -10,10 +10,12 @@ import {
 
 import { ProjectDetailCard } from "./ProjectDetailCard";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { ProjectDetailActions } from "../ProjectDetailActions";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { Default as ProjectDetailStory } from "../ProjectDetail/ProjectDetail.stories";
 import { WithoutSomeData as ProjectDetailWithoutSomeDataStory } from "../ProjectDetail/ProjectDetail.stories";
 import { ProjectDetailHeader as ProjectDetailHeaderStory } from "@/components/common/DetailHeader/DetailHeader.stories";
+import { Default as ProjectDetailActionsStory } from "@/components/projects/ProjectDetailActions/ProjectDetailActions.stories";
 
 const meta = {
   title: "components/projects/ProjectDetailCard",
@@ -28,6 +30,9 @@ export const Default = {
   args: {
     projectDetail: <ProjectDetailAlt {...ProjectDetailStory.args} />,
     projectDetailHeader: <DetailHeader {...ProjectDetailHeaderStory.args} />,
+    projectDetailActions: (
+      <ProjectDetailActions {...ProjectDetailActionsStory.args} />
+    ),
   },
 } satisfies Story;
 
@@ -35,6 +40,9 @@ export const Loading = {
   args: {
     projectDetail: <ProjectDetailAltSkeleton />,
     projectDetailHeader: <DetailHeaderSkeleton />,
+    projectDetailActions: (
+      <ProjectDetailActions {...ProjectDetailActionsStory.args} />
+    ),
   },
 } satisfies Story;
 

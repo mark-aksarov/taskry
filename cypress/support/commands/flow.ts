@@ -69,6 +69,43 @@ Cypress.Commands.add(
   },
 );
 
+Cypress.Commands.add(
+  "fillProjectForm",
+  (data: {
+    title: string;
+    description: string;
+    deadline: { day: string; month: string; year: string };
+    statusKey: string;
+    categoryKey: string;
+    customerKey: string;
+  }) => {
+    const deadline = data.deadline;
+
+    // fill form
+    cy.get('input[name="title"]').clear().type(data.title);
+    cy.get('textarea[name="description"]').clear().type(data.description);
+
+    cy.setDatePickerDate(
+      "deadline-date-picker",
+      deadline.month,
+      deadline.day,
+      deadline.year,
+    );
+
+    cy.getByData("status-select").click();
+    cy.getSelectOption(data.statusKey).click();
+
+    cy.getByData("category-select").click();
+    cy.getSelectOption(data.categoryKey).click();
+
+    cy.getByData("customer-select").click();
+    cy.getSelectOption(data.customerKey).click();
+
+    // submit
+    cy.get('button[type="submit"]').click();
+  },
+);
+
 Cypress.Commands.add("changePassword", (newPassword: string) => {
   cy.getByData("change-password-button").filter(":visible").click();
   cy.get('input[name="password"]').clear().type(newPassword);

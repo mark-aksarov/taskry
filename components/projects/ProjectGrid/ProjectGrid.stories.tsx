@@ -5,9 +5,9 @@ import { ProjectGridItem } from "../ProjectGridItem";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { ProjectStatus } from "@/generated/prisma/enums";
 import { ProjectDetailModal } from "../ProjectDetailModal";
+import { ProjectCommentsModal } from "../ProjectCommentsModal";
 import { ProjectDetailBottomSheet } from "../ProjectDetailBottomSheet";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { ProjectCommentsModalTrigger } from "../ProjectCommentsModalTrigger";
 import { ProjectItemActionMenuTrigger } from "../ProjectItemActionMenuTrigger";
 import { MockedCommentsContainer } from "@/components/comments/MockedCommentsContainer";
 import { Default as EditProjectFormStory } from "../EditProjectForm/EditProjectForm.stories";
@@ -135,10 +135,9 @@ export const Default = {
           <ProjectGridItem
             key={project.id}
             {...project}
-            commentModalTrigger={
-              <ProjectCommentsModalTrigger
+            projectCommentsModal={
+              <ProjectCommentsModal
                 projectId={1}
-                commentsCount={10}
                 projectCommentsContainer={<MockedCommentsContainer />}
                 sendCommentAction={fn()}
                 updateCommentAction={fn()}
@@ -146,6 +145,7 @@ export const Default = {
             }
             menuTrigger={
               <ProjectItemActionMenuTrigger
+                guestMode={false}
                 projectId={project.id}
                 projectTitle={project.title}
                 projectStatus={project.status}

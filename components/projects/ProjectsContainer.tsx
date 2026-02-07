@@ -8,6 +8,7 @@ import { ProjectGridItem } from "./ProjectGridItem";
 import { hasGuestRole } from "@/lib/utils/hasGuestRole";
 import { ProjectDetailModal } from "./ProjectDetailModal";
 import { UserDetailModal } from "../users/UserDetailModal";
+import { ProjectCommentsModal } from "./ProjectCommentsModal";
 import { sendComment } from "@/lib/actions/comment/sendComment";
 import { getProjectList } from "@/lib/data/project/project.dal";
 import { ProjectDetailContainer } from "./ProjectDetailContainer";
@@ -18,7 +19,6 @@ import { ProjectDetailBottomSheet } from "./ProjectDetailBottomSheet";
 import { deleteProjects } from "@/lib/actions/project/deleteProjects";
 import { ProjectCommentsContainer } from "./ProjectCommentsContainer";
 import { UserDetailBottomSheet } from "../users/UserDetailBottomSheet";
-import { ProjectCommentsModalTrigger } from "./ProjectCommentsModalTrigger";
 import { ProjectItemActionMenuTrigger } from "./ProjectItemActionMenuTrigger";
 import { updateProjectStatuses } from "@/lib/actions/project/updateProjectStatuses";
 import { EntityContainerPresentation } from "../common/EntityContainerPresentation";
@@ -70,6 +70,7 @@ export async function ProjectsContainer({
                 category={project.category}
                 menuTrigger={
                   <ProjectItemActionMenuTrigger
+                    guestMode={guestMode}
                     projectId={project.id}
                     projectTitle={project.title}
                     projectStatus={project.status}
@@ -80,10 +81,9 @@ export async function ProjectsContainer({
                     }
                   />
                 }
-                commentModalTrigger={
-                  <ProjectCommentsModalTrigger
+                projectCommentsModal={
+                  <ProjectCommentsModal
                     projectId={project.id}
-                    commentsCount={project.commentsCount}
                     projectCommentsContainer={
                       <ProjectCommentsContainer
                         guestMode={guestMode}
@@ -145,6 +145,7 @@ export async function ProjectsContainer({
                 tasksCompleted={project.tasks.completed}
                 menuTrigger={
                   <ProjectItemActionMenuTrigger
+                    guestMode={guestMode}
                     projectId={project.id}
                     projectTitle={project.title}
                     projectStatus={project.status}
@@ -156,10 +157,9 @@ export async function ProjectsContainer({
                     className="-mr-2"
                   />
                 }
-                commentModalTrigger={
-                  <ProjectCommentsModalTrigger
+                projectCommentsModal={
+                  <ProjectCommentsModal
                     projectId={project.id}
-                    commentsCount={project.commentsCount}
                     projectCommentsContainer={
                       <ProjectCommentsContainer
                         guestMode={guestMode}

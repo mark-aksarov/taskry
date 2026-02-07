@@ -18,11 +18,13 @@ import { useTranslations } from "next-intl";
 import { EditProjectModal } from "./EditProjectModal";
 import { ProjectStatus } from "@/generated/prisma/enums";
 import { DeleteProjectModal } from "./DeleteProjectModal";
+import { GuestModeModal } from "../common/GuestModeModal";
 import { startTransition, useActionState, useState } from "react";
 import { useActionErrorToast } from "@/lib/hooks/useActionErrorToast";
 import { Check, CircleEllipsis, Clock, Pencil, Trash } from "lucide-react";
 
 export type ProjectItemActionMenuTriggerProps = {
+  guestMode: boolean;
   projectId: number;
   projectTitle: string;
   projectStatus: ProjectStatus;
@@ -37,6 +39,7 @@ const updateStatusInitialState: ActionState = {
 };
 
 export function ProjectItemActionMenuTrigger({
+  guestMode,
   projectId,
   projectTitle,
   projectStatus,
@@ -46,6 +49,9 @@ export function ProjectItemActionMenuTrigger({
   editProjectFormContainer,
 }: ProjectItemActionMenuTriggerProps) {
   const t = useTranslations("projects.ProjectItemActionMenuTrigger");
+
+  // Guest mode modal
+  const [isGuestModeModalOpen, setIsGuestModeModalOpen] = useState(false);
 
   // Modal state for editing the project
   const [isOpenEditModal, setIsOpenEditModal] = useState(false);
@@ -65,6 +71,11 @@ export function ProjectItemActionMenuTrigger({
 
   // Handle menu actions
   const handleAction = (key: Key) => {
+    if (guestMode) {
+      setIsGuestModeModalOpen(true);
+      return;
+    }
+
     const action = key.toString();
     if (action === "edit") {
       setIsOpenEditModal(true);
@@ -124,6 +135,11 @@ export function ProjectItemActionMenuTrigger({
         isOpen={isOpenDeleteModal}
         onOpenChange={setIsOpenDeleteModal}
         deleteAction={deleteAction}
+      />
+
+      <GuestModeModal
+        isOpen={isGuestModeModalOpen}
+        onOpenChange={setIsGuestModeModalOpen}
       />
     </>
   );
