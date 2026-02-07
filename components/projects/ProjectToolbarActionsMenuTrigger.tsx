@@ -17,6 +17,7 @@ import { Item, Key } from "react-stately";
 import { DialogHeader } from "../ui/Dialog";
 import { useTranslations } from "next-intl";
 import { ProjectStatus } from "@/generated/prisma/enums";
+import { GuestModeModal } from "../common/GuestModeModal";
 import { DeleteProjectsModal } from "./DeleteProjectsModal";
 import { startTransition, useActionState, useState } from "react";
 import { Check, CircleEllipsis, Clock, Trash } from "lucide-react";
@@ -24,6 +25,7 @@ import { useActionErrorToast } from "@/lib/hooks/useActionErrorToast";
 import { useProjectSelection } from "@/lib/hooks/useProjectSelection";
 
 interface ProjectToolbarActionsMenuTriggerProps {
+  guestMode: boolean;
   deleteAction: ActionFn<ActionState, DeleteProjectsPayload>;
   updateStatusAction: ActionFn<ActionState, UpdateProjectStatusesPayload>;
 }
@@ -33,10 +35,14 @@ const updateStatusInitialState: ActionState = {
 };
 
 export const ProjectToolbarActionsMenuTrigger = ({
+  guestMode,
   deleteAction,
   updateStatusAction,
 }: ProjectToolbarActionsMenuTriggerProps) => {
   const t = useTranslations("projects.ProjectToolbarActionsMenuTrigger");
+
+  // Guest mode modal state
+  const [isGuestModeModalOpen, setIsGuestModeModalOpen] = useState(false);
 
   // Delete confirmation modal state
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
@@ -52,6 +58,11 @@ export const ProjectToolbarActionsMenuTrigger = ({
 
   // Menu actions: show delete modal, update project status
   const handleAction = (key: Key) => {
+    if (guestMode) {
+      setIsGuestModeModalOpen(true);
+      return;
+    }
+
     if (key === "delete") {
       setIsDeleteModalOpen(true);
     } else {
@@ -123,6 +134,12 @@ export const ProjectToolbarActionsMenuTrigger = ({
         isOpen={isDeleteModalOpen}
         onOpenChange={setIsDeleteModalOpen}
         onSuccess={clearSelectedIds}
+      />
+
+      {/* Guest mode modal */}
+      <GuestModeModal
+        isOpen={isGuestModeModalOpen}
+        onOpenChange={setIsGuestModeModalOpen}
       />
     </>
   );

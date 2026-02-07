@@ -50,11 +50,12 @@ export default async function AppTasksPage({
   const { page, pageSize, sort, ...filters } = validated;
 
   const taskCount = await getTaskCount();
-  const guestMode = await hasGuestRole();
 
   if (!taskCount) {
     return <TasksPageEmpty newTaskFormContainer={<NewTaskFormContainer />} />;
   }
+
+  const guestMode = await hasGuestRole();
 
   return (
     <TasksPage

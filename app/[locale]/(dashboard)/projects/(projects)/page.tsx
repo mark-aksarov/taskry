@@ -10,6 +10,7 @@ import {
 import { z } from "zod";
 import { ProjectsPage } from "./ProjectsPage";
 import { ProjectsPageEmpty } from "./ProjectsPageEmpty";
+import { hasGuestRole } from "@/lib/utils/hasGuestRole";
 import { ProjectStatus } from "@/generated/prisma/enums";
 import { getProjectCount } from "@/lib/data/project/project.dal";
 import { deleteProjects } from "@/lib/actions/project/deleteProjects";
@@ -61,6 +62,8 @@ export default async function AppProjectsPage({
     );
   }
 
+  const guestMode = await hasGuestRole();
+
   return (
     <ProjectsPage
       projectsContainer={
@@ -73,6 +76,7 @@ export default async function AppProjectsPage({
       }
       projectToolbarCreateNewMenuTrigger={
         <ProjectToolbarCreateNewMenuTrigger
+          guestMode={guestMode}
           newProjectFormContainer={<NewProjectFormContainer />}
           newProjectCategoryForm={
             <NewProjectCategoryForm
@@ -90,6 +94,7 @@ export default async function AppProjectsPage({
       }
       projectToolbarActionsMenuTrigger={
         <ProjectToolbarActionsMenuTrigger
+          guestMode={guestMode}
           deleteAction={deleteProjects}
           updateStatusAction={updateProjectStatuses}
         />

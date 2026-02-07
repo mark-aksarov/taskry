@@ -48,6 +48,7 @@ export const Default = {
     ),
     projectToolbarCreateNewMenuTrigger: (
       <ProjectToolbarCreateNewMenuTrigger
+        guestMode={false}
         newProjectFormContainer={
           <NewProjectForm {...NewProjectFormStory.args} />
         }
@@ -65,6 +66,7 @@ export const Default = {
     ),
     projectToolbarActionsMenuTrigger: (
       <ProjectToolbarActionsMenuTrigger
+        guestMode={false}
         deleteAction={fn()}
         updateStatusAction={fn()}
       />
