@@ -9,6 +9,7 @@ import {
 
 import { z } from "zod";
 import { CustomersPage } from "./CustomersPage";
+import { hasGuestRole } from "@/lib/utils/hasGuestRole";
 import { CustomersPageEmpty } from "./CustomersPageEmpty";
 import { createCompany } from "@/lib/actions/company/createCompany";
 import { getCustomerCount } from "@/lib/data/customer/customer.dal";
@@ -50,22 +51,29 @@ export default async function AppCustomersPage({
   // Get count
   const count = await getCustomerCount();
 
+  const guestMode = await hasGuestRole();
+
+  const customerToolbarCreateNewMenuTrigger = (
+    <CustomerToolbarCreateNewMenuTrigger
+      guestMode={guestMode}
+      newCustomerFormContainer={<NewCustomerFormContainer />}
+      newCompanyForm={<NewCompanyForm createCompany={createCompany} />}
+    />
+  );
+
   if (!count) {
     return (
       <CustomersPageEmpty
-        newCustomerFormContainer={<NewCustomerFormContainer />}
+        customerToolbarCreateNewMenuTrigger={
+          customerToolbarCreateNewMenuTrigger
+        }
       />
     );
   }
 
   return (
     <CustomersPage
-      customerToolbarCreateNewMenuTrigger={
-        <CustomerToolbarCreateNewMenuTrigger
-          newCustomerFormContainer={<NewCustomerFormContainer />}
-          newCompanyForm={<NewCompanyForm createCompany={createCompany} />}
-        />
-      }
+      customerToolbarCreateNewMenuTrigger={customerToolbarCreateNewMenuTrigger}
       customerToolbarActionsMenuTrigger={
         <CustomerToolbarActionsMenuTrigger deleteAction={deleteCustomers} />
       }

@@ -6,9 +6,7 @@
   },
 
   "NewCustomerForm": {
-    "error": {
-      "creationError": "Произошла ошибка на сервере. Не удалось создать клиента."
-    }
+    "creationError": "Произошла ошибка на сервере. Не удалось создать клиента."
   },
 
   "TotalCustomersCard": {
@@ -51,32 +49,6 @@
     "submitButtonLabel": "Обновить клиента"
   },
 
-  "CustomerBioTextField": {
-    "label": "О себе",
-    "placeholder": "Введите информацию о себе"
-  },
-
-  "CustomerFormBaseCompanySelect": {
-    "label": "Компания",
-    "placeholder": "Введите название компании",
-
-    "validation": {
-      "required": "Название компании обязательно для заполнения",
-      "tooLong": "Название компании слишком длинное"
-    }
-  },
-
-  "CustomerEmailTextField": {
-    "label": "Email",
-    "placeholder": "Введите email",
-
-    "validation": {
-      "required": "Пожалуйста, введите адрес электронной почты.",
-      "format": "Неверный формат. Email должен быть в формате `user@example.com`.",
-      "tooLong": "Этот адрес слишком длинный. Максимально допустимая длина — {maxLength} символов."
-    }
-  },
-
   "CustomerDetailCard": {
     "title": "Информация о клиенте"
   },
@@ -86,19 +58,28 @@
     "placeholder": "Введите полное имя",
 
     "validation": {
-      "required": "Полное имя обязательно для заполнения",
-      "tooLong": "Полное имя слишком длинное"
+      "required": "«Полное имя» обязательно для заполнения"
+    }
+  },
+
+  "CustomerBioTextField": {
+    "label": "О себе",
+    "placeholder": "Введите информацию о себе"
+  },
+
+  "CustomerEmailTextField": {
+    "label": "Email",
+    "placeholder": "Введите email",
+
+    "validation": {
+      "required": "Требуется электронная почта",
+      "format": "Введите корректный адрес электронной почты, например user@example.com"
     }
   },
 
   "CustomerPhoneNumberTextField": {
     "label": "Номер телефона",
-    "placeholder": "Введите номер телефона",
-
-    "validation": {
-      "required": "Номер телефона обязателен для заполнения",
-      "tooLong": "Номер телефона слишком длинный"
-    }
+    "placeholder": "Введите номер телефона"
   },
 
   "CustomerPublicLinkTextField": {
@@ -106,8 +87,13 @@
     "placeholder": "Введите публичную ссылку",
 
     "validation": {
-      "format": "Неверный формат. Публичная ссылка должна быть в формате `https://example.com`."
+      "format": "Введите корректный URL, например https://example.com"
     }
+  },
+
+  "CustomerCompanySelect": {
+    "label": "Компания",
+    "noCompany": "Нет компании"
   },
 
   "CustomerDetailBottomSheet": {
@@ -173,7 +159,8 @@
 
   "CustomerGridItem": {
     "noPhoneNumber": "Нет номера телефона",
-    "noPublicLink": "Нет публичной ссылки"
+    "noPublicLink": "Нет публичной ссылки",
+    "noCompany": "Нет компании"
   },
 
   "CustomerListItem": {
@@ -182,7 +169,8 @@
     "publicLink": "Публичная ссылка",
     "noPhoneNumber": "Нет номера телефона",
     "noPublicLink": "Нет публичной ссылки",
-    "company": "Компания"
+    "company": "Компания",
+    "noCompany": "Нет компании"
   },
 
   "CustomerToolbarFiltersModalTrigger": {

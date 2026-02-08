@@ -100,7 +100,7 @@ export const getCustomerFormData = cache(
       imageUrl: customer.imageUrl ?? undefined,
       publicLink: customer.publicLink ?? undefined,
       bio: customer.bio ?? undefined,
-      companyId: customer.companyId,
+      companyId: customer.companyId ?? undefined,
     };
   },
 );
@@ -329,7 +329,9 @@ export const createCustomer = async (input: CreateCustomerInputDTO) => {
   }
 
   // Validate company
-  await validateCompany(workspaceId, input.companyId);
+  if (input.companyId) {
+    await validateCompany(workspaceId, input.companyId);
+  }
 
   // Create customer
   const customer = await prisma.customer.create({

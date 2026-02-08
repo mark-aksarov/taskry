@@ -17,14 +17,15 @@ export function CustomerEmailTextField({
       name="email"
       label={t("label")}
       placeholder={t("placeholder")}
+      maxLength={254}
       type="email"
       errorMessage={(validation) => {
         const details = validation.validationDetails;
         if (details.valueMissing) {
           return t("validation.required");
         }
-        if (details.tooLong) {
-          return t("validation.tooLong", { maxLength: 255 });
+        if (details.typeMismatch) {
+          return t("validation.format");
         }
         return "";
       }}

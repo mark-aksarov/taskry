@@ -12,14 +12,17 @@ import { useTranslations } from "next-intl";
 import { Building2, Contact } from "lucide-react";
 import { DialogHeader } from "@/components/ui/Dialog";
 import { NewCustomerModal } from "./NewCustomerModal";
+import { GuestModeModal } from "../common/GuestModeModal";
 import { NewCompanyModal } from "../company/NewCompanyModal/NewCompanyModal";
 
 interface CustomerToolbarCreateNewMenuTriggerProps {
+  guestMode: boolean;
   newCustomerFormContainer: React.ReactNode;
   newCompanyForm: React.ReactNode;
 }
 
 export function CustomerToolbarCreateNewMenuTrigger({
+  guestMode,
   newCustomerFormContainer,
   newCompanyForm,
 }: CustomerToolbarCreateNewMenuTriggerProps) {
@@ -29,8 +32,16 @@ export function CustomerToolbarCreateNewMenuTrigger({
   const [isOpenCustomerModal, setIsOpenCustomerModal] = useState(false);
   const [isOpenCompanyModal, setIsOpenCompanyModal] = useState(false);
 
+  // Guest mode
+  const [isGuestModeModalOpen, setIsGuestModeModalOpen] = useState(false);
+
   // Open the corresponding modal based on the selected menu item
   function handleAction(key: Key) {
+    if (guestMode) {
+      setIsGuestModeModalOpen(true);
+      return;
+    }
+
     if (key === "customer") {
       setIsOpenCustomerModal(true);
     } else if (key === "company") {
@@ -74,6 +85,12 @@ export function CustomerToolbarCreateNewMenuTrigger({
         newCompanyForm={newCompanyForm}
         isOpen={isOpenCompanyModal}
         onOpenChange={setIsOpenCompanyModal}
+      />
+
+      {/* Guest mode modal */}
+      <GuestModeModal
+        isOpen={isGuestModeModalOpen}
+        onOpenChange={setIsGuestModeModalOpen}
       />
     </>
   );

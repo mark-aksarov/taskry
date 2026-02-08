@@ -62,5 +62,6 @@ export const WithoutImagePhoneAndLink = {
     imageUrl: undefined,
     phoneNumber: undefined,
     publicLink: undefined,
+    company: undefined,
   },
 } satisfies Story;

@@ -35,3 +35,6 @@ export const coercedPositiveInt = z.preprocess((val) => {
   }
   return val;
 }, z.int().positive());
+
+export const emptyStringToUndefined = (v: unknown) =>
+  typeof v === "string" && v.trim() === "" ? undefined : v;

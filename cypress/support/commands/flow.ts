@@ -106,6 +106,41 @@ Cypress.Commands.add(
   },
 );
 
+Cypress.Commands.add(
+  "fillCustomerForm",
+  (data: {
+    fullName?: string;
+    bio?: string;
+    email?: string;
+    phoneNumber?: string;
+    publicLink?: string;
+    companyKey?: string;
+  }) => {
+    // Text fields (field name : value)
+    const fields = {
+      'input[name="fullName"]': data.fullName,
+      'textarea[name="bio"]': data.bio,
+      'input[name="email"]': data.email,
+      'input[name="phoneNumber"]': data.phoneNumber,
+      'input[name="publicLink"]': data.publicLink,
+    };
+
+    // We clear each field and print only if there is text.
+    Object.entries(fields).forEach(([selector, value]) => {
+      cy.get(selector).clear();
+      if (value) {
+        cy.get(selector).type(value);
+      }
+    });
+
+    // Select company
+    if (data.companyKey) {
+      cy.getByData("company-select").click();
+      cy.getSelectOption(data.companyKey).click();
+    }
+  },
+);
+
 Cypress.Commands.add("changePassword", (newPassword: string) => {
   cy.getByData("change-password-button").filter(":visible").click();
   cy.get('input[name="password"]').clear().type(newPassword);

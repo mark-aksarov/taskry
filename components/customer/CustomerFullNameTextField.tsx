@@ -1,5 +1,3 @@
-"use client";
-
 import { useTranslations } from "next-intl";
 import { TextField } from "@/components/ui/TextField";
 
@@ -17,16 +15,8 @@ export function CustomerFullNameTextField({
       name="fullName"
       label={t("label")}
       placeholder={t("placeholder")}
-      errorMessage={(validation) => {
-        const details = validation.validationDetails;
-        if (details.valueMissing) {
-          return t("validation.required");
-        }
-        if (details.tooLong) {
-          return t("validation.tooLong", { maxLength: 255 });
-        }
-        return "";
-      }}
+      maxLength={255}
+      errorMessage={t("validation.required")}
       defaultValue={defaultValue}
       isRequired
     />

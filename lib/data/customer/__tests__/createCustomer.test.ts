@@ -76,7 +76,6 @@ describe("createCustomer", () => {
     const result = await createCustomer({
       fullName: "Customer 1",
       email: "customer-1@test.com",
-      companyId: 1,
     });
 
     expect(result).toBeDefined();

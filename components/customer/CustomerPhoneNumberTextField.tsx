@@ -18,16 +18,7 @@ export function CustomerPhoneNumberTextField({
       label={t("label")}
       placeholder={t("placeholder")}
       type="tel"
-      errorMessage={(validation) => {
-        const details = validation.validationDetails;
-        if (details.valueMissing) {
-          return t("validation.required");
-        }
-        if (details.tooLong) {
-          return t("validation.tooLong", { maxLength: 255 });
-        }
-        return "";
-      }}
+      maxLength={20}
       defaultValue={defaultValue}
     />
   );

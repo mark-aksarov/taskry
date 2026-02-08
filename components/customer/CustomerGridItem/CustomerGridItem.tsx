@@ -38,7 +38,7 @@ interface CustomerGridItemProps {
   phoneNumber?: string;
   publicLink?: string;
   imageUrl?: string;
-  company: {
+  company?: {
     id: number;
     name: string;
   };
@@ -117,7 +117,7 @@ export function CustomerGridItem({
             </ItemBaseDetailBottomSheetTrigger>
           </GridItemTitle>
 
-          <GridItemText>{company.name}</GridItemText>
+          <GridItemText>{company ? company.name : t("noCompany")}</GridItemText>
         </GridItemInfo>
       }
       contactSlot={

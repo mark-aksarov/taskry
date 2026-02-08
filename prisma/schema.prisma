@@ -102,21 +102,21 @@ model Company {
 
 model Customer {
   id          Int     @id @default(autoincrement())
-  fullName    String  @db.VarChar(100)
-  bio         String?
+  fullName    String  @db.VarChar(255)
+  bio         String? @db.VarChar(5000)
   imageUrl    String?
-  email       String  @db.VarChar(100)
+  email       String  @db.VarChar(254)
   phoneNumber String? @db.VarChar(20)
   publicLink  String? @db.VarChar(255)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  companyId   Int
+  companyId   Int?
   workspaceId Int
 
   workspace Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
-  company   Company   @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  company   Company?  @relation(fields: [companyId], references: [id], onDelete: Cascade)
 
   projects Project[]
 

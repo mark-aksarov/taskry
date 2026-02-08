@@ -31,7 +31,7 @@ export type CustomerListItemProps = {
   phoneNumber?: string;
   publicLink?: string;
   imageUrl?: string;
-  company: {
+  company?: {
     id: number;
     name: string;
   };
@@ -140,7 +140,7 @@ export function CustomerListItem({
       </ListItemInfo>
 
       <ListItemInfo className="@max-4xl:hidden">
-        <ListItemTitle>{company.name}</ListItemTitle>
+        <ListItemTitle>{company ? company.name : t("noCompany")}</ListItemTitle>
         <ListItemText>{t("company")}</ListItemText>
       </ListItemInfo>
 

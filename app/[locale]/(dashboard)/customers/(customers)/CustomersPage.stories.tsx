@@ -35,16 +35,19 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
+const customerToolbarCreateNewMenuTrigger = (
+  <CustomerToolbarCreateNewMenuTrigger
+    guestMode={false}
+    newCustomerFormContainer={
+      <NewCustomerForm {...NewCustomerFormStory.args} />
+    }
+    newCompanyForm={<NewCompanyForm {...NewCompanyFormStory.args} />}
+  />
+);
+
 export const Default = {
   args: {
-    customerToolbarCreateNewMenuTrigger: (
-      <CustomerToolbarCreateNewMenuTrigger
-        newCustomerFormContainer={
-          <NewCustomerForm {...NewCustomerFormStory.args} />
-        }
-        newCompanyForm={<NewCompanyForm {...NewCompanyFormStory.args} />}
-      />
-    ),
+    customerToolbarCreateNewMenuTrigger: customerToolbarCreateNewMenuTrigger,
     customerToolbarActionsMenuTrigger: (
       <CustomerToolbarActionsMenuTrigger deleteAction={fn()} />
     ),
@@ -76,9 +79,7 @@ export const WithNoCustomers = {
   args: { ...Default.args },
   render: () => (
     <CustomersPageEmpty
-      newCustomerFormContainer={
-        <NewCustomerForm {...NewCustomerFormStory.args} />
-      }
+      customerToolbarCreateNewMenuTrigger={customerToolbarCreateNewMenuTrigger}
     />
   ),
 } satisfies Story;

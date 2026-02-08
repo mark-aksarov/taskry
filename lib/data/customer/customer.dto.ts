@@ -11,7 +11,7 @@ export interface CustomerFormDataDTO {
   email: string;
   phoneNumber?: string;
   publicLink?: string;
-  companyId: number;
+  companyId?: number;
 }
 
 export interface CreateCustomerInputDTO {
@@ -21,7 +21,7 @@ export interface CreateCustomerInputDTO {
   email: string;
   phoneNumber?: string;
   publicLink?: string;
-  companyId: number;
+  companyId?: number;
 }
 
 export interface UpdateCustomerInputDTO {
@@ -63,7 +63,7 @@ export type CustomerListItemDTO = {
   imageUrl?: string;
   publicLink?: string;
 
-  company: {
+  company?: {
     id: number;
     name: string;
   };

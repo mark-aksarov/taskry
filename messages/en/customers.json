@@ -6,9 +6,7 @@
   },
 
   "NewCustomerForm": {
-    "error": {
-      "creationError": "A server error occurred. Failed to create customer."
-    }
+    "creationError": "A server error occurred. Failed to create customer."
   },
 
   "TotalCustomersCard": {
@@ -51,63 +49,51 @@
     "submitButtonLabel": "Update Customer"
   },
 
-  "CustomerBioTextField": {
-    "label": "Bio",
-    "placeholder": "Typing bio"
-  },
-
-  "CustomerCompanySelect": {
-    "label": "Company",
-    "placeholder": "Typing company",
-
-    "validation": {
-      "required": "Company is required",
-      "tooLong": "Company is too long"
-    }
-  },
-
-  "CustomerEmailTextField": {
-    "label": "Email",
-    "placeholder": "Typing email",
-
-    "validation": {
-      "required": "Please enter your email address.",
-      "format": "Invalid format. The email address must be in the format `user@example.com`.",
-      "tooLong": "This email address is too long. The maximum allowed length is {maxLength} characters."
-    }
-  },
-
   "CustomerDetailCard": {
     "title": "Customer Information"
   },
 
   "CustomerFullNameTextField": {
     "label": "Full name",
-    "placeholder": "Typing full name",
+    "placeholder": "Enter full name",
 
     "validation": {
-      "required": "Full name is required",
-      "tooLong": "Full name is too long"
+      "required": "Full name is required"
+    }
+  },
+
+  "CustomerBioTextField": {
+    "label": "Bio",
+    "placeholder": "Enter bio"
+  },
+
+  "CustomerEmailTextField": {
+    "label": "Email",
+    "placeholder": "Enter email",
+
+    "validation": {
+      "required": "Email is required",
+      "format": "Enter a valid email address, for example user@example.com"
     }
   },
 
   "CustomerPhoneNumberTextField": {
     "label": "Phone number",
-    "placeholder": "Typing phone number",
-
-    "validation": {
-      "required": "Phone number is required",
-      "tooLong": "Phone number is too long"
-    }
+    "placeholder": "Enter phone number"
   },
 
   "CustomerPublicLinkTextField": {
     "label": "Public link",
-    "placeholder": "Typing public link",
+    "placeholder": "Enter a public link",
 
     "validation": {
-      "format": "Invalid format. The public link must be in the format `https://example.com`."
+      "format": "Please enter a valid URL, for example https://example.com"
     }
+  },
+
+  "CustomerCompanySelect": {
+    "label": "Company",
+    "noCompany": "No company"
   },
 
   "CustomerDetailBottomSheet": {
@@ -173,7 +159,8 @@
 
   "CustomerGridItem": {
     "noPhoneNumber": "No phone number",
-    "noPublicLink": "No public link"
+    "noPublicLink": "No public link",
+    "noCompany": "No company"
   },
 
   "CustomerListItem": {
@@ -182,6 +169,7 @@
     "publicLink": "Public link",
     "noPhoneNumber": "No phone number",
     "noPublicLink": "No public link",
+    "noCompany": "No company",
     "company": "Company"
   },
 

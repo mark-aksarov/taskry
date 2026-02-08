@@ -51,7 +51,7 @@ function EditCustomerFormContainerInner({
       publicLinkDefaultValue={customer.publicLink}
       companySelect={
         <CustomerCompanySelect
-          defaultSelectedKey={customer.companyId.toString()}
+          defaultSelectedKey={customer.companyId?.toString()}
           companies={companies}
         />
       }

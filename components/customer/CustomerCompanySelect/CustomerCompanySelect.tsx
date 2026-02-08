@@ -15,14 +15,19 @@ export function CustomerCompanySelect({
 }: CustomerCompanySelectProps) {
   const t = useTranslations("customers.CustomerCompanySelect");
 
+  const items = [
+    { id: "", label: t("noCompany") },
+    ...companies.map((item) => ({ id: item.id, label: item.name })),
+  ];
+
   return (
     <ResponsiveSelect
       label={t("label")}
       name="companyId"
-      placeholder={t("placeholder")}
+      data-test="company-select"
       overlayClassName="w-[var(--trigger-width)]"
-      defaultSelectedKey={defaultSelectedKey}
-      items={companies.map((item) => ({ id: item.id, label: item.name }))}
+      defaultSelectedKey={defaultSelectedKey || ""}
+      items={items}
     >
       {(item: any) => <Item key={item.id}>{item.label}</Item>}
     </ResponsiveSelect>
