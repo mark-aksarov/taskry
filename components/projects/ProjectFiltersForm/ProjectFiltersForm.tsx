@@ -5,11 +5,17 @@ import {
   normalizeBooleanFields,
 } from "@/lib/utils/formDataUtils";
 
+import {
+  FormBase,
+  FormBaseBody,
+  FormBaseFooter,
+} from "@/components/common/FormBase";
+
 import { useLocale } from "next-intl";
-import { Form } from "react-aria-components";
 import { ProjectFilters } from "@/lib/types";
 import { Divider } from "@/components/ui/Divider";
 import { usePathname, useRouter } from "@/i18n/navigation";
+import { FiltersFormSubmitButton } from "@/components/common/FiltersFormSubmitButton";
 import { ProjectFiltersFormNoActiveTasksSwitch } from "./ProjectFiltersFormNoActiveTasksSwitch";
 import { ProjectFiltersFormDeadlineToDatePicker } from "./ProjectFiltersFormDeadlineToDatePicker";
 import { ProjectFiltersFormDeadlineFromDatePicker } from "./ProjectFiltersFormDeadlineFromDatePicker";
@@ -45,8 +51,8 @@ export function ProjectFiltersForm({
   };
 
   return (
-    <Form id="project-filter-form" onSubmit={handleSubmit}>
-      <div className="flex flex-col gap-4">
+    <FormBase id="project-filter-form" onSubmit={handleSubmit}>
+      <FormBaseBody>
         <ProjectFiltersFormNoActiveTasksSwitch filters={filters} />
 
         <Divider />
@@ -62,7 +68,11 @@ export function ProjectFiltersForm({
         <div>{customerCheckboxGroup}</div>
         <Divider />
         <div>{userCheckboxGroup}</div>
-      </div>
-    </Form>
+      </FormBaseBody>
+
+      <FormBaseFooter>
+        <FiltersFormSubmitButton />
+      </FormBaseFooter>
+    </FormBase>
   );
 }

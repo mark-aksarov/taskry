@@ -1,17 +1,24 @@
 "use client";
 
-import { useLocale } from "next-intl";
-import { TaskFilters } from "@/lib/types";
-import { Form } from "react-aria-components";
-import { Divider } from "@/components/ui/Divider";
-import { usePathname, useRouter } from "@/i18n/navigation";
-import { TaskFiltersFormOnlyMyTaskSwitch } from "./TaskFiltersFormOnlyMyTaskSwitch";
-import { TaskFiltersFormDeadlineToDatePicker } from "./TaskFiltersFormDeadlineToDatePicker";
-import { TaskFiltersFormDeadlineFromDatePicker } from "./TaskFiltersFormDeadlineFromDatePicker";
 import {
   formDataToSearchParams,
   normalizeBooleanFields,
 } from "@/lib/utils/formDataUtils";
+
+import {
+  FormBase,
+  FormBaseBody,
+  FormBaseFooter,
+} from "@/components/common/FormBase";
+
+import { useLocale } from "next-intl";
+import { TaskFilters } from "@/lib/types";
+import { Divider } from "@/components/ui/Divider";
+import { usePathname, useRouter } from "@/i18n/navigation";
+import { TaskFiltersFormOnlyMyTaskSwitch } from "./TaskFiltersFormOnlyMyTaskSwitch";
+import { FiltersFormSubmitButton } from "@/components/common/FiltersFormSubmitButton";
+import { TaskFiltersFormDeadlineToDatePicker } from "./TaskFiltersFormDeadlineToDatePicker";
+import { TaskFiltersFormDeadlineFromDatePicker } from "./TaskFiltersFormDeadlineFromDatePicker";
 
 interface TaskFiltersFormProps {
   filters?: TaskFilters;
@@ -44,8 +51,8 @@ export function TaskFiltersForm({
   };
 
   return (
-    <Form id="task-filter-form" onSubmit={handleSubmit}>
-      <div className="flex flex-col gap-4">
+    <FormBase id="task-filter-form" onSubmit={handleSubmit}>
+      <FormBaseBody>
         <TaskFiltersFormOnlyMyTaskSwitch filters={filters} />
 
         <Divider />
@@ -62,7 +69,10 @@ export function TaskFiltersForm({
         <div>{projectCheckboxGroup}</div>
         <Divider />
         <div>{assigneeCheckboxGroup}</div>
-      </div>
-    </Form>
+      </FormBaseBody>
+      <FormBaseFooter>
+        <FiltersFormSubmitButton />
+      </FormBaseFooter>
+    </FormBase>
   );
 }

@@ -1,12 +1,12 @@
 import {
   FormBaseModal,
   FormBaseModalDialog,
-  FormBaseSubmitButton,
+  FormBaseModalDialogBody,
 } from "@/components/common/FormBaseModal";
 
 import { useTranslations } from "next-intl";
 import { ModalProps } from "@/components/ui/Modal";
-import { DialogBody, DialogFooter, DialogHeader } from "@/components/ui/Dialog";
+import { DialogHeader } from "@/components/ui/Dialog";
 
 interface EditProjectModalProps
   extends Pick<ModalProps, "isOpen" | "onOpenChange"> {
@@ -23,13 +23,9 @@ export function EditProjectModal({
     <FormBaseModal data-test="edit-project-modal" {...props}>
       <FormBaseModalDialog>
         <DialogHeader>{t("title")}</DialogHeader>
-        <DialogBody>{editProjectFormContainer}</DialogBody>
-        <DialogFooter>
-          <FormBaseSubmitButton
-            form="edit-project-form"
-            label={t("submitButtonLabel")}
-          />
-        </DialogFooter>
+        <FormBaseModalDialogBody>
+          {editProjectFormContainer}
+        </FormBaseModalDialogBody>
       </FormBaseModalDialog>
     </FormBaseModal>
   );

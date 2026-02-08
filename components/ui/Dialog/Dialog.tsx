@@ -68,7 +68,7 @@ export const DialogBody = ({
   ...props
 }: React.ComponentPropsWithRef<"div">) => {
   const classes = twMerge(
-    "h-full shrink-1 overflow-auto md:p-5 max-md:p-4",
+    "flex-auto overflow-auto md:p-5 max-md:p-4",
     className,
   );
 

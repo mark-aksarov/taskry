@@ -2,12 +2,12 @@
   "NewTaskCategoryForm": {
     "error": {
       "creationError": "Произошла ошибка на сервере. Не удалось создать категорию задач."
-    }
+    },
+    "submitButtonLabel": "Создать категорию"
   },
 
   "NewTaskCategoryModal": {
-    "title": "Новая категория задач",
-    "submitButtonLabel": "Создать категорию"
+    "title": "Новая категория задач"
   },
 
   "TaskCategoryNameTextField": {

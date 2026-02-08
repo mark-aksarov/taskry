@@ -1,14 +1,14 @@
 "use client";
 
 import {
-  ToolbarFiltersModal,
-  ToolbarFiltersModalDialog,
-  ToolbarFiltersModalSubmitButton,
-} from "@/components/common/Toolbar";
+  FormBaseModal,
+  FormBaseModalDialog,
+  FormBaseModalDialogBody,
+} from "../common/FormBaseModal";
 
 import { useTranslations } from "next-intl";
+import { DialogHeader } from "../ui/Dialog";
 import { DialogTrigger } from "react-aria-components";
-import { DialogBody, DialogFooter, DialogHeader } from "../ui/Dialog";
 import { ToolbarFiltersButtonMobile } from "../common/Toolbar/ToolbarFiltersButtonMobile";
 import { ToolbarFiltersButtonDesktop } from "../common/Toolbar/ToolbarFiltersButtonDesktop";
 
@@ -24,15 +24,14 @@ export function ProjectToolbarFiltersModalTrigger({
       <ToolbarFiltersButtonMobile data-test="project-toolbar-filters-button-mobile" />
       <ToolbarFiltersButtonDesktop data-test="project-toolbar-filters-button-desktop" />
 
-      <ToolbarFiltersModal data-test="project-toolbar-filters-modal">
-        <ToolbarFiltersModalDialog>
+      <FormBaseModal data-test="project-toolbar-filters-modal">
+        <FormBaseModalDialog>
           <DialogHeader>{t("title")}</DialogHeader>
-          <DialogBody>{filtersFormContainer}</DialogBody>
-          <DialogFooter>
-            <ToolbarFiltersModalSubmitButton form="project-filter-form" />
-          </DialogFooter>
-        </ToolbarFiltersModalDialog>
-      </ToolbarFiltersModal>
+          <FormBaseModalDialogBody>
+            {filtersFormContainer}
+          </FormBaseModalDialogBody>
+        </FormBaseModalDialog>
+      </FormBaseModal>
     </DialogTrigger>
   );
 }

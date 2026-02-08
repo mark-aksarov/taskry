@@ -2,13 +2,15 @@
   "EditSubtaskForm": {
     "error": {
       "updateError": "Произошла ошибка на сервере. Не удалось обновить подзадачу."
-    }
+    },
+    "submitButtonLabel": "Обновить подзадачу"
   },
 
   "NewSubtaskForm": {
     "error": {
       "creationError": "Произошла ошибка на сервере. Не удалось создать подзадачу."
-    }
+    },
+    "submitButtonLabel": "Добавить подзадачу"
   },
 
   "DeleteSubtaskModal": {
@@ -52,13 +54,11 @@
   },
 
   "NewSubtaskModal": {
-    "heading": "Новая подзадача",
-    "submitButtonLabel": "Добавить подзадачу"
+    "heading": "Новая подзадача"
   },
 
   "EditSubtaskModal": {
-    "heading": "Редактировать подзадачу",
-    "submitButtonLabel": "Обновить подзадачу"
+    "heading": "Редактировать подзадачу"
   },
 
   "NewSubtaskDialogAddButton": {

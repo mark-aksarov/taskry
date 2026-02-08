@@ -1,11 +1,19 @@
 "use client";
 
+import {
+  FormBase,
+  FormBaseBody,
+  FormBaseFooter,
+  FormBaseSubmitButton,
+} from "@/components/common/FormBase";
+
 import { useActionState } from "react";
 import { useTranslations } from "next-intl";
-import { FormBase } from "@/components/common/FormBase";
 import { ActionFn, ActionState } from "@/lib/actions/types";
 import { ErrorBanner } from "@/components/common/ErrorBanner";
 import { UserPasswordTextField } from "../UserPasswordTextField";
+import { handleActionSubmit } from "@/lib/utils/handleActionSubmit";
+import { useCloseOverlayOnActionSuccess } from "@/lib/hooks/useCloseOverlayOnActionSuccess";
 
 const initialState: ActionState = {
   status: null,
@@ -40,12 +48,22 @@ export function ChangePasswordForm({
     }
   }
 
-  return (
-    <FormBase id="change-password-form" state={state} action={action}>
-      {userId && <input type="hidden" name="id" value={userId} />}
-      <UserPasswordTextField />
+  useCloseOverlayOnActionSuccess(state);
 
-      {state.status === "error" && <ErrorBanner>{serverError}</ErrorBanner>}
+  return (
+    <FormBase
+      id="change-password-form"
+      onSubmit={(e) => handleActionSubmit(e, action)}
+    >
+      <FormBaseBody>
+        {userId && <input type="hidden" name="id" value={userId} />}
+        <UserPasswordTextField />
+
+        {state.status === "error" && <ErrorBanner>{serverError}</ErrorBanner>}
+      </FormBaseBody>
+      <FormBaseFooter>
+        <FormBaseSubmitButton label={t("submitButtonLabel")} />
+      </FormBaseFooter>
     </FormBase>
   );
 }

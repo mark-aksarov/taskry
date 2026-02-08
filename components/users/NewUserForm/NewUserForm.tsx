@@ -1,13 +1,21 @@
 "use client";
 
+import {
+  FormBase,
+  FormBaseBody,
+  FormBaseFooter,
+  FormBaseSubmitButton,
+} from "@/components/common/FormBase";
+
 import { useActionState } from "react";
 import { useTranslations } from "next-intl";
-import { FormBase } from "@/components/common/FormBase";
 import { UserEmailTextField } from "../UserEmailTextField";
 import { ActionFn, ActionState } from "@/lib/actions/types";
 import { ErrorBanner } from "@/components/common/ErrorBanner";
 import { UserFullNameTextField } from "../UserFullNameTextField";
 import { UserPasswordTextField } from "../UserPasswordTextField";
+import { handleActionSubmit } from "@/lib/utils/handleActionSubmit";
+import { useCloseOverlayOnActionSuccess } from "@/lib/hooks/useCloseOverlayOnActionSuccess";
 
 const initialState: ActionState = {
   status: null,
@@ -21,6 +29,8 @@ export function NewUserForm({ createUser }: NewUserFormProps) {
   const t = useTranslations("users.NewUserForm");
 
   const [state, action, pending] = useActionState(createUser, initialState);
+
+  useCloseOverlayOnActionSuccess(state);
 
   let serverError = null;
 
@@ -37,12 +47,21 @@ export function NewUserForm({ createUser }: NewUserFormProps) {
   }
 
   return (
-    <FormBase id="new-user-form" state={state} action={action}>
-      <UserFullNameTextField />
-      <UserEmailTextField />
-      <UserPasswordTextField />
+    <FormBase
+      id="new-user-form"
+      onSubmit={(e) => handleActionSubmit(e, action)}
+    >
+      <FormBaseBody>
+        <UserFullNameTextField />
+        <UserEmailTextField />
+        <UserPasswordTextField />
 
-      {state.status === "error" && <ErrorBanner>{serverError}</ErrorBanner>}
+        {state.status === "error" && <ErrorBanner>{serverError}</ErrorBanner>}
+      </FormBaseBody>
+
+      <FormBaseFooter>
+        <FormBaseSubmitButton label={t("submitButtonLabel")} />
+      </FormBaseFooter>
     </FormBase>
   );
 }

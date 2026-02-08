@@ -2,12 +2,12 @@
   "NewPositionForm": {
     "error": {
       "creationError": "A server error occurred. Failed to create position."
-    }
+    },
+    "submitButtonLabel": "Create Position"
   },
 
   "NewPositionModal": {
-    "title": "New Position",
-    "submitButtonLabel": "Create Position"
+    "title": "New Position"
   },
 
   "PositionNameTextField": {

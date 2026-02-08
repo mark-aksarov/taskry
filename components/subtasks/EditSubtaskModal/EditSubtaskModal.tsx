@@ -1,12 +1,12 @@
 import {
   FormBaseModal,
   FormBaseModalDialog,
-  FormBaseSubmitButton,
+  FormBaseModalDialogBody,
 } from "@/components/common/FormBaseModal";
 
 import { useTranslations } from "next-intl";
 import { ModalProps } from "@/components/ui/Modal";
-import { DialogBody, DialogFooter, DialogHeader } from "@/components/ui/Dialog";
+import { DialogHeader } from "@/components/ui/Dialog";
 
 interface EditSubtaskModalProps
   extends Pick<ModalProps, "isOpen" | "onOpenChange"> {
@@ -27,13 +27,7 @@ export function EditSubtaskModal({
     >
       <FormBaseModalDialog>
         <DialogHeader>{t("heading")}</DialogHeader>
-        <DialogBody>{editSubtaskForm}</DialogBody>
-        <DialogFooter>
-          <FormBaseSubmitButton
-            form="edit-subtask-form"
-            label={t("submitButtonLabel")}
-          />
-        </DialogFooter>
+        <FormBaseModalDialogBody>{editSubtaskForm}</FormBaseModalDialogBody>
       </FormBaseModalDialog>
     </FormBaseModal>
   );

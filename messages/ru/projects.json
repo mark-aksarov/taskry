@@ -2,13 +2,15 @@
   "EditProjectForm": {
     "error": {
       "updateError": "Произошла ошибка на сервере. Не удалось обновить проект."
-    }
+    },
+    "submitButtonLabel": "Обновить проект"
   },
 
   "NewProjectForm": {
     "error": {
       "creationError": "Произошла ошибка на сервере. Не удалось создать проект."
-    }
+    },
+    "submitButtonLabel": "Создать проект"
   },
 
   "ProjectDetailCard": {
@@ -33,13 +35,11 @@
   },
 
   "NewProjectModal": {
-    "title": "Новый проект",
-    "submitButtonLabel": "Создать проект"
+    "title": "Новый проект"
   },
 
   "EditProjectModal": {
-    "title": "Изменить проект",
-    "submitButtonLabel": "Обновить проект"
+    "title": "Изменить проект"
   },
 
   "ProjectToolbarFiltersModalTrigger": {

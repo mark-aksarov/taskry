@@ -2,11 +2,13 @@
   "EditCustomerForm": {
     "error": {
       "updateError": "Произошла ошибка на сервере. Не удалось обновить клиента."
-    }
+    },
+    "submitButtonLabel": "Обновить клиента"
   },
 
   "NewCustomerForm": {
-    "creationError": "Произошла ошибка на сервере. Не удалось создать клиента."
+    "creationError": "Произошла ошибка на сервере. Не удалось создать клиента.",
+    "submitButtonLabel": "Создать клиента"
   },
 
   "TotalCustomersCard": {
@@ -40,13 +42,11 @@
   },
 
   "NewCustomerModal": {
-    "title": "Новый клиент",
-    "submitButtonLabel": "Создать клиента"
+    "title": "Новый клиент"
   },
 
   "EditCustomerModal": {
-    "title": "Изменить клиента",
-    "submitButtonLabel": "Обновить клиента"
+    "title": "Изменить клиента"
   },
 
   "CustomerDetailCard": {

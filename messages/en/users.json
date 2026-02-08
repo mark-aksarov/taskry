@@ -1,7 +1,6 @@
 {
   "ChangePasswordModal": {
-    "title": "Change Password",
-    "submitButtonLabel": "Change Password"
+    "title": "Change Password"
   },
 
   "ChangePasswordForm": {
@@ -10,7 +9,8 @@
       "passwordTooShort": "Password is too short",
       "passwordTooLong": "Password is too long",
       "internalServerError": "A server error occurred. Failed to change user password."
-    }
+    },
+    "submitButtonLabel": "Change Password"
   },
 
   "EditUserForm": {
@@ -20,7 +20,8 @@
       "userAlreadyExists": "User already exists with this email",
       "userCreationFailed": "Failed to create user",
       "internalServerError": "A server error occurred. Failed to update user."
-    }
+    },
+    "submitButtonLabel": "Update user"
   },
 
   "NewUserForm": {
@@ -28,17 +29,16 @@
       "accessDenied": "You are not allowed to update users",
       "noDataToUpdate": "No data to update",
       "internalServerError": "A server error occurred. Failed to create user."
-    }
-  },
-
-  "NewUserModal": {
-    "title": "New User",
+    },
     "submitButtonLabel": "Create User"
   },
 
+  "NewUserModal": {
+    "title": "New User"
+  },
+
   "EditUserModal": {
-    "title": "Edit user",
-    "submitButtonLabel": "Update user"
+    "title": "Edit user"
   },
 
   "UserFullNameTextField": {

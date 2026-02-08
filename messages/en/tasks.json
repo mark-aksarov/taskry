@@ -2,13 +2,15 @@
   "EditTaskForm": {
     "error": {
       "updateError": "A server error occurred. Failed to update task."
-    }
+    },
+    "submitButtonLabel": "Update Task"
   },
 
   "NewTaskForm": {
     "error": {
       "creationError": "A server error occurred. Failed to create task."
-    }
+    },
+    "submitButtonLabel": "Create Task"
   },
 
   "TaskDetailCard": {
@@ -118,13 +120,11 @@
   },
 
   "NewTaskModal": {
-    "title": "New Task",
-    "submitButtonLabel": "Create Task"
+    "title": "New Task"
   },
 
   "EditTaskModal": {
-    "title": "Edit Task",
-    "submitButtonLabel": "Update Task"
+    "title": "Edit Task"
   },
 
   "TaskCommentsModal": {

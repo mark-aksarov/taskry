@@ -1,15 +1,23 @@
 "use client";
 
+import {
+  FormBase,
+  FormBaseBody,
+  FormBaseFooter,
+  FormBaseSubmitButton,
+} from "@/components/common/FormBase";
+
 import { useActionState } from "react";
 import { useTranslations } from "next-intl";
-import { FormBase } from "@/components/common/FormBase";
 import { ActionFn, ActionState } from "@/lib/actions/types";
 import { ErrorBanner } from "@/components/common/ErrorBanner";
 import { CustomerBioTextField } from "../CustomerBioTextField";
 import { CustomerEmailTextField } from "../CustomerEmailTextField";
+import { handleActionSubmit } from "@/lib/utils/handleActionSubmit";
 import { CustomerFullNameTextField } from "../CustomerFullNameTextField";
 import { CustomerPublicLinkTextField } from "../CustomerPublicLinkTextField";
 import { CustomerPhoneNumberTextField } from "../CustomerPhoneNumberTextField";
+import { useCloseOverlayOnActionSuccess } from "@/lib/hooks/useCloseOverlayOnActionSuccess";
 
 const initialState: ActionState = {
   status: null,
@@ -40,19 +48,29 @@ export function EditCustomerForm({
 
   const [state, action, pending] = useActionState(updateCustomer, initialState);
 
-  return (
-    <FormBase id="edit-customer-form" state={state} action={action}>
-      {customerId && <input type="hidden" name="id" value={customerId} />}
+  useCloseOverlayOnActionSuccess(state);
 
-      <CustomerFullNameTextField defaultValue={fullNameDefaultValue} />
-      <CustomerBioTextField defaultValue={bioDefaultValue} />
-      <CustomerEmailTextField defaultValue={emailDefaultValue} />
-      <CustomerPhoneNumberTextField defaultValue={phoneNumberDefaultValue} />
-      <CustomerPublicLinkTextField defaultValue={publicLinkDefaultValue} />
-      {companySelect}
-      {state.status === "error" && (
-        <ErrorBanner>{t("error.updateError")}</ErrorBanner>
-      )}
+  return (
+    <FormBase
+      id="edit-customer-form"
+      onSubmit={(e) => handleActionSubmit(e, action)}
+    >
+      <FormBaseBody>
+        {customerId && <input type="hidden" name="id" value={customerId} />}
+
+        <CustomerFullNameTextField defaultValue={fullNameDefaultValue} />
+        <CustomerBioTextField defaultValue={bioDefaultValue} />
+        <CustomerEmailTextField defaultValue={emailDefaultValue} />
+        <CustomerPhoneNumberTextField defaultValue={phoneNumberDefaultValue} />
+        <CustomerPublicLinkTextField defaultValue={publicLinkDefaultValue} />
+        {companySelect}
+        {state.status === "error" && (
+          <ErrorBanner>{t("error.updateError")}</ErrorBanner>
+        )}
+      </FormBaseBody>
+      <FormBaseFooter>
+        <FormBaseSubmitButton label={t("submitButtonLabel")} />
+      </FormBaseFooter>
     </FormBase>
   );
 }

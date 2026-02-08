@@ -1,7 +1,6 @@
 {
   "ChangePasswordModal": {
-    "title": "Изменить пароль",
-    "submitButtonLabel": "Изменить пароль"
+    "title": "Изменить пароль"
   },
 
   "ChangePasswordForm": {
@@ -10,7 +9,8 @@
       "passwordTooShort": "Пароль слишком короткий",
       "passwordTooLong": "Пароль слишком длинный",
       "internalServerError": "Произошла ошибка на сервере. Не удалось изменить пароль пользователя."
-    }
+    },
+    "submitButtonLabel": "Изменить пароль"
   },
 
   "EditUserForm": {
@@ -20,7 +20,8 @@
       "userAlreadyExists": "Этот email уже занят",
       "userCreationFailed": "Ошибка при создании пользователя",
       "internalServerError": "Произошла ошибка на сервере. Не удалось обновить пользователя."
-    }
+    },
+    "submitButtonLabel": "Обновить пользователя"
   },
 
   "NewUserForm": {
@@ -28,17 +29,16 @@
       "accessDenied": "У вас нет прав на редактирование пользователей",
       "noDataToUpdate": "Нет данных для обновления",
       "internalServerError": "Произошла ошибка на сервере. Не удалось создать пользователя."
-    }
-  },
-
-  "NewUserModal": {
-    "title": "Новый пользователь",
+    },
     "submitButtonLabel": "Создать пользователя"
   },
 
+  "NewUserModal": {
+    "title": "Новый пользователь"
+  },
+
   "EditUserModal": {
-    "title": "Изменить пользователя",
-    "submitButtonLabel": "Обновить пользователя"
+    "title": "Изменить пользователя"
   },
 
   "UserFullNameTextField": {

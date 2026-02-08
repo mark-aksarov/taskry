@@ -25,7 +25,7 @@
     "ariaLabel": "Фильтровать проекты"
   },
 
-  "ToolbarFiltersModalSubmitButton": {
+  "FiltersFormSubmitButton": {
     "label": "Применить фильтры"
   },
 

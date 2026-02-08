@@ -1,12 +1,12 @@
 import {
   FormBaseModal,
   FormBaseModalDialog,
-  FormBaseSubmitButton,
+  FormBaseModalDialogBody,
 } from "@/components/common/FormBaseModal";
 
 import { useTranslations } from "next-intl";
 import { ModalProps } from "@/components/ui/Modal";
-import { DialogBody, DialogFooter, DialogHeader } from "@/components/ui/Dialog";
+import { DialogHeader } from "@/components/ui/Dialog";
 
 interface NewCompanyModalProps
   extends Pick<ModalProps, "isOpen" | "onOpenChange"> {
@@ -23,13 +23,7 @@ export function NewCompanyModal({
     <FormBaseModal className="md:w-[350px]" {...props}>
       <FormBaseModalDialog>
         <DialogHeader>{t("title")}</DialogHeader>
-        <DialogBody>{newCompanyForm}</DialogBody>
-        <DialogFooter>
-          <FormBaseSubmitButton
-            form="new-company-form"
-            label={t("submitButtonLabel")}
-          />
-        </DialogFooter>
+        <FormBaseModalDialogBody>{newCompanyForm}</FormBaseModalDialogBody>
       </FormBaseModalDialog>
     </FormBaseModal>
   );

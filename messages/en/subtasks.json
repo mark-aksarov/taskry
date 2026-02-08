@@ -2,13 +2,15 @@
   "EditSubtaskForm": {
     "error": {
       "updateError": "A server error occurred. Failed to update subtask."
-    }
+    },
+    "submitButtonLabel": "Edit Subtask"
   },
 
   "NewSubtaskForm": {
     "error": {
       "creationError": "A server error occurred. Failed to create subtask."
-    }
+    },
+    "submitButtonLabel": "Add Subtask"
   },
 
   "DeleteSubtaskModal": {
@@ -52,13 +54,11 @@
   },
 
   "NewSubtaskModal": {
-    "heading": "New Subtask",
-    "submitButtonLabel": "Add Subtask"
+    "heading": "New Subtask"
   },
 
   "EditSubtaskModal": {
-    "heading": "Edit Subtask",
-    "submitButtonLabel": "Edit Subtask"
+    "heading": "Edit Subtask"
   },
 
   "NewSubtaskDialogAddButton": {

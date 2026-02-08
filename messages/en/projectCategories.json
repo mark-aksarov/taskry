@@ -2,12 +2,12 @@
   "NewProjectCategoryForm": {
     "error": {
       "creationError": "A server error occurred. Failed to create project category."
-    }
+    },
+    "submitButtonLabel": "Create category"
   },
 
   "NewProjectCategoryModal": {
-    "title": "New project category",
-    "submitButtonLabel": "Create category"
+    "title": "New project category"
   },
 
   "ProjectCategoryNameTextField": {

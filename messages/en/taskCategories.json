@@ -2,12 +2,12 @@
   "NewTaskCategoryForm": {
     "error": {
       "creationError": "A server error occurred. Failed to create task category."
-    }
+    },
+    "submitButtonLabel": "Create category"
   },
 
   "NewTaskCategoryModal": {
-    "title": "New task category",
-    "submitButtonLabel": "Create category"
+    "title": "New task category"
   },
 
   "TaskCategoryNameTextField": {

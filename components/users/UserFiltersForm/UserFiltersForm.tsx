@@ -5,13 +5,19 @@ import {
   normalizeBooleanFields,
 } from "@/lib/utils/formDataUtils";
 
+import {
+  FormBase,
+  FormBaseBody,
+  FormBaseFooter,
+} from "@/components/common/FormBase";
+
 import { useLocale } from "next-intl";
 import { UserFilters } from "@/lib/types";
-import { Form } from "react-aria-components";
 import { Divider } from "@/components/ui/Divider";
 import { usePathname, useRouter } from "@/i18n/navigation";
 import { UserFiltersFormRoleCheckboxGroup } from "./UserFiltersFormRoleCheckboxGroup";
 import { UserFiltersFormActiveTasksSwitch } from "./UserFiltersFormActiveTasksSwitch";
+import { FiltersFormSubmitButton } from "@/components/common/FiltersFormSubmitButton";
 import { UserFiltersFormOverdueTasksSwitch } from "./UserFiltersFormOverdueTasksSwitch";
 import { UserFiltersFormNoActiveTasksSwitch } from "./UserFiltersFormNoActiveTasksSwitch";
 
@@ -45,8 +51,8 @@ export function UserFiltersForm({
   };
 
   return (
-    <Form id="user-filter-form" onSubmit={handleSubmit}>
-      <div className="flex flex-col gap-4">
+    <FormBase id="customer-filter-form" onSubmit={handleSubmit}>
+      <FormBaseBody>
         <UserFiltersFormNoActiveTasksSwitch filters={filters} />
         <Divider />
 
@@ -60,7 +66,10 @@ export function UserFiltersForm({
         <Divider />
 
         {positionCheckboxGroup}
-      </div>
-    </Form>
+      </FormBaseBody>
+      <FormBaseFooter>
+        <FiltersFormSubmitButton />
+      </FormBaseFooter>
+    </FormBase>
   );
 }

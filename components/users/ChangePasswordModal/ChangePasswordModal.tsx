@@ -1,11 +1,11 @@
 import {
   FormBaseModal,
   FormBaseModalDialog,
-  FormBaseSubmitButton,
+  FormBaseModalDialogBody,
 } from "@/components/common/FormBaseModal";
 
 import { ModalProps } from "@/components/ui/Modal";
-import { DialogBody, DialogFooter, DialogHeader } from "@/components/ui/Dialog";
+import { DialogHeader } from "@/components/ui/Dialog";
 
 import { useTranslations } from "next-intl";
 
@@ -28,13 +28,7 @@ export function ChangePasswordModal({
     >
       <FormBaseModalDialog>
         <DialogHeader>{t("title")}</DialogHeader>
-        <DialogBody>{changePasswordForm}</DialogBody>
-        <DialogFooter>
-          <FormBaseSubmitButton
-            form="change-password-form"
-            label={t("submitButtonLabel")}
-          />
-        </DialogFooter>
+        <FormBaseModalDialogBody>{changePasswordForm}</FormBaseModalDialogBody>
       </FormBaseModalDialog>
     </FormBaseModal>
   );

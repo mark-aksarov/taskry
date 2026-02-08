@@ -1,17 +1,25 @@
 "use client";
 
+import {
+  FormBase,
+  FormBaseBody,
+  FormBaseFooter,
+  FormBaseSubmitButton,
+} from "@/components/common/FormBase";
+
 import { DateValue } from "react-aria";
 import { useActionState } from "react";
 import { useTranslations } from "next-intl";
 import { UserBioTextField } from "../UserBioTextField";
-import { FormBase } from "@/components/common/FormBase";
 import { ActionFn, ActionState } from "@/lib/actions/types";
 import { ErrorBanner } from "@/components/common/ErrorBanner";
 import { UserAddressTextField } from "../UserAddressTextField";
 import { UserFullNameTextField } from "../UserFullNameTextField";
+import { handleActionSubmit } from "@/lib/utils/handleActionSubmit";
 import { UserBirthdateDatePicker } from "../UserBirthdateDatePicker";
 import { UserPublicLinkTextField } from "../UserPublicLinkTextField";
 import { UserPhoneNumberTextField } from "../UserPhoneNumberTextField";
+import { useCloseOverlayOnActionSuccess } from "@/lib/hooks/useCloseOverlayOnActionSuccess";
 
 const initialState: ActionState = {
   status: null,
@@ -45,6 +53,8 @@ export function EditUserForm({
 
   const [state, action, pending] = useActionState(updateUser, initialState);
 
+  useCloseOverlayOnActionSuccess(state);
+
   let serverError = null;
 
   if (state.status === "error") {
@@ -64,17 +74,26 @@ export function EditUserForm({
   }
 
   return (
-    <FormBase id="edit-user-form" state={state} action={action}>
-      {userId && <input type="hidden" name="id" value={userId} />}
-      <UserFullNameTextField defaultValue={fullNameDefaultValue} />
-      <UserBioTextField defaultValue={bioDefaultValue} />
-      <UserBirthdateDatePicker defaultValue={birthdateDefaultValue} />
-      <UserPhoneNumberTextField defaultValue={phoneNumberDefaultValue} />
-      <UserPublicLinkTextField defaultValue={publicLinkDefaultValue} />
-      <UserAddressTextField defaultValue={addressDefaultValue} />
-      {positionSelect}
+    <FormBase
+      id="edit-user-form"
+      onSubmit={(e) => handleActionSubmit(e, action)}
+    >
+      <FormBaseBody>
+        {userId && <input type="hidden" name="id" value={userId} />}
+        <UserFullNameTextField defaultValue={fullNameDefaultValue} />
+        <UserBioTextField defaultValue={bioDefaultValue} />
+        <UserBirthdateDatePicker defaultValue={birthdateDefaultValue} />
+        <UserPhoneNumberTextField defaultValue={phoneNumberDefaultValue} />
+        <UserPublicLinkTextField defaultValue={publicLinkDefaultValue} />
+        <UserAddressTextField defaultValue={addressDefaultValue} />
+        {positionSelect}
 
-      {state.status === "error" && <ErrorBanner>{serverError}</ErrorBanner>}
+        {state.status === "error" && <ErrorBanner>{serverError}</ErrorBanner>}
+      </FormBaseBody>
+
+      <FormBaseFooter>
+        <FormBaseSubmitButton label={t("submitButtonLabel")} />
+      </FormBaseFooter>
     </FormBase>
   );
 }

@@ -1,12 +1,12 @@
 import {
   FormBaseModal,
   FormBaseModalDialog,
-  FormBaseSubmitButton,
+  FormBaseModalDialogBody,
 } from "@/components/common/FormBaseModal";
 
 import { useTranslations } from "next-intl";
 import { ModalProps } from "@/components/ui/Modal";
-import { DialogBody, DialogFooter, DialogHeader } from "@/components/ui/Dialog";
+import { DialogFooter, DialogHeader } from "@/components/ui/Dialog";
 
 interface NewTaskModalProps
   extends Pick<ModalProps, "isOpen" | "onOpenChange"> {
@@ -23,13 +23,9 @@ export function NewTaskModal({
     <FormBaseModal data-test="new-task-modal" {...props}>
       <FormBaseModalDialog>
         <DialogHeader>{t("title")}</DialogHeader>
-        <DialogBody>{newTaskFormContainer}</DialogBody>
-        <DialogFooter>
-          <FormBaseSubmitButton
-            form="new-task-form"
-            label={t("submitButtonLabel")}
-          />
-        </DialogFooter>
+        <FormBaseModalDialogBody>
+          {newTaskFormContainer}
+        </FormBaseModalDialogBody>
       </FormBaseModalDialog>
     </FormBaseModal>
   );

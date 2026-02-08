@@ -1,10 +1,8 @@
 export { ToolbarDesktop } from "./ToolbarDesktop";
 export { ToolbarMobileTop } from "./ToolbarMobileTop";
-export { ToolbarFiltersModal } from "./ToolbarFiltersModal";
 export { ToolbarMobileBottom } from "./ToolbarMobileBottom";
 export { ToolbarMobileHeading } from "./ToolbarMobileHeading";
 export { ToolbarCreateNewButton } from "./ToolbarCreateNewButton";
-export { ToolbarFiltersModalDialog } from "./ToolbarFiltersModalDialog";
 export { ToolbarActionsMenuTrigger } from "./ToolbarActionsMenuTrigger";
 export { ToolbarSortingMenuTrigger } from "./ToolbarSortingMenuTrigger";
 export { ToolbarActionsButtonMobile } from "./ToolbarActionsButtonMobile";
@@ -12,6 +10,5 @@ export { ToolbarSortingButtonMobile } from "./ToolbarSortingButtonMobile";
 export { ToolbarActionsButtonDesktop } from "./ToolbarActionsButtonDesktop";
 export { ToolbarCreateNewMenuTrigger } from "./ToolbarCreateNewMenuTrigger";
 export { ToolbarSortingButtonDesktop } from "./ToolbarSortingButtonDesktop";
-export { ToolbarFiltersModalSubmitButton } from "./ToolbarFiltersModalSubmitButton";
 export { ToolbarFiltersButtonMobile } from "./ToolbarFiltersButtonMobile";
 export { ToolbarFiltersButtonDesktop } from "./ToolbarFiltersButtonDesktop";

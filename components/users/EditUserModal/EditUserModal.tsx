@@ -1,13 +1,12 @@
 import {
   FormBaseModal,
   FormBaseModalDialog,
-  FormBaseSubmitButton,
+  FormBaseModalDialogBody,
 } from "@/components/common/FormBaseModal";
 
-import { ModalProps } from "@/components/ui/Modal";
-import { DialogBody, DialogFooter, DialogHeader } from "@/components/ui/Dialog";
-
 import { useTranslations } from "next-intl";
+import { ModalProps } from "@/components/ui/Modal";
+import { DialogHeader } from "@/components/ui/Dialog";
 
 interface EditUserModalProps
   extends Pick<ModalProps, "isOpen" | "onOpenChange"> {
@@ -24,13 +23,9 @@ export function EditUserModal({
     <FormBaseModal data-test="edit-user-modal" {...props}>
       <FormBaseModalDialog>
         <DialogHeader>{t("title")}</DialogHeader>
-        <DialogBody>{editUserFormContainer}</DialogBody>
-        <DialogFooter>
-          <FormBaseSubmitButton
-            form="edit-user-form"
-            label={t("submitButtonLabel")}
-          />
-        </DialogFooter>
+        <FormBaseModalDialogBody>
+          {editUserFormContainer}
+        </FormBaseModalDialogBody>
       </FormBaseModalDialog>
     </FormBaseModal>
   );

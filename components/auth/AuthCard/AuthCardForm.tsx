@@ -1,7 +1,7 @@
 "use client";
 
-import { startTransition } from "react";
 import { Form } from "react-aria-components";
+import { handleActionSubmit } from "@/lib/utils/handleActionSubmit";
 
 interface AuthCardFormProps {
   action: (payload: FormData) => void;
@@ -9,14 +9,11 @@ interface AuthCardFormProps {
 }
 
 export function AuthCardForm({ action, children }: AuthCardFormProps) {
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    const formData = new FormData(event.currentTarget);
-    startTransition(() => action(formData));
-  }
-
   return (
-    <Form onSubmit={handleSubmit} className="flex flex-col gap-6">
+    <Form
+      onSubmit={(e) => handleActionSubmit(e, action)}
+      className="flex flex-col gap-6"
+    >
       {children}
     </Form>
   );

@@ -1,12 +1,12 @@
 import {
   FormBaseModal,
   FormBaseModalDialog,
-  FormBaseSubmitButton,
+  FormBaseModalDialogBody,
 } from "@/components/common/FormBaseModal";
 
 import { useTranslations } from "next-intl";
 import { ModalProps } from "@/components/ui/Modal";
-import { DialogBody, DialogFooter, DialogHeader } from "@/components/ui/Dialog";
+import { DialogHeader } from "@/components/ui/Dialog";
 
 interface NewProjectModalProps
   extends Pick<ModalProps, "isOpen" | "onOpenChange"> {
@@ -23,13 +23,9 @@ export function NewProjectModal({
     <FormBaseModal data-test="new-project-modal" {...props}>
       <FormBaseModalDialog>
         <DialogHeader>{t("title")}</DialogHeader>
-        <DialogBody>{newProjectFormContainer}</DialogBody>
-        <DialogFooter>
-          <FormBaseSubmitButton
-            form="new-project-form"
-            label={t("submitButtonLabel")}
-          />
-        </DialogFooter>
+        <FormBaseModalDialogBody>
+          {newProjectFormContainer}
+        </FormBaseModalDialogBody>
       </FormBaseModalDialog>
     </FormBaseModal>
   );

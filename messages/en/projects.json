@@ -2,13 +2,15 @@
   "EditProjectForm": {
     "error": {
       "updateError": "A server error occurred. Failed to update project."
-    }
+    },
+    "submitButtonLabel": "Update Project"
   },
 
   "NewProjectForm": {
     "error": {
       "creationError": "A server error occurred. Failed to create project."
-    }
+    },
+    "submitButtonLabel": "Create Project"
   },
 
   "ProjectDetailCard": {
@@ -33,13 +35,11 @@
   },
 
   "NewProjectModal": {
-    "title": "New Project",
-    "submitButtonLabel": "Create Project"
+    "title": "New Project"
   },
 
   "EditProjectModal": {
-    "title": "Edit Project",
-    "submitButtonLabel": "Update Project"
+    "title": "Edit Project"
   },
 
   "ProjectToolbarFiltersModalTrigger": {

@@ -2,12 +2,12 @@
   "NewCompanyForm": {
     "error": {
       "creationError": "A server error occurred. Failed to create company."
-    }
+    },
+    "submitButtonLabel": "Create company"
   },
 
   "NewCompanyModal": {
-    "title": "New company",
-    "submitButtonLabel": "Create company"
+    "title": "New company"
   },
 
   "CompanyNameTextField": {

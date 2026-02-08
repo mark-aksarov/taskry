@@ -1,11 +1,11 @@
 import {
   FormBaseModal,
   FormBaseModalDialog,
-  FormBaseSubmitButton,
+  FormBaseModalDialogBody,
 } from "@/components/common/FormBaseModal";
 
 import { ModalProps } from "@/components/ui/Modal";
-import { DialogBody, DialogFooter, DialogHeader } from "@/components/ui/Dialog";
+import { DialogHeader } from "@/components/ui/Dialog";
 
 import { useTranslations } from "next-intl";
 
@@ -24,13 +24,9 @@ export function NewCustomerModal({
     <FormBaseModal data-test="new-customer-modal" {...props}>
       <FormBaseModalDialog>
         <DialogHeader>{t("title")}</DialogHeader>
-        <DialogBody>{newCustomerFormContainer}</DialogBody>
-        <DialogFooter>
-          <FormBaseSubmitButton
-            form="new-customer-form"
-            label={t("submitButtonLabel")}
-          />
-        </DialogFooter>
+        <FormBaseModalDialogBody>
+          {newCustomerFormContainer}
+        </FormBaseModalDialogBody>
       </FormBaseModalDialog>
     </FormBaseModal>
   );

@@ -2,12 +2,12 @@
   "NewCompanyForm": {
     "error": {
       "creationError": "Произошла ошибка на сервере. Не удалось создать компанию."
-    }
+    },
+    "submitButtonLabel": "Создать компанию"
   },
 
   "NewCompanyModal": {
-    "title": "Новая компания",
-    "submitButtonLabel": "Создать компанию"
+    "title": "Новая компания"
   },
 
   "CompanyNameTextField": {

@@ -5,11 +5,17 @@ import {
   normalizeBooleanFields,
 } from "@/lib/utils/formDataUtils";
 
+import {
+  FormBase,
+  FormBaseBody,
+  FormBaseFooter,
+} from "@/components/common/FormBase";
+
 import { useLocale } from "next-intl";
-import { Form } from "react-aria-components";
 import { CustomerFilters } from "@/lib/types";
 import { Divider } from "@/components/ui/Divider";
 import { usePathname, useRouter } from "@/i18n/navigation";
+import { FiltersFormSubmitButton } from "@/components/common/FiltersFormSubmitButton";
 import { CustomerFiltersFormActiveProjectsSwitch } from "./CustomerFiltersFormActiveProjectsSwitch";
 import { CustomerFiltersFormOverdueProjectsSwitch } from "./CustomerFiltersFormOverdueProjectsSwitch";
 import { CustomerFiltersFormNoActiveProjectsSwitch } from "./CustomerFiltersFormNoActiveProjectsSwitch";
@@ -44,8 +50,8 @@ export function CustomerFiltersForm({
   };
 
   return (
-    <Form id="customer-filter-form" onSubmit={handleSubmit}>
-      <div className="flex flex-col gap-4">
+    <FormBase id="customer-filter-form" onSubmit={handleSubmit}>
+      <FormBaseBody>
         <CustomerFiltersFormNoActiveProjectsSwitch filters={filters} />
         <Divider />
 
@@ -56,7 +62,10 @@ export function CustomerFiltersForm({
         <Divider />
 
         {companyCheckboxGroup}
-      </div>
-    </Form>
+      </FormBaseBody>
+      <FormBaseFooter>
+        <FiltersFormSubmitButton />
+      </FormBaseFooter>
+    </FormBase>
   );
 }

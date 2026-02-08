@@ -2,11 +2,13 @@
   "EditCustomerForm": {
     "error": {
       "updateError": "A server error occurred. Failed to update customer."
-    }
+    },
+    "submitButtonLabel": "Update Customer"
   },
 
   "NewCustomerForm": {
-    "creationError": "A server error occurred. Failed to create customer."
+    "creationError": "A server error occurred. Failed to create customer.",
+    "submitButtonLabel": "Create Customer"
   },
 
   "TotalCustomersCard": {
@@ -40,13 +42,11 @@
   },
 
   "NewCustomerModal": {
-    "title": "New Customer",
-    "submitButtonLabel": "Create Customer"
+    "title": "New Customer"
   },
 
   "EditCustomerModal": {
-    "title": "Edit Customer",
-    "submitButtonLabel": "Update Customer"
+    "title": "Edit Customer"
   },
 
   "CustomerDetailCard": {

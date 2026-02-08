@@ -2,13 +2,15 @@
   "EditTaskForm": {
     "error": {
       "updateError": "Произошла ошибка на сервере. Не удалось обновить задачу."
-    }
+    },
+    "submitButtonLabel": "Обновить задачу"
   },
 
   "NewTaskForm": {
     "error": {
       "creationError": "Произошла ошибка на сервере. Не удалось создать задачу."
-    }
+    },
+    "submitButtonLabel": "Создать задачу"
   },
 
   "TaskDetailCard": {
@@ -118,13 +120,11 @@
   },
 
   "NewTaskModal": {
-    "title": "Новая задача",
-    "submitButtonLabel": "Создать задачу"
+    "title": "Новая задача"
   },
 
   "EditTaskModal": {
-    "title": "Редактировать задачу",
-    "submitButtonLabel": "Обновить задачу"
+    "title": "Редактировать задачу"
   },
 
   "TaskCommentsModal": {
