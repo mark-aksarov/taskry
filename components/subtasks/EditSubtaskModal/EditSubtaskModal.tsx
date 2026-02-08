@@ -1,7 +1,7 @@
 import {
   FormBaseModal,
   FormBaseModalDialog,
-  FormBaseModalSubmitButton,
+  FormBaseSubmitButton,
 } from "@/components/common/FormBaseModal";
 
 import { useTranslations } from "next-intl";
@@ -29,7 +29,7 @@ export function EditSubtaskModal({
         <DialogHeader>{t("heading")}</DialogHeader>
         <DialogBody>{editSubtaskForm}</DialogBody>
         <DialogFooter>
-          <FormBaseModalSubmitButton
+          <FormBaseSubmitButton
             form="edit-subtask-form"
             label={t("submitButtonLabel")}
           />

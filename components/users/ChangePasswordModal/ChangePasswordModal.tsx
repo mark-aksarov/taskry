@@ -1,7 +1,7 @@
 import {
   FormBaseModal,
   FormBaseModalDialog,
-  FormBaseModalSubmitButton,
+  FormBaseSubmitButton,
 } from "@/components/common/FormBaseModal";
 
 import { ModalProps } from "@/components/ui/Modal";
@@ -30,7 +30,7 @@ export function ChangePasswordModal({
         <DialogHeader>{t("title")}</DialogHeader>
         <DialogBody>{changePasswordForm}</DialogBody>
         <DialogFooter>
-          <FormBaseModalSubmitButton
+          <FormBaseSubmitButton
             form="change-password-form"
             label={t("submitButtonLabel")}
           />

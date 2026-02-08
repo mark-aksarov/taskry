@@ -1,7 +1,7 @@
 import {
   FormBaseModal,
   FormBaseModalDialog,
-  FormBaseModalSubmitButton,
+  FormBaseSubmitButton,
 } from "@/components/common/FormBaseModal";
 
 import { useTranslations } from "next-intl";
@@ -25,7 +25,7 @@ export function EditCustomerModal({
         <DialogHeader>{t("title")}</DialogHeader>
         <DialogBody>{editCustomerFormContainer}</DialogBody>
         <DialogFooter>
-          <FormBaseModalSubmitButton
+          <FormBaseSubmitButton
             form="edit-customer-form"
             label={t("submitButtonLabel")}
           />

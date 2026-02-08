@@ -1,7 +1,7 @@
 import {
   FormBaseModal,
   FormBaseModalDialog,
-  FormBaseModalSubmitButton,
+  FormBaseSubmitButton,
 } from "@/components/common/FormBaseModal";
 
 import { ModalProps } from "@/components/ui/Modal";
@@ -23,7 +23,7 @@ export function NewUserModal({ newUserForm, ...props }: NewUserModalProps) {
         <DialogHeader>{t("title")}</DialogHeader>
         <DialogBody>{newUserForm}</DialogBody>
         <DialogFooter>
-          <FormBaseModalSubmitButton
+          <FormBaseSubmitButton
             form="new-user-form"
             label={t("submitButtonLabel")}
           />

@@ -1,7 +1,7 @@
 import {
   FormBaseModal,
   FormBaseModalDialog,
-  FormBaseModalSubmitButton,
+  FormBaseSubmitButton,
 } from "@/components/common/FormBaseModal";
 
 import { useTranslations } from "next-intl";
@@ -25,7 +25,7 @@ export function NewTaskCategoryModal({
         <DialogHeader>{t("title")}</DialogHeader>
         <DialogBody>{newTaskCategoryForm}</DialogBody>
         <DialogFooter>
-          <FormBaseModalSubmitButton
+          <FormBaseSubmitButton
             form="new-task-category-form"
             label={t("submitButtonLabel")}
           />

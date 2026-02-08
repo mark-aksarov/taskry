@@ -1,7 +1,7 @@
 import {
   FormBaseModal,
   FormBaseModalDialog,
-  FormBaseModalSubmitButton,
+  FormBaseSubmitButton,
 } from "@/components/common/FormBaseModal";
 
 import { useTranslations } from "next-intl";
@@ -25,7 +25,7 @@ export function NewProjectModal({
         <DialogHeader>{t("title")}</DialogHeader>
         <DialogBody>{newProjectFormContainer}</DialogBody>
         <DialogFooter>
-          <FormBaseModalSubmitButton
+          <FormBaseSubmitButton
             form="new-project-form"
             label={t("submitButtonLabel")}
           />

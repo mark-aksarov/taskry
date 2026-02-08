@@ -1,6 +1,6 @@
 import { Button, ButtonProps } from "@/components/ui/Button";
 
-export function FormBaseModalSubmitButton(props: ButtonProps) {
+export function FormBaseSubmitButton(props: ButtonProps) {
   return (
     <Button
       type="submit"

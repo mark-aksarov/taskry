@@ -1,7 +1,7 @@
 import {
   FormBaseModal,
   FormBaseModalDialog,
-  FormBaseModalSubmitButton,
+  FormBaseSubmitButton,
 } from "@/components/common/FormBaseModal";
 
 import { ModalProps } from "@/components/ui/Modal";
@@ -26,7 +26,7 @@ export function EditUserModal({
         <DialogHeader>{t("title")}</DialogHeader>
         <DialogBody>{editUserFormContainer}</DialogBody>
         <DialogFooter>
-          <FormBaseModalSubmitButton
+          <FormBaseSubmitButton
             form="edit-user-form"
             label={t("submitButtonLabel")}
           />

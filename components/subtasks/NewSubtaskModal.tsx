@@ -1,7 +1,7 @@
 import {
   FormBaseModal,
   FormBaseModalDialog,
-  FormBaseModalSubmitButton,
+  FormBaseSubmitButton,
 } from "../common/FormBaseModal";
 
 import { ModalProps } from "../ui/Modal";
@@ -29,7 +29,7 @@ export function NewSubtaskModal({
         <DialogHeader>{t("heading")}</DialogHeader>
         <DialogBody>{newSubtaskForm}</DialogBody>
         <DialogFooter>
-          <FormBaseModalSubmitButton
+          <FormBaseSubmitButton
             form="new-subtask-form"
             label={t("submitButtonLabel")}
           />
