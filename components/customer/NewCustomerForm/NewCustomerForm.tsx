@@ -36,7 +36,7 @@ export function NewCustomerForm({
       <CustomerPhoneNumberTextField />
       <CustomerPublicLinkTextField />
       {companySelect}
-      {state.status === "error" && (
+      {state.status === "error" && !pending && (
         <ErrorBanner>{t("creationError")}</ErrorBanner>
       )}
     </FormBase>
