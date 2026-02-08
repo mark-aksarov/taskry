@@ -54,6 +54,9 @@ const meta = {
     onPress: fn(),
   },
   decorators: [withThemedBackground],
+  parameters: {
+    backgroundVariant: "alt",
+  },
 } satisfies Meta<typeof Button>;
 
 export default meta;
@@ -149,6 +152,16 @@ export const Icon = {
         aria-label="Button"
         {...args}
       />
+    </div>
+  ),
+} satisfies Story;
+
+export const IsPending = {
+  render: (args) => (
+    <div className="flex items-start gap-4">
+      <Button size="small" label="Small" isPending {...(args as any)} />
+      <Button size="medium" label="Medium" isPending {...(args as any)} />
+      <Button size="large" label="Large" isPending {...(args as any)} />
     </div>
   ),
 } satisfies Story;

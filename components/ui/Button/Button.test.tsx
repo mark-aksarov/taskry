@@ -121,6 +121,14 @@ describe("Button", () => {
     },
   );
 
+  test("renders loader icon and applies styles when isPending is true", () => {
+    const { getByTestId } = render(<Button label="Button" isPending />);
+    const button = screen.getByRole("button");
+
+    expect(getByTestId("loader-icon")).toBeInTheDocument();
+    expect(button).toHaveClass("opacity-50 pointer-events-none");
+  });
+
   test("renders with left and right icons", () => {
     const LeftIcon = <svg data-testid="left-icon" />;
     const RightIcon = <svg data-testid="right-icon" />;

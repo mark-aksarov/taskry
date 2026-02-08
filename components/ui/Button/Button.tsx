@@ -11,6 +11,7 @@ import {
 } from "react-aria-components";
 import { tv } from "tailwind-variants";
 import { focusRing } from "../styles";
+import { Loader2 } from "lucide-react";
 
 export type ElementType = "button" | "a";
 
@@ -63,6 +64,9 @@ export const baseButtonStyles = tv({
     },
     isDisabled: {
       true: "pointer-events-none cursor-default",
+    },
+    isPending: {
+      true: "pointer-events-none opacity-50",
     },
   },
   compoundVariants: [
@@ -199,8 +203,19 @@ export const Button = <T extends ElementType = "button">({
     );
   }
 
+  const buttonProps = props as ButtonProps<"button">;
+
   return (
-    <ReactAriaButton className={classes} {...(props as ButtonProps<"button">)}>
+    <ReactAriaButton className={classes} {...buttonProps}>
+      {buttonProps.isPending && (
+        <Loader2
+          data-testid="loader-icon"
+          size={size === "small" ? 16 : size === "medium" ? 18 : 20}
+          strokeWidth={size === "small" ? 1.5 : size === "medium" ? 1.75 : 2}
+          absoluteStrokeWidth
+          className="animate-spin"
+        />
+      )}
       {iconLeft}
       {label && <span>{label}</span>}
       {iconRight}
