@@ -183,8 +183,8 @@
   },
 
   "CustomerToolbarCreateNewMenuTrigger": {
-    "dialogHeading": "Создать новое",
-    "label": "Создать новое",
+    "dialogHeading": "Создать нового",
+    "label": "Создать нового",
 
     "items": {
       "customer": "Клиент",

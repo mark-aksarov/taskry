@@ -8,10 +8,10 @@ import { CustomerGridItem } from "./CustomerGridItem";
 import { CustomerDetailModal } from "./CustomerDetailModal";
 import { getCustomerList } from "@/lib/data/customer/customer.dal";
 import { CustomerDetailContainer } from "./CustomerDetailContainer";
-import { deleteProjects } from "@/lib/actions/project/deleteProjects";
 import { CustomerListItemDTO } from "@/lib/data/customer/customer.dto";
 import { CustomerDetailBottomSheet } from "./CustomerDetailBottomSheet";
 import { EditCustomerFormContainer } from "./EditCustomerFormContainer";
+import { deleteCustomers } from "@/lib/actions/customer/deleteCustomers";
 import { CustomerItemActionMenuTrigger } from "./CustomerItemActionMenuTrigger";
 import { EntityContainerPresentation } from "../common/EntityContainerPresentation";
 
@@ -58,7 +58,7 @@ export async function CustomersContainer({
                 <CustomerItemActionMenuTrigger
                   customerId={customer.id}
                   customerFullName={customer.fullName}
-                  deleteAction={deleteProjects}
+                  deleteAction={deleteCustomers}
                   editCustomerFormContainer={
                     <EditCustomerFormContainer customerId={customer.id} />
                   }
@@ -94,7 +94,7 @@ export async function CustomersContainer({
                 <CustomerItemActionMenuTrigger
                   customerId={customer.id}
                   customerFullName={customer.fullName}
-                  deleteAction={deleteProjects}
+                  deleteAction={deleteCustomers}
                   editCustomerFormContainer={
                     <EditCustomerFormContainer customerId={customer.id} />
                   }

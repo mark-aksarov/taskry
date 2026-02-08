@@ -4,7 +4,7 @@ import {
 } from "@/components/common/EmptySection";
 import { useTranslations } from "next-intl";
 import { PageGrid } from "@/components/common/PageGrid";
-import { ToolbarDesktop } from "@/components/common/Toolbar";
+import { ToolbarDesktop, ToolbarMobileTop } from "@/components/common/Toolbar";
 import { PageContainer } from "@/components/common/PageContainer";
 import { PageEmptySection } from "@/components/common/PageEmptySection";
 
@@ -23,6 +23,9 @@ export function CustomersPageEmpty({
         <ToolbarDesktop>
           <div className="ml-auto">{customerToolbarCreateNewMenuTrigger}</div>
         </ToolbarDesktop>
+        <ToolbarMobileTop>
+          <div className="ml-auto">{customerToolbarCreateNewMenuTrigger}</div>
+        </ToolbarMobileTop>
 
         <PageEmptySection>
           <EmptySectionHeading>{t("heading")}</EmptySectionHeading>
