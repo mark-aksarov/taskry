@@ -1,14 +1,10 @@
-import {
-  seedUsers,
-  seedPositions,
-  seedWorkspaces,
-} from "@/lib/data/utils/test-utils";
-
 import { createPosition } from "../position.dal";
+import { seed } from "@/prisma/test-utils/seed";
 import { AccessDeniedError } from "../../utils/error";
-import { resetDatabase } from "@/prisma/resetDatabase";
 import { it, expect, describe, beforeAll } from "vitest";
 import { requireSession } from "@/lib/data/utils/requireSession";
+import { resetDatabase } from "@/prisma/test-utils/resetDatabase";
+import { users, positions, workspaces } from "@/prisma/test-utils/data";
 
 describe("createPosition", () => {
   beforeAll(async () => {
@@ -17,21 +13,23 @@ describe("createPosition", () => {
     });
 
     await resetDatabase();
-    await seedWorkspaces();
-    await seedPositions();
-    await seedUsers();
+
+    await seed({
+      workspaces,
+      positions,
+      users,
+    });
   });
 
   it("should successfully create a position", async () => {
     const input = {
-      id: 1,
-      name: "Position 1",
+      name: "Position 3",
     };
 
     const result = await createPosition(input);
 
     expect(result).toBeDefined();
-    expect(result.name).toBe("Position 1");
+    expect(result.name).toBe("Position 3");
     expect(result.workspaceId).toBe(1);
   });
 
@@ -42,8 +40,7 @@ describe("createPosition", () => {
       });
 
       const createInput = {
-        id: 1,
-        name: "Position 1",
+        name: "Position 3",
       };
 
       return {

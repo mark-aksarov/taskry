@@ -1,23 +1,23 @@
-import { E2ESeedPayload } from "@/prisma/e2e/types";
+import {
+  users,
+  accounts,
+  positions,
+  companies,
+  customers,
+  workspaces,
+} from "@/prisma/test-utils/data";
 
 describe("Customer editing", () => {
   beforeEach(() => {
     cy.viewport(1440, 900);
 
-    const payload: E2ESeedPayload = {
-      companies: [{ id: 1, name: "Company 1", workspaceId: 1 }],
-      customers: [
-        {
-          id: 1,
-          email: "customer-1@example.com",
-          fullName: "Customer 1",
-          bio: "Customer 1 bio",
-          publicLink: "https://example.com/customer-1",
-          phoneNumber: "+123456",
-          companyId: 1,
-          workspaceId: 1,
-        },
-      ],
+    const payload = {
+      workspaces,
+      positions,
+      users,
+      accounts,
+      companies,
+      customers,
     };
 
     cy.task("db:reset");
@@ -25,7 +25,7 @@ describe("Customer editing", () => {
   });
 
   it("updates a customer successfully", () => {
-    cy.signIn("owner@example.com", "12345abc");
+    cy.signIn("user-1@test.com", "12345abc");
     cy.visit("/en/customers");
 
     cy.getByData("customer-item-1-action-menu-trigger").click();
@@ -52,30 +52,33 @@ describe("Customer editing", () => {
   });
 
   it("pre-fills customer form with default values", () => {
-    cy.signIn("owner@example.com", "12345abc");
+    cy.signIn("user-1@test.com", "12345abc");
     cy.visit("/en/customers");
 
     cy.getByData("customer-item-1-action-menu-trigger").click();
     cy.getMenuItem("edit").click();
 
-    cy.get("input[name=email]").should("have.value", "customer-1@example.com");
+    cy.get("input[name=email]").should("have.value", "customer-1@test.com");
     cy.get("input[name=fullName]").should("have.value", "Customer 1");
     cy.get("textarea[name=bio]").should("have.value", "Customer 1 bio");
     cy.get("input[name=publicLink]").should(
       "have.value",
       "https://example.com/customer-1",
     );
-    cy.get("input[name=phoneNumber]").should("have.value", "+123456");
+    cy.get("input[name=phoneNumber]").should("have.value", "123-456-7890");
     cy.get("select[name=companyId]").should("have.value", "1");
   });
 
   describe("edit customer access control", () => {
-    const allowedRoles = ["owner", "user"] as const;
+    const allowedUsers = [
+      { role: "owner", id: "user-1" },
+      { role: "user", id: "user-2" },
+    ] as const;
 
     describe("from customers list", () => {
-      allowedRoles.forEach((role) => {
-        it(`allows ${role} to open edit modal`, () => {
-          cy.signIn(`${role}@example.com`, "12345abc");
+      allowedUsers.forEach((user) => {
+        it(`allows ${user.role} to open edit modal`, () => {
+          cy.signIn(`${user.id}@test.com`, "12345abc");
           cy.visit("/en/customers");
 
           cy.getByData("customer-item-1-action-menu-trigger").click();
@@ -86,7 +89,7 @@ describe("Customer editing", () => {
       });
 
       it("blocks guest from editing customer", () => {
-        cy.signIn("guest@example.com", "12345abc");
+        cy.signIn("user-3@test.com", "12345abc");
         cy.visit("/en/customers");
 
         cy.getByData("customer-item-1-action-menu-trigger").click();
@@ -97,9 +100,9 @@ describe("Customer editing", () => {
     });
 
     describe("from customer details page", () => {
-      allowedRoles.forEach((role) => {
-        it(`allows ${role} to open edit modal`, () => {
-          cy.signIn(`${role}@example.com`, "12345abc");
+      allowedUsers.forEach((user) => {
+        it(`allows ${user.role} to open edit modal`, () => {
+          cy.signIn(`${user.id}@test.com`, "12345abc");
           cy.visit("/en/customers/1");
 
           cy.getByData("edit-customer-button").filter(":visible").click();
@@ -108,7 +111,7 @@ describe("Customer editing", () => {
       });
 
       it("blocks guest from editing customer", () => {
-        cy.signIn("guest@example.com", "12345abc");
+        cy.signIn("user-3@test.com", "12345abc");
         cy.visit("/en/customers/1");
 
         cy.getByData("edit-customer-button").filter(":visible").click();

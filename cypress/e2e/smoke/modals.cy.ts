@@ -1,70 +1,36 @@
-import { E2ESeedPayload } from "@/prisma/e2e/types";
+import {
+  users,
+  accounts,
+  positions,
+  workspaces,
+  companies,
+  customers,
+  projectCategories,
+  projects,
+  taskCategories,
+  tasks,
+} from "@/prisma/test-utils/data";
 
 describe("modals smoke tests", () => {
   beforeEach(() => {
     cy.viewport(1440, 900);
 
-    const payload: E2ESeedPayload = {
-      companies: [
-        {
-          id: 1,
-          name: "Company 1",
-          workspaceId: 1,
-        },
-      ],
-      customers: [
-        {
-          id: 1,
-          email: "owner@example.com",
-          fullName: "John Doe",
-          companyId: 1,
-          workspaceId: 1,
-        },
-      ],
-      projectCategories: [
-        {
-          id: 1,
-          name: "Category 1",
-          workspaceId: 1,
-        },
-      ],
-      projects: [
-        {
-          id: 1,
-          title: "Project 1",
-          status: "active",
-          deadline: new Date("2022-01-01"),
-          categoryId: 1,
-          customerId: 1,
-          workspaceId: 1,
-          creatorId: "user-1",
-        },
-      ],
-      taskCategories: [
-        {
-          id: 1,
-          name: "Category 1",
-          workspaceId: 1,
-        },
-      ],
-      tasks: [
-        {
-          id: 1,
-          title: "Task 1",
-          status: "active",
-          deadline: new Date("2022-01-01"),
-          categoryId: 1,
-          projectId: 1,
-          workspaceId: 1,
-          creatorId: "user-1",
-          assigneeId: "user-1",
-        },
-      ],
+    const payload = {
+      users,
+      accounts,
+      positions,
+      workspaces,
+      companies,
+      customers,
+      projectCategories,
+      projects,
+      taskCategories,
+      tasks,
     };
 
     cy.task("db:reset");
     cy.task("db:seed", payload);
-    cy.signIn("owner@example.com", "12345abc");
+    cy.signIn("user-1@test.com", "12345abc");
   });
 
   it("should open filter modals", () => {

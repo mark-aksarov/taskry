@@ -1,59 +1,33 @@
-import { E2ESeedPayload } from "@/prisma/e2e/types";
-import { ProjectStatus, TaskStatus } from "@/generated/prisma/enums";
+import {
+  users,
+  tasks,
+  projects,
+  accounts,
+  positions,
+  companies,
+  customers,
+  workspaces,
+} from "@/prisma/test-utils/data";
 
-describe("edit a task", () => {
+describe("Task editing", () => {
   beforeEach(() => {
-    const payload: E2ESeedPayload = {
-      companies: [{ id: 1, name: "Company 1", workspaceId: 1 }],
-      customers: [
-        {
-          id: 1,
-          email: "customer@example.com",
-          fullName: "John Doe",
-          companyId: 1,
-          workspaceId: 1,
-        },
+    const payload = {
+      workspaces,
+      users,
+      accounts,
+      positions,
+      companies,
+      customers,
+      projectCategories: [
+        { id: 1, name: "Project Category 1", workspaceId: 1 },
+        { id: 2, name: "Project Category 2", workspaceId: 1 },
       ],
-      projectCategories: [{ id: 1, name: "Category 1", workspaceId: 1 }],
       taskCategories: [
-        { id: 1, name: "Category 1", workspaceId: 1 },
-        { id: 2, name: "Category 2", workspaceId: 1 },
+        { id: 1, name: "Task Category 1", workspaceId: 1 },
+        { id: 2, name: "Task Category 2", workspaceId: 1 },
       ],
-      projects: [
-        {
-          id: 1,
-          title: "Project 1",
-          status: ProjectStatus.active,
-          deadline: new Date("2022-01-01"),
-          categoryId: 1,
-          customerId: 1,
-          workspaceId: 1,
-          creatorId: "user-1",
-        },
-        {
-          id: 2,
-          title: "Project 2",
-          status: ProjectStatus.active,
-          deadline: new Date("2022-01-01"),
-          categoryId: 1,
-          customerId: 1,
-          workspaceId: 1,
-          creatorId: "user-1",
-        },
-      ],
-      tasks: [
-        {
-          id: 1,
-          title: "Task 1",
-          status: TaskStatus.active,
-          deadline: new Date("2022-01-01"),
-          categoryId: 1,
-          projectId: 1,
-          workspaceId: 1,
-          creatorId: "user-1",
-          assigneeId: "user-3",
-        },
-      ],
+      projects,
+      tasks: tasks.slice(0, 1),
     };
 
     cy.viewport(1440, 900);
@@ -61,104 +35,92 @@ describe("edit a task", () => {
     cy.task("db:seed", payload);
   });
 
-  const taskData = {
-    title: "Updated Task Title",
-    description: "Updated Task Description",
-    deadline: { day: "01", month: "02", year: "2026" },
-    statusKey: "pending",
-    categoryKey: "2",
-    projectKey: "2",
-    assigneeKey: "user-2",
-  };
+  it("updates a task successfully", () => {
+    cy.signIn("user-1@test.com", "12345abc");
+    cy.visit("/en/tasks");
 
-  describe("tasks page", () => {
-    it("can edit a task", () => {
-      cy.signIn("owner@example.com", "12345abc");
-      cy.visit("/en/tasks");
+    cy.getByData("task-item-1-action-menu-trigger").click();
+    cy.getMenuItem("edit").click();
 
-      cy.getByData("task-item-1-action-menu-trigger").click();
-      cy.getMenuItem("edit").click();
-
-      // fill form
-      cy.fillEditTaskForm(taskData);
-
-      // assert
-      cy.getByData("task-list-item").within(() => {
-        cy.contains("Updated Task Title");
-        cy.contains("Category 2");
-        cy.contains("Project 2");
-        cy.contains("Pending");
-      });
+    cy.fillEditTaskForm({
+      title: "Updated Task Title",
+      description: "Updated Task Description",
+      deadline: { day: "01", month: "02", year: "2026" },
+      statusKey: "pending",
+      categoryKey: "2",
+      projectKey: "2",
+      assigneeKey: "user-2",
     });
 
-    describe("access control (RBAC)", () => {
-      it("allows a user with 'owner' role to open the edit modal", () => {
-        cy.signIn("owner@example.com", "12345abc");
-        cy.visit("/en/tasks");
+    cy.get('button[type="submit"]').click();
 
-        cy.getByData("task-item-1-action-menu-trigger").click();
-        cy.getMenuItem("edit").click();
-        cy.getByData("edit-task-modal").should("be.visible");
-      });
-
-      it("allows a user with 'user' role to open the edit modal", () => {
-        cy.signIn("user@example.com", "12345abc");
-        cy.visit("/en/tasks");
-
-        cy.getByData("task-item-1-action-menu-trigger").click();
-        cy.getMenuItem("edit").click();
-        cy.getByData("edit-task-modal").should("be.visible");
-      });
-
-      it("shows a restriction modal when a 'guest' attempts to edit", () => {
-        cy.signIn("guest@example.com", "12345abc");
-        cy.visit("/en/tasks");
-
-        cy.getByData("task-item-1-action-menu-trigger").click();
-        cy.getMenuItem("edit").click();
-        cy.getByData("guest-mode-modal").should("be.visible");
-      });
+    cy.getByData("task-list-item").within(() => {
+      cy.contains("Updated Task Title");
+      cy.contains("Category 2");
+      cy.contains("Project 2");
+      cy.contains("Pending");
     });
   });
 
-  describe("task detail page", () => {
-    it("can edit a task", () => {
-      cy.signIn("owner@example.com", "12345abc");
-      cy.visit("/en/tasks/1");
+  it("pre-fills task form with default values", () => {
+    cy.signIn("user-1@test.com", "12345abc");
+    cy.visit("/en/tasks");
 
-      cy.getByData("edit-task-button").filter(":visible").click();
+    cy.getByData("task-item-1-action-menu-trigger").click();
+    cy.getMenuItem("edit").click();
 
-      // fill form
-      cy.fillEditTaskForm(taskData);
+    cy.get("input[name=title]").should("have.value", "Task 1");
+    cy.get("textarea[name=description]").should("have.value", "Description 1");
+    cy.get("input[name=deadline]").should("have.value", "2025-12-31");
+    cy.get("select[name=status]").should("have.value", "active");
+    cy.get("select[name=categoryId]").should("have.value", "1");
+    cy.get("select[name=projectId]").should("have.value", "1");
+    cy.get("select[name=assigneeId]").should("have.value", "user-1");
+  });
 
-      // assert
-      cy.getByData("task-card").within(() => {
-        cy.contains("Updated Task Title");
-        cy.contains("Category 2");
-        cy.contains("Project 2");
-        cy.contains("Pending");
+  describe("edit task access control", () => {
+    const allowedUsers = [
+      { role: "owner", id: "user-1" },
+      { role: "user", id: "user-2" },
+    ] as const;
+
+    describe("from tasks list", () => {
+      allowedUsers.forEach((user) => {
+        it(`allows ${user.role} to open edit modal`, () => {
+          cy.signIn(`${user.id}@test.com`, "12345abc");
+          cy.visit("/en/tasks");
+
+          cy.getByData("task-item-1-action-menu-trigger").click();
+          cy.getMenuItem("edit").click();
+
+          cy.getByData("edit-task-modal").should("be.visible");
+        });
+      });
+
+      it("blocks guest from editing task", () => {
+        cy.signIn("user-3@test.com", "12345abc");
+        cy.visit("/en/tasks");
+
+        cy.getByData("task-item-1-action-menu-trigger").click();
+        cy.getMenuItem("edit").click();
+
+        cy.getByData("guest-mode-modal").should("be.visible");
       });
     });
 
-    describe("access control (RBAC)", () => {
-      it("allows a user with 'owner' role to open the edit modal", () => {
-        cy.signIn("owner@example.com", "12345abc");
-        cy.visit("/en/tasks/1");
+    describe("from task detail page", () => {
+      allowedUsers.forEach((user) => {
+        it(`allows ${user.role} to open edit modal`, () => {
+          cy.signIn(`${user.id}@test.com`, "12345abc");
+          cy.visit("/en/tasks/1");
 
-        cy.getByData("edit-task-button").filter(":visible").click();
-        cy.getByData("edit-task-modal").should("be.visible");
+          cy.getByData("edit-task-button").filter(":visible").click();
+          cy.getByData("edit-task-modal").should("be.visible");
+        });
       });
 
-      it("allows a user with 'user' role to open the edit modal", () => {
-        cy.signIn("user@example.com", "12345abc");
-        cy.visit("/en/tasks/1");
-
-        cy.getByData("edit-task-button").filter(":visible").click();
-        cy.getByData("edit-task-modal").should("be.visible");
-      });
-
-      it("shows a restriction modal when a 'guest' attempts to edit", () => {
-        cy.signIn("guest@example.com", "12345abc");
+      it("blocks guest from editing task", () => {
+        cy.signIn("user-3@test.com", "12345abc");
         cy.visit("/en/tasks/1");
 
         cy.getByData("edit-task-button").filter(":visible").click();

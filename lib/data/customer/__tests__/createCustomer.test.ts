@@ -1,16 +1,17 @@
 import {
-  seedUsers,
-  seedCompanies,
-  seedWorkspaces,
-  seedTaskCategories,
-  seedProjectCategories,
-  seedPositions,
-} from "@/lib/data/utils/test-utils";
+  users,
+  positions,
+  companies,
+  workspaces,
+  taskCategories,
+  projectCategories,
+} from "@/prisma/test-utils/data";
 
 import { createCustomer } from "../customer.dal";
-import { resetDatabase } from "@/prisma/resetDatabase";
 import { it, expect, describe, beforeAll } from "vitest";
+import { seed } from "@/prisma/test-utils/seed";
 import { requireSession } from "@/lib/data/utils/requireSession";
+import { resetDatabase } from "@/prisma/test-utils/resetDatabase";
 import { AccessDeniedError, NotFoundError } from "../../utils/error";
 
 describe("createCustomer", () => {
@@ -20,19 +21,22 @@ describe("createCustomer", () => {
     });
 
     await resetDatabase();
-    await seedWorkspaces();
-    await seedPositions();
-    await seedUsers();
-    await seedProjectCategories();
-    await seedTaskCategories();
-    await seedCompanies();
+
+    await seed({
+      workspaces,
+      positions,
+      users,
+      companies,
+      taskCategories,
+      projectCategories,
+    });
   });
 
   it("should successfully create a customer", async () => {
     const inputData = {
       fullName: "Customer 1",
       bio: "Customer 1 bio",
-      imageUrl: "https://example.com/image.jpg",
+      imageUrl: "/man.jpg",
       email: "customer-1@test.com",
       phoneNumber: "123-456-7890",
       publicLink: "https://example.com/public-link",

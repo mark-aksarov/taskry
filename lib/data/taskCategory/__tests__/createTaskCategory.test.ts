@@ -1,13 +1,10 @@
+import { seed } from "@/prisma/test-utils/seed";
 import { AccessDeniedError } from "../../utils/error";
-import { resetDatabase } from "@/prisma/resetDatabase";
 import { it, expect, describe, beforeAll } from "vitest";
 import { createTaskCategory } from "../taskCategory.dal";
 import { requireSession } from "@/lib/data/utils/requireSession";
-import {
-  seedPositions,
-  seedUsers,
-  seedWorkspaces,
-} from "@/lib/data/utils/test-utils";
+import { resetDatabase } from "@/prisma/test-utils/resetDatabase";
+import { users, positions, workspaces } from "@/prisma/test-utils/data";
 
 describe("createTaskCategory", () => {
   beforeAll(async () => {
@@ -16,9 +13,12 @@ describe("createTaskCategory", () => {
     });
 
     await resetDatabase();
-    await seedWorkspaces();
-    await seedPositions();
-    await seedUsers();
+
+    await seed({
+      workspaces,
+      positions,
+      users,
+    });
   });
 
   it("should successfully create a taskCategory", async () => {

@@ -1,13 +1,9 @@
-import {
-  seedUsers,
-  seedPositions,
-  seedWorkspaces,
-} from "@/lib/data/utils/test-utils";
-
 import prisma from "@/lib/prisma";
+import { seed } from "@/prisma/test-utils/seed";
 import { getPositionSummaries } from "../position.dal";
-import { resetDatabase } from "@/prisma/resetDatabase";
+import { users, workspaces } from "@/prisma/test-utils/data";
 import { requireSession } from "@/lib/data/utils/requireSession";
+import { resetDatabase } from "@/prisma/test-utils/resetDatabase";
 import { it, expect, describe, beforeAll, afterEach } from "vitest";
 
 describe("getPositionSummaries", () => {
@@ -17,9 +13,16 @@ describe("getPositionSummaries", () => {
     });
 
     await resetDatabase();
-    await seedWorkspaces();
-    await seedPositions();
-    await seedUsers();
+
+    await seed({
+      workspaces,
+      positions: [
+        { id: 1, name: "Position 1", workspaceId: 1 },
+        { id: 2, name: "Position 2", workspaceId: 2 },
+        { id: 3, name: "Position 3", workspaceId: 1 },
+      ],
+      users,
+    });
   });
 
   afterEach(async () => {
@@ -27,13 +30,6 @@ describe("getPositionSummaries", () => {
   });
 
   it("should return all position summaries as a list of valid PositionSummaryDTOs", async () => {
-    await prisma.position.createMany({
-      data: [
-        { id: 1, name: "Position 1", workspaceId: 1 },
-        { id: 2, name: "Position 2", workspaceId: 1 },
-      ],
-    });
-
     const result = await getPositionSummaries();
 
     expect(result).toHaveLength(2);
@@ -44,8 +40,8 @@ describe("getPositionSummaries", () => {
           name: "Position 1",
         },
         {
-          id: 2,
-          name: "Position 2",
+          id: 3,
+          name: "Position 3",
         },
       ]),
     );

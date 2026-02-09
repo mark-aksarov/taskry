@@ -1,10 +1,22 @@
+import {
+  users,
+  accounts,
+  positions,
+  workspaces,
+} from "@/prisma/test-utils/data";
+
 describe("creates a new project", () => {
   beforeEach(() => {
     cy.viewport(1440, 900);
 
     cy.task("db:reset");
-    cy.task("db:seed", {});
-    cy.signIn("owner@example.com", "12345abc");
+    cy.task("db:seed", {
+      workspaces,
+      users,
+      accounts,
+      positions,
+    });
+    cy.signIn("user-1@test.com", "12345abc");
     cy.visit("/en/team");
   });
 
@@ -18,7 +30,6 @@ describe("creates a new project", () => {
     cy.get('input[name="fullName"]').clear().type("Created User Name");
     cy.get('input[name="email"]').clear().type("created-user@test.com");
     cy.get('input[name="password"]').clear().type("12345abc");
-    cy.getSelectOption("3").click();
 
     // submit
     cy.get('button[type="submit"]').click();
@@ -40,7 +51,7 @@ describe("creates a new project", () => {
 
   describe("access control (RBAC)", () => {
     it("allows a user with 'owner' role to open the create user modal", () => {
-      cy.signIn("owner@example.com", "12345abc");
+      cy.signIn("user-1@test.com", "12345abc");
       cy.visit("/en/team");
 
       cy.getByData("user-toolbar-create-new-menu-trigger")
@@ -51,7 +62,7 @@ describe("creates a new project", () => {
     });
 
     it("hides the 'user' menu item for a user with 'user' role", () => {
-      cy.signIn("user@example.com", "12345abc");
+      cy.signIn("user-2@test.com", "12345abc");
       cy.visit("/en/team");
 
       cy.getByData("user-toolbar-create-new-menu-trigger")
@@ -63,7 +74,7 @@ describe("creates a new project", () => {
     });
 
     it("shows a restriction modal when a 'guest' attempts to edit", () => {
-      cy.signIn("guest@example.com", "12345abc");
+      cy.signIn("user-3@test.com", "12345abc");
       cy.visit("/en/team");
 
       cy.getByData("user-toolbar-create-new-menu-trigger")

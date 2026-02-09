@@ -1,21 +1,22 @@
 import {
-  seedTasks,
-  seedUsers,
-  seedProjects,
-  seedCompanies,
-  seedCustomers,
-  seedWorkspaces,
-  seedTaskCategories,
-  seedProjectCategories,
-  seedPositions,
-} from "@/lib/data/utils/test-utils";
+  users,
+  tasks,
+  projects,
+  positions,
+  companies,
+  customers,
+  workspaces,
+  taskCategories,
+  projectCategories,
+} from "@/prisma/test-utils/data";
 
 import prisma from "@/lib/prisma";
 import { afterEach } from "vitest";
 import { deleteComment } from "../comment.dal";
-import { resetDatabase } from "@/prisma/resetDatabase";
 import { AccessDeniedError } from "@/lib/data/utils/error";
+import { seed } from "@/prisma/test-utils/seed";
 import { requireSession } from "@/lib/data/utils/requireSession";
+import { resetDatabase } from "@/prisma/test-utils/resetDatabase";
 import { describe, beforeAll, it, expect, beforeEach } from "vitest";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/client";
 
@@ -26,15 +27,18 @@ describe("deleteComment", () => {
     });
 
     await resetDatabase();
-    await seedWorkspaces();
-    await seedPositions();
-    await seedUsers();
-    await seedCompanies();
-    await seedCustomers();
-    await seedProjectCategories();
-    await seedProjects();
-    await seedTaskCategories();
-    await seedTasks();
+
+    await seed({
+      workspaces,
+      positions,
+      users,
+      companies,
+      customers,
+      taskCategories,
+      projectCategories,
+      projects,
+      tasks,
+    });
   });
 
   afterEach(async () => {

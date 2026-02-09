@@ -1,17 +1,18 @@
 import {
-  seedUsers,
-  seedCompanies,
-  seedCustomers,
-  seedWorkspaces,
-  seedTaskCategories,
-  seedProjectCategories,
-  seedPositions,
-} from "@/lib/data/utils/test-utils";
+  users,
+  positions,
+  companies,
+  workspaces,
+  taskCategories,
+  customers,
+  projectCategories,
+} from "@/prisma/test-utils/data";
 
 import { getCustomerCount } from "../customer.dal";
-import { resetDatabase } from "@/prisma/resetDatabase";
 import { it, expect, describe, beforeAll } from "vitest";
+import { seed } from "@/prisma/test-utils/seed";
 import { requireSession } from "@/lib/data/utils/requireSession";
+import { resetDatabase } from "@/prisma/test-utils/resetDatabase";
 
 describe("getCustomerCount", () => {
   beforeAll(async () => {
@@ -20,13 +21,16 @@ describe("getCustomerCount", () => {
     });
 
     await resetDatabase();
-    await seedWorkspaces();
-    await seedPositions();
-    await seedUsers();
-    await seedProjectCategories();
-    await seedTaskCategories();
-    await seedCompanies();
-    await seedCustomers();
+
+    await seed({
+      workspaces,
+      positions,
+      users,
+      companies,
+      taskCategories,
+      projectCategories,
+      customers,
+    });
   });
 
   it("should return total count of customers", async () => {

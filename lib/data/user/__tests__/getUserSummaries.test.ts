@@ -1,13 +1,9 @@
-import {
-  seedUsers,
-  seedPositions,
-  seedWorkspaces,
-} from "@/lib/data/utils/test-utils";
-
 import { getUserSummaries } from "../user.dal";
-import { resetDatabase } from "@/prisma/resetDatabase";
+import { seed } from "@/prisma/test-utils/seed";
 import { it, expect, describe, beforeAll } from "vitest";
 import { requireSession } from "@/lib/data/utils/requireSession";
+import { resetDatabase } from "@/prisma/test-utils/resetDatabase";
+import { users, positions, workspaces } from "@/prisma/test-utils/data";
 
 describe("getUserSummaries", () => {
   beforeAll(async () => {
@@ -16,24 +12,31 @@ describe("getUserSummaries", () => {
     });
 
     await resetDatabase();
-    await seedWorkspaces();
-    await seedPositions();
-    await seedUsers();
+
+    await seed({
+      workspaces,
+      positions,
+      users,
+    });
   });
 
   it("should return all users", async () => {
     const result = await getUserSummaries();
 
-    expect(result).toHaveLength(2);
+    expect(result).toHaveLength(3);
     expect(result).toEqual(
       expect.arrayContaining([
         {
-          id: 1,
+          id: "user-1",
           fullName: "User 1",
         },
         {
-          id: 2,
+          id: "user-2",
           fullName: "User 2",
+        },
+        {
+          id: "user-3",
+          fullName: "User 3",
         },
       ]),
     );

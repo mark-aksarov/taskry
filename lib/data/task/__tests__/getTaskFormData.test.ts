@@ -1,19 +1,20 @@
 import {
-  seedTasks,
-  seedUsers,
-  seedProjects,
-  seedCustomers,
-  seedCompanies,
-  seedWorkspaces,
-  seedTaskCategories,
-  seedProjectCategories,
-  seedPositions,
-} from "@/lib/data/utils/test-utils";
+  users,
+  positions,
+  companies,
+  customers,
+  workspaces,
+  taskCategories,
+  projectCategories,
+  projects,
+  tasks,
+} from "@/prisma/test-utils/data";
 
 import { getTaskFormData } from "../task.dal";
-import { resetDatabase } from "@/prisma/resetDatabase";
+import { seed } from "@/prisma/test-utils/seed";
 import { it, expect, describe, beforeAll } from "vitest";
 import { requireSession } from "@/lib/data/utils/requireSession";
+import { resetDatabase } from "@/prisma/test-utils/resetDatabase";
 import { ProjectStatus, TaskStatus } from "@/generated/prisma/enums";
 
 describe("getTaskFormData", () => {
@@ -23,15 +24,18 @@ describe("getTaskFormData", () => {
     });
 
     await resetDatabase();
-    await seedWorkspaces();
-    await seedPositions();
-    await seedUsers();
-    await seedProjectCategories();
-    await seedTaskCategories();
-    await seedCompanies();
-    await seedCustomers();
-    await seedProjects();
-    await seedTasks();
+
+    await seed({
+      workspaces,
+      positions,
+      users,
+      companies,
+      customers,
+      taskCategories,
+      projectCategories,
+      projects,
+      tasks,
+    });
   });
 
   it("should return a valid TaskFormDataDTO", async () => {

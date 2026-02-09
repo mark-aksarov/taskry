@@ -1,18 +1,19 @@
 import {
-  seedUsers,
-  seedCompanies,
-  seedCustomers,
-  seedWorkspaces,
-  seedTaskCategories,
-  seedProjectCategories,
-  seedPositions,
-} from "@/lib/data/utils/test-utils";
+  users,
+  positions,
+  companies,
+  customers,
+  workspaces,
+  taskCategories,
+  projectCategories,
+} from "@/prisma/test-utils/data";
 
 import { createProject } from "../project.dal";
-import { resetDatabase } from "@/prisma/resetDatabase";
+import { seed } from "@/prisma/test-utils/seed";
 import { it, expect, describe, beforeAll } from "vitest";
 import { ProjectStatus } from "@/generated/prisma/enums";
 import { requireSession } from "@/lib/data/utils/requireSession";
+import { resetDatabase } from "@/prisma/test-utils/resetDatabase";
 import { AccessDeniedError, NotFoundError } from "../../utils/error";
 
 describe("createProject", () => {
@@ -22,13 +23,16 @@ describe("createProject", () => {
     });
 
     await resetDatabase();
-    await seedWorkspaces();
-    await seedPositions();
-    await seedUsers();
-    await seedProjectCategories();
-    await seedTaskCategories();
-    await seedCompanies();
-    await seedCustomers();
+
+    await seed({
+      workspaces,
+      positions,
+      users,
+      companies,
+      customers,
+      taskCategories,
+      projectCategories,
+    });
   });
 
   it("should successfully create a project", async () => {

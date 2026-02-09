@@ -1,13 +1,9 @@
-import {
-  seedUsers,
-  seedWorkspaces,
-  seedPositions,
-} from "@/lib/data/utils/test-utils";
-
 import { getUserCount } from "../user.dal";
-import { resetDatabase } from "@/prisma/resetDatabase";
+import { seed } from "@/prisma/test-utils/seed";
 import { it, expect, describe, beforeAll } from "vitest";
 import { requireSession } from "@/lib/data/utils/requireSession";
+import { resetDatabase } from "@/prisma/test-utils/resetDatabase";
+import { users, positions, workspaces } from "@/prisma/test-utils/data";
 
 describe("getUserCount", () => {
   beforeAll(async () => {
@@ -16,9 +12,12 @@ describe("getUserCount", () => {
     });
 
     await resetDatabase();
-    await seedWorkspaces();
-    await seedPositions();
-    await seedUsers();
+
+    await seed({
+      workspaces,
+      positions,
+      users,
+    });
   });
 
   it("should return total count of users", async () => {

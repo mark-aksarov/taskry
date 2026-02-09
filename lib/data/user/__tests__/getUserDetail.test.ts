@@ -1,13 +1,9 @@
-import {
-  seedUsers,
-  seedPositions,
-  seedWorkspaces,
-} from "@/lib/data/utils/test-utils";
-
 import { getUserDetail } from "../user.dal";
-import { resetDatabase } from "@/prisma/resetDatabase";
+import { seed } from "@/prisma/test-utils/seed";
 import { it, expect, describe, beforeAll } from "vitest";
 import { requireSession } from "@/lib/data/utils/requireSession";
+import { resetDatabase } from "@/prisma/test-utils/resetDatabase";
+import { users, positions, workspaces } from "@/prisma/test-utils/data";
 
 describe("getUserDetail", () => {
   beforeAll(async () => {
@@ -16,9 +12,12 @@ describe("getUserDetail", () => {
     });
 
     await resetDatabase();
-    await seedWorkspaces();
-    await seedPositions();
-    await seedUsers();
+
+    await seed({
+      workspaces,
+      positions,
+      users,
+    });
   });
 
   it("should succsessfully return a valid UserDetailDTO", async () => {
@@ -30,7 +29,7 @@ describe("getUserDetail", () => {
       fullName: "User 1",
       email: "user-1@test.com",
       phoneNumber: "phone 1",
-      imageUrl: "https://example.com/user-1.jpg",
+      imageUrl: "/man.jpg",
       publicLink: "https://example.com/user-1",
       bio: "user 1 bio",
       address: "address user 1",

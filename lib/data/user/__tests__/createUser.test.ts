@@ -1,15 +1,11 @@
-import {
-  seedUsers,
-  seedPositions,
-  seedWorkspaces,
-} from "@/lib/data/utils/test-utils";
-
 import prisma from "@/lib/prisma";
 import { createUser } from "../user.service";
-import { resetDatabase } from "@/prisma/resetDatabase";
+import { seed } from "@/prisma/test-utils/seed";
 import { AccessDeniedError } from "@/lib/data/utils/error";
 import { requireSession } from "@/lib/data/utils/requireSession";
+import { resetDatabase } from "@/prisma/test-utils/resetDatabase";
 import { it, expect, describe, beforeAll, beforeEach } from "vitest";
+import { users, positions, workspaces } from "@/prisma/test-utils/data";
 
 describe("createUser", () => {
   beforeAll(async () => {
@@ -18,13 +14,20 @@ describe("createUser", () => {
     });
 
     await resetDatabase();
-    await seedWorkspaces();
-    await seedPositions();
+
+    await seed({
+      workspaces,
+      positions,
+      users,
+    });
   });
 
   beforeEach(async () => {
     await prisma.user.deleteMany();
-    await seedUsers();
+
+    await seed({
+      users,
+    });
   });
 
   it("should successfully create a user", async () => {

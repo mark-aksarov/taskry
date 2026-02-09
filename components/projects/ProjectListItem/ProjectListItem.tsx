@@ -222,6 +222,7 @@ export const ProjectListItem = ({
       }
       commentsModalTriggerSlot={
         <ProjectCommentsModalTrigger
+          data-test={`project-${id}-comments-modal-trigger`}
           commentsCount={commentsCount}
           modal={projectCommentsModal}
         />

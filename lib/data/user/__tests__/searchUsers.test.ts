@@ -1,8 +1,9 @@
 import prisma from "@/lib/prisma";
 import { searchUsers } from "../user.dal";
-import { resetDatabase } from "@/prisma/resetDatabase";
+import { seed } from "@/prisma/test-utils/seed";
 import { requireSession } from "@/lib/data/utils/requireSession";
-import { seedWorkspaces, seedPositions } from "@/lib/data/utils/test-utils";
+import { positions, workspaces } from "@/prisma/test-utils/data";
+import { resetDatabase } from "@/prisma/test-utils/resetDatabase";
 import { it, expect, describe, beforeEach, beforeAll, afterEach } from "vitest";
 
 describe("searchUsers", () => {
@@ -12,8 +13,11 @@ describe("searchUsers", () => {
     });
 
     await resetDatabase();
-    await seedWorkspaces();
-    await seedPositions();
+
+    await seed({
+      workspaces,
+      positions,
+    });
   });
 
   afterEach(async () => {

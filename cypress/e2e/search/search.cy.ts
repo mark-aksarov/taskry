@@ -1,10 +1,27 @@
+import {
+  users,
+  accounts,
+  positions,
+  workspaces,
+  companies,
+  projectCategories,
+  projects,
+  taskCategories,
+} from "@/prisma/test-utils/data";
+
 import { ProjectStatus, TaskStatus } from "@/generated/prisma/enums";
-import { E2ESeedPayload } from "@/prisma/e2e/types";
 
 describe("search", () => {
   before(() => {
-    const payload: E2ESeedPayload = {
-      companies: [{ id: 1, name: "Company 1", workspaceId: 1 }],
+    const payload = {
+      users,
+      accounts,
+      positions,
+      workspaces,
+      companies,
+      projectCategories,
+      projects,
+      taskCategories,
 
       customers: [
         {
@@ -29,34 +46,6 @@ describe("search", () => {
           workspaceId: 1,
         },
       ],
-
-      projectCategories: [{ id: 1, name: "Category 1", workspaceId: 1 }],
-
-      projects: [
-        {
-          id: 1,
-          title: "Project 1",
-          status: ProjectStatus.active,
-          deadline: new Date(),
-          categoryId: 1,
-          customerId: 1,
-          workspaceId: 1,
-          creatorId: "user-1",
-        },
-        {
-          id: 2,
-          title: "Project 2",
-          status: ProjectStatus.active,
-          deadline: new Date(),
-          categoryId: 1,
-          customerId: 1,
-          workspaceId: 1,
-          creatorId: "user-1",
-        },
-      ],
-
-      taskCategories: [{ id: 1, name: "Category 1", workspaceId: 1 }],
-
       tasks: [
         {
           id: 1,
@@ -100,7 +89,7 @@ describe("search", () => {
 
   beforeEach(() => {
     cy.viewport(1440, 900);
-    cy.signIn("owner@example.com", "12345abc");
+    cy.signIn("user-1@test.com", "12345abc");
     cy.visit("/en");
   });
 
@@ -108,9 +97,9 @@ describe("search", () => {
     cy.getByData("search-modal-trigger").click();
 
     const expectedUsers = [
-      { name: "John Doe", email: "owner@example.com" },
-      { name: "Michael Chen", email: "user@example.com" },
-      { name: "Kevin Lee", email: "guest@example.com" },
+      { name: "User 1", email: "user-1@test.com" },
+      { name: "User 2", email: "user-2@test.com" },
+      { name: "User 3", email: "user-3@test.com" },
     ];
 
     cy.getByData("search-list-item")
@@ -123,9 +112,9 @@ describe("search", () => {
 
   it("search users when they match the query 'en'", () => {
     cy.getByData("search-modal-trigger").click();
-    cy.get("input[name=search]").type("en");
+    cy.get("input[name=search]").type("er 2");
 
-    const expectedUsers = [{ name: "Michael Chen", email: "user@example.com" }];
+    const expectedUsers = [{ name: "User 2", email: "user-2@test.com" }];
 
     cy.getByData("search-list-item")
       .should("have.length", expectedUsers.length)

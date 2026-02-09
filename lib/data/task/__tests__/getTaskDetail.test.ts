@@ -1,20 +1,21 @@
 import {
-  seedUsers,
-  seedTasks,
-  seedProjects,
-  seedCustomers,
-  seedCompanies,
-  seedWorkspaces,
-  seedTaskCategories,
-  seedProjectCategories,
-  seedPositions,
-} from "@/lib/data/utils/test-utils";
+  users,
+  positions,
+  companies,
+  customers,
+  workspaces,
+  taskCategories,
+  projectCategories,
+  projects,
+  tasks,
+} from "@/prisma/test-utils/data";
 
 import prisma from "@/lib/prisma";
 import { getTaskDetail } from "../task.dal";
+import { seed } from "@/prisma/test-utils/seed";
 import { TaskStatus } from "@/generated/prisma/enums";
-import { resetDatabase } from "@/prisma/resetDatabase";
 import { requireSession } from "@/lib/data/utils/requireSession";
+import { resetDatabase } from "@/prisma/test-utils/resetDatabase";
 import { it, expect, describe, beforeAll, afterAll } from "vitest";
 
 describe("getTaskDetail", () => {
@@ -24,15 +25,18 @@ describe("getTaskDetail", () => {
     });
 
     await resetDatabase();
-    await seedWorkspaces();
-    await seedPositions();
-    await seedUsers();
-    await seedProjectCategories();
-    await seedTaskCategories();
-    await seedCompanies();
-    await seedCustomers();
-    await seedProjects();
-    await seedTasks();
+
+    await seed({
+      workspaces,
+      positions,
+      users,
+      companies,
+      customers,
+      taskCategories,
+      projectCategories,
+      projects,
+      tasks,
+    });
 
     await prisma.attachment.createMany({
       data: [
@@ -110,7 +114,7 @@ describe("getTaskDetail", () => {
       assignee: {
         id: "user-1",
         fullName: "User 1",
-        imageUrl: "https://example.com/user-1.jpg",
+        imageUrl: "/man.jpg",
       },
       project: {
         id: 1,

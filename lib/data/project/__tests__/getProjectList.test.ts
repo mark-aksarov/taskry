@@ -1,18 +1,19 @@
 import {
-  seedUsers,
-  seedCustomers,
-  seedCompanies,
-  seedWorkspaces,
-  seedTaskCategories,
-  seedProjectCategories,
-  seedPositions,
-} from "@/lib/data/utils/test-utils";
+  users,
+  positions,
+  companies,
+  customers,
+  workspaces,
+  taskCategories,
+  projectCategories,
+} from "@/prisma/test-utils/data";
 
 import prisma from "@/lib/prisma";
 import { ProjectFilters } from "@/lib/types";
 import { getProjectList } from "../project.dal";
-import { resetDatabase } from "@/prisma/resetDatabase";
+import { seed } from "@/prisma/test-utils/seed";
 import { requireSession } from "@/lib/data/utils/requireSession";
+import { resetDatabase } from "@/prisma/test-utils/resetDatabase";
 import { ProjectStatus, TaskStatus } from "@/generated/prisma/enums";
 import { it, expect, describe, beforeAll, afterEach, afterAll } from "vitest";
 
@@ -23,13 +24,16 @@ describe("getProjectList", () => {
     });
 
     await resetDatabase();
-    await seedWorkspaces();
-    await seedPositions();
-    await seedUsers();
-    await seedProjectCategories();
-    await seedTaskCategories();
-    await seedCompanies();
-    await seedCustomers();
+
+    await seed({
+      workspaces,
+      positions,
+      users,
+      companies,
+      customers,
+      taskCategories,
+      projectCategories,
+    });
   });
 
   it("should return a valid ProjectListDTO", async () => {
@@ -104,7 +108,7 @@ describe("getProjectList", () => {
           creator: {
             id: "user-1",
             fullName: "User 1",
-            imageUrl: "https://example.com/user-1.jpg",
+            imageUrl: "/man.jpg",
           },
 
           category: {
@@ -115,7 +119,7 @@ describe("getProjectList", () => {
           customer: {
             id: 1,
             fullName: "Customer 1",
-            imageUrl: "https://example.com/customer-1.jpg",
+            imageUrl: "/man.jpg",
             company: {
               id: 1,
               name: "Company 1",

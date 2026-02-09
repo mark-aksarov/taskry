@@ -10,7 +10,7 @@ describe("auth smoke tests", () => {
 
   it("should sign-out successfully", () => {
     cy.visit("/en/sign-in");
-    cy.get("input[name=email]").type("owner@example.com");
+    cy.get("input[name=email]").type("user-1@test.com");
     cy.get("input[name=password]").type("12345abc");
     cy.get('button[type="submit"]').click();
     cy.getByData("sign-out-btn").click();

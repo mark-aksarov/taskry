@@ -1,21 +1,28 @@
+import {
+  users,
+  accounts,
+  positions,
+  companies,
+  customers,
+  workspaces,
+  projectCategories,
+  taskCategories,
+} from "@/prisma/test-utils/data";
+
+import { E2ESeedPayload } from "@/prisma/test-utils/types";
 import { ProjectStatus, TaskStatus } from "@/generated/prisma/enums";
-import { E2ESeedPayload } from "@/prisma/e2e/types";
 
 describe("update task status", () => {
   const createPayload = (payload: E2ESeedPayload): E2ESeedPayload => {
     const basePayload: E2ESeedPayload = {
-      companies: [{ id: 1, name: "Company 1", workspaceId: 1 }],
-      customers: [
-        {
-          id: 1,
-          email: "owner@example.com",
-          fullName: "John Doe",
-          companyId: 1,
-          workspaceId: 1,
-        },
-      ],
-      projectCategories: [{ id: 1, name: "Category 1", workspaceId: 1 }],
-      taskCategories: [{ id: 1, name: "Category 1", workspaceId: 1 }],
+      workspaces,
+      users,
+      accounts,
+      positions,
+      companies,
+      customers,
+      projectCategories,
+      taskCategories,
     };
 
     return { ...basePayload, ...payload };
@@ -108,7 +115,7 @@ describe("update task status", () => {
 
     cy.task("db:reset");
     cy.task("db:seed", payload);
-    cy.signIn("owner@example.com", "12345abc");
+    cy.signIn("user-1@test.com", "12345abc");
     cy.visit("/en/tasks");
   });
 
@@ -140,7 +147,7 @@ describe("update task status", () => {
 
   describe("access control (RBAC)", () => {
     it("allows a user with 'owner' role to open the edit modal", () => {
-      cy.signIn("owner@example.com", "12345abc");
+      cy.signIn("user-1@test.com", "12345abc");
       cy.visit("/en/tasks");
       cy.getByData("task-item-1-action-menu-trigger").click();
       cy.getMenuItem("pending").click();
@@ -150,7 +157,7 @@ describe("update task status", () => {
     });
 
     it("allows a user with 'user' role to open the edit modal", () => {
-      cy.signIn("user@example.com", "12345abc");
+      cy.signIn("user-2@test.com", "12345abc");
       cy.visit("/en/tasks");
       cy.getByData("task-item-1-action-menu-trigger").click();
       cy.getMenuItem("pending").click();
@@ -160,7 +167,7 @@ describe("update task status", () => {
     });
 
     it("shows a restriction modal when a 'guest' attempts to edit", () => {
-      cy.signIn("guest@example.com", "12345abc");
+      cy.signIn("user-3@test.com", "12345abc");
       cy.visit("/en/tasks");
       cy.getByData("task-item-1-action-menu-trigger").click();
       cy.getMenuItem("pending").click();

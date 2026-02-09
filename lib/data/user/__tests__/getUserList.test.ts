@@ -1,13 +1,10 @@
-import {
-  dates,
-  seedWorkspaces,
-  seedPositions,
-} from "@/lib/data/utils/test-utils";
-
 import prisma from "@/lib/prisma";
 import { getUserList } from "../user.dal";
-import { resetDatabase } from "@/prisma/resetDatabase";
+import { seed } from "@/prisma/test-utils/seed";
+import { dates } from "@/lib/data/utils/test-utils";
 import { requireSession } from "@/lib/data/utils/requireSession";
+import { positions, workspaces } from "@/prisma/test-utils/data";
+import { resetDatabase } from "@/prisma/test-utils/resetDatabase";
 import { it, expect, describe, beforeAll, afterAll } from "vitest";
 import { ProjectStatus, TaskStatus } from "@/generated/prisma/enums";
 
@@ -18,8 +15,11 @@ describe("getUserList", () => {
     });
 
     await resetDatabase();
-    await seedWorkspaces();
-    await seedPositions();
+
+    await seed({
+      workspaces,
+      positions,
+    });
   });
 
   it("should return all users", async () => {

@@ -1,11 +1,20 @@
-import { E2ESeedPayload } from "@/prisma/e2e/types";
-import { ProjectStatus } from "@/generated/prisma/enums";
+import {
+  users,
+  accounts,
+  projects,
+  positions,
+  workspaces,
+  taskCategories,
+} from "@/prisma/test-utils/data";
 
 describe("edit a new project", () => {
   beforeEach(() => {
     cy.viewport(1440, 900);
 
-    const payload: E2ESeedPayload = {
+    const payload = {
+      users,
+      accounts,
+      positions,
       companies: [
         { id: 1, name: "Company 1", workspaceId: 1 },
         { id: 2, name: "Company 2", workspaceId: 1 },
@@ -13,36 +22,30 @@ describe("edit a new project", () => {
       customers: [
         {
           id: 1,
-          email: "customer-1@example.com",
-          fullName: "Kevin Hamilton",
+          bio: "Customer 1 bio",
+          fullName: "Customer 1",
+          email: "customer-1@test.com",
+          imageUrl: "/man.jpg",
           companyId: 1,
           workspaceId: 1,
         },
         {
           id: 2,
-          email: "customer-2@example.com",
-          fullName: "Larry Doe",
+          bio: "Customer 2 bio",
+          fullName: "Customer 2",
+          email: "customer-2@test.com",
+          imageUrl: "/man.jpg",
           companyId: 2,
           workspaceId: 1,
         },
       ],
+      workspaces,
+      taskCategories,
       projectCategories: [
-        { id: 1, name: "Category 1", workspaceId: 1 },
-        { id: 2, name: "Category 2", workspaceId: 1 },
+        { id: 1, name: "Project Category 1", workspaceId: 1 },
+        { id: 2, name: "Project Category 2", workspaceId: 1 },
       ],
-      taskCategories: [{ id: 1, name: "Category 1", workspaceId: 1 }],
-      projects: [
-        {
-          id: 1,
-          title: "Project 1",
-          status: ProjectStatus.active,
-          deadline: new Date("2022-01-01"),
-          categoryId: 1,
-          customerId: 1,
-          workspaceId: 1,
-          creatorId: "user-1",
-        },
-      ],
+      projects: projects.slice(0, 1),
     };
 
     cy.task("db:reset");
@@ -56,11 +59,12 @@ describe("edit a new project", () => {
     statusKey: "pending",
     categoryKey: "2",
     customerKey: "2",
+    companyKey: "2",
   };
 
   describe("projects page", () => {
     it("can edit a project", () => {
-      cy.signIn("owner@example.com", "12345abc");
+      cy.signIn("user-1@test.com", "12345abc");
       cy.visit("/en/projects");
 
       cy.getByData("project-item-1-action-menu-trigger").click();
@@ -73,7 +77,7 @@ describe("edit a new project", () => {
       cy.getByData("project-list-item").within(() => {
         cy.contains("Updated Project Title");
         cy.contains("Category 2");
-        cy.contains("Larry Doe");
+        cy.contains("Customer 2");
         cy.contains("Company 2");
         cy.contains("Pending");
       });
@@ -81,7 +85,7 @@ describe("edit a new project", () => {
 
     describe("access control (RBAC)", () => {
       it("allows a user with 'owner' role to open the edit modal", () => {
-        cy.signIn("owner@example.com", "12345abc");
+        cy.signIn("user-1@test.com", "12345abc");
         cy.visit("/en/projects");
 
         cy.getByData("project-item-1-action-menu-trigger").click();
@@ -90,7 +94,7 @@ describe("edit a new project", () => {
       });
 
       it("allows a user with 'user' role to open the edit modal", () => {
-        cy.signIn("user@example.com", "12345abc");
+        cy.signIn("user-2@test.com", "12345abc");
         cy.visit("/en/projects");
 
         cy.getByData("project-item-1-action-menu-trigger").click();
@@ -99,7 +103,7 @@ describe("edit a new project", () => {
       });
 
       it("shows a restriction modal when a 'guest' attempts to edit", () => {
-        cy.signIn("guest@example.com", "12345abc");
+        cy.signIn("user-3@test.com", "12345abc");
         cy.visit("/en/projects");
 
         cy.getByData("project-item-1-action-menu-trigger").click();
@@ -111,7 +115,7 @@ describe("edit a new project", () => {
 
   describe("project detail page", () => {
     it("can edit a project", () => {
-      cy.signIn("owner@example.com", "12345abc");
+      cy.signIn("user-1@test.com", "12345abc");
       cy.visit("/en/projects/1");
 
       cy.getByData("edit-project-button").filter(":visible").click();
@@ -123,14 +127,14 @@ describe("edit a new project", () => {
       cy.getByData("project-card").within(() => {
         cy.contains("Updated Project Title");
         cy.contains("Category 2");
-        cy.contains("Larry Doe");
+        cy.contains("Customer 2");
         cy.contains("Pending");
       });
     });
 
     describe("access control (RBAC)", () => {
       it("allows a user with 'owner' role to open the edit modal", () => {
-        cy.signIn("owner@example.com", "12345abc");
+        cy.signIn("user-1@test.com", "12345abc");
         cy.visit("/en/projects/1");
 
         cy.getByData("edit-project-button").filter(":visible").click();
@@ -138,7 +142,7 @@ describe("edit a new project", () => {
       });
 
       it("allows a user with 'user' role to open the edit modal", () => {
-        cy.signIn("user@example.com", "12345abc");
+        cy.signIn("user-2@test.com", "12345abc");
         cy.visit("/en/projects/1");
 
         cy.getByData("edit-project-button").filter(":visible").click();
@@ -146,7 +150,7 @@ describe("edit a new project", () => {
       });
 
       it("shows a restriction modal when a 'guest' attempts to edit", () => {
-        cy.signIn("guest@example.com", "12345abc");
+        cy.signIn("user-3@test.com", "12345abc");
         cy.visit("/en/projects/1");
 
         cy.getByData("edit-project-button").filter(":visible").click();

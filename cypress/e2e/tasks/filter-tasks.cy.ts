@@ -1,19 +1,24 @@
+import {
+  users,
+  accounts,
+  positions,
+  companies,
+  customers,
+  workspaces,
+} from "@/prisma/test-utils/data";
+
 import { dates } from "@/lib/data/utils/test-utils";
-import { E2ESeedPayload } from "@/prisma/e2e/types";
+import { E2ESeedPayload } from "@/prisma/test-utils/types";
 import { ProjectStatus, TaskStatus } from "@/generated/prisma/enums";
 
 const createPayload = (payload: E2ESeedPayload): E2ESeedPayload => {
   const basePayload: E2ESeedPayload = {
-    companies: [{ id: 1, name: "Company 1", workspaceId: 1 }],
-    customers: [
-      {
-        id: 1,
-        email: "owner@example.com",
-        fullName: "John Doe",
-        companyId: 1,
-        workspaceId: 1,
-      },
-    ],
+    workspaces,
+    users,
+    accounts,
+    positions,
+    companies,
+    customers,
     projectCategories: [{ id: 1, name: "Category A", workspaceId: 1 }],
     taskCategories: [
       { id: 1, name: "Category A", workspaceId: 1 },
@@ -49,7 +54,7 @@ const createPayload = (payload: E2ESeedPayload): E2ESeedPayload => {
 const setup = (payload: E2ESeedPayload) => {
   cy.task("db:reset");
   cy.task("db:seed", payload);
-  cy.signIn("owner@example.com", "12345abc");
+  cy.signIn("user-1@test.com", "12345abc");
   cy.visit("/en/tasks");
 };
 

@@ -1,16 +1,17 @@
 import {
-  seedUsers,
-  seedCompanies,
-  seedWorkspaces,
-  seedTaskCategories,
-  seedProjectCategories,
-  seedPositions,
-} from "@/lib/data/utils/test-utils";
+  users,
+  companies,
+  positions,
+  workspaces,
+  taskCategories,
+  projectCategories,
+} from "@/prisma/test-utils/data";
 
 import prisma from "@/lib/prisma";
+import { seed } from "@/prisma/test-utils/seed";
 import { searchCustomers } from "../customer.dal";
-import { resetDatabase } from "@/prisma/resetDatabase";
 import { requireSession } from "@/lib/data/utils/requireSession";
+import { resetDatabase } from "@/prisma/test-utils/resetDatabase";
 import { it, expect, describe, beforeEach, beforeAll, afterEach } from "vitest";
 
 describe("searchCustomers", () => {
@@ -20,12 +21,15 @@ describe("searchCustomers", () => {
     });
 
     await resetDatabase();
-    await seedWorkspaces();
-    await seedPositions();
-    await seedUsers();
-    await seedProjectCategories();
-    await seedTaskCategories();
-    await seedCompanies();
+
+    await seed({
+      workspaces,
+      positions,
+      users,
+      companies,
+      taskCategories,
+      projectCategories,
+    });
   });
 
   afterEach(async () => {

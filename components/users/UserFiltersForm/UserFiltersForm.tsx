@@ -51,7 +51,7 @@ export function UserFiltersForm({
   };
 
   return (
-    <FormBase id="customer-filter-form" onSubmit={handleSubmit}>
+    <FormBase id="user-filter-form" onSubmit={handleSubmit}>
       <FormBaseBody>
         <UserFiltersFormNoActiveTasksSwitch filters={filters} />
         <Divider />

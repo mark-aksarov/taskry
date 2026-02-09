@@ -1,21 +1,22 @@
 import {
-  seedTasks,
-  seedUsers,
-  seedComments,
-  seedProjects,
-  seedCompanies,
-  seedCustomers,
-  seedWorkspaces,
-  seedTaskCategories,
-  seedProjectCategories,
-  seedPositions,
-} from "@/lib/data/utils/test-utils";
+  users,
+  tasks,
+  projects,
+  comments,
+  positions,
+  companies,
+  customers,
+  workspaces,
+  taskCategories,
+  projectCategories,
+} from "@/prisma/test-utils/data";
 
 import prisma from "@/lib/prisma";
 import { getCommentList } from "../comment.dal";
-import { resetDatabase } from "@/prisma/resetDatabase";
 import { describe, beforeAll, it, expect } from "vitest";
+import { seed } from "@/prisma/test-utils/seed";
 import { requireSession } from "@/lib/data/utils/requireSession";
+import { resetDatabase } from "@/prisma/test-utils/resetDatabase";
 
 describe("getCommentList", () => {
   beforeAll(async () => {
@@ -24,16 +25,19 @@ describe("getCommentList", () => {
     });
 
     await resetDatabase();
-    await seedWorkspaces();
-    await seedPositions();
-    await seedUsers();
-    await seedCompanies();
-    await seedCustomers();
-    await seedProjectCategories();
-    await seedProjects();
-    await seedTaskCategories();
-    await seedTasks();
-    await seedComments();
+
+    await seed({
+      workspaces,
+      positions,
+      users,
+      companies,
+      customers,
+      taskCategories,
+      projectCategories,
+      projects,
+      tasks,
+      comments,
+    });
 
     await prisma.attachment.createMany({
       data: [
@@ -61,7 +65,7 @@ describe("getCommentList", () => {
       sender: {
         id: "user-1",
         fullName: "User 1",
-        imageUrl: "https://example.com/user-1.jpg",
+        imageUrl: "/man.jpg",
       },
 
       attachments: [{ id: 1, fileUrl: "http://example.com/file1.png" }],

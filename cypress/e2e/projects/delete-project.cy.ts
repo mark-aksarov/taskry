@@ -1,48 +1,31 @@
-import { E2ESeedPayload } from "@/prisma/e2e/types";
-import { ProjectStatus, TaskStatus } from "@/generated/prisma/enums";
+import {
+  users,
+  tasks,
+  accounts,
+  projects,
+  positions,
+  companies,
+  customers,
+  workspaces,
+  taskCategories,
+  projectCategories,
+} from "@/prisma/test-utils/data";
 
 describe("deletes a project", () => {
   beforeEach(() => {
     cy.viewport(1440, 900);
 
-    const payload: E2ESeedPayload = {
-      companies: [{ id: 1, name: "Company 1", workspaceId: 1 }],
-      customers: [
-        {
-          id: 1,
-          email: "customer@example.com",
-          fullName: "John Doe",
-          companyId: 1,
-          workspaceId: 1,
-        },
-      ],
-      projectCategories: [{ id: 1, name: "Category 1", workspaceId: 1 }],
-      taskCategories: [{ id: 1, name: "Category 1", workspaceId: 1 }],
-      projects: [
-        {
-          id: 1,
-          title: "Project 1",
-          status: ProjectStatus.active,
-          deadline: new Date("2022-01-01"),
-          categoryId: 1,
-          customerId: 1,
-          workspaceId: 1,
-          creatorId: "user-1",
-        },
-      ],
-      tasks: [
-        {
-          id: 1,
-          title: "Task 1",
-          status: TaskStatus.active,
-          deadline: new Date("2022-01-01"),
-          categoryId: 1,
-          projectId: 1,
-          workspaceId: 1,
-          creatorId: "user-1",
-          assigneeId: "user-1",
-        },
-      ],
+    const payload = {
+      users,
+      accounts,
+      positions,
+      companies,
+      customers,
+      workspaces,
+      taskCategories,
+      projectCategories,
+      projects: projects.slice(0, 1),
+      tasks: tasks.slice(0, 2),
     };
 
     cy.task("db:reset");
@@ -51,7 +34,7 @@ describe("deletes a project", () => {
 
   describe("projects page ", () => {
     it("can delete a project", () => {
-      cy.signIn("owner@example.com", "12345abc");
+      cy.signIn("user-1@test.com", "12345abc");
       cy.visit("/en/projects");
 
       cy.getByData("project-item-1-action-menu-trigger").click();
@@ -62,7 +45,7 @@ describe("deletes a project", () => {
 
     describe("access control (RBAC)", () => {
       it("allows a user with 'owner' role to open the edit modal", () => {
-        cy.signIn("owner@example.com", "12345abc");
+        cy.signIn("user-1@test.com", "12345abc");
         cy.visit("/en/projects");
 
         cy.getByData("project-item-1-action-menu-trigger").click();
@@ -71,7 +54,7 @@ describe("deletes a project", () => {
       });
 
       it("allows a user with 'user' role to open the edit modal", () => {
-        cy.signIn("user@example.com", "12345abc");
+        cy.signIn("user-2@test.com", "12345abc");
         cy.visit("/en/projects");
 
         cy.getByData("project-item-1-action-menu-trigger").click();
@@ -80,7 +63,7 @@ describe("deletes a project", () => {
       });
 
       it("shows a restriction modal when a 'guest' attempts to delete", () => {
-        cy.signIn("guest@example.com", "12345abc");
+        cy.signIn("user-3@test.com", "12345abc");
         cy.visit("/en/projects");
 
         cy.getByData("project-item-1-action-menu-trigger").click();
@@ -92,7 +75,7 @@ describe("deletes a project", () => {
 
   describe("project detail page", () => {
     it("can delete a project", () => {
-      cy.signIn("owner@example.com", "12345abc");
+      cy.signIn("user-1@test.com", "12345abc");
       cy.visit("/en/projects/1");
 
       cy.getByData("delete-project-button").filter(":visible").click();
@@ -102,7 +85,7 @@ describe("deletes a project", () => {
 
     describe("access control (RBAC)", () => {
       it("allows a user with 'owner' role to open the edit modal", () => {
-        cy.signIn("owner@example.com", "12345abc");
+        cy.signIn("user-1@test.com", "12345abc");
         cy.visit("/en/projects/1");
 
         cy.getByData("delete-project-button").filter(":visible").click();
@@ -110,7 +93,7 @@ describe("deletes a project", () => {
       });
 
       it("allows a user with 'user' role to open the edit modal", () => {
-        cy.signIn("user@example.com", "12345abc");
+        cy.signIn("user-2@test.com", "12345abc");
         cy.visit("/en/projects/1");
 
         cy.getByData("delete-project-button").filter(":visible").click();
@@ -118,7 +101,7 @@ describe("deletes a project", () => {
       });
 
       it("shows a restriction modal when a 'guest' attempts to delete", () => {
-        cy.signIn("guest@example.com", "12345abc");
+        cy.signIn("user-3@test.com", "12345abc");
         cy.visit("/en/projects/1");
 
         cy.getByData("delete-project-button").filter(":visible").click();

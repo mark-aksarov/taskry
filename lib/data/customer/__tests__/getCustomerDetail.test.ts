@@ -1,17 +1,18 @@
 import {
-  seedUsers,
-  seedCustomers,
-  seedCompanies,
-  seedWorkspaces,
-  seedTaskCategories,
-  seedProjectCategories,
-  seedPositions,
-} from "@/lib/data/utils/test-utils";
+  users,
+  positions,
+  companies,
+  workspaces,
+  taskCategories,
+  customers,
+  projectCategories,
+} from "@/prisma/test-utils/data";
 
 import { getCustomerDetail } from "../customer.dal";
-import { resetDatabase } from "@/prisma/resetDatabase";
 import { it, expect, describe, beforeAll } from "vitest";
+import { seed } from "@/prisma/test-utils/seed";
 import { requireSession } from "@/lib/data/utils/requireSession";
+import { resetDatabase } from "@/prisma/test-utils/resetDatabase";
 
 describe("getCustomerDetail", () => {
   beforeAll(async () => {
@@ -20,13 +21,16 @@ describe("getCustomerDetail", () => {
     });
 
     await resetDatabase();
-    await seedWorkspaces();
-    await seedPositions();
-    await seedUsers();
-    await seedProjectCategories();
-    await seedTaskCategories();
-    await seedCompanies();
-    await seedCustomers();
+
+    await seed({
+      workspaces,
+      positions,
+      users,
+      companies,
+      taskCategories,
+      projectCategories,
+      customers,
+    });
   });
 
   it("should return a valid CustomerDetailDTO", async () => {
@@ -38,7 +42,7 @@ describe("getCustomerDetail", () => {
       fullName: "Customer 1",
       email: "customer-1@test.com",
       phoneNumber: "123-456-7890",
-      imageUrl: "https://example.com/customer-1.jpg",
+      imageUrl: "/man.jpg",
       publicLink: "https://example.com/customer-1",
       bio: "Customer 1 bio",
       workspaceId: 1,

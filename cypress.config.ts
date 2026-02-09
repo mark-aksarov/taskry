@@ -1,7 +1,6 @@
 import { defineConfig } from "cypress";
-import { seedE2E } from "./prisma/e2e/seed";
-import { E2ESeedPayload } from "./prisma/e2e/types";
-import { resetDatabase } from "./prisma/resetDatabase";
+import { seed } from "./prisma/test-utils/seed";
+import { resetDatabase } from "./prisma/test-utils/resetDatabase";
 
 export default defineConfig({
   e2e: {
@@ -15,8 +14,8 @@ export default defineConfig({
           return null;
         },
 
-        async "db:seed"(payload: E2ESeedPayload) {
-          await seedE2E(payload);
+        async "db:seed"(payload) {
+          await seed(payload);
           return null;
         },
       });

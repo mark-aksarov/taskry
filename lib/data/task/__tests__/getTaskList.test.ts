@@ -1,19 +1,20 @@
 import {
-  seedUsers,
-  seedProjects,
-  seedCustomers,
-  seedCompanies,
-  seedWorkspaces,
-  seedTaskCategories,
-  seedProjectCategories,
-  seedPositions,
-} from "@/lib/data/utils/test-utils";
+  users,
+  positions,
+  companies,
+  customers,
+  workspaces,
+  taskCategories,
+  projectCategories,
+  projects,
+} from "@/prisma/test-utils/data";
 
 import prisma from "@/lib/prisma";
 import { getTaskList } from "../task.dal";
 import { TaskFilters } from "@/lib/types";
-import { resetDatabase } from "@/prisma/resetDatabase";
+import { seed } from "@/prisma/test-utils/seed";
 import { requireSession } from "@/lib/data/utils/requireSession";
+import { resetDatabase } from "@/prisma/test-utils/resetDatabase";
 import { ProjectStatus, TaskStatus } from "@/generated/prisma/enums";
 import { it, expect, describe, beforeAll, afterEach, afterAll } from "vitest";
 
@@ -24,14 +25,17 @@ describe("getTaskList", () => {
     });
 
     await resetDatabase();
-    await seedWorkspaces();
-    await seedPositions();
-    await seedUsers();
-    await seedProjectCategories();
-    await seedTaskCategories();
-    await seedCompanies();
-    await seedCustomers();
-    await seedProjects();
+
+    await seed({
+      workspaces,
+      positions,
+      users,
+      companies,
+      customers,
+      taskCategories,
+      projectCategories,
+      projects,
+    });
   });
 
   it("should return all tasks with valid TaskListDTO", async () => {
@@ -116,7 +120,7 @@ describe("getTaskList", () => {
           assignee: {
             id: "user-3",
             fullName: "User 3",
-            imageUrl: "https://example.com/user-3.jpg",
+            imageUrl: "/man.jpg",
           },
           project: {
             id: 1,

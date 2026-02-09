@@ -6,10 +6,5 @@ import {
 export function TaskCommentsModalTrigger(
   props: ItemBaseCommentsModalTriggerProps,
 ) {
-  return (
-    <ItemBaseCommentsModalTrigger
-      {...props}
-      data-test="task-comments-modal-trigger"
-    />
-  );
+  return <ItemBaseCommentsModalTrigger {...props} />;
 }

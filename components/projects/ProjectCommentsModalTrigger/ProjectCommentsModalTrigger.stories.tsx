@@ -2,9 +2,9 @@ import { fn } from "storybook/internal/test";
 import { Repeat } from "@/components/common/Repeat";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { ProjectCommentsModal } from "../ProjectCommentsModal";
-import { ProjectCommentsModalTrigger } from "./ProjectCommentsModalTrigger";
 import { CommentItemSkeleton } from "@/components/comments/CommentItem";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { ProjectCommentsModalTrigger } from "./ProjectCommentsModalTrigger";
 import { CommentsEmptySection } from "@/components/comments/CommentsEmptySection";
 import { MockedCommentsContainer } from "@/components/comments/MockedCommentsContainer";
 

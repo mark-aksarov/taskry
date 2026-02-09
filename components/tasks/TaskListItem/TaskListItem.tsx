@@ -177,6 +177,7 @@ export const TaskListItem = ({
       }
       commentsModalTriggerSlot={
         <TaskCommentsModalTrigger
+          data-test={`task-${id}-comments-modal-trigger`}
           commentsCount={commentsCount}
           modal={taskCommentsModal}
         />

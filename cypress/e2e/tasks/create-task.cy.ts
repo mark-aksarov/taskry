@@ -1,40 +1,34 @@
-import { E2ESeedPayload } from "@/prisma/e2e/types";
-import { ProjectStatus } from "@/generated/prisma/enums";
+import {
+  users,
+  projects,
+  accounts,
+  positions,
+  companies,
+  customers,
+  workspaces,
+  taskCategories,
+  projectCategories,
+} from "@/prisma/test-utils/data";
 
 describe("creates a new task", () => {
   beforeEach(() => {
     cy.viewport(1440, 900);
 
-    const payload: E2ESeedPayload = {
-      companies: [{ id: 1, name: "Company 1", workspaceId: 1 }],
-      customers: [
-        {
-          id: 1,
-          email: "customer@example.com",
-          fullName: "John Doe",
-          companyId: 1,
-          workspaceId: 1,
-        },
-      ],
-      projectCategories: [{ id: 1, name: "Category 1", workspaceId: 1 }],
-      taskCategories: [{ id: 1, name: "Category 1", workspaceId: 1 }],
-      projects: [
-        {
-          id: 1,
-          title: "Project 1",
-          status: ProjectStatus.active,
-          deadline: new Date("2022-01-01"),
-          categoryId: 1,
-          customerId: 1,
-          workspaceId: 1,
-          creatorId: "user-1",
-        },
-      ],
+    const payload = {
+      workspaces,
+      users,
+      accounts,
+      positions,
+      companies,
+      customers,
+      projectCategories,
+      taskCategories,
+      projects,
     };
 
     cy.task("db:reset");
     cy.task("db:seed", payload);
-    cy.signIn("owner@example.com", "12345abc");
+    cy.signIn("user-1@test.com", "12345abc");
     cy.visit("/en/tasks");
   });
 

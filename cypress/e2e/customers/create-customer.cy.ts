@@ -1,4 +1,10 @@
-import { E2ESeedPayload } from "@/prisma/e2e/types";
+import {
+  users,
+  accounts,
+  positions,
+  companies,
+  workspaces,
+} from "@/prisma/test-utils/data";
 
 describe("Customer creation", () => {
   const customerData = {
@@ -13,8 +19,12 @@ describe("Customer creation", () => {
   beforeEach(() => {
     cy.viewport(1440, 900);
 
-    const payload: E2ESeedPayload = {
-      companies: [{ id: 1, name: "Company 1", workspaceId: 1 }],
+    const payload = {
+      workspaces,
+      positions,
+      users,
+      accounts,
+      companies,
     };
 
     cy.task("db:reset");
@@ -23,7 +33,7 @@ describe("Customer creation", () => {
 
   describe("customers page", () => {
     beforeEach(() => {
-      cy.signIn("owner@example.com", "12345abc");
+      cy.signIn("user-1@test.com", "12345abc");
       cy.visit("/en/customers");
 
       cy.getByData("customer-toolbar-create-new-menu-trigger")
@@ -78,12 +88,15 @@ describe("Customer creation", () => {
   });
 
   describe("create customer access control", () => {
-    const allowedRoles = ["owner", "user"] as const;
+    const allowedUsers = [
+      { role: "owner", id: "user-1" },
+      { role: "user", id: "user-2" },
+    ] as const;
 
     describe("customers page", () => {
-      allowedRoles.forEach((role) => {
-        it(`allows ${role} to open create customer modal`, () => {
-          cy.signIn(`${role}@example.com`, "12345abc");
+      allowedUsers.forEach((user) => {
+        it(`allows ${user.role} to open create customer modal`, () => {
+          cy.signIn(`${user.id}@test.com`, "12345abc");
           cy.visit("/en/customers");
 
           cy.getByData("customer-toolbar-create-new-menu-trigger")
@@ -96,7 +109,7 @@ describe("Customer creation", () => {
       });
 
       it("blocks guest from creating a customer", () => {
-        cy.signIn("guest@example.com", "12345abc");
+        cy.signIn("user-3@test.com", "12345abc");
         cy.visit("/en/customers");
 
         cy.getByData("customer-toolbar-create-new-menu-trigger")
