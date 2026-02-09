@@ -21,7 +21,7 @@ export const customerSchema = z.object({
     z.string().trim().min(1).max(255).optional(),
   ),
   companyId: z.preprocess(
-    (val) => (val === "" ? undefined : val),
-    coercedPositiveInt.optional(),
+    (val) => (val === "" ? null : val),
+    coercedPositiveInt.nullable(),
   ),
 });

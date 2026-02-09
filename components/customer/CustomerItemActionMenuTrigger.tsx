@@ -18,8 +18,10 @@ import { useTranslations } from "next-intl";
 import { Pencil, Trash } from "lucide-react";
 import { EditCustomerModal } from "./EditCustomerModal";
 import { DeleteCustomerModal } from "./DeleteCustomerModal";
+import { GuestModeModal } from "../common/GuestModeModal";
 
 export type CustomerItemActionMenuTriggerProps = {
+  guestMode: boolean;
   customerId: number;
   customerFullName: string;
   className?: string;
@@ -28,6 +30,7 @@ export type CustomerItemActionMenuTriggerProps = {
 };
 
 export function CustomerItemActionMenuTrigger({
+  guestMode,
   customerId,
   customerFullName,
   className,
@@ -36,11 +39,23 @@ export function CustomerItemActionMenuTrigger({
 }: CustomerItemActionMenuTriggerProps) {
   const t = useTranslations("customers.CustomerItemActionMenuTrigger");
 
+  // Guest mode modal
+  const [isGuestModeModalOpen, setIsGuestModeModalOpen] = useState(false);
+
+  // Modal state for deleting the customer
   const [isDeleteCustomerModalOpen, setIsDeleteCustomerModalOpen] =
     useState(false);
+
+  // Modal state for editing the customer
   const [isEditCustomerModalOpen, setIsEditCustomerModalOpen] = useState(false);
 
+  // Handle menu actions
   function handleAction(key: Key) {
+    if (guestMode) {
+      setIsGuestModeModalOpen(true);
+      return;
+    }
+
     if (key === "edit") {
       setIsEditCustomerModalOpen(true);
     } else if (key === "delete") {
@@ -80,6 +95,11 @@ export function CustomerItemActionMenuTrigger({
         isOpen={isDeleteCustomerModalOpen}
         onOpenChange={setIsDeleteCustomerModalOpen}
         deleteAction={deleteAction}
+      />
+
+      <GuestModeModal
+        isOpen={isGuestModeModalOpen}
+        onOpenChange={setIsGuestModeModalOpen}
       />
     </>
   );

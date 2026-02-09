@@ -11,11 +11,13 @@ import { CustomerDetailActions } from "../CustomerDetailActions";
 interface CustomerDetailCardProps {
   customerHeader: React.ReactNode;
   customerDetail: React.ReactNode;
+  customerDetailActions: React.ReactNode;
 }
 
 export function CustomerDetailCard({
   customerHeader,
   customerDetail,
+  customerDetailActions,
 }: CustomerDetailCardProps) {
   const t = useTranslations("customers.CustomerDetailCard");
 
@@ -30,7 +32,7 @@ export function CustomerDetailCard({
 
       <DetailCardRight>
         {customerHeader}
-        <CustomerDetailActions />
+        {customerDetailActions}
       </DetailCardRight>
     </DetailCard>
   );

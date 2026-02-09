@@ -1,7 +1,7 @@
 import { E2ESeedPayload } from "@/prisma/e2e/types";
 import { ProjectStatus, TaskStatus } from "@/generated/prisma/enums";
 
-describe("edit a new task", () => {
+describe("edit a task", () => {
   beforeEach(() => {
     const payload: E2ESeedPayload = {
       companies: [{ id: 1, name: "Company 1", workspaceId: 1 }],

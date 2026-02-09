@@ -27,6 +27,7 @@ const meta = {
       {...args}
       menuTrigger={
         <CustomerItemActionMenuTrigger
+          guestMode={false}
           customerId={args.id}
           customerFullName={args.fullName}
           deleteAction={fn()}

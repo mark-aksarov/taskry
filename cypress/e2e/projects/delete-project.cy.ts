@@ -90,7 +90,7 @@ describe("deletes a project", () => {
     });
   });
 
-  describe.only("project detail page", () => {
+  describe("project detail page", () => {
     it("can delete a project", () => {
       cy.signIn("owner@example.com", "12345abc");
       cy.visit("/en/projects/1");

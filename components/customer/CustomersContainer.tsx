@@ -5,6 +5,7 @@ import { CustomerList } from "./CustomerList";
 import { CustomerGrid } from "./CustomerGrid";
 import { CustomerListItem } from "./CustomerListItem";
 import { CustomerGridItem } from "./CustomerGridItem";
+import { hasGuestRole } from "@/lib/utils/hasGuestRole";
 import { CustomerDetailModal } from "./CustomerDetailModal";
 import { getCustomerList } from "@/lib/data/customer/customer.dal";
 import { CustomerDetailContainer } from "./CustomerDetailContainer";
@@ -45,6 +46,8 @@ export async function CustomersContainer({
     company: customer.company,
   });
 
+  const guestMode = await hasGuestRole();
+
   return (
     <EntityContainerPresentation
       page={page}
@@ -56,6 +59,7 @@ export async function CustomersContainer({
               key={customer.id}
               menuTrigger={
                 <CustomerItemActionMenuTrigger
+                  guestMode={guestMode}
                   customerId={customer.id}
                   customerFullName={customer.fullName}
                   deleteAction={deleteCustomers}
@@ -92,6 +96,7 @@ export async function CustomersContainer({
               key={customer.id}
               menuTrigger={
                 <CustomerItemActionMenuTrigger
+                  guestMode={guestMode}
                   customerId={customer.id}
                   customerFullName={customer.fullName}
                   deleteAction={deleteCustomers}

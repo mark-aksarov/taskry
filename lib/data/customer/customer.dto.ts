@@ -21,7 +21,7 @@ export interface CreateCustomerInputDTO {
   email: string;
   phoneNumber?: string;
   publicLink?: string;
-  companyId?: number;
+  companyId?: number | null;
 }
 
 export interface UpdateCustomerInputDTO {
@@ -32,7 +32,7 @@ export interface UpdateCustomerInputDTO {
   email?: string;
   phoneNumber?: string;
   publicLink?: string;
-  companyId?: number;
+  companyId?: number | null;
 }
 
 export type CustomerDetailDTO = {

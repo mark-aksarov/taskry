@@ -134,7 +134,7 @@ Cypress.Commands.add(
     });
 
     // Select company
-    if (data.companyKey) {
+    if (data.companyKey !== undefined) {
       cy.getByData("company-select").click();
       cy.getSelectOption(data.companyKey).click();
     }

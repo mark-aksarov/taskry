@@ -109,7 +109,7 @@ describe("edit a new project", () => {
     });
   });
 
-  describe.only("project detail page", () => {
+  describe("project detail page", () => {
     it("can edit a project", () => {
       cy.signIn("owner@example.com", "12345abc");
       cy.visit("/en/projects/1");

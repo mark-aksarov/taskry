@@ -1,20 +1,107 @@
+"use client";
+
+import {
+  ActionFn,
+  ActionState,
+  DeleteCustomersPayload,
+} from "@/lib/actions/types";
+
+import { useState } from "react";
 import { useTranslations } from "next-intl";
-import { KeyRound, Pencil, Trash } from "lucide-react";
+import { Pencil, Trash } from "lucide-react";
+import { EditCustomerModal } from "../EditCustomerModal";
+import { DeleteCustomerModal } from "../DeleteCustomerModal";
+import { GuestModeModal } from "@/components/common/GuestModeModal";
 import { NavigationButton } from "@/components/common/NavigationButton";
 
-export function CustomerDetailActions() {
+interface CustomerDetailActionsProps {
+  guestMode: boolean;
+  customerId: number;
+  customerFullName: string;
+  deleteCustomer: ActionFn<ActionState, DeleteCustomersPayload>;
+  editCustomerFormContainer: React.ReactNode;
+}
+
+export function CustomerDetailActions({
+  guestMode,
+  customerId,
+  customerFullName,
+  deleteCustomer,
+  editCustomerFormContainer,
+}: CustomerDetailActionsProps) {
   const t = useTranslations("customers.CustomerDetailActions");
 
+  // Guest mode modal
+  const [isGuestModeModalOpen, setIsGuestModeModalOpen] = useState(false);
+
+  // Modal state for editing the task
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+
+  // Modal state for deleting the task
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+
+  function handleDeletePress() {
+    if (guestMode) {
+      setIsGuestModeModalOpen(true);
+      return;
+    }
+
+    setIsDeleteModalOpen(true);
+  }
+
+  function handleEditPress() {
+    if (guestMode) {
+      setIsGuestModeModalOpen(true);
+      return;
+    }
+
+    setIsEditModalOpen(true);
+  }
+
   return (
-    <div className="flex flex-col gap-2.5">
-      <NavigationButton variant="secondary">
-        <Trash size={18} strokeWidth={1.5} absoluteStrokeWidth />
-        {t("delete")}
-      </NavigationButton>
-      <NavigationButton variant="secondary">
-        <KeyRound size={18} strokeWidth={1.5} absoluteStrokeWidth />
-        {t("edit")}
-      </NavigationButton>
-    </div>
+    <>
+      <div
+        data-test="customer-detail-actions"
+        className="flex flex-col gap-2.5"
+      >
+        <NavigationButton
+          data-test="delete-customer-button"
+          onPress={handleDeletePress}
+          variant="secondary"
+        >
+          <Trash size={18} strokeWidth={1.5} absoluteStrokeWidth />
+          {t("delete")}
+        </NavigationButton>
+        <NavigationButton
+          data-test="edit-customer-button"
+          onPress={handleEditPress}
+          variant="secondary"
+        >
+          <Pencil size={18} strokeWidth={1.5} absoluteStrokeWidth />
+          {t("edit")}
+        </NavigationButton>
+      </div>
+
+      {/* Modal for editing customer details */}
+      <EditCustomerModal
+        isOpen={isEditModalOpen}
+        onOpenChange={setIsEditModalOpen}
+        editCustomerFormContainer={editCustomerFormContainer}
+      />
+
+      {/* Modal for confirming customer deletion */}
+      <DeleteCustomerModal
+        customerId={customerId}
+        customerFullName={customerFullName}
+        isOpen={isDeleteModalOpen}
+        onOpenChange={setIsDeleteModalOpen}
+        deleteAction={deleteCustomer}
+      />
+
+      <GuestModeModal
+        isOpen={isGuestModeModalOpen}
+        onOpenChange={setIsGuestModeModalOpen}
+      />
+    </>
   );
 }

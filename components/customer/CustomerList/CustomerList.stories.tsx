@@ -77,6 +77,7 @@ export const Default = {
         {...customer}
         menuTrigger={
           <CustomerItemActionMenuTrigger
+            guestMode={false}
             customerId={customer.id}
             customerFullName={customer.fullName}
             deleteAction={fn()}

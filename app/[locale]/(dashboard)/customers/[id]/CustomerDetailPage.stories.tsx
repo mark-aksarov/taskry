@@ -19,7 +19,9 @@ import { useParams, usePathname } from "next/navigation";
 import { CustomerDetailPage } from "./CustomerDetailPage";
 import { PageDecorator } from "@/.storybook/PageDecorator";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { CustomerDetailActions } from "@/components/customer/CustomerDetailActions";
 import { PersonDetailHeader as PersonDetailHeaderStory } from "@/components/common/DetailHeader/DetailHeader.stories";
+import { Default as CustomerDetailActionsStory } from "@/components/customer/CustomerDetailActions/CustomerDetailActions.stories";
 
 const meta = {
   title: "components/pages/CustomerDetailPage",
@@ -41,6 +43,9 @@ export const Default = {
   args: {
     customerDetailContainer: <CustomerDetail {...CustomerDetailStory.args} />,
     customerHeaderContainer: <DetailHeader {...PersonDetailHeaderStory.args} />,
+    customerDetailActions: (
+      <CustomerDetailActions {...CustomerDetailActionsStory.args} />
+    ),
   },
 } satisfies Story;
 
@@ -48,6 +53,9 @@ export const Loading = {
   args: {
     customerDetailContainer: <CustomerDetailSkeleton />,
     customerHeaderContainer: <DetailHeaderSkeleton />,
+    customerDetailActions: (
+      <CustomerDetailActions {...CustomerDetailActionsStory.args} />
+    ),
   },
 } satisfies Story;
 
@@ -57,5 +65,8 @@ export const WithoutSomeData = {
       <CustomerDetail {...CustomerDetailWithoutSomeDataStory.args} />
     ),
     customerHeaderContainer: <DetailHeaderSkeleton />,
+    customerDetailActions: (
+      <CustomerDetailActions {...CustomerDetailActionsStory.args} />
+    ),
   },
 } satisfies Story;

@@ -8,7 +8,7 @@ import { Default as EditTaskFormStory } from "../EditTaskForm/EditTaskForm.stori
 import { MockedCommentsContainer } from "@/components/comments/MockedCommentsContainer";
 
 const meta = {
-  title: "components/users/TaskDetailActions",
+  title: "components/tasks/TaskDetailActions",
   component: TaskDetailActions,
   tags: ["autodocs"],
   decorators: [withThemedBackground],
