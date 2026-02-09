@@ -9,9 +9,9 @@ import {
 
 import { useActionState } from "react";
 import { useTranslations } from "next-intl";
-import { ErrorBanner } from "../../common/ErrorBanner";
 import { ActionFn, ActionState } from "@/lib/actions/types";
 import { handleActionSubmit } from "@/lib/utils/handleActionSubmit";
+import { FormErrorBanner } from "@/components/common/FormErrorBanner";
 import { ProjectCategoryNameTextField } from "../ProjectCategoryNameTextField";
 import { useCloseOverlayOnActionSuccess } from "@/lib/hooks/useCloseOverlayOnActionSuccess";
 
@@ -28,7 +28,7 @@ export function NewProjectCategoryForm({
 }: NewProjectCategoryFormProps) {
   const t = useTranslations("projectCategories.NewProjectCategoryForm");
 
-  const [state, action, pending] = useActionState(
+  const [state, action, isPending] = useActionState(
     createProjectCategory,
     initialState,
   );
@@ -42,12 +42,15 @@ export function NewProjectCategoryForm({
     >
       <FormBaseBody>
         <ProjectCategoryNameTextField />
-        {state.status === "error" && (
-          <ErrorBanner>{t("error.creationError")}</ErrorBanner>
-        )}
+        <FormErrorBanner status={state.status} isPending={isPending}>
+          {t("error.creationError")}
+        </FormErrorBanner>
       </FormBaseBody>
       <FormBaseFooter>
-        <FormBaseSubmitButton label={t("submitButtonLabel")} />
+        <FormBaseSubmitButton
+          isPending={isPending}
+          label={t("submitButtonLabel")}
+        />
       </FormBaseFooter>
     </FormBase>
   );

@@ -14,9 +14,9 @@ import { TaskStatus } from "@/generated/prisma/enums";
 import { TaskStatusSelect } from "../TaskStatusSelect";
 import { TaskTitleTextField } from "../TaskTitleTextField";
 import { ActionFn, ActionState } from "@/lib/actions/types";
-import { ErrorBanner } from "@/components/common/ErrorBanner";
 import { TaskDeadlineDatePicker } from "../TaskDeadlineDatePicker";
 import { handleActionSubmit } from "@/lib/utils/handleActionSubmit";
+import { FormErrorBanner } from "@/components/common/FormErrorBanner";
 import { TaskDescriptionTextField } from "../TaskDescriptionTextField";
 import { useCloseOverlayOnActionSuccess } from "@/lib/hooks/useCloseOverlayOnActionSuccess";
 
@@ -49,7 +49,7 @@ export function EditTaskForm({
 }: EditTaskFormProps) {
   const t = useTranslations("tasks.EditTaskForm");
 
-  const [state, action, pending] = useActionState(updateTask, initialState);
+  const [state, action, isPending] = useActionState(updateTask, initialState);
 
   useCloseOverlayOnActionSuccess(state);
 
@@ -67,12 +67,15 @@ export function EditTaskForm({
         {taskCategorySelect}
         {projectSelect}
         {assigneeSelect}
-        {state.status === "error" && (
-          <ErrorBanner>{t("error.updateError")}</ErrorBanner>
-        )}
+        <FormErrorBanner status={state.status} isPending={isPending}>
+          {t("error.updateError")}
+        </FormErrorBanner>
       </FormBaseBody>
       <FormBaseFooter>
-        <FormBaseSubmitButton label={t("submitButtonLabel")} />
+        <FormBaseSubmitButton
+          isPending={isPending}
+          label={t("submitButtonLabel")}
+        />
       </FormBaseFooter>
     </FormBase>
   );

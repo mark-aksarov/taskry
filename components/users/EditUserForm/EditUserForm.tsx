@@ -12,12 +12,12 @@ import { useActionState } from "react";
 import { useTranslations } from "next-intl";
 import { UserBioTextField } from "../UserBioTextField";
 import { ActionFn, ActionState } from "@/lib/actions/types";
-import { ErrorBanner } from "@/components/common/ErrorBanner";
 import { UserAddressTextField } from "../UserAddressTextField";
 import { UserFullNameTextField } from "../UserFullNameTextField";
 import { handleActionSubmit } from "@/lib/utils/handleActionSubmit";
 import { UserBirthdateDatePicker } from "../UserBirthdateDatePicker";
 import { UserPublicLinkTextField } from "../UserPublicLinkTextField";
+import { FormErrorBanner } from "@/components/common/FormErrorBanner";
 import { UserPhoneNumberTextField } from "../UserPhoneNumberTextField";
 import { useCloseOverlayOnActionSuccess } from "@/lib/hooks/useCloseOverlayOnActionSuccess";
 
@@ -51,7 +51,7 @@ export function EditUserForm({
 }: EditUserFormProps) {
   const t = useTranslations("users.EditUserForm");
 
-  const [state, action, pending] = useActionState(updateUser, initialState);
+  const [state, action, isPending] = useActionState(updateUser, initialState);
 
   useCloseOverlayOnActionSuccess(state);
 
@@ -88,11 +88,16 @@ export function EditUserForm({
         <UserAddressTextField defaultValue={addressDefaultValue} />
         {positionSelect}
 
-        {state.status === "error" && <ErrorBanner>{serverError}</ErrorBanner>}
+        <FormErrorBanner status={state.status} isPending={isPending}>
+          {serverError}
+        </FormErrorBanner>
       </FormBaseBody>
 
       <FormBaseFooter>
-        <FormBaseSubmitButton label={t("submitButtonLabel")} />
+        <FormBaseSubmitButton
+          isPending={isPending}
+          label={t("submitButtonLabel")}
+        />
       </FormBaseFooter>
     </FormBase>
   );

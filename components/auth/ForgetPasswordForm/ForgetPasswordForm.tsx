@@ -4,7 +4,7 @@ import { useActionState } from "react";
 import { AuthCardForm } from "../AuthCard";
 import { useTranslations } from "next-intl";
 import { ActionFn, ActionState } from "@/lib/actions/types";
-import { ErrorBanner } from "@/components/common/ErrorBanner";
+import { FormErrorBanner } from "@/components/common/FormErrorBanner";
 import { ForgetPasswordFormEmailField } from "./ForgetPasswordFormEmailField";
 import { ForgetPasswordFormSubmitButton } from "./ForgetPasswordFormSubmitButton";
 
@@ -42,7 +42,9 @@ export function ForgetPasswordForm({ action }: ForgetPasswordFormProps) {
     <AuthCardForm action={formAction}>
       <ForgetPasswordFormEmailField />
 
-      {serverError && <ErrorBanner>{serverError}</ErrorBanner>}
+      <FormErrorBanner status={state.status} isPending={isPending}>
+        {serverError}
+      </FormErrorBanner>
 
       <ForgetPasswordFormSubmitButton />
     </AuthCardForm>

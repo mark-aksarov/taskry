@@ -14,6 +14,7 @@ import { ErrorBanner } from "@/components/common/ErrorBanner";
 import { CompanyNameTextField } from "../CompanyNameTextField";
 import { handleActionSubmit } from "@/lib/utils/handleActionSubmit";
 import { useCloseOverlayOnActionSuccess } from "@/lib/hooks/useCloseOverlayOnActionSuccess";
+import { FormErrorBanner } from "@/components/common/FormErrorBanner";
 
 const initialState: ActionState = {
   status: null,
@@ -26,7 +27,10 @@ interface NewCompanyFormProps {
 export function NewCompanyForm({ createCompany }: NewCompanyFormProps) {
   const t = useTranslations("company.NewCompanyForm");
 
-  const [state, action, pending] = useActionState(createCompany, initialState);
+  const [state, action, isPending] = useActionState(
+    createCompany,
+    initialState,
+  );
 
   useCloseOverlayOnActionSuccess(state);
 
@@ -37,13 +41,16 @@ export function NewCompanyForm({ createCompany }: NewCompanyFormProps) {
     >
       <FormBaseBody>
         <CompanyNameTextField />
-        {state.status === "error" && (
-          <ErrorBanner>{t("error.creationError")}</ErrorBanner>
-        )}
+        <FormErrorBanner status={state.status} isPending={isPending}>
+          {t("error.creationError")}
+        </FormErrorBanner>
       </FormBaseBody>
 
       <FormBaseFooter>
-        <FormBaseSubmitButton label={t("submitButtonLabel")} />
+        <FormBaseSubmitButton
+          isPending={isPending}
+          label={t("submitButtonLabel")}
+        />
       </FormBaseFooter>
     </FormBase>
   );

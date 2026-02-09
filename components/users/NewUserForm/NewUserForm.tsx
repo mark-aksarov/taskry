@@ -11,10 +11,10 @@ import { useActionState } from "react";
 import { useTranslations } from "next-intl";
 import { UserEmailTextField } from "../UserEmailTextField";
 import { ActionFn, ActionState } from "@/lib/actions/types";
-import { ErrorBanner } from "@/components/common/ErrorBanner";
 import { UserFullNameTextField } from "../UserFullNameTextField";
 import { UserPasswordTextField } from "../UserPasswordTextField";
 import { handleActionSubmit } from "@/lib/utils/handleActionSubmit";
+import { FormErrorBanner } from "@/components/common/FormErrorBanner";
 import { useCloseOverlayOnActionSuccess } from "@/lib/hooks/useCloseOverlayOnActionSuccess";
 
 const initialState: ActionState = {
@@ -28,7 +28,7 @@ interface NewUserFormProps {
 export function NewUserForm({ createUser }: NewUserFormProps) {
   const t = useTranslations("users.NewUserForm");
 
-  const [state, action, pending] = useActionState(createUser, initialState);
+  const [state, action, isPending] = useActionState(createUser, initialState);
 
   useCloseOverlayOnActionSuccess(state);
 
@@ -56,11 +56,16 @@ export function NewUserForm({ createUser }: NewUserFormProps) {
         <UserEmailTextField />
         <UserPasswordTextField />
 
-        {state.status === "error" && <ErrorBanner>{serverError}</ErrorBanner>}
+        <FormErrorBanner status={state.status} isPending={isPending}>
+          {serverError}
+        </FormErrorBanner>
       </FormBaseBody>
 
       <FormBaseFooter>
-        <FormBaseSubmitButton label={t("submitButtonLabel")} />
+        <FormBaseSubmitButton
+          isPending={isPending}
+          label={t("submitButtonLabel")}
+        />
       </FormBaseFooter>
     </FormBase>
   );

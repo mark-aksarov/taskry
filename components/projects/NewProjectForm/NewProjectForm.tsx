@@ -11,9 +11,9 @@ import { useActionState } from "react";
 import { useTranslations } from "next-intl";
 import { ActionFn, ActionState } from "@/lib/actions/types";
 import { ProjectStatusSelect } from "../ProjectStatusSelect";
-import { ErrorBanner } from "@/components/common/ErrorBanner";
 import { ProjectTitleTextField } from "../ProjectTitleTextField";
 import { handleActionSubmit } from "@/lib/utils/handleActionSubmit";
+import { FormErrorBanner } from "@/components/common/FormErrorBanner";
 import { ProjectDeadlineDatePicker } from "../ProjectDeadlineDatePicker";
 import { ProjectDescriptionTextField } from "../ProjectDescriptionTextField";
 import { useCloseOverlayOnActionSuccess } from "@/lib/hooks/useCloseOverlayOnActionSuccess";
@@ -35,7 +35,10 @@ export function NewProjectForm({
 }: NewProjectFormProps) {
   const t = useTranslations("projects.NewProjectForm");
 
-  const [state, action, pending] = useActionState(createProject, initialState);
+  const [state, action, isPending] = useActionState(
+    createProject,
+    initialState,
+  );
 
   useCloseOverlayOnActionSuccess(state);
 
@@ -51,12 +54,15 @@ export function NewProjectForm({
         <ProjectStatusSelect />
         {projectCategorySelect}
         {projectCustomerSelect}
-        {state.status === "error" && (
-          <ErrorBanner>{t("error.creationError")}</ErrorBanner>
-        )}
+        <FormErrorBanner status={state.status} isPending={isPending}>
+          {t("error.creationError")}
+        </FormErrorBanner>
       </FormBaseBody>
       <FormBaseFooter>
-        <FormBaseSubmitButton label={t("submitButtonLabel")} />
+        <FormBaseSubmitButton
+          isPending={isPending}
+          label={t("submitButtonLabel")}
+        />
       </FormBaseFooter>
     </FormBase>
   );

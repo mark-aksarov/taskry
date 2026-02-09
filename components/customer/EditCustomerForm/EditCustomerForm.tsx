@@ -10,10 +10,10 @@ import {
 import { useActionState } from "react";
 import { useTranslations } from "next-intl";
 import { ActionFn, ActionState } from "@/lib/actions/types";
-import { ErrorBanner } from "@/components/common/ErrorBanner";
 import { CustomerBioTextField } from "../CustomerBioTextField";
 import { CustomerEmailTextField } from "../CustomerEmailTextField";
 import { handleActionSubmit } from "@/lib/utils/handleActionSubmit";
+import { FormErrorBanner } from "@/components/common/FormErrorBanner";
 import { CustomerFullNameTextField } from "../CustomerFullNameTextField";
 import { CustomerPublicLinkTextField } from "../CustomerPublicLinkTextField";
 import { CustomerPhoneNumberTextField } from "../CustomerPhoneNumberTextField";
@@ -46,7 +46,10 @@ export function EditCustomerForm({
 }: EditCustomerFormProps) {
   const t = useTranslations("customers.EditCustomerForm");
 
-  const [state, action, pending] = useActionState(updateCustomer, initialState);
+  const [state, action, isPending] = useActionState(
+    updateCustomer,
+    initialState,
+  );
 
   useCloseOverlayOnActionSuccess(state);
 
@@ -64,12 +67,15 @@ export function EditCustomerForm({
         <CustomerPhoneNumberTextField defaultValue={phoneNumberDefaultValue} />
         <CustomerPublicLinkTextField defaultValue={publicLinkDefaultValue} />
         {companySelect}
-        {state.status === "error" && (
-          <ErrorBanner>{t("error.updateError")}</ErrorBanner>
-        )}
+        <FormErrorBanner status={state.status} isPending={isPending}>
+          {t("error.updateError")}
+        </FormErrorBanner>
       </FormBaseBody>
       <FormBaseFooter>
-        <FormBaseSubmitButton label={t("submitButtonLabel")} />
+        <FormBaseSubmitButton
+          isPending={isPending}
+          label={t("submitButtonLabel")}
+        />
       </FormBaseFooter>
     </FormBase>
   );

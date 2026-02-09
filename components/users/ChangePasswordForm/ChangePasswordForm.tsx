@@ -10,9 +10,9 @@ import {
 import { useActionState } from "react";
 import { useTranslations } from "next-intl";
 import { ActionFn, ActionState } from "@/lib/actions/types";
-import { ErrorBanner } from "@/components/common/ErrorBanner";
 import { UserPasswordTextField } from "../UserPasswordTextField";
 import { handleActionSubmit } from "@/lib/utils/handleActionSubmit";
+import { FormErrorBanner } from "@/components/common/FormErrorBanner";
 import { useCloseOverlayOnActionSuccess } from "@/lib/hooks/useCloseOverlayOnActionSuccess";
 
 const initialState: ActionState = {
@@ -30,7 +30,10 @@ export function ChangePasswordForm({
 }: ChangePasswordFormProps) {
   const t = useTranslations("users.ChangePasswordForm");
 
-  const [state, action, pending] = useActionState(changePassword, initialState);
+  const [state, action, isPending] = useActionState(
+    changePassword,
+    initialState,
+  );
 
   let serverError = null;
 
@@ -59,10 +62,15 @@ export function ChangePasswordForm({
         {userId && <input type="hidden" name="id" value={userId} />}
         <UserPasswordTextField />
 
-        {state.status === "error" && <ErrorBanner>{serverError}</ErrorBanner>}
+        <FormErrorBanner status={state.status} isPending={isPending}>
+          {serverError}
+        </FormErrorBanner>
       </FormBaseBody>
       <FormBaseFooter>
-        <FormBaseSubmitButton label={t("submitButtonLabel")} />
+        <FormBaseSubmitButton
+          isPending={isPending}
+          label={t("submitButtonLabel")}
+        />
       </FormBaseFooter>
     </FormBase>
   );

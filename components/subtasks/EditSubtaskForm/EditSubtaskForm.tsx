@@ -11,9 +11,9 @@ import { useTranslations } from "next-intl";
 import { useActionState, useEffect } from "react";
 import { SubtaskTextField } from "../SubtaskTextField";
 import { ActionFn, ActionState } from "@/lib/actions/types";
-import { ErrorBanner } from "@/components/common/ErrorBanner";
-import { useCloseOverlayOnActionSuccess } from "@/lib/hooks/useCloseOverlayOnActionSuccess";
 import { handleActionSubmit } from "@/lib/utils/handleActionSubmit";
+import { FormErrorBanner } from "@/components/common/FormErrorBanner";
+import { useCloseOverlayOnActionSuccess } from "@/lib/hooks/useCloseOverlayOnActionSuccess";
 
 const initialState: ActionState = {
   status: null,
@@ -36,7 +36,10 @@ export function EditSubtaskForm({
 }: EditSubtaskFormProps) {
   const t = useTranslations("subtasks.EditSubtaskForm");
 
-  const [state, action, pending] = useActionState(updateSubtask, initialState);
+  const [state, action, isPending] = useActionState(
+    updateSubtask,
+    initialState,
+  );
 
   useEffect(() => {
     if (state.status === "success" && mutate) {
@@ -55,13 +58,16 @@ export function EditSubtaskForm({
         <input type="hidden" name="id" value={subtaskId} />
         <input type="hidden" name="taskId" value={taskId} />
         <SubtaskTextField defaultValue={textDefaultValue} />
-        {state.status === "error" && (
-          <ErrorBanner>{t("error.updateError")}</ErrorBanner>
-        )}
+        <FormErrorBanner status={state.status} isPending={isPending}>
+          {t("error.updateError")}
+        </FormErrorBanner>
       </FormBaseBody>
 
       <FormBaseFooter>
-        <FormBaseSubmitButton label={t("submitButtonLabel")} />
+        <FormBaseSubmitButton
+          isPending={isPending}
+          label={t("submitButtonLabel")}
+        />
       </FormBaseFooter>
     </FormBase>
   );

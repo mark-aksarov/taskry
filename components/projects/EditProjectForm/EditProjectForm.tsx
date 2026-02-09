@@ -13,9 +13,9 @@ import { useTranslations } from "next-intl";
 import { ProjectStatus } from "@/generated/prisma/enums";
 import { ActionFn, ActionState } from "@/lib/actions/types";
 import { ProjectStatusSelect } from "../ProjectStatusSelect";
-import { ErrorBanner } from "@/components/common/ErrorBanner";
 import { ProjectTitleTextField } from "../ProjectTitleTextField";
 import { handleActionSubmit } from "@/lib/utils/handleActionSubmit";
+import { FormErrorBanner } from "@/components/common/FormErrorBanner";
 import { ProjectDeadlineDatePicker } from "../ProjectDeadlineDatePicker";
 import { ProjectDescriptionTextField } from "../ProjectDescriptionTextField";
 import { useCloseOverlayOnActionSuccess } from "@/lib/hooks/useCloseOverlayOnActionSuccess";
@@ -47,7 +47,10 @@ export function EditProjectForm({
 }: EditProjectFormProps) {
   const t = useTranslations("projects.EditProjectForm");
 
-  const [state, action, pending] = useActionState(updateProject, initialState);
+  const [state, action, isPending] = useActionState(
+    updateProject,
+    initialState,
+  );
 
   useCloseOverlayOnActionSuccess(state);
 
@@ -66,12 +69,16 @@ export function EditProjectForm({
         <ProjectStatusSelect defaultSelectedKey={projectStatusDefaultValue} />
         {projectCategorySelect}
         {projectCustomerSelect}
-        {state.status === "error" && (
-          <ErrorBanner>{t("error.updateError")}</ErrorBanner>
-        )}
+
+        <FormErrorBanner status={state.status} isPending={isPending}>
+          {t("error.updateError")}
+        </FormErrorBanner>
       </FormBaseBody>
       <FormBaseFooter>
-        <FormBaseSubmitButton label={t("submitButtonLabel")} />
+        <FormBaseSubmitButton
+          isPending={isPending}
+          label={t("submitButtonLabel")}
+        />
       </FormBaseFooter>
     </FormBase>
   );

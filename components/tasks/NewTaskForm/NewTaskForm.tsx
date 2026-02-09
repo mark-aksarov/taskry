@@ -12,9 +12,9 @@ import { useTranslations } from "next-intl";
 import { TaskStatusSelect } from "../TaskStatusSelect";
 import { TaskTitleTextField } from "../TaskTitleTextField";
 import { ActionFn, ActionState } from "@/lib/actions/types";
-import { ErrorBanner } from "@/components/common/ErrorBanner";
 import { TaskDeadlineDatePicker } from "../TaskDeadlineDatePicker";
 import { handleActionSubmit } from "@/lib/utils/handleActionSubmit";
+import { FormErrorBanner } from "@/components/common/FormErrorBanner";
 import { TaskDescriptionTextField } from "../TaskDescriptionTextField";
 import { useCloseOverlayOnActionSuccess } from "@/lib/hooks/useCloseOverlayOnActionSuccess";
 
@@ -37,7 +37,7 @@ export function NewTaskForm({
 }: NewTaskFormProps) {
   const t = useTranslations("tasks.NewTaskForm");
 
-  const [state, action, pending] = useActionState(createTask, initialState);
+  const [state, action, isPending] = useActionState(createTask, initialState);
 
   useCloseOverlayOnActionSuccess(state);
 
@@ -54,12 +54,15 @@ export function NewTaskForm({
         {taskCategorySelect}
         {projectSelect}
         {assigneeSelect}
-        {state.status === "error" && (
-          <ErrorBanner>{t("error.creationError")}</ErrorBanner>
-        )}
+        <FormErrorBanner status={state.status} isPending={isPending}>
+          {t("error.creationError")}
+        </FormErrorBanner>
       </FormBaseBody>
       <FormBaseFooter>
-        <FormBaseSubmitButton label={t("submitButtonLabel")} />
+        <FormBaseSubmitButton
+          isPending={isPending}
+          label={t("submitButtonLabel")}
+        />
       </FormBaseFooter>
     </FormBase>
   );

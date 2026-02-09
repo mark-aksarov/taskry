@@ -10,10 +10,10 @@ import {
 import { useActionState } from "react";
 import { useTranslations } from "next-intl";
 import { ActionFn, ActionState } from "@/lib/actions/types";
-import { ErrorBanner } from "@/components/common/ErrorBanner";
 import { CustomerBioTextField } from "../CustomerBioTextField";
 import { CustomerEmailTextField } from "../CustomerEmailTextField";
 import { handleActionSubmit } from "@/lib/utils/handleActionSubmit";
+import { FormErrorBanner } from "@/components/common/FormErrorBanner";
 import { CustomerFullNameTextField } from "../CustomerFullNameTextField";
 import { CustomerPublicLinkTextField } from "../CustomerPublicLinkTextField";
 import { CustomerPhoneNumberTextField } from "../CustomerPhoneNumberTextField";
@@ -34,7 +34,10 @@ export function NewCustomerForm({
 }: NewCustomerFormProps) {
   const t = useTranslations("customers.NewCustomerForm");
 
-  const [state, action, pending] = useActionState(createCustomer, initialState);
+  const [state, action, isPending] = useActionState(
+    createCustomer,
+    initialState,
+  );
 
   useCloseOverlayOnActionSuccess(state);
 
@@ -50,12 +53,15 @@ export function NewCustomerForm({
         <CustomerPhoneNumberTextField />
         <CustomerPublicLinkTextField />
         {companySelect}
-        {state.status === "error" && !pending && (
-          <ErrorBanner>{t("creationError")}</ErrorBanner>
-        )}
+        <FormErrorBanner status={state.status} isPending={isPending}>
+          {t("creationError")}
+        </FormErrorBanner>
       </FormBaseBody>
       <FormBaseFooter>
-        <FormBaseSubmitButton label={t("submitButtonLabel")} />
+        <FormBaseSubmitButton
+          isPending={isPending}
+          label={t("submitButtonLabel")}
+        />
       </FormBaseFooter>
     </FormBase>
   );

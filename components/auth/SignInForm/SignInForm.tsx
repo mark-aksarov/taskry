@@ -3,11 +3,11 @@
 import { useActionState } from "react";
 import { AuthCardForm } from "../AuthCard";
 import { useTranslations } from "next-intl";
-import { ErrorBanner } from "@/components/common/ErrorBanner";
 import { ActionFn, ActionState } from "@/lib/actions/types";
 import { SignInFormEmailField } from "./SignInFormEmailField";
 import { SignInFormSubmitButton } from "./SignInFormSubmitButton";
 import { SignInFormPasswordField } from "./SignInFormPasswordField";
+import { FormErrorBanner } from "@/components/common/FormErrorBanner";
 import { SignInFormRememberMeCheckbox } from "./SignInFormRememberMeCheckbox";
 
 const initialState: ActionState = {
@@ -51,7 +51,9 @@ export function SignInForm({ action }: SignInFormProps) {
       <SignInFormPasswordField />
       <SignInFormRememberMeCheckbox />
 
-      {serverError && <ErrorBanner>{serverError}</ErrorBanner>}
+      <FormErrorBanner status={state.status} isPending={isPending}>
+        {serverError}
+      </FormErrorBanner>
 
       <SignInFormSubmitButton />
     </AuthCardForm>

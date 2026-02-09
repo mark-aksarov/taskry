@@ -10,9 +10,9 @@ import {
 import { useActionState } from "react";
 import { useTranslations } from "next-intl";
 import { ActionFn, ActionState } from "@/lib/actions/types";
-import { ErrorBanner } from "@/components/common/ErrorBanner";
 import { PositionNameTextField } from "../PositionNameTextField";
 import { handleActionSubmit } from "@/lib/utils/handleActionSubmit";
+import { FormErrorBanner } from "@/components/common/FormErrorBanner";
 import { useCloseOverlayOnActionSuccess } from "@/lib/hooks/useCloseOverlayOnActionSuccess";
 
 const initialState: ActionState = {
@@ -26,7 +26,10 @@ interface NewPositionFormProps {
 export function NewPositionForm({ createPosition }: NewPositionFormProps) {
   const t = useTranslations("positions.NewPositionForm");
 
-  const [state, action, pending] = useActionState(createPosition, initialState);
+  const [state, action, isPending] = useActionState(
+    createPosition,
+    initialState,
+  );
 
   useCloseOverlayOnActionSuccess(state);
 
@@ -37,12 +40,15 @@ export function NewPositionForm({ createPosition }: NewPositionFormProps) {
     >
       <FormBaseBody>
         <PositionNameTextField />
-        {state.status === "error" && (
-          <ErrorBanner>{t("error.creationError")}</ErrorBanner>
-        )}
+        <FormErrorBanner status={state.status} isPending={isPending}>
+          {t("error.creationError")}
+        </FormErrorBanner>
       </FormBaseBody>
       <FormBaseFooter>
-        <FormBaseSubmitButton label={t("submitButtonLabel")} />
+        <FormBaseSubmitButton
+          isPending={isPending}
+          label={t("submitButtonLabel")}
+        />
       </FormBaseFooter>
     </FormBase>
   );

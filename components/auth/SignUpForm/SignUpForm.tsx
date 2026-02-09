@@ -3,12 +3,12 @@
 import { useActionState } from "react";
 import { AuthCardForm } from "../AuthCard";
 import { useTranslations } from "next-intl";
-import { ErrorBanner } from "@/components/common/ErrorBanner";
 import { ActionFn, ActionState } from "@/lib/actions/types";
 import { SignUpFormNameField } from "./SignUpFormNameField";
 import { SignUpFormEmailField } from "./SignUpFormEmailField";
 import { SignUpFormSubmitButton } from "./SignUpFormSubmitButton";
 import { SignUpFormPasswordField } from "./SignUpFormPasswordField";
+import { FormErrorBanner } from "@/components/common/FormErrorBanner";
 import { SignUpFormRememberMeCheckbox } from "./SignUpFormRememberMeCheckbox";
 
 const initialState: ActionState = {
@@ -56,7 +56,9 @@ export function SignUpForm({ action }: SignUpFormProps) {
       <SignUpFormPasswordField />
       <SignUpFormRememberMeCheckbox />
 
-      {serverError && <ErrorBanner>{serverError}</ErrorBanner>}
+      <FormErrorBanner status={state.status} isPending={isPending}>
+        {serverError}
+      </FormErrorBanner>
 
       <SignUpFormSubmitButton />
     </AuthCardForm>
