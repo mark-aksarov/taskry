@@ -1,24 +1,20 @@
-import {
-  EmptySection,
-  EmptySectionButton,
-  EmptySectionHeading,
-  EmptySectionDescription,
-} from "@/components/common/EmptySection";
 import { useTranslations } from "next-intl";
-import { PageContainer } from "@/components/common/PageContainer";
+import { EmptyPageContainer } from "@/components/common/EmptyPageContainer";
 
-export function UsersPageEmpty() {
+interface UsersPageEmptyProps {
+  userToolbarCreateNewMenuTrigger: React.ReactNode;
+}
+
+export function UsersPageEmpty({
+  userToolbarCreateNewMenuTrigger,
+}: UsersPageEmptyProps) {
   const t = useTranslations("app.UsersPageEmpty");
 
   return (
-    <PageContainer fullscreen centered>
-      <EmptySection>
-        <EmptySectionHeading>{t("heading")}</EmptySectionHeading>
-        <EmptySectionDescription>{t("description")}</EmptySectionDescription>
-        <EmptySectionButton createNewModal={<div />}>
-          {t("addButtonLabel")}
-        </EmptySectionButton>
-      </EmptySection>
-    </PageContainer>
+    <EmptyPageContainer
+      heading={t("heading")}
+      description={t("description")}
+      toolbarCreateNewMenuTrigger={userToolbarCreateNewMenuTrigger}
+    />
   );
 }

@@ -35,6 +35,16 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
+const projectToolbarCreateNewMenuTrigger = (
+  <ProjectToolbarCreateNewMenuTrigger
+    guestMode={false}
+    newProjectFormContainer={<NewProjectForm {...NewProjectFormStory.args} />}
+    newProjectCategoryForm={
+      <NewProjectCategoryForm {...NewProjectCategoryFormStory.args} />
+    }
+  />
+);
+
 export const Default = {
   args: {
     projectsContainer: (
@@ -46,17 +56,7 @@ export const Default = {
         totalPages={3}
       />
     ),
-    projectToolbarCreateNewMenuTrigger: (
-      <ProjectToolbarCreateNewMenuTrigger
-        guestMode={false}
-        newProjectFormContainer={
-          <NewProjectForm {...NewProjectFormStory.args} />
-        }
-        newProjectCategoryForm={
-          <NewProjectCategoryForm {...NewProjectCategoryFormStory.args} />
-        }
-      />
-    ),
+    projectToolbarCreateNewMenuTrigger: projectToolbarCreateNewMenuTrigger,
     projectToolbarFiltersModalTrigger: (
       <ProjectToolbarFiltersModalTrigger
         filtersFormContainer={
@@ -83,7 +83,7 @@ export const WithNoProjects = {
   args: { ...Default.args },
   render: () => (
     <ProjectsPageEmpty
-      newProjectFormContainer={<NewProjectForm {...NewProjectFormStory.args} />}
+      projectToolbarCreateNewMenuTrigger={projectToolbarCreateNewMenuTrigger}
     />
   ),
 } satisfies Story;

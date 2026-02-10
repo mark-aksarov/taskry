@@ -53,16 +53,25 @@ export default async function AppProjectsPage({
 
   // Get count
   const projectCount = await getProjectCount();
+  const guestMode = await hasGuestRole();
+
+  const projectToolbarCreateNewMenuTrigger = (
+    <ProjectToolbarCreateNewMenuTrigger
+      guestMode={guestMode}
+      newProjectFormContainer={<NewProjectFormContainer />}
+      newProjectCategoryForm={
+        <NewProjectCategoryForm createProjectCategory={createProjectCategory} />
+      }
+    />
+  );
 
   if (!projectCount) {
     return (
       <ProjectsPageEmpty
-        newProjectFormContainer={<NewProjectFormContainer />}
+        projectToolbarCreateNewMenuTrigger={projectToolbarCreateNewMenuTrigger}
       />
     );
   }
-
-  const guestMode = await hasGuestRole();
 
   return (
     <ProjectsPage
@@ -74,17 +83,7 @@ export default async function AppProjectsPage({
           filters={filters}
         />
       }
-      projectToolbarCreateNewMenuTrigger={
-        <ProjectToolbarCreateNewMenuTrigger
-          guestMode={guestMode}
-          newProjectFormContainer={<NewProjectFormContainer />}
-          newProjectCategoryForm={
-            <NewProjectCategoryForm
-              createProjectCategory={createProjectCategory}
-            />
-          }
-        />
-      }
+      projectToolbarCreateNewMenuTrigger={projectToolbarCreateNewMenuTrigger}
       projectToolbarFiltersModalTrigger={
         <ProjectToolbarFiltersModalTrigger
           filtersFormContainer={

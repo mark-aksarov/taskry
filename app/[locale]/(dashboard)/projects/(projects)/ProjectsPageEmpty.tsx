@@ -1,38 +1,20 @@
-import {
-  EmptySection,
-  EmptySectionButton,
-  EmptySectionHeading,
-  EmptySectionDescription,
-} from "@/components/common/EmptySection";
 import { useTranslations } from "next-intl";
-import { PageContainer } from "@/components/common/PageContainer";
-import { NewProjectModal } from "@/components/projects/NewProjectModal";
+import { EmptyPageContainer } from "@/components/common/EmptyPageContainer";
 
 interface ProjectsPageEmptyProps {
-  newProjectFormContainer: React.ReactNode;
+  projectToolbarCreateNewMenuTrigger: React.ReactNode;
 }
 
 export function ProjectsPageEmpty({
-  newProjectFormContainer,
+  projectToolbarCreateNewMenuTrigger,
 }: ProjectsPageEmptyProps) {
   const t = useTranslations("app.ProjectsPageEmpty");
 
   return (
-    <PageContainer fullscreen centered>
-      <EmptySection>
-        <EmptySectionHeading>{t("heading")}</EmptySectionHeading>
-        <EmptySectionDescription>{t("description")}</EmptySectionDescription>
-        <EmptySectionButton
-          createNewModal={
-            <NewProjectModal
-              newProjectFormContainer={newProjectFormContainer}
-            />
-          }
-          data-test="projects-page-empty-add-button"
-        >
-          {t("addButtonLabel")}
-        </EmptySectionButton>
-      </EmptySection>
-    </PageContainer>
+    <EmptyPageContainer
+      heading={t("heading")}
+      description={t("description")}
+      toolbarCreateNewMenuTrigger={projectToolbarCreateNewMenuTrigger}
+    />
   );
 }

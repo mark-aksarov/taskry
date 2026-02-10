@@ -33,6 +33,15 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
+const userToolbarCreateNewMenuTrigger = (
+  <UserToolbarCreateNewMenuTrigger
+    showCreateNewUserMenuItem
+    guestMode={false}
+    newUserForm={<NewUserForm {...NewUserFormStory.args} />}
+    newPositionForm={<NewPositionForm createPosition={fn()} />}
+  />
+);
+
 export const Default = {
   args: {
     userToolbarFiltersModalTrigger: (
@@ -42,14 +51,7 @@ export const Default = {
         }
       />
     ),
-    userToolbarCreateNewMenuTrigger: (
-      <UserToolbarCreateNewMenuTrigger
-        showCreateNewUserMenuItem
-        guestMode={false}
-        newUserForm={<NewUserForm {...NewUserFormStory.args} />}
-        newPositionForm={<NewPositionForm createPosition={fn()} />}
-      />
-    ),
+    userToolbarCreateNewMenuTrigger: userToolbarCreateNewMenuTrigger,
     usersContainer: (
       <EntityContainerPresentation
         list={<UserList {...UserListStory.args} showCheckbox />}
@@ -69,5 +71,9 @@ export const Loading = {
 
 export const WithNoUsers = {
   args: { ...Default.args },
-  render: () => <UsersPageEmpty />,
+  render: () => (
+    <UsersPageEmpty
+      userToolbarCreateNewMenuTrigger={userToolbarCreateNewMenuTrigger}
+    />
+  ),
 } satisfies Story;

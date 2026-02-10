@@ -46,14 +46,27 @@ export default async function AppUsersPage({
 
   // Get count
   const count = await getUserCount();
-
-  if (!count) return <UsersPageEmpty />;
-
-  const isOwner = await hasOwnerRole();
   const guestMode = await hasGuestRole();
+  const isOwner = await hasOwnerRole();
 
   // Only the owner and guests can see the user menu item
   const showCreateNewUserMenuItem = isOwner || guestMode;
+
+  const userToolbarCreateNewMenuTrigger = (
+    <UserToolbarCreateNewMenuTrigger
+      showCreateNewUserMenuItem={showCreateNewUserMenuItem}
+      guestMode={guestMode}
+      newUserForm={<NewUserForm createUser={createUser} />}
+      newPositionForm={<NewPositionForm createPosition={createPosition} />}
+    />
+  );
+
+  if (!count)
+    return (
+      <UsersPageEmpty
+        userToolbarCreateNewMenuTrigger={userToolbarCreateNewMenuTrigger}
+      />
+    );
 
   // Only the owner and guests can see the user action menu trigger
   const showUserActionMenuTrigger = isOwner || guestMode;
@@ -65,14 +78,7 @@ export default async function AppUsersPage({
           filtersFormContainer={<UserFiltersFormContainer filters={filters} />}
         />
       }
-      userToolbarCreateNewMenuTrigger={
-        <UserToolbarCreateNewMenuTrigger
-          showCreateNewUserMenuItem={showCreateNewUserMenuItem}
-          guestMode={guestMode}
-          newUserForm={<NewUserForm createUser={createUser} />}
-          newPositionForm={<NewPositionForm createPosition={createPosition} />}
-        />
-      }
+      userToolbarCreateNewMenuTrigger={userToolbarCreateNewMenuTrigger}
       usersContainer={
         <UsersContainer
           showUserActionMenuTrigger={showUserActionMenuTrigger}
