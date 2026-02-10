@@ -13,15 +13,19 @@ export function TaskCategorySelect({
 }) {
   const t = useTranslations("tasks.TaskCategorySelect");
 
+  const items = [
+    { id: "", label: t("noTaskCategory") },
+    ...categories.map((item) => ({ id: item.id, label: item.name })),
+  ];
+
   return (
     <ResponsiveSelect
-      data-test="category-select"
+      data-test="task-category-select"
       name="categoryId"
       label={t("label")}
-      defaultSelectedKey={defaultSelectedKey}
-      placeholder={t("placeholder")}
+      defaultSelectedKey={defaultSelectedKey || ""}
       overlayClassName="w-[var(--trigger-width)]"
-      items={categories.map((item) => ({ id: item.id, label: item.name }))}
+      items={items}
     >
       {(item: any) => <Item key={item.id}>{item.label}</Item>}
     </ResponsiveSelect>

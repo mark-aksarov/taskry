@@ -46,9 +46,10 @@
   "TaskListItem": {
     "noDeadline": "Без срока",
     "deadlineOn": "Срок до {date}",
-    "unknownAssignee": "Неизвестный исполнитель",
     "assignee": "Исполнитель",
+    "noAssignee": "Без исполнителя",
     "category": "Категория",
+    "noCategory": "Без категории",
     "project": "Проект"
   },
 
@@ -173,22 +174,18 @@
     "label": "Исполнитель"
   },
 
-  "TaskAssigneeSelect": {
-    "label": "Исполнитель",
-    "placeholder": "Выберите исполнителя",
+  "TaskTitleTextField": {
+    "label": "Заголовок",
+    "placeholder": "Введите заголовок",
 
     "validation": {
-      "required": "Исполнитель обязателен"
+      "required": "«Заголовок» обязателен для заполнения"
     }
   },
 
-  "TaskCategorySelect": {
-    "label": "Категория",
-    "placeholder": "Выберите категорию",
-
-    "validation": {
-      "required": "Пожалуйста, выберите категорию"
-    }
+  "TaskDescriptionTextField": {
+    "label": "Описание",
+    "placeholder": "Введите описание"
   },
 
   "TaskDeadlineDatePicker": {
@@ -199,9 +196,18 @@
     }
   },
 
-  "TaskDescriptionTextField": {
-    "label": "Описание",
-    "placeholder": "Введите описание"
+  "TaskStatusSelect": {
+    "label": "Статус",
+    "placeholder": "Выберите статус",
+
+    "validation": {
+      "required": "Требуется статус"
+    }
+  },
+
+  "TaskCategorySelect": {
+    "label": "Категория",
+    "noTaskCategory": "Нет категории"
   },
 
   "TaskProjectSelect": {
@@ -209,27 +215,13 @@
     "placeholder": "Выберите проект",
 
     "validation": {
-      "required": "Проект обязателен"
+      "required": "Требуется проект"
     }
   },
 
-  "TaskStatusSelect": {
-    "label": "Статус",
-    "placeholder": "Выберите статус",
-
-    "validation": {
-      "required": "Пожалуйста, выберите статус"
-    }
-  },
-
-  "TaskTitleTextField": {
-    "label": "Заголовок",
-    "placeholder": "Введите заголовок",
-
-    "validation": {
-      "required": "Заголовок обязателен",
-      "tooLong": "Заголовок слишком длинный"
-    }
+  "TaskAssigneeSelect": {
+    "label": "Исполнитель",
+    "noAssignee": "Нет исполнителя"
   },
 
   "TaskDetail": {
@@ -238,7 +230,7 @@
     "description": "Описание",
     "noDescription": "Нет описания",
     "creator": "Создатель",
-    "unknownCreator": "Неизвестный создатель",
+    "noCreator": "Нет создателя",
     "category": "Категория",
     "project": "Проект",
     "attachments": "Вложения",
@@ -246,6 +238,10 @@
     "noAssignee": "Нет исполнителя",
     "status": "Статус",
     "subtasks": "Подзадачи"
+  },
+
+  "TaskDetailHeaderContainer": {
+    "noCategory": "Нет категории"
   },
 
   "TaskDetailStatusMenuTrigger": {

@@ -13,15 +13,19 @@ export function TaskAssigneeSelect({
 }) {
   const t = useTranslations("tasks.TaskAssigneeSelect");
 
+  const items = [
+    { id: "", label: t("noAssignee") },
+    ...users.map((item) => ({ id: item.id, label: item.fullName })),
+  ];
+
   return (
     <ResponsiveSelect
-      data-test="assignee-select"
+      data-test="task-assignee-select"
       name="assigneeId"
-      defaultSelectedKey={defaultSelectedKey}
+      defaultSelectedKey={defaultSelectedKey || ""}
       label={t("label")}
-      placeholder={t("placeholder")}
       overlayClassName="w-[var(--trigger-width)]"
-      items={users.map((item) => ({ id: item.id, label: item.fullName }))}
+      items={items}
     >
       {(item: any) => <Item key={item.id}>{item.label}</Item>}
     </ResponsiveSelect>

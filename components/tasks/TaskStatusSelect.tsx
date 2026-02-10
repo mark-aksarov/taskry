@@ -16,11 +16,13 @@ export function TaskStatusSelect({
 
   return (
     <ResponsiveSelect
-      data-test="status-select"
+      data-test="task-status-select"
       name="status"
       label={t("label")}
       defaultSelectedKey={defaultSelectedKey}
       placeholder={t("placeholder")}
+      isRequired
+      errorMessage={t("validation.required")}
       overlayClassName="w-[var(--trigger-width)]"
     >
       <Item key="pending">{tStatus("pending")}</Item>

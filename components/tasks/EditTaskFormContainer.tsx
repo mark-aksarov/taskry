@@ -67,7 +67,7 @@ function EditTaskFormContainerInner({ taskId }: EditTaskFormContainerProps) {
       statusSelectDefaultValue={task.status}
       taskCategorySelect={
         <TaskCategorySelect
-          defaultSelectedKey={task.categoryId.toString()}
+          defaultSelectedKey={task.categoryId ? task.categoryId.toString() : ""}
           categories={categories}
         />
       }
@@ -79,7 +79,7 @@ function EditTaskFormContainerInner({ taskId }: EditTaskFormContainerProps) {
       }
       assigneeSelect={
         <TaskAssigneeSelect
-          defaultSelectedKey={task.assigneeId?.toString()}
+          defaultSelectedKey={task.assigneeId ? task.assigneeId.toString() : ""}
           users={users}
         />
       }

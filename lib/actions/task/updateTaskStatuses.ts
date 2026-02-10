@@ -3,7 +3,6 @@
 import z from "zod";
 import { ActionState } from "../types";
 import { revalidatePath } from "next/cache";
-import { taskStatusParam } from "@/lib/schemas/task";
 import { TaskStatus } from "@/generated/prisma/enums";
 import { coercedPositiveInt } from "@/lib/schemas/base";
 import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedirect";
@@ -11,7 +10,7 @@ import { updateTaskStatuses as updateTaskStatusesQuery } from "@/lib/data/task/t
 
 const schema = z.object({
   ids: z.array(coercedPositiveInt).min(1),
-  nextStatus: taskStatusParam,
+  nextStatus: z.enum(TaskStatus),
 });
 
 export async function updateTaskStatuses(

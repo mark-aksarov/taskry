@@ -35,6 +35,16 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
+const taskToolbarCreateNewMenuTrigger = (
+  <TaskToolbarCreateNewMenuTrigger
+    guestMode={false}
+    newTaskFormContainer={<NewTaskForm {...NewTaskFormStory.args} />}
+    newTaskCategoryForm={
+      <NewTaskCategoryForm {...NewTaskCategoryFormStory.args} />
+    }
+  />
+);
+
 export const Default = {
   args: {
     tasksContainer: (
@@ -46,15 +56,7 @@ export const Default = {
         totalPages={3}
       />
     ),
-    taskToolbarCreateNewMenuTrigger: (
-      <TaskToolbarCreateNewMenuTrigger
-        guestMode={false}
-        newTaskFormContainer={<NewTaskForm {...NewTaskFormStory.args} />}
-        newTaskCategoryForm={
-          <NewTaskCategoryForm {...NewTaskCategoryFormStory.args} />
-        }
-      />
-    ),
+    taskToolbarCreateNewMenuTrigger: taskToolbarCreateNewMenuTrigger,
     taskToolbarFiltersModalTrigger: (
       <TaskToolbarFiltersModalTrigger
         filtersFormContainer={
@@ -81,7 +83,7 @@ export const WithNoTasks = {
   args: { ...Default.args },
   render: () => (
     <TasksPageEmpty
-      newTaskFormContainer={<NewTaskForm {...NewTaskFormStory.args} />}
+      taskToolbarCreateNewMenuTrigger={taskToolbarCreateNewMenuTrigger}
     />
   ),
 } satisfies Story;

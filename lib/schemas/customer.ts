@@ -1,5 +1,10 @@
+import {
+  emptyStringToNull,
+  coercedPositiveInt,
+  emptyStringToUndefined,
+} from "./base";
+
 import z from "zod";
-import { coercedPositiveInt, emptyStringToUndefined } from "./base";
 
 export const customerSchema = z.object({
   id: coercedPositiveInt,
@@ -20,8 +25,5 @@ export const customerSchema = z.object({
     emptyStringToUndefined,
     z.string().trim().min(1).max(255).optional(),
   ),
-  companyId: z.preprocess(
-    (val) => (val === "" ? null : val),
-    coercedPositiveInt.nullable(),
-  ),
+  companyId: z.preprocess(emptyStringToNull, coercedPositiveInt.nullable()),
 });

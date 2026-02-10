@@ -42,7 +42,7 @@ describe("Task editing", () => {
     cy.getByData("task-item-1-action-menu-trigger").click();
     cy.getMenuItem("edit").click();
 
-    cy.fillEditTaskForm({
+    cy.fillTaskForm({
       title: "Updated Task Title",
       description: "Updated Task Description",
       deadline: { day: "01", month: "02", year: "2026" },

@@ -29,43 +29,54 @@ Cypress.Commands.add(
 );
 
 Cypress.Commands.add(
-  "fillEditTaskForm",
+  "fillTaskForm",
   (data: {
-    title: string;
-    description: string;
-    deadline: { day: string; month: string; year: string };
-    statusKey: string;
-    categoryKey: string;
-    projectKey: string;
-    assigneeKey: string;
+    title?: string;
+    description?: string;
+    deadline?: { day: string; month: string; year: string };
+    statusKey?: string;
+    categoryKey?: string;
+    projectKey?: string;
+    assigneeKey?: string;
   }) => {
-    const deadline = data.deadline;
+    // Text fields (selector : value)
+    const fields = {
+      "task-title-field": data.title,
+      "task-description-field": data.description,
+    };
 
-    // fill form
-    cy.get('input[name="title"]').clear().type(data.title);
-    cy.get('textarea[name="description"]').clear().type(data.description);
+    // Clear & type text fields
+    Object.entries(fields).forEach(([selector, value]) => {
+      cy.getByData(selector).clear();
+      if (value) {
+        cy.getByData(selector).type(value);
+      }
+    });
 
-    cy.setDatePickerDate(
-      "deadline-date-picker",
-      deadline.month,
-      deadline.day,
-      deadline.year,
-    );
+    // Date picker
+    if (data.deadline) {
+      cy.setDatePickerDate(
+        "task-deadline-date-picker",
+        data.deadline.month,
+        data.deadline.day,
+        data.deadline.year,
+      );
+    }
 
-    cy.getByData("status-select").click();
-    cy.getSelectOption(data.statusKey).click();
+    // Selects (data-testid : optionKey)
+    const selects = {
+      "task-status-select": data.statusKey,
+      "task-category-select": data.categoryKey,
+      "task-project-select": data.projectKey,
+      "task-assignee-select": data.assigneeKey,
+    };
 
-    cy.getByData("category-select").click();
-    cy.getSelectOption(data.categoryKey).click();
-
-    cy.getByData("project-select").click();
-    cy.getSelectOption(data.projectKey).click();
-
-    cy.getByData("assignee-select").click();
-    cy.getSelectOption(data.assigneeKey).click();
-
-    // submit
-    cy.get('button[type="submit"]').click();
+    Object.entries(selects).forEach(([selectTestId, optionKey]) => {
+      if (optionKey !== undefined) {
+        cy.getByData(selectTestId).click();
+        cy.getSelectOption(optionKey).click();
+      }
+    });
   },
 );
 

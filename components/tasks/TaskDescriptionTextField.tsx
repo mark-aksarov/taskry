@@ -13,6 +13,7 @@ export function TaskDescriptionTextField({
   return (
     <TextField
       multiline
+      data-test="task-description-field"
       name="description"
       label={t("label")}
       placeholder={t("placeholder")}

@@ -12,21 +12,14 @@ export function TaskTitleTextField({ defaultValue }: TaskTitleTextFieldProps) {
 
   return (
     <TextField
+      data-test="task-title-field"
       name="title"
       label={t("label")}
       placeholder={t("placeholder")}
-      errorMessage={(validation) => {
-        const details = validation.validationDetails;
-        if (details.valueMissing) {
-          return t("validation.required");
-        }
-        if (details.tooLong) {
-          return t("validation.tooLong", { maxLength: 255 });
-        }
-        return "";
-      }}
-      defaultValue={defaultValue}
       isRequired
+      maxLength={255}
+      errorMessage={t("validation.required")}
+      defaultValue={defaultValue}
     />
   );
 }

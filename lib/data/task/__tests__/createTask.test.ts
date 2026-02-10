@@ -147,7 +147,6 @@ describe("createTask", () => {
       title: "New Task",
       status: TaskStatus.active,
       projectId: 1,
-      categoryId: 1,
       deadline: new Date(),
     });
 

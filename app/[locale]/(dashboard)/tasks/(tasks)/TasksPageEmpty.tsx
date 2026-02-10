@@ -1,35 +1,38 @@
 import {
-  EmptySection,
-  EmptySectionButton,
   EmptySectionHeading,
   EmptySectionDescription,
 } from "@/components/common/EmptySection";
 
 import { useTranslations } from "next-intl";
-import { NewTaskModal } from "@/components/tasks/NewTaskModal";
+import { PageGrid } from "@/components/common/PageGrid";
 import { PageContainer } from "@/components/common/PageContainer";
+import { PageEmptySection } from "@/components/common/PageEmptySection";
+import { ToolbarDesktop, ToolbarMobileTop } from "@/components/common/Toolbar";
 
 interface TasksPageEmptyProps {
-  newTaskFormContainer: React.ReactNode;
+  taskToolbarCreateNewMenuTrigger: React.ReactNode;
 }
 
-export function TasksPageEmpty({ newTaskFormContainer }: TasksPageEmptyProps) {
+export function TasksPageEmpty({
+  taskToolbarCreateNewMenuTrigger,
+}: TasksPageEmptyProps) {
   const t = useTranslations("app.TasksPageEmpty");
 
   return (
-    <PageContainer fullscreen centered>
-      <EmptySection>
-        <EmptySectionHeading>{t("heading")}</EmptySectionHeading>
-        <EmptySectionDescription>{t("description")}</EmptySectionDescription>
-        <EmptySectionButton
-          createNewModal={
-            <NewTaskModal newTaskFormContainer={newTaskFormContainer} />
-          }
-          data-test="tasks-page-empty-add-button"
-        >
-          {t("addButtonLabel")}
-        </EmptySectionButton>
-      </EmptySection>
+    <PageContainer fullscreen className="relative">
+      <PageGrid className="flex-auto">
+        <ToolbarDesktop>
+          <div className="ml-auto">{taskToolbarCreateNewMenuTrigger}</div>
+        </ToolbarDesktop>
+        <ToolbarMobileTop>
+          <div className="ml-auto">{taskToolbarCreateNewMenuTrigger}</div>
+        </ToolbarMobileTop>
+
+        <PageEmptySection>
+          <EmptySectionHeading>{t("heading")}</EmptySectionHeading>
+          <EmptySectionDescription>{t("description")}</EmptySectionDescription>
+        </PageEmptySection>
+      </PageGrid>
     </PageContainer>
   );
 }

@@ -10,7 +10,17 @@ import {
   projectCategories,
 } from "@/prisma/test-utils/data";
 
-describe("creates a new task", () => {
+describe("Task creation", () => {
+  const taskData = {
+    title: "Created Task Title",
+    description: "Created Task Description",
+    deadline: { day: "01", month: "02", year: "2026" },
+    statusKey: "active",
+    categoryKey: "1",
+    projectKey: "1",
+    assigneeKey: "user-1",
+  };
+
   beforeEach(() => {
     cy.viewport(1440, 900);
 
@@ -32,37 +42,63 @@ describe("creates a new task", () => {
     cy.visit("/en/tasks");
   });
 
-  it("can create a task", () => {
-    cy.getByData("tasks-page-empty-add-button").click();
+  it("creates a new task with valid data", () => {
+    cy.getByData("task-toolbar-create-new-menu-trigger")
+      .filter(":visible")
+      .click();
+    cy.getMenuItem("task").click();
 
-    // fill form
-    cy.get('input[name="title"]').clear().type("Created Task Title");
-    cy.get('textarea[name="description"]')
-      .clear()
-      .type("Updated Task Description");
-    cy.setDatePickerDate("deadline-date-picker", "12", "31", "2025");
+    cy.fillTaskForm(taskData);
 
-    cy.getByData("status-select").click();
-    cy.getSelectOption("active").click();
-
-    cy.getByData("category-select").click();
-    cy.getSelectOption("1").click();
-
-    cy.getByData("project-select").click();
-    cy.getSelectOption("1").click();
-
-    cy.getByData("assignee-select").click();
-    cy.getSelectOption("user-3").click();
-
-    // submit
+    // Submit
     cy.get('button[type="submit"]').click();
 
-    // assert
-    cy.getByData("task-list-item").within(() => {
-      cy.contains("Created Task Title");
-      cy.contains("Category 1");
+    cy.getByData("tasks-list").within(() => {
+      cy.contains(taskData.title);
+      cy.contains(taskData.deadline.year);
+      cy.contains(/active/i);
       cy.contains("Project 1");
-      cy.contains("Active");
+      cy.contains("Task Category 1");
+      cy.contains("User 1");
+    });
+  });
+
+  it("shows validation errors and prevents submission with invalid data", () => {
+    cy.getByData("task-toolbar-create-new-menu-trigger")
+      .filter(":visible")
+      .click();
+    cy.getMenuItem("task").click();
+
+    cy.get('button[type="submit"]').click();
+
+    cy.contains(/title is required/i).should("exist");
+    cy.contains(/deadline is required/i).should("exist");
+    cy.contains(/please select a status/i).should("exist");
+    cy.contains(/project is required/i).should("exist");
+  });
+
+  it("creates a task when optional fields are empty", () => {
+    cy.getByData("task-toolbar-create-new-menu-trigger")
+      .filter(":visible")
+      .click();
+    cy.getMenuItem("task").click();
+
+    cy.fillTaskForm({
+      title: taskData.title,
+      deadline: taskData.deadline,
+      statusKey: taskData.statusKey,
+      projectKey: taskData.projectKey,
+    });
+
+    cy.get('button[type="submit"]').click();
+
+    cy.getByData("tasks-list").within(() => {
+      cy.contains(taskData.title);
+      cy.contains(taskData.deadline.year);
+      cy.contains(/active/i);
+      cy.contains("Project 1");
+      cy.contains("No category");
+      cy.contains("No assignee");
     });
   });
 });

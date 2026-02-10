@@ -32,7 +32,7 @@ export interface TaskListItemProps {
     imageUrl?: string;
     fullName: string;
   };
-  category: {
+  category?: {
     id: number;
     name: string;
   };
@@ -140,7 +140,7 @@ export const TaskListItem = ({
                   {assignee.fullName}
                 </ItemBaseDetailModalTrigger>
               ) : (
-                t("unknownAssignee")
+                t("noAssignee")
               )}
             </ListItemTitle>
 
@@ -150,7 +150,9 @@ export const TaskListItem = ({
       }
       categorySlot={
         <ListItemInfo className="@max-3xl:hidden">
-          <ListItemTitle>{category.name}</ListItemTitle>
+          <ListItemTitle>
+            {category ? category.name : t("noCategory")}
+          </ListItemTitle>
           <ListItemText>{t("category")}</ListItemText>
         </ListItemInfo>
       }

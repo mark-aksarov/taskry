@@ -51,11 +51,25 @@ export default async function AppTasksPage({
 
   const taskCount = await getTaskCount();
 
-  if (!taskCount) {
-    return <TasksPageEmpty newTaskFormContainer={<NewTaskFormContainer />} />;
-  }
-
   const guestMode = await hasGuestRole();
+
+  const taskToolbarCreateNewMenuTrigger = (
+    <TaskToolbarCreateNewMenuTrigger
+      guestMode={guestMode}
+      newTaskFormContainer={<NewTaskFormContainer />}
+      newTaskCategoryForm={
+        <NewTaskCategoryForm createTaskCategory={createTaskCategory} />
+      }
+    />
+  );
+
+  if (!taskCount) {
+    return (
+      <TasksPageEmpty
+        taskToolbarCreateNewMenuTrigger={taskToolbarCreateNewMenuTrigger}
+      />
+    );
+  }
 
   return (
     <TasksPage
@@ -66,15 +80,7 @@ export default async function AppTasksPage({
           updateStatusAction={updateTaskStatuses}
         />
       }
-      taskToolbarCreateNewMenuTrigger={
-        <TaskToolbarCreateNewMenuTrigger
-          guestMode={guestMode}
-          newTaskFormContainer={<NewTaskFormContainer />}
-          newTaskCategoryForm={
-            <NewTaskCategoryForm createTaskCategory={createTaskCategory} />
-          }
-        />
-      }
+      taskToolbarCreateNewMenuTrigger={taskToolbarCreateNewMenuTrigger}
       taskToolbarFiltersModalTrigger={
         <TaskToolbarFiltersModalTrigger
           filtersFormContainer={<TaskFiltersFormContainer filters={filters} />}

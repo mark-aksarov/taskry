@@ -46,9 +46,10 @@
   "TaskListItem": {
     "noDeadline": "No deadline",
     "deadlineOn": "Deadline on {date}",
-    "unknownAssignee": "Unknown assignee",
     "assignee": "Assignee",
+    "noAssignee": "No assignee",
     "category": "Category",
+    "noCategory": "No category",
     "project": "Project"
   },
 
@@ -173,22 +174,18 @@
     "label": "Assignee"
   },
 
-  "TaskAssigneeSelect": {
-    "label": "Assignee",
-    "placeholder": "Select assignee",
+  "TaskTitleTextField": {
+    "label": "Title",
+    "placeholder": "Enter title",
 
     "validation": {
-      "required": "Assignee is required"
+      "required": "Title is required"
     }
   },
 
-  "TaskCategorySelect": {
-    "label": "Category",
-    "placeholder": "Select category",
-
-    "validation": {
-      "required": "Please select a category"
-    }
+  "TaskDescriptionTextField": {
+    "label": "Description",
+    "placeholder": "Enter description"
   },
 
   "TaskDeadlineDatePicker": {
@@ -196,20 +193,6 @@
 
     "validation": {
       "required": "Deadline is required"
-    }
-  },
-
-  "TaskDescriptionTextField": {
-    "label": "Description",
-    "placeholder": "Typing description"
-  },
-
-  "TaskProjectSelect": {
-    "label": "Project",
-    "placeholder": "Select project",
-
-    "validation": {
-      "required": "Project is required"
     }
   },
 
@@ -222,14 +205,23 @@
     }
   },
 
-  "TaskTitleTextField": {
-    "label": "Title",
-    "placeholder": "Typing title",
+  "TaskCategorySelect": {
+    "label": "Category",
+    "noTaskCategory": "No task category"
+  },
+
+  "TaskProjectSelect": {
+    "label": "Project",
+    "placeholder": "Select project",
 
     "validation": {
-      "required": "Title is required",
-      "tooLong": "Title is too long"
+      "required": "Project is required"
     }
+  },
+
+  "TaskAssigneeSelect": {
+    "label": "Assignee",
+    "noAssignee": "No assignee"
   },
 
   "TaskDetail": {
@@ -238,14 +230,19 @@
     "description": "Description",
     "noDescription": "No description",
     "creator": "Creator",
-    "unknownCreator": "Unknown creator",
+    "noCreator": "No creator",
     "category": "Category",
+    "noCategory": "No category",
     "project": "Project",
     "attachments": "Attachments",
     "assignee": "Assignee",
     "noAssignee": "No assignee",
     "status": "Status",
     "subtasks": "Subtasks"
+  },
+
+  "TaskDetailHeaderContainer": {
+    "noCategory": "No category"
   },
 
   "TaskDetailStatusMenuTrigger": {

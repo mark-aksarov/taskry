@@ -91,7 +91,7 @@ export const getTaskDetail = cache(
         : undefined,
       status: task.status,
       project: task.project,
-      category: task.category,
+      category: task.category ?? undefined,
       subtasks: task.subtasks,
       attachments: task.attachments,
       commentsCount: task._count.comments,
@@ -267,7 +267,7 @@ export const getTaskList = cache(
             }
           : undefined,
         project: task.project,
-        category: task.category,
+        category: task.category ?? undefined,
         commentsCount: task._count.comments,
         subtasks: {
           total: task._count.subtasks,

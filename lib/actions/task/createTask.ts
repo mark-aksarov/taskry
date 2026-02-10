@@ -15,6 +15,13 @@ export async function createTask(
   // Authorization
   await requireSessionOrRedirect();
 
+  await new Promise((resolve) => setTimeout(resolve, 2000));
+
+  return {
+    status: "error",
+    errorCode: "validationError",
+  };
+
   try {
     // Parse and validate form data
     const input = Object.fromEntries(formData.entries());

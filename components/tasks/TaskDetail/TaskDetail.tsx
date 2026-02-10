@@ -30,7 +30,7 @@ interface TaskDetailProps {
   };
   deadline?: Date;
   description?: string;
-  category: {
+  category?: {
     id: number;
     name: string;
   };
@@ -120,15 +120,13 @@ export function TaskDetail({
       creatorSlot={
         <DetailInfo>
           <DetailTitle>{t("creator")}</DetailTitle>
-          <DetailText>
-            {creator ? creator.fullName : t("unknownCreator")}
-          </DetailText>
+          <DetailText>{creator ? creator.fullName : t("noCreator")}</DetailText>
         </DetailInfo>
       }
       categoryNameSlot={
         <DetailInfo>
           <DetailTitle>{t("category")}</DetailTitle>
-          <DetailText>{category.name}</DetailText>
+          <DetailText>{category ? category.name : t("noCategory")}</DetailText>
         </DetailInfo>
       }
       statusSlot={
