@@ -71,7 +71,7 @@ export function EditProjectForm({
         {projectCustomerSelect}
 
         <FormErrorBanner status={state.status} isPending={isPending}>
-          {t("error.updateError")}
+          {t("updateError")}
         </FormErrorBanner>
       </FormBaseBody>
       <FormBaseFooter>

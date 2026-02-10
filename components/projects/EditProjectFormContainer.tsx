@@ -63,13 +63,17 @@ function EditProjectFormContainerInner({
       projectStatusDefaultValue={project.status}
       projectCategorySelect={
         <ProjectCategorySelect
-          defaultSelectedKey={project.categoryId.toString()}
+          defaultSelectedKey={
+            project.categoryId ? project.categoryId.toString() : ""
+          }
           categories={categories}
         />
       }
       projectCustomerSelect={
         <ProjectCustomerSelect
-          defaultSelectedKey={project.customerId?.toString()}
+          defaultSelectedKey={
+            project.customerId ? project.customerId.toString() : ""
+          }
           customers={customers}
         />
       }

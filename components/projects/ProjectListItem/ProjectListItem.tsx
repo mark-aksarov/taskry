@@ -42,7 +42,7 @@ export interface ProjectListItemProps {
     fullName: string;
     imageUrl?: string;
   };
-  category: {
+  category?: {
     id: number;
     name: string;
   };
@@ -105,10 +105,12 @@ export const ProjectListItem = ({
 
   return (
     <ProjectListItemLayout
+      id={id}
       checkboxSlot={
         showCheckbox && (
           <Checkbox
-            data-test={`project-${id}-checkbox`}
+            data-test="project-checkbox"
+            data-id={id}
             aria-label="project checkbox"
             isSelected={isSelected(id)}
             onChange={() => toggleItem(id)}
@@ -161,7 +163,7 @@ export const ProjectListItem = ({
                   {creator.fullName}
                 </ItemBaseDetailModalTrigger>
               ) : (
-                t("unknownCreator")
+                t("noCreator")
               )}
             </ListItemTitle>
             <ListItemText>{t("creator")}</ListItemText>
@@ -188,7 +190,7 @@ export const ProjectListItem = ({
                   {customer.fullName}
                 </Link>
               ) : (
-                t("unknownCustomer")
+                t("noCustomer")
               )}
             </ListItemTitle>
 
@@ -198,7 +200,9 @@ export const ProjectListItem = ({
       }
       categorySlot={
         <ListItemInfo className="@max-4xl:hidden">
-          <ListItemTitle>{category.name}</ListItemTitle>
+          <ListItemTitle>
+            {category ? category.name : t("noCategory")}
+          </ListItemTitle>
 
           <ListItemText>{t("category")}</ListItemText>
         </ListItemInfo>
@@ -206,7 +210,7 @@ export const ProjectListItem = ({
       companySlot={
         <ListItemInfo className="@max-5xl:hidden">
           <ListItemTitle>
-            {company ? company.name : t("unknownCompany")}
+            {company ? company.name : t("noCompany")}
           </ListItemTitle>
 
           <ListItemText>{t("company")}</ListItemText>

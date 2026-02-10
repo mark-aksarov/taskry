@@ -195,7 +195,7 @@
     "placeholder": "Select status",
 
     "validation": {
-      "required": "Please select a status"
+      "required": "Status is required"
     }
   },
 

@@ -83,37 +83,50 @@ Cypress.Commands.add(
 Cypress.Commands.add(
   "fillProjectForm",
   (data: {
-    title: string;
-    description: string;
-    deadline: { day: string; month: string; year: string };
-    statusKey: string;
-    categoryKey: string;
-    customerKey: string;
+    title?: string;
+    description?: string;
+    deadline?: { day: string; month: string; year: string };
+    statusKey?: string;
+    categoryKey?: string;
+    customerKey?: string;
   }) => {
-    const deadline = data.deadline;
+    // Text fields (selector : value)
+    const fields = {
+      "project-title-field": data.title,
+      "project-description-field": data.description,
+    };
 
-    // fill form
-    cy.get('input[name="title"]').clear().type(data.title);
-    cy.get('textarea[name="description"]').clear().type(data.description);
+    // Clear & type text fields
+    Object.entries(fields).forEach(([selector, value]) => {
+      cy.getByData(selector).clear();
+      if (value) {
+        cy.getByData(selector).type(value);
+      }
+    });
 
-    cy.setDatePickerDate(
-      "deadline-date-picker",
-      deadline.month,
-      deadline.day,
-      deadline.year,
-    );
+    // Date picker
+    if (data.deadline) {
+      cy.setDatePickerDate(
+        "project-deadline-date-picker",
+        data.deadline.month,
+        data.deadline.day,
+        data.deadline.year,
+      );
+    }
 
-    cy.getByData("status-select").click();
-    cy.getSelectOption(data.statusKey).click();
+    // Selects (data-testid : optionKey)
+    const selects = {
+      "project-status-select": data.statusKey,
+      "project-category-select": data.categoryKey,
+      "project-customer-select": data.customerKey,
+    };
 
-    cy.getByData("category-select").click();
-    cy.getSelectOption(data.categoryKey).click();
-
-    cy.getByData("customer-select").click();
-    cy.getSelectOption(data.customerKey).click();
-
-    // submit
-    cy.get('button[type="submit"]').click();
+    Object.entries(selects).forEach(([selectTestId, optionKey]) => {
+      if (optionKey !== undefined) {
+        cy.getByData(selectTestId).click();
+        cy.getSelectOption(optionKey).click();
+      }
+    });
   },
 );
 

@@ -5,11 +5,19 @@ import {
   companies,
   customers,
   workspaces,
-  taskCategories,
   projectCategories,
 } from "@/prisma/test-utils/data";
 
-describe("creates a new project", () => {
+describe("Project creation", () => {
+  const projectData = {
+    title: "Created Project Title",
+    description: "Created Project Description",
+    deadline: { day: "01", month: "02", year: "2026" },
+    statusKey: "active",
+    categoryKey: "1",
+    customerKey: "1",
+  };
+
   beforeEach(() => {
     cy.viewport(1440, 900);
 
@@ -21,7 +29,6 @@ describe("creates a new project", () => {
       companies,
       customers,
       projectCategories,
-      taskCategories,
     };
 
     cy.task("db:reset");
@@ -30,35 +37,61 @@ describe("creates a new project", () => {
     cy.visit("/en/projects");
   });
 
-  it("can create a project", () => {
-    cy.getByData("projects-page-empty-add-button").click();
+  it("creates a new project with valid data", () => {
+    cy.getByData("project-toolbar-create-new-menu-trigger")
+      .filter(":visible")
+      .click();
+    cy.getMenuItem("project").click();
 
-    // fill form
-    cy.get('input[name="title"]').clear().type("Created Project Title");
-    cy.get('textarea[name="description"]')
-      .clear()
-      .type("Created Project Description");
-    cy.setDatePickerDate("deadline-date-picker", "12", "31", "2025");
+    cy.fillProjectForm(projectData);
 
-    cy.getByData("status-select").click();
-    cy.getSelectOption("active").click();
-
-    cy.getByData("category-select").click();
-    cy.getSelectOption("1").click();
-
-    cy.getByData("customer-select").click();
-    cy.getSelectOption("1").click();
-
-    // submit
+    // Submit
     cy.get('button[type="submit"]').click();
 
-    // assert
-    cy.getByData("project-list-item").within(() => {
-      cy.contains("Created Project Title");
-      cy.contains("Category 1");
+    cy.getByData("projects-list").within(() => {
+      cy.contains(projectData.title);
+      cy.contains(projectData.deadline.year);
+      cy.contains(/active/i);
       cy.contains("Customer 1");
+      cy.contains("Project Category 1");
       cy.contains("Company 1");
-      cy.contains("Active");
+    });
+  });
+
+  it("shows validation errors and prevents submission with invalid data", () => {
+    cy.getByData("project-toolbar-create-new-menu-trigger")
+      .filter(":visible")
+      .click();
+    cy.getMenuItem("project").click();
+
+    cy.get('button[type="submit"]').click();
+
+    cy.contains(/title is required/i).should("exist");
+    cy.contains(/deadline is required/i).should("exist");
+    cy.contains(/status is required/i).should("exist");
+  });
+
+  it("creates a project when optional fields are empty", () => {
+    cy.getByData("project-toolbar-create-new-menu-trigger")
+      .filter(":visible")
+      .click();
+    cy.getMenuItem("project").click();
+
+    cy.fillProjectForm({
+      title: projectData.title,
+      deadline: projectData.deadline,
+      statusKey: projectData.statusKey,
+    });
+
+    cy.get('button[type="submit"]').click();
+
+    cy.getByData("projects-list").within(() => {
+      cy.contains(projectData.title);
+      cy.contains(projectData.deadline.year);
+      cy.contains(/active/i);
+      cy.contains("No category");
+      cy.contains("No company");
+      cy.contains("No customer");
     });
   });
 });

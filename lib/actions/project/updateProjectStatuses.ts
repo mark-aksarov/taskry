@@ -5,13 +5,12 @@ import { ActionState } from "../types";
 import { revalidatePath } from "next/cache";
 import { coercedPositiveInt } from "@/lib/schemas/base";
 import { ProjectStatus } from "@/generated/prisma/enums";
-import { projectStatusParam } from "@/lib/schemas/project";
 import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedirect";
 import { updateProjectStatuses as updateProjectStatusesQuery } from "@/lib/data/project/project.dal";
 
 const schema = z.object({
   ids: z.array(coercedPositiveInt).min(1),
-  nextStatus: projectStatusParam,
+  nextStatus: z.enum(ProjectStatus),
 });
 
 export async function updateProjectStatuses(

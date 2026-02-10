@@ -100,7 +100,8 @@ export function ProjectItemActionMenuTrigger({
         renderButton={() => (
           <ItemBaseActionMenuButton
             className={className}
-            data-test={`project-item-${projectId}-action-menu-trigger`}
+            data-test="project-item-action-menu-trigger"
+            data-id={projectId}
           />
         )}
       >

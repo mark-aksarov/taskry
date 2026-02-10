@@ -1,6 +1,7 @@
 import { ListItem } from "@/components/common/List/index";
 
 export interface ProjectListItemProps {
+  id?: number;
   checkboxSlot?: React.ReactNode;
   titleSlot: React.ReactNode;
   categorySlot: React.ReactNode;
@@ -13,6 +14,7 @@ export interface ProjectListItemProps {
 }
 
 export const ProjectListItemLayout = ({
+  id,
   checkboxSlot,
   titleSlot,
   creatorSlot,
@@ -24,7 +26,7 @@ export const ProjectListItemLayout = ({
   menuTriggerSlot,
 }: ProjectListItemProps) => {
   return (
-    <ListItem data-test="project-list-item">
+    <ListItem data-test="project-list-item" data-id={id}>
       {checkboxSlot}
       {titleSlot}
       {creatorSlot}

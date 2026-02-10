@@ -13,6 +13,7 @@ export function ProjectDescriptionTextField({
   return (
     <TextField
       multiline
+      data-test="project-description-field"
       name="description"
       label={t("label")}
       placeholder={t("placeholder")}

@@ -15,17 +15,19 @@ export function ProjectCategorySelect({
 }: ProjectCategorySelectProps) {
   const t = useTranslations("projects.ProjectCategorySelect");
 
+  const items = [
+    { id: "", label: t("noProjectCategory") },
+    ...categories.map((item) => ({ id: item.id, label: item.name })),
+  ];
+
   return (
     <ResponsiveSelect
-      data-test="category-select"
+      data-test="project-category-select"
       label={t("label")}
       name="categoryId"
-      placeholder={t("placeholder")}
       overlayClassName="w-[var(--trigger-width)]"
-      items={categories.map((item) => ({ id: item.id, label: item.name }))}
-      isRequired
-      defaultSelectedKey={defaultSelectedKey}
-      errorMessage={t("validation.required")}
+      items={items}
+      defaultSelectedKey={defaultSelectedKey || ""}
     >
       {(item: any) => <Item key={item.id}>{item.label}</Item>}
     </ResponsiveSelect>

@@ -64,10 +64,6 @@ export const WithoutSomeData = {
     id: 2,
     title: "Website Redesign",
     deadline: new Date("2025-12-01"),
-    category: {
-      id: 10,
-      name: "Design",
-    },
     status: "pending",
     attachments: [],
   },

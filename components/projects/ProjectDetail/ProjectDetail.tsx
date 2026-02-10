@@ -30,7 +30,7 @@ interface ProjectDetailProps {
     fullName: string;
     imageUrl?: string;
   };
-  category: {
+  category?: {
     id: number;
     name: string;
   };
@@ -87,7 +87,7 @@ export function ProjectDetail({
               <UnknownUser className="h-9 w-9" />
             )}
             <DetailText>
-              {creator ? creator.fullName : t("unknownCreator")}
+              {creator ? creator.fullName : t("noCreator")}
             </DetailText>
           </div>
         </DetailInfo>
@@ -112,14 +112,14 @@ export function ProjectDetail({
         <DetailInfo>
           <DetailTitle>{t("customer")}</DetailTitle>
           <DetailText>
-            {customer ? customer.fullName : t("unknownCustomer")}
+            {customer ? customer.fullName : t("noCustomer")}
           </DetailText>
         </DetailInfo>
       }
       categorySlot={
         <DetailInfo>
           <DetailTitle>{t("category")}</DetailTitle>
-          <DetailText>{category.name}</DetailText>
+          <DetailText>{category ? category.name : t("noCategory")}</DetailText>
         </DetailInfo>
       }
       attachmentsSlot={

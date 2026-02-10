@@ -1,15 +1,11 @@
 {
   "EditProjectForm": {
-    "error": {
-      "updateError": "Произошла ошибка на сервере. Не удалось обновить проект."
-    },
+    "updateError": "Произошла ошибка на сервере. Не удалось обновить проект.",
     "submitButtonLabel": "Обновить проект"
   },
 
   "NewProjectForm": {
-    "error": {
-      "creationError": "Произошла ошибка на сервере. Не удалось создать проект."
-    },
+    "creationError": "Произошла ошибка на сервере. Не удалось создать проект.",
     "submitButtonLabel": "Создать проект"
   },
 
@@ -58,29 +54,12 @@
     }
   },
 
-  "ProjectCustomerSelect": {
-    "label": "Клиент",
-    "placeholder": "Выберите клиента",
+  "ProjectTitleTextField": {
+    "label": "Заголовок",
+    "placeholder": "Введите заголовок",
 
     "validation": {
-      "required": "Клиент обязателен для заполнения"
-    }
-  },
-
-  "ProjectCategorySelect": {
-    "label": "Категория",
-    "placeholder": "Выберите категорию",
-
-    "validation": {
-      "required": "Пожалуйста, выберите категорию"
-    }
-  },
-
-  "ProjectDeadlineDatePicker": {
-    "label": "Дедлайн",
-
-    "validation": {
-      "required": "Дедлайн обязателен для заполнения"
+      "required": "«Заголовок» обязателен для заполнения"
     }
   },
 
@@ -89,23 +68,31 @@
     "placeholder": "Введите описание"
   },
 
+  "ProjectDeadlineDatePicker": {
+    "label": "Срок выполнения",
+
+    "validation": {
+      "required": "Укажите срок выполнения"
+    }
+  },
+
   "ProjectStatusSelect": {
     "label": "Статус",
     "placeholder": "Выберите статус",
 
     "validation": {
-      "required": "Пожалуйста, выберите статус"
+      "required": "Требуется статус"
     }
   },
 
-  "ProjectTitleTextField": {
-    "label": "Название",
-    "placeholder": "Введите название",
+  "ProjectCategorySelect": {
+    "label": "Категория",
+    "noProjectCategory": "Нет категории"
+  },
 
-    "validation": {
-      "required": "Название обязательно для заполнения",
-      "tooLong": "Название слишком длинное"
-    }
+  "ProjectCustomerSelect": {
+    "label": "Клиент",
+    "noCustomer": "Нет клиента"
   },
 
   "ProjectFiltersFormNoActiveTasksSwitch": {
@@ -155,13 +142,14 @@
   "ProjectListItem": {
     "noDeadline": "Без срока",
     "deadlineOn": "Срок до {date}",
-    "unknownCreator": "Неизвестный создатель",
+    "noCreator": "Нет создателя",
     "creator": "Создатель",
-    "unknownCustomer": "Неизвестный клиент",
+    "noCustomer": "Нет клиента",
     "customer": "Клиент",
     "category": "Категория",
-    "unknownCompany": "Неизвестная компания",
-    "company": "Компания"
+    "noCategory": "Нет категории",
+    "company": "Компания",
+    "noCompany": "Нет компании"
   },
 
   "ProjectItemActionMenuTrigger": {
@@ -215,16 +203,21 @@
 
   "ProjectDetail": {
     "creator": "Создатель",
-    "unknownCreator": "Неизвестный создатель",
+    "noCreator": "Нет создателя",
     "deadline": "Дедлайн",
     "noDeadline": "Без дедлайна",
     "description": "Описание",
     "noDescription": "Нет описания",
     "customer": "Клиент",
-    "unknownCustomer": "Неизвестный клиент",
+    "noCustomer": "Нет клиента",
     "category": "Категория",
+    "noCategory": "Нет категории",
     "attachments": "Вложения",
     "status": "Статус"
+  },
+
+  "ProjectDetailHeaderContainer": {
+    "noCategory": "Нет категории"
   },
 
   "ProjectDetailStatusMenuTrigger": {

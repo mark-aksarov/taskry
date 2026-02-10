@@ -89,6 +89,7 @@ export const WithoutSomeData = {
     ...Default.args,
     creator: undefined,
     customer: undefined,
+    category: undefined,
     company: undefined,
   },
 } satisfies Story;

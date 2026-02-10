@@ -38,12 +38,12 @@ declare namespace Cypress {
     }): Chainable<JQuery<HTMLElement>>;
 
     fillProjectForm(data: {
-      title: string;
-      description: string;
-      deadline: { day: string; month: string; year: string };
-      statusKey: string;
-      categoryKey: string;
-      customerKey: string;
+      title?: string;
+      description?: string;
+      deadline?: { day: string; month: string; year: string };
+      statusKey?: string;
+      categoryKey?: string;
+      customerKey?: string;
     }): Chainable<JQuery<HTMLElement>>;
 
     fillCustomerForm(data: {

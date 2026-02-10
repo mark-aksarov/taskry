@@ -16,7 +16,7 @@ export function ProjectDeadlineDatePicker({
 
   return (
     <ResponsiveDatePicker
-      data-test="deadline-date-picker"
+      data-test="project-deadline-date-picker"
       name="deadline"
       label={t("label")}
       overlayClassName="w-[var(--trigger-width)]"

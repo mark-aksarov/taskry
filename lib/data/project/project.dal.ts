@@ -78,8 +78,8 @@ export const getProjectDetail = cache(
       description: project.description ?? undefined,
       deadline: project.deadline,
       status: project.status,
-      categoryId: project.category.id,
-      customerId: project.customer?.id ?? undefined,
+      categoryId: project.category?.id,
+      customerId: project.customer?.id,
       creator: project.creator
         ? {
             id: project.creator.id,
@@ -93,7 +93,7 @@ export const getProjectDetail = cache(
             fullName: project.customer.fullName,
           }
         : undefined,
-      category: project.category,
+      category: project.category ?? undefined,
       attachments: project.attachments,
     };
   },
@@ -361,10 +361,12 @@ export const getProjectList = cache(
                   : undefined,
               }
             : undefined,
-          category: {
-            id: p.category.id,
-            name: p.category.name,
-          },
+          category: p.category
+            ? {
+                id: p.category.id,
+                name: p.category.name,
+              }
+            : undefined,
           commentsCount: p._count.comments,
           tasks: {
             total: totalTasks,

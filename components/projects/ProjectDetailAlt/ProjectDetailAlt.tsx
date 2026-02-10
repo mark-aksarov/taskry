@@ -24,7 +24,7 @@ interface ProjectDetailAltProps {
     fullName: string;
     imageUrl?: string;
   };
-  category: {
+  category?: {
     id: number;
     name: string;
   };
@@ -85,22 +85,20 @@ export function ProjectDetailAlt({
         <DetailInfo>
           <DetailTitle>{t("customer")}</DetailTitle>
           <DetailText>
-            {customer ? customer.fullName : t("unknownCustomer")}
+            {customer ? customer.fullName : t("noCustomer")}
           </DetailText>
         </DetailInfo>
       }
       categorySlot={
         <DetailInfo>
           <DetailTitle>{t("category")}</DetailTitle>
-          <DetailText>{category.name}</DetailText>
+          <DetailText>{category ? category.name : t("noCategory")}</DetailText>
         </DetailInfo>
       }
       creatorSlot={
         <DetailInfo>
           <DetailTitle>{t("creator")}</DetailTitle>
-          <DetailText>
-            {creator ? creator.fullName : t("unknownCreator")}
-          </DetailText>
+          <DetailText>{creator ? creator.fullName : t("noCreator")}</DetailText>
         </DetailInfo>
       }
       attachmentsSlot={

@@ -14,19 +14,11 @@ export function ProjectTitleTextField({
 
   return (
     <TextField
+      data-test="project-title-field"
       name="title"
       label={t("label")}
       placeholder={t("placeholder")}
-      errorMessage={(validation) => {
-        const details = validation.validationDetails;
-        if (details.valueMissing) {
-          return t("validation.required");
-        }
-        if (details.tooLong) {
-          return t("validation.tooLong", { maxLength: 255 });
-        }
-        return "";
-      }}
+      errorMessage={t("validation.required")}
       defaultValue={defaultValue}
       isRequired
     />

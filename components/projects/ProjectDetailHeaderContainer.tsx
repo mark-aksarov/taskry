@@ -2,6 +2,7 @@ import "server-only";
 
 import { Suspense } from "react";
 import { notFound } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { DetailHeaderSkeleton } from "../common/DetailHeader";
 import { DetailHeader } from "@/components/common/DetailHeader";
 import { getProjectDetail } from "@/lib/data/project/project.dal";
@@ -24,6 +25,8 @@ export function ProjectDetailHeaderContainer(
 async function ProjectDetailHeaderContainerInner({
   projectId,
 }: ProjectDetailHeaderContainerProps) {
+  const t = useTranslations("projects.ProjectDetailHeaderContainer");
+
   const project = await getProjectDetail(projectId);
 
   if (!project) {
@@ -34,7 +37,7 @@ async function ProjectDetailHeaderContainerInner({
     <DetailHeader
       title={project.title}
       image={<ProjectDetailHeaderImage />}
-      subtitle={project.category.name}
+      subtitle={project.category ? project.category.name : t("noCategory")}
     />
   );
 }

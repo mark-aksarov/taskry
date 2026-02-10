@@ -1,15 +1,11 @@
 {
   "EditProjectForm": {
-    "error": {
-      "updateError": "A server error occurred. Failed to update project."
-    },
+    "updateError": "A server error occurred. Failed to update project.",
     "submitButtonLabel": "Update Project"
   },
 
   "NewProjectForm": {
-    "error": {
-      "creationError": "A server error occurred. Failed to create project."
-    },
+    "creationError": "A server error occurred. Failed to create project.",
     "submitButtonLabel": "Create Project"
   },
 
@@ -58,22 +54,18 @@
     }
   },
 
-  "ProjectCustomerSelect": {
-    "label": "Customer",
-    "placeholder": "Select customer",
+  "ProjectTitleTextField": {
+    "label": "Title",
+    "placeholder": "Enter title",
 
     "validation": {
-      "required": "Customer is required"
+      "required": "Title is required"
     }
   },
 
-  "ProjectCategorySelect": {
-    "label": "Category",
-    "placeholder": "Select category",
-
-    "validation": {
-      "required": "Please select a category"
-    }
+  "ProjectDescriptionTextField": {
+    "label": "Description",
+    "placeholder": "Enter description"
   },
 
   "ProjectDeadlineDatePicker": {
@@ -84,28 +76,23 @@
     }
   },
 
-  "ProjectDescriptionTextField": {
-    "label": "Description",
-    "placeholder": "Typing description"
-  },
-
   "ProjectStatusSelect": {
     "label": "Status",
     "placeholder": "Select status",
 
     "validation": {
-      "required": "Please select a status"
+      "required": "Status is required"
     }
   },
 
-  "ProjectTitleTextField": {
-    "label": "Title",
-    "placeholder": "Typing title",
+  "ProjectCategorySelect": {
+    "label": "Category",
+    "noProjectCategory": "No project category"
+  },
 
-    "validation": {
-      "required": "Title is required",
-      "tooLong": "Title is too long"
-    }
+  "ProjectCustomerSelect": {
+    "label": "Customer",
+    "noCustomer": "No customer"
   },
 
   "ProjectFiltersFormNoActiveTasksSwitch": {
@@ -155,13 +142,14 @@
   "ProjectListItem": {
     "noDeadline": "No deadline",
     "deadlineOn": "Deadline on {date}",
-    "unknownCreator": "Unknown creator",
+    "noCreator": "No creator",
     "creator": "Creator",
-    "unknownCustomer": "Unknown customer",
+    "noCustomer": "No customer",
     "customer": "Customer",
     "category": "Category",
-    "unknownCompany": "Unknown company",
-    "company": "Company"
+    "noCategory": "No category",
+    "company": "Company",
+    "noCompany": "No company"
   },
 
   "ProjectItemActionMenuTrigger": {
@@ -215,16 +203,21 @@
 
   "ProjectDetail": {
     "creator": "Creator",
-    "unknownCreator": "Unknown creator",
+    "noCreator": "No creator",
     "deadline": "Deadline",
     "noDeadline": "No deadline",
     "description": "Description",
     "noDescription": "No description",
     "customer": "Customer",
-    "unknownCustomer": "Unknown customer",
+    "noCustomer": "No customer",
     "category": "Category",
+    "noCategory": "No category",
     "attachments": "Attachments",
     "status": "Status"
+  },
+
+  "ProjectDetailHeaderContainer": {
+    "noCategory": "No category"
   },
 
   "ProjectDetailStatusMenuTrigger": {

@@ -134,13 +134,13 @@ model Project {
 
   creatorId   String?
   customerId  Int?
-  categoryId  Int
+  categoryId  Int?
   workspaceId Int
 
-  workspace Workspace       @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
-  creator   User?           @relation(fields: [creatorId], references: [id], onDelete: SetNull)
-  customer  Customer?       @relation(fields: [customerId], references: [id], onDelete: SetNull)
-  category  ProjectCategory @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  workspace Workspace        @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  creator   User?            @relation(fields: [creatorId], references: [id], onDelete: SetNull)
+  customer  Customer?        @relation(fields: [customerId], references: [id], onDelete: SetNull)
+  category  ProjectCategory? @relation(fields: [categoryId], references: [id], onDelete: Cascade)
   status    ProjectStatus
 
   attachments Attachment[]

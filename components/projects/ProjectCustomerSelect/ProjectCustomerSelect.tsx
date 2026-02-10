@@ -15,15 +15,19 @@ export function ProjectCustomerSelect({
 }: ProjectCustomerSelectProps) {
   const t = useTranslations("projects.ProjectCustomerSelect");
 
+  const items = [
+    { id: "", label: t("noCustomer") },
+    ...customers.map((item) => ({ id: item.id, label: item.fullName })),
+  ];
+
   return (
     <ResponsiveSelect
-      data-test="customer-select"
+      data-test="project-customer-select"
       label={t("label")}
       name="customerId"
-      placeholder={t("placeholder")}
       overlayClassName="w-[var(--trigger-width)]"
-      defaultSelectedKey={defaultSelectedKey}
-      items={customers.map((item) => ({ id: item.id, label: item.fullName }))}
+      defaultSelectedKey={defaultSelectedKey || ""}
+      items={items}
     >
       {(item: any) => <Item key={item.id}>{item.label}</Item>}
     </ResponsiveSelect>

@@ -73,7 +73,7 @@ describe("Task creation", () => {
 
     cy.contains(/title is required/i).should("exist");
     cy.contains(/deadline is required/i).should("exist");
-    cy.contains(/please select a status/i).should("exist");
+    cy.contains(/status is required/i).should("exist");
     cy.contains(/project is required/i).should("exist");
   });
 
