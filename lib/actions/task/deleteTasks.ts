@@ -22,6 +22,8 @@ export async function deleteTasks(
   // Authorization
   await requireSessionOrRedirect();
 
+  await new Promise((resolve) => setTimeout(resolve, 2000));
+
   try {
     // Parse and validate form data
     const parsed = schema.safeParse({ ids });

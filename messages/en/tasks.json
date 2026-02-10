@@ -103,10 +103,7 @@
     "text": "Are you sure you want to delete <strong>«{name}»</strong>? All contents will be permanently removed.",
     "deleteButton": "Delete",
     "cancelButton": "Cancel",
-
-    "error": {
-      "deleteError": "A server error occurred. Failed to delete task."
-    }
+    "deleteError": "A server error occurred. Failed to delete task."
   },
 
   "DeleteTasksModal": {
@@ -114,10 +111,7 @@
     "text": "Are you sure you want to delete <strong>{count} tasks</strong>? All contents will be permanently removed.",
     "deleteButton": "Delete",
     "cancelButton": "Cancel",
-
-    "error": {
-      "deleteError": "A server error occurred. Failed to delete tasks."
-    }
+    "deleteError": "A server error occurred. Failed to delete tasks."
   },
 
   "NewTaskModal": {

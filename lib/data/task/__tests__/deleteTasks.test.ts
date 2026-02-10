@@ -18,7 +18,7 @@ import { requireSession } from "@/lib/data/utils/requireSession";
 import { resetDatabase } from "@/prisma/test-utils/resetDatabase";
 import { it, expect, describe, beforeAll, afterEach } from "vitest";
 
-describe("deleteCustomers", () => {
+describe("deleteTasks", () => {
   beforeAll(async () => {
     (requireSession as any).mockResolvedValue({
       user: { id: "user-1", workspaceId: 1 },

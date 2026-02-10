@@ -36,20 +36,20 @@ export function DeleteTaskModal({
   onSuccess,
 }: DeleteTaskModalProps) {
   const t = useTranslations("tasks.DeleteTaskModal");
-  const [state, action, pending] = useActionState(deleteAction, initialState);
+  const [state, action, isPending] = useActionState(deleteAction, initialState);
 
   useEffect(() => {
     if (state.status === "success") {
       onSuccess?.();
+      onOpenChange?.(false);
     }
   }, [state.status, onSuccess]);
 
   const handleDelete = () => {
     startTransition(() => action([taskId]));
-    onOpenChange?.(false);
   };
 
-  useActionErrorToast(state, t("error.deleteError"));
+  useActionErrorToast(state, t("deleteError"));
 
   return (
     <ConfirmModal
@@ -67,6 +67,7 @@ export function DeleteTaskModal({
       <ConfirmModalActions>
         <ConfirmModalCancelButton label={t("cancelButton")} />
         <ConfirmModalConfirmButton
+          isPending={isPending}
           label={t("deleteButton")}
           onConfirm={handleDelete}
           data-test="delete-task-modal-confirm-button"

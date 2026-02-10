@@ -5,11 +5,11 @@ import { Button } from "@/components/ui/Button";
 interface ConfirmModalProps {
   label: string;
   onConfirm: () => void;
+  isPending?: boolean;
   "data-test"?: string;
 }
 
 export function ConfirmModalConfirmButton({
-  label,
   onConfirm,
   ...props
 }: ConfirmModalProps) {
@@ -18,7 +18,6 @@ export function ConfirmModalConfirmButton({
   return (
     <Button
       variant="contrast"
-      label={label}
       onPress={handlePress}
       size="medium"
       className="py-2"

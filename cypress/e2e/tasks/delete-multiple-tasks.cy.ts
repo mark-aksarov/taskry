@@ -34,7 +34,7 @@ describe("delete multiple tasks", () => {
     cy.visit("/en/tasks");
   });
 
-  it("can delete tasks", () => {
+  it("can delete multiple tasks", () => {
     cy.getByData("task-checkbox", "1").click();
     cy.getByData("task-checkbox", "2").click();
 
