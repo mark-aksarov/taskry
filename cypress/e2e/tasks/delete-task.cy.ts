@@ -37,7 +37,7 @@ describe("deletes a task", () => {
       cy.signIn("user-1@test.com", "12345abc");
       cy.visit("/en/tasks");
 
-      cy.getByData("task-item-1-action-menu-trigger").click();
+      cy.getByData("task-item-action-menu-trigger", "1").click();
       cy.getMenuItem("delete").click();
       cy.getByData("delete-task-modal-confirm-button").click();
       cy.getByData("task-list-item").should("not.exist");
@@ -48,7 +48,7 @@ describe("deletes a task", () => {
         cy.signIn("user-1@test.com", "12345abc");
         cy.visit("/en/tasks");
 
-        cy.getByData("task-item-1-action-menu-trigger").click();
+        cy.getByData("task-item-action-menu-trigger", "1").click();
         cy.getMenuItem("delete").click();
         cy.getByData("delete-task-modal").should("be.visible");
       });
@@ -57,7 +57,7 @@ describe("deletes a task", () => {
         cy.signIn("user-2@test.com", "12345abc");
         cy.visit("/en/tasks");
 
-        cy.getByData("task-item-1-action-menu-trigger").click();
+        cy.getByData("task-item-action-menu-trigger", "1").click();
         cy.getMenuItem("delete").click();
         cy.getByData("delete-task-modal").should("be.visible");
       });
@@ -66,7 +66,7 @@ describe("deletes a task", () => {
         cy.signIn("user-3@test.com", "12345abc");
         cy.visit("/en/tasks");
 
-        cy.getByData("task-item-1-action-menu-trigger").click();
+        cy.getByData("task-item-action-menu-trigger", "1").click();
         cy.getMenuItem("edit").click();
         cy.getByData("guest-mode-modal").should("be.visible");
       });

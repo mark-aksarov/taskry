@@ -104,7 +104,7 @@ describe("update multiple task status", () => {
 
   describe("should change status for all tasks", () => {
     it("should change status for active task to pending", () => {
-      cy.getByData("task-1-checkbox").click();
+      cy.getByData("task-checkbox", "1").click();
 
       cy.getByData("task-toolbar-actions-button-desktop")
         .filter(":visible")
@@ -116,7 +116,7 @@ describe("update multiple task status", () => {
     });
 
     it("should change status for completed task to pending", () => {
-      cy.getByData("task-3-checkbox").click();
+      cy.getByData("task-checkbox", "3").click();
 
       cy.getByData("task-toolbar-actions-button-desktop")
         .filter(":visible")
@@ -128,7 +128,7 @@ describe("update multiple task status", () => {
     });
 
     it("should change status for active task to completed", () => {
-      cy.getByData("task-1-checkbox").click();
+      cy.getByData("task-checkbox", "1").click();
 
       cy.getByData("task-toolbar-actions-button-desktop")
         .filter(":visible")
@@ -140,8 +140,8 @@ describe("update multiple task status", () => {
     });
 
     it("should change status for active task + pending task to completed", () => {
-      cy.getByData("task-1-checkbox").click();
-      cy.getByData("task-4-checkbox").click();
+      cy.getByData("task-checkbox", "1").click();
+      cy.getByData("task-checkbox", "4").click();
 
       cy.getByData("task-toolbar-actions-button-desktop")
         .filter(":visible")
@@ -157,8 +157,8 @@ describe("update multiple task status", () => {
     });
 
     it("should change status for pending + completed tasks to active", () => {
-      cy.getByData("task-2-checkbox").click();
-      cy.getByData("task-3-checkbox").click();
+      cy.getByData("task-checkbox", "2").click();
+      cy.getByData("task-checkbox", "3").click();
 
       cy.getByData("task-toolbar-actions-button-desktop")
         .filter(":visible")
@@ -174,9 +174,9 @@ describe("update multiple task status", () => {
     });
 
     it("should change status for active + completed tasks + pending task to pending", () => {
-      cy.getByData("task-1-checkbox").click();
-      cy.getByData("task-3-checkbox").click();
-      cy.getByData("task-4-checkbox").click();
+      cy.getByData("task-checkbox", "1").click();
+      cy.getByData("task-checkbox", "3").click();
+      cy.getByData("task-checkbox", "4").click();
 
       cy.getByData("task-toolbar-actions-button-desktop")
         .filter(":visible")
@@ -195,9 +195,9 @@ describe("update multiple task status", () => {
     });
 
     it("should change status for active + completed tasks + completed task to completed", () => {
-      cy.getByData("task-1-checkbox").click();
-      cy.getByData("task-3-checkbox").click();
-      cy.getByData("task-5-checkbox").click();
+      cy.getByData("task-checkbox", "1").click();
+      cy.getByData("task-checkbox", "3").click();
+      cy.getByData("task-checkbox", "5").click();
 
       cy.getByData("task-toolbar-actions-button-desktop")
         .filter(":visible")
@@ -216,7 +216,7 @@ describe("update multiple task status", () => {
     });
 
     it("should disable 'active' item when all selected tasks are active", () => {
-      cy.getByData("task-1-checkbox").click();
+      cy.getByData("task-checkbox", "1").click();
 
       cy.getByData("task-toolbar-actions-button-desktop")
         .filter(":visible")
@@ -225,8 +225,8 @@ describe("update multiple task status", () => {
     });
 
     it("should disable 'pending' item when all selected tasks are pending", () => {
-      cy.getByData("task-2-checkbox").click();
-      cy.getByData("task-4-checkbox").click();
+      cy.getByData("task-checkbox", "2").click();
+      cy.getByData("task-checkbox", "4").click();
 
       cy.getByData("task-toolbar-actions-button-desktop")
         .filter(":visible")
@@ -235,9 +235,9 @@ describe("update multiple task status", () => {
     });
 
     it("should disable 'completed' item when all selected tasks are pending", () => {
-      cy.getByData("task-3-checkbox").click();
-      cy.getByData("task-5-checkbox").click();
-      cy.getByData("task-6-checkbox").click();
+      cy.getByData("task-checkbox", "3").click();
+      cy.getByData("task-checkbox", "5").click();
+      cy.getByData("task-checkbox", "6").click();
 
       cy.getByData("task-toolbar-actions-button-desktop")
         .filter(":visible")

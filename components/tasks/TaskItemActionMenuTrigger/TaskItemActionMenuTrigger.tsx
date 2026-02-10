@@ -100,7 +100,8 @@ export function TaskItemActionMenuTrigger({
         renderButton={() => (
           <ItemBaseActionMenuButton
             className={className}
-            data-test={`task-item-${taskId}-action-menu-trigger`}
+            data-test="task-item-action-menu-trigger"
+            data-id={taskId}
           />
         )}
       >

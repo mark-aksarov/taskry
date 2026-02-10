@@ -35,8 +35,8 @@ describe("delete multiple tasks", () => {
   });
 
   it("can delete tasks", () => {
-    cy.getByData("task-1-checkbox").click();
-    cy.getByData("task-2-checkbox").click();
+    cy.getByData("task-checkbox", "1").click();
+    cy.getByData("task-checkbox", "2").click();
 
     cy.getByData("task-toolbar-actions-button-desktop")
       .filter(":visible")

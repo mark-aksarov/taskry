@@ -2,7 +2,10 @@ declare namespace Cypress {
   interface Chainable {
     signIn(email: string, password: string): Chainable<void>;
     getByRole(dataTestAttribute: string): Chainable<JQuery<HTMLElement>>;
-    getByData(dataTestAttribute: string): Chainable<JQuery<HTMLElement>>;
+    getByData(
+      dataTestAttribute: string,
+      id?: string,
+    ): Chainable<JQuery<HTMLElement>>;
 
     getSelectOption(key: string): Chainable<JQuery<HTMLElement>>;
     getMenuItem(key: string): Chainable<JQuery<HTMLElement>>;

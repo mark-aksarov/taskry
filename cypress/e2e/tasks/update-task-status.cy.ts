@@ -121,7 +121,7 @@ describe("update task status", () => {
 
   describe("can update task status", () => {
     it("should update 'active' task status to 'pending'", () => {
-      cy.getByData("task-item-1-action-menu-trigger").click();
+      cy.getByData("task-item-action-menu-trigger", "1").click();
       cy.getMenuItem("pending").click();
       cy.getByData("task-list-item")
         .eq(0)
@@ -129,7 +129,7 @@ describe("update task status", () => {
     });
 
     it("should update 'active' task status to 'completed'", () => {
-      cy.getByData("task-item-1-action-menu-trigger").click();
+      cy.getByData("task-item-action-menu-trigger", "1").click();
       cy.getMenuItem("completed").click();
       cy.getByData("task-list-item")
         .eq(0)
@@ -137,7 +137,7 @@ describe("update task status", () => {
     });
 
     it("should update 'pending' task status to 'active'", () => {
-      cy.getByData("task-item-2-action-menu-trigger").click();
+      cy.getByData("task-item-action-menu-trigger", "2").click();
       cy.getMenuItem("active").click();
       cy.getByData("task-list-item")
         .eq(1)
@@ -149,7 +149,7 @@ describe("update task status", () => {
     it("allows a user with 'owner' role to open the edit modal", () => {
       cy.signIn("user-1@test.com", "12345abc");
       cy.visit("/en/tasks");
-      cy.getByData("task-item-1-action-menu-trigger").click();
+      cy.getByData("task-item-action-menu-trigger", "1").click();
       cy.getMenuItem("pending").click();
       cy.getByData("task-list-item")
         .eq(0)
@@ -159,7 +159,7 @@ describe("update task status", () => {
     it("allows a user with 'user' role to open the edit modal", () => {
       cy.signIn("user-2@test.com", "12345abc");
       cy.visit("/en/tasks");
-      cy.getByData("task-item-1-action-menu-trigger").click();
+      cy.getByData("task-item-action-menu-trigger", "1").click();
       cy.getMenuItem("pending").click();
       cy.getByData("task-list-item")
         .eq(0)
@@ -169,7 +169,7 @@ describe("update task status", () => {
     it("shows a restriction modal when a 'guest' attempts to edit", () => {
       cy.signIn("user-3@test.com", "12345abc");
       cy.visit("/en/tasks");
-      cy.getByData("task-item-1-action-menu-trigger").click();
+      cy.getByData("task-item-action-menu-trigger", "1").click();
       cy.getMenuItem("pending").click();
       cy.getByData("guest-mode-modal").should("be.visible");
     });

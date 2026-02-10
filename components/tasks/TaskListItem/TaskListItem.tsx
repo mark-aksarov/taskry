@@ -95,6 +95,7 @@ export const TaskListItem = ({
 
   return (
     <TaskListItemLayout
+      id={id}
       checkboxSlot={showCheckbox && <TaskListItemCheckbox id={id} />}
       titleSlot={
         <ListItemInfo>

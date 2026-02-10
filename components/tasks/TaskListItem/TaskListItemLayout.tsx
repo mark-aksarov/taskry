@@ -1,6 +1,7 @@
 import { ListItem } from "@/components/common/List";
 
 interface TaskListItemLayoutProps {
+  id?: number;
   checkboxSlot?: React.ReactNode;
   titleSlot: React.ReactNode;
   assigneeSlot: React.ReactNode;
@@ -12,6 +13,7 @@ interface TaskListItemLayoutProps {
 }
 
 export const TaskListItemLayout = ({
+  id,
   checkboxSlot,
   titleSlot,
   assigneeSlot,
@@ -22,7 +24,7 @@ export const TaskListItemLayout = ({
   menuTriggerSlot,
 }: TaskListItemLayoutProps) => {
   return (
-    <ListItem data-test="task-list-item">
+    <ListItem data-test="task-list-item" data-id={id}>
       {checkboxSlot}
       {titleSlot}
       {assigneeSlot}

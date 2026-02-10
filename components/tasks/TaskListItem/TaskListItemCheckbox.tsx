@@ -8,7 +8,8 @@ export function TaskListItemCheckbox({ id }: { id: number }) {
 
   return (
     <Checkbox
-      data-test={`task-${id}-checkbox`}
+      data-test="task-checkbox"
+      data-id={id}
       aria-label="task checkbox"
       isSelected={isSelected(id)}
       onChange={() => toggleItem(id)}
