@@ -14,6 +14,7 @@ export function CustomerEmailTextField({
 
   return (
     <TextField
+      data-test="customer-email-field"
       name="email"
       label={t("label")}
       placeholder={t("placeholder")}

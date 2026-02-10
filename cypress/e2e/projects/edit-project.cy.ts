@@ -63,11 +63,23 @@ describe("Project editing", () => {
     cy.getByData("project-item-action-menu-trigger", "1").click();
     cy.getMenuItem("edit").click();
 
-    cy.get("input[name=title]").should("have.value", "Project 1");
-    cy.get("textarea[name=description]").should("have.value", "Description 1");
-    cy.get("input[name=deadline]").should("have.value", "2025-12-31");
-    cy.get("select[name=status]").should("have.value", "active");
-    cy.get("select[name=categoryId]").should("have.value", "1");
-    cy.get("select[name=customerId]").should("have.value", "1");
+    cy.getByData("project-title-field").within(() =>
+      cy.get("input").should("have.value", "Project 1"),
+    );
+    cy.getByData("project-description-field").within(() =>
+      cy.get("textarea").should("have.value", "Description 1"),
+    );
+    cy.getByData("project-deadline-date-picker").within(() =>
+      cy.get("input").should("have.value", "2025-12-31"),
+    );
+    cy.getByData("project-status-select").within(() =>
+      cy.get("select").should("have.value", "active"),
+    );
+    cy.getByData("project-category-select").within(() =>
+      cy.get("select").should("have.value", "1"),
+    );
+    cy.getByData("project-customer-select").within(() =>
+      cy.get("select").should("have.value", "1"),
+    );
   });
 });

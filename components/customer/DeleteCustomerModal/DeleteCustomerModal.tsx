@@ -40,11 +40,12 @@ export function DeleteCustomerModal({
   onSuccess,
 }: DeleteCustomerModalProps) {
   const t = useTranslations("customers.DeleteCustomerModal");
-  const [state, action, pending] = useActionState(deleteAction, initialState);
+  const [state, action, isPending] = useActionState(deleteAction, initialState);
 
   useEffect(() => {
     if (state.status === "success") {
       onSuccess?.();
+      onOpenChange?.(false);
     }
   }, [state.status, onSuccess]);
 
@@ -52,7 +53,6 @@ export function DeleteCustomerModal({
 
   const handleDelete = () => {
     startTransition(() => action([customerId]));
-    onOpenChange?.(false);
   };
 
   return (
@@ -71,8 +71,10 @@ export function DeleteCustomerModal({
       <ConfirmModalActions>
         <ConfirmModalCancelButton label={t("cancelButton")} />
         <ConfirmModalConfirmButton
+          isPending={isPending}
           label={t("deleteButton")}
           onConfirm={handleDelete}
+          data-test="delete-customer-modal-confirm-button"
         />
       </ConfirmModalActions>
     </ConfirmModal>

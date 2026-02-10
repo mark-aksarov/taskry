@@ -66,8 +66,10 @@ export function CustomerListItem({
   );
 
   return (
-    <ListItem>
+    <ListItem data-test="customer-list-item" data-id={id}>
       <Checkbox
+        data-test="customer-checkbox"
+        data-id={id}
         aria-label={t("checkboxAriaLabel")}
         isSelected={isSelected(id)}
         onChange={() => toggleItem(id)}

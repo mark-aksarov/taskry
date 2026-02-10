@@ -12,6 +12,7 @@ export function CustomerFullNameTextField({
 
   return (
     <TextField
+      data-test="customer-full-name-field"
       name="fullName"
       label={t("label")}
       placeholder={t("placeholder")}

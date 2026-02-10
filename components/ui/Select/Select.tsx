@@ -12,6 +12,7 @@ import { useResizeObserver } from "@react-aria/utils";
 import { Dialog } from "../Dialog";
 
 interface SelectOwnProps {
+  "data-test"?: string;
   overlayType?: "popover" | "bottomsheet";
   overlayClassName?: string;
   className?: string;
@@ -24,6 +25,7 @@ export type SelectProps<T extends object = any> = AriaSelectProps<T> &
   SelectOwnProps;
 
 export const Select = <T extends object = any>({
+  "data-test": dataTest,
   placeholder = "Select an option",
   overlayType,
   className,
@@ -73,6 +75,7 @@ export const Select = <T extends object = any>({
 
   return (
     <div
+      data-test={dataTest}
       data-testid="select"
       ref={props.ref}
       className={fieldStyles({ className })}

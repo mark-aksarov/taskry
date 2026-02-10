@@ -142,24 +142,24 @@ Cypress.Commands.add(
   }) => {
     // Text fields (field name : value)
     const fields = {
-      'input[name="fullName"]': data.fullName,
-      'textarea[name="bio"]': data.bio,
-      'input[name="email"]': data.email,
-      'input[name="phoneNumber"]': data.phoneNumber,
-      'input[name="publicLink"]': data.publicLink,
+      "customer-full-name-field": data.fullName,
+      "customer-bio-field": data.bio,
+      "customer-email-field": data.email,
+      "customer-phone-number-field": data.phoneNumber,
+      "customer-public-link-field": data.publicLink,
     };
 
     // We clear each field and print only if there is text.
     Object.entries(fields).forEach(([selector, value]) => {
-      cy.get(selector).clear();
+      cy.getByData(selector).clear();
       if (value) {
-        cy.get(selector).type(value);
+        cy.getByData(selector).type(value);
       }
     });
 
     // Select company
     if (data.companyKey !== undefined) {
-      cy.getByData("company-select").click();
+      cy.getByData("customer-company-select").click();
       cy.getSelectOption(data.companyKey).click();
     }
   },

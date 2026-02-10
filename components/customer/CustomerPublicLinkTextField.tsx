@@ -12,6 +12,7 @@ export function CustomerPublicLinkTextField({
 
   return (
     <TextField
+      data-test="customer-public-link-field"
       name="publicLink"
       type="url"
       label={t("label")}

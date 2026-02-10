@@ -1,17 +1,13 @@
 import {
   users,
-  tasks,
   accounts,
-  projects,
   positions,
   companies,
   customers,
   workspaces,
-  taskCategories,
-  projectCategories,
 } from "@/prisma/test-utils/data";
 
-describe("deletes a project", () => {
+describe("deletes a customer", () => {
   beforeEach(() => {
     cy.viewport(1440, 900);
 
@@ -22,23 +18,19 @@ describe("deletes a project", () => {
       companies,
       customers,
       workspaces,
-      taskCategories,
-      projectCategories,
-      projects,
-      tasks,
     };
 
     cy.task("db:reset");
     cy.task("db:seed", payload);
   });
 
-  it("can delete a project", () => {
+  it("can delete a customer", () => {
     cy.signIn("user-1@test.com", "12345abc");
-    cy.visit("/en/projects");
+    cy.visit("/en/customers");
 
-    cy.getByData("project-item-action-menu-trigger", "1").click();
+    cy.getByData("customer-item-action-menu-trigger", "1").click();
     cy.getMenuItem("delete").click();
-    cy.getByData("delete-project-modal-confirm-button").click();
-    cy.getByData("project-list-item", "1").should("not.exist");
+    cy.getByData("delete-customer-modal-confirm-button").click();
+    cy.getByData("customer-list-item", "1").should("not.exist");
   });
 });

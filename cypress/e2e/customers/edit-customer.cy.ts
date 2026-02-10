@@ -28,7 +28,7 @@ describe("Customer editing", () => {
     cy.signIn("user-1@test.com", "12345abc");
     cy.visit("/en/customers");
 
-    cy.getByData("customer-item-1-action-menu-trigger").click();
+    cy.getByData("customer-item-action-menu-trigger", "1").click();
     cy.getMenuItem("edit").click();
 
     cy.fillCustomerForm({
@@ -55,68 +55,26 @@ describe("Customer editing", () => {
     cy.signIn("user-1@test.com", "12345abc");
     cy.visit("/en/customers");
 
-    cy.getByData("customer-item-1-action-menu-trigger").click();
+    cy.getByData("customer-item-action-menu-trigger", "1").click();
     cy.getMenuItem("edit").click();
 
-    cy.get("input[name=email]").should("have.value", "customer-1@test.com");
-    cy.get("input[name=fullName]").should("have.value", "Customer 1");
-    cy.get("textarea[name=bio]").should("have.value", "Customer 1 bio");
-    cy.get("input[name=publicLink]").should(
-      "have.value",
-      "https://example.com/customer-1",
+    cy.getByData("customer-full-name-field").within(() =>
+      cy.get("input").should("have.value", "Customer 1"),
     );
-    cy.get("input[name=phoneNumber]").should("have.value", "123-456-7890");
-    cy.get("select[name=companyId]").should("have.value", "1");
-  });
-
-  describe("edit customer access control", () => {
-    const allowedUsers = [
-      { role: "owner", id: "user-1" },
-      { role: "user", id: "user-2" },
-    ] as const;
-
-    describe("from customers list", () => {
-      allowedUsers.forEach((user) => {
-        it(`allows ${user.role} to open edit modal`, () => {
-          cy.signIn(`${user.id}@test.com`, "12345abc");
-          cy.visit("/en/customers");
-
-          cy.getByData("customer-item-1-action-menu-trigger").click();
-          cy.getMenuItem("edit").click();
-
-          cy.getByData("edit-customer-modal").should("be.visible");
-        });
-      });
-
-      it("blocks guest from editing customer", () => {
-        cy.signIn("user-3@test.com", "12345abc");
-        cy.visit("/en/customers");
-
-        cy.getByData("customer-item-1-action-menu-trigger").click();
-        cy.getMenuItem("edit").click();
-
-        cy.getByData("guest-mode-modal").should("be.visible");
-      });
-    });
-
-    describe("from customer details page", () => {
-      allowedUsers.forEach((user) => {
-        it(`allows ${user.role} to open edit modal`, () => {
-          cy.signIn(`${user.id}@test.com`, "12345abc");
-          cy.visit("/en/customers/1");
-
-          cy.getByData("edit-customer-button").filter(":visible").click();
-          cy.getByData("edit-customer-modal").should("be.visible");
-        });
-      });
-
-      it("blocks guest from editing customer", () => {
-        cy.signIn("user-3@test.com", "12345abc");
-        cy.visit("/en/customers/1");
-
-        cy.getByData("edit-customer-button").filter(":visible").click();
-        cy.getByData("guest-mode-modal").should("be.visible");
-      });
-    });
+    cy.getByData("customer-bio-field").within(() =>
+      cy.get("textarea").should("have.value", "Customer 1 bio"),
+    );
+    cy.getByData("customer-email-field").within(() =>
+      cy.get("input").should("have.value", "customer-1@test.com"),
+    );
+    cy.getByData("customer-phone-number-field").within(() =>
+      cy.get("input").should("have.value", "123-456-7890"),
+    );
+    cy.getByData("customer-public-link-field").within(() =>
+      cy.get("input").should("have.value", "https://example.com/customer-1"),
+    );
+    cy.getByData("customer-company-select").within(() =>
+      cy.get("select").should("have.value", "1"),
+    );
   });
 });

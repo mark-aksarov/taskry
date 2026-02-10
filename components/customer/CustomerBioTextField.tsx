@@ -13,6 +13,7 @@ export function CustomerBioTextField({
   return (
     <TextField
       multiline
+      data-test="customer-bio-field"
       name="bio"
       label={t("label")}
       placeholder={t("placeholder")}

@@ -60,19 +60,33 @@ describe("Task editing", () => {
     });
   });
 
-  it("pre-fills task form with default values", () => {
+  it.only("pre-fills task form with default values", () => {
     cy.signIn("user-1@test.com", "12345abc");
     cy.visit("/en/tasks");
 
     cy.getByData("task-item-action-menu-trigger", "1").click();
     cy.getMenuItem("edit").click();
 
-    cy.get("input[name=title]").should("have.value", "Task 1");
-    cy.get("textarea[name=description]").should("have.value", "Description 1");
-    cy.get("input[name=deadline]").should("have.value", "2025-12-31");
-    cy.get("select[name=status]").should("have.value", "active");
-    cy.get("select[name=categoryId]").should("have.value", "1");
-    cy.get("select[name=projectId]").should("have.value", "1");
-    cy.get("select[name=assigneeId]").should("have.value", "user-1");
+    cy.getByData("task-title-field").within(() =>
+      cy.get("input").should("have.value", "Task 1"),
+    );
+    cy.getByData("task-description-field").within(() =>
+      cy.get("textarea").should("have.value", "Description 1"),
+    );
+    cy.getByData("task-deadline-date-picker").within(() =>
+      cy.get("input").should("have.value", "2025-12-31"),
+    );
+    cy.getByData("task-status-select").within(() =>
+      cy.get("select").should("have.value", "active"),
+    );
+    cy.getByData("task-category-select").within(() =>
+      cy.get("select").should("have.value", "1"),
+    );
+    cy.getByData("task-project-select").within(() =>
+      cy.get("select").should("have.value", "1"),
+    );
+    cy.getByData("task-assignee-select").within(() =>
+      cy.get("select").should("have.value", "user-1"),
+    );
   });
 });

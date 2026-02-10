@@ -71,7 +71,8 @@ export function CustomerItemActionMenuTrigger({
         renderButton={() => (
           <ItemBaseActionMenuButton
             className={className}
-            data-test={`customer-item-${customerId}-action-menu-trigger`}
+            data-test="customer-item-action-menu-trigger"
+            data-id={customerId}
           />
         )}
       >
