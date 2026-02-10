@@ -38,17 +38,17 @@ export function DeleteProjectsModal({
   onSuccess,
 }: DeleteProjectsModalProps) {
   const t = useTranslations("projects.DeleteProjectsModal");
-  const [state, action, pending] = useActionState(deleteAction, initialState);
+  const [state, action, isPending] = useActionState(deleteAction, initialState);
 
   useEffect(() => {
     if (state.status === "success") {
       onSuccess?.();
+      onOpenChange?.(false);
     }
   }, [state.status, onSuccess]);
 
   const handleDelete = () => {
     startTransition(() => action(projectIds));
-    onOpenChange?.(false);
   };
 
   useActionErrorToast(state, t("error.deleteError"));
@@ -69,6 +69,7 @@ export function DeleteProjectsModal({
       <ConfirmModalActions>
         <ConfirmModalCancelButton label={t("cancelButton")} />
         <ConfirmModalConfirmButton
+          isPending={isPending}
           label={t("deleteButton")}
           onConfirm={handleDelete}
           data-test="delete-projects-modal-confirm-button"

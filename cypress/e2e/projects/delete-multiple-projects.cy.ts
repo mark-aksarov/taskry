@@ -35,8 +35,8 @@ describe("delete multiple projects", () => {
   });
 
   it("can delete projects", () => {
-    cy.getByData("project-1-checkbox").click();
-    cy.getByData("project-2-checkbox").click();
+    cy.getByData("project-checkbox", "1").click();
+    cy.getByData("project-checkbox", "2").click();
 
     cy.getByData("project-toolbar-actions-button-desktop")
       .filter(":visible")
