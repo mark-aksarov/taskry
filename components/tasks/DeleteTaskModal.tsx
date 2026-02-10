@@ -17,7 +17,6 @@ import { ActionFn, ActionState, DeleteTasksPayload } from "@/lib/actions/types";
 
 const initialState: ActionState = {
   status: null,
-  message: undefined,
 };
 
 interface DeleteTaskModalProps extends ModalProps {
