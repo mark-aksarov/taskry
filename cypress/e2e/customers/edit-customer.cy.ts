@@ -22,12 +22,11 @@ describe("Customer editing", () => {
 
     cy.task("db:reset");
     cy.task("db:seed", payload);
+    cy.signIn("user-1@test.com", "12345abc");
+    cy.visit("/en/customers");
   });
 
   it("updates a customer successfully", () => {
-    cy.signIn("user-1@test.com", "12345abc");
-    cy.visit("/en/customers");
-
     cy.getByData("customer-item-action-menu-trigger", "1").click();
     cy.getMenuItem("edit").click();
 
@@ -52,9 +51,6 @@ describe("Customer editing", () => {
   });
 
   it("pre-fills customer form with default values", () => {
-    cy.signIn("user-1@test.com", "12345abc");
-    cy.visit("/en/customers");
-
     cy.getByData("customer-item-action-menu-trigger", "1").click();
     cy.getMenuItem("edit").click();
 
@@ -76,5 +72,26 @@ describe("Customer editing", () => {
     cy.getByData("customer-company-select").within(() =>
       cy.get("select").should("have.value", "1"),
     );
+  });
+
+  it.only("updates a customer when optional fields are empty", () => {
+    cy.getByData("customer-item-action-menu-trigger", "1").click();
+    cy.getMenuItem("edit").click();
+
+    cy.fillCustomerForm({
+      fullName: "Updated Customer Name",
+      email: "updated-customer@test.com",
+      companyKey: "",
+    });
+
+    cy.get('button[type="submit"]').click();
+
+    cy.getByData("customers-list").within(() => {
+      cy.contains("Updated Customer Name");
+      cy.contains("updated-customer@test.com");
+      cy.contains("No phone number");
+      cy.contains("No public link");
+      cy.contains("No company");
+    });
   });
 });

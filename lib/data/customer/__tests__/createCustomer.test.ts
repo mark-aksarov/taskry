@@ -36,7 +36,6 @@ describe("createCustomer", () => {
     const inputData = {
       fullName: "Customer 1",
       bio: "Customer 1 bio",
-      imageUrl: "/man.jpg",
       email: "customer-1@test.com",
       phoneNumber: "123-456-7890",
       publicLink: "https://example.com/public-link",
@@ -57,6 +56,9 @@ describe("createCustomer", () => {
       fullName: "Customer 1",
       email: "customer-1@test.com",
       companyId: 999,
+      bio: null,
+      phoneNumber: null,
+      publicLink: null,
     });
 
     await expect(createCustomerPromise).rejects.toThrow(NotFoundError);
@@ -68,6 +70,9 @@ describe("createCustomer", () => {
       fullName: "Customer 1",
       email: "customer-1@test.com",
       companyId: 2,
+      bio: null,
+      phoneNumber: null,
+      publicLink: null,
     });
 
     await expect(createCustomerPromise).rejects.toThrow(AccessDeniedError);
@@ -80,6 +85,10 @@ describe("createCustomer", () => {
     const result = await createCustomer({
       fullName: "Customer 1",
       email: "customer-1@test.com",
+      companyId: null,
+      bio: null,
+      phoneNumber: null,
+      publicLink: null,
     });
 
     expect(result).toBeDefined();
@@ -96,6 +105,9 @@ describe("createCustomer", () => {
         fullName: "Customer 1",
         email: "customer-1@test.com",
         companyId: 1,
+        bio: null,
+        phoneNumber: null,
+        publicLink: null,
       };
 
       return {

@@ -39,18 +39,25 @@ describe("updateCustomer", () => {
   });
 
   it("should successfully update a customer", async () => {
+    const customerData = {
+      id: 1,
+      bio: null,
+      phoneNumber: null,
+      publicLink: null,
+      fullName: "Customer 1",
+      email: "customer-1@test.com",
+      companyId: 1,
+    };
+
     await prisma.customer.create({
       data: {
-        id: 1,
-        fullName: "Customer 1",
-        email: "customer-1@test.com",
-        companyId: 1,
+        ...customerData,
         workspaceId: 1,
       },
     });
 
     const result = await updateCustomer({
-      id: 1,
+      ...customerData,
       fullName: "Updated Customer Full Name",
     });
 
@@ -60,18 +67,25 @@ describe("updateCustomer", () => {
   });
 
   it("should throw NotFoundError if company does not found", async () => {
+    const customerData = {
+      id: 1,
+      bio: null,
+      phoneNumber: null,
+      publicLink: null,
+      fullName: "Customer 1",
+      email: "customer-1@test.com",
+      companyId: 1,
+    };
+
     await prisma.customer.create({
       data: {
-        id: 1,
-        fullName: "Customer 1",
-        email: "customer-1@test.com",
-        companyId: 1,
+        ...customerData,
         workspaceId: 1,
       },
     });
 
     const updateCustomerPromise = updateCustomer({
-      id: 1,
+      ...customerData,
       companyId: 999,
     });
 
@@ -80,18 +94,25 @@ describe("updateCustomer", () => {
   });
 
   it("should throw AccessDeniedError if company does not belong to the workspace", async () => {
+    const customerData = {
+      id: 1,
+      bio: null,
+      phoneNumber: null,
+      publicLink: null,
+      fullName: "Customer 1",
+      email: "customer-1@test.com",
+      companyId: 1,
+    };
+
     await prisma.customer.create({
       data: {
-        id: 1,
-        fullName: "Customer 1",
-        email: "customer-1@test.com",
-        companyId: 1,
+        ...customerData,
         workspaceId: 1,
       },
     });
 
     const updateCustomerPromise = updateCustomer({
-      id: 1,
+      ...customerData,
       companyId: 2,
     });
 
@@ -102,17 +123,25 @@ describe("updateCustomer", () => {
   });
 
   it("should throw an error when trying to update a customer from another workspace", async () => {
+    const customerData = {
+      id: 1,
+      bio: null,
+      phoneNumber: null,
+      publicLink: null,
+      fullName: "Customer 1",
+      email: "customer-1@test.com",
+      companyId: 1,
+    };
+
     await prisma.customer.create({
       data: {
-        fullName: "Customer 1",
-        email: "customer-1@test.com",
-        companyId: 1,
+        ...customerData,
         workspaceId: 2,
       },
     });
 
     const updateCustomerPromise = updateCustomer({
-      id: 1,
+      ...customerData,
       fullName: "Updated Customer Full Name",
     });
 
@@ -130,19 +159,26 @@ describe("updateCustomer", () => {
         user: { id: userId, workspaceId: 1, role },
       });
 
+      const customerData = {
+        id: 1,
+        bio: null,
+        phoneNumber: null,
+        publicLink: null,
+        fullName: "Customer 1",
+        email: "customer-1@test.com",
+        companyId: 1,
+      };
+
       await prisma.customer.create({
         data: {
-          id: 1,
-          fullName: "Customer 1",
-          email: "customer-1@test.com",
-          companyId: 1,
+          ...customerData,
           workspaceId: 1,
         },
       });
 
       return {
         updateInput: {
-          id: 1,
+          ...customerData,
           fullName: "Updated Customer Full Name",
         },
       };

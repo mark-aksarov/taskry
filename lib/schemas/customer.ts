@@ -13,17 +13,17 @@ export const customerSchema = z.object({
     z.string().trim().min(1).max(255),
   ),
   bio: z.preprocess(
-    emptyStringToUndefined,
-    z.string().trim().min(1).max(5000).optional(),
+    emptyStringToNull,
+    z.string().trim().min(1).max(5000).nullable(),
   ),
   email: z.email().max(254),
   phoneNumber: z.preprocess(
-    emptyStringToUndefined,
-    z.string().trim().min(1).max(20).optional(),
+    emptyStringToNull,
+    z.string().trim().min(1).max(20).nullable(),
   ),
   publicLink: z.preprocess(
-    emptyStringToUndefined,
-    z.string().trim().min(1).max(255).optional(),
+    emptyStringToNull,
+    z.string().trim().min(1).max(255).nullable(),
   ),
   companyId: z.preprocess(emptyStringToNull, coercedPositiveInt.nullable()),
 });

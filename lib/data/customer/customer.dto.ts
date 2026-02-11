@@ -15,24 +15,22 @@ export interface CustomerFormDataDTO {
 }
 
 export interface CreateCustomerInputDTO {
-  imageUrl?: string;
-  bio?: string;
+  bio: string | null;
   fullName: string;
   email: string;
-  phoneNumber?: string;
-  publicLink?: string;
-  companyId?: number | null;
+  phoneNumber: string | null;
+  publicLink: string | null;
+  companyId: number | null;
 }
 
 export interface UpdateCustomerInputDTO {
   id: number;
-  imageUrl?: string;
-  bio?: string;
-  fullName?: string;
-  email?: string;
-  phoneNumber?: string;
-  publicLink?: string;
-  companyId?: number | null;
+  bio: string | null;
+  fullName: string;
+  email: string;
+  phoneNumber: string | null;
+  publicLink: string | null;
+  companyId: number | null;
 }
 
 export type CustomerDetailDTO = {

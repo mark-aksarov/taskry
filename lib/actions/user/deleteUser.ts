@@ -4,7 +4,6 @@ import { ActionState } from "../types";
 import { APIError } from "better-auth";
 import { revalidatePath } from "next/cache";
 import { userSchema } from "@/lib/schemas/user";
-import { getTranslations } from "next-intl/server";
 import { deleteUser as deleteUserService } from "@/lib/data/user/user.service";
 import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedirect";
 
@@ -16,8 +15,6 @@ export async function deleteUser(
 ): Promise<ActionState> {
   // Authorization
   await requireSessionOrRedirect();
-
-  const t = await getTranslations("actions.common");
 
   try {
     // Parse and validate form data

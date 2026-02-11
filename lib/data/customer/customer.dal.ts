@@ -338,7 +338,6 @@ export const createCustomer = async (input: CreateCustomerInputDTO) => {
     data: {
       fullName: input.fullName,
       bio: input.bio,
-      imageUrl: input.imageUrl,
       companyId: input.companyId,
       email: input.email,
       phoneNumber: input.phoneNumber,
@@ -386,7 +385,6 @@ export const updateCustomer = async (input: UpdateCustomerInputDTO) => {
     data: {
       fullName: input.fullName,
       bio: input.bio,
-      imageUrl: input.imageUrl,
       companyId: input.companyId,
       email: input.email,
       phoneNumber: input.phoneNumber,
