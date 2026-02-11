@@ -69,13 +69,13 @@ export interface CreateUserInputDTO {
 
 export interface UpdateUserInputDTO {
   id: string;
-  fullName?: string;
-  positionId?: number | null;
-  bio?: string;
-  birthdate?: Date;
-  phoneNumber?: string;
-  address?: string;
-  publicLink?: string;
+  fullName: string;
+  positionId: number | null;
+  bio: string | null;
+  birthdate: Date | null;
+  phoneNumber: string | null;
+  address: string | null;
+  publicLink: string | null;
 }
 
 export interface ChangePasswordInputDTO {

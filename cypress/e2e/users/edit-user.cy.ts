@@ -1,9 +1,4 @@
-import {
-  users,
-  accounts,
-  positions,
-  workspaces,
-} from "@/prisma/test-utils/data";
+import { users, accounts, workspaces } from "@/prisma/test-utils/data";
 
 describe("User editing", () => {
   beforeEach(() => {
@@ -33,12 +28,11 @@ describe("User editing", () => {
     cy.viewport(1440, 900);
     cy.task("db:reset");
     cy.task("db:seed", payload);
+    cy.signIn("user-1@test.com", "12345abc");
+    cy.visit("/en/team");
   });
 
   it("updates a user successfully", () => {
-    cy.signIn("user-1@test.com", "12345abc");
-    cy.visit("/en/team");
-
     cy.getByData("user-item-action-menu-trigger", "user-1").click();
     cy.getMenuItem("edit").click();
 
@@ -63,9 +57,6 @@ describe("User editing", () => {
   });
 
   it("pre-fills user form with default values", () => {
-    cy.signIn("user-1@test.com", "12345abc");
-    cy.visit("/en/team");
-
     cy.getByData("user-item-action-menu-trigger", "user-1").click();
     cy.getMenuItem("edit").click();
 
@@ -87,5 +78,24 @@ describe("User editing", () => {
     cy.getByData("user-position-select").within(() =>
       cy.get("select").should("have.value", "1"),
     );
+  });
+
+  it.only("updates a user when optional fields are empty", () => {
+    cy.getByData("user-item-action-menu-trigger", "user-1").click();
+    cy.getMenuItem("edit").click();
+
+    cy.fillUserForm({
+      fullName: "Updated User Full Name",
+      positionKey: "",
+    });
+
+    cy.get('button[type="submit"]').click();
+
+    cy.getByData("user-list-item", "user-1").within(() => {
+      cy.contains("Updated User Full Name");
+      cy.contains("No phone");
+      cy.contains("No public link");
+      cy.contains("No position");
+    });
   });
 });

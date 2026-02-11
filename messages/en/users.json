@@ -15,20 +15,20 @@
 
   "EditUserForm": {
     "error": {
-      "accessDenied": "You are not allowed to create users",
-      "invalidEmail": "Invalid email address",
-      "userAlreadyExists": "User already exists with this email",
-      "userCreationFailed": "Failed to create user",
-      "internalServerError": "A server error occurred. Failed to update user."
+      "accessDenied": "You are not allowed to update users",
+      "noDataToUpdate": "No data to update",
+      "internalServerError": "A server error occurred. Failed to create user."
     },
     "submitButtonLabel": "Update user"
   },
 
   "NewUserForm": {
     "error": {
-      "accessDenied": "You are not allowed to update users",
-      "noDataToUpdate": "No data to update",
-      "internalServerError": "A server error occurred. Failed to create user."
+      "accessDenied": "You are not allowed to create users",
+      "invalidEmail": "Invalid email address",
+      "userAlreadyExists": "User already exists with this email",
+      "userCreationFailed": "Failed to create user",
+      "internalServerError": "A server error occurred. Failed to update user."
     },
     "submitButtonLabel": "Create User"
   },
@@ -222,9 +222,9 @@
   "UserListItem": {
     "checkboxAriaLabel": "user checkbox",
     "phoneNumber": "Phone number",
-    "noPhoneNumber": "Phone number is not provided",
+    "noPhoneNumber": "No phone number",
     "publicLink": "Public link",
-    "noPublicLink": "Public link is not provided",
+    "noPublicLink": "No public link",
     "position": "Position",
     "noPosition": "No position"
   },

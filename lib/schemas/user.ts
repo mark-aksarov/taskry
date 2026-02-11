@@ -13,23 +13,26 @@ export const userSchema = z.object({
     z.string().trim().min(1).max(255),
   ),
   bio: z.preprocess(
-    emptyStringToUndefined,
-    z.string().trim().min(1).max(5000).optional(),
+    emptyStringToNull,
+    z.string().trim().min(1).max(5000).nullable(),
   ),
   address: z.preprocess(
-    emptyStringToUndefined,
-    z.string().trim().min(1).max(255).optional(),
+    emptyStringToNull,
+    z.string().trim().min(1).max(255).nullable(),
   ),
-  birthdate: z.coerce.date("yyyy-MM-dd").optional(),
+  birthdate: z.preprocess(
+    emptyStringToNull,
+    z.coerce.date("yyyy-MM-dd").nullable(),
+  ),
   email: z.email().max(254),
   password: z.string().min(8).max(128),
   phoneNumber: z.preprocess(
-    emptyStringToUndefined,
-    z.string().trim().min(1).max(255).optional(),
+    emptyStringToNull,
+    z.string().trim().min(1).max(255).nullable(),
   ),
   publicLink: z.preprocess(
-    emptyStringToUndefined,
-    z.string().trim().min(1).max(255).optional(),
+    emptyStringToNull,
+    z.string().trim().min(1).max(255).nullable(),
   ),
   positionId: z.preprocess(emptyStringToNull, coercedPositiveInt.nullable()),
 });
