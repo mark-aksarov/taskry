@@ -1,3 +1,5 @@
 {
-  "prisma.pinToPrisma6": true
+  "prisma.pinToPrisma6": true,
+  "i18n-ally.localesPaths": ["i18n", "messages"],
+  "i18n-ally.sourceLanguage": "en"
 }

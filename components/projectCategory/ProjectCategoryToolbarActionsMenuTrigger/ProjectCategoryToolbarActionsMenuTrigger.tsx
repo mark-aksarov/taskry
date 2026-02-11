@@ -1,47 +1,55 @@
 "use client";
 
 import {
-  ActionFn,
-  ActionState,
-  DeleteCustomersPayload,
-} from "@/lib/actions/types";
-
-import {
   ToolbarMenuTrigger,
   ToolbarActionsButtonMobile,
   ToolbarActionsButtonDesktop,
-} from "../common/Toolbar";
+} from "../../common/Toolbar";
 
 import { useState } from "react";
 import { Trash } from "lucide-react";
 import { Item, Key } from "react-stately";
+import { DialogHeader } from "../../ui/Dialog";
 import { useTranslations } from "next-intl";
-import { DialogHeader } from "../ui/Dialog";
-import { DeleteCustomersModal } from "./DeleteCustomersModal";
-import { useCustomerSelection } from "@/lib/hooks/useCustomerSelection";
+import { GuestModeModal } from "../../common/GuestModeModal";
+import { useProjectCategorySelection } from "@/lib/hooks/useProjectCategorySelection";
 
-interface CustomerToolbarActionsMenuTriggerProps {
-  deleteAction: ActionFn<ActionState, DeleteCustomersPayload>;
+interface ProjectCategoryToolbarActionsMenuTriggerProps {
+  guestMode: boolean;
 }
 
-export const CustomerToolbarActionsMenuTrigger = ({
-  deleteAction,
-}: CustomerToolbarActionsMenuTriggerProps) => {
-  const t = useTranslations("customers.CustomerToolbarActionsMenuTrigger");
+export const ProjectCategoryToolbarActionsMenuTrigger = ({
+  guestMode,
+}: ProjectCategoryToolbarActionsMenuTriggerProps) => {
+  const t = useTranslations(
+    "projectCategories.ProjectCategoryToolbarActionsMenuTrigger",
+  );
+
+  // Guest mode modal state
+  const [isGuestModeModalOpen, setIsGuestModeModalOpen] = useState(false);
 
   // Delete confirmation modal state
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
   // Menu actions: show delete modal
   const handleAction = (key: Key) => {
+    if (guestMode) {
+      setIsGuestModeModalOpen(true);
+      return;
+    }
+
     if (key === "delete") {
       setIsDeleteModalOpen(true);
     }
   };
 
-  const { selectedIds: customerIds, clearSelectedIds } = useCustomerSelection();
+  const {
+    selectedIds: projectIds,
+    clearSelectedIds,
+    selectedItems,
+  } = useProjectCategorySelection();
 
-  const isDisabled = customerIds.length === 0;
+  const isDisabled = projectIds.length === 0;
 
   return (
     <>
@@ -53,11 +61,11 @@ export const CustomerToolbarActionsMenuTrigger = ({
         renderButton={() => (
           <>
             <ToolbarActionsButtonMobile
-              data-test="customer-toolbar-actions-button-mobile"
+              data-test="project-category-toolbar-actions-button-mobile"
               isDisabled={isDisabled}
             />
             <ToolbarActionsButtonDesktop
-              data-test="customer-toolbar-actions-button-desktop"
+              data-test="project-category-toolbar-actions-button-desktop"
               isDisabled={isDisabled}
             />
           </>
@@ -69,13 +77,10 @@ export const CustomerToolbarActionsMenuTrigger = ({
         </Item>
       </ToolbarMenuTrigger>
 
-      {/* Modal for confirming customer deletion */}
-      <DeleteCustomersModal
-        customerIds={customerIds}
-        deleteAction={deleteAction}
-        isOpen={isDeleteModalOpen}
-        onOpenChange={setIsDeleteModalOpen}
-        onSuccess={clearSelectedIds}
+      {/* Guest mode modal */}
+      <GuestModeModal
+        isOpen={isGuestModeModalOpen}
+        onOpenChange={setIsGuestModeModalOpen}
       />
     </>
   );

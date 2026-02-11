@@ -30,7 +30,9 @@ export const AppNavigation = () => {
 
       <NavigationButton
         href="/projects"
-        isActive={pathname.startsWith("/projects")}
+        isActive={
+          pathname.startsWith("/projects") || pathname === "/project-categories"
+        }
       >
         <FolderClosed size={18} strokeWidth={1.5} absoluteStrokeWidth />
         {t("projects")}

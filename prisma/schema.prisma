@@ -156,7 +156,7 @@ model Project {
 
 model ProjectCategory {
   id   Int    @id @default(autoincrement())
-  name String @db.VarChar(100)
+  name String @db.VarChar(255)
 
   workspaceId Int
 

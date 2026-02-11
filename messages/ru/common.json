@@ -9,6 +9,10 @@
     "dialogHeading": "Сортировка"
   },
 
+  "ToolbarManageMenuTrigger": {
+    "dialogHeading": "Управление"
+  },
+
   "ToolbarSortingButtonMobile": {
     "ariaLabel": "Сортировать проекты по"
   },
@@ -59,5 +63,13 @@
     "previousPage": "Предыдущая страница",
     "nextPage": "Следующая страница",
     "page": "страница {pageNumber}"
+  },
+
+  "ToolbarManageButtonDesktop": {
+    "label": "Управление"
+  },
+
+  "ToolbarManageButtonMobile": {
+    "ariaLabel": "Управление"
   }
 }

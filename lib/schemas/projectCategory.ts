@@ -1,5 +1,6 @@
 import z from "zod";
+import { emptyStringToUndefined } from "./base";
 
 export const projectCategorySchema = z.object({
-  name: z.string().min(1).max(255),
+  name: z.preprocess(emptyStringToUndefined, z.string().trim().min(1).max(255)),
 });

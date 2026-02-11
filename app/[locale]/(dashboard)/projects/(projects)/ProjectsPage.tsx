@@ -12,6 +12,7 @@ import { PageContainer } from "@/components/common/PageContainer";
 import { SelectionProvider } from "@/components/common/SelectionContext";
 import { ViewModeToggleButtonGroup } from "@/components/common/ViewMode";
 import { ProjectToolbarSortingMenuTrigger } from "@/components/projects/ProjectToolbarSortingMenuTrigger";
+import { ProjectToolbarManageMenuTrigger } from "@/components/projects/ProjectToolbarManageMenuTrigger";
 
 interface ProjectsPageProps {
   projectsContainer: React.ReactNode;
@@ -34,6 +35,7 @@ export function ProjectsPage({
         <ViewModeProvider>
           <SelectionProvider>
             <ToolbarDesktop>
+              <ProjectToolbarManageMenuTrigger />
               <ProjectToolbarSortingMenuTrigger />
               {projectToolbarFiltersModalTrigger}
               {projectToolbarActionsMenuTrigger}
@@ -43,6 +45,7 @@ export function ProjectsPage({
 
             <ToolbarMobileTop>
               <ToolbarMobileHeading>{t("heading")}</ToolbarMobileHeading>
+              <ProjectToolbarManageMenuTrigger />
               <ProjectToolbarSortingMenuTrigger />
               {projectToolbarFiltersModalTrigger}
               {projectToolbarActionsMenuTrigger}

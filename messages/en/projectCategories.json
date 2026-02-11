@@ -1,8 +1,6 @@
 {
   "NewProjectCategoryForm": {
-    "error": {
-      "creationError": "A server error occurred. Failed to create project category."
-    },
+    "creationError": "A server error occurred. Failed to create project category.",
     "submitButtonLabel": "Create category"
   },
 
@@ -12,11 +10,28 @@
 
   "ProjectCategoryNameTextField": {
     "label": "Name",
-    "placeholder": "Typing name",
+    "placeholder": "Enter name",
 
     "validation": {
-      "required": "Name is required",
-      "tooLong": "Name is too long"
+      "required": "Name is required"
     }
+  },
+
+  "ProjectCategoryListItem": {
+    "name": "Name"
+  },
+
+  "ProjectCategoryItemActionMenuTrigger": {
+    "edit": "Edit",
+    "delete": "Delete"
+  },
+
+  "ProjectCategoryToolbarCreateNewButton": {
+    "label": "Create New"
+  },
+
+  "ProjectCategoryToolbarActionsMenuTrigger": {
+    "dialogHeading": "Actions",
+    "delete": "Delete"
   }
 }

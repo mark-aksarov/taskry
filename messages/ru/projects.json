@@ -54,6 +54,10 @@
     }
   },
 
+  "ProjectToolbarManageMenuTrigger": {
+    "categories": "Категории"
+  },
+
   "ProjectTitleTextField": {
     "label": "Заголовок",
     "placeholder": "Введите заголовок",

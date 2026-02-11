@@ -3,12 +3,12 @@ import {
   ResponsiveMenuTriggerProps,
 } from "../ResponsiveMenuTrigger";
 
-export function ItemBaseActionMenuTrigger(props: ResponsiveMenuTriggerProps) {
+export function ToolbarMenuTrigger(props: ResponsiveMenuTriggerProps) {
   return (
     <ResponsiveMenuTrigger
+      overlayClassName="md:min-w-[150px]"
+      placement="bottom left"
       {...props}
-      overlayClassName="md:min-w-[200px]"
-      placement="bottom right"
     />
   );
 }

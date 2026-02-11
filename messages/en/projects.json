@@ -54,6 +54,10 @@
     }
   },
 
+  "ProjectToolbarManageMenuTrigger": {
+    "categories": "Categories"
+  },
+
   "ProjectTitleTextField": {
     "label": "Title",
     "placeholder": "Enter title",

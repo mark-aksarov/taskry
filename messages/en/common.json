@@ -4,60 +4,56 @@
     "text": "<strong>Action is restricted in guest mode.</strong> An account is required to access all features. Please sign in or create a new account to remove guest mode restrictions.",
     "cancelButton": "Cancel"
   },
-
   "ToolbarSortingMenuTrigger": {
     "dialogHeading": "Sorting"
   },
-
+  "ToolbarManageMenuTrigger": {
+    "dialogHeading": "Manage"
+  },
   "ToolbarSortingButtonMobile": {
     "ariaLabel": "Sort projects by"
   },
-
   "ToolbarSortingButtonDesktop": {
     "label": "Sorting"
   },
-
   "ToolbarFiltersButtonDesktop": {
     "label": "Filters"
   },
-
   "ToolbarFiltersButtonMobile": {
     "ariaLabel": "Filter projects"
   },
-
   "FiltersFormSubmitButton": {
     "label": "Apply Filters"
   },
-
   "ToolbarActionsButtonDesktop": {
     "label": "Actions"
   },
-
   "ToolbarActionsButtonMobile": {
     "ariaLabel": "Actions"
   },
-
   "ViewModeToggleButtonGroup": {
     "list": "List",
     "grid": "Grid"
   },
-
   "AttachmentsField": {
     "label": "Attachments",
     "maxSize": "Max size: 10 MB"
   },
-
   "ItemBaseActionMenuTrigger": {
     "ariaLabel": "Actions"
   },
-
   "ItemBaseActionMenuDialogHeader": {
     "heading": "Actions"
   },
-
   "Pagination": {
     "previousPage": "Previous page",
     "nextPage": "Next page",
     "page": "page {pageNumber}"
+  },
+  "ToolbarManageButtonDesktop": {
+    "label": "Manage"
+  },
+  "ToolbarManageButtonMobile": {
+    "ariaLabel": "Manage"
   }
 }

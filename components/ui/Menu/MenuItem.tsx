@@ -34,6 +34,18 @@ export const MenuItem = ({
     }),
   );
 
+  if (menuItemProps.href) {
+    return (
+      <a
+        {...mergeProps(menuItemProps, hoverProps, props)}
+        ref={ref}
+        className={classes}
+      >
+        {item.rendered}
+      </a>
+    );
+  }
+
   return (
     <li
       {...mergeProps(menuItemProps, hoverProps, props)}

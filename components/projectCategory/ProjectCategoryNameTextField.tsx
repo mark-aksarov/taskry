@@ -14,19 +14,11 @@ export function ProjectCategoryNameTextField({
 
   return (
     <TextField
+      data-test="project-category-name-field"
       name="name"
       label={t("label")}
       placeholder={t("placeholder")}
-      errorMessage={(validation) => {
-        const details = validation.validationDetails;
-        if (details.valueMissing) {
-          return t("validation.required");
-        }
-        if (details.tooLong) {
-          return t("validation.tooLong", { maxLength: 255 });
-        }
-        return "";
-      }}
+      errorMessage={t("validation.required")}
       defaultValue={defaultValue}
       isRequired
     />

@@ -8,7 +8,7 @@ import {
 } from "@/lib/actions/types";
 
 import {
-  ToolbarActionsMenuTrigger,
+  ToolbarMenuTrigger,
   ToolbarActionsButtonMobile,
   ToolbarActionsButtonDesktop,
 } from "../common/Toolbar";
@@ -90,7 +90,7 @@ export const ProjectToolbarActionsMenuTrigger = ({
 
   return (
     <>
-      <ToolbarActionsMenuTrigger
+      <ToolbarMenuTrigger
         onAction={handleAction}
         disabledKeys={disabledKeys}
         renderDialogHeader={() => (
@@ -125,7 +125,7 @@ export const ProjectToolbarActionsMenuTrigger = ({
           <Clock size={16} strokeWidth={1.5} absoluteStrokeWidth />
           {t("completed")}
         </Item>
-      </ToolbarActionsMenuTrigger>
+      </ToolbarMenuTrigger>
 
       {/* Modal for confirming project deletion */}
       <DeleteProjectsModal

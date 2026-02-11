@@ -5,10 +5,10 @@ import { DialogHeader } from "@/components/ui/Dialog";
 import { MenuTriggerProps } from "@/components/ui/Menu";
 import { ToolbarMenuTrigger } from "./ToolbarMenuTrigger";
 
-export function ToolbarSortingMenuTrigger<T extends object = any>(
+export function ToolbarManageMenuTrigger<T extends object = any>(
   props: MenuTriggerProps<T>,
 ) {
-  const t = useTranslations("common.ToolbarSortingMenuTrigger");
+  const t = useTranslations("common.ToolbarManageMenuTrigger");
 
   return (
     <ToolbarMenuTrigger
