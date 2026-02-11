@@ -45,20 +45,26 @@ describe("updateProject", () => {
   it("should successfully update task", async () => {
     const taskId = 100;
 
+    const taskData = {
+      id: taskId,
+      title: "Task 1",
+      description: null,
+      deadline: new Date(),
+      projectId: 1,
+      categoryId: 1,
+      status: TaskStatus.active,
+      assigneeId: null,
+    };
+
     await prisma.task.create({
       data: {
-        id: taskId,
-        title: "Task 1",
-        deadline: new Date(),
-        projectId: 1,
-        categoryId: 1,
+        ...taskData,
         workspaceId: 1,
-        status: TaskStatus.active,
       },
     });
 
     const result = await updateTask({
-      id: taskId,
+      ...taskData,
       title: "Updated Task Title",
     });
 
@@ -70,43 +76,55 @@ describe("updateProject", () => {
   it("should throw an error when trying to update a task from another workspace", async () => {
     const taskId = 100;
 
+    const taskData = {
+      id: taskId,
+      title: "Task 1",
+      description: null,
+      deadline: new Date(),
+      projectId: 2,
+      categoryId: 2,
+      status: TaskStatus.active,
+      assigneeId: null,
+    };
+
     await prisma.task.create({
       data: {
-        id: taskId,
-        title: "Task 1",
-        deadline: new Date(),
-        projectId: 2,
-        categoryId: 2,
+        ...taskData,
         workspaceId: 2,
-        status: TaskStatus.active,
       },
     });
 
     const updateInput = {
-      id: taskId,
+      ...taskData,
       title: "Updated Task Title",
     };
 
     await expect(updateTask(updateInput)).rejects.toThrow();
   });
 
-  it("should fail if the project belongs to a different workspace", async () => {
+  it("should fail if the project not found", async () => {
     const taskId = 100;
+
+    const taskData = {
+      id: taskId,
+      title: "Task 1",
+      description: null,
+      deadline: new Date(),
+      projectId: 1,
+      categoryId: 1,
+      status: TaskStatus.active,
+      assigneeId: null,
+    };
 
     await prisma.task.create({
       data: {
-        id: taskId,
-        title: "Task 1",
-        deadline: new Date(),
-        projectId: 1,
-        categoryId: 1,
+        ...taskData,
         workspaceId: 1,
-        status: TaskStatus.active,
       },
     });
 
     const updateTaskPromise = updateTask({
-      id: taskId,
+      ...taskData,
       projectId: 999,
     });
 
@@ -114,23 +132,29 @@ describe("updateProject", () => {
     await expect(updateTaskPromise).rejects.toThrow(/Project not found/i);
   });
 
-  it("should fail if the assignee belongs to a different workspace", async () => {
+  it("should fail if the assignee not found", async () => {
     const taskId = 100;
+
+    const taskData = {
+      id: taskId,
+      title: "Task 1",
+      description: null,
+      deadline: new Date(),
+      projectId: 1,
+      categoryId: 1,
+      status: TaskStatus.active,
+      assigneeId: null,
+    };
 
     await prisma.task.create({
       data: {
-        id: taskId,
-        title: "Task 1",
-        deadline: new Date(),
-        projectId: 1,
-        categoryId: 1,
+        ...taskData,
         workspaceId: 1,
-        status: TaskStatus.active,
       },
     });
 
     const updateTaskPromise = updateTask({
-      id: taskId,
+      ...taskData,
       assigneeId: "user-999",
     });
 
@@ -141,20 +165,26 @@ describe("updateProject", () => {
   it("should fail if the task category not found", async () => {
     const taskId = 100;
 
+    const taskData = {
+      id: taskId,
+      title: "Task 1",
+      description: null,
+      deadline: new Date(),
+      projectId: 1,
+      categoryId: 1,
+      status: TaskStatus.active,
+      assigneeId: null,
+    };
+
     await prisma.task.create({
       data: {
-        id: taskId,
-        title: "Task 1",
-        deadline: new Date(),
-        projectId: 1,
-        categoryId: 1,
+        ...taskData,
         workspaceId: 1,
-        status: TaskStatus.active,
       },
     });
 
     const updateTaskPromise = updateTask({
-      id: taskId,
+      ...taskData,
       categoryId: 999,
     });
 
@@ -165,20 +195,26 @@ describe("updateProject", () => {
   it("should fail if the project belongs to a different workspace", async () => {
     const taskId = 100;
 
+    const taskData = {
+      id: taskId,
+      title: "Task 1",
+      description: null,
+      deadline: new Date(),
+      projectId: 1,
+      categoryId: 1,
+      status: TaskStatus.active,
+      assigneeId: null,
+    };
+
     await prisma.task.create({
       data: {
-        id: taskId,
-        title: "Task 1",
-        deadline: new Date(),
-        projectId: 1,
-        categoryId: 1,
+        ...taskData,
         workspaceId: 1,
-        status: TaskStatus.active,
       },
     });
 
     const updateTaskPromise = updateTask({
-      id: taskId,
+      ...taskData,
       projectId: 3,
     });
 
@@ -189,20 +225,26 @@ describe("updateProject", () => {
   it("should fail if the assignee belongs to a different workspace", async () => {
     const taskId = 100;
 
+    const taskData = {
+      id: taskId,
+      title: "Task 1",
+      description: null,
+      deadline: new Date(),
+      projectId: 1,
+      categoryId: 1,
+      status: TaskStatus.active,
+      assigneeId: null,
+    };
+
     await prisma.task.create({
       data: {
-        id: taskId,
-        title: "Task 1",
-        deadline: new Date(),
-        projectId: 1,
-        categoryId: 1,
+        ...taskData,
         workspaceId: 1,
-        status: TaskStatus.active,
       },
     });
 
     const updateTaskPromise = updateTask({
-      id: taskId,
+      ...taskData,
       assigneeId: "user-4",
     });
 
@@ -213,20 +255,26 @@ describe("updateProject", () => {
   it("should fail if the task category belongs to a different workspace", async () => {
     const taskId = 100;
 
+    const taskData = {
+      id: taskId,
+      title: "Task 1",
+      description: null,
+      deadline: new Date(),
+      projectId: 1,
+      categoryId: 1,
+      status: TaskStatus.active,
+      assigneeId: null,
+    };
+
     await prisma.task.create({
       data: {
-        id: taskId,
-        title: "Task 1",
-        deadline: new Date(),
-        projectId: 1,
-        categoryId: 1,
+        ...taskData,
         workspaceId: 1,
-        status: TaskStatus.active,
       },
     });
 
     const updateTaskPromise = updateTask({
-      id: taskId,
+      ...taskData,
       categoryId: 2,
     });
 
@@ -234,33 +282,6 @@ describe("updateProject", () => {
     await expect(updateTaskPromise).rejects.toThrow(
       /Task category access denied/i,
     );
-  });
-
-  it("should fail if the project belongs to a different workspace", async () => {
-    await expect(
-      updateTask({
-        id: 1,
-        projectId: 2,
-      }),
-    ).rejects.toThrow();
-  });
-
-  it("should fail if the assignee belongs to a different workspace", async () => {
-    await expect(
-      updateTask({
-        id: 1,
-        assigneeId: "user-4",
-      }),
-    ).rejects.toThrow();
-  });
-
-  it("should fail if the task category belongs to a different workspace", async () => {
-    await expect(
-      updateTask({
-        id: 1,
-        categoryId: 2,
-      }),
-    ).rejects.toThrow();
   });
 
   describe("RBAC: update task", () => {
@@ -271,21 +292,27 @@ describe("updateProject", () => {
 
       const taskId = 100;
 
+      const taskData = {
+        id: taskId,
+        description: null,
+        title: "Task 1",
+        deadline: new Date(),
+        projectId: 1,
+        categoryId: 1,
+        status: TaskStatus.active,
+        assigneeId: null,
+      };
+
       await prisma.task.create({
         data: {
-          id: taskId,
-          title: "Task 1",
-          deadline: new Date(),
-          projectId: 1,
-          categoryId: 1,
+          ...taskData,
           workspaceId: 1,
-          status: TaskStatus.active,
         },
       });
 
       return {
         updateInput: {
-          id: taskId,
+          ...taskData,
           title: "Updated Task Title",
         },
       };

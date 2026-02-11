@@ -74,7 +74,7 @@ describe("Customer editing", () => {
     );
   });
 
-  it.only("updates a customer when optional fields are empty", () => {
+  it("updates a customer when optional fields are empty", () => {
     cy.getByData("customer-item-action-menu-trigger", "1").click();
     cy.getMenuItem("edit").click();
 

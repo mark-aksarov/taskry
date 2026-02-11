@@ -31,12 +31,11 @@ describe("Task editing", () => {
     cy.viewport(1440, 900);
     cy.task("db:reset");
     cy.task("db:seed", payload);
+    cy.signIn("user-1@test.com", "12345abc");
+    cy.visit("/en/tasks");
   });
 
   it("updates a task successfully", () => {
-    cy.signIn("user-1@test.com", "12345abc");
-    cy.visit("/en/tasks");
-
     cy.getByData("task-item-action-menu-trigger", "1").click();
     cy.getMenuItem("edit").click();
 
@@ -61,9 +60,6 @@ describe("Task editing", () => {
   });
 
   it("pre-fills task form with default values", () => {
-    cy.signIn("user-1@test.com", "12345abc");
-    cy.visit("/en/tasks");
-
     cy.getByData("task-item-action-menu-trigger", "1").click();
     cy.getMenuItem("edit").click();
 
@@ -88,5 +84,30 @@ describe("Task editing", () => {
     cy.getByData("task-assignee-select").within(() =>
       cy.get("select").should("have.value", "user-1"),
     );
+  });
+
+  it.only("updates a task when optional fields are empty", () => {
+    cy.getByData("task-toolbar-create-new-menu-trigger")
+      .filter(":visible")
+      .click();
+    cy.getMenuItem("task").click();
+
+    cy.fillTaskForm({
+      title: "Updated Task Title",
+      deadline: { day: "01", month: "02", year: "2026" },
+      statusKey: "pending",
+      projectKey: "2",
+    });
+
+    cy.get('button[type="submit"]').click();
+
+    cy.getByData("tasks-list").within(() => {
+      cy.contains("Updated Task Title");
+      cy.contains("2026");
+      cy.contains(/active/i);
+      cy.contains("Project 1");
+      cy.contains("No category");
+      cy.contains("No assignee");
+    });
   });
 });

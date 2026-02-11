@@ -42,6 +42,7 @@ describe("createTask", () => {
 
     const result = await createTask({
       title: "New Task",
+      description: null,
       status: TaskStatus.active,
       projectId: projectId,
       categoryId: 1,
@@ -59,6 +60,7 @@ describe("createTask", () => {
   it("should fail if the project not found", async () => {
     const createTaskPromise = createTask({
       title: "New Task",
+      description: null,
       status: TaskStatus.active,
       projectId: 999,
       categoryId: 1,
@@ -73,6 +75,7 @@ describe("createTask", () => {
   it("should fail if the assignee not found", async () => {
     const createTaskPromise = createTask({
       title: "New Task",
+      description: null,
       status: TaskStatus.active,
       projectId: 1,
       categoryId: 1,
@@ -87,6 +90,7 @@ describe("createTask", () => {
   it("should fail if the task category not found", async () => {
     const createTaskPromise = createTask({
       title: "New Task",
+      description: null,
       status: TaskStatus.active,
       projectId: 1,
       categoryId: 999,
@@ -101,6 +105,7 @@ describe("createTask", () => {
   it("should fail if the project belongs to a different workspace", async () => {
     const createTaskPromise = createTask({
       title: "New Task",
+      description: null,
       status: TaskStatus.active,
       projectId: 3,
       categoryId: 1,
@@ -115,6 +120,7 @@ describe("createTask", () => {
   it("should fail if the assignee belongs to a different workspace", async () => {
     const createTaskPromise = createTask({
       title: "New Task",
+      description: null,
       status: TaskStatus.active,
       projectId: 1,
       categoryId: 1,
@@ -129,6 +135,7 @@ describe("createTask", () => {
   it("should fail if the task category belongs to a different workspace", async () => {
     const createTaskPromise = createTask({
       title: "New Task",
+      description: null,
       status: TaskStatus.active,
       projectId: 1,
       categoryId: 2,
@@ -145,9 +152,12 @@ describe("createTask", () => {
   it("should create a task without optional fields", async () => {
     const result = await createTask({
       title: "New Task",
+      description: null,
       status: TaskStatus.active,
       projectId: 1,
       deadline: new Date(),
+      categoryId: null,
+      assigneeId: null,
     });
 
     expect(result.id).toBeDefined();
@@ -162,6 +172,7 @@ describe("createTask", () => {
 
       const createInput = {
         title: "New Task",
+        description: null,
         status: TaskStatus.active,
         projectId: 1,
         categoryId: 1,
