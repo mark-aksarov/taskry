@@ -17,14 +17,14 @@ declare namespace Cypress {
       year: string,
     ): Chainable<JQuery<HTMLElement>>;
 
-    fillEditUserForm(data: {
-      fullName: string;
-      bio: string;
-      birthdate: { month: string; day: string; year: string };
-      phoneNumber: string;
-      publicLink: string;
-      address: string;
-      positionKey: string;
+    fillUserForm(data: {
+      fullName?: string;
+      bio?: string;
+      birthdate?: { month: string; day: string; year: string };
+      phoneNumber?: string;
+      publicLink?: string;
+      address?: string;
+      positionKey?: string;
     }): Chainable<JQuery<HTMLElement>>;
 
     fillTaskForm(data: {

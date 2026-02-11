@@ -38,7 +38,7 @@ async function UserHeaderContainerInner({ userId }: UserHeaderContainerProps) {
       image={
         <PersonDetailHeaderImage alt={user.fullName} imageUrl={user.imageUrl} />
       }
-      subtitle={user.position ? user.position.name : t("unknownPosition")}
+      subtitle={user.position ? user.position.name : t("noPosition")}
     />
   );
 }

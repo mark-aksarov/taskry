@@ -97,7 +97,7 @@ export function UserGridItem({
           </GridItemTitle>
 
           <GridItemText>
-            {position ? position.name : t("unknownPosition")}
+            {position ? position.name : t("noPosition")}
           </GridItemText>
         </GridItemInfo>
       }

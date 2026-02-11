@@ -14,6 +14,7 @@ export function UserFullNameTextField({
 
   return (
     <TextField
+      data-test="user-full-name-field"
       name="fullName"
       maxLength={255}
       label={t("label")}

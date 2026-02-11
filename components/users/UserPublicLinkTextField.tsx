@@ -12,6 +12,7 @@ export function UserPublicLinkTextField({
 
   return (
     <TextField
+      data-test="user-public-link-field"
       name="publicLink"
       type="url"
       maxLength={255}

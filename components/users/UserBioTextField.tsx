@@ -11,6 +11,7 @@ export function UserBioTextField({ defaultValue }: UserBioTextFieldProps) {
   return (
     <TextField
       multiline
+      data-test="user-bio-field"
       name="bio"
       label={t("label")}
       placeholder={t("placeholder")}

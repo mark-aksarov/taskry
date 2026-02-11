@@ -8,6 +8,7 @@ export function UserPasswordTextField() {
 
   return (
     <TextField
+      data-test="user-password-field"
       name="password"
       type="password"
       label={t("password.label")}

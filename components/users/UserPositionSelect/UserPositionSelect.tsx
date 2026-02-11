@@ -15,15 +15,19 @@ export function UserPositionSelect({
 }: UserPositionSelectProps) {
   const t = useTranslations("users.UserPositionSelect");
 
+  const items = [
+    { id: "", label: t("noPosition") },
+    ...positions.map((item) => ({ id: item.id, label: item.name })),
+  ];
+
   return (
     <ResponsiveSelect
       label={t("label")}
       name="positionId"
-      data-test="position-select"
-      placeholder={t("placeholder")}
+      data-test="user-position-select"
       overlayClassName="w-[var(--trigger-width)]"
-      defaultSelectedKey={defaultSelectedKey}
-      items={positions.map((item) => ({ id: item.id, label: item.name }))}
+      defaultSelectedKey={defaultSelectedKey || ""}
+      items={items}
     >
       {(item: any) => <Item key={item.id}>{item.label}</Item>}
     </ResponsiveSelect>

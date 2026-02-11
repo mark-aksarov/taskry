@@ -51,7 +51,7 @@ function UserDetailContainerInner({ userId }: UserDetailContainerProps) {
               alt={user.fullName}
             />
           }
-          subtitle={user.position ? user.position.name : t("unknownPosition")}
+          subtitle={user.position ? user.position.name : t("noPosition")}
         />
       }
       userDetail={

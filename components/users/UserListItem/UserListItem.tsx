@@ -56,7 +56,7 @@ export function UserListItem({
   );
 
   return (
-    <ListItem data-test="user-list-item">
+    <ListItem data-test="user-list-item" data-id={id}>
       <>
         <ItemBaseDetailModalTrigger modal={userDetailModal} className="h-9 w-9">
           {userImg}
@@ -120,7 +120,7 @@ export function UserListItem({
 
       <ListItemInfo className="@max-4xl:hidden">
         <ListItemTitle>
-          {position ? position.name : t("unknownPosition")}
+          {position ? position.name : t("noPosition")}
         </ListItemTitle>
 
         <ListItemText>{t("position")}</ListItemText>

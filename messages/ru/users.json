@@ -46,8 +46,7 @@
     "placeholder": "Введите полное имя",
 
     "validation": {
-      "required": "Полное имя обязательно для заполнения",
-      "tooLong": "Полное имя слишком длинное"
+      "required": "«Полное имя» обязательно для заполнения"
     }
   },
 
@@ -56,22 +55,36 @@
     "placeholder": "Введите информацию о себе"
   },
 
+  "UserBirthdateDatePicker": {
+    "label": "Дата рождения"
+  },
+
+  "UserPhoneNumberTextField": {
+    "label": "Номер телефона",
+    "placeholder": "Введите номер телефона"
+  },
+
+  "UserPublicLinkTextField": {
+    "label": "Публичная ссылка",
+    "placeholder": "Введите публичную ссылку",
+
+    "validation": {
+      "format": "Введите корректный URL, например https://example.com"
+    }
+  },
+
   "UserAddressTextField": {
     "label": "Адрес",
     "placeholder": "Введите адрес"
   },
 
-  "UserBirthdateDatePicker": {
-    "label": "Дата рождения"
-  },
-
   "UserEmailTextField": {
-    "label": "Электронная почта",
-    "placeholder": "Введите адрес электронной почты",
+    "label": "Email",
+    "placeholder": "Введите email",
 
     "validation": {
-      "required": "Пожалуйста, укажите адрес электронной почты",
-      "format": "Неверный формат. Адрес электронной почты должен быть в формате `user@example.com`."
+      "required": "Требуется электронная почта",
+      "format": "Введите корректный адрес электронной почты, например user@example.com"
     }
   },
 
@@ -87,23 +100,9 @@
     }
   },
 
-  "UserPhoneNumberTextField": {
-    "label": "Номер телефона",
-    "placeholder": "Введите номер телефона"
-  },
-
-  "UserPublicLinkTextField": {
-    "label": "Публичная ссылка",
-    "placeholder": "Введите публичную ссылку",
-
-    "validation": {
-      "format": "Неверный формат. Публичная ссылка должна быть в формате `https://example.com`."
-    }
-  },
-
   "UserPositionSelect": {
     "label": "Должность",
-    "placeholder": "Выберите должность"
+    "noPosition": "Нет должности"
   },
 
   "TotalUsersCard": {
@@ -160,7 +159,7 @@
   },
 
   "UserDetailContainer": {
-    "unknownPosition": "Неизвестная должность"
+    "noPosition": "Нет должности"
   },
 
   "UserDetailModal": {
@@ -211,13 +210,13 @@
   },
 
   "UserGridItem": {
-    "unknownPosition": "Неизвестная должность",
+    "noPosition": "Нет должности",
     "noPhoneNumber": "Номер телефона не указан",
     "noPublicLink": "Публичная ссылка отсутствует"
   },
 
   "UserHeaderContainer": {
-    "unknownPosition": "Неизвестная должность"
+    "noPosition": "Нет должности"
   },
 
   "UserListItem": {
@@ -227,7 +226,7 @@
     "publicLink": "Публичная ссылка",
     "noPublicLink": "Публичная ссылка не указана",
     "position": "Должность",
-    "unknownPosition": "Неизвестная должность"
+    "noPosition": "Нет должности"
   },
 
   "UserNavigationDesktop": {

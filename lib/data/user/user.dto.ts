@@ -70,7 +70,7 @@ export interface CreateUserInputDTO {
 export interface UpdateUserInputDTO {
   id: string;
   fullName?: string;
-  positionId?: number;
+  positionId?: number | null;
   bio?: string;
   birthdate?: Date;
   phoneNumber?: string;

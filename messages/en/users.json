@@ -43,35 +43,48 @@
 
   "UserFullNameTextField": {
     "label": "Full name",
-    "placeholder": "Typing full name",
+    "placeholder": "Enter full name",
 
     "validation": {
-      "required": "Full name is required",
-      "tooLong": "Full name is too long"
+      "required": "Full name is required"
     }
   },
 
   "UserBioTextField": {
     "label": "Bio",
-    "placeholder": "Typing bio"
-  },
-
-  "UserAddressTextField": {
-    "label": "Address",
-    "placeholder": "Typing address"
+    "placeholder": "Enter bio"
   },
 
   "UserBirthdateDatePicker": {
     "label": "Birthdate"
   },
 
-  "UserEmailTextField": {
-    "label": "Email",
-    "placeholder": "Typing email",
+  "UserPhoneNumberTextField": {
+    "label": "Phone number",
+    "placeholder": "Enter phone number"
+  },
+
+  "UserPublicLinkTextField": {
+    "label": "Public link",
+    "placeholder": "Enter a public link",
 
     "validation": {
-      "required": "Please enter your email address.",
-      "format": "Invalid format. The email address must be in the format `user@example.com`."
+      "format": "Please enter a valid URL, for example https://example.com"
+    }
+  },
+
+  "UserAddressTextField": {
+    "label": "Address",
+    "placeholder": "Enter address"
+  },
+
+  "UserEmailTextField": {
+    "label": "Email",
+    "placeholder": "Enter email",
+
+    "validation": {
+      "required": "Email is required",
+      "format": "Enter a valid email address, for example user@example.com"
     }
   },
 
@@ -87,23 +100,9 @@
     }
   },
 
-  "UserPhoneNumberTextField": {
-    "label": "Phone number",
-    "placeholder": "Typing phone number"
-  },
-
-  "UserPublicLinkTextField": {
-    "label": "Public link",
-    "placeholder": "Typing public link",
-
-    "validation": {
-      "format": "Invalid format. The public link must be in the format `https://example.com`."
-    }
-  },
-
   "UserPositionSelect": {
     "label": "Position",
-    "placeholder": "Typing position"
+    "noPosition": "No position"
   },
 
   "TotalUsersCard": {
@@ -160,7 +159,7 @@
   },
 
   "UserDetailContainer": {
-    "unknownPosition": "Unknown position"
+    "noPosition": "No position"
   },
 
   "UserDetailModal": {
@@ -211,13 +210,13 @@
   },
 
   "UserGridItem": {
-    "unknownPosition": "Unknown position",
+    "noPosition": "No position",
     "noPhoneNumber": "No phone number",
     "noPublicLink": "No public link"
   },
 
   "UserHeaderContainer": {
-    "unknownPosition": "Unknown position"
+    "noPosition": "No position"
   },
 
   "UserListItem": {
@@ -227,7 +226,7 @@
     "publicLink": "Public link",
     "noPublicLink": "Public link is not provided",
     "position": "Position",
-    "unknownPosition": "Unknown position"
+    "noPosition": "No position"
   },
 
   "UserNavigationDesktop": {

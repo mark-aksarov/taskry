@@ -12,6 +12,7 @@ export function UserAddressTextField({
 
   return (
     <TextField
+      data-test="user-address-field"
       name="address"
       maxLength={255}
       label={t("label")}

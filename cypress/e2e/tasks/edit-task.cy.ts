@@ -60,7 +60,7 @@ describe("Task editing", () => {
     });
   });
 
-  it.only("pre-fills task form with default values", () => {
+  it("pre-fills task form with default values", () => {
     cy.signIn("user-1@test.com", "12345abc");
     cy.visit("/en/tasks");
 

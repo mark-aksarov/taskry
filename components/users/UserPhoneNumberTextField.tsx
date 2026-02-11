@@ -14,6 +14,7 @@ export function UserPhoneNumberTextField({
 
   return (
     <TextField
+      data-test="user-phone-number-field"
       name="phoneNumber"
       label={t("label")}
       placeholder={t("placeholder")}

@@ -13,11 +13,10 @@ export function UserBirthdateDatePicker({
 
   return (
     <ResponsiveDatePicker
-      data-test="birthdate-date-picker"
+      data-test="user-birthdate-date-picker"
       name="birthdate"
       label={t("label")}
       overlayClassName="w-[var(--trigger-width)]"
-      isRequired
       defaultValue={defaultValue}
     />
   );

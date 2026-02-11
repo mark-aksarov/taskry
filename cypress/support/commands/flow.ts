@@ -1,30 +1,46 @@
 Cypress.Commands.add(
-  "fillEditUserForm",
+  "fillUserForm",
   (data: {
-    fullName: string;
-    bio: string;
-    birthdate: { day: string; month: string; year: string };
-    phoneNumber: string;
-    publicLink: string;
-    address: string;
-    positionKey: string;
+    fullName?: string;
+    bio?: string;
+    birthdate?: { day: string; month: string; year: string };
+    phoneNumber?: string;
+    publicLink?: string;
+    address?: string;
+    positionKey?: string;
   }) => {
-    const birthdate = data.birthdate;
+    // Text fields (field name : value)
+    const fields = {
+      "user-full-name-field": data.fullName,
+      "user-bio-field": data.bio,
+      "user-phone-number-field": data.phoneNumber,
+      "user-public-link-field": data.publicLink,
+      "user-address-field": data.address,
+    };
 
-    cy.get('input[name="fullName"]').clear().type(data.fullName);
-    cy.get('textarea[name="bio"]').clear().type(data.bio);
-    cy.setDatePickerDate(
-      "birthdate-date-picker",
-      birthdate.month,
-      birthdate.day,
-      birthdate.year,
-    );
-    cy.get('input[name="phoneNumber"]').clear().type(data.phoneNumber);
-    cy.get('input[name="publicLink"]').clear().type(data.publicLink);
-    cy.get('input[name="address"]').clear().type(data.address);
-    cy.getByData("position-select").click();
-    cy.getSelectOption(data.positionKey).click();
-    cy.get('button[type="submit"]').click();
+    // We clear each field and print only if there is text.
+    Object.entries(fields).forEach(([selector, value]) => {
+      cy.getByData(selector).clear();
+      if (value) {
+        cy.getByData(selector).type(value);
+      }
+    });
+
+    // Date picker
+    if (data.birthdate) {
+      cy.setDatePickerDate(
+        "user-birthdate-date-picker",
+        data.birthdate.month,
+        data.birthdate.day,
+        data.birthdate.year,
+      );
+    }
+
+    // Select position
+    if (data.positionKey !== undefined) {
+      cy.getByData("user-position-select").click();
+      cy.getSelectOption(data.positionKey).click();
+    }
   },
 );
 
