@@ -5,18 +5,29 @@
     },
     "submitButtonLabel": "Create category"
   },
-
   "NewTaskCategoryModal": {
     "title": "New task category"
   },
-
   "TaskCategoryNameTextField": {
     "label": "Name",
     "placeholder": "Typing name",
-
     "validation": {
       "required": "Name is required",
       "tooLong": "Name is too long"
     }
+  },
+  "TaskCategoryListItem": {
+    "name": "Name"
+  },
+  "TaskCategoryToolbarActionsMenuTrigger": {
+    "dialogHeading": "Actions",
+    "delete": "Delete"
+  },
+  "TaskCategoryToolbarCreateNewButton": {
+    "label": "Создать новую"
+  },
+  "TaskCategoryItemActionMenuTrigger": {
+    "edit": "Edit",
+    "delete": "Delete"
   }
 }

@@ -7,6 +7,7 @@ import { NewProjectCategoryForm } from "@/components/projectCategory/NewProjectC
 import { ProjectCategoriesContainer } from "@/components/projectCategory/ProjectCategoriesContainer";
 import { ProjectCategoryToolbarCreateNewButton } from "@/components/projectCategory/ProjectCategoryToolbarCreateNewButton";
 import { ProjectCategoryToolbarActionsMenuTrigger } from "@/components/projectCategory/ProjectCategoryToolbarActionsMenuTrigger";
+import { ProjectCategoriesPageEmpty } from "./ProjectCategoriesPageEmpty";
 
 export default async function AppProjectCategoriesPage() {
   // Authorization
@@ -26,7 +27,13 @@ export default async function AppProjectCategoriesPage() {
   );
 
   if (!projectCount) {
-    //empty page
+    return (
+      <ProjectCategoriesPageEmpty
+        projectCategoryToolbarCreateNewButton={
+          projectCategoryToolbarCreateNewButton
+        }
+      />
+    );
   }
 
   return (

@@ -105,5 +105,15 @@
   "ProjectCategoriesPageEmpty": {
     "heading": "No project categories yet",
     "description": "Create a new project category to better organize your projects."
+  },
+  "TaskCategoriesPage": {
+    "heading": "Task Categories"
+  },
+  "TaskCategoriesPageEmpty": {
+    "heading": "No task categories yet",
+    "description": "Create a new task category to better organize your tasks."
+  },
+  "TaskCategoriesPageLoading": {
+    "title": "All task Categories"
   }
 }

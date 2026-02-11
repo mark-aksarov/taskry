@@ -5,18 +5,29 @@
     },
     "submitButtonLabel": "Создать категорию"
   },
-
   "NewTaskCategoryModal": {
     "title": "Новая категория задач"
   },
-
   "TaskCategoryNameTextField": {
     "label": "Название",
     "placeholder": "Введите название",
-
     "validation": {
       "required": "Требуется название",
       "tooLong": "Название слишком длинное"
     }
+  },
+  "TaskCategoryItemActionMenuTrigger": {
+    "edit": "Редактировать",
+    "delete": "Удалить"
+  },
+  "TaskCategoryListItem": {
+    "name": "Название"
+  },
+  "TaskCategoryToolbarActionsMenuTrigger": {
+    "dialogHeading": "Действия",
+    "delete": "Удалить"
+  },
+  "TaskCategoryToolbarCreateNewButton": {
+    "label": "Create new"
   }
 }

@@ -100,9 +100,20 @@
     "heading": "Информация о пользователе"
   },
   "ProjectCategoriesPageLoading": {
-    "title": "Все категории проекта"
+    "title": "Все категории проектов"
   },
   "ProjectCategoriesPageEmpty": {
-    "description": "Создайте новую категорию проекта, чтобы лучше организовать ваши проекты."
+    "description": "Создайте новую категорию проекта, чтобы лучше организовать ваши проекты.",
+    "heading": "Нет категорий проектов"
+  },
+  "TaskCategoriesPage": {
+    "heading": "Категории задач"
+  },
+  "TaskCategoriesPageEmpty": {
+    "heading": "Нет категорий задач",
+    "description": "Создайте новую категорию задачи, чтобы лучше организовать ваши задачи."
+  },
+  "TaskCategoriesPageLoading": {
+    "title": "Все категории задач"
   }
 }

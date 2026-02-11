@@ -38,7 +38,12 @@ export const AppNavigation = () => {
         {t("projects")}
       </NavigationButton>
 
-      <NavigationButton href="/tasks" isActive={pathname.startsWith("/tasks")}>
+      <NavigationButton
+        href="/tasks"
+        isActive={
+          pathname.startsWith("/tasks") || pathname === "/task-categories"
+        }
+      >
         <CalendarCheck2 size={18} strokeWidth={1.5} absoluteStrokeWidth />
         {t("tasks")}
       </NavigationButton>

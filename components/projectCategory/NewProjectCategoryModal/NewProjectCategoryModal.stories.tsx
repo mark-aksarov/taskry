@@ -8,7 +8,7 @@ import { ProjectCategoryFormSkeleton } from "../ProjectCategoryFormSkeleton";
 import { Default as NewProjectCategoryFormStory } from "../NewProjectCategoryForm/NewProjectCategoryForm.stories";
 
 const meta = {
-  title: "Components/projects/NewProjectCategoryModal",
+  title: "Components/project-categories/NewProjectCategoryModal",
   component: NewProjectCategoryModal,
   tags: ["autodocs"],
   decorators: [
