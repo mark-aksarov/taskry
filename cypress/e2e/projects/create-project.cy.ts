@@ -66,9 +66,9 @@ describe("Project creation", () => {
 
     cy.get('button[type="submit"]').click();
 
-    cy.contains(/title is required/i).should("exist");
-    cy.contains(/deadline is required/i).should("exist");
-    cy.contains(/status is required/i).should("exist");
+    cy.contains(/title is required/i);
+    cy.contains(/deadline is required/i);
+    cy.contains(/status is required/i);
   });
 
   it("creates a project when optional fields are empty", () => {

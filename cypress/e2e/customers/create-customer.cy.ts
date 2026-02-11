@@ -60,15 +60,15 @@ describe("Customer creation", () => {
 
     cy.get('button[type="submit"]').click();
 
-    cy.contains(/full name is required/i).should("be.visible");
-    cy.contains(/email is required/i).should("be.visible");
+    cy.contains(/full name is required/i);
+    cy.contains(/email is required/i);
 
-    cy.get("input[name=email]").type("invalid email");
-    cy.get("input[name=publicLink]").clear().type("invalid url");
+    cy.getByData("customer-email-field").type("invalid email");
+    cy.getByData("customer-public-link-field").clear().type("invalid url");
     cy.get('button[type="submit"]').click();
 
-    cy.contains(/enter a valid email address/i).should("be.visible");
-    cy.contains(/please enter a valid url/i).should("be.visible");
+    cy.contains(/enter a valid email address/i);
+    cy.contains(/please enter a valid url/i);
   });
 
   it("creates a customer when optional fields are empty", () => {

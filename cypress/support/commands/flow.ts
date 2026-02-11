@@ -1,5 +1,25 @@
 Cypress.Commands.add(
-  "fillUserForm",
+  "fillNewUserForm",
+  (data: { fullName?: string; email?: string; password?: string }) => {
+    // Text fields (field name : value)
+    const fields = {
+      "user-full-name-field": data.fullName,
+      "user-email-field": data.email,
+      "user-password-field": data.password,
+    };
+
+    // We clear each field and print only if there is text.
+    Object.entries(fields).forEach(([selector, value]) => {
+      cy.getByData(selector).clear();
+      if (value) {
+        cy.getByData(selector).type(value);
+      }
+    });
+  },
+);
+
+Cypress.Commands.add(
+  "fillEditUserForm",
   (data: {
     fullName?: string;
     bio?: string;

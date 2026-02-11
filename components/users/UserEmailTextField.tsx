@@ -12,6 +12,7 @@ export function UserEmailTextField({ defaultValue }: UserEmailTextFieldProps) {
 
   return (
     <TextField
+      data-test="user-email-field"
       name="email"
       label={t("label")}
       placeholder={t("placeholder")}

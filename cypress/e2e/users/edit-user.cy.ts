@@ -36,7 +36,7 @@ describe("User editing", () => {
     cy.getByData("user-item-action-menu-trigger", "user-1").click();
     cy.getMenuItem("edit").click();
 
-    cy.fillUserForm({
+    cy.fillEditUserForm({
       fullName: "Updated User Full Name",
       bio: "Updated User Bio",
       birthdate: { day: "01", month: "02", year: "1999" },
@@ -84,7 +84,7 @@ describe("User editing", () => {
     cy.getByData("user-item-action-menu-trigger", "user-1").click();
     cy.getMenuItem("edit").click();
 
-    cy.fillUserForm({
+    cy.fillEditUserForm({
       fullName: "Updated User Full Name",
       positionKey: "",
     });

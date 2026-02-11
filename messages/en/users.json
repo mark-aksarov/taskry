@@ -95,7 +95,7 @@
     },
 
     "validation": {
-      "required": "Please enter your password.",
+      "required": "Password is required",
       "tooShort": "The password is too short. It must contain at least {minLength} characters."
     }
   },
