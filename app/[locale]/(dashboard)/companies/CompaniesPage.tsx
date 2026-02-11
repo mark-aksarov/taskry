@@ -11,18 +11,18 @@ import { ViewModeProvider } from "@/components/common/ViewMode";
 import { PageContainer } from "@/components/common/PageContainer";
 import { SelectionProvider } from "@/components/common/SelectionContext";
 
-interface TaskCategoriesPageProps {
-  taskCategoriesContainer: React.ReactNode;
-  taskCategoryToolbarCreateNewButton: React.ReactNode;
-  taskCategoryToolbarActionsMenuTrigger: React.ReactNode;
+interface CompaniesPageProps {
+  companiesContainer: React.ReactNode;
+  companyToolbarCreateNewButton: React.ReactNode;
+  companyToolbarActionsMenuTrigger: React.ReactNode;
 }
 
-export function TaskCategoriesPage({
-  taskCategoriesContainer,
-  taskCategoryToolbarCreateNewButton,
-  taskCategoryToolbarActionsMenuTrigger,
-}: TaskCategoriesPageProps) {
-  const t = useTranslations("app.TaskCategoriesPage");
+export function CompaniesPage({
+  companiesContainer,
+  companyToolbarCreateNewButton,
+  companyToolbarActionsMenuTrigger,
+}: CompaniesPageProps) {
+  const t = useTranslations("app.CompaniesPage");
 
   return (
     <PageContainer>
@@ -30,22 +30,20 @@ export function TaskCategoriesPage({
         <ViewModeProvider>
           <SelectionProvider>
             <ToolbarDesktop>
-              {taskCategoryToolbarActionsMenuTrigger}
-              {taskCategoryToolbarCreateNewButton}
+              {companyToolbarActionsMenuTrigger}
+              {companyToolbarCreateNewButton}
             </ToolbarDesktop>
 
             <ToolbarMobileTop>
               <ToolbarMobileHeading>{t("heading")}</ToolbarMobileHeading>
-              {taskCategoryToolbarActionsMenuTrigger}
+              {companyToolbarActionsMenuTrigger}
             </ToolbarMobileTop>
 
             <ToolbarMobileBottom>
-              <div className="ml-auto">
-                {taskCategoryToolbarCreateNewButton}
-              </div>
+              <div className="ml-auto">{companyToolbarCreateNewButton}</div>
             </ToolbarMobileBottom>
 
-            {taskCategoriesContainer}
+            {companiesContainer}
           </SelectionProvider>
         </ViewModeProvider>
       </PageGrid>

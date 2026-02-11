@@ -7,6 +7,15 @@ import { AccessDeniedError } from "../utils/error";
 import { requireSession } from "../utils/requireSession";
 import { CompanySummaryDTO, CreateCompanyInputDTO } from "./company.dto";
 
+export const getCompanyCount = cache(async () => {
+  // Authorization
+  const {
+    user: { workspaceId },
+  } = await requireSession();
+
+  return prisma.company.count({ where: { workspaceId } });
+});
+
 export const getCompanySummaries = cache(
   async (): Promise<CompanySummaryDTO[]> => {
     // Authorization

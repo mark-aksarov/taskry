@@ -40,7 +40,7 @@ export const Default = {
     ),
     projectCategoryToolbarCreateNewButton:
       projectCategoryToolbarCreateNewButton,
-    projectToolbarActionsMenuTrigger: (
+    projectCategoryToolbarActionsMenuTrigger: (
       <ProjectCategoryToolbarActionsMenuTrigger
         {...ProjectCategoryToolbarActionsMenuTriggerStory.args}
       />

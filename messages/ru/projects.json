@@ -3,146 +3,115 @@
     "updateError": "Произошла ошибка на сервере. Не удалось обновить проект.",
     "submitButtonLabel": "Обновить проект"
   },
-
   "NewProjectForm": {
     "creationError": "Произошла ошибка на сервере. Не удалось создать проект.",
     "submitButtonLabel": "Создать проект"
   },
-
   "ProjectDetailCard": {
     "title": "Информация о проекте"
   },
-
   "ProjectDetailActions": {
     "delete": "Удалить проект",
     "edit": "Редактировать проект",
     "comments": "Комментарии"
   },
-
   "TotalProjectsCard": {
     "text": "Всего проектов"
   },
-
   "ProjectToolbarSortingMenuTrigger": {
     "byTitle": "По названию",
     "byDeadline": "По сроку",
     "byStatus": "По статусу",
     "byCategory": "По категории"
   },
-
   "NewProjectModal": {
     "title": "Новый проект"
   },
-
   "EditProjectModal": {
     "title": "Изменить проект"
   },
-
   "ProjectToolbarFiltersModalTrigger": {
     "title": "Фильтры проектов"
   },
-
   "ProjectToolbarActionsMenuTrigger": {
     "dialogHeading": "Действия",
     "delete": "Удалить",
     "pending": "Отметить как «В ожидании»",
     "active": "Отметить как «Активно»",
     "completed": "Отметить как «Завершено»",
-
     "error": {
       "updateStatusError": "Произошла ошибка на сервере. Не удалось изменить статусы проектов."
     }
   },
-
   "ProjectToolbarManageMenuTrigger": {
     "categories": "Категории"
   },
-
   "ProjectTitleTextField": {
     "label": "Заголовок",
     "placeholder": "Введите заголовок",
-
     "validation": {
       "required": "«Заголовок» обязателен для заполнения"
     }
   },
-
   "ProjectDescriptionTextField": {
     "label": "Описание",
     "placeholder": "Введите описание"
   },
-
   "ProjectDeadlineDatePicker": {
     "label": "Срок выполнения",
-
     "validation": {
       "required": "Укажите срок выполнения"
     }
   },
-
   "ProjectStatusSelect": {
     "label": "Статус",
     "placeholder": "Выберите статус",
-
     "validation": {
       "required": "Требуется статус"
     }
   },
-
   "ProjectCategorySelect": {
     "label": "Категория",
     "noProjectCategory": "Нет категории"
   },
-
   "ProjectCustomerSelect": {
     "label": "Клиент",
     "noCustomer": "Нет клиента"
   },
-
   "ProjectFiltersFormNoActiveTasksSwitch": {
     "text": "Не имеет активных задач"
   },
-
   "ProjectFiltersFormDeadlineFromDatePicker": {
     "label": "Срок от"
   },
-
   "ProjectFiltersFormDeadlineToDatePicker": {
     "label": "Срок до"
   },
-
   "ProjectFiltersFormStatusCheckboxGroup": {
     "label": "Статус"
   },
-
   "ProjectFiltersFormCategoryCheckboxGroup": {
     "label": "Категория"
   },
-
   "ProjectFiltersFormCustomerCheckboxGroup": {
     "label": "Клиент"
   },
-
   "ProjectFiltersFormUserCheckboxGroup": {
     "label": "Создатель"
   },
-
   "ProjectToolbarCreateNewMenuTrigger": {
     "dialogHeading": "Создать новый",
     "label": "Создать новый",
-
     "items": {
       "project": "Проект",
       "category": "Категорию"
     }
   },
-
   "ProjectGridItem": {
     "noDeadline": "Без срока",
     "deadlineOn": "Срок до {date}",
     "progressAriaLabel": "Прогресс проекта"
   },
-
   "ProjectListItem": {
     "noDeadline": "Без срока",
     "deadlineOn": "Срок до {date}",
@@ -155,56 +124,46 @@
     "company": "Компания",
     "noCompany": "Нет компании"
   },
-
   "ProjectItemActionMenuTrigger": {
     "edit": "Изменить",
     "delete": "Удалить",
     "markPending": "Отметить как «В ожидании»",
     "markCompleted": "Отметить как «Готово»",
     "markActive": "Отметить как «Активно»",
-
     "error": {
       "updateStatusError": "Произошла ошибка на сервере. Не удалось изменить статус проекта."
     }
   },
-
   "DeleteProjectModal": {
     "heading": "Удалить проект",
     "text": "Вы уверены, что хотите удалить <strong>«{name}»</strong>? Все содержимое будет безвозвратно удалено. Связанные задачи также будут удалены.",
     "deleteButton": "Удалить",
     "cancelButton": "Отменить",
-
     "error": {
       "deleteError": "Произошла ошибка на сервере. Не удалось удалить проект."
     }
   },
-
   "DeleteProjectsModal": {
     "heading": "Удалить проекты",
     "text": "Вы уверены, что хотите удалить <strong>{count} выбранных проектов </strong>? Все содержимое будет безвозвратно удалено. Связанные задачи также будут удалены.",
     "deleteButton": "Удалить",
     "cancelButton": "Отменить",
-
     "error": {
       "deleteError": "Произошла ошибка на сервере. Не удалось удалить проекты."
     }
   },
-
   "ProjectStatus": {
     "pending": "В ожидании",
     "active": "Активный",
     "completed": "Завершён"
   },
-
   "ProjectCommentsModal": {
     "title": "Комментарии проекта"
   },
-
   "ProjectDetailBottomSheet": {
     "dialogHeading": "Детали проекта",
     "openInFullPage": "Открыть в полном окне"
   },
-
   "ProjectDetail": {
     "creator": "Создатель",
     "noCreator": "Нет создателя",
@@ -219,23 +178,22 @@
     "attachments": "Вложения",
     "status": "Статус"
   },
-
   "ProjectDetailHeaderContainer": {
     "noCategory": "Нет категории"
   },
-
   "ProjectDetailStatusMenuTrigger": {
     "dialogHeading": "Статус проекта",
-
     "items": {
       "pending": "В ожидании",
       "active": "Активен",
       "completed": "Завершен"
     }
   },
-
   "ProjectDetailModal": {
     "dialogHeading": "Детали проекта",
     "openInFullPage": "Открыть в полном окне"
+  },
+  "CustomerToolbarManageMenuTrigger": {
+    "companies": "Компании"
   }
 }

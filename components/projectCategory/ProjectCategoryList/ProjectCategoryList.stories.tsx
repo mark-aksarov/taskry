@@ -5,11 +5,11 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { ProjectCategoryItemActionMenuTrigger } from "../ProjectCategoryItemActionMenuTrigger";
 
 const mockedProjectCategories = [
-  { id: 6, name: "Web Development", workspaceId: 1 },
-  { id: 7, name: "Mobile Applications", workspaceId: 1 },
-  { id: 8, name: "Marketing", workspaceId: 1 },
-  { id: 9, name: "Design", workspaceId: 1 },
-  { id: 10, name: "Internal Systems", workspaceId: 1 },
+  { id: 6, name: "Web Development" },
+  { id: 7, name: "Mobile Applications" },
+  { id: 8, name: "Marketing" },
+  { id: 9, name: "Design" },
+  { id: 10, name: "Internal Systems" },
 ];
 
 const meta = {

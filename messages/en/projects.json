@@ -3,146 +3,115 @@
     "updateError": "A server error occurred. Failed to update project.",
     "submitButtonLabel": "Update Project"
   },
-
   "NewProjectForm": {
     "creationError": "A server error occurred. Failed to create project.",
     "submitButtonLabel": "Create Project"
   },
-
   "ProjectDetailCard": {
     "title": "Project Information"
   },
-
   "ProjectDetailActions": {
     "delete": "Delete project",
     "edit": "Edit project",
     "comments": "Comments"
   },
-
   "TotalProjectsCard": {
     "text": "Total Projects"
   },
-
   "ProjectToolbarSortingMenuTrigger": {
     "byTitle": "By Title",
     "byDeadline": "By Deadline",
     "byStatus": "By Status",
     "byCategory": "By Category"
   },
-
   "NewProjectModal": {
     "title": "New Project"
   },
-
   "EditProjectModal": {
     "title": "Edit Project"
   },
-
   "ProjectToolbarFiltersModalTrigger": {
     "title": "Project Filters"
   },
-
   "ProjectToolbarActionsMenuTrigger": {
     "dialogHeading": "Actions",
     "delete": "Delete",
     "pending": "Mark as Pending",
     "active": "Mark as Active",
     "completed": "Mark as Completed",
-
     "error": {
       "updateStatusError": "A server error occurred. Failed to change project statuses."
     }
   },
-
   "ProjectToolbarManageMenuTrigger": {
     "categories": "Categories"
   },
-
   "ProjectTitleTextField": {
     "label": "Title",
     "placeholder": "Enter title",
-
     "validation": {
       "required": "Title is required"
     }
   },
-
   "ProjectDescriptionTextField": {
     "label": "Description",
     "placeholder": "Enter description"
   },
-
   "ProjectDeadlineDatePicker": {
     "label": "Deadline",
-
     "validation": {
       "required": "Deadline is required"
     }
   },
-
   "ProjectStatusSelect": {
     "label": "Status",
     "placeholder": "Select status",
-
     "validation": {
       "required": "Status is required"
     }
   },
-
   "ProjectCategorySelect": {
     "label": "Category",
     "noProjectCategory": "No project category"
   },
-
   "ProjectCustomerSelect": {
     "label": "Customer",
     "noCustomer": "No customer"
   },
-
   "ProjectFiltersFormNoActiveTasksSwitch": {
     "text": "Has not active tasks"
   },
-
   "ProjectFiltersFormDeadlineFromDatePicker": {
     "label": "Deadline from"
   },
-
   "ProjectFiltersFormDeadlineToDatePicker": {
     "label": "Deadline to"
   },
-
   "ProjectFiltersFormStatusCheckboxGroup": {
     "label": "Status"
   },
-
   "ProjectFiltersFormCategoryCheckboxGroup": {
     "label": "Category"
   },
-
   "ProjectFiltersFormCustomerCheckboxGroup": {
     "label": "Customer"
   },
-
   "ProjectFiltersFormUserCheckboxGroup": {
     "label": "Creator"
   },
-
   "ProjectToolbarCreateNewMenuTrigger": {
     "dialogHeading": "Create New",
     "label": "Create New",
-
     "items": {
       "project": "Project",
       "category": "Category"
     }
   },
-
   "ProjectGridItem": {
     "noDeadline": "No deadline",
     "deadlineOn": "Deadline on {date}",
     "progressAriaLabel": "project progress"
   },
-
   "ProjectListItem": {
     "noDeadline": "No deadline",
     "deadlineOn": "Deadline on {date}",
@@ -155,56 +124,46 @@
     "company": "Company",
     "noCompany": "No company"
   },
-
   "ProjectItemActionMenuTrigger": {
     "edit": "Edit",
     "delete": "Delete",
     "markPending": "Mark as Pending",
     "markCompleted": "Mark as Completed",
     "markActive": "Mark as Active",
-
     "error": {
       "updateStatusError": "A server error occurred. Failed to change project status."
     }
   },
-
   "DeleteProjectModal": {
     "heading": "Delete Project",
     "text": "Are you sure you want to delete <strong>«{name}»</strong>? All contents will be permanently removed, and all related tasks will also be deleted.",
     "deleteButton": "Delete",
     "cancelButton": "Cancel",
-
     "error": {
       "deleteError": "A server error occurred. Failed to delete project."
     }
   },
-
   "DeleteProjectsModal": {
     "heading": "Delete Projects",
     "text": "Are you sure you want to delete <strong>{count} projects</strong>? All contents will be permanently removed, and all related tasks will also be deleted.",
     "deleteButton": "Delete",
     "cancelButton": "Cancel",
-
     "error": {
       "deleteError": "A server error occurred. Failed to delete project."
     }
   },
-
   "ProjectStatus": {
     "pending": "Pending",
     "active": "Active",
     "completed": "Completed"
   },
-
   "ProjectCommentsModal": {
     "title": "Project comments"
   },
-
   "ProjectDetailBottomSheet": {
     "dialogHeading": "Project Details",
     "openInFullPage": "Open in Full Page"
   },
-
   "ProjectDetail": {
     "creator": "Creator",
     "noCreator": "No creator",
@@ -219,23 +178,22 @@
     "attachments": "Attachments",
     "status": "Status"
   },
-
   "ProjectDetailHeaderContainer": {
     "noCategory": "No category"
   },
-
   "ProjectDetailStatusMenuTrigger": {
     "dialogHeading": "Project Status",
-
     "items": {
       "pending": "Pending",
       "active": "Active",
       "completed": "Completed"
     }
   },
-
   "ProjectDetailModal": {
     "dialogHeading": "Project Details",
     "openInFullPage": "Open in Full Page"
+  },
+  "CustomerToolbarManageMenuTrigger": {
+    "companies": "Companies"
   }
 }

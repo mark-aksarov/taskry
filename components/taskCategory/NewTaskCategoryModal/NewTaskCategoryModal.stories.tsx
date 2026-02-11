@@ -3,7 +3,6 @@ import { DialogTrigger } from "react-aria-components";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { NewTaskCategoryForm } from "../NewTaskCategoryForm";
 import { NewTaskCategoryModal } from "./NewTaskCategoryModal";
-import { TaskCategoryFormSkeleton } from "../TaskCategoryFormSkeleton";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { Default as NewTaskCategoryFormStory } from "../NewTaskCategoryForm/NewTaskCategoryForm.stories";
 
@@ -30,11 +29,5 @@ export const Default = {
     newTaskCategoryForm: (
       <NewTaskCategoryForm {...NewTaskCategoryFormStory.args} />
     ),
-  },
-} satisfies Story;
-
-export const Skeleton = {
-  args: {
-    newTaskCategoryForm: <TaskCategoryFormSkeleton />,
   },
 } satisfies Story;

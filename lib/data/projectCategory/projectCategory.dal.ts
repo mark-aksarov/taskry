@@ -11,6 +11,15 @@ import { auth } from "@/lib/auth";
 import { AccessDeniedError } from "../utils/error";
 import { requireSession } from "../utils/requireSession";
 
+export const getProjectCategoryCount = cache(async () => {
+  // Authorization
+  const {
+    user: { workspaceId },
+  } = await requireSession();
+
+  return prisma.projectCategory.count({ where: { workspaceId } });
+});
+
 export const getProjectCategorySummaries = cache(
   async (): Promise<ProjectCategorySummaryDTO[]> => {
     // Authorization

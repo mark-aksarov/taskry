@@ -10,19 +10,19 @@ import { Item } from "react-stately";
 import { useTranslations } from "next-intl";
 import { Blocks } from "lucide-react";
 
-export function ProjectToolbarManageMenuTrigger() {
-  const t = useTranslations("projects.ProjectToolbarManageMenuTrigger");
+export function TaskToolbarManageMenuTrigger() {
+  const t = useTranslations("tasks.TaskToolbarManageMenuTrigger");
 
   return (
     <ToolbarManageMenuTrigger
       renderButton={() => (
         <>
-          <ToolbarManageButtonMobile data-test="project-toolbar-manage-button-mobile" />
-          <ToolbarManageButtonDesktop data-test="project-toolbar-manage-button-desktop" />
+          <ToolbarManageButtonMobile data-test="task-toolbar-manage-button-mobile" />
+          <ToolbarManageButtonDesktop data-test="task-toolbar-manage-button-desktop" />
         </>
       )}
     >
-      <Item href="/project-categories">
+      <Item href="/task-categories">
         <Blocks size={16} strokeWidth={1.5} absoluteStrokeWidth />
         {t("categories")}
       </Item>

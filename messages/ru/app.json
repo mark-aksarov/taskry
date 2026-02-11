@@ -115,5 +115,15 @@
   },
   "TaskCategoriesPageLoading": {
     "title": "Все категории задач"
+  },
+  "CompaniesPage": {
+    "heading": "Компании"
+  },
+  "CompaniesPageLoading": {
+    "title": "Все компании"
+  },
+  "CompaniesPageEmpty": {
+    "description": "Создайте новую компанию, чтобы лучше организовать работу с клиентами.",
+    "heading": "Нет компаний"
   }
 }

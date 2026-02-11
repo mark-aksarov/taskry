@@ -5,18 +5,37 @@
     },
     "submitButtonLabel": "Создать компанию"
   },
-
   "NewCompanyModal": {
     "title": "Новая компания"
   },
-
   "CompanyNameTextField": {
     "label": "Название",
     "placeholder": "Введите название",
-
     "validation": {
       "required": "Требуется название",
       "tooLong": "Название слишком длинное"
     }
+  },
+  "companies": {
+    "CompanyListItem": {
+      "name": "Название"
+    },
+    "CompanyToolbarCreateNewButton": {
+      "label": "Создать новую"
+    }
+  },
+  "CompanyListItem": {
+    "name": "Название"
+  },
+  "CompanyToolbarActionsMenuTrigger": {
+    "dialogHeading": "Действия",
+    "delete": "Удалить"
+  },
+  "CompanyToolbarCreateNewButton": {
+    "label": "Создать новую"
+  },
+  "CompanyItemActionMenuTrigger": {
+    "edit": "Редактировать",
+    "delete": "Удалить"
   }
 }

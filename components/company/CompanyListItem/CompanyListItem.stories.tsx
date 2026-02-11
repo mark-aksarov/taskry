@@ -1,0 +1,28 @@
+import { Meta, StoryObj } from "@storybook/react";
+import { CompanyListItem } from "./CompanyListItem";
+import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { CompanyItemActionMenuTrigger } from "../CompanyItemActionMenuTrigger";
+
+const meta = {
+  title: "components/companies/CompanyListItem",
+  component: CompanyListItem,
+  tags: ["autodocs"],
+  decorators: [withThemedBackground],
+} satisfies Meta<typeof CompanyListItem>;
+
+export default meta;
+type Story = StoryObj<typeof CompanyListItem>;
+
+export const Default = {
+  args: {
+    id: 1,
+    name: "Project Manager",
+    menuTrigger: (
+      <CompanyItemActionMenuTrigger
+        guestMode={false}
+        companyId={1}
+        companyName="Project Manager"
+      />
+    ),
+  },
+} satisfies Story;

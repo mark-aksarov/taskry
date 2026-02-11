@@ -11,6 +11,7 @@ import { ViewModeProvider } from "@/components/common/ViewMode";
 import { PageContainer } from "@/components/common/PageContainer";
 import { ViewModeToggleButtonGroup } from "@/components/common/ViewMode";
 import { SelectionProvider } from "@/components/common/SelectionContext";
+import { TaskToolbarManageMenuTrigger } from "@/components/tasks/TaskToolbarManageMenuTrigger";
 import { TaskToolbarSortingMenuTrigger } from "@/components/tasks/TaskToolbarSortingMenuTrigger";
 
 interface TasksPageProps {
@@ -34,6 +35,7 @@ export function TasksPage({
         <ViewModeProvider>
           <SelectionProvider>
             <ToolbarDesktop>
+              <TaskToolbarManageMenuTrigger />
               <TaskToolbarSortingMenuTrigger />
               {taskToolbarFiltersModalTrigger}
               {taskToolbarActionsMenuTrigger}
@@ -43,6 +45,7 @@ export function TasksPage({
 
             <ToolbarMobileTop>
               <ToolbarMobileHeading>{t("heading")}</ToolbarMobileHeading>
+              <TaskToolbarManageMenuTrigger />
               <TaskToolbarSortingMenuTrigger />
               {taskToolbarFiltersModalTrigger}
               {taskToolbarActionsMenuTrigger}

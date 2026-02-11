@@ -1,20 +1,20 @@
 import { hasGuestRole } from "@/lib/utils/hasGuestRole";
 import { TaskCategoriesPage } from "./TaskCategoriesPage";
-import { getTaskCount } from "@/lib/data/task/task.dal";
+import { TaskCategoriesPageEmpty } from "./TaskCategoriesPageEmpty";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
+import { getTaskCategoryCount } from "@/lib/data/taskCategory/taskCategory.dal";
 import { createTaskCategory } from "@/lib/actions/taskCategory/createTaskCategory";
 import { NewTaskCategoryForm } from "@/components/taskCategory/NewTaskCategoryForm";
 import { TaskCategoriesContainer } from "@/components/taskCategory/TaskCategoriesContainer";
 import { TaskCategoryToolbarCreateNewButton } from "@/components/taskCategory/TaskCategoryToolbarCreateNewButton";
 import { TaskCategoryToolbarActionsMenuTrigger } from "@/components/taskCategory/TaskCategoryToolbarActionsMenuTrigger";
-import { TaskCategoriesPageEmpty } from "./TaskCategoriesPageEmpty";
 
 export default async function AppTaskCategoriesPage() {
   // Authorization
   await requireProtectedPage();
 
   // Get count
-  const taskCount = await getTaskCount();
+  const taskCategoryCount = await getTaskCategoryCount();
   const guestMode = await hasGuestRole();
 
   const taskCategoryToolbarCreateNewButton = (
@@ -26,7 +26,7 @@ export default async function AppTaskCategoriesPage() {
     />
   );
 
-  if (!taskCount) {
+  if (!taskCategoryCount) {
     return (
       <TaskCategoriesPageEmpty
         taskCategoryToolbarCreateNewButton={taskCategoryToolbarCreateNewButton}
@@ -38,7 +38,7 @@ export default async function AppTaskCategoriesPage() {
     <TaskCategoriesPage
       taskCategoriesContainer={<TaskCategoriesContainer />}
       taskCategoryToolbarCreateNewButton={taskCategoryToolbarCreateNewButton}
-      taskToolbarActionsMenuTrigger={
+      taskCategoryToolbarActionsMenuTrigger={
         <TaskCategoryToolbarActionsMenuTrigger guestMode={guestMode} />
       }
     />

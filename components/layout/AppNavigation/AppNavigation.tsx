@@ -55,7 +55,9 @@ export const AppNavigation = () => {
 
       <NavigationButton
         href="/customers"
-        isActive={pathname.startsWith("/customers")}
+        isActive={
+          pathname.startsWith("/customers") || pathname === "/companies"
+        }
       >
         <Contact size={18} strokeWidth={1.5} absoluteStrokeWidth />
         {t("customers")}

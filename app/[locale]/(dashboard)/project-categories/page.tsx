@@ -1,20 +1,20 @@
 import { hasGuestRole } from "@/lib/utils/hasGuestRole";
 import { ProjectCategoriesPage } from "./ProjectCategoriesPage";
-import { getProjectCount } from "@/lib/data/project/project.dal";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
+import { ProjectCategoriesPageEmpty } from "./ProjectCategoriesPageEmpty";
+import { getProjectCategoryCount } from "@/lib/data/projectCategory/projectCategory.dal";
 import { createProjectCategory } from "@/lib/actions/projectCategory/createProjectCategory";
 import { NewProjectCategoryForm } from "@/components/projectCategory/NewProjectCategoryForm";
 import { ProjectCategoriesContainer } from "@/components/projectCategory/ProjectCategoriesContainer";
 import { ProjectCategoryToolbarCreateNewButton } from "@/components/projectCategory/ProjectCategoryToolbarCreateNewButton";
 import { ProjectCategoryToolbarActionsMenuTrigger } from "@/components/projectCategory/ProjectCategoryToolbarActionsMenuTrigger";
-import { ProjectCategoriesPageEmpty } from "./ProjectCategoriesPageEmpty";
 
 export default async function AppProjectCategoriesPage() {
   // Authorization
   await requireProtectedPage();
 
   // Get count
-  const projectCount = await getProjectCount();
+  const projectCategoryCount = await getProjectCategoryCount();
   const guestMode = await hasGuestRole();
 
   const projectCategoryToolbarCreateNewButton = (
@@ -26,7 +26,7 @@ export default async function AppProjectCategoriesPage() {
     />
   );
 
-  if (!projectCount) {
+  if (!projectCategoryCount) {
     return (
       <ProjectCategoriesPageEmpty
         projectCategoryToolbarCreateNewButton={
@@ -42,7 +42,7 @@ export default async function AppProjectCategoriesPage() {
       projectCategoryToolbarCreateNewButton={
         projectCategoryToolbarCreateNewButton
       }
-      projectToolbarActionsMenuTrigger={
+      projectCategoryToolbarActionsMenuTrigger={
         <ProjectCategoryToolbarActionsMenuTrigger guestMode={guestMode} />
       }
     />

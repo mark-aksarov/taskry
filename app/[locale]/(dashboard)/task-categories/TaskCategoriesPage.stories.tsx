@@ -39,7 +39,7 @@ export const Default = {
       <TaskCategoryList {...TaskCategoryListStory.args} />
     ),
     taskCategoryToolbarCreateNewButton: taskCategoryToolbarCreateNewButton,
-    taskToolbarActionsMenuTrigger: (
+    taskCategoryToolbarActionsMenuTrigger: (
       <TaskCategoryToolbarActionsMenuTrigger
         {...TaskCategoryToolbarActionsMenuTriggerStory.args}
       />

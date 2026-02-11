@@ -4,7 +4,6 @@ import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { NewProjectCategoryForm } from "../NewProjectCategoryForm";
 import { NewProjectCategoryModal } from "./NewProjectCategoryModal";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { ProjectCategoryFormSkeleton } from "../ProjectCategoryFormSkeleton";
 import { Default as NewProjectCategoryFormStory } from "../NewProjectCategoryForm/NewProjectCategoryForm.stories";
 
 const meta = {
@@ -30,11 +29,5 @@ export const Default = {
     newProjectCategoryForm: (
       <NewProjectCategoryForm {...NewProjectCategoryFormStory.args} />
     ),
-  },
-} satisfies Story;
-
-export const Skeleton = {
-  args: {
-    newProjectCategoryForm: <ProjectCategoryFormSkeleton />,
   },
 } satisfies Story;

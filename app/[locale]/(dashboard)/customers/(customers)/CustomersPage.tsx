@@ -11,6 +11,7 @@ import { ViewModeProvider } from "@/components/common/ViewMode";
 import { PageContainer } from "@/components/common/PageContainer";
 import { ViewModeToggleButtonGroup } from "@/components/common/ViewMode";
 import { SelectionProvider } from "@/components/common/SelectionContext";
+import { CustomerToolbarManageMenuTrigger } from "@/components/customer/CustomerToolbarManageMenuTrigger";
 import { CustomerToolbarSortingMenuTrigger } from "@/components/customer/CustomerToolbarSortingMenuTrigger";
 
 interface CustomersPageProps {
@@ -34,6 +35,7 @@ export function CustomersPage({
         <ViewModeProvider>
           <SelectionProvider>
             <ToolbarDesktop>
+              <CustomerToolbarManageMenuTrigger />
               <CustomerToolbarSortingMenuTrigger />
               {customerToolbarFiltersModalTrigger}
               {customerToolbarActionsMenuTrigger}
@@ -43,6 +45,7 @@ export function CustomersPage({
 
             <ToolbarMobileTop>
               <ToolbarMobileHeading>{t("heading")}</ToolbarMobileHeading>
+              <CustomerToolbarManageMenuTrigger />
               <CustomerToolbarSortingMenuTrigger />
               {customerToolbarFiltersModalTrigger}
               {customerToolbarActionsMenuTrigger}

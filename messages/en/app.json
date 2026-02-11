@@ -115,5 +115,15 @@
   },
   "TaskCategoriesPageLoading": {
     "title": "All task Categories"
+  },
+  "CompaniesPage": {
+    "heading": "Companies"
+  },
+  "CompaniesPageLoading": {
+    "title": "All companies"
+  },
+  "CompaniesPageEmpty": {
+    "description": "Create a new company to better organize your work with customers.",
+    "heading": "No companies"
   }
 }

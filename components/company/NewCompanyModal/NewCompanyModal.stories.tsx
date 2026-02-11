@@ -3,7 +3,6 @@ import { NewCompanyForm } from "../NewCompanyForm";
 import { NewCompanyModal } from "./NewCompanyModal";
 import { DialogTrigger } from "react-aria-components";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { CompanyFormSkeleton } from "../CompanyFormSkeleton";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { Default as NewCompanyFormStory } from "../NewCompanyForm/NewCompanyForm.stories";
 
@@ -28,11 +27,5 @@ type Story = StoryObj<typeof meta>;
 export const Default = {
   args: {
     newCompanyForm: <NewCompanyForm {...NewCompanyFormStory.args} />,
-  },
-} satisfies Story;
-
-export const Skeleton = {
-  args: {
-    newCompanyForm: <CompanyFormSkeleton />,
   },
 } satisfies Story;

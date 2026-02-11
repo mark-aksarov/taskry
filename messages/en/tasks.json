@@ -5,44 +5,36 @@
     },
     "submitButtonLabel": "Update Task"
   },
-
   "NewTaskForm": {
     "error": {
       "creationError": "A server error occurred. Failed to create task."
     },
     "submitButtonLabel": "Create Task"
   },
-
   "TaskDetailCard": {
     "title": "Task Information"
   },
-
   "TaskDetailActions": {
     "delete": "Delete task",
     "edit": "Edit task",
     "comments": "Comments"
   },
-
   "AssignedTasksSectionHeading": {
     "text": "Assigned Tasks"
   },
-
   "AssignedTasksEmptyCard": {
     "heading": "No tasks yet",
     "description": "Create a new task to keep track of your work",
     "button": "New Task"
   },
-
   "TotalTasksCard": {
     "text": "Total Tasks"
   },
-
   "TaskGridItem": {
     "noDeadline": "No deadline",
     "deadlineOn": "Deadline on {date}",
     "progressAriaLabel": "task progress"
   },
-
   "TaskListItem": {
     "noDeadline": "No deadline",
     "deadlineOn": "Deadline on {date}",
@@ -52,52 +44,43 @@
     "noCategory": "No category",
     "project": "Project"
   },
-
   "TaskToolbarSortingMenuTrigger": {
     "byTitle": "By Title",
     "byDeadline": "By Deadline",
     "byStatus": "By Status",
     "byCategory": "By Category"
   },
-
   "TaskToolbarFiltersModalTrigger": {
     "title": "Task Filters"
   },
-
   "TaskToolbarActionsMenuTrigger": {
     "dialogHeading": "Actions",
     "delete": "Delete",
     "pending": "Mark as Pending",
     "active": "Mark as Active",
     "completed": "Mark as Completed",
-
     "error": {
       "updateStatusError": "A server error occurred. Failed to change task statuses."
     }
   },
-
   "TaskItemActionMenuTrigger": {
     "edit": "Edit",
     "delete": "Delete",
     "markPending": "Mark as Pending",
     "markCompleted": "Mark as Completed",
     "markActive": "Mark as Active",
-
     "error": {
       "updateStatusError": "A server error occurred. Failed to change task status."
     }
   },
-
   "TaskToolbarCreateNewMenuTrigger": {
     "dialogHeading": "Create New",
     "label": "Create New",
-
     "items": {
       "task": "Task",
       "category": "Category"
     }
   },
-
   "DeleteTaskModal": {
     "heading": "Delete Task",
     "text": "Are you sure you want to delete <strong>«{name}»</strong>? All contents will be permanently removed.",
@@ -105,7 +88,6 @@
     "cancelButton": "Cancel",
     "deleteError": "A server error occurred. Failed to delete task."
   },
-
   "DeleteTasksModal": {
     "heading": "Delete Tasks",
     "text": "Are you sure you want to delete <strong>{count} tasks</strong>? All contents will be permanently removed.",
@@ -113,111 +95,86 @@
     "cancelButton": "Cancel",
     "deleteError": "A server error occurred. Failed to delete tasks."
   },
-
   "NewTaskModal": {
     "title": "New Task"
   },
-
   "EditTaskModal": {
     "title": "Edit Task"
   },
-
   "TaskCommentsModal": {
     "title": "Task Comments"
   },
-
   "TaskDetailBottomSheet": {
     "title": "Task Details",
     "openInFullPage": "Open in Full Page"
   },
-
   "NewTaskModalTrigger": {
     "label": "New Task"
   },
-
   "TaskDetailModal": {
     "dialogHeading": "Task Details",
     "openInFullPage": "Open in Full Page"
   },
-
   "TaskFiltersFormOnlyMyTaskSwitch": {
     "text": "Show only my tasks"
   },
-
   "TaskFiltersFormDeadlineFromDatePicker": {
     "label": "Deadline from"
   },
-
   "TaskFiltersFormDeadlineToDatePicker": {
     "label": "Deadline to"
   },
-
   "TaskFiltersFormStatusCheckboxGroup": {
     "label": "Status"
   },
-
   "TaskFiltersFormCategoryCheckboxGroup": {
     "label": "Category"
   },
-
   "TaskFiltersFormProjectCheckboxGroup": {
     "label": "Project"
   },
-
   "TaskFiltersFormAssigneeCheckboxGroup": {
     "label": "Assignee"
   },
-
   "TaskTitleTextField": {
     "label": "Title",
     "placeholder": "Enter title",
-
     "validation": {
       "required": "Title is required"
     }
   },
-
   "TaskDescriptionTextField": {
     "label": "Description",
     "placeholder": "Enter description"
   },
-
   "TaskDeadlineDatePicker": {
     "label": "Deadline",
-
     "validation": {
       "required": "Deadline is required"
     }
   },
-
   "TaskStatusSelect": {
     "label": "Status",
     "placeholder": "Select status",
-
     "validation": {
       "required": "Status is required"
     }
   },
-
   "TaskCategorySelect": {
     "label": "Category",
     "noTaskCategory": "No task category"
   },
-
   "TaskProjectSelect": {
     "label": "Project",
     "placeholder": "Select project",
-
     "validation": {
       "required": "Project is required"
     }
   },
-
   "TaskAssigneeSelect": {
     "label": "Assignee",
     "noAssignee": "No assignee"
   },
-
   "TaskDetail": {
     "noDeadline": "No deadline",
     "deadline": "Deadline",
@@ -234,24 +191,23 @@
     "status": "Status",
     "subtasks": "Subtasks"
   },
-
   "TaskDetailHeaderContainer": {
     "noCategory": "No category"
   },
-
   "TaskDetailStatusMenuTrigger": {
     "dialogHeading": "Task Status",
-
     "items": {
       "pending": "Pending",
       "active": "Active",
       "completed": "Completed"
     }
   },
-
   "TaskStatus": {
     "pending": "Pending",
     "active": "Active",
     "completed": "Completed"
+  },
+  "TaskToolbarManageMenuTrigger": {
+    "categories": "Categories"
   }
 }

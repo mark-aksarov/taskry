@@ -5,44 +5,36 @@
     },
     "submitButtonLabel": "Обновить задачу"
   },
-
   "NewTaskForm": {
     "error": {
       "creationError": "Произошла ошибка на сервере. Не удалось создать задачу."
     },
     "submitButtonLabel": "Создать задачу"
   },
-
   "TaskDetailCard": {
     "title": "Информация о задаче"
   },
-
   "TaskDetailActions": {
     "delete": "Удалить задачу",
     "edit": "Редактировать задачу",
     "comments": "Комментарии"
   },
-
   "AssignedTasksSectionHeading": {
     "text": "Назначенные задачи"
   },
-
   "AssignedTasksEmptyCard": {
     "heading": "Задач пока нет",
     "description": "Создайте новую задачу, чтобы отслеживать свою работу",
     "button": "Новая задача"
   },
-
   "TotalTasksCard": {
     "text": "Всего задач"
   },
-
   "TaskGridItem": {
     "noDeadline": "Без срока",
     "deadlineOn": "Срок до {date}",
     "progressAriaLabel": "Прогресс проекта"
   },
-
   "TaskListItem": {
     "noDeadline": "Без срока",
     "deadlineOn": "Срок до {date}",
@@ -52,52 +44,43 @@
     "noCategory": "Без категории",
     "project": "Проект"
   },
-
   "TaskToolbarSortingMenuTrigger": {
     "byTitle": "По названию",
     "byDeadline": "По сроку",
     "byStatus": "По статусу",
     "byCategory": "По категории"
   },
-
   "TaskToolbarFiltersModalTrigger": {
     "title": "Фильтры задач"
   },
-
   "TaskToolbarActionsMenuTrigger": {
     "dialogHeading": "Действия",
     "delete": "Удалить",
     "pending": "Отметить как «В ожидании»",
     "active": "Отметить как «Активно»",
     "completed": "Отметить как «Завершено»",
-
     "error": {
       "updateStatusError": "Произошла ошибка на сервере. Не удалось изменить статусы задач."
     }
   },
-
   "TaskItemActionMenuTrigger": {
     "edit": "Изменить",
     "delete": "Удалить",
     "markPending": "Пометить как ожидающую",
     "markCompleted": "Пометить как выполненную",
     "markActive": "Пометить как активную",
-
     "error": {
       "updateStatusError": "Произошла ошибка на сервере. Не удалось изменить статус задачи."
     }
   },
-
   "TaskToolbarCreateNewMenuTrigger": {
     "dialogHeading": "Создать новую",
     "label": "Создать новую",
-
     "items": {
       "task": "Задачу",
       "category": "Категорию"
     }
   },
-
   "DeleteTaskModal": {
     "heading": "Удалить задачу",
     "text": "Вы уверены, что хотите удалить <strong>«{name}»</strong>? Всё содержимое будет безвозвратно удалено.",
@@ -105,7 +88,6 @@
     "cancelButton": "Отмена",
     "deleteError": "Произошла ошибка на сервере. Не удалось удалить задачу."
   },
-
   "DeleteTasksModal": {
     "heading": "Удалить задачи",
     "text": "Вы уверены, что хотите удалить <strong>{count} выбранных задач</strong>? Всё содержимое будет безвозвратно удалено.",
@@ -113,111 +95,86 @@
     "cancelButton": "Отмена",
     "deleteError": "Произошла ошибка на сервере. Не удалось удалить задачи."
   },
-
   "NewTaskModal": {
     "title": "Новая задача"
   },
-
   "EditTaskModal": {
     "title": "Редактировать задачу"
   },
-
   "TaskCommentsModal": {
     "title": "Комментарии к задаче"
   },
-
   "TaskDetailBottomSheet": {
     "title": "Детали задачи",
     "openInFullPage": "Открыть на полной странице"
   },
-
   "NewTaskModalTrigger": {
     "label": "Новая задача"
   },
-
   "TaskDetailModal": {
     "dialogHeading": "Детали задачи",
     "openInFullPage": "Открыть на полной странице"
   },
-
   "TaskFiltersFormOnlyMyTaskSwitch": {
     "text": "Только мои задачи"
   },
-
   "TaskFiltersFormDeadlineFromDatePicker": {
     "label": "Срок от"
   },
-
   "TaskFiltersFormDeadlineToDatePicker": {
     "label": "Срок до"
   },
-
   "TaskFiltersFormStatusCheckboxGroup": {
     "label": "Статус"
   },
-
   "TaskFiltersFormCategoryCheckboxGroup": {
     "label": "Категория"
   },
-
   "TaskFiltersFormProjectCheckboxGroup": {
     "label": "Проект"
   },
-
   "TaskFiltersFormAssigneeCheckboxGroup": {
     "label": "Исполнитель"
   },
-
   "TaskTitleTextField": {
     "label": "Заголовок",
     "placeholder": "Введите заголовок",
-
     "validation": {
       "required": "«Заголовок» обязателен для заполнения"
     }
   },
-
   "TaskDescriptionTextField": {
     "label": "Описание",
     "placeholder": "Введите описание"
   },
-
   "TaskDeadlineDatePicker": {
     "label": "Срок выполнения",
-
     "validation": {
       "required": "Укажите срок выполнения"
     }
   },
-
   "TaskStatusSelect": {
     "label": "Статус",
     "placeholder": "Выберите статус",
-
     "validation": {
       "required": "Требуется статус"
     }
   },
-
   "TaskCategorySelect": {
     "label": "Категория",
     "noTaskCategory": "Нет категории"
   },
-
   "TaskProjectSelect": {
     "label": "Проект",
     "placeholder": "Выберите проект",
-
     "validation": {
       "required": "Требуется проект"
     }
   },
-
   "TaskAssigneeSelect": {
     "label": "Исполнитель",
     "noAssignee": "Нет исполнителя"
   },
-
   "TaskDetail": {
     "noDeadline": "Без срока",
     "deadline": "Срок",
@@ -233,24 +190,23 @@
     "status": "Статус",
     "subtasks": "Подзадачи"
   },
-
   "TaskDetailHeaderContainer": {
     "noCategory": "Нет категории"
   },
-
   "TaskDetailStatusMenuTrigger": {
     "dialogHeading": "Статус задачи",
-
     "items": {
       "pending": "В ожидании",
       "active": "Активная",
       "completed": "Завершённая"
     }
   },
-
   "TaskStatus": {
     "pending": "Ожидает",
     "active": "Активна",
     "completed": "Завершена"
+  },
+  "TaskToolbarManageMenuTrigger": {
+    "categories": "Категории"
   }
 }

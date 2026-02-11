@@ -5,18 +5,34 @@
     },
     "submitButtonLabel": "Create company"
   },
-
   "NewCompanyModal": {
     "title": "New company"
   },
-
   "CompanyNameTextField": {
     "label": "Name",
     "placeholder": "Typing name",
-
     "validation": {
       "required": "Name is required",
       "tooLong": "Name is too long"
     }
+  },
+  "CompanyListItem": {
+    "name": "Name"
+  },
+  "CompanyToolbarActionsMenuTrigger": {
+    "dialogHeading": "Actions",
+    "delete": "Delete"
+  },
+  "companies": {
+    "CompanyToolbarCreateNewButton": {
+      "label": "Create new"
+    }
+  },
+  "CompanyToolbarCreateNewButton": {
+    "label": "Create new"
+  },
+  "CompanyItemActionMenuTrigger": {
+    "edit": "Edit",
+    "delete": "Delete"
   }
 }
