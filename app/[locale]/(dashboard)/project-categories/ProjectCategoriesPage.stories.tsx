@@ -1,9 +1,11 @@
 import { fn, mocked } from "storybook/test";
+import ProjectsPageLoading from "./loading";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { usePathname, useRouter } from "next/navigation";
 import { PageDecorator } from "@/.storybook/PageDecorator";
 import { ProjectCategoriesPage } from "./ProjectCategoriesPage";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { ProjectCategoriesPageEmpty } from "./ProjectCategoriesPageEmpty";
 import { ProjectCategoryList } from "@/components/projectCategory/ProjectCategoryList";
 import { ProjectCategoryToolbarCreateNewButton } from "@/components/projectCategory/ProjectCategoryToolbarCreateNewButton";
 import { ProjectCategoryToolbarActionsMenuTrigger } from "@/components/projectCategory/ProjectCategoryToolbarActionsMenuTrigger";
@@ -44,4 +46,20 @@ export const Default = {
       />
     ),
   },
+} satisfies Story;
+
+export const Loading = {
+  args: { ...Default.args },
+  render: () => <ProjectsPageLoading />,
+} satisfies Story;
+
+export const WithNoProjectCategories = {
+  args: { ...Default.args },
+  render: () => (
+    <ProjectCategoriesPageEmpty
+      projectCategoryToolbarCreateNewButton={
+        projectCategoryToolbarCreateNewButton
+      }
+    />
+  ),
 } satisfies Story;

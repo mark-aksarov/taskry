@@ -2,127 +2,108 @@
   "ProjectCategoriesPage": {
     "heading": "Project Categories"
   },
-
   "CustomerDetailPage": {
     "heading": "Customer Information"
   },
-
   "DashboardErrorPage": {
     "heading": "Something went wrong",
     "description": "We encountered an unexpected error. Please try refreshing the page or contact support if the issue persists."
   },
-
   "CheckEmailPage": {
     "heading": "Check your email",
     "subtitle": "We have sent a password reset link to your email. If this email exists in our system, check your email for the reset link",
     "backButtonLabel": "Back to reset password"
   },
-
   "ForgetPasswordPage": {
     "heading": "Forget Password",
     "subtitle": "Enter your email address to receive a link to reset your password."
   },
-
   "ResetPasswordPage": {
     "heading": "Reset Password",
     "subtitle": "Provide a new password for your account."
   },
-
   "ResetPasswordNotFound": {
     "heading": "Invalid Link",
     "body": "The password reset link has expired or is invalid. Please request a password reset again.",
     "signInButtonLabel": "Sign in with email"
   },
-
   "SignInPage": {
     "heading": "Sign In",
     "subtitle": "Please sign in to your account.",
     "resetPasswordSubtitle": "Your password has been reset successfully. You can now sign in with your new password."
   },
-
   "SignUpPage": {
     "heading": "Sign Up",
     "subtitle": "Please sign in to your account."
   },
-
   "VerifyEmailPage": {
     "heading": "Verify Email",
     "subtitle": "We've sent a verification email to {email}. Click the link in the email to activate your account and continue using the service. If you don’t see the message, check your spam folder or resend it."
   },
-
   "DashboardPage": {
     "heading": "Dashboard"
   },
-
   "ProjectsPage": {
     "heading": "All Projects"
   },
-
   "TasksPage": {
     "heading": "All Tasks"
   },
-
   "CustomersPage": {
     "heading": "All Customers"
   },
-
   "CustomersPageEmpty": {
     "heading": "No Customers yet",
     "description": "Add a customer to get started and organize your projects",
     "addButtonLabel": "New Customer"
   },
-
   "CustomersPageLoading": {
     "title": "All Customers"
   },
-
   "ProfilePage": {
     "heading": "Profile Settings"
   },
-
   "ProjectsPageLoading": {
     "title": "All Projects"
   },
-
   "ProjectsPageEmpty": {
     "heading": "No projects yet",
     "description": "Create a new project to keep track of your work",
     "addButtonLabel": "New Project"
   },
-
   "ProjectDetailPage": {
     "heading": "Project Details"
   },
-
   "TasksPageLoading": {
     "title": "All Tasks"
   },
-
   "TasksPageEmpty": {
     "heading": "No tasks yet",
     "description": "Create a new task to keep track of your work",
     "addButtonLabel": "New Task"
   },
-
   "TaskDetailPage": {
     "heading": "Task Details"
   },
-
   "UsersPageLoading": {
     "title": "Team"
   },
-
   "UsersPage": {
     "heading": "Team"
   },
-
   "UsersPageEmpty": {
     "heading": "No Users yet",
     "description": "Add a new user to start building your team",
     "addButtonLabel": "New User"
   },
-
   "TeamProfilePage": {
     "heading": "User Information"
+  },
+  "ProjectCategoriesPageLoading": {
+    "title": "All Project Categories"
+  },
+  "ProjectCategoriesPageEmpty": {
+    "heading": "No project categories yet",
+    "description": "Create a new project category to better organize your projects."
   }
 }

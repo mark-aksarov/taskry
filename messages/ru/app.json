@@ -2,127 +2,107 @@
   "ProjectCategoriesPage": {
     "heading": "Категории проектов"
   },
-
   "CustomerDetailPage": {
     "heading": "Информация о клиенте"
   },
-
   "DashboardErrorPage": {
     "heading": "Что-то пошло не так",
     "description": "Произошла непредвиденная ошибка. Пожалуйста, обновите страницу или обратитесь в техническую поддержку, если проблема повторится."
   },
-
   "CheckEmailPage": {
     "heading": "Проверьте вашу почту",
     "subtitle": "Мы отправили ссылку для сброса пароля на вашу электронную почту. Если этот адрес электронной почты существует в нашей системе, проверьте почту на наличие ссылки для сброса пароля",
     "backButtonLabel": "Назад к сбросу пароля"
   },
-
   "ForgetPasswordPage": {
     "heading": "Забыли пароль",
     "subtitle": "Введите адрес электронной почты, чтобы получить ссылку для сброса пароля."
   },
-
   "ResetPasswordPage": {
     "heading": "Сброс пароля",
     "subtitle": "Укажите новый пароль для своей учетной записи."
   },
-
   "ResetPasswordNotFound": {
     "heading": "Ссылка недействительна",
     "body": "Срок действия ссылки для сброса пароля истек или она неверна. Пожалуйста, запросите сброс пароля еще раз.",
     "signInButtonLabel": "Войти по email"
   },
-
   "SignInPage": {
     "heading": "Вход",
     "subtitle": "Пожалуйста, войдите в свой аккаунт.",
     "resetPasswordSubtitle": "Ваш пароль успешно сброшен. Теперь вы можете войти, используя новый пароль."
   },
-
   "SignUpPage": {
     "heading": "Регистрация",
     "subtitle": "Пожалуйста, создайте аккаунт."
   },
-
   "VerifyEmailPage": {
     "heading": "Подтвердите электронную почту",
     "subtitle": "Мы отправили письмо с подтверждением на {email}. Перейдите по ссылке в письме, чтобы активировать аккаунт и продолжить использование сервиса. Если письмо не пришло, проверьте папку «Спам» или отправьте его ещё раз."
   },
-
   "DashboardPage": {
     "heading": "Панель управления"
   },
-
   "ProjectsPage": {
     "heading": "Все проекты"
   },
-
   "TasksPage": {
     "heading": "Все задачи"
   },
-
   "CustomersPage": {
     "heading": "Все клиенты"
   },
-
   "CustomersPageEmpty": {
     "heading": "Нет клиентов",
     "description": "Добавьте клиента, чтобы начать работу и организовать проекты",
     "addButtonLabel": "Новый клиент"
   },
-
   "CustomersPageLoading": {
     "title": "Все клиенты"
   },
-
   "ProfilePage": {
     "heading": "Настройки профиля"
   },
-
   "ProjectsPageLoading": {
     "title": "Все проекты"
   },
-
   "ProjectsPageEmpty": {
     "heading": "Нет проектов",
     "description": "Создайте новый проект, чтобы следить за работой",
     "addButtonLabel": "Новый Проект"
   },
-
   "ProjectDetailPage": {
     "heading": "Детали проекта"
   },
-
   "TasksPageLoading": {
     "title": "Все задачи"
   },
-
   "TasksPageEmpty": {
     "heading": "Нет задач",
     "description": "Добавьте новую задачу, чтобы следить за работой",
     "addButtonLabel": "Новая задача"
   },
-
   "TaskDetailPage": {
     "heading": "Детали задачи"
   },
-
   "UsersPageLoading": {
     "title": "Команда"
   },
-
   "UsersPage": {
     "heading": "Команда"
   },
-
   "UsersPageEmpty": {
     "heading": "Нет пользователей",
     "description": "Добавьте нового пользователя, чтобы начать работу",
     "addButtonLabel": "Новый Пользователь"
   },
-
   "TeamProfilePage": {
     "heading": "Информация о пользователе"
+  },
+  "ProjectCategoriesPageLoading": {
+    "title": "Все категории проекта"
+  },
+  "ProjectCategoriesPageEmpty": {
+    "description": "Создайте новую категорию проекта, чтобы лучше организовать ваши проекты."
   }
 }
