@@ -14,8 +14,8 @@ export const projectSchema = z.object({
     z.string().trim().min(1).max(255),
   ),
   description: z.preprocess(
-    emptyStringToUndefined,
-    z.string().trim().min(1).max(5000).optional(),
+    emptyStringToNull,
+    z.string().trim().min(1).max(5000).nullable(),
   ),
   deadline: z.coerce.date("yyyy-MM-dd"),
   status: z.enum(ProjectStatus),

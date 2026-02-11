@@ -7,21 +7,21 @@ export interface ProjectSummaryDTO {
 
 export interface CreateProjectInputDTO {
   title: string;
-  description?: string;
+  description: string | null;
   deadline: Date;
-  customerId?: number | null;
-  categoryId?: number | null;
+  customerId: number | null;
+  categoryId: number | null;
   status: ProjectStatus;
 }
 
 export interface UpdateProjectInputDTO {
   id: number;
-  title?: string;
-  description?: string;
-  deadline?: Date;
-  customerId?: number | null;
-  categoryId?: number | null;
-  status?: ProjectStatus;
+  title: string;
+  description: string | null;
+  deadline: Date;
+  customerId: number | null;
+  categoryId: number | null;
+  status: ProjectStatus;
 }
 
 export interface ProjectFormDataDTO {

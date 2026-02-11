@@ -27,12 +27,11 @@ describe("Project editing", () => {
     cy.viewport(1440, 900);
     cy.task("db:reset");
     cy.task("db:seed", payload);
+    cy.signIn("user-1@test.com", "12345abc");
+    cy.visit("/en/projects");
   });
 
   it("updates a project successfully", () => {
-    cy.signIn("user-1@test.com", "12345abc");
-    cy.visit("/en/projects");
-
     cy.getByData("project-item-action-menu-trigger", "1").click();
     cy.getMenuItem("edit").click();
 
@@ -57,9 +56,6 @@ describe("Project editing", () => {
   });
 
   it("pre-fills project form with default values", () => {
-    cy.signIn("user-1@test.com", "12345abc");
-    cy.visit("/en/projects");
-
     cy.getByData("project-item-action-menu-trigger", "1").click();
     cy.getMenuItem("edit").click();
 
@@ -81,5 +77,29 @@ describe("Project editing", () => {
     cy.getByData("project-customer-select").within(() =>
       cy.get("select").should("have.value", "1"),
     );
+  });
+
+  it.only("updates a project when optional fields are empty", () => {
+    cy.getByData("project-toolbar-create-new-menu-trigger")
+      .filter(":visible")
+      .click();
+    cy.getMenuItem("project").click();
+
+    cy.fillProjectForm({
+      title: "Updated Project Title",
+      deadline: { day: "01", month: "02", year: "2026" },
+      statusKey: "pending",
+    });
+
+    cy.get('button[type="submit"]').click();
+
+    cy.getByData("projects-list").within(() => {
+      cy.contains("Updated Project Title");
+      cy.contains("2026");
+      cy.contains(/active/i);
+      cy.contains("No category");
+      cy.contains("No company");
+      cy.contains("No customer");
+    });
   });
 });
