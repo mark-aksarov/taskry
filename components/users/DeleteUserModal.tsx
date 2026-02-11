@@ -35,17 +35,17 @@ export function DeleteUserModal({
   onSuccess,
 }: DeleteUserModalProps) {
   const t = useTranslations("users.DeleteUserModal");
-  const [state, action, pending] = useActionState(deleteAction, initialState);
+  const [state, action, isPending] = useActionState(deleteAction, initialState);
 
   useEffect(() => {
     if (state.status === "success") {
       onSuccess?.();
+      onOpenChange?.(false);
     }
   }, [state.status, onSuccess]);
 
   const handleDelete = () => {
     startTransition(() => action(userId));
-    onOpenChange?.(false);
   };
 
   useActionErrorToast(state, t("error.deleteError"));
@@ -66,6 +66,7 @@ export function DeleteUserModal({
       <ConfirmModalActions>
         <ConfirmModalCancelButton label={t("cancelButton")} />
         <ConfirmModalConfirmButton
+          isPending={isPending}
           data-test="delete-user-modal-confirm-button"
           label={t("deleteButton")}
           onConfirm={handleDelete}
