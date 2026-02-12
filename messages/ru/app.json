@@ -125,5 +125,15 @@
   "CompaniesPageEmpty": {
     "description": "Создайте новую компанию, чтобы лучше организовать работу с клиентами.",
     "heading": "Нет компаний"
+  },
+  "PositionsPageLoading": {
+    "title": "Все должности"
+  },
+  "PositionsPage": {
+    "heading": "Должности"
+  },
+  "PositionsPageEmpty": {
+    "heading": "Нет должностей",
+    "description": "Создайте новую должность, чтобы лучше организовать работу с пользователями."
   }
 }

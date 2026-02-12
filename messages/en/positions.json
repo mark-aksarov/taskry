@@ -5,18 +5,29 @@
     },
     "submitButtonLabel": "Create Position"
   },
-
   "NewPositionModal": {
     "title": "New Position"
   },
-
   "PositionNameTextField": {
     "label": "Name",
     "placeholder": "Typing name",
-
     "validation": {
       "required": "Name is required",
       "tooLong": "Name is too long"
     }
+  },
+  "PositionListItem": {
+    "name": "Name"
+  },
+  "PositionToolbarActionsMenuTrigger": {
+    "dialogHeading": "Actions",
+    "delete": "Delete"
+  },
+  "PositionToolbarCreateNewButton": {
+    "label": "Create new"
+  },
+  "PositionItemActionMenuTrigger": {
+    "edit": "Edit",
+    "delete": "Delete"
   }
 }

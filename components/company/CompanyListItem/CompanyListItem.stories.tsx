@@ -16,12 +16,12 @@ type Story = StoryObj<typeof CompanyListItem>;
 export const Default = {
   args: {
     id: 1,
-    name: "Project Manager",
+    name: "TechNova Solutions Inc.",
     menuTrigger: (
       <CompanyItemActionMenuTrigger
         guestMode={false}
         companyId={1}
-        companyName="Project Manager"
+        companyName="TechNova Solutions Inc."
       />
     ),
   },

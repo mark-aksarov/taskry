@@ -5,18 +5,29 @@
     },
     "submitButtonLabel": "Создать должность"
   },
-
   "NewPositionModal": {
     "title": "Новая должность"
   },
-
   "PositionNameTextField": {
     "label": "Название",
     "placeholder": "Введите название",
-
     "validation": {
       "required": "Требуется название",
       "tooLong": "Название слишком длинное"
     }
+  },
+  "PositionListItem": {
+    "name": "Название"
+  },
+  "PositionToolbarActionsMenuTrigger": {
+    "dialogHeading": "Действия",
+    "delete": "Удалить"
+  },
+  "PositionToolbarCreateNewButton": {
+    "label": "Создать новую"
+  },
+  "PositionItemActionMenuTrigger": {
+    "edit": "Редактировать",
+    "delete": "Удалить"
   }
 }

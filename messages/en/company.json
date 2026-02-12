@@ -23,11 +23,6 @@
     "dialogHeading": "Actions",
     "delete": "Delete"
   },
-  "companies": {
-    "CompanyToolbarCreateNewButton": {
-      "label": "Create new"
-    }
-  },
   "CompanyToolbarCreateNewButton": {
     "label": "Create new"
   },

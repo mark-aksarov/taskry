@@ -125,5 +125,15 @@
   "CompaniesPageEmpty": {
     "description": "Create a new company to better organize your work with customers.",
     "heading": "No companies"
+  },
+  "PositionsPageLoading": {
+    "title": "All positions"
+  },
+  "PositionsPage": {
+    "heading": "Positions"
+  },
+  "PositionsPageEmpty": {
+    "heading": "No positions",
+    "description": "Create a new position to better organize your work with users."
   }
 }

@@ -7,6 +7,15 @@ import { AccessDeniedError } from "../utils/error";
 import { requireSession } from "../utils/requireSession";
 import { CreatePositionInputDTO, PositionSummaryDTO } from "./position.dto";
 
+export const getPositionCount = cache(async () => {
+  // Authorization
+  const {
+    user: { workspaceId },
+  } = await requireSession();
+
+  return prisma.position.count({ where: { workspaceId } });
+});
+
 export const getPositionSummaries = cache(
   async (): Promise<PositionSummaryDTO[]> => {
     // Authorization

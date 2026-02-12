@@ -16,14 +16,6 @@
       "tooLong": "Название слишком длинное"
     }
   },
-  "companies": {
-    "CompanyListItem": {
-      "name": "Название"
-    },
-    "CompanyToolbarCreateNewButton": {
-      "label": "Создать новую"
-    }
-  },
   "CompanyListItem": {
     "name": "Название"
   },

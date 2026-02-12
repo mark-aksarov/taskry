@@ -3,7 +3,6 @@ import { NewPositionForm } from "../NewPositionForm";
 import { NewPositionModal } from "./NewPositionModal";
 import { DialogTrigger } from "react-aria-components";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { PositionFormSkeleton } from "../PositionFormSkeleton";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {
@@ -29,11 +28,5 @@ export const Default = {
     newPositionForm: (
       <NewPositionForm createPosition={() => ({ status: "success" })} />
     ),
-  },
-} satisfies Story;
-
-export const Skeleton = {
-  args: {
-    newPositionForm: <PositionFormSkeleton />,
   },
 } satisfies Story;

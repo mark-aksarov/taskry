@@ -5,11 +5,26 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { CompanyItemActionMenuTrigger } from "../CompanyItemActionMenuTrigger";
 
 const mockedCompanies = [
-  { id: 1, name: "Project Manager" },
-  { id: 2, name: "Frontend Developer" },
-  { id: 3, name: "Backend Developer" },
-  { id: 4, name: "UI/UX Designer" },
-  { id: 5, name: "QA Engineer" },
+  {
+    id: 1,
+    name: "TechNova Solutions Inc.",
+  },
+  {
+    id: 2,
+    name: "Global Dynamics Ltd.",
+  },
+  {
+    id: 3,
+    name: "Astra Marketing Group",
+  },
+  {
+    id: 4,
+    name: "Phoenix Data Services",
+  },
+  {
+    id: 5,
+    name: "Quantum Consulting LLC",
+  },
 ];
 
 const meta = {
