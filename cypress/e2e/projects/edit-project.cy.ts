@@ -79,7 +79,7 @@ describe("Project editing", () => {
     );
   });
 
-  it.only("updates a project when optional fields are empty", () => {
+  it("updates a project when optional fields are empty", () => {
     cy.getByData("project-toolbar-create-new-menu-trigger")
       .filter(":visible")
       .click();

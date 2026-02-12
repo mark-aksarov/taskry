@@ -13,8 +13,8 @@ import { useTranslations } from "next-intl";
 import { DialogHeader } from "../../ui/Dialog";
 import { ActionFn, ActionState } from "@/lib/actions/types";
 import { GuestModeModal } from "../../common/GuestModeModal";
+import { DeleteProjectCategoriesModal } from "../DeleteProjectCategoriesModal";
 import { useProjectCategorySelection } from "@/lib/hooks/useProjectCategorySelection";
-import { DeleteProjectCategoriesModal } from "../DeleteProjectCategoriesModal/DeleteProjectCategoriesModal";
 
 interface ProjectCategoryToolbarActionsMenuTriggerProps {
   guestMode: boolean;

@@ -8,6 +8,7 @@ import { NewTaskCategoryForm } from "@/components/taskCategory/NewTaskCategoryFo
 import { TaskCategoriesContainer } from "@/components/taskCategory/TaskCategoriesContainer";
 import { TaskCategoryToolbarCreateNewButton } from "@/components/taskCategory/TaskCategoryToolbarCreateNewButton";
 import { TaskCategoryToolbarActionsMenuTrigger } from "@/components/taskCategory/TaskCategoryToolbarActionsMenuTrigger";
+import { deleteTaskCategories } from "@/lib/actions/taskCategory/deleteTaskCategories";
 
 export default async function AppTaskCategoriesPage() {
   // Authorization
@@ -39,7 +40,10 @@ export default async function AppTaskCategoriesPage() {
       taskCategoriesContainer={<TaskCategoriesContainer />}
       taskCategoryToolbarCreateNewButton={taskCategoryToolbarCreateNewButton}
       taskCategoryToolbarActionsMenuTrigger={
-        <TaskCategoryToolbarActionsMenuTrigger guestMode={guestMode} />
+        <TaskCategoryToolbarActionsMenuTrigger
+          guestMode={guestMode}
+          deleteTaskCategories={deleteTaskCategories}
+        />
       }
     />
   );

@@ -36,5 +36,19 @@
   },
   "EditTaskCategoryModal": {
     "title": "Edit task category"
+  },
+  "DeleteTaskCategoriesModal": {
+    "heading": "Delete task categories",
+    "deleteError": "A server error occurred. Failed to delete task categories.",
+    "text": "Are you sure you want to delete <strong>{count} task categories</strong>? All contents will be permanently removed.",
+    "deleteButton": "Delete",
+    "cancelButton": "Cancel"
+  },
+  "DeleteTaskCategoryModal": {
+    "deleteError": "A server error occurred. Failed to delete task category.",
+    "heading": "Удалить категорию задач",
+    "text": "Are you sure you want to delete task category <strong>«{name}»</strong>? All contents will be permanently removed.",
+    "cancelButton": "Cancel",
+    "deleteButton": "Delete"
   }
 }

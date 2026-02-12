@@ -3,6 +3,7 @@ import { TaskCategoryListItem } from "./TaskCategoryListItem";
 import { EditTaskCategoryForm } from "./EditTaskCategoryForm";
 import { updateTaskCategory } from "@/lib/actions/taskCategory/updateTaskCategory";
 import { getTaskCategorySummaries } from "@/lib/data/taskCategory/taskCategory.dal";
+import { deleteTaskCategories } from "@/lib/actions/taskCategory/deleteTaskCategories";
 import { TaskCategoryItemActionMenuTrigger } from "./TaskCategoryItemActionMenuTrigger";
 
 export async function TaskCategoriesContainer() {
@@ -20,6 +21,7 @@ export async function TaskCategoriesContainer() {
               guestMode={false}
               taskCategoryId={taskCategory.id}
               taskCategoryName={taskCategory.name}
+              deleteTaskCategories={deleteTaskCategories}
               editTaskCategoryForm={
                 <EditTaskCategoryForm
                   taskCategoryId={taskCategory.id}

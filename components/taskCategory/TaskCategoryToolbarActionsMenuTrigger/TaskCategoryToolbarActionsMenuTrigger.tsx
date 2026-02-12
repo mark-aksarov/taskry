@@ -9,17 +9,21 @@ import {
 import { useState } from "react";
 import { Trash } from "lucide-react";
 import { Item, Key } from "react-stately";
-import { DialogHeader } from "../../ui/Dialog";
 import { useTranslations } from "next-intl";
+import { DialogHeader } from "../../ui/Dialog";
+import { ActionFn, ActionState } from "@/lib/actions/types";
 import { GuestModeModal } from "../../common/GuestModeModal";
+import { DeleteTaskCategoriesModal } from "../DeleteTaskCategoriesModal";
 import { useTaskCategorySelection } from "@/lib/hooks/useTaskCategorySelection";
 
 interface TaskCategoryToolbarActionsMenuTriggerProps {
   guestMode: boolean;
+  deleteTaskCategories: ActionFn<ActionState, number[]>;
 }
 
 export const TaskCategoryToolbarActionsMenuTrigger = ({
   guestMode,
+  deleteTaskCategories,
 }: TaskCategoryToolbarActionsMenuTriggerProps) => {
   const t = useTranslations(
     "taskCategories.TaskCategoryToolbarActionsMenuTrigger",
@@ -76,6 +80,14 @@ export const TaskCategoryToolbarActionsMenuTrigger = ({
           {t("delete")}
         </Item>
       </ToolbarMenuTrigger>
+
+      <DeleteTaskCategoriesModal
+        isOpen={isDeleteModalOpen}
+        onOpenChange={setIsDeleteModalOpen}
+        taskCategoryIds={taskCategoryIds}
+        deleteTaskCategories={deleteTaskCategories}
+        onSuccess={clearSelectedIds}
+      />
 
       {/* Guest mode modal */}
       <GuestModeModal

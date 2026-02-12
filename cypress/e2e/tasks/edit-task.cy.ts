@@ -86,7 +86,7 @@ describe("Task editing", () => {
     );
   });
 
-  it.only("updates a task when optional fields are empty", () => {
+  it("updates a task when optional fields are empty", () => {
     cy.getByData("task-toolbar-create-new-menu-trigger")
       .filter(":visible")
       .click();

@@ -80,7 +80,7 @@ describe("User editing", () => {
     );
   });
 
-  it.only("updates a user when optional fields are empty", () => {
+  it("updates a user when optional fields are empty", () => {
     cy.getByData("user-item-action-menu-trigger", "user-1").click();
     cy.getMenuItem("edit").click();
 

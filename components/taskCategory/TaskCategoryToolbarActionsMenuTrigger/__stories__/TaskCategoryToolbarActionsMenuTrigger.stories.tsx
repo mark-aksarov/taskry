@@ -14,5 +14,6 @@ type Story = StoryObj<typeof meta>;
 export const Default = {
   args: {
     guestMode: false,
+    deleteTaskCategories: () => ({ status: "success" }),
   },
 } satisfies Story;

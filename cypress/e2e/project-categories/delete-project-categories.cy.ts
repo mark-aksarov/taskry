@@ -38,7 +38,7 @@ describe("delete project categories", () => {
     cy.getByData("project-category-list-item", "1").should("not.exist");
   });
 
-  it.only("can delete multiple project categories", () => {
+  it("can delete multiple project categories", () => {
     cy.getByData("project-category-checkbox", "1").click();
     cy.getByData("project-category-checkbox", "2").click();
 

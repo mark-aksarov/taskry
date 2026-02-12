@@ -90,7 +90,7 @@ export const updateTaskCategory = async (input: UpdateTaskCategoryInputDTO) => {
     );
   }
 
-  // Update project category
+  // Update task category
   const updatedTaskCategory = await prisma.taskCategory.update({
     where: {
       id: input.id,
@@ -102,4 +102,37 @@ export const updateTaskCategory = async (input: UpdateTaskCategoryInputDTO) => {
   });
 
   return updatedTaskCategory;
+};
+
+export const deleteTaskCategories = async (ids: number[]) => {
+  // Authorization
+  const {
+    user: { id: userId, workspaceId },
+  } = await requireSession();
+
+  // ACL
+  const permission = await auth.api.userHasPermission({
+    body: {
+      userId: userId,
+      permission: {
+        taskCategory: ["delete"],
+      },
+    },
+  });
+
+  if (!permission.success) {
+    throw new AccessDeniedError(
+      "You do not have permission to delete task categories.",
+    );
+  }
+
+  // Bulk delete task categories within the workspace
+  const deletedTaskCategories = await prisma.taskCategory.deleteMany({
+    where: {
+      workspaceId,
+      id: { in: ids },
+    },
+  });
+
+  return deletedTaskCategories;
 };

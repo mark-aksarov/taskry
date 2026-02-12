@@ -1,0 +1,1 @@
+export { DeleteTaskCategoriesModal } from "./DeleteTaskCategoriesModal";

@@ -18,6 +18,7 @@ export const Default = {
     guestMode: false,
     taskCategoryId: 1,
     taskCategoryName: "Frontend",
+    deleteTaskCategories: () => ({ status: "success" }),
     editTaskCategoryForm: (
       <EditTaskCategoryForm {...EditTaskCategoryFormStory.args} />
     ),

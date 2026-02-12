@@ -1,0 +1,1 @@
+export { DeleteProjectCategoriesModal } from "./DeleteProjectCategoriesModal";
