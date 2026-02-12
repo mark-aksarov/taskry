@@ -68,10 +68,7 @@ export const WithLongContent = {
     return (
       <SideSheetTemplate {...args}>
         <Dialog className="w-[360px]">
-          <DialogHeader>
-            <DialogHeading>Side Sheet Header</DialogHeading>
-            <DialogCloseButton />
-          </DialogHeader>
+          <DialogHeader>Side Sheet Header</DialogHeader>
           <DialogBody className="text-black dark:text-white">
             <h3>The standard Lorem Ipsum passage, used since the 1500s</h3>
             <p>

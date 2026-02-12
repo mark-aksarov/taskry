@@ -39,10 +39,7 @@ export const Default = {
     return (
       <ModalTemplate {...args}>
         <Dialog>
-          <DialogHeader>
-            <DialogHeading>Modal title</DialogHeading>
-            <DialogCloseButton iconSize={20} />
-          </DialogHeader>
+          <DialogHeader>Modal title</DialogHeader>
           <DialogBody>
             <Form>
               <div className="flex flex-col gap-6">
@@ -77,10 +74,7 @@ export const Fullscreen = {
     return (
       <ModalTemplate {...args} fullscreen>
         <Dialog>
-          <DialogHeader>
-            <DialogHeading>Modal title</DialogHeading>
-            <DialogCloseButton iconSize={20} />
-          </DialogHeader>
+          <DialogHeader>Modal title</DialogHeader>
           <DialogBody className="text-black dark:text-white">
             Content
           </DialogBody>
@@ -95,10 +89,7 @@ export const WithLongContent = {
     return (
       <ModalTemplate {...args}>
         <Dialog className="max-h-[calc(100dvh-var(--spacing)*5)]">
-          <DialogHeader>
-            <DialogHeading>Modal title</DialogHeading>
-            <DialogCloseButton iconSize={20} />
-          </DialogHeader>
+          <DialogHeader>Modal title</DialogHeader>
           <DialogBody className="text-black dark:text-white">
             <h3>The standard Lorem Ipsum passage, used since the 1500s</h3>
             <p>

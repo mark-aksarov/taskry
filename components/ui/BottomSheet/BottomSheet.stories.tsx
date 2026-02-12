@@ -5,13 +5,7 @@ import { Button } from "@/components/ui/Button";
 import { useOverlayTriggerState } from "react-stately";
 import { useOverlayTrigger } from "react-aria";
 import { TextField } from "@/components/ui/TextField";
-import {
-  Dialog,
-  DialogBody,
-  DialogCloseButton,
-  DialogHeader,
-  DialogHeading,
-} from "../Dialog";
+import { Dialog, DialogBody, DialogHeader } from "../Dialog";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta: Meta<typeof BottomSheet> = {
@@ -50,10 +44,7 @@ export const WithForm = {
   render: (args) => (
     <BottomSheetTemplate {...args}>
       <Dialog>
-        <DialogHeader>
-          <DialogHeading>Bottom sheet</DialogHeading>
-          <DialogCloseButton />
-        </DialogHeader>
+        <DialogHeader>Bottom sheet</DialogHeader>
         <DialogBody>
           <Form>
             <div className="flex flex-col gap-6">

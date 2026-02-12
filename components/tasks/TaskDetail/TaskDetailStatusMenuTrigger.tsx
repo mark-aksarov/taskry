@@ -21,10 +21,7 @@ export function TaskDetailStatusMenuTrigger() {
   return (
     <ResponsiveMenuTrigger
       renderDialogHeader={() => (
-        <DialogHeader>
-          <DialogHeading>{t("dialogHeading")}</DialogHeading>
-          <DialogCloseButton />
-        </DialogHeader>
+        <DialogHeader>{t("dialogHeading")}</DialogHeader>
       )}
       renderButton={() => (
         <Button

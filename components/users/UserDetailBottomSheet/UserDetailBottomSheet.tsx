@@ -28,10 +28,7 @@ export function UserDetailBottomSheet({
   return (
     <DetailBottomSheet>
       <DetailBottomSheetDialog>
-        <DialogHeader>
-          <DialogHeading>{t("dialogHeading")}</DialogHeading>
-          <DialogCloseButton />
-        </DialogHeader>
+        <DialogHeader>{t("dialogHeading")}</DialogHeader>
         <DialogBody>{userDetailContainer}</DialogBody>
         <DialogFooter>
           <DetailModalLink
