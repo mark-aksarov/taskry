@@ -14,6 +14,7 @@ export function TaskCategoryNameTextField({
 
   return (
     <TextField
+      data-test="task-category-name-field"
       name="name"
       label={t("label")}
       placeholder={t("placeholder")}

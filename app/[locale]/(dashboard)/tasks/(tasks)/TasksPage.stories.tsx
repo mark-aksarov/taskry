@@ -19,7 +19,7 @@ import { Default as NewTaskFormStory } from "@/components/tasks/NewTaskForm/NewT
 import { TaskToolbarFiltersModalTrigger } from "@/components/tasks/TaskToolbarFiltersModalTrigger";
 import { TaskToolbarCreateNewMenuTrigger } from "@/components/tasks/TaskToolbarCreateNewMenuTrigger";
 import { Default as TaskFiltersFormStory } from "@/components/tasks/TaskFiltersForm/TaskFiltersForm.stories";
-import { Default as NewTaskCategoryFormStory } from "@/components/taskCategory/NewTaskCategoryForm/NewTaskCategoryForm.stories";
+import { Default as NewTaskCategoryFormStory } from "@/components/taskCategory/NewTaskCategoryForm/__stories__/NewTaskCategoryForm.stories";
 
 const meta = {
   title: "pages/TasksPage",

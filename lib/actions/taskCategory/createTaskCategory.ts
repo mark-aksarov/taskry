@@ -6,6 +6,8 @@ import { taskCategorySchema } from "@/lib/schemas/taskCategory";
 import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedirect";
 import { createTaskCategory as createTaskCategoryQuery } from "@/lib/data/taskCategory/taskCategory.dal";
 
+const schema = taskCategorySchema.omit({ id: true });
+
 export async function createTaskCategory(
   _prevState: ActionState,
   formData: FormData,
@@ -15,7 +17,7 @@ export async function createTaskCategory(
 
   try {
     // Parse and validate form data
-    const parsed = taskCategorySchema.safeParse({ name: formData.get("name") });
+    const parsed = schema.safeParse({ name: formData.get("name") });
 
     if (!parsed.success) {
       console.error("Validation error", parsed.error);

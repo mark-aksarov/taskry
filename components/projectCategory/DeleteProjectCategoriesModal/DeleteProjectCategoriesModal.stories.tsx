@@ -37,7 +37,7 @@ export const Default = {
     projectCategoryIds: [1, 2, 3],
     isOpen: false,
     onOpenChange: () => {},
-    deleteAction: () => ({ status: "success" }),
+    deleteProjectCategories: () => ({ status: "success" }),
   },
 } satisfies Story;
 
@@ -46,6 +46,9 @@ export const WithError = {
     projectCategoryIds: [1, 2, 3],
     isOpen: false,
     onOpenChange: () => {},
-    deleteAction: () => ({ status: "error", errorCode: "validationError" }),
+    deleteProjectCategories: () => ({
+      status: "error",
+      errorCode: "validationError",
+    }),
   },
 } satisfies Story;

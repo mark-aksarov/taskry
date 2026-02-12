@@ -4,7 +4,7 @@ import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { NewTaskCategoryForm } from "../NewTaskCategoryForm";
 import { NewTaskCategoryModal } from "./NewTaskCategoryModal";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { Default as NewTaskCategoryFormStory } from "../NewTaskCategoryForm/NewTaskCategoryForm.stories";
+import { NewTaskCategoryFormStory } from "../NewTaskCategoryForm/__stories__";
 
 const meta = {
   title: "Components/task-categories/NewTaskCategoryModal",

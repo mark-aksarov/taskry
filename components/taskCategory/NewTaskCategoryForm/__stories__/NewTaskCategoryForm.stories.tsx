@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { NewTaskCategoryForm } from "./NewTaskCategoryForm";
+import { NewTaskCategoryForm } from "../NewTaskCategoryForm";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withOverlayTriggerStateProvider } from "@/.storybook/withOverlayTriggerStateProvider";
 
