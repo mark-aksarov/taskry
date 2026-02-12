@@ -1,8 +1,8 @@
 import { Meta, StoryObj } from "@storybook/react";
-import { ProjectCategoryListItem } from "./ProjectCategoryListItem";
+import { ProjectCategoryListItem } from "../ProjectCategoryListItem";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { ProjectCategoryItemActionMenuTrigger } from "../ProjectCategoryItemActionMenuTrigger";
-import { EditProjectCategoryForm } from "../EditProjectCategoryForm";
+import { ProjectCategoryItemActionMenuTrigger } from "../../ProjectCategoryItemActionMenuTrigger";
+import { ProjectCategoryItemActionMenuTriggerStory } from "../../ProjectCategoryItemActionMenuTrigger/__stories__";
 
 const meta = {
   title: "components/project-categories/ProjectCategoryListItem",
@@ -19,16 +19,7 @@ export const Default = {
     name: "Web Development",
     menuTrigger: (
       <ProjectCategoryItemActionMenuTrigger
-        guestMode={false}
-        projectId={1}
-        projectCategoryName="Web Development"
-        editProjectCategoryForm={
-          <EditProjectCategoryForm
-            projectCategoryId={1}
-            nameDefaultValue="Web Development"
-            updateProjectCategory={() => ({ status: "success" })}
-          />
-        }
+        {...ProjectCategoryItemActionMenuTriggerStory.args}
       />
     ),
   },

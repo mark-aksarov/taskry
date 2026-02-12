@@ -8,15 +8,10 @@ import {
   ConfirmModalConfirmButton,
 } from "@/components/common/ConfirmModal";
 
-import {
-  ActionFn,
-  ActionState,
-  DeleteProjectsPayload,
-} from "@/lib/actions/types";
-
 import { useTranslations } from "next-intl";
 import { ModalProps } from "@/components/ui/Modal";
 import { DialogHeading } from "@/components/ui/Dialog";
+import { ActionFn, ActionState } from "@/lib/actions/types";
 import { startTransition, useActionState, useEffect } from "react";
 import { useActionErrorToast } from "@/lib/hooks/useActionErrorToast";
 
@@ -24,21 +19,24 @@ const initialState: ActionState = {
   status: null,
 };
 
-interface DeleteCustomersModalProps extends ModalProps {
-  customerIds: number[];
-  deleteAction: ActionFn<ActionState, DeleteProjectsPayload>;
+interface DeleteProjectCategoriesModalProps extends ModalProps {
+  projectCategoryIds: number[];
+  deleteProjectCategories: ActionFn<ActionState, number[]>;
   onSuccess?: () => void;
 }
 
-export function DeleteCustomersModal({
-  customerIds,
+export function DeleteProjectCategoriesModal({
+  projectCategoryIds,
   isOpen,
   onOpenChange,
-  deleteAction,
+  deleteProjectCategories,
   onSuccess,
-}: DeleteCustomersModalProps) {
-  const t = useTranslations("customers.DeleteCustomersModal");
-  const [state, action, isPending] = useActionState(deleteAction, initialState);
+}: DeleteProjectCategoriesModalProps) {
+  const t = useTranslations("projectCategories.DeleteProjectCategoriesModal");
+  const [state, action, isPending] = useActionState(
+    deleteProjectCategories,
+    initialState,
+  );
 
   useEffect(() => {
     if (state.status === "success") {
@@ -50,12 +48,12 @@ export function DeleteCustomersModal({
   useActionErrorToast(state, t("deleteError"));
 
   const handleDelete = () => {
-    startTransition(() => action(customerIds));
+    startTransition(() => action(projectCategoryIds));
   };
 
   return (
     <ConfirmModal
-      data-test="delete-customers-modal"
+      data-test="delete-project-categories-modal"
       isOpen={isOpen}
       onOpenChange={onOpenChange}
     >
@@ -63,7 +61,7 @@ export function DeleteCustomersModal({
       <ConfirmModalText>
         {t.rich("text", {
           strong: (chunks) => <strong>{chunks}</strong>,
-          count: customerIds.length,
+          count: projectCategoryIds.length,
         })}
       </ConfirmModalText>
       <ConfirmModalActions>
@@ -72,7 +70,7 @@ export function DeleteCustomersModal({
           isPending={isPending}
           label={t("deleteButton")}
           onConfirm={handleDelete}
-          data-test="delete-customers-modal-confirm-button"
+          data-test="delete-project-categories-modal-confirm-button"
         />
       </ConfirmModalActions>
     </ConfirmModal>

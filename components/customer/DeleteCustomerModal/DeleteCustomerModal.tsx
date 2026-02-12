@@ -49,7 +49,7 @@ export function DeleteCustomerModal({
     }
   }, [state.status, onSuccess]);
 
-  useActionErrorToast(state, t("error.deleteError"));
+  useActionErrorToast(state, t("deleteError"));
 
   const handleDelete = () => {
     startTransition(() => action([customerId]));

@@ -8,6 +8,7 @@ import { NewProjectCategoryForm } from "@/components/projectCategory/NewProjectC
 import { ProjectCategoriesContainer } from "@/components/projectCategory/ProjectCategoriesContainer";
 import { ProjectCategoryToolbarCreateNewButton } from "@/components/projectCategory/ProjectCategoryToolbarCreateNewButton";
 import { ProjectCategoryToolbarActionsMenuTrigger } from "@/components/projectCategory/ProjectCategoryToolbarActionsMenuTrigger";
+import { deleteProjectCategories } from "@/lib/actions/projectCategory/deleteProjectCategories";
 
 export default async function AppProjectCategoriesPage() {
   // Authorization
@@ -43,7 +44,10 @@ export default async function AppProjectCategoriesPage() {
         projectCategoryToolbarCreateNewButton
       }
       projectCategoryToolbarActionsMenuTrigger={
-        <ProjectCategoryToolbarActionsMenuTrigger guestMode={guestMode} />
+        <ProjectCategoryToolbarActionsMenuTrigger
+          guestMode={guestMode}
+          deleteProjectCategories={deleteProjectCategories}
+        />
       }
     />
   );

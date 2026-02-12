@@ -10,21 +10,25 @@ import { useState } from "react";
 import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
 import { Pencil, Trash } from "lucide-react";
+import { ActionFn, ActionState } from "@/lib/actions/types";
 import { GuestModeModal } from "@/components/common/GuestModeModal";
-import { EditProjectCategoryModal } from "./EditProjectCategoryModal";
+import { EditProjectCategoryModal } from "../EditProjectCategoryModal";
+import { DeleteProjectCategoryModal } from "../DeleteProjectCategoryModal";
 
 export type ProjectCategoryItemActionMenuTriggerProps = {
   guestMode: boolean;
-  projectId: number;
+  projectCategoryId: number;
   projectCategoryName: string;
   editProjectCategoryForm: React.ReactNode;
+  deleteProjectCategories: ActionFn<ActionState, number[]>;
 };
 
 export function ProjectCategoryItemActionMenuTrigger({
   guestMode,
-  projectId,
+  projectCategoryId,
   projectCategoryName,
   editProjectCategoryForm,
+  deleteProjectCategories,
 }: ProjectCategoryItemActionMenuTriggerProps) {
   const t = useTranslations(
     "projectCategories.ProjectCategoryItemActionMenuTrigger",
@@ -62,7 +66,7 @@ export function ProjectCategoryItemActionMenuTrigger({
         renderButton={() => (
           <ItemBaseActionMenuButton
             data-test="project-category-item-action-menu-trigger"
-            data-id={projectId}
+            data-id={projectCategoryId}
           />
         )}
       >
@@ -73,6 +77,14 @@ export function ProjectCategoryItemActionMenuTrigger({
           <Trash size={16} /> {t("delete")}
         </Item>
       </ItemBaseActionMenuTrigger>
+
+      <DeleteProjectCategoryModal
+        isOpen={isOpenDeleteModal}
+        onOpenChange={setIsOpenDeleteModal}
+        projectCategoryId={projectCategoryId}
+        projectCategoryName={projectCategoryName}
+        deleteProjectCategories={deleteProjectCategories}
+      />
 
       <EditProjectCategoryModal
         isOpen={isEditModalOpen}

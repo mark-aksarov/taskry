@@ -4,7 +4,7 @@ import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { NewProjectCategoryForm } from "../NewProjectCategoryForm";
 import { NewProjectCategoryModal } from "./NewProjectCategoryModal";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { Default as NewProjectCategoryFormStory } from "../NewProjectCategoryForm/NewProjectCategoryForm.stories";
+import { Default as NewProjectCategoryFormStory } from "../NewProjectCategoryForm/__stories__/NewProjectCategoryForm.stories";
 
 const meta = {
   title: "Components/project-categories/NewProjectCategoryModal",

@@ -1,8 +1,8 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { NewProjectCategoryForm } from "../../NewProjectCategoryForm";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { NewProjectCategoryFormStory } from "../../NewProjectCategoryForm/__stories__";
 import { ProjectCategoryToolbarCreateNewButton } from "../ProjectCategoryToolbarCreateNewButton";
-import { Default as NewProjectCategoryFormStory } from "../../NewProjectCategoryForm/NewProjectCategoryForm.stories";
 
 const meta = {
   title: "components/project-categories/ProjectCategoryToolbarCreateNewButton",

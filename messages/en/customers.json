@@ -138,10 +138,7 @@
     "text": "Are you sure you want to delete customer <strong>«{name}»</strong>? All contents will be permanently removed.",
     "deleteButton": "Delete",
     "cancelButton": "Cancel",
-
-    "error": {
-      "deleteError": "A server error occurred. Failed to delete customer."
-    }
+    "deleteError": "A server error occurred. Failed to delete customer."
   },
 
   "DeleteCustomersModal": {
@@ -149,10 +146,7 @@
     "text": "Are you sure you want to delete <strong>{count} customers</strong>? All contents will be permanently removed.",
     "deleteButton": "Delete",
     "cancelButton": "Cancel",
-
-    "error": {
-      "deleteError": "A server error occurred. Failed to delete customers."
-    }
+    "deleteError": "A server error occurred. Failed to delete customers."
   },
 
   "CustomerGridItem": {

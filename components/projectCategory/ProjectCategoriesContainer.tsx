@@ -4,6 +4,7 @@ import { EditProjectCategoryForm } from "./EditProjectCategoryForm";
 import { updateProjectCategory } from "@/lib/actions/projectCategory/updateProjectCategory";
 import { getProjectCategorySummaries } from "@/lib/data/projectCategory/projectCategory.dal";
 import { ProjectCategoryItemActionMenuTrigger } from "./ProjectCategoryItemActionMenuTrigger";
+import { deleteProjectCategories } from "@/lib/actions/projectCategory/deleteProjectCategories";
 
 export async function ProjectCategoriesContainer() {
   const projectCategories = await getProjectCategorySummaries();
@@ -18,8 +19,9 @@ export async function ProjectCategoriesContainer() {
           menuTrigger={
             <ProjectCategoryItemActionMenuTrigger
               guestMode={false}
-              projectId={projectCategory.id}
+              projectCategoryId={projectCategory.id}
               projectCategoryName={projectCategory.name}
+              deleteProjectCategories={deleteProjectCategories}
               editProjectCategoryForm={
                 <EditProjectCategoryForm
                   projectCategoryId={projectCategory.id}

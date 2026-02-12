@@ -1,9 +1,11 @@
 import { Meta, StoryObj } from "@storybook/react";
-import { ProjectCategoryList } from "./ProjectCategoryList";
-import { ProjectCategoryListItem } from "../ProjectCategoryListItem";
-import { EditProjectCategoryForm } from "../EditProjectCategoryForm";
+import { ProjectCategoryList } from "../ProjectCategoryList";
+import { ProjectCategoryListItem } from "../../ProjectCategoryListItem";
+import { EditProjectCategoryForm } from "../../EditProjectCategoryForm";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { ProjectCategoryItemActionMenuTrigger } from "../ProjectCategoryItemActionMenuTrigger";
+import { EditProjectCategoryFormStory } from "../../EditProjectCategoryForm/__stories__";
+import { ProjectCategoryItemActionMenuTrigger } from "../../ProjectCategoryItemActionMenuTrigger";
+import { ProjectCategoryItemActionMenuTriggerStory } from "../../ProjectCategoryItemActionMenuTrigger/__stories__";
 
 const mockedProjectCategories = [
   { id: 6, name: "Web Development" },
@@ -31,14 +33,14 @@ export const Default = {
         name={projectCategory.name}
         menuTrigger={
           <ProjectCategoryItemActionMenuTrigger
-            guestMode={false}
-            projectId={projectCategory.id}
+            {...ProjectCategoryItemActionMenuTriggerStory.args}
+            projectCategoryId={projectCategory.id}
             projectCategoryName={projectCategory.name}
             editProjectCategoryForm={
               <EditProjectCategoryForm
+                {...EditProjectCategoryFormStory.args}
                 projectCategoryId={projectCategory.id}
                 nameDefaultValue={projectCategory.name}
-                updateProjectCategory={() => ({ status: "success" })}
               />
             }
           />

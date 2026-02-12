@@ -1,24 +1,22 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { EditProjectCategoryForm } from "./EditProjectCategoryForm";
+import { NewProjectCategoryForm } from "../NewProjectCategoryForm";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withOverlayTriggerStateProvider } from "@/.storybook/withOverlayTriggerStateProvider";
 
 const meta = {
-  title: "components/project-categories/EditProjectCategoryForm",
-  component: EditProjectCategoryForm,
+  title: "components/project-categories/NewProjectCategoryForm",
+  component: NewProjectCategoryForm,
   decorators: [withOverlayTriggerStateProvider, withThemedBackground],
   parameters: {
     backgroundVariant: "alt",
   },
-} satisfies Meta<typeof EditProjectCategoryForm>;
+} satisfies Meta<typeof NewProjectCategoryForm>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    projectCategoryId: 1,
-    nameDefaultValue: "Web Development",
-    updateProjectCategory: () => ({ status: "success" }),
+    createProjectCategory: () => ({ status: "success" }),
   },
 } satisfies Story;

@@ -19,7 +19,7 @@ import { ProjectToolbarFiltersModalTrigger } from "@/components/projects/Project
 import { Default as NewProjectFormStory } from "@/components/projects/NewProjectForm/NewProjectForm.stories";
 import { ProjectToolbarCreateNewMenuTrigger } from "@/components/projects/ProjectToolbarCreateNewMenuTrigger";
 import { Default as ProjectFiltersFormStory } from "@/components/projects/ProjectFiltersForm/ProjectFiltersForm.stories";
-import { Default as NewProjectCategoryFormStory } from "@/components/projectCategory/NewProjectCategoryForm/NewProjectCategoryForm.stories";
+import { Default as NewProjectCategoryFormStory } from "@/components/projectCategory/NewProjectCategoryForm/__stories__/NewProjectCategoryForm.stories";
 
 const meta = {
   title: "pages/ProjectsPage",

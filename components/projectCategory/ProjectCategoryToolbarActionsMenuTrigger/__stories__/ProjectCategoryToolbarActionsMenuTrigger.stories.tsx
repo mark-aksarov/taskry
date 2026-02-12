@@ -10,10 +10,11 @@ const meta = {
 } satisfies Meta<typeof ProjectCategoryToolbarActionsMenuTrigger>;
 
 export default meta;
-type Story = StoryObj<typeof ProjectCategoryToolbarActionsMenuTrigger>;
+type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
     guestMode: false,
+    deleteProjectCategories: () => ({ status: "success" }),
   },
 } satisfies Story;

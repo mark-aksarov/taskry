@@ -9,17 +9,21 @@ import {
 import { useState } from "react";
 import { Trash } from "lucide-react";
 import { Item, Key } from "react-stately";
-import { DialogHeader } from "../../ui/Dialog";
 import { useTranslations } from "next-intl";
+import { DialogHeader } from "../../ui/Dialog";
+import { ActionFn, ActionState } from "@/lib/actions/types";
 import { GuestModeModal } from "../../common/GuestModeModal";
 import { useProjectCategorySelection } from "@/lib/hooks/useProjectCategorySelection";
+import { DeleteProjectCategoriesModal } from "../DeleteProjectCategoriesModal/DeleteProjectCategoriesModal";
 
 interface ProjectCategoryToolbarActionsMenuTriggerProps {
   guestMode: boolean;
+  deleteProjectCategories: ActionFn<ActionState, number[]>;
 }
 
 export const ProjectCategoryToolbarActionsMenuTrigger = ({
   guestMode,
+  deleteProjectCategories,
 }: ProjectCategoryToolbarActionsMenuTriggerProps) => {
   const t = useTranslations(
     "projectCategories.ProjectCategoryToolbarActionsMenuTrigger",
@@ -44,12 +48,12 @@ export const ProjectCategoryToolbarActionsMenuTrigger = ({
   };
 
   const {
-    selectedIds: projectIds,
+    selectedIds: projectCategoryIds,
     clearSelectedIds,
     selectedItems,
   } = useProjectCategorySelection();
 
-  const isDisabled = projectIds.length === 0;
+  const isDisabled = projectCategoryIds.length === 0;
 
   return (
     <>
@@ -76,6 +80,13 @@ export const ProjectCategoryToolbarActionsMenuTrigger = ({
           {t("delete")}
         </Item>
       </ToolbarMenuTrigger>
+
+      <DeleteProjectCategoriesModal
+        isOpen={isDeleteModalOpen}
+        onOpenChange={setIsDeleteModalOpen}
+        deleteProjectCategories={deleteProjectCategories}
+        projectCategoryIds={projectCategoryIds}
+      />
 
       {/* Guest mode modal */}
       <GuestModeModal

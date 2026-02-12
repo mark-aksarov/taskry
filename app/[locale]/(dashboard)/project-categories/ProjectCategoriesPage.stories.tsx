@@ -7,9 +7,9 @@ import { ProjectCategoriesPage } from "./ProjectCategoriesPage";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { ProjectCategoriesPageEmpty } from "./ProjectCategoriesPageEmpty";
 import { ProjectCategoryList } from "@/components/projectCategory/ProjectCategoryList";
+import { ProjectCategoryListStory } from "@/components/projectCategory/ProjectCategoryList/__stories__";
 import { ProjectCategoryToolbarCreateNewButton } from "@/components/projectCategory/ProjectCategoryToolbarCreateNewButton";
 import { ProjectCategoryToolbarActionsMenuTrigger } from "@/components/projectCategory/ProjectCategoryToolbarActionsMenuTrigger";
-import { Default as ProjectCategoryListStory } from "@/components/projectCategory/ProjectCategoryList/ProjectCategoryList.stories";
 import { ProjectCategoryToolbarCreateNewButtonStory } from "@/components/projectCategory/ProjectCategoryToolbarCreateNewButton/__stories__";
 import { ProjectCategoryToolbarActionsMenuTriggerStory } from "@/components/projectCategory/ProjectCategoryToolbarActionsMenuTrigger/__stories__";
 

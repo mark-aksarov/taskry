@@ -33,5 +33,19 @@
   },
   "EditProjectCategoryModal": {
     "title": "Edit project category"
+  },
+  "DeleteProjectCategoryModal": {
+    "deleteError": "A server error occurred. Failed to delete project category.",
+    "heading": "Удалить категорию проекта",
+    "text": "Are you sure you want to delete project category <strong>«{name}»</strong>? All contents will be permanently removed.",
+    "cancelButton": "Cancel",
+    "deleteButton": "Delete"
+  },
+  "DeleteProjectCategoriesModal": {
+    "deleteError": "A server error occurred. Failed to delete project categories.",
+    "heading": "Delete project categories",
+    "text": "Are you sure you want to delete <strong>{count} project categories</strong>? All contents will be permanently removed.",
+    "cancelButton": "Cancel",
+    "deleteButton": "Delete"
   }
 }
