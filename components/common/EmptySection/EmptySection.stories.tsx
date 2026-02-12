@@ -14,6 +14,7 @@ const meta = {
   decorators: [withThemedBackground],
   parameters: {
     backgroundVariant: "alt",
+    layout: "centered",
   },
 } satisfies Meta<typeof EmptySection>;
 

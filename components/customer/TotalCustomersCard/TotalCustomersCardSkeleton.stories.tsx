@@ -5,14 +5,7 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 const meta = {
   title: "Components/customers/TotalCustomersCardSkeleton",
   component: TotalCustomersCardSkeleton,
-  decorators: [
-    (Story) => (
-      <div className="max-w-[500px]">
-        <Story />
-      </div>
-    ),
-    withThemedBackground,
-  ],
+  decorators: [withThemedBackground],
 } satisfies Meta<typeof TotalCustomersCardSkeleton>;
 
 export default meta;

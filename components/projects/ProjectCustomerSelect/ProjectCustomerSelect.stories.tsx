@@ -3,9 +3,12 @@ import { ProjectCustomerSelect } from "./ProjectCustomerSelect";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {
-  title: "components/customers/ProjectCustomerSelect",
+  title: "components/projects/ProjectCustomerSelect",
   component: ProjectCustomerSelect,
   decorators: [withThemedBackground],
+  parameters: {
+    backgroundVariant: "alt",
+  },
 } satisfies Meta<typeof ProjectCustomerSelect>;
 
 export default meta;

@@ -5,14 +5,7 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 const meta = {
   title: "Components/projects/ProjectGridItemSkeleton",
   component: ProjectGridItemSkeleton,
-  decorators: [
-    (Story) => (
-      <div className="w-[300px] max-w-full">
-        <Story />
-      </div>
-    ),
-    withThemedBackground,
-  ],
+  decorators: [withThemedBackground],
 } satisfies Meta<typeof ProjectGridItemSkeleton>;
 
 export default meta;

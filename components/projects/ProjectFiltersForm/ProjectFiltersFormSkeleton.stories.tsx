@@ -3,16 +3,9 @@ import { ProjectFiltersFormSkeleton } from "./ProjectFiltersFormSkeleton";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {
-  title: "components/tasks/ProjectFiltersFormSkeleton",
+  title: "components/projects/ProjectFiltersFormSkeleton",
   component: ProjectFiltersFormSkeleton,
-  decorators: [
-    (Story) => (
-      <div className="max-w-[500px]">
-        <Story />
-      </div>
-    ),
-    withThemedBackground,
-  ],
+  decorators: [withThemedBackground],
   parameters: {
     backgroundVariant: "alt",
   },

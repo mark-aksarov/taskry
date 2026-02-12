@@ -18,14 +18,7 @@ import { Default as TaskDetailBottomSheetStory } from "../TaskDetailBottomSheet/
 const meta = {
   title: "Components/tasks/TaskGridItem",
   component: TaskGridItem,
-  decorators: [
-    (Story) => (
-      <div className="w-[300px] max-w-full">
-        <Story />
-      </div>
-    ),
-    withThemedBackground,
-  ],
+  decorators: [withThemedBackground],
   render: (args) => (
     <TaskGridItem
       {...args}

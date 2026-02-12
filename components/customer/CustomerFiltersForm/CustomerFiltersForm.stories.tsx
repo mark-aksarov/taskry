@@ -6,14 +6,7 @@ import { CustomerFiltersFormCompanyCheckboxGroup } from "./CustomerFiltersFormCo
 const meta: Meta<typeof CustomerFiltersForm> = {
   title: "Components/customers/CustomerFiltersForm",
   component: CustomerFiltersForm,
-  decorators: [
-    (Story) => (
-      <div className="max-w-[500px]">
-        <Story />
-      </div>
-    ),
-    withThemedBackground,
-  ],
+  decorators: [withThemedBackground],
   parameters: {
     backgroundVariant: "alt",
   },

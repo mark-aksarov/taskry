@@ -9,14 +9,7 @@ import { ProjectFiltersFormCategoryCheckboxGroup } from "./ProjectFiltersFormCat
 const meta: Meta<typeof ProjectFiltersForm> = {
   title: "Components/projects/ProjectFiltersForm",
   component: ProjectFiltersForm,
-  decorators: [
-    (Story) => (
-      <div className="w-[500px] max-w-full">
-        <Story />
-      </div>
-    ),
-    withThemedBackground,
-  ],
+  decorators: [withThemedBackground],
   parameters: {
     backgroundVariant: "alt",
   },

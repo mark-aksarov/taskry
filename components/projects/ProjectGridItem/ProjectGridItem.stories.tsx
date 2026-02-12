@@ -15,14 +15,7 @@ import { Default as ProjectDetailBottomSheetStory } from "../ProjectDetailBottom
 const meta = {
   title: "Components/projects/ProjectGridItem",
   component: ProjectGridItem,
-  decorators: [
-    (Story) => (
-      <div className="w-[300px] max-w-full">
-        <Story />
-      </div>
-    ),
-    withThemedBackground,
-  ],
+  decorators: [withThemedBackground],
 
   render: (args) => (
     <ProjectGridItem

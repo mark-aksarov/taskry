@@ -1,7 +1,7 @@
-import { usePathname } from "next/navigation";
 import { mocked } from "storybook/internal/test";
 import { ProfileActions } from "../ProfileActions";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { useParams, usePathname } from "next/navigation";
 import { UserNavigationDesktop } from "./UserNavigationDesktop";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { Default as ProfileActionsStory } from "../ProfileActions/ProfileActions.stories";
@@ -11,8 +11,14 @@ const meta = {
   component: UserNavigationDesktop,
   beforeEach: () => {
     mocked(usePathname).mockReturnValue("/profile");
+    mocked(useParams).mockReturnValue({
+      id: "user-1",
+    });
   },
   decorators: [withThemedBackground],
+  parameters: {
+    backgroundVariant: "alt",
+  },
 } satisfies Meta<typeof UserNavigationDesktop>;
 
 export default meta;

@@ -4,16 +4,9 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { UserFiltersFormPositionCheckboxGroup } from "./UserFiltersFormPositionCheckboxGroup";
 
 const meta: Meta<typeof UserFiltersForm> = {
-  title: "Components/users/UserFiltersForm",
+  title: "components/users/UserFiltersForm",
   component: UserFiltersForm,
-  decorators: [
-    (Story) => (
-      <div className="max-w-[500px]">
-        <Story />
-      </div>
-    ),
-    withThemedBackground,
-  ],
+  decorators: [withThemedBackground],
   parameters: {
     backgroundVariant: "alt",
   },

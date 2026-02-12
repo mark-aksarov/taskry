@@ -1,22 +1,15 @@
 import { Heart } from "lucide-react";
 import { DashboardCard } from "./DashboardCard";
 import { DashboardCardIcon } from "./DashboardCardIcon";
+import { DashboardCardText } from "./DashboardCardText";
 import { DashboardCardValue } from "./DashboardCardValue";
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { DashboardCardText } from "./DashboardCardText";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {
   title: "Components/common/DashboardCard",
   component: DashboardCard,
-  decorators: [
-    (Story) => (
-      <div className="w-[500px] max-w-full">
-        <Story />
-      </div>
-    ),
-    withThemedBackground,
-  ],
+  decorators: [withThemedBackground],
   args: {
     text: <DashboardCardText>Dashboard card text</DashboardCardText>,
     icon: (

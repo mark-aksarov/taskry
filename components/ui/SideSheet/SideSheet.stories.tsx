@@ -35,10 +35,7 @@ export const Right = {
     return (
       <SideSheetTemplate {...args}>
         <Dialog className="w-[360px]">
-          <DialogHeader>
-            <DialogHeading>Side Sheet Header</DialogHeading>
-            <DialogCloseButton />
-          </DialogHeader>
+          <DialogHeader>Side Sheet Header</DialogHeader>
           <DialogBody className="text-black dark:text-white">
             content
           </DialogBody>
@@ -56,10 +53,7 @@ export const Left = {
     return (
       <SideSheetTemplate {...args} side="left">
         <Dialog className="w-[360px]">
-          <DialogHeader>
-            <DialogHeading>Side Sheet Header</DialogHeading>
-            <DialogCloseButton />
-          </DialogHeader>
+          <DialogHeader>Side Sheet Header</DialogHeader>
           <DialogBody className="text-black dark:text-white">
             content
           </DialogBody>

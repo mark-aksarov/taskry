@@ -10,14 +10,7 @@ import { Default as NewSubtaskModalTriggerStory } from "@/components/subtasks/Ne
 const meta = {
   title: "components/tasks/TaskDetail",
   component: TaskDetail,
-  decorators: [
-    (Story) => (
-      <div className="w-[500px] max-w-full">
-        <Story />
-      </div>
-    ),
-    withThemedBackground,
-  ],
+  decorators: [withThemedBackground],
   parameters: {
     backgroundVariant: "alt",
   },

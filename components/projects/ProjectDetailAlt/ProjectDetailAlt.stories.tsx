@@ -7,14 +7,7 @@ import { WithoutSomeData as WithoutSomeDataStory } from "../ProjectDetail/Projec
 const meta = {
   title: "components/projects/ProjectDetailAlt",
   component: ProjectDetailAlt,
-  decorators: [
-    (Story) => (
-      <div className="max-w-[500px]">
-        <Story />
-      </div>
-    ),
-    withThemedBackground,
-  ],
+  decorators: [withThemedBackground],
   parameters: {
     backgroundVariant: "alt",
   },

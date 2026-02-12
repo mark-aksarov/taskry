@@ -7,7 +7,6 @@ import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { mockedTasks } from "../TaskList/TaskList.stories";
 import { TaskDetailBottomSheet } from "../TaskDetailBottomSheet";
 import { UserDetailModal } from "@/components/users/UserDetailModal";
-import { TaskCommentsModalTrigger } from "../TaskCommentsModalTrigger";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { TaskItemActionMenuTrigger } from "../TaskItemActionMenuTrigger";
 import { UserDetailBottomSheet } from "@/components/users/UserDetailBottomSheet";

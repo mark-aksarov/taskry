@@ -13,14 +13,7 @@ import { Default as UserDetailBottomSheetStory } from "../UserDetailBottomSheet/
 const meta = {
   title: "Components/users/UserGridItem",
   component: UserGridItem,
-  decorators: [
-    (Story) => (
-      <div className="max-w-full md:w-[300px]">
-        <Story />
-      </div>
-    ),
-    withThemedBackground,
-  ],
+  decorators: [withThemedBackground],
   render: (args) => (
     <UserGridItem
       {...args}

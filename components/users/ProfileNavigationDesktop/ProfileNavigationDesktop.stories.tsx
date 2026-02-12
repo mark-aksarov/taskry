@@ -13,6 +13,9 @@ const meta = {
     mocked(usePathname).mockReturnValue("/profile");
   },
   decorators: [withThemedBackground],
+  parameters: {
+    backgroundVariant: "alt",
+  },
 } satisfies Meta<typeof ProfileNavigationDesktop>;
 
 export default meta;

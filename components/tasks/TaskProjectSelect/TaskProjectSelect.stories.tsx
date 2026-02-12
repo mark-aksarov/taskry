@@ -6,6 +6,9 @@ const meta = {
   title: "components/tasks/TaskProjectSelect",
   component: TaskProjectSelect,
   decorators: [withThemedBackground],
+  parameters: {
+    backgroundVariant: "alt",
+  },
 } satisfies Meta<typeof TaskProjectSelect>;
 
 export default meta;

@@ -1,22 +1,12 @@
-import { fn } from "storybook/test";
 import { NewCompanyForm } from "./NewCompanyForm";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { OverlayTriggerStateContext } from "react-aria-components";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { withOverlayTriggerStateProvider } from "@/.storybook/withOverlayTriggerStateProvider";
 
 const meta = {
   title: "components/companies/NewCompanyForm",
   component: NewCompanyForm,
-  decorators: [
-    (Story) => (
-      <OverlayTriggerStateContext.Provider value={{ close: fn() } as any}>
-        <div className="max-w-[500px]">
-          <Story />
-        </div>
-      </OverlayTriggerStateContext.Provider>
-    ),
-    withThemedBackground,
-  ],
+  decorators: [withOverlayTriggerStateProvider, withThemedBackground],
   parameters: {
     backgroundVariant: "alt",
   },

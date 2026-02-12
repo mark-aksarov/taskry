@@ -15,19 +15,11 @@ const meta: Meta<typeof Select> = {
     description: "Description",
     placeholder: "Select an option",
     errorMessage: "Error message",
-    className: "max-w-[400px]",
     overlayClassName: "w-[var(--trigger-width)]",
     onSelectionChange: fn(),
     isDisabled: false,
   },
-  decorators: [
-    (Story) => (
-      <div className="w-[500px] max-w-full">
-        <Story />
-      </div>
-    ),
-    withThemedBackground,
-  ],
+  decorators: [withThemedBackground],
   parameters: {
     backgroundVariant: "alt",
   },
@@ -97,7 +89,7 @@ export const Validation = {
   },
   decorators: [
     (Story) => (
-      <Form className="flex max-w-[400px] flex-col items-start gap-4">
+      <Form className="flex flex-col items-start gap-4">
         <Story />
         <Button
           type="submit"

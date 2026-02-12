@@ -10,7 +10,6 @@ import {
 import { useActionState } from "react";
 import { useTranslations } from "next-intl";
 import { ActionFn, ActionState } from "@/lib/actions/types";
-import { ErrorBanner } from "@/components/common/ErrorBanner";
 import { CompanyNameTextField } from "../CompanyNameTextField";
 import { handleActionSubmit } from "@/lib/utils/handleActionSubmit";
 import { useCloseOverlayOnActionSuccess } from "@/lib/hooks/useCloseOverlayOnActionSuccess";

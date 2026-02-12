@@ -6,14 +6,7 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 const meta: Meta<typeof ProgressBar> = {
   title: "Components/ui/ProgressBar",
   component: ProgressBar,
-  decorators: [
-    (Story) => (
-      <div className="w-[500px] max-w-full">
-        <Story />
-      </div>
-    ),
-    withThemedBackground,
-  ],
+  decorators: [withThemedBackground],
   parameters: {
     backgroundVariant: "alt",
   },

@@ -1,4 +1,3 @@
-import { fn } from "storybook/test";
 import { EditTaskForm } from "./EditTaskForm";
 import { parseDate } from "@internationalized/date";
 import { TaskStatus } from "@/generated/prisma/enums";
@@ -6,8 +5,8 @@ import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { TaskProjectSelect } from "../TaskProjectSelect";
 import { TaskAssigneeSelect } from "../TaskAssigneeSelect";
 import { TaskCategorySelect } from "../TaskCategorySelect";
-import { OverlayTriggerStateContext } from "react-aria-components";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { withOverlayTriggerStateProvider } from "@/.storybook/withOverlayTriggerStateProvider";
 import { Default as TaskProjectSelectStory } from "../TaskProjectSelect/TaskProjectSelect.stories";
 import { Default as TaskCategorySelectStory } from "../TaskCategorySelect/TaskCategorySelect.stories";
 import { Default as TaskAssigneeSelectStory } from "../TaskAssigneeSelect/TaskAssigneeSelect.stories";
@@ -15,16 +14,7 @@ import { Default as TaskAssigneeSelectStory } from "../TaskAssigneeSelect/TaskAs
 const meta = {
   title: "components/tasks/EditTaskForm",
   component: EditTaskForm,
-  decorators: [
-    (Story) => (
-      <OverlayTriggerStateContext.Provider value={{ close: fn() } as any}>
-        <div className="max-w-[500px]">
-          <Story />
-        </div>
-      </OverlayTriggerStateContext.Provider>
-    ),
-    withThemedBackground,
-  ],
+  decorators: [withOverlayTriggerStateProvider, withThemedBackground],
   parameters: {
     backgroundVariant: "alt",
   },

@@ -3,16 +3,9 @@ import { EditUserFormSkeleton } from "./EditUserFormSkeleton";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {
-  title: "components/tasks/EditUserFormSkeleton",
+  title: "components/users/EditUserFormSkeleton",
   component: EditUserFormSkeleton,
-  decorators: [
-    (Story) => (
-      <div className="w-[500px] max-w-full">
-        <Story />
-      </div>
-    ),
-    withThemedBackground,
-  ],
+  decorators: [withThemedBackground],
   parameters: {
     backgroundVariant: "alt",
   },

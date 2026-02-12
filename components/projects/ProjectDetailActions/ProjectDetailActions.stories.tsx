@@ -8,7 +8,7 @@ import { MockedCommentsContainer } from "@/components/comments/MockedCommentsCon
 import { Default as EditProjectFormStory } from "../EditProjectForm/EditProjectForm.stories";
 
 const meta = {
-  title: "components/users/ProjectDetailActions",
+  title: "components/projects/ProjectDetailActions",
   component: ProjectDetailActions,
   decorators: [withThemedBackground],
   parameters: {

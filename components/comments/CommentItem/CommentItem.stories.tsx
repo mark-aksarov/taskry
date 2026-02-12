@@ -8,15 +8,7 @@ import { CommentItemActionMenuTrigger } from "./CommentItemActionMenuTrigger";
 const meta = {
   title: "Components/comments/CommentItem",
   component: CommentItem,
-  decorators: [
-    (Story) => (
-      <div className="w-[500px] max-w-full">
-        <Story />
-      </div>
-    ),
-    withCommentFormProvider,
-    withThemedBackground,
-  ],
+  decorators: [withCommentFormProvider, withThemedBackground],
   parameters: {
     backgroundVariant: "alt",
   },

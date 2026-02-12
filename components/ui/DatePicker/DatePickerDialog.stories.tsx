@@ -38,7 +38,6 @@ const meta = {
     locale: "en-US",
     errorMessage: "Error message",
     label: "Label",
-    className: "max-w-[400px]",
     overlayClassName: "w-[var(--trigger-width)]",
     isDisabled: false,
   },
@@ -99,7 +98,7 @@ export const Validation = {
   },
   decorators: [
     (Story) => (
-      <Form className="flex max-w-[400px] flex-col items-start gap-4">
+      <Form className="flex flex-col items-start gap-4">
         <Story />
         <Button
           type="submit"

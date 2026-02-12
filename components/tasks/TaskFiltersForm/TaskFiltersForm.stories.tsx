@@ -9,14 +9,7 @@ import { TaskFiltersFormAssigneeCheckboxGroup } from "./TaskFiltersFormAssigneeC
 const meta: Meta<typeof TaskFiltersForm> = {
   title: "Components/tasks/TaskFiltersForm",
   component: TaskFiltersForm,
-  decorators: [
-    (Story) => (
-      <div className="max-w-[500px]">
-        <Story />
-      </div>
-    ),
-    withThemedBackground,
-  ],
+  decorators: [withThemedBackground],
   parameters: {
     backgroundVariant: "alt",
   },

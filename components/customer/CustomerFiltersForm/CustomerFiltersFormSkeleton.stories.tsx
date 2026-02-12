@@ -5,14 +5,7 @@ import { CustomerFiltersFormSkeleton } from "./CustomerFiltersFormSkeleton";
 const meta = {
   title: "components/customers/CustomerFiltersFormSkeleton",
   component: CustomerFiltersFormSkeleton,
-  decorators: [
-    (Story) => (
-      <div className="max-w-[500px]">
-        <Story />
-      </div>
-    ),
-    withThemedBackground,
-  ],
+  decorators: [withThemedBackground],
   parameters: {
     backgroundVariant: "alt",
   },

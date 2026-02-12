@@ -3,9 +3,12 @@ import { UserPositionSelect } from "./UserPositionSelect";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {
-  title: "components/tasks/UserPositionSelect",
+  title: "components/users/UserPositionSelect",
   component: UserPositionSelect,
   decorators: [withThemedBackground],
+  parameters: {
+    backgroundVariant: "alt",
+  },
 } satisfies Meta<typeof UserPositionSelect>;
 
 export default meta;

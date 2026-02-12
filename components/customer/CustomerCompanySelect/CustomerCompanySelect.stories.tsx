@@ -6,6 +6,9 @@ const meta = {
   title: "components/customers/CustomerCompanySelect",
   component: CustomerCompanySelect,
   decorators: [withThemedBackground],
+  parameters: {
+    backgroundVariant: "alt",
+  },
 } satisfies Meta<typeof CustomerCompanySelect>;
 
 export default meta;

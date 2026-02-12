@@ -12,12 +12,12 @@ import { Default as SearchModalStory } from "@/components/search/SearchModal/Sea
 const meta = {
   title: "Components/layout/AppHeader",
   component: AppHeader,
-  parameters: {
-    layout: "fullscreen",
-  },
   decorators: [withThemedBackground],
   beforeEach: () => {
     mocked(usePathname).mockReturnValue("/");
+  },
+  parameters: {
+    layout: "fullscreen",
   },
 } satisfies Meta<typeof AppHeader>;
 

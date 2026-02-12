@@ -1,22 +1,14 @@
 import React from "react";
 import { Button } from "@/components/ui/Button";
-import { ToastRegion } from "@/components/ui/Toast";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { DeleteCommentModal } from "./DeleteCommentModal";
+import { withToastRegion } from "@/.storybook/withToastRegion";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {
   title: "Components/comments/DeleteCommentModal",
   component: DeleteCommentModal,
-  decorators: [
-    (Story) => (
-      <>
-        <ToastRegion />
-        <Story />
-      </>
-    ),
-    withThemedBackground,
-  ],
+  decorators: [withToastRegion, withThemedBackground],
   render: (args) => {
     const [open, setOpen] = React.useState(false);
 
@@ -38,16 +30,6 @@ export const Default = {
     isOpen: false,
     onOpenChange: () => {},
     deleteAction: () => ({ status: "success" }),
-    mutate: () => {},
-  },
-} satisfies Story;
-
-export const WithError = {
-  args: {
-    commentId: 1,
-    isOpen: false,
-    onOpenChange: () => {},
-    deleteAction: () => ({ status: "error", errorCode: "validationError" }),
     mutate: () => {},
   },
 } satisfies Story;

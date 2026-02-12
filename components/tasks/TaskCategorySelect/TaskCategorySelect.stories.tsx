@@ -6,6 +6,9 @@ const meta = {
   title: "components/tasks/TaskCategorySelect",
   component: TaskCategorySelect,
   decorators: [withThemedBackground],
+  parameters: {
+    backgroundVariant: "alt",
+  },
 } satisfies Meta<typeof TaskCategorySelect>;
 
 export default meta;

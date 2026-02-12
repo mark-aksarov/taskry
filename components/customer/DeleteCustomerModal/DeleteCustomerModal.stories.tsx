@@ -1,22 +1,14 @@
 import React from "react";
 import { Button } from "@/components/ui/Button";
-import { ToastRegion } from "@/components/ui/Toast";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { DeleteCustomerModal } from "./DeleteCustomerModal";
+import { withToastRegion } from "@/.storybook/withToastRegion";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {
   title: "Components/customers/DeleteCustomerModal",
   component: DeleteCustomerModal,
-  decorators: [
-    (Story) => (
-      <>
-        <ToastRegion />
-        <Story />
-      </>
-    ),
-    withThemedBackground,
-  ],
+  decorators: [withToastRegion, withThemedBackground],
   render: (args) => {
     const [open, setOpen] = React.useState(false);
 

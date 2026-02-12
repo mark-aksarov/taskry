@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/Button";
 import { ConfirmModalText } from "./ConfirmModalText";
 import { DialogHeading } from "@/components/ui/Dialog";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { ConfirmModalError } from "./ConfirmModalError";
 import { ConfirmModalActions } from "./ConfirmModalActions";
 import { ConfirmModalCancelButton } from "./ConfirmModalCancelButton";
 import { ConfirmModalConfirmButton } from "./ConfirmModalConfirmButton";
@@ -16,6 +15,7 @@ const meta = {
   decorators: [withThemedBackground],
   render: (args) => {
     const [isOpen, setIsOpen] = useState(false);
+
     return (
       <>
         <Button onPress={() => setIsOpen(true)} label="Open" />
@@ -35,10 +35,6 @@ export const Default = {
     children: (
       <>
         <DialogHeading>Delete item</DialogHeading>
-
-        <ConfirmModalError>
-          Something went wrong. Please try again.
-        </ConfirmModalError>
 
         <ConfirmModalText>
           Are you sure you want to delete this item? This action cannot be

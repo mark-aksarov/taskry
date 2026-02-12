@@ -13,14 +13,7 @@ import { Default as CustomerDetailBottomSheetStory } from "../CustomerDetailBott
 const meta = {
   title: "Components/customers/CustomerGridItem",
   component: CustomerGridItem,
-  decorators: [
-    (Story) => (
-      <div className="max-w-full md:w-[300px]">
-        <Story />
-      </div>
-    ),
-    withThemedBackground,
-  ],
+  decorators: [withThemedBackground],
   render: (args) => (
     <CustomerGridItem
       {...args}
