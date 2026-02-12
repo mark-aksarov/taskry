@@ -18,16 +18,8 @@ export function TaskCategoryNameTextField({
       name="name"
       label={t("label")}
       placeholder={t("placeholder")}
-      errorMessage={(validation) => {
-        const details = validation.validationDetails;
-        if (details.valueMissing) {
-          return t("validation.required");
-        }
-        if (details.tooLong) {
-          return t("validation.tooLong", { maxLength: 255 });
-        }
-        return "";
-      }}
+      errorMessage={t("validation.required")}
+      maxLength={255}
       defaultValue={defaultValue}
       isRequired
     />

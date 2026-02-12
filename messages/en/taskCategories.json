@@ -10,10 +10,9 @@
   },
   "TaskCategoryNameTextField": {
     "label": "Name",
-    "placeholder": "Typing name",
+    "placeholder": "Enter name",
     "validation": {
-      "required": "Name is required",
-      "tooLong": "Name is too long"
+      "required": "Name is required"
     }
   },
   "TaskCategoryListItem": {

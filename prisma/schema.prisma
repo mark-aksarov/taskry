@@ -252,7 +252,7 @@ model Subtask {
 
 model Position {
   id   Int    @id @default(autoincrement())
-  name String
+  name String @db.VarChar(255)
 
   workspaceId Int
 

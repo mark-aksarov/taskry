@@ -12,8 +12,7 @@
     "label": "Название",
     "placeholder": "Введите название",
     "validation": {
-      "required": "Требуется название",
-      "tooLong": "Название слишком длинное"
+      "required": "Требуется название"
     }
   },
   "TaskCategoryItemActionMenuTrigger": {

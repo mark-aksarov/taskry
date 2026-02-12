@@ -6,6 +6,8 @@ import { positionSchema } from "@/lib/schemas/position";
 import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedirect";
 import { createPosition as createPositionQuery } from "@/lib/data/position/position.dal";
 
+const schema = positionSchema.omit({ id: true });
+
 export async function createPosition(
   _prevState: ActionState,
   formData: FormData,
@@ -15,7 +17,7 @@ export async function createPosition(
 
   try {
     // Parse and validate form data
-    const parsed = positionSchema.safeParse({ name: formData.get("name") });
+    const parsed = schema.safeParse({ name: formData.get("name") });
 
     if (!parsed.success) {
       console.error("Validation error", parsed.error);

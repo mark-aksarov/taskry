@@ -15,18 +15,11 @@ export function PositionNameTextField({
   return (
     <TextField
       name="name"
+      data-test="position-name-field"
+      maxLength={255}
       label={t("label")}
       placeholder={t("placeholder")}
-      errorMessage={(validation) => {
-        const details = validation.validationDetails;
-        if (details.valueMissing) {
-          return t("validation.required");
-        }
-        if (details.tooLong) {
-          return t("validation.tooLong", { maxLength: 255 });
-        }
-        return "";
-      }}
+      errorMessage={t("validation.required")}
       defaultValue={defaultValue}
       isRequired
     />
