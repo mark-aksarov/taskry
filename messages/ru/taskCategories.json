@@ -29,5 +29,12 @@
   },
   "TaskCategoryToolbarCreateNewButton": {
     "label": "Create new"
+  },
+  "EditTaskCategoryForm": {
+    "updateError": "Произошла ошибка на сервере. Не удалось обновить категорию задачи.",
+    "submitButtonLabel": "Обновить категорию задачи"
+  },
+  "EditTaskCategoryModal": {
+    "title": "Изменить категорию задачи"
   }
 }

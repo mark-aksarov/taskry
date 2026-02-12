@@ -2,7 +2,9 @@ import { Meta, StoryObj } from "@storybook/react";
 import { TaskCategoryList } from "./TaskCategoryList";
 import { TaskCategoryListItem } from "../TaskCategoryListItem";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { TaskCategoryListItemStory } from "../TaskCategoryListItem/__stories__";
 import { TaskCategoryItemActionMenuTrigger } from "../TaskCategoryItemActionMenuTrigger";
+import { TaskCategoryItemActionMenuTriggerStory } from "../TaskCategoryItemActionMenuTrigger/__stories__";
 
 const mockedTaskCategories = [
   { id: 1, name: "Frontend" },
@@ -25,13 +27,14 @@ export const Default = {
   args: {
     children: mockedTaskCategories.map((taskCategory) => (
       <TaskCategoryListItem
+        {...TaskCategoryListItemStory.args}
         key={taskCategory.id}
         id={taskCategory.id}
         name={taskCategory.name}
         menuTrigger={
           <TaskCategoryItemActionMenuTrigger
-            guestMode={false}
-            taskId={taskCategory.id}
+            {...TaskCategoryItemActionMenuTriggerStory.args}
+            taskCategoryId={taskCategory.id}
             taskCategoryName={taskCategory.name}
           />
         }

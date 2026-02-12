@@ -44,12 +44,12 @@ export const TaskCategoryToolbarActionsMenuTrigger = ({
   };
 
   const {
-    selectedIds: taskIds,
+    selectedIds: taskCategoryIds,
     clearSelectedIds,
     selectedItems,
   } = useTaskCategorySelection();
 
-  const isDisabled = taskIds.length === 0;
+  const isDisabled = taskCategoryIds.length === 0;
 
   return (
     <>

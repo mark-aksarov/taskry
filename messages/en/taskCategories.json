@@ -29,5 +29,12 @@
   "TaskCategoryItemActionMenuTrigger": {
     "edit": "Edit",
     "delete": "Delete"
+  },
+  "EditTaskCategoryForm": {
+    "updateError": "A server error occurred. Failed to update task category.",
+    "submitButtonLabel": "Update task category"
+  },
+  "EditTaskCategoryModal": {
+    "title": "Edit task category"
   }
 }

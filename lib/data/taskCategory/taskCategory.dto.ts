@@ -6,3 +6,8 @@ export interface TaskCategorySummaryDTO {
 export interface CreateTaskCategoryInputDTO {
   name: string;
 }
+
+export interface UpdateTaskCategoryInputDTO {
+  id: number;
+  name: string;
+}

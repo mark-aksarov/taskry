@@ -1,5 +1,7 @@
 import { TaskCategoryList } from "./TaskCategoryList";
 import { TaskCategoryListItem } from "./TaskCategoryListItem";
+import { EditTaskCategoryForm } from "./EditTaskCategoryForm";
+import { updateTaskCategory } from "@/lib/actions/taskCategory/updateTaskCategory";
 import { getTaskCategorySummaries } from "@/lib/data/taskCategory/taskCategory.dal";
 import { TaskCategoryItemActionMenuTrigger } from "./TaskCategoryItemActionMenuTrigger";
 
@@ -16,8 +18,15 @@ export async function TaskCategoriesContainer() {
           menuTrigger={
             <TaskCategoryItemActionMenuTrigger
               guestMode={false}
-              taskId={taskCategory.id}
+              taskCategoryId={taskCategory.id}
               taskCategoryName={taskCategory.name}
+              editTaskCategoryForm={
+                <EditTaskCategoryForm
+                  taskCategoryId={taskCategory.id}
+                  nameDefaultValue={taskCategory.name}
+                  updateTaskCategory={updateTaskCategory}
+                />
+              }
             />
           }
         />

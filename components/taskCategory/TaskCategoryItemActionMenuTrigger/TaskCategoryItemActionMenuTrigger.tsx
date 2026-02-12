@@ -10,18 +10,21 @@ import { useState } from "react";
 import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
 import { Pencil, Trash } from "lucide-react";
+import { EditTaskCategoryModal } from "../EditTaskCategoryModal";
 import { GuestModeModal } from "@/components/common/GuestModeModal";
 
 export type TaskCategoryItemActionMenuTriggerProps = {
   guestMode: boolean;
-  taskId: number;
+  taskCategoryId: number;
   taskCategoryName: string;
+  editTaskCategoryForm: React.ReactNode;
 };
 
 export function TaskCategoryItemActionMenuTrigger({
   guestMode,
-  taskId,
+  taskCategoryId,
   taskCategoryName,
+  editTaskCategoryForm,
 }: TaskCategoryItemActionMenuTriggerProps) {
   const t = useTranslations("taskCategories.TaskCategoryItemActionMenuTrigger");
 
@@ -29,10 +32,10 @@ export function TaskCategoryItemActionMenuTrigger({
   const [isGuestModeModalOpen, setIsGuestModeModalOpen] = useState(false);
 
   // Modal state for editing the task category
-  const [isOpenEditModal, setIsOpenEditModal] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
   // Modal state for deleting the task category
-  const [isOpenDeleteModal, setIsOpenDeleteModal] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
   // Handle menu actions
   const handleAction = (key: Key) => {
@@ -43,9 +46,9 @@ export function TaskCategoryItemActionMenuTrigger({
 
     const action = key.toString();
     if (action === "edit") {
-      setIsOpenEditModal(true);
+      setIsEditModalOpen(true);
     } else if (action === "delete") {
-      setIsOpenDeleteModal(true);
+      setIsDeleteModalOpen(true);
     }
   };
 
@@ -57,7 +60,7 @@ export function TaskCategoryItemActionMenuTrigger({
         renderButton={() => (
           <ItemBaseActionMenuButton
             data-test="task-category-item-action-menu-trigger"
-            data-id={taskId}
+            data-id={taskCategoryId}
           />
         )}
       >
@@ -68,6 +71,12 @@ export function TaskCategoryItemActionMenuTrigger({
           <Trash size={16} /> {t("delete")}
         </Item>
       </ItemBaseActionMenuTrigger>
+
+      <EditTaskCategoryModal
+        isOpen={isEditModalOpen}
+        onOpenChange={setIsEditModalOpen}
+        editTaskCategoryForm={editTaskCategoryForm}
+      />
 
       <GuestModeModal
         isOpen={isGuestModeModalOpen}
