@@ -9,7 +9,6 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 const meta = {
   title: "Components/common/ListItemInfo",
   component: ListItemInfo,
-  tags: ["autodocs"],
   decorators: [withThemedBackground],
 } satisfies Meta<typeof ListItemInfo>;
 

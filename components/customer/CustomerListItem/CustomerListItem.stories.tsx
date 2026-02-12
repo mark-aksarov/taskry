@@ -13,7 +13,6 @@ import { Default as CustomerDetailBottomSheetStory } from "../CustomerDetailBott
 const meta = {
   title: "Components/customers/CustomerListItem",
   component: CustomerListItem,
-  tags: ["autodocs"],
   decorators: [withThemedBackground],
   render: (args) => (
     <CustomerListItem

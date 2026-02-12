@@ -13,7 +13,6 @@ import { Default as UserDetailBottomSheetStory } from "../UserDetailBottomSheet/
 const meta = {
   title: "Components/users/UserGridItem",
   component: UserGridItem,
-  tags: ["autodocs"],
   decorators: [
     (Story) => (
       <div className="max-w-full md:w-[300px]">

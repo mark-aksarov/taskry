@@ -16,7 +16,6 @@ interface ToastStoryArgs {
 
 const meta: Meta<ToastStoryArgs> = {
   title: "Components/ui/Toast",
-  tags: ["autodocs"],
   argTypes: {
     title: {
       control: "text",

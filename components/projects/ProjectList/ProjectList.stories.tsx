@@ -75,7 +75,6 @@ const mockedProjects = [
 const meta = {
   title: "Components/projects/ProjectList",
   component: ProjectList,
-  tags: ["autodocs"],
   decorators: [withThemedBackground],
 } satisfies Meta<typeof ProjectList & { showCheckbox?: boolean }>;
 

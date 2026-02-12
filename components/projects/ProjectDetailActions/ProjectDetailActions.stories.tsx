@@ -10,7 +10,6 @@ import { Default as EditProjectFormStory } from "../EditProjectForm/EditProjectF
 const meta = {
   title: "components/users/ProjectDetailActions",
   component: ProjectDetailActions,
-  tags: ["autodocs"],
   decorators: [withThemedBackground],
   parameters: {
     backgroundVariant: "alt",

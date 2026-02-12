@@ -8,7 +8,6 @@ import { CommentItemActionMenuTrigger } from "./CommentItemActionMenuTrigger";
 const meta = {
   title: "Components/comments/CommentItem",
   component: CommentItem,
-  tags: ["autodocs"],
   decorators: [
     (Story) => (
       <div className="w-[500px] max-w-full">

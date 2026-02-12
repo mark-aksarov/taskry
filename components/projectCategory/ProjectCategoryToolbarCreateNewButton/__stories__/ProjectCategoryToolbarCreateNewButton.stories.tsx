@@ -7,7 +7,6 @@ import { Default as NewProjectCategoryFormStory } from "../../NewProjectCategory
 const meta = {
   title: "components/project-categories/ProjectCategoryToolbarCreateNewButton",
   component: ProjectCategoryToolbarCreateNewButton,
-  tags: ["autodocs"],
   decorators: [withThemedBackground],
 } satisfies Meta<typeof ProjectCategoryToolbarCreateNewButton>;
 

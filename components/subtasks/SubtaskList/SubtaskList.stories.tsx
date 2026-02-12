@@ -18,7 +18,6 @@ const mockedSubtasks = [
 const meta = {
   title: "components/subtasks/SubtaskList",
   component: SubtaskList,
-  tags: ["autodocs"],
   decorators: [withThemedBackground],
   parameters: {
     backgroundVariant: "alt",

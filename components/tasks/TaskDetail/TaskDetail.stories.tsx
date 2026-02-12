@@ -10,7 +10,6 @@ import { Default as NewSubtaskModalTriggerStory } from "@/components/subtasks/Ne
 const meta = {
   title: "components/tasks/TaskDetail",
   component: TaskDetail,
-  tags: ["autodocs"],
   decorators: [
     (Story) => (
       <div className="w-[500px] max-w-full">

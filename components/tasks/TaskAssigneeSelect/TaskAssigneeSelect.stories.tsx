@@ -5,7 +5,6 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 const meta = {
   title: "components/tasks/TaskAssigneeSelect",
   component: TaskAssigneeSelect,
-  tags: ["autodocs"],
   decorators: [withThemedBackground],
 } satisfies Meta<typeof TaskAssigneeSelect>;
 

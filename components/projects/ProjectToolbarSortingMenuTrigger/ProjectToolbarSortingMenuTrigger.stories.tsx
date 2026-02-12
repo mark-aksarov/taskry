@@ -5,7 +5,6 @@ import { ProjectToolbarSortingMenuTrigger } from "./ProjectToolbarSortingMenuTri
 const meta = {
   title: "Components/projects/ProjectToolbarSortingMenuTrigger",
   component: ProjectToolbarSortingMenuTrigger,
-  tags: ["autodocs"],
   decorators: [withThemedBackground],
 } satisfies Meta<typeof ProjectToolbarSortingMenuTrigger>;
 

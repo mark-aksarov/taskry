@@ -7,7 +7,6 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 const meta = {
   title: "Components/common/Attachments",
   component: Attachments,
-  tags: ["autodocs"],
   args: {
     children: null,
   },

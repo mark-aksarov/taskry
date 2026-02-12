@@ -9,7 +9,6 @@ import { Default as ChangePasswordFormStory } from "../ChangePasswordForm/Change
 const meta = {
   title: "components/users/ProfileActions",
   component: ProfileActions,
-  tags: ["autodocs"],
   decorators: [withThemedBackground],
   parameters: {
     backgroundVariant: "alt",

@@ -13,7 +13,6 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 const meta = {
   title: "components/tasks/NewTaskForm",
   component: NewTaskForm,
-  tags: ["autodocs"],
   decorators: [
     (Story) => (
       <OverlayTriggerStateContext.Provider value={{ close: fn() } as any}>

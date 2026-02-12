@@ -5,7 +5,6 @@ import { PositionToolbarActionsMenuTrigger } from "../PositionToolbarActionsMenu
 const meta = {
   title: "components/positions/PositionToolbarActionsMenuTrigger",
   component: PositionToolbarActionsMenuTrigger,
-  tags: ["autodocs"],
   decorators: [withThemedBackground],
 } satisfies Meta<typeof PositionToolbarActionsMenuTrigger>;
 

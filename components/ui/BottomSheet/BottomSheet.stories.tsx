@@ -17,7 +17,6 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 const meta: Meta<typeof BottomSheet> = {
   title: "Components/ui/BottomSheet",
   component: BottomSheet,
-  tags: ["autodocs"],
   globals: {
     viewport: { value: "mobile2", isRotated: false },
   },

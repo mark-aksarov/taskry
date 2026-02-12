@@ -18,7 +18,6 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 const meta = {
   title: "Components/auth/AuthCard",
   component: AuthCard,
-  tags: ["autodocs"],
   decorators: [withThemedBackground],
 } satisfies Meta<typeof AuthCard>;
 

@@ -9,7 +9,6 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 const meta = {
   title: "Components/common/GridItemInfo",
   component: GridItemInfo,
-  tags: ["autodocs"],
   decorators: [withThemedBackground],
 } satisfies Meta<typeof GridItemInfo>;
 

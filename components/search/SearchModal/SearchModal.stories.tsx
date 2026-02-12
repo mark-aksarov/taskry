@@ -19,7 +19,6 @@ import { Default as SearchToggleButtonGroupStory } from "../SearchToggleButtonGr
 const meta = {
   title: "Components/search/SearchModal",
   component: SearchModal,
-  tags: ["autodocs"],
   decorators: [
     (Story) => (
       <DialogTrigger>

@@ -9,7 +9,6 @@ import { Default as EditSubtaskFormStory } from "../EditSubtaskForm/EditSubtaskF
 const meta = {
   title: "components/subtasks/EditSubtaskModal",
   component: EditSubtaskModal,
-  tags: ["autodocs"],
   decorators: [
     (Story) => (
       <DialogTrigger>

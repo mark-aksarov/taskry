@@ -5,7 +5,6 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 const meta = {
   title: "Components/ui/Switch",
   component: Switch,
-  tags: ["autodocs"],
   decorators: [withThemedBackground],
   parameters: {
     backgroundVariant: "alt",

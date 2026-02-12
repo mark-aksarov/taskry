@@ -13,7 +13,6 @@ import { Default as UserDetailBottomSheetStory } from "../UserDetailBottomSheet/
 const meta = {
   title: "Components/users/UserListItem",
   component: UserListItem,
-  tags: ["autodocs"],
   decorators: [withThemedBackground],
   render: (args) => (
     <UserListItem

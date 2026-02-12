@@ -9,7 +9,6 @@ import { ProjectFiltersFormCategoryCheckboxGroup } from "./ProjectFiltersFormCat
 const meta: Meta<typeof ProjectFiltersForm> = {
   title: "Components/projects/ProjectFiltersForm",
   component: ProjectFiltersForm,
-  tags: ["autodocs"],
   decorators: [
     (Story) => (
       <div className="w-[500px] max-w-full">

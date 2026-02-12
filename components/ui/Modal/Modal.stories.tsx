@@ -16,7 +16,6 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 const meta: Meta<typeof Modal> = {
   title: "Components/ui/Modal",
   component: Modal,
-  tags: ["autodocs"],
   args: {
     isDismissable: true,
   },

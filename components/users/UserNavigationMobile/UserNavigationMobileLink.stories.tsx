@@ -5,7 +5,6 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 const meta = {
   title: "components/users/UserNavigationMobileLink",
   component: UserNavigationMobileLink,
-  tags: ["autodocs"],
   args: {
     children: "Button",
   },

@@ -120,7 +120,6 @@ const mockedProjects = [
 const meta = {
   title: "Components/projects/ProjectGrid",
   component: ProjectGrid,
-  tags: ["autodocs"],
   decorators: [withThemedBackground],
 } satisfies Meta<typeof ProjectGrid>;
 

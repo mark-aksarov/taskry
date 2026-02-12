@@ -8,7 +8,6 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 const meta = {
   title: "Components/positions/NewPositionModal",
   component: NewPositionModal,
-  tags: ["autodocs"],
   decorators: [
     (Story) => (
       <DialogTrigger>

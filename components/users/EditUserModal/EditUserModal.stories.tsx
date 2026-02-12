@@ -10,7 +10,6 @@ import { Default as EditUserFormStory } from "../EditUserForm/EditUserForm.stori
 const meta = {
   title: "Components/users/EditUserModal",
   component: EditUserModal,
-  tags: ["autodocs"],
   decorators: [
     (Story) => (
       <DialogTrigger>

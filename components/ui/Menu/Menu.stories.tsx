@@ -10,7 +10,6 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 const meta: Meta<typeof MenuTrigger> = {
   title: "Components/ui/Menu",
   component: MenuTrigger,
-  tags: ["autodocs"],
   args: {
     onAction: fn(),
   },

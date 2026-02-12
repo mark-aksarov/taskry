@@ -107,7 +107,6 @@ const mockedUsers = [
 const meta = {
   title: "Components/users/UserGrid",
   component: UserGrid,
-  tags: ["autodocs"],
   decorators: [withThemedBackground],
 } satisfies Meta<typeof UserGrid>;
 

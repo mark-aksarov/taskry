@@ -7,7 +7,6 @@ import { Default as NewSubtaskFormStory } from "../NewSubtaskForm/NewSubtaskForm
 const meta = {
   title: "components/subtasks/NewSubtaskModalTrigger",
   component: NewSubtaskModalTrigger,
-  tags: ["autodocs"],
   decorators: [withThemedBackground],
   parameters: {
     backgroundVariant: "alt",

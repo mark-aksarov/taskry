@@ -7,7 +7,6 @@ import { Default as NewCompanyFormStory } from "../../NewCompanyForm/NewCompanyF
 const meta = {
   title: "components/companies/CompanyToolbarCreateNewButton",
   component: CompanyToolbarCreateNewButton,
-  tags: ["autodocs"],
   decorators: [withThemedBackground],
 } satisfies Meta<typeof CompanyToolbarCreateNewButton>;
 

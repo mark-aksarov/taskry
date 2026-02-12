@@ -9,7 +9,6 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 const meta = {
   title: "Components/ui/TextField",
   component: TextField,
-  tags: ["autodocs"],
   argTypes: {
     type: {
       options: ["text", "password"],

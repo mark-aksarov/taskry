@@ -5,7 +5,6 @@ import { CustomerToolbarSortingMenuTrigger } from "./CustomerToolbarSortingMenuT
 const meta = {
   title: "Components/customers/CustomerToolbarSortingMenuTrigger",
   component: CustomerToolbarSortingMenuTrigger,
-  tags: ["autodocs"],
   decorators: [withThemedBackground],
 } satisfies Meta<typeof CustomerToolbarSortingMenuTrigger>;
 

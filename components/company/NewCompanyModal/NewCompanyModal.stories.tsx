@@ -9,7 +9,6 @@ import { Default as NewCompanyFormStory } from "../NewCompanyForm/NewCompanyForm
 const meta = {
   title: "Components/companies/NewCompanyModal",
   component: NewCompanyModal,
-  tags: ["autodocs"],
   decorators: [
     (Story) => (
       <DialogTrigger>

@@ -13,7 +13,6 @@ import { Default as CustomerDetailBottomSheetStory } from "../CustomerDetailBott
 const meta = {
   title: "Components/customers/CustomerGridItem",
   component: CustomerGridItem,
-  tags: ["autodocs"],
   decorators: [
     (Story) => (
       <div className="max-w-full md:w-[300px]">

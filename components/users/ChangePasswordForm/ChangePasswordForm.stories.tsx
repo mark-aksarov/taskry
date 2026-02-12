@@ -7,7 +7,6 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 const meta = {
   title: "components/users/ChangePasswordForm",
   component: ChangePasswordForm,
-  tags: ["autodocs"],
   decorators: [
     (Story) => (
       <OverlayTriggerStateContext.Provider value={{ close: fn() } as any}>

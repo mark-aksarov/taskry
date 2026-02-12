@@ -15,7 +15,6 @@ const mockedTaskCategories = [
 const meta = {
   title: "components/task-categories/TaskCategoryList",
   component: TaskCategoryList,
-  tags: ["autodocs"],
   decorators: [withThemedBackground],
 } satisfies Meta<typeof TaskCategoryList>;
 

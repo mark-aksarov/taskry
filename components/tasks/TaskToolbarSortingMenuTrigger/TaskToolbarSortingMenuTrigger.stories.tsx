@@ -5,7 +5,6 @@ import { TaskToolbarSortingMenuTrigger } from "./TaskToolbarSortingMenuTrigger";
 const meta = {
   title: "Components/tasks/TaskToolbarSortingMenuTrigger",
   component: TaskToolbarSortingMenuTrigger,
-  tags: ["autodocs"],
   decorators: [withThemedBackground],
 } satisfies Meta<typeof TaskToolbarSortingMenuTrigger>;
 

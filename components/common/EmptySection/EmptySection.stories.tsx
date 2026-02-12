@@ -11,7 +11,6 @@ import { Default as NewTaskFormStory } from "@/components/tasks/NewTaskForm/NewT
 const meta = {
   title: "Components/common/EmptySection",
   component: EmptySection,
-  tags: ["autodocs"],
   decorators: [withThemedBackground],
   parameters: {
     backgroundVariant: "alt",

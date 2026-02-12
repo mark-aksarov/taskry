@@ -5,7 +5,6 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 const meta = {
   title: "Components/search/TaskSearchListItem",
   component: TaskSearchListItem,
-  tags: ["autodocs"],
   decorators: [withThemedBackground],
 } satisfies Meta<typeof TaskSearchListItem>;
 

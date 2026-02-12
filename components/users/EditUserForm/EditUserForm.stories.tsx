@@ -9,7 +9,6 @@ import { Default as UserPositionSelectStory } from "../UserPositionSelect/UserPo
 const meta = {
   title: "components/users/EditUserForm",
   component: EditUserForm,
-  tags: ["autodocs"],
   decorators: [
     (Story) => (
       <OverlayTriggerStateContext.Provider value={{ close: fn() } as any}>

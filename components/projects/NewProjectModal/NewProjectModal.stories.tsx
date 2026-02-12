@@ -10,7 +10,6 @@ import { Default as NewProjectFormStory } from "../NewProjectForm/NewProjectForm
 const meta = {
   title: "Components/projects/NewProjectModal",
   component: NewProjectModal,
-  tags: ["autodocs"],
   decorators: [
     (Story) => (
       <DialogTrigger>

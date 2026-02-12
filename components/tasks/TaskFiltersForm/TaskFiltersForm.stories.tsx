@@ -9,7 +9,6 @@ import { TaskFiltersFormAssigneeCheckboxGroup } from "./TaskFiltersFormAssigneeC
 const meta: Meta<typeof TaskFiltersForm> = {
   title: "Components/tasks/TaskFiltersForm",
   component: TaskFiltersForm,
-  tags: ["autodocs"],
   decorators: [
     (Story) => (
       <div className="max-w-[500px]">

@@ -15,7 +15,6 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 const meta: Meta<typeof SideSheet> = {
   title: "Components/ui/SideSheet",
   component: SideSheet,
-  tags: ["autodocs"],
   decorators: [withThemedBackground],
 } satisfies Meta<typeof SideSheet>;
 

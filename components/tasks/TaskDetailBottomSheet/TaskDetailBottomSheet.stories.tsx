@@ -15,7 +15,6 @@ import { Default as TaskDetailStory } from "../TaskDetail/TaskDetail.stories";
 const meta = {
   title: "components/tasks/TaskDetailBottomSheet",
   component: TaskDetailBottomSheet,
-  tags: ["autodocs"],
   decorators: [withThemedBackground],
   args: {
     taskId: 1,

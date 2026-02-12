@@ -7,7 +7,6 @@ import { EditProjectCategoryForm } from "../EditProjectCategoryForm";
 const meta = {
   title: "components/project-categories/ProjectCategoryListItem",
   component: ProjectCategoryListItem,
-  tags: ["autodocs"],
   decorators: [withThemedBackground],
 } satisfies Meta<typeof ProjectCategoryListItem>;
 

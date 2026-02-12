@@ -16,7 +16,6 @@ const mockedProjectCategories = [
 const meta = {
   title: "components/project-categories/ProjectCategoryList",
   component: ProjectCategoryList,
-  tags: ["autodocs"],
   decorators: [withThemedBackground],
 } satisfies Meta<typeof ProjectCategoryList>;
 

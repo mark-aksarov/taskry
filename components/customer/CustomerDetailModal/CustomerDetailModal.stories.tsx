@@ -17,7 +17,6 @@ import { PersonDetailHeader as PersonDetailHeaderStory } from "@/components/comm
 const meta = {
   title: "components/customers/CustomerDetailModal",
   component: CustomerDetailModal,
-  tags: ["autodocs"],
   decorators: [
     (Story) => (
       <DialogTrigger>

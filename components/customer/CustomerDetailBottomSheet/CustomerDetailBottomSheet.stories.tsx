@@ -23,7 +23,6 @@ import { PersonDetailHeader as PersonDetailHeaderStory } from "@/components/comm
 const meta = {
   title: "components/customers/CustomerDetailBottomSheet",
   component: CustomerDetailBottomSheet,
-  tags: ["autodocs"],
   decorators: [withThemedBackground],
   args: {
     customerId: 1,

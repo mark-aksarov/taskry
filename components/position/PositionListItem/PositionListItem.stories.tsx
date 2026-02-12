@@ -6,7 +6,6 @@ import { PositionItemActionMenuTrigger } from "../PositionItemActionMenuTrigger"
 const meta = {
   title: "components/positions/PositionListItem",
   component: PositionListItem,
-  tags: ["autodocs"],
   decorators: [withThemedBackground],
 } satisfies Meta<typeof PositionListItem>;
 

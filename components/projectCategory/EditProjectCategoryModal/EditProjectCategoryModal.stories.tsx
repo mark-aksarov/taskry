@@ -9,7 +9,6 @@ import { Default as EditProjectCategoryFormStory } from "../EditProjectCategoryF
 const meta = {
   title: "Components/project-categories/EditProjectCategoryModal",
   component: EditProjectCategoryModal,
-  tags: ["autodocs"],
   decorators: [
     (Story) => (
       <DialogTrigger>

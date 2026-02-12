@@ -5,7 +5,6 @@ import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 const meta = {
   title: "Components/ui/Checkbox",
   component: Checkbox,
-  tags: ["autodocs"],
   args: {
     children: "Checkbox",
   },

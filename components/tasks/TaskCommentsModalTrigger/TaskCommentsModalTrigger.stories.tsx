@@ -11,7 +11,6 @@ import { MockedCommentsContainer } from "@/components/comments/MockedCommentsCon
 const meta = {
   title: "Components/tasks/TaskCommentsModalTrigger",
   component: TaskCommentsModalTrigger,
-  tags: ["autodocs"],
   decorators: [withThemedBackground],
   parameters: {
     backgroundVariant: "alt",

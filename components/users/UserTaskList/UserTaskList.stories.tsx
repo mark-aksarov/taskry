@@ -90,7 +90,6 @@ const mockedTasks = [
 const meta = {
   title: "Components/users/UserTaskList",
   component: UserTaskList,
-  tags: ["autodocs"],
   decorators: [withThemedBackground],
 } satisfies Meta<typeof UserTaskList>;
 

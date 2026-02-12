@@ -5,7 +5,6 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 const meta = {
   title: "components/tasks/ProjectFiltersFormSkeleton",
   component: ProjectFiltersFormSkeleton,
-  tags: ["autodocs"],
   decorators: [
     (Story) => (
       <div className="max-w-[500px]">

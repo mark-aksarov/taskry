@@ -5,7 +5,6 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 const meta = {
   title: "Components/ui/Link",
   component: Link,
-  tags: ["autodocs"],
   args: {
     href: "#",
     children: "Link",

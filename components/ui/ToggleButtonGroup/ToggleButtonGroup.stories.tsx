@@ -6,7 +6,6 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 const meta: Meta<typeof ToggleButtonGroup> = {
   title: "Components/ui/ToggleButtonGroup",
   component: ToggleButtonGroup,
-  tags: ["autodocs"],
   argTypes: {
     orientation: {
       options: ["horizontal", "vertical"],

@@ -5,7 +5,6 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 const meta = {
   title: "Components/users/UserListItemSkeleton",
   component: UserListItemSkeleton,
-  tags: ["autodocs"],
   decorators: [withThemedBackground],
 } satisfies Meta<typeof UserListItemSkeleton>;
 

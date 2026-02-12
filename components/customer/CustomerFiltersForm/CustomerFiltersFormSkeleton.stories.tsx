@@ -5,7 +5,6 @@ import { CustomerFiltersFormSkeleton } from "./CustomerFiltersFormSkeleton";
 const meta = {
   title: "components/customers/CustomerFiltersFormSkeleton",
   component: CustomerFiltersFormSkeleton,
-  tags: ["autodocs"],
   decorators: [
     (Story) => (
       <div className="max-w-[500px]">

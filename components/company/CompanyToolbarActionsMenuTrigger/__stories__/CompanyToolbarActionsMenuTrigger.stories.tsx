@@ -5,7 +5,6 @@ import { CompanyToolbarActionsMenuTrigger } from "../CompanyToolbarActionsMenuTr
 const meta = {
   title: "components/companies/CompanyToolbarActionsMenuTrigger",
   component: CompanyToolbarActionsMenuTrigger,
-  tags: ["autodocs"],
   decorators: [withThemedBackground],
 } satisfies Meta<typeof CompanyToolbarActionsMenuTrigger>;
 

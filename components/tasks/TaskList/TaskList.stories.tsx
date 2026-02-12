@@ -21,7 +21,6 @@ import { Default as ProjectDetailModalStory } from "@/components/projects/Projec
 const meta = {
   title: "Components/tasks/TaskList",
   component: TaskList,
-  tags: ["autodocs"],
   decorators: [withThemedBackground],
   excludeStories: ["getTaskListItems", "mockedTasks"],
 } satisfies Meta<typeof TaskList>;

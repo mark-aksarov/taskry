@@ -11,7 +11,6 @@ import { Default as CustomerFiltersFormStory } from "../CustomerFiltersForm/Cust
 const meta = {
   title: "Components/customers/CustomerToolbarFiltersModalTrigger ",
   component: CustomerToolbarFiltersModalTrigger,
-  tags: ["autodocs"],
   decorators: [withThemedBackground],
 } satisfies Meta<typeof CustomerToolbarFiltersModalTrigger>;
 

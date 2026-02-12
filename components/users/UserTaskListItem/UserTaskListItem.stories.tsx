@@ -16,7 +16,6 @@ import { Default as TaskDetailBottomSheetStory } from "@/components/tasks/TaskDe
 const meta = {
   title: "Components/users/UserTaskListItem",
   component: UserTaskListItem,
-  tags: ["autodocs"],
   decorators: [withThemedBackground],
   render: (args) => (
     <UserTaskListItem

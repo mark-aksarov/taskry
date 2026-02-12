@@ -30,7 +30,6 @@ const mockedCompanies = [
 const meta = {
   title: "components/companies/CompanyList",
   component: CompanyList,
-  tags: ["autodocs"],
   decorators: [withThemedBackground],
 } satisfies Meta<typeof CompanyList>;
 

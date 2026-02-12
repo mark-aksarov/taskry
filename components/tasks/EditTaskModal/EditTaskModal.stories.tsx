@@ -10,7 +10,6 @@ import { Default as EditTaskFormStory } from "../EditTaskForm/EditTaskForm.stori
 const meta = {
   title: "Components/tasks/EditTaskModal",
   component: EditTaskModal,
-  tags: ["autodocs"],
   decorators: [
     (Story) => (
       <DialogTrigger>

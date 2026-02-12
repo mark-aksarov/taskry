@@ -7,7 +7,6 @@ import { WithoutSomeData as WithoutSomeDataStory } from "../TaskDetail/TaskDetai
 const meta = {
   title: "components/tasks/TaskDetailAlt",
   component: TaskDetailAlt,
-  tags: ["autodocs"],
   decorators: [
     (Story) => (
       <div className="w-[500px] max-w-full">

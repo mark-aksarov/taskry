@@ -6,7 +6,6 @@ import { TaskCategoryItemActionMenuTrigger } from "../TaskCategoryItemActionMenu
 const meta = {
   title: "components/task-categories/TaskCategoryListItem",
   component: TaskCategoryListItem,
-  tags: ["autodocs"],
   decorators: [withThemedBackground],
 } satisfies Meta<typeof TaskCategoryListItem>;
 

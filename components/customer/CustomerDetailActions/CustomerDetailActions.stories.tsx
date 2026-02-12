@@ -8,7 +8,6 @@ import { Default as EditCustomerFormStory } from "../EditCustomerForm/EditCustom
 const meta = {
   title: "components/customers/CustomerDetailActions",
   component: CustomerDetailActions,
-  tags: ["autodocs"],
   decorators: [withThemedBackground],
   parameters: {
     backgroundVariant: "alt",

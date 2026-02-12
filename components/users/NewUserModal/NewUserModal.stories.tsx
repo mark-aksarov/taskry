@@ -10,7 +10,6 @@ import { Default as NewUserFormStory } from "../NewUserForm/NewUserForm.stories"
 const meta = {
   title: "Components/users/NewUserModal",
   component: NewUserModal,
-  tags: ["autodocs"],
   decorators: [
     (Story) => (
       <DialogTrigger>

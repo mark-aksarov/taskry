@@ -7,7 +7,6 @@ import { Default as TaskFiltersFormStory } from "../TaskFiltersForm/TaskFiltersF
 const meta = {
   title: "Components/tasks/TaskToolbarFiltersModalTrigger",
   component: TaskToolbarFiltersModalTrigger,
-  tags: ["autodocs"],
   decorators: [withThemedBackground],
 } satisfies Meta<typeof TaskToolbarFiltersModalTrigger>;
 

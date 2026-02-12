@@ -9,7 +9,6 @@ import { Default as NewTaskCategoryFormStory } from "../NewTaskCategoryForm/NewT
 const meta = {
   title: "Components/task-categories/NewTaskCategoryModal",
   component: NewTaskCategoryModal,
-  tags: ["autodocs"],
   decorators: [
     (Story) => (
       <DialogTrigger>

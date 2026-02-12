@@ -216,7 +216,6 @@ const mockedCustomers = [
 const meta = {
   title: "Components/search/SearchList",
   component: SearchList,
-  tags: ["autodocs"],
   decorators: [withThemedBackground],
 } satisfies Meta<typeof SearchList>;
 

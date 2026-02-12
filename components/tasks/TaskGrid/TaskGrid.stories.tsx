@@ -22,7 +22,6 @@ import { TaskCommentsModal } from "../TaskCommentsModal";
 const meta = {
   title: "Components/tasks/TaskGrid",
   component: TaskGrid,
-  tags: ["autodocs"],
   decorators: [withThemedBackground],
 } satisfies Meta<typeof TaskGrid>;
 

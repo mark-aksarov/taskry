@@ -19,7 +19,6 @@ import { Default as ProjectDetailModalStory } from "@/components/projects/Projec
 const meta = {
   title: "Components/tasks/TaskListItem",
   component: TaskListItem,
-  tags: ["autodocs"],
   decorators: [withThemedBackground],
   render: (args) => (
     <TaskListItem

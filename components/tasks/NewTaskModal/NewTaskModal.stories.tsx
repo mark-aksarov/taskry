@@ -10,7 +10,6 @@ import { Default as NewTaskFormStory } from "../NewTaskForm/NewTaskForm.stories"
 const meta = {
   title: "Components/tasks/NewTaskModal",
   component: NewTaskModal,
-  tags: ["autodocs"],
   decorators: [
     (Story) => (
       <DialogTrigger>

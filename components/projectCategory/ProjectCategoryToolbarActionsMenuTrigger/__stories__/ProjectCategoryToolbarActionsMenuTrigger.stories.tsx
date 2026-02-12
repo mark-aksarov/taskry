@@ -6,7 +6,6 @@ const meta = {
   title:
     "components/project-categories/ProjectCategoryToolbarActionsMenuTrigger",
   component: ProjectCategoryToolbarActionsMenuTrigger,
-  tags: ["autodocs"],
   decorators: [withThemedBackground],
 } satisfies Meta<typeof ProjectCategoryToolbarActionsMenuTrigger>;
 

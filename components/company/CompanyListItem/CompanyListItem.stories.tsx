@@ -6,7 +6,6 @@ import { CompanyItemActionMenuTrigger } from "../CompanyItemActionMenuTrigger";
 const meta = {
   title: "components/companies/CompanyListItem",
   component: CompanyListItem,
-  tags: ["autodocs"],
   decorators: [withThemedBackground],
 } satisfies Meta<typeof CompanyListItem>;
 

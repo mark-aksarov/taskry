@@ -62,7 +62,6 @@ const mockedCustomers = [
 const meta = {
   title: "Components/customers/CustomerList",
   component: CustomerList,
-  tags: ["autodocs"],
   decorators: [withThemedBackground],
 } satisfies Meta<typeof CustomerList>;
 

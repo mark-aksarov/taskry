@@ -18,7 +18,6 @@ import { Default as TaskDetailBottomSheetStory } from "../TaskDetailBottomSheet/
 const meta = {
   title: "Components/tasks/TaskGridItem",
   component: TaskGridItem,
-  tags: ["autodocs"],
   decorators: [
     (Story) => (
       <div className="w-[300px] max-w-full">

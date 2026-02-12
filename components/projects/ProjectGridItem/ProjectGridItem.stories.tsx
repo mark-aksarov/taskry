@@ -15,7 +15,6 @@ import { Default as ProjectDetailBottomSheetStory } from "../ProjectDetailBottom
 const meta = {
   title: "Components/projects/ProjectGridItem",
   component: ProjectGridItem,
-  tags: ["autodocs"],
   decorators: [
     (Story) => (
       <div className="w-[300px] max-w-full">

@@ -15,7 +15,6 @@ const mockedPositions = [
 const meta = {
   title: "components/positions/PositionList",
   component: PositionList,
-  tags: ["autodocs"],
   decorators: [withThemedBackground],
 } satisfies Meta<typeof PositionList>;
 

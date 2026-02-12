@@ -7,7 +7,6 @@ import { WithoutSomeData as WithoutSomeDataStory } from "../ProjectDetail/Projec
 const meta = {
   title: "components/projects/ProjectDetailAlt",
   component: ProjectDetailAlt,
-  tags: ["autodocs"],
   decorators: [
     (Story) => (
       <div className="max-w-[500px]">

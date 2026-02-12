@@ -14,7 +14,6 @@ type DatePickerPropsWithLocaleArgs = React.ComponentProps<typeof DatePicker> & {
 const meta = {
   title: "Components/ui/DatePicker",
   component: DatePicker,
-  tags: ["autodocs"],
   argTypes: {
     locale: {
       control: "select",

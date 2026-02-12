@@ -13,7 +13,6 @@ import { Default as ProjectCustomerSelectStory } from "../ProjectCustomerSelect/
 const meta = {
   title: "components/projects/EditProjectForm",
   component: EditProjectForm,
-  tags: ["autodocs"],
   decorators: [
     (Story) => (
       <OverlayTriggerStateContext.Provider value={{ close: fn() } as any}>

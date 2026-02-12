@@ -6,7 +6,6 @@ import { CustomerFiltersFormCompanyCheckboxGroup } from "./CustomerFiltersFormCo
 const meta: Meta<typeof CustomerFiltersForm> = {
   title: "Components/customers/CustomerFiltersForm",
   component: CustomerFiltersForm,
-  tags: ["autodocs"],
   decorators: [
     (Story) => (
       <div className="max-w-[500px]">

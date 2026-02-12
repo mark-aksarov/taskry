@@ -10,7 +10,6 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 const meta: Meta<typeof Select> = {
   title: "Components/ui/Select",
   component: Select,
-  tags: ["autodocs"],
   args: {
     label: "Label",
     description: "Description",

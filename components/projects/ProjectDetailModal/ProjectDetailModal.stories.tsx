@@ -9,7 +9,6 @@ import { Default as ProjectDetailStory } from "../ProjectDetail/ProjectDetail.st
 const meta = {
   title: "components/projects/ProjectDetailModal",
   component: ProjectDetailModal,
-  tags: ["autodocs"],
   decorators: [
     (Story) => (
       <DialogTrigger>

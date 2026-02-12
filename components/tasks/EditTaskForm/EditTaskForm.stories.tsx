@@ -15,7 +15,6 @@ import { Default as TaskAssigneeSelectStory } from "../TaskAssigneeSelect/TaskAs
 const meta = {
   title: "components/tasks/EditTaskForm",
   component: EditTaskForm,
-  tags: ["autodocs"],
   decorators: [
     (Story) => (
       <OverlayTriggerStateContext.Provider value={{ close: fn() } as any}>

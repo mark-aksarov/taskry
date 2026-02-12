@@ -7,7 +7,6 @@ import { Default as UserFiltersFormStory } from "../UserFiltersForm/UserFiltersF
 const meta = {
   title: "Components/users/UserToolbarFiltersModalTrigger",
   component: UserToolbarFiltersModalTrigger,
-  tags: ["autodocs"],
   decorators: [withThemedBackground],
 } satisfies Meta<typeof UserToolbarFiltersModalTrigger>;
 

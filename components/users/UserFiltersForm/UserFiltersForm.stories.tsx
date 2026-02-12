@@ -6,7 +6,6 @@ import { UserFiltersFormPositionCheckboxGroup } from "./UserFiltersFormPositionC
 const meta: Meta<typeof UserFiltersForm> = {
   title: "Components/users/UserFiltersForm",
   component: UserFiltersForm,
-  tags: ["autodocs"],
   decorators: [
     (Story) => (
       <div className="max-w-[500px]">

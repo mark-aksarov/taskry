@@ -8,7 +8,6 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 const meta: Meta<typeof SearchField> = {
   title: "Components/ui/SearchField",
   component: SearchField,
-  tags: ["autodocs"],
   args: {
     placeholder: "Placeholder",
     errorMessage: "Error message",

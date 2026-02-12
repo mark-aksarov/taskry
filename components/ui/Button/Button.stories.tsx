@@ -17,7 +17,6 @@ const icons = {
 const meta = {
   title: "Components/ui/Button",
   component: Button,
-  tags: ["autodocs"],
   argTypes: {
     as: {
       control: {

@@ -5,7 +5,6 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 const meta = {
   title: "Components/common/Pagination",
   component: Pagination,
-  tags: ["autodocs"],
   decorators: [withThemedBackground],
 } satisfies Meta<typeof Pagination>;
 

@@ -9,7 +9,6 @@ import { Default as TaskDetailStory } from "../TaskDetail/TaskDetail.stories";
 const meta = {
   title: "components/tasks/TaskDetailModal",
   component: TaskDetailModal,
-  tags: ["autodocs"],
   decorators: [
     (Story) => (
       <DialogTrigger>

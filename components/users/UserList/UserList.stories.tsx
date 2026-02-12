@@ -107,7 +107,6 @@ const mockedUsers = [
 const meta = {
   title: "Components/users/UserList",
   component: UserList,
-  tags: ["autodocs"],
   decorators: [withThemedBackground],
 } satisfies Meta<typeof UserList>;
 

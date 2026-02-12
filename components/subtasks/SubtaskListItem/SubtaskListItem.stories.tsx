@@ -14,7 +14,6 @@ interface SubtaskListItemStoryArgs {
 
 const meta = {
   title: "components/subtasks/SubtaskListItem",
-  tags: ["autodocs"],
   decorators: [withThemedBackground],
   render: (args) => (
     <SubtaskListItem

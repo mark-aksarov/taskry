@@ -10,7 +10,6 @@ import { Attachment, Attachments } from "@/components/attachments/Attachments";
 const meta = {
   title: "Components/comments/CommentTextField",
   component: CommentTextField,
-  tags: ["autodocs"],
   decorators: [
     (Story) => (
       <div className="w-[500px] max-w-full">

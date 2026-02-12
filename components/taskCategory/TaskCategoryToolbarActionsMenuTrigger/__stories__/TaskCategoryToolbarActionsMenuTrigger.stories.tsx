@@ -5,7 +5,6 @@ import { TaskCategoryToolbarActionsMenuTrigger } from "../TaskCategoryToolbarAct
 const meta = {
   title: "components/task-categories/TaskCategoryToolbarActionsMenuTrigger",
   component: TaskCategoryToolbarActionsMenuTrigger,
-  tags: ["autodocs"],
   decorators: [withThemedBackground],
 } satisfies Meta<typeof TaskCategoryToolbarActionsMenuTrigger>;
 

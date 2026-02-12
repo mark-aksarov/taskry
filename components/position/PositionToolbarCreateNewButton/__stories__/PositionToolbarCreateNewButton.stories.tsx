@@ -7,7 +7,6 @@ import { Default as NewPositionFormStory } from "../../NewPositionForm/NewPositi
 const meta = {
   title: "components/positions/PositionToolbarCreateNewButton",
   component: PositionToolbarCreateNewButton,
-  tags: ["autodocs"],
   decorators: [withThemedBackground],
 } satisfies Meta<typeof PositionToolbarCreateNewButton>;
 

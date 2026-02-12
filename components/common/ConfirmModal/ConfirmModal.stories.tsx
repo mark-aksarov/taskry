@@ -13,7 +13,6 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 const meta = {
   title: "Components/common/ConfirmModal",
   component: ConfirmModal,
-  tags: ["autodocs"],
   decorators: [withThemedBackground],
   render: (args) => {
     const [isOpen, setIsOpen] = useState(false);

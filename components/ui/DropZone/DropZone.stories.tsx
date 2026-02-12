@@ -7,7 +7,6 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 const meta = {
   title: "Components/ui/DropZone",
   component: DropZone,
-  tags: ["autodocs"],
   args: {
     onFilesSelect: fn(),
   },

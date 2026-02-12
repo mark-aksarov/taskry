@@ -10,7 +10,6 @@ import { MockedCommentsContainer } from "@/components/comments/MockedCommentsCon
 const meta = {
   title: "components/tasks/TaskDetailActions",
   component: TaskDetailActions,
-  tags: ["autodocs"],
   decorators: [withThemedBackground],
   parameters: {
     backgroundVariant: "alt",

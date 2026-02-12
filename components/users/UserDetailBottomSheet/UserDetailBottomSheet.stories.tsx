@@ -18,7 +18,6 @@ import { PersonDetailPresentation } from "@/components/common/PersonDetailPresen
 const meta = {
   title: "components/users/UserDetailBottomSheet",
   component: UserDetailBottomSheet,
-  tags: ["autodocs"],
   decorators: [withThemedBackground],
   globals: {
     viewport: { value: "mobile2", isRotated: false },

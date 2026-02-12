@@ -10,7 +10,6 @@ import { Default as EditCustomerFormStory } from "../EditCustomerForm/EditCustom
 const meta = {
   title: "Components/customers/EditCustomerModal",
   component: EditCustomerModal,
-  tags: ["autodocs"],
   decorators: [
     (Story) => (
       <DialogTrigger>

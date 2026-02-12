@@ -7,7 +7,6 @@ import { Default as NewTaskCategoryFormStory } from "../../NewTaskCategoryForm/N
 const meta = {
   title: "components/task-categories/TaskCategoryToolbarCreateNewButton",
   component: TaskCategoryToolbarCreateNewButton,
-  tags: ["autodocs"],
   decorators: [withThemedBackground],
 } satisfies Meta<typeof TaskCategoryToolbarCreateNewButton>;
 

@@ -18,7 +18,6 @@ import { Default as ProjectDetailBottomSheetStory } from "../ProjectDetailBottom
 const meta = {
   title: "Components/projects/ProjectListItem",
   component: ProjectListItem,
-  tags: ["autodocs"],
   decorators: [withThemedBackground],
   render: (args) => (
     <ProjectListItem

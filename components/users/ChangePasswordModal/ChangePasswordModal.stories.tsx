@@ -9,7 +9,6 @@ import { Default as ChangePasswordFormStory } from "../ChangePasswordForm/Change
 const meta = {
   title: "Components/users/ChangePasswordModal",
   component: ChangePasswordModal,
-  tags: ["autodocs"],
   decorators: [
     (Story) => (
       <DialogTrigger>

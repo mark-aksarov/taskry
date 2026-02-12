@@ -14,7 +14,6 @@ import { Default as ProjectDetailStory } from "../ProjectDetail/ProjectDetail.st
 const meta = {
   title: "components/projects/ProjectDetailBottomSheet",
   component: ProjectDetailBottomSheet,
-  tags: ["autodocs"],
   decorators: [withThemedBackground],
   args: {
     projectDetailContainer: <ProjectDetail {...ProjectDetailStory.args} />,

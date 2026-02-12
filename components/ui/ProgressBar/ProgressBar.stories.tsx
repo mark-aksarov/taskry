@@ -6,7 +6,6 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 const meta: Meta<typeof ProgressBar> = {
   title: "Components/ui/ProgressBar",
   component: ProgressBar,
-  tags: ["autodocs"],
   decorators: [
     (Story) => (
       <div className="w-[500px] max-w-full">
