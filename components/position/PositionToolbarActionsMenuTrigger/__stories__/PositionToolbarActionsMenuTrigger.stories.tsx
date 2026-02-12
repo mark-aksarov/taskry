@@ -9,10 +9,11 @@ const meta = {
 } satisfies Meta<typeof PositionToolbarActionsMenuTrigger>;
 
 export default meta;
-type Story = StoryObj<typeof PositionToolbarActionsMenuTrigger>;
+type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
     guestMode: false,
+    deletePositions: () => ({ status: "success" }),
   },
 } satisfies Story;

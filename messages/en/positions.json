@@ -35,5 +35,19 @@
   },
   "EditPositionModal": {
     "title": "Edit position"
+  },
+  "DeletePositionsModal": {
+    "deleteError": "A server error occurred. Failed to delete positions.",
+    "heading": "Delete positions",
+    "text": "Are you sure you want to delete <strong>{count} positions</strong>? All contents will be permanently removed.",
+    "cancelButton": "Cancel",
+    "deleteButton": "Delete"
+  },
+  "DeletePositionModal": {
+    "deleteError": "A server error occurred. Failed to delete position.",
+    "heading": "Delete position",
+    "text": "Are you sure you want to delete position <strong>«{name}»</strong>? All contents will be permanently removed.",
+    "cancelButton": "Cancel",
+    "deleteButton": "Delete"
   }
 }

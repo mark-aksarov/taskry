@@ -1,10 +1,10 @@
-import { PositionList } from "./PositionList";
+import { PositionList } from "../PositionList";
 import { Meta, StoryObj } from "@storybook/react";
-import { PositionListItem } from "../PositionListItem";
-import { PositionListItemStory } from "../PositionListItem/__stories__";
+import { PositionListItem } from "../../PositionListItem";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { PositionItemActionMenuTrigger } from "../PositionItemActionMenuTrigger";
-import { PositionItemActionMenuTriggerStory } from "../PositionItemActionMenuTrigger/__stories__";
+import { PositionListItemStory } from "../../PositionListItem/__stories__";
+import { PositionItemActionMenuTrigger } from "../../PositionItemActionMenuTrigger";
+import { PositionItemActionMenuTriggerStory } from "../../PositionItemActionMenuTrigger/__stories__";
 
 const mockedPositions = [
   { id: 1, name: "Project Manager" },

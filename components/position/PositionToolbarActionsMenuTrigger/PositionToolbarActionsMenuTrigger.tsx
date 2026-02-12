@@ -9,17 +9,21 @@ import {
 import { useState } from "react";
 import { Trash } from "lucide-react";
 import { Item, Key } from "react-stately";
-import { DialogHeader } from "../../ui/Dialog";
 import { useTranslations } from "next-intl";
+import { DialogHeader } from "../../ui/Dialog";
+import { ActionFn, ActionState } from "@/lib/actions/types";
 import { GuestModeModal } from "../../common/GuestModeModal";
+import { DeletePositionsModal } from "../DeletePositionsModal";
 import { usePositionSelection } from "@/lib/hooks/usePositionSelection";
 
 interface PositionToolbarActionsMenuTriggerProps {
   guestMode: boolean;
+  deletePositions: ActionFn<ActionState, number[]>;
 }
 
 export const PositionToolbarActionsMenuTrigger = ({
   guestMode,
+  deletePositions,
 }: PositionToolbarActionsMenuTriggerProps) => {
   const t = useTranslations("positions.PositionToolbarActionsMenuTrigger");
 
@@ -42,12 +46,12 @@ export const PositionToolbarActionsMenuTrigger = ({
   };
 
   const {
-    selectedIds: taskIds,
+    selectedIds: positionIds,
     clearSelectedIds,
     selectedItems,
   } = usePositionSelection();
 
-  const isDisabled = taskIds.length === 0;
+  const isDisabled = positionIds.length === 0;
 
   return (
     <>
@@ -74,6 +78,14 @@ export const PositionToolbarActionsMenuTrigger = ({
           {t("delete")}
         </Item>
       </ToolbarMenuTrigger>
+
+      <DeletePositionsModal
+        isOpen={isDeleteModalOpen}
+        onOpenChange={setIsDeleteModalOpen}
+        positionIds={positionIds}
+        deletePositions={deletePositions}
+        onSuccess={clearSelectedIds}
+      />
 
       {/* Guest mode modal */}
       <GuestModeModal

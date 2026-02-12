@@ -34,7 +34,7 @@ const meta = {
 } satisfies Meta<typeof CompanyList>;
 
 export default meta;
-type Story = StoryObj<typeof CompanyList>;
+type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {

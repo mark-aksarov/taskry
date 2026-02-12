@@ -19,7 +19,7 @@ const meta = {
 } satisfies Meta<typeof EmptySection>;
 
 export default meta;
-type Story = StoryObj<typeof EmptySection>;
+type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {

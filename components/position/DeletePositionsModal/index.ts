@@ -1,0 +1,1 @@
+export { DeletePositionsModal } from "./DeletePositionsModal";

@@ -19,5 +19,6 @@ export const Default = {
     positionId: 1,
     positionName: "Project Manager",
     editPositionForm: <EditPositionForm {...EditPositionFormStory.args} />,
+    deletePositions: () => ({ status: "success" }),
   },
 } satisfies Story;

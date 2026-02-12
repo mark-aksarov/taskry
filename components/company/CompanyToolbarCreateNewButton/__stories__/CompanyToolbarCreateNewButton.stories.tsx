@@ -11,7 +11,7 @@ const meta = {
 } satisfies Meta<typeof CompanyToolbarCreateNewButton>;
 
 export default meta;
-type Story = StoryObj<typeof CompanyToolbarCreateNewButton>;
+type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {

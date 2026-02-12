@@ -107,3 +107,36 @@ export const updatePosition = async (input: UpdatePositionInputDTO) => {
 
   return updatedPosition;
 };
+
+export const deletePositions = async (ids: number[]) => {
+  // Authorization
+  const {
+    user: { id: userId, workspaceId },
+  } = await requireSession();
+
+  // ACL
+  const permission = await auth.api.userHasPermission({
+    body: {
+      userId: userId,
+      permission: {
+        position: ["delete"],
+      },
+    },
+  });
+
+  if (!permission.success) {
+    throw new AccessDeniedError(
+      "You do not have permission to delete positions.",
+    );
+  }
+
+  // Bulk delete positions within the workspace
+  const deletedPositions = await prisma.position.deleteMany({
+    where: {
+      workspaceId,
+      id: { in: ids },
+    },
+  });
+
+  return deletedPositions;
+};

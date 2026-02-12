@@ -66,7 +66,7 @@ const meta = {
 } satisfies Meta<typeof CustomerGrid>;
 
 export default meta;
-type Story = StoryObj<typeof CustomerGrid>;
+type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {

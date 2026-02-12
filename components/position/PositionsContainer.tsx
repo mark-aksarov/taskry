@@ -4,6 +4,7 @@ import { EditPositionForm } from "./EditPositionForm";
 import { updatePosition } from "@/lib/actions/position/updatePosition";
 import { getPositionSummaries } from "@/lib/data/position/position.dal";
 import { PositionItemActionMenuTrigger } from "./PositionItemActionMenuTrigger";
+import { deletePositions } from "@/lib/actions/position/deletePositions";
 
 export async function PositionsContainer() {
   const positions = await getPositionSummaries();
@@ -20,6 +21,7 @@ export async function PositionsContainer() {
               guestMode={false}
               positionId={position.id}
               positionName={position.name}
+              deletePositions={deletePositions}
               editPositionForm={
                 <EditPositionForm
                   positionId={position.id}

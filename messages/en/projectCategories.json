@@ -36,7 +36,7 @@
   },
   "DeleteProjectCategoryModal": {
     "deleteError": "A server error occurred. Failed to delete project category.",
-    "heading": "Удалить категорию проекта",
+    "heading": "Delete project category",
     "text": "Are you sure you want to delete project category <strong>«{name}»</strong>? All contents will be permanently removed.",
     "cancelButton": "Cancel",
     "deleteButton": "Delete"

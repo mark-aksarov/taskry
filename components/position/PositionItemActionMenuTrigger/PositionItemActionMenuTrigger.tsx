@@ -11,13 +11,16 @@ import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
 import { Pencil, Trash } from "lucide-react";
 import { EditPositionModal } from "../EditPositionModal";
+import { ActionFn, ActionState } from "@/lib/actions/types";
 import { GuestModeModal } from "@/components/common/GuestModeModal";
+import { DeletePositionModal } from "../DeleteProjectCategoryModal";
 
 export type PositionItemActionMenuTriggerProps = {
   guestMode: boolean;
   positionId: number;
   positionName: string;
   editPositionForm: React.ReactNode;
+  deletePositions: ActionFn<ActionState, number[]>;
 };
 
 export function PositionItemActionMenuTrigger({
@@ -25,6 +28,7 @@ export function PositionItemActionMenuTrigger({
   positionId,
   positionName,
   editPositionForm,
+  deletePositions,
 }: PositionItemActionMenuTriggerProps) {
   const t = useTranslations("positions.PositionItemActionMenuTrigger");
 
@@ -32,10 +36,10 @@ export function PositionItemActionMenuTrigger({
   const [isGuestModeModalOpen, setIsGuestModeModalOpen] = useState(false);
 
   // Modal state for editing the position
-  const [isOpenEditModal, setIsOpenEditModal] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
   // Modal state for deleting the position
-  const [isOpenDeleteModal, setIsOpenDeleteModal] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
   // Handle menu actions
   const handleAction = (key: Key) => {
@@ -46,9 +50,9 @@ export function PositionItemActionMenuTrigger({
 
     const action = key.toString();
     if (action === "edit") {
-      setIsOpenEditModal(true);
+      setIsEditModalOpen(true);
     } else if (action === "delete") {
-      setIsOpenDeleteModal(true);
+      setIsDeleteModalOpen(true);
     }
   };
 
@@ -72,9 +76,17 @@ export function PositionItemActionMenuTrigger({
         </Item>
       </ItemBaseActionMenuTrigger>
 
+      <DeletePositionModal
+        isOpen={isDeleteModalOpen}
+        onOpenChange={setIsDeleteModalOpen}
+        deletePositions={deletePositions}
+        positionId={positionId}
+        positionName={positionName}
+      />
+
       <EditPositionModal
-        isOpen={isOpenEditModal}
-        onOpenChange={setIsOpenEditModal}
+        isOpen={isEditModalOpen}
+        onOpenChange={setIsEditModalOpen}
         editPositionForm={editPositionForm}
       />
 

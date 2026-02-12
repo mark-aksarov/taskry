@@ -8,7 +8,7 @@ import { PageDecorator } from "@/.storybook/PageDecorator";
 import { PositionList } from "@/components/position/PositionList";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { PositionToolbarCreateNewButton } from "@/components/position/PositionToolbarCreateNewButton";
-import { Default as PositionListStory } from "@/components/position/PositionList/PositionList.stories";
+import { Default as PositionListStory } from "@/components/position/PositionList/__stories__/PositionList.stories";
 import { PositionToolbarActionsMenuTrigger } from "@/components/position/PositionToolbarActionsMenuTrigger";
 import { PositionToolbarCreateNewButtonStory } from "@/components/position/PositionToolbarCreateNewButton/__stories__";
 import { PositionToolbarActionsMenuTriggerStory } from "@/components/position/PositionToolbarActionsMenuTrigger/__stories__";

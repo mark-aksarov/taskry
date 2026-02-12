@@ -9,12 +9,13 @@ const meta = {
 } satisfies Meta<typeof Pagination>;
 
 export default meta;
-type Story = StoryObj<typeof Pagination>;
+type Story = StoryObj<typeof meta>;
 
 export const Small = {
   args: {
     page: 1,
     totalPages: 10,
+    onChange: () => {},
   },
 } satisfies Story;
 
@@ -23,5 +24,6 @@ export const Large = {
     page: 1,
     totalPages: 10,
     size: "large",
+    onChange: () => {},
   },
 } satisfies Story;

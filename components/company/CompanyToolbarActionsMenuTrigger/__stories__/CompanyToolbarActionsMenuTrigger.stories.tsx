@@ -9,7 +9,7 @@ const meta = {
 } satisfies Meta<typeof CompanyToolbarActionsMenuTrigger>;
 
 export default meta;
-type Story = StoryObj<typeof CompanyToolbarActionsMenuTrigger>;
+type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {

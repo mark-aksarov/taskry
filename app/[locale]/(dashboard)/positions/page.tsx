@@ -5,6 +5,7 @@ import { getPositionCount } from "@/lib/data/position/position.dal";
 import { createPosition } from "@/lib/actions/position/createPosition";
 import { NewPositionForm } from "@/components/position/NewPositionForm";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
+import { deletePositions } from "@/lib/actions/position/deletePositions";
 import { PositionsContainer } from "@/components/position/PositionsContainer";
 import { PositionToolbarCreateNewButton } from "@/components/position/PositionToolbarCreateNewButton";
 import { PositionToolbarActionsMenuTrigger } from "@/components/position/PositionToolbarActionsMenuTrigger";
@@ -37,7 +38,10 @@ export default async function AppPositionsPage() {
       positionsContainer={<PositionsContainer />}
       positionToolbarCreateNewButton={positionToolbarCreateNewButton}
       positionToolbarActionsMenuTrigger={
-        <PositionToolbarActionsMenuTrigger guestMode={guestMode} />
+        <PositionToolbarActionsMenuTrigger
+          guestMode={guestMode}
+          deletePositions={deletePositions}
+        />
       }
     />
   );

@@ -47,7 +47,7 @@ const meta = {
 } satisfies Meta<typeof DashboardPage>;
 
 export default meta;
-type Story = StoryObj<typeof DashboardPage>;
+type Story = StoryObj<typeof meta>;
 
 const AssignedTasksContainer = () => (
   <AssignedTasksPresentation
@@ -64,41 +64,35 @@ const AssignedTasksContainer = () => (
 );
 
 export const Default = {
-  render: () => (
-    <DashboardPage
-      totalProjectsCardContainer={<TotalProjectsCard totalProjects={50} />}
-      totalTasksCardContainer={<TotalTasksCard totalTasks={500} />}
-      totalUsersCardContainer={<TotalUsersCard totalUsers={15} />}
-      totalCustomersCardContainer={<TotalCustomersCard totalCustomers={20} />}
-      assignedTasksContainer={<AssignedTasksContainer />}
-    />
-  ),
+  args: {
+    totalProjectsCardContainer: <TotalProjectsCard totalProjects={50} />,
+    totalTasksCardContainer: <TotalTasksCard totalTasks={500} />,
+    totalUsersCardContainer: <TotalUsersCard totalUsers={15} />,
+    totalCustomersCardContainer: <TotalCustomersCard totalCustomers={20} />,
+    assignedTasksContainer: <AssignedTasksContainer />,
+  },
 } satisfies Story;
 
 export const Loading = {
-  render: () => (
-    <DashboardPage
-      totalProjectsCardContainer={<TotalProjectsCardSkeleton />}
-      totalTasksCardContainer={<TotalTasksCardSkeleton />}
-      totalUsersCardContainer={<TotalUsersCardSkeleton />}
-      totalCustomersCardContainer={<TotalCustomersCardSkeleton />}
-      assignedTasksContainer={<AssignedTasksSkeleton />}
-    />
-  ),
+  args: {
+    totalProjectsCardContainer: <TotalProjectsCardSkeleton />,
+    totalTasksCardContainer: <TotalTasksCardSkeleton />,
+    totalUsersCardContainer: <TotalUsersCardSkeleton />,
+    totalCustomersCardContainer: <TotalCustomersCardSkeleton />,
+    assignedTasksContainer: <AssignedTasksSkeleton />,
+  },
 } satisfies Story;
 
 export const WithNoTasks = {
-  render: () => (
-    <DashboardPage
-      totalProjectsCardContainer={<TotalProjectsCard totalProjects={50} />}
-      totalTasksCardContainer={<TotalTasksCard totalTasks={500} />}
-      totalUsersCardContainer={<TotalUsersCard totalUsers={15} />}
-      totalCustomersCardContainer={<TotalCustomersCard totalCustomers={20} />}
-      assignedTasksContainer={
-        <AssignedTasksEmptySection
-          newTaskFormContainer={<NewTaskForm {...NewTaskFormStory.args} />}
-        />
-      }
-    />
-  ),
+  args: {
+    totalProjectsCardContainer: <TotalProjectsCard totalProjects={50} />,
+    totalTasksCardContainer: <TotalTasksCard totalTasks={500} />,
+    totalUsersCardContainer: <TotalUsersCard totalUsers={15} />,
+    totalCustomersCardContainer: <TotalCustomersCard totalCustomers={20} />,
+    assignedTasksContainer: (
+      <AssignedTasksEmptySection
+        newTaskFormContainer={<NewTaskForm {...NewTaskFormStory.args} />}
+      />
+    ),
+  },
 } satisfies Story;
