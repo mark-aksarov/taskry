@@ -14,7 +14,7 @@ import { CompanyToolbarCreateNewButtonStory } from "@/components/company/Company
 import { CompanyToolbarActionsMenuTriggerStory } from "@/components/company/CompanyToolbarActionsMenuTrigger/__stories__";
 
 const meta = {
-  title: "components/pages/CompaniesPage",
+  title: "pages/CompaniesPage",
   component: CompaniesPage,
   parameters: { layout: "fullscreen" },
   decorators: [PageDecorator, withThemedBackground],

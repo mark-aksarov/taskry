@@ -8,7 +8,7 @@ import { Button } from "../Button";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta: Meta<typeof Select> = {
-  title: "Components/ui/Select",
+  title: "UI/Select",
   component: Select,
   args: {
     label: "Label",

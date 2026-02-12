@@ -24,7 +24,7 @@ import { TaskDetailHeader as TaskDetailHeaderStory } from "@/components/common/D
 import { Default as TaskDetailActionsStory } from "@/components/tasks/TaskDetailActions/TaskDetailActions.stories";
 
 const meta = {
-  title: "components/pages/TaskDetailPage",
+  title: "pages/TaskDetailPage",
   component: TaskDetailPage,
   parameters: { layout: "fullscreen" },
   decorators: [PageDecorator, withThemedBackground],

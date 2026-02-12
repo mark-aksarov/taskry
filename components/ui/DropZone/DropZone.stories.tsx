@@ -5,7 +5,7 @@ import { useState } from "react";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {
-  title: "Components/ui/DropZone",
+  title: "UI/DropZone",
   component: DropZone,
   args: {
     onFilesSelect: fn(),

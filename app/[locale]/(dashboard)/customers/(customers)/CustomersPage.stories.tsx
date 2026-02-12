@@ -22,7 +22,7 @@ import { Default as NewCustomerFormStory } from "@/components/customer/NewCustom
 import { Default as CustomerFiltersFormStory } from "@/components/customer/CustomerFiltersForm/CustomerFiltersForm.stories";
 
 const meta = {
-  title: "components/pages/CustomersPage",
+  title: "pages/CustomersPage",
   component: CustomersPage,
   parameters: { layout: "fullscreen" },
   decorators: [PageDecorator, withThemedBackground],

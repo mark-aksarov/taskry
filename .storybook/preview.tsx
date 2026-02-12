@@ -68,6 +68,12 @@ const preview: Preview = {
       },
     },
 
+    options: {
+      storySort: {
+        order: ["pages", "UI", "components"],
+      },
+    },
+
     backgrounds: { disable: true },
 
     viewport: {

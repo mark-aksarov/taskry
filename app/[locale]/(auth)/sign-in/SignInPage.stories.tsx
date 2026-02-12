@@ -4,7 +4,7 @@ import { AuthPageDecorator } from "@/.storybook/AuthPageDecorator";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {
-  title: "components/pages/SignInPage",
+  title: "pages/SignInPage",
   component: SignInPage,
   parameters: { layout: "fullscreen" },
   decorators: [AuthPageDecorator, withThemedBackground],

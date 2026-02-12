@@ -3,7 +3,7 @@ import { Badge } from "./Badge";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {
-  title: "Components/ui/Badge",
+  title: "UI/Badge",
   component: Badge,
   decorators: [withThemedBackground],
   parameters: {

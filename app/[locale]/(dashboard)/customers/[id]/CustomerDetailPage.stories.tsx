@@ -24,7 +24,7 @@ import { PersonDetailHeader as PersonDetailHeaderStory } from "@/components/comm
 import { Default as CustomerDetailActionsStory } from "@/components/customer/CustomerDetailActions/CustomerDetailActions.stories";
 
 const meta = {
-  title: "components/pages/CustomerDetailPage",
+  title: "pages/CustomerDetailPage",
   component: CustomerDetailPage,
   parameters: { layout: "fullscreen" },
   decorators: [PageDecorator, withThemedBackground],

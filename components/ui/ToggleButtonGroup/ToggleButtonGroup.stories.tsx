@@ -4,7 +4,7 @@ import { ToggleButton } from "./ToggleButton";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta: Meta<typeof ToggleButtonGroup> = {
-  title: "Components/ui/ToggleButtonGroup",
+  title: "UI/ToggleButtonGroup",
   component: ToggleButtonGroup,
   argTypes: {
     orientation: {

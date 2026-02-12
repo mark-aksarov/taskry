@@ -7,7 +7,7 @@ import { fn } from "storybook/test";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {
-  title: "Components/ui/TextField",
+  title: "UI/TextField",
   component: TextField,
   argTypes: {
     type: {

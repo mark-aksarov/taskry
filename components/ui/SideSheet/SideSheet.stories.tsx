@@ -13,7 +13,7 @@ import {
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta: Meta<typeof SideSheet> = {
-  title: "Components/ui/SideSheet",
+  title: "UI/SideSheet",
   component: SideSheet,
   decorators: [withThemedBackground],
 } satisfies Meta<typeof SideSheet>;

@@ -14,7 +14,7 @@ import { ProjectCategoryToolbarCreateNewButtonStory } from "@/components/project
 import { ProjectCategoryToolbarActionsMenuTriggerStory } from "@/components/projectCategory/ProjectCategoryToolbarActionsMenuTrigger/__stories__";
 
 const meta = {
-  title: "components/pages/ProjectCategoriesPage",
+  title: "pages/ProjectCategoriesPage",
   component: ProjectCategoriesPage,
   parameters: { layout: "fullscreen" },
   decorators: [PageDecorator, withThemedBackground],

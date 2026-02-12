@@ -22,7 +22,7 @@ import { Default as ProjectFiltersFormStory } from "@/components/projects/Projec
 import { Default as NewProjectCategoryFormStory } from "@/components/projectCategory/NewProjectCategoryForm/NewProjectCategoryForm.stories";
 
 const meta = {
-  title: "components/pages/ProjectsPage",
+  title: "pages/ProjectsPage",
   component: ProjectsPage,
   parameters: { layout: "fullscreen" },
   decorators: [PageDecorator, withThemedBackground],

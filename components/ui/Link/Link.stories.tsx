@@ -3,7 +3,7 @@ import { Link } from "../Link";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {
-  title: "Components/ui/Link",
+  title: "UI/Link",
   component: Link,
   args: {
     href: "#",

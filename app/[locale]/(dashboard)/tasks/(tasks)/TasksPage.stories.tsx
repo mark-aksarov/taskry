@@ -22,7 +22,7 @@ import { Default as TaskFiltersFormStory } from "@/components/tasks/TaskFiltersF
 import { Default as NewTaskCategoryFormStory } from "@/components/taskCategory/NewTaskCategoryForm/NewTaskCategoryForm.stories";
 
 const meta = {
-  title: "components/pages/TasksPage",
+  title: "pages/TasksPage",
   component: TasksPage,
   parameters: { layout: "fullscreen" },
   decorators: [PageDecorator, withThemedBackground],

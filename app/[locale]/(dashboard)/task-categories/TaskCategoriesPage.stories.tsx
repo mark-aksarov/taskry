@@ -14,7 +14,7 @@ import { TaskCategoryToolbarCreateNewButtonStory } from "@/components/taskCatego
 import { TaskCategoryToolbarActionsMenuTriggerStory } from "@/components/taskCategory/TaskCategoryToolbarActionsMenuTrigger/__stories__";
 
 const meta = {
-  title: "components/pages/TaskCategoriesPage",
+  title: "pages/TaskCategoriesPage",
   component: TaskCategoriesPage,
   parameters: { layout: "fullscreen" },
   decorators: [PageDecorator, withThemedBackground],

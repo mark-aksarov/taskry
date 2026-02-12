@@ -21,7 +21,7 @@ import { PersonDetailHeader as PersonDetailHeaderStory } from "@/components/comm
 import { Default as ProfileNavigationDesktopStory } from "@/components/users/ProfileNavigationDesktop/ProfileNavigationDesktop.stories";
 
 const meta = {
-  title: "components/pages/ProfileTasksPage",
+  title: "pages/ProfileTasksPage",
   component: UserTasksPageLayout,
   parameters: { layout: "fullscreen" },
   decorators: [PageDecorator, withThemedBackground],

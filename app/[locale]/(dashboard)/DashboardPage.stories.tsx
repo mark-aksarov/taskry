@@ -36,7 +36,7 @@ import { getTaskListItems } from "@/components/tasks/TaskList/TaskList.stories";
 import { Default as NewTaskFormStory } from "@/components/tasks/NewTaskForm/NewTaskForm.stories";
 
 const meta = {
-  title: "components/pages/DashboardPage",
+  title: "pages/DashboardPage",
   component: DashboardPage,
   parameters: { layout: "fullscreen" },
   decorators: [PageDecorator, withThemedBackground],

@@ -20,7 +20,7 @@ import { UserToolbarCreateNewMenuTrigger } from "@/components/users/UserToolbarC
 import { Default as UserFiltersFormStory } from "@/components/users/UserFiltersForm/UserFiltersForm.stories";
 
 const meta = {
-  title: "components/pages/UsersPage",
+  title: "pages/UsersPage",
   component: UsersPage,
   parameters: { layout: "fullscreen" },
   decorators: [PageDecorator, withThemedBackground],

@@ -20,7 +20,7 @@ import { Default as ProfileActionsStory } from "@/components/users/ProfileAction
 import { PersonDetailHeader as PersonDetailHeaderStory } from "@/components/common/DetailHeader/DetailHeader.stories";
 
 const meta = {
-  title: "components/pages/ProfilePage",
+  title: "pages/ProfilePage",
   component: ProfilePage,
   parameters: { layout: "fullscreen" },
   decorators: [PageDecorator, withThemedBackground],

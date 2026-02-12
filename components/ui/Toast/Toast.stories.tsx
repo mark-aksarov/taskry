@@ -15,7 +15,7 @@ interface ToastStoryArgs {
 }
 
 const meta: Meta<ToastStoryArgs> = {
-  title: "Components/ui/Toast",
+  title: "UI/Toast",
   argTypes: {
     title: {
       control: "text",

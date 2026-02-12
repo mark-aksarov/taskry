@@ -6,7 +6,7 @@ import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta: Meta<typeof SearchField> = {
-  title: "Components/ui/SearchField",
+  title: "UI/SearchField",
   component: SearchField,
   args: {
     placeholder: "Placeholder",

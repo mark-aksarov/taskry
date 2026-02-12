@@ -4,7 +4,7 @@ import { CheckCheck } from "lucide-react";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta: Meta<typeof ProgressBar> = {
-  title: "Components/ui/ProgressBar",
+  title: "UI/ProgressBar",
   component: ProgressBar,
   decorators: [withThemedBackground],
   parameters: {

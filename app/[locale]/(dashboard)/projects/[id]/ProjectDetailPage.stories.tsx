@@ -24,7 +24,7 @@ import { ProjectDetailHeader as ProjectDetailHeaderStory } from "@/components/co
 import { Default as ProjectDetailActionsStory } from "@/components/projects/ProjectDetailActions/ProjectDetailActions.stories";
 
 const meta = {
-  title: "components/pages/ProjectDetailPage",
+  title: "pages/ProjectDetailPage",
   component: ProjectDetailPage,
   parameters: { layout: "fullscreen" },
   decorators: [PageDecorator, withThemedBackground],

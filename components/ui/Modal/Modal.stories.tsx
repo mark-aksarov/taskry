@@ -14,7 +14,7 @@ import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta: Meta<typeof Modal> = {
-  title: "Components/ui/Modal",
+  title: "UI/Modal",
   component: Modal,
   args: {
     isDismissable: true,

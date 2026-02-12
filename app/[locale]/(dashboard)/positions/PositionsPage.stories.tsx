@@ -14,7 +14,7 @@ import { PositionToolbarCreateNewButtonStory } from "@/components/position/Posit
 import { PositionToolbarActionsMenuTriggerStory } from "@/components/position/PositionToolbarActionsMenuTrigger/__stories__";
 
 const meta = {
-  title: "components/pages/PositionsPage",
+  title: "pages/PositionsPage",
   component: PositionsPage,
   parameters: { layout: "fullscreen" },
   decorators: [PageDecorator, withThemedBackground],

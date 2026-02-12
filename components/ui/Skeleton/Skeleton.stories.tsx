@@ -3,7 +3,7 @@ import { Skeleton } from "./Skeleton";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta: Meta<typeof Skeleton> = {
-  title: "Components/ui/Skeleton",
+  title: "UI/Skeleton",
   component: Skeleton,
   decorators: [withThemedBackground],
   parameters: {

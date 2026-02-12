@@ -15,7 +15,7 @@ const icons = {
 };
 
 const meta = {
-  title: "Components/ui/Button",
+  title: "UI/Button",
   component: Button,
   argTypes: {
     as: {

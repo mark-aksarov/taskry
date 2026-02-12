@@ -8,7 +8,7 @@ import { DialogCloseButton, DialogHeader, DialogHeading } from "../Dialog";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta: Meta<typeof MenuTrigger> = {
-  title: "Components/ui/Menu",
+  title: "UI/Menu",
   component: MenuTrigger,
   args: {
     onAction: fn(),
