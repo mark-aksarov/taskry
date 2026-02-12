@@ -70,7 +70,7 @@ const preview: Preview = {
 
     options: {
       storySort: {
-        order: ["pages", "UI", "components"],
+        order: ["UI", "components", "pages"],
       },
     },
 
