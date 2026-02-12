@@ -48,7 +48,10 @@ export const AppNavigation = () => {
         {t("tasks")}
       </NavigationButton>
 
-      <NavigationButton href="/team" isActive={pathname.startsWith("/team")}>
+      <NavigationButton
+        href="/team"
+        isActive={pathname.startsWith("/team") || pathname === "/positions"}
+      >
         <Users size={18} strokeWidth={1.5} absoluteStrokeWidth />
         {t("team")}
       </NavigationButton>

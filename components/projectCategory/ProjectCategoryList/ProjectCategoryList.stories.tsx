@@ -1,6 +1,7 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { ProjectCategoryList } from "./ProjectCategoryList";
 import { ProjectCategoryListItem } from "../ProjectCategoryListItem";
+import { EditProjectCategoryForm } from "../EditProjectCategoryForm";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { ProjectCategoryItemActionMenuTrigger } from "../ProjectCategoryItemActionMenuTrigger";
 
@@ -34,6 +35,13 @@ export const Default = {
             guestMode={false}
             projectId={projectCategory.id}
             projectCategoryName={projectCategory.name}
+            editProjectCategoryForm={
+              <EditProjectCategoryForm
+                projectCategoryId={projectCategory.id}
+                nameDefaultValue={projectCategory.name}
+                updateProjectCategory={() => ({ status: "success" })}
+              />
+            }
           />
         }
       />

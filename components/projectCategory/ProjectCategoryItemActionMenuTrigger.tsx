@@ -11,18 +11,21 @@ import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
 import { Pencil, Trash } from "lucide-react";
 import { GuestModeModal } from "@/components/common/GuestModeModal";
+import { EditProjectCategoryModal } from "./EditProjectCategoryModal";
 
-export type PProjectCategoryItemActionMenuTriggerProps = {
+export type ProjectCategoryItemActionMenuTriggerProps = {
   guestMode: boolean;
   projectId: number;
   projectCategoryName: string;
+  editProjectCategoryForm: React.ReactNode;
 };
 
 export function ProjectCategoryItemActionMenuTrigger({
   guestMode,
   projectId,
   projectCategoryName,
-}: PProjectCategoryItemActionMenuTriggerProps) {
+  editProjectCategoryForm,
+}: ProjectCategoryItemActionMenuTriggerProps) {
   const t = useTranslations(
     "projectCategories.ProjectCategoryItemActionMenuTrigger",
   );
@@ -31,7 +34,7 @@ export function ProjectCategoryItemActionMenuTrigger({
   const [isGuestModeModalOpen, setIsGuestModeModalOpen] = useState(false);
 
   // Modal state for editing the project category
-  const [isOpenEditModal, setIsOpenEditModal] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
   // Modal state for deleting the project category
   const [isOpenDeleteModal, setIsOpenDeleteModal] = useState(false);
@@ -45,7 +48,7 @@ export function ProjectCategoryItemActionMenuTrigger({
 
     const action = key.toString();
     if (action === "edit") {
-      setIsOpenEditModal(true);
+      setIsEditModalOpen(true);
     } else if (action === "delete") {
       setIsOpenDeleteModal(true);
     }
@@ -70,6 +73,12 @@ export function ProjectCategoryItemActionMenuTrigger({
           <Trash size={16} /> {t("delete")}
         </Item>
       </ItemBaseActionMenuTrigger>
+
+      <EditProjectCategoryModal
+        isOpen={isEditModalOpen}
+        onOpenChange={setIsEditModalOpen}
+        editProjectCategoryForm={editProjectCategoryForm}
+      />
 
       <GuestModeModal
         isOpen={isGuestModeModalOpen}

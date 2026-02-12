@@ -20,31 +20,29 @@ describe("Project category creation", () => {
     cy.task("db:seed", payload);
 
     cy.signIn("user-1@test.com", "12345abc");
-    cy.visit("/en/projects");
+    cy.visit("/en/project-categories");
   });
 
   it("creates a new project category with valid data", () => {
-    cy.getByData("project-toolbar-create-new-menu-trigger")
+    cy.getByData("project-category-toolbar-create-new-button")
       .filter(":visible")
       .click();
-    cy.getMenuItem("category").click();
 
     cy.getByData("project-category-name-field").type("Created Category Name");
     cy.get('button[type="submit"]').click();
 
-    cy.getByData("customers-list").within(() => {
+    cy.getByData("project-category-list").within(() => {
       cy.contains("Created Category Name");
     });
   });
 
   it("shows validation errors and prevents submission with invalid data", () => {
-    cy.getByData("customer-toolbar-create-new-menu-trigger")
+    cy.getByData("project-category-toolbar-create-new-button")
       .filter(":visible")
       .click();
-    cy.getMenuItem("customer").click();
 
     cy.get('button[type="submit"]').click();
 
-    cy.contains(/full name is required/i);
+    cy.contains(/Name is required/i);
   });
 });

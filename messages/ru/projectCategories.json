@@ -3,35 +3,35 @@
     "creationError": "Произошла ошибка на сервере. Не удалось создать категорию проекта.",
     "submitButtonLabel": "Создать категорию"
   },
-
   "NewProjectCategoryModal": {
     "title": "Новая категория проекта"
   },
-
   "ProjectCategoryNameTextField": {
     "label": "Название",
     "placeholder": "Введите название",
-
     "validation": {
       "required": "Требуется название"
     }
   },
-
   "ProjectCategoryListItem": {
     "name": "Название"
   },
-
   "ProjectCategoryItemActionMenuTrigger": {
     "edit": "Редактировать",
     "delete": "Удалить"
   },
-
   "ProjectCategoryToolbarCreateNewButton": {
     "label": "Создать новую"
   },
-
   "ProjectCategoryToolbarActionsMenuTrigger": {
     "dialogHeading": "Действия",
     "delete": "Удалить"
+  },
+  "EditProjectCategoryForm": {
+    "updateError": "Произошла ошибка на сервере. Не удалось обновить категорию проекта.",
+    "submitButtonLabel": "Обновить категорию проекта"
+  },
+  "EditProjectCategoryModal": {
+    "title": "Изменить категорию проекта"
   }
 }

@@ -1,5 +1,7 @@
 import { ProjectCategoryList } from "./ProjectCategoryList";
 import { ProjectCategoryListItem } from "./ProjectCategoryListItem";
+import { EditProjectCategoryForm } from "./EditProjectCategoryForm";
+import { updateProjectCategory } from "@/lib/actions/projectCategory/updateProjectCategory";
 import { getProjectCategorySummaries } from "@/lib/data/projectCategory/projectCategory.dal";
 import { ProjectCategoryItemActionMenuTrigger } from "./ProjectCategoryItemActionMenuTrigger";
 
@@ -18,6 +20,13 @@ export async function ProjectCategoriesContainer() {
               guestMode={false}
               projectId={projectCategory.id}
               projectCategoryName={projectCategory.name}
+              editProjectCategoryForm={
+                <EditProjectCategoryForm
+                  projectCategoryId={projectCategory.id}
+                  nameDefaultValue={projectCategory.name}
+                  updateProjectCategory={updateProjectCategory}
+                />
+              }
             />
           }
         />

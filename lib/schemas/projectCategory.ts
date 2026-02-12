@@ -1,6 +1,7 @@
 import z from "zod";
-import { emptyStringToUndefined } from "./base";
+import { coercedPositiveInt, emptyStringToUndefined } from "./base";
 
 export const projectCategorySchema = z.object({
+  id: coercedPositiveInt,
   name: z.preprocess(emptyStringToUndefined, z.string().trim().min(1).max(255)),
 });

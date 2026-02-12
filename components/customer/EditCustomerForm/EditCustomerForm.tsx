@@ -68,7 +68,7 @@ export function EditCustomerForm({
         <CustomerPublicLinkTextField defaultValue={publicLinkDefaultValue} />
         {companySelect}
         <FormErrorBanner status={state.status} isPending={isPending}>
-          {t("error.updateError")}
+          {t("updateError")}
         </FormErrorBanner>
       </FormBaseBody>
       <FormBaseFooter>

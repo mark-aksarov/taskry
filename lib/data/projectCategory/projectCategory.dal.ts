@@ -3,6 +3,7 @@ import "server-only";
 import {
   ProjectCategorySummaryDTO,
   CreateProjectCategoryInputDTO,
+  UpdateProjectCategoryInputDTO,
 } from "./projectCategory.dto";
 
 import { cache } from "react";
@@ -55,7 +56,7 @@ export const createProjectCategory = async (
     body: {
       userId: userId,
       permission: {
-        company: ["create"],
+        projectCategory: ["create"],
       },
     },
   });
@@ -75,4 +76,42 @@ export const createProjectCategory = async (
   });
 
   return projectCategory;
+};
+
+export const updateProjectCategory = async (
+  input: UpdateProjectCategoryInputDTO,
+) => {
+  // Authorization
+  const {
+    user: { id: userId, workspaceId },
+  } = await requireSession();
+
+  // ACL
+  const permission = await auth.api.userHasPermission({
+    body: {
+      userId: userId,
+      permission: {
+        projectCategory: ["update"],
+      },
+    },
+  });
+
+  if (!permission.success) {
+    throw new AccessDeniedError(
+      "You do not have permission to update project categories.",
+    );
+  }
+
+  // Update project category
+  const updatedProjectCategory = await prisma.projectCategory.update({
+    where: {
+      id: input.id,
+      workspaceId,
+    },
+    data: {
+      name: input.name,
+    },
+  });
+
+  return updatedProjectCategory;
 };

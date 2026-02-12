@@ -3,35 +3,35 @@
     "creationError": "A server error occurred. Failed to create project category.",
     "submitButtonLabel": "Create category"
   },
-
   "NewProjectCategoryModal": {
     "title": "New project category"
   },
-
   "ProjectCategoryNameTextField": {
     "label": "Name",
     "placeholder": "Enter name",
-
     "validation": {
       "required": "Name is required"
     }
   },
-
   "ProjectCategoryListItem": {
     "name": "Name"
   },
-
   "ProjectCategoryItemActionMenuTrigger": {
     "edit": "Edit",
     "delete": "Delete"
   },
-
   "ProjectCategoryToolbarCreateNewButton": {
     "label": "Create New"
   },
-
   "ProjectCategoryToolbarActionsMenuTrigger": {
     "dialogHeading": "Actions",
     "delete": "Delete"
+  },
+  "EditProjectCategoryForm": {
+    "updateError": "A server error occurred. Failed to update project category.",
+    "submitButtonLabel": "Update project category"
+  },
+  "EditProjectCategoryModal": {
+    "title": "Edit project category"
   }
 }

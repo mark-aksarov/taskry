@@ -5,5 +5,5 @@ export function ProjectCategoryList({
 }: {
   children: React.ReactNode;
 }) {
-  return <List data-test="project-categories-list">{children}</List>;
+  return <List data-test="project-category-list">{children}</List>;
 }

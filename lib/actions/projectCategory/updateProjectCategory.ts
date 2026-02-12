@@ -4,11 +4,9 @@ import { ActionState } from "../types";
 import { revalidatePath } from "next/cache";
 import { projectCategorySchema } from "@/lib/schemas/projectCategory";
 import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedirect";
-import { createProjectCategory as createProjectCategoryQuery } from "@/lib/data/projectCategory/projectCategory.dal";
+import { updateProjectCategory as updateProjectCategoryQuery } from "@/lib/data/projectCategory/projectCategory.dal";
 
-const schema = projectCategorySchema.omit({ id: true });
-
-export async function createProjectCategory(
+export async function updateProjectCategory(
   _prevState: ActionState,
   formData: FormData,
 ): Promise<ActionState> {
@@ -17,9 +15,8 @@ export async function createProjectCategory(
 
   try {
     // Parse and validate form data
-    const parsed = schema.safeParse({
-      name: formData.get("name"),
-    });
+    const input = Object.fromEntries(formData.entries());
+    const parsed = projectCategorySchema.safeParse(input);
 
     if (!parsed.success) {
       console.error("Validation error", parsed.error);
@@ -31,7 +28,7 @@ export async function createProjectCategory(
     }
 
     // Create project
-    await createProjectCategoryQuery(parsed.data);
+    await updateProjectCategoryQuery(parsed.data);
     revalidatePath("/projects");
 
     return {
