@@ -1,24 +1,24 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { EditTaskCategoryForm } from "../EditTaskCategoryForm";
+import { EditPositionForm } from "../EditPositionForm";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withOverlayTriggerStateProvider } from "@/.storybook/withOverlayTriggerStateProvider";
 
 const meta = {
-  title: "components/task-categories/EditTaskCategoryForm",
-  component: EditTaskCategoryForm,
+  title: "components/positions/EditPositionForm",
+  component: EditPositionForm,
   decorators: [withOverlayTriggerStateProvider, withThemedBackground],
   parameters: {
     backgroundVariant: "alt",
   },
-} satisfies Meta<typeof EditTaskCategoryForm>;
+} satisfies Meta<typeof EditPositionForm>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    taskCategoryId: 1,
-    nameDefaultValue: "Frontend",
-    updateTaskCategory: () => ({ status: "success" }),
+    positionId: 1,
+    nameDefaultValue: "Project Manager",
+    updatePosition: () => ({ status: "success" }),
   },
 } satisfies Story;

@@ -1,32 +1,30 @@
 import { Button } from "@/components/ui/Button";
 import { DialogTrigger } from "react-aria-components";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { EditTaskCategoryForm } from "../EditTaskCategoryForm";
-import { EditTaskCategoryModal } from "./EditTaskCategoryModal";
+import { EditPositionForm } from "../EditPositionForm";
+import { EditPositionModal } from "./EditPositionModal";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { EditTaskCategoryFormStory } from "../EditTaskCategoryForm/__stories__";
+import { EditPositionFormStory } from "../EditPositionForm/__stories__";
 
 const meta = {
-  title: "Components/task-categories/EditTaskCategoryModal",
-  component: EditTaskCategoryModal,
+  title: "components/positions/EditPositionModal",
+  component: EditPositionModal,
   decorators: [
     (Story) => (
       <DialogTrigger>
-        <Button label="Edit task category" />
+        <Button label="Edit position" />
         <Story />
       </DialogTrigger>
     ),
     withThemedBackground,
   ],
-} satisfies Meta<typeof EditTaskCategoryModal>;
+} satisfies Meta<typeof EditPositionModal>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    editTaskCategoryForm: (
-      <EditTaskCategoryForm {...EditTaskCategoryFormStory.args} />
-    ),
+    editPositionForm: <EditPositionForm {...EditPositionFormStory.args} />,
   },
 } satisfies Story;

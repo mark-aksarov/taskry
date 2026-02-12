@@ -28,5 +28,12 @@
   "PositionItemActionMenuTrigger": {
     "edit": "Edit",
     "delete": "Delete"
+  },
+  "EditPositionForm": {
+    "updateError": "A server error occurred. Failed to update project category.",
+    "submitButtonLabel": "Update position"
+  },
+  "EditPositionModal": {
+    "title": "Edit position"
   }
 }

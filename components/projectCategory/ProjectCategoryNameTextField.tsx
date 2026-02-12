@@ -20,6 +20,7 @@ export function ProjectCategoryNameTextField({
       placeholder={t("placeholder")}
       errorMessage={t("validation.required")}
       defaultValue={defaultValue}
+      maxLength={255}
       isRequired
     />
   );

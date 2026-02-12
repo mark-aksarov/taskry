@@ -28,5 +28,12 @@
   "PositionItemActionMenuTrigger": {
     "edit": "Редактировать",
     "delete": "Удалить"
+  },
+  "EditPositionForm": {
+    "updateError": "Произошла ошибка на сервере. Не удалось обновить должность.",
+    "submitButtonLabel": "Обновить должность"
+  },
+  "EditPositionModal": {
+    "title": "Изменить должность"
   }
 }

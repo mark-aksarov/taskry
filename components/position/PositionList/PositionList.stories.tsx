@@ -1,8 +1,10 @@
 import { PositionList } from "./PositionList";
 import { Meta, StoryObj } from "@storybook/react";
 import { PositionListItem } from "../PositionListItem";
+import { PositionListItemStory } from "../PositionListItem/__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { PositionItemActionMenuTrigger } from "../PositionItemActionMenuTrigger";
+import { PositionItemActionMenuTriggerStory } from "../PositionItemActionMenuTrigger/__stories__";
 
 const mockedPositions = [
   { id: 1, name: "Project Manager" },
@@ -25,12 +27,13 @@ export const Default = {
   args: {
     children: mockedPositions.map((position) => (
       <PositionListItem
+        {...PositionListItemStory.args}
         key={position.id}
         id={position.id}
         name={position.name}
         menuTrigger={
           <PositionItemActionMenuTrigger
-            guestMode={false}
+            {...PositionItemActionMenuTriggerStory.args}
             positionId={position.id}
             positionName={position.name}
           />

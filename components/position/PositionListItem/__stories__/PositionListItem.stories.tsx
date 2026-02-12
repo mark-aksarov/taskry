@@ -1,7 +1,8 @@
 import { Meta, StoryObj } from "@storybook/react";
-import { PositionListItem } from "./PositionListItem";
+import { PositionListItem } from "../PositionListItem";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { PositionItemActionMenuTrigger } from "../PositionItemActionMenuTrigger";
+import { PositionItemActionMenuTrigger } from "../../PositionItemActionMenuTrigger";
+import { PositionItemActionMenuTriggerStory } from "../../PositionItemActionMenuTrigger/__stories__";
 
 const meta = {
   title: "components/positions/PositionListItem",
@@ -18,9 +19,7 @@ export const Default = {
     name: "Project Manager",
     menuTrigger: (
       <PositionItemActionMenuTrigger
-        guestMode={false}
-        positionId={1}
-        positionName="Project Manager"
+        {...PositionItemActionMenuTriggerStory.args}
       />
     ),
   },

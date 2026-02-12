@@ -10,18 +10,21 @@ import { useState } from "react";
 import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
 import { Pencil, Trash } from "lucide-react";
+import { EditPositionModal } from "../EditPositionModal";
 import { GuestModeModal } from "@/components/common/GuestModeModal";
 
 export type PositionItemActionMenuTriggerProps = {
   guestMode: boolean;
   positionId: number;
   positionName: string;
+  editPositionForm: React.ReactNode;
 };
 
 export function PositionItemActionMenuTrigger({
   guestMode,
   positionId,
   positionName,
+  editPositionForm,
 }: PositionItemActionMenuTriggerProps) {
   const t = useTranslations("positions.PositionItemActionMenuTrigger");
 
@@ -68,6 +71,12 @@ export function PositionItemActionMenuTrigger({
           <Trash size={16} /> {t("delete")}
         </Item>
       </ItemBaseActionMenuTrigger>
+
+      <EditPositionModal
+        isOpen={isOpenEditModal}
+        onOpenChange={setIsOpenEditModal}
+        editPositionForm={editPositionForm}
+      />
 
       <GuestModeModal
         isOpen={isGuestModeModalOpen}
