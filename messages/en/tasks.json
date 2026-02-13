@@ -104,10 +104,7 @@
   "TaskCommentsModal": {
     "title": "Task Comments"
   },
-  "TaskDetailBottomSheet": {
-    "title": "Task Details",
-    "openInFullPage": "Open in Full Page"
-  },
+
   "NewTaskModalTrigger": {
     "label": "New Task"
   },

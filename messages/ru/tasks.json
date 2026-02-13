@@ -104,10 +104,6 @@
   "TaskCommentsModal": {
     "title": "Комментарии к задаче"
   },
-  "TaskDetailBottomSheet": {
-    "title": "Детали задачи",
-    "openInFullPage": "Открыть на полной странице"
-  },
   "NewTaskModalTrigger": {
     "label": "Новая задача"
   },

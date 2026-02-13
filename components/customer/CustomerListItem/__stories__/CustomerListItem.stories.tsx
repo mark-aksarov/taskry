@@ -2,10 +2,8 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { CustomerListItem } from "../CustomerListItem";
 import { CustomerDetailModal } from "../../CustomerDetailModal";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { CustomerDetailBottomSheet } from "../../CustomerDetailBottomSheet";
 import { CustomerDetailModalStory } from "../../CustomerDetailModal/__stories__";
 import { CustomerItemActionMenuTrigger } from "../../CustomerItemActionMenuTrigger";
-import { CustomerDetailBottomSheetStory } from "../../CustomerDetailBottomSheet/__stories__";
 import { CustomerItemActionMenuTriggerStory } from "../../CustomerItemActionMenuTrigger/__stories__";
 
 const meta = {
@@ -37,10 +35,6 @@ export const Default = {
 
     customerDetailModal: (
       <CustomerDetailModal {...CustomerDetailModalStory.args} />
-    ),
-
-    customerDetailBottomSheet: (
-      <CustomerDetailBottomSheet {...CustomerDetailBottomSheetStory.args} />
     ),
   },
 } satisfies Story;

@@ -15,10 +15,10 @@ import {
 import {
   ItemBaseBadge,
   ItemBaseDetailModalTrigger,
-  ItemBaseDetailBottomSheetTrigger,
 } from "@/components/common/ItemBase";
 
 import Image from "next/image";
+import { Link } from "@/components/ui/Link";
 import { Checkbox } from "@/components/ui/Checkbox";
 import { ProjectStatus } from "@/generated/prisma/enums";
 import { useFormatter, useTranslations } from "next-intl";
@@ -44,9 +44,7 @@ export interface ProjectGridItemProps {
   projectCommentsModal: React.ReactNode;
   menuTrigger: React.ReactNode;
   projectDetailModal: React.ReactNode;
-  projectDetailBottomSheet: React.ReactNode;
   userDetailModal?: React.ReactNode;
-  userDetailBottomSheet?: React.ReactNode;
 }
 
 export function ProjectGridItem({
@@ -61,9 +59,7 @@ export function ProjectGridItem({
   projectCommentsModal,
   menuTrigger,
   projectDetailModal,
-  projectDetailBottomSheet,
   userDetailModal,
-  userDetailBottomSheet,
 }: ProjectGridItemProps) {
   const tStatus = useTranslations("projects.ProjectStatus");
   const t = useTranslations("projects.ProjectGridItem");
@@ -89,6 +85,14 @@ export function ProjectGridItem({
     <UnknownUser className="h-9 w-9" />
   );
 
+  const creatorImgLink = creator ? (
+    <Link className="md:hidden" href={`/team/${creator.id}`}>
+      {creatorImg}
+    </Link>
+  ) : (
+    <UnknownUser className="h-9 w-9" />
+  );
+
   return (
     <ProjectGridItemLayout
       checkboxSlot={
@@ -109,12 +113,12 @@ export function ProjectGridItem({
               {title}
             </ItemBaseDetailModalTrigger>
 
-            <ItemBaseDetailBottomSheetTrigger
-              bottomSheet={projectDetailBottomSheet}
-              className="truncate"
+            <Link
+              className="block truncate md:hidden"
+              href={`/customers/${id}`}
             >
               {title}
-            </ItemBaseDetailBottomSheetTrigger>
+            </Link>
           </GridItemTitle>
 
           <GridItemText>{deadlineOn}</GridItemText>
@@ -127,11 +131,7 @@ export function ProjectGridItem({
               {creatorImg}
             </ItemBaseDetailModalTrigger>
 
-            <ItemBaseDetailBottomSheetTrigger
-              bottomSheet={userDetailBottomSheet}
-            >
-              {creatorImg}
-            </ItemBaseDetailBottomSheetTrigger>
+            {creatorImgLink}
           </>
         ) : (
           <UnknownUser className="h-9 w-9" />

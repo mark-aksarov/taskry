@@ -153,11 +153,6 @@
     "title": "User Information"
   },
 
-  "UserDetailBottomSheet": {
-    "dialogHeading": "User Details",
-    "openInFullPage": "Open in Full Page"
-  },
-
   "UserDetailContainer": {
     "noPosition": "No position"
   },

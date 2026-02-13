@@ -10,11 +10,6 @@ import {
   GridItemContactIconWrapper,
 } from "@/components/common/Grid";
 
-import {
-  ItemBaseDetailModalTrigger,
-  ItemBaseDetailBottomSheetTrigger,
-} from "@/components/common/ItemBase";
-
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { Link } from "@/components/ui/Link";
@@ -23,6 +18,7 @@ import { Divider } from "@/components/ui/Divider";
 import { UserGridItemLayout } from "./UserGridItemLayout";
 import { UnknownUser } from "@/components/common/UnknownUser";
 import { ImageContainer } from "@/components/common/ImageContainer";
+import { ItemBaseDetailModalTrigger } from "@/components/common/ItemBase";
 
 export interface UserGridItemProps {
   id: string;
@@ -36,7 +32,6 @@ export interface UserGridItemProps {
   email: string;
   menuTrigger: React.ReactNode;
   userDetailModal: React.ReactNode;
-  userDetailBottomSheet: React.ReactNode;
 }
 
 export function UserGridItem({
@@ -49,7 +44,6 @@ export function UserGridItem({
   email,
   menuTrigger,
   userDetailModal,
-  userDetailBottomSheet,
 }: UserGridItemProps) {
   const t = useTranslations("users.UserGridItem");
 
@@ -72,9 +66,9 @@ export function UserGridItem({
             {userImg}
           </ItemBaseDetailModalTrigger>
 
-          <ItemBaseDetailBottomSheetTrigger bottomSheet={userDetailBottomSheet}>
+          <Link className="md:hidden" href={`/team/${id}`}>
             {userImg}
-          </ItemBaseDetailBottomSheetTrigger>
+          </Link>
         </>
       }
       titleSlot={
@@ -87,12 +81,9 @@ export function UserGridItem({
               {fullName}
             </ItemBaseDetailModalTrigger>
 
-            <ItemBaseDetailBottomSheetTrigger
-              bottomSheet={userDetailBottomSheet}
-              className="truncate"
-            >
+            <Link className="block truncate md:hidden" href={`/team/${id}`}>
               {fullName}
-            </ItemBaseDetailBottomSheetTrigger>
+            </Link>
           </GridItemTitle>
 
           <GridItemText>

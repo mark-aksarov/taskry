@@ -19,7 +19,6 @@ import { UserListItemDTO } from "@/lib/data/user/user.dto";
 import { deleteUser } from "@/lib/actions/user/deleteUser";
 import { UserDetailContainer } from "../UserDetailContainer";
 import { ViewModeLayout } from "@/components/common/ViewMode";
-import { UserDetailBottomSheet } from "../UserDetailBottomSheet";
 import { EditUserFormContainer } from "../EditUserFormContainer";
 import { UserItemActionMenuTrigger } from "../UserItemActionMenuTrigger";
 
@@ -94,14 +93,6 @@ export async function UsersContainer({
                     }
                   />
                 }
-                userDetailBottomSheet={
-                  <UserDetailBottomSheet
-                    userId={user.id}
-                    userDetailContainer={
-                      <UserDetailContainer userId={user.id} />
-                    }
-                  />
-                }
                 {...getUserCommonProps(user)}
               />
             ))}
@@ -129,14 +120,6 @@ export async function UsersContainer({
                 }
                 userDetailModal={
                   <UserDetailModal
-                    userId={user.id}
-                    userDetailContainer={
-                      <UserDetailContainer userId={user.id} />
-                    }
-                  />
-                }
-                userDetailBottomSheet={
-                  <UserDetailBottomSheet
                     userId={user.id}
                     userDetailContainer={
                       <UserDetailContainer userId={user.id} />

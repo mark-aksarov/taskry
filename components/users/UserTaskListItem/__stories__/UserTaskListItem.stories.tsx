@@ -5,11 +5,9 @@ import { TaskDetailModal } from "@/components/tasks/TaskDetailModal";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { TaskCommentsModal } from "@/components/tasks/TaskCommentsModal";
 import { UserItemActionMenuTrigger } from "../../UserItemActionMenuTrigger";
-import { TaskDetailBottomSheet } from "@/components/tasks/TaskDetailBottomSheet";
 import { TaskDetailModalStory } from "@/components/tasks/TaskDetailModal/__stories__";
 import { TaskCommentsModalStory } from "@/components/tasks/TaskCommentsModal/__stories__";
 import { UserItemActionMenuTriggerStory } from "../../UserItemActionMenuTrigger/__stories__";
-import { TaskDetailBottomSheetStory } from "@/components/tasks/TaskDetailBottomSheet/__stories__";
 
 const meta = {
   title: "components/users/UserTaskListItem",
@@ -28,9 +26,6 @@ export const Default = {
     status: TaskStatus.pending,
     commentsCount: 10,
     taskDetailModal: <TaskDetailModal {...TaskDetailModalStory.args} />,
-    taskDetailBottomSheet: (
-      <TaskDetailBottomSheet {...TaskDetailBottomSheetStory.args} />
-    ),
     menuTrigger: (
       <UserItemActionMenuTrigger {...UserItemActionMenuTriggerStory.args} />
     ),

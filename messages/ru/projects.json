@@ -160,10 +160,6 @@
   "ProjectCommentsModal": {
     "title": "Комментарии проекта"
   },
-  "ProjectDetailBottomSheet": {
-    "dialogHeading": "Детали проекта",
-    "openInFullPage": "Открыть в полном окне"
-  },
   "ProjectDetail": {
     "creator": "Создатель",
     "noCreator": "Нет создателя",

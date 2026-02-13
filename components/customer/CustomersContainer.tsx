@@ -10,7 +10,6 @@ import { CustomerDetailModal } from "./CustomerDetailModal";
 import { getCustomerList } from "@/lib/data/customer/customer.dal";
 import { CustomerDetailContainer } from "./CustomerDetailContainer";
 import { CustomerListItemDTO } from "@/lib/data/customer/customer.dto";
-import { CustomerDetailBottomSheet } from "./CustomerDetailBottomSheet";
 import { EditCustomerFormContainer } from "./EditCustomerFormContainer";
 import { deleteCustomers } from "@/lib/actions/customer/deleteCustomers";
 import { CustomerItemActionMenuTrigger } from "./CustomerItemActionMenuTrigger";
@@ -76,14 +75,6 @@ export async function CustomersContainer({
                   }
                 />
               }
-              customerDetailBottomSheet={
-                <CustomerDetailBottomSheet
-                  customerId={customer.id}
-                  customerDetailContainer={
-                    <CustomerDetailContainer customerId={customer.id} />
-                  }
-                />
-              }
               {...getCustomerCommonProps(customer)}
             />
           ))}
@@ -108,14 +99,6 @@ export async function CustomersContainer({
               }
               customerDetailModal={
                 <CustomerDetailModal
-                  customerId={customer.id}
-                  customerDetailContainer={
-                    <CustomerDetailContainer customerId={customer.id} />
-                  }
-                />
-              }
-              customerDetailBottomSheet={
-                <CustomerDetailBottomSheet
                   customerId={customer.id}
                   customerDetailContainer={
                     <CustomerDetailContainer customerId={customer.id} />

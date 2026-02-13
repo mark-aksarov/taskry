@@ -5,11 +5,9 @@ import { ProjectDetailModal } from "../../ProjectDetailModal";
 import { ProjectCommentsModal } from "../../ProjectCommentsModal";
 import { mockedProject } from "../../ProjectListItem/__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { ProjectDetailBottomSheet } from "../../ProjectDetailBottomSheet";
 import { ProjectDetailModalStory } from "../../ProjectDetailModal/__stories__";
 import { ProjectItemActionMenuTrigger } from "../../ProjectItemActionMenuTrigger";
 import { ProjectCommentsModalStory } from "../../ProjectCommentsModal/__stories__";
-import { ProjectDetailBottomSheetStory } from "../../ProjectDetailBottomSheet/__stories__";
 import { ProjectItemActionMenuTriggerStory } from "../../ProjectItemActionMenuTrigger/__stories__";
 
 const meta = {
@@ -35,9 +33,6 @@ export const Default = {
     ),
     projectDetailModal: (
       <ProjectDetailModal {...ProjectDetailModalStory.args} />
-    ),
-    projectDetailBottomSheet: (
-      <ProjectDetailBottomSheet {...ProjectDetailBottomSheetStory.args} />
     ),
   },
 } satisfies Story;

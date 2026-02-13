@@ -19,7 +19,6 @@ import { deleteTasks } from "@/lib/actions/task/deleteTasks";
 import { TaskDetailContainer } from "../TaskDetailContainer";
 import { NewTaskFormContainer } from "../NewTaskFormContainer";
 import { sendComment } from "@/lib/actions/comment/sendComment";
-import { TaskDetailBottomSheet } from "../TaskDetailBottomSheet";
 import { EditTaskFormContainer } from "../EditTaskFormContainer";
 import { TaskCommentsContainer } from "../TaskCommentsContainer";
 import { updateComment } from "@/lib/actions/comment/updateComment";
@@ -92,17 +91,6 @@ async function AssignedTasksContainerInner({
               assignee={task.assignee}
               taskDetailModal={
                 <TaskDetailModal
-                  taskId={task.id}
-                  taskDetailContainer={
-                    <TaskDetailContainer
-                      guestMode={guestMode}
-                      taskId={task.id}
-                    />
-                  }
-                />
-              }
-              taskDetailBottomSheet={
-                <TaskDetailBottomSheet
                   taskId={task.id}
                   taskDetailContainer={
                     <TaskDetailContainer

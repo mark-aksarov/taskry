@@ -14,7 +14,6 @@ import {
 import {
   ItemBaseBadge,
   ItemBaseDetailModalTrigger,
-  ItemBaseDetailBottomSheetTrigger,
 } from "@/components/common/ItemBase";
 
 import Image from "next/image";
@@ -56,7 +55,6 @@ export interface ProjectListItemProps {
   projectCommentsModal: React.ReactNode;
   menuTrigger: React.ReactNode;
   projectDetailModal: React.ReactNode;
-  projectDetailBottomSheet: React.ReactNode;
   userDetailModal?: React.ReactNode;
 }
 
@@ -74,7 +72,6 @@ export const ProjectListItem = ({
   projectCommentsModal,
   menuTrigger,
   projectDetailModal,
-  projectDetailBottomSheet,
   userDetailModal,
 }: ProjectListItemProps) => {
   const tStatus = useTranslations("projects.ProjectStatus");
@@ -126,12 +123,9 @@ export const ProjectListItem = ({
               {title}
             </ItemBaseDetailModalTrigger>
 
-            <ItemBaseDetailBottomSheetTrigger
-              bottomSheet={projectDetailBottomSheet}
-              className="truncate"
-            >
+            <Link className="block truncate md:hidden" href={`/projects/${id}`}>
               {title}
-            </ItemBaseDetailBottomSheetTrigger>
+            </Link>
           </ListItemTitle>
           <ListItemText>{deadlineOn}</ListItemText>
         </ListItemInfo>

@@ -8,11 +8,6 @@ import {
 } from "@/components/common/List";
 
 import {
-  ItemBaseDetailModalTrigger,
-  ItemBaseDetailBottomSheetTrigger,
-} from "@/components/common/ItemBase";
-
-import {
   useCustomerSelection,
   useSyncSelectionCustomerItem,
 } from "@/lib/hooks/useCustomerSelection";
@@ -23,6 +18,7 @@ import { Link } from "@/components/ui/Link";
 import { Checkbox } from "@/components/ui/Checkbox";
 import { UnknownUser } from "@/components/common/UnknownUser";
 import { ImageContainer } from "@/components/common/ImageContainer";
+import { ItemBaseDetailModalTrigger } from "@/components/common/ItemBase";
 
 export type CustomerListItemProps = {
   id: number;
@@ -37,7 +33,6 @@ export type CustomerListItemProps = {
   };
   menuTrigger: React.ReactNode;
   customerDetailModal: React.ReactNode;
-  customerDetailBottomSheet: React.ReactNode;
 };
 
 export function CustomerListItem({
@@ -50,7 +45,6 @@ export function CustomerListItem({
   company,
   menuTrigger,
   customerDetailModal,
-  customerDetailBottomSheet,
 }: CustomerListItemProps) {
   const t = useTranslations("customers.CustomerListItem");
 
@@ -83,12 +77,9 @@ export function CustomerListItem({
           {userImg}
         </ItemBaseDetailModalTrigger>
 
-        <ItemBaseDetailBottomSheetTrigger
-          bottomSheet={customerDetailBottomSheet}
-          className="h-9 w-9"
-        >
+        <Link className="md:hidden" href={`/customers/${id}`}>
           {userImg}
-        </ItemBaseDetailBottomSheetTrigger>
+        </Link>
       </>
 
       <ListItemInfo>
@@ -100,12 +91,9 @@ export function CustomerListItem({
             {fullName}
           </ItemBaseDetailModalTrigger>
 
-          <ItemBaseDetailBottomSheetTrigger
-            bottomSheet={customerDetailBottomSheet}
-            className="truncate"
-          >
+          <Link className="block truncate md:hidden" href={`/customers/${id}`}>
             {fullName}
-          </ItemBaseDetailBottomSheetTrigger>
+          </Link>
         </ListItemTitle>
 
         <ListItemText>

@@ -1,11 +1,9 @@
 import { UserGridItem } from "../UserGridItem";
 import type { Meta, StoryObj } from "@storybook/react";
 import { UserDetailModal } from "../../UserDetailModal";
-import { UserDetailBottomSheet } from "../../UserDetailBottomSheet";
 import { UserDetailModalStory } from "../../UserDetailModal/__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { UserItemActionMenuTrigger } from "../../UserItemActionMenuTrigger";
-import { UserDetailBottomSheetStory } from "../../UserDetailBottomSheet/__stories__";
 import { UserItemActionMenuTriggerStory } from "../../UserItemActionMenuTrigger/__stories__";
 
 const meta = {
@@ -36,9 +34,6 @@ export const Default = {
       />
     ),
     userDetailModal: <UserDetailModal {...UserDetailModalStory.args} />,
-    userDetailBottomSheet: (
-      <UserDetailBottomSheet {...UserDetailBottomSheetStory.args} />
-    ),
   },
 } satisfies Story;
 

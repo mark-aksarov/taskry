@@ -94,11 +94,6 @@
     "noCompany": "No company"
   },
 
-  "CustomerDetailBottomSheet": {
-    "dialogHeading": "Customer Details",
-    "openInFullPage": "Open in Full Page"
-  },
-
   "CustomerDetailContainer": {
     "unknownCompany": "Unknown company"
   },

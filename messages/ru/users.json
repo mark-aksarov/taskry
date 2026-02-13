@@ -153,11 +153,6 @@
     "title": "Детали пользователя"
   },
 
-  "UserDetailBottomSheet": {
-    "dialogHeading": "Детали пользователя",
-    "openInFullPage": "Открыть в полном окне"
-  },
-
   "UserDetailContainer": {
     "noPosition": "Нет должности"
   },

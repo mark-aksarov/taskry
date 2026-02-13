@@ -1,4 +1,4 @@
-import { ListItem } from "@/components/common/List/index";
+import { ListItem } from "@/components/common/List";
 
 export interface ProjectListItemProps {
   id?: number;

@@ -94,11 +94,6 @@
     "noCompany": "Нет компании"
   },
 
-  "CustomerDetailBottomSheet": {
-    "dialogHeading": "Детали клиента",
-    "openInFullPage": "Открыть в полном окне"
-  },
-
   "CustomerDetailContainer": {
     "unknownCompany": "Неизвестная компания"
   },

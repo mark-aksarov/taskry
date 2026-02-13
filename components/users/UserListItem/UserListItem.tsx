@@ -7,10 +7,7 @@ import {
   ListItemTitle,
 } from "@/components/common/List";
 
-import {
-  ItemBaseDetailModalTrigger,
-  ItemBaseDetailBottomSheetTrigger,
-} from "@/components/common/ItemBase";
+import { ItemBaseDetailModalTrigger } from "@/components/common/ItemBase";
 
 import Image from "next/image";
 import { Link } from "@/components/ui/Link";
@@ -30,7 +27,6 @@ export interface UserListItemProps {
   };
   menuTrigger: React.ReactNode;
   userDetailModal: React.ReactNode;
-  userDetailBottomSheet: React.ReactNode;
 }
 
 export function UserListItem({
@@ -43,7 +39,6 @@ export function UserListItem({
   position,
   menuTrigger,
   userDetailModal,
-  userDetailBottomSheet,
 }: UserListItemProps) {
   const t = useTranslations("users.UserListItem");
 
@@ -62,12 +57,9 @@ export function UserListItem({
           {userImg}
         </ItemBaseDetailModalTrigger>
 
-        <ItemBaseDetailBottomSheetTrigger
-          bottomSheet={userDetailBottomSheet}
-          className="h-9 w-9"
-        >
+        <Link className="md:hidden" href={`/team/${id}`}>
           {userImg}
-        </ItemBaseDetailBottomSheetTrigger>
+        </Link>
       </>
 
       <ListItemInfo>
@@ -79,12 +71,9 @@ export function UserListItem({
             {fullName}
           </ItemBaseDetailModalTrigger>
 
-          <ItemBaseDetailBottomSheetTrigger
-            bottomSheet={userDetailBottomSheet}
-            className="truncate"
-          >
+          <Link className="block truncate md:hidden" href={`/team/${id}`}>
             {fullName}
-          </ItemBaseDetailBottomSheetTrigger>
+          </Link>
         </ListItemTitle>
 
         <ListItemText>

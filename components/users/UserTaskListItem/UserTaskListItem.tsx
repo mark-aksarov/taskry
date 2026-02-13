@@ -9,9 +9,9 @@ import {
 import {
   ItemBaseBadge,
   ItemBaseDetailModalTrigger,
-  ItemBaseDetailBottomSheetTrigger,
 } from "@/components/common/ItemBase";
 
+import { Link } from "@/components/ui/Link";
 import { TaskStatus } from "@/generated/prisma/enums";
 import { useFormatter, useTranslations } from "next-intl";
 import { UserTaskListItemLayout } from "./UserTaskListItemLayout";
@@ -29,7 +29,6 @@ export interface UserTaskListItemProps {
   taskCommentsModal: React.ReactNode;
   menuTrigger: React.ReactNode;
   taskDetailModal: React.ReactNode;
-  taskDetailBottomSheet: React.ReactNode;
 }
 
 export const UserTaskListItem = ({
@@ -41,10 +40,9 @@ export const UserTaskListItem = ({
   taskCommentsModal,
   menuTrigger,
   taskDetailModal,
-  taskDetailBottomSheet,
 }: UserTaskListItemProps) => {
-  const t = useTranslations("users.UserTaskListItem");
   const tStatus = useTranslations("tasks.TaskStatus");
+  const t = useTranslations("users.UserTaskListItem");
 
   useSyncSelectionTaskItem(id, title, status);
 
@@ -73,12 +71,9 @@ export const UserTaskListItem = ({
               {title}
             </ItemBaseDetailModalTrigger>
 
-            <ItemBaseDetailBottomSheetTrigger
-              bottomSheet={taskDetailBottomSheet}
-              className="truncate"
-            >
+            <Link className="block truncate md:hidden" href={`/tasks/${id}`}>
               {title}
-            </ItemBaseDetailBottomSheetTrigger>
+            </Link>
           </ListItemTitle>
           <ListItemText>{deadlineOn}</ListItemText>
         </ListItemInfo>

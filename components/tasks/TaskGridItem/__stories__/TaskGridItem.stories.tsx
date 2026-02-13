@@ -4,17 +4,13 @@ import { TaskDetailModal } from "../../TaskDetailModal";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { TaskCommentsModal } from "../../TaskCommentsModal";
 import { mockedTask } from "../../TaskListItem/__stories__";
-import { TaskDetailBottomSheet } from "../../TaskDetailBottomSheet";
 import { UserDetailModal } from "@/components/users/UserDetailModal";
 import { TaskDetailModalStory } from "../../TaskDetailModal/__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { TaskItemActionMenuTrigger } from "../../TaskItemActionMenuTrigger";
 import { TaskCommentsModalStory } from "../../TaskCommentsModal/__stories__";
-import { UserDetailBottomSheet } from "@/components/users/UserDetailBottomSheet";
-import { TaskDetailBottomSheetStory } from "../../TaskDetailBottomSheet/__stories__";
 import { UserDetailModalStory } from "@/components/users/UserDetailModal/__stories__";
 import { TaskItemActionMenuTriggerStory } from "../../TaskItemActionMenuTrigger/__stories__";
-import { UserDetailBottomSheetStory } from "@/components/users/UserDetailBottomSheet/__stories__";
 
 const meta = {
   title: "components/tasks/TaskGridItem",
@@ -29,13 +25,7 @@ export const Default = {
   args: {
     ...mockedTask,
     taskDetailModal: <TaskDetailModal {...TaskDetailModalStory.args} />,
-    taskDetailBottomSheet: (
-      <TaskDetailBottomSheet {...TaskDetailBottomSheetStory.args} />
-    ),
     userDetailModal: <UserDetailModal {...UserDetailModalStory.args} />,
-    userDetailBottomSheet: (
-      <UserDetailBottomSheet {...UserDetailBottomSheetStory.args} />
-    ),
     taskCommentsModal: <TaskCommentsModal {...TaskCommentsModalStory.args} />,
     menuTrigger: (
       <TaskItemActionMenuTrigger

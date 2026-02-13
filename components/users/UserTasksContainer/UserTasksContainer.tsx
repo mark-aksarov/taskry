@@ -17,7 +17,6 @@ import { TaskCommentsModal } from "@/components/tasks/TaskCommentsModal";
 import { updateTaskStatuses } from "@/lib/actions/task/updateTaskStatuses";
 import { TaskDetailContainer } from "@/components/tasks/TaskDetailContainer";
 import { TaskCommentsContainer } from "@/components/tasks/TaskCommentsContainer";
-import { TaskDetailBottomSheet } from "@/components/tasks/TaskDetailBottomSheet";
 import { EditTaskFormContainer } from "@/components/tasks/EditTaskFormContainer";
 import { TaskItemActionMenuTrigger } from "@/components/tasks/TaskItemActionMenuTrigger";
 
@@ -62,17 +61,6 @@ export async function UserTasksContainer({
               status={task.status}
               taskDetailModal={
                 <TaskDetailModal
-                  taskId={task.id}
-                  taskDetailContainer={
-                    <TaskDetailContainer
-                      guestMode={guestMode}
-                      taskId={task.id}
-                    />
-                  }
-                />
-              }
-              taskDetailBottomSheet={
-                <TaskDetailBottomSheet
                   taskId={task.id}
                   taskDetailContainer={
                     <TaskDetailContainer

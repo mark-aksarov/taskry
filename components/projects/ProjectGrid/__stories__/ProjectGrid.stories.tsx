@@ -1,7 +1,7 @@
 import { ProjectGrid } from "../ProjectGrid";
-import { mockedProjects } from "../../ProjectList";
 import { ProjectGridItem } from "../../ProjectGridItem";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { mockedProjects } from "../../ProjectList/__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { ProjectGridItemStory } from "../../ProjectGridItem/__stories__";
 

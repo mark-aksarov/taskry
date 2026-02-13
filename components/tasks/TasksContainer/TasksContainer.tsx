@@ -14,7 +14,6 @@ import { deleteTasks } from "@/lib/actions/task/deleteTasks";
 import { TaskDetailContainer } from "../TaskDetailContainer";
 import { sendComment } from "@/lib/actions/comment/sendComment";
 import { EditTaskFormContainer } from "../EditTaskFormContainer";
-import { TaskDetailBottomSheet } from "../TaskDetailBottomSheet";
 import { TaskCommentsContainer } from "../TaskCommentsContainer";
 import { updateComment } from "@/lib/actions/comment/updateComment";
 import { UserDetailModal } from "@/components/users/UserDetailModal";
@@ -22,7 +21,6 @@ import { TaskItemActionMenuTrigger } from "../TaskItemActionMenuTrigger";
 import { updateTaskStatuses } from "@/lib/actions/task/updateTaskStatuses";
 import { UserDetailContainer } from "@/components/users/UserDetailContainer";
 import { ProjectDetailModal } from "@/components/projects/ProjectDetailModal";
-import { UserDetailBottomSheet } from "@/components/users/UserDetailBottomSheet";
 import { ProjectDetailContainer } from "@/components/projects/ProjectDetailContainer";
 import { EntityContainerPresentation } from "@/components/common/EntityContainerPresentation";
 
@@ -70,17 +68,6 @@ export async function TasksContainer({
                 project={task.project}
                 taskDetailModal={
                   <TaskDetailModal
-                    taskId={task.id}
-                    taskDetailContainer={
-                      <TaskDetailContainer
-                        taskId={task.id}
-                        guestMode={guestMode}
-                      />
-                    }
-                  />
-                }
-                taskDetailBottomSheet={
-                  <TaskDetailBottomSheet
                     taskId={task.id}
                     taskDetailContainer={
                       <TaskDetailContainer
@@ -158,17 +145,6 @@ export async function TasksContainer({
                   }
                 />
               }
-              taskDetailBottomSheet={
-                <TaskDetailBottomSheet
-                  taskId={task.id}
-                  taskDetailContainer={
-                    <TaskDetailContainer
-                      taskId={task.id}
-                      guestMode={guestMode}
-                    />
-                  }
-                />
-              }
               taskCommentsModal={
                 <TaskCommentsModal
                   taskId={task.id}
@@ -199,16 +175,6 @@ export async function TasksContainer({
               userDetailModal={
                 task.assignee && (
                   <UserDetailModal
-                    userId={task.assignee.id}
-                    userDetailContainer={
-                      <UserDetailContainer userId={task.assignee.id} />
-                    }
-                  />
-                )
-              }
-              userDetailBottomSheet={
-                task.assignee && (
-                  <UserDetailBottomSheet
                     userId={task.assignee.id}
                     userDetailContainer={
                       <UserDetailContainer userId={task.assignee.id} />

@@ -3,14 +3,12 @@ import { TaskStatus } from "@/generated/prisma/enums";
 import { TaskDetailModal } from "../../TaskDetailModal";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { TaskCommentsModal } from "../../TaskCommentsModal";
-import { TaskDetailBottomSheet } from "../../TaskDetailBottomSheet";
 import { UserDetailModal } from "@/components/users/UserDetailModal";
 import { TaskDetailModalStory } from "../../TaskDetailModal/__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { TaskItemActionMenuTrigger } from "../../TaskItemActionMenuTrigger";
 import { TaskCommentsModalStory } from "../../TaskCommentsModal/__stories__";
 import { ProjectDetailModal } from "@/components/projects/ProjectDetailModal";
-import { TaskDetailBottomSheetStory } from "../../TaskDetailBottomSheet/__stories__";
 import { UserDetailModalStory } from "@/components/users/UserDetailModal/__stories__";
 import { TaskItemActionMenuTriggerStory } from "../../TaskItemActionMenuTrigger/__stories__";
 import { ProjectDetailModalStory } from "@/components/projects/ProjectDetailModal/__stories__";
@@ -53,9 +51,6 @@ export const Default = {
   args: {
     ...mockedTask,
     taskDetailModal: <TaskDetailModal {...TaskDetailModalStory.args} />,
-    taskDetailBottomSheet: (
-      <TaskDetailBottomSheet {...TaskDetailBottomSheetStory.args} />
-    ),
     userDetailModal: <UserDetailModal {...UserDetailModalStory.args} />,
     projectDetailModal: (
       <ProjectDetailModal {...ProjectDetailModalStory.args} />

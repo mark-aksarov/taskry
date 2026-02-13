@@ -15,10 +15,8 @@ import { ProjectDetailContainer } from "./ProjectDetailContainer";
 import { UserDetailContainer } from "../users/UserDetailContainer";
 import { updateComment } from "@/lib/actions/comment/updateComment";
 import { EditProjectFormContainer } from "./EditProjectFormContainer";
-import { ProjectDetailBottomSheet } from "./ProjectDetailBottomSheet";
 import { deleteProjects } from "@/lib/actions/project/deleteProjects";
 import { ProjectCommentsContainer } from "./ProjectCommentsContainer";
-import { UserDetailBottomSheet } from "../users/UserDetailBottomSheet";
 import { ProjectItemActionMenuTrigger } from "./ProjectItemActionMenuTrigger";
 import { updateProjectStatuses } from "@/lib/actions/project/updateProjectStatuses";
 import { EntityContainerPresentation } from "../common/EntityContainerPresentation";
@@ -102,14 +100,6 @@ export async function ProjectsContainer({
                     }
                   />
                 }
-                projectDetailBottomSheet={
-                  <ProjectDetailBottomSheet
-                    projectId={project.id}
-                    projectDetailContainer={
-                      <ProjectDetailContainer projectId={project.id} />
-                    }
-                  />
-                }
                 userDetailModal={
                   project.creator && (
                     <UserDetailModal
@@ -178,27 +168,9 @@ export async function ProjectsContainer({
                     }
                   />
                 }
-                projectDetailBottomSheet={
-                  <ProjectDetailBottomSheet
-                    projectId={project.id}
-                    projectDetailContainer={
-                      <ProjectDetailContainer projectId={project.id} />
-                    }
-                  />
-                }
                 userDetailModal={
                   project.creator && (
                     <UserDetailModal
-                      userId={project.creator.id}
-                      userDetailContainer={
-                        <UserDetailContainer userId={project.creator.id} />
-                      }
-                    />
-                  )
-                }
-                userDetailBottomSheet={
-                  project.creator && (
-                    <UserDetailBottomSheet
                       userId={project.creator.id}
                       userDetailContainer={
                         <UserDetailContainer userId={project.creator.id} />

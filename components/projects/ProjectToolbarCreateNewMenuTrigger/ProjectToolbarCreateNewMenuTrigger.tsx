@@ -11,9 +11,9 @@ import { Item } from "react-stately";
 import { DialogHeader } from "../../ui/Dialog";
 import { useTranslations } from "next-intl";
 import { Blocks, FolderClosed } from "lucide-react";
+import { GuestModeModal } from "../../common/GuestModeModal";
 import { NewProjectModal } from "@/components/projects/NewProjectModal";
 import { NewProjectCategoryModal } from "../../projectCategory/NewProjectCategoryModal";
-import { GuestModeModal } from "../../common/GuestModeModal";
 
 interface ProjectToolbarCreateNewMenuTriggerProps {
   guestMode: boolean;

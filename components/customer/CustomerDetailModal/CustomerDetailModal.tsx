@@ -4,7 +4,7 @@ import {
 } from "@/components/common/DetailModal";
 
 import { useTranslations } from "next-intl";
-import { DetailBottomSheetLink } from "@/components/common/DetailBottomSheet";
+import { DetailModalLink } from "@/components/common/DetailModal";
 import { DialogBody, DialogFooter, DialogHeader } from "@/components/ui/Dialog";
 
 interface CustomerDetailModalProps {
@@ -24,7 +24,7 @@ export function CustomerDetailModal({
         <DialogHeader>{t("dialogHeading")}</DialogHeader>
         <DialogBody>{customerDetailContainer}</DialogBody>
         <DialogFooter>
-          <DetailBottomSheetLink
+          <DetailModalLink
             label={t("openInFullPage")}
             href={`/customers?customerId=${customerId}`}
           />

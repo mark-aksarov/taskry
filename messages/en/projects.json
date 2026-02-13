@@ -160,10 +160,7 @@
   "ProjectCommentsModal": {
     "title": "Project comments"
   },
-  "ProjectDetailBottomSheet": {
-    "dialogHeading": "Project Details",
-    "openInFullPage": "Open in Full Page"
-  },
+
   "ProjectDetail": {
     "creator": "Creator",
     "noCreator": "No creator",

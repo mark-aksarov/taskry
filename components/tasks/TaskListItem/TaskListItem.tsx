@@ -9,10 +9,10 @@ import {
 import {
   ItemBaseBadge,
   ItemBaseDetailModalTrigger,
-  ItemBaseDetailBottomSheetTrigger,
 } from "@/components/common/ItemBase";
 
 import Image from "next/image";
+import { Link } from "@/components/ui/Link";
 import { TaskStatus } from "@/generated/prisma/enums";
 import { TaskListItemLayout } from "./TaskListItemLayout";
 import { useFormatter, useTranslations } from "next-intl";
@@ -46,7 +46,6 @@ export interface TaskListItemProps {
   taskCommentsModal: React.ReactNode;
   menuTrigger: React.ReactNode;
   taskDetailModal: React.ReactNode;
-  taskDetailBottomSheet: React.ReactNode;
   userDetailModal: React.ReactNode;
   projectDetailModal: React.ReactNode;
 }
@@ -64,7 +63,6 @@ export const TaskListItem = ({
   taskCommentsModal,
   menuTrigger,
   taskDetailModal,
-  taskDetailBottomSheet,
   userDetailModal,
   projectDetailModal,
 }: TaskListItemProps) => {
@@ -105,12 +103,9 @@ export const TaskListItem = ({
               {title}
             </ItemBaseDetailModalTrigger>
 
-            <ItemBaseDetailBottomSheetTrigger
-              bottomSheet={taskDetailBottomSheet}
-              className="truncate"
-            >
+            <Link className="block truncate md:hidden" href={`/tasks/${id}`}>
               {title}
-            </ItemBaseDetailBottomSheetTrigger>
+            </Link>
           </ListItemTitle>
 
           <ListItemText>{deadlineOn}</ListItemText>

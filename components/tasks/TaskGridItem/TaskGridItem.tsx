@@ -10,7 +10,6 @@ import {
 import {
   ItemBaseBadge,
   ItemBaseDetailModalTrigger,
-  ItemBaseDetailBottomSheetTrigger,
 } from "@/components/common/ItemBase";
 
 import Image from "next/image";
@@ -23,6 +22,7 @@ import { getTaskStatusBadgeColor } from "../getTaskStatusBadgeColor";
 import { useSyncSelectionTaskItem } from "@/lib/hooks/useTaskSelection";
 import { TaskListItemCheckbox } from "../TaskListItem/TaskListItemCheckbox";
 import { TaskCommentsModalTrigger } from "../TaskCommentsModalTrigger";
+import { Link } from "@/components/ui/Link";
 
 export interface TaskGridItemProps {
   id: number;
@@ -40,9 +40,7 @@ export interface TaskGridItemProps {
   taskCommentsModal: React.ReactNode;
   menuTrigger: React.ReactNode;
   taskDetailModal: React.ReactNode;
-  taskDetailBottomSheet: React.ReactNode;
   userDetailModal: React.ReactNode;
-  userDetailBottomSheet: React.ReactNode;
 }
 
 export function TaskGridItem({
@@ -57,9 +55,7 @@ export function TaskGridItem({
   taskCommentsModal,
   menuTrigger,
   taskDetailModal,
-  taskDetailBottomSheet,
   userDetailModal,
-  userDetailBottomSheet,
 }: TaskGridItemProps) {
   const tStatus = useTranslations("tasks.TaskStatus");
   const t = useTranslations("tasks.TaskGridItem");
@@ -84,6 +80,14 @@ export function TaskGridItem({
     <UnknownUser className="h-9 w-9" />
   );
 
+  const assigneeImgLink = assignee ? (
+    <Link className="md:hidden" href={`/team/${assignee.id}`}>
+      {assigneeImg}
+    </Link>
+  ) : (
+    <UnknownUser className="h-9 w-9" />
+  );
+
   return (
     <TaskGridItemLayout
       checkboxSlot={<TaskListItemCheckbox id={id} />}
@@ -98,12 +102,9 @@ export function TaskGridItem({
               {title}
             </ItemBaseDetailModalTrigger>
 
-            <ItemBaseDetailBottomSheetTrigger
-              bottomSheet={taskDetailBottomSheet}
-              className="truncate"
-            >
+            <Link className="block truncate md:hidden" href={`/tasks/${id}`}>
               {title}
-            </ItemBaseDetailBottomSheetTrigger>
+            </Link>
           </GridItemTitle>
 
           <GridItemText>{deadlineOn}</GridItemText>
@@ -116,11 +117,7 @@ export function TaskGridItem({
               {assigneeImg}
             </ItemBaseDetailModalTrigger>
 
-            <ItemBaseDetailBottomSheetTrigger
-              bottomSheet={userDetailBottomSheet}
-            >
-              {assigneeImg}
-            </ItemBaseDetailBottomSheetTrigger>
+            {assigneeImgLink}
           </>
         ) : (
           <UnknownUser className="h-9 w-9" />

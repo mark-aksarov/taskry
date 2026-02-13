@@ -12,11 +12,6 @@ import {
 } from "@/components/common/Grid";
 
 import {
-  ItemBaseDetailModalTrigger,
-  ItemBaseDetailBottomSheetTrigger,
-} from "@/components/common/ItemBase";
-
-import {
   useCustomerSelection,
   useSyncSelectionCustomerItem,
 } from "@/lib/hooks/useCustomerSelection";
@@ -30,6 +25,7 @@ import { Checkbox } from "@/components/ui/Checkbox";
 import { UnknownUser } from "@/components/common/UnknownUser";
 import { CustomerGridItemLayout } from "./CustomerGridItemLayout";
 import { ImageContainer } from "@/components/common/ImageContainer";
+import { ItemBaseDetailModalTrigger } from "@/components/common/ItemBase";
 
 interface CustomerGridItemProps {
   id: number;
@@ -44,7 +40,6 @@ interface CustomerGridItemProps {
   };
   menuTrigger: React.ReactNode;
   customerDetailModal: React.ReactNode;
-  customerDetailBottomSheet: React.ReactNode;
 }
 
 export function CustomerGridItem({
@@ -57,7 +52,6 @@ export function CustomerGridItem({
   company,
   menuTrigger,
   customerDetailModal,
-  customerDetailBottomSheet,
 }: CustomerGridItemProps) {
   const t = useTranslations("customers.CustomerGridItem");
 
@@ -92,11 +86,9 @@ export function CustomerGridItem({
             {customerImg}
           </ItemBaseDetailModalTrigger>
 
-          <ItemBaseDetailBottomSheetTrigger
-            bottomSheet={customerDetailBottomSheet}
-          >
+          <Link className="md:hidden" href={`/customers/${id}`}>
             {customerImg}
-          </ItemBaseDetailBottomSheetTrigger>
+          </Link>
         </>
       }
       titleSlot={
@@ -109,12 +101,12 @@ export function CustomerGridItem({
               {fullName}
             </ItemBaseDetailModalTrigger>
 
-            <ItemBaseDetailBottomSheetTrigger
-              bottomSheet={customerDetailBottomSheet}
-              className="truncate"
+            <Link
+              className="block truncate md:hidden"
+              href={`/customers/${id}`}
             >
               {fullName}
-            </ItemBaseDetailBottomSheetTrigger>
+            </Link>
           </GridItemTitle>
 
           <GridItemText>{company ? company.name : t("noCompany")}</GridItemText>
