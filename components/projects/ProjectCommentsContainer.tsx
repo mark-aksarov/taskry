@@ -59,7 +59,6 @@ function ProjectCommentsContainerInner({
             key={comment.id}
             content={comment.content}
             createdAt={comment.createdAt}
-            attachments={comment.attachments}
             sender={comment.sender}
             menuTrigger={
               (comment.canEdit || guestMode) && (

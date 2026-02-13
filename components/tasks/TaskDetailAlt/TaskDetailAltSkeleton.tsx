@@ -23,15 +23,6 @@ export function TaskDetailAltSkeleton() {
       statusSlot={<DetailInfoSkeleton />}
       projectTitleSlot={<DetailInfoSkeleton />}
       subtasksSlot={
-        <DetailInfo>
-          <FieldSkeleton>
-            <Skeleton size="sm" />
-            <Skeleton size="sm" />
-            <Skeleton size="sm" />
-          </FieldSkeleton>
-        </DetailInfo>
-      }
-      attachmentsSlot={
         <DetailInfo className="border-none pb-0">
           <FieldSkeleton>
             <Skeleton size="sm" />

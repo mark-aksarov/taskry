@@ -8,7 +8,6 @@ interface ProjectDetailLayoutProps {
   descriptionSlot: React.ReactNode;
   customerSlot: React.ReactNode;
   categorySlot: React.ReactNode;
-  attachmentsSlot: React.ReactNode;
 }
 
 export function ProjectDetailLayout({
@@ -19,7 +18,6 @@ export function ProjectDetailLayout({
   descriptionSlot,
   customerSlot,
   categorySlot,
-  attachmentsSlot,
 }: ProjectDetailLayoutProps) {
   const rowStyles = "max-lg:flex-col max-lg:gap-4";
 
@@ -40,7 +38,6 @@ export function ProjectDetailLayout({
           {customerSlot}
           {categorySlot}
         </DetailRow>
-        <DetailRow>{attachmentsSlot}</DetailRow>
       </div>
     </div>
   );

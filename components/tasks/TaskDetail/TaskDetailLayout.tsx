@@ -10,7 +10,6 @@ interface TaskDetailLayoutProps {
   statusSlot: React.ReactNode;
   projectTitleSlot: React.ReactNode;
   subtasksSlot: React.ReactNode;
-  attachmentsSlot: React.ReactNode;
 }
 
 export function TaskDetailLayout({
@@ -23,7 +22,6 @@ export function TaskDetailLayout({
   statusSlot,
   projectTitleSlot,
   subtasksSlot,
-  attachmentsSlot,
 }: TaskDetailLayoutProps) {
   const rowStyles = "max-lg:flex-col max-lg:gap-4";
 
@@ -45,7 +43,6 @@ export function TaskDetailLayout({
           {creatorSlot}
         </DetailRow>
         <DetailRow>{subtasksSlot}</DetailRow>
-        <DetailRow>{attachmentsSlot}</DetailRow>
       </div>
     </div>
   );

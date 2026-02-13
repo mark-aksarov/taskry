@@ -1,6 +1,5 @@
 import { Skeleton } from "@/components/ui/Skeleton";
 import { ProjectDetailAltLayout } from "./ProjectDetailAltLayout";
-import { FieldSkeleton } from "@/components/common/FieldSkeleton";
 import { DetailInfo, DetailInfoSkeleton } from "@/components/common/Detail";
 
 export function ProjectDetailAltSkeleton() {
@@ -20,16 +19,7 @@ export function ProjectDetailAltSkeleton() {
       deadlineSlot={<DetailInfoSkeleton />}
       customerSlot={<DetailInfoSkeleton />}
       categorySlot={<DetailInfoSkeleton />}
-      creatorSlot={<DetailInfoSkeleton />}
-      attachmentsSlot={
-        <DetailInfo className="border-none pb-0">
-          <FieldSkeleton>
-            <Skeleton size="sm" />
-            <Skeleton size="sm" />
-            <Skeleton size="sm" />
-          </FieldSkeleton>
-        </DetailInfo>
-      }
+      creatorSlot={<DetailInfoSkeleton className="border-none pb-0" />}
     />
   );
 }

@@ -12,7 +12,6 @@ import { useFormatter, useTranslations } from "next-intl";
 import { ProjectDetailLayout } from "./ProjectDetailLayout";
 import { UnknownUser } from "@/components/common/UnknownUser";
 import { ImageContainer } from "@/components/common/ImageContainer";
-import { Attachment, Attachments } from "@/components/attachments/Attachments";
 import { ProjectDetailStatusMenuTrigger } from "./ProjectDetailStatusMenuTrigger";
 
 interface ProjectDetailProps {
@@ -35,11 +34,6 @@ interface ProjectDetailProps {
     name: string;
   };
   status: ProjectStatus;
-  attachments: {
-    id: number;
-    fileUrl: string;
-    fileName: string;
-  }[];
 }
 
 export function ProjectDetail({
@@ -51,7 +45,6 @@ export function ProjectDetail({
   customer,
   category,
   status,
-  attachments,
 }: ProjectDetailProps) {
   const t = useTranslations("projects.ProjectDetail");
 
@@ -109,7 +102,7 @@ export function ProjectDetail({
         </DetailInfo>
       }
       customerSlot={
-        <DetailInfo>
+        <DetailInfo className="lg:border-none lg:pb-0">
           <DetailTitle>{t("customer")}</DetailTitle>
           <DetailText>
             {customer ? customer.fullName : t("noCustomer")}
@@ -117,28 +110,9 @@ export function ProjectDetail({
         </DetailInfo>
       }
       categorySlot={
-        <DetailInfo>
+        <DetailInfo className="border-none pb-0">
           <DetailTitle>{t("category")}</DetailTitle>
           <DetailText>{category ? category.name : t("noCategory")}</DetailText>
-        </DetailInfo>
-      }
-      attachmentsSlot={
-        <DetailInfo className="border-none pb-0">
-          <DetailTitle>{t("attachments")}</DetailTitle>
-          {attachments.length > 0 && (
-            <Attachments>
-              {attachments.map((attachment) => (
-                <Attachment key={attachment.id}>
-                  <Image
-                    src={attachment.fileUrl}
-                    alt=""
-                    fill
-                    className="object-cover"
-                  />
-                </Attachment>
-              ))}
-            </Attachments>
-          )}
         </DetailInfo>
       }
     />

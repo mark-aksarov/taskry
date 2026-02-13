@@ -8,8 +8,8 @@ export function CustomerDetailSkeleton() {
       fullNameSlot={<DetailInfoSkeleton />}
       emailSlot={<DetailInfoSkeleton />}
       phoneNumberSlot={<DetailInfoSkeleton />}
-      publicLinkSlot={<DetailInfoSkeleton className="border-none pb-0" />}
       companySlot={<DetailInfoSkeleton />}
+      publicLinkSlot={<DetailInfoSkeleton className="border-none pb-0" />}
     />
   );
 }

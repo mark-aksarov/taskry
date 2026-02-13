@@ -54,16 +54,16 @@ export function CustomerDetail({
           <DetailText>{phoneNumber || t("noPhoneNumber")}</DetailText>
         </DetailInfo>
       }
-      publicLinkSlot={
-        <DetailInfo className="border-none pb-0">
-          <DetailTitle>{t("publicLink")}</DetailTitle>
-          <DetailText>{publicLink || t("noPublicLink")}</DetailText>
-        </DetailInfo>
-      }
       companySlot={
         <DetailInfo>
           <DetailTitle>{t("company")}</DetailTitle>
           <DetailText>{company?.name || t("noCompany")}</DetailText>
+        </DetailInfo>
+      }
+      publicLinkSlot={
+        <DetailInfo className="border-none pb-0">
+          <DetailTitle>{t("publicLink")}</DetailTitle>
+          <DetailText>{publicLink || t("noPublicLink")}</DetailText>
         </DetailInfo>
       }
     />

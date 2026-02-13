@@ -7,14 +7,13 @@ import { fieldStyles } from "@/components/ui/Field";
 import type { TextFieldProps } from "react-aria-components";
 import { useCommentFormContext } from "../CommentFormContext";
 import { CommentTextFieldSendButton } from "./CommentTextFieldSendButton";
-import { CommentTextFieldFileTrigger } from "./CommentTextFieldFileTrigger";
 import { fieldInputStyles as baseInputStyles } from "@/components/ui/TextField";
 import { TextArea, composeRenderProps, TextField } from "react-aria-components";
 
 export const fieldInputStyles = tv({
   base: [
     focusRing.base,
-    "peer h-[3.5rem] w-full resize-none rounded-xl px-[2.875rem] py-4 text-sm",
+    "peer h-[3.5rem] w-full resize-none rounded-xl p-4 text-sm",
   ],
   variants: {
     isFocused: focusRing.variants.isFocusVisible,
@@ -26,14 +25,10 @@ type CommentTextFieldProps = TextFieldProps &
   React.RefAttributes<HTMLDivElement> & {
     isLoading?: boolean;
     textAreaClassName?: string;
-    acceptedFileTypes?: string[];
-    onFilesSelect: (files: FileList) => void;
   };
 
 export const CommentTextField = ({
   isLoading,
-  acceptedFileTypes,
-  onFilesSelect,
   textAreaClassName,
   ...props
 }: CommentTextFieldProps) => {
@@ -45,11 +40,6 @@ export const CommentTextField = ({
 
   return (
     <div className="relative w-full">
-      <CommentTextFieldFileTrigger
-        onFilesSelect={onFilesSelect}
-        buttonClasses={buttonClasses}
-      />
-
       <TextField
         {...props}
         id="content"

@@ -8,15 +8,10 @@ import { CommentItemLayout } from "./CommentItemLayout";
 import { useFormatter, useTranslations } from "next-intl";
 import { UnknownUser } from "@/components/common/UnknownUser";
 import { ImageContainer } from "@/components/common/ImageContainer";
-import { Attachment, Attachments } from "@/components/attachments/Attachments";
 
 interface CommentItemProps {
   content: string;
   createdAt: Date;
-  attachments: {
-    id: number;
-    fileUrl: string;
-  }[];
   sender?: {
     id: string;
     fullName: string;
@@ -28,7 +23,6 @@ interface CommentItemProps {
 export function CommentItem({
   content,
   createdAt,
-  attachments,
   sender,
   menuTrigger,
 }: CommentItemProps) {
@@ -73,20 +67,6 @@ export function CommentItem({
       contentSlot={
         <>
           <CommentItemText>{content}</CommentItemText>
-          {attachments.length > 0 && (
-            <Attachments>
-              {attachments.map((attachment) => (
-                <Attachment key={attachment.id}>
-                  <Image
-                    src={attachment.fileUrl}
-                    alt=""
-                    fill
-                    className="object-cover"
-                  />
-                </Attachment>
-              ))}
-            </Attachments>
-          )}
         </>
       }
       menuTriggerSlot={menuTrigger}

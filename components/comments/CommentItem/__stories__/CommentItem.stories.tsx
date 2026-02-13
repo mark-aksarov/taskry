@@ -28,7 +28,6 @@ export const Default = {
       fullName: "User 1",
       imageUrl: "/woman.jpg",
     },
-    attachments: [],
     menuTrigger: (
       <CommentItemActionMenuTrigger
         {...CommentItemActionMenuTriggerStory.args}
@@ -54,19 +53,3 @@ export const WithoutSenderImage = {
     },
   },
 };
-
-export const WithAttachements = {
-  args: {
-    ...Default.args,
-    attachments: [
-      {
-        id: 1,
-        fileUrl: "/placeholder.jpg",
-      },
-      {
-        id: 2,
-        fileUrl: "/placeholder.jpg",
-      },
-    ],
-  },
-} satisfies Story;

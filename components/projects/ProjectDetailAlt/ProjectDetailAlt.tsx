@@ -4,11 +4,9 @@ import {
   DetailTitle,
 } from "@/components/common/Detail";
 
-import Image from "next/image";
 import { ProjectStatus } from "@/generated/prisma/enums";
 import { useFormatter, useTranslations } from "next-intl";
 import { ProjectDetailAltLayout } from "./ProjectDetailAltLayout";
-import { Attachment, Attachments } from "@/components/attachments/Attachments";
 
 interface ProjectDetailAltProps {
   id: number;
@@ -29,11 +27,6 @@ interface ProjectDetailAltProps {
     name: string;
   };
   status: ProjectStatus;
-  attachments: {
-    id: number;
-    fileUrl: string;
-    fileName: string;
-  }[];
 }
 
 export function ProjectDetailAlt({
@@ -44,10 +37,9 @@ export function ProjectDetailAlt({
   customer,
   category,
   status,
-  attachments,
 }: ProjectDetailAltProps) {
-  const t = useTranslations("projects.ProjectDetail");
   const tStatus = useTranslations("projects.ProjectStatus");
+  const t = useTranslations("projects.ProjectDetail");
 
   const format = useFormatter();
 
@@ -96,28 +88,9 @@ export function ProjectDetailAlt({
         </DetailInfo>
       }
       creatorSlot={
-        <DetailInfo>
+        <DetailInfo className="border-none pb-0">
           <DetailTitle>{t("creator")}</DetailTitle>
           <DetailText>{creator ? creator.fullName : t("noCreator")}</DetailText>
-        </DetailInfo>
-      }
-      attachmentsSlot={
-        <DetailInfo className="border-none pb-0">
-          <DetailTitle>{t("attachments")}</DetailTitle>
-          {attachments.length > 0 && (
-            <Attachments>
-              {attachments.map((attachment) => (
-                <Attachment key={attachment.id}>
-                  <Image
-                    src={attachment.fileUrl}
-                    alt=""
-                    fill
-                    className="object-cover"
-                  />
-                </Attachment>
-              ))}
-            </Attachments>
-          )}
         </DetailInfo>
       }
     />

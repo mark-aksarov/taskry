@@ -7,7 +7,6 @@ interface ProjectDetailAltLayoutProps {
   deadlineSlot: React.ReactNode;
   customerSlot: React.ReactNode;
   categorySlot: React.ReactNode;
-  attachmentsSlot: React.ReactNode;
 }
 
 export function ProjectDetailAltLayout({
@@ -17,7 +16,6 @@ export function ProjectDetailAltLayout({
   deadlineSlot,
   customerSlot,
   categorySlot,
-  attachmentsSlot,
 }: ProjectDetailAltLayoutProps) {
   const rowStyles = "max-lg:flex-col max-lg:gap-4";
 
@@ -33,7 +31,6 @@ export function ProjectDetailAltLayout({
         {categorySlot}
       </DetailRow>
       <DetailRow>{creatorSlot}</DetailRow>
-      <DetailRow>{attachmentsSlot}</DetailRow>
     </div>
   );
 }

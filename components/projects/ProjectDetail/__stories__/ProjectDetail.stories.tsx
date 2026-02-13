@@ -35,18 +35,6 @@ export const Default = {
       name: "Category 1",
     },
     status: "pending",
-    attachments: [
-      {
-        id: 1,
-        fileUrl: "/placeholder.jpg",
-        fileName: "file-1.jpg",
-      },
-      {
-        id: 2,
-        fileUrl: "/placeholder.jpg",
-        fileName: "file-2.jpg",
-      },
-    ],
   },
 } satisfies Story;
 
@@ -56,6 +44,5 @@ export const WithoutSomeData = {
     title: "Project 1",
     deadline: new Date("2025-01-01"),
     status: "pending",
-    attachments: [],
   },
 } satisfies Story;

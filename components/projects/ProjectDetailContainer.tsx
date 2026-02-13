@@ -39,7 +39,6 @@ function ProjectDetailContainerInner({
       customer={project.customer}
       category={project.category}
       status={project.status}
-      attachments={project.attachments}
     />
   );
 }

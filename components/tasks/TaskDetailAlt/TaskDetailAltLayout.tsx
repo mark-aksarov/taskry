@@ -9,7 +9,6 @@ interface TaskDetailAltLayoutProps {
   projectTitleSlot: React.ReactNode;
   statusSlot: React.ReactNode;
   subtasksSlot: React.ReactNode;
-  attachmentsSlot: React.ReactNode;
 }
 
 export function TaskDetailAltLayout({
@@ -21,7 +20,6 @@ export function TaskDetailAltLayout({
   projectTitleSlot,
   statusSlot,
   subtasksSlot,
-  attachmentsSlot,
 }: TaskDetailAltLayoutProps) {
   const rowStyles = "max-lg:flex-col max-lg:gap-4";
 
@@ -41,7 +39,6 @@ export function TaskDetailAltLayout({
         {creatorSlot}
       </DetailRow>
       <DetailRow>{subtasksSlot}</DetailRow>
-      <DetailRow>{attachmentsSlot}</DetailRow>
     </div>
   );
 }

@@ -13,7 +13,6 @@ import { TaskStatus } from "@/generated/prisma/enums";
 import { useFormatter, useTranslations } from "next-intl";
 import { UnknownUser } from "@/components/common/UnknownUser";
 import { ImageContainer } from "@/components/common/ImageContainer";
-import { Attachment, Attachments } from "@/components/attachments/Attachments";
 
 interface TaskDetailProps {
   id: number;
@@ -39,11 +38,6 @@ interface TaskDetailProps {
     id: number;
     title: string;
   };
-  attachments: {
-    id: number;
-    fileUrl: string;
-    fileName: string;
-  }[];
   subtasksList?: React.ReactNode;
   newSubtaskModalTrigger: React.ReactNode;
 }
@@ -58,12 +52,11 @@ export function TaskDetail({
   category,
   status,
   project,
-  attachments,
   subtasksList,
   newSubtaskModalTrigger,
 }: TaskDetailProps) {
-  const t = useTranslations("tasks.TaskDetail");
   const tStatus = useTranslations("tasks.TaskStatus");
+  const t = useTranslations("tasks.TaskDetail");
 
   const format = useFormatter();
 
@@ -142,29 +135,10 @@ export function TaskDetail({
         </DetailInfo>
       }
       subtasksSlot={
-        <DetailInfo>
+        <DetailInfo className="border-none pb-0">
           <DetailTitle>{t("subtasks")}</DetailTitle>
           {subtasksList}
           {newSubtaskModalTrigger}
-        </DetailInfo>
-      }
-      attachmentsSlot={
-        <DetailInfo className="border-none pb-0">
-          <DetailTitle>{t("attachments")}</DetailTitle>
-          {attachments.length > 0 && (
-            <Attachments>
-              {attachments.map((attachment) => (
-                <Attachment key={attachment.id}>
-                  <Image
-                    src={attachment.fileUrl}
-                    alt=""
-                    fill
-                    className="object-cover"
-                  />
-                </Attachment>
-              ))}
-            </Attachments>
-          )}
         </DetailInfo>
       }
     />

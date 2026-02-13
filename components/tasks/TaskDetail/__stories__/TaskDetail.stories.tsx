@@ -40,7 +40,6 @@ export const Default = {
       id: 1,
       title: "Project 1",
     },
-    attachments: [],
     subtasksList: <SubtaskList {...SubtaskListStory.args} />,
     newSubtaskModalTrigger: (
       <NewSubtaskModalTrigger {...NewSubtaskModalTriggerStory.args} />
@@ -58,7 +57,6 @@ export const WithoutSomeData = {
       id: 1,
       title: "Project 1",
     },
-    attachments: [],
     newSubtaskModalTrigger: (
       <NewSubtaskModalTrigger {...NewSubtaskModalTriggerStory.args} />
     ),

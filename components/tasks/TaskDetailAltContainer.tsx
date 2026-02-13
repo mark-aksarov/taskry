@@ -49,7 +49,6 @@ async function TaskDetailAltContainerInner({
       category={task.category}
       project={task.project}
       status={task.status}
-      attachments={task.attachments}
       subtasksList={
         task.subtasks.length !== 0 && (
           <SubtaskList>

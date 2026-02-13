@@ -4,7 +4,6 @@ import { useSWRConfig } from "swr";
 import { Form } from "react-aria-components";
 import { CommentTextField } from "../CommentTextField";
 import { ActionFn, ActionState } from "@/lib/actions/types";
-import { CommentFormAttachments } from "./CommentFormAttachments";
 import { startTransition, useActionState, useEffect, useState } from "react";
 import { useActionErrorToast } from "@/lib/hooks/useActionErrorToast";
 import { useTranslations } from "next-intl";
@@ -25,8 +24,6 @@ export function CommentForm({
   hiddenInput,
 }: CommentFormProps) {
   const t = useTranslations("comments.CommentForm");
-
-  let [files, setFiles] = useState<FileList | null>(null);
 
   const { mutate } = useSWRConfig();
 
@@ -51,15 +48,8 @@ export function CommentForm({
 
   return (
     <Form onSubmit={handleSubmit} className="flex w-full flex-col">
-      {files && (
-        <CommentFormAttachments
-          files={files}
-          className="border-b-1 border-gray-300 px-4 py-3 dark:border-gray-600"
-        />
-      )}
       <CommentTextField
         isLoading={pending}
-        onFilesSelect={setFiles}
         textAreaClassName="bg-white dark:bg-gray-800 outline-hidden"
       />
       {hiddenInput}

@@ -51,7 +51,6 @@ function TaskDetailContainerInner({
       category={task.category}
       status={task.status}
       project={task.project}
-      attachments={task.attachments}
       subtasksList={
         task.subtasks.length && (
           <SubtaskList>
