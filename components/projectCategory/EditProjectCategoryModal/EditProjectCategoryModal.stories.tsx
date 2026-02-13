@@ -7,7 +7,7 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { EditProjectCategoryFormStory } from "../EditProjectCategoryForm/__stories__";
 
 const meta = {
-  title: "Components/project-categories/EditProjectCategoryModal",
+  title: "components/project-categories/EditProjectCategoryModal",
   component: EditProjectCategoryModal,
   decorators: [
     (Story) => (

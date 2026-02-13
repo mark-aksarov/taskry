@@ -3,15 +3,13 @@ import { Meta, StoryObj } from "@storybook/react";
 import { PositionListItem } from "../../PositionListItem";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { PositionListItemStory } from "../../PositionListItem/__stories__";
-import { PositionItemActionMenuTrigger } from "../../PositionItemActionMenuTrigger";
-import { PositionItemActionMenuTriggerStory } from "../../PositionItemActionMenuTrigger/__stories__";
 
 const mockedPositions = [
-  { id: 1, name: "Project Manager" },
-  { id: 2, name: "Frontend Developer" },
-  { id: 3, name: "Backend Developer" },
-  { id: 4, name: "UI/UX Designer" },
-  { id: 5, name: "QA Engineer" },
+  { id: 1, name: "Position 1" },
+  { id: 2, name: "Position 2" },
+  { id: 3, name: "Position 3" },
+  { id: 4, name: "Position 4" },
+  { id: 5, name: "Position 5" },
 ];
 
 const meta = {
@@ -29,15 +27,7 @@ export const Default = {
       <PositionListItem
         {...PositionListItemStory.args}
         key={position.id}
-        id={position.id}
-        name={position.name}
-        menuTrigger={
-          <PositionItemActionMenuTrigger
-            {...PositionItemActionMenuTriggerStory.args}
-            positionId={position.id}
-            positionName={position.name}
-          />
-        }
+        {...position}
       />
     )),
   },

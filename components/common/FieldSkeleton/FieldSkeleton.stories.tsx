@@ -3,7 +3,7 @@ import { FieldGroupSkeleton, FieldSkeleton } from "./FieldSkeleton";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {
-  title: "Components/common/FieldSkeleton",
+  title: "components/common/FieldSkeleton",
   component: FieldSkeleton,
   decorators: [withThemedBackground],
   parameters: {

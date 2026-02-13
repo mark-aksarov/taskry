@@ -6,7 +6,7 @@ import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {
-  title: "Components/positions/NewPositionModal",
+  title: "components/positions/NewPositionModal",
   component: NewPositionModal,
   decorators: [
     (Story) => (

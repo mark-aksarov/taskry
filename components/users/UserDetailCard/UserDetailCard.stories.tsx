@@ -11,10 +11,9 @@ import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { useParams, usePathname } from "next/navigation";
 import { UserNavigationDesktop } from "../UserNavigationDesktop";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { PersonDetailHeaderImage } from "@/components/common/PersonDetailHeaderImage";
-import { Default as UserDetailStory } from "@/components/users/UserDetail/UserDetail.stories";
-import { WithoutSomeData as UserDetailWithoutSomeDataStory } from "@/components/users/UserDetail/UserDetail.stories";
-import { PersonDetailHeader as PersonDetailHeaderStory } from "@/components/common/DetailHeader/DetailHeader.stories";
+import { UserDetailStory } from "@/components/users/UserDetail/__stories__";
+import { PersonDetailHeaderStory } from "@/components/common/DetailHeader/__stories__";
+import { UserDetailWithoutSomeDataStory } from "@/components/users/UserDetail/__stories__";
 
 const meta = {
   title: "components/users/UserDetailCard",
@@ -50,13 +49,7 @@ export const Loading = {
 export const WithoutSomeData = {
   args: {
     profileDetail: <UserDetail {...UserDetailWithoutSomeDataStory.args} />,
-    profileHeader: (
-      <DetailHeader
-        title={UserDetailStory.args.fullName}
-        image={<PersonDetailHeaderImage />}
-        subtitle={UserDetailStory.args.position?.name}
-      />
-    ),
+    profileHeader: <DetailHeader {...PersonDetailHeaderStory.args} />,
     navigationDesktop: <UserNavigationDesktop />,
   },
 } satisfies Story;

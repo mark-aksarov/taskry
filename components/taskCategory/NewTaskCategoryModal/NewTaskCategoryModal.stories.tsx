@@ -7,12 +7,12 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { NewTaskCategoryFormStory } from "../NewTaskCategoryForm/__stories__";
 
 const meta = {
-  title: "Components/task-categories/NewTaskCategoryModal",
+  title: "components/task-categories/NewTaskCategoryModal",
   component: NewTaskCategoryModal,
   decorators: [
     (Story) => (
       <DialogTrigger>
-        <Button label="New Task" />
+        <Button label="New Task Category" />
         <Story />
       </DialogTrigger>
     ),

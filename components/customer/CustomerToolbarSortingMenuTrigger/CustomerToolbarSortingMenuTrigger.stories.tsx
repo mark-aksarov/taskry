@@ -3,7 +3,7 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { CustomerToolbarSortingMenuTrigger } from "./CustomerToolbarSortingMenuTrigger";
 
 const meta = {
-  title: "Components/customers/CustomerToolbarSortingMenuTrigger",
+  title: "components/customers/CustomerToolbarSortingMenuTrigger",
   component: CustomerToolbarSortingMenuTrigger,
   decorators: [withThemedBackground],
 } satisfies Meta<typeof CustomerToolbarSortingMenuTrigger>;

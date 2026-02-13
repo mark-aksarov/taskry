@@ -3,7 +3,7 @@ import { TotalTasksCard } from "./TotalTasksCard";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {
-  title: "Components/tasks/TotalTasksCard",
+  title: "components/tasks/TotalTasksCard",
   component: TotalTasksCard,
   decorators: [withThemedBackground],
   args: {
@@ -12,6 +12,6 @@ const meta = {
 } satisfies Meta<typeof TotalTasksCard>;
 
 export default meta;
-type Story = StoryObj<typeof TotalTasksCard>;
+type Story = StoryObj<typeof meta>;
 
 export const Default = {} satisfies Story;

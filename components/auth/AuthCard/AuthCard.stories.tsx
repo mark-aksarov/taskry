@@ -16,7 +16,7 @@ import { AuthCardFooterText } from "./AuthCardFooterText";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {
-  title: "Components/auth/AuthCard",
+  title: "components/auth/AuthCard",
   component: AuthCard,
   decorators: [withThemedBackground],
 } satisfies Meta<typeof AuthCard>;

@@ -32,8 +32,8 @@ import { usePathname, useRouter } from "next/navigation";
 import { PageDecorator } from "@/.storybook/PageDecorator";
 import { NewTaskForm } from "@/components/tasks/NewTaskForm";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { getTaskListItems } from "@/components/tasks/TaskList/TaskList.stories";
-import { Default as NewTaskFormStory } from "@/components/tasks/NewTaskForm/NewTaskForm.stories";
+import { getTaskListItems } from "@/components/tasks/TaskList/__stories__";
+import { NewTaskFormStory } from "@/components/tasks/NewTaskForm/__stories__";
 
 const meta = {
   title: "pages/DashboardPage",

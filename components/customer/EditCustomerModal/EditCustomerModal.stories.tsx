@@ -4,11 +4,11 @@ import { EditCustomerForm } from "../EditCustomerForm";
 import { EditCustomerModal } from "./EditCustomerModal";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { CustomerFormSkeleton } from "../CustomerFormSkeleton";
+import { EditCustomerFormStory } from "../EditCustomerForm/__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { Default as EditCustomerFormStory } from "../EditCustomerForm/EditCustomerForm.stories";
 
 const meta = {
-  title: "Components/customers/EditCustomerModal",
+  title: "components/customers/EditCustomerModal",
   component: EditCustomerModal,
   decorators: [
     (Story) => (

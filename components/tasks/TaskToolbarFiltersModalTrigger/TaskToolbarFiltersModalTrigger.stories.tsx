@@ -1,11 +1,11 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { TaskFiltersFormStory } from "../TaskFiltersForm/__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { TaskFiltersForm, TaskFiltersFormSkeleton } from "../TaskFiltersForm";
 import { TaskToolbarFiltersModalTrigger } from "./TaskToolbarFiltersModalTrigger";
-import { Default as TaskFiltersFormStory } from "../TaskFiltersForm/TaskFiltersForm.stories";
 
 const meta = {
-  title: "Components/tasks/TaskToolbarFiltersModalTrigger",
+  title: "components/tasks/TaskToolbarFiltersModalTrigger",
   component: TaskToolbarFiltersModalTrigger,
   decorators: [withThemedBackground],
 } satisfies Meta<typeof TaskToolbarFiltersModalTrigger>;

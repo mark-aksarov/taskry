@@ -1,8 +1,8 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { NewCompanyForm } from "../../NewCompanyForm";
+import { NewCompanyFormStory } from "../../NewCompanyForm/__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { CompanyToolbarCreateNewButton } from "../CompanyToolbarCreateNewButton";
-import { Default as NewCompanyFormStory } from "../../NewCompanyForm/NewCompanyForm.stories";
 
 const meta = {
   title: "components/companies/CompanyToolbarCreateNewButton",

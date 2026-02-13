@@ -7,17 +7,15 @@ import { UserGrid } from "@/components/users/UserGrid";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { usePathname, useRouter } from "next/navigation";
 import { PageDecorator } from "@/.storybook/PageDecorator";
-import { NewUserForm } from "@/components/users/NewUserForm";
 import { UserFiltersForm } from "@/components/users/UserFiltersForm";
-import { NewPositionForm } from "@/components/position/NewPositionForm";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { Default as UserListStory } from "@/components/users/UserList/UserList.stories";
-import { Default as UserGridStory } from "@/components/users/UserGrid/UserGrid.stories";
+import { UserListStory } from "@/components/users/UserList/__stories__";
+import { UserGridStory } from "@/components/users/UserGrid/__stories__";
+import { UserFiltersFormStory } from "@/components/users/UserFiltersForm/__stories__";
 import { EntityContainerPresentation } from "@/components/common/EntityContainerPresentation";
-import { Default as NewUserFormStory } from "@/components/users/NewUserForm/NewUserForm.stories";
 import { UserToolbarFiltersModalTrigger } from "@/components/users/UserToolbarFiltersModalTrigger";
 import { UserToolbarCreateNewMenuTrigger } from "@/components/users/UserToolbarCreateNewMenuTrigger";
-import { Default as UserFiltersFormStory } from "@/components/users/UserFiltersForm/UserFiltersForm.stories";
+import { UserToolbarCreateNewMenuTriggerStory } from "@/components/users/UserToolbarCreateNewMenuTrigger/__stories__";
 
 const meta = {
   title: "pages/UsersPage",
@@ -35,10 +33,7 @@ type Story = StoryObj<typeof meta>;
 
 const userToolbarCreateNewMenuTrigger = (
   <UserToolbarCreateNewMenuTrigger
-    showCreateNewUserMenuItem
-    guestMode={false}
-    newUserForm={<NewUserForm {...NewUserFormStory.args} />}
-    newPositionForm={<NewPositionForm createPosition={fn()} />}
+    {...UserToolbarCreateNewMenuTriggerStory.args}
   />
 );
 

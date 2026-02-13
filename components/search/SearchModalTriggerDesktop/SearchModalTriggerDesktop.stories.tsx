@@ -2,12 +2,19 @@ import { SearchModal } from "../SearchModal";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { SearchModalTriggerDesktop } from "./SearchModalTriggerDesktop";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { Default as SearchModalStory } from "../SearchModal/SearchModal.stories";
+import { Default as SearchModalStory } from "../SearchModal/__stories__/SearchModal.stories";
 
 const meta = {
-  title: "Components/search/SearchModalTriggerDesktop",
+  title: "components/search/SearchModalTriggerDesktop",
   component: SearchModalTriggerDesktop,
-  decorators: [withThemedBackground],
+  decorators: [
+    (Story) => (
+      <div className="flex">
+        <Story />
+      </div>
+    ),
+    withThemedBackground,
+  ],
 } satisfies Meta<typeof SearchModalTriggerDesktop>;
 
 export default meta;

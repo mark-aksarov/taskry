@@ -4,9 +4,9 @@ import {
 } from "@/components/projects/ProjectDetailAlt";
 
 import {
-  Default as ProjectDetailStory,
-  WithoutSomeData as ProjectDetailWithoutSomeDataStory,
-} from "@/components/projects/ProjectDetail/ProjectDetail.stories";
+  ProjectDetailStory,
+  ProjectDetailWithoutSomeDataStory,
+} from "@/components/projects/ProjectDetail/__stories__";
 
 import {
   DetailHeader,
@@ -20,8 +20,8 @@ import { useParams, usePathname } from "next/navigation";
 import { PageDecorator } from "@/.storybook/PageDecorator";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { ProjectDetailActions } from "@/components/projects/ProjectDetailActions";
-import { ProjectDetailHeader as ProjectDetailHeaderStory } from "@/components/common/DetailHeader/DetailHeader.stories";
-import { Default as ProjectDetailActionsStory } from "@/components/projects/ProjectDetailActions/ProjectDetailActions.stories";
+import { ProjectDetailHeaderStory } from "@/components/common/DetailHeader/__stories__";
+import { ProjectDetailActionsStory } from "@/components/projects/ProjectDetailActions/__stories__";
 
 const meta = {
   title: "pages/ProjectDetailPage",

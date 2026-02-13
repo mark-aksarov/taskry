@@ -1,9 +1,9 @@
 import React from "react";
 import { Button } from "@/components/ui/Button";
 import { Meta, StoryObj } from "@storybook/react";
+import { DeletePositionsModal } from "./DeletePositionsModal";
 import { withToastRegion } from "@/.storybook/withToastRegion";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { DeletePositionsModal } from "./DeletePositionsModal";
 
 const meta = {
   title: "components/positions/DeletePositionsModal",

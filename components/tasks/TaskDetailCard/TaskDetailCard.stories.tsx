@@ -6,12 +6,12 @@ import {
 import { TaskDetailCard } from "./TaskDetailCard";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { TaskDetailActions } from "../TaskDetailActions";
+import { TaskDetailStory } from "../TaskDetail/__stories__";
 import { TaskDetailAlt, TaskDetailAltSkeleton } from "../TaskDetailAlt";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { Default as TaskDetailStory } from "../TaskDetail/TaskDetail.stories";
-import { WithoutSomeData as TaskDetailWithoutSomeDataStory } from "../TaskDetail/TaskDetail.stories";
-import { TaskDetailHeader as TaskDetailHeaderStory } from "@/components/common/DetailHeader/DetailHeader.stories";
-import { Default as TaskDetailActionsStory } from "@/components/tasks/TaskDetailActions/TaskDetailActions.stories";
+import { TaskDetailWithoutSomeDataStory } from "../TaskDetail/__stories__";
+import { TaskDetailHeader as TaskDetailHeaderStory } from "@/components/common/DetailHeader/__stories__/DetailHeader.stories";
+import { Default as TaskDetailActionsStory } from "@/components/tasks/TaskDetailActions/__stories__/TaskDetailActions.stories";
 
 const meta = {
   title: "components/tasks/TaskDetailCard",

@@ -3,7 +3,7 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { ProjectToolbarSortingMenuTrigger } from "./ProjectToolbarSortingMenuTrigger";
 
 const meta = {
-  title: "Components/projects/ProjectToolbarSortingMenuTrigger",
+  title: "components/projects/ProjectToolbarSortingMenuTrigger",
   component: ProjectToolbarSortingMenuTrigger,
   decorators: [withThemedBackground],
 } satisfies Meta<typeof ProjectToolbarSortingMenuTrigger>;

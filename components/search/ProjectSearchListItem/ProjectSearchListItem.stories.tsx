@@ -3,7 +3,7 @@ import { ProjectSearchListItem } from "./ProjectSearchListItem";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {
-  title: "Components/search/ProjectSearchListItem",
+  title: "components/search/ProjectSearchListItem",
   component: ProjectSearchListItem,
   decorators: [withThemedBackground],
 } satisfies Meta<typeof ProjectSearchListItem>;
@@ -14,7 +14,7 @@ type Story = StoryObj<typeof ProjectSearchListItem>;
 export const Default = {
   args: {
     id: 1,
-    title: "Website Redesign",
+    title: "Project 1",
     deadline: new Date("2025-06-30"),
   },
 } satisfies Story;

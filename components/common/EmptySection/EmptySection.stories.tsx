@@ -6,10 +6,10 @@ import { NewTaskForm } from "@/components/tasks/NewTaskForm";
 import { NewTaskModal } from "@/components/tasks/NewTaskModal";
 import { EmptySectionDescription } from "./EmptySectionDescription";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { Default as NewTaskFormStory } from "@/components/tasks/NewTaskForm/NewTaskForm.stories";
+import { NewTaskFormStory } from "@/components/tasks/NewTaskForm/__stories__";
 
 const meta = {
-  title: "Components/common/EmptySection",
+  title: "components/common/EmptySection",
   component: EmptySection,
   decorators: [withThemedBackground],
   parameters: {

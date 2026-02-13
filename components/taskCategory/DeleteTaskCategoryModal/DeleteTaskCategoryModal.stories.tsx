@@ -31,7 +31,7 @@ export type Story = StoryObj<typeof meta>;
 export const Default = {
   args: {
     taskCategoryId: 1,
-    taskCategoryName: "Web Development",
+    taskCategoryName: "Task category 1",
     onOpenChange: () => {},
     deleteTaskCategories: () => ({ status: "success" }),
   },

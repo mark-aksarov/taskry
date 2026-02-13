@@ -16,7 +16,7 @@ type Story = StoryObj<typeof ProjectCategoryListItem>;
 export const Default = {
   args: {
     id: 1,
-    name: "Web Development",
+    name: "Project Category 1",
     menuTrigger: (
       <ProjectCategoryItemActionMenuTrigger
         {...ProjectCategoryItemActionMenuTriggerStory.args}

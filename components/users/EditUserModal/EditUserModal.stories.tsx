@@ -4,11 +4,11 @@ import { Button } from "@/components/ui/Button";
 import { DialogTrigger } from "react-aria-components";
 import { EditUserFormSkeleton } from "../EditUserForm";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { EditUserFormStory } from "../EditUserForm/__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { Default as EditUserFormStory } from "../EditUserForm/EditUserForm.stories";
 
 const meta = {
-  title: "Components/users/EditUserModal",
+  title: "components/users/EditUserModal",
   component: EditUserModal,
   decorators: [
     (Story) => (

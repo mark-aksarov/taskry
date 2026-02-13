@@ -81,7 +81,7 @@ export interface TaskListItemDTO {
   title: string;
   status: TaskStatus;
 
-  deadline?: Date;
+  deadline: Date;
   assignee?: {
     id: string;
     fullName: string;

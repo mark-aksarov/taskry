@@ -13,7 +13,7 @@ import { Dialog, DialogCloseButton } from "@/components/ui/Dialog";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {
-  title: "Components/layout/AppSidebar",
+  title: "components/layout/AppSidebar",
   component: AppSidebar,
   decorators: [withThemedBackground],
   beforeEach: () => {

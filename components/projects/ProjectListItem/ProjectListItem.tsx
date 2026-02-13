@@ -31,7 +31,7 @@ import { ProjectCommentsModalTrigger } from "../ProjectCommentsModalTrigger";
 export interface ProjectListItemProps {
   id: number;
   title: string;
-  deadline?: Date;
+  deadline: Date;
   creator?: {
     id: string;
     fullName: string;
@@ -85,15 +85,13 @@ export const ProjectListItem = ({
 
   const format = useFormatter();
 
-  const deadlineOn = deadline
-    ? t("deadlineOn", {
-        date: format.dateTime(deadline, {
-          day: "2-digit",
-          month: "short",
-          year: "numeric",
-        }),
-      })
-    : t("noDeadline");
+  const deadlineOn = t("deadlineOn", {
+    date: format.dateTime(deadline, {
+      day: "2-digit",
+      month: "short",
+      year: "numeric",
+    }),
+  });
 
   const creatorImg = creator?.imageUrl ? (
     <ImageContainer className="h-9 w-9">

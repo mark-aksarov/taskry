@@ -4,11 +4,11 @@ import { Button } from "@/components/ui/Button";
 import { DialogTrigger } from "react-aria-components";
 import { TaskFormSkeleton } from "../TaskFormSkeleton";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { EditTaskFormStory } from "../EditTaskForm/__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { Default as EditTaskFormStory } from "../EditTaskForm/EditTaskForm.stories";
 
 const meta = {
-  title: "Components/tasks/EditTaskModal",
+  title: "components/tasks/EditTaskModal",
   component: EditTaskModal,
   decorators: [
     (Story) => (

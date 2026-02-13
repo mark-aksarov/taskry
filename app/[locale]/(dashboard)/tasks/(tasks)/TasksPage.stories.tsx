@@ -9,17 +9,17 @@ import { usePathname, useRouter } from "next/navigation";
 import { PageDecorator } from "@/.storybook/PageDecorator";
 import { NewTaskForm } from "@/components/tasks/NewTaskForm";
 import { TaskFiltersForm } from "@/components/tasks/TaskFiltersForm";
+import { TaskGridStory } from "@/components/tasks/TaskGrid/__stories__";
+import { TaskListStory } from "@/components/tasks/TaskList/__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { NewTaskFormStory } from "@/components/tasks/NewTaskForm/__stories__";
 import { NewTaskCategoryForm } from "@/components/taskCategory/NewTaskCategoryForm";
-import { Default as TaskListStory } from "@/components/tasks/TaskList/TaskList.stories";
-import { Default as TaskGridStory } from "@/components/tasks/TaskGrid/TaskGrid.stories";
+import { TaskFiltersFormStory } from "@/components/tasks/TaskFiltersForm/__stories__";
 import { EntityContainerPresentation } from "@/components/common/EntityContainerPresentation";
 import { TaskToolbarActionsMenuTrigger } from "@/components/tasks/TaskToolbarActionsMenuTrigger";
-import { Default as NewTaskFormStory } from "@/components/tasks/NewTaskForm/NewTaskForm.stories";
 import { TaskToolbarFiltersModalTrigger } from "@/components/tasks/TaskToolbarFiltersModalTrigger";
 import { TaskToolbarCreateNewMenuTrigger } from "@/components/tasks/TaskToolbarCreateNewMenuTrigger";
-import { Default as TaskFiltersFormStory } from "@/components/tasks/TaskFiltersForm/TaskFiltersForm.stories";
-import { Default as NewTaskCategoryFormStory } from "@/components/taskCategory/NewTaskCategoryForm/__stories__/NewTaskCategoryForm.stories";
+import { NewTaskCategoryFormStory } from "@/components/taskCategory/NewTaskCategoryForm/__stories__";
 
 const meta = {
   title: "pages/TasksPage",

@@ -3,7 +3,7 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { TaskToolbarSortingMenuTrigger } from "./TaskToolbarSortingMenuTrigger";
 
 const meta = {
-  title: "Components/tasks/TaskToolbarSortingMenuTrigger",
+  title: "components/tasks/TaskToolbarSortingMenuTrigger",
   component: TaskToolbarSortingMenuTrigger,
   decorators: [withThemedBackground],
 } satisfies Meta<typeof TaskToolbarSortingMenuTrigger>;

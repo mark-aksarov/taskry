@@ -5,7 +5,7 @@ import { withCommentFormProvider } from "../withCommentFormProvider";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {
-  title: "Components/comments/CommentForm",
+  title: "components/comments/CommentForm",
   component: CommentForm,
   decorators: [withToastRegion, withCommentFormProvider, withThemedBackground],
 } satisfies Meta<typeof CommentForm>;

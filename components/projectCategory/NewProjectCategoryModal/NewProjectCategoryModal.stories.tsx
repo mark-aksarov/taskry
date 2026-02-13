@@ -7,7 +7,7 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { Default as NewProjectCategoryFormStory } from "../NewProjectCategoryForm/__stories__/NewProjectCategoryForm.stories";
 
 const meta = {
-  title: "Components/project-categories/NewProjectCategoryModal",
+  title: "components/project-categories/NewProjectCategoryModal",
   component: NewProjectCategoryModal,
   decorators: [
     (Story) => (

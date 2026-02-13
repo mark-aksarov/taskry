@@ -10,10 +10,10 @@ import { CustomerDetailSkeleton } from "../CustomerDetail";
 import { CustomerDetailActions } from "../CustomerDetailActions";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { PersonDetailHeaderImage } from "@/components/common/PersonDetailHeaderImage";
-import { Default as CustomerDetailStory } from "@/components/customer/CustomerDetail/CustomerDetail.stories";
-import { PersonDetailHeader as PersonDetailHeaderStory } from "@/components/common/DetailHeader/DetailHeader.stories";
-import { Default as CustomerDetailActionsStory } from "@/components/customer/CustomerDetailActions/CustomerDetailActions.stories";
-import { WithoutSomeData as CustomerDetailWithoutSomeDataStory } from "@/components/customer/CustomerDetail/CustomerDetail.stories";
+import { CustomerDetailStory } from "@/components/customer/CustomerDetail/__stories__";
+import { PersonDetailHeaderStory } from "@/components/common/DetailHeader/__stories__";
+import { CustomerDetailActionsStory } from "@/components/customer/CustomerDetailActions/__stories__";
+import { CustomerDetailWithoutSomeDataStory } from "@/components/customer/CustomerDetail/__stories__";
 
 const meta = {
   title: "components/customers/CustomerDetailCard",

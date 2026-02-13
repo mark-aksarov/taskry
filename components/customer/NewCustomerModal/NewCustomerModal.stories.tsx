@@ -4,11 +4,11 @@ import { DialogTrigger } from "react-aria-components";
 import { NewCustomerModal } from "./NewCustomerModal";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { CustomerFormSkeleton } from "../CustomerFormSkeleton";
+import { NewCustomerFormStory } from "../NewCustomerForm/__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { Default as NewCustomerFormStory } from "../NewCustomerForm/NewCustomerForm.stories";
 
 const meta = {
-  title: "Components/customers/NewCustomerModal",
+  title: "components/customers/NewCustomerModal",
   component: NewCustomerModal,
   decorators: [
     (Story) => (

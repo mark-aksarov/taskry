@@ -4,11 +4,11 @@ import { NewProjectModal } from "./NewProjectModal";
 import { DialogTrigger } from "react-aria-components";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { ProjectFormSkeleton } from "../ProjectFormSkeleton";
+import { NewProjectFormStory } from "../NewProjectForm/__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { Default as NewProjectFormStory } from "../NewProjectForm/NewProjectForm.stories";
 
 const meta = {
-  title: "Components/projects/NewProjectModal",
+  title: "components/projects/NewProjectModal",
   component: NewProjectModal,
   decorators: [
     (Story) => (

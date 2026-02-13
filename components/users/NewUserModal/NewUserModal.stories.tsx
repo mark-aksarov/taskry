@@ -4,11 +4,11 @@ import { Button } from "@/components/ui/Button";
 import { NewUserFormSkeleton } from "../NewUserForm";
 import { DialogTrigger } from "react-aria-components";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { NewUserFormStory } from "../NewUserForm/__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { Default as NewUserFormStory } from "../NewUserForm/NewUserForm.stories";
 
 const meta = {
-  title: "Components/users/NewUserModal",
+  title: "components/users/NewUserModal",
   component: NewUserModal,
   decorators: [
     (Story) => (

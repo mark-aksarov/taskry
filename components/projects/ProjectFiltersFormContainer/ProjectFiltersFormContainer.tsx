@@ -3,10 +3,7 @@ import "server-only";
 import {
   ProjectFiltersForm,
   ProjectFiltersFormSkeleton,
-  ProjectFiltersFormUserCheckboxGroup,
   ProjectFiltersFormStatusCheckboxGroup,
-  ProjectFiltersFormCategoryCheckboxGroup,
-  ProjectFiltersFormCustomerCheckboxGroup,
 } from "../ProjectFiltersForm";
 
 import { Suspense } from "react";
@@ -14,6 +11,9 @@ import { ProjectFilters } from "@/lib/types";
 import { getUserSummaries } from "@/lib/data/user/user.dal";
 import { getCustomerSummaries } from "@/lib/data/customer/customer.dal";
 import { getProjectCategorySummaries } from "@/lib/data/projectCategory/projectCategory.dal";
+import { ProjectFiltersFormUserCheckboxGroup } from "../ProjectFiltersFormUserCheckboxGroup";
+import { ProjectFiltersFormCategoryCheckboxGroup } from "../ProjectFiltersFormCategoryCheckboxGroup";
+import { ProjectFiltersFormCustomerCheckboxGroup } from "../ProjectFiltersFormCustomerCheckboxGroup";
 
 interface ProjectFiltersFormContainerProps {
   filters?: ProjectFilters;

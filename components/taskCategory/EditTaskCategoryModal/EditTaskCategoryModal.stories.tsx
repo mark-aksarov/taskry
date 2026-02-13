@@ -7,7 +7,7 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { EditTaskCategoryFormStory } from "../EditTaskCategoryForm/__stories__";
 
 const meta = {
-  title: "Components/task-categories/EditTaskCategoryModal",
+  title: "components/task-categories/EditTaskCategoryModal",
   component: EditTaskCategoryModal,
   decorators: [
     (Story) => (

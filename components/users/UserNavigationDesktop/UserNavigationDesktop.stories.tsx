@@ -4,7 +4,7 @@ import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { useParams, usePathname } from "next/navigation";
 import { UserNavigationDesktop } from "./UserNavigationDesktop";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { Default as ProfileActionsStory } from "../ProfileActions/ProfileActions.stories";
+import { Default as ProfileActionsStory } from "../ProfileActions/__stories__/ProfileActions.stories";
 
 const meta = {
   title: "components/users/UserNavigationDesktop",

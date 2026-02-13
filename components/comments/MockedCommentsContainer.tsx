@@ -1,84 +1,75 @@
 import { CommentItem } from "./CommentItem";
-import { fn } from "storybook/internal/test";
 import { CommentItemActionMenuTrigger } from "./CommentItem/CommentItemActionMenuTrigger";
 
 const mockedComments = [
   {
     id: 1,
-    content:
-      "This looks great! I especially like how you handled the async logic.",
-    createdAt: "2025-11-10T09:15:00Z",
-    sender: { id: "u1", fullName: "Alice Johnson", imageUrl: "woman.jpg" },
+    content: "Comment 1. Sample comment text.",
+    createdAt: "2025-01-01T01:00:00Z",
+    sender: { id: "1", fullName: "User 1", imageUrl: "/man.jpg" },
     attachments: [],
   },
   {
     id: 2,
-    content:
-      "Could you explain why you chose Immer here instead of a plain reducer?",
-    createdAt: "2025-11-10T09:45:00Z",
-    sender: { id: "u2", fullName: "Bob Miller", imageUrl: "man.jpg" },
+    content: "Comment 2. Sample comment text.",
+    createdAt: "2025-01-01T02:00:00Z",
+    sender: { id: "2", fullName: "User 2", imageUrl: "/woman.jpg" },
     attachments: [],
   },
   {
     id: 3,
-    content:
-      "I’ve added a similar feature recently — we might reuse some logic!",
-    createdAt: "2025-11-10T10:05:00Z",
-    sender: { id: "u3", fullName: "Carla Chen", imageUrl: "woman.jpg" },
-    attachments: [{ id: 1, fileUrl: "placeholder.jpg" }],
+    content: "Comment 3. Sample comment text.",
+    createdAt: "2025-01-01T03:00:00Z",
+    sender: { id: "3", fullName: "User 3", imageUrl: "/woman.jpg" },
+    attachments: [],
   },
   {
     id: 4,
-    content:
-      "You could optimize the fetcher by memoizing the key or batching requests.",
-    createdAt: "2025-11-10T11:00:00Z",
-    sender: { id: "u4", fullName: "Daniel Ivanov" },
+    content: "Comment 4. Sample comment text.",
+    createdAt: "2025-01-01T04:00:00Z",
+    sender: { id: "4", fullName: "User 4" },
     attachments: [],
   },
   {
     id: 5,
-    content:
-      "I found a small typo in your variable name — 'taskDeail' instead of 'taskDetail'.",
-    createdAt: "2025-11-10T11:35:00Z",
-    sender: { id: "u5", fullName: "Eva Brown", imageUrl: "woman.jpg" },
+    content: "Comment 5. Sample comment text.",
+    createdAt: "2025-01-01T05:00:00Z",
+    sender: { id: "5", fullName: "User 5", imageUrl: "/man.jpg" },
     attachments: [],
   },
   {
     id: 6,
-    content:
-      "Maybe we should display attachments as previews rather than links?",
-    createdAt: "2025-11-10T12:10:00Z",
-    sender: { id: "u6", fullName: "Frank Wilson", imageUrl: "man.jpg" },
-    attachments: [{ id: 2, fileUrl: "placeholder.jpg" }],
+    content: "Comment 6. Sample comment text.",
+    createdAt: "2025-01-01T06:00:00Z",
+    sender: { id: "6", fullName: "User 6", imageUrl: "/man.jpg" },
+    attachments: [],
   },
   {
     id: 7,
-    content: "Great work! I’ll merge this once tests pass.",
-    createdAt: "2025-11-10T13:20:00Z",
-    sender: { id: "u7", fullName: "Grace Lee", imageUrl: "woman.jpg" },
+    content: "Comment 7. Sample comment text.",
+    createdAt: "2025-01-01T07:00:00Z",
+    sender: { id: "7", fullName: "User 7", imageUrl: "/woman.jpg" },
     attachments: [],
   },
   {
     id: 8,
-    content:
-      "You could extract the repeated markup into a 'CommentBody' subcomponent.",
-    createdAt: "2025-11-10T14:00:00Z",
-    sender: { id: "u8", fullName: "Henry Scott" },
+    content: "Comment 8. Sample comment text.",
+    createdAt: "2025-01-01T08:00:00Z",
+    sender: { id: "8", fullName: "User 8" },
     attachments: [],
   },
   {
     id: 9,
-    content: "I love the clean UI — minimal and functional!",
-    createdAt: "2025-11-10T14:45:00Z",
-    sender: { id: "u9", fullName: "Isabella Torres", imageUrl: "woman.jpg" },
-    attachments: [{ id: 3, fileUrl: "placeholder.jpg" }],
+    content: "Comment 9. Sample comment text.",
+    createdAt: "2025-01-01",
+    sender: { id: "9", fullName: "User 9", imageUrl: "/woman.jpg" },
+    attachments: [],
   },
   {
     id: 10,
-    content:
-      "We should probably limit comment length on the backend to avoid spam.",
-    createdAt: "2025-11-10T15:30:00Z",
-    sender: { id: "u10", fullName: "Jack Anderson", imageUrl: "man.jpg" },
+    content: "Comment 10. Sample comment text.",
+    createdAt: "2025-01-01T10:00:00Z",
+    sender: { id: "10", fullName: "User 10", imageUrl: "/man.jpg" },
     attachments: [],
   },
 ];
@@ -98,8 +89,8 @@ export function MockedCommentsContainer() {
               guestMode={false}
               commentId={comment.id}
               commentContent={comment.content}
-              deleteAction={fn()}
-              mutate={fn()}
+              deleteAction={() => ({ status: "success" })}
+              mutate={() => {}}
             />
           }
         />

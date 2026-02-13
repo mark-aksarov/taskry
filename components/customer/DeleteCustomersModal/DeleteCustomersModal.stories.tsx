@@ -6,7 +6,7 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withToastRegion } from "@/.storybook/withToastRegion";
 
 const meta = {
-  title: "Components/customers/DeleteCustomersModal",
+  title: "components/customers/DeleteCustomersModal",
   component: DeleteCustomersModal,
   decorators: [withToastRegion, withThemedBackground],
   render: (args) => {

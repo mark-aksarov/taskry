@@ -1,7 +1,7 @@
 import {
   Default as CustomerDetailStory,
   WithoutSomeData as CustomerDetailWithoutSomeDataStory,
-} from "@/components/customer/CustomerDetail/CustomerDetail.stories";
+} from "@/components/customer/CustomerDetail/__stories__/CustomerDetail.stories";
 
 import {
   DetailHeader,
@@ -20,8 +20,8 @@ import { CustomerDetailPage } from "./CustomerDetailPage";
 import { PageDecorator } from "@/.storybook/PageDecorator";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { CustomerDetailActions } from "@/components/customer/CustomerDetailActions";
-import { PersonDetailHeader as PersonDetailHeaderStory } from "@/components/common/DetailHeader/DetailHeader.stories";
-import { Default as CustomerDetailActionsStory } from "@/components/customer/CustomerDetailActions/CustomerDetailActions.stories";
+import { PersonDetailHeaderStory } from "@/components/common/DetailHeader/__stories__";
+import { CustomerDetailActionsStory } from "@/components/customer/CustomerDetailActions/__stories__";
 
 const meta = {
   title: "pages/CustomerDetailPage",

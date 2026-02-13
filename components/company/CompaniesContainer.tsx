@@ -1,7 +1,7 @@
 import { CompanyList } from "./CompanyList";
 import { CompanyListItem } from "./CompanyListItem";
 import { getCompanySummaries } from "@/lib/data/company/company.dal";
-import { CompanyItemActionMenuTrigger } from "./CompanyItemActionMenuTrigger";
+import { CompanyItemActionMenuTrigger } from "./CompanyItemActionMenuTrigger/CompanyItemActionMenuTrigger";
 
 export async function CompaniesContainer() {
   const companies = await getCompanySummaries();

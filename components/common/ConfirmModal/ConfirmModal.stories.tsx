@@ -10,7 +10,7 @@ import { ConfirmModalConfirmButton } from "./ConfirmModalConfirmButton";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {
-  title: "Components/common/ConfirmModal",
+  title: "components/common/ConfirmModal",
   component: ConfirmModal,
   decorators: [withThemedBackground],
   render: (args) => {

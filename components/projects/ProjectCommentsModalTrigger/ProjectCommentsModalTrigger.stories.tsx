@@ -1,15 +1,14 @@
-import { fn } from "storybook/internal/test";
 import { Repeat } from "@/components/common/Repeat";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { ProjectCommentsModal } from "../ProjectCommentsModal";
 import { CommentItemSkeleton } from "@/components/comments/CommentItem";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { ProjectCommentsModalTrigger } from "./ProjectCommentsModalTrigger";
+import { ProjectCommentsModalStory } from "../ProjectCommentsModal/__stories__";
 import { CommentsEmptySection } from "@/components/comments/CommentsEmptySection";
-import { MockedCommentsContainer } from "@/components/comments/MockedCommentsContainer";
 
 const meta = {
-  title: "Components/projects/ProjectCommentsModalTrigger",
+  title: "components/projects/ProjectCommentsModalTrigger",
   component: ProjectCommentsModalTrigger,
   decorators: [withThemedBackground],
   parameters: {
@@ -23,14 +22,7 @@ type Story = StoryObj<typeof meta>;
 export const Default = {
   args: {
     commentsCount: 10,
-    modal: (
-      <ProjectCommentsModal
-        projectId={1}
-        projectCommentsContainer={<MockedCommentsContainer />}
-        sendCommentAction={fn()}
-        updateCommentAction={fn()}
-      />
-    ),
+    modal: <ProjectCommentsModal {...ProjectCommentsModalStory.args} />,
   },
 } satisfies Story;
 
@@ -39,12 +31,10 @@ export const WithEmptyContent = {
     commentsCount: 10,
     modal: (
       <ProjectCommentsModal
-        projectId={1}
+        {...ProjectCommentsModalStory.args}
         projectCommentsContainer={
           <Repeat items={10} renderItem={() => <CommentItemSkeleton />} />
         }
-        sendCommentAction={fn()}
-        updateCommentAction={fn()}
       />
     ),
   },
@@ -55,10 +45,8 @@ export const WithSkeletonContent = {
     commentsCount: 10,
     modal: (
       <ProjectCommentsModal
-        projectId={1}
+        {...ProjectCommentsModalStory.args}
         projectCommentsContainer={<CommentsEmptySection />}
-        sendCommentAction={fn()}
-        updateCommentAction={fn()}
       />
     ),
   },

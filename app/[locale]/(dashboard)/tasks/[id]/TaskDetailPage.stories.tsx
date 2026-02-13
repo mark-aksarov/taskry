@@ -6,7 +6,7 @@ import {
 import {
   Default as TaskDetailStory,
   WithoutSomeData as TaskDetailWithoutSomeDataStory,
-} from "@/components/tasks/TaskDetail/TaskDetail.stories";
+} from "@/components/tasks/TaskDetail/__stories__/TaskDetail.stories";
 
 import {
   DetailHeader,
@@ -20,8 +20,8 @@ import { useParams, usePathname } from "next/navigation";
 import { PageDecorator } from "@/.storybook/PageDecorator";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { TaskDetailActions } from "@/components/tasks/TaskDetailActions";
-import { TaskDetailHeader as TaskDetailHeaderStory } from "@/components/common/DetailHeader/DetailHeader.stories";
-import { Default as TaskDetailActionsStory } from "@/components/tasks/TaskDetailActions/TaskDetailActions.stories";
+import { TaskDetailHeaderStory } from "@/components/common/DetailHeader/__stories__";
+import { TaskDetailActionsStory } from "@/components/tasks/TaskDetailActions/__stories__";
 
 const meta = {
   title: "pages/TaskDetailPage",

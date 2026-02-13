@@ -11,11 +11,11 @@ import {
 import { ProjectDetailCard } from "./ProjectDetailCard";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { ProjectDetailActions } from "../ProjectDetailActions";
+import { ProjectDetailStory } from "../ProjectDetail/__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { Default as ProjectDetailStory } from "../ProjectDetail/ProjectDetail.stories";
-import { WithoutSomeData as ProjectDetailWithoutSomeDataStory } from "../ProjectDetail/ProjectDetail.stories";
-import { ProjectDetailHeader as ProjectDetailHeaderStory } from "@/components/common/DetailHeader/DetailHeader.stories";
-import { Default as ProjectDetailActionsStory } from "@/components/projects/ProjectDetailActions/ProjectDetailActions.stories";
+import { ProjectDetailWithoutSomeDataStory } from "../ProjectDetail/__stories__";
+import { ProjectDetailHeaderStory } from "@/components/common/DetailHeader/__stories__";
+import { ProjectDetailActionsStory } from "@/components/projects/ProjectDetailActions/__stories__";
 
 const meta = {
   title: "components/projects/ProjectDetailCard",

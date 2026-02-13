@@ -14,10 +14,10 @@ import { DetailHeader } from "@/components/common/DetailHeader";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { UserNavigationMobile } from "@/components/users/UserNavigationMobile";
 import { UserNavigationDesktop } from "@/components/users/UserNavigationDesktop";
-import { Default as NewTaskFormStory } from "@/components/tasks/NewTaskForm/NewTaskForm.stories";
+import { Default as NewTaskFormStory } from "@/components/tasks/NewTaskForm/__stories__/NewTaskForm.stories";
 import { TaskToolbarActionsMenuTrigger } from "@/components/tasks/TaskToolbarActionsMenuTrigger";
-import { Default as UserTaskListStory } from "@/components/users/UserTaskList/UserTaskList.stories";
-import { PersonDetailHeader as PersonDetailHeaderStory } from "@/components/common/DetailHeader/DetailHeader.stories";
+import { Default as UserTaskListStory } from "@/components/users/UserTaskList/__stories__/UserTaskList.stories";
+import { PersonDetailHeader as PersonDetailHeaderStory } from "@/components/common/DetailHeader/__stories__/DetailHeader.stories";
 import { Default as UserNavigationDesktopStory } from "@/components/users/UserNavigationDesktop/UserNavigationDesktop.stories";
 
 const meta = {

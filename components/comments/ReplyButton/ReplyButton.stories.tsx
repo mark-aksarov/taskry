@@ -3,7 +3,7 @@ import { ReplyButton } from "./ReplyButton";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {
-  title: "Components/comments/ReplyButton",
+  title: "components/comments/ReplyButton",
   component: ReplyButton,
   decorators: [withThemedBackground],
 } satisfies Meta<typeof ReplyButton>;

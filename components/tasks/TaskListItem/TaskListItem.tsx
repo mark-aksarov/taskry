@@ -26,7 +26,7 @@ import { TaskCommentsModalTrigger } from "../TaskCommentsModalTrigger";
 export interface TaskListItemProps {
   id: number;
   title: string;
-  deadline?: Date;
+  deadline: Date;
   assignee?: {
     id: string;
     imageUrl?: string;
@@ -68,22 +68,20 @@ export const TaskListItem = ({
   userDetailModal,
   projectDetailModal,
 }: TaskListItemProps) => {
-  const t = useTranslations("tasks.TaskListItem");
   const tStatus = useTranslations("tasks.TaskStatus");
+  const t = useTranslations("tasks.TaskListItem");
 
   useSyncSelectionTaskItem(id, title, status);
 
   const format = useFormatter();
 
-  const deadlineOn = deadline
-    ? t("deadlineOn", {
-        date: format.dateTime(deadline, {
-          day: "2-digit",
-          month: "short",
-          year: "numeric",
-        }),
-      })
-    : t("noDeadline");
+  const deadlineOn = t("deadlineOn", {
+    date: format.dateTime(deadline, {
+      day: "2-digit",
+      month: "short",
+      year: "numeric",
+    }),
+  });
 
   const assigneeImg = assignee?.imageUrl ? (
     <ImageContainer className="h-9 w-9">

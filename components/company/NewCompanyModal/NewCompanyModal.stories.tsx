@@ -3,11 +3,11 @@ import { NewCompanyForm } from "../NewCompanyForm";
 import { NewCompanyModal } from "./NewCompanyModal";
 import { DialogTrigger } from "react-aria-components";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { NewCompanyFormStory } from "../NewCompanyForm/__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { Default as NewCompanyFormStory } from "../NewCompanyForm/NewCompanyForm.stories";
 
 const meta = {
-  title: "Components/companies/NewCompanyModal",
+  title: "components/companies/NewCompanyModal",
   component: NewCompanyModal,
   decorators: [
     (Story) => (

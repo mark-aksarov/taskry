@@ -4,10 +4,10 @@ import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { ChangePasswordForm } from "../ChangePasswordForm";
 import { ChangePasswordModal } from "./ChangePasswordModal";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { Default as ChangePasswordFormStory } from "../ChangePasswordForm/ChangePasswordForm.stories";
+import { ChangePasswordFormStory } from "../ChangePasswordForm/__stories__";
 
 const meta = {
-  title: "Components/users/ChangePasswordModal",
+  title: "components/users/ChangePasswordModal",
   component: ChangePasswordModal,
   decorators: [
     (Story) => (

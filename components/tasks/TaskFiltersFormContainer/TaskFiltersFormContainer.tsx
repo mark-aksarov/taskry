@@ -1,19 +1,15 @@
 import "server-only";
 
-import {
-  TaskFiltersForm,
-  TaskFiltersFormStatusCheckboxGroup,
-  TaskFiltersFormProjectCheckboxGroup,
-  TaskFiltersFormCategoryCheckboxGroup,
-  TaskFiltersFormAssigneeCheckboxGroup,
-  TaskFiltersFormSkeleton,
-} from "../TaskFiltersForm";
-
 import { Suspense } from "react";
 import { TaskFilters } from "@/lib/types";
 import { getUserSummaries } from "@/lib/data/user/user.dal";
 import { getProjectSummaries } from "@/lib/data/project/project.dal";
+import { TaskFiltersForm, TaskFiltersFormSkeleton } from "../TaskFiltersForm";
 import { getTaskCategorySummaries } from "@/lib/data/taskCategory/taskCategory.dal";
+import { TaskFiltersFormStatusCheckboxGroup } from "../TaskFiltersFormStatusCheckboxGroup";
+import { TaskFiltersFormProjectCheckboxGroup } from "../TaskFiltersFormProjectCheckboxGroup";
+import { TaskFiltersFormAssigneeCheckboxGroup } from "../TaskFiltersFormAssigneeCheckboxGroup";
+import { TaskFiltersFormCategoryCheckboxGroup } from "../TaskFiltersFormCategoryCheckboxGroup";
 
 interface TaskFiltersFormContainerProps {
   filters?: TaskFilters;

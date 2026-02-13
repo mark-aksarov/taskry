@@ -1,8 +1,8 @@
 import { TaskDetailAlt } from "./TaskDetailAlt";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { TaskDetailStory } from "../TaskDetail/__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { Default as TaskDetailStory } from "../TaskDetail/TaskDetail.stories";
-import { WithoutSomeData as WithoutSomeDataStory } from "../TaskDetail/TaskDetail.stories";
+import { TaskDetailWithoutSomeDataStory } from "../TaskDetail/__stories__";
 
 const meta = {
   title: "components/tasks/TaskDetailAlt",
@@ -21,5 +21,5 @@ export const Default = {
 } satisfies Story;
 
 export const WithoutSomeData = {
-  ...WithoutSomeDataStory,
+  ...TaskDetailWithoutSomeDataStory,
 } satisfies Story;

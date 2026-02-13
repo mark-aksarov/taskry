@@ -7,19 +7,17 @@ import { usePathname, useRouter } from "next/navigation";
 import { PageDecorator } from "@/.storybook/PageDecorator";
 import { ProjectList } from "@/components/projects/ProjectList";
 import { ProjectGrid } from "@/components/projects/ProjectGrid";
-import { NewProjectForm } from "@/components/projects/NewProjectForm";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { ProjectFiltersForm } from "@/components/projects/ProjectFiltersForm";
-import { NewProjectCategoryForm } from "@/components/projectCategory/NewProjectCategoryForm";
+import { ProjectGridStory } from "@/components/projects/ProjectGrid/__stories__";
+import { ProjectListStory } from "@/components/projects/ProjectList/__stories__";
 import { EntityContainerPresentation } from "@/components/common/EntityContainerPresentation";
-import { Default as ProjectListStory } from "@/components/projects/ProjectList/ProjectList.stories";
-import { Default as ProjectGridStory } from "@/components/projects/ProjectGrid/ProjectGrid.stories";
+import { ProjectFiltersFormStory } from "@/components/projects/ProjectFiltersForm/__stories__";
 import { ProjectToolbarActionsMenuTrigger } from "@/components/projects/ProjectToolbarActionsMenuTrigger";
 import { ProjectToolbarFiltersModalTrigger } from "@/components/projects/ProjectToolbarFiltersModalTrigger";
-import { Default as NewProjectFormStory } from "@/components/projects/NewProjectForm/NewProjectForm.stories";
 import { ProjectToolbarCreateNewMenuTrigger } from "@/components/projects/ProjectToolbarCreateNewMenuTrigger";
-import { Default as ProjectFiltersFormStory } from "@/components/projects/ProjectFiltersForm/ProjectFiltersForm.stories";
-import { Default as NewProjectCategoryFormStory } from "@/components/projectCategory/NewProjectCategoryForm/__stories__/NewProjectCategoryForm.stories";
+import { ProjectToolbarCreateNewMenuTriggerStory } from "@/components/projects/ProjectToolbarCreateNewMenuTrigger/__stories__";
+import { ProjectToolbarActionsMenuTriggerStory } from "@/components/projects/ProjectToolbarActionsMenuTrigger/__stories__";
 
 const meta = {
   title: "pages/ProjectsPage",
@@ -37,11 +35,7 @@ type Story = StoryObj<typeof meta>;
 
 const projectToolbarCreateNewMenuTrigger = (
   <ProjectToolbarCreateNewMenuTrigger
-    guestMode={false}
-    newProjectFormContainer={<NewProjectForm {...NewProjectFormStory.args} />}
-    newProjectCategoryForm={
-      <NewProjectCategoryForm {...NewProjectCategoryFormStory.args} />
-    }
+    {...ProjectToolbarCreateNewMenuTriggerStory.args}
   />
 );
 
@@ -66,9 +60,7 @@ export const Default = {
     ),
     projectToolbarActionsMenuTrigger: (
       <ProjectToolbarActionsMenuTrigger
-        guestMode={false}
-        deleteAction={fn()}
-        updateStatusAction={fn()}
+        {...ProjectToolbarActionsMenuTriggerStory.args}
       />
     ),
   },

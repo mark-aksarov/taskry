@@ -2,7 +2,7 @@ import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { NewTaskForm } from "@/components/tasks/NewTaskForm";
 import { UserTasksEmptySection } from "./UserTasksEmptySection";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { Default as NewTaskFormStory } from "@/components/tasks/NewTaskForm/NewTaskForm.stories";
+import { NewTaskFormStory } from "@/components/tasks/NewTaskForm/__stories__";
 
 const meta = {
   title: "components/users/UserTasksEmptySection",

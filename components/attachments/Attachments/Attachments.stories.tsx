@@ -5,7 +5,7 @@ import Image from "next/image";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {
-  title: "Components/common/Attachments",
+  title: "components/common/Attachments",
   component: Attachments,
   args: {
     children: null,

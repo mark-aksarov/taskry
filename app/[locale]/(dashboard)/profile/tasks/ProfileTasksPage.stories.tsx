@@ -12,13 +12,14 @@ import { NewTaskForm } from "@/components/tasks/NewTaskForm";
 import { UserTaskList } from "@/components/users/UserTaskList";
 import { DetailHeader } from "@/components/common/DetailHeader";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { NewTaskFormStory } from "@/components/tasks/NewTaskForm/__stories__";
+import { UserTaskListStory } from "@/components/users/UserTaskList/__stories__";
 import { ProfileNavigationMobile } from "@/components/users/ProfileNavigationMobile";
 import { ProfileNavigationDesktop } from "@/components/users/ProfileNavigationDesktop";
-import { Default as NewTaskFormStory } from "@/components/tasks/NewTaskForm/NewTaskForm.stories";
+import { PersonDetailHeaderStory } from "@/components/common/DetailHeader/__stories__";
 import { TaskToolbarActionsMenuTrigger } from "@/components/tasks/TaskToolbarActionsMenuTrigger";
-import { Default as UserTaskListStory } from "@/components/users/UserTaskList/UserTaskList.stories";
-import { PersonDetailHeader as PersonDetailHeaderStory } from "@/components/common/DetailHeader/DetailHeader.stories";
-import { Default as ProfileNavigationDesktopStory } from "@/components/users/ProfileNavigationDesktop/ProfileNavigationDesktop.stories";
+import { ProfileNavigationDesktopStory } from "@/components/users/ProfileNavigationDesktop/__stories__";
+import { TaskToolbarActionsMenuTriggerStory } from "@/components/tasks/TaskToolbarActionsMenuTrigger/__stories__";
 
 const meta = {
   title: "pages/ProfileTasksPage",
@@ -40,9 +41,7 @@ export const Default = {
     userHeaderContainer: <DetailHeader {...PersonDetailHeaderStory.args} />,
     taskToolbarActionsMenuTrigger: (
       <TaskToolbarActionsMenuTrigger
-        guestMode={false}
-        deleteAction={fn()}
-        updateStatusAction={fn()}
+        {...TaskToolbarActionsMenuTriggerStory.args}
       />
     ),
     navigationDesktop: (

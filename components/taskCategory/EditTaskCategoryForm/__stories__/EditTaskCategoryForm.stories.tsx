@@ -18,7 +18,7 @@ type Story = StoryObj<typeof meta>;
 export const Default = {
   args: {
     taskCategoryId: 1,
-    nameDefaultValue: "Frontend",
+    nameDefaultValue: "Task category 1",
     updateTaskCategory: () => ({ status: "success" }),
   },
 } satisfies Story;

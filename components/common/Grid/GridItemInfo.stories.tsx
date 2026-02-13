@@ -7,9 +7,12 @@ import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {
-  title: "Components/common/GridItemInfo",
+  title: "components/common/GridItemInfo",
   component: GridItemInfo,
   decorators: [withThemedBackground],
+  parameters: {
+    backgroundVariant: "alt",
+  },
 } satisfies Meta<typeof GridItemInfo>;
 
 export default meta;

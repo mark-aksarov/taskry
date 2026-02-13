@@ -3,7 +3,7 @@ import { AttachmentsField } from "./AttachmentsField";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {
-  title: "Components/common/AttachmentsField",
+  title: "components/common/AttachmentsField",
   component: AttachmentsField,
   decorators: [withThemedBackground],
   parameters: {

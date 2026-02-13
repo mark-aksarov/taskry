@@ -7,7 +7,7 @@ import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {
-  title: "Components/common/DashboardCard",
+  title: "components/common/DashboardCard",
   component: DashboardCard,
   decorators: [withThemedBackground],
   args: {

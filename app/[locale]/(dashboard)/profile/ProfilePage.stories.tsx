@@ -1,7 +1,7 @@
 import {
   Default as UserDetailStory,
   WithoutSomeData as UserDetailWithoutSomeDataStory,
-} from "@/components/users/UserDetail/UserDetail.stories";
+} from "@/components/users/UserDetail/__stories__/UserDetail.stories";
 
 import {
   DetailHeader,
@@ -16,8 +16,8 @@ import { PageDecorator } from "@/.storybook/PageDecorator";
 import { ProfileActions } from "@/components/users/ProfileActions";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { UserDetail, UserDetailSkeleton } from "@/components/users/UserDetail";
-import { Default as ProfileActionsStory } from "@/components/users/ProfileActions/ProfileActions.stories";
-import { PersonDetailHeader as PersonDetailHeaderStory } from "@/components/common/DetailHeader/DetailHeader.stories";
+import { ProfileActionsStory } from "@/components/users/ProfileActions/__stories__";
+import { PersonDetailHeaderStory } from "@/components/common/DetailHeader/__stories__";
 
 const meta = {
   title: "pages/ProfilePage",

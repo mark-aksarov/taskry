@@ -3,7 +3,7 @@ import { CustomerSearchListItem } from "./CustomerSearchListItem";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {
-  title: "Components/search/CustomerSearchListItem",
+  title: "components/search/CustomerSearchListItem",
   component: CustomerSearchListItem,
   decorators: [withThemedBackground],
 } satisfies Meta<typeof CustomerSearchListItem>;
@@ -14,7 +14,7 @@ type Story = StoryObj<typeof CustomerSearchListItem>;
 export const Default = {
   args: {
     id: 1,
-    fullName: "John Doe",
+    fullName: "Customer 1",
     email: "customer1@example.com",
     imageUrl: "/man.jpg",
   },

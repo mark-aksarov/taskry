@@ -3,7 +3,7 @@ import { Pagination } from "./Pagination";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {
-  title: "Components/common/Pagination",
+  title: "components/common/Pagination",
   component: Pagination,
   decorators: [withThemedBackground],
 } satisfies Meta<typeof Pagination>;

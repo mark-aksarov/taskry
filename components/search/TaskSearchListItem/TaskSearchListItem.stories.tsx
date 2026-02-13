@@ -3,7 +3,7 @@ import { TaskSearchListItem } from "./TaskSearchListItem";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {
-  title: "Components/search/TaskSearchListItem",
+  title: "components/search/TaskSearchListItem",
   component: TaskSearchListItem,
   decorators: [withThemedBackground],
 } satisfies Meta<typeof TaskSearchListItem>;
@@ -14,7 +14,7 @@ type Story = StoryObj<typeof TaskSearchListItem>;
 export const Default = {
   args: {
     id: 1,
-    title: "Design landing page",
+    title: "Task 1",
     deadline: new Date("2025-09-30"),
   },
 } satisfies Story;

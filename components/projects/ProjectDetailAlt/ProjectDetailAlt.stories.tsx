@@ -1,8 +1,8 @@
 import { ProjectDetailAlt } from "./ProjectDetailAlt";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { ProjectDetailStory } from "../ProjectDetail/__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { Default as ProjectDetailStory } from "../ProjectDetail/ProjectDetail.stories";
-import { WithoutSomeData as WithoutSomeDataStory } from "../ProjectDetail/ProjectDetail.stories";
+import { ProjectDetailWithoutSomeDataStory } from "../ProjectDetail/__stories__";
 
 const meta = {
   title: "components/projects/ProjectDetailAlt",
@@ -21,5 +21,5 @@ export const Default = {
 } satisfies Story;
 
 export const WithoutSomeData = {
-  ...WithoutSomeDataStory,
+  ...ProjectDetailWithoutSomeDataStory,
 } satisfies Story;

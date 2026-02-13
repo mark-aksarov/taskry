@@ -1,15 +1,15 @@
-import { fn } from "storybook/internal/test";
 import { Repeat } from "@/components/common/Repeat";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { TaskCommentsModal } from "../TaskCommentsModal";
 import { TaskCommentsModalTrigger } from "./TaskCommentsModalTrigger";
 import { CommentItemSkeleton } from "@/components/comments/CommentItem";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { TaskCommentsModalStory } from "../TaskCommentsModal/__stories__";
 import { CommentsEmptySection } from "@/components/comments/CommentsEmptySection";
 import { MockedCommentsContainer } from "@/components/comments/MockedCommentsContainer";
 
 const meta = {
-  title: "Components/tasks/TaskCommentsModalTrigger",
+  title: "components/tasks/TaskCommentsModalTrigger",
   component: TaskCommentsModalTrigger,
   decorators: [withThemedBackground],
   parameters: {
@@ -25,10 +25,8 @@ export const Default = {
     commentsCount: 10,
     modal: (
       <TaskCommentsModal
-        taskId={1}
+        {...TaskCommentsModalStory.args}
         taskCommentsContainer={<MockedCommentsContainer />}
-        sendCommentAction={fn()}
-        updateCommentAction={fn()}
       />
     ),
   },
@@ -39,12 +37,10 @@ export const WithEmptyContent = {
     commentsCount: 10,
     modal: (
       <TaskCommentsModal
-        taskId={1}
+        {...TaskCommentsModalStory.args}
         taskCommentsContainer={
           <Repeat items={10} renderItem={() => <CommentItemSkeleton />} />
         }
-        sendCommentAction={fn()}
-        updateCommentAction={fn()}
       />
     ),
   },
@@ -55,10 +51,8 @@ export const WithSkeletonContent = {
     commentsCount: 10,
     modal: (
       <TaskCommentsModal
-        taskId={1}
+        {...TaskCommentsModalStory.args}
         taskCommentsContainer={<CommentsEmptySection />}
-        sendCommentAction={fn()}
-        updateCommentAction={fn()}
       />
     ),
   },

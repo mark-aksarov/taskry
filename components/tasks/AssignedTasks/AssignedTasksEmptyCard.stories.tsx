@@ -2,10 +2,10 @@ import { NewTaskForm } from "../NewTaskForm";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { AssignedTasksEmptyCard } from "./AssignedTasksEmptyCard";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { Default as NewTaskFormStory } from "@/components/tasks/NewTaskForm/NewTaskForm.stories";
+import { NewTaskFormStory } from "@/components/tasks/NewTaskForm/__stories__";
 
 const meta = {
-  title: "Components/tasks/AssignedTasksEmptyCard",
+  title: "components/tasks/AssignedTasksEmptyCard",
   component: AssignedTasksEmptyCard,
   decorators: [withThemedBackground],
 } satisfies Meta<typeof AssignedTasksEmptyCard>;

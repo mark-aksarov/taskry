@@ -3,8 +3,8 @@ import { EditSubtaskForm } from "../EditSubtaskForm";
 import { EditSubtaskModal } from "./EditSubtaskModal";
 import { DialogTrigger } from "react-aria-components";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { EditSubtaskFormStory } from "../EditSubtaskForm/__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { Default as EditSubtaskFormStory } from "../EditSubtaskForm/EditSubtaskForm.stories";
 
 const meta = {
   title: "components/subtasks/EditSubtaskModal",

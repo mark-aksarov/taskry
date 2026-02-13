@@ -7,10 +7,10 @@ import { SearchModal } from "@/components/search/SearchModal";
 import { AppBottomSheetTrigger } from "../AppBottomSheetTrigger";
 import { AppSidebarSheetTrigger } from "../AppSidebarSheetTrigger";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { Default as SearchModalStory } from "@/components/search/SearchModal/SearchModal.stories";
+import { SearchModalStory } from "@/components/search/SearchModal/__stories__";
 
 const meta = {
-  title: "Components/layout/AppHeader",
+  title: "components/layout/AppHeader",
   component: AppHeader,
   decorators: [withThemedBackground],
   beforeEach: () => {

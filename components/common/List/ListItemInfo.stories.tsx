@@ -7,9 +7,12 @@ import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {
-  title: "Components/common/ListItemInfo",
+  title: "components/common/ListItemInfo",
   component: ListItemInfo,
   decorators: [withThemedBackground],
+  parameters: {
+    backgroundVariant: "alt",
+  },
 } satisfies Meta<typeof ListItemInfo>;
 
 export default meta;
