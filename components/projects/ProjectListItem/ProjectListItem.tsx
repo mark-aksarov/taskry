@@ -56,6 +56,7 @@ export interface ProjectListItemProps {
   menuTrigger: React.ReactNode;
   projectDetailModal: React.ReactNode;
   userDetailModal?: React.ReactNode;
+  customerDetailModal?: React.ReactNode;
 }
 
 export const ProjectListItem = ({
@@ -73,6 +74,7 @@ export const ProjectListItem = ({
   menuTrigger,
   projectDetailModal,
   userDetailModal,
+  customerDetailModal,
 }: ProjectListItemProps) => {
   const tStatus = useTranslations("projects.ProjectStatus");
   const t = useTranslations("projects.ProjectListItem");
@@ -118,7 +120,7 @@ export const ProjectListItem = ({
             <ItemBaseDetailModalTrigger
               data-test="project-list-item-title-trigger"
               modal={projectDetailModal}
-              className="truncate"
+              className="truncate max-md:hidden"
             >
               {title}
             </ItemBaseDetailModalTrigger>
@@ -133,27 +135,31 @@ export const ProjectListItem = ({
       creatorSlot={
         <>
           {creator ? (
-            <ItemBaseDetailModalTrigger
-              data-test="project-list-item-creator-image-trigger"
-              modal={userDetailModal}
-              className="@max-2xl:hidden"
-            >
-              {creatorImg}
-            </ItemBaseDetailModalTrigger>
+            <>
+              <ItemBaseDetailModalTrigger
+                data-test="project-list-item-creator-image-trigger"
+                modal={userDetailModal}
+                className="max-md:hidden"
+              >
+                {creatorImg}
+              </ItemBaseDetailModalTrigger>
+            </>
           ) : (
-            <UnknownUser className="h-9 w-9 @max-2xl:hidden" />
+            <UnknownUser className="h-9 w-9 max-md:hidden" />
           )}
 
-          <ListItemInfo className="@max-2xl:hidden">
+          <ListItemInfo className="max-md:hidden">
             <ListItemTitle>
               {creator ? (
-                <ItemBaseDetailModalTrigger
-                  data-test="project-list-item-creator-name-trigger"
-                  modal={userDetailModal}
-                  className="truncate"
-                >
-                  {creator.fullName}
-                </ItemBaseDetailModalTrigger>
+                <>
+                  <ItemBaseDetailModalTrigger
+                    data-test="project-list-item-creator-name-trigger"
+                    modal={userDetailModal}
+                    className="truncate"
+                  >
+                    {creator.fullName}
+                  </ItemBaseDetailModalTrigger>
+                </>
               ) : (
                 t("noCreator")
               )}
@@ -165,22 +171,25 @@ export const ProjectListItem = ({
       customerSlot={
         <>
           {customer?.imageUrl ? (
-            <ImageContainer className="h-9 w-9 @max-3xl:hidden">
+            <ImageContainer className="h-9 w-9 max-md:hidden">
               <Image fill src={customer.imageUrl} alt={customer.fullName} />
             </ImageContainer>
           ) : (
-            <UnknownUser className="h-9 w-9 @max-3xl:hidden" />
+            <UnknownUser className="h-9 w-9 max-md:hidden" />
           )}
 
-          <ListItemInfo className="@max-3xl:hidden">
+          <ListItemInfo className="max-md:hidden">
             <ListItemTitle>
               {customer ? (
-                <Link
-                  className="block truncate"
-                  href={`/customers=${customer.id}`}
-                >
-                  {customer.fullName}
-                </Link>
+                <>
+                  <ItemBaseDetailModalTrigger
+                    data-test="project-list-item-customer-modal-trigger"
+                    modal={customerDetailModal}
+                    className="truncate"
+                  >
+                    {customer.fullName}
+                  </ItemBaseDetailModalTrigger>
+                </>
               ) : (
                 t("noCustomer")
               )}

@@ -80,14 +80,6 @@ export function TaskGridItem({
     <UnknownUser className="h-9 w-9" />
   );
 
-  const assigneeImgLink = assignee ? (
-    <Link className="md:hidden" href={`/team/${assignee.id}`}>
-      {assigneeImg}
-    </Link>
-  ) : (
-    <UnknownUser className="h-9 w-9" />
-  );
-
   return (
     <TaskGridItemLayout
       checkboxSlot={<TaskListItemCheckbox id={id} />}
@@ -97,7 +89,7 @@ export function TaskGridItem({
           <GridItemTitle>
             <ItemBaseDetailModalTrigger
               modal={taskDetailModal}
-              className="truncate"
+              className="truncate max-md:hidden"
             >
               {title}
             </ItemBaseDetailModalTrigger>
@@ -113,11 +105,16 @@ export function TaskGridItem({
       assigneeImageSlot={
         assignee ? (
           <>
-            <ItemBaseDetailModalTrigger modal={userDetailModal}>
+            <ItemBaseDetailModalTrigger
+              modal={userDetailModal}
+              className="max-md:hidden"
+            >
               {assigneeImg}
             </ItemBaseDetailModalTrigger>
 
-            {assigneeImgLink}
+            <Link className="md:hidden" href={`/team/${assignee.id}`}>
+              {assigneeImg}
+            </Link>
           </>
         ) : (
           <UnknownUser className="h-9 w-9" />

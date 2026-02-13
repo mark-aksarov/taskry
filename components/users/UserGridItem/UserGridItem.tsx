@@ -62,7 +62,10 @@ export function UserGridItem({
       actionMenuSlot={menuTrigger}
       imageSlot={
         <>
-          <ItemBaseDetailModalTrigger modal={userDetailModal}>
+          <ItemBaseDetailModalTrigger
+            className="max-md:hidden"
+            modal={userDetailModal}
+          >
             {userImg}
           </ItemBaseDetailModalTrigger>
 
@@ -76,7 +79,7 @@ export function UserGridItem({
           <GridItemTitle>
             <ItemBaseDetailModalTrigger
               modal={userDetailModal}
-              className="truncate"
+              className="truncate max-md:hidden"
             >
               {fullName}
             </ItemBaseDetailModalTrigger>

@@ -10,6 +10,8 @@ import { ProjectItemActionMenuTrigger } from "../../ProjectItemActionMenuTrigger
 import { ProjectCommentsModalStory } from "../../ProjectCommentsModal/__stories__";
 import { UserDetailModalStory } from "@/components/users/UserDetailModal/__stories__";
 import { ProjectItemActionMenuTriggerStory } from "../../ProjectItemActionMenuTrigger/__stories__";
+import { CustomerDetailModal } from "@/components/customer/CustomerDetailModal";
+import { CustomerDetailModalStory } from "@/components/customer/CustomerDetailModal/__stories__";
 
 export const mockedProject = {
   id: 1,
@@ -62,6 +64,9 @@ export const Default = {
       <ProjectDetailModal {...ProjectDetailModalStory.args} />
     ),
     userDetailModal: <UserDetailModal {...UserDetailModalStory.args} />,
+    customerDetailModal: (
+      <CustomerDetailModal {...CustomerDetailModalStory.args} />
+    ),
   },
 } satisfies Story;
 

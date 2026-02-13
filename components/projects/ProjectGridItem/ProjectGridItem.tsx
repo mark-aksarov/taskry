@@ -85,14 +85,6 @@ export function ProjectGridItem({
     <UnknownUser className="h-9 w-9" />
   );
 
-  const creatorImgLink = creator ? (
-    <Link className="md:hidden" href={`/team/${creator.id}`}>
-      {creatorImg}
-    </Link>
-  ) : (
-    <UnknownUser className="h-9 w-9" />
-  );
-
   return (
     <ProjectGridItemLayout
       checkboxSlot={
@@ -108,15 +100,12 @@ export function ProjectGridItem({
           <GridItemTitle>
             <ItemBaseDetailModalTrigger
               modal={projectDetailModal}
-              className="truncate"
+              className="truncate max-md:hidden"
             >
               {title}
             </ItemBaseDetailModalTrigger>
 
-            <Link
-              className="block truncate md:hidden"
-              href={`/customers/${id}`}
-            >
+            <Link className="block truncate md:hidden" href={`/projects/${id}`}>
               {title}
             </Link>
           </GridItemTitle>
@@ -127,11 +116,16 @@ export function ProjectGridItem({
       creatorImageSlot={
         creator ? (
           <>
-            <ItemBaseDetailModalTrigger modal={userDetailModal}>
+            <ItemBaseDetailModalTrigger
+              className="max-md:hidden"
+              modal={userDetailModal}
+            >
               {creatorImg}
             </ItemBaseDetailModalTrigger>
 
-            {creatorImgLink}
+            <Link className="md:hidden" href={`/team/${creator.id}`}>
+              {creatorImg}
+            </Link>
           </>
         ) : (
           <UnknownUser className="h-9 w-9" />

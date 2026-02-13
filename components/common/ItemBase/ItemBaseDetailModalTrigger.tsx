@@ -16,7 +16,7 @@ interface ItemBaseDetailModalTriggerProps extends DialogTriggerProps {
 
 const styles = tv({
   extend: focusRing,
-  base: "max-w-full cursor-pointer max-md:hidden",
+  base: "max-w-full cursor-pointer",
 });
 
 export function ItemBaseDetailModalTrigger({

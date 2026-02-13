@@ -35,7 +35,7 @@ export const TaskListItemLayout = ({
         {statusSlot}
 
         <div className="flex items-center @max-md:gap-1 @md:gap-2">
-          {commentsModalTriggerSlot}
+          <div className="@max-lg:hidden">{commentsModalTriggerSlot}</div>
           {menuTriggerSlot}
         </div>
       </div>

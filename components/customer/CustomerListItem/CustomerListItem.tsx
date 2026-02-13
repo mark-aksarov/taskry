@@ -72,7 +72,7 @@ export function CustomerListItem({
       <>
         <ItemBaseDetailModalTrigger
           modal={customerDetailModal}
-          className="h-9 w-9"
+          className="h-9 w-9 max-md:hidden"
         >
           {userImg}
         </ItemBaseDetailModalTrigger>
@@ -86,7 +86,7 @@ export function CustomerListItem({
         <ListItemTitle>
           <ItemBaseDetailModalTrigger
             modal={customerDetailModal}
-            className="truncate"
+            className="truncate max-md:hidden"
           >
             {fullName}
           </ItemBaseDetailModalTrigger>

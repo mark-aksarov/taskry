@@ -53,7 +53,10 @@ export function UserListItem({
   return (
     <ListItem data-test="user-list-item" data-id={id}>
       <>
-        <ItemBaseDetailModalTrigger modal={userDetailModal} className="h-9 w-9">
+        <ItemBaseDetailModalTrigger
+          modal={userDetailModal}
+          className="h-9 w-9 max-md:hidden"
+        >
           {userImg}
         </ItemBaseDetailModalTrigger>
 
@@ -66,7 +69,7 @@ export function UserListItem({
         <ListItemTitle>
           <ItemBaseDetailModalTrigger
             modal={userDetailModal}
-            className="truncate"
+            className="truncate max-md:hidden"
           >
             {fullName}
           </ItemBaseDetailModalTrigger>

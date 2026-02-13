@@ -17,6 +17,8 @@ import { updateComment } from "@/lib/actions/comment/updateComment";
 import { EditProjectFormContainer } from "./EditProjectFormContainer";
 import { deleteProjects } from "@/lib/actions/project/deleteProjects";
 import { ProjectCommentsContainer } from "./ProjectCommentsContainer";
+import { CustomerDetailModal } from "../customer/CustomerDetailModal";
+import { CustomerDetailContainer } from "../customer/CustomerDetailContainer";
 import { ProjectItemActionMenuTrigger } from "./ProjectItemActionMenuTrigger";
 import { updateProjectStatuses } from "@/lib/actions/project/updateProjectStatuses";
 import { EntityContainerPresentation } from "../common/EntityContainerPresentation";
@@ -106,6 +108,18 @@ export async function ProjectsContainer({
                       userId={project.creator.id}
                       userDetailContainer={
                         <UserDetailContainer userId={project.creator.id} />
+                      }
+                    />
+                  )
+                }
+                customerDetailModal={
+                  project.customer && (
+                    <CustomerDetailModal
+                      customerId={project.customer.id}
+                      customerDetailContainer={
+                        <CustomerDetailContainer
+                          customerId={project.customer.id}
+                        />
                       }
                     />
                   )

@@ -23,7 +23,7 @@ import { TaskListItemCheckbox } from "@/components/tasks/TaskListItem/TaskListIt
 export interface UserTaskListItemProps {
   id: number;
   title: string;
-  deadline?: Date;
+  deadline: Date;
   status: TaskStatus;
   commentsCount: number;
   taskCommentsModal: React.ReactNode;
@@ -48,15 +48,13 @@ export const UserTaskListItem = ({
 
   const format = useFormatter();
 
-  const deadlineOn = deadline
-    ? t("deadlineOn", {
-        date: format.dateTime(deadline, {
-          day: "2-digit",
-          month: "short",
-          year: "numeric",
-        }),
-      })
-    : t("noDeadline");
+  const deadlineOn = t("deadlineOn", {
+    date: format.dateTime(deadline, {
+      day: "2-digit",
+      month: "short",
+      year: "numeric",
+    }),
+  });
 
   return (
     <UserTaskListItemLayout
@@ -66,7 +64,7 @@ export const UserTaskListItem = ({
           <ListItemTitle>
             <ItemBaseDetailModalTrigger
               modal={taskDetailModal}
-              className="truncate"
+              className="truncate max-md:hidden"
             >
               {title}
             </ItemBaseDetailModalTrigger>

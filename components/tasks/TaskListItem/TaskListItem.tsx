@@ -98,7 +98,7 @@ export const TaskListItem = ({
           <ListItemTitle data-test="task-list-item-title">
             <ItemBaseDetailModalTrigger
               modal={taskDetailModal}
-              className="truncate"
+              className="truncate max-md:hidden"
             >
               {title}
             </ItemBaseDetailModalTrigger>
@@ -116,15 +116,15 @@ export const TaskListItem = ({
           {assignee ? (
             <ItemBaseDetailModalTrigger
               modal={userDetailModal}
-              className="@max-2xl:hidden"
+              className="max-md:hidden"
             >
               {assigneeImg}
             </ItemBaseDetailModalTrigger>
           ) : (
-            <UnknownUser className="h-9 w-9 @max-2xl:hidden" />
+            <UnknownUser className="h-9 w-9 max-md:hidden" />
           )}
 
-          <ListItemInfo className="@max-2xl:hidden">
+          <ListItemInfo className="max-md:hidden">
             <ListItemTitle data-test="task-list-item-user-title">
               {assignee ? (
                 <ItemBaseDetailModalTrigger

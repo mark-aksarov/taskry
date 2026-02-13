@@ -82,7 +82,10 @@ export function CustomerGridItem({
       }
       imageSlot={
         <>
-          <ItemBaseDetailModalTrigger modal={customerDetailModal}>
+          <ItemBaseDetailModalTrigger
+            className="max-md:hidden"
+            modal={customerDetailModal}
+          >
             {customerImg}
           </ItemBaseDetailModalTrigger>
 
@@ -96,7 +99,7 @@ export function CustomerGridItem({
           <GridItemTitle>
             <ItemBaseDetailModalTrigger
               modal={customerDetailModal}
-              className="truncate"
+              className="truncate max-md:hidden"
             >
               {fullName}
             </ItemBaseDetailModalTrigger>

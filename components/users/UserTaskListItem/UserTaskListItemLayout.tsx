@@ -22,7 +22,7 @@ export const UserTaskListItemLayout = ({
 
       <div className="flex items-center @max-md:gap-1 @md:gap-2">
         {statusSlot}
-        {commentsSlot}
+        <div className="@max-lg:hidden">{commentsSlot}</div>
         {actionMenuSlot}
       </div>
     </ListItem>
