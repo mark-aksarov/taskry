@@ -2,13 +2,13 @@ import { Meta, StoryObj } from "@storybook/react";
 import { NewCompanyForm } from "../../NewCompanyForm";
 import { NewCompanyFormStory } from "../../NewCompanyForm/__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { CompanyToolbarCreateNewButton } from "../CompanyToolbarCreateNewButton";
+import { CompanyToolbarCreateNewModalTrigger } from "../CompanyToolbarCreateNewModalTrigger";
 
 const meta = {
-  title: "components/companies/CompanyToolbarCreateNewButton",
-  component: CompanyToolbarCreateNewButton,
+  title: "components/companies/CompanyToolbarCreateNewModalTrigger",
+  component: CompanyToolbarCreateNewModalTrigger,
   decorators: [withThemedBackground],
-} satisfies Meta<typeof CompanyToolbarCreateNewButton>;
+} satisfies Meta<typeof CompanyToolbarCreateNewModalTrigger>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;

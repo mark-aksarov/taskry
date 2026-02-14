@@ -8,9 +8,9 @@ import { TaskCategoriesPageEmpty } from "./TaskCategoriesPageEmpty";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { TaskCategoryList } from "@/components/taskCategory/TaskCategoryList";
 import { TaskCategoryListStory } from "@/components/taskCategory/TaskCategoryList/__stories__";
-import { TaskCategoryToolbarCreateNewButton } from "@/components/taskCategory/TaskCategoryToolbarCreateNewButton";
+import { TaskCategoryToolbarCreateNewModalTrigger } from "@/components/taskCategory/TaskCategoryToolbarCreateNewModalTrigger";
 import { TaskCategoryToolbarActionsMenuTrigger } from "@/components/taskCategory/TaskCategoryToolbarActionsMenuTrigger";
-import { TaskCategoryToolbarCreateNewButtonStory } from "@/components/taskCategory/TaskCategoryToolbarCreateNewButton/__stories__";
+import { TaskCategoryToolbarCreateNewModalTriggerStory } from "@/components/taskCategory/TaskCategoryToolbarCreateNewModalTrigger/__stories__";
 import { TaskCategoryToolbarActionsMenuTriggerStory } from "@/components/taskCategory/TaskCategoryToolbarActionsMenuTrigger/__stories__";
 
 const meta = {
@@ -27,9 +27,9 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-const taskCategoryToolbarCreateNewButton = (
-  <TaskCategoryToolbarCreateNewButton
-    {...TaskCategoryToolbarCreateNewButtonStory.args}
+const taskCategoryToolbarCreateNewModalTrigger = (
+  <TaskCategoryToolbarCreateNewModalTrigger
+    {...TaskCategoryToolbarCreateNewModalTriggerStory.args}
   />
 );
 
@@ -38,7 +38,8 @@ export const Default = {
     taskCategoriesContainer: (
       <TaskCategoryList {...TaskCategoryListStory.args} />
     ),
-    taskCategoryToolbarCreateNewButton: taskCategoryToolbarCreateNewButton,
+    taskCategoryToolbarCreateNewModalTrigger:
+      taskCategoryToolbarCreateNewModalTrigger,
     taskCategoryToolbarActionsMenuTrigger: (
       <TaskCategoryToolbarActionsMenuTrigger
         {...TaskCategoryToolbarActionsMenuTriggerStory.args}
@@ -56,7 +57,9 @@ export const WithNoTaskCategories = {
   args: { ...Default.args },
   render: () => (
     <TaskCategoriesPageEmpty
-      taskCategoryToolbarCreateNewButton={taskCategoryToolbarCreateNewButton}
+      taskCategoryToolbarCreateNewModalTrigger={
+        taskCategoryToolbarCreateNewModalTrigger
+      }
     />
   ),
 } satisfies Story;

@@ -8,9 +8,9 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { ProjectCategoriesPageEmpty } from "./ProjectCategoriesPageEmpty";
 import { ProjectCategoryList } from "@/components/projectCategory/ProjectCategoryList";
 import { ProjectCategoryListStory } from "@/components/projectCategory/ProjectCategoryList/__stories__";
-import { ProjectCategoryToolbarCreateNewButton } from "@/components/projectCategory/ProjectCategoryToolbarCreateNewButton";
+import { ProjectCategoryToolbarCreateNewModalTrigger } from "@/components/projectCategory/ProjectCategoryToolbarCreateNewModalTrigger";
 import { ProjectCategoryToolbarActionsMenuTrigger } from "@/components/projectCategory/ProjectCategoryToolbarActionsMenuTrigger";
-import { ProjectCategoryToolbarCreateNewButtonStory } from "@/components/projectCategory/ProjectCategoryToolbarCreateNewButton/__stories__";
+import { ProjectCategoryToolbarCreateNewModalTriggerStory } from "@/components/projectCategory/ProjectCategoryToolbarCreateNewModalTrigger/__stories__";
 import { ProjectCategoryToolbarActionsMenuTriggerStory } from "@/components/projectCategory/ProjectCategoryToolbarActionsMenuTrigger/__stories__";
 
 const meta = {
@@ -27,9 +27,9 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-const projectCategoryToolbarCreateNewButton = (
-  <ProjectCategoryToolbarCreateNewButton
-    {...ProjectCategoryToolbarCreateNewButtonStory.args}
+const projectCategoryToolbarCreateNewModalTrigger = (
+  <ProjectCategoryToolbarCreateNewModalTrigger
+    {...ProjectCategoryToolbarCreateNewModalTriggerStory.args}
   />
 );
 
@@ -38,8 +38,8 @@ export const Default = {
     projectCategoriesContainer: (
       <ProjectCategoryList {...ProjectCategoryListStory.args} />
     ),
-    projectCategoryToolbarCreateNewButton:
-      projectCategoryToolbarCreateNewButton,
+    projectCategoryToolbarCreateNewModalTrigger:
+      projectCategoryToolbarCreateNewModalTrigger,
     projectCategoryToolbarActionsMenuTrigger: (
       <ProjectCategoryToolbarActionsMenuTrigger
         {...ProjectCategoryToolbarActionsMenuTriggerStory.args}
@@ -57,8 +57,8 @@ export const WithNoProjectCategories = {
   args: { ...Default.args },
   render: () => (
     <ProjectCategoriesPageEmpty
-      projectCategoryToolbarCreateNewButton={
-        projectCategoryToolbarCreateNewButton
+      projectCategoryToolbarCreateNewModalTrigger={
+        projectCategoryToolbarCreateNewModalTrigger
       }
     />
   ),

@@ -1,10 +1,10 @@
 import { mocked } from "storybook/internal/test";
-import { ProfileActions } from "../ProfileActions";
+import { ProfileActions } from "../../ProfileActions";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { useParams, usePathname } from "next/navigation";
-import { UserNavigationDesktop } from "./UserNavigationDesktop";
+import { UserNavigationDesktop } from "../UserNavigationDesktop";
+import { ProfileActionsStory } from "../../ProfileActions/__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { Default as ProfileActionsStory } from "../ProfileActions/__stories__/ProfileActions.stories";
 
 const meta = {
   title: "components/users/UserNavigationDesktop",

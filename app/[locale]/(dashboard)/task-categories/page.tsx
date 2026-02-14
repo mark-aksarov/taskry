@@ -6,7 +6,7 @@ import { getTaskCategoryCount } from "@/lib/data/taskCategory/taskCategory.dal";
 import { createTaskCategory } from "@/lib/actions/taskCategory/createTaskCategory";
 import { NewTaskCategoryForm } from "@/components/taskCategory/NewTaskCategoryForm";
 import { TaskCategoriesContainer } from "@/components/taskCategory/TaskCategoriesContainer";
-import { TaskCategoryToolbarCreateNewButton } from "@/components/taskCategory/TaskCategoryToolbarCreateNewButton";
+import { TaskCategoryToolbarCreateNewModalTrigger } from "@/components/taskCategory/TaskCategoryToolbarCreateNewModalTrigger";
 import { TaskCategoryToolbarActionsMenuTrigger } from "@/components/taskCategory/TaskCategoryToolbarActionsMenuTrigger";
 import { deleteTaskCategories } from "@/lib/actions/taskCategory/deleteTaskCategories";
 
@@ -18,8 +18,8 @@ export default async function AppTaskCategoriesPage() {
   const taskCategoryCount = await getTaskCategoryCount();
   const guestMode = await hasGuestRole();
 
-  const taskCategoryToolbarCreateNewButton = (
-    <TaskCategoryToolbarCreateNewButton
+  const taskCategoryToolbarCreateNewModalTrigger = (
+    <TaskCategoryToolbarCreateNewModalTrigger
       guestMode={guestMode}
       newTaskCategoryForm={
         <NewTaskCategoryForm createTaskCategory={createTaskCategory} />
@@ -30,7 +30,9 @@ export default async function AppTaskCategoriesPage() {
   if (!taskCategoryCount) {
     return (
       <TaskCategoriesPageEmpty
-        taskCategoryToolbarCreateNewButton={taskCategoryToolbarCreateNewButton}
+        taskCategoryToolbarCreateNewModalTrigger={
+          taskCategoryToolbarCreateNewModalTrigger
+        }
       />
     );
   }
@@ -38,7 +40,9 @@ export default async function AppTaskCategoriesPage() {
   return (
     <TaskCategoriesPage
       taskCategoriesContainer={<TaskCategoriesContainer />}
-      taskCategoryToolbarCreateNewButton={taskCategoryToolbarCreateNewButton}
+      taskCategoryToolbarCreateNewModalTrigger={
+        taskCategoryToolbarCreateNewModalTrigger
+      }
       taskCategoryToolbarActionsMenuTrigger={
         <TaskCategoryToolbarActionsMenuTrigger
           guestMode={guestMode}

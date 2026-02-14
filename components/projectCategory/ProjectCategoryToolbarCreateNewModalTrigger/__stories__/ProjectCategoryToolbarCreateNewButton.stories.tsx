@@ -2,13 +2,14 @@ import { Meta, StoryObj } from "@storybook/react";
 import { NewProjectCategoryForm } from "../../NewProjectCategoryForm";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { NewProjectCategoryFormStory } from "../../NewProjectCategoryForm/__stories__";
-import { ProjectCategoryToolbarCreateNewButton } from "../ProjectCategoryToolbarCreateNewButton";
+import { ProjectCategoryToolbarCreateNewModalTrigger } from "../ProjectCategoryToolbarCreateNewModalTrigger";
 
 const meta = {
-  title: "components/project-categories/ProjectCategoryToolbarCreateNewButton",
-  component: ProjectCategoryToolbarCreateNewButton,
+  title:
+    "components/project-categories/ProjectCategoryToolbarCreateNewModalTrigger",
+  component: ProjectCategoryToolbarCreateNewModalTrigger,
   decorators: [withThemedBackground],
-} satisfies Meta<typeof ProjectCategoryToolbarCreateNewButton>;
+} satisfies Meta<typeof ProjectCategoryToolbarCreateNewModalTrigger>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;

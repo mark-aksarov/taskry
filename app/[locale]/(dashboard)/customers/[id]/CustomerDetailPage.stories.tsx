@@ -1,7 +1,7 @@
 import {
-  Default as CustomerDetailStory,
-  WithoutSomeData as CustomerDetailWithoutSomeDataStory,
-} from "@/components/customer/CustomerDetail/__stories__/CustomerDetail.stories";
+  CustomerDetailStory,
+  CustomerDetailWithoutSomeDataStory,
+} from "@/components/customer/CustomerDetail/__stories__";
 
 import {
   DetailHeader,

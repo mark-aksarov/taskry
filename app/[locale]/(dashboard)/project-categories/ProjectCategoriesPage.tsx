@@ -13,13 +13,13 @@ import { SelectionProvider } from "@/components/common/SelectionContext";
 
 interface ProjectCategoriesPageProps {
   projectCategoriesContainer: React.ReactNode;
-  projectCategoryToolbarCreateNewButton: React.ReactNode;
+  projectCategoryToolbarCreateNewModalTrigger: React.ReactNode;
   projectCategoryToolbarActionsMenuTrigger: React.ReactNode;
 }
 
 export function ProjectCategoriesPage({
   projectCategoriesContainer,
-  projectCategoryToolbarCreateNewButton,
+  projectCategoryToolbarCreateNewModalTrigger,
   projectCategoryToolbarActionsMenuTrigger,
 }: ProjectCategoriesPageProps) {
   const t = useTranslations("app.ProjectCategoriesPage");
@@ -31,7 +31,7 @@ export function ProjectCategoriesPage({
           <SelectionProvider>
             <ToolbarDesktop>
               {projectCategoryToolbarActionsMenuTrigger}
-              {projectCategoryToolbarCreateNewButton}
+              {projectCategoryToolbarCreateNewModalTrigger}
             </ToolbarDesktop>
 
             <ToolbarMobileTop>
@@ -41,7 +41,7 @@ export function ProjectCategoriesPage({
 
             <ToolbarMobileBottom>
               <div className="ml-auto">
-                {projectCategoryToolbarCreateNewButton}
+                {projectCategoryToolbarCreateNewModalTrigger}
               </div>
             </ToolbarMobileBottom>
 

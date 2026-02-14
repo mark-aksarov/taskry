@@ -7,7 +7,7 @@ import { NewPositionForm } from "@/components/position/NewPositionForm";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { deletePositions } from "@/lib/actions/position/deletePositions";
 import { PositionsContainer } from "@/components/position/PositionsContainer";
-import { PositionToolbarCreateNewButton } from "@/components/position/PositionToolbarCreateNewButton";
+import { PositionToolbarCreateNewModalTrigger } from "@/components/position/PositionToolbarCreateNewModalTrigger";
 import { PositionToolbarActionsMenuTrigger } from "@/components/position/PositionToolbarActionsMenuTrigger";
 
 export default async function AppPositionsPage() {
@@ -18,8 +18,8 @@ export default async function AppPositionsPage() {
   const positionCount = await getPositionCount();
   const guestMode = await hasGuestRole();
 
-  const positionToolbarCreateNewButton = (
-    <PositionToolbarCreateNewButton
+  const positionToolbarCreateNewModalTrigger = (
+    <PositionToolbarCreateNewModalTrigger
       guestMode={guestMode}
       newPositionForm={<NewPositionForm createPosition={createPosition} />}
     />
@@ -28,7 +28,9 @@ export default async function AppPositionsPage() {
   if (!positionCount) {
     return (
       <PositionsPageEmpty
-        positionToolbarCreateNewButton={positionToolbarCreateNewButton}
+        positionToolbarCreateNewModalTrigger={
+          positionToolbarCreateNewModalTrigger
+        }
       />
     );
   }
@@ -36,7 +38,9 @@ export default async function AppPositionsPage() {
   return (
     <PositionsPage
       positionsContainer={<PositionsContainer />}
-      positionToolbarCreateNewButton={positionToolbarCreateNewButton}
+      positionToolbarCreateNewModalTrigger={
+        positionToolbarCreateNewModalTrigger
+      }
       positionToolbarActionsMenuTrigger={
         <PositionToolbarActionsMenuTrigger
           guestMode={guestMode}

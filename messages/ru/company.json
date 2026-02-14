@@ -20,7 +20,7 @@
     "dialogHeading": "Действия",
     "delete": "Удалить"
   },
-  "CompanyToolbarCreateNewButton": {
+  "CompanyToolbarCreateNewModalTrigger": {
     "label": "Создать новую"
   },
   "CompanyItemActionMenuTrigger": {

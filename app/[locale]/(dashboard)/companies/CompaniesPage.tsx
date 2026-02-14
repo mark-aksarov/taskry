@@ -13,13 +13,13 @@ import { SelectionProvider } from "@/components/common/SelectionContext";
 
 interface CompaniesPageProps {
   companiesContainer: React.ReactNode;
-  companyToolbarCreateNewButton: React.ReactNode;
+  companyToolbarCreateNewModalTrigger: React.ReactNode;
   companyToolbarActionsMenuTrigger: React.ReactNode;
 }
 
 export function CompaniesPage({
   companiesContainer,
-  companyToolbarCreateNewButton,
+  companyToolbarCreateNewModalTrigger,
   companyToolbarActionsMenuTrigger,
 }: CompaniesPageProps) {
   const t = useTranslations("app.CompaniesPage");
@@ -31,7 +31,7 @@ export function CompaniesPage({
           <SelectionProvider>
             <ToolbarDesktop>
               {companyToolbarActionsMenuTrigger}
-              {companyToolbarCreateNewButton}
+              {companyToolbarCreateNewModalTrigger}
             </ToolbarDesktop>
 
             <ToolbarMobileTop>
@@ -40,7 +40,9 @@ export function CompaniesPage({
             </ToolbarMobileTop>
 
             <ToolbarMobileBottom>
-              <div className="ml-auto">{companyToolbarCreateNewButton}</div>
+              <div className="ml-auto">
+                {companyToolbarCreateNewModalTrigger}
+              </div>
             </ToolbarMobileBottom>
 
             {companiesContainer}

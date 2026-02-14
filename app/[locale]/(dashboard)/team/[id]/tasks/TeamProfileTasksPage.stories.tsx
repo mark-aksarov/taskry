@@ -12,13 +12,13 @@ import { NewTaskForm } from "@/components/tasks/NewTaskForm";
 import { UserTaskList } from "@/components/users/UserTaskList";
 import { DetailHeader } from "@/components/common/DetailHeader";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { NewTaskFormStory } from "@/components/tasks/NewTaskForm/__stories__";
 import { UserNavigationMobile } from "@/components/users/UserNavigationMobile";
+import { UserTaskListStory } from "@/components/users/UserTaskList/__stories__";
 import { UserNavigationDesktop } from "@/components/users/UserNavigationDesktop";
-import { Default as NewTaskFormStory } from "@/components/tasks/NewTaskForm/__stories__/NewTaskForm.stories";
+import { PersonDetailHeaderStory } from "@/components/common/DetailHeader/__stories__";
 import { TaskToolbarActionsMenuTrigger } from "@/components/tasks/TaskToolbarActionsMenuTrigger";
-import { Default as UserTaskListStory } from "@/components/users/UserTaskList/__stories__/UserTaskList.stories";
-import { PersonDetailHeader as PersonDetailHeaderStory } from "@/components/common/DetailHeader/__stories__/DetailHeader.stories";
-import { Default as UserNavigationDesktopStory } from "@/components/users/UserNavigationDesktop/UserNavigationDesktop.stories";
+import { UserNavigationDesktopStory } from "@/components/users/UserNavigationDesktop/__stories__";
 
 const meta = {
   title: "pages/TeamProfileTasksPage",

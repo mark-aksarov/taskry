@@ -1,4 +1,4 @@
-import { NewPositionForm } from "./NewPositionForm";
+import { NewPositionForm } from "../NewPositionForm";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withOverlayTriggerStateProvider } from "@/.storybook/withOverlayTriggerStateProvider";

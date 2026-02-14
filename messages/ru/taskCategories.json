@@ -23,7 +23,7 @@
     "dialogHeading": "Действия",
     "delete": "Удалить"
   },
-  "TaskCategoryToolbarCreateNewButton": {
+  "TaskCategoryToolbarCreateNewModalTrigger": {
     "label": "Create new"
   },
   "EditTaskCategoryForm": {

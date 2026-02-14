@@ -13,13 +13,13 @@ import { SelectionProvider } from "@/components/common/SelectionContext";
 
 interface TaskCategoriesPageProps {
   taskCategoriesContainer: React.ReactNode;
-  taskCategoryToolbarCreateNewButton: React.ReactNode;
+  taskCategoryToolbarCreateNewModalTrigger: React.ReactNode;
   taskCategoryToolbarActionsMenuTrigger: React.ReactNode;
 }
 
 export function TaskCategoriesPage({
   taskCategoriesContainer,
-  taskCategoryToolbarCreateNewButton,
+  taskCategoryToolbarCreateNewModalTrigger,
   taskCategoryToolbarActionsMenuTrigger,
 }: TaskCategoriesPageProps) {
   const t = useTranslations("app.TaskCategoriesPage");
@@ -31,7 +31,7 @@ export function TaskCategoriesPage({
           <SelectionProvider>
             <ToolbarDesktop>
               {taskCategoryToolbarActionsMenuTrigger}
-              {taskCategoryToolbarCreateNewButton}
+              {taskCategoryToolbarCreateNewModalTrigger}
             </ToolbarDesktop>
 
             <ToolbarMobileTop>
@@ -41,7 +41,7 @@ export function TaskCategoriesPage({
 
             <ToolbarMobileBottom>
               <div className="ml-auto">
-                {taskCategoryToolbarCreateNewButton}
+                {taskCategoryToolbarCreateNewModalTrigger}
               </div>
             </ToolbarMobileBottom>
 

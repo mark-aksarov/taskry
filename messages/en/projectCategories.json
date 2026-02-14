@@ -19,7 +19,7 @@
     "edit": "Edit",
     "delete": "Delete"
   },
-  "ProjectCategoryToolbarCreateNewButton": {
+  "ProjectCategoryToolbarCreateNewModalTrigger": {
     "label": "Create New"
   },
   "ProjectCategoryToolbarActionsMenuTrigger": {

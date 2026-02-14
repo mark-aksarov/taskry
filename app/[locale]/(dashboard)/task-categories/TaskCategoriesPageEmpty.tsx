@@ -2,11 +2,11 @@ import { useTranslations } from "next-intl";
 import { EmptyPageContainer } from "@/components/common/EmptyPageContainer";
 
 interface TaskCategoriesPageEmptyProps {
-  taskCategoryToolbarCreateNewButton: React.ReactNode;
+  taskCategoryToolbarCreateNewModalTrigger: React.ReactNode;
 }
 
 export function TaskCategoriesPageEmpty({
-  taskCategoryToolbarCreateNewButton,
+  taskCategoryToolbarCreateNewModalTrigger,
 }: TaskCategoriesPageEmptyProps) {
   const t = useTranslations("app.TaskCategoriesPageEmpty");
 
@@ -14,7 +14,7 @@ export function TaskCategoriesPageEmpty({
     <EmptyPageContainer
       heading={t("heading")}
       description={t("description")}
-      toolbarCreateNewMenuTrigger={taskCategoryToolbarCreateNewButton}
+      toolbarCreateNewMenuTrigger={taskCategoryToolbarCreateNewModalTrigger}
     />
   );
 }

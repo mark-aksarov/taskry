@@ -10,8 +10,8 @@ import { TaskDetailStory } from "../TaskDetail/__stories__";
 import { TaskDetailAlt, TaskDetailAltSkeleton } from "../TaskDetailAlt";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { TaskDetailWithoutSomeDataStory } from "../TaskDetail/__stories__";
-import { TaskDetailHeader as TaskDetailHeaderStory } from "@/components/common/DetailHeader/__stories__/DetailHeader.stories";
-import { Default as TaskDetailActionsStory } from "@/components/tasks/TaskDetailActions/__stories__/TaskDetailActions.stories";
+import { TaskDetailHeaderStory } from "@/components/common/DetailHeader/__stories__";
+import { TaskDetailActionsStory } from "@/components/tasks/TaskDetailActions/__stories__";
 
 const meta = {
   title: "components/tasks/TaskDetailCard",

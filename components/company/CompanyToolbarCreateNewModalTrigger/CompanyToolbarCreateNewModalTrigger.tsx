@@ -4,18 +4,18 @@ import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { NewCompanyModal } from "../NewCompanyModal";
 import { GuestModeModal } from "@/components/common/GuestModeModal";
-import { ToolbarCreateNewButton } from "@/components/common/Toolbar";
+import { ToolbarCreateNewModalTrigger } from "@/components/common/Toolbar";
 
-interface CompanyToolbarCreateNewButtonProps {
+interface CompanyToolbarCreateNewModalTriggerProps {
   guestMode: boolean;
   newCompanyForm: React.ReactNode;
 }
 
-export function CompanyToolbarCreateNewButton({
+export function CompanyToolbarCreateNewModalTrigger({
   guestMode,
   newCompanyForm,
-}: CompanyToolbarCreateNewButtonProps) {
-  const t = useTranslations("company.CompanyToolbarCreateNewButton");
+}: CompanyToolbarCreateNewModalTriggerProps) {
+  const t = useTranslations("company.CompanyToolbarCreateNewModalTrigger");
 
   // Create new company modal
   const [isCompanyModalOpen, setIsCompanyModalOpen] = useState(false);
@@ -34,7 +34,7 @@ export function CompanyToolbarCreateNewButton({
 
   return (
     <>
-      <ToolbarCreateNewButton
+      <ToolbarCreateNewModalTrigger
         data-test="company-toolbar-create-new-button"
         label={t("label")}
         onPress={handlePress}

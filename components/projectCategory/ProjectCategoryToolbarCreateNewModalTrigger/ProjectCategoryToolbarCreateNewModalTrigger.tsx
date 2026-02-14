@@ -3,20 +3,20 @@
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { GuestModeModal } from "@/components/common/GuestModeModal";
-import { ToolbarCreateNewButton } from "@/components/common/Toolbar";
+import { ToolbarCreateNewModalTrigger } from "@/components/common/Toolbar";
 import { NewProjectCategoryModal } from "../NewProjectCategoryModal";
 
-interface ProjectCategoryToolbarCreateNewButtonProps {
+interface ProjectCategoryToolbarCreateNewModalTriggerProps {
   guestMode: boolean;
   newProjectCategoryForm: React.ReactNode;
 }
 
-export function ProjectCategoryToolbarCreateNewButton({
+export function ProjectCategoryToolbarCreateNewModalTrigger({
   guestMode,
   newProjectCategoryForm,
-}: ProjectCategoryToolbarCreateNewButtonProps) {
+}: ProjectCategoryToolbarCreateNewModalTriggerProps) {
   const t = useTranslations(
-    "projectCategories.ProjectCategoryToolbarCreateNewButton",
+    "projectCategories.ProjectCategoryToolbarCreateNewModalTrigger",
   );
 
   // Create new project category modal
@@ -37,7 +37,7 @@ export function ProjectCategoryToolbarCreateNewButton({
 
   return (
     <>
-      <ToolbarCreateNewButton
+      <ToolbarCreateNewModalTrigger
         data-test="project-category-toolbar-create-new-button"
         label={t("label")}
         onPress={handlePress}

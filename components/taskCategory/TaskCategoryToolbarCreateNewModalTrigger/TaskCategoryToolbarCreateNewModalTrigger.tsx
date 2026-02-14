@@ -3,20 +3,20 @@
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { GuestModeModal } from "@/components/common/GuestModeModal";
-import { ToolbarCreateNewButton } from "@/components/common/Toolbar";
+import { ToolbarCreateNewModalTrigger } from "@/components/common/Toolbar";
 import { NewTaskCategoryModal } from "../NewTaskCategoryModal";
 
-interface TaskCategoryToolbarCreateNewButtonProps {
+interface TaskCategoryToolbarCreateNewModalTriggerProps {
   guestMode: boolean;
   newTaskCategoryForm: React.ReactNode;
 }
 
-export function TaskCategoryToolbarCreateNewButton({
+export function TaskCategoryToolbarCreateNewModalTrigger({
   guestMode,
   newTaskCategoryForm,
-}: TaskCategoryToolbarCreateNewButtonProps) {
+}: TaskCategoryToolbarCreateNewModalTriggerProps) {
   const t = useTranslations(
-    "taskCategories.TaskCategoryToolbarCreateNewButton",
+    "taskCategories.TaskCategoryToolbarCreateNewModalTrigger",
   );
 
   // Create new task category modal
@@ -36,7 +36,7 @@ export function TaskCategoryToolbarCreateNewButton({
 
   return (
     <>
-      <ToolbarCreateNewButton
+      <ToolbarCreateNewModalTrigger
         data-test="task-category-toolbar-create-new-button"
         label={t("label")}
         onPress={handlePress}

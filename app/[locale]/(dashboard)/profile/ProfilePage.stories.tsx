@@ -1,7 +1,7 @@
 import {
-  Default as UserDetailStory,
-  WithoutSomeData as UserDetailWithoutSomeDataStory,
-} from "@/components/users/UserDetail/__stories__/UserDetail.stories";
+  UserDetailStory,
+  UserDetailWithoutSomeDataStory,
+} from "@/components/users/UserDetail/__stories__";
 
 import {
   DetailHeader,

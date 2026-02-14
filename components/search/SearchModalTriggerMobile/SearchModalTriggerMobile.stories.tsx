@@ -1,8 +1,8 @@
 import { SearchModal } from "../SearchModal";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { SearchModalStory } from "../SearchModal/__stories__";
 import { SearchModalTriggerMobile } from "./SearchModalTriggerMobile";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { Default as SearchModalStory } from "../SearchModal/__stories__/SearchModal.stories";
 
 const meta = {
   title: "components/search/SearchModalTriggerMobile",

@@ -8,9 +8,9 @@ import { PageDecorator } from "@/.storybook/PageDecorator";
 import { PositionList } from "@/components/position/PositionList";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { PositionListStory } from "@/components/position/PositionList/__stories__";
-import { PositionToolbarCreateNewButton } from "@/components/position/PositionToolbarCreateNewButton";
+import { PositionToolbarCreateNewModalTrigger } from "@/components/position/PositionToolbarCreateNewModalTrigger";
 import { PositionToolbarActionsMenuTrigger } from "@/components/position/PositionToolbarActionsMenuTrigger";
-import { PositionToolbarCreateNewButtonStory } from "@/components/position/PositionToolbarCreateNewButton/__stories__";
+import { PositionToolbarCreateNewModalTriggerStory } from "@/components/position/PositionToolbarCreateNewModalTrigger/__stories__";
 import { PositionToolbarActionsMenuTriggerStory } from "@/components/position/PositionToolbarActionsMenuTrigger/__stories__";
 
 const meta = {
@@ -27,16 +27,16 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-const positionToolbarCreateNewButton = (
-  <PositionToolbarCreateNewButton
-    {...PositionToolbarCreateNewButtonStory.args}
+const positionToolbarCreateNewModalTrigger = (
+  <PositionToolbarCreateNewModalTrigger
+    {...PositionToolbarCreateNewModalTriggerStory.args}
   />
 );
 
 export const Default = {
   args: {
     positionsContainer: <PositionList {...PositionListStory.args} />,
-    positionToolbarCreateNewButton: positionToolbarCreateNewButton,
+    positionToolbarCreateNewModalTrigger: positionToolbarCreateNewModalTrigger,
     positionToolbarActionsMenuTrigger: (
       <PositionToolbarActionsMenuTrigger
         {...PositionToolbarActionsMenuTriggerStory.args}
@@ -54,7 +54,9 @@ export const WithNoPositionsPage = {
   args: { ...Default.args },
   render: () => (
     <PositionsPageEmpty
-      positionToolbarCreateNewButton={positionToolbarCreateNewButton}
+      positionToolbarCreateNewModalTrigger={
+        positionToolbarCreateNewModalTrigger
+      }
     />
   ),
 } satisfies Story;

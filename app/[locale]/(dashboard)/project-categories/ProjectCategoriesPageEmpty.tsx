@@ -2,11 +2,11 @@ import { useTranslations } from "next-intl";
 import { EmptyPageContainer } from "@/components/common/EmptyPageContainer";
 
 interface ProjectCategoriesPageEmptyProps {
-  projectCategoryToolbarCreateNewButton: React.ReactNode;
+  projectCategoryToolbarCreateNewModalTrigger: React.ReactNode;
 }
 
 export function ProjectCategoriesPageEmpty({
-  projectCategoryToolbarCreateNewButton,
+  projectCategoryToolbarCreateNewModalTrigger,
 }: ProjectCategoriesPageEmptyProps) {
   const t = useTranslations("app.ProjectCategoriesPageEmpty");
 
@@ -14,7 +14,7 @@ export function ProjectCategoriesPageEmpty({
     <EmptyPageContainer
       heading={t("heading")}
       description={t("description")}
-      toolbarCreateNewMenuTrigger={projectCategoryToolbarCreateNewButton}
+      toolbarCreateNewMenuTrigger={projectCategoryToolbarCreateNewModalTrigger}
     />
   );
 }

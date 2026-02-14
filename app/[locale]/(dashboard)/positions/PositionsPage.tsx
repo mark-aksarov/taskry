@@ -13,13 +13,13 @@ import { SelectionProvider } from "@/components/common/SelectionContext";
 
 interface PositionsPageProps {
   positionsContainer: React.ReactNode;
-  positionToolbarCreateNewButton: React.ReactNode;
+  positionToolbarCreateNewModalTrigger: React.ReactNode;
   positionToolbarActionsMenuTrigger: React.ReactNode;
 }
 
 export function PositionsPage({
   positionsContainer,
-  positionToolbarCreateNewButton,
+  positionToolbarCreateNewModalTrigger,
   positionToolbarActionsMenuTrigger,
 }: PositionsPageProps) {
   const t = useTranslations("app.PositionsPage");
@@ -31,7 +31,7 @@ export function PositionsPage({
           <SelectionProvider>
             <ToolbarDesktop>
               {positionToolbarActionsMenuTrigger}
-              {positionToolbarCreateNewButton}
+              {positionToolbarCreateNewModalTrigger}
             </ToolbarDesktop>
 
             <ToolbarMobileTop>
@@ -40,7 +40,9 @@ export function PositionsPage({
             </ToolbarMobileTop>
 
             <ToolbarMobileBottom>
-              <div className="ml-auto">{positionToolbarCreateNewButton}</div>
+              <div className="ml-auto">
+                {positionToolbarCreateNewModalTrigger}
+              </div>
             </ToolbarMobileBottom>
 
             {positionsContainer}

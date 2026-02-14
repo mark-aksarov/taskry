@@ -19,7 +19,7 @@
     "edit": "Редактировать",
     "delete": "Удалить"
   },
-  "ProjectCategoryToolbarCreateNewButton": {
+  "ProjectCategoryToolbarCreateNewModalTrigger": {
     "label": "Создать новую"
   },
   "ProjectCategoryToolbarActionsMenuTrigger": {

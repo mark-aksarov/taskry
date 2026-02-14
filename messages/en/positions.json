@@ -19,7 +19,7 @@
     "dialogHeading": "Actions",
     "delete": "Delete"
   },
-  "PositionToolbarCreateNewButton": {
+  "PositionToolbarCreateNewModalTrigger": {
     "label": "Create new"
   },
   "PositionItemActionMenuTrigger": {

@@ -19,7 +19,7 @@
     "dialogHeading": "Actions",
     "delete": "Delete"
   },
-  "TaskCategoryToolbarCreateNewButton": {
+  "TaskCategoryToolbarCreateNewModalTrigger": {
     "label": "Создать новую"
   },
   "TaskCategoryItemActionMenuTrigger": {

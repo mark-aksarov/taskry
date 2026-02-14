@@ -4,9 +4,9 @@ import {
 } from "@/components/tasks/TaskDetailAlt";
 
 import {
-  Default as TaskDetailStory,
-  WithoutSomeData as TaskDetailWithoutSomeDataStory,
-} from "@/components/tasks/TaskDetail/__stories__/TaskDetail.stories";
+  TaskDetailStory,
+  TaskDetailWithoutSomeDataStory,
+} from "@/components/tasks/TaskDetail/__stories__";
 
 import {
   DetailHeader,

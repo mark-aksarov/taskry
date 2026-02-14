@@ -2,11 +2,11 @@ import { useTranslations } from "next-intl";
 import { EmptyPageContainer } from "@/components/common/EmptyPageContainer";
 
 interface CompaniesPageEmptyProps {
-  companyToolbarCreateNewButton: React.ReactNode;
+  companyToolbarCreateNewModalTrigger: React.ReactNode;
 }
 
 export function CompaniesPageEmpty({
-  companyToolbarCreateNewButton,
+  companyToolbarCreateNewModalTrigger,
 }: CompaniesPageEmptyProps) {
   const t = useTranslations("app.CompaniesPageEmpty");
 
@@ -14,7 +14,7 @@ export function CompaniesPageEmpty({
     <EmptyPageContainer
       heading={t("heading")}
       description={t("description")}
-      toolbarCreateNewMenuTrigger={companyToolbarCreateNewButton}
+      toolbarCreateNewMenuTrigger={companyToolbarCreateNewModalTrigger}
     />
   );
 }

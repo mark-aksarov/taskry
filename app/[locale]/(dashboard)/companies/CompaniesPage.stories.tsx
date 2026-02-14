@@ -8,9 +8,9 @@ import { PageDecorator } from "@/.storybook/PageDecorator";
 import { CompanyList } from "@/components/company/CompanyList";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { CompanyListStory } from "@/components/company/CompanyList/__stories__";
-import { CompanyToolbarCreateNewButton } from "@/components/company/CompanyToolbarCreateNewButton";
+import { CompanyToolbarCreateNewModalTrigger } from "@/components/company/CompanyToolbarCreateNewModalTrigger";
 import { CompanyToolbarActionsMenuTrigger } from "@/components/company/CompanyToolbarActionsMenuTrigger";
-import { CompanyToolbarCreateNewButtonStory } from "@/components/company/CompanyToolbarCreateNewButton/__stories__";
+import { CompanyToolbarCreateNewModalTriggerStory } from "@/components/company/CompanyToolbarCreateNewModalTrigger/__stories__";
 import { CompanyToolbarActionsMenuTriggerStory } from "@/components/company/CompanyToolbarActionsMenuTrigger/__stories__";
 
 const meta = {
@@ -27,14 +27,16 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-const companyToolbarCreateNewButton = (
-  <CompanyToolbarCreateNewButton {...CompanyToolbarCreateNewButtonStory.args} />
+const companyToolbarCreateNewModalTrigger = (
+  <CompanyToolbarCreateNewModalTrigger
+    {...CompanyToolbarCreateNewModalTriggerStory.args}
+  />
 );
 
 export const Default = {
   args: {
     companiesContainer: <CompanyList {...CompanyListStory.args} />,
-    companyToolbarCreateNewButton: companyToolbarCreateNewButton,
+    companyToolbarCreateNewModalTrigger: companyToolbarCreateNewModalTrigger,
     companyToolbarActionsMenuTrigger: (
       <CompanyToolbarActionsMenuTrigger
         {...CompanyToolbarActionsMenuTriggerStory.args}
@@ -52,7 +54,7 @@ export const WithNoCompaniesPage = {
   args: { ...Default.args },
   render: () => (
     <CompaniesPageEmpty
-      companyToolbarCreateNewButton={companyToolbarCreateNewButton}
+      companyToolbarCreateNewModalTrigger={companyToolbarCreateNewModalTrigger}
     />
   ),
 } satisfies Story;

@@ -1,7 +1,7 @@
 "use client";
 
 import {
-  ToolbarCreateNewButton,
+  ToolbarCreateNewModalTrigger,
   ToolbarCreateNewMenuTrigger,
 } from "../../common/Toolbar";
 
@@ -57,7 +57,7 @@ export function CustomerToolbarCreateNewMenuTrigger({
           <DialogHeader>{t("dialogHeading")}</DialogHeader>
         )}
         renderButton={() => (
-          <ToolbarCreateNewButton
+          <ToolbarCreateNewModalTrigger
             data-test="customer-toolbar-create-new-menu-trigger"
             label={t("label")}
           />

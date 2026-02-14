@@ -6,8 +6,8 @@ import { createCompany } from "@/lib/actions/company/createCompany";
 import { NewCompanyForm } from "@/components/company/NewCompanyForm";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { CompaniesContainer } from "@/components/company/CompaniesContainer";
-import { CompanyToolbarCreateNewButton } from "@/components/company/CompanyToolbarCreateNewButton";
 import { CompanyToolbarActionsMenuTrigger } from "@/components/company/CompanyToolbarActionsMenuTrigger";
+import { CompanyToolbarCreateNewModalTrigger } from "@/components/company/CompanyToolbarCreateNewModalTrigger";
 
 export default async function AppCompaniesPage() {
   // Authorization
@@ -17,8 +17,8 @@ export default async function AppCompaniesPage() {
   const companyCount = await getCompanyCount();
   const guestMode = await hasGuestRole();
 
-  const companyToolbarCreateNewButton = (
-    <CompanyToolbarCreateNewButton
+  const companyToolbarCreateNewModalTrigger = (
+    <CompanyToolbarCreateNewModalTrigger
       guestMode={guestMode}
       newCompanyForm={<NewCompanyForm createCompany={createCompany} />}
     />
@@ -27,7 +27,9 @@ export default async function AppCompaniesPage() {
   if (!companyCount) {
     return (
       <CompaniesPageEmpty
-        companyToolbarCreateNewButton={companyToolbarCreateNewButton}
+        companyToolbarCreateNewModalTrigger={
+          companyToolbarCreateNewModalTrigger
+        }
       />
     );
   }
@@ -35,7 +37,7 @@ export default async function AppCompaniesPage() {
   return (
     <CompaniesPage
       companiesContainer={<CompaniesContainer />}
-      companyToolbarCreateNewButton={companyToolbarCreateNewButton}
+      companyToolbarCreateNewModalTrigger={companyToolbarCreateNewModalTrigger}
       companyToolbarActionsMenuTrigger={
         <CompanyToolbarActionsMenuTrigger guestMode={guestMode} />
       }
