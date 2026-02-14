@@ -189,5 +189,10 @@
     "error": {
       "internalServerError": "A server error occurred. Failed to update company."
     }
+  },
+  "deleteCompany": {
+    "error": {
+      "internalServerError": "A server error occurred. Failed to delete company."
+    }
   }
 }

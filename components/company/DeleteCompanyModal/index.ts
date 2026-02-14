@@ -1,0 +1,1 @@
+export { DeleteCompanyModal } from "./DeleteCompanyModal";

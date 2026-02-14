@@ -24,7 +24,7 @@ describe("Project category creation", () => {
   });
 
   it("creates a new project category with valid data", () => {
-    cy.getByData("project-category-toolbar-create-new-button")
+    cy.getByData("project-category-toolbar-create-new-modal-trigger")
       .filter(":visible")
       .click();
 
@@ -37,7 +37,7 @@ describe("Project category creation", () => {
   });
 
   it("shows validation errors and prevents submission with invalid data", () => {
-    cy.getByData("project-category-toolbar-create-new-button")
+    cy.getByData("project-category-toolbar-create-new-modal-trigger")
       .filter(":visible")
       .click();
 

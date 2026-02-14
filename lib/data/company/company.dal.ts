@@ -111,3 +111,36 @@ export const createCompany = async (input: CreateCompanyInputDTO) => {
 
   return company;
 };
+
+export const deleteCompanies = async (ids: number[]) => {
+  // Authorization
+  const {
+    user: { id: userId, workspaceId },
+  } = await requireSession();
+
+  // ACL
+  const permission = await auth.api.userHasPermission({
+    body: {
+      userId: userId,
+      permission: {
+        company: ["delete"],
+      },
+    },
+  });
+
+  if (!permission.success) {
+    throw new AccessDeniedError(
+      "You do not have permission to delete companies.",
+    );
+  }
+
+  // Bulk delete companies within the workspace
+  const deletedCompanies = await prisma.company.deleteMany({
+    where: {
+      workspaceId,
+      id: { in: ids },
+    },
+  });
+
+  return deletedCompanies;
+};

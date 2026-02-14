@@ -31,5 +31,17 @@
   },
   "EditCompanyModal": {
     "title": "Edit company"
+  },
+  "DeleteCompaniesModal": {
+    "heading": "Delete companies",
+    "text": "Are you sure you want to delete <strong>{count} companies</strong>? All contents will be permanently removed.",
+    "cancelButton": "Cancel",
+    "deleteButton": "Delete"
+  },
+  "DeleteCompanyModal": {
+    "heading": "Delete company",
+    "text": "Are you sure you want to delete company <strong>«{name}»</strong>? All contents will be permanently removed.",
+    "cancelButton": "Cancel",
+    "deleteButton": "Delete"
   }
 }

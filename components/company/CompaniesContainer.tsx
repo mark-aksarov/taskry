@@ -3,6 +3,7 @@ import { CompanyListItem } from "./CompanyListItem";
 import { EditCompanyForm } from "./EditCompanyForm";
 import { updateCompany } from "@/lib/actions/company/updateCompany";
 import { getCompanySummaries } from "@/lib/data/company/company.dal";
+import { deleteCompanies } from "@/lib/actions/company/deleteCompanies";
 import { CompanyItemActionMenuTrigger } from "./CompanyItemActionMenuTrigger";
 
 export async function CompaniesContainer() {
@@ -20,6 +21,7 @@ export async function CompaniesContainer() {
               guestMode={false}
               companyId={company.id}
               companyName={company.name}
+              deleteCompanies={deleteCompanies}
               editCompanyForm={
                 <EditCompanyForm
                   companyId={company.id}

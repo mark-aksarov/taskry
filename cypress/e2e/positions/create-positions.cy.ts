@@ -24,7 +24,7 @@ describe("Position creation", () => {
   });
 
   it("creates a new position with valid data", () => {
-    cy.getByData("position-toolbar-create-new-button")
+    cy.getByData("position-toolbar-create-new-modal-trigger")
       .filter(":visible")
       .click();
 
@@ -37,7 +37,7 @@ describe("Position creation", () => {
   });
 
   it("shows validation errors and prevents submission with invalid data", () => {
-    cy.getByData("position-toolbar-create-new-button")
+    cy.getByData("position-toolbar-create-new-modal-trigger")
       .filter(":visible")
       .click();
 

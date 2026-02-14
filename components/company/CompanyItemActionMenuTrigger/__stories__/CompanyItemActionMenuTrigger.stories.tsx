@@ -18,6 +18,7 @@ export const Default = {
     guestMode: false,
     companyId: 1,
     companyName: "Company 1",
+    deleteCompanies: () => ({ status: "success" }),
     editCompanyForm: <EditCompanyForm {...EditCompanyFormStory.args} />,
   },
 } satisfies Story;

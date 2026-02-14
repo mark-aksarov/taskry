@@ -35,7 +35,7 @@ export function CompanyToolbarCreateNewModalTrigger({
   return (
     <>
       <ToolbarCreateNewModalTrigger
-        data-test="company-toolbar-create-new-button"
+        data-test="company-toolbar-create-new-modal-trigger"
         label={t("label")}
         onPress={handlePress}
       />

@@ -9,17 +9,21 @@ import {
 import { useState } from "react";
 import { Trash } from "lucide-react";
 import { Item, Key } from "react-stately";
-import { DialogHeader } from "../../ui/Dialog";
 import { useTranslations } from "next-intl";
+import { DialogHeader } from "../../ui/Dialog";
+import { ActionFn, ActionState } from "@/lib/actions/types";
 import { GuestModeModal } from "../../common/GuestModeModal";
 import { useCompanySelection } from "@/lib/hooks/useCompanySelection";
+import { DeleteCompaniesModal } from "../DeleteCompaniesModal";
 
 interface CompanyToolbarActionsMenuTriggerProps {
   guestMode: boolean;
+  deleteCompanies: ActionFn<ActionState, number[]>;
 }
 
 export const CompanyToolbarActionsMenuTrigger = ({
   guestMode,
+  deleteCompanies,
 }: CompanyToolbarActionsMenuTriggerProps) => {
   const t = useTranslations("company.CompanyToolbarActionsMenuTrigger");
 
@@ -42,12 +46,12 @@ export const CompanyToolbarActionsMenuTrigger = ({
   };
 
   const {
-    selectedIds: taskIds,
+    selectedIds: companyIds,
     clearSelectedIds,
     selectedItems,
   } = useCompanySelection();
 
-  const isDisabled = taskIds.length === 0;
+  const isDisabled = companyIds.length === 0;
 
   return (
     <>
@@ -74,6 +78,14 @@ export const CompanyToolbarActionsMenuTrigger = ({
           {t("delete")}
         </Item>
       </ToolbarMenuTrigger>
+
+      <DeleteCompaniesModal
+        isOpen={isDeleteModalOpen}
+        onOpenChange={setIsDeleteModalOpen}
+        companyIds={companyIds}
+        deleteCompanies={deleteCompanies}
+        onSuccess={clearSelectedIds}
+      />
 
       {/* Guest mode modal */}
       <GuestModeModal

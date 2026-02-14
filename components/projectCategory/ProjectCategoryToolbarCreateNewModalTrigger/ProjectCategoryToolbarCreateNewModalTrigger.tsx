@@ -38,7 +38,7 @@ export function ProjectCategoryToolbarCreateNewModalTrigger({
   return (
     <>
       <ToolbarCreateNewModalTrigger
-        data-test="project-category-toolbar-create-new-button"
+        data-test="project-category-toolbar-create-new-modal-trigger"
         label={t("label")}
         onPress={handlePress}
       />

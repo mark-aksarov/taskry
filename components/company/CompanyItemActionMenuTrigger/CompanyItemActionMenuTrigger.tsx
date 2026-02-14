@@ -10,14 +10,17 @@ import { useState } from "react";
 import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
 import { Pencil, Trash } from "lucide-react";
-import { GuestModeModal } from "@/components/common/GuestModeModal";
 import { EditCompanyModal } from "../EditPositionModal";
+import { DeleteCompanyModal } from "../DeleteCompanyModal";
+import { GuestModeModal } from "@/components/common/GuestModeModal";
+import { ActionFn, ActionState } from "@/lib/actions/types";
 
 export type CompanyItemActionMenuTriggerProps = {
   guestMode: boolean;
   companyId: number;
   companyName: string;
   editCompanyForm: React.ReactNode;
+  deleteCompanies: ActionFn<ActionState, number[]>;
 };
 
 export function CompanyItemActionMenuTrigger({
@@ -25,6 +28,7 @@ export function CompanyItemActionMenuTrigger({
   companyId,
   companyName,
   editCompanyForm,
+  deleteCompanies,
 }: CompanyItemActionMenuTriggerProps) {
   const t = useTranslations("company.CompanyItemActionMenuTrigger");
 
@@ -71,6 +75,14 @@ export function CompanyItemActionMenuTrigger({
           <Trash size={16} /> {t("delete")}
         </Item>
       </ItemBaseActionMenuTrigger>
+
+      <DeleteCompanyModal
+        isOpen={isDeleteModalOpen}
+        onOpenChange={setIsDeleteModalOpen}
+        companyId={companyId}
+        companyName={companyName}
+        deleteCompanies={deleteCompanies}
+      />
 
       <EditCompanyModal
         isOpen={isEditModalOpen}

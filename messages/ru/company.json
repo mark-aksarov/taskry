@@ -31,5 +31,17 @@
   },
   "EditCompanyModal": {
     "title": "Изменить компанию"
+  },
+  "DeleteCompaniesModal": {
+    "heading": "Удалить компании",
+    "text": "Вы уверены, что хотите удалить <strong>{count} выбранные компании</strong>? Все содержимое будет безвозвратно удалено.",
+    "cancelButton": "Отменить",
+    "deleteButton": "Удалить"
+  },
+  "DeleteCompanyModal": {
+    "heading": "Удалить компанию",
+    "text": "Вы уверены, что хотите удалить компанию <strong>«{name}»</strong>? Все содержимое будет безвозвратно удалено.",
+    "cancelButton": "Отменить",
+    "deleteButton": "Удалить"
   }
 }

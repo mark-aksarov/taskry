@@ -4,6 +4,7 @@ import { CompaniesPageEmpty } from "./CompaniesPageEmpty";
 import { getCompanyCount } from "@/lib/data/company/company.dal";
 import { createCompany } from "@/lib/actions/company/createCompany";
 import { NewCompanyForm } from "@/components/company/NewCompanyForm";
+import { deleteCompanies } from "@/lib/actions/company/deleteCompanies";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { CompaniesContainer } from "@/components/company/CompaniesContainer";
 import { CompanyToolbarActionsMenuTrigger } from "@/components/company/CompanyToolbarActionsMenuTrigger";
@@ -39,7 +40,10 @@ export default async function AppCompaniesPage() {
       companiesContainer={<CompaniesContainer />}
       companyToolbarCreateNewModalTrigger={companyToolbarCreateNewModalTrigger}
       companyToolbarActionsMenuTrigger={
-        <CompanyToolbarActionsMenuTrigger guestMode={guestMode} />
+        <CompanyToolbarActionsMenuTrigger
+          guestMode={guestMode}
+          deleteCompanies={deleteCompanies}
+        />
       }
     />
   );

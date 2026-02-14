@@ -13,7 +13,7 @@ import { Pencil, Trash } from "lucide-react";
 import { EditPositionModal } from "../EditPositionModal";
 import { ActionFn, ActionState } from "@/lib/actions/types";
 import { GuestModeModal } from "@/components/common/GuestModeModal";
-import { DeletePositionModal } from "../DeleteProjectCategoryModal";
+import { DeletePositionModal } from "../DeletePositionModal";
 
 export type PositionItemActionMenuTriggerProps = {
   guestMode: boolean;

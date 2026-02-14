@@ -37,7 +37,7 @@ export function TaskCategoryToolbarCreateNewModalTrigger({
   return (
     <>
       <ToolbarCreateNewModalTrigger
-        data-test="task-category-toolbar-create-new-button"
+        data-test="task-category-toolbar-create-new-modal-trigger"
         label={t("label")}
         onPress={handlePress}
       />
