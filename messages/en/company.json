@@ -25,5 +25,11 @@
   "CompanyItemActionMenuTrigger": {
     "edit": "Edit",
     "delete": "Delete"
+  },
+  "EditCompanyForm": {
+    "submitButtonLabel": "Update company"
+  },
+  "EditCompanyModal": {
+    "title": "Edit company"
   }
 }

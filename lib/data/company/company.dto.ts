@@ -6,3 +6,8 @@ export type CompanySummaryDTO = {
 export interface CreateCompanyInputDTO {
   name: string;
 }
+
+export interface UpdateCompanyInputDTO {
+  id: number;
+  name: string;
+}

@@ -1,11 +1,16 @@
 import "server-only";
 
+import {
+  CompanySummaryDTO,
+  CreateCompanyInputDTO,
+  UpdateCompanyInputDTO,
+} from "./company.dto";
+
 import { cache } from "react";
 import prisma from "@/lib/prisma";
 import { auth } from "@/lib/auth";
 import { AccessDeniedError } from "../utils/error";
 import { requireSession } from "../utils/requireSession";
-import { CompanySummaryDTO, CreateCompanyInputDTO } from "./company.dto";
 
 export const getCompanyCount = cache(async () => {
   // Authorization
@@ -37,6 +42,42 @@ export const getCompanySummaries = cache(
     return companies;
   },
 );
+
+export const updateCompany = async (input: UpdateCompanyInputDTO) => {
+  // Authorization
+  const {
+    user: { id: userId, workspaceId },
+  } = await requireSession();
+
+  // ACL
+  const permission = await auth.api.userHasPermission({
+    body: {
+      userId: userId,
+      permission: {
+        company: ["update"],
+      },
+    },
+  });
+
+  if (!permission.success) {
+    throw new AccessDeniedError(
+      "You do not have permission to update companies.",
+    );
+  }
+
+  // Update company
+  const updatedCompany = await prisma.company.update({
+    where: {
+      id: input.id,
+      workspaceId,
+    },
+    data: {
+      name: input.name,
+    },
+  });
+
+  return updatedCompany;
+};
 
 export const createCompany = async (input: CreateCompanyInputDTO) => {
   // Authorization

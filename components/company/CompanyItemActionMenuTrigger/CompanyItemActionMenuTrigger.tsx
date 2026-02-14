@@ -11,17 +11,20 @@ import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
 import { Pencil, Trash } from "lucide-react";
 import { GuestModeModal } from "@/components/common/GuestModeModal";
+import { EditCompanyModal } from "../EditPositionModal";
 
 export type CompanyItemActionMenuTriggerProps = {
   guestMode: boolean;
   companyId: number;
   companyName: string;
+  editCompanyForm: React.ReactNode;
 };
 
 export function CompanyItemActionMenuTrigger({
   guestMode,
   companyId,
   companyName,
+  editCompanyForm,
 }: CompanyItemActionMenuTriggerProps) {
   const t = useTranslations("company.CompanyItemActionMenuTrigger");
 
@@ -29,10 +32,10 @@ export function CompanyItemActionMenuTrigger({
   const [isGuestModeModalOpen, setIsGuestModeModalOpen] = useState(false);
 
   // Modal state for editing the company
-  const [isOpenEditModal, setIsOpenEditModal] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
   // Modal state for deleting the company
-  const [isOpenDeleteModal, setIsOpenDeleteModal] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
   // Handle menu actions
   const handleAction = (key: Key) => {
@@ -43,9 +46,9 @@ export function CompanyItemActionMenuTrigger({
 
     const action = key.toString();
     if (action === "edit") {
-      setIsOpenEditModal(true);
+      setIsEditModalOpen(true);
     } else if (action === "delete") {
-      setIsOpenDeleteModal(true);
+      setIsDeleteModalOpen(true);
     }
   };
 
@@ -68,6 +71,12 @@ export function CompanyItemActionMenuTrigger({
           <Trash size={16} /> {t("delete")}
         </Item>
       </ItemBaseActionMenuTrigger>
+
+      <EditCompanyModal
+        isOpen={isEditModalOpen}
+        onOpenChange={setIsEditModalOpen}
+        editCompanyForm={editCompanyForm}
+      />
 
       <GuestModeModal
         isOpen={isGuestModeModalOpen}

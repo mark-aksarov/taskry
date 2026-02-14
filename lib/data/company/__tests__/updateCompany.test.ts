@@ -1,14 +1,20 @@
+import {
+  users,
+  positions,
+  companies,
+  workspaces,
+} from "@/prisma/test-utils/data";
+
 import prisma from "@/lib/prisma";
 import { seed } from "@/prisma/test-utils/seed";
-import { updatePosition } from "../position.dal";
+import { updateCompany } from "../company.dal";
 import { AccessDeniedError } from "../../utils/error";
 import { requireSession } from "@/lib/data/utils/requireSession";
 import { resetDatabase } from "@/prisma/test-utils/resetDatabase";
 import { it, expect, describe, beforeAll, afterEach } from "vitest";
-import { users, positions, workspaces } from "@/prisma/test-utils/data";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/client";
 
-describe("updatePosition", () => {
+describe("updateCompany", () => {
   beforeAll(async () => {
     (requireSession as any).mockResolvedValue({
       user: { id: "user-1", workspaceId: 1 },
@@ -20,64 +26,65 @@ describe("updatePosition", () => {
       workspaces,
       positions,
       users,
+      companies,
     });
   });
 
   afterEach(async () => {
-    await prisma.position.deleteMany();
+    await prisma.company.deleteMany();
   });
 
-  it("should successfully update a position", async () => {
-    await prisma.position.create({
+  it("should successfully update a company", async () => {
+    await prisma.company.create({
       data: {
         id: 3,
-        name: "Position 3",
+        name: "Company 3",
         workspaceId: 1,
       },
     });
 
-    const result = await updatePosition({
+    const result = await updateCompany({
       id: 3,
-      name: "Updated Position Name",
+      name: "Updated Company Name",
     });
 
     expect(result).not.toBeNull();
     expect(result!.id).toBe(3);
-    expect(result!.name).toBe("Updated Position Name");
+    expect(result!.name).toBe("Updated Company Name");
   });
 
-  it("should throw an error when trying to update a position from another workspace", async () => {
-    await prisma.position.create({
+  it("should throw an error when trying to update a company from another workspace", async () => {
+    await prisma.company.create({
       data: {
         id: 3,
-        name: "Position 3",
+        name: "Company 3",
         workspaceId: 2,
       },
     });
 
-    const updatePositionPromise = updatePosition({
+    const updateCompanyPromise = updateCompany({
       id: 1,
-      name: "Updated Position Name",
+      name: "Updated Company Name",
     });
 
-    await expect(updatePositionPromise).rejects.toThrow(
+    await expect(updateCompanyPromise).rejects.toThrow(
       PrismaClientKnownRequestError,
     );
-    await expect(updatePositionPromise).rejects.toMatchObject({
+    await expect(updateCompanyPromise).rejects.toMatchObject({
       code: "P2025",
     });
   });
 
-  describe("RBAC: update position", () => {
+  describe("RBAC: update company", () => {
     const setup = async (userId: string, role: string) => {
       (requireSession as any).mockResolvedValue({
         user: { id: userId, workspaceId: 1, role },
       });
 
-      await prisma.position.create({
+      await prisma.company.create({
         data: {
           id: 3,
-          name: "Position 3",
+          name: "Company 3",
           workspaceId: 1,
         },
       });
@@ -85,27 +92,27 @@ describe("updatePosition", () => {
       return {
         updateInput: {
           id: 3,
-          name: "Updated Position Name",
+          name: "Updated Company Name",
         },
       };
     };
 
     it("should succeed for owner", async () => {
       const { updateInput } = await setup("user-1", "owner");
-      const result = await updatePosition(updateInput);
+      const result = await updateCompany(updateInput);
       expect(result.name).toBe(updateInput.name);
     });
 
     it("should fail for user", async () => {
       const { updateInput } = await setup("user-2", "user");
-      const result = await updatePosition(updateInput);
+      const result = await updateCompany(updateInput);
       expect(result.name).toBe(updateInput.name);
     });
 
     it("should fail for guest", async () => {
       const { updateInput } = await setup("user-3", "guest");
 
-      await expect(updatePosition(updateInput)).rejects.toThrow(
+      await expect(updateCompany(updateInput)).rejects.toThrow(
         AccessDeniedError,
       );
     });

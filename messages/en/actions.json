@@ -184,5 +184,10 @@
     "error": {
       "internalServerError": "A server error occurred. Failed to update user."
     }
+  },
+  "updateCompany": {
+    "error": {
+      "internalServerError": "A server error occurred. Failed to update company."
+    }
   }
 }

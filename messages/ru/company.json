@@ -25,5 +25,11 @@
   "CompanyItemActionMenuTrigger": {
     "edit": "Редактировать",
     "delete": "Удалить"
+  },
+  "EditCompanyForm": {
+    "submitButtonLabel": "Обновить компанию"
+  },
+  "EditCompanyModal": {
+    "title": "Изменить компанию"
   }
 }

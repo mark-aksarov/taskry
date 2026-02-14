@@ -1,7 +1,9 @@
 import { CompanyList } from "./CompanyList";
 import { CompanyListItem } from "./CompanyListItem";
+import { EditCompanyForm } from "./EditCompanyForm";
+import { updateCompany } from "@/lib/actions/company/updateCompany";
 import { getCompanySummaries } from "@/lib/data/company/company.dal";
-import { CompanyItemActionMenuTrigger } from "./CompanyItemActionMenuTrigger/CompanyItemActionMenuTrigger";
+import { CompanyItemActionMenuTrigger } from "./CompanyItemActionMenuTrigger";
 
 export async function CompaniesContainer() {
   const companies = await getCompanySummaries();
@@ -18,6 +20,13 @@ export async function CompaniesContainer() {
               guestMode={false}
               companyId={company.id}
               companyName={company.name}
+              editCompanyForm={
+                <EditCompanyForm
+                  companyId={company.id}
+                  nameDefaultValue={company.name}
+                  updateCompany={updateCompany}
+                />
+              }
             />
           }
         />
