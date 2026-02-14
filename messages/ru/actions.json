@@ -1,7 +1,188 @@
 {
   "common": {
-    "validation": {
-      "internalServerError": "Произошла ошибка сервера. Пожалуйста, попробуйте позже."
+    "error": {
+      "internalServerError": "Произошла ошибка сервера. Пожалуйста, попробуйте позже.",
+      "authError": "Произошла ошибка сервера. Подробности: {message}"
+    }
+  },
+  "createPosition": {
+    "error": {
+      "internalServerError": "Произошла ошибка сервера. Не удалось создать должность."
+    }
+  },
+  "updatePosition": {
+    "error": {
+      "internalServerError": "Произошла ошибка сервера. Не удалось обновить должность."
+    }
+  },
+  "deletePosition": {
+    "error": {
+      "internalServerError": "Произошла ошибка сервера. Не удалось удалить должность."
+    }
+  },
+  "forgetPassword": {
+    "error": {
+      "internalServerError": "Произошла ошибка сервера. Не удалось сбросить пароль."
+    }
+  },
+  "resetPassword": {
+    "error": {
+      "internalServerError": "Произошла ошибка сервера. Не удалось сбросить пароль."
+    }
+  },
+  "signIn": {
+    "error": {
+      "internalServerError": "Произошла ошибка сервера. Не удалось войти в систему."
+    }
+  },
+  "signUp": {
+    "error": {
+      "internalServerError": "Произошла ошибка сервера. Не удалось зарегистрироваться."
+    }
+  },
+  "deleteComment": {
+    "error": {
+      "internalServerError": "Произошла ошибка сервера. Не удалось удалить комментарий."
+    }
+  },
+  "sendComment": {
+    "error": {
+      "internalServerError": "Произошла ошибка сервера. Не удалось отправить комментарий."
+    }
+  },
+  "updateComment": {
+    "error": {
+      "internalServerError": "Произошла ошибка сервера. Не удалось обновить комментарий."
+    }
+  },
+  "createCompany": {
+    "error": {
+      "internalServerError": "Произошла ошибка сервера. Не удалось создать компанию."
+    }
+  },
+  "createCustomer": {
+    "error": {
+      "internalServerError": "Произошла ошибка сервера. Не удалось создать клиента."
+    }
+  },
+  "deleteCustomer": {
+    "error": {
+      "internalServerError": "Произошла ошибка сервера. Не удалось удалить клиента."
+    }
+  },
+  "updateCustomer": {
+    "error": {
+      "internalServerError": "Произошла ошибка сервера. Не удалось обновить клиента."
+    }
+  },
+  "createProject": {
+    "error": {
+      "internalServerError": "Произошла ошибка сервера. Не удалось создать проект."
+    }
+  },
+  "deleteProject": {
+    "error": {
+      "internalServerError": "Произошла ошибка сервера. Не удалось удалить проект."
+    }
+  },
+  "updateProject": {
+    "error": {
+      "internalServerError": "Произошла ошибка сервера. Не удалось обновить проект."
+    }
+  },
+  "updateProjectStatuses": {
+    "error": {
+      "internalServerError": "Произошла ошибка сервера. Не удалось обновить статусы проектов."
+    }
+  },
+  "createTask": {
+    "error": {
+      "internalServerError": "Произошла ошибка сервера. Не удалось создать задачу."
+    }
+  },
+  "deleteTask": {
+    "error": {
+      "internalServerError": "Произошла ошибка сервера. Не удалось удалить задачу."
+    }
+  },
+  "updateTask": {
+    "error": {
+      "internalServerError": "Произошла ошибка сервера. Не удалось обновить задачу."
+    }
+  },
+  "updateTaskStatuses": {
+    "error": {
+      "internalServerError": "Произошла ошибка сервера. Не удалось обновить статусы задач."
+    }
+  },
+  "createProjectCategory": {
+    "error": {
+      "internalServerError": "Произошла ошибка сервера. Не удалось создать категорию проекта."
+    }
+  },
+  "deleteProjectCategory": {
+    "error": {
+      "internalServerError": "Произошла ошибка сервера. Не удалось удалить категорию проекта."
+    }
+  },
+  "updateProjectCategory": {
+    "error": {
+      "internalServerError": "Произошла ошибка сервера. Не удалось обновить категорию проекта."
+    }
+  },
+  "createTaskCategory": {
+    "error": {
+      "internalServerError": "Произошла ошибка сервера. Не удалось создать категорию задачи."
+    }
+  },
+  "deleteTaskCategory": {
+    "error": {
+      "internalServerError": "Произошла ошибка сервера. Не удалось удалить категорию задачи."
+    }
+  },
+  "updateTaskCategory": {
+    "error": {
+      "internalServerError": "Произошла ошибка сервера. Не удалось обновить категорию задачи."
+    }
+  },
+  "createSubtask": {
+    "error": {
+      "internalServerError": "Произошла ошибка сервера. Не удалось создать подзадачу."
+    }
+  },
+  "deleteSubtask": {
+    "error": {
+      "internalServerError": "Произошла ошибка сервера. Не удалось удалить подзадачу."
+    }
+  },
+  "updateSubtask": {
+    "error": {
+      "internalServerError": "Произошла ошибка сервера. Не удалось обновить подзадачу."
+    }
+  },
+  "toggleSubtask": {
+    "error": {
+      "internalServerError": "Произошла ошибка сервера. Не удалось переключить статус подзадачи."
+    }
+  },
+  "changePassword": {
+    "error": {
+      "internalServerError": "Произошла ошибка сервера. Не удалось изменить пароль."
+    }
+  },
+  "createUser": {
+    "error": {
+      "internalServerError": "Произошла ошибка сервера. Не удалось создать пользователя."
+    }
+  },
+  "deleteUser": {
+    "error": {
+      "internalServerError": "Произошла ошибка сервера. Не удалось удалить пользователя."
+    }
+  },
+  "updateUser": {
+    "error": {
+      "internalServerError": "Произошла ошибка сервера. Не удалось обновить пользователя."
     }
   }
 }

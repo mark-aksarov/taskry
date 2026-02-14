@@ -48,7 +48,7 @@ export function EditProjectCategoryForm({
         <input type="hidden" name="id" value={projectCategoryId} />
         <ProjectCategoryNameTextField defaultValue={nameDefaultValue} />
         <FormErrorBanner status={state.status} isPending={isPending}>
-          {t("updateError")}
+          {state.message}
         </FormErrorBanner>
       </FormBaseBody>
       <FormBaseFooter>

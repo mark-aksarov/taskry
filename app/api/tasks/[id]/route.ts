@@ -7,8 +7,8 @@ import {
 import z from "zod";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
+import { taskId } from "@/lib/schemas/task";
 import { NextResponse, NextRequest } from "next/server";
-import { coercedPositiveInt } from "@/lib/schemas/base";
 import { getTaskDetail } from "@/lib/data/task/task.dal";
 import { getTaskFormData } from "@/lib/data/task/task.dal";
 
@@ -29,7 +29,7 @@ export async function GET(
     // Parse and validate
     const data = await params;
     const schema = z.object({
-      id: coercedPositiveInt,
+      id: taskId,
     });
 
     const parse = schema.safeParse({ id: data.id });

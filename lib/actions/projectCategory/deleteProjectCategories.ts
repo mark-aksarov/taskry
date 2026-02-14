@@ -3,13 +3,12 @@
 import z from "zod";
 import { ActionState } from "../types";
 import { revalidatePath } from "next/cache";
-import { coercedPositiveInt } from "@/lib/schemas/base";
+import { getTranslations } from "next-intl/server";
+import { projectCategoryId } from "@/lib/schemas/projectCategory";
 import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedirect";
 import { deleteProjectCategories as deleteProjectCategoriesQuery } from "@/lib/data/projectCategory/projectCategory.dal";
 
-const schema = z.object({
-  ids: z.array(coercedPositiveInt).min(1),
-});
+const projectCategoryIds = z.array(projectCategoryId).min(1);
 
 export async function deleteProjectCategories(
   _prevState: ActionState,
@@ -18,21 +17,12 @@ export async function deleteProjectCategories(
   // Authorization
   await requireSessionOrRedirect();
 
+  const t = await getTranslations("actions");
+
   try {
-    // Parse and validate form data
-    const parsed = schema.safeParse({ ids });
+    const parsedIds = projectCategoryIds.parse(ids);
 
-    if (!parsed.success) {
-      console.error("Validation error", parsed.error);
-
-      return {
-        status: "error",
-        errorCode: "validationError",
-      };
-    }
-
-    // Delete customers
-    await deleteProjectCategoriesQuery(parsed.data.ids);
+    await deleteProjectCategoriesQuery(parsedIds);
     revalidatePath("/project-categories");
 
     return {
@@ -43,7 +33,7 @@ export async function deleteProjectCategories(
 
     return {
       status: "error",
-      errorCode: "internalServerError",
+      message: t("deleteProjectCategory.error.internalServerError"),
     };
   }
 }

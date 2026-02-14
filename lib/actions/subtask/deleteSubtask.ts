@@ -2,11 +2,10 @@
 
 import { ActionState } from "../types";
 import { revalidatePath } from "next/cache";
-import { subtaskSchema } from "@/lib/schemas/subtask";
+import { subtaskId } from "@/lib/schemas/subtask";
+import { getTranslations } from "next-intl/server";
 import { deleteSubtask as deleteSubtaskQuery } from "@/lib/data/subtask/subtask.dal";
 import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedirect";
-
-const schema = subtaskSchema.pick({ id: true });
 
 export async function deleteSubtask(
   _prevState: ActionState,
@@ -15,21 +14,12 @@ export async function deleteSubtask(
   // Authorization
   await requireSessionOrRedirect();
 
+  const t = await getTranslations("actions");
+
   try {
-    // Parse and validate form data
-    const parsed = schema.safeParse({ id });
+    const parsedId = subtaskId.parse(id);
 
-    if (!parsed.success) {
-      console.error("Validation error", parsed.error);
-
-      return {
-        status: "error",
-        errorCode: "validationError",
-      };
-    }
-
-    // Delete tasks
-    const result = await deleteSubtaskQuery(parsed.data.id);
+    const result = await deleteSubtaskQuery(parsedId);
     revalidatePath(`/tasks/${result.taskId}`);
 
     return {
@@ -40,7 +30,7 @@ export async function deleteSubtask(
 
     return {
       status: "error",
-      errorCode: "internalServerError",
+      message: t("deleteSubtask.error.internalServerError"),
     };
   }
 }

@@ -1,14 +1,8 @@
 {
   "EditTaskForm": {
-    "error": {
-      "updateError": "A server error occurred. Failed to update task."
-    },
     "submitButtonLabel": "Update Task"
   },
   "NewTaskForm": {
-    "error": {
-      "creationError": "A server error occurred. Failed to create task."
-    },
     "submitButtonLabel": "Create Task"
   },
   "TaskDetailCard": {
@@ -58,20 +52,14 @@
     "delete": "Delete",
     "pending": "Mark as Pending",
     "active": "Mark as Active",
-    "completed": "Mark as Completed",
-    "error": {
-      "updateStatusError": "A server error occurred. Failed to change task statuses."
-    }
+    "completed": "Mark as Completed"
   },
   "TaskItemActionMenuTrigger": {
     "edit": "Edit",
     "delete": "Delete",
     "markPending": "Mark as Pending",
     "markCompleted": "Mark as Completed",
-    "markActive": "Mark as Active",
-    "error": {
-      "updateStatusError": "A server error occurred. Failed to change task status."
-    }
+    "markActive": "Mark as Active"
   },
   "TaskToolbarCreateNewMenuTrigger": {
     "dialogHeading": "Create New",
@@ -85,15 +73,13 @@
     "heading": "Delete Task",
     "text": "Are you sure you want to delete <strong>«{name}»</strong>? All contents will be permanently removed.",
     "deleteButton": "Delete",
-    "cancelButton": "Cancel",
-    "deleteError": "A server error occurred. Failed to delete task."
+    "cancelButton": "Cancel"
   },
   "DeleteTasksModal": {
     "heading": "Delete Tasks",
     "text": "Are you sure you want to delete <strong>{count} tasks</strong>? All contents will be permanently removed.",
     "deleteButton": "Delete",
-    "cancelButton": "Cancel",
-    "deleteError": "A server error occurred. Failed to delete tasks."
+    "cancelButton": "Cancel"
   },
   "NewTaskModal": {
     "title": "New Task"

@@ -51,7 +51,7 @@ export function DeleteTasksModal({
     startTransition(() => action(taskIds));
   };
 
-  useActionErrorToast(state, t("deleteError"));
+  useActionErrorToast(state);
 
   return (
     <ConfirmModal

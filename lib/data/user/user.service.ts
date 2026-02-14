@@ -114,7 +114,7 @@ export const changePassword = async (input: ChangePasswordInputDTO) => {
     );
   }
 
-  // Validate updated user. Since we use the better-auth API, we can't check users in the database directly.
+  // Validate updated user. Since we use the better-auth API, we need to check users in the database directly.
   await validateUser(workspaceId, input.id);
 
   // Use better auth admin api to update user
@@ -149,7 +149,7 @@ export const deleteUser = async (deletedUserId: string) => {
     throw new AccessDeniedError("You do not have permission to delete user.");
   }
 
-  // Validate deleted user. Since we use the better-auth API, we can't check users in the database directly.
+  // Validate deleted user. Since we use the better-auth API, we need to check users in the database directly.
   await validateUser(workspaceId, deletedUserId);
 
   // Use better auth admin api to delete user

@@ -58,7 +58,7 @@ export function SubtaskActionMenuTrigger({
     }
   }, [toggleSubtaskState, mutate]);
 
-  useActionErrorToast(toggleSubtaskState, t("error.updateStatusError"));
+  useActionErrorToast(toggleSubtaskState);
 
   // Guest mode modal
   const [isGuestModeModalOpen, setIsGuestModeModalOpen] = useState(false);

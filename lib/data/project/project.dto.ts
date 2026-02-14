@@ -7,10 +7,10 @@ export interface ProjectSummaryDTO {
 
 export interface CreateProjectInputDTO {
   title: string;
-  description: string | null;
+  description?: string;
   deadline: Date;
-  customerId: number | null;
-  categoryId: number | null;
+  customerId?: number;
+  categoryId?: number;
   status: ProjectStatus;
 }
 

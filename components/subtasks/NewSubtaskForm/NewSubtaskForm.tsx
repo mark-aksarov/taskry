@@ -54,7 +54,7 @@ export function NewSubtaskForm({
         <input type="hidden" name="taskId" value={taskId} />
         <SubtaskTextField />
         <FormErrorBanner status={state.status} isPending={isPending}>
-          {t("error.creationError")}
+          {state.message}
         </FormErrorBanner>
       </FormBaseBody>
 

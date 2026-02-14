@@ -2,11 +2,10 @@
 
 import { ActionState } from "../types";
 import { revalidatePath } from "next/cache";
-import { commentSchema } from "@/lib/schemas/comment";
+import { commentId } from "@/lib/schemas/comment";
+import { getTranslations } from "next-intl/server";
 import { deleteComment as deleteCommentQuery } from "@/lib/data/comment/comment.dal";
 import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedirect";
-
-const schema = commentSchema.pick({ id: true });
 
 export async function deleteComment(
   _prevState: ActionState,
@@ -15,21 +14,11 @@ export async function deleteComment(
   // Authorization
   await requireSessionOrRedirect();
 
+  const t = await getTranslations("actions");
+
   try {
-    // Parse and validate form data
-    const parsed = schema.safeParse({ id });
-
-    if (!parsed.success) {
-      console.error("Validation error", parsed.error);
-
-      return {
-        status: "error",
-        errorCode: "validationError",
-      };
-    }
-
-    // Delete comment
-    await deleteCommentQuery(parsed.data.id);
+    const parsedId = commentId.parse(id);
+    await deleteCommentQuery(parsedId);
 
     revalidatePath("/projects");
     revalidatePath("/tasks");
@@ -42,7 +31,7 @@ export async function deleteComment(
 
     return {
       status: "error",
-      errorCode: "internalServerError",
+      message: t("deleteComment.error.internalServerError"),
     };
   }
 }

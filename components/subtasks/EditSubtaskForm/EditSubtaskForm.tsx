@@ -59,7 +59,7 @@ export function EditSubtaskForm({
         <input type="hidden" name="taskId" value={taskId} />
         <SubtaskTextField defaultValue={textDefaultValue} />
         <FormErrorBanner status={state.status} isPending={isPending}>
-          {t("error.updateError")}
+          {state.message}
         </FormErrorBanner>
       </FormBaseBody>
 

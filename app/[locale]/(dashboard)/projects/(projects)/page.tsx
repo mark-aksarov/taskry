@@ -1,18 +1,20 @@
 import {
   pageSearchParam,
   dateSearchParam,
-  arraySearchParam,
   booleanSearchParam,
+  searchParamToArray,
   pageSizeSearchParam,
-  coercedPositiveInt,
 } from "@/lib/schemas/base";
 
 import { z } from "zod";
+import { userId } from "@/lib/schemas/user";
 import { ProjectsPage } from "./ProjectsPage";
+import { customerId } from "@/lib/schemas/customer";
+import { projectStatus } from "@/lib/schemas/project";
 import { ProjectsPageEmpty } from "./ProjectsPageEmpty";
 import { hasGuestRole } from "@/lib/utils/hasGuestRole";
-import { ProjectStatus } from "@/generated/prisma/enums";
 import { getProjectCount } from "@/lib/data/project/project.dal";
+import { projectCategoryId } from "@/lib/schemas/projectCategory";
 import { deleteProjects } from "@/lib/actions/project/deleteProjects";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { ProjectsContainer } from "@/components/projects/ProjectsContainer";
@@ -32,10 +34,22 @@ const searchParamsSchema = z.object({
   deadlineTo: dateSearchParam,
   noActiveTasks: booleanSearchParam,
   sort: z.enum(["title", "deadline", "status", "category"]).catch("title"),
-  status: arraySearchParam(z.enum(ProjectStatus)),
-  category: arraySearchParam(coercedPositiveInt),
-  customer: arraySearchParam(coercedPositiveInt),
-  user: arraySearchParam(z.string()),
+  status: z.preprocess(
+    searchParamToArray,
+    z.array(projectStatus).optional().catch(undefined),
+  ),
+  category: z.preprocess(
+    searchParamToArray,
+    z.array(projectCategoryId).optional().catch(undefined),
+  ),
+  customer: z.preprocess(
+    searchParamToArray,
+    z.array(customerId).optional().catch(undefined),
+  ),
+  user: z.preprocess(
+    searchParamToArray,
+    z.array(userId).optional().catch(undefined),
+  ),
 });
 
 export default async function AppProjectsPage({

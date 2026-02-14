@@ -4,9 +4,8 @@ import { useSWRConfig } from "swr";
 import { Form } from "react-aria-components";
 import { CommentTextField } from "../CommentTextField";
 import { ActionFn, ActionState } from "@/lib/actions/types";
-import { startTransition, useActionState, useEffect, useState } from "react";
+import { startTransition, useActionState, useEffect } from "react";
 import { useActionErrorToast } from "@/lib/hooks/useActionErrorToast";
-import { useTranslations } from "next-intl";
 
 const initialState: ActionState = {
   status: null,
@@ -23,8 +22,6 @@ export function CommentForm({
   mutateUrl,
   hiddenInput,
 }: CommentFormProps) {
-  const t = useTranslations("comments.CommentForm");
-
   const { mutate } = useSWRConfig();
 
   const [state, action, pending] = useActionState(
@@ -38,7 +35,7 @@ export function CommentForm({
     }
   }, [state, mutateUrl]);
 
-  useActionErrorToast(state, t("error.sendFailed"));
+  useActionErrorToast(state);
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();

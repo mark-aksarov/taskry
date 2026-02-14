@@ -1,10 +1,8 @@
 {
   "EditProjectForm": {
-    "updateError": "A server error occurred. Failed to update project.",
     "submitButtonLabel": "Update Project"
   },
   "NewProjectForm": {
-    "creationError": "A server error occurred. Failed to create project.",
     "submitButtonLabel": "Create Project"
   },
   "ProjectDetailCard": {
@@ -38,10 +36,7 @@
     "delete": "Delete",
     "pending": "Mark as Pending",
     "active": "Mark as Active",
-    "completed": "Mark as Completed",
-    "error": {
-      "updateStatusError": "A server error occurred. Failed to change project statuses."
-    }
+    "completed": "Mark as Completed"
   },
   "ProjectToolbarManageMenuTrigger": {
     "categories": "Categories"
@@ -129,28 +124,19 @@
     "delete": "Delete",
     "markPending": "Mark as Pending",
     "markCompleted": "Mark as Completed",
-    "markActive": "Mark as Active",
-    "error": {
-      "updateStatusError": "A server error occurred. Failed to change project status."
-    }
+    "markActive": "Mark as Active"
   },
   "DeleteProjectModal": {
     "heading": "Delete Project",
     "text": "Are you sure you want to delete <strong>«{name}»</strong>? All contents will be permanently removed, and all related tasks will also be deleted.",
     "deleteButton": "Delete",
-    "cancelButton": "Cancel",
-    "error": {
-      "deleteError": "A server error occurred. Failed to delete project."
-    }
+    "cancelButton": "Cancel"
   },
   "DeleteProjectsModal": {
     "heading": "Delete Projects",
     "text": "Are you sure you want to delete <strong>{count} projects</strong>? All contents will be permanently removed, and all related tasks will also be deleted.",
     "deleteButton": "Delete",
-    "cancelButton": "Cancel",
-    "error": {
-      "deleteError": "A server error occurred. Failed to delete project."
-    }
+    "cancelButton": "Cancel"
   },
   "ProjectStatus": {
     "pending": "Pending",

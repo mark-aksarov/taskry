@@ -1,12 +1,17 @@
 "use server";
 
+import z from "zod";
 import { revalidatePath } from "next/cache";
-import { subtaskSchema } from "@/lib/schemas/subtask";
+import { getTranslations } from "next-intl/server";
 import { ActionState, ToggleSubtaskPayload } from "../types";
+import { subtaskId, subtaskIsDone } from "@/lib/schemas/subtask";
 import { updateSubtask as updateSubtaskQuery } from "@/lib/data/subtask/subtask.dal";
 import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedirect";
 
-const schema = subtaskSchema.pick({ id: true, isDone: true });
+const schema = z.object({
+  id: subtaskId,
+  isDone: subtaskIsDone,
+});
 
 export async function toggleSubtask(
   _prevState: ActionState,
@@ -15,23 +20,11 @@ export async function toggleSubtask(
   // Authorization
   await requireSessionOrRedirect();
 
+  const t = await getTranslations("actions");
+
   try {
-    // Parse and validate form data
-    const parsed = schema.safeParse(data);
-
-    if (!parsed.success) {
-      console.error("Validation error", parsed.error);
-
-      return {
-        status: "error",
-        errorCode: "validationError",
-      };
-    }
-
-    // Execute update
-    const result = await updateSubtaskQuery(parsed.data);
-
-    // Revalidation
+    const parsedData = schema.parse(data);
+    const result = await updateSubtaskQuery(parsedData);
     revalidatePath(`/tasks/${result.taskId}`);
 
     return {
@@ -42,7 +35,7 @@ export async function toggleSubtask(
 
     return {
       status: "error",
-      errorCode: "internalServerError",
+      message: t("toggleSubtask.error.internalServerError"),
     };
   }
 }

@@ -1,10 +1,34 @@
 "use server";
 
+import {
+  taskId,
+  taskTitle,
+  taskStatus,
+  taskDeadline,
+  taskDescription,
+} from "@/lib/schemas/task";
+
+import z from "zod";
 import { ActionState } from "../types";
+import { userId } from "@/lib/schemas/user";
 import { revalidatePath } from "next/cache";
-import { taskSchema } from "@/lib/schemas/task";
+import { projectId } from "@/lib/schemas/project";
+import { getTranslations } from "next-intl/server";
+import { emptyStringToNull } from "@/lib/schemas/base";
+import { taskCategoryId } from "@/lib/schemas/taskCategory";
 import { updateTask as updateTaskQuery } from "@/lib/data/task/task.dal";
 import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedirect";
+
+const schema = z.object({
+  id: taskId,
+  title: taskTitle,
+  description: z.preprocess(emptyStringToNull, taskDescription.nullable()),
+  deadline: taskDeadline,
+  status: taskStatus,
+  projectId,
+  categoryId: z.preprocess(emptyStringToNull, taskCategoryId.nullable()),
+  assigneeId: z.preprocess(emptyStringToNull, userId.nullable()),
+});
 
 export async function updateTask(
   _prevState: ActionState,
@@ -13,24 +37,13 @@ export async function updateTask(
   // Authorization
   await requireSessionOrRedirect();
 
+  const t = await getTranslations("actions");
+
   try {
-    // Parse and validate form data
     const input = Object.fromEntries(formData.entries());
-    const parsed = taskSchema.safeParse(input);
+    const parsedData = schema.parse(input);
 
-    if (!parsed.success) {
-      console.error("Validation error", parsed.error);
-
-      return {
-        status: "error",
-        errorCode: "validationError",
-      };
-    }
-
-    // Execute update
-    await updateTaskQuery(parsed.data);
-
-    // Revalidation
+    await updateTaskQuery(parsedData);
     revalidatePath("/tasks");
 
     return {
@@ -41,7 +54,7 @@ export async function updateTask(
 
     return {
       status: "error",
-      errorCode: "internalServerError",
+      message: t("updateTask.error.internalServerError"),
     };
   }
 }

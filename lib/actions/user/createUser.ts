@@ -1,16 +1,18 @@
 "use server";
 
+import z from "zod";
 import { ActionState } from "../types";
 import { APIError } from "better-auth";
 import { revalidatePath } from "next/cache";
-import { userSchema } from "@/lib/schemas/user";
+import { getTranslations } from "next-intl/server";
+import { userEmail, userFullName, userPassword } from "@/lib/schemas/user";
 import { createUser as createUserService } from "@/lib/data/user/user.service";
 import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedirect";
 
-const schema = userSchema.omit({ id: true }).pick({
-  email: true,
-  password: true,
-  fullName: true,
+const schema = z.object({
+  email: userEmail,
+  password: userPassword,
+  fullName: userFullName,
 });
 
 export async function createUser(
@@ -19,24 +21,12 @@ export async function createUser(
 ): Promise<ActionState> {
   // Authorization
   await requireSessionOrRedirect();
+  const t = await getTranslations("actions");
 
   try {
-    // Parse and validate form data
     const input = Object.fromEntries(formData.entries());
-    const parsed = schema.safeParse(input);
-
-    if (!parsed.success) {
-      console.error("Validation error", parsed.error);
-
-      return {
-        status: "error",
-        errorCode: "validationError",
-      };
-    }
-
-    // Create user
-    await createUserService(parsed.data);
-
+    const parsedData = schema.parse(input);
+    await createUserService(parsedData);
     revalidatePath("/team");
 
     return {
@@ -48,14 +38,13 @@ export async function createUser(
     if (error instanceof APIError) {
       return {
         status: "error",
-        errorCode: "authServiceError",
-        message: error.message,
+        message: t("common.error.authError", { message: error.message }),
       };
     }
 
     return {
       status: "error",
-      errorCode: "internalServerError",
+      message: t("createUser.error.internalServerError"),
     };
   }
 }

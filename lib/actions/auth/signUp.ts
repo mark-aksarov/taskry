@@ -7,13 +7,14 @@ import { ActionState } from "../types";
 import { APIError } from "better-auth";
 import { headers } from "next/headers";
 import { redirect } from "@/i18n/navigation";
-import { getLocale } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
+import { userEmail, userFullName, userPassword } from "@/lib/schemas/user";
 
 const schema = z.object({
-  name: z.string().min(5).max(50),
-  email: z.email().min(1).max(254),
-  password: z.string().min(8).max(128),
-  rememberMe: z.coerce.boolean(),
+  name: userFullName,
+  email: userEmail,
+  password: userPassword,
+  rememberMe: z.stringbool(),
 });
 
 export async function signUp(
@@ -21,6 +22,7 @@ export async function signUp(
   formData: FormData,
 ): Promise<ActionState> {
   const locale = await getLocale();
+  const t = await getTranslations("actions");
 
   // Redirect if already signed in
   const session = await auth.api.getSession({ headers: await headers() });
@@ -32,24 +34,16 @@ export async function signUp(
     };
   }
 
-  const input = Object.fromEntries(formData.entries());
-  const parsed = schema.safeParse(input);
-
-  if (!parsed.success) {
-    return {
-      status: "error",
-      errorCode: "validationError",
-    };
-  }
-
-  const { name, email, password, rememberMe } = parsed.data;
-
   try {
+    const input = Object.fromEntries(formData.entries());
+    const parsedData = schema.parse(input);
+
     // Create workspace
     const workspace = await prisma.workspace.create({ data: {} });
 
+    // Create user
     await auth.api.signUpEmail({
-      body: { name, email, password, rememberMe, workspaceId: workspace.id },
+      body: { ...parsedData, workspaceId: workspace.id },
     });
   } catch (error: unknown) {
     console.error("Sign-up Error:", error);
@@ -58,14 +52,13 @@ export async function signUp(
     if (error instanceof APIError) {
       return {
         status: "error",
-        errorCode: "authServiceError",
-        message: error.message,
+        message: t("common.error.authError", { message: error.message }),
       };
     }
 
     return {
       status: "error",
-      errorCode: "internalServerError",
+      message: t("signUp.error.internalServerError"),
     };
   }
 

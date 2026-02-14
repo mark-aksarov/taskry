@@ -68,7 +68,7 @@ export function EditTaskForm({
         {projectSelect}
         {assigneeSelect}
         <FormErrorBanner status={state.status} isPending={isPending}>
-          {t("error.updateError")}
+          {state.message}
         </FormErrorBanner>
       </FormBaseBody>
       <FormBaseFooter>

@@ -1,12 +1,32 @@
 "use server";
 
+import {
+  taskTitle,
+  taskStatus,
+  taskDeadline,
+  taskDescription,
+} from "@/lib/schemas/task";
+
+import z from "zod";
 import { ActionState } from "../types";
 import { revalidatePath } from "next/cache";
-import { taskSchema } from "@/lib/schemas/task";
+import { userId } from "@/lib/schemas/user";
+import { projectId } from "@/lib/schemas/project";
+import { getTranslations } from "next-intl/server";
+import { emptyStringToUndefined } from "@/lib/schemas/base";
+import { taskCategoryId } from "@/lib/schemas/taskCategory";
 import { createTask as createTaskQuery } from "@/lib/data/task/task.dal";
 import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedirect";
 
-const schema = taskSchema.omit({ id: true });
+const schema = z.object({
+  title: taskTitle,
+  description: z.preprocess(emptyStringToUndefined, taskDescription.optional()),
+  deadline: taskDeadline,
+  status: taskStatus,
+  projectId,
+  categoryId: z.preprocess(emptyStringToUndefined, taskCategoryId.optional()),
+  assigneeId: z.preprocess(emptyStringToUndefined, userId.optional()),
+});
 
 export async function createTask(
   _prevState: ActionState,
@@ -15,25 +35,13 @@ export async function createTask(
   // Authorization
   await requireSessionOrRedirect();
 
+  const t = await getTranslations("actions");
+
   try {
-    // Parse and validate form data
     const input = Object.fromEntries(formData.entries());
-    const parsed = schema.safeParse(input);
-
-    if (!parsed.success) {
-      console.error("Validation error", parsed.error);
-
-      return {
-        status: "error",
-        errorCode: "validationError",
-      };
-    }
-
-    // Execute create
-    await createTaskQuery(parsed.data);
-
-    // Revalidation
-    revalidatePath("/projects");
+    const parsedData = schema.parse(input);
+    await createTaskQuery(parsedData);
+    revalidatePath("/tasks");
 
     return {
       status: "success",
@@ -43,7 +51,7 @@ export async function createTask(
 
     return {
       status: "error",
-      errorCode: "internalServerError",
+      message: t("createTask.error.internalServerError"),
     };
   }
 }

@@ -1,18 +1,20 @@
 import {
   pageSearchParam,
   dateSearchParam,
-  arraySearchParam,
   booleanSearchParam,
   pageSizeSearchParam,
-  coercedPositiveInt,
+  searchParamToArray,
 } from "@/lib/schemas/base";
 
 import { z } from "zod";
 import { TasksPage } from "./TasksPage";
+import { userId } from "@/lib/schemas/user";
+import { taskStatus } from "@/lib/schemas/task";
+import { projectId } from "@/lib/schemas/project";
 import { TasksPageEmpty } from "./TasksPageEmpty";
-import { TaskStatus } from "@/generated/prisma/enums";
 import { getTaskCount } from "@/lib/data/task/task.dal";
 import { hasGuestRole } from "@/lib/utils/hasGuestRole";
+import { taskCategoryId } from "@/lib/schemas/taskCategory";
 import { deleteTasks } from "@/lib/actions/task/deleteTasks";
 import { TasksContainer } from "@/components/tasks/TasksContainer";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
@@ -32,10 +34,22 @@ const searchParamsSchema = z.object({
   deadlineTo: dateSearchParam,
   onlyMyTasks: booleanSearchParam,
   sort: z.enum(["title", "deadline", "status", "category"]).catch("title"),
-  status: arraySearchParam(z.enum(TaskStatus)),
-  category: arraySearchParam(coercedPositiveInt),
-  project: arraySearchParam(coercedPositiveInt),
-  assignee: arraySearchParam(z.string()),
+  status: z.preprocess(
+    searchParamToArray,
+    z.array(taskStatus).optional().catch(undefined),
+  ),
+  category: z.preprocess(
+    searchParamToArray,
+    z.array(taskCategoryId).optional().catch(undefined),
+  ),
+  project: z.preprocess(
+    searchParamToArray,
+    z.array(projectId).optional().catch(undefined),
+  ),
+  assignee: z.preprocess(
+    searchParamToArray,
+    z.array(userId).optional().catch(undefined),
+  ),
 });
 
 export default async function AppTasksPage({

@@ -1,6 +1,5 @@
 {
   "NewProjectCategoryForm": {
-    "creationError": "Произошла ошибка на сервере. Не удалось создать категорию проекта.",
     "submitButtonLabel": "Создать категорию"
   },
   "NewProjectCategoryModal": {
@@ -28,21 +27,18 @@
     "delete": "Удалить"
   },
   "EditProjectCategoryForm": {
-    "updateError": "Произошла ошибка на сервере. Не удалось обновить категорию проекта.",
     "submitButtonLabel": "Обновить категорию проекта"
   },
   "EditProjectCategoryModal": {
     "title": "Изменить категорию проекта"
   },
   "DeleteProjectCategoryModal": {
-    "deleteError": "Произошла ошибка на сервере. Не удалось удалить категорию проекта.",
     "heading": "Удалить категорию проекта",
     "text": "Вы уверены, что хотите удалить категорию проекта <strong>«{name}»</strong>? Все содержимое будет безвозвратно удалено.",
     "cancelButton": "Отменить",
     "deleteButton": "Удалить"
   },
   "DeleteProjectCategoriesModal": {
-    "deleteError": "Произошла ошибка на сервере. Не удалось удалить категории проектов.",
     "heading": "Удалить категории проектов",
     "text": "Вы уверены, что хотите удалить <strong>{count} выбранные категории проектов</strong>? Все содержимое будет безвозвратно удалено.",
     "cancelButton": "Отменить",

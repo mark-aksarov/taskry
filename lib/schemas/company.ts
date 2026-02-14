@@ -1,5 +1,4 @@
 import z from "zod";
 
-export const companySchema = z.object({
-  name: z.string().min(1).max(255),
-});
+export const companyId = z.coerce.number().int().positive();
+export const companyName = z.string().trim().min(1).max(255);

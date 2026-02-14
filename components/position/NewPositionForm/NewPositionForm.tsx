@@ -41,7 +41,7 @@ export function NewPositionForm({ createPosition }: NewPositionFormProps) {
       <FormBaseBody>
         <PositionNameTextField />
         <FormErrorBanner status={state.status} isPending={isPending}>
-          {t("error.creationError")}
+          {state.message}
         </FormErrorBanner>
       </FormBaseBody>
       <FormBaseFooter>

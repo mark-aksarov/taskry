@@ -51,7 +51,7 @@ export function DeleteProjectsModal({
     startTransition(() => action(projectIds));
   };
 
-  useActionErrorToast(state, t("error.deleteError"));
+  useActionErrorToast(state);
 
   return (
     <ConfirmModal

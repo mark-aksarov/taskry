@@ -2,12 +2,11 @@
 
 import { ActionState } from "../types";
 import { APIError } from "better-auth";
+import { userId } from "@/lib/schemas/user";
 import { revalidatePath } from "next/cache";
-import { userSchema } from "@/lib/schemas/user";
+import { getTranslations } from "next-intl/server";
 import { deleteUser as deleteUserService } from "@/lib/data/user/user.service";
 import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedirect";
-
-const schema = userSchema.pick({ id: true });
 
 export async function deleteUser(
   _prevState: ActionState,
@@ -15,22 +14,12 @@ export async function deleteUser(
 ): Promise<ActionState> {
   // Authorization
   await requireSessionOrRedirect();
+  const t = await getTranslations("actions");
 
   try {
-    // Parse and validate form data
-    const parsed = schema.safeParse({ id });
-
-    if (!parsed.success) {
-      console.error("Validation error", parsed.error);
-
-      return {
-        status: "error",
-        errorCode: "validationError",
-      };
-    }
-
-    await deleteUserService(parsed.data.id);
-    revalidatePath("/users");
+    const parsedId = userId.parse(id);
+    await deleteUserService(parsedId);
+    revalidatePath("/team");
 
     return {
       status: "success",
@@ -41,14 +30,13 @@ export async function deleteUser(
     if (error instanceof APIError) {
       return {
         status: "error",
-        errorCode: "authServiceError",
-        message: error.message,
+        message: t("common.error.authError", { message: error.message }),
       };
     }
 
     return {
       status: "error",
-      errorCode: "internalServerError",
+      message: t("deleteUser.error.internalServerError"),
     };
   }
 }

@@ -1,7 +1,4 @@
 import z from "zod";
-import { coercedPositiveInt, emptyStringToUndefined } from "./base";
 
-export const projectCategorySchema = z.object({
-  id: coercedPositiveInt,
-  name: z.preprocess(emptyStringToUndefined, z.string().trim().min(1).max(255)),
-});
+export const projectCategoryId = z.coerce.number().int().positive();
+export const projectCategoryName = z.string().trim().min(1).max(255);

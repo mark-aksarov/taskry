@@ -43,7 +43,7 @@ export function NewProjectCategoryForm({
       <FormBaseBody>
         <ProjectCategoryNameTextField />
         <FormErrorBanner status={state.status} isPending={isPending}>
-          {t("creationError")}
+          {state.message}
         </FormErrorBanner>
       </FormBaseBody>
       <FormBaseFooter>

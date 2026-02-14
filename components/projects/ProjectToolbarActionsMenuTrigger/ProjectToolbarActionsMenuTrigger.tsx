@@ -54,7 +54,7 @@ export const ProjectToolbarActionsMenuTrigger = ({
   );
 
   // Show toast if updating status fails
-  useActionErrorToast(updateStatusState, t("error.updateStatusError"));
+  useActionErrorToast(updateStatusState);
 
   // Menu actions: show delete modal, update project status
   const handleAction = (key: Key) => {

@@ -1,10 +1,32 @@
 "use server";
 
+import {
+  customerId,
+  customerBio,
+  customerEmail,
+  customerFullName,
+  customerPhoneNumber,
+  customerPublicLink,
+} from "@/lib/schemas/customer";
+
+import z from "zod";
 import { ActionState } from "../types";
 import { revalidatePath } from "next/cache";
-import { customerSchema } from "@/lib/schemas/customer";
+import { companyId } from "@/lib/schemas/company";
+import { getTranslations } from "next-intl/server";
+import { emptyStringToNull } from "@/lib/schemas/base";
 import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedirect";
 import { updateCustomer as updateCustomerQuery } from "@/lib/data/customer/customer.dal";
+
+const schema = z.object({
+  id: customerId,
+  fullName: customerFullName,
+  bio: z.preprocess(emptyStringToNull, customerBio.nullable()),
+  email: customerEmail,
+  phoneNumber: z.preprocess(emptyStringToNull, customerPhoneNumber.nullable()),
+  publicLink: z.preprocess(emptyStringToNull, customerPublicLink.nullable()),
+  companyId: z.preprocess(emptyStringToNull, companyId.nullable()),
+});
 
 export async function updateCustomer(
   _prevState: ActionState,
@@ -13,22 +35,13 @@ export async function updateCustomer(
   // Authorization
   await requireSessionOrRedirect();
 
+  const t = await getTranslations("actions");
+
   try {
-    // Parse and validate form data
     const input = Object.fromEntries(formData.entries());
-    const parsed = customerSchema.safeParse(input);
+    const parsedData = schema.parse(input);
 
-    if (!parsed.success) {
-      console.error("Validation error", parsed.error);
-
-      return {
-        status: "error",
-        errorCode: "validationError",
-      };
-    }
-
-    // Update customer
-    await updateCustomerQuery(parsed.data);
+    await updateCustomerQuery(parsedData);
     revalidatePath("/customers");
 
     return {
@@ -39,7 +52,7 @@ export async function updateCustomer(
 
     return {
       status: "error",
-      errorCode: "internalServerError",
+      message: t("updateCustomer.error.internalServerError"),
     };
   }
 }

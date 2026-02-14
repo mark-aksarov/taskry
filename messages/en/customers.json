@@ -1,11 +1,9 @@
 {
   "EditCustomerForm": {
-    "updateError": "A server error occurred. Failed to update customer.",
     "submitButtonLabel": "Update Customer"
   },
 
   "NewCustomerForm": {
-    "creationError": "A server error occurred. Failed to create customer.",
     "submitButtonLabel": "Create Customer"
   },
 
@@ -132,16 +130,14 @@
     "heading": "Delete customer",
     "text": "Are you sure you want to delete customer <strong>«{name}»</strong>? All contents will be permanently removed.",
     "deleteButton": "Delete",
-    "cancelButton": "Cancel",
-    "deleteError": "A server error occurred. Failed to delete customer."
+    "cancelButton": "Cancel"
   },
 
   "DeleteCustomersModal": {
     "heading": "Delete customers",
     "text": "Are you sure you want to delete <strong>{count} customers</strong>? All contents will be permanently removed.",
     "deleteButton": "Delete",
-    "cancelButton": "Cancel",
-    "deleteError": "A server error occurred. Failed to delete customers."
+    "cancelButton": "Cancel"
   },
 
   "CustomerGridItem": {

@@ -35,22 +35,6 @@ export function ChangePasswordForm({
     initialState,
   );
 
-  let serverError = null;
-
-  if (state.status === "error") {
-    if (state.errorCode === "authServiceError" && state.message) {
-      if (state.message.includes("not allowed")) {
-        serverError = t("error.accessDenied");
-      } else if (state.message.includes("too short")) {
-        serverError = t("error.passwordTooShort");
-      } else if (state.message.includes("too long")) {
-        serverError = t("error.passwordTooLong");
-      }
-    } else {
-      serverError = t("error.internalServerError");
-    }
-  }
-
   useCloseOverlayOnActionSuccess(state);
 
   return (
@@ -63,7 +47,7 @@ export function ChangePasswordForm({
         <UserPasswordTextField />
 
         <FormErrorBanner status={state.status} isPending={isPending}>
-          {serverError}
+          {state.message}
         </FormErrorBanner>
       </FormBaseBody>
       <FormBaseFooter>

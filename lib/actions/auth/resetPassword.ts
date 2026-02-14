@@ -5,10 +5,11 @@ import { auth } from "@/lib/auth";
 import { ActionState } from "../types";
 import { APIError } from "better-auth";
 import { redirect } from "@/i18n/navigation";
-import { getLocale } from "next-intl/server";
+import { userPassword } from "@/lib/schemas/user";
+import { getLocale, getTranslations } from "next-intl/server";
 
 const schema = z.object({
-  password: z.string().min(8).max(128),
+  password: userPassword,
 });
 
 export async function resetPassword(
@@ -17,23 +18,16 @@ export async function resetPassword(
   formData: FormData,
 ): Promise<ActionState> {
   const locale = await getLocale();
+  const t = await getTranslations("actions");
 
-  // Parse form data
-  const input = Object.fromEntries(formData.entries());
-  const parsed = schema.safeParse(input);
-
-  if (!parsed.success) {
-    return {
-      status: "error",
-      errorCode: "validationError",
-    };
-  }
-
-  // Request password reset
   try {
+    const input = Object.fromEntries(formData.entries());
+    const parsedData = schema.parse(input);
+
+    // Request password reset
     await auth.api.resetPassword({
       body: {
-        newPassword: parsed.data.password,
+        newPassword: parsedData.password,
         token,
       },
     });
@@ -44,14 +38,13 @@ export async function resetPassword(
     if (error instanceof APIError) {
       return {
         status: "error",
-        errorCode: "authServiceError",
-        message: error.message,
+        message: t("common.error.authError", { message: error.message }),
       };
     }
 
     return {
       status: "error",
-      errorCode: "internalServerError",
+      message: t("resetPassword.error.internalServerError"),
     };
   }
 

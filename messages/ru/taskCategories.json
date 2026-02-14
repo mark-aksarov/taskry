@@ -1,8 +1,5 @@
 {
   "NewTaskCategoryForm": {
-    "error": {
-      "creationError": "Произошла ошибка на сервере. Не удалось создать категорию задач."
-    },
     "submitButtonLabel": "Создать категорию"
   },
   "NewTaskCategoryModal": {
@@ -30,7 +27,6 @@
     "label": "Create new"
   },
   "EditTaskCategoryForm": {
-    "updateError": "Произошла ошибка на сервере. Не удалось обновить категорию задачи.",
     "submitButtonLabel": "Обновить категорию задачи"
   },
   "EditTaskCategoryModal": {
@@ -38,13 +34,11 @@
   },
   "DeleteTaskCategoriesModal": {
     "heading": "Удалить категории задач",
-    "deleteError": "Произошла ошибка на сервере. Не удалось удалить категории задач.",
     "text": "Вы уверены, что хотите удалить <strong>{count} выбранные категории задач</strong>? Все содержимое будет безвозвратно удалено.",
     "cancelButton": "Отменить",
     "deleteButton": "Удалить"
   },
   "DeleteTaskCategoryModal": {
-    "deleteError": "Произошла ошибка на сервере. Не удалось удалить категорию задач.",
     "heading": "Delete task category",
     "text": "Вы уверены, что хотите удалить категорию задач <strong>«{name}»</strong>? Все содержимое будет безвозвратно удалено.",
     "cancelButton": "Отменить",

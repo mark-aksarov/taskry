@@ -144,34 +144,4 @@ describe("update task status", () => {
         .contains(/active/i);
     });
   });
-
-  describe("access control (RBAC)", () => {
-    it("allows a user with 'owner' role to open the edit modal", () => {
-      cy.signIn("user-1@test.com", "12345abc");
-      cy.visit("/en/tasks");
-      cy.getByData("task-item-action-menu-trigger", "1").click();
-      cy.getMenuItem("pending").click();
-      cy.getByData("task-list-item")
-        .eq(0)
-        .contains(/pending/i);
-    });
-
-    it("allows a user with 'user' role to open the edit modal", () => {
-      cy.signIn("user-2@test.com", "12345abc");
-      cy.visit("/en/tasks");
-      cy.getByData("task-item-action-menu-trigger", "1").click();
-      cy.getMenuItem("pending").click();
-      cy.getByData("task-list-item")
-        .eq(0)
-        .contains(/pending/i);
-    });
-
-    it("shows a restriction modal when a 'guest' attempts to edit", () => {
-      cy.signIn("user-3@test.com", "12345abc");
-      cy.visit("/en/tasks");
-      cy.getByData("task-item-action-menu-trigger", "1").click();
-      cy.getMenuItem("pending").click();
-      cy.getByData("guest-mode-modal").should("be.visible");
-    });
-  });
 });

@@ -6,12 +6,13 @@ import { ActionState } from "../types";
 import { APIError } from "better-auth";
 import { headers } from "next/headers";
 import { redirect } from "@/i18n/navigation";
-import { getLocale } from "next-intl/server";
+import { userEmail, userPassword } from "@/lib/schemas/user";
+import { getLocale, getTranslations } from "next-intl/server";
 
 const schema = z.object({
-  email: z.email().min(1).max(254),
-  password: z.string().min(8).max(128),
-  rememberMe: z.coerce.boolean(),
+  email: userEmail,
+  password: userPassword,
+  rememberMe: z.stringbool(),
 });
 
 export async function signIn(
@@ -20,6 +21,7 @@ export async function signIn(
   formData: FormData,
 ): Promise<ActionState> {
   const locale = await getLocale();
+  const t = await getTranslations("actions");
 
   // Redirect if already signed in
   const session = await auth.api.getSession({ headers: await headers() });
@@ -32,19 +34,11 @@ export async function signIn(
     };
   }
 
-  // Parse form data
-  const input = Object.fromEntries(formData.entries());
-  const parsed = schema.safeParse(input);
-
-  if (!parsed.success) {
-    return {
-      status: "error",
-      errorCode: "validationError",
-    };
-  }
-
   try {
-    await auth.api.signInEmail({ body: parsed.data });
+    const input = Object.fromEntries(formData.entries());
+    const parsedData = schema.parse(input);
+
+    await auth.api.signInEmail({ body: parsedData });
   } catch (error: unknown) {
     console.error("Sign-in Error:", error);
 
@@ -52,14 +46,13 @@ export async function signIn(
     if (error instanceof APIError) {
       return {
         status: "error",
-        errorCode: "authServiceError",
-        message: error.message,
+        message: t("common.error.authError", { message: error.message }),
       };
     }
 
     return {
       status: "error",
-      errorCode: "internalServerError",
+      message: t("signIn.error.internalServerError"),
     };
   }
 

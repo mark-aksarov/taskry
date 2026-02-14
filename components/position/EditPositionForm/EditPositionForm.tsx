@@ -48,7 +48,7 @@ export function EditPositionForm({
         <input type="hidden" name="id" value={positionId} />
         <PositionNameTextField defaultValue={nameDefaultValue} />
         <FormErrorBanner status={state.status} isPending={isPending}>
-          {t("updateError")}
+          {state.message}
         </FormErrorBanner>
       </FormBaseBody>
       <FormBaseFooter>

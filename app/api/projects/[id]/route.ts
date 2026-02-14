@@ -8,9 +8,9 @@ import z from "zod";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import { NextResponse, NextRequest } from "next/server";
-import { coercedPositiveInt } from "@/lib/schemas/base";
 import { getProjectDetail } from "@/lib/data/project/project.dal";
 import { getProjectFormData } from "@/lib/data/project/project.dal";
+import { projectId } from "@/lib/schemas/project";
 
 export async function GET(
   req: NextRequest,
@@ -29,7 +29,7 @@ export async function GET(
     // Parse and validate
     const rawParams = await params;
     const schema = z.object({
-      id: coercedPositiveInt,
+      id: projectId,
     });
 
     const parse = schema.safeParse({ id: rawParams.id });

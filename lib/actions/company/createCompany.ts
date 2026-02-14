@@ -1,10 +1,16 @@
 "use server";
 
+import z from "zod";
 import { ActionState } from "../types";
 import { revalidatePath } from "next/cache";
-import { companySchema } from "@/lib/schemas/company";
+import { getTranslations } from "next-intl/server";
+import { companyName } from "@/lib/schemas/company";
 import { createCompany as createCompanyQuery } from "@/lib/data/company/company.dal";
 import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedirect";
+
+const schema = z.object({
+  name: companyName,
+});
 
 export async function createCompany(
   _prevState: ActionState,
@@ -13,24 +19,15 @@ export async function createCompany(
   // Authorization
   await requireSessionOrRedirect();
 
+  const t = await getTranslations("actions");
+
   try {
-    // Parse and validate form data
-    const parsed = companySchema.safeParse({
+    const parsedDate = schema.parse({
       name: formData.get("name"),
     });
 
-    if (!parsed.success) {
-      console.error("Validation error", parsed.error);
-
-      return {
-        status: "error",
-        errorCode: "validationError",
-      };
-    }
-
-    // Create company
-    await createCompanyQuery(parsed.data);
-    revalidatePath("/customers");
+    await createCompanyQuery(parsedDate);
+    revalidatePath("/companies");
 
     return {
       status: "success",
@@ -40,7 +37,7 @@ export async function createCompany(
 
     return {
       status: "error",
-      errorCode: "internalServerError",
+      message: t("createCompany.error.internalServerError"),
     };
   }
 }

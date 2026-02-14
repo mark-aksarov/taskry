@@ -1,15 +1,9 @@
 {
   "EditSubtaskForm": {
-    "error": {
-      "updateError": "A server error occurred. Failed to update subtask."
-    },
     "submitButtonLabel": "Edit Subtask"
   },
 
   "NewSubtaskForm": {
-    "error": {
-      "creationError": "A server error occurred. Failed to create subtask."
-    },
     "submitButtonLabel": "Add Subtask"
   },
 
@@ -17,22 +11,14 @@
     "heading": "Delete Subtask",
     "text": "Are you sure you want to delete subtask <strong>«{text}»</strong>?",
     "deleteButton": "Delete",
-    "cancelButton": "Cancel",
-
-    "error": {
-      "deleteError": "A server error occurred. Failed to delete subtask."
-    }
+    "cancelButton": "Cancel"
   },
 
   "SubtaskActionMenuTrigger": {
     "edit": "Edit",
     "done": "Mark as Done",
     "undone": "Mark as Undone",
-    "delete": "Delete",
-
-    "error": {
-      "updateStatusError": "A server error occurred. Failed to change subtask status."
-    }
+    "delete": "Delete"
   },
 
   "SubtasksCheckboxGroup": {

@@ -4,32 +4,14 @@
   },
 
   "ChangePasswordForm": {
-    "error": {
-      "accessDenied": "You are not allowed to set users password",
-      "passwordTooShort": "Password is too short",
-      "passwordTooLong": "Password is too long",
-      "internalServerError": "A server error occurred. Failed to change user password."
-    },
     "submitButtonLabel": "Change Password"
   },
 
   "EditUserForm": {
-    "error": {
-      "accessDenied": "You are not allowed to update users",
-      "noDataToUpdate": "No data to update",
-      "internalServerError": "A server error occurred. Failed to create user."
-    },
     "submitButtonLabel": "Update user"
   },
 
   "NewUserForm": {
-    "error": {
-      "accessDenied": "You are not allowed to create users",
-      "invalidEmail": "Invalid email address",
-      "userAlreadyExists": "User already exists with this email",
-      "userCreationFailed": "Failed to create user",
-      "internalServerError": "A server error occurred. Failed to update user."
-    },
     "submitButtonLabel": "Create User"
   },
 
@@ -197,11 +179,7 @@
     "heading": "Delete user",
     "text": "Are you sure you want to delete user <strong>«{name}»</strong>? All contents will be permanently removed.",
     "deleteButton": "Delete",
-    "cancelButton": "Cancel",
-
-    "error": {
-      "deleteError": "A server error occurred. Failed to delete user."
-    }
+    "cancelButton": "Cancel"
   },
 
   "UserGridItem": {

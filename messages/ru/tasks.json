@@ -1,14 +1,8 @@
 {
   "EditTaskForm": {
-    "error": {
-      "updateError": "Произошла ошибка на сервере. Не удалось обновить задачу."
-    },
     "submitButtonLabel": "Обновить задачу"
   },
   "NewTaskForm": {
-    "error": {
-      "creationError": "Произошла ошибка на сервере. Не удалось создать задачу."
-    },
     "submitButtonLabel": "Создать задачу"
   },
   "TaskDetailCard": {
@@ -58,20 +52,14 @@
     "delete": "Удалить",
     "pending": "Отметить как «В ожидании»",
     "active": "Отметить как «Активно»",
-    "completed": "Отметить как «Завершено»",
-    "error": {
-      "updateStatusError": "Произошла ошибка на сервере. Не удалось изменить статусы задач."
-    }
+    "completed": "Отметить как «Завершено»"
   },
   "TaskItemActionMenuTrigger": {
     "edit": "Изменить",
     "delete": "Удалить",
     "markPending": "Пометить как ожидающую",
     "markCompleted": "Пометить как выполненную",
-    "markActive": "Пометить как активную",
-    "error": {
-      "updateStatusError": "Произошла ошибка на сервере. Не удалось изменить статус задачи."
-    }
+    "markActive": "Пометить как активную"
   },
   "TaskToolbarCreateNewMenuTrigger": {
     "dialogHeading": "Создать новую",
@@ -85,15 +73,13 @@
     "heading": "Удалить задачу",
     "text": "Вы уверены, что хотите удалить <strong>«{name}»</strong>? Всё содержимое будет безвозвратно удалено.",
     "deleteButton": "Удалить",
-    "cancelButton": "Отмена",
-    "deleteError": "Произошла ошибка на сервере. Не удалось удалить задачу."
+    "cancelButton": "Отмена"
   },
   "DeleteTasksModal": {
     "heading": "Удалить задачи",
     "text": "Вы уверены, что хотите удалить <strong>{count} выбранных задач</strong>? Всё содержимое будет безвозвратно удалено.",
     "deleteButton": "Удалить",
-    "cancelButton": "Отмена",
-    "deleteError": "Произошла ошибка на сервере. Не удалось удалить задачи."
+    "cancelButton": "Отмена"
   },
   "NewTaskModal": {
     "title": "Новая задача"

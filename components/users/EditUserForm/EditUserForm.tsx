@@ -55,20 +55,6 @@ export function EditUserForm({
 
   useCloseOverlayOnActionSuccess(state);
 
-  let serverError = null;
-
-  if (state.status === "error") {
-    if (state.errorCode === "authServiceError" && state.message) {
-      if (state.message.includes("not allowed")) {
-        serverError = t("error.accessDenied");
-      } else if (state.message.includes("No data")) {
-        serverError = t("error.noDataToUpdate");
-      }
-    } else {
-      serverError = t("error.internalServerError");
-    }
-  }
-
   return (
     <FormBase
       id="edit-user-form"
@@ -85,7 +71,7 @@ export function EditUserForm({
         {positionSelect}
 
         <FormErrorBanner status={state.status} isPending={isPending}>
-          {serverError}
+          {state.message}
         </FormErrorBanner>
       </FormBaseBody>
 

@@ -1,10 +1,32 @@
 "use server";
 
+import {
+  projectId,
+  projectTitle,
+  projectStatus,
+  projectDeadline,
+  projectDescription,
+} from "@/lib/schemas/project";
+
+import z from "zod";
 import { ActionState } from "../types";
 import { revalidatePath } from "next/cache";
-import { projectSchema } from "@/lib/schemas/project";
+import { getTranslations } from "next-intl/server";
+import { customerId } from "@/lib/schemas/customer";
+import { emptyStringToNull } from "@/lib/schemas/base";
+import { projectCategoryId } from "@/lib/schemas/projectCategory";
 import { updateProject as updateProjectQuery } from "@/lib/data/project/project.dal";
 import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedirect";
+
+const schema = z.object({
+  id: projectId,
+  title: projectTitle,
+  description: z.preprocess(emptyStringToNull, projectDescription.nullable()),
+  deadline: projectDeadline,
+  status: projectStatus,
+  categoryId: z.preprocess(emptyStringToNull, projectCategoryId.nullable()),
+  customerId: z.preprocess(emptyStringToNull, customerId.nullable()),
+});
 
 export async function updateProject(
   _prevState: ActionState,
@@ -13,22 +35,13 @@ export async function updateProject(
   // Authorization
   await requireSessionOrRedirect();
 
+  const t = await getTranslations("actions");
+
   try {
-    // Parse and validate form data
     const input = Object.fromEntries(formData.entries());
-    const parsed = projectSchema.safeParse(input);
+    const parsedData = schema.parse(input);
 
-    if (!parsed.success) {
-      console.error("Validation error", parsed.error);
-
-      return {
-        status: "error",
-        errorCode: "validationError",
-      };
-    }
-
-    // Update project
-    await updateProjectQuery(parsed.data);
+    await updateProjectQuery(parsedData);
     revalidatePath("/projects");
 
     return {
@@ -39,7 +52,7 @@ export async function updateProject(
 
     return {
       status: "error",
-      errorCode: "internalServerError",
+      message: t("updateProject.error.internalServerError"),
     };
   }
 }

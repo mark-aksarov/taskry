@@ -48,7 +48,7 @@ export function DeleteUserModal({
     startTransition(() => action(userId));
   };
 
-  useActionErrorToast(state, t("error.deleteError"));
+  useActionErrorToast(state);
 
   return (
     <ConfirmModal

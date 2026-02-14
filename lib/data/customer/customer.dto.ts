@@ -15,12 +15,12 @@ export interface CustomerFormDataDTO {
 }
 
 export interface CreateCustomerInputDTO {
-  bio: string | null;
+  bio?: string;
   fullName: string;
   email: string;
-  phoneNumber: string | null;
-  publicLink: string | null;
-  companyId: number | null;
+  phoneNumber?: string;
+  publicLink?: string;
+  companyId?: number;
 }
 
 export interface UpdateCustomerInputDTO {

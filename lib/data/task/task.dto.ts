@@ -19,12 +19,12 @@ export interface TaskFormDataDTO {
 
 export interface CreateTaskInputDTO {
   title: string;
-  description: string | null;
+  description?: string;
   deadline: Date;
   status: TaskStatus;
   projectId: number;
-  categoryId: number | null;
-  assigneeId: string | null;
+  categoryId?: number;
+  assigneeId?: string;
 }
 
 export interface UpdateTaskInputDTO {

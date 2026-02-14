@@ -3,13 +3,12 @@
 import z from "zod";
 import { ActionState } from "../types";
 import { revalidatePath } from "next/cache";
-import { coercedPositiveInt } from "@/lib/schemas/base";
+import { getTranslations } from "next-intl/server";
+import { positionId } from "@/lib/schemas/position";
 import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedirect";
 import { deletePositions as deletePositionsQuery } from "@/lib/data/position/position.dal";
 
-const schema = z.object({
-  ids: z.array(coercedPositiveInt).min(1),
-});
+const positionIds = z.array(positionId).min(1);
 
 export async function deletePositions(
   _prevState: ActionState,
@@ -18,21 +17,12 @@ export async function deletePositions(
   // Authorization
   await requireSessionOrRedirect();
 
+  const t = await getTranslations("actions");
+
   try {
-    // Parse and validate form data
-    const parsed = schema.safeParse({ ids });
+    const parsedIds = positionIds.parse(ids);
+    await deletePositionsQuery(parsedIds);
 
-    if (!parsed.success) {
-      console.error("Validation error", parsed.error);
-
-      return {
-        status: "error",
-        errorCode: "validationError",
-      };
-    }
-
-    // Delete positions
-    await deletePositionsQuery(parsed.data.ids);
     revalidatePath("/positions");
 
     return {
@@ -43,7 +33,7 @@ export async function deletePositions(
 
     return {
       status: "error",
-      errorCode: "internalServerError",
+      message: t("deletePosition.error.internalServerError"),
     };
   }
 }

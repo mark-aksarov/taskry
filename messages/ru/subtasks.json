@@ -1,15 +1,9 @@
 {
   "EditSubtaskForm": {
-    "error": {
-      "updateError": "Произошла ошибка на сервере. Не удалось обновить подзадачу."
-    },
     "submitButtonLabel": "Обновить подзадачу"
   },
 
   "NewSubtaskForm": {
-    "error": {
-      "creationError": "Произошла ошибка на сервере. Не удалось создать подзадачу."
-    },
     "submitButtonLabel": "Добавить подзадачу"
   },
 
@@ -17,22 +11,14 @@
     "heading": "Удалить подзадачу",
     "text": "Вы уверены, что хотите удалить подзадачу <strong>«{text}»</strong>?",
     "deleteButton": "Удалить",
-    "cancelButton": "Отмена",
-
-    "error": {
-      "deleteError": "Произошла ошибка на сервере. Не удалось удалить подзадачу."
-    }
+    "cancelButton": "Отмена"
   },
 
   "SubtaskActionMenuTrigger": {
     "edit": "Редактировать",
     "done": "Отметить как «Выполнено»",
     "undone": "Отметить как «Не выполнено»",
-    "delete": "Удалить",
-
-    "error": {
-      "updateStatusError": "Произошла ошибка на сервере. Не удалось обновить статус подзадачи."
-    }
+    "delete": "Удалить"
   },
 
   "SubtasksCheckboxGroup": {

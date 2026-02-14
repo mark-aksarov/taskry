@@ -41,7 +41,7 @@ export function NewCompanyForm({ createCompany }: NewCompanyFormProps) {
       <FormBaseBody>
         <CompanyNameTextField />
         <FormErrorBanner status={state.status} isPending={isPending}>
-          {t("error.creationError")}
+          {state.message}
         </FormErrorBanner>
       </FormBaseBody>
 

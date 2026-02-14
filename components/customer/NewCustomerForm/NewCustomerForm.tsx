@@ -54,7 +54,7 @@ export function NewCustomerForm({
         <CustomerPublicLinkTextField />
         {companySelect}
         <FormErrorBanner status={state.status} isPending={isPending}>
-          {t("creationError")}
+          {state.message}
         </FormErrorBanner>
       </FormBaseBody>
       <FormBaseFooter>

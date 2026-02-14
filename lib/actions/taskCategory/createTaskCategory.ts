@@ -1,12 +1,14 @@
 "use server";
 
+import z from "zod";
 import { ActionState } from "../types";
 import { revalidatePath } from "next/cache";
-import { taskCategorySchema } from "@/lib/schemas/taskCategory";
+import { getTranslations } from "next-intl/server";
+import { taskCategoryName } from "@/lib/schemas/taskCategory";
 import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedirect";
 import { createTaskCategory as createTaskCategoryQuery } from "@/lib/data/taskCategory/taskCategory.dal";
 
-const schema = taskCategorySchema.omit({ id: true });
+const schema = z.object({ name: taskCategoryName });
 
 export async function createTaskCategory(
   _prevState: ActionState,
@@ -15,22 +17,15 @@ export async function createTaskCategory(
   // Authorization
   await requireSessionOrRedirect();
 
+  const t = await getTranslations("actions");
+
   try {
-    // Parse and validate form data
-    const parsed = schema.safeParse({ name: formData.get("name") });
+    const parsedData = schema.parse({
+      name: formData.get("name"),
+    });
 
-    if (!parsed.success) {
-      console.error("Validation error", parsed.error);
-
-      return {
-        status: "error",
-        errorCode: "validationError",
-      };
-    }
-
-    // Create task
-    await createTaskCategoryQuery(parsed.data);
-    revalidatePath("/Tasks");
+    await createTaskCategoryQuery(parsedData);
+    revalidatePath("/task-categories");
 
     return {
       status: "success",
@@ -40,7 +35,7 @@ export async function createTaskCategory(
 
     return {
       status: "error",
-      errorCode: "internalServerError",
+      message: t("createTaskCategory.error.internalServerError"),
     };
   }
 }

@@ -1,12 +1,36 @@
 "use server";
 
+import {
+  customerBio,
+  customerEmail,
+  customerFullName,
+  customerPublicLink,
+  customerPhoneNumber,
+} from "@/lib/schemas/customer";
+
+import z from "zod";
 import { ActionState } from "../types";
 import { revalidatePath } from "next/cache";
-import { customerSchema } from "@/lib/schemas/customer";
+import { companyId } from "@/lib/schemas/company";
+import { getTranslations } from "next-intl/server";
+import { emptyStringToUndefined } from "@/lib/schemas/base";
 import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedirect";
 import { createCustomer as createCustomerQuery } from "@/lib/data/customer/customer.dal";
 
-const schema = customerSchema.omit({ id: true });
+const schema = z.object({
+  fullName: customerFullName,
+  bio: z.preprocess(emptyStringToUndefined, customerBio.optional()),
+  email: customerEmail,
+  phoneNumber: z.preprocess(
+    emptyStringToUndefined,
+    customerPhoneNumber.optional(),
+  ),
+  publicLink: z.preprocess(
+    emptyStringToUndefined,
+    customerPublicLink.optional(),
+  ),
+  companyId: z.preprocess(emptyStringToUndefined, companyId.optional()),
+});
 
 export async function createCustomer(
   _prevState: ActionState,
@@ -15,22 +39,13 @@ export async function createCustomer(
   // Authorization
   await requireSessionOrRedirect();
 
+  const t = await getTranslations("actions");
+
   try {
-    // Parse and validate form data
     const input = Object.fromEntries(formData.entries());
-    const parsed = schema.safeParse(input);
+    const parsedData = schema.parse(input);
 
-    if (!parsed.success) {
-      console.error("Validation error", parsed.error);
-
-      return {
-        status: "error",
-        errorCode: "validationError",
-      };
-    }
-
-    // Create customer
-    await createCustomerQuery(parsed.data);
+    await createCustomerQuery(parsedData);
     revalidatePath("/customers");
 
     return {
@@ -41,7 +56,7 @@ export async function createCustomer(
 
     return {
       status: "error",
-      errorCode: "internalServerError",
+      message: t("createCustomer.error.internalServerError"),
     };
   }
 }

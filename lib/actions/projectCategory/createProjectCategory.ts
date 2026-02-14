@@ -1,12 +1,14 @@
 "use server";
 
+import z from "zod";
 import { ActionState } from "../types";
 import { revalidatePath } from "next/cache";
-import { projectCategorySchema } from "@/lib/schemas/projectCategory";
+import { getTranslations } from "next-intl/server";
+import { projectCategoryName } from "@/lib/schemas/projectCategory";
 import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedirect";
 import { createProjectCategory as createProjectCategoryQuery } from "@/lib/data/projectCategory/projectCategory.dal";
 
-const schema = projectCategorySchema.omit({ id: true });
+const schema = z.object({ name: projectCategoryName });
 
 export async function createProjectCategory(
   _prevState: ActionState,
@@ -15,24 +17,15 @@ export async function createProjectCategory(
   // Authorization
   await requireSessionOrRedirect();
 
+  const t = await getTranslations("actions");
+
   try {
-    // Parse and validate form data
-    const parsed = schema.safeParse({
+    const parsedData = schema.parse({
       name: formData.get("name"),
     });
 
-    if (!parsed.success) {
-      console.error("Validation error", parsed.error);
-
-      return {
-        status: "error",
-        errorCode: "validationError",
-      };
-    }
-
-    // Create project
-    await createProjectCategoryQuery(parsed.data);
-    revalidatePath("/projects");
+    await createProjectCategoryQuery(parsedData);
+    revalidatePath("/project-categories");
 
     return {
       status: "success",
@@ -42,7 +35,7 @@ export async function createProjectCategory(
 
     return {
       status: "error",
-      errorCode: "internalServerError",
+      message: t("createProjectCategory.error.internalServerError"),
     };
   }
 }

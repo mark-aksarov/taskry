@@ -7,12 +7,12 @@ import {
 import z from "zod";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
+import { customerId } from "@/lib/schemas/customer";
 import { NextRequest, NextResponse } from "next/server";
-import { coercedPositiveInt } from "@/lib/schemas/base";
 import { getCustomerDetail } from "@/lib/data/customer/customer.dal";
 import { getCustomerFormData } from "@/lib/data/customer/customer.dal";
 
-const schema = z.object({ id: coercedPositiveInt });
+const schema = z.object({ id: customerId });
 
 export async function GET(
   req: NextRequest,

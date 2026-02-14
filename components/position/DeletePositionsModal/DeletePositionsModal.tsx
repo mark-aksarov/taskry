@@ -45,7 +45,7 @@ export function DeletePositionsModal({
     }
   }, [state.status, onSuccess]);
 
-  useActionErrorToast(state, t("deleteError"));
+  useActionErrorToast(state);
 
   const handleDelete = () => {
     startTransition(() => action(positionIds));

@@ -54,7 +54,6 @@ describe("createProject", () => {
   it("should throw error if project category does not found", async () => {
     const createProjectPromise = createProject({
       title: "Project 1",
-      description: null,
       deadline: new Date("2025-12-31"),
       categoryId: 999,
       customerId: 1,
@@ -70,7 +69,6 @@ describe("createProject", () => {
   it("should throw error if customer does not found", async () => {
     const createProjectPromise = createProject({
       title: "Project 1",
-      description: null,
       deadline: new Date("2025-12-31"),
       categoryId: 1,
       customerId: 999,
@@ -84,7 +82,6 @@ describe("createProject", () => {
   it("should throw error if category does not belong to the workspace", async () => {
     const createProjectPromise = createProject({
       title: "Project 1",
-      description: null,
       deadline: new Date("2025-12-31"),
       categoryId: 2,
       customerId: 1,
@@ -100,7 +97,6 @@ describe("createProject", () => {
   it("should throw error if customer does not belong to the workspace", async () => {
     const createProjectPromise = createProject({
       title: "Project 1",
-      description: null,
       deadline: new Date("2025-12-31"),
       categoryId: 1,
       customerId: 3,
@@ -116,11 +112,9 @@ describe("createProject", () => {
   it("should create a project without optional fields", async () => {
     const result = await createProject({
       title: "Project 1",
-      description: null,
       deadline: new Date("2025-12-31"),
       categoryId: 1,
       status: ProjectStatus.active,
-      customerId: null,
     });
 
     expect(result.id).toBeDefined();
@@ -135,7 +129,6 @@ describe("createProject", () => {
 
       const createInput = {
         title: "Project 1",
-        description: null,
         deadline: new Date("2025-12-31"),
         categoryId: 1,
         customerId: 1,

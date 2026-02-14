@@ -7,8 +7,8 @@ import {
 import z from "zod";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
+import { projectId } from "@/lib/schemas/project";
 import { NextRequest, NextResponse } from "next/server";
-import { coercedPositiveInt } from "@/lib/schemas/base";
 import { getCommentList } from "@/lib/data/comment/comment.dal";
 
 export async function GET(
@@ -29,7 +29,7 @@ export async function GET(
     const data = await params;
 
     const schema = z.object({
-      id: coercedPositiveInt,
+      id: projectId,
     });
 
     const parse = schema.safeParse({ id: data.id });
@@ -38,11 +38,9 @@ export async function GET(
       return badRequest("Invalid project ID");
     }
 
-    const { id: projectId } = parse.data;
-
     // Fetch comments
     const comments = await getCommentList({
-      projectId,
+      projectId: parse.data.id,
     });
 
     return NextResponse.json(comments);

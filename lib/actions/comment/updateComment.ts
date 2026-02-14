@@ -1,11 +1,16 @@
 "use server";
 
+import z from "zod";
 import { ActionState } from "../types";
-import { commentSchema } from "@/lib/schemas/comment";
+import { getTranslations } from "next-intl/server";
+import { commentId, commentContent } from "@/lib/schemas/comment";
 import { updateComment as updateCommentQuery } from "@/lib/data/comment/comment.dal";
 import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedirect";
 
-const schema = commentSchema.pick({ id: true, content: true });
+const schema = z.object({
+  id: commentId,
+  content: commentContent,
+});
 
 export async function updateComment(
   _prevState: ActionState,
@@ -14,24 +19,13 @@ export async function updateComment(
   // Authorization
   await requireSessionOrRedirect();
 
+  const t = await getTranslations("actions");
+
   try {
-    // Parse and validate form data
-    const parsed = schema.safeParse({
-      id: formData.get("id"),
-      content: formData.get("content"),
-    });
+    const input = Object.fromEntries(formData.entries());
+    const parsedData = schema.parse(input);
 
-    if (!parsed.success) {
-      console.error("Validation error", parsed.error);
-
-      return {
-        status: "error",
-        errorCode: "validationError",
-      };
-    }
-
-    // Update comment
-    await updateCommentQuery(parsed.data);
+    await updateCommentQuery(parsedData);
 
     return {
       status: "success",
@@ -41,7 +35,7 @@ export async function updateComment(
 
     return {
       status: "error",
-      errorCode: "internalServerError",
+      message: t("updateComment.error.internalServerError"),
     };
   }
 }

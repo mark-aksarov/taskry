@@ -50,7 +50,7 @@ export function DeleteSubtaskModal({
     }
   }, [state, mutate]);
 
-  useActionErrorToast(state, t("error.deleteError"));
+  useActionErrorToast(state);
 
   return (
     <ConfirmModal

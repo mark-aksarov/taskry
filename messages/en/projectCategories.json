@@ -1,6 +1,5 @@
 {
   "NewProjectCategoryForm": {
-    "creationError": "A server error occurred. Failed to create project category.",
     "submitButtonLabel": "Create category"
   },
   "NewProjectCategoryModal": {
@@ -28,21 +27,18 @@
     "delete": "Delete"
   },
   "EditProjectCategoryForm": {
-    "updateError": "A server error occurred. Failed to update project category.",
     "submitButtonLabel": "Update project category"
   },
   "EditProjectCategoryModal": {
     "title": "Edit project category"
   },
   "DeleteProjectCategoryModal": {
-    "deleteError": "A server error occurred. Failed to delete project category.",
     "heading": "Delete project category",
     "text": "Are you sure you want to delete project category <strong>«{name}»</strong>? All contents will be permanently removed.",
     "cancelButton": "Cancel",
     "deleteButton": "Delete"
   },
   "DeleteProjectCategoriesModal": {
-    "deleteError": "A server error occurred. Failed to delete project categories.",
     "heading": "Delete project categories",
     "text": "Are you sure you want to delete <strong>{count} project categories</strong>? All contents will be permanently removed.",
     "cancelButton": "Cancel",

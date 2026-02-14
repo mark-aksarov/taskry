@@ -1,12 +1,18 @@
 "use server";
 
+import z from "zod";
 import { ActionState } from "../types";
 import { revalidatePath } from "next/cache";
-import { subtaskSchema } from "@/lib/schemas/subtask";
+import { taskId } from "@/lib/schemas/task";
+import { getTranslations } from "next-intl/server";
+import { subtaskIsDone, subtaskText } from "@/lib/schemas/subtask";
 import { createSubtask as createSubtaskQuery } from "@/lib/data/subtask/subtask.dal";
 import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedirect";
 
-const schema = subtaskSchema.omit({ id: true });
+const schema = z.object({
+  text: subtaskText,
+  taskId: taskId,
+});
 
 export async function createSubtask(
   _prevState: ActionState,
@@ -15,25 +21,14 @@ export async function createSubtask(
   // Authorization
   await requireSessionOrRedirect();
 
+  const t = await getTranslations("actions");
+
   try {
-    // Parse and validate form data
     const input = Object.fromEntries(formData.entries());
-    const parsed = schema.safeParse(input);
+    const parsedData = schema.parse(input);
 
-    if (!parsed.success) {
-      console.error("Validation error", parsed.error);
-
-      return {
-        status: "error",
-        errorCode: "validationError",
-      };
-    }
-
-    // Execute create
-    await createSubtaskQuery(parsed.data);
-
-    // Revalidation
-    revalidatePath(`/tasks/${parsed.data.taskId}`);
+    await createSubtaskQuery(parsedData);
+    revalidatePath(`/tasks/${parsedData.taskId}`);
 
     return {
       status: "success",
@@ -43,7 +38,7 @@ export async function createSubtask(
 
     return {
       status: "error",
-      errorCode: "internalServerError",
+      message: t("createSubtask.error.internalServerError"),
     };
   }
 }

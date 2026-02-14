@@ -48,7 +48,7 @@ export function EditTaskCategoryForm({
         <input type="hidden" name="id" value={taskCategoryId} />
         <TaskCategoryNameTextField defaultValue={nameDefaultValue} />
         <FormErrorBanner status={state.status} isPending={isPending}>
-          {t("updateError")}
+          {state.message}
         </FormErrorBanner>
       </FormBaseBody>
       <FormBaseFooter>

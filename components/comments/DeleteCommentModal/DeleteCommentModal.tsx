@@ -47,7 +47,7 @@ export function DeleteCommentModal({
     }
   }, [state, mutate]);
 
-  useActionErrorToast(state, t("error.deleteFailed"));
+  useActionErrorToast(state);
 
   return (
     <ConfirmModal

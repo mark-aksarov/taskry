@@ -55,7 +55,7 @@ export function NewProjectForm({
         {projectCategorySelect}
         {projectCustomerSelect}
         <FormErrorBanner status={state.status} isPending={isPending}>
-          {t("creationError")}
+          {state.message}
         </FormErrorBanner>
       </FormBaseBody>
       <FormBaseFooter>

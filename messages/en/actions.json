@@ -1,7 +1,188 @@
 {
   "common": {
-    "validation": {
-      "internalServerError": "An internal server error occurred. Please try again later."
+    "error": {
+      "internalServerError": "A server error occurred. Please try again later.",
+      "authError": "An server error occurred. Details: {message}"
+    }
+  },
+  "createPosition": {
+    "error": {
+      "internalServerError": "A server error occurred. Failed to create position."
+    }
+  },
+  "updatePosition": {
+    "error": {
+      "internalServerError": "A server error occurred. Failed to update position."
+    }
+  },
+  "deletePosition": {
+    "error": {
+      "internalServerError": "A server error occurred. Failed to delete position."
+    }
+  },
+  "forgetPassword": {
+    "error": {
+      "internalServerError": "A server error occurred. Failed to reset password."
+    }
+  },
+  "resetPassword": {
+    "error": {
+      "internalServerError": "A server error occurred. Failed to reset password."
+    }
+  },
+  "signIn": {
+    "error": {
+      "internalServerError": "A server error occurred. Failed to sign in."
+    }
+  },
+  "signUp": {
+    "error": {
+      "internalServerError": "A server error occurred. Failed to sign up."
+    }
+  },
+  "deleteComment": {
+    "error": {
+      "internalServerError": "A server error occurred. Failed to delete comment."
+    }
+  },
+  "sendComment": {
+    "error": {
+      "internalServerError": "A server error occurred. Failed to send comment."
+    }
+  },
+  "updateComment": {
+    "error": {
+      "internalServerError": "A server error occurred. Failed to update comment."
+    }
+  },
+  "createCompany": {
+    "error": {
+      "internalServerError": "A server error occurred. Failed to create company."
+    }
+  },
+  "createCustomer": {
+    "error": {
+      "internalServerError": "A server error occurred. Failed to create customer."
+    }
+  },
+  "deleteCustomer": {
+    "error": {
+      "internalServerError": "A server error occurred. Failed to delete customer."
+    }
+  },
+  "updateCustomer": {
+    "error": {
+      "internalServerError": "A server error occurred. Failed to update customer."
+    }
+  },
+  "createProject": {
+    "error": {
+      "internalServerError": "A server error occurred. Failed to create project."
+    }
+  },
+  "deleteProject": {
+    "error": {
+      "internalServerError": "A server error occurred. Failed to delete project."
+    }
+  },
+  "updateProject": {
+    "error": {
+      "internalServerError": "A server error occurred. Failed to update project."
+    }
+  },
+  "updateProjectStatuses": {
+    "error": {
+      "internalServerError": "A server error occurred. Failed to update project statuses."
+    }
+  },
+  "createTask": {
+    "error": {
+      "internalServerError": "A server error occurred. Failed to create task."
+    }
+  },
+  "deleteTask": {
+    "error": {
+      "internalServerError": "A server error occurred. Failed to delete task."
+    }
+  },
+  "updateTask": {
+    "error": {
+      "internalServerError": "A server error occurred. Failed to update task."
+    }
+  },
+  "updateTaskStatuses": {
+    "error": {
+      "internalServerError": "A server error occurred. Failed to update task statuses."
+    }
+  },
+  "createProjectCategory": {
+    "error": {
+      "internalServerError": "A server error occurred. Failed to create project category."
+    }
+  },
+  "deleteProjectCategory": {
+    "error": {
+      "internalServerError": "A server error occurred. Failed to delete project categories."
+    }
+  },
+  "updateProjectCategory": {
+    "error": {
+      "internalServerError": "A server error occurred. Failed to update project category."
+    }
+  },
+  "createTaskCategory": {
+    "error": {
+      "internalServerError": "A server error occurred. Failed to create task category."
+    }
+  },
+  "deleteTaskCategory": {
+    "error": {
+      "internalServerError": "A server error occurred. Failed to delete task categories."
+    }
+  },
+  "updateTaskCategory": {
+    "error": {
+      "internalServerError": "A server error occurred. Failed to update task category."
+    }
+  },
+  "createSubtask": {
+    "error": {
+      "internalServerError": "A server error occurred. Failed to create subtask."
+    }
+  },
+  "deleteSubtask": {
+    "error": {
+      "internalServerError": "A server error occurred. Failed to delete subtask."
+    }
+  },
+  "updateSubtask": {
+    "error": {
+      "internalServerError": "A server error occurred. Failed to update subtask."
+    }
+  },
+  "toggleSubtask": {
+    "error": {
+      "internalServerError": "A server error occurred. Failed to toggle subtask status."
+    }
+  },
+  "changePassword": {
+    "error": {
+      "internalServerError": "A server error occurred. Failed to change password."
+    }
+  },
+  "createUser": {
+    "error": {
+      "internalServerError": "A server error occurred. Failed to create user."
+    }
+  },
+  "deleteUser": {
+    "error": {
+      "internalServerError": "A server error occurred. Failed to delete user."
+    }
+  },
+  "updateUser": {
+    "error": {
+      "internalServerError": "A server error occurred. Failed to update user."
     }
   }
 }

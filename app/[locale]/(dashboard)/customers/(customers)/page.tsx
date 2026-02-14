@@ -1,14 +1,14 @@
 import {
   dateSearchParam,
   pageSearchParam,
-  arraySearchParam,
   booleanSearchParam,
   pageSizeSearchParam,
-  coercedPositiveInt,
+  searchParamToArray,
 } from "@/lib/schemas/base";
 
 import { z } from "zod";
 import { CustomersPage } from "./CustomersPage";
+import { companyId } from "@/lib/schemas/company";
 import { hasGuestRole } from "@/lib/utils/hasGuestRole";
 import { CustomersPageEmpty } from "./CustomersPageEmpty";
 import { createCompany } from "@/lib/actions/company/createCompany";
@@ -32,7 +32,10 @@ const searchParamsSchema = z.object({
   hasNoActiveProjects: booleanSearchParam,
   hasActiveProjects: booleanSearchParam,
   hasOverdueProjects: booleanSearchParam,
-  company: arraySearchParam(coercedPositiveInt),
+  company: z.preprocess(
+    searchParamToArray,
+    z.array(companyId).optional().catch(undefined),
+  ),
 });
 
 export default async function AppCustomersPage({

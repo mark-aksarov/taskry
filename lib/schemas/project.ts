@@ -1,24 +1,8 @@
-import {
-  emptyStringToNull,
-  coercedPositiveInt,
-  emptyStringToUndefined,
-} from "./base";
-
 import z from "zod";
 import { ProjectStatus } from "@/generated/prisma/enums";
 
-export const projectSchema = z.object({
-  id: coercedPositiveInt,
-  title: z.preprocess(
-    emptyStringToUndefined,
-    z.string().trim().min(1).max(255),
-  ),
-  description: z.preprocess(
-    emptyStringToNull,
-    z.string().trim().min(1).max(5000).nullable(),
-  ),
-  deadline: z.coerce.date("yyyy-MM-dd"),
-  status: z.enum(ProjectStatus),
-  categoryId: z.preprocess(emptyStringToNull, coercedPositiveInt.nullable()),
-  customerId: z.preprocess(emptyStringToNull, coercedPositiveInt.nullable()),
-});
+export const projectId = z.coerce.number().int().positive();
+export const projectTitle = z.string().trim().min(1).max(255);
+export const projectDescription = z.string().trim().min(1).max(5000);
+export const projectDeadline = z.coerce.date("yyyy-MM-dd");
+export const projectStatus = z.enum(ProjectStatus);

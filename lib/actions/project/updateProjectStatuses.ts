@@ -3,14 +3,15 @@
 import z from "zod";
 import { ActionState } from "../types";
 import { revalidatePath } from "next/cache";
-import { coercedPositiveInt } from "@/lib/schemas/base";
+import { getTranslations } from "next-intl/server";
 import { ProjectStatus } from "@/generated/prisma/enums";
+import { projectId, projectStatus } from "@/lib/schemas/project";
 import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedirect";
 import { updateProjectStatuses as updateProjectStatusesQuery } from "@/lib/data/project/project.dal";
 
 const schema = z.object({
-  ids: z.array(coercedPositiveInt).min(1),
-  nextStatus: z.enum(ProjectStatus),
+  ids: z.array(projectId).min(1),
+  nextStatus: projectStatus,
 });
 
 export async function updateProjectStatuses(
@@ -20,23 +21,11 @@ export async function updateProjectStatuses(
   // Authorization
   await requireSessionOrRedirect();
 
+  const t = await getTranslations("actions");
+
   try {
-    // Parse and validate form data
-    const parsed = schema.safeParse({ ids, nextStatus });
-
-    if (!parsed.success) {
-      console.error("Validation error", parsed.error);
-
-      return {
-        status: "error",
-        errorCode: "validationError",
-      };
-    }
-
-    // Execute update
-    await updateProjectStatusesQuery(parsed.data.ids, parsed.data.nextStatus);
-
-    // Revalidation
+    const parsedData = schema.parse({ ids, nextStatus });
+    await updateProjectStatusesQuery(parsedData.ids, parsedData.nextStatus);
     revalidatePath("/projects");
 
     return {
@@ -47,7 +36,7 @@ export async function updateProjectStatuses(
 
     return {
       status: "error",
-      errorCode: "internalServerError",
+      message: t("updateProjectStatuses.error.internalServerError"),
     };
   }
 }

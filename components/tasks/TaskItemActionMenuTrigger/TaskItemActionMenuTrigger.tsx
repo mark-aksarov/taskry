@@ -67,7 +67,7 @@ export function TaskItemActionMenuTrigger({
   ] = useActionState(updateStatusAction, initialState);
 
   // Show toast for status update errors
-  useActionErrorToast(updateTaskStatusState, t("error.updateStatusError"));
+  useActionErrorToast(updateTaskStatusState);
 
   // Handle menu actions
   function handleAction(key: Key) {

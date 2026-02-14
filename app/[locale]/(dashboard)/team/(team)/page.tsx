@@ -1,13 +1,14 @@
 import {
-  arraySearchParam,
   booleanSearchParam,
   pageSearchParam,
   pageSizeSearchParam,
+  searchParamToArray,
 } from "@/lib/schemas/base";
 
 import { z } from "zod";
 import { UsersPage } from "./UsersPage";
 import { UsersPageEmpty } from "./UsersPageEmpty";
+import { positionId } from "@/lib/schemas/position";
 import { hasOwnerRole } from "@/lib/utils/hasOwnerRole";
 import { getUserCount } from "@/lib/data/user/user.dal";
 import { hasGuestRole } from "@/lib/utils/hasGuestRole";
@@ -28,7 +29,10 @@ const searchParamsSchema = z.object({
   hasActiveTasks: booleanSearchParam,
   hasOverdueTasks: booleanSearchParam,
   sort: z.enum(["fullName", "position"]).catch("fullName"),
-  position: arraySearchParam(z.coerce.number()),
+  position: z.preprocess(
+    searchParamToArray,
+    z.array(positionId).optional().catch(undefined),
+  ),
 });
 
 export default async function AppUsersPage({

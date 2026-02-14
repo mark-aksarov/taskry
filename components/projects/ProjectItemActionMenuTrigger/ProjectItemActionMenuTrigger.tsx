@@ -67,7 +67,7 @@ export function ProjectItemActionMenuTrigger({
   ] = useActionState(updateStatusAction, updateStatusInitialState);
 
   // Show toast for status update errors
-  useActionErrorToast(updateProjectStatusState, t("error.updateStatusError"));
+  useActionErrorToast(updateProjectStatusState);
 
   // Handle menu actions
   const handleAction = (key: Key) => {

@@ -1,12 +1,16 @@
 "use server";
 
+import z from "zod";
 import { ActionState } from "../types";
 import { revalidatePath } from "next/cache";
-import { positionSchema } from "@/lib/schemas/position";
+import { getTranslations } from "next-intl/server";
+import { positionName } from "@/lib/schemas/position";
 import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedirect";
 import { createPosition as createPositionQuery } from "@/lib/data/position/position.dal";
 
-const schema = positionSchema.omit({ id: true });
+const schema = z.object({
+  name: positionName,
+});
 
 export async function createPosition(
   _prevState: ActionState,
@@ -15,22 +19,12 @@ export async function createPosition(
   // Authorization
   await requireSessionOrRedirect();
 
+  const t = await getTranslations("actions");
+
   try {
-    // Parse and validate form data
-    const parsed = schema.safeParse({ name: formData.get("name") });
-
-    if (!parsed.success) {
-      console.error("Validation error", parsed.error);
-
-      return {
-        status: "error",
-        errorCode: "validationError",
-      };
-    }
-
-    // Create position
-    await createPositionQuery(parsed.data);
-    revalidatePath("/users");
+    const data = schema.parse({ name: formData.get("name") });
+    await createPositionQuery(data);
+    revalidatePath("/positions");
 
     return {
       status: "success",
@@ -40,7 +34,7 @@ export async function createPosition(
 
     return {
       status: "error",
-      errorCode: "internalServerError",
+      message: t("createPosition.error.internalServerError"),
     };
   }
 }

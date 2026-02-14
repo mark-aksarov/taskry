@@ -3,14 +3,15 @@
 import z from "zod";
 import { ActionState } from "../types";
 import { revalidatePath } from "next/cache";
+import { getTranslations } from "next-intl/server";
 import { TaskStatus } from "@/generated/prisma/enums";
-import { coercedPositiveInt } from "@/lib/schemas/base";
+import { taskId, taskStatus } from "@/lib/schemas/task";
 import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedirect";
 import { updateTaskStatuses as updateTaskStatusesQuery } from "@/lib/data/task/task.dal";
 
 const schema = z.object({
-  ids: z.array(coercedPositiveInt).min(1),
-  nextStatus: z.enum(TaskStatus),
+  ids: z.array(taskId).min(1),
+  nextStatus: taskStatus,
 });
 
 export async function updateTaskStatuses(
@@ -20,22 +21,11 @@ export async function updateTaskStatuses(
   // Authorization
   await requireSessionOrRedirect();
 
+  const t = await getTranslations("actions");
+
   try {
-    // Parse and validate form data
-    const parsed = schema.safeParse({ ids, nextStatus });
-
-    if (!parsed.success) {
-      console.error("Validation error", parsed.error);
-
-      return {
-        status: "error",
-        errorCode: "validationError",
-      };
-    }
-
-    // Update tasks
-    await updateTaskStatusesQuery(parsed.data.ids, parsed.data.nextStatus);
-
+    const parsedData = schema.parse({ ids, nextStatus });
+    await updateTaskStatusesQuery(parsedData.ids, parsedData.nextStatus);
     revalidatePath("/tasks");
 
     return {
@@ -46,7 +36,7 @@ export async function updateTaskStatuses(
 
     return {
       status: "error",
-      errorCode: "internalServerError",
+      message: t("updateTaskStatuses.error.internalServerError"),
     };
   }
 }

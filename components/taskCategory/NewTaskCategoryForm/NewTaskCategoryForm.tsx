@@ -43,7 +43,7 @@ export function NewTaskCategoryForm({
       <FormBaseBody>
         <TaskCategoryNameTextField />
         <FormErrorBanner status={state.status} isPending={isPending}>
-          {t("error.creationError")}
+          {state.message}
         </FormErrorBanner>
       </FormBaseBody>
 

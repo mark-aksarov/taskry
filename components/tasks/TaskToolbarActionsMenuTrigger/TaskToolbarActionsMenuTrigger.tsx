@@ -73,7 +73,7 @@ export const TaskToolbarActionsMenuTrigger = ({
   };
 
   // Show toast if updating status fails
-  useActionErrorToast(updateTaskStatusState, t("error.updateStatusError"));
+  useActionErrorToast(updateTaskStatusState);
 
   const {
     selectedIds: taskIds,

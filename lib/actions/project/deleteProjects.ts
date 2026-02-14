@@ -3,13 +3,12 @@
 import z from "zod";
 import { ActionState } from "../types";
 import { revalidatePath } from "next/cache";
-import { coercedPositiveInt } from "@/lib/schemas/base";
+import { projectId } from "@/lib/schemas/project";
+import { getTranslations } from "next-intl/server";
 import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedirect";
 import { deleteProjects as deleteProjectQuery } from "@/lib/data/project/project.dal";
 
-const schema = z.object({
-  ids: z.array(coercedPositiveInt).min(1),
-});
+const projectIds = z.array(projectId).min(1);
 
 export async function deleteProjects(
   _prevState: ActionState,
@@ -18,21 +17,12 @@ export async function deleteProjects(
   // Authorization
   await requireSessionOrRedirect();
 
+  const t = await getTranslations("actions");
+
   try {
-    // Parse and validate form data
-    const parsed = schema.safeParse({ ids });
+    const parsedIds = projectIds.parse(ids);
 
-    if (!parsed.success) {
-      console.error("Validation error", parsed.error);
-
-      return {
-        status: "error",
-        errorCode: "validationError",
-      };
-    }
-
-    // Delete project
-    await deleteProjectQuery(parsed.data.ids);
+    await deleteProjectQuery(parsedIds);
     revalidatePath("/projects");
 
     return {
@@ -43,7 +33,7 @@ export async function deleteProjects(
 
     return {
       status: "error",
-      errorCode: "internalServerError",
+      message: t("deleteProject.error.internalServerError"),
     };
   }
 }

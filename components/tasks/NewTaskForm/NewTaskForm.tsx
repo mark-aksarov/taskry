@@ -55,7 +55,7 @@ export function NewTaskForm({
         {projectSelect}
         {assigneeSelect}
         <FormErrorBanner status={state.status} isPending={isPending}>
-          {t("error.creationError")}
+          {state.message}
         </FormErrorBanner>
       </FormBaseBody>
       <FormBaseFooter>

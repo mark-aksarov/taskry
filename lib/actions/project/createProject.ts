@@ -1,12 +1,36 @@
 "use server";
 
+import {
+  projectTitle,
+  projectStatus,
+  projectDeadline,
+  projectDescription,
+} from "@/lib/schemas/project";
+
+import z from "zod";
 import { ActionState } from "../types";
 import { revalidatePath } from "next/cache";
-import { projectSchema } from "@/lib/schemas/project";
+import { getTranslations } from "next-intl/server";
+import { customerId } from "@/lib/schemas/customer";
+import { emptyStringToUndefined } from "@/lib/schemas/base";
+import { projectCategoryId } from "@/lib/schemas/projectCategory";
 import { createProject as createProjectQuery } from "@/lib/data/project/project.dal";
 import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedirect";
 
-const schema = projectSchema.omit({ id: true });
+const schema = z.object({
+  title: projectTitle,
+  description: z.preprocess(
+    emptyStringToUndefined,
+    projectDescription.optional(),
+  ),
+  deadline: projectDeadline,
+  status: projectStatus,
+  categoryId: z.preprocess(
+    emptyStringToUndefined,
+    projectCategoryId.optional(),
+  ),
+  customerId: z.preprocess(emptyStringToUndefined, customerId.optional()),
+});
 
 export async function createProject(
   _prevState: ActionState,
@@ -15,22 +39,13 @@ export async function createProject(
   // Authorization
   await requireSessionOrRedirect();
 
+  const t = await getTranslations("actions");
+
   try {
-    // Parse and validate form data
     const input = Object.fromEntries(formData.entries());
-    const parsed = schema.safeParse(input);
+    const parsedData = schema.parse(input);
 
-    if (!parsed.success) {
-      console.error("Validation error", parsed.error);
-
-      return {
-        status: "error",
-        errorCode: "validationError",
-      };
-    }
-
-    // Create project
-    await createProjectQuery(parsed.data);
+    await createProjectQuery(parsedData);
     revalidatePath("/projects");
 
     return {
@@ -41,7 +56,7 @@ export async function createProject(
 
     return {
       status: "error",
-      errorCode: "internalServerError",
+      message: t("createProject.error.internalServerError"),
     };
   }
 }

@@ -1,12 +1,20 @@
 "use server";
 
+import z from "zod";
 import { ActionState } from "../types";
 import { revalidatePath } from "next/cache";
-import { commentSchema } from "@/lib/schemas/comment";
+import { taskId } from "@/lib/schemas/task";
+import { projectId } from "@/lib/schemas/project";
+import { getTranslations } from "next-intl/server";
+import { commentContent } from "@/lib/schemas/comment";
 import { createComment } from "@/lib/data/comment/comment.dal";
 import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedirect";
 
-const schema = commentSchema.omit({ id: true });
+const schema = z.object({
+  content: commentContent,
+  taskId: taskId.optional(),
+  projectId: projectId.optional(),
+});
 
 export async function sendComment(
   _prevState: ActionState,
@@ -15,31 +23,19 @@ export async function sendComment(
   // Authorization
   await requireSessionOrRedirect();
 
+  const t = await getTranslations("actions");
+
   try {
-    // Parse and validate form data
-    const parsed = schema.safeParse({
-      content: formData.get("content"),
-      taskId: formData.get("taskId"),
-      projectId: formData.get("projectId"),
-    });
+    const input = Object.fromEntries(formData.entries());
+    const parsedData = schema.parse(input);
 
-    if (!parsed.success) {
-      console.error("Validation error", parsed.error);
+    await createComment(parsedData);
 
-      return {
-        status: "error",
-        errorCode: "validationError",
-      };
-    }
-
-    // Create comment
-    await createComment(parsed.data);
-
-    if (parsed.data.projectId) {
+    if (parsedData.projectId) {
       revalidatePath("/projects");
     }
 
-    if (parsed.data.taskId) {
+    if (parsedData.taskId) {
       revalidatePath("/tasks");
     }
 
@@ -51,7 +47,7 @@ export async function sendComment(
 
     return {
       status: "error",
-      errorCode: "internalServerError",
+      message: t("sendComment.error.internalServerError"),
     };
   }
 }
