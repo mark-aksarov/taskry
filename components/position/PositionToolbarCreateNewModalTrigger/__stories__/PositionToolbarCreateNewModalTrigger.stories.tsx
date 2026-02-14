@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { NewPositionForm } from "../../NewPositionForm";
+import { NewPositionFormStory } from "../../NewPositionForm/__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { Default as NewPositionFormStory } from "../../NewPositionForm/__stories__";
 import { PositionToolbarCreateNewModalTrigger } from "../PositionToolbarCreateNewModalTrigger";
 
 const meta = {

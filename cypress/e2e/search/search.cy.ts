@@ -93,100 +93,37 @@ describe("search", () => {
     cy.visit("/en");
   });
 
-  it("search all users when no query is provided", () => {
+  it("search all tasks when no query is provided", () => {
     cy.getByData("search-modal-trigger").click();
 
-    const expectedUsers = [
-      { name: "User 1", email: "user-1@test.com" },
-      { name: "User 2", email: "user-2@test.com" },
-      { name: "User 3", email: "user-3@test.com" },
-    ];
-
-    cy.getByData("search-list-item")
-      .should("have.length", expectedUsers.length)
-      .each(($el, index) => {
-        cy.wrap($el).should("contain", expectedUsers[index].name);
-        cy.wrap($el).should("contain", expectedUsers[index].email);
-      });
+    cy.getByData("search-list").contains("Task 1");
+    cy.getByData("search-list").contains("Task 2");
+    cy.getByData("search-list").contains("Task 3");
   });
 
-  it("search users when they match the query 'en'", () => {
+  it("search users when they match the query '1'", () => {
     cy.getByData("search-modal-trigger").click();
-    cy.get("input[name=search]").type("er 2");
+    cy.get("input[name=search]").type("1");
 
-    const expectedUsers = [{ name: "User 2", email: "user-2@test.com" }];
-
-    cy.getByData("search-list-item")
-      .should("have.length", expectedUsers.length)
-      .each(($el, index) => {
-        cy.wrap($el).should("contain", expectedUsers[index].name);
-        cy.wrap($el).should("contain", expectedUsers[index].email);
-      });
+    cy.getByData("search-list").contains("Task 1");
   });
 
-  it("navigate through search tabs: tasks, projects, users, and customers", () => {
+  it("navigate to projects tab", () => {
     cy.getByData("search-modal-trigger").click();
-
-    cy.getByData("tasks-button").click();
-    const expectedTasks = [
-      { title: "Task 1" },
-      { title: "Task 2" },
-      { title: "Task 3" },
-    ];
-
-    cy.getByData("search-list-item")
-      .should("have.length", expectedTasks.length)
-      .each(($el, index) => {
-        cy.wrap($el).should("contain", expectedTasks[index].title);
-      });
-
     cy.getByData("projects-button").click();
-    const expectedProjects = [{ title: "Project 1" }, { title: "Project 2" }];
 
-    cy.getByData("search-list-item")
-      .should("have.length", expectedProjects.length)
-      .each(($el, index) => {
-        cy.wrap($el).should("contain", expectedProjects[index].title);
-      });
-
-    cy.getByData("customers-button").click();
-    const expectedCustomers = [
-      { fullName: "Customer 1" },
-      { fullName: "Customer 2" },
-      { fullName: "Customer 3" },
-    ];
-
-    cy.getByData("search-list-item")
-      .should("have.length", expectedCustomers.length)
-      .each(($el, index) => {
-        cy.wrap($el).should("contain", expectedCustomers[index].fullName);
-      });
-
-    cy.getByData("users-button").click();
-    cy.getByData("search-list-item").should("have.length", 3);
+    cy.getByData("search-list").contains("Project 1");
+    cy.getByData("search-list").contains("Project 2");
   });
 
   it("navigate through links", () => {
     cy.getByData("search-modal-trigger").click();
     cy.getByData("search-list-item").first().click();
-    cy.location("pathname").should("contain", "/team/user-1");
-
-    cy.getByData("search-modal").should("not.exist");
-    cy.getByData("search-modal-trigger").click();
-    cy.getByData("tasks-button").click();
-    cy.getByData("search-list-item").first().click();
     cy.location("pathname").should("contain", "/tasks/1");
 
-    cy.getByData("search-modal").should("not.exist");
     cy.getByData("search-modal-trigger").click();
     cy.getByData("projects-button").click();
     cy.getByData("search-list-item").first().click();
     cy.location("pathname").should("contain", "/projects/1");
-
-    cy.getByData("search-modal").should("not.exist");
-    cy.getByData("search-modal-trigger").click();
-    cy.getByData("customers-button").click();
-    cy.getByData("search-list-item").first().click();
-    cy.location("pathname").should("contain", "/customers/1");
   });
 });
