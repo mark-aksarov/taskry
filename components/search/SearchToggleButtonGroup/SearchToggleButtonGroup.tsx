@@ -26,17 +26,11 @@ export function SearchToggleButtonGroup({
         variant="contrast"
         className="p-4"
       >
-        <ToggleButton data-test="users-button" id="users">
-          {t("users")}
-        </ToggleButton>
         <ToggleButton data-test="tasks-button" id="tasks">
           {t("tasks")}
         </ToggleButton>
         <ToggleButton data-test="projects-button" id="projects">
           {t("projects")}
-        </ToggleButton>
-        <ToggleButton data-test="customers-button" id="customers">
-          {t("customers")}
         </ToggleButton>
       </ToggleButtonGroup>
     </div>

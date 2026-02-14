@@ -20,7 +20,6 @@ const styles = tv({
 });
 
 interface SearchListItemProps {
-  imageSlot: React.ReactNode;
   titleSlot: React.ReactNode;
   textSlot: React.ReactNode;
   href: string;
@@ -29,7 +28,6 @@ interface SearchListItemProps {
 export function SearchListItem({
   titleSlot,
   textSlot,
-  imageSlot,
   href,
 }: SearchListItemProps) {
   return (
@@ -39,7 +37,6 @@ export function SearchListItem({
       href={href}
     >
       <ListItem className="rounded-none bg-inherit! pr-3 shadow-none">
-        {imageSlot}
         <ListItemInfo>
           {titleSlot}
           {textSlot}

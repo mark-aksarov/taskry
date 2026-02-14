@@ -11,23 +11,19 @@ import { ResponsiveModal } from "@/components/common/ResponsiveModal";
 type SearchCategory = "users" | "projects" | "tasks" | "customers";
 
 interface SearchModalProps {
-  usersSearchContainer: React.ReactNode;
   tasksSearchContainer: React.ReactNode;
   projectsSearchContainer: React.ReactNode;
-  customersSearchContainer: React.ReactNode;
 }
 
 export function SearchModal({
-  usersSearchContainer,
   tasksSearchContainer,
   projectsSearchContainer,
-  customersSearchContainer,
 }: SearchModalProps) {
   const t = useTranslations("search.SearchModal");
 
   const [page, setPage] = useState(1);
   const [query, setQuery] = useState("");
-  const [searchCategory, setSearchCategory] = useState<SearchCategory>("users");
+  const [searchCategory, setSearchCategory] = useState<SearchCategory>("tasks");
 
   const searchField = (
     <SearchField
@@ -70,10 +66,8 @@ export function SearchModal({
         <DialogHeader>{t("dialogHeading")}</DialogHeader>
 
         <SearchModalContext.Provider value={contextValue}>
-          {searchCategory === "users" && usersSearchContainer}
           {searchCategory === "tasks" && tasksSearchContainer}
           {searchCategory === "projects" && projectsSearchContainer}
-          {searchCategory === "customers" && customersSearchContainer}
         </SearchModalContext.Provider>
       </Dialog>
     </ResponsiveModal>

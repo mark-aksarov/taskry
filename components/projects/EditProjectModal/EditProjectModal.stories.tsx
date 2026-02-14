@@ -13,7 +13,7 @@ const meta = {
   decorators: [
     (Story) => (
       <DialogTrigger>
-        <Button label="New project" />
+        <Button label="Edit project" />
         <Story />
       </DialogTrigger>
     ),

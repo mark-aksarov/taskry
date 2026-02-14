@@ -16,6 +16,6 @@ export type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    selectedKeys: ["users"],
+    selectedKeys: ["tasks"],
   },
 } satisfies Story;

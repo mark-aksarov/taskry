@@ -7,15 +7,13 @@ import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { SearchPresentation } from "../../SearchPresentation";
 import { SearchEmptySection } from "../../SearchEmptySection";
 import { SearchList, SearchListSkeleton } from "../../SearchList";
-import { UsersSearchListStory } from "../../SearchList/__stories__";
 import { TasksSearchListStory } from "../../SearchList/__stories__";
 import { ModalPagination } from "@/components/common/ModalPagination";
 import { ProjectsSearchListStory } from "../../SearchList/__stories__";
-import { CustomersSearchListStory } from "../../SearchList/__stories__";
 import { SearchToggleButtonGroup } from "../../SearchToggleButtonGroup";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { SearchToggleButtonGroupStory } from "../../SearchToggleButtonGroup/__stories__";
 import { ModalPaginationStory } from "@/components/common/ModalPagination/__stories__";
+import { SearchToggleButtonGroupStory } from "../../SearchToggleButtonGroup/__stories__";
 
 const meta = {
   title: "components/search/SearchModal",
@@ -23,7 +21,7 @@ const meta = {
   decorators: [
     (Story) => (
       <DialogTrigger>
-        <Button label="New project" />
+        <Button label="Search" />
         <Story />
       </DialogTrigger>
     ),
@@ -57,12 +55,6 @@ const SearchContainer = ({
 
 export const Default = {
   args: {
-    usersSearchContainer: (
-      <SearchContainer
-        searchResultList={<SearchList {...UsersSearchListStory.args} />}
-        selectedToggleKey="users"
-      />
-    ),
     tasksSearchContainer: (
       <SearchContainer
         searchResultList={<SearchList {...TasksSearchListStory.args} />}
@@ -75,23 +67,11 @@ export const Default = {
         selectedToggleKey="projects"
       />
     ),
-    customersSearchContainer: (
-      <SearchContainer
-        searchResultList={<SearchList {...CustomersSearchListStory.args} />}
-        selectedToggleKey="customers"
-      />
-    ),
   },
 } satisfies Story;
 
 export const WithEmptySection = {
   args: {
-    usersSearchContainer: (
-      <SearchContainer
-        searchResultList={<SearchEmptySection />}
-        selectedToggleKey="users"
-      />
-    ),
     tasksSearchContainer: (
       <SearchContainer
         searchResultList={<SearchEmptySection />}
@@ -102,12 +82,6 @@ export const WithEmptySection = {
       <SearchContainer
         searchResultList={<SearchEmptySection />}
         selectedToggleKey="projects"
-      />
-    ),
-    customersSearchContainer: (
-      <SearchContainer
-        searchResultList={<SearchEmptySection />}
-        selectedToggleKey="customers"
       />
     ),
   },
@@ -115,12 +89,6 @@ export const WithEmptySection = {
 
 export const WithSkeletonContent = {
   args: {
-    usersSearchContainer: (
-      <SearchContainer
-        searchResultList={<SearchListSkeleton />}
-        selectedToggleKey="users"
-      />
-    ),
     tasksSearchContainer: (
       <SearchContainer
         searchResultList={<SearchListSkeleton />}
@@ -131,12 +99,6 @@ export const WithSkeletonContent = {
       <SearchContainer
         searchResultList={<SearchListSkeleton />}
         selectedToggleKey="projects"
-      />
-    ),
-    customersSearchContainer: (
-      <SearchContainer
-        searchResultList={<SearchListSkeleton />}
-        selectedToggleKey="customers"
       />
     ),
   },

@@ -12,7 +12,7 @@ const meta = {
   decorators: [
     (Story) => (
       <DialogTrigger>
-        <Button label="New Task Category" />
+        <Button label="New task Category" />
         <Story />
       </DialogTrigger>
     ),
