@@ -16,12 +16,11 @@ import { Link } from "@/components/ui/Link";
 import { TaskStatus } from "@/generated/prisma/enums";
 import { useFormatter, useTranslations } from "next-intl";
 import { UserTaskListItemLayout } from "./UserTaskListItemLayout";
-import { useSyncSelectionTaskItem } from "@/lib/hooks/useTaskSelection";
+import { TaskItemCheckbox } from "@/components/tasks/TaskItemCheckbox";
 import { TaskItemBaseBadge } from "@/components/tasks/TaskItemBaseBadge";
 import { ItemBaseDetailModalTrigger } from "@/components/common/ItemBase";
 import { UpdateTaskStatusProvider } from "@/components/tasks/UpdateTaskStatusContext";
 import { TaskCommentsModalTrigger } from "@/components/tasks/TaskCommentsModalTrigger";
-import { TaskListItemCheckbox } from "@/components/tasks/TaskListItem/TaskListItemCheckbox";
 
 export interface UserTaskListItemProps {
   id: number;
@@ -58,8 +57,6 @@ export const UserTaskListItemInner = ({
 }: Omit<UserTaskListItemProps, "updateTaskStatus">) => {
   const t = useTranslations("users.UserTaskListItem");
 
-  useSyncSelectionTaskItem(id, title, status);
-
   const format = useFormatter();
 
   const deadlineOn = t("deadlineOn", {
@@ -72,7 +69,7 @@ export const UserTaskListItemInner = ({
 
   return (
     <UserTaskListItemLayout
-      checkboxSlot={<TaskListItemCheckbox id={id} />}
+      checkboxSlot={<TaskItemCheckbox id={id} status={status} />}
       deadlineSlot={
         <ListItemInfo>
           <ListItemTitle>

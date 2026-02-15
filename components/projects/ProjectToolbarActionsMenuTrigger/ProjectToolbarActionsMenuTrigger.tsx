@@ -19,10 +19,10 @@ import { useTranslations } from "next-intl";
 import { ProjectStatus } from "@/generated/prisma/enums";
 import { GuestModeModal } from "../../common/GuestModeModal";
 import { DeleteProjectsModal } from "../DeleteProjectsModal";
+import { useSelectedProjects } from "../SelectedProjectsContext";
 import { startTransition, useActionState, useState } from "react";
 import { Check, CircleEllipsis, Clock, Trash } from "lucide-react";
 import { useActionErrorToast } from "@/lib/hooks/useActionErrorToast";
-import { useProjectSelection } from "@/lib/hooks/useProjectSelection";
 
 interface ProjectToolbarActionsMenuTriggerProps {
   guestMode: boolean;
@@ -53,6 +53,9 @@ export const ProjectToolbarActionsMenuTrigger = ({
     updateStatusInitialState,
   );
 
+  // Selected with checkbox projects
+  const selected = useSelectedProjects();
+
   // Show toast if updating status fails
   useActionErrorToast(updateStatusState);
 
@@ -68,25 +71,20 @@ export const ProjectToolbarActionsMenuTrigger = ({
     } else {
       startTransition(() => {
         updateStatus({
-          ids: projectIds,
+          ids: selected.ids,
           nextStatus: key as ProjectStatus,
         });
       });
     }
   };
 
-  const {
-    selectedIds: projectIds,
-    clearSelectedIds,
-    selectedItems,
-  } = useProjectSelection();
-
-  // disable actions when selected projects have the same status
+  // disable menu items if selected projects have the same status.
   const disabledKeys = Object.values(ProjectStatus).filter((status) =>
-    selectedItems.every((task) => task.status === status),
+    selected.items.every((project) => project.status === status),
   );
 
-  const isDisabled = projectIds.length === 0;
+  // disable menu trigger if no projects are selected
+  const isDisabled = selected.items.length === 0;
 
   return (
     <>
@@ -129,11 +127,11 @@ export const ProjectToolbarActionsMenuTrigger = ({
 
       {/* Modal for confirming project deletion */}
       <DeleteProjectsModal
-        projectIds={projectIds}
+        projectIds={selected.ids}
         deleteAction={deleteAction}
         isOpen={isDeleteModalOpen}
         onOpenChange={setIsDeleteModalOpen}
-        onSuccess={clearSelectedIds}
+        onSuccess={selected.clear}
       />
 
       {/* Guest mode modal */}

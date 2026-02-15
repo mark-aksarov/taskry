@@ -5,7 +5,7 @@ import {
 import { useTranslations } from "next-intl";
 import { PageGrid } from "@/components/common/PageGrid";
 import { PageContainer } from "@/components/common/PageContainer";
-import { SelectionProvider } from "@/components/common/SelectionContext";
+import { SelectedTasksProvider } from "@/components/tasks/SelectedTasksContext";
 
 interface DashboardPageProps {
   totalProjectsCardContainer: React.ReactNode;
@@ -27,7 +27,7 @@ export function DashboardPage({
   return (
     <PageContainer>
       <PageGrid>
-        <SelectionProvider>
+        <SelectedTasksProvider>
           <ToolbarMobileTop>
             <ToolbarMobileHeading>{t("heading")}</ToolbarMobileHeading>
           </ToolbarMobileTop>
@@ -42,7 +42,7 @@ export function DashboardPage({
           </div>
 
           {assignedTasksContainer}
-        </SelectionProvider>
+        </SelectedTasksProvider>
       </PageGrid>
     </PageContainer>
   );

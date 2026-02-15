@@ -9,7 +9,7 @@ import { useTranslations } from "next-intl";
 import { PageGrid } from "@/components/common/PageGrid";
 import { ViewModeProvider } from "@/components/common/ViewMode";
 import { PageContainer } from "@/components/common/PageContainer";
-import { SelectionProvider } from "@/components/common/SelectionContext";
+import { SelectedItemsProvider } from "@/components/common/SelectedItemsContext";
 
 interface CompaniesPageProps {
   companiesContainer: React.ReactNode;
@@ -28,7 +28,7 @@ export function CompaniesPage({
     <PageContainer>
       <PageGrid>
         <ViewModeProvider>
-          <SelectionProvider>
+          <SelectedItemsProvider>
             <ToolbarDesktop>
               {companyToolbarActionsMenuTrigger}
               {companyToolbarCreateNewModalTrigger}
@@ -46,7 +46,7 @@ export function CompaniesPage({
             </ToolbarMobileBottom>
 
             {companiesContainer}
-          </SelectionProvider>
+          </SelectedItemsProvider>
         </ViewModeProvider>
       </PageGrid>
     </PageContainer>

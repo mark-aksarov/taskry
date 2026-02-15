@@ -14,7 +14,7 @@ import { DialogHeader } from "../../ui/Dialog";
 import { ActionFn, ActionState } from "@/lib/actions/types";
 import { GuestModeModal } from "../../common/GuestModeModal";
 import { DeleteTaskCategoriesModal } from "../DeleteTaskCategoriesModal";
-import { useTaskCategorySelection } from "@/lib/hooks/useTaskCategorySelection";
+import { useSelectedItems } from "@/components/common/SelectedItemsContext";
 
 interface TaskCategoryToolbarActionsMenuTriggerProps {
   guestMode: boolean;
@@ -35,6 +35,9 @@ export const TaskCategoryToolbarActionsMenuTrigger = ({
   // Delete confirmation modal state
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
+  // Selected with checkbox positions
+  const selected = useSelectedItems();
+
   // Menu actions: show delete modal
   const handleAction = (key: Key) => {
     if (guestMode) {
@@ -47,13 +50,7 @@ export const TaskCategoryToolbarActionsMenuTrigger = ({
     }
   };
 
-  const {
-    selectedIds: taskCategoryIds,
-    clearSelectedIds,
-    selectedItems,
-  } = useTaskCategorySelection();
-
-  const isDisabled = taskCategoryIds.length === 0;
+  const isDisabled = selected.ids.length === 0;
 
   return (
     <>
@@ -84,9 +81,9 @@ export const TaskCategoryToolbarActionsMenuTrigger = ({
       <DeleteTaskCategoriesModal
         isOpen={isDeleteModalOpen}
         onOpenChange={setIsDeleteModalOpen}
-        taskCategoryIds={taskCategoryIds}
+        taskCategoryIds={selected.ids}
         deleteTaskCategories={deleteTaskCategories}
-        onSuccess={clearSelectedIds}
+        onSuccess={selected.clear}
       />
 
       {/* Guest mode modal */}

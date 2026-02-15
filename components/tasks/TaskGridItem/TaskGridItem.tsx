@@ -13,23 +13,18 @@ import {
   UpdateTaskStatusesPayload,
 } from "@/lib/actions/types";
 
-import {
-  UpdateTaskStatusProvider,
-  useUpdateTaskStatusContext,
-} from "../UpdateTaskStatusContext";
-
 import Image from "next/image";
 import { Link } from "@/components/ui/Link";
 import { TaskStatus } from "@/generated/prisma/enums";
+import { TaskItemCheckbox } from "../TaskItemCheckbox";
 import { TaskItemBaseBadge } from "../TaskItemBaseBadge";
 import { useFormatter, useTranslations } from "next-intl";
 import { TaskGridItemLayout } from "./TaskGridItemLayout";
 import { UnknownUser } from "@/components/common/UnknownUser";
 import { ImageContainer } from "@/components/common/ImageContainer";
+import { UpdateTaskStatusProvider } from "../UpdateTaskStatusContext";
 import { TaskCommentsModalTrigger } from "../TaskCommentsModalTrigger";
-import { useSyncSelectionTaskItem } from "@/lib/hooks/useTaskSelection";
 import { ItemBaseDetailModalTrigger } from "@/components/common/ItemBase";
-import { TaskListItemCheckbox } from "../TaskListItem/TaskListItemCheckbox";
 
 export interface TaskGridItemProps {
   id: number;
@@ -76,12 +71,7 @@ export function TaskGridItemInner({
   taskDetailModal,
   userDetailModal,
 }: Omit<TaskGridItemProps, "updateTaskStatus">) {
-  const tStatus = useTranslations("tasks.TaskStatus");
   const t = useTranslations("tasks.TaskGridItem");
-
-  useSyncSelectionTaskItem(id, title, status);
-
-  const { isUpdateTaskStatusPending } = useUpdateTaskStatusContext();
 
   const format = useFormatter();
 
@@ -103,7 +93,7 @@ export function TaskGridItemInner({
 
   return (
     <TaskGridItemLayout
-      checkboxSlot={<TaskListItemCheckbox id={id} />}
+      checkboxSlot={<TaskItemCheckbox id={id} status={status} />}
       menuTriggerSlot={menuTrigger}
       titleSlot={
         <GridItemInfo className="flex-auto">

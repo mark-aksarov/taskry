@@ -11,18 +11,13 @@ import {
   GridItemContactIconWrapper,
 } from "@/components/common/Grid";
 
-import {
-  useCustomerSelection,
-  useSyncSelectionCustomerItem,
-} from "@/lib/hooks/useCustomerSelection";
-
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { Link } from "@/components/ui/Link";
 import { Link2, Mail, Phone } from "lucide-react";
 import { Divider } from "@/components/ui/Divider";
-import { Checkbox } from "@/components/ui/Checkbox";
 import { UnknownUser } from "@/components/common/UnknownUser";
+import { CustomerItemCheckbox } from "../CustomerItemCheckbox";
 import { CustomerGridItemLayout } from "./CustomerGridItemLayout";
 import { ImageContainer } from "@/components/common/ImageContainer";
 import { ItemBaseDetailModalTrigger } from "@/components/common/ItemBase";
@@ -55,9 +50,6 @@ export function CustomerGridItem({
 }: CustomerGridItemProps) {
   const t = useTranslations("customers.CustomerGridItem");
 
-  const { isSelected, toggleItem } = useCustomerSelection();
-  useSyncSelectionCustomerItem(id, fullName);
-
   const contactLinkClasses = "max-w-full overflow-hidden";
 
   const customerImg = imageUrl ? (
@@ -72,11 +64,7 @@ export function CustomerGridItem({
     <CustomerGridItemLayout
       topRowSlot={
         <GridItemRow>
-          <Checkbox
-            aria-label={`${fullName} checkbox`}
-            isSelected={isSelected(id)}
-            onChange={() => toggleItem(id)}
-          />
+          <CustomerItemCheckbox id={id} />
           {menuTrigger}
         </GridItemRow>
       }

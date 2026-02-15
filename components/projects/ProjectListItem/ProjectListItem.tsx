@@ -1,11 +1,6 @@
 "use client";
 
 import {
-  useProjectSelection,
-  useSyncSelectionProjectItem,
-} from "@/lib/hooks/useProjectSelection";
-
-import {
   ListItemInfo,
   ListItemText,
   ListItemTitle,
@@ -18,9 +13,9 @@ import {
 
 import Image from "next/image";
 import { Link } from "@/components/ui/Link";
-import { Checkbox } from "@/components/ui/Checkbox";
 import { ProjectStatus } from "@/generated/prisma/enums";
 import { useFormatter, useTranslations } from "next-intl";
+import { ProjectItemCheckbox } from "../ProjectItemCheckbox";
 import { UnknownUser } from "@/components/common/UnknownUser";
 import { ProjectListItemLayout } from "./ProjectListItemLayout";
 import { ImageContainer } from "@/components/common/ImageContainer";
@@ -79,9 +74,6 @@ export const ProjectListItem = ({
   const tStatus = useTranslations("projects.ProjectStatus");
   const t = useTranslations("projects.ProjectListItem");
 
-  const { isSelected, toggleItem } = useProjectSelection();
-  useSyncSelectionProjectItem(id, title, status);
-
   const format = useFormatter();
 
   const deadlineOn = t("deadlineOn", {
@@ -104,15 +96,7 @@ export const ProjectListItem = ({
     <ProjectListItemLayout
       id={id}
       checkboxSlot={
-        showCheckbox && (
-          <Checkbox
-            data-test="project-checkbox"
-            data-id={id}
-            aria-label="project checkbox"
-            isSelected={isSelected(id)}
-            onChange={() => toggleItem(id)}
-          />
-        )
+        showCheckbox && <ProjectItemCheckbox id={id} status={status} />
       }
       titleSlot={
         <ListItemInfo>

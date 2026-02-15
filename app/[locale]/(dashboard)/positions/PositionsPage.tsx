@@ -9,7 +9,7 @@ import { useTranslations } from "next-intl";
 import { PageGrid } from "@/components/common/PageGrid";
 import { ViewModeProvider } from "@/components/common/ViewMode";
 import { PageContainer } from "@/components/common/PageContainer";
-import { SelectionProvider } from "@/components/common/SelectionContext";
+import { SelectedItemsProvider } from "@/components/common/SelectedItemsContext";
 
 interface PositionsPageProps {
   positionsContainer: React.ReactNode;
@@ -28,7 +28,7 @@ export function PositionsPage({
     <PageContainer>
       <PageGrid>
         <ViewModeProvider>
-          <SelectionProvider>
+          <SelectedItemsProvider>
             <ToolbarDesktop>
               {positionToolbarActionsMenuTrigger}
               {positionToolbarCreateNewModalTrigger}
@@ -46,7 +46,7 @@ export function PositionsPage({
             </ToolbarMobileBottom>
 
             {positionsContainer}
-          </SelectionProvider>
+          </SelectedItemsProvider>
         </ViewModeProvider>
       </PageGrid>
     </PageContainer>

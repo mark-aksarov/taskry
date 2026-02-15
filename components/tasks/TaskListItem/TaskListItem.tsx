@@ -15,15 +15,14 @@ import {
 import Image from "next/image";
 import { Link } from "@/components/ui/Link";
 import { TaskStatus } from "@/generated/prisma/enums";
+import { TaskItemCheckbox } from "../TaskItemCheckbox";
 import { TaskItemBaseBadge } from "../TaskItemBaseBadge";
 import { TaskListItemLayout } from "./TaskListItemLayout";
 import { useFormatter, useTranslations } from "next-intl";
 import { UnknownUser } from "@/components/common/UnknownUser";
-import { TaskListItemCheckbox } from "./TaskListItemCheckbox";
 import { ImageContainer } from "@/components/common/ImageContainer";
 import { UpdateTaskStatusProvider } from "../UpdateTaskStatusContext";
 import { TaskCommentsModalTrigger } from "../TaskCommentsModalTrigger";
-import { useSyncSelectionTaskItem } from "@/lib/hooks/useTaskSelection";
 import { ItemBaseDetailModalTrigger } from "@/components/common/ItemBase";
 
 export interface TaskListItemProps {
@@ -83,8 +82,6 @@ export const TaskListItemInner = ({
 }: Omit<TaskListItemProps, "updateTaskStatus">) => {
   const t = useTranslations("tasks.TaskListItem");
 
-  useSyncSelectionTaskItem(id, title, status);
-
   const format = useFormatter();
 
   const deadlineOn = t("deadlineOn", {
@@ -106,7 +103,9 @@ export const TaskListItemInner = ({
   return (
     <TaskListItemLayout
       id={id}
-      checkboxSlot={showCheckbox && <TaskListItemCheckbox id={id} />}
+      checkboxSlot={
+        showCheckbox && <TaskItemCheckbox id={id} status={status} />
+      }
       titleSlot={
         <ListItemInfo>
           <ListItemTitle data-test="task-list-item-title">

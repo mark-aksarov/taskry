@@ -10,7 +10,7 @@ import { PageGrid } from "@/components/common/PageGrid";
 import { ViewModeProvider } from "@/components/common/ViewMode";
 import { PageContainer } from "@/components/common/PageContainer";
 import { ViewModeToggleButtonGroup } from "@/components/common/ViewMode";
-import { SelectionProvider } from "@/components/common/SelectionContext";
+import { SelectedTasksProvider } from "@/components/tasks/SelectedTasksContext";
 import { TaskToolbarManageMenuTrigger } from "@/components/tasks/TaskToolbarManageMenuTrigger";
 import { TaskToolbarSortingMenuTrigger } from "@/components/tasks/TaskToolbarSortingMenuTrigger";
 
@@ -33,7 +33,7 @@ export function TasksPage({
     <PageContainer>
       <PageGrid>
         <ViewModeProvider>
-          <SelectionProvider>
+          <SelectedTasksProvider>
             <ToolbarDesktop>
               <TaskToolbarManageMenuTrigger />
               <TaskToolbarSortingMenuTrigger />
@@ -57,7 +57,7 @@ export function TasksPage({
             </ToolbarMobileBottom>
 
             {tasksContainer}
-          </SelectionProvider>
+          </SelectedTasksProvider>
         </ViewModeProvider>
       </PageGrid>
     </PageContainer>

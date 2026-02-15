@@ -18,7 +18,7 @@ import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
 import { DialogHeader } from "../../ui/Dialog";
 import { DeleteCustomersModal } from "../DeleteCustomersModal";
-import { useCustomerSelection } from "@/lib/hooks/useCustomerSelection";
+import { useSelectedItems } from "@/components/common/SelectedItemsContext";
 
 interface CustomerToolbarActionsMenuTriggerProps {
   deleteAction: ActionFn<ActionState, DeleteCustomersPayload>;
@@ -32,6 +32,9 @@ export const CustomerToolbarActionsMenuTrigger = ({
   // Delete confirmation modal state
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
+  // Selected with checkbox customers
+  const selected = useSelectedItems();
+
   // Menu actions: show delete modal
   const handleAction = (key: Key) => {
     if (key === "delete") {
@@ -39,9 +42,7 @@ export const CustomerToolbarActionsMenuTrigger = ({
     }
   };
 
-  const { selectedIds: customerIds, clearSelectedIds } = useCustomerSelection();
-
-  const isDisabled = customerIds.length === 0;
+  const isDisabled = selected.ids.length === 0;
 
   return (
     <>
@@ -71,11 +72,11 @@ export const CustomerToolbarActionsMenuTrigger = ({
 
       {/* Modal for confirming customer deletion */}
       <DeleteCustomersModal
-        customerIds={customerIds}
+        customerIds={selected.ids}
         deleteAction={deleteAction}
         isOpen={isDeleteModalOpen}
         onOpenChange={setIsDeleteModalOpen}
-        onSuccess={clearSelectedIds}
+        onSuccess={selected.clear}
       />
     </>
   );

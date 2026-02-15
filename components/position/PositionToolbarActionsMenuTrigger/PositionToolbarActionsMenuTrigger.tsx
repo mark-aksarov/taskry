@@ -14,7 +14,7 @@ import { DialogHeader } from "../../ui/Dialog";
 import { ActionFn, ActionState } from "@/lib/actions/types";
 import { GuestModeModal } from "../../common/GuestModeModal";
 import { DeletePositionsModal } from "../DeletePositionsModal";
-import { usePositionSelection } from "@/lib/hooks/usePositionSelection";
+import { useSelectedItems } from "@/components/common/SelectedItemsContext";
 
 interface PositionToolbarActionsMenuTriggerProps {
   guestMode: boolean;
@@ -33,6 +33,9 @@ export const PositionToolbarActionsMenuTrigger = ({
   // Delete confirmation modal state
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
+  // Selected with checkbox positions
+  const selected = useSelectedItems();
+
   // Menu actions: show delete modal
   const handleAction = (key: Key) => {
     if (guestMode) {
@@ -45,13 +48,7 @@ export const PositionToolbarActionsMenuTrigger = ({
     }
   };
 
-  const {
-    selectedIds: positionIds,
-    clearSelectedIds,
-    selectedItems,
-  } = usePositionSelection();
-
-  const isDisabled = positionIds.length === 0;
+  const isDisabled = selected.ids.length === 0;
 
   return (
     <>
@@ -82,9 +79,9 @@ export const PositionToolbarActionsMenuTrigger = ({
       <DeletePositionsModal
         isOpen={isDeleteModalOpen}
         onOpenChange={setIsDeleteModalOpen}
-        positionIds={positionIds}
+        positionIds={selected.ids}
         deletePositions={deletePositions}
-        onSuccess={clearSelectedIds}
+        onSuccess={selected.clear}
       />
 
       {/* Guest mode modal */}

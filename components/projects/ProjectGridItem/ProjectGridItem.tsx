@@ -1,11 +1,6 @@
 "use client";
 
 import {
-  useProjectSelection,
-  useSyncSelectionProjectItem,
-} from "@/lib/hooks/useProjectSelection";
-
-import {
   GridItemText,
   GridItemInfo,
   GridItemTitle,
@@ -19,9 +14,9 @@ import {
 
 import Image from "next/image";
 import { Link } from "@/components/ui/Link";
-import { Checkbox } from "@/components/ui/Checkbox";
 import { ProjectStatus } from "@/generated/prisma/enums";
 import { useFormatter, useTranslations } from "next-intl";
+import { ProjectItemCheckbox } from "../ProjectItemCheckbox";
 import { UnknownUser } from "@/components/common/UnknownUser";
 import { ProjectGridItemLayout } from "./ProjectGridItemLayout";
 import { ImageContainer } from "@/components/common/ImageContainer";
@@ -64,9 +59,6 @@ export function ProjectGridItem({
   const tStatus = useTranslations("projects.ProjectStatus");
   const t = useTranslations("projects.ProjectGridItem");
 
-  const { isSelected, toggleItem } = useProjectSelection();
-  useSyncSelectionProjectItem(id, title, status);
-
   const format = useFormatter();
 
   const deadlineOn = t("deadlineOn", {
@@ -87,13 +79,7 @@ export function ProjectGridItem({
 
   return (
     <ProjectGridItemLayout
-      checkboxSlot={
-        <Checkbox
-          aria-label={title}
-          isSelected={isSelected(id)}
-          onChange={() => toggleItem(id)}
-        />
-      }
+      checkboxSlot={<ProjectItemCheckbox id={id} status={status} />}
       menuTriggerSlot={menuTrigger}
       titleSlot={
         <GridItemInfo className="flex-auto">

@@ -10,7 +10,7 @@ import { PageGrid } from "@/components/common/PageGrid";
 import { ViewModeProvider } from "@/components/common/ViewMode";
 import { PageContainer } from "@/components/common/PageContainer";
 import { ViewModeToggleButtonGroup } from "@/components/common/ViewMode";
-import { SelectionProvider } from "@/components/common/SelectionContext";
+import { SelectedItemsProvider } from "@/components/common/SelectedItemsContext";
 import { CustomerToolbarManageMenuTrigger } from "@/components/customer/CustomerToolbarManageMenuTrigger";
 import { CustomerToolbarSortingMenuTrigger } from "@/components/customer/CustomerToolbarSortingMenuTrigger";
 
@@ -33,7 +33,7 @@ export function CustomersPage({
     <PageContainer>
       <PageGrid>
         <ViewModeProvider>
-          <SelectionProvider>
+          <SelectedItemsProvider>
             <ToolbarDesktop>
               <CustomerToolbarManageMenuTrigger />
               <CustomerToolbarSortingMenuTrigger />
@@ -56,7 +56,7 @@ export function CustomersPage({
               {customerToolbarCreateNewMenuTrigger}
             </ToolbarMobileBottom>
             {customersContainer}
-          </SelectionProvider>
+          </SelectedItemsProvider>
         </ViewModeProvider>
       </PageGrid>
     </PageContainer>

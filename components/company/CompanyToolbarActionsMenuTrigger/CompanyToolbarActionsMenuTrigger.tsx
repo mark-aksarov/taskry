@@ -13,8 +13,8 @@ import { useTranslations } from "next-intl";
 import { DialogHeader } from "../../ui/Dialog";
 import { ActionFn, ActionState } from "@/lib/actions/types";
 import { GuestModeModal } from "../../common/GuestModeModal";
-import { useCompanySelection } from "@/lib/hooks/useCompanySelection";
 import { DeleteCompaniesModal } from "../DeleteCompaniesModal";
+import { useSelectedItems } from "@/components/common/SelectedItemsContext";
 
 interface CompanyToolbarActionsMenuTriggerProps {
   guestMode: boolean;
@@ -33,6 +33,9 @@ export const CompanyToolbarActionsMenuTrigger = ({
   // Delete confirmation modal state
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
+  // Selected with checkbox companies
+  const selected = useSelectedItems();
+
   // Menu actions: show delete modal
   const handleAction = (key: Key) => {
     if (guestMode) {
@@ -45,13 +48,7 @@ export const CompanyToolbarActionsMenuTrigger = ({
     }
   };
 
-  const {
-    selectedIds: companyIds,
-    clearSelectedIds,
-    selectedItems,
-  } = useCompanySelection();
-
-  const isDisabled = companyIds.length === 0;
+  const isDisabled = selected.ids.length === 0;
 
   return (
     <>
@@ -82,9 +79,9 @@ export const CompanyToolbarActionsMenuTrigger = ({
       <DeleteCompaniesModal
         isOpen={isDeleteModalOpen}
         onOpenChange={setIsDeleteModalOpen}
-        companyIds={companyIds}
+        companyIds={selected.ids}
         deleteCompanies={deleteCompanies}
-        onSuccess={clearSelectedIds}
+        onSuccess={selected.clear}
       />
 
       {/* Guest mode modal */}

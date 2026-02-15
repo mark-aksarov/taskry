@@ -14,12 +14,12 @@ import {
 } from "../../common/Toolbar";
 
 import { Item, Key } from "react-stately";
-import { DialogHeader } from "../../ui/Dialog";
 import { useTranslations } from "next-intl";
-import { DeleteTasksModal } from "../DeleteTasksModal";
+import { DialogHeader } from "../../ui/Dialog";
 import { TaskStatus } from "@/generated/prisma/enums";
+import { DeleteTasksModal } from "../DeleteTasksModal";
+import { useSelectedTasks } from "../SelectedTasksContext";
 import { GuestModeModal } from "../../common/GuestModeModal";
-import { useTaskSelection } from "@/lib/hooks/useTaskSelection";
 import { startTransition, useActionState, useState } from "react";
 import { Check, CircleEllipsis, Clock, Trash } from "lucide-react";
 import { useActionErrorToast } from "@/lib/hooks/useActionErrorToast";
@@ -53,6 +53,9 @@ export const TaskToolbarActionsMenuTrigger = ({
     initialState,
   );
 
+  // Selected with checkbox tasks
+  const selected = useSelectedTasks();
+
   // Menu actions: show guest modal, show delete modal, update task status
   const handleAction = (key: Key) => {
     if (guestMode) {
@@ -68,25 +71,20 @@ export const TaskToolbarActionsMenuTrigger = ({
     const nextStatus = key as TaskStatus;
 
     startTransition(() => {
-      updateTaskStatusAction({ ids: taskIds, nextStatus });
+      updateTaskStatusAction({ ids: selected.ids, nextStatus });
     });
   };
 
   // Show toast if updating status fails
   useActionErrorToast(updateTaskStatusState);
 
-  const {
-    selectedIds: taskIds,
-    clearSelectedIds,
-    selectedItems,
-  } = useTaskSelection();
-
-  // disable actions when selected tasks have the same status
+  // disable menu items if selected tasks have the same status.
   const disabledKeys = Object.values(TaskStatus).filter((status) =>
-    selectedItems.every((task) => task.status === status),
+    selected.items.every((task) => task.status === status),
   );
 
-  const isDisabled = taskIds.length === 0;
+  // disable menu trigger if no tasks are selected
+  const isDisabled = selected.items.length === 0;
 
   return (
     <>
@@ -129,11 +127,11 @@ export const TaskToolbarActionsMenuTrigger = ({
 
       {/* Modal for confirming task deletion */}
       <DeleteTasksModal
-        taskIds={taskIds}
+        taskIds={selected.ids}
         deleteAction={deleteAction}
         isOpen={isDeleteModalOpen}
         onOpenChange={setIsDeleteModalOpen}
-        onSuccess={clearSelectedIds}
+        onSuccess={selected.clear}
       />
 
       {/* Guest mode modal */}

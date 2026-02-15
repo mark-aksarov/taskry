@@ -7,16 +7,11 @@ import {
   ListItemTitle,
 } from "@/components/common/List";
 
-import {
-  useCustomerSelection,
-  useSyncSelectionCustomerItem,
-} from "@/lib/hooks/useCustomerSelection";
-
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { Link } from "@/components/ui/Link";
-import { Checkbox } from "@/components/ui/Checkbox";
 import { UnknownUser } from "@/components/common/UnknownUser";
+import { CustomerItemCheckbox } from "../CustomerItemCheckbox";
 import { ImageContainer } from "@/components/common/ImageContainer";
 import { ItemBaseDetailModalTrigger } from "@/components/common/ItemBase";
 
@@ -48,9 +43,6 @@ export function CustomerListItem({
 }: CustomerListItemProps) {
   const t = useTranslations("customers.CustomerListItem");
 
-  const { isSelected, toggleItem } = useCustomerSelection();
-  useSyncSelectionCustomerItem(id, fullName);
-
   const userImg = imageUrl ? (
     <ImageContainer className="h-9 w-9">
       <Image fill src={imageUrl} alt={fullName} />
@@ -61,13 +53,7 @@ export function CustomerListItem({
 
   return (
     <ListItem data-test="customer-list-item" data-id={id}>
-      <Checkbox
-        data-test="customer-checkbox"
-        data-id={id}
-        aria-label={t("checkboxAriaLabel")}
-        isSelected={isSelected(id)}
-        onChange={() => toggleItem(id)}
-      />
+      <CustomerItemCheckbox id={id} />
 
       <>
         <ItemBaseDetailModalTrigger

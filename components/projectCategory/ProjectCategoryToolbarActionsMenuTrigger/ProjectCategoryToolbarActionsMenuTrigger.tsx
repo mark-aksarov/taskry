@@ -13,8 +13,8 @@ import { useTranslations } from "next-intl";
 import { DialogHeader } from "../../ui/Dialog";
 import { ActionFn, ActionState } from "@/lib/actions/types";
 import { GuestModeModal } from "../../common/GuestModeModal";
+import { useSelectedItems } from "@/components/common/SelectedItemsContext";
 import { DeleteProjectCategoriesModal } from "../DeleteProjectCategoriesModal";
-import { useProjectCategorySelection } from "@/lib/hooks/useProjectCategorySelection";
 
 interface ProjectCategoryToolbarActionsMenuTriggerProps {
   guestMode: boolean;
@@ -35,6 +35,9 @@ export const ProjectCategoryToolbarActionsMenuTrigger = ({
   // Delete confirmation modal state
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
+  // Selected with checkbox positions
+  const selected = useSelectedItems();
+
   // Menu actions: show delete modal
   const handleAction = (key: Key) => {
     if (guestMode) {
@@ -47,13 +50,7 @@ export const ProjectCategoryToolbarActionsMenuTrigger = ({
     }
   };
 
-  const {
-    selectedIds: projectCategoryIds,
-    clearSelectedIds,
-    selectedItems,
-  } = useProjectCategorySelection();
-
-  const isDisabled = projectCategoryIds.length === 0;
+  const isDisabled = selected.ids.length === 0;
 
   return (
     <>
@@ -85,7 +82,8 @@ export const ProjectCategoryToolbarActionsMenuTrigger = ({
         isOpen={isDeleteModalOpen}
         onOpenChange={setIsDeleteModalOpen}
         deleteProjectCategories={deleteProjectCategories}
-        projectCategoryIds={projectCategoryIds}
+        projectCategoryIds={selected.ids}
+        onSuccess={selected.clear}
       />
 
       {/* Guest mode modal */}
