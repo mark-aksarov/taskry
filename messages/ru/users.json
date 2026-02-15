@@ -2,116 +2,92 @@
   "ChangePasswordModal": {
     "title": "Изменить пароль"
   },
-
   "ChangePasswordForm": {
     "submitButtonLabel": "Изменить пароль"
   },
-
   "EditUserForm": {
     "submitButtonLabel": "Обновить пользователя"
   },
-
   "NewUserForm": {
     "submitButtonLabel": "Создать пользователя"
   },
-
   "NewUserModal": {
     "title": "Новый пользователь"
   },
-
   "EditUserModal": {
     "title": "Изменить пользователя"
   },
-
   "UserFullNameTextField": {
     "label": "Полное имя",
     "placeholder": "Введите полное имя",
-
     "validation": {
       "required": "«Полное имя» обязательно для заполнения"
     }
   },
-
   "UserBioTextField": {
     "label": "О себе",
     "placeholder": "Введите информацию о себе"
   },
-
   "UserBirthdateDatePicker": {
     "label": "Дата рождения"
   },
-
   "UserPhoneNumberTextField": {
     "label": "Номер телефона",
     "placeholder": "Введите номер телефона"
   },
-
   "UserPublicLinkTextField": {
     "label": "Публичная ссылка",
     "placeholder": "Введите публичную ссылку",
-
     "validation": {
       "format": "Введите корректный URL, например https://example.com"
     }
   },
-
   "UserAddressTextField": {
     "label": "Адрес",
     "placeholder": "Введите адрес"
   },
-
   "UserEmailTextField": {
     "label": "Email",
     "placeholder": "Введите email",
-
     "validation": {
       "required": "Требуется электронная почта",
       "format": "Введите корректный адрес электронной почты, например user@example.com"
     }
   },
-
   "UserPasswordTextField": {
     "password": {
       "label": "Пароль",
       "placeholder": "Введите ваш пароль"
     },
-
     "validation": {
       "required": "Требуется пароль",
       "tooShort": "Пароль слишком короткий. Он должен содержать не менее {minLength} символов."
     }
   },
-
   "UserPositionSelect": {
     "label": "Должность",
     "noPosition": "Нет должности"
   },
-
   "TotalUsersCard": {
     "text": "Всего пользователей"
   },
-
   "UserToolbarSortingMenuTrigger": {
     "byFullName": "По полному имени",
     "byPosition": "По должности"
   },
-
   "ProfileActions": {
     "deleteAccount": "Удалить аккаунт",
     "changePassword": "Сменить пароль",
     "editAccount": "Редактировать аккаунт"
   },
-
   "ProfileNavigationDesktop": {
     "userInformation": "Информация о пользователе",
     "assignedTasks": "Назначенные задачи"
   },
-
   "ProfileNavigationMobile": {
     "info": "Информация",
     "assignedTasks": "Задачи"
   },
-
   "UserDetail": {
     "bio": "Биография",
     "noBio": "Этот пользователь еще не написал биографию.",
@@ -130,68 +106,54 @@
     "birthdate": "Дата рождения",
     "noBirthdate": "Дата рождения не указана"
   },
-
   "UserDetailCard": {
     "title": "Детали пользователя"
   },
-
   "UserDetailContainer": {
     "noPosition": "Нет должности"
   },
-
   "UserDetailModal": {
     "dialogHeading": "Детали пользователя",
     "openInFullPage": "Открыть в полном окне"
   },
-
   "UserFiltersFormNoActiveTasksSwitch": {
     "text": "Нет активных задач"
   },
-
   "UserFiltersFormActiveTasksSwitch": {
     "text": "Есть активные задачи"
   },
-
   "UserFiltersFormOverdueTasksSwitch": {
     "text": "Есть просроченные задачи"
   },
-
   "UserFiltersFormRoleCheckboxGroup": {
     "label": "Роль",
-
     "items": {
       "admin": "Администратор",
       "manager": "Менеджер",
       "user": "Пользователь"
     }
   },
-
   "UserFiltersFormPositionCheckboxGroup": {
     "label": "Должность"
   },
-
   "UserItemActionMenuTrigger": {
     "edit": "Редактировать",
     "delete": "Удалить"
   },
-
   "DeleteUserModal": {
     "heading": "Удалить пользователя",
     "text": "Вы уверены, что хотите удалить пользователя <strong>«{name}»</strong>? Все содержимое будет безвозвратно удалено.",
     "deleteButton": "Удалить",
     "cancelButton": "Отменить"
   },
-
   "UserGridItem": {
     "noPosition": "Нет должности",
     "noPhoneNumber": "Номер телефона не указан",
     "noPublicLink": "Публичная ссылка отсутствует"
   },
-
   "UserHeaderContainer": {
     "noPosition": "Нет должности"
   },
-
   "UserListItem": {
     "checkboxAriaLabel": "чекбокс пользователя",
     "phoneNumber": "Номер телефона",
@@ -201,53 +163,46 @@
     "position": "Должность",
     "noPosition": "Нет должности"
   },
-
   "UserNavigationDesktop": {
     "userInformation": "Информация о пользователе",
     "assignedTasks": "Назначенные задачи"
   },
-
   "UserNavigationMobile": {
     "info": "Информация",
     "assignedTasks": "Задачи"
   },
-
   "UserTaskListItem": {
     "checkboxAriaLabel": "чекбокс задачи",
     "noDeadline": "Без дедлайна",
     "deadlineOn": "Срок до {date}"
   },
-
   "UserTasksEmptySection": {
     "heading": "Пока нет назначенных задач",
     "description": "Создайте новую задачу, чтобы отслеживать свою работу",
     "editButtonLabel": "Новая задача"
   },
-
   "UserTasksPageEmptyLayout": {
     "title": "Назначенные задачи"
   },
-
   "UserTasksPageLayout": {
     "title": "Назначенные задачи"
   },
-
   "UserToolbarFiltersModalTrigger": {
     "title": "Фильтры пользователя"
   },
-
   "UserToolbarActionsMenuTrigger": {
     "dialogHeading": "Действия",
     "delete": "Удалить"
   },
-
   "UserToolbarCreateNewMenuTrigger": {
     "dialogHeading": "Создать нового",
     "label": "Создать нового",
-
     "items": {
       "user": "Пользователь",
       "position": "Должность"
     }
+  },
+  "UserToolbarManageMenuTrigger": {
+    "positions": "Должности"
   }
 }

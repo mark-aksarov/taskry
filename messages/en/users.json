@@ -2,116 +2,92 @@
   "ChangePasswordModal": {
     "title": "Change Password"
   },
-
   "ChangePasswordForm": {
     "submitButtonLabel": "Change Password"
   },
-
   "EditUserForm": {
     "submitButtonLabel": "Update user"
   },
-
   "NewUserForm": {
     "submitButtonLabel": "Create User"
   },
-
   "NewUserModal": {
     "title": "New User"
   },
-
   "EditUserModal": {
     "title": "Edit user"
   },
-
   "UserFullNameTextField": {
     "label": "Full name",
     "placeholder": "Enter full name",
-
     "validation": {
       "required": "Full name is required"
     }
   },
-
   "UserBioTextField": {
     "label": "Bio",
     "placeholder": "Enter bio"
   },
-
   "UserBirthdateDatePicker": {
     "label": "Birthdate"
   },
-
   "UserPhoneNumberTextField": {
     "label": "Phone number",
     "placeholder": "Enter phone number"
   },
-
   "UserPublicLinkTextField": {
     "label": "Public link",
     "placeholder": "Enter a public link",
-
     "validation": {
       "format": "Please enter a valid URL, for example https://example.com"
     }
   },
-
   "UserAddressTextField": {
     "label": "Address",
     "placeholder": "Enter address"
   },
-
   "UserEmailTextField": {
     "label": "Email",
     "placeholder": "Enter email",
-
     "validation": {
       "required": "Email is required",
       "format": "Enter a valid email address, for example user@example.com"
     }
   },
-
   "UserPasswordTextField": {
     "password": {
       "label": "Password",
       "placeholder": "Enter your password"
     },
-
     "validation": {
       "required": "Password is required",
       "tooShort": "The password is too short. It must contain at least {minLength} characters."
     }
   },
-
   "UserPositionSelect": {
     "label": "Position",
     "noPosition": "No position"
   },
-
   "TotalUsersCard": {
     "text": "Total Users"
   },
-
   "UserToolbarSortingMenuTrigger": {
     "byFullName": "By full name",
     "byPosition": "By position"
   },
-
   "ProfileActions": {
     "deleteAccount": "Delete account",
     "changePassword": "Change password",
     "editAccount": "Edit account"
   },
-
   "ProfileNavigationDesktop": {
     "userInformation": "User Information",
     "assignedTasks": "Assigned Tasks"
   },
-
   "ProfileNavigationMobile": {
     "info": "Info",
     "assignedTasks": "Assigned Tasks"
   },
-
   "UserDetail": {
     "bio": "Bio",
     "noBio": "This user hasn’t written a bio yet.",
@@ -130,68 +106,54 @@
     "birthdate": "Birthdate",
     "noBirthdate": "No birthdate"
   },
-
   "UserDetailCard": {
     "title": "User Information"
   },
-
   "UserDetailContainer": {
     "noPosition": "No position"
   },
-
   "UserDetailModal": {
     "dialogHeading": "User Details",
     "openInFullPage": "Open in Full Page"
   },
-
   "UserFiltersFormNoActiveTasksSwitch": {
     "text": "Has no active tasks"
   },
-
   "UserFiltersFormActiveTasksSwitch": {
     "text": "Has active tasks"
   },
-
   "UserFiltersFormOverdueTasksSwitch": {
     "text": "Has overdue tasks"
   },
-
   "UserFiltersFormRoleCheckboxGroup": {
     "label": "Role",
-
     "items": {
       "admin": "Admin",
       "manager": "Manager",
       "user": "User"
     }
   },
-
   "UserFiltersFormPositionCheckboxGroup": {
     "label": "Position"
   },
-
   "UserItemActionMenuTrigger": {
     "edit": "Edit",
     "delete": "Delete"
   },
-
   "DeleteUserModal": {
     "heading": "Delete user",
     "text": "Are you sure you want to delete user <strong>«{name}»</strong>? All contents will be permanently removed.",
     "deleteButton": "Delete",
     "cancelButton": "Cancel"
   },
-
   "UserGridItem": {
     "noPosition": "No position",
     "noPhoneNumber": "No phone number",
     "noPublicLink": "No public link"
   },
-
   "UserHeaderContainer": {
     "noPosition": "No position"
   },
-
   "UserListItem": {
     "checkboxAriaLabel": "user checkbox",
     "phoneNumber": "Phone number",
@@ -201,53 +163,46 @@
     "position": "Position",
     "noPosition": "No position"
   },
-
   "UserNavigationDesktop": {
     "userInformation": "User Information",
     "assignedTasks": "Assigned Tasks"
   },
-
   "UserNavigationMobile": {
     "info": "Info",
     "assignedTasks": "Assigned Tasks"
   },
-
   "UserTaskListItem": {
     "checkboxAriaLabel": "task checkbox",
     "noDeadline": "No deadline",
     "deadlineOn": "Deadline on {date}"
   },
-
   "UserTasksEmptySection": {
     "heading": "No assigned tasks yet",
     "description": "Create a new task to keep track of your work",
     "editButtonLabel": "New Task"
   },
-
   "UserTasksPageEmptyLayout": {
     "title": "Assigned tasks"
   },
-
   "UserTasksPageLayout": {
     "title": "Assigned tasks"
   },
-
   "UserToolbarFiltersModalTrigger": {
     "title": "User Filters"
   },
-
   "UserToolbarActionsMenuTrigger": {
     "dialogHeading": "Actions",
     "delete": "Delete"
   },
-
   "UserToolbarCreateNewMenuTrigger": {
     "dialogHeading": "Create New",
     "label": "Create New",
-
     "items": {
       "user": "User",
       "position": "Position"
     }
+  },
+  "UserToolbarManageMenuTrigger": {
+    "positions": "Positions"
   }
 }

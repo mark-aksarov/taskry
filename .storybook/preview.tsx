@@ -9,8 +9,10 @@ import type { Preview } from "@storybook/nextjs-vite";
 import { MINIMAL_VIEWPORTS } from "storybook/viewport";
 import { useRouter, useSearchParams } from "next/navigation";
 import { withThemeByDataAttribute } from "@storybook/addon-themes";
-import { SelectionProvider } from "../components/common/SelectionContext";
+import { SelectedTasksProvider } from "../components/tasks/SelectedTasksContext";
+import { SelectedItemsProvider } from "../components/common/SelectedItemsContext";
 import { EntityPaginationProvider } from "../components/common/EntityContainerPagination";
+import { SelectedProjectsProvider } from "../components/projects/SelectedProjectsContext";
 
 export const globalTypes = {
   locale: {
@@ -42,11 +44,24 @@ const preview: Preview = {
       );
     },
     (Story) => (
-      <SelectionProvider>
-        <EntityPaginationProvider>
-          <Story />
-        </EntityPaginationProvider>
-      </SelectionProvider>
+      <SelectedTasksProvider>
+        <Story />
+      </SelectedTasksProvider>
+    ),
+    (Story) => (
+      <SelectedProjectsProvider>
+        <Story />
+      </SelectedProjectsProvider>
+    ),
+    (Story) => (
+      <SelectedItemsProvider>
+        <Story />
+      </SelectedItemsProvider>
+    ),
+    (Story) => (
+      <EntityPaginationProvider>
+        <Story />
+      </EntityPaginationProvider>
     ),
     withThemeByDataAttribute({
       themes: {
