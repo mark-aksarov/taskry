@@ -112,7 +112,7 @@
   },
   "updateTaskStatuses": {
     "error": {
-      "internalServerError": "A server error occurred. Failed to update task statuses."
+      "internalServerError": "A server error occurred. Failed to update task status."
     }
   },
   "createProjectCategory": {

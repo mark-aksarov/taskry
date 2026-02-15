@@ -59,6 +59,11 @@ export const Default = {
     menuTrigger: (
       <TaskItemActionMenuTrigger {...TaskItemActionMenuTriggerStory.args} />
     ),
+    updateTaskStatus: () => {
+      return new Promise((res) =>
+        setTimeout(() => res({ status: "success" }), 500),
+      );
+    },
   },
 } satisfies Story;
 

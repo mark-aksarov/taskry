@@ -8,21 +8,28 @@ import {
 } from "@/components/common/Grid";
 
 import {
-  ItemBaseBadge,
-  ItemBaseDetailModalTrigger,
-} from "@/components/common/ItemBase";
+  ActionFn,
+  ActionState,
+  UpdateTaskStatusesPayload,
+} from "@/lib/actions/types";
+
+import {
+  UpdateTaskStatusProvider,
+  useUpdateTaskStatusContext,
+} from "../UpdateTaskStatusContext";
 
 import Image from "next/image";
+import { Link } from "@/components/ui/Link";
 import { TaskStatus } from "@/generated/prisma/enums";
+import { TaskItemBaseBadge } from "../TaskItemBaseBadge";
 import { useFormatter, useTranslations } from "next-intl";
 import { TaskGridItemLayout } from "./TaskGridItemLayout";
 import { UnknownUser } from "@/components/common/UnknownUser";
 import { ImageContainer } from "@/components/common/ImageContainer";
-import { getTaskStatusBadgeColor } from "../getTaskStatusBadgeColor";
-import { useSyncSelectionTaskItem } from "@/lib/hooks/useTaskSelection";
-import { TaskListItemCheckbox } from "../TaskListItem/TaskListItemCheckbox";
 import { TaskCommentsModalTrigger } from "../TaskCommentsModalTrigger";
-import { Link } from "@/components/ui/Link";
+import { useSyncSelectionTaskItem } from "@/lib/hooks/useTaskSelection";
+import { ItemBaseDetailModalTrigger } from "@/components/common/ItemBase";
+import { TaskListItemCheckbox } from "../TaskListItem/TaskListItemCheckbox";
 
 export interface TaskGridItemProps {
   id: number;
@@ -41,9 +48,21 @@ export interface TaskGridItemProps {
   menuTrigger: React.ReactNode;
   taskDetailModal: React.ReactNode;
   userDetailModal: React.ReactNode;
+  updateTaskStatus: ActionFn<ActionState, UpdateTaskStatusesPayload>;
 }
 
-export function TaskGridItem({
+export const TaskGridItem = ({
+  updateTaskStatus,
+  ...props
+}: TaskGridItemProps) => {
+  return (
+    <UpdateTaskStatusProvider updateTaskStatus={updateTaskStatus}>
+      <TaskGridItemInner {...props} />
+    </UpdateTaskStatusProvider>
+  );
+};
+
+export function TaskGridItemInner({
   id,
   title,
   deadline,
@@ -56,11 +75,13 @@ export function TaskGridItem({
   menuTrigger,
   taskDetailModal,
   userDetailModal,
-}: TaskGridItemProps) {
+}: Omit<TaskGridItemProps, "updateTaskStatus">) {
   const tStatus = useTranslations("tasks.TaskStatus");
   const t = useTranslations("tasks.TaskGridItem");
 
   useSyncSelectionTaskItem(id, title, status);
+
+  const { isUpdateTaskStatusPending } = useUpdateTaskStatusContext();
 
   const format = useFormatter();
 
@@ -127,11 +148,7 @@ export function TaskGridItem({
           modal={taskCommentsModal}
         />
       }
-      statusSlot={
-        <ItemBaseBadge color={getTaskStatusBadgeColor(status)}>
-          {tStatus(`${status}`)}
-        </ItemBaseBadge>
-      }
+      statusSlot={<TaskItemBaseBadge status={status} />}
       progressSlot={
         <GridItemProgress
           value={(subtasksDone / subtasksTotal) * 100}

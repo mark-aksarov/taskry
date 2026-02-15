@@ -7,16 +7,19 @@ import {
 } from "@/components/common/List";
 
 import {
-  ItemBaseBadge,
-  ItemBaseDetailModalTrigger,
-} from "@/components/common/ItemBase";
+  ActionFn,
+  ActionState,
+  UpdateTaskStatusesPayload,
+} from "@/lib/actions/types";
 
 import { Link } from "@/components/ui/Link";
 import { TaskStatus } from "@/generated/prisma/enums";
 import { useFormatter, useTranslations } from "next-intl";
 import { UserTaskListItemLayout } from "./UserTaskListItemLayout";
 import { useSyncSelectionTaskItem } from "@/lib/hooks/useTaskSelection";
-import { getTaskStatusBadgeColor } from "@/components/tasks/getTaskStatusBadgeColor";
+import { TaskItemBaseBadge } from "@/components/tasks/TaskItemBaseBadge";
+import { ItemBaseDetailModalTrigger } from "@/components/common/ItemBase";
+import { UpdateTaskStatusProvider } from "@/components/tasks/UpdateTaskStatusContext";
 import { TaskCommentsModalTrigger } from "@/components/tasks/TaskCommentsModalTrigger";
 import { TaskListItemCheckbox } from "@/components/tasks/TaskListItem/TaskListItemCheckbox";
 
@@ -29,9 +32,21 @@ export interface UserTaskListItemProps {
   taskCommentsModal: React.ReactNode;
   menuTrigger: React.ReactNode;
   taskDetailModal: React.ReactNode;
+  updateTaskStatus: ActionFn<ActionState, UpdateTaskStatusesPayload>;
 }
 
 export const UserTaskListItem = ({
+  updateTaskStatus,
+  ...props
+}: UserTaskListItemProps) => {
+  return (
+    <UpdateTaskStatusProvider updateTaskStatus={updateTaskStatus}>
+      <UserTaskListItemInner {...props} />
+    </UpdateTaskStatusProvider>
+  );
+};
+
+export const UserTaskListItemInner = ({
   id,
   title,
   deadline,
@@ -40,8 +55,7 @@ export const UserTaskListItem = ({
   taskCommentsModal,
   menuTrigger,
   taskDetailModal,
-}: UserTaskListItemProps) => {
-  const tStatus = useTranslations("tasks.TaskStatus");
+}: Omit<UserTaskListItemProps, "updateTaskStatus">) => {
   const t = useTranslations("users.UserTaskListItem");
 
   useSyncSelectionTaskItem(id, title, status);
@@ -77,12 +91,7 @@ export const UserTaskListItem = ({
         </ListItemInfo>
       }
       statusSlot={
-        <ItemBaseBadge
-          color={getTaskStatusBadgeColor(status)}
-          className="@max-lg:hidden"
-        >
-          {tStatus(`${status}`)}
-        </ItemBaseBadge>
+        <TaskItemBaseBadge status={status} className="@max-lg:hidden" />
       }
       commentsSlot={
         <TaskCommentsModalTrigger

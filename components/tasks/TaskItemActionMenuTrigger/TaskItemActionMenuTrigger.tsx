@@ -16,11 +16,12 @@ import {
 import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
 import { EditTaskModal } from "../EditTaskModal";
+import { startTransition, useState } from "react";
 import { DeleteTaskModal } from "../DeleteTaskModal";
 import { TaskStatus } from "@/generated/prisma/enums";
-import { startTransition, useActionState, useState } from "react";
 import { GuestModeModal } from "@/components/common/GuestModeModal";
 import { useActionErrorToast } from "@/lib/hooks/useActionErrorToast";
+import { useUpdateTaskStatusContext } from "../UpdateTaskStatusContext";
 import { Check, CircleEllipsis, Clock, Pencil, Trash } from "lucide-react";
 
 export type TaskItemActionMenuTriggerProps = {
@@ -30,12 +31,7 @@ export type TaskItemActionMenuTriggerProps = {
   taskStatus: TaskStatus;
   className?: string;
   deleteAction: ActionFn<ActionState, DeleteTasksPayload>;
-  updateStatusAction: ActionFn<ActionState, UpdateTaskStatusesPayload>;
   editTaskFormContainer: React.ReactNode;
-};
-
-const initialState: ActionState = {
-  status: null,
 };
 
 export function TaskItemActionMenuTrigger({
@@ -45,7 +41,6 @@ export function TaskItemActionMenuTrigger({
   taskStatus,
   className,
   deleteAction,
-  updateStatusAction,
   editTaskFormContainer,
 }: TaskItemActionMenuTriggerProps) {
   const t = useTranslations("tasks.TaskItemActionMenuTrigger");
@@ -60,11 +55,11 @@ export function TaskItemActionMenuTrigger({
   const [isOpenDeleteModal, setIsOpenDeleteModal] = useState(false);
 
   // State and action handler for updating task status
-  const [
+  const {
     updateTaskStatusState,
     updateTaskStatusAction,
-    updateTaskStatusPending,
-  ] = useActionState(updateStatusAction, initialState);
+    isUpdateTaskStatusPending,
+  } = useUpdateTaskStatusContext();
 
   // Show toast for status update errors
   useActionErrorToast(updateTaskStatusState);
@@ -91,11 +86,15 @@ export function TaskItemActionMenuTrigger({
     }
   }
 
+  const disabledKeys = isUpdateTaskStatusPending
+    ? ["pending", "active", "completed"]
+    : [taskStatus];
+
   return (
     <>
       <ItemBaseActionMenuTrigger
         onAction={handleAction}
-        disabledKeys={[taskStatus]}
+        disabledKeys={disabledKeys}
         renderDialogHeader={() => <ItemBaseActionMenuDialogHeader />}
         renderButton={() => (
           <ItemBaseActionMenuButton

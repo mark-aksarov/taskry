@@ -59,6 +59,7 @@ export async function UserTasksContainer({
               title={task.title}
               deadline={task.deadline}
               status={task.status}
+              updateTaskStatus={updateTaskStatuses}
               taskDetailModal={
                 <TaskDetailModal
                   taskId={task.id}
@@ -91,7 +92,6 @@ export async function UserTasksContainer({
                   taskTitle={task.title}
                   taskStatus={task.status}
                   deleteAction={deleteTasks}
-                  updateStatusAction={updateTaskStatuses}
                   editTaskFormContainer={
                     <EditTaskFormContainer taskId={task.id} />
                   }

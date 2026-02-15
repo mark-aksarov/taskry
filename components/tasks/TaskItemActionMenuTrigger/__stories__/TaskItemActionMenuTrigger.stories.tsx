@@ -24,7 +24,6 @@ export const Default: Story = {
     taskTitle: "Task 1",
     taskStatus: TaskStatus.active,
     deleteAction: () => ({ status: "success" }),
-    updateStatusAction: () => ({ status: "success" }),
     editTaskFormContainer: <EditTaskForm {...EditTaskFormStory.args} />,
   },
 };

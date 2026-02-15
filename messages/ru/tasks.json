@@ -27,7 +27,7 @@
   "TaskGridItem": {
     "noDeadline": "Без срока",
     "deadlineOn": "Срок до {date}",
-    "progressAriaLabel": "Прогресс проекта"
+    "progressAriaLabel": "Прогресс задачи"
   },
   "TaskListItem": {
     "noDeadline": "Без срока",

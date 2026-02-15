@@ -112,7 +112,7 @@
   },
   "updateTaskStatuses": {
     "error": {
-      "internalServerError": "Произошла ошибка сервера. Не удалось обновить статусы задач."
+      "internalServerError": "Произошла ошибка сервера. Не удалось обновить статус задач."
     }
   },
   "createProjectCategory": {

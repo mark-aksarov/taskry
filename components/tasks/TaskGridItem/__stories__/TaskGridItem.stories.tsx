@@ -33,6 +33,11 @@ export const Default = {
         className="-mr-2"
       />
     ),
+    updateTaskStatus: () => {
+      return new Promise((res) =>
+        setTimeout(() => res({ status: "success" }), 500),
+      );
+    },
   },
 } satisfies Story;
 

@@ -66,6 +66,7 @@ export async function TasksContainer({
                 key={task.id}
                 category={task.category}
                 project={task.project}
+                updateTaskStatus={updateTaskStatuses}
                 taskDetailModal={
                   <TaskDetailModal
                     taskId={task.id}
@@ -115,7 +116,6 @@ export async function TasksContainer({
                     taskTitle={task.title}
                     taskStatus={task.status}
                     deleteAction={deleteTasks}
-                    updateStatusAction={updateTaskStatuses}
                     editTaskFormContainer={
                       <EditTaskFormContainer taskId={task.id} />
                     }
@@ -134,6 +134,7 @@ export async function TasksContainer({
             <TaskGridItem
               key={task.id}
               subtasksDone={task.subtasks.done}
+              updateTaskStatus={updateTaskStatuses}
               taskDetailModal={
                 <TaskDetailModal
                   taskId={task.id}
@@ -165,7 +166,6 @@ export async function TasksContainer({
                   taskTitle={task.title}
                   taskStatus={task.status}
                   deleteAction={deleteTasks}
-                  updateStatusAction={updateTaskStatuses}
                   editTaskFormContainer={
                     <EditTaskFormContainer taskId={task.id} />
                   }

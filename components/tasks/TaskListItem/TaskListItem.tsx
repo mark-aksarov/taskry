@@ -1,27 +1,30 @@
 "use client";
 
 import {
+  ActionFn,
+  ActionState,
+  UpdateTaskStatusesPayload,
+} from "@/lib/actions/types";
+
+import {
   ListItemInfo,
   ListItemText,
   ListItemTitle,
 } from "@/components/common/List";
 
-import {
-  ItemBaseBadge,
-  ItemBaseDetailModalTrigger,
-} from "@/components/common/ItemBase";
-
 import Image from "next/image";
 import { Link } from "@/components/ui/Link";
 import { TaskStatus } from "@/generated/prisma/enums";
+import { TaskItemBaseBadge } from "../TaskItemBaseBadge";
 import { TaskListItemLayout } from "./TaskListItemLayout";
 import { useFormatter, useTranslations } from "next-intl";
 import { UnknownUser } from "@/components/common/UnknownUser";
 import { TaskListItemCheckbox } from "./TaskListItemCheckbox";
 import { ImageContainer } from "@/components/common/ImageContainer";
-import { getTaskStatusBadgeColor } from "../getTaskStatusBadgeColor";
-import { useSyncSelectionTaskItem } from "@/lib/hooks/useTaskSelection";
+import { UpdateTaskStatusProvider } from "../UpdateTaskStatusContext";
 import { TaskCommentsModalTrigger } from "../TaskCommentsModalTrigger";
+import { useSyncSelectionTaskItem } from "@/lib/hooks/useTaskSelection";
+import { ItemBaseDetailModalTrigger } from "@/components/common/ItemBase";
 
 export interface TaskListItemProps {
   id: number;
@@ -48,9 +51,21 @@ export interface TaskListItemProps {
   taskDetailModal: React.ReactNode;
   userDetailModal: React.ReactNode;
   projectDetailModal: React.ReactNode;
+  updateTaskStatus: ActionFn<ActionState, UpdateTaskStatusesPayload>;
 }
 
 export const TaskListItem = ({
+  updateTaskStatus,
+  ...props
+}: TaskListItemProps) => {
+  return (
+    <UpdateTaskStatusProvider updateTaskStatus={updateTaskStatus}>
+      <TaskListItemInner {...props} />
+    </UpdateTaskStatusProvider>
+  );
+};
+
+export const TaskListItemInner = ({
   id,
   title,
   deadline,
@@ -65,8 +80,7 @@ export const TaskListItem = ({
   taskDetailModal,
   userDetailModal,
   projectDetailModal,
-}: TaskListItemProps) => {
-  const tStatus = useTranslations("tasks.TaskStatus");
+}: Omit<TaskListItemProps, "updateTaskStatus">) => {
   const t = useTranslations("tasks.TaskListItem");
 
   useSyncSelectionTaskItem(id, title, status);
@@ -164,12 +178,7 @@ export const TaskListItem = ({
         </ListItemInfo>
       }
       statusSlot={
-        <ItemBaseBadge
-          className="@max-lg:hidden"
-          color={getTaskStatusBadgeColor(status)}
-        >
-          {tStatus(`${status}`)}
-        </ItemBaseBadge>
+        <TaskItemBaseBadge className="@max-lg:hidden" status={status} />
       }
       commentsModalTriggerSlot={
         <TaskCommentsModalTrigger

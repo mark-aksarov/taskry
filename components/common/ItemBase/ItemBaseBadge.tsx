@@ -6,9 +6,6 @@ export function ItemBaseBadge({
   ...props
 }: BadgeProps & { className?: string }) {
   return (
-    <Badge
-      className={twMerge("block w-[5.625rem] truncate px-2", className)}
-      {...props}
-    />
+    <Badge className={twMerge("w-[5.625rem] px-2", className)} {...props} />
   );
 }

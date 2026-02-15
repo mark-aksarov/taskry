@@ -89,6 +89,7 @@ async function AssignedTasksContainerInner({
               project={task.project}
               status={task.status}
               assignee={task.assignee}
+              updateTaskStatus={updateTaskStatuses}
               taskDetailModal={
                 <TaskDetailModal
                   taskId={task.id}
@@ -139,7 +140,6 @@ async function AssignedTasksContainerInner({
                   taskTitle={task.title}
                   taskStatus={task.status}
                   deleteAction={deleteTasks}
-                  updateStatusAction={updateTaskStatuses}
                   editTaskFormContainer={
                     <EditTaskFormContainer taskId={task.id} />
                   }
