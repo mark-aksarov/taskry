@@ -1,5 +1,12 @@
 "use server";
 
+import {
+  userEmail,
+  rememberMe,
+  userFullName,
+  userPassword,
+} from "@/lib/schemas/user";
+
 import * as z from "zod";
 import { auth } from "@/lib/auth";
 import prisma from "@/lib/prisma";
@@ -8,13 +15,12 @@ import { APIError } from "better-auth";
 import { headers } from "next/headers";
 import { redirect } from "@/i18n/navigation";
 import { getLocale, getTranslations } from "next-intl/server";
-import { userEmail, userFullName, userPassword } from "@/lib/schemas/user";
 
 const schema = z.object({
   name: userFullName,
   email: userEmail,
   password: userPassword,
-  rememberMe: z.stringbool(),
+  rememberMe: rememberMe,
 });
 
 export async function signUp(

@@ -11,8 +11,8 @@ interface TaskStatusSelectProps {
 export function TaskStatusSelect({
   defaultSelectedKey,
 }: TaskStatusSelectProps) {
-  const t = useTranslations("tasks.TaskStatusSelect");
   const tStatus = useTranslations("tasks.TaskStatus");
+  const t = useTranslations("tasks.TaskStatusSelect");
 
   return (
     <ResponsiveSelect

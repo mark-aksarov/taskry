@@ -6,13 +6,13 @@ import { ActionState } from "../types";
 import { APIError } from "better-auth";
 import { headers } from "next/headers";
 import { redirect } from "@/i18n/navigation";
-import { userEmail, userPassword } from "@/lib/schemas/user";
 import { getLocale, getTranslations } from "next-intl/server";
+import { rememberMe, userEmail, userPassword } from "@/lib/schemas/user";
 
 const schema = z.object({
   email: userEmail,
   password: userPassword,
-  rememberMe: z.stringbool(),
+  rememberMe: rememberMe,
 });
 
 export async function signIn(
@@ -37,6 +37,7 @@ export async function signIn(
   try {
     const input = Object.fromEntries(formData.entries());
     const parsedData = schema.parse(input);
+    console.log(parsedData);
 
     await auth.api.signInEmail({ body: parsedData });
   } catch (error: unknown) {

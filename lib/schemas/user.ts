@@ -9,3 +9,7 @@ export const userEmail = z.email().max(254);
 export const userPassword = z.string().min(8).max(128);
 export const userPhoneNumber = z.string().trim().min(1).max(255);
 export const userPublicLink = z.string().trim().min(1).max(255);
+export const rememberMe = z.preprocess(
+  (val) => (!val ? "false" : val),
+  z.stringbool(),
+);

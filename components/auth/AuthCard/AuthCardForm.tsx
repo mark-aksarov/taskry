@@ -11,7 +11,7 @@ interface AuthCardFormProps {
 export function AuthCardForm({ action, children }: AuthCardFormProps) {
   return (
     <Form
-      onSubmit={(e) => handleActionSubmit(e, action)}
+      onSubmit={(e) => handleActionSubmit(e, action, ["rememberMe"])}
       className="flex flex-col gap-6"
     >
       {children}
