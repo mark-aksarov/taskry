@@ -10,17 +10,15 @@ import { useState } from "react";
 import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
 import { Pencil, Trash } from "lucide-react";
-import { ActionFn, ActionState } from "@/lib/actions/types";
 import { GuestModeModal } from "@/components/common/GuestModeModal";
 import { EditProjectCategoryModal } from "../EditProjectCategoryModal";
-import { DeleteProjectCategoryModal } from "../DeleteProjectCategoryModal";
+import { useDeleteProjectCategoryModal } from "../DeleteProjectCategoryModal";
 
 export type ProjectCategoryItemActionMenuTriggerProps = {
   guestMode: boolean;
   projectCategoryId: number;
   projectCategoryName: string;
   editProjectCategoryForm: React.ReactNode;
-  deleteProjectCategories: ActionFn<ActionState, number[]>;
 };
 
 export function ProjectCategoryItemActionMenuTrigger({
@@ -28,7 +26,6 @@ export function ProjectCategoryItemActionMenuTrigger({
   projectCategoryId,
   projectCategoryName,
   editProjectCategoryForm,
-  deleteProjectCategories,
 }: ProjectCategoryItemActionMenuTriggerProps) {
   const t = useTranslations(
     "projectCategories.ProjectCategoryItemActionMenuTrigger",
@@ -41,7 +38,8 @@ export function ProjectCategoryItemActionMenuTrigger({
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
   // Modal state for deleting the project category
-  const [isOpenDeleteModal, setIsOpenDeleteModal] = useState(false);
+  const { setState: setDeleteCompanyModalState } =
+    useDeleteProjectCategoryModal();
 
   // Handle menu actions
   const handleAction = (key: Key) => {
@@ -54,7 +52,11 @@ export function ProjectCategoryItemActionMenuTrigger({
     if (action === "edit") {
       setIsEditModalOpen(true);
     } else if (action === "delete") {
-      setIsOpenDeleteModal(true);
+      setDeleteCompanyModalState({
+        isOpen: true,
+        projectCategoryId,
+        projectCategoryName,
+      });
     }
   };
 
@@ -77,14 +79,6 @@ export function ProjectCategoryItemActionMenuTrigger({
           <Trash size={16} /> {t("delete")}
         </Item>
       </ItemBaseActionMenuTrigger>
-
-      <DeleteProjectCategoryModal
-        isOpen={isOpenDeleteModal}
-        onOpenChange={setIsOpenDeleteModal}
-        projectCategoryId={projectCategoryId}
-        projectCategoryName={projectCategoryName}
-        deleteProjectCategories={deleteProjectCategories}
-      />
 
       <EditProjectCategoryModal
         isOpen={isEditModalOpen}

@@ -11,18 +11,27 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { CustomerGridStory } from "@/components/customer/CustomerGrid/__stories__";
 import { CustomerListStory } from "@/components/customer/CustomerList/__stories__";
 import { EntityContainerPresentation } from "@/components/common/EntityContainerPresentation";
+import { withSelectedItemsProvider } from "@/components/common/SelectedItemsContext/__stories__";
+import { withDeleteCustomerModalProvider } from "@/components/customer/DeleteCustomerModal/__stories__";
+import { withEntityPaginationProvider } from "@/components/common/EntityContainerPagination/__stories__";
 import { CustomerToolbarActionsMenuTrigger } from "@/components/customer/CustomerToolbarActionsMenuTrigger";
 import { CustomerToolbarFiltersModalTrigger } from "@/components/customer/CustomerToolbarFiltersModalTrigger";
 import { CustomerToolbarCreateNewMenuTrigger } from "@/components/customer/CustomerToolbarCreateNewMenuTrigger";
 import { CustomerToolbarActionsMenuTriggerStory } from "@/components/customer/CustomerToolbarActionsMenuTrigger/__stories__";
-import { CustomerToolbarCreateNewMenuTriggerStory } from "@/components/customer/CustomerToolbarCreateNewMenuTrigger/__stories__";
 import { CustomerToolbarFiltersModalTriggerStory } from "@/components/customer/CustomerToolbarFiltersModalTrigger/__stories__";
+import { CustomerToolbarCreateNewMenuTriggerStory } from "@/components/customer/CustomerToolbarCreateNewMenuTrigger/__stories__";
 
 const meta = {
   title: "pages/CustomersPage",
   component: CustomersPage,
   parameters: { layout: "fullscreen" },
-  decorators: [PageDecorator, withThemedBackground],
+  decorators: [
+    withDeleteCustomerModalProvider,
+    withEntityPaginationProvider,
+    withSelectedItemsProvider,
+    PageDecorator,
+    withThemedBackground,
+  ],
   beforeEach: () => {
     mocked(usePathname).mockReturnValue("/customers");
     mocked(useRouter).mockReturnValue({ push: fn() } as any);

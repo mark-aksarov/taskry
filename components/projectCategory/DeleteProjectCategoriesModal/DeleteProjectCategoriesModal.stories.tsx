@@ -40,15 +40,3 @@ export const Default = {
     deleteProjectCategories: () => ({ status: "success" }),
   },
 } satisfies Story;
-
-export const WithError = {
-  args: {
-    projectCategoryIds: [1, 2, 3],
-    isOpen: false,
-    onOpenChange: () => {},
-    deleteProjectCategories: () => ({
-      status: "error",
-      errorCode: "validationError",
-    }),
-  },
-} satisfies Story;

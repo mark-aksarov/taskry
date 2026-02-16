@@ -29,15 +29,6 @@ export const Default = {
     customerIds: [1, 2, 3],
     isOpen: false,
     onOpenChange: () => {},
-    deleteAction: () => ({ status: "success" }),
-  },
-} satisfies Story;
-
-export const WithError = {
-  args: {
-    customerIds: [1, 2, 3],
-    isOpen: false,
-    onOpenChange: () => {},
-    deleteAction: () => ({ status: "error", errorCode: "validationError" }),
+    deleteCustomers: () => ({ status: "success" }),
   },
 } satisfies Story;

@@ -1,0 +1,1 @@
+export { withDeleteTaskModalProvider } from "./withDeleteTaskModalProvider";

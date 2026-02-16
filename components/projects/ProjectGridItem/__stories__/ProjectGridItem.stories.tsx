@@ -8,12 +8,18 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { ProjectDetailModalStory } from "../../ProjectDetailModal/__stories__";
 import { ProjectItemActionMenuTrigger } from "../../ProjectItemActionMenuTrigger";
 import { ProjectCommentsModalStory } from "../../ProjectCommentsModal/__stories__";
+import { withDeleteProjectModalProvider } from "../../DeleteProjectModal/__stories__";
+import { withSelectedProjectsProvider } from "../../SelectedProjectsContext/__stories__";
 import { ProjectItemActionMenuTriggerStory } from "../../ProjectItemActionMenuTrigger/__stories__";
 
 const meta = {
   title: "components/projects/ProjectGridItem",
   component: ProjectGridItem,
-  decorators: [withThemedBackground],
+  decorators: [
+    withSelectedProjectsProvider,
+    withDeleteProjectModalProvider,
+    withThemedBackground,
+  ],
 } satisfies Meta<typeof ProjectGridItem>;
 
 export default meta;

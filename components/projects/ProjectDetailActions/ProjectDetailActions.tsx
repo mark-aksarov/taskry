@@ -98,7 +98,7 @@ export function ProjectDetailActions({
         projectTitle={projectTitle}
         isOpen={isDeleteModalOpen}
         onOpenChange={setIsDeleteModalOpen}
-        deleteAction={deleteProject}
+        deleteProjects={deleteProject}
       />
 
       <GuestModeModal

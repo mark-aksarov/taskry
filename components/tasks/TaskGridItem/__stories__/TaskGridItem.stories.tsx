@@ -9,13 +9,19 @@ import { TaskDetailModalStory } from "../../TaskDetailModal/__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { TaskItemActionMenuTrigger } from "../../TaskItemActionMenuTrigger";
 import { TaskCommentsModalStory } from "../../TaskCommentsModal/__stories__";
+import { withDeleteTaskModalProvider } from "../../DeleteTaskModal/__stories__";
+import { withSelectedTasksProvider } from "../../SelectedTasksContext/__stories__";
 import { UserDetailModalStory } from "@/components/users/UserDetailModal/__stories__";
 import { TaskItemActionMenuTriggerStory } from "../../TaskItemActionMenuTrigger/__stories__";
 
 const meta = {
   title: "components/tasks/TaskGridItem",
   component: TaskGridItem,
-  decorators: [withThemedBackground],
+  decorators: [
+    withSelectedTasksProvider,
+    withDeleteTaskModalProvider,
+    withThemedBackground,
+  ],
 } satisfies Meta<typeof TaskGridItem>;
 
 export default meta;

@@ -2,11 +2,9 @@ import "server-only";
 
 import { TaskList } from "../TaskList";
 import { TaskGrid } from "../TaskGrid";
-import { TaskFilters } from "@/lib/types";
 import { TaskListItem } from "../TaskListItem";
 import { TaskGridItem } from "../TaskGridItem";
 import { TaskDetailModal } from "../TaskDetailModal";
-import { getTaskList } from "@/lib/data/task/task.dal";
 import { hasGuestRole } from "@/lib/utils/hasGuestRole";
 import { TaskCommentsModal } from "../TaskCommentsModal";
 import { TaskListItemDTO } from "@/lib/data/task/task.dto";
@@ -23,27 +21,21 @@ import { UserDetailContainer } from "@/components/users/UserDetailContainer";
 import { ProjectDetailModal } from "@/components/projects/ProjectDetailModal";
 import { ProjectDetailContainer } from "@/components/projects/ProjectDetailContainer";
 import { EntityContainerPresentation } from "@/components/common/EntityContainerPresentation";
+import { DeleteTaskModalProvider } from "../DeleteTaskModal";
 
 interface TasksContainerProps {
+  tasks: TaskListItemDTO[];
+  totalCount: number;
   page: number;
   pageSize: number;
-  sort: string;
-  filters?: TaskFilters;
 }
 
 export async function TasksContainer({
+  tasks,
+  totalCount,
   page,
   pageSize,
-  sort,
-  filters,
 }: TasksContainerProps) {
-  const { items: tasks, totalCount } = await getTaskList({
-    page,
-    pageSize,
-    sort,
-    filters,
-  });
-
   const getCommonProps = (task: TaskListItemDTO) => ({
     id: task.id,
     title: task.title,
@@ -57,15 +49,83 @@ export async function TasksContainer({
   const guestMode = await hasGuestRole();
 
   return (
-    <EntityContainerPresentation
-      list={
-        <TaskList showCheckbox>
-          {tasks.map((task) => {
-            return (
-              <TaskListItem
+    <DeleteTaskModalProvider deleteTask={deleteTasks}>
+      <EntityContainerPresentation
+        list={
+          <TaskList showCheckbox>
+            {tasks.map((task) => {
+              return (
+                <TaskListItem
+                  key={task.id}
+                  category={task.category}
+                  project={task.project}
+                  updateTaskStatus={updateTaskStatuses}
+                  taskDetailModal={
+                    <TaskDetailModal
+                      taskId={task.id}
+                      taskDetailContainer={
+                        <TaskDetailContainer
+                          taskId={task.id}
+                          guestMode={guestMode}
+                        />
+                      }
+                    />
+                  }
+                  taskCommentsModal={
+                    <TaskCommentsModal
+                      taskId={task.id}
+                      taskCommentsContainer={
+                        <TaskCommentsContainer
+                          guestMode={guestMode}
+                          taskId={task.id}
+                        />
+                      }
+                      sendCommentAction={sendComment}
+                      updateCommentAction={updateComment}
+                    />
+                  }
+                  projectDetailModal={
+                    <ProjectDetailModal
+                      projectId={task.project.id}
+                      projectDetailContainer={
+                        <ProjectDetailContainer projectId={task.project.id} />
+                      }
+                    />
+                  }
+                  userDetailModal={
+                    task.assignee && (
+                      <UserDetailModal
+                        userId={task.assignee.id}
+                        userDetailContainer={
+                          <UserDetailContainer userId={task.assignee.id} />
+                        }
+                      />
+                    )
+                  }
+                  menuTrigger={
+                    <TaskItemActionMenuTrigger
+                      guestMode={guestMode}
+                      taskId={task.id}
+                      taskTitle={task.title}
+                      taskStatus={task.status}
+                      editTaskFormContainer={
+                        <EditTaskFormContainer taskId={task.id} />
+                      }
+                    />
+                  }
+                  showCheckbox
+                  {...getCommonProps(task)}
+                />
+              );
+            })}
+          </TaskList>
+        }
+        grid={
+          <TaskGrid>
+            {tasks.map((task) => (
+              <TaskGridItem
                 key={task.id}
-                category={task.category}
-                project={task.project}
+                subtasksDone={task.subtasks.done}
                 updateTaskStatus={updateTaskStatuses}
                 taskDetailModal={
                   <TaskDetailModal
@@ -91,12 +151,16 @@ export async function TasksContainer({
                     updateCommentAction={updateComment}
                   />
                 }
-                projectDetailModal={
-                  <ProjectDetailModal
-                    projectId={task.project.id}
-                    projectDetailContainer={
-                      <ProjectDetailContainer projectId={task.project.id} />
+                menuTrigger={
+                  <TaskItemActionMenuTrigger
+                    guestMode={guestMode}
+                    taskId={task.id}
+                    taskTitle={task.title}
+                    taskStatus={task.status}
+                    editTaskFormContainer={
+                      <EditTaskFormContainer taskId={task.id} />
                     }
+                    className="-mr-2"
                   />
                 }
                 userDetailModal={
@@ -109,87 +173,15 @@ export async function TasksContainer({
                     />
                   )
                 }
-                menuTrigger={
-                  <TaskItemActionMenuTrigger
-                    guestMode={guestMode}
-                    taskId={task.id}
-                    taskTitle={task.title}
-                    taskStatus={task.status}
-                    deleteAction={deleteTasks}
-                    editTaskFormContainer={
-                      <EditTaskFormContainer taskId={task.id} />
-                    }
-                  />
-                }
-                showCheckbox
                 {...getCommonProps(task)}
               />
-            );
-          })}
-        </TaskList>
-      }
-      grid={
-        <TaskGrid>
-          {tasks.map((task) => (
-            <TaskGridItem
-              key={task.id}
-              subtasksDone={task.subtasks.done}
-              updateTaskStatus={updateTaskStatuses}
-              taskDetailModal={
-                <TaskDetailModal
-                  taskId={task.id}
-                  taskDetailContainer={
-                    <TaskDetailContainer
-                      taskId={task.id}
-                      guestMode={guestMode}
-                    />
-                  }
-                />
-              }
-              taskCommentsModal={
-                <TaskCommentsModal
-                  taskId={task.id}
-                  taskCommentsContainer={
-                    <TaskCommentsContainer
-                      guestMode={guestMode}
-                      taskId={task.id}
-                    />
-                  }
-                  sendCommentAction={sendComment}
-                  updateCommentAction={updateComment}
-                />
-              }
-              menuTrigger={
-                <TaskItemActionMenuTrigger
-                  guestMode={guestMode}
-                  taskId={task.id}
-                  taskTitle={task.title}
-                  taskStatus={task.status}
-                  deleteAction={deleteTasks}
-                  editTaskFormContainer={
-                    <EditTaskFormContainer taskId={task.id} />
-                  }
-                  className="-mr-2"
-                />
-              }
-              userDetailModal={
-                task.assignee && (
-                  <UserDetailModal
-                    userId={task.assignee.id}
-                    userDetailContainer={
-                      <UserDetailContainer userId={task.assignee.id} />
-                    }
-                  />
-                )
-              }
-              {...getCommonProps(task)}
-            />
-          ))}
-        </TaskGrid>
-      }
-      page={page}
-      pageSize={pageSize}
-      totalPages={Math.ceil(totalCount / pageSize)}
-    />
+            ))}
+          </TaskGrid>
+        }
+        page={page}
+        pageSize={pageSize}
+        totalPages={Math.ceil(totalCount / pageSize)}
+      />
+    </DeleteTaskModalProvider>
   );
 }

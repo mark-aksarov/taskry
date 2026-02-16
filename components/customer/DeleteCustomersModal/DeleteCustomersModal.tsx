@@ -11,14 +11,15 @@ import {
 import {
   ActionFn,
   ActionState,
-  DeleteProjectsPayload,
+  DeleteCustomersPayload,
 } from "@/lib/actions/types";
 
 import { useTranslations } from "next-intl";
 import { ModalProps } from "@/components/ui/Modal";
 import { DialogHeading } from "@/components/ui/Dialog";
-import { startTransition, useActionState, useEffect } from "react";
-import { useActionErrorToast } from "@/lib/hooks/useActionErrorToast";
+import { startTransition, useActionState } from "react";
+import { useErrorToast } from "@/lib/hooks/useErrorToast";
+import { useSelectedItems } from "@/components/common/SelectedItemsContext";
 
 const initialState: ActionState = {
   status: null,
@@ -26,28 +27,41 @@ const initialState: ActionState = {
 
 interface DeleteCustomersModalProps extends ModalProps {
   customerIds: number[];
-  deleteAction: ActionFn<ActionState, DeleteProjectsPayload>;
-  onSuccess?: () => void;
+  deleteCustomers: ActionFn<ActionState, DeleteCustomersPayload>;
 }
 
 export function DeleteCustomersModal({
   customerIds,
   isOpen,
   onOpenChange,
-  deleteAction,
-  onSuccess,
+  deleteCustomers,
 }: DeleteCustomersModalProps) {
   const t = useTranslations("customers.DeleteCustomersModal");
-  const [state, action, isPending] = useActionState(deleteAction, initialState);
 
-  useEffect(() => {
-    if (state.status === "success") {
-      onSuccess?.();
-      onOpenChange?.(false);
-    }
-  }, [state.status, onSuccess]);
+  // show error toast when delete action fails
+  const { close: closeErrorToast, add: addErrorToast } = useErrorToast();
 
-  useActionErrorToast(state);
+  const [state, action, isPending] = useActionState(
+    async (prevState: ActionState, payload: DeleteCustomersPayload) => {
+      // call server action to perform delete action
+      const newState = await deleteCustomers(prevState, payload);
+
+      // close error toast
+      closeErrorToast();
+
+      // clear selected items and close modal
+      if (newState.status === "success") {
+        onOpenChange?.(false);
+      }
+      // show error toast
+      else if (newState.status === "error" && newState.message) {
+        addErrorToast(newState.message);
+      }
+
+      return newState;
+    },
+    initialState,
+  );
 
   const handleDelete = () => {
     startTransition(() => action(customerIds));

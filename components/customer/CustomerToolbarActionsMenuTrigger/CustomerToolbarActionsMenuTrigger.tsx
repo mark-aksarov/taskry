@@ -21,11 +21,11 @@ import { DeleteCustomersModal } from "../DeleteCustomersModal";
 import { useSelectedItems } from "@/components/common/SelectedItemsContext";
 
 interface CustomerToolbarActionsMenuTriggerProps {
-  deleteAction: ActionFn<ActionState, DeleteCustomersPayload>;
+  deleteCustomers: ActionFn<ActionState, DeleteCustomersPayload>;
 }
 
 export const CustomerToolbarActionsMenuTrigger = ({
-  deleteAction,
+  deleteCustomers,
 }: CustomerToolbarActionsMenuTriggerProps) => {
   const t = useTranslations("customers.CustomerToolbarActionsMenuTrigger");
 
@@ -73,10 +73,9 @@ export const CustomerToolbarActionsMenuTrigger = ({
       {/* Modal for confirming customer deletion */}
       <DeleteCustomersModal
         customerIds={selected.ids}
-        deleteAction={deleteAction}
+        deleteCustomers={deleteCustomers}
         isOpen={isDeleteModalOpen}
         onOpenChange={setIsDeleteModalOpen}
-        onSuccess={selected.clear}
       />
     </>
   );

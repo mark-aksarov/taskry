@@ -32,7 +32,7 @@ describe("Button", () => {
   });
 
   test.each<[ButtonVariant, boolean, string]>([
-    ["primary", true, "bg-gray-100"],
+    ["primary", true, "bg-gray-200"],
     ["ghost", true, "text-gray-400"],
     ["primary", false, "bg-blue-600"],
     ["secondary", false, "bg-blue-50"],

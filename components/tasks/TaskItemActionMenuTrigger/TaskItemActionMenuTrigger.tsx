@@ -1,13 +1,6 @@
 "use client";
 
 import {
-  ActionFn,
-  ActionState,
-  DeleteTasksPayload,
-  UpdateTaskStatusesPayload,
-} from "@/lib/actions/types";
-
-import {
   ItemBaseActionMenuButton,
   ItemBaseActionMenuTrigger,
   ItemBaseActionMenuDialogHeader,
@@ -17,8 +10,8 @@ import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
 import { EditTaskModal } from "../EditTaskModal";
 import { startTransition, useState } from "react";
-import { DeleteTaskModal } from "../DeleteTaskModal";
 import { TaskStatus } from "@/generated/prisma/enums";
+import { useDeleteTaskModal } from "../DeleteTaskModal";
 import { GuestModeModal } from "@/components/common/GuestModeModal";
 import { useActionErrorToast } from "@/lib/hooks/useActionErrorToast";
 import { useUpdateTaskStatusContext } from "../UpdateTaskStatusContext";
@@ -30,7 +23,6 @@ export type TaskItemActionMenuTriggerProps = {
   taskTitle: string;
   taskStatus: TaskStatus;
   className?: string;
-  deleteAction: ActionFn<ActionState, DeleteTasksPayload>;
   editTaskFormContainer: React.ReactNode;
 };
 
@@ -40,7 +32,6 @@ export function TaskItemActionMenuTrigger({
   taskTitle,
   taskStatus,
   className,
-  deleteAction,
   editTaskFormContainer,
 }: TaskItemActionMenuTriggerProps) {
   const t = useTranslations("tasks.TaskItemActionMenuTrigger");
@@ -52,7 +43,7 @@ export function TaskItemActionMenuTrigger({
   const [isOpenEditModal, setIsOpenEditModal] = useState(false);
 
   // Modal state for deleting the task
-  const [isOpenDeleteModal, setIsOpenDeleteModal] = useState(false);
+  const { setState: setDeleteTaskModalState } = useDeleteTaskModal();
 
   // State and action handler for updating task status
   const {
@@ -75,7 +66,11 @@ export function TaskItemActionMenuTrigger({
     if (action === "edit") {
       setIsOpenEditModal(true);
     } else if (action === "delete") {
-      setIsOpenDeleteModal(true);
+      setDeleteTaskModalState({
+        isOpen: true,
+        taskId,
+        taskTitle,
+      });
     } else {
       startTransition(() => {
         updateTaskStatusAction({
@@ -126,15 +121,6 @@ export function TaskItemActionMenuTrigger({
         isOpen={isOpenEditModal}
         onOpenChange={setIsOpenEditModal}
         editTaskFormContainer={editTaskFormContainer}
-      />
-
-      {/* Modal for confirming task deletion */}
-      <DeleteTaskModal
-        taskId={taskId}
-        taskTitle={taskTitle}
-        isOpen={isOpenDeleteModal}
-        onOpenChange={setIsOpenDeleteModal}
-        deleteAction={deleteAction}
       />
 
       <GuestModeModal

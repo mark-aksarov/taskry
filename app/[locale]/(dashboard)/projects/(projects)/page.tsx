@@ -13,13 +13,14 @@ import { customerId } from "@/lib/schemas/customer";
 import { projectStatus } from "@/lib/schemas/project";
 import { ProjectsPageEmpty } from "./ProjectsPageEmpty";
 import { hasGuestRole } from "@/lib/utils/hasGuestRole";
-import { getProjectCount } from "@/lib/data/project/project.dal";
+import { getProjectList } from "@/lib/data/project/project.dal";
 import { projectCategoryId } from "@/lib/schemas/projectCategory";
 import { deleteProjects } from "@/lib/actions/project/deleteProjects";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { ProjectsContainer } from "@/components/projects/ProjectsContainer";
 import { updateProjectStatuses } from "@/lib/actions/project/updateProjectStatuses";
 import { NewProjectFormContainer } from "@/components/projects/NewProjectFormContainer";
+import { SelectedProjectsProvider } from "@/components/projects/SelectedProjectsContext";
 import { createProjectCategory } from "@/lib/actions/projectCategory/createProjectCategory";
 import { NewProjectCategoryForm } from "@/components/projectCategory/NewProjectCategoryForm";
 import { ProjectFiltersFormContainer } from "@/components/projects/ProjectFiltersFormContainer";
@@ -66,7 +67,13 @@ export default async function AppProjectsPage({
   const { page, pageSize, sort, ...filters } = validated;
 
   // Get count
-  const projectCount = await getProjectCount();
+  const { items: projects, totalCount } = await getProjectList({
+    page,
+    pageSize,
+    sort,
+    filters,
+  });
+
   const guestMode = await hasGuestRole();
 
   const projectToolbarCreateNewMenuTrigger = (
@@ -79,7 +86,7 @@ export default async function AppProjectsPage({
     />
   );
 
-  if (!projectCount) {
+  if (!totalCount) {
     return (
       <ProjectsPageEmpty
         projectToolbarCreateNewMenuTrigger={projectToolbarCreateNewMenuTrigger}
@@ -88,30 +95,34 @@ export default async function AppProjectsPage({
   }
 
   return (
-    <ProjectsPage
-      projectsContainer={
-        <ProjectsContainer
-          page={page}
-          pageSize={pageSize}
-          sort={sort}
-          filters={filters}
-        />
-      }
-      projectToolbarCreateNewMenuTrigger={projectToolbarCreateNewMenuTrigger}
-      projectToolbarFiltersModalTrigger={
-        <ProjectToolbarFiltersModalTrigger
-          filtersFormContainer={
-            <ProjectFiltersFormContainer filters={filters} />
-          }
-        />
-      }
-      projectToolbarActionsMenuTrigger={
-        <ProjectToolbarActionsMenuTrigger
-          guestMode={guestMode}
-          deleteAction={deleteProjects}
-          updateStatusAction={updateProjectStatuses}
-        />
-      }
-    />
+    <SelectedProjectsProvider
+      pageItems={projects.map((p) => ({ id: p.id, status: p.status }))}
+    >
+      <ProjectsPage
+        projectsContainer={
+          <ProjectsContainer
+            projects={projects}
+            totalCount={totalCount}
+            page={page}
+            pageSize={pageSize}
+          />
+        }
+        projectToolbarCreateNewMenuTrigger={projectToolbarCreateNewMenuTrigger}
+        projectToolbarFiltersModalTrigger={
+          <ProjectToolbarFiltersModalTrigger
+            filtersFormContainer={
+              <ProjectFiltersFormContainer filters={filters} />
+            }
+          />
+        }
+        projectToolbarActionsMenuTrigger={
+          <ProjectToolbarActionsMenuTrigger
+            guestMode={guestMode}
+            deleteProjects={deleteProjects}
+            updateStatusAction={updateProjectStatuses}
+          />
+        }
+      />
+    </SelectedProjectsProvider>
   );
 }

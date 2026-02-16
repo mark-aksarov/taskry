@@ -3,6 +3,8 @@ import { UserListItem } from "../../UserListItem";
 import type { Meta, StoryObj } from "@storybook/react";
 import { UserListItemStory } from "../../UserListItem/__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { withDeleteUserModalProvider } from "../../DeleteUserModal/__stories__";
+import { withEntityPaginationProvider } from "@/components/common/EntityContainerPagination/__stories__";
 
 export const mockedUsers = [
   {
@@ -100,7 +102,11 @@ export const mockedUsers = [
 const meta = {
   title: "components/users/UserList",
   component: UserList,
-  decorators: [withThemedBackground],
+  decorators: [
+    withEntityPaginationProvider,
+    withDeleteUserModalProvider,
+    withThemedBackground,
+  ],
   excludeStories: ["mockedUsers"],
 } satisfies Meta<typeof UserList>;
 

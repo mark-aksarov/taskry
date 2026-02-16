@@ -8,16 +8,23 @@ import { PageDecorator } from "@/.storybook/PageDecorator";
 import { PositionList } from "@/components/position/PositionList";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { PositionListStory } from "@/components/position/PositionList/__stories__";
-import { PositionToolbarCreateNewModalTrigger } from "@/components/position/PositionToolbarCreateNewModalTrigger";
+import { withSelectedItemsProvider } from "@/components/common/SelectedItemsContext/__stories__";
+import { withDeletePositionModalProvider } from "@/components/position/DeletePositionModal/__stories__";
 import { PositionToolbarActionsMenuTrigger } from "@/components/position/PositionToolbarActionsMenuTrigger";
-import { PositionToolbarCreateNewModalTriggerStory } from "@/components/position/PositionToolbarCreateNewModalTrigger/__stories__";
+import { PositionToolbarCreateNewModalTrigger } from "@/components/position/PositionToolbarCreateNewModalTrigger";
 import { PositionToolbarActionsMenuTriggerStory } from "@/components/position/PositionToolbarActionsMenuTrigger/__stories__";
+import { PositionToolbarCreateNewModalTriggerStory } from "@/components/position/PositionToolbarCreateNewModalTrigger/__stories__";
 
 const meta = {
   title: "pages/PositionsPage",
   component: PositionsPage,
   parameters: { layout: "fullscreen" },
-  decorators: [PageDecorator, withThemedBackground],
+  decorators: [
+    withDeletePositionModalProvider,
+    withSelectedItemsProvider,
+    PageDecorator,
+    withThemedBackground,
+  ],
   beforeEach: () => {
     mocked(usePathname).mockReturnValue("/positions");
     mocked(useRouter).mockReturnValue({ push: fn() } as any);

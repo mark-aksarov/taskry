@@ -12,7 +12,7 @@ import { userId } from "@/lib/schemas/user";
 import { taskStatus } from "@/lib/schemas/task";
 import { projectId } from "@/lib/schemas/project";
 import { TasksPageEmpty } from "./TasksPageEmpty";
-import { getTaskCount } from "@/lib/data/task/task.dal";
+import { getTaskList } from "@/lib/data/task/task.dal";
 import { hasGuestRole } from "@/lib/utils/hasGuestRole";
 import { taskCategoryId } from "@/lib/schemas/taskCategory";
 import { deleteTasks } from "@/lib/actions/task/deleteTasks";
@@ -20,6 +20,7 @@ import { TasksContainer } from "@/components/tasks/TasksContainer";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { updateTaskStatuses } from "@/lib/actions/task/updateTaskStatuses";
 import { NewTaskFormContainer } from "@/components/tasks/NewTaskFormContainer";
+import { SelectedTasksProvider } from "@/components/tasks/SelectedTasksContext/SelectedTasksContext";
 import { createTaskCategory } from "@/lib/actions/taskCategory/createTaskCategory";
 import { NewTaskCategoryForm } from "@/components/taskCategory/NewTaskCategoryForm";
 import { TaskFiltersFormContainer } from "@/components/tasks/TaskFiltersFormContainer";
@@ -63,7 +64,12 @@ export default async function AppTasksPage({
   const validated = searchParamsSchema.parse(rawParams);
   const { page, pageSize, sort, ...filters } = validated;
 
-  const taskCount = await getTaskCount();
+  const { items: tasks, totalCount } = await getTaskList({
+    page,
+    pageSize,
+    sort,
+    filters,
+  });
   const guestMode = await hasGuestRole();
 
   const taskToolbarCreateNewMenuTrigger = (
@@ -76,7 +82,7 @@ export default async function AppTasksPage({
     />
   );
 
-  if (!taskCount) {
+  if (!totalCount) {
     return (
       <TasksPageEmpty
         taskToolbarCreateNewMenuTrigger={taskToolbarCreateNewMenuTrigger}
@@ -85,28 +91,34 @@ export default async function AppTasksPage({
   }
 
   return (
-    <TasksPage
-      taskToolbarActionsMenuTrigger={
-        <TaskToolbarActionsMenuTrigger
-          guestMode={guestMode}
-          deleteAction={deleteTasks}
-          updateStatusAction={updateTaskStatuses}
-        />
-      }
-      taskToolbarCreateNewMenuTrigger={taskToolbarCreateNewMenuTrigger}
-      taskToolbarFiltersModalTrigger={
-        <TaskToolbarFiltersModalTrigger
-          filtersFormContainer={<TaskFiltersFormContainer filters={filters} />}
-        />
-      }
-      tasksContainer={
-        <TasksContainer
-          page={page}
-          pageSize={pageSize}
-          sort={sort}
-          filters={filters}
-        />
-      }
-    />
+    <SelectedTasksProvider
+      pageItems={tasks.map((t) => ({ id: t.id, status: t.status }))}
+    >
+      <TasksPage
+        taskToolbarActionsMenuTrigger={
+          <TaskToolbarActionsMenuTrigger
+            guestMode={guestMode}
+            deleteTasks={deleteTasks}
+            updateStatusAction={updateTaskStatuses}
+          />
+        }
+        taskToolbarCreateNewMenuTrigger={taskToolbarCreateNewMenuTrigger}
+        taskToolbarFiltersModalTrigger={
+          <TaskToolbarFiltersModalTrigger
+            filtersFormContainer={
+              <TaskFiltersFormContainer filters={filters} />
+            }
+          />
+        }
+        tasksContainer={
+          <TasksContainer
+            tasks={tasks}
+            totalCount={totalCount}
+            page={page}
+            pageSize={pageSize}
+          />
+        }
+      />
+    </SelectedTasksProvider>
   );
 }

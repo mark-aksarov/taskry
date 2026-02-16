@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect } from "react";
 import { Checkbox } from "@/components/ui/Checkbox";
 import { ProjectStatus } from "@/generated/prisma/enums";
 import { useSelectedProjects } from "./SelectedProjectsContext";
@@ -13,11 +12,6 @@ interface ProjectItemCheckboxProps {
 export function ProjectItemCheckbox({ id, status }: ProjectItemCheckboxProps) {
   const selected = useSelectedProjects();
 
-  // Sync status with project selection
-  useEffect(() => {
-    selected.update(id, { id, status });
-  }, [id, status, selected.update]);
-
   function handleChange(isSelected: boolean) {
     if (isSelected) {
       selected.add({ id, status });
@@ -26,14 +20,12 @@ export function ProjectItemCheckbox({ id, status }: ProjectItemCheckboxProps) {
     }
   }
 
-  const isSelected = !!selected.get(id);
-
   return (
     <Checkbox
       data-test="project-checkbox"
       data-id={id}
       aria-label="project checkbox"
-      isSelected={isSelected}
+      isSelected={selected.items.some((item) => item.id === id)}
       onChange={handleChange}
     />
   );

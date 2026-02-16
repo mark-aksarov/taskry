@@ -11,9 +11,9 @@ import {
 import { useTranslations } from "next-intl";
 import { ModalProps } from "@/components/ui/Modal";
 import { DialogHeading } from "@/components/ui/Dialog";
+import { startTransition, useActionState } from "react";
 import { ActionFn, ActionState } from "@/lib/actions/types";
-import { startTransition, useActionState, useEffect } from "react";
-import { useActionErrorToast } from "@/lib/hooks/useActionErrorToast";
+import { useErrorToast } from "@/lib/hooks/useErrorToast";
 
 const initialState: ActionState = {
   status: null,
@@ -23,7 +23,6 @@ interface DeleteTaskCategoryModalProps extends ModalProps {
   taskCategoryId: number;
   taskCategoryName: string;
   deleteTaskCategories: ActionFn<ActionState, number[]>;
-  onSuccess?: () => void;
 }
 
 export function DeleteTaskCategoryModal({
@@ -32,22 +31,33 @@ export function DeleteTaskCategoryModal({
   isOpen,
   onOpenChange,
   deleteTaskCategories,
-  onSuccess,
 }: DeleteTaskCategoryModalProps) {
   const t = useTranslations("taskCategories.DeleteTaskCategoryModal");
-  const [state, action, isPending] = useActionState(
-    deleteTaskCategories,
+
+  // show error toast when delete action fails
+  const { close: closeErrorToast, add: addErrorToast } = useErrorToast();
+
+  const [_, action, isPending] = useActionState(
+    async (prevState: ActionState, payload: number[]) => {
+      // call server action to perform delete action
+      const newState = await deleteTaskCategories(prevState, payload);
+
+      // close error toast
+      closeErrorToast();
+
+      // close modal
+      if (newState.status === "success") {
+        onOpenChange?.(false);
+      }
+      // show error toast
+      else if (newState.status === "error" && newState.message) {
+        addErrorToast(newState.message);
+      }
+
+      return newState;
+    },
     initialState,
   );
-
-  useEffect(() => {
-    if (state.status === "success") {
-      onSuccess?.();
-      onOpenChange?.(false);
-    }
-  }, [state.status, onSuccess]);
-
-  useActionErrorToast(state);
 
   const handleDelete = () => {
     startTransition(() => action([taskCategoryId]));

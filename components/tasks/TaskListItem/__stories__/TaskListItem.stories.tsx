@@ -9,6 +9,8 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { TaskItemActionMenuTrigger } from "../../TaskItemActionMenuTrigger";
 import { TaskCommentsModalStory } from "../../TaskCommentsModal/__stories__";
 import { ProjectDetailModal } from "@/components/projects/ProjectDetailModal";
+import { withDeleteTaskModalProvider } from "../../DeleteTaskModal/__stories__";
+import { withSelectedTasksProvider } from "../../SelectedTasksContext/__stories__";
 import { UserDetailModalStory } from "@/components/users/UserDetailModal/__stories__";
 import { TaskItemActionMenuTriggerStory } from "../../TaskItemActionMenuTrigger/__stories__";
 import { ProjectDetailModalStory } from "@/components/projects/ProjectDetailModal/__stories__";
@@ -40,7 +42,11 @@ export const mockedTask = {
 const meta = {
   title: "components/tasks/TaskListItem",
   component: TaskListItem,
-  decorators: [withThemedBackground],
+  decorators: [
+    withSelectedTasksProvider,
+    withDeleteTaskModalProvider,
+    withThemedBackground,
+  ],
   excludeStories: ["mockedTask"],
 } satisfies Meta<typeof TaskListItem>;
 

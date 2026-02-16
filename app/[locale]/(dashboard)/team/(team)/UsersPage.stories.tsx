@@ -12,16 +12,25 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { UserListStory } from "@/components/users/UserList/__stories__";
 import { UserGridStory } from "@/components/users/UserGrid/__stories__";
 import { UserFiltersFormStory } from "@/components/users/UserFiltersForm/__stories__";
+import { withDeleteUserModalProvider } from "@/components/users/DeleteUserModal/__stories__";
 import { EntityContainerPresentation } from "@/components/common/EntityContainerPresentation";
 import { UserToolbarFiltersModalTrigger } from "@/components/users/UserToolbarFiltersModalTrigger";
 import { UserToolbarCreateNewMenuTrigger } from "@/components/users/UserToolbarCreateNewMenuTrigger";
 import { UserToolbarCreateNewMenuTriggerStory } from "@/components/users/UserToolbarCreateNewMenuTrigger/__stories__";
+import { withEntityPaginationProvider } from "@/components/common/EntityContainerPagination/__stories__";
+import { withSelectedTasksProvider } from "@/components/tasks/SelectedTasksContext/__stories__";
 
 const meta = {
   title: "pages/UsersPage",
   component: UsersPage,
   parameters: { layout: "fullscreen" },
-  decorators: [PageDecorator, withThemedBackground],
+  decorators: [
+    withDeleteUserModalProvider,
+    withEntityPaginationProvider,
+    withSelectedTasksProvider,
+    PageDecorator,
+    withThemedBackground,
+  ],
   beforeEach: () => {
     mocked(usePathname).mockReturnValue("/team");
     mocked(useRouter).mockReturnValue({ push: fn() } as any);

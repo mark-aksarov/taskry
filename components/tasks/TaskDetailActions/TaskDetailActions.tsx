@@ -93,7 +93,7 @@ export function TaskDetailActions({
         taskTitle={taskTitle}
         isOpen={isDeleteModalOpen}
         onOpenChange={setIsDeleteModalOpen}
-        deleteAction={deleteTask}
+        deleteTask={deleteTask}
       />
 
       <GuestModeModal

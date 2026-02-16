@@ -9,7 +9,6 @@ import { useTranslations } from "next-intl";
 import { PageGrid } from "@/components/common/PageGrid";
 import { ViewModeProvider } from "@/components/common/ViewMode";
 import { PageContainer } from "@/components/common/PageContainer";
-import { SelectedItemsProvider } from "@/components/common/SelectedItemsContext";
 
 interface CompaniesPageProps {
   companiesContainer: React.ReactNode;
@@ -28,25 +27,21 @@ export function CompaniesPage({
     <PageContainer>
       <PageGrid>
         <ViewModeProvider>
-          <SelectedItemsProvider>
-            <ToolbarDesktop>
-              {companyToolbarActionsMenuTrigger}
-              {companyToolbarCreateNewModalTrigger}
-            </ToolbarDesktop>
+          <ToolbarDesktop>
+            {companyToolbarActionsMenuTrigger}
+            {companyToolbarCreateNewModalTrigger}
+          </ToolbarDesktop>
 
-            <ToolbarMobileTop>
-              <ToolbarMobileHeading>{t("heading")}</ToolbarMobileHeading>
-              {companyToolbarActionsMenuTrigger}
-            </ToolbarMobileTop>
+          <ToolbarMobileTop>
+            <ToolbarMobileHeading>{t("heading")}</ToolbarMobileHeading>
+            {companyToolbarActionsMenuTrigger}
+          </ToolbarMobileTop>
 
-            <ToolbarMobileBottom>
-              <div className="ml-auto">
-                {companyToolbarCreateNewModalTrigger}
-              </div>
-            </ToolbarMobileBottom>
+          <ToolbarMobileBottom>
+            <div className="ml-auto">{companyToolbarCreateNewModalTrigger}</div>
+          </ToolbarMobileBottom>
 
-            {companiesContainer}
-          </SelectedItemsProvider>
+          {companiesContainer}
         </ViewModeProvider>
       </PageGrid>
     </PageContainer>

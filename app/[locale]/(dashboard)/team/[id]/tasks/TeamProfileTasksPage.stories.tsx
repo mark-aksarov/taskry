@@ -17,14 +17,23 @@ import { UserNavigationMobile } from "@/components/users/UserNavigationMobile";
 import { UserTaskListStory } from "@/components/users/UserTaskList/__stories__";
 import { UserNavigationDesktop } from "@/components/users/UserNavigationDesktop";
 import { PersonDetailHeaderStory } from "@/components/common/DetailHeader/__stories__";
+import { withDeleteTaskModalProvider } from "@/components/tasks/DeleteTaskModal/__stories__";
+import { withSelectedTasksProvider } from "@/components/tasks/SelectedTasksContext/__stories__";
 import { TaskToolbarActionsMenuTrigger } from "@/components/tasks/TaskToolbarActionsMenuTrigger";
 import { UserNavigationDesktopStory } from "@/components/users/UserNavigationDesktop/__stories__";
+import { withEntityPaginationProvider } from "@/components/common/EntityContainerPagination/__stories__";
 
 const meta = {
   title: "pages/TeamProfileTasksPage",
   component: UserTasksPageLayout,
   parameters: { layout: "fullscreen" },
-  decorators: [PageDecorator, withThemedBackground],
+  decorators: [
+    withDeleteTaskModalProvider,
+    withEntityPaginationProvider,
+    withSelectedTasksProvider,
+    PageDecorator,
+    withThemedBackground,
+  ],
   beforeEach: () => {
     mocked(usePathname).mockReturnValue(`/team/user-1/tasks`);
     mocked(useParams).mockReturnValue({ id: "user-1" });
@@ -41,7 +50,7 @@ export const Default = {
     taskToolbarActionsMenuTrigger: (
       <TaskToolbarActionsMenuTrigger
         guestMode={false}
-        deleteAction={fn()}
+        deleteTasks={fn()}
         updateStatusAction={fn()}
       />
     ),

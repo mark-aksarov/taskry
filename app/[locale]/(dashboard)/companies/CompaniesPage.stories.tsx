@@ -8,16 +8,23 @@ import { PageDecorator } from "@/.storybook/PageDecorator";
 import { CompanyList } from "@/components/company/CompanyList";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { CompanyListStory } from "@/components/company/CompanyList/__stories__";
-import { CompanyToolbarCreateNewModalTrigger } from "@/components/company/CompanyToolbarCreateNewModalTrigger";
+import { withSelectedItemsProvider } from "@/components/common/SelectedItemsContext/__stories__";
+import { withDeleteCompanyModalProvider } from "@/components/company/DeleteCompanyModal/__stories__";
 import { CompanyToolbarActionsMenuTrigger } from "@/components/company/CompanyToolbarActionsMenuTrigger";
-import { CompanyToolbarCreateNewModalTriggerStory } from "@/components/company/CompanyToolbarCreateNewModalTrigger/__stories__";
+import { CompanyToolbarCreateNewModalTrigger } from "@/components/company/CompanyToolbarCreateNewModalTrigger";
 import { CompanyToolbarActionsMenuTriggerStory } from "@/components/company/CompanyToolbarActionsMenuTrigger/__stories__";
+import { CompanyToolbarCreateNewModalTriggerStory } from "@/components/company/CompanyToolbarCreateNewModalTrigger/__stories__";
 
 const meta = {
   title: "pages/CompaniesPage",
   component: CompaniesPage,
   parameters: { layout: "fullscreen" },
-  decorators: [PageDecorator, withThemedBackground],
+  decorators: [
+    withDeleteCompanyModalProvider,
+    withSelectedItemsProvider,
+    PageDecorator,
+    withThemedBackground,
+  ],
   beforeEach: () => {
     mocked(usePathname).mockReturnValue("/companies");
     mocked(useRouter).mockReturnValue({ push: fn() } as any);

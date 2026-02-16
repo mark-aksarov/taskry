@@ -11,12 +11,13 @@ import { CustomersPage } from "./CustomersPage";
 import { companyId } from "@/lib/schemas/company";
 import { hasGuestRole } from "@/lib/utils/hasGuestRole";
 import { CustomersPageEmpty } from "./CustomersPageEmpty";
+import { getCustomerList } from "@/lib/data/customer/customer.dal";
 import { createCompany } from "@/lib/actions/company/createCompany";
-import { getCustomerCount } from "@/lib/data/customer/customer.dal";
 import { NewCompanyForm } from "@/components/company/NewCompanyForm";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { deleteCustomers } from "@/lib/actions/customer/deleteCustomers";
 import { CustomersContainer } from "@/components/customer/CustomersContainer";
+import { SelectedItemsProvider } from "@/components/common/SelectedItemsContext";
 import { NewCustomerFormContainer } from "@/components/customer/NewCustomerFormContainer";
 import { CustomerFiltersFormContainer } from "@/components/customer/CustomerFiltersFormContainer";
 import { CustomerToolbarActionsMenuTrigger } from "@/components/customer/CustomerToolbarActionsMenuTrigger";
@@ -51,8 +52,12 @@ export default async function AppCustomersPage({
   const { page, pageSize, sort, ...filters } =
     searchParamsSchema.parse(rawParams);
 
-  // Get count
-  const count = await getCustomerCount();
+  const { items: customers, totalCount } = await getCustomerList({
+    page,
+    pageSize,
+    sort,
+    filters,
+  });
 
   const guestMode = await hasGuestRole();
 
@@ -64,7 +69,7 @@ export default async function AppCustomersPage({
     />
   );
 
-  if (!count) {
+  if (!totalCount) {
     return (
       <CustomersPageEmpty
         customerToolbarCreateNewMenuTrigger={
@@ -75,26 +80,32 @@ export default async function AppCustomersPage({
   }
 
   return (
-    <CustomersPage
-      customerToolbarCreateNewMenuTrigger={customerToolbarCreateNewMenuTrigger}
-      customerToolbarActionsMenuTrigger={
-        <CustomerToolbarActionsMenuTrigger deleteAction={deleteCustomers} />
-      }
-      customerToolbarFiltersModalTrigger={
-        <CustomerToolbarFiltersModalTrigger
-          filtersFormContainer={
-            <CustomerFiltersFormContainer filters={filters} />
-          }
-        />
-      }
-      customersContainer={
-        <CustomersContainer
-          page={page}
-          pageSize={pageSize}
-          sort={sort}
-          filters={filters}
-        />
-      }
-    />
+    <SelectedItemsProvider pageItems={customers.map((c) => ({ id: c.id }))}>
+      <CustomersPage
+        customerToolbarCreateNewMenuTrigger={
+          customerToolbarCreateNewMenuTrigger
+        }
+        customerToolbarActionsMenuTrigger={
+          <CustomerToolbarActionsMenuTrigger
+            deleteCustomers={deleteCustomers}
+          />
+        }
+        customerToolbarFiltersModalTrigger={
+          <CustomerToolbarFiltersModalTrigger
+            filtersFormContainer={
+              <CustomerFiltersFormContainer filters={filters} />
+            }
+          />
+        }
+        customersContainer={
+          <CustomersContainer
+            customers={customers}
+            totalCount={totalCount}
+            page={page}
+            pageSize={pageSize}
+          />
+        }
+      />
+    </SelectedItemsProvider>
   );
 }

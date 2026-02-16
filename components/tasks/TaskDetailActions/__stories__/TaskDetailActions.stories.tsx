@@ -1,4 +1,3 @@
-import { fn } from "storybook/internal/test";
 import { EditTaskForm } from "../../EditTaskForm";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { TaskDetailActions } from "../TaskDetailActions";
@@ -25,7 +24,7 @@ export const Default = {
     guestMode: false,
     taskId: 1,
     taskTitle: "Design homepage layout",
-    deleteTask: fn(),
+    deleteTask: () => ({ status: "success" }),
     commentsModal: (
       <TaskCommentsModal
         {...TaskCommentsModalStory.args}

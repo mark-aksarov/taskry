@@ -95,7 +95,7 @@ export function CustomerDetailActions({
         customerFullName={customerFullName}
         isOpen={isDeleteModalOpen}
         onOpenChange={setIsDeleteModalOpen}
-        deleteAction={deleteCustomer}
+        deleteCustomer={deleteCustomer}
       />
 
       <GuestModeModal

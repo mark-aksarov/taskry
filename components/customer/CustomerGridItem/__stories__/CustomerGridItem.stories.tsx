@@ -4,12 +4,18 @@ import { CustomerDetailModal } from "../../CustomerDetailModal";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { CustomerDetailModalStory } from "../../CustomerDetailModal/__stories__";
 import { CustomerItemActionMenuTrigger } from "../../CustomerItemActionMenuTrigger";
+import { withDeleteCustomerModalProvider } from "../../DeleteCustomerModal/__stories__";
+import { withSelectedItemsProvider } from "@/components/common/SelectedItemsContext/__stories__";
 import { CustomerItemActionMenuTriggerStory } from "../../CustomerItemActionMenuTrigger/__stories__";
 
 const meta = {
   title: "components/customers/CustomerGridItem",
   component: CustomerGridItem,
-  decorators: [withThemedBackground],
+  decorators: [
+    withSelectedItemsProvider,
+    withDeleteCustomerModalProvider,
+    withThemedBackground,
+  ],
 } satisfies Meta<typeof CustomerGridItem>;
 
 export default meta;

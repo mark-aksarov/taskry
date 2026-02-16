@@ -4,12 +4,13 @@ import { UserDetailModal } from "../../UserDetailModal";
 import { UserDetailModalStory } from "../../UserDetailModal/__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { UserItemActionMenuTrigger } from "../../UserItemActionMenuTrigger";
+import { withDeleteUserModalProvider } from "../../DeleteUserModal/__stories__";
 import { UserItemActionMenuTriggerStory } from "../../UserItemActionMenuTrigger/__stories__";
 
 const meta = {
   title: "components/users/UserGridItem",
   component: UserGridItem,
-  decorators: [withThemedBackground],
+  decorators: [withDeleteUserModalProvider, withThemedBackground],
   render: (args) => <UserGridItem {...args} />,
 } satisfies Meta<typeof UserGridItem>;
 

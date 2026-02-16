@@ -37,15 +37,3 @@ export const Default = {
     deleteTaskCategories: () => ({ status: "success" }),
   },
 } satisfies Story;
-
-export const WithError = {
-  args: {
-    taskCategoryIds: [1, 2, 3],
-    isOpen: false,
-    onOpenChange: () => {},
-    deleteTaskCategories: () => ({
-      status: "error",
-      errorCode: "validationError",
-    }),
-  },
-} satisfies Story;

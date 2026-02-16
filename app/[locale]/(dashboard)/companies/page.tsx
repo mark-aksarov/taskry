@@ -1,12 +1,17 @@
+import {
+  getCompanyCount,
+  getCompanySummaries,
+} from "@/lib/data/company/company.dal";
+
 import { CompaniesPage } from "./CompaniesPage";
 import { hasGuestRole } from "@/lib/utils/hasGuestRole";
 import { CompaniesPageEmpty } from "./CompaniesPageEmpty";
-import { getCompanyCount } from "@/lib/data/company/company.dal";
 import { createCompany } from "@/lib/actions/company/createCompany";
 import { NewCompanyForm } from "@/components/company/NewCompanyForm";
 import { deleteCompanies } from "@/lib/actions/company/deleteCompanies";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { CompaniesContainer } from "@/components/company/CompaniesContainer";
+import { SelectedItemsProvider } from "@/components/common/SelectedItemsContext";
 import { CompanyToolbarActionsMenuTrigger } from "@/components/company/CompanyToolbarActionsMenuTrigger";
 import { CompanyToolbarCreateNewModalTrigger } from "@/components/company/CompanyToolbarCreateNewModalTrigger";
 
@@ -35,16 +40,22 @@ export default async function AppCompaniesPage() {
     );
   }
 
+  const companies = await getCompanySummaries();
+
   return (
-    <CompaniesPage
-      companiesContainer={<CompaniesContainer />}
-      companyToolbarCreateNewModalTrigger={companyToolbarCreateNewModalTrigger}
-      companyToolbarActionsMenuTrigger={
-        <CompanyToolbarActionsMenuTrigger
-          guestMode={guestMode}
-          deleteCompanies={deleteCompanies}
-        />
-      }
-    />
+    <SelectedItemsProvider pageItems={companies.map((c) => ({ id: c.id }))}>
+      <CompaniesPage
+        companiesContainer={<CompaniesContainer />}
+        companyToolbarCreateNewModalTrigger={
+          companyToolbarCreateNewModalTrigger
+        }
+        companyToolbarActionsMenuTrigger={
+          <CompanyToolbarActionsMenuTrigger
+            guestMode={guestMode}
+            deleteCompanies={deleteCompanies}
+          />
+        }
+      />
+    </SelectedItemsProvider>
   );
 }

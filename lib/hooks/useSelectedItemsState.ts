@@ -1,46 +1,36 @@
-import { useCallback, useMemo, useState } from "react";
+import { useEffect, useState, useCallback, useMemo } from "react";
 
 export interface SelectedItem {
   id: number;
 }
 
-export const useSelectedItemsState = <
-  T extends SelectedItem = SelectedItem,
->() => {
+export function useSelectedItemsState<T extends SelectedItem = SelectedItem>(
+  pageItems: T[],
+) {
   const [items, setItems] = useState<T[]>([]);
 
-  const add = useCallback((item: T) => {
-    setItems((prev) => [...prev, item]);
-  }, []);
+  const ids = useMemo(() => items.map((i) => i.id), [items]);
 
-  const update = useCallback((id: number, updatedItem: Partial<T>) => {
+  const add = useCallback((item: T) => {
     setItems((prev) =>
-      prev.map((item) => (item.id === id ? { ...item, ...updatedItem } : item)),
+      prev.some((i) => i.id === item.id) ? prev : [...prev, item],
     );
   }, []);
 
   const remove = useCallback((id: number) => {
-    setItems((prev) => prev.filter((item) => item.id !== id));
+    setItems((prev) => prev.filter((i) => i.id !== id));
   }, []);
 
   const get = useCallback(
-    (id: number) => items.find((item) => item.id === id),
+    (id: number) => items.find((i) => i.id === id),
     [items],
   );
 
-  const clear = useCallback(() => {
-    setItems([]);
-  }, []);
+  useEffect(() => {
+    setItems((prev) =>
+      pageItems.filter((p) => prev.some((i) => i.id === p.id)),
+    );
+  }, [pageItems]);
 
-  const ids = useMemo(() => items.map((item) => item.id), [items]);
-
-  return {
-    add,
-    update,
-    remove,
-    get,
-    clear,
-    items,
-    ids,
-  };
-};
+  return { items, ids, add, remove, get };
+}

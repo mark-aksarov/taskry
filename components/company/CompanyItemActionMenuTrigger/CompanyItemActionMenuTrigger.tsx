@@ -11,9 +11,9 @@ import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
 import { Pencil, Trash } from "lucide-react";
 import { EditCompanyModal } from "../EditPositionModal";
-import { DeleteCompanyModal } from "../DeleteCompanyModal";
-import { GuestModeModal } from "@/components/common/GuestModeModal";
 import { ActionFn, ActionState } from "@/lib/actions/types";
+import { GuestModeModal } from "@/components/common/GuestModeModal";
+import { useDeleteCompanyModal } from "@/components/company/DeleteCompanyModal";
 
 export type CompanyItemActionMenuTriggerProps = {
   guestMode: boolean;
@@ -28,7 +28,6 @@ export function CompanyItemActionMenuTrigger({
   companyId,
   companyName,
   editCompanyForm,
-  deleteCompanies,
 }: CompanyItemActionMenuTriggerProps) {
   const t = useTranslations("company.CompanyItemActionMenuTrigger");
 
@@ -39,7 +38,7 @@ export function CompanyItemActionMenuTrigger({
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
   // Modal state for deleting the company
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const { setState: setDeleteCompanyModalState } = useDeleteCompanyModal();
 
   // Handle menu actions
   const handleAction = (key: Key) => {
@@ -52,7 +51,11 @@ export function CompanyItemActionMenuTrigger({
     if (action === "edit") {
       setIsEditModalOpen(true);
     } else if (action === "delete") {
-      setIsDeleteModalOpen(true);
+      setDeleteCompanyModalState({
+        isOpen: true,
+        companyId,
+        companyName,
+      });
     }
   };
 
@@ -75,14 +78,6 @@ export function CompanyItemActionMenuTrigger({
           <Trash size={16} /> {t("delete")}
         </Item>
       </ItemBaseActionMenuTrigger>
-
-      <DeleteCompanyModal
-        isOpen={isDeleteModalOpen}
-        onOpenChange={setIsDeleteModalOpen}
-        companyId={companyId}
-        companyName={companyName}
-        deleteCompanies={deleteCompanies}
-      />
 
       <EditCompanyModal
         isOpen={isEditModalOpen}

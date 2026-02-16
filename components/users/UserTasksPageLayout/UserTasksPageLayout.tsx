@@ -15,7 +15,6 @@ import {
 import { useTranslations } from "next-intl";
 import { PageGrid } from "@/components/common/PageGrid";
 import { PageContainer } from "@/components/common/PageContainer";
-import { SelectedTasksProvider } from "@/components/tasks/SelectedTasksContext";
 import { TaskToolbarSortingMenuTrigger } from "@/components/tasks/TaskToolbarSortingMenuTrigger";
 
 interface UserTasksPageLayoutProps {
@@ -36,7 +35,7 @@ export function UserTasksPageLayout({
   const t = useTranslations("users.UserTasksPageLayout");
 
   return (
-    <SelectedTasksProvider>
+    <>
       <PageContainer className="max-md:hidden">
         <DetailCard>
           <DetailCardLeft>
@@ -69,6 +68,6 @@ export function UserTasksPageLayout({
           {userTasksContainer}
         </PageGrid>
       </PageContainer>
-    </SelectedTasksProvider>
+    </>
   );
 }

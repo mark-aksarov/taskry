@@ -1,11 +1,12 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { CustomerToolbarActionsMenuTrigger } from "../CustomerToolbarActionsMenuTrigger";
+import { withSelectedItemsProvider } from "@/components/common/SelectedItemsContext/__stories__";
 
 const meta = {
   title: "components/customers/CustomerToolbarActionsMenuTrigger",
   component: CustomerToolbarActionsMenuTrigger,
-  decorators: [withThemedBackground],
+  decorators: [withSelectedItemsProvider, withThemedBackground],
   parameters: {
     backgroundVariant: "alt",
   },
@@ -16,6 +17,6 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    deleteAction: () => ({ status: "success" }),
+    deleteCustomers: () => ({ status: "success" }),
   },
 } satisfies Story;

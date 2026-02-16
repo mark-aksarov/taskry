@@ -81,7 +81,6 @@ export const PositionToolbarActionsMenuTrigger = ({
         onOpenChange={setIsDeleteModalOpen}
         positionIds={selected.ids}
         deletePositions={deletePositions}
-        onSuccess={selected.clear}
       />
 
       {/* Guest mode modal */}

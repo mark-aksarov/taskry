@@ -17,8 +17,8 @@ import {
 import { useTranslations } from "next-intl";
 import { ModalProps } from "@/components/ui/Modal";
 import { DialogHeading } from "@/components/ui/Dialog";
-import { startTransition, useActionState, useEffect } from "react";
-import { useActionErrorToast } from "@/lib/hooks/useActionErrorToast";
+import { startTransition, useActionState } from "react";
+import { useErrorToast } from "@/lib/hooks/useErrorToast";
 
 const initialState: ActionState = {
   status: null,
@@ -27,8 +27,7 @@ const initialState: ActionState = {
 interface DeleteCustomerModalProps extends ModalProps {
   customerId: number;
   customerFullName: string;
-  deleteAction: ActionFn<ActionState, DeleteCustomersPayload>;
-  onSuccess?: () => void;
+  deleteCustomer: ActionFn<ActionState, DeleteCustomersPayload>;
 }
 
 export function DeleteCustomerModal({
@@ -36,21 +35,36 @@ export function DeleteCustomerModal({
   customerFullName,
   isOpen,
   onOpenChange,
-  deleteAction,
-  onSuccess,
+  deleteCustomer,
 }: DeleteCustomerModalProps) {
   const t = useTranslations("customers.DeleteCustomerModal");
-  const [state, action, isPending] = useActionState(deleteAction, initialState);
 
-  useEffect(() => {
-    if (state.status === "success") {
-      onSuccess?.();
-      onOpenChange?.(false);
-    }
-  }, [state.status, onSuccess]);
+  // show error toast when delete action fails
+  const { close: closeErrorToast, add: addErrorToast } = useErrorToast();
 
-  useActionErrorToast(state);
+  const [_, action, isPending] = useActionState(
+    async (prevState: ActionState, payload: DeleteCustomersPayload) => {
+      // call server action to perform delete action
+      const newState = await deleteCustomer(prevState, payload);
 
+      // close error toast
+      closeErrorToast();
+
+      // close modal
+      if (newState.status === "success") {
+        onOpenChange?.(false);
+      }
+      // show error toast
+      else if (newState.status === "error" && newState.message) {
+        addErrorToast(newState.message);
+      }
+
+      return newState;
+    },
+    initialState,
+  );
+
+  // call delete action with payload
   const handleDelete = () => {
     startTransition(() => action([customerId]));
   };

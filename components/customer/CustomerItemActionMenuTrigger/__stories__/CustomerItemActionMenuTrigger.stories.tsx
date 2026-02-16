@@ -3,11 +3,17 @@ import { EditCustomerForm } from "../../EditCustomerForm";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { EditCustomerFormStory } from "../../EditCustomerForm/__stories__";
 import { CustomerItemActionMenuTrigger } from "../CustomerItemActionMenuTrigger";
+import { withDeleteCustomerModalProvider } from "../../DeleteCustomerModal/__stories__";
+import { withSelectedItemsProvider } from "@/components/common/SelectedItemsContext/__stories__";
 
 const meta = {
   title: "components/customers/CustomerItemActionMenuTrigger",
   component: CustomerItemActionMenuTrigger,
-  decorators: [withThemedBackground],
+  decorators: [
+    withSelectedItemsProvider,
+    withDeleteCustomerModalProvider,
+    withThemedBackground,
+  ],
   parameters: {
     backgroundVariant: "alt",
   },
@@ -22,7 +28,6 @@ export const Default: Story = {
     guestMode: false,
     customerId: 1,
     customerFullName: "Customer 1",
-    deleteAction: () => ({ status: "success" }),
     editCustomerFormContainer: (
       <EditCustomerForm {...EditCustomerFormStory.args} />
     ),

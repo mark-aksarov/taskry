@@ -1,11 +1,12 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { TaskCategoryToolbarActionsMenuTrigger } from "../TaskCategoryToolbarActionsMenuTrigger";
+import { withSelectedItemsProvider } from "@/components/common/SelectedItemsContext/__stories__";
 
 const meta = {
   title: "components/task-categories/TaskCategoryToolbarActionsMenuTrigger",
   component: TaskCategoryToolbarActionsMenuTrigger,
-  decorators: [withThemedBackground],
+  decorators: [withSelectedItemsProvider, withThemedBackground],
 } satisfies Meta<typeof TaskCategoryToolbarActionsMenuTrigger>;
 
 export default meta;

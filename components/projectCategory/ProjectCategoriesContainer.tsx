@@ -1,6 +1,7 @@
 import { ProjectCategoryList } from "./ProjectCategoryList";
 import { ProjectCategoryListItem } from "./ProjectCategoryListItem";
 import { EditProjectCategoryForm } from "./EditProjectCategoryForm";
+import { DeleteProjectCategoryModalProvider } from "./DeleteProjectCategoryModal";
 import { updateProjectCategory } from "@/lib/actions/projectCategory/updateProjectCategory";
 import { getProjectCategorySummaries } from "@/lib/data/projectCategory/projectCategory.dal";
 import { ProjectCategoryItemActionMenuTrigger } from "./ProjectCategoryItemActionMenuTrigger";
@@ -10,29 +11,32 @@ export async function ProjectCategoriesContainer() {
   const projectCategories = await getProjectCategorySummaries();
 
   return (
-    <ProjectCategoryList>
-      {projectCategories.map((projectCategory) => (
-        <ProjectCategoryListItem
-          key={projectCategory.id}
-          id={projectCategory.id}
-          name={projectCategory.name}
-          menuTrigger={
-            <ProjectCategoryItemActionMenuTrigger
-              guestMode={false}
-              projectCategoryId={projectCategory.id}
-              projectCategoryName={projectCategory.name}
-              deleteProjectCategories={deleteProjectCategories}
-              editProjectCategoryForm={
-                <EditProjectCategoryForm
-                  projectCategoryId={projectCategory.id}
-                  nameDefaultValue={projectCategory.name}
-                  updateProjectCategory={updateProjectCategory}
-                />
-              }
-            />
-          }
-        />
-      ))}
-    </ProjectCategoryList>
+    <DeleteProjectCategoryModalProvider
+      deleteProjectCategories={deleteProjectCategories}
+    >
+      <ProjectCategoryList>
+        {projectCategories.map((projectCategory) => (
+          <ProjectCategoryListItem
+            key={projectCategory.id}
+            id={projectCategory.id}
+            name={projectCategory.name}
+            menuTrigger={
+              <ProjectCategoryItemActionMenuTrigger
+                guestMode={false}
+                projectCategoryId={projectCategory.id}
+                projectCategoryName={projectCategory.name}
+                editProjectCategoryForm={
+                  <EditProjectCategoryForm
+                    projectCategoryId={projectCategory.id}
+                    nameDefaultValue={projectCategory.name}
+                    updateProjectCategory={updateProjectCategory}
+                  />
+                }
+              />
+            }
+          />
+        ))}
+      </ProjectCategoryList>
+    </DeleteProjectCategoryModalProvider>
   );
 }

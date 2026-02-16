@@ -3,11 +3,12 @@ import { EditCompanyForm } from "../../EditCompanyForm";
 import { EditCompanyFormStory } from "../../EditCompanyForm/__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { CompanyItemActionMenuTrigger } from "../CompanyItemActionMenuTrigger";
+import { withDeleteCompanyModalProvider } from "../../DeleteCompanyModal/__stories__";
 
 const meta = {
   title: "components/companies/CompanyItemActionMenuTrigger",
   component: CompanyItemActionMenuTrigger,
-  decorators: [withThemedBackground],
+  decorators: [withDeleteCompanyModalProvider, withThemedBackground],
 } satisfies Meta<typeof CompanyItemActionMenuTrigger>;
 
 export default meta;

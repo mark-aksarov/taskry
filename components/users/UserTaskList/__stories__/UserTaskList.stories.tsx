@@ -4,11 +4,19 @@ import { UserTaskListItem } from "../../UserTaskListItem";
 import { mockedTasks } from "@/components/tasks/TaskList/__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { UserTaskListItemStory } from "../../UserTaskListItem/__stories__";
+import { withDeleteTaskModalProvider } from "@/components/tasks/DeleteTaskModal/__stories__";
+import { withSelectedTasksProvider } from "@/components/tasks/SelectedTasksContext/__stories__";
+import { withEntityPaginationProvider } from "@/components/common/EntityContainerPagination/__stories__";
 
 const meta = {
   title: "components/users/UserTaskList",
   component: UserTaskList,
-  decorators: [withThemedBackground],
+  decorators: [
+    withEntityPaginationProvider,
+    withSelectedTasksProvider,
+    withDeleteTaskModalProvider,
+    withThemedBackground,
+  ],
 } satisfies Meta<typeof UserTaskList>;
 
 export default meta;

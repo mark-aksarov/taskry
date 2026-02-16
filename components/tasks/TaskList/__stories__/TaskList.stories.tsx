@@ -4,11 +4,19 @@ import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { TaskListItemStory } from "../../TaskListItem/__stories__";
 import { ProjectStatus, TaskStatus } from "@/generated/prisma/enums";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { withDeleteTaskModalProvider } from "../../DeleteTaskModal/__stories__";
+import { withSelectedTasksProvider } from "../../SelectedTasksContext/__stories__";
+import { withEntityPaginationProvider } from "@/components/common/EntityContainerPagination/__stories__";
 
 const meta = {
   title: "components/tasks/TaskList",
   component: TaskList,
-  decorators: [withThemedBackground],
+  decorators: [
+    withEntityPaginationProvider,
+    withSelectedTasksProvider,
+    withDeleteTaskModalProvider,
+    withThemedBackground,
+  ],
   excludeStories: ["getTaskListItems", "mockedTasks"],
 } satisfies Meta<typeof TaskList>;
 

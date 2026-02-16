@@ -1,11 +1,12 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { TaskToolbarActionsMenuTrigger } from "../TaskToolbarActionsMenuTrigger";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { TaskToolbarActionsMenuTrigger } from "../TaskToolbarActionsMenuTrigger";
+import { withSelectedTasksProvider } from "../../SelectedTasksContext/__stories__";
 
 const meta = {
   title: "components/tasks/TaskToolbarActionsMenuTrigger",
   component: TaskToolbarActionsMenuTrigger,
-  decorators: [withThemedBackground],
+  decorators: [withSelectedTasksProvider, withThemedBackground],
   parameters: {
     backgroundVariant: "alt",
   },
@@ -17,7 +18,7 @@ type Story = StoryObj<typeof meta>;
 export const Default = {
   args: {
     guestMode: false,
-    deleteAction: () => ({ status: "success" }),
+    deleteTasks: () => ({ status: "success" }),
     updateStatusAction: () => ({ status: "success" }),
   },
 } satisfies Story;

@@ -3,6 +3,8 @@ import { Meta, StoryObj } from "@storybook/react";
 import { PositionListItem } from "../../PositionListItem";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { PositionListItemStory } from "../../PositionListItem/__stories__";
+import { withDeletePositionModalProvider } from "../../DeletePositionModal/__stories__";
+import { withSelectedItemsProvider } from "@/components/common/SelectedItemsContext/__stories__";
 
 const mockedPositions = [
   { id: 1, name: "Position 1" },
@@ -15,7 +17,11 @@ const mockedPositions = [
 const meta = {
   title: "components/positions/PositionList",
   component: PositionList,
-  decorators: [withThemedBackground],
+  decorators: [
+    withSelectedItemsProvider,
+    withDeletePositionModalProvider,
+    withThemedBackground,
+  ],
 } satisfies Meta<typeof PositionList>;
 
 export default meta;

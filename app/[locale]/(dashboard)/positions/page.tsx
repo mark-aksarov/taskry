@@ -1,14 +1,19 @@
+import {
+  getPositionCount,
+  getPositionSummaries,
+} from "@/lib/data/position/position.dal";
+
 import { PositionsPage } from "./PositionsPage";
 import { hasGuestRole } from "@/lib/utils/hasGuestRole";
 import { PositionsPageEmpty } from "./PositionsPageEmpty";
-import { getPositionCount } from "@/lib/data/position/position.dal";
 import { createPosition } from "@/lib/actions/position/createPosition";
 import { NewPositionForm } from "@/components/position/NewPositionForm";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { deletePositions } from "@/lib/actions/position/deletePositions";
 import { PositionsContainer } from "@/components/position/PositionsContainer";
-import { PositionToolbarCreateNewModalTrigger } from "@/components/position/PositionToolbarCreateNewModalTrigger";
+import { SelectedItemsProvider } from "@/components/common/SelectedItemsContext";
 import { PositionToolbarActionsMenuTrigger } from "@/components/position/PositionToolbarActionsMenuTrigger";
+import { PositionToolbarCreateNewModalTrigger } from "@/components/position/PositionToolbarCreateNewModalTrigger";
 
 export default async function AppPositionsPage() {
   // Authorization
@@ -35,18 +40,22 @@ export default async function AppPositionsPage() {
     );
   }
 
+  const positions = await getPositionSummaries();
+
   return (
-    <PositionsPage
-      positionsContainer={<PositionsContainer />}
-      positionToolbarCreateNewModalTrigger={
-        positionToolbarCreateNewModalTrigger
-      }
-      positionToolbarActionsMenuTrigger={
-        <PositionToolbarActionsMenuTrigger
-          guestMode={guestMode}
-          deletePositions={deletePositions}
-        />
-      }
-    />
+    <SelectedItemsProvider pageItems={positions.map((p) => ({ id: p.id }))}>
+      <PositionsPage
+        positionsContainer={<PositionsContainer />}
+        positionToolbarCreateNewModalTrigger={
+          positionToolbarCreateNewModalTrigger
+        }
+        positionToolbarActionsMenuTrigger={
+          <PositionToolbarActionsMenuTrigger
+            guestMode={guestMode}
+            deletePositions={deletePositions}
+          />
+        }
+      />
+    </SelectedItemsProvider>
   );
 }

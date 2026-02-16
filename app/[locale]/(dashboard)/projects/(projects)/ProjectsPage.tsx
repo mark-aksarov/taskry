@@ -10,7 +10,6 @@ import { PageGrid } from "@/components/common/PageGrid";
 import { ViewModeProvider } from "@/components/common/ViewMode";
 import { PageContainer } from "@/components/common/PageContainer";
 import { ViewModeToggleButtonGroup } from "@/components/common/ViewMode";
-import { SelectedProjectsProvider } from "@/components/projects/SelectedProjectsContext";
 import { ProjectToolbarManageMenuTrigger } from "@/components/projects/ProjectToolbarManageMenuTrigger";
 import { ProjectToolbarSortingMenuTrigger } from "@/components/projects/ProjectToolbarSortingMenuTrigger";
 
@@ -33,31 +32,29 @@ export function ProjectsPage({
     <PageContainer>
       <PageGrid>
         <ViewModeProvider>
-          <SelectedProjectsProvider>
-            <ToolbarDesktop>
-              <ProjectToolbarManageMenuTrigger />
-              <ProjectToolbarSortingMenuTrigger />
-              {projectToolbarFiltersModalTrigger}
-              {projectToolbarActionsMenuTrigger}
-              <ViewModeToggleButtonGroup className="ml-auto" />
-              {projectToolbarCreateNewMenuTrigger}
-            </ToolbarDesktop>
+          <ToolbarDesktop>
+            <ProjectToolbarManageMenuTrigger />
+            <ProjectToolbarSortingMenuTrigger />
+            {projectToolbarFiltersModalTrigger}
+            {projectToolbarActionsMenuTrigger}
+            <ViewModeToggleButtonGroup className="ml-auto" />
+            {projectToolbarCreateNewMenuTrigger}
+          </ToolbarDesktop>
 
-            <ToolbarMobileTop>
-              <ToolbarMobileHeading>{t("heading")}</ToolbarMobileHeading>
-              <ProjectToolbarManageMenuTrigger />
-              <ProjectToolbarSortingMenuTrigger />
-              {projectToolbarFiltersModalTrigger}
-              {projectToolbarActionsMenuTrigger}
-            </ToolbarMobileTop>
+          <ToolbarMobileTop>
+            <ToolbarMobileHeading>{t("heading")}</ToolbarMobileHeading>
+            <ProjectToolbarManageMenuTrigger />
+            <ProjectToolbarSortingMenuTrigger />
+            {projectToolbarFiltersModalTrigger}
+            {projectToolbarActionsMenuTrigger}
+          </ToolbarMobileTop>
 
-            <ToolbarMobileBottom>
-              <ViewModeToggleButtonGroup />
-              {projectToolbarCreateNewMenuTrigger}
-            </ToolbarMobileBottom>
+          <ToolbarMobileBottom>
+            <ViewModeToggleButtonGroup />
+            {projectToolbarCreateNewMenuTrigger}
+          </ToolbarMobileBottom>
 
-            {projectsContainer}
-          </SelectedProjectsProvider>
+          {projectsContainer}
         </ViewModeProvider>
       </PageGrid>
     </PageContainer>

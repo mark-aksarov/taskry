@@ -3,6 +3,8 @@ import { ProjectCategoryList } from "../ProjectCategoryList";
 import { ProjectCategoryListItem } from "../../ProjectCategoryListItem";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { ProjectCategoryListItemStory } from "../../ProjectCategoryListItem/__stories__";
+import { withSelectedItemsProvider } from "@/components/common/SelectedItemsContext/__stories__";
+import { withDeleteProjectCategoryModalProvider } from "../../DeleteProjectCategoryModal/__stories__";
 
 const mockedProjectCategories = [
   { id: 1, name: "Project Category 1" },
@@ -15,7 +17,11 @@ const mockedProjectCategories = [
 const meta = {
   title: "components/project-categories/ProjectCategoryList",
   component: ProjectCategoryList,
-  decorators: [withThemedBackground],
+  decorators: [
+    withSelectedItemsProvider,
+    withDeleteProjectCategoryModalProvider,
+    withThemedBackground,
+  ],
 } satisfies Meta<typeof ProjectCategoryList>;
 
 export default meta;

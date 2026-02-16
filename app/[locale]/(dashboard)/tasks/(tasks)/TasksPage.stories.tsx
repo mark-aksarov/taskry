@@ -15,17 +15,26 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { NewTaskFormStory } from "@/components/tasks/NewTaskForm/__stories__";
 import { NewTaskCategoryForm } from "@/components/taskCategory/NewTaskCategoryForm";
 import { TaskFiltersFormStory } from "@/components/tasks/TaskFiltersForm/__stories__";
+import { withDeleteTaskModalProvider } from "@/components/tasks/DeleteTaskModal/__stories__";
 import { EntityContainerPresentation } from "@/components/common/EntityContainerPresentation";
+import { withSelectedTasksProvider } from "@/components/tasks/SelectedTasksContext/__stories__";
 import { TaskToolbarActionsMenuTrigger } from "@/components/tasks/TaskToolbarActionsMenuTrigger";
 import { TaskToolbarFiltersModalTrigger } from "@/components/tasks/TaskToolbarFiltersModalTrigger";
 import { TaskToolbarCreateNewMenuTrigger } from "@/components/tasks/TaskToolbarCreateNewMenuTrigger";
 import { NewTaskCategoryFormStory } from "@/components/taskCategory/NewTaskCategoryForm/__stories__";
+import { withEntityPaginationProvider } from "@/components/common/EntityContainerPagination/__stories__";
 
 const meta = {
   title: "pages/TasksPage",
   component: TasksPage,
   parameters: { layout: "fullscreen" },
-  decorators: [PageDecorator, withThemedBackground],
+  decorators: [
+    withDeleteTaskModalProvider,
+    withEntityPaginationProvider,
+    withSelectedTasksProvider,
+    PageDecorator,
+    withThemedBackground,
+  ],
   beforeEach: () => {
     mocked(usePathname).mockReturnValue("/tasks");
     mocked(useRouter).mockReturnValue({ push: fn() } as any);
@@ -67,7 +76,7 @@ export const Default = {
     taskToolbarActionsMenuTrigger: (
       <TaskToolbarActionsMenuTrigger
         guestMode={false}
-        deleteAction={fn()}
+        deleteTasks={fn()}
         updateStatusAction={fn()}
       />
     ),

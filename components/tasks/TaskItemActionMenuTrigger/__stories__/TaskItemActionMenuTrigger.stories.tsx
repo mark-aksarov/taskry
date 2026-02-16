@@ -4,11 +4,17 @@ import { TaskStatus } from "@/generated/prisma/enums";
 import { EditTaskFormStory } from "../../EditTaskForm/__stories__";
 import { TaskItemActionMenuTrigger } from "../TaskItemActionMenuTrigger";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { withDeleteTaskModalProvider } from "../../DeleteTaskModal/__stories__";
+import { withUpdateTaskStatusProvider } from "../../UpdateTaskStatusContext/__stories__";
 
 const meta = {
   title: "components/tasks/TaskItemActionMenuTrigger",
   component: TaskItemActionMenuTrigger,
-  decorators: [withThemedBackground],
+  decorators: [
+    withDeleteTaskModalProvider,
+    withUpdateTaskStatusProvider,
+    withThemedBackground,
+  ],
   parameters: {
     backgroundVariant: "alt",
   },
@@ -23,7 +29,6 @@ export const Default: Story = {
     taskId: 1,
     taskTitle: "Task 1",
     taskStatus: TaskStatus.active,
-    deleteAction: () => ({ status: "success" }),
     editTaskFormContainer: <EditTaskForm {...EditTaskFormStory.args} />,
   },
 };

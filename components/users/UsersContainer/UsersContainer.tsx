@@ -17,6 +17,7 @@ import { getUserList } from "@/lib/data/user/user.dal";
 import { hasGuestRole } from "@/lib/utils/hasGuestRole";
 import { UserListItemDTO } from "@/lib/data/user/user.dto";
 import { deleteUser } from "@/lib/actions/user/deleteUser";
+import { DeleteUserModalProvider } from "../DeleteUserModal";
 import { UserDetailContainer } from "../UserDetailContainer";
 import { ViewModeLayout } from "@/components/common/ViewMode";
 import { EditUserFormContainer } from "../EditUserFormContainer";
@@ -64,80 +65,80 @@ export async function UsersContainer({
   const authUser = session!.user;
 
   return (
-    <EntityPaginationProvider>
-      <ViewModeLayout
-        list={
-          <UserList>
-            {users.map((user) => (
-              <UserListItem
-                key={user.id}
-                menuTrigger={
-                  showUserActionMenuTrigger && (
-                    <UserItemActionMenuTrigger
-                      showDeleteMenuItem={user.id !== authUser.id}
-                      guestMode={guestMode}
-                      editUserFormContainer={
-                        <EditUserFormContainer userId={user.id} />
-                      }
+    <DeleteUserModalProvider deleteUser={deleteUser}>
+      <EntityPaginationProvider>
+        <ViewModeLayout
+          list={
+            <UserList>
+              {users.map((user) => (
+                <UserListItem
+                  key={user.id}
+                  menuTrigger={
+                    showUserActionMenuTrigger && (
+                      <UserItemActionMenuTrigger
+                        showDeleteMenuItem={user.id !== authUser.id}
+                        guestMode={guestMode}
+                        editUserFormContainer={
+                          <EditUserFormContainer userId={user.id} />
+                        }
+                        userId={user.id}
+                        userFullName={user.fullName}
+                      />
+                    )
+                  }
+                  userDetailModal={
+                    <UserDetailModal
                       userId={user.id}
-                      userFullName={user.fullName}
-                      deleteAction={deleteUser}
-                    />
-                  )
-                }
-                userDetailModal={
-                  <UserDetailModal
-                    userId={user.id}
-                    userDetailContainer={
-                      <UserDetailContainer userId={user.id} />
-                    }
-                  />
-                }
-                {...getUserCommonProps(user)}
-              />
-            ))}
-          </UserList>
-        }
-        grid={
-          <UserGrid>
-            {users.map((user) => (
-              <UserGridItem
-                key={user.id}
-                menuTrigger={
-                  showUserActionMenuTrigger && (
-                    <UserItemActionMenuTrigger
-                      showDeleteMenuItem={user.id !== authUser.id}
-                      guestMode={guestMode}
-                      editUserFormContainer={
-                        <EditUserFormContainer userId={user.id} />
+                      userDetailContainer={
+                        <UserDetailContainer userId={user.id} />
                       }
-                      userId={user.id}
-                      userFullName={user.fullName}
-                      deleteAction={deleteUser}
-                      className="-mr-2"
                     />
-                  )
-                }
-                userDetailModal={
-                  <UserDetailModal
-                    userId={user.id}
-                    userDetailContainer={
-                      <UserDetailContainer userId={user.id} />
-                    }
-                  />
-                }
-                {...getUserCommonProps(user)}
-              />
-            ))}
-          </UserGrid>
-        }
-      />
+                  }
+                  {...getUserCommonProps(user)}
+                />
+              ))}
+            </UserList>
+          }
+          grid={
+            <UserGrid>
+              {users.map((user) => (
+                <UserGridItem
+                  key={user.id}
+                  menuTrigger={
+                    showUserActionMenuTrigger && (
+                      <UserItemActionMenuTrigger
+                        showDeleteMenuItem={user.id !== authUser.id}
+                        guestMode={guestMode}
+                        editUserFormContainer={
+                          <EditUserFormContainer userId={user.id} />
+                        }
+                        userId={user.id}
+                        userFullName={user.fullName}
+                        className="-mr-2"
+                      />
+                    )
+                  }
+                  userDetailModal={
+                    <UserDetailModal
+                      userId={user.id}
+                      userDetailContainer={
+                        <UserDetailContainer userId={user.id} />
+                      }
+                    />
+                  }
+                  {...getUserCommonProps(user)}
+                />
+              ))}
+            </UserGrid>
+          }
+        />
 
-      <EntityContainerPagination
-        page={page}
-        totalPages={Math.ceil(totalCount / pageSize)}
-        pageSize={pageSize}
-      />
-    </EntityPaginationProvider>
+        <EntityContainerPagination
+          page={page}
+          totalPages={Math.ceil(totalCount / pageSize)}
+          pageSize={pageSize}
+        />
+      </EntityPaginationProvider>
+    </DeleteUserModalProvider>
   );
 }

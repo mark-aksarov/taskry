@@ -1,14 +1,19 @@
+import {
+  getProjectCategoryCount,
+  getProjectCategorySummaries,
+} from "@/lib/data/projectCategory/projectCategory.dal";
+
 import { hasGuestRole } from "@/lib/utils/hasGuestRole";
 import { ProjectCategoriesPage } from "./ProjectCategoriesPage";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { ProjectCategoriesPageEmpty } from "./ProjectCategoriesPageEmpty";
-import { getProjectCategoryCount } from "@/lib/data/projectCategory/projectCategory.dal";
+import { SelectedItemsProvider } from "@/components/common/SelectedItemsContext";
 import { createProjectCategory } from "@/lib/actions/projectCategory/createProjectCategory";
 import { NewProjectCategoryForm } from "@/components/projectCategory/NewProjectCategoryForm";
-import { ProjectCategoriesContainer } from "@/components/projectCategory/ProjectCategoriesContainer";
-import { ProjectCategoryToolbarCreateNewModalTrigger } from "@/components/projectCategory/ProjectCategoryToolbarCreateNewModalTrigger";
-import { ProjectCategoryToolbarActionsMenuTrigger } from "@/components/projectCategory/ProjectCategoryToolbarActionsMenuTrigger";
 import { deleteProjectCategories } from "@/lib/actions/projectCategory/deleteProjectCategories";
+import { ProjectCategoriesContainer } from "@/components/projectCategory/ProjectCategoriesContainer";
+import { ProjectCategoryToolbarActionsMenuTrigger } from "@/components/projectCategory/ProjectCategoryToolbarActionsMenuTrigger";
+import { ProjectCategoryToolbarCreateNewModalTrigger } from "@/components/projectCategory/ProjectCategoryToolbarCreateNewModalTrigger";
 
 export default async function AppProjectCategoriesPage() {
   // Authorization
@@ -37,18 +42,24 @@ export default async function AppProjectCategoriesPage() {
     );
   }
 
+  const projectCategories = await getProjectCategorySummaries();
+
   return (
-    <ProjectCategoriesPage
-      projectCategoriesContainer={<ProjectCategoriesContainer />}
-      projectCategoryToolbarCreateNewModalTrigger={
-        projectCategoryToolbarCreateNewModalTrigger
-      }
-      projectCategoryToolbarActionsMenuTrigger={
-        <ProjectCategoryToolbarActionsMenuTrigger
-          guestMode={guestMode}
-          deleteProjectCategories={deleteProjectCategories}
-        />
-      }
-    />
+    <SelectedItemsProvider
+      pageItems={projectCategories.map((p) => ({ id: p.id }))}
+    >
+      <ProjectCategoriesPage
+        projectCategoriesContainer={<ProjectCategoriesContainer />}
+        projectCategoryToolbarCreateNewModalTrigger={
+          projectCategoryToolbarCreateNewModalTrigger
+        }
+        projectCategoryToolbarActionsMenuTrigger={
+          <ProjectCategoryToolbarActionsMenuTrigger
+            guestMode={guestMode}
+            deleteProjectCategories={deleteProjectCategories}
+          />
+        }
+      />
+    </SelectedItemsProvider>
   );
 }

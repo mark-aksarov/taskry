@@ -1,11 +1,12 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { ProjectToolbarActionsMenuTrigger } from "../ProjectToolbarActionsMenuTrigger";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { ProjectToolbarActionsMenuTrigger } from "../ProjectToolbarActionsMenuTrigger";
+import { withSelectedProjectsProvider } from "../../SelectedProjectsContext/__stories__";
 
 const meta = {
   title: "components/projects/ProjectToolbarActionsMenuTrigger",
   component: ProjectToolbarActionsMenuTrigger,
-  decorators: [withThemedBackground],
+  decorators: [withSelectedProjectsProvider, withThemedBackground],
   parameters: {
     backgroundVariant: "alt",
   },
@@ -17,7 +18,7 @@ type Story = StoryObj<typeof meta>;
 export const Default = {
   args: {
     guestMode: false,
-    deleteAction: () => ({ status: "success" }),
+    deleteProjects: () => ({ status: "success" }),
     updateStatusAction: () => ({ status: "success" }),
   },
 } satisfies Story;

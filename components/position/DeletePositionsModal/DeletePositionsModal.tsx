@@ -11,9 +11,9 @@ import {
 import { useTranslations } from "next-intl";
 import { ModalProps } from "@/components/ui/Modal";
 import { DialogHeading } from "@/components/ui/Dialog";
+import { startTransition, useActionState } from "react";
+import { useErrorToast } from "@/lib/hooks/useErrorToast";
 import { ActionFn, ActionState } from "@/lib/actions/types";
-import { startTransition, useActionState, useEffect } from "react";
-import { useActionErrorToast } from "@/lib/hooks/useActionErrorToast";
 
 const initialState: ActionState = {
   status: null,
@@ -22,7 +22,6 @@ const initialState: ActionState = {
 interface DeletePositionsModalProps extends ModalProps {
   positionIds: number[];
   deletePositions: ActionFn<ActionState, number[]>;
-  onSuccess?: () => void;
 }
 
 export function DeletePositionsModal({
@@ -30,22 +29,27 @@ export function DeletePositionsModal({
   isOpen,
   onOpenChange,
   deletePositions,
-  onSuccess,
 }: DeletePositionsModalProps) {
   const t = useTranslations("positions.DeletePositionsModal");
+
+  const { close: closeErrorToast, add: addErrorToast } = useErrorToast();
+
   const [state, action, isPending] = useActionState(
-    deletePositions,
+    async (prevState: ActionState, payload: number[]) => {
+      const newState = await deletePositions(prevState, payload);
+
+      closeErrorToast();
+
+      if (newState.status === "success") {
+        onOpenChange?.(false);
+      } else if (newState.status === "error" && newState.message) {
+        addErrorToast(newState.message);
+      }
+
+      return newState;
+    },
     initialState,
   );
-
-  useEffect(() => {
-    if (state.status === "success") {
-      onSuccess?.();
-      onOpenChange?.(false);
-    }
-  }, [state.status, onSuccess]);
-
-  useActionErrorToast(state);
 
   const handleDelete = () => {
     startTransition(() => action(positionIds));

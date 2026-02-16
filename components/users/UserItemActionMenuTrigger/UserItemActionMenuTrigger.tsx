@@ -11,9 +11,8 @@ import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
 import { Pencil, Trash } from "lucide-react";
 import { EditUserModal } from "../EditUserModal";
-import { DeleteUserModal } from "../DeleteUserModal";
+import { useDeleteUserModal } from "../DeleteUserModal";
 import { GuestModeModal } from "../../common/GuestModeModal";
-import { ActionFn, ActionState } from "@/lib/actions/types";
 
 interface UserItemActionMenuTriggerProps {
   showDeleteMenuItem: boolean;
@@ -21,7 +20,6 @@ interface UserItemActionMenuTriggerProps {
   userId: string;
   userFullName: string;
   className?: string;
-  deleteAction: ActionFn<ActionState, string>;
   editUserFormContainer: React.ReactNode;
 }
 
@@ -31,7 +29,6 @@ export function UserItemActionMenuTrigger({
   userId,
   userFullName,
   className,
-  deleteAction,
   editUserFormContainer,
 }: UserItemActionMenuTriggerProps) {
   const t = useTranslations("users.UserItemActionMenuTrigger");
@@ -40,7 +37,7 @@ export function UserItemActionMenuTrigger({
   const [isEditUserModalOpen, setIsEditUserModalOpen] = useState(false);
 
   // Modal state for deleting the user
-  const [isDeleteUserModalOpen, setIsDeleteUserModalOpen] = useState(false);
+  const { setState: setDeleteUserModalState } = useDeleteUserModal();
 
   // Guest mode
   const [isGuestModeModalOpen, setIsGuestModeModalOpen] = useState(false);
@@ -55,7 +52,11 @@ export function UserItemActionMenuTrigger({
     if (key === "edit") {
       setIsEditUserModalOpen(true);
     } else if (key === "delete") {
-      setIsDeleteUserModalOpen(true);
+      setDeleteUserModalState({
+        isOpen: true,
+        userId,
+        userFullName,
+      });
     }
   }
 
@@ -87,15 +88,6 @@ export function UserItemActionMenuTrigger({
         isOpen={isEditUserModalOpen}
         onOpenChange={setIsEditUserModalOpen}
         editUserFormContainer={editUserFormContainer}
-      />
-
-      {/* Modal for confirming task deletion */}
-      <DeleteUserModal
-        userId={userId}
-        userFullName={userFullName}
-        isOpen={isDeleteUserModalOpen}
-        onOpenChange={setIsDeleteUserModalOpen}
-        deleteAction={deleteAction}
       />
 
       <GuestModeModal

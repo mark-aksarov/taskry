@@ -34,12 +34,19 @@ import { NewTaskForm } from "@/components/tasks/NewTaskForm";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { getTaskListItems } from "@/components/tasks/TaskList/__stories__";
 import { NewTaskFormStory } from "@/components/tasks/NewTaskForm/__stories__";
+import { withDeleteTaskModalProvider } from "@/components/tasks/DeleteTaskModal/__stories__";
+import { withEntityPaginationProvider } from "@/components/common/EntityContainerPagination/__stories__";
 
 const meta = {
   title: "pages/DashboardPage",
   component: DashboardPage,
   parameters: { layout: "fullscreen" },
-  decorators: [PageDecorator, withThemedBackground],
+  decorators: [
+    withDeleteTaskModalProvider,
+    withEntityPaginationProvider,
+    PageDecorator,
+    withThemedBackground,
+  ],
   beforeEach: () => {
     mocked(usePathname).mockReturnValue("/");
     mocked(useRouter).mockReturnValue({ push: fn() } as any);

@@ -9,7 +9,6 @@ import { useTranslations } from "next-intl";
 import { PageGrid } from "@/components/common/PageGrid";
 import { ViewModeProvider } from "@/components/common/ViewMode";
 import { PageContainer } from "@/components/common/PageContainer";
-import { SelectedItemsProvider } from "@/components/common/SelectedItemsContext";
 
 interface ProjectCategoriesPageProps {
   projectCategoriesContainer: React.ReactNode;
@@ -28,25 +27,23 @@ export function ProjectCategoriesPage({
     <PageContainer>
       <PageGrid>
         <ViewModeProvider>
-          <SelectedItemsProvider>
-            <ToolbarDesktop>
-              {projectCategoryToolbarActionsMenuTrigger}
+          <ToolbarDesktop>
+            {projectCategoryToolbarActionsMenuTrigger}
+            {projectCategoryToolbarCreateNewModalTrigger}
+          </ToolbarDesktop>
+
+          <ToolbarMobileTop>
+            <ToolbarMobileHeading>{t("heading")}</ToolbarMobileHeading>
+            {projectCategoryToolbarActionsMenuTrigger}
+          </ToolbarMobileTop>
+
+          <ToolbarMobileBottom>
+            <div className="ml-auto">
               {projectCategoryToolbarCreateNewModalTrigger}
-            </ToolbarDesktop>
+            </div>
+          </ToolbarMobileBottom>
 
-            <ToolbarMobileTop>
-              <ToolbarMobileHeading>{t("heading")}</ToolbarMobileHeading>
-              {projectCategoryToolbarActionsMenuTrigger}
-            </ToolbarMobileTop>
-
-            <ToolbarMobileBottom>
-              <div className="ml-auto">
-                {projectCategoryToolbarCreateNewModalTrigger}
-              </div>
-            </ToolbarMobileBottom>
-
-            {projectCategoriesContainer}
-          </SelectedItemsProvider>
+          {projectCategoriesContainer}
         </ViewModeProvider>
       </PageGrid>
     </PageContainer>

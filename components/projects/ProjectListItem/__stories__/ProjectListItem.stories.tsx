@@ -6,12 +6,14 @@ import { ProjectCommentsModal } from "../../ProjectCommentsModal";
 import { UserDetailModal } from "@/components/users/UserDetailModal";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { ProjectDetailModalStory } from "../../ProjectDetailModal/__stories__";
+import { CustomerDetailModal } from "@/components/customer/CustomerDetailModal";
 import { ProjectItemActionMenuTrigger } from "../../ProjectItemActionMenuTrigger";
 import { ProjectCommentsModalStory } from "../../ProjectCommentsModal/__stories__";
 import { UserDetailModalStory } from "@/components/users/UserDetailModal/__stories__";
-import { ProjectItemActionMenuTriggerStory } from "../../ProjectItemActionMenuTrigger/__stories__";
-import { CustomerDetailModal } from "@/components/customer/CustomerDetailModal";
+import { withDeleteProjectModalProvider } from "../../DeleteProjectModal/__stories__";
+import { withSelectedProjectsProvider } from "../../SelectedProjectsContext/__stories__";
 import { CustomerDetailModalStory } from "@/components/customer/CustomerDetailModal/__stories__";
+import { ProjectItemActionMenuTriggerStory } from "../../ProjectItemActionMenuTrigger/__stories__";
 
 export const mockedProject = {
   id: 1,
@@ -42,7 +44,11 @@ export const mockedProject = {
 const meta = {
   title: "components/projects/ProjectListItem",
   component: ProjectListItem,
-  decorators: [withThemedBackground],
+  decorators: [
+    withSelectedProjectsProvider,
+    withDeleteProjectModalProvider,
+    withThemedBackground,
+  ],
   excludeStories: ["mockedProject"],
 } satisfies Meta<typeof ProjectListItem>;
 

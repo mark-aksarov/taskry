@@ -26,7 +26,7 @@ import { useActionErrorToast } from "@/lib/hooks/useActionErrorToast";
 
 interface ProjectToolbarActionsMenuTriggerProps {
   guestMode: boolean;
-  deleteAction: ActionFn<ActionState, DeleteProjectsPayload>;
+  deleteProjects: ActionFn<ActionState, DeleteProjectsPayload>;
   updateStatusAction: ActionFn<ActionState, UpdateProjectStatusesPayload>;
 }
 
@@ -36,7 +36,7 @@ const updateStatusInitialState: ActionState = {
 
 export const ProjectToolbarActionsMenuTrigger = ({
   guestMode,
-  deleteAction,
+  deleteProjects,
   updateStatusAction,
 }: ProjectToolbarActionsMenuTriggerProps) => {
   const t = useTranslations("projects.ProjectToolbarActionsMenuTrigger");
@@ -128,10 +128,9 @@ export const ProjectToolbarActionsMenuTrigger = ({
       {/* Modal for confirming project deletion */}
       <DeleteProjectsModal
         projectIds={selected.ids}
-        deleteAction={deleteAction}
+        deleteProjects={deleteProjects}
         isOpen={isDeleteModalOpen}
         onOpenChange={setIsDeleteModalOpen}
-        onSuccess={selected.clear}
       />
 
       {/* Guest mode modal */}

@@ -4,15 +4,21 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { TaskDetailModal } from "@/components/tasks/TaskDetailModal";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { TaskCommentsModal } from "@/components/tasks/TaskCommentsModal";
-import { UserItemActionMenuTrigger } from "../../UserItemActionMenuTrigger";
 import { TaskDetailModalStory } from "@/components/tasks/TaskDetailModal/__stories__";
+import { TaskItemActionMenuTrigger } from "@/components/tasks/TaskItemActionMenuTrigger";
 import { TaskCommentsModalStory } from "@/components/tasks/TaskCommentsModal/__stories__";
-import { UserItemActionMenuTriggerStory } from "../../UserItemActionMenuTrigger/__stories__";
+import { withDeleteTaskModalProvider } from "@/components/tasks/DeleteTaskModal/__stories__";
+import { withSelectedTasksProvider } from "@/components/tasks/SelectedTasksContext/__stories__";
+import { TaskItemActionMenuTriggerStory } from "@/components/tasks/TaskItemActionMenuTrigger/__stories__";
 
 const meta = {
   title: "components/users/UserTaskListItem",
   component: UserTaskListItem,
-  decorators: [withThemedBackground],
+  decorators: [
+    withSelectedTasksProvider,
+    withDeleteTaskModalProvider,
+    withThemedBackground,
+  ],
 } satisfies Meta<typeof UserTaskListItem>;
 
 export default meta;
@@ -27,7 +33,7 @@ export const Default = {
     commentsCount: 10,
     taskDetailModal: <TaskDetailModal {...TaskDetailModalStory.args} />,
     menuTrigger: (
-      <UserItemActionMenuTrigger {...UserItemActionMenuTriggerStory.args} />
+      <TaskItemActionMenuTrigger {...TaskItemActionMenuTriggerStory.args} />
     ),
     taskCommentsModal: <TaskCommentsModal {...TaskCommentsModalStory.args} />,
     updateTaskStatus: () => {

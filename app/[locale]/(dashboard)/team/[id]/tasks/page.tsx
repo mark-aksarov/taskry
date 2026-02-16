@@ -1,6 +1,6 @@
 import { z } from "zod";
+import { getTaskList } from "@/lib/data/task/task.dal";
 import { hasGuestRole } from "@/lib/utils/hasGuestRole";
-import { getTaskCount } from "@/lib/data/task/task.dal";
 import { hasOwnerRole } from "@/lib/utils/hasOwnerRole";
 import { deleteTasks } from "@/lib/actions/task/deleteTasks";
 import { ProfileActions } from "@/components/users/ProfileActions";
@@ -15,6 +15,7 @@ import { UserTasksPageLayout } from "@/components/users/UserTasksPageLayout";
 import { UserHeaderContainer } from "@/components/users/UserHeaderContainer";
 import { NewTaskFormContainer } from "@/components/tasks/NewTaskFormContainer";
 import { UserNavigationMobile } from "@/components/users/UserNavigationMobile";
+import { SelectedTasksProvider } from "@/components/tasks/SelectedTasksContext/SelectedTasksContext";
 import { UserNavigationDesktop } from "@/components/users/UserNavigationDesktop";
 import { EditUserFormContainer } from "@/components/users/EditUserFormContainer";
 import { TaskToolbarActionsMenuTrigger } from "@/components/tasks/TaskToolbarActionsMenuTrigger";
@@ -42,7 +43,16 @@ export default async function AppProfileTasksPage({
   const { page, pageSize, sort } = searchParamsSchema.parse(rawParams);
 
   // Get count
-  const taskCount = await getTaskCount();
+  const filters = {
+    assignee: [userId],
+  };
+
+  const { items: tasks, totalCount } = await getTaskList({
+    page,
+    pageSize,
+    sort,
+    filters,
+  });
 
   // Render user actions for the owner, guest, or authenticated user
   const isOwner = await hasOwnerRole();
@@ -62,7 +72,7 @@ export default async function AppProfileTasksPage({
   ) : null;
 
   // Render the page with an empty tasks section.
-  if (!taskCount)
+  if (!totalCount) {
     return (
       <TeamProfileTasksPageEmpty
         userId={userId}
@@ -71,27 +81,32 @@ export default async function AppProfileTasksPage({
         userHeaderContainer={<UserHeaderContainer userId={userId} />}
       />
     );
+  }
 
   return (
-    <UserTasksPageLayout
-      userTasksContainer={
-        <UserTasksContainer
-          userId={userId}
-          page={page}
-          pageSize={pageSize}
-          sort={sort}
-        />
-      }
-      userHeaderContainer={<UserHeaderContainer userId={userId} />}
-      taskToolbarActionsMenuTrigger={
-        <TaskToolbarActionsMenuTrigger
-          guestMode={guestMode}
-          deleteAction={deleteTasks}
-          updateStatusAction={updateTaskStatuses}
-        />
-      }
-      navigationDesktop={<UserNavigationDesktop userActions={userActions} />}
-      navigationMobile={<UserNavigationMobile />}
-    />
+    <SelectedTasksProvider
+      pageItems={tasks.map((task) => ({ id: task.id, status: task.status }))}
+    >
+      <UserTasksPageLayout
+        userTasksContainer={
+          <UserTasksContainer
+            tasks={tasks}
+            totalCount={totalCount}
+            page={page}
+            pageSize={pageSize}
+          />
+        }
+        userHeaderContainer={<UserHeaderContainer userId={userId} />}
+        taskToolbarActionsMenuTrigger={
+          <TaskToolbarActionsMenuTrigger
+            guestMode={guestMode}
+            deleteTasks={deleteTasks}
+            updateStatusAction={updateTaskStatuses}
+          />
+        }
+        navigationDesktop={<UserNavigationDesktop userActions={userActions} />}
+        navigationMobile={<UserNavigationMobile />}
+      />
+    </SelectedTasksProvider>
   );
 }

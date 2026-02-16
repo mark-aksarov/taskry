@@ -3,6 +3,8 @@ import { Meta, StoryObj } from "@storybook/react";
 import { CompanyListItem } from "../../CompanyListItem";
 import { CompanyListItemStory } from "../../CompanyListItem/__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { withSelectedItemsProvider } from "@/components/common/SelectedItemsContext/__stories__";
+import { withDeleteCompanyModalProvider } from "../../DeleteCompanyModal/__stories__";
 
 const mockedCompanies = [
   { id: 1, name: "Company 1" },
@@ -15,7 +17,11 @@ const mockedCompanies = [
 const meta = {
   title: "components/companies/CompanyList",
   component: CompanyList,
-  decorators: [withThemedBackground],
+  decorators: [
+    withDeleteCompanyModalProvider,
+    withSelectedItemsProvider,
+    withThemedBackground,
+  ],
 } satisfies Meta<typeof CompanyList>;
 
 export default meta;

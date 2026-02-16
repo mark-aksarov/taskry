@@ -1,4 +1,3 @@
-import { fn } from "storybook/internal/test";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { EditCustomerForm } from "../../EditCustomerForm";
 import { CustomerDetailActions } from "../CustomerDetailActions";
@@ -22,7 +21,7 @@ export const Default = {
     guestMode: false,
     customerId: 1,
     customerFullName: "John Doe",
-    deleteCustomer: fn(),
+    deleteCustomer: () => ({ status: "success" }),
     editCustomerFormContainer: (
       <EditCustomerForm {...EditCustomerFormStory.args} />
     ),

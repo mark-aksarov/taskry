@@ -83,7 +83,6 @@ export const ProjectCategoryToolbarActionsMenuTrigger = ({
         onOpenChange={setIsDeleteModalOpen}
         deleteProjectCategories={deleteProjectCategories}
         projectCategoryIds={selected.ids}
-        onSuccess={selected.clear}
       />
 
       {/* Guest mode modal */}

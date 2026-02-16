@@ -81,7 +81,6 @@ export const CompanyToolbarActionsMenuTrigger = ({
         onOpenChange={setIsDeleteModalOpen}
         companyIds={selected.ids}
         deleteCompanies={deleteCompanies}
-        onSuccess={selected.clear}
       />
 
       {/* Guest mode modal */}

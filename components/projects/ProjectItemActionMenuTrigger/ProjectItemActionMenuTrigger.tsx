@@ -3,7 +3,6 @@
 import {
   ActionFn,
   ActionState,
-  DeleteProjectsPayload,
   UpdateProjectStatusesPayload,
 } from "@/lib/actions/types";
 
@@ -17,11 +16,11 @@ import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
 import { EditProjectModal } from "../EditProjectModal";
 import { ProjectStatus } from "@/generated/prisma/enums";
-import { DeleteProjectModal } from "../DeleteProjectModal";
 import { GuestModeModal } from "../../common/GuestModeModal";
 import { startTransition, useActionState, useState } from "react";
 import { useActionErrorToast } from "@/lib/hooks/useActionErrorToast";
 import { Check, CircleEllipsis, Clock, Pencil, Trash } from "lucide-react";
+import { useDeleteProjectModal } from "../DeleteProjectModal/DeleteProjectModalContext";
 
 export type ProjectItemActionMenuTriggerProps = {
   guestMode: boolean;
@@ -29,7 +28,6 @@ export type ProjectItemActionMenuTriggerProps = {
   projectTitle: string;
   projectStatus: ProjectStatus;
   className?: string;
-  deleteAction: ActionFn<ActionState, DeleteProjectsPayload>;
   updateStatusAction: ActionFn<ActionState, UpdateProjectStatusesPayload>;
   editProjectFormContainer: React.ReactNode;
 };
@@ -44,7 +42,6 @@ export function ProjectItemActionMenuTrigger({
   projectTitle,
   projectStatus,
   className,
-  deleteAction,
   updateStatusAction,
   editProjectFormContainer,
 }: ProjectItemActionMenuTriggerProps) {
@@ -57,7 +54,7 @@ export function ProjectItemActionMenuTrigger({
   const [isOpenEditModal, setIsOpenEditModal] = useState(false);
 
   // Modal state for deleting the project
-  const [isOpenDeleteModal, setIsOpenDeleteModal] = useState(false);
+  const { setState } = useDeleteProjectModal();
 
   // State and action handler for updating project status
   const [
@@ -80,7 +77,11 @@ export function ProjectItemActionMenuTrigger({
     if (action === "edit") {
       setIsOpenEditModal(true);
     } else if (action === "delete") {
-      setIsOpenDeleteModal(true);
+      setState({
+        isOpen: true,
+        projectId,
+        projectTitle,
+      });
     } else {
       startTransition(() => {
         updateProjectStatusAction({
@@ -127,15 +128,6 @@ export function ProjectItemActionMenuTrigger({
         isOpen={isOpenEditModal}
         onOpenChange={setIsOpenEditModal}
         editProjectFormContainer={editProjectFormContainer}
-      />
-
-      {/* Modal for confirming project deletion */}
-      <DeleteProjectModal
-        projectId={projectId}
-        projectTitle={projectTitle}
-        isOpen={isOpenDeleteModal}
-        onOpenChange={setIsOpenDeleteModal}
-        deleteAction={deleteAction}
       />
 
       <GuestModeModal

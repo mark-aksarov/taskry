@@ -3,6 +3,9 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { CustomerListItem } from "../../CustomerListItem";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { CustomerListItemStory } from "../../CustomerListItem/__stories__";
+import { withDeleteCustomerModalProvider } from "../../DeleteCustomerModal/__stories__";
+import { withSelectedItemsProvider } from "@/components/common/SelectedItemsContext/__stories__";
+import { withEntityPaginationProvider } from "@/components/common/EntityContainerPagination/__stories__";
 
 export const mockedCustomers = [
   {
@@ -55,7 +58,12 @@ export const mockedCustomers = [
 const meta = {
   title: "components/customers/CustomerList",
   component: CustomerList,
-  decorators: [withThemedBackground],
+  decorators: [
+    withEntityPaginationProvider,
+    withSelectedItemsProvider,
+    withDeleteCustomerModalProvider,
+    withThemedBackground,
+  ],
   excludeStories: ["mockedCustomers"],
 } satisfies Meta<typeof CustomerList>;
 

@@ -3,6 +3,8 @@ import { TaskCategoryList } from "../TaskCategoryList";
 import { TaskCategoryListItem } from "../../TaskCategoryListItem";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { TaskCategoryListItemStory } from "../../TaskCategoryListItem/__stories__";
+import { withSelectedItemsProvider } from "@/components/common/SelectedItemsContext/__stories__";
+import { withDeleteTaskCategoryModalProvider } from "../../DeleteTaskCategoryModal/__stories__";
 
 const mockedTaskCategories = [
   { id: 1, name: "Task Category 1" },
@@ -15,7 +17,11 @@ const mockedTaskCategories = [
 const meta = {
   title: "components/task-categories/TaskCategoryList",
   component: TaskCategoryList,
-  decorators: [withThemedBackground],
+  decorators: [
+    withSelectedItemsProvider,
+    withDeleteTaskCategoryModalProvider,
+    withThemedBackground,
+  ],
 } satisfies Meta<typeof TaskCategoryList>;
 
 export default meta;

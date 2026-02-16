@@ -4,6 +4,9 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { ProjectStatus } from "@/generated/prisma/enums";
 import { ProjectListItemStory } from "../../ProjectListItem/__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { withDeleteProjectModalProvider } from "../../DeleteProjectModal/__stories__";
+import { withSelectedProjectsProvider } from "../../SelectedProjectsContext/__stories__";
+import { withEntityPaginationProvider } from "@/components/common/EntityContainerPagination/__stories__";
 
 export const mockedProjects = [
   {
@@ -76,7 +79,12 @@ export const mockedProjects = [
 const meta = {
   title: "components/projects/ProjectList",
   component: ProjectList,
-  decorators: [withThemedBackground],
+  decorators: [
+    withEntityPaginationProvider,
+    withSelectedProjectsProvider,
+    withDeleteProjectModalProvider,
+    withThemedBackground,
+  ],
   excludeStories: ["mockedProjects"],
 } satisfies Meta<typeof ProjectList & { showCheckbox?: boolean }>;
 

@@ -8,16 +8,23 @@ import { TaskCategoriesPageEmpty } from "./TaskCategoriesPageEmpty";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { TaskCategoryList } from "@/components/taskCategory/TaskCategoryList";
 import { TaskCategoryListStory } from "@/components/taskCategory/TaskCategoryList/__stories__";
-import { TaskCategoryToolbarCreateNewModalTrigger } from "@/components/taskCategory/TaskCategoryToolbarCreateNewModalTrigger";
+import { withSelectedItemsProvider } from "@/components/common/SelectedItemsContext/__stories__";
+import { withDeleteTaskCategoryModalProvider } from "@/components/taskCategory/DeleteTaskCategoryModal/__stories__";
 import { TaskCategoryToolbarActionsMenuTrigger } from "@/components/taskCategory/TaskCategoryToolbarActionsMenuTrigger";
-import { TaskCategoryToolbarCreateNewModalTriggerStory } from "@/components/taskCategory/TaskCategoryToolbarCreateNewModalTrigger/__stories__";
+import { TaskCategoryToolbarCreateNewModalTrigger } from "@/components/taskCategory/TaskCategoryToolbarCreateNewModalTrigger";
 import { TaskCategoryToolbarActionsMenuTriggerStory } from "@/components/taskCategory/TaskCategoryToolbarActionsMenuTrigger/__stories__";
+import { TaskCategoryToolbarCreateNewModalTriggerStory } from "@/components/taskCategory/TaskCategoryToolbarCreateNewModalTrigger/__stories__";
 
 const meta = {
   title: "pages/TaskCategoriesPage",
   component: TaskCategoriesPage,
   parameters: { layout: "fullscreen" },
-  decorators: [PageDecorator, withThemedBackground],
+  decorators: [
+    withDeleteTaskCategoryModalProvider,
+    withSelectedItemsProvider,
+    PageDecorator,
+    withThemedBackground,
+  ],
   beforeEach: () => {
     mocked(usePathname).mockReturnValue("/task-categories");
     mocked(useRouter).mockReturnValue({ push: fn() } as any);

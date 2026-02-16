@@ -33,15 +33,3 @@ export const Default = {
     deleteCompanies: () => ({ status: "success" }),
   },
 } satisfies Story;
-
-export const WithError = {
-  args: {
-    companyIds: [1, 2, 3],
-    isOpen: false,
-    onOpenChange: () => {},
-    deleteCompanies: () => ({
-      status: "error",
-      errorCode: "validationError",
-    }),
-  },
-} satisfies Story;

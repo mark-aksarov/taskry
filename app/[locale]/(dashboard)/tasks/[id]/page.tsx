@@ -38,10 +38,10 @@ export default async function AppTaskDetailPage({
       taskDetailActions={
         <TaskDetailActions
           guestMode={guestMode}
-          deleteTask={deleteTasks}
           editTaskFormContainer={<EditTaskFormContainer taskId={numberId} />}
           taskId={numberId}
           taskTitle={taskSummary.title}
+          deleteTask={deleteTasks}
           commentsModal={
             <TaskCommentsModal
               taskId={numberId}

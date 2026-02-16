@@ -12,9 +12,9 @@ import { headers } from "next/headers";
 import { TaskList } from "../TaskList";
 import { TaskListItem } from "../TaskListItem";
 import { TaskDetailModal } from "../TaskDetailModal";
-import { getTaskList } from "@/lib/data/task/task.dal";
 import { hasGuestRole } from "@/lib/utils/hasGuestRole";
 import { TaskCommentsModal } from "../TaskCommentsModal";
+import { TaskListItemDTO } from "@/lib/data/task/task.dto";
 import { deleteTasks } from "@/lib/actions/task/deleteTasks";
 import { TaskDetailContainer } from "../TaskDetailContainer";
 import { NewTaskFormContainer } from "../NewTaskFormContainer";
@@ -30,6 +30,8 @@ import { ProjectDetailModal } from "@/components/projects/ProjectDetailModal";
 import { ProjectDetailContainer } from "@/components/projects/ProjectDetailContainer";
 
 interface AssignedTasksContainerProps {
+  tasks: TaskListItemDTO[];
+  totalCount: number;
   page: number;
   pageSize: number;
 }
@@ -43,6 +45,8 @@ export function AssignedTasksContainer(props: AssignedTasksContainerProps) {
 }
 
 async function AssignedTasksContainerInner({
+  tasks,
+  totalCount,
   page,
   pageSize,
 }: AssignedTasksContainerProps) {
@@ -50,18 +54,6 @@ async function AssignedTasksContainerInner({
     headers: await headers(),
   });
 
-  const assigneeId = session!.user.id;
-
-  const filters = {
-    assignee: [assigneeId],
-  };
-
-  const { items: tasks, totalCount } = await getTaskList({
-    page,
-    pageSize,
-    sort: "deadline",
-    filters,
-  });
   const guestMode = await hasGuestRole();
 
   if (!totalCount) {
@@ -139,7 +131,6 @@ async function AssignedTasksContainerInner({
                   taskId={task.id}
                   taskTitle={task.title}
                   taskStatus={task.status}
-                  deleteAction={deleteTasks}
                   editTaskFormContainer={
                     <EditTaskFormContainer taskId={task.id} />
                   }

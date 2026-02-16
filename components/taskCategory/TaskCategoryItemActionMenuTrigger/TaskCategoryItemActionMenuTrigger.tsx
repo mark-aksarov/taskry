@@ -10,17 +10,15 @@ import { useState } from "react";
 import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
 import { Pencil, Trash } from "lucide-react";
-import { ActionFn, ActionState } from "@/lib/actions/types";
 import { EditTaskCategoryModal } from "../EditTaskCategoryModal";
 import { GuestModeModal } from "@/components/common/GuestModeModal";
-import { DeleteTaskCategoryModal } from "../DeleteTaskCategoryModal";
+import { useDeleteTaskCategoryModal } from "../DeleteTaskCategoryModal";
 
 export type TaskCategoryItemActionMenuTriggerProps = {
   guestMode: boolean;
   taskCategoryId: number;
   taskCategoryName: string;
   editTaskCategoryForm: React.ReactNode;
-  deleteTaskCategories: ActionFn<ActionState, number[]>;
 };
 
 export function TaskCategoryItemActionMenuTrigger({
@@ -28,7 +26,6 @@ export function TaskCategoryItemActionMenuTrigger({
   taskCategoryId,
   taskCategoryName,
   editTaskCategoryForm,
-  deleteTaskCategories,
 }: TaskCategoryItemActionMenuTriggerProps) {
   const t = useTranslations("taskCategories.TaskCategoryItemActionMenuTrigger");
 
@@ -39,7 +36,8 @@ export function TaskCategoryItemActionMenuTrigger({
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
   // Modal state for deleting the task category
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const { setState: setDeleteTaskCategoryModalState } =
+    useDeleteTaskCategoryModal();
 
   // Handle menu actions
   const handleAction = (key: Key) => {
@@ -52,7 +50,11 @@ export function TaskCategoryItemActionMenuTrigger({
     if (action === "edit") {
       setIsEditModalOpen(true);
     } else if (action === "delete") {
-      setIsDeleteModalOpen(true);
+      setDeleteTaskCategoryModalState({
+        isOpen: true,
+        taskCategoryId,
+        taskCategoryName,
+      });
     }
   };
 
@@ -75,14 +77,6 @@ export function TaskCategoryItemActionMenuTrigger({
           <Trash size={16} /> {t("delete")}
         </Item>
       </ItemBaseActionMenuTrigger>
-
-      <DeleteTaskCategoryModal
-        isOpen={isDeleteModalOpen}
-        onOpenChange={setIsDeleteModalOpen}
-        taskCategoryId={taskCategoryId}
-        taskCategoryName={taskCategoryName}
-        deleteTaskCategories={deleteTaskCategories}
-      />
 
       <EditTaskCategoryModal
         isOpen={isEditModalOpen}

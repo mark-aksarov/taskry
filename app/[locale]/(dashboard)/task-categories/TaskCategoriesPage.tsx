@@ -9,7 +9,6 @@ import { useTranslations } from "next-intl";
 import { PageGrid } from "@/components/common/PageGrid";
 import { ViewModeProvider } from "@/components/common/ViewMode";
 import { PageContainer } from "@/components/common/PageContainer";
-import { SelectedItemsProvider } from "@/components/common/SelectedItemsContext";
 
 interface TaskCategoriesPageProps {
   taskCategoriesContainer: React.ReactNode;
@@ -28,25 +27,23 @@ export function TaskCategoriesPage({
     <PageContainer>
       <PageGrid>
         <ViewModeProvider>
-          <SelectedItemsProvider>
-            <ToolbarDesktop>
-              {taskCategoryToolbarActionsMenuTrigger}
+          <ToolbarDesktop>
+            {taskCategoryToolbarActionsMenuTrigger}
+            {taskCategoryToolbarCreateNewModalTrigger}
+          </ToolbarDesktop>
+
+          <ToolbarMobileTop>
+            <ToolbarMobileHeading>{t("heading")}</ToolbarMobileHeading>
+            {taskCategoryToolbarActionsMenuTrigger}
+          </ToolbarMobileTop>
+
+          <ToolbarMobileBottom>
+            <div className="ml-auto">
               {taskCategoryToolbarCreateNewModalTrigger}
-            </ToolbarDesktop>
+            </div>
+          </ToolbarMobileBottom>
 
-            <ToolbarMobileTop>
-              <ToolbarMobileHeading>{t("heading")}</ToolbarMobileHeading>
-              {taskCategoryToolbarActionsMenuTrigger}
-            </ToolbarMobileTop>
-
-            <ToolbarMobileBottom>
-              <div className="ml-auto">
-                {taskCategoryToolbarCreateNewModalTrigger}
-              </div>
-            </ToolbarMobileBottom>
-
-            {taskCategoriesContainer}
-          </SelectedItemsProvider>
+          {taskCategoriesContainer}
         </ViewModeProvider>
       </PageGrid>
     </PageContainer>

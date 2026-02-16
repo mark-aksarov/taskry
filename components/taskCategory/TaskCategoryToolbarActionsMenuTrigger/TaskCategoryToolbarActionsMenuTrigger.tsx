@@ -83,7 +83,6 @@ export const TaskCategoryToolbarActionsMenuTrigger = ({
         onOpenChange={setIsDeleteModalOpen}
         taskCategoryIds={selected.ids}
         deleteTaskCategories={deleteTaskCategories}
-        onSuccess={selected.clear}
       />
 
       {/* Guest mode modal */}

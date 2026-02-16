@@ -4,11 +4,12 @@ import { ProjectStatus } from "@/generated/prisma/enums";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { EditProjectFormStory } from "../../EditProjectForm/__stories__";
 import { ProjectItemActionMenuTrigger } from "../ProjectItemActionMenuTrigger";
+import { withDeleteProjectModalProvider } from "../../DeleteProjectModal/__stories__";
 
 const meta = {
   title: "components/projects/ProjectItemActionMenuTrigger",
   component: ProjectItemActionMenuTrigger,
-  decorators: [withThemedBackground],
+  decorators: [withDeleteProjectModalProvider, withThemedBackground],
   parameters: {
     backgroundVariant: "alt",
   },
@@ -23,7 +24,6 @@ export const Default = {
     projectId: 1,
     projectTitle: "Project 1",
     projectStatus: ProjectStatus.pending,
-    deleteAction: () => ({ status: "success" }),
     updateStatusAction: () => ({ status: "success" }),
     editProjectFormContainer: (
       <EditProjectForm {...EditProjectFormStory.args} />

@@ -1,11 +1,12 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { CompanyToolbarActionsMenuTrigger } from "../CompanyToolbarActionsMenuTrigger";
+import { withSelectedItemsProvider } from "@/components/common/SelectedItemsContext/__stories__";
 
 const meta = {
   title: "components/companies/CompanyToolbarActionsMenuTrigger",
   component: CompanyToolbarActionsMenuTrigger,
-  decorators: [withThemedBackground],
+  decorators: [withSelectedItemsProvider, withThemedBackground],
 } satisfies Meta<typeof CompanyToolbarActionsMenuTrigger>;
 
 export default meta;

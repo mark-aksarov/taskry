@@ -10,7 +10,6 @@ import { PageGrid } from "@/components/common/PageGrid";
 import { ViewModeProvider } from "@/components/common/ViewMode";
 import { PageContainer } from "@/components/common/PageContainer";
 import { ViewModeToggleButtonGroup } from "@/components/common/ViewMode";
-import { SelectedTasksProvider } from "@/components/tasks/SelectedTasksContext";
 import { TaskToolbarManageMenuTrigger } from "@/components/tasks/TaskToolbarManageMenuTrigger";
 import { TaskToolbarSortingMenuTrigger } from "@/components/tasks/TaskToolbarSortingMenuTrigger";
 
@@ -33,31 +32,29 @@ export function TasksPage({
     <PageContainer>
       <PageGrid>
         <ViewModeProvider>
-          <SelectedTasksProvider>
-            <ToolbarDesktop>
-              <TaskToolbarManageMenuTrigger />
-              <TaskToolbarSortingMenuTrigger />
-              {taskToolbarFiltersModalTrigger}
-              {taskToolbarActionsMenuTrigger}
-              <ViewModeToggleButtonGroup className="ml-auto" />
-              {taskToolbarCreateNewMenuTrigger}
-            </ToolbarDesktop>
+          <ToolbarDesktop>
+            <TaskToolbarManageMenuTrigger />
+            <TaskToolbarSortingMenuTrigger />
+            {taskToolbarFiltersModalTrigger}
+            {taskToolbarActionsMenuTrigger}
+            <ViewModeToggleButtonGroup className="ml-auto" />
+            {taskToolbarCreateNewMenuTrigger}
+          </ToolbarDesktop>
 
-            <ToolbarMobileTop>
-              <ToolbarMobileHeading>{t("heading")}</ToolbarMobileHeading>
-              <TaskToolbarManageMenuTrigger />
-              <TaskToolbarSortingMenuTrigger />
-              {taskToolbarFiltersModalTrigger}
-              {taskToolbarActionsMenuTrigger}
-            </ToolbarMobileTop>
+          <ToolbarMobileTop>
+            <ToolbarMobileHeading>{t("heading")}</ToolbarMobileHeading>
+            <TaskToolbarManageMenuTrigger />
+            <TaskToolbarSortingMenuTrigger />
+            {taskToolbarFiltersModalTrigger}
+            {taskToolbarActionsMenuTrigger}
+          </ToolbarMobileTop>
 
-            <ToolbarMobileBottom>
-              <ViewModeToggleButtonGroup />
-              {taskToolbarCreateNewMenuTrigger}
-            </ToolbarMobileBottom>
+          <ToolbarMobileBottom>
+            <ViewModeToggleButtonGroup />
+            {taskToolbarCreateNewMenuTrigger}
+          </ToolbarMobileBottom>
 
-            {tasksContainer}
-          </SelectedTasksProvider>
+          {tasksContainer}
         </ViewModeProvider>
       </PageGrid>
     </PageContainer>

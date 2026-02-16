@@ -1,9 +1,8 @@
 "use client";
 
-import { useEffect } from "react";
 import { Checkbox } from "@/components/ui/Checkbox";
 import { TaskStatus } from "@/generated/prisma/enums";
-import { useSelectedTasks } from "./SelectedTasksContext";
+import { useSelectedTasks } from "./SelectedTasksContext/SelectedTasksContext";
 
 interface TaskItemCheckboxProps {
   id: number;
@@ -12,11 +11,6 @@ interface TaskItemCheckboxProps {
 
 export function TaskItemCheckbox({ id, status }: TaskItemCheckboxProps) {
   const selected = useSelectedTasks();
-
-  // Sync status with task selection
-  useEffect(() => {
-    selected.update(id, { id, status });
-  }, [id, status, selected.update]);
 
   function handleChange(isSelected: boolean) {
     if (isSelected) {
