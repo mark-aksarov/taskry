@@ -8,9 +8,10 @@ import {
 } from "@/components/common/Grid";
 
 import {
-  ItemBaseBadge,
-  ItemBaseDetailModalTrigger,
-} from "@/components/common/ItemBase";
+  ActionFn,
+  ActionState,
+  UpdateProjectStatusesPayload,
+} from "@/lib/actions/types";
 
 import Image from "next/image";
 import { Link } from "@/components/ui/Link";
@@ -18,10 +19,12 @@ import { ProjectStatus } from "@/generated/prisma/enums";
 import { useFormatter, useTranslations } from "next-intl";
 import { ProjectItemCheckbox } from "../ProjectItemCheckbox";
 import { UnknownUser } from "@/components/common/UnknownUser";
+import { ProjectItemBaseBadge } from "../ProjectItemBaseBadge";
 import { ProjectGridItemLayout } from "./ProjectGridItemLayout";
 import { ImageContainer } from "@/components/common/ImageContainer";
-import { getProjectStatusBadgeColor } from "../getProjectStatusBadgeColor";
+import { ItemBaseDetailModalTrigger } from "@/components/common/ItemBase";
 import { ProjectCommentsModalTrigger } from "../ProjectCommentsModalTrigger";
+import { UpdateProjectStatusProvider } from "../UpdateProjectStatusContext";
 
 export interface ProjectGridItemProps {
   id: number;
@@ -40,9 +43,21 @@ export interface ProjectGridItemProps {
   menuTrigger: React.ReactNode;
   projectDetailModal: React.ReactNode;
   userDetailModal?: React.ReactNode;
+  updateProjectStatus: ActionFn<ActionState, UpdateProjectStatusesPayload>;
 }
 
-export function ProjectGridItem({
+export const ProjectGridItem = ({
+  updateProjectStatus,
+  ...props
+}: ProjectGridItemProps) => {
+  return (
+    <UpdateProjectStatusProvider updateStatus={updateProjectStatus}>
+      <ProjectGridItemInner {...props} />
+    </UpdateProjectStatusProvider>
+  );
+};
+
+export function ProjectGridItemInner({
   id,
   title,
   deadline,
@@ -55,8 +70,7 @@ export function ProjectGridItem({
   menuTrigger,
   projectDetailModal,
   userDetailModal,
-}: ProjectGridItemProps) {
-  const tStatus = useTranslations("projects.ProjectStatus");
+}: Omit<ProjectGridItemProps, "updateProjectStatus">) {
   const t = useTranslations("projects.ProjectGridItem");
 
   const format = useFormatter();
@@ -124,11 +138,7 @@ export function ProjectGridItem({
           modal={projectCommentsModal}
         />
       }
-      statusSlot={
-        <ItemBaseBadge color={getProjectStatusBadgeColor(status)}>
-          {tStatus(`${status}`)}
-        </ItemBaseBadge>
-      }
+      statusSlot={<ProjectItemBaseBadge projectId={id} status={status} />}
       progressSlot={
         <GridItemProgress
           value={(tasksCompleted / tasksTotal) * 100}

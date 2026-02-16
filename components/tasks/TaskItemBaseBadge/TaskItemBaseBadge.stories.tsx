@@ -1,11 +1,17 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { TaskItemBaseBadge } from "./TaskItemBaseBadge";
-import { withUpdateTaskStatusProvider } from "../UpdateTaskStatusContext/__stories__/withUpdateTaskStatusProvider";
+import { withSelectedTasksProvider } from "../SelectedTasksContext/__stories__";
+import { withUpdateTaskStatusProvider } from "../UpdateTaskStatusContext/__stories__";
+import { withUpdateTaskStatusesProvider } from "../UpdateTaskStatusContext/__stories__";
 
 const meta: Meta<typeof TaskItemBaseBadge> = {
   title: "components/tasks/TaskItemBaseBadge",
   component: TaskItemBaseBadge,
-  decorators: [withUpdateTaskStatusProvider],
+  decorators: [
+    withSelectedTasksProvider,
+    withUpdateTaskStatusesProvider,
+    withUpdateTaskStatusProvider,
+  ],
 } satisfies Meta<typeof TaskItemBaseBadge>;
 
 export default meta;

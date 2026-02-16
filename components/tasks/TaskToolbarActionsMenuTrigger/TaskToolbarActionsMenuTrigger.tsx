@@ -35,7 +35,7 @@ export const TaskToolbarActionsMenuTrigger = ({
   // Delete confirmation modal state
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
-  // State and handlers for updating task status
+  // Action for updating task status
   const { action: updateTaskStatusAction } = useUpdateTaskStatusesContext();
 
   // Selected with checkbox tasks

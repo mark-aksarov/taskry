@@ -4,7 +4,6 @@ import {
   ActionFn,
   ActionState,
   DeleteProjectsPayload,
-  UpdateProjectStatusesPayload,
 } from "@/lib/actions/types";
 
 import {
@@ -14,30 +13,24 @@ import {
 } from "../../common/Toolbar";
 
 import { Item, Key } from "react-stately";
-import { DialogHeader } from "../../ui/Dialog";
 import { useTranslations } from "next-intl";
+import { DialogHeader } from "../../ui/Dialog";
+import { startTransition, useState } from "react";
 import { ProjectStatus } from "@/generated/prisma/enums";
 import { GuestModeModal } from "../../common/GuestModeModal";
 import { DeleteProjectsModal } from "../DeleteProjectsModal";
 import { useSelectedProjects } from "../SelectedProjectsContext";
-import { startTransition, useActionState, useState } from "react";
 import { Check, CircleEllipsis, Clock, Trash } from "lucide-react";
-import { useActionErrorToast } from "@/lib/hooks/useActionErrorToast";
+import { useUpdateProjectStatusesContext } from "../UpdateProjectStatusContext";
 
 interface ProjectToolbarActionsMenuTriggerProps {
   guestMode: boolean;
   deleteProjects: ActionFn<ActionState, DeleteProjectsPayload>;
-  updateStatusAction: ActionFn<ActionState, UpdateProjectStatusesPayload>;
 }
-
-const updateStatusInitialState: ActionState = {
-  status: null,
-};
 
 export const ProjectToolbarActionsMenuTrigger = ({
   guestMode,
   deleteProjects,
-  updateStatusAction,
 }: ProjectToolbarActionsMenuTriggerProps) => {
   const t = useTranslations("projects.ProjectToolbarActionsMenuTrigger");
 
@@ -47,17 +40,12 @@ export const ProjectToolbarActionsMenuTrigger = ({
   // Delete confirmation modal state
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
-  // State and handlers for updating project status
-  const [updateStatusState, updateStatus, updateStatusPending] = useActionState(
-    updateStatusAction,
-    updateStatusInitialState,
-  );
+  // Action for updating project status
+  const { action: updateProjectStatusAction } =
+    useUpdateProjectStatusesContext();
 
   // Selected with checkbox projects
   const selected = useSelectedProjects();
-
-  // Show toast if updating status fails
-  useActionErrorToast(updateStatusState);
 
   // Menu actions: show delete modal, update project status
   const handleAction = (key: Key) => {
@@ -70,9 +58,11 @@ export const ProjectToolbarActionsMenuTrigger = ({
       setIsDeleteModalOpen(true);
     } else {
       startTransition(() => {
-        updateStatus({
+        const nextStatus = key as ProjectStatus;
+
+        updateProjectStatusAction({
           ids: selected.ids,
-          nextStatus: key as ProjectStatus,
+          nextStatus,
         });
       });
     }

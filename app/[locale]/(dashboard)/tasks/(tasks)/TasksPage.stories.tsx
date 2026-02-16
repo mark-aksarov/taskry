@@ -24,6 +24,7 @@ import { TaskToolbarCreateNewMenuTrigger } from "@/components/tasks/TaskToolbarC
 import { NewTaskCategoryFormStory } from "@/components/taskCategory/NewTaskCategoryForm/__stories__";
 import { withEntityPaginationProvider } from "@/components/common/EntityContainerPagination/__stories__";
 import { TaskToolbarActionsMenuTriggerStory } from "@/components/tasks/TaskToolbarActionsMenuTrigger/__stories__";
+import { withUpdateTaskStatusesProvider } from "@/components/tasks/UpdateTaskStatusContext/__stories__";
 
 const meta = {
   title: "pages/TasksPage",
@@ -33,6 +34,7 @@ const meta = {
     withDeleteTaskModalProvider,
     withEntityPaginationProvider,
     withSelectedTasksProvider,
+    withUpdateTaskStatusesProvider,
     PageDecorator,
     withThemedBackground,
   ],

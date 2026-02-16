@@ -1,12 +1,6 @@
 "use client";
 
 import {
-  ActionFn,
-  ActionState,
-  UpdateProjectStatusesPayload,
-} from "@/lib/actions/types";
-
-import {
   ItemBaseActionMenuButton,
   ItemBaseActionMenuTrigger,
   ItemBaseActionMenuDialogHeader,
@@ -14,12 +8,12 @@ import {
 
 import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
+import { startTransition, useState } from "react";
 import { EditProjectModal } from "../EditProjectModal";
 import { ProjectStatus } from "@/generated/prisma/enums";
 import { GuestModeModal } from "../../common/GuestModeModal";
-import { startTransition, useActionState, useState } from "react";
-import { useActionErrorToast } from "@/lib/hooks/useActionErrorToast";
 import { Check, CircleEllipsis, Clock, Pencil, Trash } from "lucide-react";
+import { useUpdateProjectStatusContext } from "../UpdateProjectStatusContext";
 import { useDeleteProjectModal } from "../DeleteProjectModal/DeleteProjectModalContext";
 
 export type ProjectItemActionMenuTriggerProps = {
@@ -28,12 +22,7 @@ export type ProjectItemActionMenuTriggerProps = {
   projectTitle: string;
   projectStatus: ProjectStatus;
   className?: string;
-  updateStatusAction: ActionFn<ActionState, UpdateProjectStatusesPayload>;
   editProjectFormContainer: React.ReactNode;
-};
-
-const updateStatusInitialState: ActionState = {
-  status: null,
 };
 
 export function ProjectItemActionMenuTrigger({
@@ -42,7 +31,6 @@ export function ProjectItemActionMenuTrigger({
   projectTitle,
   projectStatus,
   className,
-  updateStatusAction,
   editProjectFormContainer,
 }: ProjectItemActionMenuTriggerProps) {
   const t = useTranslations("projects.ProjectItemActionMenuTrigger");
@@ -57,14 +45,10 @@ export function ProjectItemActionMenuTrigger({
   const { setState } = useDeleteProjectModal();
 
   // State and action handler for updating project status
-  const [
-    updateProjectStatusState,
-    updateProjectStatusAction,
-    updateProjectStatusPending,
-  ] = useActionState(updateStatusAction, updateStatusInitialState);
-
-  // Show toast for status update errors
-  useActionErrorToast(updateProjectStatusState);
+  const {
+    action: updateProjectStatusAction,
+    isPending: isUpdateProjectStatusPending,
+  } = useUpdateProjectStatusContext();
 
   // Handle menu actions
   const handleAction = (key: Key) => {
@@ -92,11 +76,15 @@ export function ProjectItemActionMenuTrigger({
     }
   };
 
+  const disabledKeys = isUpdateProjectStatusPending
+    ? ["pending", "active", "completed"]
+    : [projectStatus];
+
   return (
     <>
       <ItemBaseActionMenuTrigger
         onAction={handleAction}
-        disabledKeys={[projectStatus]}
+        disabledKeys={disabledKeys}
         renderDialogHeader={() => <ItemBaseActionMenuDialogHeader />}
         renderButton={() => (
           <ItemBaseActionMenuButton

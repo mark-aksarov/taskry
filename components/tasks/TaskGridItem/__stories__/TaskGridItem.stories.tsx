@@ -13,6 +13,7 @@ import { withDeleteTaskModalProvider } from "../../DeleteTaskModal/__stories__";
 import { withSelectedTasksProvider } from "../../SelectedTasksContext/__stories__";
 import { UserDetailModalStory } from "@/components/users/UserDetailModal/__stories__";
 import { TaskItemActionMenuTriggerStory } from "../../TaskItemActionMenuTrigger/__stories__";
+import { withUpdateTaskStatusesProvider } from "../../UpdateTaskStatusContext/__stories__";
 
 const meta = {
   title: "components/tasks/TaskGridItem",
@@ -20,6 +21,7 @@ const meta = {
   decorators: [
     withSelectedTasksProvider,
     withDeleteTaskModalProvider,
+    withUpdateTaskStatusesProvider,
     withThemedBackground,
   ],
 } satisfies Meta<typeof TaskGridItem>;

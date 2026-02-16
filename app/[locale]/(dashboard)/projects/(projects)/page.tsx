@@ -24,6 +24,7 @@ import { SelectedProjectsProvider } from "@/components/projects/SelectedProjects
 import { createProjectCategory } from "@/lib/actions/projectCategory/createProjectCategory";
 import { NewProjectCategoryForm } from "@/components/projectCategory/NewProjectCategoryForm";
 import { ProjectFiltersFormContainer } from "@/components/projects/ProjectFiltersFormContainer";
+import { UpdateProjectStatusesProvider } from "@/components/projects/UpdateProjectStatusContext";
 import { ProjectToolbarActionsMenuTrigger } from "@/components/projects/ProjectToolbarActionsMenuTrigger";
 import { ProjectToolbarFiltersModalTrigger } from "@/components/projects/ProjectToolbarFiltersModalTrigger";
 import { ProjectToolbarCreateNewMenuTrigger } from "@/components/projects/ProjectToolbarCreateNewMenuTrigger";
@@ -95,34 +96,37 @@ export default async function AppProjectsPage({
   }
 
   return (
-    <SelectedProjectsProvider
-      pageItems={projects.map((p) => ({ id: p.id, status: p.status }))}
-    >
-      <ProjectsPage
-        projectsContainer={
-          <ProjectsContainer
-            projects={projects}
-            totalCount={totalCount}
-            page={page}
-            pageSize={pageSize}
-          />
-        }
-        projectToolbarCreateNewMenuTrigger={projectToolbarCreateNewMenuTrigger}
-        projectToolbarFiltersModalTrigger={
-          <ProjectToolbarFiltersModalTrigger
-            filtersFormContainer={
-              <ProjectFiltersFormContainer filters={filters} />
-            }
-          />
-        }
-        projectToolbarActionsMenuTrigger={
-          <ProjectToolbarActionsMenuTrigger
-            guestMode={guestMode}
-            deleteProjects={deleteProjects}
-            updateStatusAction={updateProjectStatuses}
-          />
-        }
-      />
-    </SelectedProjectsProvider>
+    <UpdateProjectStatusesProvider updateStatus={updateProjectStatuses}>
+      <SelectedProjectsProvider
+        pageItems={projects.map((p) => ({ id: p.id, status: p.status }))}
+      >
+        <ProjectsPage
+          projectsContainer={
+            <ProjectsContainer
+              projects={projects}
+              totalCount={totalCount}
+              page={page}
+              pageSize={pageSize}
+            />
+          }
+          projectToolbarCreateNewMenuTrigger={
+            projectToolbarCreateNewMenuTrigger
+          }
+          projectToolbarFiltersModalTrigger={
+            <ProjectToolbarFiltersModalTrigger
+              filtersFormContainer={
+                <ProjectFiltersFormContainer filters={filters} />
+              }
+            />
+          }
+          projectToolbarActionsMenuTrigger={
+            <ProjectToolbarActionsMenuTrigger
+              guestMode={guestMode}
+              deleteProjects={deleteProjects}
+            />
+          }
+        />
+      </SelectedProjectsProvider>
+    </UpdateProjectStatusesProvider>
   );
 }

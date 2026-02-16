@@ -7,6 +7,7 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withDeleteProjectModalProvider } from "../../DeleteProjectModal/__stories__";
 import { withSelectedProjectsProvider } from "../../SelectedProjectsContext/__stories__";
 import { withEntityPaginationProvider } from "@/components/common/EntityContainerPagination/__stories__";
+import { withUpdateProjectStatusesProvider } from "../../UpdateProjectStatusContext/__stories__";
 
 export const mockedProjects = [
   {
@@ -82,6 +83,7 @@ const meta = {
   decorators: [
     withEntityPaginationProvider,
     withSelectedProjectsProvider,
+    withUpdateProjectStatusesProvider,
     withDeleteProjectModalProvider,
     withThemedBackground,
   ],

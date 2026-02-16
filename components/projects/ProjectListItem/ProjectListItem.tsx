@@ -7,9 +7,10 @@ import {
 } from "@/components/common/List/index";
 
 import {
-  ItemBaseBadge,
-  ItemBaseDetailModalTrigger,
-} from "@/components/common/ItemBase";
+  ActionFn,
+  ActionState,
+  UpdateProjectStatusesPayload,
+} from "@/lib/actions/types";
 
 import Image from "next/image";
 import { Link } from "@/components/ui/Link";
@@ -17,10 +18,12 @@ import { ProjectStatus } from "@/generated/prisma/enums";
 import { useFormatter, useTranslations } from "next-intl";
 import { ProjectItemCheckbox } from "../ProjectItemCheckbox";
 import { UnknownUser } from "@/components/common/UnknownUser";
+import { ProjectItemBaseBadge } from "../ProjectItemBaseBadge";
 import { ProjectListItemLayout } from "./ProjectListItemLayout";
 import { ImageContainer } from "@/components/common/ImageContainer";
-import { getProjectStatusBadgeColor } from "../getProjectStatusBadgeColor";
+import { ItemBaseDetailModalTrigger } from "@/components/common/ItemBase";
 import { ProjectCommentsModalTrigger } from "../ProjectCommentsModalTrigger";
+import { UpdateProjectStatusProvider } from "../UpdateProjectStatusContext";
 
 export interface ProjectListItemProps {
   id: number;
@@ -52,9 +55,21 @@ export interface ProjectListItemProps {
   projectDetailModal: React.ReactNode;
   userDetailModal?: React.ReactNode;
   customerDetailModal?: React.ReactNode;
+  updateProjectStatus: ActionFn<ActionState, UpdateProjectStatusesPayload>;
 }
 
 export const ProjectListItem = ({
+  updateProjectStatus,
+  ...props
+}: ProjectListItemProps) => {
+  return (
+    <UpdateProjectStatusProvider updateStatus={updateProjectStatus}>
+      <ProjectListItemInner {...props} />
+    </UpdateProjectStatusProvider>
+  );
+};
+
+export const ProjectListItemInner = ({
   id,
   title,
   deadline,
@@ -70,8 +85,7 @@ export const ProjectListItem = ({
   projectDetailModal,
   userDetailModal,
   customerDetailModal,
-}: ProjectListItemProps) => {
-  const tStatus = useTranslations("projects.ProjectStatus");
+}: Omit<ProjectListItemProps, "updateProjectStatus">) => {
   const t = useTranslations("projects.ProjectListItem");
 
   const format = useFormatter();
@@ -202,12 +216,11 @@ export const ProjectListItem = ({
         </ListItemInfo>
       }
       statusSlot={
-        <ItemBaseBadge
+        <ProjectItemBaseBadge
+          projectId={id}
           className="@max-lg:hidden"
-          color={getProjectStatusBadgeColor(status)}
-        >
-          {tStatus(`${status}`)}
-        </ItemBaseBadge>
+          status={status}
+        />
       }
       commentsModalTriggerSlot={
         <ProjectCommentsModalTrigger

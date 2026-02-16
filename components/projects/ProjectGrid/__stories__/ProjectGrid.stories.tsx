@@ -6,6 +6,7 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { ProjectGridItemStory } from "../../ProjectGridItem/__stories__";
 import { withDeleteProjectModalProvider } from "../../DeleteProjectModal/__stories__";
 import { withSelectedProjectsProvider } from "../../SelectedProjectsContext/__stories__";
+import { withUpdateProjectStatusesProvider } from "../../UpdateProjectStatusContext/__stories__";
 import { withEntityPaginationProvider } from "@/components/common/EntityContainerPagination/__stories__";
 
 const meta = {
@@ -14,6 +15,7 @@ const meta = {
   decorators: [
     withEntityPaginationProvider,
     withSelectedProjectsProvider,
+    withUpdateProjectStatusesProvider,
     withDeleteProjectModalProvider,
     withThemedBackground,
   ],

@@ -21,6 +21,7 @@ import { ProjectToolbarFiltersModalTrigger } from "@/components/projects/Project
 import { ProjectToolbarCreateNewMenuTrigger } from "@/components/projects/ProjectToolbarCreateNewMenuTrigger";
 import { ProjectToolbarActionsMenuTriggerStory } from "@/components/projects/ProjectToolbarActionsMenuTrigger/__stories__";
 import { ProjectToolbarCreateNewMenuTriggerStory } from "@/components/projects/ProjectToolbarCreateNewMenuTrigger/__stories__";
+import { withUpdateProjectStatusesProvider } from "@/components/projects/UpdateProjectStatusContext/__stories__";
 
 const meta = {
   title: "pages/ProjectsPage",
@@ -30,6 +31,7 @@ const meta = {
     withDeleteProjectModalProvider,
     withEntityPaginationProvider,
     withSelectedProjectsProvider,
+    withUpdateProjectStatusesProvider,
     PageDecorator,
     withThemedBackground,
   ],

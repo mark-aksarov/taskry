@@ -63,13 +63,13 @@ export async function ProjectsContainer({
                   customer={project.customer}
                   company={project.customer?.company}
                   category={project.category}
+                  updateProjectStatus={updateProjectStatuses}
                   menuTrigger={
                     <ProjectItemActionMenuTrigger
                       guestMode={guestMode}
                       projectId={project.id}
                       projectTitle={project.title}
                       projectStatus={project.status}
-                      updateStatusAction={updateProjectStatuses}
                       editProjectFormContainer={
                         <EditProjectFormContainer projectId={project.id} />
                       }
@@ -141,13 +141,13 @@ export async function ProjectsContainer({
                   key={project.id}
                   tasksTotal={project.tasks.total}
                   tasksCompleted={project.tasks.completed}
+                  updateProjectStatus={updateProjectStatuses}
                   menuTrigger={
                     <ProjectItemActionMenuTrigger
                       guestMode={guestMode}
                       projectId={project.id}
                       projectTitle={project.title}
                       projectStatus={project.status}
-                      updateStatusAction={updateProjectStatuses}
                       editProjectFormContainer={
                         <EditProjectFormContainer projectId={project.id} />
                       }

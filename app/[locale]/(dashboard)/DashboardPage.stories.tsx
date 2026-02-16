@@ -36,6 +36,8 @@ import { getTaskListItems } from "@/components/tasks/TaskList/__stories__";
 import { NewTaskFormStory } from "@/components/tasks/NewTaskForm/__stories__";
 import { withDeleteTaskModalProvider } from "@/components/tasks/DeleteTaskModal/__stories__";
 import { withEntityPaginationProvider } from "@/components/common/EntityContainerPagination/__stories__";
+import { withUpdateTaskStatusesProvider } from "@/components/tasks/UpdateTaskStatusContext/__stories__";
+import { withSelectedTasksProvider } from "@/components/tasks/SelectedTasksContext/__stories__";
 
 const meta = {
   title: "pages/DashboardPage",
@@ -44,6 +46,8 @@ const meta = {
   decorators: [
     withDeleteTaskModalProvider,
     withEntityPaginationProvider,
+    withSelectedTasksProvider,
+    withUpdateTaskStatusesProvider,
     PageDecorator,
     withThemedBackground,
   ],

@@ -11,12 +11,14 @@ import { ProjectCommentsModalStory } from "../../ProjectCommentsModal/__stories_
 import { withDeleteProjectModalProvider } from "../../DeleteProjectModal/__stories__";
 import { withSelectedProjectsProvider } from "../../SelectedProjectsContext/__stories__";
 import { ProjectItemActionMenuTriggerStory } from "../../ProjectItemActionMenuTrigger/__stories__";
+import { withUpdateProjectStatusesProvider } from "../../UpdateProjectStatusContext/__stories__";
 
 const meta = {
   title: "components/projects/ProjectGridItem",
   component: ProjectGridItem,
   decorators: [
     withSelectedProjectsProvider,
+    withUpdateProjectStatusesProvider,
     withDeleteProjectModalProvider,
     withThemedBackground,
   ],
@@ -40,6 +42,11 @@ export const Default = {
     projectDetailModal: (
       <ProjectDetailModal {...ProjectDetailModalStory.args} />
     ),
+    updateProjectStatus: () => {
+      return new Promise((res) =>
+        setTimeout(() => res({ status: "success" }), 500),
+      );
+    },
   },
 } satisfies Story;
 

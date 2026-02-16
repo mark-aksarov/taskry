@@ -14,6 +14,7 @@ import { withDeleteProjectModalProvider } from "../../DeleteProjectModal/__stori
 import { withSelectedProjectsProvider } from "../../SelectedProjectsContext/__stories__";
 import { CustomerDetailModalStory } from "@/components/customer/CustomerDetailModal/__stories__";
 import { ProjectItemActionMenuTriggerStory } from "../../ProjectItemActionMenuTrigger/__stories__";
+import { withUpdateProjectStatusesProvider } from "../../UpdateProjectStatusContext/__stories__";
 
 export const mockedProject = {
   id: 1,
@@ -47,6 +48,7 @@ const meta = {
   decorators: [
     withSelectedProjectsProvider,
     withDeleteProjectModalProvider,
+    withUpdateProjectStatusesProvider,
     withThemedBackground,
   ],
   excludeStories: ["mockedProject"],
@@ -73,6 +75,11 @@ export const Default = {
     customerDetailModal: (
       <CustomerDetailModal {...CustomerDetailModalStory.args} />
     ),
+    updateProjectStatus: () => {
+      return new Promise((res) =>
+        setTimeout(() => res({ status: "success" }), 500),
+      );
+    },
   },
 } satisfies Story;
 

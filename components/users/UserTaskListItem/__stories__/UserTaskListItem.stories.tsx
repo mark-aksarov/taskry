@@ -10,6 +10,7 @@ import { TaskCommentsModalStory } from "@/components/tasks/TaskCommentsModal/__s
 import { withDeleteTaskModalProvider } from "@/components/tasks/DeleteTaskModal/__stories__";
 import { withSelectedTasksProvider } from "@/components/tasks/SelectedTasksContext/__stories__";
 import { TaskItemActionMenuTriggerStory } from "@/components/tasks/TaskItemActionMenuTrigger/__stories__";
+import { withUpdateTaskStatusesProvider } from "@/components/tasks/UpdateTaskStatusContext/__stories__";
 
 const meta = {
   title: "components/users/UserTaskListItem",
@@ -17,6 +18,7 @@ const meta = {
   decorators: [
     withSelectedTasksProvider,
     withDeleteTaskModalProvider,
+    withUpdateTaskStatusesProvider,
     withThemedBackground,
   ],
 } satisfies Meta<typeof UserTaskListItem>;
