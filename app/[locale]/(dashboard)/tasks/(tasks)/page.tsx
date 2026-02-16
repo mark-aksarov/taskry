@@ -20,13 +20,14 @@ import { TasksContainer } from "@/components/tasks/TasksContainer";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { updateTaskStatuses } from "@/lib/actions/task/updateTaskStatuses";
 import { NewTaskFormContainer } from "@/components/tasks/NewTaskFormContainer";
-import { SelectedTasksProvider } from "@/components/tasks/SelectedTasksContext/SelectedTasksContext";
 import { createTaskCategory } from "@/lib/actions/taskCategory/createTaskCategory";
 import { NewTaskCategoryForm } from "@/components/taskCategory/NewTaskCategoryForm";
 import { TaskFiltersFormContainer } from "@/components/tasks/TaskFiltersFormContainer";
+import { UpdateTaskStatusesProvider } from "@/components/tasks/UpdateTaskStatusContext";
 import { TaskToolbarActionsMenuTrigger } from "@/components/tasks/TaskToolbarActionsMenuTrigger";
 import { TaskToolbarFiltersModalTrigger } from "@/components/tasks/TaskToolbarFiltersModalTrigger";
 import { TaskToolbarCreateNewMenuTrigger } from "@/components/tasks/TaskToolbarCreateNewMenuTrigger";
+import { SelectedTasksProvider } from "@/components/tasks/SelectedTasksContext/SelectedTasksContext";
 
 const searchParamsSchema = z.object({
   page: pageSearchParam,
@@ -91,34 +92,35 @@ export default async function AppTasksPage({
   }
 
   return (
-    <SelectedTasksProvider
-      pageItems={tasks.map((t) => ({ id: t.id, status: t.status }))}
-    >
-      <TasksPage
-        taskToolbarActionsMenuTrigger={
-          <TaskToolbarActionsMenuTrigger
-            guestMode={guestMode}
-            deleteTasks={deleteTasks}
-            updateStatusAction={updateTaskStatuses}
-          />
-        }
-        taskToolbarCreateNewMenuTrigger={taskToolbarCreateNewMenuTrigger}
-        taskToolbarFiltersModalTrigger={
-          <TaskToolbarFiltersModalTrigger
-            filtersFormContainer={
-              <TaskFiltersFormContainer filters={filters} />
-            }
-          />
-        }
-        tasksContainer={
-          <TasksContainer
-            tasks={tasks}
-            totalCount={totalCount}
-            page={page}
-            pageSize={pageSize}
-          />
-        }
-      />
-    </SelectedTasksProvider>
+    <UpdateTaskStatusesProvider updateTaskStatus={updateTaskStatuses}>
+      <SelectedTasksProvider
+        pageItems={tasks.map((t) => ({ id: t.id, status: t.status }))}
+      >
+        <TasksPage
+          taskToolbarActionsMenuTrigger={
+            <TaskToolbarActionsMenuTrigger
+              guestMode={guestMode}
+              deleteTasks={deleteTasks}
+            />
+          }
+          taskToolbarCreateNewMenuTrigger={taskToolbarCreateNewMenuTrigger}
+          taskToolbarFiltersModalTrigger={
+            <TaskToolbarFiltersModalTrigger
+              filtersFormContainer={
+                <TaskFiltersFormContainer filters={filters} />
+              }
+            />
+          }
+          tasksContainer={
+            <TasksContainer
+              tasks={tasks}
+              totalCount={totalCount}
+              page={page}
+              pageSize={pageSize}
+            />
+          }
+        />
+      </SelectedTasksProvider>
+    </UpdateTaskStatusesProvider>
   );
 }

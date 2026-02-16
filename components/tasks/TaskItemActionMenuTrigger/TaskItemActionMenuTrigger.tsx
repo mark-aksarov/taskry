@@ -13,7 +13,6 @@ import { startTransition, useState } from "react";
 import { TaskStatus } from "@/generated/prisma/enums";
 import { useDeleteTaskModal } from "../DeleteTaskModal";
 import { GuestModeModal } from "@/components/common/GuestModeModal";
-import { useActionErrorToast } from "@/lib/hooks/useActionErrorToast";
 import { useUpdateTaskStatusContext } from "../UpdateTaskStatusContext";
 import { Check, CircleEllipsis, Clock, Pencil, Trash } from "lucide-react";
 
@@ -47,13 +46,9 @@ export function TaskItemActionMenuTrigger({
 
   // State and action handler for updating task status
   const {
-    updateTaskStatusState,
-    updateTaskStatusAction,
-    isUpdateTaskStatusPending,
+    action: updateTaskStatusAction,
+    isPending: isUpdateTaskStatusPending,
   } = useUpdateTaskStatusContext();
-
-  // Show toast for status update errors
-  useActionErrorToast(updateTaskStatusState);
 
   // Handle menu actions
   function handleAction(key: Key) {

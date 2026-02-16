@@ -22,6 +22,7 @@ import { withSelectedTasksProvider } from "@/components/tasks/SelectedTasksConte
 import { TaskToolbarActionsMenuTrigger } from "@/components/tasks/TaskToolbarActionsMenuTrigger";
 import { UserNavigationDesktopStory } from "@/components/users/UserNavigationDesktop/__stories__";
 import { withEntityPaginationProvider } from "@/components/common/EntityContainerPagination/__stories__";
+import { TaskToolbarActionsMenuTriggerStory } from "@/components/tasks/TaskToolbarActionsMenuTrigger/__stories__";
 
 const meta = {
   title: "pages/TeamProfileTasksPage",
@@ -49,9 +50,7 @@ export const Default = {
     userHeaderContainer: <DetailHeader {...PersonDetailHeaderStory.args} />,
     taskToolbarActionsMenuTrigger: (
       <TaskToolbarActionsMenuTrigger
-        guestMode={false}
-        deleteTasks={fn()}
-        updateStatusAction={fn()}
+        {...TaskToolbarActionsMenuTriggerStory.args}
       />
     ),
     navigationDesktop: (

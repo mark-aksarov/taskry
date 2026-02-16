@@ -88,7 +88,11 @@ export const UserTaskListItemInner = ({
         </ListItemInfo>
       }
       statusSlot={
-        <TaskItemBaseBadge status={status} className="@max-lg:hidden" />
+        <TaskItemBaseBadge
+          taskId={id}
+          status={status}
+          className="@max-lg:hidden"
+        />
       }
       commentsSlot={
         <TaskCommentsModalTrigger

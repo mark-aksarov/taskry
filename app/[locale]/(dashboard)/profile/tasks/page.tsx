@@ -98,7 +98,6 @@ export default async function AppProfileTasksPage({
           <TaskToolbarActionsMenuTrigger
             guestMode={guestMode}
             deleteTasks={deleteTasks}
-            updateStatusAction={updateTaskStatuses}
           />
         }
         navigationDesktop={

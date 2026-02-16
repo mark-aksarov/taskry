@@ -8,27 +8,27 @@ import {
 
 import { createContext, useContext } from "react";
 
-const UpdateTaskStatusContext =
+const UpdateTaskStatusesContext =
   createContext<BaseUpdateTaskStatusContextType | null>(null);
 
-export function UpdateTaskStatusProvider({
+export function UpdateTaskStatusesProvider({
   updateTaskStatus,
   children,
 }: UpdateTaskStatusProviderProps) {
   const value = useBaseUpdateTaskStatusContextState(updateTaskStatus);
 
   return (
-    <UpdateTaskStatusContext.Provider value={value}>
+    <UpdateTaskStatusesContext.Provider value={value}>
       {children}
-    </UpdateTaskStatusContext.Provider>
+    </UpdateTaskStatusesContext.Provider>
   );
 }
 
-export function useUpdateTaskStatusContext() {
-  const context = useContext(UpdateTaskStatusContext);
+export function useUpdateTaskStatusesContext() {
+  const context = useContext(UpdateTaskStatusesContext);
   if (!context) {
     throw new Error(
-      "useUpdateTaskStatusContext must be used within a UpdateTaskStatusProvider",
+      "useUpdateTaskStatusesContext must be used within a UpdateTaskStatusesProvider",
     );
   }
   return context;

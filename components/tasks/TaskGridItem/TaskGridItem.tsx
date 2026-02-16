@@ -138,7 +138,7 @@ export function TaskGridItemInner({
           modal={taskCommentsModal}
         />
       }
-      statusSlot={<TaskItemBaseBadge status={status} />}
+      statusSlot={<TaskItemBaseBadge taskId={id} status={status} />}
       progressSlot={
         <GridItemProgress
           value={(subtasksDone / subtasksTotal) * 100}

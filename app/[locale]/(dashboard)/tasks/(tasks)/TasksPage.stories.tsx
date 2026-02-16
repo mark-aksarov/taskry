@@ -23,6 +23,7 @@ import { TaskToolbarFiltersModalTrigger } from "@/components/tasks/TaskToolbarFi
 import { TaskToolbarCreateNewMenuTrigger } from "@/components/tasks/TaskToolbarCreateNewMenuTrigger";
 import { NewTaskCategoryFormStory } from "@/components/taskCategory/NewTaskCategoryForm/__stories__";
 import { withEntityPaginationProvider } from "@/components/common/EntityContainerPagination/__stories__";
+import { TaskToolbarActionsMenuTriggerStory } from "@/components/tasks/TaskToolbarActionsMenuTrigger/__stories__";
 
 const meta = {
   title: "pages/TasksPage",
@@ -75,9 +76,7 @@ export const Default = {
     ),
     taskToolbarActionsMenuTrigger: (
       <TaskToolbarActionsMenuTrigger
-        guestMode={false}
-        deleteTasks={fn()}
-        updateStatusAction={fn()}
+        {...TaskToolbarActionsMenuTriggerStory.args}
       />
     ),
   },

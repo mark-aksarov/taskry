@@ -1,13 +1,6 @@
 "use client";
 
 import {
-  ActionFn,
-  ActionState,
-  DeleteTasksPayload,
-  UpdateTaskStatusesPayload,
-} from "@/lib/actions/types";
-
-import {
   ToolbarMenuTrigger,
   ToolbarActionsButtonMobile,
   ToolbarActionsButtonDesktop,
@@ -16,28 +9,23 @@ import {
 import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
 import { DialogHeader } from "../../ui/Dialog";
+import { startTransition, useState } from "react";
 import { TaskStatus } from "@/generated/prisma/enums";
 import { DeleteTasksModal } from "../DeleteTasksModal";
-import { useSelectedTasks } from "../SelectedTasksContext/SelectedTasksContext";
+import { useSelectedTasks } from "../SelectedTasksContext";
 import { GuestModeModal } from "../../common/GuestModeModal";
-import { startTransition, useActionState, useState } from "react";
 import { Check, CircleEllipsis, Clock, Trash } from "lucide-react";
-import { useActionErrorToast } from "@/lib/hooks/useActionErrorToast";
+import { useUpdateTaskStatusesContext } from "../UpdateTaskStatusContext";
+import { ActionFn, ActionState, DeleteTasksPayload } from "@/lib/actions/types";
 
 interface TaskToolbarActionsMenuTriggerProps {
   guestMode: boolean;
   deleteTasks: ActionFn<ActionState, DeleteTasksPayload>;
-  updateStatusAction: ActionFn<ActionState, UpdateTaskStatusesPayload>;
 }
-
-const initialState: ActionState = {
-  status: null,
-};
 
 export const TaskToolbarActionsMenuTrigger = ({
   guestMode,
   deleteTasks,
-  updateStatusAction,
 }: TaskToolbarActionsMenuTriggerProps) => {
   const t = useTranslations("tasks.TaskToolbarActionsMenuTrigger");
 
@@ -48,10 +36,7 @@ export const TaskToolbarActionsMenuTrigger = ({
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
   // State and handlers for updating task status
-  const [updateTaskStatusState, updateTaskStatusAction] = useActionState(
-    updateStatusAction,
-    initialState,
-  );
+  const { action: updateTaskStatusAction } = useUpdateTaskStatusesContext();
 
   // Selected with checkbox tasks
   const selected = useSelectedTasks();
@@ -74,9 +59,6 @@ export const TaskToolbarActionsMenuTrigger = ({
       updateTaskStatusAction({ ids: selected.ids, nextStatus });
     });
   };
-
-  // Show toast if updating status fails
-  useActionErrorToast(updateTaskStatusState);
 
   // disable menu items if selected tasks have the same status.
   const disabledKeys = Object.values(TaskStatus).filter((status) =>

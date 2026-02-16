@@ -19,6 +19,5 @@ export const Default = {
   args: {
     guestMode: false,
     deleteTasks: () => ({ status: "success" }),
-    updateStatusAction: () => ({ status: "success" }),
   },
 } satisfies Story;

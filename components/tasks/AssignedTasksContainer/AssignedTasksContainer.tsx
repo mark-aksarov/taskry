@@ -16,6 +16,7 @@ import { hasGuestRole } from "@/lib/utils/hasGuestRole";
 import { TaskCommentsModal } from "../TaskCommentsModal";
 import { TaskListItemDTO } from "@/lib/data/task/task.dto";
 import { deleteTasks } from "@/lib/actions/task/deleteTasks";
+import { DeleteTaskModalProvider } from "../DeleteTaskModal";
 import { TaskDetailContainer } from "../TaskDetailContainer";
 import { NewTaskFormContainer } from "../NewTaskFormContainer";
 import { sendComment } from "@/lib/actions/comment/sendComment";
@@ -65,81 +66,83 @@ async function AssignedTasksContainerInner({
   }
 
   return (
-    <AssignedTasksPresentation
-      page={page}
-      pageSize={pageSize}
-      totalPages={Math.ceil(totalCount / pageSize)}
-      list={
-        <TaskList>
-          {tasks.map((task) => (
-            <TaskListItem
-              key={task.id}
-              id={task.id}
-              title={task.title}
-              deadline={task.deadline}
-              category={task.category}
-              project={task.project}
-              status={task.status}
-              assignee={task.assignee}
-              updateTaskStatus={updateTaskStatuses}
-              taskDetailModal={
-                <TaskDetailModal
-                  taskId={task.id}
-                  taskDetailContainer={
-                    <TaskDetailContainer
-                      guestMode={guestMode}
-                      taskId={task.id}
-                    />
-                  }
-                />
-              }
-              commentsCount={task.commentsCount}
-              taskCommentsModal={
-                <TaskCommentsModal
-                  taskId={task.id}
-                  taskCommentsContainer={
-                    <TaskCommentsContainer
-                      guestMode={guestMode}
-                      taskId={task.id}
-                    />
-                  }
-                  sendCommentAction={sendComment}
-                  updateCommentAction={updateComment}
-                />
-              }
-              userDetailModal={
-                task.assignee && (
-                  <UserDetailModal
-                    userId={task.assignee.id}
-                    userDetailContainer={
-                      <UserDetailContainer userId={task.assignee.id} />
+    <DeleteTaskModalProvider deleteTask={deleteTasks}>
+      <AssignedTasksPresentation
+        page={page}
+        pageSize={pageSize}
+        totalPages={Math.ceil(totalCount / pageSize)}
+        list={
+          <TaskList>
+            {tasks.map((task) => (
+              <TaskListItem
+                key={task.id}
+                id={task.id}
+                title={task.title}
+                deadline={task.deadline}
+                category={task.category}
+                project={task.project}
+                status={task.status}
+                assignee={task.assignee}
+                updateTaskStatus={updateTaskStatuses}
+                taskDetailModal={
+                  <TaskDetailModal
+                    taskId={task.id}
+                    taskDetailContainer={
+                      <TaskDetailContainer
+                        guestMode={guestMode}
+                        taskId={task.id}
+                      />
                     }
                   />
-                )
-              }
-              projectDetailModal={
-                <ProjectDetailModal
-                  projectId={task.project.id}
-                  projectDetailContainer={
-                    <ProjectDetailContainer projectId={task.project.id} />
-                  }
-                />
-              }
-              menuTrigger={
-                <TaskItemActionMenuTrigger
-                  guestMode={guestMode}
-                  taskId={task.id}
-                  taskTitle={task.title}
-                  taskStatus={task.status}
-                  editTaskFormContainer={
-                    <EditTaskFormContainer taskId={task.id} />
-                  }
-                />
-              }
-            />
-          ))}
-        </TaskList>
-      }
-    />
+                }
+                commentsCount={task.commentsCount}
+                taskCommentsModal={
+                  <TaskCommentsModal
+                    taskId={task.id}
+                    taskCommentsContainer={
+                      <TaskCommentsContainer
+                        guestMode={guestMode}
+                        taskId={task.id}
+                      />
+                    }
+                    sendCommentAction={sendComment}
+                    updateCommentAction={updateComment}
+                  />
+                }
+                userDetailModal={
+                  task.assignee && (
+                    <UserDetailModal
+                      userId={task.assignee.id}
+                      userDetailContainer={
+                        <UserDetailContainer userId={task.assignee.id} />
+                      }
+                    />
+                  )
+                }
+                projectDetailModal={
+                  <ProjectDetailModal
+                    projectId={task.project.id}
+                    projectDetailContainer={
+                      <ProjectDetailContainer projectId={task.project.id} />
+                    }
+                  />
+                }
+                menuTrigger={
+                  <TaskItemActionMenuTrigger
+                    guestMode={guestMode}
+                    taskId={task.id}
+                    taskTitle={task.title}
+                    taskStatus={task.status}
+                    editTaskFormContainer={
+                      <EditTaskFormContainer taskId={task.id} />
+                    }
+                  />
+                }
+              />
+            ))}
+          </TaskList>
+        }
+      />
+    </DeleteTaskModalProvider>
   );
 }
