@@ -39,7 +39,7 @@ export const UserTaskListItem = ({
   ...props
 }: UserTaskListItemProps) => {
   return (
-    <UpdateTaskStatusProvider updateTaskStatus={updateTaskStatus}>
+    <UpdateTaskStatusProvider updateStatus={updateTaskStatus}>
       <UserTaskListItemInner {...props} />
     </UpdateTaskStatusProvider>
   );

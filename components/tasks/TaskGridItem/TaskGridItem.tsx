@@ -51,7 +51,7 @@ export const TaskGridItem = ({
   ...props
 }: TaskGridItemProps) => {
   return (
-    <UpdateTaskStatusProvider updateTaskStatus={updateTaskStatus}>
+    <UpdateTaskStatusProvider updateStatus={updateTaskStatus}>
       <TaskGridItemInner {...props} />
     </UpdateTaskStatusProvider>
   );

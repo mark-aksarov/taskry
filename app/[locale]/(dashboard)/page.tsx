@@ -3,10 +3,12 @@ import { DashboardPage } from "./DashboardPage";
 import { getTaskList } from "@/lib/data/task/task.dal";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { pageSearchParam, pageSizeSearchParam } from "@/lib/schemas/base";
-import { SelectedTasksProvider } from "@/components/tasks/SelectedTasksContext/SelectedTasksContext";
+import { updateTaskStatuses } from "@/lib/actions/task/updateTaskStatuses";
+import { SelectedTasksProvider } from "@/components/tasks/SelectedTasksContext";
 import { AssignedTasksContainer } from "@/components/tasks/AssignedTasksContainer";
 import { TotalTasksCardContainer } from "@/components/tasks/TotalTasksCardContainer";
 import { TotalUsersCardContainer } from "@/components/users/TotalUsersCardContainer";
+import { UpdateTaskStatusesProvider } from "@/components/tasks/UpdateTaskStatusContext";
 import { TotalProjectsCardContainer } from "@/components/projects/TotalProjectsCardContainer";
 import { TotalCustomersCardContainer } from "@/components/customer/TotalCustomersCardContainer";
 
@@ -41,23 +43,25 @@ export default async function AppDashboardPage({
   });
 
   return (
-    <SelectedTasksProvider
-      pageItems={tasks.map((task) => ({ id: task.id, status: task.status }))}
-    >
-      <DashboardPage
-        totalProjectsCardContainer={<TotalProjectsCardContainer />}
-        totalTasksCardContainer={<TotalTasksCardContainer />}
-        totalUsersCardContainer={<TotalUsersCardContainer />}
-        totalCustomersCardContainer={<TotalCustomersCardContainer />}
-        assignedTasksContainer={
-          <AssignedTasksContainer
-            tasks={tasks}
-            totalCount={totalCount}
-            page={page}
-            pageSize={pageSize}
-          />
-        }
-      />
-    </SelectedTasksProvider>
+    <UpdateTaskStatusesProvider updateStatus={updateTaskStatuses}>
+      <SelectedTasksProvider
+        pageItems={tasks.map((task) => ({ id: task.id, status: task.status }))}
+      >
+        <DashboardPage
+          totalProjectsCardContainer={<TotalProjectsCardContainer />}
+          totalTasksCardContainer={<TotalTasksCardContainer />}
+          totalUsersCardContainer={<TotalUsersCardContainer />}
+          totalCustomersCardContainer={<TotalCustomersCardContainer />}
+          assignedTasksContainer={
+            <AssignedTasksContainer
+              tasks={tasks}
+              totalCount={totalCount}
+              page={page}
+              pageSize={pageSize}
+            />
+          }
+        />
+      </SelectedTasksProvider>
+    </UpdateTaskStatusesProvider>
   );
 }

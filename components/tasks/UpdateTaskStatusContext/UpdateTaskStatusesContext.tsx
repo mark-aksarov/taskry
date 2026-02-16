@@ -1,21 +1,24 @@
 "use client";
 
 import {
-  UpdateTaskStatusProviderProps,
-  BaseUpdateTaskStatusContextType,
-  useBaseUpdateTaskStatusContextState,
-} from "./BaseUpdateTaskStatusContext";
+  UpdateStatusProviderProps,
+  BaseUpdateStatusContextType,
+  useBaseUpdateStatusContextState,
+} from "@/components/common/BaseUpdateStatusContext";
 
 import { createContext, useContext } from "react";
+import { UpdateTaskStatusesPayload } from "@/lib/actions/types";
 
 const UpdateTaskStatusesContext =
-  createContext<BaseUpdateTaskStatusContextType | null>(null);
+  createContext<BaseUpdateStatusContextType<UpdateTaskStatusesPayload> | null>(
+    null,
+  );
 
 export function UpdateTaskStatusesProvider({
-  updateTaskStatus,
+  updateStatus,
   children,
-}: UpdateTaskStatusProviderProps) {
-  const value = useBaseUpdateTaskStatusContextState(updateTaskStatus);
+}: UpdateStatusProviderProps<UpdateTaskStatusesPayload>) {
+  const value = useBaseUpdateStatusContextState(updateStatus);
 
   return (
     <UpdateTaskStatusesContext.Provider value={value}>

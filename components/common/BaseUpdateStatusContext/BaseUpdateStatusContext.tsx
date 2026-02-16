@@ -1,22 +1,18 @@
 "use client";
 
-import {
-  ActionFn,
-  ActionState,
-  UpdateTaskStatusesPayload,
-} from "@/lib/actions/types";
+import { ActionFn, ActionState } from "@/lib/actions/types";
 
 import { useActionState, useMemo } from "react";
 import { useErrorToast } from "@/lib/hooks/useErrorToast";
 
-export interface BaseUpdateTaskStatusContextType {
+export interface BaseUpdateStatusContextType<TPayload> {
   state: ActionState;
-  action: (payload: UpdateTaskStatusesPayload) => void;
+  action: (payload: TPayload) => void;
   isPending: boolean;
 }
 
-export interface UpdateTaskStatusProviderProps {
-  updateTaskStatus: ActionFn<ActionState, UpdateTaskStatusesPayload>;
+export interface UpdateStatusProviderProps<TPayload> {
+  updateStatus: ActionFn<ActionState, TPayload>;
   children: React.ReactNode;
 }
 
@@ -24,15 +20,15 @@ const initialState: ActionState = {
   status: null,
 };
 
-export function useBaseUpdateTaskStatusContextState(
-  updateTaskStatus: ActionFn<ActionState, UpdateTaskStatusesPayload>,
+export function useBaseUpdateStatusContextState<TPayload>(
+  updateStatus: ActionFn<ActionState, TPayload>,
 ) {
   const { close: closeErrorToast, add: addErrorToast } = useErrorToast();
 
   const [state, action, isPending] = useActionState(
-    async (prevState: ActionState, payload: UpdateTaskStatusesPayload) => {
+    async (prevState: ActionState, payload: TPayload) => {
       // call server action to perform delete action
-      const newState = await updateTaskStatus(prevState, payload);
+      const newState = await updateStatus(prevState, payload);
 
       // close error toast
       closeErrorToast();

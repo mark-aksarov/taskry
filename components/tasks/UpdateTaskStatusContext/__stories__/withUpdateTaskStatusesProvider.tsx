@@ -4,7 +4,7 @@ import { UpdateTaskStatusesProvider } from "../UpdateTaskStatusesContext";
 export const withUpdateTaskStatusesProvider: Decorator = (Story) => {
   return (
     <UpdateTaskStatusesProvider
-      updateTaskStatus={() =>
+      updateStatus={() =>
         new Promise((res) => setTimeout(() => res({ status: "success" }), 500))
       }
     >

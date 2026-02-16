@@ -92,7 +92,7 @@ export default async function AppTasksPage({
   }
 
   return (
-    <UpdateTaskStatusesProvider updateTaskStatus={updateTaskStatuses}>
+    <UpdateTaskStatusesProvider updateStatus={updateTaskStatuses}>
       <SelectedTasksProvider
         pageItems={tasks.map((t) => ({ id: t.id, status: t.status }))}
       >
