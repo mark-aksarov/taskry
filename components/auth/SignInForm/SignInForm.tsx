@@ -1,10 +1,10 @@
 "use client";
 
 import { useActionState } from "react";
-import { AuthCardForm } from "../AuthCard";
+import { useTranslations } from "next-intl";
 import { ActionFn, ActionState } from "@/lib/actions/types";
 import { SignInFormEmailField } from "./SignInFormEmailField";
-import { SignInFormSubmitButton } from "./SignInFormSubmitButton";
+import { AuthCardForm, AuthCardSubmitButton } from "../AuthCard";
 import { SignInFormPasswordField } from "./SignInFormPasswordField";
 import { FormErrorBanner } from "@/components/common/FormErrorBanner";
 import { SignInFormRememberMeCheckbox } from "./SignInFormRememberMeCheckbox";
@@ -18,6 +18,8 @@ interface SignInFormProps {
 }
 
 export function SignInForm({ action }: SignInFormProps) {
+  const t = useTranslations("auth.SignInForm");
+
   const [state, formAction, isPending] = useActionState(action, initialState);
 
   return (
@@ -30,7 +32,10 @@ export function SignInForm({ action }: SignInFormProps) {
         {state.message}
       </FormErrorBanner>
 
-      <SignInFormSubmitButton />
+      <AuthCardSubmitButton
+        isPending={isPending}
+        label={t("submitButtonLabel")}
+      />
     </AuthCardForm>
   );
 }

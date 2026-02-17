@@ -37,7 +37,6 @@ export async function signIn(
   try {
     const input = Object.fromEntries(formData.entries());
     const parsedData = schema.parse(input);
-    console.log(parsedData);
 
     await auth.api.signInEmail({ body: parsedData });
   } catch (error: unknown) {

@@ -8,3 +8,4 @@ export { AuthCardSubtitle } from "./AuthCardSubtitle";
 export { AuthCardFooterItem } from "./AuthCardFooterItem";
 export { AuthCardFooterText } from "./AuthCardFooterText";
 export { AuthCardFooterLink } from "./AuthCardFooterLink";
+export { AuthCardSubmitButton } from "./AuthCardSubmitButton";
