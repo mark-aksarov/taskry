@@ -63,7 +63,6 @@ function TaskDetailContainerInner({
                 <SubtaskListItem
                   key={subtask.id}
                   isDone={subtask.isDone}
-                  subtaskText={subtask.text}
                   actionMenuTrigger={
                     <SubtaskActionMenuTrigger
                       guestMode={guestMode}

@@ -3,13 +3,11 @@ import { twMerge } from "tailwind-merge";
 
 interface SubtaskListItemProps {
   isDone: boolean;
-  subtaskText: string;
   actionMenuTrigger: React.ReactNode;
 }
 
 export function SubtaskListItem({
   isDone,
-  subtaskText,
   actionMenuTrigger,
 }: SubtaskListItemProps) {
   return (
@@ -23,17 +21,8 @@ export function SubtaskListItem({
             !isDone && "text-gray-500 dark:text-gray-400",
           )}
         />
-        <span
-          className={twMerge(
-            "text-sm",
-            isDone && "text-black dark:text-white",
-            !isDone && "text-gray-500 dark:text-gray-400",
-          )}
-        >
-          {subtaskText}
-        </span>
+        {actionMenuTrigger}
       </div>
-      {actionMenuTrigger}
     </div>
   );
 }

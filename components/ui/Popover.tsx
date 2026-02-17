@@ -9,6 +9,7 @@ import { DismissButton, Overlay, usePopover } from "react-aria";
 import { twMerge } from "tailwind-merge";
 
 export type Placement =
+  | "top left"
   | "left top"
   | "left bottom"
   | "bottom left"

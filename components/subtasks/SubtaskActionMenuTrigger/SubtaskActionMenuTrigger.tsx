@@ -1,7 +1,6 @@
 "use client";
 
 import {
-  ItemBaseActionMenuButton,
   ItemBaseActionMenuTrigger,
   ItemBaseActionMenuDialogHeader,
 } from "../../common/ItemBase";
@@ -12,13 +11,16 @@ import {
   ToggleSubtaskPayload,
 } from "@/lib/actions/types";
 
+import { tv } from "tailwind-variants";
 import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
+import { Button } from "react-aria-components";
+import { focusRing } from "@/components/ui/styles";
 import { EditSubtaskModal } from "../EditSubtaskModal";
+import { CheckCheck, Pencil, Trash } from "lucide-react";
 import { GuestModeModal } from "../../common/GuestModeModal";
 import { useDeleteSubtaskModal } from "../DeleteSubtaskModal";
 import { useActionErrorToast } from "@/lib/hooks/useActionErrorToast";
-import { CheckCheck, EllipsisVertical, Pencil, Trash } from "lucide-react";
 import { startTransition, useActionState, useEffect, useState } from "react";
 
 const toggleSubtaskInitialState: ActionState = {
@@ -34,6 +36,17 @@ interface SubtaskActionMenuTriggerProps {
   editSubtaskForm: React.ReactNode;
   mutate?: () => void;
 }
+
+const buttonStyles = tv({
+  extend: focusRing,
+  base: "cursor-pointer text-left text-sm",
+  variants: {
+    isDone: {
+      true: "text-black dark:text-white",
+      false: "text-gray-500 dark:text-gray-400",
+    },
+  },
+});
 
 export function SubtaskActionMenuTrigger({
   subtaskId,
@@ -90,18 +103,16 @@ export function SubtaskActionMenuTrigger({
     <>
       <ItemBaseActionMenuTrigger
         onAction={handleAction}
+        placement="top left"
         renderDialogHeader={() => <ItemBaseActionMenuDialogHeader />}
         renderButton={() => (
-          <ItemBaseActionMenuButton
-            className="-m-1.25 rounded-full text-gray-500 dark:text-gray-400"
-            iconLeft={
-              <EllipsisVertical
-                size={16}
-                absoluteStrokeWidth
-                strokeWidth={1.25}
-              />
+          <Button
+            className={(renderProps) =>
+              buttonStyles({ ...renderProps, isDone })
             }
-          />
+          >
+            {subtaskText}
+          </Button>
         )}
       >
         <Item textValue={t("edit")} key="edit">

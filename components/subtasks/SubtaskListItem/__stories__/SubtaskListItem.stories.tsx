@@ -20,7 +20,6 @@ type Story = StoryObj<typeof meta>;
 export const Default = {
   args: {
     isDone: false,
-    subtaskText: "Subtask",
     actionMenuTrigger: (
       <SubtaskActionMenuTrigger {...SubtaskActionMenuTriggerStory.args} />
     ),
@@ -30,6 +29,12 @@ export const Default = {
 export const IsDone = {
   args: {
     ...Default.args,
+    actionMenuTrigger: (
+      <SubtaskActionMenuTrigger
+        {...SubtaskActionMenuTriggerStory.args}
+        isDone={true}
+      />
+    ),
     isDone: true,
   },
 } satisfies Story;

@@ -3,7 +3,9 @@ import { SubtaskListItem } from "../../SubtaskListItem";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { SubtaskListItemStory } from "../../SubtaskListItem/__stories__";
+import { SubtaskActionMenuTrigger } from "../../SubtaskActionMenuTrigger";
 import { withDeleteSubtaskModalProvider } from "../../DeleteSubtaskModal/__stories__";
+import { SubtaskActionMenuTriggerStory } from "../../SubtaskActionMenuTrigger/__stories__";
 
 const mockedSubtasks = [
   { id: 1, subtaskText: "Subtask 1 text", isDone: false },
@@ -31,6 +33,12 @@ export const Default = {
       <SubtaskListItem
         key={subtask.id}
         {...SubtaskListItemStory.args}
+        actionMenuTrigger={
+          <SubtaskActionMenuTrigger
+            {...SubtaskActionMenuTriggerStory.args}
+            isDone={subtask.isDone}
+          />
+        }
         {...subtask}
       />
     )),
