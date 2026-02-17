@@ -5,7 +5,7 @@ import { ActionState } from "../types";
 import { revalidatePath } from "next/cache";
 import { taskId } from "@/lib/schemas/task";
 import { getTranslations } from "next-intl/server";
-import { subtaskIsDone, subtaskText } from "@/lib/schemas/subtask";
+import { subtaskText } from "@/lib/schemas/subtask";
 import { createSubtask as createSubtaskQuery } from "@/lib/data/subtask/subtask.dal";
 import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedirect";
 
