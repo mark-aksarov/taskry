@@ -6,11 +6,12 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { SubtaskListStory } from "@/components/subtasks/SubtaskList/__stories__";
 import { NewSubtaskModalTrigger } from "@/components/subtasks/NewSubtaskModalTrigger";
 import { NewSubtaskModalTriggerStory } from "@/components/subtasks/NewSubtaskModalTrigger/__stories__";
+import { withDeleteSubtaskModalProvider } from "@/components/subtasks/DeleteSubtaskModal/__stories__";
 
 const meta = {
   title: "components/tasks/TaskDetail",
   component: TaskDetail,
-  decorators: [withThemedBackground],
+  decorators: [withDeleteSubtaskModalProvider, withThemedBackground],
   parameters: {
     backgroundVariant: "alt",
   },

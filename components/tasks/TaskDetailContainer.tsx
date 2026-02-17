@@ -13,6 +13,7 @@ import { deleteSubtask } from "@/lib/actions/subtask/deleteSubtask";
 import { updateSubtask } from "@/lib/actions/subtask/updateSubtask";
 import { toggleSubtask } from "@/lib/actions/subtask/toggleSubtask";
 import { TaskDetailSkeleton } from "./TaskDetail/TaskDetailSkeleton";
+import { DeleteSubtaskModalProvider } from "../subtasks/DeleteSubtaskModal";
 import { NewSubtaskModalTrigger } from "../subtasks/NewSubtaskModalTrigger";
 import { SubtaskActionMenuTrigger } from "../subtasks/SubtaskActionMenuTrigger";
 
@@ -53,35 +54,39 @@ function TaskDetailContainerInner({
       project={task.project}
       subtasksList={
         task.subtasks.length && (
-          <SubtaskList>
-            {task.subtasks.map((subtask) => (
-              <SubtaskListItem
-                key={subtask.id}
-                isDone={subtask.isDone}
-                subtaskText={subtask.text}
-                actionMenuTrigger={
-                  <SubtaskActionMenuTrigger
-                    guestMode={guestMode}
-                    subtaskId={subtask.id}
-                    isDone={subtask.isDone}
-                    subtaskText={subtask.text}
-                    deleteAction={deleteSubtask}
-                    toggleSubtaskAction={toggleSubtask}
-                    mutate={mutate}
-                    editSubtaskForm={
-                      <EditSubtaskForm
-                        taskId={task.id}
-                        subtaskId={subtask.id}
-                        updateSubtask={updateSubtask}
-                        textDefaultValue={subtask.text}
-                        mutate={mutate}
-                      />
-                    }
-                  />
-                }
-              />
-            ))}
-          </SubtaskList>
+          <DeleteSubtaskModalProvider
+            deleteEntity={deleteSubtask}
+            mutate={mutate}
+          >
+            <SubtaskList>
+              {task.subtasks.map((subtask) => (
+                <SubtaskListItem
+                  key={subtask.id}
+                  isDone={subtask.isDone}
+                  subtaskText={subtask.text}
+                  actionMenuTrigger={
+                    <SubtaskActionMenuTrigger
+                      guestMode={guestMode}
+                      subtaskId={subtask.id}
+                      isDone={subtask.isDone}
+                      subtaskText={subtask.text}
+                      toggleSubtaskAction={toggleSubtask}
+                      mutate={mutate}
+                      editSubtaskForm={
+                        <EditSubtaskForm
+                          taskId={task.id}
+                          subtaskId={subtask.id}
+                          updateSubtask={updateSubtask}
+                          textDefaultValue={subtask.text}
+                          mutate={mutate}
+                        />
+                      }
+                    />
+                  }
+                />
+              ))}
+            </SubtaskList>
+          </DeleteSubtaskModalProvider>
         )
       }
       newSubtaskModalTrigger={

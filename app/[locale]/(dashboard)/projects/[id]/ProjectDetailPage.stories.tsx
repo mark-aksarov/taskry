@@ -22,12 +22,17 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { ProjectDetailActions } from "@/components/projects/ProjectDetailActions";
 import { ProjectDetailHeaderStory } from "@/components/common/DetailHeader/__stories__";
 import { ProjectDetailActionsStory } from "@/components/projects/ProjectDetailActions/__stories__";
+import { withDeleteCommentModalProvider } from "@/components/comments/DeleteCommentModal/__stories__";
 
 const meta = {
   title: "pages/ProjectDetailPage",
   component: ProjectDetailPage,
   parameters: { layout: "fullscreen" },
-  decorators: [PageDecorator, withThemedBackground],
+  decorators: [
+    PageDecorator,
+    withDeleteCommentModalProvider,
+    withThemedBackground,
+  ],
   beforeEach: () => {
     mocked(usePathname).mockReturnValue("/projects/1");
     mocked(useParams).mockReturnValue({

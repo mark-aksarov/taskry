@@ -3,11 +3,12 @@ import { EditSubtaskForm } from "../../EditSubtaskForm";
 import { SubtaskActionMenuTrigger } from "../SubtaskActionMenuTrigger";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { EditSubtaskFormStory } from "../../EditSubtaskForm/__stories__";
+import { withDeleteSubtaskModalProvider } from "../../DeleteSubtaskModal/__stories__";
 
 const meta = {
   title: "components/subtasks/SubtaskActionMenuTrigger",
   component: SubtaskActionMenuTrigger,
-  decorators: [withThemedBackground],
+  decorators: [withDeleteSubtaskModalProvider, withThemedBackground],
 } satisfies Meta<typeof SubtaskActionMenuTrigger>;
 
 export default meta;
@@ -19,7 +20,6 @@ export const Default = {
     subtaskId: 1,
     isDone: false,
     subtaskText: "Subtask",
-    deleteAction: () => ({ status: "success" }),
     toggleSubtaskAction: () => ({ status: "success" }),
     editSubtaskForm: <EditSubtaskForm {...EditSubtaskFormStory.args} />,
     mutate: () => {},

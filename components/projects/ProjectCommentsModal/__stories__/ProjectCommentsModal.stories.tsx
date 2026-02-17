@@ -5,6 +5,7 @@ import { ProjectCommentsModal } from "../ProjectCommentsModal";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { MockedCommentsContainer } from "@/components/comments/MockedCommentsContainer";
 import { withCommentFormProvider } from "@/components/comments/withCommentFormProvider";
+import { withDeleteCommentModalProvider } from "@/components/comments/DeleteCommentModal/__stories__";
 
 const meta = {
   title: "components/projects/ProjectCommentsModal",
@@ -16,6 +17,7 @@ const meta = {
         <Story />
       </DialogTrigger>
     ),
+    withDeleteCommentModalProvider,
     withCommentFormProvider,
     withThemedBackground,
   ],

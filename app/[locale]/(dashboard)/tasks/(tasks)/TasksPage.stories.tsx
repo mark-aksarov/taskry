@@ -22,10 +22,11 @@ import { TaskToolbarActionsMenuTrigger } from "@/components/tasks/TaskToolbarAct
 import { TaskToolbarFiltersModalTrigger } from "@/components/tasks/TaskToolbarFiltersModalTrigger";
 import { TaskToolbarCreateNewMenuTrigger } from "@/components/tasks/TaskToolbarCreateNewMenuTrigger";
 import { NewTaskCategoryFormStory } from "@/components/taskCategory/NewTaskCategoryForm/__stories__";
+import { withDeleteSubtaskModalProvider } from "@/components/subtasks/DeleteSubtaskModal/__stories__";
+import { withDeleteCommentModalProvider } from "@/components/comments/DeleteCommentModal/__stories__";
+import { withUpdateTaskStatusesProvider } from "@/components/tasks/UpdateTaskStatusContext/__stories__";
 import { withEntityPaginationProvider } from "@/components/common/EntityContainerPagination/__stories__";
 import { TaskToolbarActionsMenuTriggerStory } from "@/components/tasks/TaskToolbarActionsMenuTrigger/__stories__";
-import { withUpdateTaskStatusesProvider } from "@/components/tasks/UpdateTaskStatusContext/__stories__";
-
 const meta = {
   title: "pages/TasksPage",
   component: TasksPage,
@@ -34,6 +35,8 @@ const meta = {
     withDeleteTaskModalProvider,
     withEntityPaginationProvider,
     withSelectedTasksProvider,
+    withDeleteSubtaskModalProvider,
+    withDeleteCommentModalProvider,
     withUpdateTaskStatusesProvider,
     PageDecorator,
     withThemedBackground,

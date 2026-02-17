@@ -8,6 +8,7 @@ import { withDeleteProjectModalProvider } from "../../DeleteProjectModal/__stori
 import { withSelectedProjectsProvider } from "../../SelectedProjectsContext/__stories__";
 import { withUpdateProjectStatusesProvider } from "../../UpdateProjectStatusContext/__stories__";
 import { withEntityPaginationProvider } from "@/components/common/EntityContainerPagination/__stories__";
+import { withDeleteCommentModalProvider } from "@/components/comments/DeleteCommentModal/__stories__";
 
 const meta = {
   title: "components/projects/ProjectGrid",
@@ -15,6 +16,7 @@ const meta = {
   decorators: [
     withEntityPaginationProvider,
     withSelectedProjectsProvider,
+    withDeleteCommentModalProvider,
     withUpdateProjectStatusesProvider,
     withDeleteProjectModalProvider,
     withThemedBackground,

@@ -15,8 +15,8 @@ import {
 import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
 import { EditSubtaskModal } from "../EditSubtaskModal";
-import { DeleteSubtaskModal } from "../DeleteSubtaskModal";
 import { GuestModeModal } from "../../common/GuestModeModal";
+import { useDeleteSubtaskModal } from "../DeleteSubtaskModal";
 import { useActionErrorToast } from "@/lib/hooks/useActionErrorToast";
 import { CheckCheck, EllipsisVertical, Pencil, Trash } from "lucide-react";
 import { startTransition, useActionState, useEffect, useState } from "react";
@@ -27,10 +27,9 @@ const toggleSubtaskInitialState: ActionState = {
 
 interface SubtaskActionMenuTriggerProps {
   subtaskId: number;
-  isDone: boolean;
   subtaskText: string;
+  isDone: boolean;
   guestMode: boolean;
-  deleteAction: ActionFn<ActionState, number>;
   toggleSubtaskAction: ActionFn<ActionState, ToggleSubtaskPayload>;
   editSubtaskForm: React.ReactNode;
   mutate?: () => void;
@@ -38,10 +37,9 @@ interface SubtaskActionMenuTriggerProps {
 
 export function SubtaskActionMenuTrigger({
   subtaskId,
-  isDone,
   subtaskText,
+  isDone,
   guestMode,
-  deleteAction,
   toggleSubtaskAction,
   editSubtaskForm,
   mutate,
@@ -64,7 +62,7 @@ export function SubtaskActionMenuTrigger({
   const [isGuestModeModalOpen, setIsGuestModeModalOpen] = useState(false);
 
   // Delete State
-  const [isOpenDeleteModal, setIsOpenDeleteModal] = useState(false);
+  const { setState: setDeleteSubtaskModalState } = useDeleteSubtaskModal();
 
   // Edit modal / bottom sheet
   const [isOpenEditModal, setIsOpenEditModal] = useState(false);
@@ -76,7 +74,11 @@ export function SubtaskActionMenuTrigger({
     }
 
     if (key === "delete") {
-      setIsOpenDeleteModal(true);
+      setDeleteSubtaskModalState({
+        isOpen: true,
+        entityId: subtaskId,
+        entityName: subtaskText,
+      });
     } else if (key === "edit") {
       setIsOpenEditModal(true);
     } else if (key === "toggle") {
@@ -117,15 +119,6 @@ export function SubtaskActionMenuTrigger({
         isOpen={isOpenEditModal}
         onOpenChange={setIsOpenEditModal}
         editSubtaskForm={editSubtaskForm}
-      />
-
-      <DeleteSubtaskModal
-        subtaskId={subtaskId}
-        subtaskText={subtaskText}
-        isOpen={isOpenDeleteModal}
-        onOpenChange={setIsOpenDeleteModal}
-        deleteAction={deleteAction}
-        mutate={mutate}
       />
 
       <GuestModeModal

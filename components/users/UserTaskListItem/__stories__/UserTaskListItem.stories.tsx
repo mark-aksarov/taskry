@@ -11,6 +11,7 @@ import { withDeleteTaskModalProvider } from "@/components/tasks/DeleteTaskModal/
 import { withSelectedTasksProvider } from "@/components/tasks/SelectedTasksContext/__stories__";
 import { TaskItemActionMenuTriggerStory } from "@/components/tasks/TaskItemActionMenuTrigger/__stories__";
 import { withUpdateTaskStatusesProvider } from "@/components/tasks/UpdateTaskStatusContext/__stories__";
+import { withDeleteCommentModalProvider } from "@/components/comments/DeleteCommentModal/__stories__";
 
 const meta = {
   title: "components/users/UserTaskListItem",
@@ -18,6 +19,7 @@ const meta = {
   decorators: [
     withSelectedTasksProvider,
     withDeleteTaskModalProvider,
+    withDeleteCommentModalProvider,
     withUpdateTaskStatusesProvider,
     withThemedBackground,
   ],

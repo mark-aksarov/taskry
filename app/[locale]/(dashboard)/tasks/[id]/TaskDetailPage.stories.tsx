@@ -22,12 +22,19 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { TaskDetailActions } from "@/components/tasks/TaskDetailActions";
 import { TaskDetailHeaderStory } from "@/components/common/DetailHeader/__stories__";
 import { TaskDetailActionsStory } from "@/components/tasks/TaskDetailActions/__stories__";
+import { withDeleteSubtaskModalProvider } from "@/components/subtasks/DeleteSubtaskModal/__stories__";
+import { withDeleteCommentModalProvider } from "@/components/comments/DeleteCommentModal/__stories__";
 
 const meta = {
   title: "pages/TaskDetailPage",
   component: TaskDetailPage,
   parameters: { layout: "fullscreen" },
-  decorators: [PageDecorator, withThemedBackground],
+  decorators: [
+    PageDecorator,
+    withDeleteSubtaskModalProvider,
+    withDeleteCommentModalProvider,
+    withThemedBackground,
+  ],
   beforeEach: () => {
     mocked(usePathname).mockReturnValue("/tasks/1");
     mocked(useParams).mockReturnValue({

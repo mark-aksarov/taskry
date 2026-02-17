@@ -15,6 +15,7 @@ import { UserDetailModalStory } from "@/components/users/UserDetailModal/__stori
 import { withUpdateTaskStatusesProvider } from "../../UpdateTaskStatusContext/__stories__";
 import { TaskItemActionMenuTriggerStory } from "../../TaskItemActionMenuTrigger/__stories__";
 import { ProjectDetailModalStory } from "@/components/projects/ProjectDetailModal/__stories__";
+import { withDeleteCommentModalProvider } from "@/components/comments/DeleteCommentModal/__stories__";
 
 export const mockedTask = {
   id: 1,
@@ -46,6 +47,7 @@ const meta = {
   decorators: [
     withSelectedTasksProvider,
     withDeleteTaskModalProvider,
+    withDeleteCommentModalProvider,
     withUpdateTaskStatusesProvider,
     withThemedBackground,
   ],

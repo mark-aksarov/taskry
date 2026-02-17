@@ -2,12 +2,13 @@ import { SubtaskListItem } from "../SubtaskListItem";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { SubtaskActionMenuTrigger } from "../../SubtaskActionMenuTrigger";
+import { withDeleteSubtaskModalProvider } from "../../DeleteSubtaskModal/__stories__";
 import { SubtaskActionMenuTriggerStory } from "../../SubtaskActionMenuTrigger/__stories__";
 
 const meta = {
   title: "components/subtasks/SubtaskListItem",
   component: SubtaskListItem,
-  decorators: [withThemedBackground],
+  decorators: [withDeleteSubtaskModalProvider, withThemedBackground],
   parameters: {
     backgroundVariant: "alt",
   },

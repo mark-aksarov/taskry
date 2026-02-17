@@ -12,6 +12,7 @@ import { withDeleteProjectModalProvider } from "../../DeleteProjectModal/__stori
 import { withSelectedProjectsProvider } from "../../SelectedProjectsContext/__stories__";
 import { ProjectItemActionMenuTriggerStory } from "../../ProjectItemActionMenuTrigger/__stories__";
 import { withUpdateProjectStatusesProvider } from "../../UpdateProjectStatusContext/__stories__";
+import { withDeleteCommentModalProvider } from "@/components/comments/DeleteCommentModal/__stories__";
 
 const meta = {
   title: "components/projects/ProjectGridItem",
@@ -19,6 +20,7 @@ const meta = {
   decorators: [
     withSelectedProjectsProvider,
     withUpdateProjectStatusesProvider,
+    withDeleteCommentModalProvider,
     withDeleteProjectModalProvider,
     withThemedBackground,
   ],

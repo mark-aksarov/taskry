@@ -7,11 +7,12 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { TaskCommentsModalStory } from "../TaskCommentsModal/__stories__";
 import { CommentsEmptySection } from "@/components/comments/CommentsEmptySection";
 import { MockedCommentsContainer } from "@/components/comments/MockedCommentsContainer";
+import { withDeleteCommentModalProvider } from "@/components/comments/DeleteCommentModal/__stories__";
 
 const meta = {
   title: "components/tasks/TaskCommentsModalTrigger",
   component: TaskCommentsModalTrigger,
-  decorators: [withThemedBackground],
+  decorators: [withDeleteCommentModalProvider, withThemedBackground],
   parameters: {
     backgroundVariant: "alt",
   },

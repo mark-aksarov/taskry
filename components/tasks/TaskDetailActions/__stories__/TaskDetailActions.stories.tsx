@@ -6,11 +6,12 @@ import { EditTaskFormStory } from "../../EditTaskForm/__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { TaskCommentsModalStory } from "../../TaskCommentsModal/__stories__";
 import { MockedCommentsContainer } from "@/components/comments/MockedCommentsContainer";
+import { withDeleteCommentModalProvider } from "@/components/comments/DeleteCommentModal/__stories__";
 
 const meta = {
   title: "components/tasks/TaskDetailActions",
   component: TaskDetailActions,
-  decorators: [withThemedBackground],
+  decorators: [withDeleteCommentModalProvider, withThemedBackground],
   parameters: {
     backgroundVariant: "alt",
   },

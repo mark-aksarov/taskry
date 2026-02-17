@@ -1,0 +1,39 @@
+import { useState } from "react";
+import { Button } from "@/components/ui/Button";
+import { Meta, StoryObj } from "@storybook/react";
+import { DeleteSubtaskModal } from "../DeleteSubtaskModal";
+import { withToastRegion } from "@/.storybook/withToastRegion";
+import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { withDeleteSubtaskModalProvider } from "./withDeleteSubtaskModalProvider";
+
+const meta = {
+  title: "components/companies/DeleteSubtaskModal",
+  component: DeleteSubtaskModal,
+  decorators: [
+    withToastRegion,
+    withDeleteSubtaskModalProvider,
+    withThemedBackground,
+  ],
+  render: (args) => {
+    const [open, setOpen] = useState(false);
+
+    return (
+      <>
+        <Button label="Delete company" onClick={() => setOpen(true)} />
+        <DeleteSubtaskModal {...args} isOpen={open} onOpenChange={setOpen} />
+      </>
+    );
+  },
+} satisfies Meta<typeof DeleteSubtaskModal>;
+
+export default meta;
+export type Story = StoryObj<typeof meta>;
+
+export const Default = {
+  args: {
+    subtaskId: 1,
+    subtaskText: "Project Manager",
+    onOpenChange: () => {},
+    deleteSubtask: () => ({ status: "success" }),
+  },
+} satisfies Story;

@@ -6,11 +6,16 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { EditProjectFormStory } from "../../EditProjectForm/__stories__";
 import { ProjectCommentsModalStory } from "../../ProjectCommentsModal/__stories__";
 import { withDeleteProjectModalProvider } from "../../DeleteProjectModal/__stories__";
+import { withDeleteCommentModalProvider } from "@/components/comments/DeleteCommentModal/__stories__";
 
 const meta = {
   title: "components/projects/ProjectDetailActions",
   component: ProjectDetailActions,
-  decorators: [withDeleteProjectModalProvider, withThemedBackground],
+  decorators: [
+    withDeleteProjectModalProvider,
+    withDeleteCommentModalProvider,
+    withThemedBackground,
+  ],
   parameters: {
     backgroundVariant: "alt",
   },

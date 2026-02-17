@@ -15,6 +15,7 @@ import { withSelectedProjectsProvider } from "../../SelectedProjectsContext/__st
 import { CustomerDetailModalStory } from "@/components/customer/CustomerDetailModal/__stories__";
 import { ProjectItemActionMenuTriggerStory } from "../../ProjectItemActionMenuTrigger/__stories__";
 import { withUpdateProjectStatusesProvider } from "../../UpdateProjectStatusContext/__stories__";
+import { withDeleteCommentModalProvider } from "@/components/comments/DeleteCommentModal/__stories__";
 
 export const mockedProject = {
   id: 1,
@@ -48,6 +49,7 @@ const meta = {
   decorators: [
     withSelectedProjectsProvider,
     withDeleteProjectModalProvider,
+    withDeleteCommentModalProvider,
     withUpdateProjectStatusesProvider,
     withThemedBackground,
   ],

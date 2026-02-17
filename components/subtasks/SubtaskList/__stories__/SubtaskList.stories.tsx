@@ -3,6 +3,7 @@ import { SubtaskListItem } from "../../SubtaskListItem";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { SubtaskListItemStory } from "../../SubtaskListItem/__stories__";
+import { withDeleteSubtaskModalProvider } from "../../DeleteSubtaskModal/__stories__";
 
 const mockedSubtasks = [
   { id: 1, subtaskText: "Subtask 1 text", isDone: false },
@@ -15,7 +16,7 @@ const mockedSubtasks = [
 const meta = {
   title: "components/subtasks/SubtaskList",
   component: SubtaskList,
-  decorators: [withThemedBackground],
+  decorators: [withDeleteSubtaskModalProvider, withThemedBackground],
   parameters: {
     backgroundVariant: "alt",
   },

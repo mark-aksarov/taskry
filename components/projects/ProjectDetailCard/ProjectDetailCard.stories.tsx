@@ -16,11 +16,12 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { ProjectDetailWithoutSomeDataStory } from "../ProjectDetail/__stories__";
 import { ProjectDetailHeaderStory } from "@/components/common/DetailHeader/__stories__";
 import { ProjectDetailActionsStory } from "@/components/projects/ProjectDetailActions/__stories__";
+import { withDeleteCommentModalProvider } from "@/components/comments/DeleteCommentModal/__stories__";
 
 const meta = {
   title: "components/projects/ProjectDetailCard",
   component: ProjectDetailCard,
-  decorators: [withThemedBackground],
+  decorators: [withDeleteCommentModalProvider, withThemedBackground],
 } satisfies Meta<typeof ProjectDetailCard>;
 
 export default meta;

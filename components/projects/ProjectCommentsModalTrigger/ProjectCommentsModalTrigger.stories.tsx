@@ -6,11 +6,12 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { ProjectCommentsModalTrigger } from "./ProjectCommentsModalTrigger";
 import { ProjectCommentsModalStory } from "../ProjectCommentsModal/__stories__";
 import { CommentsEmptySection } from "@/components/comments/CommentsEmptySection";
+import { withDeleteCommentModalProvider } from "@/components/comments/DeleteCommentModal/__stories__";
 
 const meta = {
   title: "components/projects/ProjectCommentsModalTrigger",
   component: ProjectCommentsModalTrigger,
-  decorators: [withThemedBackground],
+  decorators: [withDeleteCommentModalProvider, withThemedBackground],
   parameters: {
     backgroundVariant: "alt",
   },

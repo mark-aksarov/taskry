@@ -8,6 +8,7 @@ import { withDeleteTaskModalProvider } from "../../DeleteTaskModal/__stories__";
 import { withSelectedTasksProvider } from "../../SelectedTasksContext/__stories__";
 import { withUpdateTaskStatusesProvider } from "../../UpdateTaskStatusContext/__stories__";
 import { withEntityPaginationProvider } from "@/components/common/EntityContainerPagination/__stories__";
+import { withDeleteCommentModalProvider } from "@/components/comments/DeleteCommentModal/__stories__";
 
 const meta = {
   title: "components/tasks/TaskGrid",
@@ -16,6 +17,7 @@ const meta = {
     withEntityPaginationProvider,
     withSelectedTasksProvider,
     withUpdateTaskStatusesProvider,
+    withDeleteCommentModalProvider,
     withDeleteTaskModalProvider,
     withThemedBackground,
   ],

@@ -12,11 +12,17 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { TaskDetailWithoutSomeDataStory } from "../TaskDetail/__stories__";
 import { TaskDetailHeaderStory } from "@/components/common/DetailHeader/__stories__";
 import { TaskDetailActionsStory } from "@/components/tasks/TaskDetailActions/__stories__";
+import { withDeleteSubtaskModalProvider } from "@/components/subtasks/DeleteSubtaskModal/__stories__";
+import { withDeleteCommentModalProvider } from "@/components/comments/DeleteCommentModal/__stories__";
 
 const meta = {
   title: "components/tasks/TaskDetailCard",
   component: TaskDetailCard,
-  decorators: [withThemedBackground],
+  decorators: [
+    withDeleteSubtaskModalProvider,
+    withDeleteCommentModalProvider,
+    withThemedBackground,
+  ],
 } satisfies Meta<typeof TaskDetailCard>;
 
 export default meta;

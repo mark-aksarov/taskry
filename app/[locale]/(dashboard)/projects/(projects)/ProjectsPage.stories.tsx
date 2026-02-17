@@ -13,15 +13,16 @@ import { ProjectGridStory } from "@/components/projects/ProjectGrid/__stories__"
 import { ProjectListStory } from "@/components/projects/ProjectList/__stories__";
 import { EntityContainerPresentation } from "@/components/common/EntityContainerPresentation";
 import { ProjectFiltersFormStory } from "@/components/projects/ProjectFiltersForm/__stories__";
+import { withDeleteCommentModalProvider } from "@/components/comments/DeleteCommentModal/__stories__";
 import { withDeleteProjectModalProvider } from "@/components/projects/DeleteProjectModal/__stories__";
 import { withEntityPaginationProvider } from "@/components/common/EntityContainerPagination/__stories__";
 import { withSelectedProjectsProvider } from "@/components/projects/SelectedProjectsContext/__stories__";
 import { ProjectToolbarActionsMenuTrigger } from "@/components/projects/ProjectToolbarActionsMenuTrigger";
 import { ProjectToolbarFiltersModalTrigger } from "@/components/projects/ProjectToolbarFiltersModalTrigger";
 import { ProjectToolbarCreateNewMenuTrigger } from "@/components/projects/ProjectToolbarCreateNewMenuTrigger";
+import { withUpdateProjectStatusesProvider } from "@/components/projects/UpdateProjectStatusContext/__stories__";
 import { ProjectToolbarActionsMenuTriggerStory } from "@/components/projects/ProjectToolbarActionsMenuTrigger/__stories__";
 import { ProjectToolbarCreateNewMenuTriggerStory } from "@/components/projects/ProjectToolbarCreateNewMenuTrigger/__stories__";
-import { withUpdateProjectStatusesProvider } from "@/components/projects/UpdateProjectStatusContext/__stories__";
 
 const meta = {
   title: "pages/ProjectsPage",
@@ -31,6 +32,7 @@ const meta = {
     withDeleteProjectModalProvider,
     withEntityPaginationProvider,
     withSelectedProjectsProvider,
+    withDeleteCommentModalProvider,
     withUpdateProjectStatusesProvider,
     PageDecorator,
     withThemedBackground,

@@ -24,6 +24,8 @@ import { ProfileNavigationDesktopStory } from "@/components/users/ProfileNavigat
 import { withEntityPaginationProvider } from "@/components/common/EntityContainerPagination/__stories__";
 import { TaskToolbarActionsMenuTriggerStory } from "@/components/tasks/TaskToolbarActionsMenuTrigger/__stories__";
 import { withUpdateTaskStatusesProvider } from "@/components/tasks/UpdateTaskStatusContext/__stories__";
+import { withDeleteSubtaskModalProvider } from "@/components/subtasks/DeleteSubtaskModal/__stories__";
+import { withDeleteCommentModalProvider } from "@/components/comments/DeleteCommentModal/__stories__";
 
 const meta = {
   title: "pages/ProfileTasksPage",
@@ -32,6 +34,8 @@ const meta = {
   decorators: [
     withDeleteTaskModalProvider,
     withEntityPaginationProvider,
+    withDeleteSubtaskModalProvider,
+    withDeleteCommentModalProvider,
     withUpdateTaskStatusesProvider,
     withSelectedTasksProvider,
     PageDecorator,

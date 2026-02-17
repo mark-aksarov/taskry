@@ -8,22 +8,17 @@ import {
   ConfirmModalConfirmButton,
 } from "@/components/common/ConfirmModal";
 
+import { startTransition } from "react";
 import { useTranslations } from "next-intl";
+import { ModalProps } from "@/components/ui/Modal";
 import { DialogHeading } from "@/components/ui/Dialog";
 import { ActionFn, ActionState } from "@/lib/actions/types";
-import { startTransition, useActionState, useEffect } from "react";
-import { useActionErrorToast } from "@/lib/hooks/useActionErrorToast";
+import { useDeleteModalActionState } from "@/components/common/BaseDeleteModal";
 
-const initialState: ActionState = {
-  status: null,
-};
-
-interface DeleteSubtaskModalProps {
+interface DeleteSubtaskModalProps extends ModalProps {
   subtaskId: number;
   subtaskText: string;
-  isOpen: boolean;
-  onOpenChange: (isOpen: boolean) => void;
-  deleteAction: ActionFn<ActionState, number>;
+  deleteSubtask: ActionFn<ActionState, number>;
   mutate?: () => void;
 }
 
@@ -32,25 +27,20 @@ export function DeleteSubtaskModal({
   subtaskText,
   isOpen,
   onOpenChange,
-  deleteAction,
+  deleteSubtask,
   mutate,
 }: DeleteSubtaskModalProps) {
   const t = useTranslations("subtasks.DeleteSubtaskModal");
 
-  const [state, action] = useActionState(deleteAction, initialState);
+  const [_, action, isPending] = useDeleteModalActionState<number>({
+    deleteEntity: deleteSubtask,
+    onOpenChange,
+    onSuccess: mutate,
+  });
 
   const handleDelete = () => {
     startTransition(() => action(subtaskId));
-    onOpenChange(false);
   };
-
-  useEffect(() => {
-    if (state.status === "success") {
-      mutate?.();
-    }
-  }, [state, mutate]);
-
-  useActionErrorToast(state);
 
   return (
     <ConfirmModal
@@ -71,6 +61,7 @@ export function DeleteSubtaskModal({
           label={t("deleteButton")}
           onConfirm={handleDelete}
           data-test="delete-subtask-modal-confirm-button"
+          isPending={isPending}
         />
       </ConfirmModalActions>
     </ConfirmModal>
