@@ -20,7 +20,7 @@ export const Default = {
     subtaskId: 1,
     isDone: false,
     subtaskText: "Subtask",
-    toggleSubtaskAction: () => ({ status: "success" }),
+    toggleSubtask: () => ({ status: "success" }),
     editSubtaskForm: <EditSubtaskForm {...EditSubtaskFormStory.args} />,
     mutate: () => {},
   },

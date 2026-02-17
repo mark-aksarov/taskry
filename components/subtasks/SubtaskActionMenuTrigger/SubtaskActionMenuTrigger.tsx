@@ -20,19 +20,15 @@ import { EditSubtaskModal } from "../EditSubtaskModal";
 import { CheckCheck, Pencil, Trash } from "lucide-react";
 import { GuestModeModal } from "../../common/GuestModeModal";
 import { useDeleteSubtaskModal } from "../DeleteSubtaskModal";
-import { useActionErrorToast } from "@/lib/hooks/useActionErrorToast";
-import { startTransition, useActionState, useEffect, useState } from "react";
-
-const toggleSubtaskInitialState: ActionState = {
-  status: null,
-};
+import { startTransition, useActionState, useState } from "react";
+import { useToggleSubtaskStatusActionState } from "./useToggleSubtaskStatusActionState";
 
 interface SubtaskActionMenuTriggerProps {
   subtaskId: number;
   subtaskText: string;
   isDone: boolean;
   guestMode: boolean;
-  toggleSubtaskAction: ActionFn<ActionState, ToggleSubtaskPayload>;
+  toggleSubtask: ActionFn<ActionState, ToggleSubtaskPayload>;
   editSubtaskForm: React.ReactNode;
   mutate?: () => void;
 }
@@ -53,23 +49,18 @@ export function SubtaskActionMenuTrigger({
   subtaskText,
   isDone,
   guestMode,
-  toggleSubtaskAction,
+  toggleSubtask,
   editSubtaskForm,
   mutate,
 }: SubtaskActionMenuTriggerProps) {
   const t = useTranslations("subtasks.SubtaskActionMenuTrigger");
 
-  // Toggle IsDone
-  const [toggleSubtaskState, toggleSubtask, toggleSubtaskIsPending] =
-    useActionState(toggleSubtaskAction, toggleSubtaskInitialState);
-
-  useEffect(() => {
-    if (toggleSubtaskState.status === "success") {
-      mutate?.();
-    }
-  }, [toggleSubtaskState, mutate]);
-
-  useActionErrorToast(toggleSubtaskState);
+  // Toggle subtask status
+  const [_toggleSubtaskState, toggleSubtaskAction, _isToggleSubtaskPending] =
+    useToggleSubtaskStatusActionState({
+      toggleSubtask,
+      mutate,
+    });
 
   // Guest mode modal
   const [isGuestModeModalOpen, setIsGuestModeModalOpen] = useState(false);
@@ -95,7 +86,9 @@ export function SubtaskActionMenuTrigger({
     } else if (key === "edit") {
       setIsOpenEditModal(true);
     } else if (key === "toggle") {
-      startTransition(() => toggleSubtask({ id: subtaskId, isDone: !isDone }));
+      startTransition(() =>
+        toggleSubtaskAction({ id: subtaskId, isDone: !isDone }),
+      );
     }
   }
 

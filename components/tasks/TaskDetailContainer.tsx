@@ -69,7 +69,7 @@ function TaskDetailContainerInner({
                       subtaskId={subtask.id}
                       isDone={subtask.isDone}
                       subtaskText={subtask.text}
-                      toggleSubtaskAction={toggleSubtask}
+                      toggleSubtask={toggleSubtask}
                       mutate={mutate}
                       editSubtaskForm={
                         <EditSubtaskForm

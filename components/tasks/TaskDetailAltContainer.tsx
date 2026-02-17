@@ -58,14 +58,13 @@ async function TaskDetailAltContainerInner({
                 <SubtaskListItem
                   key={subtask.id}
                   isDone={subtask.isDone}
-                  subtaskText={subtask.text}
                   actionMenuTrigger={
                     <SubtaskActionMenuTrigger
                       guestMode={guestMode}
                       subtaskId={subtask.id}
                       isDone={subtask.isDone}
                       subtaskText={subtask.text}
-                      toggleSubtaskAction={toggleSubtask}
+                      toggleSubtask={toggleSubtask}
                       editSubtaskForm={
                         <EditSubtaskForm
                           taskId={task.id}
