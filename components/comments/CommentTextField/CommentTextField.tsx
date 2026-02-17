@@ -23,12 +23,12 @@ export const fieldInputStyles = tv({
 
 type CommentTextFieldProps = TextFieldProps &
   React.RefAttributes<HTMLDivElement> & {
-    isLoading?: boolean;
+    isPending?: boolean;
     textAreaClassName?: string;
   };
 
 export const CommentTextField = ({
-  isLoading,
+  isPending,
   textAreaClassName,
   ...props
 }: CommentTextFieldProps) => {
@@ -36,7 +36,7 @@ export const CommentTextField = ({
 
   const t = useTranslations("comments.CommentTextField");
 
-  const buttonClasses = "absolute top-[1.75rem] -translate-y-1/2 rounded-full";
+  const buttonClasses = "absolute top-[1.75rem] -translate-y-1/2";
 
   return (
     <div className="relative w-full">
@@ -47,7 +47,7 @@ export const CommentTextField = ({
         value={commentContent}
         onChange={setCommentContent}
         className={fieldStyles}
-        isDisabled={isLoading}
+        isDisabled={isPending}
       >
         <TextArea
           data-test="comment-text-field-textarea"
@@ -62,7 +62,7 @@ export const CommentTextField = ({
 
       <CommentTextFieldSendButton
         buttonClasses={buttonClasses}
-        isDisabled={!commentContent || isLoading}
+        isDisabled={!commentContent || isPending}
       />
     </div>
   );

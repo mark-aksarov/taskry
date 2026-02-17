@@ -3,9 +3,10 @@
 import { useSWRConfig } from "swr";
 import { Form } from "react-aria-components";
 import { CommentTextField } from "../CommentTextField";
+import { startTransition, useActionState } from "react";
+import { useErrorToast } from "@/lib/hooks/useErrorToast";
 import { ActionFn, ActionState } from "@/lib/actions/types";
-import { startTransition, useActionState, useEffect } from "react";
-import { useActionErrorToast } from "@/lib/hooks/useActionErrorToast";
+import { useCommentFormContext } from "../CommentFormContext";
 
 const initialState: ActionState = {
   status: null,
@@ -24,18 +25,26 @@ export function CommentForm({
 }: CommentFormProps) {
   const { mutate } = useSWRConfig();
 
-  const [state, action, pending] = useActionState(
-    sendCommentAction,
+  const { add: addErrorToast, close: closeErrorToast } = useErrorToast();
+  const { setCommentContent } = useCommentFormContext();
+
+  const [_, action, isPending] = useActionState(
+    async (prevState: ActionState, payload: FormData) => {
+      const newState = await sendCommentAction(prevState, payload);
+
+      closeErrorToast();
+
+      if (newState.status === "success") {
+        await mutate(mutateUrl);
+        setCommentContent("");
+      } else if (newState.status === "error" && newState.message) {
+        addErrorToast(newState.message);
+      }
+
+      return newState;
+    },
     initialState,
   );
-
-  useEffect(() => {
-    if (state.status === "success") {
-      mutate(mutateUrl);
-    }
-  }, [state, mutateUrl]);
-
-  useActionErrorToast(state);
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -46,7 +55,7 @@ export function CommentForm({
   return (
     <Form onSubmit={handleSubmit} className="flex w-full flex-col">
       <CommentTextField
-        isLoading={pending}
+        isPending={isPending}
         textAreaClassName="bg-white dark:bg-gray-800 outline-hidden"
       />
       {hiddenInput}

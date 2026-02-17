@@ -4,7 +4,7 @@ import { SendHorizonal } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 
 interface CommentTextFieldSendButtonProps {
-  buttonClasses: string;
+  buttonClasses?: string;
   isDisabled?: boolean;
 }
 
@@ -17,9 +17,10 @@ export function CommentTextFieldSendButton({
   return (
     <Button
       type="submit"
-      variant="ghost"
       data-test="comment-text-field-send-button"
-      iconLeft={<SendHorizonal size={16} strokeWidth={1} absoluteStrokeWidth />}
+      iconLeft={
+        <SendHorizonal size={16} strokeWidth={1.25} absoluteStrokeWidth />
+      }
       className={twMerge(buttonClasses, "right-0 -translate-x-2")}
       isDisabled={isDisabled}
       aria-label={t("ariaLabel")}
