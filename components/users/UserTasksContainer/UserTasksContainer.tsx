@@ -37,7 +37,7 @@ export async function UserTasksContainer({
   const guestMode = await hasGuestRole();
 
   return (
-    <DeleteTaskModalProvider deleteTask={deleteTasks}>
+    <DeleteTaskModalProvider deleteEntity={deleteTasks}>
       <EntityPaginationProvider>
         <UserTaskList>
           {tasks.length &&

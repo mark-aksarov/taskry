@@ -54,8 +54,8 @@ export function UserItemActionMenuTrigger({
     } else if (key === "delete") {
       setDeleteUserModalState({
         isOpen: true,
-        userId,
-        userFullName,
+        entityId: userId,
+        entityName: userFullName,
       });
     }
   }

@@ -51,8 +51,8 @@ export function PositionItemActionMenuTrigger({
     } else if (action === "delete") {
       setDeletePositionModalState({
         isOpen: true,
-        positionId,
-        positionName,
+        entityId: positionId,
+        entityName: positionName,
       });
     }
   };

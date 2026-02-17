@@ -11,9 +11,7 @@ export async function ProjectCategoriesContainer() {
   const projectCategories = await getProjectCategorySummaries();
 
   return (
-    <DeleteProjectCategoryModalProvider
-      deleteProjectCategories={deleteProjectCategories}
-    >
+    <DeleteProjectCategoryModalProvider deleteEntity={deleteProjectCategories}>
       <ProjectCategoryList>
         {projectCategories.map((projectCategory) => (
           <ProjectCategoryListItem

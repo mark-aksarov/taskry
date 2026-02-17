@@ -11,9 +11,7 @@ export async function TaskCategoriesContainer() {
   const taskCategories = await getTaskCategorySummaries();
 
   return (
-    <DeleteTaskCategoryModalProvider
-      deleteTaskCategories={deleteTaskCategories}
-    >
+    <DeleteTaskCategoryModalProvider deleteEntity={deleteTaskCategories}>
       <TaskCategoryList>
         {taskCategories.map((taskCategory) => (
           <TaskCategoryListItem

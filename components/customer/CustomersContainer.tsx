@@ -40,7 +40,7 @@ export async function CustomersContainer({
   const guestMode = await hasGuestRole();
 
   return (
-    <DeleteCustomerModalProvider deleteCustomer={deleteCustomers}>
+    <DeleteCustomerModalProvider deleteEntity={deleteCustomers}>
       <EntityContainerPresentation
         page={page}
         pageSize={pageSize}

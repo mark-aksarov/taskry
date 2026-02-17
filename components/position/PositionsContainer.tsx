@@ -13,7 +13,7 @@ export async function PositionsContainer() {
   const positions = await getPositionSummaries();
 
   return (
-    <DeletePositionModalProvider deletePositions={deletePositions}>
+    <DeletePositionModalProvider deleteEntity={deletePositions}>
       <PositionList>
         {positions.map((position) => (
           <PositionListItem

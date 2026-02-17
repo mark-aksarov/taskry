@@ -3,9 +3,7 @@ import { DeletePositionModalProvider } from "../DeletePositionModalContext";
 
 export const withDeletePositionModalProvider: Decorator = (Story) => {
   return (
-    <DeletePositionModalProvider
-      deletePositions={() => ({ status: "success" })}
-    >
+    <DeletePositionModalProvider deleteEntity={() => ({ status: "success" })}>
       <Story />
     </DeletePositionModalProvider>
   );

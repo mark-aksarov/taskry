@@ -54,8 +54,8 @@ export function ProjectCategoryItemActionMenuTrigger({
     } else if (action === "delete") {
       setDeleteCompanyModalState({
         isOpen: true,
-        projectCategoryId,
-        projectCategoryName,
+        entityId: projectCategoryId,
+        entityName: projectCategoryName,
       });
     }
   };

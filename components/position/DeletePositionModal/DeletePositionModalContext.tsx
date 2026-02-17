@@ -1,64 +1,34 @@
 "use client";
 
 import {
-  useMemo,
-  useState,
-  Dispatch,
-  createContext,
-  SetStateAction,
-  useContext,
-} from "react";
+  DeleteModalContextType,
+  DeleteModalProviderProps,
+  useDeleteModalContextState,
+} from "@/components/common/BaseDeleteModal";
 
+import { createContext, useContext } from "react";
 import { DeletePositionModal } from "./DeletePositionModal";
-import { ActionFn, ActionState } from "@/lib/actions/types";
-
-interface DeletePositionModalContextType {
-  state: PositionModalState;
-  setState: Dispatch<SetStateAction<PositionModalState>>;
-}
 
 const DeletePositionModalContext =
-  createContext<DeletePositionModalContextType | null>(null);
-
-interface PositionModalState {
-  positionId: number;
-  positionName: string;
-  isOpen: boolean;
-}
-
-interface DeletePositionModalProviderProps {
-  deletePositions: ActionFn<ActionState, number[]>;
-  children: React.ReactNode;
-}
+  createContext<DeleteModalContextType<number> | null>(null);
 
 export function DeletePositionModalProvider({
-  deletePositions,
+  deleteEntity,
   children,
-}: DeletePositionModalProviderProps) {
-  const [state, setState] = useState<PositionModalState>(() => ({
-    positionId: 0,
-    positionName: "",
-    isOpen: false,
-  }));
-
-  const contextValue = useMemo(
-    () => ({
-      state,
-      setState,
-    }),
-    [state, setState],
-  );
+}: DeleteModalProviderProps<number[]>) {
+  const contextValue = useDeleteModalContextState<number>();
+  const { state, setState } = contextValue;
 
   return (
     <DeletePositionModalContext.Provider value={contextValue}>
       {children}
 
       <DeletePositionModal
-        positionId={state.positionId}
-        positionName={state.positionName}
+        positionId={state.entityId || 0}
+        positionName={state.entityName}
         isOpen={state.isOpen}
-        onOpenChange={() => setState((prev) => ({ ...prev, isOpen: false }))}
-        deletePositions={deletePositions}
+        onOpenChange={(isOpen) => setState((prev) => ({ ...prev, isOpen }))}
+        deletePositions={deleteEntity}
       />
     </DeletePositionModalContext.Provider>
   );

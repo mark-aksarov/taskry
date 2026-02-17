@@ -52,8 +52,8 @@ export function TaskCategoryItemActionMenuTrigger({
     } else if (action === "delete") {
       setDeleteTaskCategoryModalState({
         isOpen: true,
-        taskCategoryId,
-        taskCategoryName,
+        entityId: taskCategoryId,
+        entityName: taskCategoryName,
       });
     }
   };

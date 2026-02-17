@@ -65,7 +65,7 @@ export async function UsersContainer({
   const authUser = session!.user;
 
   return (
-    <DeleteUserModalProvider deleteUser={deleteUser}>
+    <DeleteUserModalProvider deleteEntity={deleteUser}>
       <EntityPaginationProvider>
         <ViewModeLayout
           list={

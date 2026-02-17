@@ -1,65 +1,35 @@
 "use client";
 
 import {
-  useMemo,
-  useState,
-  Dispatch,
-  createContext,
-  SetStateAction,
-  useContext,
-} from "react";
+  DeleteModalContextType,
+  DeleteModalProviderProps,
+  useDeleteModalContextState,
+} from "@/components/common/BaseDeleteModal";
 
-import { ActionFn, ActionState } from "@/lib/actions/types";
-
+import { createContext, useContext } from "react";
 import { DeleteTaskCategoryModal } from "./DeleteTaskCategoryModal";
 
-interface DeleteTaskCategoryModalContextType {
-  state: TaskCategoryModalState;
-  setState: Dispatch<SetStateAction<TaskCategoryModalState>>;
-}
-
 const DeleteTaskCategoryModalContext =
-  createContext<DeleteTaskCategoryModalContextType | null>(null);
-
-interface TaskCategoryModalState {
-  taskCategoryId: number;
-  taskCategoryName: string;
-  isOpen: boolean;
-}
-
-interface DeleteTaskCategoryModalProviderProps {
-  deleteTaskCategories: ActionFn<ActionState, number[]>;
-  children: React.ReactNode;
-}
+  createContext<DeleteModalContextType<number> | null>(null);
 
 export function DeleteTaskCategoryModalProvider({
-  deleteTaskCategories,
+  deleteEntity,
   children,
-}: DeleteTaskCategoryModalProviderProps) {
-  const [state, setState] = useState<TaskCategoryModalState>(() => ({
-    taskCategoryId: 0,
-    taskCategoryName: "",
-    isOpen: false,
-  }));
+}: DeleteModalProviderProps<number[]>) {
+  const contextValue = useDeleteModalContextState<number>();
 
-  const contextValue = useMemo(
-    () => ({
-      state,
-      setState,
-    }),
-    [state, setState],
-  );
+  const { state, setState } = contextValue;
 
   return (
     <DeleteTaskCategoryModalContext.Provider value={contextValue}>
       {children}
 
       <DeleteTaskCategoryModal
-        taskCategoryId={state.taskCategoryId}
-        taskCategoryName={state.taskCategoryName}
+        taskCategoryId={state.entityId || 0}
+        taskCategoryName={state.entityName}
         isOpen={state.isOpen}
-        onOpenChange={() => setState((prev) => ({ ...prev, isOpen: false }))}
-        deleteTaskCategories={deleteTaskCategories}
+        onOpenChange={(isOpen) => setState((prev) => ({ ...prev, isOpen }))}
+        deleteTaskCategories={deleteEntity}
       />
     </DeleteTaskCategoryModalContext.Provider>
   );

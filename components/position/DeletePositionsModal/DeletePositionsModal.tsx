@@ -8,16 +8,12 @@ import {
   ConfirmModalConfirmButton,
 } from "@/components/common/ConfirmModal";
 
+import { startTransition } from "react";
 import { useTranslations } from "next-intl";
 import { ModalProps } from "@/components/ui/Modal";
 import { DialogHeading } from "@/components/ui/Dialog";
-import { startTransition, useActionState } from "react";
-import { useErrorToast } from "@/lib/hooks/useErrorToast";
 import { ActionFn, ActionState } from "@/lib/actions/types";
-
-const initialState: ActionState = {
-  status: null,
-};
+import { useDeleteModalActionState } from "@/components/common/BaseDeleteModal";
 
 interface DeletePositionsModalProps extends ModalProps {
   positionIds: number[];
@@ -32,24 +28,10 @@ export function DeletePositionsModal({
 }: DeletePositionsModalProps) {
   const t = useTranslations("positions.DeletePositionsModal");
 
-  const { close: closeErrorToast, add: addErrorToast } = useErrorToast();
-
-  const [state, action, isPending] = useActionState(
-    async (prevState: ActionState, payload: number[]) => {
-      const newState = await deletePositions(prevState, payload);
-
-      closeErrorToast();
-
-      if (newState.status === "success") {
-        onOpenChange?.(false);
-      } else if (newState.status === "error" && newState.message) {
-        addErrorToast(newState.message);
-      }
-
-      return newState;
-    },
-    initialState,
-  );
+  const [_, action, isPending] = useDeleteModalActionState<number[]>({
+    deleteEntity: deletePositions,
+    onOpenChange,
+  });
 
   const handleDelete = () => {
     startTransition(() => action(positionIds));

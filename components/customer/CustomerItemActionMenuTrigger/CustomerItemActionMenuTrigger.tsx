@@ -52,8 +52,8 @@ export function CustomerItemActionMenuTrigger({
     } else if (key === "delete") {
       setDeleteCustomerModalState({
         isOpen: true,
-        customerId,
-        customerFullName,
+        entityId: customerId,
+        entityName: customerFullName,
       });
     }
   }

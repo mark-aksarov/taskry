@@ -1,17 +1,17 @@
 import { CompanyList } from "./CompanyList";
 import { CompanyListItem } from "./CompanyListItem";
 import { EditCompanyForm } from "./EditCompanyForm";
+import { DeleteCompanyModalProvider } from "./DeleteCompanyModal";
 import { updateCompany } from "@/lib/actions/company/updateCompany";
 import { getCompanySummaries } from "@/lib/data/company/company.dal";
 import { deleteCompanies } from "@/lib/actions/company/deleteCompanies";
 import { CompanyItemActionMenuTrigger } from "./CompanyItemActionMenuTrigger";
-import { DeleteCompanyModalProvider } from "./DeleteCompanyModal";
 
 export async function CompaniesContainer() {
   const companies = await getCompanySummaries();
 
   return (
-    <DeleteCompanyModalProvider deleteCompanies={deleteCompanies}>
+    <DeleteCompanyModalProvider deleteEntity={deleteCompanies}>
       <CompanyList>
         {companies.map((company) => (
           <CompanyListItem

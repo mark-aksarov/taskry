@@ -53,8 +53,8 @@ export function CompanyItemActionMenuTrigger({
     } else if (action === "delete") {
       setDeleteCompanyModalState({
         isOpen: true,
-        companyId,
-        companyName,
+        entityId: companyId,
+        entityName: companyName,
       });
     }
   };

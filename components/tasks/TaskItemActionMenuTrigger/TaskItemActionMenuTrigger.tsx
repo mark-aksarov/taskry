@@ -63,8 +63,8 @@ export function TaskItemActionMenuTrigger({
     } else if (action === "delete") {
       setDeleteTaskModalState({
         isOpen: true,
-        taskId,
-        taskTitle,
+        entityId: taskId,
+        entityName: taskTitle,
       });
     } else {
       startTransition(() => {

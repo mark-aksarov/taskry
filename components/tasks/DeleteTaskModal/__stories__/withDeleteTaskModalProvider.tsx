@@ -3,7 +3,7 @@ import { DeleteTaskModalProvider } from "../DeleteTaskModalContext";
 
 export const withDeleteTaskModalProvider: Decorator = (Story) => {
   return (
-    <DeleteTaskModalProvider deleteTask={() => ({ status: "success" })}>
+    <DeleteTaskModalProvider deleteEntity={() => ({ status: "success" })}>
       <Story />
     </DeleteTaskModalProvider>
   );

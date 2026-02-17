@@ -39,7 +39,7 @@ export async function ProjectsContainer({
   const guestMode = await hasGuestRole();
 
   return (
-    <DeleteProjectModalProvider deleteProjects={deleteProjects}>
+    <DeleteProjectModalProvider deleteEntity={deleteProjects}>
       <EntityContainerPresentation
         page={page}
         pageSize={pageSize}

@@ -3,7 +3,7 @@ import { DeleteProjectModalProvider } from "../DeleteProjectModalContext";
 
 export const withDeleteProjectModalProvider: Decorator = (Story) => {
   return (
-    <DeleteProjectModalProvider deleteProjects={() => ({ status: "success" })}>
+    <DeleteProjectModalProvider deleteEntity={() => ({ status: "success" })}>
       <Story />
     </DeleteProjectModalProvider>
   );

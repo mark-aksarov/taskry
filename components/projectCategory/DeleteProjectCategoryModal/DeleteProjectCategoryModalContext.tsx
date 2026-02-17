@@ -1,65 +1,35 @@
 "use client";
 
 import {
-  useMemo,
-  useState,
-  Dispatch,
-  createContext,
-  SetStateAction,
-  useContext,
-} from "react";
+  DeleteModalContextType,
+  DeleteModalProviderProps,
+  useDeleteModalContextState,
+} from "@/components/common/BaseDeleteModal";
 
-import { ActionFn, ActionState } from "@/lib/actions/types";
-
+import { createContext, useContext } from "react";
 import { DeleteProjectCategoryModal } from "./DeleteProjectCategoryModal";
 
-interface DeleteProjectCategoryModalContextType {
-  state: ProjectCategoryModalState;
-  setState: Dispatch<SetStateAction<ProjectCategoryModalState>>;
-}
-
 const DeleteProjectCategoryModalContext =
-  createContext<DeleteProjectCategoryModalContextType | null>(null);
-
-interface ProjectCategoryModalState {
-  projectCategoryId: number;
-  projectCategoryName: string;
-  isOpen: boolean;
-}
-
-interface DeleteProjectCategoryModalProviderProps {
-  deleteProjectCategories: ActionFn<ActionState, number[]>;
-  children: React.ReactNode;
-}
+  createContext<DeleteModalContextType<number> | null>(null);
 
 export function DeleteProjectCategoryModalProvider({
-  deleteProjectCategories,
+  deleteEntity,
   children,
-}: DeleteProjectCategoryModalProviderProps) {
-  const [state, setState] = useState<ProjectCategoryModalState>(() => ({
-    projectCategoryId: 0,
-    projectCategoryName: "",
-    isOpen: false,
-  }));
+}: DeleteModalProviderProps<number[]>) {
+  const contextValue = useDeleteModalContextState<number>();
 
-  const contextValue = useMemo(
-    () => ({
-      state,
-      setState,
-    }),
-    [state, setState],
-  );
+  const { state, setState } = contextValue;
 
   return (
     <DeleteProjectCategoryModalContext.Provider value={contextValue}>
       {children}
 
       <DeleteProjectCategoryModal
-        projectCategoryId={state.projectCategoryId}
-        projectCategoryName={state.projectCategoryName}
+        projectCategoryId={state.entityId || 0}
+        projectCategoryName={state.entityName}
         isOpen={state.isOpen}
-        onOpenChange={() => setState((prev) => ({ ...prev, isOpen: false }))}
-        deleteProjectCategories={deleteProjectCategories}
+        onOpenChange={(isOpen) => setState((prev) => ({ ...prev, isOpen }))}
+        deleteProjectCategories={deleteEntity}
       />
     </DeleteProjectCategoryModalContext.Provider>
   );

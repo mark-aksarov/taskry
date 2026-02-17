@@ -66,7 +66,7 @@ async function AssignedTasksContainerInner({
   }
 
   return (
-    <DeleteTaskModalProvider deleteTask={deleteTasks}>
+    <DeleteTaskModalProvider deleteEntity={deleteTasks}>
       <AssignedTasksPresentation
         page={page}
         pageSize={pageSize}

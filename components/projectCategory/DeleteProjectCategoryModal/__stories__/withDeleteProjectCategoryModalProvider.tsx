@@ -4,7 +4,7 @@ import { DeleteProjectCategoryModalProvider } from "..";
 export const withDeleteProjectCategoryModalProvider: Decorator = (Story) => {
   return (
     <DeleteProjectCategoryModalProvider
-      deleteProjectCategories={() => ({ status: "success" })}
+      deleteEntity={() => ({ status: "success" })}
     >
       <Story />
     </DeleteProjectCategoryModalProvider>

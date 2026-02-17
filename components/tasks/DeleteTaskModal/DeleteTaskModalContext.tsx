@@ -1,66 +1,34 @@
 "use client";
 
 import {
-  useMemo,
-  useState,
-  Dispatch,
-  createContext,
-  SetStateAction,
-  useContext,
-} from "react";
+  DeleteModalContextType,
+  DeleteModalProviderProps,
+  useDeleteModalContextState,
+} from "@/components/common/BaseDeleteModal";
 
-import { ActionFn, ActionState } from "@/lib/actions/types";
-
+import { createContext, useContext } from "react";
 import { DeleteTaskModal } from "./DeleteTaskModal";
 
-interface DeleteTaskModalContextType {
-  state: TaskModalState;
-  setState: Dispatch<SetStateAction<TaskModalState>>;
-}
-
-const DeleteTaskModalContext = createContext<DeleteTaskModalContextType | null>(
-  null,
-);
-
-interface TaskModalState {
-  taskId: number;
-  taskTitle: string;
-  isOpen: boolean;
-}
-
-interface DeleteTaskModalProviderProps {
-  deleteTask: ActionFn<ActionState, number[]>;
-  children: React.ReactNode;
-}
+const DeleteTaskModalContext =
+  createContext<DeleteModalContextType<number> | null>(null);
 
 export function DeleteTaskModalProvider({
-  deleteTask,
+  deleteEntity,
   children,
-}: DeleteTaskModalProviderProps) {
-  const [state, setState] = useState<TaskModalState>(() => ({
-    taskId: 0,
-    taskTitle: "",
-    isOpen: false,
-  }));
-
-  const contextValue = useMemo(
-    () => ({
-      state,
-      setState,
-    }),
-    [state, setState],
-  );
+}: DeleteModalProviderProps<number[]>) {
+  const contextValue = useDeleteModalContextState<number>();
+  const { state, setState } = contextValue;
 
   return (
     <DeleteTaskModalContext.Provider value={contextValue}>
       {children}
 
       <DeleteTaskModal
-        taskId={state.taskId}
-        taskTitle={state.taskTitle}
+        taskId={state.entityId || 0}
+        taskTitle={state.entityName}
         isOpen={state.isOpen}
-        onOpenChange={() => setState((prev) => ({ ...prev, isOpen: false }))}
-        deleteTask={deleteTask}
+        onOpenChange={(isOpen) => setState((prev) => ({ ...prev, isOpen }))}
+        deleteTask={deleteEntity}
       />
     </DeleteTaskModalContext.Provider>
   );

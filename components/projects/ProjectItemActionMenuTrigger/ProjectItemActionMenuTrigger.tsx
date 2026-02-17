@@ -63,8 +63,8 @@ export function ProjectItemActionMenuTrigger({
     } else if (action === "delete") {
       setState({
         isOpen: true,
-        projectId,
-        projectTitle,
+        entityId: projectId,
+        entityName: projectTitle,
       });
     } else {
       startTransition(() => {

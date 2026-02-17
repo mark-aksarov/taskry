@@ -4,7 +4,7 @@ import { DeleteCustomerModalProvider } from "../DeleteCustomerModalContext";
 export const withDeleteCustomerModalProvider: Decorator = (Story) => {
   return (
     <DeleteCustomerModalProvider
-      deleteCustomer={() =>
+      deleteEntity={() =>
         new Promise((res) => setTimeout(() => res({ status: "success" }), 500))
       }
     >

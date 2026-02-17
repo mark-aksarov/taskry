@@ -4,7 +4,7 @@ import { DeleteTaskCategoryModalProvider } from "../DeleteTaskCategoryModalConte
 export const withDeleteTaskCategoryModalProvider: Decorator = (Story) => {
   return (
     <DeleteTaskCategoryModalProvider
-      deleteTaskCategories={() => ({ status: "success" })}
+      deleteEntity={() => ({ status: "success" })}
     >
       <Story />
     </DeleteTaskCategoryModalProvider>

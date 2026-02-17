@@ -1,65 +1,35 @@
 "use client";
 
 import {
-  useMemo,
-  useState,
-  Dispatch,
-  createContext,
-  SetStateAction,
-  useContext,
-} from "react";
+  DeleteModalContextType,
+  DeleteModalProviderProps,
+  useDeleteModalContextState,
+} from "@/components/common/BaseDeleteModal";
 
-import { ActionFn, ActionState } from "@/lib/actions/types";
-
+import { createContext, useContext } from "react";
 import { DeleteCompanyModal } from "./DeleteCompanyModal";
 
-interface DeleteCompanyModalContextType {
-  state: CompanyModalState;
-  setState: Dispatch<SetStateAction<CompanyModalState>>;
-}
-
 const DeleteCompanyModalContext =
-  createContext<DeleteCompanyModalContextType | null>(null);
-
-interface CompanyModalState {
-  companyId: number;
-  companyName: string;
-  isOpen: boolean;
-}
-
-interface DeleteCompanyModalProviderProps {
-  deleteCompanies: ActionFn<ActionState, number[]>;
-  children: React.ReactNode;
-}
+  createContext<DeleteModalContextType<number> | null>(null);
 
 export function DeleteCompanyModalProvider({
-  deleteCompanies,
+  deleteEntity,
   children,
-}: DeleteCompanyModalProviderProps) {
-  const [state, setState] = useState<CompanyModalState>(() => ({
-    companyId: 0,
-    companyName: "",
-    isOpen: false,
-  }));
+}: DeleteModalProviderProps<number[]>) {
+  const contextValue = useDeleteModalContextState<number>();
 
-  const contextValue = useMemo(
-    () => ({
-      state,
-      setState,
-    }),
-    [state, setState],
-  );
+  const { state, setState } = contextValue;
 
   return (
     <DeleteCompanyModalContext.Provider value={contextValue}>
       {children}
 
       <DeleteCompanyModal
-        companyId={state.companyId}
-        companyName={state.companyName}
+        companyId={state.entityId || 0}
+        companyName={state.entityName}
         isOpen={state.isOpen}
-        onOpenChange={() => setState((prev) => ({ ...prev, isOpen: false }))}
-        deleteCompanies={deleteCompanies}
+        onOpenChange={(isOpen) => setState((prev) => ({ ...prev, isOpen }))}
+        deleteCompanies={deleteEntity}
       />
     </DeleteCompanyModalContext.Provider>
   );

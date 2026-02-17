@@ -1,66 +1,34 @@
 "use client";
 
 import {
-  useMemo,
-  useState,
-  Dispatch,
-  createContext,
-  SetStateAction,
-  useContext,
-} from "react";
+  DeleteModalContextType,
+  DeleteModalProviderProps,
+  useDeleteModalContextState,
+} from "@/components/common/BaseDeleteModal";
 
-import { ActionFn, ActionState } from "@/lib/actions/types";
-
+import { createContext, useContext } from "react";
 import { DeleteUserModal } from "./DeleteUserModal";
 
-interface DeleteUserModalContextType {
-  state: UserModalState;
-  setState: Dispatch<SetStateAction<UserModalState>>;
-}
-
-const DeleteUserModalContext = createContext<DeleteUserModalContextType | null>(
-  null,
-);
-
-interface UserModalState {
-  userId: string;
-  userFullName: string;
-  isOpen: boolean;
-}
-
-interface DeleteUserModalProviderProps {
-  deleteUser: ActionFn<ActionState, string>;
-  children: React.ReactNode;
-}
+const DeleteUserModalContext =
+  createContext<DeleteModalContextType<string> | null>(null);
 
 export function DeleteUserModalProvider({
-  deleteUser,
+  deleteEntity,
   children,
-}: DeleteUserModalProviderProps) {
-  const [state, setState] = useState<UserModalState>(() => ({
-    userId: "",
-    userFullName: "",
-    isOpen: false,
-  }));
-
-  const contextValue = useMemo(
-    () => ({
-      state,
-      setState,
-    }),
-    [state, setState],
-  );
+}: DeleteModalProviderProps<string>) {
+  const contextValue = useDeleteModalContextState<string>();
+  const { state, setState } = contextValue;
 
   return (
     <DeleteUserModalContext.Provider value={contextValue}>
       {children}
 
       <DeleteUserModal
-        userId={state.userId}
-        userFullName={state.userFullName}
+        userId={state.entityId || ""}
+        userFullName={state.entityName}
         isOpen={state.isOpen}
-        onOpenChange={() => setState((prev) => ({ ...prev, isOpen: false }))}
-        deleteUser={deleteUser}
+        onOpenChange={(isOpen) => setState((prev) => ({ ...prev, isOpen }))}
+        deleteUser={deleteEntity}
       />
     </DeleteUserModalContext.Provider>
   );

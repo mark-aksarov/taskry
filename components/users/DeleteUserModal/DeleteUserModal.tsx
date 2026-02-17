@@ -8,16 +8,12 @@ import {
   ConfirmModalConfirmButton,
 } from "@/components/common/ConfirmModal";
 
+import { startTransition } from "react";
 import { useTranslations } from "next-intl";
 import { ModalProps } from "@/components/ui/Modal";
 import { DialogHeading } from "@/components/ui/Dialog";
-import { startTransition, useActionState } from "react";
 import { ActionFn, ActionState } from "@/lib/actions/types";
-import { useErrorToast } from "@/lib/hooks/useErrorToast";
-
-const initialState: ActionState = {
-  status: null,
-};
+import { useDeleteModalActionState } from "@/components/common/BaseDeleteModal";
 
 interface DeleteUserModalProps extends ModalProps {
   userId: string;
@@ -35,30 +31,10 @@ export function DeleteUserModal({
 }: DeleteUserModalProps) {
   const t = useTranslations("users.DeleteUserModal");
 
-  // show error toast when delete action fails
-  const { close: closeErrorToast, add: addErrorToast } = useErrorToast();
-
-  const [_, action, isPending] = useActionState(
-    async (prevState: ActionState, payload: string) => {
-      // call server action to perform delete action
-      const newState = await deleteUser(prevState, payload);
-
-      // close error toast
-      closeErrorToast();
-
-      // close modal
-      if (newState.status === "success") {
-        onOpenChange?.(false);
-      }
-      // show error toast
-      else if (newState.status === "error" && newState.message) {
-        addErrorToast(newState.message);
-      }
-
-      return newState;
-    },
-    initialState,
-  );
+  const [_, action, isPending] = useDeleteModalActionState<string>({
+    deleteEntity: deleteUser,
+    onOpenChange,
+  });
 
   const handleDelete = () => {
     startTransition(() => action(userId));

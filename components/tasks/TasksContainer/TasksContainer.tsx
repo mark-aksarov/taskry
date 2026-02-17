@@ -10,6 +10,7 @@ import { TaskCommentsModal } from "../TaskCommentsModal";
 import { TaskListItemDTO } from "@/lib/data/task/task.dto";
 import { deleteTasks } from "@/lib/actions/task/deleteTasks";
 import { TaskDetailContainer } from "../TaskDetailContainer";
+import { DeleteTaskModalProvider } from "../DeleteTaskModal";
 import { sendComment } from "@/lib/actions/comment/sendComment";
 import { EditTaskFormContainer } from "../EditTaskFormContainer";
 import { TaskCommentsContainer } from "../TaskCommentsContainer";
@@ -21,7 +22,6 @@ import { UserDetailContainer } from "@/components/users/UserDetailContainer";
 import { ProjectDetailModal } from "@/components/projects/ProjectDetailModal";
 import { ProjectDetailContainer } from "@/components/projects/ProjectDetailContainer";
 import { EntityContainerPresentation } from "@/components/common/EntityContainerPresentation";
-import { DeleteTaskModalProvider } from "../DeleteTaskModal";
 
 interface TasksContainerProps {
   tasks: TaskListItemDTO[];
@@ -49,7 +49,7 @@ export async function TasksContainer({
   const guestMode = await hasGuestRole();
 
   return (
-    <DeleteTaskModalProvider deleteTask={deleteTasks}>
+    <DeleteTaskModalProvider deleteEntity={deleteTasks}>
       <EntityContainerPresentation
         list={
           <TaskList showCheckbox>

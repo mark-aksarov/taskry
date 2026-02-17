@@ -1,69 +1,35 @@
 "use client";
 
 import {
-  useMemo,
-  useState,
-  Dispatch,
-  createContext,
-  SetStateAction,
-  useContext,
-} from "react";
+  DeleteModalContextType,
+  DeleteModalProviderProps,
+  useDeleteModalContextState,
+} from "@/components/common/BaseDeleteModal";
 
-import {
-  ActionFn,
-  ActionState,
-  DeleteCustomersPayload,
-} from "@/lib/actions/types";
-
+import { createContext, useContext } from "react";
 import { DeleteCustomerModal } from "./DeleteCustomerModal";
 
-interface DeleteCustomerModalContextType {
-  state: CustomerModalState;
-  setState: Dispatch<SetStateAction<CustomerModalState>>;
-}
-
 const DeleteCustomerModalContext =
-  createContext<DeleteCustomerModalContextType | null>(null);
-
-interface CustomerModalState {
-  customerId: number;
-  customerFullName: string;
-  isOpen: boolean;
-}
-
-interface DeleteCustomerModalProviderProps {
-  deleteCustomer: ActionFn<ActionState, DeleteCustomersPayload>;
-  children: React.ReactNode;
-}
+  createContext<DeleteModalContextType<number> | null>(null);
 
 export function DeleteCustomerModalProvider({
-  deleteCustomer,
+  deleteEntity,
   children,
-}: DeleteCustomerModalProviderProps) {
-  const [state, setState] = useState<CustomerModalState>(() => ({
-    customerId: 0,
-    customerFullName: "",
-    isOpen: false,
-  }));
+}: DeleteModalProviderProps<number[]>) {
+  const contextValue = useDeleteModalContextState<number>();
 
-  const contextValue = useMemo(
-    () => ({
-      state,
-      setState,
-    }),
-    [state, setState],
-  );
+  const { state, setState } = contextValue;
 
   return (
     <DeleteCustomerModalContext.Provider value={contextValue}>
       {children}
 
       <DeleteCustomerModal
-        customerId={state.customerId}
-        customerFullName={state.customerFullName}
+        customerId={state.entityId || 0}
+        customerFullName={state.entityName}
         isOpen={state.isOpen}
-        onOpenChange={() => setState((prev) => ({ ...prev, isOpen: false }))}
-        deleteCustomer={deleteCustomer}
+        onOpenChange={(isOpen) => setState((prev) => ({ ...prev, isOpen }))}
+        deleteCustomer={deleteEntity}
       />
     </DeleteCustomerModalContext.Provider>
   );

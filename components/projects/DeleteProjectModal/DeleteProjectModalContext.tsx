@@ -1,65 +1,35 @@
 "use client";
 
 import {
-  useMemo,
-  useState,
-  Dispatch,
-  createContext,
-  SetStateAction,
-  useContext,
-} from "react";
+  DeleteModalContextType,
+  DeleteModalProviderProps,
+  useDeleteModalContextState,
+} from "@/components/common/BaseDeleteModal";
 
-import { ActionFn, ActionState } from "@/lib/actions/types";
-
+import { createContext, useContext } from "react";
 import { DeleteProjectModal } from "./DeleteProjectModal";
 
-interface DeleteProjectModalContextType {
-  state: ProjectModalState;
-  setState: Dispatch<SetStateAction<ProjectModalState>>;
-}
-
 const DeleteProjectModalContext =
-  createContext<DeleteProjectModalContextType | null>(null);
-
-interface ProjectModalState {
-  projectId: number;
-  projectTitle: string;
-  isOpen: boolean;
-}
-
-interface DeleteProjectModalProviderProps {
-  deleteProjects: ActionFn<ActionState, number[]>;
-  children: React.ReactNode;
-}
+  createContext<DeleteModalContextType<number> | null>(null);
 
 export function DeleteProjectModalProvider({
-  deleteProjects,
+  deleteEntity,
   children,
-}: DeleteProjectModalProviderProps) {
-  const [state, setState] = useState<ProjectModalState>(() => ({
-    projectId: 0,
-    projectTitle: "",
-    isOpen: false,
-  }));
+}: DeleteModalProviderProps<number[]>) {
+  const contextValue = useDeleteModalContextState<number>();
 
-  const contextValue = useMemo(
-    () => ({
-      state,
-      setState,
-    }),
-    [state, setState],
-  );
+  const { state, setState } = contextValue;
 
   return (
     <DeleteProjectModalContext.Provider value={contextValue}>
       {children}
 
       <DeleteProjectModal
-        projectId={state.projectId}
-        projectTitle={state.projectTitle}
+        projectId={state.entityId || 0}
+        projectTitle={state.entityName}
         isOpen={state.isOpen}
-        onOpenChange={() => setState((prev) => ({ ...prev, isOpen: false }))}
-        deleteProjects={deleteProjects}
+        onOpenChange={(isOpen) => setState((prev) => ({ ...prev, isOpen }))}
+        deleteProjects={deleteEntity}
       />
     </DeleteProjectModalContext.Provider>
   );
