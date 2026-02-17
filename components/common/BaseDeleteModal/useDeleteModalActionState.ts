@@ -8,12 +8,14 @@ const initialState: ActionState = {
 
 interface useDeleteModalActionStateProps<TPayload> {
   deleteEntity: ActionFn<ActionState, TPayload>;
-  onOpenChange: ((isOpen: boolean) => void) | undefined;
+  onOpenChange?: ((isOpen: boolean) => void) | undefined;
+  onSuccess?: () => void;
 }
 
 export function useDeleteModalActionState<TPayload>({
   deleteEntity,
   onOpenChange,
+  onSuccess,
 }: useDeleteModalActionStateProps<TPayload>) {
   // show error toast when delete action fails
   const { close: closeErrorToast, add: addErrorToast } = useErrorToast();
@@ -28,6 +30,7 @@ export function useDeleteModalActionState<TPayload>({
     // close modal
     if (newState.status === "success") {
       onOpenChange?.(false);
+      onSuccess?.();
     }
     // show error toast
     else if (newState.status === "error" && newState.message) {

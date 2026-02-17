@@ -10,18 +10,15 @@ import { useState } from "react";
 import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
 import { Pencil, Trash } from "lucide-react";
-import { DeleteCommentModal } from "../DeleteCommentModal";
-import { ActionFn, ActionState } from "@/lib/actions/types";
 import { useCommentFormContext } from "../CommentFormContext";
 import { GuestModeModal } from "@/components/common/GuestModeModal";
+import { useDeleteCommentModal } from "../DeleteCommentModal";
 
 export type CommentItemActionMenuTriggerProps = {
   guestMode: boolean;
   commentId: number;
   commentContent: string;
   className?: string;
-  deleteAction: ActionFn<ActionState, number>;
-  mutate: () => void;
 };
 
 export function CommentItemActionMenuTrigger({
@@ -29,8 +26,6 @@ export function CommentItemActionMenuTrigger({
   commentId,
   commentContent,
   className,
-  deleteAction,
-  mutate,
 }: CommentItemActionMenuTriggerProps) {
   const { setEditCommentId, setCommentContent } = useCommentFormContext();
 
@@ -40,7 +35,7 @@ export function CommentItemActionMenuTrigger({
   const [isGuestModeModalOpen, setIsGuestModeModalOpen] = useState(false);
 
   // Delete State
-  const [isOpenDeleteModal, setIsOpenDeleteModal] = useState(false);
+  const { setState: setDeleteCommentModalState } = useDeleteCommentModal();
 
   function handleAction(key: Key) {
     if (guestMode) {
@@ -53,7 +48,11 @@ export function CommentItemActionMenuTrigger({
       setEditCommentId(commentId);
       setCommentContent(commentContent);
     } else if (action === "delete") {
-      setIsOpenDeleteModal(true);
+      setDeleteCommentModalState({
+        isOpen: true,
+        entityId: commentId,
+        entityName: "",
+      });
     }
   }
 
@@ -76,14 +75,6 @@ export function CommentItemActionMenuTrigger({
           <Trash size={16} /> {t("delete")}
         </Item>
       </ItemBaseActionMenuTrigger>
-
-      <DeleteCommentModal
-        commentId={commentId}
-        isOpen={isOpenDeleteModal}
-        onOpenChange={setIsOpenDeleteModal}
-        deleteAction={deleteAction}
-        mutate={mutate}
-      />
 
       <GuestModeModal
         isOpen={isGuestModeModalOpen}

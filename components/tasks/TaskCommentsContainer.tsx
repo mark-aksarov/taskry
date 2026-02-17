@@ -12,6 +12,7 @@ import { CommentListItemDTO } from "@/lib/data/comment/comment.dto";
 import { deleteComment } from "@/lib/actions/comment/deleteComment";
 import { CommentItemActionMenuTrigger } from "../comments/CommentItem";
 import { CommentsEmptySection } from "@/components/comments/CommentsEmptySection";
+import { DeleteCommentModalProvider } from "../comments/DeleteCommentModal";
 
 interface TaskCommentsContainerProps {
   guestMode: boolean;
@@ -50,7 +51,7 @@ function TaskCommentsContainerInner({
   }
 
   return (
-    <>
+    <DeleteCommentModalProvider deleteEntity={deleteComment} mutate={mutate}>
       {comments.map((comment) => {
         return (
           <CommentItem
@@ -64,14 +65,12 @@ function TaskCommentsContainerInner({
                   guestMode={guestMode}
                   commentId={comment.id}
                   commentContent={comment.content}
-                  deleteAction={deleteComment}
-                  mutate={mutate}
                 />
               )
             }
           />
         );
       })}
-    </>
+    </DeleteCommentModalProvider>
   );
 }

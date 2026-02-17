@@ -4,11 +4,16 @@ import { CommentItemActionMenuTriggerStory } from "./index";
 import { withCommentFormProvider } from "../../withCommentFormProvider";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { CommentItemActionMenuTrigger } from "../CommentItemActionMenuTrigger";
+import { withDeleteCommentModalProvider } from "../../DeleteCommentModal/__stories__";
 
 const meta = {
   title: "components/comments/CommentItem",
   component: CommentItem,
-  decorators: [withCommentFormProvider, withThemedBackground],
+  decorators: [
+    withCommentFormProvider,
+    withDeleteCommentModalProvider,
+    withThemedBackground,
+  ],
   parameters: {
     backgroundVariant: "alt",
   },

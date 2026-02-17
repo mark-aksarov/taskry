@@ -78,8 +78,6 @@ export function MockedCommentsContainer() {
               guestMode={false}
               commentId={comment.id}
               commentContent={comment.content}
-              deleteAction={() => ({ status: "success" })}
-              mutate={() => {}}
             />
           }
         />

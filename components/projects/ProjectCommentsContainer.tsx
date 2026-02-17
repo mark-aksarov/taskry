@@ -11,6 +11,7 @@ import { Repeat } from "../common/Repeat";
 import { CommentListItemDTO } from "@/lib/data/comment/comment.dto";
 import { deleteComment } from "@/lib/actions/comment/deleteComment";
 import { CommentItemActionMenuTrigger } from "../comments/CommentItem";
+import { DeleteCommentModalProvider } from "../comments/DeleteCommentModal";
 import { CommentsEmptySection } from "@/components/comments/CommentsEmptySection";
 
 interface ProjectCommentsContainerProps {
@@ -52,7 +53,7 @@ function ProjectCommentsContainerInner({
   }
 
   return (
-    <>
+    <DeleteCommentModalProvider deleteEntity={deleteComment} mutate={mutate}>
       {comments.map((comment) => {
         return (
           <CommentItem
@@ -66,14 +67,12 @@ function ProjectCommentsContainerInner({
                   guestMode={guestMode}
                   commentId={comment.id}
                   commentContent={comment.content}
-                  deleteAction={deleteComment}
-                  mutate={mutate}
                 />
               )
             }
           />
         );
       })}
-    </>
+    </DeleteCommentModalProvider>
   );
 }

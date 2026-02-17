@@ -8,21 +8,17 @@ import {
   ConfirmModalConfirmButton,
 } from "@/components/common/ConfirmModal";
 
+import { startTransition } from "react";
 import { useTranslations } from "next-intl";
 import { DialogHeading } from "@/components/ui/Dialog";
 import { ActionFn, ActionState } from "@/lib/actions/types";
-import { startTransition, useActionState, useEffect } from "react";
-import { useActionErrorToast } from "@/lib/hooks/useActionErrorToast";
-
-const initialState: ActionState = {
-  status: null,
-};
+import { useDeleteModalActionState } from "@/components/common/BaseDeleteModal";
 
 interface DeleteCommentModalProps {
   commentId: number;
   isOpen: boolean;
   onOpenChange: (isOpen: boolean) => void;
-  deleteAction: ActionFn<ActionState, number>;
+  deleteComment: ActionFn<ActionState, number>;
   mutate: () => void;
 }
 
@@ -30,24 +26,20 @@ export function DeleteCommentModal({
   commentId,
   isOpen,
   onOpenChange,
-  deleteAction,
+  deleteComment,
   mutate,
 }: DeleteCommentModalProps) {
   const t = useTranslations("comments.DeleteCommentModal");
-  const [state, action] = useActionState(deleteAction, initialState);
+
+  const [_, action, isPending] = useDeleteModalActionState<number>({
+    deleteEntity: deleteComment,
+    onOpenChange,
+    onSuccess: mutate,
+  });
 
   const handleDelete = () => {
     startTransition(() => action(commentId));
-    onOpenChange(false);
   };
-
-  useEffect(() => {
-    if (state.status === "success") {
-      mutate();
-    }
-  }, [state, mutate]);
-
-  useActionErrorToast(state);
 
   return (
     <ConfirmModal
@@ -63,6 +55,7 @@ export function DeleteCommentModal({
           label={t("confirmButton")}
           onConfirm={handleDelete}
           data-test="delete-comment-modal-confirm-button"
+          isPending={isPending}
         />
       </ConfirmModalActions>
     </ConfirmModal>

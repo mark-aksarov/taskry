@@ -1,16 +1,21 @@
-import React from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/Button";
-import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { DeleteCommentModal } from "./DeleteCommentModal";
+import { Meta, StoryObj } from "@storybook/react";
+import { DeleteCommentModal } from "../DeleteCommentModal";
 import { withToastRegion } from "@/.storybook/withToastRegion";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { withDeleteCommentModalProvider } from "./withDeleteCommentModalProvider";
 
 const meta = {
-  title: "components/comments/DeleteCommentModal",
+  title: "components/companies/DeleteCommentModal",
   component: DeleteCommentModal,
-  decorators: [withToastRegion, withThemedBackground],
+  decorators: [
+    withToastRegion,
+    withDeleteCommentModalProvider,
+    withThemedBackground,
+  ],
   render: (args) => {
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = useState(false);
 
     return (
       <>
@@ -22,7 +27,7 @@ const meta = {
 } satisfies Meta<typeof DeleteCommentModal>;
 
 export default meta;
-type Story = StoryObj<typeof meta>;
+export type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {

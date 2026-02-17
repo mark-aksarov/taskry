@@ -2,11 +2,16 @@ import { Meta, StoryObj } from "@storybook/react";
 import { withCommentFormProvider } from "../../withCommentFormProvider";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { CommentItemActionMenuTrigger } from "../CommentItemActionMenuTrigger";
+import { withDeleteCommentModalProvider } from "../../DeleteCommentModal/__stories__";
 
 const meta = {
   title: "components/comments/CommentItemActionMenuTrigger",
   component: CommentItemActionMenuTrigger,
-  decorators: [withCommentFormProvider, withThemedBackground],
+  decorators: [
+    withCommentFormProvider,
+    withDeleteCommentModalProvider,
+    withThemedBackground,
+  ],
   parameters: {
     backgroundVariant: "alt",
   },
@@ -20,7 +25,5 @@ export const Default = {
     guestMode: false,
     commentId: 1,
     commentContent: "Comment content",
-    deleteAction: () => ({ status: "success" }),
-    mutate: () => {},
   },
 } satisfies Story;
