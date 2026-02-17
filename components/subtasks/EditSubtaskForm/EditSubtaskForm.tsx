@@ -7,13 +7,13 @@ import {
   FormBaseSubmitButton,
 } from "@/components/common/FormBase";
 
+import { useActionState } from "react";
 import { useTranslations } from "next-intl";
-import { useActionState, useEffect } from "react";
 import { SubtaskTextField } from "../SubtaskTextField";
 import { ActionFn, ActionState } from "@/lib/actions/types";
+import { useCloseOverlay } from "@/lib/hooks/useCloseOverlay";
 import { handleActionSubmit } from "@/lib/utils/handleActionSubmit";
 import { FormErrorBanner } from "@/components/common/FormErrorBanner";
-import { useCloseOverlayOnActionSuccess } from "@/lib/hooks/useCloseOverlayOnActionSuccess";
 
 const initialState: ActionState = {
   status: null,
@@ -36,18 +36,23 @@ export function EditSubtaskForm({
 }: EditSubtaskFormProps) {
   const t = useTranslations("subtasks.EditSubtaskForm");
 
+  const closeModal = useCloseOverlay();
+
   const [state, action, isPending] = useActionState(
-    updateSubtask,
+    async (prevState: ActionState, payload: FormData) => {
+      // call server action to perform edit subtask action
+      const newState = await updateSubtask(prevState, payload);
+
+      // call swr mutate to refresh subtasks and close modal
+      if (newState.status === "success") {
+        closeModal();
+        mutate?.();
+      }
+
+      return newState;
+    },
     initialState,
   );
-
-  useEffect(() => {
-    if (state.status === "success" && mutate) {
-      mutate();
-    }
-  }, [state, mutate]);
-
-  useCloseOverlayOnActionSuccess(state);
 
   return (
     <FormBase
