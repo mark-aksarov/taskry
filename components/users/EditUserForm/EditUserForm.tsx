@@ -5,10 +5,10 @@ import {
   FormBaseBody,
   FormBaseFooter,
   FormBaseSubmitButton,
+  useFormBaseActionState,
 } from "@/components/common/FormBase";
 
 import { DateValue } from "react-aria";
-import { useActionState } from "react";
 import { useTranslations } from "next-intl";
 import { UserBioTextField } from "../UserBioTextField";
 import { ActionFn, ActionState } from "@/lib/actions/types";
@@ -19,11 +19,6 @@ import { UserBirthdateDatePicker } from "../UserBirthdateDatePicker";
 import { UserPublicLinkTextField } from "../UserPublicLinkTextField";
 import { FormErrorBanner } from "@/components/common/FormErrorBanner";
 import { UserPhoneNumberTextField } from "../UserPhoneNumberTextField";
-import { useCloseOverlayOnActionSuccess } from "@/lib/hooks/useCloseOverlayOnActionSuccess";
-
-const initialState: ActionState = {
-  status: null,
-};
 
 interface EditUserFormProps {
   userId: string;
@@ -51,9 +46,7 @@ export function EditUserForm({
 }: EditUserFormProps) {
   const t = useTranslations("users.EditUserForm");
 
-  const [state, action, isPending] = useActionState(updateUser, initialState);
-
-  useCloseOverlayOnActionSuccess(state);
+  const [state, action, isPending] = useFormBaseActionState(updateUser);
 
   return (
     <FormBase

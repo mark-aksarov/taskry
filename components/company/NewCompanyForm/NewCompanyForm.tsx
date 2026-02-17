@@ -5,19 +5,14 @@ import {
   FormBaseBody,
   FormBaseFooter,
   FormBaseSubmitButton,
+  useFormBaseActionState,
 } from "@/components/common/FormBase";
 
-import { useActionState } from "react";
 import { useTranslations } from "next-intl";
 import { ActionFn, ActionState } from "@/lib/actions/types";
 import { CompanyNameTextField } from "../CompanyNameTextField";
 import { handleActionSubmit } from "@/lib/utils/handleActionSubmit";
-import { useCloseOverlayOnActionSuccess } from "@/lib/hooks/useCloseOverlayOnActionSuccess";
 import { FormErrorBanner } from "@/components/common/FormErrorBanner";
-
-const initialState: ActionState = {
-  status: null,
-};
 
 interface NewCompanyFormProps {
   createCompany: ActionFn<ActionState, FormData>;
@@ -26,12 +21,7 @@ interface NewCompanyFormProps {
 export function NewCompanyForm({ createCompany }: NewCompanyFormProps) {
   const t = useTranslations("company.NewCompanyForm");
 
-  const [state, action, isPending] = useActionState(
-    createCompany,
-    initialState,
-  );
-
-  useCloseOverlayOnActionSuccess(state);
+  const [state, action, isPending] = useFormBaseActionState(createCompany);
 
   return (
     <FormBase

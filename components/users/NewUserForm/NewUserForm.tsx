@@ -5,9 +5,9 @@ import {
   FormBaseBody,
   FormBaseFooter,
   FormBaseSubmitButton,
+  useFormBaseActionState,
 } from "@/components/common/FormBase";
 
-import { useActionState } from "react";
 import { useTranslations } from "next-intl";
 import { UserEmailTextField } from "../UserEmailTextField";
 import { ActionFn, ActionState } from "@/lib/actions/types";
@@ -15,11 +15,6 @@ import { UserFullNameTextField } from "../UserFullNameTextField";
 import { UserPasswordTextField } from "../UserPasswordTextField";
 import { handleActionSubmit } from "@/lib/utils/handleActionSubmit";
 import { FormErrorBanner } from "@/components/common/FormErrorBanner";
-import { useCloseOverlayOnActionSuccess } from "@/lib/hooks/useCloseOverlayOnActionSuccess";
-
-const initialState: ActionState = {
-  status: null,
-};
 
 interface NewUserFormProps {
   createUser: ActionFn<ActionState, FormData>;
@@ -28,9 +23,7 @@ interface NewUserFormProps {
 export function NewUserForm({ createUser }: NewUserFormProps) {
   const t = useTranslations("users.NewUserForm");
 
-  const [state, action, isPending] = useActionState(createUser, initialState);
-
-  useCloseOverlayOnActionSuccess(state);
+  const [state, action, isPending] = useFormBaseActionState(createUser);
 
   return (
     <FormBase

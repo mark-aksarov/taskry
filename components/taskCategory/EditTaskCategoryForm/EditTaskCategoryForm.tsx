@@ -5,19 +5,14 @@ import {
   FormBaseBody,
   FormBaseFooter,
   FormBaseSubmitButton,
+  useFormBaseActionState,
 } from "@/components/common/FormBase";
 
-import { useActionState } from "react";
 import { useTranslations } from "next-intl";
 import { ActionFn, ActionState } from "@/lib/actions/types";
 import { handleActionSubmit } from "@/lib/utils/handleActionSubmit";
 import { FormErrorBanner } from "@/components/common/FormErrorBanner";
 import { TaskCategoryNameTextField } from "../TaskCategoryNameTextField";
-import { useCloseOverlayOnActionSuccess } from "@/lib/hooks/useCloseOverlayOnActionSuccess";
-
-const initialState: ActionState = {
-  status: null,
-};
 
 interface EditTaskCategoryFormProps {
   taskCategoryId: number;
@@ -32,12 +27,7 @@ export function EditTaskCategoryForm({
 }: EditTaskCategoryFormProps) {
   const t = useTranslations("taskCategories.EditTaskCategoryForm");
 
-  const [state, action, isPending] = useActionState(
-    updateTaskCategory,
-    initialState,
-  );
-
-  useCloseOverlayOnActionSuccess(state);
+  const [state, action, isPending] = useFormBaseActionState(updateTaskCategory);
 
   return (
     <FormBase

@@ -5,10 +5,10 @@ import {
   FormBaseBody,
   FormBaseFooter,
   FormBaseSubmitButton,
+  useFormBaseActionState,
 } from "@/components/common/FormBase";
 
 import { DateValue } from "react-aria";
-import { useActionState } from "react";
 import { useTranslations } from "next-intl";
 import { ProjectStatus } from "@/generated/prisma/enums";
 import { ActionFn, ActionState } from "@/lib/actions/types";
@@ -18,11 +18,6 @@ import { handleActionSubmit } from "@/lib/utils/handleActionSubmit";
 import { FormErrorBanner } from "@/components/common/FormErrorBanner";
 import { ProjectDeadlineDatePicker } from "../ProjectDeadlineDatePicker";
 import { ProjectDescriptionTextField } from "../ProjectDescriptionTextField";
-import { useCloseOverlayOnActionSuccess } from "@/lib/hooks/useCloseOverlayOnActionSuccess";
-
-const initialState: ActionState = {
-  status: null,
-};
 
 interface EditProjectFormProps {
   projectId: number;
@@ -47,12 +42,7 @@ export function EditProjectForm({
 }: EditProjectFormProps) {
   const t = useTranslations("projects.EditProjectForm");
 
-  const [state, action, isPending] = useActionState(
-    updateProject,
-    initialState,
-  );
-
-  useCloseOverlayOnActionSuccess(state);
+  const [state, action, isPending] = useFormBaseActionState(updateProject);
 
   return (
     <FormBase

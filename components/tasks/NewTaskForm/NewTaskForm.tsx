@@ -5,9 +5,9 @@ import {
   FormBaseBody,
   FormBaseFooter,
   FormBaseSubmitButton,
+  useFormBaseActionState,
 } from "@/components/common/FormBase";
 
-import { useActionState } from "react";
 import { useTranslations } from "next-intl";
 import { TaskStatusSelect } from "../TaskStatusSelect";
 import { TaskTitleTextField } from "../TaskTitleTextField";
@@ -16,11 +16,6 @@ import { TaskDeadlineDatePicker } from "../TaskDeadlineDatePicker";
 import { handleActionSubmit } from "@/lib/utils/handleActionSubmit";
 import { FormErrorBanner } from "@/components/common/FormErrorBanner";
 import { TaskDescriptionTextField } from "../TaskDescriptionTextField";
-import { useCloseOverlayOnActionSuccess } from "@/lib/hooks/useCloseOverlayOnActionSuccess";
-
-const initialState: ActionState = {
-  status: null,
-};
 
 interface NewTaskFormProps {
   taskCategorySelect: React.ReactNode;
@@ -37,9 +32,7 @@ export function NewTaskForm({
 }: NewTaskFormProps) {
   const t = useTranslations("tasks.NewTaskForm");
 
-  const [state, action, isPending] = useActionState(createTask, initialState);
-
-  useCloseOverlayOnActionSuccess(state);
+  const [state, action, isPending] = useFormBaseActionState(createTask);
 
   return (
     <FormBase

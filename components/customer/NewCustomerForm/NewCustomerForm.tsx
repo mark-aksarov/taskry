@@ -5,9 +5,9 @@ import {
   FormBaseBody,
   FormBaseFooter,
   FormBaseSubmitButton,
+  useFormBaseActionState,
 } from "@/components/common/FormBase";
 
-import { useActionState } from "react";
 import { useTranslations } from "next-intl";
 import { ActionFn, ActionState } from "@/lib/actions/types";
 import { CustomerBioTextField } from "../CustomerBioTextField";
@@ -17,11 +17,6 @@ import { FormErrorBanner } from "@/components/common/FormErrorBanner";
 import { CustomerFullNameTextField } from "../CustomerFullNameTextField";
 import { CustomerPublicLinkTextField } from "../CustomerPublicLinkTextField";
 import { CustomerPhoneNumberTextField } from "../CustomerPhoneNumberTextField";
-import { useCloseOverlayOnActionSuccess } from "@/lib/hooks/useCloseOverlayOnActionSuccess";
-
-const initialState: ActionState = {
-  status: null,
-};
 
 interface NewCustomerFormProps {
   companySelect: React.ReactNode;
@@ -34,12 +29,7 @@ export function NewCustomerForm({
 }: NewCustomerFormProps) {
   const t = useTranslations("customers.NewCustomerForm");
 
-  const [state, action, isPending] = useActionState(
-    createCustomer,
-    initialState,
-  );
-
-  useCloseOverlayOnActionSuccess(state);
+  const [state, action, isPending] = useFormBaseActionState(createCustomer);
 
   return (
     <FormBase

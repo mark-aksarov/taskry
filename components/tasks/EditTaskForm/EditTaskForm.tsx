@@ -5,9 +5,9 @@ import {
   FormBaseBody,
   FormBaseFooter,
   FormBaseSubmitButton,
+  useFormBaseActionState,
 } from "@/components/common/FormBase";
 
-import { useActionState } from "react";
 import { DateValue } from "react-aria";
 import { useTranslations } from "next-intl";
 import { TaskStatus } from "@/generated/prisma/enums";
@@ -18,11 +18,6 @@ import { TaskDeadlineDatePicker } from "../TaskDeadlineDatePicker";
 import { handleActionSubmit } from "@/lib/utils/handleActionSubmit";
 import { FormErrorBanner } from "@/components/common/FormErrorBanner";
 import { TaskDescriptionTextField } from "../TaskDescriptionTextField";
-import { useCloseOverlayOnActionSuccess } from "@/lib/hooks/useCloseOverlayOnActionSuccess";
-
-const initialState: ActionState = {
-  status: null,
-};
 
 interface EditTaskFormProps {
   taskId: number;
@@ -49,9 +44,7 @@ export function EditTaskForm({
 }: EditTaskFormProps) {
   const t = useTranslations("tasks.EditTaskForm");
 
-  const [state, action, isPending] = useActionState(updateTask, initialState);
-
-  useCloseOverlayOnActionSuccess(state);
+  const [state, action, isPending] = useFormBaseActionState(updateTask);
 
   return (
     <FormBase

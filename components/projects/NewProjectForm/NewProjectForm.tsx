@@ -5,9 +5,9 @@ import {
   FormBaseBody,
   FormBaseFooter,
   FormBaseSubmitButton,
+  useFormBaseActionState,
 } from "@/components/common/FormBase";
 
-import { useActionState } from "react";
 import { useTranslations } from "next-intl";
 import { ActionFn, ActionState } from "@/lib/actions/types";
 import { ProjectStatusSelect } from "../ProjectStatusSelect";
@@ -16,11 +16,6 @@ import { handleActionSubmit } from "@/lib/utils/handleActionSubmit";
 import { FormErrorBanner } from "@/components/common/FormErrorBanner";
 import { ProjectDeadlineDatePicker } from "../ProjectDeadlineDatePicker";
 import { ProjectDescriptionTextField } from "../ProjectDescriptionTextField";
-import { useCloseOverlayOnActionSuccess } from "@/lib/hooks/useCloseOverlayOnActionSuccess";
-
-const initialState: ActionState = {
-  status: null,
-};
 
 interface NewProjectFormProps {
   projectCategorySelect: React.ReactNode;
@@ -35,12 +30,7 @@ export function NewProjectForm({
 }: NewProjectFormProps) {
   const t = useTranslations("projects.NewProjectForm");
 
-  const [state, action, isPending] = useActionState(
-    createProject,
-    initialState,
-  );
-
-  useCloseOverlayOnActionSuccess(state);
+  const [state, action, isPending] = useFormBaseActionState(createProject);
 
   return (
     <FormBase

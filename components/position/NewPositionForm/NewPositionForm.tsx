@@ -5,19 +5,14 @@ import {
   FormBaseBody,
   FormBaseFooter,
   FormBaseSubmitButton,
+  useFormBaseActionState,
 } from "@/components/common/FormBase";
 
-import { useActionState } from "react";
 import { useTranslations } from "next-intl";
 import { ActionFn, ActionState } from "@/lib/actions/types";
 import { PositionNameTextField } from "../PositionNameTextField";
 import { handleActionSubmit } from "@/lib/utils/handleActionSubmit";
 import { FormErrorBanner } from "@/components/common/FormErrorBanner";
-import { useCloseOverlayOnActionSuccess } from "@/lib/hooks/useCloseOverlayOnActionSuccess";
-
-const initialState: ActionState = {
-  status: null,
-};
 
 interface NewPositionFormProps {
   createPosition: ActionFn<ActionState, FormData>;
@@ -26,12 +21,7 @@ interface NewPositionFormProps {
 export function NewPositionForm({ createPosition }: NewPositionFormProps) {
   const t = useTranslations("positions.NewPositionForm");
 
-  const [state, action, isPending] = useActionState(
-    createPosition,
-    initialState,
-  );
-
-  useCloseOverlayOnActionSuccess(state);
+  const [state, action, isPending] = useFormBaseActionState(createPosition);
 
   return (
     <FormBase

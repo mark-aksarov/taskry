@@ -5,19 +5,14 @@ import {
   FormBaseBody,
   FormBaseFooter,
   FormBaseSubmitButton,
+  useFormBaseActionState,
 } from "@/components/common/FormBase";
 
-import { useActionState } from "react";
 import { useTranslations } from "next-intl";
 import { ActionFn, ActionState } from "@/lib/actions/types";
+import { PositionNameTextField } from "../PositionNameTextField";
 import { handleActionSubmit } from "@/lib/utils/handleActionSubmit";
 import { FormErrorBanner } from "@/components/common/FormErrorBanner";
-import { PositionNameTextField } from "../PositionNameTextField";
-import { useCloseOverlayOnActionSuccess } from "@/lib/hooks/useCloseOverlayOnActionSuccess";
-
-const initialState: ActionState = {
-  status: null,
-};
 
 interface EditPositionFormProps {
   positionId: number;
@@ -32,12 +27,7 @@ export function EditPositionForm({
 }: EditPositionFormProps) {
   const t = useTranslations("positions.EditPositionForm");
 
-  const [state, action, isPending] = useActionState(
-    updatePosition,
-    initialState,
-  );
-
-  useCloseOverlayOnActionSuccess(state);
+  const [state, action, isPending] = useFormBaseActionState(updatePosition);
 
   return (
     <FormBase

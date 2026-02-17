@@ -5,19 +5,14 @@ import {
   FormBaseBody,
   FormBaseFooter,
   FormBaseSubmitButton,
+  useFormBaseActionState,
 } from "@/components/common/FormBase";
 
-import { useActionState } from "react";
 import { useTranslations } from "next-intl";
 import { ActionFn, ActionState } from "@/lib/actions/types";
 import { UserPasswordTextField } from "../UserPasswordTextField";
 import { handleActionSubmit } from "@/lib/utils/handleActionSubmit";
 import { FormErrorBanner } from "@/components/common/FormErrorBanner";
-import { useCloseOverlayOnActionSuccess } from "@/lib/hooks/useCloseOverlayOnActionSuccess";
-
-const initialState: ActionState = {
-  status: null,
-};
 
 interface ChangePasswordFormProps {
   userId: string;
@@ -30,12 +25,7 @@ export function ChangePasswordForm({
 }: ChangePasswordFormProps) {
   const t = useTranslations("users.ChangePasswordForm");
 
-  const [state, action, isPending] = useActionState(
-    changePassword,
-    initialState,
-  );
-
-  useCloseOverlayOnActionSuccess(state);
+  const [state, action, isPending] = useFormBaseActionState(changePassword);
 
   return (
     <FormBase

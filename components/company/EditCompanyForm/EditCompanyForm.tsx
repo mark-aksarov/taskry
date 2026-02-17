@@ -7,17 +7,12 @@ import {
   FormBaseSubmitButton,
 } from "@/components/common/FormBase";
 
-import { useActionState } from "react";
 import { useTranslations } from "next-intl";
 import { ActionFn, ActionState } from "@/lib/actions/types";
 import { CompanyNameTextField } from "../CompanyNameTextField";
 import { handleActionSubmit } from "@/lib/utils/handleActionSubmit";
 import { FormErrorBanner } from "@/components/common/FormErrorBanner";
-import { useCloseOverlayOnActionSuccess } from "@/lib/hooks/useCloseOverlayOnActionSuccess";
-
-const initialState: ActionState = {
-  status: null,
-};
+import { useFormBaseActionState } from "@/components/common/FormBase";
 
 interface EditCompanyFormProps {
   companyId: number;
@@ -32,12 +27,7 @@ export function EditCompanyForm({
 }: EditCompanyFormProps) {
   const t = useTranslations("company.EditCompanyForm");
 
-  const [state, action, isPending] = useActionState(
-    updateCompany,
-    initialState,
-  );
-
-  useCloseOverlayOnActionSuccess(state);
+  const [state, action, isPending] = useFormBaseActionState(updateCompany);
 
   return (
     <FormBase

@@ -5,19 +5,14 @@ import {
   FormBaseBody,
   FormBaseFooter,
   FormBaseSubmitButton,
+  useFormBaseActionState,
 } from "@/components/common/FormBase";
 
-import { useActionState } from "react";
 import { useTranslations } from "next-intl";
 import { ActionFn, ActionState } from "@/lib/actions/types";
 import { handleActionSubmit } from "@/lib/utils/handleActionSubmit";
 import { FormErrorBanner } from "@/components/common/FormErrorBanner";
 import { ProjectCategoryNameTextField } from "../ProjectCategoryNameTextField";
-import { useCloseOverlayOnActionSuccess } from "@/lib/hooks/useCloseOverlayOnActionSuccess";
-
-const initialState: ActionState = {
-  status: null,
-};
 
 interface EditProjectCategoryFormProps {
   projectCategoryId: number;
@@ -32,12 +27,9 @@ export function EditProjectCategoryForm({
 }: EditProjectCategoryFormProps) {
   const t = useTranslations("projectCategories.EditProjectCategoryForm");
 
-  const [state, action, isPending] = useActionState(
+  const [state, action, isPending] = useFormBaseActionState(
     updateProjectCategory,
-    initialState,
   );
-
-  useCloseOverlayOnActionSuccess(state);
 
   return (
     <FormBase
