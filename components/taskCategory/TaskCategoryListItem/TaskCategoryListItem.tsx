@@ -8,7 +8,9 @@ import {
 } from "@/components/common/List";
 
 import { useTranslations } from "next-intl";
+import { SelectableItem } from "@/components/common/SelectableItem";
 import { TaskCategoryItemCheckbox } from "../TaskCategoryItemCheckbox";
+import { useSelectedItems } from "@/components/common/SelectedItemsContext";
 
 interface TaskCategoryListItemProps {
   id: number;
@@ -22,16 +24,19 @@ export function TaskCategoryListItem({
   menuTrigger,
 }: TaskCategoryListItemProps) {
   const t = useTranslations("taskCategories.TaskCategoryListItem");
+  const selected = useSelectedItems();
 
   return (
-    <ListItem data-test="task-category-list-item">
-      <TaskCategoryItemCheckbox id={id} />
-      <ListItemInfo>
-        <ListItemTitle>{name}</ListItemTitle>
-        <ListItemText>{t("name")}</ListItemText>
-      </ListItemInfo>
+    <SelectableItem {...selected} item={{ id }}>
+      <ListItem data-test="task-category-list-item">
+        <TaskCategoryItemCheckbox id={id} />
+        <ListItemInfo>
+          <ListItemTitle>{name}</ListItemTitle>
+          <ListItemText>{t("name")}</ListItemText>
+        </ListItemInfo>
 
-      {menuTrigger}
-    </ListItem>
+        {menuTrigger}
+      </ListItem>
+    </SelectableItem>
   );
 }

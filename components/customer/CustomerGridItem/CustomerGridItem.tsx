@@ -19,8 +19,10 @@ import { Separator } from "@/components/ui/Separator";
 import { UnknownUser } from "@/components/common/UnknownUser";
 import { CustomerItemCheckbox } from "../CustomerItemCheckbox";
 import { CustomerGridItemLayout } from "./CustomerGridItemLayout";
+import { SelectableItem } from "@/components/common/SelectableItem";
 import { ImageContainer } from "@/components/common/ImageContainer";
 import { ItemBaseDetailModalTrigger } from "@/components/common/ItemBase";
+import { useSelectedItems } from "@/components/common/SelectedItemsContext";
 
 interface CustomerGridItemProps {
   id: number;
@@ -49,6 +51,7 @@ export function CustomerGridItem({
   customerDetailModal,
 }: CustomerGridItemProps) {
   const t = useTranslations("customers.CustomerGridItem");
+  const selected = useSelectedItems();
 
   const contactLinkClasses = "max-w-full overflow-hidden";
 
@@ -61,99 +64,108 @@ export function CustomerGridItem({
   );
 
   return (
-    <CustomerGridItemLayout
-      topRowSlot={
-        <GridItemRow>
-          <CustomerItemCheckbox id={id} />
-          {menuTrigger}
-        </GridItemRow>
-      }
-      imageSlot={
-        <>
-          <ItemBaseDetailModalTrigger
-            className="max-md:hidden"
-            modal={customerDetailModal}
-          >
-            {customerImg}
-          </ItemBaseDetailModalTrigger>
-
-          <Link className="md:hidden" href={`/customers/${id}`}>
-            {customerImg}
-          </Link>
-        </>
-      }
-      titleSlot={
-        <GridItemInfo className="w-full items-center">
-          <GridItemTitle>
+    <SelectableItem {...selected} item={{ id }}>
+      <CustomerGridItemLayout
+        topRowSlot={
+          <GridItemRow>
+            <CustomerItemCheckbox id={id} />
+            {menuTrigger}
+          </GridItemRow>
+        }
+        imageSlot={
+          <>
             <ItemBaseDetailModalTrigger
+              className="max-md:hidden"
               modal={customerDetailModal}
-              className="truncate max-md:hidden"
             >
-              {fullName}
+              {customerImg}
             </ItemBaseDetailModalTrigger>
 
-            <Link
-              className="block truncate md:hidden"
-              href={`/customers/${id}`}
-            >
-              {fullName}
+            <Link className="md:hidden" href={`/customers/${id}`}>
+              {customerImg}
             </Link>
-          </GridItemTitle>
+          </>
+        }
+        titleSlot={
+          <GridItemInfo className="w-full items-center">
+            <GridItemTitle>
+              <ItemBaseDetailModalTrigger
+                modal={customerDetailModal}
+                className="truncate max-md:hidden"
+              >
+                {fullName}
+              </ItemBaseDetailModalTrigger>
 
-          <GridItemText>{company ? company.name : t("noCompany")}</GridItemText>
-        </GridItemInfo>
-      }
-      contactSlot={
-        <>
-          <Separator />
-          <GridItemContactList>
-            {phoneNumber ? (
-              <Link className={contactLinkClasses} href={`tel:${phoneNumber}`}>
+              <Link
+                className="block truncate md:hidden"
+                href={`/customers/${id}`}
+              >
+                {fullName}
+              </Link>
+            </GridItemTitle>
+
+            <GridItemText>
+              {company ? company.name : t("noCompany")}
+            </GridItemText>
+          </GridItemInfo>
+        }
+        contactSlot={
+          <>
+            <Separator />
+            <GridItemContactList>
+              {phoneNumber ? (
+                <Link
+                  className={contactLinkClasses}
+                  href={`tel:${phoneNumber}`}
+                >
+                  <GridItemContact>
+                    <GridItemContactIconWrapper>
+                      <Phone size={16} strokeWidth={1.5} absoluteStrokeWidth />
+                    </GridItemContactIconWrapper>
+                    <GridItemContactText>{phoneNumber}</GridItemContactText>
+                  </GridItemContact>
+                </Link>
+              ) : (
                 <GridItemContact>
                   <GridItemContactIconWrapper>
                     <Phone size={16} strokeWidth={1.5} absoluteStrokeWidth />
                   </GridItemContactIconWrapper>
-                  <GridItemContactText>{phoneNumber}</GridItemContactText>
+                  <GridItemContactText>
+                    {t("noPhoneNumber")}
+                  </GridItemContactText>
                 </GridItemContact>
-              </Link>
-            ) : (
-              <GridItemContact>
-                <GridItemContactIconWrapper>
-                  <Phone size={16} strokeWidth={1.5} absoluteStrokeWidth />
-                </GridItemContactIconWrapper>
-                <GridItemContactText>{t("noPhoneNumber")}</GridItemContactText>
-              </GridItemContact>
-            )}
+              )}
 
-            {publicLink ? (
-              <Link className={contactLinkClasses} href={publicLink}>
+              {publicLink ? (
+                <Link className={contactLinkClasses} href={publicLink}>
+                  <GridItemContact>
+                    <GridItemContactIconWrapper>
+                      <Link2 size={16} strokeWidth={1.5} absoluteStrokeWidth />
+                    </GridItemContactIconWrapper>
+                    <GridItemContactText>{publicLink}</GridItemContactText>
+                  </GridItemContact>
+                </Link>
+              ) : (
                 <GridItemContact>
                   <GridItemContactIconWrapper>
                     <Link2 size={16} strokeWidth={1.5} absoluteStrokeWidth />
                   </GridItemContactIconWrapper>
-                  <GridItemContactText>{publicLink}</GridItemContactText>
+                  <GridItemContactText>{t("noPublicLink")}</GridItemContactText>
+                </GridItemContact>
+              )}
+
+              <Link className={contactLinkClasses} href={`mailto:${email}`}>
+                <GridItemContact>
+                  <GridItemContactIconWrapper>
+                    <Mail size={16} strokeWidth={1.5} absoluteStrokeWidth />
+                  </GridItemContactIconWrapper>
+                  <GridItemContactText>{email}</GridItemContactText>
                 </GridItemContact>
               </Link>
-            ) : (
-              <GridItemContact>
-                <GridItemContactIconWrapper>
-                  <Link2 size={16} strokeWidth={1.5} absoluteStrokeWidth />
-                </GridItemContactIconWrapper>
-                <GridItemContactText>{t("noPublicLink")}</GridItemContactText>
-              </GridItemContact>
-            )}
-
-            <Link className={contactLinkClasses} href={`mailto:${email}`}>
-              <GridItemContact>
-                <GridItemContactIconWrapper>
-                  <Mail size={16} strokeWidth={1.5} absoluteStrokeWidth />
-                </GridItemContactIconWrapper>
-                <GridItemContactText>{email}</GridItemContactText>
-              </GridItemContact>
-            </Link>
-          </GridItemContactList>
-        </>
-      }
-    />
+            </GridItemContactList>
+          </>
+        }
+      />
+    </SelectableItem>
   );
 }

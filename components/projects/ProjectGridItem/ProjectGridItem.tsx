@@ -26,6 +26,8 @@ import { ProjectItemCheckbox } from "../ProjectItemCheckbox";
 import { UnknownUser } from "@/components/common/UnknownUser";
 import { ProjectItemBaseBadge } from "../ProjectItemBaseBadge";
 import { ProjectGridItemLayout } from "./ProjectGridItemLayout";
+import { useSelectedProjects } from "../SelectedProjectsContext";
+import { SelectableItem } from "@/components/common/SelectableItem";
 import { ImageContainer } from "@/components/common/ImageContainer";
 import { UpdateProjectStatusProvider } from "../UpdateProjectStatusContext";
 
@@ -53,9 +55,16 @@ export const ProjectGridItem = ({
   updateProjectStatus,
   ...props
 }: ProjectGridItemProps) => {
+  const selected = useSelectedProjects();
+
   return (
     <UpdateProjectStatusProvider updateStatus={updateProjectStatus}>
-      <ProjectGridItemInner {...props} />
+      <SelectableItem
+        {...selected}
+        item={{ id: props.id, status: props.status }}
+      >
+        <ProjectGridItemInner {...props} />
+      </SelectableItem>
     </UpdateProjectStatusProvider>
   );
 };

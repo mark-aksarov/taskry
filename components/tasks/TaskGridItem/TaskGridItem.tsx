@@ -20,11 +20,13 @@ import {
 
 import Image from "next/image";
 import { Link } from "@/components/ui/Link";
+import { SelectableItem } from "../../common/SelectableItem";
 import { TaskStatus } from "@/generated/prisma/enums";
 import { TaskItemCheckbox } from "../TaskItemCheckbox";
 import { TaskItemBaseBadge } from "../TaskItemBaseBadge";
 import { useFormatter, useTranslations } from "next-intl";
 import { TaskGridItemLayout } from "./TaskGridItemLayout";
+import { useSelectedTasks } from "../SelectedTasksContext";
 import { UnknownUser } from "@/components/common/UnknownUser";
 import { ImageContainer } from "@/components/common/ImageContainer";
 import { UpdateTaskStatusProvider } from "../UpdateTaskStatusContext";
@@ -53,9 +55,16 @@ export const TaskGridItem = ({
   updateTaskStatus,
   ...props
 }: TaskGridItemProps) => {
+  const selected = useSelectedTasks();
+
   return (
     <UpdateTaskStatusProvider updateStatus={updateTaskStatus}>
-      <TaskGridItemInner {...props} />
+      <SelectableItem
+        {...selected}
+        item={{ id: props.id, status: props.status }}
+      >
+        <TaskGridItemInner {...props} />
+      </SelectableItem>
     </UpdateTaskStatusProvider>
   );
 };

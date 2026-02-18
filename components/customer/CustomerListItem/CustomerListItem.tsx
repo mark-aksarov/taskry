@@ -14,6 +14,8 @@ import { UnknownUser } from "@/components/common/UnknownUser";
 import { CustomerItemCheckbox } from "../CustomerItemCheckbox";
 import { ImageContainer } from "@/components/common/ImageContainer";
 import { ItemBaseDetailModalTrigger } from "@/components/common/ItemBase";
+import { useSelectedItems } from "@/components/common/SelectedItemsContext";
+import { SelectableItem } from "@/components/common/SelectableItem";
 
 export type CustomerListItemProps = {
   id: number;
@@ -42,6 +44,7 @@ export function CustomerListItem({
   customerDetailModal,
 }: CustomerListItemProps) {
   const t = useTranslations("customers.CustomerListItem");
+  const selected = useSelectedItems();
 
   const userImg = imageUrl ? (
     <ImageContainer className="h-9 w-9">
@@ -52,75 +55,82 @@ export function CustomerListItem({
   );
 
   return (
-    <ListItem data-test="customer-list-item" data-id={id}>
-      <CustomerItemCheckbox id={id} />
+    <SelectableItem {...selected} item={{ id }}>
+      <ListItem data-test="customer-list-item" data-id={id}>
+        <CustomerItemCheckbox id={id} />
 
-      <>
-        <ItemBaseDetailModalTrigger
-          modal={customerDetailModal}
-          className="h-9 w-9 max-md:hidden"
-        >
-          {userImg}
-        </ItemBaseDetailModalTrigger>
-
-        <Link className="md:hidden" href={`/customers/${id}`}>
-          {userImg}
-        </Link>
-      </>
-
-      <ListItemInfo>
-        <ListItemTitle>
+        <>
           <ItemBaseDetailModalTrigger
             modal={customerDetailModal}
-            className="truncate max-md:hidden"
+            className="h-9 w-9 max-md:hidden"
           >
-            {fullName}
+            {userImg}
           </ItemBaseDetailModalTrigger>
 
-          <Link className="block truncate md:hidden" href={`/customers/${id}`}>
-            {fullName}
+          <Link className="md:hidden" href={`/customers/${id}`}>
+            {userImg}
           </Link>
-        </ListItemTitle>
+        </>
 
-        <ListItemText>
-          <Link className="block truncate" href={`mailto:${email}`}>
-            {email}
-          </Link>
-        </ListItemText>
-      </ListItemInfo>
-      <ListItemInfo className="@max-lg:hidden">
-        <ListItemTitle>
-          {phoneNumber ? (
-            <Link className="block truncate" href={`tel:${phoneNumber}`}>
-              {phoneNumber}
+        <ListItemInfo>
+          <ListItemTitle>
+            <ItemBaseDetailModalTrigger
+              modal={customerDetailModal}
+              className="truncate max-md:hidden"
+            >
+              {fullName}
+            </ItemBaseDetailModalTrigger>
+
+            <Link
+              className="block truncate md:hidden"
+              href={`/customers/${id}`}
+            >
+              {fullName}
             </Link>
-          ) : (
-            t("noPhoneNumber")
-          )}
-        </ListItemTitle>
+          </ListItemTitle>
 
-        <ListItemText>{t("phoneNumber")}</ListItemText>
-      </ListItemInfo>
-      <ListItemInfo className="@max-2xl:hidden">
-        <ListItemTitle>
-          {publicLink ? (
-            <Link className="block truncate" href={publicLink}>
-              {publicLink}
+          <ListItemText>
+            <Link className="block truncate" href={`mailto:${email}`}>
+              {email}
             </Link>
-          ) : (
-            t("noPublicLink")
-          )}
-        </ListItemTitle>
+          </ListItemText>
+        </ListItemInfo>
+        <ListItemInfo className="@max-lg:hidden">
+          <ListItemTitle>
+            {phoneNumber ? (
+              <Link className="block truncate" href={`tel:${phoneNumber}`}>
+                {phoneNumber}
+              </Link>
+            ) : (
+              t("noPhoneNumber")
+            )}
+          </ListItemTitle>
 
-        <ListItemText>{t("publicLink")}</ListItemText>
-      </ListItemInfo>
+          <ListItemText>{t("phoneNumber")}</ListItemText>
+        </ListItemInfo>
+        <ListItemInfo className="@max-2xl:hidden">
+          <ListItemTitle>
+            {publicLink ? (
+              <Link className="block truncate" href={publicLink}>
+                {publicLink}
+              </Link>
+            ) : (
+              t("noPublicLink")
+            )}
+          </ListItemTitle>
 
-      <ListItemInfo className="@max-4xl:hidden">
-        <ListItemTitle>{company ? company.name : t("noCompany")}</ListItemTitle>
-        <ListItemText>{t("company")}</ListItemText>
-      </ListItemInfo>
+          <ListItemText>{t("publicLink")}</ListItemText>
+        </ListItemInfo>
 
-      {menuTrigger}
-    </ListItem>
+        <ListItemInfo className="@max-4xl:hidden">
+          <ListItemTitle>
+            {company ? company.name : t("noCompany")}
+          </ListItemTitle>
+          <ListItemText>{t("company")}</ListItemText>
+        </ListItemInfo>
+
+        {menuTrigger}
+      </ListItem>
+    </SelectableItem>
   );
 }
