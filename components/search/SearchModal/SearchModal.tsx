@@ -1,14 +1,13 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { SearchCategory } from "../types";
 import { useTranslations } from "next-intl";
 import { SearchField } from "../SearchField";
-import { SearchModalContext } from "./SearchModalContext";
+import { SearchContext } from "../SearchContext";
 import { Dialog, DialogHeader } from "@/components/ui/Dialog";
 import { SearchToggleButtonGroup } from "../SearchToggleButtonGroup";
 import { ResponsiveModal } from "@/components/common/ResponsiveModal";
-
-type SearchCategory = "users" | "projects" | "tasks" | "customers";
 
 interface SearchModalProps {
   tasksSearchContainer: React.ReactNode;
@@ -50,6 +49,7 @@ export function SearchModal({
       query,
       page,
       setPage,
+      searchCategory,
       searchField,
       searchToggleButtonGroup,
     }),
@@ -65,10 +65,10 @@ export function SearchModal({
       <Dialog className="md:h-[calc(100dvh-64px)]">
         <DialogHeader>{t("dialogHeading")}</DialogHeader>
 
-        <SearchModalContext.Provider value={contextValue}>
+        <SearchContext.Provider value={contextValue}>
           {searchCategory === "tasks" && tasksSearchContainer}
           {searchCategory === "projects" && projectsSearchContainer}
-        </SearchModalContext.Provider>
+        </SearchContext.Provider>
       </Dialog>
     </ResponsiveModal>
   );

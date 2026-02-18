@@ -9,7 +9,7 @@ export function SearchEmptyPresentation({
   searchField,
 }: SearchEmptyPresentationProps) {
   return (
-    <DialogBody className="p-0!">
+    <DialogBody className="relative">
       {searchField}
       <SearchEmptySection />
     </DialogBody>

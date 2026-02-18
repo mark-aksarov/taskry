@@ -1,26 +1,22 @@
+import { SearchPagination } from "../SearchPagination";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { ModalPagination } from "../ModalPagination";
+import { withSearchProvider } from "../../SearchContext/__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { fn } from "storybook/internal/test";
 
 const meta = {
-  title: "components/common/ModalPagination",
-  component: ModalPagination,
-  decorators: [withThemedBackground],
+  title: "components/search/SearchPagination",
+  component: SearchPagination,
+  decorators: [withSearchProvider, withThemedBackground],
   parameters: {
     backgroundVariant: "alt",
   },
-} satisfies Meta<typeof ModalPagination>;
+} satisfies Meta<typeof SearchPagination>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    page: 1,
-    pageSize: 10,
-    setPage: fn(),
     totalCount: 30,
-    totalPages: 3,
   },
 } satisfies Story;

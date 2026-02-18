@@ -1,19 +1,19 @@
 import { SearchModal } from "../SearchModal";
-import { SearchField } from "../../SearchField";
 import { fn } from "storybook/internal/test";
+import { SearchField } from "../../SearchField";
 import { Button } from "@/components/ui/Button";
 import { DialogTrigger } from "react-aria-components";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { SearchPagination } from "../../SearchPagination";
 import { SearchPresentation } from "../../SearchPresentation";
-import { SearchEmptySection } from "../../SearchEmptySection";
 import { SearchList, SearchListSkeleton } from "../../SearchList";
 import { TasksSearchListStory } from "../../SearchList/__stories__";
-import { ModalPagination } from "@/components/common/ModalPagination";
 import { ProjectsSearchListStory } from "../../SearchList/__stories__";
 import { SearchToggleButtonGroup } from "../../SearchToggleButtonGroup";
+import { SearchEmptyPresentation } from "../../SearchEmptyPresentation";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { ModalPaginationStory } from "@/components/common/ModalPagination/__stories__";
 import { SearchToggleButtonGroupStory } from "../../SearchToggleButtonGroup/__stories__";
+import { SearchPaginationSkeleton } from "../../SearchPagination/SearchPaginationSkeleton";
 
 const meta = {
   title: "components/search/SearchModal",
@@ -33,14 +33,15 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 const SearchContainer = ({
-  searchResultList,
+  searchResult,
+  searchPagination,
   selectedToggleKey,
 }: {
-  searchResultList: React.ReactNode;
+  searchResult: React.ReactNode;
+  searchPagination: React.ReactNode;
   selectedToggleKey: string;
 }) => (
   <SearchPresentation
-    totalPages={2}
     searchField={<SearchField value="" onChange={fn()} />}
     searchToggleButtonGroup={
       <SearchToggleButtonGroup
@@ -48,8 +49,8 @@ const SearchContainer = ({
         selectedKeys={[selectedToggleKey]}
       />
     }
-    searchResult={searchResultList}
-    pagination={<ModalPagination {...ModalPaginationStory.args} />}
+    searchResult={searchResult}
+    searchPagination={searchPagination}
   />
 );
 
@@ -57,13 +58,15 @@ export const Default = {
   args: {
     tasksSearchContainer: (
       <SearchContainer
-        searchResultList={<SearchList {...TasksSearchListStory.args} />}
+        searchResult={<SearchList {...TasksSearchListStory.args} />}
+        searchPagination={<SearchPagination totalCount={30} />}
         selectedToggleKey="tasks"
       />
     ),
     projectsSearchContainer: (
       <SearchContainer
-        searchResultList={<SearchList {...ProjectsSearchListStory.args} />}
+        searchResult={<SearchList {...ProjectsSearchListStory.args} />}
+        searchPagination={<SearchPagination totalCount={30} />}
         selectedToggleKey="projects"
       />
     ),
@@ -73,15 +76,13 @@ export const Default = {
 export const WithEmptySection = {
   args: {
     tasksSearchContainer: (
-      <SearchContainer
-        searchResultList={<SearchEmptySection />}
-        selectedToggleKey="tasks"
+      <SearchEmptyPresentation
+        searchField={<SearchField value="" onChange={fn()} />}
       />
     ),
     projectsSearchContainer: (
-      <SearchContainer
-        searchResultList={<SearchEmptySection />}
-        selectedToggleKey="projects"
+      <SearchEmptyPresentation
+        searchField={<SearchField value="" onChange={fn()} />}
       />
     ),
   },
@@ -91,13 +92,15 @@ export const WithSkeletonContent = {
   args: {
     tasksSearchContainer: (
       <SearchContainer
-        searchResultList={<SearchListSkeleton />}
+        searchResult={<SearchListSkeleton />}
+        searchPagination={<SearchPaginationSkeleton />}
         selectedToggleKey="tasks"
       />
     ),
     projectsSearchContainer: (
       <SearchContainer
-        searchResultList={<SearchListSkeleton />}
+        searchResult={<SearchListSkeleton />}
+        searchPagination={<SearchPaginationSkeleton />}
         selectedToggleKey="projects"
       />
     ),

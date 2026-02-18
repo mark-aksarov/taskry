@@ -9,16 +9,14 @@ export function SearchEmptySection() {
   const t = useTranslations("search.SearchEmptySection");
 
   return (
-    <div
+    <EmptySection
       data-test="search-empty-section"
-      className="flex min-h-[400px] flex-auto items-center justify-center"
+      className="absolute top-1/2 left-1/2 flex max-w-[375px] -translate-x-1/2 -translate-y-1/2 items-center justify-center"
     >
-      <EmptySection className="max-w-[375px]">
-        <EmptySectionHeading tag="h3" className="text-3xl!">
-          {t("heading")}
-        </EmptySectionHeading>
-        <EmptySectionDescription>{t("description")}</EmptySectionDescription>
-      </EmptySection>
-    </div>
+      <EmptySectionHeading tag="h3" className="text-3xl!">
+        {t("heading")}
+      </EmptySectionHeading>
+      <EmptySectionDescription>{t("description")}</EmptySectionDescription>
+    </EmptySection>
   );
 }

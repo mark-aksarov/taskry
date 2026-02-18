@@ -1,13 +1,15 @@
 "use client";
 
 import useSWR from "swr";
-import { SearchEmptySection } from "./SearchEmptySection";
+import { useState } from "react";
+import { useSearchContext } from "./SearchContext";
+import { SearchPagination } from "./SearchPagination";
 import { SearchPresentation } from "./SearchPresentation";
-import { useSearchModalContext } from "./SearchModal/SearchModalContext";
-import { ModalPagination } from "../common/ModalPagination";
 import { SearchList, SearchListSkeleton } from "./SearchList";
+import { SearchEmptyPresentation } from "./SearchEmptyPresentation";
+import { SearchPaginationSkeleton } from "./SearchPagination/SearchPaginationSkeleton";
 
-const pageSize = 10;
+export const pageSize = 10;
 
 export interface SearchContainerProps<T> {
   endpoint: string;
@@ -23,41 +25,45 @@ export function SearchContainer<T extends { id: string | number }>({
   endpoint,
   renderItem,
 }: SearchContainerProps<T>) {
-  const { page, setPage, query, searchField, searchToggleButtonGroup } =
-    useSearchModalContext();
+  const { page, query, searchField, searchToggleButtonGroup } =
+    useSearchContext();
 
-  const { data, isLoading } = useSWR<PaginatedResponse<T>>(
+  const { data } = useSWR<PaginatedResponse<T>>(
     `${endpoint}?page=${page}&pageSize=${pageSize}&query=${query}`,
   );
 
-  const items = data?.items ?? [];
-  const totalCount = data?.totalCount ?? 0;
-  const isEmpty = items.length === 0;
-  const totalPages = Math.ceil(totalCount / pageSize);
+  const [totalCount, setTotalCount] = useState<number | null>(null);
+
+  const isLoading = !data;
+
+  // Update totalCount when the data changes
+  if (!isLoading && data.totalCount !== totalCount) {
+    setTotalCount(data.totalCount);
+  }
+
+  // Check if the data is empty
+  const isEmpty = !isLoading && totalCount === 0;
+
+  if (isEmpty) {
+    return <SearchEmptyPresentation searchField={searchField} />;
+  }
 
   return (
     <SearchPresentation
       searchField={searchField}
       searchToggleButtonGroup={searchToggleButtonGroup}
-      totalPages={totalPages}
       searchResult={
         isLoading ? (
           <SearchListSkeleton />
-        ) : isEmpty ? (
-          <SearchEmptySection />
         ) : (
-          <SearchList>{items.map(renderItem)}</SearchList>
+          <SearchList>{data.items.map(renderItem)}</SearchList>
         )
       }
-      pagination={
-        !isEmpty && (
-          <ModalPagination
-            page={page}
-            pageSize={pageSize}
-            setPage={setPage}
-            totalCount={totalCount}
-            totalPages={totalPages}
-          />
+      searchPagination={
+        !totalCount ? (
+          <SearchPaginationSkeleton />
+        ) : (
+          <SearchPagination totalCount={totalCount} />
         )
       }
     />

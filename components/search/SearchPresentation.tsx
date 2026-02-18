@@ -4,16 +4,14 @@ export interface SearchPresentationProps {
   searchField: React.ReactNode;
   searchToggleButtonGroup: React.ReactNode;
   searchResult: React.ReactNode;
-  pagination: React.ReactNode;
-  totalPages: number;
+  searchPagination: React.ReactNode;
 }
 
 export function SearchPresentation({
   searchField,
   searchToggleButtonGroup,
   searchResult,
-  pagination,
-  totalPages,
+  searchPagination,
 }: SearchPresentationProps) {
   return (
     <>
@@ -22,7 +20,8 @@ export function SearchPresentation({
         {searchToggleButtonGroup}
         {searchResult}
       </DialogBody>
-      {totalPages > 1 && <DialogFooter>{pagination}</DialogFooter>}
+
+      <DialogFooter>{searchPagination}</DialogFooter>
     </>
   );
 }

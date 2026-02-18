@@ -2,33 +2,32 @@
   "SearchListItem": {
     "deadlineOn": "Срок до {date}"
   },
-
   "SearchToggleButtonGroup": {
     "users": "Пользователи",
     "tasks": "Задачи",
     "projects": "Проекты",
     "customers": "Клиенты"
   },
-
   "SearchModalTriggerDesktop": {
     "label": "Поиск"
   },
-
   "SearchModalTriggerMobile": {
     "ariaLabel": "Поиск"
   },
-
   "SearchEmptySection": {
     "heading": "Ничего не найдено",
     "description": "По вашему запросу нет результатов. Попробуйте изменить формулировку или проверить орфографию."
   },
-
   "SearchModal": {
     "dialogHeading": "Результаты поиска"
   },
-
   "SearchField": {
     "ariaLabel": "Поиск",
     "placeholder": "Поиск"
+  },
+  "SearchPaginationStatus": {
+    "tasks": "Задачи",
+    "projects": "Проекты",
+    "of": "из"
   }
 }
