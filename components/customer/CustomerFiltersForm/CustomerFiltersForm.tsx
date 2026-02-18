@@ -13,7 +13,7 @@ import {
 
 import { useLocale } from "next-intl";
 import { CustomerFilters } from "@/lib/types";
-import { Divider } from "@/components/ui/Divider";
+import { Separator } from "@/components/ui/Separator";
 import { usePathname, useRouter } from "@/i18n/navigation";
 import { FiltersFormSubmitButton } from "@/components/common/FiltersFormSubmitButton";
 import { CustomerFiltersFormActiveProjectsSwitch } from "./CustomerFiltersFormActiveProjectsSwitch";
@@ -53,13 +53,13 @@ export function CustomerFiltersForm({
     <FormBase id="customer-filter-form" onSubmit={handleSubmit}>
       <FormBaseBody>
         <CustomerFiltersFormNoActiveProjectsSwitch filters={filters} />
-        <Divider />
+        <Separator />
 
         <CustomerFiltersFormActiveProjectsSwitch filters={filters} />
-        <Divider />
+        <Separator />
 
         <CustomerFiltersFormOverdueProjectsSwitch filters={filters} />
-        <Divider />
+        <Separator />
 
         {companyCheckboxGroup}
       </FormBaseBody>

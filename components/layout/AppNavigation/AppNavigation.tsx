@@ -11,7 +11,7 @@ import {
 
 import { useTranslations } from "next-intl";
 import { usePathname } from "@/i18n/navigation";
-import { Divider } from "@/components/ui/Divider";
+import { Separator } from "@/components/ui/Separator";
 import { NavigationButton } from "@/components/common/NavigationButton";
 import { AppNavigationLogoutButton } from "./AppNavigationLogoutButton";
 import { AppNavigationLangMenuTrigger } from "./AppNavigationLangMenuTrigger";
@@ -74,7 +74,7 @@ export const AppNavigation = () => {
         {t("profile")}
       </NavigationButton>
 
-      <Divider />
+      <Separator />
 
       <div className="flex flex-col gap-2.5 md:hidden">
         <AppNavigationLangMenuTrigger />

@@ -3,7 +3,7 @@
 import { useParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { usePathname } from "@/i18n/navigation";
-import { Divider } from "@/components/ui/Divider";
+import { Separator } from "@/components/ui/Separator";
 import { CalendarCheck, Info } from "lucide-react";
 import { NavigationButton } from "@/components/common/NavigationButton";
 
@@ -41,7 +41,7 @@ export function UserNavigationDesktop({
 
       {userActions && (
         <>
-          <Divider />
+          <Separator />
           {userActions}
         </>
       )}

@@ -21,7 +21,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { createCalendar, getWeeksInMonth } from "@internationalized/date";
 import { tv } from "tailwind-variants";
 import { focusRing } from "../styles";
-import { Divider } from "../Divider";
+import { Separator } from "../Separator";
 
 export const Calendar = <T extends DateValue>(props: AriaCalendarProps<T>) => {
   const { locale } = useLocale();
@@ -56,7 +56,7 @@ export const Calendar = <T extends DateValue>(props: AriaCalendarProps<T>) => {
           }
         />
       </div>
-      <Divider />
+      <Separator />
       <CalendarGrid state={state} firstDayOfWeek={props.firstDayOfWeek} />
     </div>
   );

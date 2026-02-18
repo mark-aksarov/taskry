@@ -13,7 +13,7 @@ import {
 
 import { useLocale } from "next-intl";
 import { UserFilters } from "@/lib/types";
-import { Divider } from "@/components/ui/Divider";
+import { Separator } from "@/components/ui/Separator";
 import { usePathname, useRouter } from "@/i18n/navigation";
 import { UserFiltersFormRoleCheckboxGroup } from "./UserFiltersFormRoleCheckboxGroup";
 import { UserFiltersFormActiveTasksSwitch } from "./UserFiltersFormActiveTasksSwitch";
@@ -54,16 +54,16 @@ export function UserFiltersForm({
     <FormBase id="user-filter-form" onSubmit={handleSubmit}>
       <FormBaseBody>
         <UserFiltersFormNoActiveTasksSwitch filters={filters} />
-        <Divider />
+        <Separator />
 
         <UserFiltersFormActiveTasksSwitch filters={filters} />
-        <Divider />
+        <Separator />
 
         <UserFiltersFormOverdueTasksSwitch filters={filters} />
-        <Divider />
+        <Separator />
 
         <UserFiltersFormRoleCheckboxGroup />
-        <Divider />
+        <Separator />
 
         {positionCheckboxGroup}
       </FormBaseBody>

@@ -13,7 +13,7 @@ import {
 
 import { useLocale } from "next-intl";
 import { ProjectFilters } from "@/lib/types";
-import { Divider } from "@/components/ui/Divider";
+import { Separator } from "@/components/ui/Separator";
 import { usePathname, useRouter } from "@/i18n/navigation";
 import { FiltersFormSubmitButton } from "@/components/common/FiltersFormSubmitButton";
 import { ProjectFiltersFormNoActiveTasksSwitch } from "./ProjectFiltersFormNoActiveTasksSwitch";
@@ -55,18 +55,18 @@ export function ProjectFiltersForm({
       <FormBaseBody>
         <ProjectFiltersFormNoActiveTasksSwitch filters={filters} />
 
-        <Divider />
+        <Separator />
 
         <ProjectFiltersFormDeadlineFromDatePicker filters={filters} />
         <ProjectFiltersFormDeadlineToDatePicker filters={filters} />
 
-        <Divider />
+        <Separator />
         <div>{projectStatusCheckboxGroup}</div>
-        <Divider />
+        <Separator />
         <div>{projectCategoryCheckboxGroup}</div>
-        <Divider />
+        <Separator />
         <div>{customerCheckboxGroup}</div>
-        <Divider />
+        <Separator />
         <div>{userCheckboxGroup}</div>
       </FormBaseBody>
 

@@ -15,7 +15,7 @@ import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { Link } from "@/components/ui/Link";
 import { Link2, Mail, Phone } from "lucide-react";
-import { Divider } from "@/components/ui/Divider";
+import { Separator } from "@/components/ui/Separator";
 import { UnknownUser } from "@/components/common/UnknownUser";
 import { CustomerItemCheckbox } from "../CustomerItemCheckbox";
 import { CustomerGridItemLayout } from "./CustomerGridItemLayout";
@@ -105,7 +105,7 @@ export function CustomerGridItem({
       }
       contactSlot={
         <>
-          <Divider />
+          <Separator />
           <GridItemContactList>
             {phoneNumber ? (
               <Link className={contactLinkClasses} href={`tel:${phoneNumber}`}>
