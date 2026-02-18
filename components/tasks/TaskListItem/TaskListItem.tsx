@@ -12,6 +12,11 @@ import {
   ListItemTitle,
 } from "@/components/common/List";
 
+import {
+  ItemBaseDetailModalTrigger,
+  ItemBaseCommentsModalTrigger,
+} from "@/components/common/ItemBase";
+
 import Image from "next/image";
 import { Link } from "@/components/ui/Link";
 import { TaskStatus } from "@/generated/prisma/enums";
@@ -22,8 +27,6 @@ import { useFormatter, useTranslations } from "next-intl";
 import { UnknownUser } from "@/components/common/UnknownUser";
 import { ImageContainer } from "@/components/common/ImageContainer";
 import { UpdateTaskStatusProvider } from "../UpdateTaskStatusContext";
-import { TaskCommentsModalTrigger } from "../TaskCommentsModalTrigger";
-import { ItemBaseDetailModalTrigger } from "@/components/common/ItemBase";
 
 export interface TaskListItemProps {
   id: number;
@@ -184,7 +187,7 @@ export const TaskListItemInner = ({
         />
       }
       commentsModalTriggerSlot={
-        <TaskCommentsModalTrigger
+        <ItemBaseCommentsModalTrigger
           data-test={`task-${id}-comments-modal-trigger`}
           commentsCount={commentsCount}
           modal={taskCommentsModal}

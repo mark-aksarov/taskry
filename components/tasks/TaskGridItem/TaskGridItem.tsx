@@ -13,6 +13,11 @@ import {
   UpdateTaskStatusesPayload,
 } from "@/lib/actions/types";
 
+import {
+  ItemBaseDetailModalTrigger,
+  ItemBaseCommentsModalTrigger,
+} from "@/components/common/ItemBase";
+
 import Image from "next/image";
 import { Link } from "@/components/ui/Link";
 import { TaskStatus } from "@/generated/prisma/enums";
@@ -23,8 +28,6 @@ import { TaskGridItemLayout } from "./TaskGridItemLayout";
 import { UnknownUser } from "@/components/common/UnknownUser";
 import { ImageContainer } from "@/components/common/ImageContainer";
 import { UpdateTaskStatusProvider } from "../UpdateTaskStatusContext";
-import { TaskCommentsModalTrigger } from "../TaskCommentsModalTrigger";
-import { ItemBaseDetailModalTrigger } from "@/components/common/ItemBase";
 
 export interface TaskGridItemProps {
   id: number;
@@ -132,7 +135,7 @@ export function TaskGridItemInner({
         )
       }
       commentsSlot={
-        <TaskCommentsModalTrigger
+        <ItemBaseCommentsModalTrigger
           data-test={`task-${id}-comments-modal-trigger`}
           commentsCount={commentsCount}
           modal={taskCommentsModal}

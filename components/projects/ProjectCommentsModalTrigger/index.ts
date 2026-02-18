@@ -1,1 +1,0 @@
-export { ProjectCommentsModalTrigger } from "./ProjectCommentsModalTrigger";

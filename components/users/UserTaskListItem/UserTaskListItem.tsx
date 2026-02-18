@@ -12,15 +12,18 @@ import {
   UpdateTaskStatusesPayload,
 } from "@/lib/actions/types";
 
+import {
+  ItemBaseDetailModalTrigger,
+  ItemBaseCommentsModalTrigger,
+} from "@/components/common/ItemBase";
+
 import { Link } from "@/components/ui/Link";
 import { TaskStatus } from "@/generated/prisma/enums";
 import { useFormatter, useTranslations } from "next-intl";
 import { UserTaskListItemLayout } from "./UserTaskListItemLayout";
 import { TaskItemCheckbox } from "@/components/tasks/TaskItemCheckbox";
 import { TaskItemBaseBadge } from "@/components/tasks/TaskItemBaseBadge";
-import { ItemBaseDetailModalTrigger } from "@/components/common/ItemBase";
 import { UpdateTaskStatusProvider } from "@/components/tasks/UpdateTaskStatusContext";
-import { TaskCommentsModalTrigger } from "@/components/tasks/TaskCommentsModalTrigger";
 
 export interface UserTaskListItemProps {
   id: number;
@@ -95,7 +98,7 @@ export const UserTaskListItemInner = ({
         />
       }
       commentsSlot={
-        <TaskCommentsModalTrigger
+        <ItemBaseCommentsModalTrigger
           commentsCount={commentsCount}
           modal={taskCommentsModal}
         />

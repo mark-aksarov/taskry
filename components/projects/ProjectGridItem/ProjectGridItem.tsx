@@ -13,6 +13,11 @@ import {
   UpdateProjectStatusesPayload,
 } from "@/lib/actions/types";
 
+import {
+  ItemBaseDetailModalTrigger,
+  ItemBaseCommentsModalTrigger,
+} from "@/components/common/ItemBase";
+
 import Image from "next/image";
 import { Link } from "@/components/ui/Link";
 import { ProjectStatus } from "@/generated/prisma/enums";
@@ -22,8 +27,6 @@ import { UnknownUser } from "@/components/common/UnknownUser";
 import { ProjectItemBaseBadge } from "../ProjectItemBaseBadge";
 import { ProjectGridItemLayout } from "./ProjectGridItemLayout";
 import { ImageContainer } from "@/components/common/ImageContainer";
-import { ItemBaseDetailModalTrigger } from "@/components/common/ItemBase";
-import { ProjectCommentsModalTrigger } from "../ProjectCommentsModalTrigger";
 import { UpdateProjectStatusProvider } from "../UpdateProjectStatusContext";
 
 export interface ProjectGridItemProps {
@@ -132,7 +135,7 @@ export function ProjectGridItemInner({
         )
       }
       commentsSlot={
-        <ProjectCommentsModalTrigger
+        <ItemBaseCommentsModalTrigger
           data-test={`project-${id}-comments-modal-trigger`}
           commentsCount={commentsCount}
           modal={projectCommentsModal}
