@@ -14,7 +14,7 @@ export function AppNavigationThemeToggleButton() {
       <>
         <NavigationButton onPress={() => setTheme("light")}>
           <Moon size={18} strokeWidth={1.5} absoluteStrokeWidth />
-          {t("lightLabel")}
+          {t("darkLabel")}
         </NavigationButton>
       </>
     );
@@ -24,7 +24,7 @@ export function AppNavigationThemeToggleButton() {
     <>
       <NavigationButton onPress={() => setTheme("dark")}>
         <Sun size={18} strokeWidth={1.5} absoluteStrokeWidth />
-        {t("darkLabel")}
+        {t("lightLabel")}
       </NavigationButton>
     </>
   );

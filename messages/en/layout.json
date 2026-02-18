@@ -18,8 +18,8 @@
     }
   },
   "AppHeaderThemeToggleButton": {
-    "darkLabel": "Switch to dark theme",
-    "lightLabel": "Switch to light theme"
+    "darkLabel": "Dark mode",
+    "lightLabel": "Light mode"
   },
   "AppNavigation": {
     "dashboard": "Dashboard",
@@ -42,7 +42,7 @@
   },
   "AppNavigationThemeToggleButton": {
     "darkLabel": "Dark mode",
-    "lightLabel": "Light theme"
+    "lightLabel": "Light mode"
   },
   "AppBottomSheetTrigger": {
     "triggerAriaLabel": "language",

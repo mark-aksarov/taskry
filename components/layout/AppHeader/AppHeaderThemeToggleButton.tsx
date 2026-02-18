@@ -1,6 +1,6 @@
 "use client";
 
-import { Sun } from "lucide-react";
+import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/Button";
@@ -20,9 +20,9 @@ export function AppHeaderThemeToggleButton({
       <>
         <Button
           onPress={() => setTheme("light")}
-          aria-label={t("lightLabel")}
+          aria-label={t("darkLabel")}
           variant="ghost"
-          iconLeft={<Sun size={16} strokeWidth={1.5} absoluteStrokeWidth />}
+          iconLeft={<Moon size={16} strokeWidth={1.5} absoluteStrokeWidth />}
           className={className}
         />
       </>
@@ -33,7 +33,7 @@ export function AppHeaderThemeToggleButton({
     <>
       <Button
         onPress={() => setTheme("dark")}
-        aria-label={t("darkLabel")}
+        aria-label={t("lightLabel")}
         variant="ghost"
         iconLeft={<Sun size={16} strokeWidth={1.5} absoluteStrokeWidth />}
         className={className}

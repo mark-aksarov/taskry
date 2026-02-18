@@ -18,8 +18,8 @@
     }
   },
   "AppHeaderThemeToggleButton": {
-    "darkLabel": "Переключить на тёмную тему",
-    "lightLabel": "Переключить на светлую тему"
+    "darkLabel": "Темная тема",
+    "lightLabel": "Светлая тема"
   },
   "AppNavigation": {
     "dashboard": "Панель",
