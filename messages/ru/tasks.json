@@ -170,7 +170,8 @@
     "assignee": "Исполнитель",
     "noAssignee": "Нет исполнителя",
     "status": "Статус",
-    "subtasks": "Подзадачи"
+    "subtasks": "Подзадачи",
+    "noCategory": "Нет категории"
   },
   "TaskDetailHeaderContainer": {
     "noCategory": "Нет категории"
