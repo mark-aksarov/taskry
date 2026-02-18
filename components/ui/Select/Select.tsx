@@ -10,6 +10,7 @@ import { BottomSheet } from "../BottomSheet";
 import { SelectButton } from "./SelectButton";
 import { useResizeObserver } from "@react-aria/utils";
 import { Dialog } from "../Dialog";
+import { twMerge } from "tailwind-merge";
 
 interface SelectOwnProps {
   "data-test"?: string;
@@ -73,6 +74,11 @@ export const Select = <T extends object = any>({
     onResize: onResize,
   });
 
+  const dialogProps = {
+    "aria-labelledby": menuProps["aria-labelledby"],
+    className: "max-h-[inherit] overflow-y-auto",
+  };
+
   return (
     <div
       data-test={dataTest}
@@ -108,9 +114,9 @@ export const Select = <T extends object = any>({
         <BottomSheet
           isDismissable={true}
           state={state}
-          className={overlayClassName}
+          className={twMerge("max-h-[calc(100dvh-64px)]", overlayClassName)}
         >
-          <Dialog aria-labelledby={menuProps["aria-labelledby"]}>
+          <Dialog {...dialogProps}>
             <SelectListBox {...listBoxProps} />
           </Dialog>
         </BottomSheet>
@@ -122,7 +128,7 @@ export const Select = <T extends object = any>({
           className={overlayClassName}
           style={{ "--trigger-width": buttonWidth } as React.CSSProperties}
         >
-          <Dialog aria-labelledby={menuProps["aria-labelledby"]}>
+          <Dialog {...dialogProps}>
             <SelectListBox {...listBoxProps} />
           </Dialog>
         </Popover>
