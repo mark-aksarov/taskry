@@ -15,12 +15,12 @@ import { tv } from "tailwind-variants";
 import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
 import { Button } from "react-aria-components";
+import { startTransition, useState } from "react";
 import { focusRing } from "@/components/ui/styles";
 import { EditSubtaskModal } from "../EditSubtaskModal";
 import { CheckCheck, Pencil, Trash } from "lucide-react";
 import { GuestModeModal } from "../../common/GuestModeModal";
 import { useDeleteSubtaskModal } from "../DeleteSubtaskModal";
-import { startTransition, useActionState, useState } from "react";
 import { useToggleSubtaskStatusActionState } from "./useToggleSubtaskStatusActionState";
 
 interface SubtaskActionMenuTriggerProps {
@@ -35,7 +35,7 @@ interface SubtaskActionMenuTriggerProps {
 
 const buttonStyles = tv({
   extend: focusRing,
-  base: "cursor-pointer text-left text-sm",
+  base: "pressed:underline cursor-pointer text-left text-sm hover:underline",
   variants: {
     isDone: {
       true: "text-black dark:text-white",
@@ -96,7 +96,7 @@ export function SubtaskActionMenuTrigger({
     <>
       <ItemBaseActionMenuTrigger
         onAction={handleAction}
-        placement="top left"
+        placement="bottom left"
         renderDialogHeader={() => <ItemBaseActionMenuDialogHeader />}
         renderButton={() => (
           <Button
