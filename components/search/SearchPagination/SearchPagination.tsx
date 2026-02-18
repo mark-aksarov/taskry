@@ -15,7 +15,7 @@ export function SearchPagination({ totalCount }: SearchPaginationProps) {
   const totalPages = Math.ceil(totalCount / pageSize);
 
   return (
-    <div className="flex w-full items-center justify-between">
+    <div className="flex h-[1.875rem] w-full items-center justify-between">
       <SearchPaginationStatus totalCount={totalCount} />
       {totalPages > 1 && (
         <Pagination
