@@ -2,7 +2,7 @@ import { DetailRow } from "@/components/common/Detail";
 
 interface ProjectDetailLayoutProps {
   titleSlot: React.ReactNode;
-  actionsSlot: React.ReactNode;
+  statusSlot: React.ReactNode;
   creatorSlot: React.ReactNode;
   deadlineSlot: React.ReactNode;
   descriptionSlot: React.ReactNode;
@@ -12,7 +12,7 @@ interface ProjectDetailLayoutProps {
 
 export function ProjectDetailLayout({
   titleSlot,
-  actionsSlot,
+  statusSlot,
   creatorSlot,
   deadlineSlot,
   descriptionSlot,
@@ -23,11 +23,7 @@ export function ProjectDetailLayout({
 
   return (
     <div className="flex flex-col gap-6">
-      <div className="flex flex-col gap-4">
-        {titleSlot}
-
-        <div className="flex gap-3">{actionsSlot}</div>
-      </div>
+      {titleSlot}
       <div className="flex flex-col gap-4">
         <DetailRow className={rowStyles}>
           {creatorSlot}
@@ -35,9 +31,10 @@ export function ProjectDetailLayout({
         </DetailRow>
         <DetailRow className={rowStyles}>{descriptionSlot}</DetailRow>
         <DetailRow className={rowStyles}>
-          {customerSlot}
+          {statusSlot}
           {categorySlot}
         </DetailRow>
+        <DetailRow className={rowStyles}>{customerSlot}</DetailRow>
       </div>
     </div>
   );

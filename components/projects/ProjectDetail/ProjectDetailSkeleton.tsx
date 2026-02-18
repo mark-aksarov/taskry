@@ -6,7 +6,6 @@ export function ProjectDetailSkeleton() {
   return (
     <ProjectDetailLayout
       titleSlot={<Skeleton size="base" className="w-[15rem]" />}
-      actionsSlot={<Skeleton className="h-8 w-[5rem] rounded-lg" />}
       creatorSlot={<DetailInfoSkeleton />}
       deadlineSlot={<DetailInfoSkeleton />}
       descriptionSlot={
@@ -19,8 +18,9 @@ export function ProjectDetailSkeleton() {
           </div>
         </DetailInfo>
       }
-      customerSlot={<DetailInfoSkeleton className="lg:border-none lg:pb-0" />}
-      categorySlot={<DetailInfoSkeleton className="border-none pb-0" />}
+      statusSlot={<DetailInfoSkeleton />}
+      categorySlot={<DetailInfoSkeleton />}
+      customerSlot={<DetailInfoSkeleton className="border-none pb-0" />}
     />
   );
 }

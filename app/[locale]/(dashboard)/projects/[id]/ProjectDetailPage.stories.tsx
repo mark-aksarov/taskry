@@ -2,16 +2,15 @@ import {
   ProjectDetailAlt,
   ProjectDetailAltSkeleton,
 } from "@/components/projects/ProjectDetailAlt";
-
-import {
-  ProjectDetailStory,
-  ProjectDetailWithoutSomeDataStory,
-} from "@/components/projects/ProjectDetail/__stories__";
-
 import {
   DetailHeader,
   DetailHeaderSkeleton,
 } from "@/components/common/DetailHeader";
+
+import {
+  ProjectDetailAltStory,
+  ProjectDetailAltWithoutSomeDataStory,
+} from "@/components/projects/ProjectDetailAlt/__stories__";
 
 import { mocked } from "storybook/test";
 import { ProjectDetailPage } from "./ProjectDetailPage";
@@ -46,7 +45,9 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    projectDetailContainer: <ProjectDetailAlt {...ProjectDetailStory.args} />,
+    projectDetailContainer: (
+      <ProjectDetailAlt {...ProjectDetailAltStory.args} />
+    ),
     projectHeaderContainer: <DetailHeader {...ProjectDetailHeaderStory.args} />,
     projectDetailActions: (
       <ProjectDetailActions {...ProjectDetailActionsStory.args} />
@@ -67,7 +68,7 @@ export const Loading = {
 export const WithoutSomeData = {
   args: {
     projectDetailContainer: (
-      <ProjectDetailAlt {...ProjectDetailWithoutSomeDataStory.args} />
+      <ProjectDetailAlt {...ProjectDetailAltWithoutSomeDataStory.args} />
     ),
     projectHeaderContainer: <DetailHeaderSkeleton />,
     projectDetailActions: (

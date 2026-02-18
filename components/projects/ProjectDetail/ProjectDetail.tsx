@@ -12,7 +12,6 @@ import { useFormatter, useTranslations } from "next-intl";
 import { ProjectDetailLayout } from "./ProjectDetailLayout";
 import { UnknownUser } from "@/components/common/UnknownUser";
 import { ImageContainer } from "@/components/common/ImageContainer";
-import { ProjectDetailStatusMenuTrigger } from "./ProjectDetailStatusMenuTrigger";
 
 interface ProjectDetailProps {
   id: number;
@@ -46,6 +45,7 @@ export function ProjectDetail({
   category,
   status,
 }: ProjectDetailProps) {
+  const tStatus = useTranslations("projects.ProjectStatus");
   const t = useTranslations("projects.ProjectDetail");
 
   const format = useFormatter();
@@ -65,7 +65,6 @@ export function ProjectDetail({
           {title}
         </h2>
       }
-      actionsSlot={<ProjectDetailStatusMenuTrigger />}
       creatorSlot={
         <DetailInfo>
           <DetailTitle>{t("creator")}</DetailTitle>
@@ -101,18 +100,24 @@ export function ProjectDetail({
           </DetailText>
         </DetailInfo>
       }
+      statusSlot={
+        <DetailInfo>
+          <DetailTitle>{t("status")}</DetailTitle>
+          <DetailText>{tStatus(status)}</DetailText>
+        </DetailInfo>
+      }
+      categorySlot={
+        <DetailInfo>
+          <DetailTitle>{t("category")}</DetailTitle>
+          <DetailText>{category ? category.name : t("noCategory")}</DetailText>
+        </DetailInfo>
+      }
       customerSlot={
-        <DetailInfo className="lg:border-none lg:pb-0">
+        <DetailInfo className="border-none pb-0">
           <DetailTitle>{t("customer")}</DetailTitle>
           <DetailText>
             {customer ? customer.fullName : t("noCustomer")}
           </DetailText>
-        </DetailInfo>
-      }
-      categorySlot={
-        <DetailInfo className="border-none pb-0">
-          <DetailTitle>{t("category")}</DetailTitle>
-          <DetailText>{category ? category.name : t("noCategory")}</DetailText>
         </DetailInfo>
       }
     />
