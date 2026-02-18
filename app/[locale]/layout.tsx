@@ -9,6 +9,7 @@ import { ToastRegion } from "@/components/ui/Toast";
 import { I18nProvider } from "@/components/ui/I18nProvider";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { RouterProvider } from "@/components/ui/RouterProvider";
+import { ThemeProvider } from "@/components/layout/ThemeProvider";
 
 const nunitoSans = Nunito_Sans({
   variable: "--font-nunito-sans",
@@ -44,14 +45,21 @@ export default async function RootLayout({
       <body
         className={`${nunitoSans.className} bg-gray-100 antialiased dark:bg-gray-900`}
       >
-        <ToastRegion />
-        <SWRProvider>
-          <NextIntlClientProvider>
-            <I18nProvider locale={locale}>
-              <RouterProvider>{children}</RouterProvider>
-            </I18nProvider>
-          </NextIntlClientProvider>
-        </SWRProvider>
+        <ThemeProvider
+          attribute="data-theme"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <ToastRegion />
+          <SWRProvider>
+            <NextIntlClientProvider>
+              <I18nProvider locale={locale}>
+                <RouterProvider>{children}</RouterProvider>
+              </I18nProvider>
+            </NextIntlClientProvider>
+          </SWRProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

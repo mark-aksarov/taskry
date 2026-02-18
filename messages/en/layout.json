@@ -10,20 +10,17 @@
     "projectDetails": "Project Details",
     "userInfo": "User Information"
   },
-
   "AppHeaderLangMenuTrigger": {
     "label": "English",
-
     "items": {
       "english": "English",
       "russian": "Russian"
     }
   },
-
   "AppHeaderThemeToggleButton": {
-    "label": "Switch to dark theme"
+    "darkLabel": "Switch to dark theme",
+    "lightLabel": "Switch to light theme"
   },
-
   "AppNavigation": {
     "dashboard": "Dashboard",
     "projects": "Projects",
@@ -32,30 +29,25 @@
     "customers": "Customers",
     "profile": "Profile"
   },
-
   "AppNavigationLangMenuTrigger": {
     "dialogHeading": "Language",
     "label": "English",
-
     "items": {
       "english": "English",
       "russian": "Russian"
     }
   },
-
   "AppNavigationLogoutButton": {
     "logout": "Logout"
   },
-
   "AppNavigationThemeToggleButton": {
-    "label": "Dark mode"
+    "darkLabel": "Dark mode",
+    "lightLabel": "Light theme"
   },
-
   "AppBottomSheetTrigger": {
     "triggerAriaLabel": "language",
     "dialogAriaLabel": "App navigation"
   },
-
   "AppSidebarSheetTrigger": {
     "triggerAriaLabel": "menu"
   }

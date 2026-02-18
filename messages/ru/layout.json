@@ -10,20 +10,17 @@
     "projectDetails": "Детали проекта",
     "userInfo": "Информация о пользователе"
   },
-
   "AppHeaderLangMenuTrigger": {
     "label": "Английский",
-
     "items": {
       "english": "Английский",
       "russian": "Русский"
     }
   },
-
   "AppHeaderThemeToggleButton": {
-    "label": "Переключить на тёмную тему"
+    "darkLabel": "Переключить на тёмную тему",
+    "lightLabel": "Переключить на светлую тему"
   },
-
   "AppNavigation": {
     "dashboard": "Панель",
     "projects": "Проекты",
@@ -32,30 +29,25 @@
     "customers": "Клиенты",
     "profile": "Профиль"
   },
-
   "AppNavigationLangMenuTrigger": {
     "dialogHeading": "Язык",
     "label": "Английский",
-
     "items": {
       "english": "Английский",
       "russian": "Русский"
     }
   },
-
   "AppNavigationLogoutButton": {
     "logout": "Выйти"
   },
-
   "AppNavigationThemeToggleButton": {
-    "label": "Темный режим"
+    "darkLabel": "Темная тема",
+    "lightLabel": "Светлая тема"
   },
-
   "AppBottomSheetTrigger": {
     "triggerAriaLabel": "язык",
     "dialogAriaLabel": "Навигация по приложению"
   },
-
   "AppSidebarSheetTrigger": {
     "triggerAriaLabel": "меню"
   }
