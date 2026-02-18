@@ -13,12 +13,6 @@ export type ActionState = {
   message?: string;
 };
 
-export type DeleteCustomersPayload = number[];
-
-export type DeleteProjectsPayload = number[];
-
-export type DeleteTasksPayload = number[];
-
 export interface UpdateProjectStatusesPayload {
   ids: number[];
   nextStatus: ProjectStatus;

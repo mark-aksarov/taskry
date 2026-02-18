@@ -1,12 +1,6 @@
 "use client";
 
 import {
-  ActionFn,
-  ActionState,
-  DeleteCustomersPayload,
-} from "@/lib/actions/types";
-
-import {
   ToolbarMenuTrigger,
   ToolbarActionsButtonMobile,
   ToolbarActionsButtonDesktop,
@@ -17,11 +11,12 @@ import { Trash } from "lucide-react";
 import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
 import { DialogHeader } from "../../ui/Dialog";
+import { ActionFn, ActionState } from "@/lib/actions/types";
 import { DeleteCustomersModal } from "../DeleteCustomersModal";
 import { useSelectedItems } from "@/components/common/SelectedItemsContext";
 
 interface CustomerToolbarActionsMenuTriggerProps {
-  deleteCustomers: ActionFn<ActionState, DeleteCustomersPayload>;
+  deleteCustomers: ActionFn<ActionState, number[]>;
 }
 
 export const CustomerToolbarActionsMenuTrigger = ({

@@ -1,15 +1,10 @@
 "use client";
 
-import {
-  ActionFn,
-  ActionState,
-  DeleteCustomersPayload,
-} from "@/lib/actions/types";
-
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { Pencil, Trash } from "lucide-react";
 import { EditCustomerModal } from "../EditCustomerModal";
+import { ActionFn, ActionState } from "@/lib/actions/types";
 import { DeleteCustomerModal } from "../DeleteCustomerModal";
 import { GuestModeModal } from "@/components/common/GuestModeModal";
 import { NavigationButton } from "@/components/common/NavigationButton";
@@ -18,7 +13,7 @@ interface CustomerDetailActionsProps {
   guestMode: boolean;
   customerId: number;
   customerFullName: string;
-  deleteCustomer: ActionFn<ActionState, DeleteCustomersPayload>;
+  deleteCustomer: ActionFn<ActionState, number[]>;
   editCustomerFormContainer: React.ReactNode;
 }
 

@@ -1,12 +1,6 @@
 "use client";
 
 import {
-  ActionFn,
-  ActionState,
-  DeleteProjectsPayload,
-} from "@/lib/actions/types";
-
-import {
   ToolbarMenuTrigger,
   ToolbarActionsButtonMobile,
   ToolbarActionsButtonDesktop,
@@ -17,6 +11,7 @@ import { useTranslations } from "next-intl";
 import { DialogHeader } from "../../ui/Dialog";
 import { startTransition, useState } from "react";
 import { ProjectStatus } from "@/generated/prisma/enums";
+import { ActionFn, ActionState } from "@/lib/actions/types";
 import { GuestModeModal } from "../../common/GuestModeModal";
 import { DeleteProjectsModal } from "../DeleteProjectsModal";
 import { useSelectedProjects } from "../SelectedProjectsContext";
@@ -25,7 +20,7 @@ import { useUpdateProjectStatusesContext } from "../UpdateProjectStatusContext";
 
 interface ProjectToolbarActionsMenuTriggerProps {
   guestMode: boolean;
-  deleteProjects: ActionFn<ActionState, DeleteProjectsPayload>;
+  deleteProjects: ActionFn<ActionState, number[]>;
 }
 
 export const ProjectToolbarActionsMenuTrigger = ({

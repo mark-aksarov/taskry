@@ -1,16 +1,11 @@
 "use client";
 
-import {
-  ActionFn,
-  ActionState,
-  DeleteProjectsPayload,
-} from "@/lib/actions/types";
-
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { KeyRound, Trash } from "lucide-react";
 import { EditProjectModal } from "../EditProjectModal";
 import { DeleteProjectModal } from "../DeleteProjectModal";
+import { ActionFn, ActionState } from "@/lib/actions/types";
 import { GuestModeModal } from "@/components/common/GuestModeModal";
 import { NavigationButton } from "@/components/common/NavigationButton";
 import { DetailActionsCommentsModalTrigger } from "@/components/common/DetailActionsCommentsModalTrigger";
@@ -20,7 +15,7 @@ interface ProjectDetailActionsProps {
   projectId: number;
   projectTitle: string;
   commentsModal: React.ReactNode;
-  deleteProject: ActionFn<ActionState, DeleteProjectsPayload>;
+  deleteProject: ActionFn<ActionState, number[]>;
   editProjectFormContainer: React.ReactNode;
 }
 

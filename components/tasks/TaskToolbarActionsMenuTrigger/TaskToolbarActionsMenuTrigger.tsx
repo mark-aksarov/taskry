@@ -13,14 +13,14 @@ import { startTransition, useState } from "react";
 import { TaskStatus } from "@/generated/prisma/enums";
 import { DeleteTasksModal } from "../DeleteTasksModal";
 import { useSelectedTasks } from "../SelectedTasksContext";
+import { ActionFn, ActionState } from "@/lib/actions/types";
 import { GuestModeModal } from "../../common/GuestModeModal";
 import { Check, CircleEllipsis, Clock, Trash } from "lucide-react";
 import { useUpdateTaskStatusesContext } from "../UpdateTaskStatusContext";
-import { ActionFn, ActionState, DeleteTasksPayload } from "@/lib/actions/types";
 
 interface TaskToolbarActionsMenuTriggerProps {
   guestMode: boolean;
-  deleteTasks: ActionFn<ActionState, DeleteTasksPayload>;
+  deleteTasks: ActionFn<ActionState, number[]>;
 }
 
 export const TaskToolbarActionsMenuTrigger = ({

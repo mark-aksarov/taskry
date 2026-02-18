@@ -8,21 +8,16 @@ import {
   ConfirmModalConfirmButton,
 } from "@/components/common/ConfirmModal";
 
-import {
-  ActionFn,
-  ActionState,
-  DeleteProjectsPayload,
-} from "@/lib/actions/types";
-
 import { startTransition } from "react";
 import { useTranslations } from "next-intl";
 import { ModalProps } from "@/components/ui/Modal";
 import { DialogHeading } from "@/components/ui/Dialog";
+import { ActionFn, ActionState } from "@/lib/actions/types";
 import { useDeleteModalActionState } from "@/components/common/BaseDeleteModal";
 
 interface DeleteProjectsModalProps extends ModalProps {
   projectIds: number[];
-  deleteProjects: ActionFn<ActionState, DeleteProjectsPayload>;
+  deleteProjects: ActionFn<ActionState, number[]>;
 }
 
 export function DeleteProjectsModal({

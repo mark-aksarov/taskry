@@ -5,9 +5,9 @@ import { useTranslations } from "next-intl";
 import { KeyRound, Trash } from "lucide-react";
 import { EditTaskModal } from "../EditTaskModal";
 import { DeleteTaskModal } from "../DeleteTaskModal";
+import { ActionFn, ActionState } from "@/lib/actions/types";
 import { GuestModeModal } from "@/components/common/GuestModeModal";
 import { NavigationButton } from "@/components/common/NavigationButton";
-import { ActionFn, ActionState, DeleteTasksPayload } from "@/lib/actions/types";
 import { DetailActionsCommentsModalTrigger } from "@/components/common/DetailActionsCommentsModalTrigger";
 
 interface TaskDetailActionsProps {
@@ -15,7 +15,7 @@ interface TaskDetailActionsProps {
   taskId: number;
   taskTitle: string;
   commentsModal: React.ReactNode;
-  deleteTask: ActionFn<ActionState, DeleteTasksPayload>;
+  deleteTask: ActionFn<ActionState, number[]>;
   editTaskFormContainer: React.ReactNode;
 }
 
