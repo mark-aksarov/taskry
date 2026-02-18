@@ -1,28 +1,21 @@
 "use client";
 
-import { useEffect, useRef } from "react";
 import { twMerge } from "tailwind-merge";
 
 interface ErrorBannerTextProps {
+  ref: React.RefObject<HTMLDivElement | null>;
   className?: string;
   children: React.ReactNode;
 }
 
-export function ErrorBanner({ className, children }: ErrorBannerTextProps) {
-  const errorRef = useRef<HTMLDivElement | null>(null);
-
-  useEffect(() => {
-    if (errorRef.current) {
-      errorRef.current.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
-    }
-  }, []);
-
+export function ErrorBanner({
+  ref,
+  className,
+  children,
+}: ErrorBannerTextProps) {
   return (
     <div
-      ref={errorRef}
+      ref={ref}
       role="alert"
       aria-live="assertive"
       className={twMerge(
