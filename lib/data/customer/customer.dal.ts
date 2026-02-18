@@ -105,6 +105,32 @@ export const getCustomerFormData = cache(
   },
 );
 
+export const getCustomerSummary = cache(
+  async (id: number): Promise<CustomerSummaryDTO | null> => {
+    // Authorization
+    const {
+      user: { workspaceId },
+    } = await requireSession();
+
+    const customer = await prisma.customer.findFirst({
+      where: { id, workspaceId },
+      select: {
+        id: true,
+        fullName: true,
+      },
+    });
+
+    if (!customer) {
+      return null;
+    }
+
+    return {
+      id: customer.id,
+      fullName: customer.fullName,
+    };
+  },
+);
+
 export const getCustomerSummaries = cache(
   async (): Promise<CustomerSummaryDTO[]> => {
     // Authorization

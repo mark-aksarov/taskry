@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import { hasGuestRole } from "@/lib/utils/hasGuestRole";
 import { CustomerDetailPage } from "./CustomerDetailPage";
-import { getCustomerDetail } from "@/lib/data/customer/customer.dal";
+import { getCustomerSummary } from "@/lib/data/customer/customer.dal";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { deleteCustomers } from "@/lib/actions/customer/deleteCustomers";
 import { CustomerDetailActions } from "@/components/customer/CustomerDetailActions";
@@ -19,7 +19,7 @@ export default async function AppCustomerDetailPage({
   const { id } = await params;
   const numberId = Number(id);
 
-  const customerSummary = await getCustomerDetail(numberId);
+  const customerSummary = await getCustomerSummary(numberId);
 
   if (!customerSummary) {
     notFound();
