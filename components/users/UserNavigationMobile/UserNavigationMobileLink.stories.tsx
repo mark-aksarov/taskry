@@ -12,9 +12,12 @@ const meta = {
 } satisfies Meta<typeof UserNavigationMobileLink>;
 
 export default meta;
-type Story = StoryObj<typeof UserNavigationMobileLink>;
+type Story = StoryObj<typeof meta>;
 
 export const Default = {
+  args: {
+    isSelected: false,
+  },
   globals: {
     viewport: { value: "mobile2", isRotated: false },
   },

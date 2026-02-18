@@ -17,7 +17,7 @@ const meta = {
 } satisfies Meta<typeof ProjectCategoryListItem>;
 
 export default meta;
-type Story = StoryObj<typeof ProjectCategoryListItem>;
+type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {

@@ -17,7 +17,7 @@ const meta = {
 } satisfies Meta<typeof PositionListItem>;
 
 export default meta;
-type Story = StoryObj<typeof PositionListItem>;
+type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {

@@ -12,7 +12,7 @@ const meta: Meta<typeof Skeleton> = {
 } satisfies Meta<typeof Skeleton>;
 
 export default meta;
-type Story = StoryObj<typeof Skeleton>;
+type Story = StoryObj<typeof meta>;
 
 export const Default = {} satisfies Story;
 

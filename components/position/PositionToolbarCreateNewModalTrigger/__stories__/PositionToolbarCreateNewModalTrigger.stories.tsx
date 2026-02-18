@@ -11,7 +11,7 @@ const meta = {
 } satisfies Meta<typeof PositionToolbarCreateNewModalTrigger>;
 
 export default meta;
-type Story = StoryObj<typeof PositionToolbarCreateNewModalTrigger>;
+type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {

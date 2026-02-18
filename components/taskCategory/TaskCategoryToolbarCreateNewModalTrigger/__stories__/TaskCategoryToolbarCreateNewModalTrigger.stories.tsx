@@ -11,7 +11,7 @@ const meta = {
 } satisfies Meta<typeof TaskCategoryToolbarCreateNewModalTrigger>;
 
 export default meta;
-type Story = StoryObj<typeof TaskCategoryToolbarCreateNewModalTrigger>;
+type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
