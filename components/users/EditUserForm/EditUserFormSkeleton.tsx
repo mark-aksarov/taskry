@@ -18,7 +18,7 @@ export function EditUserFormSkeleton() {
         </FieldSkeleton>
 
         <FieldSkeleton>
-          <FieldGroupSkeleton />
+          <FieldGroupSkeleton className="h-[9rem]" />
         </FieldSkeleton>
 
         <FieldSkeleton>

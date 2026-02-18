@@ -28,7 +28,7 @@ export function PageListSkeleton({
           <Skeleton className="h-8 w-[5rem] rounded-lg" />
           <Skeleton className="h-8 w-[5rem] rounded-lg" />
           <Skeleton className="ml-auto h-8 w-[5rem] rounded-lg" />
-          <Skeleton className="h-8 w-[7rem] rounded-lg" />
+          <Skeleton className="h-8 w-[5rem] rounded-lg" />
         </ToolbarDesktop>
 
         <ToolbarMobileTop>
@@ -40,7 +40,7 @@ export function PageListSkeleton({
 
         <ToolbarMobileBottom>
           <Skeleton className="h-8 w-[5rem] rounded-lg" />
-          <Skeleton className="ml-auto h-8 w-[7rem] rounded-lg" />
+          <Skeleton className="ml-auto h-8 w-[5rem] rounded-lg" />
         </ToolbarMobileBottom>
 
         <List>

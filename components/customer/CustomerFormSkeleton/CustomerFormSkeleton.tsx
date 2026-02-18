@@ -7,7 +7,7 @@ import {
   FormBaseBody,
   FormBaseFooter,
   FormBaseSubmitButtonSkeleton,
-} from "../common/FormBase";
+} from "../../common/FormBase";
 
 export function CustomerFormSkeleton() {
   return (
@@ -18,7 +18,7 @@ export function CustomerFormSkeleton() {
         </FieldSkeleton>
 
         <FieldSkeleton>
-          <FieldGroupSkeleton />
+          <FieldGroupSkeleton className="h-[9rem]" />
         </FieldSkeleton>
 
         <FieldSkeleton>
@@ -37,6 +37,7 @@ export function CustomerFormSkeleton() {
           <FieldGroupSkeleton />
         </FieldSkeleton>
       </FormBaseBody>
+
       <FormBaseFooter>
         <FormBaseSubmitButtonSkeleton />
       </FormBaseFooter>

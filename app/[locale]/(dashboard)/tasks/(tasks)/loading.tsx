@@ -1,14 +1,55 @@
+import {
+  ToolbarDesktop,
+  ToolbarMobileTop,
+  ToolbarMobileBottom,
+  ToolbarMobileHeading,
+  ToolbarDesktopButtonSkeleton,
+  ToolbarMobileTopButtonSkeleton,
+  ToolbarMobileBottomButtonSkeleton,
+} from "@/components/common/Toolbar";
+
 import { useTranslations } from "next-intl";
+import { List } from "@/components/common/List";
+import { Repeat } from "@/components/common/Repeat";
+import { PageGrid } from "@/components/common/PageGrid";
+import { PageContainer } from "@/components/common/PageContainer";
 import { TaskListItemSkeleton } from "@/components/tasks/TaskListItem";
-import { PageListSkeleton } from "@/components/common/PageListSkeleton";
 
 export default function TasksPageLoading() {
   const t = useTranslations("app.TasksPageLoading");
 
   return (
-    <PageListSkeleton
-      title={t("title")}
-      renderItemSkeleton={() => <TaskListItemSkeleton showCheckbox />}
-    />
+    <PageContainer>
+      <PageGrid>
+        <ToolbarDesktop>
+          <ToolbarDesktopButtonSkeleton />
+          <ToolbarDesktopButtonSkeleton />
+          <ToolbarDesktopButtonSkeleton />
+          <ToolbarDesktopButtonSkeleton />
+          <ToolbarDesktopButtonSkeleton className="ml-auto" />
+          <ToolbarDesktopButtonSkeleton />
+        </ToolbarDesktop>
+
+        <ToolbarMobileTop>
+          <ToolbarMobileHeading>{t("title")}</ToolbarMobileHeading>
+          <ToolbarMobileTopButtonSkeleton />
+          <ToolbarMobileTopButtonSkeleton />
+          <ToolbarMobileTopButtonSkeleton />
+          <ToolbarMobileTopButtonSkeleton />
+        </ToolbarMobileTop>
+
+        <ToolbarMobileBottom>
+          <ToolbarMobileBottomButtonSkeleton />
+          <ToolbarMobileBottomButtonSkeleton className="ml-auto" />
+        </ToolbarMobileBottom>
+
+        <List>
+          <Repeat
+            items={20}
+            renderItem={() => <TaskListItemSkeleton showCheckbox />}
+          />
+        </List>
+      </PageGrid>
+    </PageContainer>
   );
 }

@@ -7,9 +7,7 @@ import {
   FormBaseBody,
   FormBaseFooter,
   FormBaseSubmitButtonSkeleton,
-} from "../common/FormBase";
-
-import { Skeleton } from "@/components/ui/Skeleton";
+} from "../../common/FormBase";
 
 export function TaskFormSkeleton() {
   return (
@@ -20,7 +18,7 @@ export function TaskFormSkeleton() {
         </FieldSkeleton>
 
         <FieldSkeleton>
-          <FieldGroupSkeleton />
+          <FieldGroupSkeleton className="h-[9rem]" />
         </FieldSkeleton>
 
         <FieldSkeleton>
@@ -41,12 +39,6 @@ export function TaskFormSkeleton() {
 
         <FieldSkeleton>
           <FieldGroupSkeleton />
-        </FieldSkeleton>
-
-        <FieldSkeleton>
-          <Skeleton size="sm" />
-          <Skeleton size="sm" />
-          <Skeleton size="sm" />
         </FieldSkeleton>
       </FormBaseBody>
       <FormBaseFooter>

@@ -1,15 +1,15 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { NewUserFormSkeleton } from "../NewUserFormSkeleton";
+import { UserFiltersFormSkeleton } from "../UserFiltersFormSkeleton";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {
-  title: "components/users/NewUserFormSkeleton",
-  component: NewUserFormSkeleton,
+  title: "components/users/UserFiltersFormSkeleton",
+  component: UserFiltersFormSkeleton,
   decorators: [withThemedBackground],
   parameters: {
     backgroundVariant: "alt",
   },
-} as Meta<typeof NewUserFormSkeleton>;
+} as Meta<typeof UserFiltersFormSkeleton>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;

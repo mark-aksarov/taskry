@@ -11,8 +11,8 @@ export function TaskDetailSkeleton() {
         <DetailInfo>
           <Skeleton className="w-[7rem]" size="xs" />
           <div className="flex flex-col">
-            <Skeleton size="sm" />
-            <Skeleton size="sm" />
+            <Skeleton size="sm" className="w-[15rem]" />
+            <Skeleton size="sm" className="w-[14rem]" />
             <Skeleton size="sm" className="w-[15rem]" />
           </div>
         </DetailInfo>
@@ -26,9 +26,9 @@ export function TaskDetailSkeleton() {
       subtasksSlot={
         <DetailInfo className="border-none pb-0">
           <FieldSkeleton>
-            <Skeleton size="sm" />
-            <Skeleton size="sm" />
-            <Skeleton size="sm" />
+            <Skeleton size="sm" className="w-[7rem]" />
+            <Skeleton size="sm" className="w-[7rem]" />
+            <Skeleton size="sm" className="w-[7rem]" />
           </FieldSkeleton>
         </DetailInfo>
       }
