@@ -26,7 +26,7 @@ export function CustomerDetailModal({
         <DialogFooter>
           <DetailModalLink
             label={t("openInFullPage")}
-            href={`/customers?customerId=${customerId}`}
+            href={`/customers/${customerId}`}
           />
         </DialogFooter>
       </DetailModalDialog>

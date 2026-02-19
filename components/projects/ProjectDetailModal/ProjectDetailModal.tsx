@@ -26,7 +26,7 @@ export function ProjectDetailModal({
         <DialogFooter>
           <DetailModalLink
             label={t("openInFullPage")}
-            href={`/projects?projectId=${projectId}`}
+            href={`/projects/${projectId}`}
           />
         </DialogFooter>
       </DetailModalDialog>
