@@ -3,6 +3,7 @@ import { itemStyles } from "../styles";
 import { Node, TreeState } from "react-stately";
 import { mergeProps, useHover, useMenuItem } from "react-aria";
 import { twMerge } from "tailwind-merge";
+import { Check } from "lucide-react";
 
 interface MenuItemProps<T extends object = any>
   extends React.HTMLAttributes<HTMLLIElement> {
@@ -53,6 +54,18 @@ export const MenuItem = ({
       className={classes}
     >
       {item.rendered}
+      {state.selectionManager.selectionMode !== "none" ? (
+        states.isSelected ? (
+          <Check
+            size={16}
+            strokeWidth={1.5}
+            absoluteStrokeWidth
+            className="ml-auto"
+          />
+        ) : (
+          <div className="ml-auto w-4" />
+        )
+      ) : null}
     </li>
   );
 };

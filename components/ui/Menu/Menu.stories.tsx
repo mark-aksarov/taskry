@@ -85,6 +85,14 @@ export const WithDisabledItem = {
   },
 } satisfies Story;
 
+export const WithSelectedItem = {
+  ...MenuTemplate,
+  args: {
+    selectionMode: "single",
+    selectedKeys: ["delete"],
+  },
+} satisfies Story;
+
 export const WithSheet = {
   ...MenuTemplate,
   args: {
