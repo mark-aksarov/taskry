@@ -9,15 +9,17 @@ import { ProfileActions } from "@/components/users/ProfileActions";
 import { changePassword } from "@/lib/actions/user/changePassword";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { pageSearchParam, pageSizeSearchParam } from "@/lib/schemas/base";
+import { updateTaskStatuses } from "@/lib/actions/task/updateTaskStatuses";
 import { UserTasksContainer } from "@/components/users/UserTasksContainer";
 import { ChangePasswordForm } from "@/components/users/ChangePasswordForm";
 import { UserHeaderContainer } from "@/components/users/UserHeaderContainer";
 import { UserTasksPageLayout } from "@/components/users/UserTasksPageLayout";
 import { NewTaskFormContainer } from "@/components/tasks/NewTaskFormContainer";
-import { SelectedTasksProvider } from "@/components/tasks/SelectedTasksContext/SelectedTasksContext";
+import { SelectedTasksProvider } from "@/components/tasks/SelectedTasksContext";
 import { EditUserFormContainer } from "@/components/users/EditUserFormContainer";
 import { ProfileNavigationMobile } from "@/components/users/ProfileNavigationMobile";
 import { ProfileNavigationDesktop } from "@/components/users/ProfileNavigationDesktop";
+import { UpdateTaskStatusesProvider } from "@/components/tasks/UpdateTaskStatusContext";
 import { TaskToolbarActionsMenuTrigger } from "@/components/tasks/TaskToolbarActionsMenuTrigger";
 
 const searchParamsSchema = z.object({
@@ -80,30 +82,32 @@ export default async function AppProfileTasksPage({
   }
 
   return (
-    <SelectedTasksProvider
-      pageItems={tasks.map((task) => ({ id: task.id, status: task.status }))}
-    >
-      <UserTasksPageLayout
-        userTasksContainer={
-          <UserTasksContainer
-            tasks={tasks}
-            totalCount={totalCount}
-            page={page}
-            pageSize={pageSize}
-          />
-        }
-        userHeaderContainer={<UserHeaderContainer userId={userId} />}
-        taskToolbarActionsMenuTrigger={
-          <TaskToolbarActionsMenuTrigger
-            guestMode={guestMode}
-            deleteTasks={deleteTasks}
-          />
-        }
-        navigationDesktop={
-          <ProfileNavigationDesktop profileActions={profileActions} />
-        }
-        navigationMobile={<ProfileNavigationMobile />}
-      />
-    </SelectedTasksProvider>
+    <UpdateTaskStatusesProvider updateStatus={updateTaskStatuses}>
+      <SelectedTasksProvider
+        pageItems={tasks.map((task) => ({ id: task.id, status: task.status }))}
+      >
+        <UserTasksPageLayout
+          userTasksContainer={
+            <UserTasksContainer
+              tasks={tasks}
+              totalCount={totalCount}
+              page={page}
+              pageSize={pageSize}
+            />
+          }
+          userHeaderContainer={<UserHeaderContainer userId={userId} />}
+          taskToolbarActionsMenuTrigger={
+            <TaskToolbarActionsMenuTrigger
+              guestMode={guestMode}
+              deleteTasks={deleteTasks}
+            />
+          }
+          navigationDesktop={
+            <ProfileNavigationDesktop profileActions={profileActions} />
+          }
+          navigationMobile={<ProfileNavigationMobile />}
+        />
+      </SelectedTasksProvider>
+    </UpdateTaskStatusesProvider>
   );
 }

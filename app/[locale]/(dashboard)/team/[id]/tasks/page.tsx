@@ -10,6 +10,7 @@ import { TeamProfileTasksPageEmpty } from "./TeamProfileTasksPageEmpty";
 import { pageSearchParam, pageSizeSearchParam } from "@/lib/schemas/base";
 import { ChangePasswordForm } from "@/components/users/ChangePasswordForm";
 import { UserTasksContainer } from "@/components/users/UserTasksContainer";
+import { updateTaskStatuses } from "@/lib/actions/task/updateTaskStatuses";
 import { UserTasksPageLayout } from "@/components/users/UserTasksPageLayout";
 import { UserHeaderContainer } from "@/components/users/UserHeaderContainer";
 import { NewTaskFormContainer } from "@/components/tasks/NewTaskFormContainer";
@@ -17,6 +18,7 @@ import { UserNavigationMobile } from "@/components/users/UserNavigationMobile";
 import { SelectedTasksProvider } from "@/components/tasks/SelectedTasksContext";
 import { UserNavigationDesktop } from "@/components/users/UserNavigationDesktop";
 import { EditUserFormContainer } from "@/components/users/EditUserFormContainer";
+import { UpdateTaskStatusesProvider } from "@/components/tasks/UpdateTaskStatusContext";
 import { TaskToolbarActionsMenuTrigger } from "@/components/tasks/TaskToolbarActionsMenuTrigger";
 
 const searchParamsSchema = z.object({
@@ -83,29 +85,33 @@ export default async function AppProfileTasksPage({
   }
 
   return (
-    <SelectedTasksProvider
-      pageItems={tasks.map((task) => ({ id: task.id, status: task.status }))}
-    >
-      <UserTasksPageLayout
-        backButton
-        userTasksContainer={
-          <UserTasksContainer
-            tasks={tasks}
-            totalCount={totalCount}
-            page={page}
-            pageSize={pageSize}
-          />
-        }
-        userHeaderContainer={<UserHeaderContainer userId={userId} />}
-        taskToolbarActionsMenuTrigger={
-          <TaskToolbarActionsMenuTrigger
-            guestMode={guestMode}
-            deleteTasks={deleteTasks}
-          />
-        }
-        navigationDesktop={<UserNavigationDesktop userActions={userActions} />}
-        navigationMobile={<UserNavigationMobile />}
-      />
-    </SelectedTasksProvider>
+    <UpdateTaskStatusesProvider updateStatus={updateTaskStatuses}>
+      <SelectedTasksProvider
+        pageItems={tasks.map((task) => ({ id: task.id, status: task.status }))}
+      >
+        <UserTasksPageLayout
+          backButton
+          userTasksContainer={
+            <UserTasksContainer
+              tasks={tasks}
+              totalCount={totalCount}
+              page={page}
+              pageSize={pageSize}
+            />
+          }
+          userHeaderContainer={<UserHeaderContainer userId={userId} />}
+          taskToolbarActionsMenuTrigger={
+            <TaskToolbarActionsMenuTrigger
+              guestMode={guestMode}
+              deleteTasks={deleteTasks}
+            />
+          }
+          navigationDesktop={
+            <UserNavigationDesktop userActions={userActions} />
+          }
+          navigationMobile={<UserNavigationMobile />}
+        />
+      </SelectedTasksProvider>
+    </UpdateTaskStatusesProvider>
   );
 }
