@@ -1,8 +1,8 @@
 "use client";
 
 import React from "react";
+import { pageSize } from "../constants";
 import { useTranslations } from "next-intl";
-import { pageSize } from "../SearchContainer";
 import { useSearchContext } from "../SearchContext";
 
 interface SearchPaginationStatusProps {

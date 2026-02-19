@@ -1,20 +1,16 @@
 import { AppHeader } from "@/components/layout/AppHeader";
+import { PageTemplateProps } from "@/components/layout/types";
 import { useTranslations } from "next-intl";
 
-interface TasksTemplateProps {
-  searchModal: React.ReactNode;
-  children: React.ReactNode;
-}
-
-export default async function TasksTemplate({
-  searchModal,
+export default function TasksTemplate({
   children,
-}: TasksTemplateProps) {
+  ...appHeaderProps
+}: PageTemplateProps) {
   const t = useTranslations("app.TasksPage");
 
   return (
     <>
-      <AppHeader heading={t("heading")} searchModal={searchModal} />
+      <AppHeader {...appHeaderProps} heading={t("heading")} />
       <main>{children}</main>
     </>
   );

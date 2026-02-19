@@ -1,25 +1,14 @@
 import CompaniesTemplate from "./CompaniesTemplate";
-import { SearchModal } from "@/components/search/SearchModal";
-import { TasksSearchContainer } from "@/components/search/TasksSearchContainer";
-import { ProjectsSearchContainer } from "@/components/search/ProjectsSearchContainer";
+import { defaultAppHeaderSlots } from "@/components/layout/AppHeader/defaultAppHeaderSlots";
 
 interface CompaniesTemplateProps {
   children: React.ReactNode;
 }
 
-export default async function AppCompaniesTemplate({
+export default function AppCompaniesTemplate({
   children,
 }: CompaniesTemplateProps) {
   return (
-    <CompaniesTemplate
-      searchModal={
-        <SearchModal
-          tasksSearchContainer={<TasksSearchContainer />}
-          projectsSearchContainer={<ProjectsSearchContainer />}
-        />
-      }
-    >
-      {children}
-    </CompaniesTemplate>
+    <CompaniesTemplate {...defaultAppHeaderSlots}>{children}</CompaniesTemplate>
   );
 }

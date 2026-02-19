@@ -6,10 +6,9 @@ import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { usePathname, useRouter } from "next/navigation";
 import { PositionsPageEmpty } from "./PositionsPageEmpty";
 import { PageDecorator } from "@/.storybook/PageDecorator";
-import { SearchModal } from "@/components/search/SearchModal";
 import { PositionList } from "@/components/position/PositionList";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { SearchModalStory } from "@/components/search/SearchModal/__stories__";
+import { AppHeaderStory } from "@/components/layout/AppHeader/__stories__";
 import { PositionListStory } from "@/components/position/PositionList/__stories__";
 import { withSelectedItemsProvider } from "@/components/common/SelectedItemsContext/__stories__";
 import { withDeletePositionModalProvider } from "@/components/position/DeletePositionModal/__stories__";
@@ -24,9 +23,7 @@ const meta = {
   parameters: { layout: "fullscreen" },
   decorators: [
     (Story) => (
-      <PositionsTemplate
-        searchModal={<SearchModal {...SearchModalStory.args} />}
-      >
+      <PositionsTemplate {...AppHeaderStory.args}>
         <Story />
       </PositionsTemplate>
     ),

@@ -10,12 +10,11 @@ import TeamProfileTemplate from "../TeamProfileTemplate";
 import { useParams, usePathname } from "next/navigation";
 import { PageDecorator } from "@/.storybook/PageDecorator";
 import { NewTaskForm } from "@/components/tasks/NewTaskForm";
-import { SearchModal } from "@/components/search/SearchModal";
 import { UserTaskList } from "@/components/users/UserTaskList";
 import { DetailHeader } from "@/components/common/DetailHeader";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { AppHeaderStory } from "@/components/layout/AppHeader/__stories__";
 import { NewTaskFormStory } from "@/components/tasks/NewTaskForm/__stories__";
-import { SearchModalStory } from "@/components/search/SearchModal/__stories__";
 import { UserNavigationMobile } from "@/components/users/UserNavigationMobile";
 import { UserTaskListStory } from "@/components/users/UserTaskList/__stories__";
 import { UserNavigationDesktop } from "@/components/users/UserNavigationDesktop";
@@ -36,9 +35,7 @@ const meta = {
   parameters: { layout: "fullscreen" },
   decorators: [
     (Story) => (
-      <TeamProfileTemplate
-        searchModal={<SearchModal {...SearchModalStory.args} />}
-      >
+      <TeamProfileTemplate {...AppHeaderStory.args}>
         <Story />
       </TeamProfileTemplate>
     ),

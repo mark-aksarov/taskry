@@ -1,20 +1,16 @@
-import { AppHeader } from "@/components/layout/AppHeader";
 import { useTranslations } from "next-intl";
+import { AppHeader } from "@/components/layout/AppHeader";
+import { PageTemplateProps } from "@/components/layout/types";
 
-interface TeamProfileTemplateProps {
-  searchModal: React.ReactNode;
-  children: React.ReactNode;
-}
-
-export default async function TeamProfileTemplate({
-  searchModal,
+export default function TeamProfileTemplate({
   children,
-}: TeamProfileTemplateProps) {
+  ...appHeaderProps
+}: PageTemplateProps) {
   const t = useTranslations("app.TeamProfilePage");
 
   return (
     <>
-      <AppHeader backButton heading={t("heading")} searchModal={searchModal} />
+      <AppHeader {...appHeaderProps} backButton heading={t("heading")} />
       <main>{children}</main>
     </>
   );

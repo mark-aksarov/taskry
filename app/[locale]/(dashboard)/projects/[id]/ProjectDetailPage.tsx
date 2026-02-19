@@ -3,32 +3,36 @@ import {
   ToolbarMobileHeading,
 } from "@/components/common/Toolbar";
 
+import {
+  AppHeader,
+  AppHeaderContainerProps,
+} from "@/components/layout/AppHeader";
+
 import { useTranslations } from "next-intl";
 import { Card } from "@/components/common/Card";
 import { PageGrid } from "@/components/common/PageGrid";
 import { BackButton } from "@/components/common/BackButton";
 import { PageContainer } from "@/components/common/PageContainer";
 import { ProjectDetailCard } from "@/components/projects/ProjectDetailCard";
-import { AppHeader } from "@/components/layout/AppHeader";
 
 interface ProjectPageProps {
   projectDetailContainer: React.ReactNode;
   projectHeaderContainer: React.ReactNode;
   projectDetailActions: React.ReactNode;
-  searchModal: React.ReactNode;
+  appHeaderProps: AppHeaderContainerProps;
 }
 
 export function ProjectDetailPage({
   projectDetailContainer,
   projectHeaderContainer,
   projectDetailActions,
-  searchModal,
+  appHeaderProps,
 }: ProjectPageProps) {
   const t = useTranslations("app.ProjectDetailPage");
 
   return (
     <>
-      <AppHeader backButton heading={t("heading")} searchModal={searchModal} />
+      <AppHeader {...appHeaderProps} backButton heading={t("heading")} />
       <main>
         <PageContainer>
           <ProjectDetailCard

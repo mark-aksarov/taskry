@@ -1,25 +1,14 @@
 import PositionsTemplate from "./PositionsTemplate";
-import { SearchModal } from "@/components/search/SearchModal";
-import { TasksSearchContainer } from "@/components/search/TasksSearchContainer";
-import { ProjectsSearchContainer } from "@/components/search/ProjectsSearchContainer";
+import { defaultAppHeaderSlots } from "@/components/layout/AppHeader/defaultAppHeaderSlots";
 
-interface PositionsTemplateProps {
+interface AppPositionsTemplateProps {
   children: React.ReactNode;
 }
 
 export default async function AppPositionsTemplate({
   children,
-}: PositionsTemplateProps) {
+}: AppPositionsTemplateProps) {
   return (
-    <PositionsTemplate
-      searchModal={
-        <SearchModal
-          tasksSearchContainer={<TasksSearchContainer />}
-          projectsSearchContainer={<ProjectsSearchContainer />}
-        />
-      }
-    >
-      {children}
-    </PositionsTemplate>
+    <PositionsTemplate {...defaultAppHeaderSlots}>{children}</PositionsTemplate>
   );
 }

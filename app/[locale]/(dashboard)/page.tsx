@@ -9,11 +9,9 @@ import { AssignedTasksContainer } from "@/components/tasks/AssignedTasksContaine
 import { TotalTasksCardContainer } from "@/components/tasks/TotalTasksCardContainer";
 import { TotalUsersCardContainer } from "@/components/users/TotalUsersCardContainer";
 import { UpdateTaskStatusesProvider } from "@/components/tasks/UpdateTaskStatusContext";
+import { defaultAppHeaderSlots } from "@/components/layout/AppHeader/defaultAppHeaderSlots";
 import { TotalProjectsCardContainer } from "@/components/projects/TotalProjectsCardContainer";
 import { TotalCustomersCardContainer } from "@/components/customer/TotalCustomersCardContainer";
-import { SearchModal } from "@/components/search/SearchModal";
-import { TasksSearchContainer } from "@/components/search/TasksSearchContainer";
-import { ProjectsSearchContainer } from "@/components/search/ProjectsSearchContainer";
 
 const searchParamsSchema = z.object({
   page: pageSearchParam,
@@ -63,12 +61,7 @@ export default async function AppDashboardPage({
               pageSize={pageSize}
             />
           }
-          searchModal={
-            <SearchModal
-              tasksSearchContainer={<TasksSearchContainer />}
-              projectsSearchContainer={<ProjectsSearchContainer />}
-            />
-          }
+          appHeaderProps={defaultAppHeaderSlots}
         />
       </SelectedTasksProvider>
     </UpdateTaskStatusesProvider>

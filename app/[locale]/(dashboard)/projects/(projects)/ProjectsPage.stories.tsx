@@ -6,12 +6,11 @@ import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { ProjectsPageEmpty } from "./ProjectsPageEmpty";
 import { usePathname, useRouter } from "next/navigation";
 import { PageDecorator } from "@/.storybook/PageDecorator";
-import { SearchModal } from "@/components/search/SearchModal";
 import { ProjectList } from "@/components/projects/ProjectList";
 import { ProjectGrid } from "@/components/projects/ProjectGrid";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { AppHeaderStory } from "@/components/layout/AppHeader/__stories__";
 import { ProjectFiltersForm } from "@/components/projects/ProjectFiltersForm";
-import { SearchModalStory } from "@/components/search/SearchModal/__stories__";
 import { ProjectGridStory } from "@/components/projects/ProjectGrid/__stories__";
 import { ProjectListStory } from "@/components/projects/ProjectList/__stories__";
 import { EntityContainerPresentation } from "@/components/common/EntityContainerPresentation";
@@ -33,9 +32,7 @@ const meta = {
   parameters: { layout: "fullscreen" },
   decorators: [
     (Story) => (
-      <ProjectsTemplate
-        searchModal={<SearchModal {...SearchModalStory.args} />}
-      >
+      <ProjectsTemplate {...AppHeaderStory.args}>
         <Story />
       </ProjectsTemplate>
     ),

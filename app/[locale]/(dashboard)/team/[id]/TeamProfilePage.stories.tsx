@@ -14,10 +14,9 @@ import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import TeamProfileTemplate from "./TeamProfileTemplate";
 import { useParams, usePathname } from "next/navigation";
 import { PageDecorator } from "@/.storybook/PageDecorator";
-import { SearchModal } from "@/components/search/SearchModal";
 import { ProfileActions } from "@/components/users/ProfileActions";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { SearchModalStory } from "@/components/search/SearchModal/__stories__";
+import { AppHeaderStory } from "@/components/layout/AppHeader/__stories__";
 import { UserDetail, UserDetailSkeleton } from "@/components/users/UserDetail";
 import { ProfileActionsStory } from "@/components/users/ProfileActions/__stories__";
 import { PersonDetailHeaderStory } from "@/components/common/DetailHeader/__stories__";
@@ -28,9 +27,7 @@ const meta = {
   parameters: { layout: "fullscreen" },
   decorators: [
     (Story) => (
-      <TeamProfileTemplate
-        searchModal={<SearchModal {...SearchModalStory.args} />}
-      >
+      <TeamProfileTemplate {...AppHeaderStory.args}>
         <Story />
       </TeamProfileTemplate>
     ),

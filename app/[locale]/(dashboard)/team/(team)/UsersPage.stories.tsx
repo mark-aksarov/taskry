@@ -8,12 +8,11 @@ import { UserGrid } from "@/components/users/UserGrid";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { usePathname, useRouter } from "next/navigation";
 import { PageDecorator } from "@/.storybook/PageDecorator";
-import { SearchModal } from "@/components/search/SearchModal";
 import { UserFiltersForm } from "@/components/users/UserFiltersForm";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { UserListStory } from "@/components/users/UserList/__stories__";
 import { UserGridStory } from "@/components/users/UserGrid/__stories__";
-import { SearchModalStory } from "@/components/search/SearchModal/__stories__";
+import { AppHeaderStory } from "@/components/layout/AppHeader/__stories__";
 import { UserFiltersFormStory } from "@/components/users/UserFiltersForm/__stories__";
 import { withDeleteUserModalProvider } from "@/components/users/DeleteUserModal/__stories__";
 import { EntityContainerPresentation } from "@/components/common/EntityContainerPresentation";
@@ -29,7 +28,7 @@ const meta = {
   parameters: { layout: "fullscreen" },
   decorators: [
     (Story) => (
-      <UsersTemplate searchModal={<SearchModal {...SearchModalStory.args} />}>
+      <UsersTemplate {...AppHeaderStory.args}>
         <Story />
       </UsersTemplate>
     ),

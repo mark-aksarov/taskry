@@ -2,9 +2,14 @@ import {
   ToolbarMobileTop,
   ToolbarMobileHeading,
 } from "@/components/common/Toolbar";
+
+import {
+  AppHeader,
+  AppHeaderContainerProps,
+} from "@/components/layout/AppHeader";
+
 import { useTranslations } from "next-intl";
 import { PageGrid } from "@/components/common/PageGrid";
-import { AppHeader } from "@/components/layout/AppHeader";
 import { PageContainer } from "@/components/common/PageContainer";
 
 interface DashboardPageProps {
@@ -13,7 +18,7 @@ interface DashboardPageProps {
   totalUsersCardContainer: React.ReactNode;
   totalCustomersCardContainer: React.ReactNode;
   assignedTasksContainer: React.ReactNode;
-  searchModal: React.ReactNode;
+  appHeaderProps: AppHeaderContainerProps;
 }
 
 export function DashboardPage({
@@ -22,13 +27,13 @@ export function DashboardPage({
   totalUsersCardContainer,
   totalCustomersCardContainer,
   assignedTasksContainer,
-  searchModal,
+  appHeaderProps,
 }: DashboardPageProps) {
   const t = useTranslations("app.DashboardPage");
 
   return (
     <>
-      <AppHeader heading={t("heading")} searchModal={searchModal} />
+      <AppHeader {...appHeaderProps} heading={t("heading")} />
       <main>
         <PageContainer>
           <PageGrid>

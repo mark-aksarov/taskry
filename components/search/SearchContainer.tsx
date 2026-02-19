@@ -2,14 +2,13 @@
 
 import useSWR from "swr";
 import { useState } from "react";
+import { pageSize } from "./constants";
 import { useSearchContext } from "./SearchContext";
 import { SearchPagination } from "./SearchPagination";
 import { SearchPresentation } from "./SearchPresentation";
 import { SearchList, SearchListSkeleton } from "./SearchList";
 import { SearchEmptyPresentation } from "./SearchEmptyPresentation";
 import { SearchPaginationSkeleton } from "./SearchPagination/SearchPaginationSkeleton";
-
-export const pageSize = 10;
 
 export interface SearchContainerProps<T> {
   endpoint: string;

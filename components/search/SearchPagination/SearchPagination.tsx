@@ -1,6 +1,6 @@
 "use client";
 
-import { pageSize } from "../SearchContainer";
+import { pageSize } from "../constants";
 import { useSearchContext } from "../SearchContext";
 import { Pagination } from "../../common/Pagination";
 import { SearchPaginationStatus } from "./SearchPaginationStatus";

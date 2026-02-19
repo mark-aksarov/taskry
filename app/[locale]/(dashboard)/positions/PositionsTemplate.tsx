@@ -1,20 +1,16 @@
-import { AppHeader } from "@/components/layout/AppHeader";
 import { useTranslations } from "next-intl";
+import { AppHeader } from "@/components/layout/AppHeader";
+import { PageTemplateProps } from "@/components/layout/types";
 
-interface PositionsTemplateProps {
-  searchModal: React.ReactNode;
-  children: React.ReactNode;
-}
-
-export default async function PositionsTemplate({
-  searchModal,
+export default function PositionsTemplate({
   children,
-}: PositionsTemplateProps) {
+  ...appHeaderProps
+}: PageTemplateProps) {
   const t = useTranslations("app.PositionsPage");
 
   return (
     <>
-      <AppHeader backButton heading={t("heading")} searchModal={searchModal} />
+      <AppHeader {...appHeaderProps} backButton heading={t("heading")} />
       <main>{children}</main>
     </>
   );

@@ -24,7 +24,7 @@ export function SearchToggleButtonGroup({
         selectionMode="single"
         disallowEmptySelection
         variant="contrast"
-        className="p-4"
+        className="gap-2 p-4"
       >
         <ToggleButton data-test="tasks-button" id="tasks">
           {t("tasks")}
@@ -40,7 +40,6 @@ export function SearchToggleButtonGroup({
 export function SearchToggleButtonGroupSkeleton() {
   return (
     <div className="inline-flex gap-4">
-      <Skeleton className="h-8 w-[5rem] rounded-lg" />
       <Skeleton className="h-8 w-[5rem] rounded-lg" />
       <Skeleton className="h-8 w-[5rem] rounded-lg" />
     </div>

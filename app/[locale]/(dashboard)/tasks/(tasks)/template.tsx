@@ -1,7 +1,5 @@
 import TasksTemplate from "./TasksTemplate";
-import { SearchModal } from "@/components/search/SearchModal";
-import { TasksSearchContainer } from "@/components/search/TasksSearchContainer";
-import { ProjectsSearchContainer } from "@/components/search/ProjectsSearchContainer";
+import { defaultAppHeaderSlots } from "@/components/layout/AppHeader/defaultAppHeaderSlots";
 
 interface TasksTemplateProps {
   children: React.ReactNode;
@@ -10,16 +8,5 @@ interface TasksTemplateProps {
 export default async function AppTasksTemplate({
   children,
 }: TasksTemplateProps) {
-  return (
-    <TasksTemplate
-      searchModal={
-        <SearchModal
-          tasksSearchContainer={<TasksSearchContainer />}
-          projectsSearchContainer={<ProjectsSearchContainer />}
-        />
-      }
-    >
-      {children}
-    </TasksTemplate>
-  );
+  return <TasksTemplate {...defaultAppHeaderSlots}>{children}</TasksTemplate>;
 }

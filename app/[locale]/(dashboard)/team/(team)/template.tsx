@@ -1,7 +1,5 @@
 import UsersTemplate from "./UsersTemplate";
-import { SearchModal } from "@/components/search/SearchModal";
-import { TasksSearchContainer } from "@/components/search/TasksSearchContainer";
-import { ProjectsSearchContainer } from "@/components/search/ProjectsSearchContainer";
+import { defaultAppHeaderSlots } from "@/components/layout/AppHeader/defaultAppHeaderSlots";
 
 interface UsersTemplateProps {
   children: React.ReactNode;
@@ -10,16 +8,5 @@ interface UsersTemplateProps {
 export default async function AppUsersTemplate({
   children,
 }: UsersTemplateProps) {
-  return (
-    <UsersTemplate
-      searchModal={
-        <SearchModal
-          tasksSearchContainer={<TasksSearchContainer />}
-          projectsSearchContainer={<ProjectsSearchContainer />}
-        />
-      }
-    >
-      {children}
-    </UsersTemplate>
-  );
+  return <UsersTemplate {...defaultAppHeaderSlots}>{children}</UsersTemplate>;
 }

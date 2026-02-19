@@ -3,32 +3,36 @@ import {
   ToolbarMobileHeading,
 } from "@/components/common/Toolbar";
 
+import {
+  AppHeader,
+  AppHeaderContainerProps,
+} from "@/components/layout/AppHeader";
+
 import { useTranslations } from "next-intl";
 import { Card } from "@/components/common/Card";
 import { PageGrid } from "@/components/common/PageGrid";
 import { BackButton } from "@/components/common/BackButton";
 import { PageContainer } from "@/components/common/PageContainer";
 import { TaskDetailCard } from "@/components/tasks/TaskDetailCard";
-import { AppHeader } from "@/components/layout/AppHeader";
 
 interface TaskDetailPageProps {
   taskDetailContainer: React.ReactNode;
   taskHeaderContainer: React.ReactNode;
   taskDetailActions: React.ReactNode;
-  searchModal: React.ReactNode;
+  appHeaderProps: AppHeaderContainerProps;
 }
 
 export function TaskDetailPage({
   taskDetailContainer,
   taskHeaderContainer,
   taskDetailActions,
-  searchModal,
+  appHeaderProps,
 }: TaskDetailPageProps) {
   const t = useTranslations("app.TaskDetailPage");
 
   return (
     <>
-      <AppHeader backButton heading={t("heading")} searchModal={searchModal} />
+      <AppHeader {...appHeaderProps} backButton heading={t("heading")} />
       <main>
         <PageContainer>
           <TaskDetailCard

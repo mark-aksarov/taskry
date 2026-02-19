@@ -18,10 +18,9 @@ import { mocked } from "storybook/test";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { useParams, usePathname } from "next/navigation";
 import { PageDecorator } from "@/.storybook/PageDecorator";
-import { SearchModal } from "@/components/search/SearchModal";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { TaskDetailActions } from "@/components/tasks/TaskDetailActions";
-import { SearchModalStory } from "@/components/search/SearchModal/__stories__";
+import { AppHeaderStory } from "@/components/layout/AppHeader/__stories__";
 import { TaskDetailHeaderStory } from "@/components/common/DetailHeader/__stories__";
 import { TaskDetailActionsStory } from "@/components/tasks/TaskDetailActions/__stories__";
 import { withDeleteSubtaskModalProvider } from "@/components/subtasks/DeleteSubtaskModal/__stories__";
@@ -53,7 +52,7 @@ export const Default = {
     taskDetailContainer: <TaskDetailAlt {...TaskDetailStory.args} />,
     taskHeaderContainer: <DetailHeader {...TaskDetailHeaderStory.args} />,
     taskDetailActions: <TaskDetailActions {...TaskDetailActionsStory.args} />,
-    searchModal: <SearchModal {...SearchModalStory.args} />,
+    appHeaderProps: AppHeaderStory.args,
   },
 } satisfies Story;
 
@@ -62,7 +61,7 @@ export const Loading = {
     taskDetailContainer: <TaskDetailAltSkeleton />,
     taskHeaderContainer: <DetailHeaderSkeleton />,
     taskDetailActions: <TaskDetailActions {...TaskDetailActionsStory.args} />,
-    searchModal: <SearchModal {...SearchModalStory.args} />,
+    appHeaderProps: AppHeaderStory.args,
   },
 } satisfies Story;
 
@@ -73,6 +72,6 @@ export const WithoutSomeData = {
     ),
     taskHeaderContainer: <DetailHeaderSkeleton />,
     taskDetailActions: <TaskDetailActions {...TaskDetailActionsStory.args} />,
-    searchModal: <SearchModal {...SearchModalStory.args} />,
+    appHeaderProps: AppHeaderStory.args,
   },
 } satisfies Story;

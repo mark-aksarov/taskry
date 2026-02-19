@@ -1,4 +1,3 @@
-import { ProfileLink } from "../ProfileLink";
 import { AppNavigation } from "../AppNavigation";
 import { AppHeaderHeading } from "./AppHeaderHeading";
 import { BackButton } from "@/components/common/BackButton";
@@ -8,19 +7,34 @@ import { AppHeaderLangMenuTrigger } from "./AppHeaderLangMenuTrigger";
 import { AppHeaderThemeToggleButton } from "./AppHeaderThemeToggleButton";
 import { SearchModalTriggerMobile } from "@/components/search/SearchModalTriggerMobile";
 import { SearchModalTriggerDesktop } from "@/components/search/SearchModalTriggerDesktop";
+import { SearchModal } from "@/components/search/SearchModal";
 
-interface AppHeaderProps {
+export interface AppHeaderContainerProps {
+  tasksSearchContainer: React.ReactNode;
+  projectsSearchContainer: React.ReactNode;
+  profileLinkContainer: React.ReactNode;
+}
+
+export interface AppHeaderProps extends AppHeaderContainerProps {
   heading: string;
   backButton?: boolean;
-  searchModal: React.ReactNode;
 }
 
 export const AppHeader = ({
   heading,
   backButton,
-  searchModal,
+  tasksSearchContainer,
+  projectsSearchContainer,
+  profileLinkContainer,
 }: AppHeaderProps) => {
   const buttonClasses = "rounded-full p-3";
+
+  const searchModal = (
+    <SearchModal
+      tasksSearchContainer={tasksSearchContainer}
+      projectsSearchContainer={projectsSearchContainer}
+    />
+  );
 
   return (
     <>
@@ -36,13 +50,13 @@ export const AppHeader = ({
             <SearchModalTriggerDesktop modal={searchModal} />
             <AppHeaderThemeToggleButton className={buttonClasses} />
             <AppHeaderLangMenuTrigger />
-            <ProfileLink />
+            {profileLinkContainer}
             <AppSidebarSheetTrigger appNavigation={<AppNavigation />} />
           </div>
         </div>
 
         <div className="flex items-center justify-between md:hidden">
-          <ProfileLink />
+          {profileLinkContainer}
           <div className="flex items-center gap-3">
             <SearchModalTriggerMobile
               modal={searchModal}

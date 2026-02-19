@@ -4,20 +4,35 @@ import Image from "next/image";
 import { tv } from "tailwind-variants";
 import { Link } from "react-aria-components";
 import { focusRing } from "@/components/ui/styles";
+import { UnknownUser } from "@/components/common/UnknownUser";
+import { ImageContainer } from "@/components/common/ImageContainer";
 
 const styles = tv({
   extend: focusRing,
   base: "flex items-center gap-2.5",
 });
 
-export const ProfileLink = () => {
+interface ProfileLinkProps {
+  fullName: string;
+  imageUrl?: string;
+}
+
+export const ProfileLink = ({ fullName, imageUrl }: ProfileLinkProps) => {
+  const profileImg = imageUrl ? (
+    <ImageContainer className="h-8 w-8">
+      <Image fill src={imageUrl} alt="profile image" />
+    </ImageContainer>
+  ) : (
+    <UnknownUser className="h-8 w-8" />
+  );
+
   return (
     <Link href="/profile" className={styles}>
       <div className="h-8 w-8 overflow-hidden rounded-full bg-gray-300">
-        <Image src="/man.jpg" alt="user avatar" width={32} height={32} />
+        {profileImg}
       </div>
-      <span className="font-bold text-black max-md:text-sm md:text-base dark:text-white">
-        Adam Smith
+      <span className="text-sm font-bold text-black dark:text-white">
+        {fullName}
       </span>
     </Link>
   );

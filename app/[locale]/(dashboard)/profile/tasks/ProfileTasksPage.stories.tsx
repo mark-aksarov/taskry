@@ -4,18 +4,17 @@ import {
   UserTasksPageLoadingLayout,
 } from "@/components/users/UserTasksPageLayout";
 
-import { fn, mocked } from "storybook/test";
+import { mocked } from "storybook/test";
 import ProfileTemplate from "../ProfileTemplate";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { useParams, usePathname } from "next/navigation";
 import { PageDecorator } from "@/.storybook/PageDecorator";
 import { NewTaskForm } from "@/components/tasks/NewTaskForm";
-import { SearchModal } from "@/components/search/SearchModal";
 import { UserTaskList } from "@/components/users/UserTaskList";
 import { DetailHeader } from "@/components/common/DetailHeader";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { AppHeaderStory } from "@/components/layout/AppHeader/__stories__";
 import { NewTaskFormStory } from "@/components/tasks/NewTaskForm/__stories__";
-import { SearchModalStory } from "@/components/search/SearchModal/__stories__";
 import { UserTaskListStory } from "@/components/users/UserTaskList/__stories__";
 import { ProfileNavigationMobile } from "@/components/users/ProfileNavigationMobile";
 import { ProfileNavigationDesktop } from "@/components/users/ProfileNavigationDesktop";
@@ -36,7 +35,7 @@ const meta = {
   parameters: { layout: "fullscreen" },
   decorators: [
     (Story) => (
-      <ProfileTemplate searchModal={<SearchModal {...SearchModalStory.args} />}>
+      <ProfileTemplate {...AppHeaderStory.args}>
         <Story />
       </ProfileTemplate>
     ),

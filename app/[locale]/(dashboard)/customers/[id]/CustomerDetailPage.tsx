@@ -3,10 +3,14 @@ import {
   ToolbarMobileHeading,
 } from "@/components/common/Toolbar";
 
+import {
+  AppHeader,
+  AppHeaderContainerProps,
+} from "@/components/layout/AppHeader";
+
 import { useTranslations } from "next-intl";
 import { Card } from "@/components/common/Card";
 import { PageGrid } from "@/components/common/PageGrid";
-import { AppHeader } from "@/components/layout/AppHeader";
 import { BackButton } from "@/components/common/BackButton";
 import { PageContainer } from "@/components/common/PageContainer";
 import { CustomerDetailCard } from "@/components/customer/CustomerDetailCard";
@@ -15,20 +19,20 @@ interface CustomerDetailPageProps {
   customerDetailContainer: React.ReactNode;
   customerHeaderContainer: React.ReactNode;
   customerDetailActions: React.ReactNode;
-  searchModal: React.ReactNode;
+  appHeaderProps: AppHeaderContainerProps;
 }
 
 export function CustomerDetailPage({
   customerDetailContainer,
   customerHeaderContainer,
   customerDetailActions,
-  searchModal,
+  appHeaderProps,
 }: CustomerDetailPageProps) {
   const t = useTranslations("app.CustomerDetailPage");
 
   return (
     <>
-      <AppHeader backButton heading={t("heading")} searchModal={searchModal} />
+      <AppHeader {...appHeaderProps} backButton heading={t("heading")} />
       <main>
         <PageContainer>
           <CustomerDetailCard

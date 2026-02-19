@@ -9,13 +9,12 @@ import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { usePathname, useRouter } from "next/navigation";
 import { PageDecorator } from "@/.storybook/PageDecorator";
 import { NewTaskForm } from "@/components/tasks/NewTaskForm";
-import { SearchModal } from "@/components/search/SearchModal";
 import { TaskFiltersForm } from "@/components/tasks/TaskFiltersForm";
 import { TaskGridStory } from "@/components/tasks/TaskGrid/__stories__";
 import { TaskListStory } from "@/components/tasks/TaskList/__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { AppHeaderStory } from "@/components/layout/AppHeader/__stories__";
 import { NewTaskFormStory } from "@/components/tasks/NewTaskForm/__stories__";
-import { SearchModalStory } from "@/components/search/SearchModal/__stories__";
 import { NewTaskCategoryForm } from "@/components/taskCategory/NewTaskCategoryForm";
 import { TaskFiltersFormStory } from "@/components/tasks/TaskFiltersForm/__stories__";
 import { withDeleteTaskModalProvider } from "@/components/tasks/DeleteTaskModal/__stories__";
@@ -37,7 +36,7 @@ const meta = {
   parameters: { layout: "fullscreen" },
   decorators: [
     (Story) => (
-      <TasksTemplate searchModal={<SearchModal {...SearchModalStory.args} />}>
+      <TasksTemplate {...AppHeaderStory.args}>
         <Story />
       </TasksTemplate>
     ),
