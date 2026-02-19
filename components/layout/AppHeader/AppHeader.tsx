@@ -1,5 +1,6 @@
 import { ProfileLink } from "../ProfileLink";
 import { AppHeaderTitle } from "./AppHeaderTitle";
+import { AppHeaderBackButton } from "./AppHeaderBackButton";
 import { AppHeaderLangMenuTrigger } from "./AppHeaderLangMenuTrigger";
 import { AppHeaderThemeToggleButton } from "./AppHeaderThemeToggleButton";
 import { SearchModalTriggerMobile } from "@/components/search/SearchModalTriggerMobile";
@@ -24,6 +25,7 @@ export const AppHeader = ({
         <div className="flex items-center gap-8 max-md:hidden">
           {
             <div className="flex flex-none items-center gap-4">
+              <AppHeaderBackButton />
               {appSidebarSheetTrigger}
               <AppHeaderTitle />
             </div>

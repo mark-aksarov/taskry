@@ -7,6 +7,7 @@ import {
 import { useTranslations } from "next-intl";
 import { Card } from "@/components/common/Card";
 import { PageGrid } from "@/components/common/PageGrid";
+import { BackButton } from "@/components/common/BackButton";
 import { PageContainer } from "@/components/common/PageContainer";
 import { UserDetailCard } from "@/components/users/UserDetailCard";
 import { UserNavigationMobile } from "@/components/users/UserNavigationMobile";
@@ -35,6 +36,7 @@ export function TeamProfilePage({
 
       <PageGrid className="md:hidden">
         <ToolbarMobileTop>
+          <BackButton />
           <ToolbarMobileHeading>{t("heading")}</ToolbarMobileHeading>
         </ToolbarMobileTop>
 

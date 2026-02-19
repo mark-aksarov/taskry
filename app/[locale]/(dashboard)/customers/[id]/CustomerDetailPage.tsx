@@ -9,6 +9,7 @@ import { Card } from "@/components/common/Card";
 import { PageGrid } from "@/components/common/PageGrid";
 import { PageContainer } from "@/components/common/PageContainer";
 import { CustomerDetailCard } from "@/components/customer/CustomerDetailCard";
+import { BackButton } from "@/components/common/BackButton";
 
 interface CustomerDetailPageProps {
   customerDetailContainer: React.ReactNode;
@@ -33,6 +34,7 @@ export function CustomerDetailPage({
 
       <PageGrid className="md:hidden">
         <ToolbarMobileTop>
+          <BackButton />
           <ToolbarMobileHeading>{t("heading")}</ToolbarMobileHeading>
         </ToolbarMobileTop>
 

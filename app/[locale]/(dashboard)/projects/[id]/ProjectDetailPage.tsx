@@ -6,6 +6,7 @@ import {
 import { useTranslations } from "next-intl";
 import { Card } from "@/components/common/Card";
 import { PageGrid } from "@/components/common/PageGrid";
+import { BackButton } from "@/components/common/BackButton";
 import { PageContainer } from "@/components/common/PageContainer";
 import { ProjectDetailCard } from "@/components/projects/ProjectDetailCard";
 
@@ -32,6 +33,7 @@ export function ProjectDetailPage({
 
       <PageGrid className="md:hidden">
         <ToolbarMobileTop>
+          <BackButton />
           <ToolbarMobileHeading>{t("heading")}</ToolbarMobileHeading>
         </ToolbarMobileTop>
 

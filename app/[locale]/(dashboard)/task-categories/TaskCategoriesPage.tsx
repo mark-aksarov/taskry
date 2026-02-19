@@ -9,6 +9,7 @@ import { useTranslations } from "next-intl";
 import { PageGrid } from "@/components/common/PageGrid";
 import { ViewModeProvider } from "@/components/common/ViewMode";
 import { PageContainer } from "@/components/common/PageContainer";
+import { BackButton } from "@/components/common/BackButton";
 
 interface TaskCategoriesPageProps {
   taskCategoriesContainer: React.ReactNode;
@@ -33,6 +34,7 @@ export function TaskCategoriesPage({
           </ToolbarDesktop>
 
           <ToolbarMobileTop>
+            <BackButton />
             <ToolbarMobileHeading>{t("heading")}</ToolbarMobileHeading>
             {taskCategoryToolbarActionsMenuTrigger}
           </ToolbarMobileTop>
