@@ -9,7 +9,7 @@ export function ProfileNavigationMobile() {
   const pathname = usePathname();
 
   return (
-    <nav className="flex gap-1 md:hidden">
+    <nav className="flex gap-2 md:hidden">
       <UserNavigationMobileLink
         href="/profile"
         isSelected={pathname === "/profile"}

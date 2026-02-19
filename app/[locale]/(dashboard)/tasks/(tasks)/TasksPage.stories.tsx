@@ -1,6 +1,7 @@
 import { TasksPage } from "./TasksPage";
 import TasksPageLoading from "./loading";
 import { fn, mocked } from "storybook/test";
+import TasksTemplate from "./TasksTemplate";
 import { TasksPageEmpty } from "./TasksPageEmpty";
 import { TaskList } from "@/components/tasks/TaskList";
 import { TaskGrid } from "@/components/tasks/TaskGrid";
@@ -8,11 +9,13 @@ import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { usePathname, useRouter } from "next/navigation";
 import { PageDecorator } from "@/.storybook/PageDecorator";
 import { NewTaskForm } from "@/components/tasks/NewTaskForm";
+import { SearchModal } from "@/components/search/SearchModal";
 import { TaskFiltersForm } from "@/components/tasks/TaskFiltersForm";
 import { TaskGridStory } from "@/components/tasks/TaskGrid/__stories__";
 import { TaskListStory } from "@/components/tasks/TaskList/__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { NewTaskFormStory } from "@/components/tasks/NewTaskForm/__stories__";
+import { SearchModalStory } from "@/components/search/SearchModal/__stories__";
 import { NewTaskCategoryForm } from "@/components/taskCategory/NewTaskCategoryForm";
 import { TaskFiltersFormStory } from "@/components/tasks/TaskFiltersForm/__stories__";
 import { withDeleteTaskModalProvider } from "@/components/tasks/DeleteTaskModal/__stories__";
@@ -27,11 +30,17 @@ import { withDeleteCommentModalProvider } from "@/components/comments/DeleteComm
 import { withUpdateTaskStatusesProvider } from "@/components/tasks/UpdateTaskStatusContext/__stories__";
 import { withEntityPaginationProvider } from "@/components/common/EntityContainerPagination/__stories__";
 import { TaskToolbarActionsMenuTriggerStory } from "@/components/tasks/TaskToolbarActionsMenuTrigger/__stories__";
+
 const meta = {
   title: "pages/TasksPage",
   component: TasksPage,
   parameters: { layout: "fullscreen" },
   decorators: [
+    (Story) => (
+      <TasksTemplate searchModal={<SearchModal {...SearchModalStory.args} />}>
+        <Story />
+      </TasksTemplate>
+    ),
     withDeleteTaskModalProvider,
     withEntityPaginationProvider,
     withSelectedTasksProvider,

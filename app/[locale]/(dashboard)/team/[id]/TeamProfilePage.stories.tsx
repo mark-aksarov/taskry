@@ -11,10 +11,13 @@ import {
 import { mocked } from "storybook/test";
 import { TeamProfilePage } from "./TeamProfilePage";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
+import TeamProfileTemplate from "./TeamProfileTemplate";
 import { useParams, usePathname } from "next/navigation";
 import { PageDecorator } from "@/.storybook/PageDecorator";
+import { SearchModal } from "@/components/search/SearchModal";
 import { ProfileActions } from "@/components/users/ProfileActions";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { SearchModalStory } from "@/components/search/SearchModal/__stories__";
 import { UserDetail, UserDetailSkeleton } from "@/components/users/UserDetail";
 import { ProfileActionsStory } from "@/components/users/ProfileActions/__stories__";
 import { PersonDetailHeaderStory } from "@/components/common/DetailHeader/__stories__";
@@ -23,7 +26,17 @@ const meta = {
   title: "pages/TeamProfilePage",
   component: TeamProfilePage,
   parameters: { layout: "fullscreen" },
-  decorators: [PageDecorator, withThemedBackground],
+  decorators: [
+    (Story) => (
+      <TeamProfileTemplate
+        searchModal={<SearchModal {...SearchModalStory.args} />}
+      >
+        <Story />
+      </TeamProfileTemplate>
+    ),
+    PageDecorator,
+    withThemedBackground,
+  ],
   beforeEach: () => {
     mocked(usePathname).mockReturnValue(`/team/user-1`);
     mocked(useParams).mockReturnValue({

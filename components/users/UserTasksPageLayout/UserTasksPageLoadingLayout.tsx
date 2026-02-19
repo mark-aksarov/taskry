@@ -18,6 +18,7 @@ import { useTranslations } from "next-intl";
 import { Skeleton } from "@/components/ui/Skeleton";
 import { Repeat } from "@/components/common/Repeat";
 import { PageGrid } from "@/components/common/PageGrid";
+import { BackButton } from "@/components/common/BackButton";
 import { PageContainer } from "@/components/common/PageContainer";
 import { UserTaskListLayout } from "@/components/users/UserTaskList";
 import { DetailHeaderSkeleton } from "@/components/common/DetailHeader";
@@ -26,11 +27,13 @@ import { UserTaskListItemSkeleton } from "@/components/users/UserTaskListItem";
 interface UserTasksPageLoadingLayoutProps {
   navigationDesktop: React.ReactNode;
   navigationMobile: React.ReactNode;
+  backButton?: boolean;
 }
 
 export function UserTasksPageLoadingLayout({
   navigationDesktop,
   navigationMobile,
+  backButton,
 }: UserTasksPageLoadingLayoutProps) {
   const t = useTranslations("users.UserTasksPageLayout");
 
@@ -64,6 +67,7 @@ export function UserTasksPageLoadingLayout({
       <PageContainer className="md:hidden">
         <PageGrid>
           <ToolbarMobileTop>
+            {backButton && <BackButton />}
             <ToolbarMobileHeading>{t("title")}</ToolbarMobileHeading>
             <Skeleton className="h-8 w-8 rounded-lg" />
             <Skeleton className="h-8 w-8 rounded-lg" />

@@ -12,11 +12,12 @@ import { useTranslations } from "next-intl";
 import { List } from "@/components/common/List";
 import { Repeat } from "@/components/common/Repeat";
 import { PageGrid } from "@/components/common/PageGrid";
+import { BackButton } from "@/components/common/BackButton";
 import { PageContainer } from "@/components/common/PageContainer";
 import { ProjectCategoryListItemSkeleton } from "@/components/projectCategory/ProjectCategoryListItem";
 
 export default function ProjectCategoriesPageLoading() {
-  const t = useTranslations("app.ProjectCategoriesPageLoading");
+  const t = useTranslations("app.ProjectCategoriesPage");
 
   return (
     <PageContainer>
@@ -27,7 +28,8 @@ export default function ProjectCategoriesPageLoading() {
         </ToolbarDesktop>
 
         <ToolbarMobileTop>
-          <ToolbarMobileHeading>{t("title")}</ToolbarMobileHeading>
+          <BackButton />
+          <ToolbarMobileHeading>{t("heading")}</ToolbarMobileHeading>
           <ToolbarMobileTopButtonSkeleton />
         </ToolbarMobileTop>
 

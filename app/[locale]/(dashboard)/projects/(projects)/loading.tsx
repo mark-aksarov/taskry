@@ -16,7 +16,7 @@ import { PageContainer } from "@/components/common/PageContainer";
 import { ProjectListItemSkeleton } from "@/components/projects/ProjectListItem";
 
 export default function ProjectsPageLoading() {
-  const t = useTranslations("app.ProjectsPageLoading");
+  const t = useTranslations("app.ProjectsPage");
 
   return (
     <PageContainer>
@@ -31,7 +31,7 @@ export default function ProjectsPageLoading() {
         </ToolbarDesktop>
 
         <ToolbarMobileTop>
-          <ToolbarMobileHeading>{t("title")}</ToolbarMobileHeading>
+          <ToolbarMobileHeading>{t("heading")}</ToolbarMobileHeading>
           <ToolbarMobileTopButtonSkeleton />
           <ToolbarMobileTopButtonSkeleton />
           <ToolbarMobileTopButtonSkeleton />

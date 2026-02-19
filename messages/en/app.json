@@ -3,7 +3,7 @@
     "heading": "Project Categories"
   },
   "CustomerDetailPage": {
-    "heading": "Customer Information"
+    "heading": "Customer detail"
   },
   "DashboardErrorPage": {
     "heading": "Something went wrong",
@@ -49,13 +49,13 @@
     "heading": "Dashboard"
   },
   "ProjectsPage": {
-    "heading": "All Projects"
+    "heading": "Projects"
   },
   "TasksPage": {
-    "heading": "All Tasks"
+    "heading": "Tasks"
   },
   "CustomersPage": {
-    "heading": "All Customers"
+    "heading": "Customers"
   },
   "CustomersPageEmpty": {
     "heading": "No Customers yet",
@@ -102,7 +102,7 @@
     "addButtonLabel": "New User"
   },
   "TeamProfilePage": {
-    "heading": "User Information"
+    "heading": "User detail"
   },
   "ProjectCategoriesPageLoading": {
     "title": "All Project Categories"

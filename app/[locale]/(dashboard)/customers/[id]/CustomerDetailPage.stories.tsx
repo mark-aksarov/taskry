@@ -18,7 +18,9 @@ import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { useParams, usePathname } from "next/navigation";
 import { CustomerDetailPage } from "./CustomerDetailPage";
 import { PageDecorator } from "@/.storybook/PageDecorator";
+import { SearchModal } from "@/components/search/SearchModal";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { SearchModalStory } from "@/components/search/SearchModal/__stories__";
 import { CustomerDetailActions } from "@/components/customer/CustomerDetailActions";
 import { PersonDetailHeaderStory } from "@/components/common/DetailHeader/__stories__";
 import { CustomerDetailActionsStory } from "@/components/customer/CustomerDetailActions/__stories__";
@@ -46,6 +48,7 @@ export const Default = {
     customerDetailActions: (
       <CustomerDetailActions {...CustomerDetailActionsStory.args} />
     ),
+    searchModal: <SearchModal {...SearchModalStory.args} />,
   },
 } satisfies Story;
 
@@ -56,6 +59,7 @@ export const Loading = {
     customerDetailActions: (
       <CustomerDetailActions {...CustomerDetailActionsStory.args} />
     ),
+    searchModal: <SearchModal {...SearchModalStory.args} />,
   },
 } satisfies Story;
 
@@ -64,9 +68,10 @@ export const WithoutSomeData = {
     customerDetailContainer: (
       <CustomerDetail {...CustomerDetailWithoutSomeDataStory.args} />
     ),
-    customerHeaderContainer: <DetailHeaderSkeleton />,
+    customerHeaderContainer: <DetailHeader {...PersonDetailHeaderStory.args} />,
     customerDetailActions: (
       <CustomerDetailActions {...CustomerDetailActionsStory.args} />
     ),
+    searchModal: <SearchModal {...SearchModalStory.args} />,
   },
 } satisfies Story;

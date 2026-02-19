@@ -1,14 +1,17 @@
 import { fn, mocked } from "storybook/test";
 import ProjectsPageLoading from "./loading";
 import { ProjectsPage } from "./ProjectsPage";
+import ProjectsTemplate from "./ProjectsTemplate";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { ProjectsPageEmpty } from "./ProjectsPageEmpty";
 import { usePathname, useRouter } from "next/navigation";
 import { PageDecorator } from "@/.storybook/PageDecorator";
+import { SearchModal } from "@/components/search/SearchModal";
 import { ProjectList } from "@/components/projects/ProjectList";
 import { ProjectGrid } from "@/components/projects/ProjectGrid";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { ProjectFiltersForm } from "@/components/projects/ProjectFiltersForm";
+import { SearchModalStory } from "@/components/search/SearchModal/__stories__";
 import { ProjectGridStory } from "@/components/projects/ProjectGrid/__stories__";
 import { ProjectListStory } from "@/components/projects/ProjectList/__stories__";
 import { EntityContainerPresentation } from "@/components/common/EntityContainerPresentation";
@@ -29,6 +32,13 @@ const meta = {
   component: ProjectsPage,
   parameters: { layout: "fullscreen" },
   decorators: [
+    (Story) => (
+      <ProjectsTemplate
+        searchModal={<SearchModal {...SearchModalStory.args} />}
+      >
+        <Story />
+      </ProjectsTemplate>
+    ),
     withDeleteProjectModalProvider,
     withEntityPaginationProvider,
     withSelectedProjectsProvider,

@@ -31,9 +31,11 @@ import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { usePathname, useRouter } from "next/navigation";
 import { PageDecorator } from "@/.storybook/PageDecorator";
 import { NewTaskForm } from "@/components/tasks/NewTaskForm";
+import { SearchModal } from "@/components/search/SearchModal";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { getTaskListItems } from "@/components/tasks/TaskList/__stories__";
 import { NewTaskFormStory } from "@/components/tasks/NewTaskForm/__stories__";
+import { SearchModalStory } from "@/components/search/SearchModal/__stories__";
 import { withDeleteTaskModalProvider } from "@/components/tasks/DeleteTaskModal/__stories__";
 import { withSelectedTasksProvider } from "@/components/tasks/SelectedTasksContext/__stories__";
 import { withDeleteSubtaskModalProvider } from "@/components/subtasks/DeleteSubtaskModal/__stories__";
@@ -85,6 +87,7 @@ export const Default = {
     totalUsersCardContainer: <TotalUsersCard totalUsers={15} />,
     totalCustomersCardContainer: <TotalCustomersCard totalCustomers={20} />,
     assignedTasksContainer: <AssignedTasksContainer />,
+    searchModal: <SearchModal {...SearchModalStory.args} />,
   },
 } satisfies Story;
 
@@ -95,15 +98,13 @@ export const Loading = {
     totalUsersCardContainer: <TotalUsersCardSkeleton />,
     totalCustomersCardContainer: <TotalCustomersCardSkeleton />,
     assignedTasksContainer: <AssignedTasksSkeleton />,
+    searchModal: <SearchModal {...SearchModalStory.args} />,
   },
 } satisfies Story;
 
 export const WithNoTasks = {
   args: {
-    totalProjectsCardContainer: <TotalProjectsCard totalProjects={50} />,
-    totalTasksCardContainer: <TotalTasksCard totalTasks={500} />,
-    totalUsersCardContainer: <TotalUsersCard totalUsers={15} />,
-    totalCustomersCardContainer: <TotalCustomersCard totalCustomers={20} />,
+    ...Default.args,
     assignedTasksContainer: (
       <AssignedTasksEmptySection
         newTaskFormContainer={<NewTaskForm {...NewTaskFormStory.args} />}

@@ -12,11 +12,12 @@ import { useTranslations } from "next-intl";
 import { List } from "@/components/common/List";
 import { Repeat } from "@/components/common/Repeat";
 import { PageGrid } from "@/components/common/PageGrid";
+import { BackButton } from "@/components/common/BackButton";
 import { PageContainer } from "@/components/common/PageContainer";
 import { TaskCategoryListItemSkeleton } from "@/components/taskCategory/TaskCategoryListItem";
 
 export default function TaskCategoriesPageLoading() {
-  const t = useTranslations("app.TaskCategoriesPageLoading");
+  const t = useTranslations("app.TaskCategoriesPage");
 
   return (
     <PageContainer>
@@ -27,7 +28,8 @@ export default function TaskCategoriesPageLoading() {
         </ToolbarDesktop>
 
         <ToolbarMobileTop>
-          <ToolbarMobileHeading>{t("title")}</ToolbarMobileHeading>
+          <BackButton />
+          <ToolbarMobileHeading>{t("heading")}</ToolbarMobileHeading>
           <ToolbarMobileTopButtonSkeleton />
         </ToolbarMobileTop>
 

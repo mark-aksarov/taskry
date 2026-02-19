@@ -12,11 +12,12 @@ import { useTranslations } from "next-intl";
 import { List } from "@/components/common/List";
 import { Repeat } from "@/components/common/Repeat";
 import { PageGrid } from "@/components/common/PageGrid";
+import { BackButton } from "@/components/common/BackButton";
 import { PageContainer } from "@/components/common/PageContainer";
 import { PositionListItemSkeleton } from "@/components/position/PositionListItem";
 
 export default function PositionsPageLoading() {
-  const t = useTranslations("app.PositionsPageLoading");
+  const t = useTranslations("app.PositionsPage");
 
   return (
     <PageContainer>
@@ -27,7 +28,8 @@ export default function PositionsPageLoading() {
         </ToolbarDesktop>
 
         <ToolbarMobileTop>
-          <ToolbarMobileHeading>{t("title")}</ToolbarMobileHeading>
+          <BackButton />
+          <ToolbarMobileHeading>{t("heading")}</ToolbarMobileHeading>
           <ToolbarMobileTopButtonSkeleton />
         </ToolbarMobileTop>
 

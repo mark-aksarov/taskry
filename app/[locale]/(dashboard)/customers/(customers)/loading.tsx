@@ -16,7 +16,7 @@ import { PageContainer } from "@/components/common/PageContainer";
 import { CustomerListItemSkeleton } from "@/components/customer/CustomerListItem";
 
 export default function CustomersPageLoading() {
-  const t = useTranslations("app.CustomersPageLoading");
+  const t = useTranslations("app.CustomersPage");
 
   return (
     <PageContainer>
@@ -31,7 +31,7 @@ export default function CustomersPageLoading() {
         </ToolbarDesktop>
 
         <ToolbarMobileTop>
-          <ToolbarMobileHeading>{t("title")}</ToolbarMobileHeading>
+          <ToolbarMobileHeading>{t("heading")}</ToolbarMobileHeading>
           <ToolbarMobileTopButtonSkeleton />
           <ToolbarMobileTopButtonSkeleton />
           <ToolbarMobileTopButtonSkeleton />

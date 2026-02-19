@@ -22,7 +22,7 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
         </AppSidebarBody>
       </AppSidebar>
 
-      {children}
+      <div className="flex flex-auto flex-col">{children}</div>
     </div>
   );
 }

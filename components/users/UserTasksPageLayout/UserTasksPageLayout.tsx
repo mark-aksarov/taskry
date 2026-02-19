@@ -14,6 +14,7 @@ import {
 
 import { useTranslations } from "next-intl";
 import { PageGrid } from "@/components/common/PageGrid";
+import { BackButton } from "@/components/common/BackButton";
 import { PageContainer } from "@/components/common/PageContainer";
 import { TaskToolbarSortingMenuTrigger } from "@/components/tasks/TaskToolbarSortingMenuTrigger";
 
@@ -23,6 +24,7 @@ interface UserTasksPageLayoutProps {
   navigationDesktop: React.ReactNode;
   navigationMobile: React.ReactNode;
   taskToolbarActionsMenuTrigger: React.ReactNode;
+  backButton?: boolean;
 }
 
 export function UserTasksPageLayout({
@@ -31,6 +33,7 @@ export function UserTasksPageLayout({
   navigationDesktop,
   navigationMobile,
   taskToolbarActionsMenuTrigger,
+  backButton,
 }: UserTasksPageLayoutProps) {
   const t = useTranslations("users.UserTasksPageLayout");
 
@@ -59,6 +62,7 @@ export function UserTasksPageLayout({
       <PageContainer className="md:hidden">
         <PageGrid>
           <ToolbarMobileTop>
+            {backButton && <BackButton />}
             <ToolbarMobileHeading>{t("title")}</ToolbarMobileHeading>
             <TaskToolbarSortingMenuTrigger />
             {taskToolbarActionsMenuTrigger}

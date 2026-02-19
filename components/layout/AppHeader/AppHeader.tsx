@@ -1,20 +1,23 @@
 import { ProfileLink } from "../ProfileLink";
-import { AppHeaderTitle } from "./AppHeaderTitle";
-import { AppHeaderBackButton } from "./AppHeaderBackButton";
+import { AppNavigation } from "../AppNavigation";
+import { AppHeaderHeading } from "./AppHeaderHeading";
+import { BackButton } from "@/components/common/BackButton";
+import { AppBottomSheetTrigger } from "../AppBottomSheetTrigger";
+import { AppSidebarSheetTrigger } from "../AppSidebarSheetTrigger";
 import { AppHeaderLangMenuTrigger } from "./AppHeaderLangMenuTrigger";
 import { AppHeaderThemeToggleButton } from "./AppHeaderThemeToggleButton";
 import { SearchModalTriggerMobile } from "@/components/search/SearchModalTriggerMobile";
 import { SearchModalTriggerDesktop } from "@/components/search/SearchModalTriggerDesktop";
 
 interface AppHeaderProps {
-  appBottomSheetTrigger: React.ReactNode;
-  appSidebarSheetTrigger: React.ReactNode;
+  heading: string;
+  backButton?: boolean;
   searchModal: React.ReactNode;
 }
 
 export const AppHeader = ({
-  appBottomSheetTrigger,
-  appSidebarSheetTrigger,
+  heading,
+  backButton,
   searchModal,
 }: AppHeaderProps) => {
   const buttonClasses = "rounded-full p-3";
@@ -25,9 +28,8 @@ export const AppHeader = ({
         <div className="flex items-center gap-8 max-md:hidden">
           {
             <div className="flex flex-none items-center gap-4">
-              <AppHeaderBackButton />
-              {appSidebarSheetTrigger}
-              <AppHeaderTitle />
+              {backButton && <BackButton />}
+              <AppHeaderHeading>{heading}</AppHeaderHeading>
             </div>
           }
           <div className="flex flex-auto items-center justify-end gap-4">
@@ -35,6 +37,7 @@ export const AppHeader = ({
             <AppHeaderThemeToggleButton className={buttonClasses} />
             <AppHeaderLangMenuTrigger />
             <ProfileLink />
+            <AppSidebarSheetTrigger appNavigation={<AppNavigation />} />
           </div>
         </div>
 
@@ -45,7 +48,7 @@ export const AppHeader = ({
               modal={searchModal}
               className={buttonClasses}
             />
-            {appBottomSheetTrigger}
+            <AppBottomSheetTrigger appNavigation={<AppNavigation />} />
           </div>
         </div>
       </header>

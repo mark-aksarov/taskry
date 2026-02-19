@@ -16,7 +16,7 @@ import { PageContainer } from "@/components/common/PageContainer";
 import { TaskListItemSkeleton } from "@/components/tasks/TaskListItem";
 
 export default function TasksPageLoading() {
-  const t = useTranslations("app.TasksPageLoading");
+  const t = useTranslations("app.TasksPage");
 
   return (
     <PageContainer>
@@ -31,7 +31,7 @@ export default function TasksPageLoading() {
         </ToolbarDesktop>
 
         <ToolbarMobileTop>
-          <ToolbarMobileHeading>{t("title")}</ToolbarMobileHeading>
+          <ToolbarMobileHeading>{t("heading")}</ToolbarMobileHeading>
           <ToolbarMobileTopButtonSkeleton />
           <ToolbarMobileTopButtonSkeleton />
           <ToolbarMobileTopButtonSkeleton />

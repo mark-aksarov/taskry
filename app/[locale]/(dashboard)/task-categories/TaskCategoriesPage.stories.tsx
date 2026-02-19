@@ -4,9 +4,12 @@ import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { usePathname, useRouter } from "next/navigation";
 import { TaskCategoriesPage } from "./TaskCategoriesPage";
 import { PageDecorator } from "@/.storybook/PageDecorator";
+import TaskCategoriesTemplate from "./TaskCategoriesTemplate";
+import { SearchModal } from "@/components/search/SearchModal";
 import { TaskCategoriesPageEmpty } from "./TaskCategoriesPageEmpty";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { TaskCategoryList } from "@/components/taskCategory/TaskCategoryList";
+import { SearchModalStory } from "@/components/search/SearchModal/__stories__";
 import { TaskCategoryListStory } from "@/components/taskCategory/TaskCategoryList/__stories__";
 import { withSelectedItemsProvider } from "@/components/common/SelectedItemsContext/__stories__";
 import { withDeleteTaskCategoryModalProvider } from "@/components/taskCategory/DeleteTaskCategoryModal/__stories__";
@@ -20,6 +23,13 @@ const meta = {
   component: TaskCategoriesPage,
   parameters: { layout: "fullscreen" },
   decorators: [
+    (Story) => (
+      <TaskCategoriesTemplate
+        searchModal={<SearchModal {...SearchModalStory.args} />}
+      >
+        <Story />
+      </TaskCategoriesTemplate>
+    ),
     withDeleteTaskCategoryModalProvider,
     withSelectedItemsProvider,
     PageDecorator,

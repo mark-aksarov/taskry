@@ -1,17 +1,17 @@
-import DashboardTemplate from "./DashboardTemplate";
+import PositionsTemplate from "./PositionsTemplate";
 import { SearchModal } from "@/components/search/SearchModal";
 import { TasksSearchContainer } from "@/components/search/TasksSearchContainer";
 import { ProjectsSearchContainer } from "@/components/search/ProjectsSearchContainer";
 
-interface DashboardTemplateProps {
+interface PositionsTemplateProps {
   children: React.ReactNode;
 }
 
-export default async function AppDashboardTemplate({
+export default async function AppPositionsTemplate({
   children,
-}: DashboardTemplateProps) {
+}: PositionsTemplateProps) {
   return (
-    <DashboardTemplate
+    <PositionsTemplate
       searchModal={
         <SearchModal
           tasksSearchContainer={<TasksSearchContainer />}
@@ -20,6 +20,6 @@ export default async function AppDashboardTemplate({
       }
     >
       {children}
-    </DashboardTemplate>
+    </PositionsTemplate>
   );
 }

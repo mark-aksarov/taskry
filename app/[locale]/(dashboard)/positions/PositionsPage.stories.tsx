@@ -1,12 +1,15 @@
-import PositionsPageLoading from "./loading";
 import { fn, mocked } from "storybook/test";
+import PositionsPageLoading from "./loading";
 import { PositionsPage } from "./PositionsPage";
+import PositionsTemplate from "./PositionsTemplate";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { usePathname, useRouter } from "next/navigation";
 import { PositionsPageEmpty } from "./PositionsPageEmpty";
 import { PageDecorator } from "@/.storybook/PageDecorator";
+import { SearchModal } from "@/components/search/SearchModal";
 import { PositionList } from "@/components/position/PositionList";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { SearchModalStory } from "@/components/search/SearchModal/__stories__";
 import { PositionListStory } from "@/components/position/PositionList/__stories__";
 import { withSelectedItemsProvider } from "@/components/common/SelectedItemsContext/__stories__";
 import { withDeletePositionModalProvider } from "@/components/position/DeletePositionModal/__stories__";
@@ -20,6 +23,13 @@ const meta = {
   component: PositionsPage,
   parameters: { layout: "fullscreen" },
   decorators: [
+    (Story) => (
+      <PositionsTemplate
+        searchModal={<SearchModal {...SearchModalStory.args} />}
+      >
+        <Story />
+      </PositionsTemplate>
+    ),
     withDeletePositionModalProvider,
     withSelectedItemsProvider,
     PageDecorator,

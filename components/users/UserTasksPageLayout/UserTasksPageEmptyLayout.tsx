@@ -14,6 +14,7 @@ import {
 
 import { useTranslations } from "next-intl";
 import { PageGrid } from "@/components/common/PageGrid";
+import { BackButton } from "@/components/common/BackButton";
 import { PageContainer } from "@/components/common/PageContainer";
 import { UserTasksEmptySection } from "@/components/users/UserTasksEmptySection";
 
@@ -22,6 +23,7 @@ interface UserTasksPageEmptyLayoutProps {
   userHeaderContainer: React.ReactNode;
   navigationDesktop: React.ReactNode;
   navigationMobile: React.ReactNode;
+  backButton?: boolean;
 }
 
 export function UserTasksPageEmptyLayout({
@@ -29,6 +31,7 @@ export function UserTasksPageEmptyLayout({
   userHeaderContainer,
   navigationDesktop,
   navigationMobile,
+  backButton,
 }: UserTasksPageEmptyLayoutProps) {
   const t = useTranslations("users.UserTasksPageEmptyLayout");
 
@@ -56,6 +59,7 @@ export function UserTasksPageEmptyLayout({
       <PageContainer fullscreen className="md:hidden">
         <PageGrid className="flex-auto">
           <ToolbarMobileTop>
+            {backButton && <BackButton />}
             <ToolbarMobileHeading>{t("title")}</ToolbarMobileHeading>
           </ToolbarMobileTop>
 

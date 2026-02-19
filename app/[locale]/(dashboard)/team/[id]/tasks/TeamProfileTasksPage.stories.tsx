@@ -6,13 +6,16 @@ import {
 
 import { fn, mocked } from "storybook/test";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
+import TeamProfileTemplate from "../TeamProfileTemplate";
 import { useParams, usePathname } from "next/navigation";
 import { PageDecorator } from "@/.storybook/PageDecorator";
 import { NewTaskForm } from "@/components/tasks/NewTaskForm";
+import { SearchModal } from "@/components/search/SearchModal";
 import { UserTaskList } from "@/components/users/UserTaskList";
 import { DetailHeader } from "@/components/common/DetailHeader";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { NewTaskFormStory } from "@/components/tasks/NewTaskForm/__stories__";
+import { SearchModalStory } from "@/components/search/SearchModal/__stories__";
 import { UserNavigationMobile } from "@/components/users/UserNavigationMobile";
 import { UserTaskListStory } from "@/components/users/UserTaskList/__stories__";
 import { UserNavigationDesktop } from "@/components/users/UserNavigationDesktop";
@@ -32,6 +35,13 @@ const meta = {
   component: UserTasksPageLayout,
   parameters: { layout: "fullscreen" },
   decorators: [
+    (Story) => (
+      <TeamProfileTemplate
+        searchModal={<SearchModal {...SearchModalStory.args} />}
+      >
+        <Story />
+      </TeamProfileTemplate>
+    ),
     withDeleteTaskModalProvider,
     withEntityPaginationProvider,
     withSelectedTasksProvider,
@@ -52,6 +62,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
+    backButton: true,
     userTasksContainer: <UserTaskList {...UserTaskListStory.args} />,
     userHeaderContainer: <DetailHeader {...PersonDetailHeaderStory.args} />,
     taskToolbarActionsMenuTrigger: (

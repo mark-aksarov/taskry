@@ -1,10 +1,13 @@
 import { notFound } from "next/navigation";
 import { hasGuestRole } from "@/lib/utils/hasGuestRole";
 import { CustomerDetailPage } from "./CustomerDetailPage";
+import { SearchModal } from "@/components/search/SearchModal";
 import { getCustomerSummary } from "@/lib/data/customer/customer.dal";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { deleteCustomers } from "@/lib/actions/customer/deleteCustomers";
+import { TasksSearchContainer } from "@/components/search/TasksSearchContainer";
 import { CustomerDetailActions } from "@/components/customer/CustomerDetailActions";
+import { ProjectsSearchContainer } from "@/components/search/ProjectsSearchContainer";
 import { CustomerHeaderContainer } from "@/components/customer/CustomerHeaderContainer";
 import { EditCustomerFormContainer } from "@/components/customer/EditCustomerFormContainer";
 import { CustomerDetailAltContainer } from "@/components/customer/CustomerDetailAltContainer";
@@ -44,6 +47,12 @@ export default async function AppCustomerDetailPage({
           editCustomerFormContainer={
             <EditCustomerFormContainer customerId={numberId} />
           }
+        />
+      }
+      searchModal={
+        <SearchModal
+          tasksSearchContainer={<TasksSearchContainer />}
+          projectsSearchContainer={<ProjectsSearchContainer />}
         />
       }
     />

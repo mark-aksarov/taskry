@@ -11,6 +11,9 @@ import { TotalUsersCardContainer } from "@/components/users/TotalUsersCardContai
 import { UpdateTaskStatusesProvider } from "@/components/tasks/UpdateTaskStatusContext";
 import { TotalProjectsCardContainer } from "@/components/projects/TotalProjectsCardContainer";
 import { TotalCustomersCardContainer } from "@/components/customer/TotalCustomersCardContainer";
+import { SearchModal } from "@/components/search/SearchModal";
+import { TasksSearchContainer } from "@/components/search/TasksSearchContainer";
+import { ProjectsSearchContainer } from "@/components/search/ProjectsSearchContainer";
 
 const searchParamsSchema = z.object({
   page: pageSearchParam,
@@ -58,6 +61,12 @@ export default async function AppDashboardPage({
               totalCount={totalCount}
               page={page}
               pageSize={pageSize}
+            />
+          }
+          searchModal={
+            <SearchModal
+              tasksSearchContainer={<TasksSearchContainer />}
+              projectsSearchContainer={<ProjectsSearchContainer />}
             />
           }
         />

@@ -7,6 +7,7 @@ import {
 
 import { useTranslations } from "next-intl";
 import { useViewMode, ViewMode } from "./ViewModeContext";
+import { twMerge } from "tailwind-merge";
 
 export const ViewModeToggleButtonGroup = ({
   className,
@@ -20,7 +21,7 @@ export const ViewModeToggleButtonGroup = ({
     <ToggleButtonGroup
       selectionMode="single"
       selectedKeys={[viewMode]}
-      className={className}
+      className={twMerge(className, "gap-2")}
       variant="contrast"
       disallowEmptySelection
       onSelectionChange={(keys) => {

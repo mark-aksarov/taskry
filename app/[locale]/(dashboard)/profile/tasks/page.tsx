@@ -1,16 +1,15 @@
 import { z } from "zod";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
+import { getTaskList } from "@/lib/data/task/task.dal";
 import { hasGuestRole } from "@/lib/utils/hasGuestRole";
 import { deleteTasks } from "@/lib/actions/task/deleteTasks";
 import { ProfileTasksPageEmpty } from "./ProfileTasksPageEmpty";
 import { ProfileActions } from "@/components/users/ProfileActions";
 import { changePassword } from "@/lib/actions/user/changePassword";
-import { getTaskCount, getTaskList } from "@/lib/data/task/task.dal";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { pageSearchParam, pageSizeSearchParam } from "@/lib/schemas/base";
 import { UserTasksContainer } from "@/components/users/UserTasksContainer";
-import { updateTaskStatuses } from "@/lib/actions/task/updateTaskStatuses";
 import { ChangePasswordForm } from "@/components/users/ChangePasswordForm";
 import { UserHeaderContainer } from "@/components/users/UserHeaderContainer";
 import { UserTasksPageLayout } from "@/components/users/UserTasksPageLayout";

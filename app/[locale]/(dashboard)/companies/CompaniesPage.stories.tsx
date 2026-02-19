@@ -1,12 +1,15 @@
-import CompaniesPageLoading from "./loading";
 import { fn, mocked } from "storybook/test";
+import CompaniesPageLoading from "./loading";
 import { CompaniesPage } from "./CompaniesPage";
+import CompaniesTemplate from "./CompaniesTemplate";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { usePathname, useRouter } from "next/navigation";
 import { CompaniesPageEmpty } from "./CompaniesPageEmpty";
 import { PageDecorator } from "@/.storybook/PageDecorator";
+import { SearchModal } from "@/components/search/SearchModal";
 import { CompanyList } from "@/components/company/CompanyList";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { SearchModalStory } from "@/components/search/SearchModal/__stories__";
 import { CompanyListStory } from "@/components/company/CompanyList/__stories__";
 import { withSelectedItemsProvider } from "@/components/common/SelectedItemsContext/__stories__";
 import { withDeleteCompanyModalProvider } from "@/components/company/DeleteCompanyModal/__stories__";
@@ -20,6 +23,13 @@ const meta = {
   component: CompaniesPage,
   parameters: { layout: "fullscreen" },
   decorators: [
+    (Story) => (
+      <CompaniesTemplate
+        searchModal={<SearchModal {...SearchModalStory.args} />}
+      >
+        <Story />
+      </CompaniesTemplate>
+    ),
     withDeleteCompanyModalProvider,
     withSelectedItemsProvider,
     PageDecorator,

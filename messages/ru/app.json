@@ -3,7 +3,7 @@
     "heading": "Категории проектов"
   },
   "CustomerDetailPage": {
-    "heading": "Информация о клиенте"
+    "heading": "Детали клиента"
   },
   "DashboardErrorPage": {
     "heading": "Что-то пошло не так",
@@ -49,13 +49,13 @@
     "heading": "Панель управления"
   },
   "ProjectsPage": {
-    "heading": "Все проекты"
+    "heading": "Проекты"
   },
   "TasksPage": {
-    "heading": "Все задачи"
+    "heading": "Задачи"
   },
   "CustomersPage": {
-    "heading": "Все клиенты"
+    "heading": "Клиенты"
   },
   "CustomersPageEmpty": {
     "heading": "Нет клиентов",
@@ -102,7 +102,7 @@
     "addButtonLabel": "Новый Пользователь"
   },
   "TeamProfilePage": {
-    "heading": "Информация о пользователе"
+    "heading": "Детали пользователя"
   },
   "ProjectCategoriesPageLoading": {
     "title": "Все категории проектов"

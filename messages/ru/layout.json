@@ -8,7 +8,11 @@
     "profileSettings": "Настройки профиля",
     "taskDetails": "Детали задачи",
     "projectDetails": "Детали проекта",
-    "userInfo": "Информация о пользователе"
+    "userInfo": "Информация о пользователе",
+    "positions": "Должности",
+    "projectCategories": "Категории проектов",
+    "taskCategories": "Категории задач",
+    "companies": "Компании"
   },
   "AppHeaderLangMenuTrigger": {
     "label": "Английский",

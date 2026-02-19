@@ -9,13 +9,12 @@ import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { TeamProfileTasksPageEmpty } from "./TeamProfileTasksPageEmpty";
 import { pageSearchParam, pageSizeSearchParam } from "@/lib/schemas/base";
 import { ChangePasswordForm } from "@/components/users/ChangePasswordForm";
-import { updateTaskStatuses } from "@/lib/actions/task/updateTaskStatuses";
 import { UserTasksContainer } from "@/components/users/UserTasksContainer";
 import { UserTasksPageLayout } from "@/components/users/UserTasksPageLayout";
 import { UserHeaderContainer } from "@/components/users/UserHeaderContainer";
 import { NewTaskFormContainer } from "@/components/tasks/NewTaskFormContainer";
 import { UserNavigationMobile } from "@/components/users/UserNavigationMobile";
-import { SelectedTasksProvider } from "@/components/tasks/SelectedTasksContext/SelectedTasksContext";
+import { SelectedTasksProvider } from "@/components/tasks/SelectedTasksContext";
 import { UserNavigationDesktop } from "@/components/users/UserNavigationDesktop";
 import { EditUserFormContainer } from "@/components/users/EditUserFormContainer";
 import { TaskToolbarActionsMenuTrigger } from "@/components/tasks/TaskToolbarActionsMenuTrigger";
@@ -88,6 +87,7 @@ export default async function AppProfileTasksPage({
       pageItems={tasks.map((task) => ({ id: task.id, status: task.status }))}
     >
       <UserTasksPageLayout
+        backButton
         userTasksContainer={
           <UserTasksContainer
             tasks={tasks}

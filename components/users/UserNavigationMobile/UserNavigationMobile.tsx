@@ -12,7 +12,7 @@ export function UserNavigationMobile() {
   const { id } = useParams<{ id: string }>();
 
   return (
-    <nav className="flex gap-1 md:hidden">
+    <nav className="flex gap-2 md:hidden">
       <UserNavigationMobileLink
         href={`/team/${id}`}
         isSelected={pathname === `/team/${id}`}

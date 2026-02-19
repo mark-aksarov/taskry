@@ -3,14 +3,17 @@ import { TaskDetailPage } from "./TaskDetailPage";
 import { hasGuestRole } from "@/lib/utils/hasGuestRole";
 import { getTaskSummary } from "@/lib/data/task/task.dal";
 import { deleteTasks } from "@/lib/actions/task/deleteTasks";
+import { SearchModal } from "@/components/search/SearchModal";
 import { sendComment } from "@/lib/actions/comment/sendComment";
 import { updateComment } from "@/lib/actions/comment/updateComment";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { TaskDetailActions } from "@/components/tasks/TaskDetailActions";
 import { TaskCommentsModal } from "@/components/tasks/TaskCommentsModal";
+import { TasksSearchContainer } from "@/components/search/TasksSearchContainer";
 import { TaskCommentsContainer } from "@/components/tasks/TaskCommentsContainer";
 import { EditTaskFormContainer } from "@/components/tasks/EditTaskFormContainer";
 import { TaskDetailAltContainer } from "@/components/tasks/TaskDetailAltContainer";
+import { ProjectsSearchContainer } from "@/components/search/ProjectsSearchContainer";
 import { TaskDetailHeaderContainer } from "@/components/tasks/TaskDetailHeaderContainer";
 
 export default async function AppTaskDetailPage({
@@ -55,6 +58,12 @@ export default async function AppTaskDetailPage({
               updateCommentAction={updateComment}
             />
           }
+        />
+      }
+      searchModal={
+        <SearchModal
+          tasksSearchContainer={<TasksSearchContainer />}
+          projectsSearchContainer={<ProjectsSearchContainer />}
         />
       }
     />

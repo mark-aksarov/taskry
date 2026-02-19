@@ -8,7 +8,11 @@
     "profileSettings": "Profile Settings",
     "taskDetails": "Task Details",
     "projectDetails": "Project Details",
-    "userInfo": "User Information"
+    "userInfo": "User Information",
+    "positions": "Positions",
+    "projectCategories": "Project categories",
+    "taskCategories": "Task categories",
+    "companies": "Companies"
   },
   "AppHeaderLangMenuTrigger": {
     "label": "English",
