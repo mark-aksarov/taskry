@@ -4,8 +4,8 @@ import { useActionState } from "react";
 import { useTranslations } from "next-intl";
 import { ActionFn, ActionState } from "@/lib/actions/types";
 import { SignUpFormNameField } from "./SignUpFormNameField";
+import { AuthForm, AuthFormSubmitButton } from "../AuthForm";
 import { SignUpFormEmailField } from "./SignUpFormEmailField";
-import { AuthCardForm, AuthCardSubmitButton } from "../AuthCard";
 import { SignUpFormPasswordField } from "./SignUpFormPasswordField";
 import { FormErrorBanner } from "@/components/common/FormErrorBanner";
 import { SignUpFormRememberMeCheckbox } from "./SignUpFormRememberMeCheckbox";
@@ -24,7 +24,7 @@ export function SignUpForm({ action }: SignUpFormProps) {
   const [state, formAction, isPending] = useActionState(action, initialState);
 
   return (
-    <AuthCardForm action={formAction}>
+    <AuthForm action={formAction}>
       <SignUpFormNameField />
       <SignUpFormEmailField />
       <SignUpFormPasswordField />
@@ -34,10 +34,10 @@ export function SignUpForm({ action }: SignUpFormProps) {
         {state.message}
       </FormErrorBanner>
 
-      <AuthCardSubmitButton
+      <AuthFormSubmitButton
         isPending={isPending}
         label={t("submitButtonLabel")}
       />
-    </AuthCardForm>
+    </AuthForm>
   );
 }

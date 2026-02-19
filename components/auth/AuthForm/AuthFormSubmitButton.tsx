@@ -1,6 +1,6 @@
 import { Button, ButtonProps } from "@/components/ui/Button";
 
-export function AuthCardSubmitButton(props: ButtonProps) {
+export function AuthFormSubmitButton(props: ButtonProps) {
   return (
     <Button
       type="submit"

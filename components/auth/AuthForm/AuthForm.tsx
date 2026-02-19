@@ -3,12 +3,12 @@
 import { Form } from "react-aria-components";
 import { handleActionSubmit } from "@/lib/utils/handleActionSubmit";
 
-interface AuthCardFormProps {
+interface AuthFormProps {
   action: (payload: FormData) => void;
   children: React.ReactNode;
 }
 
-export function AuthCardForm({ action, children }: AuthCardFormProps) {
+export function AuthForm({ action, children }: AuthFormProps) {
   return (
     <Form
       onSubmit={(e) => handleActionSubmit(e, action, ["rememberMe"])}

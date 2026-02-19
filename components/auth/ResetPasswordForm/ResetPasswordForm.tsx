@@ -3,7 +3,7 @@
 import { useActionState } from "react";
 import { useTranslations } from "next-intl";
 import { ActionFn, ActionState } from "@/lib/actions/types";
-import { AuthCardForm, AuthCardSubmitButton } from "../AuthCard";
+import { AuthForm, AuthFormSubmitButton } from "../AuthForm";
 import { FormErrorBanner } from "@/components/common/FormErrorBanner";
 import { ResetPasswordFormPasswordField } from "./ResetPasswordFormPasswordField";
 
@@ -21,17 +21,17 @@ export function ResetPasswordForm({ action }: ResetPasswordFormProps) {
   const [state, formAction, isPending] = useActionState(action, initialState);
 
   return (
-    <AuthCardForm action={formAction}>
+    <AuthForm action={formAction}>
       <ResetPasswordFormPasswordField />
 
       <FormErrorBanner status={state.status} isPending={isPending}>
         {state.message}
       </FormErrorBanner>
 
-      <AuthCardSubmitButton
+      <AuthFormSubmitButton
         isPending={isPending}
         label={t("submitButtonLabel")}
       />
-    </AuthCardForm>
+    </AuthForm>
   );
 }
