@@ -47,7 +47,7 @@ export function TaskFiltersForm({
     const searchParams = formDataToSearchParams(formData);
     searchParams.delete("page");
 
-    router.push(`${pathname}?${searchParams.toString()}`, { locale });
+    router.replace(`${pathname}?${searchParams.toString()}`, { locale });
   };
 
   return (

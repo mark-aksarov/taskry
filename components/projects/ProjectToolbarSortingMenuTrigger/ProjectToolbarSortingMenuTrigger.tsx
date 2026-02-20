@@ -29,7 +29,7 @@ export function ProjectToolbarSortingMenuTrigger({
     const params = new URLSearchParams(searchParams.toString());
     params.set("sort", key as string);
     params.delete("page");
-    router.push(`${pathname}?${params.toString()}`, { locale });
+    router.replace(`${pathname}?${params.toString()}`, { locale });
   };
 
   return (

@@ -46,7 +46,7 @@ export function CustomerFiltersForm({
     const searchParams = formDataToSearchParams(formData);
     params.delete("page");
 
-    router.push(`${pathname}?${searchParams.toString()}`, { locale });
+    router.replace(`${pathname}?${searchParams.toString()}`, { locale });
   };
 
   return (
