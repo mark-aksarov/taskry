@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import { projectId } from "@/lib/schemas/project";
 import { hasGuestRole } from "@/lib/utils/hasGuestRole";
 import { ProjectDetailPage } from "./ProjectDetailPage";
 import { sendComment } from "@/lib/actions/comment/sendComment";
@@ -21,10 +22,15 @@ export default async function AppProfilePage({
 }) {
   await requireProtectedPage();
 
-  const { id } = await params;
-  const numberId = Number(id);
+  const { id: rawProjectId } = await params;
 
-  const projectSummary = await getProjectSummary(numberId);
+  const parsed = projectId.safeParse(rawProjectId);
+  if (!parsed.success) {
+    notFound();
+  }
+  const id = parsed.data;
+
+  const projectSummary = await getProjectSummary(id);
 
   if (!projectSummary) {
     notFound();
@@ -34,28 +40,22 @@ export default async function AppProfilePage({
 
   return (
     <ProjectDetailPage
-      projectDetailContainer={
-        <ProjectDetailAltContainer projectId={Number(id)} />
-      }
-      projectHeaderContainer={
-        <ProjectDetailHeaderContainer projectId={Number(id)} />
-      }
+      projectDetailContainer={<ProjectDetailAltContainer projectId={id} />}
+      projectHeaderContainer={<ProjectDetailHeaderContainer projectId={id} />}
       projectDetailActions={
         <ProjectDetailActions
           guestMode={guestMode}
           deleteProject={deleteProjects}
-          editProjectFormContainer={
-            <EditProjectFormContainer projectId={numberId} />
-          }
-          projectId={numberId}
+          editProjectFormContainer={<EditProjectFormContainer projectId={id} />}
+          projectId={id}
           projectTitle={projectSummary.title}
           commentsModal={
             <ProjectCommentsModal
-              projectId={numberId}
+              projectId={id}
               projectCommentsContainer={
                 <ProjectCommentsContainer
                   guestMode={guestMode}
-                  projectId={numberId}
+                  projectId={id}
                 />
               }
               sendCommentAction={sendComment}

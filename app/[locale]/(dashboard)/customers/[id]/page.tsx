@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import { customerId } from "@/lib/schemas/customer";
 import { hasGuestRole } from "@/lib/utils/hasGuestRole";
 import { CustomerDetailPage } from "./CustomerDetailPage";
 import { getCustomerSummary } from "@/lib/data/customer/customer.dal";
@@ -17,10 +18,15 @@ export default async function AppCustomerDetailPage({
 }) {
   await requireProtectedPage();
 
-  const { id } = await params;
-  const numberId = Number(id);
+  const { id: rawCustomerId } = await params;
 
-  const customerSummary = await getCustomerSummary(numberId);
+  const parsed = customerId.safeParse(rawCustomerId);
+  if (!parsed.success) {
+    notFound();
+  }
+  const id = parsed.data;
+
+  const customerSummary = await getCustomerSummary(id);
 
   if (!customerSummary) {
     notFound();
@@ -30,20 +36,16 @@ export default async function AppCustomerDetailPage({
 
   return (
     <CustomerDetailPage
-      customerDetailContainer={
-        <CustomerDetailAltContainer customerId={numberId} />
-      }
-      customerHeaderContainer={
-        <CustomerHeaderContainer customerId={numberId} />
-      }
+      customerDetailContainer={<CustomerDetailAltContainer customerId={id} />}
+      customerHeaderContainer={<CustomerHeaderContainer customerId={id} />}
       customerDetailActions={
         <CustomerDetailActions
           guestMode={guestMode}
-          customerId={numberId}
+          customerId={id}
           customerFullName={customerSummary.fullName}
           deleteCustomer={deleteCustomers}
           editCustomerFormContainer={
-            <EditCustomerFormContainer customerId={numberId} />
+            <EditCustomerFormContainer customerId={id} />
           }
         />
       }

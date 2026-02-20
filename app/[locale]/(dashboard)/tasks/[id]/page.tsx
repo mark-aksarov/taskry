@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import { taskId } from "@/lib/schemas/task";
 import { TaskDetailPage } from "./TaskDetailPage";
 import { hasGuestRole } from "@/lib/utils/hasGuestRole";
 import { getTaskSummary } from "@/lib/data/task/task.dal";
@@ -21,10 +22,15 @@ export default async function AppTaskDetailPage({
 }) {
   await requireProtectedPage();
 
-  const { id } = await params;
-  const numberId = Number(id);
+  const { id: rawTaskId } = await params;
 
-  const taskSummary = await getTaskSummary(numberId);
+  const parsed = taskId.safeParse(rawTaskId);
+  if (!parsed.success) {
+    notFound();
+  }
+  const id = parsed.data;
+
+  const taskSummary = await getTaskSummary(id);
 
   if (!taskSummary) {
     notFound();
@@ -34,23 +40,20 @@ export default async function AppTaskDetailPage({
 
   return (
     <TaskDetailPage
-      taskDetailContainer={<TaskDetailAltContainer taskId={numberId} />}
-      taskHeaderContainer={<TaskDetailHeaderContainer taskId={numberId} />}
+      taskDetailContainer={<TaskDetailAltContainer taskId={id} />}
+      taskHeaderContainer={<TaskDetailHeaderContainer taskId={id} />}
       taskDetailActions={
         <TaskDetailActions
           guestMode={guestMode}
-          editTaskFormContainer={<EditTaskFormContainer taskId={numberId} />}
-          taskId={numberId}
+          editTaskFormContainer={<EditTaskFormContainer taskId={id} />}
+          taskId={id}
           taskTitle={taskSummary.title}
           deleteTask={deleteTasks}
           commentsModal={
             <TaskCommentsModal
-              taskId={numberId}
+              taskId={id}
               taskCommentsContainer={
-                <TaskCommentsContainer
-                  guestMode={guestMode}
-                  taskId={numberId}
-                />
+                <TaskCommentsContainer guestMode={guestMode} taskId={id} />
               }
               sendCommentAction={sendComment}
               updateCommentAction={updateComment}
