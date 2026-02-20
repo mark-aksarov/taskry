@@ -39,7 +39,7 @@ export default async function AppDashboardPage({
   const { items: tasks, totalCount } = await getTaskList({
     page,
     pageSize,
-    sort: "deadline",
+    sort: "createdAt",
     filters,
   });
 

@@ -35,7 +35,7 @@
   },
   "AppNavigationLangMenuTrigger": {
     "dialogHeading": "Язык",
-    "label": "Английский",
+    "label": "Русский",
     "items": {
       "english": "Английский",
       "russian": "Русский"

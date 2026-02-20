@@ -3,9 +3,9 @@
 import Image from "next/image";
 import { Languages } from "lucide-react";
 import { Item, Key } from "react-stately";
-import { useTranslations } from "next-intl";
 import { MenuTrigger } from "@/components/ui/Menu";
 import { DialogHeader } from "@/components/ui/Dialog";
+import { useLocale, useTranslations } from "next-intl";
 import { usePathname, useRouter } from "@/i18n/navigation";
 import { NavigationButton } from "@/components/common/NavigationButton";
 
@@ -13,6 +13,7 @@ export const AppNavigationLangMenuTrigger = () => {
   const t = useTranslations("layout.AppNavigationLangMenuTrigger");
   const router = useRouter();
   const pathname = usePathname();
+  const locale = useLocale();
 
   function toggleLang(key: Key) {
     const locale = key as "en" | "ru";
@@ -22,6 +23,8 @@ export const AppNavigationLangMenuTrigger = () => {
   return (
     <MenuTrigger
       onAction={toggleLang}
+      selectionMode="single"
+      selectedKeys={[locale]}
       overlayType="bottomsheet"
       renderDialogHeader={() => (
         <DialogHeader>{t("dialogHeading")}</DialogHeader>
