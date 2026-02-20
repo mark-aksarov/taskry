@@ -15,7 +15,6 @@ import { useLocale } from "next-intl";
 import { UserFilters } from "@/lib/types";
 import { Separator } from "@/components/ui/Separator";
 import { usePathname, useRouter } from "@/i18n/navigation";
-import { UserFiltersFormRoleCheckboxGroup } from "./UserFiltersFormRoleCheckboxGroup";
 import { UserFiltersFormActiveTasksSwitch } from "./UserFiltersFormActiveTasksSwitch";
 import { FiltersFormSubmitButton } from "@/components/common/FiltersFormSubmitButton";
 import { UserFiltersFormOverdueTasksSwitch } from "./UserFiltersFormOverdueTasksSwitch";
@@ -62,10 +61,7 @@ export function UserFiltersForm({
         <UserFiltersFormOverdueTasksSwitch filters={filters} />
         <Separator />
 
-        <UserFiltersFormRoleCheckboxGroup />
-        <Separator />
-
-        {positionCheckboxGroup}
+        <div>{positionCheckboxGroup}</div>
       </FormBaseBody>
       <FormBaseFooter>
         <FiltersFormSubmitButton />

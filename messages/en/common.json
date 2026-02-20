@@ -55,5 +55,9 @@
   },
   "ToolbarManageButtonMobile": {
     "ariaLabel": "Manage"
+  },
+  "ExpandCollapseButton": {
+    "collapse": "Collapse",
+    "expand": "Expand"
   }
 }

@@ -4,72 +4,60 @@
     "text": "<strong>Действие ограничено в гостевом режиме.</strong> Для доступа ко всем функциям требуется аккаунт. Пожалуйста, войдите в систему или создайте новый аккаунт, чтобы снять ограничения гостевого режима.",
     "cancelButton": "Отмена"
   },
-
   "ToolbarSortingMenuTrigger": {
     "dialogHeading": "Сортировка"
   },
-
   "ToolbarManageMenuTrigger": {
     "dialogHeading": "Управление"
   },
-
   "ToolbarSortingButtonMobile": {
     "ariaLabel": "Сортировать проекты по"
   },
-
   "ToolbarSortingButtonDesktop": {
     "label": "Сортировка"
   },
-
   "ToolbarFiltersButtonDesktop": {
     "label": "Фильтры"
   },
-
   "ToolbarFiltersButtonMobile": {
     "ariaLabel": "Фильтровать проекты"
   },
-
   "FiltersFormSubmitButton": {
     "label": "Применить фильтры"
   },
-
   "ToolbarActionsButtonDesktop": {
     "label": "Действия"
   },
-
   "ToolbarActionsButtonMobile": {
     "ariaLabel": "Действия"
   },
-
   "ViewModeToggleButtonGroup": {
     "list": "Список",
     "grid": "Сетка"
   },
-
   "AttachmentsField": {
     "label": "Вложения",
     "maxSize": "Максимальный размер: 10 МБ"
   },
-
   "ItemBaseActionMenuTrigger": {
     "ariaLabel": "Действия"
   },
-
   "ItemBaseActionMenuDialogHeader": {
     "heading": "Действия"
   },
-
   "Pagination": {
     "previousPage": "Предыдущая страница",
     "nextPage": "Следующая страница",
     "page": "страница {pageNumber}"
   },
-
   "ToolbarManageButtonDesktop": {
     "label": "Управление"
   },
-
   "ToolbarManageButtonMobile": {
     "ariaLabel": "Управление"
+  },
+  "ExpandCollapseButton": {
+    "collapse": "Свернуть",
+    "expand": "Развернуть"
   }
 }

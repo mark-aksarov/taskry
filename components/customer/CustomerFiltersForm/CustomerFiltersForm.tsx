@@ -61,7 +61,7 @@ export function CustomerFiltersForm({
         <CustomerFiltersFormOverdueProjectsSwitch filters={filters} />
         <Separator />
 
-        {companyCheckboxGroup}
+        <div>{companyCheckboxGroup}</div>
       </FormBaseBody>
       <FormBaseFooter>
         <FiltersFormSubmitButton />
