@@ -32,6 +32,9 @@ export const getCommentList = cache(
 
     // Get comments
     const comments = await prisma.comment.findMany({
+      orderBy: {
+        createdAt: "desc",
+      },
       where: {
         taskId,
         projectId,
