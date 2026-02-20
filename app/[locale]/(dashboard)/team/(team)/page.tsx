@@ -7,6 +7,7 @@ import {
 
 import { z } from "zod";
 import { UsersPage } from "./UsersPage";
+import { userSortFields } from "@/lib/types";
 import { UsersPageEmpty } from "./UsersPageEmpty";
 import { positionId } from "@/lib/schemas/position";
 import { hasOwnerRole } from "@/lib/utils/hasOwnerRole";
@@ -28,7 +29,7 @@ const searchParamsSchema = z.object({
   hasNoActiveTasks: booleanSearchParam,
   hasActiveTasks: booleanSearchParam,
   hasOverdueTasks: booleanSearchParam,
-  sort: z.enum(["fullName", "position"]).catch("fullName"),
+  sort: z.enum(userSortFields).catch("fullName"),
   position: z.preprocess(
     searchParamToArray,
     z.array(positionId).optional().catch(undefined),
@@ -77,6 +78,7 @@ export default async function AppUsersPage({
 
   return (
     <UsersPage
+      selectedSortField={sort}
       userToolbarFiltersModalTrigger={
         <UserToolbarFiltersModalTrigger
           filtersFormContainer={<UserFiltersFormContainer filters={filters} />}

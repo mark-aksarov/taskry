@@ -11,7 +11,7 @@ import {
 import { cache } from "react";
 import prisma from "@/lib/prisma";
 import { auth } from "@/lib/auth";
-import { TaskFilters } from "@/lib/types";
+import { TaskFilters, TaskSortField } from "@/lib/types";
 import { requireSession } from "../utils/requireSession";
 import { Prisma, TaskStatus } from "@/generated/prisma/client";
 import { AccessDeniedError, NotFoundError } from "../utils/error";
@@ -179,7 +179,7 @@ export const getTaskList = cache(
   }: {
     page?: number;
     pageSize?: number;
-    sort?: string;
+    sort?: TaskSortField;
     filters?: TaskFilters;
   }): Promise<TaskListDTO> => {
     // Authorization

@@ -13,7 +13,7 @@ import {
 import { cache } from "react";
 import { auth } from "@/lib/auth";
 import prisma from "@/lib/prisma";
-import { CustomerFilters } from "@/lib/types";
+import { CustomerFilters, CustomerSortField } from "@/lib/types";
 import { requireSession } from "../utils/requireSession";
 import { AccessDeniedError, NotFoundError } from "../utils/error";
 import { Prisma, ProjectStatus } from "@/generated/prisma/client";
@@ -216,7 +216,7 @@ export const getCustomerList = cache(
   }: {
     page?: number;
     pageSize?: number;
-    sort?: string;
+    sort?: CustomerSortField;
     filters?: CustomerFilters;
   }): Promise<CustomerListDTO> => {
     // Authorization

@@ -13,7 +13,7 @@ import {
 import { cache } from "react";
 import { auth } from "@/lib/auth";
 import prisma from "@/lib/prisma";
-import { ProjectFilters } from "@/lib/types";
+import { ProjectFilters, ProjectSortField } from "@/lib/types";
 import { requireSession } from "../utils/requireSession";
 import { AccessDeniedError, NotFoundError } from "../utils/error";
 import { Prisma, TaskStatus, ProjectStatus } from "@/generated/prisma/client";
@@ -249,7 +249,7 @@ export const getProjectList = cache(
   }: {
     page?: number;
     pageSize?: number;
-    sort?: string;
+    sort?: ProjectSortField;
     filters?: ProjectFilters;
   }): Promise<ProjectListDTO> => {
     // Authorization

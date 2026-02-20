@@ -7,12 +7,19 @@ import {
 } from "@/components/common/Toolbar";
 
 import { Item, Key } from "react-stately";
+import { CustomerSortField } from "@/lib/types";
 import { useSearchParams } from "next/navigation";
 import { ALargeSmall, Building2 } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { usePathname, useRouter } from "@/i18n/navigation";
 
-export function CustomerToolbarSortingMenuTrigger() {
+interface CustomerToolbarSortingMenuTriggerProps {
+  selectedSortField: CustomerSortField;
+}
+
+export function CustomerToolbarSortingMenuTrigger({
+  selectedSortField,
+}: CustomerToolbarSortingMenuTriggerProps) {
   const t = useTranslations("customers.CustomerToolbarSortingMenuTrigger");
   const locale = useLocale();
   const router = useRouter();
@@ -29,6 +36,7 @@ export function CustomerToolbarSortingMenuTrigger() {
   return (
     <ToolbarSortingMenuTrigger
       onAction={handleAction}
+      selectedKeys={[selectedSortField]}
       renderButton={() => (
         <>
           <ToolbarSortingButtonMobile data-test="customer-toolbar-sorting-button-mobile" />

@@ -9,7 +9,7 @@ import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import { UserList } from "../UserList";
 import { UserGrid } from "../UserGrid";
-import { UserFilters } from "@/lib/types";
+import { UserFilters, UserSortField } from "@/lib/types";
 import { UserListItem } from "../UserListItem";
 import { UserGridItem } from "../UserGridItem";
 import { UserDetailModal } from "../UserDetailModal";
@@ -27,7 +27,7 @@ interface UsersContainerProps {
   showUserActionMenuTrigger: boolean;
   page: number;
   pageSize: number;
-  sort: string;
+  sort: UserSortField;
   filters?: UserFilters;
 }
 

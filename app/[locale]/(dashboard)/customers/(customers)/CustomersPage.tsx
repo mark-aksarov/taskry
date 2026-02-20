@@ -6,6 +6,7 @@ import {
 } from "@/components/common/Toolbar";
 
 import { useTranslations } from "next-intl";
+import { CustomerSortField } from "@/lib/types";
 import { PageGrid } from "@/components/common/PageGrid";
 import { ViewModeProvider } from "@/components/common/ViewMode";
 import { PageContainer } from "@/components/common/PageContainer";
@@ -18,6 +19,7 @@ interface CustomersPageProps {
   customerToolbarActionsMenuTrigger: React.ReactNode;
   customerToolbarFiltersModalTrigger: React.ReactNode;
   customersContainer: React.ReactNode;
+  selectedSortField: CustomerSortField;
 }
 
 export function CustomersPage({
@@ -25,6 +27,7 @@ export function CustomersPage({
   customerToolbarActionsMenuTrigger,
   customerToolbarFiltersModalTrigger,
   customersContainer,
+  selectedSortField,
 }: CustomersPageProps) {
   const t = useTranslations("app.CustomersPage");
 
@@ -34,7 +37,9 @@ export function CustomersPage({
         <ViewModeProvider>
           <ToolbarDesktop>
             <CustomerToolbarManageMenuTrigger />
-            <CustomerToolbarSortingMenuTrigger />
+            <CustomerToolbarSortingMenuTrigger
+              selectedSortField={selectedSortField}
+            />
             {customerToolbarFiltersModalTrigger}
             {customerToolbarActionsMenuTrigger}
             <ViewModeToggleButtonGroup className="ml-auto" />
@@ -44,7 +49,9 @@ export function CustomersPage({
           <ToolbarMobileTop>
             <ToolbarMobileHeading>{t("heading")}</ToolbarMobileHeading>
             <CustomerToolbarManageMenuTrigger />
-            <CustomerToolbarSortingMenuTrigger />
+            <CustomerToolbarSortingMenuTrigger
+              selectedSortField={selectedSortField}
+            />
             {customerToolbarFiltersModalTrigger}
             {customerToolbarActionsMenuTrigger}
           </ToolbarMobileTop>

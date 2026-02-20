@@ -53,3 +53,11 @@ export const projectSortFields = [
 ] as const;
 
 export type ProjectSortField = (typeof projectSortFields)[number];
+
+export const customerSortFields = ["fullName", "company"] as const;
+
+export type CustomerSortField = (typeof customerSortFields)[number];
+
+export const userSortFields = ["fullName", "position"] as const;
+
+export type UserSortField = (typeof userSortFields)[number];

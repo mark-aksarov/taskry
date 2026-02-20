@@ -6,6 +6,7 @@ import {
 } from "@/components/common/Toolbar";
 
 import { useTranslations } from "next-intl";
+import { UserSortField } from "@/lib/types";
 import { PageGrid } from "@/components/common/PageGrid";
 import { ViewModeProvider } from "@/components/common/ViewMode";
 import { PageContainer } from "@/components/common/PageContainer";
@@ -17,12 +18,14 @@ interface UsersPageProps {
   userToolbarFiltersModalTrigger: React.ReactNode;
   userToolbarCreateNewMenuTrigger: React.ReactNode;
   usersContainer: React.ReactNode;
+  selectedSortField: UserSortField;
 }
 
 export function UsersPage({
   userToolbarFiltersModalTrigger,
   userToolbarCreateNewMenuTrigger,
   usersContainer,
+  selectedSortField,
 }: UsersPageProps) {
   const t = useTranslations("app.UsersPage");
 
@@ -32,7 +35,9 @@ export function UsersPage({
         <ViewModeProvider>
           <ToolbarDesktop>
             <UserToolbarManageMenuTrigger />
-            <UserToolbarSortingMenuTrigger />
+            <UserToolbarSortingMenuTrigger
+              selectedSortField={selectedSortField}
+            />
             {userToolbarFiltersModalTrigger}
             <ViewModeToggleButtonGroup className="ml-auto" />
             {userToolbarCreateNewMenuTrigger}
@@ -41,7 +46,9 @@ export function UsersPage({
           <ToolbarMobileTop>
             <ToolbarMobileHeading>{t("heading")}</ToolbarMobileHeading>
             <UserToolbarManageMenuTrigger />
-            <UserToolbarSortingMenuTrigger />
+            <UserToolbarSortingMenuTrigger
+              selectedSortField={selectedSortField}
+            />
             {userToolbarFiltersModalTrigger}
           </ToolbarMobileTop>
 

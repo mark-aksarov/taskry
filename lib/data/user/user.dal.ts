@@ -7,7 +7,7 @@ import {
 
 import { cache } from "react";
 import prisma from "@/lib/prisma";
-import { UserFilters } from "@/lib/types";
+import { UserFilters, UserSortField } from "@/lib/types";
 import { requireSession } from "../utils/requireSession";
 import { Prisma, TaskStatus } from "@/generated/prisma/client";
 
@@ -177,19 +177,31 @@ export const getUserList = cache(
   }: {
     page?: number;
     pageSize?: number;
-    sort?: string;
+    sort?: UserSortField;
     filters?: UserFilters;
   }): Promise<UserSearchDTO> => {
     const {
       user: { workspaceId },
     } = await requireSession();
 
-    let orderBy: Prisma.UserOrderByWithRelationInput | undefined;
+    // Sorting
+    let orderBy;
 
-    if (sort === "fullName") {
-      orderBy = { fullName: "asc" };
-    } else if (sort === "position") {
-      orderBy = { position: { name: "asc" } };
+    if (sort === "position") {
+      orderBy = [
+        {
+          position: {
+            name: "asc",
+          },
+        },
+        {
+          fullName: "asc",
+        },
+      ] as Prisma.CustomerOrderByWithRelationInput[];
+    } else if (sort === "fullName") {
+      orderBy = {
+        fullName: "asc",
+      } as Prisma.CustomerOrderByWithRelationInput;
     }
 
     const where = buildUserWhereClause(workspaceId, filters);

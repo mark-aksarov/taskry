@@ -8,6 +8,7 @@ import {
 
 import { z } from "zod";
 import { CustomersPage } from "./CustomersPage";
+import { customerSortFields } from "@/lib/types";
 import { companyId } from "@/lib/schemas/company";
 import { hasGuestRole } from "@/lib/utils/hasGuestRole";
 import { CustomersPageEmpty } from "./CustomersPageEmpty";
@@ -29,7 +30,7 @@ const searchParamsSchema = z.object({
   pageSize: pageSizeSearchParam,
   deadlineFrom: dateSearchParam,
   deadlineTo: dateSearchParam,
-  sort: z.enum(["fullName", "company"]).catch("fullName"),
+  sort: z.enum(customerSortFields).catch("fullName"),
   hasNoActiveProjects: booleanSearchParam,
   hasActiveProjects: booleanSearchParam,
   hasOverdueProjects: booleanSearchParam,
@@ -82,6 +83,7 @@ export default async function AppCustomersPage({
   return (
     <SelectedItemsProvider pageItems={customers.map((c) => ({ id: c.id }))}>
       <CustomersPage
+        selectedSortField={sort}
         customerToolbarCreateNewMenuTrigger={
           customerToolbarCreateNewMenuTrigger
         }

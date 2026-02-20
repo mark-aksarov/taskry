@@ -56,6 +56,7 @@ const customerToolbarCreateNewMenuTrigger = (
 
 export const Default = {
   args: {
+    selectedSortField: "fullName",
     customerToolbarCreateNewMenuTrigger: customerToolbarCreateNewMenuTrigger,
     customerToolbarActionsMenuTrigger: (
       <CustomerToolbarActionsMenuTrigger

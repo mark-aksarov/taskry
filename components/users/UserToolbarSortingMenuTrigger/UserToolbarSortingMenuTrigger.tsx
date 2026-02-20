@@ -7,12 +7,19 @@ import {
 } from "@/components/common/Toolbar";
 
 import { Item, Key } from "react-stately";
+import { UserSortField } from "@/lib/types";
 import { useSearchParams } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import { usePathname, useRouter } from "@/i18n/navigation";
 import { ALargeSmall, BriefcaseBusiness } from "lucide-react";
 
-export function UserToolbarSortingMenuTrigger() {
+interface UserToolbarSortingMenuTriggerProps {
+  selectedSortField: UserSortField;
+}
+
+export function UserToolbarSortingMenuTrigger({
+  selectedSortField,
+}: UserToolbarSortingMenuTriggerProps) {
   const t = useTranslations("users.UserToolbarSortingMenuTrigger");
   const locale = useLocale();
   const router = useRouter();
@@ -29,6 +36,7 @@ export function UserToolbarSortingMenuTrigger() {
   return (
     <ToolbarSortingMenuTrigger
       onAction={handleAction}
+      selectedKeys={[selectedSortField]}
       renderButton={() => (
         <>
           <ToolbarSortingButtonMobile data-test="user-toolbar-sorting-button-mobile" />
