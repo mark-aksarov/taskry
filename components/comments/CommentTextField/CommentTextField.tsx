@@ -1,6 +1,7 @@
 "use client";
 
 import { tv } from "tailwind-variants";
+import { useEffect, useRef } from "react";
 import { useTranslations } from "next-intl";
 import { focusRing } from "@/components/ui/styles";
 import { fieldStyles } from "@/components/ui/Field";
@@ -10,10 +11,12 @@ import { CommentTextFieldSendButton } from "./CommentTextFieldSendButton";
 import { fieldInputStyles as baseInputStyles } from "@/components/ui/TextField";
 import { TextArea, composeRenderProps, TextField } from "react-aria-components";
 
+const MAX_TEXTAREA_HEIGHT = 164;
+
 export const fieldInputStyles = tv({
   base: [
     focusRing.base,
-    "peer h-[3.5rem] w-full resize-none rounded-xl p-4 text-sm",
+    "peer w-full resize-none rounded-xl p-4 pr-14 text-sm",
   ],
   variants: {
     isFocused: focusRing.variants.isFocusVisible,
@@ -32,11 +35,23 @@ export const CommentTextField = ({
   textAreaClassName,
   ...props
 }: CommentTextFieldProps) => {
-  const { commentContent, setCommentContent } = useCommentFormContext();
-
+  const { commentContent, setCommentContent, editCommentId } =
+    useCommentFormContext();
   const t = useTranslations("comments.CommentTextField");
+  const ref = useRef<HTMLTextAreaElement>(null);
 
-  const buttonClasses = "absolute top-[1.75rem] -translate-y-1/2";
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+
+    el.style.height = "auto";
+
+    const newHeight = Math.min(el.scrollHeight, MAX_TEXTAREA_HEIGHT);
+    el.style.height = newHeight + "px";
+
+    el.style.overflowY =
+      el.scrollHeight > MAX_TEXTAREA_HEIGHT ? "auto" : "hidden";
+  }, [commentContent]);
 
   return (
     <div className="relative w-full">
@@ -50,6 +65,8 @@ export const CommentTextField = ({
         isDisabled={isPending}
       >
         <TextArea
+          rows={1}
+          ref={ref}
           data-test="comment-text-field-textarea"
           placeholder={t("placeholder")}
           className={composeRenderProps(
@@ -61,7 +78,7 @@ export const CommentTextField = ({
       </TextField>
 
       <CommentTextFieldSendButton
-        buttonClasses={buttonClasses}
+        buttonClasses="absolute top-[1.75rem] -translate-y-1/2"
         isDisabled={!commentContent || isPending}
       />
     </div>

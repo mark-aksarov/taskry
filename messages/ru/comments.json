@@ -3,34 +3,30 @@
     "edit": "Редактировать",
     "delete": "Удалить"
   },
-
   "DeleteCommentModal": {
     "heading": "Удалить комментарий",
     "text": "Вы уверены, что хотите удалить этот комментарий? Это действие нельзя будет отменить.",
     "cancelButton": "Отмена",
     "confirmButton": "Удалить"
   },
-
   "CommentItem": {
     "unknownUser": "Неизвестный пользователь"
   },
-
   "CommentsEmptySection": {
     "heading": "Пока нет комментариев",
     "description": "Комментариев пока нет. Добавьте первый, чтобы поделиться обновлениями, задать вопрос или начать обсуждение по этой задаче."
   },
-
   "CommentTextField": {
     "placeholder": "Напишите комментарий..."
   },
-
   "CommentTextFieldFileTrigger": {
     "ariaLabel": "Добавить вложения"
   },
-
   "CommentTextFieldSendButton": {
     "ariaLabel": "Отправить сообщение"
   },
-
-  "ReplyButton": "Ответить"
+  "ReplyButton": "Ответить",
+  "CommentCancelEditingButton": {
+    "label": "Отменить редактирование"
+  }
 }

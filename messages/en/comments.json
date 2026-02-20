@@ -3,34 +3,30 @@
     "edit": "Edit",
     "delete": "Delete"
   },
-
   "DeleteCommentModal": {
     "heading": "Delete Comment",
     "text": "Are you sure you want to delete this comment? This action cannot be undone.",
     "cancelButton": "Cancel",
     "confirmButton": "Delete"
   },
-
   "CommentItem": {
     "unknownUser": "Unknown user"
   },
-
   "CommentsEmptySection": {
     "heading": "No comments yet?",
     "description": "No comments yet. Add the first one to share updates, ask a question, or start a discussion about this task."
   },
-
   "CommentTextField": {
     "placeholder": "Type a comment..."
   },
-
   "CommentTextFieldFileTrigger": {
     "ariaLabel": "Add attachments"
   },
-
   "CommentTextFieldSendButton": {
     "ariaLabel": "Send Message"
   },
-
-  "ReplyButton": "Reply"
+  "ReplyButton": "Reply",
+  "CommentCancelEditingButton": {
+    "label": "Cancel editing"
+  }
 }
