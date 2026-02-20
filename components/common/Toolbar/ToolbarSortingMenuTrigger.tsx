@@ -12,6 +12,7 @@ export function ToolbarSortingMenuTrigger<T extends object = any>(
 
   return (
     <ToolbarMenuTrigger
+      selectionMode="single"
       renderDialogHeader={() => (
         <DialogHeader>{t("dialogHeading")}</DialogHeader>
       )}

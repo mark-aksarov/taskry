@@ -20,7 +20,8 @@
     "byTitle": "По названию",
     "byDeadline": "По сроку",
     "byStatus": "По статусу",
-    "byCategory": "По категории"
+    "byCategory": "По категории",
+    "byCreatedAt": "По дате создания"
   },
   "NewProjectModal": {
     "title": "Новый проект"

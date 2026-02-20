@@ -61,6 +61,7 @@ const projectToolbarCreateNewMenuTrigger = (
 
 export const Default = {
   args: {
+    selectedSortField: "createdAt",
     projectsContainer: (
       <EntityContainerPresentation
         page={1}

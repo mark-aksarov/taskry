@@ -35,7 +35,6 @@ export function TaskToolbarSortingMenuTrigger({
 
   return (
     <ToolbarSortingMenuTrigger
-      selectionMode="single"
       selectedKeys={[selectedSortField]}
       onAction={handleAction}
       renderButton={() => (

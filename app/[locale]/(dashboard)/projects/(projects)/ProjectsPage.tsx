@@ -6,6 +6,7 @@ import {
 } from "@/components/common/Toolbar";
 
 import { useTranslations } from "next-intl";
+import { ProjectSortField } from "@/lib/types";
 import { PageGrid } from "@/components/common/PageGrid";
 import { ViewModeProvider } from "@/components/common/ViewMode";
 import { PageContainer } from "@/components/common/PageContainer";
@@ -18,6 +19,7 @@ interface ProjectsPageProps {
   projectToolbarCreateNewMenuTrigger: React.ReactNode;
   projectToolbarFiltersModalTrigger: React.ReactNode;
   projectToolbarActionsMenuTrigger: React.ReactNode;
+  selectedSortField: ProjectSortField;
 }
 
 export function ProjectsPage({
@@ -25,6 +27,7 @@ export function ProjectsPage({
   projectToolbarCreateNewMenuTrigger,
   projectToolbarFiltersModalTrigger,
   projectToolbarActionsMenuTrigger,
+  selectedSortField,
 }: ProjectsPageProps) {
   const t = useTranslations("app.ProjectsPage");
 
@@ -34,7 +37,9 @@ export function ProjectsPage({
         <ViewModeProvider>
           <ToolbarDesktop>
             <ProjectToolbarManageMenuTrigger />
-            <ProjectToolbarSortingMenuTrigger />
+            <ProjectToolbarSortingMenuTrigger
+              selectedSortField={selectedSortField}
+            />
             {projectToolbarFiltersModalTrigger}
             {projectToolbarActionsMenuTrigger}
             <ViewModeToggleButtonGroup className="ml-auto" />
@@ -44,7 +49,9 @@ export function ProjectsPage({
           <ToolbarMobileTop>
             <ToolbarMobileHeading>{t("heading")}</ToolbarMobileHeading>
             <ProjectToolbarManageMenuTrigger />
-            <ProjectToolbarSortingMenuTrigger />
+            <ProjectToolbarSortingMenuTrigger
+              selectedSortField={selectedSortField}
+            />
             {projectToolbarFiltersModalTrigger}
             {projectToolbarActionsMenuTrigger}
           </ToolbarMobileTop>

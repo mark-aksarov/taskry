@@ -12,7 +12,13 @@ import { useLocale, useTranslations } from "next-intl";
 import { usePathname, useRouter } from "@/i18n/navigation";
 import { ALargeSmall, Blocks, Calendar, CircleCheck } from "lucide-react";
 
-export function ProjectToolbarSortingMenuTrigger() {
+interface ProjectToolbarSortingMenuTriggerProps {
+  selectedSortField: string;
+}
+
+export function ProjectToolbarSortingMenuTrigger({
+  selectedSortField,
+}: ProjectToolbarSortingMenuTriggerProps) {
   const t = useTranslations("projects.ProjectToolbarSortingMenuTrigger");
   const locale = useLocale();
   const router = useRouter();
@@ -29,6 +35,7 @@ export function ProjectToolbarSortingMenuTrigger() {
   return (
     <ToolbarSortingMenuTrigger
       onAction={handleAction}
+      selectedKeys={[selectedSortField]}
       renderButton={() => (
         <>
           <ToolbarSortingButtonMobile data-test="project-toolbar-sorting-button-mobile" />
@@ -36,6 +43,10 @@ export function ProjectToolbarSortingMenuTrigger() {
         </>
       )}
     >
+      <Item textValue={t("byCreatedAt")} key="createdAt">
+        <Calendar size={16} strokeWidth={1.5} absoluteStrokeWidth />
+        {t("byCreatedAt")}
+      </Item>
       <Item textValue={t("byTitle")} key="title">
         <ALargeSmall size={16} strokeWidth={1.5} absoluteStrokeWidth />
         {t("byTitle")}

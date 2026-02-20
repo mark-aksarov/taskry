@@ -43,3 +43,13 @@ export const taskSortFields = [
 ] as const;
 
 export type TaskSortField = (typeof taskSortFields)[number];
+
+export const projectSortFields = [
+  "createdAt",
+  "title",
+  "deadline",
+  "status",
+  "category",
+] as const;
+
+export type ProjectSortField = (typeof projectSortFields)[number];

@@ -9,6 +9,7 @@ import {
 import { z } from "zod";
 import { userId } from "@/lib/schemas/user";
 import { ProjectsPage } from "./ProjectsPage";
+import { projectSortFields } from "@/lib/types";
 import { customerId } from "@/lib/schemas/customer";
 import { projectStatus } from "@/lib/schemas/project";
 import { ProjectsPageEmpty } from "./ProjectsPageEmpty";
@@ -35,7 +36,7 @@ const searchParamsSchema = z.object({
   deadlineFrom: dateSearchParam,
   deadlineTo: dateSearchParam,
   noActiveTasks: booleanSearchParam,
-  sort: z.enum(["title", "deadline", "status", "category"]).catch("title"),
+  sort: z.enum(projectSortFields).catch("createdAt"),
   status: z.preprocess(
     searchParamToArray,
     z.array(projectStatus).optional().catch(undefined),
@@ -101,6 +102,7 @@ export default async function AppProjectsPage({
         pageItems={projects.map((p) => ({ id: p.id, status: p.status }))}
       >
         <ProjectsPage
+          selectedSortField={sort}
           projectsContainer={
             <ProjectsContainer
               projects={projects}

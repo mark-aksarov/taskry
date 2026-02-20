@@ -20,7 +20,8 @@
     "byTitle": "By Title",
     "byDeadline": "By Deadline",
     "byStatus": "By Status",
-    "byCategory": "By Category"
+    "byCategory": "By Category",
+    "byCreatedAt": "By creation date"
   },
   "NewProjectModal": {
     "title": "New Project"
@@ -146,7 +147,6 @@
   "ProjectCommentsModal": {
     "title": "Project comments"
   },
-
   "ProjectDetail": {
     "creator": "Creator",
     "noCreator": "No creator",
