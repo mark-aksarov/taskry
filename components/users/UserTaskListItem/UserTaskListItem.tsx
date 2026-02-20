@@ -21,8 +21,10 @@ import { Link } from "@/components/ui/Link";
 import { TaskStatus } from "@/generated/prisma/enums";
 import { useFormatter, useTranslations } from "next-intl";
 import { UserTaskListItemLayout } from "./UserTaskListItemLayout";
+import { SelectableItem } from "@/components/common/SelectableItem";
 import { TaskItemCheckbox } from "@/components/tasks/TaskItemCheckbox";
 import { TaskItemBaseBadge } from "@/components/tasks/TaskItemBaseBadge";
+import { useSelectedTasks } from "@/components/tasks/SelectedTasksContext";
 import { UpdateTaskStatusProvider } from "@/components/tasks/UpdateTaskStatusContext";
 
 export interface UserTaskListItemProps {
@@ -41,9 +43,16 @@ export const UserTaskListItem = ({
   updateTaskStatus,
   ...props
 }: UserTaskListItemProps) => {
+  const selected = useSelectedTasks();
+
   return (
     <UpdateTaskStatusProvider updateStatus={updateTaskStatus}>
-      <UserTaskListItemInner {...props} />
+      <SelectableItem
+        {...selected}
+        item={{ id: props.id, status: props.status }}
+      >
+        <UserTaskListItemInner {...props} />
+      </SelectableItem>
     </UpdateTaskStatusProvider>
   );
 };
