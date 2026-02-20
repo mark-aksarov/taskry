@@ -76,8 +76,12 @@ describe("getCommentList", () => {
     const result = await getCommentList({ projectId: 1 });
 
     expect(result).toHaveLength(2);
-    expect(result[0].content).toContain("Comment 1");
-    expect(result[1].content).toContain("Comment 2");
+    expect(result).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({ content: "Comment 1" }),
+        expect.objectContaining({ content: "Comment 2" }),
+      ]),
+    );
   });
 
   it("should return empty array", async () => {

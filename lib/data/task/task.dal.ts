@@ -59,6 +59,13 @@ export const getTaskDetail = cache(
             isDone: true,
           },
         },
+        creator: {
+          select: {
+            id: true,
+            fullName: true,
+            imageUrl: true,
+          },
+        },
         attachments: {
           select: {
             id: true,
@@ -83,6 +90,13 @@ export const getTaskDetail = cache(
       title: task.title,
       description: task.description ?? undefined,
       deadline: task.deadline,
+      creator: task.creator
+        ? {
+            id: task.creator.id,
+            fullName: task.creator.fullName,
+            imageUrl: task.creator.imageUrl ?? undefined,
+          }
+        : undefined,
       assignee: task.assignee
         ? {
             id: task.assignee.id,

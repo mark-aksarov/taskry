@@ -45,6 +45,11 @@ export interface TaskDetailDTO {
   deadline: Date;
   status: TaskStatus;
 
+  creator?: {
+    id: string;
+    fullName: string;
+    imageUrl?: string;
+  };
   assignee?: {
     id: string;
     fullName: string;

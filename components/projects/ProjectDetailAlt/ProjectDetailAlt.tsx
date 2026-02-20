@@ -1,5 +1,6 @@
 import {
   DetailInfo,
+  DetailLink,
   DetailText,
   DetailTitle,
 } from "@/components/common/Detail";
@@ -76,9 +77,13 @@ export function ProjectDetailAlt({
       customerSlot={
         <DetailInfo>
           <DetailTitle>{t("customer")}</DetailTitle>
-          <DetailText>
-            {customer ? customer.fullName : t("noCustomer")}
-          </DetailText>
+          {customer ? (
+            <DetailLink href={`/customers/${customer.id}`}>
+              <DetailText>{customer.fullName}</DetailText>
+            </DetailLink>
+          ) : (
+            <DetailText>{t("noCustomer")}</DetailText>
+          )}
         </DetailInfo>
       }
       categorySlot={
@@ -90,7 +95,13 @@ export function ProjectDetailAlt({
       creatorSlot={
         <DetailInfo className="border-none pb-0">
           <DetailTitle>{t("creator")}</DetailTitle>
-          <DetailText>{creator ? creator.fullName : t("noCreator")}</DetailText>
+          {creator ? (
+            <DetailLink href={`/team/${creator.id}`}>
+              <DetailText>{creator.fullName}</DetailText>
+            </DetailLink>
+          ) : (
+            <DetailText>{t("noCreator")}</DetailText>
+          )}
         </DetailInfo>
       }
     />

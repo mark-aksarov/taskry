@@ -2,25 +2,20 @@
   "EditCustomerForm": {
     "submitButtonLabel": "Update Customer"
   },
-
   "NewCustomerForm": {
     "submitButtonLabel": "Create Customer"
   },
-
   "TotalCustomersCard": {
     "text": "Total Customers"
   },
-
   "CustomerDetailActions": {
     "delete": "Delete customer",
     "edit": "Edit customer"
   },
-
   "CustomerToolbarSortingMenuTrigger": {
     "byFullName": "By full name",
     "byCompany": "By company"
   },
-
   "CustomerDetail": {
     "bio": "Bio",
     "fullName": "Full name",
@@ -28,124 +23,99 @@
     "phoneNumber": "Phone number",
     "publicLink": "Public link",
     "company": "Company",
-
     "noBio": "This user hasn’t written a bio yet.",
     "noFullName": "No name provided",
     "noEmail": "No email provided",
     "noPhoneNumber": "No phone number provided",
-    "noPublicLink": "This user doesn’t have a public profile link",
+    "noPublicLink": "No public link",
     "noCompany": "Company not specified"
   },
-
   "NewCustomerModal": {
     "title": "New Customer"
   },
-
   "EditCustomerModal": {
     "title": "Edit Customer"
   },
-
   "CustomerDetailCard": {
     "title": "Customer Information"
   },
-
   "CustomerFullNameTextField": {
     "label": "Full name",
     "placeholder": "Enter full name",
-
     "validation": {
       "required": "Full name is required"
     }
   },
-
   "CustomerBioTextField": {
     "label": "Bio",
     "placeholder": "Enter bio"
   },
-
   "CustomerEmailTextField": {
     "label": "Email",
     "placeholder": "Enter email",
-
     "validation": {
       "required": "Email is required",
       "format": "Enter a valid email address, for example user@example.com"
     }
   },
-
   "CustomerPhoneNumberTextField": {
     "label": "Phone number",
     "placeholder": "Enter phone number"
   },
-
   "CustomerPublicLinkTextField": {
     "label": "Public link",
     "placeholder": "Enter a public link",
-
     "validation": {
       "format": "Please enter a valid URL, for example https://example.com"
     }
   },
-
   "CustomerCompanySelect": {
     "label": "Company",
     "noCompany": "No company"
   },
-
   "CustomerDetailContainer": {
     "unknownCompany": "Unknown company"
   },
-
   "CustomerHeaderContainer": {
     "unknownCompany": "Unknown company"
   },
-
   "CustomerDetailModal": {
     "dialogHeading": "Customer Details",
     "openInFullPage": "Open in Full Page"
   },
-
   "CustomerFiltersFormNoActiveProjectsSwitch": {
     "text": "Has no active projects"
   },
-
   "CustomerFiltersFormActiveProjectsSwitch": {
     "text": "Has active projects"
   },
-
   "CustomerFiltersFormOverdueProjectsSwitch": {
     "text": "Has overdue projects"
   },
-
   "CustomerFiltersFormCompanyCheckboxGroup": {
     "label": "Company"
   },
-
   "CustomerItemActionMenuTrigger": {
     "edit": "Edit",
     "delete": "Delete"
   },
-
   "DeleteCustomerModal": {
     "heading": "Delete customer",
     "text": "Are you sure you want to delete customer <strong>«{name}»</strong>? All contents will be permanently removed.",
     "deleteButton": "Delete",
     "cancelButton": "Cancel"
   },
-
   "DeleteCustomersModal": {
     "heading": "Delete customers",
     "text": "Are you sure you want to delete <strong>{count} customers</strong>? All contents will be permanently removed.",
     "deleteButton": "Delete",
     "cancelButton": "Cancel"
   },
-
   "CustomerGridItem": {
     "noPhoneNumber": "No phone number",
     "noPublicLink": "No public link",
     "noCompany": "No company"
   },
-
   "CustomerListItem": {
     "checkboxAriaLabel": "customer checkbox",
     "phoneNumber": "Phone number",
@@ -155,20 +125,16 @@
     "noCompany": "No company",
     "company": "Company"
   },
-
   "CustomerToolbarFiltersModalTrigger": {
     "title": "Customer Filters"
   },
-
   "CustomerToolbarActionsMenuTrigger": {
     "dialogHeading": "Actions",
     "delete": "Delete"
   },
-
   "CustomerToolbarCreateNewMenuTrigger": {
     "dialogHeading": "Create New",
     "label": "Create New",
-
     "items": {
       "customer": "Customer",
       "company": "Company"

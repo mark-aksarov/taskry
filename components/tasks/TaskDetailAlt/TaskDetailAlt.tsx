@@ -1,10 +1,10 @@
 import {
   DetailInfo,
+  DetailLink,
   DetailText,
   DetailTitle,
 } from "@/components/common/Detail";
 
-import Image from "next/image";
 import { TaskStatus } from "@/generated/prisma/enums";
 import { useFormatter, useTranslations } from "next-intl";
 import { TaskDetailAltLayout } from "./TaskDetailAltLayout";
@@ -74,9 +74,13 @@ export function TaskDetailAlt({
       assigneesSlot={
         <DetailInfo>
           <DetailTitle>{t("assignee")}</DetailTitle>
-          <DetailText>
-            {assignee ? assignee.fullName : t("noAssignee")}
-          </DetailText>
+          {assignee ? (
+            <DetailLink href={`/team/${assignee.id}`}>
+              <DetailText>{assignee.fullName}</DetailText>
+            </DetailLink>
+          ) : (
+            <DetailText>{t("noAssignee")}</DetailText>
+          )}
         </DetailInfo>
       }
       deadlineSlot={
@@ -88,7 +92,13 @@ export function TaskDetailAlt({
       creatorSlot={
         <DetailInfo>
           <DetailTitle>{t("creator")}</DetailTitle>
-          <DetailText>{creator ? creator.fullName : t("noCreator")}</DetailText>
+          {creator ? (
+            <DetailLink href={`/team/${creator.id}`}>
+              <DetailText>{creator.fullName}</DetailText>
+            </DetailLink>
+          ) : (
+            <DetailText>{t("noCreator")}</DetailText>
+          )}
         </DetailInfo>
       }
       categoryNameSlot={
@@ -100,7 +110,9 @@ export function TaskDetailAlt({
       projectTitleSlot={
         <DetailInfo>
           <DetailTitle>{t("project")}</DetailTitle>
-          <DetailText>{project.title}</DetailText>
+          <DetailLink href={`/projects/${project.id}`}>
+            <DetailText>{project.title}</DetailText>
+          </DetailLink>
         </DetailInfo>
       }
       statusSlot={

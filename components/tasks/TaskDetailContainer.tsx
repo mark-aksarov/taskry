@@ -46,6 +46,7 @@ function TaskDetailContainerInner({
     <TaskDetail
       id={task.id}
       title={task.title}
+      creator={task.creator}
       assignee={task.assignee}
       deadline={task.deadline}
       description={task.description}
@@ -53,7 +54,7 @@ function TaskDetailContainerInner({
       status={task.status}
       project={task.project}
       subtasksList={
-        task.subtasks.length && (
+        task.subtasks.length !== 0 && (
           <DeleteSubtaskModalProvider
             deleteEntity={deleteSubtask}
             mutate={mutate}

@@ -44,9 +44,11 @@ export function CommentItem({
       senderImageSlot={
         <>
           {sender?.imageUrl ? (
-            <ImageContainer className="h-9 w-9">
-              <Image src={sender.imageUrl} alt={sender.fullName} fill />
-            </ImageContainer>
+            <Link href={`/team/${sender.id}`}>
+              <ImageContainer className="h-9 w-9">
+                <Image src={sender.imageUrl} alt={sender.fullName} fill />
+              </ImageContainer>
+            </Link>
           ) : (
             <UnknownUser className="h-9 w-9" />
           )}
@@ -58,7 +60,7 @@ export function CommentItem({
             {!sender ? (
               t("unknownUser")
             ) : (
-              <Link href={`/users/${sender.id}`}>{sender.fullName}</Link>
+              <Link href={`/team/${sender.id}`}>{sender.fullName}</Link>
             )}
           </CommentItemTitle>
           <CommentItemDate>{formattedDate}</CommentItemDate>

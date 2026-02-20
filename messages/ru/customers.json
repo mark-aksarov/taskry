@@ -2,25 +2,20 @@
   "EditCustomerForm": {
     "submitButtonLabel": "Обновить клиента"
   },
-
   "NewCustomerForm": {
     "submitButtonLabel": "Создать клиента"
   },
-
   "TotalCustomersCard": {
     "text": "Всего клиентов"
   },
-
   "CustomerDetailActions": {
     "delete": "Удалить клиента",
     "edit": "Редактировать клиента"
   },
-
   "CustomerToolbarSortingMenuTrigger": {
     "byFullName": "По полному имени",
     "byCompany": "По компании"
   },
-
   "CustomerDetail": {
     "bio": "Биография",
     "fullName": "Полное имя",
@@ -28,124 +23,99 @@
     "phoneNumber": "Номер телефона",
     "publicLink": "Публичная ссылка",
     "company": "Компания",
-
     "noBio": "Пользователь ещё не написал биографию.",
     "noFullName": "Имя не указано",
     "noEmail": "Электронная почта не указана",
     "noPhoneNumber": "Номер телефона не указан",
-    "noPublicLink": "У пользователя нет публичной ссылки на профиль",
+    "noPublicLink": "Публичная ссылка отсутствует",
     "noCompany": "Компания не указана"
   },
-
   "NewCustomerModal": {
     "title": "Новый клиент"
   },
-
   "EditCustomerModal": {
     "title": "Изменить клиента"
   },
-
   "CustomerDetailCard": {
     "title": "Информация о клиенте"
   },
-
   "CustomerFullNameTextField": {
     "label": "Полное имя",
     "placeholder": "Введите полное имя",
-
     "validation": {
       "required": "«Полное имя» обязательно для заполнения"
     }
   },
-
   "CustomerBioTextField": {
     "label": "О себе",
     "placeholder": "Введите информацию о себе"
   },
-
   "CustomerEmailTextField": {
     "label": "Email",
     "placeholder": "Введите email",
-
     "validation": {
       "required": "Требуется электронная почта",
       "format": "Введите корректный адрес электронной почты, например user@example.com"
     }
   },
-
   "CustomerPhoneNumberTextField": {
     "label": "Номер телефона",
     "placeholder": "Введите номер телефона"
   },
-
   "CustomerPublicLinkTextField": {
     "label": "Публичная ссылка",
     "placeholder": "Введите публичную ссылку",
-
     "validation": {
       "format": "Введите корректный URL, например https://example.com"
     }
   },
-
   "CustomerCompanySelect": {
     "label": "Компания",
     "noCompany": "Нет компании"
   },
-
   "CustomerDetailContainer": {
     "unknownCompany": "Неизвестная компания"
   },
-
   "CustomerHeaderContainer": {
     "unknownCompany": "Неизвестная компания"
   },
-
   "CustomerDetailModal": {
     "dialogHeading": "Детали клиента",
     "openInFullPage": "Открыть в полном окне"
   },
-
   "CustomerFiltersFormNoActiveProjectsSwitch": {
     "text": "Не имеет активных проектов"
   },
-
   "CustomerFiltersFormActiveProjectsSwitch": {
     "text": "Имеет активные проекты"
   },
-
   "CustomerFiltersFormOverdueProjectsSwitch": {
     "text": "Имеет просроченные проекты"
   },
-
   "CustomerFiltersFormCompanyCheckboxGroup": {
     "label": "Компания"
   },
-
   "CustomerItemActionMenuTrigger": {
     "edit": "Редактировать",
     "delete": "Удалить"
   },
-
   "DeleteCustomerModal": {
     "heading": "Удалить клиента",
     "text": "Вы уверены, что хотите удалить клиента <strong>«{name}»</strong>? Все содержимое будет безвозвратно удалено.",
     "deleteButton": "Удалить",
     "cancelButton": "Отменить"
   },
-
   "DeleteCustomersModal": {
     "heading": "Удалить клиентов",
     "text": "Вы уверены, что хотите удалить <strong>{count} выбранных клиентов </strong>? Все содержимое будет безвозвратно удалено.",
     "deleteButton": "Удалить",
     "cancelButton": "Отменить"
   },
-
   "CustomerGridItem": {
     "noPhoneNumber": "Нет номера телефона",
     "noPublicLink": "Нет публичной ссылки",
     "noCompany": "Нет компании"
   },
-
   "CustomerListItem": {
     "checkboxAriaLabel": "чекбокс клиента",
     "phoneNumber": "Номер телефона",
@@ -155,20 +125,16 @@
     "company": "Компания",
     "noCompany": "Нет компании"
   },
-
   "CustomerToolbarFiltersModalTrigger": {
     "title": "Фильтры клиентов"
   },
-
   "CustomerToolbarActionsMenuTrigger": {
     "dialogHeading": "Действия",
     "delete": "Удалить"
   },
-
   "CustomerToolbarCreateNewMenuTrigger": {
     "dialogHeading": "Создать нового",
     "label": "Создать нового",
-
     "items": {
       "customer": "Клиент",
       "company": "Компания"

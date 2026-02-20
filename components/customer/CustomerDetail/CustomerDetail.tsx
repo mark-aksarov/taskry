@@ -1,5 +1,6 @@
 import {
   DetailInfo,
+  DetailLink,
   DetailText,
   DetailTitle,
 } from "@/components/common/Detail";
@@ -45,13 +46,21 @@ export function CustomerDetail({
       emailSlot={
         <DetailInfo>
           <DetailTitle>{t("email")}</DetailTitle>
-          <DetailText>{email || t("noEmail")}</DetailText>
+          <DetailLink href={`mailto:${email}`}>
+            <DetailText>{email}</DetailText>
+          </DetailLink>
         </DetailInfo>
       }
       phoneNumberSlot={
         <DetailInfo>
           <DetailTitle>{t("phoneNumber")}</DetailTitle>
-          <DetailText>{phoneNumber || t("noPhoneNumber")}</DetailText>
+          {phoneNumber ? (
+            <DetailLink href={`tel:${phoneNumber}`}>
+              <DetailText>{phoneNumber}</DetailText>
+            </DetailLink>
+          ) : (
+            <DetailText>{t("noPhoneNumber")}</DetailText>
+          )}
         </DetailInfo>
       }
       companySlot={
@@ -63,7 +72,13 @@ export function CustomerDetail({
       publicLinkSlot={
         <DetailInfo className="border-none pb-0">
           <DetailTitle>{t("publicLink")}</DetailTitle>
-          <DetailText>{publicLink || t("noPublicLink")}</DetailText>
+          {publicLink ? (
+            <DetailLink href={publicLink}>
+              <DetailText>{publicLink}</DetailText>
+            </DetailLink>
+          ) : (
+            <DetailText>{t("noPublicLink")}</DetailText>
+          )}
         </DetailInfo>
       }
     />

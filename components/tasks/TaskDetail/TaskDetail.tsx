@@ -1,4 +1,5 @@
 import {
+  DetailLink,
   DetailInfo,
   DetailText,
   DetailTitle,
@@ -6,7 +7,6 @@ import {
 
 import React from "react";
 import Image from "next/image";
-import { Link } from "@/components/ui/Link";
 import { Badge } from "@/components/ui/Badge";
 import { TaskDetailLayout } from "./TaskDetailLayout";
 import { TaskStatus } from "@/generated/prisma/enums";
@@ -68,6 +68,14 @@ export function TaskDetail({
       })
     : t("noDeadline");
 
+  const assigneeImg = assignee?.imageUrl ? (
+    <ImageContainer className="h-9 w-9">
+      <Image fill src={assignee.imageUrl} alt={assignee.fullName} />
+    </ImageContainer>
+  ) : (
+    <UnknownUser className="h-9 w-9" />
+  );
+
   return (
     <TaskDetailLayout
       titleSlot={
@@ -78,20 +86,20 @@ export function TaskDetail({
       assigneesSlot={
         <DetailInfo>
           <DetailTitle>{t("assignee")}</DetailTitle>
-          <div className="flex items-center gap-2">
-            {assignee?.imageUrl ? (
-              <Link href={`/users/${id}`}>
-                <ImageContainer className="h-9 w-9">
-                  <Image fill src={assignee.imageUrl} alt={assignee.fullName} />
-                </ImageContainer>
-              </Link>
-            ) : (
-              <UnknownUser className="h-9 w-9" />
-            )}
-            <DetailText>
-              {assignee ? assignee.fullName : t("noAssignee")}
-            </DetailText>
-          </div>
+          {assignee ? (
+            <DetailLink
+              href={`/team/${assignee.id}`}
+              className="flex items-center gap-2"
+            >
+              {assigneeImg}
+              <DetailText>{assignee.fullName}</DetailText>
+            </DetailLink>
+          ) : (
+            <div className="flex items-center gap-2">
+              {assigneeImg}
+              <DetailText>{t("noAssignee")}</DetailText>
+            </div>
+          )}
         </DetailInfo>
       }
       deadlineSlot={
@@ -113,7 +121,13 @@ export function TaskDetail({
       creatorSlot={
         <DetailInfo>
           <DetailTitle>{t("creator")}</DetailTitle>
-          <DetailText>{creator ? creator.fullName : t("noCreator")}</DetailText>
+          {creator ? (
+            <DetailLink href={`/team/${creator.id}`}>
+              <DetailText>{creator.fullName}</DetailText>
+            </DetailLink>
+          ) : (
+            <DetailText>{t("noCreator")}</DetailText>
+          )}
         </DetailInfo>
       }
       categoryNameSlot={
@@ -131,7 +145,9 @@ export function TaskDetail({
       projectTitleSlot={
         <DetailInfo>
           <DetailTitle>{t("project")}</DetailTitle>
-          <DetailText>{project.title}</DetailText>
+          <DetailLink href={`/projects/${project.id}`}>
+            <DetailText>{project.title}</DetailText>
+          </DetailLink>
         </DetailInfo>
       }
       subtasksSlot={

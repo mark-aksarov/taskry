@@ -1,11 +1,11 @@
 import {
   DetailInfo,
+  DetailLink,
   DetailText,
   DetailTitle,
 } from "@/components/common/Detail";
 
 import Image from "next/image";
-import { Link } from "@/components/ui/Link";
 import { Badge } from "@/components/ui/Badge";
 import { ProjectStatus } from "@/generated/prisma/enums";
 import { useFormatter, useTranslations } from "next-intl";
@@ -58,6 +58,14 @@ export function ProjectDetail({
       })
     : t("noDeadline");
 
+  const creatorImg = creator?.imageUrl ? (
+    <ImageContainer className="h-9 w-9">
+      <Image fill src={creator.imageUrl} alt={creator.fullName} />
+    </ImageContainer>
+  ) : (
+    <UnknownUser className="h-9 w-9" />
+  );
+
   return (
     <ProjectDetailLayout
       titleSlot={
@@ -68,20 +76,20 @@ export function ProjectDetail({
       creatorSlot={
         <DetailInfo>
           <DetailTitle>{t("creator")}</DetailTitle>
-          <div className="flex items-center gap-2">
-            {creator?.imageUrl ? (
-              <Link href={`/users/${id}`}>
-                <ImageContainer className="h-9 w-9">
-                  <Image fill src={creator.imageUrl} alt={creator.fullName} />
-                </ImageContainer>
-              </Link>
-            ) : (
-              <UnknownUser className="h-9 w-9" />
-            )}
-            <DetailText>
-              {creator ? creator.fullName : t("noCreator")}
-            </DetailText>
-          </div>
+          {creator ? (
+            <DetailLink
+              href={`/team/${creator.id}`}
+              className="flex items-center gap-2"
+            >
+              {creatorImg}
+              <DetailText>{creator.fullName}</DetailText>
+            </DetailLink>
+          ) : (
+            <div className="flex items-center gap-2">
+              {creatorImg}
+              <DetailText>{t("noCreator")}</DetailText>
+            </div>
+          )}
         </DetailInfo>
       }
       deadlineSlot={
@@ -115,9 +123,13 @@ export function ProjectDetail({
       customerSlot={
         <DetailInfo className="border-none pb-0">
           <DetailTitle>{t("customer")}</DetailTitle>
-          <DetailText>
-            {customer ? customer.fullName : t("noCustomer")}
-          </DetailText>
+          {customer ? (
+            <DetailLink href={`/customers/${customer.id}`}>
+              <DetailText>{customer.fullName}</DetailText>
+            </DetailLink>
+          ) : (
+            <DetailText>{t("noCustomer")}</DetailText>
+          )}
         </DetailInfo>
       }
     />

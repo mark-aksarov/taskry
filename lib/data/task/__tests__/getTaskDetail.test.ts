@@ -111,6 +111,7 @@ describe("getTaskDetail", () => {
       deadline: new Date("2025-12-31"),
       status: TaskStatus.active,
 
+      creator: undefined,
       assignee: {
         id: "user-1",
         fullName: "User 1",
