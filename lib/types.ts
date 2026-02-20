@@ -33,3 +33,13 @@ export interface CustomerFilters {
   hasOverdueProjects?: boolean;
   company?: number[];
 }
+
+export const taskSortFields = [
+  "createdAt",
+  "title",
+  "deadline",
+  "status",
+  "category",
+] as const;
+
+export type TaskSortField = (typeof taskSortFields)[number];

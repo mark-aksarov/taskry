@@ -7,12 +7,19 @@ import {
 } from "@/components/common/Toolbar";
 
 import { Item, Key } from "react-stately";
+import { TaskSortField } from "@/lib/types";
 import { useSearchParams } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import { usePathname, useRouter } from "@/i18n/navigation";
 import { Calendar, CircleCheck, ALargeSmall, Blocks } from "lucide-react";
 
-export function TaskToolbarSortingMenuTrigger() {
+interface TaskToolbarSortingMenuTriggerProps {
+  selectedSortField: TaskSortField;
+}
+
+export function TaskToolbarSortingMenuTrigger({
+  selectedSortField,
+}: TaskToolbarSortingMenuTriggerProps) {
   const t = useTranslations("tasks.TaskToolbarSortingMenuTrigger");
   const locale = useLocale();
   const router = useRouter();
@@ -23,11 +30,13 @@ export function TaskToolbarSortingMenuTrigger() {
     const params = new URLSearchParams(searchParams.toString());
     params.set("sort", key as string);
     params.delete("page");
-    router.push(`${pathname}?${params.toString()}`, { locale });
+    router.replace(`${pathname}?${params.toString()}`, { locale });
   };
 
   return (
     <ToolbarSortingMenuTrigger
+      selectionMode="single"
+      selectedKeys={[selectedSortField]}
       onAction={handleAction}
       renderButton={() => (
         <>
@@ -36,6 +45,10 @@ export function TaskToolbarSortingMenuTrigger() {
         </>
       )}
     >
+      <Item textValue={t("byCreatedAt")} key="createdAt">
+        <Calendar size={16} strokeWidth={1.5} absoluteStrokeWidth />
+        {t("byCreatedAt")}
+      </Item>
       <Item textValue={t("byTitle")} key="title">
         <ALargeSmall size={16} strokeWidth={1.5} absoluteStrokeWidth />
         {t("byTitle")}

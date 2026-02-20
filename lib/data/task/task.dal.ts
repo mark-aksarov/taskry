@@ -52,6 +52,7 @@ export const getTaskDetail = cache(
           },
         },
         subtasks: {
+          orderBy: { createdAt: "desc" },
           select: {
             id: true,
             text: true,

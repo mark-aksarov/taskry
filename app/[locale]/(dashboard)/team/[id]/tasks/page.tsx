@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { taskSortFields } from "@/lib/types";
 import { getTaskList } from "@/lib/data/task/task.dal";
 import { hasGuestRole } from "@/lib/utils/hasGuestRole";
 import { hasOwnerRole } from "@/lib/utils/hasOwnerRole";
@@ -24,7 +25,7 @@ import { TaskToolbarActionsMenuTrigger } from "@/components/tasks/TaskToolbarAct
 const searchParamsSchema = z.object({
   page: pageSearchParam,
   pageSize: pageSizeSearchParam,
-  sort: z.enum(["title", "deadline", "status", "category"]).catch("title"),
+  sort: z.enum(taskSortFields).catch("createdAt"),
 });
 
 export default async function AppProfileTasksPage({
@@ -90,6 +91,7 @@ export default async function AppProfileTasksPage({
         pageItems={tasks.map((task) => ({ id: task.id, status: task.status }))}
       >
         <UserTasksPageLayout
+          selectedSortField={sort}
           backButton
           userTasksContainer={
             <UserTasksContainer

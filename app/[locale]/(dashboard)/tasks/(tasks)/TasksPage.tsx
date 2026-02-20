@@ -12,12 +12,14 @@ import { PageContainer } from "@/components/common/PageContainer";
 import { ViewModeToggleButtonGroup } from "@/components/common/ViewMode";
 import { TaskToolbarManageMenuTrigger } from "@/components/tasks/TaskToolbarManageMenuTrigger";
 import { TaskToolbarSortingMenuTrigger } from "@/components/tasks/TaskToolbarSortingMenuTrigger";
+import { TaskSortField } from "@/lib/types";
 
 interface TasksPageProps {
   tasksContainer: React.ReactNode;
   taskToolbarActionsMenuTrigger: React.ReactNode;
   taskToolbarCreateNewMenuTrigger: React.ReactNode;
   taskToolbarFiltersModalTrigger: React.ReactNode;
+  selectedSortField: TaskSortField;
 }
 
 export function TasksPage({
@@ -25,6 +27,7 @@ export function TasksPage({
   taskToolbarActionsMenuTrigger,
   taskToolbarCreateNewMenuTrigger,
   taskToolbarFiltersModalTrigger,
+  selectedSortField,
 }: TasksPageProps) {
   const t = useTranslations("app.TasksPage");
 
@@ -34,7 +37,9 @@ export function TasksPage({
         <ViewModeProvider>
           <ToolbarDesktop>
             <TaskToolbarManageMenuTrigger />
-            <TaskToolbarSortingMenuTrigger />
+            <TaskToolbarSortingMenuTrigger
+              selectedSortField={selectedSortField}
+            />
             {taskToolbarFiltersModalTrigger}
             {taskToolbarActionsMenuTrigger}
             <ViewModeToggleButtonGroup className="ml-auto" />
@@ -44,7 +49,9 @@ export function TasksPage({
           <ToolbarMobileTop>
             <ToolbarMobileHeading>{t("heading")}</ToolbarMobileHeading>
             <TaskToolbarManageMenuTrigger />
-            <TaskToolbarSortingMenuTrigger />
+            <TaskToolbarSortingMenuTrigger
+              selectedSortField={selectedSortField}
+            />
             {taskToolbarFiltersModalTrigger}
             {taskToolbarActionsMenuTrigger}
           </ToolbarMobileTop>

@@ -13,6 +13,7 @@ import {
 } from "@/components/common/Toolbar";
 
 import { useTranslations } from "next-intl";
+import { TaskSortField } from "@/lib/types";
 import { PageGrid } from "@/components/common/PageGrid";
 import { BackButton } from "@/components/common/BackButton";
 import { PageContainer } from "@/components/common/PageContainer";
@@ -24,6 +25,7 @@ interface UserTasksPageLayoutProps {
   navigationDesktop: React.ReactNode;
   navigationMobile: React.ReactNode;
   taskToolbarActionsMenuTrigger: React.ReactNode;
+  selectedSortField: TaskSortField;
   backButton?: boolean;
 }
 
@@ -33,6 +35,7 @@ export function UserTasksPageLayout({
   navigationDesktop,
   navigationMobile,
   taskToolbarActionsMenuTrigger,
+  selectedSortField,
   backButton,
 }: UserTasksPageLayoutProps) {
   const t = useTranslations("users.UserTasksPageLayout");
@@ -45,7 +48,9 @@ export function UserTasksPageLayout({
             <DetailCardHeader>
               <DetailCardTitle>{t("title")}</DetailCardTitle>
               <div className="flex gap-4">
-                <TaskToolbarSortingMenuTrigger />
+                <TaskToolbarSortingMenuTrigger
+                  selectedSortField={selectedSortField}
+                />
                 {taskToolbarActionsMenuTrigger}
               </div>
             </DetailCardHeader>
@@ -64,7 +69,9 @@ export function UserTasksPageLayout({
           <ToolbarMobileTop>
             {backButton && <BackButton />}
             <ToolbarMobileHeading>{t("title")}</ToolbarMobileHeading>
-            <TaskToolbarSortingMenuTrigger />
+            <TaskToolbarSortingMenuTrigger
+              selectedSortField={selectedSortField}
+            />
             {taskToolbarActionsMenuTrigger}
           </ToolbarMobileTop>
 

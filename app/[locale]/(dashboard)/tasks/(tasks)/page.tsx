@@ -9,6 +9,7 @@ import {
 import { z } from "zod";
 import { TasksPage } from "./TasksPage";
 import { userId } from "@/lib/schemas/user";
+import { taskSortFields } from "@/lib/types";
 import { taskStatus } from "@/lib/schemas/task";
 import { projectId } from "@/lib/schemas/project";
 import { TasksPageEmpty } from "./TasksPageEmpty";
@@ -20,6 +21,7 @@ import { TasksContainer } from "@/components/tasks/TasksContainer";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { updateTaskStatuses } from "@/lib/actions/task/updateTaskStatuses";
 import { NewTaskFormContainer } from "@/components/tasks/NewTaskFormContainer";
+import { SelectedTasksProvider } from "@/components/tasks/SelectedTasksContext";
 import { createTaskCategory } from "@/lib/actions/taskCategory/createTaskCategory";
 import { NewTaskCategoryForm } from "@/components/taskCategory/NewTaskCategoryForm";
 import { TaskFiltersFormContainer } from "@/components/tasks/TaskFiltersFormContainer";
@@ -27,7 +29,6 @@ import { UpdateTaskStatusesProvider } from "@/components/tasks/UpdateTaskStatusC
 import { TaskToolbarActionsMenuTrigger } from "@/components/tasks/TaskToolbarActionsMenuTrigger";
 import { TaskToolbarFiltersModalTrigger } from "@/components/tasks/TaskToolbarFiltersModalTrigger";
 import { TaskToolbarCreateNewMenuTrigger } from "@/components/tasks/TaskToolbarCreateNewMenuTrigger";
-import { SelectedTasksProvider } from "@/components/tasks/SelectedTasksContext/SelectedTasksContext";
 
 const searchParamsSchema = z.object({
   page: pageSearchParam,
@@ -35,7 +36,7 @@ const searchParamsSchema = z.object({
   deadlineFrom: dateSearchParam,
   deadlineTo: dateSearchParam,
   onlyMyTasks: booleanSearchParam,
-  sort: z.enum(["title", "deadline", "status", "category"]).catch("title"),
+  sort: z.enum(taskSortFields).catch("createdAt"),
   status: z.preprocess(
     searchParamToArray,
     z.array(taskStatus).optional().catch(undefined),
@@ -97,6 +98,7 @@ export default async function AppTasksPage({
         pageItems={tasks.map((t) => ({ id: t.id, status: t.status }))}
       >
         <TasksPage
+          selectedSortField={sort}
           taskToolbarActionsMenuTrigger={
             <TaskToolbarActionsMenuTrigger
               guestMode={guestMode}

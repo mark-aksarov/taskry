@@ -42,7 +42,8 @@
     "byTitle": "По названию",
     "byDeadline": "По сроку",
     "byStatus": "По статусу",
-    "byCategory": "По категории"
+    "byCategory": "По категории",
+    "byCreatedAt": "По дате создания"
   },
   "TaskToolbarFiltersModalTrigger": {
     "title": "Фильтры задач"

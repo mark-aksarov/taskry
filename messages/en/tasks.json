@@ -42,7 +42,8 @@
     "byTitle": "By Title",
     "byDeadline": "By Deadline",
     "byStatus": "By Status",
-    "byCategory": "By Category"
+    "byCategory": "By Category",
+    "byCreatedAt": "By creation date"
   },
   "TaskToolbarFiltersModalTrigger": {
     "title": "Task Filters"
@@ -90,7 +91,6 @@
   "TaskCommentsModal": {
     "title": "Task Comments"
   },
-
   "NewTaskModalTrigger": {
     "label": "New Task"
   },

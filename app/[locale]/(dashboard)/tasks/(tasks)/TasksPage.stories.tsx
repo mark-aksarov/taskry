@@ -70,6 +70,7 @@ const taskToolbarCreateNewMenuTrigger = (
 
 export const Default = {
   args: {
+    selectedSortField: "title",
     tasksContainer: (
       <EntityContainerPresentation
         page={1}

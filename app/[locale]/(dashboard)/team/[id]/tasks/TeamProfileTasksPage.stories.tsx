@@ -59,6 +59,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
+    selectedSortField: "title",
     backButton: true,
     userTasksContainer: <UserTaskList {...UserTaskListStory.args} />,
     userHeaderContainer: <DetailHeader {...PersonDetailHeaderStory.args} />,

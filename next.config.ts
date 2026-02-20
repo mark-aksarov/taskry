@@ -3,6 +3,7 @@ import createNextIntlPlugin from "next-intl/plugin";
 
 const nextConfig: NextConfig = {
   images: {
+    contentDispositionType: "inline",
     remotePatterns: [
       {
         protocol: "https",
