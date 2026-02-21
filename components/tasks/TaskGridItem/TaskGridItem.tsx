@@ -34,7 +34,7 @@ import { UpdateTaskStatusProvider } from "../UpdateTaskStatusContext";
 export interface TaskGridItemProps {
   id: number;
   title: string;
-  deadline: Date;
+  deadline: string;
   assignee?: {
     id: string;
     imageUrl?: string;
@@ -85,10 +85,11 @@ export function TaskGridItemInner({
 }: Omit<TaskGridItemProps, "updateTaskStatus">) {
   const t = useTranslations("tasks.TaskGridItem");
 
+  // use useFormatter to format the date according to the user's locale
   const format = useFormatter();
 
   const deadlineOn = t("deadlineOn", {
-    date: format.dateTime(deadline, {
+    date: format.dateTime(new Date(deadline), {
       day: "2-digit",
       month: "short",
       year: "numeric",

@@ -66,7 +66,7 @@ export const getCommentList = cache(
       return {
         id: c.id,
         content: c.content,
-        createdAt: c.createdAt,
+        createdAt: c.createdAt.toISOString(),
 
         canEdit: role === "owner" || c.sender.id === userId,
 

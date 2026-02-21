@@ -33,7 +33,7 @@ import { UpdateProjectStatusProvider } from "../UpdateProjectStatusContext";
 export interface ProjectListItemProps {
   id: number;
   title: string;
-  deadline: Date;
+  deadline: string;
   creator?: {
     id: string;
     fullName: string;
@@ -100,10 +100,11 @@ export const ProjectListItemInner = ({
 }: Omit<ProjectListItemProps, "updateProjectStatus">) => {
   const t = useTranslations("projects.ProjectListItem");
 
+  // use useFormatter to format the date according to the user's locale
   const format = useFormatter();
 
   const deadlineOn = t("deadlineOn", {
-    date: format.dateTime(deadline, {
+    date: format.dateTime(new Date(deadline), {
       day: "2-digit",
       month: "short",
       year: "numeric",

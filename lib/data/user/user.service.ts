@@ -82,7 +82,7 @@ export const updateUser = async (input: UpdateUserInputDTO) => {
         bio: input.bio,
         address: input.address,
         phoneNumber: input.phoneNumber,
-        birthdate: input.birthdate,
+        birthdate: input.birthdate ? new Date(input.birthdate) : null,
         publicLink: input.publicLink,
       },
     },

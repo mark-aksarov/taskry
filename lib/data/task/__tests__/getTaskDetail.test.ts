@@ -108,7 +108,7 @@ describe("getTaskDetail", () => {
       id: 1,
       title: "Task 1",
       description: "Description 1",
-      deadline: new Date("2025-12-31"),
+      deadline: new Date("2025-12-31").toISOString(),
       status: TaskStatus.active,
 
       creator: undefined,

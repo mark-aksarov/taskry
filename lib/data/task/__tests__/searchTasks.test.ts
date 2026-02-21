@@ -67,7 +67,7 @@ describe("searchTasks", () => {
         {
           id: 1,
           title: "Task A",
-          deadline: new Date("2025-03-01"),
+          deadline: new Date("2025-03-01").toISOString(),
         },
       ],
       totalCount: 1,

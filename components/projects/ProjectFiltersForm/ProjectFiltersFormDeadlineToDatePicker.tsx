@@ -1,22 +1,25 @@
 "use client";
 
-import { ProjectFilters } from "@/lib/types";
 import { useTranslations } from "next-intl";
+import { ProjectFilters } from "@/lib/types";
 import { parseDate } from "@internationalized/date";
+import { type CalendarDate } from "@internationalized/date";
 import { ResponsiveDatePicker } from "@/components/common/ResponsiveDatePicker";
 
 interface ProjectFiltersFormDeadlineToDatePickerProps {
   filters?: ProjectFilters;
+  deadlineFrom: CalendarDate | null;
 }
 
 export function ProjectFiltersFormDeadlineToDatePicker({
   filters,
+  deadlineFrom,
 }: ProjectFiltersFormDeadlineToDatePickerProps) {
   const t = useTranslations("projects.ProjectFiltersFormDeadlineToDatePicker");
 
-  const defaultValue = filters?.deadlineTo
-    ? parseDate(filters?.deadlineTo?.toISOString().split("T")[0])
-    : undefined;
+  // parse deadlineTo to CalendarDate without time components
+  const deadlineTo = filters?.deadlineTo;
+  const defaultValue = deadlineTo ? parseDate(deadlineTo) : null;
 
   return (
     <ResponsiveDatePicker
@@ -24,6 +27,7 @@ export function ProjectFiltersFormDeadlineToDatePicker({
       label={t("label")}
       defaultValue={defaultValue}
       name="deadlineTo"
+      minValue={deadlineFrom}
     />
   );
 }

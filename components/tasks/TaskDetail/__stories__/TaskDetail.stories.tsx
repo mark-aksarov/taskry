@@ -30,7 +30,7 @@ export const Default = {
       fullName: "User 1",
       imageUrl: "/man.jpg",
     },
-    deadline: new Date("2025-01-01"),
+    deadline: "2025-01-01",
     status: TaskStatus.active,
     creator: {
       id: "2",
@@ -52,7 +52,7 @@ export const WithoutSomeData = {
   args: {
     id: 1,
     title: "Task 1",
-    deadline: new Date("2025-01-01"),
+    deadline: "2025-01-01",
     status: TaskStatus.active,
     project: {
       id: 1,

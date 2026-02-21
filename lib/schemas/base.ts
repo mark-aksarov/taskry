@@ -17,10 +17,7 @@ export const searchParamToArray = (val: unknown) => {
   return undefined;
 };
 
-export const dateSearchParam = z.coerce
-  .date("yyyy-MM-dd")
-  .optional()
-  .catch(undefined);
+export const dateSearchParam = z.iso.date().optional().catch(undefined);
 
 export const emptyStringToUndefined = (v: unknown) =>
   typeof v === "string" && v === "" ? undefined : v;

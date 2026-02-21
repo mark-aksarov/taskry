@@ -116,7 +116,7 @@ describe("getTaskList", () => {
           title: "Task 1",
           status: TaskStatus.active,
 
-          deadline: new Date("2023-01-01"),
+          deadline: new Date("2023-01-01").toISOString(),
           assignee: {
             id: "user-3",
             fullName: "User 3",
@@ -439,8 +439,8 @@ describe("getTaskList", () => {
         ]);
 
         const filters: TaskFilters = {
-          deadlineFrom: new Date("2023-01-01"),
-          deadlineTo: new Date("2023-01-02"),
+          deadlineFrom: "2023-01-01",
+          deadlineTo: "2023-01-02",
         };
 
         const result = await getTaskList({

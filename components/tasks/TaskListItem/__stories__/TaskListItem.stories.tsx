@@ -21,7 +21,7 @@ export const mockedTask = {
   id: 1,
   title: "Task 1",
   description: "Task description. General information goes here.",
-  deadline: new Date("2025-09-30"),
+  deadline: "2025-09-30",
   assignee: {
     id: "user1",
     imageUrl: "/man.jpg",

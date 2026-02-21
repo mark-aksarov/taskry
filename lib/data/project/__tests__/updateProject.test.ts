@@ -42,11 +42,12 @@ describe("updateProject", () => {
   });
 
   it("should update project data", async () => {
+    const deadlineIso = "2025-12-31";
+
     const projectData = {
       id: 1,
       description: null,
       title: "Project 1",
-      deadline: new Date(),
       categoryId: 1,
       status: ProjectStatus.active,
       customerId: null,
@@ -55,12 +56,14 @@ describe("updateProject", () => {
     await prisma.project.create({
       data: {
         ...projectData,
+        deadline: new Date(deadlineIso),
         workspaceId: 1,
       },
     });
 
     const result = await updateProject({
       ...projectData,
+      deadline: deadlineIso,
       title: "Updated Project Title",
     });
 
@@ -70,11 +73,12 @@ describe("updateProject", () => {
   });
 
   it("should throw error if project category does not found", async () => {
+    const deadlineIso = "2025-12-31";
+
     const projectData = {
       id: 1,
       description: null,
       title: "Project 1",
-      deadline: new Date(),
       categoryId: 1,
       status: ProjectStatus.active,
       customerId: null,
@@ -83,12 +87,14 @@ describe("updateProject", () => {
     await prisma.project.create({
       data: {
         ...projectData,
+        deadline: new Date(deadlineIso),
         workspaceId: 1,
       },
     });
 
     const updateProjectPromise = updateProject({
       ...projectData,
+      deadline: deadlineIso,
       categoryId: 999,
     });
 
@@ -99,11 +105,12 @@ describe("updateProject", () => {
   });
 
   it("should throw error if customer does not found", async () => {
+    const deadlineIso = "2025-12-31";
+
     const projectData = {
       id: 1,
       description: null,
       title: "Project 1",
-      deadline: new Date(),
       categoryId: 1,
       status: ProjectStatus.active,
       customerId: null,
@@ -112,12 +119,14 @@ describe("updateProject", () => {
     await prisma.project.create({
       data: {
         ...projectData,
+        deadline: new Date(deadlineIso),
         workspaceId: 1,
       },
     });
 
     const updateProjectPromise = updateProject({
       ...projectData,
+      deadline: deadlineIso,
       customerId: 999,
     });
 
@@ -126,11 +135,12 @@ describe("updateProject", () => {
   });
 
   it("should throw error if category does not belong to the workspace", async () => {
+    const deadlineIso = "2025-12-31";
+
     const projectData = {
       id: 1,
       description: null,
       title: "Project 1",
-      deadline: new Date(),
       categoryId: 1,
       status: ProjectStatus.active,
       customerId: null,
@@ -139,12 +149,14 @@ describe("updateProject", () => {
     await prisma.project.create({
       data: {
         ...projectData,
+        deadline: new Date(deadlineIso),
         workspaceId: 1,
       },
     });
 
     const updateProjectPromise = updateProject({
       ...projectData,
+      deadline: deadlineIso,
       categoryId: 2,
     });
 
@@ -155,11 +167,12 @@ describe("updateProject", () => {
   });
 
   it("should throw error if customer does not belong to the workspace", async () => {
+    const deadlineIso = "2025-12-31";
+
     const projectData = {
       id: 1,
       description: null,
       title: "Project 1",
-      deadline: new Date(),
       categoryId: 1,
       status: ProjectStatus.active,
       customerId: null,
@@ -168,12 +181,14 @@ describe("updateProject", () => {
     await prisma.project.create({
       data: {
         ...projectData,
+        deadline: new Date(deadlineIso),
         workspaceId: 1,
       },
     });
 
     const updateProjectPromise = updateProject({
       ...projectData,
+      deadline: deadlineIso,
       customerId: 3,
     });
 
@@ -184,11 +199,13 @@ describe("updateProject", () => {
   });
 
   it("should throw an error when trying to update a project from another workspace", async () => {
+    const deadlineIso = "2025-12-31";
+
     const projectData = {
       id: 1,
       description: null,
       title: "Project 1",
-      deadline: new Date(),
+      deadline: "2025-12-31",
       categoryId: 2,
       status: ProjectStatus.active,
       customerId: null,
@@ -197,12 +214,14 @@ describe("updateProject", () => {
     await prisma.project.create({
       data: {
         ...projectData,
+        deadline: new Date(deadlineIso),
         workspaceId: 2,
       },
     });
 
     const updateProjectPromise = updateProject({
       ...projectData,
+      deadline: deadlineIso,
       title: "Updated Project Title",
       categoryId: null,
     });
@@ -220,12 +239,12 @@ describe("updateProject", () => {
       (requireSession as any).mockResolvedValue({
         user: { id: userId, workspaceId: 1, role },
       });
+      const deadlineIso = "2025-12-31";
 
       const projectData = {
         id: 1,
         description: null,
         title: "Project 1",
-        deadline: new Date(),
         categoryId: 1,
         status: ProjectStatus.active,
         customerId: null,
@@ -234,6 +253,7 @@ describe("updateProject", () => {
       await prisma.project.create({
         data: {
           ...projectData,
+          deadline: new Date(deadlineIso),
           workspaceId: 1,
         },
       });
@@ -241,6 +261,7 @@ describe("updateProject", () => {
       return {
         updateInput: {
           ...projectData,
+          deadline: deadlineIso,
           title: "Updated Project Title",
         },
       };

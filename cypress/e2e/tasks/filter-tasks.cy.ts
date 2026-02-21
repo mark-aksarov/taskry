@@ -69,7 +69,7 @@ describe("filter tasks", () => {
         tasks: [
           {
             id: 1,
-            title: "A",
+            title: "Task A",
             status: TaskStatus.active,
             deadline: dates.today,
             categoryId: 1,
@@ -80,7 +80,7 @@ describe("filter tasks", () => {
           },
           {
             id: 2,
-            title: "B",
+            title: "Task B",
             status: TaskStatus.active,
             deadline: dates.today,
             categoryId: 1,
@@ -91,7 +91,7 @@ describe("filter tasks", () => {
           },
           {
             id: 3,
-            title: "C",
+            title: "Task C",
             status: TaskStatus.active,
             deadline: dates.today,
             categoryId: 1,
@@ -111,9 +111,9 @@ describe("filter tasks", () => {
     cy.getByData("show-only-my-tasks").click();
     cy.get('button[type="submit"]').click();
 
-    cy.getByData("task-list-item-title").should("have.length", 2);
-    cy.getByData("task-list-item-title").eq(0).should("contain", "A");
-    cy.getByData("task-list-item-title").eq(1).should("contain", "C");
+    cy.getByData("task-list-item").should("have.length", 2);
+    cy.getByData("task-list-item", "1").should("contain", "Task A");
+    cy.getByData("task-list-item", "3").should("contain", "Task C");
 
     cy.location("search").should("include", "onlyMyTasks=true");
   });
@@ -124,7 +124,7 @@ describe("filter tasks", () => {
         tasks: [
           {
             id: 1,
-            title: "A",
+            title: "Task A",
             status: TaskStatus.active,
             deadline: new Date("2025-12-31"),
             categoryId: 1,
@@ -135,7 +135,7 @@ describe("filter tasks", () => {
           },
           {
             id: 2,
-            title: "B",
+            title: "Task B",
             status: TaskStatus.active,
             deadline: new Date("2026-01-01"),
             categoryId: 1,
@@ -146,7 +146,7 @@ describe("filter tasks", () => {
           },
           {
             id: 3,
-            title: "С",
+            title: "Task С",
             status: TaskStatus.active,
             deadline: new Date("2026-01-02"),
             categoryId: 1,
@@ -167,9 +167,9 @@ describe("filter tasks", () => {
     cy.setDatePickerDate("deadline-to-date-picker", "01", "01", "2026");
     cy.get('button[type="submit"]').click();
 
-    cy.getByData("task-list-item-title").should("have.length", 2);
-    cy.getByData("task-list-item-title").eq(0).should("contain", "A");
-    cy.getByData("task-list-item-title").eq(1).should("contain", "B");
+    cy.getByData("task-list-item").should("have.length", 2);
+    cy.getByData("task-list-item", "1").should("contain", "Task A");
+    cy.getByData("task-list-item", "2").should("contain", "Task B");
 
     cy.location("search")
       .should("include", "deadlineFrom=2025-12-31")
@@ -183,7 +183,7 @@ describe("filter tasks", () => {
           tasks: [
             {
               id: 1,
-              title: "A",
+              title: "Task A",
               status: TaskStatus.active,
               deadline: new Date("2025-12-31"),
               categoryId: 1,
@@ -194,7 +194,7 @@ describe("filter tasks", () => {
             },
             {
               id: 2,
-              title: "B",
+              title: "Task B",
               status: TaskStatus.pending,
               deadline: new Date("2026-01-01"),
               categoryId: 1,
@@ -205,7 +205,7 @@ describe("filter tasks", () => {
             },
             {
               id: 3,
-              title: "C",
+              title: "Task C",
               status: TaskStatus.completed,
               deadline: new Date("2026-01-02"),
               categoryId: 1,
@@ -227,9 +227,9 @@ describe("filter tasks", () => {
       cy.getByData("active-checkbox").click();
       cy.get('button[type="submit"]').click();
 
-      cy.getByData("task-list-item-title")
+      cy.getByData("task-list-item")
         .should("have.length", 1)
-        .and("contain", "A");
+        .and("contain", "Task A");
 
       cy.location("search").should("include", "status=active");
     });
@@ -242,9 +242,9 @@ describe("filter tasks", () => {
       cy.getByData("pending-checkbox").click();
       cy.get('button[type="submit"]').click();
 
-      cy.getByData("task-list-item-title")
+      cy.getByData("task-list-item")
         .should("have.length", 1)
-        .and("contain", "B");
+        .and("contain", "Task B");
 
       cy.location("search").should("include", "status=pending");
     });
@@ -257,9 +257,9 @@ describe("filter tasks", () => {
       cy.getByData("completed-checkbox").click();
       cy.get('button[type="submit"]').click();
 
-      cy.getByData("task-list-item-title")
+      cy.getByData("task-list-item")
         .should("have.length", 1)
-        .and("contain", "C");
+        .and("contain", "Task C");
 
       cy.location("search").should("include", "status=completed");
     });
@@ -271,7 +271,7 @@ describe("filter tasks", () => {
         tasks: [
           {
             id: 1,
-            title: "A",
+            title: "Task A",
             status: TaskStatus.active,
             deadline: new Date("2025-12-31"),
             categoryId: 1,
@@ -282,7 +282,7 @@ describe("filter tasks", () => {
           },
           {
             id: 2,
-            title: "B",
+            title: "Task B",
             status: TaskStatus.pending,
             deadline: new Date("2026-01-01"),
             categoryId: 2,
@@ -302,9 +302,7 @@ describe("filter tasks", () => {
     cy.getByData("category-1-checkbox").click();
     cy.get('button[type="submit"]').click();
 
-    cy.getByData("task-list-item-title")
-      .should("have.length", 1)
-      .and("contain", "A");
+    cy.getByData("task-list-item").should("have.length", 1).and("contain", "A");
 
     cy.location("search").should("include", "category=1");
   });
@@ -315,7 +313,7 @@ describe("filter tasks", () => {
         tasks: [
           {
             id: 1,
-            title: "A",
+            title: "Task A",
             status: TaskStatus.active,
             deadline: new Date("2025-12-31"),
             categoryId: 1,
@@ -326,7 +324,7 @@ describe("filter tasks", () => {
           },
           {
             id: 2,
-            title: "B",
+            title: "Task B",
             status: TaskStatus.pending,
             deadline: new Date("2026-01-01"),
             categoryId: 1,
@@ -346,9 +344,9 @@ describe("filter tasks", () => {
     cy.getByData("project-1-checkbox").click();
     cy.get('button[type="submit"]').click();
 
-    cy.getByData("task-list-item-title")
+    cy.getByData("task-list-item")
       .should("have.length", 1)
-      .and("contain", "A");
+      .and("contain", "Task A");
 
     cy.location("search").should("include", "project=1");
   });
@@ -359,7 +357,7 @@ describe("filter tasks", () => {
         tasks: [
           {
             id: 1,
-            title: "A",
+            title: "Task A",
             status: TaskStatus.active,
             deadline: new Date("2025-12-31"),
             categoryId: 1,
@@ -370,7 +368,7 @@ describe("filter tasks", () => {
           },
           {
             id: 2,
-            title: "B",
+            title: "Task B",
             status: TaskStatus.pending,
             deadline: new Date("2026-01-01"),
             categoryId: 1,
@@ -390,9 +388,9 @@ describe("filter tasks", () => {
     cy.getByData("assignee-user-1-checkbox").click();
     cy.get('button[type="submit"]').click();
 
-    cy.getByData("task-list-item-title")
+    cy.getByData("task-list-item")
       .should("have.length", 1)
-      .and("contain", "A");
+      .and("contain", "Task A");
 
     cy.location("search").should("include", "assignee=user-1");
   });

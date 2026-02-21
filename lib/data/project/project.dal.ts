@@ -76,7 +76,7 @@ export const getProjectDetail = cache(
       id: project.id,
       title: project.title,
       description: project.description ?? undefined,
-      deadline: project.deadline,
+      deadline: project.deadline.toISOString(),
       status: project.status,
       categoryId: project.category?.id,
       customerId: project.customer?.id,
@@ -129,7 +129,7 @@ export const getProjectFormData = cache(
       id: project.id,
       title: project.title,
       description: project.description ?? undefined,
-      deadline: project.deadline,
+      deadline: project.deadline.toISOString(),
       status: project.status,
       categoryId: project.categoryId ?? undefined,
       customerId: project.customerId ?? undefined,
@@ -232,7 +232,7 @@ export const searchProjects = cache(
       items: items.map((p) => ({
         id: p.id,
         title: p.title,
-        deadline: p.deadline,
+        deadline: p.deadline.toISOString(),
       })),
 
       totalCount,
@@ -340,7 +340,7 @@ export const getProjectList = cache(
           id: p.id,
           title: p.title,
           status: p.status,
-          deadline: p.deadline,
+          deadline: p.deadline.toISOString(),
           creator: p.creator
             ? {
                 id: p.creator.id,
@@ -427,7 +427,7 @@ export const createProject = async (input: CreateProjectInputDTO) => {
     data: {
       title: input.title,
       description: input.description,
-      deadline: input.deadline,
+      deadline: new Date(input.deadline),
       customerId: input.customerId,
       categoryId: input.categoryId,
       status: input.status,
@@ -480,7 +480,7 @@ export const updateProject = async (input: UpdateProjectInputDTO) => {
     data: {
       title: input.title,
       description: input.description,
-      deadline: input.deadline,
+      deadline: new Date(input.deadline),
       customerId: input.customerId,
       categoryId: input.categoryId,
       status: input.status,
@@ -617,8 +617,8 @@ export function buildProjectWhereClause(
     ...(filters.customer?.length && { customerId: { in: filters.customer } }),
     ...(filters.user?.length && { creatorId: { in: filters.user } }),
     deadline: {
-      ...(filters.deadlineFrom && { gte: filters.deadlineFrom }),
-      ...(filters.deadlineTo && { lte: filters.deadlineTo }),
+      ...(filters.deadlineFrom && { gte: new Date(filters.deadlineFrom) }),
+      ...(filters.deadlineTo && { lte: new Date(filters.deadlineTo) }),
     },
   };
 }

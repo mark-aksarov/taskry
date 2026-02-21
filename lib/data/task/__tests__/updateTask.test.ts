@@ -44,12 +44,13 @@ describe("updateProject", () => {
 
   it("should successfully update task", async () => {
     const taskId = 100;
+    const deadlineIso = "2025-12-31";
 
     const taskData = {
       id: taskId,
       title: "Task 1",
       description: null,
-      deadline: new Date(),
+      deadline: "2025-12-31",
       projectId: 1,
       categoryId: 1,
       status: TaskStatus.active,
@@ -59,12 +60,14 @@ describe("updateProject", () => {
     await prisma.task.create({
       data: {
         ...taskData,
+        deadline: new Date(deadlineIso),
         workspaceId: 1,
       },
     });
 
     const result = await updateTask({
       ...taskData,
+      deadline: deadlineIso,
       title: "Updated Task Title",
     });
 
@@ -75,12 +78,12 @@ describe("updateProject", () => {
 
   it("should throw an error when trying to update a task from another workspace", async () => {
     const taskId = 100;
+    const deadlineIso = "2025-12-31";
 
     const taskData = {
       id: taskId,
       title: "Task 1",
       description: null,
-      deadline: new Date(),
       projectId: 2,
       categoryId: 2,
       status: TaskStatus.active,
@@ -90,12 +93,14 @@ describe("updateProject", () => {
     await prisma.task.create({
       data: {
         ...taskData,
+        deadline: new Date(deadlineIso),
         workspaceId: 2,
       },
     });
 
     const updateInput = {
       ...taskData,
+      deadline: deadlineIso,
       title: "Updated Task Title",
     };
 
@@ -104,12 +109,12 @@ describe("updateProject", () => {
 
   it("should fail if the project not found", async () => {
     const taskId = 100;
+    const deadlineIso = "2025-12-31";
 
     const taskData = {
       id: taskId,
       title: "Task 1",
       description: null,
-      deadline: new Date(),
       projectId: 1,
       categoryId: 1,
       status: TaskStatus.active,
@@ -119,12 +124,14 @@ describe("updateProject", () => {
     await prisma.task.create({
       data: {
         ...taskData,
+        deadline: new Date(deadlineIso),
         workspaceId: 1,
       },
     });
 
     const updateTaskPromise = updateTask({
       ...taskData,
+      deadline: deadlineIso,
       projectId: 999,
     });
 
@@ -134,12 +141,12 @@ describe("updateProject", () => {
 
   it("should fail if the assignee not found", async () => {
     const taskId = 100;
+    const deadlineIso = "2025-12-31";
 
     const taskData = {
       id: taskId,
       title: "Task 1",
       description: null,
-      deadline: new Date(),
       projectId: 1,
       categoryId: 1,
       status: TaskStatus.active,
@@ -149,12 +156,14 @@ describe("updateProject", () => {
     await prisma.task.create({
       data: {
         ...taskData,
+        deadline: new Date(deadlineIso),
         workspaceId: 1,
       },
     });
 
     const updateTaskPromise = updateTask({
       ...taskData,
+      deadline: deadlineIso,
       assigneeId: "user-999",
     });
 
@@ -164,12 +173,12 @@ describe("updateProject", () => {
 
   it("should fail if the task category not found", async () => {
     const taskId = 100;
+    const deadlineIso = "2025-12-31";
 
     const taskData = {
       id: taskId,
       title: "Task 1",
       description: null,
-      deadline: new Date(),
       projectId: 1,
       categoryId: 1,
       status: TaskStatus.active,
@@ -179,12 +188,14 @@ describe("updateProject", () => {
     await prisma.task.create({
       data: {
         ...taskData,
+        deadline: new Date(deadlineIso),
         workspaceId: 1,
       },
     });
 
     const updateTaskPromise = updateTask({
       ...taskData,
+      deadline: deadlineIso,
       categoryId: 999,
     });
 
@@ -194,12 +205,12 @@ describe("updateProject", () => {
 
   it("should fail if the project belongs to a different workspace", async () => {
     const taskId = 100;
+    const deadlineIso = "2025-12-31";
 
     const taskData = {
       id: taskId,
       title: "Task 1",
       description: null,
-      deadline: new Date(),
       projectId: 1,
       categoryId: 1,
       status: TaskStatus.active,
@@ -209,12 +220,14 @@ describe("updateProject", () => {
     await prisma.task.create({
       data: {
         ...taskData,
+        deadline: new Date(deadlineIso),
         workspaceId: 1,
       },
     });
 
     const updateTaskPromise = updateTask({
       ...taskData,
+      deadline: deadlineIso,
       projectId: 3,
     });
 
@@ -224,12 +237,12 @@ describe("updateProject", () => {
 
   it("should fail if the assignee belongs to a different workspace", async () => {
     const taskId = 100;
+    const deadlineIso = "2025-12-31";
 
     const taskData = {
       id: taskId,
       title: "Task 1",
       description: null,
-      deadline: new Date(),
       projectId: 1,
       categoryId: 1,
       status: TaskStatus.active,
@@ -239,12 +252,14 @@ describe("updateProject", () => {
     await prisma.task.create({
       data: {
         ...taskData,
+        deadline: new Date(deadlineIso),
         workspaceId: 1,
       },
     });
 
     const updateTaskPromise = updateTask({
       ...taskData,
+      deadline: deadlineIso,
       assigneeId: "user-4",
     });
 
@@ -254,12 +269,12 @@ describe("updateProject", () => {
 
   it("should fail if the task category belongs to a different workspace", async () => {
     const taskId = 100;
+    const deadlineIso = "2025-12-31";
 
     const taskData = {
       id: taskId,
       title: "Task 1",
       description: null,
-      deadline: new Date(),
       projectId: 1,
       categoryId: 1,
       status: TaskStatus.active,
@@ -269,12 +284,14 @@ describe("updateProject", () => {
     await prisma.task.create({
       data: {
         ...taskData,
+        deadline: new Date(deadlineIso),
         workspaceId: 1,
       },
     });
 
     const updateTaskPromise = updateTask({
       ...taskData,
+      deadline: deadlineIso,
       categoryId: 2,
     });
 
@@ -291,12 +308,12 @@ describe("updateProject", () => {
       });
 
       const taskId = 100;
+      const deadlineIso = "2025-12-31";
 
       const taskData = {
         id: taskId,
         description: null,
         title: "Task 1",
-        deadline: new Date(),
         projectId: 1,
         categoryId: 1,
         status: TaskStatus.active,
@@ -306,6 +323,7 @@ describe("updateProject", () => {
       await prisma.task.create({
         data: {
           ...taskData,
+          deadline: new Date(deadlineIso),
           workspaceId: 1,
         },
       });
@@ -313,6 +331,7 @@ describe("updateProject", () => {
       return {
         updateInput: {
           ...taskData,
+          deadline: deadlineIso,
           title: "Updated Task Title",
         },
       };

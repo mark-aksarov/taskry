@@ -30,7 +30,7 @@ import { UpdateTaskStatusProvider } from "@/components/tasks/UpdateTaskStatusCon
 export interface UserTaskListItemProps {
   id: number;
   title: string;
-  deadline: Date;
+  deadline: string;
   status: TaskStatus;
   commentsCount: number;
   taskCommentsModal: React.ReactNode;
@@ -69,10 +69,11 @@ export const UserTaskListItemInner = ({
 }: Omit<UserTaskListItemProps, "updateTaskStatus">) => {
   const t = useTranslations("users.UserTaskListItem");
 
+  // use useFormatter to format the date according to the user's locale
   const format = useFormatter();
 
   const deadlineOn = t("deadlineOn", {
-    date: format.dateTime(deadline, {
+    date: format.dateTime(new Date(deadline), {
       day: "2-digit",
       month: "short",
       year: "numeric",

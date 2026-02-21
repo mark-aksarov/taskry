@@ -123,25 +123,19 @@ describe("update task status", () => {
     it("should update 'active' task status to 'pending'", () => {
       cy.getByData("task-item-action-menu-trigger", "1").click();
       cy.getMenuItem("pending").click();
-      cy.getByData("task-list-item")
-        .eq(0)
-        .contains(/pending/i);
+      cy.getByData("task-list-item", "1").contains(/pending/i);
     });
 
     it("should update 'active' task status to 'completed'", () => {
       cy.getByData("task-item-action-menu-trigger", "1").click();
       cy.getMenuItem("completed").click();
-      cy.getByData("task-list-item")
-        .eq(0)
-        .contains(/completed/i);
+      cy.getByData("task-list-item", "1").contains(/completed/i);
     });
 
     it("should update 'pending' task status to 'active'", () => {
       cy.getByData("task-item-action-menu-trigger", "2").click();
       cy.getMenuItem("active").click();
-      cy.getByData("task-list-item")
-        .eq(1)
-        .contains(/active/i);
+      cy.getByData("task-list-item", "2").contains(/active/i);
     });
   });
 });

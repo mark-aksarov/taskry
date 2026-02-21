@@ -11,8 +11,8 @@ import { Repeat } from "@/components/common/Repeat";
 import { CommentListItemDTO } from "@/lib/data/comment/comment.dto";
 import { deleteComment } from "@/lib/actions/comment/deleteComment";
 import { CommentItemActionMenuTrigger } from "../comments/CommentItem";
-import { CommentsEmptySection } from "@/components/comments/CommentsEmptySection";
 import { DeleteCommentModalProvider } from "../comments/DeleteCommentModal";
+import { CommentsEmptySection } from "@/components/comments/CommentsEmptySection";
 
 interface TaskCommentsContainerProps {
   guestMode: boolean;

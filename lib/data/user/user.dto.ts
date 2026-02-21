@@ -11,7 +11,7 @@ export interface UserFormDataDTO {
   phoneNumber?: string;
   address?: string;
   publicLink?: string;
-  birthdate?: Date;
+  birthdate?: string;
   positionId?: number;
 }
 
@@ -24,7 +24,7 @@ export interface UserDetailDTO {
   phoneNumber?: string;
   address?: string;
   publicLink?: string;
-  birthdate?: Date;
+  birthdate?: string;
 
   position?: {
     name: string;
@@ -72,7 +72,7 @@ export interface UpdateUserInputDTO {
   fullName: string;
   positionId: number | null;
   bio: string | null;
-  birthdate: Date | null;
+  birthdate: string | null;
   phoneNumber: string | null;
   address: string | null;
   publicLink: string | null;

@@ -60,7 +60,7 @@ describe("getCommentList", () => {
       id: 3,
       content: "Comment 3",
       canEdit: true,
-      createdAt: new Date("2025-03-03"),
+      createdAt: new Date("2025-03-03").toISOString(),
 
       sender: {
         id: "user-1",

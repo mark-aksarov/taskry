@@ -47,7 +47,7 @@ describe("filter projects", () => {
         projects: [
           {
             id: 1,
-            title: "A",
+            title: "Project A",
             status: ProjectStatus.active,
             deadline: dates.today,
             categoryId: 1,
@@ -57,7 +57,7 @@ describe("filter projects", () => {
           },
           {
             id: 2,
-            title: "B",
+            title: "Project B",
             status: ProjectStatus.active,
             deadline: dates.tomorrow,
             categoryId: 1,
@@ -67,7 +67,7 @@ describe("filter projects", () => {
           },
           {
             id: 3,
-            title: "C",
+            title: "Project C",
             status: ProjectStatus.pending,
             deadline: dates.tomorrow,
             categoryId: 1,
@@ -79,7 +79,7 @@ describe("filter projects", () => {
         tasks: [
           {
             id: 1,
-            title: "A",
+            title: "Task A",
             status: TaskStatus.active,
             deadline: dates.today,
             categoryId: 1,
@@ -90,7 +90,7 @@ describe("filter projects", () => {
           },
           {
             id: 2,
-            title: "B",
+            title: "Task B",
             status: TaskStatus.completed,
             deadline: dates.tomorrow,
             categoryId: 1,
@@ -101,7 +101,7 @@ describe("filter projects", () => {
           },
           {
             id: 3,
-            title: "C",
+            title: "Task C",
             status: TaskStatus.pending,
             deadline: dates.tomorrow,
             categoryId: 1,
@@ -121,9 +121,9 @@ describe("filter projects", () => {
     cy.getByData("no-active-tasks-switch").click();
     cy.get('button[type="submit"]').click();
 
-    cy.getByData("project-list-item-title")
+    cy.getByData("project-list-item")
       .should("have.length", 1)
-      .should("contain", "B");
+      .should("contain", "Project B");
 
     cy.location("search").should("include", "noActiveTasks=true");
   });
@@ -134,7 +134,7 @@ describe("filter projects", () => {
         projects: [
           {
             id: 1,
-            title: "A",
+            title: "Project A",
             status: ProjectStatus.active,
             deadline: new Date("2025-12-31"),
             categoryId: 1,
@@ -144,7 +144,7 @@ describe("filter projects", () => {
           },
           {
             id: 2,
-            title: "B",
+            title: "Project B",
             status: ProjectStatus.active,
             deadline: new Date("2026-01-01"),
             categoryId: 1,
@@ -154,7 +154,7 @@ describe("filter projects", () => {
           },
           {
             id: 3,
-            title: "C",
+            title: "Project C",
             status: ProjectStatus.active,
             deadline: new Date("2026-01-02"),
             categoryId: 1,
@@ -174,9 +174,9 @@ describe("filter projects", () => {
     cy.setDatePickerDate("deadline-to-date-picker", "01", "01", "2026");
     cy.get('button[type="submit"]').click();
 
-    cy.getByData("project-list-item-title").should("have.length", 2);
-    cy.getByData("project-list-item-title").eq(0).should("contain", "A");
-    cy.getByData("project-list-item-title").eq(1).should("contain", "B");
+    cy.getByData("project-list-item").should("have.length", 2);
+    cy.getByData("project-list-item", "1").should("contain", "Project A");
+    cy.getByData("project-list-item", "2").should("contain", "Project B");
 
     cy.location("search")
       .should("include", "deadlineFrom=2025-12-31")
@@ -190,7 +190,7 @@ describe("filter projects", () => {
           projects: [
             {
               id: 1,
-              title: "A",
+              title: "Project A",
               status: ProjectStatus.active,
               deadline: new Date("2025-12-31"),
               categoryId: 1,
@@ -200,7 +200,7 @@ describe("filter projects", () => {
             },
             {
               id: 2,
-              title: "B",
+              title: "Project B",
               status: ProjectStatus.pending,
               deadline: new Date("2026-01-01"),
               categoryId: 1,
@@ -210,7 +210,7 @@ describe("filter projects", () => {
             },
             {
               id: 3,
-              title: "C",
+              title: "Project C",
               status: ProjectStatus.completed,
               deadline: new Date("2026-01-02"),
               categoryId: 1,
@@ -231,9 +231,7 @@ describe("filter projects", () => {
       cy.getByData("active-checkbox").click();
       cy.get('button[type="submit"]').click();
 
-      cy.getByData("project-list-item-title")
-        .should("have.length", 1)
-        .and("contain", "A");
+      cy.getByData("project-list-item").and("contain", "Project A");
 
       cy.location("search").should("include", "status=active");
     });
@@ -246,9 +244,7 @@ describe("filter projects", () => {
       cy.getByData("pending-checkbox").click();
       cy.get('button[type="submit"]').click();
 
-      cy.getByData("project-list-item-title")
-        .should("have.length", 1)
-        .and("contain", "B");
+      cy.getByData("project-list-item").and("contain", "Project B");
 
       cy.location("search").should("include", "status=pending");
     });
@@ -261,9 +257,7 @@ describe("filter projects", () => {
       cy.getByData("completed-checkbox").click();
       cy.get('button[type="submit"]').click();
 
-      cy.getByData("project-list-item-title")
-        .should("have.length", 1)
-        .and("contain", "C");
+      cy.getByData("project-list-item").and("contain", "Project C");
 
       cy.location("search").should("include", "status=completed");
     });
@@ -275,7 +269,7 @@ describe("filter projects", () => {
         projects: [
           {
             id: 1,
-            title: "A",
+            title: "Project A",
             status: ProjectStatus.active,
             deadline: new Date("2025-12-31"),
             categoryId: 1,
@@ -285,7 +279,7 @@ describe("filter projects", () => {
           },
           {
             id: 2,
-            title: "B",
+            title: "Project B",
             status: ProjectStatus.pending,
             deadline: new Date("2026-01-01"),
             categoryId: 2,
@@ -304,9 +298,7 @@ describe("filter projects", () => {
     cy.getByData("category-1-checkbox").click();
     cy.get('button[type="submit"]').click();
 
-    cy.getByData("project-list-item-title")
-      .should("have.length", 1)
-      .and("contain", "A");
+    cy.getByData("project-list-item").and("contain", "A");
 
     cy.location("search").should("include", "category=1");
   });
@@ -317,7 +309,7 @@ describe("filter projects", () => {
         projects: [
           {
             id: 1,
-            title: "A",
+            title: "Project A",
             status: ProjectStatus.active,
             deadline: new Date("2025-12-31"),
             categoryId: 1,
@@ -327,7 +319,7 @@ describe("filter projects", () => {
           },
           {
             id: 2,
-            title: "B",
+            title: "Project B",
             status: ProjectStatus.pending,
             deadline: new Date("2026-01-01"),
             categoryId: 1,
@@ -346,9 +338,9 @@ describe("filter projects", () => {
     cy.getByData("customer-1-checkbox").click();
     cy.get('button[type="submit"]').click();
 
-    cy.getByData("project-list-item-title")
+    cy.getByData("project-list-item")
       .should("have.length", 1)
-      .and("contain", "A");
+      .and("contain", "Project A");
 
     cy.location("search").should("include", "customer=1");
   });
@@ -359,7 +351,7 @@ describe("filter projects", () => {
         projects: [
           {
             id: 1,
-            title: "A",
+            title: "Project A",
             status: ProjectStatus.active,
             deadline: new Date("2025-12-31"),
             categoryId: 1,
@@ -369,7 +361,7 @@ describe("filter projects", () => {
           },
           {
             id: 2,
-            title: "B",
+            title: "Project B",
             status: ProjectStatus.pending,
             deadline: new Date("2026-01-01"),
             categoryId: 1,
@@ -388,9 +380,9 @@ describe("filter projects", () => {
     cy.getByData("user-user-1-checkbox").click();
     cy.get('button[type="submit"]').click();
 
-    cy.getByData("project-list-item-title")
+    cy.getByData("project-list-item")
       .should("have.length", 1)
-      .and("contain", "A");
+      .and("contain", "Project A");
 
     cy.location("search").should("include", "user=user-1");
   });

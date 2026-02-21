@@ -6,8 +6,8 @@ export interface ProjectFilters {
   category?: number[];
   customer?: number[];
   user?: string[];
-  deadlineFrom?: Date;
-  deadlineTo?: Date;
+  deadlineFrom?: string;
+  deadlineTo?: string;
 }
 
 export interface TaskFilters {
@@ -16,8 +16,8 @@ export interface TaskFilters {
   category?: number[];
   project?: number[];
   assignee?: string[];
-  deadlineFrom?: Date;
-  deadlineTo?: Date;
+  deadlineFrom?: string;
+  deadlineTo?: string;
 }
 
 export interface UserFilters {

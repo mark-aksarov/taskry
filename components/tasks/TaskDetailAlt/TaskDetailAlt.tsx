@@ -21,7 +21,7 @@ interface TaskDetailAltProps {
     fullName: string;
     imageUrl?: string;
   };
-  deadline?: Date;
+  deadline?: string;
   description?: string;
   category?: {
     id: number;

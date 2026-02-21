@@ -12,7 +12,7 @@ const mockedUser = {
     name: "Position 1",
   },
   bio: "Sample bio text. Placeholder content only. No specific details provided.",
-  birthdate: new Date(1990, 0, 1),
+  birthdate: "1990-01-01",
   address: "Address line 1",
 };
 

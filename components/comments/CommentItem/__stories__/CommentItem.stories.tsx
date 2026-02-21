@@ -27,7 +27,7 @@ const content = "Comment content text";
 export const Default = {
   args: {
     content,
-    createdAt: new Date(2025, 10, 10, 14, 23, 0),
+    createdAt: "2025-01-01T04:00:00Z",
     sender: {
       id: "user-1",
       fullName: "User 1",

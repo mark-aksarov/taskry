@@ -24,7 +24,7 @@ export const Default = {
       fullName: "User 1",
       imageUrl: "/man.jpg",
     },
-    deadline: new Date("2025-01-01"),
+    deadline: "2025-01-01",
     description: "Project description. General information goes here.",
     customer: {
       id: 2,
@@ -43,7 +43,7 @@ export const WithoutSomeData = {
   args: {
     id: 2,
     title: "Project 1",
-    deadline: new Date("2025-01-01"),
+    deadline: "2025-01-01",
     status: ProjectStatus.pending,
   },
 } satisfies Story;

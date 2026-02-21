@@ -65,7 +65,7 @@ describe("searchProjects", () => {
         {
           id: 1,
           title: "Project A",
-          deadline: new Date("2025-03-01"),
+          deadline: new Date("2025-03-01").toISOString(),
         },
       ],
       totalCount: 1,

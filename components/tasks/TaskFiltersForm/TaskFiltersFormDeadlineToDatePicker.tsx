@@ -2,11 +2,12 @@
 
 import { TaskFilters } from "@/lib/types";
 import { useTranslations } from "next-intl";
-import { parseDate } from "@internationalized/date";
+import { CalendarDate, parseDate } from "@internationalized/date";
 import { ResponsiveDatePicker } from "@/components/common/ResponsiveDatePicker";
 
 interface TaskFiltersFormDeadlineToDatePickerProps {
   filters?: TaskFilters;
+  deadlineFrom: CalendarDate | null;
 }
 
 export function TaskFiltersFormDeadlineToDatePicker({
@@ -14,9 +15,9 @@ export function TaskFiltersFormDeadlineToDatePicker({
 }: TaskFiltersFormDeadlineToDatePickerProps) {
   const t = useTranslations("tasks.TaskFiltersFormDeadlineToDatePicker");
 
-  const defaultValue = filters?.deadlineTo
-    ? parseDate(filters?.deadlineTo?.toISOString().split("T")[0])
-    : undefined;
+  // parse deadlineTo to CalendarDate without time components
+  const deadlineTo = filters?.deadlineTo;
+  const defaultValue = deadlineTo ? parseDate(deadlineTo) : null;
 
   return (
     <ResponsiveDatePicker

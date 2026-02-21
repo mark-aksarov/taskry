@@ -46,7 +46,7 @@ describe("createTask", () => {
       projectId: projectId,
       categoryId: 1,
       assigneeId: "user-2",
-      deadline: new Date(),
+      deadline: "2025-12-31",
     });
 
     expect(result).toBeDefined();
@@ -63,7 +63,7 @@ describe("createTask", () => {
       projectId: 999,
       categoryId: 1,
       assigneeId: "user-1",
-      deadline: new Date(),
+      deadline: "2025-12-31",
     });
 
     await expect(createTaskPromise).rejects.toThrow(NotFoundError);
@@ -77,7 +77,7 @@ describe("createTask", () => {
       projectId: 1,
       categoryId: 1,
       assigneeId: "user-999",
-      deadline: new Date(),
+      deadline: "2025-12-31",
     });
 
     await expect(createTaskPromise).rejects.toThrow(NotFoundError);
@@ -91,7 +91,7 @@ describe("createTask", () => {
       projectId: 1,
       categoryId: 999,
       assigneeId: "user-1",
-      deadline: new Date(),
+      deadline: "2025-12-31",
     });
 
     await expect(createTaskPromise).rejects.toThrow(NotFoundError);
@@ -105,7 +105,7 @@ describe("createTask", () => {
       projectId: 3,
       categoryId: 1,
       assigneeId: "user-1",
-      deadline: new Date(),
+      deadline: "2025-12-31",
     });
 
     await expect(createTaskPromise).rejects.toThrow(AccessDeniedError);
@@ -119,7 +119,7 @@ describe("createTask", () => {
       projectId: 1,
       categoryId: 1,
       assigneeId: "user-4",
-      deadline: new Date(),
+      deadline: "2025-12-31",
     });
 
     await expect(createTaskPromise).rejects.toThrow(AccessDeniedError);
@@ -133,7 +133,7 @@ describe("createTask", () => {
       projectId: 1,
       categoryId: 2,
       assigneeId: "user-1",
-      deadline: new Date(),
+      deadline: "2025-12-31",
     });
 
     await expect(createTaskPromise).rejects.toThrow(AccessDeniedError);
@@ -147,7 +147,7 @@ describe("createTask", () => {
       title: "New Task",
       status: TaskStatus.active,
       projectId: 1,
-      deadline: new Date(),
+      deadline: "2025-12-31",
     });
 
     expect(result.id).toBeDefined();
@@ -166,7 +166,7 @@ describe("createTask", () => {
         projectId: 1,
         categoryId: 1,
         assigneeId: "user-2",
-        deadline: new Date(),
+        deadline: "2025-12-31",
       };
 
       return {

@@ -8,7 +8,7 @@ export interface ProjectSummaryDTO {
 export interface CreateProjectInputDTO {
   title: string;
   description?: string;
-  deadline: Date;
+  deadline: string;
   customerId?: number;
   categoryId?: number;
   status: ProjectStatus;
@@ -18,7 +18,7 @@ export interface UpdateProjectInputDTO {
   id: number;
   title: string;
   description: string | null;
-  deadline: Date;
+  deadline: string;
   customerId: number | null;
   categoryId: number | null;
   status: ProjectStatus;
@@ -28,7 +28,7 @@ export interface ProjectFormDataDTO {
   id: number;
   title: string;
   description?: string;
-  deadline: Date;
+  deadline: string;
   status: ProjectStatus;
   categoryId?: number;
   customerId?: number;
@@ -38,7 +38,7 @@ export interface ProjectDetailDTO {
   id: number;
   title: string;
   description?: string;
-  deadline: Date;
+  deadline: string;
   status: ProjectStatus;
   categoryId?: number;
   customerId?: number;
@@ -75,7 +75,7 @@ export interface ProjectListItemDTO {
   id: number;
   title: string;
   status: ProjectStatus;
-  deadline: Date;
+  deadline: string;
 
   creator?: {
     id: string;
@@ -114,5 +114,5 @@ export interface ProjectSearchDTO {
 export interface ProjectSearchItemDTO {
   id: number;
   title: string;
-  deadline: Date;
+  deadline: string;
 }

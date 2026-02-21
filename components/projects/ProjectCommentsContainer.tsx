@@ -37,7 +37,6 @@ function ProjectCommentsContainerInner({
 }: ProjectCommentsContainerProps) {
   const {
     data: comments,
-    error,
     isLoading,
     mutate,
   } = useSWR<CommentListItemDTO[]>(`/api/projects/${projectId}/comments`, {

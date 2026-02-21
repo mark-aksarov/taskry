@@ -11,10 +11,12 @@ import {
   FormBaseFooter,
 } from "@/components/common/FormBase";
 
+import { useState } from "react";
 import { useLocale } from "next-intl";
 import { TaskFilters } from "@/lib/types";
 import { Separator } from "@/components/ui/Separator";
 import { usePathname, useRouter } from "@/i18n/navigation";
+import { CalendarDate, parseDate } from "@internationalized/date";
 import { TaskFiltersFormOnlyMyTaskSwitch } from "./TaskFiltersFormOnlyMyTaskSwitch";
 import { FiltersFormSubmitButton } from "@/components/common/FiltersFormSubmitButton";
 import { TaskFiltersFormDeadlineToDatePicker } from "./TaskFiltersFormDeadlineToDatePicker";
@@ -39,6 +41,13 @@ export function TaskFiltersForm({
   const router = useRouter();
   const pathname = usePathname();
 
+  // parse deadlineFrom to CalendarDate without time components
+  const [deadlineFrom, setDeadlineFrom] = useState<CalendarDate | null>(() => {
+    const deadlineFrom = filters?.deadlineFrom;
+    if (!deadlineFrom) return null;
+    return parseDate(deadlineFrom);
+  });
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -57,8 +66,14 @@ export function TaskFiltersForm({
 
         <Separator />
 
-        <TaskFiltersFormDeadlineFromDatePicker filters={filters} />
-        <TaskFiltersFormDeadlineToDatePicker filters={filters} />
+        <TaskFiltersFormDeadlineFromDatePicker
+          deadlineFrom={deadlineFrom}
+          setDeadlineFrom={setDeadlineFrom}
+        />
+        <TaskFiltersFormDeadlineToDatePicker
+          filters={filters}
+          deadlineFrom={deadlineFrom}
+        />
 
         <Separator />
 

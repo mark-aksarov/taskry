@@ -15,7 +15,7 @@ interface UserDetailProps {
   phoneNumber?: string;
   address?: string;
   publicLink?: string;
-  birthdate?: Date;
+  birthdate?: string;
   position?: {
     name: string;
   };

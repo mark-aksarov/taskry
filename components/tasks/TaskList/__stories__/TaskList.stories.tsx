@@ -32,7 +32,7 @@ export const mockedTasks = [
     id: 1,
     title: "Task 1",
     status: TaskStatus.pending,
-    deadline: new Date("2025-01-01"),
+    deadline: "2025-01-01",
     commentsCount: 10,
     assignee: {
       id: "user1",
@@ -54,7 +54,7 @@ export const mockedTasks = [
     id: 2,
     title: "Task 2",
     status: TaskStatus.active,
-    deadline: new Date("2025-01-02"),
+    deadline: "2025-01-02",
     commentsCount: 22,
     project: {
       id: 2,
@@ -71,7 +71,7 @@ export const mockedTasks = [
     id: 3,
     title: "Task 3",
     status: TaskStatus.completed,
-    deadline: new Date("2025-01-03"),
+    deadline: "2025-01-03",
     commentsCount: 2,
     assignee: {
       id: "user3",
@@ -92,7 +92,7 @@ export const mockedTasks = [
     id: 4,
     title: "Task 4",
     status: TaskStatus.pending,
-    deadline: new Date("2025-01-04"),
+    deadline: "2025-01-04",
     commentsCount: 12,
     assignee: {
       id: "user4",
@@ -114,7 +114,7 @@ export const mockedTasks = [
     id: 5,
     title: "Task 5",
     status: TaskStatus.active,
-    deadline: new Date("2025-01-05"),
+    deadline: "2025-01-05",
     commentsCount: 15,
     assignee: {
       id: "user5",
@@ -136,7 +136,7 @@ export const mockedTasks = [
     id: 6,
     title: "Task 6",
     status: TaskStatus.completed,
-    deadline: new Date("2025-01-06"),
+    deadline: "2025-01-06",
     commentsCount: 9,
     assignee: {
       id: "user6",
@@ -158,7 +158,7 @@ export const mockedTasks = [
     id: 7,
     title: "Task 7",
     status: TaskStatus.completed,
-    deadline: new Date("2025-01-07"),
+    deadline: "2025-01-07",
     commentsCount: 12,
     assignee: {
       id: "user7",
@@ -180,7 +180,7 @@ export const mockedTasks = [
     id: 8,
     title: "Task 8",
     status: TaskStatus.active,
-    deadline: new Date("2025-01-08"),
+    deadline: "2025-01-08",
     commentsCount: 10,
     assignee: {
       id: "user8",
@@ -202,7 +202,7 @@ export const mockedTasks = [
     id: 9,
     title: "Task 9",
     status: TaskStatus.pending,
-    deadline: new Date("2025-01-09"),
+    deadline: "2025-01-09",
     commentsCount: 23,
     assignee: {
       id: "user9",
@@ -223,7 +223,7 @@ export const mockedTasks = [
     id: 10,
     title: "Task 10",
     status: TaskStatus.completed,
-    deadline: new Date("2025-01-10"),
+    deadline: "2025-01-10",
     commentsCount: 13,
     project: {
       id: 10,

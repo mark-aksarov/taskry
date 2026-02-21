@@ -11,10 +11,12 @@ import {
   FormBaseFooter,
 } from "@/components/common/FormBase";
 
+import { useState } from "react";
 import { useLocale } from "next-intl";
 import { ProjectFilters } from "@/lib/types";
 import { Separator } from "@/components/ui/Separator";
 import { usePathname, useRouter } from "@/i18n/navigation";
+import { CalendarDate, parseDate } from "@internationalized/date";
 import { FiltersFormSubmitButton } from "@/components/common/FiltersFormSubmitButton";
 import { ProjectFiltersFormNoActiveTasksSwitch } from "./ProjectFiltersFormNoActiveTasksSwitch";
 import { ProjectFiltersFormDeadlineToDatePicker } from "./ProjectFiltersFormDeadlineToDatePicker";
@@ -39,6 +41,13 @@ export function ProjectFiltersForm({
   const router = useRouter();
   const pathname = usePathname();
 
+  // parse deadlineFrom iso date to CalendarDate
+  const [deadlineFrom, setDeadlineFrom] = useState<CalendarDate | null>(() => {
+    const deadlineFrom = filters?.deadlineFrom;
+    if (!deadlineFrom) return null;
+    return parseDate(deadlineFrom);
+  });
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -57,10 +66,17 @@ export function ProjectFiltersForm({
 
         <Separator />
 
-        <ProjectFiltersFormDeadlineFromDatePicker filters={filters} />
-        <ProjectFiltersFormDeadlineToDatePicker filters={filters} />
+        <ProjectFiltersFormDeadlineFromDatePicker
+          deadlineFrom={deadlineFrom}
+          setDeadlineFrom={setDeadlineFrom}
+        />
+        <ProjectFiltersFormDeadlineToDatePicker
+          filters={filters}
+          deadlineFrom={deadlineFrom}
+        />
 
         <Separator />
+
         <div>{projectStatusCheckboxGroup}</div>
         <Separator />
         <div>{projectCategoryCheckboxGroup}</div>

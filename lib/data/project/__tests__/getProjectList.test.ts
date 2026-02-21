@@ -103,7 +103,7 @@ describe("getProjectList", () => {
           id: 1,
           title: "Project 1",
           status: ProjectStatus.active,
-          deadline: new Date("2025-03-01"),
+          deadline: new Date("2025-03-01").toISOString(),
 
           creator: {
             id: "user-1",
@@ -555,8 +555,8 @@ describe("getProjectList", () => {
         ]);
 
         const filters: ProjectFilters = {
-          deadlineFrom: new Date("2023-01-01"),
-          deadlineTo: new Date("2023-01-02"),
+          deadlineFrom: "2023-01-01",
+          deadlineTo: "2023-01-02",
         };
 
         const result = await getProjectList({

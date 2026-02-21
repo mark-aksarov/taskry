@@ -14,7 +14,7 @@ export const mockedProjects = [
   {
     id: 1,
     title: "Project 1",
-    deadline: new Date("2025-01-01"),
+    deadline: "2025-01-01",
     creator: { id: "user1", fullName: "User 1", imageUrl: "/woman.jpg" },
     customer: { id: 1, fullName: "Customer 1", imageUrl: "/man.jpg" },
     category: { id: 1, name: "Category 1" },
@@ -27,7 +27,7 @@ export const mockedProjects = [
   {
     id: 2,
     title: "Project 2",
-    deadline: new Date("2025-01-02"),
+    deadline: "2025-01-02",
     creator: { id: "user2", fullName: "User 2", imageUrl: "/man.jpg" },
     customer: { id: 2, fullName: "Customer 2", imageUrl: "/man.jpg" },
     category: { id: 2, name: "Category 2" },
@@ -40,7 +40,7 @@ export const mockedProjects = [
   {
     id: 3,
     title: "Project 3",
-    deadline: new Date("2025-01-03"),
+    deadline: "2025-01-03",
     creator: { id: "user3", fullName: "User 3", imageUrl: "/woman.jpg" },
     customer: { id: 3, fullName: "Customer 3", imageUrl: "/man.jpg" },
     category: { id: 3, name: "Category 3" },
@@ -53,7 +53,7 @@ export const mockedProjects = [
   {
     id: 4,
     title: "Project 4",
-    deadline: new Date("2025-01-04"),
+    deadline: "2025-01-04",
     creator: { id: "user4", fullName: "User 4", imageUrl: "/man.jpg" },
     customer: { id: 4, fullName: "Customer 4", imageUrl: "/woman.jpg" },
     category: { id: 4, name: "Category 4" },
@@ -66,7 +66,7 @@ export const mockedProjects = [
   {
     id: 5,
     title: "Project 5",
-    deadline: new Date("2025-01-05"),
+    deadline: "2025-01-05",
     creator: { id: "user5", fullName: "User 5", imageUrl: "/woman.jpg" },
     customer: { id: 5, fullName: "Customer 5", imageUrl: "/man.jpg" },
     category: { id: 5, name: "Category 5" },

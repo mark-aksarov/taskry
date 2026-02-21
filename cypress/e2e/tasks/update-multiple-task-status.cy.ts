@@ -110,9 +110,7 @@ describe("update multiple task status", () => {
         .filter(":visible")
         .click();
       cy.getMenuItem("pending").click();
-      cy.getByData("task-list-item")
-        .eq(0)
-        .contains(/pending/i);
+      cy.getByData("task-list-item", "1").contains(/pending/i);
     });
 
     it("should change status for completed task to pending", () => {
@@ -122,9 +120,7 @@ describe("update multiple task status", () => {
         .filter(":visible")
         .click();
       cy.getMenuItem("pending").click();
-      cy.getByData("task-list-item")
-        .eq(2)
-        .contains(/pending/i);
+      cy.getByData("task-list-item", "3").contains(/pending/i);
     });
 
     it("should change status for active task to completed", () => {
@@ -134,9 +130,7 @@ describe("update multiple task status", () => {
         .filter(":visible")
         .click();
       cy.getMenuItem("completed").click();
-      cy.getByData("task-list-item")
-        .eq(0)
-        .contains(/completed/i);
+      cy.getByData("task-list-item", "1").contains(/completed/i);
     });
 
     it("should change status for active task + pending task to completed", () => {
@@ -148,12 +142,8 @@ describe("update multiple task status", () => {
         .click();
       cy.getMenuItem("completed").click();
 
-      cy.getByData("task-list-item")
-        .eq(0)
-        .contains(/completed/i);
-      cy.getByData("task-list-item")
-        .eq(3)
-        .contains(/completed/i);
+      cy.getByData("task-list-item", "1").contains(/completed/i);
+      cy.getByData("task-list-item", "4").contains(/completed/i);
     });
 
     it("should change status for pending + completed tasks to active", () => {
@@ -165,12 +155,8 @@ describe("update multiple task status", () => {
         .click();
       cy.getMenuItem("active").click();
 
-      cy.getByData("task-list-item")
-        .eq(1)
-        .contains(/active/i);
-      cy.getByData("task-list-item")
-        .eq(2)
-        .contains(/active/i);
+      cy.getByData("task-list-item", "2").contains(/active/i);
+      cy.getByData("task-list-item", "3").contains(/active/i);
     });
 
     it("should change status for active + completed tasks + pending task to pending", () => {
@@ -183,15 +169,9 @@ describe("update multiple task status", () => {
         .click();
       cy.getMenuItem("pending").click();
 
-      cy.getByData("task-list-item")
-        .eq(0)
-        .contains(/pending/i);
-      cy.getByData("task-list-item")
-        .eq(2)
-        .contains(/pending/i);
-      cy.getByData("task-list-item")
-        .eq(3)
-        .contains(/pending/i);
+      cy.getByData("task-list-item", "1").contains(/pending/i);
+      cy.getByData("task-list-item", "3").contains(/pending/i);
+      cy.getByData("task-list-item", "4").contains(/pending/i);
     });
 
     it("should change status for active + completed tasks + completed task to completed", () => {
@@ -204,15 +184,9 @@ describe("update multiple task status", () => {
         .click();
       cy.getMenuItem("completed").click();
 
-      cy.getByData("task-list-item")
-        .eq(0)
-        .contains(/completed/i);
-      cy.getByData("task-list-item")
-        .eq(2)
-        .contains(/completed/i);
-      cy.getByData("task-list-item")
-        .eq(4)
-        .contains(/completed/i);
+      cy.getByData("task-list-item", "1").contains(/completed/i);
+      cy.getByData("task-list-item", "3").contains(/completed/i);
+      cy.getByData("task-list-item", "5").contains(/completed/i);
     });
 
     it("should disable 'active' item when all selected tasks are active", () => {

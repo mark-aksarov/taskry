@@ -34,7 +34,7 @@ import { UpdateProjectStatusProvider } from "../UpdateProjectStatusContext";
 export interface ProjectGridItemProps {
   id: number;
   title: string;
-  deadline: Date;
+  deadline: string;
   creator?: {
     id: string;
     fullName: string;
@@ -85,10 +85,11 @@ export function ProjectGridItemInner({
 }: Omit<ProjectGridItemProps, "updateProjectStatus">) {
   const t = useTranslations("projects.ProjectGridItem");
 
+  // use useFormatter to format the date according to the user's locale
   const format = useFormatter();
 
   const deadlineOn = t("deadlineOn", {
-    date: format.dateTime(deadline, {
+    date: format.dateTime(new Date(deadline), {
       day: "2-digit",
       month: "short",
       year: "numeric",

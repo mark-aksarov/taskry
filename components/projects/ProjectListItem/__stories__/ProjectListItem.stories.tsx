@@ -20,7 +20,7 @@ import { withDeleteCommentModalProvider } from "@/components/comments/DeleteComm
 export const mockedProject = {
   id: 1,
   title: "Project 1",
-  deadline: new Date("2025-01-01"),
+  deadline: "2025-01-01",
   creator: {
     id: "user1",
     fullName: "User 1",

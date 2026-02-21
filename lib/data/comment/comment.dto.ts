@@ -1,7 +1,7 @@
 export interface CommentListItemDTO {
   id: number;
   content: string;
-  createdAt: Date;
+  createdAt: string;
 
   canEdit: boolean;
 

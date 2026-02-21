@@ -16,7 +16,7 @@ interface ProjectDetailAltProps {
     fullName: string;
     imageUrl?: string;
   };
-  deadline?: Date;
+  deadline?: string;
   description?: string;
   customer?: {
     id: number;

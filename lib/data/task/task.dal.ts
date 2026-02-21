@@ -89,7 +89,7 @@ export const getTaskDetail = cache(
       id: task.id,
       title: task.title,
       description: task.description ?? undefined,
-      deadline: task.deadline,
+      deadline: task.deadline.toISOString(),
       creator: task.creator
         ? {
             id: task.creator.id,
@@ -148,7 +148,7 @@ export const getTaskFormData = cache(
       id: task.id,
       title: task.title,
       description: task.description ?? undefined,
-      deadline: task.deadline,
+      deadline: task.deadline.toISOString(),
       status: task.status,
       categoryId: task.categoryId ?? undefined,
       projectId: task.projectId ?? undefined,
@@ -273,7 +273,7 @@ export const getTaskList = cache(
         id: task.id,
         title: task.title,
         status: task.status,
-        deadline: task.deadline ?? undefined,
+        deadline: task.deadline.toISOString() ?? undefined,
         assignee: task.assignee
           ? {
               id: task.assignee.id,
@@ -336,7 +336,7 @@ export const searchTasks = cache(
       items: items.map((t) => ({
         id: t.id,
         title: t.title,
-        deadline: t.deadline,
+        deadline: t.deadline.toISOString(),
       })),
 
       totalCount,
@@ -395,7 +395,7 @@ export const createTask = async (input: CreateTaskInputDTO) => {
     data: {
       title: input.title,
       description: input.description,
-      deadline: input.deadline,
+      deadline: new Date(input.deadline),
       status: input.status,
       projectId: input.projectId,
       categoryId: input.categoryId,
@@ -452,7 +452,7 @@ export const updateTask = async (input: UpdateTaskInputDTO) => {
     data: {
       title: input.title,
       description: input.description,
-      deadline: input.deadline,
+      deadline: new Date(input.deadline),
       status: input.status,
       projectId: input.projectId,
       categoryId: input.categoryId,
@@ -608,8 +608,8 @@ export function buildTaskWhereClause(
     ...(filters.project?.length && { projectId: { in: filters.project } }),
     ...(filters.assignee?.length && { assigneeId: { in: filters.assignee } }),
     deadline: {
-      ...(filters.deadlineFrom && { gte: filters.deadlineFrom }),
-      ...(filters.deadlineTo && { lte: filters.deadlineTo }),
+      ...(filters.deadlineFrom && { gte: new Date(filters.deadlineFrom) }),
+      ...(filters.deadlineTo && { lte: new Date(filters.deadlineTo) }),
     },
   };
 }

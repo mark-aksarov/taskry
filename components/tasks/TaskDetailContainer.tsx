@@ -2,8 +2,8 @@
 
 import useSWR from "swr";
 import { Suspense } from "react";
-import { SubtaskList } from "../subtasks/SubtaskList";
 import { TaskDetail } from "./TaskDetail/TaskDetail";
+import { SubtaskList } from "../subtasks/SubtaskList";
 import { TaskDetailDTO } from "@/lib/data/task/task.dto";
 import { NewSubtaskForm } from "../subtasks/NewSubtaskForm";
 import { SubtaskListItem } from "../subtasks/SubtaskListItem";

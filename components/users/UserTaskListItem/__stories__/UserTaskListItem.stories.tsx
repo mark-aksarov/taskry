@@ -32,7 +32,7 @@ export const Default = {
   args: {
     id: 1,
     title: "Task 1",
-    deadline: new Date("2025-09-30"),
+    deadline: "2025-09-30",
     status: TaskStatus.pending,
     commentsCount: 10,
     taskDetailModal: <TaskDetailModal {...TaskDetailModalStory.args} />,

@@ -5,13 +5,13 @@ import { CommentItemText } from "./CommentItemText";
 import { CommentItemInfo } from "./CommentItemInfo";
 import { CommentItemTitle } from "./CommentItemTitle";
 import { CommentItemLayout } from "./CommentItemLayout";
-import { useFormatter, useTranslations } from "next-intl";
+import { useFormatter, useLocale, useTranslations } from "next-intl";
 import { UnknownUser } from "@/components/common/UnknownUser";
 import { ImageContainer } from "@/components/common/ImageContainer";
 
 interface CommentItemProps {
   content: string;
-  createdAt: Date;
+  createdAt: string;
   sender?: {
     id: string;
     fullName: string;
@@ -27,7 +27,9 @@ export function CommentItem({
   menuTrigger,
 }: CommentItemProps) {
   const t = useTranslations("comments.CommentItem");
+  const locale = useLocale();
 
+  // use useFormatter to format the date according to the user's locale
   const format = useFormatter();
 
   const formattedDate = format.dateTime(new Date(createdAt), {
@@ -36,7 +38,7 @@ export function CommentItem({
     year: "numeric",
     hour: "numeric",
     minute: "2-digit",
-    hour12: true,
+    hour12: locale === "en" ? true : false,
   });
 
   return (

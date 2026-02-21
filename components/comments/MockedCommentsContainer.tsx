@@ -71,7 +71,7 @@ export function MockedCommentsContainer() {
         <CommentItem
           key={comment.id}
           content={comment.content}
-          createdAt={new Date(comment.createdAt)}
+          createdAt={comment.createdAt}
           sender={comment.sender}
           menuTrigger={
             <CommentItemActionMenuTrigger

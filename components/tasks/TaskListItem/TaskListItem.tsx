@@ -19,13 +19,13 @@ import {
 
 import Image from "next/image";
 import { Link } from "@/components/ui/Link";
-import { SelectableItem } from "../../common/SelectableItem";
 import { TaskStatus } from "@/generated/prisma/enums";
 import { TaskItemCheckbox } from "../TaskItemCheckbox";
 import { TaskItemBaseBadge } from "../TaskItemBaseBadge";
 import { TaskListItemLayout } from "./TaskListItemLayout";
 import { useFormatter, useTranslations } from "next-intl";
 import { useSelectedTasks } from "../SelectedTasksContext";
+import { SelectableItem } from "../../common/SelectableItem";
 import { UnknownUser } from "@/components/common/UnknownUser";
 import { ImageContainer } from "@/components/common/ImageContainer";
 import { UpdateTaskStatusProvider } from "../UpdateTaskStatusContext";
@@ -33,7 +33,7 @@ import { UpdateTaskStatusProvider } from "../UpdateTaskStatusContext";
 export interface TaskListItemProps {
   id: number;
   title: string;
-  deadline: Date;
+  deadline: string;
   assignee?: {
     id: string;
     imageUrl?: string;
@@ -94,10 +94,11 @@ export const TaskListItemInner = ({
 }: Omit<TaskListItemProps, "updateTaskStatus">) => {
   const t = useTranslations("tasks.TaskListItem");
 
+  // use useFormatter to format the date according to the user's locale
   const format = useFormatter();
 
   const deadlineOn = t("deadlineOn", {
-    date: format.dateTime(deadline, {
+    date: format.dateTime(new Date(deadline), {
       day: "2-digit",
       month: "short",
       year: "numeric",
