@@ -4,7 +4,7 @@ import { Children } from "react";
 import { Repeat } from "@/components/common/Repeat";
 import { UserTaskListLayout } from "./UserTaskListLayout";
 import { UserTaskListItemSkeleton } from "../UserTaskListItem";
-import { useEntityPagination } from "@/components/common/EntityContainerPagination";
+import { usePageTransition } from "@/components/common/PageTransitionContext";
 
 export function UserTaskList({
   className,
@@ -13,9 +13,9 @@ export function UserTaskList({
   className?: string;
   children: React.ReactNode;
 }) {
-  const { isPending } = useEntityPagination();
+  const { isSortingPending, isPaginationPending } = usePageTransition();
 
-  if (isPending) {
+  if (isPaginationPending || isSortingPending) {
     return (
       <UserTaskListLayout className={className}>
         <Repeat

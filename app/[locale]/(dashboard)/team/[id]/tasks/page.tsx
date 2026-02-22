@@ -19,6 +19,7 @@ import { UserNavigationMobile } from "@/components/users/UserNavigationMobile";
 import { SelectedTasksProvider } from "@/components/tasks/SelectedTasksContext";
 import { UserNavigationDesktop } from "@/components/users/UserNavigationDesktop";
 import { EditUserFormContainer } from "@/components/users/EditUserFormContainer";
+import { PageTransitionProvider } from "@/components/common/PageTransitionContext";
 import { UpdateTaskStatusesProvider } from "@/components/tasks/UpdateTaskStatusContext";
 import { TaskToolbarActionsMenuTrigger } from "@/components/tasks/TaskToolbarActionsMenuTrigger";
 
@@ -90,29 +91,31 @@ export default async function AppProfileTasksPage({
       <SelectedTasksProvider
         pageItems={tasks.map((task) => ({ id: task.id, status: task.status }))}
       >
-        <UserTasksPageLayout
-          selectedSortField={sort}
-          backButton
-          userTasksContainer={
-            <UserTasksContainer
-              tasks={tasks}
-              totalCount={totalCount}
-              page={page}
-              pageSize={pageSize}
-            />
-          }
-          userHeaderContainer={<UserHeaderContainer userId={userId} />}
-          taskToolbarActionsMenuTrigger={
-            <TaskToolbarActionsMenuTrigger
-              guestMode={guestMode}
-              deleteTasks={deleteTasks}
-            />
-          }
-          navigationDesktop={
-            <UserNavigationDesktop userActions={userActions} />
-          }
-          navigationMobile={<UserNavigationMobile />}
-        />
+        <PageTransitionProvider>
+          <UserTasksPageLayout
+            selectedSortField={sort}
+            backButton
+            userTasksContainer={
+              <UserTasksContainer
+                tasks={tasks}
+                totalCount={totalCount}
+                page={page}
+                pageSize={pageSize}
+              />
+            }
+            userHeaderContainer={<UserHeaderContainer userId={userId} />}
+            taskToolbarActionsMenuTrigger={
+              <TaskToolbarActionsMenuTrigger
+                guestMode={guestMode}
+                deleteTasks={deleteTasks}
+              />
+            }
+            navigationDesktop={
+              <UserNavigationDesktop userActions={userActions} />
+            }
+            navigationMobile={<UserNavigationMobile />}
+          />
+        </PageTransitionProvider>
       </SelectedTasksProvider>
     </UpdateTaskStatusesProvider>
   );

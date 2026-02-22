@@ -15,7 +15,19 @@ interface EntityContainerPaginationProps {
   className?: string;
 }
 
-export function EntityContainerPagination({
+export function EntityContainerPagination(
+  props: EntityContainerPaginationProps,
+) {
+  const { isFilteringPending, isSortingPending } = usePageTransition();
+
+  if (isFilteringPending || isSortingPending) {
+    return null;
+  }
+
+  return <EntityContainerPaginationInner {...props} />;
+}
+
+export function EntityContainerPaginationInner({
   page,
   pageSize,
   totalPages,
