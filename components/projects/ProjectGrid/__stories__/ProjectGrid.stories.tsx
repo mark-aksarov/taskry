@@ -7,14 +7,14 @@ import { ProjectGridItemStory } from "../../ProjectGridItem/__stories__";
 import { withDeleteProjectModalProvider } from "../../DeleteProjectModal/__stories__";
 import { withSelectedProjectsProvider } from "../../SelectedProjectsContext/__stories__";
 import { withUpdateProjectStatusesProvider } from "../../UpdateProjectStatusContext/__stories__";
-import { withEntityPaginationProvider } from "@/components/common/EntityContainerPagination/__stories__";
+import { withPageTransitionProvider } from "@/components/common/PageTransitionContext/__stories__";
 import { withDeleteCommentModalProvider } from "@/components/comments/DeleteCommentModal/__stories__";
 
 const meta = {
   title: "components/projects/ProjectGrid",
   component: ProjectGrid,
   decorators: [
-    withEntityPaginationProvider,
+    withPageTransitionProvider,
     withSelectedProjectsProvider,
     withDeleteCommentModalProvider,
     withUpdateProjectStatusesProvider,

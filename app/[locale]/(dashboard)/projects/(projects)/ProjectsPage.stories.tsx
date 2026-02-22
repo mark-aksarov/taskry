@@ -3,21 +3,21 @@ import ProjectsPageLoading from "./loading";
 import { ProjectsPage } from "./ProjectsPage";
 import ProjectsTemplate from "./ProjectsTemplate";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { ProjectsPageEmpty } from "./ProjectsPageEmpty";
 import { usePathname, useRouter } from "next/navigation";
 import { PageDecorator } from "@/.storybook/PageDecorator";
 import { ProjectList } from "@/components/projects/ProjectList";
 import { ProjectGrid } from "@/components/projects/ProjectGrid";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { ProjectsPageEmptyContainer } from "./ProjectsPageEmptyContainer";
 import { AppHeaderStory } from "@/components/layout/AppHeader/__stories__";
 import { ProjectFiltersForm } from "@/components/projects/ProjectFiltersForm";
 import { ProjectGridStory } from "@/components/projects/ProjectGrid/__stories__";
 import { ProjectListStory } from "@/components/projects/ProjectList/__stories__";
 import { EntityContainerPresentation } from "@/components/common/EntityContainerPresentation";
 import { ProjectFiltersFormStory } from "@/components/projects/ProjectFiltersForm/__stories__";
+import { withPageTransitionProvider } from "@/components/common/PageTransitionContext/__stories__";
 import { withDeleteCommentModalProvider } from "@/components/comments/DeleteCommentModal/__stories__";
 import { withDeleteProjectModalProvider } from "@/components/projects/DeleteProjectModal/__stories__";
-import { withEntityPaginationProvider } from "@/components/common/EntityContainerPagination/__stories__";
 import { withSelectedProjectsProvider } from "@/components/projects/SelectedProjectsContext/__stories__";
 import { ProjectToolbarActionsMenuTrigger } from "@/components/projects/ProjectToolbarActionsMenuTrigger";
 import { ProjectToolbarFiltersModalTrigger } from "@/components/projects/ProjectToolbarFiltersModalTrigger";
@@ -37,7 +37,7 @@ const meta = {
       </ProjectsTemplate>
     ),
     withDeleteProjectModalProvider,
-    withEntityPaginationProvider,
+    withPageTransitionProvider,
     withSelectedProjectsProvider,
     withDeleteCommentModalProvider,
     withUpdateProjectStatusesProvider,
@@ -61,6 +61,7 @@ const projectToolbarCreateNewMenuTrigger = (
 
 export const Default = {
   args: {
+    totalFilteredProjects: 10,
     selectedSortField: "createdAt",
     projectsContainer: (
       <EntityContainerPresentation
@@ -95,8 +96,12 @@ export const Loading = {
 export const WithNoProjects = {
   args: { ...Default.args },
   render: () => (
-    <ProjectsPageEmpty
+    <ProjectsPageEmptyContainer
       projectToolbarCreateNewMenuTrigger={projectToolbarCreateNewMenuTrigger}
     />
   ),
+} satisfies Story;
+
+export const WithEmptyFilterResult = {
+  args: { ...Default.args, totalFilteredProjects: 0 },
 } satisfies Story;

@@ -4,7 +4,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { UserListItemStory } from "../../UserListItem/__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withDeleteUserModalProvider } from "../../DeleteUserModal/__stories__";
-import { withEntityPaginationProvider } from "@/components/common/EntityContainerPagination/__stories__";
+import { withPageTransitionProvider } from "@/components/common/PageTransitionContext/__stories__";
 
 export const mockedUsers = [
   {
@@ -103,7 +103,7 @@ const meta = {
   title: "components/users/UserList",
   component: UserList,
   decorators: [
-    withEntityPaginationProvider,
+    withPageTransitionProvider,
     withDeleteUserModalProvider,
     withThemedBackground,
   ],

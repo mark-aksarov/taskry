@@ -17,9 +17,9 @@ import { UserFiltersFormStory } from "@/components/users/UserFiltersForm/__stori
 import { withDeleteUserModalProvider } from "@/components/users/DeleteUserModal/__stories__";
 import { EntityContainerPresentation } from "@/components/common/EntityContainerPresentation";
 import { withSelectedTasksProvider } from "@/components/tasks/SelectedTasksContext/__stories__";
+import { withPageTransitionProvider } from "@/components/common/PageTransitionContext/__stories__";
 import { UserToolbarFiltersModalTrigger } from "@/components/users/UserToolbarFiltersModalTrigger";
 import { UserToolbarCreateNewMenuTrigger } from "@/components/users/UserToolbarCreateNewMenuTrigger";
-import { withEntityPaginationProvider } from "@/components/common/EntityContainerPagination/__stories__";
 import { UserToolbarCreateNewMenuTriggerStory } from "@/components/users/UserToolbarCreateNewMenuTrigger/__stories__";
 
 const meta = {
@@ -33,7 +33,7 @@ const meta = {
       </UsersTemplate>
     ),
     withDeleteUserModalProvider,
-    withEntityPaginationProvider,
+    withPageTransitionProvider,
     withSelectedTasksProvider,
     PageDecorator,
     withThemedBackground,

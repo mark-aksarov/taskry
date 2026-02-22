@@ -25,6 +25,9 @@
   "FiltersFormSubmitButton": {
     "label": "Apply Filters"
   },
+  "FiltersResetButton": {
+    "label": "Reset filters"
+  },
   "ToolbarActionsButtonDesktop": {
     "label": "Actions"
   },

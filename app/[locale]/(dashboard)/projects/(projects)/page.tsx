@@ -6,19 +6,24 @@ import {
   pageSizeSearchParam,
 } from "@/lib/schemas/base";
 
+import {
+  getProjectCount,
+  getProjectList,
+} from "@/lib/data/project/project.dal";
+
 import { z } from "zod";
 import { userId } from "@/lib/schemas/user";
 import { ProjectsPage } from "./ProjectsPage";
 import { projectSortFields } from "@/lib/types";
 import { customerId } from "@/lib/schemas/customer";
 import { projectStatus } from "@/lib/schemas/project";
-import { ProjectsPageEmpty } from "./ProjectsPageEmpty";
 import { hasGuestRole } from "@/lib/utils/hasGuestRole";
-import { getProjectList } from "@/lib/data/project/project.dal";
 import { projectCategoryId } from "@/lib/schemas/projectCategory";
 import { deleteProjects } from "@/lib/actions/project/deleteProjects";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
+import { ProjectsPageEmptyContainer } from "./ProjectsPageEmptyContainer";
 import { ProjectsContainer } from "@/components/projects/ProjectsContainer";
+import { PageTransitionProvider } from "@/components/common/PageTransitionContext";
 import { updateProjectStatuses } from "@/lib/actions/project/updateProjectStatuses";
 import { NewProjectFormContainer } from "@/components/projects/NewProjectFormContainer";
 import { SelectedProjectsProvider } from "@/components/projects/SelectedProjectsContext";
@@ -68,13 +73,8 @@ export default async function AppProjectsPage({
   const validated = searchParamsSchema.parse(rawParams);
   const { page, pageSize, sort, ...filters } = validated;
 
-  // Get count
-  const { items: projects, totalCount } = await getProjectList({
-    page,
-    pageSize,
-    sort,
-    filters,
-  });
+  // Get total count of projects in the current workspace
+  const totalCount = await getProjectCount();
 
   const guestMode = await hasGuestRole();
 
@@ -90,44 +90,56 @@ export default async function AppProjectsPage({
 
   if (!totalCount) {
     return (
-      <ProjectsPageEmpty
+      <ProjectsPageEmptyContainer
         projectToolbarCreateNewMenuTrigger={projectToolbarCreateNewMenuTrigger}
       />
     );
   }
+
+  // Get projects for the current page based on filters and sorting
+  const { items: projects, totalCount: totalFilteredProjects } =
+    await getProjectList({
+      page,
+      pageSize,
+      sort,
+      filters,
+    });
 
   return (
     <UpdateProjectStatusesProvider updateStatus={updateProjectStatuses}>
       <SelectedProjectsProvider
         pageItems={projects.map((p) => ({ id: p.id, status: p.status }))}
       >
-        <ProjectsPage
-          selectedSortField={sort}
-          projectsContainer={
-            <ProjectsContainer
-              projects={projects}
-              totalCount={totalCount}
-              page={page}
-              pageSize={pageSize}
-            />
-          }
-          projectToolbarCreateNewMenuTrigger={
-            projectToolbarCreateNewMenuTrigger
-          }
-          projectToolbarFiltersModalTrigger={
-            <ProjectToolbarFiltersModalTrigger
-              filtersFormContainer={
-                <ProjectFiltersFormContainer filters={filters} />
-              }
-            />
-          }
-          projectToolbarActionsMenuTrigger={
-            <ProjectToolbarActionsMenuTrigger
-              guestMode={guestMode}
-              deleteProjects={deleteProjects}
-            />
-          }
-        />
+        <PageTransitionProvider>
+          <ProjectsPage
+            totalFilteredProjects={totalFilteredProjects}
+            selectedSortField={sort}
+            projectsContainer={
+              <ProjectsContainer
+                projects={projects}
+                totalCount={totalFilteredProjects}
+                page={page}
+                pageSize={pageSize}
+              />
+            }
+            projectToolbarCreateNewMenuTrigger={
+              projectToolbarCreateNewMenuTrigger
+            }
+            projectToolbarFiltersModalTrigger={
+              <ProjectToolbarFiltersModalTrigger
+                filtersFormContainer={
+                  <ProjectFiltersFormContainer filters={filters} />
+                }
+              />
+            }
+            projectToolbarActionsMenuTrigger={
+              <ProjectToolbarActionsMenuTrigger
+                guestMode={guestMode}
+                deleteProjects={deleteProjects}
+              />
+            }
+          />
+        </PageTransitionProvider>
       </SelectedProjectsProvider>
     </UpdateProjectStatusesProvider>
   );

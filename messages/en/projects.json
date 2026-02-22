@@ -1,4 +1,8 @@
 {
+  "ProjectsFilteredEmptySection": {
+    "heading": "No projects found",
+    "description": "No projects match the selected filters. Try changing or resetting the filters."
+  },
   "EditProjectForm": {
     "submitButtonLabel": "Update Project"
   },

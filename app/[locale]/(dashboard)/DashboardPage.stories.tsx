@@ -37,10 +37,10 @@ import { getTaskListItems } from "@/components/tasks/TaskList/__stories__";
 import { NewTaskFormStory } from "@/components/tasks/NewTaskForm/__stories__";
 import { withDeleteTaskModalProvider } from "@/components/tasks/DeleteTaskModal/__stories__";
 import { withSelectedTasksProvider } from "@/components/tasks/SelectedTasksContext/__stories__";
+import { withPageTransitionProvider } from "@/components/common/PageTransitionContext/__stories__";
 import { withDeleteSubtaskModalProvider } from "@/components/subtasks/DeleteSubtaskModal/__stories__";
 import { withDeleteCommentModalProvider } from "@/components/comments/DeleteCommentModal/__stories__";
 import { withUpdateTaskStatusesProvider } from "@/components/tasks/UpdateTaskStatusContext/__stories__";
-import { withEntityPaginationProvider } from "@/components/common/EntityContainerPagination/__stories__";
 
 const meta = {
   title: "pages/DashboardPage",
@@ -48,7 +48,7 @@ const meta = {
   parameters: { layout: "fullscreen" },
   decorators: [
     withDeleteTaskModalProvider,
-    withEntityPaginationProvider,
+    withPageTransitionProvider,
     withSelectedTasksProvider,
     withDeleteSubtaskModalProvider,
     withDeleteCommentModalProvider,

@@ -14,8 +14,8 @@ import { CustomerGridStory } from "@/components/customer/CustomerGrid/__stories_
 import { CustomerListStory } from "@/components/customer/CustomerList/__stories__";
 import { EntityContainerPresentation } from "@/components/common/EntityContainerPresentation";
 import { withSelectedItemsProvider } from "@/components/common/SelectedItemsContext/__stories__";
+import { withPageTransitionProvider } from "@/components/common/PageTransitionContext/__stories__";
 import { withDeleteCustomerModalProvider } from "@/components/customer/DeleteCustomerModal/__stories__";
-import { withEntityPaginationProvider } from "@/components/common/EntityContainerPagination/__stories__";
 import { CustomerToolbarActionsMenuTrigger } from "@/components/customer/CustomerToolbarActionsMenuTrigger";
 import { CustomerToolbarFiltersModalTrigger } from "@/components/customer/CustomerToolbarFiltersModalTrigger";
 import { CustomerToolbarCreateNewMenuTrigger } from "@/components/customer/CustomerToolbarCreateNewMenuTrigger";
@@ -34,7 +34,7 @@ const meta = {
       </CustomersTemplate>
     ),
     withDeleteCustomerModalProvider,
-    withEntityPaginationProvider,
+    withPageTransitionProvider,
     withSelectedItemsProvider,
     PageDecorator,
     withThemedBackground,

@@ -71,10 +71,9 @@
   "ProjectsPageLoading": {
     "title": "All Projects"
   },
-  "ProjectsPageEmpty": {
+  "ProjectsPageEmptyContainer": {
     "heading": "No projects yet",
-    "description": "Create a new project to keep track of your work",
-    "addButtonLabel": "New Project"
+    "description": "Create a new project to keep track of your work"
   },
   "ProjectDetailPage": {
     "heading": "Project Details"

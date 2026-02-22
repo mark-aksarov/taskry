@@ -5,7 +5,7 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { CustomerListItemStory } from "../../CustomerListItem/__stories__";
 import { withDeleteCustomerModalProvider } from "../../DeleteCustomerModal/__stories__";
 import { withSelectedItemsProvider } from "@/components/common/SelectedItemsContext/__stories__";
-import { withEntityPaginationProvider } from "@/components/common/EntityContainerPagination/__stories__";
+import { withPageTransitionProvider } from "@/components/common/PageTransitionContext/__stories__";
 
 export const mockedCustomers = [
   {
@@ -59,7 +59,7 @@ const meta = {
   title: "components/customers/CustomerList",
   component: CustomerList,
   decorators: [
-    withEntityPaginationProvider,
+    withPageTransitionProvider,
     withSelectedItemsProvider,
     withDeleteCustomerModalProvider,
     withThemedBackground,

@@ -22,11 +22,11 @@ import { PersonDetailHeaderStory } from "@/components/common/DetailHeader/__stor
 import { withDeleteTaskModalProvider } from "@/components/tasks/DeleteTaskModal/__stories__";
 import { withSelectedTasksProvider } from "@/components/tasks/SelectedTasksContext/__stories__";
 import { TaskToolbarActionsMenuTrigger } from "@/components/tasks/TaskToolbarActionsMenuTrigger";
+import { withPageTransitionProvider } from "@/components/common/PageTransitionContext/__stories__";
 import { withDeleteSubtaskModalProvider } from "@/components/subtasks/DeleteSubtaskModal/__stories__";
 import { withDeleteCommentModalProvider } from "@/components/comments/DeleteCommentModal/__stories__";
 import { ProfileNavigationDesktopStory } from "@/components/users/ProfileNavigationDesktop/__stories__";
 import { withUpdateTaskStatusesProvider } from "@/components/tasks/UpdateTaskStatusContext/__stories__";
-import { withEntityPaginationProvider } from "@/components/common/EntityContainerPagination/__stories__";
 import { TaskToolbarActionsMenuTriggerStory } from "@/components/tasks/TaskToolbarActionsMenuTrigger/__stories__";
 
 const meta = {
@@ -40,7 +40,7 @@ const meta = {
       </ProfileTemplate>
     ),
     withDeleteTaskModalProvider,
-    withEntityPaginationProvider,
+    withPageTransitionProvider,
     withDeleteSubtaskModalProvider,
     withDeleteCommentModalProvider,
     withUpdateTaskStatusesProvider,

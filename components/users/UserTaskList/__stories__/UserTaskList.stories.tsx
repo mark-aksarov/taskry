@@ -6,7 +6,7 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { UserTaskListItemStory } from "../../UserTaskListItem/__stories__";
 import { withDeleteTaskModalProvider } from "@/components/tasks/DeleteTaskModal/__stories__";
 import { withSelectedTasksProvider } from "@/components/tasks/SelectedTasksContext/__stories__";
-import { withEntityPaginationProvider } from "@/components/common/EntityContainerPagination/__stories__";
+import { withPageTransitionProvider } from "@/components/common/PageTransitionContext/__stories__";
 import { withUpdateTaskStatusesProvider } from "@/components/tasks/UpdateTaskStatusContext/__stories__";
 import { withDeleteCommentModalProvider } from "@/components/comments/DeleteCommentModal/__stories__";
 
@@ -14,7 +14,7 @@ const meta = {
   title: "components/users/UserTaskList",
   component: UserTaskList,
   decorators: [
-    withEntityPaginationProvider,
+    withPageTransitionProvider,
     withSelectedTasksProvider,
     withUpdateTaskStatusesProvider,
     withDeleteCommentModalProvider,

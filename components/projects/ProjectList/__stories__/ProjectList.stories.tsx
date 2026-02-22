@@ -8,7 +8,7 @@ import { withDeleteProjectModalProvider } from "../../DeleteProjectModal/__stori
 import { withSelectedProjectsProvider } from "../../SelectedProjectsContext/__stories__";
 import { withUpdateProjectStatusesProvider } from "../../UpdateProjectStatusContext/__stories__";
 import { withDeleteCommentModalProvider } from "@/components/comments/DeleteCommentModal/__stories__";
-import { withEntityPaginationProvider } from "@/components/common/EntityContainerPagination/__stories__";
+import { withPageTransitionProvider } from "@/components/common/PageTransitionContext/__stories__";
 
 export const mockedProjects = [
   {
@@ -82,7 +82,7 @@ const meta = {
   title: "components/projects/ProjectList",
   component: ProjectList,
   decorators: [
-    withEntityPaginationProvider,
+    withPageTransitionProvider,
     withSelectedProjectsProvider,
     withDeleteCommentModalProvider,
     withUpdateProjectStatusesProvider,
@@ -97,6 +97,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
+    showCheckbox: true,
     children: mockedProjects.map((project) => (
       <ProjectListItem
         key={project.id}

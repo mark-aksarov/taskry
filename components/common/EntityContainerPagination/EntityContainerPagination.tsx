@@ -5,7 +5,7 @@ import { useLocale } from "next-intl";
 import { twMerge } from "tailwind-merge";
 import { useSearchParams } from "next/navigation";
 import { usePathname, useRouter } from "@/i18n/navigation";
-import { useEntityPagination } from "./EntityPaginationContext";
+import { usePageTransition } from "../PageTransitionContext";
 import { Pagination, PaginationProps } from "@/components/common/Pagination";
 
 interface EntityContainerPaginationProps {
@@ -26,14 +26,14 @@ export function EntityContainerPagination({
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
-  const { startTransition } = useEntityPagination();
+  const { startPaginationTransition } = usePageTransition();
   const [optimisticPage, setOptimisticPage] = useOptimistic(
     page,
     (_, newPage: number) => newPage,
   );
 
   function handleChange(targetPage: number) {
-    startTransition(() => {
+    startPaginationTransition(() => {
       setOptimisticPage(targetPage);
 
       const params = new URLSearchParams(searchParams.toString());

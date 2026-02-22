@@ -4,7 +4,7 @@ import { Children } from "react";
 import { List } from "@/components/common/List";
 import { Repeat } from "@/components/common/Repeat";
 import { ProjectListItemSkeleton } from "../ProjectListItem";
-import { useEntityPagination } from "@/components/common/EntityContainerPagination";
+import { usePageTransition } from "@/components/common/PageTransitionContext";
 
 interface ProjectListProps {
   showCheckbox?: boolean;
@@ -12,9 +12,10 @@ interface ProjectListProps {
 }
 
 export function ProjectList({ showCheckbox, children }: ProjectListProps) {
-  const { isPending } = useEntityPagination();
+  const { isFilteringPending, isSortingPending, isPaginationPending } =
+    usePageTransition();
 
-  if (isPending) {
+  if (isPaginationPending || isFilteringPending || isSortingPending) {
     return (
       <List data-test="projects-list">
         <Repeat

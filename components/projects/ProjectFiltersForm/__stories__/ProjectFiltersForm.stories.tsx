@@ -1,8 +1,11 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { ProjectFiltersForm } from "../ProjectFiltersForm";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { withSelectedProjectsProvider } from "../../SelectedProjectsContext/__stories__";
+import { withOverlayTriggerStateProvider } from "@/.storybook/withOverlayTriggerStateProvider";
 import { ProjectFiltersFormUserCheckboxGroup } from "../../ProjectFiltersFormUserCheckboxGroup";
 import { ProjectFiltersFormStatusCheckboxGroup } from "../ProjectFiltersFormStatusCheckboxGroup";
+import { withPageTransitionProvider } from "@/components/common/PageTransitionContext/__stories__";
 import { ProjectFiltersFormCustomerCheckboxGroup } from "../../ProjectFiltersFormCustomerCheckboxGroup";
 import { ProjectFiltersFormCategoryCheckboxGroup } from "../../ProjectFiltersFormCategoryCheckboxGroup";
 import { ProjectFiltersFormUserCheckboxGroupStory } from "../../ProjectFiltersFormUserCheckboxGroup/__stories__";
@@ -12,7 +15,12 @@ import { ProjectFiltersFormCustomerCheckboxGroupStory } from "../../ProjectFilte
 const meta: Meta<typeof ProjectFiltersForm> = {
   title: "components/projects/ProjectFiltersForm",
   component: ProjectFiltersForm,
-  decorators: [withThemedBackground],
+  decorators: [
+    withPageTransitionProvider,
+    withOverlayTriggerStateProvider,
+    withSelectedProjectsProvider,
+    withThemedBackground,
+  ],
   parameters: {
     backgroundVariant: "alt",
   },

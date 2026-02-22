@@ -26,11 +26,13 @@ export function useSelectedItemsState<T extends SelectedItem = SelectedItem>(
     [items],
   );
 
+  const clear = useCallback(() => setItems([]), []);
+
   useEffect(() => {
     setItems((prev) =>
       pageItems.filter((p) => prev.some((i) => i.id === p.id)),
     );
   }, [pageItems]);
 
-  return { items, ids, add, remove, get };
+  return { items, ids, add, remove, get, clear };
 }

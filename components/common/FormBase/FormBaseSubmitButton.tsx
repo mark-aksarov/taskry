@@ -6,7 +6,7 @@ export function FormBaseSubmitButton(props: ButtonProps) {
       type="submit"
       variant="primary"
       size="medium"
-      className="w-full justify-center"
+      className="w-full justify-center px-0"
       {...props}
     />
   );

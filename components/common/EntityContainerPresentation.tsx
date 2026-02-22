@@ -1,8 +1,8 @@
-import {
-  EntityPaginationProvider,
-  EntityContainerPagination,
-} from "../common/EntityContainerPagination";
+"use client";
+
+import { usePageTransition } from "./PageTransitionContext";
 import { ViewModeLayout } from "@/components/common/ViewMode";
+import { EntityContainerPagination } from "../common/EntityContainerPagination";
 
 interface EntityContainerPresentationProps {
   page: number;
@@ -19,15 +19,19 @@ export function EntityContainerPresentation({
   grid,
   totalPages,
 }: EntityContainerPresentationProps) {
+  const { isFilteringPending, isSortingPending } = usePageTransition();
+
   return (
-    <EntityPaginationProvider>
+    <>
       <ViewModeLayout list={list} grid={grid} />
 
-      <EntityContainerPagination
-        page={page}
-        totalPages={totalPages}
-        pageSize={pageSize}
-      />
-    </EntityPaginationProvider>
+      {isFilteringPending || isSortingPending ? null : (
+        <EntityContainerPagination
+          page={page}
+          totalPages={totalPages}
+          pageSize={pageSize}
+        />
+      )}
+    </>
   );
 }

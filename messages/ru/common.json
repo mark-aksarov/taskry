@@ -25,6 +25,9 @@
   "FiltersFormSubmitButton": {
     "label": "Применить фильтры"
   },
+  "FiltersResetButton": {
+    "label": "Сбросить фильтры"
+  },
   "ToolbarActionsButtonDesktop": {
     "label": "Действия"
   },

@@ -11,10 +11,12 @@ import { PageGrid } from "@/components/common/PageGrid";
 import { ViewModeProvider } from "@/components/common/ViewMode";
 import { PageContainer } from "@/components/common/PageContainer";
 import { ViewModeToggleButtonGroup } from "@/components/common/ViewMode";
+import { ProjectsFilteredEmptySection } from "@/components/projects/ProjectsFilteredEmptySection";
 import { ProjectToolbarManageMenuTrigger } from "@/components/projects/ProjectToolbarManageMenuTrigger";
 import { ProjectToolbarSortingMenuTrigger } from "@/components/projects/ProjectToolbarSortingMenuTrigger";
 
 interface ProjectsPageProps {
+  totalFilteredProjects: number;
   projectsContainer: React.ReactNode;
   projectToolbarCreateNewMenuTrigger: React.ReactNode;
   projectToolbarFiltersModalTrigger: React.ReactNode;
@@ -23,6 +25,7 @@ interface ProjectsPageProps {
 }
 
 export function ProjectsPage({
+  totalFilteredProjects,
   projectsContainer,
   projectToolbarCreateNewMenuTrigger,
   projectToolbarFiltersModalTrigger,
@@ -32,8 +35,11 @@ export function ProjectsPage({
   const t = useTranslations("app.ProjectsPage");
 
   return (
-    <PageContainer>
-      <PageGrid>
+    <PageContainer
+      fullscreen={totalFilteredProjects === 0}
+      className="relative"
+    >
+      <PageGrid className="flex-auto">
         <ViewModeProvider>
           <ToolbarDesktop>
             <ProjectToolbarManageMenuTrigger />
@@ -61,7 +67,11 @@ export function ProjectsPage({
             {projectToolbarCreateNewMenuTrigger}
           </ToolbarMobileBottom>
 
-          {projectsContainer}
+          {totalFilteredProjects === 0 ? (
+            <ProjectsFilteredEmptySection />
+          ) : (
+            projectsContainer
+          )}
         </ViewModeProvider>
       </PageGrid>
     </PageContainer>

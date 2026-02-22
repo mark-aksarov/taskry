@@ -1,4 +1,8 @@
 {
+  "ProjectsFilteredEmptySection": {
+    "heading": "Проекты не найдены",
+    "description": "По выбранным фильтрам проекты отсутствуют. Попробуйте изменить или сбросить фильтры"
+  },
   "EditProjectForm": {
     "submitButtonLabel": "Обновить проект"
   },

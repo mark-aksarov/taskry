@@ -1,14 +1,14 @@
 import { useTranslations } from "next-intl";
 import { EmptyPageContainer } from "@/components/common/EmptyPageContainer";
 
-interface ProjectsPageEmptyProps {
+interface ProjectsPageEmptyContainerProps {
   projectToolbarCreateNewMenuTrigger: React.ReactNode;
 }
 
-export function ProjectsPageEmpty({
+export function ProjectsPageEmptyContainer({
   projectToolbarCreateNewMenuTrigger,
-}: ProjectsPageEmptyProps) {
-  const t = useTranslations("app.ProjectsPageEmpty");
+}: ProjectsPageEmptyContainerProps) {
+  const t = useTranslations("app.ProjectsPageEmptyContainer");
 
   return (
     <EmptyPageContainer

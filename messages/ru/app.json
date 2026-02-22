@@ -71,10 +71,9 @@
   "ProjectsPageLoading": {
     "title": "Все проекты"
   },
-  "ProjectsPageEmpty": {
+  "ProjectsPageEmptyContainer": {
     "heading": "Нет проектов",
-    "description": "Создайте новый проект, чтобы следить за работой",
-    "addButtonLabel": "Новый Проект"
+    "description": "Создайте новый проект, чтобы следить за работой"
   },
   "ProjectDetailPage": {
     "heading": "Детали проекта"
