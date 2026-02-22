@@ -12,6 +12,7 @@ import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { deletePositions } from "@/lib/actions/position/deletePositions";
 import { PositionsContainer } from "@/components/position/PositionsContainer";
 import { SelectedItemsProvider } from "@/components/common/SelectedItemsContext";
+import { PageTransitionProvider } from "@/components/common/PageTransitionContext";
 import { PositionToolbarActionsMenuTrigger } from "@/components/position/PositionToolbarActionsMenuTrigger";
 import { PositionToolbarCreateNewModalTrigger } from "@/components/position/PositionToolbarCreateNewModalTrigger";
 
@@ -44,18 +45,20 @@ export default async function AppPositionsPage() {
 
   return (
     <SelectedItemsProvider pageItems={positions.map((p) => ({ id: p.id }))}>
-      <PositionsPage
-        positionsContainer={<PositionsContainer />}
-        positionToolbarCreateNewModalTrigger={
-          positionToolbarCreateNewModalTrigger
-        }
-        positionToolbarActionsMenuTrigger={
-          <PositionToolbarActionsMenuTrigger
-            guestMode={guestMode}
-            deletePositions={deletePositions}
-          />
-        }
-      />
+      <PageTransitionProvider>
+        <PositionsPage
+          positionsContainer={<PositionsContainer />}
+          positionToolbarCreateNewModalTrigger={
+            positionToolbarCreateNewModalTrigger
+          }
+          positionToolbarActionsMenuTrigger={
+            <PositionToolbarActionsMenuTrigger
+              guestMode={guestMode}
+              deletePositions={deletePositions}
+            />
+          }
+        />
+      </PageTransitionProvider>
     </SelectedItemsProvider>
   );
 }

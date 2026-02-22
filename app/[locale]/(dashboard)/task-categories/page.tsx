@@ -9,6 +9,7 @@ import { TaskCategoriesPageEmpty } from "./TaskCategoriesPageEmpty";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { SelectedItemsProvider } from "@/components/common/SelectedItemsContext";
 import { createTaskCategory } from "@/lib/actions/taskCategory/createTaskCategory";
+import { PageTransitionProvider } from "@/components/common/PageTransitionContext";
 import { NewTaskCategoryForm } from "@/components/taskCategory/NewTaskCategoryForm";
 import { deleteTaskCategories } from "@/lib/actions/taskCategory/deleteTaskCategories";
 import { TaskCategoriesContainer } from "@/components/taskCategory/TaskCategoriesContainer";
@@ -48,18 +49,20 @@ export default async function AppTaskCategoriesPage() {
     <SelectedItemsProvider
       pageItems={taskCategories.map((t) => ({ id: t.id }))}
     >
-      <TaskCategoriesPage
-        taskCategoriesContainer={<TaskCategoriesContainer />}
-        taskCategoryToolbarCreateNewModalTrigger={
-          taskCategoryToolbarCreateNewModalTrigger
-        }
-        taskCategoryToolbarActionsMenuTrigger={
-          <TaskCategoryToolbarActionsMenuTrigger
-            guestMode={guestMode}
-            deleteTaskCategories={deleteTaskCategories}
-          />
-        }
-      />
+      <PageTransitionProvider>
+        <TaskCategoriesPage
+          taskCategoriesContainer={<TaskCategoriesContainer />}
+          taskCategoryToolbarCreateNewModalTrigger={
+            taskCategoryToolbarCreateNewModalTrigger
+          }
+          taskCategoryToolbarActionsMenuTrigger={
+            <TaskCategoryToolbarActionsMenuTrigger
+              guestMode={guestMode}
+              deleteTaskCategories={deleteTaskCategories}
+            />
+          }
+        />
+      </PageTransitionProvider>
     </SelectedItemsProvider>
   );
 }

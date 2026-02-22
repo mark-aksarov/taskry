@@ -8,6 +8,7 @@ import { ProjectCategoriesPage } from "./ProjectCategoriesPage";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { ProjectCategoriesPageEmpty } from "./ProjectCategoriesPageEmpty";
 import { SelectedItemsProvider } from "@/components/common/SelectedItemsContext";
+import { PageTransitionProvider } from "@/components/common/PageTransitionContext";
 import { createProjectCategory } from "@/lib/actions/projectCategory/createProjectCategory";
 import { NewProjectCategoryForm } from "@/components/projectCategory/NewProjectCategoryForm";
 import { deleteProjectCategories } from "@/lib/actions/projectCategory/deleteProjectCategories";
@@ -48,18 +49,20 @@ export default async function AppProjectCategoriesPage() {
     <SelectedItemsProvider
       pageItems={projectCategories.map((p) => ({ id: p.id }))}
     >
-      <ProjectCategoriesPage
-        projectCategoriesContainer={<ProjectCategoriesContainer />}
-        projectCategoryToolbarCreateNewModalTrigger={
-          projectCategoryToolbarCreateNewModalTrigger
-        }
-        projectCategoryToolbarActionsMenuTrigger={
-          <ProjectCategoryToolbarActionsMenuTrigger
-            guestMode={guestMode}
-            deleteProjectCategories={deleteProjectCategories}
-          />
-        }
-      />
+      <PageTransitionProvider>
+        <ProjectCategoriesPage
+          projectCategoriesContainer={<ProjectCategoriesContainer />}
+          projectCategoryToolbarCreateNewModalTrigger={
+            projectCategoryToolbarCreateNewModalTrigger
+          }
+          projectCategoryToolbarActionsMenuTrigger={
+            <ProjectCategoryToolbarActionsMenuTrigger
+              guestMode={guestMode}
+              deleteProjectCategories={deleteProjectCategories}
+            />
+          }
+        />
+      </PageTransitionProvider>
     </SelectedItemsProvider>
   );
 }

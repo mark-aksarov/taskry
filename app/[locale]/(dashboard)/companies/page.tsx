@@ -12,6 +12,7 @@ import { deleteCompanies } from "@/lib/actions/company/deleteCompanies";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { CompaniesContainer } from "@/components/company/CompaniesContainer";
 import { SelectedItemsProvider } from "@/components/common/SelectedItemsContext";
+import { PageTransitionProvider } from "@/components/common/PageTransitionContext";
 import { CompanyToolbarActionsMenuTrigger } from "@/components/company/CompanyToolbarActionsMenuTrigger";
 import { CompanyToolbarCreateNewModalTrigger } from "@/components/company/CompanyToolbarCreateNewModalTrigger";
 
@@ -44,18 +45,20 @@ export default async function AppCompaniesPage() {
 
   return (
     <SelectedItemsProvider pageItems={companies.map((c) => ({ id: c.id }))}>
-      <CompaniesPage
-        companiesContainer={<CompaniesContainer />}
-        companyToolbarCreateNewModalTrigger={
-          companyToolbarCreateNewModalTrigger
-        }
-        companyToolbarActionsMenuTrigger={
-          <CompanyToolbarActionsMenuTrigger
-            guestMode={guestMode}
-            deleteCompanies={deleteCompanies}
-          />
-        }
-      />
+      <PageTransitionProvider>
+        <CompaniesPage
+          companiesContainer={<CompaniesContainer />}
+          companyToolbarCreateNewModalTrigger={
+            companyToolbarCreateNewModalTrigger
+          }
+          companyToolbarActionsMenuTrigger={
+            <CompanyToolbarActionsMenuTrigger
+              guestMode={guestMode}
+              deleteCompanies={deleteCompanies}
+            />
+          }
+        />
+      </PageTransitionProvider>
     </SelectedItemsProvider>
   );
 }
