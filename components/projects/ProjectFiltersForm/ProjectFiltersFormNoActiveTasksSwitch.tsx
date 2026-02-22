@@ -1,22 +1,25 @@
-import { ProjectFilters } from "@/lib/types";
+import {
+  useProjectFilters,
+  useProjectFiltersDispatch,
+} from "../ProjectFiltersContext";
+
 import { useTranslations } from "next-intl";
 import { Switch } from "@/components/ui/Switch";
 
-interface ProjectFiltersFormNoActiveTasksSwitchProps {
-  filters?: ProjectFilters;
-}
-
-export function ProjectFiltersFormNoActiveTasksSwitch({
-  filters,
-}: ProjectFiltersFormNoActiveTasksSwitchProps) {
+export function ProjectFiltersFormNoActiveTasksSwitch() {
   const t = useTranslations("projects.ProjectFiltersFormNoActiveTasksSwitch");
+  const filters = useProjectFilters();
+  const dispatch = useProjectFiltersDispatch();
 
   return (
     <Switch
       data-test="no-active-tasks-switch"
       className="justify-between"
       name="noActiveTasks"
-      defaultSelected={filters?.noActiveTasks}
+      isSelected={filters?.noActiveTasks}
+      onChange={(value) =>
+        dispatch({ type: "changeNoActiveTasks", payload: value })
+      }
     >
       {t("text")}
     </Switch>

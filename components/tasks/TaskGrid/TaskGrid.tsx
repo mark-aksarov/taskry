@@ -4,12 +4,13 @@ import { Children } from "react";
 import { Repeat } from "@/components/common/Repeat";
 import { Grid } from "@/components/common/Grid/Grid";
 import { TaskGridItemSkeleton } from "../TaskGridItem";
-import { useEntityPagination } from "@/components/common/EntityContainerPagination";
+import { usePageTransition } from "@/components/common/PageTransitionContext";
 
 export function TaskGrid({ children }: { children: React.ReactNode }) {
-  const { isPending } = useEntityPagination();
+  const { isFilteringPending, isSortingPending, isPaginationPending } =
+    usePageTransition();
 
-  if (isPending) {
+  if (isPaginationPending || isFilteringPending || isSortingPending) {
     return (
       <Grid data-test="tasks-grid">
         <Repeat

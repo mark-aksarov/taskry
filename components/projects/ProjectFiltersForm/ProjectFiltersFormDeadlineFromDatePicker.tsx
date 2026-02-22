@@ -1,28 +1,29 @@
 "use client";
 
+import {
+  useProjectFilters,
+  useProjectFiltersDispatch,
+} from "../ProjectFiltersContext";
+
 import { useTranslations } from "next-intl";
-import { CalendarDate } from "@internationalized/date";
 import { ResponsiveDatePicker } from "@/components/common/ResponsiveDatePicker";
 
-interface ProjectFiltersFormDeadlineFromDatePickerProps {
-  deadlineFrom: CalendarDate | null;
-  setDeadlineFrom: (date: CalendarDate | null) => void;
-}
-
-export function ProjectFiltersFormDeadlineFromDatePicker({
-  deadlineFrom,
-  setDeadlineFrom,
-}: ProjectFiltersFormDeadlineFromDatePickerProps) {
+export function ProjectFiltersFormDeadlineFromDatePicker() {
   const t = useTranslations(
     "projects.ProjectFiltersFormDeadlineFromDatePicker",
   );
+
+  const filters = useProjectFilters();
+  const dispatch = useProjectFiltersDispatch();
 
   return (
     <ResponsiveDatePicker
       data-test="deadline-from-date-picker"
       label={t("label")}
-      value={deadlineFrom}
-      onChange={setDeadlineFrom}
+      value={filters.deadlineFrom}
+      onChange={(date) =>
+        dispatch({ type: "changeDeadlineFrom", payload: date })
+      }
       name="deadlineFrom"
     />
   );

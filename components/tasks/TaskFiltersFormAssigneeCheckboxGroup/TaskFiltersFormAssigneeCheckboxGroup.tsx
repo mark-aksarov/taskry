@@ -1,6 +1,10 @@
 "use client";
 
-import { TaskFilters } from "@/lib/types";
+import {
+  useTaskFilters,
+  useTaskFiltersDispatch,
+} from "@/components/tasks/TaskFiltersContext";
+
 import { useTranslations } from "next-intl";
 import { Checkbox } from "@/components/ui/Checkbox";
 import { CheckboxGroup } from "@/components/ui/CheckboxGroup";
@@ -8,22 +12,24 @@ import { useExpandedItems } from "@/lib/hooks/useExpandedItems";
 import { ExpandCollapseButton } from "@/components/common/ExpandCollapseButton";
 
 export function TaskFiltersFormAssigneeCheckboxGroup({
-  filters,
   users,
 }: {
-  filters?: TaskFilters;
   users: { id: string; fullName: string }[];
 }) {
   const t = useTranslations("tasks.TaskFiltersFormAssigneeCheckboxGroup");
-  const defaultValue = filters?.assignee?.map((id) => id.toString());
   const { isExpanded, setIsExpanded, expandedItems } = useExpandedItems(users);
+  const filters = useTaskFilters();
+  const dispatch = useTaskFiltersDispatch();
 
   return (
     <>
       <CheckboxGroup
         label={t("label")}
         name="assignee"
-        defaultValue={defaultValue}
+        value={filters?.assignee}
+        onChange={(value) =>
+          dispatch({ type: "setAssignee", payload: value as any })
+        }
       >
         {expandedItems.map((user) => (
           <Checkbox

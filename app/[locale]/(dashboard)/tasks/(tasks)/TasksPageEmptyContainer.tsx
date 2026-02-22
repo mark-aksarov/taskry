@@ -1,14 +1,14 @@
 import { useTranslations } from "next-intl";
 import { EmptyPageContainer } from "@/components/common/EmptyPageContainer";
 
-interface TasksPageEmptyProps {
+interface TasksPageEmptyContainerProps {
   taskToolbarCreateNewMenuTrigger: React.ReactNode;
 }
 
-export function TasksPageEmpty({
+export function TasksPageEmptyContainer({
   taskToolbarCreateNewMenuTrigger,
-}: TasksPageEmptyProps) {
-  const t = useTranslations("app.TasksPageEmpty");
+}: TasksPageEmptyContainerProps) {
+  const t = useTranslations("app.TasksPageEmptyContainer");
 
   return (
     <EmptyPageContainer

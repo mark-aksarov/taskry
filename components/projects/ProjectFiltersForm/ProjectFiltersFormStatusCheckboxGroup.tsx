@@ -1,22 +1,35 @@
 "use client";
 
+import {
+  useProjectFilters,
+  useProjectFiltersDispatch,
+} from "../ProjectFiltersContext";
+
 import { useTranslations } from "next-intl";
-import { ProjectFilters } from "@/lib/types";
 import { Checkbox } from "@/components/ui/Checkbox";
 import { CheckboxGroup } from "@/components/ui/CheckboxGroup";
 
-export function ProjectFiltersFormStatusCheckboxGroup({
-  filters,
-}: {
-  filters?: ProjectFilters;
-}) {
-  const t = useTranslations("projects.ProjectFiltersFormStatusCheckboxGroup");
+export function ProjectFiltersFormStatusCheckboxGroup() {
   const tStatus = useTranslations("projects.ProjectStatus");
+  const t = useTranslations("projects.ProjectFiltersFormStatusCheckboxGroup");
 
-  const defaultValue = filters?.status?.map((id) => id.toString());
+  const filters = useProjectFilters();
+  const dispatch = useProjectFiltersDispatch();
+
+  console.log(
+    "ProjectFiltersFormStatusCheckboxGroup - filters.status:",
+    filters.status,
+  );
 
   return (
-    <CheckboxGroup name="status" label={t("label")} defaultValue={defaultValue}>
+    <CheckboxGroup
+      name="status"
+      label={t("label")}
+      value={filters.status}
+      onChange={(value) =>
+        dispatch({ type: "setStatus", payload: value as any })
+      }
+    >
       <Checkbox
         data-test="pending-checkbox"
         key="pending"

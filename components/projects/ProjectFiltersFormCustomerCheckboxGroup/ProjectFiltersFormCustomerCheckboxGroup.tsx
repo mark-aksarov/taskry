@@ -1,30 +1,37 @@
 "use client";
 
+import {
+  useProjectFilters,
+  useProjectFiltersDispatch,
+} from "../ProjectFiltersContext";
+
 import { useTranslations } from "next-intl";
-import { ProjectFilters } from "@/lib/types";
 import { Checkbox } from "@/components/ui/Checkbox";
 import { CheckboxGroup } from "@/components/ui/CheckboxGroup";
 import { useExpandedItems } from "@/lib/hooks/useExpandedItems";
+
 import { ExpandCollapseButton } from "@/components/common/ExpandCollapseButton";
 
 export function ProjectFiltersFormCustomerCheckboxGroup({
-  filters,
   customers,
 }: {
-  filters?: ProjectFilters;
   customers: { id: number; fullName: string }[];
 }) {
   const t = useTranslations("projects.ProjectFiltersFormCustomerCheckboxGroup");
-  const defaultValue = filters?.customer?.map((id) => id.toString());
   const { isExpanded, setIsExpanded, expandedItems } =
     useExpandedItems(customers);
+  const filters = useProjectFilters();
+  const dispatch = useProjectFiltersDispatch();
 
   return (
     <>
       <CheckboxGroup
         name="customer"
         label={t("label")}
-        defaultValue={defaultValue}
+        value={filters.customer}
+        onChange={(value) =>
+          dispatch({ type: "setCustomer", payload: value as any })
+        }
       >
         {expandedItems.map((customer) => (
           <Checkbox

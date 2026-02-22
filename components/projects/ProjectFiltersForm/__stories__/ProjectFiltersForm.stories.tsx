@@ -31,9 +31,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    projectStatusCheckboxGroup: (
-      <ProjectFiltersFormStatusCheckboxGroup filters={{}} />
-    ),
+    projectStatusCheckboxGroup: <ProjectFiltersFormStatusCheckboxGroup />,
     projectCategoryCheckboxGroup: (
       <ProjectFiltersFormCategoryCheckboxGroup
         {...ProjectFiltersFormCategoryCheckboxGroupStory.args}

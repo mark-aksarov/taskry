@@ -75,7 +75,6 @@ export default async function AppProjectsPage({
 
   // Get total count of projects in the current workspace
   const totalCount = await getProjectCount();
-
   const guestMode = await hasGuestRole();
 
   const projectToolbarCreateNewMenuTrigger = (

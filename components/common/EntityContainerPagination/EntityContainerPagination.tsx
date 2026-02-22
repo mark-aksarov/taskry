@@ -25,7 +25,6 @@ export function EntityContainerPagination({
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
-
   const { startPaginationTransition } = usePageTransition();
   const [optimisticPage, setOptimisticPage] = useOptimistic(
     page,

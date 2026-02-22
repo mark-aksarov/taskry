@@ -1,6 +1,10 @@
 "use client";
 
-import { TaskFilters } from "@/lib/types";
+import {
+  useTaskFilters,
+  useTaskFiltersDispatch,
+} from "@/components/tasks/TaskFiltersContext";
+
 import { useTranslations } from "next-intl";
 import { Checkbox } from "@/components/ui/Checkbox";
 import { CheckboxGroup } from "@/components/ui/CheckboxGroup";
@@ -8,23 +12,25 @@ import { useExpandedItems } from "@/lib/hooks/useExpandedItems";
 import { ExpandCollapseButton } from "@/components/common/ExpandCollapseButton";
 
 export function TaskFiltersFormCategoryCheckboxGroup({
-  filters,
   categories,
 }: {
-  filters?: TaskFilters;
   categories: { id: number; name: string }[];
 }) {
   const t = useTranslations("tasks.TaskFiltersFormCategoryCheckboxGroup");
-  const defaultValue = filters?.category?.map((id) => id.toString());
   const { isExpanded, setIsExpanded, expandedItems } =
     useExpandedItems(categories);
+  const filters = useTaskFilters();
+  const dispatch = useTaskFiltersDispatch();
 
   return (
     <>
       <CheckboxGroup
         label={t("label")}
         name="category"
-        defaultValue={defaultValue}
+        value={filters?.category}
+        onChange={(value) =>
+          dispatch({ type: "setCategory", payload: value as any })
+        }
       >
         {expandedItems.map((item) => (
           <Checkbox

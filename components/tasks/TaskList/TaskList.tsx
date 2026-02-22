@@ -4,7 +4,7 @@ import { Children } from "react";
 import { List } from "@/components/common/List";
 import { Repeat } from "@/components/common/Repeat";
 import { TaskListItemSkeleton } from "../TaskListItem";
-import { useEntityPagination } from "@/components/common/EntityContainerPagination";
+import { usePageTransition } from "@/components/common/PageTransitionContext";
 
 interface TaskListProps {
   showCheckbox?: boolean;
@@ -12,9 +12,10 @@ interface TaskListProps {
 }
 
 export function TaskList({ showCheckbox, children }: TaskListProps) {
-  const { isPending } = useEntityPagination();
+  const { isFilteringPending, isSortingPending, isPaginationPending } =
+    usePageTransition();
 
-  if (isPending) {
+  if (isPaginationPending || isFilteringPending || isSortingPending) {
     return (
       <List data-test="tasks-list">
         <Repeat

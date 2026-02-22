@@ -192,5 +192,9 @@
   },
   "TaskToolbarManageMenuTrigger": {
     "categories": "Категории"
+  },
+  "TasksFilteredEmptySection": {
+    "heading": "Задачи не найдены",
+    "description": "По выбранным фильтрам задачи отсутствуют. Попробуйте изменить или сбросить фильтры"
   }
 }

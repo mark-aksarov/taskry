@@ -9,6 +9,7 @@ import {
 import { Suspense } from "react";
 import { ProjectFilters } from "@/lib/types";
 import { getUserSummaries } from "@/lib/data/user/user.dal";
+import { ProjectFiltersProvider } from "../ProjectFiltersContext";
 import { getCustomerSummaries } from "@/lib/data/customer/customer.dal";
 import { getProjectCategorySummaries } from "@/lib/data/projectCategory/projectCategory.dal";
 import { ProjectFiltersFormUserCheckboxGroup } from "../ProjectFiltersFormUserCheckboxGroup";
@@ -37,26 +38,19 @@ async function ProjectFiltersFormContainerInner({
   const users = await getUserSummaries();
 
   return (
-    <ProjectFiltersForm
-      projectStatusCheckboxGroup={
-        <ProjectFiltersFormStatusCheckboxGroup filters={filters} />
-      }
-      userCheckboxGroup={
-        <ProjectFiltersFormUserCheckboxGroup filters={filters} users={users} />
-      }
-      projectCategoryCheckboxGroup={
-        <ProjectFiltersFormCategoryCheckboxGroup
-          filters={filters}
-          categories={categories}
-        />
-      }
-      customerCheckboxGroup={
-        <ProjectFiltersFormCustomerCheckboxGroup
-          filters={filters}
-          customers={customers}
-        />
-      }
-      filters={filters}
-    />
+    <ProjectFiltersProvider initialFilters={filters}>
+      <ProjectFiltersForm
+        projectStatusCheckboxGroup={<ProjectFiltersFormStatusCheckboxGroup />}
+        userCheckboxGroup={
+          <ProjectFiltersFormUserCheckboxGroup users={users} />
+        }
+        projectCategoryCheckboxGroup={
+          <ProjectFiltersFormCategoryCheckboxGroup categories={categories} />
+        }
+        customerCheckboxGroup={
+          <ProjectFiltersFormCustomerCheckboxGroup customers={customers} />
+        }
+      />
+    </ProjectFiltersProvider>
   );
 }

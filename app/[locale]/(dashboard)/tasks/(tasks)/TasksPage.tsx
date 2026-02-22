@@ -6,15 +6,17 @@ import {
 } from "@/components/common/Toolbar";
 
 import { useTranslations } from "next-intl";
+import { TaskSortField } from "@/lib/types";
 import { PageGrid } from "@/components/common/PageGrid";
 import { ViewModeProvider } from "@/components/common/ViewMode";
 import { PageContainer } from "@/components/common/PageContainer";
 import { ViewModeToggleButtonGroup } from "@/components/common/ViewMode";
+import { TasksFilteredEmptySection } from "@/components/tasks/TasksFilteredEmptySection";
 import { TaskToolbarManageMenuTrigger } from "@/components/tasks/TaskToolbarManageMenuTrigger";
 import { TaskToolbarSortingMenuTrigger } from "@/components/tasks/TaskToolbarSortingMenuTrigger";
-import { TaskSortField } from "@/lib/types";
 
 interface TasksPageProps {
+  totalFilteredTasks: number;
   tasksContainer: React.ReactNode;
   taskToolbarActionsMenuTrigger: React.ReactNode;
   taskToolbarCreateNewMenuTrigger: React.ReactNode;
@@ -23,6 +25,7 @@ interface TasksPageProps {
 }
 
 export function TasksPage({
+  totalFilteredTasks,
   tasksContainer,
   taskToolbarActionsMenuTrigger,
   taskToolbarCreateNewMenuTrigger,
@@ -32,8 +35,8 @@ export function TasksPage({
   const t = useTranslations("app.TasksPage");
 
   return (
-    <PageContainer>
-      <PageGrid>
+    <PageContainer fullscreen={totalFilteredTasks === 0} className="relative">
+      <PageGrid className="flex-auto">
         <ViewModeProvider>
           <ToolbarDesktop>
             <TaskToolbarManageMenuTrigger />
@@ -61,7 +64,11 @@ export function TasksPage({
             {taskToolbarCreateNewMenuTrigger}
           </ToolbarMobileBottom>
 
-          {tasksContainer}
+          {totalFilteredTasks === 0 ? (
+            <TasksFilteredEmptySection />
+          ) : (
+            tasksContainer
+          )}
         </ViewModeProvider>
       </PageGrid>
     </PageContainer>

@@ -2,6 +2,7 @@ import "server-only";
 
 import { Suspense } from "react";
 import { TaskFilters } from "@/lib/types";
+import { TaskFiltersProvider } from "../TaskFiltersContext";
 import { getUserSummaries } from "@/lib/data/user/user.dal";
 import { getProjectSummaries } from "@/lib/data/project/project.dal";
 import { TaskFiltersForm, TaskFiltersFormSkeleton } from "../TaskFiltersForm";
@@ -31,26 +32,19 @@ async function TaskFiltersFormContainerInner({
   const users = await getUserSummaries();
 
   return (
-    <TaskFiltersForm
-      assigneeCheckboxGroup={
-        <TaskFiltersFormAssigneeCheckboxGroup filters={filters} users={users} />
-      }
-      categoryCheckboxGroup={
-        <TaskFiltersFormCategoryCheckboxGroup
-          filters={filters}
-          categories={categories}
-        />
-      }
-      projectCheckboxGroup={
-        <TaskFiltersFormProjectCheckboxGroup
-          filters={filters}
-          projects={projects}
-        />
-      }
-      statusCheckboxGroup={
-        <TaskFiltersFormStatusCheckboxGroup filters={filters} />
-      }
-      filters={filters}
-    />
+    <TaskFiltersProvider initialFilters={filters}>
+      <TaskFiltersForm
+        assigneeCheckboxGroup={
+          <TaskFiltersFormAssigneeCheckboxGroup users={users} />
+        }
+        categoryCheckboxGroup={
+          <TaskFiltersFormCategoryCheckboxGroup categories={categories} />
+        }
+        projectCheckboxGroup={
+          <TaskFiltersFormProjectCheckboxGroup projects={projects} />
+        }
+        statusCheckboxGroup={<TaskFiltersFormStatusCheckboxGroup />}
+      />
+    </TaskFiltersProvider>
   );
 }

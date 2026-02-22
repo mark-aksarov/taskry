@@ -1,22 +1,26 @@
-import { TaskFilters } from "@/lib/types";
+import {
+  useTaskFilters,
+  useTaskFiltersDispatch,
+} from "@/components/tasks/TaskFiltersContext";
+
 import { useTranslations } from "next-intl";
 import { Switch } from "@/components/ui/Switch";
 
-interface TaskFiltersFormOnlyMyTaskSwitchProps {
-  filters?: TaskFilters;
-}
-
-export function TaskFiltersFormOnlyMyTaskSwitch({
-  filters,
-}: TaskFiltersFormOnlyMyTaskSwitchProps) {
+export function TaskFiltersFormOnlyMyTaskSwitch() {
   const t = useTranslations("tasks.TaskFiltersFormOnlyMyTaskSwitch");
+
+  const filters = useTaskFilters();
+  const dispatch = useTaskFiltersDispatch();
 
   return (
     <Switch
       data-test="show-only-my-tasks"
       className="justify-between"
       name="onlyMyTasks"
-      defaultSelected={filters?.onlyMyTasks}
+      isSelected={filters?.onlyMyTasks}
+      onChange={(value) =>
+        dispatch({ type: "changeOnlyMyTasks", payload: value })
+      }
     >
       {t("text")}
     </Switch>

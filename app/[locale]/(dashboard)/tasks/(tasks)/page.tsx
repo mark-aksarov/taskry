@@ -12,16 +12,17 @@ import { userId } from "@/lib/schemas/user";
 import { taskSortFields } from "@/lib/types";
 import { taskStatus } from "@/lib/schemas/task";
 import { projectId } from "@/lib/schemas/project";
-import { TasksPageEmpty } from "./TasksPageEmpty";
-import { getTaskList } from "@/lib/data/task/task.dal";
 import { hasGuestRole } from "@/lib/utils/hasGuestRole";
 import { taskCategoryId } from "@/lib/schemas/taskCategory";
 import { deleteTasks } from "@/lib/actions/task/deleteTasks";
 import { TasksContainer } from "@/components/tasks/TasksContainer";
+import { TasksPageEmptyContainer } from "./TasksPageEmptyContainer";
+import { getTaskCount, getTaskList } from "@/lib/data/task/task.dal";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { updateTaskStatuses } from "@/lib/actions/task/updateTaskStatuses";
 import { NewTaskFormContainer } from "@/components/tasks/NewTaskFormContainer";
 import { SelectedTasksProvider } from "@/components/tasks/SelectedTasksContext";
+import { PageTransitionProvider } from "@/components/common/PageTransitionContext";
 import { createTaskCategory } from "@/lib/actions/taskCategory/createTaskCategory";
 import { NewTaskCategoryForm } from "@/components/taskCategory/NewTaskCategoryForm";
 import { TaskFiltersFormContainer } from "@/components/tasks/TaskFiltersFormContainer";
@@ -62,16 +63,14 @@ export default async function AppTasksPage({
 }) {
   await requireProtectedPage();
 
+  await new Promise((resolve) => setTimeout(resolve, 2000)); // Simulate loading delay
+
   const rawParams = await searchParams;
   const validated = searchParamsSchema.parse(rawParams);
   const { page, pageSize, sort, ...filters } = validated;
 
-  const { items: tasks, totalCount } = await getTaskList({
-    page,
-    pageSize,
-    sort,
-    filters,
-  });
+  // Get total count of tasks in the current workspace
+  const totalCount = await getTaskCount();
   const guestMode = await hasGuestRole();
 
   const taskToolbarCreateNewMenuTrigger = (
@@ -86,42 +85,53 @@ export default async function AppTasksPage({
 
   if (!totalCount) {
     return (
-      <TasksPageEmpty
+      <TasksPageEmptyContainer
         taskToolbarCreateNewMenuTrigger={taskToolbarCreateNewMenuTrigger}
       />
     );
   }
+
+  // Get tasks for the current page based on filters and sorting
+  const { items: tasks, totalCount: totalFilteredTasks } = await getTaskList({
+    page,
+    pageSize,
+    sort,
+    filters,
+  });
 
   return (
     <UpdateTaskStatusesProvider updateStatus={updateTaskStatuses}>
       <SelectedTasksProvider
         pageItems={tasks.map((t) => ({ id: t.id, status: t.status }))}
       >
-        <TasksPage
-          selectedSortField={sort}
-          taskToolbarActionsMenuTrigger={
-            <TaskToolbarActionsMenuTrigger
-              guestMode={guestMode}
-              deleteTasks={deleteTasks}
-            />
-          }
-          taskToolbarCreateNewMenuTrigger={taskToolbarCreateNewMenuTrigger}
-          taskToolbarFiltersModalTrigger={
-            <TaskToolbarFiltersModalTrigger
-              filtersFormContainer={
-                <TaskFiltersFormContainer filters={filters} />
-              }
-            />
-          }
-          tasksContainer={
-            <TasksContainer
-              tasks={tasks}
-              totalCount={totalCount}
-              page={page}
-              pageSize={pageSize}
-            />
-          }
-        />
+        <PageTransitionProvider>
+          <TasksPage
+            totalFilteredTasks={totalFilteredTasks}
+            selectedSortField={sort}
+            taskToolbarActionsMenuTrigger={
+              <TaskToolbarActionsMenuTrigger
+                guestMode={guestMode}
+                deleteTasks={deleteTasks}
+              />
+            }
+            taskToolbarCreateNewMenuTrigger={taskToolbarCreateNewMenuTrigger}
+            taskToolbarFiltersModalTrigger={
+              <TaskToolbarFiltersModalTrigger
+                filtersFormContainer={
+                  <TaskFiltersFormContainer filters={filters} />
+                }
+              />
+            }
+            tasksContainer={
+              <TasksContainer
+                tasks={tasks}
+                totalCount={totalFilteredTasks}
+                page={page}
+                pageSize={pageSize}
+              />
+            }
+          />
+        </PageTransitionProvider>
       </SelectedTasksProvider>
     </UpdateTaskStatusesProvider>
   );

@@ -192,5 +192,9 @@
   },
   "TaskToolbarManageMenuTrigger": {
     "categories": "Categories"
+  },
+  "TasksFilteredEmptySection": {
+    "heading": "No tasks found",
+    "description": "No tasks match the selected filters. Try changing or resetting the filters."
   }
 }

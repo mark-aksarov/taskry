@@ -81,7 +81,7 @@
   "TasksPageLoading": {
     "title": "All Tasks"
   },
-  "TasksPageEmpty": {
+  "TasksPageEmptyContainer": {
     "heading": "No tasks yet",
     "description": "Create a new task to keep track of your work",
     "addButtonLabel": "New Task"

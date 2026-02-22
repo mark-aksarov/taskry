@@ -11,19 +11,23 @@ import {
   FormBaseFooter,
 } from "@/components/common/FormBase";
 
-import { useState } from "react";
+import { useContext } from "react";
 import { useLocale } from "next-intl";
-import { TaskFilters } from "@/lib/types";
+import { useSearchParams } from "next/navigation";
 import { Separator } from "@/components/ui/Separator";
 import { usePathname, useRouter } from "@/i18n/navigation";
-import { CalendarDate, parseDate } from "@internationalized/date";
+import { useSelectedTasks } from "../SelectedTasksContext";
+import { useTaskFiltersDispatch } from "../TaskFiltersContext";
+import { OverlayTriggerStateContext } from "react-aria-components";
+import { areSearchParamsEqual } from "@/lib/utils/areSearchParamsEqual";
+import { usePageTransition } from "@/components/common/PageTransitionContext";
 import { TaskFiltersFormOnlyMyTaskSwitch } from "./TaskFiltersFormOnlyMyTaskSwitch";
+import { FiltersFormResetButton } from "@/components/common/FiltersFormResetButton";
 import { FiltersFormSubmitButton } from "@/components/common/FiltersFormSubmitButton";
 import { TaskFiltersFormDeadlineToDatePicker } from "./TaskFiltersFormDeadlineToDatePicker";
 import { TaskFiltersFormDeadlineFromDatePicker } from "./TaskFiltersFormDeadlineFromDatePicker";
 
 interface TaskFiltersFormProps {
-  filters?: TaskFilters;
   statusCheckboxGroup: React.ReactNode;
   categoryCheckboxGroup: React.ReactNode;
   projectCheckboxGroup: React.ReactNode;
@@ -31,49 +35,79 @@ interface TaskFiltersFormProps {
 }
 
 export function TaskFiltersForm({
-  filters,
   statusCheckboxGroup,
   categoryCheckboxGroup,
   projectCheckboxGroup,
   assigneeCheckboxGroup,
 }: TaskFiltersFormProps) {
+  const overlayContext = useContext(OverlayTriggerStateContext);
+
+  if (!overlayContext) {
+    throw new Error(
+      "FiltersFormResetButton must be used within a FormBaseModal",
+    );
+  }
+
+  const { clear: clearSelectedTasks } = useSelectedTasks();
   const locale = useLocale();
   const router = useRouter();
   const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const { startFilteringTransition } = usePageTransition();
+  const dispatch = useTaskFiltersDispatch();
 
-  // parse deadlineFrom to CalendarDate without time components
-  const [deadlineFrom, setDeadlineFrom] = useState<CalendarDate | null>(() => {
-    const deadlineFrom = filters?.deadlineFrom;
-    if (!deadlineFrom) return null;
-    return parseDate(deadlineFrom);
-  });
+  const { close: closeModal } = overlayContext;
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const formData = new FormData(e.currentTarget);
-    normalizeBooleanFields(formData, ["onlyMyTasks"]);
-    const searchParams = formDataToSearchParams(formData);
-    searchParams.delete("page");
+    // close the form modal immediately
+    closeModal();
 
-    router.replace(`${pathname}?${searchParams.toString()}`, { locale });
+    const formData = new FormData(e.currentTarget);
+
+    // transform "on" to "true" and remove unchecked checkboxes from formData
+    normalizeBooleanFields(formData, ["onlyMyTasks"]);
+
+    // convert formData to URLSearchParams and remove empty values
+    const newSearchParams = formDataToSearchParams(formData);
+
+    // preserve the "sort" param when resetting filters
+    const sort = searchParams.get("sort");
+    if (sort) newSearchParams.set("sort", sort);
+
+    // reset pagination when applying new filters
+    newSearchParams.delete("page");
+
+    // if the new searchParams are the same as the current searchParams, do nothing
+    if (
+      areSearchParamsEqual({
+        a: searchParams,
+        b: newSearchParams,
+        excludeKeys: ["page", "sort", "pageSize"],
+      })
+    ) {
+      return;
+    }
+    clearSelectedTasks();
+
+    // start the page transition and update the URL with the new searchParams
+    startFilteringTransition(() => {
+      router.replace(`${pathname}?${newSearchParams.toString()}`, {
+        locale,
+      });
+    });
   };
 
   return (
     <FormBase id="task-filter-form" onSubmit={handleSubmit}>
       <FormBaseBody>
-        <TaskFiltersFormOnlyMyTaskSwitch filters={filters} />
+        <TaskFiltersFormOnlyMyTaskSwitch />
 
         <Separator />
 
-        <TaskFiltersFormDeadlineFromDatePicker
-          deadlineFrom={deadlineFrom}
-          setDeadlineFrom={setDeadlineFrom}
-        />
-        <TaskFiltersFormDeadlineToDatePicker
-          filters={filters}
-          deadlineFrom={deadlineFrom}
-        />
+        <TaskFiltersFormDeadlineFromDatePicker />
+        <TaskFiltersFormDeadlineToDatePicker />
 
         <Separator />
 
@@ -87,6 +121,9 @@ export function TaskFiltersForm({
       </FormBaseBody>
       <FormBaseFooter>
         <FiltersFormSubmitButton />
+        <FiltersFormResetButton
+          onPress={() => dispatch({ type: "resetFilters" })}
+        />
       </FormBaseFooter>
     </FormBase>
   );

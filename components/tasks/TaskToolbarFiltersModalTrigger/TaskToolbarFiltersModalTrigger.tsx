@@ -8,7 +8,7 @@ import {
 
 import { useTranslations } from "next-intl";
 import { DialogTrigger } from "react-aria-components";
-import { DialogBody, DialogHeader } from "@/components/ui/Dialog";
+import { DialogHeader } from "@/components/ui/Dialog";
 import { ToolbarFiltersButtonMobile } from "@/components/common/Toolbar/ToolbarFiltersButtonMobile";
 import { ToolbarFiltersButtonDesktop } from "@/components/common/Toolbar/ToolbarFiltersButtonDesktop";
 

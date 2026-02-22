@@ -1,26 +1,27 @@
 "use client";
 
+import {
+  useTaskFilters,
+  useTaskFiltersDispatch,
+} from "@/components/tasks/TaskFiltersContext";
+
 import { useTranslations } from "next-intl";
-import { CalendarDate } from "@internationalized/date";
 import { ResponsiveDatePicker } from "@/components/common/ResponsiveDatePicker";
 
-interface TaskFiltersFormDeadlineFromDatePickerProps {
-  deadlineFrom: CalendarDate | null;
-  setDeadlineFrom: (date: CalendarDate | null) => void;
-}
-
-export function TaskFiltersFormDeadlineFromDatePicker({
-  deadlineFrom,
-  setDeadlineFrom,
-}: TaskFiltersFormDeadlineFromDatePickerProps) {
+export function TaskFiltersFormDeadlineFromDatePicker() {
   const t = useTranslations("tasks.TaskFiltersFormDeadlineFromDatePicker");
+
+  const filters = useTaskFilters();
+  const dispatch = useTaskFiltersDispatch();
 
   return (
     <ResponsiveDatePicker
       data-test="deadline-from-date-picker"
       label={t("label")}
-      value={deadlineFrom}
-      onChange={setDeadlineFrom}
+      value={filters.deadlineFrom}
+      onChange={(date) =>
+        dispatch({ type: "changeDeadlineFrom", payload: date })
+      }
       name="deadlineFrom"
     />
   );

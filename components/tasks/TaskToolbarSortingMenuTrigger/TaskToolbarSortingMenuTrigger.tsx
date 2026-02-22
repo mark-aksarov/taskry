@@ -11,7 +11,10 @@ import { TaskSortField } from "@/lib/types";
 import { useSearchParams } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import { usePathname, useRouter } from "@/i18n/navigation";
+import { useSelectedTasks } from "../SelectedTasksContext";
+import { areSearchParamsEqual } from "@/lib/utils/areSearchParamsEqual";
 import { Calendar, CircleCheck, ALargeSmall, Blocks } from "lucide-react";
+import { usePageTransition } from "@/components/common/PageTransitionContext";
 
 interface TaskToolbarSortingMenuTriggerProps {
   selectedSortField: TaskSortField;
@@ -25,12 +28,29 @@ export function TaskToolbarSortingMenuTrigger({
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
+  const { startSortingTransition } = usePageTransition();
+  const { clear: clearSelectedTasks } = useSelectedTasks();
 
   const handleAction = (key: Key) => {
-    const params = new URLSearchParams(searchParams.toString());
-    params.set("sort", key as string);
-    params.delete("page");
-    router.replace(`${pathname}?${params.toString()}`, { locale });
+    const newSearchParams = new URLSearchParams(searchParams.toString());
+    newSearchParams.set("sort", key as string);
+    newSearchParams.delete("page");
+
+    // if the new searchParams are the same as the current searchParams, do nothing
+    if (
+      areSearchParamsEqual({
+        a: searchParams,
+        b: newSearchParams,
+        includeKeys: ["sort"],
+      })
+    ) {
+      return;
+    }
+    clearSelectedTasks();
+
+    startSortingTransition(() => {
+      router.replace(`${pathname}?${newSearchParams.toString()}`, { locale });
+    });
   };
 
   return (

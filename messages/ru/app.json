@@ -81,7 +81,7 @@
   "TasksPageLoading": {
     "title": "Все задачи"
   },
-  "TasksPageEmpty": {
+  "TasksPageEmptyContainer": {
     "heading": "Нет задач",
     "description": "Добавьте новую задачу, чтобы следить за работой",
     "addButtonLabel": "Новая задача"

@@ -1,3 +1,5 @@
+"use client";
+
 import { useTranslations } from "next-intl";
 import { SlidersHorizontal } from "lucide-react";
 import { Button, ButtonProps } from "@/components/ui/Button";
