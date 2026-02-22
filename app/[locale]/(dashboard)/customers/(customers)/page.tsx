@@ -6,19 +6,24 @@ import {
   searchParamToArray,
 } from "@/lib/schemas/base";
 
+import {
+  getCustomerCount,
+  getCustomerList,
+} from "@/lib/data/customer/customer.dal";
+
 import { z } from "zod";
 import { CustomersPage } from "./CustomersPage";
 import { customerSortFields } from "@/lib/types";
 import { companyId } from "@/lib/schemas/company";
 import { hasGuestRole } from "@/lib/utils/hasGuestRole";
 import { CustomersPageEmpty } from "./CustomersPageEmpty";
-import { getCustomerList } from "@/lib/data/customer/customer.dal";
 import { createCompany } from "@/lib/actions/company/createCompany";
 import { NewCompanyForm } from "@/components/company/NewCompanyForm";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { deleteCustomers } from "@/lib/actions/customer/deleteCustomers";
 import { CustomersContainer } from "@/components/customer/CustomersContainer";
 import { SelectedItemsProvider } from "@/components/common/SelectedItemsContext";
+import { PageTransitionProvider } from "@/components/common/PageTransitionContext";
 import { NewCustomerFormContainer } from "@/components/customer/NewCustomerFormContainer";
 import { CustomerFiltersFormContainer } from "@/components/customer/CustomerFiltersFormContainer";
 import { CustomerToolbarActionsMenuTrigger } from "@/components/customer/CustomerToolbarActionsMenuTrigger";
@@ -53,13 +58,8 @@ export default async function AppCustomersPage({
   const { page, pageSize, sort, ...filters } =
     searchParamsSchema.parse(rawParams);
 
-  const { items: customers, totalCount } = await getCustomerList({
-    page,
-    pageSize,
-    sort,
-    filters,
-  });
-
+  // Get total count of customers in the current workspace
+  const totalCount = await getCustomerCount();
   const guestMode = await hasGuestRole();
 
   const customerToolbarCreateNewMenuTrigger = (
@@ -80,34 +80,46 @@ export default async function AppCustomersPage({
     );
   }
 
+  // Get customers for the current page based on filters and sorting
+  const { items: customers, totalCount: totalFilteredCustomers } =
+    await getCustomerList({
+      page,
+      pageSize,
+      sort,
+      filters,
+    });
+
   return (
     <SelectedItemsProvider pageItems={customers.map((c) => ({ id: c.id }))}>
-      <CustomersPage
-        selectedSortField={sort}
-        customerToolbarCreateNewMenuTrigger={
-          customerToolbarCreateNewMenuTrigger
-        }
-        customerToolbarActionsMenuTrigger={
-          <CustomerToolbarActionsMenuTrigger
-            deleteCustomers={deleteCustomers}
-          />
-        }
-        customerToolbarFiltersModalTrigger={
-          <CustomerToolbarFiltersModalTrigger
-            filtersFormContainer={
-              <CustomerFiltersFormContainer filters={filters} />
-            }
-          />
-        }
-        customersContainer={
-          <CustomersContainer
-            customers={customers}
-            totalCount={totalCount}
-            page={page}
-            pageSize={pageSize}
-          />
-        }
-      />
+      <PageTransitionProvider>
+        <CustomersPage
+          totalFilteredCustomers={totalFilteredCustomers}
+          selectedSortField={sort}
+          customerToolbarCreateNewMenuTrigger={
+            customerToolbarCreateNewMenuTrigger
+          }
+          customerToolbarActionsMenuTrigger={
+            <CustomerToolbarActionsMenuTrigger
+              deleteCustomers={deleteCustomers}
+            />
+          }
+          customerToolbarFiltersModalTrigger={
+            <CustomerToolbarFiltersModalTrigger
+              filtersFormContainer={
+                <CustomerFiltersFormContainer filters={filters} />
+              }
+            />
+          }
+          customersContainer={
+            <CustomersContainer
+              customers={customers}
+              totalCount={totalCount}
+              page={page}
+              pageSize={pageSize}
+            />
+          }
+        />
+      </PageTransitionProvider>
     </SelectedItemsProvider>
   );
 }

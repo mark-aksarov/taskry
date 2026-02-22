@@ -19,9 +19,6 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    filters: {
-      company: [],
-    },
     companyCheckboxGroup: (
       <CustomerFiltersFormCompanyCheckboxGroup
         {...CustomerFiltersFormCompanyCheckboxGroupStory.args}

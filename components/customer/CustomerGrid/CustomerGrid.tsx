@@ -4,12 +4,13 @@ import { Children } from "react";
 import { Grid } from "@/components/common/Grid";
 import { Repeat } from "@/components/common/Repeat";
 import { CustomerGridItemSkeleton } from "../CustomerGridItem";
-import { useEntityPagination } from "@/components/common/EntityContainerPagination";
+import { usePageTransition } from "@/components/common/PageTransitionContext";
 
 export function CustomerGrid({ children }: { children: React.ReactNode }) {
-  const { isPending } = useEntityPagination();
+  const { isFilteringPending, isSortingPending, isPaginationPending } =
+    usePageTransition();
 
-  if (isPending) {
+  if (isPaginationPending || isFilteringPending || isSortingPending) {
     return (
       <Grid data-test="customers-grid">
         <Repeat

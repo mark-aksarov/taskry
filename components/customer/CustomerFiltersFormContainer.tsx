@@ -9,6 +9,7 @@ import { Suspense } from "react";
 import { CustomerFilters } from "@/lib/types";
 import { getCompanySummaries } from "@/lib/data/company/company.dal";
 import { CustomerFiltersFormCompanyCheckboxGroup } from "./CustomerFiltersForm";
+import { CustomerFiltersProvider } from "./CustomerFiltersContext";
 
 interface CustomerFiltersFormContainerProps {
   filters?: CustomerFilters;
@@ -30,14 +31,12 @@ async function CustomerFiltersFormContainerInner({
   const companies = await getCompanySummaries();
 
   return (
-    <CustomerFiltersForm
-      filters={filters}
-      companyCheckboxGroup={
-        <CustomerFiltersFormCompanyCheckboxGroup
-          filters={filters}
-          companies={companies}
-        />
-      }
-    />
+    <CustomerFiltersProvider initialFilters={filters}>
+      <CustomerFiltersForm
+        companyCheckboxGroup={
+          <CustomerFiltersFormCompanyCheckboxGroup companies={companies} />
+        }
+      />
+    </CustomerFiltersProvider>
   );
 }

@@ -1,70 +1,62 @@
 "use client";
 
 import {
-  formDataToSearchParams,
-  normalizeBooleanFields,
-} from "@/lib/utils/formDataUtils";
-
-import {
   FormBase,
   FormBaseBody,
   FormBaseFooter,
 } from "@/components/common/FormBase";
 
-import { useLocale } from "next-intl";
-import { CustomerFilters } from "@/lib/types";
+import {
+  FiltersFormResetButton,
+  FiltersFormSubmitButton,
+} from "@/components/common/FiltersForm";
+
 import { Separator } from "@/components/ui/Separator";
-import { usePathname, useRouter } from "@/i18n/navigation";
-import { FiltersFormSubmitButton } from "@/components/common/FiltersFormSubmitButton";
+import { useCustomerFiltersDispatch } from "../CustomerFiltersContext";
+import { useSelectedItems } from "@/components/common/SelectedItemsContext";
+import { useFiltersFormHandleSubmit } from "@/components/common/FiltersForm";
 import { CustomerFiltersFormActiveProjectsSwitch } from "./CustomerFiltersFormActiveProjectsSwitch";
 import { CustomerFiltersFormOverdueProjectsSwitch } from "./CustomerFiltersFormOverdueProjectsSwitch";
 import { CustomerFiltersFormNoActiveProjectsSwitch } from "./CustomerFiltersFormNoActiveProjectsSwitch";
 
 interface CustomerFiltersFormProps {
-  filters?: CustomerFilters;
   companyCheckboxGroup: React.ReactNode;
 }
 
 export function CustomerFiltersForm({
-  filters,
   companyCheckboxGroup,
 }: CustomerFiltersFormProps) {
-  const locale = useLocale();
-  const router = useRouter();
-  const pathname = usePathname();
+  const { clear: clearSelectedItems } = useSelectedItems();
+  const dispatch = useCustomerFiltersDispatch();
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const params = new URLSearchParams();
-
-    const formData = new FormData(e.currentTarget);
-    normalizeBooleanFields(formData, [
+  const handleSubmit = useFiltersFormHandleSubmit({
+    booleanFieldNames: [
       "hasActiveProjects",
       "hasOverdueProjects",
       "hasNoActiveProjects",
-    ]);
-    const searchParams = formDataToSearchParams(formData);
-    params.delete("page");
-
-    router.replace(`${pathname}?${searchParams.toString()}`, { locale });
-  };
+    ],
+    clearSelectedItems: clearSelectedItems,
+  });
 
   return (
     <FormBase id="customer-filter-form" onSubmit={handleSubmit}>
       <FormBaseBody>
-        <CustomerFiltersFormNoActiveProjectsSwitch filters={filters} />
+        <CustomerFiltersFormNoActiveProjectsSwitch />
         <Separator />
 
-        <CustomerFiltersFormActiveProjectsSwitch filters={filters} />
+        <CustomerFiltersFormActiveProjectsSwitch />
         <Separator />
 
-        <CustomerFiltersFormOverdueProjectsSwitch filters={filters} />
+        <CustomerFiltersFormOverdueProjectsSwitch />
         <Separator />
 
         <div>{companyCheckboxGroup}</div>
       </FormBaseBody>
       <FormBaseFooter>
         <FiltersFormSubmitButton />
+        <FiltersFormResetButton
+          onPress={() => dispatch({ type: "resetFilters" })}
+        />
       </FormBaseFooter>
     </FormBase>
   );

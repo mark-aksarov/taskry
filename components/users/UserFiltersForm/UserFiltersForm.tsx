@@ -16,7 +16,7 @@ import { UserFilters } from "@/lib/types";
 import { Separator } from "@/components/ui/Separator";
 import { usePathname, useRouter } from "@/i18n/navigation";
 import { UserFiltersFormActiveTasksSwitch } from "./UserFiltersFormActiveTasksSwitch";
-import { FiltersFormSubmitButton } from "@/components/common/FiltersFormSubmitButton";
+import { FiltersFormSubmitButton } from "@/components/common/FiltersForm/FiltersFormSubmitButton";
 import { UserFiltersFormOverdueTasksSwitch } from "./UserFiltersFormOverdueTasksSwitch";
 import { UserFiltersFormNoActiveTasksSwitch } from "./UserFiltersFormNoActiveTasksSwitch";
 

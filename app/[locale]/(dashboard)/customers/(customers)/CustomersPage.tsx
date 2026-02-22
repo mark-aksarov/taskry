@@ -11,10 +11,12 @@ import { PageGrid } from "@/components/common/PageGrid";
 import { ViewModeProvider } from "@/components/common/ViewMode";
 import { PageContainer } from "@/components/common/PageContainer";
 import { ViewModeToggleButtonGroup } from "@/components/common/ViewMode";
+import { CustomersFilteredEmptySection } from "@/components/customer/CustomersFilteredEmptySection";
 import { CustomerToolbarManageMenuTrigger } from "@/components/customer/CustomerToolbarManageMenuTrigger";
 import { CustomerToolbarSortingMenuTrigger } from "@/components/customer/CustomerToolbarSortingMenuTrigger";
 
 interface CustomersPageProps {
+  totalFilteredCustomers: number;
   customerToolbarCreateNewMenuTrigger: React.ReactNode;
   customerToolbarActionsMenuTrigger: React.ReactNode;
   customerToolbarFiltersModalTrigger: React.ReactNode;
@@ -23,6 +25,7 @@ interface CustomersPageProps {
 }
 
 export function CustomersPage({
+  totalFilteredCustomers,
   customerToolbarCreateNewMenuTrigger,
   customerToolbarActionsMenuTrigger,
   customerToolbarFiltersModalTrigger,
@@ -32,8 +35,11 @@ export function CustomersPage({
   const t = useTranslations("app.CustomersPage");
 
   return (
-    <PageContainer>
-      <PageGrid>
+    <PageContainer
+      fullscreen={totalFilteredCustomers === 0}
+      className="relative"
+    >
+      <PageGrid className="flex-auto">
         <ViewModeProvider>
           <ToolbarDesktop>
             <CustomerToolbarManageMenuTrigger />
@@ -60,7 +66,12 @@ export function CustomersPage({
             <ViewModeToggleButtonGroup />
             {customerToolbarCreateNewMenuTrigger}
           </ToolbarMobileBottom>
-          {customersContainer}
+
+          {totalFilteredCustomers === 0 ? (
+            <CustomersFilteredEmptySection />
+          ) : (
+            customersContainer
+          )}
         </ViewModeProvider>
       </PageGrid>
     </PageContainer>

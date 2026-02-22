@@ -1,7 +1,7 @@
 import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/Button";
 
-export function FiltersFormResetButton({ onPress }: { onPress?: () => void }) {
+export function FiltersFormResetButton({ onPress }: { onPress: () => void }) {
   const t = useTranslations("common.FiltersResetButton");
 
   return (

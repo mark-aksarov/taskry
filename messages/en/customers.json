@@ -139,5 +139,9 @@
       "customer": "Customer",
       "company": "Company"
     }
+  },
+  "CustomersFilteredEmptySection": {
+    "heading": "No customers found",
+    "description": "No customers match the selected filters. Try changing or resetting the filters."
   }
 }
