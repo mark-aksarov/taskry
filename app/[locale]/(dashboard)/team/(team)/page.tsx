@@ -19,6 +19,7 @@ import { UsersContainer } from "@/components/users/UsersContainer";
 import { createPosition } from "@/lib/actions/position/createPosition";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { NewPositionForm } from "@/components/position/NewPositionForm";
+import { PageTransitionProvider } from "@/components/common/PageTransitionContext";
 import { UserFiltersFormContainer } from "@/components/users/UserFiltersFormContainer";
 import { UserToolbarFiltersModalTrigger } from "@/components/users/UserToolbarFiltersModalTrigger";
 import { UserToolbarCreateNewMenuTrigger } from "@/components/users/UserToolbarCreateNewMenuTrigger";
@@ -49,12 +50,12 @@ export default async function AppUsersPage({
   const { page, pageSize, sort, ...filters } =
     searchParamsSchema.parse(rawParams);
 
-  // Get count
-  const count = await getUserCount();
+  // Get total count of users in the current workspace
+  const totalCount = await getUserCount();
   const guestMode = await hasGuestRole();
-  const isOwner = await hasOwnerRole();
 
   // Only the owner and guests can see the user menu item
+  const isOwner = await hasOwnerRole();
   const showCreateNewUserMenuItem = isOwner || guestMode;
 
   const userToolbarCreateNewMenuTrigger = (
@@ -66,7 +67,7 @@ export default async function AppUsersPage({
     />
   );
 
-  if (!count)
+  if (!totalCount)
     return (
       <UsersPageEmpty
         userToolbarCreateNewMenuTrigger={userToolbarCreateNewMenuTrigger}
@@ -76,24 +77,32 @@ export default async function AppUsersPage({
   // Only the owner and guests can see the user action menu trigger
   const showUserActionMenuTrigger = isOwner || guestMode;
 
+  // Get total count of users based on filters and sorting
+  const totalFilteredUsers = await getUserCount(filters);
+
   return (
-    <UsersPage
-      selectedSortField={sort}
-      userToolbarFiltersModalTrigger={
-        <UserToolbarFiltersModalTrigger
-          filtersFormContainer={<UserFiltersFormContainer filters={filters} />}
-        />
-      }
-      userToolbarCreateNewMenuTrigger={userToolbarCreateNewMenuTrigger}
-      usersContainer={
-        <UsersContainer
-          showUserActionMenuTrigger={showUserActionMenuTrigger}
-          page={page}
-          pageSize={pageSize}
-          sort={sort}
-          filters={filters}
-        />
-      }
-    />
+    <PageTransitionProvider>
+      <UsersPage
+        totalFilteredUsers={totalFilteredUsers}
+        selectedSortField={sort}
+        userToolbarFiltersModalTrigger={
+          <UserToolbarFiltersModalTrigger
+            filtersFormContainer={
+              <UserFiltersFormContainer filters={filters} />
+            }
+          />
+        }
+        userToolbarCreateNewMenuTrigger={userToolbarCreateNewMenuTrigger}
+        usersContainer={
+          <UsersContainer
+            showUserActionMenuTrigger={showUserActionMenuTrigger}
+            page={page}
+            pageSize={pageSize}
+            sort={sort}
+            filters={filters}
+          />
+        }
+      />
+    </PageTransitionProvider>
   );
 }

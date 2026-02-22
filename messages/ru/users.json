@@ -204,5 +204,9 @@
   },
   "UserToolbarManageMenuTrigger": {
     "positions": "Должности"
+  },
+  "UsersFilteredEmptySection": {
+    "heading": "Пользователи не найдены",
+    "description": "По выбранным фильтрам пользователи отсутствуют. Попробуйте изменить или сбросить фильтры"
   }
 }

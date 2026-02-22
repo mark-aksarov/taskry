@@ -21,21 +21,9 @@ export function UserToolbarSortingMenuTrigger({
   selectedSortField,
 }: UserToolbarSortingMenuTriggerProps) {
   const t = useTranslations("users.UserToolbarSortingMenuTrigger");
-  const locale = useLocale();
-  const router = useRouter();
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
-
-  const handleAction = (key: Key) => {
-    const params = new URLSearchParams(searchParams.toString());
-    params.set("sort", key as string);
-    params.delete("page");
-    router.replace(`${pathname}?${params.toString()}`, { locale });
-  };
 
   return (
     <ToolbarSortingMenuTrigger
-      onAction={handleAction}
       selectedKeys={[selectedSortField]}
       renderButton={() => (
         <>

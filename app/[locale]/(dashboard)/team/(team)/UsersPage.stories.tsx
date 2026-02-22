@@ -55,6 +55,7 @@ const userToolbarCreateNewMenuTrigger = (
 
 export const Default = {
   args: {
+    totalFilteredUsers: 3,
     selectedSortField: "fullName",
     userToolbarFiltersModalTrigger: (
       <UserToolbarFiltersModalTrigger

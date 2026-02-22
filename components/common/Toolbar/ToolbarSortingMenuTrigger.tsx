@@ -12,7 +12,7 @@ import { areSearchParamsEqual } from "@/lib/utils/areSearchParamsEqual";
 
 interface ToolbarSortingMenuTriggerProps<T extends object = any>
   extends MenuTriggerProps<T> {
-  clearSelectedItems: () => void;
+  clearSelectedItems?: () => void;
 }
 
 export function ToolbarSortingMenuTrigger<T extends object = any>({
@@ -41,7 +41,7 @@ export function ToolbarSortingMenuTrigger<T extends object = any>({
     ) {
       return;
     }
-    clearSelectedItems();
+    clearSelectedItems?.();
 
     startSortingTransition(() => {
       router.replace(`${pathname}?${newSearchParams.toString()}`, { locale });

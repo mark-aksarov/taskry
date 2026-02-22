@@ -25,7 +25,7 @@ export function TaskToolbarFiltersModalTrigger({
       <ToolbarFiltersButtonDesktop data-test="task-toolbar-filters-button-desktop" />
 
       <FormBaseModal data-test="task-toolbar-filters-modal">
-        <FormBaseModalDialog>
+        <FormBaseModalDialog className="md:h-[calc(100dvh-64px)]">
           <DialogHeader>{t("title")}</DialogHeader>
           <FormBaseModalDialogBody>
             {filtersFormContainer}

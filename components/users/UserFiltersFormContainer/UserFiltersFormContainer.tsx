@@ -9,6 +9,7 @@ import {
 import { Suspense } from "react";
 import { UserFilters } from "@/lib/types";
 import { getPositionSummaries } from "@/lib/data/position/position.dal";
+import { UserFiltersProvider } from "../UserFiltersForm/UserFiltersContext";
 
 interface UserFiltersFormContainerProps {
   filters?: UserFilters;
@@ -28,14 +29,12 @@ async function UserFiltersFormContainerInner({
   const positions = await getPositionSummaries();
 
   return (
-    <UserFiltersForm
-      filters={filters}
-      positionCheckboxGroup={
-        <UserFiltersFormPositionCheckboxGroup
-          filters={filters}
-          positions={positions}
-        />
-      }
-    />
+    <UserFiltersProvider initialFilters={filters}>
+      <UserFiltersForm
+        positionCheckboxGroup={
+          <UserFiltersFormPositionCheckboxGroup positions={positions} />
+        }
+      />
+    </UserFiltersProvider>
   );
 }

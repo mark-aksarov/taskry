@@ -11,10 +11,12 @@ import { PageGrid } from "@/components/common/PageGrid";
 import { ViewModeProvider } from "@/components/common/ViewMode";
 import { PageContainer } from "@/components/common/PageContainer";
 import { ViewModeToggleButtonGroup } from "@/components/common/ViewMode";
+import { UsersFilteredEmptySection } from "@/components/users/UsersFilteredEmptySection";
 import { UserToolbarManageMenuTrigger } from "@/components/users/UserToolbarManageMenuTrigger";
 import { UserToolbarSortingMenuTrigger } from "@/components/users/UserToolbarSortingMenuTrigger";
 
 interface UsersPageProps {
+  totalFilteredUsers: number;
   userToolbarFiltersModalTrigger: React.ReactNode;
   userToolbarCreateNewMenuTrigger: React.ReactNode;
   usersContainer: React.ReactNode;
@@ -22,6 +24,7 @@ interface UsersPageProps {
 }
 
 export function UsersPage({
+  totalFilteredUsers,
   userToolbarFiltersModalTrigger,
   userToolbarCreateNewMenuTrigger,
   usersContainer,
@@ -30,8 +33,8 @@ export function UsersPage({
   const t = useTranslations("app.UsersPage");
 
   return (
-    <PageContainer>
-      <PageGrid>
+    <PageContainer fullscreen={totalFilteredUsers === 0} className="relative">
+      <PageGrid className="flex-auto">
         <ViewModeProvider>
           <ToolbarDesktop>
             <UserToolbarManageMenuTrigger />
@@ -56,7 +59,12 @@ export function UsersPage({
             <ViewModeToggleButtonGroup />
             {userToolbarCreateNewMenuTrigger}
           </ToolbarMobileBottom>
-          {usersContainer}
+
+          {totalFilteredUsers === 0 ? (
+            <UsersFilteredEmptySection />
+          ) : (
+            usersContainer
+          )}
         </ViewModeProvider>
       </PageGrid>
     </PageContainer>

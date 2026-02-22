@@ -15,7 +15,7 @@ export function useFiltersFormHandleSubmit({
   clearSelectedItems,
   booleanFieldNames = [],
 }: {
-  clearSelectedItems: () => void;
+  clearSelectedItems?: () => void;
   booleanFieldNames?: string[];
 }) {
   const overlayContext = useContext(OverlayTriggerStateContext);
@@ -65,7 +65,7 @@ export function useFiltersFormHandleSubmit({
     ) {
       return;
     }
-    clearSelectedItems();
+    clearSelectedItems?.();
 
     // start the page transition and update the URL with the new searchParams
     startFilteringTransition(() => {

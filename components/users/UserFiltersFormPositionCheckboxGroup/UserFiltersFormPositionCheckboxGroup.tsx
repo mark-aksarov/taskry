@@ -1,6 +1,10 @@
 "use client";
 
-import { UserFilters } from "@/lib/types";
+import {
+  useUserFilters,
+  useUserFiltersDispatch,
+} from "../UserFiltersForm/UserFiltersContext";
+
 import { useTranslations } from "next-intl";
 import { Checkbox } from "@/components/ui/Checkbox";
 import { CheckboxGroup } from "@/components/ui/CheckboxGroup";
@@ -8,25 +12,27 @@ import { useExpandedItems } from "@/lib/hooks/useExpandedItems";
 import { ExpandCollapseButton } from "@/components/common/ExpandCollapseButton";
 
 interface UserFiltersFormPositionCheckboxGroupProps {
-  filters?: UserFilters;
   positions: { id: number; name: string }[];
 }
 
 export function UserFiltersFormPositionCheckboxGroup({
-  filters,
   positions,
 }: UserFiltersFormPositionCheckboxGroupProps) {
   const t = useTranslations("users.UserFiltersFormPositionCheckboxGroup");
-  const defaultValue = filters?.position?.map((id) => id.toString());
   const { isExpanded, setIsExpanded, expandedItems } =
     useExpandedItems(positions);
+  const filters = useUserFilters();
+  const dispatch = useUserFiltersDispatch();
 
   return (
     <>
       <CheckboxGroup
         name="position"
         label={t("label")}
-        defaultValue={defaultValue}
+        value={filters.position}
+        onChange={(value) =>
+          dispatch({ type: "setPosition", payload: value as any })
+        }
       >
         {expandedItems.map((item) => (
           <Checkbox
