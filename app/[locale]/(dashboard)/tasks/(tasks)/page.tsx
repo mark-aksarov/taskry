@@ -63,8 +63,6 @@ export default async function AppTasksPage({
 }) {
   await requireProtectedPage();
 
-  await new Promise((resolve) => setTimeout(resolve, 2000)); // Simulate loading delay
-
   const rawParams = await searchParams;
   const validated = searchParamsSchema.parse(rawParams);
   const { page, pageSize, sort, ...filters } = validated;

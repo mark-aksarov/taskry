@@ -5,6 +5,7 @@ import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { pageSearchParam, pageSizeSearchParam } from "@/lib/schemas/base";
 import { updateTaskStatuses } from "@/lib/actions/task/updateTaskStatuses";
 import { SelectedTasksProvider } from "@/components/tasks/SelectedTasksContext";
+import { PageTransitionProvider } from "@/components/common/PageTransitionContext";
 import { AssignedTasksContainer } from "@/components/tasks/AssignedTasksContainer";
 import { TotalTasksCardContainer } from "@/components/tasks/TotalTasksCardContainer";
 import { TotalUsersCardContainer } from "@/components/users/TotalUsersCardContainer";
@@ -48,21 +49,23 @@ export default async function AppDashboardPage({
       <SelectedTasksProvider
         pageItems={tasks.map((task) => ({ id: task.id, status: task.status }))}
       >
-        <DashboardPage
-          totalProjectsCardContainer={<TotalProjectsCardContainer />}
-          totalTasksCardContainer={<TotalTasksCardContainer />}
-          totalUsersCardContainer={<TotalUsersCardContainer />}
-          totalCustomersCardContainer={<TotalCustomersCardContainer />}
-          assignedTasksContainer={
-            <AssignedTasksContainer
-              tasks={tasks}
-              totalCount={totalCount}
-              page={page}
-              pageSize={pageSize}
-            />
-          }
-          appHeaderProps={defaultAppHeaderSlots}
-        />
+        <PageTransitionProvider>
+          <DashboardPage
+            totalProjectsCardContainer={<TotalProjectsCardContainer />}
+            totalTasksCardContainer={<TotalTasksCardContainer />}
+            totalUsersCardContainer={<TotalUsersCardContainer />}
+            totalCustomersCardContainer={<TotalCustomersCardContainer />}
+            assignedTasksContainer={
+              <AssignedTasksContainer
+                tasks={tasks}
+                totalCount={totalCount}
+                page={page}
+                pageSize={pageSize}
+              />
+            }
+            appHeaderProps={defaultAppHeaderSlots}
+          />
+        </PageTransitionProvider>
       </SelectedTasksProvider>
     </UpdateTaskStatusesProvider>
   );
