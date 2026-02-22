@@ -1,6 +1,7 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { ProjectFiltersForm } from "../ProjectFiltersForm";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { withProjectFiltersProvider } from "../../ProjectFiltersContext/__stories__";
 import { withSelectedProjectsProvider } from "../../SelectedProjectsContext/__stories__";
 import { withOverlayTriggerStateProvider } from "@/.storybook/withOverlayTriggerStateProvider";
 import { ProjectFiltersFormUserCheckboxGroup } from "../../ProjectFiltersFormUserCheckboxGroup";
@@ -18,6 +19,7 @@ const meta: Meta<typeof ProjectFiltersForm> = {
   decorators: [
     withPageTransitionProvider,
     withOverlayTriggerStateProvider,
+    withProjectFiltersProvider,
     withSelectedProjectsProvider,
     withThemedBackground,
   ],

@@ -1,11 +1,12 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { withTaskFiltersProvider } from "../../TaskFiltersContext/__stories__";
 import { TaskFiltersFormCategoryCheckboxGroup } from "../TaskFiltersFormCategoryCheckboxGroup";
 
 const meta = {
   title: "components/tasks/TaskFiltersFormCategoryCheckboxGroup",
   component: TaskFiltersFormCategoryCheckboxGroup,
-  decorators: [withThemedBackground],
+  decorators: [withTaskFiltersProvider, withThemedBackground],
   parameters: {
     backgroundVariant: "alt",
   },

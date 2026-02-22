@@ -1,7 +1,7 @@
 import {
   useTaskFilters,
   useTaskFiltersDispatch,
-} from "@/components/tasks/TaskFiltersContext";
+} from "@/components/tasks/TaskFiltersContext/TaskFiltersContext";
 
 import { useTranslations } from "next-intl";
 import { Switch } from "@/components/ui/Switch";

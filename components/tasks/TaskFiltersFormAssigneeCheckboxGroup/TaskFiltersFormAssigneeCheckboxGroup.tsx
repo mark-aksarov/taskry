@@ -3,7 +3,7 @@
 import {
   useTaskFilters,
   useTaskFiltersDispatch,
-} from "@/components/tasks/TaskFiltersContext";
+} from "@/components/tasks/TaskFiltersContext/TaskFiltersContext";
 
 import { useTranslations } from "next-intl";
 import { Checkbox } from "@/components/ui/Checkbox";

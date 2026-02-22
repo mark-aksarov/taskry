@@ -8,7 +8,7 @@ import {
 
 import { Separator } from "@/components/ui/Separator";
 import { useSelectedTasks } from "../SelectedTasksContext";
-import { useTaskFiltersDispatch } from "../TaskFiltersContext";
+import { useTaskFiltersDispatch } from "../TaskFiltersContext/TaskFiltersContext";
 import { FiltersFormResetButton } from "@/components/common/FiltersForm";
 import { FiltersFormSubmitButton } from "@/components/common/FiltersForm";
 import { useFiltersFormHandleSubmit } from "@/components/common/FiltersForm";

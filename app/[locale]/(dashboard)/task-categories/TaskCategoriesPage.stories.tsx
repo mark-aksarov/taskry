@@ -11,6 +11,7 @@ import { AppHeaderStory } from "@/components/layout/AppHeader/__stories__";
 import { TaskCategoryList } from "@/components/taskCategory/TaskCategoryList";
 import { TaskCategoryListStory } from "@/components/taskCategory/TaskCategoryList/__stories__";
 import { withSelectedItemsProvider } from "@/components/common/SelectedItemsContext/__stories__";
+import { withPageTransitionProvider } from "@/components/common/PageTransitionContext/__stories__";
 import { withDeleteTaskCategoryModalProvider } from "@/components/taskCategory/DeleteTaskCategoryModal/__stories__";
 import { TaskCategoryToolbarActionsMenuTrigger } from "@/components/taskCategory/TaskCategoryToolbarActionsMenuTrigger";
 import { TaskCategoryToolbarCreateNewModalTrigger } from "@/components/taskCategory/TaskCategoryToolbarCreateNewModalTrigger";
@@ -27,6 +28,7 @@ const meta = {
         <Story />
       </TaskCategoriesTemplate>
     ),
+    withPageTransitionProvider,
     withDeleteTaskCategoryModalProvider,
     withSelectedItemsProvider,
     PageDecorator,

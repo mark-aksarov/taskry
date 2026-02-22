@@ -3,10 +3,9 @@
 import { CustomerFilters } from "@/lib/types";
 import { useReducer, useContext, createContext } from "react";
 
-export const CustomerFiltersContext =
-  createContext<CustomerFiltersState | null>(null);
+const CustomerFiltersContext = createContext<CustomerFiltersState | null>(null);
 
-export const CustomerFiltersDispatchContext =
+const CustomerFiltersDispatchContext =
   createContext<React.Dispatch<CustomerFiltersAction> | null>(null);
 
 interface CustomerFiltersProviderProps {
@@ -79,7 +78,7 @@ function createInitialState(
   };
 }
 
-export function customerFiltersReducer(
+function customerFiltersReducer(
   state: CustomerFiltersState,
   action: CustomerFiltersAction,
 ) {

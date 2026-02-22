@@ -1,0 +1,1 @@
+export { withCustomerFiltersProvider } from "./withCustomerFiltersProvider";

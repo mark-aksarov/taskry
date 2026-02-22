@@ -1,19 +1,29 @@
 import { TaskFiltersForm } from "../TaskFiltersForm";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { TaskFiltersFormProjectCheckboxGroup } from "../../TaskFiltersFormProjectCheckboxGroup";
+import { withTaskFiltersProvider } from "../../TaskFiltersContext/__stories__";
+import { withSelectedTasksProvider } from "../../SelectedTasksContext/__stories__";
 import { TaskFiltersFormStatusCheckboxGroup } from "../../TaskFiltersFormStatusCheckboxGroup";
+import { withOverlayTriggerStateProvider } from "@/.storybook/withOverlayTriggerStateProvider";
+import { TaskFiltersFormProjectCheckboxGroup } from "../../TaskFiltersFormProjectCheckboxGroup";
 import { TaskFiltersFormAssigneeCheckboxGroup } from "../../TaskFiltersFormAssigneeCheckboxGroup";
 import { TaskFiltersFormCategoryCheckboxGroup } from "../../TaskFiltersFormCategoryCheckboxGroup";
+import { withPageTransitionProvider } from "@/components/common/PageTransitionContext/__stories__";
 import { TaskFiltersFormStatusCheckboxGroupStory } from "../../TaskFiltersFormStatusCheckboxGroup/__stories__";
+import { TaskFiltersFormProjectCheckboxGroupStory } from "../../TaskFiltersFormProjectCheckboxGroup/__stories__";
 import { TaskFiltersFormCategoryCheckboxGroupStory } from "../../TaskFiltersFormCategoryCheckboxGroup/__stories__";
 import { TaskFiltersFormAssigneeCheckboxGroupStory } from "../../TaskFiltersFormAssigneeCheckboxGroup/__stories__";
-import { TaskFiltersFormProjectCheckboxGroupStory } from "../../TaskFiltersFormProjectCheckboxGroup/__stories__";
 
 const meta: Meta<typeof TaskFiltersForm> = {
   title: "components/tasks/TaskFiltersForm",
   component: TaskFiltersForm,
-  decorators: [withThemedBackground],
+  decorators: [
+    withPageTransitionProvider,
+    withOverlayTriggerStateProvider,
+    withTaskFiltersProvider,
+    withSelectedTasksProvider,
+    withThemedBackground,
+  ],
   parameters: {
     backgroundVariant: "alt",
   },

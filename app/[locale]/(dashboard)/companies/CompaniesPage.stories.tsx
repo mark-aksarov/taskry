@@ -11,6 +11,7 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { AppHeaderStory } from "@/components/layout/AppHeader/__stories__";
 import { CompanyListStory } from "@/components/company/CompanyList/__stories__";
 import { withSelectedItemsProvider } from "@/components/common/SelectedItemsContext/__stories__";
+import { withPageTransitionProvider } from "@/components/common/PageTransitionContext/__stories__";
 import { withDeleteCompanyModalProvider } from "@/components/company/DeleteCompanyModal/__stories__";
 import { CompanyToolbarActionsMenuTrigger } from "@/components/company/CompanyToolbarActionsMenuTrigger";
 import { CompanyToolbarCreateNewModalTrigger } from "@/components/company/CompanyToolbarCreateNewModalTrigger";
@@ -27,6 +28,7 @@ const meta = {
         <Story />
       </CompaniesTemplate>
     ),
+    withPageTransitionProvider,
     withDeleteCompanyModalProvider,
     withSelectedItemsProvider,
     PageDecorator,

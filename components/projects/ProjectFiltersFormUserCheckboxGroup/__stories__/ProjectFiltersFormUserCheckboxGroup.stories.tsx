@@ -1,11 +1,12 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { withProjectFiltersProvider } from "../../ProjectFiltersContext/__stories__";
 import { ProjectFiltersFormUserCheckboxGroup } from "../ProjectFiltersFormUserCheckboxGroup";
 
 const meta = {
   title: "components/projects/ProjectFiltersFormUserCheckboxGroup",
   component: ProjectFiltersFormUserCheckboxGroup,
-  decorators: [withThemedBackground],
+  decorators: [withProjectFiltersProvider, withThemedBackground],
   parameters: {
     backgroundVariant: "alt",
   },

@@ -13,7 +13,7 @@ import {
 } from "@/components/common/FiltersForm";
 
 import { Separator } from "@/components/ui/Separator";
-import { useUserFiltersDispatch } from "./UserFiltersContext";
+import { useUserFiltersDispatch } from "../UserFiltersContext";
 import { UserFiltersFormActiveTasksSwitch } from "./UserFiltersFormActiveTasksSwitch";
 import { UserFiltersFormOverdueTasksSwitch } from "./UserFiltersFormOverdueTasksSwitch";
 import { UserFiltersFormNoActiveTasksSwitch } from "./UserFiltersFormNoActiveTasksSwitch";

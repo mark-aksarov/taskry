@@ -1,9 +1,6 @@
 "use client";
 
-import {
-  useUserFilters,
-  useUserFiltersDispatch,
-} from "../UserFiltersForm/UserFiltersContext";
+import { useUserFilters, useUserFiltersDispatch } from "../UserFiltersContext";
 
 import { useTranslations } from "next-intl";
 import { Checkbox } from "@/components/ui/Checkbox";

@@ -22,7 +22,7 @@ export function useFiltersFormHandleSubmit({
 
   if (!overlayContext) {
     throw new Error(
-      "FiltersFormResetButton must be used within a FormBaseModal",
+      "FiltersFormResetButton must be used within a OverlayTriggerStateContext.Provider",
     );
   }
 

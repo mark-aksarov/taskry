@@ -1,6 +1,6 @@
 import { useTranslations } from "next-intl";
 import { Switch } from "@/components/ui/Switch";
-import { useUserFilters, useUserFiltersDispatch } from "./UserFiltersContext";
+import { useUserFilters, useUserFiltersDispatch } from "../UserFiltersContext";
 
 export function UserFiltersFormActiveTasksSwitch() {
   const t = useTranslations("users.UserFiltersFormActiveTasksSwitch");

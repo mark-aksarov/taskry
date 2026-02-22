@@ -7,9 +7,9 @@ import {
 
 import { Suspense } from "react";
 import { CustomerFilters } from "@/lib/types";
-import { getCompanySummaries } from "@/lib/data/company/company.dal";
-import { CustomerFiltersFormCompanyCheckboxGroup } from "./CustomerFiltersForm";
 import { CustomerFiltersProvider } from "./CustomerFiltersContext";
+import { getCompanySummaries } from "@/lib/data/company/company.dal";
+import { CustomerFiltersFormCompanyCheckboxGroup } from "./CustomerFiltersFormCompanyCheckboxGroup";
 
 interface CustomerFiltersFormContainerProps {
   filters?: CustomerFilters;

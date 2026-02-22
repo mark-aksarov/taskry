@@ -10,6 +10,7 @@ import { ProjectCategoriesPageEmpty } from "./ProjectCategoriesPageEmpty";
 import { AppHeaderStory } from "@/components/layout/AppHeader/__stories__";
 import { ProjectCategoryList } from "@/components/projectCategory/ProjectCategoryList";
 import { withSelectedItemsProvider } from "@/components/common/SelectedItemsContext/__stories__";
+import { withPageTransitionProvider } from "@/components/common/PageTransitionContext/__stories__";
 import { ProjectCategoryListStory } from "@/components/projectCategory/ProjectCategoryList/__stories__";
 import { withDeleteProjectCategoryModalProvider } from "@/components/projectCategory/DeleteProjectCategoryModal/__stories__";
 import { ProjectCategoryToolbarActionsMenuTrigger } from "@/components/projectCategory/ProjectCategoryToolbarActionsMenuTrigger";
@@ -27,6 +28,7 @@ const meta = {
         <Story />
       </ProjectCategoriesTemplate>
     ),
+    withPageTransitionProvider,
     withDeleteProjectCategoryModalProvider,
     withSelectedItemsProvider,
     PageDecorator,

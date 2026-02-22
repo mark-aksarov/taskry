@@ -11,6 +11,7 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { AppHeaderStory } from "@/components/layout/AppHeader/__stories__";
 import { PositionListStory } from "@/components/position/PositionList/__stories__";
 import { withSelectedItemsProvider } from "@/components/common/SelectedItemsContext/__stories__";
+import { withPageTransitionProvider } from "@/components/common/PageTransitionContext/__stories__";
 import { withDeletePositionModalProvider } from "@/components/position/DeletePositionModal/__stories__";
 import { PositionToolbarActionsMenuTrigger } from "@/components/position/PositionToolbarActionsMenuTrigger";
 import { PositionToolbarCreateNewModalTrigger } from "@/components/position/PositionToolbarCreateNewModalTrigger";
@@ -27,6 +28,7 @@ const meta = {
         <Story />
       </PositionsTemplate>
     ),
+    withPageTransitionProvider,
     withDeletePositionModalProvider,
     withSelectedItemsProvider,
     PageDecorator,
