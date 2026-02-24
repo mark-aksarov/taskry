@@ -8,14 +8,14 @@ import {
 import { useTranslations } from "next-intl";
 
 interface ProjectDetailCardProps {
-  projectDetailHeader: React.ReactNode;
-  projectDetail: React.ReactNode;
+  projectDetailHeaderContainer: React.ReactNode;
+  projectDetailContainer: React.ReactNode;
   projectDetailActions: React.ReactNode;
 }
 
 export function ProjectDetailCard({
-  projectDetailHeader,
-  projectDetail,
+  projectDetailHeaderContainer,
+  projectDetailContainer,
   projectDetailActions,
 }: ProjectDetailCardProps) {
   const t = useTranslations("projects.ProjectDetailCard");
@@ -26,11 +26,11 @@ export function ProjectDetailCard({
         <DetailCardHeader>
           <DetailCardTitle>{t("title")}</DetailCardTitle>
         </DetailCardHeader>
-        <div className="p-6">{projectDetail}</div>
+        <div className="p-6">{projectDetailContainer}</div>
       </DetailCardLeft>
 
       <DetailCardRight>
-        {projectDetailHeader}
+        {projectDetailHeaderContainer}
         {projectDetailActions}
       </DetailCardRight>
     </DetailCard>

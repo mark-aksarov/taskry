@@ -1,16 +1,16 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/Button";
 import { Meta, StoryObj } from "@storybook/react";
+import { DeletePositionModal } from "../DeletePositionModal";
 import { withToastRegion } from "@/.storybook/withToastRegion";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { DeletePositionModal } from "../DeletePositionModal";
 
 const meta = {
   title: "components/positions/DeletePositionModal",
   component: DeletePositionModal,
   decorators: [withToastRegion, withThemedBackground],
   render: (args) => {
-    const [open, setOpen] = useState(false);
+    const [open, setOpen] = useState(true);
 
     return (
       <>
@@ -27,7 +27,7 @@ export type Story = StoryObj<typeof meta>;
 export const Default = {
   args: {
     positionId: 1,
-    positionName: "Project Manager",
+    positionName: "Position 1",
     onOpenChange: () => {},
     deletePositions: () => ({ status: "success" }),
   },

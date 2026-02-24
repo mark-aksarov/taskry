@@ -3,20 +3,25 @@ import { NewCustomerForm } from "../NewCustomerForm";
 import { DialogTrigger } from "react-aria-components";
 import { NewCustomerModal } from "./NewCustomerModal";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { mockedCompanySummaries } from "@/mocks/companies";
 import { CustomerFormSkeleton } from "../CustomerFormSkeleton";
-import { NewCustomerFormStory } from "../NewCustomerForm/__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { useState } from "react";
 
 const meta = {
   title: "components/customers/NewCustomerModal",
   component: NewCustomerModal,
   decorators: [
-    (Story) => (
-      <DialogTrigger>
-        <Button label="New customer" />
-        <Story />
-      </DialogTrigger>
-    ),
+    (Story) => {
+      const [isOpen, setIsOpen] = useState(true);
+
+      return (
+        <DialogTrigger isOpen={isOpen} onOpenChange={setIsOpen}>
+          <Button label="New customer" />
+          <Story />
+        </DialogTrigger>
+      );
+    },
     withThemedBackground,
   ],
 } satisfies Meta<typeof NewCustomerModal>;
@@ -27,7 +32,10 @@ type Story = StoryObj<typeof meta>;
 export const Default = {
   args: {
     newCustomerFormContainer: (
-      <NewCustomerForm {...NewCustomerFormStory.args} />
+      <NewCustomerForm
+        createCustomer={() => ({ status: "success" })}
+        companySelectItems={mockedCompanySummaries}
+      />
     ),
   },
 } satisfies Story;

@@ -14,6 +14,8 @@ import { Link } from "@/components/ui/Link";
 import { useTranslations } from "next-intl";
 import { UnknownUser } from "@/components/common/UnknownUser";
 import { ImageContainer } from "@/components/common/ImageContainer";
+import { UserItemActionMenuTrigger } from "../UserItemActionMenuTrigger";
+import { UserDetailModal } from "../UserDetailModal";
 
 export interface UserListItemProps {
   id: string;
@@ -25,8 +27,11 @@ export interface UserListItemProps {
   position?: {
     name: string;
   };
-  menuTrigger: React.ReactNode;
-  userDetailModal: React.ReactNode;
+  guestMode: boolean;
+  showUserActionMenuTrigger: boolean;
+  showDeleteMenuItem: boolean;
+  editUserFormContainer: React.ReactNode;
+  userDetailContainer: React.ReactNode;
 }
 
 export function UserListItem({
@@ -37,8 +42,11 @@ export function UserListItem({
   phoneNumber,
   publicLink,
   position,
-  menuTrigger,
-  userDetailModal,
+  guestMode,
+  showUserActionMenuTrigger,
+  showDeleteMenuItem,
+  editUserFormContainer,
+  userDetailContainer,
 }: UserListItemProps) {
   const t = useTranslations("users.UserListItem");
 
@@ -48,6 +56,10 @@ export function UserListItem({
     </ImageContainer>
   ) : (
     <UnknownUser className="h-9 w-9" />
+  );
+
+  const userDetailModal = (
+    <UserDetailModal userId={id} userDetailContainer={userDetailContainer} />
   );
 
   return (
@@ -118,7 +130,15 @@ export function UserListItem({
         <ListItemText>{t("position")}</ListItemText>
       </ListItemInfo>
 
-      {menuTrigger}
+      {showUserActionMenuTrigger && (
+        <UserItemActionMenuTrigger
+          showDeleteMenuItem={showDeleteMenuItem}
+          guestMode={guestMode}
+          editUserFormContainer={editUserFormContainer}
+          userId={id}
+          userFullName={fullName}
+        />
+      )}
     </ListItem>
   );
 }

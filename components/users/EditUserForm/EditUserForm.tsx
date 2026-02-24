@@ -19,29 +19,31 @@ import { UserBirthdateDatePicker } from "../UserBirthdateDatePicker";
 import { UserPublicLinkTextField } from "../UserPublicLinkTextField";
 import { FormErrorBanner } from "@/components/common/FormErrorBanner";
 import { UserPhoneNumberTextField } from "../UserPhoneNumberTextField";
+import { UserPositionSelect } from "../UserPositionSelect";
 
 interface EditUserFormProps {
   userId: string;
-  fullNameDefaultValue?: string;
-  bioDefaultValue?: string;
-  birthdateDefaultValue?: DateValue;
-  emailDefaultValue?: string;
-  phoneNumberDefaultValue?: string;
-  publicLinkDefaultValue?: string;
-  addressDefaultValue?: string;
-  positionSelect: React.ReactNode;
+  userFullNameDefaultValue?: string;
+  userBioDefaultValue?: string;
+  userBirthdateDefaultValue?: DateValue;
+  userPhoneNumberDefaultValue?: string;
+  userPublicLinkDefaultValue?: string;
+  userAddressDefaultValue?: string;
+  userPositionSelectDefaultValue?: string;
+  userPositionSelectItems: { id: number; name: string }[];
   updateUser: ActionFn<ActionState, FormData>;
 }
 
 export function EditUserForm({
   userId,
-  fullNameDefaultValue,
-  bioDefaultValue,
-  birthdateDefaultValue,
-  phoneNumberDefaultValue,
-  publicLinkDefaultValue,
-  addressDefaultValue,
-  positionSelect,
+  userFullNameDefaultValue,
+  userBioDefaultValue,
+  userBirthdateDefaultValue,
+  userPhoneNumberDefaultValue,
+  userPublicLinkDefaultValue,
+  userAddressDefaultValue,
+  userPositionSelectDefaultValue,
+  userPositionSelectItems,
   updateUser,
 }: EditUserFormProps) {
   const t = useTranslations("users.EditUserForm");
@@ -55,13 +57,16 @@ export function EditUserForm({
     >
       <FormBaseBody>
         {userId && <input type="hidden" name="id" value={userId} />}
-        <UserFullNameTextField defaultValue={fullNameDefaultValue} />
-        <UserBioTextField defaultValue={bioDefaultValue} />
-        <UserBirthdateDatePicker defaultValue={birthdateDefaultValue} />
-        <UserPhoneNumberTextField defaultValue={phoneNumberDefaultValue} />
-        <UserPublicLinkTextField defaultValue={publicLinkDefaultValue} />
-        <UserAddressTextField defaultValue={addressDefaultValue} />
-        {positionSelect}
+        <UserFullNameTextField defaultValue={userFullNameDefaultValue} />
+        <UserBioTextField defaultValue={userBioDefaultValue} />
+        <UserBirthdateDatePicker defaultValue={userBirthdateDefaultValue} />
+        <UserPhoneNumberTextField defaultValue={userPhoneNumberDefaultValue} />
+        <UserPublicLinkTextField defaultValue={userPublicLinkDefaultValue} />
+        <UserAddressTextField defaultValue={userAddressDefaultValue} />
+        <UserPositionSelect
+          defaultSelectedKey={userPositionSelectDefaultValue}
+          items={userPositionSelectItems}
+        />
 
         <FormErrorBanner status={state.status} isPending={isPending}>
           {state.message}

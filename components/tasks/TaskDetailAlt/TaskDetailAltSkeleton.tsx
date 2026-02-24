@@ -9,11 +9,7 @@ export function TaskDetailAltSkeleton() {
       descriptionSlot={
         <DetailInfo>
           <Skeleton className="w-[7rem]" size="xs" />
-          <div className="flex flex-col">
-            <Skeleton size="sm" className="w-[15rem]" />
-            <Skeleton size="sm" className="w-[14rem]" />
-            <Skeleton size="sm" className="w-[15rem]" />
-          </div>
+          <Skeleton size="sm" className="w-[15rem]" />
         </DetailInfo>
       }
       assigneesSlot={<DetailInfoSkeleton />}

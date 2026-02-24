@@ -11,9 +11,7 @@ export function CommentItemSkeleton() {
       senderNameAndDateSlot={<CommentItemInfoSkeleton />}
       contentSlot={
         <div className="flex flex-col">
-          <Skeleton size="sm" />
-          <Skeleton size="sm" />
-          <Skeleton size="sm" />
+          <Skeleton size="sm" className="w-[15rem]" />
         </div>
       }
       menuTriggerSlot={<ItemBaseActionMenuTriggerSkeleton />}

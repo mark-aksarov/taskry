@@ -15,30 +15,41 @@ import {
 import { useTranslations } from "next-intl";
 import { TaskSortField } from "@/lib/types";
 import { PageGrid } from "@/components/common/PageGrid";
+import { ActionFn, ActionState } from "@/lib/actions/types";
 import { BackButton } from "@/components/common/BackButton";
 import { PageContainer } from "@/components/common/PageContainer";
 import { TaskToolbarSortingMenuTrigger } from "@/components/tasks/TaskToolbarSortingMenuTrigger";
+import { TaskToolbarActionsMenuTrigger } from "@/components/tasks/TaskToolbarActionsMenuTrigger";
 
 interface UserTasksPageLayoutProps {
+  guestMode: boolean;
   userTasksContainer: React.ReactNode;
   userHeaderContainer: React.ReactNode;
   navigationDesktop: React.ReactNode;
   navigationMobile: React.ReactNode;
-  taskToolbarActionsMenuTrigger: React.ReactNode;
   selectedSortField: TaskSortField;
   backButton?: boolean;
+  deleteTasks: ActionFn<ActionState, number[]>;
 }
 
 export function UserTasksPageLayout({
+  guestMode,
   userTasksContainer,
   userHeaderContainer,
   navigationDesktop,
   navigationMobile,
-  taskToolbarActionsMenuTrigger,
   selectedSortField,
   backButton,
+  deleteTasks,
 }: UserTasksPageLayoutProps) {
   const t = useTranslations("users.UserTasksPageLayout");
+
+  const taskToolbarActionsMenuTrigger = (
+    <TaskToolbarActionsMenuTrigger
+      guestMode={guestMode}
+      deleteTasks={deleteTasks}
+    />
+  );
 
   return (
     <>

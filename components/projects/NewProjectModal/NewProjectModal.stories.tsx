@@ -1,22 +1,27 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/Button";
 import { NewProjectForm } from "../NewProjectForm";
 import { NewProjectModal } from "./NewProjectModal";
 import { DialogTrigger } from "react-aria-components";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { ProjectFormSkeleton } from "../ProjectFormSkeleton";
-import { NewProjectFormStory } from "../NewProjectForm/__stories__";
+import { newProjectFormArgs } from "../NewProjectForm/__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {
   title: "components/projects/NewProjectModal",
   component: NewProjectModal,
   decorators: [
-    (Story) => (
-      <DialogTrigger>
-        <Button label="New project" />
-        <Story />
-      </DialogTrigger>
-    ),
+    (Story) => {
+      const [isOpen, setIsOpen] = useState(true);
+
+      return (
+        <DialogTrigger isOpen={isOpen} onOpenChange={setIsOpen}>
+          <Button label="New project" />
+          <Story />
+        </DialogTrigger>
+      );
+    },
     withThemedBackground,
   ],
 } satisfies Meta<typeof NewProjectModal>;
@@ -26,7 +31,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    newProjectFormContainer: <NewProjectForm {...NewProjectFormStory.args} />,
+    newProjectFormContainer: <NewProjectForm {...newProjectFormArgs} />,
   },
 } satisfies Story;
 

@@ -29,8 +29,14 @@ import { SelectableItem } from "../../common/SelectableItem";
 import { UnknownUser } from "@/components/common/UnknownUser";
 import { ImageContainer } from "@/components/common/ImageContainer";
 import { UpdateTaskStatusProvider } from "../UpdateTaskStatusContext";
+import { TaskDetailModal } from "../TaskDetailModal";
+import { TaskCommentsModal } from "../TaskCommentsModal";
+import { ProjectDetailModal } from "@/components/projects/ProjectDetailModal";
+import { UserDetailModal } from "@/components/users/UserDetailModal";
+import { TaskItemActionMenuTrigger } from "../TaskItemActionMenuTrigger";
 
 export interface TaskListItemProps {
+  guestMode: boolean;
   id: number;
   title: string;
   deadline: string;
@@ -50,11 +56,13 @@ export interface TaskListItemProps {
   commentsCount: number;
   status: TaskStatus;
   showCheckbox?: boolean;
-  taskCommentsModal: React.ReactNode;
-  menuTrigger: React.ReactNode;
-  taskDetailModal: React.ReactNode;
-  userDetailModal: React.ReactNode;
-  projectDetailModal: React.ReactNode;
+  taskCommentsContainer: React.ReactNode;
+  editTaskFormContainer: React.ReactNode;
+  taskDetailContainer: React.ReactNode;
+  userDetailContainer: React.ReactNode;
+  projectDetailContainer: React.ReactNode;
+  sendComment: ActionFn<ActionState, FormData>;
+  updateComment: ActionFn<ActionState, FormData>;
   updateTaskStatus: ActionFn<ActionState, UpdateTaskStatusesPayload>;
 }
 
@@ -77,6 +85,7 @@ export const TaskListItem = ({
 };
 
 export const TaskListItemInner = ({
+  guestMode,
   id,
   title,
   deadline,
@@ -86,11 +95,13 @@ export const TaskListItemInner = ({
   commentsCount,
   status,
   showCheckbox,
-  taskCommentsModal,
-  menuTrigger,
-  taskDetailModal,
-  userDetailModal,
-  projectDetailModal,
+  taskCommentsContainer,
+  editTaskFormContainer,
+  taskDetailContainer,
+  userDetailContainer,
+  projectDetailContainer,
+  sendComment,
+  updateComment,
 }: Omit<TaskListItemProps, "updateTaskStatus">) => {
   const t = useTranslations("tasks.TaskListItem");
 
@@ -123,7 +134,12 @@ export const TaskListItemInner = ({
         <ListItemInfo>
           <ListItemTitle data-test="task-list-item-title">
             <ItemBaseDetailModalTrigger
-              modal={taskDetailModal}
+              modal={
+                <TaskDetailModal
+                  taskId={id}
+                  taskDetailContainer={taskDetailContainer}
+                />
+              }
               className="truncate max-md:hidden"
             >
               {title}
@@ -141,7 +157,12 @@ export const TaskListItemInner = ({
         <>
           {assignee ? (
             <ItemBaseDetailModalTrigger
-              modal={userDetailModal}
+              modal={
+                <UserDetailModal
+                  userId={assignee.id}
+                  userDetailContainer={userDetailContainer}
+                />
+              }
               className="max-md:hidden"
             >
               {assigneeImg}
@@ -154,7 +175,12 @@ export const TaskListItemInner = ({
             <ListItemTitle data-test="task-list-item-user-title">
               {assignee ? (
                 <ItemBaseDetailModalTrigger
-                  modal={userDetailModal}
+                  modal={
+                    <UserDetailModal
+                      userId={assignee.id}
+                      userDetailContainer={userDetailContainer}
+                    />
+                  }
                   className="truncate"
                 >
                   {assignee.fullName}
@@ -180,7 +206,12 @@ export const TaskListItemInner = ({
         <ListItemInfo className="@max-4xl:hidden">
           <ListItemTitle data-test="task-list-item-project-title">
             <ItemBaseDetailModalTrigger
-              modal={projectDetailModal}
+              modal={
+                <ProjectDetailModal
+                  projectId={project.id}
+                  projectDetailContainer={projectDetailContainer}
+                />
+              }
               className="truncate"
             >
               {project.title}
@@ -200,10 +231,25 @@ export const TaskListItemInner = ({
         <ItemBaseCommentsModalTrigger
           data-test={`task-${id}-comments-modal-trigger`}
           commentsCount={commentsCount}
-          modal={taskCommentsModal}
+          modal={
+            <TaskCommentsModal
+              taskId={id}
+              taskCommentsContainer={taskCommentsContainer}
+              sendComment={sendComment}
+              updateComment={updateComment}
+            />
+          }
         />
       }
-      menuTriggerSlot={menuTrigger}
+      menuTriggerSlot={
+        <TaskItemActionMenuTrigger
+          guestMode={guestMode}
+          taskId={id}
+          taskTitle={title}
+          taskStatus={status}
+          editTaskFormContainer={editTaskFormContainer}
+        />
+      }
     />
   );
 };

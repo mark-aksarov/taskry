@@ -11,24 +11,53 @@ import {
 import { useTranslations } from "next-intl";
 import { Card } from "@/components/common/Card";
 import { PageGrid } from "@/components/common/PageGrid";
+import { ActionFn, ActionState } from "@/lib/actions/types";
 import { BackButton } from "@/components/common/BackButton";
 import { PageContainer } from "@/components/common/PageContainer";
 import { TaskDetailCard } from "@/components/tasks/TaskDetailCard";
+import { TaskDetailActions } from "@/components/tasks/TaskDetailActions";
 
 interface TaskDetailPageProps {
+  guestMode: boolean;
+  taskId: number;
+  taskTitle: string;
   taskDetailContainer: React.ReactNode;
   taskHeaderContainer: React.ReactNode;
-  taskDetailActions: React.ReactNode;
+  editTaskFormContainer: React.ReactNode;
+  taskCommentsContainer: React.ReactNode;
   appHeaderProps: AppHeaderContainerProps;
+  sendComment: ActionFn<ActionState, FormData>;
+  updateComment: ActionFn<ActionState, FormData>;
+  deleteTask: ActionFn<ActionState, number[]>;
 }
 
 export function TaskDetailPage({
+  guestMode,
+  taskId,
+  taskTitle,
   taskDetailContainer,
   taskHeaderContainer,
-  taskDetailActions,
+  editTaskFormContainer,
+  taskCommentsContainer,
   appHeaderProps,
+  sendComment,
+  updateComment,
+  deleteTask,
 }: TaskDetailPageProps) {
   const t = useTranslations("app.TaskDetailPage");
+
+  const taskDetailActions = (
+    <TaskDetailActions
+      guestMode={guestMode}
+      taskId={taskId}
+      taskTitle={taskTitle}
+      editTaskFormContainer={editTaskFormContainer}
+      taskCommentsContainer={taskCommentsContainer}
+      deleteTask={deleteTask}
+      sendComment={sendComment}
+      updateComment={updateComment}
+    />
+  );
 
   return (
     <>
@@ -36,8 +65,8 @@ export function TaskDetailPage({
       <main>
         <PageContainer>
           <TaskDetailCard
-            taskDetail={taskDetailContainer}
-            taskDetailHeader={taskHeaderContainer}
+            taskDetailContainer={taskDetailContainer}
+            taskDetailHeaderContainer={taskHeaderContainer}
             taskDetailActions={taskDetailActions}
           />
 

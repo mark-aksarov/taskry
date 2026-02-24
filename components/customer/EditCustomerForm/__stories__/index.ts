@@ -1,1 +1,1 @@
-export { Default as EditCustomerFormStory } from "./EditCustomerForm.stories";
+export { editCustomerFormArgs } from "./EditCustomerForm.args";

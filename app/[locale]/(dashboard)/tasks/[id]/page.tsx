@@ -7,8 +7,6 @@ import { deleteTasks } from "@/lib/actions/task/deleteTasks";
 import { sendComment } from "@/lib/actions/comment/sendComment";
 import { updateComment } from "@/lib/actions/comment/updateComment";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
-import { TaskDetailActions } from "@/components/tasks/TaskDetailActions";
-import { TaskCommentsModal } from "@/components/tasks/TaskCommentsModal";
 import { TaskCommentsContainer } from "@/components/tasks/TaskCommentsContainer";
 import { EditTaskFormContainer } from "@/components/tasks/EditTaskFormContainer";
 import { TaskDetailAltContainer } from "@/components/tasks/TaskDetailAltContainer";
@@ -42,25 +40,16 @@ export default async function AppTaskDetailPage({
     <TaskDetailPage
       taskDetailContainer={<TaskDetailAltContainer taskId={id} />}
       taskHeaderContainer={<TaskDetailHeaderContainer taskId={id} />}
-      taskDetailActions={
-        <TaskDetailActions
-          guestMode={guestMode}
-          editTaskFormContainer={<EditTaskFormContainer taskId={id} />}
-          taskId={id}
-          taskTitle={taskSummary.title}
-          deleteTask={deleteTasks}
-          commentsModal={
-            <TaskCommentsModal
-              taskId={id}
-              taskCommentsContainer={
-                <TaskCommentsContainer guestMode={guestMode} taskId={id} />
-              }
-              sendCommentAction={sendComment}
-              updateCommentAction={updateComment}
-            />
-          }
-        />
+      guestMode={guestMode}
+      editTaskFormContainer={<EditTaskFormContainer taskId={id} />}
+      taskId={id}
+      taskTitle={taskSummary.title}
+      deleteTask={deleteTasks}
+      taskCommentsContainer={
+        <TaskCommentsContainer guestMode={guestMode} taskId={id} />
       }
+      sendComment={sendComment}
+      updateComment={updateComment}
       appHeaderProps={defaultAppHeaderSlots}
     />
   );

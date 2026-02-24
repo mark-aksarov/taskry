@@ -4,18 +4,21 @@ import {
   FormBaseModalDialogBody,
 } from "@/components/common/FormBaseModal";
 
+import { useTranslations } from "next-intl";
 import { ModalProps } from "@/components/ui/Modal";
 import { DialogHeader } from "@/components/ui/Dialog";
-
-import { useTranslations } from "next-intl";
+import { ChangePasswordForm } from "../ChangePasswordForm";
+import { ActionFn, ActionState } from "@/lib/actions/types";
 
 interface ChangePasswordModalProps
   extends Pick<ModalProps, "isOpen" | "onOpenChange"> {
-  changePasswordForm: React.ReactNode;
+  userId: string;
+  changePassword: ActionFn<ActionState, FormData>;
 }
 
 export function ChangePasswordModal({
-  changePasswordForm,
+  userId,
+  changePassword,
   ...props
 }: ChangePasswordModalProps) {
   const t = useTranslations("users.ChangePasswordModal");
@@ -28,7 +31,9 @@ export function ChangePasswordModal({
     >
       <FormBaseModalDialog>
         <DialogHeader>{t("title")}</DialogHeader>
-        <FormBaseModalDialogBody>{changePasswordForm}</FormBaseModalDialogBody>
+        <FormBaseModalDialogBody>
+          <ChangePasswordForm userId={userId} changePassword={changePassword} />
+        </FormBaseModalDialogBody>
       </FormBaseModalDialog>
     </FormBaseModal>
   );

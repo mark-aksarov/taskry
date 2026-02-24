@@ -13,6 +13,8 @@ import { useTranslations } from "next-intl";
 import { ProjectStatus } from "@/generated/prisma/enums";
 import { ActionFn, ActionState } from "@/lib/actions/types";
 import { ProjectStatusSelect } from "../ProjectStatusSelect";
+import { ProjectCategorySelect } from "../ProjectCategorySelect";
+import { ProjectCustomerSelect } from "../ProjectCustomerSelect";
 import { ProjectTitleTextField } from "../ProjectTitleTextField";
 import { handleActionSubmit } from "@/lib/utils/handleActionSubmit";
 import { FormErrorBanner } from "@/components/common/FormErrorBanner";
@@ -25,8 +27,10 @@ interface EditProjectFormProps {
   projectDescriptionDefaultValue?: string;
   projectDeadlineDefaultValue: DateValue;
   projectStatusDefaultValue: ProjectStatus;
-  projectCategorySelect: React.ReactNode;
-  projectCustomerSelect?: React.ReactNode;
+  projectCategorySelectDefaultValue?: string;
+  projectCustomerSelectDefaultValue?: string;
+  projectCategorySelectItems: { id: number; name: string }[];
+  projectCustomerSelectItems: { id: number; fullName: string }[];
   updateProject: ActionFn<ActionState, FormData>;
 }
 
@@ -36,8 +40,10 @@ export function EditProjectForm({
   projectDescriptionDefaultValue,
   projectDeadlineDefaultValue,
   projectStatusDefaultValue,
-  projectCategorySelect,
-  projectCustomerSelect,
+  projectCategorySelectDefaultValue,
+  projectCustomerSelectDefaultValue,
+  projectCategorySelectItems,
+  projectCustomerSelectItems,
   updateProject,
 }: EditProjectFormProps) {
   const t = useTranslations("projects.EditProjectForm");
@@ -57,8 +63,14 @@ export function EditProjectForm({
         />
         <ProjectDeadlineDatePicker defaultValue={projectDeadlineDefaultValue} />
         <ProjectStatusSelect defaultSelectedKey={projectStatusDefaultValue} />
-        {projectCategorySelect}
-        {projectCustomerSelect}
+        <ProjectCategorySelect
+          defaultSelectedKey={projectCategorySelectDefaultValue}
+          items={projectCategorySelectItems}
+        />
+        <ProjectCustomerSelect
+          defaultSelectedKey={projectCustomerSelectDefaultValue}
+          items={projectCustomerSelectItems}
+        />
 
         <FormErrorBanner status={state.status} isPending={isPending}>
           {state.message}

@@ -165,7 +165,7 @@
     "attachments": "Вложения",
     "status": "Статус"
   },
-  "ProjectDetailHeaderContainer": {
+  "ProjectDetailHeader": {
     "noCategory": "Нет категории"
   },
   "ProjectDetailStatusMenuTrigger": {

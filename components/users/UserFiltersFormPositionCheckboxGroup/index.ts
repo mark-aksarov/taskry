@@ -1,1 +1,0 @@
-export { UserFiltersFormPositionCheckboxGroup } from "./UserFiltersFormPositionCheckboxGroup";

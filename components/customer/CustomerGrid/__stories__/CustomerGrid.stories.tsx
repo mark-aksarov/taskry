@@ -1,7 +1,7 @@
 import { CustomerGrid } from "../CustomerGrid";
 import type { Meta, StoryObj } from "@storybook/react";
+import { mockedCustomerList } from "@/mocks/customers";
 import { CustomerGridItem } from "../../CustomerGridItem";
-import { mockedCustomers } from "../../CustomerList/__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { CustomerGridItemStory } from "../../CustomerGridItem/__stories__";
 import { withDeleteCustomerModalProvider } from "../../DeleteCustomerModal/__stories__";
@@ -24,7 +24,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    children: mockedCustomers.map((customer) => (
+    children: mockedCustomerList.map((customer) => (
       <CustomerGridItem
         key={customer.id}
         {...CustomerGridItemStory.args}

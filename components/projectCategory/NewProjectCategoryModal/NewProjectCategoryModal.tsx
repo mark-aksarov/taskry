@@ -7,14 +7,16 @@ import {
 import { useTranslations } from "next-intl";
 import { ModalProps } from "@/components/ui/Modal";
 import { DialogHeader } from "@/components/ui/Dialog";
+import { ActionFn, ActionState } from "@/lib/actions/types";
+import { NewProjectCategoryForm } from "../NewProjectCategoryForm";
 
 interface NewProjectCategoryModalProps
   extends Pick<ModalProps, "isOpen" | "onOpenChange"> {
-  newProjectCategoryForm: React.ReactNode;
+  createProjectCategory: ActionFn<ActionState, FormData>;
 }
 
 export function NewProjectCategoryModal({
-  newProjectCategoryForm,
+  createProjectCategory,
   ...props
 }: NewProjectCategoryModalProps) {
   const t = useTranslations("projectCategories.NewProjectCategoryModal");
@@ -24,7 +26,9 @@ export function NewProjectCategoryModal({
       <FormBaseModalDialog>
         <DialogHeader>{t("title")}</DialogHeader>
         <FormBaseModalDialogBody>
-          {newProjectCategoryForm}
+          <NewProjectCategoryForm
+            createProjectCategory={createProjectCategory}
+          />
         </FormBaseModalDialogBody>
       </FormBaseModalDialog>
     </FormBaseModal>

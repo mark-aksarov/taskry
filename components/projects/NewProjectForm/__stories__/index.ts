@@ -1,1 +1,1 @@
-export { Default as NewProjectFormStory } from "./NewProjectForm.stories";
+export { newProjectFormArgs } from "./NewProjectForm.args";

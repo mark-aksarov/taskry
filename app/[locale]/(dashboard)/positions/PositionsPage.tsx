@@ -7,22 +7,41 @@ import {
 
 import { useTranslations } from "next-intl";
 import { PageGrid } from "@/components/common/PageGrid";
+import { BackButton } from "@/components/common/BackButton";
+import { ActionFn, ActionState } from "@/lib/actions/types";
 import { ViewModeProvider } from "@/components/common/ViewMode";
 import { PageContainer } from "@/components/common/PageContainer";
-import { BackButton } from "@/components/common/BackButton";
+import { PositionToolbarActionsMenuTrigger } from "@/components/position/PositionToolbarActionsMenuTrigger";
+import { PositionToolbarCreateNewModalTrigger } from "@/components/position/PositionToolbarCreateNewModalTrigger";
 
 interface PositionsPageProps {
   positionsContainer: React.ReactNode;
-  positionToolbarCreateNewModalTrigger: React.ReactNode;
-  positionToolbarActionsMenuTrigger: React.ReactNode;
+  guestMode: boolean;
+  createPosition: ActionFn<ActionState, FormData>;
+  deletePositions: ActionFn<ActionState, number[]>;
 }
 
 export function PositionsPage({
   positionsContainer,
-  positionToolbarCreateNewModalTrigger,
-  positionToolbarActionsMenuTrigger,
+  guestMode,
+  createPosition,
+  deletePositions,
 }: PositionsPageProps) {
   const t = useTranslations("app.PositionsPage");
+
+  const positionToolbarCreateNewModalTrigger = (
+    <PositionToolbarCreateNewModalTrigger
+      guestMode={guestMode}
+      createPosition={createPosition}
+    />
+  );
+
+  const positionToolbarActionsMenuTrigger = (
+    <PositionToolbarActionsMenuTrigger
+      guestMode={guestMode}
+      deletePositions={deletePositions}
+    />
+  );
 
   return (
     <PageContainer>

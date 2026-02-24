@@ -1,19 +1,14 @@
-import {
-  DetailHeader,
-  DetailHeaderSkeleton,
-} from "@/components/common/DetailHeader";
-
 import { mocked } from "storybook/test";
 import { UserDetail } from "../UserDetail";
+import { mockedUserDetail } from "@/mocks/users";
 import { UserDetailCard } from "./UserDetailCard";
 import { UserDetailSkeleton } from "../UserDetail";
+import { UserDetailHeader } from "../UserDetailHeader";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { useParams, usePathname } from "next/navigation";
 import { UserNavigationDesktop } from "../UserNavigationDesktop";
+import { DetailHeaderSkeleton } from "@/components/common/DetailHeader";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { UserDetailStory } from "@/components/users/UserDetail/__stories__";
-import { PersonDetailHeaderStory } from "@/components/common/DetailHeader/__stories__";
-import { UserDetailWithoutSomeDataStory } from "@/components/users/UserDetail/__stories__";
 
 const meta = {
   title: "components/users/UserDetailCard",
@@ -32,8 +27,14 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    profileDetail: <UserDetail {...UserDetailStory.args} />,
-    profileHeader: <DetailHeader {...PersonDetailHeaderStory.args} />,
+    profileDetail: <UserDetail {...mockedUserDetail} />,
+    profileHeader: (
+      <UserDetailHeader
+        fullName={mockedUserDetail.fullName}
+        imageUrl="/man.jpg"
+        positionName={mockedUserDetail.position?.name}
+      />
+    ),
     navigationDesktop: <UserNavigationDesktop />,
   },
 } satisfies Story;
@@ -46,10 +47,16 @@ export const Loading = {
   },
 } satisfies Story;
 
-export const WithoutSomeData = {
+export const WithoutOptionalUserData = {
   args: {
-    profileDetail: <UserDetail {...UserDetailWithoutSomeDataStory.args} />,
-    profileHeader: <DetailHeader {...PersonDetailHeaderStory.args} />,
+    profileDetail: (
+      <UserDetail
+        id={mockedUserDetail.id}
+        fullName={mockedUserDetail.fullName}
+        email={mockedUserDetail.email}
+      />
+    ),
+    profileHeader: <UserDetailHeader fullName={mockedUserDetail.fullName} />,
     navigationDesktop: <UserNavigationDesktop />,
   },
 } satisfies Story;

@@ -10,6 +10,9 @@ import {
 
 import { useTranslations } from "next-intl";
 import { TaskStatusSelect } from "../TaskStatusSelect";
+import { TaskProjectSelect } from "../TaskProjectSelect";
+import { TaskAssigneeSelect } from "../TaskAssigneeSelect";
+import { TaskCategorySelect } from "../TaskCategorySelect";
 import { TaskTitleTextField } from "../TaskTitleTextField";
 import { ActionFn, ActionState } from "@/lib/actions/types";
 import { TaskDeadlineDatePicker } from "../TaskDeadlineDatePicker";
@@ -18,16 +21,16 @@ import { FormErrorBanner } from "@/components/common/FormErrorBanner";
 import { TaskDescriptionTextField } from "../TaskDescriptionTextField";
 
 interface NewTaskFormProps {
-  taskCategorySelect: React.ReactNode;
-  projectSelect: React.ReactNode;
-  assigneeSelect: React.ReactNode;
+  categorySelectItems: { id: number; name: string }[];
+  projectSelectItems: { id: number; title: string }[];
+  assigneeSelectItems: { id: string; fullName: string }[];
   createTask: ActionFn<ActionState, FormData>;
 }
 
 export function NewTaskForm({
-  taskCategorySelect,
-  projectSelect,
-  assigneeSelect,
+  categorySelectItems,
+  projectSelectItems,
+  assigneeSelectItems,
   createTask,
 }: NewTaskFormProps) {
   const t = useTranslations("tasks.NewTaskForm");
@@ -44,9 +47,9 @@ export function NewTaskForm({
         <TaskDescriptionTextField />
         <TaskDeadlineDatePicker />
         <TaskStatusSelect />
-        {taskCategorySelect}
-        {projectSelect}
-        {assigneeSelect}
+        <TaskCategorySelect items={categorySelectItems} />
+        <TaskProjectSelect items={projectSelectItems} />
+        <TaskAssigneeSelect items={assigneeSelectItems} />
         <FormErrorBanner status={state.status} isPending={isPending}>
           {state.message}
         </FormErrorBanner>

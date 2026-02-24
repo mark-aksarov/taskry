@@ -8,20 +8,24 @@ import {
 } from "@/components/common/List";
 
 import { useTranslations } from "next-intl";
+import { ActionFn, ActionState } from "@/lib/actions/types";
 import { PositionItemCheckbox } from "../PositionItemCheckbox";
 import { SelectableItem } from "@/components/common/SelectableItem";
 import { useSelectedItems } from "@/components/common/SelectedItemsContext";
+import { PositionItemActionMenuTrigger } from "../PositionItemActionMenuTrigger";
 
 interface PositionListItemProps {
   id: number;
   name: string;
-  menuTrigger: React.ReactNode;
+  guestMode: boolean;
+  updatePosition: ActionFn<ActionState, FormData>;
 }
 
 export function PositionListItem({
   id,
   name,
-  menuTrigger,
+  guestMode,
+  updatePosition,
 }: PositionListItemProps) {
   const t = useTranslations("positions.PositionListItem");
   const selected = useSelectedItems();
@@ -35,7 +39,12 @@ export function PositionListItem({
           <ListItemText>{t("name")}</ListItemText>
         </ListItemInfo>
 
-        {menuTrigger}
+        <PositionItemActionMenuTrigger
+          guestMode={guestMode}
+          positionId={id}
+          positionName={name}
+          updatePosition={updatePosition}
+        />
       </ListItem>
     </SelectableItem>
   );

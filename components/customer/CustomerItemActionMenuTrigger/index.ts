@@ -1,1 +1,0 @@
-export { CustomerItemActionMenuTrigger } from "./CustomerItemActionMenuTrigger";

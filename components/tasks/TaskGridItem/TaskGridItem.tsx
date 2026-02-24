@@ -30,8 +30,13 @@ import { useSelectedTasks } from "../SelectedTasksContext";
 import { UnknownUser } from "@/components/common/UnknownUser";
 import { ImageContainer } from "@/components/common/ImageContainer";
 import { UpdateTaskStatusProvider } from "../UpdateTaskStatusContext";
+import { TaskDetailModal } from "../TaskDetailModal";
+import { TaskCommentsModal } from "../TaskCommentsModal";
+import { TaskItemActionMenuTrigger } from "../TaskItemActionMenuTrigger";
+import { UserDetailModal } from "@/components/users/UserDetailModal";
 
 export interface TaskGridItemProps {
+  guestMode: boolean;
   id: number;
   title: string;
   deadline: string;
@@ -44,10 +49,12 @@ export interface TaskGridItemProps {
   status: TaskStatus;
   subtasksTotal: number;
   subtasksDone: number;
-  taskCommentsModal: React.ReactNode;
-  menuTrigger: React.ReactNode;
-  taskDetailModal: React.ReactNode;
-  userDetailModal: React.ReactNode;
+  taskCommentsContainer: React.ReactNode;
+  editTaskFormContainer: React.ReactNode;
+  taskDetailContainer: React.ReactNode;
+  userDetailContainer: React.ReactNode;
+  sendComment: ActionFn<ActionState, FormData>;
+  updateComment: ActionFn<ActionState, FormData>;
   updateTaskStatus: ActionFn<ActionState, UpdateTaskStatusesPayload>;
 }
 
@@ -70,6 +77,7 @@ export const TaskGridItem = ({
 };
 
 export function TaskGridItemInner({
+  guestMode,
   id,
   title,
   deadline,
@@ -78,10 +86,12 @@ export function TaskGridItemInner({
   status,
   subtasksTotal,
   subtasksDone,
-  taskCommentsModal,
-  menuTrigger,
-  taskDetailModal,
-  userDetailModal,
+  taskCommentsContainer,
+  editTaskFormContainer,
+  taskDetailContainer,
+  userDetailContainer,
+  sendComment,
+  updateComment,
 }: Omit<TaskGridItemProps, "updateTaskStatus">) {
   const t = useTranslations("tasks.TaskGridItem");
 
@@ -107,12 +117,26 @@ export function TaskGridItemInner({
   return (
     <TaskGridItemLayout
       checkboxSlot={<TaskItemCheckbox id={id} status={status} />}
-      menuTriggerSlot={menuTrigger}
+      menuTriggerSlot={
+        <TaskItemActionMenuTrigger
+          guestMode={guestMode}
+          taskId={id}
+          taskTitle={title}
+          taskStatus={status}
+          editTaskFormContainer={editTaskFormContainer}
+          className="-mr-2"
+        />
+      }
       titleSlot={
         <GridItemInfo className="flex-auto">
           <GridItemTitle>
             <ItemBaseDetailModalTrigger
-              modal={taskDetailModal}
+              modal={
+                <TaskDetailModal
+                  taskId={id}
+                  taskDetailContainer={taskDetailContainer}
+                />
+              }
               className="truncate max-md:hidden"
             >
               {title}
@@ -130,7 +154,12 @@ export function TaskGridItemInner({
         assignee ? (
           <>
             <ItemBaseDetailModalTrigger
-              modal={userDetailModal}
+              modal={
+                <UserDetailModal
+                  userId={assignee.id}
+                  userDetailContainer={userDetailContainer}
+                />
+              }
               className="max-md:hidden"
             >
               {assigneeImg}
@@ -148,7 +177,14 @@ export function TaskGridItemInner({
         <ItemBaseCommentsModalTrigger
           data-test={`task-${id}-comments-modal-trigger`}
           commentsCount={commentsCount}
-          modal={taskCommentsModal}
+          modal={
+            <TaskCommentsModal
+              taskId={id}
+              taskCommentsContainer={taskCommentsContainer}
+              sendComment={sendComment}
+              updateComment={updateComment}
+            />
+          }
         />
       }
       statusSlot={<TaskItemBaseBadge taskId={id} status={status} />}

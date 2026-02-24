@@ -165,7 +165,7 @@
     "attachments": "Attachments",
     "status": "Status"
   },
-  "ProjectDetailHeaderContainer": {
+  "ProjectDetailHeader": {
     "noCategory": "No category"
   },
   "ProjectDetailStatusMenuTrigger": {

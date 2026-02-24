@@ -1,1 +1,1 @@
-export { Default as EditPositionFormStory } from "./EditPositionForm.stories";
+export { editPositionFormArgs } from "./EditPositionForm.args";

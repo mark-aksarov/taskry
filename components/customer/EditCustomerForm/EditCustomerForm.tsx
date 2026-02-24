@@ -17,26 +17,29 @@ import { FormErrorBanner } from "@/components/common/FormErrorBanner";
 import { CustomerFullNameTextField } from "../CustomerFullNameTextField";
 import { CustomerPublicLinkTextField } from "../CustomerPublicLinkTextField";
 import { CustomerPhoneNumberTextField } from "../CustomerPhoneNumberTextField";
+import { CustomerCompanySelect } from "../CustomerCompanySelect";
 
 interface EditCustomerFormProps {
   customerId: number;
-  fullNameDefaultValue: string;
-  bioDefaultValue?: string;
-  emailDefaultValue: string;
-  phoneNumberDefaultValue?: string;
-  publicLinkDefaultValue?: string;
-  companySelect: React.ReactNode;
+  customerFullNameDefaultValue: string;
+  customerBioDefaultValue?: string;
+  customerEmailDefaultValue: string;
+  customerPhoneNumberDefaultValue?: string;
+  customerPublicLinkDefaultValue?: string;
+  customerCompanyDefaultValue?: string;
+  customerCompanySelectItems: { id: number; name: string }[];
   updateCustomer: ActionFn<ActionState, FormData>;
 }
 
 export function EditCustomerForm({
   customerId,
-  fullNameDefaultValue,
-  bioDefaultValue,
-  emailDefaultValue,
-  phoneNumberDefaultValue,
-  publicLinkDefaultValue,
-  companySelect,
+  customerFullNameDefaultValue,
+  customerBioDefaultValue,
+  customerEmailDefaultValue,
+  customerPhoneNumberDefaultValue,
+  customerPublicLinkDefaultValue,
+  customerCompanyDefaultValue,
+  customerCompanySelectItems,
   updateCustomer,
 }: EditCustomerFormProps) {
   const t = useTranslations("customers.EditCustomerForm");
@@ -51,12 +54,21 @@ export function EditCustomerForm({
       <FormBaseBody>
         {customerId && <input type="hidden" name="id" value={customerId} />}
 
-        <CustomerFullNameTextField defaultValue={fullNameDefaultValue} />
-        <CustomerBioTextField defaultValue={bioDefaultValue} />
-        <CustomerEmailTextField defaultValue={emailDefaultValue} />
-        <CustomerPhoneNumberTextField defaultValue={phoneNumberDefaultValue} />
-        <CustomerPublicLinkTextField defaultValue={publicLinkDefaultValue} />
-        {companySelect}
+        <CustomerFullNameTextField
+          defaultValue={customerFullNameDefaultValue}
+        />
+        <CustomerBioTextField defaultValue={customerBioDefaultValue} />
+        <CustomerEmailTextField defaultValue={customerEmailDefaultValue} />
+        <CustomerPhoneNumberTextField
+          defaultValue={customerPhoneNumberDefaultValue}
+        />
+        <CustomerPublicLinkTextField
+          defaultValue={customerPublicLinkDefaultValue}
+        />
+        <CustomerCompanySelect
+          defaultSelectedKey={customerCompanyDefaultValue}
+          items={customerCompanySelectItems}
+        />
         <FormErrorBanner status={state.status} isPending={isPending}>
           {state.message}
         </FormErrorBanner>

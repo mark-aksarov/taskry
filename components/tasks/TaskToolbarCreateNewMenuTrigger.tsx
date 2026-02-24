@@ -12,19 +12,20 @@ import { useTranslations } from "next-intl";
 import { Blocks, CalendarCheck } from "lucide-react";
 import { DialogHeader } from "@/components/ui/Dialog";
 import { GuestModeModal } from "../common/GuestModeModal";
+import { ActionFn, ActionState } from "@/lib/actions/types";
 import { NewTaskModal } from "@/components/tasks/NewTaskModal";
 import { NewTaskCategoryModal } from "../taskCategory/NewTaskCategoryModal";
 
 interface TaskToolbarCreateNewMenuTriggerProps {
   guestMode: boolean;
   newTaskFormContainer: React.ReactNode;
-  newTaskCategoryForm: React.ReactNode;
+  createTaskCategory: ActionFn<ActionState, FormData>;
 }
 
 export function TaskToolbarCreateNewMenuTrigger({
   guestMode,
   newTaskFormContainer,
-  newTaskCategoryForm,
+  createTaskCategory,
 }: TaskToolbarCreateNewMenuTriggerProps) {
   const t = useTranslations("tasks.TaskToolbarCreateNewMenuTrigger");
 
@@ -82,7 +83,7 @@ export function TaskToolbarCreateNewMenuTrigger({
 
       {/* Modal for creating a new task category */}
       <NewTaskCategoryModal
-        newTaskCategoryForm={newTaskCategoryForm}
+        createTaskCategory={createTaskCategory}
         isOpen={openTaskCategoryModal}
         onOpenChange={setOpenTaskCategoryModal}
       />

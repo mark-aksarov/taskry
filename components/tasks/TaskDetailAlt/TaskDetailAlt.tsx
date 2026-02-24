@@ -8,6 +8,8 @@ import {
 import { TaskStatus } from "@/generated/prisma/enums";
 import { useFormatter, useTranslations } from "next-intl";
 import { TaskDetailAltLayout } from "./TaskDetailAltLayout";
+import { ActionFn, ActionState } from "@/lib/actions/types";
+import { NewSubtaskModalTrigger } from "@/components/subtasks/NewSubtaskModalTrigger";
 
 interface TaskDetailAltProps {
   id: number;
@@ -21,7 +23,7 @@ interface TaskDetailAltProps {
     fullName: string;
     imageUrl?: string;
   };
-  deadline?: string;
+  deadline: string;
   description?: string;
   category?: {
     id: number;
@@ -33,7 +35,7 @@ interface TaskDetailAltProps {
   };
   status: TaskStatus;
   subtasksList?: React.ReactNode;
-  newSubtaskModalTrigger: React.ReactNode;
+  createSubtask: ActionFn<ActionState, FormData>;
 }
 
 export function TaskDetailAlt({
@@ -46,20 +48,18 @@ export function TaskDetailAlt({
   project,
   status,
   subtasksList,
-  newSubtaskModalTrigger,
+  createSubtask,
 }: TaskDetailAltProps) {
   const tStatus = useTranslations("tasks.TaskStatus");
   const t = useTranslations("tasks.TaskDetail");
 
   const format = useFormatter();
 
-  const formattedDeadline = deadline
-    ? format.dateTime(new Date(deadline), {
-        day: "2-digit",
-        month: "short",
-        year: "numeric",
-      })
-    : t("noDeadline");
+  const formattedDeadline = format.dateTime(new Date(deadline), {
+    day: "2-digit",
+    month: "short",
+    year: "numeric",
+  });
 
   return (
     <TaskDetailAltLayout
@@ -125,7 +125,7 @@ export function TaskDetailAlt({
         <DetailInfo className="border-none pb-0">
           <DetailTitle>{t("subtasks")}</DetailTitle>
           {subtasksList}
-          {newSubtaskModalTrigger}
+          <NewSubtaskModalTrigger taskId={id} createSubtask={createSubtask} />
         </DetailInfo>
       }
     />

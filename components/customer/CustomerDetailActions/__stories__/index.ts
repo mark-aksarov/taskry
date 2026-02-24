@@ -1,1 +1,1 @@
-export { Default as CustomerDetailActionsStory } from "./CustomerDetailActions.stories";
+export { customerDetailActionsArgs } from "./CustomerDetailActions.args";

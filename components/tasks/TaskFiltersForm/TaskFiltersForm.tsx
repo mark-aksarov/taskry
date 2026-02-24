@@ -8,26 +8,28 @@ import {
 
 import { Separator } from "@/components/ui/Separator";
 import { useSelectedTasks } from "../SelectedTasksContext";
-import { useTaskFiltersDispatch } from "../TaskFiltersContext/TaskFiltersContext";
+import { useTaskFiltersDispatch } from "../TaskFiltersContext";
 import { FiltersFormResetButton } from "@/components/common/FiltersForm";
 import { FiltersFormSubmitButton } from "@/components/common/FiltersForm";
 import { useFiltersFormHandleSubmit } from "@/components/common/FiltersForm";
 import { TaskFiltersFormOnlyMyTaskSwitch } from "./TaskFiltersFormOnlyMyTaskSwitch";
+import { TaskFiltersFormStatusCheckboxGroup } from "./TaskFiltersFormStatusCheckboxGroup";
 import { TaskFiltersFormDeadlineToDatePicker } from "./TaskFiltersFormDeadlineToDatePicker";
+import { TaskFiltersFormProjectCheckboxGroup } from "./TaskFiltersFormProjectCheckboxGroup";
+import { TaskFiltersFormCategoryCheckboxGroup } from "./TaskFiltersFormCategoryCheckboxGroup";
+import { TaskFiltersFormAssigneeCheckboxGroup } from "./TaskFiltersFormAssigneeCheckboxGroup";
 import { TaskFiltersFormDeadlineFromDatePicker } from "./TaskFiltersFormDeadlineFromDatePicker";
 
 interface TaskFiltersFormProps {
-  statusCheckboxGroup: React.ReactNode;
-  categoryCheckboxGroup: React.ReactNode;
-  projectCheckboxGroup: React.ReactNode;
-  assigneeCheckboxGroup: React.ReactNode;
+  categoryCheckboxGroupItems: { id: number; name: string }[];
+  projectCheckboxGroupItems: { id: number; title: string }[];
+  assigneeCheckboxGroupItems: { id: string; fullName: string }[];
 }
 
 export function TaskFiltersForm({
-  statusCheckboxGroup,
-  categoryCheckboxGroup,
-  projectCheckboxGroup,
-  assigneeCheckboxGroup,
+  categoryCheckboxGroupItems,
+  projectCheckboxGroupItems,
+  assigneeCheckboxGroupItems,
 }: TaskFiltersFormProps) {
   const { clear: clearSelectedTasks } = useSelectedTasks();
   const dispatch = useTaskFiltersDispatch();
@@ -49,13 +51,22 @@ export function TaskFiltersForm({
 
         <Separator />
 
-        <div>{statusCheckboxGroup}</div>
+        <TaskFiltersFormStatusCheckboxGroup />
         <Separator />
-        <div>{categoryCheckboxGroup}</div>
+
+        <TaskFiltersFormCategoryCheckboxGroup
+          categories={categoryCheckboxGroupItems}
+        />
         <Separator />
-        <div>{projectCheckboxGroup}</div>
+
+        <TaskFiltersFormProjectCheckboxGroup
+          projects={projectCheckboxGroupItems}
+        />
         <Separator />
-        <div>{assigneeCheckboxGroup}</div>
+
+        <TaskFiltersFormAssigneeCheckboxGroup
+          users={assigneeCheckboxGroupItems}
+        />
       </FormBaseBody>
       <FormBaseFooter>
         <FiltersFormSubmitButton />

@@ -4,10 +4,10 @@ import useSWR from "swr";
 import { Suspense } from "react";
 import { useTranslations } from "next-intl";
 import { UserDetail } from "./UserDetail/UserDetail";
+import { UserDetailHeader } from "./UserDetailHeader";
 import { UserDetailDTO } from "@/lib/data/user/user.dto";
 import { UserDetailSkeleton } from "./UserDetail/UserDetailSkeleton";
 import { DetailHeader, DetailHeaderSkeleton } from "../common/DetailHeader";
-import { PersonDetailHeaderImage } from "../common/PersonDetailHeaderImage";
 import { PersonDetailPresentation } from "../common/PersonDetailPresentation";
 
 interface UserDetailContainerProps {
@@ -30,8 +30,6 @@ export function UserDetailContainer(props: UserDetailContainerProps) {
 }
 
 function UserDetailContainerInner({ userId }: UserDetailContainerProps) {
-  const t = useTranslations("users.UserDetailContainer");
-
   const { data: user } = useSWR<UserDetailDTO>(`/api/users/${userId}`, {
     suspense: true,
   });
@@ -43,15 +41,10 @@ function UserDetailContainerInner({ userId }: UserDetailContainerProps) {
   return (
     <PersonDetailPresentation
       personHeader={
-        <DetailHeader
-          title={user.fullName}
-          image={
-            <PersonDetailHeaderImage
-              imageUrl={user.imageUrl}
-              alt={user.fullName}
-            />
-          }
-          subtitle={user.position ? user.position.name : t("noPosition")}
+        <UserDetailHeader
+          fullName={user.fullName}
+          imageUrl={user.imageUrl}
+          positionName={user.position?.name}
         />
       }
       userDetail={

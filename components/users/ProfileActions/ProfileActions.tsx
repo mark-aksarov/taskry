@@ -4,19 +4,22 @@ import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { KeyRound, Pencil } from "lucide-react";
 import { EditUserModal } from "../EditUserModal";
+import { ActionFn, ActionState } from "@/lib/actions/types";
 import { ChangePasswordModal } from "../ChangePasswordModal";
 import { GuestModeModal } from "@/components/common/GuestModeModal";
 import { NavigationButton } from "@/components/common/NavigationButton";
 
 interface ProfileActionsProps {
   guestMode: boolean;
-  changePasswordForm: React.ReactNode;
+  userId: string;
+  changePassword: ActionFn<ActionState, FormData>;
   editUserFormContainer: React.ReactNode;
 }
 
 export function ProfileActions({
   guestMode,
-  changePasswordForm,
+  userId,
+  changePassword,
   editUserFormContainer,
 }: ProfileActionsProps) {
   const t = useTranslations("users.ProfileActions");
@@ -71,7 +74,8 @@ export function ProfileActions({
       <ChangePasswordModal
         isOpen={isChangePasswordModalOpen}
         onOpenChange={setIsChangePasswordModalOpen}
-        changePasswordForm={changePasswordForm}
+        userId={userId}
+        changePassword={changePassword}
       />
 
       <EditUserModal

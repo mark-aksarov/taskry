@@ -5,9 +5,6 @@ import { ProjectGrid } from "./ProjectGrid";
 import { ProjectListItem } from "./ProjectListItem";
 import { ProjectGridItem } from "./ProjectGridItem";
 import { hasGuestRole } from "@/lib/utils/hasGuestRole";
-import { ProjectDetailModal } from "./ProjectDetailModal";
-import { UserDetailModal } from "../users/UserDetailModal";
-import { ProjectCommentsModal } from "./ProjectCommentsModal";
 import { sendComment } from "@/lib/actions/comment/sendComment";
 import { ProjectDetailContainer } from "./ProjectDetailContainer";
 import { UserDetailContainer } from "../users/UserDetailContainer";
@@ -16,9 +13,7 @@ import { ProjectListItemDTO } from "@/lib/data/project/project.dto";
 import { EditProjectFormContainer } from "./EditProjectFormContainer";
 import { deleteProjects } from "@/lib/actions/project/deleteProjects";
 import { ProjectCommentsContainer } from "./ProjectCommentsContainer";
-import { CustomerDetailModal } from "../customer/CustomerDetailModal";
 import { CustomerDetailContainer } from "../customer/CustomerDetailContainer";
-import { ProjectItemActionMenuTrigger } from "./ProjectItemActionMenuTrigger";
 import { updateProjectStatuses } from "@/lib/actions/project/updateProjectStatuses";
 import { EntityContainerPresentation } from "../common/EntityContainerPresentation";
 import { DeleteProjectModalProvider } from "./DeleteProjectModal/DeleteProjectModalContext";
@@ -47,78 +42,47 @@ export async function ProjectsContainer({
         list={
           <ProjectList showCheckbox>
             {projects.map((project) => {
-              const commonProps = {
-                id: project.id,
-                title: project.title,
-                deadline: project.deadline,
-                creator: project.creator,
-                status: project.status,
-                commentsCount: project.commentsCount,
-              };
-
               return (
                 <ProjectListItem
-                  key={project.id}
                   showCheckbox
+                  guestMode={guestMode}
+                  key={project.id}
+                  id={project.id}
+                  title={project.title}
+                  deadline={project.deadline}
+                  creator={project.creator}
+                  status={project.status}
+                  commentsCount={project.commentsCount}
                   customer={project.customer}
                   company={project.customer?.company}
                   category={project.category}
-                  updateProjectStatus={updateProjectStatuses}
-                  menuTrigger={
-                    <ProjectItemActionMenuTrigger
+                  editProjectFormContainer={
+                    <EditProjectFormContainer projectId={project.id} />
+                  }
+                  projectCommentsContainer={
+                    <ProjectCommentsContainer
                       guestMode={guestMode}
                       projectId={project.id}
-                      projectTitle={project.title}
-                      projectStatus={project.status}
-                      editProjectFormContainer={
-                        <EditProjectFormContainer projectId={project.id} />
-                      }
                     />
                   }
-                  projectCommentsModal={
-                    <ProjectCommentsModal
-                      projectId={project.id}
-                      projectCommentsContainer={
-                        <ProjectCommentsContainer
-                          guestMode={guestMode}
-                          projectId={project.id}
-                        />
-                      }
-                      sendCommentAction={sendComment}
-                      updateCommentAction={updateComment}
-                    />
+                  projectDetailContainer={
+                    <ProjectDetailContainer projectId={project.id} />
                   }
-                  projectDetailModal={
-                    <ProjectDetailModal
-                      projectId={project.id}
-                      projectDetailContainer={
-                        <ProjectDetailContainer projectId={project.id} />
-                      }
-                    />
-                  }
-                  userDetailModal={
+                  userDetailContainer={
                     project.creator && (
-                      <UserDetailModal
-                        userId={project.creator.id}
-                        userDetailContainer={
-                          <UserDetailContainer userId={project.creator.id} />
-                        }
-                      />
+                      <UserDetailContainer userId={project.creator.id} />
                     )
                   }
-                  customerDetailModal={
+                  customerDetailContainer={
                     project.customer && (
-                      <CustomerDetailModal
+                      <CustomerDetailContainer
                         customerId={project.customer.id}
-                        customerDetailContainer={
-                          <CustomerDetailContainer
-                            customerId={project.customer.id}
-                          />
-                        }
                       />
                     )
                   }
-                  {...commonProps}
+                  sendComment={sendComment}
+                  updateComment={updateComment}
+                  updateProjectStatus={updateProjectStatuses}
                 />
               );
             })}
@@ -127,65 +91,38 @@ export async function ProjectsContainer({
         grid={
           <ProjectGrid>
             {projects.map((project) => {
-              const commonProps = {
-                id: project.id,
-                title: project.title,
-                deadline: project.deadline,
-                creator: project.creator,
-                status: project.status,
-                commentsCount: project.commentsCount,
-              };
-
               return (
                 <ProjectGridItem
+                  guestMode={guestMode}
                   key={project.id}
+                  id={project.id}
+                  title={project.title}
+                  deadline={project.deadline}
+                  creator={project.creator}
+                  status={project.status}
+                  commentsCount={project.commentsCount}
                   tasksTotal={project.tasks.total}
                   tasksCompleted={project.tasks.completed}
-                  updateProjectStatus={updateProjectStatuses}
-                  menuTrigger={
-                    <ProjectItemActionMenuTrigger
+                  editProjectFormContainer={
+                    <EditProjectFormContainer projectId={project.id} />
+                  }
+                  projectCommentsContainer={
+                    <ProjectCommentsContainer
                       guestMode={guestMode}
                       projectId={project.id}
-                      projectTitle={project.title}
-                      projectStatus={project.status}
-                      editProjectFormContainer={
-                        <EditProjectFormContainer projectId={project.id} />
-                      }
-                      className="-mr-2"
                     />
                   }
-                  projectCommentsModal={
-                    <ProjectCommentsModal
-                      projectId={project.id}
-                      projectCommentsContainer={
-                        <ProjectCommentsContainer
-                          guestMode={guestMode}
-                          projectId={project.id}
-                        />
-                      }
-                      sendCommentAction={sendComment}
-                      updateCommentAction={updateComment}
-                    />
+                  projectDetailContainer={
+                    <ProjectDetailContainer projectId={project.id} />
                   }
-                  projectDetailModal={
-                    <ProjectDetailModal
-                      projectId={project.id}
-                      projectDetailContainer={
-                        <ProjectDetailContainer projectId={project.id} />
-                      }
-                    />
-                  }
-                  userDetailModal={
+                  userDetailContainer={
                     project.creator && (
-                      <UserDetailModal
-                        userId={project.creator.id}
-                        userDetailContainer={
-                          <UserDetailContainer userId={project.creator.id} />
-                        }
-                      />
+                      <UserDetailContainer userId={project.creator.id} />
                     )
                   }
-                  {...commonProps}
+                  sendComment={sendComment}
+                  updateComment={updateComment}
+                  updateProjectStatus={updateProjectStatuses}
                 />
               );
             })}

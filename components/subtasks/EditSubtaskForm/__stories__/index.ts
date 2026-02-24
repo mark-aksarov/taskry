@@ -1,1 +1,1 @@
-export { Default as EditSubtaskFormStory } from "./EditSubtaskForm.stories";
+export { editSubtaskFormArgs } from "./EditSubtaskForm.args";

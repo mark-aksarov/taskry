@@ -7,7 +7,7 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withDeleteSubtaskModalProvider } from "./withDeleteSubtaskModalProvider";
 
 const meta = {
-  title: "components/companies/DeleteSubtaskModal",
+  title: "components/subtasks/DeleteSubtaskModal",
   component: DeleteSubtaskModal,
   decorators: [
     withToastRegion,
@@ -15,11 +15,11 @@ const meta = {
     withThemedBackground,
   ],
   render: (args) => {
-    const [open, setOpen] = useState(false);
+    const [open, setOpen] = useState(true);
 
     return (
       <>
-        <Button label="Delete company" onClick={() => setOpen(true)} />
+        <Button label="Delete subtask" onClick={() => setOpen(true)} />
         <DeleteSubtaskModal {...args} isOpen={open} onOpenChange={setOpen} />
       </>
     );

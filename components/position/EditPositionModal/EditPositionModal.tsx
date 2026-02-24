@@ -7,14 +7,20 @@ import {
 import { useTranslations } from "next-intl";
 import { ModalProps } from "@/components/ui/Modal";
 import { DialogHeader } from "@/components/ui/Dialog";
+import { EditPositionForm } from "../EditPositionForm";
+import { ActionFn, ActionState } from "@/lib/actions/types";
 
 interface EditPositionModalProps
   extends Pick<ModalProps, "isOpen" | "onOpenChange"> {
-  editPositionForm: React.ReactNode;
+  positionId: number;
+  positionName: string;
+  updatePosition: ActionFn<ActionState, FormData>;
 }
 
 export function EditPositionModal({
-  editPositionForm,
+  positionId,
+  positionName,
+  updatePosition,
   ...props
 }: EditPositionModalProps) {
   const t = useTranslations("positions.EditPositionModal");
@@ -23,7 +29,13 @@ export function EditPositionModal({
     <FormBaseModal className="md:w-[350px]" {...props}>
       <FormBaseModalDialog>
         <DialogHeader>{t("title")}</DialogHeader>
-        <FormBaseModalDialogBody>{editPositionForm}</FormBaseModalDialogBody>
+        <FormBaseModalDialogBody>
+          <EditPositionForm
+            positionId={positionId}
+            nameDefaultValue={positionName}
+            updatePosition={updatePosition}
+          />
+        </FormBaseModalDialogBody>
       </FormBaseModalDialog>
     </FormBaseModal>
   );

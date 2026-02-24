@@ -1,24 +1,16 @@
 import {
-  DetailHeader,
-  DetailHeaderSkeleton,
-} from "@/components/common/DetailHeader";
-
-import {
   ProjectDetailAlt,
   ProjectDetailAltSkeleton,
 } from "../ProjectDetailAlt";
 
-import {
-  ProjectDetailAltStory,
-  ProjectDetailAltWithoutSomeDataStory,
-} from "../ProjectDetailAlt/__stories__";
-
+import { mockedProjectDetail } from "@/mocks/projects";
 import { ProjectDetailCard } from "./ProjectDetailCard";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { ProjectDetailHeader } from "../ProjectDetailHeader";
 import { ProjectDetailActions } from "../ProjectDetailActions";
+import { DetailHeaderSkeleton } from "@/components/common/DetailHeader";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { ProjectDetailHeaderStory } from "@/components/common/DetailHeader/__stories__";
-import { ProjectDetailActionsStory } from "@/components/projects/ProjectDetailActions/__stories__";
+import { projectDetailActionsArgs } from "../ProjectDetailActions/__stories__";
 import { withDeleteCommentModalProvider } from "@/components/comments/DeleteCommentModal/__stories__";
 
 const meta = {
@@ -30,31 +22,45 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
+const project = mockedProjectDetail;
+
 export const Default = {
   args: {
-    projectDetail: <ProjectDetailAlt {...ProjectDetailAltStory.args} />,
-    projectDetailHeader: <DetailHeader {...ProjectDetailHeaderStory.args} />,
+    projectDetailContainer: <ProjectDetailAlt {...project} />,
+    projectDetailHeaderContainer: (
+      <ProjectDetailHeader
+        projectTitle={project.title}
+        categoryName={project.category.name}
+      />
+    ),
     projectDetailActions: (
-      <ProjectDetailActions {...ProjectDetailActionsStory.args} />
+      <ProjectDetailActions {...projectDetailActionsArgs} />
     ),
   },
 } satisfies Story;
 
 export const Loading = {
   args: {
-    projectDetail: <ProjectDetailAltSkeleton />,
-    projectDetailHeader: <DetailHeaderSkeleton />,
-    projectDetailActions: (
-      <ProjectDetailActions {...ProjectDetailActionsStory.args} />
-    ),
+    ...Default.args,
+    projectDetailContainer: <ProjectDetailAltSkeleton />,
+    projectDetailHeaderContainer: <DetailHeaderSkeleton />,
   },
 } satisfies Story;
 
-export const WithoutSomeData = {
+export const WithoutOptionalProjectData = {
   args: {
-    ...Default.args,
-    projectDetail: (
-      <ProjectDetailAlt {...ProjectDetailAltWithoutSomeDataStory.args} />
+    projectDetailContainer: (
+      <ProjectDetailAlt
+        id={project.id}
+        status={project.status}
+        deadline={project.deadline}
+      />
+    ),
+    projectDetailHeaderContainer: (
+      <ProjectDetailHeader projectTitle={project.title} />
+    ),
+    projectDetailActions: (
+      <ProjectDetailActions {...projectDetailActionsArgs} />
     ),
   },
 } satisfies Story;

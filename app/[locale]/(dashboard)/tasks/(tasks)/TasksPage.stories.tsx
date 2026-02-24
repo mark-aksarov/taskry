@@ -14,21 +14,16 @@ import { TaskGridStory } from "@/components/tasks/TaskGrid/__stories__";
 import { TaskListStory } from "@/components/tasks/TaskList/__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { AppHeaderStory } from "@/components/layout/AppHeader/__stories__";
-import { NewTaskFormStory } from "@/components/tasks/NewTaskForm/__stories__";
-import { NewTaskCategoryForm } from "@/components/taskCategory/NewTaskCategoryForm";
-import { TaskFiltersFormStory } from "@/components/tasks/TaskFiltersForm/__stories__";
+import { newTaskFormArgs } from "@/components/tasks/NewTaskForm/__stories__";
+import { taskFiltersFormArgs } from "@/components/tasks/TaskFiltersForm/__stories__";
+import { withTaskFiltersProvider } from "@/components/tasks/TaskFiltersContext/__stories__";
 import { withDeleteTaskModalProvider } from "@/components/tasks/DeleteTaskModal/__stories__";
 import { EntityContainerPresentation } from "@/components/common/EntityContainerPresentation";
 import { withSelectedTasksProvider } from "@/components/tasks/SelectedTasksContext/__stories__";
-import { TaskToolbarActionsMenuTrigger } from "@/components/tasks/TaskToolbarActionsMenuTrigger";
-import { TaskToolbarFiltersModalTrigger } from "@/components/tasks/TaskToolbarFiltersModalTrigger";
 import { withPageTransitionProvider } from "@/components/common/PageTransitionContext/__stories__";
-import { TaskToolbarCreateNewMenuTrigger } from "@/components/tasks/TaskToolbarCreateNewMenuTrigger";
-import { NewTaskCategoryFormStory } from "@/components/taskCategory/NewTaskCategoryForm/__stories__";
 import { withDeleteSubtaskModalProvider } from "@/components/subtasks/DeleteSubtaskModal/__stories__";
 import { withDeleteCommentModalProvider } from "@/components/comments/DeleteCommentModal/__stories__";
 import { withUpdateTaskStatusesProvider } from "@/components/tasks/UpdateTaskStatusContext/__stories__";
-import { TaskToolbarActionsMenuTriggerStory } from "@/components/tasks/TaskToolbarActionsMenuTrigger/__stories__";
 
 const meta = {
   title: "pages/TasksPage",
@@ -40,6 +35,7 @@ const meta = {
         <Story />
       </TasksTemplate>
     ),
+    withTaskFiltersProvider,
     withDeleteTaskModalProvider,
     withPageTransitionProvider,
     withSelectedTasksProvider,
@@ -58,18 +54,9 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-const taskToolbarCreateNewMenuTrigger = (
-  <TaskToolbarCreateNewMenuTrigger
-    guestMode={false}
-    newTaskFormContainer={<NewTaskForm {...NewTaskFormStory.args} />}
-    newTaskCategoryForm={
-      <NewTaskCategoryForm {...NewTaskCategoryFormStory.args} />
-    }
-  />
-);
-
 export const Default = {
   args: {
+    guestMode: false,
     totalFilteredTasks: 3,
     selectedSortField: "title",
     tasksContainer: (
@@ -81,19 +68,10 @@ export const Default = {
         totalPages={3}
       />
     ),
-    taskToolbarCreateNewMenuTrigger: taskToolbarCreateNewMenuTrigger,
-    taskToolbarFiltersModalTrigger: (
-      <TaskToolbarFiltersModalTrigger
-        filtersFormContainer={
-          <TaskFiltersForm {...TaskFiltersFormStory.args} />
-        }
-      />
-    ),
-    taskToolbarActionsMenuTrigger: (
-      <TaskToolbarActionsMenuTrigger
-        {...TaskToolbarActionsMenuTriggerStory.args}
-      />
-    ),
+    filtersFormContainer: <TaskFiltersForm {...taskFiltersFormArgs} />,
+    newTaskFormContainer: <NewTaskForm {...newTaskFormArgs} />,
+    createTaskCategory: () => ({ status: "success" }),
+    deleteTasks: () => ({ status: "success" }),
   },
 } satisfies Story;
 
@@ -106,7 +84,9 @@ export const WithNoTasks = {
   args: { ...Default.args },
   render: () => (
     <TasksPageEmptyContainer
-      taskToolbarCreateNewMenuTrigger={taskToolbarCreateNewMenuTrigger}
+      guestMode={false}
+      newTaskFormContainer={<NewTaskForm {...newTaskFormArgs} />}
+      createTaskCategory={() => ({ status: "success" })}
     />
   ),
 } satisfies Story;

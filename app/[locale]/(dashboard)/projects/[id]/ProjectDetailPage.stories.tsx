@@ -2,26 +2,20 @@ import {
   ProjectDetailAlt,
   ProjectDetailAltSkeleton,
 } from "@/components/projects/ProjectDetailAlt";
-import {
-  DetailHeader,
-  DetailHeaderSkeleton,
-} from "@/components/common/DetailHeader";
-
-import {
-  ProjectDetailAltStory,
-  ProjectDetailAltWithoutSomeDataStory,
-} from "@/components/projects/ProjectDetailAlt/__stories__";
 
 import { mocked } from "storybook/test";
+import { mockedProjectDetail } from "@/mocks/projects";
 import { ProjectDetailPage } from "./ProjectDetailPage";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { useParams, usePathname } from "next/navigation";
 import { PageDecorator } from "@/.storybook/PageDecorator";
+import { EditProjectForm } from "@/components/projects/EditProjectForm";
+import { DetailHeaderSkeleton } from "@/components/common/DetailHeader";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { AppHeaderStory } from "@/components/layout/AppHeader/__stories__";
-import { ProjectDetailActions } from "@/components/projects/ProjectDetailActions";
-import { ProjectDetailHeaderStory } from "@/components/common/DetailHeader/__stories__";
-import { ProjectDetailActionsStory } from "@/components/projects/ProjectDetailActions/__stories__";
+import { getCommentList } from "@/components/comments/CommentList/__stories__";
+import { ProjectDetailHeader } from "@/components/projects/ProjectDetailHeader";
+import { editProjectFormArgs } from "@/components/projects/EditProjectForm/__stories__";
 import { withDeleteCommentModalProvider } from "@/components/comments/DeleteCommentModal/__stories__";
 
 const meta = {
@@ -44,39 +38,50 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
+const project = mockedProjectDetail;
+
 export const Default = {
   args: {
-    projectDetailContainer: (
-      <ProjectDetailAlt {...ProjectDetailAltStory.args} />
+    guestMode: false,
+    projectId: project.id,
+    projectTitle: project.title,
+    sendComment: () => ({ status: "success" }),
+    updateComment: () => ({ status: "success" }),
+    deleteProject: () => ({ status: "success" }),
+    projectCommentsContainer: getCommentList(),
+    projectDetailContainer: <ProjectDetailAlt {...project} />,
+    projectHeaderContainer: (
+      <ProjectDetailHeader
+        projectTitle={project.title}
+        categoryName={project.category.name}
+      />
     ),
-    projectHeaderContainer: <DetailHeader {...ProjectDetailHeaderStory.args} />,
-    projectDetailActions: (
-      <ProjectDetailActions {...ProjectDetailActionsStory.args} />
-    ),
+    editProjectFormContainer: <EditProjectForm {...editProjectFormArgs} />,
+
     appHeaderProps: AppHeaderStory.args,
   },
 } satisfies Story;
 
 export const Loading = {
   args: {
+    ...Default.args,
     projectDetailContainer: <ProjectDetailAltSkeleton />,
     projectHeaderContainer: <DetailHeaderSkeleton />,
-    projectDetailActions: (
-      <ProjectDetailActions {...ProjectDetailActionsStory.args} />
-    ),
-    appHeaderProps: AppHeaderStory.args,
   },
 } satisfies Story;
 
 export const WithoutSomeData = {
   args: {
+    ...Default.args,
     projectDetailContainer: (
-      <ProjectDetailAlt {...ProjectDetailAltWithoutSomeDataStory.args} />
+      <ProjectDetailAlt
+        id={project.id}
+        status={project.status}
+        deadline={project.deadline}
+      />
     ),
-    projectHeaderContainer: <DetailHeaderSkeleton />,
-    projectDetailActions: (
-      <ProjectDetailActions {...ProjectDetailActionsStory.args} />
+    projectHeaderContainer: (
+      <ProjectDetailHeader projectTitle={project.title} />
     ),
-    appHeaderProps: AppHeaderStory.args,
   },
 } satisfies Story;

@@ -1,19 +1,13 @@
-import {
-  DetailHeader,
-  DetailHeaderSkeleton,
-} from "@/components/common/DetailHeader";
-
 import { CustomerDetail } from "../CustomerDetail";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { mockedCustomerDetail } from "@/mocks/customers";
 import { CustomerDetailCard } from "./CustomerDetailCard";
 import { CustomerDetailSkeleton } from "../CustomerDetail";
+import { CustomerDetailHeader } from "../CustomerDetailHeader";
 import { CustomerDetailActions } from "../CustomerDetailActions";
+import { DetailHeaderSkeleton } from "@/components/common/DetailHeader";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { PersonDetailHeaderImage } from "@/components/common/PersonDetailHeaderImage";
-import { CustomerDetailStory } from "@/components/customer/CustomerDetail/__stories__";
-import { PersonDetailHeaderStory } from "@/components/common/DetailHeader/__stories__";
-import { CustomerDetailActionsStory } from "@/components/customer/CustomerDetailActions/__stories__";
-import { CustomerDetailWithoutSomeDataStory } from "@/components/customer/CustomerDetail/__stories__";
+import { customerDetailActionsArgs } from "@/components/customer/CustomerDetailActions/__stories__";
 
 const meta = {
   title: "components/customers/CustomerDetailCard",
@@ -24,12 +18,20 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
+const customer = mockedCustomerDetail;
+
 export const Default = {
   args: {
-    customerDetail: <CustomerDetail {...CustomerDetailStory.args} />,
-    customerHeader: <DetailHeader {...PersonDetailHeaderStory.args} />,
+    customerDetail: <CustomerDetail {...customer} />,
+    customerHeader: (
+      <CustomerDetailHeader
+        fullName={customer.fullName}
+        imageUrl={customer.imageUrl}
+        companyName={customer.company?.name}
+      />
+    ),
     customerDetailActions: (
-      <CustomerDetailActions {...CustomerDetailActionsStory.args} />
+      <CustomerDetailActions {...customerDetailActionsArgs} />
     ),
   },
 } satisfies Story;
@@ -39,7 +41,7 @@ export const Loading = {
     customerDetail: <CustomerDetailSkeleton />,
     customerHeader: <DetailHeaderSkeleton />,
     customerDetailActions: (
-      <CustomerDetailActions {...CustomerDetailActionsStory.args} />
+      <CustomerDetailActions {...customerDetailActionsArgs} />
     ),
   },
 } satisfies Story;
@@ -47,17 +49,11 @@ export const Loading = {
 export const WithoutSomeData = {
   args: {
     customerDetail: (
-      <CustomerDetail {...CustomerDetailWithoutSomeDataStory.args} />
+      <CustomerDetail fullName={customer.fullName} email={customer.email} />
     ),
-    customerHeader: (
-      <DetailHeader
-        title={CustomerDetailStory.args.fullName}
-        image={<PersonDetailHeaderImage />}
-        subtitle={CustomerDetailStory.args.company?.name}
-      />
-    ),
+    customerHeader: <CustomerDetailHeader fullName={customer.fullName} />,
     customerDetailActions: (
-      <CustomerDetailActions {...CustomerDetailActionsStory.args} />
+      <CustomerDetailActions {...customerDetailActionsArgs} />
     ),
   },
 } satisfies Story;

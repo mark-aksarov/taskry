@@ -2,11 +2,10 @@
 
 import useSWR from "swr";
 import { Suspense } from "react";
-import { useTranslations } from "next-intl";
+import { DetailHeaderSkeleton } from "../common/DetailHeader";
+import { CustomerDetailHeader } from "./CustomerDetailHeader";
 import { CustomerDetailDTO } from "@/lib/data/customer/customer.dto";
 import { CustomerDetail, CustomerDetailSkeleton } from "./CustomerDetail";
-import { PersonDetailHeaderImage } from "../common/PersonDetailHeaderImage";
-import { DetailHeader, DetailHeaderSkeleton } from "../common/DetailHeader";
 import { PersonDetailPresentation } from "../common/PersonDetailPresentation";
 
 interface CustomerDetailContainerProps {
@@ -31,8 +30,6 @@ export function CustomerDetailContainer(props: CustomerDetailContainerProps) {
 function CustomerDetailContainerInner({
   customerId,
 }: CustomerDetailContainerProps) {
-  const t = useTranslations("customers.CustomerDetailContainer");
-
   const { data: customer } = useSWR<CustomerDetailDTO>(
     `/api/customers/${customerId}`,
     { suspense: true },
@@ -45,17 +42,10 @@ function CustomerDetailContainerInner({
   return (
     <PersonDetailPresentation
       personHeader={
-        <DetailHeader
-          title={customer.fullName}
-          image={
-            <PersonDetailHeaderImage
-              imageUrl={customer.imageUrl}
-              alt={customer.fullName}
-            />
-          }
-          subtitle={
-            customer.company ? customer.company.name : t("unknownCompany")
-          }
+        <CustomerDetailHeader
+          fullName={customer.fullName}
+          imageUrl={customer.imageUrl}
+          companyName={customer.company?.name}
         />
       }
       userDetail={

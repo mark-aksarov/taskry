@@ -13,10 +13,6 @@ import { CompanyListStory } from "@/components/company/CompanyList/__stories__";
 import { withSelectedItemsProvider } from "@/components/common/SelectedItemsContext/__stories__";
 import { withPageTransitionProvider } from "@/components/common/PageTransitionContext/__stories__";
 import { withDeleteCompanyModalProvider } from "@/components/company/DeleteCompanyModal/__stories__";
-import { CompanyToolbarActionsMenuTrigger } from "@/components/company/CompanyToolbarActionsMenuTrigger";
-import { CompanyToolbarCreateNewModalTrigger } from "@/components/company/CompanyToolbarCreateNewModalTrigger";
-import { CompanyToolbarActionsMenuTriggerStory } from "@/components/company/CompanyToolbarActionsMenuTrigger/__stories__";
-import { CompanyToolbarCreateNewModalTriggerStory } from "@/components/company/CompanyToolbarCreateNewModalTrigger/__stories__";
 
 const meta = {
   title: "pages/CompaniesPage",
@@ -43,21 +39,12 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-const companyToolbarCreateNewModalTrigger = (
-  <CompanyToolbarCreateNewModalTrigger
-    {...CompanyToolbarCreateNewModalTriggerStory.args}
-  />
-);
-
 export const Default = {
   args: {
     companiesContainer: <CompanyList {...CompanyListStory.args} />,
-    companyToolbarCreateNewModalTrigger: companyToolbarCreateNewModalTrigger,
-    companyToolbarActionsMenuTrigger: (
-      <CompanyToolbarActionsMenuTrigger
-        {...CompanyToolbarActionsMenuTriggerStory.args}
-      />
-    ),
+    guestMode: false,
+    createCompany: () => ({ status: "success" }),
+    deleteCompanies: () => ({ status: "success" }),
   },
 } satisfies Story;
 
@@ -70,7 +57,8 @@ export const WithNoCompaniesPage = {
   args: { ...Default.args },
   render: () => (
     <CompaniesPageEmpty
-      companyToolbarCreateNewModalTrigger={companyToolbarCreateNewModalTrigger}
+      guestMode={false}
+      createCompany={() => ({ status: "success" })}
     />
   ),
 } satisfies Story;

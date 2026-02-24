@@ -15,7 +15,7 @@ const meta = {
     withThemedBackground,
   ],
   render: (args) => {
-    const [open, setOpen] = useState(false);
+    const [open, setOpen] = useState(true);
 
     return (
       <>
@@ -32,7 +32,7 @@ export type Story = StoryObj<typeof meta>;
 export const Default = {
   args: {
     companyId: 1,
-    companyName: "Project Manager",
+    companyName: "Company 1",
     onOpenChange: () => {},
     deleteCompanies: () => ({ status: "success" }),
   },

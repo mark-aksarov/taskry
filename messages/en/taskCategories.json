@@ -39,7 +39,7 @@
     "cancelButton": "Cancel"
   },
   "DeleteTaskCategoryModal": {
-    "heading": "Удалить категорию задач",
+    "heading": "Delete task category",
     "text": "Are you sure you want to delete task category <strong>«{name}»</strong>? All contents will be permanently removed.",
     "cancelButton": "Cancel",
     "deleteButton": "Delete"

@@ -34,7 +34,7 @@ import { NewTaskForm } from "@/components/tasks/NewTaskForm";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { AppHeaderStory } from "@/components/layout/AppHeader/__stories__";
 import { getTaskListItems } from "@/components/tasks/TaskList/__stories__";
-import { NewTaskFormStory } from "@/components/tasks/NewTaskForm/__stories__";
+import { newTaskFormArgs } from "@/components/tasks/NewTaskForm/__stories__";
 import { withDeleteTaskModalProvider } from "@/components/tasks/DeleteTaskModal/__stories__";
 import { withSelectedTasksProvider } from "@/components/tasks/SelectedTasksContext/__stories__";
 import { withPageTransitionProvider } from "@/components/common/PageTransitionContext/__stories__";
@@ -106,7 +106,7 @@ export const WithNoTasks = {
     ...Default.args,
     assignedTasksContainer: (
       <AssignedTasksEmptySection
-        newTaskFormContainer={<NewTaskForm {...NewTaskFormStory.args} />}
+        newTaskFormContainer={<NewTaskForm {...newTaskFormArgs} />}
       />
     ),
   },

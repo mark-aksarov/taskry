@@ -44,17 +44,13 @@ function EditCustomerFormContainerInner({
   return (
     <EditCustomerForm
       customerId={customerId}
-      fullNameDefaultValue={customer.fullName}
-      bioDefaultValue={customer.bio}
-      emailDefaultValue={customer.email}
-      phoneNumberDefaultValue={customer.phoneNumber}
-      publicLinkDefaultValue={customer.publicLink}
-      companySelect={
-        <CustomerCompanySelect
-          defaultSelectedKey={customer.companyId?.toString()}
-          companies={companies}
-        />
-      }
+      customerFullNameDefaultValue={customer.fullName}
+      customerBioDefaultValue={customer.bio}
+      customerEmailDefaultValue={customer.email}
+      customerPhoneNumberDefaultValue={customer.phoneNumber}
+      customerPublicLinkDefaultValue={customer.publicLink}
+      customerCompanyDefaultValue={customer?.companyId?.toString()}
+      customerCompanySelectItems={companies}
       updateCustomer={updateCustomer}
     />
   );

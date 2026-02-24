@@ -8,20 +8,24 @@ import {
 } from "@/components/common/List";
 
 import { useTranslations } from "next-intl";
+import { ActionFn, ActionState } from "@/lib/actions/types";
 import { SelectableItem } from "@/components/common/SelectableItem";
 import { useSelectedItems } from "@/components/common/SelectedItemsContext";
 import { ProjectCategoryItemCheckbox } from "../ProjectCategoryItemCheckbox";
+import { ProjectCategoryItemActionMenuTrigger } from "../ProjectCategoryItemActionMenuTrigger";
 
 interface ProjectCategoryListItemProps {
   id: number;
   name: string;
-  menuTrigger: React.ReactNode;
+  guestMode: boolean;
+  updateProjectCategory: ActionFn<ActionState, FormData>;
 }
 
 export function ProjectCategoryListItem({
   id,
   name,
-  menuTrigger,
+  guestMode,
+  updateProjectCategory,
 }: ProjectCategoryListItemProps) {
   const t = useTranslations("projectCategories.ProjectCategoryListItem");
   const selected = useSelectedItems();
@@ -35,7 +39,12 @@ export function ProjectCategoryListItem({
           <ListItemText>{t("name")}</ListItemText>
         </ListItemInfo>
 
-        {menuTrigger}
+        <ProjectCategoryItemActionMenuTrigger
+          guestMode={guestMode}
+          projectCategoryId={id}
+          projectCategoryName={name}
+          updateProjectCategory={updateProjectCategory}
+        />
       </ListItem>
     </SelectableItem>
   );

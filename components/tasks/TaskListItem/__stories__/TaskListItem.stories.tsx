@@ -1,45 +1,20 @@
+import { TaskDetail } from "../../TaskDetail";
+import { mockedTaskList } from "@/mocks/tasks";
 import { TaskListItem } from "../TaskListItem";
-import { TaskStatus } from "@/generated/prisma/enums";
-import { TaskDetailModal } from "../../TaskDetailModal";
+import { mockedUserDetail } from "@/mocks/users";
+import { EditTaskForm } from "../../EditTaskForm";
+import { mockedProjectDetail } from "@/mocks/projects";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { TaskCommentsModal } from "../../TaskCommentsModal";
-import { UserDetailModal } from "@/components/users/UserDetailModal";
-import { TaskDetailModalStory } from "../../TaskDetailModal/__stories__";
+import { UserDetail } from "@/components/users/UserDetail";
+import { taskDetailArgs } from "../../TaskDetail/__stories__";
+import { editTaskFormArgs } from "../../EditTaskForm/__stories__";
+import { ProjectDetail } from "@/components/projects/ProjectDetail";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { TaskItemActionMenuTrigger } from "../../TaskItemActionMenuTrigger";
-import { TaskCommentsModalStory } from "../../TaskCommentsModal/__stories__";
-import { ProjectDetailModal } from "@/components/projects/ProjectDetailModal";
+import { getCommentList } from "@/components/comments/CommentList/__stories__";
 import { withDeleteTaskModalProvider } from "../../DeleteTaskModal/__stories__";
 import { withSelectedTasksProvider } from "../../SelectedTasksContext/__stories__";
-import { UserDetailModalStory } from "@/components/users/UserDetailModal/__stories__";
 import { withUpdateTaskStatusesProvider } from "../../UpdateTaskStatusContext/__stories__";
-import { TaskItemActionMenuTriggerStory } from "../../TaskItemActionMenuTrigger/__stories__";
-import { ProjectDetailModalStory } from "@/components/projects/ProjectDetailModal/__stories__";
 import { withDeleteCommentModalProvider } from "@/components/comments/DeleteCommentModal/__stories__";
-
-export const mockedTask = {
-  id: 1,
-  title: "Task 1",
-  description: "Task description. General information goes here.",
-  deadline: "2025-09-30",
-  assignee: {
-    id: "user1",
-    imageUrl: "/man.jpg",
-    fullName: "User 1",
-  },
-  category: {
-    id: 1,
-    name: "Category 1",
-  },
-  project: {
-    id: 1,
-    title: "Project 1",
-  },
-  status: TaskStatus.pending,
-  subtasksTotal: 6,
-  subtasksDone: 2,
-  commentsCount: 5,
-};
 
 const meta = {
   title: "components/tasks/TaskListItem",
@@ -51,24 +26,24 @@ const meta = {
     withUpdateTaskStatusesProvider,
     withThemedBackground,
   ],
-  excludeStories: ["mockedTask"],
 } satisfies Meta<typeof TaskListItem>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
+const task = mockedTaskList[0];
+
 export const Default = {
   args: {
-    ...mockedTask,
-    taskDetailModal: <TaskDetailModal {...TaskDetailModalStory.args} />,
-    userDetailModal: <UserDetailModal {...UserDetailModalStory.args} />,
-    projectDetailModal: (
-      <ProjectDetailModal {...ProjectDetailModalStory.args} />
-    ),
-    taskCommentsModal: <TaskCommentsModal {...TaskCommentsModalStory.args} />,
-    menuTrigger: (
-      <TaskItemActionMenuTrigger {...TaskItemActionMenuTriggerStory.args} />
-    ),
+    ...task,
+    guestMode: false,
+    taskCommentsContainer: getCommentList(),
+    editTaskFormContainer: <EditTaskForm {...editTaskFormArgs} />,
+    userDetailContainer: <UserDetail {...mockedUserDetail} />,
+    projectDetailContainer: <ProjectDetail {...mockedProjectDetail} />,
+    taskDetailContainer: <TaskDetail {...taskDetailArgs} />,
+    sendComment: () => ({ status: "success" }),
+    updateComment: () => ({ status: "success" }),
     updateTaskStatus: () => {
       return new Promise((res) =>
         setTimeout(() => res({ status: "success" }), 500),

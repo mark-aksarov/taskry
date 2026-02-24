@@ -6,13 +6,11 @@ import { getTaskList } from "@/lib/data/task/task.dal";
 import { hasGuestRole } from "@/lib/utils/hasGuestRole";
 import { deleteTasks } from "@/lib/actions/task/deleteTasks";
 import { ProfileTasksPageEmpty } from "./ProfileTasksPageEmpty";
-import { ProfileActions } from "@/components/users/ProfileActions";
 import { changePassword } from "@/lib/actions/user/changePassword";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { pageSearchParam, pageSizeSearchParam } from "@/lib/schemas/base";
 import { updateTaskStatuses } from "@/lib/actions/task/updateTaskStatuses";
 import { UserTasksContainer } from "@/components/users/UserTasksContainer";
-import { ChangePasswordForm } from "@/components/users/ChangePasswordForm";
 import { UserHeaderContainer } from "@/components/users/UserHeaderContainer";
 import { UserTasksPageLayout } from "@/components/users/UserTasksPageLayout";
 import { NewTaskFormContainer } from "@/components/tasks/NewTaskFormContainer";
@@ -22,7 +20,7 @@ import { PageTransitionProvider } from "@/components/common/PageTransitionContex
 import { ProfileNavigationMobile } from "@/components/users/ProfileNavigationMobile";
 import { ProfileNavigationDesktop } from "@/components/users/ProfileNavigationDesktop";
 import { UpdateTaskStatusesProvider } from "@/components/tasks/UpdateTaskStatusContext";
-import { TaskToolbarActionsMenuTrigger } from "@/components/tasks/TaskToolbarActionsMenuTrigger";
+import { ProfileActions } from "@/components/users/ProfileActions";
 
 const searchParamsSchema = z.object({
   page: pageSearchParam,
@@ -65,9 +63,8 @@ export default async function AppProfileTasksPage({
   const profileActions = (
     <ProfileActions
       guestMode={guestMode}
-      changePasswordForm={
-        <ChangePasswordForm userId={userId} changePassword={changePassword} />
-      }
+      userId={userId}
+      changePassword={changePassword}
       editUserFormContainer={<EditUserFormContainer userId={userId} />}
     />
   );
@@ -76,9 +73,9 @@ export default async function AppProfileTasksPage({
   if (!totalCount) {
     return (
       <ProfileTasksPageEmpty
-        profileActions={profileActions}
         newTaskFormContainer={<NewTaskFormContainer />}
         userHeaderContainer={<UserHeaderContainer userId={userId} />}
+        profileActions={profileActions}
       />
     );
   }
@@ -100,12 +97,8 @@ export default async function AppProfileTasksPage({
               />
             }
             userHeaderContainer={<UserHeaderContainer userId={userId} />}
-            taskToolbarActionsMenuTrigger={
-              <TaskToolbarActionsMenuTrigger
-                guestMode={guestMode}
-                deleteTasks={deleteTasks}
-              />
-            }
+            guestMode={guestMode}
+            deleteTasks={deleteTasks}
             navigationDesktop={
               <ProfileNavigationDesktop profileActions={profileActions} />
             }

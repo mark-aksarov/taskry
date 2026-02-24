@@ -3,6 +3,7 @@ import {
   ProjectsSearchPresentationStory,
 } from "../../SearchPresentation/__stories__";
 
+import { useState } from "react";
 import { SearchModal } from "../SearchModal";
 import { fn } from "storybook/internal/test";
 import { SearchField } from "../../SearchField";
@@ -19,12 +20,16 @@ const meta = {
   title: "components/search/SearchModal",
   component: SearchModal,
   decorators: [
-    (Story) => (
-      <DialogTrigger>
-        <Button label="Search" />
-        <Story />
-      </DialogTrigger>
-    ),
+    (Story) => {
+      const [isOpen, setIsOpen] = useState(true);
+
+      return (
+        <DialogTrigger isOpen={isOpen} onOpenChange={setIsOpen}>
+          <Button label="Search" />
+          <Story />
+        </DialogTrigger>
+      );
+    },
     withThemedBackground,
   ],
 } satisfies Meta<typeof SearchModal>;

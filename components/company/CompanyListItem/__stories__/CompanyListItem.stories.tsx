@@ -1,9 +1,7 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { CompanyListItem } from "../CompanyListItem";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { CompanyItemActionMenuTrigger } from "../../CompanyItemActionMenuTrigger";
 import { withDeleteCompanyModalProvider } from "../../DeleteCompanyModal/__stories__";
-import { CompanyItemActionMenuTriggerStory } from "../../CompanyItemActionMenuTrigger/__stories__";
 import { withSelectedItemsProvider } from "@/components/common/SelectedItemsContext/__stories__";
 
 const meta = {
@@ -23,10 +21,7 @@ export const Default = {
   args: {
     id: 1,
     name: "Company 1",
-    menuTrigger: (
-      <CompanyItemActionMenuTrigger
-        {...CompanyItemActionMenuTriggerStory.args}
-      />
-    ),
+    guestMode: false,
+    updateCompany: () => ({ status: "success" }),
   },
 } satisfies Story;

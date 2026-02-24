@@ -7,14 +7,16 @@ import {
 import { useTranslations } from "next-intl";
 import { ModalProps } from "@/components/ui/Modal";
 import { DialogHeader } from "@/components/ui/Dialog";
+import { NewPositionForm } from "../NewPositionForm";
+import { ActionFn, ActionState } from "@/lib/actions/types";
 
 interface NewPositionModalProps
   extends Pick<ModalProps, "isOpen" | "onOpenChange"> {
-  newPositionForm: React.ReactNode;
+  createPosition: ActionFn<ActionState, FormData>;
 }
 
 export function NewPositionModal({
-  newPositionForm,
+  createPosition,
   ...props
 }: NewPositionModalProps) {
   const t = useTranslations("positions.NewPositionModal");
@@ -23,7 +25,9 @@ export function NewPositionModal({
     <FormBaseModal className="md:w-[350px]" {...props}>
       <FormBaseModalDialog>
         <DialogHeader>{t("title")}</DialogHeader>
-        <FormBaseModalDialogBody>{newPositionForm}</FormBaseModalDialogBody>
+        <FormBaseModalDialogBody>
+          <NewPositionForm createPosition={createPosition} />
+        </FormBaseModalDialogBody>
       </FormBaseModalDialog>
     </FormBaseModal>
   );

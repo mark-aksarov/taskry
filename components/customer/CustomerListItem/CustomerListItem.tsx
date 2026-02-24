@@ -16,6 +16,8 @@ import { ImageContainer } from "@/components/common/ImageContainer";
 import { ItemBaseDetailModalTrigger } from "@/components/common/ItemBase";
 import { useSelectedItems } from "@/components/common/SelectedItemsContext";
 import { SelectableItem } from "@/components/common/SelectableItem";
+import { CustomerItemActionMenuTrigger } from "../CustomerItemActionMenuTrigger";
+import { CustomerDetailModal } from "../CustomerDetailModal";
 
 export type CustomerListItemProps = {
   id: number;
@@ -28,8 +30,9 @@ export type CustomerListItemProps = {
     id: number;
     name: string;
   };
-  menuTrigger: React.ReactNode;
-  customerDetailModal: React.ReactNode;
+  guestMode: boolean;
+  customerDetailContainer: React.ReactNode;
+  editCustomerFormContainer: React.ReactNode;
 };
 
 export function CustomerListItem({
@@ -40,8 +43,9 @@ export function CustomerListItem({
   publicLink,
   imageUrl,
   company,
-  menuTrigger,
-  customerDetailModal,
+  guestMode,
+  customerDetailContainer,
+  editCustomerFormContainer,
 }: CustomerListItemProps) {
   const t = useTranslations("customers.CustomerListItem");
   const selected = useSelectedItems();
@@ -52,6 +56,13 @@ export function CustomerListItem({
     </ImageContainer>
   ) : (
     <UnknownUser className="h-9 w-9" />
+  );
+
+  const customerDetailModal = (
+    <CustomerDetailModal
+      customerId={id}
+      customerDetailContainer={customerDetailContainer}
+    />
   );
 
   return (
@@ -129,7 +140,12 @@ export function CustomerListItem({
           <ListItemText>{t("company")}</ListItemText>
         </ListItemInfo>
 
-        {menuTrigger}
+        <CustomerItemActionMenuTrigger
+          guestMode={guestMode}
+          customerId={id}
+          customerFullName={fullName}
+          editCustomerFormContainer={editCustomerFormContainer}
+        />
       </ListItem>
     </SelectableItem>
   );

@@ -12,22 +12,24 @@ import { useProjectFiltersDispatch } from "../ProjectFiltersContext";
 import { FiltersFormResetButton } from "@/components/common/FiltersForm";
 import { FiltersFormSubmitButton } from "@/components/common/FiltersForm";
 import { useFiltersFormHandleSubmit } from "@/components/common/FiltersForm";
+import { ProjectFiltersFormUserCheckboxGroup } from "./ProjectFiltersFormUserCheckboxGroup";
 import { ProjectFiltersFormNoActiveTasksSwitch } from "./ProjectFiltersFormNoActiveTasksSwitch";
+import { ProjectFiltersFormStatusCheckboxGroup } from "./ProjectFiltersFormStatusCheckboxGroup";
 import { ProjectFiltersFormDeadlineToDatePicker } from "./ProjectFiltersFormDeadlineToDatePicker";
+import { ProjectFiltersFormCategoryCheckboxGroup } from "./ProjectFiltersFormCategoryCheckboxGroup";
+import { ProjectFiltersFormCustomerCheckboxGroup } from "./ProjectFiltersFormCustomerCheckboxGroup";
 import { ProjectFiltersFormDeadlineFromDatePicker } from "./ProjectFiltersFormDeadlineFromDatePicker";
 
 interface ProjectFiltersFormProps {
-  projectStatusCheckboxGroup: React.ReactNode;
-  projectCategoryCheckboxGroup: React.ReactNode;
-  customerCheckboxGroup: React.ReactNode;
-  userCheckboxGroup: React.ReactNode;
+  categoryCheckboxGroupItems: { id: number; name: string }[];
+  userCheckboxGroupItems: { id: string; fullName: string }[];
+  customerCheckboxGroupItems: { id: number; fullName: string }[];
 }
 
 export function ProjectFiltersForm({
-  projectStatusCheckboxGroup,
-  projectCategoryCheckboxGroup,
-  customerCheckboxGroup,
-  userCheckboxGroup,
+  categoryCheckboxGroupItems,
+  userCheckboxGroupItems,
+  customerCheckboxGroupItems,
 }: ProjectFiltersFormProps) {
   const { clear: clearSelectedProjects } = useSelectedProjects();
   const dispatch = useProjectFiltersDispatch();
@@ -41,21 +43,26 @@ export function ProjectFiltersForm({
     <FormBase id="project-filter-form" onSubmit={handleSubmit}>
       <FormBaseBody>
         <ProjectFiltersFormNoActiveTasksSwitch />
-
         <Separator />
 
         <ProjectFiltersFormDeadlineFromDatePicker />
         <ProjectFiltersFormDeadlineToDatePicker />
-
         <Separator />
 
-        <div>{projectStatusCheckboxGroup}</div>
+        <ProjectFiltersFormStatusCheckboxGroup />
         <Separator />
-        <div>{projectCategoryCheckboxGroup}</div>
+
+        <ProjectFiltersFormCategoryCheckboxGroup
+          categories={categoryCheckboxGroupItems}
+        />
         <Separator />
-        <div>{customerCheckboxGroup}</div>
+
+        <ProjectFiltersFormCustomerCheckboxGroup
+          items={customerCheckboxGroupItems}
+        />
         <Separator />
-        <div>{userCheckboxGroup}</div>
+
+        <ProjectFiltersFormUserCheckboxGroup items={userCheckboxGroupItems} />
       </FormBaseBody>
 
       <FormBaseFooter>

@@ -23,6 +23,8 @@ import { SelectableItem } from "@/components/common/SelectableItem";
 import { ImageContainer } from "@/components/common/ImageContainer";
 import { ItemBaseDetailModalTrigger } from "@/components/common/ItemBase";
 import { useSelectedItems } from "@/components/common/SelectedItemsContext";
+import { CustomerItemActionMenuTrigger } from "../CustomerItemActionMenuTrigger";
+import { CustomerDetailModal } from "../CustomerDetailModal";
 
 interface CustomerGridItemProps {
   id: number;
@@ -35,8 +37,9 @@ interface CustomerGridItemProps {
     id: number;
     name: string;
   };
-  menuTrigger: React.ReactNode;
-  customerDetailModal: React.ReactNode;
+  guestMode: boolean;
+  customerDetailContainer: React.ReactNode;
+  editCustomerFormContainer: React.ReactNode;
 }
 
 export function CustomerGridItem({
@@ -47,8 +50,9 @@ export function CustomerGridItem({
   publicLink,
   imageUrl,
   company,
-  menuTrigger,
-  customerDetailModal,
+  guestMode,
+  customerDetailContainer,
+  editCustomerFormContainer,
 }: CustomerGridItemProps) {
   const t = useTranslations("customers.CustomerGridItem");
   const selected = useSelectedItems();
@@ -63,13 +67,26 @@ export function CustomerGridItem({
     <UnknownUser className="h-20 w-20" iconSize={48} />
   );
 
+  const customerDetailModal = (
+    <CustomerDetailModal
+      customerId={id}
+      customerDetailContainer={customerDetailContainer}
+    />
+  );
+
   return (
     <SelectableItem {...selected} item={{ id }}>
       <CustomerGridItemLayout
         topRowSlot={
           <GridItemRow>
             <CustomerItemCheckbox id={id} />
-            {menuTrigger}
+            <CustomerItemActionMenuTrigger
+              guestMode={guestMode}
+              customerId={id}
+              customerFullName={fullName}
+              editCustomerFormContainer={editCustomerFormContainer}
+              className="-mr-2"
+            />
           </GridItemRow>
         }
         imageSlot={

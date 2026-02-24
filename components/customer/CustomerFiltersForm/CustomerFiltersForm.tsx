@@ -16,15 +16,16 @@ import { useCustomerFiltersDispatch } from "../CustomerFiltersContext";
 import { useSelectedItems } from "@/components/common/SelectedItemsContext";
 import { useFiltersFormHandleSubmit } from "@/components/common/FiltersForm";
 import { CustomerFiltersFormActiveProjectsSwitch } from "./CustomerFiltersFormActiveProjectsSwitch";
+import { CustomerFiltersFormCompanyCheckboxGroup } from "./CustomerFiltersFormCompanyCheckboxGroup";
 import { CustomerFiltersFormOverdueProjectsSwitch } from "./CustomerFiltersFormOverdueProjectsSwitch";
 import { CustomerFiltersFormNoActiveProjectsSwitch } from "./CustomerFiltersFormNoActiveProjectsSwitch";
 
 interface CustomerFiltersFormProps {
-  companyCheckboxGroup: React.ReactNode;
+  companyCheckboxGroupItems: { id: number; name: string }[];
 }
 
 export function CustomerFiltersForm({
-  companyCheckboxGroup,
+  companyCheckboxGroupItems,
 }: CustomerFiltersFormProps) {
   const { clear: clearSelectedItems } = useSelectedItems();
   const dispatch = useCustomerFiltersDispatch();
@@ -50,7 +51,9 @@ export function CustomerFiltersForm({
         <CustomerFiltersFormOverdueProjectsSwitch />
         <Separator />
 
-        <div>{companyCheckboxGroup}</div>
+        <CustomerFiltersFormCompanyCheckboxGroup
+          items={companyCheckboxGroupItems}
+        />
       </FormBaseBody>
       <FormBaseFooter>
         <FiltersFormSubmitButton />

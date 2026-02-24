@@ -1,0 +1,35 @@
+"use client";
+
+import { Item } from "react-stately";
+import { useTranslations } from "next-intl";
+import { ResponsiveSelect } from "@/components/common/ResponsiveSelect";
+
+interface ProjectCustomerSelectProps {
+  defaultSelectedKey?: string;
+  items: { id: number; fullName: string }[];
+}
+
+export function ProjectCustomerSelect({
+  defaultSelectedKey,
+  items,
+}: ProjectCustomerSelectProps) {
+  const t = useTranslations("projects.ProjectCustomerSelect");
+
+  const withNoCustomerItems = [
+    { id: "", label: t("noCustomer") },
+    ...items.map((item) => ({ id: item.id, label: item.fullName })),
+  ];
+
+  return (
+    <ResponsiveSelect
+      data-test="project-customer-select"
+      label={t("label")}
+      name="customerId"
+      overlayClassName="w-[var(--trigger-width)]"
+      defaultSelectedKey={defaultSelectedKey || ""}
+      items={withNoCustomerItems}
+    >
+      {(item: any) => <Item key={item.id}>{item.label}</Item>}
+    </ResponsiveSelect>
+  );
+}

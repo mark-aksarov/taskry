@@ -1,9 +1,7 @@
 import { CommentItem } from "../CommentItem";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { CommentItemActionMenuTriggerStory } from "./index";
 import { withCommentFormProvider } from "../../withCommentFormProvider";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { CommentItemActionMenuTrigger } from "../CommentItemActionMenuTrigger";
 import { withDeleteCommentModalProvider } from "../../DeleteCommentModal/__stories__";
 
 const meta = {
@@ -26,6 +24,7 @@ const content = "Comment content text";
 
 export const Default = {
   args: {
+    id: 1,
     content,
     createdAt: "2025-01-01T04:00:00Z",
     sender: {
@@ -33,12 +32,8 @@ export const Default = {
       fullName: "User 1",
       imageUrl: "/woman.jpg",
     },
-    menuTrigger: (
-      <CommentItemActionMenuTrigger
-        {...CommentItemActionMenuTriggerStory.args}
-        commentContent={content}
-      />
-    ),
+    guestMode: false,
+    canEdit: true,
   },
 } satisfies Story;
 

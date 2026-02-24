@@ -3,7 +3,6 @@
 import useSWR from "swr";
 import { Suspense } from "react";
 import { CalendarDate } from "@internationalized/date";
-import { UserPositionSelect } from "./UserPositionSelect";
 import { updateUser } from "@/lib/actions/user/updateUser";
 import { UserFormDataDTO } from "@/lib/data/user/user.dto";
 import { EditUserForm, EditUserFormSkeleton } from "./EditUserForm";
@@ -50,18 +49,14 @@ function EditUserFormContainerInner({ userId }: EditUserFormContainerProps) {
   return (
     <EditUserForm
       userId={userId}
-      fullNameDefaultValue={user.fullName}
-      bioDefaultValue={user.bio}
-      birthdateDefaultValue={dateValue}
-      phoneNumberDefaultValue={user.phoneNumber}
-      publicLinkDefaultValue={user.publicLink}
-      addressDefaultValue={user.address}
-      positionSelect={
-        <UserPositionSelect
-          defaultSelectedKey={user.positionId?.toString()}
-          positions={positions}
-        />
-      }
+      userFullNameDefaultValue={user.fullName}
+      userBioDefaultValue={user.bio}
+      userBirthdateDefaultValue={dateValue}
+      userPhoneNumberDefaultValue={user.phoneNumber}
+      userPublicLinkDefaultValue={user.publicLink}
+      userAddressDefaultValue={user.address}
+      userPositionSelectDefaultValue={user.positionId?.toString()}
+      userPositionSelectItems={positions}
       updateUser={updateUser}
     />
   );

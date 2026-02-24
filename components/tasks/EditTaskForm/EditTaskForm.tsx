@@ -12,6 +12,9 @@ import { DateValue } from "react-aria";
 import { useTranslations } from "next-intl";
 import { TaskStatus } from "@/generated/prisma/enums";
 import { TaskStatusSelect } from "../TaskStatusSelect";
+import { TaskProjectSelect } from "../TaskProjectSelect";
+import { TaskCategorySelect } from "../TaskCategorySelect";
+import { TaskAssigneeSelect } from "../TaskAssigneeSelect";
 import { TaskTitleTextField } from "../TaskTitleTextField";
 import { ActionFn, ActionState } from "@/lib/actions/types";
 import { TaskDeadlineDatePicker } from "../TaskDeadlineDatePicker";
@@ -21,25 +24,31 @@ import { TaskDescriptionTextField } from "../TaskDescriptionTextField";
 
 interface EditTaskFormProps {
   taskId: number;
-  titleDefaultValue: string;
-  descriptionDefaultValue?: string;
-  deadlineDefaultValue: DateValue;
-  statusSelectDefaultValue: TaskStatus;
-  taskCategorySelect: React.ReactNode;
-  projectSelect: React.ReactNode;
-  assigneeSelect: React.ReactNode;
+  taskTitleDefaultValue: string;
+  taskDescriptionDefaultValue?: string;
+  taskDeadlineDefaultValue: DateValue;
+  taskStatusSelectDefaultValue: TaskStatus;
+  taskCategorySelectDefaultValue?: string;
+  taskProjectSelectDefaultValue?: string;
+  taskAssigneeSelectDefaultValue?: string;
+  taskCategorySelectItems: { id: number; name: string }[];
+  taskProjectSelectItems: { id: number; title: string }[];
+  taskAssigneeSelectItems: { id: string; fullName: string }[];
   updateTask: ActionFn<ActionState, FormData>;
 }
 
 export function EditTaskForm({
   taskId,
-  titleDefaultValue,
-  descriptionDefaultValue,
-  deadlineDefaultValue,
-  statusSelectDefaultValue,
-  taskCategorySelect,
-  projectSelect,
-  assigneeSelect,
+  taskTitleDefaultValue,
+  taskDescriptionDefaultValue,
+  taskDeadlineDefaultValue,
+  taskStatusSelectDefaultValue,
+  taskCategorySelectDefaultValue,
+  taskProjectSelectDefaultValue,
+  taskAssigneeSelectDefaultValue,
+  taskCategorySelectItems,
+  taskProjectSelectItems,
+  taskAssigneeSelectItems,
   updateTask,
 }: EditTaskFormProps) {
   const t = useTranslations("tasks.EditTaskForm");
@@ -53,13 +62,22 @@ export function EditTaskForm({
     >
       <FormBaseBody>
         {taskId && <input type="hidden" name="id" value={taskId} />}
-        <TaskTitleTextField defaultValue={titleDefaultValue} />
-        <TaskDescriptionTextField defaultValue={descriptionDefaultValue} />
-        <TaskDeadlineDatePicker defaultValue={deadlineDefaultValue} />
-        <TaskStatusSelect defaultSelectedKey={statusSelectDefaultValue} />
-        {taskCategorySelect}
-        {projectSelect}
-        {assigneeSelect}
+        <TaskTitleTextField defaultValue={taskTitleDefaultValue} />
+        <TaskDescriptionTextField defaultValue={taskDescriptionDefaultValue} />
+        <TaskDeadlineDatePicker defaultValue={taskDeadlineDefaultValue} />
+        <TaskStatusSelect defaultSelectedKey={taskStatusSelectDefaultValue} />
+        <TaskCategorySelect
+          defaultSelectedKey={taskCategorySelectDefaultValue}
+          items={taskCategorySelectItems}
+        />
+        <TaskProjectSelect
+          defaultSelectedKey={taskProjectSelectDefaultValue}
+          items={taskProjectSelectItems}
+        />
+        <TaskAssigneeSelect
+          defaultSelectedKey={taskAssigneeSelectDefaultValue}
+          items={taskAssigneeSelectItems}
+        />
         <FormErrorBanner status={state.status} isPending={isPending}>
           {state.message}
         </FormErrorBanner>

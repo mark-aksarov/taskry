@@ -1,8 +1,8 @@
 import {
-  booleanSearchParam,
   pageSearchParam,
-  pageSizeSearchParam,
+  booleanSearchParam,
   searchParamToArray,
+  pageSizeSearchParam,
 } from "@/lib/schemas/base";
 
 import { z } from "zod";
@@ -14,15 +14,11 @@ import { hasOwnerRole } from "@/lib/utils/hasOwnerRole";
 import { getUserCount } from "@/lib/data/user/user.dal";
 import { hasGuestRole } from "@/lib/utils/hasGuestRole";
 import { createUser } from "@/lib/actions/user/createUser";
-import { NewUserForm } from "@/components/users/NewUserForm";
 import { UsersContainer } from "@/components/users/UsersContainer";
 import { createPosition } from "@/lib/actions/position/createPosition";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
-import { NewPositionForm } from "@/components/position/NewPositionForm";
 import { PageTransitionProvider } from "@/components/common/PageTransitionContext";
 import { UserFiltersFormContainer } from "@/components/users/UserFiltersFormContainer";
-import { UserToolbarFiltersModalTrigger } from "@/components/users/UserToolbarFiltersModalTrigger";
-import { UserToolbarCreateNewMenuTrigger } from "@/components/users/UserToolbarCreateNewMenuTrigger";
 
 const searchParamsSchema = z.object({
   page: pageSearchParam,
@@ -58,19 +54,13 @@ export default async function AppUsersPage({
   const isOwner = await hasOwnerRole();
   const showCreateNewUserMenuItem = isOwner || guestMode;
 
-  const userToolbarCreateNewMenuTrigger = (
-    <UserToolbarCreateNewMenuTrigger
-      showCreateNewUserMenuItem={showCreateNewUserMenuItem}
-      guestMode={guestMode}
-      newUserForm={<NewUserForm createUser={createUser} />}
-      newPositionForm={<NewPositionForm createPosition={createPosition} />}
-    />
-  );
-
   if (!totalCount)
     return (
       <UsersPageEmpty
-        userToolbarCreateNewMenuTrigger={userToolbarCreateNewMenuTrigger}
+        showCreateNewUserMenuItem={showCreateNewUserMenuItem}
+        guestMode={guestMode}
+        createUser={createUser}
+        createPosition={createPosition}
       />
     );
 
@@ -83,16 +73,11 @@ export default async function AppUsersPage({
   return (
     <PageTransitionProvider>
       <UsersPage
+        guestMode={guestMode}
+        showCreateNewUserMenuItem={showCreateNewUserMenuItem}
         totalFilteredUsers={totalFilteredUsers}
         selectedSortField={sort}
-        userToolbarFiltersModalTrigger={
-          <UserToolbarFiltersModalTrigger
-            filtersFormContainer={
-              <UserFiltersFormContainer filters={filters} />
-            }
-          />
-        }
-        userToolbarCreateNewMenuTrigger={userToolbarCreateNewMenuTrigger}
+        filtersFormContainer={<UserFiltersFormContainer filters={filters} />}
         usersContainer={
           <UsersContainer
             showUserActionMenuTrigger={showUserActionMenuTrigger}
@@ -102,6 +87,8 @@ export default async function AppUsersPage({
             filters={filters}
           />
         }
+        createUser={createUser}
+        createPosition={createPosition}
       />
     </PageTransitionProvider>
   );

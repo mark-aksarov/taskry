@@ -1,29 +1,30 @@
-import {
-  DetailHeader,
-  DetailHeaderSkeleton,
-} from "@/components/common/DetailHeader";
-
+import { useState } from "react";
 import { Button } from "@/components/ui/Button";
+import { mockedUserDetail } from "@/mocks/users";
 import { UserDetailModal } from "../UserDetailModal";
 import { DialogTrigger } from "react-aria-components";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { UserDetail } from "../../UserDetail/UserDetail";
+import { UserDetailHeader } from "../../UserDetailHeader";
+import { DetailHeaderSkeleton } from "@/components/common/DetailHeader";
 import { UserDetailSkeleton } from "../../UserDetail/UserDetailSkeleton";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { UserDetailStory } from "@/components/users/UserDetail/__stories__";
-import { PersonDetailHeaderStory } from "@/components/common/DetailHeader/__stories__";
 import { PersonDetailPresentation } from "@/components/common/PersonDetailPresentation";
 
 const meta = {
   title: "components/users/UserDetailModal",
   component: UserDetailModal,
   decorators: [
-    (Story) => (
-      <DialogTrigger>
-        <Button label="User detail" />
-        <Story />
-      </DialogTrigger>
-    ),
+    (Story) => {
+      const [isOpen, setIsOpen] = useState(true);
+
+      return (
+        <DialogTrigger isOpen={isOpen} onOpenChange={setIsOpen}>
+          <Button label="User detail" />
+          <Story />
+        </DialogTrigger>
+      );
+    },
     withThemedBackground,
   ],
 } satisfies Meta<typeof UserDetailModal>;
@@ -36,8 +37,14 @@ export const Default = {
     userId: "user-1",
     userDetailContainer: (
       <PersonDetailPresentation
-        personHeader={<DetailHeader {...PersonDetailHeaderStory.args} />}
-        userDetail={<UserDetail {...UserDetailStory.args} />}
+        personHeader={
+          <UserDetailHeader
+            fullName={mockedUserDetail.fullName}
+            positionName={mockedUserDetail.position?.name}
+            imageUrl="/man.jpg"
+          />
+        }
+        userDetail={<UserDetail {...mockedUserDetail} />}
       />
     ),
   },

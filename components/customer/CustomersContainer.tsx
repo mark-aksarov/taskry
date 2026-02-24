@@ -5,13 +5,11 @@ import { CustomerGrid } from "./CustomerGrid";
 import { CustomerListItem } from "./CustomerListItem";
 import { CustomerGridItem } from "./CustomerGridItem";
 import { hasGuestRole } from "@/lib/utils/hasGuestRole";
-import { CustomerDetailModal } from "./CustomerDetailModal";
 import { DeleteCustomerModalProvider } from "./DeleteCustomerModal";
 import { CustomerDetailContainer } from "./CustomerDetailContainer";
 import { CustomerListItemDTO } from "@/lib/data/customer/customer.dto";
 import { EditCustomerFormContainer } from "./EditCustomerFormContainer";
 import { deleteCustomers } from "@/lib/actions/customer/deleteCustomers";
-import { CustomerItemActionMenuTrigger } from "./CustomerItemActionMenuTrigger";
 import { EntityContainerPresentation } from "../common/EntityContainerPresentation";
 
 export interface CustomersContainerProps {
@@ -49,23 +47,12 @@ export async function CustomersContainer({
             {customers.map((customer) => (
               <CustomerListItem
                 key={customer.id}
-                menuTrigger={
-                  <CustomerItemActionMenuTrigger
-                    guestMode={guestMode}
-                    customerId={customer.id}
-                    customerFullName={customer.fullName}
-                    editCustomerFormContainer={
-                      <EditCustomerFormContainer customerId={customer.id} />
-                    }
-                  />
+                guestMode={guestMode}
+                editCustomerFormContainer={
+                  <EditCustomerFormContainer customerId={customer.id} />
                 }
-                customerDetailModal={
-                  <CustomerDetailModal
-                    customerId={customer.id}
-                    customerDetailContainer={
-                      <CustomerDetailContainer customerId={customer.id} />
-                    }
-                  />
+                customerDetailContainer={
+                  <CustomerDetailContainer customerId={customer.id} />
                 }
                 {...getCustomerCommonProps(customer)}
               />
@@ -77,24 +64,12 @@ export async function CustomersContainer({
             {customers.map((customer) => (
               <CustomerGridItem
                 key={customer.id}
-                menuTrigger={
-                  <CustomerItemActionMenuTrigger
-                    guestMode={guestMode}
-                    customerId={customer.id}
-                    customerFullName={customer.fullName}
-                    editCustomerFormContainer={
-                      <EditCustomerFormContainer customerId={customer.id} />
-                    }
-                    className="-mr-2"
-                  />
+                guestMode={guestMode}
+                editCustomerFormContainer={
+                  <EditCustomerFormContainer customerId={customer.id} />
                 }
-                customerDetailModal={
-                  <CustomerDetailModal
-                    customerId={customer.id}
-                    customerDetailContainer={
-                      <CustomerDetailContainer customerId={customer.id} />
-                    }
-                  />
+                customerDetailContainer={
+                  <CustomerDetailContainer customerId={customer.id} />
                 }
                 {...getCustomerCommonProps(customer)}
               />

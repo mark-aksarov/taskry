@@ -5,8 +5,6 @@ import { Suspense } from "react";
 import { EditProjectForm } from "./EditProjectForm";
 import { CalendarDate } from "@internationalized/date";
 import { ProjectFormSkeleton } from "./ProjectFormSkeleton";
-import { ProjectCategorySelect } from "./ProjectCategorySelect";
-import { ProjectCustomerSelect } from "./ProjectCustomerSelect";
 import { updateProject } from "@/lib/actions/project/updateProject";
 import { ProjectFormDataDTO } from "@/lib/data/project/project.dto";
 import { CustomerSummaryDTO } from "@/lib/data/customer/customer.dto";
@@ -61,22 +59,14 @@ function EditProjectFormContainerInner({
       projectDescriptionDefaultValue={project.description}
       projectDeadlineDefaultValue={dateValue}
       projectStatusDefaultValue={project.status}
-      projectCategorySelect={
-        <ProjectCategorySelect
-          defaultSelectedKey={
-            project.categoryId ? project.categoryId.toString() : ""
-          }
-          categories={categories}
-        />
+      projectCategorySelectDefaultValue={
+        project.categoryId ? project.categoryId.toString() : ""
       }
-      projectCustomerSelect={
-        <ProjectCustomerSelect
-          defaultSelectedKey={
-            project.customerId ? project.customerId.toString() : ""
-          }
-          customers={customers}
-        />
+      projectCustomerSelectDefaultValue={
+        project.customerId ? project.customerId.toString() : ""
       }
+      projectCategorySelectItems={categories}
+      projectCustomerSelectItems={customers}
       updateProject={updateProject}
     />
   );

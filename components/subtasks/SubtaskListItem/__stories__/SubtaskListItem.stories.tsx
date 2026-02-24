@@ -1,9 +1,7 @@
 import { SubtaskListItem } from "../SubtaskListItem";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { SubtaskActionMenuTrigger } from "../../SubtaskActionMenuTrigger";
 import { withDeleteSubtaskModalProvider } from "../../DeleteSubtaskModal/__stories__";
-import { SubtaskActionMenuTriggerStory } from "../../SubtaskActionMenuTrigger/__stories__";
 
 const meta = {
   title: "components/subtasks/SubtaskListItem",
@@ -20,21 +18,18 @@ type Story = StoryObj<typeof meta>;
 export const Default = {
   args: {
     isDone: false,
-    actionMenuTrigger: (
-      <SubtaskActionMenuTrigger {...SubtaskActionMenuTriggerStory.args} />
-    ),
+    id: 1,
+    text: "Subtask 1",
+    taskId: 1,
+    toggleSubtask: () => ({ status: "success" }),
+    updateSubtask: () => ({ status: "success" }),
+    guestMode: false,
   },
 } satisfies Story;
 
 export const IsDone = {
   args: {
     ...Default.args,
-    actionMenuTrigger: (
-      <SubtaskActionMenuTrigger
-        {...SubtaskActionMenuTriggerStory.args}
-        isDone={true}
-      />
-    ),
     isDone: true,
   },
 } satisfies Story;

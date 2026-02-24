@@ -1,29 +1,30 @@
-import {
-  DetailHeader,
-  DetailHeaderSkeleton,
-} from "@/components/common/DetailHeader";
-
+import { useState } from "react";
 import { Button } from "@/components/ui/Button";
 import { DialogTrigger } from "react-aria-components";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { mockedCustomerDetail } from "@/mocks/customers";
 import { CustomerDetailModal } from "../CustomerDetailModal";
+import { CustomerDetailHeader } from "../../CustomerDetailHeader";
 import { CustomerDetail } from "../../CustomerDetail/CustomerDetail";
-import { CustomerDetailStory } from "../../CustomerDetail/__stories__";
+import { DetailHeaderSkeleton } from "@/components/common/DetailHeader";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { CustomerDetailSkeleton } from "../../CustomerDetail/CustomerDetailSkeleton";
-import { PersonDetailHeaderStory } from "@/components/common/DetailHeader/__stories__";
 import { PersonDetailPresentation } from "@/components/common/PersonDetailPresentation";
 
 const meta = {
   title: "components/customers/CustomerDetailModal",
   component: CustomerDetailModal,
   decorators: [
-    (Story) => (
-      <DialogTrigger>
-        <Button label="Customer detail" />
-        <Story />
-      </DialogTrigger>
-    ),
+    (Story) => {
+      const [isOpen, setIsOpen] = useState(true);
+
+      return (
+        <DialogTrigger isOpen={isOpen} onOpenChange={setIsOpen}>
+          <Button label="Customer detail" />
+          <Story />
+        </DialogTrigger>
+      );
+    },
     withThemedBackground,
   ],
   args: {
@@ -34,13 +35,21 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
+const customer = mockedCustomerDetail;
+
 export const Default = {
   args: {
     customerId: 1,
     customerDetailContainer: (
       <PersonDetailPresentation
-        personHeader={<DetailHeader {...PersonDetailHeaderStory.args} />}
-        userDetail={<CustomerDetail {...CustomerDetailStory.args} />}
+        personHeader={
+          <CustomerDetailHeader
+            fullName={customer.fullName}
+            imageUrl={customer.imageUrl}
+            companyName={customer.company?.name}
+          />
+        }
+        userDetail={<CustomerDetail {...customer} />}
       />
     ),
   },

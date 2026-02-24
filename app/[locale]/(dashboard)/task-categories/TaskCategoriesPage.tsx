@@ -10,19 +10,38 @@ import { PageGrid } from "@/components/common/PageGrid";
 import { ViewModeProvider } from "@/components/common/ViewMode";
 import { PageContainer } from "@/components/common/PageContainer";
 import { BackButton } from "@/components/common/BackButton";
+import { TaskCategoryToolbarCreateNewModalTrigger } from "@/components/taskCategory/TaskCategoryToolbarCreateNewModalTrigger";
+import { ActionFn, ActionState } from "@/lib/actions/types";
+import { TaskCategoryToolbarActionsMenuTrigger } from "@/components/taskCategory/TaskCategoryToolbarActionsMenuTrigger";
 
 interface TaskCategoriesPageProps {
   taskCategoriesContainer: React.ReactNode;
-  taskCategoryToolbarCreateNewModalTrigger: React.ReactNode;
-  taskCategoryToolbarActionsMenuTrigger: React.ReactNode;
+  guestMode: boolean;
+  createTaskCategory: ActionFn<ActionState, FormData>;
+  deleteTaskCategories: ActionFn<ActionState, number[]>;
 }
 
 export function TaskCategoriesPage({
   taskCategoriesContainer,
-  taskCategoryToolbarCreateNewModalTrigger,
-  taskCategoryToolbarActionsMenuTrigger,
+  guestMode,
+  createTaskCategory,
+  deleteTaskCategories,
 }: TaskCategoriesPageProps) {
   const t = useTranslations("app.TaskCategoriesPage");
+
+  const taskCategoryToolbarCreateNewModalTrigger = (
+    <TaskCategoryToolbarCreateNewModalTrigger
+      guestMode={guestMode}
+      createTaskCategory={createTaskCategory}
+    />
+  );
+
+  const taskCategoryToolbarActionsMenuTrigger = (
+    <TaskCategoryToolbarActionsMenuTrigger
+      guestMode={guestMode}
+      deleteTaskCategories={deleteTaskCategories}
+    />
+  );
 
   return (
     <PageContainer>

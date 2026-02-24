@@ -22,16 +22,21 @@ import Image from "next/image";
 import { Link } from "@/components/ui/Link";
 import { ProjectStatus } from "@/generated/prisma/enums";
 import { useFormatter, useTranslations } from "next-intl";
+import { ProjectDetailModal } from "../ProjectDetailModal";
 import { ProjectItemCheckbox } from "../ProjectItemCheckbox";
 import { UnknownUser } from "@/components/common/UnknownUser";
+import { ProjectCommentsModal } from "../ProjectCommentsModal";
 import { ProjectItemBaseBadge } from "../ProjectItemBaseBadge";
 import { ProjectGridItemLayout } from "./ProjectGridItemLayout";
 import { useSelectedProjects } from "../SelectedProjectsContext";
 import { SelectableItem } from "@/components/common/SelectableItem";
 import { ImageContainer } from "@/components/common/ImageContainer";
+import { UserDetailModal } from "@/components/users/UserDetailModal";
 import { UpdateProjectStatusProvider } from "../UpdateProjectStatusContext";
+import { ProjectItemActionMenuTrigger } from "../ProjectItemActionMenuTrigger";
 
 export interface ProjectGridItemProps {
+  guestMode: boolean;
   id: number;
   title: string;
   deadline: string;
@@ -44,10 +49,12 @@ export interface ProjectGridItemProps {
   status: ProjectStatus;
   tasksTotal: number;
   tasksCompleted: number;
-  projectCommentsModal: React.ReactNode;
-  menuTrigger: React.ReactNode;
-  projectDetailModal: React.ReactNode;
-  userDetailModal?: React.ReactNode;
+  projectCommentsContainer: React.ReactNode;
+  editProjectFormContainer: React.ReactNode;
+  projectDetailContainer: React.ReactNode;
+  userDetailContainer?: React.ReactNode;
+  sendComment: ActionFn<ActionState, FormData>;
+  updateComment: ActionFn<ActionState, FormData>;
   updateProjectStatus: ActionFn<ActionState, UpdateProjectStatusesPayload>;
 }
 
@@ -70,6 +77,7 @@ export const ProjectGridItem = ({
 };
 
 export function ProjectGridItemInner({
+  guestMode,
   id,
   title,
   deadline,
@@ -78,10 +86,12 @@ export function ProjectGridItemInner({
   status,
   tasksTotal,
   tasksCompleted,
-  projectCommentsModal,
-  menuTrigger,
-  projectDetailModal,
-  userDetailModal,
+  projectCommentsContainer,
+  editProjectFormContainer,
+  projectDetailContainer,
+  userDetailContainer,
+  sendComment,
+  updateComment,
 }: Omit<ProjectGridItemProps, "updateProjectStatus">) {
   const t = useTranslations("projects.ProjectGridItem");
 
@@ -107,12 +117,26 @@ export function ProjectGridItemInner({
   return (
     <ProjectGridItemLayout
       checkboxSlot={<ProjectItemCheckbox id={id} status={status} />}
-      menuTriggerSlot={menuTrigger}
+      menuTriggerSlot={
+        <ProjectItemActionMenuTrigger
+          guestMode={guestMode}
+          projectId={id}
+          projectTitle={title}
+          projectStatus={status}
+          editProjectFormContainer={editProjectFormContainer}
+          className="-mr-2"
+        />
+      }
       titleSlot={
         <GridItemInfo className="flex-auto">
           <GridItemTitle>
             <ItemBaseDetailModalTrigger
-              modal={projectDetailModal}
+              modal={
+                <ProjectDetailModal
+                  projectId={id}
+                  projectDetailContainer={projectDetailContainer}
+                />
+              }
               className="truncate max-md:hidden"
             >
               {title}
@@ -131,7 +155,12 @@ export function ProjectGridItemInner({
           <>
             <ItemBaseDetailModalTrigger
               className="max-md:hidden"
-              modal={userDetailModal}
+              modal={
+                <UserDetailModal
+                  userId={creator.id}
+                  userDetailContainer={userDetailContainer}
+                />
+              }
             >
               {creatorImg}
             </ItemBaseDetailModalTrigger>
@@ -148,7 +177,14 @@ export function ProjectGridItemInner({
         <ItemBaseCommentsModalTrigger
           data-test={`project-${id}-comments-modal-trigger`}
           commentsCount={commentsCount}
-          modal={projectCommentsModal}
+          modal={
+            <ProjectCommentsModal
+              projectId={id}
+              projectCommentsContainer={projectCommentsContainer}
+              sendComment={sendComment}
+              updateComment={updateComment}
+            />
+          }
         />
       }
       statusSlot={<ProjectItemBaseBadge projectId={id} status={status} />}

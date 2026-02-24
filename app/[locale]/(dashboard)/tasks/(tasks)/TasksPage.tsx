@@ -8,31 +8,60 @@ import {
 import { useTranslations } from "next-intl";
 import { TaskSortField } from "@/lib/types";
 import { PageGrid } from "@/components/common/PageGrid";
+import { ActionFn, ActionState } from "@/lib/actions/types";
 import { ViewModeProvider } from "@/components/common/ViewMode";
 import { PageContainer } from "@/components/common/PageContainer";
 import { ViewModeToggleButtonGroup } from "@/components/common/ViewMode";
 import { TasksFilteredEmptySection } from "@/components/tasks/TasksFilteredEmptySection";
 import { TaskToolbarManageMenuTrigger } from "@/components/tasks/TaskToolbarManageMenuTrigger";
 import { TaskToolbarSortingMenuTrigger } from "@/components/tasks/TaskToolbarSortingMenuTrigger";
+import { TaskToolbarCreateNewMenuTrigger } from "@/components/tasks/TaskToolbarCreateNewMenuTrigger";
+import { TaskToolbarFiltersModalTrigger } from "@/components/tasks/TaskToolbarFiltersModalTrigger";
+import { TaskToolbarActionsMenuTrigger } from "@/components/tasks/TaskToolbarActionsMenuTrigger";
 
 interface TasksPageProps {
+  guestMode: boolean;
+  selectedSortField: TaskSortField;
   totalFilteredTasks: number;
   tasksContainer: React.ReactNode;
-  taskToolbarActionsMenuTrigger: React.ReactNode;
-  taskToolbarCreateNewMenuTrigger: React.ReactNode;
-  taskToolbarFiltersModalTrigger: React.ReactNode;
-  selectedSortField: TaskSortField;
+  filtersFormContainer: React.ReactNode;
+  newTaskFormContainer: React.ReactNode;
+  createTaskCategory: ActionFn<ActionState, FormData>;
+  deleteTasks: ActionFn<ActionState, number[]>;
 }
 
 export function TasksPage({
+  guestMode,
+  selectedSortField,
   totalFilteredTasks,
   tasksContainer,
-  taskToolbarActionsMenuTrigger,
-  taskToolbarCreateNewMenuTrigger,
-  taskToolbarFiltersModalTrigger,
-  selectedSortField,
+  filtersFormContainer,
+  newTaskFormContainer,
+  createTaskCategory,
+  deleteTasks,
 }: TasksPageProps) {
   const t = useTranslations("app.TasksPage");
+
+  const taskToolbarCreateNewMenuTrigger = (
+    <TaskToolbarCreateNewMenuTrigger
+      guestMode={guestMode}
+      newTaskFormContainer={newTaskFormContainer}
+      createTaskCategory={createTaskCategory}
+    />
+  );
+
+  const taskToolbarActionsMenuTrigger = (
+    <TaskToolbarActionsMenuTrigger
+      guestMode={guestMode}
+      deleteTasks={deleteTasks}
+    />
+  );
+
+  const taskToolbarFiltersModalTrigger = (
+    <TaskToolbarFiltersModalTrigger
+      filtersFormContainer={filtersFormContainer}
+    />
+  );
 
   return (
     <PageContainer fullscreen={totalFilteredTasks === 0} className="relative">

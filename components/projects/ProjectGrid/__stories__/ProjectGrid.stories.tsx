@@ -1,7 +1,7 @@
 import { ProjectGrid } from "../ProjectGrid";
+import { mockedProjectList } from "@/mocks/projects";
 import { ProjectGridItem } from "../../ProjectGridItem";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { mockedProjects } from "../../ProjectList/__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { ProjectGridItemStory } from "../../ProjectGridItem/__stories__";
 import { withDeleteProjectModalProvider } from "../../DeleteProjectModal/__stories__";
@@ -30,7 +30,7 @@ export const Default = {
   args: {
     children: (
       <>
-        {mockedProjects.map((project) => (
+        {mockedProjectList.map((project) => (
           <ProjectGridItem
             key={project.id}
             {...ProjectGridItemStory.args}

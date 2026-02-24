@@ -13,10 +13,6 @@ import { TaskCategoryListStory } from "@/components/taskCategory/TaskCategoryLis
 import { withSelectedItemsProvider } from "@/components/common/SelectedItemsContext/__stories__";
 import { withPageTransitionProvider } from "@/components/common/PageTransitionContext/__stories__";
 import { withDeleteTaskCategoryModalProvider } from "@/components/taskCategory/DeleteTaskCategoryModal/__stories__";
-import { TaskCategoryToolbarActionsMenuTrigger } from "@/components/taskCategory/TaskCategoryToolbarActionsMenuTrigger";
-import { TaskCategoryToolbarCreateNewModalTrigger } from "@/components/taskCategory/TaskCategoryToolbarCreateNewModalTrigger";
-import { TaskCategoryToolbarActionsMenuTriggerStory } from "@/components/taskCategory/TaskCategoryToolbarActionsMenuTrigger/__stories__";
-import { TaskCategoryToolbarCreateNewModalTriggerStory } from "@/components/taskCategory/TaskCategoryToolbarCreateNewModalTrigger/__stories__";
 
 const meta = {
   title: "pages/TaskCategoriesPage",
@@ -43,24 +39,14 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-const taskCategoryToolbarCreateNewModalTrigger = (
-  <TaskCategoryToolbarCreateNewModalTrigger
-    {...TaskCategoryToolbarCreateNewModalTriggerStory.args}
-  />
-);
-
 export const Default = {
   args: {
     taskCategoriesContainer: (
       <TaskCategoryList {...TaskCategoryListStory.args} />
     ),
-    taskCategoryToolbarCreateNewModalTrigger:
-      taskCategoryToolbarCreateNewModalTrigger,
-    taskCategoryToolbarActionsMenuTrigger: (
-      <TaskCategoryToolbarActionsMenuTrigger
-        {...TaskCategoryToolbarActionsMenuTriggerStory.args}
-      />
-    ),
+    guestMode: false,
+    createTaskCategory: () => ({ status: "success" }),
+    deleteTaskCategories: () => ({ status: "success" }),
   },
 } satisfies Story;
 
@@ -73,9 +59,8 @@ export const WithNoTaskCategories = {
   args: { ...Default.args },
   render: () => (
     <TaskCategoriesPageEmpty
-      taskCategoryToolbarCreateNewModalTrigger={
-        taskCategoryToolbarCreateNewModalTrigger
-      }
+      guestMode={false}
+      createTaskCategory={() => ({ status: "success" })}
     />
   ),
 } satisfies Story;

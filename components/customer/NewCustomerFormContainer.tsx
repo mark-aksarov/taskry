@@ -3,7 +3,6 @@ import "server-only";
 import { Suspense } from "react";
 import { NewCustomerForm } from "./NewCustomerForm";
 import { CustomerFormSkeleton } from "./CustomerFormSkeleton";
-import { CustomerCompanySelect } from "./CustomerCompanySelect";
 import { getCompanySummaries } from "@/lib/data/company/company.dal";
 import { createCustomer } from "@/lib/actions/customer/createCustomer";
 
@@ -20,7 +19,7 @@ async function NewCustomerFormContainerInner() {
 
   return (
     <NewCustomerForm
-      companySelect={<CustomerCompanySelect companies={companies} />}
+      companySelectItems={companies}
       createCustomer={createCustomer}
     />
   );

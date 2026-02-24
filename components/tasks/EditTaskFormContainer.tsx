@@ -5,10 +5,7 @@ import { Suspense } from "react";
 import { EditTaskForm } from "./EditTaskForm";
 import { TaskFormSkeleton } from "./TaskFormSkeleton";
 import { CalendarDate } from "@internationalized/date";
-import { TaskProjectSelect } from "./TaskProjectSelect";
-import { TaskAssigneeSelect } from "./TaskAssigneeSelect";
 import { UserSummaryDTO } from "@/lib/data/user/user.dto";
-import { TaskCategorySelect } from "./TaskCategorySelect";
 import { updateTask } from "@/lib/actions/task/updateTask";
 import { TaskFormDataDTO } from "@/lib/data/task/task.dto";
 import { ProjectSummaryDTO } from "@/lib/data/project/project.dto";
@@ -61,28 +58,20 @@ function EditTaskFormContainerInner({ taskId }: EditTaskFormContainerProps) {
   return (
     <EditTaskForm
       taskId={taskId}
-      titleDefaultValue={task.title}
-      descriptionDefaultValue={task.description}
-      deadlineDefaultValue={dateValue}
-      statusSelectDefaultValue={task.status}
-      taskCategorySelect={
-        <TaskCategorySelect
-          defaultSelectedKey={task.categoryId ? task.categoryId.toString() : ""}
-          categories={categories}
-        />
+      taskTitleDefaultValue={task.title}
+      taskDescriptionDefaultValue={task.description}
+      taskDeadlineDefaultValue={dateValue}
+      taskStatusSelectDefaultValue={task.status}
+      taskCategorySelectDefaultValue={
+        task.categoryId ? task.categoryId.toString() : ""
       }
-      projectSelect={
-        <TaskProjectSelect
-          defaultSelectedKey={task.projectId.toString()}
-          projects={projects}
-        />
+      taskProjectSelectDefaultValue={task.projectId.toString()}
+      taskAssigneeSelectDefaultValue={
+        task.assigneeId ? task.assigneeId.toString() : ""
       }
-      assigneeSelect={
-        <TaskAssigneeSelect
-          defaultSelectedKey={task.assigneeId ? task.assigneeId.toString() : ""}
-          users={users}
-        />
-      }
+      taskCategorySelectItems={categories}
+      taskProjectSelectItems={projects}
+      taskAssigneeSelectItems={users}
       updateTask={updateTask}
     />
   );

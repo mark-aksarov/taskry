@@ -151,7 +151,7 @@
     "noPhoneNumber": "Номер телефона не указан",
     "noPublicLink": "Публичная ссылка отсутствует"
   },
-  "UserHeaderContainer": {
+  "UserDetailHeader": {
     "noPosition": "Нет должности"
   },
   "UserListItem": {

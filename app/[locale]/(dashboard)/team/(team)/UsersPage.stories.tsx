@@ -8,19 +8,16 @@ import { UserGrid } from "@/components/users/UserGrid";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { usePathname, useRouter } from "next/navigation";
 import { PageDecorator } from "@/.storybook/PageDecorator";
+import { mockedPositionSummaries } from "@/mocks/positions";
 import { UserFiltersForm } from "@/components/users/UserFiltersForm";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { UserListStory } from "@/components/users/UserList/__stories__";
 import { UserGridStory } from "@/components/users/UserGrid/__stories__";
 import { AppHeaderStory } from "@/components/layout/AppHeader/__stories__";
-import { UserFiltersFormStory } from "@/components/users/UserFiltersForm/__stories__";
 import { withDeleteUserModalProvider } from "@/components/users/DeleteUserModal/__stories__";
 import { EntityContainerPresentation } from "@/components/common/EntityContainerPresentation";
 import { withSelectedTasksProvider } from "@/components/tasks/SelectedTasksContext/__stories__";
 import { withPageTransitionProvider } from "@/components/common/PageTransitionContext/__stories__";
-import { UserToolbarFiltersModalTrigger } from "@/components/users/UserToolbarFiltersModalTrigger";
-import { UserToolbarCreateNewMenuTrigger } from "@/components/users/UserToolbarCreateNewMenuTrigger";
-import { UserToolbarCreateNewMenuTriggerStory } from "@/components/users/UserToolbarCreateNewMenuTrigger/__stories__";
 
 const meta = {
   title: "pages/UsersPage",
@@ -47,24 +44,15 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-const userToolbarCreateNewMenuTrigger = (
-  <UserToolbarCreateNewMenuTrigger
-    {...UserToolbarCreateNewMenuTriggerStory.args}
-  />
-);
-
 export const Default = {
   args: {
     totalFilteredUsers: 3,
     selectedSortField: "fullName",
-    userToolbarFiltersModalTrigger: (
-      <UserToolbarFiltersModalTrigger
-        filtersFormContainer={
-          <UserFiltersForm {...UserFiltersFormStory.args} />
-        }
-      />
+    guestMode: false,
+    showCreateNewUserMenuItem: true,
+    filtersFormContainer: (
+      <UserFiltersForm positionCheckboxGroupItems={mockedPositionSummaries} />
     ),
-    userToolbarCreateNewMenuTrigger: userToolbarCreateNewMenuTrigger,
     usersContainer: (
       <EntityContainerPresentation
         list={<UserList {...UserListStory.args} showCheckbox />}
@@ -74,6 +62,8 @@ export const Default = {
         totalPages={3}
       />
     ),
+    createUser: () => ({ status: "success" }),
+    createPosition: () => ({ status: "success" }),
   },
 } satisfies Story;
 
@@ -86,7 +76,10 @@ export const WithNoUsers = {
   args: { ...Default.args },
   render: () => (
     <UsersPageEmpty
-      userToolbarCreateNewMenuTrigger={userToolbarCreateNewMenuTrigger}
+      guestMode={false}
+      createUser={() => ({ status: "success" })}
+      createPosition={() => ({ status: "success" })}
+      showCreateNewUserMenuItem={true}
     />
   ),
 } satisfies Story;

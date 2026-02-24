@@ -1,1 +1,0 @@
-export { CustomerFormSkeleton } from "./CustomerFormSkeleton";

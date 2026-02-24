@@ -1,1 +1,1 @@
-export { Default as EditTaskFormStory } from "./EditTaskForm.stories";
+export { editTaskFormArgs } from "./EditTaskForm.args";

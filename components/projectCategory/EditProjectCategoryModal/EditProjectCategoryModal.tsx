@@ -7,14 +7,20 @@ import {
 import { useTranslations } from "next-intl";
 import { ModalProps } from "@/components/ui/Modal";
 import { DialogHeader } from "@/components/ui/Dialog";
+import { ActionFn, ActionState } from "@/lib/actions/types";
+import { EditProjectCategoryForm } from "../EditProjectCategoryForm";
 
 interface EditProjectCategoryModalProps
   extends Pick<ModalProps, "isOpen" | "onOpenChange"> {
-  editProjectCategoryForm: React.ReactNode;
+  projectCategoryId: number;
+  projectCategoryName: string;
+  updateProjectCategory: ActionFn<ActionState, FormData>;
 }
 
 export function EditProjectCategoryModal({
-  editProjectCategoryForm,
+  projectCategoryId,
+  projectCategoryName,
+  updateProjectCategory,
   ...props
 }: EditProjectCategoryModalProps) {
   const t = useTranslations("projectCategories.EditProjectCategoryModal");
@@ -24,7 +30,11 @@ export function EditProjectCategoryModal({
       <FormBaseModalDialog>
         <DialogHeader>{t("title")}</DialogHeader>
         <FormBaseModalDialogBody>
-          {editProjectCategoryForm}
+          <EditProjectCategoryForm
+            projectCategoryId={projectCategoryId}
+            nameDefaultValue={projectCategoryName}
+            updateProjectCategory={updateProjectCategory}
+          />
         </FormBaseModalDialogBody>
       </FormBaseModalDialog>
     </FormBaseModal>

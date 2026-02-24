@@ -17,13 +17,14 @@ import { useUserFiltersDispatch } from "../UserFiltersContext";
 import { UserFiltersFormActiveTasksSwitch } from "./UserFiltersFormActiveTasksSwitch";
 import { UserFiltersFormOverdueTasksSwitch } from "./UserFiltersFormOverdueTasksSwitch";
 import { UserFiltersFormNoActiveTasksSwitch } from "./UserFiltersFormNoActiveTasksSwitch";
+import { UserFiltersFormPositionCheckboxGroup } from "./UserFiltersFormPositionCheckboxGroup";
 
 interface UserFiltersFormProps {
-  positionCheckboxGroup: React.ReactNode;
+  positionCheckboxGroupItems: { id: number; name: string }[];
 }
 
 export function UserFiltersForm({
-  positionCheckboxGroup,
+  positionCheckboxGroupItems,
 }: UserFiltersFormProps) {
   const dispatch = useUserFiltersDispatch();
 
@@ -47,7 +48,9 @@ export function UserFiltersForm({
         <UserFiltersFormOverdueTasksSwitch />
         <Separator />
 
-        <div>{positionCheckboxGroup}</div>
+        <UserFiltersFormPositionCheckboxGroup
+          items={positionCheckboxGroupItems}
+        />
       </FormBaseBody>
       <FormBaseFooter>
         <FiltersFormSubmitButton />

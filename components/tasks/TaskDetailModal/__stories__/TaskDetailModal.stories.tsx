@@ -1,8 +1,10 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/Button";
+import { mockedTaskDetail } from "@/mocks/tasks";
 import { TaskDetailModal } from "../TaskDetailModal";
 import { DialogTrigger } from "react-aria-components";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { TaskDetailStory } from "../../TaskDetail/__stories__";
+import { getSubtasksList } from "../../TaskDetail/__stories__";
 import { TaskDetail, TaskDetailSkeleton } from "../../TaskDetail";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withDeleteSubtaskModalProvider } from "@/components/subtasks/DeleteSubtaskModal/__stories__";
@@ -11,12 +13,16 @@ const meta = {
   title: "components/tasks/TaskDetailModal",
   component: TaskDetailModal,
   decorators: [
-    (Story) => (
-      <DialogTrigger>
-        <Button label="Task detail" />
-        <Story />
-      </DialogTrigger>
-    ),
+    (Story) => {
+      const [isOpen, setIsOpen] = useState(true);
+
+      return (
+        <DialogTrigger isOpen={isOpen} onOpenChange={setIsOpen}>
+          <Button label="Task detail" />
+          <Story />
+        </DialogTrigger>
+      );
+    },
     withDeleteSubtaskModalProvider,
     withThemedBackground,
   ],
@@ -25,16 +31,42 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
+const task = mockedTaskDetail;
+
 export const Default = {
   args: {
     taskId: 1,
-    taskDetailContainer: <TaskDetail {...TaskDetailStory.args} />,
+    taskDetailContainer: (
+      <TaskDetail
+        {...task}
+        subtasksList={getSubtasksList()}
+        mutate={() => {}}
+        createSubtask={() => ({ status: "success" })}
+      />
+    ),
   },
 } satisfies Story;
 
-export const WithSkeletonContent = {
+export const WithSkeleton = {
   args: {
     taskId: 1,
     taskDetailContainer: <TaskDetailSkeleton />,
   },
 } satisfies Story;
+
+export const WithoutOptionalTaskData = {
+  args: {
+    taskId: 1,
+    taskDetailContainer: (
+      <TaskDetail
+        id={task.id}
+        title={task.title}
+        status={task.status}
+        deadline={task.deadline}
+        project={task.project}
+        mutate={() => {}}
+        createSubtask={() => ({ status: "success" })}
+      />
+    ),
+  },
+};

@@ -13,10 +13,6 @@ import { withSelectedItemsProvider } from "@/components/common/SelectedItemsCont
 import { withPageTransitionProvider } from "@/components/common/PageTransitionContext/__stories__";
 import { ProjectCategoryListStory } from "@/components/projectCategory/ProjectCategoryList/__stories__";
 import { withDeleteProjectCategoryModalProvider } from "@/components/projectCategory/DeleteProjectCategoryModal/__stories__";
-import { ProjectCategoryToolbarActionsMenuTrigger } from "@/components/projectCategory/ProjectCategoryToolbarActionsMenuTrigger";
-import { ProjectCategoryToolbarCreateNewModalTrigger } from "@/components/projectCategory/ProjectCategoryToolbarCreateNewModalTrigger";
-import { ProjectCategoryToolbarActionsMenuTriggerStory } from "@/components/projectCategory/ProjectCategoryToolbarActionsMenuTrigger/__stories__";
-import { ProjectCategoryToolbarCreateNewModalTriggerStory } from "@/components/projectCategory/ProjectCategoryToolbarCreateNewModalTrigger/__stories__";
 
 const meta = {
   title: "pages/ProjectCategoriesPage",
@@ -43,24 +39,14 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-const projectCategoryToolbarCreateNewModalTrigger = (
-  <ProjectCategoryToolbarCreateNewModalTrigger
-    {...ProjectCategoryToolbarCreateNewModalTriggerStory.args}
-  />
-);
-
 export const Default = {
   args: {
     projectCategoriesContainer: (
       <ProjectCategoryList {...ProjectCategoryListStory.args} />
     ),
-    projectCategoryToolbarCreateNewModalTrigger:
-      projectCategoryToolbarCreateNewModalTrigger,
-    projectCategoryToolbarActionsMenuTrigger: (
-      <ProjectCategoryToolbarActionsMenuTrigger
-        {...ProjectCategoryToolbarActionsMenuTriggerStory.args}
-      />
-    ),
+    guestMode: false,
+    createProjectCategory: () => ({ status: "success" }),
+    deleteProjectCategories: () => ({ status: "success" }),
   },
 } satisfies Story;
 
@@ -73,9 +59,8 @@ export const WithNoProjectCategories = {
   args: { ...Default.args },
   render: () => (
     <ProjectCategoriesPageEmpty
-      projectCategoryToolbarCreateNewModalTrigger={
-        projectCategoryToolbarCreateNewModalTrigger
-      }
+      guestMode={false}
+      createProjectCategory={() => ({ status: "success" })}
     />
   ),
 } satisfies Story;

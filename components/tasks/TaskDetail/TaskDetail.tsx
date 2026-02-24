@@ -11,8 +11,10 @@ import { Badge } from "@/components/ui/Badge";
 import { TaskDetailLayout } from "./TaskDetailLayout";
 import { TaskStatus } from "@/generated/prisma/enums";
 import { useFormatter, useTranslations } from "next-intl";
+import { ActionFn, ActionState } from "@/lib/actions/types";
 import { UnknownUser } from "@/components/common/UnknownUser";
 import { ImageContainer } from "@/components/common/ImageContainer";
+import { NewSubtaskModalTrigger } from "@/components/subtasks/NewSubtaskModalTrigger";
 
 interface TaskDetailProps {
   id: number;
@@ -39,7 +41,8 @@ interface TaskDetailProps {
     title: string;
   };
   subtasksList?: React.ReactNode;
-  newSubtaskModalTrigger: React.ReactNode;
+  createSubtask: ActionFn<ActionState, FormData>;
+  mutate: () => void;
 }
 
 export function TaskDetail({
@@ -53,7 +56,8 @@ export function TaskDetail({
   status,
   project,
   subtasksList,
-  newSubtaskModalTrigger,
+  createSubtask,
+  mutate,
 }: TaskDetailProps) {
   const tStatus = useTranslations("tasks.TaskStatus");
   const t = useTranslations("tasks.TaskDetail");
@@ -154,7 +158,11 @@ export function TaskDetail({
         <DetailInfo className="border-none pb-0">
           <DetailTitle>{t("subtasks")}</DetailTitle>
           {subtasksList}
-          {newSubtaskModalTrigger}
+          <NewSubtaskModalTrigger
+            taskId={id}
+            createSubtask={createSubtask}
+            mutate={mutate}
+          />
         </DetailInfo>
       }
     />

@@ -10,11 +10,8 @@ import { ProjectCategoriesPageEmpty } from "./ProjectCategoriesPageEmpty";
 import { SelectedItemsProvider } from "@/components/common/SelectedItemsContext";
 import { PageTransitionProvider } from "@/components/common/PageTransitionContext";
 import { createProjectCategory } from "@/lib/actions/projectCategory/createProjectCategory";
-import { NewProjectCategoryForm } from "@/components/projectCategory/NewProjectCategoryForm";
 import { deleteProjectCategories } from "@/lib/actions/projectCategory/deleteProjectCategories";
 import { ProjectCategoriesContainer } from "@/components/projectCategory/ProjectCategoriesContainer";
-import { ProjectCategoryToolbarActionsMenuTrigger } from "@/components/projectCategory/ProjectCategoryToolbarActionsMenuTrigger";
-import { ProjectCategoryToolbarCreateNewModalTrigger } from "@/components/projectCategory/ProjectCategoryToolbarCreateNewModalTrigger";
 
 export default async function AppProjectCategoriesPage() {
   // Authorization
@@ -24,21 +21,11 @@ export default async function AppProjectCategoriesPage() {
   const projectCategoryCount = await getProjectCategoryCount();
   const guestMode = await hasGuestRole();
 
-  const projectCategoryToolbarCreateNewModalTrigger = (
-    <ProjectCategoryToolbarCreateNewModalTrigger
-      guestMode={guestMode}
-      newProjectCategoryForm={
-        <NewProjectCategoryForm createProjectCategory={createProjectCategory} />
-      }
-    />
-  );
-
   if (!projectCategoryCount) {
     return (
       <ProjectCategoriesPageEmpty
-        projectCategoryToolbarCreateNewModalTrigger={
-          projectCategoryToolbarCreateNewModalTrigger
-        }
+        guestMode={guestMode}
+        createProjectCategory={createProjectCategory}
       />
     );
   }
@@ -52,15 +39,9 @@ export default async function AppProjectCategoriesPage() {
       <PageTransitionProvider>
         <ProjectCategoriesPage
           projectCategoriesContainer={<ProjectCategoriesContainer />}
-          projectCategoryToolbarCreateNewModalTrigger={
-            projectCategoryToolbarCreateNewModalTrigger
-          }
-          projectCategoryToolbarActionsMenuTrigger={
-            <ProjectCategoryToolbarActionsMenuTrigger
-              guestMode={guestMode}
-              deleteProjectCategories={deleteProjectCategories}
-            />
-          }
+          guestMode={guestMode}
+          createProjectCategory={createProjectCategory}
+          deleteProjectCategories={deleteProjectCategories}
         />
       </PageTransitionProvider>
     </SelectedItemsProvider>

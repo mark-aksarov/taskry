@@ -8,10 +8,14 @@ import { CommentItemLayout } from "./CommentItemLayout";
 import { useFormatter, useLocale, useTranslations } from "next-intl";
 import { UnknownUser } from "@/components/common/UnknownUser";
 import { ImageContainer } from "@/components/common/ImageContainer";
+import { CommentItemActionMenuTrigger } from "./CommentItemActionMenuTrigger";
 
 interface CommentItemProps {
+  guestMode: boolean;
+  id: number;
   content: string;
   createdAt: string;
+  canEdit: boolean;
   sender?: {
     id: string;
     fullName: string;
@@ -21,10 +25,12 @@ interface CommentItemProps {
 }
 
 export function CommentItem({
+  guestMode,
+  id,
   content,
   createdAt,
+  canEdit,
   sender,
-  menuTrigger,
 }: CommentItemProps) {
   const t = useTranslations("comments.CommentItem");
   const locale = useLocale();
@@ -73,7 +79,15 @@ export function CommentItem({
           <CommentItemText>{content}</CommentItemText>
         </>
       }
-      menuTriggerSlot={menuTrigger}
+      menuTriggerSlot={
+        (canEdit || guestMode) && (
+          <CommentItemActionMenuTrigger
+            guestMode={guestMode}
+            commentId={id}
+            commentContent={content}
+          />
+        )
+      }
     />
   );
 }

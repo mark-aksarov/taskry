@@ -1,1 +1,1 @@
-export { Default as NewTaskFormStory } from "./NewTaskForm.stories";
+export { newTaskFormArgs } from "./NewTaskForm.args";

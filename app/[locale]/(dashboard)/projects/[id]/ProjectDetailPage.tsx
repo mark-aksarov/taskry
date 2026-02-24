@@ -11,24 +11,53 @@ import {
 import { useTranslations } from "next-intl";
 import { Card } from "@/components/common/Card";
 import { PageGrid } from "@/components/common/PageGrid";
+import { ActionFn, ActionState } from "@/lib/actions/types";
 import { BackButton } from "@/components/common/BackButton";
 import { PageContainer } from "@/components/common/PageContainer";
 import { ProjectDetailCard } from "@/components/projects/ProjectDetailCard";
+import { ProjectDetailActions } from "@/components/projects/ProjectDetailActions";
 
 interface ProjectPageProps {
+  guestMode: boolean;
+  projectId: number;
+  projectTitle: string;
   projectDetailContainer: React.ReactNode;
   projectHeaderContainer: React.ReactNode;
-  projectDetailActions: React.ReactNode;
+  projectCommentsContainer: React.ReactNode;
+  editProjectFormContainer: React.ReactNode;
   appHeaderProps: AppHeaderContainerProps;
+  sendComment: ActionFn<ActionState, FormData>;
+  updateComment: ActionFn<ActionState, FormData>;
+  deleteProject: ActionFn<ActionState, number[]>;
 }
 
 export function ProjectDetailPage({
+  guestMode,
+  projectId,
+  projectTitle,
   projectDetailContainer,
   projectHeaderContainer,
-  projectDetailActions,
+  projectCommentsContainer,
+  editProjectFormContainer,
   appHeaderProps,
+  sendComment,
+  updateComment,
+  deleteProject,
 }: ProjectPageProps) {
   const t = useTranslations("app.ProjectDetailPage");
+
+  const projectDetailActions = (
+    <ProjectDetailActions
+      guestMode={guestMode}
+      projectId={projectId}
+      projectTitle={projectTitle}
+      sendComment={sendComment}
+      updateComment={updateComment}
+      deleteProject={deleteProject}
+      projectCommentsContainer={projectCommentsContainer}
+      editProjectFormContainer={editProjectFormContainer}
+    />
+  );
 
   return (
     <>
@@ -36,8 +65,8 @@ export function ProjectDetailPage({
       <main>
         <PageContainer>
           <ProjectDetailCard
-            projectDetail={projectDetailContainer}
-            projectDetailHeader={projectHeaderContainer}
+            projectDetailContainer={projectDetailContainer}
+            projectDetailHeaderContainer={projectHeaderContainer}
             projectDetailActions={projectDetailActions}
           />
 

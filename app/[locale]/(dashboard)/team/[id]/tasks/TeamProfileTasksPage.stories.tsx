@@ -11,23 +11,21 @@ import { useParams, usePathname } from "next/navigation";
 import { PageDecorator } from "@/.storybook/PageDecorator";
 import { NewTaskForm } from "@/components/tasks/NewTaskForm";
 import { UserTaskList } from "@/components/users/UserTaskList";
-import { DetailHeader } from "@/components/common/DetailHeader";
+import { ProfileActions } from "@/components/users/ProfileActions";
+import { UserDetailHeader } from "@/components/users/UserDetailHeader";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { AppHeaderStory } from "@/components/layout/AppHeader/__stories__";
-import { NewTaskFormStory } from "@/components/tasks/NewTaskForm/__stories__";
+import { newTaskFormArgs } from "@/components/tasks/NewTaskForm/__stories__";
 import { UserNavigationMobile } from "@/components/users/UserNavigationMobile";
 import { UserTaskListStory } from "@/components/users/UserTaskList/__stories__";
 import { UserNavigationDesktop } from "@/components/users/UserNavigationDesktop";
-import { PersonDetailHeaderStory } from "@/components/common/DetailHeader/__stories__";
+import { profileActionsArgs } from "@/components/users/ProfileActions/__stories__";
 import { withDeleteTaskModalProvider } from "@/components/tasks/DeleteTaskModal/__stories__";
 import { withSelectedTasksProvider } from "@/components/tasks/SelectedTasksContext/__stories__";
-import { TaskToolbarActionsMenuTrigger } from "@/components/tasks/TaskToolbarActionsMenuTrigger";
-import { UserNavigationDesktopStory } from "@/components/users/UserNavigationDesktop/__stories__";
 import { withPageTransitionProvider } from "@/components/common/PageTransitionContext/__stories__";
 import { withDeleteSubtaskModalProvider } from "@/components/subtasks/DeleteSubtaskModal/__stories__";
 import { withDeleteCommentModalProvider } from "@/components/comments/DeleteCommentModal/__stories__";
 import { withUpdateTaskStatusesProvider } from "@/components/tasks/UpdateTaskStatusContext/__stories__";
-import { TaskToolbarActionsMenuTriggerStory } from "@/components/tasks/TaskToolbarActionsMenuTrigger/__stories__";
 
 const meta = {
   title: "pages/TeamProfileTasksPage",
@@ -59,17 +57,22 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
+    guestMode: false,
     selectedSortField: "title",
     backButton: true,
+    deleteTasks: () => ({ status: "success" }),
     userTasksContainer: <UserTaskList {...UserTaskListStory.args} />,
-    userHeaderContainer: <DetailHeader {...PersonDetailHeaderStory.args} />,
-    taskToolbarActionsMenuTrigger: (
-      <TaskToolbarActionsMenuTrigger
-        {...TaskToolbarActionsMenuTriggerStory.args}
+    userHeaderContainer: (
+      <UserDetailHeader
+        fullName="User 1"
+        positionName="Position 1"
+        imageUrl="/man.jpg"
       />
     ),
     navigationDesktop: (
-      <UserNavigationDesktop {...UserNavigationDesktopStory.args} />
+      <UserNavigationDesktop
+        userActions={<ProfileActions {...profileActionsArgs} />}
+      />
     ),
     navigationMobile: <UserNavigationMobile />,
   },
@@ -83,7 +86,7 @@ export const WithNoTasks = {
   render: () => (
     <UserTasksPageEmptyLayout
       {...Default.args}
-      newTaskFormContainer={<NewTaskForm {...NewTaskFormStory.args} />}
+      newTaskFormContainer={<NewTaskForm {...newTaskFormArgs} />}
     />
   ),
 };

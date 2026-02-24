@@ -28,12 +28,8 @@ import { updateProjectStatuses } from "@/lib/actions/project/updateProjectStatus
 import { NewProjectFormContainer } from "@/components/projects/NewProjectFormContainer";
 import { SelectedProjectsProvider } from "@/components/projects/SelectedProjectsContext";
 import { createProjectCategory } from "@/lib/actions/projectCategory/createProjectCategory";
-import { NewProjectCategoryForm } from "@/components/projectCategory/NewProjectCategoryForm";
 import { ProjectFiltersFormContainer } from "@/components/projects/ProjectFiltersFormContainer";
 import { UpdateProjectStatusesProvider } from "@/components/projects/UpdateProjectStatusContext";
-import { ProjectToolbarActionsMenuTrigger } from "@/components/projects/ProjectToolbarActionsMenuTrigger";
-import { ProjectToolbarFiltersModalTrigger } from "@/components/projects/ProjectToolbarFiltersModalTrigger";
-import { ProjectToolbarCreateNewMenuTrigger } from "@/components/projects/ProjectToolbarCreateNewMenuTrigger";
 
 const searchParamsSchema = z.object({
   page: pageSearchParam,
@@ -77,20 +73,12 @@ export default async function AppProjectsPage({
   const totalCount = await getProjectCount();
   const guestMode = await hasGuestRole();
 
-  const projectToolbarCreateNewMenuTrigger = (
-    <ProjectToolbarCreateNewMenuTrigger
-      guestMode={guestMode}
-      newProjectFormContainer={<NewProjectFormContainer />}
-      newProjectCategoryForm={
-        <NewProjectCategoryForm createProjectCategory={createProjectCategory} />
-      }
-    />
-  );
-
   if (!totalCount) {
     return (
       <ProjectsPageEmptyContainer
-        projectToolbarCreateNewMenuTrigger={projectToolbarCreateNewMenuTrigger}
+        guestMode={guestMode}
+        newProjectFormContainer={<NewProjectFormContainer />}
+        createProjectCategory={createProjectCategory}
       />
     );
   }
@@ -111,6 +99,9 @@ export default async function AppProjectsPage({
       >
         <PageTransitionProvider>
           <ProjectsPage
+            guestMode={guestMode}
+            newProjectFormContainer={<NewProjectFormContainer />}
+            createProjectCategory={createProjectCategory}
             totalFilteredProjects={totalFilteredProjects}
             selectedSortField={sort}
             projectsContainer={
@@ -121,22 +112,10 @@ export default async function AppProjectsPage({
                 pageSize={pageSize}
               />
             }
-            projectToolbarCreateNewMenuTrigger={
-              projectToolbarCreateNewMenuTrigger
+            projectFiltersFormContainer={
+              <ProjectFiltersFormContainer filters={filters} />
             }
-            projectToolbarFiltersModalTrigger={
-              <ProjectToolbarFiltersModalTrigger
-                filtersFormContainer={
-                  <ProjectFiltersFormContainer filters={filters} />
-                }
-              />
-            }
-            projectToolbarActionsMenuTrigger={
-              <ProjectToolbarActionsMenuTrigger
-                guestMode={guestMode}
-                deleteProjects={deleteProjects}
-              />
-            }
+            deleteProjects={deleteProjects}
           />
         </PageTransitionProvider>
       </SelectedProjectsProvider>

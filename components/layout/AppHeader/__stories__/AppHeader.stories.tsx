@@ -8,7 +8,6 @@ import { AppHeader } from "../AppHeader";
 import { ProfileLink } from "../../ProfileLink";
 import { usePathname } from "next/navigation";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { ProfileLinkStory } from "../../ProfileLink/__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { SearchPresentation } from "@/components/search/SearchPresentation";
 
@@ -36,6 +35,6 @@ export const Default = {
     projectsSearchContainer: (
       <SearchPresentation {...ProjectsSearchPresentationStory.args} />
     ),
-    profileLinkContainer: <ProfileLink {...ProfileLinkStory.args} />,
+    profileLinkContainer: <ProfileLink fullName="User 1" imageUrl="/man.jpg" />,
   },
 } satisfies Story;

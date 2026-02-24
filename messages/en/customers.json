@@ -73,12 +73,6 @@
     "label": "Company",
     "noCompany": "No company"
   },
-  "CustomerDetailContainer": {
-    "unknownCompany": "Unknown company"
-  },
-  "CustomerHeaderContainer": {
-    "unknownCompany": "Unknown company"
-  },
   "CustomerDetailModal": {
     "dialogHeading": "Customer Details",
     "openInFullPage": "Open in Full Page"

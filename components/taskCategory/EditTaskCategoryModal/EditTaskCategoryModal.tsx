@@ -7,14 +7,20 @@ import {
 import { useTranslations } from "next-intl";
 import { ModalProps } from "@/components/ui/Modal";
 import { DialogHeader } from "@/components/ui/Dialog";
+import { EditTaskCategoryForm } from "../EditTaskCategoryForm";
+import { ActionFn, ActionState } from "@/lib/actions/types";
 
 interface EditTaskCategoryModalProps
   extends Pick<ModalProps, "isOpen" | "onOpenChange"> {
-  editTaskCategoryForm: React.ReactNode;
+  taskCategoryId: number;
+  taskCategoryName: string;
+  updateTaskCategory: ActionFn<ActionState, FormData>;
 }
 
 export function EditTaskCategoryModal({
-  editTaskCategoryForm,
+  taskCategoryId,
+  taskCategoryName,
+  updateTaskCategory,
   ...props
 }: EditTaskCategoryModalProps) {
   const t = useTranslations("taskCategories.EditTaskCategoryModal");
@@ -24,7 +30,11 @@ export function EditTaskCategoryModal({
       <FormBaseModalDialog>
         <DialogHeader>{t("title")}</DialogHeader>
         <FormBaseModalDialogBody>
-          {editTaskCategoryForm}
+          <EditTaskCategoryForm
+            taskCategoryId={taskCategoryId}
+            nameDefaultValue={taskCategoryName}
+            updateTaskCategory={updateTaskCategory}
+          />
         </FormBaseModalDialogBody>
       </FormBaseModalDialog>
     </FormBaseModal>

@@ -24,12 +24,8 @@ import { NewTaskFormContainer } from "@/components/tasks/NewTaskFormContainer";
 import { SelectedTasksProvider } from "@/components/tasks/SelectedTasksContext";
 import { PageTransitionProvider } from "@/components/common/PageTransitionContext";
 import { createTaskCategory } from "@/lib/actions/taskCategory/createTaskCategory";
-import { NewTaskCategoryForm } from "@/components/taskCategory/NewTaskCategoryForm";
 import { TaskFiltersFormContainer } from "@/components/tasks/TaskFiltersFormContainer";
 import { UpdateTaskStatusesProvider } from "@/components/tasks/UpdateTaskStatusContext";
-import { TaskToolbarActionsMenuTrigger } from "@/components/tasks/TaskToolbarActionsMenuTrigger";
-import { TaskToolbarFiltersModalTrigger } from "@/components/tasks/TaskToolbarFiltersModalTrigger";
-import { TaskToolbarCreateNewMenuTrigger } from "@/components/tasks/TaskToolbarCreateNewMenuTrigger";
 
 const searchParamsSchema = z.object({
   page: pageSearchParam,
@@ -71,20 +67,12 @@ export default async function AppTasksPage({
   const totalCount = await getTaskCount();
   const guestMode = await hasGuestRole();
 
-  const taskToolbarCreateNewMenuTrigger = (
-    <TaskToolbarCreateNewMenuTrigger
-      guestMode={guestMode}
-      newTaskFormContainer={<NewTaskFormContainer />}
-      newTaskCategoryForm={
-        <NewTaskCategoryForm createTaskCategory={createTaskCategory} />
-      }
-    />
-  );
-
   if (!totalCount) {
     return (
       <TasksPageEmptyContainer
-        taskToolbarCreateNewMenuTrigger={taskToolbarCreateNewMenuTrigger}
+        guestMode={guestMode}
+        newTaskFormContainer={<NewTaskFormContainer />}
+        createTaskCategory={createTaskCategory}
       />
     );
   }
@@ -104,21 +92,12 @@ export default async function AppTasksPage({
       >
         <PageTransitionProvider>
           <TasksPage
+            guestMode={guestMode}
             totalFilteredTasks={totalFilteredTasks}
             selectedSortField={sort}
-            taskToolbarActionsMenuTrigger={
-              <TaskToolbarActionsMenuTrigger
-                guestMode={guestMode}
-                deleteTasks={deleteTasks}
-              />
-            }
-            taskToolbarCreateNewMenuTrigger={taskToolbarCreateNewMenuTrigger}
-            taskToolbarFiltersModalTrigger={
-              <TaskToolbarFiltersModalTrigger
-                filtersFormContainer={
-                  <TaskFiltersFormContainer filters={filters} />
-                }
-              />
+            newTaskFormContainer={<NewTaskFormContainer />}
+            filtersFormContainer={
+              <TaskFiltersFormContainer filters={filters} />
             }
             tasksContainer={
               <TasksContainer
@@ -128,6 +107,8 @@ export default async function AppTasksPage({
                 pageSize={pageSize}
               />
             }
+            createTaskCategory={createTaskCategory}
+            deleteTasks={deleteTasks}
           />
         </PageTransitionProvider>
       </SelectedTasksProvider>

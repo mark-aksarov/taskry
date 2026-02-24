@@ -73,12 +73,6 @@
     "label": "Компания",
     "noCompany": "Нет компании"
   },
-  "CustomerDetailContainer": {
-    "unknownCompany": "Неизвестная компания"
-  },
-  "CustomerHeaderContainer": {
-    "unknownCompany": "Неизвестная компания"
-  },
   "CustomerDetailModal": {
     "dialogHeading": "Детали клиента",
     "openInFullPage": "Открыть в полном окне"

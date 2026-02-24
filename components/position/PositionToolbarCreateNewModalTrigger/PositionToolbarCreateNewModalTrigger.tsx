@@ -3,17 +3,18 @@
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { NewPositionModal } from "../NewPositionModal";
+import { ActionFn, ActionState } from "@/lib/actions/types";
 import { GuestModeModal } from "@/components/common/GuestModeModal";
 import { ToolbarCreateNewModalTrigger } from "@/components/common/Toolbar";
 
 interface PositionToolbarCreateNewModalTriggerProps {
   guestMode: boolean;
-  newPositionForm: React.ReactNode;
+  createPosition: ActionFn<ActionState, FormData>;
 }
 
 export function PositionToolbarCreateNewModalTrigger({
   guestMode,
-  newPositionForm,
+  createPosition,
 }: PositionToolbarCreateNewModalTriggerProps) {
   const t = useTranslations("positions.PositionToolbarCreateNewModalTrigger");
 
@@ -42,7 +43,7 @@ export function PositionToolbarCreateNewModalTrigger({
       <NewPositionModal
         isOpen={isPositionModalOpen}
         onOpenChange={setIsPositionModalOpen}
-        newPositionForm={newPositionForm}
+        createPosition={createPosition}
       />
       <GuestModeModal
         isOpen={isGuestModeModalOpen}

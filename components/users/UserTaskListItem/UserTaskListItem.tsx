@@ -26,6 +26,9 @@ import { TaskItemCheckbox } from "@/components/tasks/TaskItemCheckbox";
 import { TaskItemBaseBadge } from "@/components/tasks/TaskItemBaseBadge";
 import { useSelectedTasks } from "@/components/tasks/SelectedTasksContext";
 import { UpdateTaskStatusProvider } from "@/components/tasks/UpdateTaskStatusContext";
+import { TaskDetailModal } from "@/components/tasks/TaskDetailModal";
+import { TaskCommentsModal } from "@/components/tasks/TaskCommentsModal";
+import { TaskItemActionMenuTrigger } from "@/components/tasks/TaskItemActionMenuTrigger";
 
 export interface UserTaskListItemProps {
   id: number;
@@ -33,9 +36,12 @@ export interface UserTaskListItemProps {
   deadline: string;
   status: TaskStatus;
   commentsCount: number;
-  taskCommentsModal: React.ReactNode;
-  menuTrigger: React.ReactNode;
-  taskDetailModal: React.ReactNode;
+  guestMode: boolean;
+  taskDetailContainer: React.ReactNode;
+  taskCommentsContainer: React.ReactNode;
+  editTaskFormContainer: React.ReactNode;
+  sendComment: ActionFn<ActionState, FormData>;
+  updateComment: ActionFn<ActionState, FormData>;
   updateTaskStatus: ActionFn<ActionState, UpdateTaskStatusesPayload>;
 }
 
@@ -63,9 +69,12 @@ export const UserTaskListItemInner = ({
   deadline,
   status,
   commentsCount,
-  taskCommentsModal,
-  menuTrigger,
-  taskDetailModal,
+  guestMode,
+  taskDetailContainer,
+  taskCommentsContainer,
+  editTaskFormContainer,
+  sendComment,
+  updateComment,
 }: Omit<UserTaskListItemProps, "updateTaskStatus">) => {
   const t = useTranslations("users.UserTaskListItem");
 
@@ -87,7 +96,12 @@ export const UserTaskListItemInner = ({
         <ListItemInfo>
           <ListItemTitle>
             <ItemBaseDetailModalTrigger
-              modal={taskDetailModal}
+              modal={
+                <TaskDetailModal
+                  taskId={id}
+                  taskDetailContainer={taskDetailContainer}
+                />
+              }
               className="truncate max-md:hidden"
             >
               {title}
@@ -110,10 +124,25 @@ export const UserTaskListItemInner = ({
       commentsSlot={
         <ItemBaseCommentsModalTrigger
           commentsCount={commentsCount}
-          modal={taskCommentsModal}
+          modal={
+            <TaskCommentsModal
+              taskId={id}
+              taskCommentsContainer={taskCommentsContainer}
+              sendComment={sendComment}
+              updateComment={updateComment}
+            />
+          }
         />
       }
-      actionMenuSlot={menuTrigger}
+      actionMenuSlot={
+        <TaskItemActionMenuTrigger
+          guestMode={guestMode}
+          taskId={id}
+          taskTitle={title}
+          taskStatus={status}
+          editTaskFormContainer={editTaskFormContainer}
+        />
+      }
     />
   );
 };

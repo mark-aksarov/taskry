@@ -1,1 +1,0 @@
-export { CompanyToolbarCreateNewModalTrigger } from "./CompanyToolbarCreateNewModalTrigger";

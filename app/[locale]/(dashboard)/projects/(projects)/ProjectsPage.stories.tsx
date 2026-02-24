@@ -7,24 +7,22 @@ import { usePathname, useRouter } from "next/navigation";
 import { PageDecorator } from "@/.storybook/PageDecorator";
 import { ProjectList } from "@/components/projects/ProjectList";
 import { ProjectGrid } from "@/components/projects/ProjectGrid";
+import { NewProjectForm } from "@/components/projects/NewProjectForm";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { ProjectsPageEmptyContainer } from "./ProjectsPageEmptyContainer";
 import { AppHeaderStory } from "@/components/layout/AppHeader/__stories__";
 import { ProjectFiltersForm } from "@/components/projects/ProjectFiltersForm";
 import { ProjectGridStory } from "@/components/projects/ProjectGrid/__stories__";
 import { ProjectListStory } from "@/components/projects/ProjectList/__stories__";
+import { newProjectFormArgs } from "@/components/projects/NewProjectForm/__stories__";
+import { projectFiltersFormArgs } from "@/components/projects/ProjectFiltersForm/__stories__";
 import { EntityContainerPresentation } from "@/components/common/EntityContainerPresentation";
-import { ProjectFiltersFormStory } from "@/components/projects/ProjectFiltersForm/__stories__";
 import { withPageTransitionProvider } from "@/components/common/PageTransitionContext/__stories__";
+import { withProjectFiltersProvider } from "@/components/projects/ProjectFiltersContext/__stories__";
 import { withDeleteCommentModalProvider } from "@/components/comments/DeleteCommentModal/__stories__";
 import { withDeleteProjectModalProvider } from "@/components/projects/DeleteProjectModal/__stories__";
 import { withSelectedProjectsProvider } from "@/components/projects/SelectedProjectsContext/__stories__";
-import { ProjectToolbarActionsMenuTrigger } from "@/components/projects/ProjectToolbarActionsMenuTrigger";
-import { ProjectToolbarFiltersModalTrigger } from "@/components/projects/ProjectToolbarFiltersModalTrigger";
-import { ProjectToolbarCreateNewMenuTrigger } from "@/components/projects/ProjectToolbarCreateNewMenuTrigger";
 import { withUpdateProjectStatusesProvider } from "@/components/projects/UpdateProjectStatusContext/__stories__";
-import { ProjectToolbarActionsMenuTriggerStory } from "@/components/projects/ProjectToolbarActionsMenuTrigger/__stories__";
-import { ProjectToolbarCreateNewMenuTriggerStory } from "@/components/projects/ProjectToolbarCreateNewMenuTrigger/__stories__";
 
 const meta = {
   title: "pages/ProjectsPage",
@@ -36,12 +34,13 @@ const meta = {
         <Story />
       </ProjectsTemplate>
     ),
+    PageDecorator,
+    withProjectFiltersProvider,
     withDeleteProjectModalProvider,
     withPageTransitionProvider,
     withSelectedProjectsProvider,
     withDeleteCommentModalProvider,
     withUpdateProjectStatusesProvider,
-    PageDecorator,
     withThemedBackground,
   ],
   beforeEach: () => {
@@ -53,16 +52,16 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-const projectToolbarCreateNewMenuTrigger = (
-  <ProjectToolbarCreateNewMenuTrigger
-    {...ProjectToolbarCreateNewMenuTriggerStory.args}
-  />
-);
-
 export const Default = {
   args: {
+    guestMode: false,
     totalFilteredProjects: 10,
     selectedSortField: "createdAt",
+
+    newProjectFormContainer: <NewProjectForm {...newProjectFormArgs} />,
+    projectFiltersFormContainer: (
+      <ProjectFiltersForm {...projectFiltersFormArgs} />
+    ),
     projectsContainer: (
       <EntityContainerPresentation
         page={1}
@@ -72,19 +71,9 @@ export const Default = {
         totalPages={3}
       />
     ),
-    projectToolbarCreateNewMenuTrigger: projectToolbarCreateNewMenuTrigger,
-    projectToolbarFiltersModalTrigger: (
-      <ProjectToolbarFiltersModalTrigger
-        filtersFormContainer={
-          <ProjectFiltersForm {...ProjectFiltersFormStory.args} />
-        }
-      />
-    ),
-    projectToolbarActionsMenuTrigger: (
-      <ProjectToolbarActionsMenuTrigger
-        {...ProjectToolbarActionsMenuTriggerStory.args}
-      />
-    ),
+
+    createProjectCategory: () => ({ status: "success" }),
+    deleteProjects: () => ({ status: "success" }),
   },
 } satisfies Story;
 
@@ -97,7 +86,9 @@ export const WithNoProjects = {
   args: { ...Default.args },
   render: () => (
     <ProjectsPageEmptyContainer
-      projectToolbarCreateNewMenuTrigger={projectToolbarCreateNewMenuTrigger}
+      guestMode={false}
+      newProjectFormContainer={<NewProjectForm {...newProjectFormArgs} />}
+      createProjectCategory={() => ({ status: "success" })}
     />
   ),
 } satisfies Story;

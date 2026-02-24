@@ -2,8 +2,8 @@
 
 import { useTranslations } from "next-intl";
 import { usePathname } from "@/i18n/navigation";
-import { Separator } from "@/components/ui/Separator";
 import { CalendarCheck, Info } from "lucide-react";
+import { Separator } from "@/components/ui/Separator";
 import { NavigationButton } from "@/components/common/NavigationButton";
 
 interface ProfileNavigationDesktopProps {

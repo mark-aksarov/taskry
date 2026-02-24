@@ -10,7 +10,7 @@ const meta = {
   component: DeletePositionsModal,
   decorators: [withToastRegion, withThemedBackground],
   render: (args) => {
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = React.useState(true);
 
     return (
       <>

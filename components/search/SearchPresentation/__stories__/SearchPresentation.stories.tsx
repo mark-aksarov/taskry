@@ -1,14 +1,13 @@
-import {
-  TasksSearchListStory,
-  ProjectsSearchListStory,
-} from "../../SearchList/__stories__";
-
 import { fn } from "storybook/test";
 import { SearchList } from "../../SearchList";
 import { SearchField } from "../../SearchField";
 import { Meta, StoryObj } from "@storybook/react";
+import { mockedTaskSearchList } from "@/mocks/tasks";
 import { SearchPagination } from "../../SearchPagination";
 import { SearchPresentation } from "../SearchPresentation";
+import { mockedProjectSearchList } from "@/mocks/projects";
+import { TaskSearchListItem } from "../../TaskSearchListItem";
+import { ProjectSearchListItem } from "../../ProjectSearchListItem";
 import { withSearchProvider } from "../../SearchContext/__stories__";
 import { SearchToggleButtonGroup } from "../../SearchToggleButtonGroup";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
@@ -16,6 +15,7 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 const meta = {
   title: "components/search/SearchPresentation",
   component: SearchPresentation,
+  tags: ["!dev"],
   decorators: [withSearchProvider, withThemedBackground],
 } satisfies Meta<typeof SearchPresentation>;
 
@@ -28,7 +28,17 @@ export const TasksSearchPresentation = {
     searchToggleButtonGroup: (
       <SearchToggleButtonGroup selectedKeys={["tasks"]} />
     ),
-    searchResult: <SearchList {...TasksSearchListStory.args} />,
+    searchResult: (
+      <SearchList>
+        {mockedTaskSearchList.map((task) => (
+          <TaskSearchListItem
+            key={task.id}
+            {...task}
+            deadline={new Date(task.deadline)}
+          />
+        ))}
+      </SearchList>
+    ),
     searchPagination: <SearchPagination totalCount={30} />,
   },
 } satisfies Story;
@@ -39,7 +49,19 @@ export const ProjectsSearchPresentation = {
     searchToggleButtonGroup: (
       <SearchToggleButtonGroup selectedKeys={["projects"]} />
     ),
-    searchResult: <SearchList {...ProjectsSearchListStory.args} />,
-    searchPagination: <SearchPagination totalCount={30} />,
+    searchResult: (
+      <SearchList>
+        {mockedProjectSearchList.map((project) => (
+          <ProjectSearchListItem
+            key={project.id}
+            {...project}
+            deadline={new Date(project.deadline)}
+          />
+        ))}
+      </SearchList>
+    ),
+    searchPagination: (
+      <SearchPagination totalCount={mockedProjectSearchList.length} />
+    ),
   },
 } satisfies Story;

@@ -14,11 +14,13 @@ import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { Link } from "@/components/ui/Link";
 import { Link2, Mail, Phone } from "lucide-react";
+import { UserDetailModal } from "../UserDetailModal";
 import { Separator } from "@/components/ui/Separator";
 import { UserGridItemLayout } from "./UserGridItemLayout";
 import { UnknownUser } from "@/components/common/UnknownUser";
 import { ImageContainer } from "@/components/common/ImageContainer";
 import { ItemBaseDetailModalTrigger } from "@/components/common/ItemBase";
+import { UserItemActionMenuTrigger } from "../UserItemActionMenuTrigger";
 
 export interface UserGridItemProps {
   id: string;
@@ -30,8 +32,11 @@ export interface UserGridItemProps {
   phoneNumber?: string;
   publicLink?: string;
   email: string;
-  menuTrigger: React.ReactNode;
-  userDetailModal: React.ReactNode;
+  guestMode: boolean;
+  showUserActionMenuTrigger: boolean;
+  showDeleteMenuItem: boolean;
+  editUserFormContainer: React.ReactNode;
+  userDetailContainer: React.ReactNode;
 }
 
 export function UserGridItem({
@@ -42,8 +47,11 @@ export function UserGridItem({
   phoneNumber,
   publicLink,
   email,
-  menuTrigger,
-  userDetailModal,
+  guestMode,
+  showUserActionMenuTrigger,
+  showDeleteMenuItem,
+  editUserFormContainer,
+  userDetailContainer,
 }: UserGridItemProps) {
   const t = useTranslations("users.UserGridItem");
 
@@ -57,9 +65,24 @@ export function UserGridItem({
     <UnknownUser className="h-20 w-20" iconSize={48} />
   );
 
+  const userDetailModal = (
+    <UserDetailModal userId={id} userDetailContainer={userDetailContainer} />
+  );
+
   return (
     <UserGridItemLayout
-      actionMenuSlot={menuTrigger}
+      actionMenuSlot={
+        showUserActionMenuTrigger && (
+          <UserItemActionMenuTrigger
+            showDeleteMenuItem={showDeleteMenuItem}
+            guestMode={guestMode}
+            editUserFormContainer={editUserFormContainer}
+            userId={id}
+            userFullName={fullName}
+            className="-mr-2"
+          />
+        )
+      }
       imageSlot={
         <>
           <ItemBaseDetailModalTrigger

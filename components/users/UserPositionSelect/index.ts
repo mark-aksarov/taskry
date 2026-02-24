@@ -1,1 +1,0 @@
-export { UserPositionSelect } from "./UserPositionSelect";

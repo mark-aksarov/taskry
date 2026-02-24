@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { mocked } from "storybook/test";
 import { AppSidebar } from "./AppSidebar";
 import { usePathname } from "next/navigation";
@@ -46,8 +47,10 @@ export const Default = {
 export const WrapWithSheet = {
   decorators: [
     (Story) => {
+      const [isOpen, setIsOpen] = useState(true);
+
       return (
-        <DialogTrigger>
+        <DialogTrigger isOpen={isOpen} onOpenChange={setIsOpen}>
           <Button label="Open sheet" />
           <SideSheet side="left" isDismissable>
             <Dialog>

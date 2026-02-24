@@ -1,1 +1,0 @@
-export { TaskToolbarSortingMenuTrigger } from "./TaskToolbarSortingMenuTrigger";

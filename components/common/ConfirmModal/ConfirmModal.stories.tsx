@@ -14,7 +14,7 @@ const meta = {
   component: ConfirmModal,
   decorators: [withThemedBackground],
   render: (args) => {
-    const [isOpen, setIsOpen] = useState(false);
+    const [isOpen, setIsOpen] = useState(true);
 
     return (
       <>

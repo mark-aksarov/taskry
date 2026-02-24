@@ -1,1 +1,1 @@
-export { Default as NewCustomerFormStory } from "./NewCustomerForm.stories";
+export { newCustomerFormArgs } from "./NewCustomerForm.args";

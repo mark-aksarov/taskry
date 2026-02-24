@@ -10,20 +10,38 @@ import { PageGrid } from "@/components/common/PageGrid";
 import { ViewModeProvider } from "@/components/common/ViewMode";
 import { PageContainer } from "@/components/common/PageContainer";
 import { BackButton } from "@/components/common/BackButton";
+import { ActionFn, ActionState } from "@/lib/actions/types";
+import { CompanyToolbarActionsMenuTrigger } from "@/components/company/CompanyToolbarActionsMenuTrigger";
+import { CompanyToolbarCreateNewModalTrigger } from "@/components/company/CompanyToolbarCreateNewModalTrigger";
 
 interface CompaniesPageProps {
   companiesContainer: React.ReactNode;
-  companyToolbarCreateNewModalTrigger: React.ReactNode;
-  companyToolbarActionsMenuTrigger: React.ReactNode;
+  guestMode: boolean;
+  createCompany: ActionFn<ActionState, FormData>;
+  deleteCompanies: ActionFn<ActionState, number[]>;
 }
 
 export function CompaniesPage({
   companiesContainer,
-  companyToolbarCreateNewModalTrigger,
-  companyToolbarActionsMenuTrigger,
+  guestMode,
+  createCompany,
+  deleteCompanies,
 }: CompaniesPageProps) {
   const t = useTranslations("app.CompaniesPage");
 
+  const companyToolbarActionsMenuTrigger = (
+    <CompanyToolbarActionsMenuTrigger
+      guestMode={guestMode}
+      deleteCompanies={deleteCompanies}
+    />
+  );
+
+  const companyToolbarCreateNewModalTrigger = (
+    <CompanyToolbarCreateNewModalTrigger
+      guestMode={guestMode}
+      createCompany={createCompany}
+    />
+  );
   return (
     <PageContainer>
       <PageGrid>

@@ -6,7 +6,6 @@ import { hasGuestRole } from "@/lib/utils/hasGuestRole";
 import { ProfileActions } from "@/components/users/ProfileActions";
 import { changePassword } from "@/lib/actions/user/changePassword";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
-import { ChangePasswordForm } from "@/components/users/ChangePasswordForm";
 import { UserHeaderContainer } from "@/components/users/UserHeaderContainer";
 import { EditUserFormContainer } from "@/components/users/EditUserFormContainer";
 import { ProfileDetailContainer } from "@/components/users/ProfileDetailContainer";
@@ -38,9 +37,8 @@ export default async function AppProfilePage({
         showUserActions ? (
           <ProfileActions
             guestMode={guestMode}
-            changePasswordForm={
-              <ChangePasswordForm changePassword={changePassword} userId={id} />
-            }
+            changePassword={changePassword}
+            userId={id}
             editUserFormContainer={<EditUserFormContainer userId={id} />}
           />
         ) : null

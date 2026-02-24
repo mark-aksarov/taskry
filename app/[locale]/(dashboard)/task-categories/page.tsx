@@ -10,11 +10,8 @@ import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { SelectedItemsProvider } from "@/components/common/SelectedItemsContext";
 import { createTaskCategory } from "@/lib/actions/taskCategory/createTaskCategory";
 import { PageTransitionProvider } from "@/components/common/PageTransitionContext";
-import { NewTaskCategoryForm } from "@/components/taskCategory/NewTaskCategoryForm";
 import { deleteTaskCategories } from "@/lib/actions/taskCategory/deleteTaskCategories";
 import { TaskCategoriesContainer } from "@/components/taskCategory/TaskCategoriesContainer";
-import { TaskCategoryToolbarActionsMenuTrigger } from "@/components/taskCategory/TaskCategoryToolbarActionsMenuTrigger";
-import { TaskCategoryToolbarCreateNewModalTrigger } from "@/components/taskCategory/TaskCategoryToolbarCreateNewModalTrigger";
 
 export default async function AppTaskCategoriesPage() {
   // Authorization
@@ -24,21 +21,11 @@ export default async function AppTaskCategoriesPage() {
   const taskCategoryCount = await getTaskCategoryCount();
   const guestMode = await hasGuestRole();
 
-  const taskCategoryToolbarCreateNewModalTrigger = (
-    <TaskCategoryToolbarCreateNewModalTrigger
-      guestMode={guestMode}
-      newTaskCategoryForm={
-        <NewTaskCategoryForm createTaskCategory={createTaskCategory} />
-      }
-    />
-  );
-
   if (!taskCategoryCount) {
     return (
       <TaskCategoriesPageEmpty
-        taskCategoryToolbarCreateNewModalTrigger={
-          taskCategoryToolbarCreateNewModalTrigger
-        }
+        guestMode={guestMode}
+        createTaskCategory={createTaskCategory}
       />
     );
   }
@@ -52,15 +39,9 @@ export default async function AppTaskCategoriesPage() {
       <PageTransitionProvider>
         <TaskCategoriesPage
           taskCategoriesContainer={<TaskCategoriesContainer />}
-          taskCategoryToolbarCreateNewModalTrigger={
-            taskCategoryToolbarCreateNewModalTrigger
-          }
-          taskCategoryToolbarActionsMenuTrigger={
-            <TaskCategoryToolbarActionsMenuTrigger
-              guestMode={guestMode}
-              deleteTaskCategories={deleteTaskCategories}
-            />
-          }
+          guestMode={guestMode}
+          createTaskCategory={createTaskCategory}
+          deleteTaskCategories={deleteTaskCategories}
         />
       </PageTransitionProvider>
     </SelectedItemsProvider>

@@ -10,7 +10,6 @@ import { Suspense } from "react";
 import { Repeat } from "@/components/common/Repeat";
 import { CommentListItemDTO } from "@/lib/data/comment/comment.dto";
 import { deleteComment } from "@/lib/actions/comment/deleteComment";
-import { CommentItemActionMenuTrigger } from "../comments/CommentItem";
 import { DeleteCommentModalProvider } from "../comments/DeleteCommentModal";
 import { CommentsEmptySection } from "@/components/comments/CommentsEmptySection";
 
@@ -56,18 +55,12 @@ function TaskCommentsContainerInner({
         return (
           <CommentItem
             key={comment.id}
+            id={comment.id}
             content={comment.content}
             createdAt={comment.createdAt}
             sender={comment.sender}
-            menuTrigger={
-              comment.canEdit && (
-                <CommentItemActionMenuTrigger
-                  guestMode={guestMode}
-                  commentId={comment.id}
-                  commentContent={comment.content}
-                />
-              )
-            }
+            canEdit={comment.canEdit}
+            guestMode={guestMode}
           />
         );
       })}

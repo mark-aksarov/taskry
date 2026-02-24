@@ -8,20 +8,24 @@ import {
 } from "@/components/common/List";
 
 import { useTranslations } from "next-intl";
+import { ActionFn, ActionState } from "@/lib/actions/types";
 import { SelectableItem } from "@/components/common/SelectableItem";
 import { CompanyListItemCheckbox } from "./CompanyListItemCheckbox";
 import { useSelectedItems } from "@/components/common/SelectedItemsContext";
+import { CompanyItemActionMenuTrigger } from "../CompanyItemActionMenuTrigger";
 
 interface CompanyListItemProps {
   id: number;
   name: string;
-  menuTrigger: React.ReactNode;
+  guestMode: boolean;
+  updateCompany: ActionFn<ActionState, FormData>;
 }
 
 export function CompanyListItem({
   id,
   name,
-  menuTrigger,
+  guestMode,
+  updateCompany,
 }: CompanyListItemProps) {
   const t = useTranslations("company.CompanyListItem");
   const selected = useSelectedItems();
@@ -35,7 +39,12 @@ export function CompanyListItem({
           <ListItemText>{t("name")}</ListItemText>
         </ListItemInfo>
 
-        {menuTrigger}
+        <CompanyItemActionMenuTrigger
+          guestMode={guestMode}
+          companyId={id}
+          companyName={name}
+          updateCompany={updateCompany}
+        />
       </ListItem>
     </SelectableItem>
   );

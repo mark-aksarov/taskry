@@ -1,1 +1,0 @@
-export { CustomerToolbarManageMenuTrigger } from "./CustomerToolbarManageMenuTrigger";

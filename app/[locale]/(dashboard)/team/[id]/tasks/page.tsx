@@ -9,7 +9,6 @@ import { changePassword } from "@/lib/actions/user/changePassword";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { TeamProfileTasksPageEmpty } from "./TeamProfileTasksPageEmpty";
 import { pageSearchParam, pageSizeSearchParam } from "@/lib/schemas/base";
-import { ChangePasswordForm } from "@/components/users/ChangePasswordForm";
 import { UserTasksContainer } from "@/components/users/UserTasksContainer";
 import { updateTaskStatuses } from "@/lib/actions/task/updateTaskStatuses";
 import { UserTasksPageLayout } from "@/components/users/UserTasksPageLayout";
@@ -21,7 +20,6 @@ import { UserNavigationDesktop } from "@/components/users/UserNavigationDesktop"
 import { EditUserFormContainer } from "@/components/users/EditUserFormContainer";
 import { PageTransitionProvider } from "@/components/common/PageTransitionContext";
 import { UpdateTaskStatusesProvider } from "@/components/tasks/UpdateTaskStatusContext";
-import { TaskToolbarActionsMenuTrigger } from "@/components/tasks/TaskToolbarActionsMenuTrigger";
 
 const searchParamsSchema = z.object({
   page: pageSearchParam,
@@ -67,9 +65,8 @@ export default async function AppProfileTasksPage({
   const userActions = showUserActions ? (
     <ProfileActions
       guestMode={guestMode}
-      changePasswordForm={
-        <ChangePasswordForm userId={userId} changePassword={changePassword} />
-      }
+      userId={userId}
+      changePassword={changePassword}
       editUserFormContainer={<EditUserFormContainer userId={userId} />}
     />
   ) : null;
@@ -104,12 +101,8 @@ export default async function AppProfileTasksPage({
               />
             }
             userHeaderContainer={<UserHeaderContainer userId={userId} />}
-            taskToolbarActionsMenuTrigger={
-              <TaskToolbarActionsMenuTrigger
-                guestMode={guestMode}
-                deleteTasks={deleteTasks}
-              />
-            }
+            guestMode={guestMode}
+            deleteTasks={deleteTasks}
             navigationDesktop={
               <UserNavigationDesktop userActions={userActions} />
             }

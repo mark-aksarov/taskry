@@ -5,6 +5,7 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 const meta = {
   title: "components/comments/ReplyButton",
   component: ReplyButton,
+  tags: ["!dev"],
   decorators: [withThemedBackground],
 } satisfies Meta<typeof ReplyButton>;
 

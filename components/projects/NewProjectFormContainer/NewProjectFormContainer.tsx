@@ -3,8 +3,6 @@ import "server-only";
 import { Suspense } from "react";
 import { NewProjectForm } from "../NewProjectForm";
 import { ProjectFormSkeleton } from "../ProjectFormSkeleton";
-import { ProjectCategorySelect } from "../ProjectCategorySelect";
-import { ProjectCustomerSelect } from "../ProjectCustomerSelect";
 import { createProject } from "@/lib/actions/project/createProject";
 import { getCustomerSummaries } from "@/lib/data/customer/customer.dal";
 import { getProjectCategorySummaries } from "@/lib/data/projectCategory/projectCategory.dal";
@@ -23,8 +21,8 @@ async function NewProjectFormContainerInner() {
 
   return (
     <NewProjectForm
-      projectCategorySelect={<ProjectCategorySelect categories={categories} />}
-      projectCustomerSelect={<ProjectCustomerSelect customers={customers} />}
+      projectCategorySelectItems={categories}
+      projectCustomerSelectItems={customers}
       createProject={createProject}
     />
   );

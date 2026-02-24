@@ -4,18 +4,14 @@ import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import { SubtaskList } from "../subtasks/SubtaskList";
 import { hasGuestRole } from "@/lib/utils/hasGuestRole";
+import { TaskDetailAltSkeleton } from "./TaskDetailAlt";
 import { getTaskDetail } from "@/lib/data/task/task.dal";
-import { NewSubtaskForm } from "../subtasks/NewSubtaskForm";
 import { SubtaskListItem } from "../subtasks/SubtaskListItem";
-import { EditSubtaskForm } from "../subtasks/EditSubtaskForm";
 import { TaskDetailAlt } from "./TaskDetailAlt/TaskDetailAlt";
 import { createSubtask } from "@/lib/actions/subtask/createSubtask";
 import { deleteSubtask } from "@/lib/actions/subtask/deleteSubtask";
 import { updateSubtask } from "@/lib/actions/subtask/updateSubtask";
 import { toggleSubtask } from "@/lib/actions/subtask/toggleSubtask";
-import { NewSubtaskModalTrigger } from "../subtasks/NewSubtaskModalTrigger";
-import { TaskDetailAltSkeleton } from "./TaskDetailAlt/TaskDetailAltSkeleton";
-import { SubtaskActionMenuTrigger } from "../subtasks/SubtaskActionMenuTrigger";
 import { DeleteSubtaskModalProvider } from "../subtasks/DeleteSubtaskModal";
 
 interface TaskDetailAltContainerProps {
@@ -58,37 +54,20 @@ async function TaskDetailAltContainerInner({
               {task.subtasks.map((subtask) => (
                 <SubtaskListItem
                   key={subtask.id}
+                  guestMode={guestMode}
+                  id={subtask.id}
+                  text={subtask.text}
                   isDone={subtask.isDone}
-                  actionMenuTrigger={
-                    <SubtaskActionMenuTrigger
-                      guestMode={guestMode}
-                      subtaskId={subtask.id}
-                      isDone={subtask.isDone}
-                      subtaskText={subtask.text}
-                      toggleSubtask={toggleSubtask}
-                      editSubtaskForm={
-                        <EditSubtaskForm
-                          taskId={task.id}
-                          subtaskId={subtask.id}
-                          updateSubtask={updateSubtask}
-                          textDefaultValue={subtask.text}
-                        />
-                      }
-                    />
-                  }
+                  taskId={task.id}
+                  toggleSubtask={toggleSubtask}
+                  updateSubtask={updateSubtask}
                 />
               ))}
             </SubtaskList>
           </DeleteSubtaskModalProvider>
         )
       }
-      newSubtaskModalTrigger={
-        <NewSubtaskModalTrigger
-          newSubtaskForm={
-            <NewSubtaskForm taskId={task.id} createSubtask={createSubtask} />
-          }
-        />
-      }
+      createSubtask={createSubtask}
     />
   );
 }

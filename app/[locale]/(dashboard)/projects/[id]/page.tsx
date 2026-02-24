@@ -7,8 +7,6 @@ import { getProjectSummary } from "@/lib/data/project/project.dal";
 import { updateComment } from "@/lib/actions/comment/updateComment";
 import { deleteProjects } from "@/lib/actions/project/deleteProjects";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
-import { ProjectDetailActions } from "@/components/projects/ProjectDetailActions";
-import { ProjectCommentsModal } from "@/components/projects/ProjectCommentsModal";
 import { EditProjectFormContainer } from "@/components/projects/EditProjectFormContainer";
 import { ProjectCommentsContainer } from "@/components/projects/ProjectCommentsContainer";
 import { defaultAppHeaderSlots } from "@/components/layout/AppHeader/defaultAppHeaderSlots";
@@ -40,30 +38,18 @@ export default async function AppProfilePage({
 
   return (
     <ProjectDetailPage
+      guestMode={guestMode}
+      projectId={id}
+      projectTitle={projectSummary.title}
+      sendComment={sendComment}
+      updateComment={updateComment}
+      deleteProject={deleteProjects}
       projectDetailContainer={<ProjectDetailAltContainer projectId={id} />}
       projectHeaderContainer={<ProjectDetailHeaderContainer projectId={id} />}
-      projectDetailActions={
-        <ProjectDetailActions
-          guestMode={guestMode}
-          deleteProject={deleteProjects}
-          editProjectFormContainer={<EditProjectFormContainer projectId={id} />}
-          projectId={id}
-          projectTitle={projectSummary.title}
-          commentsModal={
-            <ProjectCommentsModal
-              projectId={id}
-              projectCommentsContainer={
-                <ProjectCommentsContainer
-                  guestMode={guestMode}
-                  projectId={id}
-                />
-              }
-              sendCommentAction={sendComment}
-              updateCommentAction={updateComment}
-            />
-          }
-        />
+      projectCommentsContainer={
+        <ProjectCommentsContainer guestMode={guestMode} projectId={id} />
       }
+      editProjectFormContainer={<EditProjectFormContainer projectId={id} />}
       appHeaderProps={defaultAppHeaderSlots}
     />
   );

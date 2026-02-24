@@ -9,12 +9,15 @@ import { ActionFn, ActionState } from "@/lib/actions/types";
 import { GuestModeModal } from "@/components/common/GuestModeModal";
 import { NavigationButton } from "@/components/common/NavigationButton";
 import { DetailActionsCommentsModalTrigger } from "@/components/common/DetailActionsCommentsModalTrigger";
+import { TaskCommentsModal } from "../TaskCommentsModal";
 
 interface TaskDetailActionsProps {
   guestMode: boolean;
   taskId: number;
   taskTitle: string;
-  commentsModal: React.ReactNode;
+  taskCommentsContainer: React.ReactNode;
+  sendComment: ActionFn<ActionState, FormData>;
+  updateComment: ActionFn<ActionState, FormData>;
   deleteTask: ActionFn<ActionState, number[]>;
   editTaskFormContainer: React.ReactNode;
 }
@@ -23,7 +26,9 @@ export function TaskDetailActions({
   guestMode,
   taskId,
   taskTitle,
-  commentsModal,
+  taskCommentsContainer,
+  sendComment,
+  updateComment,
   deleteTask,
   editTaskFormContainer,
 }: TaskDetailActionsProps) {
@@ -75,7 +80,16 @@ export function TaskDetailActions({
           <KeyRound size={18} strokeWidth={1.5} absoluteStrokeWidth />
           {t("edit")}
         </NavigationButton>
-        <DetailActionsCommentsModalTrigger modal={commentsModal}>
+        <DetailActionsCommentsModalTrigger
+          modal={
+            <TaskCommentsModal
+              taskId={taskId}
+              taskCommentsContainer={taskCommentsContainer}
+              sendComment={sendComment}
+              updateComment={updateComment}
+            />
+          }
+        >
           {t("comments")}
         </DetailActionsCommentsModalTrigger>
       </div>

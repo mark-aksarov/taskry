@@ -1,10 +1,8 @@
 import { ProjectCategoryList } from "./ProjectCategoryList";
 import { ProjectCategoryListItem } from "./ProjectCategoryListItem";
-import { EditProjectCategoryForm } from "./EditProjectCategoryForm";
 import { DeleteProjectCategoryModalProvider } from "./DeleteProjectCategoryModal";
 import { updateProjectCategory } from "@/lib/actions/projectCategory/updateProjectCategory";
 import { getProjectCategorySummaries } from "@/lib/data/projectCategory/projectCategory.dal";
-import { ProjectCategoryItemActionMenuTrigger } from "./ProjectCategoryItemActionMenuTrigger";
 import { deleteProjectCategories } from "@/lib/actions/projectCategory/deleteProjectCategories";
 
 export async function ProjectCategoriesContainer() {
@@ -18,20 +16,8 @@ export async function ProjectCategoriesContainer() {
             key={projectCategory.id}
             id={projectCategory.id}
             name={projectCategory.name}
-            menuTrigger={
-              <ProjectCategoryItemActionMenuTrigger
-                guestMode={false}
-                projectCategoryId={projectCategory.id}
-                projectCategoryName={projectCategory.name}
-                editProjectCategoryForm={
-                  <EditProjectCategoryForm
-                    projectCategoryId={projectCategory.id}
-                    nameDefaultValue={projectCategory.name}
-                    updateProjectCategory={updateProjectCategory}
-                  />
-                }
-              />
-            }
+            guestMode={false}
+            updateProjectCategory={updateProjectCategory}
           />
         ))}
       </ProjectCategoryList>

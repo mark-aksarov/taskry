@@ -6,15 +6,17 @@ import {
 
 import { useTranslations } from "next-intl";
 import { ModalProps } from "@/components/ui/Modal";
+import { NewCompanyForm } from "../NewCompanyForm";
 import { DialogHeader } from "@/components/ui/Dialog";
+import { ActionFn, ActionState } from "@/lib/actions/types";
 
 interface NewCompanyModalProps
   extends Pick<ModalProps, "isOpen" | "onOpenChange"> {
-  newCompanyForm: React.ReactNode;
+  createCompany: ActionFn<ActionState, FormData>;
 }
 
 export function NewCompanyModal({
-  newCompanyForm,
+  createCompany,
   ...props
 }: NewCompanyModalProps) {
   const t = useTranslations("company.NewCompanyModal");
@@ -23,7 +25,9 @@ export function NewCompanyModal({
     <FormBaseModal className="md:w-[350px]" {...props}>
       <FormBaseModalDialog>
         <DialogHeader>{t("title")}</DialogHeader>
-        <FormBaseModalDialogBody>{newCompanyForm}</FormBaseModalDialogBody>
+        <FormBaseModalDialogBody>
+          <NewCompanyForm createCompany={createCompany} />
+        </FormBaseModalDialogBody>
       </FormBaseModalDialog>
     </FormBaseModal>
   );

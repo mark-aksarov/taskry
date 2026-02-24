@@ -1,1 +1,0 @@
-export { CustomerToolbarSortingMenuTrigger } from "./CustomerToolbarSortingMenuTrigger";

@@ -1,16 +1,16 @@
+import { mockedUserDetail } from "@/mocks/users";
+import { ProjectDetail } from "../../ProjectDetail";
 import { ProjectGridItem } from "../ProjectGridItem";
+import { mockedProjectList } from "@/mocks/projects";
 import type { Meta, StoryObj } from "@storybook/react";
+import { EditProjectForm } from "../../EditProjectForm";
 import { ProjectStatus } from "@/generated/prisma/enums";
-import { ProjectDetailModal } from "../../ProjectDetailModal";
-import { ProjectCommentsModal } from "../../ProjectCommentsModal";
-import { mockedProject } from "../../ProjectListItem/__stories__";
+import { UserDetail } from "@/components/users/UserDetail";
+import { editProjectFormArgs } from "../../EditProjectForm/__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { ProjectDetailModalStory } from "../../ProjectDetailModal/__stories__";
-import { ProjectItemActionMenuTrigger } from "../../ProjectItemActionMenuTrigger";
-import { ProjectCommentsModalStory } from "../../ProjectCommentsModal/__stories__";
+import { getCommentList } from "@/components/comments/CommentList/__stories__";
 import { withDeleteProjectModalProvider } from "../../DeleteProjectModal/__stories__";
 import { withSelectedProjectsProvider } from "../../SelectedProjectsContext/__stories__";
-import { ProjectItemActionMenuTriggerStory } from "../../ProjectItemActionMenuTrigger/__stories__";
 import { withUpdateProjectStatusesProvider } from "../../UpdateProjectStatusContext/__stories__";
 import { withDeleteCommentModalProvider } from "@/components/comments/DeleteCommentModal/__stories__";
 
@@ -29,21 +29,18 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
+const project = mockedProjectList[0];
+
 export const Default = {
   args: {
-    ...mockedProject,
-    projectCommentsModal: (
-      <ProjectCommentsModal {...ProjectCommentsModalStory.args} />
-    ),
-    menuTrigger: (
-      <ProjectItemActionMenuTrigger
-        {...ProjectItemActionMenuTriggerStory.args}
-        className="-mr-2"
-      />
-    ),
-    projectDetailModal: (
-      <ProjectDetailModal {...ProjectDetailModalStory.args} />
-    ),
+    ...project,
+    guestMode: false,
+    projectCommentsContainer: getCommentList(),
+    editProjectFormContainer: <EditProjectForm {...editProjectFormArgs} />,
+    projectDetailContainer: <ProjectDetail {...project} />,
+    userDetailContainer: <UserDetail {...mockedUserDetail} />,
+    sendComment: () => ({ status: "success" }),
+    updateComment: () => ({ status: "success" }),
     updateProjectStatus: () => {
       return new Promise((res) =>
         setTimeout(() => res({ status: "success" }), 500),

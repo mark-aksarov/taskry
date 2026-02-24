@@ -7,14 +7,16 @@ import {
 import { useTranslations } from "next-intl";
 import { ModalProps } from "@/components/ui/Modal";
 import { DialogHeader } from "@/components/ui/Dialog";
+import { ActionFn, ActionState } from "@/lib/actions/types";
+import { NewTaskCategoryForm } from "../NewTaskCategoryForm";
 
 interface NewTaskCategoryModalProps
   extends Pick<ModalProps, "isOpen" | "onOpenChange"> {
-  newTaskCategoryForm: React.ReactNode;
+  createTaskCategory: ActionFn<ActionState, FormData>;
 }
 
 export function NewTaskCategoryModal({
-  newTaskCategoryForm,
+  createTaskCategory,
   ...props
 }: NewTaskCategoryModalProps) {
   const t = useTranslations("taskCategories.NewTaskCategoryModal");
@@ -23,7 +25,9 @@ export function NewTaskCategoryModal({
     <FormBaseModal className="md:w-[350px]" {...props}>
       <FormBaseModalDialog>
         <DialogHeader>{t("title")}</DialogHeader>
-        <FormBaseModalDialogBody>{newTaskCategoryForm}</FormBaseModalDialogBody>
+        <FormBaseModalDialogBody>
+          <NewTaskCategoryForm createTaskCategory={createTaskCategory} />
+        </FormBaseModalDialogBody>
       </FormBaseModalDialog>
     </FormBaseModal>
   );

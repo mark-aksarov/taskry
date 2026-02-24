@@ -1,1 +1,1 @@
-export { Default as ProfileActionsStory } from "./ProfileActions.stories";
+export { profileActionsArgs } from "./ProfileActions.args";

@@ -9,13 +9,16 @@ import { ActionFn, ActionState } from "@/lib/actions/types";
 import { GuestModeModal } from "@/components/common/GuestModeModal";
 import { NavigationButton } from "@/components/common/NavigationButton";
 import { DetailActionsCommentsModalTrigger } from "@/components/common/DetailActionsCommentsModalTrigger";
+import { ProjectCommentsModal } from "../ProjectCommentsModal";
 
 interface ProjectDetailActionsProps {
   guestMode: boolean;
   projectId: number;
   projectTitle: string;
-  commentsModal: React.ReactNode;
+  sendComment: ActionFn<ActionState, FormData>;
+  updateComment: ActionFn<ActionState, FormData>;
   deleteProject: ActionFn<ActionState, number[]>;
+  projectCommentsContainer: React.ReactNode;
   editProjectFormContainer: React.ReactNode;
 }
 
@@ -23,8 +26,10 @@ export function ProjectDetailActions({
   guestMode,
   projectId,
   projectTitle,
-  commentsModal,
+  sendComment,
+  updateComment,
   deleteProject,
+  projectCommentsContainer,
   editProjectFormContainer,
 }: ProjectDetailActionsProps) {
   const t = useTranslations("projects.ProjectDetailActions");
@@ -75,7 +80,16 @@ export function ProjectDetailActions({
           <KeyRound size={18} strokeWidth={1.5} absoluteStrokeWidth />
           {t("edit")}
         </NavigationButton>
-        <DetailActionsCommentsModalTrigger modal={commentsModal}>
+        <DetailActionsCommentsModalTrigger
+          modal={
+            <ProjectCommentsModal
+              projectId={projectId}
+              projectCommentsContainer={projectCommentsContainer}
+              sendComment={sendComment}
+              updateComment={updateComment}
+            />
+          }
+        >
           {t("comments")}
         </DetailActionsCommentsModalTrigger>
       </div>

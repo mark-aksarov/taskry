@@ -1,47 +1,17 @@
+import { mockedUserDetail } from "@/mocks/users";
+import { ProjectDetail } from "../../ProjectDetail";
 import { ProjectListItem } from "../ProjectListItem";
+import { mockedProjectList } from "@/mocks/projects";
+import { EditProjectForm } from "../../EditProjectForm";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { ProjectStatus } from "@/generated/prisma/enums";
-import { ProjectDetailModal } from "../../ProjectDetailModal";
-import { ProjectCommentsModal } from "../../ProjectCommentsModal";
-import { UserDetailModal } from "@/components/users/UserDetailModal";
+import { UserDetail } from "@/components/users/UserDetail";
+import { editProjectFormArgs } from "../../EditProjectForm/__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { ProjectDetailModalStory } from "../../ProjectDetailModal/__stories__";
-import { CustomerDetailModal } from "@/components/customer/CustomerDetailModal";
-import { ProjectItemActionMenuTrigger } from "../../ProjectItemActionMenuTrigger";
-import { ProjectCommentsModalStory } from "../../ProjectCommentsModal/__stories__";
-import { UserDetailModalStory } from "@/components/users/UserDetailModal/__stories__";
+import { getCommentList } from "@/components/comments/CommentList/__stories__";
 import { withDeleteProjectModalProvider } from "../../DeleteProjectModal/__stories__";
 import { withSelectedProjectsProvider } from "../../SelectedProjectsContext/__stories__";
-import { CustomerDetailModalStory } from "@/components/customer/CustomerDetailModal/__stories__";
-import { ProjectItemActionMenuTriggerStory } from "../../ProjectItemActionMenuTrigger/__stories__";
 import { withUpdateProjectStatusesProvider } from "../../UpdateProjectStatusContext/__stories__";
 import { withDeleteCommentModalProvider } from "@/components/comments/DeleteCommentModal/__stories__";
-
-export const mockedProject = {
-  id: 1,
-  title: "Project 1",
-  deadline: "2025-01-01",
-  creator: {
-    id: "user1",
-    fullName: "User 1",
-    imageUrl: "/woman.jpg",
-  },
-  status: ProjectStatus.pending,
-  category: { id: 1, name: "Category 1" },
-  customer: {
-    id: 1,
-    imageUrl: "/man.jpg",
-    fullName: "Customer 1",
-  },
-  company: {
-    id: 1,
-    name: "Company 1",
-  },
-  tasksTotal: 10,
-  tasksCompleted: 8,
-  commentsCount: 5,
-  showCheckbox: false,
-};
 
 const meta = {
   title: "components/projects/ProjectListItem",
@@ -53,30 +23,23 @@ const meta = {
     withUpdateProjectStatusesProvider,
     withThemedBackground,
   ],
-  excludeStories: ["mockedProject"],
 } satisfies Meta<typeof ProjectListItem>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
+const project = mockedProjectList[0];
+
 export const Default = {
   args: {
-    ...mockedProject,
-    projectCommentsModal: (
-      <ProjectCommentsModal {...ProjectCommentsModalStory.args} />
-    ),
-    menuTrigger: (
-      <ProjectItemActionMenuTrigger
-        {...ProjectItemActionMenuTriggerStory.args}
-      />
-    ),
-    projectDetailModal: (
-      <ProjectDetailModal {...ProjectDetailModalStory.args} />
-    ),
-    userDetailModal: <UserDetailModal {...UserDetailModalStory.args} />,
-    customerDetailModal: (
-      <CustomerDetailModal {...CustomerDetailModalStory.args} />
-    ),
+    ...project,
+    guestMode: false,
+    projectCommentsContainer: getCommentList(),
+    editProjectFormContainer: <EditProjectForm {...editProjectFormArgs} />,
+    projectDetailContainer: <ProjectDetail {...project} />,
+    userDetailContainer: <UserDetail {...mockedUserDetail} />,
+    sendComment: () => ({ status: "success" }),
+    updateComment: () => ({ status: "success" }),
     updateProjectStatus: () => {
       return new Promise((res) =>
         setTimeout(() => res({ status: "success" }), 500),

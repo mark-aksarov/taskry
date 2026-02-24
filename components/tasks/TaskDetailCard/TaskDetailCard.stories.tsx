@@ -1,17 +1,13 @@
-import {
-  DetailHeader,
-  DetailHeaderSkeleton,
-} from "@/components/common/DetailHeader";
-
+import { mockedTaskDetail } from "@/mocks/tasks";
 import { TaskDetailCard } from "./TaskDetailCard";
+import { TaskDetailHeader } from "../TaskDetailHeader";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { TaskDetailActions } from "../TaskDetailActions";
-import { TaskDetailStory } from "../TaskDetail/__stories__";
+import { taskDetailAltArgs } from "../TaskDetailAlt/__stories__";
+import { DetailHeaderSkeleton } from "@/components/common/DetailHeader";
 import { TaskDetailAlt, TaskDetailAltSkeleton } from "../TaskDetailAlt";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { TaskDetailWithoutSomeDataStory } from "../TaskDetail/__stories__";
-import { TaskDetailHeaderStory } from "@/components/common/DetailHeader/__stories__";
-import { TaskDetailActionsStory } from "@/components/tasks/TaskDetailActions/__stories__";
+import { taskDetailActionsArgs } from "../TaskDetailActions/__stories__";
 import { withDeleteSubtaskModalProvider } from "@/components/subtasks/DeleteSubtaskModal/__stories__";
 import { withDeleteCommentModalProvider } from "@/components/comments/DeleteCommentModal/__stories__";
 
@@ -28,25 +24,41 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
+const task = mockedTaskDetail;
+
 export const Default = {
   args: {
-    taskDetail: <TaskDetailAlt {...TaskDetailStory.args} />,
-    taskDetailHeader: <DetailHeader {...TaskDetailHeaderStory.args} />,
-    taskDetailActions: <TaskDetailActions {...TaskDetailActionsStory.args} />,
+    taskDetailContainer: <TaskDetailAlt {...taskDetailAltArgs} />,
+    taskDetailHeaderContainer: (
+      <TaskDetailHeader
+        taskTitle={task.title}
+        categoryName={task.category?.name}
+      />
+    ),
+    taskDetailActions: <TaskDetailActions {...taskDetailActionsArgs} />,
   },
 } satisfies Story;
 
 export const Loading = {
   args: {
-    taskDetail: <TaskDetailAltSkeleton />,
-    taskDetailHeader: <DetailHeaderSkeleton />,
-    taskDetailActions: <TaskDetailActions {...TaskDetailActionsStory.args} />,
+    ...Default.args,
+    taskDetailContainer: <TaskDetailAltSkeleton />,
+    taskDetailHeaderContainer: <DetailHeaderSkeleton />,
   },
 } satisfies Story;
 
-export const WithoutSomeData = {
+export const WithoutOptionalTaskData = {
   args: {
-    ...Default.args,
-    taskDetail: <TaskDetailAlt {...TaskDetailWithoutSomeDataStory.args} />,
+    taskDetailContainer: (
+      <TaskDetailAlt
+        id={task.id}
+        project={task.project}
+        deadline={task.deadline}
+        status={task.status}
+        createSubtask={() => ({ status: "success" })}
+      />
+    ),
+    taskDetailHeaderContainer: <TaskDetailHeader taskTitle={task.title} />,
+    taskDetailActions: <TaskDetailActions {...taskDetailActionsArgs} />,
   },
 } satisfies Story;

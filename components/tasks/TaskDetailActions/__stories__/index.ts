@@ -1,1 +1,1 @@
-export { Default as TaskDetailActionsStory } from "./TaskDetailActions.stories";
+export { taskDetailActionsArgs } from "./TaskDetailActions.args";

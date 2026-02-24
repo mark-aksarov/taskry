@@ -13,10 +13,6 @@ import { PositionListStory } from "@/components/position/PositionList/__stories_
 import { withSelectedItemsProvider } from "@/components/common/SelectedItemsContext/__stories__";
 import { withPageTransitionProvider } from "@/components/common/PageTransitionContext/__stories__";
 import { withDeletePositionModalProvider } from "@/components/position/DeletePositionModal/__stories__";
-import { PositionToolbarActionsMenuTrigger } from "@/components/position/PositionToolbarActionsMenuTrigger";
-import { PositionToolbarCreateNewModalTrigger } from "@/components/position/PositionToolbarCreateNewModalTrigger";
-import { PositionToolbarActionsMenuTriggerStory } from "@/components/position/PositionToolbarActionsMenuTrigger/__stories__";
-import { PositionToolbarCreateNewModalTriggerStory } from "@/components/position/PositionToolbarCreateNewModalTrigger/__stories__";
 
 const meta = {
   title: "pages/PositionsPage",
@@ -43,21 +39,12 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-const positionToolbarCreateNewModalTrigger = (
-  <PositionToolbarCreateNewModalTrigger
-    {...PositionToolbarCreateNewModalTriggerStory.args}
-  />
-);
-
 export const Default = {
   args: {
     positionsContainer: <PositionList {...PositionListStory.args} />,
-    positionToolbarCreateNewModalTrigger: positionToolbarCreateNewModalTrigger,
-    positionToolbarActionsMenuTrigger: (
-      <PositionToolbarActionsMenuTrigger
-        {...PositionToolbarActionsMenuTriggerStory.args}
-      />
-    ),
+    guestMode: false,
+    createPosition: () => ({ status: "success" }),
+    deletePositions: () => ({ status: "success" }),
   },
 } satisfies Story;
 
@@ -70,9 +57,8 @@ export const WithNoPositionsPage = {
   args: { ...Default.args },
   render: () => (
     <PositionsPageEmpty
-      positionToolbarCreateNewModalTrigger={
-        positionToolbarCreateNewModalTrigger
-      }
+      guestMode={false}
+      createPosition={() => ({ status: "success" })}
     />
   ),
 } satisfies Story;

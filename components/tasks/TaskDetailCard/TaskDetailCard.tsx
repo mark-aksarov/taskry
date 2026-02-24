@@ -8,14 +8,14 @@ import {
 import { useTranslations } from "next-intl";
 
 interface TaskDetailCardProps {
-  taskDetailHeader: React.ReactNode;
-  taskDetail: React.ReactNode;
+  taskDetailHeaderContainer: React.ReactNode;
+  taskDetailContainer: React.ReactNode;
   taskDetailActions: React.ReactNode;
 }
 
 export function TaskDetailCard({
-  taskDetailHeader,
-  taskDetail,
+  taskDetailHeaderContainer,
+  taskDetailContainer,
   taskDetailActions,
 }: TaskDetailCardProps) {
   const t = useTranslations("tasks.TaskDetailCard");
@@ -26,11 +26,11 @@ export function TaskDetailCard({
         <DetailCardHeader>
           <DetailCardTitle>{t("title")}</DetailCardTitle>
         </DetailCardHeader>
-        <div className="p-6">{taskDetail}</div>
+        <div className="p-6">{taskDetailContainer}</div>
       </DetailCardLeft>
 
       <DetailCardRight>
-        {taskDetailHeader}
+        {taskDetailHeaderContainer}
         {taskDetailActions}
       </DetailCardRight>
     </DetailCard>

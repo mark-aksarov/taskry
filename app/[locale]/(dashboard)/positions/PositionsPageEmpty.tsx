@@ -1,14 +1,25 @@
 import { useTranslations } from "next-intl";
+import { ActionFn, ActionState } from "@/lib/actions/types";
 import { EmptyPageContainer } from "@/components/common/EmptyPageContainer";
+import { PositionToolbarCreateNewModalTrigger } from "@/components/position/PositionToolbarCreateNewModalTrigger";
 
 interface PositionsPageEmptyProps {
-  positionToolbarCreateNewModalTrigger: React.ReactNode;
+  guestMode: boolean;
+  createPosition: ActionFn<ActionState, FormData>;
 }
 
 export function PositionsPageEmpty({
-  positionToolbarCreateNewModalTrigger,
+  guestMode,
+  createPosition,
 }: PositionsPageEmptyProps) {
   const t = useTranslations("app.PositionsPageEmpty");
+
+  const positionToolbarCreateNewModalTrigger = (
+    <PositionToolbarCreateNewModalTrigger
+      guestMode={guestMode}
+      createPosition={createPosition}
+    />
+  );
 
   return (
     <EmptyPageContainer

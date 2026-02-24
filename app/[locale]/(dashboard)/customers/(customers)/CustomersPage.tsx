@@ -8,31 +8,57 @@ import {
 import { useTranslations } from "next-intl";
 import { CustomerSortField } from "@/lib/types";
 import { PageGrid } from "@/components/common/PageGrid";
+import { ActionFn, ActionState } from "@/lib/actions/types";
 import { ViewModeProvider } from "@/components/common/ViewMode";
 import { PageContainer } from "@/components/common/PageContainer";
 import { ViewModeToggleButtonGroup } from "@/components/common/ViewMode";
 import { CustomersFilteredEmptySection } from "@/components/customer/CustomersFilteredEmptySection";
 import { CustomerToolbarManageMenuTrigger } from "@/components/customer/CustomerToolbarManageMenuTrigger";
 import { CustomerToolbarSortingMenuTrigger } from "@/components/customer/CustomerToolbarSortingMenuTrigger";
+import { CustomerToolbarCreateNewMenuTrigger } from "@/components/customer/CustomerToolbarCreateNewMenuTrigger";
+import { CustomerToolbarActionsMenuTrigger } from "@/components/customer/CustomerToolbarActionsMenuTrigger";
+import { CustomerToolbarFiltersModalTrigger } from "@/components/customer/CustomerToolbarFiltersModalTrigger";
 
 interface CustomersPageProps {
+  guestMode: boolean;
   totalFilteredCustomers: number;
-  customerToolbarCreateNewMenuTrigger: React.ReactNode;
-  customerToolbarActionsMenuTrigger: React.ReactNode;
-  customerToolbarFiltersModalTrigger: React.ReactNode;
-  customersContainer: React.ReactNode;
   selectedSortField: CustomerSortField;
+  customersContainer: React.ReactNode;
+  newCustomerFormContainer: React.ReactNode;
+  filtersFormContainer: React.ReactNode;
+  createCompany: ActionFn<ActionState, FormData>;
+  deleteCustomers: ActionFn<ActionState, number[]>;
 }
 
 export function CustomersPage({
+  guestMode,
   totalFilteredCustomers,
-  customerToolbarCreateNewMenuTrigger,
-  customerToolbarActionsMenuTrigger,
-  customerToolbarFiltersModalTrigger,
-  customersContainer,
   selectedSortField,
+  customersContainer,
+  newCustomerFormContainer,
+  filtersFormContainer,
+  createCompany,
+  deleteCustomers,
 }: CustomersPageProps) {
   const t = useTranslations("app.CustomersPage");
+
+  const customerToolbarCreateNewMenuTrigger = (
+    <CustomerToolbarCreateNewMenuTrigger
+      guestMode={guestMode}
+      newCustomerFormContainer={newCustomerFormContainer}
+      createCompany={createCompany}
+    />
+  );
+
+  const customerToolbarActionsMenuTrigger = (
+    <CustomerToolbarActionsMenuTrigger deleteCustomers={deleteCustomers} />
+  );
+
+  const customerToolbarFiltersModalTrigger = (
+    <CustomerToolbarFiltersModalTrigger
+      filtersFormContainer={filtersFormContainer}
+    />
+  );
 
   return (
     <PageContainer

@@ -21,14 +21,19 @@ import Image from "next/image";
 import { Link } from "@/components/ui/Link";
 import { ProjectStatus } from "@/generated/prisma/enums";
 import { useFormatter, useTranslations } from "next-intl";
+import { ProjectDetailModal } from "../ProjectDetailModal";
 import { ProjectItemCheckbox } from "../ProjectItemCheckbox";
 import { UnknownUser } from "@/components/common/UnknownUser";
+import { ProjectCommentsModal } from "../ProjectCommentsModal";
 import { ProjectItemBaseBadge } from "../ProjectItemBaseBadge";
 import { ProjectListItemLayout } from "./ProjectListItemLayout";
 import { useSelectedProjects } from "../SelectedProjectsContext";
 import { SelectableItem } from "@/components/common/SelectableItem";
 import { ImageContainer } from "@/components/common/ImageContainer";
+import { UserDetailModal } from "@/components/users/UserDetailModal";
 import { UpdateProjectStatusProvider } from "../UpdateProjectStatusContext";
+import { ProjectItemActionMenuTrigger } from "../ProjectItemActionMenuTrigger";
+import { CustomerDetailModal } from "@/components/customer/CustomerDetailModal";
 
 export interface ProjectListItemProps {
   id: number;
@@ -55,11 +60,14 @@ export interface ProjectListItemProps {
   commentsCount: number;
   status: ProjectStatus;
   showCheckbox?: boolean;
-  projectCommentsModal: React.ReactNode;
-  menuTrigger: React.ReactNode;
-  projectDetailModal: React.ReactNode;
-  userDetailModal?: React.ReactNode;
-  customerDetailModal?: React.ReactNode;
+  guestMode: boolean;
+  editProjectFormContainer: React.ReactNode;
+  customerDetailContainer?: React.ReactNode;
+  projectCommentsContainer: React.ReactNode;
+  projectDetailContainer: React.ReactNode;
+  userDetailContainer?: React.ReactNode;
+  sendComment: ActionFn<ActionState, FormData>;
+  updateComment: ActionFn<ActionState, FormData>;
   updateProjectStatus: ActionFn<ActionState, UpdateProjectStatusesPayload>;
 }
 
@@ -92,11 +100,14 @@ export const ProjectListItemInner = ({
   status,
   creator,
   showCheckbox,
-  projectCommentsModal,
-  menuTrigger,
-  projectDetailModal,
-  userDetailModal,
-  customerDetailModal,
+  guestMode,
+  editProjectFormContainer,
+  projectDetailContainer,
+  userDetailContainer,
+  customerDetailContainer,
+  projectCommentsContainer,
+  sendComment,
+  updateComment,
 }: Omit<ProjectListItemProps, "updateProjectStatus">) => {
   const t = useTranslations("projects.ProjectListItem");
 
@@ -119,6 +130,13 @@ export const ProjectListItemInner = ({
     <UnknownUser className="h-9 w-9" />
   );
 
+  const userDetailModal = creator && (
+    <UserDetailModal
+      userId={creator.id}
+      userDetailContainer={userDetailContainer}
+    />
+  );
+
   return (
     <ProjectListItemLayout
       id={id}
@@ -130,7 +148,12 @@ export const ProjectListItemInner = ({
           <ListItemTitle data-test="project-list-item-title">
             <ItemBaseDetailModalTrigger
               data-test="project-list-item-title-trigger"
-              modal={projectDetailModal}
+              modal={
+                <ProjectDetailModal
+                  projectId={id}
+                  projectDetailContainer={projectDetailContainer}
+                />
+              }
               className="truncate max-md:hidden"
             >
               {title}
@@ -195,7 +218,12 @@ export const ProjectListItemInner = ({
                 <>
                   <ItemBaseDetailModalTrigger
                     data-test="project-list-item-customer-modal-trigger"
-                    modal={customerDetailModal}
+                    modal={
+                      <CustomerDetailModal
+                        customerId={customer.id}
+                        customerDetailContainer={customerDetailContainer}
+                      />
+                    }
                     className="truncate"
                   >
                     {customer.fullName}
@@ -239,10 +267,25 @@ export const ProjectListItemInner = ({
         <ItemBaseCommentsModalTrigger
           data-test={`project-${id}-comments-modal-trigger`}
           commentsCount={commentsCount}
-          modal={projectCommentsModal}
+          modal={
+            <ProjectCommentsModal
+              projectId={id}
+              projectCommentsContainer={projectCommentsContainer}
+              sendComment={sendComment}
+              updateComment={updateComment}
+            />
+          }
         />
       }
-      menuTriggerSlot={menuTrigger}
+      menuTriggerSlot={
+        <ProjectItemActionMenuTrigger
+          guestMode={guestMode}
+          projectId={id}
+          projectTitle={title}
+          projectStatus={status}
+          editProjectFormContainer={editProjectFormContainer}
+        />
+      }
     />
   );
 };

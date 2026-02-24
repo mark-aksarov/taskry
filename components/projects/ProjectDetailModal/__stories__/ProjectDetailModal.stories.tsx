@@ -1,8 +1,9 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/Button";
 import { DialogTrigger } from "react-aria-components";
+import { mockedProjectDetail } from "@/mocks/projects";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { ProjectDetailModal } from "../ProjectDetailModal";
-import { ProjectDetailStory } from "../../ProjectDetail/__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { ProjectDetail, ProjectDetailSkeleton } from "../../ProjectDetail";
 
@@ -10,12 +11,16 @@ const meta = {
   title: "components/projects/ProjectDetailModal",
   component: ProjectDetailModal,
   decorators: [
-    (Story) => (
-      <DialogTrigger>
-        <Button label="Project detail" />
-        <Story />
-      </DialogTrigger>
-    ),
+    (Story) => {
+      const [isOpen, setIsOpen] = useState(true);
+
+      return (
+        <DialogTrigger isOpen={isOpen} onOpenChange={setIsOpen}>
+          <Button label="Project detail" />
+          <Story />
+        </DialogTrigger>
+      );
+    },
     withThemedBackground,
   ],
 } satisfies Meta<typeof ProjectDetailModal>;
@@ -23,16 +28,32 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
+const project = mockedProjectDetail;
+
 export const Default = {
   args: {
-    projectId: 1,
-    projectDetailContainer: <ProjectDetail {...ProjectDetailStory.args} />,
+    projectId: project.id,
+    projectDetailContainer: <ProjectDetail {...project} />,
   },
 } satisfies Story;
 
-export const WithSkeletonContent = {
+export const WithSkeleton = {
   args: {
-    projectId: 1,
+    projectId: project.id,
     projectDetailContainer: <ProjectDetailSkeleton />,
+  },
+} satisfies Story;
+
+export const WithoutOptionalProjectData = {
+  args: {
+    projectId: project.id,
+    projectDetailContainer: (
+      <ProjectDetail
+        id={project.id}
+        title={project.title}
+        status={project.status}
+        deadline={project.deadline}
+      />
+    ),
   },
 } satisfies Story;

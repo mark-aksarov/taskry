@@ -10,7 +10,7 @@ const meta = {
   component: DeleteTaskCategoryModal,
   decorators: [withToastRegion, withThemedBackground],
   render: (args) => {
-    const [open, setOpen] = useState(false);
+    const [open, setOpen] = useState(true);
 
     return (
       <>

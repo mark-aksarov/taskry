@@ -1,5 +1,5 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/Button";
-import { NewPositionForm } from "../NewPositionForm";
 import { NewPositionModal } from "./NewPositionModal";
 import { DialogTrigger } from "react-aria-components";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
@@ -9,12 +9,16 @@ const meta = {
   title: "components/positions/NewPositionModal",
   component: NewPositionModal,
   decorators: [
-    (Story) => (
-      <DialogTrigger>
-        <Button label="New Position" />
-        <Story />
-      </DialogTrigger>
-    ),
+    (Story) => {
+      const [isOpen, setIsOpen] = useState(true);
+
+      return (
+        <DialogTrigger isOpen={isOpen} onOpenChange={setIsOpen}>
+          <Button label="New Position" />
+          <Story />
+        </DialogTrigger>
+      );
+    },
     withThemedBackground,
   ],
 } satisfies Meta<typeof NewPositionModal>;
@@ -24,8 +28,6 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    newPositionForm: (
-      <NewPositionForm createPosition={() => ({ status: "success" })} />
-    ),
+    createPosition: () => ({ status: "success" }),
   },
 } satisfies Story;

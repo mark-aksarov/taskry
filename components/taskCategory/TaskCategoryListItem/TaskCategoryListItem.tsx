@@ -11,17 +11,21 @@ import { useTranslations } from "next-intl";
 import { SelectableItem } from "@/components/common/SelectableItem";
 import { TaskCategoryItemCheckbox } from "../TaskCategoryItemCheckbox";
 import { useSelectedItems } from "@/components/common/SelectedItemsContext";
+import { TaskCategoryItemActionMenuTrigger } from "../TaskCategoryItemActionMenuTrigger";
+import { ActionFn, ActionState } from "@/lib/actions/types";
 
 interface TaskCategoryListItemProps {
   id: number;
   name: string;
-  menuTrigger: React.ReactNode;
+  guestMode: boolean;
+  updateTaskCategory: ActionFn<ActionState, FormData>;
 }
 
 export function TaskCategoryListItem({
   id,
   name,
-  menuTrigger,
+  guestMode,
+  updateTaskCategory,
 }: TaskCategoryListItemProps) {
   const t = useTranslations("taskCategories.TaskCategoryListItem");
   const selected = useSelectedItems();
@@ -35,7 +39,12 @@ export function TaskCategoryListItem({
           <ListItemText>{t("name")}</ListItemText>
         </ListItemInfo>
 
-        {menuTrigger}
+        <TaskCategoryItemActionMenuTrigger
+          guestMode={guestMode}
+          taskCategoryId={id}
+          taskCategoryName={name}
+          updateTaskCategory={updateTaskCategory}
+        />
       </ListItem>
     </SelectableItem>
   );

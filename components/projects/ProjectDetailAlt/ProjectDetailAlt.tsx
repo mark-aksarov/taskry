@@ -16,7 +16,7 @@ interface ProjectDetailAltProps {
     fullName: string;
     imageUrl?: string;
   };
-  deadline?: string;
+  deadline: string;
   description?: string;
   customer?: {
     id: number;
@@ -44,13 +44,11 @@ export function ProjectDetailAlt({
 
   const format = useFormatter();
 
-  const formattedDeadline = deadline
-    ? format.dateTime(new Date(deadline), {
-        day: "2-digit",
-        month: "short",
-        year: "numeric",
-      })
-    : t("noDeadline");
+  const formattedDeadline = format.dateTime(new Date(deadline), {
+    day: "2-digit",
+    month: "short",
+    year: "numeric",
+  });
 
   return (
     <ProjectDetailAltLayout

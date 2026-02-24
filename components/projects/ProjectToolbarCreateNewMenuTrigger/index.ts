@@ -1,1 +1,0 @@
-export { ProjectToolbarCreateNewMenuTrigger } from "./ProjectToolbarCreateNewMenuTrigger";

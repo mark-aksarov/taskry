@@ -8,29 +8,53 @@ import {
 import { useTranslations } from "next-intl";
 import { UserSortField } from "@/lib/types";
 import { PageGrid } from "@/components/common/PageGrid";
+import { ActionFn, ActionState } from "@/lib/actions/types";
 import { ViewModeProvider } from "@/components/common/ViewMode";
 import { PageContainer } from "@/components/common/PageContainer";
 import { ViewModeToggleButtonGroup } from "@/components/common/ViewMode";
 import { UsersFilteredEmptySection } from "@/components/users/UsersFilteredEmptySection";
 import { UserToolbarManageMenuTrigger } from "@/components/users/UserToolbarManageMenuTrigger";
 import { UserToolbarSortingMenuTrigger } from "@/components/users/UserToolbarSortingMenuTrigger";
+import { UserToolbarCreateNewMenuTrigger } from "@/components/users/UserToolbarCreateNewMenuTrigger";
+import { UserToolbarFiltersModalTrigger } from "@/components/users/UserToolbarFiltersModalTrigger";
 
 interface UsersPageProps {
+  guestMode: boolean;
   totalFilteredUsers: number;
-  userToolbarFiltersModalTrigger: React.ReactNode;
-  userToolbarCreateNewMenuTrigger: React.ReactNode;
-  usersContainer: React.ReactNode;
   selectedSortField: UserSortField;
+  showCreateNewUserMenuItem: boolean;
+  usersContainer: React.ReactNode;
+  filtersFormContainer: React.ReactNode;
+  createUser: ActionFn<ActionState, FormData>;
+  createPosition: ActionFn<ActionState, FormData>;
 }
 
 export function UsersPage({
+  guestMode,
   totalFilteredUsers,
-  userToolbarFiltersModalTrigger,
-  userToolbarCreateNewMenuTrigger,
-  usersContainer,
   selectedSortField,
+  showCreateNewUserMenuItem,
+  usersContainer,
+  filtersFormContainer,
+  createUser,
+  createPosition,
 }: UsersPageProps) {
   const t = useTranslations("app.UsersPage");
+
+  const userToolbarCreateNewMenuTrigger = (
+    <UserToolbarCreateNewMenuTrigger
+      showCreateNewUserMenuItem={showCreateNewUserMenuItem}
+      guestMode={guestMode}
+      createUser={createUser}
+      createPosition={createPosition}
+    />
+  );
+
+  const userToolbarFiltersModalTrigger = (
+    <UserToolbarFiltersModalTrigger
+      filtersFormContainer={filtersFormContainer}
+    />
+  );
 
   return (
     <PageContainer fullscreen={totalFilteredUsers === 0} className="relative">

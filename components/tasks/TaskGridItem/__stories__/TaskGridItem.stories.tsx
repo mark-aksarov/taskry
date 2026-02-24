@@ -1,18 +1,17 @@
+import { TaskDetail } from "../../TaskDetail";
 import { TaskGridItem } from "../TaskGridItem";
+import { mockedTaskList } from "@/mocks/tasks";
+import { mockedUserDetail } from "@/mocks/users";
+import { EditTaskForm } from "../../EditTaskForm";
 import { TaskStatus } from "@/generated/prisma/enums";
-import { TaskDetailModal } from "../../TaskDetailModal";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { TaskCommentsModal } from "../../TaskCommentsModal";
-import { mockedTask } from "../../TaskListItem/__stories__";
-import { UserDetailModal } from "@/components/users/UserDetailModal";
-import { TaskDetailModalStory } from "../../TaskDetailModal/__stories__";
+import { UserDetail } from "@/components/users/UserDetail";
+import { taskDetailArgs } from "../../TaskDetail/__stories__";
+import { editTaskFormArgs } from "../../EditTaskForm/__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { TaskItemActionMenuTrigger } from "../../TaskItemActionMenuTrigger";
-import { TaskCommentsModalStory } from "../../TaskCommentsModal/__stories__";
+import { getCommentList } from "@/components/comments/CommentList/__stories__";
 import { withDeleteTaskModalProvider } from "../../DeleteTaskModal/__stories__";
 import { withSelectedTasksProvider } from "../../SelectedTasksContext/__stories__";
-import { UserDetailModalStory } from "@/components/users/UserDetailModal/__stories__";
-import { TaskItemActionMenuTriggerStory } from "../../TaskItemActionMenuTrigger/__stories__";
 import { withUpdateTaskStatusesProvider } from "../../UpdateTaskStatusContext/__stories__";
 import { withDeleteCommentModalProvider } from "@/components/comments/DeleteCommentModal/__stories__";
 
@@ -31,18 +30,20 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
+const task = mockedTaskList[0];
+
 export const Default = {
   args: {
-    ...mockedTask,
-    taskDetailModal: <TaskDetailModal {...TaskDetailModalStory.args} />,
-    userDetailModal: <UserDetailModal {...UserDetailModalStory.args} />,
-    taskCommentsModal: <TaskCommentsModal {...TaskCommentsModalStory.args} />,
-    menuTrigger: (
-      <TaskItemActionMenuTrigger
-        {...TaskItemActionMenuTriggerStory.args}
-        className="-mr-2"
-      />
-    ),
+    ...task,
+    subtasksTotal: task.subtasks.total,
+    subtasksDone: task.subtasks.done,
+    guestMode: false,
+    taskCommentsContainer: getCommentList(),
+    editTaskFormContainer: <EditTaskForm {...editTaskFormArgs} />,
+    taskDetailContainer: <TaskDetail {...taskDetailArgs} />,
+    userDetailContainer: <UserDetail {...mockedUserDetail} />,
+    sendComment: () => ({ status: "success" }),
+    updateComment: () => ({ status: "success" }),
     updateTaskStatus: () => {
       return new Promise((res) =>
         setTimeout(() => res({ status: "success" }), 500),

@@ -2,7 +2,7 @@ import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { NewTaskForm } from "@/components/tasks/NewTaskForm";
 import { UserTasksEmptySection } from "./UserTasksEmptySection";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { NewTaskFormStory } from "@/components/tasks/NewTaskForm/__stories__";
+import { newTaskFormArgs } from "@/components/tasks/NewTaskForm/__stories__";
 
 const meta = {
   title: "components/users/UserTasksEmptySection",
@@ -19,6 +19,6 @@ export type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    newTaskFormContainer: <NewTaskForm {...NewTaskFormStory.args} />,
+    newTaskFormContainer: <NewTaskForm {...newTaskFormArgs} />,
   },
 } satisfies Story;

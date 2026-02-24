@@ -7,9 +7,8 @@ import {
 
 import { Suspense } from "react";
 import { notFound } from "next/navigation";
-import { useTranslations } from "next-intl";
+import { CustomerDetailHeader } from "./CustomerDetailHeader";
 import { getCustomerDetail } from "@/lib/data/customer/customer.dal";
-import { PersonDetailHeaderImage } from "@/components/common/PersonDetailHeaderImage";
 
 interface CustomerHeaderContainerProps {
   customerId: number;
@@ -26,8 +25,6 @@ export function CustomerHeaderContainer(props: CustomerHeaderContainerProps) {
 async function CustomerHeaderContainerInner({
   customerId,
 }: CustomerHeaderContainerProps) {
-  const t = useTranslations("customers.CustomerHeaderContainer");
-
   const customer = await getCustomerDetail(customerId);
 
   if (!customer) {
@@ -35,15 +32,10 @@ async function CustomerHeaderContainerInner({
   }
 
   return (
-    <DetailHeader
-      title={customer.fullName}
-      image={
-        <PersonDetailHeaderImage
-          alt={customer.fullName}
-          imageUrl={customer.imageUrl}
-        />
-      }
-      subtitle={customer.company ? customer.company.name : t("unknownCompany")}
+    <CustomerDetailHeader
+      fullName={customer.fullName}
+      imageUrl={customer.imageUrl}
+      companyName={customer.company?.name}
     />
   );
 }

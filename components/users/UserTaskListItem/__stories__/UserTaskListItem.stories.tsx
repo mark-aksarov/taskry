@@ -1,17 +1,16 @@
 import { TaskStatus } from "@/generated/prisma/enums";
 import { UserTaskListItem } from "../UserTaskListItem";
 import type { Meta, StoryObj } from "@storybook/react";
-import { TaskDetailModal } from "@/components/tasks/TaskDetailModal";
+import { TaskDetail } from "@/components/tasks/TaskDetail";
+import { EditTaskForm } from "@/components/tasks/EditTaskForm";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { TaskCommentsModal } from "@/components/tasks/TaskCommentsModal";
-import { TaskDetailModalStory } from "@/components/tasks/TaskDetailModal/__stories__";
-import { TaskItemActionMenuTrigger } from "@/components/tasks/TaskItemActionMenuTrigger";
-import { TaskCommentsModalStory } from "@/components/tasks/TaskCommentsModal/__stories__";
+import { taskDetailArgs } from "@/components/tasks/TaskDetail/__stories__";
+import { editTaskFormArgs } from "@/components/tasks/EditTaskForm/__stories__";
+import { getCommentList } from "@/components/comments/CommentList/__stories__";
 import { withDeleteTaskModalProvider } from "@/components/tasks/DeleteTaskModal/__stories__";
 import { withSelectedTasksProvider } from "@/components/tasks/SelectedTasksContext/__stories__";
-import { TaskItemActionMenuTriggerStory } from "@/components/tasks/TaskItemActionMenuTrigger/__stories__";
-import { withUpdateTaskStatusesProvider } from "@/components/tasks/UpdateTaskStatusContext/__stories__";
 import { withDeleteCommentModalProvider } from "@/components/comments/DeleteCommentModal/__stories__";
+import { withUpdateTaskStatusesProvider } from "@/components/tasks/UpdateTaskStatusContext/__stories__";
 
 const meta = {
   title: "components/users/UserTaskListItem",
@@ -23,6 +22,9 @@ const meta = {
     withUpdateTaskStatusesProvider,
     withThemedBackground,
   ],
+  parameters: {
+    backgroundVariant: "alt",
+  },
 } satisfies Meta<typeof UserTaskListItem>;
 
 export default meta;
@@ -35,11 +37,12 @@ export const Default = {
     deadline: "2025-09-30",
     status: TaskStatus.pending,
     commentsCount: 10,
-    taskDetailModal: <TaskDetailModal {...TaskDetailModalStory.args} />,
-    menuTrigger: (
-      <TaskItemActionMenuTrigger {...TaskItemActionMenuTriggerStory.args} />
-    ),
-    taskCommentsModal: <TaskCommentsModal {...TaskCommentsModalStory.args} />,
+    guestMode: false,
+    taskDetailContainer: <TaskDetail {...taskDetailArgs} />,
+    taskCommentsContainer: getCommentList(),
+    editTaskFormContainer: <EditTaskForm {...editTaskFormArgs} />,
+    sendComment: () => ({ status: "success" }),
+    updateComment: () => ({ status: "success" }),
     updateTaskStatus: () => {
       return new Promise((res) =>
         setTimeout(() => res({ status: "success" }), 500),

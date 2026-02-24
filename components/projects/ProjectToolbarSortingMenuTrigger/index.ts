@@ -1,1 +1,0 @@
-export { ProjectToolbarSortingMenuTrigger } from "./ProjectToolbarSortingMenuTrigger";
