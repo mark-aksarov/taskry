@@ -2,7 +2,7 @@ import { ListItem } from "@/components/common/List";
 
 export interface ProjectListItemProps {
   id?: number;
-  checkboxSlot?: React.ReactNode;
+  checkboxSlot: React.ReactNode;
   titleSlot: React.ReactNode;
   categorySlot: React.ReactNode;
   creatorSlot: React.ReactNode;

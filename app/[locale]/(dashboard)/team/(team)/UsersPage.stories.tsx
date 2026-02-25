@@ -55,7 +55,7 @@ export const Default = {
     ),
     usersContainer: (
       <EntityContainerPresentation
-        list={<UserList {...UserListStory.args} showCheckbox />}
+        list={<UserList {...UserListStory.args} />}
         grid={<UserGrid {...UserGridStory.args} />}
         page={1}
         pageSize={3}

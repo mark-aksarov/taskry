@@ -60,7 +60,6 @@ export interface ProjectListItemProps {
   };
   commentsCount: number;
   status: ProjectStatus;
-  showCheckbox?: boolean;
   guestMode: boolean;
   editProjectFormContainer: React.ReactNode;
   customerDetailContainer?: React.ReactNode;
@@ -101,7 +100,6 @@ export const ProjectListItemInner = memo(
     commentsCount,
     status,
     creator,
-    showCheckbox,
     guestMode,
     editProjectFormContainer,
     projectDetailContainer,
@@ -142,9 +140,7 @@ export const ProjectListItemInner = memo(
     return (
       <ProjectListItemLayout
         id={id}
-        checkboxSlot={
-          showCheckbox && <ProjectItemCheckbox id={id} status={status} />
-        }
+        checkboxSlot={<ProjectItemCheckbox id={id} status={status} />}
         titleSlot={
           <ListItemInfo>
             <ListItemTitle data-test="project-list-item-title">

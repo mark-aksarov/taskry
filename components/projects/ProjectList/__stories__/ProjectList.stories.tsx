@@ -21,20 +21,18 @@ const meta = {
     withDeleteProjectModalProvider,
     withThemedBackground,
   ],
-} satisfies Meta<typeof ProjectList & { showCheckbox?: boolean }>;
+} satisfies Meta<typeof ProjectList>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    showCheckbox: true,
     children: mockedProjectList.map((project) => (
       <ProjectListItem
         key={project.id}
         {...ProjectListItemStory.args}
         {...project}
-        showCheckbox={true}
       />
     )),
   },

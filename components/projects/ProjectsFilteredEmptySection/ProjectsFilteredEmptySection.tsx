@@ -19,10 +19,7 @@ export function ProjectsFilteredEmptySection() {
   if (isFilteringPending) {
     return (
       <List data-test="projects-list">
-        <Repeat
-          items={10}
-          renderItem={() => <ProjectListItemSkeleton showCheckbox={true} />}
-        />
+        <Repeat items={10} renderItem={() => <ProjectListItemSkeleton />} />
       </List>
     );
   }

@@ -12,10 +12,10 @@ import { ItemBaseDetailModalTrigger } from "@/components/common/ItemBase";
 import Image from "next/image";
 import { Link } from "@/components/ui/Link";
 import { useTranslations } from "next-intl";
+import { UserDetailModal } from "../UserDetailModal";
 import { UnknownUser } from "@/components/common/UnknownUser";
 import { ImageContainer } from "@/components/common/ImageContainer";
 import { UserItemActionMenuTrigger } from "../UserItemActionMenuTrigger";
-import { UserDetailModal } from "../UserDetailModal";
 
 export interface UserListItemProps {
   id: string;

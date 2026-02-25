@@ -7,11 +7,10 @@ import { UserListItemSkeleton } from "../UserListItem";
 import { useEntityListPending } from "@/lib/hooks/useEntityListPending";
 
 export type UserListProps = {
-  showCheckbox?: boolean;
   children: React.ReactNode;
 };
 
-export function UserList({ showCheckbox, children }: UserListProps) {
+export function UserList({ children }: UserListProps) {
   const isPending = useEntityListPending();
 
   if (isPending) {
@@ -19,9 +18,7 @@ export function UserList({ showCheckbox, children }: UserListProps) {
       <List data-test="users-list">
         <Repeat
           items={Children.count(children)}
-          renderItem={() => (
-            <UserListItemSkeleton showCheckbox={showCheckbox} />
-          )}
+          renderItem={() => <UserListItemSkeleton />}
         />
       </List>
     );

@@ -40,11 +40,10 @@ export async function ProjectsContainer({
         pageSize={pageSize}
         totalPages={Math.ceil(totalCount / pageSize)}
         list={
-          <ProjectList showCheckbox>
+          <ProjectList>
             {projects.map((project) => {
               return (
                 <ProjectListItem
-                  showCheckbox
                   guestMode={guestMode}
                   key={project.id}
                   id={project.id}

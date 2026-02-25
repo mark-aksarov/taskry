@@ -8,14 +8,10 @@ import { ListItemInfoSkeleton } from "@/components/common/List/index";
 import { CheckboxSkeleton } from "@/components/common/CheckboxSkeleton";
 import { ImageContainerSkeleton } from "@/components/common/ImageContainer";
 
-export const ProjectListItemSkeleton = ({
-  showCheckbox,
-}: {
-  showCheckbox?: boolean;
-}) => {
+export const ProjectListItemSkeleton = () => {
   return (
     <ProjectListItemLayout
-      checkboxSlot={showCheckbox && <CheckboxSkeleton />}
+      checkboxSlot={<CheckboxSkeleton />}
       titleSlot={<ListItemInfoSkeleton />}
       creatorSlot={
         <>

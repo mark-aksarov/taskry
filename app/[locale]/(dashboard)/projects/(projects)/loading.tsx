@@ -44,10 +44,7 @@ export default function ProjectsPageLoading() {
         </ToolbarMobileBottom>
 
         <List>
-          <Repeat
-            items={20}
-            renderItem={() => <ProjectListItemSkeleton showCheckbox />}
-          />
+          <Repeat items={20} renderItem={() => <ProjectListItemSkeleton />} />
         </List>
       </PageGrid>
     </PageContainer>

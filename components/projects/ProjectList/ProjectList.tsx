@@ -7,11 +7,10 @@ import { ProjectListItemSkeleton } from "../ProjectListItem";
 import { useEntityListPending } from "@/lib/hooks/useEntityListPending";
 
 interface ProjectListProps {
-  showCheckbox?: boolean;
   children: React.ReactNode;
 }
 
-export function ProjectList({ showCheckbox, children }: ProjectListProps) {
+export function ProjectList({ children }: ProjectListProps) {
   const isPending = useEntityListPending();
 
   if (isPending) {
@@ -19,9 +18,7 @@ export function ProjectList({ showCheckbox, children }: ProjectListProps) {
       <List data-test="projects-list">
         <Repeat
           items={Children.count(children)}
-          renderItem={() => (
-            <ProjectListItemSkeleton showCheckbox={showCheckbox} />
-          )}
+          renderItem={() => <ProjectListItemSkeleton />}
         />
       </List>
     );

@@ -58,13 +58,6 @@ export const WithoutSomeData = {
   },
 } satisfies Story;
 
-export const WithCheckbox = {
-  args: {
-    ...Default.args,
-    showCheckbox: true,
-  },
-} satisfies Story;
-
 export const WithActiveStatus = {
   args: {
     ...Default.args,

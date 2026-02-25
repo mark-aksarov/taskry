@@ -42,10 +42,7 @@ export default function UsersPageLoading() {
         </ToolbarMobileBottom>
 
         <List>
-          <Repeat
-            items={20}
-            renderItem={() => <UserListItemSkeleton showCheckbox />}
-          />
+          <Repeat items={20} renderItem={() => <UserListItemSkeleton />} />
         </List>
       </PageGrid>
     </PageContainer>
