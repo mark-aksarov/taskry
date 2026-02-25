@@ -182,10 +182,10 @@
     "editButtonLabel": "New Task"
   },
   "UserTasksPageEmptyLayout": {
-    "title": "Assigned tasks"
+    "title": "Tasks"
   },
   "UserTasksPageLayout": {
-    "title": "Assigned tasks"
+    "title": "Tasks"
   },
   "UserToolbarFiltersModalTrigger": {
     "title": "User Filters"
