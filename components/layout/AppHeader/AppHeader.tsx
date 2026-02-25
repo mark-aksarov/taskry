@@ -17,12 +17,12 @@ export interface AppHeaderContainerProps {
 
 export interface AppHeaderProps extends AppHeaderContainerProps {
   heading: string;
-  backButton?: boolean;
+  backButtonHref?: string;
 }
 
 export const AppHeader = ({
   heading,
-  backButton,
+  backButtonHref,
   tasksSearchContainer,
   projectsSearchContainer,
   profileLinkContainer,
@@ -42,7 +42,7 @@ export const AppHeader = ({
         <div className="flex items-center gap-8 max-md:hidden">
           {
             <div className="flex flex-none items-center gap-4">
-              {backButton && <BackButton />}
+              {backButtonHref && <BackButton href={backButtonHref} />}
               <AppHeaderHeading>{heading}</AppHeaderHeading>
             </div>
           }

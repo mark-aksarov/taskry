@@ -67,7 +67,7 @@ export function UserTasksPageLoadingLayout({
       <PageContainer className="md:hidden">
         <PageGrid>
           <ToolbarMobileTop>
-            {backButton && <BackButton />}
+            {backButton && <BackButton href="/team" />}
             <ToolbarMobileHeading>{t("title")}</ToolbarMobileHeading>
             <Skeleton className="h-8 w-8 rounded-lg" />
             <Skeleton className="h-8 w-8 rounded-lg" />

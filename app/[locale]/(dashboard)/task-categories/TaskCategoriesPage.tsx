@@ -53,7 +53,7 @@ export function TaskCategoriesPage({
           </ToolbarDesktop>
 
           <ToolbarMobileTop>
-            <BackButton />
+            <BackButton href="/tasks" />
             <ToolbarMobileHeading>{t("heading")}</ToolbarMobileHeading>
             {taskCategoryToolbarActionsMenuTrigger}
           </ToolbarMobileTop>

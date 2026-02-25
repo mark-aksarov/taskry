@@ -53,7 +53,7 @@ export function ProjectCategoriesPage({
           </ToolbarDesktop>
 
           <ToolbarMobileTop>
-            <BackButton />
+            <BackButton href="/projects" />
             <ToolbarMobileHeading>{t("heading")}</ToolbarMobileHeading>
             {projectCategoryToolbarActionsMenuTrigger}
           </ToolbarMobileTop>

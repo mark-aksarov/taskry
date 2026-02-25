@@ -61,7 +61,11 @@ export function TaskDetailPage({
 
   return (
     <>
-      <AppHeader {...appHeaderProps} backButton heading={t("heading")} />
+      <AppHeader
+        {...appHeaderProps}
+        backButtonHref="/tasks"
+        heading={t("heading")}
+      />
       <main>
         <PageContainer>
           <TaskDetailCard
@@ -72,7 +76,7 @@ export function TaskDetailPage({
 
           <PageGrid className="md:hidden">
             <ToolbarMobileTop>
-              <BackButton />
+              <BackButton href="/tasks" />
               <ToolbarMobileHeading>{t("heading")}</ToolbarMobileHeading>
             </ToolbarMobileTop>
 

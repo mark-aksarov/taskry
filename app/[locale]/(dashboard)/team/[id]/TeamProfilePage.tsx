@@ -36,7 +36,7 @@ export function TeamProfilePage({
 
       <PageGrid className="md:hidden">
         <ToolbarMobileTop>
-          <BackButton />
+          <BackButton href="/team" />
           <ToolbarMobileHeading>{t("heading")}</ToolbarMobileHeading>
         </ToolbarMobileTop>
 

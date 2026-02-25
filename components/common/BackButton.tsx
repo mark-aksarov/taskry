@@ -2,14 +2,12 @@
 
 import { ChevronLeft } from "lucide-react";
 import { Button } from "@/components/ui/Button";
-import { useRouter } from "@/i18n/navigation";
 
-export function BackButton() {
-  const router = useRouter();
-
+export function BackButton({ href }: { href: string }) {
   return (
     <Button
-      onClick={router.back}
+      as="a"
+      href={href}
       variant="outlined"
       iconLeft={<ChevronLeft size={16} absoluteStrokeWidth strokeWidth={1.5} />}
     />

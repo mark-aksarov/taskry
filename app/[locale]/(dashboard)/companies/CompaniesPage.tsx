@@ -52,7 +52,7 @@ export function CompaniesPage({
           </ToolbarDesktop>
 
           <ToolbarMobileTop>
-            <BackButton />
+            <BackButton href="/customers" />
             <ToolbarMobileHeading>{t("heading")}</ToolbarMobileHeading>
             {companyToolbarActionsMenuTrigger}
           </ToolbarMobileTop>

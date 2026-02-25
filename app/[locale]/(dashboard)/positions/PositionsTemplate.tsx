@@ -10,7 +10,11 @@ export default function PositionsTemplate({
 
   return (
     <>
-      <AppHeader {...appHeaderProps} backButton heading={t("heading")} />
+      <AppHeader
+        {...appHeaderProps}
+        backButtonHref="/team"
+        heading={t("heading")}
+      />
       <main>{children}</main>
     </>
   );

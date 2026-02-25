@@ -10,7 +10,11 @@ export default function ProjectCategoriesTemplate({
 
   return (
     <>
-      <AppHeader {...appHeaderProps} backButton heading={t("heading")} />
+      <AppHeader
+        {...appHeaderProps}
+        backButtonHref="/projects"
+        heading={t("heading")}
+      />
       <main>{children}</main>
     </>
   );

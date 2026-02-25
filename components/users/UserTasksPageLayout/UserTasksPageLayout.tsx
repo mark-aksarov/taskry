@@ -78,7 +78,7 @@ export function UserTasksPageLayout({
       <PageContainer className="md:hidden">
         <PageGrid>
           <ToolbarMobileTop>
-            {backButton && <BackButton />}
+            {backButton && <BackButton href="/team" />}
             <ToolbarMobileHeading>{t("title")}</ToolbarMobileHeading>
             <TaskToolbarSortingMenuTrigger
               selectedSortField={selectedSortField}

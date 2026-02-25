@@ -10,7 +10,11 @@ export default function CompaniesTemplate({
 
   return (
     <>
-      <AppHeader {...appHeaderProps} backButton heading={t("heading")} />
+      <AppHeader
+        {...appHeaderProps}
+        backButtonHref="/customers"
+        heading={t("heading")}
+      />
       <main>{children}</main>
     </>
   );

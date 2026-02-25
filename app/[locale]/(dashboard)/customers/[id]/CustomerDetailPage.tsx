@@ -32,7 +32,11 @@ export function CustomerDetailPage({
 
   return (
     <>
-      <AppHeader {...appHeaderProps} backButton heading={t("heading")} />
+      <AppHeader
+        {...appHeaderProps}
+        backButtonHref="/customers"
+        heading={t("heading")}
+      />
       <main>
         <PageContainer>
           <CustomerDetailCard
@@ -43,7 +47,7 @@ export function CustomerDetailPage({
 
           <PageGrid className="md:hidden">
             <ToolbarMobileTop>
-              <BackButton />
+              <BackButton href="/customers" />
               <ToolbarMobileHeading>{t("heading")}</ToolbarMobileHeading>
             </ToolbarMobileTop>
 

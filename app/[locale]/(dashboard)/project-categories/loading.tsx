@@ -28,7 +28,7 @@ export default function ProjectCategoriesPageLoading() {
         </ToolbarDesktop>
 
         <ToolbarMobileTop>
-          <BackButton />
+          <BackButton href="/projects" />
           <ToolbarMobileHeading>{t("heading")}</ToolbarMobileHeading>
           <ToolbarMobileTopButtonSkeleton />
         </ToolbarMobileTop>

@@ -28,7 +28,7 @@ export default function PositionsPageLoading() {
         </ToolbarDesktop>
 
         <ToolbarMobileTop>
-          <BackButton />
+          <BackButton href="/team" />
           <ToolbarMobileHeading>{t("heading")}</ToolbarMobileHeading>
           <ToolbarMobileTopButtonSkeleton />
         </ToolbarMobileTop>

@@ -28,7 +28,7 @@ export default function TaskCategoriesPageLoading() {
         </ToolbarDesktop>
 
         <ToolbarMobileTop>
-          <BackButton />
+          <BackButton href="/tasks" />
           <ToolbarMobileHeading>{t("heading")}</ToolbarMobileHeading>
           <ToolbarMobileTopButtonSkeleton />
         </ToolbarMobileTop>

@@ -59,7 +59,7 @@ export function UserTasksPageEmptyLayout({
       <PageContainer fullscreen className="md:hidden">
         <PageGrid className="flex-auto">
           <ToolbarMobileTop>
-            {backButton && <BackButton />}
+            {backButton && <BackButton href="/team" />}
             <ToolbarMobileHeading>{t("title")}</ToolbarMobileHeading>
           </ToolbarMobileTop>
 

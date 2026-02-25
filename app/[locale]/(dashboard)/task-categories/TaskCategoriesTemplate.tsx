@@ -10,7 +10,11 @@ export default function TaskCategoriesTemplate({
 
   return (
     <>
-      <AppHeader {...appHeaderProps} backButton heading={t("heading")} />
+      <AppHeader
+        {...appHeaderProps}
+        backButtonHref="/tasks"
+        heading={t("heading")}
+      />
       <main>{children}</main>
     </>
   );

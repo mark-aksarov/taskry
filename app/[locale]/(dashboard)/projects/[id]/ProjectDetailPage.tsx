@@ -61,7 +61,11 @@ export function ProjectDetailPage({
 
   return (
     <>
-      <AppHeader {...appHeaderProps} backButton heading={t("heading")} />
+      <AppHeader
+        {...appHeaderProps}
+        backButtonHref="/projects"
+        heading={t("heading")}
+      />
       <main>
         <PageContainer>
           <ProjectDetailCard
@@ -72,7 +76,7 @@ export function ProjectDetailPage({
 
           <PageGrid className="md:hidden">
             <ToolbarMobileTop>
-              <BackButton />
+              <BackButton href="/projects" />
               <ToolbarMobileHeading>{t("heading")}</ToolbarMobileHeading>
             </ToolbarMobileTop>
 

@@ -28,7 +28,7 @@ export default function CompaniesPageLoading() {
         </ToolbarDesktop>
 
         <ToolbarMobileTop>
-          <BackButton />
+          <BackButton href="/customers" />
           <ToolbarMobileHeading>{t("heading")}</ToolbarMobileHeading>
           <ToolbarMobileTopButtonSkeleton />
         </ToolbarMobileTop>

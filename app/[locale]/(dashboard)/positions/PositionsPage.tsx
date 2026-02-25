@@ -53,7 +53,7 @@ export function PositionsPage({
           </ToolbarDesktop>
 
           <ToolbarMobileTop>
-            <BackButton />
+            <BackButton href="/team" />
             <ToolbarMobileHeading>{t("heading")}</ToolbarMobileHeading>
             {positionToolbarActionsMenuTrigger}
           </ToolbarMobileTop>
