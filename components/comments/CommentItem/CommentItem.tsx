@@ -54,7 +54,12 @@ export function CommentItem({
           {sender?.imageUrl ? (
             <Link href={`/team/${sender.id}`}>
               <ImageContainer className="h-9 w-9">
-                <Image src={sender.imageUrl} alt={sender.fullName} fill />
+                <Image
+                  src={sender.imageUrl}
+                  alt={sender.fullName}
+                  width={36}
+                  height={36}
+                />
               </ImageContainer>
             </Link>
           ) : (

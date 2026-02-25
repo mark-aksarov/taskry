@@ -60,7 +60,12 @@ export function ProjectDetail({
 
   const creatorImg = creator?.imageUrl ? (
     <ImageContainer className="h-9 w-9">
-      <Image fill src={creator.imageUrl} alt={creator.fullName} />
+      <Image
+        src={creator.imageUrl}
+        alt={creator.fullName}
+        width={36}
+        height={36}
+      />
     </ImageContainer>
   ) : (
     <UnknownUser className="h-9 w-9" />

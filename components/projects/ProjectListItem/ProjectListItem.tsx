@@ -124,7 +124,12 @@ export const ProjectListItemInner = memo(
 
     const creatorImg = creator?.imageUrl ? (
       <ImageContainer className="h-9 w-9">
-        <Image fill src={creator.imageUrl} alt={creator.fullName} />
+        <Image
+          src={creator.imageUrl}
+          alt={creator.fullName}
+          width={36}
+          height={36}
+        />
       </ImageContainer>
     ) : (
       <UnknownUser className="h-9 w-9" />
@@ -207,7 +212,12 @@ export const ProjectListItemInner = memo(
           <>
             {customer?.imageUrl ? (
               <ImageContainer className="h-9 w-9 max-md:hidden">
-                <Image fill src={customer.imageUrl} alt={customer.fullName} />
+                <Image
+                  src={customer.imageUrl}
+                  alt={customer.fullName}
+                  width={36}
+                  height={36}
+                />
               </ImageContainer>
             ) : (
               <UnknownUser className="h-9 w-9 max-md:hidden" />

@@ -52,7 +52,7 @@ export function UserListItem({
 
   const userImg = imageUrl ? (
     <ImageContainer className="h-9 w-9">
-      <Image fill src={imageUrl} alt={fullName} />
+      <Image src={imageUrl} alt={fullName} width={36} height={36} />
     </ImageContainer>
   ) : (
     <UnknownUser className="h-9 w-9" />

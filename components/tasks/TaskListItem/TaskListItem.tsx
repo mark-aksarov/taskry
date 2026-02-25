@@ -128,7 +128,12 @@ export const TaskListItemInner = memo(
 
     const assigneeImg = assignee?.imageUrl ? (
       <ImageContainer className="h-9 w-9">
-        <Image fill src={assignee.imageUrl} alt={assignee.fullName} />
+        <Image
+          src={assignee.imageUrl}
+          alt={assignee.fullName}
+          width={36}
+          height={36}
+        />
       </ImageContainer>
     ) : (
       <UnknownUser className="h-9 w-9" />

@@ -20,7 +20,7 @@ interface ProfileLinkProps {
 export const ProfileLink = ({ fullName, imageUrl }: ProfileLinkProps) => {
   const profileImg = imageUrl ? (
     <ImageContainer className="h-8 w-8">
-      <Image fill src={imageUrl} alt="profile image" />
+      <Image src={imageUrl} alt="profile image" width={32} height={32} />
     </ImageContainer>
   ) : (
     <UnknownUser className="h-8 w-8" />

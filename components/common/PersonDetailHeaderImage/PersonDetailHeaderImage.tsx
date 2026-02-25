@@ -17,7 +17,7 @@ export function PersonDetailHeaderImage({
 
   return (
     <ImageContainer className="h-21 w-21">
-      <Image fill src={imageUrl} alt={alt ?? ""} />
+      <Image src={imageUrl} alt={alt ?? ""} width={84} height={84} />
     </ImageContainer>
   );
 }

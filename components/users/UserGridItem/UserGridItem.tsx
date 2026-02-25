@@ -59,7 +59,7 @@ export function UserGridItem({
 
   const userImg = imageUrl ? (
     <ImageContainer className="h-20 w-20">
-      <Image fill src={imageUrl} alt={fullName} />
+      <Image src={imageUrl} alt={fullName} width={80} height={80} />
     </ImageContainer>
   ) : (
     <UnknownUser className="h-20 w-20" iconSize={48} />
