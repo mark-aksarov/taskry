@@ -11,10 +11,12 @@ import {
 
 import { ProjectGridItemLayout } from "./ProjectGridItemLayout";
 import { ImageContainerSkeleton } from "@/components/common/ImageContainer";
+import { CheckboxSkeleton } from "@/components/common/CheckboxSkeleton";
 
 export function ProjectGridItemSkeleton() {
   return (
     <ProjectGridItemLayout
+      checkboxSlot={<CheckboxSkeleton />}
       menuTriggerSlot={
         <ItemBaseActionMenuTriggerSkeleton className="-mr-2 ml-auto" />
       }

@@ -4,25 +4,21 @@ import { Children } from "react";
 import { List } from "@/components/common/List";
 import { Repeat } from "@/components/common/Repeat";
 import { TaskListItemSkeleton } from "../TaskListItem";
-import { usePageTransition } from "@/components/common/PageTransitionContext";
+import { useEntityListPending } from "@/lib/hooks/useEntityListPending";
 
 interface TaskListProps {
-  showCheckbox?: boolean;
   children: React.ReactNode;
 }
 
-export function TaskList({ showCheckbox, children }: TaskListProps) {
-  const { isFilteringPending, isSortingPending, isPaginationPending } =
-    usePageTransition();
+export function TaskList({ children }: TaskListProps) {
+  const isPending = useEntityListPending();
 
-  if (isPaginationPending || isFilteringPending || isSortingPending) {
+  if (isPending) {
     return (
       <List data-test="tasks-list">
         <Repeat
           items={Children.count(children)}
-          renderItem={() => (
-            <TaskListItemSkeleton showCheckbox={showCheckbox} />
-          )}
+          renderItem={() => <TaskListItemSkeleton showCheckbox={true} />}
         />
       </List>
     );

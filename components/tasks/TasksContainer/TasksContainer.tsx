@@ -49,7 +49,7 @@ export async function TasksContainer({
     <DeleteTaskModalProvider deleteEntity={deleteTasks}>
       <EntityContainerPresentation
         list={
-          <TaskList showCheckbox>
+          <TaskList>
             {tasks.map((task) => {
               return (
                 <TaskListItem

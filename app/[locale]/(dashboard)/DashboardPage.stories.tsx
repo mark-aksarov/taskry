@@ -25,18 +25,19 @@ import {
 } from "@/components/tasks/AssignedTasks";
 
 import { fn, mocked } from "storybook/test";
+import { mockedTaskList } from "@/mocks/tasks";
 import { DashboardPage } from "./DashboardPage";
-import { TaskList } from "@/components/tasks/TaskList";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { usePathname, useRouter } from "next/navigation";
 import { PageDecorator } from "@/.storybook/PageDecorator";
 import { NewTaskForm } from "@/components/tasks/NewTaskForm";
+import { AssignedTaskList } from "@/components/tasks/AssignedTaskList";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { AppHeaderStory } from "@/components/layout/AppHeader/__stories__";
-import { getTaskListItems } from "@/components/tasks/TaskList/__stories__";
 import { newTaskFormArgs } from "@/components/tasks/NewTaskForm/__stories__";
+import { AssignedTaskListItem } from "@/components/tasks/AssignedTaskListItem";
+import { TaskListItemStory } from "@/components/tasks/TaskListItem/__stories__";
 import { withDeleteTaskModalProvider } from "@/components/tasks/DeleteTaskModal/__stories__";
-import { withSelectedTasksProvider } from "@/components/tasks/SelectedTasksContext/__stories__";
 import { withPageTransitionProvider } from "@/components/common/PageTransitionContext/__stories__";
 import { withDeleteSubtaskModalProvider } from "@/components/subtasks/DeleteSubtaskModal/__stories__";
 import { withDeleteCommentModalProvider } from "@/components/comments/DeleteCommentModal/__stories__";
@@ -49,7 +50,6 @@ const meta = {
   decorators: [
     withDeleteTaskModalProvider,
     withPageTransitionProvider,
-    withSelectedTasksProvider,
     withDeleteSubtaskModalProvider,
     withDeleteCommentModalProvider,
     withUpdateTaskStatusesProvider,
@@ -70,10 +70,15 @@ const AssignedTasksContainer = () => (
     page={1}
     pageSize={5}
     list={
-      <TaskList
-        showCheckbox={false}
-        children={getTaskListItems({ showCheckbox: false })}
-      />
+      <AssignedTaskList>
+        {mockedTaskList.map((task) => (
+          <AssignedTaskListItem
+            key={task.id}
+            {...TaskListItemStory.args}
+            {...task}
+          />
+        ))}
+      </AssignedTaskList>
     }
     totalPages={3}
   />

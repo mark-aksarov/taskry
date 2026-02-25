@@ -16,11 +16,6 @@ export function ProjectFiltersFormStatusCheckboxGroup() {
   const filters = useProjectFilters();
   const dispatch = useProjectFiltersDispatch();
 
-  console.log(
-    "ProjectFiltersFormStatusCheckboxGroup - filters.status:",
-    filters.status,
-  );
-
   return (
     <CheckboxGroup
       name="status"

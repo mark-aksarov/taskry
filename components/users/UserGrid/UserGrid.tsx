@@ -3,14 +3,13 @@
 import { Children } from "react";
 import { Repeat } from "@/components/common/Repeat";
 import { Grid } from "@/components/common/Grid/Grid";
-import { UserGridItemSkeleton } from "../UserGridItem/UserGridItemSkeleton";
-import { usePageTransition } from "@/components/common/PageTransitionContext";
+import { UserGridItemSkeleton } from "../UserGridItem";
+import { useEntityListPending } from "@/lib/hooks/useEntityListPending";
 
 export function UserGrid({ children }: { children: React.ReactNode }) {
-  const { isFilteringPending, isSortingPending, isPaginationPending } =
-    usePageTransition();
+  const isPending = useEntityListPending();
 
-  if (isPaginationPending || isFilteringPending || isSortingPending) {
+  if (isPending) {
     return (
       <Grid data-test="users-grid">
         <Repeat

@@ -7,15 +7,13 @@ import {
 } from "../AssignedTasks";
 
 import { Suspense } from "react";
-import { auth } from "@/lib/auth";
-import { headers } from "next/headers";
-import { TaskList } from "../TaskList";
-import { TaskListItem } from "../TaskListItem";
+import { AssignedTaskList } from "../AssignedTaskList";
 import { hasGuestRole } from "@/lib/utils/hasGuestRole";
 import { TaskListItemDTO } from "@/lib/data/task/task.dto";
 import { deleteTasks } from "@/lib/actions/task/deleteTasks";
 import { DeleteTaskModalProvider } from "../DeleteTaskModal";
 import { TaskDetailContainer } from "../TaskDetailContainer";
+import { AssignedTaskListItem } from "../AssignedTaskListItem";
 import { NewTaskFormContainer } from "../NewTaskFormContainer";
 import { sendComment } from "@/lib/actions/comment/sendComment";
 import { EditTaskFormContainer } from "../EditTaskFormContainer";
@@ -46,10 +44,6 @@ async function AssignedTasksContainerInner({
   page,
   pageSize,
 }: AssignedTasksContainerProps) {
-  const session = await auth.api.getSession({
-    headers: await headers(),
-  });
-
   const guestMode = await hasGuestRole();
 
   if (!totalCount) {
@@ -67,9 +61,9 @@ async function AssignedTasksContainerInner({
         pageSize={pageSize}
         totalPages={Math.ceil(totalCount / pageSize)}
         list={
-          <TaskList>
+          <AssignedTaskList>
             {tasks.map((task) => (
-              <TaskListItem
+              <AssignedTaskListItem
                 guestMode={guestMode}
                 key={task.id}
                 id={task.id}
@@ -105,7 +99,7 @@ async function AssignedTasksContainerInner({
                 }
               />
             ))}
-          </TaskList>
+          </AssignedTaskList>
         }
       />
     </DeleteTaskModalProvider>

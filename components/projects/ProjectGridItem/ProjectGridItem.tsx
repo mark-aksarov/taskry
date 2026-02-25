@@ -18,6 +18,7 @@ import {
   ItemBaseCommentsModalTrigger,
 } from "@/components/common/ItemBase";
 
+import { memo } from "react";
 import Image from "next/image";
 import { Link } from "@/components/ui/Link";
 import { ProjectStatus } from "@/generated/prisma/enums";
@@ -76,125 +77,130 @@ export const ProjectGridItem = ({
   );
 };
 
-export function ProjectGridItemInner({
-  guestMode,
-  id,
-  title,
-  deadline,
-  creator,
-  commentsCount,
-  status,
-  tasksTotal,
-  tasksCompleted,
-  projectCommentsContainer,
-  editProjectFormContainer,
-  projectDetailContainer,
-  userDetailContainer,
-  sendComment,
-  updateComment,
-}: Omit<ProjectGridItemProps, "updateProjectStatus">) {
-  const t = useTranslations("projects.ProjectGridItem");
+export const ProjectGridItemInner = memo(
+  ({
+    guestMode,
+    id,
+    title,
+    deadline,
+    creator,
+    commentsCount,
+    status,
+    tasksTotal,
+    tasksCompleted,
+    projectCommentsContainer,
+    editProjectFormContainer,
+    projectDetailContainer,
+    userDetailContainer,
+    sendComment,
+    updateComment,
+  }: Omit<ProjectGridItemProps, "updateProjectStatus">) => {
+    const t = useTranslations("projects.ProjectGridItem");
 
-  // use useFormatter to format the date according to the user's locale
-  const format = useFormatter();
+    // use useFormatter to format the date according to the user's locale
+    const format = useFormatter();
 
-  const deadlineOn = t("deadlineOn", {
-    date: format.dateTime(new Date(deadline), {
-      day: "2-digit",
-      month: "short",
-      year: "numeric",
-    }),
-  });
+    const deadlineOn = t("deadlineOn", {
+      date: format.dateTime(new Date(deadline), {
+        day: "2-digit",
+        month: "short",
+        year: "numeric",
+      }),
+    });
 
-  const creatorImg = creator?.imageUrl ? (
-    <ImageContainer className="h-9 w-9">
-      <Image fill src={creator.imageUrl} alt={creator.fullName} />
-    </ImageContainer>
-  ) : (
-    <UnknownUser className="h-9 w-9" />
-  );
+    const creatorImg = creator?.imageUrl ? (
+      <ImageContainer className="h-9 w-9">
+        <Image fill src={creator.imageUrl} alt={creator.fullName} />
+      </ImageContainer>
+    ) : (
+      <UnknownUser className="h-9 w-9" />
+    );
 
-  return (
-    <ProjectGridItemLayout
-      checkboxSlot={<ProjectItemCheckbox id={id} status={status} />}
-      menuTriggerSlot={
-        <ProjectItemActionMenuTrigger
-          guestMode={guestMode}
-          projectId={id}
-          projectTitle={title}
-          projectStatus={status}
-          editProjectFormContainer={editProjectFormContainer}
-          className="-mr-2"
-        />
-      }
-      titleSlot={
-        <GridItemInfo className="flex-auto">
-          <GridItemTitle>
-            <ItemBaseDetailModalTrigger
-              modal={
-                <ProjectDetailModal
-                  projectId={id}
-                  projectDetailContainer={projectDetailContainer}
-                />
-              }
-              className="truncate max-md:hidden"
-            >
-              {title}
-            </ItemBaseDetailModalTrigger>
+    return (
+      <ProjectGridItemLayout
+        checkboxSlot={<ProjectItemCheckbox id={id} status={status} />}
+        menuTriggerSlot={
+          <ProjectItemActionMenuTrigger
+            guestMode={guestMode}
+            projectId={id}
+            projectTitle={title}
+            projectStatus={status}
+            editProjectFormContainer={editProjectFormContainer}
+            className="-mr-2"
+          />
+        }
+        titleSlot={
+          <GridItemInfo className="flex-auto">
+            <GridItemTitle>
+              <ItemBaseDetailModalTrigger
+                modal={
+                  <ProjectDetailModal
+                    projectId={id}
+                    projectDetailContainer={projectDetailContainer}
+                  />
+                }
+                className="truncate max-md:hidden"
+              >
+                {title}
+              </ItemBaseDetailModalTrigger>
 
-            <Link className="block truncate md:hidden" href={`/projects/${id}`}>
-              {title}
-            </Link>
-          </GridItemTitle>
+              <Link
+                className="block truncate md:hidden"
+                href={`/projects/${id}`}
+              >
+                {title}
+              </Link>
+            </GridItemTitle>
 
-          <GridItemText>{deadlineOn}</GridItemText>
-        </GridItemInfo>
-      }
-      creatorImageSlot={
-        creator ? (
-          <>
-            <ItemBaseDetailModalTrigger
-              className="max-md:hidden"
-              modal={
-                <UserDetailModal
-                  userId={creator.id}
-                  userDetailContainer={userDetailContainer}
-                />
-              }
-            >
-              {creatorImg}
-            </ItemBaseDetailModalTrigger>
+            <GridItemText>{deadlineOn}</GridItemText>
+          </GridItemInfo>
+        }
+        creatorImageSlot={
+          creator ? (
+            <>
+              <ItemBaseDetailModalTrigger
+                className="max-md:hidden"
+                modal={
+                  <UserDetailModal
+                    userId={creator.id}
+                    userDetailContainer={userDetailContainer}
+                  />
+                }
+              >
+                {creatorImg}
+              </ItemBaseDetailModalTrigger>
 
-            <Link className="md:hidden" href={`/team/${creator.id}`}>
-              {creatorImg}
-            </Link>
-          </>
-        ) : (
-          <UnknownUser className="h-9 w-9" />
-        )
-      }
-      commentsSlot={
-        <ItemBaseCommentsModalTrigger
-          data-test={`project-${id}-comments-modal-trigger`}
-          commentsCount={commentsCount}
-          modal={
-            <ProjectCommentsModal
-              projectId={id}
-              projectCommentsContainer={projectCommentsContainer}
-              sendComment={sendComment}
-              updateComment={updateComment}
-            />
-          }
-        />
-      }
-      statusSlot={<ProjectItemBaseBadge projectId={id} status={status} />}
-      progressSlot={
-        <GridItemProgress
-          value={(tasksCompleted / tasksTotal) * 100}
-          showValueText={false}
-          aria-label={t("progressAriaLabel")}
-        />
-      }
-    />
-  );
-}
+              <Link className="md:hidden" href={`/team/${creator.id}`}>
+                {creatorImg}
+              </Link>
+            </>
+          ) : (
+            <UnknownUser className="h-9 w-9" />
+          )
+        }
+        commentsSlot={
+          <ItemBaseCommentsModalTrigger
+            data-test={`project-${id}-comments-modal-trigger`}
+            commentsCount={commentsCount}
+            modal={
+              <ProjectCommentsModal
+                projectId={id}
+                projectCommentsContainer={projectCommentsContainer}
+                sendComment={sendComment}
+                updateComment={updateComment}
+              />
+            }
+          />
+        }
+        statusSlot={<ProjectItemBaseBadge projectId={id} status={status} />}
+        progressSlot={
+          <GridItemProgress
+            value={(tasksCompleted / tasksTotal) * 100}
+            showValueText={false}
+            aria-label={t("progressAriaLabel")}
+          />
+        }
+      />
+    );
+  },
+);

@@ -8,30 +8,27 @@ import { useTranslations } from "next-intl";
 import { TaskStatus } from "@/generated/prisma/enums";
 import { ItemBaseBadge } from "@/components/common/ItemBase";
 import { getTaskStatusBadgeColor } from "../getTaskStatusBadgeColor";
-import { useSelectedTasks } from "../SelectedTasksContext";
 
 interface TaskItemBaseBadgeProps {
-  taskId: number;
   className?: string;
   status: TaskStatus;
+  isSelected?: boolean;
 }
 
 export function TaskItemBaseBadge({
-  taskId,
   className,
   status,
+  isSelected,
 }: TaskItemBaseBadgeProps) {
   const t = useTranslations("tasks.TaskStatus");
 
+  // Show loader when updating task status
   const { isPending: isUpdateTaskStatusPending } = useUpdateTaskStatusContext();
   const { isPending: isUpdateTaskStatusesPending } =
     useUpdateTaskStatusesContext();
 
-  const selected = useSelectedTasks();
-
   const isPending =
-    isUpdateTaskStatusPending ||
-    (isUpdateTaskStatusesPending && !!selected.get(taskId));
+    isUpdateTaskStatusPending || (isUpdateTaskStatusesPending && isSelected);
 
   return (
     <ItemBaseBadge

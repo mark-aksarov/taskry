@@ -29,6 +29,7 @@ import { UpdateTaskStatusProvider } from "@/components/tasks/UpdateTaskStatusCon
 import { TaskDetailModal } from "@/components/tasks/TaskDetailModal";
 import { TaskCommentsModal } from "@/components/tasks/TaskCommentsModal";
 import { TaskItemActionMenuTrigger } from "@/components/tasks/TaskItemActionMenuTrigger";
+import { memo } from "react";
 
 export interface UserTaskListItemProps {
   id: number;
@@ -63,86 +64,88 @@ export const UserTaskListItem = ({
   );
 };
 
-export const UserTaskListItemInner = ({
-  id,
-  title,
-  deadline,
-  status,
-  commentsCount,
-  guestMode,
-  taskDetailContainer,
-  taskCommentsContainer,
-  editTaskFormContainer,
-  sendComment,
-  updateComment,
-}: Omit<UserTaskListItemProps, "updateTaskStatus">) => {
-  const t = useTranslations("users.UserTaskListItem");
+export const UserTaskListItemInner = memo(
+  ({
+    id,
+    title,
+    deadline,
+    status,
+    commentsCount,
+    guestMode,
+    taskDetailContainer,
+    taskCommentsContainer,
+    editTaskFormContainer,
+    sendComment,
+    updateComment,
+  }: Omit<UserTaskListItemProps, "updateTaskStatus">) => {
+    const t = useTranslations("users.UserTaskListItem");
 
-  // use useFormatter to format the date according to the user's locale
-  const format = useFormatter();
+    // use useFormatter to format the date according to the user's locale
+    const format = useFormatter();
 
-  const deadlineOn = t("deadlineOn", {
-    date: format.dateTime(new Date(deadline), {
-      day: "2-digit",
-      month: "short",
-      year: "numeric",
-    }),
-  });
+    const deadlineOn = t("deadlineOn", {
+      date: format.dateTime(new Date(deadline), {
+        day: "2-digit",
+        month: "short",
+        year: "numeric",
+      }),
+    });
 
-  return (
-    <UserTaskListItemLayout
-      checkboxSlot={<TaskItemCheckbox id={id} status={status} />}
-      deadlineSlot={
-        <ListItemInfo>
-          <ListItemTitle>
-            <ItemBaseDetailModalTrigger
-              modal={
-                <TaskDetailModal
-                  taskId={id}
-                  taskDetailContainer={taskDetailContainer}
-                />
-              }
-              className="truncate max-md:hidden"
-            >
-              {title}
-            </ItemBaseDetailModalTrigger>
+    return (
+      <UserTaskListItemLayout
+        checkboxSlot={<TaskItemCheckbox id={id} status={status} />}
+        deadlineSlot={
+          <ListItemInfo>
+            <ListItemTitle>
+              <ItemBaseDetailModalTrigger
+                modal={
+                  <TaskDetailModal
+                    taskId={id}
+                    taskDetailContainer={taskDetailContainer}
+                  />
+                }
+                className="truncate max-md:hidden"
+              >
+                {title}
+              </ItemBaseDetailModalTrigger>
 
-            <Link className="block truncate md:hidden" href={`/tasks/${id}`}>
-              {title}
-            </Link>
-          </ListItemTitle>
-          <ListItemText>{deadlineOn}</ListItemText>
-        </ListItemInfo>
-      }
-      statusSlot={
-        <TaskItemBaseBadge
-          taskId={id}
-          status={status}
-          className="@max-lg:hidden"
-        />
-      }
-      commentsSlot={
-        <ItemBaseCommentsModalTrigger
-          commentsCount={commentsCount}
-          modal={
-            <TaskCommentsModal
-              taskId={id}
-              taskCommentsContainer={taskCommentsContainer}
-              sendComment={sendComment}
-              updateComment={updateComment}
-            />
-          }
-        />
-      }
-      actionMenuSlot={
-        <TaskItemActionMenuTrigger
-          guestMode={guestMode}
-          taskId={id}
-          taskTitle={title}
-          taskStatus={status}
-          editTaskFormContainer={editTaskFormContainer}
-        />
-      }
-    />
-  );
-};
+              <Link className="block truncate md:hidden" href={`/tasks/${id}`}>
+                {title}
+              </Link>
+            </ListItemTitle>
+            <ListItemText>{deadlineOn}</ListItemText>
+          </ListItemInfo>
+        }
+        statusSlot={
+          <TaskItemBaseBadge
+            taskId={id}
+            status={status}
+            className="@max-lg:hidden"
+          />
+        }
+        commentsSlot={
+          <ItemBaseCommentsModalTrigger
+            commentsCount={commentsCount}
+            modal={
+              <TaskCommentsModal
+                taskId={id}
+                taskCommentsContainer={taskCommentsContainer}
+                sendComment={sendComment}
+                updateComment={updateComment}
+              />
+            }
+          />
+        }
+        actionMenuSlot={
+          <TaskItemActionMenuTrigger
+            guestMode={guestMode}
+            taskId={id}
+            taskTitle={title}
+            taskStatus={status}
+            editTaskFormContainer={editTaskFormContainer}
+          />
+        }
+      />
+    );
+  },
+);

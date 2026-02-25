@@ -4,17 +4,16 @@ import { Children } from "react";
 import { List } from "@/components/common/List";
 import { Repeat } from "@/components/common/Repeat";
 import { CustomerListItemSkeleton } from "../CustomerListItem";
-import { usePageTransition } from "@/components/common/PageTransitionContext";
+import { useEntityListPending } from "@/lib/hooks/useEntityListPending";
 
 export type CustomerListProps = {
   children: React.ReactNode;
 };
 
 export function CustomerList({ children }: CustomerListProps) {
-  const { isFilteringPending, isSortingPending, isPaginationPending } =
-    usePageTransition();
+  const isPending = useEntityListPending();
 
-  if (isPaginationPending || isFilteringPending || isSortingPending) {
+  if (isPending) {
     return (
       <List data-test="customers-list">
         <Repeat

@@ -4,6 +4,7 @@ import {
   createContext,
   useContext,
   useMemo,
+  useOptimistic,
   useState,
   useTransition,
 } from "react";
@@ -11,11 +12,12 @@ import {
 export type ViewMode = "list" | "grid";
 
 interface ViewModeContextType {
+  isPending: boolean;
   viewMode: ViewMode;
-  setViewMode: (mode: ViewMode) => void;
+  changeViewMode: (mode: ViewMode) => void;
 }
 
-const ViewModeContext = createContext<ViewModeContextType | null>(null);
+export const ViewModeContext = createContext<ViewModeContextType | null>(null);
 
 export function ViewModeProvider({
   initialValue = "list",
@@ -25,21 +27,23 @@ export function ViewModeProvider({
   children: React.ReactNode;
 }) {
   const [viewMode, setViewModeState] = useState<ViewMode>(initialValue);
+  const [optimisticViewMode, setOptimisticViewMode] = useOptimistic(viewMode);
   const [isPending, startTransition] = useTransition();
 
-  const setViewMode = (mode: ViewMode) => {
+  const changeViewMode = (mode: ViewMode) => {
     startTransition(() => {
+      setOptimisticViewMode(mode);
       setViewModeState(mode);
     });
   };
 
   const contextValue = useMemo(
     () => ({
-      viewMode,
-      setViewMode,
+      viewMode: optimisticViewMode,
+      changeViewMode,
       isPending,
     }),
-    [viewMode, isPending],
+    [optimisticViewMode, isPending],
   );
 
   return (

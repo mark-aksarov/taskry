@@ -5,16 +5,16 @@ import {
   ToggleButtonGroup,
 } from "@/components/ui/ToggleButtonGroup";
 
+import { twMerge } from "tailwind-merge";
 import { useTranslations } from "next-intl";
 import { useViewMode, ViewMode } from "./ViewModeContext";
-import { twMerge } from "tailwind-merge";
 
 export const ViewModeToggleButtonGroup = ({
   className,
 }: {
   className?: string;
 }) => {
-  const { viewMode, setViewMode } = useViewMode();
+  const { viewMode, changeViewMode } = useViewMode();
   const t = useTranslations("common.ViewModeToggleButtonGroup");
 
   return (
@@ -26,7 +26,7 @@ export const ViewModeToggleButtonGroup = ({
       disallowEmptySelection
       onSelectionChange={(keys) => {
         const [key] = Array.from(keys);
-        setViewMode(key as ViewMode);
+        changeViewMode(key as ViewMode);
       }}
     >
       <ToggleButton id="list">{t("list")}</ToggleButton>

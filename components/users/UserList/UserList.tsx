@@ -4,7 +4,7 @@ import { Children } from "react";
 import { List } from "@/components/common/List";
 import { Repeat } from "@/components/common/Repeat";
 import { UserListItemSkeleton } from "../UserListItem";
-import { usePageTransition } from "@/components/common/PageTransitionContext";
+import { useEntityListPending } from "@/lib/hooks/useEntityListPending";
 
 export type UserListProps = {
   showCheckbox?: boolean;
@@ -12,10 +12,9 @@ export type UserListProps = {
 };
 
 export function UserList({ showCheckbox, children }: UserListProps) {
-  const { isFilteringPending, isSortingPending, isPaginationPending } =
-    usePageTransition();
+  const isPending = useEntityListPending();
 
-  if (isPaginationPending || isFilteringPending || isSortingPending) {
+  if (isPending) {
     return (
       <List data-test="users-list">
         <Repeat

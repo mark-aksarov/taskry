@@ -17,6 +17,7 @@ import {
   ItemBaseCommentsModalTrigger,
 } from "@/components/common/ItemBase";
 
+import { memo } from "react";
 import Image from "next/image";
 import { Link } from "@/components/ui/Link";
 import { ProjectStatus } from "@/generated/prisma/enums";
@@ -89,203 +90,208 @@ export const ProjectListItem = ({
   );
 };
 
-export const ProjectListItemInner = ({
-  id,
-  title,
-  deadline,
-  category,
-  customer,
-  company,
-  commentsCount,
-  status,
-  creator,
-  showCheckbox,
-  guestMode,
-  editProjectFormContainer,
-  projectDetailContainer,
-  userDetailContainer,
-  customerDetailContainer,
-  projectCommentsContainer,
-  sendComment,
-  updateComment,
-}: Omit<ProjectListItemProps, "updateProjectStatus">) => {
-  const t = useTranslations("projects.ProjectListItem");
+export const ProjectListItemInner = memo(
+  ({
+    id,
+    title,
+    deadline,
+    category,
+    customer,
+    company,
+    commentsCount,
+    status,
+    creator,
+    showCheckbox,
+    guestMode,
+    editProjectFormContainer,
+    projectDetailContainer,
+    userDetailContainer,
+    customerDetailContainer,
+    projectCommentsContainer,
+    sendComment,
+    updateComment,
+  }: Omit<ProjectListItemProps, "updateProjectStatus">) => {
+    const t = useTranslations("projects.ProjectListItem");
 
-  // use useFormatter to format the date according to the user's locale
-  const format = useFormatter();
+    // use useFormatter to format the date according to the user's locale
+    const format = useFormatter();
 
-  const deadlineOn = t("deadlineOn", {
-    date: format.dateTime(new Date(deadline), {
-      day: "2-digit",
-      month: "short",
-      year: "numeric",
-    }),
-  });
+    const deadlineOn = t("deadlineOn", {
+      date: format.dateTime(new Date(deadline), {
+        day: "2-digit",
+        month: "short",
+        year: "numeric",
+      }),
+    });
 
-  const creatorImg = creator?.imageUrl ? (
-    <ImageContainer className="h-9 w-9">
-      <Image fill src={creator.imageUrl} alt={creator.fullName} />
-    </ImageContainer>
-  ) : (
-    <UnknownUser className="h-9 w-9" />
-  );
+    const creatorImg = creator?.imageUrl ? (
+      <ImageContainer className="h-9 w-9">
+        <Image fill src={creator.imageUrl} alt={creator.fullName} />
+      </ImageContainer>
+    ) : (
+      <UnknownUser className="h-9 w-9" />
+    );
 
-  const userDetailModal = creator && (
-    <UserDetailModal
-      userId={creator.id}
-      userDetailContainer={userDetailContainer}
-    />
-  );
+    const userDetailModal = creator && (
+      <UserDetailModal
+        userId={creator.id}
+        userDetailContainer={userDetailContainer}
+      />
+    );
 
-  return (
-    <ProjectListItemLayout
-      id={id}
-      checkboxSlot={
-        showCheckbox && <ProjectItemCheckbox id={id} status={status} />
-      }
-      titleSlot={
-        <ListItemInfo>
-          <ListItemTitle data-test="project-list-item-title">
-            <ItemBaseDetailModalTrigger
-              data-test="project-list-item-title-trigger"
-              modal={
-                <ProjectDetailModal
-                  projectId={id}
-                  projectDetailContainer={projectDetailContainer}
-                />
-              }
-              className="truncate max-md:hidden"
-            >
-              {title}
-            </ItemBaseDetailModalTrigger>
-
-            <Link className="block truncate md:hidden" href={`/projects/${id}`}>
-              {title}
-            </Link>
-          </ListItemTitle>
-          <ListItemText>{deadlineOn}</ListItemText>
-        </ListItemInfo>
-      }
-      creatorSlot={
-        <>
-          {creator ? (
-            <>
+    return (
+      <ProjectListItemLayout
+        id={id}
+        checkboxSlot={
+          showCheckbox && <ProjectItemCheckbox id={id} status={status} />
+        }
+        titleSlot={
+          <ListItemInfo>
+            <ListItemTitle data-test="project-list-item-title">
               <ItemBaseDetailModalTrigger
-                data-test="project-list-item-creator-image-trigger"
-                modal={userDetailModal}
-                className="max-md:hidden"
+                data-test="project-list-item-title-trigger"
+                modal={
+                  <ProjectDetailModal
+                    projectId={id}
+                    projectDetailContainer={projectDetailContainer}
+                  />
+                }
+                className="truncate max-md:hidden"
               >
-                {creatorImg}
+                {title}
               </ItemBaseDetailModalTrigger>
-            </>
-          ) : (
-            <UnknownUser className="h-9 w-9 max-md:hidden" />
-          )}
 
-          <ListItemInfo className="max-md:hidden">
-            <ListItemTitle>
-              {creator ? (
-                <>
-                  <ItemBaseDetailModalTrigger
-                    data-test="project-list-item-creator-name-trigger"
-                    modal={userDetailModal}
-                    className="truncate"
-                  >
-                    {creator.fullName}
-                  </ItemBaseDetailModalTrigger>
-                </>
-              ) : (
-                t("noCreator")
-              )}
+              <Link
+                className="block truncate md:hidden"
+                href={`/projects/${id}`}
+              >
+                {title}
+              </Link>
             </ListItemTitle>
-            <ListItemText>{t("creator")}</ListItemText>
+            <ListItemText>{deadlineOn}</ListItemText>
           </ListItemInfo>
-        </>
-      }
-      customerSlot={
-        <>
-          {customer?.imageUrl ? (
-            <ImageContainer className="h-9 w-9 max-md:hidden">
-              <Image fill src={customer.imageUrl} alt={customer.fullName} />
-            </ImageContainer>
-          ) : (
-            <UnknownUser className="h-9 w-9 max-md:hidden" />
-          )}
+        }
+        creatorSlot={
+          <>
+            {creator ? (
+              <>
+                <ItemBaseDetailModalTrigger
+                  data-test="project-list-item-creator-image-trigger"
+                  modal={userDetailModal}
+                  className="max-md:hidden"
+                >
+                  {creatorImg}
+                </ItemBaseDetailModalTrigger>
+              </>
+            ) : (
+              <UnknownUser className="h-9 w-9 max-md:hidden" />
+            )}
 
-          <ListItemInfo className="max-md:hidden">
+            <ListItemInfo className="max-md:hidden">
+              <ListItemTitle>
+                {creator ? (
+                  <>
+                    <ItemBaseDetailModalTrigger
+                      data-test="project-list-item-creator-name-trigger"
+                      modal={userDetailModal}
+                      className="truncate"
+                    >
+                      {creator.fullName}
+                    </ItemBaseDetailModalTrigger>
+                  </>
+                ) : (
+                  t("noCreator")
+                )}
+              </ListItemTitle>
+              <ListItemText>{t("creator")}</ListItemText>
+            </ListItemInfo>
+          </>
+        }
+        customerSlot={
+          <>
+            {customer?.imageUrl ? (
+              <ImageContainer className="h-9 w-9 max-md:hidden">
+                <Image fill src={customer.imageUrl} alt={customer.fullName} />
+              </ImageContainer>
+            ) : (
+              <UnknownUser className="h-9 w-9 max-md:hidden" />
+            )}
+
+            <ListItemInfo className="max-md:hidden">
+              <ListItemTitle>
+                {customer ? (
+                  <>
+                    <ItemBaseDetailModalTrigger
+                      data-test="project-list-item-customer-modal-trigger"
+                      modal={
+                        <CustomerDetailModal
+                          customerId={customer.id}
+                          customerDetailContainer={customerDetailContainer}
+                        />
+                      }
+                      className="truncate"
+                    >
+                      {customer.fullName}
+                    </ItemBaseDetailModalTrigger>
+                  </>
+                ) : (
+                  t("noCustomer")
+                )}
+              </ListItemTitle>
+
+              <ListItemText>{t("customer")}</ListItemText>
+            </ListItemInfo>
+          </>
+        }
+        categorySlot={
+          <ListItemInfo className="@max-4xl:hidden">
             <ListItemTitle>
-              {customer ? (
-                <>
-                  <ItemBaseDetailModalTrigger
-                    data-test="project-list-item-customer-modal-trigger"
-                    modal={
-                      <CustomerDetailModal
-                        customerId={customer.id}
-                        customerDetailContainer={customerDetailContainer}
-                      />
-                    }
-                    className="truncate"
-                  >
-                    {customer.fullName}
-                  </ItemBaseDetailModalTrigger>
-                </>
-              ) : (
-                t("noCustomer")
-              )}
+              {category ? category.name : t("noCategory")}
             </ListItemTitle>
 
-            <ListItemText>{t("customer")}</ListItemText>
+            <ListItemText>{t("category")}</ListItemText>
           </ListItemInfo>
-        </>
-      }
-      categorySlot={
-        <ListItemInfo className="@max-4xl:hidden">
-          <ListItemTitle>
-            {category ? category.name : t("noCategory")}
-          </ListItemTitle>
+        }
+        companySlot={
+          <ListItemInfo className="@max-5xl:hidden">
+            <ListItemTitle>
+              {company ? company.name : t("noCompany")}
+            </ListItemTitle>
 
-          <ListItemText>{t("category")}</ListItemText>
-        </ListItemInfo>
-      }
-      companySlot={
-        <ListItemInfo className="@max-5xl:hidden">
-          <ListItemTitle>
-            {company ? company.name : t("noCompany")}
-          </ListItemTitle>
-
-          <ListItemText>{t("company")}</ListItemText>
-        </ListItemInfo>
-      }
-      statusSlot={
-        <ProjectItemBaseBadge
-          projectId={id}
-          className="@max-lg:hidden"
-          status={status}
-        />
-      }
-      commentsModalTriggerSlot={
-        <ItemBaseCommentsModalTrigger
-          data-test={`project-${id}-comments-modal-trigger`}
-          commentsCount={commentsCount}
-          modal={
-            <ProjectCommentsModal
-              projectId={id}
-              projectCommentsContainer={projectCommentsContainer}
-              sendComment={sendComment}
-              updateComment={updateComment}
-            />
-          }
-        />
-      }
-      menuTriggerSlot={
-        <ProjectItemActionMenuTrigger
-          guestMode={guestMode}
-          projectId={id}
-          projectTitle={title}
-          projectStatus={status}
-          editProjectFormContainer={editProjectFormContainer}
-        />
-      }
-    />
-  );
-};
+            <ListItemText>{t("company")}</ListItemText>
+          </ListItemInfo>
+        }
+        statusSlot={
+          <ProjectItemBaseBadge
+            projectId={id}
+            className="@max-lg:hidden"
+            status={status}
+          />
+        }
+        commentsModalTriggerSlot={
+          <ItemBaseCommentsModalTrigger
+            data-test={`project-${id}-comments-modal-trigger`}
+            commentsCount={commentsCount}
+            modal={
+              <ProjectCommentsModal
+                projectId={id}
+                projectCommentsContainer={projectCommentsContainer}
+                sendComment={sendComment}
+                updateComment={updateComment}
+              />
+            }
+          />
+        }
+        menuTriggerSlot={
+          <ProjectItemActionMenuTrigger
+            guestMode={guestMode}
+            projectId={id}
+            projectTitle={title}
+            projectStatus={status}
+            editProjectFormContainer={editProjectFormContainer}
+          />
+        }
+      />
+    );
+  },
+);

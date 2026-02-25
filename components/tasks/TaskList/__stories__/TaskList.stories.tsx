@@ -27,23 +27,15 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const getTaskListItems = ({
-  showCheckbox,
-}: {
-  showCheckbox?: boolean;
-}) =>
-  mockedTaskList.map((task) => (
-    <TaskListItem
-      key={task.id}
-      {...TaskListItemStory.args}
-      {...task}
-      showCheckbox={showCheckbox}
-    />
-  ));
-
 export const Default = {
   args: {
-    showCheckbox: true,
-    children: getTaskListItems({ showCheckbox: true }),
+    children: mockedTaskList.map((task) => (
+      <TaskListItem
+        key={task.id}
+        {...TaskListItemStory.args}
+        {...task}
+        showCheckbox={true}
+      />
+    )),
   },
 } satisfies Story;
