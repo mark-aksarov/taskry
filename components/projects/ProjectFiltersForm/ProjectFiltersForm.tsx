@@ -53,7 +53,7 @@ export function ProjectFiltersForm({
         <Separator />
 
         <ProjectFiltersFormCategoryCheckboxGroup
-          categories={categoryCheckboxGroupItems}
+          items={categoryCheckboxGroupItems}
         />
         <Separator />
 

@@ -55,17 +55,17 @@ export function TaskFiltersForm({
         <Separator />
 
         <TaskFiltersFormCategoryCheckboxGroup
-          categories={categoryCheckboxGroupItems}
+          items={categoryCheckboxGroupItems}
         />
         <Separator />
 
         <TaskFiltersFormProjectCheckboxGroup
-          projects={projectCheckboxGroupItems}
+          items={projectCheckboxGroupItems}
         />
         <Separator />
 
         <TaskFiltersFormAssigneeCheckboxGroup
-          users={assigneeCheckboxGroupItems}
+          items={assigneeCheckboxGroupItems}
         />
       </FormBaseBody>
       <FormBaseFooter>

@@ -5,28 +5,54 @@ import {
   useCustomerFiltersDispatch,
 } from "../CustomerFiltersContext";
 
+import {
+  FilterCheckboxGroupExpandButton,
+  FilterCheckboxGroupWrapper,
+  useFilterCheckboxGroupExpansion,
+} from "@/components/common/FilterCheckboxGroup";
+
+import { twMerge } from "tailwind-merge";
 import { useTranslations } from "next-intl";
 import { Checkbox } from "@/components/ui/Checkbox";
 import { CheckboxGroup } from "@/components/ui/CheckboxGroup";
-import { useExpandedItems } from "@/lib/hooks/useExpandedItems";
-import { ExpandCollapseButton } from "@/components/common/ExpandCollapseButton";
 
-interface CustomerFiltersFormCompanyCheckboxGroupProps {
-  items: { id: number; name: string }[];
+interface Item {
+  id: number;
+  name: string;
 }
 
 export function CustomerFiltersFormCompanyCheckboxGroup({
   items,
-}: CustomerFiltersFormCompanyCheckboxGroupProps) {
+}: {
+  items: Item[];
+}) {
   const t = useTranslations(
     "customers.CustomerFiltersFormCompanyCheckboxGroup",
   );
-  const { isExpanded, setIsExpanded, expandedItems } = useExpandedItems(items);
   const filters = useCustomerFilters();
   const dispatch = useCustomerFiltersDispatch();
 
+  const {
+    isExpanded,
+    setIsExpanded,
+    visibleItems,
+    hiddenItems,
+    hiddenSelectedItems,
+  } = useFilterCheckboxGroupExpansion(items, filters.company);
+
+  const renderCheckbox = (item: Item, hidden = false) => (
+    <Checkbox
+      key={item.id}
+      value={item.id.toString()}
+      className={twMerge("font-normal capitalize", hidden && "hidden")}
+      data-test={`company-${item.id}-checkbox`}
+    >
+      {item.name}
+    </Checkbox>
+  );
+
   return (
-    <div>
+    <FilterCheckboxGroupWrapper>
       <CheckboxGroup
         name="company"
         label={t("label")}
@@ -35,21 +61,15 @@ export function CustomerFiltersFormCompanyCheckboxGroup({
           dispatch({ type: "setCompany", payload: value as any })
         }
       >
-        {expandedItems.map((customer) => (
-          <Checkbox
-            key={customer.id}
-            value={customer.id.toString()}
-            className="font-normal capitalize"
-          >
-            {customer.name}
-          </Checkbox>
-        ))}
+        {visibleItems.map((item) => renderCheckbox(item))}
+        {hiddenItems.map((item) => renderCheckbox(item, true))}
       </CheckboxGroup>
 
-      <ExpandCollapseButton
+      <FilterCheckboxGroupExpandButton
         isExpanded={isExpanded}
         setIsExpanded={setIsExpanded}
+        hiddenSelectedItemNames={hiddenSelectedItems.map((item) => item.name)}
       />
-    </div>
+    </FilterCheckboxGroupWrapper>
   );
 }

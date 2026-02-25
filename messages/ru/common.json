@@ -59,8 +59,9 @@
   "ToolbarManageButtonMobile": {
     "ariaLabel": "Управление"
   },
-  "ExpandCollapseButton": {
+  "FilterCheckboxGroupExpandButton": {
     "collapse": "Свернуть",
-    "expand": "Развернуть"
+    "expand": "Развернуть",
+    "more": "Еще"
   }
 }

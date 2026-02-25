@@ -3,26 +3,54 @@
 import {
   useTaskFilters,
   useTaskFiltersDispatch,
-} from "@/components/tasks/TaskFiltersContext/TaskFiltersContext";
+} from "@/components/tasks/TaskFiltersContext";
 
+import {
+  FilterCheckboxGroupExpandButton,
+  FilterCheckboxGroupWrapper,
+  useFilterCheckboxGroupExpansion,
+} from "@/components/common/FilterCheckboxGroup";
+
+import { twMerge } from "tailwind-merge";
 import { useTranslations } from "next-intl";
 import { Checkbox } from "@/components/ui/Checkbox";
 import { CheckboxGroup } from "@/components/ui/CheckboxGroup";
-import { useExpandedItems } from "@/lib/hooks/useExpandedItems";
-import { ExpandCollapseButton } from "@/components/common/ExpandCollapseButton";
+
+interface Item {
+  id: string;
+  fullName: string;
+}
 
 export function TaskFiltersFormAssigneeCheckboxGroup({
-  users,
+  items,
 }: {
-  users: { id: string; fullName: string }[];
+  items: Item[];
 }) {
   const t = useTranslations("tasks.TaskFiltersFormAssigneeCheckboxGroup");
-  const { isExpanded, setIsExpanded, expandedItems } = useExpandedItems(users);
   const filters = useTaskFilters();
   const dispatch = useTaskFiltersDispatch();
 
+  const {
+    isExpanded,
+    setIsExpanded,
+    visibleItems,
+    hiddenItems,
+    hiddenSelectedItems,
+  } = useFilterCheckboxGroupExpansion(items, filters.assignee);
+
+  const renderCheckbox = (item: Item, hidden = false) => (
+    <Checkbox
+      key={item.id}
+      value={item.id}
+      className={twMerge("font-normal capitalize", hidden && "hidden")}
+      data-test={`assignee-${item.id}-checkbox`}
+    >
+      {item.fullName}
+    </Checkbox>
+  );
+
   return (
-    <div>
+    <FilterCheckboxGroupWrapper>
       <CheckboxGroup
         label={t("label")}
         name="assignee"
@@ -31,22 +59,17 @@ export function TaskFiltersFormAssigneeCheckboxGroup({
           dispatch({ type: "setAssignee", payload: value as any })
         }
       >
-        {expandedItems.map((user) => (
-          <Checkbox
-            data-test={`assignee-${user.id}-checkbox`}
-            key={user.id}
-            value={user.id.toString()}
-            className="font-normal capitalize"
-          >
-            {user.fullName}
-          </Checkbox>
-        ))}
+        {visibleItems.map((item) => renderCheckbox(item))}
+        {hiddenItems.map((item) => renderCheckbox(item, true))}
       </CheckboxGroup>
 
-      <ExpandCollapseButton
+      <FilterCheckboxGroupExpandButton
         isExpanded={isExpanded}
         setIsExpanded={setIsExpanded}
+        hiddenSelectedItemNames={hiddenSelectedItems.map(
+          (item) => item.fullName,
+        )}
       />
-    </div>
+    </FilterCheckboxGroupWrapper>
   );
 }
