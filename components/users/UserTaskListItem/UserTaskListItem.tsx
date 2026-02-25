@@ -17,19 +17,19 @@ import {
   ItemBaseCommentsModalTrigger,
 } from "@/components/common/ItemBase";
 
+import { memo } from "react";
 import { Link } from "@/components/ui/Link";
 import { TaskStatus } from "@/generated/prisma/enums";
 import { useFormatter, useTranslations } from "next-intl";
 import { UserTaskListItemLayout } from "./UserTaskListItemLayout";
 import { SelectableItem } from "@/components/common/SelectableItem";
+import { TaskDetailModal } from "@/components/tasks/TaskDetailModal";
 import { TaskItemCheckbox } from "@/components/tasks/TaskItemCheckbox";
+import { TaskCommentsModal } from "@/components/tasks/TaskCommentsModal";
 import { TaskItemBaseBadge } from "@/components/tasks/TaskItemBaseBadge";
 import { useSelectedTasks } from "@/components/tasks/SelectedTasksContext";
 import { UpdateTaskStatusProvider } from "@/components/tasks/UpdateTaskStatusContext";
-import { TaskDetailModal } from "@/components/tasks/TaskDetailModal";
-import { TaskCommentsModal } from "@/components/tasks/TaskCommentsModal";
 import { TaskItemActionMenuTrigger } from "@/components/tasks/TaskItemActionMenuTrigger";
-import { memo } from "react";
 
 export interface UserTaskListItemProps {
   id: number;
@@ -52,16 +52,26 @@ export const UserTaskListItem = ({
 }: UserTaskListItemProps) => {
   const selected = useSelectedTasks();
 
+  const isSelected = !!selected.get(props.id);
+
   return (
     <UpdateTaskStatusProvider updateStatus={updateTaskStatus}>
       <SelectableItem
         {...selected}
         item={{ id: props.id, status: props.status }}
       >
-        <UserTaskListItemInner {...props} />
+        <UserTaskListItemInner {...props} isSelected={isSelected} />
       </SelectableItem>
     </UpdateTaskStatusProvider>
   );
+};
+
+// `isSelected` is used in `TaskItemBaseBadge` because `useSelectedTasks` cannot be called inside it.
+type UserTaskListItemInnerProps = Omit<
+  UserTaskListItemProps,
+  "updateTaskStatus"
+> & {
+  isSelected: boolean;
 };
 
 export const UserTaskListItemInner = memo(
@@ -72,12 +82,13 @@ export const UserTaskListItemInner = memo(
     status,
     commentsCount,
     guestMode,
+    isSelected,
     taskDetailContainer,
     taskCommentsContainer,
     editTaskFormContainer,
     sendComment,
     updateComment,
-  }: Omit<UserTaskListItemProps, "updateTaskStatus">) => {
+  }: UserTaskListItemInnerProps) => {
     const t = useTranslations("users.UserTaskListItem");
 
     // use useFormatter to format the date according to the user's locale
@@ -118,7 +129,7 @@ export const UserTaskListItemInner = memo(
         }
         statusSlot={
           <TaskItemBaseBadge
-            taskId={id}
+            isSelected={isSelected}
             status={status}
             className="@max-lg:hidden"
           />
