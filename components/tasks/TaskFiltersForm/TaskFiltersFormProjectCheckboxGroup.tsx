@@ -23,7 +23,7 @@ export function TaskFiltersFormProjectCheckboxGroup({
   const dispatch = useTaskFiltersDispatch();
 
   return (
-    <>
+    <div>
       <CheckboxGroup
         label={t("label")}
         name="project"
@@ -48,6 +48,6 @@ export function TaskFiltersFormProjectCheckboxGroup({
         isExpanded={isExpanded}
         setIsExpanded={setIsExpanded}
       />
-    </>
+    </div>
   );
 }

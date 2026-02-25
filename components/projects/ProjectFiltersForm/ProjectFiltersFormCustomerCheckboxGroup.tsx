@@ -23,7 +23,7 @@ export function ProjectFiltersFormCustomerCheckboxGroup({
   const dispatch = useProjectFiltersDispatch();
 
   return (
-    <>
+    <div>
       <CheckboxGroup
         name="customer"
         label={t("label")}
@@ -48,6 +48,6 @@ export function ProjectFiltersFormCustomerCheckboxGroup({
         isExpanded={isExpanded}
         setIsExpanded={setIsExpanded}
       />
-    </>
+    </div>
   );
 }

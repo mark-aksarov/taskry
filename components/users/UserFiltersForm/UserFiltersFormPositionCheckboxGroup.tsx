@@ -21,7 +21,7 @@ export function UserFiltersFormPositionCheckboxGroup({
   const dispatch = useUserFiltersDispatch();
 
   return (
-    <>
+    <div>
       <CheckboxGroup
         name="position"
         label={t("label")}
@@ -45,6 +45,6 @@ export function UserFiltersFormPositionCheckboxGroup({
         isExpanded={isExpanded}
         setIsExpanded={setIsExpanded}
       />
-    </>
+    </div>
   );
 }

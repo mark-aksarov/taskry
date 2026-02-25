@@ -22,7 +22,7 @@ export function TaskFiltersFormAssigneeCheckboxGroup({
   const dispatch = useTaskFiltersDispatch();
 
   return (
-    <>
+    <div>
       <CheckboxGroup
         label={t("label")}
         name="assignee"
@@ -47,6 +47,6 @@ export function TaskFiltersFormAssigneeCheckboxGroup({
         isExpanded={isExpanded}
         setIsExpanded={setIsExpanded}
       />
-    </>
+    </div>
   );
 }
