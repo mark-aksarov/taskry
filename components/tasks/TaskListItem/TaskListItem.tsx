@@ -19,7 +19,6 @@ import {
 
 import { memo } from "react";
 import Image from "next/image";
-import { Link } from "@/components/ui/Link";
 import { TaskDetailModal } from "../TaskDetailModal";
 import { TaskStatus } from "@/generated/prisma/enums";
 import { TaskItemCheckbox } from "../TaskItemCheckbox";
@@ -160,9 +159,7 @@ export const TaskListItemInner = memo(
                 {title}
               </ItemBaseDetailModalTrigger>
 
-              <Link className="block truncate md:hidden" href={`/tasks/${id}`}>
-                {title}
-              </Link>
+              <div className="truncate md:hidden">{title}</div>
             </ListItemTitle>
 
             <ListItemText>{deadlineOn}</ListItemText>

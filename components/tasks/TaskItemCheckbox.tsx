@@ -29,6 +29,7 @@ export function TaskItemCheckbox({ id, status }: TaskItemCheckboxProps) {
       aria-label="task checkbox"
       isSelected={isSelected}
       onChange={handleChange}
+      className="items-start"
     />
   );
 }

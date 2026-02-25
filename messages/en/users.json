@@ -138,7 +138,8 @@
   },
   "UserItemActionMenuTrigger": {
     "edit": "Edit",
-    "delete": "Delete"
+    "delete": "Delete",
+    "details": "Open details"
   },
   "DeleteUserModal": {
     "heading": "Delete user",

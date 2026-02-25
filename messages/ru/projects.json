@@ -129,7 +129,8 @@
     "delete": "Удалить",
     "markPending": "Отметить как «В ожидании»",
     "markCompleted": "Отметить как «Готово»",
-    "markActive": "Отметить как «Активно»"
+    "markActive": "Отметить как «Активно»",
+    "details": "Открыть детали"
   },
   "DeleteProjectModal": {
     "heading": "Удалить проект",

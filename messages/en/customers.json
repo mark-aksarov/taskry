@@ -91,7 +91,8 @@
   },
   "CustomerItemActionMenuTrigger": {
     "edit": "Edit",
-    "delete": "Delete"
+    "delete": "Delete",
+    "details": "Open details"
   },
   "DeleteCustomerModal": {
     "heading": "Delete customer",

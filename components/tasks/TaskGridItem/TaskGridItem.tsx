@@ -157,9 +157,7 @@ export const TaskGridItemInner = memo(
                 {title}
               </ItemBaseDetailModalTrigger>
 
-              <Link className="block truncate md:hidden" href={`/tasks/${id}`}>
-                {title}
-              </Link>
+              <div className="truncate md:hidden">{title}</div>
             </GridItemTitle>
 
             <GridItemText>{deadlineOn}</GridItemText>

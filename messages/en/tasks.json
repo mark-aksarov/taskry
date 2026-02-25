@@ -60,7 +60,8 @@
     "delete": "Delete",
     "markPending": "Mark as Pending",
     "markCompleted": "Mark as Completed",
-    "markActive": "Mark as Active"
+    "markActive": "Mark as Active",
+    "details": "Open details"
   },
   "TaskToolbarCreateNewMenuTrigger": {
     "dialogHeading": "Create New",

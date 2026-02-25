@@ -17,10 +17,10 @@ export function UserGridItemLayout({
     <GridItem>
       <GridItemRow className="justify-end">{actionMenuSlot}</GridItemRow>
 
-      <div className="flex flex-col items-center justify-between gap-4">
-        {imageSlot}
+      <GridItemRow>
         {titleSlot}
-      </div>
+        {imageSlot}
+      </GridItemRow>
 
       {phoneNumberSlot}
     </GridItem>

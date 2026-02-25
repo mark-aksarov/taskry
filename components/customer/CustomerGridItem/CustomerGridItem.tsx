@@ -60,11 +60,11 @@ export function CustomerGridItem({
   const contactLinkClasses = "max-w-full overflow-hidden";
 
   const customerImg = imageUrl ? (
-    <ImageContainer className="h-20 w-20">
-      <Image src={imageUrl} alt={fullName} width={80} height={80} />
+    <ImageContainer className="h-9 w-9">
+      <Image src={imageUrl} alt={fullName} width={36} height={36} />
     </ImageContainer>
   ) : (
-    <UnknownUser className="h-20 w-20" iconSize={48} />
+    <UnknownUser className="h-9 w-9" />
   );
 
   const customerDetailModal = (
@@ -104,7 +104,7 @@ export function CustomerGridItem({
           </>
         }
         titleSlot={
-          <GridItemInfo className="w-full items-center">
+          <GridItemInfo className="flex-auto">
             <GridItemTitle>
               <ItemBaseDetailModalTrigger
                 modal={customerDetailModal}
@@ -113,12 +113,7 @@ export function CustomerGridItem({
                 {fullName}
               </ItemBaseDetailModalTrigger>
 
-              <Link
-                className="block truncate md:hidden"
-                href={`/customers/${id}`}
-              >
-                {fullName}
-              </Link>
+              <div className="truncate md:hidden">{fullName}</div>
             </GridItemTitle>
 
             <GridItemText>

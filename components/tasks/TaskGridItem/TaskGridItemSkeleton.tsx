@@ -22,8 +22,8 @@ export const TaskGridItemSkeleton = () => {
       }
       titleSlot={<GridItemInfoSkeleton />}
       assigneeImageSlot={<ImageContainerSkeleton className="h-9 w-9" />}
-      commentsSlot={<ItemBaseButtonSkeleton className="@max-md:hidden" />}
-      statusSlot={<ItemBaseBadgeSkeleton className="@max-md:hidden" />}
+      commentsSlot={<ItemBaseButtonSkeleton />}
+      statusSlot={<ItemBaseBadgeSkeleton />}
       progressSlot={<GridItemProgressSkeleton />}
     />
   );

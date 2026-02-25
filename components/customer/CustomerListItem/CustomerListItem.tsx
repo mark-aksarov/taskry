@@ -92,18 +92,17 @@ export function CustomerListItem({
               {fullName}
             </ItemBaseDetailModalTrigger>
 
-            <Link
-              className="block truncate md:hidden"
-              href={`/customers/${id}`}
-            >
-              {fullName}
-            </Link>
+            <div className="truncate md:hidden">{fullName}</div>
           </ListItemTitle>
 
           <ListItemText>
-            <Link className="block truncate" href={`mailto:${email}`}>
+            <Link
+              className="block truncate max-md:hidden"
+              href={`mailto:${email}`}
+            >
               {email}
             </Link>
+            <div className="truncate md:hidden">{email}</div>
           </ListItemText>
         </ListItemInfo>
         <ListItemInfo className="@max-lg:hidden">

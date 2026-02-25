@@ -149,12 +149,7 @@ export const ProjectGridItemInner = memo(
                 {title}
               </ItemBaseDetailModalTrigger>
 
-              <Link
-                className="block truncate md:hidden"
-                href={`/projects/${id}`}
-              >
-                {title}
-              </Link>
+              <div className="truncate md:hidden">{title}</div>
             </GridItemTitle>
 
             <GridItemText>{deadlineOn}</GridItemText>

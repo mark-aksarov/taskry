@@ -9,7 +9,7 @@ import {
 import { useState } from "react";
 import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
-import { Pencil, Trash } from "lucide-react";
+import { Info, Pencil, Trash } from "lucide-react";
 import { EditCustomerModal } from "./EditCustomerModal";
 import { GuestModeModal } from "../common/GuestModeModal";
 import { useDeleteCustomerModal } from "./DeleteCustomerModal";
@@ -47,6 +47,10 @@ export function CustomerItemActionMenuTrigger({
       return;
     }
 
+    if (key === "details") {
+      return;
+    }
+
     if (key === "edit") {
       setIsEditCustomerModalOpen(true);
     } else if (key === "delete") {
@@ -71,6 +75,13 @@ export function CustomerItemActionMenuTrigger({
           />
         )}
       >
+        <Item
+          href={`/customers/${customerId}`}
+          textValue={t("details")}
+          key="details"
+        >
+          <Info size={16} /> {t("details")}
+        </Item>
         <Item textValue={t("edit")} key="edit">
           <Pencil size={16} /> {t("edit")}
         </Item>

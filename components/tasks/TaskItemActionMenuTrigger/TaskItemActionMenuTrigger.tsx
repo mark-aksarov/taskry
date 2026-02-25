@@ -14,7 +14,14 @@ import { TaskStatus } from "@/generated/prisma/enums";
 import { useDeleteTaskModal } from "../DeleteTaskModal";
 import { GuestModeModal } from "@/components/common/GuestModeModal";
 import { useUpdateTaskStatusContext } from "../UpdateTaskStatusContext";
-import { Check, CircleEllipsis, Clock, Pencil, Trash } from "lucide-react";
+import {
+  Check,
+  CircleEllipsis,
+  Clock,
+  Info,
+  Pencil,
+  Trash,
+} from "lucide-react";
 
 export type TaskItemActionMenuTriggerProps = {
   guestMode: boolean;
@@ -58,6 +65,11 @@ export function TaskItemActionMenuTrigger({
     }
 
     const action = key.toString();
+
+    if (action === "details") {
+      return;
+    }
+
     if (action === "edit") {
       setIsOpenEditModal(true);
     } else if (action === "delete") {
@@ -94,6 +106,9 @@ export function TaskItemActionMenuTrigger({
           />
         )}
       >
+        <Item href={`/tasks/${taskId}`} textValue={t("details")} key="details">
+          <Info size={16} /> {t("details")}
+        </Item>
         <Item textValue={t("edit")} key="edit">
           <Pencil size={16} /> {t("edit")}
         </Item>

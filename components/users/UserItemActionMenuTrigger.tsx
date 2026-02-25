@@ -9,7 +9,7 @@ import {
 import { useState } from "react";
 import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
-import { Pencil, Trash } from "lucide-react";
+import { Info, Pencil, Trash } from "lucide-react";
 import { EditUserModal } from "./EditUserModal";
 import { useDeleteUserModal } from "./DeleteUserModal";
 import { GuestModeModal } from "../common/GuestModeModal";
@@ -49,6 +49,10 @@ export function UserItemActionMenuTrigger({
       return;
     }
 
+    if (key === "details") {
+      return;
+    }
+
     if (key === "edit") {
       setIsEditUserModalOpen(true);
     } else if (key === "delete") {
@@ -73,6 +77,9 @@ export function UserItemActionMenuTrigger({
           />
         )}
       >
+        <Item href={`/team/${userId}`} textValue={t("details")} key="details">
+          <Info size={16} /> {t("details")}
+        </Item>
         <Item textValue={t("edit")} key="edit">
           <Pencil size={16} /> {t("edit")}
         </Item>

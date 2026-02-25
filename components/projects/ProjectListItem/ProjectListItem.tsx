@@ -162,12 +162,7 @@ export const ProjectListItemInner = memo(
                 {title}
               </ItemBaseDetailModalTrigger>
 
-              <Link
-                className="block truncate md:hidden"
-                href={`/projects/${id}`}
-              >
-                {title}
-              </Link>
+              <div className="truncate md:hidden">{title}</div>
             </ListItemTitle>
             <ListItemText>{deadlineOn}</ListItemText>
           </ListItemInfo>

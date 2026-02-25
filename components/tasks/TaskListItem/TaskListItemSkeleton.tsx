@@ -25,7 +25,7 @@ export const TaskListItemSkeleton = ({
       }
       categorySlot={<ListItemInfoSkeleton className="@max-3xl:hidden" />}
       projectSlot={<ListItemInfoSkeleton className="@max-4xl:hidden" />}
-      statusSlot={<ItemBaseBadgeSkeleton className="@max-lg:hidden" />}
+      statusSlot={<ItemBaseBadgeSkeleton />}
       commentsModalTriggerSlot={
         <ItemBaseButtonSkeleton className="@max-md:hidden" />
       }

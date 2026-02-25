@@ -18,7 +18,6 @@ import {
 } from "@/components/common/ItemBase";
 
 import { memo } from "react";
-import { Link } from "@/components/ui/Link";
 import { TaskStatus } from "@/generated/prisma/enums";
 import { useFormatter, useTranslations } from "next-intl";
 import { UserTaskListItemLayout } from "./UserTaskListItemLayout";
@@ -120,9 +119,7 @@ export const UserTaskListItemInner = memo(
                 {title}
               </ItemBaseDetailModalTrigger>
 
-              <Link className="block truncate md:hidden" href={`/tasks/${id}`}>
-                {title}
-              </Link>
+              <div className="truncate md:hidden">{title}</div>
             </ListItemTitle>
             <ListItemText>{deadlineOn}</ListItemText>
           </ListItemInfo>

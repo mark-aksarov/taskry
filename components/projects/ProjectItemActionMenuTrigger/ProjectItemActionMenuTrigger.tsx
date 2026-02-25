@@ -12,7 +12,14 @@ import { startTransition, useState } from "react";
 import { EditProjectModal } from "../EditProjectModal";
 import { ProjectStatus } from "@/generated/prisma/enums";
 import { GuestModeModal } from "../../common/GuestModeModal";
-import { Check, CircleEllipsis, Clock, Pencil, Trash } from "lucide-react";
+import {
+  Check,
+  CircleEllipsis,
+  Clock,
+  Info,
+  Pencil,
+  Trash,
+} from "lucide-react";
 import { useUpdateProjectStatusContext } from "../UpdateProjectStatusContext";
 import { useDeleteProjectModal } from "../DeleteProjectModal/DeleteProjectModalContext";
 
@@ -58,6 +65,11 @@ export function ProjectItemActionMenuTrigger({
     }
 
     const action = key.toString();
+
+    if (action === "details") {
+      return;
+    }
+
     if (action === "edit") {
       setIsOpenEditModal(true);
     } else if (action === "delete") {
@@ -94,6 +106,13 @@ export function ProjectItemActionMenuTrigger({
           />
         )}
       >
+        <Item
+          href={`/projects/${projectId}`}
+          textValue={t("details")}
+          key="details"
+        >
+          <Info size={16} /> {t("details")}
+        </Item>
         <Item textValue={t("edit")} key="edit">
           <Pencil size={16} /> {t("edit")}
         </Item>

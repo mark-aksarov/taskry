@@ -13,9 +13,9 @@ export function GridItemContactList({
 export function GridItemContactListSkeleton() {
   return (
     <div className={styles}>
-      <Skeleton size="xs" />
-      <Skeleton size="xs" />
-      <Skeleton size="xs" />
+      <Skeleton size="xs" className="w-[7rem]" />
+      <Skeleton size="xs" className="w-[9rem]" />
+      <Skeleton size="xs" className="w-[6rem]" />
     </div>
   );
 }

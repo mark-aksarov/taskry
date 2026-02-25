@@ -13,8 +13,8 @@ export function UserGridItemSkeleton() {
       actionMenuSlot={
         <ItemBaseActionMenuTriggerSkeleton className="-mr-2 ml-auto" />
       }
-      imageSlot={<ImageContainerSkeleton className="h-20 w-20" />}
-      titleSlot={<GridItemInfoSkeleton className="w-full items-center" />}
+      imageSlot={<ImageContainerSkeleton className="h-9 w-9" />}
+      titleSlot={<GridItemInfoSkeleton className="flex-auto" />}
       phoneNumberSlot={
         <>
           <Skeleton className="h-px" />
