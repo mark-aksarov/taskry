@@ -24,7 +24,7 @@
     "delete": "Удалить"
   },
   "TaskCategoryToolbarCreateNewModalTrigger": {
-    "label": "Create new"
+    "label": "Создать новую\t"
   },
   "EditTaskCategoryForm": {
     "submitButtonLabel": "Обновить категорию задачи"
