@@ -38,8 +38,9 @@ export function FilterCheckboxGroupExpandButton({
             strokeWidth={1.5}
             className="shrink-0"
           />
-          <span className="shrink-0">{t("more")}</span>
-          <span className="shrink-0">{hiddenSelectedItemNames.length}</span>
+          <span className="shrink-0">
+            {t("more")} {hiddenSelectedItemNames.length}
+          </span>
           <span className="inline-block truncate">
             ({hiddenSelectedItemNames?.join(", ")})
           </span>
@@ -60,7 +61,7 @@ export function FilterCheckboxGroupExpandButton({
       onPress={() => setIsExpanded(!isExpanded)}
       className={linkStyles({
         variant: "primary",
-        className: "max-w-full gap-1 text-sm",
+        className: "max-w-full text-sm",
       })}
     >
       {content}
