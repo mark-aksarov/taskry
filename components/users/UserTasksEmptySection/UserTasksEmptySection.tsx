@@ -17,7 +17,7 @@ export function UserTasksEmptySection({
   const t = useTranslations("users.UserTasksEmptySection");
 
   return (
-    <div className="flex flex-auto items-center justify-center">
+    <div className="flex flex-auto items-center justify-center px-6">
       <EmptySection>
         <EmptySectionHeading className="text-3xl!">
           {t("heading")}

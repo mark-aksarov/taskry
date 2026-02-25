@@ -9,7 +9,7 @@ export function EmptySection({ className, children }: EmptySectionProps) {
   return (
     <section
       className={twMerge(
-        "inline-flex max-w-[500px] min-w-[300px] flex-col items-center gap-4",
+        "inline-flex max-w-[500px] min-w-[200px] flex-col items-center gap-4",
         className,
       )}
     >
