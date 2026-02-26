@@ -189,7 +189,8 @@
   "TaskStatus": {
     "pending": "Ожидает",
     "active": "Активна",
-    "completed": "Завершена"
+    "completed": "Завершена",
+    "overdue": "Просрочена"
   },
   "TaskToolbarManageMenuTrigger": {
     "categories": "Категории"

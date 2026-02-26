@@ -13,12 +13,14 @@ interface TaskItemBaseBadgeProps {
   className?: string;
   status: TaskStatus;
   isSelected?: boolean;
+  deadline: string;
 }
 
 export function TaskItemBaseBadge({
   className,
   status,
   isSelected,
+  deadline,
 }: TaskItemBaseBadgeProps) {
   const t = useTranslations("tasks.TaskStatus");
 
@@ -30,11 +32,13 @@ export function TaskItemBaseBadge({
   const isPending =
     isUpdateTaskStatusPending || (isUpdateTaskStatusesPending && isSelected);
 
+  const isOverdue = new Date(deadline) < new Date();
+
+  const color = isOverdue ? "red" : getTaskStatusBadgeColor(status);
+  const text = isOverdue ? t("overdue") : t(`${status}`);
+
   return (
-    <ItemBaseBadge
-      className={className}
-      color={isPending ? "gray" : getTaskStatusBadgeColor(status)}
-    >
+    <ItemBaseBadge className={className} color={isPending ? "gray" : color}>
       {isPending ? (
         <Loader2
           data-testid="loader-icon"
@@ -44,7 +48,7 @@ export function TaskItemBaseBadge({
           className="animate-spin text-gray-400 dark:text-gray-900"
         />
       ) : (
-        t(`${status}`)
+        text
       )}
     </ItemBaseBadge>
   );

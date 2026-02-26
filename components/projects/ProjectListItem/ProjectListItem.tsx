@@ -248,7 +248,13 @@ export const ProjectListItemInner = memo(
             <ListItemText>{t("company")}</ListItemText>
           </>
         }
-        statusSlot={<ProjectItemBaseBadge projectId={id} status={status} />}
+        statusSlot={
+          <ProjectItemBaseBadge
+            projectId={id}
+            deadline={deadline}
+            status={status}
+          />
+        }
         commentsModalTriggerSlot={
           <ItemBaseCommentsModalTrigger
             data-test={`project-${id}-comments-modal-trigger`}

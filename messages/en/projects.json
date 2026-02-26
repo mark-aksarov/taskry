@@ -147,7 +147,8 @@
   "ProjectStatus": {
     "pending": "Pending",
     "active": "Active",
-    "completed": "Completed"
+    "completed": "Completed",
+    "overdue": "Overdue"
   },
   "ProjectCommentsModal": {
     "title": "Project comments"

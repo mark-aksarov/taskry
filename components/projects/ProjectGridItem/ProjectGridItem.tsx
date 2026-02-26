@@ -199,7 +199,13 @@ export const ProjectGridItemInner = memo(
             }
           />
         }
-        statusSlot={<ProjectItemBaseBadge projectId={id} status={status} />}
+        statusSlot={
+          <ProjectItemBaseBadge
+            projectId={id}
+            deadline={deadline}
+            status={status}
+          />
+        }
         progressSlot={
           <GridItemProgress
             value={(tasksCompleted / tasksTotal) * 100}

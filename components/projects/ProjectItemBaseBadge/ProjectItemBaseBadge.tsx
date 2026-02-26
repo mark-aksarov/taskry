@@ -12,12 +12,14 @@ import { useSelectedProjects } from "../SelectedProjectsContext";
 
 interface ProjectItemBaseBadgeProps {
   projectId: number;
+  deadline: string;
   className?: string;
   status: ProjectStatus;
 }
 
 export function ProjectItemBaseBadge({
   projectId,
+  deadline,
   className,
   status,
 }: ProjectItemBaseBadgeProps) {
@@ -34,11 +36,13 @@ export function ProjectItemBaseBadge({
     isUpdateProjectStatusPending ||
     (isUpdateProjectStatusesPending && !!selected.get(projectId));
 
+  const isOverdue = new Date(deadline) < new Date();
+
+  const color = isOverdue ? "red" : getProjectStatusBadgeColor(status);
+  const text = isOverdue ? t("overdue") : t(`${status}`);
+
   return (
-    <ItemBaseBadge
-      className={className}
-      color={isPending ? "gray" : getProjectStatusBadgeColor(status)}
-    >
+    <ItemBaseBadge className={className} color={isPending ? "gray" : color}>
       {isPending ? (
         <Loader2
           data-testid="loader-icon"
@@ -48,7 +52,7 @@ export function ProjectItemBaseBadge({
           className="animate-spin text-gray-400 dark:text-gray-900"
         />
       ) : (
-        t(`${status}`)
+        text
       )}
     </ItemBaseBadge>
   );

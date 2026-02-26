@@ -60,7 +60,7 @@ export const mockedProjectList = [
   {
     id: 2,
     title: "Project 2",
-    deadline: "2025-01-02",
+    deadline: "2027-01-02",
     creator: { id: "user2", fullName: "User 2", imageUrl: "/man.jpg" },
     customer: { id: 2, fullName: "Customer 2", imageUrl: "/man.jpg" },
     category: { id: 2, name: "Category 2" },
@@ -73,7 +73,7 @@ export const mockedProjectList = [
   {
     id: 3,
     title: "Project 3",
-    deadline: "2025-01-03",
+    deadline: "2027-01-03",
     creator: { id: "user3", fullName: "User 3", imageUrl: "/woman.jpg" },
     customer: { id: 3, fullName: "Customer 3", imageUrl: "/man.jpg" },
     category: { id: 3, name: "Category 3" },
@@ -99,7 +99,7 @@ export const mockedProjectList = [
   {
     id: 5,
     title: "Project 5",
-    deadline: "2025-01-05",
+    deadline: "2027-01-05",
     creator: { id: "user5", fullName: "User 5", imageUrl: "/woman.jpg" },
     customer: { id: 5, fullName: "Customer 5", imageUrl: "/man.jpg" },
     category: { id: 5, name: "Category 5" },

@@ -189,7 +189,8 @@
   "TaskStatus": {
     "pending": "Pending",
     "active": "Active",
-    "completed": "Completed"
+    "completed": "Completed",
+    "overdue": "Overdue"
   },
   "TaskToolbarManageMenuTrigger": {
     "categories": "Categories"

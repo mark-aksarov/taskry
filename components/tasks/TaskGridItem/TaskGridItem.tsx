@@ -208,7 +208,11 @@ export const TaskGridItemInner = memo(
           />
         }
         statusSlot={
-          <TaskItemBaseBadge isSelected={isSelected} status={status} />
+          <TaskItemBaseBadge
+            isSelected={isSelected}
+            deadline={deadline}
+            status={status}
+          />
         }
         progressSlot={
           <GridItemProgress

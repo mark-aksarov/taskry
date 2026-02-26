@@ -147,7 +147,8 @@
   "ProjectStatus": {
     "pending": "В ожидании",
     "active": "Активный",
-    "completed": "Завершён"
+    "completed": "Завершён",
+    "overdue": "Просрочен"
   },
   "ProjectCommentsModal": {
     "title": "Комментарии проекта"

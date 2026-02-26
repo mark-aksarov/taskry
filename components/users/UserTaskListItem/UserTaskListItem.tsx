@@ -122,7 +122,11 @@ export const UserTaskListItemInner = memo(
           </>
         }
         statusSlot={
-          <TaskItemBaseBadge isSelected={isSelected} status={status} />
+          <TaskItemBaseBadge
+            isSelected={isSelected}
+            deadline={deadline}
+            status={status}
+          />
         }
         commentsModalTriggerSlot={
           <ItemBaseCommentsModalTrigger
