@@ -1,23 +1,19 @@
 "use client";
 
-import {
-  ListItem,
-  ListItemInfo,
-  ListItemText,
-  ListItemTitle,
-} from "@/components/common/List";
-
+import { memo } from "react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { Link } from "@/components/ui/Link";
+import { CustomerDetailModal } from "../CustomerDetailModal";
 import { UnknownUser } from "@/components/common/UnknownUser";
 import { CustomerItemCheckbox } from "../CustomerItemCheckbox";
+import { CustomerListItemLayout } from "./CustomerListItemLayout";
+import { SelectableItem } from "@/components/common/SelectableItem";
 import { ImageContainer } from "@/components/common/ImageContainer";
+import { ListItemText, ListItemTitle } from "@/components/common/List";
 import { ItemBaseDetailModalTrigger } from "@/components/common/ItemBase";
 import { useSelectedItems } from "@/components/common/SelectedItemsContext";
-import { SelectableItem } from "@/components/common/SelectableItem";
 import { CustomerItemActionMenuTrigger } from "../CustomerItemActionMenuTrigger";
-import { CustomerDetailModal } from "../CustomerDetailModal";
 
 export type CustomerListItemProps = {
   id: number;
@@ -35,117 +31,134 @@ export type CustomerListItemProps = {
   editCustomerFormContainer: React.ReactNode;
 };
 
-export function CustomerListItem({
-  id,
-  fullName,
-  email,
-  phoneNumber,
-  publicLink,
-  imageUrl,
-  company,
-  guestMode,
-  customerDetailContainer,
-  editCustomerFormContainer,
-}: CustomerListItemProps) {
-  const t = useTranslations("customers.CustomerListItem");
+export function CustomerListItem(props: CustomerListItemProps) {
   const selected = useSelectedItems();
 
-  const userImg = imageUrl ? (
-    <ImageContainer className="h-9 w-9">
-      <Image src={imageUrl} alt={fullName} width={36} height={36} />
-    </ImageContainer>
-  ) : (
-    <UnknownUser className="h-9 w-9" />
-  );
-
-  const customerDetailModal = (
-    <CustomerDetailModal
-      customerId={id}
-      customerDetailContainer={customerDetailContainer}
-    />
-  );
-
   return (
-    <SelectableItem {...selected} item={{ id }}>
-      <ListItem data-test="customer-list-item" data-id={id}>
-        <CustomerItemCheckbox id={id} />
+    <SelectableItem {...selected} item={{ id: props.id }}>
+      <CustomerListItemInner {...props} />
+    </SelectableItem>
+  );
+}
 
-        <>
+export const CustomerListItemInner = memo(
+  ({
+    id,
+    fullName,
+    email,
+    phoneNumber,
+    publicLink,
+    imageUrl,
+    company,
+    guestMode,
+    customerDetailContainer,
+    editCustomerFormContainer,
+  }: CustomerListItemProps) => {
+    const t = useTranslations("customers.CustomerListItem");
+
+    const userImg = imageUrl ? (
+      <ImageContainer className="h-9 w-9">
+        <Image src={imageUrl} alt={fullName} width={36} height={36} />
+      </ImageContainer>
+    ) : (
+      <UnknownUser className="h-9 w-9" />
+    );
+
+    const customerDetailModal = (
+      <CustomerDetailModal
+        customerId={id}
+        customerDetailContainer={customerDetailContainer}
+      />
+    );
+
+    return (
+      <CustomerListItemLayout
+        id={id}
+        checkboxSlot={<CustomerItemCheckbox id={id} />}
+        imgSlot={
           <ItemBaseDetailModalTrigger
             modal={customerDetailModal}
             className="h-9 w-9 max-md:hidden"
           >
             {userImg}
           </ItemBaseDetailModalTrigger>
-
+        }
+        imgMobileSlot={
           <Link className="md:hidden" href={`/customers/${id}`}>
             {userImg}
           </Link>
-        </>
+        }
+        infoSlot={
+          <>
+            <ListItemTitle>
+              <ItemBaseDetailModalTrigger
+                modal={customerDetailModal}
+                className="truncate"
+              >
+                {fullName}
+              </ItemBaseDetailModalTrigger>
+            </ListItemTitle>
 
-        <ListItemInfo>
-          <ListItemTitle>
-            <ItemBaseDetailModalTrigger
-              modal={customerDetailModal}
-              className="truncate max-md:hidden"
-            >
-              {fullName}
-            </ItemBaseDetailModalTrigger>
-
-            <div className="truncate md:hidden">{fullName}</div>
-          </ListItemTitle>
-
-          <ListItemText>
-            <Link
-              className="block truncate max-md:hidden"
-              href={`mailto:${email}`}
-            >
-              {email}
-            </Link>
-            <div className="truncate md:hidden">{email}</div>
-          </ListItemText>
-        </ListItemInfo>
-        <ListItemInfo className="@max-lg:hidden">
-          <ListItemTitle>
-            {phoneNumber ? (
-              <Link className="block truncate" href={`tel:${phoneNumber}`}>
-                {phoneNumber}
+            <ListItemText>
+              <Link className="block truncate" href={`mailto:${email}`}>
+                {email}
               </Link>
-            ) : (
-              t("noPhoneNumber")
-            )}
-          </ListItemTitle>
+            </ListItemText>
+          </>
+        }
+        infoMobileSlot={
+          <>
+            <ListItemTitle>{fullName}</ListItemTitle>
+            <ListItemText>{email}</ListItemText>
+          </>
+        }
+        phoneNumberSlot={
+          <>
+            <ListItemTitle>
+              {phoneNumber ? (
+                <Link className="block truncate" href={`tel:${phoneNumber}`}>
+                  {phoneNumber}
+                </Link>
+              ) : (
+                t("noPhoneNumber")
+              )}
+            </ListItemTitle>
 
-          <ListItemText>{t("phoneNumber")}</ListItemText>
-        </ListItemInfo>
-        <ListItemInfo className="@max-2xl:hidden">
-          <ListItemTitle>
-            {publicLink ? (
-              <Link className="block truncate" href={publicLink}>
-                {publicLink}
-              </Link>
-            ) : (
-              t("noPublicLink")
-            )}
-          </ListItemTitle>
+            <ListItemText>{t("phoneNumber")}</ListItemText>
+          </>
+        }
+        publicLinkSlot={
+          <>
+            <ListItemTitle>
+              {publicLink ? (
+                <Link className="block truncate" href={publicLink}>
+                  {publicLink}
+                </Link>
+              ) : (
+                t("noPublicLink")
+              )}
+            </ListItemTitle>
 
-          <ListItemText>{t("publicLink")}</ListItemText>
-        </ListItemInfo>
-
-        <ListItemInfo className="@max-4xl:hidden">
-          <ListItemTitle>
-            {company ? company.name : t("noCompany")}
-          </ListItemTitle>
-          <ListItemText>{t("company")}</ListItemText>
-        </ListItemInfo>
-
-        <CustomerItemActionMenuTrigger
-          guestMode={guestMode}
-          customerId={id}
-          customerFullName={fullName}
-          editCustomerFormContainer={editCustomerFormContainer}
-        />
-      </ListItem>
-    </SelectableItem>
-  );
-}
+            <ListItemText>{t("publicLink")}</ListItemText>
+          </>
+        }
+        companySlot={
+          <>
+            <ListItemTitle>
+              {company ? company.name : t("noCompany")}
+            </ListItemTitle>
+            <ListItemText>{t("company")}</ListItemText>
+          </>
+        }
+        menuTriggerSlot={
+          <CustomerItemActionMenuTrigger
+            guestMode={guestMode}
+            customerId={id}
+            customerFullName={fullName}
+            editCustomerFormContainer={editCustomerFormContainer}
+          />
+        }
+      />
+    );
+  },
+);

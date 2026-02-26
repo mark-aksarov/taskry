@@ -146,9 +146,9 @@ export const ProjectListItemInner = memo(
       <ProjectListItemLayout
         id={id}
         checkboxSlot={<ProjectItemCheckbox id={id} status={status} />}
-        titleSlot={
-          <ListItemInfo>
-            <ListItemTitle data-test="project-list-item-title">
+        infoSlot={
+          <>
+            <ListItemTitle>
               <ItemBaseDetailModalTrigger
                 data-test="project-list-item-title-trigger"
                 modal={
@@ -157,56 +157,55 @@ export const ProjectListItemInner = memo(
                     projectDetailContainer={projectDetailContainer}
                   />
                 }
-                className="truncate max-md:hidden"
               >
                 {title}
               </ItemBaseDetailModalTrigger>
-
-              <div className="truncate md:hidden">{title}</div>
             </ListItemTitle>
             <ListItemText>{deadlineOn}</ListItemText>
-          </ListItemInfo>
+          </>
         }
-        creatorSlot={
+        infoMobileSlot={
+          <>
+            <ListItemTitle>{title}</ListItemTitle>
+            <ListItemText>{deadlineOn}</ListItemText>
+          </>
+        }
+        creatorImgSlot={
           <>
             {creator ? (
               <>
-                <ItemBaseDetailModalTrigger
-                  data-test="project-list-item-creator-image-trigger"
-                  modal={userDetailModal}
-                  className="max-md:hidden"
-                >
+                <ItemBaseDetailModalTrigger modal={userDetailModal}>
                   {creatorImg}
                 </ItemBaseDetailModalTrigger>
               </>
             ) : (
-              <UnknownUser className="h-9 w-9 max-md:hidden" />
+              <UnknownUser className="h-9 w-9" />
             )}
-
-            <ListItemInfo className="max-md:hidden">
-              <ListItemTitle>
-                {creator ? (
-                  <>
-                    <ItemBaseDetailModalTrigger
-                      data-test="project-list-item-creator-name-trigger"
-                      modal={userDetailModal}
-                      className="truncate"
-                    >
-                      {creator.fullName}
-                    </ItemBaseDetailModalTrigger>
-                  </>
-                ) : (
-                  t("noCreator")
-                )}
-              </ListItemTitle>
-              <ListItemText>{t("creator")}</ListItemText>
-            </ListItemInfo>
           </>
         }
-        customerSlot={
+        creatorSlot={
+          <>
+            <ListItemTitle>
+              {creator ? (
+                <>
+                  <ItemBaseDetailModalTrigger
+                    modal={userDetailModal}
+                    className="truncate"
+                  >
+                    {creator.fullName}
+                  </ItemBaseDetailModalTrigger>
+                </>
+              ) : (
+                t("noCreator")
+              )}
+            </ListItemTitle>
+            <ListItemText>{t("creator")}</ListItemText>
+          </>
+        }
+        customerImgSlot={
           <>
             {customer?.imageUrl ? (
-              <ImageContainer className="h-9 w-9 max-md:hidden">
+              <ImageContainer className="h-9 w-9">
                 <Image
                   src={customer.imageUrl}
                   alt={customer.fullName}
@@ -215,60 +214,54 @@ export const ProjectListItemInner = memo(
                 />
               </ImageContainer>
             ) : (
-              <UnknownUser className="h-9 w-9 max-md:hidden" />
+              <UnknownUser className="h-9 w-9" />
             )}
+          </>
+        }
+        customerSlot={
+          <>
+            <ListItemTitle>
+              {customer ? (
+                <>
+                  <ItemBaseDetailModalTrigger
+                    modal={
+                      <CustomerDetailModal
+                        customerId={customer.id}
+                        customerDetailContainer={customerDetailContainer}
+                      />
+                    }
+                    className="truncate"
+                  >
+                    {customer.fullName}
+                  </ItemBaseDetailModalTrigger>
+                </>
+              ) : (
+                t("noCustomer")
+              )}
+            </ListItemTitle>
 
-            <ListItemInfo className="max-md:hidden">
-              <ListItemTitle>
-                {customer ? (
-                  <>
-                    <ItemBaseDetailModalTrigger
-                      data-test="project-list-item-customer-modal-trigger"
-                      modal={
-                        <CustomerDetailModal
-                          customerId={customer.id}
-                          customerDetailContainer={customerDetailContainer}
-                        />
-                      }
-                      className="truncate"
-                    >
-                      {customer.fullName}
-                    </ItemBaseDetailModalTrigger>
-                  </>
-                ) : (
-                  t("noCustomer")
-                )}
-              </ListItemTitle>
-
-              <ListItemText>{t("customer")}</ListItemText>
-            </ListItemInfo>
+            <ListItemText>{t("customer")}</ListItemText>
           </>
         }
         categorySlot={
-          <ListItemInfo className="@max-4xl:hidden">
+          <>
             <ListItemTitle>
               {category ? category.name : t("noCategory")}
             </ListItemTitle>
 
             <ListItemText>{t("category")}</ListItemText>
-          </ListItemInfo>
+          </>
         }
         companySlot={
-          <ListItemInfo className="@max-5xl:hidden">
+          <>
             <ListItemTitle>
               {company ? company.name : t("noCompany")}
             </ListItemTitle>
 
             <ListItemText>{t("company")}</ListItemText>
-          </ListItemInfo>
+          </>
         }
-        statusSlot={
-          <ProjectItemBaseBadge
-            projectId={id}
-            className="@max-lg:hidden"
-            status={status}
-          />
-        }
+        statusSlot={<ProjectItemBaseBadge projectId={id} status={status} />}
         commentsModalTriggerSlot={
           <ItemBaseCommentsModalTrigger
             data-test={`project-${id}-comments-modal-trigger`}

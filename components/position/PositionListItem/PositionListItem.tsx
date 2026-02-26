@@ -32,7 +32,10 @@ export function PositionListItem({
 
   return (
     <SelectableItem {...selected} item={{ id }}>
-      <ListItem data-test="position-list-item">
+      <ListItem
+        data-test="position-list-item"
+        className="flex w-full items-center gap-4"
+      >
         <PositionItemCheckbox id={id} />
         <ListItemInfo>
           <ListItemTitle>{name}</ListItemTitle>

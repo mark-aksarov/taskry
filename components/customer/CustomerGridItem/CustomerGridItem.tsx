@@ -16,6 +16,7 @@ import { useTranslations } from "next-intl";
 import { Link } from "@/components/ui/Link";
 import { Link2, Mail, Phone } from "lucide-react";
 import { Separator } from "@/components/ui/Separator";
+import { CustomerDetailModal } from "../CustomerDetailModal";
 import { UnknownUser } from "@/components/common/UnknownUser";
 import { CustomerItemCheckbox } from "../CustomerItemCheckbox";
 import { CustomerGridItemLayout } from "./CustomerGridItemLayout";
@@ -24,7 +25,6 @@ import { ImageContainer } from "@/components/common/ImageContainer";
 import { ItemBaseDetailModalTrigger } from "@/components/common/ItemBase";
 import { useSelectedItems } from "@/components/common/SelectedItemsContext";
 import { CustomerItemActionMenuTrigger } from "../CustomerItemActionMenuTrigger";
-import { CustomerDetailModal } from "../CustomerDetailModal";
 
 interface CustomerGridItemProps {
   id: number;
@@ -104,22 +104,29 @@ export function CustomerGridItem({
           </>
         }
         titleSlot={
-          <GridItemInfo className="flex-auto">
-            <GridItemTitle>
-              <ItemBaseDetailModalTrigger
-                modal={customerDetailModal}
-                className="truncate max-md:hidden"
-              >
-                {fullName}
-              </ItemBaseDetailModalTrigger>
+          <>
+            <GridItemInfo className="flex-auto max-md:hidden">
+              <GridItemTitle>
+                <ItemBaseDetailModalTrigger
+                  modal={customerDetailModal}
+                  className="truncate"
+                >
+                  {fullName}
+                </ItemBaseDetailModalTrigger>
+              </GridItemTitle>
 
-              <div className="truncate md:hidden">{fullName}</div>
-            </GridItemTitle>
+              <GridItemText>
+                {company ? company.name : t("noCompany")}
+              </GridItemText>
+            </GridItemInfo>
 
-            <GridItemText>
-              {company ? company.name : t("noCompany")}
-            </GridItemText>
-          </GridItemInfo>
+            <GridItemInfo className="flex-auto md:hidden">
+              <GridItemTitle>{fullName}</GridItemTitle>
+              <GridItemText>
+                {company ? company.name : t("noCompany")}
+              </GridItemText>
+            </GridItemInfo>
+          </>
         }
         contactSlot={
           <>

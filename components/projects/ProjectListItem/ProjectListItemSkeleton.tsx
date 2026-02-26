@@ -3,34 +3,60 @@ import {
   ItemBaseButtonSkeleton,
   ItemBaseActionMenuTriggerSkeleton,
 } from "@/components/common/ItemBase";
-import { ProjectListItemLayout } from "./ProjectListItemLayout";
-import { ListItemInfoSkeleton } from "@/components/common/List/index";
+
+import {
+  ListItemTextSkeleton,
+  ListItemTitleSkeleton,
+} from "@/components/common/List";
+
 import { CheckboxSkeleton } from "@/components/common/CheckboxSkeleton";
 import { ImageContainerSkeleton } from "@/components/common/ImageContainer";
+import { ProjectListItemLayout } from "./ProjectListItemLayout";
 
 export const ProjectListItemSkeleton = () => {
   return (
     <ProjectListItemLayout
       checkboxSlot={<CheckboxSkeleton />}
-      titleSlot={<ListItemInfoSkeleton />}
+      infoSlot={
+        <>
+          <ListItemTitleSkeleton />
+          <ListItemTextSkeleton />
+        </>
+      }
+      infoMobileSlot={
+        <>
+          <ListItemTitleSkeleton />
+          <ListItemTextSkeleton />
+        </>
+      }
+      creatorImgSlot={<ImageContainerSkeleton className="h-9 w-9" />}
       creatorSlot={
         <>
-          <ImageContainerSkeleton className="h-9 w-9 @max-2xl:hidden" />
-          <ListItemInfoSkeleton className="@max-2xl:hidden" />
+          <ListItemTitleSkeleton />
+          <ListItemTextSkeleton />
         </>
       }
+      customerImgSlot={<ImageContainerSkeleton className="h-9 w-9" />}
       customerSlot={
         <>
-          <ImageContainerSkeleton className="h-9 w-9 @max-3xl:hidden" />
-          <ListItemInfoSkeleton className="@max-3xl:hidden" />
+          <ListItemTitleSkeleton />
+          <ListItemTextSkeleton />
         </>
       }
-      categorySlot={<ListItemInfoSkeleton className="@max-4xl:hidden" />}
-      companySlot={<ListItemInfoSkeleton className="@max-5xl:hidden" />}
-      statusSlot={<ItemBaseBadgeSkeleton className="@max-lg:hidden" />}
-      commentsModalTriggerSlot={
-        <ItemBaseButtonSkeleton className="@max-md:hidden" />
+      categorySlot={
+        <>
+          <ListItemTitleSkeleton />
+          <ListItemTextSkeleton />
+        </>
       }
+      companySlot={
+        <>
+          <ListItemTitleSkeleton />
+          <ListItemTextSkeleton />
+        </>
+      }
+      statusSlot={<ItemBaseBadgeSkeleton />}
+      commentsModalTriggerSlot={<ItemBaseButtonSkeleton />}
       menuTriggerSlot={<ItemBaseActionMenuTriggerSkeleton />}
     />
   );

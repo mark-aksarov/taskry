@@ -1,11 +1,15 @@
-import { ListItem } from "@/components/common/List";
+import { ListItem, ListItemInfo } from "@/components/common/List";
+import { twMerge } from "tailwind-merge";
 
 export interface ProjectListItemProps {
   id?: number;
   checkboxSlot: React.ReactNode;
-  titleSlot: React.ReactNode;
+  infoSlot: React.ReactNode;
+  infoMobileSlot: React.ReactNode;
   categorySlot: React.ReactNode;
+  creatorImgSlot: React.ReactNode;
   creatorSlot: React.ReactNode;
+  customerImgSlot: React.ReactNode;
   customerSlot: React.ReactNode;
   companySlot: React.ReactNode;
   statusSlot: React.ReactNode;
@@ -16,8 +20,11 @@ export interface ProjectListItemProps {
 export const ProjectListItemLayout = ({
   id,
   checkboxSlot,
-  titleSlot,
+  infoSlot,
+  infoMobileSlot,
+  creatorImgSlot,
   creatorSlot,
+  customerImgSlot,
   customerSlot,
   categorySlot,
   companySlot,
@@ -27,20 +34,33 @@ export const ProjectListItemLayout = ({
 }: ProjectListItemProps) => {
   return (
     <ListItem data-test="project-list-item" data-id={id}>
-      {checkboxSlot}
-      {titleSlot}
-      {creatorSlot}
-      {customerSlot}
-      {categorySlot}
-      {companySlot}
+      <div className="flex w-full items-center gap-4 max-md:hidden">
+        {checkboxSlot}
+        <ListItemInfo>{infoSlot}</ListItemInfo>
+        {creatorImgSlot}
+        <ListItemInfo>{creatorSlot}</ListItemInfo>
+        {customerImgSlot}
+        <ListItemInfo>{customerSlot}</ListItemInfo>
+        <ListItemInfo className="@max-4xl:hidden">{categorySlot}</ListItemInfo>
+        <ListItemInfo className="@max-5xl:hidden">{companySlot}</ListItemInfo>
 
-      <div className="flex flex-none items-center justify-end gap-4">
-        {statusSlot}
+        <div className="flex flex-none items-center justify-end gap-4">
+          {statusSlot}
 
-        <div className="flex items-center @max-md:gap-1 @md:gap-2">
-          <div className="@max-lg:hidden">{commentsModalTriggerSlot}</div>
+          <div className="flex items-center gap-2">
+            {commentsModalTriggerSlot}
+            {menuTriggerSlot}
+          </div>
+        </div>
+      </div>
+
+      <div className="flex flex-col gap-2 md:hidden">
+        <div className="flex w-full items-center gap-4">
+          {checkboxSlot}
+          <ListItemInfo>{infoMobileSlot}</ListItemInfo>
           {menuTriggerSlot}
         </div>
+        <div className={twMerge("ml-9 h-[1.75rem]")}>{statusSlot}</div>
       </div>
     </ListItem>
   );

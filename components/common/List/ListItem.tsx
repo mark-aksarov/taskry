@@ -9,10 +9,7 @@ interface ListItemProps extends React.HTMLAttributes<HTMLDivElement> {
 export function ListItem({ className, children, ...props }: ListItemProps) {
   return (
     <Card
-      className={twMerge(
-        "@container flex w-full items-center gap-4 rounded-md py-3 pr-2",
-        className,
-      )}
+      className={twMerge("@container rounded-md py-3 pr-2", className)}
       {...props}
     >
       {children}

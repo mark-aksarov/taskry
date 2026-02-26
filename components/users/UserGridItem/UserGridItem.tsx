@@ -98,22 +98,29 @@ export function UserGridItem({
         </>
       }
       titleSlot={
-        <GridItemInfo className="flex-auto">
-          <GridItemTitle>
-            <ItemBaseDetailModalTrigger
-              modal={userDetailModal}
-              className="truncate max-md:hidden"
-            >
-              {fullName}
-            </ItemBaseDetailModalTrigger>
+        <>
+          <GridItemInfo className="flex-auto max-md:hidden">
+            <GridItemTitle>
+              <ItemBaseDetailModalTrigger
+                modal={userDetailModal}
+                className="truncate"
+              >
+                {fullName}
+              </ItemBaseDetailModalTrigger>
+            </GridItemTitle>
 
-            <div className="truncate md:hidden">{fullName}</div>
-          </GridItemTitle>
+            <GridItemText>
+              {position ? position.name : t("noPosition")}
+            </GridItemText>
+          </GridItemInfo>
 
-          <GridItemText>
-            {position ? position.name : t("noPosition")}
-          </GridItemText>
-        </GridItemInfo>
+          <GridItemInfo className="flex-auto md:hidden">
+            <GridItemTitle>{fullName}</GridItemTitle>
+            <GridItemText>
+              {position ? position.name : t("noPosition")}
+            </GridItemText>
+          </GridItemInfo>
+        </>
       }
       phoneNumberSlot={
         <>

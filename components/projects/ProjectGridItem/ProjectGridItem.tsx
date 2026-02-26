@@ -135,25 +135,29 @@ export const ProjectGridItemInner = memo(
           />
         }
         titleSlot={
-          <GridItemInfo className="flex-auto">
-            <GridItemTitle>
-              <ItemBaseDetailModalTrigger
-                modal={
-                  <ProjectDetailModal
-                    projectId={id}
-                    projectDetailContainer={projectDetailContainer}
-                  />
-                }
-                className="truncate max-md:hidden"
-              >
-                {title}
-              </ItemBaseDetailModalTrigger>
+          <>
+            <GridItemInfo className="flex-auto max-md:hidden">
+              <GridItemTitle>
+                <ItemBaseDetailModalTrigger
+                  modal={
+                    <ProjectDetailModal
+                      projectId={id}
+                      projectDetailContainer={projectDetailContainer}
+                    />
+                  }
+                >
+                  {title}
+                </ItemBaseDetailModalTrigger>
+              </GridItemTitle>
 
-              <div className="truncate md:hidden">{title}</div>
-            </GridItemTitle>
+              <GridItemText>{deadlineOn}</GridItemText>
+            </GridItemInfo>
 
-            <GridItemText>{deadlineOn}</GridItemText>
-          </GridItemInfo>
+            <GridItemInfo className="flex-auto md:hidden">
+              <GridItemTitle>{title}</GridItemTitle>
+              <GridItemText>{deadlineOn}</GridItemText>
+            </GridItemInfo>
+          </>
         }
         creatorImageSlot={
           creator ? (

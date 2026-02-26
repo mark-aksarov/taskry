@@ -3,8 +3,13 @@ import {
   ItemBaseButtonSkeleton,
   ItemBaseActionMenuTriggerSkeleton,
 } from "@/components/common/ItemBase";
+
+import {
+  ListItemTextSkeleton,
+  ListItemTitleSkeleton,
+} from "@/components/common/List";
+
 import { TaskListItemLayout } from "./TaskListItemLayout";
-import { ListItemInfoSkeleton } from "@/components/common/List";
 import { CheckboxSkeleton } from "@/components/common/CheckboxSkeleton";
 import { ImageContainerSkeleton } from "@/components/common/ImageContainer";
 
@@ -16,19 +21,39 @@ export const TaskListItemSkeleton = ({
   return (
     <TaskListItemLayout
       checkboxSlot={showCheckbox && <CheckboxSkeleton />}
-      titleSlot={<ListItemInfoSkeleton />}
-      assigneeSlot={
+      infoSlot={
         <>
-          <ImageContainerSkeleton className="h-9 w-9 @max-2xl:hidden" />
-          <ListItemInfoSkeleton className="@max-2xl:hidden" />
+          <ListItemTitleSkeleton />
+          <ListItemTextSkeleton />
         </>
       }
-      categorySlot={<ListItemInfoSkeleton className="@max-3xl:hidden" />}
-      projectSlot={<ListItemInfoSkeleton className="@max-4xl:hidden" />}
-      statusSlot={<ItemBaseBadgeSkeleton />}
-      commentsModalTriggerSlot={
-        <ItemBaseButtonSkeleton className="@max-md:hidden" />
+      infoMobileSlot={
+        <>
+          <ListItemTitleSkeleton />
+          <ListItemTextSkeleton />
+        </>
       }
+      assigneeImgSlot={<ImageContainerSkeleton className="h-9 w-9" />}
+      assigneeSlot={
+        <>
+          <ListItemTitleSkeleton />
+          <ListItemTextSkeleton />
+        </>
+      }
+      categorySlot={
+        <>
+          <ListItemTitleSkeleton />
+          <ListItemTextSkeleton />
+        </>
+      }
+      projectSlot={
+        <>
+          <ListItemTitleSkeleton />
+          <ListItemTextSkeleton />
+        </>
+      }
+      statusSlot={<ItemBaseBadgeSkeleton />}
+      commentsModalTriggerSlot={<ItemBaseButtonSkeleton />}
       menuTriggerSlot={<ItemBaseActionMenuTriggerSkeleton />}
     />
   );

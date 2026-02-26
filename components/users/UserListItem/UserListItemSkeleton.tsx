@@ -1,16 +1,48 @@
-import { ListItem, ListItemInfoSkeleton } from "@/components/common/List";
+import {
+  ListItemTextSkeleton,
+  ListItemTitleSkeleton,
+} from "@/components/common/List";
+
+import { UserListItemLayout } from "./UserListItemLayout";
 import { ImageContainerSkeleton } from "@/components/common/ImageContainer";
 import { ItemBaseActionMenuTriggerSkeleton } from "@/components/common/ItemBase";
 
 export function UserListItemSkeleton() {
   return (
-    <ListItem>
-      <ImageContainerSkeleton className="h-9 w-9" />
-      <ListItemInfoSkeleton />
-      <ListItemInfoSkeleton className="@max-lg:hidden" />
-      <ListItemInfoSkeleton className="@max-2xl:hidden" />
-      <ListItemInfoSkeleton className="@max-4xl:hidden" />
-      <ItemBaseActionMenuTriggerSkeleton />
-    </ListItem>
+    <UserListItemLayout
+      imgSlot={<ImageContainerSkeleton className="h-9 w-9 max-md:hidden" />}
+      imgMobileSlot={<ImageContainerSkeleton className="h-9 w-9 md:hidden" />}
+      infoSlot={
+        <>
+          <ListItemTitleSkeleton />
+          <ListItemTextSkeleton />
+        </>
+      }
+      infoMobileSlot={
+        <>
+          <ListItemTitleSkeleton />
+          <ListItemTextSkeleton />
+        </>
+      }
+      phoneNumberSlot={
+        <>
+          <ListItemTitleSkeleton />
+          <ListItemTextSkeleton />
+        </>
+      }
+      publicLinkSlot={
+        <>
+          <ListItemTitleSkeleton />
+          <ListItemTextSkeleton />
+        </>
+      }
+      positionSlot={
+        <>
+          <ListItemTitleSkeleton />
+          <ListItemTextSkeleton />
+        </>
+      }
+      menuTriggerSlot={<ItemBaseActionMenuTriggerSkeleton />}
+    />
   );
 }

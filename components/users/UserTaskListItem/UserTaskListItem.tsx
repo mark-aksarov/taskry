@@ -1,12 +1,6 @@
 "use client";
 
 import {
-  ListItemInfo,
-  ListItemText,
-  ListItemTitle,
-} from "@/components/common/List";
-
-import {
   ActionFn,
   ActionState,
   UpdateTaskStatusesPayload,
@@ -23,6 +17,7 @@ import { useFormatter, useTranslations } from "next-intl";
 import { UserTaskListItemLayout } from "./UserTaskListItemLayout";
 import { SelectableItem } from "@/components/common/SelectableItem";
 import { TaskDetailModal } from "@/components/tasks/TaskDetailModal";
+import { ListItemText, ListItemTitle } from "@/components/common/List";
 import { TaskItemCheckbox } from "@/components/tasks/TaskItemCheckbox";
 import { TaskCommentsModal } from "@/components/tasks/TaskCommentsModal";
 import { TaskItemBaseBadge } from "@/components/tasks/TaskItemBaseBadge";
@@ -104,8 +99,8 @@ export const UserTaskListItemInner = memo(
     return (
       <UserTaskListItemLayout
         checkboxSlot={<TaskItemCheckbox id={id} status={status} />}
-        deadlineSlot={
-          <ListItemInfo>
+        infoSlot={
+          <>
             <ListItemTitle>
               <ItemBaseDetailModalTrigger
                 modal={
@@ -118,20 +113,20 @@ export const UserTaskListItemInner = memo(
               >
                 {title}
               </ItemBaseDetailModalTrigger>
-
-              <div className="truncate md:hidden">{title}</div>
             </ListItemTitle>
             <ListItemText>{deadlineOn}</ListItemText>
-          </ListItemInfo>
+          </>
+        }
+        infoMobileSlot={
+          <>
+            <ListItemTitle>{title}</ListItemTitle>
+            <ListItemText>{deadlineOn}</ListItemText>
+          </>
         }
         statusSlot={
-          <TaskItemBaseBadge
-            isSelected={isSelected}
-            status={status}
-            className="@max-lg:hidden"
-          />
+          <TaskItemBaseBadge isSelected={isSelected} status={status} />
         }
-        commentsSlot={
+        commentsModalTriggerSlot={
           <ItemBaseCommentsModalTrigger
             commentsCount={commentsCount}
             modal={
@@ -144,7 +139,7 @@ export const UserTaskListItemInner = memo(
             }
           />
         }
-        actionMenuSlot={
+        menuTriggerSlot={
           <TaskItemActionMenuTrigger
             guestMode={guestMode}
             taskId={id}

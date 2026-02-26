@@ -8,11 +8,11 @@ import {
 } from "@/components/common/List";
 
 import { useTranslations } from "next-intl";
+import { ActionFn, ActionState } from "@/lib/actions/types";
 import { SelectableItem } from "@/components/common/SelectableItem";
 import { TaskCategoryItemCheckbox } from "../TaskCategoryItemCheckbox";
 import { useSelectedItems } from "@/components/common/SelectedItemsContext";
 import { TaskCategoryItemActionMenuTrigger } from "../TaskCategoryItemActionMenuTrigger";
-import { ActionFn, ActionState } from "@/lib/actions/types";
 
 interface TaskCategoryListItemProps {
   id: number;
@@ -32,7 +32,10 @@ export function TaskCategoryListItem({
 
   return (
     <SelectableItem {...selected} item={{ id }}>
-      <ListItem data-test="task-category-list-item">
+      <ListItem
+        data-test="task-category-list-item"
+        className="flex w-full items-center gap-4"
+      >
         <TaskCategoryItemCheckbox id={id} />
         <ListItemInfo>
           <ListItemTitle>{name}</ListItemTitle>

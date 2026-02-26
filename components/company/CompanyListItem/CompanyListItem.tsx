@@ -32,7 +32,10 @@ export function CompanyListItem({
 
   return (
     <SelectableItem {...selected} item={{ id }}>
-      <ListItem data-test="company-list-item">
+      <ListItem
+        data-test="company-list-item "
+        className="flex w-full items-center gap-4"
+      >
         <CompanyListItemCheckbox id={id} />
         <ListItemInfo>
           <ListItemTitle>{name}</ListItemTitle>

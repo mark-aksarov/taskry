@@ -32,7 +32,10 @@ export function ProjectCategoryListItem({
 
   return (
     <SelectableItem {...selected} item={{ id }}>
-      <ListItem data-test="project-category-list-item">
+      <ListItem
+        data-test="project-category-list-item"
+        className="flex w-full items-center gap-4"
+      >
         <ProjectCategoryItemCheckbox id={id} />
         <ListItemInfo>
           <ListItemTitle>{name}</ListItemTitle>

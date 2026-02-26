@@ -143,25 +143,29 @@ export const TaskGridItemInner = memo(
           />
         }
         titleSlot={
-          <GridItemInfo className="flex-auto">
-            <GridItemTitle>
-              <ItemBaseDetailModalTrigger
-                modal={
-                  <TaskDetailModal
-                    taskId={id}
-                    taskDetailContainer={taskDetailContainer}
-                  />
-                }
-                className="truncate max-md:hidden"
-              >
-                {title}
-              </ItemBaseDetailModalTrigger>
+          <>
+            <GridItemInfo className="flex-auto max-md:hidden">
+              <GridItemTitle>
+                <ItemBaseDetailModalTrigger
+                  modal={
+                    <TaskDetailModal
+                      taskId={id}
+                      taskDetailContainer={taskDetailContainer}
+                    />
+                  }
+                >
+                  {title}
+                </ItemBaseDetailModalTrigger>
+              </GridItemTitle>
 
-              <div className="truncate md:hidden">{title}</div>
-            </GridItemTitle>
+              <GridItemText>{deadlineOn}</GridItemText>
+            </GridItemInfo>
 
-            <GridItemText>{deadlineOn}</GridItemText>
-          </GridItemInfo>
+            <GridItemInfo className="flex-auto md:hidden">
+              <GridItemTitle>{title}</GridItemTitle>
+              <GridItemText>{deadlineOn}</GridItemText>
+            </GridItemInfo>
+          </>
         }
         assigneeImageSlot={
           assignee ? (

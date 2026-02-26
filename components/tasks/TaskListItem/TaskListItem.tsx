@@ -7,12 +7,6 @@ import {
 } from "@/lib/actions/types";
 
 import {
-  ListItemInfo,
-  ListItemText,
-  ListItemTitle,
-} from "@/components/common/List";
-
-import {
   ItemBaseDetailModalTrigger,
   ItemBaseCommentsModalTrigger,
 } from "@/components/common/ItemBase";
@@ -32,6 +26,7 @@ import { UnknownUser } from "@/components/common/UnknownUser";
 import { ImageContainer } from "@/components/common/ImageContainer";
 import { UserDetailModal } from "@/components/users/UserDetailModal";
 import { UpdateTaskStatusProvider } from "../UpdateTaskStatusContext";
+import { ListItemText, ListItemTitle } from "@/components/common/List";
 import { TaskItemActionMenuTrigger } from "../TaskItemActionMenuTrigger";
 import { ProjectDetailModal } from "@/components/projects/ProjectDetailModal";
 
@@ -144,9 +139,9 @@ export const TaskListItemInner = memo(
         checkboxSlot={
           showCheckbox && <TaskItemCheckbox id={id} status={status} />
         }
-        titleSlot={
-          <ListItemInfo>
-            <ListItemTitle data-test="task-list-item-title">
+        infoSlot={
+          <>
+            <ListItemTitle>
               <ItemBaseDetailModalTrigger
                 modal={
                   <TaskDetailModal
@@ -154,18 +149,22 @@ export const TaskListItemInner = memo(
                     taskDetailContainer={taskDetailContainer}
                   />
                 }
-                className="truncate max-md:hidden"
+                className="truncate"
               >
                 {title}
               </ItemBaseDetailModalTrigger>
-
-              <div className="truncate md:hidden">{title}</div>
             </ListItemTitle>
 
             <ListItemText>{deadlineOn}</ListItemText>
-          </ListItemInfo>
+          </>
         }
-        assigneeSlot={
+        infoMobileSlot={
+          <>
+            <ListItemTitle>{title}</ListItemTitle>
+            <ListItemText>{deadlineOn}</ListItemText>
+          </>
+        }
+        assigneeImgSlot={
           <>
             {assignee ? (
               <ItemBaseDetailModalTrigger
@@ -175,47 +174,47 @@ export const TaskListItemInner = memo(
                     userDetailContainer={userDetailContainer}
                   />
                 }
-                className="max-md:hidden"
               >
                 {assigneeImg}
               </ItemBaseDetailModalTrigger>
             ) : (
-              <UnknownUser className="h-9 w-9 max-md:hidden" />
+              <UnknownUser className="h-9 w-9" />
             )}
+          </>
+        }
+        assigneeSlot={
+          <>
+            <ListItemTitle>
+              {assignee ? (
+                <ItemBaseDetailModalTrigger
+                  modal={
+                    <UserDetailModal
+                      userId={assignee.id}
+                      userDetailContainer={userDetailContainer}
+                    />
+                  }
+                  className="truncate"
+                >
+                  {assignee.fullName}
+                </ItemBaseDetailModalTrigger>
+              ) : (
+                t("noAssignee")
+              )}
+            </ListItemTitle>
 
-            <ListItemInfo className="max-md:hidden">
-              <ListItemTitle data-test="task-list-item-user-title">
-                {assignee ? (
-                  <ItemBaseDetailModalTrigger
-                    modal={
-                      <UserDetailModal
-                        userId={assignee.id}
-                        userDetailContainer={userDetailContainer}
-                      />
-                    }
-                    className="truncate"
-                  >
-                    {assignee.fullName}
-                  </ItemBaseDetailModalTrigger>
-                ) : (
-                  t("noAssignee")
-                )}
-              </ListItemTitle>
-
-              <ListItemText>{t("assignee")}</ListItemText>
-            </ListItemInfo>
+            <ListItemText>{t("assignee")}</ListItemText>
           </>
         }
         categorySlot={
-          <ListItemInfo className="@max-3xl:hidden">
+          <>
             <ListItemTitle>
               {category ? category.name : t("noCategory")}
             </ListItemTitle>
             <ListItemText>{t("category")}</ListItemText>
-          </ListItemInfo>
+          </>
         }
         projectSlot={
-          <ListItemInfo className="@max-4xl:hidden">
+          <>
             <ListItemTitle data-test="task-list-item-project-title">
               <ItemBaseDetailModalTrigger
                 modal={
@@ -230,14 +229,10 @@ export const TaskListItemInner = memo(
               </ItemBaseDetailModalTrigger>
             </ListItemTitle>
             <ListItemText>{t("project")}</ListItemText>
-          </ListItemInfo>
+          </>
         }
         statusSlot={
-          <TaskItemBaseBadge
-            isSelected={isSelected}
-            className="@max-lg:hidden"
-            status={status}
-          />
+          <TaskItemBaseBadge isSelected={isSelected} status={status} />
         }
         commentsModalTriggerSlot={
           <ItemBaseCommentsModalTrigger

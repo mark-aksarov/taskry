@@ -1,3 +1,4 @@
+import { Skeleton } from "@/components/ui/Skeleton";
 import { twMerge } from "tailwind-merge";
 
 export const titleStyles =
@@ -18,4 +19,8 @@ export function ListItemTitle({
       {children}
     </div>
   );
+}
+
+export function ListItemTitleSkeleton() {
+  return <Skeleton className="w-[6rem] max-w-full" size="sm" />;
 }
