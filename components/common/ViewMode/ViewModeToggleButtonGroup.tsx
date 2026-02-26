@@ -30,7 +30,7 @@ export const ViewModeToggleButtonGroup = ({
       }}
     >
       <ToggleButton id="list">{t("list")}</ToggleButton>
-      <ToggleButton id="grid">{t("grid")}</ToggleButton>
+      <ToggleButton id="grid">{t("cards")}</ToggleButton>
     </ToggleButtonGroup>
   );
 };

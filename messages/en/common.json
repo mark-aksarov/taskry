@@ -36,7 +36,7 @@
   },
   "ViewModeToggleButtonGroup": {
     "list": "List",
-    "grid": "Grid"
+    "cards": "Cards"
   },
   "AttachmentsField": {
     "label": "Attachments",

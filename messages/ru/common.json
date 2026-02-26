@@ -36,7 +36,7 @@
   },
   "ViewModeToggleButtonGroup": {
     "list": "Список",
-    "grid": "Сетка"
+    "cards": "Карточки"
   },
   "AttachmentsField": {
     "label": "Вложения",
