@@ -21,13 +21,13 @@ export const TaskListItemSkeleton = ({
   return (
     <TaskListItemLayout
       checkboxSlot={showCheckbox && <CheckboxSkeleton />}
-      infoSlot={
+      mainSlot={
         <>
           <ListItemTitleSkeleton />
           <ListItemTextSkeleton />
         </>
       }
-      infoMobileSlot={
+      mainMobileSlot={
         <>
           <ListItemTitleSkeleton />
           <ListItemTextSkeleton />

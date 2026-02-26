@@ -3,7 +3,7 @@ import { GridItem, GridItemRow } from "@/components/common/Grid";
 interface ProjectGridItemLayoutProps {
   checkboxSlot?: React.ReactNode;
   menuTriggerSlot: React.ReactNode;
-  titleSlot: React.ReactNode;
+  mainSlot: React.ReactNode;
   creatorImageSlot: React.ReactNode;
   commentsSlot: React.ReactNode;
   statusSlot: React.ReactNode;
@@ -13,7 +13,7 @@ interface ProjectGridItemLayoutProps {
 export function ProjectGridItemLayout({
   checkboxSlot,
   menuTriggerSlot,
-  titleSlot,
+  mainSlot,
   creatorImageSlot,
   commentsSlot,
   statusSlot,
@@ -26,7 +26,7 @@ export function ProjectGridItemLayout({
         {menuTriggerSlot}
       </GridItemRow>
       <GridItemRow>
-        {titleSlot}
+        {mainSlot}
         {creatorImageSlot}
       </GridItemRow>
 

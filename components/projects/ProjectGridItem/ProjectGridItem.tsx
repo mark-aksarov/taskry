@@ -5,6 +5,7 @@ import {
   GridItemInfo,
   GridItemTitle,
   GridItemProgress,
+  GridItemTitleDetailModalTrigger,
 } from "@/components/common/Grid";
 
 import {
@@ -134,25 +135,25 @@ export const ProjectGridItemInner = memo(
             className="-mr-2"
           />
         }
-        titleSlot={
+        mainSlot={
           <>
+            {/* Show modal on desktop */}
             <GridItemInfo className="flex-auto max-md:hidden">
-              <GridItemTitle>
-                <ItemBaseDetailModalTrigger
-                  modal={
-                    <ProjectDetailModal
-                      projectId={id}
-                      projectDetailContainer={projectDetailContainer}
-                    />
-                  }
-                >
-                  {title}
-                </ItemBaseDetailModalTrigger>
-              </GridItemTitle>
+              <GridItemTitleDetailModalTrigger
+                modal={
+                  <ProjectDetailModal
+                    projectId={id}
+                    projectDetailContainer={projectDetailContainer}
+                  />
+                }
+              >
+                {title}
+              </GridItemTitleDetailModalTrigger>
 
               <GridItemText>{deadlineOn}</GridItemText>
             </GridItemInfo>
 
+            {/* Show only text on mobile */}
             <GridItemInfo className="flex-auto md:hidden">
               <GridItemTitle>{title}</GridItemTitle>
               <GridItemText>{deadlineOn}</GridItemText>
@@ -162,6 +163,7 @@ export const ProjectGridItemInner = memo(
         creatorImageSlot={
           creator ? (
             <>
+              {/* Show modal on desktop */}
               <ItemBaseDetailModalTrigger
                 className="max-md:hidden"
                 modal={
@@ -174,6 +176,7 @@ export const ProjectGridItemInner = memo(
                 {creatorImg}
               </ItemBaseDetailModalTrigger>
 
+              {/* Show link on mobile */}
               <Link className="md:hidden" href={`/team/${creator.id}`}>
                 {creatorImg}
               </Link>

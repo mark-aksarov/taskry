@@ -1,13 +1,36 @@
 import { twMerge } from "tailwind-merge";
+import {
+  ItemBaseDetailModalTrigger,
+  ItemBaseDetailModalTriggerProps,
+} from "../ItemBase";
+
+// These components are direct children of a flex container and become blockified flex items.
 
 export const titleStyles =
-  "max-w-full truncate p-1 -m-1 text-sm font-bold text-black dark:text-white inline";
+  "truncate max-w-full text-sm font-bold text-black dark:text-white";
 
+// Text only title
 interface GridItemTitleProps {
   className?: string;
   children: React.ReactNode;
 }
 
 export function GridItemTitle({ className, children }: GridItemTitleProps) {
-  return <h3 className={twMerge(titleStyles, className)}>{children}</h3>;
+  return <div className={twMerge(titleStyles, className)}>{children}</div>;
+}
+
+// Detail modal title
+export function GridItemTitleDetailModalTrigger({
+  className,
+  children,
+  ...props
+}: ItemBaseDetailModalTriggerProps & GridItemTitleProps) {
+  return (
+    <ItemBaseDetailModalTrigger
+      className={twMerge(titleStyles, className)}
+      {...props}
+    >
+      {children}
+    </ItemBaseDetailModalTrigger>
+  );
 }

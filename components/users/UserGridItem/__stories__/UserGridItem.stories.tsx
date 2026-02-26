@@ -28,6 +28,17 @@ export const Default = {
   },
 } satisfies Story;
 
+export const WithOverflowContent = {
+  args: {
+    ...Default.args,
+    fullName: "This is a user name with a very long text for layout testing",
+    email: "longemailaddressfortestingpurposes@exampledomainfortestemail.com",
+    phoneNumber: "+1000000000000000000000000000000000000000000000000000",
+    publicLink:
+      "https://example.com/this-is-a-very-long-url-for-layout-testing",
+  },
+};
+
 export const WithoutImagePositionPhoneAndLink = {
   args: {
     ...Default.args,

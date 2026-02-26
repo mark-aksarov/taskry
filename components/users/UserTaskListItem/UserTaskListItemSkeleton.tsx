@@ -16,13 +16,13 @@ export const UserTaskListItemSkeleton = () => {
   return (
     <UserTaskListItemLayout
       checkboxSlot={<CheckboxSkeleton />}
-      infoSlot={
+      mainSlot={
         <>
           <ListItemTitleSkeleton />
           <ListItemTextSkeleton />
         </>
       }
-      infoMobileSlot={
+      mainMobileSlot={
         <>
           <ListItemTitleSkeleton />
           <ListItemTextSkeleton />

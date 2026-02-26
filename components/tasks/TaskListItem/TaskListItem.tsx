@@ -11,6 +11,12 @@ import {
   ItemBaseCommentsModalTrigger,
 } from "@/components/common/ItemBase";
 
+import {
+  ListItemText,
+  ListItemTitle,
+  ListItemTitleDetailModalTrigger,
+} from "@/components/common/List";
+
 import { memo } from "react";
 import Image from "next/image";
 import { TaskDetailModal } from "../TaskDetailModal";
@@ -26,7 +32,6 @@ import { UnknownUser } from "@/components/common/UnknownUser";
 import { ImageContainer } from "@/components/common/ImageContainer";
 import { UserDetailModal } from "@/components/users/UserDetailModal";
 import { UpdateTaskStatusProvider } from "../UpdateTaskStatusContext";
-import { ListItemText, ListItemTitle } from "@/components/common/List";
 import { TaskItemActionMenuTrigger } from "../TaskItemActionMenuTrigger";
 import { ProjectDetailModal } from "@/components/projects/ProjectDetailModal";
 
@@ -139,26 +144,23 @@ export const TaskListItemInner = memo(
         checkboxSlot={
           showCheckbox && <TaskItemCheckbox id={id} status={status} />
         }
-        infoSlot={
+        mainSlot={
           <>
-            <ListItemTitle>
-              <ItemBaseDetailModalTrigger
-                modal={
-                  <TaskDetailModal
-                    taskId={id}
-                    taskDetailContainer={taskDetailContainer}
-                  />
-                }
-                className="truncate"
-              >
-                {title}
-              </ItemBaseDetailModalTrigger>
-            </ListItemTitle>
+            <ListItemTitleDetailModalTrigger
+              modal={
+                <TaskDetailModal
+                  taskId={id}
+                  taskDetailContainer={taskDetailContainer}
+                />
+              }
+            >
+              {title}
+            </ListItemTitleDetailModalTrigger>
 
             <ListItemText>{deadlineOn}</ListItemText>
           </>
         }
-        infoMobileSlot={
+        mainMobileSlot={
           <>
             <ListItemTitle>{title}</ListItemTitle>
             <ListItemText>{deadlineOn}</ListItemText>
@@ -184,23 +186,20 @@ export const TaskListItemInner = memo(
         }
         assigneeSlot={
           <>
-            <ListItemTitle>
-              {assignee ? (
-                <ItemBaseDetailModalTrigger
-                  modal={
-                    <UserDetailModal
-                      userId={assignee.id}
-                      userDetailContainer={userDetailContainer}
-                    />
-                  }
-                  className="truncate"
-                >
-                  {assignee.fullName}
-                </ItemBaseDetailModalTrigger>
-              ) : (
-                t("noAssignee")
-              )}
-            </ListItemTitle>
+            {assignee ? (
+              <ListItemTitleDetailModalTrigger
+                modal={
+                  <UserDetailModal
+                    userId={assignee.id}
+                    userDetailContainer={userDetailContainer}
+                  />
+                }
+              >
+                {assignee.fullName}
+              </ListItemTitleDetailModalTrigger>
+            ) : (
+              <ListItemTitle>{t("noAssignee")}</ListItemTitle>
+            )}
 
             <ListItemText>{t("assignee")}</ListItemText>
           </>
@@ -215,19 +214,16 @@ export const TaskListItemInner = memo(
         }
         projectSlot={
           <>
-            <ListItemTitle data-test="task-list-item-project-title">
-              <ItemBaseDetailModalTrigger
-                modal={
-                  <ProjectDetailModal
-                    projectId={project.id}
-                    projectDetailContainer={projectDetailContainer}
-                  />
-                }
-                className="truncate"
-              >
-                {project.title}
-              </ItemBaseDetailModalTrigger>
-            </ListItemTitle>
+            <ListItemTitleDetailModalTrigger
+              modal={
+                <ProjectDetailModal
+                  projectId={project.id}
+                  projectDetailContainer={projectDetailContainer}
+                />
+              }
+            >
+              {project.title}
+            </ListItemTitleDetailModalTrigger>
             <ListItemText>{t("project")}</ListItemText>
           </>
         }

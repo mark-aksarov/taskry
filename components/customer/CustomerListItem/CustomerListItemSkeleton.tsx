@@ -13,13 +13,13 @@ export function CustomerListItemSkeleton() {
       checkboxSlot={<CheckboxSkeleton />}
       imgSlot={<ImageContainerSkeleton className="h-9 w-9 max-md:hidden" />}
       imgMobileSlot={<ImageContainerSkeleton className="h-9 w-9 md:hidden" />}
-      infoSlot={
+      mainSlot={
         <>
           <ListItemTitleSkeleton />
           <ListItemTextSkeleton />
         </>
       }
-      infoMobileSlot={
+      mainMobileSlot={
         <>
           <ListItemTitleSkeleton />
           <ListItemTextSkeleton />

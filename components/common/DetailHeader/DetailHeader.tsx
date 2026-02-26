@@ -13,7 +13,7 @@ export function DetailHeader({ title, image, subtitle }: DetailHeaderProps) {
   return (
     <DetailHeaderLayout
       imageSlot={image}
-      infoSlot={
+      mainSlot={
         <DetailHeaderInfo>
           <DetailHeaderTitle>{title}</DetailHeaderTitle>
           <DetailHeaderText>{subtitle}</DetailHeaderText>

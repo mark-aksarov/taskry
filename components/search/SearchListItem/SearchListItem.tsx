@@ -36,7 +36,7 @@ export function SearchListItem({
       className={(renderProps) => styles({ ...renderProps })}
       href={href}
     >
-      <ListItem className="rounded-none bg-inherit! pr-3 shadow-none">
+      <ListItem className="flex w-full items-center gap-4 rounded-none bg-inherit! pr-3 shadow-none">
         <ListItemInfo>
           {titleSlot}
           {textSlot}

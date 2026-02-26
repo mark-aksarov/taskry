@@ -52,6 +52,17 @@ export const Default = {
   },
 } satisfies Story;
 
+export const WithOverflowContent = {
+  args: {
+    ...Default.args,
+    title: "This is a task title with a very long text for layout testing",
+    assignee: {
+      ...Default.args.assignee!,
+      fullName: "This is a user name with a very long text for layout testing",
+    },
+  },
+} satisfies Story;
+
 export const WithoutAssignee = {
   args: {
     ...Default.args,

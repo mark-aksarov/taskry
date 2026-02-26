@@ -4,26 +4,26 @@ interface CustomerListItemLayoutProps {
   id?: number;
   checkboxSlot: React.ReactNode;
   imgSlot: React.ReactNode;
-  infoSlot: React.ReactNode;
+  mainSlot: React.ReactNode;
   phoneNumberSlot: React.ReactNode;
   publicLinkSlot: React.ReactNode;
   companySlot: React.ReactNode;
   menuTriggerSlot: React.ReactNode;
   imgMobileSlot: React.ReactNode;
-  infoMobileSlot: React.ReactNode;
+  mainMobileSlot: React.ReactNode;
 }
 
 export const CustomerListItemLayout = ({
   id,
   checkboxSlot,
   imgSlot,
-  infoSlot,
+  mainSlot,
   phoneNumberSlot,
   publicLinkSlot,
   companySlot,
   menuTriggerSlot,
   imgMobileSlot,
-  infoMobileSlot,
+  mainMobileSlot,
 }: CustomerListItemLayoutProps) => {
   return (
     <ListItem
@@ -35,8 +35,8 @@ export const CustomerListItemLayout = ({
       {imgSlot}
       {imgMobileSlot}
 
-      <ListItemInfo className="max-md:hidden">{infoSlot}</ListItemInfo>
-      <ListItemInfo className="md:hidden">{infoMobileSlot}</ListItemInfo>
+      <ListItemInfo className="max-md:hidden">{mainSlot}</ListItemInfo>
+      <ListItemInfo className="md:hidden">{mainMobileSlot}</ListItemInfo>
 
       <ListItemInfo className="@max-lg:hidden">{phoneNumberSlot}</ListItemInfo>
       <ListItemInfo className="@max-2xl:hidden">{publicLinkSlot}</ListItemInfo>

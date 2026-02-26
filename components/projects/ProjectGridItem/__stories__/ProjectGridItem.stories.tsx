@@ -49,6 +49,17 @@ export const Default = {
   },
 } satisfies Story;
 
+export const WithOverflowContent = {
+  args: {
+    ...Default.args,
+    title: "This is a project title with a very long text for layout testing",
+    creator: {
+      ...Default.args.creator,
+      fullName: "This is a user name with a very long text for layout testing",
+    },
+  },
+} satisfies Story;
+
 export const WithoutCreator = {
   args: {
     ...Default.args,

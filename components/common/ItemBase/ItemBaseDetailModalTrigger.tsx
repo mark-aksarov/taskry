@@ -8,15 +8,16 @@ import {
 import { tv } from "tailwind-variants";
 import { focusRing } from "@/components/ui/styles";
 
-interface ItemBaseDetailModalTriggerProps extends DialogTriggerProps {
+export interface ItemBaseDetailModalTriggerProps extends DialogTriggerProps {
   modal: React.ReactNode;
   children: React.ReactNode;
+  "data-test"?: string;
   className?: string;
 }
 
 const styles = tv({
   extend: focusRing,
-  base: "max-w-full cursor-pointer",
+  base: "cursor-pointer",
 });
 
 export function ItemBaseDetailModalTrigger({

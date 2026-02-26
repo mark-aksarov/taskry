@@ -7,9 +7,10 @@ import {
 } from "@/lib/actions/types";
 
 import {
-  ItemBaseDetailModalTrigger,
-  ItemBaseCommentsModalTrigger,
-} from "@/components/common/ItemBase";
+  ListItemText,
+  ListItemTitle,
+  ListItemTitleDetailModalTrigger,
+} from "@/components/common/List";
 
 import { memo } from "react";
 import { TaskStatus } from "@/generated/prisma/enums";
@@ -17,11 +18,11 @@ import { useFormatter, useTranslations } from "next-intl";
 import { UserTaskListItemLayout } from "./UserTaskListItemLayout";
 import { SelectableItem } from "@/components/common/SelectableItem";
 import { TaskDetailModal } from "@/components/tasks/TaskDetailModal";
-import { ListItemText, ListItemTitle } from "@/components/common/List";
 import { TaskItemCheckbox } from "@/components/tasks/TaskItemCheckbox";
 import { TaskCommentsModal } from "@/components/tasks/TaskCommentsModal";
 import { TaskItemBaseBadge } from "@/components/tasks/TaskItemBaseBadge";
 import { useSelectedTasks } from "@/components/tasks/SelectedTasksContext";
+import { ItemBaseCommentsModalTrigger } from "@/components/common/ItemBase";
 import { UpdateTaskStatusProvider } from "@/components/tasks/UpdateTaskStatusContext";
 import { TaskItemActionMenuTrigger } from "@/components/tasks/TaskItemActionMenuTrigger";
 
@@ -99,25 +100,22 @@ export const UserTaskListItemInner = memo(
     return (
       <UserTaskListItemLayout
         checkboxSlot={<TaskItemCheckbox id={id} status={status} />}
-        infoSlot={
+        mainSlot={
           <>
-            <ListItemTitle>
-              <ItemBaseDetailModalTrigger
-                modal={
-                  <TaskDetailModal
-                    taskId={id}
-                    taskDetailContainer={taskDetailContainer}
-                  />
-                }
-                className="truncate max-md:hidden"
-              >
-                {title}
-              </ItemBaseDetailModalTrigger>
-            </ListItemTitle>
+            <ListItemTitleDetailModalTrigger
+              modal={
+                <TaskDetailModal
+                  taskId={id}
+                  taskDetailContainer={taskDetailContainer}
+                />
+              }
+            >
+              {title}
+            </ListItemTitleDetailModalTrigger>
             <ListItemText>{deadlineOn}</ListItemText>
           </>
         }
-        infoMobileSlot={
+        mainMobileSlot={
           <>
             <ListItemTitle>{title}</ListItemTitle>
             <ListItemText>{deadlineOn}</ListItemText>

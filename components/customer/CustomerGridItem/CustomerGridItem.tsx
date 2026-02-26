@@ -9,6 +9,8 @@ import {
   GridItemContactText,
   GridItemContactList,
   GridItemContactIconWrapper,
+  GridItemTitleDetailModalTrigger,
+  GridItemContactLink,
 } from "@/components/common/Grid";
 
 import Image from "next/image";
@@ -57,8 +59,6 @@ export function CustomerGridItem({
   const t = useTranslations("customers.CustomerGridItem");
   const selected = useSelectedItems();
 
-  const contactLinkClasses = "max-w-full overflow-hidden";
-
   const customerImg = imageUrl ? (
     <ImageContainer className="h-9 w-9">
       <Image src={imageUrl} alt={fullName} width={36} height={36} />
@@ -91,6 +91,7 @@ export function CustomerGridItem({
         }
         imageSlot={
           <>
+            {/* Show modal on desktop */}
             <ItemBaseDetailModalTrigger
               className="max-md:hidden"
               modal={customerDetailModal}
@@ -98,6 +99,7 @@ export function CustomerGridItem({
               {customerImg}
             </ItemBaseDetailModalTrigger>
 
+            {/* Show link on mobile */}
             <Link className="md:hidden" href={`/customers/${id}`}>
               {customerImg}
             </Link>
@@ -105,21 +107,18 @@ export function CustomerGridItem({
         }
         titleSlot={
           <>
+            {/* Show modal on desktop */}
             <GridItemInfo className="flex-auto max-md:hidden">
-              <GridItemTitle>
-                <ItemBaseDetailModalTrigger
-                  modal={customerDetailModal}
-                  className="truncate"
-                >
-                  {fullName}
-                </ItemBaseDetailModalTrigger>
-              </GridItemTitle>
+              <GridItemTitleDetailModalTrigger modal={customerDetailModal}>
+                {fullName}
+              </GridItemTitleDetailModalTrigger>
 
               <GridItemText>
                 {company ? company.name : t("noCompany")}
               </GridItemText>
             </GridItemInfo>
 
+            {/* Show only text on mobile */}
             <GridItemInfo className="flex-auto md:hidden">
               <GridItemTitle>{fullName}</GridItemTitle>
               <GridItemText>
@@ -133,17 +132,12 @@ export function CustomerGridItem({
             <Separator />
             <GridItemContactList>
               {phoneNumber ? (
-                <Link
-                  className={contactLinkClasses}
-                  href={`tel:${phoneNumber}`}
-                >
-                  <GridItemContact>
-                    <GridItemContactIconWrapper>
-                      <Phone size={16} strokeWidth={1.5} absoluteStrokeWidth />
-                    </GridItemContactIconWrapper>
-                    <GridItemContactText>{phoneNumber}</GridItemContactText>
-                  </GridItemContact>
-                </Link>
+                <GridItemContactLink href={`tel:${phoneNumber}`}>
+                  <GridItemContactIconWrapper>
+                    <Phone size={16} strokeWidth={1.5} absoluteStrokeWidth />
+                  </GridItemContactIconWrapper>
+                  <GridItemContactText>{phoneNumber}</GridItemContactText>
+                </GridItemContactLink>
               ) : (
                 <GridItemContact>
                   <GridItemContactIconWrapper>
@@ -156,14 +150,12 @@ export function CustomerGridItem({
               )}
 
               {publicLink ? (
-                <Link className={contactLinkClasses} href={publicLink}>
-                  <GridItemContact>
-                    <GridItemContactIconWrapper>
-                      <Link2 size={16} strokeWidth={1.5} absoluteStrokeWidth />
-                    </GridItemContactIconWrapper>
-                    <GridItemContactText>{publicLink}</GridItemContactText>
-                  </GridItemContact>
-                </Link>
+                <GridItemContactLink href={publicLink}>
+                  <GridItemContactIconWrapper>
+                    <Link2 size={16} strokeWidth={1.5} absoluteStrokeWidth />
+                  </GridItemContactIconWrapper>
+                  <GridItemContactText>{publicLink}</GridItemContactText>
+                </GridItemContactLink>
               ) : (
                 <GridItemContact>
                   <GridItemContactIconWrapper>
@@ -173,14 +165,12 @@ export function CustomerGridItem({
                 </GridItemContact>
               )}
 
-              <Link className={contactLinkClasses} href={`mailto:${email}`}>
-                <GridItemContact>
-                  <GridItemContactIconWrapper>
-                    <Mail size={16} strokeWidth={1.5} absoluteStrokeWidth />
-                  </GridItemContactIconWrapper>
-                  <GridItemContactText>{email}</GridItemContactText>
-                </GridItemContact>
-              </Link>
+              <GridItemContactLink href={`mailto:${email}`}>
+                <GridItemContactIconWrapper>
+                  <Mail size={16} strokeWidth={1.5} absoluteStrokeWidth />
+                </GridItemContactIconWrapper>
+                <GridItemContactText>{email}</GridItemContactText>
+              </GridItemContactLink>
             </GridItemContactList>
           </>
         }

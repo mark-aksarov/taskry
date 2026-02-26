@@ -8,5 +8,6 @@ export { ItemBaseActionMenuTrigger } from "./ItemBaseActionMenuTrigger";
 export { ItemBaseDetailModalTrigger } from "./ItemBaseDetailModalTrigger";
 export { ItemBaseCommentsModalTrigger } from "./ItemBaseCommentsModalTrigger";
 export { ItemBaseActionMenuDialogHeader } from "./ItemBaseActionMenuDialogHeader";
+export { type ItemBaseDetailModalTriggerProps } from "./ItemBaseDetailModalTrigger";
 export { ItemBaseActionMenuTriggerSkeleton } from "./ItemBaseActionMenuTriggerSkeleton";
 export { type ItemBaseCommentsModalTriggerProps } from "./ItemBaseCommentsModalTrigger";

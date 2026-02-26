@@ -5,6 +5,7 @@ import {
   GridItemText,
   GridItemTitle,
   GridItemProgress,
+  GridItemTitleDetailModalTrigger,
 } from "@/components/common/Grid";
 
 import {
@@ -73,7 +74,7 @@ export const TaskGridItem = ({
         {...selected}
         item={{ id: props.id, status: props.status }}
       >
-        <TaskGridItemInner {...props} />
+        <TaskGridItemInner {...props} isSelected={isSelected} />
       </SelectableItem>
     </UpdateTaskStatusProvider>
   );
@@ -144,23 +145,23 @@ export const TaskGridItemInner = memo(
         }
         titleSlot={
           <>
+            {/* Show modal on desktop */}
             <GridItemInfo className="flex-auto max-md:hidden">
-              <GridItemTitle>
-                <ItemBaseDetailModalTrigger
-                  modal={
-                    <TaskDetailModal
-                      taskId={id}
-                      taskDetailContainer={taskDetailContainer}
-                    />
-                  }
-                >
-                  {title}
-                </ItemBaseDetailModalTrigger>
-              </GridItemTitle>
+              <GridItemTitleDetailModalTrigger
+                modal={
+                  <TaskDetailModal
+                    taskId={id}
+                    taskDetailContainer={taskDetailContainer}
+                  />
+                }
+              >
+                {title}
+              </GridItemTitleDetailModalTrigger>
 
               <GridItemText>{deadlineOn}</GridItemText>
             </GridItemInfo>
 
+            {/* Show only text on mobile */}
             <GridItemInfo className="flex-auto md:hidden">
               <GridItemTitle>{title}</GridItemTitle>
               <GridItemText>{deadlineOn}</GridItemText>
@@ -170,6 +171,7 @@ export const TaskGridItemInner = memo(
         assigneeImageSlot={
           assignee ? (
             <>
+              {/* Show modal on desktop */}
               <ItemBaseDetailModalTrigger
                 modal={
                   <UserDetailModal
@@ -182,6 +184,7 @@ export const TaskGridItemInner = memo(
                 {assigneeImg}
               </ItemBaseDetailModalTrigger>
 
+              {/* Show link on mobile */}
               <Link className="md:hidden" href={`/team/${assignee.id}`}>
                 {assigneeImg}
               </Link>

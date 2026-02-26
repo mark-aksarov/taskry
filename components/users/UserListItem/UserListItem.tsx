@@ -1,5 +1,12 @@
 "use client";
 
+import {
+  ListItemText,
+  ListItemTitle,
+  ListItemTextLink,
+  ListItemTitleDetailModalTrigger,
+} from "@/components/common/List";
+
 import Image from "next/image";
 import { Link } from "@/components/ui/Link";
 import { useTranslations } from "next-intl";
@@ -7,9 +14,9 @@ import { UserDetailModal } from "../UserDetailModal";
 import { UserListItemLayout } from "./UserListItemLayout";
 import { UnknownUser } from "@/components/common/UnknownUser";
 import { ImageContainer } from "@/components/common/ImageContainer";
-import { ListItemText, ListItemTitle } from "@/components/common/List";
 import { UserItemActionMenuTrigger } from "../UserItemActionMenuTrigger";
 import { ItemBaseDetailModalTrigger } from "@/components/common/ItemBase";
+import { ListItemTitleLink } from "@/components/common/List/ListItemTitle";
 
 export interface UserListItemProps {
   id: string;
@@ -72,25 +79,16 @@ export function UserListItem({
           {userImg}
         </Link>
       }
-      infoSlot={
+      mainSlot={
         <>
-          <ListItemTitle>
-            <ItemBaseDetailModalTrigger
-              modal={userDetailModal}
-              className="truncate"
-            >
-              {fullName}
-            </ItemBaseDetailModalTrigger>
-          </ListItemTitle>
+          <ListItemTitleDetailModalTrigger modal={userDetailModal}>
+            {fullName}
+          </ListItemTitleDetailModalTrigger>
 
-          <ListItemText>
-            <Link className="block truncate" href={`mailto:${email}`}>
-              {email}
-            </Link>
-          </ListItemText>
+          <ListItemTextLink href={`mailto:${email}`}>{email}</ListItemTextLink>
         </>
       }
-      infoMobileSlot={
+      mainMobileSlot={
         <>
           <ListItemTitle>{fullName}</ListItemTitle>
           <ListItemText>{email}</ListItemText>
@@ -98,26 +96,26 @@ export function UserListItem({
       }
       phoneNumberSlot={
         <>
-          <ListItemTitle>
-            {phoneNumber ? (
-              <Link href={`tel:${phoneNumber}`}>{phoneNumber}</Link>
-            ) : (
-              t("noPhoneNumber")
-            )}
-          </ListItemTitle>
+          {phoneNumber ? (
+            <ListItemTitleLink href={`tel:${phoneNumber}`}>
+              {phoneNumber}
+            </ListItemTitleLink>
+          ) : (
+            <ListItemTitle>{t("noPhoneNumber")}</ListItemTitle>
+          )}
 
           <ListItemText>{t("phoneNumber")}</ListItemText>
         </>
       }
       publicLinkSlot={
         <>
-          <ListItemTitle>
-            {publicLink ? (
-              <Link href={publicLink}>{publicLink}</Link>
-            ) : (
-              t("noPublicLink")
-            )}
-          </ListItemTitle>
+          {publicLink ? (
+            <ListItemTitleLink href={publicLink}>
+              {publicLink}
+            </ListItemTitleLink>
+          ) : (
+            <ListItemTitle>{t("noPublicLink")}</ListItemTitle>
+          )}
 
           <ListItemText>{t("publicLink")}</ListItemText>
         </>

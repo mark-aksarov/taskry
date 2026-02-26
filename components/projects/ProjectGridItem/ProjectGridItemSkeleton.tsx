@@ -20,7 +20,7 @@ export function ProjectGridItemSkeleton() {
       menuTriggerSlot={
         <ItemBaseActionMenuTriggerSkeleton className="-mr-2 ml-auto" />
       }
-      titleSlot={<GridItemInfoSkeleton />}
+      mainSlot={<GridItemInfoSkeleton />}
       creatorImageSlot={<ImageContainerSkeleton className="h-9 w-9" />}
       commentsSlot={<ItemBaseButtonSkeleton />}
       statusSlot={<ItemBaseBadgeSkeleton />}

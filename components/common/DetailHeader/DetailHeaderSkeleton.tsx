@@ -6,7 +6,7 @@ export function DetailHeaderSkeleton() {
   return (
     <DetailHeaderLayout
       imageSlot={<ImageContainerSkeleton className="h-21 w-21" />}
-      infoSlot={<DetailHeaderInfoSkeleton />}
+      mainSlot={<DetailHeaderInfoSkeleton />}
     />
   );
 }

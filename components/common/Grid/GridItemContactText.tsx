@@ -1,10 +1,13 @@
+// GridItemContactText are direct children of a flex container (GridItemContact) and become blockified flex items.
+// Truncate (overflow-hidden + text-overflow) works on them automatically.
+
 export function GridItemContactText({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <span className="-m-1 max-w-full truncate p-1 text-xs font-medium text-black dark:text-white">
+    <span className="max-w-full truncate text-xs font-medium text-black dark:text-white">
       {children}
     </span>
   );

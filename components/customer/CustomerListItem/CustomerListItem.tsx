@@ -1,5 +1,12 @@
 "use client";
 
+import {
+  ListItemText,
+  ListItemTextLink,
+  ListItemTitle,
+  ListItemTitleDetailModalTrigger,
+} from "@/components/common/List";
+
 import { memo } from "react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
@@ -10,8 +17,8 @@ import { CustomerItemCheckbox } from "../CustomerItemCheckbox";
 import { CustomerListItemLayout } from "./CustomerListItemLayout";
 import { SelectableItem } from "@/components/common/SelectableItem";
 import { ImageContainer } from "@/components/common/ImageContainer";
-import { ListItemText, ListItemTitle } from "@/components/common/List";
 import { ItemBaseDetailModalTrigger } from "@/components/common/ItemBase";
+import { ListItemTitleLink } from "@/components/common/List/ListItemTitle";
 import { useSelectedItems } from "@/components/common/SelectedItemsContext";
 import { CustomerItemActionMenuTrigger } from "../CustomerItemActionMenuTrigger";
 
@@ -88,25 +95,18 @@ export const CustomerListItemInner = memo(
             {userImg}
           </Link>
         }
-        infoSlot={
+        mainSlot={
           <>
-            <ListItemTitle>
-              <ItemBaseDetailModalTrigger
-                modal={customerDetailModal}
-                className="truncate"
-              >
-                {fullName}
-              </ItemBaseDetailModalTrigger>
-            </ListItemTitle>
+            <ListItemTitleDetailModalTrigger modal={customerDetailModal}>
+              {fullName}
+            </ListItemTitleDetailModalTrigger>
 
-            <ListItemText>
-              <Link className="block truncate" href={`mailto:${email}`}>
-                {email}
-              </Link>
-            </ListItemText>
+            <ListItemTextLink href={`mailto:${email}`}>
+              {email}
+            </ListItemTextLink>
           </>
         }
-        infoMobileSlot={
+        mainMobileSlot={
           <>
             <ListItemTitle>{fullName}</ListItemTitle>
             <ListItemText>{email}</ListItemText>
@@ -114,30 +114,26 @@ export const CustomerListItemInner = memo(
         }
         phoneNumberSlot={
           <>
-            <ListItemTitle>
-              {phoneNumber ? (
-                <Link className="block truncate" href={`tel:${phoneNumber}`}>
-                  {phoneNumber}
-                </Link>
-              ) : (
-                t("noPhoneNumber")
-              )}
-            </ListItemTitle>
+            {phoneNumber ? (
+              <ListItemTitleLink href={`tel:${phoneNumber}`}>
+                {phoneNumber}
+              </ListItemTitleLink>
+            ) : (
+              <ListItemTitle>{t("noPhoneNumber")}</ListItemTitle>
+            )}
 
             <ListItemText>{t("phoneNumber")}</ListItemText>
           </>
         }
         publicLinkSlot={
           <>
-            <ListItemTitle>
-              {publicLink ? (
-                <Link className="block truncate" href={publicLink}>
-                  {publicLink}
-                </Link>
-              ) : (
-                t("noPublicLink")
-              )}
-            </ListItemTitle>
+            {publicLink ? (
+              <ListItemTitleLink href={publicLink}>
+                {publicLink}
+              </ListItemTitleLink>
+            ) : (
+              <ListItemTitle>{t("noPublicLink")}</ListItemTitle>
+            )}
 
             <ListItemText>{t("publicLink")}</ListItemText>
           </>

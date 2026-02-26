@@ -52,6 +52,25 @@ export const Default = {
   },
 } satisfies Story;
 
+export const WithOverflowContent = {
+  args: {
+    ...Default.args,
+    title: "This is a task title with a very long text for layout testing",
+    assignee: {
+      ...Default.args.assignee!,
+      fullName: "This is a user name with a very long text for layout testing",
+    },
+    project: {
+      ...Default.args.project,
+      title: "This is a project title with a very long text for layout testing",
+    },
+    category: {
+      ...Default.args.category,
+      name: "This is a category name with a very long text for layout testing",
+    },
+  },
+} satisfies Story;
+
 export const WithCheckbox = {
   args: {
     ...Default.args,

@@ -4,7 +4,8 @@ import {
   ListItemInfo,
   ListItemText,
   ListItemTitle,
-} from "@/components/common/List/index";
+  ListItemTitleDetailModalTrigger,
+} from "@/components/common/List";
 
 import {
   ActionFn,
@@ -19,7 +20,6 @@ import {
 
 import { memo } from "react";
 import Image from "next/image";
-import { Link } from "@/components/ui/Link";
 import { ProjectStatus } from "@/generated/prisma/enums";
 import { useFormatter, useTranslations } from "next-intl";
 import { ProjectDetailModal } from "../ProjectDetailModal";
@@ -146,25 +146,23 @@ export const ProjectListItemInner = memo(
       <ProjectListItemLayout
         id={id}
         checkboxSlot={<ProjectItemCheckbox id={id} status={status} />}
-        infoSlot={
+        mainSlot={
           <>
-            <ListItemTitle>
-              <ItemBaseDetailModalTrigger
-                data-test="project-list-item-title-trigger"
-                modal={
-                  <ProjectDetailModal
-                    projectId={id}
-                    projectDetailContainer={projectDetailContainer}
-                  />
-                }
-              >
-                {title}
-              </ItemBaseDetailModalTrigger>
-            </ListItemTitle>
+            <ListItemTitleDetailModalTrigger
+              data-test="project-list-item-title-trigger"
+              modal={
+                <ProjectDetailModal
+                  projectId={id}
+                  projectDetailContainer={projectDetailContainer}
+                />
+              }
+            >
+              {title}
+            </ListItemTitleDetailModalTrigger>
             <ListItemText>{deadlineOn}</ListItemText>
           </>
         }
-        infoMobileSlot={
+        mainMobileSlot={
           <>
             <ListItemTitle>{title}</ListItemTitle>
             <ListItemText>{deadlineOn}</ListItemText>
@@ -185,20 +183,14 @@ export const ProjectListItemInner = memo(
         }
         creatorSlot={
           <>
-            <ListItemTitle>
-              {creator ? (
-                <>
-                  <ItemBaseDetailModalTrigger
-                    modal={userDetailModal}
-                    className="truncate"
-                  >
-                    {creator.fullName}
-                  </ItemBaseDetailModalTrigger>
-                </>
-              ) : (
-                t("noCreator")
-              )}
-            </ListItemTitle>
+            {creator ? (
+              <ListItemTitleDetailModalTrigger modal={userDetailModal}>
+                {creator.fullName}
+              </ListItemTitleDetailModalTrigger>
+            ) : (
+              <ListItemTitle>{t("noCreator")}</ListItemTitle>
+            )}
+
             <ListItemText>{t("creator")}</ListItemText>
           </>
         }
@@ -220,25 +212,20 @@ export const ProjectListItemInner = memo(
         }
         customerSlot={
           <>
-            <ListItemTitle>
-              {customer ? (
-                <>
-                  <ItemBaseDetailModalTrigger
-                    modal={
-                      <CustomerDetailModal
-                        customerId={customer.id}
-                        customerDetailContainer={customerDetailContainer}
-                      />
-                    }
-                    className="truncate"
-                  >
-                    {customer.fullName}
-                  </ItemBaseDetailModalTrigger>
-                </>
-              ) : (
-                t("noCustomer")
-              )}
-            </ListItemTitle>
+            {customer ? (
+              <ListItemTitleDetailModalTrigger
+                modal={
+                  <CustomerDetailModal
+                    customerId={customer.id}
+                    customerDetailContainer={customerDetailContainer}
+                  />
+                }
+              >
+                {customer.fullName}
+              </ListItemTitleDetailModalTrigger>
+            ) : (
+              <ListItemTitle>{t("noCustomer")} </ListItemTitle>
+            )}
 
             <ListItemText>{t("customer")}</ListItemText>
           </>

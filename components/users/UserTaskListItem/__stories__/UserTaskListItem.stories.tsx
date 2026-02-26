@@ -51,6 +51,13 @@ export const Default = {
   },
 } satisfies Story;
 
+export const WithOverflowContent = {
+  args: {
+    ...Default.args,
+    title: "This is a task title with a very long text for layout testing",
+  },
+};
+
 export const WithActiveStatus = {
   args: {
     ...Default.args,

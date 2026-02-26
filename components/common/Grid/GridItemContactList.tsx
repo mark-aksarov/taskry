@@ -1,6 +1,6 @@
 import { Skeleton } from "@/components/ui/Skeleton";
 
-const styles = "-m-1 flex flex-col gap-2 p-1 items-start";
+const styles = "flex flex-col gap-2 items-start";
 
 export function GridItemContactList({
   children,

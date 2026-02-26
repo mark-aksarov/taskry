@@ -6,7 +6,8 @@ interface GridItemInfoProps {
   children: React.ReactNode;
 }
 
-const styles = "overflow-hidden flex flex-col gap-1 -m-1 p-1";
+// p-1 -m-1: prevents visual clipping of the focus ring when using overflow-hidden
+const styles = "overflow-hidden flex flex-col items-start gap-1 -m-1 p-1";
 
 export function GridItemInfo({ className, children }: GridItemInfoProps) {
   return <div className={twMerge(styles, className)}>{children}</div>;

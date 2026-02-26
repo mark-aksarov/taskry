@@ -17,13 +17,13 @@ export const ProjectListItemSkeleton = () => {
   return (
     <ProjectListItemLayout
       checkboxSlot={<CheckboxSkeleton />}
-      infoSlot={
+      mainSlot={
         <>
           <ListItemTitleSkeleton />
           <ListItemTextSkeleton />
         </>
       }
-      infoMobileSlot={
+      mainMobileSlot={
         <>
           <ListItemTitleSkeleton />
           <ListItemTextSkeleton />
