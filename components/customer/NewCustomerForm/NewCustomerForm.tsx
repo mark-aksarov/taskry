@@ -8,6 +8,7 @@ import {
   useFormBaseActionState,
 } from "@/components/common/FormBase";
 
+import { useRef } from "react";
 import { useTranslations } from "next-intl";
 import { ActionFn, ActionState } from "@/lib/actions/types";
 import { CustomerBioTextField } from "../CustomerBioTextField";
@@ -30,10 +31,19 @@ export function NewCustomerForm({
 }: NewCustomerFormProps) {
   const t = useTranslations("customers.NewCustomerForm");
 
-  const [state, action, isPending] = useFormBaseActionState(createCustomer);
+  // The ref is used inside reducerAction in useFormBaseActionState.
+  // ref.current in useFormBaseActionState is null on unmount, preventing programmatic modal close when opening another form.
+  const ref = useRef<HTMLFormElement>(null);
+
+  const [state, action, isPending] = useFormBaseActionState(
+    createCustomer,
+    ref,
+    t("successMessage"),
+  );
 
   return (
     <FormBase
+      ref={ref}
       id="new-customer-form"
       onSubmit={(e) => handleActionSubmit(e, action)}
     >

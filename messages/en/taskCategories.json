@@ -1,6 +1,7 @@
 {
   "NewTaskCategoryForm": {
-    "submitButtonLabel": "Create category"
+    "submitButtonLabel": "Create category",
+    "successMessage": "Task category created successfully."
   },
   "NewTaskCategoryModal": {
     "title": "New task category"

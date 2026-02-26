@@ -3,7 +3,8 @@
     "submitButtonLabel": "Обновить задачу"
   },
   "NewTaskForm": {
-    "submitButtonLabel": "Создать задачу"
+    "submitButtonLabel": "Создать задачу",
+    "successMessage": "Задача успешно создана"
   },
   "TaskDetailCard": {
     "title": "Информация о задаче"

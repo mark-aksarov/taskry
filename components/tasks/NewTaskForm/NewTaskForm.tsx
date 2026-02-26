@@ -8,6 +8,7 @@ import {
   useFormBaseActionState,
 } from "@/components/common/FormBase";
 
+import { useRef } from "react";
 import { useTranslations } from "next-intl";
 import { TaskStatusSelect } from "../TaskStatusSelect";
 import { TaskProjectSelect } from "../TaskProjectSelect";
@@ -35,10 +36,19 @@ export function NewTaskForm({
 }: NewTaskFormProps) {
   const t = useTranslations("tasks.NewTaskForm");
 
-  const [state, action, isPending] = useFormBaseActionState(createTask);
+  // The ref is used inside reducerAction in useFormBaseActionState.
+  // ref.current in useFormBaseActionState is null on unmount, preventing programmatic modal close when opening another form.
+  const ref = useRef<HTMLFormElement>(null);
+
+  const [state, action, isPending] = useFormBaseActionState(
+    createTask,
+    ref,
+    t("successMessage"),
+  );
 
   return (
     <FormBase
+      ref={ref}
       id="new-task-form"
       onSubmit={(e) => handleActionSubmit(e, action)}
     >

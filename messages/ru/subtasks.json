@@ -4,7 +4,8 @@
   },
 
   "NewSubtaskForm": {
-    "submitButtonLabel": "Добавить подзадачу"
+    "submitButtonLabel": "Добавить подзадачу",
+    "successMessage": "Подзадача успешно добавлена"
   },
 
   "DeleteSubtaskModal": {

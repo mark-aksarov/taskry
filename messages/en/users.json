@@ -9,7 +9,8 @@
     "submitButtonLabel": "Update user"
   },
   "NewUserForm": {
-    "submitButtonLabel": "Create User"
+    "submitButtonLabel": "Create User",
+    "successMessage": "User created successfully"
   },
   "NewUserModal": {
     "title": "New User"

@@ -8,6 +8,7 @@ import {
   useFormBaseActionState,
 } from "@/components/common/FormBase";
 
+import { useRef } from "react";
 import { useTranslations } from "next-intl";
 import { ActionFn, ActionState } from "@/lib/actions/types";
 import { PositionNameTextField } from "../PositionNameTextField";
@@ -21,10 +22,19 @@ interface NewPositionFormProps {
 export function NewPositionForm({ createPosition }: NewPositionFormProps) {
   const t = useTranslations("positions.NewPositionForm");
 
-  const [state, action, isPending] = useFormBaseActionState(createPosition);
+  // The ref is used inside reducerAction in useFormBaseActionState.
+  // ref.current in useFormBaseActionState is null on unmount, preventing programmatic modal close when opening another form.
+  const ref = useRef<HTMLFormElement>(null);
+
+  const [state, action, isPending] = useFormBaseActionState(
+    createPosition,
+    ref,
+    t("successMessage"),
+  );
 
   return (
     <FormBase
+      ref={ref}
       id="new-position-form"
       onSubmit={(e) => handleActionSubmit(e, action)}
     >

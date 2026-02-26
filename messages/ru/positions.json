@@ -1,6 +1,7 @@
 {
   "NewPositionForm": {
-    "submitButtonLabel": "Создать должность"
+    "submitButtonLabel": "Создать должность",
+    "successMessage": "Должность успешно создана"
   },
   "NewPositionModal": {
     "title": "Новая должность"

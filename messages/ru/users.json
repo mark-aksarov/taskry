@@ -9,7 +9,8 @@
     "submitButtonLabel": "Обновить пользователя"
   },
   "NewUserForm": {
-    "submitButtonLabel": "Создать пользователя"
+    "submitButtonLabel": "Создать пользователя",
+    "successMessage": "Пользователь успешно создан"
   },
   "NewUserModal": {
     "title": "Новый пользователь"

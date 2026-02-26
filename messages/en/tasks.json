@@ -3,7 +3,8 @@
     "submitButtonLabel": "Update Task"
   },
   "NewTaskForm": {
-    "submitButtonLabel": "Create Task"
+    "submitButtonLabel": "Create Task",
+    "successMessage": "Task created successfully."
   },
   "TaskDetailCard": {
     "title": "Task Information"

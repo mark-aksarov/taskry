@@ -1,6 +1,7 @@
 {
   "NewPositionForm": {
-    "submitButtonLabel": "Create Position"
+    "submitButtonLabel": "Create Position",
+    "successMessage": "Position created successfully"
   },
   "NewPositionModal": {
     "title": "New Position"

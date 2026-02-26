@@ -18,6 +18,7 @@ import { handleActionSubmit } from "@/lib/utils/handleActionSubmit";
 import { FormErrorBanner } from "@/components/common/FormErrorBanner";
 import { ProjectDeadlineDatePicker } from "../ProjectDeadlineDatePicker";
 import { ProjectDescriptionTextField } from "../ProjectDescriptionTextField";
+import { useRef } from "react";
 
 interface NewProjectFormProps {
   projectCategorySelectItems: { id: number; name: string }[];
@@ -32,10 +33,19 @@ export function NewProjectForm({
 }: NewProjectFormProps) {
   const t = useTranslations("projects.NewProjectForm");
 
-  const [state, action, isPending] = useFormBaseActionState(createProject);
+  // The ref is used inside reducerAction in useFormBaseActionState.
+  // ref.current in useFormBaseActionState is null on unmount, preventing programmatic modal close when opening another form.
+  const ref = useRef<HTMLFormElement>(null);
+
+  const [state, action, isPending] = useFormBaseActionState(
+    createProject,
+    ref,
+    t("successMessage"),
+  );
 
   return (
     <FormBase
+      ref={ref}
       id="new-project-form"
       onSubmit={(e) => handleActionSubmit(e, action)}
     >

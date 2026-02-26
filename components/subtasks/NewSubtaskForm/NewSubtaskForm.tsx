@@ -7,13 +7,14 @@ import {
   FormBaseSubmitButton,
 } from "@/components/common/FormBase";
 
-import { useActionState } from "react";
 import { useTranslations } from "next-intl";
 import { SubtaskTextField } from "../SubtaskTextField";
+import { useActionState, useContext, useRef } from "react";
 import { ActionFn, ActionState } from "@/lib/actions/types";
-import { useCloseOverlay } from "@/lib/hooks/useCloseOverlay";
 import { handleActionSubmit } from "@/lib/utils/handleActionSubmit";
 import { FormErrorBanner } from "@/components/common/FormErrorBanner";
+import { OverlayTriggerStateContext } from "react-aria-components";
+import { useSuccessToast } from "@/lib/hooks/useSuccessToast";
 
 const initialState: ActionState = {
   status: null,
@@ -32,7 +33,20 @@ export function NewSubtaskForm({
 }: NewSubtaskFormProps) {
   const t = useTranslations("subtasks.NewSubtaskForm");
 
-  const closeModal = useCloseOverlay();
+  // The ref is used inside reducerAction
+  // ref.current is null on unmount, preventing programmatic modal close when opening another form.
+  const ref = useRef<HTMLFormElement>(null);
+
+  // FormBase must be used within a FormBaseModal, which is wrapped in OverlayTriggerStateContext
+  const context = useContext(OverlayTriggerStateContext);
+
+  if (!context) {
+    throw new Error("FormBase must be used within a OverlayTriggerProvider");
+  }
+
+  const { close: closeModal } = context;
+
+  const { add: addSuccessToast } = useSuccessToast();
 
   const [state, action, isPending] = useActionState(
     async (prevState: ActionState, payload: FormData) => {
@@ -41,7 +55,11 @@ export function NewSubtaskForm({
 
       // call swr mutate to refresh subtasks and close modal
       if (newState.status === "success") {
-        closeModal();
+        if (ref.current) {
+          closeModal();
+        }
+
+        addSuccessToast(t("successMessage"));
         mutate?.();
       }
 
@@ -52,6 +70,7 @@ export function NewSubtaskForm({
 
   return (
     <FormBase
+      ref={ref}
       id="new-subtask-form"
       onSubmit={(e) => handleActionSubmit(e, action)}
     >

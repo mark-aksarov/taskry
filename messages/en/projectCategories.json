@@ -1,6 +1,7 @@
 {
   "NewProjectCategoryForm": {
-    "submitButtonLabel": "Create category"
+    "submitButtonLabel": "Create category",
+    "successMessage": "Project category created successfully."
   },
   "NewProjectCategoryModal": {
     "title": "New project category"

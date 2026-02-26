@@ -1,8 +1,8 @@
-import { CircleX } from "lucide-react";
+import { CheckCircle2 } from "lucide-react";
 import { useContext, useMemo, useRef } from "react";
 import { ToastContext } from "@/components/ui/Toast";
 
-export function useErrorToast() {
+export function useSuccessToast() {
   const toastQueue = useContext(ToastContext);
   const toastKeyRef = useRef<string | null>(null);
 
@@ -12,9 +12,10 @@ export function useErrorToast() {
       add: (message: string) =>
         (toastKeyRef.current = toastQueue.add(
           {
+            color: "green",
             title: message,
             iconLeft: (
-              <CircleX size={16} strokeWidth={1.5} absoluteStrokeWidth />
+              <CheckCircle2 size={16} strokeWidth={1.5} absoluteStrokeWidth />
             ),
           },
           { timeout: 5000 },

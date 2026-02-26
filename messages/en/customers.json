@@ -1,9 +1,11 @@
 {
   "EditCustomerForm": {
-    "submitButtonLabel": "Update Customer"
+    "submitButtonLabel": "Update Customer",
+    "successMessage": "Customer updated successfully"
   },
   "NewCustomerForm": {
-    "submitButtonLabel": "Create Customer"
+    "submitButtonLabel": "Create Customer",
+    "successMessage": "Customer created successfully"
   },
   "TotalCustomersCard": {
     "text": "Total Customers"
@@ -98,13 +100,15 @@
     "heading": "Delete customer",
     "text": "Are you sure you want to delete customer <strong>«{name}»</strong>? All contents will be permanently removed.",
     "deleteButton": "Delete",
-    "cancelButton": "Cancel"
+    "cancelButton": "Cancel",
+    "successMessage": "Customer deleted successfully"
   },
   "DeleteCustomersModal": {
     "heading": "Delete customers",
     "text": "Are you sure you want to delete <strong>{count} customers</strong>? All contents will be permanently removed.",
     "deleteButton": "Delete",
-    "cancelButton": "Cancel"
+    "cancelButton": "Cancel",
+    "successMessage": "Customers deleted successfully"
   },
   "CustomerGridItem": {
     "noPhoneNumber": "No phone number",
