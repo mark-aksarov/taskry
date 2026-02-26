@@ -4,6 +4,7 @@ import { ProjectGridItem } from "../../ProjectGridItem";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { ProjectGridItemStory } from "../../ProjectGridItem/__stories__";
+import { withViewModeProvider } from "@/components/common/ViewMode/__stories__";
 import { withDeleteProjectModalProvider } from "../../DeleteProjectModal/__stories__";
 import { withSelectedProjectsProvider } from "../../SelectedProjectsContext/__stories__";
 import { withUpdateProjectStatusesProvider } from "../../UpdateProjectStatusContext/__stories__";
@@ -14,6 +15,7 @@ const meta = {
   title: "components/projects/ProjectGrid",
   component: ProjectGrid,
   decorators: [
+    withViewModeProvider,
     withPageTransitionProvider,
     withSelectedProjectsProvider,
     withDeleteCommentModalProvider,

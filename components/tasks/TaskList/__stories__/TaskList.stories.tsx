@@ -4,6 +4,7 @@ import { TaskListItem } from "../../TaskListItem";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { TaskListItemStory } from "../../TaskListItem/__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { withViewModeProvider } from "@/components/common/ViewMode/__stories__";
 import { withDeleteTaskModalProvider } from "../../DeleteTaskModal/__stories__";
 import { withSelectedTasksProvider } from "../../SelectedTasksContext/__stories__";
 import { withUpdateTaskStatusesProvider } from "../../UpdateTaskStatusContext/__stories__";
@@ -14,6 +15,7 @@ const meta = {
   title: "components/tasks/TaskList",
   component: TaskList,
   decorators: [
+    withViewModeProvider,
     withPageTransitionProvider,
     withSelectedTasksProvider,
     withDeleteCommentModalProvider,

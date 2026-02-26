@@ -4,6 +4,7 @@ import { TaskGridItem } from "../../TaskGridItem";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { TaskGridItemStory } from "../../TaskGridItem/__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { withViewModeProvider } from "@/components/common/ViewMode/__stories__";
 import { withDeleteTaskModalProvider } from "../../DeleteTaskModal/__stories__";
 import { withSelectedTasksProvider } from "../../SelectedTasksContext/__stories__";
 import { withUpdateTaskStatusesProvider } from "../../UpdateTaskStatusContext/__stories__";
@@ -14,6 +15,7 @@ const meta = {
   title: "components/tasks/TaskGrid",
   component: TaskGrid,
   decorators: [
+    withViewModeProvider,
     withPageTransitionProvider,
     withSelectedTasksProvider,
     withUpdateTaskStatusesProvider,

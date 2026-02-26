@@ -4,6 +4,7 @@ import { ProjectListItem } from "../../ProjectListItem";
 import type { Meta, StoryObj } from "@storybook/react";
 import { ProjectListItemStory } from "../../ProjectListItem/__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { withViewModeProvider } from "@/components/common/ViewMode/__stories__";
 import { withDeleteProjectModalProvider } from "../../DeleteProjectModal/__stories__";
 import { withSelectedProjectsProvider } from "../../SelectedProjectsContext/__stories__";
 import { withUpdateProjectStatusesProvider } from "../../UpdateProjectStatusContext/__stories__";
@@ -14,6 +15,7 @@ const meta = {
   title: "components/projects/ProjectList",
   component: ProjectList,
   decorators: [
+    withViewModeProvider,
     withPageTransitionProvider,
     withSelectedProjectsProvider,
     withDeleteCommentModalProvider,

@@ -4,6 +4,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { CustomerListItem } from "../../CustomerListItem";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { CustomerListItemStory } from "../../CustomerListItem/__stories__";
+import { withViewModeProvider } from "@/components/common/ViewMode/__stories__";
 import { withDeleteCustomerModalProvider } from "../../DeleteCustomerModal/__stories__";
 import { withSelectedItemsProvider } from "@/components/common/SelectedItemsContext/__stories__";
 import { withPageTransitionProvider } from "@/components/common/PageTransitionContext/__stories__";
@@ -12,6 +13,7 @@ const meta = {
   title: "components/customers/CustomerList",
   component: CustomerList,
   decorators: [
+    withViewModeProvider,
     withPageTransitionProvider,
     withSelectedItemsProvider,
     withDeleteCustomerModalProvider,

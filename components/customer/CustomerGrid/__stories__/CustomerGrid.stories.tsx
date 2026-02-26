@@ -4,6 +4,7 @@ import { mockedCustomerList } from "@/mocks/customers";
 import { CustomerGridItem } from "../../CustomerGridItem";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { CustomerGridItemStory } from "../../CustomerGridItem/__stories__";
+import { withViewModeProvider } from "@/components/common/ViewMode/__stories__";
 import { withDeleteCustomerModalProvider } from "../../DeleteCustomerModal/__stories__";
 import { withSelectedItemsProvider } from "@/components/common/SelectedItemsContext/__stories__";
 import { withPageTransitionProvider } from "@/components/common/PageTransitionContext/__stories__";
@@ -12,6 +13,7 @@ const meta = {
   title: "components/customers/CustomerGrid",
   component: CustomerGrid,
   decorators: [
+    withViewModeProvider,
     withPageTransitionProvider,
     withSelectedItemsProvider,
     withDeleteCustomerModalProvider,

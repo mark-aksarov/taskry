@@ -1,16 +1,18 @@
 import { UserList } from "../UserList";
+import { mockedUserList } from "@/mocks/users";
 import { UserListItem } from "../../UserListItem";
 import type { Meta, StoryObj } from "@storybook/react";
 import { UserListItemStory } from "../../UserListItem/__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { withViewModeProvider } from "@/components/common/ViewMode/__stories__";
 import { withDeleteUserModalProvider } from "../../DeleteUserModal/__stories__";
 import { withPageTransitionProvider } from "@/components/common/PageTransitionContext/__stories__";
-import { mockedUserList } from "@/mocks/users";
 
 const meta = {
   title: "components/users/UserList",
   component: UserList,
   decorators: [
+    withViewModeProvider,
     withPageTransitionProvider,
     withDeleteUserModalProvider,
     withThemedBackground,
