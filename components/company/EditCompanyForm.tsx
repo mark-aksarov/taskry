@@ -10,9 +10,9 @@ import {
 import { useTranslations } from "next-intl";
 import { ActionFn, ActionState } from "@/lib/actions/types";
 import { CompanyNameTextField } from "./CompanyNameTextField";
-import { handleActionSubmit } from "@/lib/utils/handleActionSubmit";
 import { FormErrorBanner } from "@/components/common/FormErrorBanner";
-import { useFormBaseActionState } from "@/components/common/FormBase";
+import { useUpdateCompanyTransition } from "./UpdateCompanyTransitionContext";
+import { useUpdateEntityActionState } from "@/lib/hooks/useUpdateEntityActionState";
 
 interface EditCompanyFormProps {
   companyId: number;
@@ -27,13 +27,24 @@ export function EditCompanyForm({
 }: EditCompanyFormProps) {
   const t = useTranslations("company.EditCompanyForm");
 
-  const [state, action, isPending] = useFormBaseActionState(updateCompany);
+  const { startTransition } = useUpdateCompanyTransition();
+
+  const [state, action, isPending] = useUpdateEntityActionState({
+    updateEntity: updateCompany,
+    successMessage: t("successMessage"),
+  });
+
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+
+    startTransition(() => {
+      action(formData);
+    });
+  }
 
   return (
-    <FormBase
-      id="edit-company-form"
-      onSubmit={(e) => handleActionSubmit(e, action)}
-    >
+    <FormBase id="edit-company-form" onSubmit={handleSubmit}>
       <FormBaseBody>
         <input type="hidden" name="id" value={companyId} />
         <CompanyNameTextField defaultValue={nameDefaultValue} />

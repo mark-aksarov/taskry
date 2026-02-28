@@ -11,6 +11,7 @@ import {
 import {
   ActionFn,
   ActionState,
+  DeleteProjectsPayload,
   UpdateProjectStatusesPayload,
 } from "@/lib/actions/types";
 
@@ -19,13 +20,17 @@ import {
   ItemBaseCommentsModalTrigger,
 } from "@/components/common/ItemBase";
 
+import {
+  ProjectItemPendingOverlay,
+  ProjectItemActionMenuTrigger,
+} from "../ProjectItem";
+
 import { memo } from "react";
 import Image from "next/image";
 import { Link } from "@/components/ui/Link";
 import { ProjectStatus } from "@/generated/prisma/enums";
 import { useFormatter, useTranslations } from "next-intl";
 import { ProjectDetailModal } from "../ProjectDetailModal";
-import { ProjectItemCheckbox } from "../ProjectItemCheckbox";
 import { UnknownUser } from "@/components/common/UnknownUser";
 import { ProjectCommentsModal } from "../ProjectCommentsModal";
 import { ProjectItemBaseBadge } from "../ProjectItemBaseBadge";
@@ -34,11 +39,12 @@ import { useSelectedProjects } from "../SelectedProjectsContext";
 import { SelectableItem } from "@/components/common/SelectableItem";
 import { ImageContainer } from "@/components/common/ImageContainer";
 import { UserDetailModal } from "@/components/users/UserDetailModal";
-import { UpdateProjectStatusProvider } from "../UpdateProjectStatusContext";
-import { ProjectItemActionMenuTrigger } from "../ProjectItemActionMenuTrigger";
+import { ProjectItemCheckbox } from "../ProjectItem/ProjectItemCheckbox";
+import { UpdateProjectTransitionProvider } from "../UpdateProjectTransitionContext";
+import { DeleteProjectTransitionProvider } from "../DeleteProjectTransitionContext";
+import { UpdateProjectStatusTransitionProvider } from "../UpdateProjectStatusTransitionContext";
 
 export interface ProjectGridItemProps {
-  guestMode: boolean;
   id: number;
   title: string;
   deadline: string;
@@ -58,29 +64,34 @@ export interface ProjectGridItemProps {
   sendComment: ActionFn<ActionState, FormData>;
   updateComment: ActionFn<ActionState, FormData>;
   updateProjectStatus: ActionFn<ActionState, UpdateProjectStatusesPayload>;
+  deleteProject: ActionFn<ActionState, DeleteProjectsPayload>;
 }
 
-export const ProjectGridItem = ({
-  updateProjectStatus,
-  ...props
-}: ProjectGridItemProps) => {
+export const ProjectGridItem = (props: ProjectGridItemProps) => {
+  const t = useTranslations("projects.ProjectGridItem");
+
   const selected = useSelectedProjects();
 
   return (
-    <UpdateProjectStatusProvider updateStatus={updateProjectStatus}>
-      <SelectableItem
-        {...selected}
-        item={{ id: props.id, status: props.status }}
-      >
-        <ProjectGridItemInner {...props} />
-      </SelectableItem>
-    </UpdateProjectStatusProvider>
+    <UpdateProjectTransitionProvider>
+      <DeleteProjectTransitionProvider>
+        <UpdateProjectStatusTransitionProvider>
+          <ProjectItemPendingOverlay projectId={props.id}>
+            <SelectableItem
+              {...selected}
+              item={{ id: props.id, status: props.status }}
+            >
+              <ProjectGridItemInner {...props} />
+            </SelectableItem>
+          </ProjectItemPendingOverlay>
+        </UpdateProjectStatusTransitionProvider>
+      </DeleteProjectTransitionProvider>
+    </UpdateProjectTransitionProvider>
   );
 };
 
 export const ProjectGridItemInner = memo(
   ({
-    guestMode,
     id,
     title,
     deadline,
@@ -95,7 +106,9 @@ export const ProjectGridItemInner = memo(
     userDetailContainer,
     sendComment,
     updateComment,
-  }: Omit<ProjectGridItemProps, "updateProjectStatus">) => {
+    updateProjectStatus,
+    deleteProject,
+  }: ProjectGridItemProps) => {
     const t = useTranslations("projects.ProjectGridItem");
 
     // use useFormatter to format the date according to the user's locale
@@ -127,12 +140,13 @@ export const ProjectGridItemInner = memo(
         checkboxSlot={<ProjectItemCheckbox id={id} status={status} />}
         menuTriggerSlot={
           <ProjectItemActionMenuTrigger
-            guestMode={guestMode}
             projectId={id}
             projectTitle={title}
             projectStatus={status}
             editProjectFormContainer={editProjectFormContainer}
             className="-mr-2"
+            updateProjectStatus={updateProjectStatus}
+            deleteProject={deleteProject}
           />
         }
         mainSlot={

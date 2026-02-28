@@ -4,6 +4,7 @@ import {
   ToolbarMenuTrigger,
   ToolbarActionsButtonMobile,
   ToolbarActionsButtonDesktop,
+  ToolbarActionsMenuTrigger,
 } from "../../common/Toolbar";
 
 import { useState } from "react";
@@ -14,20 +15,20 @@ import { DialogHeader } from "../../ui/Dialog";
 import { ActionFn, ActionState } from "@/lib/actions/types";
 import { GuestModeModal } from "../../common/GuestModeModal";
 import { DeletePositionsModal } from "../DeletePositionsModal";
+import { useCurrentUser } from "@/components/common/CurrentUserContext";
 import { useSelectedItems } from "@/components/common/SelectedItemsContext";
 
 interface PositionToolbarActionsMenuTriggerProps {
-  guestMode: boolean;
   deletePositions: ActionFn<ActionState, number[]>;
 }
 
 export const PositionToolbarActionsMenuTrigger = ({
-  guestMode,
   deletePositions,
 }: PositionToolbarActionsMenuTriggerProps) => {
   const t = useTranslations("positions.PositionToolbarActionsMenuTrigger");
 
-  // Guest mode modal state
+  // Guest mode
+  const { isGuest } = useCurrentUser();
   const [isGuestModeModalOpen, setIsGuestModeModalOpen] = useState(false);
 
   // Delete confirmation modal state
@@ -38,7 +39,7 @@ export const PositionToolbarActionsMenuTrigger = ({
 
   // Menu actions: show delete modal
   const handleAction = (key: Key) => {
-    if (guestMode) {
+    if (isGuest) {
       setIsGuestModeModalOpen(true);
       return;
     }
@@ -48,33 +49,20 @@ export const PositionToolbarActionsMenuTrigger = ({
     }
   };
 
-  const isDisabled = selected.ids.length === 0;
-
   return (
     <>
-      <ToolbarMenuTrigger
+      <ToolbarActionsMenuTrigger
         onAction={handleAction}
         renderDialogHeader={() => (
           <DialogHeader>{t("dialogHeading")}</DialogHeader>
         )}
-        renderButton={() => (
-          <>
-            <ToolbarActionsButtonMobile
-              data-test="position-toolbar-actions-button-mobile"
-              isDisabled={isDisabled}
-            />
-            <ToolbarActionsButtonDesktop
-              data-test="position-toolbar-actions-button-desktop"
-              isDisabled={isDisabled}
-            />
-          </>
-        )}
+        selectedIds={selected.ids}
       >
         <Item textValue={t("delete")} key="delete">
           <Trash size={16} strokeWidth={1.5} absoluteStrokeWidth />
           {t("delete")}
         </Item>
-      </ToolbarMenuTrigger>
+      </ToolbarActionsMenuTrigger>
 
       <DeletePositionsModal
         isOpen={isDeleteModalOpen}

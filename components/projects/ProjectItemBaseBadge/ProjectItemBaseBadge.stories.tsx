@@ -1,17 +1,11 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { ProjectItemBaseBadge } from "./ProjectItemBaseBadge";
 import { withSelectedProjectsProvider } from "../SelectedProjectsContext/__stories__";
-import { withUpdateProjectStatusProvider } from "../UpdateProjectStatusContext/__stories__";
-import { withUpdateProjectStatusesProvider } from "../UpdateProjectStatusContext/__stories__";
 
 const meta: Meta<typeof ProjectItemBaseBadge> = {
   title: "components/projects/ProjectItemBaseBadge",
   component: ProjectItemBaseBadge,
-  decorators: [
-    withSelectedProjectsProvider,
-    withUpdateProjectStatusesProvider,
-    withUpdateProjectStatusProvider,
-  ],
+  decorators: [withSelectedProjectsProvider],
 } satisfies Meta<typeof ProjectItemBaseBadge>;
 
 export default meta;

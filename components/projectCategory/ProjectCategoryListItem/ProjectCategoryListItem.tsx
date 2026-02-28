@@ -7,48 +7,67 @@ import {
   ListItemTitle,
 } from "@/components/common/List";
 
+import { memo } from "react";
 import { useTranslations } from "next-intl";
 import { ActionFn, ActionState } from "@/lib/actions/types";
 import { SelectableItem } from "@/components/common/SelectableItem";
 import { useSelectedItems } from "@/components/common/SelectedItemsContext";
-import { ProjectCategoryItemCheckbox } from "../ProjectCategoryItemCheckbox";
-import { ProjectCategoryItemActionMenuTrigger } from "../ProjectCategoryItemActionMenuTrigger";
+import { ProjectCategoryListItemCheckbox } from "./ProjectCategoryListItemCheckbox";
+import { ProjectCategoryListItemPendingOverlay } from "./ProjectCategoryListItemPendingOverlay";
+import { DeleteProjectCategoryTransitionProvider } from "../DeleteProjectCategoryTransitionContext";
+import { UpdateProjectCategoryTransitionProvider } from "../UpdateProjectCategoryTransitionContext";
+import { ProjectCategoryListItemActionMenuTrigger } from "./ProjectCategoryListItemActionMenuTrigger";
 
 interface ProjectCategoryListItemProps {
   id: number;
   name: string;
-  guestMode: boolean;
   updateProjectCategory: ActionFn<ActionState, FormData>;
+  deleteProjectCategory: ActionFn<ActionState, number[]>;
 }
 
-export function ProjectCategoryListItem({
-  id,
-  name,
-  guestMode,
-  updateProjectCategory,
-}: ProjectCategoryListItemProps) {
-  const t = useTranslations("projectCategories.ProjectCategoryListItem");
+export function ProjectCategoryListItem(props: ProjectCategoryListItemProps) {
   const selected = useSelectedItems();
 
   return (
-    <SelectableItem {...selected} item={{ id }}>
+    <UpdateProjectCategoryTransitionProvider>
+      <DeleteProjectCategoryTransitionProvider>
+        <ProjectCategoryListItemPendingOverlay projectCategoryId={props.id}>
+          <SelectableItem {...selected} item={{ id: props.id }}>
+            <ProjectCategoryListItemInner {...props} />
+          </SelectableItem>
+        </ProjectCategoryListItemPendingOverlay>
+      </DeleteProjectCategoryTransitionProvider>
+    </UpdateProjectCategoryTransitionProvider>
+  );
+}
+
+const ProjectCategoryListItemInner = memo(
+  ({
+    id,
+    name,
+    updateProjectCategory,
+    deleteProjectCategory,
+  }: ProjectCategoryListItemProps) => {
+    const t = useTranslations("projectCategories.ProjectCategoryListItem");
+
+    return (
       <ListItem
         data-test="project-category-list-item"
         className="flex w-full items-center gap-4"
       >
-        <ProjectCategoryItemCheckbox id={id} />
+        <ProjectCategoryListItemCheckbox id={id} />
         <ListItemInfo>
           <ListItemTitle>{name}</ListItemTitle>
           <ListItemText>{t("name")}</ListItemText>
         </ListItemInfo>
 
-        <ProjectCategoryItemActionMenuTrigger
-          guestMode={guestMode}
+        <ProjectCategoryListItemActionMenuTrigger
           projectCategoryId={id}
           projectCategoryName={name}
           updateProjectCategory={updateProjectCategory}
+          deleteProjectCategory={deleteProjectCategory}
         />
       </ListItem>
-    </SelectableItem>
-  );
-}
+    );
+  },
+);

@@ -10,39 +10,40 @@ import { useState } from "react";
 import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
 import { Pencil, Trash } from "lucide-react";
+import { ActionFn, ActionState } from "@/lib/actions/types";
 import { EditTaskCategoryModal } from "./EditTaskCategoryModal";
 import { GuestModeModal } from "@/components/common/GuestModeModal";
-import { useDeleteTaskCategoryModal } from "./DeleteTaskCategoryModal";
-import { ActionFn, ActionState } from "@/lib/actions/types";
+import { DeleteTaskCategoryModal } from "./DeleteTaskCategoryModal";
+import { useDeleteTaskCategoryContext } from "./DeleteTaskCategoryContext";
+import { useCurrentUser } from "../common/CurrentUserContext";
 
 export type TaskCategoryItemActionMenuTriggerProps = {
-  guestMode: boolean;
   taskCategoryId: number;
   taskCategoryName: string;
   updateTaskCategory: ActionFn<ActionState, FormData>;
 };
 
 export function TaskCategoryItemActionMenuTrigger({
-  guestMode,
   taskCategoryId,
   taskCategoryName,
   updateTaskCategory,
 }: TaskCategoryItemActionMenuTriggerProps) {
   const t = useTranslations("taskCategories.TaskCategoryItemActionMenuTrigger");
 
-  // Guest mode modal
+  // Deleting the position
+  const { isPending: isDeletePending } = useDeleteTaskCategoryContext();
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+
+  // Guest mode
+  const { isGuest } = useCurrentUser();
   const [isGuestModeModalOpen, setIsGuestModeModalOpen] = useState(false);
 
   // Modal state for editing the task category
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
-  // Modal state for deleting the task category
-  const { setState: setDeleteTaskCategoryModalState } =
-    useDeleteTaskCategoryModal();
-
   // Handle menu actions
   const handleAction = (key: Key) => {
-    if (guestMode) {
+    if (isGuest) {
       setIsGuestModeModalOpen(true);
       return;
     }
@@ -51,11 +52,7 @@ export function TaskCategoryItemActionMenuTrigger({
     if (action === "edit") {
       setIsEditModalOpen(true);
     } else if (action === "delete") {
-      setDeleteTaskCategoryModalState({
-        isOpen: true,
-        entityId: taskCategoryId,
-        entityName: taskCategoryName,
-      });
+      setIsDeleteModalOpen(true);
     }
   };
 
@@ -66,6 +63,7 @@ export function TaskCategoryItemActionMenuTrigger({
         renderDialogHeader={() => <ItemBaseActionMenuDialogHeader />}
         renderButton={() => (
           <ItemBaseActionMenuButton
+            isPending={isDeletePending}
             data-test="task-category-item-action-menu-trigger"
             data-id={taskCategoryId}
           />
@@ -85,6 +83,13 @@ export function TaskCategoryItemActionMenuTrigger({
         taskCategoryId={taskCategoryId}
         taskCategoryName={taskCategoryName}
         updateTaskCategory={updateTaskCategory}
+      />
+
+      <DeleteTaskCategoryModal
+        isOpen={isDeleteModalOpen}
+        onOpenChange={setIsDeleteModalOpen}
+        taskCategoryId={taskCategoryId}
+        taskCategoryName={taskCategoryName}
       />
 
       <GuestModeModal

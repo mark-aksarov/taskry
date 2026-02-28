@@ -16,14 +16,12 @@ import { ProjectCategoryToolbarActionsMenuTrigger } from "@/components/projectCa
 
 interface ProjectCategoriesPageProps {
   projectCategoriesContainer: React.ReactNode;
-  guestMode: boolean;
   createProjectCategory: ActionFn<ActionState, FormData>;
   deleteProjectCategories: ActionFn<ActionState, number[]>;
 }
 
 export function ProjectCategoriesPage({
   projectCategoriesContainer,
-  guestMode,
   createProjectCategory,
   deleteProjectCategories,
 }: ProjectCategoriesPageProps) {
@@ -31,14 +29,12 @@ export function ProjectCategoriesPage({
 
   const projectCategoryToolbarCreateNewModalTrigger = (
     <ProjectCategoryToolbarCreateNewModalTrigger
-      guestMode={guestMode}
       createProjectCategory={createProjectCategory}
     />
   );
 
   const projectCategoryToolbarActionsMenuTrigger = (
     <ProjectCategoryToolbarActionsMenuTrigger
-      guestMode={guestMode}
       deleteProjectCategories={deleteProjectCategories}
     />
   );

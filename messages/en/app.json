@@ -76,7 +76,8 @@
     "description": "Create a new project to keep track of your work"
   },
   "ProjectDetailPage": {
-    "heading": "Project Details"
+    "heading": "Project Details",
+    "successDeleteMessage": "Project deleted successfully"
   },
   "TasksPageLoading": {
     "title": "All Tasks"

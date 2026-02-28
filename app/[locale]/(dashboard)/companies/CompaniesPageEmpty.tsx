@@ -4,21 +4,14 @@ import { EmptyPageContainer } from "@/components/common/EmptyPageContainer";
 import { CompanyToolbarCreateNewModalTrigger } from "@/components/company/CompanyToolbarCreateNewModalTrigger";
 
 interface CompaniesPageEmptyProps {
-  guestMode: boolean;
   createCompany: ActionFn<ActionState, FormData>;
 }
 
-export function CompaniesPageEmpty({
-  guestMode,
-  createCompany,
-}: CompaniesPageEmptyProps) {
+export function CompaniesPageEmpty({ createCompany }: CompaniesPageEmptyProps) {
   const t = useTranslations("app.CompaniesPageEmpty");
 
   const companyToolbarCreateNewModalTrigger = (
-    <CompanyToolbarCreateNewModalTrigger
-      guestMode={guestMode}
-      createCompany={createCompany}
-    />
+    <CompanyToolbarCreateNewModalTrigger createCompany={createCompany} />
   );
 
   return (

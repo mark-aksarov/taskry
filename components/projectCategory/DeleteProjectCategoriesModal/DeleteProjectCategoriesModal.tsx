@@ -8,12 +8,13 @@ import {
   ConfirmModalConfirmButton,
 } from "@/components/common/ConfirmModal";
 
-import { startTransition } from "react";
 import { useTranslations } from "next-intl";
 import { ModalProps } from "@/components/ui/Modal";
 import { DialogHeading } from "@/components/ui/Dialog";
 import { ActionFn, ActionState } from "@/lib/actions/types";
-import { useDeleteModalActionState } from "@/components/common/BaseDeleteModal";
+import { useSelectedItems } from "@/components/common/SelectedItemsContext";
+import { useDeleteProjectCategories } from "../DeleteProjectCategoriesContext";
+import { useDeleteEntityActionState } from "@/lib/hooks/useDeleteEntityActionState";
 
 interface DeleteProjectCategoriesModalProps extends ModalProps {
   projectCategoryIds: number[];
@@ -28,14 +29,28 @@ export function DeleteProjectCategoriesModal({
 }: DeleteProjectCategoriesModalProps) {
   const t = useTranslations("projectCategories.DeleteProjectCategoriesModal");
 
-  const [_, action, isPending] = useDeleteModalActionState<number[]>({
+  const {
+    startTransition,
+    setProjectCategoryIds: setDeletedProjectCategoryIds,
+  } = useDeleteProjectCategories();
+
+  const [, action] = useDeleteEntityActionState({
     deleteEntity: deleteProjectCategories,
-    onOpenChange,
+    successMessage: t("successMessage"),
   });
 
-  const handleDelete = () => {
+  const { clear: clearSelectedItems } = useSelectedItems();
+
+  function handleDelete() {
+    onOpenChange?.(false);
+
+    // Clear selected items
+    clearSelectedItems();
+
+    // Used to show an overlay on the selected project categories
+    setDeletedProjectCategoryIds(projectCategoryIds);
     startTransition(() => action(projectCategoryIds));
-  };
+  }
 
   return (
     <ConfirmModal
@@ -53,7 +68,6 @@ export function DeleteProjectCategoriesModal({
       <ConfirmModalActions>
         <ConfirmModalCancelButton label={t("cancelButton")} />
         <ConfirmModalConfirmButton
-          isPending={isPending}
           label={t("deleteButton")}
           onConfirm={handleDelete}
           data-test="delete-project-categories-modal-confirm-button"

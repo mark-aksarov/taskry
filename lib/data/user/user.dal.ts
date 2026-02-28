@@ -96,6 +96,32 @@ export const getUserFormData = cache(
   },
 );
 
+export const getUserSummary = cache(
+  async (id: string): Promise<UserSummaryDTO | null> => {
+    // Authorization
+    const {
+      user: { workspaceId },
+    } = await requireSession();
+
+    const user = await prisma.user.findFirst({
+      where: { id, workspaceId },
+      select: {
+        id: true,
+        fullName: true,
+      },
+    });
+
+    if (!user) {
+      return null;
+    }
+
+    return {
+      id: user.id,
+      fullName: user.fullName,
+    };
+  },
+);
+
 export const getUserSummaries = cache(async (): Promise<UserSummaryDTO[]> => {
   const {
     user: { workspaceId },

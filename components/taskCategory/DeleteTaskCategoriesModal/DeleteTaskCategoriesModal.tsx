@@ -28,7 +28,7 @@ export function DeleteTaskCategoriesModal({
 }: DeleteTaskCategoriesModalProps) {
   const t = useTranslations("taskCategories.DeleteTaskCategoriesModal");
 
-  const [_, action, isPending] = useDeleteModalActionState<number[]>({
+  const [, action, isPending] = useDeleteModalActionState<number[]>({
     deleteEntity: deleteTaskCategories,
     onOpenChange,
   });

@@ -34,7 +34,7 @@ function EditProjectFormContainerInner({
     suspense: true,
   });
 
-  const { data: project } = useSWR<ProjectFormDataDTO>(
+  const { data: project, mutate } = useSWR<ProjectFormDataDTO>(
     `/api/projects/${projectId}?view=edit`,
     {
       suspense: true,
@@ -68,6 +68,7 @@ function EditProjectFormContainerInner({
       projectCategorySelectItems={categories}
       projectCustomerSelectItems={customers}
       updateProject={updateProject}
+      mutate={mutate}
     />
   );
 }

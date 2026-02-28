@@ -1,24 +1,29 @@
 "use client";
 
-import { useState } from "react";
+import {
+  ActionFn,
+  ActionState,
+  DeleteCustomersPayload,
+} from "@/lib/actions/types";
+
 import { useTranslations } from "next-intl";
 import { Pencil, Trash } from "lucide-react";
+import { startTransition, useState } from "react";
 import { EditCustomerModal } from "../EditCustomerModal";
-import { ActionFn, ActionState } from "@/lib/actions/types";
-import { DeleteCustomerModal } from "../DeleteCustomerModal";
+import { BaseDeleteCustomerModal } from "../DeleteCustomerModal";
 import { GuestModeModal } from "@/components/common/GuestModeModal";
 import { NavigationButton } from "@/components/common/NavigationButton";
+import { useCurrentUser } from "@/components/common/CurrentUserContext";
+import { useDeleteEntityPageActionState } from "@/lib/hooks/useDeleteEntityPageActionState";
 
 interface CustomerDetailActionsProps {
-  guestMode: boolean;
   customerId: number;
   customerFullName: string;
-  deleteCustomer: ActionFn<ActionState, number[]>;
+  deleteCustomer: ActionFn<ActionState, DeleteCustomersPayload>;
   editCustomerFormContainer: React.ReactNode;
 }
 
 export function CustomerDetailActions({
-  guestMode,
   customerId,
   customerFullName,
   deleteCustomer,
@@ -26,17 +31,21 @@ export function CustomerDetailActions({
 }: CustomerDetailActionsProps) {
   const t = useTranslations("customers.CustomerDetailActions");
 
-  // Guest mode modal
+  // Deleting the project
+  const [, action, isDeletePending] = useDeleteEntityPageActionState({
+    deleteEntity: deleteCustomer,
+  });
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+
+  // Guest mode
+  const { isGuest } = useCurrentUser();
   const [isGuestModeModalOpen, setIsGuestModeModalOpen] = useState(false);
 
   // Modal state for editing the task
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
-  // Modal state for deleting the task
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-
   function handleDeletePress() {
-    if (guestMode) {
+    if (isGuest) {
       setIsGuestModeModalOpen(true);
       return;
     }
@@ -45,12 +54,17 @@ export function CustomerDetailActions({
   }
 
   function handleEditPress() {
-    if (guestMode) {
+    if (isGuest) {
       setIsGuestModeModalOpen(true);
       return;
     }
 
     setIsEditModalOpen(true);
+  }
+
+  function handleDelete() {
+    setIsDeleteModalOpen(false);
+    startTransition(() => action({ ids: [customerId], shouldRedirect: true }));
   }
 
   return (
@@ -61,20 +75,19 @@ export function CustomerDetailActions({
       >
         <NavigationButton
           data-test="delete-customer-button"
+          isPending={isDeletePending}
           onPress={handleDeletePress}
           variant="secondary"
-        >
-          <Trash size={18} strokeWidth={1.5} absoluteStrokeWidth />
-          {t("delete")}
-        </NavigationButton>
+          iconLeft={<Trash size={18} strokeWidth={1.5} absoluteStrokeWidth />}
+          label={t("delete")}
+        />
         <NavigationButton
           data-test="edit-customer-button"
           onPress={handleEditPress}
           variant="secondary"
-        >
-          <Pencil size={18} strokeWidth={1.5} absoluteStrokeWidth />
-          {t("edit")}
-        </NavigationButton>
+          iconLeft={<Pencil size={18} strokeWidth={1.5} absoluteStrokeWidth />}
+          label={t("edit")}
+        />
       </div>
 
       {/* Modal for editing customer details */}
@@ -85,12 +98,11 @@ export function CustomerDetailActions({
       />
 
       {/* Modal for confirming customer deletion */}
-      <DeleteCustomerModal
-        customerId={customerId}
+      <BaseDeleteCustomerModal
         customerFullName={customerFullName}
         isOpen={isDeleteModalOpen}
         onOpenChange={setIsDeleteModalOpen}
-        deleteCustomer={deleteCustomer}
+        onDelete={handleDelete}
       />
 
       <GuestModeModal

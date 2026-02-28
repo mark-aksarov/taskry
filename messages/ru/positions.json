@@ -23,12 +23,13 @@
   "PositionToolbarCreateNewModalTrigger": {
     "label": "Создать новую"
   },
-  "PositionItemActionMenuTrigger": {
+  "PositionListItemActionMenuTrigger": {
     "edit": "Редактировать",
     "delete": "Удалить"
   },
   "EditPositionForm": {
-    "submitButtonLabel": "Обновить должность"
+    "submitButtonLabel": "Обновить должность",
+    "successMessage": "Должность успешно обновлена"
   },
   "EditPositionModal": {
     "title": "Изменить должность"
@@ -37,12 +38,14 @@
     "heading": "Удалить должности",
     "text": "Вы уверены, что хотите удалить <strong>{count} выбранные должности</strong>? Все содержимое будет безвозвратно удалено.",
     "cancelButton": "Отменить",
-    "deleteButton": "Удалить"
+    "deleteButton": "Удалить",
+    "successMessage": "Должности успешно удалены"
   },
   "DeletePositionModal": {
     "heading": "Удалить должность",
     "text": "Вы уверены, что хотите удалить должность <strong>«{name}»</strong>? Все содержимое будет безвозвратно удалено.",
     "cancelButton": "Отменить",
-    "deleteButton": "Удалить"
+    "deleteButton": "Удалить",
+    "successMessage": "Должность успешно удалена"
   }
 }

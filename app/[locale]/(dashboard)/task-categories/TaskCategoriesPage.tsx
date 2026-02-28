@@ -16,14 +16,12 @@ import { TaskCategoryToolbarActionsMenuTrigger } from "@/components/taskCategory
 
 interface TaskCategoriesPageProps {
   taskCategoriesContainer: React.ReactNode;
-  guestMode: boolean;
   createTaskCategory: ActionFn<ActionState, FormData>;
   deleteTaskCategories: ActionFn<ActionState, number[]>;
 }
 
 export function TaskCategoriesPage({
   taskCategoriesContainer,
-  guestMode,
   createTaskCategory,
   deleteTaskCategories,
 }: TaskCategoriesPageProps) {
@@ -31,14 +29,12 @@ export function TaskCategoriesPage({
 
   const taskCategoryToolbarCreateNewModalTrigger = (
     <TaskCategoryToolbarCreateNewModalTrigger
-      guestMode={guestMode}
       createTaskCategory={createTaskCategory}
     />
   );
 
   const taskCategoryToolbarActionsMenuTrigger = (
     <TaskCategoryToolbarActionsMenuTrigger
-      guestMode={guestMode}
       deleteTaskCategories={deleteTaskCategories}
     />
   );

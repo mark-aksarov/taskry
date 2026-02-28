@@ -5,7 +5,6 @@ import {
   FormBaseBody,
   FormBaseFooter,
   FormBaseSubmitButton,
-  useFormBaseActionState,
 } from "@/components/common/FormBase";
 
 import { DateValue } from "react-aria";
@@ -16,10 +15,11 @@ import { ProjectStatusSelect } from "../ProjectStatusSelect";
 import { ProjectCategorySelect } from "../ProjectCategorySelect";
 import { ProjectCustomerSelect } from "../ProjectCustomerSelect";
 import { ProjectTitleTextField } from "../ProjectTitleTextField";
-import { handleActionSubmit } from "@/lib/utils/handleActionSubmit";
 import { FormErrorBanner } from "@/components/common/FormErrorBanner";
 import { ProjectDeadlineDatePicker } from "../ProjectDeadlineDatePicker";
 import { ProjectDescriptionTextField } from "../ProjectDescriptionTextField";
+import { useUpdateProjectTransition } from "../UpdateProjectTransitionContext";
+import { useUpdateEntityActionState } from "@/lib/hooks/useUpdateEntityActionState";
 
 interface EditProjectFormProps {
   projectId: number;
@@ -32,6 +32,7 @@ interface EditProjectFormProps {
   projectCategorySelectItems: { id: number; name: string }[];
   projectCustomerSelectItems: { id: number; fullName: string }[];
   updateProject: ActionFn<ActionState, FormData>;
+  mutate: () => void;
 }
 
 export function EditProjectForm({
@@ -45,16 +46,29 @@ export function EditProjectForm({
   projectCategorySelectItems,
   projectCustomerSelectItems,
   updateProject,
+  mutate,
 }: EditProjectFormProps) {
   const t = useTranslations("projects.EditProjectForm");
 
-  const [state, action, isPending] = useFormBaseActionState(updateProject);
+  const { startTransition } = useUpdateProjectTransition();
+
+  const [state, action, isPending] = useUpdateEntityActionState({
+    updateEntity: updateProject,
+    onSuccess: mutate,
+    successMessage: t("successMessage"),
+  });
+
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+
+    startTransition(() => {
+      action(formData);
+    });
+  }
 
   return (
-    <FormBase
-      id="edit-project-form"
-      onSubmit={(e) => handleActionSubmit(e, action)}
-    >
+    <FormBase id="edit-project-form" onSubmit={handleSubmit}>
       <FormBaseBody>
         {projectId && <input type="hidden" name="id" value={projectId} />}
         <ProjectTitleTextField defaultValue={projectTitleDefaultValue} />

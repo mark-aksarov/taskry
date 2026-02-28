@@ -79,7 +79,8 @@
   "ProfileActions": {
     "deleteAccount": "Delete account",
     "changePassword": "Change password",
-    "editAccount": "Edit account"
+    "editAccount": "Edit account",
+    "delete": "Delete user"
   },
   "ProfileNavigationDesktop": {
     "userInformation": "User Information",
@@ -210,5 +211,8 @@
   "UsersFilteredEmptySection": {
     "heading": "No users found",
     "description": "No users match the selected filters. Try changing or resetting the filters."
+  },
+  "DeleteUserProvider": {
+    "successMessage": "User created successfully"
   }
 }

@@ -30,7 +30,7 @@ function EditCustomerFormContainerInner({
     suspense: true,
   });
 
-  const { data: customer } = useSWR<CustomerFormDataDTO>(
+  const { data: customer, mutate } = useSWR<CustomerFormDataDTO>(
     `/api/customers/${customerId}?view=edit`,
     {
       suspense: true,
@@ -52,6 +52,7 @@ function EditCustomerFormContainerInner({
       customerCompanyDefaultValue={customer?.companyId?.toString()}
       customerCompanySelectItems={companies}
       updateCustomer={updateCustomer}
+      mutate={mutate}
     />
   );
 }

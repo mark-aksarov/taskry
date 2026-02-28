@@ -2,57 +2,49 @@
   "EditSubtaskForm": {
     "submitButtonLabel": "Обновить подзадачу"
   },
-
   "NewSubtaskForm": {
     "submitButtonLabel": "Добавить подзадачу",
     "successMessage": "Подзадача успешно добавлена"
   },
-
   "DeleteSubtaskModal": {
     "heading": "Удалить подзадачу",
     "text": "Вы уверены, что хотите удалить подзадачу <strong>«{text}»</strong>?",
     "deleteButton": "Удалить",
     "cancelButton": "Отмена"
   },
-
   "SubtaskActionMenuTrigger": {
     "edit": "Редактировать",
     "done": "Отметить как «Выполнено»",
     "undone": "Отметить как «Не выполнено»",
     "delete": "Удалить"
   },
-
   "SubtasksCheckboxGroup": {
     "label": "Подзадачи"
   },
-
   "SubtaskTextField": {
     "label": "Текст",
     "placeholder": "Введите новую подзадачу...",
-
     "validation": {
       "required": "Заголовок обязателен",
       "tooLong": "Заголовок слишком длинный"
     }
   },
-
   "SubtaskFormDialogHeader": {
     "heading": "Новая подзадача"
   },
-
   "NewSubtaskModal": {
     "heading": "Новая подзадача"
   },
-
   "EditSubtaskModal": {
     "heading": "Редактировать подзадачу"
   },
-
   "NewSubtaskDialogAddButton": {
     "label": "Добавить подзадачу"
   },
-
   "NewSubtasksButton": {
     "label": "Новая подзадача"
+  },
+  "DeleteSubtaskProvider": {
+    "successMessage": "Подзадача успешно удалена"
   }
 }

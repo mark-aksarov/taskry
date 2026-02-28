@@ -6,11 +6,9 @@ import {
   ToolbarSortingButtonDesktop,
 } from "@/components/common/Toolbar";
 
-import { Item, Key } from "react-stately";
+import { Item } from "react-stately";
 import { UserSortField } from "@/lib/types";
-import { useSearchParams } from "next/navigation";
-import { useLocale, useTranslations } from "next-intl";
-import { usePathname, useRouter } from "@/i18n/navigation";
+import { useTranslations } from "next-intl";
 import { ALargeSmall, BriefcaseBusiness } from "lucide-react";
 
 interface UserToolbarSortingMenuTriggerProps {

@@ -11,14 +11,13 @@ import {
 import { useTranslations } from "next-intl";
 import { Card } from "@/components/common/Card";
 import { PageGrid } from "@/components/common/PageGrid";
-import { ActionFn, ActionState } from "@/lib/actions/types";
 import { BackButton } from "@/components/common/BackButton";
 import { PageContainer } from "@/components/common/PageContainer";
 import { TaskDetailCard } from "@/components/tasks/TaskDetailCard";
 import { TaskDetailActions } from "@/components/tasks/TaskDetailActions";
+import { ActionFn, ActionState, DeleteTasksPayload } from "@/lib/actions/types";
 
 interface TaskDetailPageProps {
-  guestMode: boolean;
   taskId: number;
   taskTitle: string;
   taskDetailContainer: React.ReactNode;
@@ -28,11 +27,10 @@ interface TaskDetailPageProps {
   appHeaderProps: AppHeaderContainerProps;
   sendComment: ActionFn<ActionState, FormData>;
   updateComment: ActionFn<ActionState, FormData>;
-  deleteTask: ActionFn<ActionState, number[]>;
+  deleteTask: ActionFn<ActionState, DeleteTasksPayload>;
 }
 
 export function TaskDetailPage({
-  guestMode,
   taskId,
   taskTitle,
   taskDetailContainer,
@@ -48,7 +46,6 @@ export function TaskDetailPage({
 
   const taskDetailActions = (
     <TaskDetailActions
-      guestMode={guestMode}
       taskId={taskId}
       taskTitle={taskTitle}
       editTaskFormContainer={editTaskFormContainer}

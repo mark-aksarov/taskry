@@ -5,6 +5,7 @@ import { tv } from "tailwind-variants";
 import { Button } from "react-aria-components";
 import { focusRing } from "@/components/ui/styles";
 import { baseButtonStyles } from "@/components/ui/Button";
+import { Loader2 } from "lucide-react";
 
 export const styles = tv({
   extend: focusRing,
@@ -21,6 +22,9 @@ export const styles = tv({
       false:
         "pressed:bg-gray-300 dark:pressed:bg-gray-700 hover:bg-gray-200 active:bg-gray-300 dark:hover:bg-gray-600 dark:active:bg-gray-700",
       true: "bg-blue-600 text-white! dark:bg-blue-700",
+    },
+    isPending: {
+      true: "pointer-events-none opacity-50",
     },
   },
   compoundVariants: [
@@ -49,8 +53,10 @@ interface NavigationButtonProps {
   variant?: NavigationButtonVariant;
   href?: string;
   onPress?: () => void;
-  children: React.ReactNode;
+  iconLeft?: React.ReactNode;
+  label: React.ReactNode;
   className?: string;
+  isPending?: boolean;
   "data-test"?: string;
 }
 
@@ -59,10 +65,24 @@ export const NavigationButton = ({
   variant = "primary",
   href,
   onPress,
-  children,
+  isPending,
+  iconLeft,
+  label,
   className,
   ...props
 }: NavigationButtonProps) => {
+  const icon = isPending ? (
+    <Loader2
+      data-testid="loader-icon"
+      size={18}
+      strokeWidth={1.75}
+      absoluteStrokeWidth
+      className="animate-spin"
+    />
+  ) : (
+    iconLeft
+  );
+
   if (href) {
     return (
       <Link
@@ -71,10 +91,12 @@ export const NavigationButton = ({
           variant,
           isActive,
           className,
+          isPending,
         })}
         {...props}
       >
-        {children}
+        {icon}
+        {label}
       </Link>
     );
   }
@@ -83,9 +105,11 @@ export const NavigationButton = ({
     <Button
       {...props}
       onPress={onPress}
-      className={styles({ variant, isActive, className })}
+      isPending={isPending}
+      className={styles({ variant, isActive, className, isPending })}
     >
-      {children}
+      {icon}
+      {label}
     </Button>
   );
 };

@@ -76,7 +76,8 @@
     "description": "Создайте новый проект, чтобы следить за работой"
   },
   "ProjectDetailPage": {
-    "heading": "Детали проекта"
+    "heading": "Детали проекта",
+    "successDeleteMessage": "Проект успешно удалён"
   },
   "TasksPageLoading": {
     "title": "Все задачи"

@@ -12,13 +12,11 @@ import { startTransition } from "react";
 import { useTranslations } from "next-intl";
 import { ModalProps } from "@/components/ui/Modal";
 import { DialogHeading } from "@/components/ui/Dialog";
-import { ActionFn, ActionState } from "@/lib/actions/types";
-import { useDeleteModalActionState } from "@/components/common/BaseDeleteModal";
+import { useDeleteTaskCategoryContext } from "../DeleteTaskCategoryContext";
 
 interface DeleteTaskCategoryModalProps extends ModalProps {
   taskCategoryId: number;
   taskCategoryName: string;
-  deleteTaskCategories: ActionFn<ActionState, number[]>;
 }
 
 export function DeleteTaskCategoryModal({
@@ -26,16 +24,13 @@ export function DeleteTaskCategoryModal({
   taskCategoryName,
   isOpen,
   onOpenChange,
-  deleteTaskCategories,
 }: DeleteTaskCategoryModalProps) {
   const t = useTranslations("taskCategories.DeleteTaskCategoryModal");
 
-  const [_, action, isPending] = useDeleteModalActionState<number[]>({
-    deleteEntity: deleteTaskCategories,
-    onOpenChange,
-  });
+  const { action } = useDeleteTaskCategoryContext();
 
   const handleDelete = () => {
+    onOpenChange?.(false);
     startTransition(() => action([taskCategoryId]));
   };
 
@@ -55,7 +50,6 @@ export function DeleteTaskCategoryModal({
       <ConfirmModalActions>
         <ConfirmModalCancelButton label={t("cancelButton")} />
         <ConfirmModalConfirmButton
-          isPending={isPending}
           label={t("deleteButton")}
           onConfirm={handleDelete}
           data-test="delete-task-category-modal-confirm-button"

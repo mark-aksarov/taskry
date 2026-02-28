@@ -4,7 +4,8 @@
     "description": "По выбранным фильтрам проекты отсутствуют. Попробуйте изменить или сбросить фильтры"
   },
   "EditProjectForm": {
-    "submitButtonLabel": "Обновить проект"
+    "submitButtonLabel": "Обновить проект",
+    "successMessage": "Проект успешно обновлен"
   },
   "NewProjectForm": {
     "submitButtonLabel": "Создать проект",
@@ -137,13 +138,15 @@
     "heading": "Удалить проект",
     "text": "Вы уверены, что хотите удалить <strong>«{name}»</strong>? Все содержимое будет безвозвратно удалено. Связанные задачи также будут удалены.",
     "deleteButton": "Удалить",
-    "cancelButton": "Отменить"
+    "cancelButton": "Отменить",
+    "successMessage": "Проект успешно удалён"
   },
   "DeleteProjectsModal": {
     "heading": "Удалить проекты",
     "text": "Вы уверены, что хотите удалить <strong>{count} выбранных проектов </strong>? Все содержимое будет безвозвратно удалено. Связанные задачи также будут удалены.",
     "deleteButton": "Удалить",
-    "cancelButton": "Отменить"
+    "cancelButton": "Отменить",
+    "successMessage": "Проекты успешно удалены"
   },
   "ProjectStatus": {
     "pending": "В ожидании",

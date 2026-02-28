@@ -1,4 +1,7 @@
 {
+  "DeleteTaskProvider": {
+    "successMessage": "Task deleted successfully"
+  },
   "EditTaskForm": {
     "submitButtonLabel": "Update Task"
   },

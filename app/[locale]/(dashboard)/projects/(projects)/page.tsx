@@ -18,18 +18,20 @@ import { projectSortFields } from "@/lib/types";
 import { customerId } from "@/lib/schemas/customer";
 import { projectStatus } from "@/lib/schemas/project";
 import { hasGuestRole } from "@/lib/utils/hasGuestRole";
+import { hasOwnerRole } from "@/lib/utils/hasOwnerRole";
 import { projectCategoryId } from "@/lib/schemas/projectCategory";
 import { deleteProjects } from "@/lib/actions/project/deleteProjects";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { ProjectsPageEmptyContainer } from "./ProjectsPageEmptyContainer";
 import { ProjectsContainer } from "@/components/projects/ProjectsContainer";
+import { CurrentUserProvider } from "@/components/common/CurrentUserContext";
 import { PageTransitionProvider } from "@/components/common/PageTransitionContext";
-import { updateProjectStatuses } from "@/lib/actions/project/updateProjectStatuses";
+import { DeleteProjectsProvider } from "@/components/projects/DeleteProjectsContext";
 import { NewProjectFormContainer } from "@/components/projects/NewProjectFormContainer";
 import { SelectedProjectsProvider } from "@/components/projects/SelectedProjectsContext";
 import { createProjectCategory } from "@/lib/actions/projectCategory/createProjectCategory";
 import { ProjectFiltersFormContainer } from "@/components/projects/ProjectFiltersFormContainer";
-import { UpdateProjectStatusesProvider } from "@/components/projects/UpdateProjectStatusContext";
+import { UpdateProjectStatusesProvider } from "@/components/projects/UpdateProjectStatusesContext";
 
 const searchParamsSchema = z.object({
   page: pageSearchParam,
@@ -62,24 +64,32 @@ export default async function AppProjectsPage({
   searchParams: Promise<{ [key: string]: string | undefined }>;
 }) {
   // Authorization
-  await requireProtectedPage();
+  const session = await requireProtectedPage();
 
   // Validation
   const rawParams = await searchParams;
   const validated = searchParamsSchema.parse(rawParams);
   const { page, pageSize, sort, ...filters } = validated;
 
-  // Get total count of projects in the current workspace
+  // This data is required to determine the user's role
+  // and render the UI accordingly on the client side.
+  const currentUserContextValue = {
+    isGuest: await hasGuestRole(),
+    isOwner: await hasOwnerRole(),
+    userId: session.user.id,
+  };
+
+  // Render the empty page if there are no projects
   const totalCount = await getProjectCount();
-  const guestMode = await hasGuestRole();
 
   if (!totalCount) {
     return (
-      <ProjectsPageEmptyContainer
-        guestMode={guestMode}
-        newProjectFormContainer={<NewProjectFormContainer />}
-        createProjectCategory={createProjectCategory}
-      />
+      <CurrentUserProvider value={currentUserContextValue}>
+        <ProjectsPageEmptyContainer
+          newProjectFormContainer={<NewProjectFormContainer />}
+          createProjectCategory={createProjectCategory}
+        />
+      </CurrentUserProvider>
     );
   }
 
@@ -93,32 +103,35 @@ export default async function AppProjectsPage({
     });
 
   return (
-    <UpdateProjectStatusesProvider updateStatus={updateProjectStatuses}>
-      <SelectedProjectsProvider
-        pageItems={projects.map((p) => ({ id: p.id, status: p.status }))}
-      >
-        <PageTransitionProvider>
-          <ProjectsPage
-            guestMode={guestMode}
-            newProjectFormContainer={<NewProjectFormContainer />}
-            createProjectCategory={createProjectCategory}
-            totalFilteredProjects={totalFilteredProjects}
-            selectedSortField={sort}
-            projectsContainer={
-              <ProjectsContainer
-                projects={projects}
-                totalCount={totalFilteredProjects}
-                page={page}
-                pageSize={pageSize}
+    <CurrentUserProvider value={currentUserContextValue}>
+      <UpdateProjectStatusesProvider>
+        <SelectedProjectsProvider
+          pageItems={projects.map((p) => ({ id: p.id, status: p.status }))}
+        >
+          <PageTransitionProvider>
+            <DeleteProjectsProvider>
+              <ProjectsPage
+                newProjectFormContainer={<NewProjectFormContainer />}
+                createProjectCategory={createProjectCategory}
+                totalFilteredProjects={totalFilteredProjects}
+                selectedSortField={sort}
+                projectsContainer={
+                  <ProjectsContainer
+                    projects={projects}
+                    totalCount={totalFilteredProjects}
+                    page={page}
+                    pageSize={pageSize}
+                  />
+                }
+                projectFiltersFormContainer={
+                  <ProjectFiltersFormContainer filters={filters} />
+                }
+                deleteProjects={deleteProjects}
               />
-            }
-            projectFiltersFormContainer={
-              <ProjectFiltersFormContainer filters={filters} />
-            }
-            deleteProjects={deleteProjects}
-          />
-        </PageTransitionProvider>
-      </SelectedProjectsProvider>
-    </UpdateProjectStatusesProvider>
+            </DeleteProjectsProvider>
+          </PageTransitionProvider>
+        </SelectedProjectsProvider>
+      </UpdateProjectStatusesProvider>
+    </CurrentUserProvider>
   );
 }

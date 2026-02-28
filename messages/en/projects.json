@@ -4,7 +4,8 @@
     "description": "No projects match the selected filters. Try changing or resetting the filters."
   },
   "EditProjectForm": {
-    "submitButtonLabel": "Update Project"
+    "submitButtonLabel": "Update Project",
+    "successMessage": "Project updated successfully."
   },
   "NewProjectForm": {
     "submitButtonLabel": "Create Project",
@@ -137,13 +138,15 @@
     "heading": "Delete Project",
     "text": "Are you sure you want to delete <strong>«{name}»</strong>? All contents will be permanently removed, and all related tasks will also be deleted.",
     "deleteButton": "Delete",
-    "cancelButton": "Cancel"
+    "cancelButton": "Cancel",
+    "successMessage": "Project deleted successfully"
   },
   "DeleteProjectsModal": {
     "heading": "Delete Projects",
     "text": "Are you sure you want to delete <strong>{count} projects</strong>? All contents will be permanently removed, and all related tasks will also be deleted.",
     "deleteButton": "Delete",
-    "cancelButton": "Cancel"
+    "cancelButton": "Cancel",
+    "successMessage": "Projects deleted successfully"
   },
   "ProjectStatus": {
     "pending": "Pending",

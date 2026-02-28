@@ -30,10 +30,12 @@ export const AppNavigationLangMenuTrigger = () => {
         <DialogHeader>{t("dialogHeading")}</DialogHeader>
       )}
       renderButton={() => (
-        <NavigationButton>
-          <Languages size={18} strokeWidth={1.5} absoluteStrokeWidth />
-          {t("label")}
-        </NavigationButton>
+        <NavigationButton
+          iconLeft={
+            <Languages size={18} strokeWidth={1.5} absoluteStrokeWidth />
+          }
+          label={t("label")}
+        />
       )}
     >
       <Item textValue={t("items.english")} key="en">

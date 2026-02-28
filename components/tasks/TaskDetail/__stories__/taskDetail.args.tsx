@@ -16,7 +16,7 @@ export const getSubtasksList = () => (
         taskId={1}
         toggleSubtask={() => ({ status: "success" as const })}
         updateSubtask={() => ({ status: "success" as const })}
-        guestMode
+        deleteSubtask={() => ({ status: "success" as const })}
       />
     ))}
   </SubtaskList>

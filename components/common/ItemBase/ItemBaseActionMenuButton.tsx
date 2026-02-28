@@ -10,7 +10,11 @@ export function ItemBaseActionMenuButton({ className, ...props }: ButtonProps) {
     <Button
       aria-label={t("ariaLabel")}
       variant="ghost"
-      iconLeft={<Ellipsis size={16} strokeWidth={1.5} absoluteStrokeWidth />}
+      iconLeft={
+        props.isPending ? undefined : (
+          <Ellipsis size={16} strokeWidth={1.5} absoluteStrokeWidth />
+        )
+      }
       className={twMerge("rounded-full", className)}
       {...props}
     />

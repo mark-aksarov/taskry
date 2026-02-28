@@ -1,8 +1,11 @@
 import { z } from "zod";
+import { notFound } from "next/navigation";
 import { taskSortFields } from "@/lib/types";
 import { getTaskList } from "@/lib/data/task/task.dal";
 import { hasGuestRole } from "@/lib/utils/hasGuestRole";
 import { hasOwnerRole } from "@/lib/utils/hasOwnerRole";
+import { getUserSummary } from "@/lib/data/user/user.dal";
+import { deleteUser } from "@/lib/actions/user/deleteUser";
 import { deleteTasks } from "@/lib/actions/task/deleteTasks";
 import { ProfileActions } from "@/components/users/ProfileActions";
 import { changePassword } from "@/lib/actions/user/changePassword";
@@ -11,6 +14,7 @@ import { TeamProfileTasksPageEmpty } from "./TeamProfileTasksPageEmpty";
 import { pageSearchParam, pageSizeSearchParam } from "@/lib/schemas/base";
 import { UserTasksContainer } from "@/components/users/UserTasksContainer";
 import { updateTaskStatuses } from "@/lib/actions/task/updateTaskStatuses";
+import { CurrentUserProvider } from "@/components/common/CurrentUserContext";
 import { UserTasksPageLayout } from "@/components/users/UserTasksPageLayout";
 import { UserHeaderContainer } from "@/components/users/UserHeaderContainer";
 import { NewTaskFormContainer } from "@/components/tasks/NewTaskFormContainer";
@@ -37,49 +41,63 @@ export default async function AppProfileTasksPage({
   // Authorization
   const session = await requireProtectedPage();
 
-  const { id: userId } = await params;
-
   // Validation
+  const { id: userId } = await params;
   const rawParams = await searchParams;
   const { page, pageSize, sort } = searchParamsSchema.parse(rawParams);
 
-  // Get count
-  const filters = {
-    assignee: [userId],
-  };
+  // Get user summary
+  const userSummary = await getUserSummary(userId);
 
+  if (!userSummary) {
+    notFound();
+  }
+
+  // Get tasks for specific user
   const { items: tasks, totalCount } = await getTaskList({
     page,
     pageSize,
     sort,
-    filters,
+    filters: {
+      assignee: [userId],
+    },
   });
 
-  // Render user actions for the owner, guest, or authenticated user
+  // This data is required to determine the user's role
+  // and render the UI accordingly on the client side.
   const isOwner = await hasOwnerRole();
-  const guestMode = await hasGuestRole();
+  const isGuest = await hasGuestRole();
 
-  const isAuthUser = session?.user.id === userId;
-  const showUserActions = isOwner || guestMode || isAuthUser;
+  const currentUserContextValue = {
+    isGuest,
+    isOwner,
+    userId: session.user.id,
+  };
 
-  const userActions = showUserActions ? (
+  // Show user actions if the user is the owner, guest, or the current user
+  const showUserActions = isOwner || isGuest || session.user.id === userId;
+
+  const userActions = showUserActions && (
     <ProfileActions
-      guestMode={guestMode}
       userId={userId}
+      userFullName={userSummary.fullName}
       changePassword={changePassword}
+      deleteUser={deleteUser}
       editUserFormContainer={<EditUserFormContainer userId={userId} />}
     />
-  ) : null;
+  );
 
   // Render the page with an empty tasks section.
   if (!totalCount) {
     return (
-      <TeamProfileTasksPageEmpty
-        userId={userId}
-        userActions={userActions}
-        newTaskFormContainer={<NewTaskFormContainer />}
-        userHeaderContainer={<UserHeaderContainer userId={userId} />}
-      />
+      <CurrentUserProvider value={currentUserContextValue}>
+        <TeamProfileTasksPageEmpty
+          userId={userId}
+          userActions={userActions}
+          newTaskFormContainer={<NewTaskFormContainer />}
+          userHeaderContainer={<UserHeaderContainer userId={userId} />}
+        />
+      </CurrentUserProvider>
     );
   }
 
@@ -101,7 +119,6 @@ export default async function AppProfileTasksPage({
               />
             }
             userHeaderContainer={<UserHeaderContainer userId={userId} />}
-            guestMode={guestMode}
             deleteTasks={deleteTasks}
             navigationDesktop={
               <UserNavigationDesktop userActions={userActions} />

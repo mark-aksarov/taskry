@@ -13,6 +13,26 @@ export type ActionState = {
   message?: string;
 };
 
+export type DeleteProjectsPayload = {
+  ids: number[];
+  shouldRedirect: boolean;
+};
+
+export type DeleteTasksPayload = {
+  ids: number[];
+  shouldRedirect: boolean;
+};
+
+export type DeleteCustomersPayload = {
+  ids: number[];
+  shouldRedirect: boolean;
+};
+
+export type DeleteUserPayload = {
+  id: string;
+  shouldRedirect: boolean;
+};
+
 export interface UpdateProjectStatusesPayload {
   ids: number[];
   nextStatus: ProjectStatus;

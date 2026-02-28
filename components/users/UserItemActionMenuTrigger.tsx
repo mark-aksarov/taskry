@@ -9,14 +9,14 @@ import {
 import { useState } from "react";
 import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
-import { Info, Pencil, Trash } from "lucide-react";
 import { EditUserModal } from "./EditUserModal";
-import { useDeleteUserModal } from "./DeleteUserModal";
+import { Info, Pencil, Trash } from "lucide-react";
+import { DeleteUserModal } from "./DeleteUserModal";
 import { GuestModeModal } from "../common/GuestModeModal";
+import { useDeleteUserContext } from "./DeleteUserContext";
+import { useCurrentUser } from "../common/CurrentUserContext";
 
 interface UserItemActionMenuTriggerProps {
-  showDeleteMenuItem: boolean;
-  guestMode: boolean;
   userId: string;
   userFullName: string;
   className?: string;
@@ -24,8 +24,6 @@ interface UserItemActionMenuTriggerProps {
 }
 
 export function UserItemActionMenuTrigger({
-  showDeleteMenuItem,
-  guestMode,
   userId,
   userFullName,
   className,
@@ -33,18 +31,21 @@ export function UserItemActionMenuTrigger({
 }: UserItemActionMenuTriggerProps) {
   const t = useTranslations("users.UserItemActionMenuTrigger");
 
+  // Deleting the user
+  const { isPending: isDeletePending } = useDeleteUserContext();
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+
   // Separate modal state for creating an user
   const [isEditUserModalOpen, setIsEditUserModalOpen] = useState(false);
 
-  // Modal state for deleting the user
-  const { setState: setDeleteUserModalState } = useDeleteUserModal();
-
-  // Guest mode
+  // Guest mode modal state
   const [isGuestModeModalOpen, setIsGuestModeModalOpen] = useState(false);
+
+  const { isGuest, userId: currentUserId } = useCurrentUser();
 
   // Menu actions: show guest modal, show edit user modal, show delete user modal
   function handleAction(key: Key) {
-    if (guestMode) {
+    if (isGuest) {
       setIsGuestModeModalOpen(true);
       return;
     }
@@ -56,13 +57,12 @@ export function UserItemActionMenuTrigger({
     if (key === "edit") {
       setIsEditUserModalOpen(true);
     } else if (key === "delete") {
-      setDeleteUserModalState({
-        isOpen: true,
-        entityId: userId,
-        entityName: userFullName,
-      });
+      setIsDeleteModalOpen(true);
     }
   }
+
+  // The user can't delete themselves, so we need to make sure the user sees the "Delete" menu item.
+  const showDeleteMenuItem = currentUserId !== userId;
 
   return (
     <>
@@ -72,6 +72,7 @@ export function UserItemActionMenuTrigger({
         renderButton={() => (
           <ItemBaseActionMenuButton
             className={className}
+            isPending={isDeletePending}
             data-test="user-item-action-menu-trigger"
             data-id={userId}
           />
@@ -95,6 +96,13 @@ export function UserItemActionMenuTrigger({
         isOpen={isEditUserModalOpen}
         onOpenChange={setIsEditUserModalOpen}
         editUserFormContainer={editUserFormContainer}
+      />
+
+      <DeleteUserModal
+        userId={userId}
+        userFullName={userFullName}
+        isOpen={isDeleteModalOpen}
+        onOpenChange={setIsDeleteModalOpen}
       />
 
       <GuestModeModal

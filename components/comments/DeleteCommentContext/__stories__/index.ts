@@ -1,0 +1,1 @@
+export { withDeleteCommentProvider } from "./withDeleteCommentProvider";

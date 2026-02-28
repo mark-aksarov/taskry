@@ -12,12 +12,12 @@ import { startTransition } from "react";
 import { useTranslations } from "next-intl";
 import { ModalProps } from "@/components/ui/Modal";
 import { DialogHeading } from "@/components/ui/Dialog";
-import { ActionFn, ActionState } from "@/lib/actions/types";
+import { ActionFn, ActionState, DeleteTasksPayload } from "@/lib/actions/types";
 import { useDeleteModalActionState } from "@/components/common/BaseDeleteModal";
 
 interface DeleteTasksModalProps extends ModalProps {
   taskIds: number[];
-  deleteTasks: ActionFn<ActionState, number[]>;
+  deleteTasks: ActionFn<ActionState, DeleteTasksPayload>;
 }
 
 export function DeleteTasksModal({
@@ -28,7 +28,7 @@ export function DeleteTasksModal({
 }: DeleteTasksModalProps) {
   const t = useTranslations("tasks.DeleteTasksModal");
 
-  const [_, action, isPending] = useDeleteModalActionState<number[]>({
+  const [, action, isPending] = useDeleteModalActionState<number[]>({
     deleteEntity: deleteTasks,
     onOpenChange,
   });

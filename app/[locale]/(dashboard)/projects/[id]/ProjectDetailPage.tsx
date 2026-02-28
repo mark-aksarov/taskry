@@ -8,17 +8,21 @@ import {
   AppHeaderContainerProps,
 } from "@/components/layout/AppHeader";
 
+import {
+  ActionFn,
+  ActionState,
+  DeleteProjectsPayload,
+} from "@/lib/actions/types";
+
 import { useTranslations } from "next-intl";
 import { Card } from "@/components/common/Card";
 import { PageGrid } from "@/components/common/PageGrid";
-import { ActionFn, ActionState } from "@/lib/actions/types";
 import { BackButton } from "@/components/common/BackButton";
 import { PageContainer } from "@/components/common/PageContainer";
 import { ProjectDetailCard } from "@/components/projects/ProjectDetailCard";
 import { ProjectDetailActions } from "@/components/projects/ProjectDetailActions";
 
 interface ProjectPageProps {
-  guestMode: boolean;
   projectId: number;
   projectTitle: string;
   projectDetailContainer: React.ReactNode;
@@ -28,11 +32,10 @@ interface ProjectPageProps {
   appHeaderProps: AppHeaderContainerProps;
   sendComment: ActionFn<ActionState, FormData>;
   updateComment: ActionFn<ActionState, FormData>;
-  deleteProject: ActionFn<ActionState, number[]>;
+  deleteProject: ActionFn<ActionState, DeleteProjectsPayload>;
 }
 
 export function ProjectDetailPage({
-  guestMode,
   projectId,
   projectTitle,
   projectDetailContainer,
@@ -48,12 +51,11 @@ export function ProjectDetailPage({
 
   const projectDetailActions = (
     <ProjectDetailActions
-      guestMode={guestMode}
+      deleteProject={deleteProject}
       projectId={projectId}
       projectTitle={projectTitle}
       sendComment={sendComment}
       updateComment={updateComment}
-      deleteProject={deleteProject}
       projectCommentsContainer={projectCommentsContainer}
       editProjectFormContainer={editProjectFormContainer}
     />

@@ -13,6 +13,8 @@ import { ActionFn, ActionState } from "@/lib/actions/types";
 import { handleActionSubmit } from "@/lib/utils/handleActionSubmit";
 import { FormErrorBanner } from "@/components/common/FormErrorBanner";
 import { ProjectCategoryNameTextField } from "./ProjectCategoryNameTextField";
+import { useUpdateEntityActionState } from "@/lib/hooks/useUpdateEntityActionState";
+import { useUpdateProjectCategoryTransition } from "./UpdateProjectCategoryTransitionContext";
 
 interface EditProjectCategoryFormProps {
   projectCategoryId: number;
@@ -27,15 +29,24 @@ export function EditProjectCategoryForm({
 }: EditProjectCategoryFormProps) {
   const t = useTranslations("projectCategories.EditProjectCategoryForm");
 
-  const [state, action, isPending] = useFormBaseActionState(
-    updateProjectCategory,
-  );
+  const { startTransition } = useUpdateProjectCategoryTransition();
+
+  const [state, action, isPending] = useUpdateEntityActionState({
+    updateEntity: updateProjectCategory,
+    successMessage: t("successMessage"),
+  });
+
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+
+    startTransition(() => {
+      action(formData);
+    });
+  }
 
   return (
-    <FormBase
-      id="edit-project-category-form"
-      onSubmit={(e) => handleActionSubmit(e, action)}
-    >
+    <FormBase id="edit-project-category-form" onSubmit={handleSubmit}>
       <FormBaseBody>
         <input type="hidden" name="id" value={projectCategoryId} />
         <ProjectCategoryNameTextField defaultValue={nameDefaultValue} />

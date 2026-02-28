@@ -4,17 +4,12 @@ import { CompanyListItem } from "../../CompanyListItem";
 import { mockedCompanySummaries } from "@/mocks/companies";
 import { CompanyListItemStory } from "../../CompanyListItem/__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withDeleteCompanyModalProvider } from "../../DeleteCompanyModal/__stories__";
 import { withSelectedItemsProvider } from "@/components/common/SelectedItemsContext/__stories__";
 
 const meta = {
   title: "components/companies/CompanyList",
   component: CompanyList,
-  decorators: [
-    withDeleteCompanyModalProvider,
-    withSelectedItemsProvider,
-    withThemedBackground,
-  ],
+  decorators: [withSelectedItemsProvider, withThemedBackground],
 } satisfies Meta<typeof CompanyList>;
 
 export default meta;

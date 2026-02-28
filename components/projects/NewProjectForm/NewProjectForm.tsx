@@ -5,20 +5,19 @@ import {
   FormBaseBody,
   FormBaseFooter,
   FormBaseSubmitButton,
-  useFormBaseActionState,
 } from "@/components/common/FormBase";
 
 import { useTranslations } from "next-intl";
+import { startTransition, useRef } from "react";
 import { ActionFn, ActionState } from "@/lib/actions/types";
 import { ProjectStatusSelect } from "../ProjectStatusSelect";
 import { ProjectTitleTextField } from "../ProjectTitleTextField";
 import { ProjectCategorySelect } from "../ProjectCategorySelect";
 import { ProjectCustomerSelect } from "../ProjectCustomerSelect";
-import { handleActionSubmit } from "@/lib/utils/handleActionSubmit";
 import { FormErrorBanner } from "@/components/common/FormErrorBanner";
 import { ProjectDeadlineDatePicker } from "../ProjectDeadlineDatePicker";
 import { ProjectDescriptionTextField } from "../ProjectDescriptionTextField";
-import { useRef } from "react";
+import { useCreateEntityActionState } from "@/lib/hooks/useCreateEntityActionState";
 
 interface NewProjectFormProps {
   projectCategorySelectItems: { id: number; name: string }[];
@@ -33,22 +32,27 @@ export function NewProjectForm({
 }: NewProjectFormProps) {
   const t = useTranslations("projects.NewProjectForm");
 
-  // The ref is used inside reducerAction in useFormBaseActionState.
-  // ref.current in useFormBaseActionState is null on unmount, preventing programmatic modal close when opening another form.
+  // The ref is used inside reducerAction
+  // ref.current is null on unmount, preventing programmatic modal close when opening another form in the same modal
   const ref = useRef<HTMLFormElement>(null);
 
-  const [state, action, isPending] = useFormBaseActionState(
-    createProject,
-    ref,
-    t("successMessage"),
-  );
+  const [state, action, isPending] = useCreateEntityActionState({
+    createEntity: createProject,
+    formRef: ref,
+    successMessage: t("successMessage"),
+  });
+
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+
+    startTransition(() => {
+      action(formData);
+    });
+  }
 
   return (
-    <FormBase
-      ref={ref}
-      id="new-project-form"
-      onSubmit={(e) => handleActionSubmit(e, action)}
-    >
+    <FormBase ref={ref} id="new-project-form" onSubmit={handleSubmit}>
       <FormBaseBody>
         <ProjectTitleTextField />
         <ProjectDescriptionTextField />

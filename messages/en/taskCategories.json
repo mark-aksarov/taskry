@@ -1,4 +1,7 @@
 {
+  "DeleteTaskCategoryProvider": {
+    "successMessage": "Task category deleted successfully"
+  },
   "NewTaskCategoryForm": {
     "submitButtonLabel": "Create category",
     "successMessage": "Task category created successfully."

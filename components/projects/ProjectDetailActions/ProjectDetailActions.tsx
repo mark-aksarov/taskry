@@ -1,29 +1,34 @@
 "use client";
 
-import { useState } from "react";
+import {
+  ActionFn,
+  ActionState,
+  DeleteProjectsPayload,
+} from "@/lib/actions/types";
+
 import { useTranslations } from "next-intl";
 import { KeyRound, Trash } from "lucide-react";
+import { startTransition, useState } from "react";
 import { EditProjectModal } from "../EditProjectModal";
-import { DeleteProjectModal } from "../DeleteProjectModal";
-import { ActionFn, ActionState } from "@/lib/actions/types";
+import { ProjectCommentsModal } from "../ProjectCommentsModal";
+import { BaseDeleteProjectModal } from "../DeleteProjectModal";
 import { GuestModeModal } from "@/components/common/GuestModeModal";
 import { NavigationButton } from "@/components/common/NavigationButton";
+import { useCurrentUser } from "@/components/common/CurrentUserContext";
+import { useDeleteEntityPageActionState } from "@/lib/hooks/useDeleteEntityPageActionState";
 import { DetailActionsCommentsModalTrigger } from "@/components/common/DetailActionsCommentsModalTrigger";
-import { ProjectCommentsModal } from "../ProjectCommentsModal";
 
 interface ProjectDetailActionsProps {
-  guestMode: boolean;
   projectId: number;
   projectTitle: string;
   sendComment: ActionFn<ActionState, FormData>;
   updateComment: ActionFn<ActionState, FormData>;
-  deleteProject: ActionFn<ActionState, number[]>;
+  deleteProject: ActionFn<ActionState, DeleteProjectsPayload>;
   projectCommentsContainer: React.ReactNode;
   editProjectFormContainer: React.ReactNode;
 }
 
 export function ProjectDetailActions({
-  guestMode,
   projectId,
   projectTitle,
   sendComment,
@@ -34,17 +39,21 @@ export function ProjectDetailActions({
 }: ProjectDetailActionsProps) {
   const t = useTranslations("projects.ProjectDetailActions");
 
-  // Guest mode modal
-  const [isGuestModeModalOpen, setIsGuestModeModalOpen] = useState(false);
-
-  // Modal state for editing the task
-  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-
-  // Modal state for deleting the task
+  // Deleting the project
+  const [, action, isDeletePending] = useDeleteEntityPageActionState({
+    deleteEntity: deleteProject,
+  });
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
+  // Guest mode
+  const { isGuest } = useCurrentUser();
+  const [isGuestModeModalOpen, setIsGuestModeModalOpen] = useState(false);
+
+  // Modal state for editing the project
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+
   function handleDeletePress() {
-    if (guestMode) {
+    if (isGuest) {
       setIsGuestModeModalOpen(true);
       return;
     }
@@ -53,7 +62,7 @@ export function ProjectDetailActions({
   }
 
   function handleEditPress() {
-    if (guestMode) {
+    if (isGuest) {
       setIsGuestModeModalOpen(true);
       return;
     }
@@ -61,25 +70,31 @@ export function ProjectDetailActions({
     setIsEditModalOpen(true);
   }
 
+  function handleDelete() {
+    setIsDeleteModalOpen(false);
+    startTransition(() => action({ ids: [projectId], shouldRedirect: true }));
+  }
+
   return (
     <>
       <div className="flex flex-col gap-2.5">
         <NavigationButton
+          isPending={isDeletePending}
           data-test="delete-project-button"
           onPress={handleDeletePress}
           variant="secondary"
-        >
-          <Trash size={18} strokeWidth={1.5} absoluteStrokeWidth />
-          {t("delete")}
-        </NavigationButton>
+          iconLeft={<Trash size={18} strokeWidth={1.5} absoluteStrokeWidth />}
+          label={t("delete")}
+        />
         <NavigationButton
           data-test="edit-project-button"
           onPress={handleEditPress}
           variant="secondary"
-        >
-          <KeyRound size={18} strokeWidth={1.5} absoluteStrokeWidth />
-          {t("edit")}
-        </NavigationButton>
+          iconLeft={
+            <KeyRound size={18} strokeWidth={1.5} absoluteStrokeWidth />
+          }
+          label={t("edit")}
+        />
         <DetailActionsCommentsModalTrigger
           modal={
             <ProjectCommentsModal
@@ -89,9 +104,8 @@ export function ProjectDetailActions({
               updateComment={updateComment}
             />
           }
-        >
-          {t("comments")}
-        </DetailActionsCommentsModalTrigger>
+          label={t("comments")}
+        />
       </div>
 
       {/* Modal for editing project details */}
@@ -102,12 +116,11 @@ export function ProjectDetailActions({
       />
 
       {/* Modal for confirming project deletion */}
-      <DeleteProjectModal
-        projectId={projectId}
+      <BaseDeleteProjectModal
+        onDelete={handleDelete}
         projectTitle={projectTitle}
         isOpen={isDeleteModalOpen}
         onOpenChange={setIsDeleteModalOpen}
-        deleteProjects={deleteProject}
       />
 
       <GuestModeModal

@@ -4,13 +4,11 @@ import { EmptyPageContainer } from "@/components/common/EmptyPageContainer";
 import { ProjectToolbarCreateNewMenuTrigger } from "@/components/projects/ProjectToolbarCreateNewMenuTrigger";
 
 interface ProjectsPageEmptyContainerProps {
-  guestMode: boolean;
   newProjectFormContainer: React.ReactNode;
   createProjectCategory: ActionFn<ActionState, FormData>;
 }
 
 export function ProjectsPageEmptyContainer({
-  guestMode,
   newProjectFormContainer,
   createProjectCategory,
 }: ProjectsPageEmptyContainerProps) {
@@ -18,7 +16,6 @@ export function ProjectsPageEmptyContainer({
 
   const toolbarCreateNewMenuTrigger = (
     <ProjectToolbarCreateNewMenuTrigger
-      guestMode={guestMode}
       newProjectFormContainer={newProjectFormContainer}
       createProjectCategory={createProjectCategory}
     />

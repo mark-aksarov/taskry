@@ -1,14 +1,10 @@
-import {
-  useUpdateProjectStatusContext,
-  useUpdateProjectStatusesContext,
-} from "../UpdateProjectStatusContext";
-
 import { Loader2 } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { ProjectStatus } from "@/generated/prisma/enums";
 import { ItemBaseBadge } from "@/components/common/ItemBase";
 import { getProjectStatusBadgeColor } from "../getProjectStatusBadgeColor";
-import { useSelectedProjects } from "../SelectedProjectsContext";
+import { useUpdateProjectStatuses } from "../UpdateProjectStatusesContext";
+import { useUpdateProjectStatusTransition } from "../UpdateProjectStatusTransitionContext";
 
 interface ProjectItemBaseBadgeProps {
   projectId: number;
@@ -26,15 +22,15 @@ export function ProjectItemBaseBadge({
   const t = useTranslations("projects.ProjectStatus");
 
   const { isPending: isUpdateProjectStatusPending } =
-    useUpdateProjectStatusContext();
-  const { isPending: isUpdateProjectStatusesPending } =
-    useUpdateProjectStatusesContext();
-
-  const selected = useSelectedProjects();
+    useUpdateProjectStatusTransition();
+  const {
+    isPending: isUpdateProjectStatusesPending,
+    projectIds: updatedProjectIds,
+  } = useUpdateProjectStatuses();
 
   const isPending =
     isUpdateProjectStatusPending ||
-    (isUpdateProjectStatusesPending && !!selected.get(projectId));
+    (isUpdateProjectStatusesPending && updatedProjectIds.includes(projectId));
 
   const isOverdue = new Date(deadline) < new Date();
 

@@ -19,10 +19,8 @@ import { UserToolbarCreateNewMenuTrigger } from "@/components/users/UserToolbarC
 import { UserToolbarFiltersModalTrigger } from "@/components/users/UserToolbarFiltersModalTrigger";
 
 interface UsersPageProps {
-  guestMode: boolean;
   totalFilteredUsers: number;
   selectedSortField: UserSortField;
-  showCreateNewUserMenuItem: boolean;
   usersContainer: React.ReactNode;
   filtersFormContainer: React.ReactNode;
   createUser: ActionFn<ActionState, FormData>;
@@ -30,10 +28,8 @@ interface UsersPageProps {
 }
 
 export function UsersPage({
-  guestMode,
   totalFilteredUsers,
   selectedSortField,
-  showCreateNewUserMenuItem,
   usersContainer,
   filtersFormContainer,
   createUser,
@@ -43,8 +39,6 @@ export function UsersPage({
 
   const userToolbarCreateNewMenuTrigger = (
     <UserToolbarCreateNewMenuTrigger
-      showCreateNewUserMenuItem={showCreateNewUserMenuItem}
-      guestMode={guestMode}
       createUser={createUser}
       createPosition={createPosition}
     />

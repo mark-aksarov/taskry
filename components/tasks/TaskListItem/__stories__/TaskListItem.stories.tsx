@@ -11,18 +11,14 @@ import { editTaskFormArgs } from "../../EditTaskForm/__stories__";
 import { ProjectDetail } from "@/components/projects/ProjectDetail";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { getCommentList } from "@/components/comments/CommentList/__stories__";
-import { withDeleteTaskModalProvider } from "../../DeleteTaskModal/__stories__";
 import { withSelectedTasksProvider } from "../../SelectedTasksContext/__stories__";
 import { withUpdateTaskStatusesProvider } from "../../UpdateTaskStatusContext/__stories__";
-import { withDeleteCommentModalProvider } from "@/components/comments/DeleteCommentModal/__stories__";
 
 const meta = {
   title: "components/tasks/TaskListItem",
   component: TaskListItem,
   decorators: [
     withSelectedTasksProvider,
-    withDeleteTaskModalProvider,
-    withDeleteCommentModalProvider,
     withUpdateTaskStatusesProvider,
     withThemedBackground,
   ],
@@ -49,6 +45,7 @@ export const Default = {
         setTimeout(() => res({ status: "success" }), 500),
       );
     },
+    deleteTask: () => ({ status: "success" }),
   },
 } satisfies Story;
 

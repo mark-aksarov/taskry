@@ -10,19 +10,19 @@ import { useState } from "react";
 import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
 import { Pencil, Trash } from "lucide-react";
+import { DeleteCommentModal } from "../DeleteCommentModal";
 import { useCommentFormContext } from "../CommentFormContext";
+import { useDeleteCommentContext } from "../DeleteCommentContext";
 import { GuestModeModal } from "@/components/common/GuestModeModal";
-import { useDeleteCommentModal } from "../DeleteCommentModal";
+import { useCurrentUser } from "@/components/common/CurrentUserContext";
 
 export type CommentItemActionMenuTriggerProps = {
-  guestMode: boolean;
   commentId: number;
   commentContent: string;
   className?: string;
 };
 
 export function CommentItemActionMenuTrigger({
-  guestMode,
   commentId,
   commentContent,
   className,
@@ -31,14 +31,16 @@ export function CommentItemActionMenuTrigger({
 
   const t = useTranslations("comments.CommentItemActionMenuTrigger");
 
-  // Guest mode modal
+  // Deleting the company
+  const { isPending: isDeletePending } = useDeleteCommentContext();
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+
+  // Guest mode
+  const { isGuest } = useCurrentUser();
   const [isGuestModeModalOpen, setIsGuestModeModalOpen] = useState(false);
 
-  // Delete State
-  const { setState: setDeleteCommentModalState } = useDeleteCommentModal();
-
   function handleAction(key: Key) {
-    if (guestMode) {
+    if (isGuest) {
       setIsGuestModeModalOpen(true);
       return;
     }
@@ -48,11 +50,7 @@ export function CommentItemActionMenuTrigger({
       setEditCommentId(commentId);
       setCommentContent(commentContent);
     } else if (action === "delete") {
-      setDeleteCommentModalState({
-        isOpen: true,
-        entityId: commentId,
-        entityName: "",
-      });
+      setIsDeleteModalOpen(true);
     }
   }
 
@@ -64,6 +62,7 @@ export function CommentItemActionMenuTrigger({
         renderButton={() => (
           <ItemBaseActionMenuButton
             className={className}
+            isPending={isDeletePending}
             data-test={`comment-item-${commentId}-action-menu-trigger`}
           />
         )}
@@ -75,6 +74,12 @@ export function CommentItemActionMenuTrigger({
           <Trash size={16} /> {t("delete")}
         </Item>
       </ItemBaseActionMenuTrigger>
+
+      <DeleteCommentModal
+        commentId={commentId}
+        isOpen={isDeleteModalOpen}
+        onOpenChange={setIsDeleteModalOpen}
+      />
 
       <GuestModeModal
         isOpen={isGuestModeModalOpen}

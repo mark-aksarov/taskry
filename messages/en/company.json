@@ -23,12 +23,13 @@
   "CompanyToolbarCreateNewModalTrigger": {
     "label": "Create new"
   },
-  "CompanyItemActionMenuTrigger": {
+  "CompanyListItemActionMenuTrigger": {
     "edit": "Edit",
     "delete": "Delete"
   },
   "EditCompanyForm": {
-    "submitButtonLabel": "Update company"
+    "submitButtonLabel": "Update company",
+    "successMessage": "Company updated successfully"
   },
   "EditCompanyModal": {
     "title": "Edit company"
@@ -37,12 +38,14 @@
     "heading": "Delete companies",
     "text": "Are you sure you want to delete <strong>{count} companies</strong>? All contents will be permanently removed.",
     "cancelButton": "Cancel",
-    "deleteButton": "Delete"
+    "deleteButton": "Delete",
+    "successMessage": "Companies deleted successfully"
   },
   "DeleteCompanyModal": {
     "heading": "Delete company",
     "text": "Are you sure you want to delete company <strong>«{name}»</strong>? All contents will be permanently removed.",
     "cancelButton": "Cancel",
-    "deleteButton": "Delete"
+    "deleteButton": "Delete",
+    "successMessage": "Company deleted successfully"
   }
 }

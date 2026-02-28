@@ -8,16 +8,24 @@ import {
   ConfirmModalConfirmButton,
 } from "@/components/common/ConfirmModal";
 
+import {
+  ActionFn,
+  ActionState,
+  DeleteProjectsPayload,
+} from "@/lib/actions/types";
+
 import { startTransition } from "react";
 import { useTranslations } from "next-intl";
 import { ModalProps } from "@/components/ui/Modal";
 import { DialogHeading } from "@/components/ui/Dialog";
-import { ActionFn, ActionState } from "@/lib/actions/types";
 import { useDeleteModalActionState } from "@/components/common/BaseDeleteModal";
+import { useDeleteProjects } from "../DeleteProjectsContext";
+import { useDeleteEntityActionState } from "@/lib/hooks/useDeleteEntityActionState";
+import { useSelectedProjects } from "../SelectedProjectsContext";
 
 interface DeleteProjectsModalProps extends ModalProps {
   projectIds: number[];
-  deleteProjects: ActionFn<ActionState, number[]>;
+  deleteProjects: ActionFn<ActionState, DeleteProjectsPayload>;
 }
 
 export function DeleteProjectsModal({
@@ -28,14 +36,32 @@ export function DeleteProjectsModal({
 }: DeleteProjectsModalProps) {
   const t = useTranslations("projects.DeleteProjectsModal");
 
-  const [_, action, isPending] = useDeleteModalActionState<number[]>({
+  const { startTransition, setProjectIds: setDeleteProjectIds } =
+    useDeleteProjects();
+
+  const [, action] = useDeleteEntityActionState({
     deleteEntity: deleteProjects,
-    onOpenChange,
+    successMessage: t("successMessage"),
   });
 
-  const handleDelete = () => {
-    startTransition(() => action(projectIds));
-  };
+  const { clear: clearSelectedItems } = useSelectedProjects();
+
+  function handleDelete() {
+    onOpenChange?.(false);
+
+    // Clear selected items
+    clearSelectedItems();
+
+    // Used to show an overlay on the selected projects
+    setDeleteProjectIds(projectIds);
+
+    const payload = {
+      ids: projectIds,
+      shouldRedirect: false,
+    };
+
+    startTransition(() => action(payload));
+  }
 
   return (
     <ConfirmModal
@@ -53,7 +79,6 @@ export function DeleteProjectsModal({
       <ConfirmModalActions>
         <ConfirmModalCancelButton label={t("cancelButton")} />
         <ConfirmModalConfirmButton
-          isPending={isPending}
           label={t("deleteButton")}
           onConfirm={handleDelete}
           data-test="delete-projects-modal-confirm-button"

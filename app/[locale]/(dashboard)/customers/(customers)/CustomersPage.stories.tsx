@@ -19,7 +19,6 @@ import { newCustomerFormArgs } from "@/components/customer/NewCustomerForm/__sto
 import { EntityContainerPresentation } from "@/components/common/EntityContainerPresentation";
 import { withSelectedItemsProvider } from "@/components/common/SelectedItemsContext/__stories__";
 import { withPageTransitionProvider } from "@/components/common/PageTransitionContext/__stories__";
-import { withDeleteCustomerModalProvider } from "@/components/customer/DeleteCustomerModal/__stories__";
 
 const meta = {
   title: "pages/CustomersPage",
@@ -31,7 +30,6 @@ const meta = {
         <Story />
       </CustomersTemplate>
     ),
-    withDeleteCustomerModalProvider,
     withPageTransitionProvider,
     withSelectedItemsProvider,
     PageDecorator,
@@ -48,7 +46,6 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    guestMode: false,
     totalFilteredCustomers: 10,
     selectedSortField: "fullName",
     createCompany: () => ({ status: "success" }),
@@ -78,7 +75,6 @@ export const WithNoCustomers = {
   args: { ...Default.args },
   render: () => (
     <CustomersPageEmpty
-      guestMode={false}
       createCompany={() => ({ status: "success" })}
       newCustomerFormContainer={<NewCustomerForm {...newCustomerFormArgs} />}
     />

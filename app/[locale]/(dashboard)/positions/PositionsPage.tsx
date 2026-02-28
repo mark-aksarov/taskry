@@ -16,31 +16,23 @@ import { PositionToolbarCreateNewModalTrigger } from "@/components/position/Posi
 
 interface PositionsPageProps {
   positionsContainer: React.ReactNode;
-  guestMode: boolean;
   createPosition: ActionFn<ActionState, FormData>;
   deletePositions: ActionFn<ActionState, number[]>;
 }
 
 export function PositionsPage({
   positionsContainer,
-  guestMode,
   createPosition,
   deletePositions,
 }: PositionsPageProps) {
   const t = useTranslations("app.PositionsPage");
 
   const positionToolbarCreateNewModalTrigger = (
-    <PositionToolbarCreateNewModalTrigger
-      guestMode={guestMode}
-      createPosition={createPosition}
-    />
+    <PositionToolbarCreateNewModalTrigger createPosition={createPosition} />
   );
 
   const positionToolbarActionsMenuTrigger = (
-    <PositionToolbarActionsMenuTrigger
-      guestMode={guestMode}
-      deletePositions={deletePositions}
-    />
+    <PositionToolbarActionsMenuTrigger deletePositions={deletePositions} />
   );
 
   return (

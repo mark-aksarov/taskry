@@ -9,21 +9,12 @@ import { UserDetail } from "@/components/users/UserDetail";
 import { editProjectFormArgs } from "../../EditProjectForm/__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { getCommentList } from "@/components/comments/CommentList/__stories__";
-import { withDeleteProjectModalProvider } from "../../DeleteProjectModal/__stories__";
 import { withSelectedProjectsProvider } from "../../SelectedProjectsContext/__stories__";
-import { withUpdateProjectStatusesProvider } from "../../UpdateProjectStatusContext/__stories__";
-import { withDeleteCommentModalProvider } from "@/components/comments/DeleteCommentModal/__stories__";
 
 const meta = {
   title: "components/projects/ProjectGridItem",
   component: ProjectGridItem,
-  decorators: [
-    withSelectedProjectsProvider,
-    withUpdateProjectStatusesProvider,
-    withDeleteCommentModalProvider,
-    withDeleteProjectModalProvider,
-    withThemedBackground,
-  ],
+  decorators: [withSelectedProjectsProvider, withThemedBackground],
 } satisfies Meta<typeof ProjectGridItem>;
 
 export default meta;
@@ -34,7 +25,6 @@ const project = mockedProjectList[0];
 export const Default = {
   args: {
     ...project,
-    guestMode: false,
     projectCommentsContainer: getCommentList(),
     editProjectFormContainer: <EditProjectForm {...editProjectFormArgs} />,
     projectDetailContainer: <ProjectDetail {...project} />,
@@ -46,6 +36,7 @@ export const Default = {
         setTimeout(() => res({ status: "success" }), 500),
       );
     },
+    deleteProject: () => ({ status: "success" }),
   },
 } satisfies Story;
 

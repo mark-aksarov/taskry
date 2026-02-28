@@ -4,13 +4,11 @@ import { EmptyPageContainer } from "@/components/common/EmptyPageContainer";
 import { CustomerToolbarCreateNewMenuTrigger } from "@/components/customer/CustomerToolbarCreateNewMenuTrigger";
 
 interface CustomersPageEmptyProps {
-  guestMode: boolean;
   createCompany: ActionFn<ActionState, FormData>;
   newCustomerFormContainer: React.ReactNode;
 }
 
 export function CustomersPageEmpty({
-  guestMode,
   createCompany,
   newCustomerFormContainer,
 }: CustomersPageEmptyProps) {
@@ -18,7 +16,6 @@ export function CustomersPageEmpty({
 
   const customerToolbarCreateNewMenuTrigger = (
     <CustomerToolbarCreateNewMenuTrigger
-      guestMode={guestMode}
       newCustomerFormContainer={newCustomerFormContainer}
       createCompany={createCompany}
     />

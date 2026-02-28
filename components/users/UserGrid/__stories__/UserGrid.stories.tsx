@@ -5,7 +5,6 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { UserGridItemStory } from "../../UserGridItem/__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withViewModeProvider } from "@/components/common/ViewMode/__stories__";
-import { withDeleteUserModalProvider } from "../../DeleteUserModal/__stories__";
 import { withPageTransitionProvider } from "@/components/common/PageTransitionContext/__stories__";
 
 const meta = {
@@ -14,7 +13,6 @@ const meta = {
   decorators: [
     withViewModeProvider,
     withPageTransitionProvider,
-    withDeleteUserModalProvider,
     withThemedBackground,
   ],
 } satisfies Meta<typeof UserGrid>;

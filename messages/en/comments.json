@@ -28,5 +28,8 @@
   "ReplyButton": "Reply",
   "CommentCancelEditingButton": {
     "label": "Cancel editing"
+  },
+  "DeleteCommentProvider": {
+    "successMessage": "Comment deleted successfully"
   }
 }

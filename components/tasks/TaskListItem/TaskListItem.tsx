@@ -3,6 +3,7 @@
 import {
   ActionFn,
   ActionState,
+  DeleteTasksPayload,
   UpdateTaskStatusesPayload,
 } from "@/lib/actions/types";
 
@@ -24,11 +25,13 @@ import { TaskStatus } from "@/generated/prisma/enums";
 import { TaskItemCheckbox } from "../TaskItemCheckbox";
 import { TaskCommentsModal } from "../TaskCommentsModal";
 import { TaskItemBaseBadge } from "../TaskItemBaseBadge";
+import { DeleteTaskProvider } from "../DeleteTaskContext";
 import { TaskListItemLayout } from "./TaskListItemLayout";
 import { useFormatter, useTranslations } from "next-intl";
 import { useSelectedTasks } from "../SelectedTasksContext";
 import { SelectableItem } from "../../common/SelectableItem";
 import { UnknownUser } from "@/components/common/UnknownUser";
+import { TaskItemDeleteOverlay } from "../TaskItemDeleteOverlay";
 import { ImageContainer } from "@/components/common/ImageContainer";
 import { UserDetailModal } from "@/components/users/UserDetailModal";
 import { UpdateTaskStatusProvider } from "../UpdateTaskStatusContext";
@@ -36,7 +39,6 @@ import { TaskItemActionMenuTrigger } from "../TaskItemActionMenuTrigger";
 import { ProjectDetailModal } from "@/components/projects/ProjectDetailModal";
 
 export interface TaskListItemProps {
-  guestMode: boolean;
   id: number;
   title: string;
   deadline: string;
@@ -64,10 +66,12 @@ export interface TaskListItemProps {
   sendComment: ActionFn<ActionState, FormData>;
   updateComment: ActionFn<ActionState, FormData>;
   updateTaskStatus: ActionFn<ActionState, UpdateTaskStatusesPayload>;
+  deleteTask: ActionFn<ActionState, DeleteTasksPayload>;
 }
 
 export const TaskListItem = ({
   updateTaskStatus,
+  deleteTask,
   ...props
 }: TaskListItemProps) => {
   const selected = useSelectedTasks();
@@ -75,25 +79,31 @@ export const TaskListItem = ({
   const isSelected = !!selected.get(props.id);
 
   return (
-    <UpdateTaskStatusProvider updateStatus={updateTaskStatus}>
-      <SelectableItem
-        {...selected}
-        item={{ id: props.id, status: props.status }}
-      >
-        <TaskListItemInner {...props} isSelected={isSelected} />
-      </SelectableItem>
-    </UpdateTaskStatusProvider>
+    <DeleteTaskProvider deleteTask={deleteTask}>
+      <UpdateTaskStatusProvider updateStatus={updateTaskStatus}>
+        <TaskItemDeleteOverlay>
+          <SelectableItem
+            {...selected}
+            item={{ id: props.id, status: props.status }}
+          >
+            <TaskListItemInner {...props} isSelected={isSelected} />
+          </SelectableItem>
+        </TaskItemDeleteOverlay>
+      </UpdateTaskStatusProvider>
+    </DeleteTaskProvider>
   );
 };
 
 // `isSelected` is used in `TaskItemBaseBadge` because `useSelectedTasks` cannot be called inside it.
-type TaskListItemInnerProps = Omit<TaskListItemProps, "updateTaskStatus"> & {
+type TaskListItemInnerProps = Omit<
+  TaskListItemProps,
+  "updateTaskStatus" | "deleteTask"
+> & {
   isSelected?: boolean;
 };
 
 export const TaskListItemInner = memo(
   ({
-    guestMode,
     isSelected,
     id,
     title,
@@ -250,7 +260,6 @@ export const TaskListItemInner = memo(
         }
         menuTriggerSlot={
           <TaskItemActionMenuTrigger
-            guestMode={guestMode}
             taskId={id}
             taskTitle={title}
             taskStatus={status}

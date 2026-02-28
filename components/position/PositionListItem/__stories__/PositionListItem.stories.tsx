@@ -1,17 +1,12 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { PositionListItem } from "../PositionListItem";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withDeletePositionModalProvider } from "../../DeletePositionModal/__stories__";
 import { withSelectedItemsProvider } from "@/components/common/SelectedItemsContext/__stories__";
 
 const meta = {
   title: "components/positions/PositionListItem",
   component: PositionListItem,
-  decorators: [
-    withSelectedItemsProvider,
-    withDeletePositionModalProvider,
-    withThemedBackground,
-  ],
+  decorators: [withSelectedItemsProvider, withThemedBackground],
 } satisfies Meta<typeof PositionListItem>;
 
 export default meta;
@@ -21,7 +16,7 @@ export const Default = {
   args: {
     id: 1,
     name: "Position 1",
-    guestMode: false,
     updatePosition: () => ({ status: "success" }),
+    deletePosition: () => ({ status: "success" }),
   },
 } satisfies Story;

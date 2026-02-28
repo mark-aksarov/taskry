@@ -1,29 +1,27 @@
 "use server";
 
-import { ActionState } from "../types";
 import { APIError } from "better-auth";
 import { userId } from "@/lib/schemas/user";
 import { revalidatePath } from "next/cache";
-import { getTranslations } from "next-intl/server";
+import { redirect } from "@/i18n/navigation";
+import { ActionState, DeleteUserPayload } from "../types";
+import { getLocale, getTranslations } from "next-intl/server";
 import { deleteUser as deleteUserService } from "@/lib/data/user/user.service";
 import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedirect";
 
 export async function deleteUser(
   _prevState: ActionState,
-  id: string,
+  payload: DeleteUserPayload,
 ): Promise<ActionState> {
   // Authorization
   await requireSessionOrRedirect();
+
   const t = await getTranslations("actions");
 
   try {
-    const parsedId = userId.parse(id);
+    const parsedId = userId.parse(payload.id);
     await deleteUserService(parsedId);
     revalidatePath("/team");
-
-    return {
-      status: "success",
-    };
   } catch (error) {
     console.error("Server Action Error:", error);
 
@@ -39,4 +37,14 @@ export async function deleteUser(
       message: t("deleteUser.error.internalServerError"),
     };
   }
+
+  const locale = await getLocale();
+
+  if (payload.shouldRedirect) {
+    redirect({ href: "/team", locale });
+  }
+
+  return {
+    status: "success",
+  };
 }

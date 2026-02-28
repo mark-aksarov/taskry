@@ -17,6 +17,7 @@ import { createUser } from "@/lib/actions/user/createUser";
 import { UsersContainer } from "@/components/users/UsersContainer";
 import { createPosition } from "@/lib/actions/position/createPosition";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
+import { CurrentUserProvider } from "@/components/common/CurrentUserContext";
 import { PageTransitionProvider } from "@/components/common/PageTransitionContext";
 import { UserFiltersFormContainer } from "@/components/users/UserFiltersFormContainer";
 
@@ -39,57 +40,57 @@ export default async function AppUsersPage({
   searchParams: Promise<{ [key: string]: string | undefined }>;
 }) {
   // Authorization
-  await requireProtectedPage();
+  const session = await requireProtectedPage();
 
   // Validation
   const rawParams = await searchParams;
   const { page, pageSize, sort, ...filters } =
     searchParamsSchema.parse(rawParams);
 
-  // Get total count of users in the current workspace
+  // This data is required to determine the user's role
+  // and render the UI accordingly on the client side.
+  const currentUserContextValue = {
+    isGuest: await hasGuestRole(),
+    isOwner: await hasOwnerRole(),
+    userId: session.user.id,
+  };
+
+  // Render the empty page if there are no users
   const totalCount = await getUserCount();
-  const guestMode = await hasGuestRole();
 
-  // Only the owner and guests can see the user menu item
-  const isOwner = await hasOwnerRole();
-  const showCreateNewUserMenuItem = isOwner || guestMode;
-
-  if (!totalCount)
+  if (!totalCount) {
     return (
-      <UsersPageEmpty
-        showCreateNewUserMenuItem={showCreateNewUserMenuItem}
-        guestMode={guestMode}
-        createUser={createUser}
-        createPosition={createPosition}
-      />
+      <CurrentUserProvider value={currentUserContextValue}>
+        <UsersPageEmpty
+          createUser={createUser}
+          createPosition={createPosition}
+        />
+      </CurrentUserProvider>
     );
-
-  // Only the owner and guests can see the user action menu trigger
-  const showUserActionMenuTrigger = isOwner || guestMode;
+  }
 
   // Get total count of users based on filters and sorting
   const totalFilteredUsers = await getUserCount(filters);
 
   return (
     <PageTransitionProvider>
-      <UsersPage
-        guestMode={guestMode}
-        showCreateNewUserMenuItem={showCreateNewUserMenuItem}
-        totalFilteredUsers={totalFilteredUsers}
-        selectedSortField={sort}
-        filtersFormContainer={<UserFiltersFormContainer filters={filters} />}
-        usersContainer={
-          <UsersContainer
-            showUserActionMenuTrigger={showUserActionMenuTrigger}
-            page={page}
-            pageSize={pageSize}
-            sort={sort}
-            filters={filters}
-          />
-        }
-        createUser={createUser}
-        createPosition={createPosition}
-      />
+      <CurrentUserProvider value={currentUserContextValue}>
+        <UsersPage
+          totalFilteredUsers={totalFilteredUsers}
+          selectedSortField={sort}
+          filtersFormContainer={<UserFiltersFormContainer filters={filters} />}
+          usersContainer={
+            <UsersContainer
+              page={page}
+              pageSize={pageSize}
+              sort={sort}
+              filters={filters}
+            />
+          }
+          createUser={createUser}
+          createPosition={createPosition}
+        />
+      </CurrentUserProvider>
     </PageTransitionProvider>
   );
 }

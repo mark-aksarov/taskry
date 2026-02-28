@@ -12,7 +12,6 @@ import { AppHeaderStory } from "@/components/layout/AppHeader/__stories__";
 import { PositionListStory } from "@/components/position/PositionList/__stories__";
 import { withSelectedItemsProvider } from "@/components/common/SelectedItemsContext/__stories__";
 import { withPageTransitionProvider } from "@/components/common/PageTransitionContext/__stories__";
-import { withDeletePositionModalProvider } from "@/components/position/DeletePositionModal/__stories__";
 
 const meta = {
   title: "pages/PositionsPage",
@@ -25,7 +24,6 @@ const meta = {
       </PositionsTemplate>
     ),
     withPageTransitionProvider,
-    withDeletePositionModalProvider,
     withSelectedItemsProvider,
     PageDecorator,
     withThemedBackground,
@@ -42,7 +40,6 @@ type Story = StoryObj<typeof meta>;
 export const Default = {
   args: {
     positionsContainer: <PositionList {...PositionListStory.args} />,
-    guestMode: false,
     createPosition: () => ({ status: "success" }),
     deletePositions: () => ({ status: "success" }),
   },
@@ -56,9 +53,6 @@ export const Loading = {
 export const WithNoPositionsPage = {
   args: { ...Default.args },
   render: () => (
-    <PositionsPageEmpty
-      guestMode={false}
-      createPosition={() => ({ status: "success" })}
-    />
+    <PositionsPageEmpty createPosition={() => ({ status: "success" })} />
   ),
 } satisfies Story;

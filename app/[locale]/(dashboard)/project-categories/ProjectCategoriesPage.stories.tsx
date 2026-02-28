@@ -12,7 +12,6 @@ import { ProjectCategoryList } from "@/components/projectCategory/ProjectCategor
 import { withSelectedItemsProvider } from "@/components/common/SelectedItemsContext/__stories__";
 import { withPageTransitionProvider } from "@/components/common/PageTransitionContext/__stories__";
 import { ProjectCategoryListStory } from "@/components/projectCategory/ProjectCategoryList/__stories__";
-import { withDeleteProjectCategoryModalProvider } from "@/components/projectCategory/DeleteProjectCategoryModal/__stories__";
 
 const meta = {
   title: "pages/ProjectCategoriesPage",
@@ -25,7 +24,6 @@ const meta = {
       </ProjectCategoriesTemplate>
     ),
     withPageTransitionProvider,
-    withDeleteProjectCategoryModalProvider,
     withSelectedItemsProvider,
     PageDecorator,
     withThemedBackground,
@@ -44,7 +42,6 @@ export const Default = {
     projectCategoriesContainer: (
       <ProjectCategoryList {...ProjectCategoryListStory.args} />
     ),
-    guestMode: false,
     createProjectCategory: () => ({ status: "success" }),
     deleteProjectCategories: () => ({ status: "success" }),
   },
@@ -59,7 +56,6 @@ export const WithNoProjectCategories = {
   args: { ...Default.args },
   render: () => (
     <ProjectCategoriesPageEmpty
-      guestMode={false}
       createProjectCategory={() => ({ status: "success" })}
     />
   ),

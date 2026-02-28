@@ -10,11 +10,9 @@ import { Suspense } from "react";
 import { Repeat } from "@/components/common/Repeat";
 import { CommentListItemDTO } from "@/lib/data/comment/comment.dto";
 import { deleteComment } from "@/lib/actions/comment/deleteComment";
-import { DeleteCommentModalProvider } from "../comments/DeleteCommentModal";
 import { CommentsEmptySection } from "@/components/comments/CommentsEmptySection";
 
 interface TaskCommentsContainerProps {
-  guestMode: boolean;
   taskId: number;
 }
 
@@ -30,10 +28,7 @@ export function TaskCommentsContainer(props: TaskCommentsContainerProps) {
   );
 }
 
-function TaskCommentsContainerInner({
-  guestMode,
-  taskId,
-}: TaskCommentsContainerProps) {
+function TaskCommentsContainerInner({ taskId }: TaskCommentsContainerProps) {
   const {
     data: comments,
     error,
@@ -50,7 +45,7 @@ function TaskCommentsContainerInner({
   }
 
   return (
-    <DeleteCommentModalProvider deleteEntity={deleteComment} mutate={mutate}>
+    <>
       {comments.map((comment) => {
         return (
           <CommentItem
@@ -60,10 +55,11 @@ function TaskCommentsContainerInner({
             createdAt={comment.createdAt}
             sender={comment.sender}
             canEdit={comment.canEdit}
-            guestMode={guestMode}
+            deleteComment={deleteComment}
+            mutate={mutate}
           />
         );
       })}
-    </DeleteCommentModalProvider>
+    </>
   );
 }

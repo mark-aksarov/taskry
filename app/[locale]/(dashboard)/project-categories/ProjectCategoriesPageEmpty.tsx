@@ -4,19 +4,16 @@ import { EmptyPageContainer } from "@/components/common/EmptyPageContainer";
 import { ProjectCategoryToolbarCreateNewModalTrigger } from "@/components/projectCategory/ProjectCategoryToolbarCreateNewModalTrigger";
 
 interface ProjectCategoriesPageEmptyProps {
-  guestMode: boolean;
   createProjectCategory: ActionFn<ActionState, FormData>;
 }
 
 export function ProjectCategoriesPageEmpty({
-  guestMode,
   createProjectCategory,
 }: ProjectCategoriesPageEmptyProps) {
   const t = useTranslations("app.ProjectCategoriesPageEmpty");
 
   const projectCategoryToolbarCreateNewModalTrigger = (
     <ProjectCategoryToolbarCreateNewModalTrigger
-      guestMode={guestMode}
       createProjectCategory={createProjectCategory}
     />
   );

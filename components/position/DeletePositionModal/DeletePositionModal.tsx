@@ -8,17 +8,18 @@ import {
   ConfirmModalConfirmButton,
 } from "@/components/common/ConfirmModal";
 
-import { startTransition } from "react";
 import { useTranslations } from "next-intl";
 import { ModalProps } from "@/components/ui/Modal";
 import { DialogHeading } from "@/components/ui/Dialog";
 import { ActionFn, ActionState } from "@/lib/actions/types";
-import { useDeleteModalActionState } from "@/components/common/BaseDeleteModal";
+import { useSelectedItems } from "@/components/common/SelectedItemsContext";
+import { useDeletePositionTransition } from "../DeletePositionTransitionContext";
+import { useDeleteEntityActionState } from "@/lib/hooks/useDeleteEntityActionState";
 
 interface DeletePositionModalProps extends ModalProps {
   positionId: number;
   positionName: string;
-  deletePositions: ActionFn<ActionState, number[]>;
+  deletePosition: ActionFn<ActionState, number[]>;
 }
 
 export function DeletePositionModal({
@@ -26,18 +27,27 @@ export function DeletePositionModal({
   positionName,
   isOpen,
   onOpenChange,
-  deletePositions,
+  deletePosition,
 }: DeletePositionModalProps) {
   const t = useTranslations("positions.DeletePositionModal");
 
-  const [_, action, isPending] = useDeleteModalActionState<number[]>({
-    deleteEntity: deletePositions,
-    onOpenChange,
+  const { startTransition } = useDeletePositionTransition();
+
+  const [, action] = useDeleteEntityActionState({
+    deleteEntity: deletePosition,
+    successMessage: t("successMessage"),
   });
 
-  const handleDelete = () => {
+  const { remove: removeSelected } = useSelectedItems();
+
+  function handleDelete() {
+    //Remove the position from the selection to prevent access to it
+    removeSelected(positionId);
+
+    //close modal before deleting
+    onOpenChange?.(false);
     startTransition(() => action([positionId]));
-  };
+  }
 
   return (
     <ConfirmModal
@@ -55,7 +65,6 @@ export function DeletePositionModal({
       <ConfirmModalActions>
         <ConfirmModalCancelButton label={t("cancelButton")} />
         <ConfirmModalConfirmButton
-          isPending={isPending}
           label={t("deleteButton")}
           onConfirm={handleDelete}
           data-test="delete-position-modal-confirm-button"

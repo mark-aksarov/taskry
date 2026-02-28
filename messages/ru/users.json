@@ -79,7 +79,8 @@
   "ProfileActions": {
     "deleteAccount": "Удалить аккаунт",
     "changePassword": "Сменить пароль",
-    "editAccount": "Редактировать аккаунт"
+    "editAccount": "Редактировать аккаунт",
+    "delete": "Удалить пользователя"
   },
   "ProfileNavigationDesktop": {
     "userInformation": "Информация о пользователе",
@@ -210,5 +211,8 @@
   "UsersFilteredEmptySection": {
     "heading": "Пользователи не найдены",
     "description": "По выбранным фильтрам пользователи отсутствуют. Попробуйте изменить или сбросить фильтры"
+  },
+  "DeleteUserProvider": {
+    "successMessage": "Пользователь успешно создан"
   }
 }

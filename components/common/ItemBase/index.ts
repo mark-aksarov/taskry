@@ -2,6 +2,7 @@ export { ItemBaseBadge } from "./ItemBaseBadge";
 export { ItemBaseButton } from "./ItemBaseButton";
 export { type ItemBaseButtonProps } from "./ItemBaseButton";
 export { ItemBaseBadgeSkeleton } from "./ItemBaseBadgeSkeleton";
+export { ItemBasePendingOverlay } from "./ItemBasePendingOverlay";
 export { ItemBaseButtonSkeleton } from "./ItemBaseButtonSkeleton";
 export { ItemBaseActionMenuButton } from "./ItemBaseActionMenuButton";
 export { ItemBaseActionMenuTrigger } from "./ItemBaseActionMenuTrigger";

@@ -13,4 +13,5 @@ export const editCustomerFormArgs = {
   customerCompanyDefaultValue: "1",
   customerCompanySelectItems: mockedCompanySummaries,
   updateCustomer: () => ({ status: "success" as const }),
+  mutate: () => {},
 };

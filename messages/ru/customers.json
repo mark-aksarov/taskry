@@ -122,7 +122,8 @@
     "noPhoneNumber": "Нет номера телефона",
     "noPublicLink": "Нет публичной ссылки",
     "company": "Компания",
-    "noCompany": "Нет компании"
+    "noCompany": "Нет компании",
+    "successDeleteMessage": "Клиент успешно удален"
   },
   "CustomerToolbarFiltersModalTrigger": {
     "title": "Фильтры клиентов"

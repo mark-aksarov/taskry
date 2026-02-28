@@ -2,57 +2,49 @@
   "EditSubtaskForm": {
     "submitButtonLabel": "Edit Subtask"
   },
-
   "NewSubtaskForm": {
     "submitButtonLabel": "Add Subtask",
     "successMessage": "Subtask created successfully"
   },
-
   "DeleteSubtaskModal": {
     "heading": "Delete Subtask",
     "text": "Are you sure you want to delete subtask <strong>«{text}»</strong>?",
     "deleteButton": "Delete",
     "cancelButton": "Cancel"
   },
-
   "SubtaskActionMenuTrigger": {
     "edit": "Edit",
     "done": "Mark as Done",
     "undone": "Mark as Undone",
     "delete": "Delete"
   },
-
   "SubtasksCheckboxGroup": {
     "label": "Subtasks"
   },
-
   "SubtaskTextField": {
     "label": "Text",
     "placeholder": "Typing a new subtask...",
-
     "validation": {
       "required": "Title is required",
       "tooLong": "Title is too long"
     }
   },
-
   "SubtaskFormDialogHeader": {
     "heading": "New Subtask"
   },
-
   "NewSubtaskModal": {
     "heading": "New Subtask"
   },
-
   "EditSubtaskModal": {
     "heading": "Edit Subtask"
   },
-
   "NewSubtaskDialogAddButton": {
     "label": "Add Subtask"
   },
-
   "NewSubtasksButton": {
     "label": "New Subtask"
+  },
+  "DeleteSubtaskProvider": {
+    "successMessage": "Subtask deleted successfully"
   }
 }

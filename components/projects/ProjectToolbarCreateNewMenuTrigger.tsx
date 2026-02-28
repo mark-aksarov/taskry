@@ -11,19 +11,18 @@ import { Item } from "react-stately";
 import { DialogHeader } from "../ui/Dialog";
 import { useTranslations } from "next-intl";
 import { Blocks, FolderClosed } from "lucide-react";
-import { ActionFn, ActionState } from "@/lib/actions/types";
 import { GuestModeModal } from "../common/GuestModeModal";
+import { ActionFn, ActionState } from "@/lib/actions/types";
+import { useCurrentUser } from "../common/CurrentUserContext";
 import { NewProjectModal } from "@/components/projects/NewProjectModal";
 import { NewProjectCategoryModal } from "../projectCategory/NewProjectCategoryModal";
 
 interface ProjectToolbarCreateNewMenuTriggerProps {
-  guestMode: boolean;
   newProjectFormContainer: React.ReactNode;
   createProjectCategory: ActionFn<ActionState, FormData>;
 }
 
 export function ProjectToolbarCreateNewMenuTrigger({
-  guestMode,
   newProjectFormContainer,
   createProjectCategory,
 }: ProjectToolbarCreateNewMenuTriggerProps) {
@@ -35,11 +34,12 @@ export function ProjectToolbarCreateNewMenuTrigger({
     useState(false);
 
   // Guest mode
+  const { isGuest } = useCurrentUser();
   const [isGuestModeModalOpen, setIsGuestModeModalOpen] = useState(false);
 
   // Open the corresponding modal based on the selected menu item
   function handleAction(key: Key) {
-    if (guestMode) {
+    if (isGuest) {
       setIsGuestModeModalOpen(true);
       return;
     }

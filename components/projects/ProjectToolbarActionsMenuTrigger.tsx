@@ -1,50 +1,59 @@
 "use client";
 
 import {
-  ToolbarMenuTrigger,
-  ToolbarActionsButtonMobile,
-  ToolbarActionsButtonDesktop,
-} from "../common/Toolbar";
+  ActionFn,
+  ActionState,
+  DeleteProjectsPayload,
+  UpdateProjectStatusesPayload,
+} from "@/lib/actions/types";
 
+import { useState } from "react";
 import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
 import { DialogHeader } from "../ui/Dialog";
-import { startTransition, useState } from "react";
 import { ProjectStatus } from "@/generated/prisma/enums";
-import { ActionFn, ActionState } from "@/lib/actions/types";
 import { GuestModeModal } from "../common/GuestModeModal";
 import { DeleteProjectsModal } from "./DeleteProjectsModal";
+import { ToolbarActionsMenuTrigger } from "../common/Toolbar";
+import { useCurrentUser } from "../common/CurrentUserContext";
 import { useSelectedProjects } from "./SelectedProjectsContext";
 import { Check, CircleEllipsis, Clock, Trash } from "lucide-react";
-import { useUpdateProjectStatusesContext } from "./UpdateProjectStatusContext";
+import { useUpdateProjectStatuses } from "./UpdateProjectStatusesContext";
+import { useUpdateEntityStatusActionState } from "@/lib/hooks/useUpdateEntityStatusActionState";
 
 interface ProjectToolbarActionsMenuTriggerProps {
-  guestMode: boolean;
-  deleteProjects: ActionFn<ActionState, number[]>;
+  deleteProjects: ActionFn<ActionState, DeleteProjectsPayload>;
+  updateProjectStatuses: ActionFn<ActionState, UpdateProjectStatusesPayload>;
 }
 
 export const ProjectToolbarActionsMenuTrigger = ({
-  guestMode,
   deleteProjects,
+  updateProjectStatuses,
 }: ProjectToolbarActionsMenuTriggerProps) => {
   const t = useTranslations("projects.ProjectToolbarActionsMenuTrigger");
 
-  // Guest mode modal state
+  // Guest mode
+  const { isGuest } = useCurrentUser();
   const [isGuestModeModalOpen, setIsGuestModeModalOpen] = useState(false);
 
   // Delete confirmation modal state
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
   // Action for updating project status
-  const { action: updateProjectStatusAction } =
-    useUpdateProjectStatusesContext();
+  const [, updateProjectStatusAction] = useUpdateEntityStatusActionState({
+    updateEntityStatus: updateProjectStatuses,
+  });
+  const {
+    startTransition: startUpdateProjectStatusesTransition,
+    setProjectIds: setUpdateProjectStatusesIds,
+  } = useUpdateProjectStatuses();
 
   // Selected with checkbox projects
   const selected = useSelectedProjects();
 
   // Menu actions: show delete modal, update project status
   const handleAction = (key: Key) => {
-    if (guestMode) {
+    if (isGuest) {
       setIsGuestModeModalOpen(true);
       return;
     }
@@ -52,7 +61,9 @@ export const ProjectToolbarActionsMenuTrigger = ({
     if (key === "delete") {
       setIsDeleteModalOpen(true);
     } else {
-      startTransition(() => {
+      setUpdateProjectStatusesIds(selected.ids);
+
+      startUpdateProjectStatusesTransition(() => {
         const nextStatus = key as ProjectStatus;
 
         updateProjectStatusAction({
@@ -68,29 +79,15 @@ export const ProjectToolbarActionsMenuTrigger = ({
     selected.items.every((project) => project.status === status),
   );
 
-  // disable menu trigger if no projects are selected
-  const isDisabled = selected.items.length === 0;
-
   return (
     <>
-      <ToolbarMenuTrigger
+      <ToolbarActionsMenuTrigger
         onAction={handleAction}
         disabledKeys={disabledKeys}
         renderDialogHeader={() => (
           <DialogHeader>{t("dialogHeading")}</DialogHeader>
         )}
-        renderButton={() => (
-          <>
-            <ToolbarActionsButtonMobile
-              data-test="project-toolbar-actions-button-mobile"
-              isDisabled={isDisabled}
-            />
-            <ToolbarActionsButtonDesktop
-              data-test="project-toolbar-actions-button-desktop"
-              isDisabled={isDisabled}
-            />
-          </>
-        )}
+        selectedIds={selected.ids}
       >
         <Item textValue={t("delete")} key="delete">
           <Trash size={16} strokeWidth={1.5} absoluteStrokeWidth />
@@ -108,7 +105,7 @@ export const ProjectToolbarActionsMenuTrigger = ({
           <Clock size={16} strokeWidth={1.5} absoluteStrokeWidth />
           {t("completed")}
         </Item>
-      </ToolbarMenuTrigger>
+      </ToolbarActionsMenuTrigger>
 
       {/* Modal for confirming project deletion */}
       <DeleteProjectsModal

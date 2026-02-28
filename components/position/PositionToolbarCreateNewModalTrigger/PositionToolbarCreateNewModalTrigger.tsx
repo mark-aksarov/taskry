@@ -6,14 +6,13 @@ import { NewPositionModal } from "../NewPositionModal";
 import { ActionFn, ActionState } from "@/lib/actions/types";
 import { GuestModeModal } from "@/components/common/GuestModeModal";
 import { ToolbarCreateNewModalTrigger } from "@/components/common/Toolbar";
+import { useCurrentUser } from "@/components/common/CurrentUserContext";
 
 interface PositionToolbarCreateNewModalTriggerProps {
-  guestMode: boolean;
   createPosition: ActionFn<ActionState, FormData>;
 }
 
 export function PositionToolbarCreateNewModalTrigger({
-  guestMode,
   createPosition,
 }: PositionToolbarCreateNewModalTriggerProps) {
   const t = useTranslations("positions.PositionToolbarCreateNewModalTrigger");
@@ -22,10 +21,11 @@ export function PositionToolbarCreateNewModalTrigger({
   const [isPositionModalOpen, setIsPositionModalOpen] = useState(false);
 
   // Guest mode
+  const { isGuest } = useCurrentUser();
   const [isGuestModeModalOpen, setIsGuestModeModalOpen] = useState(false);
 
   const handlePress = () => {
-    if (guestMode) {
+    if (isGuest) {
       setIsGuestModeModalOpen(true);
       return;
     }

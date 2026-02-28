@@ -14,22 +14,22 @@ import { TaskStatus } from "@/generated/prisma/enums";
 import { DeleteTasksModal } from "./DeleteTasksModal";
 import { useSelectedTasks } from "./SelectedTasksContext";
 import { GuestModeModal } from "../common/GuestModeModal";
-import { ActionFn, ActionState } from "@/lib/actions/types";
+import { useCurrentUser } from "../common/CurrentUserContext";
 import { Check, CircleEllipsis, Clock, Trash } from "lucide-react";
 import { useUpdateTaskStatusesContext } from "./UpdateTaskStatusContext";
+import { ActionFn, ActionState, DeleteTasksPayload } from "@/lib/actions/types";
 
 interface TaskToolbarActionsMenuTriggerProps {
-  guestMode: boolean;
-  deleteTasks: ActionFn<ActionState, number[]>;
+  deleteTasks: ActionFn<ActionState, DeleteTasksPayload>;
 }
 
 export const TaskToolbarActionsMenuTrigger = ({
-  guestMode,
   deleteTasks,
 }: TaskToolbarActionsMenuTriggerProps) => {
   const t = useTranslations("tasks.TaskToolbarActionsMenuTrigger");
 
   // Guest mode modal state
+  const { isGuest } = useCurrentUser();
   const [isGuestModeModalOpen, setIsGuestModeModalOpen] = useState(false);
 
   // Delete confirmation modal state
@@ -43,7 +43,7 @@ export const TaskToolbarActionsMenuTrigger = ({
 
   // Menu actions: show guest modal, show delete modal, update task status
   const handleAction = (key: Key) => {
-    if (guestMode) {
+    if (isGuest) {
       setIsGuestModeModalOpen(true);
       return;
     }
@@ -110,7 +110,7 @@ export const TaskToolbarActionsMenuTrigger = ({
       {/* Modal for confirming task deletion */}
       <DeleteTasksModal
         taskIds={selected.ids}
-        deleteTasks={deleteTasks}
+        deleteTask={deleteTasks}
         isOpen={isDeleteModalOpen}
         onOpenChange={setIsDeleteModalOpen}
       />

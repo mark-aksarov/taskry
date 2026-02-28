@@ -1,22 +1,22 @@
 "use client";
 
 import {
-  ToolbarMenuTrigger,
-  ToolbarActionsButtonMobile,
-  ToolbarActionsButtonDesktop,
-} from "../common/Toolbar";
+  ActionFn,
+  ActionState,
+  DeleteCustomersPayload,
+} from "@/lib/actions/types";
 
 import { useState } from "react";
 import { Trash } from "lucide-react";
 import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
 import { DialogHeader } from "../ui/Dialog";
-import { ActionFn, ActionState } from "@/lib/actions/types";
+import { ToolbarActionsMenuTrigger } from "../common/Toolbar";
 import { DeleteCustomersModal } from "./DeleteCustomersModal";
 import { useSelectedItems } from "@/components/common/SelectedItemsContext";
 
 interface CustomerToolbarActionsMenuTriggerProps {
-  deleteCustomers: ActionFn<ActionState, number[]>;
+  deleteCustomers: ActionFn<ActionState, DeleteCustomersPayload>;
 }
 
 export const CustomerToolbarActionsMenuTrigger = ({
@@ -37,33 +37,20 @@ export const CustomerToolbarActionsMenuTrigger = ({
     }
   };
 
-  const isDisabled = selected.ids.length === 0;
-
   return (
     <>
-      <ToolbarMenuTrigger
+      <ToolbarActionsMenuTrigger
         onAction={handleAction}
         renderDialogHeader={() => (
           <DialogHeader>{t("dialogHeading")}</DialogHeader>
         )}
-        renderButton={() => (
-          <>
-            <ToolbarActionsButtonMobile
-              data-test="customer-toolbar-actions-button-mobile"
-              isDisabled={isDisabled}
-            />
-            <ToolbarActionsButtonDesktop
-              data-test="customer-toolbar-actions-button-desktop"
-              isDisabled={isDisabled}
-            />
-          </>
-        )}
+        selectedIds={selected.ids}
       >
         <Item textValue={t("delete")} key="delete">
           <Trash size={16} strokeWidth={1.5} absoluteStrokeWidth />
           {t("delete")}
         </Item>
-      </ToolbarMenuTrigger>
+      </ToolbarActionsMenuTrigger>
 
       {/* Modal for confirming customer deletion */}
       <DeleteCustomersModal

@@ -28,7 +28,7 @@ export function CommentForm({
   const { add: addErrorToast, close: closeErrorToast } = useErrorToast();
   const { setCommentContent } = useCommentFormContext();
 
-  const [_, action, isPending] = useActionState(
+  const [, action, isPending] = useActionState(
     async (prevState: ActionState, payload: FormData) => {
       const newState = await sendCommentAction(prevState, payload);
 

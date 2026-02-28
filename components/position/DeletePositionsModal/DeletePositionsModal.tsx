@@ -8,12 +8,13 @@ import {
   ConfirmModalConfirmButton,
 } from "@/components/common/ConfirmModal";
 
-import { startTransition } from "react";
 import { useTranslations } from "next-intl";
 import { ModalProps } from "@/components/ui/Modal";
 import { DialogHeading } from "@/components/ui/Dialog";
 import { ActionFn, ActionState } from "@/lib/actions/types";
-import { useDeleteModalActionState } from "@/components/common/BaseDeleteModal";
+import { useDeletePositions } from "../DeletePositionsContext";
+import { useSelectedItems } from "@/components/common/SelectedItemsContext";
+import { useDeleteEntityActionState } from "@/lib/hooks/useDeleteEntityActionState";
 
 interface DeletePositionsModalProps extends ModalProps {
   positionIds: number[];
@@ -28,14 +29,27 @@ export function DeletePositionsModal({
 }: DeletePositionsModalProps) {
   const t = useTranslations("positions.DeletePositionsModal");
 
-  const [_, action, isPending] = useDeleteModalActionState<number[]>({
+  const { startTransition, setPositionIds: setDeletePositionIds } =
+    useDeletePositions();
+
+  const [, action] = useDeleteEntityActionState({
     deleteEntity: deletePositions,
-    onOpenChange,
+    successMessage: t("successMessage"),
   });
 
-  const handleDelete = () => {
+  const { clear: clearSelectedItems } = useSelectedItems();
+
+  function handleDelete() {
+    //close modal before deleting
+    onOpenChange?.(false);
+
+    // Clear selected items
+    clearSelectedItems();
+
+    // Used to show an overlay on the selected positions
+    setDeletePositionIds(positionIds);
     startTransition(() => action(positionIds));
-  };
+  }
 
   return (
     <ConfirmModal
@@ -53,7 +67,6 @@ export function DeletePositionsModal({
       <ConfirmModalActions>
         <ConfirmModalCancelButton label={t("cancelButton")} />
         <ConfirmModalConfirmButton
-          isPending={isPending}
           label={t("deleteButton")}
           onConfirm={handleDelete}
           data-test="delete-positions-modal-confirm-button"

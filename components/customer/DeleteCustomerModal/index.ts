@@ -1,3 +1,2 @@
 export { DeleteCustomerModal } from "./DeleteCustomerModal";
-export { DeleteCustomerModalProvider } from "./DeleteCustomerModalContext";
-export { useDeleteCustomerModal } from "./DeleteCustomerModalContext";
+export { BaseDeleteCustomerModal } from "./BaseDeleteCustomerModal";

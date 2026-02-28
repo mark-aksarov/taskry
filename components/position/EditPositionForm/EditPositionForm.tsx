@@ -5,14 +5,14 @@ import {
   FormBaseBody,
   FormBaseFooter,
   FormBaseSubmitButton,
-  useFormBaseActionState,
 } from "@/components/common/FormBase";
 
 import { useTranslations } from "next-intl";
 import { ActionFn, ActionState } from "@/lib/actions/types";
 import { PositionNameTextField } from "../PositionNameTextField";
-import { handleActionSubmit } from "@/lib/utils/handleActionSubmit";
 import { FormErrorBanner } from "@/components/common/FormErrorBanner";
+import { useUpdatePositionTransition } from "../UpdatePositionTransitionContext";
+import { useUpdateEntityActionState } from "@/lib/hooks/useUpdateEntityActionState";
 
 interface EditPositionFormProps {
   positionId: number;
@@ -27,13 +27,24 @@ export function EditPositionForm({
 }: EditPositionFormProps) {
   const t = useTranslations("positions.EditPositionForm");
 
-  const [state, action, isPending] = useFormBaseActionState(updatePosition);
+  const { startTransition } = useUpdatePositionTransition();
+
+  const [state, action, isPending] = useUpdateEntityActionState({
+    updateEntity: updatePosition,
+    successMessage: t("successMessage"),
+  });
+
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+
+    startTransition(() => {
+      action(formData);
+    });
+  }
 
   return (
-    <FormBase
-      id="edit-position-form"
-      onSubmit={(e) => handleActionSubmit(e, action)}
-    >
+    <FormBase id="edit-position-form" onSubmit={handleSubmit}>
       <FormBaseBody>
         <input type="hidden" name="id" value={positionId} />
         <PositionNameTextField defaultValue={nameDefaultValue} />

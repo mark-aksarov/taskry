@@ -5,17 +5,12 @@ import { mockedCustomerDetail } from "@/mocks/customers";
 import { EditCustomerForm } from "../../EditCustomerForm";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { editCustomerFormArgs } from "../../EditCustomerForm/__stories__";
-import { withDeleteCustomerModalProvider } from "../../DeleteCustomerModal/__stories__";
 import { withSelectedItemsProvider } from "@/components/common/SelectedItemsContext/__stories__";
 
 const meta = {
   title: "components/customers/CustomerListItem",
   component: CustomerListItem,
-  decorators: [
-    withSelectedItemsProvider,
-    withDeleteCustomerModalProvider,
-    withThemedBackground,
-  ],
+  decorators: [withSelectedItemsProvider, withThemedBackground],
 } satisfies Meta<typeof CustomerListItem>;
 
 export default meta;
@@ -26,7 +21,7 @@ const customer = mockedCustomerDetail;
 export const Default = {
   args: {
     ...customer,
-    guestMode: false,
+    deleteCustomer: () => ({ status: "success" }),
     customerDetailContainer: <CustomerDetail {...customer} />,
     editCustomerFormContainer: <EditCustomerForm {...editCustomerFormArgs} />,
   },
@@ -46,10 +41,10 @@ export const WithOverflowContent = {
 
 export const WithoutImagePhoneAndLink = {
   args: {
+    deleteCustomer: () => ({ status: "success" }),
     id: customer.id,
     fullName: customer.fullName,
     email: customer.email,
-    guestMode: false,
     customerDetailContainer: <CustomerDetail {...customer} />,
     editCustomerFormContainer: <EditCustomerForm {...editCustomerFormArgs} />,
   },

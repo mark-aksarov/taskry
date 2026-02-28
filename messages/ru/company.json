@@ -23,12 +23,13 @@
   "CompanyToolbarCreateNewModalTrigger": {
     "label": "Создать новую"
   },
-  "CompanyItemActionMenuTrigger": {
+  "CompanyListItemActionMenuTrigger": {
     "edit": "Редактировать",
     "delete": "Удалить"
   },
   "EditCompanyForm": {
-    "submitButtonLabel": "Обновить компанию"
+    "submitButtonLabel": "Обновить компанию",
+    "successMessage": "Компания успешно обновлена"
   },
   "EditCompanyModal": {
     "title": "Изменить компанию"
@@ -37,12 +38,14 @@
     "heading": "Удалить компании",
     "text": "Вы уверены, что хотите удалить <strong>{count} выбранные компании</strong>? Все содержимое будет безвозвратно удалено.",
     "cancelButton": "Отменить",
-    "deleteButton": "Удалить"
+    "deleteButton": "Удалить",
+    "successMessage": "Компании успешно удалены"
   },
   "DeleteCompanyModal": {
     "heading": "Удалить компанию",
     "text": "Вы уверены, что хотите удалить компанию <strong>«{name}»</strong>? Все содержимое будет безвозвратно удалено.",
     "cancelButton": "Отменить",
-    "deleteButton": "Удалить"
+    "deleteButton": "Удалить",
+    "successMessage": "Компания успешно удалена"
   }
 }

@@ -5,11 +5,8 @@ import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { ProjectGridItemStory } from "../../ProjectGridItem/__stories__";
 import { withViewModeProvider } from "@/components/common/ViewMode/__stories__";
-import { withDeleteProjectModalProvider } from "../../DeleteProjectModal/__stories__";
 import { withSelectedProjectsProvider } from "../../SelectedProjectsContext/__stories__";
-import { withUpdateProjectStatusesProvider } from "../../UpdateProjectStatusContext/__stories__";
 import { withPageTransitionProvider } from "@/components/common/PageTransitionContext/__stories__";
-import { withDeleteCommentModalProvider } from "@/components/comments/DeleteCommentModal/__stories__";
 
 const meta = {
   title: "components/projects/ProjectGrid",
@@ -18,9 +15,6 @@ const meta = {
     withViewModeProvider,
     withPageTransitionProvider,
     withSelectedProjectsProvider,
-    withDeleteCommentModalProvider,
-    withUpdateProjectStatusesProvider,
-    withDeleteProjectModalProvider,
     withThemedBackground,
   ],
 } satisfies Meta<typeof ProjectGrid>;

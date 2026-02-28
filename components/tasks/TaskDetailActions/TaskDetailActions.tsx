@@ -1,50 +1,54 @@
 "use client";
 
-import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { KeyRound, Trash } from "lucide-react";
 import { EditTaskModal } from "../EditTaskModal";
-import { DeleteTaskModal } from "../DeleteTaskModal";
-import { ActionFn, ActionState } from "@/lib/actions/types";
+import { startTransition, useState } from "react";
+import { TaskCommentsModal } from "../TaskCommentsModal";
+import { BaseDeleteTaskModal } from "../DeleteTaskModal";
 import { GuestModeModal } from "@/components/common/GuestModeModal";
 import { NavigationButton } from "@/components/common/NavigationButton";
+import { useCurrentUser } from "@/components/common/CurrentUserContext";
+import { ActionFn, ActionState, DeleteTasksPayload } from "@/lib/actions/types";
+import { useDeletePageActionState } from "@/lib/hooks/useDeleteEntityPageActionState";
 import { DetailActionsCommentsModalTrigger } from "@/components/common/DetailActionsCommentsModalTrigger";
-import { TaskCommentsModal } from "../TaskCommentsModal";
 
 interface TaskDetailActionsProps {
-  guestMode: boolean;
   taskId: number;
   taskTitle: string;
   taskCommentsContainer: React.ReactNode;
+  editTaskFormContainer: React.ReactNode;
   sendComment: ActionFn<ActionState, FormData>;
   updateComment: ActionFn<ActionState, FormData>;
-  deleteTask: ActionFn<ActionState, number[]>;
-  editTaskFormContainer: React.ReactNode;
+  deleteTask: ActionFn<ActionState, DeleteTasksPayload>;
 }
 
 export function TaskDetailActions({
-  guestMode,
   taskId,
   taskTitle,
   taskCommentsContainer,
+  editTaskFormContainer,
   sendComment,
   updateComment,
   deleteTask,
-  editTaskFormContainer,
 }: TaskDetailActionsProps) {
   const t = useTranslations("tasks.TaskDetailActions");
 
-  // Guest mode modal
+  // Deleting the task
+  const [, action, isDeletePending] = useDeletePageActionState({
+    deleteEntity: deleteTask,
+  });
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+
+  // Guest mode
+  const { isGuest } = useCurrentUser();
   const [isGuestModeModalOpen, setIsGuestModeModalOpen] = useState(false);
 
   // Modal state for editing the task
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
-  // Modal state for deleting the task
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-
   function handleDeletePress() {
-    if (guestMode) {
+    if (isGuest) {
       setIsGuestModeModalOpen(true);
       return;
     }
@@ -53,12 +57,17 @@ export function TaskDetailActions({
   }
 
   function handleEditPress() {
-    if (guestMode) {
+    if (isGuest) {
       setIsGuestModeModalOpen(true);
       return;
     }
 
     setIsEditModalOpen(true);
+  }
+
+  function handleDelete() {
+    setIsDeleteModalOpen(false);
+    startTransition(() => action({ ids: [taskId], shouldRedirect: true }));
   }
 
   return (
@@ -68,18 +77,19 @@ export function TaskDetailActions({
           data-test="delete-task-button"
           onPress={handleDeletePress}
           variant="secondary"
-        >
-          <Trash size={18} strokeWidth={1.5} absoluteStrokeWidth />
-          {t("delete")}
-        </NavigationButton>
+          isPending={isDeletePending}
+          iconLeft={<Trash size={18} strokeWidth={1.5} absoluteStrokeWidth />}
+          label={t("delete")}
+        />
         <NavigationButton
           data-test="edit-task-button"
           onPress={handleEditPress}
           variant="secondary"
-        >
-          <KeyRound size={18} strokeWidth={1.5} absoluteStrokeWidth />
-          {t("edit")}
-        </NavigationButton>
+          iconLeft={
+            <KeyRound size={18} strokeWidth={1.5} absoluteStrokeWidth />
+          }
+          label={t("edit")}
+        />
         <DetailActionsCommentsModalTrigger
           modal={
             <TaskCommentsModal
@@ -89,9 +99,8 @@ export function TaskDetailActions({
               updateComment={updateComment}
             />
           }
-        >
-          {t("comments")}
-        </DetailActionsCommentsModalTrigger>
+          label={t("comments")}
+        />
       </div>
 
       {/* Modal for editing task details */}
@@ -102,12 +111,11 @@ export function TaskDetailActions({
       />
 
       {/* Modal for confirming task deletion */}
-      <DeleteTaskModal
-        taskId={taskId}
+      <BaseDeleteTaskModal
         taskTitle={taskTitle}
         isOpen={isDeleteModalOpen}
         onOpenChange={setIsDeleteModalOpen}
-        deleteTask={deleteTask}
+        onDelete={handleDelete}
       />
 
       <GuestModeModal

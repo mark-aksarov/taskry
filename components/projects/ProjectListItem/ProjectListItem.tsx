@@ -1,7 +1,6 @@
 "use client";
 
 import {
-  ListItemInfo,
   ListItemText,
   ListItemTitle,
   ListItemTitleDetailModalTrigger,
@@ -10,6 +9,7 @@ import {
 import {
   ActionFn,
   ActionState,
+  DeleteProjectsPayload,
   UpdateProjectStatusesPayload,
 } from "@/lib/actions/types";
 
@@ -18,12 +18,16 @@ import {
   ItemBaseCommentsModalTrigger,
 } from "@/components/common/ItemBase";
 
+import {
+  ProjectItemPendingOverlay,
+  ProjectItemActionMenuTrigger,
+} from "../ProjectItem";
+
 import { memo } from "react";
 import Image from "next/image";
 import { ProjectStatus } from "@/generated/prisma/enums";
 import { useFormatter, useTranslations } from "next-intl";
 import { ProjectDetailModal } from "../ProjectDetailModal";
-import { ProjectItemCheckbox } from "../ProjectItemCheckbox";
 import { UnknownUser } from "@/components/common/UnknownUser";
 import { ProjectCommentsModal } from "../ProjectCommentsModal";
 import { ProjectItemBaseBadge } from "../ProjectItemBaseBadge";
@@ -32,9 +36,11 @@ import { useSelectedProjects } from "../SelectedProjectsContext";
 import { SelectableItem } from "@/components/common/SelectableItem";
 import { ImageContainer } from "@/components/common/ImageContainer";
 import { UserDetailModal } from "@/components/users/UserDetailModal";
-import { UpdateProjectStatusProvider } from "../UpdateProjectStatusContext";
-import { ProjectItemActionMenuTrigger } from "../ProjectItemActionMenuTrigger";
+import { ProjectItemCheckbox } from "../ProjectItem/ProjectItemCheckbox";
 import { CustomerDetailModal } from "@/components/customer/CustomerDetailModal";
+import { DeleteProjectTransitionProvider } from "../DeleteProjectTransitionContext";
+import { UpdateProjectTransitionProvider } from "../UpdateProjectTransitionContext";
+import { UpdateProjectStatusTransitionProvider } from "../UpdateProjectStatusTransitionContext";
 
 export interface ProjectListItemProps {
   id: number;
@@ -60,7 +66,6 @@ export interface ProjectListItemProps {
   };
   commentsCount: number;
   status: ProjectStatus;
-  guestMode: boolean;
   editProjectFormContainer: React.ReactNode;
   customerDetailContainer?: React.ReactNode;
   projectCommentsContainer: React.ReactNode;
@@ -69,23 +74,27 @@ export interface ProjectListItemProps {
   sendComment: ActionFn<ActionState, FormData>;
   updateComment: ActionFn<ActionState, FormData>;
   updateProjectStatus: ActionFn<ActionState, UpdateProjectStatusesPayload>;
+  deleteProject: ActionFn<ActionState, DeleteProjectsPayload>;
 }
 
-export const ProjectListItem = ({
-  updateProjectStatus,
-  ...props
-}: ProjectListItemProps) => {
+export const ProjectListItem = (props: ProjectListItemProps) => {
   const selected = useSelectedProjects();
 
   return (
-    <UpdateProjectStatusProvider updateStatus={updateProjectStatus}>
-      <SelectableItem
-        {...selected}
-        item={{ id: props.id, status: props.status }}
-      >
-        <ProjectListItemInner {...props} />
-      </SelectableItem>
-    </UpdateProjectStatusProvider>
+    <UpdateProjectTransitionProvider>
+      <DeleteProjectTransitionProvider>
+        <UpdateProjectStatusTransitionProvider>
+          <ProjectItemPendingOverlay projectId={props.id}>
+            <SelectableItem
+              {...selected}
+              item={{ id: props.id, status: props.status }}
+            >
+              <ProjectListItemInner {...props} />
+            </SelectableItem>
+          </ProjectItemPendingOverlay>
+        </UpdateProjectStatusTransitionProvider>
+      </DeleteProjectTransitionProvider>
+    </UpdateProjectTransitionProvider>
   );
 };
 
@@ -100,7 +109,6 @@ export const ProjectListItemInner = memo(
     commentsCount,
     status,
     creator,
-    guestMode,
     editProjectFormContainer,
     projectDetailContainer,
     userDetailContainer,
@@ -108,7 +116,9 @@ export const ProjectListItemInner = memo(
     projectCommentsContainer,
     sendComment,
     updateComment,
-  }: Omit<ProjectListItemProps, "updateProjectStatus">) => {
+    updateProjectStatus,
+    deleteProject,
+  }: ProjectListItemProps) => {
     const t = useTranslations("projects.ProjectListItem");
 
     // use useFormatter to format the date according to the user's locale
@@ -271,11 +281,12 @@ export const ProjectListItemInner = memo(
         }
         menuTriggerSlot={
           <ProjectItemActionMenuTrigger
-            guestMode={guestMode}
             projectId={id}
             projectTitle={title}
             projectStatus={status}
             editProjectFormContainer={editProjectFormContainer}
+            updateProjectStatus={updateProjectStatus}
+            deleteProject={deleteProject}
           />
         }
       />

@@ -4,13 +4,11 @@ import { EmptyPageContainer } from "@/components/common/EmptyPageContainer";
 import { TaskToolbarCreateNewMenuTrigger } from "@/components/tasks/TaskToolbarCreateNewMenuTrigger";
 
 interface TasksPageEmptyContainerProps {
-  guestMode: boolean;
   newTaskFormContainer: React.ReactNode;
   createTaskCategory: ActionFn<ActionState, FormData>;
 }
 
 export function TasksPageEmptyContainer({
-  guestMode,
   newTaskFormContainer,
   createTaskCategory,
 }: TasksPageEmptyContainerProps) {
@@ -18,7 +16,6 @@ export function TasksPageEmptyContainer({
 
   const taskToolbarCreateNewMenuTrigger = (
     <TaskToolbarCreateNewMenuTrigger
-      guestMode={guestMode}
       newTaskFormContainer={newTaskFormContainer}
       createTaskCategory={createTaskCategory}
     />

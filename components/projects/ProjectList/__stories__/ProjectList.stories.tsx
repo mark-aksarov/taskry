@@ -5,10 +5,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { ProjectListItemStory } from "../../ProjectListItem/__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withViewModeProvider } from "@/components/common/ViewMode/__stories__";
-import { withDeleteProjectModalProvider } from "../../DeleteProjectModal/__stories__";
 import { withSelectedProjectsProvider } from "../../SelectedProjectsContext/__stories__";
-import { withUpdateProjectStatusesProvider } from "../../UpdateProjectStatusContext/__stories__";
-import { withDeleteCommentModalProvider } from "@/components/comments/DeleteCommentModal/__stories__";
 import { withPageTransitionProvider } from "@/components/common/PageTransitionContext/__stories__";
 
 const meta = {
@@ -18,9 +15,6 @@ const meta = {
     withViewModeProvider,
     withPageTransitionProvider,
     withSelectedProjectsProvider,
-    withDeleteCommentModalProvider,
-    withUpdateProjectStatusesProvider,
-    withDeleteProjectModalProvider,
     withThemedBackground,
   ],
 } satisfies Meta<typeof ProjectList>;

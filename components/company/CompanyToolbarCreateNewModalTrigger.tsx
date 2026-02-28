@@ -4,16 +4,15 @@ import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { NewCompanyModal } from "./NewCompanyModal";
 import { ActionFn, ActionState } from "@/lib/actions/types";
+import { useCurrentUser } from "../common/CurrentUserContext";
 import { GuestModeModal } from "@/components/common/GuestModeModal";
 import { ToolbarCreateNewModalTrigger } from "@/components/common/Toolbar";
 
 interface CompanyToolbarCreateNewModalTriggerProps {
-  guestMode: boolean;
   createCompany: ActionFn<ActionState, FormData>;
 }
 
 export function CompanyToolbarCreateNewModalTrigger({
-  guestMode,
   createCompany,
 }: CompanyToolbarCreateNewModalTriggerProps) {
   const t = useTranslations("company.CompanyToolbarCreateNewModalTrigger");
@@ -22,10 +21,11 @@ export function CompanyToolbarCreateNewModalTrigger({
   const [isCompanyModalOpen, setIsCompanyModalOpen] = useState(false);
 
   // Guest mode
+  const { isGuest } = useCurrentUser();
   const [isGuestModeModalOpen, setIsGuestModeModalOpen] = useState(false);
 
   const handlePress = () => {
-    if (guestMode) {
+    if (isGuest) {
       setIsGuestModeModalOpen(true);
       return;
     }

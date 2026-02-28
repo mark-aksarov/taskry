@@ -6,7 +6,7 @@ import { NavigationButton } from "@/components/common/NavigationButton";
 import { CommentFormProvider } from "@/components/comments/CommentFormContext";
 
 interface DetailActionsCommentsModalTriggerProps {
-  children: React.ReactNode;
+  label: React.ReactNode;
   modal: React.ReactNode;
 }
 
@@ -21,15 +21,16 @@ export function DetailActionsCommentsModalTrigger(
 }
 
 function DetailActionsCommentsModalTriggerInner({
-  children,
+  label,
   modal,
 }: DetailActionsCommentsModalTriggerProps) {
   return (
     <DialogTrigger>
-      <NavigationButton variant="secondary">
-        <Pencil size={18} strokeWidth={1.5} absoluteStrokeWidth />
-        {children}
-      </NavigationButton>
+      <NavigationButton
+        variant="secondary"
+        iconLeft={<Pencil size={18} strokeWidth={1.5} absoluteStrokeWidth />}
+        label={label}
+      />
       {modal}
     </DialogTrigger>
   );

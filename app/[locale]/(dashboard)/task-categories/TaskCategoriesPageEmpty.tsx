@@ -4,19 +4,16 @@ import { EmptyPageContainer } from "@/components/common/EmptyPageContainer";
 import { TaskCategoryToolbarCreateNewModalTrigger } from "@/components/taskCategory/TaskCategoryToolbarCreateNewModalTrigger";
 
 interface TaskCategoriesPageEmptyProps {
-  guestMode: boolean;
   createTaskCategory: ActionFn<ActionState, FormData>;
 }
 
 export function TaskCategoriesPageEmpty({
-  guestMode,
   createTaskCategory,
 }: TaskCategoriesPageEmptyProps) {
   const t = useTranslations("app.TaskCategoriesPageEmpty");
 
   const taskCategoryToolbarCreateNewModalTrigger = (
     <TaskCategoryToolbarCreateNewModalTrigger
-      guestMode={guestMode}
       createTaskCategory={createTaskCategory}
     />
   );

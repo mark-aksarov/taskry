@@ -1,1 +1,0 @@
-export { withDeleteCommentModalProvider } from "./withDeleteCommentModalProvider";

@@ -8,7 +8,11 @@ import {
 import { useTranslations } from "next-intl";
 import { CustomerSortField } from "@/lib/types";
 import { PageGrid } from "@/components/common/PageGrid";
-import { ActionFn, ActionState } from "@/lib/actions/types";
+import {
+  ActionFn,
+  ActionState,
+  DeleteCustomersPayload,
+} from "@/lib/actions/types";
 import { ViewModeProvider } from "@/components/common/ViewMode";
 import { PageContainer } from "@/components/common/PageContainer";
 import { ViewModeToggleButtonGroup } from "@/components/common/ViewMode";
@@ -20,18 +24,16 @@ import { CustomerToolbarActionsMenuTrigger } from "@/components/customer/Custome
 import { CustomerToolbarFiltersModalTrigger } from "@/components/customer/CustomerToolbarFiltersModalTrigger";
 
 interface CustomersPageProps {
-  guestMode: boolean;
   totalFilteredCustomers: number;
   selectedSortField: CustomerSortField;
   customersContainer: React.ReactNode;
   newCustomerFormContainer: React.ReactNode;
   filtersFormContainer: React.ReactNode;
   createCompany: ActionFn<ActionState, FormData>;
-  deleteCustomers: ActionFn<ActionState, number[]>;
+  deleteCustomers: ActionFn<ActionState, DeleteCustomersPayload>;
 }
 
 export function CustomersPage({
-  guestMode,
   totalFilteredCustomers,
   selectedSortField,
   customersContainer,
@@ -44,7 +46,6 @@ export function CustomersPage({
 
   const customerToolbarCreateNewMenuTrigger = (
     <CustomerToolbarCreateNewMenuTrigger
-      guestMode={guestMode}
       newCustomerFormContainer={newCustomerFormContainer}
       createCompany={createCompany}
     />

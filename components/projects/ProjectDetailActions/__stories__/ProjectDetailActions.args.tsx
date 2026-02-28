@@ -6,7 +6,6 @@ import { getCommentList } from "@/components/comments/CommentList/__stories__";
 const project = mockedProjectDetail;
 
 export const projectDetailActionsArgs = {
-  guestMode: false,
   projectId: project.id,
   projectTitle: project.title,
   sendComment: () => ({ status: "success" as const }),

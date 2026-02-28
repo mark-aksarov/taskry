@@ -8,25 +8,35 @@ import {
   GridItemContact,
   GridItemContactText,
   GridItemContactList,
+  GridItemContactLink,
   GridItemContactIconWrapper,
   GridItemTitleDetailModalTrigger,
-  GridItemContactLink,
 } from "@/components/common/Grid";
 
+import {
+  ActionFn,
+  ActionState,
+  DeleteCustomersPayload,
+} from "@/lib/actions/types";
+
+import { memo } from "react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { Link } from "@/components/ui/Link";
 import { Link2, Mail, Phone } from "lucide-react";
 import { Separator } from "@/components/ui/Separator";
+import { CustomerItemPendingOverlay } from "../CustomerItem";
 import { CustomerDetailModal } from "../CustomerDetailModal";
 import { UnknownUser } from "@/components/common/UnknownUser";
-import { CustomerItemCheckbox } from "../CustomerItemCheckbox";
 import { CustomerGridItemLayout } from "./CustomerGridItemLayout";
 import { SelectableItem } from "@/components/common/SelectableItem";
 import { ImageContainer } from "@/components/common/ImageContainer";
 import { ItemBaseDetailModalTrigger } from "@/components/common/ItemBase";
 import { useSelectedItems } from "@/components/common/SelectedItemsContext";
-import { CustomerItemActionMenuTrigger } from "../CustomerItemActionMenuTrigger";
+import { CustomerItemCheckbox } from "../CustomerItem/CustomerItemCheckbox";
+import { DeleteCustomerTransitionProvider } from "../DeleteCustomerTransitionContext";
+import { CustomerItemActionMenuTrigger } from "../CustomerItem/CustomerItemActionMenuTrigger";
+import { UpdateCustomerTransitionProvider } from "../UpdateCustomerTransitionContext";
 
 interface CustomerGridItemProps {
   id: number;
@@ -39,53 +49,70 @@ interface CustomerGridItemProps {
     id: number;
     name: string;
   };
-  guestMode: boolean;
   customerDetailContainer: React.ReactNode;
   editCustomerFormContainer: React.ReactNode;
+  deleteCustomer: ActionFn<ActionState, DeleteCustomersPayload>;
 }
 
-export function CustomerGridItem({
-  id,
-  fullName,
-  email,
-  phoneNumber,
-  publicLink,
-  imageUrl,
-  company,
-  guestMode,
-  customerDetailContainer,
-  editCustomerFormContainer,
-}: CustomerGridItemProps) {
+export function CustomerGridItem(props: CustomerGridItemProps) {
   const t = useTranslations("customers.CustomerGridItem");
+
   const selected = useSelectedItems();
 
-  const customerImg = imageUrl ? (
-    <ImageContainer className="h-9 w-9">
-      <Image src={imageUrl} alt={fullName} width={36} height={36} />
-    </ImageContainer>
-  ) : (
-    <UnknownUser className="h-9 w-9" />
-  );
-
-  const customerDetailModal = (
-    <CustomerDetailModal
-      customerId={id}
-      customerDetailContainer={customerDetailContainer}
-    />
-  );
-
   return (
-    <SelectableItem {...selected} item={{ id }}>
+    <DeleteCustomerTransitionProvider>
+      <UpdateCustomerTransitionProvider>
+        <CustomerItemPendingOverlay customerId={props.id}>
+          <SelectableItem {...selected} item={{ id: props.id }}>
+            <CustomerGridItemInner {...props} />
+          </SelectableItem>
+        </CustomerItemPendingOverlay>
+      </UpdateCustomerTransitionProvider>
+    </DeleteCustomerTransitionProvider>
+  );
+}
+
+const CustomerGridItemInner = memo(
+  ({
+    id,
+    fullName,
+    email,
+    phoneNumber,
+    publicLink,
+    imageUrl,
+    company,
+    customerDetailContainer,
+    editCustomerFormContainer,
+    deleteCustomer,
+  }: CustomerGridItemProps) => {
+    const t = useTranslations("customers.CustomerGridItem");
+
+    const customerImg = imageUrl ? (
+      <ImageContainer className="h-9 w-9">
+        <Image src={imageUrl} alt={fullName} width={36} height={36} />
+      </ImageContainer>
+    ) : (
+      <UnknownUser className="h-9 w-9" />
+    );
+
+    const customerDetailModal = (
+      <CustomerDetailModal
+        customerId={id}
+        customerDetailContainer={customerDetailContainer}
+      />
+    );
+
+    return (
       <CustomerGridItemLayout
         topRowSlot={
           <GridItemRow>
             <CustomerItemCheckbox id={id} />
             <CustomerItemActionMenuTrigger
-              guestMode={guestMode}
               customerId={id}
               customerFullName={fullName}
               editCustomerFormContainer={editCustomerFormContainer}
               className="-mr-2"
+              deleteCustomer={deleteCustomer}
             />
           </GridItemRow>
         }
@@ -175,6 +202,6 @@ export function CustomerGridItem({
           </>
         }
       />
-    </SelectableItem>
-  );
-}
+    );
+  },
+);

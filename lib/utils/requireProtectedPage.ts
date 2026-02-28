@@ -16,5 +16,5 @@ export async function requireProtectedPage() {
     redirect({ href: "/verify-email", locale });
   }
 
-  return session;
+  return session!;
 }

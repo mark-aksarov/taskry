@@ -18,7 +18,7 @@ export const Primary = {
   args: {
     href: "/projects",
     variant: "primary",
-    children: "Navigation Item",
+    label: "Navigation Item",
   },
 } satisfies Story;
 
@@ -26,8 +26,17 @@ export const PrimaryActive = {
   args: {
     href: "/",
     variant: "primary",
-    children: "Navigation Item",
+    label: "Navigation Item",
     isActive: true,
+  },
+} satisfies Story;
+
+export const PrimaryPending = {
+  args: {
+    href: "/projects",
+    variant: "primary",
+    label: "Navigation Item",
+    isPending: true,
   },
 } satisfies Story;
 
@@ -35,7 +44,7 @@ export const Secondary = {
   args: {
     href: "/projects",
     variant: "secondary",
-    children: "Navigation Item",
+    label: "Navigation Item",
   },
 } satisfies Story;
 
@@ -43,7 +52,16 @@ export const SecondaryActive = {
   args: {
     href: "/",
     variant: "secondary",
-    children: "Navigation Item",
+    label: "Navigation Item",
     isActive: true,
+  },
+} satisfies Story;
+
+export const SecondaryPending = {
+  args: {
+    href: "/projects",
+    variant: "secondary",
+    label: "Navigation Item",
+    isPending: true,
   },
 } satisfies Story;

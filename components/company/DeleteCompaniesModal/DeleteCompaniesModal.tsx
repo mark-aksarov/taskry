@@ -8,12 +8,13 @@ import {
   ConfirmModalConfirmButton,
 } from "@/components/common/ConfirmModal";
 
-import { startTransition } from "react";
 import { useTranslations } from "next-intl";
 import { ModalProps } from "@/components/ui/Modal";
 import { DialogHeading } from "@/components/ui/Dialog";
 import { ActionFn, ActionState } from "@/lib/actions/types";
-import { useDeleteModalActionState } from "@/components/common/BaseDeleteModal";
+import { useDeleteCompanies } from "../DeleteCompaniesContext";
+import { useDeleteEntityActionState } from "@/lib/hooks/useDeleteEntityActionState";
+import { useSelectedItems } from "@/components/common/SelectedItemsContext";
 
 interface DeleteCompaniesModalProps extends ModalProps {
   companyIds: number[];
@@ -23,19 +24,31 @@ interface DeleteCompaniesModalProps extends ModalProps {
 export function DeleteCompaniesModal({
   companyIds,
   isOpen,
-  onOpenChange,
   deleteCompanies,
+  onOpenChange,
 }: DeleteCompaniesModalProps) {
   const t = useTranslations("company.DeleteCompaniesModal");
 
-  const [_, action, isPending] = useDeleteModalActionState<number[]>({
+  const { startTransition, setCompanyIds: setDeleteCompanyIds } =
+    useDeleteCompanies();
+
+  const [, action] = useDeleteEntityActionState({
     deleteEntity: deleteCompanies,
-    onOpenChange,
+    successMessage: t("successMessage"),
   });
 
-  const handleDelete = () => {
+  const { clear: clearSelectedItems } = useSelectedItems();
+
+  function handleDelete() {
+    onOpenChange?.(false);
+
+    // Clear selected items
+    clearSelectedItems();
+
+    // Used to show an overlay on the selected companies
+    setDeleteCompanyIds(companyIds);
     startTransition(() => action(companyIds));
-  };
+  }
 
   return (
     <ConfirmModal
@@ -53,7 +66,6 @@ export function DeleteCompaniesModal({
       <ConfirmModalActions>
         <ConfirmModalCancelButton label={t("cancelButton")} />
         <ConfirmModalConfirmButton
-          isPending={isPending}
           label={t("deleteButton")}
           onConfirm={handleDelete}
           data-test="delete-companies-modal-confirm-button"

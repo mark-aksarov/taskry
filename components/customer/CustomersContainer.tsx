@@ -5,7 +5,6 @@ import { CustomerGrid } from "./CustomerGrid";
 import { CustomerListItem } from "./CustomerListItem";
 import { CustomerGridItem } from "./CustomerGridItem";
 import { hasGuestRole } from "@/lib/utils/hasGuestRole";
-import { DeleteCustomerModalProvider } from "./DeleteCustomerModal";
 import { CustomerDetailContainer } from "./CustomerDetailContainer";
 import { CustomerListItemDTO } from "@/lib/data/customer/customer.dto";
 import { EditCustomerFormContainer } from "./EditCustomerFormContainer";
@@ -33,51 +32,46 @@ export async function CustomersContainer({
     phoneNumber: customer.phoneNumber,
     publicLink: customer.publicLink,
     company: customer.company,
+    deleteCustomer: deleteCustomers,
   });
 
-  const guestMode = await hasGuestRole();
-
   return (
-    <DeleteCustomerModalProvider deleteEntity={deleteCustomers}>
-      <EntityContainerPresentation
-        page={page}
-        pageSize={pageSize}
-        list={
-          <CustomerList>
-            {customers.map((customer) => (
-              <CustomerListItem
-                key={customer.id}
-                guestMode={guestMode}
-                editCustomerFormContainer={
-                  <EditCustomerFormContainer customerId={customer.id} />
-                }
-                customerDetailContainer={
-                  <CustomerDetailContainer customerId={customer.id} />
-                }
-                {...getCustomerCommonProps(customer)}
-              />
-            ))}
-          </CustomerList>
-        }
-        grid={
-          <CustomerGrid>
-            {customers.map((customer) => (
-              <CustomerGridItem
-                key={customer.id}
-                guestMode={guestMode}
-                editCustomerFormContainer={
-                  <EditCustomerFormContainer customerId={customer.id} />
-                }
-                customerDetailContainer={
-                  <CustomerDetailContainer customerId={customer.id} />
-                }
-                {...getCustomerCommonProps(customer)}
-              />
-            ))}
-          </CustomerGrid>
-        }
-        totalPages={Math.ceil(totalCount / pageSize)}
-      />
-    </DeleteCustomerModalProvider>
+    <EntityContainerPresentation
+      page={page}
+      pageSize={pageSize}
+      list={
+        <CustomerList>
+          {customers.map((customer) => (
+            <CustomerListItem
+              key={customer.id}
+              editCustomerFormContainer={
+                <EditCustomerFormContainer customerId={customer.id} />
+              }
+              customerDetailContainer={
+                <CustomerDetailContainer customerId={customer.id} />
+              }
+              {...getCustomerCommonProps(customer)}
+            />
+          ))}
+        </CustomerList>
+      }
+      grid={
+        <CustomerGrid>
+          {customers.map((customer) => (
+            <CustomerGridItem
+              key={customer.id}
+              editCustomerFormContainer={
+                <EditCustomerFormContainer customerId={customer.id} />
+              }
+              customerDetailContainer={
+                <CustomerDetailContainer customerId={customer.id} />
+              }
+              {...getCustomerCommonProps(customer)}
+            />
+          ))}
+        </CustomerGrid>
+      }
+      totalPages={Math.ceil(totalCount / pageSize)}
+    />
   );
 }

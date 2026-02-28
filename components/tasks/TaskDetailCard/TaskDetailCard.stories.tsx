@@ -9,16 +9,11 @@ import { TaskDetailAlt, TaskDetailAltSkeleton } from "../TaskDetailAlt";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { taskDetailActionsArgs } from "../TaskDetailActions/__stories__";
 import { withDeleteSubtaskModalProvider } from "@/components/subtasks/DeleteSubtaskModal/__stories__";
-import { withDeleteCommentModalProvider } from "@/components/comments/DeleteCommentModal/__stories__";
 
 const meta = {
   title: "components/tasks/TaskDetailCard",
   component: TaskDetailCard,
-  decorators: [
-    withDeleteSubtaskModalProvider,
-    withDeleteCommentModalProvider,
-    withThemedBackground,
-  ],
+  decorators: [withDeleteSubtaskModalProvider, withThemedBackground],
 } satisfies Meta<typeof TaskDetailCard>;
 
 export default meta;

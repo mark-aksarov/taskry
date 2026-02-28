@@ -8,10 +8,8 @@ import {
 
 import { Suspense } from "react";
 import { AssignedTaskList } from "../AssignedTaskList";
-import { hasGuestRole } from "@/lib/utils/hasGuestRole";
 import { TaskListItemDTO } from "@/lib/data/task/task.dto";
 import { deleteTasks } from "@/lib/actions/task/deleteTasks";
-import { DeleteTaskModalProvider } from "../DeleteTaskModal";
 import { TaskDetailContainer } from "../TaskDetailContainer";
 import { AssignedTaskListItem } from "../AssignedTaskListItem";
 import { NewTaskFormContainer } from "../NewTaskFormContainer";
@@ -44,8 +42,6 @@ async function AssignedTasksContainerInner({
   page,
   pageSize,
 }: AssignedTasksContainerProps) {
-  const guestMode = await hasGuestRole();
-
   if (!totalCount) {
     return (
       <AssignedTasksEmptySection
@@ -55,53 +51,42 @@ async function AssignedTasksContainerInner({
   }
 
   return (
-    <DeleteTaskModalProvider deleteEntity={deleteTasks}>
-      <AssignedTasksPresentation
-        page={page}
-        pageSize={pageSize}
-        totalPages={Math.ceil(totalCount / pageSize)}
-        list={
-          <AssignedTaskList>
-            {tasks.map((task) => (
-              <AssignedTaskListItem
-                guestMode={guestMode}
-                key={task.id}
-                id={task.id}
-                title={task.title}
-                deadline={task.deadline}
-                category={task.category}
-                project={task.project}
-                status={task.status}
-                assignee={task.assignee}
-                updateTaskStatus={updateTaskStatuses}
-                taskDetailContainer={
-                  <TaskDetailContainer guestMode={guestMode} taskId={task.id} />
-                }
-                commentsCount={task.commentsCount}
-                taskCommentsContainer={
-                  <TaskCommentsContainer
-                    guestMode={guestMode}
-                    taskId={task.id}
-                  />
-                }
-                sendComment={sendComment}
-                updateComment={updateComment}
-                userDetailContainer={
-                  task.assignee && (
-                    <UserDetailContainer userId={task.assignee.id} />
-                  )
-                }
-                projectDetailContainer={
-                  <ProjectDetailContainer projectId={task.project.id} />
-                }
-                editTaskFormContainer={
-                  <EditTaskFormContainer taskId={task.id} />
-                }
-              />
-            ))}
-          </AssignedTaskList>
-        }
-      />
-    </DeleteTaskModalProvider>
+    <AssignedTasksPresentation
+      page={page}
+      pageSize={pageSize}
+      totalPages={Math.ceil(totalCount / pageSize)}
+      list={
+        <AssignedTaskList>
+          {tasks.map((task) => (
+            <AssignedTaskListItem
+              key={task.id}
+              id={task.id}
+              title={task.title}
+              deadline={task.deadline}
+              category={task.category}
+              project={task.project}
+              status={task.status}
+              assignee={task.assignee}
+              updateTaskStatus={updateTaskStatuses}
+              deleteTask={deleteTasks}
+              taskDetailContainer={<TaskDetailContainer taskId={task.id} />}
+              commentsCount={task.commentsCount}
+              taskCommentsContainer={<TaskCommentsContainer taskId={task.id} />}
+              sendComment={sendComment}
+              updateComment={updateComment}
+              userDetailContainer={
+                task.assignee && (
+                  <UserDetailContainer userId={task.assignee.id} />
+                )
+              }
+              projectDetailContainer={
+                <ProjectDetailContainer projectId={task.project.id} />
+              }
+              editTaskFormContainer={<EditTaskFormContainer taskId={task.id} />}
+            />
+          ))}
+        </AssignedTaskList>
+      }
+    />
   );
 }

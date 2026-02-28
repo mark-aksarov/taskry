@@ -11,12 +11,11 @@ import { ProjectDetailActions } from "../ProjectDetailActions";
 import { DetailHeaderSkeleton } from "@/components/common/DetailHeader";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { projectDetailActionsArgs } from "../ProjectDetailActions/__stories__";
-import { withDeleteCommentModalProvider } from "@/components/comments/DeleteCommentModal/__stories__";
 
 const meta = {
   title: "components/projects/ProjectDetailCard",
   component: ProjectDetailCard,
-  decorators: [withDeleteCommentModalProvider, withThemedBackground],
+  decorators: [withThemedBackground],
 } satisfies Meta<typeof ProjectDetailCard>;
 
 export default meta;

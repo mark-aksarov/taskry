@@ -22,19 +22,19 @@ export function ProfileNavigationDesktop({
         href="/profile"
         isActive={pathname === "/profile"}
         variant="secondary"
-      >
-        <Info size={18} strokeWidth={1.5} absoluteStrokeWidth />
-        {t("userInformation")}
-      </NavigationButton>
+        iconLeft={<Info size={18} strokeWidth={1.5} absoluteStrokeWidth />}
+        label={t("userInformation")}
+      />
 
       <NavigationButton
         href="/profile/tasks"
         isActive={pathname === "/profile/tasks"}
         variant="secondary"
-      >
-        <CalendarCheck size={18} strokeWidth={1.5} absoluteStrokeWidth />
-        {t("assignedTasks")}
-      </NavigationButton>
+        iconLeft={
+          <CalendarCheck size={18} strokeWidth={1.5} absoluteStrokeWidth />
+        }
+        label={t("assignedTasks")}
+      />
 
       <Separator />
 

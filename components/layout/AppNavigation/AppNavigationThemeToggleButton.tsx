@@ -23,20 +23,22 @@ export function AppNavigationThemeToggleButton() {
   if (theme === "dark") {
     return (
       <>
-        <NavigationButton onPress={() => setTheme("light")}>
-          <Moon size={18} strokeWidth={1.5} absoluteStrokeWidth />
-          {t("darkLabel")}
-        </NavigationButton>
+        <NavigationButton
+          onPress={() => setTheme("light")}
+          iconLeft={<Moon size={18} strokeWidth={1.5} absoluteStrokeWidth />}
+          label={t("darkLabel")}
+        />
       </>
     );
   }
 
   return (
     <>
-      <NavigationButton onPress={() => setTheme("dark")}>
-        <Sun size={18} strokeWidth={1.5} absoluteStrokeWidth />
-        {t("lightLabel")}
-      </NavigationButton>
+      <NavigationButton
+        onPress={() => setTheme("dark")}
+        iconLeft={<Sun size={18} strokeWidth={1.5} absoluteStrokeWidth />}
+        label={t("lightLabel")}
+      />
     </>
   );
 }

@@ -1,24 +1,22 @@
 "use client";
 
 import {
-  ConfirmModal,
-  ConfirmModalText,
-  ConfirmModalActions,
-  ConfirmModalCancelButton,
-  ConfirmModalConfirmButton,
-} from "@/components/common/ConfirmModal";
+  ActionFn,
+  ActionState,
+  DeleteCustomersPayload,
+} from "@/lib/actions/types";
 
-import { startTransition } from "react";
 import { useTranslations } from "next-intl";
 import { ModalProps } from "@/components/ui/Modal";
-import { DialogHeading } from "@/components/ui/Dialog";
-import { ActionFn, ActionState } from "@/lib/actions/types";
-import { useDeleteModalActionState } from "@/components/common/BaseDeleteModal";
+import { BaseDeleteCustomerModal } from "./BaseDeleteCustomerModal";
+import { useSelectedItems } from "@/components/common/SelectedItemsContext";
+import { useDeleteCustomerTransition } from "../DeleteCustomerTransitionContext";
+import { useDeleteEntityActionState } from "@/lib/hooks/useDeleteEntityActionState";
 
 interface DeleteCustomerModalProps extends ModalProps {
   customerId: number;
   customerFullName: string;
-  deleteCustomer: ActionFn<ActionState, number[]>;
+  deleteCustomer: ActionFn<ActionState, DeleteCustomersPayload>;
 }
 
 export function DeleteCustomerModal({
@@ -30,37 +28,36 @@ export function DeleteCustomerModal({
 }: DeleteCustomerModalProps) {
   const t = useTranslations("customers.DeleteCustomerModal");
 
-  const [_, action, isPending] = useDeleteModalActionState<number[]>({
+  const { startTransition } = useDeleteCustomerTransition();
+
+  const [, action] = useDeleteEntityActionState({
     deleteEntity: deleteCustomer,
-    onOpenChange,
+    successMessage: t("successMessage"),
   });
 
-  const handleDelete = () => {
-    startTransition(() => action([customerId]));
-  };
+  const { remove: removeSelected } = useSelectedItems();
+
+  function handleDelete() {
+    //Remove the customer from the selection to prevent access to it
+    removeSelected(customerId);
+
+    //close modal before deleting
+    onOpenChange?.(false);
+
+    const payload = {
+      ids: [customerId],
+      shouldRedirect: false,
+    };
+
+    startTransition(() => action(payload));
+  }
 
   return (
-    <ConfirmModal
-      data-test="delete-customer-modal"
+    <BaseDeleteCustomerModal
+      onDelete={handleDelete}
+      customerFullName={customerFullName}
       isOpen={isOpen}
       onOpenChange={onOpenChange}
-    >
-      <DialogHeading>{t("heading")}</DialogHeading>
-      <ConfirmModalText>
-        {t.rich("text", {
-          strong: (chunks) => <strong>{chunks}</strong>,
-          name: customerFullName,
-        })}
-      </ConfirmModalText>
-      <ConfirmModalActions>
-        <ConfirmModalCancelButton label={t("cancelButton")} />
-        <ConfirmModalConfirmButton
-          isPending={isPending}
-          label={t("deleteButton")}
-          onConfirm={handleDelete}
-          data-test="delete-customer-modal-confirm-button"
-        />
-      </ConfirmModalActions>
-    </ConfirmModal>
+    />
   );
 }

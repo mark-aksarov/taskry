@@ -6,7 +6,6 @@ import { EditTaskForm } from "../../EditTaskForm";
 const task = mockedTaskDetail;
 
 export const taskDetailActionsArgs = {
-  guestMode: false,
   taskId: task.id,
   taskTitle: task.title,
   sendComment: () => ({ status: "success" as const }),

@@ -16,7 +16,7 @@
   "ProjectCategoryListItem": {
     "name": "Name"
   },
-  "ProjectCategoryItemActionMenuTrigger": {
+  "ProjectCategoryListItemActionMenuTrigger": {
     "edit": "Edit",
     "delete": "Delete"
   },
@@ -28,7 +28,8 @@
     "delete": "Delete"
   },
   "EditProjectCategoryForm": {
-    "submitButtonLabel": "Update project category"
+    "submitButtonLabel": "Update project category",
+    "successMessage": "Project category updated successfully"
   },
   "EditProjectCategoryModal": {
     "title": "Edit project category"
@@ -37,12 +38,14 @@
     "heading": "Delete project category",
     "text": "Are you sure you want to delete project category <strong>«{name}»</strong>? All contents will be permanently removed.",
     "cancelButton": "Cancel",
-    "deleteButton": "Delete"
+    "deleteButton": "Delete",
+    "successMessage": "Project category deleted successfully"
   },
   "DeleteProjectCategoriesModal": {
     "heading": "Delete project categories",
     "text": "Are you sure you want to delete <strong>{count} project categories</strong>? All contents will be permanently removed.",
     "cancelButton": "Cancel",
-    "deleteButton": "Delete"
+    "deleteButton": "Delete",
+    "successMessage": "Project categories deleted successfully"
   }
 }

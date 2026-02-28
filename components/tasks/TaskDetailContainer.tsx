@@ -11,11 +11,9 @@ import { createSubtask } from "@/lib/actions/subtask/createSubtask";
 import { deleteSubtask } from "@/lib/actions/subtask/deleteSubtask";
 import { updateSubtask } from "@/lib/actions/subtask/updateSubtask";
 import { toggleSubtask } from "@/lib/actions/subtask/toggleSubtask";
-import { DeleteSubtaskModalProvider } from "../subtasks/DeleteSubtaskModal";
 
 interface TaskDetailContainerProps {
   taskId: number;
-  guestMode: boolean;
 }
 
 export function TaskDetailContainer(props: TaskDetailContainerProps) {
@@ -26,10 +24,7 @@ export function TaskDetailContainer(props: TaskDetailContainerProps) {
   );
 }
 
-function TaskDetailContainerInner({
-  taskId,
-  guestMode,
-}: TaskDetailContainerProps) {
+function TaskDetailContainerInner({ taskId }: TaskDetailContainerProps) {
   const { data: task, mutate } = useSWR<TaskDetailDTO>(`/api/tasks/${taskId}`, {
     suspense: true,
   });
@@ -51,26 +46,21 @@ function TaskDetailContainerInner({
       project={task.project}
       subtasksList={
         task.subtasks.length !== 0 && (
-          <DeleteSubtaskModalProvider
-            deleteEntity={deleteSubtask}
-            mutate={mutate}
-          >
-            <SubtaskList>
-              {task.subtasks.map((subtask) => (
-                <SubtaskListItem
-                  key={subtask.id}
-                  guestMode={guestMode}
-                  id={subtask.id}
-                  text={subtask.text}
-                  isDone={subtask.isDone}
-                  taskId={task.id}
-                  toggleSubtask={toggleSubtask}
-                  updateSubtask={updateSubtask}
-                  mutate={mutate}
-                />
-              ))}
-            </SubtaskList>
-          </DeleteSubtaskModalProvider>
+          <SubtaskList>
+            {task.subtasks.map((subtask) => (
+              <SubtaskListItem
+                key={subtask.id}
+                id={subtask.id}
+                text={subtask.text}
+                isDone={subtask.isDone}
+                taskId={task.id}
+                toggleSubtask={toggleSubtask}
+                updateSubtask={updateSubtask}
+                deleteSubtask={deleteSubtask}
+                mutate={mutate}
+              />
+            ))}
+          </SubtaskList>
         )
       }
       createSubtask={createSubtask}

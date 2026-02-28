@@ -12,18 +12,17 @@ import { useTranslations } from "next-intl";
 import { Building2, Contact } from "lucide-react";
 import { DialogHeader } from "@/components/ui/Dialog";
 import { NewCustomerModal } from "./NewCustomerModal";
-import { ActionFn, ActionState } from "@/lib/actions/types";
 import { GuestModeModal } from "../common/GuestModeModal";
+import { ActionFn, ActionState } from "@/lib/actions/types";
+import { useCurrentUser } from "../common/CurrentUserContext";
 import { NewCompanyModal } from "../company/NewCompanyModal/NewCompanyModal";
 
 interface CustomerToolbarCreateNewMenuTriggerProps {
-  guestMode: boolean;
   newCustomerFormContainer: React.ReactNode;
   createCompany: ActionFn<ActionState, FormData>;
 }
 
 export function CustomerToolbarCreateNewMenuTrigger({
-  guestMode,
   newCustomerFormContainer,
   createCompany,
 }: CustomerToolbarCreateNewMenuTriggerProps) {
@@ -34,11 +33,12 @@ export function CustomerToolbarCreateNewMenuTrigger({
   const [isOpenCompanyModal, setIsOpenCompanyModal] = useState(false);
 
   // Guest mode
+  const { isGuest } = useCurrentUser();
   const [isGuestModeModalOpen, setIsGuestModeModalOpen] = useState(false);
 
   // Open the corresponding modal based on the selected menu item
   function handleAction(key: Key) {
-    if (guestMode) {
+    if (isGuest) {
       setIsGuestModeModalOpen(true);
       return;
     }

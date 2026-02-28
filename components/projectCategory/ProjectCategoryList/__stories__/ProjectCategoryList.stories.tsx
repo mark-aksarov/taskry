@@ -5,16 +5,11 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { mockedProjectCategorySummaries } from "@/mocks/projectCategories";
 import { ProjectCategoryListItemStory } from "../../ProjectCategoryListItem/__stories__";
 import { withSelectedItemsProvider } from "@/components/common/SelectedItemsContext/__stories__";
-import { withDeleteProjectCategoryModalProvider } from "../../DeleteProjectCategoryModal/__stories__";
 
 const meta = {
   title: "components/project-categories/ProjectCategoryList",
   component: ProjectCategoryList,
-  decorators: [
-    withSelectedItemsProvider,
-    withDeleteProjectCategoryModalProvider,
-    withThemedBackground,
-  ],
+  decorators: [withSelectedItemsProvider, withThemedBackground],
 } satisfies Meta<typeof ProjectCategoryList>;
 
 export default meta;

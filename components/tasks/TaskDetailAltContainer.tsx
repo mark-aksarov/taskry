@@ -3,7 +3,6 @@ import "server-only";
 import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import { SubtaskList } from "../subtasks/SubtaskList";
-import { hasGuestRole } from "@/lib/utils/hasGuestRole";
 import { TaskDetailAltSkeleton } from "./TaskDetailAlt";
 import { getTaskDetail } from "@/lib/data/task/task.dal";
 import { SubtaskListItem } from "../subtasks/SubtaskListItem";
@@ -12,7 +11,6 @@ import { createSubtask } from "@/lib/actions/subtask/createSubtask";
 import { deleteSubtask } from "@/lib/actions/subtask/deleteSubtask";
 import { updateSubtask } from "@/lib/actions/subtask/updateSubtask";
 import { toggleSubtask } from "@/lib/actions/subtask/toggleSubtask";
-import { DeleteSubtaskModalProvider } from "../subtasks/DeleteSubtaskModal";
 
 interface TaskDetailAltContainerProps {
   taskId: number;
@@ -35,8 +33,6 @@ async function TaskDetailAltContainerInner({
     notFound();
   }
 
-  const guestMode = await hasGuestRole();
-
   return (
     <TaskDetailAlt
       id={task.id}
@@ -49,22 +45,20 @@ async function TaskDetailAltContainerInner({
       status={task.status}
       subtasksList={
         task.subtasks.length !== 0 && (
-          <DeleteSubtaskModalProvider deleteEntity={deleteSubtask}>
-            <SubtaskList>
-              {task.subtasks.map((subtask) => (
-                <SubtaskListItem
-                  key={subtask.id}
-                  guestMode={guestMode}
-                  id={subtask.id}
-                  text={subtask.text}
-                  isDone={subtask.isDone}
-                  taskId={task.id}
-                  toggleSubtask={toggleSubtask}
-                  updateSubtask={updateSubtask}
-                />
-              ))}
-            </SubtaskList>
-          </DeleteSubtaskModalProvider>
+          <SubtaskList>
+            {task.subtasks.map((subtask) => (
+              <SubtaskListItem
+                key={subtask.id}
+                id={subtask.id}
+                text={subtask.text}
+                isDone={subtask.isDone}
+                taskId={task.id}
+                toggleSubtask={toggleSubtask}
+                updateSubtask={updateSubtask}
+                deleteSubtask={deleteSubtask}
+              />
+            ))}
+          </SubtaskList>
         )
       }
       createSubtask={createSubtask}

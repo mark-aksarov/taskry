@@ -22,7 +22,6 @@ import { TaskToolbarSortingMenuTrigger } from "@/components/tasks/TaskToolbarSor
 import { TaskToolbarActionsMenuTrigger } from "@/components/tasks/TaskToolbarActionsMenuTrigger";
 
 interface UserTasksPageLayoutProps {
-  guestMode: boolean;
   userTasksContainer: React.ReactNode;
   userHeaderContainer: React.ReactNode;
   navigationDesktop: React.ReactNode;
@@ -33,7 +32,6 @@ interface UserTasksPageLayoutProps {
 }
 
 export function UserTasksPageLayout({
-  guestMode,
   userTasksContainer,
   userHeaderContainer,
   navigationDesktop,
@@ -45,10 +43,7 @@ export function UserTasksPageLayout({
   const t = useTranslations("users.UserTasksPageLayout");
 
   const taskToolbarActionsMenuTrigger = (
-    <TaskToolbarActionsMenuTrigger
-      guestMode={guestMode}
-      deleteTasks={deleteTasks}
-    />
+    <TaskToolbarActionsMenuTrigger deleteTasks={deleteTasks} />
   );
 
   return (

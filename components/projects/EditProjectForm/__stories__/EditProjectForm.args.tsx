@@ -16,4 +16,5 @@ export const editProjectFormArgs = {
   projectCategorySelectItems: mockedProjectCategorySummaries,
   projectCustomerSelectItems: mockedCustomerSummaries,
   updateProject: () => ({ status: "success" as const }),
+  mutate: () => {},
 };

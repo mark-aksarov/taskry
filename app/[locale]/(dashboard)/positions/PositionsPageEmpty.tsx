@@ -4,21 +4,16 @@ import { EmptyPageContainer } from "@/components/common/EmptyPageContainer";
 import { PositionToolbarCreateNewModalTrigger } from "@/components/position/PositionToolbarCreateNewModalTrigger";
 
 interface PositionsPageEmptyProps {
-  guestMode: boolean;
   createPosition: ActionFn<ActionState, FormData>;
 }
 
 export function PositionsPageEmpty({
-  guestMode,
   createPosition,
 }: PositionsPageEmptyProps) {
   const t = useTranslations("app.PositionsPageEmpty");
 
   const positionToolbarCreateNewModalTrigger = (
-    <PositionToolbarCreateNewModalTrigger
-      guestMode={guestMode}
-      createPosition={createPosition}
-    />
+    <PositionToolbarCreateNewModalTrigger createPosition={createPosition} />
   );
 
   return (

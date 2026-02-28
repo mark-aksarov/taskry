@@ -7,31 +7,49 @@ import {
   ListItemTitle,
 } from "@/components/common/List";
 
+import { memo } from "react";
 import { useTranslations } from "next-intl";
 import { ActionFn, ActionState } from "@/lib/actions/types";
 import { SelectableItem } from "@/components/common/SelectableItem";
 import { TaskCategoryItemCheckbox } from "../TaskCategoryItemCheckbox";
+import { DeleteTaskCategoryProvider } from "../DeleteTaskCategoryContext";
 import { useSelectedItems } from "@/components/common/SelectedItemsContext";
+import { TaskCategoryItemDeleteOverlay } from "../TaskCategoryItemDeleteOverlay";
 import { TaskCategoryItemActionMenuTrigger } from "../TaskCategoryItemActionMenuTrigger";
 
 interface TaskCategoryListItemProps {
   id: number;
   name: string;
-  guestMode: boolean;
   updateTaskCategory: ActionFn<ActionState, FormData>;
+  deleteTaskCategory: ActionFn<ActionState, number[]>;
 }
 
 export function TaskCategoryListItem({
-  id,
-  name,
-  guestMode,
-  updateTaskCategory,
+  deleteTaskCategory,
+  ...props
 }: TaskCategoryListItemProps) {
-  const t = useTranslations("taskCategories.TaskCategoryListItem");
   const selected = useSelectedItems();
 
   return (
-    <SelectableItem {...selected} item={{ id }}>
+    <DeleteTaskCategoryProvider deleteTaskCategory={deleteTaskCategory}>
+      <TaskCategoryItemDeleteOverlay>
+        <SelectableItem {...selected} item={{ id: props.id }}>
+          <TaskCategoryListItemInner {...props} />
+        </SelectableItem>
+      </TaskCategoryItemDeleteOverlay>
+    </DeleteTaskCategoryProvider>
+  );
+}
+
+const TaskCategoryListItemInner = memo(
+  ({
+    id,
+    name,
+    updateTaskCategory,
+  }: Omit<TaskCategoryListItemProps, "deleteTaskCategory">) => {
+    const t = useTranslations("taskCategories.TaskCategoryListItem");
+
+    return (
       <ListItem
         data-test="task-category-list-item"
         className="flex w-full items-center gap-4"
@@ -43,12 +61,11 @@ export function TaskCategoryListItem({
         </ListItemInfo>
 
         <TaskCategoryItemActionMenuTrigger
-          guestMode={guestMode}
           taskCategoryId={id}
           taskCategoryName={name}
           updateTaskCategory={updateTaskCategory}
         />
       </ListItem>
-    </SelectableItem>
-  );
-}
+    );
+  },
+);

@@ -4,6 +4,7 @@ export { ToolbarMenuTrigger } from "./ToolbarMenuTrigger";
 export { ToolbarMobileBottom } from "./ToolbarMobileBottom";
 export { ToolbarMobileHeading } from "./ToolbarMobileHeading";
 export { ToolbarManageMenuTrigger } from "./ToolbarManageMenuTrigger";
+export { ToolbarActionsMenuTrigger } from "./ToolbarActionsMenuTrigger";
 export { ToolbarSortingMenuTrigger } from "./ToolbarSortingMenuTrigger";
 export { ToolbarManageButtonMobile } from "./ToolbarManageButtonMobile";
 export { ToolbarManageButtonDesktop } from "./ToolbarManageButtonDesktop";

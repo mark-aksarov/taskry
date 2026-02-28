@@ -6,14 +6,13 @@ import { ActionFn, ActionState } from "@/lib/actions/types";
 import { NewTaskCategoryModal } from "./NewTaskCategoryModal";
 import { GuestModeModal } from "@/components/common/GuestModeModal";
 import { ToolbarCreateNewModalTrigger } from "@/components/common/Toolbar";
+import { useCurrentUser } from "../common/CurrentUserContext";
 
 interface TaskCategoryToolbarCreateNewModalTriggerProps {
-  guestMode: boolean;
   createTaskCategory: ActionFn<ActionState, FormData>;
 }
 
 export function TaskCategoryToolbarCreateNewModalTrigger({
-  guestMode,
   createTaskCategory,
 }: TaskCategoryToolbarCreateNewModalTriggerProps) {
   const t = useTranslations(
@@ -24,10 +23,11 @@ export function TaskCategoryToolbarCreateNewModalTrigger({
   const [isTaskCategoryModalOpen, setIsTaskCategoryModalOpen] = useState(false);
 
   // Guest mode
+  const { isGuest } = useCurrentUser();
   const [isGuestModeModalOpen, setIsGuestModeModalOpen] = useState(false);
 
   const handlePress = () => {
-    if (guestMode) {
+    if (isGuest) {
       setIsGuestModeModalOpen(true);
       return;
     }

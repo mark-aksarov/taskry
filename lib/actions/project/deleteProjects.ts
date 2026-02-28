@@ -1,10 +1,11 @@
 "use server";
 
 import z from "zod";
-import { ActionState } from "../types";
 import { revalidatePath } from "next/cache";
+import { redirect } from "@/i18n/navigation";
 import { projectId } from "@/lib/schemas/project";
-import { getTranslations } from "next-intl/server";
+import { ActionState, DeleteProjectsPayload } from "../types";
+import { getLocale, getTranslations } from "next-intl/server";
 import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedirect";
 import { deleteProjects as deleteProjectQuery } from "@/lib/data/project/project.dal";
 
@@ -12,7 +13,7 @@ const projectIds = z.array(projectId).min(1);
 
 export async function deleteProjects(
   _prevState: ActionState,
-  ids: number[],
+  payload: DeleteProjectsPayload,
 ): Promise<ActionState> {
   // Authorization
   await requireSessionOrRedirect();
@@ -20,14 +21,10 @@ export async function deleteProjects(
   const t = await getTranslations("actions");
 
   try {
-    const parsedIds = projectIds.parse(ids);
+    const parsedIds = projectIds.parse(payload.ids);
 
     await deleteProjectQuery(parsedIds);
     revalidatePath("/projects");
-
-    return {
-      status: "success",
-    };
   } catch (error) {
     console.error("Server Action Error:", error);
 
@@ -36,4 +33,14 @@ export async function deleteProjects(
       message: t("deleteProject.error.internalServerError"),
     };
   }
+
+  const locale = await getLocale();
+
+  if (payload.shouldRedirect) {
+    redirect({ href: "/projects", locale });
+  }
+
+  return {
+    status: "success",
+  };
 }

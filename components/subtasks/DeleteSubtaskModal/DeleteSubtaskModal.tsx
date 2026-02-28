@@ -12,14 +12,11 @@ import { startTransition } from "react";
 import { useTranslations } from "next-intl";
 import { ModalProps } from "@/components/ui/Modal";
 import { DialogHeading } from "@/components/ui/Dialog";
-import { ActionFn, ActionState } from "@/lib/actions/types";
-import { useDeleteModalActionState } from "@/components/common/BaseDeleteModal";
+import { useDeleteSubtaskContext } from "../DeleteSubtaskContext";
 
 interface DeleteSubtaskModalProps extends ModalProps {
   subtaskId: number;
   subtaskText: string;
-  deleteSubtask: ActionFn<ActionState, number>;
-  mutate?: () => void;
 }
 
 export function DeleteSubtaskModal({
@@ -27,20 +24,15 @@ export function DeleteSubtaskModal({
   subtaskText,
   isOpen,
   onOpenChange,
-  deleteSubtask,
-  mutate,
 }: DeleteSubtaskModalProps) {
   const t = useTranslations("subtasks.DeleteSubtaskModal");
 
-  const [_, action, isPending] = useDeleteModalActionState<number>({
-    deleteEntity: deleteSubtask,
-    onOpenChange,
-    onSuccess: mutate,
-  });
+  const { action } = useDeleteSubtaskContext();
 
-  const handleDelete = () => {
+  function handleDelete() {
+    onOpenChange?.(false);
     startTransition(() => action(subtaskId));
-  };
+  }
 
   return (
     <ConfirmModal
@@ -61,7 +53,6 @@ export function DeleteSubtaskModal({
           label={t("deleteButton")}
           onConfirm={handleDelete}
           data-test="delete-subtask-modal-confirm-button"
-          isPending={isPending}
         />
       </ConfirmModalActions>
     </ConfirmModal>

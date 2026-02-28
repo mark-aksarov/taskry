@@ -23,56 +23,59 @@ export const AppNavigation = () => {
 
   return (
     <nav className="flex flex-col gap-2.5">
-      <NavigationButton href="/" isActive={pathname === "/"}>
-        <LayoutDashboard size={18} strokeWidth={1.5} absoluteStrokeWidth />
-        {t("dashboard")}
-      </NavigationButton>
+      <NavigationButton
+        href="/"
+        isActive={pathname === "/"}
+        iconLeft={
+          <LayoutDashboard size={18} strokeWidth={1.5} absoluteStrokeWidth />
+        }
+        label={t("dashboard")}
+      />
 
       <NavigationButton
         href="/projects"
         isActive={
           pathname.startsWith("/projects") || pathname === "/project-categories"
         }
-      >
-        <FolderClosed size={18} strokeWidth={1.5} absoluteStrokeWidth />
-        {t("projects")}
-      </NavigationButton>
+        iconLeft={
+          <FolderClosed size={18} strokeWidth={1.5} absoluteStrokeWidth />
+        }
+        label={t("projects")}
+      />
 
       <NavigationButton
         href="/tasks"
         isActive={
           pathname.startsWith("/tasks") || pathname === "/task-categories"
         }
-      >
-        <CalendarCheck2 size={18} strokeWidth={1.5} absoluteStrokeWidth />
-        {t("tasks")}
-      </NavigationButton>
+        iconLeft={
+          <CalendarCheck2 size={18} strokeWidth={1.5} absoluteStrokeWidth />
+        }
+        label={t("tasks")}
+      />
 
       <NavigationButton
         href="/team"
         isActive={pathname.startsWith("/team") || pathname === "/positions"}
-      >
-        <Users size={18} strokeWidth={1.5} absoluteStrokeWidth />
-        {t("team")}
-      </NavigationButton>
+        iconLeft={<Users size={18} strokeWidth={1.5} absoluteStrokeWidth />}
+        label={t("team")}
+      />
 
       <NavigationButton
         href="/customers"
         isActive={
           pathname.startsWith("/customers") || pathname === "/companies"
         }
-      >
-        <Contact size={18} strokeWidth={1.5} absoluteStrokeWidth />
-        {t("customers")}
-      </NavigationButton>
+        iconLeft={<Contact size={18} strokeWidth={1.5} absoluteStrokeWidth />}
+        label={t("customers")}
+      />
 
       <NavigationButton
         href="/profile"
         isActive={pathname.startsWith("/profile")}
-      >
-        <UserRound size={18} strokeWidth={1.5} absoluteStrokeWidth />
-        {t("profile")}
-      </NavigationButton>
+        iconLeft={<UserRound size={18} strokeWidth={1.5} absoluteStrokeWidth />}
+        label={t("profile")}
+      />
 
       <Separator />
 

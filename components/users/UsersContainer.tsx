@@ -16,13 +16,11 @@ import { hasGuestRole } from "@/lib/utils/hasGuestRole";
 import { UserFilters, UserSortField } from "@/lib/types";
 import { UserListItemDTO } from "@/lib/data/user/user.dto";
 import { deleteUser } from "@/lib/actions/user/deleteUser";
-import { DeleteUserModalProvider } from "./DeleteUserModal";
 import { UserDetailContainer } from "./UserDetailContainer";
 import { ViewModeLayout } from "@/components/common/ViewMode";
 import { EditUserFormContainer } from "./EditUserFormContainer";
 
 interface UsersContainerProps {
-  showUserActionMenuTrigger: boolean;
   page: number;
   pageSize: number;
   sort: UserSortField;
@@ -30,7 +28,6 @@ interface UsersContainerProps {
 }
 
 export async function UsersContainer({
-  showUserActionMenuTrigger,
   page,
   pageSize,
   sort,
@@ -51,63 +48,47 @@ export async function UsersContainer({
     phoneNumber: user.phoneNumber,
     publicLink: user.publicLink,
     position: user.position,
+    deleteUser,
   });
-
-  const guestMode = await hasGuestRole();
-
-  // The user can't delete themselves, so we need to make sure the user sees the "Delete" menu item.
-  const session = await auth.api.getSession({
-    headers: await headers(),
-  });
-
-  const authUser = session!.user;
 
   return (
-    <DeleteUserModalProvider deleteEntity={deleteUser}>
-      <EntityPaginationProvider>
-        <ViewModeLayout
-          list={
-            <UserList>
-              {users.map((user) => (
-                <UserListItem
-                  key={user.id}
-                  showUserActionMenuTrigger={showUserActionMenuTrigger}
-                  showDeleteMenuItem={user.id !== authUser.id}
-                  guestMode={guestMode}
-                  editUserFormContainer={
-                    <EditUserFormContainer userId={user.id} />
-                  }
-                  userDetailContainer={<UserDetailContainer userId={user.id} />}
-                  {...getUserCommonProps(user)}
-                />
-              ))}
-            </UserList>
-          }
-          grid={
-            <UserGrid>
-              {users.map((user) => (
-                <UserGridItem
-                  key={user.id}
-                  showUserActionMenuTrigger={showUserActionMenuTrigger}
-                  showDeleteMenuItem={user.id !== authUser.id}
-                  guestMode={guestMode}
-                  editUserFormContainer={
-                    <EditUserFormContainer userId={user.id} />
-                  }
-                  userDetailContainer={<UserDetailContainer userId={user.id} />}
-                  {...getUserCommonProps(user)}
-                />
-              ))}
-            </UserGrid>
-          }
-        />
+    <EntityPaginationProvider>
+      <ViewModeLayout
+        list={
+          <UserList>
+            {users.map((user) => (
+              <UserListItem
+                key={user.id}
+                editUserFormContainer={
+                  <EditUserFormContainer userId={user.id} />
+                }
+                userDetailContainer={<UserDetailContainer userId={user.id} />}
+                {...getUserCommonProps(user)}
+              />
+            ))}
+          </UserList>
+        }
+        grid={
+          <UserGrid>
+            {users.map((user) => (
+              <UserGridItem
+                key={user.id}
+                editUserFormContainer={
+                  <EditUserFormContainer userId={user.id} />
+                }
+                userDetailContainer={<UserDetailContainer userId={user.id} />}
+                {...getUserCommonProps(user)}
+              />
+            ))}
+          </UserGrid>
+        }
+      />
 
-        <EntityContainerPagination
-          page={page}
-          totalPages={Math.ceil(totalCount / pageSize)}
-          pageSize={pageSize}
-        />
-      </EntityPaginationProvider>
-    </DeleteUserModalProvider>
+      <EntityContainerPagination
+        page={page}
+        totalPages={Math.ceil(totalCount / pageSize)}
+        pageSize={pageSize}
+      />
+    </EntityPaginationProvider>
   );
 }

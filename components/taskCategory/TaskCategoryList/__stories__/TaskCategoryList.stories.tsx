@@ -5,16 +5,11 @@ import { mockedTaskCategorySummaries } from "@/mocks/taskCategories";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { TaskCategoryListItemStory } from "../../TaskCategoryListItem/__stories__";
 import { withSelectedItemsProvider } from "@/components/common/SelectedItemsContext/__stories__";
-import { withDeleteTaskCategoryModalProvider } from "../../DeleteTaskCategoryModal/__stories__";
 
 const meta = {
   title: "components/task-categories/TaskCategoryList",
   component: TaskCategoryList,
-  decorators: [
-    withSelectedItemsProvider,
-    withDeleteTaskCategoryModalProvider,
-    withThemedBackground,
-  ],
+  decorators: [withSelectedItemsProvider, withThemedBackground],
 } satisfies Meta<typeof TaskCategoryList>;
 
 export default meta;

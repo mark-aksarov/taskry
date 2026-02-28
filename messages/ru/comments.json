@@ -28,5 +28,8 @@
   "ReplyButton": "Ответить",
   "CommentCancelEditingButton": {
     "label": "Отменить редактирование"
+  },
+  "DeleteCommentProvider": {
+    "successMessage": "Комментарий успешно удалён"
   }
 }

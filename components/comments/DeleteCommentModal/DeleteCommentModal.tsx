@@ -11,35 +11,27 @@ import {
 import { startTransition } from "react";
 import { useTranslations } from "next-intl";
 import { DialogHeading } from "@/components/ui/Dialog";
-import { ActionFn, ActionState } from "@/lib/actions/types";
-import { useDeleteModalActionState } from "@/components/common/BaseDeleteModal";
+import { useDeleteCommentContext } from "../DeleteCommentContext";
 
 interface DeleteCommentModalProps {
   commentId: number;
   isOpen: boolean;
   onOpenChange: (isOpen: boolean) => void;
-  deleteComment: ActionFn<ActionState, number>;
-  mutate: () => void;
 }
 
 export function DeleteCommentModal({
   commentId,
   isOpen,
   onOpenChange,
-  deleteComment,
-  mutate,
 }: DeleteCommentModalProps) {
   const t = useTranslations("comments.DeleteCommentModal");
 
-  const [_, action, isPending] = useDeleteModalActionState<number>({
-    deleteEntity: deleteComment,
-    onOpenChange,
-    onSuccess: mutate,
-  });
+  const { action } = useDeleteCommentContext();
 
-  const handleDelete = () => {
+  function handleDelete() {
+    onOpenChange?.(false);
     startTransition(() => action(commentId));
-  };
+  }
 
   return (
     <ConfirmModal
@@ -55,7 +47,6 @@ export function DeleteCommentModal({
           label={t("confirmButton")}
           onConfirm={handleDelete}
           data-test="delete-comment-modal-confirm-button"
-          isPending={isPending}
         />
       </ConfirmModalActions>
     </ConfirmModal>

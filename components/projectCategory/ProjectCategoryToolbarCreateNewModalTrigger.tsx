@@ -1,19 +1,18 @@
 "use client";
 
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useTranslations } from "next-intl";
 import { ActionFn, ActionState } from "@/lib/actions/types";
+import { useCurrentUser } from "../common/CurrentUserContext";
 import { NewProjectCategoryModal } from "./NewProjectCategoryModal";
 import { GuestModeModal } from "@/components/common/GuestModeModal";
 import { ToolbarCreateNewModalTrigger } from "@/components/common/Toolbar";
 
 interface ProjectCategoryToolbarCreateNewModalTriggerProps {
-  guestMode: boolean;
   createProjectCategory: ActionFn<ActionState, FormData>;
 }
 
 export function ProjectCategoryToolbarCreateNewModalTrigger({
-  guestMode,
   createProjectCategory,
 }: ProjectCategoryToolbarCreateNewModalTriggerProps) {
   const t = useTranslations(
@@ -25,10 +24,11 @@ export function ProjectCategoryToolbarCreateNewModalTrigger({
     useState(false);
 
   // Guest mode
+  const { isGuest } = useCurrentUser();
   const [isGuestModeModalOpen, setIsGuestModeModalOpen] = useState(false);
 
   const handlePress = () => {
-    if (guestMode) {
+    if (isGuest) {
       setIsGuestModeModalOpen(true);
       return;
     }

@@ -15,21 +15,21 @@ import { GuestModeModal } from "../common/GuestModeModal";
 import { ActionFn, ActionState } from "@/lib/actions/types";
 import { DeleteTaskCategoriesModal } from "./DeleteTaskCategoriesModal";
 import { useSelectedItems } from "@/components/common/SelectedItemsContext";
+import { useCurrentUser } from "../common/CurrentUserContext";
 
 interface TaskCategoryToolbarActionsMenuTriggerProps {
-  guestMode: boolean;
   deleteTaskCategories: ActionFn<ActionState, number[]>;
 }
 
 export const TaskCategoryToolbarActionsMenuTrigger = ({
-  guestMode,
   deleteTaskCategories,
 }: TaskCategoryToolbarActionsMenuTriggerProps) => {
   const t = useTranslations(
     "taskCategories.TaskCategoryToolbarActionsMenuTrigger",
   );
 
-  // Guest mode modal state
+  // Guest mode
+  const { isGuest } = useCurrentUser();
   const [isGuestModeModalOpen, setIsGuestModeModalOpen] = useState(false);
 
   // Delete confirmation modal state
@@ -40,7 +40,7 @@ export const TaskCategoryToolbarActionsMenuTrigger = ({
 
   // Menu actions: show delete modal
   const handleAction = (key: Key) => {
-    if (guestMode) {
+    if (isGuest) {
       setIsGuestModeModalOpen(true);
       return;
     }

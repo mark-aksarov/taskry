@@ -6,21 +6,29 @@ import {
   ListItemTitle,
   ListItemTitleDetailModalTrigger,
 } from "@/components/common/List";
+import {
+  ActionFn,
+  ActionState,
+  DeleteCustomersPayload,
+} from "@/lib/actions/types";
 
 import { memo } from "react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { Link } from "@/components/ui/Link";
+import { CustomerItemPendingOverlay } from "../CustomerItem";
 import { CustomerDetailModal } from "../CustomerDetailModal";
 import { UnknownUser } from "@/components/common/UnknownUser";
-import { CustomerItemCheckbox } from "../CustomerItemCheckbox";
 import { CustomerListItemLayout } from "./CustomerListItemLayout";
 import { SelectableItem } from "@/components/common/SelectableItem";
 import { ImageContainer } from "@/components/common/ImageContainer";
 import { ItemBaseDetailModalTrigger } from "@/components/common/ItemBase";
 import { ListItemTitleLink } from "@/components/common/List/ListItemTitle";
+import { CustomerItemCheckbox } from "../CustomerItem/CustomerItemCheckbox";
 import { useSelectedItems } from "@/components/common/SelectedItemsContext";
-import { CustomerItemActionMenuTrigger } from "../CustomerItemActionMenuTrigger";
+import { DeleteCustomerTransitionProvider } from "../DeleteCustomerTransitionContext";
+import { CustomerItemActionMenuTrigger } from "../CustomerItem/CustomerItemActionMenuTrigger";
+import { UpdateCustomerTransitionProvider } from "../UpdateCustomerTransitionContext";
 
 export type CustomerListItemProps = {
   id: number;
@@ -33,22 +41,28 @@ export type CustomerListItemProps = {
     id: number;
     name: string;
   };
-  guestMode: boolean;
   customerDetailContainer: React.ReactNode;
   editCustomerFormContainer: React.ReactNode;
+  deleteCustomer: ActionFn<ActionState, DeleteCustomersPayload>;
 };
 
 export function CustomerListItem(props: CustomerListItemProps) {
   const selected = useSelectedItems();
 
   return (
-    <SelectableItem {...selected} item={{ id: props.id }}>
-      <CustomerListItemInner {...props} />
-    </SelectableItem>
+    <DeleteCustomerTransitionProvider>
+      <UpdateCustomerTransitionProvider>
+        <CustomerItemPendingOverlay customerId={props.id}>
+          <SelectableItem {...selected} item={{ id: props.id }}>
+            <CustomerListItemInner {...props} />
+          </SelectableItem>
+        </CustomerItemPendingOverlay>
+      </UpdateCustomerTransitionProvider>
+    </DeleteCustomerTransitionProvider>
   );
 }
 
-export const CustomerListItemInner = memo(
+const CustomerListItemInner = memo(
   ({
     id,
     fullName,
@@ -57,9 +71,9 @@ export const CustomerListItemInner = memo(
     publicLink,
     imageUrl,
     company,
-    guestMode,
     customerDetailContainer,
     editCustomerFormContainer,
+    deleteCustomer,
   }: CustomerListItemProps) => {
     const t = useTranslations("customers.CustomerListItem");
 
@@ -148,10 +162,10 @@ export const CustomerListItemInner = memo(
         }
         menuTriggerSlot={
           <CustomerItemActionMenuTrigger
-            guestMode={guestMode}
             customerId={id}
             customerFullName={fullName}
             editCustomerFormContainer={editCustomerFormContainer}
+            deleteCustomer={deleteCustomer}
           />
         }
       />

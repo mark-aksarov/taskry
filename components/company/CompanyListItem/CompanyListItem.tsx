@@ -7,31 +7,45 @@ import {
   ListItemTitle,
 } from "@/components/common/List";
 
+import { memo } from "react";
 import { useTranslations } from "next-intl";
 import { ActionFn, ActionState } from "@/lib/actions/types";
-import { SelectableItem } from "@/components/common/SelectableItem";
 import { CompanyListItemCheckbox } from "./CompanyListItemCheckbox";
+import { SelectableItem } from "@/components/common/SelectableItem";
 import { useSelectedItems } from "@/components/common/SelectedItemsContext";
-import { CompanyItemActionMenuTrigger } from "../CompanyItemActionMenuTrigger";
+import { CompanyListItemPendingOverlay } from "./CompanyListItemPendingOverlay";
+import { UpdateCompanyTransitionProvider } from "../UpdateCompanyTransitionContext";
+import { CompanyListItemActionMenuTrigger } from "./CompanyListItemActionMenuTrigger";
+import { DeleteCompanyTransitionProvider } from "../DeleteCompanyTransitionContext";
 
 interface CompanyListItemProps {
   id: number;
   name: string;
-  guestMode: boolean;
   updateCompany: ActionFn<ActionState, FormData>;
+  deleteCompany: ActionFn<ActionState, number[]>;
 }
 
-export function CompanyListItem({
-  id,
-  name,
-  guestMode,
-  updateCompany,
-}: CompanyListItemProps) {
-  const t = useTranslations("company.CompanyListItem");
+export function CompanyListItem(props: CompanyListItemProps) {
   const selected = useSelectedItems();
 
   return (
-    <SelectableItem {...selected} item={{ id }}>
+    <UpdateCompanyTransitionProvider>
+      <DeleteCompanyTransitionProvider>
+        <CompanyListItemPendingOverlay companyId={props.id}>
+          <SelectableItem {...selected} item={{ id: props.id }}>
+            <CompanyListItemInner {...props} />
+          </SelectableItem>
+        </CompanyListItemPendingOverlay>
+      </DeleteCompanyTransitionProvider>
+    </UpdateCompanyTransitionProvider>
+  );
+}
+
+const CompanyListItemInner = memo(
+  ({ id, name, updateCompany, deleteCompany }: CompanyListItemProps) => {
+    const t = useTranslations("company.CompanyListItem");
+
+    return (
       <ListItem
         data-test="company-list-item "
         className="flex w-full items-center gap-4"
@@ -42,13 +56,13 @@ export function CompanyListItem({
           <ListItemText>{t("name")}</ListItemText>
         </ListItemInfo>
 
-        <CompanyItemActionMenuTrigger
-          guestMode={guestMode}
+        <CompanyListItemActionMenuTrigger
           companyId={id}
           companyName={name}
+          deleteCompany={deleteCompany}
           updateCompany={updateCompany}
         />
       </ListItem>
-    </SelectableItem>
-  );
-}
+    );
+  },
+);

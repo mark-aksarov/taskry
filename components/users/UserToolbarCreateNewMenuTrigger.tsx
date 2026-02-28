@@ -14,18 +14,15 @@ import { DialogHeader } from "@/components/ui/Dialog";
 import { BriefcaseBusiness, Users } from "lucide-react";
 import { GuestModeModal } from "../common/GuestModeModal";
 import { ActionFn, ActionState } from "@/lib/actions/types";
+import { useCurrentUser } from "../common/CurrentUserContext";
 import { NewPositionModal } from "../position/NewPositionModal";
 
 interface UserToolbarCreateNewMenuTriggerProps {
-  showCreateNewUserMenuItem: boolean;
-  guestMode: boolean;
   createUser: ActionFn<ActionState, FormData>;
   createPosition: ActionFn<ActionState, FormData>;
 }
 
 export function UserToolbarCreateNewMenuTrigger({
-  showCreateNewUserMenuItem,
-  guestMode,
   createUser,
   createPosition,
 }: UserToolbarCreateNewMenuTriggerProps) {
@@ -35,12 +32,12 @@ export function UserToolbarCreateNewMenuTrigger({
   const [isOpenUserModal, setIsOpenUserModal] = useState(false);
   const [isOpenPositionModal, setIsOpenPositionModal] = useState(false);
 
-  // Guest mode
+  const { isOwner, isGuest } = useCurrentUser();
   const [isGuestModeModalOpen, setIsGuestModeModalOpen] = useState(false);
 
   // Menu actions: show guest modal, show user modal, show position modal
   function handleAction(key: Key) {
-    if (guestMode) {
+    if (isGuest) {
       setIsGuestModeModalOpen(true);
       return;
     }
@@ -51,6 +48,9 @@ export function UserToolbarCreateNewMenuTrigger({
       setIsOpenPositionModal(true);
     }
   }
+
+  // We show the user menu item only for owners and guests
+  const showCreateNewUserMenuItem = isOwner || isGuest;
 
   return (
     <>

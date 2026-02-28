@@ -2,16 +2,11 @@ import { Meta, StoryObj } from "@storybook/react";
 import { ProjectCategoryListItem } from "../ProjectCategoryListItem";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withSelectedItemsProvider } from "@/components/common/SelectedItemsContext/__stories__";
-import { withDeleteProjectCategoryModalProvider } from "../../DeleteProjectCategoryModal/__stories__";
 
 const meta = {
   title: "components/project-categories/ProjectCategoryListItem",
   component: ProjectCategoryListItem,
-  decorators: [
-    withSelectedItemsProvider,
-    withDeleteProjectCategoryModalProvider,
-    withThemedBackground,
-  ],
+  decorators: [withSelectedItemsProvider, withThemedBackground],
 } satisfies Meta<typeof ProjectCategoryListItem>;
 
 export default meta;
@@ -21,7 +16,7 @@ export const Default = {
   args: {
     id: 1,
     name: "Project Category 1",
-    guestMode: false,
     updateProjectCategory: () => ({ status: "success" }),
+    deleteProjectCategory: () => ({ status: "success" }),
   },
 } satisfies Story;

@@ -5,12 +5,11 @@ import { EditUserForm } from "../../EditUserForm";
 import type { Meta, StoryObj } from "@storybook/react";
 import { editUserFormArgs } from "../../EditUserForm/__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withDeleteUserModalProvider } from "../../DeleteUserModal/__stories__";
 
 const meta = {
   title: "components/users/UserGridItem",
   component: UserGridItem,
-  decorators: [withDeleteUserModalProvider, withThemedBackground],
+  decorators: [withThemedBackground],
   render: (args) => <UserGridItem {...args} />,
 } satisfies Meta<typeof UserGridItem>;
 
@@ -25,6 +24,7 @@ export const Default = {
     showDeleteMenuItem: true,
     editUserFormContainer: <EditUserForm {...editUserFormArgs} />,
     userDetailContainer: <UserDetail {...mockedUserDetail} />,
+    deleteUser: () => ({ status: "success" }),
   },
 } satisfies Story;
 

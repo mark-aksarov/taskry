@@ -7,7 +7,6 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { taskDetailArgs } from "@/components/tasks/TaskDetail/__stories__";
 import { editTaskFormArgs } from "@/components/tasks/EditTaskForm/__stories__";
 import { getCommentList } from "@/components/comments/CommentList/__stories__";
-import { withDeleteTaskModalProvider } from "@/components/tasks/DeleteTaskModal/__stories__";
 import { withSelectedTasksProvider } from "@/components/tasks/SelectedTasksContext/__stories__";
 import { withDeleteCommentModalProvider } from "@/components/comments/DeleteCommentModal/__stories__";
 import { withUpdateTaskStatusesProvider } from "@/components/tasks/UpdateTaskStatusContext/__stories__";
@@ -17,7 +16,6 @@ const meta = {
   component: UserTaskListItem,
   decorators: [
     withSelectedTasksProvider,
-    withDeleteTaskModalProvider,
     withDeleteCommentModalProvider,
     withUpdateTaskStatusesProvider,
     withThemedBackground,
@@ -48,6 +46,7 @@ export const Default = {
         setTimeout(() => res({ status: "success" }), 500),
       );
     },
+    deleteTask: () => ({ status: "success" }),
   },
 } satisfies Story;
 

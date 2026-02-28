@@ -5,13 +5,19 @@ import {
   ToolbarMobileHeading,
 } from "@/components/common/Toolbar";
 
+import {
+  ActionFn,
+  ActionState,
+  DeleteProjectsPayload,
+} from "@/lib/actions/types";
+
 import { useTranslations } from "next-intl";
 import { ProjectSortField } from "@/lib/types";
 import { PageGrid } from "@/components/common/PageGrid";
-import { ActionFn, ActionState } from "@/lib/actions/types";
 import { ViewModeProvider } from "@/components/common/ViewMode";
 import { PageContainer } from "@/components/common/PageContainer";
 import { ViewModeToggleButtonGroup } from "@/components/common/ViewMode";
+import { updateProjectStatuses } from "@/lib/actions/project/updateProjectStatuses";
 import { ProjectsFilteredEmptySection } from "@/components/projects/ProjectsFilteredEmptySection";
 import { ProjectToolbarManageMenuTrigger } from "@/components/projects/ProjectToolbarManageMenuTrigger";
 import { ProjectToolbarActionsMenuTrigger } from "@/components/projects/ProjectToolbarActionsMenuTrigger";
@@ -20,31 +26,28 @@ import { ProjectToolbarFiltersModalTrigger } from "@/components/projects/Project
 import { ProjectToolbarCreateNewMenuTrigger } from "@/components/projects/ProjectToolbarCreateNewMenuTrigger";
 
 interface ProjectsPageProps {
-  guestMode: boolean;
   totalFilteredProjects: number;
+  selectedSortField: ProjectSortField;
   projectsContainer: React.ReactNode;
   newProjectFormContainer: React.ReactNode;
-  createProjectCategory: ActionFn<ActionState, FormData>;
   projectFiltersFormContainer: React.ReactNode;
-  deleteProjects: ActionFn<ActionState, number[]>;
-  selectedSortField: ProjectSortField;
+  createProjectCategory: ActionFn<ActionState, FormData>;
+  deleteProjects: ActionFn<ActionState, DeleteProjectsPayload>;
 }
 
 export function ProjectsPage({
-  guestMode,
   totalFilteredProjects,
+  selectedSortField,
   projectsContainer,
   newProjectFormContainer,
-  createProjectCategory,
   projectFiltersFormContainer,
+  createProjectCategory,
   deleteProjects,
-  selectedSortField,
 }: ProjectsPageProps) {
   const t = useTranslations("app.ProjectsPage");
 
   const projectToolbarCreateNewMenuTrigger = (
     <ProjectToolbarCreateNewMenuTrigger
-      guestMode={guestMode}
       newProjectFormContainer={newProjectFormContainer}
       createProjectCategory={createProjectCategory}
     />
@@ -58,8 +61,8 @@ export function ProjectsPage({
 
   const projectToolbarActionsMenuTrigger = (
     <ProjectToolbarActionsMenuTrigger
-      guestMode={guestMode}
       deleteProjects={deleteProjects}
+      updateProjectStatuses={updateProjectStatuses}
     />
   );
 
