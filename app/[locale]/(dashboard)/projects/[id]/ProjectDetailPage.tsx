@@ -21,6 +21,7 @@ import { BackButton } from "@/components/common/BackButton";
 import { PageContainer } from "@/components/common/PageContainer";
 import { ProjectDetailCard } from "@/components/projects/ProjectDetailCard";
 import { ProjectDetailActions } from "@/components/projects/ProjectDetailActions";
+import { UpdateProjectTransitionProvider } from "@/components/projects/UpdateProjectTransitionContext";
 
 interface ProjectPageProps {
   projectId: number;
@@ -50,15 +51,17 @@ export function ProjectDetailPage({
   const t = useTranslations("app.ProjectDetailPage");
 
   const projectDetailActions = (
-    <ProjectDetailActions
-      deleteProject={deleteProject}
-      projectId={projectId}
-      projectTitle={projectTitle}
-      sendComment={sendComment}
-      updateComment={updateComment}
-      projectCommentsContainer={projectCommentsContainer}
-      editProjectFormContainer={editProjectFormContainer}
-    />
+    <UpdateProjectTransitionProvider>
+      <ProjectDetailActions
+        deleteProject={deleteProject}
+        projectId={projectId}
+        projectTitle={projectTitle}
+        sendComment={sendComment}
+        updateComment={updateComment}
+        projectCommentsContainer={projectCommentsContainer}
+        editProjectFormContainer={editProjectFormContainer}
+      />
+    </UpdateProjectTransitionProvider>
   );
 
   return (

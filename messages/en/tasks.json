@@ -1,9 +1,7 @@
 {
-  "DeleteTaskProvider": {
-    "successMessage": "Task deleted successfully"
-  },
   "EditTaskForm": {
-    "submitButtonLabel": "Update Task"
+    "submitButtonLabel": "Update Task",
+    "successMessage": "Task updated successfully."
   },
   "NewTaskForm": {
     "submitButtonLabel": "Create Task",
@@ -79,13 +77,15 @@
     "heading": "Delete Task",
     "text": "Are you sure you want to delete <strong>«{name}»</strong>? All contents will be permanently removed.",
     "deleteButton": "Delete",
-    "cancelButton": "Cancel"
+    "cancelButton": "Cancel",
+    "successMessage": "Task deleted successfully"
   },
   "DeleteTasksModal": {
     "heading": "Delete Tasks",
     "text": "Are you sure you want to delete <strong>{count} tasks</strong>? All contents will be permanently removed.",
     "deleteButton": "Delete",
-    "cancelButton": "Cancel"
+    "cancelButton": "Cancel",
+    "successMessage": "Tasks deleted successfully"
   },
   "NewTaskModal": {
     "title": "New Task"

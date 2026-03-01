@@ -1,6 +1,7 @@
 {
   "EditSubtaskForm": {
-    "submitButtonLabel": "Edit Subtask"
+    "submitButtonLabel": "Edit Subtask",
+    "successMessage": "Subtask updated successfully"
   },
   "NewSubtaskForm": {
     "submitButtonLabel": "Add Subtask",
@@ -10,13 +11,15 @@
     "heading": "Delete Subtask",
     "text": "Are you sure you want to delete subtask <strong>«{text}»</strong>?",
     "deleteButton": "Delete",
-    "cancelButton": "Cancel"
+    "cancelButton": "Cancel",
+    "successMessage": "Subtask deleted successfully"
   },
   "SubtaskActionMenuTrigger": {
     "edit": "Edit",
     "done": "Mark as Done",
     "undone": "Mark as Undone",
-    "delete": "Delete"
+    "delete": "Delete",
+    "toggleSuccess": "Subtask updated successfully"
   },
   "SubtasksCheckboxGroup": {
     "label": "Subtasks"
@@ -43,8 +46,5 @@
   },
   "NewSubtasksButton": {
     "label": "New Subtask"
-  },
-  "DeleteSubtaskProvider": {
-    "successMessage": "Subtask deleted successfully"
   }
 }

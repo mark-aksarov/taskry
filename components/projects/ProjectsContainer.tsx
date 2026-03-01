@@ -1,10 +1,8 @@
 import "server-only";
 
+import { ProjectItem } from "./ProjectItem";
 import { ProjectList } from "./ProjectList";
 import { ProjectGrid } from "./ProjectGrid";
-import { ProjectListItem } from "./ProjectListItem";
-import { ProjectGridItem } from "./ProjectGridItem";
-import { hasGuestRole } from "@/lib/utils/hasGuestRole";
 import { sendComment } from "@/lib/actions/comment/sendComment";
 import { ProjectDetailContainer } from "./ProjectDetailContainer";
 import { UserDetailContainer } from "../users/UserDetailContainer";
@@ -30,91 +28,59 @@ export async function ProjectsContainer({
   page,
   pageSize,
 }: ProjectsContainerProps) {
+  const items = (
+    <>
+      {projects.map((project) => {
+        return (
+          <ProjectItem
+            key={project.id}
+            id={project.id}
+            title={project.title}
+            deadline={project.deadline}
+            creator={project.creator}
+            status={project.status}
+            commentsCount={project.commentsCount}
+            customer={project.customer}
+            company={project.customer?.company}
+            category={project.category}
+            tasksTotal={project.tasks.total}
+            tasksCompleted={project.tasks.completed}
+            editProjectFormContainer={
+              <EditProjectFormContainer projectId={project.id} />
+            }
+            projectCommentsContainer={
+              <ProjectCommentsContainer projectId={project.id} />
+            }
+            projectDetailContainer={
+              <ProjectDetailContainer projectId={project.id} />
+            }
+            userDetailContainer={
+              project.creator && (
+                <UserDetailContainer userId={project.creator.id} />
+              )
+            }
+            customerDetailContainer={
+              project.customer && (
+                <CustomerDetailContainer customerId={project.customer.id} />
+              )
+            }
+            sendComment={sendComment}
+            updateComment={updateComment}
+            updateProjectStatus={updateProjectStatuses}
+            deleteProject={deleteProjects}
+          />
+        );
+      })}
+    </>
+  );
+
   return (
     <EntityContainerPresentation
       page={page}
       pageSize={pageSize}
       totalPages={Math.ceil(totalCount / pageSize)}
-      list={
-        <ProjectList>
-          {projects.map((project) => {
-            return (
-              <ProjectListItem
-                key={project.id}
-                id={project.id}
-                title={project.title}
-                deadline={project.deadline}
-                creator={project.creator}
-                status={project.status}
-                commentsCount={project.commentsCount}
-                customer={project.customer}
-                company={project.customer?.company}
-                category={project.category}
-                editProjectFormContainer={
-                  <EditProjectFormContainer projectId={project.id} />
-                }
-                projectCommentsContainer={
-                  <ProjectCommentsContainer projectId={project.id} />
-                }
-                projectDetailContainer={
-                  <ProjectDetailContainer projectId={project.id} />
-                }
-                userDetailContainer={
-                  project.creator && (
-                    <UserDetailContainer userId={project.creator.id} />
-                  )
-                }
-                customerDetailContainer={
-                  project.customer && (
-                    <CustomerDetailContainer customerId={project.customer.id} />
-                  )
-                }
-                sendComment={sendComment}
-                updateComment={updateComment}
-                updateProjectStatus={updateProjectStatuses}
-                deleteProject={deleteProjects}
-              />
-            );
-          })}
-        </ProjectList>
-      }
-      grid={
-        <ProjectGrid>
-          {projects.map((project) => {
-            return (
-              <ProjectGridItem
-                key={project.id}
-                id={project.id}
-                title={project.title}
-                deadline={project.deadline}
-                creator={project.creator}
-                status={project.status}
-                commentsCount={project.commentsCount}
-                tasksTotal={project.tasks.total}
-                tasksCompleted={project.tasks.completed}
-                editProjectFormContainer={
-                  <EditProjectFormContainer projectId={project.id} />
-                }
-                projectCommentsContainer={
-                  <ProjectCommentsContainer projectId={project.id} />
-                }
-                projectDetailContainer={
-                  <ProjectDetailContainer projectId={project.id} />
-                }
-                userDetailContainer={
-                  project.creator && (
-                    <UserDetailContainer userId={project.creator.id} />
-                  )
-                }
-                sendComment={sendComment}
-                updateComment={updateComment}
-                updateProjectStatus={updateProjectStatuses}
-                deleteProject={deleteProjects}
-              />
-            );
-          })}
-        </ProjectGrid>
-      }
+      list={<ProjectList>{items}</ProjectList>}
+      grid={<ProjectGrid>{items}</ProjectGrid>}
     />
   );
 }

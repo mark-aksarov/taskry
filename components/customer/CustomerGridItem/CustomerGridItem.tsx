@@ -13,66 +13,22 @@ import {
   GridItemTitleDetailModalTrigger,
 } from "@/components/common/Grid";
 
-import {
-  ActionFn,
-  ActionState,
-  DeleteCustomersPayload,
-} from "@/lib/actions/types";
-
 import { memo } from "react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { Link } from "@/components/ui/Link";
 import { Link2, Mail, Phone } from "lucide-react";
+import { CustomerItemProps } from "../CustomerItem";
 import { Separator } from "@/components/ui/Separator";
-import { CustomerItemPendingOverlay } from "../CustomerItem";
 import { CustomerDetailModal } from "../CustomerDetailModal";
 import { UnknownUser } from "@/components/common/UnknownUser";
 import { CustomerGridItemLayout } from "./CustomerGridItemLayout";
-import { SelectableItem } from "@/components/common/SelectableItem";
 import { ImageContainer } from "@/components/common/ImageContainer";
 import { ItemBaseDetailModalTrigger } from "@/components/common/ItemBase";
-import { useSelectedItems } from "@/components/common/SelectedItemsContext";
 import { CustomerItemCheckbox } from "../CustomerItem/CustomerItemCheckbox";
-import { DeleteCustomerTransitionProvider } from "../DeleteCustomerTransitionContext";
 import { CustomerItemActionMenuTrigger } from "../CustomerItem/CustomerItemActionMenuTrigger";
-import { UpdateCustomerTransitionProvider } from "../UpdateCustomerTransitionContext";
 
-interface CustomerGridItemProps {
-  id: number;
-  fullName: string;
-  email: string;
-  phoneNumber?: string;
-  publicLink?: string;
-  imageUrl?: string;
-  company?: {
-    id: number;
-    name: string;
-  };
-  customerDetailContainer: React.ReactNode;
-  editCustomerFormContainer: React.ReactNode;
-  deleteCustomer: ActionFn<ActionState, DeleteCustomersPayload>;
-}
-
-export function CustomerGridItem(props: CustomerGridItemProps) {
-  const t = useTranslations("customers.CustomerGridItem");
-
-  const selected = useSelectedItems();
-
-  return (
-    <DeleteCustomerTransitionProvider>
-      <UpdateCustomerTransitionProvider>
-        <CustomerItemPendingOverlay customerId={props.id}>
-          <SelectableItem {...selected} item={{ id: props.id }}>
-            <CustomerGridItemInner {...props} />
-          </SelectableItem>
-        </CustomerItemPendingOverlay>
-      </UpdateCustomerTransitionProvider>
-    </DeleteCustomerTransitionProvider>
-  );
-}
-
-const CustomerGridItemInner = memo(
+export const CustomerGridItem = memo(
   ({
     id,
     fullName,
@@ -84,7 +40,7 @@ const CustomerGridItemInner = memo(
     customerDetailContainer,
     editCustomerFormContainer,
     deleteCustomer,
-  }: CustomerGridItemProps) => {
+  }: CustomerItemProps) => {
     const t = useTranslations("customers.CustomerGridItem");
 
     const customerImg = imageUrl ? (

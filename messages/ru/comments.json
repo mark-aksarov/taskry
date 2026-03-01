@@ -7,7 +7,8 @@
     "heading": "Удалить комментарий",
     "text": "Вы уверены, что хотите удалить этот комментарий? Это действие нельзя будет отменить.",
     "cancelButton": "Отмена",
-    "confirmButton": "Удалить"
+    "confirmButton": "Удалить",
+    "successMessage": "Комментарий успешно удалён"
   },
   "CommentItem": {
     "unknownUser": "Неизвестный пользователь"
@@ -28,8 +29,5 @@
   "ReplyButton": "Ответить",
   "CommentCancelEditingButton": {
     "label": "Отменить редактирование"
-  },
-  "DeleteCommentProvider": {
-    "successMessage": "Комментарий успешно удалён"
   }
 }

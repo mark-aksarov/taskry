@@ -7,7 +7,7 @@ import {
 } from "@/lib/actions/types";
 
 import { useTranslations } from "next-intl";
-import { KeyRound, Trash } from "lucide-react";
+import { Pencil, Trash } from "lucide-react";
 import { startTransition, useState } from "react";
 import { EditProjectModal } from "../EditProjectModal";
 import { ProjectCommentsModal } from "../ProjectCommentsModal";
@@ -15,6 +15,7 @@ import { BaseDeleteProjectModal } from "../DeleteProjectModal";
 import { GuestModeModal } from "@/components/common/GuestModeModal";
 import { NavigationButton } from "@/components/common/NavigationButton";
 import { useCurrentUser } from "@/components/common/CurrentUserContext";
+import { useUpdateProjectTransition } from "../UpdateProjectTransitionContext";
 import { useDeleteEntityPageActionState } from "@/lib/hooks/useDeleteEntityPageActionState";
 import { DetailActionsCommentsModalTrigger } from "@/components/common/DetailActionsCommentsModalTrigger";
 
@@ -49,7 +50,8 @@ export function ProjectDetailActions({
   const { isGuest } = useCurrentUser();
   const [isGuestModeModalOpen, setIsGuestModeModalOpen] = useState(false);
 
-  // Modal state for editing the project
+  // Editing the project
+  const { isPending: isUpdatePending } = useUpdateProjectTransition();
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
   function handleDeletePress() {
@@ -87,12 +89,11 @@ export function ProjectDetailActions({
           label={t("delete")}
         />
         <NavigationButton
+          isPending={isUpdatePending}
           data-test="edit-project-button"
           onPress={handleEditPress}
           variant="secondary"
-          iconLeft={
-            <KeyRound size={18} strokeWidth={1.5} absoluteStrokeWidth />
-          }
+          iconLeft={<Pencil size={18} strokeWidth={1.5} absoluteStrokeWidth />}
           label={t("edit")}
         />
         <DetailActionsCommentsModalTrigger

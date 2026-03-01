@@ -12,10 +12,16 @@ import {
   ToolbarMobileHeading,
 } from "@/components/common/Toolbar";
 
+import {
+  ActionFn,
+  ActionState,
+  DeleteTasksPayload,
+  UpdateTaskStatusesPayload,
+} from "@/lib/actions/types";
+
 import { useTranslations } from "next-intl";
 import { TaskSortField } from "@/lib/types";
 import { PageGrid } from "@/components/common/PageGrid";
-import { ActionFn, ActionState } from "@/lib/actions/types";
 import { BackButton } from "@/components/common/BackButton";
 import { PageContainer } from "@/components/common/PageContainer";
 import { TaskToolbarSortingMenuTrigger } from "@/components/tasks/TaskToolbarSortingMenuTrigger";
@@ -28,7 +34,8 @@ interface UserTasksPageLayoutProps {
   navigationMobile: React.ReactNode;
   selectedSortField: TaskSortField;
   backButton?: boolean;
-  deleteTasks: ActionFn<ActionState, number[]>;
+  deleteTasks: ActionFn<ActionState, DeleteTasksPayload>;
+  updateTaskStatuses: ActionFn<ActionState, UpdateTaskStatusesPayload>;
 }
 
 export function UserTasksPageLayout({
@@ -39,11 +46,15 @@ export function UserTasksPageLayout({
   selectedSortField,
   backButton,
   deleteTasks,
+  updateTaskStatuses,
 }: UserTasksPageLayoutProps) {
   const t = useTranslations("users.UserTasksPageLayout");
 
   const taskToolbarActionsMenuTrigger = (
-    <TaskToolbarActionsMenuTrigger deleteTasks={deleteTasks} />
+    <TaskToolbarActionsMenuTrigger
+      deleteTasks={deleteTasks}
+      updateTaskStatuses={updateTaskStatuses}
+    />
   );
 
   return (

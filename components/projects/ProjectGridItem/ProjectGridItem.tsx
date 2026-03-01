@@ -9,88 +9,30 @@ import {
 } from "@/components/common/Grid";
 
 import {
-  ActionFn,
-  ActionState,
-  DeleteProjectsPayload,
-  UpdateProjectStatusesPayload,
-} from "@/lib/actions/types";
-
-import {
   ItemBaseDetailModalTrigger,
   ItemBaseCommentsModalTrigger,
 } from "@/components/common/ItemBase";
 
-import {
-  ProjectItemPendingOverlay,
-  ProjectItemActionMenuTrigger,
-} from "../ProjectItem";
-
 import { memo } from "react";
 import Image from "next/image";
 import { Link } from "@/components/ui/Link";
-import { ProjectStatus } from "@/generated/prisma/enums";
 import { useFormatter, useTranslations } from "next-intl";
 import { ProjectDetailModal } from "../ProjectDetailModal";
 import { UnknownUser } from "@/components/common/UnknownUser";
 import { ProjectCommentsModal } from "../ProjectCommentsModal";
 import { ProjectItemBaseBadge } from "../ProjectItemBaseBadge";
 import { ProjectGridItemLayout } from "./ProjectGridItemLayout";
-import { useSelectedProjects } from "../SelectedProjectsContext";
-import { SelectableItem } from "@/components/common/SelectableItem";
 import { ImageContainer } from "@/components/common/ImageContainer";
 import { UserDetailModal } from "@/components/users/UserDetailModal";
 import { ProjectItemCheckbox } from "../ProjectItem/ProjectItemCheckbox";
-import { UpdateProjectTransitionProvider } from "../UpdateProjectTransitionContext";
-import { DeleteProjectTransitionProvider } from "../DeleteProjectTransitionContext";
-import { UpdateProjectStatusTransitionProvider } from "../UpdateProjectStatusTransitionContext";
+import { ProjectItemActionMenuTrigger, ProjectItemProps } from "../ProjectItem";
 
-export interface ProjectGridItemProps {
-  id: number;
-  title: string;
-  deadline: string;
-  creator?: {
-    id: string;
-    fullName: string;
-    imageUrl?: string;
-  };
-  commentsCount: number;
-  status: ProjectStatus;
-  tasksTotal: number;
-  tasksCompleted: number;
-  projectCommentsContainer: React.ReactNode;
-  editProjectFormContainer: React.ReactNode;
-  projectDetailContainer: React.ReactNode;
-  userDetailContainer?: React.ReactNode;
-  sendComment: ActionFn<ActionState, FormData>;
-  updateComment: ActionFn<ActionState, FormData>;
-  updateProjectStatus: ActionFn<ActionState, UpdateProjectStatusesPayload>;
-  deleteProject: ActionFn<ActionState, DeleteProjectsPayload>;
-}
+export type ProjectGridItemProps = Omit<
+  ProjectItemProps,
+  "customer" | "category" | "company" | "customerDetailContainer"
+>;
 
-export const ProjectGridItem = (props: ProjectGridItemProps) => {
-  const t = useTranslations("projects.ProjectGridItem");
-
-  const selected = useSelectedProjects();
-
-  return (
-    <UpdateProjectTransitionProvider>
-      <DeleteProjectTransitionProvider>
-        <UpdateProjectStatusTransitionProvider>
-          <ProjectItemPendingOverlay projectId={props.id}>
-            <SelectableItem
-              {...selected}
-              item={{ id: props.id, status: props.status }}
-            >
-              <ProjectGridItemInner {...props} />
-            </SelectableItem>
-          </ProjectItemPendingOverlay>
-        </UpdateProjectStatusTransitionProvider>
-      </DeleteProjectTransitionProvider>
-    </UpdateProjectTransitionProvider>
-  );
-};
-
-export const ProjectGridItemInner = memo(
+export const ProjectGridItem = memo(
   ({
     id,
     title,

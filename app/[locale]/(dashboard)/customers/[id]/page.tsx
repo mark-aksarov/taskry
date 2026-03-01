@@ -12,6 +12,7 @@ import { defaultAppHeaderSlots } from "@/components/layout/AppHeader/defaultAppH
 import { EditCustomerFormContainer } from "@/components/customer/EditCustomerFormContainer";
 import { CustomerDetailAltContainer } from "@/components/customer/CustomerDetailAltContainer";
 import { CurrentUserProvider } from "@/components/common/CurrentUserContext";
+import { UpdateCustomerTransitionProvider } from "@/components/customer/UpdateCustomerTransitionContext";
 
 export default async function AppCustomerDetailPage({
   params,
@@ -50,14 +51,16 @@ export default async function AppCustomerDetailPage({
         customerDetailContainer={<CustomerDetailAltContainer customerId={id} />}
         customerHeaderContainer={<CustomerHeaderContainer customerId={id} />}
         customerDetailActions={
-          <CustomerDetailActions
-            customerId={id}
-            customerFullName={customerSummary.fullName}
-            deleteCustomer={deleteCustomers}
-            editCustomerFormContainer={
-              <EditCustomerFormContainer customerId={id} />
-            }
-          />
+          <UpdateCustomerTransitionProvider>
+            <CustomerDetailActions
+              customerId={id}
+              customerFullName={customerSummary.fullName}
+              deleteCustomer={deleteCustomers}
+              editCustomerFormContainer={
+                <EditCustomerFormContainer customerId={id} />
+              }
+            />
+          </UpdateCustomerTransitionProvider>
         }
         appHeaderProps={defaultAppHeaderSlots}
       />

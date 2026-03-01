@@ -5,16 +5,11 @@ import {
   EntityContainerPagination,
 } from "@/components/common/EntityContainerPagination";
 
-import { auth } from "@/lib/auth";
-import { headers } from "next/headers";
+import { UserItem } from "./UserItem";
 import { UserList } from "./UserList";
 import { UserGrid } from "./UserGrid";
-import { UserListItem } from "./UserListItem";
-import { UserGridItem } from "./UserGridItem";
 import { getUserList } from "@/lib/data/user/user.dal";
-import { hasGuestRole } from "@/lib/utils/hasGuestRole";
 import { UserFilters, UserSortField } from "@/lib/types";
-import { UserListItemDTO } from "@/lib/data/user/user.dto";
 import { deleteUser } from "@/lib/actions/user/deleteUser";
 import { UserDetailContainer } from "./UserDetailContainer";
 import { ViewModeLayout } from "@/components/common/ViewMode";
@@ -40,48 +35,31 @@ export async function UsersContainer({
     filters,
   });
 
-  const getUserCommonProps = (user: UserListItemDTO) => ({
-    id: user.id,
-    fullName: user.fullName,
-    imageUrl: user.imageUrl,
-    email: user.email,
-    phoneNumber: user.phoneNumber,
-    publicLink: user.publicLink,
-    position: user.position,
-    deleteUser,
-  });
+  const items = (
+    <>
+      {users.map((user) => (
+        <UserItem
+          key={user.id}
+          id={user.id}
+          fullName={user.fullName}
+          imageUrl={user.imageUrl}
+          email={user.email}
+          phoneNumber={user.phoneNumber}
+          publicLink={user.publicLink}
+          position={user.position}
+          deleteUser={deleteUser}
+          editUserFormContainer={<EditUserFormContainer userId={user.id} />}
+          userDetailContainer={<UserDetailContainer userId={user.id} />}
+        />
+      ))}
+    </>
+  );
 
   return (
     <EntityPaginationProvider>
       <ViewModeLayout
-        list={
-          <UserList>
-            {users.map((user) => (
-              <UserListItem
-                key={user.id}
-                editUserFormContainer={
-                  <EditUserFormContainer userId={user.id} />
-                }
-                userDetailContainer={<UserDetailContainer userId={user.id} />}
-                {...getUserCommonProps(user)}
-              />
-            ))}
-          </UserList>
-        }
-        grid={
-          <UserGrid>
-            {users.map((user) => (
-              <UserGridItem
-                key={user.id}
-                editUserFormContainer={
-                  <EditUserFormContainer userId={user.id} />
-                }
-                userDetailContainer={<UserDetailContainer userId={user.id} />}
-                {...getUserCommonProps(user)}
-              />
-            ))}
-          </UserGrid>
-        }
+        list={<UserList>{items}</UserList>}
+        grid={<UserGrid>{items}</UserGrid>}
       />
 
       <EntityContainerPagination

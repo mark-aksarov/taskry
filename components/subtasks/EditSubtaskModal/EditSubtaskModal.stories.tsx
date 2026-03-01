@@ -30,6 +30,10 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    editSubtaskForm: <EditSubtaskForm {...editSubtaskFormArgs} />,
+    subtaskId: 1,
+    taskId: 1,
+    mutate: () => {},
+    subtaskText: "Subtask 1",
+    updateSubtask: () => ({ status: "success" as const }),
   },
 } satisfies Story;

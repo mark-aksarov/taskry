@@ -13,42 +13,14 @@ import { Link } from "@/components/ui/Link";
 import { useTranslations } from "next-intl";
 import { UserDetailModal } from "../UserDetailModal";
 import { UserListItemLayout } from "./UserListItemLayout";
-import { DeleteUserProvider } from "../DeleteUserContext";
 import { UnknownUser } from "@/components/common/UnknownUser";
-import { UserItemDeleteOverlay } from "../UserItemDeleteOverlay";
 import { ImageContainer } from "@/components/common/ImageContainer";
+import { UserItemActionMenuTrigger, UserItemProps } from "../UserItem";
 import { useCurrentUser } from "@/components/common/CurrentUserContext";
-import { UserItemActionMenuTrigger } from "../UserItemActionMenuTrigger";
 import { ItemBaseDetailModalTrigger } from "@/components/common/ItemBase";
 import { ListItemTitleLink } from "@/components/common/List/ListItemTitle";
-import { ActionFn, ActionState, DeleteUserPayload } from "@/lib/actions/types";
 
-export interface UserListItemProps {
-  id: string;
-  fullName: string;
-  imageUrl?: string;
-  email: string;
-  phoneNumber?: string;
-  publicLink?: string;
-  position?: {
-    name: string;
-  };
-  editUserFormContainer: React.ReactNode;
-  userDetailContainer: React.ReactNode;
-  deleteUser: ActionFn<ActionState, DeleteUserPayload>;
-}
-
-export function UserListItem({ deleteUser, ...props }: UserListItemProps) {
-  return (
-    <DeleteUserProvider deleteUser={deleteUser}>
-      <UserItemDeleteOverlay>
-        <UserListItemInner {...props} />
-      </UserItemDeleteOverlay>
-    </DeleteUserProvider>
-  );
-}
-
-const UserListItemInner = memo(
+export const UserListItem = memo(
   ({
     id,
     fullName,
@@ -59,7 +31,8 @@ const UserListItemInner = memo(
     position,
     editUserFormContainer,
     userDetailContainer,
-  }: Omit<UserListItemProps, "deleteUser">) => {
+    deleteUser,
+  }: UserItemProps) => {
     const t = useTranslations("users.UserListItem");
 
     const { isOwner, isGuest } = useCurrentUser();
@@ -153,6 +126,7 @@ const UserListItemInner = memo(
               editUserFormContainer={editUserFormContainer}
               userId={id}
               userFullName={fullName}
+              deleteUser={deleteUser}
             />
           )
         }

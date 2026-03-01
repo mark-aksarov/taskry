@@ -11,6 +11,7 @@ import { DialogHeader } from "@/components/ui/Dialog";
 import { ActionFn, ActionState } from "@/lib/actions/types";
 import { CommentForm } from "@/components/comments/CommentForm";
 import { useCommentFormContext } from "@/components/comments/CommentFormContext";
+import { SendCommentTransitionProvider } from "../SendCommentTransitionContext";
 
 interface EntityCommentsModalProps {
   entityId: number;
@@ -51,17 +52,19 @@ export function EntityCommentsModal({
       <CommentsModalDialog>
         <DialogHeader>{title}</DialogHeader>
 
-        <CommentsModalDialogBody>{commentsContainer}</CommentsModalDialogBody>
+        <SendCommentTransitionProvider>
+          <CommentsModalDialogBody>{commentsContainer}</CommentsModalDialogBody>
 
-        <CommentsModalDialogFooter>
-          <CommentForm
-            sendCommentAction={action}
-            mutateUrl={mutateUrl}
-            hiddenInput={
-              <input type="hidden" name={hiddenName} value={hiddenValue} />
-            }
-          />
-        </CommentsModalDialogFooter>
+          <CommentsModalDialogFooter>
+            <CommentForm
+              sendCommentAction={action}
+              mutateUrl={mutateUrl}
+              hiddenInput={
+                <input type="hidden" name={hiddenName} value={hiddenValue} />
+              }
+            />
+          </CommentsModalDialogFooter>
+        </SendCommentTransitionProvider>
       </CommentsModalDialog>
     </CommentsModal>
   );

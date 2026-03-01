@@ -14,6 +14,7 @@ import { TeamProfileTasksPageEmpty } from "./TeamProfileTasksPageEmpty";
 import { pageSearchParam, pageSizeSearchParam } from "@/lib/schemas/base";
 import { UserTasksContainer } from "@/components/users/UserTasksContainer";
 import { updateTaskStatuses } from "@/lib/actions/task/updateTaskStatuses";
+import { DeleteTasksProvider } from "@/components/tasks/DeleteTasksContext";
 import { CurrentUserProvider } from "@/components/common/CurrentUserContext";
 import { UserTasksPageLayout } from "@/components/users/UserTasksPageLayout";
 import { UserHeaderContainer } from "@/components/users/UserHeaderContainer";
@@ -23,7 +24,9 @@ import { SelectedTasksProvider } from "@/components/tasks/SelectedTasksContext";
 import { UserNavigationDesktop } from "@/components/users/UserNavigationDesktop";
 import { EditUserFormContainer } from "@/components/users/EditUserFormContainer";
 import { PageTransitionProvider } from "@/components/common/PageTransitionContext";
-import { UpdateTaskStatusesProvider } from "@/components/tasks/UpdateTaskStatusContext";
+import { UpdateTaskStatusesProvider } from "@/components/tasks/UpdateTaskStatusesContext";
+import { UpdateUserTransitionProvider } from "@/components/users/UpdateUserTransitionContext";
+import { ChangePasswordTransitionProvider } from "@/components/users/ChangePasswordTransitionContext";
 
 const searchParamsSchema = z.object({
   page: pageSearchParam,
@@ -78,13 +81,17 @@ export default async function AppProfileTasksPage({
   const showUserActions = isOwner || isGuest || session.user.id === userId;
 
   const userActions = showUserActions && (
-    <ProfileActions
-      userId={userId}
-      userFullName={userSummary.fullName}
-      changePassword={changePassword}
-      deleteUser={deleteUser}
-      editUserFormContainer={<EditUserFormContainer userId={userId} />}
-    />
+    <UpdateUserTransitionProvider>
+      <ChangePasswordTransitionProvider>
+        <ProfileActions
+          userId={userId}
+          userFullName={userSummary.fullName}
+          changePassword={changePassword}
+          deleteUser={deleteUser}
+          editUserFormContainer={<EditUserFormContainer userId={userId} />}
+        />
+      </ChangePasswordTransitionProvider>
+    </UpdateUserTransitionProvider>
   );
 
   // Render the page with an empty tasks section.
@@ -102,31 +109,39 @@ export default async function AppProfileTasksPage({
   }
 
   return (
-    <UpdateTaskStatusesProvider updateStatus={updateTaskStatuses}>
-      <SelectedTasksProvider
-        pageItems={tasks.map((task) => ({ id: task.id, status: task.status }))}
-      >
-        <PageTransitionProvider>
-          <UserTasksPageLayout
-            selectedSortField={sort}
-            backButton
-            userTasksContainer={
-              <UserTasksContainer
-                tasks={tasks}
-                totalCount={totalCount}
-                page={page}
-                pageSize={pageSize}
+    <CurrentUserProvider value={currentUserContextValue}>
+      <UpdateTaskStatusesProvider>
+        <SelectedTasksProvider
+          pageItems={tasks.map((task) => ({
+            id: task.id,
+            status: task.status,
+          }))}
+        >
+          <PageTransitionProvider>
+            <DeleteTasksProvider>
+              <UserTasksPageLayout
+                selectedSortField={sort}
+                backButton
+                userTasksContainer={
+                  <UserTasksContainer
+                    tasks={tasks}
+                    totalCount={totalCount}
+                    page={page}
+                    pageSize={pageSize}
+                  />
+                }
+                userHeaderContainer={<UserHeaderContainer userId={userId} />}
+                navigationDesktop={
+                  <UserNavigationDesktop userActions={userActions} />
+                }
+                navigationMobile={<UserNavigationMobile />}
+                deleteTasks={deleteTasks}
+                updateTaskStatuses={updateTaskStatuses}
               />
-            }
-            userHeaderContainer={<UserHeaderContainer userId={userId} />}
-            deleteTasks={deleteTasks}
-            navigationDesktop={
-              <UserNavigationDesktop userActions={userActions} />
-            }
-            navigationMobile={<UserNavigationMobile />}
-          />
-        </PageTransitionProvider>
-      </SelectedTasksProvider>
-    </UpdateTaskStatusesProvider>
+            </DeleteTasksProvider>
+          </PageTransitionProvider>
+        </SelectedTasksProvider>
+      </UpdateTaskStatusesProvider>
+    </CurrentUserProvider>
   );
 }

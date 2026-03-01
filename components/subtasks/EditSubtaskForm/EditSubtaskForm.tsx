@@ -7,13 +7,13 @@ import {
   FormBaseSubmitButton,
 } from "@/components/common/FormBase";
 
-import { useActionState } from "react";
 import { useTranslations } from "next-intl";
 import { SubtaskTextField } from "../SubtaskTextField";
 import { ActionFn, ActionState } from "@/lib/actions/types";
-import { useCloseOverlay } from "@/lib/hooks/useCloseOverlay";
 import { handleActionSubmit } from "@/lib/utils/handleActionSubmit";
 import { FormErrorBanner } from "@/components/common/FormErrorBanner";
+import { useUpdateSubtaskTransition } from "../UpdateSubtaskTransitionContext";
+import { useUpdateEntityActionState } from "@/lib/hooks/useUpdateEntityActionState";
 
 const initialState: ActionState = {
   status: null,
@@ -36,29 +36,25 @@ export function EditSubtaskForm({
 }: EditSubtaskFormProps) {
   const t = useTranslations("subtasks.EditSubtaskForm");
 
-  const closeModal = useCloseOverlay();
+  const { startTransition } = useUpdateSubtaskTransition();
 
-  const [state, action, isPending] = useActionState(
-    async (prevState: ActionState, payload: FormData) => {
-      // call server action to perform edit subtask action
-      const newState = await updateSubtask(prevState, payload);
+  const [state, action, isPending] = useUpdateEntityActionState({
+    updateEntity: updateSubtask,
+    onSuccess: mutate,
+    successMessage: t("successMessage"),
+  });
 
-      // call swr mutate to refresh subtasks and close modal
-      if (newState.status === "success") {
-        closeModal();
-        mutate?.();
-      }
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
 
-      return newState;
-    },
-    initialState,
-  );
+    startTransition(() => {
+      action(formData);
+    });
+  }
 
   return (
-    <FormBase
-      id="edit-subtask-form"
-      onSubmit={(e) => handleActionSubmit(e, action)}
-    >
+    <FormBase id="edit-subtask-form" onSubmit={handleSubmit}>
       <FormBaseBody>
         <input type="hidden" name="id" value={subtaskId} />
         <input type="hidden" name="taskId" value={taskId} />

@@ -19,9 +19,6 @@ type Story = StoryObj<typeof meta>;
 export const Default = {
   args: {
     ...mockedUserDetail,
-    guestMode: false,
-    showUserActionMenuTrigger: true,
-    showDeleteMenuItem: true,
     editUserFormContainer: <EditUserForm {...editUserFormArgs} />,
     userDetailContainer: <UserDetail {...mockedUserDetail} />,
     deleteUser: () => ({ status: "success" }),

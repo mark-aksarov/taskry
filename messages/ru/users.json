@@ -3,10 +3,12 @@
     "title": "Изменить пароль"
   },
   "ChangePasswordForm": {
-    "submitButtonLabel": "Изменить пароль"
+    "submitButtonLabel": "Изменить пароль",
+    "successMessage": "Пароль успешно изменен"
   },
   "EditUserForm": {
-    "submitButtonLabel": "Обновить пользователя"
+    "submitButtonLabel": "Обновить пользователя",
+    "successMessage": "Пользователь успешно обновлен"
   },
   "NewUserForm": {
     "submitButtonLabel": "Создать пользователя",
@@ -80,7 +82,8 @@
     "deleteAccount": "Удалить аккаунт",
     "changePassword": "Сменить пароль",
     "editAccount": "Редактировать аккаунт",
-    "delete": "Удалить пользователя"
+    "delete": "Удалить пользователя",
+    "changePasswordSuccessMessage": "Пароль успешно изменен"
   },
   "ProfileNavigationDesktop": {
     "userInformation": "Информация о пользователе",
@@ -147,7 +150,8 @@
     "heading": "Удалить пользователя",
     "text": "Вы уверены, что хотите удалить пользователя <strong>«{name}»</strong>? Все содержимое будет безвозвратно удалено.",
     "deleteButton": "Удалить",
-    "cancelButton": "Отменить"
+    "cancelButton": "Отменить",
+    "successMessage": "Пользователь успешно удален"
   },
   "UserGridItem": {
     "noPosition": "Нет должности",
@@ -211,8 +215,5 @@
   "UsersFilteredEmptySection": {
     "heading": "Пользователи не найдены",
     "description": "По выбранным фильтрам пользователи отсутствуют. Попробуйте изменить или сбросить фильтры"
-  },
-  "DeleteUserProvider": {
-    "successMessage": "Пользователь успешно создан"
   }
 }

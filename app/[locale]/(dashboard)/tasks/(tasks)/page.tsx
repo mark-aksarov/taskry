@@ -21,13 +21,14 @@ import { TasksPageEmptyContainer } from "./TasksPageEmptyContainer";
 import { getTaskCount, getTaskList } from "@/lib/data/task/task.dal";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { updateTaskStatuses } from "@/lib/actions/task/updateTaskStatuses";
+import { DeleteTasksProvider } from "@/components/tasks/DeleteTasksContext";
 import { CurrentUserProvider } from "@/components/common/CurrentUserContext";
 import { NewTaskFormContainer } from "@/components/tasks/NewTaskFormContainer";
 import { SelectedTasksProvider } from "@/components/tasks/SelectedTasksContext";
 import { PageTransitionProvider } from "@/components/common/PageTransitionContext";
 import { createTaskCategory } from "@/lib/actions/taskCategory/createTaskCategory";
 import { TaskFiltersFormContainer } from "@/components/tasks/TaskFiltersFormContainer";
-import { UpdateTaskStatusesProvider } from "@/components/tasks/UpdateTaskStatusContext";
+import { UpdateTaskStatusesProvider } from "@/components/tasks/UpdateTaskStatusesContext";
 
 const searchParamsSchema = z.object({
   page: pageSearchParam,
@@ -97,30 +98,33 @@ export default async function AppTasksPage({
   });
 
   return (
-    <UpdateTaskStatusesProvider updateStatus={updateTaskStatuses}>
+    <UpdateTaskStatusesProvider>
       <SelectedTasksProvider
         pageItems={tasks.map((t) => ({ id: t.id, status: t.status }))}
       >
         <PageTransitionProvider>
           <CurrentUserProvider value={currentUserContextValue}>
-            <TasksPage
-              totalFilteredTasks={totalFilteredTasks}
-              selectedSortField={sort}
-              newTaskFormContainer={<NewTaskFormContainer />}
-              filtersFormContainer={
-                <TaskFiltersFormContainer filters={filters} />
-              }
-              tasksContainer={
-                <TasksContainer
-                  tasks={tasks}
-                  totalCount={totalFilteredTasks}
-                  page={page}
-                  pageSize={pageSize}
-                />
-              }
-              createTaskCategory={createTaskCategory}
-              deleteTasks={deleteTasks}
-            />
+            <DeleteTasksProvider>
+              <TasksPage
+                totalFilteredTasks={totalFilteredTasks}
+                selectedSortField={sort}
+                newTaskFormContainer={<NewTaskFormContainer />}
+                filtersFormContainer={
+                  <TaskFiltersFormContainer filters={filters} />
+                }
+                tasksContainer={
+                  <TasksContainer
+                    tasks={tasks}
+                    totalCount={totalFilteredTasks}
+                    page={page}
+                    pageSize={pageSize}
+                  />
+                }
+                createTaskCategory={createTaskCategory}
+                deleteTasks={deleteTasks}
+                updateTaskStatuses={updateTaskStatuses}
+              />
+            </DeleteTasksProvider>
           </CurrentUserProvider>
         </PageTransitionProvider>
       </SelectedTasksProvider>

@@ -1,7 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { KeyRound, Trash } from "lucide-react";
+import { Pencil, Trash } from "lucide-react";
 import { EditTaskModal } from "../EditTaskModal";
 import { startTransition, useState } from "react";
 import { TaskCommentsModal } from "../TaskCommentsModal";
@@ -10,8 +10,9 @@ import { GuestModeModal } from "@/components/common/GuestModeModal";
 import { NavigationButton } from "@/components/common/NavigationButton";
 import { useCurrentUser } from "@/components/common/CurrentUserContext";
 import { ActionFn, ActionState, DeleteTasksPayload } from "@/lib/actions/types";
-import { useDeletePageActionState } from "@/lib/hooks/useDeleteEntityPageActionState";
+import { useDeleteEntityPageActionState } from "@/lib/hooks/useDeleteEntityPageActionState";
 import { DetailActionsCommentsModalTrigger } from "@/components/common/DetailActionsCommentsModalTrigger";
+import { useUpdateTaskTransition } from "../UpdateTaskTransitionContext";
 
 interface TaskDetailActionsProps {
   taskId: number;
@@ -35,7 +36,7 @@ export function TaskDetailActions({
   const t = useTranslations("tasks.TaskDetailActions");
 
   // Deleting the task
-  const [, action, isDeletePending] = useDeletePageActionState({
+  const [, action, isDeletePending] = useDeleteEntityPageActionState({
     deleteEntity: deleteTask,
   });
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
@@ -44,7 +45,8 @@ export function TaskDetailActions({
   const { isGuest } = useCurrentUser();
   const [isGuestModeModalOpen, setIsGuestModeModalOpen] = useState(false);
 
-  // Modal state for editing the task
+  // Editing the task
+  const { isPending: isUpdatePending } = useUpdateTaskTransition();
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
   function handleDeletePress() {
@@ -85,9 +87,8 @@ export function TaskDetailActions({
           data-test="edit-task-button"
           onPress={handleEditPress}
           variant="secondary"
-          iconLeft={
-            <KeyRound size={18} strokeWidth={1.5} absoluteStrokeWidth />
-          }
+          isPending={isUpdatePending}
+          iconLeft={<Pencil size={18} strokeWidth={1.5} absoluteStrokeWidth />}
           label={t("edit")}
         />
         <DetailActionsCommentsModalTrigger

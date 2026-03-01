@@ -12,24 +12,37 @@ import { startTransition } from "react";
 import { useTranslations } from "next-intl";
 import { ModalProps } from "@/components/ui/Modal";
 import { DialogHeading } from "@/components/ui/Dialog";
-import { useDeleteSubtaskContext } from "../DeleteSubtaskContext";
+import { ActionFn, ActionState } from "@/lib/actions/types";
+import { useDeleteSubtaskTransition } from "../DeleteSubtaskTransitionContext";
+import { useDeleteEntityActionState } from "@/lib/hooks/useDeleteEntityActionState";
 
 interface DeleteSubtaskModalProps extends ModalProps {
   subtaskId: number;
   subtaskText: string;
+  deleteSubtask: ActionFn<ActionState, number>;
+  mutate?: () => void;
 }
 
 export function DeleteSubtaskModal({
   subtaskId,
   subtaskText,
+  deleteSubtask,
+  mutate,
   isOpen,
   onOpenChange,
 }: DeleteSubtaskModalProps) {
   const t = useTranslations("subtasks.DeleteSubtaskModal");
 
-  const { action } = useDeleteSubtaskContext();
+  const { startTransition } = useDeleteSubtaskTransition();
+
+  const [, action] = useDeleteEntityActionState({
+    deleteEntity: deleteSubtask,
+    onSuccess: mutate,
+    successMessage: t("successMessage"),
+  });
 
   function handleDelete() {
+    //close modal before deleting
     onOpenChange?.(false);
     startTransition(() => action(subtaskId));
   }

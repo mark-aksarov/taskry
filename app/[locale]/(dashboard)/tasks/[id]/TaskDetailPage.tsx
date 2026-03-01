@@ -16,6 +16,7 @@ import { PageContainer } from "@/components/common/PageContainer";
 import { TaskDetailCard } from "@/components/tasks/TaskDetailCard";
 import { TaskDetailActions } from "@/components/tasks/TaskDetailActions";
 import { ActionFn, ActionState, DeleteTasksPayload } from "@/lib/actions/types";
+import { UpdateTaskTransitionProvider } from "@/components/tasks/UpdateTaskTransitionContext";
 
 interface TaskDetailPageProps {
   taskId: number;
@@ -45,15 +46,17 @@ export function TaskDetailPage({
   const t = useTranslations("app.TaskDetailPage");
 
   const taskDetailActions = (
-    <TaskDetailActions
-      taskId={taskId}
-      taskTitle={taskTitle}
-      editTaskFormContainer={editTaskFormContainer}
-      taskCommentsContainer={taskCommentsContainer}
-      deleteTask={deleteTask}
-      sendComment={sendComment}
-      updateComment={updateComment}
-    />
+    <UpdateTaskTransitionProvider>
+      <TaskDetailActions
+        taskId={taskId}
+        taskTitle={taskTitle}
+        editTaskFormContainer={editTaskFormContainer}
+        taskCommentsContainer={taskCommentsContainer}
+        deleteTask={deleteTask}
+        sendComment={sendComment}
+        updateComment={updateComment}
+      />
+    </UpdateTaskTransitionProvider>
   );
 
   return (

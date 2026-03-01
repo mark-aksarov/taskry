@@ -11,32 +11,35 @@ import {
   ToggleSubtaskPayload,
 } from "@/lib/actions/types";
 
+import { useState } from "react";
 import { tv } from "tailwind-variants";
 import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
 import { Button } from "react-aria-components";
-import { startTransition, useState } from "react";
 import { focusRing } from "@/components/ui/styles";
 import { EditSubtaskModal } from "../EditSubtaskModal";
-import { CheckCheck, Pencil, Trash } from "lucide-react";
 import { DeleteSubtaskModal } from "../DeleteSubtaskModal";
 import { GuestModeModal } from "../../common/GuestModeModal";
-import { useDeleteSubtaskContext } from "../DeleteSubtaskContext";
+import { CheckCheck, Loader2, Pencil, Trash } from "lucide-react";
 import { useCurrentUser } from "@/components/common/CurrentUserContext";
+import { useToggleSubtaskTransition } from "../ToggleSubtaskTransitionContext";
 import { useToggleSubtaskStatusActionState } from "./useToggleSubtaskStatusActionState";
+import { useSubtaskListItemPending } from "../SubtaskListItem/useSubtaskListItemPending";
 
 interface SubtaskActionMenuTriggerProps {
+  taskId: number;
   subtaskId: number;
   subtaskText: string;
   isDone: boolean;
   toggleSubtask: ActionFn<ActionState, ToggleSubtaskPayload>;
-  editSubtaskForm: React.ReactNode;
+  updateSubtask: ActionFn<ActionState, FormData>;
+  deleteSubtask: ActionFn<ActionState, number>;
   mutate?: () => void;
 }
 
 const buttonStyles = tv({
   extend: focusRing,
-  base: "pressed:underline cursor-pointer text-left text-sm hover:underline",
+  base: "pressed:underline flex cursor-pointer items-center gap-2 text-left text-sm hover:underline",
   variants: {
     isDone: {
       true: "text-black dark:text-white",
@@ -46,25 +49,28 @@ const buttonStyles = tv({
 });
 
 export function SubtaskActionMenuTrigger({
+  taskId,
   subtaskId,
   subtaskText,
   isDone,
   toggleSubtask,
-  editSubtaskForm,
+  updateSubtask,
+  deleteSubtask,
   mutate,
 }: SubtaskActionMenuTriggerProps) {
   const t = useTranslations("subtasks.SubtaskActionMenuTrigger");
 
   // Deleting the subtask
-  const { isPending: isDeletePending } = useDeleteSubtaskContext();
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
   // Toggle subtask status
-  const [_toggleSubtaskState, toggleSubtaskAction, _isToggleSubtaskPending] =
-    useToggleSubtaskStatusActionState({
-      toggleSubtask,
-      mutate,
-    });
+  const [, toggleSubtaskAction] = useToggleSubtaskStatusActionState({
+    toggleSubtask,
+    mutate,
+    successMessage: t("toggleSuccess"),
+  });
+  const { startTransition: startToggleTransition } =
+    useToggleSubtaskTransition();
 
   // Guest mode
   const { isGuest } = useCurrentUser();
@@ -84,11 +90,14 @@ export function SubtaskActionMenuTrigger({
     } else if (key === "edit") {
       setIsOpenEditModal(true);
     } else if (key === "toggle") {
-      startTransition(() =>
+      startToggleTransition(() =>
         toggleSubtaskAction({ id: subtaskId, isDone: !isDone }),
       );
     }
   }
+
+  //Pending state while deleting or updating
+  const isPending = useSubtaskListItemPending();
 
   return (
     <>
@@ -98,12 +107,21 @@ export function SubtaskActionMenuTrigger({
         renderDialogHeader={() => <ItemBaseActionMenuDialogHeader />}
         renderButton={() => (
           <Button
-            isPending={isDeletePending}
+            isPending={isPending}
             className={(renderProps) =>
               buttonStyles({ ...renderProps, isDone })
             }
           >
             {subtaskText}
+            {isPending && (
+              <Loader2
+                data-testid="loader-icon"
+                size={16}
+                strokeWidth={1.5}
+                absoluteStrokeWidth
+                className="animate-spin"
+              />
+            )}
           </Button>
         )}
       >
@@ -120,8 +138,12 @@ export function SubtaskActionMenuTrigger({
 
       <EditSubtaskModal
         isOpen={isOpenEditModal}
+        taskId={taskId}
+        subtaskId={subtaskId}
+        subtaskText={subtaskText}
         onOpenChange={setIsOpenEditModal}
-        editSubtaskForm={editSubtaskForm}
+        updateSubtask={updateSubtask}
+        mutate={mutate}
       />
 
       <DeleteSubtaskModal
@@ -129,6 +151,8 @@ export function SubtaskActionMenuTrigger({
         onOpenChange={setIsDeleteModalOpen}
         subtaskId={subtaskId}
         subtaskText={subtaskText}
+        deleteSubtask={deleteSubtask}
+        mutate={mutate}
       />
 
       <GuestModeModal

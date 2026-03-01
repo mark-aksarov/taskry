@@ -1,6 +1,6 @@
 "use client";
 
-import { Pencil } from "lucide-react";
+import { MessageSquare, Pencil } from "lucide-react";
 import { DialogTrigger } from "react-aria-components";
 import { NavigationButton } from "@/components/common/NavigationButton";
 import { CommentFormProvider } from "@/components/comments/CommentFormContext";
@@ -28,7 +28,9 @@ function DetailActionsCommentsModalTriggerInner({
     <DialogTrigger>
       <NavigationButton
         variant="secondary"
-        iconLeft={<Pencil size={18} strokeWidth={1.5} absoluteStrokeWidth />}
+        iconLeft={
+          <MessageSquare size={18} strokeWidth={1.5} absoluteStrokeWidth />
+        }
         label={label}
       />
       {modal}

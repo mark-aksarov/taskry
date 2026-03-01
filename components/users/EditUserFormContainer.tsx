@@ -25,7 +25,7 @@ function EditUserFormContainerInner({ userId }: EditUserFormContainerProps) {
     suspense: true,
   });
 
-  const { data: user } = useSWR<UserFormDataDTO>(
+  const { data: user, mutate } = useSWR<UserFormDataDTO>(
     `/api/users/${userId}?view=edit`,
     {
       suspense: true,
@@ -58,6 +58,7 @@ function EditUserFormContainerInner({ userId }: EditUserFormContainerProps) {
       userPositionSelectDefaultValue={user.positionId?.toString()}
       userPositionSelectItems={positions}
       updateUser={updateUser}
+      mutate={mutate}
     />
   );
 }

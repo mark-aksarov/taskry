@@ -7,14 +7,24 @@ import {
 import { useTranslations } from "next-intl";
 import { ModalProps } from "@/components/ui/Modal";
 import { DialogHeader } from "@/components/ui/Dialog";
+import { EditSubtaskForm } from "../EditSubtaskForm";
+import { ActionFn, ActionState } from "@/lib/actions/types";
 
 interface EditSubtaskModalProps
   extends Pick<ModalProps, "isOpen" | "onOpenChange"> {
-  editSubtaskForm: React.ReactNode;
+  subtaskId: number;
+  taskId: number;
+  mutate?: () => void;
+  subtaskText?: string;
+  updateSubtask: ActionFn<ActionState, FormData>;
 }
 
 export function EditSubtaskModal({
-  editSubtaskForm,
+  subtaskId,
+  taskId,
+  mutate,
+  subtaskText,
+  updateSubtask,
   ...props
 }: EditSubtaskModalProps) {
   const t = useTranslations("subtasks.EditSubtaskModal");
@@ -27,7 +37,15 @@ export function EditSubtaskModal({
     >
       <FormBaseModalDialog>
         <DialogHeader>{t("heading")}</DialogHeader>
-        <FormBaseModalDialogBody>{editSubtaskForm}</FormBaseModalDialogBody>
+        <FormBaseModalDialogBody>
+          <EditSubtaskForm
+            taskId={taskId}
+            subtaskId={subtaskId}
+            updateSubtask={updateSubtask}
+            textDefaultValue={subtaskText}
+            mutate={mutate}
+          />
+        </FormBaseModalDialogBody>
       </FormBaseModalDialog>
     </FormBaseModal>
   );

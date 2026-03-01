@@ -10,6 +10,7 @@ import { PageTransitionProvider } from "@/components/common/PageTransitionContex
 import { getTaskCategorySummaries } from "@/lib/data/taskCategory/taskCategory.dal";
 import { deleteTaskCategories } from "@/lib/actions/taskCategory/deleteTaskCategories";
 import { TaskCategoriesContainer } from "@/components/taskCategory/TaskCategoriesContainer";
+import { DeleteTaskCategoriesProvider } from "@/components/taskCategory/DeleteTaskCategoriesContext";
 
 export default async function AppTaskCategoriesPage() {
   // Authorization
@@ -40,11 +41,13 @@ export default async function AppTaskCategoriesPage() {
         pageItems={taskCategories.map((t) => ({ id: t.id }))}
       >
         <PageTransitionProvider>
-          <TaskCategoriesPage
-            taskCategoriesContainer={<TaskCategoriesContainer />}
-            createTaskCategory={createTaskCategory}
-            deleteTaskCategories={deleteTaskCategories}
-          />
+          <DeleteTaskCategoriesProvider>
+            <TaskCategoriesPage
+              taskCategoriesContainer={<TaskCategoriesContainer />}
+              createTaskCategory={createTaskCategory}
+              deleteTaskCategories={deleteTaskCategories}
+            />
+          </DeleteTaskCategoriesProvider>
         </PageTransitionProvider>
       </SelectedItemsProvider>
     </CurrentUserProvider>

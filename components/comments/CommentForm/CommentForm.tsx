@@ -1,12 +1,13 @@
 "use client";
 
 import { useSWRConfig } from "swr";
+import { useActionState } from "react";
 import { Form } from "react-aria-components";
 import { CommentTextField } from "../CommentTextField";
-import { startTransition, useActionState } from "react";
 import { useErrorToast } from "@/lib/hooks/useErrorToast";
 import { ActionFn, ActionState } from "@/lib/actions/types";
 import { useCommentFormContext } from "../CommentFormContext";
+import { useSendCommentTransition } from "../SendCommentTransitionContext";
 
 const initialState: ActionState = {
   status: null,
@@ -26,8 +27,9 @@ export function CommentForm({
   const { mutate } = useSWRConfig();
 
   const { add: addErrorToast, close: closeErrorToast } = useErrorToast();
-  const { setCommentContent } = useCommentFormContext();
+  const { setCommentContent, setEditCommentId } = useCommentFormContext();
 
+  const { startTransition } = useSendCommentTransition();
   const [, action, isPending] = useActionState(
     async (prevState: ActionState, payload: FormData) => {
       const newState = await sendCommentAction(prevState, payload);
@@ -37,6 +39,7 @@ export function CommentForm({
       if (newState.status === "success") {
         await mutate(mutateUrl);
         setCommentContent("");
+        setEditCommentId(undefined);
       } else if (newState.status === "error" && newState.message) {
         addErrorToast(newState.message);
       }

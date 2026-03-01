@@ -17,13 +17,9 @@ import { AppHeaderStory } from "@/components/layout/AppHeader/__stories__";
 import { newTaskFormArgs } from "@/components/tasks/NewTaskForm/__stories__";
 import { taskFiltersFormArgs } from "@/components/tasks/TaskFiltersForm/__stories__";
 import { withTaskFiltersProvider } from "@/components/tasks/TaskFiltersContext/__stories__";
-import { withDeleteTaskModalProvider } from "@/components/tasks/DeleteTaskModal/__stories__";
 import { EntityContainerPresentation } from "@/components/common/EntityContainerPresentation";
 import { withSelectedTasksProvider } from "@/components/tasks/SelectedTasksContext/__stories__";
 import { withPageTransitionProvider } from "@/components/common/PageTransitionContext/__stories__";
-import { withDeleteSubtaskModalProvider } from "@/components/subtasks/DeleteSubtaskModal/__stories__";
-import { withDeleteCommentModalProvider } from "@/components/comments/DeleteCommentModal/__stories__";
-import { withUpdateTaskStatusesProvider } from "@/components/tasks/UpdateTaskStatusContext/__stories__";
 
 const meta = {
   title: "pages/TasksPage",
@@ -36,12 +32,8 @@ const meta = {
       </TasksTemplate>
     ),
     withTaskFiltersProvider,
-    withDeleteTaskModalProvider,
     withPageTransitionProvider,
     withSelectedTasksProvider,
-    withDeleteSubtaskModalProvider,
-    withDeleteCommentModalProvider,
-    withUpdateTaskStatusesProvider,
     PageDecorator,
     withThemedBackground,
   ],
@@ -56,7 +48,6 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    guestMode: false,
     totalFilteredTasks: 3,
     selectedSortField: "title",
     tasksContainer: (
@@ -72,6 +63,7 @@ export const Default = {
     newTaskFormContainer: <NewTaskForm {...newTaskFormArgs} />,
     createTaskCategory: () => ({ status: "success" }),
     deleteTasks: () => ({ status: "success" }),
+    updateTaskStatuses: () => ({ status: "success" }),
   },
 } satisfies Story;
 
@@ -84,7 +76,6 @@ export const WithNoTasks = {
   args: { ...Default.args },
   render: () => (
     <TasksPageEmptyContainer
-      guestMode={false}
       newTaskFormContainer={<NewTaskForm {...newTaskFormArgs} />}
       createTaskCategory={() => ({ status: "success" })}
     />

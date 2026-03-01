@@ -1,9 +1,7 @@
 {
-  "DeleteTaskProvider": {
-    "successMessage": "Задача успешно удалена"
-  },
   "EditTaskForm": {
-    "submitButtonLabel": "Обновить задачу"
+    "submitButtonLabel": "Обновить задачу",
+    "successMessage": "Задача успешно обновлена"
   },
   "NewTaskForm": {
     "submitButtonLabel": "Создать задачу",
@@ -79,13 +77,15 @@
     "heading": "Удалить задачу",
     "text": "Вы уверены, что хотите удалить <strong>«{name}»</strong>? Всё содержимое будет безвозвратно удалено.",
     "deleteButton": "Удалить",
-    "cancelButton": "Отмена"
+    "cancelButton": "Отмена",
+    "successMessage": "Задача успешно удалена"
   },
   "DeleteTasksModal": {
     "heading": "Удалить задачи",
     "text": "Вы уверены, что хотите удалить <strong>{count} выбранных задач</strong>? Всё содержимое будет безвозвратно удалено.",
     "deleteButton": "Удалить",
-    "cancelButton": "Отмена"
+    "cancelButton": "Отмена",
+    "successMessage": "Задачи успешно удалены"
   },
   "NewTaskModal": {
     "title": "Новая задача"

@@ -3,13 +3,12 @@ import { Button } from "@/components/ui/Button";
 import { Meta, StoryObj } from "@storybook/react";
 import { Repeat } from "@/components/common/Repeat";
 import { DialogTrigger } from "react-aria-components";
+import { CommentItemSkeleton } from "../../CommentItem";
 import { EntityCommentsModal } from "../EntityCommentsModal";
 import { getCommentList } from "../../CommentList/__stories__";
 import { CommentsEmptySection } from "../../CommentsEmptySection";
-import { CommentItem, CommentItemSkeleton } from "../../CommentItem";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withCommentFormProvider } from "@/components/comments/withCommentFormProvider";
-import { withDeleteCommentModalProvider } from "@/components/comments/DeleteCommentModal/__stories__";
 
 const meta = {
   title: "components/comments/EntityCommentsModal",
@@ -25,7 +24,6 @@ const meta = {
         </DialogTrigger>
       );
     },
-    withDeleteCommentModalProvider,
     withCommentFormProvider,
     withThemedBackground,
   ],

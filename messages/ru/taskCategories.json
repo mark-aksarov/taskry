@@ -1,7 +1,4 @@
 {
-  "DeleteTaskCategoryProvider": {
-    "successMessage": "Категория задач успешно удалена"
-  },
   "NewTaskCategoryForm": {
     "submitButtonLabel": "Создать категорию",
     "successMessage": "Категория задач успешно создана"
@@ -26,12 +23,13 @@
   "TaskCategoryToolbarCreateNewModalTrigger": {
     "label": "Создать новую"
   },
-  "TaskCategoryItemActionMenuTrigger": {
+  "TaskCategoryListItemActionMenuTrigger": {
     "edit": "Редактировать",
     "delete": "Удалить"
   },
   "EditTaskCategoryForm": {
-    "submitButtonLabel": "Обновить категорию задачи"
+    "submitButtonLabel": "Обновить категорию задачи",
+    "successMessage": "Категория задач успешно обновлена"
   },
   "EditTaskCategoryModal": {
     "title": "Изменить категорию задачи"
@@ -40,12 +38,14 @@
     "heading": "Удалить категории задач",
     "text": "Вы уверены, что хотите удалить <strong>{count} выбранные категории задач</strong>? Все содержимое будет безвозвратно удалено.",
     "cancelButton": "Отменить",
-    "deleteButton": "Удалить"
+    "deleteButton": "Удалить",
+    "successMessage": "Категории задач успешно удалены"
   },
   "DeleteTaskCategoryModal": {
     "heading": "Удалить категорию задач",
     "text": "Вы уверены, что хотите удалить категорию задач <strong>«{name}»</strong>? Все содержимое будет безвозвратно удалено.",
     "cancelButton": "Отменить",
-    "deleteButton": "Удалить"
+    "deleteButton": "Удалить",
+    "successMessage": "Категория задач успешно удалена"
   }
 }

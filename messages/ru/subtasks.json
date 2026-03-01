@@ -1,6 +1,7 @@
 {
   "EditSubtaskForm": {
-    "submitButtonLabel": "Обновить подзадачу"
+    "submitButtonLabel": "Обновить подзадачу",
+    "successMessage": "Подзадача успешно обновлена"
   },
   "NewSubtaskForm": {
     "submitButtonLabel": "Добавить подзадачу",
@@ -10,13 +11,15 @@
     "heading": "Удалить подзадачу",
     "text": "Вы уверены, что хотите удалить подзадачу <strong>«{text}»</strong>?",
     "deleteButton": "Удалить",
-    "cancelButton": "Отмена"
+    "cancelButton": "Отмена",
+    "successMessage": "Подзадача успешно удалена"
   },
   "SubtaskActionMenuTrigger": {
     "edit": "Редактировать",
     "done": "Отметить как «Выполнено»",
     "undone": "Отметить как «Не выполнено»",
-    "delete": "Удалить"
+    "delete": "Удалить",
+    "toggleSuccess": "Подзадача успешно обновлена"
   },
   "SubtasksCheckboxGroup": {
     "label": "Подзадачи"
@@ -43,8 +46,5 @@
   },
   "NewSubtasksButton": {
     "label": "Новая подзадача"
-  },
-  "DeleteSubtaskProvider": {
-    "successMessage": "Подзадача успешно удалена"
   }
 }

@@ -11,16 +11,11 @@ import { editTaskFormArgs } from "../../EditTaskForm/__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { getCommentList } from "@/components/comments/CommentList/__stories__";
 import { withSelectedTasksProvider } from "../../SelectedTasksContext/__stories__";
-import { withUpdateTaskStatusesProvider } from "../../UpdateTaskStatusContext/__stories__";
 
 const meta = {
   title: "components/tasks/TaskGridItem",
   component: TaskGridItem,
-  decorators: [
-    withSelectedTasksProvider,
-    withUpdateTaskStatusesProvider,
-    withThemedBackground,
-  ],
+  decorators: [withSelectedTasksProvider, withThemedBackground],
 } satisfies Meta<typeof TaskGridItem>;
 
 export default meta;
@@ -33,7 +28,6 @@ export const Default = {
     ...task,
     subtasksTotal: task.subtasks.total,
     subtasksDone: task.subtasks.done,
-    guestMode: false,
     taskCommentsContainer: getCommentList(),
     editTaskFormContainer: <EditTaskForm {...editTaskFormArgs} />,
     taskDetailContainer: <TaskDetail {...taskDetailArgs} />,

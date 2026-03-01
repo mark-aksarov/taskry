@@ -16,17 +16,12 @@ import { AppHeaderStory } from "@/components/layout/AppHeader/__stories__";
 import { getCommentList } from "@/components/comments/CommentList/__stories__";
 import { ProjectDetailHeader } from "@/components/projects/ProjectDetailHeader";
 import { editProjectFormArgs } from "@/components/projects/EditProjectForm/__stories__";
-import { withDeleteCommentModalProvider } from "@/components/comments/DeleteCommentModal/__stories__";
 
 const meta = {
   title: "pages/ProjectDetailPage",
   component: ProjectDetailPage,
   parameters: { layout: "fullscreen" },
-  decorators: [
-    PageDecorator,
-    withDeleteCommentModalProvider,
-    withThemedBackground,
-  ],
+  decorators: [PageDecorator, withThemedBackground],
   beforeEach: () => {
     mocked(usePathname).mockReturnValue("/projects/1");
     mocked(useParams).mockReturnValue({
@@ -42,7 +37,6 @@ const project = mockedProjectDetail;
 
 export const Default = {
   args: {
-    guestMode: false,
     projectId: project.id,
     projectTitle: project.title,
     sendComment: () => ({ status: "success" }),

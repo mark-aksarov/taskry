@@ -30,5 +30,6 @@ export const Default = {
     userFullName: "User 1",
     isOpen: true,
     onOpenChange: () => {},
+    deleteUser: () => ({ status: "success" }),
   },
 } satisfies Story;

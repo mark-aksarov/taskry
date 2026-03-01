@@ -8,18 +8,11 @@ import { taskDetailArgs } from "@/components/tasks/TaskDetail/__stories__";
 import { editTaskFormArgs } from "@/components/tasks/EditTaskForm/__stories__";
 import { getCommentList } from "@/components/comments/CommentList/__stories__";
 import { withSelectedTasksProvider } from "@/components/tasks/SelectedTasksContext/__stories__";
-import { withDeleteCommentModalProvider } from "@/components/comments/DeleteCommentModal/__stories__";
-import { withUpdateTaskStatusesProvider } from "@/components/tasks/UpdateTaskStatusContext/__stories__";
 
 const meta = {
   title: "components/users/UserTaskListItem",
   component: UserTaskListItem,
-  decorators: [
-    withSelectedTasksProvider,
-    withDeleteCommentModalProvider,
-    withUpdateTaskStatusesProvider,
-    withThemedBackground,
-  ],
+  decorators: [withSelectedTasksProvider, withThemedBackground],
   parameters: {
     backgroundVariant: "alt",
   },
@@ -35,7 +28,6 @@ export const Default = {
     deadline: "2025-09-30",
     status: TaskStatus.pending,
     commentsCount: 10,
-    guestMode: false,
     taskDetailContainer: <TaskDetail {...taskDetailArgs} />,
     taskCommentsContainer: getCommentList(),
     editTaskFormContainer: <EditTaskForm {...editTaskFormArgs} />,

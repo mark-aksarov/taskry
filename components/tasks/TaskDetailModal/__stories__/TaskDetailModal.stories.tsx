@@ -7,7 +7,6 @@ import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { getSubtasksList } from "../../TaskDetail/__stories__";
 import { TaskDetail, TaskDetailSkeleton } from "../../TaskDetail";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withDeleteSubtaskModalProvider } from "@/components/subtasks/DeleteSubtaskModal/__stories__";
 
 const meta = {
   title: "components/tasks/TaskDetailModal",
@@ -23,7 +22,6 @@ const meta = {
         </DialogTrigger>
       );
     },
-    withDeleteSubtaskModalProvider,
     withThemedBackground,
   ],
 } satisfies Meta<typeof TaskDetailModal>;

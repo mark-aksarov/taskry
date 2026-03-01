@@ -5,13 +5,19 @@ import {
   ToolbarMobileHeading,
 } from "@/components/common/Toolbar";
 
+import {
+  ActionFn,
+  ActionState,
+  DeleteTasksPayload,
+  UpdateTaskStatusesPayload,
+} from "@/lib/actions/types";
+
 import { useTranslations } from "next-intl";
 import { TaskSortField } from "@/lib/types";
 import { PageGrid } from "@/components/common/PageGrid";
 import { ViewModeProvider } from "@/components/common/ViewMode";
 import { PageContainer } from "@/components/common/PageContainer";
 import { ViewModeToggleButtonGroup } from "@/components/common/ViewMode";
-import { ActionFn, ActionState, DeleteTasksPayload } from "@/lib/actions/types";
 import { TasksFilteredEmptySection } from "@/components/tasks/TasksFilteredEmptySection";
 import { TaskToolbarManageMenuTrigger } from "@/components/tasks/TaskToolbarManageMenuTrigger";
 import { TaskToolbarSortingMenuTrigger } from "@/components/tasks/TaskToolbarSortingMenuTrigger";
@@ -27,6 +33,7 @@ interface TasksPageProps {
   newTaskFormContainer: React.ReactNode;
   createTaskCategory: ActionFn<ActionState, FormData>;
   deleteTasks: ActionFn<ActionState, DeleteTasksPayload>;
+  updateTaskStatuses: ActionFn<ActionState, UpdateTaskStatusesPayload>;
 }
 
 export function TasksPage({
@@ -37,6 +44,7 @@ export function TasksPage({
   newTaskFormContainer,
   createTaskCategory,
   deleteTasks,
+  updateTaskStatuses,
 }: TasksPageProps) {
   const t = useTranslations("app.TasksPage");
 
@@ -48,7 +56,10 @@ export function TasksPage({
   );
 
   const taskToolbarActionsMenuTrigger = (
-    <TaskToolbarActionsMenuTrigger deleteTasks={deleteTasks} />
+    <TaskToolbarActionsMenuTrigger
+      deleteTasks={deleteTasks}
+      updateTaskStatuses={updateTaskStatuses}
+    />
   );
 
   const taskToolbarFiltersModalTrigger = (

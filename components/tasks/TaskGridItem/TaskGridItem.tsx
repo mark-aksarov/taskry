@@ -9,96 +9,32 @@ import {
 } from "@/components/common/Grid";
 
 import {
-  ActionFn,
-  ActionState,
-  DeleteTasksPayload,
-  UpdateTaskStatusesPayload,
-} from "@/lib/actions/types";
-
-import {
   ItemBaseDetailModalTrigger,
   ItemBaseCommentsModalTrigger,
 } from "@/components/common/ItemBase";
 
 import { memo } from "react";
 import Image from "next/image";
+import { TaskItemProps } from "../TaskItem";
 import { Link } from "@/components/ui/Link";
 import { TaskDetailModal } from "../TaskDetailModal";
-import { TaskStatus } from "@/generated/prisma/enums";
-import { TaskItemCheckbox } from "../TaskItemCheckbox";
 import { TaskCommentsModal } from "../TaskCommentsModal";
 import { TaskItemBaseBadge } from "../TaskItemBaseBadge";
-import { DeleteTaskProvider } from "../DeleteTaskContext";
 import { useFormatter, useTranslations } from "next-intl";
 import { TaskGridItemLayout } from "./TaskGridItemLayout";
-import { useSelectedTasks } from "../SelectedTasksContext";
-import { SelectableItem } from "../../common/SelectableItem";
 import { UnknownUser } from "@/components/common/UnknownUser";
-import { TaskItemDeleteOverlay } from "../TaskItemDeleteOverlay";
+import { TaskItemCheckbox } from "../TaskItem/TaskItemCheckbox";
 import { ImageContainer } from "@/components/common/ImageContainer";
 import { UserDetailModal } from "@/components/users/UserDetailModal";
-import { UpdateTaskStatusProvider } from "../UpdateTaskStatusContext";
-import { TaskItemActionMenuTrigger } from "../TaskItemActionMenuTrigger";
+import { TaskItemActionMenuTrigger } from "../TaskItem/TaskItemActionMenuTrigger";
 
-export interface TaskGridItemProps {
-  id: number;
-  title: string;
-  deadline: string;
-  assignee?: {
-    id: string;
-    imageUrl?: string;
-    fullName: string;
-  };
-  commentsCount: number;
-  status: TaskStatus;
-  subtasksTotal: number;
-  subtasksDone: number;
-  taskCommentsContainer: React.ReactNode;
-  editTaskFormContainer: React.ReactNode;
-  taskDetailContainer: React.ReactNode;
-  userDetailContainer: React.ReactNode;
-  sendComment: ActionFn<ActionState, FormData>;
-  updateComment: ActionFn<ActionState, FormData>;
-  updateTaskStatus: ActionFn<ActionState, UpdateTaskStatusesPayload>;
-  deleteTask: ActionFn<ActionState, DeleteTasksPayload>;
-}
+export type TaskGridItemProps = Omit<
+  TaskItemProps,
+  "category" | "project" | "showCheckbox" | "projectDetailContainer"
+>;
 
-export const TaskGridItem = ({
-  updateTaskStatus,
-  deleteTask,
-  ...props
-}: TaskGridItemProps) => {
-  const selected = useSelectedTasks();
-
-  const isSelected = !!selected.get(props.id);
-
-  return (
-    <DeleteTaskProvider deleteTask={deleteTask}>
-      <UpdateTaskStatusProvider updateStatus={updateTaskStatus}>
-        <TaskItemDeleteOverlay>
-          <SelectableItem
-            {...selected}
-            item={{ id: props.id, status: props.status }}
-          >
-            <TaskGridItemInner {...props} isSelected={isSelected} />
-          </SelectableItem>
-        </TaskItemDeleteOverlay>
-      </UpdateTaskStatusProvider>
-    </DeleteTaskProvider>
-  );
-};
-
-// `isSelected` is used in `TaskItemBaseBadge` because `useSelectedTasks` cannot be called inside it.
-type TaskGridItemInnerProps = Omit<
-  TaskGridItemProps,
-  "updateTaskStatus" | "deleteTask"
-> & {
-  isSelected?: boolean;
-};
-
-export const TaskGridItemInner = memo(
+export const TaskGridItem = memo(
   ({
-    isSelected,
     id,
     title,
     deadline,
@@ -113,7 +49,9 @@ export const TaskGridItemInner = memo(
     userDetailContainer,
     sendComment,
     updateComment,
-  }: TaskGridItemInnerProps) => {
+    deleteTask,
+    updateTaskStatus,
+  }: TaskGridItemProps) => {
     const t = useTranslations("tasks.TaskGridItem");
 
     // use useFormatter to format the date according to the user's locale
@@ -150,6 +88,8 @@ export const TaskGridItemInner = memo(
             taskStatus={status}
             editTaskFormContainer={editTaskFormContainer}
             className="-mr-2"
+            deleteTask={deleteTask}
+            updateTaskStatus={updateTaskStatus}
           />
         }
         titleSlot={
@@ -217,11 +157,7 @@ export const TaskGridItemInner = memo(
           />
         }
         statusSlot={
-          <TaskItemBaseBadge
-            isSelected={isSelected}
-            deadline={deadline}
-            status={status}
-          />
+          <TaskItemBaseBadge taskId={id} deadline={deadline} status={status} />
         }
         progressSlot={
           <GridItemProgress

@@ -15,4 +15,5 @@ export const editUserFormArgs = {
   userPositionSelectDefaultValue: user.position.id.toString(),
   userPositionSelectItems: mockedPositionSummaries,
   updateUser: () => ({ status: "success" as const }),
+  mutate: () => {},
 };

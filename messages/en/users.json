@@ -3,10 +3,12 @@
     "title": "Change Password"
   },
   "ChangePasswordForm": {
-    "submitButtonLabel": "Change Password"
+    "submitButtonLabel": "Change Password",
+    "successMessage": "Password changed successfully"
   },
   "EditUserForm": {
-    "submitButtonLabel": "Update user"
+    "submitButtonLabel": "Update user",
+    "successMessage": "User updated successfully"
   },
   "NewUserForm": {
     "submitButtonLabel": "Create User",
@@ -80,7 +82,8 @@
     "deleteAccount": "Delete account",
     "changePassword": "Change password",
     "editAccount": "Edit account",
-    "delete": "Delete user"
+    "delete": "Delete user",
+    "changePasswordSuccessMessage": "Password changed successfully"
   },
   "ProfileNavigationDesktop": {
     "userInformation": "User Information",
@@ -147,7 +150,8 @@
     "heading": "Delete user",
     "text": "Are you sure you want to delete user <strong>«{name}»</strong>? All contents will be permanently removed.",
     "deleteButton": "Delete",
-    "cancelButton": "Cancel"
+    "cancelButton": "Cancel",
+    "successMessage": "User deleted successfully"
   },
   "UserGridItem": {
     "noPosition": "No position",

@@ -1,3 +1,5 @@
+"use client";
+
 import {
   ActionFn,
   ActionState,
@@ -7,10 +9,11 @@ import {
 import { memo } from "react";
 import { Check } from "lucide-react";
 import { twMerge } from "tailwind-merge";
-import { EditSubtaskForm } from "../EditSubtaskForm";
-import { DeleteSubtaskProvider } from "../DeleteSubtaskContext";
 import { SubtaskActionMenuTrigger } from "../SubtaskActionMenuTrigger";
-import { SubtaskItemDeleteOverlay } from "../SubtaskItemDeleteOverlay";
+import { SubtaskListItemPendingOverlay } from "./SubtaskListItemPendingOverlay";
+import { DeleteSubtaskTransitionProvider } from "../DeleteSubtaskTransitionContext";
+import { UpdateSubtaskTransitionProvider } from "../UpdateSubtaskTransitionContext";
+import { ToggleSubtaskTransitionProvider } from "../ToggleSubtaskTransitionContext";
 
 interface SubtaskListItemProps {
   id: number;
@@ -23,16 +26,17 @@ interface SubtaskListItemProps {
   mutate?: () => void;
 }
 
-export function SubtaskListItem({
-  deleteSubtask,
-  ...props
-}: SubtaskListItemProps) {
+export function SubtaskListItem(props: SubtaskListItemProps) {
   return (
-    <DeleteSubtaskProvider deleteSubtask={deleteSubtask}>
-      <SubtaskItemDeleteOverlay>
-        <SubtaskListItemInner {...props} />
-      </SubtaskItemDeleteOverlay>
-    </DeleteSubtaskProvider>
+    <DeleteSubtaskTransitionProvider>
+      <UpdateSubtaskTransitionProvider>
+        <ToggleSubtaskTransitionProvider>
+          <SubtaskListItemPendingOverlay>
+            <SubtaskListItemInner {...props} />
+          </SubtaskListItemPendingOverlay>
+        </ToggleSubtaskTransitionProvider>
+      </UpdateSubtaskTransitionProvider>
+    </DeleteSubtaskTransitionProvider>
   );
 }
 
@@ -44,8 +48,9 @@ const SubtaskListItemInner = memo(
     taskId,
     toggleSubtask,
     updateSubtask,
+    deleteSubtask,
     mutate,
-  }: Omit<SubtaskListItemProps, "deleteSubtask">) => {
+  }: SubtaskListItemProps) => {
     return (
       <div className="flex items-start justify-between">
         <div className="flex items-start gap-2">
@@ -53,25 +58,19 @@ const SubtaskListItemInner = memo(
             size={16}
             className={twMerge(
               "mt-0.5 shrink-0",
-              isDone && "text-blue-600 dark:text-blue-700",
+              isDone && "text-blue-600 dark:text-blue-400",
               !isDone && "text-gray-500 dark:text-gray-400",
             )}
           />
           <SubtaskActionMenuTrigger
+            taskId={taskId}
             subtaskId={id}
             isDone={isDone}
             subtaskText={text}
             toggleSubtask={toggleSubtask}
+            updateSubtask={updateSubtask}
+            deleteSubtask={deleteSubtask}
             mutate={mutate}
-            editSubtaskForm={
-              <EditSubtaskForm
-                taskId={taskId}
-                subtaskId={id}
-                updateSubtask={updateSubtask}
-                textDefaultValue={text}
-                mutate={mutate}
-              />
-            }
           />
         </div>
       </div>

@@ -14,7 +14,6 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { UserListStory } from "@/components/users/UserList/__stories__";
 import { UserGridStory } from "@/components/users/UserGrid/__stories__";
 import { AppHeaderStory } from "@/components/layout/AppHeader/__stories__";
-import { withDeleteUserModalProvider } from "@/components/users/DeleteUserModal/__stories__";
 import { EntityContainerPresentation } from "@/components/common/EntityContainerPresentation";
 import { withSelectedTasksProvider } from "@/components/tasks/SelectedTasksContext/__stories__";
 import { withPageTransitionProvider } from "@/components/common/PageTransitionContext/__stories__";
@@ -29,7 +28,6 @@ const meta = {
         <Story />
       </UsersTemplate>
     ),
-    withDeleteUserModalProvider,
     withPageTransitionProvider,
     withSelectedTasksProvider,
     PageDecorator,
@@ -48,8 +46,6 @@ export const Default = {
   args: {
     totalFilteredUsers: 3,
     selectedSortField: "fullName",
-    guestMode: false,
-    showCreateNewUserMenuItem: true,
     filtersFormContainer: (
       <UserFiltersForm positionCheckboxGroupItems={mockedPositionSummaries} />
     ),
@@ -76,10 +72,8 @@ export const WithNoUsers = {
   args: { ...Default.args },
   render: () => (
     <UsersPageEmpty
-      guestMode={false}
       createUser={() => ({ status: "success" })}
       createPosition={() => ({ status: "success" })}
-      showCreateNewUserMenuItem={true}
     />
   ),
 } satisfies Story;

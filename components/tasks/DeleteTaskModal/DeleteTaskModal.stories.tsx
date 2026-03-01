@@ -30,5 +30,6 @@ export const Default = {
     taskTitle: "Task 1",
     isOpen: true,
     onOpenChange: () => {},
+    deleteTask: () => ({ status: "success" }),
   },
 } satisfies Story;

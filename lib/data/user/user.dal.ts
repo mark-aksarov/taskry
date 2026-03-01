@@ -3,6 +3,7 @@ import {
   UserSearchDTO,
   UserSummaryDTO,
   UserFormDataDTO,
+  UserListDTO,
 } from "./user.dto";
 
 import { cache } from "react";
@@ -205,7 +206,7 @@ export const getUserList = cache(
     pageSize?: number;
     sort?: UserSortField;
     filters?: UserFilters;
-  }): Promise<UserSearchDTO> => {
+  }): Promise<UserListDTO> => {
     const {
       user: { workspaceId },
     } = await requireSession();

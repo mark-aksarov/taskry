@@ -15,6 +15,7 @@ import { GuestModeModal } from "@/components/common/GuestModeModal";
 import { NavigationButton } from "@/components/common/NavigationButton";
 import { useCurrentUser } from "@/components/common/CurrentUserContext";
 import { useDeleteEntityPageActionState } from "@/lib/hooks/useDeleteEntityPageActionState";
+import { useUpdateCustomerTransition } from "../UpdateCustomerTransitionContext";
 
 interface CustomerDetailActionsProps {
   customerId: number;
@@ -41,7 +42,8 @@ export function CustomerDetailActions({
   const { isGuest } = useCurrentUser();
   const [isGuestModeModalOpen, setIsGuestModeModalOpen] = useState(false);
 
-  // Modal state for editing the task
+  // Editing the task
+  const { isPending: isUpdatePending } = useUpdateCustomerTransition();
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
   function handleDeletePress() {
@@ -83,6 +85,7 @@ export function CustomerDetailActions({
         />
         <NavigationButton
           data-test="edit-customer-button"
+          isPending={isUpdatePending}
           onPress={handleEditPress}
           variant="secondary"
           iconLeft={<Pencil size={18} strokeWidth={1.5} absoluteStrokeWidth />}

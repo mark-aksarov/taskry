@@ -19,15 +19,16 @@ import { useFormatter, useTranslations } from "next-intl";
 import { UserTaskListItemLayout } from "./UserTaskListItemLayout";
 import { SelectableItem } from "@/components/common/SelectableItem";
 import { TaskDetailModal } from "@/components/tasks/TaskDetailModal";
-import { TaskItemCheckbox } from "@/components/tasks/TaskItemCheckbox";
+import { TaskItemPendingOverlay } from "@/components/tasks/TaskItem";
 import { TaskCommentsModal } from "@/components/tasks/TaskCommentsModal";
 import { TaskItemBaseBadge } from "@/components/tasks/TaskItemBaseBadge";
-import { DeleteTaskProvider } from "@/components/tasks/DeleteTaskContext";
 import { useSelectedTasks } from "@/components/tasks/SelectedTasksContext";
 import { ItemBaseCommentsModalTrigger } from "@/components/common/ItemBase";
-import { TaskItemDeleteOverlay } from "@/components/tasks/TaskItemDeleteOverlay";
-import { UpdateTaskStatusProvider } from "@/components/tasks/UpdateTaskStatusContext";
-import { TaskItemActionMenuTrigger } from "@/components/tasks/TaskItemActionMenuTrigger";
+import { TaskItemCheckbox } from "@/components/tasks/TaskItem/TaskItemCheckbox";
+import { UpdateTaskTransitionProvider } from "@/components/tasks/UpdateTaskTransitionContext";
+import { DeleteTaskTransitionProvider } from "@/components/tasks/DeleteTaskTransitionContext";
+import { TaskItemActionMenuTrigger } from "@/components/tasks/TaskItem/TaskItemActionMenuTrigger";
+import { UpdateTaskStatusTransitionProvider } from "@/components/tasks/UpdateTaskStatusTransitionContext";
 
 export interface UserTaskListItemProps {
   id: number;
@@ -40,41 +41,29 @@ export interface UserTaskListItemProps {
   editTaskFormContainer: React.ReactNode;
   sendComment: ActionFn<ActionState, FormData>;
   updateComment: ActionFn<ActionState, FormData>;
-  updateTaskStatus: ActionFn<ActionState, UpdateTaskStatusesPayload>;
   deleteTask: ActionFn<ActionState, DeleteTasksPayload>;
+  updateTaskStatus: ActionFn<ActionState, UpdateTaskStatusesPayload>;
 }
 
-export const UserTaskListItem = ({
-  updateTaskStatus,
-  deleteTask,
-  ...props
-}: UserTaskListItemProps) => {
+export const UserTaskListItem = (props: UserTaskListItemProps) => {
   const selected = useSelectedTasks();
 
-  const isSelected = !!selected.get(props.id);
-
   return (
-    <DeleteTaskProvider deleteTask={deleteTask}>
-      <UpdateTaskStatusProvider updateStatus={updateTaskStatus}>
-        <TaskItemDeleteOverlay>
-          <SelectableItem
-            {...selected}
-            item={{ id: props.id, status: props.status }}
-          >
-            <UserTaskListItemInner {...props} isSelected={isSelected} />
-          </SelectableItem>
-        </TaskItemDeleteOverlay>
-      </UpdateTaskStatusProvider>
-    </DeleteTaskProvider>
+    <DeleteTaskTransitionProvider>
+      <UpdateTaskTransitionProvider>
+        <UpdateTaskStatusTransitionProvider>
+          <TaskItemPendingOverlay taskId={props.id}>
+            <SelectableItem
+              {...selected}
+              item={{ id: props.id, status: props.status }}
+            >
+              <UserTaskListItemInner {...props} />
+            </SelectableItem>
+          </TaskItemPendingOverlay>
+        </UpdateTaskStatusTransitionProvider>
+      </UpdateTaskTransitionProvider>
+    </DeleteTaskTransitionProvider>
   );
-};
-
-// `isSelected` is used in `TaskItemBaseBadge` because `useSelectedTasks` cannot be called inside it.
-type UserTaskListItemInnerProps = Omit<
-  UserTaskListItemProps,
-  "updateTaskStatus" | "deleteTask"
-> & {
-  isSelected: boolean;
 };
 
 export const UserTaskListItemInner = memo(
@@ -84,13 +73,14 @@ export const UserTaskListItemInner = memo(
     deadline,
     status,
     commentsCount,
-    isSelected,
     taskDetailContainer,
     taskCommentsContainer,
     editTaskFormContainer,
     sendComment,
     updateComment,
-  }: UserTaskListItemInnerProps) => {
+    deleteTask,
+    updateTaskStatus,
+  }: UserTaskListItemProps) => {
     const t = useTranslations("users.UserTaskListItem");
 
     // use useFormatter to format the date according to the user's locale
@@ -129,11 +119,7 @@ export const UserTaskListItemInner = memo(
           </>
         }
         statusSlot={
-          <TaskItemBaseBadge
-            isSelected={isSelected}
-            deadline={deadline}
-            status={status}
-          />
+          <TaskItemBaseBadge taskId={id} deadline={deadline} status={status} />
         }
         commentsModalTriggerSlot={
           <ItemBaseCommentsModalTrigger
@@ -154,6 +140,8 @@ export const UserTaskListItemInner = memo(
             taskTitle={title}
             taskStatus={status}
             editTaskFormContainer={editTaskFormContainer}
+            deleteTask={deleteTask}
+            updateTaskStatus={updateTaskStatus}
           />
         }
       />

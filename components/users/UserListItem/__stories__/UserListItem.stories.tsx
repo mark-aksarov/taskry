@@ -5,12 +5,11 @@ import { EditUserForm } from "../../EditUserForm";
 import type { Meta, StoryObj } from "@storybook/react";
 import { editUserFormArgs } from "../../EditUserForm/__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withDeleteUserProvider } from "../../DeleteUserContext/__stories__";
 
 const meta = {
   title: "components/users/UserListItem",
   component: UserListItem,
-  decorators: [withDeleteUserProvider, withThemedBackground],
+  decorators: [withThemedBackground],
 } satisfies Meta<typeof UserListItem>;
 
 export default meta;
@@ -19,9 +18,6 @@ type Story = StoryObj<typeof meta>;
 export const Default = {
   args: {
     ...mockedUserDetail,
-    guestMode: false,
-    showUserActionMenuTrigger: true,
-    showDeleteMenuItem: true,
     editUserFormContainer: <EditUserForm {...editUserFormArgs} />,
     userDetailContainer: <UserDetail {...mockedUserDetail} />,
     deleteUser: () => ({ status: "success" }),

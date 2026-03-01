@@ -2,8 +2,7 @@ import "server-only";
 
 import { TaskList } from "./TaskList";
 import { TaskGrid } from "./TaskGrid";
-import { TaskListItem } from "./TaskListItem";
-import { TaskGridItem } from "./TaskGridItem";
+import { TaskItem } from "./TaskItem";
 import { TaskListItemDTO } from "@/lib/data/task/task.dto";
 import { deleteTasks } from "@/lib/actions/task/deleteTasks";
 import { TaskDetailContainer } from "./TaskDetailContainer";
@@ -29,72 +28,49 @@ export async function TasksContainer({
   page,
   pageSize,
 }: TasksContainerProps) {
-  const getCommonProps = (task: TaskListItemDTO) => ({
-    id: task.id,
-    title: task.title,
-    deadline: task.deadline,
-    assignee: task.assignee,
-    status: task.status,
-    commentsCount: task.commentsCount,
-    subtasksTotal: task.subtasks.total,
-    sendComment,
-    updateComment,
-    deleteTask: deleteTasks,
-  });
+  const getCommonProps = (task: TaskListItemDTO) => ({});
+
+  const items = (
+    <>
+      {tasks.map((task) => {
+        return (
+          <TaskItem
+            key={task.id}
+            id={task.id}
+            title={task.title}
+            deadline={task.deadline}
+            assignee={task.assignee}
+            status={task.status}
+            commentsCount={task.commentsCount}
+            subtasksTotal={task.subtasks.total}
+            subtasksDone={task.subtasks.done}
+            sendComment={sendComment}
+            updateComment={updateComment}
+            deleteTask={deleteTasks}
+            category={task.category}
+            project={task.project}
+            updateTaskStatus={updateTaskStatuses}
+            taskDetailContainer={<TaskDetailContainer taskId={task.id} />}
+            taskCommentsContainer={<TaskCommentsContainer taskId={task.id} />}
+            projectDetailContainer={
+              <ProjectDetailContainer projectId={task.project.id} />
+            }
+            userDetailContainer={
+              task.assignee && <UserDetailContainer userId={task.assignee.id} />
+            }
+            editTaskFormContainer={<EditTaskFormContainer taskId={task.id} />}
+            showCheckbox
+            {...getCommonProps(task)}
+          />
+        );
+      })}
+    </>
+  );
 
   return (
     <EntityContainerPresentation
-      list={
-        <TaskList>
-          {tasks.map((task) => {
-            return (
-              <TaskListItem
-                key={task.id}
-                category={task.category}
-                project={task.project}
-                updateTaskStatus={updateTaskStatuses}
-                taskDetailContainer={<TaskDetailContainer taskId={task.id} />}
-                taskCommentsContainer={
-                  <TaskCommentsContainer taskId={task.id} />
-                }
-                projectDetailContainer={
-                  <ProjectDetailContainer projectId={task.project.id} />
-                }
-                userDetailContainer={
-                  task.assignee && (
-                    <UserDetailContainer userId={task.assignee.id} />
-                  )
-                }
-                editTaskFormContainer={
-                  <EditTaskFormContainer taskId={task.id} />
-                }
-                showCheckbox
-                {...getCommonProps(task)}
-              />
-            );
-          })}
-        </TaskList>
-      }
-      grid={
-        <TaskGrid>
-          {tasks.map((task) => (
-            <TaskGridItem
-              key={task.id}
-              subtasksDone={task.subtasks.done}
-              updateTaskStatus={updateTaskStatuses}
-              taskDetailContainer={<TaskDetailContainer taskId={task.id} />}
-              taskCommentsContainer={<TaskCommentsContainer taskId={task.id} />}
-              editTaskFormContainer={<EditTaskFormContainer taskId={task.id} />}
-              userDetailContainer={
-                task.assignee && (
-                  <UserDetailContainer userId={task.assignee.id} />
-                )
-              }
-              {...getCommonProps(task)}
-            />
-          ))}
-        </TaskGrid>
-      }
+      list={<TaskList>{items}</TaskList>}
+      grid={<TaskGrid>{items}</TaskGrid>}
       page={page}
       pageSize={pageSize}
       totalPages={Math.ceil(totalCount / pageSize)}

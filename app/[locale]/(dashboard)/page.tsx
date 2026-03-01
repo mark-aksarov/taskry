@@ -5,16 +5,17 @@ import { hasGuestRole } from "@/lib/utils/hasGuestRole";
 import { hasOwnerRole } from "@/lib/utils/hasOwnerRole";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { pageSearchParam, pageSizeSearchParam } from "@/lib/schemas/base";
-import { updateTaskStatuses } from "@/lib/actions/task/updateTaskStatuses";
 import { CurrentUserProvider } from "@/components/common/CurrentUserContext";
+import { SelectedTasksProvider } from "@/components/tasks/SelectedTasksContext";
 import { PageTransitionProvider } from "@/components/common/PageTransitionContext";
 import { AssignedTasksContainer } from "@/components/tasks/AssignedTasksContainer";
 import { TotalTasksCardContainer } from "@/components/tasks/TotalTasksCardContainer";
 import { TotalUsersCardContainer } from "@/components/users/TotalUsersCardContainer";
-import { UpdateTaskStatusesProvider } from "@/components/tasks/UpdateTaskStatusContext";
+import { UpdateTaskStatusesProvider } from "@/components/tasks/UpdateTaskStatusesContext";
 import { defaultAppHeaderSlots } from "@/components/layout/AppHeader/defaultAppHeaderSlots";
 import { TotalProjectsCardContainer } from "@/components/projects/TotalProjectsCardContainer";
 import { TotalCustomersCardContainer } from "@/components/customer/TotalCustomersCardContainer";
+import { DeleteTasksProvider } from "@/components/tasks/DeleteTasksContext";
 
 const searchParamsSchema = z.object({
   page: pageSearchParam,
@@ -52,26 +53,32 @@ export default async function AppDashboardPage({
   };
 
   return (
-    <CurrentUserProvider value={currentUserContextValue}>
-      <UpdateTaskStatusesProvider updateStatus={updateTaskStatuses}>
+    <UpdateTaskStatusesProvider>
+      <SelectedTasksProvider
+        pageItems={tasks.map((t) => ({ id: t.id, status: t.status }))}
+      >
         <PageTransitionProvider>
-          <DashboardPage
-            totalProjectsCardContainer={<TotalProjectsCardContainer />}
-            totalTasksCardContainer={<TotalTasksCardContainer />}
-            totalUsersCardContainer={<TotalUsersCardContainer />}
-            totalCustomersCardContainer={<TotalCustomersCardContainer />}
-            assignedTasksContainer={
-              <AssignedTasksContainer
-                tasks={tasks}
-                totalCount={totalCount}
-                page={page}
-                pageSize={pageSize}
+          <CurrentUserProvider value={currentUserContextValue}>
+            <DeleteTasksProvider>
+              <DashboardPage
+                totalProjectsCardContainer={<TotalProjectsCardContainer />}
+                totalTasksCardContainer={<TotalTasksCardContainer />}
+                totalUsersCardContainer={<TotalUsersCardContainer />}
+                totalCustomersCardContainer={<TotalCustomersCardContainer />}
+                assignedTasksContainer={
+                  <AssignedTasksContainer
+                    tasks={tasks}
+                    totalCount={totalCount}
+                    page={page}
+                    pageSize={pageSize}
+                  />
+                }
+                appHeaderProps={defaultAppHeaderSlots}
               />
-            }
-            appHeaderProps={defaultAppHeaderSlots}
-          />
+            </DeleteTasksProvider>
+          </CurrentUserProvider>
         </PageTransitionProvider>
-      </UpdateTaskStatusesProvider>
-    </CurrentUserProvider>
+      </SelectedTasksProvider>
+    </UpdateTaskStatusesProvider>
   );
 }

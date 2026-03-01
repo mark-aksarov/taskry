@@ -5,21 +5,21 @@ import {
   FormBaseBody,
   FormBaseFooter,
   FormBaseSubmitButton,
-  useFormBaseActionState,
 } from "@/components/common/FormBase";
 
 import { DateValue } from "react-aria";
 import { useTranslations } from "next-intl";
 import { UserBioTextField } from "../UserBioTextField";
+import { UserPositionSelect } from "../UserPositionSelect";
 import { ActionFn, ActionState } from "@/lib/actions/types";
 import { UserAddressTextField } from "../UserAddressTextField";
 import { UserFullNameTextField } from "../UserFullNameTextField";
-import { handleActionSubmit } from "@/lib/utils/handleActionSubmit";
 import { UserBirthdateDatePicker } from "../UserBirthdateDatePicker";
 import { UserPublicLinkTextField } from "../UserPublicLinkTextField";
 import { FormErrorBanner } from "@/components/common/FormErrorBanner";
 import { UserPhoneNumberTextField } from "../UserPhoneNumberTextField";
-import { UserPositionSelect } from "../UserPositionSelect";
+import { useUpdateUserTransition } from "../UpdateUserTransitionContext";
+import { useUpdateEntityActionState } from "@/lib/hooks/useUpdateEntityActionState";
 
 interface EditUserFormProps {
   userId: string;
@@ -32,6 +32,7 @@ interface EditUserFormProps {
   userPositionSelectDefaultValue?: string;
   userPositionSelectItems: { id: number; name: string }[];
   updateUser: ActionFn<ActionState, FormData>;
+  mutate: () => void;
 }
 
 export function EditUserForm({
@@ -45,16 +46,29 @@ export function EditUserForm({
   userPositionSelectDefaultValue,
   userPositionSelectItems,
   updateUser,
+  mutate,
 }: EditUserFormProps) {
   const t = useTranslations("users.EditUserForm");
 
-  const [state, action, isPending] = useFormBaseActionState(updateUser);
+  const { startTransition } = useUpdateUserTransition();
+
+  const [state, action, isPending] = useUpdateEntityActionState({
+    updateEntity: updateUser,
+    onSuccess: mutate,
+    successMessage: t("successMessage"),
+  });
+
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+
+    startTransition(() => {
+      action(formData);
+    });
+  }
 
   return (
-    <FormBase
-      id="edit-user-form"
-      onSubmit={(e) => handleActionSubmit(e, action)}
-    >
+    <FormBase id="edit-user-form" onSubmit={handleSubmit}>
       <FormBaseBody>
         {userId && <input type="hidden" name="id" value={userId} />}
         <UserFullNameTextField defaultValue={userFullNameDefaultValue} />

@@ -5,6 +5,7 @@ import {
 } from "@/lib/actions/types";
 import { useActionState } from "react";
 import { useErrorToast } from "@/lib/hooks/useErrorToast";
+import { useSuccessToast } from "@/lib/hooks/useSuccessToast";
 
 const toggleSubtaskInitialState: ActionState = {
   status: null,
@@ -13,12 +14,15 @@ const toggleSubtaskInitialState: ActionState = {
 interface useToggleSubtaskStatusActionStateProps {
   toggleSubtask: ActionFn<ActionState, ToggleSubtaskPayload>;
   mutate?: () => void;
+  successMessage: string;
 }
 
 export function useToggleSubtaskStatusActionState({
   toggleSubtask,
   mutate,
+  successMessage,
 }: useToggleSubtaskStatusActionStateProps) {
+  const { add: addSuccessToast } = useSuccessToast();
   const { close: closeErrorToast, add: addErrorToast } = useErrorToast();
 
   return useActionState(
@@ -29,9 +33,11 @@ export function useToggleSubtaskStatusActionState({
       // close error toast
       closeErrorToast();
 
-      // call swr mutate to refresh subtasks
       if (newState.status === "success") {
+        // call swr mutate to refresh subtasks
         mutate?.();
+        // show success toast
+        addSuccessToast(successMessage);
       }
       // show error toast
       else if (newState.status === "error" && newState.message) {

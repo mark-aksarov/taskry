@@ -12,7 +12,6 @@ import { TaskCategoryList } from "@/components/taskCategory/TaskCategoryList";
 import { TaskCategoryListStory } from "@/components/taskCategory/TaskCategoryList/__stories__";
 import { withSelectedItemsProvider } from "@/components/common/SelectedItemsContext/__stories__";
 import { withPageTransitionProvider } from "@/components/common/PageTransitionContext/__stories__";
-import { withDeleteTaskCategoryModalProvider } from "@/components/taskCategory/DeleteTaskCategoryModal/__stories__";
 
 const meta = {
   title: "pages/TaskCategoriesPage",
@@ -25,7 +24,6 @@ const meta = {
       </TaskCategoriesTemplate>
     ),
     withPageTransitionProvider,
-    withDeleteTaskCategoryModalProvider,
     withSelectedItemsProvider,
     PageDecorator,
     withThemedBackground,
@@ -44,7 +42,6 @@ export const Default = {
     taskCategoriesContainer: (
       <TaskCategoryList {...TaskCategoryListStory.args} />
     ),
-    guestMode: false,
     createTaskCategory: () => ({ status: "success" }),
     deleteTaskCategories: () => ({ status: "success" }),
   },
@@ -59,7 +56,6 @@ export const WithNoTaskCategories = {
   args: { ...Default.args },
   render: () => (
     <TaskCategoriesPageEmpty
-      guestMode={false}
       createTaskCategory={() => ({ status: "success" })}
     />
   ),

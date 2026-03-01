@@ -18,8 +18,6 @@ export async function deleteTasks(
   // Authorization
   await requireSessionOrRedirect();
 
-  await new Promise((resolve) => setTimeout(resolve, 3000));
-
   const t = await getTranslations("actions");
 
   try {

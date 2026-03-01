@@ -37,25 +37,13 @@ import { AppHeaderStory } from "@/components/layout/AppHeader/__stories__";
 import { newTaskFormArgs } from "@/components/tasks/NewTaskForm/__stories__";
 import { AssignedTaskListItem } from "@/components/tasks/AssignedTaskListItem";
 import { TaskListItemStory } from "@/components/tasks/TaskListItem/__stories__";
-import { withDeleteTaskModalProvider } from "@/components/tasks/DeleteTaskModal/__stories__";
 import { withPageTransitionProvider } from "@/components/common/PageTransitionContext/__stories__";
-import { withDeleteSubtaskModalProvider } from "@/components/subtasks/DeleteSubtaskModal/__stories__";
-import { withDeleteCommentModalProvider } from "@/components/comments/DeleteCommentModal/__stories__";
-import { withUpdateTaskStatusesProvider } from "@/components/tasks/UpdateTaskStatusContext/__stories__";
 
 const meta = {
   title: "pages/DashboardPage",
   component: DashboardPage,
   parameters: { layout: "fullscreen" },
-  decorators: [
-    withDeleteTaskModalProvider,
-    withPageTransitionProvider,
-    withDeleteSubtaskModalProvider,
-    withDeleteCommentModalProvider,
-    withUpdateTaskStatusesProvider,
-    PageDecorator,
-    withThemedBackground,
-  ],
+  decorators: [withPageTransitionProvider, PageDecorator, withThemedBackground],
   beforeEach: () => {
     mocked(usePathname).mockReturnValue("/");
     mocked(useRouter).mockReturnValue({ push: fn() } as any);

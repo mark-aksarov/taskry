@@ -2,16 +2,11 @@ import { CommentItem } from "../CommentItem";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { withCommentFormProvider } from "../../withCommentFormProvider";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withDeleteCommentModalProvider } from "../../DeleteCommentModal/__stories__";
 
 const meta = {
   title: "components/comments/CommentItem",
   component: CommentItem,
-  decorators: [
-    withCommentFormProvider,
-    withDeleteCommentModalProvider,
-    withThemedBackground,
-  ],
+  decorators: [withCommentFormProvider, withThemedBackground],
   parameters: {
     backgroundVariant: "alt",
   },
@@ -32,8 +27,9 @@ export const Default = {
       fullName: "User 1",
       imageUrl: "/woman.jpg",
     },
-    guestMode: false,
     canEdit: true,
+    deleteComment: () => ({ status: "success" }),
+    mutate: () => {},
   },
 } satisfies Story;
 

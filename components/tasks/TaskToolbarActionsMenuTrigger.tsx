@@ -1,30 +1,34 @@
 "use client";
 
 import {
-  ToolbarMenuTrigger,
-  ToolbarActionsButtonMobile,
-  ToolbarActionsButtonDesktop,
-} from "../common/Toolbar";
+  ActionFn,
+  ActionState,
+  DeleteTasksPayload,
+  UpdateTaskStatusesPayload,
+} from "@/lib/actions/types";
 
+import { useState } from "react";
 import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
 import { DialogHeader } from "../ui/Dialog";
-import { startTransition, useState } from "react";
 import { TaskStatus } from "@/generated/prisma/enums";
 import { DeleteTasksModal } from "./DeleteTasksModal";
 import { useSelectedTasks } from "./SelectedTasksContext";
 import { GuestModeModal } from "../common/GuestModeModal";
 import { useCurrentUser } from "../common/CurrentUserContext";
+import { ToolbarActionsMenuTrigger } from "../common/Toolbar";
 import { Check, CircleEllipsis, Clock, Trash } from "lucide-react";
-import { useUpdateTaskStatusesContext } from "./UpdateTaskStatusContext";
-import { ActionFn, ActionState, DeleteTasksPayload } from "@/lib/actions/types";
+import { useUpdateTaskStatuses } from "./UpdateTaskStatusesContext";
+import { useUpdateEntityStatusActionState } from "@/lib/hooks/useUpdateEntityStatusActionState";
 
 interface TaskToolbarActionsMenuTriggerProps {
   deleteTasks: ActionFn<ActionState, DeleteTasksPayload>;
+  updateTaskStatuses: ActionFn<ActionState, UpdateTaskStatusesPayload>;
 }
 
 export const TaskToolbarActionsMenuTrigger = ({
   deleteTasks,
+  updateTaskStatuses,
 }: TaskToolbarActionsMenuTriggerProps) => {
   const t = useTranslations("tasks.TaskToolbarActionsMenuTrigger");
 
@@ -35,8 +39,14 @@ export const TaskToolbarActionsMenuTrigger = ({
   // Delete confirmation modal state
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
-  // Action for updating task status
-  const { action: updateTaskStatusAction } = useUpdateTaskStatusesContext();
+  // Action for updating task statuses
+  const [, updateTaskStatusAction] = useUpdateEntityStatusActionState({
+    updateEntityStatus: updateTaskStatuses,
+  });
+  const {
+    startTransition: startUpdateTaskStatusesTransition,
+    setTaskIds: setUpdateTaskStatusesIds,
+  } = useUpdateTaskStatuses();
 
   // Selected with checkbox tasks
   const selected = useSelectedTasks();
@@ -50,14 +60,18 @@ export const TaskToolbarActionsMenuTrigger = ({
 
     if (key === "delete") {
       setIsDeleteModalOpen(true);
-      return;
+    } else {
+      setUpdateTaskStatusesIds(selected.ids);
+
+      startUpdateTaskStatusesTransition(() => {
+        const nextStatus = key as TaskStatus;
+
+        updateTaskStatusAction({
+          ids: selected.ids,
+          nextStatus,
+        });
+      });
     }
-
-    const nextStatus = key as TaskStatus;
-
-    startTransition(() => {
-      updateTaskStatusAction({ ids: selected.ids, nextStatus });
-    });
   };
 
   // disable menu items if selected tasks have the same status.
@@ -65,29 +79,15 @@ export const TaskToolbarActionsMenuTrigger = ({
     selected.items.every((task) => task.status === status),
   );
 
-  // disable menu trigger if no tasks are selected
-  const isDisabled = selected.items.length === 0;
-
   return (
     <>
-      <ToolbarMenuTrigger
+      <ToolbarActionsMenuTrigger
         onAction={handleAction}
         disabledKeys={disabledKeys}
         renderDialogHeader={() => (
           <DialogHeader>{t("dialogHeading")}</DialogHeader>
         )}
-        renderButton={() => (
-          <>
-            <ToolbarActionsButtonMobile
-              data-test="task-toolbar-actions-button-mobile"
-              isDisabled={isDisabled}
-            />
-            <ToolbarActionsButtonDesktop
-              data-test="task-toolbar-actions-button-desktop"
-              isDisabled={isDisabled}
-            />
-          </>
-        )}
+        selectedIds={selected.ids}
       >
         <Item textValue={t("delete")} key="delete">
           <Trash size={16} strokeWidth={1.5} absoluteStrokeWidth />
@@ -105,12 +105,12 @@ export const TaskToolbarActionsMenuTrigger = ({
           <Clock size={16} strokeWidth={1.5} absoluteStrokeWidth />
           {t("completed")}
         </Item>
-      </ToolbarMenuTrigger>
+      </ToolbarActionsMenuTrigger>
 
       {/* Modal for confirming task deletion */}
       <DeleteTasksModal
         taskIds={selected.ids}
-        deleteTask={deleteTasks}
+        deleteTasks={deleteTasks}
         isOpen={isDeleteModalOpen}
         onOpenChange={setIsDeleteModalOpen}
       />

@@ -16,7 +16,6 @@ export const Default = {
   args: {
     id: 1,
     name: "Task Category 1",
-    guestMode: false,
     updateTaskCategory: () => ({ status: "success" }),
     deleteTaskCategory: () => ({ status: "success" }),
   },

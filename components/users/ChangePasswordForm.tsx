@@ -5,14 +5,14 @@ import {
   FormBaseBody,
   FormBaseFooter,
   FormBaseSubmitButton,
-  useFormBaseActionState,
 } from "@/components/common/FormBase";
 
 import { useTranslations } from "next-intl";
 import { ActionFn, ActionState } from "@/lib/actions/types";
 import { UserPasswordTextField } from "./UserPasswordTextField";
-import { handleActionSubmit } from "@/lib/utils/handleActionSubmit";
 import { FormErrorBanner } from "@/components/common/FormErrorBanner";
+import { useUpdateEntityActionState } from "@/lib/hooks/useUpdateEntityActionState";
+import { useChangePasswordTransition } from "./ChangePasswordTransitionContext";
 
 interface ChangePasswordFormProps {
   userId: string;
@@ -25,13 +25,23 @@ export function ChangePasswordForm({
 }: ChangePasswordFormProps) {
   const t = useTranslations("users.ChangePasswordForm");
 
-  const [state, action, isPending] = useFormBaseActionState(changePassword);
+  const { startTransition } = useChangePasswordTransition();
+  const [state, action, isPending] = useUpdateEntityActionState({
+    updateEntity: changePassword,
+    successMessage: t("successMessage"),
+  });
+
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+
+    startTransition(() => {
+      action(formData);
+    });
+  }
 
   return (
-    <FormBase
-      id="change-password-form"
-      onSubmit={(e) => handleActionSubmit(e, action)}
-    >
+    <FormBase id="change-password-form" onSubmit={handleSubmit}>
       <FormBaseBody>
         {userId && <input type="hidden" name="id" value={userId} />}
         <UserPasswordTextField />

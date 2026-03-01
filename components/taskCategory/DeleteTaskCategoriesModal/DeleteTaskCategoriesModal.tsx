@@ -8,12 +8,13 @@ import {
   ConfirmModalConfirmButton,
 } from "@/components/common/ConfirmModal";
 
-import { startTransition } from "react";
 import { useTranslations } from "next-intl";
 import { ModalProps } from "@/components/ui/Modal";
 import { DialogHeading } from "@/components/ui/Dialog";
 import { ActionFn, ActionState } from "@/lib/actions/types";
-import { useDeleteModalActionState } from "@/components/common/BaseDeleteModal";
+import { useDeleteTaskCategories } from "../DeleteTaskCategoriesContext";
+import { useSelectedItems } from "@/components/common/SelectedItemsContext";
+import { useDeleteEntityActionState } from "@/lib/hooks/useDeleteEntityActionState";
 
 interface DeleteTaskCategoriesModalProps extends ModalProps {
   taskCategoryIds: number[];
@@ -28,14 +29,26 @@ export function DeleteTaskCategoriesModal({
 }: DeleteTaskCategoriesModalProps) {
   const t = useTranslations("taskCategories.DeleteTaskCategoriesModal");
 
-  const [, action, isPending] = useDeleteModalActionState<number[]>({
+  const { startTransition, setTaskCategoryIds: setDeletedTaskCategoryIds } =
+    useDeleteTaskCategories();
+
+  const [, action] = useDeleteEntityActionState({
     deleteEntity: deleteTaskCategories,
-    onOpenChange,
+    successMessage: t("successMessage"),
   });
 
-  const handleDelete = () => {
+  const { clear: clearSelectedItems } = useSelectedItems();
+
+  function handleDelete() {
+    onOpenChange?.(false);
+
+    // Clear selected items
+    clearSelectedItems();
+
+    // Used to show an overlay on the selected task categories
+    setDeletedTaskCategoryIds(taskCategoryIds);
     startTransition(() => action(taskCategoryIds));
-  };
+  }
 
   return (
     <ConfirmModal
@@ -53,7 +66,6 @@ export function DeleteTaskCategoriesModal({
       <ConfirmModalActions>
         <ConfirmModalCancelButton label={t("cancelButton")} />
         <ConfirmModalConfirmButton
-          isPending={isPending}
           label={t("deleteButton")}
           onConfirm={handleDelete}
           data-test="delete-task-categories-modal-confirm-button"

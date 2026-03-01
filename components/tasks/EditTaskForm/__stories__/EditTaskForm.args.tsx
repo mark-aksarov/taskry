@@ -19,4 +19,5 @@ export const editTaskFormArgs = {
   taskProjectSelectItems: mockedProjectSummaries,
   taskAssigneeSelectItems: mockedUserSummaries,
   updateTask: () => ({ status: "success" as const }),
+  mutate: () => {},
 };

@@ -37,7 +37,7 @@ function EditTaskFormContainerInner({ taskId }: EditTaskFormContainerProps) {
     suspense: true,
   });
 
-  const { data: task } = useSWR<TaskFormDataDTO>(
+  const { data: task, mutate } = useSWR<TaskFormDataDTO>(
     `/api/tasks/${taskId}?view=edit`,
     {
       suspense: true,
@@ -73,6 +73,7 @@ function EditTaskFormContainerInner({ taskId }: EditTaskFormContainerProps) {
       taskProjectSelectItems={projects}
       taskAssigneeSelectItems={users}
       updateTask={updateTask}
+      mutate={mutate}
     />
   );
 }

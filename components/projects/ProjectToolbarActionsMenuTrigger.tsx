@@ -39,7 +39,7 @@ export const ProjectToolbarActionsMenuTrigger = ({
   // Delete confirmation modal state
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
-  // Action for updating project status
+  // Action for updating project statuses
   const [, updateProjectStatusAction] = useUpdateEntityStatusActionState({
     updateEntityStatus: updateProjectStatuses,
   });

@@ -1,3 +1,5 @@
+export { ProjectItem } from "./ProjectItem";
+export { type ProjectItemProps } from "./ProjectItem";
 export { ProjectItemCheckbox } from "./ProjectItemCheckbox";
 export { useProjectItemPending } from "./useProjectItemPending";
 export { ProjectItemPendingOverlay } from "./ProjectItemPendingOverlay";

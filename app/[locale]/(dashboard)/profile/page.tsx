@@ -9,6 +9,8 @@ import { UserHeaderContainer } from "@/components/users/UserHeaderContainer";
 import { CurrentUserProvider } from "@/components/common/CurrentUserContext";
 import { EditUserFormContainer } from "@/components/users/EditUserFormContainer";
 import { ProfileDetailContainer } from "@/components/users/ProfileDetailContainer";
+import { ChangePasswordTransitionProvider } from "@/components/users/ChangePasswordTransitionContext";
+import { UpdateUserTransitionProvider } from "@/components/users/UpdateUserTransitionContext";
 
 export default async function AppProfilePage() {
   const session = await requireProtectedPage();
@@ -25,15 +27,19 @@ export default async function AppProfilePage() {
     <CurrentUserProvider value={currentUserContextValue}>
       <ProfilePage
         profileActions={
-          <ProfileActions
-            userId={session.user.id}
-            userFullName={session.user.name}
-            changePassword={changePassword}
-            deleteUser={deleteUser}
-            editUserFormContainer={
-              <EditUserFormContainer userId={session.user.id} />
-            }
-          />
+          <UpdateUserTransitionProvider>
+            <ChangePasswordTransitionProvider>
+              <ProfileActions
+                userId={session.user.id}
+                userFullName={session.user.name}
+                changePassword={changePassword}
+                deleteUser={deleteUser}
+                editUserFormContainer={
+                  <EditUserFormContainer userId={session.user.id} />
+                }
+              />
+            </ChangePasswordTransitionProvider>
+          </UpdateUserTransitionProvider>
         }
         profileDetailContainer={
           <ProfileDetailContainer userId={session.user.id} />

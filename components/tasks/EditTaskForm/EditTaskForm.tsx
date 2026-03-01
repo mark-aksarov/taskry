@@ -21,6 +21,8 @@ import { TaskDeadlineDatePicker } from "../TaskDeadlineDatePicker";
 import { handleActionSubmit } from "@/lib/utils/handleActionSubmit";
 import { FormErrorBanner } from "@/components/common/FormErrorBanner";
 import { TaskDescriptionTextField } from "../TaskDescriptionTextField";
+import { useUpdateTaskTransition } from "../UpdateTaskTransitionContext";
+import { useUpdateEntityActionState } from "@/lib/hooks/useUpdateEntityActionState";
 
 interface EditTaskFormProps {
   taskId: number;
@@ -35,6 +37,7 @@ interface EditTaskFormProps {
   taskProjectSelectItems: { id: number; title: string }[];
   taskAssigneeSelectItems: { id: string; fullName: string }[];
   updateTask: ActionFn<ActionState, FormData>;
+  mutate: () => void;
 }
 
 export function EditTaskForm({
@@ -50,16 +53,29 @@ export function EditTaskForm({
   taskProjectSelectItems,
   taskAssigneeSelectItems,
   updateTask,
+  mutate,
 }: EditTaskFormProps) {
   const t = useTranslations("tasks.EditTaskForm");
 
-  const [state, action, isPending] = useFormBaseActionState(updateTask);
+  const { startTransition } = useUpdateTaskTransition();
+
+  const [state, action, isPending] = useUpdateEntityActionState({
+    updateEntity: updateTask,
+    onSuccess: mutate,
+    successMessage: t("successMessage"),
+  });
+
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+
+    startTransition(() => {
+      action(formData);
+    });
+  }
 
   return (
-    <FormBase
-      id="edit-task-form"
-      onSubmit={(e) => handleActionSubmit(e, action)}
-    >
+    <FormBase id="edit-task-form" onSubmit={handleSubmit}>
       <FormBaseBody>
         {taskId && <input type="hidden" name="id" value={taskId} />}
         <TaskTitleTextField defaultValue={taskTitleDefaultValue} />

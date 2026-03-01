@@ -7,10 +7,12 @@ import { KeyRound, Pencil, Trash } from "lucide-react";
 import { BaseDeleteUserModal } from "../DeleteUserModal";
 import { ChangePasswordModal } from "../ChangePasswordModal";
 import { GuestModeModal } from "@/components/common/GuestModeModal";
+import { useCurrentUser } from "@/components/common/CurrentUserContext";
 import { NavigationButton } from "@/components/common/NavigationButton";
 import { ActionFn, ActionState, DeleteUserPayload } from "@/lib/actions/types";
-import { useDeletePageActionState } from "@/lib/hooks/useDeleteEntityPageActionState";
-import { useCurrentUser } from "@/components/common/CurrentUserContext";
+import { useDeleteEntityPageActionState } from "@/lib/hooks/useDeleteEntityPageActionState";
+import { useChangePasswordTransition } from "../ChangePasswordTransitionContext";
+import { useUpdateUserTransition } from "../UpdateUserTransitionContext";
 
 interface ProfileActionsProps {
   userId: string;
@@ -30,7 +32,7 @@ export function ProfileActions({
   const t = useTranslations("users.ProfileActions");
 
   // Deleting the user
-  const [, action, isDeletePending] = useDeletePageActionState({
+  const [, action, isDeletePending] = useDeleteEntityPageActionState({
     deleteEntity: deleteUser,
   });
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
@@ -40,10 +42,12 @@ export function ProfileActions({
   const [isGuestModeModalOpen, setIsGuestModeModalOpen] = useState(false);
 
   // Change password modal state
+  const { isPending: isChangePasswordPending } = useChangePasswordTransition();
   const [isChangePasswordModalOpen, setIsChangePasswordModalOpen] =
     useState(false);
 
   // Edit user modal state
+  const { isPending: isUpdateUserPending } = useUpdateUserTransition();
   const [isEditUserModalOpen, setIsEditUserModalOpen] = useState(false);
 
   function handlePasswordChangePress() {
@@ -96,6 +100,7 @@ export function ProfileActions({
           data-test="change-password-button"
           onPress={handlePasswordChangePress}
           variant="secondary"
+          isPending={isChangePasswordPending}
           iconLeft={
             <KeyRound size={18} strokeWidth={1.5} absoluteStrokeWidth />
           }
@@ -105,6 +110,7 @@ export function ProfileActions({
           data-test="edit-user-button"
           onPress={handleEditPress}
           variant="secondary"
+          isPending={isUpdateUserPending}
           iconLeft={<Pencil size={18} strokeWidth={1.5} absoluteStrokeWidth />}
           label={t("editAccount")}
         />

@@ -12,16 +12,11 @@ import { ProjectDetail } from "@/components/projects/ProjectDetail";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { getCommentList } from "@/components/comments/CommentList/__stories__";
 import { withSelectedTasksProvider } from "../../SelectedTasksContext/__stories__";
-import { withUpdateTaskStatusesProvider } from "../../UpdateTaskStatusContext/__stories__";
 
 const meta = {
   title: "components/tasks/TaskListItem",
   component: TaskListItem,
-  decorators: [
-    withSelectedTasksProvider,
-    withUpdateTaskStatusesProvider,
-    withThemedBackground,
-  ],
+  decorators: [withSelectedTasksProvider, withThemedBackground],
 } satisfies Meta<typeof TaskListItem>;
 
 export default meta;
@@ -32,7 +27,6 @@ const task = mockedTaskList[0];
 export const Default = {
   args: {
     ...task,
-    guestMode: false,
     taskCommentsContainer: getCommentList(),
     editTaskFormContainer: <EditTaskForm {...editTaskFormArgs} />,
     userDetailContainer: <UserDetail {...mockedUserDetail} />,

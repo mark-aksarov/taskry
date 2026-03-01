@@ -12,6 +12,8 @@ import { UserHeaderContainer } from "@/components/users/UserHeaderContainer";
 import { CurrentUserProvider } from "@/components/common/CurrentUserContext";
 import { EditUserFormContainer } from "@/components/users/EditUserFormContainer";
 import { ProfileDetailContainer } from "@/components/users/ProfileDetailContainer";
+import { UpdateUserTransitionProvider } from "@/components/users/UpdateUserTransitionContext";
+import { ChangePasswordTransitionProvider } from "@/components/users/ChangePasswordTransitionContext";
 
 export default async function AppProfilePage({
   params,
@@ -55,13 +57,19 @@ export default async function AppProfilePage({
       <TeamProfilePage
         userActions={
           showUserActions && (
-            <ProfileActions
-              changePassword={changePassword}
-              deleteUser={deleteUser}
-              userId={userId}
-              userFullName={userSummary.fullName}
-              editUserFormContainer={<EditUserFormContainer userId={userId} />}
-            />
+            <UpdateUserTransitionProvider>
+              <ChangePasswordTransitionProvider>
+                <ProfileActions
+                  changePassword={changePassword}
+                  deleteUser={deleteUser}
+                  userId={userId}
+                  userFullName={userSummary.fullName}
+                  editUserFormContainer={
+                    <EditUserFormContainer userId={userId} />
+                  }
+                />
+              </ChangePasswordTransitionProvider>
+            </UpdateUserTransitionProvider>
           )
         }
         profileDetailContainer={<ProfileDetailContainer userId={userId} />}

@@ -1,7 +1,7 @@
 import { ListItem, ListItemInfo } from "@/components/common/List";
 import { twMerge } from "tailwind-merge";
 
-export interface ProjectListItemProps {
+export interface ProjectListItemLayoutProps {
   id?: number;
   checkboxSlot: React.ReactNode;
   mainSlot: React.ReactNode;
@@ -31,7 +31,7 @@ export const ProjectListItemLayout = ({
   statusSlot,
   commentsModalTriggerSlot,
   menuTriggerSlot,
-}: ProjectListItemProps) => {
+}: ProjectListItemLayoutProps) => {
   return (
     <ListItem data-test="project-list-item" data-id={id}>
       <div className="flex w-full items-center gap-4 max-md:hidden">

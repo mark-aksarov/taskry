@@ -6,7 +6,6 @@ import { TaskListItemStory } from "../../TaskListItem/__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withViewModeProvider } from "@/components/common/ViewMode/__stories__";
 import { withSelectedTasksProvider } from "../../SelectedTasksContext/__stories__";
-import { withUpdateTaskStatusesProvider } from "../../UpdateTaskStatusContext/__stories__";
 import { withPageTransitionProvider } from "@/components/common/PageTransitionContext/__stories__";
 
 const meta = {
@@ -16,7 +15,6 @@ const meta = {
     withViewModeProvider,
     withPageTransitionProvider,
     withSelectedTasksProvider,
-    withUpdateTaskStatusesProvider,
     withThemedBackground,
   ],
   excludeStories: ["getTaskListItems"],

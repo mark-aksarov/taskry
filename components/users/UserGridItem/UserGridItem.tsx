@@ -20,41 +20,13 @@ import { Link2, Mail, Phone } from "lucide-react";
 import { UserDetailModal } from "../UserDetailModal";
 import { Separator } from "@/components/ui/Separator";
 import { UserGridItemLayout } from "./UserGridItemLayout";
-import { DeleteUserProvider } from "../DeleteUserContext";
 import { UnknownUser } from "@/components/common/UnknownUser";
-import { UserItemDeleteOverlay } from "../UserItemDeleteOverlay";
 import { ImageContainer } from "@/components/common/ImageContainer";
+import { UserItemActionMenuTrigger, UserItemProps } from "../UserItem";
 import { useCurrentUser } from "@/components/common/CurrentUserContext";
-import { UserItemActionMenuTrigger } from "../UserItemActionMenuTrigger";
 import { ItemBaseDetailModalTrigger } from "@/components/common/ItemBase";
-import { ActionFn, ActionState, DeleteUserPayload } from "@/lib/actions/types";
 
-export interface UserGridItemProps {
-  id: string;
-  fullName: string;
-  imageUrl?: string;
-  position?: {
-    name: string;
-  };
-  phoneNumber?: string;
-  publicLink?: string;
-  email: string;
-  editUserFormContainer: React.ReactNode;
-  userDetailContainer: React.ReactNode;
-  deleteUser: ActionFn<ActionState, DeleteUserPayload>;
-}
-
-export function UserGridItem({ deleteUser, ...props }: UserGridItemProps) {
-  return (
-    <DeleteUserProvider deleteUser={deleteUser}>
-      <UserItemDeleteOverlay>
-        <UserGridItemInner {...props} />
-      </UserItemDeleteOverlay>
-    </DeleteUserProvider>
-  );
-}
-
-const UserGridItemInner = memo(
+export const UserGridItem = memo(
   ({
     id,
     fullName,
@@ -65,7 +37,8 @@ const UserGridItemInner = memo(
     email,
     editUserFormContainer,
     userDetailContainer,
-  }: Omit<UserGridItemProps, "deleteUser">) => {
+    deleteUser,
+  }: UserItemProps) => {
     const t = useTranslations("users.UserGridItem");
 
     const { isOwner, isGuest } = useCurrentUser();
@@ -94,6 +67,7 @@ const UserGridItemInner = memo(
               userId={id}
               userFullName={fullName}
               className="-mr-2"
+              deleteUser={deleteUser}
             />
           )
         }

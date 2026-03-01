@@ -5,10 +5,9 @@ import {
   FormBaseBody,
   FormBaseFooter,
   FormBaseSubmitButton,
-  useFormBaseActionState,
 } from "@/components/common/FormBase";
 
-import { useRef } from "react";
+import { startTransition, useRef } from "react";
 import { useTranslations } from "next-intl";
 import { TaskStatusSelect } from "../TaskStatusSelect";
 import { TaskProjectSelect } from "../TaskProjectSelect";
@@ -17,9 +16,9 @@ import { TaskCategorySelect } from "../TaskCategorySelect";
 import { TaskTitleTextField } from "../TaskTitleTextField";
 import { ActionFn, ActionState } from "@/lib/actions/types";
 import { TaskDeadlineDatePicker } from "../TaskDeadlineDatePicker";
-import { handleActionSubmit } from "@/lib/utils/handleActionSubmit";
 import { FormErrorBanner } from "@/components/common/FormErrorBanner";
 import { TaskDescriptionTextField } from "../TaskDescriptionTextField";
+import { useCreateEntityActionState } from "@/lib/hooks/useCreateEntityActionState";
 
 interface NewTaskFormProps {
   categorySelectItems: { id: number; name: string }[];
@@ -36,22 +35,27 @@ export function NewTaskForm({
 }: NewTaskFormProps) {
   const t = useTranslations("tasks.NewTaskForm");
 
-  // The ref is used inside reducerAction in useFormBaseActionState.
-  // ref.current in useFormBaseActionState is null on unmount, preventing programmatic modal close when opening another form.
+  // The ref is used inside reducerAction
+  // ref.current is null on unmount, preventing programmatic modal close when opening another form in the same modal
   const ref = useRef<HTMLFormElement>(null);
 
-  const [state, action, isPending] = useFormBaseActionState(
-    createTask,
-    ref,
-    t("successMessage"),
-  );
+  const [state, action, isPending] = useCreateEntityActionState({
+    createEntity: createTask,
+    formRef: ref,
+    successMessage: t("successMessage"),
+  });
+
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+
+    startTransition(() => {
+      action(formData);
+    });
+  }
 
   return (
-    <FormBase
-      ref={ref}
-      id="new-task-form"
-      onSubmit={(e) => handleActionSubmit(e, action)}
-    >
+    <FormBase ref={ref} id="new-task-form" onSubmit={handleSubmit}>
       <FormBaseBody>
         <TaskTitleTextField />
         <TaskDescriptionTextField />

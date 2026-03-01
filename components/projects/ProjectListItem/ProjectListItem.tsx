@@ -7,98 +7,30 @@ import {
 } from "@/components/common/List";
 
 import {
-  ActionFn,
-  ActionState,
-  DeleteProjectsPayload,
-  UpdateProjectStatusesPayload,
-} from "@/lib/actions/types";
-
-import {
   ItemBaseDetailModalTrigger,
   ItemBaseCommentsModalTrigger,
 } from "@/components/common/ItemBase";
 
-import {
-  ProjectItemPendingOverlay,
-  ProjectItemActionMenuTrigger,
-} from "../ProjectItem";
-
 import { memo } from "react";
 import Image from "next/image";
-import { ProjectStatus } from "@/generated/prisma/enums";
 import { useFormatter, useTranslations } from "next-intl";
 import { ProjectDetailModal } from "../ProjectDetailModal";
 import { UnknownUser } from "@/components/common/UnknownUser";
 import { ProjectCommentsModal } from "../ProjectCommentsModal";
 import { ProjectItemBaseBadge } from "../ProjectItemBaseBadge";
 import { ProjectListItemLayout } from "./ProjectListItemLayout";
-import { useSelectedProjects } from "../SelectedProjectsContext";
-import { SelectableItem } from "@/components/common/SelectableItem";
 import { ImageContainer } from "@/components/common/ImageContainer";
 import { UserDetailModal } from "@/components/users/UserDetailModal";
 import { ProjectItemCheckbox } from "../ProjectItem/ProjectItemCheckbox";
+import { ProjectItemActionMenuTrigger, ProjectItemProps } from "../ProjectItem";
 import { CustomerDetailModal } from "@/components/customer/CustomerDetailModal";
-import { DeleteProjectTransitionProvider } from "../DeleteProjectTransitionContext";
-import { UpdateProjectTransitionProvider } from "../UpdateProjectTransitionContext";
-import { UpdateProjectStatusTransitionProvider } from "../UpdateProjectStatusTransitionContext";
 
-export interface ProjectListItemProps {
-  id: number;
-  title: string;
-  deadline: string;
-  creator?: {
-    id: string;
-    fullName: string;
-    imageUrl?: string;
-  };
-  customer?: {
-    id: number;
-    fullName: string;
-    imageUrl?: string;
-  };
-  category?: {
-    id: number;
-    name: string;
-  };
-  company?: {
-    id: number;
-    name: string;
-  };
-  commentsCount: number;
-  status: ProjectStatus;
-  editProjectFormContainer: React.ReactNode;
-  customerDetailContainer?: React.ReactNode;
-  projectCommentsContainer: React.ReactNode;
-  projectDetailContainer: React.ReactNode;
-  userDetailContainer?: React.ReactNode;
-  sendComment: ActionFn<ActionState, FormData>;
-  updateComment: ActionFn<ActionState, FormData>;
-  updateProjectStatus: ActionFn<ActionState, UpdateProjectStatusesPayload>;
-  deleteProject: ActionFn<ActionState, DeleteProjectsPayload>;
-}
+export type ProjectListItemProps = Omit<
+  ProjectItemProps,
+  "tasksTotal" | "tasksCompleted"
+>;
 
-export const ProjectListItem = (props: ProjectListItemProps) => {
-  const selected = useSelectedProjects();
-
-  return (
-    <UpdateProjectTransitionProvider>
-      <DeleteProjectTransitionProvider>
-        <UpdateProjectStatusTransitionProvider>
-          <ProjectItemPendingOverlay projectId={props.id}>
-            <SelectableItem
-              {...selected}
-              item={{ id: props.id, status: props.status }}
-            >
-              <ProjectListItemInner {...props} />
-            </SelectableItem>
-          </ProjectItemPendingOverlay>
-        </UpdateProjectStatusTransitionProvider>
-      </DeleteProjectTransitionProvider>
-    </UpdateProjectTransitionProvider>
-  );
-};
-
-export const ProjectListItemInner = memo(
+export const ProjectListItem = memo(
   ({
     id,
     title,

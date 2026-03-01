@@ -1,0 +1,1 @@
+export { withDeleteTaskTransitionProvider } from "./withDeleteTaskTransitionProvider";

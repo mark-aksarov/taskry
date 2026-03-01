@@ -17,19 +17,12 @@ import { AppHeaderStory } from "@/components/layout/AppHeader/__stories__";
 import { getCommentList } from "@/components/comments/CommentList/__stories__";
 import { editTaskFormArgs } from "@/components/tasks/EditTaskForm/__stories__";
 import { taskDetailAltArgs } from "@/components/tasks/TaskDetailAlt/__stories__";
-import { withDeleteSubtaskModalProvider } from "@/components/subtasks/DeleteSubtaskModal/__stories__";
-import { withDeleteCommentModalProvider } from "@/components/comments/DeleteCommentModal/__stories__";
 
 const meta = {
   title: "pages/TaskDetailPage",
   component: TaskDetailPage,
   parameters: { layout: "fullscreen" },
-  decorators: [
-    PageDecorator,
-    withDeleteSubtaskModalProvider,
-    withDeleteCommentModalProvider,
-    withThemedBackground,
-  ],
+  decorators: [PageDecorator, withThemedBackground],
   beforeEach: () => {
     mocked(usePathname).mockReturnValue("/tasks/1");
     mocked(useParams).mockReturnValue({
@@ -45,7 +38,6 @@ const task = mockedTaskDetail;
 
 export const Default = {
   args: {
-    guestMode: false,
     taskId: task.id,
     taskTitle: task.title,
     deleteTask: () => ({ status: "success" }),

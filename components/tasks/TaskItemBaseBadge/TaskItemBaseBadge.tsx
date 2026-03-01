@@ -1,36 +1,41 @@
-import {
-  useUpdateTaskStatusContext,
-  useUpdateTaskStatusesContext,
-} from "../UpdateTaskStatusContext";
-
 import { Loader2 } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { TaskStatus } from "@/generated/prisma/enums";
 import { ItemBaseBadge } from "@/components/common/ItemBase";
 import { getTaskStatusBadgeColor } from "../getTaskStatusBadgeColor";
+import { useUpdateTaskStatuses } from "../UpdateTaskStatusesContext";
+import { useUpdateTaskStatusTransition } from "../UpdateTaskStatusTransitionContext";
 
 interface TaskItemBaseBadgeProps {
+  taskId: number;
   className?: string;
   status: TaskStatus;
-  isSelected?: boolean;
   deadline: string;
 }
 
 export function TaskItemBaseBadge({
+  taskId,
   className,
   status,
-  isSelected,
   deadline,
 }: TaskItemBaseBadgeProps) {
   const t = useTranslations("tasks.TaskStatus");
 
-  // Show loader when updating task status
-  const { isPending: isUpdateTaskStatusPending } = useUpdateTaskStatusContext();
-  const { isPending: isUpdateTaskStatusesPending } =
-    useUpdateTaskStatusesContext();
+  // Pending state for single task status update
+  const { isPending: isUpdateTaskStatusPending } =
+    useUpdateTaskStatusTransition();
 
+  // Pending state for batch task status updates
+  const { isPending: isUpdateTaskStatusesPending, taskIds: updatedTaskIds } =
+    useUpdateTaskStatuses();
+
+  // Whether this task is included in the current batch update
+  const isTaskInBatchUpdate = updatedTaskIds.includes(taskId);
+
+  // Combined pending state for this task
   const isPending =
-    isUpdateTaskStatusPending || (isUpdateTaskStatusesPending && isSelected);
+    isUpdateTaskStatusPending ||
+    (isUpdateTaskStatusesPending && isTaskInBatchUpdate);
 
   const isOverdue = new Date(deadline) < new Date();
 

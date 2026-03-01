@@ -23,7 +23,6 @@ export const Default = {
     toggleSubtask: () => ({ status: "success" }),
     updateSubtask: () => ({ status: "success" }),
     deleteSubtask: () => ({ status: "success" }),
-    guestMode: false,
   },
 } satisfies Story;
 

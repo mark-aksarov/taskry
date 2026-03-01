@@ -8,12 +8,12 @@ import { CommentItemTitle } from "./CommentItemTitle";
 import { CommentItemLayout } from "./CommentItemLayout";
 import { ActionFn, ActionState } from "@/lib/actions/types";
 import { UnknownUser } from "@/components/common/UnknownUser";
-import { DeleteCommentProvider } from "../DeleteCommentContext";
 import { ImageContainer } from "@/components/common/ImageContainer";
 import { useFormatter, useLocale, useTranslations } from "next-intl";
-import { CommentItemDeleteOverlay } from "../CommentItemDeleteOverlay";
-import { CommentItemActionMenuTrigger } from "./CommentItemActionMenuTrigger";
+import { CommentItemPendingOverlay } from "./CommentItemPendingOverlay";
 import { useCurrentUser } from "@/components/common/CurrentUserContext";
+import { CommentItemActionMenuTrigger } from "./CommentItemActionMenuTrigger";
+import { DeleteCommentTransitionProvider } from "../DeleteCommentTransitionContext";
 
 interface CommentItemProps {
   id: number;
@@ -30,17 +30,13 @@ interface CommentItemProps {
   deleteComment: ActionFn<ActionState, number>;
 }
 
-export function CommentItem({
-  mutate,
-  deleteComment,
-  ...props
-}: CommentItemProps) {
+export function CommentItem(props: CommentItemProps) {
   return (
-    <DeleteCommentProvider deleteComment={deleteComment} mutate={mutate}>
-      <CommentItemDeleteOverlay>
+    <DeleteCommentTransitionProvider>
+      <CommentItemPendingOverlay commentId={props.id}>
         <CommentItemInner {...props} />
-      </CommentItemDeleteOverlay>
-    </DeleteCommentProvider>
+      </CommentItemPendingOverlay>
+    </DeleteCommentTransitionProvider>
   );
 }
 
@@ -51,7 +47,9 @@ const CommentItemInner = memo(
     createdAt,
     canEdit,
     sender,
-  }: Omit<CommentItemProps, "deleteComment" | "mutate">) => {
+    deleteComment,
+    mutate,
+  }: CommentItemProps) => {
     const t = useTranslations("comments.CommentItem");
     const locale = useLocale();
 
@@ -111,6 +109,8 @@ const CommentItemInner = memo(
             <CommentItemActionMenuTrigger
               commentId={id}
               commentContent={content}
+              deleteComment={deleteComment}
+              mutate={mutate}
             />
           )
         }

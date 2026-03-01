@@ -17,8 +17,6 @@ export async function createProjectCategory(
   // Authorization
   await requireSessionOrRedirect();
 
-  await new Promise((resolve) => setTimeout(resolve, 3000));
-
   const t = await getTranslations("actions");
 
   try {

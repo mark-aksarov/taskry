@@ -1,7 +1,4 @@
 {
-  "DeleteTaskCategoryProvider": {
-    "successMessage": "Task category deleted successfully"
-  },
   "NewTaskCategoryForm": {
     "submitButtonLabel": "Create category",
     "successMessage": "Task category created successfully."
@@ -26,12 +23,13 @@
   "TaskCategoryToolbarCreateNewModalTrigger": {
     "label": "Create new"
   },
-  "TaskCategoryItemActionMenuTrigger": {
+  "TaskCategoryListItemActionMenuTrigger": {
     "edit": "Edit",
     "delete": "Delete"
   },
   "EditTaskCategoryForm": {
-    "submitButtonLabel": "Update task category"
+    "submitButtonLabel": "Update task category",
+    "successMessage": "Task category updated successfully"
   },
   "EditTaskCategoryModal": {
     "title": "Edit task category"
@@ -40,12 +38,14 @@
     "heading": "Delete task categories",
     "text": "Are you sure you want to delete <strong>{count} task categories</strong>? All contents will be permanently removed.",
     "deleteButton": "Delete",
-    "cancelButton": "Cancel"
+    "cancelButton": "Cancel",
+    "successMessage": "Task categories deleted successfully"
   },
   "DeleteTaskCategoryModal": {
     "heading": "Delete task category",
     "text": "Are you sure you want to delete task category <strong>«{name}»</strong>? All contents will be permanently removed.",
     "cancelButton": "Cancel",
-    "deleteButton": "Delete"
+    "deleteButton": "Delete",
+    "successMessage": "Task category deleted successfully"
   }
 }
