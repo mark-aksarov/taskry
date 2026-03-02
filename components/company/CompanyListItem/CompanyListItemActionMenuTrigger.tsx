@@ -11,7 +11,7 @@ import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
 import { Pencil, Trash } from "lucide-react";
 import { EditCompanyModal } from "../EditCompanyModal";
-import { ActionFn, ActionState } from "@/lib/actions/types";
+import { useUpdateCompany } from "../UpdateCompanyContext";
 import { useCurrentUser } from "../../common/CurrentUserContext";
 import { GuestModeModal } from "@/components/common/GuestModeModal";
 import { useCompanyListItemPending } from "./useCompanyListItemPending";
@@ -20,29 +20,32 @@ import { DeleteCompanyModal } from "@/components/company/DeleteCompanyModal";
 export type CompanyListItemActionMenuTriggerProps = {
   companyId: number;
   companyName: string;
-  updateCompany: ActionFn<ActionState, FormData>;
-  deleteCompany: ActionFn<ActionState, number[]>;
 };
 
 export function CompanyListItemActionMenuTrigger({
   companyId,
   companyName,
-  updateCompany,
-  deleteCompany,
 }: CompanyListItemActionMenuTriggerProps) {
   const t = useTranslations("company.CompanyListItemActionMenuTrigger");
 
-  // Deleting the company
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-
-  // Guest mode
+  // Detect if the current user is a guest
   const { isGuest } = useCurrentUser();
   const [isGuestModeModalOpen, setIsGuestModeModalOpen] = useState(false);
 
-  // Modal state for editing the company
-  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  // Delete confirmation modal state
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
-  // Handle menu actions
+  // Shared state for edit modal from context
+  const {
+    isModalOpen: isEditModalOpen,
+    onModalOpenChange: onEditModalOpenChange,
+  } = useUpdateCompany();
+
+  /**
+   * Handles menu actions for a company item
+   * - If user is a guest, show guest modal
+   * - Otherwise, open edit or delete modal based on action key
+   */
   const handleAction = (key: Key) => {
     if (isGuest) {
       setIsGuestModeModalOpen(true);
@@ -51,13 +54,13 @@ export function CompanyListItemActionMenuTrigger({
 
     const action = key.toString();
     if (action === "edit") {
-      setIsEditModalOpen(true);
+      onEditModalOpenChange(true);
     } else if (action === "delete") {
       setIsDeleteModalOpen(true);
     }
   };
 
-  //Pending state while deleting or updating
+  // Determine if any action on this company item is pending (update or delete)
   const isPending = useCompanyListItemPending(companyId);
 
   return (
@@ -81,12 +84,12 @@ export function CompanyListItemActionMenuTrigger({
         </Item>
       </ItemBaseActionMenuTrigger>
 
+      {/* Modals for editing, deleting, and guest mode */}
       <EditCompanyModal
         isOpen={isEditModalOpen}
-        onOpenChange={setIsEditModalOpen}
+        onOpenChange={onEditModalOpenChange}
         companyId={companyId}
         companyName={companyName}
-        updateCompany={updateCompany}
       />
 
       <DeleteCompanyModal
@@ -94,7 +97,6 @@ export function CompanyListItemActionMenuTrigger({
         companyName={companyName}
         isOpen={isDeleteModalOpen}
         onOpenChange={setIsDeleteModalOpen}
-        deleteCompany={deleteCompany}
       />
 
       <GuestModeModal

@@ -1,27 +1,32 @@
+"use client";
+
 import {
   FormBaseModal,
   FormBaseModalDialog,
   FormBaseModalDialogBody,
 } from "@/components/common/FormBaseModal";
 
-import { ModalProps } from "@/components/ui/Modal";
-import { DialogHeader } from "@/components/ui/Dialog";
-
 import { useTranslations } from "next-intl";
+import { DialogHeader } from "@/components/ui/Dialog";
+import { useCreateCustomer } from "../CreateCustomerContext";
 
-interface NewCustomerModalProps
-  extends Pick<ModalProps, "isOpen" | "onOpenChange"> {
+interface NewCustomerModalProps {
   newCustomerFormContainer: React.ReactNode;
 }
 
 export function NewCustomerModal({
   newCustomerFormContainer,
-  ...props
 }: NewCustomerModalProps) {
   const t = useTranslations("customers.NewCustomerModal");
 
+  const { isModalOpen, onModalOpenChange } = useCreateCustomer();
+
   return (
-    <FormBaseModal data-test="new-customer-modal" {...props}>
+    <FormBaseModal
+      data-test="new-customer-modal"
+      isOpen={isModalOpen}
+      onOpenChange={onModalOpenChange}
+    >
       <FormBaseModalDialog>
         <DialogHeader>{t("title")}</DialogHeader>
         <FormBaseModalDialogBody>

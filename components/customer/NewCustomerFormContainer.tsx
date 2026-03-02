@@ -4,7 +4,6 @@ import { Suspense } from "react";
 import { NewCustomerForm } from "./NewCustomerForm";
 import { CustomerFormSkeleton } from "./CustomerFormSkeleton";
 import { getCompanySummaries } from "@/lib/data/company/company.dal";
-import { createCustomer } from "@/lib/actions/customer/createCustomer";
 
 export function NewCustomerFormContainer() {
   return (
@@ -17,10 +16,5 @@ export function NewCustomerFormContainer() {
 async function NewCustomerFormContainerInner() {
   const companies = await getCompanySummaries();
 
-  return (
-    <NewCustomerForm
-      companySelectItems={companies}
-      createCustomer={createCustomer}
-    />
-  );
+  return <NewCustomerForm companySelectItems={companies} />;
 }

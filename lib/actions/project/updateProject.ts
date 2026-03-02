@@ -46,13 +46,14 @@ export async function updateProject(
 
     return {
       status: "success",
+      message: t("project.update.success"),
     };
   } catch (error) {
     console.error("Server Action Error:", error);
 
     return {
       status: "error",
-      message: t("updateProject.error.internalServerError"),
+      message: t("project.update.error"),
     };
   }
 }

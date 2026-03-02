@@ -20,8 +20,9 @@ export async function deleteTasks(
 
   const t = await getTranslations("actions");
 
+  let parsedIds: number[] = [];
   try {
-    const parsedIds = taskIds.parse(payload.ids);
+    parsedIds = taskIds.parse(payload.ids);
 
     await deleteTaskQuery(parsedIds);
     revalidatePath("/tasks");
@@ -30,7 +31,10 @@ export async function deleteTasks(
 
     return {
       status: "error",
-      message: t("deleteTask.error.internalServerError"),
+      message:
+        parsedIds.length > 1
+          ? t("task.delete.error.many")
+          : t("task.delete.error.one"),
     };
   }
 
@@ -42,5 +46,9 @@ export async function deleteTasks(
 
   return {
     status: "success",
+    message:
+      parsedIds.length > 1
+        ? t("task.delete.success.many")
+        : t("task.delete.success.one"),
   };
 }

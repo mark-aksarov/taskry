@@ -1,1 +1,0 @@
-export { withDeleteCompanyTransitionProvider } from "./withDeleteCompanyTransitionProvider";

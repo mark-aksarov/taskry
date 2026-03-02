@@ -35,13 +35,14 @@ export async function updateProjectCategory(
 
     return {
       status: "success",
+      message: t("projectCategory.update.success"),
     };
   } catch (error) {
     console.error("Server Action Error:", error);
 
     return {
       status: "error",
-      message: t("deleteProjectCategory.error.internalServerError"),
+      message: t("projectCategory.update.error"),
     };
   }
 }

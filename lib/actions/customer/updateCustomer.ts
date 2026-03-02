@@ -46,13 +46,14 @@ export async function updateCustomer(
 
     return {
       status: "success",
+      message: t("customer.update.success"),
     };
   } catch (error) {
     console.error("Server Action Error:", error);
 
     return {
       status: "error",
-      message: t("updateCustomer.error.internalServerError"),
+      message: t("customer.update.error"),
     };
   }
 }

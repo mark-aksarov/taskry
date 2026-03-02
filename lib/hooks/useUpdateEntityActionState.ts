@@ -1,6 +1,6 @@
 import { useErrorToast } from "./useErrorToast";
 import { useActionState, useContext } from "react";
-import { useSuccessToast } from "./useSuccessToast";
+import { useSuccessToast } from "@/lib/hooks/useSuccessToast";
 import { ActionFn, ActionState } from "../actions/types";
 import { OverlayTriggerStateContext } from "react-aria-components";
 

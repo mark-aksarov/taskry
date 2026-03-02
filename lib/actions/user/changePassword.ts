@@ -33,6 +33,7 @@ export async function changePassword(
 
     return {
       status: "success",
+      message: t("user.changePassword.success"),
     };
   } catch (error) {
     console.error("Server Action Error:", error);
@@ -46,7 +47,7 @@ export async function changePassword(
 
     return {
       status: "error",
-      message: t("changePassword.error.internalServerError"),
+      message: t("user.changePassword.error"),
     };
   }
 }

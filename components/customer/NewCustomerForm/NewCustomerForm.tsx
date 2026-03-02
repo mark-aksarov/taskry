@@ -7,9 +7,9 @@ import {
   FormBaseSubmitButton,
 } from "@/components/common/FormBase";
 
+import { startTransition } from "react";
 import { useTranslations } from "next-intl";
-import { startTransition, useRef } from "react";
-import { ActionFn, ActionState } from "@/lib/actions/types";
+import { useCreateCustomer } from "../CreateCustomerContext";
 import { CustomerBioTextField } from "../CustomerBioTextField";
 import { CustomerCompanySelect } from "../CustomerCompanySelect";
 import { CustomerEmailTextField } from "../CustomerEmailTextField";
@@ -17,28 +17,15 @@ import { FormErrorBanner } from "@/components/common/FormErrorBanner";
 import { CustomerFullNameTextField } from "../CustomerFullNameTextField";
 import { CustomerPublicLinkTextField } from "../CustomerPublicLinkTextField";
 import { CustomerPhoneNumberTextField } from "../CustomerPhoneNumberTextField";
-import { useCreateEntityActionState } from "@/lib/hooks/useCreateEntityActionState";
 
 interface NewCustomerFormProps {
   companySelectItems: { id: number; name: string }[];
-  createCustomer: ActionFn<ActionState, FormData>;
 }
 
-export function NewCustomerForm({
-  companySelectItems,
-  createCustomer,
-}: NewCustomerFormProps) {
+export function NewCustomerForm({ companySelectItems }: NewCustomerFormProps) {
   const t = useTranslations("customers.NewCustomerForm");
 
-  // The ref is used inside reducerAction
-  // ref.current is null on unmount, preventing programmatic modal close when opening another form in the same modal
-  const ref = useRef<HTMLFormElement>(null);
-
-  const [state, action, isPending] = useCreateEntityActionState({
-    createEntity: createCustomer,
-    formRef: ref,
-    successMessage: t("successMessage"),
-  });
+  const { state, action, isPending } = useCreateCustomer();
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -50,7 +37,7 @@ export function NewCustomerForm({
   }
 
   return (
-    <FormBase ref={ref} id="new-customer-form" onSubmit={handleSubmit}>
+    <FormBase id="new-customer-form" onSubmit={handleSubmit}>
       <FormBaseBody>
         <CustomerFullNameTextField />
         <CustomerBioTextField />

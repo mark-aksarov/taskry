@@ -29,13 +29,14 @@ export async function toggleSubtask(
 
     return {
       status: "success",
+      message: t("subtask.updateStatus.error"),
     };
   } catch (error) {
     console.error("Server Action Error:", error);
 
     return {
       status: "error",
-      message: t("toggleSubtask.error.internalServerError"),
+      message: t("subtask.updateStatus.error"),
     };
   }
 }

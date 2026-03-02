@@ -26,9 +26,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    customerIds: [1, 2, 3],
     isOpen: false,
     onOpenChange: () => {},
-    deleteCustomers: () => ({ status: "success" }),
   },
 } satisfies Story;

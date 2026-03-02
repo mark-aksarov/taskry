@@ -29,13 +29,14 @@ export async function updateComment(
 
     return {
       status: "success",
+      message: t("comment.update.success"),
     };
   } catch (error) {
     console.error("Server Action Error:", error);
 
     return {
       status: "error",
-      message: t("updateComment.error.internalServerError"),
+      message: t("comment.update.error"),
     };
   }
 }

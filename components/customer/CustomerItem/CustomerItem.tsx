@@ -9,11 +9,11 @@ import {
 import { CustomerGridItem } from "../CustomerGridItem";
 import { CustomerListItem } from "../CustomerListItem";
 import { useViewMode } from "@/components/common/ViewMode";
+import { DeleteCustomerProvider } from "../DeleteCustomerContext";
 import { SelectableItem } from "@/components/common/SelectableItem";
 import { CustomerItemPendingOverlay } from "./CustomerItemPendingOverlay";
 import { useSelectedItems } from "@/components/common/SelectedItemsContext";
-import { DeleteCustomerTransitionProvider } from "../DeleteCustomerTransitionContext";
-import { UpdateCustomerTransitionProvider } from "../UpdateCustomerTransitionContext";
+import { UpdateCustomerProvider } from "../UpdateCustomerContext";
 
 export interface CustomerItemProps {
   id: number;
@@ -28,17 +28,22 @@ export interface CustomerItemProps {
   };
   customerDetailContainer: React.ReactNode;
   editCustomerFormContainer: React.ReactNode;
+  updateCustomer: ActionFn<ActionState, FormData>;
   deleteCustomer: ActionFn<ActionState, DeleteCustomersPayload>;
 }
 
-export function CustomerItem(props: CustomerItemProps) {
+export function CustomerItem({
+  updateCustomer,
+  deleteCustomer,
+  ...props
+}: CustomerItemProps) {
   const selected = useSelectedItems();
 
   const { viewMode } = useViewMode();
 
   return (
-    <DeleteCustomerTransitionProvider>
-      <UpdateCustomerTransitionProvider>
+    <DeleteCustomerProvider deleteCustomer={deleteCustomer}>
+      <UpdateCustomerProvider updateCustomer={updateCustomer}>
         <CustomerItemPendingOverlay customerId={props.id}>
           <SelectableItem {...selected} item={{ id: props.id }}>
             {viewMode === "grid" ? (
@@ -48,7 +53,7 @@ export function CustomerItem(props: CustomerItemProps) {
             )}
           </SelectableItem>
         </CustomerItemPendingOverlay>
-      </UpdateCustomerTransitionProvider>
-    </DeleteCustomerTransitionProvider>
+      </UpdateCustomerProvider>
+    </DeleteCustomerProvider>
   );
 }

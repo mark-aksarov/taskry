@@ -31,13 +31,14 @@ export async function updateTaskCategory(
 
     return {
       status: "success",
+      message: t("taskCategory.update.success"),
     };
   } catch (error) {
     console.error("Server Action Error:", error);
 
     return {
       status: "error",
-      message: t("deleteTaskCategory.error.internalServerError"),
+      message: t("taskCategory.update.error"),
     };
   }
 }

@@ -25,13 +25,14 @@ export async function deleteComment(
 
     return {
       status: "success",
+      message: t("comment.delete.success.one"),
     };
   } catch (error) {
     console.error("Server Action Error:", error);
 
     return {
       status: "error",
-      message: t("deleteComment.error.internalServerError"),
+      message: t("comment.delete.error.one"),
     };
   }
 }

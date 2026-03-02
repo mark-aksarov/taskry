@@ -30,6 +30,7 @@ export const Default = {
   args: {
     companyId: 1,
     companyName: "Company 1",
-    updateCompany: () => ({ status: "success" }),
+    isOpen: true,
+    onOpenChange: () => {},
   },
 } satisfies Story;

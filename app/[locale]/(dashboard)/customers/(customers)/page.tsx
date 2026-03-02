@@ -17,17 +17,19 @@ import { customerSortFields } from "@/lib/types";
 import { companyId } from "@/lib/schemas/company";
 import { hasOwnerRole } from "@/lib/utils/hasOwnerRole";
 import { hasGuestRole } from "@/lib/utils/hasGuestRole";
-import { CustomersPageEmpty } from "./CustomersPageEmpty";
 import { createCompany } from "@/lib/actions/company/createCompany";
+import { createCustomer } from "@/lib/actions/customer/createCustomer";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { deleteCustomers } from "@/lib/actions/customer/deleteCustomers";
 import { CurrentUserProvider } from "@/components/common/CurrentUserContext";
 import { CustomersContainer } from "@/components/customer/CustomersContainer";
 import { SelectedItemsProvider } from "@/components/common/SelectedItemsContext";
+import { CreateCompanyProvider } from "@/components/company/CreateCompanyContext";
 import { PageTransitionProvider } from "@/components/common/PageTransitionContext";
+import { CreateCustomerProvider } from "@/components/customer/CreateCustomerContext";
+import { DeleteCustomersProvider } from "@/components/customer/DeleteCustomersContext";
 import { NewCustomerFormContainer } from "@/components/customer/NewCustomerFormContainer";
 import { CustomerFiltersFormContainer } from "@/components/customer/CustomerFiltersFormContainer";
-import { DeleteCustomersProvider } from "@/components/customer/DeleteCustomersContext";
 
 const searchParamsSchema = z.object({
   page: pageSearchParam,
@@ -68,17 +70,6 @@ export default async function AppCustomersPage({
   // Render the empty page if there are no customers (without applying filters)
   const totalCount = await getCustomerCount();
 
-  if (!totalCount) {
-    return (
-      <CurrentUserProvider value={currentUserContextValue}>
-        <CustomersPageEmpty
-          createCompany={createCompany}
-          newCustomerFormContainer={<NewCustomerFormContainer />}
-        />
-      </CurrentUserProvider>
-    );
-  }
-
   // Get customers for the current page based on filters and sorting
   const { items: customers, totalCount: totalFilteredCustomers } =
     await getCustomerList({
@@ -92,25 +83,28 @@ export default async function AppCustomersPage({
     <CurrentUserProvider value={currentUserContextValue}>
       <SelectedItemsProvider pageItems={customers.map((c) => ({ id: c.id }))}>
         <PageTransitionProvider>
-          <DeleteCustomersProvider>
-            <CustomersPage
-              totalFilteredCustomers={totalFilteredCustomers}
-              selectedSortField={sort}
-              createCompany={createCompany}
-              deleteCustomers={deleteCustomers}
-              filtersFormContainer={
-                <CustomerFiltersFormContainer filters={filters} />
-              }
-              newCustomerFormContainer={<NewCustomerFormContainer />}
-              customersContainer={
-                <CustomersContainer
-                  customers={customers}
+          <DeleteCustomersProvider deleteCustomers={deleteCustomers}>
+            <CreateCompanyProvider createCompany={createCompany}>
+              <CreateCustomerProvider createCustomer={createCustomer}>
+                <CustomersPage
                   totalCount={totalCount}
-                  page={page}
-                  pageSize={pageSize}
+                  totalFilteredCustomers={totalFilteredCustomers}
+                  selectedSortField={sort}
+                  filtersFormContainer={
+                    <CustomerFiltersFormContainer filters={filters} />
+                  }
+                  newCustomerFormContainer={<NewCustomerFormContainer />}
+                  customersContainer={
+                    <CustomersContainer
+                      customers={customers}
+                      totalCount={totalCount}
+                      page={page}
+                      pageSize={pageSize}
+                    />
+                  }
                 />
-              }
-            />
+              </CreateCustomerProvider>
+            </CreateCompanyProvider>
           </DeleteCustomersProvider>
         </PageTransitionProvider>
       </SelectedItemsProvider>

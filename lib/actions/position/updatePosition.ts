@@ -31,13 +31,14 @@ export async function updatePosition(
 
     return {
       status: "success",
+      message: t("position.update.success"),
     };
   } catch (error) {
     console.error("Server Action Error:", error);
 
     return {
       status: "error",
-      message: t("updatePosition.error.internalServerError"),
+      message: t("position.update.error"),
     };
   }
 }

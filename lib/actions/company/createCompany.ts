@@ -31,13 +31,14 @@ export async function createCompany(
 
     return {
       status: "success",
+      message: t("company.create.success"),
     };
   } catch (error) {
     console.error("Server Action Error:", error);
 
     return {
       status: "error",
-      message: t("createCompany.error.internalServerError"),
+      message: t("company.create.error"),
     };
   }
 }

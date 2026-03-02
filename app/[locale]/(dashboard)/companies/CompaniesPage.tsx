@@ -8,54 +8,65 @@ import {
 import { useTranslations } from "next-intl";
 import { PageGrid } from "@/components/common/PageGrid";
 import { BackButton } from "@/components/common/BackButton";
-import { ActionFn, ActionState } from "@/lib/actions/types";
 import { ViewModeProvider } from "@/components/common/ViewMode";
 import { PageContainer } from "@/components/common/PageContainer";
+import { NewCompanyModal } from "@/components/company/NewCompanyModal";
+import { EmptyPageContainer } from "@/components/common/EmptyPageContainer";
 import { CompanyToolbarActionsMenuTrigger } from "@/components/company/CompanyToolbarActionsMenuTrigger";
 import { CompanyToolbarCreateNewModalTrigger } from "@/components/company/CompanyToolbarCreateNewModalTrigger";
 
 interface CompaniesPageProps {
+  totalCount: number;
   companiesContainer: React.ReactNode;
-  createCompany: ActionFn<ActionState, FormData>;
-  deleteCompanies: ActionFn<ActionState, number[]>;
 }
 
 export function CompaniesPage({
+  totalCount,
   companiesContainer,
-  createCompany,
-  deleteCompanies,
 }: CompaniesPageProps) {
   const t = useTranslations("app.CompaniesPage");
 
-  const companyToolbarActionsMenuTrigger = (
-    <CompanyToolbarActionsMenuTrigger deleteCompanies={deleteCompanies} />
-  );
+  if (totalCount === 0) {
+    return (
+      <>
+        <EmptyPageContainer
+          heading={t("emptySection.heading")}
+          description={t("emptySection.description")}
+          toolbarCreateNewMenuTrigger={<CompanyToolbarCreateNewModalTrigger />}
+        />
+        <NewCompanyModal />
+      </>
+    );
+  }
 
-  const companyToolbarCreateNewModalTrigger = (
-    <CompanyToolbarCreateNewModalTrigger createCompany={createCompany} />
-  );
   return (
-    <PageContainer>
-      <PageGrid>
-        <ViewModeProvider>
-          <ToolbarDesktop>
-            {companyToolbarActionsMenuTrigger}
-            {companyToolbarCreateNewModalTrigger}
-          </ToolbarDesktop>
+    <>
+      <PageContainer>
+        <PageGrid>
+          <ViewModeProvider>
+            <ToolbarDesktop>
+              <CompanyToolbarActionsMenuTrigger />
+              <CompanyToolbarCreateNewModalTrigger />
+            </ToolbarDesktop>
 
-          <ToolbarMobileTop>
-            <BackButton href="/customers" />
-            <ToolbarMobileHeading>{t("heading")}</ToolbarMobileHeading>
-            {companyToolbarActionsMenuTrigger}
-          </ToolbarMobileTop>
+            <ToolbarMobileTop>
+              <BackButton href="/customers" />
+              <ToolbarMobileHeading>{t("heading")}</ToolbarMobileHeading>
+              <CompanyToolbarActionsMenuTrigger />
+            </ToolbarMobileTop>
 
-          <ToolbarMobileBottom>
-            <div className="ml-auto">{companyToolbarCreateNewModalTrigger}</div>
-          </ToolbarMobileBottom>
+            <ToolbarMobileBottom>
+              <div className="ml-auto">
+                <CompanyToolbarCreateNewModalTrigger />
+              </div>
+            </ToolbarMobileBottom>
 
-          {companiesContainer}
-        </ViewModeProvider>
-      </PageGrid>
-    </PageContainer>
+            {companiesContainer}
+          </ViewModeProvider>
+        </PageGrid>
+      </PageContainer>
+
+      <NewCompanyModal />
+    </>
   );
 }

@@ -6,19 +6,12 @@ import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
 import { DialogHeader } from "../ui/Dialog";
 import { GuestModeModal } from "../common/GuestModeModal";
-import { ActionFn, ActionState } from "@/lib/actions/types";
 import { ToolbarActionsMenuTrigger } from "../common/Toolbar";
 import { DeleteCompaniesModal } from "./DeleteCompaniesModal";
 import { useCurrentUser } from "../common/CurrentUserContext";
 import { useSelectedItems } from "@/components/common/SelectedItemsContext";
 
-interface CompanyToolbarActionsMenuTriggerProps {
-  deleteCompanies: ActionFn<ActionState, number[]>;
-}
-
-export const CompanyToolbarActionsMenuTrigger = ({
-  deleteCompanies,
-}: CompanyToolbarActionsMenuTriggerProps) => {
+export const CompanyToolbarActionsMenuTrigger = () => {
   const t = useTranslations("company.CompanyToolbarActionsMenuTrigger");
 
   // Guest mode
@@ -61,8 +54,6 @@ export const CompanyToolbarActionsMenuTrigger = ({
       <DeleteCompaniesModal
         isOpen={isDeleteModalOpen}
         onOpenChange={setIsDeleteModalOpen}
-        companyIds={selected.ids}
-        deleteCompanies={deleteCompanies}
       />
 
       {/* Guest mode modal */}

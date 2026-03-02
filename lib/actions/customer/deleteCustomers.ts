@@ -20,8 +20,10 @@ export async function deleteCustomers(
 
   const t = await getTranslations("actions");
 
+  let parsedIds: number[] = [];
+
   try {
-    const parsedIds = customerIds.parse(payload.ids);
+    parsedIds = customerIds.parse(payload.ids);
 
     await deleteCustomersQuery(parsedIds);
     revalidatePath("/customers");
@@ -30,7 +32,10 @@ export async function deleteCustomers(
 
     return {
       status: "error",
-      message: t("deleteCustomer.error.internalServerError"),
+      message:
+        parsedIds.length > 1
+          ? t("customer.delete.error.many")
+          : t("customer.delete.error.one"),
     };
   }
 
@@ -42,5 +47,9 @@ export async function deleteCustomers(
 
   return {
     status: "success",
+    message:
+      parsedIds.length > 1
+        ? t("customer.delete.success.many")
+        : t("customer.delete.success.one"),
   };
 }

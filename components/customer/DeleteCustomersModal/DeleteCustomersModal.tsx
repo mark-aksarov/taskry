@@ -8,57 +8,41 @@ import {
   ConfirmModalConfirmButton,
 } from "@/components/common/ConfirmModal";
 
-import {
-  ActionFn,
-  ActionState,
-  DeleteCustomersPayload,
-} from "@/lib/actions/types";
-
 import { useTranslations } from "next-intl";
-import { ModalProps } from "@/components/ui/Modal";
 import { DialogHeading } from "@/components/ui/Dialog";
 import { useDeleteCustomers } from "../DeleteCustomersContext";
-import { useDeleteEntityActionState } from "@/lib/hooks/useDeleteEntityActionState";
+import { handleDeleteEntities } from "@/lib/utils/handleDeleteEntities";
 import { useSelectedItems } from "@/components/common/SelectedItemsContext";
 
-interface DeleteCustomersModalProps extends ModalProps {
-  customerIds: number[];
-  deleteCustomers: ActionFn<ActionState, DeleteCustomersPayload>;
+interface DeleteCustomersModalProps {
+  isOpen: boolean;
+  onOpenChange: (open: boolean) => void;
 }
 
 export function DeleteCustomersModal({
-  customerIds,
   isOpen,
   onOpenChange,
-  deleteCustomers,
 }: DeleteCustomersModalProps) {
   const t = useTranslations("customers.DeleteCustomersModal");
 
-  const { startTransition, setCustomerIds: setDeleteCustomerIds } =
-    useDeleteCustomers();
-
-  const [, action] = useDeleteEntityActionState({
-    deleteEntity: deleteCustomers,
-    successMessage: t("successMessage"),
-  });
-
+  const selected = useSelectedItems();
+  const { action, setIds: setDeleteCustomerIds } = useDeleteCustomers();
   const { clear: clearSelectedItems } = useSelectedItems();
 
   function handleDelete() {
-    onOpenChange?.(false);
-
-    // Clear selected items
-    clearSelectedItems();
-
-    // Used to show an overlay on the selected customers
-    setDeleteCustomerIds(customerIds);
-
     const payload = {
-      ids: customerIds,
+      ids: selected.ids,
       shouldRedirect: false,
     };
 
-    startTransition(() => action(payload));
+    handleDeleteEntities(
+      selected.ids,
+      action,
+      payload,
+      setDeleteCustomerIds,
+      clearSelectedItems,
+      onOpenChange,
+    );
   }
 
   return (
@@ -71,7 +55,7 @@ export function DeleteCustomersModal({
       <ConfirmModalText>
         {t.rich("text", {
           strong: (chunks) => <strong>{chunks}</strong>,
-          count: customerIds.length,
+          count: selected.ids.length,
         })}
       </ConfirmModalText>
       <ConfirmModalActions>

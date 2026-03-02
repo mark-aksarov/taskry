@@ -2,7 +2,7 @@
 
 import { useActionState } from "react";
 import { useErrorToast } from "./useErrorToast";
-import { useSuccessToast } from "./useSuccessToast";
+import { useSuccessToast } from "@/lib/hooks/useSuccessToast";
 import { ActionFn, ActionState } from "@/lib/actions/types";
 
 const initialState: ActionState = {

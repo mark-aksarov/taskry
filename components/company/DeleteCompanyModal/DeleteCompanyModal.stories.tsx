@@ -4,16 +4,11 @@ import { Meta, StoryObj } from "@storybook/react";
 import { DeleteCompanyModal } from "../DeleteCompanyModal";
 import { withToastRegion } from "@/.storybook/withToastRegion";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withDeleteCompanyTransitionProvider } from "../DeleteCompanyTransitionContext/__stories__";
 
 const meta = {
   title: "components/companies/DeleteCompanyModal",
   component: DeleteCompanyModal,
-  decorators: [
-    withToastRegion,
-    withDeleteCompanyTransitionProvider,
-    withThemedBackground,
-  ],
+  decorators: [withToastRegion, withThemedBackground],
   render: (args) => {
     const [open, setOpen] = useState(true);
 
@@ -35,6 +30,5 @@ export const Default = {
     companyName: "Company 1",
     isOpen: true,
     onOpenChange: () => {},
-    deleteCompany: () => ({ status: "success" }),
   },
 } satisfies Story;

@@ -30,13 +30,14 @@ export async function updateSubtask(
 
     return {
       status: "success",
+      message: t("subtask.update.success"),
     };
   } catch (error) {
     console.error("Server Action Error:", error);
 
     return {
       status: "error",
-      message: t("updateSubtask.error.internalServerError"),
+      message: t("subtask.update.error"),
     };
   }
 }

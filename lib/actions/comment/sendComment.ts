@@ -41,13 +41,14 @@ export async function sendComment(
 
     return {
       status: "success",
+      message: t("comment.create.success"),
     };
   } catch (error) {
     console.error("Server Action Error:", error);
 
     return {
       status: "error",
-      message: t("sendComment.error.internalServerError"),
+      message: t("comment.create.error"),
     };
   }
 }

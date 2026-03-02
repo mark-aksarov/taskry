@@ -31,6 +31,7 @@ export async function createUser(
 
     return {
       status: "success",
+      message: t("user.create.success"),
     };
   } catch (error: unknown) {
     console.error("Create User Error:", error);
@@ -44,7 +45,7 @@ export async function createUser(
 
     return {
       status: "error",
-      message: t("createUser.error.internalServerError"),
+      message: t("user.create.error"),
     };
   }
 }

@@ -30,6 +30,5 @@ export const Default = {
     customerFullName: "John Doe",
     isOpen: false,
     onOpenChange: () => {},
-    deleteCustomer: () => ({ status: "success" }),
   },
 } satisfies Story;

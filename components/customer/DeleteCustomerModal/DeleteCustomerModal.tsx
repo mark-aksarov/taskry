@@ -1,22 +1,14 @@
 "use client";
 
-import {
-  ActionFn,
-  ActionState,
-  DeleteCustomersPayload,
-} from "@/lib/actions/types";
-
-import { useTranslations } from "next-intl";
+import { startTransition } from "react";
 import { ModalProps } from "@/components/ui/Modal";
+import { useDeleteCustomer } from "../DeleteCustomerContext";
 import { BaseDeleteCustomerModal } from "./BaseDeleteCustomerModal";
 import { useSelectedItems } from "@/components/common/SelectedItemsContext";
-import { useDeleteCustomerTransition } from "../DeleteCustomerTransitionContext";
-import { useDeleteEntityActionState } from "@/lib/hooks/useDeleteEntityActionState";
 
 interface DeleteCustomerModalProps extends ModalProps {
   customerId: number;
   customerFullName: string;
-  deleteCustomer: ActionFn<ActionState, DeleteCustomersPayload>;
 }
 
 export function DeleteCustomerModal({
@@ -24,16 +16,8 @@ export function DeleteCustomerModal({
   customerFullName,
   isOpen,
   onOpenChange,
-  deleteCustomer,
 }: DeleteCustomerModalProps) {
-  const t = useTranslations("customers.DeleteCustomerModal");
-
-  const { startTransition } = useDeleteCustomerTransition();
-
-  const [, action] = useDeleteEntityActionState({
-    deleteEntity: deleteCustomer,
-    successMessage: t("successMessage"),
-  });
+  const { action } = useDeleteCustomer();
 
   const { remove: removeSelected } = useSelectedItems();
 

@@ -4,7 +4,6 @@ import { CompaniesPage } from "./CompaniesPage";
 import CompaniesTemplate from "./CompaniesTemplate";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { usePathname, useRouter } from "next/navigation";
-import { CompaniesPageEmpty } from "./CompaniesPageEmpty";
 import { PageDecorator } from "@/.storybook/PageDecorator";
 import { CompanyList } from "@/components/company/CompanyList";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
@@ -39,9 +38,8 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
+    totalCount: 10,
     companiesContainer: <CompanyList {...CompanyListStory.args} />,
-    createCompany: () => ({ status: "success" }),
-    deleteCompanies: () => ({ status: "success" }),
   },
 } satisfies Story;
 
@@ -51,8 +49,5 @@ export const Loading = {
 } satisfies Story;
 
 export const WithNoCompaniesPage = {
-  args: { ...Default.args },
-  render: () => (
-    <CompaniesPageEmpty createCompany={() => ({ status: "success" })} />
-  ),
+  args: { ...Default.args, totalCount: 0 },
 } satisfies Story;

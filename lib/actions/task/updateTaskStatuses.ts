@@ -23,20 +23,29 @@ export async function updateTaskStatuses(
 
   const t = await getTranslations("actions");
 
+  let parsedIds: number[] = [];
   try {
     const parsedData = schema.parse({ ids, nextStatus });
+    parsedIds = parsedData.ids;
     await updateTaskStatusesQuery(parsedData.ids, parsedData.nextStatus);
     revalidatePath("/tasks");
 
     return {
       status: "success",
+      message:
+        parsedIds.length > 1
+          ? t("task.updateStatus.success.many")
+          : t("task.updateStatus.success.one"),
     };
   } catch (error) {
     console.error("Server Action Error:", error);
 
     return {
       status: "error",
-      message: t("updateTaskStatuses.error.internalServerError"),
+      message:
+        parsedIds.length > 1
+          ? t("task.updateStatus.error.many")
+          : t("task.updateStatus.error.one"),
     };
   }
 }

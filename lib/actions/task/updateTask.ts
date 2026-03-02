@@ -48,13 +48,14 @@ export async function updateTask(
 
     return {
       status: "success",
+      message: t("task.update.success"),
     };
   } catch (error) {
     console.error("Server Action Error:", error);
 
     return {
       status: "error",
-      message: t("updateTask.error.internalServerError"),
+      message: t("task.update.error"),
     };
   }
 }

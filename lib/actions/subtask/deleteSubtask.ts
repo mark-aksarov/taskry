@@ -24,13 +24,14 @@ export async function deleteSubtask(
 
     return {
       status: "success",
+      message: t("subtask.delete.success.one"),
     };
   } catch (error) {
     console.error("Server Action Error:", error);
 
     return {
       status: "error",
-      message: t("deleteSubtask.error.internalServerError"),
+      message: t("subtask.delete.error.one"),
     };
   }
 }

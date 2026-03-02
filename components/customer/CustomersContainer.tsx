@@ -4,6 +4,7 @@ import { CustomerList } from "./CustomerList";
 import { CustomerGrid } from "./CustomerGrid";
 import { CustomerItem } from "./CustomerItem";
 import { CustomerDetailContainer } from "./CustomerDetailContainer";
+import { updateCustomer } from "@/lib/actions/customer/updateCustomer";
 import { CustomerListItemDTO } from "@/lib/data/customer/customer.dto";
 import { EditCustomerFormContainer } from "./EditCustomerFormContainer";
 import { deleteCustomers } from "@/lib/actions/customer/deleteCustomers";
@@ -34,6 +35,7 @@ export async function CustomersContainer({
           phoneNumber={customer.phoneNumber}
           publicLink={customer.publicLink}
           company={customer.company}
+          updateCustomer={updateCustomer}
           deleteCustomer={deleteCustomers}
           editCustomerFormContainer={
             <EditCustomerFormContainer customerId={customer.id} />

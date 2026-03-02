@@ -50,13 +50,14 @@ export async function createProject(
 
     return {
       status: "success",
+      message: t("project.create.success"),
     };
   } catch (error) {
     console.error("Server Action Error:", error);
 
     return {
       status: "error",
-      message: t("createProject.error.internalServerError"),
+      message: t("project.create.error"),
     };
   }
 }

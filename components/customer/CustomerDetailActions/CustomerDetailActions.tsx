@@ -10,12 +10,12 @@ import { useTranslations } from "next-intl";
 import { Pencil, Trash } from "lucide-react";
 import { startTransition, useState } from "react";
 import { EditCustomerModal } from "../EditCustomerModal";
+import { useUpdateCustomer } from "../UpdateCustomerContext";
 import { BaseDeleteCustomerModal } from "../DeleteCustomerModal";
 import { GuestModeModal } from "@/components/common/GuestModeModal";
 import { NavigationButton } from "@/components/common/NavigationButton";
 import { useCurrentUser } from "@/components/common/CurrentUserContext";
-import { useDeleteEntityPageActionState } from "@/lib/hooks/useDeleteEntityPageActionState";
-import { useUpdateCustomerTransition } from "../UpdateCustomerTransitionContext";
+import { useDeleteEntityState } from "@/lib/hooks/useDeleteEntityState";
 
 interface CustomerDetailActionsProps {
   customerId: number;
@@ -32,19 +32,21 @@ export function CustomerDetailActions({
 }: CustomerDetailActionsProps) {
   const t = useTranslations("customers.CustomerDetailActions");
 
-  // Deleting the project
-  const [, action, isDeletePending] = useDeleteEntityPageActionState({
-    deleteEntity: deleteCustomer,
-  });
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-
-  // Guest mode
+  // If the user is a guest, show the guest mode modal instead of allowing creation
   const { isGuest } = useCurrentUser();
   const [isGuestModeModalOpen, setIsGuestModeModalOpen] = useState(false);
 
-  // Editing the task
-  const { isPending: isUpdatePending } = useUpdateCustomerTransition();
-  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  // Delete customer: action state + form modal state
+  const { action, isPending: isDeletePending } =
+    useDeleteEntityState(deleteCustomer);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+
+  // Edit customer: action state + form modal state
+  const {
+    isPending: isUpdatePending,
+    onModalOpenChange: onEditModalOpenChange,
+    isModalOpen: isEditModalOpen,
+  } = useUpdateCustomer();
 
   function handleDeletePress() {
     if (isGuest) {
@@ -61,9 +63,10 @@ export function CustomerDetailActions({
       return;
     }
 
-    setIsEditModalOpen(true);
+    onEditModalOpenChange(true);
   }
 
+  // we should redirect to the customer list page after deletion
   function handleDelete() {
     setIsDeleteModalOpen(false);
     startTransition(() => action({ ids: [customerId], shouldRedirect: true }));
@@ -85,7 +88,9 @@ export function CustomerDetailActions({
         />
         <NavigationButton
           data-test="edit-customer-button"
-          isPending={isUpdatePending}
+          // show pending state
+          // When the modal opens, a reset action is triggered, the pending state becomes true, and flickering occurs
+          isPending={isUpdatePending && !isEditModalOpen}
           onPress={handleEditPress}
           variant="secondary"
           iconLeft={<Pencil size={18} strokeWidth={1.5} absoluteStrokeWidth />}
@@ -95,8 +100,6 @@ export function CustomerDetailActions({
 
       {/* Modal for editing customer details */}
       <EditCustomerModal
-        isOpen={isEditModalOpen}
-        onOpenChange={setIsEditModalOpen}
         editCustomerFormContainer={editCustomerFormContainer}
       />
 

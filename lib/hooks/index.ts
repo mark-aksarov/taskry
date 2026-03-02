@@ -1,1 +1,0 @@
-export { useResponsiveOverlayType } from "./useResponsiveOverlayType";

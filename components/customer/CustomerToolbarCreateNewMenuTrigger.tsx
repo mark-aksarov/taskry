@@ -1,8 +1,8 @@
 "use client";
 
 import {
-  ToolbarCreateNewModalTrigger,
   ToolbarCreateNewMenuTrigger,
+  ToolbarCreateNewModalTrigger,
 } from "../common/Toolbar";
 
 import { useState } from "react";
@@ -11,32 +11,37 @@ import { Item } from "react-stately";
 import { useTranslations } from "next-intl";
 import { Building2, Contact } from "lucide-react";
 import { DialogHeader } from "@/components/ui/Dialog";
-import { NewCustomerModal } from "./NewCustomerModal";
 import { GuestModeModal } from "../common/GuestModeModal";
-import { ActionFn, ActionState } from "@/lib/actions/types";
+import { useCreateCustomer } from "./CreateCustomerContext";
 import { useCurrentUser } from "../common/CurrentUserContext";
-import { NewCompanyModal } from "../company/NewCompanyModal/NewCompanyModal";
+import { useCreateCompany } from "../company/CreateCompanyContext";
 
-interface CustomerToolbarCreateNewMenuTriggerProps {
-  newCustomerFormContainer: React.ReactNode;
-  createCompany: ActionFn<ActionState, FormData>;
-}
-
-export function CustomerToolbarCreateNewMenuTrigger({
-  newCustomerFormContainer,
-  createCompany,
-}: CustomerToolbarCreateNewMenuTriggerProps) {
+export function CustomerToolbarCreateNewMenuTrigger() {
   const t = useTranslations("customers.CustomerToolbarCreateNewMenuTrigger");
 
-  // Separate modal state for creating a customer and a company
-  const [isOpenCustomerModal, setIsOpenCustomerModal] = useState(false);
-  const [isOpenCompanyModal, setIsOpenCompanyModal] = useState(false);
-
-  // Guest mode
+  // If the user is a guest, show the guest mode modal instead of allowing creation
   const { isGuest } = useCurrentUser();
   const [isGuestModeModalOpen, setIsGuestModeModalOpen] = useState(false);
 
-  // Open the corresponding modal based on the selected menu item
+  // Create company: action state + form modal state
+  const {
+    isPending: isCreateCompanyPending,
+    isModalOpen: isCreateCompanyModalOpen,
+    onModalOpenChange: onCompanyModalOpenChange,
+  } = useCreateCompany();
+
+  // Create customer: action state + form modal state
+  const {
+    isPending: isCreateCustomerPending,
+    isModalOpen: isCreateCustomerModalOpen,
+    onModalOpenChange: onCustomerModalOpenChange,
+  } = useCreateCustomer();
+
+  /**
+   * Handles menu actions for creating a customer or company
+   * - If user is a guest, show guest modal
+   * - Otherwise, open create company modal or create customer modal
+   */
   function handleAction(key: Key) {
     if (isGuest) {
       setIsGuestModeModalOpen(true);
@@ -44,9 +49,9 @@ export function CustomerToolbarCreateNewMenuTrigger({
     }
 
     if (key === "customer") {
-      setIsOpenCustomerModal(true);
+      onCustomerModalOpenChange(true);
     } else if (key === "company") {
-      setIsOpenCompanyModal(true);
+      onCompanyModalOpenChange(true);
     }
   }
 
@@ -61,6 +66,12 @@ export function CustomerToolbarCreateNewMenuTrigger({
           <ToolbarCreateNewModalTrigger
             data-test="customer-toolbar-create-new-menu-trigger"
             label={t("label")}
+            isDisabled={
+              // Block user interactions while a company or customer is being created
+              // When the modal opens, a reset action is triggered, the pending state becomes true, and flickering occurs
+              (isCreateCompanyPending && !isCreateCompanyModalOpen) ||
+              (isCreateCustomerPending && !isCreateCustomerModalOpen)
+            }
           />
         )}
       >
@@ -74,21 +85,6 @@ export function CustomerToolbarCreateNewMenuTrigger({
         </Item>
       </ToolbarCreateNewMenuTrigger>
 
-      {/* Modal for creating a new customer */}
-      <NewCustomerModal
-        newCustomerFormContainer={newCustomerFormContainer}
-        isOpen={isOpenCustomerModal}
-        onOpenChange={setIsOpenCustomerModal}
-      />
-
-      {/* Modal for creating a new company */}
-      <NewCompanyModal
-        createCompany={createCompany}
-        isOpen={isOpenCompanyModal}
-        onOpenChange={setIsOpenCompanyModal}
-      />
-
-      {/* Guest mode modal */}
       <GuestModeModal
         isOpen={isGuestModeModalOpen}
         onOpenChange={setIsGuestModeModalOpen}

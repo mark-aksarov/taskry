@@ -1,11 +1,11 @@
 import { useDeleteCompanies } from "../DeleteCompaniesContext";
-import { useDeleteCompanyTransition } from "../DeleteCompanyTransitionContext";
-import { useUpdateCompanyTransition } from "../UpdateCompanyTransitionContext";
+import { useDeleteCompany } from "../DeleteCompanyContext";
+import { useUpdateCompany } from "../UpdateCompanyContext";
 
 export function useCompanyListItemPending(companyId: number) {
-  const { isPending: isDeleteCompanyPending } = useDeleteCompanyTransition();
-  const { isPending: isUpdateCompanyPending } = useUpdateCompanyTransition();
-  const { isPending: isDeleteCompaniesPending, companyIds } =
+  const { isPending: isDeleteCompanyPending } = useDeleteCompany();
+  const { isPending: isUpdateCompanyPending } = useUpdateCompany();
+  const { isPending: isDeleteCompaniesPending, ids: companyIds } =
     useDeleteCompanies();
 
   const isPending =

@@ -21,7 +21,6 @@ const customer = mockedCustomerDetail;
 export const Default = {
   args: {
     ...customer,
-    deleteCustomer: () => ({ status: "success" }),
     customerDetailContainer: <CustomerDetail {...customer} />,
     editCustomerFormContainer: <EditCustomerForm {...editCustomerFormArgs} />,
   },
@@ -41,7 +40,6 @@ export const WithOverflowContent = {
 
 export const WithoutImagePhoneAndLink = {
   args: {
-    deleteCustomer: () => ({ status: "success" }),
     id: customer.id,
     fullName: customer.fullName,
     email: customer.email,

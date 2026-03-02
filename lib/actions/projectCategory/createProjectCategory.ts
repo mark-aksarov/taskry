@@ -29,13 +29,14 @@ export async function createProjectCategory(
 
     return {
       status: "success",
+      message: t("projectCategory.create.success"),
     };
   } catch (error) {
     console.error("Server Action Error:", error);
 
     return {
       status: "error",
-      message: t("createProjectCategory.error.internalServerError"),
+      message: t("projectCategory.create.error"),
     };
   }
 }

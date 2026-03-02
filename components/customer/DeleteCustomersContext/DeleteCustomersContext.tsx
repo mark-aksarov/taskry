@@ -1,45 +1,29 @@
 "use client";
 
 import {
-  useMemo,
-  useState,
-  useContext,
-  createContext,
-  useTransition,
-  TransitionStartFunction,
-} from "react";
+  useDeleteEntitiesState,
+  DeleteEntitiesContextType,
+} from "@/lib/hooks/useDeleteEntitiesState";
 
-interface DeleteCustomersContextType {
-  isPending: boolean;
-  startTransition: TransitionStartFunction;
-  customerIds: number[];
-  setCustomerIds: (customerIds: number[]) => void;
-}
+import {
+  ActionFn,
+  ActionState,
+  DeleteCustomersPayload,
+} from "@/lib/actions/types";
 
-const DeleteCustomersContext = createContext<DeleteCustomersContextType | null>(
-  null,
-);
+import { useContext, createContext } from "react";
 
-interface DeleteCustomersProviderProps {
-  children: React.ReactNode;
-}
+const DeleteCustomersContext =
+  createContext<DeleteEntitiesContextType<DeleteCustomersPayload> | null>(null);
 
 export function DeleteCustomersProvider({
+  deleteCustomers,
   children,
-}: DeleteCustomersProviderProps) {
-  const [isPending, startTransition] = useTransition();
-  const [customerIds, setCustomerIds] = useState<number[]>([]);
-
-  const contextValue = useMemo(
-    () => ({
-      isPending,
-      startTransition,
-      customerIds,
-      setCustomerIds,
-    }),
-    [isPending, customerIds],
-  );
-
+}: {
+  deleteCustomers: ActionFn<ActionState, DeleteCustomersPayload>;
+  children: React.ReactNode;
+}) {
+  const contextValue = useDeleteEntitiesState(deleteCustomers);
   return (
     <DeleteCustomersContext.Provider value={contextValue}>
       {children}
@@ -49,10 +33,9 @@ export function DeleteCustomersProvider({
 
 export function useDeleteCustomers() {
   const context = useContext(DeleteCustomersContext);
-  if (!context) {
+  if (!context)
     throw new Error(
       "useDeleteCustomers must be used within a DeleteCustomersProvider",
     );
-  }
   return context;
 }

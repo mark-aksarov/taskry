@@ -28,13 +28,14 @@ export async function createPosition(
 
     return {
       status: "success",
+      message: t("position.create.success"),
     };
   } catch (error) {
     console.error("Server Action Error:", error);
 
     return {
       status: "error",
-      message: t("createPosition.error.internalServerError"),
+      message: t("position.create.error"),
     };
   }
 }

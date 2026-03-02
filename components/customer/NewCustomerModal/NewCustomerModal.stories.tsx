@@ -32,10 +32,7 @@ type Story = StoryObj<typeof meta>;
 export const Default = {
   args: {
     newCustomerFormContainer: (
-      <NewCustomerForm
-        createCustomer={() => ({ status: "success" })}
-        companySelectItems={mockedCompanySummaries}
-      />
+      <NewCustomerForm companySelectItems={mockedCompanySummaries} />
     ),
   },
 } satisfies Story;

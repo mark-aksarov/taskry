@@ -1,45 +1,25 @@
 "use client";
 
 import {
-  useMemo,
-  useContext,
-  createContext,
-  useTransition,
-  TransitionStartFunction,
-  useState,
-} from "react";
+  useDeleteEntitiesState,
+  DeleteEntitiesContextType,
+} from "@/lib/hooks/useDeleteEntitiesState";
 
-interface DeleteCompaniesContextType {
-  isPending: boolean;
-  startTransition: TransitionStartFunction;
-  companyIds: number[];
-  setCompanyIds: (companyIds: number[]) => void;
-}
+import { useContext, createContext } from "react";
+import { ActionFn, ActionState } from "@/lib/actions/types";
 
-const DeleteCompaniesContext = createContext<DeleteCompaniesContextType | null>(
-  null,
-);
-
-interface DeleteCompaniesProviderProps {
-  children: React.ReactNode;
-}
+const DeleteCompaniesContext = createContext<DeleteEntitiesContextType<
+  number[]
+> | null>(null);
 
 export function DeleteCompaniesProvider({
+  deleteCompanies,
   children,
-}: DeleteCompaniesProviderProps) {
-  const [isPending, startTransition] = useTransition();
-  const [companyIds, setCompanyIds] = useState<number[]>([]);
-
-  const contextValue = useMemo(
-    () => ({
-      isPending,
-      startTransition,
-      companyIds,
-      setCompanyIds,
-    }),
-    [isPending, companyIds],
-  );
-
+}: {
+  deleteCompanies: ActionFn<ActionState, number[]>;
+  children: React.ReactNode;
+}) {
+  const contextValue = useDeleteEntitiesState(deleteCompanies);
   return (
     <DeleteCompaniesContext.Provider value={contextValue}>
       {children}
@@ -49,10 +29,9 @@ export function DeleteCompaniesProvider({
 
 export function useDeleteCompanies() {
   const context = useContext(DeleteCompaniesContext);
-  if (!context) {
+  if (!context)
     throw new Error(
       "useDeleteCompanies must be used within a DeleteCompaniesProvider",
     );
-  }
   return context;
 }

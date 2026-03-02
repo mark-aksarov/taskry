@@ -32,13 +32,14 @@ export async function createSubtask(
 
     return {
       status: "success",
+      message: t("subtask.create.success"),
     };
   } catch (error) {
     console.error("Server Action Error:", error);
 
     return {
       status: "error",
-      message: t("createSubtask.error.internalServerError"),
+      message: t("subtask.create.error"),
     };
   }
 }

@@ -55,12 +55,11 @@
     "heading": "Задачи"
   },
   "CustomersPage": {
-    "heading": "Клиенты"
-  },
-  "CustomersPageEmpty": {
-    "heading": "Нет клиентов",
-    "description": "Добавьте клиента, чтобы начать работу и организовать проекты",
-    "addButtonLabel": "Новый клиент"
+    "heading": "Клиенты",
+    "emptySection": {
+      "heading": "Нет клиентов",
+      "description": "Добавьте клиента, чтобы начать работу и организовать проекты"
+    }
   },
   "CustomersPageLoading": {
     "title": "Все клиенты"
@@ -122,14 +121,14 @@
     "title": "Все категории задач"
   },
   "CompaniesPage": {
-    "heading": "Компании"
+    "heading": "Компании",
+    "emptySection": {
+      "heading": "Нет компаний",
+      "description": "Добавьте компанию, чтобы начать работу и организовать проекты"
+    }
   },
   "CompaniesPageLoading": {
     "title": "Все компании"
-  },
-  "CompaniesPageEmpty": {
-    "description": "Создайте новую компанию, чтобы лучше организовать работу с клиентами.",
-    "heading": "Нет компаний"
   },
   "PositionsPageLoading": {
     "title": "Все должности"

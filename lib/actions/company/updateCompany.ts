@@ -31,13 +31,14 @@ export async function updateCompany(
 
     return {
       status: "success",
+      message: t("company.update.success"),
     };
   } catch (error) {
     console.error("Server Action Error:", error);
 
     return {
       status: "error",
-      message: t("updateCompany.error.internalServerError"),
+      message: t("company.update.error"),
     };
   }
 }

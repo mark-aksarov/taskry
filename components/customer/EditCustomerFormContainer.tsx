@@ -4,9 +4,7 @@ import useSWR from "swr";
 import { Suspense } from "react";
 import { EditCustomerForm } from "./EditCustomerForm";
 import { CustomerFormSkeleton } from "./CustomerFormSkeleton";
-import { CustomerCompanySelect } from "./CustomerCompanySelect";
 import { CompanySummaryDTO } from "@/lib/data/company/company.dto";
-import { updateCustomer } from "@/lib/actions/customer/updateCustomer";
 import { CustomerFormDataDTO } from "@/lib/data/customer/customer.dto";
 
 interface EditCustomerFormContainerProps {
@@ -30,7 +28,7 @@ function EditCustomerFormContainerInner({
     suspense: true,
   });
 
-  const { data: customer, mutate } = useSWR<CustomerFormDataDTO>(
+  const { data: customer } = useSWR<CustomerFormDataDTO>(
     `/api/customers/${customerId}?view=edit`,
     {
       suspense: true,
@@ -51,8 +49,6 @@ function EditCustomerFormContainerInner({
       customerPublicLinkDefaultValue={customer.publicLink}
       customerCompanyDefaultValue={customer?.companyId?.toString()}
       customerCompanySelectItems={companies}
-      updateCustomer={updateCustomer}
-      mutate={mutate}
     />
   );
 }

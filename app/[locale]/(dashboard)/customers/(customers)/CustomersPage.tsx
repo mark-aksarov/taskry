@@ -8,99 +8,99 @@ import {
 import { useTranslations } from "next-intl";
 import { CustomerSortField } from "@/lib/types";
 import { PageGrid } from "@/components/common/PageGrid";
-import {
-  ActionFn,
-  ActionState,
-  DeleteCustomersPayload,
-} from "@/lib/actions/types";
 import { ViewModeProvider } from "@/components/common/ViewMode";
 import { PageContainer } from "@/components/common/PageContainer";
+import { NewCompanyModal } from "@/components/company/NewCompanyModal";
 import { ViewModeToggleButtonGroup } from "@/components/common/ViewMode";
+import { NewCustomerModal } from "@/components/customer/NewCustomerModal";
+import { EmptyPageContainer } from "@/components/common/EmptyPageContainer";
 import { CustomersFilteredEmptySection } from "@/components/customer/CustomersFilteredEmptySection";
 import { CustomerToolbarManageMenuTrigger } from "@/components/customer/CustomerToolbarManageMenuTrigger";
 import { CustomerToolbarSortingMenuTrigger } from "@/components/customer/CustomerToolbarSortingMenuTrigger";
-import { CustomerToolbarCreateNewMenuTrigger } from "@/components/customer/CustomerToolbarCreateNewMenuTrigger";
 import { CustomerToolbarActionsMenuTrigger } from "@/components/customer/CustomerToolbarActionsMenuTrigger";
 import { CustomerToolbarFiltersModalTrigger } from "@/components/customer/CustomerToolbarFiltersModalTrigger";
+import { CustomerToolbarCreateNewMenuTrigger } from "@/components/customer/CustomerToolbarCreateNewMenuTrigger";
 
 interface CustomersPageProps {
+  totalCount: number;
   totalFilteredCustomers: number;
   selectedSortField: CustomerSortField;
   customersContainer: React.ReactNode;
   newCustomerFormContainer: React.ReactNode;
   filtersFormContainer: React.ReactNode;
-  createCompany: ActionFn<ActionState, FormData>;
-  deleteCustomers: ActionFn<ActionState, DeleteCustomersPayload>;
 }
 
 export function CustomersPage({
+  totalCount,
   totalFilteredCustomers,
   selectedSortField,
   customersContainer,
   newCustomerFormContainer,
   filtersFormContainer,
-  createCompany,
-  deleteCustomers,
 }: CustomersPageProps) {
   const t = useTranslations("app.CustomersPage");
+  const isFilteredEmpty = totalFilteredCustomers === 0;
 
-  const customerToolbarCreateNewMenuTrigger = (
-    <CustomerToolbarCreateNewMenuTrigger
-      newCustomerFormContainer={newCustomerFormContainer}
-      createCompany={createCompany}
-    />
-  );
-
-  const customerToolbarActionsMenuTrigger = (
-    <CustomerToolbarActionsMenuTrigger deleteCustomers={deleteCustomers} />
-  );
-
-  const customerToolbarFiltersModalTrigger = (
-    <CustomerToolbarFiltersModalTrigger
-      filtersFormContainer={filtersFormContainer}
-    />
-  );
+  if (totalCount === 0) {
+    return (
+      <>
+        <EmptyPageContainer
+          heading={t("emptySection.heading")}
+          description={t("emptySection.description")}
+          toolbarCreateNewMenuTrigger={<CustomerToolbarCreateNewMenuTrigger />}
+        />
+        <NewCustomerModal newCustomerFormContainer={newCustomerFormContainer} />
+        <NewCompanyModal />
+      </>
+    );
+  }
 
   return (
-    <PageContainer
-      fullscreen={totalFilteredCustomers === 0}
-      className="relative"
-    >
-      <PageGrid className="flex-auto">
-        <ViewModeProvider>
-          <ToolbarDesktop>
-            <CustomerToolbarManageMenuTrigger />
-            <CustomerToolbarSortingMenuTrigger
-              selectedSortField={selectedSortField}
-            />
-            {customerToolbarFiltersModalTrigger}
-            {customerToolbarActionsMenuTrigger}
-            <ViewModeToggleButtonGroup className="ml-auto" />
-            {customerToolbarCreateNewMenuTrigger}
-          </ToolbarDesktop>
+    <>
+      <PageContainer fullscreen={isFilteredEmpty} className="relative">
+        <PageGrid className="flex-auto">
+          <ViewModeProvider>
+            <ToolbarDesktop>
+              <CustomerToolbarManageMenuTrigger />
+              <CustomerToolbarSortingMenuTrigger
+                selectedSortField={selectedSortField}
+              />
+              <CustomerToolbarFiltersModalTrigger
+                filtersFormContainer={filtersFormContainer}
+              />
+              <CustomerToolbarActionsMenuTrigger />
+              <ViewModeToggleButtonGroup className="ml-auto" />
+              <CustomerToolbarCreateNewMenuTrigger />
+            </ToolbarDesktop>
 
-          <ToolbarMobileTop>
-            <ToolbarMobileHeading>{t("heading")}</ToolbarMobileHeading>
-            <CustomerToolbarManageMenuTrigger />
-            <CustomerToolbarSortingMenuTrigger
-              selectedSortField={selectedSortField}
-            />
-            {customerToolbarFiltersModalTrigger}
-            {customerToolbarActionsMenuTrigger}
-          </ToolbarMobileTop>
+            <ToolbarMobileTop>
+              <ToolbarMobileHeading>{t("heading")}</ToolbarMobileHeading>
+              <CustomerToolbarManageMenuTrigger />
+              <CustomerToolbarSortingMenuTrigger
+                selectedSortField={selectedSortField}
+              />
+              <CustomerToolbarFiltersModalTrigger
+                filtersFormContainer={filtersFormContainer}
+              />
+              <CustomerToolbarActionsMenuTrigger />
+            </ToolbarMobileTop>
 
-          <ToolbarMobileBottom>
-            <ViewModeToggleButtonGroup />
-            {customerToolbarCreateNewMenuTrigger}
-          </ToolbarMobileBottom>
+            <ToolbarMobileBottom>
+              <ViewModeToggleButtonGroup />
+              <CustomerToolbarCreateNewMenuTrigger />
+            </ToolbarMobileBottom>
 
-          {totalFilteredCustomers === 0 ? (
-            <CustomersFilteredEmptySection />
-          ) : (
-            customersContainer
-          )}
-        </ViewModeProvider>
-      </PageGrid>
-    </PageContainer>
+            {isFilteredEmpty ? (
+              <CustomersFilteredEmptySection />
+            ) : (
+              customersContainer
+            )}
+          </ViewModeProvider>
+        </PageGrid>
+      </PageContainer>
+
+      <NewCustomerModal newCustomerFormContainer={newCustomerFormContainer} />
+      <NewCompanyModal />
+    </>
   );
 }

@@ -19,21 +19,29 @@ export async function deleteProjectCategories(
 
   const t = await getTranslations("actions");
 
+  let parsedIds: number[] = [];
   try {
-    const parsedIds = projectCategoryIds.parse(ids);
+    parsedIds = projectCategoryIds.parse(ids);
 
     await deleteProjectCategoriesQuery(parsedIds);
     revalidatePath("/project-categories");
 
     return {
       status: "success",
+      message:
+        parsedIds.length > 1
+          ? t("projectCategory.delete.success.many")
+          : t("projectCategory.delete.success.one"),
     };
   } catch (error) {
     console.error("Server Action Error:", error);
 
     return {
       status: "error",
-      message: t("deleteProjectCategory.error.internalServerError"),
+      message:
+        parsedIds.length > 1
+          ? t("projectCategory.delete.error.many")
+          : t("projectCategory.delete.error.one"),
     };
   }
 }

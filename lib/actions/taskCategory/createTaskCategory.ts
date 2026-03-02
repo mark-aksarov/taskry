@@ -29,13 +29,14 @@ export async function createTaskCategory(
 
     return {
       status: "success",
+      message: t("taskCategory.create.success"),
     };
   } catch (error) {
     console.error("Server Action Error:", error);
 
     return {
       status: "error",
-      message: t("createTaskCategory.error.internalServerError"),
+      message: t("taskCategory.create.error"),
     };
   }
 }

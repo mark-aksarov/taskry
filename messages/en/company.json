@@ -1,7 +1,6 @@
 {
   "NewCompanyForm": {
-    "submitButtonLabel": "Create company",
-    "successMessage": "Company created successfully"
+    "submitButtonLabel": "Create company"
   },
   "NewCompanyModal": {
     "title": "New company"

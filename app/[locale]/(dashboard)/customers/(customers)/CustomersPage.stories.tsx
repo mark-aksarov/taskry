@@ -4,7 +4,6 @@ import { CustomersPage } from "./CustomersPage";
 import CustomersTemplate from "./CustomersTemplate";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { usePathname, useRouter } from "next/navigation";
-import { CustomersPageEmpty } from "./CustomersPageEmpty";
 import { PageDecorator } from "@/.storybook/PageDecorator";
 import { mockedCompanySummaries } from "@/mocks/companies";
 import { CustomerList } from "@/components/customer/CustomerList";
@@ -46,10 +45,9 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
+    totalCount: 10,
     totalFilteredCustomers: 10,
     selectedSortField: "fullName",
-    createCompany: () => ({ status: "success" }),
-    deleteCustomers: () => ({ status: "success" }),
     newCustomerFormContainer: <NewCustomerForm {...newCustomerFormArgs} />,
     filtersFormContainer: (
       <CustomerFiltersForm companyCheckboxGroupItems={mockedCompanySummaries} />
@@ -72,11 +70,8 @@ export const Loading = {
 } satisfies Story;
 
 export const WithNoCustomers = {
-  args: { ...Default.args },
-  render: () => (
-    <CustomersPageEmpty
-      createCompany={() => ({ status: "success" })}
-      newCustomerFormContainer={<NewCustomerForm {...newCustomerFormArgs} />}
-    />
-  ),
+  args: {
+    ...Default.args,
+    totalCount: 0,
+  },
 } satisfies Story;

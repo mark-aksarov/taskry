@@ -19,21 +19,30 @@ export async function deleteCompanies(
 
   const t = await getTranslations("actions");
 
+  let parsedIds: number[] = [];
+
   try {
-    const parsedIds = companyIds.parse(ids);
+    parsedIds = companyIds.parse(ids);
     await deleteCompaniesQuery(parsedIds);
 
     revalidatePath("/companies");
 
     return {
       status: "success",
+      message:
+        parsedIds.length > 1
+          ? t("company.delete.success.many")
+          : t("company.delete.success.one"),
     };
   } catch (error) {
     console.error("Server Action Error:", error);
 
     return {
       status: "error",
-      message: t("deleteCompany.error.internalServerError"),
+      message:
+        parsedIds.length > 1
+          ? t("company.delete.error.many")
+          : t("company.delete.error.one"),
     };
   }
 }

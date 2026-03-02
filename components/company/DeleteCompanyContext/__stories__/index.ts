@@ -1,0 +1,1 @@
+export { withDeleteCompanyProvider } from "./withDeleteCompanyProvider";

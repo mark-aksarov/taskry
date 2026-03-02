@@ -32,8 +32,7 @@ export const CustomerListItem = memo(
     company,
     customerDetailContainer,
     editCustomerFormContainer,
-    deleteCustomer,
-  }: CustomerItemProps) => {
+  }: Omit<CustomerItemProps, "deleteCustomer" | "updateCustomer">) => {
     const t = useTranslations("customers.CustomerListItem");
 
     const userImg = imageUrl ? (
@@ -124,7 +123,6 @@ export const CustomerListItem = memo(
             customerId={id}
             customerFullName={fullName}
             editCustomerFormContainer={editCustomerFormContainer}
-            deleteCustomer={deleteCustomer}
           />
         }
       />

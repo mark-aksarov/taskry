@@ -45,13 +45,14 @@ export async function createTask(
 
     return {
       status: "success",
+      message: t("task.create.success"),
     };
   } catch (error) {
     console.error("Server Action Error:", error);
 
     return {
       status: "error",
-      message: t("createTask.error.internalServerError"),
+      message: t("task.create.error"),
     };
   }
 }

@@ -23,7 +23,6 @@ export const Default = {
     ...customer,
     customerDetailContainer: <CustomerDetail {...customer} />,
     editCustomerFormContainer: <EditCustomerForm {...editCustomerFormArgs} />,
-    deleteCustomer: () => ({ status: "success" }),
   },
 } satisfies Story;
 
@@ -46,6 +45,5 @@ export const WithoutImagePhoneAndLink = {
     email: customer.email,
     customerDetailContainer: <CustomerDetail {...customer} />,
     editCustomerFormContainer: <EditCustomerForm {...editCustomerFormArgs} />,
-    deleteCustomer: () => ({ status: "success" }),
   },
 } satisfies Story;

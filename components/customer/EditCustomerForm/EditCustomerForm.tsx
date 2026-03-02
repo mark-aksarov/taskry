@@ -7,8 +7,9 @@ import {
   FormBaseSubmitButton,
 } from "@/components/common/FormBase";
 
+import { startTransition } from "react";
 import { useTranslations } from "next-intl";
-import { ActionFn, ActionState } from "@/lib/actions/types";
+import { useUpdateCustomer } from "../UpdateCustomerContext";
 import { CustomerBioTextField } from "../CustomerBioTextField";
 import { CustomerCompanySelect } from "../CustomerCompanySelect";
 import { CustomerEmailTextField } from "../CustomerEmailTextField";
@@ -16,8 +17,6 @@ import { FormErrorBanner } from "@/components/common/FormErrorBanner";
 import { CustomerFullNameTextField } from "../CustomerFullNameTextField";
 import { CustomerPublicLinkTextField } from "../CustomerPublicLinkTextField";
 import { CustomerPhoneNumberTextField } from "../CustomerPhoneNumberTextField";
-import { useUpdateCustomerTransition } from "../UpdateCustomerTransitionContext";
-import { useUpdateEntityActionState } from "@/lib/hooks/useUpdateEntityActionState";
 
 interface EditCustomerFormProps {
   customerId: number;
@@ -28,8 +27,6 @@ interface EditCustomerFormProps {
   customerPublicLinkDefaultValue?: string;
   customerCompanyDefaultValue?: string;
   customerCompanySelectItems: { id: number; name: string }[];
-  updateCustomer: ActionFn<ActionState, FormData>;
-  mutate: () => void;
 }
 
 export function EditCustomerForm({
@@ -41,18 +38,10 @@ export function EditCustomerForm({
   customerPublicLinkDefaultValue,
   customerCompanyDefaultValue,
   customerCompanySelectItems,
-  updateCustomer,
-  mutate,
 }: EditCustomerFormProps) {
   const t = useTranslations("customers.EditCustomerForm");
 
-  const { startTransition } = useUpdateCustomerTransition();
-
-  const [state, action, isPending] = useUpdateEntityActionState({
-    updateEntity: updateCustomer,
-    onSuccess: mutate,
-    successMessage: t("successMessage"),
-  });
+  const { state, isPending, action } = useUpdateCustomer();
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();

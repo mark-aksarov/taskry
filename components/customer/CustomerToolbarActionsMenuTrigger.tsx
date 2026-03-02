@@ -1,11 +1,5 @@
 "use client";
 
-import {
-  ActionFn,
-  ActionState,
-  DeleteCustomersPayload,
-} from "@/lib/actions/types";
-
 import { useState } from "react";
 import { Trash } from "lucide-react";
 import { Item, Key } from "react-stately";
@@ -15,13 +9,7 @@ import { ToolbarActionsMenuTrigger } from "../common/Toolbar";
 import { DeleteCustomersModal } from "./DeleteCustomersModal";
 import { useSelectedItems } from "@/components/common/SelectedItemsContext";
 
-interface CustomerToolbarActionsMenuTriggerProps {
-  deleteCustomers: ActionFn<ActionState, DeleteCustomersPayload>;
-}
-
-export const CustomerToolbarActionsMenuTrigger = ({
-  deleteCustomers,
-}: CustomerToolbarActionsMenuTriggerProps) => {
+export const CustomerToolbarActionsMenuTrigger = () => {
   const t = useTranslations("customers.CustomerToolbarActionsMenuTrigger");
 
   // Delete confirmation modal state
@@ -54,8 +42,6 @@ export const CustomerToolbarActionsMenuTrigger = ({
 
       {/* Modal for confirming customer deletion */}
       <DeleteCustomersModal
-        customerIds={selected.ids}
-        deleteCustomers={deleteCustomers}
         isOpen={isDeleteModalOpen}
         onOpenChange={setIsDeleteModalOpen}
       />

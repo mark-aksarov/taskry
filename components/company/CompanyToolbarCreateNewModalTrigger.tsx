@@ -2,35 +2,36 @@
 
 import { useState } from "react";
 import { useTranslations } from "next-intl";
-import { NewCompanyModal } from "./NewCompanyModal";
-import { ActionFn, ActionState } from "@/lib/actions/types";
+import { useCreateCompany } from "./CreateCompanyContext";
 import { useCurrentUser } from "../common/CurrentUserContext";
 import { GuestModeModal } from "@/components/common/GuestModeModal";
 import { ToolbarCreateNewModalTrigger } from "@/components/common/Toolbar";
 
-interface CompanyToolbarCreateNewModalTriggerProps {
-  createCompany: ActionFn<ActionState, FormData>;
-}
-
-export function CompanyToolbarCreateNewModalTrigger({
-  createCompany,
-}: CompanyToolbarCreateNewModalTriggerProps) {
+export function CompanyToolbarCreateNewModalTrigger() {
   const t = useTranslations("company.CompanyToolbarCreateNewModalTrigger");
 
-  // Create new company modal
-  const [isCompanyModalOpen, setIsCompanyModalOpen] = useState(false);
-
-  // Guest mode
+  // If the user is a guest, show the guest mode modal instead of allowing creation
   const { isGuest } = useCurrentUser();
+
+  // Create company action and modal states
+  const {
+    isPending: isCreateCompanyPending,
+    onModalOpenChange: onCompanyModalOpenChange,
+  } = useCreateCompany();
   const [isGuestModeModalOpen, setIsGuestModeModalOpen] = useState(false);
 
+  /**
+   * Handles menu actions for creating a company
+   * - If user is a guest, show guest modal
+   * - Otherwise, open create company modal
+   */
   const handlePress = () => {
     if (isGuest) {
       setIsGuestModeModalOpen(true);
       return;
     }
 
-    setIsCompanyModalOpen(true);
+    onCompanyModalOpenChange(true);
   };
 
   return (
@@ -39,12 +40,9 @@ export function CompanyToolbarCreateNewModalTrigger({
         data-test="company-toolbar-create-new-modal-trigger"
         label={t("label")}
         onPress={handlePress}
+        isDisabled={isCreateCompanyPending} //Block creating another company until the current request completes
       />
-      <NewCompanyModal
-        isOpen={isCompanyModalOpen}
-        onOpenChange={setIsCompanyModalOpen}
-        createCompany={createCompany}
-      />
+
       <GuestModeModal
         isOpen={isGuestModeModalOpen}
         onOpenChange={setIsGuestModeModalOpen}

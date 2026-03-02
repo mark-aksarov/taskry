@@ -50,13 +50,14 @@ export async function createCustomer(
 
     return {
       status: "success",
+      message: t("customer.create.success"),
     };
   } catch (error) {
     console.error("Server Action Error:", error);
 
     return {
       status: "error",
-      message: t("createCustomer.error.internalServerError"),
+      message: t("customer.create.error"),
     };
   }
 }

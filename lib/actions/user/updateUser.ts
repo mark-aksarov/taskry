@@ -47,6 +47,7 @@ export async function updateUser(
 
     return {
       status: "success",
+      message: t("user.update.success"),
     };
   } catch (error) {
     console.error("Server Action Error:", error);
@@ -60,7 +61,7 @@ export async function updateUser(
 
     return {
       status: "error",
-      message: t("updateUser.error.internalServerError"),
+      message: t("user.update.error"),
     };
   }
 }

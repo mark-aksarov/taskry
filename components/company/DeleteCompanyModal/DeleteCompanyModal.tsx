@@ -9,44 +9,38 @@ import {
 } from "@/components/common/ConfirmModal";
 
 import { useTranslations } from "next-intl";
-import { ModalProps } from "@/components/ui/Modal";
 import { DialogHeading } from "@/components/ui/Dialog";
-import { ActionFn, ActionState } from "@/lib/actions/types";
+import { useDeleteCompany } from "../DeleteCompanyContext";
 import { useSelectedItems } from "@/components/common/SelectedItemsContext";
-import { useDeleteCompanyTransition } from "../DeleteCompanyTransitionContext";
-import { useDeleteEntityActionState } from "@/lib/hooks/useDeleteEntityActionState";
+import { handleDeleteEntity } from "@/lib/utils/handleDeleteEntity";
 
-interface DeleteCompanyModalProps extends ModalProps {
+interface DeleteCompanyModalProps {
   companyId: number;
   companyName: string;
-  deleteCompany: ActionFn<ActionState, number[]>;
+  isOpen: boolean;
+  onOpenChange: (open: boolean) => void;
 }
 
 export function DeleteCompanyModal({
   companyId,
   companyName,
-  deleteCompany,
   isOpen,
   onOpenChange,
 }: DeleteCompanyModalProps) {
   const t = useTranslations("company.DeleteCompanyModal");
 
-  const { startTransition } = useDeleteCompanyTransition();
-
-  const [, action] = useDeleteEntityActionState({
-    deleteEntity: deleteCompany,
-    successMessage: t("successMessage"),
-  });
+  const { action } = useDeleteCompany();
 
   const { remove: removeSelected } = useSelectedItems();
 
   function handleDelete() {
-    //Remove the company from the selection to prevent access to it
-    removeSelected(companyId);
-
-    //close modal before deleting
-    onOpenChange?.(false);
-    startTransition(() => action([companyId]));
+    handleDeleteEntity(
+      removeSelected,
+      action,
+      [companyId],
+      companyId,
+      onOpenChange,
+    );
   }
 
   return (

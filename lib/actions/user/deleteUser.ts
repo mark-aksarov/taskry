@@ -34,7 +34,7 @@ export async function deleteUser(
 
     return {
       status: "error",
-      message: t("deleteUser.error.internalServerError"),
+      message: t("user.delete.error"),
     };
   }
 
@@ -46,5 +46,6 @@ export async function deleteUser(
 
   return {
     status: "success",
+    message: t("user.delete.success"),
   };
 }

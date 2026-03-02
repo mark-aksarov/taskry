@@ -1,3 +1,5 @@
+"use client";
+
 import {
   FormBaseModal,
   FormBaseModalDialog,
@@ -5,28 +7,25 @@ import {
 } from "@/components/common/FormBaseModal";
 
 import { useTranslations } from "next-intl";
-import { ModalProps } from "@/components/ui/Modal";
 import { NewCompanyForm } from "../NewCompanyForm";
 import { DialogHeader } from "@/components/ui/Dialog";
-import { ActionFn, ActionState } from "@/lib/actions/types";
+import { useCreateCompany } from "../CreateCompanyContext";
 
-interface NewCompanyModalProps
-  extends Pick<ModalProps, "isOpen" | "onOpenChange"> {
-  createCompany: ActionFn<ActionState, FormData>;
-}
-
-export function NewCompanyModal({
-  createCompany,
-  ...props
-}: NewCompanyModalProps) {
+export function NewCompanyModal() {
   const t = useTranslations("company.NewCompanyModal");
 
+  const { isModalOpen, onModalOpenChange } = useCreateCompany();
+
   return (
-    <FormBaseModal className="md:w-[350px]" {...props}>
+    <FormBaseModal
+      className="md:w-[350px]"
+      isOpen={isModalOpen}
+      onOpenChange={onModalOpenChange}
+    >
       <FormBaseModalDialog>
         <DialogHeader>{t("title")}</DialogHeader>
         <FormBaseModalDialogBody>
-          <NewCompanyForm createCompany={createCompany} />
+          <NewCompanyForm />
         </FormBaseModalDialogBody>
       </FormBaseModalDialog>
     </FormBaseModal>

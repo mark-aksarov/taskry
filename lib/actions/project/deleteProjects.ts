@@ -20,8 +20,10 @@ export async function deleteProjects(
 
   const t = await getTranslations("actions");
 
+  let parsedIds: number[] = [];
+
   try {
-    const parsedIds = projectIds.parse(payload.ids);
+    parsedIds = projectIds.parse(payload.ids);
 
     await deleteProjectQuery(parsedIds);
     revalidatePath("/projects");
@@ -30,7 +32,10 @@ export async function deleteProjects(
 
     return {
       status: "error",
-      message: t("deleteProject.error.internalServerError"),
+      message:
+        parsedIds.length > 1
+          ? t("project.delete.error.many")
+          : t("project.delete.error.one"),
     };
   }
 
@@ -42,5 +47,9 @@ export async function deleteProjects(
 
   return {
     status: "success",
+    message:
+      parsedIds.length > 1
+        ? t("project.delete.success.many")
+        : t("project.delete.success.one"),
   };
 }

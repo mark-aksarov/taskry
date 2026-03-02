@@ -1,6 +1,6 @@
 import { useActionState, useContext } from "react";
-import { useSuccessToast } from "./useSuccessToast";
 import { ActionFn, ActionState } from "../actions/types";
+import { useSuccessToast } from "@/lib/hooks/useSuccessToast";
 import { OverlayTriggerStateContext } from "react-aria-components";
 
 const initialState: ActionState = {

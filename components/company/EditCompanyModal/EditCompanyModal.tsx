@@ -5,35 +5,36 @@ import {
 } from "@/components/common/FormBaseModal";
 
 import { useTranslations } from "next-intl";
-import { ModalProps } from "@/components/ui/Modal";
 import { DialogHeader } from "@/components/ui/Dialog";
 import { EditCompanyForm } from "../EditCompanyForm";
-import { ActionFn, ActionState } from "@/lib/actions/types";
 
-interface EditCompanyModalProps
-  extends Pick<ModalProps, "isOpen" | "onOpenChange"> {
+interface EditCompanyModalProps {
   companyId: number;
   companyName: string;
-  updateCompany: ActionFn<ActionState, FormData>;
+  isOpen: boolean;
+  onOpenChange: (open: boolean) => void;
 }
 
 export function EditCompanyModal({
   companyId,
   companyName,
-  updateCompany,
-  ...props
+  isOpen,
+  onOpenChange,
 }: EditCompanyModalProps) {
   const t = useTranslations("company.EditCompanyModal");
 
   return (
-    <FormBaseModal className="md:w-[350px]" {...props}>
+    <FormBaseModal
+      className="md:w-[350px]"
+      isOpen={isOpen}
+      onOpenChange={onOpenChange}
+    >
       <FormBaseModalDialog>
         <DialogHeader>{t("title")}</DialogHeader>
         <FormBaseModalDialogBody>
           <EditCompanyForm
             companyId={companyId}
             nameDefaultValue={companyName}
-            updateCompany={updateCompany}
           />
         </FormBaseModalDialogBody>
       </FormBaseModalDialog>

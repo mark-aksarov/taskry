@@ -7,29 +7,16 @@ import {
   FormBaseSubmitButton,
 } from "@/components/common/FormBase";
 
+import { startTransition } from "react";
 import { useTranslations } from "next-intl";
-import { startTransition, useRef } from "react";
-import { ActionFn, ActionState } from "@/lib/actions/types";
 import { CompanyNameTextField } from "./CompanyNameTextField";
 import { FormErrorBanner } from "@/components/common/FormErrorBanner";
-import { useCreateEntityActionState } from "@/lib/hooks/useCreateEntityActionState";
+import { useCreateCompany } from "./CreateCompanyContext/CreateCompanyContext";
 
-interface NewCompanyFormProps {
-  createCompany: ActionFn<ActionState, FormData>;
-}
-
-export function NewCompanyForm({ createCompany }: NewCompanyFormProps) {
+export function NewCompanyForm() {
   const t = useTranslations("company.NewCompanyForm");
 
-  // The ref is used inside reducerAction
-  // ref.current is null on unmount, preventing programmatic modal close when opening another form in the same modal
-  const ref = useRef<HTMLFormElement>(null);
-
-  const [state, action, isPending] = useCreateEntityActionState({
-    createEntity: createCompany,
-    formRef: ref,
-    successMessage: t("successMessage"),
-  });
+  const { state, action, isPending } = useCreateCompany();
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -41,7 +28,7 @@ export function NewCompanyForm({ createCompany }: NewCompanyFormProps) {
   }
 
   return (
-    <FormBase ref={ref} id="new-company-form" onSubmit={handleSubmit}>
+    <FormBase id="new-company-form" onSubmit={handleSubmit}>
       <FormBaseBody>
         <CompanyNameTextField />
         <FormErrorBanner status={state.status} isPending={isPending}>

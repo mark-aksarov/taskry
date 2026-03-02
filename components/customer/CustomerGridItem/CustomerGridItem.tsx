@@ -39,8 +39,7 @@ export const CustomerGridItem = memo(
     company,
     customerDetailContainer,
     editCustomerFormContainer,
-    deleteCustomer,
-  }: CustomerItemProps) => {
+  }: Omit<CustomerItemProps, "deleteCustomer" | "updateCustomer">) => {
     const t = useTranslations("customers.CustomerGridItem");
 
     const customerImg = imageUrl ? (
@@ -68,7 +67,6 @@ export const CustomerGridItem = memo(
               customerFullName={fullName}
               editCustomerFormContainer={editCustomerFormContainer}
               className="-mr-2"
-              deleteCustomer={deleteCustomer}
             />
           </GridItemRow>
         }

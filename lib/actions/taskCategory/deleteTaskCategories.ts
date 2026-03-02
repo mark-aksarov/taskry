@@ -19,21 +19,29 @@ export async function deleteTaskCategories(
 
   const t = await getTranslations("actions");
 
+  let parsedIds: number[] = [];
   try {
-    const parsedIds = taskCategoryIds.parse(ids);
+    parsedIds = taskCategoryIds.parse(ids);
 
     await deleteTaskCategoriesQuery(parsedIds);
     revalidatePath("/task-categories");
 
     return {
       status: "success",
+      message:
+        parsedIds.length > 1
+          ? t("taskCategory.delete.success.many")
+          : t("taskCategory.delete.success.one"),
     };
   } catch (error) {
     console.error("Server Action Error:", error);
 
     return {
       status: "error",
-      message: t("deleteTaskCategory.error.internalServerError"),
+      message:
+        parsedIds.length > 1
+          ? t("taskCategory.delete.error.many")
+          : t("taskCategory.delete.error.one"),
     };
   }
 }

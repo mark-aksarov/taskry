@@ -7,32 +7,24 @@ import {
   FormBaseSubmitButton,
 } from "@/components/common/FormBase";
 
+import { startTransition } from "react";
 import { useTranslations } from "next-intl";
-import { ActionFn, ActionState } from "@/lib/actions/types";
+import { useUpdateCompany } from "./UpdateCompanyContext";
 import { CompanyNameTextField } from "./CompanyNameTextField";
 import { FormErrorBanner } from "@/components/common/FormErrorBanner";
-import { useUpdateCompanyTransition } from "./UpdateCompanyTransitionContext";
-import { useUpdateEntityActionState } from "@/lib/hooks/useUpdateEntityActionState";
 
 interface EditCompanyFormProps {
   companyId: number;
   nameDefaultValue: string;
-  updateCompany: ActionFn<ActionState, FormData>;
 }
 
 export function EditCompanyForm({
   companyId,
   nameDefaultValue,
-  updateCompany,
 }: EditCompanyFormProps) {
   const t = useTranslations("company.EditCompanyForm");
 
-  const { startTransition } = useUpdateCompanyTransition();
-
-  const [state, action, isPending] = useUpdateEntityActionState({
-    updateEntity: updateCompany,
-    successMessage: t("successMessage"),
-  });
+  const { state, isPending, action } = useUpdateCompany();
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();

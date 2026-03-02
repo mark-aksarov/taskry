@@ -6,13 +6,14 @@ import { CustomerDetailPage } from "./CustomerDetailPage";
 import { getCustomerSummary } from "@/lib/data/customer/customer.dal";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { deleteCustomers } from "@/lib/actions/customer/deleteCustomers";
+import { CurrentUserProvider } from "@/components/common/CurrentUserContext";
 import { CustomerDetailActions } from "@/components/customer/CustomerDetailActions";
+import { UpdateCustomerProvider } from "@/components/customer/UpdateCustomerContext";
 import { CustomerHeaderContainer } from "@/components/customer/CustomerHeaderContainer";
 import { defaultAppHeaderSlots } from "@/components/layout/AppHeader/defaultAppHeaderSlots";
 import { EditCustomerFormContainer } from "@/components/customer/EditCustomerFormContainer";
 import { CustomerDetailAltContainer } from "@/components/customer/CustomerDetailAltContainer";
-import { CurrentUserProvider } from "@/components/common/CurrentUserContext";
-import { UpdateCustomerTransitionProvider } from "@/components/customer/UpdateCustomerTransitionContext";
+import { updateCustomer } from "@/lib/actions/customer/updateCustomer";
 
 export default async function AppCustomerDetailPage({
   params,
@@ -51,7 +52,7 @@ export default async function AppCustomerDetailPage({
         customerDetailContainer={<CustomerDetailAltContainer customerId={id} />}
         customerHeaderContainer={<CustomerHeaderContainer customerId={id} />}
         customerDetailActions={
-          <UpdateCustomerTransitionProvider>
+          <UpdateCustomerProvider updateCustomer={updateCustomer}>
             <CustomerDetailActions
               customerId={id}
               customerFullName={customerSummary.fullName}
@@ -60,7 +61,7 @@ export default async function AppCustomerDetailPage({
                 <EditCustomerFormContainer customerId={id} />
               }
             />
-          </UpdateCustomerTransitionProvider>
+          </UpdateCustomerProvider>
         }
         appHeaderProps={defaultAppHeaderSlots}
       />

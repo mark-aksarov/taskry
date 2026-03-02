@@ -9,45 +9,35 @@ import {
 } from "@/components/common/ConfirmModal";
 
 import { useTranslations } from "next-intl";
-import { ModalProps } from "@/components/ui/Modal";
 import { DialogHeading } from "@/components/ui/Dialog";
-import { ActionFn, ActionState } from "@/lib/actions/types";
 import { useDeleteCompanies } from "../DeleteCompaniesContext";
-import { useDeleteEntityActionState } from "@/lib/hooks/useDeleteEntityActionState";
+import { handleDeleteEntities } from "@/lib/utils/handleDeleteEntities";
 import { useSelectedItems } from "@/components/common/SelectedItemsContext";
 
-interface DeleteCompaniesModalProps extends ModalProps {
-  companyIds: number[];
-  deleteCompanies: ActionFn<ActionState, number[]>;
+interface DeleteCompaniesModalProps {
+  isOpen: boolean;
+  onOpenChange: (open: boolean) => void;
 }
 
 export function DeleteCompaniesModal({
-  companyIds,
   isOpen,
-  deleteCompanies,
   onOpenChange,
 }: DeleteCompaniesModalProps) {
   const t = useTranslations("company.DeleteCompaniesModal");
 
-  const { startTransition, setCompanyIds: setDeleteCompanyIds } =
-    useDeleteCompanies();
-
-  const [, action] = useDeleteEntityActionState({
-    deleteEntity: deleteCompanies,
-    successMessage: t("successMessage"),
-  });
-
+  const selected = useSelectedItems();
+  const { action, setIds: setDeleteCompanyIds } = useDeleteCompanies();
   const { clear: clearSelectedItems } = useSelectedItems();
 
   function handleDelete() {
-    onOpenChange?.(false);
-
-    // Clear selected items
-    clearSelectedItems();
-
-    // Used to show an overlay on the selected companies
-    setDeleteCompanyIds(companyIds);
-    startTransition(() => action(companyIds));
+    handleDeleteEntities(
+      selected.ids,
+      action,
+      selected.ids,
+      setDeleteCompanyIds,
+      clearSelectedItems,
+      onOpenChange,
+    );
   }
 
   return (
@@ -60,7 +50,7 @@ export function DeleteCompaniesModal({
       <ConfirmModalText>
         {t.rich("text", {
           strong: (chunks) => <strong>{chunks}</strong>,
-          count: companyIds.length,
+          count: selected.ids.length,
         })}
       </ConfirmModalText>
       <ConfirmModalActions>

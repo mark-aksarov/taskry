@@ -6,12 +6,6 @@ import {
   ItemBaseActionMenuDialogHeader,
 } from "../../common/ItemBase";
 
-import {
-  ActionFn,
-  ActionState,
-  DeleteCustomersPayload,
-} from "@/lib/actions/types";
-
 import { useState } from "react";
 import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
@@ -21,13 +15,13 @@ import { GuestModeModal } from "../../common/GuestModeModal";
 import { DeleteCustomerModal } from "../DeleteCustomerModal";
 import { useCurrentUser } from "../../common/CurrentUserContext";
 import { useCustomerItemPending } from "./useCustomerItemPending";
+import { useUpdateCustomer } from "../UpdateCustomerContext";
 
 export type CustomerItemActionMenuTriggerProps = {
   customerId: number;
   customerFullName: string;
   className?: string;
   editCustomerFormContainer: React.ReactNode;
-  deleteCustomer: ActionFn<ActionState, DeleteCustomersPayload>;
 };
 
 export function CustomerItemActionMenuTrigger({
@@ -35,7 +29,6 @@ export function CustomerItemActionMenuTrigger({
   customerFullName,
   className,
   editCustomerFormContainer,
-  deleteCustomer,
 }: CustomerItemActionMenuTriggerProps) {
   const t = useTranslations("customers.CustomerItemActionMenuTrigger");
 
@@ -47,7 +40,7 @@ export function CustomerItemActionMenuTrigger({
   const [isGuestModeModalOpen, setIsGuestModeModalOpen] = useState(false);
 
   // Modal state for editing the customer
-  const [isEditCustomerModalOpen, setIsEditCustomerModalOpen] = useState(false);
+  const { onModalOpenChange: onEditModalOpenChange } = useUpdateCustomer();
 
   // Handle menu actions
   function handleAction(key: Key) {
@@ -61,7 +54,7 @@ export function CustomerItemActionMenuTrigger({
     }
 
     if (key === "edit") {
-      setIsEditCustomerModalOpen(true);
+      onEditModalOpenChange(true);
     } else if (key === "delete") {
       setIsDeleteModalOpen(true);
     }
@@ -100,8 +93,6 @@ export function CustomerItemActionMenuTrigger({
       </ItemBaseActionMenuTrigger>
 
       <EditCustomerModal
-        isOpen={isEditCustomerModalOpen}
-        onOpenChange={setIsEditCustomerModalOpen}
         editCustomerFormContainer={editCustomerFormContainer}
       />
 
@@ -115,7 +106,6 @@ export function CustomerItemActionMenuTrigger({
         customerFullName={customerFullName}
         isOpen={isDeleteModalOpen}
         onOpenChange={setIsDeleteModalOpen}
-        deleteCustomer={deleteCustomer}
       />
     </>
   );

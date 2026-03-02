@@ -10,13 +10,13 @@ import {
 import { memo } from "react";
 import { useTranslations } from "next-intl";
 import { ActionFn, ActionState } from "@/lib/actions/types";
+import { DeleteCompanyProvider } from "../DeleteCompanyContext";
+import { UpdateCompanyProvider } from "../UpdateCompanyContext";
 import { CompanyListItemCheckbox } from "./CompanyListItemCheckbox";
 import { SelectableItem } from "@/components/common/SelectableItem";
 import { useSelectedItems } from "@/components/common/SelectedItemsContext";
 import { CompanyListItemPendingOverlay } from "./CompanyListItemPendingOverlay";
-import { UpdateCompanyTransitionProvider } from "../UpdateCompanyTransitionContext";
 import { CompanyListItemActionMenuTrigger } from "./CompanyListItemActionMenuTrigger";
-import { DeleteCompanyTransitionProvider } from "../DeleteCompanyTransitionContext";
 
 interface CompanyListItemProps {
   id: number;
@@ -25,24 +25,31 @@ interface CompanyListItemProps {
   deleteCompany: ActionFn<ActionState, number[]>;
 }
 
-export function CompanyListItem(props: CompanyListItemProps) {
+export function CompanyListItem({
+  updateCompany,
+  deleteCompany,
+  ...props
+}: CompanyListItemProps) {
   const selected = useSelectedItems();
 
   return (
-    <UpdateCompanyTransitionProvider>
-      <DeleteCompanyTransitionProvider>
+    <UpdateCompanyProvider updateCompany={updateCompany}>
+      <DeleteCompanyProvider deleteCompany={deleteCompany}>
         <CompanyListItemPendingOverlay companyId={props.id}>
           <SelectableItem {...selected} item={{ id: props.id }}>
             <CompanyListItemInner {...props} />
           </SelectableItem>
         </CompanyListItemPendingOverlay>
-      </DeleteCompanyTransitionProvider>
-    </UpdateCompanyTransitionProvider>
+      </DeleteCompanyProvider>
+    </UpdateCompanyProvider>
   );
 }
 
 const CompanyListItemInner = memo(
-  ({ id, name, updateCompany, deleteCompany }: CompanyListItemProps) => {
+  ({
+    id,
+    name,
+  }: Omit<CompanyListItemProps, "updateCompany" | "deleteCompany">) => {
     const t = useTranslations("company.CompanyListItem");
 
     return (
@@ -56,12 +63,7 @@ const CompanyListItemInner = memo(
           <ListItemText>{t("name")}</ListItemText>
         </ListItemInfo>
 
-        <CompanyListItemActionMenuTrigger
-          companyId={id}
-          companyName={name}
-          deleteCompany={deleteCompany}
-          updateCompany={updateCompany}
-        />
+        <CompanyListItemActionMenuTrigger companyId={id} companyName={name} />
       </ListItem>
     );
   },
