@@ -1,30 +1,17 @@
 "use client";
 
-import {
-  ToolbarMenuTrigger,
-  ToolbarActionsButtonMobile,
-  ToolbarActionsButtonDesktop,
-  ToolbarActionsMenuTrigger,
-} from "../../common/Toolbar";
-
 import { useState } from "react";
 import { Trash } from "lucide-react";
 import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
-import { DialogHeader } from "../../ui/Dialog";
-import { ActionFn, ActionState } from "@/lib/actions/types";
-import { GuestModeModal } from "../../common/GuestModeModal";
-import { DeletePositionsModal } from "../DeletePositionsModal";
+import { DialogHeader } from "../ui/Dialog";
+import { GuestModeModal } from "../common/GuestModeModal";
+import { DeletePositionsModal } from "./DeletePositionsModal";
+import { ToolbarActionsMenuTrigger } from "../common/Toolbar";
 import { useCurrentUser } from "@/components/common/CurrentUserContext";
 import { useSelectedItems } from "@/components/common/SelectedItemsContext";
 
-interface PositionToolbarActionsMenuTriggerProps {
-  deletePositions: ActionFn<ActionState, number[]>;
-}
-
-export const PositionToolbarActionsMenuTrigger = ({
-  deletePositions,
-}: PositionToolbarActionsMenuTriggerProps) => {
+export const PositionToolbarActionsMenuTrigger = () => {
   const t = useTranslations("positions.PositionToolbarActionsMenuTrigger");
 
   // Guest mode
@@ -67,8 +54,6 @@ export const PositionToolbarActionsMenuTrigger = ({
       <DeletePositionsModal
         isOpen={isDeleteModalOpen}
         onOpenChange={setIsDeleteModalOpen}
-        positionIds={selected.ids}
-        deletePositions={deletePositions}
       />
 
       {/* Guest mode modal */}

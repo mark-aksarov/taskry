@@ -35,7 +35,7 @@ export function CompanyListItemActionMenuTrigger({
   // Delete confirmation modal state
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
-  // Shared state for edit modal from context
+  // State for edit modal from context
   const {
     isModalOpen: isEditModalOpen,
     onModalOpenChange: onEditModalOpenChange,

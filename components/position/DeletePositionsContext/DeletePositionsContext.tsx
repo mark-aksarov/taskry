@@ -1,45 +1,25 @@
 "use client";
 
 import {
-  useMemo,
-  useContext,
-  createContext,
-  useTransition,
-  TransitionStartFunction,
-  useState,
-} from "react";
+  useDeleteEntitiesState,
+  DeleteEntitiesContextType,
+} from "@/lib/hooks/useDeleteEntitiesState";
 
-interface DeletePositionsContextType {
-  isPending: boolean;
-  startTransition: TransitionStartFunction;
-  positionIds: number[];
-  setPositionIds: (positionIds: number[]) => void;
-}
+import { useContext, createContext } from "react";
+import { ActionFn, ActionState } from "@/lib/actions/types";
 
-const DeletePositionsContext = createContext<DeletePositionsContextType | null>(
-  null,
-);
-
-interface DeletePositionsProviderProps {
-  children: React.ReactNode;
-}
+const DeletePositionsContext = createContext<DeleteEntitiesContextType<
+  number[]
+> | null>(null);
 
 export function DeletePositionsProvider({
+  deletePositions,
   children,
-}: DeletePositionsProviderProps) {
-  const [isPending, startTransition] = useTransition();
-  const [positionIds, setPositionIds] = useState<number[]>([]);
-
-  const contextValue = useMemo(
-    () => ({
-      isPending,
-      startTransition,
-      positionIds,
-      setPositionIds,
-    }),
-    [isPending, positionIds],
-  );
-
+}: {
+  deletePositions: ActionFn<ActionState, number[]>;
+  children: React.ReactNode;
+}) {
+  const contextValue = useDeleteEntitiesState(deletePositions);
   return (
     <DeletePositionsContext.Provider value={contextValue}>
       {children}
@@ -49,10 +29,9 @@ export function DeletePositionsProvider({
 
 export function useDeletePositions() {
   const context = useContext(DeletePositionsContext);
-  if (!context) {
+  if (!context)
     throw new Error(
       "useDeletePositions must be used within a DeletePositionsProvider",
     );
-  }
   return context;
 }

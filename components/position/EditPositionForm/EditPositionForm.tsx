@@ -7,32 +7,24 @@ import {
   FormBaseSubmitButton,
 } from "@/components/common/FormBase";
 
+import { startTransition } from "react";
 import { useTranslations } from "next-intl";
-import { ActionFn, ActionState } from "@/lib/actions/types";
+import { useUpdatePosition } from "../UpdatePositionContext";
 import { PositionNameTextField } from "../PositionNameTextField";
 import { FormErrorBanner } from "@/components/common/FormErrorBanner";
-import { useUpdatePositionTransition } from "../UpdatePositionTransitionContext";
-import { useUpdateEntityActionState } from "@/lib/hooks/useUpdateEntityActionState";
 
 interface EditPositionFormProps {
   positionId: number;
   nameDefaultValue: string;
-  updatePosition: ActionFn<ActionState, FormData>;
 }
 
 export function EditPositionForm({
   positionId,
   nameDefaultValue,
-  updatePosition,
 }: EditPositionFormProps) {
   const t = useTranslations("positions.EditPositionForm");
 
-  const { startTransition } = useUpdatePositionTransition();
-
-  const [state, action, isPending] = useUpdateEntityActionState({
-    updateEntity: updatePosition,
-    successMessage: t("successMessage"),
-  });
+  const { state, isPending, action } = useUpdatePosition();
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();

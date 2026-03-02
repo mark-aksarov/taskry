@@ -28,7 +28,7 @@ export const Default = {
   args: {
     positionId: 1,
     positionName: "Position 1",
+    isOpen: true,
     onOpenChange: () => {},
-    deletePosition: () => ({ status: "success" }),
   },
 } satisfies Story;

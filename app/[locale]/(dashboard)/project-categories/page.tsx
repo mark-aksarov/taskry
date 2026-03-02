@@ -2,7 +2,6 @@ import { hasGuestRole } from "@/lib/utils/hasGuestRole";
 import { hasOwnerRole } from "@/lib/utils/hasOwnerRole";
 import { ProjectCategoriesPage } from "./ProjectCategoriesPage";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
-import { ProjectCategoriesPageEmpty } from "./ProjectCategoriesPageEmpty";
 import { CurrentUserProvider } from "@/components/common/CurrentUserContext";
 import { SelectedItemsProvider } from "@/components/common/SelectedItemsContext";
 import { PageTransitionProvider } from "@/components/common/PageTransitionContext";
@@ -11,6 +10,7 @@ import { getProjectCategorySummaries } from "@/lib/data/projectCategory/projectC
 import { deleteProjectCategories } from "@/lib/actions/projectCategory/deleteProjectCategories";
 import { ProjectCategoriesContainer } from "@/components/projectCategory/ProjectCategoriesContainer";
 import { DeleteProjectCategoriesProvider } from "@/components/projectCategory/DeleteProjectCategoriesContext";
+import { CreateProjectCategoryProvider } from "@/components/projectCategory/CreateProjectCategoryContext";
 
 export default async function AppProjectCategoriesPage() {
   // Authorization
@@ -26,29 +26,23 @@ export default async function AppProjectCategoriesPage() {
 
   const projectCategories = await getProjectCategorySummaries();
 
-  // Render the empty page if there are no companies
-  if (!projectCategories.length) {
-    return (
-      <CurrentUserProvider value={currentUserContextValue}>
-        <ProjectCategoriesPageEmpty
-          createProjectCategory={createProjectCategory}
-        />
-      </CurrentUserProvider>
-    );
-  }
-
   return (
     <CurrentUserProvider value={currentUserContextValue}>
       <SelectedItemsProvider
         pageItems={projectCategories.map((p) => ({ id: p.id }))}
       >
         <PageTransitionProvider>
-          <DeleteProjectCategoriesProvider>
-            <ProjectCategoriesPage
-              projectCategoriesContainer={<ProjectCategoriesContainer />}
+          <DeleteProjectCategoriesProvider
+            deleteProjectCategories={deleteProjectCategories}
+          >
+            <CreateProjectCategoryProvider
               createProjectCategory={createProjectCategory}
-              deleteProjectCategories={deleteProjectCategories}
-            />
+            >
+              <ProjectCategoriesPage
+                totalCount={projectCategories.length}
+                projectCategoriesContainer={<ProjectCategoriesContainer />}
+              />
+            </CreateProjectCategoryProvider>
           </DeleteProjectCategoriesProvider>
         </PageTransitionProvider>
       </SelectedItemsProvider>

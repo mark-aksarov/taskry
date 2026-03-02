@@ -1,14 +1,16 @@
 import { useDeleteProjectCategories } from "../DeleteProjectCategoriesContext";
-import { useDeleteProjectCategoryTransition } from "../DeleteProjectCategoryTransitionContext";
-import { useUpdateProjectCategoryTransition } from "../UpdateProjectCategoryTransitionContext";
+import { useDeleteProjectCategory } from "../DeleteProjectCategoryContext";
+import { useUpdateProjectCategory } from "../UpdateProjectCategoryContext";
 
 export function useProjectCategoryListItemPending(projectCategoryId: number) {
   const { isPending: isDeleteProjectCategoryPending } =
-    useDeleteProjectCategoryTransition();
+    useDeleteProjectCategory();
   const { isPending: isUpdateProjectCategoryPending } =
-    useUpdateProjectCategoryTransition();
-  const { isPending: isDeleteProjectCategoriesPending, projectCategoryIds } =
-    useDeleteProjectCategories();
+    useUpdateProjectCategory();
+  const {
+    isPending: isDeleteProjectCategoriesPending,
+    ids: projectCategoryIds,
+  } = useDeleteProjectCategories();
 
   const isPending =
     isDeleteProjectCategoryPending ||

@@ -5,35 +5,36 @@ import {
 } from "@/components/common/FormBaseModal";
 
 import { useTranslations } from "next-intl";
-import { ModalProps } from "@/components/ui/Modal";
 import { DialogHeader } from "@/components/ui/Dialog";
-import { ActionFn, ActionState } from "@/lib/actions/types";
 import { EditProjectCategoryForm } from "../EditProjectCategoryForm";
 
-interface EditProjectCategoryModalProps
-  extends Pick<ModalProps, "isOpen" | "onOpenChange"> {
+interface EditProjectCategoryModalProps {
   projectCategoryId: number;
   projectCategoryName: string;
-  updateProjectCategory: ActionFn<ActionState, FormData>;
+  isOpen: boolean;
+  onOpenChange: (open: boolean) => void;
 }
 
 export function EditProjectCategoryModal({
   projectCategoryId,
   projectCategoryName,
-  updateProjectCategory,
-  ...props
+  isOpen,
+  onOpenChange,
 }: EditProjectCategoryModalProps) {
   const t = useTranslations("projectCategories.EditProjectCategoryModal");
 
   return (
-    <FormBaseModal className="md:w-[350px]" {...props}>
+    <FormBaseModal
+      className="md:w-[350px]"
+      isOpen={isOpen}
+      onOpenChange={onOpenChange}
+    >
       <FormBaseModalDialog>
         <DialogHeader>{t("title")}</DialogHeader>
         <FormBaseModalDialogBody>
           <EditProjectCategoryForm
             projectCategoryId={projectCategoryId}
             nameDefaultValue={projectCategoryName}
-            updateProjectCategory={updateProjectCategory}
           />
         </FormBaseModalDialogBody>
       </FormBaseModalDialog>

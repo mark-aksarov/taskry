@@ -12,13 +12,14 @@ export function CompanyToolbarCreateNewModalTrigger() {
 
   // If the user is a guest, show the guest mode modal instead of allowing creation
   const { isGuest } = useCurrentUser();
+  const [isGuestModeModalOpen, setIsGuestModeModalOpen] = useState(false);
 
   // Create company action and modal states
   const {
     isPending: isCreateCompanyPending,
+    isModalOpen: isCreateCompanyModalOpen,
     onModalOpenChange: onCompanyModalOpenChange,
   } = useCreateCompany();
-  const [isGuestModeModalOpen, setIsGuestModeModalOpen] = useState(false);
 
   /**
    * Handles menu actions for creating a company
@@ -40,7 +41,9 @@ export function CompanyToolbarCreateNewModalTrigger() {
         data-test="company-toolbar-create-new-modal-trigger"
         label={t("label")}
         onPress={handlePress}
-        isDisabled={isCreateCompanyPending} //Block creating another company until the current request completes
+        // Block creating another company until the current request completes
+        // When the modal opens, a reset action is triggered, the pending state becomes true, and flickering occurs
+        isDisabled={isCreateCompanyPending && !isCreateCompanyModalOpen}
       />
 
       <GuestModeModal

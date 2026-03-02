@@ -34,9 +34,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    projectCategoryIds: [1, 2, 3],
     isOpen: false,
     onOpenChange: () => {},
-    deleteProjectCategories: () => ({ status: "success" }),
   },
 } satisfies Story;

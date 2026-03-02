@@ -9,46 +9,35 @@ import {
 } from "@/components/common/ConfirmModal";
 
 import { useTranslations } from "next-intl";
-import { ModalProps } from "@/components/ui/Modal";
 import { DialogHeading } from "@/components/ui/Dialog";
-import { ActionFn, ActionState } from "@/lib/actions/types";
 import { useDeletePositions } from "../DeletePositionsContext";
+import { handleDeleteEntities } from "@/lib/utils/handleDeleteEntities";
 import { useSelectedItems } from "@/components/common/SelectedItemsContext";
-import { useDeleteEntityActionState } from "@/lib/hooks/useDeleteEntityActionState";
 
-interface DeletePositionsModalProps extends ModalProps {
-  positionIds: number[];
-  deletePositions: ActionFn<ActionState, number[]>;
+interface DeletePositionsModalProps {
+  isOpen: boolean;
+  onOpenChange: (open: boolean) => void;
 }
 
 export function DeletePositionsModal({
-  positionIds,
   isOpen,
   onOpenChange,
-  deletePositions,
 }: DeletePositionsModalProps) {
   const t = useTranslations("positions.DeletePositionsModal");
 
-  const { startTransition, setPositionIds: setDeletePositionIds } =
-    useDeletePositions();
-
-  const [, action] = useDeleteEntityActionState({
-    deleteEntity: deletePositions,
-    successMessage: t("successMessage"),
-  });
-
+  const selected = useSelectedItems();
+  const { action, setIds: setDeletePositionIds } = useDeletePositions();
   const { clear: clearSelectedItems } = useSelectedItems();
 
   function handleDelete() {
-    //close modal before deleting
-    onOpenChange?.(false);
-
-    // Clear selected items
-    clearSelectedItems();
-
-    // Used to show an overlay on the selected positions
-    setDeletePositionIds(positionIds);
-    startTransition(() => action(positionIds));
+    handleDeleteEntities(
+      selected.ids,
+      action,
+      selected.ids,
+      setDeletePositionIds,
+      clearSelectedItems,
+      onOpenChange,
+    );
   }
 
   return (
@@ -61,7 +50,7 @@ export function DeletePositionsModal({
       <ConfirmModalText>
         {t.rich("text", {
           strong: (chunks) => <strong>{chunks}</strong>,
-          count: positionIds.length,
+          count: selected.ids.length,
         })}
       </ConfirmModalText>
       <ConfirmModalActions>

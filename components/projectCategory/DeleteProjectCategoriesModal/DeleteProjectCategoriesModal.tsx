@@ -9,47 +9,36 @@ import {
 } from "@/components/common/ConfirmModal";
 
 import { useTranslations } from "next-intl";
-import { ModalProps } from "@/components/ui/Modal";
 import { DialogHeading } from "@/components/ui/Dialog";
-import { ActionFn, ActionState } from "@/lib/actions/types";
+import { handleDeleteEntities } from "@/lib/utils/handleDeleteEntities";
 import { useSelectedItems } from "@/components/common/SelectedItemsContext";
 import { useDeleteProjectCategories } from "../DeleteProjectCategoriesContext";
-import { useDeleteEntityActionState } from "@/lib/hooks/useDeleteEntityActionState";
 
-interface DeleteProjectCategoriesModalProps extends ModalProps {
-  projectCategoryIds: number[];
-  deleteProjectCategories: ActionFn<ActionState, number[]>;
+interface DeleteProjectCategoriesModalProps {
+  isOpen: boolean;
+  onOpenChange: (open: boolean) => void;
 }
 
 export function DeleteProjectCategoriesModal({
-  projectCategoryIds,
   isOpen,
   onOpenChange,
-  deleteProjectCategories,
 }: DeleteProjectCategoriesModalProps) {
   const t = useTranslations("projectCategories.DeleteProjectCategoriesModal");
 
-  const {
-    startTransition,
-    setProjectCategoryIds: setDeletedProjectCategoryIds,
-  } = useDeleteProjectCategories();
-
-  const [, action] = useDeleteEntityActionState({
-    deleteEntity: deleteProjectCategories,
-    successMessage: t("successMessage"),
-  });
-
+  const selected = useSelectedItems();
+  const { action, setIds: setDeleteProjectCategoryIds } =
+    useDeleteProjectCategories();
   const { clear: clearSelectedItems } = useSelectedItems();
 
   function handleDelete() {
-    onOpenChange?.(false);
-
-    // Clear selected items
-    clearSelectedItems();
-
-    // Used to show an overlay on the selected project categories
-    setDeletedProjectCategoryIds(projectCategoryIds);
-    startTransition(() => action(projectCategoryIds));
+    handleDeleteEntities(
+      selected.ids,
+      action,
+      selected.ids,
+      setDeleteProjectCategoryIds,
+      clearSelectedItems,
+      onOpenChange,
+    );
   }
 
   return (
@@ -62,7 +51,7 @@ export function DeleteProjectCategoriesModal({
       <ConfirmModalText>
         {t.rich("text", {
           strong: (chunks) => <strong>{chunks}</strong>,
-          count: projectCategoryIds.length,
+          count: selected.ids.length,
         })}
       </ConfirmModalText>
       <ConfirmModalActions>

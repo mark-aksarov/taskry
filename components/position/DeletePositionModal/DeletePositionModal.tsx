@@ -9,17 +9,16 @@ import {
 } from "@/components/common/ConfirmModal";
 
 import { useTranslations } from "next-intl";
-import { ModalProps } from "@/components/ui/Modal";
 import { DialogHeading } from "@/components/ui/Dialog";
-import { ActionFn, ActionState } from "@/lib/actions/types";
+import { useDeletePosition } from "../DeletePositionContext";
+import { handleDeleteEntity } from "@/lib/utils/handleDeleteEntity";
 import { useSelectedItems } from "@/components/common/SelectedItemsContext";
-import { useDeletePositionTransition } from "../DeletePositionTransitionContext";
-import { useDeleteEntityActionState } from "@/lib/hooks/useDeleteEntityActionState";
 
-interface DeletePositionModalProps extends ModalProps {
+interface DeletePositionModalProps {
   positionId: number;
   positionName: string;
-  deletePosition: ActionFn<ActionState, number[]>;
+  isOpen: boolean;
+  onOpenChange: (open: boolean) => void;
 }
 
 export function DeletePositionModal({
@@ -27,26 +26,21 @@ export function DeletePositionModal({
   positionName,
   isOpen,
   onOpenChange,
-  deletePosition,
 }: DeletePositionModalProps) {
   const t = useTranslations("positions.DeletePositionModal");
 
-  const { startTransition } = useDeletePositionTransition();
-
-  const [, action] = useDeleteEntityActionState({
-    deleteEntity: deletePosition,
-    successMessage: t("successMessage"),
-  });
+  const { action } = useDeletePosition();
 
   const { remove: removeSelected } = useSelectedItems();
 
   function handleDelete() {
-    //Remove the position from the selection to prevent access to it
-    removeSelected(positionId);
-
-    //close modal before deleting
-    onOpenChange?.(false);
-    startTransition(() => action([positionId]));
+    handleDeleteEntity(
+      removeSelected,
+      action,
+      [positionId],
+      positionId,
+      onOpenChange,
+    );
   }
 
   return (

@@ -8,61 +8,67 @@ import {
 import { useTranslations } from "next-intl";
 import { PageGrid } from "@/components/common/PageGrid";
 import { BackButton } from "@/components/common/BackButton";
-import { ActionFn, ActionState } from "@/lib/actions/types";
 import { ViewModeProvider } from "@/components/common/ViewMode";
 import { PageContainer } from "@/components/common/PageContainer";
-import { ProjectCategoryToolbarCreateNewModalTrigger } from "@/components/projectCategory/ProjectCategoryToolbarCreateNewModalTrigger";
+import { EmptyPageContainer } from "@/components/common/EmptyPageContainer";
+import { NewProjectCategoryModal } from "@/components/projectCategory/NewProjectCategoryModal";
 import { ProjectCategoryToolbarActionsMenuTrigger } from "@/components/projectCategory/ProjectCategoryToolbarActionsMenuTrigger";
+import { ProjectCategoryToolbarCreateNewModalTrigger } from "@/components/projectCategory/ProjectCategoryToolbarCreateNewModalTrigger";
 
 interface ProjectCategoriesPageProps {
+  totalCount: number;
   projectCategoriesContainer: React.ReactNode;
-  createProjectCategory: ActionFn<ActionState, FormData>;
-  deleteProjectCategories: ActionFn<ActionState, number[]>;
 }
 
 export function ProjectCategoriesPage({
+  totalCount,
   projectCategoriesContainer,
-  createProjectCategory,
-  deleteProjectCategories,
 }: ProjectCategoriesPageProps) {
   const t = useTranslations("app.ProjectCategoriesPage");
 
-  const projectCategoryToolbarCreateNewModalTrigger = (
-    <ProjectCategoryToolbarCreateNewModalTrigger
-      createProjectCategory={createProjectCategory}
-    />
-  );
-
-  const projectCategoryToolbarActionsMenuTrigger = (
-    <ProjectCategoryToolbarActionsMenuTrigger
-      deleteProjectCategories={deleteProjectCategories}
-    />
-  );
+  if (totalCount === 0) {
+    return (
+      <>
+        <EmptyPageContainer
+          heading={t("emptySection.heading")}
+          description={t("emptySection.description")}
+          toolbarCreateNewMenuTrigger={
+            <ProjectCategoryToolbarCreateNewModalTrigger />
+          }
+        />
+        <NewProjectCategoryModal />
+      </>
+    );
+  }
 
   return (
-    <PageContainer>
-      <PageGrid>
-        <ViewModeProvider>
-          <ToolbarDesktop>
-            {projectCategoryToolbarActionsMenuTrigger}
-            {projectCategoryToolbarCreateNewModalTrigger}
-          </ToolbarDesktop>
+    <>
+      <PageContainer>
+        <PageGrid>
+          <ViewModeProvider>
+            <ToolbarDesktop>
+              <ProjectCategoryToolbarActionsMenuTrigger />
+              <ProjectCategoryToolbarCreateNewModalTrigger />
+            </ToolbarDesktop>
 
-          <ToolbarMobileTop>
-            <BackButton href="/projects" />
-            <ToolbarMobileHeading>{t("heading")}</ToolbarMobileHeading>
-            {projectCategoryToolbarActionsMenuTrigger}
-          </ToolbarMobileTop>
+            <ToolbarMobileTop>
+              <BackButton href="/projects" />
+              <ToolbarMobileHeading>{t("heading")}</ToolbarMobileHeading>
+              <ProjectCategoryToolbarActionsMenuTrigger />
+            </ToolbarMobileTop>
 
-          <ToolbarMobileBottom>
-            <div className="ml-auto">
-              {projectCategoryToolbarCreateNewModalTrigger}
-            </div>
-          </ToolbarMobileBottom>
+            <ToolbarMobileBottom>
+              <div className="ml-auto">
+                <ProjectCategoryToolbarCreateNewModalTrigger />
+              </div>
+            </ToolbarMobileBottom>
 
-          {projectCategoriesContainer}
-        </ViewModeProvider>
-      </PageGrid>
-    </PageContainer>
+            {projectCategoriesContainer}
+          </ViewModeProvider>
+        </PageGrid>
+      </PageContainer>
+
+      <NewProjectCategoryModal />
+    </>
   );
 }

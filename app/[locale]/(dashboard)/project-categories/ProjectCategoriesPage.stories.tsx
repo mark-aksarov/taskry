@@ -6,7 +6,6 @@ import { PageDecorator } from "@/.storybook/PageDecorator";
 import { ProjectCategoriesPage } from "./ProjectCategoriesPage";
 import ProjectCategoriesTemplate from "./ProjectCategoriesTemplate";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { ProjectCategoriesPageEmpty } from "./ProjectCategoriesPageEmpty";
 import { AppHeaderStory } from "@/components/layout/AppHeader/__stories__";
 import { ProjectCategoryList } from "@/components/projectCategory/ProjectCategoryList";
 import { withSelectedItemsProvider } from "@/components/common/SelectedItemsContext/__stories__";
@@ -39,11 +38,10 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
+    totalCount: 10,
     projectCategoriesContainer: (
       <ProjectCategoryList {...ProjectCategoryListStory.args} />
     ),
-    createProjectCategory: () => ({ status: "success" }),
-    deleteProjectCategories: () => ({ status: "success" }),
   },
 } satisfies Story;
 
@@ -53,10 +51,5 @@ export const Loading = {
 } satisfies Story;
 
 export const WithNoProjectCategories = {
-  args: { ...Default.args },
-  render: () => (
-    <ProjectCategoriesPageEmpty
-      createProjectCategory={() => ({ status: "success" })}
-    />
-  ),
+  args: { ...Default.args, totalCount: 0 },
 } satisfies Story;

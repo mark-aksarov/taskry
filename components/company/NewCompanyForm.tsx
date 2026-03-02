@@ -9,9 +9,9 @@ import {
 
 import { startTransition } from "react";
 import { useTranslations } from "next-intl";
+import { useCreateCompany } from "./CreateCompanyContext";
 import { CompanyNameTextField } from "./CompanyNameTextField";
 import { FormErrorBanner } from "@/components/common/FormErrorBanner";
-import { useCreateCompany } from "./CreateCompanyContext/CreateCompanyContext";
 
 export function NewCompanyForm() {
   const t = useTranslations("company.NewCompanyForm");

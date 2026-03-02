@@ -30,6 +30,7 @@ export const Default = {
   args: {
     positionId: 1,
     positionName: "Position 1",
-    updatePosition: () => ({ status: "success" }),
+    isOpen: true,
+    onOpenChange: () => {},
   },
 } satisfies Story;

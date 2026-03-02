@@ -28,11 +28,11 @@
   "position": {
     "create": {
       "success": "Position created successfully",
-      "error": "Failed to create position."
+      "error": "A server error occurred. Failed to create position."
     },
     "update": {
       "success": "Position updated successfully",
-      "error": "Failed to update position."
+      "error": "A server error occurred. Failed to update position."
     },
     "delete": {
       "success": {
@@ -40,19 +40,19 @@
         "many": "Positions deleted successfully"
       },
       "error": {
-        "one": "Failed to delete position.",
-        "many": "Failed to delete positions."
+        "one": "A server error occurred. Failed to delete position.",
+        "many": "A server error occurred. Failed to delete positions."
       }
     }
   },
   "comment": {
     "create": {
       "success": "Comment sent successfully",
-      "error": "Failed to send comment."
+      "error": "A server error occurred. Failed to send comment."
     },
     "update": {
       "success": "Comment updated successfully",
-      "error": "Failed to update comment."
+      "error": "A server error occurred. Failed to update comment."
     },
     "delete": {
       "success": {
@@ -60,19 +60,19 @@
         "many": "Comments deleted successfully"
       },
       "error": {
-        "one": "Failed to delete comment.",
-        "many": "Failed to delete comments."
+        "one": "A server error occurred. Failed to delete comment.",
+        "many": "A server error occurred. Failed to delete comments."
       }
     }
   },
   "company": {
     "create": {
       "success": "Company created successfully",
-      "error": "Failed to create company."
+      "error": "A server error occurred. Failed to create company."
     },
     "update": {
       "success": "Company updated successfully",
-      "error": "Failed to update company."
+      "error": "A server error occurred. Failed to update company."
     },
     "delete": {
       "success": {
@@ -80,19 +80,19 @@
         "many": "Companies deleted successfully"
       },
       "error": {
-        "one": "Failed to delete company.",
-        "many": "Failed to delete companies."
+        "one": "A server error occurred. Failed to delete company.",
+        "many": "A server error occurred. Failed to delete companies."
       }
     }
   },
   "customer": {
     "create": {
       "success": "Customer created successfully",
-      "error": "Failed to create customer."
+      "error": "A server error occurred. Failed to create customer."
     },
     "update": {
       "success": "Customer updated successfully",
-      "error": "Failed to update customer."
+      "error": "A server error occurred. Failed to update customer."
     },
     "delete": {
       "success": {
@@ -100,19 +100,19 @@
         "many": "Customers deleted successfully"
       },
       "error": {
-        "one": "Failed to delete customer.",
-        "many": "Failed to delete customers."
+        "one": "A server error occurred. Failed to delete customer.",
+        "many": "A server error occurred. Failed to delete customers."
       }
     }
   },
   "project": {
     "create": {
       "success": "Project created successfully",
-      "error": "Failed to create project."
+      "error": "A server error occurred. Failed to create project."
     },
     "update": {
       "success": "Project updated successfully",
-      "error": "Failed to update project."
+      "error": "A server error occurred. Failed to update project."
     },
     "updateStatus": {
       "success": {
@@ -120,8 +120,8 @@
         "many": "Project statuses updated successfully"
       },
       "error": {
-        "one": "Failed to update project status",
-        "many": "Failed to update project statuses"
+        "one": "A server error occurred. Failed to update project status",
+        "many": "A server error occurred. Failed to update project statuses"
       }
     },
     "delete": {
@@ -130,19 +130,19 @@
         "many": "Projects deleted successfully"
       },
       "error": {
-        "one": "Failed to delete project.",
-        "many": "Failed to delete projects."
+        "one": "A server error occurred. Failed to delete project.",
+        "many": "A server error occurred. Failed to delete projects."
       }
     }
   },
   "task": {
     "create": {
       "success": "Task created successfully",
-      "error": "Failed to create task."
+      "error": "A server error occurred. Failed to create task."
     },
     "update": {
       "success": "Task updated successfully",
-      "error": "Failed to update task."
+      "error": "A server error occurred. Failed to update task."
     },
     "updateStatus": {
       "success": {
@@ -150,8 +150,8 @@
         "many": "Task statuses updated successfully"
       },
       "error": {
-        "one": "Failed to update task status",
-        "many": "Failed to update task statuses"
+        "one": "A server error occurred. Failed to update task status",
+        "many": "A server error occurred. Failed to update task statuses"
       }
     },
     "delete": {
@@ -160,19 +160,19 @@
         "many": "Tasks deleted successfully"
       },
       "error": {
-        "one": "Failed to delete task.",
-        "many": "Failed to delete tasks."
+        "one": "A server error occurred. Failed to delete task.",
+        "many": "A server error occurred. Failed to delete tasks."
       }
     }
   },
   "projectCategory": {
     "create": {
       "success": "Project category created successfully",
-      "error": "Failed to create project category."
+      "error": "A server error occurred. Failed to create project category."
     },
     "update": {
       "success": "Project category updated successfully",
-      "error": "Failed to update project category."
+      "error": "A server error occurred. Failed to update project category."
     },
     "delete": {
       "success": {
@@ -180,19 +180,19 @@
         "many": "Project categories deleted successfully"
       },
       "error": {
-        "one": "Failed to delete project category.",
-        "many": "Failed to delete project categories."
+        "one": "A server error occurred. Failed to delete project category.",
+        "many": "A server error occurred. Failed to delete project categories."
       }
     }
   },
   "taskCategory": {
     "create": {
       "success": "Task category created successfully",
-      "error": "Failed to create task category."
+      "error": "A server error occurred. Failed to create task category."
     },
     "update": {
       "success": "Task category updated successfully",
-      "error": "Failed to update task category."
+      "error": "A server error occurred. Failed to update task category."
     },
     "delete": {
       "success": {
@@ -200,23 +200,23 @@
         "many": "Task categories deleted successfully"
       },
       "error": {
-        "one": "Failed to delete task category.",
-        "many": "Failed to delete task categories."
+        "one": "A server error occurred. Failed to delete task category.",
+        "many": "A server error occurred. Failed to delete task categories."
       }
     }
   },
   "subtask": {
     "create": {
       "success": "Subtask created successfully",
-      "error": "Failed to create subtask."
+      "error": "A server error occurred. Failed to create subtask."
     },
     "update": {
       "success": "Subtask updated successfully",
-      "error": "Failed to update subtask."
+      "error": "A server error occurred. Failed to update subtask."
     },
     "updateStatus": {
       "success": "Subtask status updated successfully",
-      "error": "Failed to update subtask status"
+      "error": "A server error occurred. Failed to update subtask status"
     },
     "delete": {
       "success": {
@@ -224,27 +224,27 @@
         "many": "Subtasks deleted successfully"
       },
       "error": {
-        "one": "Failed to delete subtask.",
-        "many": "Failed to delete subtasks."
+        "one": "A server error occurred. Failed to delete subtask.",
+        "many": "A server error occurred. Failed to delete subtasks."
       }
     }
   },
   "user": {
     "create": {
       "success": "User created successfully",
-      "error": "Failed to create user."
+      "error": "A server error occurred. Failed to create user."
     },
     "update": {
       "success": "User updated successfully",
-      "error": "Failed to update user."
+      "error": "A server error occurred. Failed to update user."
     },
     "delete": {
       "success": "User deleted successfully",
-      "error": "Failed to delete user."
+      "error": "A server error occurred. Failed to delete user."
     },
     "changePassword": {
       "success": "Password changed successfully",
-      "error": "Failed to change password."
+      "error": "A server error occurred. Failed to change password."
     }
   }
 }

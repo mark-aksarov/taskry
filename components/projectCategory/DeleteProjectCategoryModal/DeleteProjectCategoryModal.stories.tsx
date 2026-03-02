@@ -4,7 +4,7 @@ import { Meta, StoryObj } from "@storybook/react";
 import { withToastRegion } from "@/.storybook/withToastRegion";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { DeleteProjectCategoryModal } from "../DeleteProjectCategoryModal";
-import { withDeleteProjectCategoryProvider } from "../DeleteProjectCategoryTransitionContext/__stories__";
+import { withDeleteProjectCategoryProvider } from "../DeleteProjectCategoryContext/__stories__";
 
 const meta = {
   title: "components/project-categories/DeleteProjectCategoryModal",
@@ -37,7 +37,7 @@ export const Default = {
   args: {
     projectCategoryId: 1,
     projectCategoryName: "Project Category 1",
+    isOpen: false,
     onOpenChange: () => {},
-    deleteProjectCategory: () => ({ status: "success" }),
   },
 } satisfies Story;

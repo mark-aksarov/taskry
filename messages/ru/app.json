@@ -1,6 +1,10 @@
 {
   "ProjectCategoriesPage": {
-    "heading": "Категории проектов"
+    "heading": "Категории проектов",
+    "emptySection": {
+      "heading": "Нет категорий проектов",
+      "description": "Создайте первую категорию, чтобы начать работать."
+    }
   },
   "CustomerDetailPage": {
     "heading": "Детали клиента"
@@ -106,10 +110,6 @@
   "ProjectCategoriesPageLoading": {
     "title": "Все категории проектов"
   },
-  "ProjectCategoriesPageEmpty": {
-    "description": "Создайте новую категорию проекта, чтобы лучше организовать ваши проекты.",
-    "heading": "Нет категорий проектов"
-  },
   "TaskCategoriesPage": {
     "heading": "Категории задач"
   },
@@ -134,10 +134,10 @@
     "title": "Все должности"
   },
   "PositionsPage": {
-    "heading": "Должности"
-  },
-  "PositionsPageEmpty": {
-    "heading": "Нет должностей",
-    "description": "Создайте новую должность, чтобы лучше организовать работу с пользователями."
+    "heading": "Должности",
+    "emptySection": {
+      "heading": "Нет должностей",
+      "description": "Создайте новую должность, чтобы лучше организовать работу с пользователями"
+    }
   }
 }

@@ -5,47 +5,37 @@ import {
   FormBaseBody,
   FormBaseFooter,
   FormBaseSubmitButton,
-  useFormBaseActionState,
 } from "@/components/common/FormBase";
 
-import { useRef } from "react";
+import { startTransition } from "react";
 import { useTranslations } from "next-intl";
-import { ActionFn, ActionState } from "@/lib/actions/types";
-import { handleActionSubmit } from "@/lib/utils/handleActionSubmit";
 import { FormErrorBanner } from "@/components/common/FormErrorBanner";
+import { useCreateProjectCategory } from "./CreateProjectCategoryContext";
 import { ProjectCategoryNameTextField } from "./ProjectCategoryNameTextField";
 
-interface NewProjectCategoryFormProps {
-  createProjectCategory: ActionFn<ActionState, FormData>;
-}
-
-export function NewProjectCategoryForm({
-  createProjectCategory,
-}: NewProjectCategoryFormProps) {
+export function NewProjectCategoryForm() {
   const t = useTranslations("projectCategories.NewProjectCategoryForm");
 
-  // The ref is used inside reducerAction in useFormBaseActionState.
-  // ref.current in useFormBaseActionState is null on unmount, preventing programmatic modal close when opening another form.
-  const ref = useRef<HTMLFormElement>(null);
+  const { state, action, isPending } = useCreateProjectCategory();
 
-  const [state, action, isPending] = useFormBaseActionState(
-    createProjectCategory,
-    ref,
-    t("successMessage"),
-  );
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+
+    startTransition(() => {
+      action(formData);
+    });
+  }
 
   return (
-    <FormBase
-      ref={ref}
-      id="new-project-category-form"
-      onSubmit={(e) => handleActionSubmit(e, action)}
-    >
+    <FormBase id="new-project-category-form" onSubmit={handleSubmit}>
       <FormBaseBody>
         <ProjectCategoryNameTextField />
         <FormErrorBanner status={state.status} isPending={isPending}>
           {state.message}
         </FormErrorBanner>
       </FormBaseBody>
+
       <FormBaseFooter>
         <FormBaseSubmitButton
           isPending={isPending}

@@ -4,7 +4,6 @@ import { PositionsPage } from "./PositionsPage";
 import PositionsTemplate from "./PositionsTemplate";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { usePathname, useRouter } from "next/navigation";
-import { PositionsPageEmpty } from "./PositionsPageEmpty";
 import { PageDecorator } from "@/.storybook/PageDecorator";
 import { PositionList } from "@/components/position/PositionList";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
@@ -39,9 +38,8 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
+    totalCount: 10,
     positionsContainer: <PositionList {...PositionListStory.args} />,
-    createPosition: () => ({ status: "success" }),
-    deletePositions: () => ({ status: "success" }),
   },
 } satisfies Story;
 
@@ -51,8 +49,5 @@ export const Loading = {
 } satisfies Story;
 
 export const WithNoPositionsPage = {
-  args: { ...Default.args },
-  render: () => (
-    <PositionsPageEmpty createPosition={() => ({ status: "success" })} />
-  ),
+  args: { ...Default.args, totalCount: 0 },
 } satisfies Story;

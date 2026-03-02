@@ -30,6 +30,7 @@ export const Default = {
   args: {
     projectCategoryId: 1,
     projectCategoryName: "Project Category 1",
-    updateProjectCategory: () => ({ status: "success" }),
+    isOpen: false,
+    onOpenChange: () => {},
   },
 } satisfies Story;

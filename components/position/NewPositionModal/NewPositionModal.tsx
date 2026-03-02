@@ -1,3 +1,5 @@
+"use client";
+
 import {
   FormBaseModal,
   FormBaseModalDialog,
@@ -5,28 +7,25 @@ import {
 } from "@/components/common/FormBaseModal";
 
 import { useTranslations } from "next-intl";
-import { ModalProps } from "@/components/ui/Modal";
 import { DialogHeader } from "@/components/ui/Dialog";
 import { NewPositionForm } from "../NewPositionForm";
-import { ActionFn, ActionState } from "@/lib/actions/types";
+import { useCreatePosition } from "../CreatePositionContext";
 
-interface NewPositionModalProps
-  extends Pick<ModalProps, "isOpen" | "onOpenChange"> {
-  createPosition: ActionFn<ActionState, FormData>;
-}
-
-export function NewPositionModal({
-  createPosition,
-  ...props
-}: NewPositionModalProps) {
+export function NewPositionModal() {
   const t = useTranslations("positions.NewPositionModal");
 
+  const { isModalOpen, onModalOpenChange } = useCreatePosition();
+
   return (
-    <FormBaseModal className="md:w-[350px]" {...props}>
+    <FormBaseModal
+      className="md:w-[350px]"
+      isOpen={isModalOpen}
+      onOpenChange={onModalOpenChange}
+    >
       <FormBaseModalDialog>
         <DialogHeader>{t("title")}</DialogHeader>
         <FormBaseModalDialogBody>
-          <NewPositionForm createPosition={createPosition} />
+          <NewPositionForm />
         </FormBaseModalDialogBody>
       </FormBaseModalDialog>
     </FormBaseModal>

@@ -5,36 +5,26 @@ import {
   FormBaseBody,
   FormBaseFooter,
   FormBaseSubmitButton,
-  useFormBaseActionState,
 } from "@/components/common/FormBase";
 
+import { startTransition } from "react";
 import { useTranslations } from "next-intl";
-import { ActionFn, ActionState } from "@/lib/actions/types";
-import { handleActionSubmit } from "@/lib/utils/handleActionSubmit";
 import { FormErrorBanner } from "@/components/common/FormErrorBanner";
+import { useUpdateProjectCategory } from "./UpdateProjectCategoryContext";
 import { ProjectCategoryNameTextField } from "./ProjectCategoryNameTextField";
-import { useUpdateEntityActionState } from "@/lib/hooks/useUpdateEntityActionState";
-import { useUpdateProjectCategoryTransition } from "./UpdateProjectCategoryTransitionContext";
 
 interface EditProjectCategoryFormProps {
   projectCategoryId: number;
   nameDefaultValue: string;
-  updateProjectCategory: ActionFn<ActionState, FormData>;
 }
 
 export function EditProjectCategoryForm({
   projectCategoryId,
   nameDefaultValue,
-  updateProjectCategory,
 }: EditProjectCategoryFormProps) {
   const t = useTranslations("projectCategories.EditProjectCategoryForm");
 
-  const { startTransition } = useUpdateProjectCategoryTransition();
-
-  const [state, action, isPending] = useUpdateEntityActionState({
-    updateEntity: updateProjectCategory,
-    successMessage: t("successMessage"),
-  });
+  const { state, isPending, action } = useUpdateProjectCategory();
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();

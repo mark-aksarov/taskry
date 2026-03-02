@@ -9,44 +9,38 @@ import {
 } from "@/components/common/ConfirmModal";
 
 import { useTranslations } from "next-intl";
-import { ModalProps } from "@/components/ui/Modal";
 import { DialogHeading } from "@/components/ui/Dialog";
-import { ActionFn, ActionState } from "@/lib/actions/types";
+import { handleDeleteEntity } from "@/lib/utils/handleDeleteEntity";
+import { useDeleteProjectCategory } from "../DeleteProjectCategoryContext";
 import { useSelectedItems } from "@/components/common/SelectedItemsContext";
-import { useDeleteEntityActionState } from "@/lib/hooks/useDeleteEntityActionState";
-import { useDeleteProjectCategoryTransition } from "../DeleteProjectCategoryTransitionContext";
 
-interface DeleteProjectCategoryModalProps extends ModalProps {
+interface DeleteProjectCategoryModalProps {
   projectCategoryId: number;
   projectCategoryName: string;
-  deleteProjectCategory: ActionFn<ActionState, number[]>;
+  isOpen: boolean;
+  onOpenChange: (open: boolean) => void;
 }
 
 export function DeleteProjectCategoryModal({
   projectCategoryId,
   projectCategoryName,
-  deleteProjectCategory,
   isOpen,
   onOpenChange,
 }: DeleteProjectCategoryModalProps) {
   const t = useTranslations("projectCategories.DeleteProjectCategoryModal");
 
-  const { startTransition } = useDeleteProjectCategoryTransition();
-
-  const [, action] = useDeleteEntityActionState({
-    deleteEntity: deleteProjectCategory,
-    successMessage: t("successMessage"),
-  });
+  const { action } = useDeleteProjectCategory();
 
   const { remove: removeSelected } = useSelectedItems();
 
   function handleDelete() {
-    //Remove the company from the selection to prevent access to it
-    removeSelected(projectCategoryId);
-
-    //close modal before deleting
-    onOpenChange?.(false);
-    startTransition(() => action([projectCategoryId]));
+    handleDeleteEntity(
+      removeSelected,
+      action,
+      [projectCategoryId],
+      projectCategoryId,
+      onOpenChange,
+    );
   }
 
   return (

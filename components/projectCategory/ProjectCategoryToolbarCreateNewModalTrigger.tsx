@@ -1,39 +1,40 @@
 "use client";
 
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { useTranslations } from "next-intl";
-import { ActionFn, ActionState } from "@/lib/actions/types";
 import { useCurrentUser } from "../common/CurrentUserContext";
-import { NewProjectCategoryModal } from "./NewProjectCategoryModal";
 import { GuestModeModal } from "@/components/common/GuestModeModal";
 import { ToolbarCreateNewModalTrigger } from "@/components/common/Toolbar";
+import { useCreateProjectCategory } from "./CreateProjectCategoryContext";
 
-interface ProjectCategoryToolbarCreateNewModalTriggerProps {
-  createProjectCategory: ActionFn<ActionState, FormData>;
-}
-
-export function ProjectCategoryToolbarCreateNewModalTrigger({
-  createProjectCategory,
-}: ProjectCategoryToolbarCreateNewModalTriggerProps) {
+export function ProjectCategoryToolbarCreateNewModalTrigger() {
   const t = useTranslations(
     "projectCategories.ProjectCategoryToolbarCreateNewModalTrigger",
   );
 
-  // Create new project category modal
-  const [isProjectCategoryModalOpen, setIsProjectCategoryModalOpen] =
-    useState(false);
-
-  // Guest mode
+  // If the user is a guest, show the guest mode modal instead of allowing creation
   const { isGuest } = useCurrentUser();
   const [isGuestModeModalOpen, setIsGuestModeModalOpen] = useState(false);
 
+  // Create project category action and modal states
+  const {
+    isPending: isCreateProjectCategoryPending,
+    isModalOpen: isCreateProjectCategoryModalOpen,
+    onModalOpenChange: onProjectCategoryModalOpenChange,
+  } = useCreateProjectCategory();
+
+  /**
+   * Handles menu actions for creating a project category
+   * - If user is a guest, show guest modal
+   * - Otherwise, open create project category modal
+   */
   const handlePress = () => {
     if (isGuest) {
       setIsGuestModeModalOpen(true);
       return;
     }
 
-    setIsProjectCategoryModalOpen(true);
+    onProjectCategoryModalOpenChange(true);
   };
 
   return (
@@ -42,12 +43,13 @@ export function ProjectCategoryToolbarCreateNewModalTrigger({
         data-test="project-category-toolbar-create-new-modal-trigger"
         label={t("label")}
         onPress={handlePress}
+        // Block creating another project category until the current request completes
+        // When the modal opens, a reset action is triggered, the pending state becomes true, and flickering occurs
+        isDisabled={
+          isCreateProjectCategoryPending && !isCreateProjectCategoryModalOpen
+        }
       />
-      <NewProjectCategoryModal
-        isOpen={isProjectCategoryModalOpen}
-        onOpenChange={setIsProjectCategoryModalOpen}
-        createProjectCategory={createProjectCategory}
-      />
+
       <GuestModeModal
         isOpen={isGuestModeModalOpen}
         onOpenChange={setIsGuestModeModalOpen}

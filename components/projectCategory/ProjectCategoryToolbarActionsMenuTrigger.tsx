@@ -6,19 +6,12 @@ import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
 import { DialogHeader } from "../ui/Dialog";
 import { GuestModeModal } from "../common/GuestModeModal";
-import { ActionFn, ActionState } from "@/lib/actions/types";
 import { ToolbarActionsMenuTrigger } from "../common/Toolbar";
 import { useCurrentUser } from "../common/CurrentUserContext";
 import { useSelectedItems } from "@/components/common/SelectedItemsContext";
 import { DeleteProjectCategoriesModal } from "./DeleteProjectCategoriesModal";
 
-interface ProjectCategoryToolbarActionsMenuTriggerProps {
-  deleteProjectCategories: ActionFn<ActionState, number[]>;
-}
-
-export const ProjectCategoryToolbarActionsMenuTrigger = ({
-  deleteProjectCategories,
-}: ProjectCategoryToolbarActionsMenuTriggerProps) => {
+export const ProjectCategoryToolbarActionsMenuTrigger = () => {
   const t = useTranslations(
     "projectCategories.ProjectCategoryToolbarActionsMenuTrigger",
   );
@@ -63,8 +56,6 @@ export const ProjectCategoryToolbarActionsMenuTrigger = ({
       <DeleteProjectCategoriesModal
         isOpen={isDeleteModalOpen}
         onOpenChange={setIsDeleteModalOpen}
-        deleteProjectCategories={deleteProjectCategories}
-        projectCategoryIds={selected.ids}
       />
 
       {/* Guest mode modal */}

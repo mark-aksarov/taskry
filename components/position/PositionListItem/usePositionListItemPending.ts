@@ -1,11 +1,11 @@
 import { useDeletePositions } from "../DeletePositionsContext";
-import { useDeletePositionTransition } from "../DeletePositionTransitionContext";
-import { useUpdatePositionTransition } from "../UpdatePositionTransitionContext";
+import { useDeletePosition } from "../DeletePositionContext";
+import { useUpdatePosition } from "../UpdatePositionContext";
 
 export function usePositionListItemPending(companyId: number) {
-  const { isPending: isDeletePositionPending } = useDeletePositionTransition();
-  const { isPending: isUpdatePositionPending } = useUpdatePositionTransition();
-  const { isPending: isDeleteCompaniesPending, positionIds } =
+  const { isPending: isDeletePositionPending } = useDeletePosition();
+  const { isPending: isUpdatePositionPending } = useUpdatePosition();
+  const { isPending: isDeleteCompaniesPending, ids: positionIds } =
     useDeletePositions();
 
   const isPending =

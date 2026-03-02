@@ -1,6 +1,10 @@
 {
   "ProjectCategoriesPage": {
-    "heading": "Project Categories"
+    "heading": "Project Categories",
+    "emptySection": {
+      "heading": "No project categories",
+      "description": "Create your first category to get started."
+    }
   },
   "CustomerDetailPage": {
     "heading": "Customer detail"
@@ -106,10 +110,6 @@
   "ProjectCategoriesPageLoading": {
     "title": "All Project Categories"
   },
-  "ProjectCategoriesPageEmpty": {
-    "heading": "No project categories yet",
-    "description": "Create a new project category to better organize your projects."
-  },
   "TaskCategoriesPage": {
     "heading": "Task Categories"
   },
@@ -134,10 +134,10 @@
     "title": "All positions"
   },
   "PositionsPage": {
-    "heading": "Positions"
-  },
-  "PositionsPageEmpty": {
-    "heading": "No positions",
-    "description": "Create a new position to better organize your work with users."
+    "heading": "Positions",
+    "emptySection": {
+      "heading": "No positions yet",
+      "description": "Create a new position to better organize your work with users."
+    }
   }
 }

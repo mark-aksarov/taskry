@@ -11,8 +11,8 @@ import {
 import { useTranslations } from "next-intl";
 import { DialogHeading } from "@/components/ui/Dialog";
 import { useDeleteCompany } from "../DeleteCompanyContext";
-import { useSelectedItems } from "@/components/common/SelectedItemsContext";
 import { handleDeleteEntity } from "@/lib/utils/handleDeleteEntity";
+import { useSelectedItems } from "@/components/common/SelectedItemsContext";
 
 interface DeleteCompanyModalProps {
   companyId: number;

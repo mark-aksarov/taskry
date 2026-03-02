@@ -12,10 +12,10 @@ import { useTranslations } from "next-intl";
 import { ActionFn, ActionState } from "@/lib/actions/types";
 import { SelectableItem } from "@/components/common/SelectableItem";
 import { useSelectedItems } from "@/components/common/SelectedItemsContext";
+import { DeleteProjectCategoryProvider } from "../DeleteProjectCategoryContext";
+import { UpdateProjectCategoryProvider } from "../UpdateProjectCategoryContext";
 import { ProjectCategoryListItemCheckbox } from "./ProjectCategoryListItemCheckbox";
 import { ProjectCategoryListItemPendingOverlay } from "./ProjectCategoryListItemPendingOverlay";
-import { DeleteProjectCategoryTransitionProvider } from "../DeleteProjectCategoryTransitionContext";
-import { UpdateProjectCategoryTransitionProvider } from "../UpdateProjectCategoryTransitionContext";
 import { ProjectCategoryListItemActionMenuTrigger } from "./ProjectCategoryListItemActionMenuTrigger";
 
 interface ProjectCategoryListItemProps {
@@ -25,19 +25,27 @@ interface ProjectCategoryListItemProps {
   deleteProjectCategory: ActionFn<ActionState, number[]>;
 }
 
-export function ProjectCategoryListItem(props: ProjectCategoryListItemProps) {
+export function ProjectCategoryListItem({
+  updateProjectCategory,
+  deleteProjectCategory,
+  ...props
+}: ProjectCategoryListItemProps) {
   const selected = useSelectedItems();
 
   return (
-    <UpdateProjectCategoryTransitionProvider>
-      <DeleteProjectCategoryTransitionProvider>
+    <UpdateProjectCategoryProvider
+      updateProjectCategory={updateProjectCategory}
+    >
+      <DeleteProjectCategoryProvider
+        deleteProjectCategory={deleteProjectCategory}
+      >
         <ProjectCategoryListItemPendingOverlay projectCategoryId={props.id}>
           <SelectableItem {...selected} item={{ id: props.id }}>
             <ProjectCategoryListItemInner {...props} />
           </SelectableItem>
         </ProjectCategoryListItemPendingOverlay>
-      </DeleteProjectCategoryTransitionProvider>
-    </UpdateProjectCategoryTransitionProvider>
+      </DeleteProjectCategoryProvider>
+    </UpdateProjectCategoryProvider>
   );
 }
 
@@ -45,9 +53,10 @@ const ProjectCategoryListItemInner = memo(
   ({
     id,
     name,
-    updateProjectCategory,
-    deleteProjectCategory,
-  }: ProjectCategoryListItemProps) => {
+  }: Omit<
+    ProjectCategoryListItemProps,
+    "updateProjectCategory" | "deleteProjectCategory"
+  >) => {
     const t = useTranslations("projectCategories.ProjectCategoryListItem");
 
     return (
@@ -64,8 +73,6 @@ const ProjectCategoryListItemInner = memo(
         <ProjectCategoryListItemActionMenuTrigger
           projectCategoryId={id}
           projectCategoryName={name}
-          updateProjectCategory={updateProjectCategory}
-          deleteProjectCategory={deleteProjectCategory}
         />
       </ListItem>
     );

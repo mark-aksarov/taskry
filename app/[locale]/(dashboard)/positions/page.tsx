@@ -1,7 +1,6 @@
 import { PositionsPage } from "./PositionsPage";
 import { hasOwnerRole } from "@/lib/utils/hasOwnerRole";
 import { hasGuestRole } from "@/lib/utils/hasGuestRole";
-import { PositionsPageEmpty } from "./PositionsPageEmpty";
 import { createPosition } from "@/lib/actions/position/createPosition";
 import { getPositionSummaries } from "@/lib/data/position/position.dal";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
@@ -11,6 +10,7 @@ import { PositionsContainer } from "@/components/position/PositionsContainer";
 import { SelectedItemsProvider } from "@/components/common/SelectedItemsContext";
 import { PageTransitionProvider } from "@/components/common/PageTransitionContext";
 import { DeletePositionsProvider } from "@/components/position/DeletePositionsContext";
+import { CreatePositionProvider } from "@/components/position/CreatePositionContext";
 
 export default async function AppPositionsPage() {
   // Authorization
@@ -26,25 +26,17 @@ export default async function AppPositionsPage() {
 
   const positions = await getPositionSummaries();
 
-  // Render the empty page if there are no positions
-  if (!positions.length) {
-    return (
-      <CurrentUserProvider value={currentUserContextValue}>
-        <PositionsPageEmpty createPosition={createPosition} />
-      </CurrentUserProvider>
-    );
-  }
-
   return (
     <CurrentUserProvider value={currentUserContextValue}>
       <SelectedItemsProvider pageItems={positions.map((p) => ({ id: p.id }))}>
         <PageTransitionProvider>
-          <DeletePositionsProvider>
-            <PositionsPage
-              createPosition={createPosition}
-              positionsContainer={<PositionsContainer />}
-              deletePositions={deletePositions}
-            />
+          <DeletePositionsProvider deletePositions={deletePositions}>
+            <CreatePositionProvider createPosition={createPosition}>
+              <PositionsPage
+                totalCount={positions.length}
+                positionsContainer={<PositionsContainer />}
+              />
+            </CreatePositionProvider>
           </DeletePositionsProvider>
         </PageTransitionProvider>
       </SelectedItemsProvider>

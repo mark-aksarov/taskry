@@ -11,7 +11,7 @@ import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
 import { Pencil, Trash } from "lucide-react";
 import { EditPositionModal } from "../EditPositionModal";
-import { ActionFn, ActionState } from "@/lib/actions/types";
+import { useUpdatePosition } from "../UpdatePositionContext";
 import { DeletePositionModal } from "../DeletePositionModal";
 import { useCurrentUser } from "../../common/CurrentUserContext";
 import { GuestModeModal } from "@/components/common/GuestModeModal";
@@ -20,29 +20,32 @@ import { usePositionListItemPending } from "./usePositionListItemPending";
 export type PositionListItemActionMenuTriggerProps = {
   positionId: number;
   positionName: string;
-  updatePosition: ActionFn<ActionState, FormData>;
-  deletePosition: ActionFn<ActionState, number[]>;
 };
 
 export function PositionListItemActionMenuTrigger({
   positionId,
   positionName,
-  updatePosition,
-  deletePosition,
 }: PositionListItemActionMenuTriggerProps) {
   const t = useTranslations("positions.PositionListItemActionMenuTrigger");
 
-  // Deleting the position
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-
-  // Guest mode
+  // Detect if the current user is a guest
   const { isGuest } = useCurrentUser();
   const [isGuestModeModalOpen, setIsGuestModeModalOpen] = useState(false);
 
-  // Modal state for editing the position
-  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  // Delete confirmation modal state
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
-  // Handle menu actions
+  // State for edit modal from context
+  const {
+    isModalOpen: isEditModalOpen,
+    onModalOpenChange: onEditModalOpenChange,
+  } = useUpdatePosition();
+
+  /**
+   * Handles menu actions for a position item
+   * - If user is a guest, show guest modal
+   * - Otherwise, open edit or delete modal based on action key
+   */
   const handleAction = (key: Key) => {
     if (isGuest) {
       setIsGuestModeModalOpen(true);
@@ -51,13 +54,13 @@ export function PositionListItemActionMenuTrigger({
 
     const action = key.toString();
     if (action === "edit") {
-      setIsEditModalOpen(true);
+      onEditModalOpenChange(true);
     } else if (action === "delete") {
       setIsDeleteModalOpen(true);
     }
   };
 
-  //Pending state while deleting or updating
+  // Determine if any action on this position item is pending (update or delete)
   const isPending = usePositionListItemPending(positionId);
 
   return (
@@ -81,12 +84,12 @@ export function PositionListItemActionMenuTrigger({
         </Item>
       </ItemBaseActionMenuTrigger>
 
+      {/* Modals for editing, deleting, and guest mode */}
       <EditPositionModal
         isOpen={isEditModalOpen}
-        onOpenChange={setIsEditModalOpen}
+        onOpenChange={onEditModalOpenChange}
         positionId={positionId}
         positionName={positionName}
-        updatePosition={updatePosition}
       />
 
       <DeletePositionModal
@@ -94,7 +97,6 @@ export function PositionListItemActionMenuTrigger({
         onOpenChange={setIsDeleteModalOpen}
         positionId={positionId}
         positionName={positionName}
-        deletePosition={deletePosition}
       />
 
       <GuestModeModal

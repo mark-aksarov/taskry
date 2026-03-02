@@ -1,3 +1,5 @@
+"use client";
+
 import {
   FormBaseModal,
   FormBaseModalDialog,
@@ -5,30 +7,25 @@ import {
 } from "@/components/common/FormBaseModal";
 
 import { useTranslations } from "next-intl";
-import { ModalProps } from "@/components/ui/Modal";
 import { DialogHeader } from "@/components/ui/Dialog";
-import { ActionFn, ActionState } from "@/lib/actions/types";
 import { NewProjectCategoryForm } from "../NewProjectCategoryForm";
+import { useCreateProjectCategory } from "../CreateProjectCategoryContext";
 
-interface NewProjectCategoryModalProps
-  extends Pick<ModalProps, "isOpen" | "onOpenChange"> {
-  createProjectCategory: ActionFn<ActionState, FormData>;
-}
-
-export function NewProjectCategoryModal({
-  createProjectCategory,
-  ...props
-}: NewProjectCategoryModalProps) {
+export function NewProjectCategoryModal() {
   const t = useTranslations("projectCategories.NewProjectCategoryModal");
 
+  const { isModalOpen, onModalOpenChange } = useCreateProjectCategory();
+
   return (
-    <FormBaseModal className="md:w-[350px]" {...props}>
+    <FormBaseModal
+      className="md:w-[350px]"
+      isOpen={isModalOpen}
+      onOpenChange={onModalOpenChange}
+    >
       <FormBaseModalDialog>
         <DialogHeader>{t("title")}</DialogHeader>
         <FormBaseModalDialogBody>
-          <NewProjectCategoryForm
-            createProjectCategory={createProjectCategory}
-          />
+          <NewProjectCategoryForm />
         </FormBaseModalDialogBody>
       </FormBaseModalDialog>
     </FormBaseModal>

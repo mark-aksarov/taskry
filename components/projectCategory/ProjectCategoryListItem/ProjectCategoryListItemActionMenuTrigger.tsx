@@ -10,41 +10,44 @@ import { useState } from "react";
 import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
 import { Pencil, Trash } from "lucide-react";
-import { ActionFn, ActionState } from "@/lib/actions/types";
 import { useCurrentUser } from "../../common/CurrentUserContext";
 import { GuestModeModal } from "@/components/common/GuestModeModal";
 import { EditProjectCategoryModal } from "../EditProjectCategoryModal";
 import { DeleteProjectCategoryModal } from "../DeleteProjectCategoryModal";
+import { useUpdateProjectCategory } from "../UpdateProjectCategoryContext";
 import { useProjectCategoryListItemPending } from "./useProjectCategoryListItemPending";
 
 export type ProjectCategoryListItemActionMenuTriggerProps = {
   projectCategoryId: number;
   projectCategoryName: string;
-  updateProjectCategory: ActionFn<ActionState, FormData>;
-  deleteProjectCategory: ActionFn<ActionState, number[]>;
 };
 
 export function ProjectCategoryListItemActionMenuTrigger({
   projectCategoryId,
   projectCategoryName,
-  updateProjectCategory,
-  deleteProjectCategory,
 }: ProjectCategoryListItemActionMenuTriggerProps) {
   const t = useTranslations(
     "projectCategories.ProjectCategoryListItemActionMenuTrigger",
   );
 
-  // Deleting the position
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-
-  // Guest mode
+  // Detect if the current user is a guest
   const { isGuest } = useCurrentUser();
   const [isGuestModeModalOpen, setIsGuestModeModalOpen] = useState(false);
 
-  // Modal state for editing the project category
-  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  // Delete confirmation modal state
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
-  // Handle menu actions
+  // State for edit modal from context
+  const {
+    isModalOpen: isEditModalOpen,
+    onModalOpenChange: onEditModalOpenChange,
+  } = useUpdateProjectCategory();
+
+  /**
+   * Handles menu actions for a project category item
+   * - If user is a guest, show guest modal
+   * - Otherwise, open edit or delete modal based on action key
+   */
   const handleAction = (key: Key) => {
     if (isGuest) {
       setIsGuestModeModalOpen(true);
@@ -53,13 +56,13 @@ export function ProjectCategoryListItemActionMenuTrigger({
 
     const action = key.toString();
     if (action === "edit") {
-      setIsEditModalOpen(true);
+      onEditModalOpenChange(true);
     } else if (action === "delete") {
       setIsDeleteModalOpen(true);
     }
   };
 
-  //Pending state while deleting or updating
+  // Determine if any action on this project category item is pending (update or delete)
   const isPending = useProjectCategoryListItemPending(projectCategoryId);
 
   return (
@@ -83,12 +86,12 @@ export function ProjectCategoryListItemActionMenuTrigger({
         </Item>
       </ItemBaseActionMenuTrigger>
 
+      {/* Modals for editing, deleting, and guest mode */}
       <EditProjectCategoryModal
         isOpen={isEditModalOpen}
-        onOpenChange={setIsEditModalOpen}
+        onOpenChange={onEditModalOpenChange}
         projectCategoryId={projectCategoryId}
         projectCategoryName={projectCategoryName}
-        updateProjectCategory={updateProjectCategory}
       />
 
       <DeleteProjectCategoryModal
@@ -96,7 +99,6 @@ export function ProjectCategoryListItemActionMenuTrigger({
         onOpenChange={setIsDeleteModalOpen}
         projectCategoryId={projectCategoryId}
         projectCategoryName={projectCategoryName}
-        deleteProjectCategory={deleteProjectCategory}
       />
 
       <GuestModeModal
