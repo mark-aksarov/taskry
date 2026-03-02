@@ -1,8 +1,7 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useActionState } from "react";
 import { ActionState, ActionFn } from "@/lib/actions/types";
-import { useActionStateWithReset } from "./useActionStateWithReset";
 import { useCloseModalOnActionSuccess } from "./useCloseModalOnActionSuccess";
-import { useModalOpenChangeWithActionReset } from "./useModalOpenChangeWithActionReset";
+import { useActionErrorToastWhenModalClosed } from "./useActionErrorToastWhenModalClosed";
 
 export const initialState: ActionState = {
   status: null,
@@ -16,27 +15,20 @@ export function useUpdateEntityState<TPayload = FormData>(
 ) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const [state, action, isPending] = useActionStateWithReset(
-    updateFn,
-    initialState,
-  );
+  const [state, action, isPending] = useActionState(updateFn, initialState);
 
+  useActionErrorToastWhenModalClosed(state, isModalOpen);
   useCloseModalOnActionSuccess(state, setIsModalOpen);
-
-  const onModalOpenChange = useModalOpenChangeWithActionReset(
-    action,
-    setIsModalOpen,
-  );
 
   const contextValue = useMemo(
     () => ({
       isModalOpen,
-      onModalOpenChange,
+      onModalOpenChange: setIsModalOpen,
       state,
       action,
       isPending,
     }),
-    [isModalOpen, onModalOpenChange, state, action, isPending],
+    [isModalOpen, state, action, isPending],
   );
 
   return contextValue;

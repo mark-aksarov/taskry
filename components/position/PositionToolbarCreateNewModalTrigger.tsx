@@ -17,7 +17,6 @@ export function PositionToolbarCreateNewModalTrigger() {
   // Create position action and modal states
   const {
     isPending: isCreatePositionPending,
-    isModalOpen: isCreatePositionModalOpen,
     onModalOpenChange: onPositionModalOpenChange,
   } = useCreatePosition();
 
@@ -42,8 +41,7 @@ export function PositionToolbarCreateNewModalTrigger() {
         label={t("label")}
         onPress={handlePress}
         // Block creating another position until the current request completes
-        // When the modal opens, a reset action is triggered, the pending state becomes true, and flickering occurs
-        isDisabled={isCreatePositionPending && !isCreatePositionModalOpen}
+        isDisabled={isCreatePositionPending}
       />
 
       <GuestModeModal

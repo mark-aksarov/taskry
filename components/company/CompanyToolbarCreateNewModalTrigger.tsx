@@ -17,7 +17,6 @@ export function CompanyToolbarCreateNewModalTrigger() {
   // Create company action and modal states
   const {
     isPending: isCreateCompanyPending,
-    isModalOpen: isCreateCompanyModalOpen,
     onModalOpenChange: onCompanyModalOpenChange,
   } = useCreateCompany();
 
@@ -42,8 +41,7 @@ export function CompanyToolbarCreateNewModalTrigger() {
         label={t("label")}
         onPress={handlePress}
         // Block creating another company until the current request completes
-        // When the modal opens, a reset action is triggered, the pending state becomes true, and flickering occurs
-        isDisabled={isCreateCompanyPending && !isCreateCompanyModalOpen}
+        isDisabled={isCreateCompanyPending}
       />
 
       <GuestModeModal

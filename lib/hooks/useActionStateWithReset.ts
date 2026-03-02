@@ -5,15 +5,5 @@ export function useActionStateWithReset<TPayload>(
   action: ActionFn<ActionState, TPayload>,
   initialState: ActionState,
 ) {
-  return useActionState(
-    async (prevState: ActionState, payload: TPayload | null) => {
-      if (payload === null) {
-        return initialState;
-      }
-
-      const newState = await action(prevState, payload);
-      return newState;
-    },
-    initialState,
-  );
+  return useActionState(action, initialState);
 }

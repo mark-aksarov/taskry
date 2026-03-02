@@ -19,7 +19,6 @@ export function ProjectCategoryToolbarCreateNewModalTrigger() {
   // Create project category action and modal states
   const {
     isPending: isCreateProjectCategoryPending,
-    isModalOpen: isCreateProjectCategoryModalOpen,
     onModalOpenChange: onProjectCategoryModalOpenChange,
   } = useCreateProjectCategory();
 
@@ -44,10 +43,7 @@ export function ProjectCategoryToolbarCreateNewModalTrigger() {
         label={t("label")}
         onPress={handlePress}
         // Block creating another project category until the current request completes
-        // When the modal opens, a reset action is triggered, the pending state becomes true, and flickering occurs
-        isDisabled={
-          isCreateProjectCategoryPending && !isCreateProjectCategoryModalOpen
-        }
+        isDisabled={isCreateProjectCategoryPending}
       />
 
       <GuestModeModal

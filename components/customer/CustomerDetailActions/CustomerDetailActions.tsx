@@ -88,9 +88,7 @@ export function CustomerDetailActions({
         />
         <NavigationButton
           data-test="edit-customer-button"
-          // show pending state
-          // When the modal opens, a reset action is triggered, the pending state becomes true, and flickering occurs
-          isPending={isUpdatePending && !isEditModalOpen}
+          isPending={isUpdatePending}
           onPress={handleEditPress}
           variant="secondary"
           iconLeft={<Pencil size={18} strokeWidth={1.5} absoluteStrokeWidth />}

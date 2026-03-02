@@ -26,14 +26,12 @@ export function CustomerToolbarCreateNewMenuTrigger() {
   // Create company: action state + form modal state
   const {
     isPending: isCreateCompanyPending,
-    isModalOpen: isCreateCompanyModalOpen,
     onModalOpenChange: onCompanyModalOpenChange,
   } = useCreateCompany();
 
   // Create customer: action state + form modal state
   const {
     isPending: isCreateCustomerPending,
-    isModalOpen: isCreateCustomerModalOpen,
     onModalOpenChange: onCustomerModalOpenChange,
   } = useCreateCustomer();
 
@@ -68,9 +66,7 @@ export function CustomerToolbarCreateNewMenuTrigger() {
             label={t("label")}
             isDisabled={
               // Block user interactions while a company or customer is being created
-              // When the modal opens, a reset action is triggered, the pending state becomes true, and flickering occurs
-              (isCreateCompanyPending && !isCreateCompanyModalOpen) ||
-              (isCreateCustomerPending && !isCreateCustomerModalOpen)
+              isCreateCompanyPending || isCreateCustomerPending
             }
           />
         )}
