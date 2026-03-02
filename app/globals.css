@@ -28,6 +28,30 @@
   --text-5xl--line-height: calc(3.5 / 2.625);
 }
 
+::view-transition-new(.toast):only-child {
+  animation: slide-in 300ms;
+}
+
+::view-transition-old(.toast):only-child {
+  animation: slide-out 300ms;
+  animation-fill-mode: forwards;
+}
+
+@keyframes slide-out {
+  to {
+    translate: -100% 0;
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+@keyframes slide-in {
+  from {
+    translate: -100% 0;
+    opacity: 0;
+  }
+}
+
 @layer utilities {
   .bg-dashed-border {
     background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='12' ry='12' stroke='%23d1d5db' stroke-width='2' stroke-dasharray='4%2c8' stroke-dashoffset='0' stroke-linecap='square'/%3e%3c/svg%3e");
