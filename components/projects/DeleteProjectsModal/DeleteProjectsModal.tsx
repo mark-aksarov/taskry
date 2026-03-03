@@ -8,59 +8,40 @@ import {
   ConfirmModalConfirmButton,
 } from "@/components/common/ConfirmModal";
 
-import {
-  ActionFn,
-  ActionState,
-  DeleteProjectsPayload,
-} from "@/lib/actions/types";
-
-import { startTransition } from "react";
 import { useTranslations } from "next-intl";
-import { ModalProps } from "@/components/ui/Modal";
 import { DialogHeading } from "@/components/ui/Dialog";
-import { useDeleteModalActionState } from "@/components/common/BaseDeleteModal";
 import { useDeleteProjects } from "../DeleteProjectsContext";
-import { useDeleteEntityActionState } from "@/lib/hooks/useDeleteEntityActionState";
 import { useSelectedProjects } from "../SelectedProjectsContext";
+import { handleDeleteEntities } from "@/lib/utils/handleDeleteEntities";
 
-interface DeleteProjectsModalProps extends ModalProps {
-  projectIds: number[];
-  deleteProjects: ActionFn<ActionState, DeleteProjectsPayload>;
+interface DeleteProjectsModalProps {
+  isOpen: boolean;
+  onOpenChange: (open: boolean) => void;
 }
 
 export function DeleteProjectsModal({
-  projectIds,
   isOpen,
   onOpenChange,
-  deleteProjects,
 }: DeleteProjectsModalProps) {
   const t = useTranslations("projects.DeleteProjectsModal");
 
-  const { startTransition, setProjectIds: setDeleteProjectIds } =
-    useDeleteProjects();
-
-  const [, action] = useDeleteEntityActionState({
-    deleteEntity: deleteProjects,
-    successMessage: t("successMessage"),
-  });
-
-  const { clear: clearSelectedItems } = useSelectedProjects();
+  const { ids: selectedIds, clear: clearSelectedItems } = useSelectedProjects();
+  const { action, setIds: setDeleteCustomerIds } = useDeleteProjects();
 
   function handleDelete() {
-    onOpenChange?.(false);
-
-    // Clear selected items
-    clearSelectedItems();
-
-    // Used to show an overlay on the selected projects
-    setDeleteProjectIds(projectIds);
-
     const payload = {
-      ids: projectIds,
+      ids: selectedIds,
       shouldRedirect: false,
     };
 
-    startTransition(() => action(payload));
+    handleDeleteEntities(
+      selectedIds,
+      action,
+      payload,
+      setDeleteCustomerIds,
+      clearSelectedItems,
+      onOpenChange,
+    );
   }
 
   return (
@@ -73,7 +54,7 @@ export function DeleteProjectsModal({
       <ConfirmModalText>
         {t.rich("text", {
           strong: (chunks) => <strong>{chunks}</strong>,
-          count: projectIds.length,
+          count: selectedIds.length,
         })}
       </ConfirmModalText>
       <ConfirmModalActions>

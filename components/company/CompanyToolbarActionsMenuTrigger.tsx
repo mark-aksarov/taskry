@@ -14,7 +14,7 @@ import { useSelectedItems } from "@/components/common/SelectedItemsContext";
 export const CompanyToolbarActionsMenuTrigger = () => {
   const t = useTranslations("company.CompanyToolbarActionsMenuTrigger");
 
-  // Guest mode
+  // Detect if the current user is a guest
   const { isGuest } = useCurrentUser();
   const [isGuestModeModalOpen, setIsGuestModeModalOpen] = useState(false);
 

@@ -15,33 +15,22 @@ import {
   ItemBaseActionMenuDialogHeader,
 } from "../../common/ItemBase";
 
-import {
-  ActionFn,
-  ActionState,
-  DeleteProjectsPayload,
-  UpdateProjectStatusesPayload,
-} from "@/lib/actions/types";
-
-import { useState } from "react";
 import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
-import { EditProjectModal } from "../EditProjectModal";
+import { startTransition, useState } from "react";
 import { ProjectStatus } from "@/generated/prisma/enums";
 import { DeleteProjectModal } from "../DeleteProjectModal";
+import { useUpdateProject } from "../UpdateProjectContext";
 import { GuestModeModal } from "../../common/GuestModeModal";
 import { useProjectItemPending } from "./useProjectItemPending";
+import { useUpdateProjectStatus } from "../UpdateProjectStatusContext";
 import { useCurrentUser } from "@/components/common/CurrentUserContext";
-import { useUpdateEntityStatusActionState } from "@/lib/hooks/useUpdateEntityStatusActionState";
-import { useUpdateProjectStatusTransition } from "../UpdateProjectStatusTransitionContext";
 
 export type ProjectItemActionMenuTriggerProps = {
   projectId: number;
   projectTitle: string;
   projectStatus: ProjectStatus;
   className?: string;
-  editProjectFormContainer: React.ReactNode;
-  deleteProject: ActionFn<ActionState, DeleteProjectsPayload>;
-  updateProjectStatus: ActionFn<ActionState, UpdateProjectStatusesPayload>;
 };
 
 export function ProjectItemActionMenuTrigger({
@@ -49,32 +38,34 @@ export function ProjectItemActionMenuTrigger({
   projectTitle,
   projectStatus,
   className,
-  editProjectFormContainer,
-  deleteProject,
-  updateProjectStatus,
 }: ProjectItemActionMenuTriggerProps) {
   const t = useTranslations("projects.ProjectItemActionMenuTrigger");
 
-  // Deleting the customer
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-
-  // Guest mode
+  // Detect if the current user is a guest
   const { isGuest } = useCurrentUser();
   const [isGuestModeModalOpen, setIsGuestModeModalOpen] = useState(false);
 
-  // Modal state for editing the project
-  const [isOpenEditModal, setIsOpenEditModal] = useState(false);
+  // Delete confirmation modal state
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
-  // updating project status
-  const [, updateProjectStatusAction] = useUpdateEntityStatusActionState({
-    updateEntityStatus: updateProjectStatus,
-  });
+  // State for edit modal from context
+  const { onModalOpenChange: onEditModalOpenChange } = useUpdateProject();
+
+  // State for update project status from context
   const {
     isPending: isUpdateProjectStatusPending,
-    startTransition: startUpdateProjectStatusTransition,
-  } = useUpdateProjectStatusTransition();
+    action: updateProjectStatusAction,
+  } = useUpdateProjectStatus();
 
-  // Handle menu actions
+  /**
+   * Handles menu actions for a customer item:
+   * 1. If the user is a guest, show the guest mode modal.
+   * 2. If action is "details", do nothing.
+   * 3. If action is "edit", open the edit modal.
+   * 4. If action is "delete", open the delete confirmation modal.
+   * 5. Otherwise, treat the action as a project status update
+   *    and trigger the updateProjectStatusAction for this project.
+   */
   const handleAction = (key: Key) => {
     if (isGuest) {
       setIsGuestModeModalOpen(true);
@@ -88,11 +79,11 @@ export function ProjectItemActionMenuTrigger({
     }
 
     if (action === "edit") {
-      setIsOpenEditModal(true);
+      onEditModalOpenChange(true);
     } else if (action === "delete") {
       setIsDeleteModalOpen(true);
     } else {
-      startUpdateProjectStatusTransition(() => {
+      startTransition(() => {
         updateProjectStatusAction({
           ids: [projectId],
           nextStatus: action as ProjectStatus,
@@ -101,11 +92,13 @@ export function ProjectItemActionMenuTrigger({
     }
   };
 
+  // Disable status-related menu items while a project update is in progress,
+  // otherwise disable only the current project status.
   const disabledKeys = isUpdateProjectStatusPending
     ? ["pending", "active", "completed"]
     : [projectStatus];
 
-  //Pending state while deleting or updating
+  // Pending state while deleting or updating
   const isPending = useProjectItemPending(projectId);
 
   return (
@@ -147,19 +140,11 @@ export function ProjectItemActionMenuTrigger({
         </Item>
       </ItemBaseActionMenuTrigger>
 
-      {/* Modal for editing project details */}
-      <EditProjectModal
-        isOpen={isOpenEditModal}
-        onOpenChange={setIsOpenEditModal}
-        editProjectFormContainer={editProjectFormContainer}
-      />
-
       <DeleteProjectModal
         projectId={projectId}
         projectTitle={projectTitle}
         isOpen={isDeleteModalOpen}
         onOpenChange={setIsDeleteModalOpen}
-        deleteProject={deleteProject}
       />
 
       <GuestModeModal

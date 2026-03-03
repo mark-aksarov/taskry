@@ -1,3 +1,5 @@
+"use client";
+
 import {
   FormBaseModal,
   FormBaseModalDialog,
@@ -5,22 +7,26 @@ import {
 } from "@/components/common/FormBaseModal";
 
 import { useTranslations } from "next-intl";
-import { ModalProps } from "@/components/ui/Modal";
 import { DialogHeader } from "@/components/ui/Dialog";
+import { useUpdateProject } from "../UpdateProjectContext";
 
-interface EditProjectModalProps
-  extends Pick<ModalProps, "isOpen" | "onOpenChange"> {
+interface EditProjectModalProps {
   editProjectFormContainer: React.ReactNode;
 }
 
 export function EditProjectModal({
   editProjectFormContainer,
-  ...props
 }: EditProjectModalProps) {
   const t = useTranslations("projects.EditProjectModal");
 
+  const { isModalOpen, onModalOpenChange } = useUpdateProject();
+
   return (
-    <FormBaseModal data-test="edit-project-modal" {...props}>
+    <FormBaseModal
+      data-test="edit-project-modal"
+      isOpen={isModalOpen}
+      onOpenChange={onModalOpenChange}
+    >
       <FormBaseModalDialog>
         <DialogHeader>{t("title")}</DialogHeader>
         <FormBaseModalDialogBody>

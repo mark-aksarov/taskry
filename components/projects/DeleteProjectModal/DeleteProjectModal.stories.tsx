@@ -28,7 +28,7 @@ export const Default = {
   args: {
     projectId: 1,
     projectTitle: "Project 1",
+    isOpen: true,
     onOpenChange: () => {},
-    deleteProject: () => ({ status: "success" }),
   },
 } satisfies Story;

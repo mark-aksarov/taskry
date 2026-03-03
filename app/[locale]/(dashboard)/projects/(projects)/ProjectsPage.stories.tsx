@@ -9,7 +9,6 @@ import { ProjectList } from "@/components/projects/ProjectList";
 import { ProjectGrid } from "@/components/projects/ProjectGrid";
 import { NewProjectForm } from "@/components/projects/NewProjectForm";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { ProjectsPageEmptyContainer } from "./ProjectsPageEmptyContainer";
 import { AppHeaderStory } from "@/components/layout/AppHeader/__stories__";
 import { ProjectFiltersForm } from "@/components/projects/ProjectFiltersForm";
 import { ProjectGridStory } from "@/components/projects/ProjectGrid/__stories__";
@@ -48,6 +47,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
+    totalCount: 10,
     totalFilteredProjects: 10,
     selectedSortField: "createdAt",
 
@@ -64,9 +64,6 @@ export const Default = {
         totalPages={3}
       />
     ),
-
-    createProjectCategory: () => ({ status: "success" }),
-    deleteProjects: () => ({ status: "success" }),
   },
 } satisfies Story;
 
@@ -76,13 +73,7 @@ export const Loading = {
 } satisfies Story;
 
 export const WithNoProjects = {
-  args: { ...Default.args },
-  render: () => (
-    <ProjectsPageEmptyContainer
-      newProjectFormContainer={<NewProjectForm {...newProjectFormArgs} />}
-      createProjectCategory={() => ({ status: "success" })}
-    />
-  ),
+  args: { ...Default.args, totalCount: 0 },
 } satisfies Story;
 
 export const WithEmptyFilterResult = {

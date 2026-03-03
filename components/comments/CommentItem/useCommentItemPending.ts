@@ -1,16 +1,16 @@
 import { useCommentFormContext } from "../CommentFormContext";
-import { useDeleteCommentTransition } from "../DeleteCommentTransitionContext";
-import { useSendCommentTransition } from "../SendCommentTransitionContext";
+import { useDeleteComment } from "../DeleteCommentContext";
+import { useUpdateComment } from "../UpdateCommentContext";
 
 export function useCommentItemPending(commentId: number) {
-  const { isPending: isDeleteCommentPending } = useDeleteCommentTransition();
-  const { isPending: isSendCommentPending } = useSendCommentTransition();
+  const { isPending: isDeleteCommentPending } = useDeleteComment();
+  const { isPending: isUpdateCommentPending } = useUpdateComment();
 
   const { editCommentId } = useCommentFormContext();
 
   const isPending =
     isDeleteCommentPending ||
-    (isSendCommentPending && editCommentId === commentId);
+    (isUpdateCommentPending && editCommentId === commentId);
 
   return isPending;
 }

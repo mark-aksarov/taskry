@@ -1,43 +1,31 @@
 "use client";
 
 import {
-  useMemo,
-  useState,
-  useContext,
-  createContext,
-  useTransition,
-  TransitionStartFunction,
-} from "react";
+  useUpdateEntityStatusesState,
+  UpdateEntityStatusesContextType,
+} from "@/lib/hooks/useUpdateEntityStatusesState";
 
-interface UpdateProjectStatusesContextType {
-  isPending: boolean;
-  startTransition: TransitionStartFunction;
-  projectIds: number[];
-  setProjectIds: (projectIds: number[]) => void;
-}
+import {
+  ActionFn,
+  ActionState,
+  UpdateProjectStatusesPayload,
+} from "@/lib/actions/types";
+
+import { useContext, createContext } from "react";
 
 const UpdateProjectStatusesContext =
-  createContext<UpdateProjectStatusesContextType | null>(null);
+  createContext<UpdateEntityStatusesContextType | null>(null);
 
 interface UpdateProjectStatusesProviderProps {
+  updateProjectStatuses: ActionFn<ActionState, UpdateProjectStatusesPayload>;
   children: React.ReactNode;
 }
 
 export function UpdateProjectStatusesProvider({
+  updateProjectStatuses,
   children,
 }: UpdateProjectStatusesProviderProps) {
-  const [isPending, startTransition] = useTransition();
-  const [projectIds, setProjectIds] = useState<number[]>([]);
-
-  const contextValue = useMemo(
-    () => ({
-      isPending,
-      startTransition,
-      projectIds,
-      setProjectIds,
-    }),
-    [isPending, projectIds],
-  );
+  const contextValue = useUpdateEntityStatusesState(updateProjectStatuses);
 
   return (
     <UpdateProjectStatusesContext.Provider value={contextValue}>

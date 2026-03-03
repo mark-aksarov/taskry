@@ -35,8 +35,7 @@ export const CommentTextField = ({
   textAreaClassName,
   ...props
 }: CommentTextFieldProps) => {
-  const { commentContent, setCommentContent, editCommentId } =
-    useCommentFormContext();
+  const { commentContent, setCommentContent } = useCommentFormContext();
   const t = useTranslations("comments.CommentTextField");
   const ref = useRef<HTMLTextAreaElement>(null);
 

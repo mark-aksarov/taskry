@@ -8,6 +8,7 @@ import { ProjectDetailContainer } from "./ProjectDetailContainer";
 import { UserDetailContainer } from "../users/UserDetailContainer";
 import { updateComment } from "@/lib/actions/comment/updateComment";
 import { ProjectListItemDTO } from "@/lib/data/project/project.dto";
+import { updateProject } from "@/lib/actions/project/updateProject";
 import { EditProjectFormContainer } from "./EditProjectFormContainer";
 import { deleteProjects } from "@/lib/actions/project/deleteProjects";
 import { ProjectCommentsContainer } from "./ProjectCommentsContainer";
@@ -66,8 +67,9 @@ export async function ProjectsContainer({
             }
             sendComment={sendComment}
             updateComment={updateComment}
-            updateProjectStatus={updateProjectStatuses}
+            updateProject={updateProject}
             deleteProject={deleteProjects}
+            updateProjectStatus={updateProjectStatuses}
           />
         );
       })}

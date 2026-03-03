@@ -5,7 +5,6 @@ import { Suspense } from "react";
 import { EditProjectForm } from "./EditProjectForm";
 import { CalendarDate } from "@internationalized/date";
 import { ProjectFormSkeleton } from "./ProjectFormSkeleton";
-import { updateProject } from "@/lib/actions/project/updateProject";
 import { ProjectFormDataDTO } from "@/lib/data/project/project.dto";
 import { CustomerSummaryDTO } from "@/lib/data/customer/customer.dto";
 import { ProjectCategorySummaryDTO } from "@/lib/data/projectCategory/projectCategory.dto";
@@ -34,7 +33,7 @@ function EditProjectFormContainerInner({
     suspense: true,
   });
 
-  const { data: project, mutate } = useSWR<ProjectFormDataDTO>(
+  const { data: project } = useSWR<ProjectFormDataDTO>(
     `/api/projects/${projectId}?view=edit`,
     {
       suspense: true,
@@ -67,8 +66,6 @@ function EditProjectFormContainerInner({
       }
       projectCategorySelectItems={categories}
       projectCustomerSelectItems={customers}
-      updateProject={updateProject}
-      mutate={mutate}
     />
   );
 }

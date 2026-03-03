@@ -8,7 +8,7 @@ import { EntityCommentsModal } from "../EntityCommentsModal";
 import { getCommentList } from "../../CommentList/__stories__";
 import { CommentsEmptySection } from "../../CommentsEmptySection";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withCommentFormProvider } from "@/components/comments/withCommentFormProvider";
+import { withCommentFormProvider } from "@/components/comments/CommentForm/__stories__/withCommentFormProvider";
 
 const meta = {
   title: "components/comments/EntityCommentsModal",
@@ -34,13 +34,8 @@ export type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    entityId: 1,
-    entityKey: "entityId",
-    mutateUrl: "/api/enity/1/comments",
     title: "Entity Comments",
     commentsContainer: getCommentList(),
-    sendComment: () => ({ status: "success" }),
-    updateComment: () => ({ status: "success" }),
   },
 } satisfies Story;
 

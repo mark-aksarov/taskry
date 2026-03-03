@@ -20,18 +20,21 @@ import { projectStatus } from "@/lib/schemas/project";
 import { hasGuestRole } from "@/lib/utils/hasGuestRole";
 import { hasOwnerRole } from "@/lib/utils/hasOwnerRole";
 import { projectCategoryId } from "@/lib/schemas/projectCategory";
+import { createProject } from "@/lib/actions/project/createProject";
 import { deleteProjects } from "@/lib/actions/project/deleteProjects";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
-import { ProjectsPageEmptyContainer } from "./ProjectsPageEmptyContainer";
 import { ProjectsContainer } from "@/components/projects/ProjectsContainer";
 import { CurrentUserProvider } from "@/components/common/CurrentUserContext";
+import { CreateProjectProvider } from "@/components/projects/CreateProjectContext";
 import { PageTransitionProvider } from "@/components/common/PageTransitionContext";
+import { updateProjectStatuses } from "@/lib/actions/project/updateProjectStatuses";
 import { DeleteProjectsProvider } from "@/components/projects/DeleteProjectsContext";
 import { NewProjectFormContainer } from "@/components/projects/NewProjectFormContainer";
 import { SelectedProjectsProvider } from "@/components/projects/SelectedProjectsContext";
 import { createProjectCategory } from "@/lib/actions/projectCategory/createProjectCategory";
 import { ProjectFiltersFormContainer } from "@/components/projects/ProjectFiltersFormContainer";
 import { UpdateProjectStatusesProvider } from "@/components/projects/UpdateProjectStatusesContext";
+import { CreateProjectCategoryProvider } from "@/components/projectCategory/CreateProjectCategoryContext";
 
 const searchParamsSchema = z.object({
   page: pageSearchParam,
@@ -82,17 +85,6 @@ export default async function AppProjectsPage({
   // Render the empty page if there are no projects
   const totalCount = await getProjectCount();
 
-  if (!totalCount) {
-    return (
-      <CurrentUserProvider value={currentUserContextValue}>
-        <ProjectsPageEmptyContainer
-          newProjectFormContainer={<NewProjectFormContainer />}
-          createProjectCategory={createProjectCategory}
-        />
-      </CurrentUserProvider>
-    );
-  }
-
   // Get projects for the current page based on filters and sorting
   const { items: projects, totalCount: totalFilteredProjects } =
     await getProjectList({
@@ -104,30 +96,37 @@ export default async function AppProjectsPage({
 
   return (
     <CurrentUserProvider value={currentUserContextValue}>
-      <UpdateProjectStatusesProvider>
+      <UpdateProjectStatusesProvider
+        updateProjectStatuses={updateProjectStatuses}
+      >
         <SelectedProjectsProvider
           pageItems={projects.map((p) => ({ id: p.id, status: p.status }))}
         >
           <PageTransitionProvider>
-            <DeleteProjectsProvider>
-              <ProjectsPage
-                newProjectFormContainer={<NewProjectFormContainer />}
+            <DeleteProjectsProvider deleteProjects={deleteProjects}>
+              <CreateProjectCategoryProvider
                 createProjectCategory={createProjectCategory}
-                totalFilteredProjects={totalFilteredProjects}
-                selectedSortField={sort}
-                projectsContainer={
-                  <ProjectsContainer
-                    projects={projects}
-                    totalCount={totalFilteredProjects}
-                    page={page}
-                    pageSize={pageSize}
+              >
+                <CreateProjectProvider createProject={createProject}>
+                  <ProjectsPage
+                    totalCount={totalCount}
+                    newProjectFormContainer={<NewProjectFormContainer />}
+                    totalFilteredProjects={totalFilteredProjects}
+                    selectedSortField={sort}
+                    projectsContainer={
+                      <ProjectsContainer
+                        projects={projects}
+                        totalCount={totalFilteredProjects}
+                        page={page}
+                        pageSize={pageSize}
+                      />
+                    }
+                    projectFiltersFormContainer={
+                      <ProjectFiltersFormContainer filters={filters} />
+                    }
                   />
-                }
-                projectFiltersFormContainer={
-                  <ProjectFiltersFormContainer filters={filters} />
-                }
-                deleteProjects={deleteProjects}
-              />
+                </CreateProjectProvider>
+              </CreateProjectCategoryProvider>
             </DeleteProjectsProvider>
           </PageTransitionProvider>
         </SelectedProjectsProvider>

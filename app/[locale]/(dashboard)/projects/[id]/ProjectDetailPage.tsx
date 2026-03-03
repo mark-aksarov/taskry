@@ -21,7 +21,7 @@ import { BackButton } from "@/components/common/BackButton";
 import { PageContainer } from "@/components/common/PageContainer";
 import { ProjectDetailCard } from "@/components/projects/ProjectDetailCard";
 import { ProjectDetailActions } from "@/components/projects/ProjectDetailActions";
-import { UpdateProjectTransitionProvider } from "@/components/projects/UpdateProjectTransitionContext";
+import { EditProjectModal } from "@/components/projects/EditProjectModal";
 
 interface ProjectPageProps {
   projectId: number;
@@ -51,17 +51,14 @@ export function ProjectDetailPage({
   const t = useTranslations("app.ProjectDetailPage");
 
   const projectDetailActions = (
-    <UpdateProjectTransitionProvider>
-      <ProjectDetailActions
-        deleteProject={deleteProject}
-        projectId={projectId}
-        projectTitle={projectTitle}
-        sendComment={sendComment}
-        updateComment={updateComment}
-        projectCommentsContainer={projectCommentsContainer}
-        editProjectFormContainer={editProjectFormContainer}
-      />
-    </UpdateProjectTransitionProvider>
+    <ProjectDetailActions
+      deleteProject={deleteProject}
+      projectId={projectId}
+      projectTitle={projectTitle}
+      sendComment={sendComment}
+      updateComment={updateComment}
+      projectCommentsContainer={projectCommentsContainer}
+    />
   );
 
   return (
@@ -85,11 +82,13 @@ export function ProjectDetailPage({
               <ToolbarMobileHeading>{t("heading")}</ToolbarMobileHeading>
             </ToolbarMobileTop>
 
-            <div className="flex flex-col px-1.5">{projectHeaderContainer}</div>
-            <Card className="flex flex-col px-1.5">{projectDetailActions}</Card>
+            <div className="flex flex-col">{projectHeaderContainer}</div>
+            <Card className="flex flex-col p-1.5">{projectDetailActions}</Card>
             <Card className="flex flex-col">{projectDetailContainer}</Card>
           </PageGrid>
         </PageContainer>
+
+        <EditProjectModal editProjectFormContainer={editProjectFormContainer} />
       </main>
     </>
   );

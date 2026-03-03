@@ -1,22 +1,15 @@
 "use client";
 
-import {
-  ActionFn,
-  ActionState,
-  DeleteProjectsPayload,
-} from "@/lib/actions/types";
-
-import { useTranslations } from "next-intl";
-import { ModalProps } from "@/components/ui/Modal";
+import { useDeleteProject } from "../DeleteProjectContext";
 import { useSelectedProjects } from "../SelectedProjectsContext";
 import { BaseDeleteProjectModal } from "./BaseDeleteProjectModal";
-import { useDeleteProjectTransition } from "../DeleteProjectTransitionContext";
-import { useDeleteEntityActionState } from "@/lib/hooks/useDeleteEntityActionState";
+import { handleDeleteEntity } from "@/lib/utils/handleDeleteEntity";
 
-interface DeleteProjectModalProps extends ModalProps {
+interface DeleteProjectModalProps {
   projectId: number;
   projectTitle: string;
-  deleteProject: ActionFn<ActionState, DeleteProjectsPayload>;
+  isOpen: boolean;
+  onOpenChange: (isOpen: boolean) => void;
 }
 
 export function DeleteProjectModal({
@@ -24,26 +17,24 @@ export function DeleteProjectModal({
   projectTitle,
   isOpen,
   onOpenChange,
-  deleteProject,
 }: DeleteProjectModalProps) {
-  const t = useTranslations("projects.DeleteProjectModal");
-
-  const { startTransition } = useDeleteProjectTransition();
-
-  const [, action] = useDeleteEntityActionState({
-    deleteEntity: deleteProject,
-    successMessage: t("successMessage"),
-  });
+  const { action } = useDeleteProject();
 
   const { remove: removeSelected } = useSelectedProjects();
 
   function handleDelete() {
-    //Remove the project from the selection to prevent access to it
-    removeSelected(projectId);
+    const payload = {
+      ids: [projectId],
+      shouldRedirect: false,
+    };
 
-    //close modal before deleting
-    onOpenChange?.(false);
-    startTransition(() => action({ ids: [projectId], shouldRedirect: false }));
+    handleDeleteEntity(
+      removeSelected,
+      action,
+      payload,
+      projectId,
+      onOpenChange,
+    );
   }
 
   return (

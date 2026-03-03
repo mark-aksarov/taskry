@@ -9,14 +9,13 @@ import {
 import { useTranslations } from "next-intl";
 import { Pencil, Trash } from "lucide-react";
 import { startTransition, useState } from "react";
-import { EditProjectModal } from "../EditProjectModal";
+import { useUpdateProject } from "../UpdateProjectContext";
 import { ProjectCommentsModal } from "../ProjectCommentsModal";
 import { BaseDeleteProjectModal } from "../DeleteProjectModal";
 import { GuestModeModal } from "@/components/common/GuestModeModal";
 import { NavigationButton } from "@/components/common/NavigationButton";
 import { useCurrentUser } from "@/components/common/CurrentUserContext";
-import { useUpdateProjectTransition } from "../UpdateProjectTransitionContext";
-import { useDeleteEntityPageActionState } from "@/lib/hooks/useDeleteEntityPageActionState";
+import { useDeleteEntityState } from "@/lib/hooks/useDeleteEntityState";
 import { DetailActionsCommentsModalTrigger } from "@/components/common/DetailActionsCommentsModalTrigger";
 
 interface ProjectDetailActionsProps {
@@ -26,7 +25,6 @@ interface ProjectDetailActionsProps {
   updateComment: ActionFn<ActionState, FormData>;
   deleteProject: ActionFn<ActionState, DeleteProjectsPayload>;
   projectCommentsContainer: React.ReactNode;
-  editProjectFormContainer: React.ReactNode;
 }
 
 export function ProjectDetailActions({
@@ -36,23 +34,23 @@ export function ProjectDetailActions({
   updateComment,
   deleteProject,
   projectCommentsContainer,
-  editProjectFormContainer,
 }: ProjectDetailActionsProps) {
   const t = useTranslations("projects.ProjectDetailActions");
 
-  // Deleting the project
-  const [, action, isDeletePending] = useDeleteEntityPageActionState({
-    deleteEntity: deleteProject,
-  });
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-
-  // Guest mode
+  // If the user is a guest, show the guest mode modal instead of allowing creation
   const { isGuest } = useCurrentUser();
   const [isGuestModeModalOpen, setIsGuestModeModalOpen] = useState(false);
 
-  // Editing the project
-  const { isPending: isUpdatePending } = useUpdateProjectTransition();
-  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  // Delete project: action state + form modal state
+  const { action, isPending: isDeletePending } =
+    useDeleteEntityState(deleteProject);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+
+  // Edit project: action state + form modal state
+  const {
+    isPending: isUpdatePending,
+    onModalOpenChange: onEditModalOpenChange,
+  } = useUpdateProject();
 
   function handleDeletePress() {
     if (isGuest) {
@@ -69,9 +67,11 @@ export function ProjectDetailActions({
       return;
     }
 
-    setIsEditModalOpen(true);
+    onEditModalOpenChange(true);
   }
 
+  // Close modal and delete project
+  // We should redirect to the project list page after deletion
   function handleDelete() {
     setIsDeleteModalOpen(false);
     startTransition(() => action({ ids: [projectId], shouldRedirect: true }));
@@ -108,13 +108,6 @@ export function ProjectDetailActions({
           label={t("comments")}
         />
       </div>
-
-      {/* Modal for editing project details */}
-      <EditProjectModal
-        isOpen={isEditModalOpen}
-        onOpenChange={setIsEditModalOpen}
-        editProjectFormContainer={editProjectFormContainer}
-      />
 
       {/* Modal for confirming project deletion */}
       <BaseDeleteProjectModal

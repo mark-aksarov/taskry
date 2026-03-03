@@ -45,7 +45,6 @@ export function CustomerDetailActions({
   const {
     isPending: isUpdatePending,
     onModalOpenChange: onEditModalOpenChange,
-    isModalOpen: isEditModalOpen,
   } = useUpdateCustomer();
 
   function handleDeletePress() {
@@ -66,7 +65,8 @@ export function CustomerDetailActions({
     onEditModalOpenChange(true);
   }
 
-  // we should redirect to the customer list page after deletion
+  // Close modal and delete customer
+  // We should redirect to the customer list page after deletion
   function handleDelete() {
     setIsDeleteModalOpen(false);
     startTransition(() => action({ ids: [customerId], shouldRedirect: true }));

@@ -10,13 +10,13 @@ import {
 import { ProjectListItem } from "../ProjectListItem";
 import { ProjectStatus } from "@/generated/prisma/enums";
 import { useViewMode } from "@/components/common/ViewMode";
+import { UpdateProjectProvider } from "../UpdateProjectContext";
+import { DeleteProjectProvider } from "../DeleteProjectContext";
 import { useSelectedProjects } from "../SelectedProjectsContext";
 import { SelectableItem } from "@/components/common/SelectableItem";
 import { ProjectGridItem } from "../ProjectGridItem/ProjectGridItem";
 import { ProjectItemPendingOverlay } from "./ProjectItemPendingOverlay";
-import { UpdateProjectTransitionProvider } from "../UpdateProjectTransitionContext";
-import { DeleteProjectTransitionProvider } from "../DeleteProjectTransitionContext";
-import { UpdateProjectStatusTransitionProvider } from "../UpdateProjectStatusTransitionContext";
+import { UpdateProjectStatusProvider } from "../UpdateProjectStatusContext";
 
 export interface ProjectItemProps {
   id: number;
@@ -51,18 +51,24 @@ export interface ProjectItemProps {
   userDetailContainer?: React.ReactNode;
   sendComment: ActionFn<ActionState, FormData>;
   updateComment: ActionFn<ActionState, FormData>;
-  updateProjectStatus: ActionFn<ActionState, UpdateProjectStatusesPayload>;
+  updateProject: ActionFn<ActionState, FormData>;
   deleteProject: ActionFn<ActionState, DeleteProjectsPayload>;
+  updateProjectStatus: ActionFn<ActionState, UpdateProjectStatusesPayload>;
 }
 
-export const ProjectItem = (props: ProjectItemProps) => {
+export const ProjectItem = ({
+  updateProject,
+  deleteProject,
+  updateProjectStatus,
+  ...props
+}: ProjectItemProps) => {
   const selected = useSelectedProjects();
   const { viewMode } = useViewMode();
 
   return (
-    <UpdateProjectTransitionProvider>
-      <DeleteProjectTransitionProvider>
-        <UpdateProjectStatusTransitionProvider>
+    <UpdateProjectProvider updateProject={updateProject}>
+      <DeleteProjectProvider deleteProject={deleteProject}>
+        <UpdateProjectStatusProvider updateProjectStatus={updateProjectStatus}>
           <ProjectItemPendingOverlay projectId={props.id}>
             <SelectableItem
               {...selected}
@@ -75,8 +81,8 @@ export const ProjectItem = (props: ProjectItemProps) => {
               )}
             </SelectableItem>
           </ProjectItemPendingOverlay>
-        </UpdateProjectStatusTransitionProvider>
-      </DeleteProjectTransitionProvider>
-    </UpdateProjectTransitionProvider>
+        </UpdateProjectStatusProvider>
+      </DeleteProjectProvider>
+    </UpdateProjectProvider>
   );
 };

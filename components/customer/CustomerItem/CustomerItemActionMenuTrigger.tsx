@@ -32,17 +32,21 @@ export function CustomerItemActionMenuTrigger({
 }: CustomerItemActionMenuTriggerProps) {
   const t = useTranslations("customers.CustomerItemActionMenuTrigger");
 
-  // Guest mode
+  // Detect if the current user is a guest
   const { isGuest } = useCurrentUser();
   const [isGuestModeModalOpen, setIsGuestModeModalOpen] = useState(false);
 
-  // Deleting the customer
+  // Delete confirmation modal state
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
-  // Modal state for editing the customer
+  // State for edit modal from context
   const { onModalOpenChange: onEditModalOpenChange } = useUpdateCustomer();
 
-  // Handle menu actions
+  /**
+   * Handles menu actions for a customer item
+   * - If user is a guest, show guest modal
+   * - Otherwise, open edit or delete modal based on action key
+   */
   function handleAction(key: Key) {
     if (isGuest) {
       setIsGuestModeModalOpen(true);

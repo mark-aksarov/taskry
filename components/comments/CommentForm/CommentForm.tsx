@@ -1,59 +1,31 @@
 "use client";
 
-import { useSWRConfig } from "swr";
-import { useActionState } from "react";
+import { startTransition } from "react";
 import { Form } from "react-aria-components";
 import { CommentTextField } from "../CommentTextField";
-import { useErrorToast } from "@/lib/hooks/useErrorToast";
-import { ActionFn, ActionState } from "@/lib/actions/types";
 import { useCommentFormContext } from "../CommentFormContext";
-import { useSendCommentTransition } from "../SendCommentTransitionContext";
-
-const initialState: ActionState = {
-  status: null,
-};
 
 interface CommentFormProps {
-  sendCommentAction: ActionFn<ActionState, FormData>;
-  mutateUrl: string;
-  hiddenInput?: React.ReactNode;
+  action: (formData: FormData) => void;
+  isPending: boolean;
 }
 
-export function CommentForm({
-  sendCommentAction,
-  mutateUrl,
-  hiddenInput,
-}: CommentFormProps) {
-  const { mutate } = useSWRConfig();
-
-  const { add: addErrorToast, close: closeErrorToast } = useErrorToast();
-  const { setCommentContent, setEditCommentId } = useCommentFormContext();
-
-  const { startTransition } = useSendCommentTransition();
-  const [, action, isPending] = useActionState(
-    async (prevState: ActionState, payload: FormData) => {
-      const newState = await sendCommentAction(prevState, payload);
-
-      closeErrorToast();
-
-      if (newState.status === "success") {
-        await mutate(mutateUrl);
-        setCommentContent("");
-        setEditCommentId(undefined);
-      } else if (newState.status === "error" && newState.message) {
-        addErrorToast(newState.message);
-      }
-
-      return newState;
-    },
-    initialState,
-  );
+export function CommentForm({ action, isPending }: CommentFormProps) {
+  const { editCommentId, entityId, entityKey } = useCommentFormContext();
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
+
     startTransition(() => action(formData));
   }
+
+  /**
+   * If editing - send comment "id"
+   * If creating - send entity reference (entityKey - entityId)
+   */
+  const hiddenName = editCommentId ? "id" : entityKey;
+  const hiddenValue = editCommentId ? editCommentId : entityId;
 
   return (
     <Form onSubmit={handleSubmit} className="flex w-full flex-col">
@@ -61,7 +33,7 @@ export function CommentForm({
         isPending={isPending}
         textAreaClassName="bg-white dark:bg-gray-800 outline-hidden"
       />
-      {hiddenInput}
+      <input type="hidden" name={hiddenName} value={hiddenValue} />
     </Form>
   );
 }

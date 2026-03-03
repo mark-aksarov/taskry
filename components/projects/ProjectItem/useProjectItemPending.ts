@@ -1,12 +1,12 @@
 import { useDeleteProjects } from "../DeleteProjectsContext";
-import { useDeleteProjectTransition } from "../DeleteProjectTransitionContext";
-import { useUpdateProjectTransition } from "../UpdateProjectTransitionContext";
+import { useDeleteProject } from "../DeleteProjectContext";
+import { useUpdateProject } from "../UpdateProjectContext";
 
 export function useProjectItemPending(projectId: number) {
-  const { isPending: isDeleteProjectPending } = useDeleteProjectTransition();
-  const { isPending: isDeleteProjectsPending, projectIds } =
+  const { isPending: isDeleteProjectPending } = useDeleteProject();
+  const { isPending: isDeleteProjectsPending, ids: projectIds } =
     useDeleteProjects();
-  const { isPending: isUpdateProjectPending } = useUpdateProjectTransition();
+  const { isPending: isUpdateProjectPending } = useUpdateProject();
 
   const isPending =
     isDeleteProjectPending ||

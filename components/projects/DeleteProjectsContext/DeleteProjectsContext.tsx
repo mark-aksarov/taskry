@@ -1,45 +1,29 @@
 "use client";
 
 import {
-  useMemo,
-  useState,
-  useContext,
-  createContext,
-  useTransition,
-  TransitionStartFunction,
-} from "react";
+  useDeleteEntitiesState,
+  DeleteEntitiesContextType,
+} from "@/lib/hooks/useDeleteEntitiesState";
 
-interface DeleteProjectsContextType {
-  isPending: boolean;
-  startTransition: TransitionStartFunction;
-  projectIds: number[];
-  setProjectIds: (projectIds: number[]) => void;
-}
+import {
+  ActionFn,
+  ActionState,
+  DeleteProjectsPayload,
+} from "@/lib/actions/types";
 
-const DeleteProjectsContext = createContext<DeleteProjectsContextType | null>(
-  null,
-);
+import { useContext, createContext } from "react";
 
-interface DeleteProjectsProviderProps {
-  children: React.ReactNode;
-}
+const DeleteProjectsContext =
+  createContext<DeleteEntitiesContextType<DeleteProjectsPayload> | null>(null);
 
 export function DeleteProjectsProvider({
+  deleteProjects,
   children,
-}: DeleteProjectsProviderProps) {
-  const [isPending, startTransition] = useTransition();
-  const [projectIds, setProjectIds] = useState<number[]>([]);
-
-  const contextValue = useMemo(
-    () => ({
-      isPending,
-      startTransition,
-      projectIds,
-      setProjectIds,
-    }),
-    [isPending, projectIds],
-  );
-
+}: {
+  deleteProjects: ActionFn<ActionState, DeleteProjectsPayload>;
+  children: React.ReactNode;
+}) {
+  const contextValue = useDeleteEntitiesState(deleteProjects);
   return (
     <DeleteProjectsContext.Provider value={contextValue}>
       {children}
@@ -49,10 +33,9 @@ export function DeleteProjectsProvider({
 
 export function useDeleteProjects() {
   const context = useContext(DeleteProjectsContext);
-  if (!context) {
+  if (!context)
     throw new Error(
       "useDeleteProjects must be used within a DeleteProjectsProvider",
     );
-  }
   return context;
 }

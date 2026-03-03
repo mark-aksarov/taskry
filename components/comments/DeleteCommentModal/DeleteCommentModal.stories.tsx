@@ -29,7 +29,5 @@ export const Default = {
     commentId: 1,
     isOpen: true,
     onOpenChange: () => {},
-    deleteComment: () => ({ status: "success" }),
-    mutate: () => {},
   },
 } satisfies Story;

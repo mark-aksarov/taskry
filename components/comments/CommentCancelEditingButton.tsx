@@ -1,15 +1,15 @@
 import { X } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/Button";
+import { useUpdateComment } from "./UpdateCommentContext";
 import { useCommentFormContext } from "./CommentFormContext";
-import { useSendCommentTransition } from "./SendCommentTransitionContext";
 
 export function CommentCancelEditingButton() {
   const t = useTranslations("comments.CommentCancelEditingButton");
   const { editCommentId, setEditCommentId, setCommentContent } =
     useCommentFormContext();
 
-  const { isPending: isSendCommentPending } = useSendCommentTransition();
+  const { isPending: isUpdateCommentPending } = useUpdateComment();
 
   if (!editCommentId) return null;
 
@@ -25,7 +25,7 @@ export function CommentCancelEditingButton() {
       onPress={handlePress}
       label={t("label")}
       iconLeft={<X size={14} className="-ml-1" />}
-      isDisabled={isSendCommentPending}
+      isDisabled={isUpdateCommentPending}
     />
   );
 }

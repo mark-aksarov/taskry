@@ -1,6 +1,6 @@
 import { CommentItem } from "../CommentItem";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { withCommentFormProvider } from "../../withCommentFormProvider";
+import { withCommentFormProvider } from "../../CommentForm/__stories__/withCommentFormProvider";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {
@@ -29,7 +29,6 @@ export const Default = {
     },
     canEdit: true,
     deleteComment: () => ({ status: "success" }),
-    mutate: () => {},
   },
 } satisfies Story;
 

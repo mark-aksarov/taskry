@@ -8,9 +8,10 @@ import {
 } from "@/components/common/FormBase";
 
 import { DateValue } from "react-aria";
+import { startTransition } from "react";
 import { useTranslations } from "next-intl";
 import { ProjectStatus } from "@/generated/prisma/enums";
-import { ActionFn, ActionState } from "@/lib/actions/types";
+import { useUpdateProject } from "../UpdateProjectContext";
 import { ProjectStatusSelect } from "../ProjectStatusSelect";
 import { ProjectCategorySelect } from "../ProjectCategorySelect";
 import { ProjectCustomerSelect } from "../ProjectCustomerSelect";
@@ -18,8 +19,6 @@ import { ProjectTitleTextField } from "../ProjectTitleTextField";
 import { FormErrorBanner } from "@/components/common/FormErrorBanner";
 import { ProjectDeadlineDatePicker } from "../ProjectDeadlineDatePicker";
 import { ProjectDescriptionTextField } from "../ProjectDescriptionTextField";
-import { useUpdateProjectTransition } from "../UpdateProjectTransitionContext";
-import { useUpdateEntityActionState } from "@/lib/hooks/useUpdateEntityActionState";
 
 interface EditProjectFormProps {
   projectId: number;
@@ -31,8 +30,6 @@ interface EditProjectFormProps {
   projectCustomerSelectDefaultValue?: string;
   projectCategorySelectItems: { id: number; name: string }[];
   projectCustomerSelectItems: { id: number; fullName: string }[];
-  updateProject: ActionFn<ActionState, FormData>;
-  mutate: () => void;
 }
 
 export function EditProjectForm({
@@ -45,18 +42,10 @@ export function EditProjectForm({
   projectCustomerSelectDefaultValue,
   projectCategorySelectItems,
   projectCustomerSelectItems,
-  updateProject,
-  mutate,
 }: EditProjectFormProps) {
   const t = useTranslations("projects.EditProjectForm");
 
-  const { startTransition } = useUpdateProjectTransition();
-
-  const [state, action, isPending] = useUpdateEntityActionState({
-    updateEntity: updateProject,
-    onSuccess: mutate,
-    successMessage: t("successMessage"),
-  });
+  const { state, isPending, action } = useUpdateProject();
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();

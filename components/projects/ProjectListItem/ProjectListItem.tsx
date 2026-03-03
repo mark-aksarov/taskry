@@ -13,6 +13,7 @@ import {
 
 import { memo } from "react";
 import Image from "next/image";
+import { EditProjectModal } from "../EditProjectModal";
 import { useFormatter, useTranslations } from "next-intl";
 import { ProjectDetailModal } from "../ProjectDetailModal";
 import { UnknownUser } from "@/components/common/UnknownUser";
@@ -27,7 +28,11 @@ import { CustomerDetailModal } from "@/components/customer/CustomerDetailModal";
 
 export type ProjectListItemProps = Omit<
   ProjectItemProps,
-  "tasksTotal" | "tasksCompleted"
+  | "tasksTotal"
+  | "tasksCompleted"
+  | "updateProject"
+  | "deleteProject"
+  | "updateProjectStatus"
 >;
 
 export const ProjectListItem = memo(
@@ -48,8 +53,6 @@ export const ProjectListItem = memo(
     projectCommentsContainer,
     sendComment,
     updateComment,
-    updateProjectStatus,
-    deleteProject,
   }: ProjectListItemProps) => {
     const t = useTranslations("projects.ProjectListItem");
 
@@ -85,143 +88,145 @@ export const ProjectListItem = memo(
     );
 
     return (
-      <ProjectListItemLayout
-        id={id}
-        checkboxSlot={<ProjectItemCheckbox id={id} status={status} />}
-        mainSlot={
-          <>
-            <ListItemTitleDetailModalTrigger
-              data-test="project-list-item-title-trigger"
-              modal={
-                <ProjectDetailModal
-                  projectId={id}
-                  projectDetailContainer={projectDetailContainer}
-                />
-              }
-            >
-              {title}
-            </ListItemTitleDetailModalTrigger>
-            <ListItemText>{deadlineOn}</ListItemText>
-          </>
-        }
-        mainMobileSlot={
-          <>
-            <ListItemTitle>{title}</ListItemTitle>
-            <ListItemText>{deadlineOn}</ListItemText>
-          </>
-        }
-        creatorImgSlot={
-          <>
-            {creator ? (
-              <>
-                <ItemBaseDetailModalTrigger modal={userDetailModal}>
-                  {creatorImg}
-                </ItemBaseDetailModalTrigger>
-              </>
-            ) : (
-              <UnknownUser className="h-9 w-9" />
-            )}
-          </>
-        }
-        creatorSlot={
-          <>
-            {creator ? (
-              <ListItemTitleDetailModalTrigger modal={userDetailModal}>
-                {creator.fullName}
-              </ListItemTitleDetailModalTrigger>
-            ) : (
-              <ListItemTitle>{t("noCreator")}</ListItemTitle>
-            )}
-
-            <ListItemText>{t("creator")}</ListItemText>
-          </>
-        }
-        customerImgSlot={
-          <>
-            {customer?.imageUrl ? (
-              <ImageContainer className="h-9 w-9">
-                <Image
-                  src={customer.imageUrl}
-                  alt={customer.fullName}
-                  width={36}
-                  height={36}
-                />
-              </ImageContainer>
-            ) : (
-              <UnknownUser className="h-9 w-9" />
-            )}
-          </>
-        }
-        customerSlot={
-          <>
-            {customer ? (
+      <>
+        <ProjectListItemLayout
+          id={id}
+          checkboxSlot={<ProjectItemCheckbox id={id} status={status} />}
+          mainSlot={
+            <>
               <ListItemTitleDetailModalTrigger
+                data-test="project-list-item-title-trigger"
                 modal={
-                  <CustomerDetailModal
-                    customerId={customer.id}
-                    customerDetailContainer={customerDetailContainer}
+                  <ProjectDetailModal
+                    projectId={id}
+                    projectDetailContainer={projectDetailContainer}
                   />
                 }
               >
-                {customer.fullName}
+                {title}
               </ListItemTitleDetailModalTrigger>
-            ) : (
-              <ListItemTitle>{t("noCustomer")} </ListItemTitle>
-            )}
+              <ListItemText>{deadlineOn}</ListItemText>
+            </>
+          }
+          mainMobileSlot={
+            <>
+              <ListItemTitle>{title}</ListItemTitle>
+              <ListItemText>{deadlineOn}</ListItemText>
+            </>
+          }
+          creatorImgSlot={
+            <>
+              {creator ? (
+                <>
+                  <ItemBaseDetailModalTrigger modal={userDetailModal}>
+                    {creatorImg}
+                  </ItemBaseDetailModalTrigger>
+                </>
+              ) : (
+                <UnknownUser className="h-9 w-9" />
+              )}
+            </>
+          }
+          creatorSlot={
+            <>
+              {creator ? (
+                <ListItemTitleDetailModalTrigger modal={userDetailModal}>
+                  {creator.fullName}
+                </ListItemTitleDetailModalTrigger>
+              ) : (
+                <ListItemTitle>{t("noCreator")}</ListItemTitle>
+              )}
 
-            <ListItemText>{t("customer")}</ListItemText>
-          </>
-        }
-        categorySlot={
-          <>
-            <ListItemTitle>
-              {category ? category.name : t("noCategory")}
-            </ListItemTitle>
+              <ListItemText>{t("creator")}</ListItemText>
+            </>
+          }
+          customerImgSlot={
+            <>
+              {customer?.imageUrl ? (
+                <ImageContainer className="h-9 w-9">
+                  <Image
+                    src={customer.imageUrl}
+                    alt={customer.fullName}
+                    width={36}
+                    height={36}
+                  />
+                </ImageContainer>
+              ) : (
+                <UnknownUser className="h-9 w-9" />
+              )}
+            </>
+          }
+          customerSlot={
+            <>
+              {customer ? (
+                <ListItemTitleDetailModalTrigger
+                  modal={
+                    <CustomerDetailModal
+                      customerId={customer.id}
+                      customerDetailContainer={customerDetailContainer}
+                    />
+                  }
+                >
+                  {customer.fullName}
+                </ListItemTitleDetailModalTrigger>
+              ) : (
+                <ListItemTitle>{t("noCustomer")} </ListItemTitle>
+              )}
 
-            <ListItemText>{t("category")}</ListItemText>
-          </>
-        }
-        companySlot={
-          <>
-            <ListItemTitle>
-              {company ? company.name : t("noCompany")}
-            </ListItemTitle>
+              <ListItemText>{t("customer")}</ListItemText>
+            </>
+          }
+          categorySlot={
+            <>
+              <ListItemTitle>
+                {category ? category.name : t("noCategory")}
+              </ListItemTitle>
 
-            <ListItemText>{t("company")}</ListItemText>
-          </>
-        }
-        statusSlot={
-          <ProjectItemBaseBadge
-            projectId={id}
-            deadline={deadline}
-            status={status}
-          />
-        }
-        commentsModalTriggerSlot={
-          <ItemBaseCommentsModalTrigger
-            data-test={`project-${id}-comments-modal-trigger`}
-            commentsCount={commentsCount}
-            modal={
-              <ProjectCommentsModal
-                projectId={id}
-                projectCommentsContainer={projectCommentsContainer}
-                sendComment={sendComment}
-                updateComment={updateComment}
-              />
-            }
-          />
-        }
-        menuTriggerSlot={
-          <ProjectItemActionMenuTrigger
-            projectId={id}
-            projectTitle={title}
-            projectStatus={status}
-            editProjectFormContainer={editProjectFormContainer}
-            updateProjectStatus={updateProjectStatus}
-            deleteProject={deleteProject}
-          />
-        }
-      />
+              <ListItemText>{t("category")}</ListItemText>
+            </>
+          }
+          companySlot={
+            <>
+              <ListItemTitle>
+                {company ? company.name : t("noCompany")}
+              </ListItemTitle>
+
+              <ListItemText>{t("company")}</ListItemText>
+            </>
+          }
+          statusSlot={
+            <ProjectItemBaseBadge
+              projectId={id}
+              deadline={deadline}
+              status={status}
+            />
+          }
+          commentsModalTriggerSlot={
+            <ItemBaseCommentsModalTrigger
+              data-test={`project-${id}-comments-modal-trigger`}
+              commentsCount={commentsCount}
+              modal={
+                <ProjectCommentsModal
+                  projectId={id}
+                  projectCommentsContainer={projectCommentsContainer}
+                  sendComment={sendComment}
+                  updateComment={updateComment}
+                />
+              }
+            />
+          }
+          menuTriggerSlot={
+            <ProjectItemActionMenuTrigger
+              projectId={id}
+              projectTitle={title}
+              projectStatus={status}
+            />
+          }
+        />
+
+        {/* Modal for editing project details */}
+        <EditProjectModal editProjectFormContainer={editProjectFormContainer} />
+      </>
     );
   },
 );

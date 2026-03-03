@@ -7,9 +7,9 @@ import {
   FormBaseSubmitButton,
 } from "@/components/common/FormBase";
 
+import { startTransition } from "react";
 import { useTranslations } from "next-intl";
-import { startTransition, useRef } from "react";
-import { ActionFn, ActionState } from "@/lib/actions/types";
+import { useCreateProject } from "../CreateProjectContext";
 import { ProjectStatusSelect } from "../ProjectStatusSelect";
 import { ProjectTitleTextField } from "../ProjectTitleTextField";
 import { ProjectCategorySelect } from "../ProjectCategorySelect";
@@ -17,30 +17,19 @@ import { ProjectCustomerSelect } from "../ProjectCustomerSelect";
 import { FormErrorBanner } from "@/components/common/FormErrorBanner";
 import { ProjectDeadlineDatePicker } from "../ProjectDeadlineDatePicker";
 import { ProjectDescriptionTextField } from "../ProjectDescriptionTextField";
-import { useCreateEntityActionState } from "@/lib/hooks/useCreateEntityActionState";
 
 interface NewProjectFormProps {
   projectCategorySelectItems: { id: number; name: string }[];
   projectCustomerSelectItems: { id: number; fullName: string }[];
-  createProject: ActionFn<ActionState, FormData>;
 }
 
 export function NewProjectForm({
   projectCategorySelectItems,
   projectCustomerSelectItems,
-  createProject,
 }: NewProjectFormProps) {
   const t = useTranslations("projects.NewProjectForm");
 
-  // The ref is used inside reducerAction
-  // ref.current is null on unmount, preventing programmatic modal close when opening another form in the same modal
-  const ref = useRef<HTMLFormElement>(null);
-
-  const [state, action, isPending] = useCreateEntityActionState({
-    createEntity: createProject,
-    formRef: ref,
-    successMessage: t("successMessage"),
-  });
+  const { state, action, isPending } = useCreateProject();
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -52,7 +41,7 @@ export function NewProjectForm({
   }
 
   return (
-    <FormBase ref={ref} id="new-project-form" onSubmit={handleSubmit}>
+    <FormBase id="new-project-form" onSubmit={handleSubmit}>
       <FormBaseBody>
         <ProjectTitleTextField />
         <ProjectDescriptionTextField />

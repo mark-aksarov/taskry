@@ -25,16 +25,15 @@ export function DeleteProjectCategoriesModal({
 }: DeleteProjectCategoriesModalProps) {
   const t = useTranslations("projectCategories.DeleteProjectCategoriesModal");
 
-  const selected = useSelectedItems();
+  const { ids: selectedIds, clear: clearSelectedItems } = useSelectedItems();
   const { action, setIds: setDeleteProjectCategoryIds } =
     useDeleteProjectCategories();
-  const { clear: clearSelectedItems } = useSelectedItems();
 
   function handleDelete() {
     handleDeleteEntities(
-      selected.ids,
+      selectedIds,
       action,
-      selected.ids,
+      selectedIds,
       setDeleteProjectCategoryIds,
       clearSelectedItems,
       onOpenChange,
@@ -51,7 +50,7 @@ export function DeleteProjectCategoriesModal({
       <ConfirmModalText>
         {t.rich("text", {
           strong: (chunks) => <strong>{chunks}</strong>,
-          count: selected.ids.length,
+          count: selectedIds.length,
         })}
       </ConfirmModalText>
       <ConfirmModalActions>

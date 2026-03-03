@@ -2,9 +2,9 @@ import { Loader2 } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { ProjectStatus } from "@/generated/prisma/enums";
 import { ItemBaseBadge } from "@/components/common/ItemBase";
-import { getProjectStatusBadgeColor } from "../getProjectStatusBadgeColor";
+import { useUpdateProjectStatus } from "../UpdateProjectStatusContext";
 import { useUpdateProjectStatuses } from "../UpdateProjectStatusesContext";
-import { useUpdateProjectStatusTransition } from "../UpdateProjectStatusTransitionContext";
+import { getProjectStatusBadgeColor } from "../getProjectStatusBadgeColor";
 
 interface ProjectItemBaseBadgeProps {
   projectId: number;
@@ -21,17 +21,22 @@ export function ProjectItemBaseBadge({
 }: ProjectItemBaseBadgeProps) {
   const t = useTranslations("projects.ProjectStatus");
 
-  const { isPending: isUpdateProjectStatusPending } =
-    useUpdateProjectStatusTransition();
-  const {
-    isPending: isUpdateProjectStatusesPending,
-    projectIds: updatedProjectIds,
-  } = useUpdateProjectStatuses();
+  // Pending state for single project status update
+  const { isPending: isUpdateProjectStatusPending } = useUpdateProjectStatus();
 
+  // Pending state for batch project status updates
+  const { isPending: isUpdateProjectStatusesPending, ids: updatedProjectIds } =
+    useUpdateProjectStatuses();
+
+  // Whether this project is included in the current batch update
+  const isProjectInBatchUpdate = updatedProjectIds.includes(projectId);
+
+  // Combined pending state for this project
   const isPending =
     isUpdateProjectStatusPending ||
-    (isUpdateProjectStatusesPending && updatedProjectIds.includes(projectId));
+    (isUpdateProjectStatusesPending && isProjectInBatchUpdate);
 
+  // Check if the project is overdue
   const isOverdue = new Date(deadline) < new Date();
 
   const color = isOverdue ? "red" : getProjectStatusBadgeColor(status);

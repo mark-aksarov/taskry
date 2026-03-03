@@ -8,40 +8,38 @@ import {
   ConfirmModalConfirmButton,
 } from "@/components/common/ConfirmModal";
 
+import { startTransition } from "react";
 import { useTranslations } from "next-intl";
 import { DialogHeading } from "@/components/ui/Dialog";
-import { ActionFn, ActionState } from "@/lib/actions/types";
-import { useDeleteCommentTransition } from "../DeleteCommentTransitionContext";
-import { useDeleteEntityActionState } from "@/lib/hooks/useDeleteEntityActionState";
+import { useDeleteComment } from "../DeleteCommentContext";
+import { useCommentFormContext } from "../CommentFormContext";
 
 interface DeleteCommentModalProps {
   commentId: number;
-  deleteComment: ActionFn<ActionState, number>;
-  mutate: () => void;
   isOpen: boolean;
   onOpenChange: (isOpen: boolean) => void;
 }
 
 export function DeleteCommentModal({
   commentId,
-  deleteComment,
-  mutate,
   isOpen,
   onOpenChange,
 }: DeleteCommentModalProps) {
   const t = useTranslations("comments.DeleteCommentModal");
 
-  const { startTransition } = useDeleteCommentTransition();
-
-  const [, action] = useDeleteEntityActionState({
-    deleteEntity: deleteComment,
-    onSuccess: mutate,
-    successMessage: t("successMessage"),
-  });
+  const { editCommentId, setEditCommentId, setCommentContent } =
+    useCommentFormContext();
+  const { action } = useDeleteComment();
 
   function handleDelete() {
+    // clear editCommentId if deleting comment that is currently being edited
+    if (editCommentId === commentId) {
+      setEditCommentId(undefined);
+      setCommentContent("");
+    }
+
     //close modal before deleting
-    onOpenChange?.(false);
+    onOpenChange(false);
     startTransition(() => action(commentId));
   }
 

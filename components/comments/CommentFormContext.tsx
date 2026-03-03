@@ -1,41 +1,48 @@
 "use client";
 
-import {
-  useMemo,
-  useState,
-  Dispatch,
-  useContext,
-  createContext,
-  SetStateAction,
-} from "react";
+import { useMemo, useState, useContext, createContext } from "react";
 
-interface CommentFormContextProps {
+interface CommentFormContextType {
+  entityId: number;
+  entityKey: string;
+  mutateUrl: string;
   editCommentId?: number;
-  setEditCommentId: Dispatch<SetStateAction<number | undefined>>;
+  setEditCommentId: (id?: number) => void;
   commentContent: string;
-  setCommentContent: Dispatch<SetStateAction<string>>;
+  setCommentContent: (content: string) => void;
 }
 
-export const CommentFormContext = createContext<CommentFormContextProps | null>(
+export const CommentFormContext = createContext<CommentFormContextType | null>(
   null,
 );
 
 interface CommentFormProviderProps {
+  entityId: number;
+  entityKey: string;
+  mutateUrl: string;
   children: React.ReactNode;
 }
 
-export function CommentFormProvider({ children }: CommentFormProviderProps) {
+export function CommentFormProvider({
+  entityId,
+  entityKey,
+  mutateUrl,
+  children,
+}: CommentFormProviderProps) {
   const [editCommentId, setEditCommentId] = useState<number>();
   const [commentContent, setCommentContent] = useState("");
 
   const contextValue = useMemo(
     () => ({
+      entityId,
+      entityKey,
+      mutateUrl,
       editCommentId,
       setEditCommentId,
       commentContent,
       setCommentContent,
     }),
-    [editCommentId, commentContent],
+    [entityId, entityKey, mutateUrl, editCommentId, commentContent],
   );
 
   return (

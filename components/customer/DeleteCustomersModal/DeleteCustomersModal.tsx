@@ -25,18 +25,17 @@ export function DeleteCustomersModal({
 }: DeleteCustomersModalProps) {
   const t = useTranslations("customers.DeleteCustomersModal");
 
-  const selected = useSelectedItems();
+  const { ids: selectedIds, clear: clearSelectedItems } = useSelectedItems();
   const { action, setIds: setDeleteCustomerIds } = useDeleteCustomers();
-  const { clear: clearSelectedItems } = useSelectedItems();
 
   function handleDelete() {
     const payload = {
-      ids: selected.ids,
+      ids: selectedIds,
       shouldRedirect: false,
     };
 
     handleDeleteEntities(
-      selected.ids,
+      selectedIds,
       action,
       payload,
       setDeleteCustomerIds,
@@ -55,7 +54,7 @@ export function DeleteCustomersModal({
       <ConfirmModalText>
         {t.rich("text", {
           strong: (chunks) => <strong>{chunks}</strong>,
-          count: selected.ids.length,
+          count: selectedIds.length,
         })}
       </ConfirmModalText>
       <ConfirmModalActions>

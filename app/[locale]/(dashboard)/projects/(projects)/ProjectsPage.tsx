@@ -5,19 +5,15 @@ import {
   ToolbarMobileHeading,
 } from "@/components/common/Toolbar";
 
-import {
-  ActionFn,
-  ActionState,
-  DeleteProjectsPayload,
-} from "@/lib/actions/types";
-
 import { useTranslations } from "next-intl";
 import { ProjectSortField } from "@/lib/types";
 import { PageGrid } from "@/components/common/PageGrid";
 import { ViewModeProvider } from "@/components/common/ViewMode";
 import { PageContainer } from "@/components/common/PageContainer";
+import { NewProjectModal } from "@/components/projects/NewProjectModal";
 import { ViewModeToggleButtonGroup } from "@/components/common/ViewMode";
-import { updateProjectStatuses } from "@/lib/actions/project/updateProjectStatuses";
+import { EmptyPageContainer } from "@/components/common/EmptyPageContainer";
+import { NewProjectCategoryModal } from "@/components/projectCategory/NewProjectCategoryModal";
 import { ProjectsFilteredEmptySection } from "@/components/projects/ProjectsFilteredEmptySection";
 import { ProjectToolbarManageMenuTrigger } from "@/components/projects/ProjectToolbarManageMenuTrigger";
 import { ProjectToolbarActionsMenuTrigger } from "@/components/projects/ProjectToolbarActionsMenuTrigger";
@@ -26,86 +22,88 @@ import { ProjectToolbarFiltersModalTrigger } from "@/components/projects/Project
 import { ProjectToolbarCreateNewMenuTrigger } from "@/components/projects/ProjectToolbarCreateNewMenuTrigger";
 
 interface ProjectsPageProps {
+  totalCount: number;
   totalFilteredProjects: number;
   selectedSortField: ProjectSortField;
   projectsContainer: React.ReactNode;
   newProjectFormContainer: React.ReactNode;
   projectFiltersFormContainer: React.ReactNode;
-  createProjectCategory: ActionFn<ActionState, FormData>;
-  deleteProjects: ActionFn<ActionState, DeleteProjectsPayload>;
 }
 
 export function ProjectsPage({
+  totalCount,
   totalFilteredProjects,
   selectedSortField,
   projectsContainer,
   newProjectFormContainer,
   projectFiltersFormContainer,
-  createProjectCategory,
-  deleteProjects,
 }: ProjectsPageProps) {
   const t = useTranslations("app.ProjectsPage");
 
-  const projectToolbarCreateNewMenuTrigger = (
-    <ProjectToolbarCreateNewMenuTrigger
-      newProjectFormContainer={newProjectFormContainer}
-      createProjectCategory={createProjectCategory}
-    />
-  );
+  if (totalCount === 0) {
+    return (
+      <>
+        <EmptyPageContainer
+          heading={t("emptySection.heading")}
+          description={t("emptySection.description")}
+          toolbarCreateNewMenuTrigger={<ProjectToolbarCreateNewMenuTrigger />}
+        />
 
-  const projectToolbarFiltersModalTrigger = (
-    <ProjectToolbarFiltersModalTrigger
-      filtersFormContainer={projectFiltersFormContainer}
-    />
-  );
-
-  const projectToolbarActionsMenuTrigger = (
-    <ProjectToolbarActionsMenuTrigger
-      deleteProjects={deleteProjects}
-      updateProjectStatuses={updateProjectStatuses}
-    />
-  );
+        <NewProjectModal newProjectFormContainer={newProjectFormContainer} />
+        <NewProjectCategoryModal />
+      </>
+    );
+  }
 
   return (
-    <PageContainer
-      fullscreen={totalFilteredProjects === 0}
-      className="relative"
-    >
-      <PageGrid className="flex-auto">
-        <ViewModeProvider>
-          <ToolbarDesktop>
-            <ProjectToolbarManageMenuTrigger />
-            <ProjectToolbarSortingMenuTrigger
-              selectedSortField={selectedSortField}
-            />
-            {projectToolbarFiltersModalTrigger}
-            {projectToolbarActionsMenuTrigger}
-            <ViewModeToggleButtonGroup className="ml-auto" />
-            {projectToolbarCreateNewMenuTrigger}
-          </ToolbarDesktop>
+    <>
+      <PageContainer
+        fullscreen={totalFilteredProjects === 0}
+        className="relative"
+      >
+        <PageGrid className="flex-auto">
+          <ViewModeProvider>
+            <ToolbarDesktop>
+              <ProjectToolbarManageMenuTrigger />
+              <ProjectToolbarSortingMenuTrigger
+                selectedSortField={selectedSortField}
+              />
+              <ProjectToolbarFiltersModalTrigger
+                filtersFormContainer={projectFiltersFormContainer}
+              />
+              <ProjectToolbarActionsMenuTrigger />
+              <ViewModeToggleButtonGroup className="ml-auto" />
+              <ProjectToolbarCreateNewMenuTrigger />
+            </ToolbarDesktop>
 
-          <ToolbarMobileTop>
-            <ToolbarMobileHeading>{t("heading")}</ToolbarMobileHeading>
-            <ProjectToolbarManageMenuTrigger />
-            <ProjectToolbarSortingMenuTrigger
-              selectedSortField={selectedSortField}
-            />
-            {projectToolbarFiltersModalTrigger}
-            {projectToolbarActionsMenuTrigger}
-          </ToolbarMobileTop>
+            <ToolbarMobileTop>
+              <ToolbarMobileHeading>{t("heading")}</ToolbarMobileHeading>
+              <ProjectToolbarManageMenuTrigger />
+              <ProjectToolbarSortingMenuTrigger
+                selectedSortField={selectedSortField}
+              />
+              <ProjectToolbarFiltersModalTrigger
+                filtersFormContainer={projectFiltersFormContainer}
+              />
+              <ProjectToolbarActionsMenuTrigger />
+            </ToolbarMobileTop>
 
-          <ToolbarMobileBottom>
-            <ViewModeToggleButtonGroup />
-            {projectToolbarCreateNewMenuTrigger}
-          </ToolbarMobileBottom>
+            <ToolbarMobileBottom>
+              <ViewModeToggleButtonGroup />
+              <ProjectToolbarCreateNewMenuTrigger />
+            </ToolbarMobileBottom>
 
-          {totalFilteredProjects === 0 ? (
-            <ProjectsFilteredEmptySection />
-          ) : (
-            projectsContainer
-          )}
-        </ViewModeProvider>
-      </PageGrid>
-    </PageContainer>
+            {totalFilteredProjects === 0 ? (
+              <ProjectsFilteredEmptySection />
+            ) : (
+              projectsContainer
+            )}
+          </ViewModeProvider>
+        </PageGrid>
+      </PageContainer>
+
+      <NewProjectModal newProjectFormContainer={newProjectFormContainer} />
+      <NewProjectCategoryModal />
+    </>
   );
 }

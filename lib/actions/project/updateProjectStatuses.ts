@@ -24,6 +24,7 @@ export async function updateProjectStatuses(
   const t = await getTranslations("actions");
 
   let parsedIds: number[] = [];
+
   try {
     const parsedData = schema.parse({ ids, nextStatus });
     parsedIds = parsedData.ids;

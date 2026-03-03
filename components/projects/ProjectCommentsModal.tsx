@@ -1,6 +1,9 @@
 import { useTranslations } from "next-intl";
 import { ActionFn, ActionState } from "@/lib/actions/types";
-import { EntityCommentsModal } from "@/components/comments/EntityCommentsModal";
+import { CommentFormProvider } from "../comments/CommentFormContext";
+import { SendCommentProvider } from "../comments/SendCommentContext";
+import { EntityCommentsModal } from "../comments/EntityCommentsModal";
+import { UpdateCommentProvider } from "../comments/UpdateCommentContext";
 
 interface ProjectCommentsModalProps {
   projectId: number;
@@ -18,14 +21,19 @@ export function ProjectCommentsModal({
   const t = useTranslations("projects.ProjectCommentsModal");
 
   return (
-    <EntityCommentsModal
+    <CommentFormProvider
       entityId={projectId}
       entityKey="projectId"
       mutateUrl={`/api/projects/${projectId}/comments`}
-      title={t("title")}
-      commentsContainer={projectCommentsContainer}
-      sendComment={sendComment}
-      updateComment={updateComment}
-    />
+    >
+      <SendCommentProvider sendComment={sendComment}>
+        <UpdateCommentProvider updateComment={updateComment}>
+          <EntityCommentsModal
+            title={t("title")}
+            commentsContainer={projectCommentsContainer}
+          />
+        </UpdateCommentProvider>
+      </SendCommentProvider>
+    </CommentFormProvider>
   );
 }

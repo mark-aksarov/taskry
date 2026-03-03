@@ -31,13 +31,12 @@ export function ProjectCommentsContainer(props: ProjectCommentsContainerProps) {
 function ProjectCommentsContainerInner({
   projectId,
 }: ProjectCommentsContainerProps) {
-  const {
-    data: comments,
-    isLoading,
-    mutate,
-  } = useSWR<CommentListItemDTO[]>(`/api/projects/${projectId}/comments`, {
-    suspense: true,
-  });
+  const { data: comments, isLoading } = useSWR<CommentListItemDTO[]>(
+    `/api/projects/${projectId}/comments`,
+    {
+      suspense: true,
+    },
+  );
 
   // Show skeleton while loading
   if (isLoading) {
@@ -60,7 +59,6 @@ function ProjectCommentsContainerInner({
             createdAt={comment.createdAt}
             sender={comment.sender}
             canEdit={comment.canEdit}
-            mutate={mutate}
             deleteComment={deleteComment}
           />
         );

@@ -8,12 +8,12 @@ import { CommentItemTitle } from "./CommentItemTitle";
 import { CommentItemLayout } from "./CommentItemLayout";
 import { ActionFn, ActionState } from "@/lib/actions/types";
 import { UnknownUser } from "@/components/common/UnknownUser";
+import { DeleteCommentProvider } from "../DeleteCommentContext";
 import { ImageContainer } from "@/components/common/ImageContainer";
 import { useFormatter, useLocale, useTranslations } from "next-intl";
 import { CommentItemPendingOverlay } from "./CommentItemPendingOverlay";
 import { useCurrentUser } from "@/components/common/CurrentUserContext";
 import { CommentItemActionMenuTrigger } from "./CommentItemActionMenuTrigger";
-import { DeleteCommentTransitionProvider } from "../DeleteCommentTransitionContext";
 
 interface CommentItemProps {
   id: number;
@@ -26,17 +26,16 @@ interface CommentItemProps {
     imageUrl?: string;
   };
   menuTrigger?: React.ReactNode;
-  mutate: () => void;
   deleteComment: ActionFn<ActionState, number>;
 }
 
-export function CommentItem(props: CommentItemProps) {
+export function CommentItem({ deleteComment, ...props }: CommentItemProps) {
   return (
-    <DeleteCommentTransitionProvider>
+    <DeleteCommentProvider deleteComment={deleteComment}>
       <CommentItemPendingOverlay commentId={props.id}>
         <CommentItemInner {...props} />
       </CommentItemPendingOverlay>
-    </DeleteCommentTransitionProvider>
+    </DeleteCommentProvider>
   );
 }
 
@@ -47,9 +46,7 @@ const CommentItemInner = memo(
     createdAt,
     canEdit,
     sender,
-    deleteComment,
-    mutate,
-  }: CommentItemProps) => {
+  }: Omit<CommentItemProps, "deleteComment">) => {
     const t = useTranslations("comments.CommentItem");
     const locale = useLocale();
 
@@ -109,8 +106,6 @@ const CommentItemInner = memo(
             <CommentItemActionMenuTrigger
               commentId={id}
               commentContent={content}
-              deleteComment={deleteComment}
-              mutate={mutate}
             />
           )
         }

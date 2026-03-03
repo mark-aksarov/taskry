@@ -12,32 +12,34 @@ import { DialogHeader } from "../ui/Dialog";
 import { useTranslations } from "next-intl";
 import { Blocks, FolderClosed } from "lucide-react";
 import { GuestModeModal } from "../common/GuestModeModal";
-import { ActionFn, ActionState } from "@/lib/actions/types";
+import { useCreateProject } from "./CreateProjectContext";
 import { useCurrentUser } from "../common/CurrentUserContext";
-import { NewProjectModal } from "@/components/projects/NewProjectModal";
-import { NewProjectCategoryModal } from "../projectCategory/NewProjectCategoryModal";
+import { useCreateProjectCategory } from "../projectCategory/CreateProjectCategoryContext";
 
-interface ProjectToolbarCreateNewMenuTriggerProps {
-  newProjectFormContainer: React.ReactNode;
-  createProjectCategory: ActionFn<ActionState, FormData>;
-}
-
-export function ProjectToolbarCreateNewMenuTrigger({
-  newProjectFormContainer,
-  createProjectCategory,
-}: ProjectToolbarCreateNewMenuTriggerProps) {
+export function ProjectToolbarCreateNewMenuTrigger() {
   const t = useTranslations("projects.ProjectToolbarCreateNewMenuTrigger");
 
-  // Separate modal state for creating a project and a project category
-  const [openProjectModal, setOpenProjectModal] = useState(false);
-  const [openProjectCategoryModal, setOpenProjectCategoryModal] =
-    useState(false);
-
-  // Guest mode
+  // If the user is a guest, show the guest mode modal instead of allowing creation
   const { isGuest } = useCurrentUser();
   const [isGuestModeModalOpen, setIsGuestModeModalOpen] = useState(false);
 
-  // Open the corresponding modal based on the selected menu item
+  // Create project category: action state + form modal state
+  const {
+    isPending: isCreateProjectCategoryPending,
+    onModalOpenChange: onProjectCategoryModalOpenChange,
+  } = useCreateProjectCategory();
+
+  // Create project: action state + form modal state
+  const {
+    isPending: isCreateProjectPending,
+    onModalOpenChange: onProjectModalOpenChange,
+  } = useCreateProject();
+
+  /**
+   * Handles menu actions for creating a project or project category
+   * - If user is a guest, show guest modal
+   * - Otherwise, open create project category modal or create project modal
+   */
   function handleAction(key: Key) {
     if (isGuest) {
       setIsGuestModeModalOpen(true);
@@ -45,9 +47,9 @@ export function ProjectToolbarCreateNewMenuTrigger({
     }
 
     if (key === "project") {
-      setOpenProjectModal(true);
+      onProjectModalOpenChange(true);
     } else if (key === "category") {
-      setOpenProjectCategoryModal(true);
+      onProjectCategoryModalOpenChange(true);
     }
   }
 
@@ -62,6 +64,10 @@ export function ProjectToolbarCreateNewMenuTrigger({
           <ToolbarCreateNewModalTrigger
             data-test="project-toolbar-create-new-menu-trigger"
             label={t("label")}
+            isDisabled={
+              // Block user interactions while a project category or project is being created
+              isCreateProjectCategoryPending || isCreateProjectPending
+            }
           />
         )}
       >
@@ -74,20 +80,6 @@ export function ProjectToolbarCreateNewMenuTrigger({
           {t("items.category")}
         </Item>
       </ToolbarCreateNewMenuTrigger>
-
-      {/* Modal for creating a new project */}
-      <NewProjectModal
-        newProjectFormContainer={newProjectFormContainer}
-        isOpen={openProjectModal}
-        onOpenChange={setOpenProjectModal}
-      />
-
-      {/* Modal for creating a new project category */}
-      <NewProjectCategoryModal
-        createProjectCategory={createProjectCategory}
-        isOpen={openProjectCategoryModal}
-        onOpenChange={setOpenProjectCategoryModal}
-      />
 
       {/* Guest mode modal */}
       <GuestModeModal

@@ -3,7 +3,6 @@
 import { MessageSquare, Pencil } from "lucide-react";
 import { DialogTrigger } from "react-aria-components";
 import { NavigationButton } from "@/components/common/NavigationButton";
-import { CommentFormProvider } from "@/components/comments/CommentFormContext";
 
 interface DetailActionsCommentsModalTriggerProps {
   label: React.ReactNode;
@@ -13,11 +12,7 @@ interface DetailActionsCommentsModalTriggerProps {
 export function DetailActionsCommentsModalTrigger(
   props: DetailActionsCommentsModalTriggerProps,
 ) {
-  return (
-    <CommentFormProvider>
-      <DetailActionsCommentsModalTriggerInner {...props} />
-    </CommentFormProvider>
-  );
+  return <DetailActionsCommentsModalTriggerInner {...props} />;
 }
 
 function DetailActionsCommentsModalTriggerInner({

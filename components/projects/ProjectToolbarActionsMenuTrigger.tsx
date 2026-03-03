@@ -1,16 +1,9 @@
 "use client";
 
-import {
-  ActionFn,
-  ActionState,
-  DeleteProjectsPayload,
-  UpdateProjectStatusesPayload,
-} from "@/lib/actions/types";
-
-import { useState } from "react";
 import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
 import { DialogHeader } from "../ui/Dialog";
+import { startTransition, useState } from "react";
 import { ProjectStatus } from "@/generated/prisma/enums";
 import { GuestModeModal } from "../common/GuestModeModal";
 import { DeleteProjectsModal } from "./DeleteProjectsModal";
@@ -19,20 +12,11 @@ import { useCurrentUser } from "../common/CurrentUserContext";
 import { useSelectedProjects } from "./SelectedProjectsContext";
 import { Check, CircleEllipsis, Clock, Trash } from "lucide-react";
 import { useUpdateProjectStatuses } from "./UpdateProjectStatusesContext";
-import { useUpdateEntityStatusActionState } from "@/lib/hooks/useUpdateEntityStatusActionState";
 
-interface ProjectToolbarActionsMenuTriggerProps {
-  deleteProjects: ActionFn<ActionState, DeleteProjectsPayload>;
-  updateProjectStatuses: ActionFn<ActionState, UpdateProjectStatusesPayload>;
-}
-
-export const ProjectToolbarActionsMenuTrigger = ({
-  deleteProjects,
-  updateProjectStatuses,
-}: ProjectToolbarActionsMenuTriggerProps) => {
+export const ProjectToolbarActionsMenuTrigger = () => {
   const t = useTranslations("projects.ProjectToolbarActionsMenuTrigger");
 
-  // Guest mode
+  // Detect if the current user is a guest
   const { isGuest } = useCurrentUser();
   const [isGuestModeModalOpen, setIsGuestModeModalOpen] = useState(false);
 
@@ -40,18 +24,19 @@ export const ProjectToolbarActionsMenuTrigger = ({
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
   // Action for updating project statuses
-  const [, updateProjectStatusAction] = useUpdateEntityStatusActionState({
-    updateEntityStatus: updateProjectStatuses,
-  });
   const {
-    startTransition: startUpdateProjectStatusesTransition,
-    setProjectIds: setUpdateProjectStatusesIds,
+    action: updateProjectStatusesAction,
+    setIds: setUpdateProjectStatusesIds,
   } = useUpdateProjectStatuses();
 
   // Selected with checkbox projects
   const selected = useSelectedProjects();
 
-  // Menu actions: show delete modal, update project status
+  /**
+   * Handles menu actions for a selected projects
+   * - If user is a guest, show guest modal
+   * - Otherwise, open delete confirmation modal based on action key or update project statuses
+   */
   const handleAction = (key: Key) => {
     if (isGuest) {
       setIsGuestModeModalOpen(true);
@@ -61,12 +46,14 @@ export const ProjectToolbarActionsMenuTrigger = ({
     if (key === "delete") {
       setIsDeleteModalOpen(true);
     } else {
+      // I store the current ids separately so that checkbox changes
+      // during the update process don’t affect status tracking.
       setUpdateProjectStatusesIds(selected.ids);
 
-      startUpdateProjectStatusesTransition(() => {
+      startTransition(() => {
         const nextStatus = key as ProjectStatus;
 
-        updateProjectStatusAction({
+        updateProjectStatusesAction({
           ids: selected.ids,
           nextStatus,
         });
@@ -109,8 +96,6 @@ export const ProjectToolbarActionsMenuTrigger = ({
 
       {/* Modal for confirming project deletion */}
       <DeleteProjectsModal
-        projectIds={selected.ids}
-        deleteProjects={deleteProjects}
         isOpen={isDeleteModalOpen}
         onOpenChange={setIsDeleteModalOpen}
       />

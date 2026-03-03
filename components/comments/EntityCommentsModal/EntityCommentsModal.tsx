@@ -8,63 +8,39 @@ import {
 } from "@/components/comments/CommentsModal";
 
 import { DialogHeader } from "@/components/ui/Dialog";
-import { ActionFn, ActionState } from "@/lib/actions/types";
+import { useSendComment } from "../SendCommentContext";
+import { useUpdateComment } from "../UpdateCommentContext";
+import { useCommentFormContext } from "../CommentFormContext";
 import { CommentForm } from "@/components/comments/CommentForm";
-import { useCommentFormContext } from "@/components/comments/CommentFormContext";
-import { SendCommentTransitionProvider } from "../SendCommentTransitionContext";
 
 interface EntityCommentsModalProps {
-  entityId: number;
-  entityKey: string;
-  mutateUrl: string;
   title: string;
   commentsContainer: React.ReactNode;
-  sendComment: ActionFn<ActionState, FormData>;
-  updateComment: ActionFn<ActionState, FormData>;
 }
 
 export function EntityCommentsModal({
-  entityId,
-  entityKey,
-  mutateUrl,
   title,
   commentsContainer,
-  sendComment,
-  updateComment,
 }: EntityCommentsModalProps) {
-  const context = useCommentFormContext();
+  const { editCommentId } = useCommentFormContext();
 
-  if (context === null) {
-    throw new Error(
-      "useCommentFormContext must be used within a CommentFormProvider",
-    );
-  }
-
-  const { editCommentId } = context;
-
-  const action = editCommentId ? updateComment : sendComment;
-
-  const hiddenName = editCommentId ? "id" : entityKey;
-  const hiddenValue = editCommentId ? editCommentId : entityId;
+  // We switch between create/update comment depending on editCommentId
+  const { action: sendComment, isPending: isSendPending } = useSendComment();
+  const { action: updateComment, isPending: isUpdatePending } =
+    useUpdateComment();
 
   return (
     <CommentsModal>
       <CommentsModalDialog>
         <DialogHeader>{title}</DialogHeader>
-
-        <SendCommentTransitionProvider>
-          <CommentsModalDialogBody>{commentsContainer}</CommentsModalDialogBody>
-
-          <CommentsModalDialogFooter>
-            <CommentForm
-              sendCommentAction={action}
-              mutateUrl={mutateUrl}
-              hiddenInput={
-                <input type="hidden" name={hiddenName} value={hiddenValue} />
-              }
-            />
-          </CommentsModalDialogFooter>
-        </SendCommentTransitionProvider>
+        <CommentsModalDialogBody>{commentsContainer}</CommentsModalDialogBody>
+        <CommentsModalDialogFooter>
+          {editCommentId ? (
+            <CommentForm action={updateComment} isPending={isUpdatePending} />
+          ) : (
+            <CommentForm action={sendComment} isPending={isSendPending} />
+          )}
+        </CommentsModalDialogFooter>
       </CommentsModalDialog>
     </CommentsModal>
   );

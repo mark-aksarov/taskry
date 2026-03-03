@@ -16,6 +16,7 @@ import {
 import { memo } from "react";
 import Image from "next/image";
 import { Link } from "@/components/ui/Link";
+import { EditProjectModal } from "../EditProjectModal";
 import { useFormatter, useTranslations } from "next-intl";
 import { ProjectDetailModal } from "../ProjectDetailModal";
 import { UnknownUser } from "@/components/common/UnknownUser";
@@ -29,7 +30,13 @@ import { ProjectItemActionMenuTrigger, ProjectItemProps } from "../ProjectItem";
 
 export type ProjectGridItemProps = Omit<
   ProjectItemProps,
-  "customer" | "category" | "company" | "customerDetailContainer"
+  | "customer"
+  | "category"
+  | "company"
+  | "customerDetailContainer"
+  | "updateProject"
+  | "deleteProject"
+  | "updateProjectStatus"
 >;
 
 export const ProjectGridItem = memo(
@@ -48,8 +55,6 @@ export const ProjectGridItem = memo(
     userDetailContainer,
     sendComment,
     updateComment,
-    updateProjectStatus,
-    deleteProject,
   }: ProjectGridItemProps) => {
     const t = useTranslations("projects.ProjectGridItem");
 
@@ -78,98 +83,100 @@ export const ProjectGridItem = memo(
     );
 
     return (
-      <ProjectGridItemLayout
-        checkboxSlot={<ProjectItemCheckbox id={id} status={status} />}
-        menuTriggerSlot={
-          <ProjectItemActionMenuTrigger
-            projectId={id}
-            projectTitle={title}
-            projectStatus={status}
-            editProjectFormContainer={editProjectFormContainer}
-            className="-mr-2"
-            updateProjectStatus={updateProjectStatus}
-            deleteProject={deleteProject}
-          />
-        }
-        mainSlot={
-          <>
-            {/* Show modal on desktop */}
-            <GridItemInfo className="flex-auto max-md:hidden">
-              <GridItemTitleDetailModalTrigger
-                modal={
-                  <ProjectDetailModal
-                    projectId={id}
-                    projectDetailContainer={projectDetailContainer}
-                  />
-                }
-              >
-                {title}
-              </GridItemTitleDetailModalTrigger>
-
-              <GridItemText>{deadlineOn}</GridItemText>
-            </GridItemInfo>
-
-            {/* Show only text on mobile */}
-            <GridItemInfo className="flex-auto md:hidden">
-              <GridItemTitle>{title}</GridItemTitle>
-              <GridItemText>{deadlineOn}</GridItemText>
-            </GridItemInfo>
-          </>
-        }
-        creatorImageSlot={
-          creator ? (
+      <>
+        <ProjectGridItemLayout
+          checkboxSlot={<ProjectItemCheckbox id={id} status={status} />}
+          menuTriggerSlot={
+            <ProjectItemActionMenuTrigger
+              projectId={id}
+              projectTitle={title}
+              projectStatus={status}
+              className="-mr-2"
+            />
+          }
+          mainSlot={
             <>
               {/* Show modal on desktop */}
-              <ItemBaseDetailModalTrigger
-                className="max-md:hidden"
-                modal={
-                  <UserDetailModal
-                    userId={creator.id}
-                    userDetailContainer={userDetailContainer}
-                  />
-                }
-              >
-                {creatorImg}
-              </ItemBaseDetailModalTrigger>
+              <GridItemInfo className="flex-auto max-md:hidden">
+                <GridItemTitleDetailModalTrigger
+                  modal={
+                    <ProjectDetailModal
+                      projectId={id}
+                      projectDetailContainer={projectDetailContainer}
+                    />
+                  }
+                >
+                  {title}
+                </GridItemTitleDetailModalTrigger>
 
-              {/* Show link on mobile */}
-              <Link className="md:hidden" href={`/team/${creator.id}`}>
-                {creatorImg}
-              </Link>
+                <GridItemText>{deadlineOn}</GridItemText>
+              </GridItemInfo>
+
+              {/* Show only text on mobile */}
+              <GridItemInfo className="flex-auto md:hidden">
+                <GridItemTitle>{title}</GridItemTitle>
+                <GridItemText>{deadlineOn}</GridItemText>
+              </GridItemInfo>
             </>
-          ) : (
-            <UnknownUser className="h-9 w-9" />
-          )
-        }
-        commentsSlot={
-          <ItemBaseCommentsModalTrigger
-            data-test={`project-${id}-comments-modal-trigger`}
-            commentsCount={commentsCount}
-            modal={
-              <ProjectCommentsModal
-                projectId={id}
-                projectCommentsContainer={projectCommentsContainer}
-                sendComment={sendComment}
-                updateComment={updateComment}
-              />
-            }
-          />
-        }
-        statusSlot={
-          <ProjectItemBaseBadge
-            projectId={id}
-            deadline={deadline}
-            status={status}
-          />
-        }
-        progressSlot={
-          <GridItemProgress
-            value={(tasksCompleted / tasksTotal) * 100}
-            showValueText={false}
-            aria-label={t("progressAriaLabel")}
-          />
-        }
-      />
+          }
+          creatorImageSlot={
+            creator ? (
+              <>
+                {/* Show modal on desktop */}
+                <ItemBaseDetailModalTrigger
+                  className="max-md:hidden"
+                  modal={
+                    <UserDetailModal
+                      userId={creator.id}
+                      userDetailContainer={userDetailContainer}
+                    />
+                  }
+                >
+                  {creatorImg}
+                </ItemBaseDetailModalTrigger>
+
+                {/* Show link on mobile */}
+                <Link className="md:hidden" href={`/team/${creator.id}`}>
+                  {creatorImg}
+                </Link>
+              </>
+            ) : (
+              <UnknownUser className="h-9 w-9" />
+            )
+          }
+          commentsSlot={
+            <ItemBaseCommentsModalTrigger
+              data-test={`project-${id}-comments-modal-trigger`}
+              commentsCount={commentsCount}
+              modal={
+                <ProjectCommentsModal
+                  projectId={id}
+                  projectCommentsContainer={projectCommentsContainer}
+                  sendComment={sendComment}
+                  updateComment={updateComment}
+                />
+              }
+            />
+          }
+          statusSlot={
+            <ProjectItemBaseBadge
+              projectId={id}
+              deadline={deadline}
+              status={status}
+            />
+          }
+          progressSlot={
+            <GridItemProgress
+              value={(tasksCompleted / tasksTotal) * 100}
+              showValueText={false}
+              aria-label={t("progressAriaLabel")}
+            />
+          }
+        />
+
+        {/* Modal for editing project details */}
+        <EditProjectModal editProjectFormContainer={editProjectFormContainer} />
+      </>
     );
   },
 );
