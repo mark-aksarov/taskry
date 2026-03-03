@@ -17,6 +17,7 @@ export function UserEmailTextField({ defaultValue }: UserEmailTextFieldProps) {
       label={t("label")}
       placeholder={t("placeholder")}
       type="email"
+      autoComplete="new-email"
       errorMessage={(validation) => {
         const details = validation.validationDetails;
         if (details.valueMissing) {

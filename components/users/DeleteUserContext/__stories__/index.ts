@@ -1,0 +1,1 @@
+export { withDeleteUserProvider } from "./withDeleteUserProvider";

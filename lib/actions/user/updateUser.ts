@@ -37,7 +37,10 @@ export async function updateUser(
 ): Promise<ActionState> {
   // Authorization
   await requireSessionOrRedirect();
+
   const t = await getTranslations("actions");
+
+  await new Promise((resolve) => setTimeout(resolve, 3000));
 
   try {
     const input = Object.fromEntries(formData.entries());

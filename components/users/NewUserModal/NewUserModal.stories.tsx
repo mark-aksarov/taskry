@@ -27,7 +27,5 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default = {
-  args: {
-    createUser: () => ({ status: "success" }),
-  },
+  args: {},
 } satisfies Story;

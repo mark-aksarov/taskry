@@ -97,12 +97,11 @@
     "title": "Команда"
   },
   "UsersPage": {
-    "heading": "Команда"
-  },
-  "UsersPageEmpty": {
-    "heading": "Нет пользователей",
-    "description": "Добавьте нового пользователя, чтобы начать работу",
-    "addButtonLabel": "Новый Пользователь"
+    "heading": "Команда",
+    "emptySection": {
+      "heading": "Нет пользователей",
+      "description": "Добавьте нового пользователя, чтобы начать работу"
+    }
   },
   "TeamProfilePage": {
     "heading": "Детали пользователя"

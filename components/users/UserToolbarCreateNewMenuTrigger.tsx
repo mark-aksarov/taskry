@@ -9,33 +9,37 @@ import { useState } from "react";
 import { Key } from "react-aria";
 import { Item } from "react-stately";
 import { useTranslations } from "next-intl";
-import { NewUserModal } from "./NewUserModal";
+import { useCreateUser } from "./CreateUserContext";
 import { DialogHeader } from "@/components/ui/Dialog";
 import { BriefcaseBusiness, Users } from "lucide-react";
 import { GuestModeModal } from "../common/GuestModeModal";
-import { ActionFn, ActionState } from "@/lib/actions/types";
 import { useCurrentUser } from "../common/CurrentUserContext";
-import { NewPositionModal } from "../position/NewPositionModal";
+import { useCreatePosition } from "../position/CreatePositionContext";
 
-interface UserToolbarCreateNewMenuTriggerProps {
-  createUser: ActionFn<ActionState, FormData>;
-  createPosition: ActionFn<ActionState, FormData>;
-}
-
-export function UserToolbarCreateNewMenuTrigger({
-  createUser,
-  createPosition,
-}: UserToolbarCreateNewMenuTriggerProps) {
+export function UserToolbarCreateNewMenuTrigger() {
   const t = useTranslations("users.UserToolbarCreateNewMenuTrigger");
 
-  // Separate modal state for creating an user and a position
-  const [isOpenUserModal, setIsOpenUserModal] = useState(false);
-  const [isOpenPositionModal, setIsOpenPositionModal] = useState(false);
-
+  // If the user is a guest, show the guest mode modal instead of allowing creation
   const { isOwner, isGuest } = useCurrentUser();
   const [isGuestModeModalOpen, setIsGuestModeModalOpen] = useState(false);
 
-  // Menu actions: show guest modal, show user modal, show position modal
+  // Create position: action state + form modal state
+  const {
+    isPending: isCreatePositionPending,
+    onModalOpenChange: onPositionModalOpenChange,
+  } = useCreatePosition();
+
+  // Create user: action state + form modal state
+  const {
+    isPending: isCreateUserPending,
+    onModalOpenChange: onUserModalOpenChange,
+  } = useCreateUser();
+
+  /**
+   * Handles menu actions for creating a user or position
+   * - If user is a guest, show guest modal
+   * - Otherwise, open create position modal or create user modal
+   */
   function handleAction(key: Key) {
     if (isGuest) {
       setIsGuestModeModalOpen(true);
@@ -43,9 +47,9 @@ export function UserToolbarCreateNewMenuTrigger({
     }
 
     if (key === "user") {
-      setIsOpenUserModal(true);
+      onUserModalOpenChange(true);
     } else if (key === "position") {
-      setIsOpenPositionModal(true);
+      onPositionModalOpenChange(true);
     }
   }
 
@@ -63,6 +67,10 @@ export function UserToolbarCreateNewMenuTrigger({
           <ToolbarCreateNewModalTrigger
             data-test="user-toolbar-create-new-menu-trigger"
             label={t("label")}
+            isDisabled={
+              // Block user interactions while a position or user is being created
+              isCreatePositionPending || isCreateUserPending
+            }
           />
         )}
       >
@@ -78,21 +86,6 @@ export function UserToolbarCreateNewMenuTrigger({
         </Item>
       </ToolbarCreateNewMenuTrigger>
 
-      {/* Modal for creating a user */}
-      <NewUserModal
-        createUser={createUser}
-        isOpen={isOpenUserModal}
-        onOpenChange={setIsOpenUserModal}
-      />
-
-      {/* Modal for creating a position */}
-      <NewPositionModal
-        createPosition={createPosition}
-        isOpen={isOpenPositionModal}
-        onOpenChange={setIsOpenPositionModal}
-      />
-
-      {/* Guest mode modal */}
       <GuestModeModal
         isOpen={isGuestModeModalOpen}
         onOpenChange={setIsGuestModeModalOpen}

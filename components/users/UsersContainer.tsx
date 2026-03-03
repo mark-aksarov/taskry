@@ -11,6 +11,7 @@ import { UserGrid } from "./UserGrid";
 import { getUserList } from "@/lib/data/user/user.dal";
 import { UserFilters, UserSortField } from "@/lib/types";
 import { deleteUser } from "@/lib/actions/user/deleteUser";
+import { updateUser } from "@/lib/actions/user/updateUser";
 import { UserDetailContainer } from "./UserDetailContainer";
 import { ViewModeLayout } from "@/components/common/ViewMode";
 import { EditUserFormContainer } from "./EditUserFormContainer";
@@ -48,6 +49,7 @@ export async function UsersContainer({
           publicLink={user.publicLink}
           position={user.position}
           deleteUser={deleteUser}
+          updateUser={updateUser}
           editUserFormContainer={<EditUserFormContainer userId={user.id} />}
           userDetailContainer={<UserDetailContainer userId={user.id} />}
         />

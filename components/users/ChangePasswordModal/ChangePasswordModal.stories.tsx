@@ -29,6 +29,5 @@ type Story = StoryObj<typeof meta>;
 export const Default = {
   args: {
     userId: "user-1",
-    changePassword: () => ({ status: "success" }),
   },
 } satisfies Story;

@@ -4,7 +4,9 @@ import { useActionSuccessToast } from "@/lib/hooks/useActionSuccessToast";
 import { useCloseModalOnActionSuccess } from "@/lib/hooks/useCloseModalOnActionSuccess";
 import { useActionErrorToastWhenModalClosed } from "./useActionErrorToastWhenModalClosed";
 
-export const initialState: ActionState = { status: null };
+export const initialState: ActionState = {
+  status: null,
+};
 
 /**
  * Shared hook for create actions

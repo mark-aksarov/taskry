@@ -58,7 +58,7 @@
     "completed": "Отметить как «Завершено»"
   },
   "TaskItemActionMenuTrigger": {
-    "edit": "Изменить",
+    "edit": "Редактировать",
     "delete": "Удалить",
     "markPending": "Пометить как ожидающую",
     "markCompleted": "Пометить как выполненную",

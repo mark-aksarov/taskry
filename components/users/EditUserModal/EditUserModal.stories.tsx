@@ -37,6 +37,7 @@ export const Default = {
 
 export const Skeleton = {
   args: {
+    ...Default.args,
     editUserFormContainer: <EditUserFormSkeleton />,
   },
 } satisfies Story;

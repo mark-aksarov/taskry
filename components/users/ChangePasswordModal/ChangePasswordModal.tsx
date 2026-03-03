@@ -1,3 +1,5 @@
+"use client";
+
 import {
   FormBaseModal,
   FormBaseModalDialog,
@@ -5,34 +7,30 @@ import {
 } from "@/components/common/FormBaseModal";
 
 import { useTranslations } from "next-intl";
-import { ModalProps } from "@/components/ui/Modal";
 import { DialogHeader } from "@/components/ui/Dialog";
 import { ChangePasswordForm } from "../ChangePasswordForm";
-import { ActionFn, ActionState } from "@/lib/actions/types";
+import { useChangePassword } from "../ChangePasswordContext";
 
-interface ChangePasswordModalProps
-  extends Pick<ModalProps, "isOpen" | "onOpenChange"> {
+interface ChangePasswordModalProps {
   userId: string;
-  changePassword: ActionFn<ActionState, FormData>;
 }
 
-export function ChangePasswordModal({
-  userId,
-  changePassword,
-  ...props
-}: ChangePasswordModalProps) {
+export function ChangePasswordModal({ userId }: ChangePasswordModalProps) {
   const t = useTranslations("users.ChangePasswordModal");
+
+  const { isModalOpen, onModalOpenChange } = useChangePassword();
 
   return (
     <FormBaseModal
       data-test="change-password-modal"
       className="md:w-[350px]"
-      {...props}
+      isOpen={isModalOpen}
+      onOpenChange={onModalOpenChange}
     >
       <FormBaseModalDialog>
         <DialogHeader>{t("title")}</DialogHeader>
         <FormBaseModalDialogBody>
-          <ChangePasswordForm userId={userId} changePassword={changePassword} />
+          <ChangePasswordForm userId={userId} />
         </FormBaseModalDialogBody>
       </FormBaseModalDialog>
     </FormBaseModal>

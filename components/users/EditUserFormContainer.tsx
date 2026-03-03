@@ -3,7 +3,6 @@
 import useSWR from "swr";
 import { Suspense } from "react";
 import { CalendarDate } from "@internationalized/date";
-import { updateUser } from "@/lib/actions/user/updateUser";
 import { UserFormDataDTO } from "@/lib/data/user/user.dto";
 import { EditUserForm, EditUserFormSkeleton } from "./EditUserForm";
 import { PositionSummaryDTO } from "@/lib/data/position/position.dto";
@@ -57,8 +56,6 @@ function EditUserFormContainerInner({ userId }: EditUserFormContainerProps) {
       userAddressDefaultValue={user.address}
       userPositionSelectDefaultValue={user.positionId?.toString()}
       userPositionSelectItems={positions}
-      updateUser={updateUser}
-      mutate={mutate}
     />
   );
 }

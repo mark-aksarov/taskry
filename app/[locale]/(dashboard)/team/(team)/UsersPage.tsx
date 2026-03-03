@@ -8,10 +8,11 @@ import {
 import { useTranslations } from "next-intl";
 import { UserSortField } from "@/lib/types";
 import { PageGrid } from "@/components/common/PageGrid";
-import { ActionFn, ActionState } from "@/lib/actions/types";
+import { NewUserModal } from "@/components/users/NewUserModal";
 import { ViewModeProvider } from "@/components/common/ViewMode";
 import { PageContainer } from "@/components/common/PageContainer";
 import { ViewModeToggleButtonGroup } from "@/components/common/ViewMode";
+import { NewPositionModal } from "@/components/position/NewPositionModal";
 import { UsersFilteredEmptySection } from "@/components/users/UsersFilteredEmptySection";
 import { UserToolbarManageMenuTrigger } from "@/components/users/UserToolbarManageMenuTrigger";
 import { UserToolbarSortingMenuTrigger } from "@/components/users/UserToolbarSortingMenuTrigger";
@@ -23,8 +24,6 @@ interface UsersPageProps {
   selectedSortField: UserSortField;
   usersContainer: React.ReactNode;
   filtersFormContainer: React.ReactNode;
-  createUser: ActionFn<ActionState, FormData>;
-  createPosition: ActionFn<ActionState, FormData>;
 }
 
 export function UsersPage({
@@ -32,59 +31,53 @@ export function UsersPage({
   selectedSortField,
   usersContainer,
   filtersFormContainer,
-  createUser,
-  createPosition,
 }: UsersPageProps) {
   const t = useTranslations("app.UsersPage");
 
-  const userToolbarCreateNewMenuTrigger = (
-    <UserToolbarCreateNewMenuTrigger
-      createUser={createUser}
-      createPosition={createPosition}
-    />
-  );
-
-  const userToolbarFiltersModalTrigger = (
-    <UserToolbarFiltersModalTrigger
-      filtersFormContainer={filtersFormContainer}
-    />
-  );
-
   return (
-    <PageContainer fullscreen={totalFilteredUsers === 0} className="relative">
-      <PageGrid className="flex-auto">
-        <ViewModeProvider>
-          <ToolbarDesktop>
-            <UserToolbarManageMenuTrigger />
-            <UserToolbarSortingMenuTrigger
-              selectedSortField={selectedSortField}
-            />
-            {userToolbarFiltersModalTrigger}
-            <ViewModeToggleButtonGroup className="ml-auto" />
-            {userToolbarCreateNewMenuTrigger}
-          </ToolbarDesktop>
+    <>
+      <PageContainer fullscreen={totalFilteredUsers === 0} className="relative">
+        <PageGrid className="flex-auto">
+          <ViewModeProvider>
+            <ToolbarDesktop>
+              <UserToolbarManageMenuTrigger />
+              <UserToolbarSortingMenuTrigger
+                selectedSortField={selectedSortField}
+              />
+              <UserToolbarFiltersModalTrigger
+                filtersFormContainer={filtersFormContainer}
+              />
+              <ViewModeToggleButtonGroup className="ml-auto" />
+              <UserToolbarCreateNewMenuTrigger />
+            </ToolbarDesktop>
 
-          <ToolbarMobileTop>
-            <ToolbarMobileHeading>{t("heading")}</ToolbarMobileHeading>
-            <UserToolbarManageMenuTrigger />
-            <UserToolbarSortingMenuTrigger
-              selectedSortField={selectedSortField}
-            />
-            {userToolbarFiltersModalTrigger}
-          </ToolbarMobileTop>
+            <ToolbarMobileTop>
+              <ToolbarMobileHeading>{t("heading")}</ToolbarMobileHeading>
+              <UserToolbarManageMenuTrigger />
+              <UserToolbarSortingMenuTrigger
+                selectedSortField={selectedSortField}
+              />
+              <UserToolbarFiltersModalTrigger
+                filtersFormContainer={filtersFormContainer}
+              />
+            </ToolbarMobileTop>
 
-          <ToolbarMobileBottom>
-            <ViewModeToggleButtonGroup />
-            {userToolbarCreateNewMenuTrigger}
-          </ToolbarMobileBottom>
+            <ToolbarMobileBottom>
+              <ViewModeToggleButtonGroup />
+              <UserToolbarCreateNewMenuTrigger />
+            </ToolbarMobileBottom>
 
-          {totalFilteredUsers === 0 ? (
-            <UsersFilteredEmptySection />
-          ) : (
-            usersContainer
-          )}
-        </ViewModeProvider>
-      </PageGrid>
-    </PageContainer>
+            {totalFilteredUsers === 0 ? (
+              <UsersFilteredEmptySection />
+            ) : (
+              usersContainer
+            )}
+          </ViewModeProvider>
+        </PageGrid>
+      </PageContainer>
+
+      <NewUserModal />
+      <NewPositionModal />
+    </>
   );
 }

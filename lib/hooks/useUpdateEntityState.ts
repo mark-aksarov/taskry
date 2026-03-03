@@ -2,6 +2,7 @@ import { useState, useMemo, useActionState } from "react";
 import { ActionState, ActionFn } from "@/lib/actions/types";
 import { useCloseModalOnActionSuccess } from "./useCloseModalOnActionSuccess";
 import { useActionErrorToastWhenModalClosed } from "./useActionErrorToastWhenModalClosed";
+import { useActionSuccessToast } from "./useActionSuccessToast";
 
 export const initialState: ActionState = {
   status: null,
@@ -17,6 +18,7 @@ export function useUpdateEntityState<TPayload = FormData>(
 
   const [state, action, isPending] = useActionState(updateFn, initialState);
 
+  useActionSuccessToast(state);
   useActionErrorToastWhenModalClosed(state, isModalOpen);
   useCloseModalOnActionSuccess(state, setIsModalOpen);
 
@@ -37,6 +39,7 @@ export function useUpdateEntityState<TPayload = FormData>(
 /**
  * Generic type for any update context
  */
+
 export interface UpdateEntityContextType<TPayload = FormData> {
   isModalOpen: boolean;
   onModalOpenChange: (isOpen: boolean) => void;

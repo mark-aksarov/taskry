@@ -24,7 +24,10 @@ export async function changePassword(
 ): Promise<ActionState> {
   // Authorization
   await requireSessionOrRedirect();
+
   const t = await getTranslations("actions");
+
+  await new Promise((resolve) => setTimeout(resolve, 3000));
 
   try {
     const input = Object.fromEntries(formData.entries());

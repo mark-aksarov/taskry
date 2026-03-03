@@ -1,6 +1,5 @@
 import {
   UserTasksPageLayout,
-  UserTasksPageEmptyLayout,
   UserTasksPageLoadingLayout,
 } from "@/components/users/UserTasksPageLayout";
 
@@ -11,13 +10,13 @@ import { useParams, usePathname } from "next/navigation";
 import { PageDecorator } from "@/.storybook/PageDecorator";
 import { NewTaskForm } from "@/components/tasks/NewTaskForm";
 import { UserTaskList } from "@/components/users/UserTaskList";
-import { ProfileActions } from "@/components/users/ProfileActions";
+import { EditUserForm } from "@/components/users/EditUserForm";
 import { UserDetailHeader } from "@/components/users/UserDetailHeader";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { AppHeaderStory } from "@/components/layout/AppHeader/__stories__";
 import { newTaskFormArgs } from "@/components/tasks/NewTaskForm/__stories__";
+import { editUserFormArgs } from "@/components/users/EditUserForm/__stories__";
 import { UserTaskListStory } from "@/components/users/UserTaskList/__stories__";
-import { profileActionsArgs } from "@/components/users/ProfileActions/__stories__";
 import { ProfileNavigationMobile } from "@/components/users/ProfileNavigationMobile";
 import { ProfileNavigationDesktop } from "@/components/users/ProfileNavigationDesktop";
 import { withSelectedTasksProvider } from "@/components/tasks/SelectedTasksContext/__stories__";
@@ -49,6 +48,8 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
+    userId: "user-1",
+    totalTasksCount: 10,
     selectedSortField: "title",
     userTasksContainer: <UserTaskList {...UserTaskListStory.args} />,
     userHeaderContainer: (
@@ -59,11 +60,11 @@ export const Default = {
       />
     ),
     navigationDesktop: (
-      <ProfileNavigationDesktop
-        profileActions={<ProfileActions {...profileActionsArgs} />}
-      />
+      <ProfileNavigationDesktop userId="user-1" userFullName="User 1" />
     ),
     navigationMobile: <ProfileNavigationMobile />,
+    editUserFormContainer: <EditUserForm {...editUserFormArgs} />,
+    newTaskFormContainer: <NewTaskForm {...newTaskFormArgs} />,
     deleteTasks: () => ({ status: "success" }),
     updateTaskStatuses: () => ({ status: "success" }),
   },
@@ -74,10 +75,5 @@ export const Loading = {
 };
 
 export const WithNoTasks = {
-  render: () => (
-    <UserTasksPageEmptyLayout
-      {...Default.args}
-      newTaskFormContainer={<NewTaskForm {...newTaskFormArgs} />}
-    />
-  ),
+  args: { ...Default.args, totalTasksCount: 0 },
 };

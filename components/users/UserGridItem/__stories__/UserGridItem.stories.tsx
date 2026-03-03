@@ -21,7 +21,6 @@ export const Default = {
     ...mockedUserDetail,
     editUserFormContainer: <EditUserForm {...editUserFormArgs} />,
     userDetailContainer: <UserDetail {...mockedUserDetail} />,
-    deleteUser: () => ({ status: "success" }),
   },
 } satisfies Story;
 

@@ -2,11 +2,11 @@
 
 import { UserGridItem } from "../UserGridItem";
 import { UserListItem } from "../UserListItem";
+import { DeleteUserProvider } from "../DeleteUserContext";
+import { UpdateUserProvider } from "../UpdateUserContext";
 import { useViewMode } from "@/components/common/ViewMode";
 import { UserItemPendingOverlay } from "./UserItemPendingOverlay";
-import { DeleteUserTransitionProvider } from "../DeleteUserTransitionContext";
 import { ActionFn, ActionState, DeleteUserPayload } from "@/lib/actions/types";
-import { UpdateUserTransitionProvider } from "../UpdateUserTransitionContext";
 
 export interface UserItemProps {
   id: string;
@@ -20,15 +20,16 @@ export interface UserItemProps {
   };
   editUserFormContainer: React.ReactNode;
   userDetailContainer: React.ReactNode;
+  updateUser: ActionFn<ActionState, FormData>;
   deleteUser: ActionFn<ActionState, DeleteUserPayload>;
 }
 
-export function UserItem(props: UserItemProps) {
+export function UserItem({ updateUser, deleteUser, ...props }: UserItemProps) {
   const { viewMode } = useViewMode();
 
   return (
-    <UpdateUserTransitionProvider>
-      <DeleteUserTransitionProvider>
+    <UpdateUserProvider updateUser={updateUser}>
+      <DeleteUserProvider deleteUser={deleteUser}>
         <UserItemPendingOverlay>
           {viewMode === "grid" ? (
             <UserGridItem {...props} />
@@ -36,7 +37,7 @@ export function UserItem(props: UserItemProps) {
             <UserListItem {...props} />
           )}
         </UserItemPendingOverlay>
-      </DeleteUserTransitionProvider>
-    </UpdateUserTransitionProvider>
+      </DeleteUserProvider>
+    </UpdateUserProvider>
   );
 }

@@ -1,61 +1,48 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { EditUserModal } from "../EditUserModal";
 import { startTransition, useState } from "react";
+import { useUpdateUser } from "../UpdateUserContext";
+import { useDeleteUser } from "../DeleteUserContext";
 import { KeyRound, Pencil, Trash } from "lucide-react";
 import { BaseDeleteUserModal } from "../DeleteUserModal";
-import { ChangePasswordModal } from "../ChangePasswordModal";
+import { useChangePassword } from "../ChangePasswordContext";
 import { GuestModeModal } from "@/components/common/GuestModeModal";
 import { useCurrentUser } from "@/components/common/CurrentUserContext";
 import { NavigationButton } from "@/components/common/NavigationButton";
-import { ActionFn, ActionState, DeleteUserPayload } from "@/lib/actions/types";
-import { useDeleteEntityPageActionState } from "@/lib/hooks/useDeleteEntityPageActionState";
-import { useChangePasswordTransition } from "../ChangePasswordTransitionContext";
-import { useUpdateUserTransition } from "../UpdateUserTransitionContext";
 
 interface ProfileActionsProps {
   userId: string;
   userFullName: string;
-  changePassword: ActionFn<ActionState, FormData>;
-  deleteUser: ActionFn<ActionState, DeleteUserPayload>;
-  editUserFormContainer: React.ReactNode;
 }
 
-export function ProfileActions({
-  userId,
-  userFullName,
-  changePassword,
-  deleteUser,
-  editUserFormContainer,
-}: ProfileActionsProps) {
+export function ProfileActions({ userId, userFullName }: ProfileActionsProps) {
   const t = useTranslations("users.ProfileActions");
 
-  // Deleting the user
-  const [, action, isDeletePending] = useDeleteEntityPageActionState({
-    deleteEntity: deleteUser,
-  });
+  // Delete user action and modal states
+  const { action: deleteUserAction, isPending: isDeletePending } =
+    useDeleteUser();
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
   // Guest mode
   const { isGuest, isOwner, userId: currentUserId } = useCurrentUser();
   const [isGuestModeModalOpen, setIsGuestModeModalOpen] = useState(false);
 
-  // Change password modal state
-  const { isPending: isChangePasswordPending } = useChangePasswordTransition();
-  const [isChangePasswordModalOpen, setIsChangePasswordModalOpen] =
-    useState(false);
+  // Change password action and modal states
+  const { isPending: isChangePasswordPending } = useChangePassword();
+  const { onModalOpenChange: onChangePasswordModalOpenChange } =
+    useChangePassword();
 
   // Edit user modal state
-  const { isPending: isUpdateUserPending } = useUpdateUserTransition();
-  const [isEditUserModalOpen, setIsEditUserModalOpen] = useState(false);
+  const { isPending: isUpdateUserPending } = useUpdateUser();
+  const { onModalOpenChange: onEditModalOpenChange } = useUpdateUser();
 
   function handlePasswordChangePress() {
     if (isGuest) {
       setIsGuestModeModalOpen(true);
       return;
     }
-    setIsChangePasswordModalOpen(true);
+    onChangePasswordModalOpenChange(true);
   }
 
   function handleEditPress() {
@@ -63,7 +50,7 @@ export function ProfileActions({
       setIsGuestModeModalOpen(true);
       return;
     }
-    setIsEditUserModalOpen(true);
+    onEditModalOpenChange(true);
   }
 
   function handleDeletePress() {
@@ -76,7 +63,9 @@ export function ProfileActions({
 
   function handleDelete() {
     setIsDeleteModalOpen(false);
-    startTransition(() => action({ id: userId, shouldRedirect: true }));
+    startTransition(() =>
+      deleteUserAction({ id: userId, shouldRedirect: true }),
+    );
   }
 
   // Only owners can delete the user, and user cannot delete his own account
@@ -115,19 +104,6 @@ export function ProfileActions({
           label={t("editAccount")}
         />
       </div>
-
-      <ChangePasswordModal
-        isOpen={isChangePasswordModalOpen}
-        onOpenChange={setIsChangePasswordModalOpen}
-        userId={userId}
-        changePassword={changePassword}
-      />
-
-      <EditUserModal
-        isOpen={isEditUserModalOpen}
-        onOpenChange={setIsEditUserModalOpen}
-        editUserFormContainer={editUserFormContainer}
-      />
 
       {showDeleteButton && (
         <BaseDeleteUserModal

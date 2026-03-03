@@ -60,7 +60,7 @@ export function UserDetail({
       positionSlot={
         <DetailInfo>
           <DetailTitle>{t("position")}</DetailTitle>
-          <DetailText>{position?.name || "Position not specified"}</DetailText>
+          <DetailText>{position?.name || t("noPosition")}</DetailText>
         </DetailInfo>
       }
       emailSlot={

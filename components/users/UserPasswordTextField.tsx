@@ -16,6 +16,7 @@ export function UserPasswordTextField() {
       isRequired
       minLength={8}
       maxLength={128}
+      autoComplete="new-password"
       errorMessage={(validation) => {
         const details = validation.validationDetails;
 

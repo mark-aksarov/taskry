@@ -5,41 +5,32 @@ import {
   FormBaseBody,
   FormBaseFooter,
   FormBaseSubmitButton,
-  useFormBaseActionState,
 } from "@/components/common/FormBase";
 
+import { startTransition } from "react";
 import { useTranslations } from "next-intl";
+import { useCreateUser } from "./CreateUserContext";
 import { UserEmailTextField } from "./UserEmailTextField";
-import { ActionFn, ActionState } from "@/lib/actions/types";
 import { UserFullNameTextField } from "./UserFullNameTextField";
 import { UserPasswordTextField } from "./UserPasswordTextField";
-import { handleActionSubmit } from "@/lib/utils/handleActionSubmit";
 import { FormErrorBanner } from "@/components/common/FormErrorBanner";
-import { useRef } from "react";
 
-interface NewUserFormProps {
-  createUser: ActionFn<ActionState, FormData>;
-}
-
-export function NewUserForm({ createUser }: NewUserFormProps) {
+export function NewUserForm() {
   const t = useTranslations("users.NewUserForm");
 
-  // The ref is used inside reducerAction in useFormBaseActionState.
-  // ref.current in useFormBaseActionState is null on unmount, preventing programmatic modal close when opening another form.
-  const ref = useRef<HTMLFormElement>(null);
+  const { state, action, isPending } = useCreateUser();
 
-  const [state, action, isPending] = useFormBaseActionState(
-    createUser,
-    ref,
-    t("successMessage"),
-  );
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+
+    startTransition(() => {
+      action(formData);
+    });
+  }
 
   return (
-    <FormBase
-      ref={ref}
-      id="new-user-form"
-      onSubmit={(e) => handleActionSubmit(e, action)}
-    >
+    <FormBase id="new-user-form" onSubmit={handleSubmit} autoComplete="off">
       <FormBaseBody>
         <UserFullNameTextField />
         <UserEmailTextField />

@@ -7,29 +7,20 @@ import {
   FormBaseSubmitButton,
 } from "@/components/common/FormBase";
 
+import { startTransition } from "react";
 import { useTranslations } from "next-intl";
-import { ActionFn, ActionState } from "@/lib/actions/types";
+import { useChangePassword } from "./ChangePasswordContext";
 import { UserPasswordTextField } from "./UserPasswordTextField";
 import { FormErrorBanner } from "@/components/common/FormErrorBanner";
-import { useUpdateEntityActionState } from "@/lib/hooks/useUpdateEntityActionState";
-import { useChangePasswordTransition } from "./ChangePasswordTransitionContext";
 
 interface ChangePasswordFormProps {
   userId: string;
-  changePassword: ActionFn<ActionState, FormData>;
 }
 
-export function ChangePasswordForm({
-  userId,
-  changePassword,
-}: ChangePasswordFormProps) {
+export function ChangePasswordForm({ userId }: ChangePasswordFormProps) {
   const t = useTranslations("users.ChangePasswordForm");
 
-  const { startTransition } = useChangePasswordTransition();
-  const [state, action, isPending] = useUpdateEntityActionState({
-    updateEntity: changePassword,
-    successMessage: t("successMessage"),
-  });
+  const { state, isPending, action } = useChangePassword();
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();

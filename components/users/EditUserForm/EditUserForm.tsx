@@ -8,18 +8,17 @@ import {
 } from "@/components/common/FormBase";
 
 import { DateValue } from "react-aria";
+import { startTransition } from "react";
 import { useTranslations } from "next-intl";
+import { useUpdateUser } from "../UpdateUserContext";
 import { UserBioTextField } from "../UserBioTextField";
 import { UserPositionSelect } from "../UserPositionSelect";
-import { ActionFn, ActionState } from "@/lib/actions/types";
 import { UserAddressTextField } from "../UserAddressTextField";
 import { UserFullNameTextField } from "../UserFullNameTextField";
 import { UserBirthdateDatePicker } from "../UserBirthdateDatePicker";
 import { UserPublicLinkTextField } from "../UserPublicLinkTextField";
 import { FormErrorBanner } from "@/components/common/FormErrorBanner";
 import { UserPhoneNumberTextField } from "../UserPhoneNumberTextField";
-import { useUpdateUserTransition } from "../UpdateUserTransitionContext";
-import { useUpdateEntityActionState } from "@/lib/hooks/useUpdateEntityActionState";
 
 interface EditUserFormProps {
   userId: string;
@@ -31,8 +30,6 @@ interface EditUserFormProps {
   userAddressDefaultValue?: string;
   userPositionSelectDefaultValue?: string;
   userPositionSelectItems: { id: number; name: string }[];
-  updateUser: ActionFn<ActionState, FormData>;
-  mutate: () => void;
 }
 
 export function EditUserForm({
@@ -45,18 +42,10 @@ export function EditUserForm({
   userAddressDefaultValue,
   userPositionSelectDefaultValue,
   userPositionSelectItems,
-  updateUser,
-  mutate,
 }: EditUserFormProps) {
   const t = useTranslations("users.EditUserForm");
 
-  const { startTransition } = useUpdateUserTransition();
-
-  const [state, action, isPending] = useUpdateEntityActionState({
-    updateEntity: updateUser,
-    onSuccess: mutate,
-    successMessage: t("successMessage"),
-  });
+  const { state, action, isPending } = useUpdateUser();
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();

@@ -5,13 +5,13 @@ import ProfileTemplate from "./ProfileTemplate";
 import { mockedUserDetail } from "@/mocks/users";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { PageDecorator } from "@/.storybook/PageDecorator";
-import { ProfileActions } from "@/components/users/ProfileActions";
+import { EditUserForm } from "@/components/users/EditUserForm";
 import { UserDetailHeader } from "@/components/users/UserDetailHeader";
 import { DetailHeaderSkeleton } from "@/components/common/DetailHeader";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { AppHeaderStory } from "@/components/layout/AppHeader/__stories__";
 import { UserDetail, UserDetailSkeleton } from "@/components/users/UserDetail";
-import { profileActionsArgs } from "@/components/users/ProfileActions/__stories__";
+import { editUserFormArgs } from "@/components/users/EditUserForm/__stories__";
 
 const meta = {
   title: "pages/ProfilePage",
@@ -36,6 +36,9 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
+    userId: "user-1",
+    userFullName: "User 1",
+    editUserFormContainer: <EditUserForm {...editUserFormArgs} />,
     profileDetailContainer: <UserDetail {...mockedUserDetail} />,
     userHeaderContainer: (
       <UserDetailHeader
@@ -44,7 +47,6 @@ export const Default = {
         positionName="Position 1"
       />
     ),
-    profileActions: <ProfileActions {...profileActionsArgs} />,
   },
 } satisfies Story;
 
@@ -58,6 +60,7 @@ export const Loading = {
 
 export const WithoutOptionalUserData = {
   args: {
+    ...Default.args,
     profileDetailContainer: (
       <UserDetail
         id={mockedUserDetail.id}
@@ -66,6 +69,5 @@ export const WithoutOptionalUserData = {
       />
     ),
     userHeaderContainer: <UserDetailHeader fullName="User 1" />,
-    profileActions: <ProfileActions {...profileActionsArgs} />,
   },
 } satisfies Story;

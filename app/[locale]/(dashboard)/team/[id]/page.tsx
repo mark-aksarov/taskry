@@ -4,16 +4,17 @@ import { hasOwnerRole } from "@/lib/utils/hasOwnerRole";
 import { hasGuestRole } from "@/lib/utils/hasGuestRole";
 import { getUserSummary } from "@/lib/data/user/user.dal";
 import { deleteUser } from "@/lib/actions/user/deleteUser";
+import { updateUser } from "@/lib/actions/user/updateUser";
 import { userId as userIdSchema } from "@/lib/schemas/user";
-import { ProfileActions } from "@/components/users/ProfileActions";
 import { changePassword } from "@/lib/actions/user/changePassword";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
+import { DeleteUserProvider } from "@/components/users/DeleteUserContext";
+import { UpdateUserProvider } from "@/components/users/UpdateUserContext";
 import { UserHeaderContainer } from "@/components/users/UserHeaderContainer";
 import { CurrentUserProvider } from "@/components/common/CurrentUserContext";
 import { EditUserFormContainer } from "@/components/users/EditUserFormContainer";
 import { ProfileDetailContainer } from "@/components/users/ProfileDetailContainer";
-import { UpdateUserTransitionProvider } from "@/components/users/UpdateUserTransitionContext";
-import { ChangePasswordTransitionProvider } from "@/components/users/ChangePasswordTransitionContext";
+import { ChangePasswordProvider } from "@/components/users/ChangePasswordContext";
 
 export default async function AppProfilePage({
   params,
@@ -54,27 +55,22 @@ export default async function AppProfilePage({
 
   return (
     <CurrentUserProvider value={currentUserContextValue}>
-      <TeamProfilePage
-        userActions={
-          showUserActions && (
-            <UpdateUserTransitionProvider>
-              <ChangePasswordTransitionProvider>
-                <ProfileActions
-                  changePassword={changePassword}
-                  deleteUser={deleteUser}
-                  userId={userId}
-                  userFullName={userSummary.fullName}
-                  editUserFormContainer={
-                    <EditUserFormContainer userId={userId} />
-                  }
-                />
-              </ChangePasswordTransitionProvider>
-            </UpdateUserTransitionProvider>
-          )
-        }
-        profileDetailContainer={<ProfileDetailContainer userId={userId} />}
-        userHeaderContainer={<UserHeaderContainer userId={userId} />}
-      />
+      <UpdateUserProvider updateUser={updateUser}>
+        <ChangePasswordProvider changePassword={changePassword}>
+          <DeleteUserProvider deleteUser={deleteUser}>
+            <TeamProfilePage
+              showUserActions={showUserActions}
+              userId={userId}
+              userFullName={userSummary.fullName}
+              profileDetailContainer={
+                <ProfileDetailContainer userId={userId} />
+              }
+              userHeaderContainer={<UserHeaderContainer userId={userId} />}
+              editUserFormContainer={<EditUserFormContainer userId={userId} />}
+            />
+          </DeleteUserProvider>
+        </ChangePasswordProvider>
+      </UpdateUserProvider>
     </CurrentUserProvider>
   );
 }

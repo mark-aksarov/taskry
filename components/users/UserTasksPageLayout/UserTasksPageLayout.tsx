@@ -21,30 +21,41 @@ import {
 
 import { useTranslations } from "next-intl";
 import { TaskSortField } from "@/lib/types";
+import { EditUserModal } from "../EditUserModal";
 import { PageGrid } from "@/components/common/PageGrid";
 import { BackButton } from "@/components/common/BackButton";
+import { ChangePasswordModal } from "../ChangePasswordModal";
 import { PageContainer } from "@/components/common/PageContainer";
+import { UserTasksPageEmptyLayout } from "./UserTasksPageEmptyLayout";
 import { TaskToolbarSortingMenuTrigger } from "@/components/tasks/TaskToolbarSortingMenuTrigger";
 import { TaskToolbarActionsMenuTrigger } from "@/components/tasks/TaskToolbarActionsMenuTrigger";
 
 interface UserTasksPageLayoutProps {
-  userTasksContainer: React.ReactNode;
-  userHeaderContainer: React.ReactNode;
-  navigationDesktop: React.ReactNode;
-  navigationMobile: React.ReactNode;
+  totalTasksCount: number;
+  userId: string;
   selectedSortField: TaskSortField;
   backButton?: boolean;
+  navigationDesktop: React.ReactNode;
+  navigationMobile: React.ReactNode;
+  userTasksContainer: React.ReactNode;
+  editUserFormContainer: React.ReactNode;
+  newTaskFormContainer: React.ReactNode;
+  userHeaderContainer: React.ReactNode;
   deleteTasks: ActionFn<ActionState, DeleteTasksPayload>;
   updateTaskStatuses: ActionFn<ActionState, UpdateTaskStatusesPayload>;
 }
 
 export function UserTasksPageLayout({
-  userTasksContainer,
-  userHeaderContainer,
-  navigationDesktop,
-  navigationMobile,
+  totalTasksCount,
+  userId,
   selectedSortField,
   backButton,
+  navigationDesktop,
+  navigationMobile,
+  userTasksContainer,
+  editUserFormContainer,
+  newTaskFormContainer,
+  userHeaderContainer,
   deleteTasks,
   updateTaskStatuses,
 }: UserTasksPageLayoutProps) {
@@ -56,6 +67,17 @@ export function UserTasksPageLayout({
       updateTaskStatuses={updateTaskStatuses}
     />
   );
+
+  if (totalTasksCount === 0) {
+    return (
+      <UserTasksPageEmptyLayout
+        newTaskFormContainer={newTaskFormContainer}
+        userHeaderContainer={userHeaderContainer}
+        navigationDesktop={navigationDesktop}
+        navigationMobile={navigationMobile}
+      />
+    );
+  }
 
   return (
     <>
@@ -96,6 +118,9 @@ export function UserTasksPageLayout({
           {userTasksContainer}
         </PageGrid>
       </PageContainer>
+
+      <ChangePasswordModal userId={userId} />
+      <EditUserModal editUserFormContainer={editUserFormContainer} />
     </>
   );
 }

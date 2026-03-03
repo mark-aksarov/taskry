@@ -1,30 +1,31 @@
+"use client";
+
 import {
   FormBaseModal,
   FormBaseModalDialog,
   FormBaseModalDialogBody,
 } from "@/components/common/FormBaseModal";
 
-import { ModalProps } from "@/components/ui/Modal";
-import { DialogHeader } from "@/components/ui/Dialog";
-
 import { useTranslations } from "next-intl";
 import { NewUserForm } from "../NewUserForm";
-import { ActionFn, ActionState } from "@/lib/actions/types";
+import { DialogHeader } from "@/components/ui/Dialog";
+import { useCreateUser } from "../CreateUserContext";
 
-interface NewUserModalProps
-  extends Pick<ModalProps, "isOpen" | "onOpenChange"> {
-  createUser: ActionFn<ActionState, FormData>;
-}
-
-export function NewUserModal({ createUser, ...props }: NewUserModalProps) {
+export function NewUserModal() {
   const t = useTranslations("users.NewUserModal");
 
+  const { isModalOpen, onModalOpenChange } = useCreateUser();
+
   return (
-    <FormBaseModal data-test="new-user-modal" {...props}>
+    <FormBaseModal
+      data-test="new-user-modal"
+      isOpen={isModalOpen}
+      onOpenChange={onModalOpenChange}
+    >
       <FormBaseModalDialog>
         <DialogHeader>{t("title")}</DialogHeader>
         <FormBaseModalDialogBody>
-          <NewUserForm createUser={createUser} />
+          <NewUserForm />
         </FormBaseModalDialogBody>
       </FormBaseModalDialog>
     </FormBaseModal>

@@ -31,8 +31,7 @@ export const UserListItem = memo(
     position,
     editUserFormContainer,
     userDetailContainer,
-    deleteUser,
-  }: UserItemProps) => {
+  }: Omit<UserItemProps, "deleteUser" | "updateUser">) => {
     const t = useTranslations("users.UserListItem");
 
     const { isOwner, isGuest } = useCurrentUser();
@@ -126,7 +125,6 @@ export const UserListItem = memo(
               editUserFormContainer={editUserFormContainer}
               userId={id}
               userFullName={fullName}
-              deleteUser={deleteUser}
             />
           )
         }

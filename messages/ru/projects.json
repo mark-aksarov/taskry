@@ -127,7 +127,7 @@
     "noCompany": "Нет компании"
   },
   "ProjectItemActionMenuTrigger": {
-    "edit": "Изменить",
+    "edit": "Редактировать",
     "delete": "Удалить",
     "markPending": "Отметить как «В ожидании»",
     "markCompleted": "Отметить как «Готово»",

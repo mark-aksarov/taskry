@@ -97,12 +97,11 @@
     "title": "Team"
   },
   "UsersPage": {
-    "heading": "Team"
-  },
-  "UsersPageEmpty": {
-    "heading": "No Users yet",
-    "description": "Add a new user to start building your team",
-    "addButtonLabel": "New User"
+    "heading": "Team",
+    "emptySection": {
+      "heading": "No Users yet",
+      "description": "Add a new user to start building your team"
+    }
   },
   "TeamProfilePage": {
     "heading": "User detail"

@@ -32,12 +32,12 @@ export function CustomerItemActionMenuTrigger({
 }: CustomerItemActionMenuTriggerProps) {
   const t = useTranslations("customers.CustomerItemActionMenuTrigger");
 
-  // Deleting the customer
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-
   // Guest mode
   const { isGuest } = useCurrentUser();
   const [isGuestModeModalOpen, setIsGuestModeModalOpen] = useState(false);
+
+  // Deleting the customer
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
   // Modal state for editing the customer
   const { onModalOpenChange: onEditModalOpenChange } = useUpdateCustomer();

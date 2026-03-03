@@ -18,6 +18,8 @@ export async function deleteUser(
 
   const t = await getTranslations("actions");
 
+  await new Promise((resolve) => setTimeout(resolve, 3000));
+
   try {
     const parsedId = userId.parse(payload.id);
     await deleteUserService(parsedId);

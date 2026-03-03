@@ -2,7 +2,6 @@ import { UsersPage } from "./UsersPage";
 import UsersPageLoading from "./loading";
 import { fn, mocked } from "storybook/test";
 import UsersTemplate from "./UsersTemplate";
-import { UsersPageEmpty } from "./UsersPageEmpty";
 import { UserList } from "@/components/users/UserList";
 import { UserGrid } from "@/components/users/UserGrid";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
@@ -58,22 +57,10 @@ export const Default = {
         totalPages={3}
       />
     ),
-    createUser: () => ({ status: "success" }),
-    createPosition: () => ({ status: "success" }),
   },
 } satisfies Story;
 
 export const Loading = {
   args: { ...Default.args },
   render: () => <UsersPageLoading />,
-} satisfies Story;
-
-export const WithNoUsers = {
-  args: { ...Default.args },
-  render: () => (
-    <UsersPageEmpty
-      createUser={() => ({ status: "success" })}
-      createPosition={() => ({ status: "success" })}
-    />
-  ),
 } satisfies Story;

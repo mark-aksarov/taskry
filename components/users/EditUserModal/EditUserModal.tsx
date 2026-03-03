@@ -1,3 +1,5 @@
+"use client";
+
 import {
   FormBaseModal,
   FormBaseModalDialog,
@@ -5,22 +7,24 @@ import {
 } from "@/components/common/FormBaseModal";
 
 import { useTranslations } from "next-intl";
-import { ModalProps } from "@/components/ui/Modal";
 import { DialogHeader } from "@/components/ui/Dialog";
+import { useUpdateUser } from "../UpdateUserContext";
 
-interface EditUserModalProps
-  extends Pick<ModalProps, "isOpen" | "onOpenChange"> {
+interface EditUserModalProps {
   editUserFormContainer: React.ReactNode;
 }
 
-export function EditUserModal({
-  editUserFormContainer,
-  ...props
-}: EditUserModalProps) {
+export function EditUserModal({ editUserFormContainer }: EditUserModalProps) {
   const t = useTranslations("users.EditUserModal");
 
+  const { isModalOpen, onModalOpenChange } = useUpdateUser();
+
   return (
-    <FormBaseModal data-test="edit-user-modal" {...props}>
+    <FormBaseModal
+      data-test="edit-user-modal"
+      isOpen={isModalOpen}
+      onOpenChange={onModalOpenChange}
+    >
       <FormBaseModalDialog>
         <DialogHeader>{t("title")}</DialogHeader>
         <FormBaseModalDialogBody>

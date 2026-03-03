@@ -1,9 +1,9 @@
-import { useDeleteUserTransition } from "../DeleteUserTransitionContext";
-import { useUpdateUserTransition } from "../UpdateUserTransitionContext";
+import { useDeleteUser } from "../DeleteUserContext";
+import { useUpdateUser } from "../UpdateUserContext";
 
 export function useUserItemPending() {
-  const { isPending: isDeleteUserPending } = useDeleteUserTransition();
-  const { isPending: isUpdateUserPending } = useUpdateUserTransition();
+  const { isPending: isDeleteUserPending } = useDeleteUser();
+  const { isPending: isUpdateUserPending } = useUpdateUser();
 
   const isPending = isDeleteUserPending || isUpdateUserPending;
 

@@ -37,8 +37,7 @@ export const UserGridItem = memo(
     email,
     editUserFormContainer,
     userDetailContainer,
-    deleteUser,
-  }: UserItemProps) => {
+  }: Omit<UserItemProps, "deleteUser" | "updateUser">) => {
     const t = useTranslations("users.UserGridItem");
 
     const { isOwner, isGuest } = useCurrentUser();
@@ -67,7 +66,6 @@ export const UserGridItem = memo(
               userId={id}
               userFullName={fullName}
               className="-mr-2"
-              deleteUser={deleteUser}
             />
           )
         }
