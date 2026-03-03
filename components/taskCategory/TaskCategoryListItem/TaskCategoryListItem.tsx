@@ -12,11 +12,11 @@ import { useTranslations } from "next-intl";
 import { ActionFn, ActionState } from "@/lib/actions/types";
 import { SelectableItem } from "@/components/common/SelectableItem";
 import { TaskCategoryItemCheckbox } from "../TaskCategoryItemCheckbox";
+import { DeleteTaskCategoryProvider } from "../DeleteTaskCategoryContext";
+import { UpdateTaskCategoryProvider } from "../UpdateTaskCategoryContext";
 import { useSelectedItems } from "@/components/common/SelectedItemsContext";
 import { TaskCategoryListItemPendingOverlay } from "./TaskCategoryListItemPendingOverlay";
 import { TaskCategoryListItemActionMenuTrigger } from "./TaskCategoryListItemActionMenuTrigger";
-import { DeleteTaskCategoryTransitionProvider } from "../DeleteTaskCategoryTransitionContext";
-import { UpdateTaskCategoryTransitionProvider } from "../UpdateTaskCategoryTransitionContext";
 
 interface TaskCategoryListItemProps {
   id: number;
@@ -25,19 +25,23 @@ interface TaskCategoryListItemProps {
   deleteTaskCategory: ActionFn<ActionState, number[]>;
 }
 
-export function TaskCategoryListItem(props: TaskCategoryListItemProps) {
+export function TaskCategoryListItem({
+  updateTaskCategory,
+  deleteTaskCategory,
+  ...props
+}: TaskCategoryListItemProps) {
   const selected = useSelectedItems();
 
   return (
-    <UpdateTaskCategoryTransitionProvider>
-      <DeleteTaskCategoryTransitionProvider>
+    <UpdateTaskCategoryProvider updateTaskCategory={updateTaskCategory}>
+      <DeleteTaskCategoryProvider deleteTaskCategory={deleteTaskCategory}>
         <TaskCategoryListItemPendingOverlay taskCategoryId={props.id}>
           <SelectableItem {...selected} item={{ id: props.id }}>
             <TaskCategoryListItemInner {...props} />
           </SelectableItem>
         </TaskCategoryListItemPendingOverlay>
-      </DeleteTaskCategoryTransitionProvider>
-    </UpdateTaskCategoryTransitionProvider>
+      </DeleteTaskCategoryProvider>
+    </UpdateTaskCategoryProvider>
   );
 }
 
@@ -45,9 +49,10 @@ const TaskCategoryListItemInner = memo(
   ({
     id,
     name,
-    updateTaskCategory,
-    deleteTaskCategory,
-  }: TaskCategoryListItemProps) => {
+  }: Omit<
+    TaskCategoryListItemProps,
+    "updateTaskCategory" | "deleteTaskCategory"
+  >) => {
     const t = useTranslations("taskCategories.TaskCategoryListItem");
 
     return (
@@ -64,8 +69,6 @@ const TaskCategoryListItemInner = memo(
         <TaskCategoryListItemActionMenuTrigger
           taskCategoryId={id}
           taskCategoryName={name}
-          updateTaskCategory={updateTaskCategory}
-          deleteTaskCategory={deleteTaskCategory}
         />
       </ListItem>
     );

@@ -111,11 +111,11 @@
     "title": "All Project Categories"
   },
   "TaskCategoriesPage": {
-    "heading": "Task Categories"
-  },
-  "TaskCategoriesPageEmpty": {
-    "heading": "No task categories yet",
-    "description": "Create a new task category to better organize your tasks."
+    "heading": "Task Categories",
+    "emptySection": {
+      "heading": "No task categories yet",
+      "description": "Create a new task category to better organize your tasks."
+    }
   },
   "TaskCategoriesPageLoading": {
     "title": "All task Categories"

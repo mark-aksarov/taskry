@@ -30,6 +30,7 @@ export const Default = {
   args: {
     taskCategoryId: 1,
     taskCategoryName: "Task Category 1",
-    updateTaskCategory: () => ({ status: "success" }),
+    isOpen: true,
+    onOpenChange: () => {},
   },
 } satisfies Story;

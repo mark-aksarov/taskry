@@ -111,11 +111,11 @@
     "title": "Все категории проектов"
   },
   "TaskCategoriesPage": {
-    "heading": "Категории задач"
-  },
-  "TaskCategoriesPageEmpty": {
-    "heading": "Нет категорий задач",
-    "description": "Создайте новую категорию задачи, чтобы лучше организовать ваши задачи."
+    "heading": "Категории задач",
+    "emptySection": {
+      "heading": "Нет категорий задач",
+      "description": "Создайте новую категорию задачи, чтобы лучше организовать ваши задачи"
+    }
   },
   "TaskCategoriesPageLoading": {
     "title": "Все категории задач"

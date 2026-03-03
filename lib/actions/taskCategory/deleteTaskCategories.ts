@@ -20,6 +20,7 @@ export async function deleteTaskCategories(
   const t = await getTranslations("actions");
 
   let parsedIds: number[] = [];
+
   try {
     parsedIds = taskCategoryIds.parse(ids);
 

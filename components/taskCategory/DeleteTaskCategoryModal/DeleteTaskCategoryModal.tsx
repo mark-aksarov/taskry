@@ -9,44 +9,38 @@ import {
 } from "@/components/common/ConfirmModal";
 
 import { useTranslations } from "next-intl";
-import { ModalProps } from "@/components/ui/Modal";
 import { DialogHeading } from "@/components/ui/Dialog";
-import { ActionFn, ActionState } from "@/lib/actions/types";
-import { useDeleteEntityActionState } from "@/lib/hooks/useDeleteEntityActionState";
-import { useDeleteTaskCategoryTransition } from "../DeleteTaskCategoryTransitionContext";
+import { handleDeleteEntity } from "@/lib/utils/handleDeleteEntity";
+import { useDeleteTaskCategory } from "../DeleteTaskCategoryContext";
 import { useSelectedItems } from "@/components/common/SelectedItemsContext";
 
-interface DeleteTaskCategoryModalProps extends ModalProps {
+interface DeleteTaskCategoryModalProps {
   taskCategoryId: number;
   taskCategoryName: string;
-  deleteTaskCategory: ActionFn<ActionState, number[]>;
+  isOpen: boolean;
+  onOpenChange: (open: boolean) => void;
 }
 
 export function DeleteTaskCategoryModal({
   taskCategoryId,
   taskCategoryName,
-  deleteTaskCategory,
   isOpen,
   onOpenChange,
 }: DeleteTaskCategoryModalProps) {
   const t = useTranslations("taskCategories.DeleteTaskCategoryModal");
 
-  const { startTransition } = useDeleteTaskCategoryTransition();
-
-  const [, action] = useDeleteEntityActionState({
-    deleteEntity: deleteTaskCategory,
-    successMessage: t("successMessage"),
-  });
+  const { action } = useDeleteTaskCategory();
 
   const { remove: removeSelected } = useSelectedItems();
 
   function handleDelete() {
-    //Remove the company from the selection to prevent access to it
-    removeSelected(taskCategoryId);
-
-    //close modal before deleting
-    onOpenChange?.(false);
-    startTransition(() => action([taskCategoryId]));
+    handleDeleteEntity(
+      removeSelected,
+      action,
+      [taskCategoryId],
+      taskCategoryId,
+      onOpenChange,
+    );
   }
 
   return (

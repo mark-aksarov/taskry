@@ -1,3 +1,5 @@
+"use client";
+
 import {
   FormBaseModal,
   FormBaseModalDialog,
@@ -5,28 +7,25 @@ import {
 } from "@/components/common/FormBaseModal";
 
 import { useTranslations } from "next-intl";
-import { ModalProps } from "@/components/ui/Modal";
 import { DialogHeader } from "@/components/ui/Dialog";
-import { ActionFn, ActionState } from "@/lib/actions/types";
 import { NewTaskCategoryForm } from "../NewTaskCategoryForm";
+import { useCreateTaskCategory } from "../CreateTaskCategoryContext";
 
-interface NewTaskCategoryModalProps
-  extends Pick<ModalProps, "isOpen" | "onOpenChange"> {
-  createTaskCategory: ActionFn<ActionState, FormData>;
-}
-
-export function NewTaskCategoryModal({
-  createTaskCategory,
-  ...props
-}: NewTaskCategoryModalProps) {
+export function NewTaskCategoryModal() {
   const t = useTranslations("taskCategories.NewTaskCategoryModal");
 
+  const { isModalOpen, onModalOpenChange } = useCreateTaskCategory();
+
   return (
-    <FormBaseModal className="md:w-[350px]" {...props}>
+    <FormBaseModal
+      className="md:w-[350px]"
+      isOpen={isModalOpen}
+      onOpenChange={onModalOpenChange}
+    >
       <FormBaseModalDialog>
         <DialogHeader>{t("title")}</DialogHeader>
         <FormBaseModalDialogBody>
-          <NewTaskCategoryForm createTaskCategory={createTaskCategory} />
+          <NewTaskCategoryForm />
         </FormBaseModalDialogBody>
       </FormBaseModalDialog>
     </FormBaseModal>

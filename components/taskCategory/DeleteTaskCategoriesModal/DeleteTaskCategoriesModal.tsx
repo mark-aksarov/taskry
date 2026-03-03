@@ -9,45 +9,36 @@ import {
 } from "@/components/common/ConfirmModal";
 
 import { useTranslations } from "next-intl";
-import { ModalProps } from "@/components/ui/Modal";
 import { DialogHeading } from "@/components/ui/Dialog";
-import { ActionFn, ActionState } from "@/lib/actions/types";
+import { handleDeleteEntities } from "@/lib/utils/handleDeleteEntities";
 import { useDeleteTaskCategories } from "../DeleteTaskCategoriesContext";
 import { useSelectedItems } from "@/components/common/SelectedItemsContext";
-import { useDeleteEntityActionState } from "@/lib/hooks/useDeleteEntityActionState";
 
-interface DeleteTaskCategoriesModalProps extends ModalProps {
-  taskCategoryIds: number[];
-  deleteTaskCategories: ActionFn<ActionState, number[]>;
+interface DeleteTaskCategoriesModalProps {
+  isOpen: boolean;
+  onOpenChange: (open: boolean) => void;
 }
 
 export function DeleteTaskCategoriesModal({
-  taskCategoryIds,
   isOpen,
   onOpenChange,
-  deleteTaskCategories,
 }: DeleteTaskCategoriesModalProps) {
   const t = useTranslations("taskCategories.DeleteTaskCategoriesModal");
 
-  const { startTransition, setTaskCategoryIds: setDeletedTaskCategoryIds } =
+  const selected = useSelectedItems();
+  const { action, setIds: setDeleteProjectCategoryIds } =
     useDeleteTaskCategories();
-
-  const [, action] = useDeleteEntityActionState({
-    deleteEntity: deleteTaskCategories,
-    successMessage: t("successMessage"),
-  });
-
   const { clear: clearSelectedItems } = useSelectedItems();
 
   function handleDelete() {
-    onOpenChange?.(false);
-
-    // Clear selected items
-    clearSelectedItems();
-
-    // Used to show an overlay on the selected task categories
-    setDeletedTaskCategoryIds(taskCategoryIds);
-    startTransition(() => action(taskCategoryIds));
+    handleDeleteEntities(
+      selected.ids,
+      action,
+      selected.ids,
+      setDeleteProjectCategoryIds,
+      clearSelectedItems,
+      onOpenChange,
+    );
   }
 
   return (
@@ -60,7 +51,7 @@ export function DeleteTaskCategoriesModal({
       <ConfirmModalText>
         {t.rich("text", {
           strong: (chunks) => <strong>{chunks}</strong>,
-          count: taskCategoryIds.length,
+          count: selected.ids.length,
         })}
       </ConfirmModalText>
       <ConfirmModalActions>

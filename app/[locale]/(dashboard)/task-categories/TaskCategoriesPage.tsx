@@ -7,62 +7,68 @@ import {
 
 import { useTranslations } from "next-intl";
 import { PageGrid } from "@/components/common/PageGrid";
+import { BackButton } from "@/components/common/BackButton";
 import { ViewModeProvider } from "@/components/common/ViewMode";
 import { PageContainer } from "@/components/common/PageContainer";
-import { BackButton } from "@/components/common/BackButton";
-import { TaskCategoryToolbarCreateNewModalTrigger } from "@/components/taskCategory/TaskCategoryToolbarCreateNewModalTrigger";
-import { ActionFn, ActionState } from "@/lib/actions/types";
+import { EmptyPageContainer } from "@/components/common/EmptyPageContainer";
+import { NewTaskCategoryModal } from "@/components/taskCategory/NewTaskCategoryModal";
 import { TaskCategoryToolbarActionsMenuTrigger } from "@/components/taskCategory/TaskCategoryToolbarActionsMenuTrigger";
+import { TaskCategoryToolbarCreateNewModalTrigger } from "@/components/taskCategory/TaskCategoryToolbarCreateNewModalTrigger";
 
 interface TaskCategoriesPageProps {
+  totalCount: number;
   taskCategoriesContainer: React.ReactNode;
-  createTaskCategory: ActionFn<ActionState, FormData>;
-  deleteTaskCategories: ActionFn<ActionState, number[]>;
 }
 
 export function TaskCategoriesPage({
+  totalCount,
   taskCategoriesContainer,
-  createTaskCategory,
-  deleteTaskCategories,
 }: TaskCategoriesPageProps) {
   const t = useTranslations("app.TaskCategoriesPage");
 
-  const taskCategoryToolbarCreateNewModalTrigger = (
-    <TaskCategoryToolbarCreateNewModalTrigger
-      createTaskCategory={createTaskCategory}
-    />
-  );
-
-  const taskCategoryToolbarActionsMenuTrigger = (
-    <TaskCategoryToolbarActionsMenuTrigger
-      deleteTaskCategories={deleteTaskCategories}
-    />
-  );
+  if (totalCount === 0) {
+    return (
+      <>
+        <EmptyPageContainer
+          heading={t("emptySection.heading")}
+          description={t("emptySection.description")}
+          toolbarCreateNewMenuTrigger={
+            <TaskCategoryToolbarCreateNewModalTrigger />
+          }
+        />
+        <NewTaskCategoryModal />
+      </>
+    );
+  }
 
   return (
-    <PageContainer>
-      <PageGrid>
-        <ViewModeProvider>
-          <ToolbarDesktop>
-            {taskCategoryToolbarActionsMenuTrigger}
-            {taskCategoryToolbarCreateNewModalTrigger}
-          </ToolbarDesktop>
+    <>
+      <PageContainer>
+        <PageGrid>
+          <ViewModeProvider>
+            <ToolbarDesktop>
+              <TaskCategoryToolbarActionsMenuTrigger />
+              <TaskCategoryToolbarCreateNewModalTrigger />
+            </ToolbarDesktop>
 
-          <ToolbarMobileTop>
-            <BackButton href="/tasks" />
-            <ToolbarMobileHeading>{t("heading")}</ToolbarMobileHeading>
-            {taskCategoryToolbarActionsMenuTrigger}
-          </ToolbarMobileTop>
+            <ToolbarMobileTop>
+              <BackButton href="/tasks" />
+              <ToolbarMobileHeading>{t("heading")}</ToolbarMobileHeading>
+              <TaskCategoryToolbarActionsMenuTrigger />
+            </ToolbarMobileTop>
 
-          <ToolbarMobileBottom>
-            <div className="ml-auto">
-              {taskCategoryToolbarCreateNewModalTrigger}
-            </div>
-          </ToolbarMobileBottom>
+            <ToolbarMobileBottom>
+              <div className="ml-auto">
+                <TaskCategoryToolbarCreateNewModalTrigger />
+              </div>
+            </ToolbarMobileBottom>
 
-          {taskCategoriesContainer}
-        </ViewModeProvider>
-      </PageGrid>
-    </PageContainer>
+            {taskCategoriesContainer}
+          </ViewModeProvider>
+        </PageGrid>
+      </PageContainer>
+
+      <NewTaskCategoryModal />
+    </>
   );
 }

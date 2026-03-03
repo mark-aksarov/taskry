@@ -7,33 +7,24 @@ import {
   FormBaseSubmitButton,
 } from "@/components/common/FormBase";
 
+import { startTransition } from "react";
 import { useTranslations } from "next-intl";
-import { ActionFn, ActionState } from "@/lib/actions/types";
-import { handleActionSubmit } from "@/lib/utils/handleActionSubmit";
+import { useUpdateTaskCategory } from "./UpdateTaskCategoryContext";
 import { FormErrorBanner } from "@/components/common/FormErrorBanner";
 import { TaskCategoryNameTextField } from "./TaskCategoryNameTextField";
-import { useUpdateTaskCategoryTransition } from "./UpdateTaskCategoryTransitionContext";
-import { useUpdateEntityActionState } from "@/lib/hooks/useUpdateEntityActionState";
 
 interface EditTaskCategoryFormProps {
   taskCategoryId: number;
   nameDefaultValue: string;
-  updateTaskCategory: ActionFn<ActionState, FormData>;
 }
 
 export function EditTaskCategoryForm({
   taskCategoryId,
   nameDefaultValue,
-  updateTaskCategory,
 }: EditTaskCategoryFormProps) {
   const t = useTranslations("taskCategories.EditTaskCategoryForm");
 
-  const { startTransition } = useUpdateTaskCategoryTransition();
-
-  const [state, action, isPending] = useUpdateEntityActionState({
-    updateEntity: updateTaskCategory,
-    successMessage: t("successMessage"),
-  });
+  const { state, isPending, action } = useUpdateTaskCategory();
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();

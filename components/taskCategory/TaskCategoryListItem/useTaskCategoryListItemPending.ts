@@ -1,13 +1,11 @@
 import { useDeleteTaskCategories } from "../DeleteTaskCategoriesContext";
-import { useDeleteTaskCategoryTransition } from "../DeleteTaskCategoryTransitionContext";
-import { useUpdateTaskCategoryTransition } from "../UpdateTaskCategoryTransitionContext";
+import { useDeleteTaskCategory } from "../DeleteTaskCategoryContext";
+import { useUpdateTaskCategory } from "../UpdateTaskCategoryContext";
 
 export function useTaskCategoryListItemPending(taskCategoryId: number) {
-  const { isPending: isDeleteTaskCategoryPending } =
-    useDeleteTaskCategoryTransition();
-  const { isPending: isUpdateTaskCategoryPending } =
-    useUpdateTaskCategoryTransition();
-  const { isPending: isDeleteTaskCategoriesPending, taskCategoryIds } =
+  const { isPending: isDeleteTaskCategoryPending } = useDeleteTaskCategory();
+  const { isPending: isUpdateTaskCategoryPending } = useUpdateTaskCategory();
+  const { isPending: isDeleteTaskCategoriesPending, ids: taskCategoryIds } =
     useDeleteTaskCategories();
 
   const isPending =

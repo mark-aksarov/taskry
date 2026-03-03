@@ -5,7 +5,6 @@ import { usePathname, useRouter } from "next/navigation";
 import { TaskCategoriesPage } from "./TaskCategoriesPage";
 import { PageDecorator } from "@/.storybook/PageDecorator";
 import TaskCategoriesTemplate from "./TaskCategoriesTemplate";
-import { TaskCategoriesPageEmpty } from "./TaskCategoriesPageEmpty";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { AppHeaderStory } from "@/components/layout/AppHeader/__stories__";
 import { TaskCategoryList } from "@/components/taskCategory/TaskCategoryList";
@@ -39,11 +38,10 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
+    totalCount: 10,
     taskCategoriesContainer: (
       <TaskCategoryList {...TaskCategoryListStory.args} />
     ),
-    createTaskCategory: () => ({ status: "success" }),
-    deleteTaskCategories: () => ({ status: "success" }),
   },
 } satisfies Story;
 
@@ -53,10 +51,5 @@ export const Loading = {
 } satisfies Story;
 
 export const WithNoTaskCategories = {
-  args: { ...Default.args },
-  render: () => (
-    <TaskCategoriesPageEmpty
-      createTaskCategory={() => ({ status: "success" })}
-    />
-  ),
+  args: { ...Default.args, totalCount: 0 },
 } satisfies Story;

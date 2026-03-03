@@ -1,29 +1,17 @@
 "use client";
 
-import {
-  ToolbarMenuTrigger,
-  ToolbarActionsButtonMobile,
-  ToolbarActionsButtonDesktop,
-} from "../common/Toolbar";
-
 import { useState } from "react";
 import { Trash } from "lucide-react";
 import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
 import { DialogHeader } from "../ui/Dialog";
 import { GuestModeModal } from "../common/GuestModeModal";
-import { ActionFn, ActionState } from "@/lib/actions/types";
+import { useCurrentUser } from "../common/CurrentUserContext";
+import { ToolbarActionsMenuTrigger } from "../common/Toolbar";
 import { DeleteTaskCategoriesModal } from "./DeleteTaskCategoriesModal";
 import { useSelectedItems } from "@/components/common/SelectedItemsContext";
-import { useCurrentUser } from "../common/CurrentUserContext";
 
-interface TaskCategoryToolbarActionsMenuTriggerProps {
-  deleteTaskCategories: ActionFn<ActionState, number[]>;
-}
-
-export const TaskCategoryToolbarActionsMenuTrigger = ({
-  deleteTaskCategories,
-}: TaskCategoryToolbarActionsMenuTriggerProps) => {
+export const TaskCategoryToolbarActionsMenuTrigger = () => {
   const t = useTranslations(
     "taskCategories.TaskCategoryToolbarActionsMenuTrigger",
   );
@@ -50,39 +38,24 @@ export const TaskCategoryToolbarActionsMenuTrigger = ({
     }
   };
 
-  const isDisabled = selected.ids.length === 0;
-
   return (
     <>
-      <ToolbarMenuTrigger
+      <ToolbarActionsMenuTrigger
         onAction={handleAction}
         renderDialogHeader={() => (
           <DialogHeader>{t("dialogHeading")}</DialogHeader>
         )}
-        renderButton={() => (
-          <>
-            <ToolbarActionsButtonMobile
-              data-test="task-category-toolbar-actions-button-mobile"
-              isDisabled={isDisabled}
-            />
-            <ToolbarActionsButtonDesktop
-              data-test="task-category-toolbar-actions-button-desktop"
-              isDisabled={isDisabled}
-            />
-          </>
-        )}
+        selectedIds={selected.ids}
       >
         <Item textValue={t("delete")} key="delete">
           <Trash size={16} strokeWidth={1.5} absoluteStrokeWidth />
           {t("delete")}
         </Item>
-      </ToolbarMenuTrigger>
+      </ToolbarActionsMenuTrigger>
 
       <DeleteTaskCategoriesModal
         isOpen={isDeleteModalOpen}
         onOpenChange={setIsDeleteModalOpen}
-        taskCategoryIds={selected.ids}
-        deleteTaskCategories={deleteTaskCategories}
       />
 
       {/* Guest mode modal */}

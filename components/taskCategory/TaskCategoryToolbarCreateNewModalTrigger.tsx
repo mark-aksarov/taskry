@@ -2,37 +2,38 @@
 
 import { useState } from "react";
 import { useTranslations } from "next-intl";
-import { ActionFn, ActionState } from "@/lib/actions/types";
-import { NewTaskCategoryModal } from "./NewTaskCategoryModal";
+import { useCurrentUser } from "../common/CurrentUserContext";
+import { useCreateTaskCategory } from "./CreateTaskCategoryContext";
 import { GuestModeModal } from "@/components/common/GuestModeModal";
 import { ToolbarCreateNewModalTrigger } from "@/components/common/Toolbar";
-import { useCurrentUser } from "../common/CurrentUserContext";
 
-interface TaskCategoryToolbarCreateNewModalTriggerProps {
-  createTaskCategory: ActionFn<ActionState, FormData>;
-}
-
-export function TaskCategoryToolbarCreateNewModalTrigger({
-  createTaskCategory,
-}: TaskCategoryToolbarCreateNewModalTriggerProps) {
+export function TaskCategoryToolbarCreateNewModalTrigger() {
   const t = useTranslations(
     "taskCategories.TaskCategoryToolbarCreateNewModalTrigger",
   );
 
-  // Create new task category modal
-  const [isTaskCategoryModalOpen, setIsTaskCategoryModalOpen] = useState(false);
-
-  // Guest mode
+  // If the user is a guest, show the guest mode modal instead of allowing creation
   const { isGuest } = useCurrentUser();
   const [isGuestModeModalOpen, setIsGuestModeModalOpen] = useState(false);
 
+  // Create task category action and modal states
+  const {
+    isPending: isCreateTaskCategoryPending,
+    onModalOpenChange: onTaskCategoryModalOpenChange,
+  } = useCreateTaskCategory();
+
+  /**
+   * Handles menu actions for creating a task category
+   * - If user is a guest, show guest modal
+   * - Otherwise, open create task category modal
+   */
   const handlePress = () => {
     if (isGuest) {
       setIsGuestModeModalOpen(true);
       return;
     }
 
-    setIsTaskCategoryModalOpen(true);
+    onTaskCategoryModalOpenChange(true);
   };
 
   return (
@@ -41,12 +42,10 @@ export function TaskCategoryToolbarCreateNewModalTrigger({
         data-test="task-category-toolbar-create-new-modal-trigger"
         label={t("label")}
         onPress={handlePress}
+        // Block creating another task category until the current request completes
+        isDisabled={isCreateTaskCategoryPending}
       />
-      <NewTaskCategoryModal
-        isOpen={isTaskCategoryModalOpen}
-        onOpenChange={setIsTaskCategoryModalOpen}
-        createTaskCategory={createTaskCategory}
-      />
+
       <GuestModeModal
         isOpen={isGuestModeModalOpen}
         onOpenChange={setIsGuestModeModalOpen}

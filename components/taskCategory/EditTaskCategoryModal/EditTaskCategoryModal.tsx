@@ -5,35 +5,36 @@ import {
 } from "@/components/common/FormBaseModal";
 
 import { useTranslations } from "next-intl";
-import { ModalProps } from "@/components/ui/Modal";
 import { DialogHeader } from "@/components/ui/Dialog";
 import { EditTaskCategoryForm } from "../EditTaskCategoryForm";
-import { ActionFn, ActionState } from "@/lib/actions/types";
 
-interface EditTaskCategoryModalProps
-  extends Pick<ModalProps, "isOpen" | "onOpenChange"> {
+interface EditTaskCategoryModalProps {
   taskCategoryId: number;
   taskCategoryName: string;
-  updateTaskCategory: ActionFn<ActionState, FormData>;
+  isOpen: boolean;
+  onOpenChange: (open: boolean) => void;
 }
 
 export function EditTaskCategoryModal({
   taskCategoryId,
   taskCategoryName,
-  updateTaskCategory,
-  ...props
+  isOpen,
+  onOpenChange,
 }: EditTaskCategoryModalProps) {
   const t = useTranslations("taskCategories.EditTaskCategoryModal");
 
   return (
-    <FormBaseModal className="md:w-[350px]" {...props}>
+    <FormBaseModal
+      className="md:w-[350px]"
+      isOpen={isOpen}
+      onOpenChange={onOpenChange}
+    >
       <FormBaseModalDialog>
         <DialogHeader>{t("title")}</DialogHeader>
         <FormBaseModalDialogBody>
           <EditTaskCategoryForm
             taskCategoryId={taskCategoryId}
             nameDefaultValue={taskCategoryName}
-            updateTaskCategory={updateTaskCategory}
           />
         </FormBaseModalDialogBody>
       </FormBaseModalDialog>

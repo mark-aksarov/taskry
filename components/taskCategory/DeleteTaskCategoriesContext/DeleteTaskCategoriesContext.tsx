@@ -1,44 +1,25 @@
 "use client";
 
 import {
-  useMemo,
-  useContext,
-  createContext,
-  useTransition,
-  TransitionStartFunction,
-  useState,
-} from "react";
+  useDeleteEntitiesState,
+  DeleteEntitiesContextType,
+} from "@/lib/hooks/useDeleteEntitiesState";
 
-interface DeleteTaskCategoriesContextType {
-  isPending: boolean;
-  startTransition: TransitionStartFunction;
-  taskCategoryIds: number[];
-  setTaskCategoryIds: (taskCategoryIds: number[]) => void;
-}
+import { useContext, createContext } from "react";
+import { ActionFn, ActionState } from "@/lib/actions/types";
 
-const DeleteTaskCategoriesContext =
-  createContext<DeleteTaskCategoriesContextType | null>(null);
-
-interface DeleteTaskCategoriesProviderProps {
-  children: React.ReactNode;
-}
+const DeleteTaskCategoriesContext = createContext<DeleteEntitiesContextType<
+  number[]
+> | null>(null);
 
 export function DeleteTaskCategoriesProvider({
+  deleteTaskCategories,
   children,
-}: DeleteTaskCategoriesProviderProps) {
-  const [isPending, startTransition] = useTransition();
-  const [taskCategoryIds, setTaskCategoryIds] = useState<number[]>([]);
-
-  const contextValue = useMemo(
-    () => ({
-      isPending,
-      startTransition,
-      taskCategoryIds,
-      setTaskCategoryIds,
-    }),
-    [isPending, taskCategoryIds],
-  );
-
+}: {
+  deleteTaskCategories: ActionFn<ActionState, number[]>;
+  children: React.ReactNode;
+}) {
+  const contextValue = useDeleteEntitiesState(deleteTaskCategories);
   return (
     <DeleteTaskCategoriesContext.Provider value={contextValue}>
       {children}
@@ -48,10 +29,9 @@ export function DeleteTaskCategoriesProvider({
 
 export function useDeleteTaskCategories() {
   const context = useContext(DeleteTaskCategoriesContext);
-  if (!context) {
+  if (!context)
     throw new Error(
       "useDeleteTaskCategories must be used within a DeleteTaskCategoriesProvider",
     );
-  }
   return context;
 }
