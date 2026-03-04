@@ -23,7 +23,7 @@ export default function ProjectDetailLoading({
 }: {
   appHeaderProps: AppHeaderContainerProps;
 }) {
-  const t = useTranslations("app.ProfilePage");
+  const t = useTranslations("app.ProjectDetailPage");
 
   return (
     <>

@@ -23,7 +23,7 @@ export default function TaskDetailLoading({
 }: {
   appHeaderProps: AppHeaderContainerProps;
 }) {
-  const t = useTranslations("app.ProfilePage");
+  const t = useTranslations("app.TaskDetailPage");
 
   return (
     <>
