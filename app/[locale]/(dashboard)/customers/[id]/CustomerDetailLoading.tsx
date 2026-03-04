@@ -46,10 +46,10 @@ export default function CustomerDetailLoading({
               <ToolbarMobileHeading>{t("heading")}</ToolbarMobileHeading>
             </ToolbarMobileTop>
 
-            <div className="flex flex-col px-1.5">
+            <div className="flex flex-col">
               <DetailHeaderSkeleton />
             </div>
-            <Card className="flex flex-col px-1.5">
+            <Card className="flex flex-col p-1.5">
               <CustomerDetailActionsSkeleton />
             </Card>
             <Card className="flex flex-col">

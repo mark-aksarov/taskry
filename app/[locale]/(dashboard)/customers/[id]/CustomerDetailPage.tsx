@@ -51,12 +51,8 @@ export function CustomerDetailPage({
               <ToolbarMobileHeading>{t("heading")}</ToolbarMobileHeading>
             </ToolbarMobileTop>
 
-            <div className="flex flex-col px-1.5">
-              {customerHeaderContainer}
-            </div>
-            <Card className="flex flex-col px-1.5">
-              {customerDetailActions}
-            </Card>
+            <div className="flex flex-col">{customerHeaderContainer}</div>
+            <Card className="flex flex-col p-1.5">{customerDetailActions}</Card>
             <Card className="flex flex-col">{customerDetailContainer}</Card>
           </PageGrid>
         </PageContainer>
