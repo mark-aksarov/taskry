@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect } from "react";
-import { useTranslations } from "next-intl";
 import ErrorPageLayout from "@/components/layout/ErrorPageLayout";
 
 export default function Error({
@@ -11,11 +10,9 @@ export default function Error({
   error: Error & { digest?: string };
   reset: () => void;
 }) {
-  const t = useTranslations("app.DashboardErrorPage");
-
   useEffect(() => {
     console.error(error);
   }, [error]);
 
-  return <ErrorPageLayout />;
+  return <ErrorPageLayout reset={reset} />;
 }

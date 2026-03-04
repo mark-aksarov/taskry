@@ -6,8 +6,9 @@ import {
 
 import { useTranslations } from "next-intl";
 import { PageContainer } from "@/components/common/PageContainer";
+import { Button } from "../ui/Button";
 
-export default function ErrorPageLayout() {
+export default function ErrorPageLayout({ reset }: { reset: () => void }) {
   const t = useTranslations("app.DashboardErrorPage");
 
   return (
@@ -15,6 +16,12 @@ export default function ErrorPageLayout() {
       <EmptySection className="max-w-[500px]">
         <EmptySectionHeading>{t("heading")}</EmptySectionHeading>
         <EmptySectionDescription>{t("description")}</EmptySectionDescription>
+        <Button
+          variant="outlined"
+          label={t("resetButtonLabel")}
+          size="medium"
+          onPress={reset}
+        />
       </EmptySection>
     </PageContainer>
   );
