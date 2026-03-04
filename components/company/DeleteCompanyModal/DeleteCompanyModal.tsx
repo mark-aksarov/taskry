@@ -8,10 +8,10 @@ import {
   ConfirmModalConfirmButton,
 } from "@/components/common/ConfirmModal";
 
+import { startTransition } from "react";
 import { useTranslations } from "next-intl";
 import { DialogHeading } from "@/components/ui/Dialog";
 import { useDeleteCompany } from "../DeleteCompanyContext";
-import { handleDeleteEntity } from "@/lib/utils/handleDeleteEntity";
 import { useSelectedItems } from "@/components/common/SelectedItemsContext";
 
 interface DeleteCompanyModalProps {
@@ -34,13 +34,13 @@ export function DeleteCompanyModal({
   const { remove: removeSelected } = useSelectedItems();
 
   function handleDelete() {
-    handleDeleteEntity(
-      removeSelected,
-      action,
-      [companyId],
-      companyId,
-      onOpenChange,
-    );
+    //Remove the entity from the selection to prevent access to it
+    removeSelected(companyId);
+
+    //close modal before deleting
+    onOpenChange(false);
+
+    startTransition(() => action(companyId));
   }
 
   return (

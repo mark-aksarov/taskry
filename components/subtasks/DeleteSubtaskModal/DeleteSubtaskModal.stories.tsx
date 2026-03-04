@@ -28,7 +28,7 @@ export const Default = {
   args: {
     subtaskId: 1,
     subtaskText: "Project Manager",
+    isOpen: true,
     onOpenChange: () => {},
-    deleteSubtask: () => ({ status: "success" }),
   },
 } satisfies Story;

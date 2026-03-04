@@ -1,43 +1,31 @@
 "use client";
 
 import {
-  useMemo,
-  useState,
-  useContext,
-  createContext,
-  useTransition,
-  TransitionStartFunction,
-} from "react";
+  UpdateEntityStatusesContextType,
+  useUpdateEntityStatusesContextValue,
+} from "@/lib/hooks/useUpdateEntityStatusesContextValue";
 
-interface UpdateTaskStatusesContextType {
-  isPending: boolean;
-  startTransition: TransitionStartFunction;
-  taskIds: number[];
-  setTaskIds: (taskIds: number[]) => void;
-}
+import {
+  ActionFn,
+  ActionState,
+  UpdateTaskStatusesPayload,
+} from "@/lib/actions/types";
+
+import { useContext, createContext } from "react";
 
 const UpdateTaskStatusesContext =
-  createContext<UpdateTaskStatusesContextType | null>(null);
+  createContext<UpdateEntityStatusesContextType | null>(null);
 
 interface UpdateTaskStatusesProviderProps {
+  updateTaskStatuses: ActionFn<ActionState, UpdateTaskStatusesPayload>;
   children: React.ReactNode;
 }
 
 export function UpdateTaskStatusesProvider({
+  updateTaskStatuses,
   children,
 }: UpdateTaskStatusesProviderProps) {
-  const [isPending, startTransition] = useTransition();
-  const [taskIds, setTaskIds] = useState<number[]>([]);
-
-  const contextValue = useMemo(
-    () => ({
-      isPending,
-      startTransition,
-      taskIds,
-      setTaskIds,
-    }),
-    [isPending, taskIds],
-  );
+  const contextValue = useUpdateEntityStatusesContextValue(updateTaskStatuses);
 
   return (
     <UpdateTaskStatusesContext.Provider value={contextValue}>

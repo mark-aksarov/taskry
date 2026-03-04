@@ -1,14 +1,14 @@
 "use client";
 
 import {
-  useUpdateEntityStatusState,
   UpdateEntityStatusContextType,
-} from "@/lib/hooks/useUpdateEntityStatusState";
+  useUpdateEntityStatusContextValue,
+} from "@/lib/hooks/useUpdateEntityStatusContextValue";
 
 import {
   ActionFn,
   ActionState,
-  UpdateProjectStatusesPayload,
+  UpdateProjectStatusPayload,
 } from "@/lib/actions/types";
 
 import { useContext, createContext } from "react";
@@ -17,7 +17,7 @@ const UpdateProjectStatusContext =
   createContext<UpdateEntityStatusContextType | null>(null);
 
 interface UpdateProjectStatusProviderProps {
-  updateProjectStatus: ActionFn<ActionState, UpdateProjectStatusesPayload>;
+  updateProjectStatus: ActionFn<ActionState, UpdateProjectStatusPayload>;
   children: React.ReactNode;
 }
 
@@ -25,7 +25,7 @@ export function UpdateProjectStatusProvider({
   updateProjectStatus,
   children,
 }: UpdateProjectStatusProviderProps) {
-  const contextValue = useUpdateEntityStatusState(updateProjectStatus);
+  const contextValue = useUpdateEntityStatusContextValue(updateProjectStatus);
 
   return (
     <UpdateProjectStatusContext.Provider value={contextValue}>

@@ -35,12 +35,7 @@ export const Default = {
   args: {
     taskId: 1,
     taskDetailContainer: (
-      <TaskDetail
-        {...task}
-        subtasksList={getSubtasksList()}
-        mutate={() => {}}
-        createSubtask={() => ({ status: "success" })}
-      />
+      <TaskDetail {...task} subtasksList={getSubtasksList()} />
     ),
   },
 } satisfies Story;
@@ -62,8 +57,6 @@ export const WithoutOptionalTaskData = {
         status={task.status}
         deadline={task.deadline}
         project={task.project}
-        mutate={() => {}}
-        createSubtask={() => ({ status: "success" })}
       />
     ),
   },

@@ -6,7 +6,6 @@ import { EditTaskForm } from "./EditTaskForm";
 import { TaskFormSkeleton } from "./TaskFormSkeleton";
 import { CalendarDate } from "@internationalized/date";
 import { UserSummaryDTO } from "@/lib/data/user/user.dto";
-import { updateTask } from "@/lib/actions/task/updateTask";
 import { TaskFormDataDTO } from "@/lib/data/task/task.dto";
 import { ProjectSummaryDTO } from "@/lib/data/project/project.dto";
 import { TaskCategorySummaryDTO } from "@/lib/data/taskCategory/taskCategory.dto";
@@ -37,7 +36,7 @@ function EditTaskFormContainerInner({ taskId }: EditTaskFormContainerProps) {
     suspense: true,
   });
 
-  const { data: task, mutate } = useSWR<TaskFormDataDTO>(
+  const { data: task } = useSWR<TaskFormDataDTO>(
     `/api/tasks/${taskId}?view=edit`,
     {
       suspense: true,
@@ -72,8 +71,6 @@ function EditTaskFormContainerInner({ taskId }: EditTaskFormContainerProps) {
       taskCategorySelectItems={categories}
       taskProjectSelectItems={projects}
       taskAssigneeSelectItems={users}
-      updateTask={updateTask}
-      mutate={mutate}
     />
   );
 }

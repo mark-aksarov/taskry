@@ -8,10 +8,10 @@ import {
   ConfirmModalConfirmButton,
 } from "@/components/common/ConfirmModal";
 
+import { startTransition } from "react";
 import { useTranslations } from "next-intl";
 import { DialogHeading } from "@/components/ui/Dialog";
 import { useDeletePositions } from "../DeletePositionsContext";
-import { handleDeleteEntities } from "@/lib/utils/handleDeleteEntities";
 import { useSelectedItems } from "@/components/common/SelectedItemsContext";
 
 interface DeletePositionsModalProps {
@@ -29,14 +29,23 @@ export function DeletePositionsModal({
   const { action, setIds: setDeletePositionIds } = useDeletePositions();
 
   function handleDelete() {
-    handleDeleteEntities(
-      selectedIds,
-      action,
-      selectedIds,
-      setDeletePositionIds,
-      clearSelectedItems,
-      onOpenChange,
-    );
+    // Close modal
+    onOpenChange(false);
+
+    // Highlight currently selected entities before deletion.
+    // Note: selectedIds may change if the user updates selection.
+    setDeletePositionIds(selectedIds);
+
+    // Clear selected items after the modal close animation (150ms).
+    // This prevents the modal text from jumping due to deleted items.
+    setTimeout(() => {
+      clearSelectedItems();
+    }, 150);
+
+    // Trigger the deletion
+    startTransition(() => {
+      action(selectedIds);
+    });
   }
 
   return (

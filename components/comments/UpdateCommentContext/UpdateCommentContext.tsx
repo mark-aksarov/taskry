@@ -1,25 +1,17 @@
 "use client";
 
-import { ActionFn, ActionState } from "@/lib/actions/types";
-import { useActionErrorToast } from "@/lib/hooks/useActionErrorToast";
+import { useToastOnActionError } from "@/lib/hooks/useToastOnActionError";
 import { useContext, createContext, useActionState, useMemo } from "react";
+import { ActionContextType, ActionFn, ActionState } from "@/lib/actions/types";
 import { useRefreshCommentsOnActionSuccess } from "@/lib/hooks/useRefreshCommentsOnActionSuccess";
 import { useCommentFormResetOnActionSuccess } from "@/lib/hooks/useCommentFormResetOnActionSuccess";
 import { useClearEditCommentIdOnActionSuccess } from "@/lib/hooks/useClearEditCommentIdOnActionSuccess";
 
-export const initialState: ActionState = {
+const initialState: ActionState = {
   status: null,
 };
 
-export interface UpdateCommentContextType {
-  state: ActionState;
-  action: (payload: FormData) => void;
-  isPending: boolean;
-}
-
-const UpdateCommentContext = createContext<UpdateCommentContextType | null>(
-  null,
-);
+const UpdateCommentContext = createContext<ActionContextType | null>(null);
 
 interface UpdateCommentProviderProps {
   updateComment: ActionFn<ActionState, FormData>;
@@ -35,7 +27,7 @@ export function UpdateCommentProvider({
     initialState,
   );
 
-  useActionErrorToast(state);
+  useToastOnActionError(state);
   useRefreshCommentsOnActionSuccess(state);
   useCommentFormResetOnActionSuccess(state);
   useClearEditCommentIdOnActionSuccess(state);

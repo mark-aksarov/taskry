@@ -1,11 +1,10 @@
 "use server";
 
 import z from "zod";
+import { ActionState } from "../types";
 import { revalidatePath } from "next/cache";
-import { redirect } from "@/i18n/navigation";
 import { projectId } from "@/lib/schemas/project";
-import { ActionState, DeleteProjectsPayload } from "../types";
-import { getLocale, getTranslations } from "next-intl/server";
+import { getTranslations } from "next-intl/server";
 import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedirect";
 import { deleteProjects as deleteProjectQuery } from "@/lib/data/project/project.dal";
 
@@ -13,43 +12,29 @@ const projectIds = z.array(projectId).min(1);
 
 export async function deleteProjects(
   _prevState: ActionState,
-  payload: DeleteProjectsPayload,
+  ids: number[],
 ): Promise<ActionState> {
   // Authorization
   await requireSessionOrRedirect();
 
   const t = await getTranslations("actions");
 
-  let parsedIds: number[] = [];
-
   try {
-    parsedIds = projectIds.parse(payload.ids);
+    const parsedIds = projectIds.parse(ids);
 
     await deleteProjectQuery(parsedIds);
     revalidatePath("/projects");
+
+    return {
+      status: "success",
+      message: t("project.delete.success.many"),
+    };
   } catch (error) {
     console.error("Server Action Error:", error);
 
     return {
       status: "error",
-      message:
-        parsedIds.length > 1
-          ? t("project.delete.error.many")
-          : t("project.delete.error.one"),
+      message: t("project.delete.error.many"),
     };
   }
-
-  const locale = await getLocale();
-
-  if (payload.shouldRedirect) {
-    redirect({ href: "/projects", locale });
-  }
-
-  return {
-    status: "success",
-    message:
-      parsedIds.length > 1
-        ? t("project.delete.success.many")
-        : t("project.delete.success.one"),
-  };
 }

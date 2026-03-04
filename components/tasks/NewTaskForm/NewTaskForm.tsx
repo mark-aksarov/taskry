@@ -7,43 +7,32 @@ import {
   FormBaseSubmitButton,
 } from "@/components/common/FormBase";
 
-import { startTransition, useRef } from "react";
+import { startTransition } from "react";
 import { useTranslations } from "next-intl";
+import { useCreateTask } from "../CreateTaskContext";
 import { TaskStatusSelect } from "../TaskStatusSelect";
 import { TaskProjectSelect } from "../TaskProjectSelect";
 import { TaskAssigneeSelect } from "../TaskAssigneeSelect";
 import { TaskCategorySelect } from "../TaskCategorySelect";
 import { TaskTitleTextField } from "../TaskTitleTextField";
-import { ActionFn, ActionState } from "@/lib/actions/types";
 import { TaskDeadlineDatePicker } from "../TaskDeadlineDatePicker";
 import { FormErrorBanner } from "@/components/common/FormErrorBanner";
 import { TaskDescriptionTextField } from "../TaskDescriptionTextField";
-import { useCreateEntityActionState } from "@/lib/hooks/useCreateEntityActionState";
 
 interface NewTaskFormProps {
   categorySelectItems: { id: number; name: string }[];
   projectSelectItems: { id: number; title: string }[];
   assigneeSelectItems: { id: string; fullName: string }[];
-  createTask: ActionFn<ActionState, FormData>;
 }
 
 export function NewTaskForm({
   categorySelectItems,
   projectSelectItems,
   assigneeSelectItems,
-  createTask,
 }: NewTaskFormProps) {
   const t = useTranslations("tasks.NewTaskForm");
 
-  // The ref is used inside reducerAction
-  // ref.current is null on unmount, preventing programmatic modal close when opening another form in the same modal
-  const ref = useRef<HTMLFormElement>(null);
-
-  const [state, action, isPending] = useCreateEntityActionState({
-    createEntity: createTask,
-    formRef: ref,
-    successMessage: t("successMessage"),
-  });
+  const { state, action, isPending } = useCreateTask();
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -55,7 +44,7 @@ export function NewTaskForm({
   }
 
   return (
-    <FormBase ref={ref} id="new-task-form" onSubmit={handleSubmit}>
+    <FormBase id="new-task-form" onSubmit={handleSubmit}>
       <FormBaseBody>
         <TaskTitleTextField />
         <TaskDescriptionTextField />

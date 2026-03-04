@@ -8,8 +8,7 @@ import {
 import { TaskStatus } from "@/generated/prisma/enums";
 import { useFormatter, useTranslations } from "next-intl";
 import { TaskDetailAltLayout } from "./TaskDetailAltLayout";
-import { ActionFn, ActionState } from "@/lib/actions/types";
-import { NewSubtaskModalTrigger } from "@/components/subtasks/NewSubtaskModalTrigger";
+import { NewSubtasksButton } from "@/components/subtasks/NewSubtaskButton";
 
 interface TaskDetailAltProps {
   id: number;
@@ -35,7 +34,6 @@ interface TaskDetailAltProps {
   };
   status: TaskStatus;
   subtasksList?: React.ReactNode;
-  createSubtask: ActionFn<ActionState, FormData>;
 }
 
 export function TaskDetailAlt({
@@ -48,7 +46,6 @@ export function TaskDetailAlt({
   project,
   status,
   subtasksList,
-  createSubtask,
 }: TaskDetailAltProps) {
   const tStatus = useTranslations("tasks.TaskStatus");
   const t = useTranslations("tasks.TaskDetail");
@@ -125,7 +122,7 @@ export function TaskDetailAlt({
         <DetailInfo className="border-none pb-0">
           <DetailTitle>{t("subtasks")}</DetailTitle>
           {subtasksList}
-          <NewSubtaskModalTrigger taskId={id} createSubtask={createSubtask} />
+          <NewSubtasksButton />
         </DetailInfo>
       }
     />

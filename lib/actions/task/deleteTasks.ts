@@ -1,11 +1,10 @@
 "use server";
 
 import z from "zod";
+import { ActionState } from "../types";
 import { revalidatePath } from "next/cache";
 import { taskId } from "@/lib/schemas/task";
-import { redirect } from "@/i18n/navigation";
-import { ActionState, DeleteTasksPayload } from "../types";
-import { getLocale, getTranslations } from "next-intl/server";
+import { getTranslations } from "next-intl/server";
 import { deleteTasks as deleteTaskQuery } from "@/lib/data/task/task.dal";
 import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedirect";
 
@@ -13,42 +12,29 @@ const taskIds = z.array(taskId).min(1);
 
 export async function deleteTasks(
   _prevState: ActionState,
-  payload: DeleteTasksPayload,
+  ids: number[],
 ): Promise<ActionState> {
   // Authorization
   await requireSessionOrRedirect();
 
   const t = await getTranslations("actions");
 
-  let parsedIds: number[] = [];
   try {
-    parsedIds = taskIds.parse(payload.ids);
+    const parsedIds = taskIds.parse(ids);
 
     await deleteTaskQuery(parsedIds);
     revalidatePath("/tasks");
+
+    return {
+      status: "success",
+      message: t("task.delete.success.many"),
+    };
   } catch (error) {
     console.error("Server Action Error:", error);
 
     return {
       status: "error",
-      message:
-        parsedIds.length > 1
-          ? t("task.delete.error.many")
-          : t("task.delete.error.one"),
+      message: t("task.delete.error.many"),
     };
   }
-
-  const locale = await getLocale();
-
-  if (payload.shouldRedirect) {
-    redirect({ href: "/tasks", locale });
-  }
-
-  return {
-    status: "success",
-    message:
-      parsedIds.length > 1
-        ? t("task.delete.success.many")
-        : t("task.delete.success.one"),
-  };
 }

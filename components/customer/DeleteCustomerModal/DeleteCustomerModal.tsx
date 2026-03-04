@@ -1,9 +1,9 @@
 "use client";
 
+import { startTransition } from "react";
 import { useDeleteCustomer } from "../DeleteCustomerContext";
 import { BaseDeleteCustomerModal } from "./BaseDeleteCustomerModal";
 import { useSelectedItems } from "@/components/common/SelectedItemsContext";
-import { handleDeleteEntity } from "@/lib/utils/handleDeleteEntity";
 
 interface DeleteCustomerModalProps {
   customerId: number;
@@ -24,17 +24,17 @@ export function DeleteCustomerModal({
 
   function handleDelete() {
     const payload = {
-      ids: [customerId],
+      id: customerId,
       shouldRedirect: false,
     };
 
-    handleDeleteEntity(
-      removeSelected,
-      action,
-      payload,
-      customerId,
-      onOpenChange,
-    );
+    //Remove the entity from the selection to prevent access to it
+    removeSelected(customerId);
+
+    //close modal before deleting
+    onOpenChange(false);
+
+    startTransition(() => action(payload));
   }
 
   return (

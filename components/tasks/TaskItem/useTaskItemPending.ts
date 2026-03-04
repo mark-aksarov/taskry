@@ -1,11 +1,11 @@
 import { useDeleteTasks } from "../DeleteTasksContext";
-import { useDeleteTaskTransition } from "../DeleteTaskTransitionContext";
-import { useUpdateTaskTransition } from "../UpdateTaskTransitionContext";
+import { useDeleteTask } from "../DeleteTaskContext";
+import { useUpdateTask } from "../UpdateTaskContext";
 
 export function useTaskItemPending(taskId: number) {
-  const { isPending: isDeleteTaskPending } = useDeleteTaskTransition();
-  const { isPending: isDeleteTasksPending, taskIds } = useDeleteTasks();
-  const { isPending: isUpdateTaskPending } = useUpdateTaskTransition();
+  const { isPending: isDeleteTaskPending } = useDeleteTask();
+  const { isPending: isDeleteTasksPending, ids: taskIds } = useDeleteTasks();
+  const { isPending: isUpdateTaskPending } = useUpdateTask();
 
   const isPending =
     isDeleteTaskPending ||

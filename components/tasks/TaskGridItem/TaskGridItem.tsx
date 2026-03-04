@@ -17,6 +17,7 @@ import { memo } from "react";
 import Image from "next/image";
 import { TaskItemProps } from "../TaskItem";
 import { Link } from "@/components/ui/Link";
+import { EditTaskModal } from "../EditTaskModal";
 import { TaskDetailModal } from "../TaskDetailModal";
 import { TaskCommentsModal } from "../TaskCommentsModal";
 import { TaskItemBaseBadge } from "../TaskItemBaseBadge";
@@ -30,7 +31,13 @@ import { TaskItemActionMenuTrigger } from "../TaskItem/TaskItemActionMenuTrigger
 
 export type TaskGridItemProps = Omit<
   TaskItemProps,
-  "category" | "project" | "showCheckbox" | "projectDetailContainer"
+  | "category"
+  | "project"
+  | "showCheckbox"
+  | "projectDetailContainer"
+  | "updateTask"
+  | "deleteTask"
+  | "updateTaskStatus"
 >;
 
 export const TaskGridItem = memo(
@@ -49,8 +56,6 @@ export const TaskGridItem = memo(
     userDetailContainer,
     sendComment,
     updateComment,
-    deleteTask,
-    updateTaskStatus,
   }: TaskGridItemProps) => {
     const t = useTranslations("tasks.TaskGridItem");
 
@@ -79,94 +84,100 @@ export const TaskGridItem = memo(
     );
 
     return (
-      <TaskGridItemLayout
-        checkboxSlot={<TaskItemCheckbox id={id} status={status} />}
-        menuTriggerSlot={
-          <TaskItemActionMenuTrigger
-            taskId={id}
-            taskTitle={title}
-            taskStatus={status}
-            editTaskFormContainer={editTaskFormContainer}
-            className="-mr-2"
-            deleteTask={deleteTask}
-            updateTaskStatus={updateTaskStatus}
-          />
-        }
-        titleSlot={
-          <>
-            {/* Show modal on desktop */}
-            <GridItemInfo className="flex-auto max-md:hidden">
-              <GridItemTitleDetailModalTrigger
-                modal={
-                  <TaskDetailModal
-                    taskId={id}
-                    taskDetailContainer={taskDetailContainer}
-                  />
-                }
-              >
-                {title}
-              </GridItemTitleDetailModalTrigger>
-
-              <GridItemText>{deadlineOn}</GridItemText>
-            </GridItemInfo>
-
-            {/* Show only text on mobile */}
-            <GridItemInfo className="flex-auto md:hidden">
-              <GridItemTitle>{title}</GridItemTitle>
-              <GridItemText>{deadlineOn}</GridItemText>
-            </GridItemInfo>
-          </>
-        }
-        assigneeImageSlot={
-          assignee ? (
+      <>
+        <TaskGridItemLayout
+          checkboxSlot={<TaskItemCheckbox id={id} status={status} />}
+          menuTriggerSlot={
+            <TaskItemActionMenuTrigger
+              taskId={id}
+              taskTitle={title}
+              taskStatus={status}
+              className="-mr-2"
+            />
+          }
+          titleSlot={
             <>
               {/* Show modal on desktop */}
-              <ItemBaseDetailModalTrigger
-                modal={
-                  <UserDetailModal
-                    userId={assignee.id}
-                    userDetailContainer={userDetailContainer}
-                  />
-                }
-                className="max-md:hidden"
-              >
-                {assigneeImg}
-              </ItemBaseDetailModalTrigger>
+              <GridItemInfo className="flex-auto max-md:hidden">
+                <GridItemTitleDetailModalTrigger
+                  modal={
+                    <TaskDetailModal
+                      taskId={id}
+                      taskDetailContainer={taskDetailContainer}
+                    />
+                  }
+                >
+                  {title}
+                </GridItemTitleDetailModalTrigger>
 
-              {/* Show link on mobile */}
-              <Link className="md:hidden" href={`/team/${assignee.id}`}>
-                {assigneeImg}
-              </Link>
+                <GridItemText>{deadlineOn}</GridItemText>
+              </GridItemInfo>
+
+              {/* Show only text on mobile */}
+              <GridItemInfo className="flex-auto md:hidden">
+                <GridItemTitle>{title}</GridItemTitle>
+                <GridItemText>{deadlineOn}</GridItemText>
+              </GridItemInfo>
             </>
-          ) : (
-            <UnknownUser className="h-9 w-9" />
-          )
-        }
-        commentsSlot={
-          <ItemBaseCommentsModalTrigger
-            data-test={`task-${id}-comments-modal-trigger`}
-            commentsCount={commentsCount}
-            modal={
-              <TaskCommentsModal
-                taskId={id}
-                taskCommentsContainer={taskCommentsContainer}
-                sendComment={sendComment}
-                updateComment={updateComment}
-              />
-            }
-          />
-        }
-        statusSlot={
-          <TaskItemBaseBadge taskId={id} deadline={deadline} status={status} />
-        }
-        progressSlot={
-          <GridItemProgress
-            value={(subtasksDone / subtasksTotal) * 100}
-            showValueText={false}
-            aria-label={t("progressAriaLabel")}
-          />
-        }
-      />
+          }
+          assigneeImageSlot={
+            assignee ? (
+              <>
+                {/* Show modal on desktop */}
+                <ItemBaseDetailModalTrigger
+                  modal={
+                    <UserDetailModal
+                      userId={assignee.id}
+                      userDetailContainer={userDetailContainer}
+                    />
+                  }
+                  className="max-md:hidden"
+                >
+                  {assigneeImg}
+                </ItemBaseDetailModalTrigger>
+
+                {/* Show link on mobile */}
+                <Link className="md:hidden" href={`/team/${assignee.id}`}>
+                  {assigneeImg}
+                </Link>
+              </>
+            ) : (
+              <UnknownUser className="h-9 w-9" />
+            )
+          }
+          commentsSlot={
+            <ItemBaseCommentsModalTrigger
+              data-test={`task-${id}-comments-modal-trigger`}
+              commentsCount={commentsCount}
+              modal={
+                <TaskCommentsModal
+                  taskId={id}
+                  taskCommentsContainer={taskCommentsContainer}
+                  sendComment={sendComment}
+                  updateComment={updateComment}
+                />
+              }
+            />
+          }
+          statusSlot={
+            <TaskItemBaseBadge
+              taskId={id}
+              deadline={deadline}
+              status={status}
+            />
+          }
+          progressSlot={
+            <GridItemProgress
+              value={(subtasksDone / subtasksTotal) * 100}
+              showValueText={false}
+              aria-label={t("progressAriaLabel")}
+            />
+          }
+        />
+
+        {/* Modal for editing task details */}
+        <EditTaskModal editTaskFormContainer={editTaskFormContainer} />
+      </>
     );
   },
 );

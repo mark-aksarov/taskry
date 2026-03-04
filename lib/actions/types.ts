@@ -13,18 +13,18 @@ export type ActionState = {
   message?: string;
 };
 
-export type DeleteProjectsPayload = {
-  ids: number[];
+export type DeleteProjectPayload = {
+  id: number;
   shouldRedirect: boolean;
 };
 
-export type DeleteTasksPayload = {
-  ids: number[];
+export type DeleteTaskPayload = {
+  id: number;
   shouldRedirect: boolean;
 };
 
-export type DeleteCustomersPayload = {
-  ids: number[];
+export type DeleteCustomerPayload = {
+  id: number;
   shouldRedirect: boolean;
 };
 
@@ -33,9 +33,19 @@ export type DeleteUserPayload = {
   shouldRedirect: boolean;
 };
 
+export interface UpdateProjectStatusPayload {
+  id: number;
+  nextStatus: ProjectStatus;
+}
+
 export interface UpdateProjectStatusesPayload {
   ids: number[];
   nextStatus: ProjectStatus;
+}
+
+export interface UpdateTaskStatusPayload {
+  id: number;
+  nextStatus: TaskStatus;
 }
 
 export interface UpdateTaskStatusesPayload {
@@ -46,3 +56,9 @@ export interface UpdateTaskStatusesPayload {
 export type MarkAsReadPayload = number[] | null;
 
 export type ToggleSubtaskPayload = { id: number; isDone: boolean };
+
+export interface ActionContextType<TPayload = FormData> {
+  state: ActionState;
+  action: (payload: TPayload) => void;
+  isPending: boolean;
+}

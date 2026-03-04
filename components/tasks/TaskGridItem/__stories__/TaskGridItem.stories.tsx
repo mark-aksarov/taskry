@@ -34,12 +34,6 @@ export const Default = {
     userDetailContainer: <UserDetail {...mockedUserDetail} />,
     sendComment: () => ({ status: "success" }),
     updateComment: () => ({ status: "success" }),
-    updateTaskStatus: () => {
-      return new Promise((res) =>
-        setTimeout(() => res({ status: "success" }), 500),
-      );
-    },
-    deleteTask: () => ({ status: "success" }),
   },
 } satisfies Story;
 

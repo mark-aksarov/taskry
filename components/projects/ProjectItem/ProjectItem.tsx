@@ -3,8 +3,8 @@
 import {
   ActionFn,
   ActionState,
-  DeleteProjectsPayload,
-  UpdateProjectStatusesPayload,
+  DeleteProjectPayload,
+  UpdateProjectStatusPayload,
 } from "@/lib/actions/types";
 
 import { ProjectListItem } from "../ProjectListItem";
@@ -52,8 +52,8 @@ export interface ProjectItemProps {
   sendComment: ActionFn<ActionState, FormData>;
   updateComment: ActionFn<ActionState, FormData>;
   updateProject: ActionFn<ActionState, FormData>;
-  deleteProject: ActionFn<ActionState, DeleteProjectsPayload>;
-  updateProjectStatus: ActionFn<ActionState, UpdateProjectStatusesPayload>;
+  deleteProject: ActionFn<ActionState, DeleteProjectPayload>;
+  updateProjectStatus: ActionFn<ActionState, UpdateProjectStatusPayload>;
 }
 
 export const ProjectItem = ({

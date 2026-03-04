@@ -60,7 +60,11 @@
     }
   },
   "TasksPage": {
-    "heading": "Tasks"
+    "heading": "Tasks",
+    "emptySection": {
+      "heading": "No tasks yet",
+      "description": "Create a new task to keep track of your work"
+    }
   },
   "CustomersPage": {
     "heading": "Customers",
@@ -84,11 +88,6 @@
   },
   "TasksPageLoading": {
     "title": "All Tasks"
-  },
-  "TasksPageEmptyContainer": {
-    "heading": "No tasks yet",
-    "description": "Create a new task to keep track of your work",
-    "addButtonLabel": "New Task"
   },
   "TaskDetailPage": {
     "heading": "Task Details"

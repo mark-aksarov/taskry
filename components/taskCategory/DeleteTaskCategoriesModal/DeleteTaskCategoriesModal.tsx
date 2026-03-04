@@ -8,9 +8,9 @@ import {
   ConfirmModalConfirmButton,
 } from "@/components/common/ConfirmModal";
 
+import { startTransition } from "react";
 import { useTranslations } from "next-intl";
 import { DialogHeading } from "@/components/ui/Dialog";
-import { handleDeleteEntities } from "@/lib/utils/handleDeleteEntities";
 import { useDeleteTaskCategories } from "../DeleteTaskCategoriesContext";
 import { useSelectedItems } from "@/components/common/SelectedItemsContext";
 
@@ -26,18 +26,27 @@ export function DeleteTaskCategoriesModal({
   const t = useTranslations("taskCategories.DeleteTaskCategoriesModal");
 
   const { ids: selectedIds, clear: clearSelectedItems } = useSelectedItems();
-  const { action, setIds: setDeleteProjectCategoryIds } =
+  const { action, setIds: setDeleteTaskCategoryIds } =
     useDeleteTaskCategories();
 
   function handleDelete() {
-    handleDeleteEntities(
-      selectedIds,
-      action,
-      selectedIds,
-      setDeleteProjectCategoryIds,
-      clearSelectedItems,
-      onOpenChange,
-    );
+    // Close modal
+    onOpenChange(false);
+
+    // Highlight currently selected entities before deletion.
+    // Note: selectedIds may change if the user updates selection.
+    setDeleteTaskCategoryIds(selectedIds);
+
+    // Clear selected items after the modal close animation (150ms).
+    // This prevents the modal text from jumping due to deleted items.
+    setTimeout(() => {
+      clearSelectedItems();
+    }, 150);
+
+    // Trigger the deletion
+    startTransition(() => {
+      action(selectedIds);
+    });
   }
 
   return (

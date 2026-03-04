@@ -1,9 +1,9 @@
 "use client";
 
+import { startTransition } from "react";
 import { useDeleteProject } from "../DeleteProjectContext";
 import { useSelectedProjects } from "../SelectedProjectsContext";
 import { BaseDeleteProjectModal } from "./BaseDeleteProjectModal";
-import { handleDeleteEntity } from "@/lib/utils/handleDeleteEntity";
 
 interface DeleteProjectModalProps {
   projectId: number;
@@ -24,17 +24,17 @@ export function DeleteProjectModal({
 
   function handleDelete() {
     const payload = {
-      ids: [projectId],
+      id: projectId,
       shouldRedirect: false,
     };
 
-    handleDeleteEntity(
-      removeSelected,
-      action,
-      payload,
-      projectId,
-      onOpenChange,
-    );
+    //Remove the entity from the selection to prevent access to it
+    removeSelected(projectId);
+
+    //close modal before deleting
+    onOpenChange(false);
+
+    startTransition(() => action(payload));
   }
 
   return (

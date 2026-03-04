@@ -3,11 +3,11 @@ import { ActionState } from "../actions/types";
 
 export function useCloseModalOnActionSuccess(
   state: ActionState,
-  setIsModalOpen: (isOpen: boolean) => void,
+  onModalOpenChange: (isOpen: boolean) => void,
 ) {
   useEffect(() => {
     if (state.status === "success") {
-      setIsModalOpen(false);
+      onModalOpenChange(false);
     }
-  }, [state, setIsModalOpen]);
+  }, [state, onModalOpenChange]);
 }

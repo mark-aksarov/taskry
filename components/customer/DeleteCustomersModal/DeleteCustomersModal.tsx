@@ -8,10 +8,10 @@ import {
   ConfirmModalConfirmButton,
 } from "@/components/common/ConfirmModal";
 
+import { startTransition } from "react";
 import { useTranslations } from "next-intl";
 import { DialogHeading } from "@/components/ui/Dialog";
 import { useDeleteCustomers } from "../DeleteCustomersContext";
-import { handleDeleteEntities } from "@/lib/utils/handleDeleteEntities";
 import { useSelectedItems } from "@/components/common/SelectedItemsContext";
 
 interface DeleteCustomersModalProps {
@@ -29,19 +29,23 @@ export function DeleteCustomersModal({
   const { action, setIds: setDeleteCustomerIds } = useDeleteCustomers();
 
   function handleDelete() {
-    const payload = {
-      ids: selectedIds,
-      shouldRedirect: false,
-    };
+    // Close modal
+    onOpenChange(false);
 
-    handleDeleteEntities(
-      selectedIds,
-      action,
-      payload,
-      setDeleteCustomerIds,
-      clearSelectedItems,
-      onOpenChange,
-    );
+    // Highlight currently selected entities before deletion.
+    // Note: selectedIds may change if the user updates selection.
+    setDeleteCustomerIds(selectedIds);
+
+    // Clear selected items after the modal close animation (150ms).
+    // This prevents the modal text from jumping due to deleted items.
+    setTimeout(() => {
+      clearSelectedItems();
+    }, 150);
+
+    // Trigger the deletion
+    startTransition(() => {
+      action(selectedIds);
+    });
   }
 
   return (

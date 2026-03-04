@@ -34,12 +34,6 @@ export const Default = {
     taskDetailContainer: <TaskDetail {...taskDetailArgs} />,
     sendComment: () => ({ status: "success" }),
     updateComment: () => ({ status: "success" }),
-    updateTaskStatus: () => {
-      return new Promise((res) =>
-        setTimeout(() => res({ status: "success" }), 500),
-      );
-    },
-    deleteTask: () => ({ status: "success" }),
   },
 } satisfies Story;
 

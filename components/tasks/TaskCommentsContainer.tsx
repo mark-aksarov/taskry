@@ -29,12 +29,9 @@ export function TaskCommentsContainer(props: TaskCommentsContainerProps) {
 }
 
 function TaskCommentsContainerInner({ taskId }: TaskCommentsContainerProps) {
-  const {
-    data: comments,
-    error,
-    isLoading,
-    mutate,
-  } = useSWR<CommentListItemDTO[]>(`/api/tasks/${taskId}/comments`);
+  const { data: comments, isLoading } = useSWR<CommentListItemDTO[]>(
+    `/api/tasks/${taskId}/comments`,
+  );
 
   if (isLoading) {
     return <Repeat items={10} renderItem={() => <CommentItemSkeleton />} />;
@@ -56,7 +53,6 @@ function TaskCommentsContainerInner({ taskId }: TaskCommentsContainerProps) {
             sender={comment.sender}
             canEdit={comment.canEdit}
             deleteComment={deleteComment}
-            mutate={mutate}
           />
         );
       })}

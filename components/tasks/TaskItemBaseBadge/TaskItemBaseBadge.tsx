@@ -4,7 +4,7 @@ import { TaskStatus } from "@/generated/prisma/enums";
 import { ItemBaseBadge } from "@/components/common/ItemBase";
 import { getTaskStatusBadgeColor } from "../getTaskStatusBadgeColor";
 import { useUpdateTaskStatuses } from "../UpdateTaskStatusesContext";
-import { useUpdateTaskStatusTransition } from "../UpdateTaskStatusTransitionContext";
+import { useUpdateTaskStatus } from "../UpdateTaskStatusContext";
 
 interface TaskItemBaseBadgeProps {
   taskId: number;
@@ -22,11 +22,10 @@ export function TaskItemBaseBadge({
   const t = useTranslations("tasks.TaskStatus");
 
   // Pending state for single task status update
-  const { isPending: isUpdateTaskStatusPending } =
-    useUpdateTaskStatusTransition();
+  const { isPending: isUpdateTaskStatusPending } = useUpdateTaskStatus();
 
   // Pending state for batch task status updates
-  const { isPending: isUpdateTaskStatusesPending, taskIds: updatedTaskIds } =
+  const { isPending: isUpdateTaskStatusesPending, ids: updatedTaskIds } =
     useUpdateTaskStatuses();
 
   // Whether this task is included in the current batch update

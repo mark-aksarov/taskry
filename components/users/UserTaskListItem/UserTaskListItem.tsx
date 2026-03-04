@@ -3,8 +3,8 @@
 import {
   ActionFn,
   ActionState,
-  DeleteTasksPayload,
-  UpdateTaskStatusesPayload,
+  DeleteTaskPayload,
+  UpdateTaskStatusPayload,
 } from "@/lib/actions/types";
 
 import {
@@ -16,19 +16,20 @@ import {
 import { memo } from "react";
 import { TaskStatus } from "@/generated/prisma/enums";
 import { useFormatter, useTranslations } from "next-intl";
+import { EditTaskModal } from "@/components/tasks/EditTaskModal";
 import { UserTaskListItemLayout } from "./UserTaskListItemLayout";
 import { SelectableItem } from "@/components/common/SelectableItem";
 import { TaskDetailModal } from "@/components/tasks/TaskDetailModal";
 import { TaskItemPendingOverlay } from "@/components/tasks/TaskItem";
 import { TaskCommentsModal } from "@/components/tasks/TaskCommentsModal";
 import { TaskItemBaseBadge } from "@/components/tasks/TaskItemBaseBadge";
+import { UpdateTaskProvider } from "@/components/tasks/UpdateTaskContext";
+import { DeleteTaskProvider } from "@/components/tasks/DeleteTaskContext";
 import { useSelectedTasks } from "@/components/tasks/SelectedTasksContext";
 import { ItemBaseCommentsModalTrigger } from "@/components/common/ItemBase";
 import { TaskItemCheckbox } from "@/components/tasks/TaskItem/TaskItemCheckbox";
-import { UpdateTaskTransitionProvider } from "@/components/tasks/UpdateTaskTransitionContext";
-import { DeleteTaskTransitionProvider } from "@/components/tasks/DeleteTaskTransitionContext";
+import { UpdateTaskStatusProvider } from "@/components/tasks/UpdateTaskStatusContext";
 import { TaskItemActionMenuTrigger } from "@/components/tasks/TaskItem/TaskItemActionMenuTrigger";
-import { UpdateTaskStatusTransitionProvider } from "@/components/tasks/UpdateTaskStatusTransitionContext";
 
 export interface UserTaskListItemProps {
   id: number;
@@ -41,17 +42,23 @@ export interface UserTaskListItemProps {
   editTaskFormContainer: React.ReactNode;
   sendComment: ActionFn<ActionState, FormData>;
   updateComment: ActionFn<ActionState, FormData>;
-  deleteTask: ActionFn<ActionState, DeleteTasksPayload>;
-  updateTaskStatus: ActionFn<ActionState, UpdateTaskStatusesPayload>;
+  updateTask: ActionFn<ActionState, FormData>;
+  deleteTask: ActionFn<ActionState, DeleteTaskPayload>;
+  updateTaskStatus: ActionFn<ActionState, UpdateTaskStatusPayload>;
 }
 
-export const UserTaskListItem = (props: UserTaskListItemProps) => {
+export const UserTaskListItem = ({
+  updateTask,
+  deleteTask,
+  updateTaskStatus,
+  ...props
+}: UserTaskListItemProps) => {
   const selected = useSelectedTasks();
 
   return (
-    <DeleteTaskTransitionProvider>
-      <UpdateTaskTransitionProvider>
-        <UpdateTaskStatusTransitionProvider>
+    <DeleteTaskProvider deleteTask={deleteTask}>
+      <UpdateTaskProvider updateTask={updateTask}>
+        <UpdateTaskStatusProvider updateTaskStatus={updateTaskStatus}>
           <TaskItemPendingOverlay taskId={props.id}>
             <SelectableItem
               {...selected}
@@ -60,9 +67,9 @@ export const UserTaskListItem = (props: UserTaskListItemProps) => {
               <UserTaskListItemInner {...props} />
             </SelectableItem>
           </TaskItemPendingOverlay>
-        </UpdateTaskStatusTransitionProvider>
-      </UpdateTaskTransitionProvider>
-    </DeleteTaskTransitionProvider>
+        </UpdateTaskStatusProvider>
+      </UpdateTaskProvider>
+    </DeleteTaskProvider>
   );
 };
 
@@ -78,9 +85,10 @@ export const UserTaskListItemInner = memo(
     editTaskFormContainer,
     sendComment,
     updateComment,
-    deleteTask,
-    updateTaskStatus,
-  }: UserTaskListItemProps) => {
+  }: Omit<
+    UserTaskListItemProps,
+    "updateTask" | "deleteTask" | "updateTaskStatus"
+  >) => {
     const t = useTranslations("users.UserTaskListItem");
 
     // use useFormatter to format the date according to the user's locale
@@ -95,56 +103,62 @@ export const UserTaskListItemInner = memo(
     });
 
     return (
-      <UserTaskListItemLayout
-        checkboxSlot={<TaskItemCheckbox id={id} status={status} />}
-        mainSlot={
-          <>
-            <ListItemTitleDetailModalTrigger
+      <>
+        <UserTaskListItemLayout
+          checkboxSlot={<TaskItemCheckbox id={id} status={status} />}
+          mainSlot={
+            <>
+              <ListItemTitleDetailModalTrigger
+                modal={
+                  <TaskDetailModal
+                    taskId={id}
+                    taskDetailContainer={taskDetailContainer}
+                  />
+                }
+              >
+                {title}
+              </ListItemTitleDetailModalTrigger>
+              <ListItemText>{deadlineOn}</ListItemText>
+            </>
+          }
+          mainMobileSlot={
+            <>
+              <ListItemTitle>{title}</ListItemTitle>
+              <ListItemText>{deadlineOn}</ListItemText>
+            </>
+          }
+          statusSlot={
+            <TaskItemBaseBadge
+              taskId={id}
+              deadline={deadline}
+              status={status}
+            />
+          }
+          commentsModalTriggerSlot={
+            <ItemBaseCommentsModalTrigger
+              commentsCount={commentsCount}
               modal={
-                <TaskDetailModal
+                <TaskCommentsModal
                   taskId={id}
-                  taskDetailContainer={taskDetailContainer}
+                  taskCommentsContainer={taskCommentsContainer}
+                  sendComment={sendComment}
+                  updateComment={updateComment}
                 />
               }
-            >
-              {title}
-            </ListItemTitleDetailModalTrigger>
-            <ListItemText>{deadlineOn}</ListItemText>
-          </>
-        }
-        mainMobileSlot={
-          <>
-            <ListItemTitle>{title}</ListItemTitle>
-            <ListItemText>{deadlineOn}</ListItemText>
-          </>
-        }
-        statusSlot={
-          <TaskItemBaseBadge taskId={id} deadline={deadline} status={status} />
-        }
-        commentsModalTriggerSlot={
-          <ItemBaseCommentsModalTrigger
-            commentsCount={commentsCount}
-            modal={
-              <TaskCommentsModal
-                taskId={id}
-                taskCommentsContainer={taskCommentsContainer}
-                sendComment={sendComment}
-                updateComment={updateComment}
-              />
-            }
-          />
-        }
-        menuTriggerSlot={
-          <TaskItemActionMenuTrigger
-            taskId={id}
-            taskTitle={title}
-            taskStatus={status}
-            editTaskFormContainer={editTaskFormContainer}
-            deleteTask={deleteTask}
-            updateTaskStatus={updateTaskStatus}
-          />
-        }
-      />
+            />
+          }
+          menuTriggerSlot={
+            <TaskItemActionMenuTrigger
+              taskId={id}
+              taskTitle={title}
+              taskStatus={status}
+            />
+          }
+        />
+
+        {/* Modal for editing task details */}
+        <EditTaskModal editTaskFormContainer={editTaskFormContainer} />
+      </>
     );
   },
 );

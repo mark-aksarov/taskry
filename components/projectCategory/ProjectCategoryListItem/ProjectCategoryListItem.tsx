@@ -22,7 +22,7 @@ interface ProjectCategoryListItemProps {
   id: number;
   name: string;
   updateProjectCategory: ActionFn<ActionState, FormData>;
-  deleteProjectCategory: ActionFn<ActionState, number[]>;
+  deleteProjectCategory: ActionFn<ActionState, number>;
 }
 
 export function ProjectCategoryListItem({

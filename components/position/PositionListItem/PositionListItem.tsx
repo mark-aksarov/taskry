@@ -22,7 +22,7 @@ interface PositionListItemProps {
   id: number;
   name: string;
   updatePosition: ActionFn<ActionState, FormData>;
-  deletePosition: ActionFn<ActionState, number[]>;
+  deletePosition: ActionFn<ActionState, number>;
 }
 
 export function PositionListItem({

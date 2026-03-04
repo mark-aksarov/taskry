@@ -22,7 +22,7 @@ interface TaskCategoryListItemProps {
   id: number;
   name: string;
   updateTaskCategory: ActionFn<ActionState, FormData>;
-  deleteTaskCategory: ActionFn<ActionState, number[]>;
+  deleteTaskCategory: ActionFn<ActionState, number>;
 }
 
 export function TaskCategoryListItem({

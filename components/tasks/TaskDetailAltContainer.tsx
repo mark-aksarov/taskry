@@ -11,6 +11,8 @@ import { createSubtask } from "@/lib/actions/subtask/createSubtask";
 import { deleteSubtask } from "@/lib/actions/subtask/deleteSubtask";
 import { updateSubtask } from "@/lib/actions/subtask/updateSubtask";
 import { toggleSubtask } from "@/lib/actions/subtask/toggleSubtask";
+import { CreateSubtaskProvider } from "../subtasks/CreateSubtaskContext";
+import { NewSubtaskModal } from "../subtasks/NewSubtaskModal";
 
 interface TaskDetailAltContainerProps {
   taskId: number;
@@ -34,34 +36,37 @@ async function TaskDetailAltContainerInner({
   }
 
   return (
-    <TaskDetailAlt
-      id={task.id}
-      creator={task.creator}
-      assignee={task.assignee}
-      deadline={task.deadline}
-      description={task.description}
-      category={task.category}
-      project={task.project}
-      status={task.status}
-      subtasksList={
-        task.subtasks.length !== 0 && (
-          <SubtaskList>
-            {task.subtasks.map((subtask) => (
-              <SubtaskListItem
-                key={subtask.id}
-                id={subtask.id}
-                text={subtask.text}
-                isDone={subtask.isDone}
-                taskId={task.id}
-                toggleSubtask={toggleSubtask}
-                updateSubtask={updateSubtask}
-                deleteSubtask={deleteSubtask}
-              />
-            ))}
-          </SubtaskList>
-        )
-      }
-      createSubtask={createSubtask}
-    />
+    <CreateSubtaskProvider taskId={task.id} createSubtask={createSubtask}>
+      <TaskDetailAlt
+        id={task.id}
+        creator={task.creator}
+        assignee={task.assignee}
+        deadline={task.deadline}
+        description={task.description}
+        category={task.category}
+        project={task.project}
+        status={task.status}
+        subtasksList={
+          task.subtasks.length !== 0 && (
+            <SubtaskList>
+              {task.subtasks.map((subtask) => (
+                <SubtaskListItem
+                  key={subtask.id}
+                  id={subtask.id}
+                  text={subtask.text}
+                  isDone={subtask.isDone}
+                  taskId={task.id}
+                  toggleSubtask={toggleSubtask}
+                  updateSubtask={updateSubtask}
+                  deleteSubtask={deleteSubtask}
+                />
+              ))}
+            </SubtaskList>
+          )
+        }
+      />
+
+      <NewSubtaskModal taskId={task.id} />
+    </CreateSubtaskProvider>
   );
 }

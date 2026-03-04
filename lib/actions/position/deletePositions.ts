@@ -19,30 +19,22 @@ export async function deletePositions(
 
   const t = await getTranslations("actions");
 
-  let parsedIds: number[] = [];
-
   try {
-    parsedIds = positionIds.parse(ids);
+    const parsedIds = positionIds.parse(ids);
     await deletePositionsQuery(parsedIds);
 
     revalidatePath("/positions");
 
     return {
       status: "success",
-      message:
-        parsedIds.length > 1
-          ? t("position.delete.success.many")
-          : t("position.delete.success.one"),
+      message: t("position.delete.success.many"),
     };
   } catch (error) {
     console.error("Server Action Error:", error);
 
     return {
       status: "error",
-      message:
-        parsedIds.length > 1
-          ? t("position.delete.error.many")
-          : t("position.delete.error.one"),
+      message: t("position.delete.error.many"),
     };
   }
 }

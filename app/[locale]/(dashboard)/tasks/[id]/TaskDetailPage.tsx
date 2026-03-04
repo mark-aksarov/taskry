@@ -12,11 +12,11 @@ import { useTranslations } from "next-intl";
 import { Card } from "@/components/common/Card";
 import { PageGrid } from "@/components/common/PageGrid";
 import { BackButton } from "@/components/common/BackButton";
+import { EditTaskModal } from "@/components/tasks/EditTaskModal";
 import { PageContainer } from "@/components/common/PageContainer";
 import { TaskDetailCard } from "@/components/tasks/TaskDetailCard";
 import { TaskDetailActions } from "@/components/tasks/TaskDetailActions";
-import { ActionFn, ActionState, DeleteTasksPayload } from "@/lib/actions/types";
-import { UpdateTaskTransitionProvider } from "@/components/tasks/UpdateTaskTransitionContext";
+import { ActionFn, ActionState, DeleteTaskPayload } from "@/lib/actions/types";
 
 interface TaskDetailPageProps {
   taskId: number;
@@ -28,7 +28,7 @@ interface TaskDetailPageProps {
   appHeaderProps: AppHeaderContainerProps;
   sendComment: ActionFn<ActionState, FormData>;
   updateComment: ActionFn<ActionState, FormData>;
-  deleteTask: ActionFn<ActionState, DeleteTasksPayload>;
+  deleteTask: ActionFn<ActionState, DeleteTaskPayload>;
 }
 
 export function TaskDetailPage({
@@ -46,17 +46,14 @@ export function TaskDetailPage({
   const t = useTranslations("app.TaskDetailPage");
 
   const taskDetailActions = (
-    <UpdateTaskTransitionProvider>
-      <TaskDetailActions
-        taskId={taskId}
-        taskTitle={taskTitle}
-        editTaskFormContainer={editTaskFormContainer}
-        taskCommentsContainer={taskCommentsContainer}
-        deleteTask={deleteTask}
-        sendComment={sendComment}
-        updateComment={updateComment}
-      />
-    </UpdateTaskTransitionProvider>
+    <TaskDetailActions
+      taskId={taskId}
+      taskTitle={taskTitle}
+      taskCommentsContainer={taskCommentsContainer}
+      deleteTask={deleteTask}
+      sendComment={sendComment}
+      updateComment={updateComment}
+    />
   );
 
   return (
@@ -80,11 +77,13 @@ export function TaskDetailPage({
               <ToolbarMobileHeading>{t("heading")}</ToolbarMobileHeading>
             </ToolbarMobileTop>
 
-            <div className="flex flex-col px-1.5">{taskHeaderContainer}</div>
-            <Card className="flex flex-col px-1.5">{taskDetailActions}</Card>
+            <div className="flex flex-col">{taskHeaderContainer}</div>
+            <Card className="flex flex-col p-1.5">{taskDetailActions}</Card>
             <Card className="flex flex-col">{taskDetailContainer}</Card>
           </PageGrid>
         </PageContainer>
+
+        <EditTaskModal editTaskFormContainer={editTaskFormContainer} />
       </main>
     </>
   );

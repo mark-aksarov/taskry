@@ -1,25 +1,30 @@
 "use client";
 
-import { ActionFn, ActionState, DeleteUserPayload } from "@/lib/actions/types";
-
 import {
-  useDeleteEntityState,
   DeleteEntityContextType,
-} from "@/lib/hooks/useDeleteEntityState";
+  useDeleteEntityContextValue,
+} from "@/lib/hooks/useDeleteEntityContextValue";
 
 import { useContext, createContext } from "react";
+import { useToastOnActionError } from "@/lib/hooks/useToastOnActionError";
+import { ActionFn, ActionState, DeleteUserPayload } from "@/lib/actions/types";
 
 const DeleteUserContext =
   createContext<DeleteEntityContextType<DeleteUserPayload> | null>(null);
 
+interface DeleteUserProviderProps {
+  deleteUser: ActionFn<ActionState, DeleteUserPayload>;
+  children: React.ReactNode;
+}
+
 export function DeleteUserProvider({
   deleteUser,
   children,
-}: {
-  deleteUser: ActionFn<ActionState, DeleteUserPayload>;
-  children: React.ReactNode;
-}) {
-  const contextValue = useDeleteEntityState(deleteUser);
+}: DeleteUserProviderProps) {
+  const contextValue = useDeleteEntityContextValue(deleteUser);
+
+  const { state } = contextValue;
+  useToastOnActionError(state);
 
   return (
     <DeleteUserContext.Provider value={contextValue}>

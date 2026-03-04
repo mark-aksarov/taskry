@@ -1,25 +1,35 @@
 "use client";
 
 import {
-  useCreateEntityState,
   CreateEntityContextType,
-} from "@/lib/hooks/useCreateEntityState";
+  useCreateEntityContextValue,
+} from "@/lib/hooks/useCreateEntityContextValue";
 
 import { useContext, createContext } from "react";
 import { ActionFn, ActionState } from "@/lib/actions/types";
+import { useToastOnActionSuccess } from "@/lib/hooks/useToastOnActionSuccess";
+import { useCloseModalOnActionSuccess } from "@/lib/hooks/useCloseModalOnActionSuccess";
+import { useToastOnActionErrorWhenModalClosed } from "@/lib/hooks/useToastOnActionErrorWhenModalClosed";
 
 const CreatePositionContext = createContext<CreateEntityContextType | null>(
   null,
 );
 
+interface CreatePositionProviderProps {
+  createPosition: ActionFn<ActionState, FormData>;
+  children: React.ReactNode;
+}
+
 export function CreatePositionProvider({
   createPosition,
   children,
-}: {
-  createPosition: ActionFn<ActionState, FormData>;
-  children: React.ReactNode;
-}) {
-  const contextValue = useCreateEntityState(createPosition);
+}: CreatePositionProviderProps) {
+  const contextValue = useCreateEntityContextValue(createPosition);
+
+  const { state, isModalOpen, onModalOpenChange } = contextValue;
+  useToastOnActionSuccess(state);
+  useToastOnActionErrorWhenModalClosed(state, isModalOpen);
+  useCloseModalOnActionSuccess(state, onModalOpenChange);
 
   return (
     <CreatePositionContext.Provider value={contextValue}>

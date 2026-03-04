@@ -64,6 +64,10 @@ const AssignedTasksContainer = () => (
             key={task.id}
             {...TaskListItemStory.args}
             {...task}
+            updateComment={() => ({ status: "success" })}
+            updateTask={() => ({ status: "success" })}
+            deleteTask={() => ({ status: "success" })}
+            updateTaskStatus={() => ({ status: "success" })}
           />
         ))}
       </AssignedTaskList>

@@ -71,8 +71,6 @@ export const Default = {
     editUserFormContainer: <EditUserForm {...editUserFormArgs} />,
     newTaskFormContainer: <NewTaskForm {...newTaskFormArgs} />,
     navigationMobile: <UserNavigationMobile />,
-    deleteTasks: () => ({ status: "success" }),
-    updateTaskStatuses: () => ({ status: "success" }),
   },
 } satisfies Story;
 

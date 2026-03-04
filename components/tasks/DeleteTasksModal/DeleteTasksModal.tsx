@@ -8,51 +8,44 @@ import {
   ConfirmModalConfirmButton,
 } from "@/components/common/ConfirmModal";
 
+import { startTransition } from "react";
 import { useTranslations } from "next-intl";
-import { ModalProps } from "@/components/ui/Modal";
 import { DialogHeading } from "@/components/ui/Dialog";
 import { useDeleteTasks } from "../DeleteTasksContext";
 import { useSelectedTasks } from "../SelectedTasksContext";
-import { ActionFn, ActionState, DeleteTasksPayload } from "@/lib/actions/types";
-import { useDeleteEntityActionState } from "@/lib/hooks/useDeleteEntityActionState";
 
-interface DeleteTasksModalProps extends ModalProps {
-  taskIds: number[];
-  deleteTasks: ActionFn<ActionState, DeleteTasksPayload>;
+interface DeleteTasksModalProps {
+  isOpen: boolean;
+  onOpenChange: (open: boolean) => void;
 }
 
 export function DeleteTasksModal({
-  taskIds,
   isOpen,
   onOpenChange,
-  deleteTasks,
 }: DeleteTasksModalProps) {
   const t = useTranslations("tasks.DeleteTasksModal");
 
-  const { startTransition, setTaskIds: setDeleteTaskIds } = useDeleteTasks();
-
-  const [, action] = useDeleteEntityActionState({
-    deleteEntity: deleteTasks,
-    successMessage: t("successMessage"),
-  });
-
-  const { clear: clearSelectedItems } = useSelectedTasks();
+  const { ids: selectedIds, clear: clearSelectedItems } = useSelectedTasks();
+  const { action, setIds: setDeleteTaskIds } = useDeleteTasks();
 
   function handleDelete() {
-    onOpenChange?.(false);
+    // Close modal
+    onOpenChange(false);
 
-    // Clear selected items
-    clearSelectedItems();
+    // Highlight currently selected entities before deletion.
+    // Note: selectedIds may change if the user updates selection.
+    setDeleteTaskIds(selectedIds);
 
-    // Used to show an overlay on the selected tasks
-    setDeleteTaskIds(taskIds);
+    // Clear selected items after the modal close animation (150ms).
+    // This prevents the modal text from jumping due to deleted items.
+    setTimeout(() => {
+      clearSelectedItems();
+    }, 150);
 
-    const payload = {
-      ids: taskIds,
-      shouldRedirect: false,
-    };
-
-    startTransition(() => action(payload));
+    // Trigger the deletion
+    startTransition(() => {
+      action(selectedIds);
+    });
   }
 
   return (
@@ -65,7 +58,7 @@ export function DeleteTasksModal({
       <ConfirmModalText>
         {t.rich("text", {
           strong: (chunks) => <strong>{chunks}</strong>,
-          count: taskIds.length,
+          count: selectedIds.length,
         })}
       </ConfirmModalText>
       <ConfirmModalActions>

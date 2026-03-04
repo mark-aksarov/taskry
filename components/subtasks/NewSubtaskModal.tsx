@@ -1,44 +1,36 @@
+"use client";
+
 import {
   FormBaseModal,
   FormBaseModalDialog,
   FormBaseModalDialogBody,
 } from "../common/FormBaseModal";
 
-import { ModalProps } from "../ui/Modal";
 import { useTranslations } from "next-intl";
 import { DialogHeader } from "../ui/Dialog";
 import { NewSubtaskForm } from "./NewSubtaskForm";
-import { ActionFn, ActionState } from "@/lib/actions/types";
+import { useCreateSubtask } from "./CreateSubtaskContext";
 
-interface EditSubtaskModalProps
-  extends Pick<ModalProps, "isOpen" | "onOpenChange"> {
+interface EditSubtaskModalProps {
   taskId: number;
-  createSubtask: ActionFn<ActionState, FormData>;
-  mutate?: () => void;
 }
 
-export function NewSubtaskModal({
-  taskId,
-  createSubtask,
-  mutate,
-  ...props
-}: EditSubtaskModalProps) {
+export function NewSubtaskModal({ taskId }: EditSubtaskModalProps) {
   const t = useTranslations("subtasks.NewSubtaskModal");
+
+  const { isModalOpen, onModalOpenChange } = useCreateSubtask();
 
   return (
     <FormBaseModal
       data-test="new-subtask-modal"
       className="md:w-[350px]"
-      {...props}
+      isOpen={isModalOpen}
+      onOpenChange={onModalOpenChange}
     >
       <FormBaseModalDialog>
         <DialogHeader>{t("heading")}</DialogHeader>
         <FormBaseModalDialogBody>
-          <NewSubtaskForm
-            taskId={taskId}
-            createSubtask={createSubtask}
-            mutate={mutate}
-          />
+          <NewSubtaskForm taskId={taskId} />
         </FormBaseModalDialogBody>
       </FormBaseModalDialog>
     </FormBaseModal>

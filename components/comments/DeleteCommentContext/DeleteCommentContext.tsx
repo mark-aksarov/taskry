@@ -1,14 +1,14 @@
 "use client";
 
-import { ActionFn, ActionState } from "@/lib/actions/types";
-import { useActionErrorToast } from "@/lib/hooks/useActionErrorToast";
-import { DeleteEntityContextType } from "@/lib/hooks/useDeleteEntityState";
-import { useMemo, useContext, createContext, useActionState } from "react";
-import { useRefreshCommentsOnActionSuccess } from "@/lib/hooks/useRefreshCommentsOnActionSuccess";
+import {
+  DeleteEntityContextType,
+  useDeleteEntityContextValue,
+} from "@/lib/hooks/useDeleteEntityContextValue";
 
-export const initialState: ActionState = {
-  status: null,
-};
+import { useContext, createContext } from "react";
+import { ActionFn, ActionState } from "@/lib/actions/types";
+import { useToastOnActionError } from "@/lib/hooks/useToastOnActionError";
+import { useRefreshCommentsOnActionSuccess } from "@/lib/hooks/useRefreshCommentsOnActionSuccess";
 
 const DeleteCommentContext =
   createContext<DeleteEntityContextType<number> | null>(null);
@@ -22,18 +22,11 @@ export function DeleteCommentProvider({
   deleteComment,
   children,
 }: DeleteCommentProviderProps) {
-  const [state, action, isPending] = useActionState(
-    deleteComment,
-    initialState,
-  );
+  const contextValue = useDeleteEntityContextValue(deleteComment);
 
-  useActionErrorToast(state);
+  const { state } = contextValue;
+  useToastOnActionError(state);
   useRefreshCommentsOnActionSuccess(state);
-
-  const contextValue = useMemo(
-    () => ({ state, action, isPending }),
-    [state, action, isPending],
-  );
 
   return (
     <DeleteCommentContext.Provider value={contextValue}>

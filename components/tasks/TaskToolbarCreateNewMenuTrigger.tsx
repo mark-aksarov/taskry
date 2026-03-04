@@ -9,34 +9,37 @@ import { Key } from "react-aria";
 import { useState } from "react";
 import { Item } from "react-stately";
 import { useTranslations } from "next-intl";
+import { useCreateTask } from "./CreateTaskContext";
 import { Blocks, CalendarCheck } from "lucide-react";
 import { DialogHeader } from "@/components/ui/Dialog";
 import { GuestModeModal } from "../common/GuestModeModal";
-import { ActionFn, ActionState } from "@/lib/actions/types";
 import { useCurrentUser } from "../common/CurrentUserContext";
-import { NewTaskModal } from "@/components/tasks/NewTaskModal";
-import { NewTaskCategoryModal } from "../taskCategory/NewTaskCategoryModal";
+import { useCreateTaskCategory } from "../taskCategory/CreateTaskCategoryContext";
 
-interface TaskToolbarCreateNewMenuTriggerProps {
-  newTaskFormContainer: React.ReactNode;
-  createTaskCategory: ActionFn<ActionState, FormData>;
-}
-
-export function TaskToolbarCreateNewMenuTrigger({
-  newTaskFormContainer,
-  createTaskCategory,
-}: TaskToolbarCreateNewMenuTriggerProps) {
+export function TaskToolbarCreateNewMenuTrigger() {
   const t = useTranslations("tasks.TaskToolbarCreateNewMenuTrigger");
 
-  // Separate modal state for creating a task and a task category
-  const [openTaskModal, setOpenTaskModal] = useState(false);
-  const [openTaskCategoryModal, setOpenTaskCategoryModal] = useState(false);
-
-  // Guest mode
+  // If the user is a guest, show the guest mode modal instead of allowing creation
   const { isGuest } = useCurrentUser();
   const [isGuestModeModalOpen, setIsGuestModeModalOpen] = useState(false);
 
-  // Menu actions: show guest modal, show task modal, show task category modal
+  // Create task category: action state + form modal state
+  const {
+    isPending: isCreateTaskCategoryPending,
+    onModalOpenChange: onTaskCategoryModalOpenChange,
+  } = useCreateTaskCategory();
+
+  // Create task: action state + form modal state
+  const {
+    isPending: isCreateTaskPending,
+    onModalOpenChange: onTaskModalOpenChange,
+  } = useCreateTask();
+
+  /**
+   * Handles menu actions for creating a task or task category
+   * - If user is a guest, show guest modal
+   * - Otherwise, open create task category modal or create task modal
+   */
   function handleAction(key: Key) {
     if (isGuest) {
       setIsGuestModeModalOpen(true);
@@ -44,9 +47,9 @@ export function TaskToolbarCreateNewMenuTrigger({
     }
 
     if (key === "task") {
-      setOpenTaskModal(true);
+      onTaskModalOpenChange(true);
     } else if (key === "category") {
-      setOpenTaskCategoryModal(true);
+      onTaskCategoryModalOpenChange(true);
     }
   }
 
@@ -61,6 +64,10 @@ export function TaskToolbarCreateNewMenuTrigger({
           <ToolbarCreateNewModalTrigger
             data-test="task-toolbar-create-new-menu-trigger"
             label={t("label")}
+            isDisabled={
+              // Block user interactions while a task category or task is being created
+              isCreateTaskCategoryPending || isCreateTaskPending
+            }
           />
         )}
       >
@@ -73,20 +80,6 @@ export function TaskToolbarCreateNewMenuTrigger({
           {t("items.category")}
         </Item>
       </ToolbarCreateNewMenuTrigger>
-
-      {/* Modal for creating a new task */}
-      <NewTaskModal
-        newTaskFormContainer={newTaskFormContainer}
-        isOpen={openTaskModal}
-        onOpenChange={setOpenTaskModal}
-      />
-
-      {/* Modal for creating a new task category */}
-      <NewTaskCategoryModal
-        createTaskCategory={createTaskCategory}
-        isOpen={openTaskCategoryModal}
-        onOpenChange={setOpenTaskCategoryModal}
-      />
 
       {/* Guest mode modal */}
       <GuestModeModal

@@ -5,25 +5,19 @@ import {
   ItemBaseActionMenuDialogHeader,
 } from "../../common/ItemBase";
 
-import {
-  ActionFn,
-  ActionState,
-  ToggleSubtaskPayload,
-} from "@/lib/actions/types";
-
-import { useState } from "react";
 import { tv } from "tailwind-variants";
 import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
 import { Button } from "react-aria-components";
+import { startTransition, useState } from "react";
 import { focusRing } from "@/components/ui/styles";
 import { EditSubtaskModal } from "../EditSubtaskModal";
 import { DeleteSubtaskModal } from "../DeleteSubtaskModal";
+import { useToggleSubtask } from "../ToggleSubtaskContext";
+import { useUpdateSubtask } from "../UpdateSubtaskContext";
 import { GuestModeModal } from "../../common/GuestModeModal";
 import { CheckCheck, Loader2, Pencil, Trash } from "lucide-react";
 import { useCurrentUser } from "@/components/common/CurrentUserContext";
-import { useToggleSubtaskTransition } from "../ToggleSubtaskTransitionContext";
-import { useToggleSubtaskStatusActionState } from "./useToggleSubtaskStatusActionState";
 import { useSubtaskListItemPending } from "../SubtaskListItem/useSubtaskListItemPending";
 
 interface SubtaskActionMenuTriggerProps {
@@ -31,10 +25,6 @@ interface SubtaskActionMenuTriggerProps {
   subtaskId: number;
   subtaskText: string;
   isDone: boolean;
-  toggleSubtask: ActionFn<ActionState, ToggleSubtaskPayload>;
-  updateSubtask: ActionFn<ActionState, FormData>;
-  deleteSubtask: ActionFn<ActionState, number>;
-  mutate?: () => void;
 }
 
 const buttonStyles = tv({
@@ -53,31 +43,24 @@ export function SubtaskActionMenuTrigger({
   subtaskId,
   subtaskText,
   isDone,
-  toggleSubtask,
-  updateSubtask,
-  deleteSubtask,
-  mutate,
 }: SubtaskActionMenuTriggerProps) {
   const t = useTranslations("subtasks.SubtaskActionMenuTrigger");
 
-  // Deleting the subtask
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-
-  // Toggle subtask status
-  const [, toggleSubtaskAction] = useToggleSubtaskStatusActionState({
-    toggleSubtask,
-    mutate,
-    successMessage: t("toggleSuccess"),
-  });
-  const { startTransition: startToggleTransition } =
-    useToggleSubtaskTransition();
-
-  // Guest mode
+  // Detect if the current user is a guest
   const { isGuest } = useCurrentUser();
   const [isGuestModeModalOpen, setIsGuestModeModalOpen] = useState(false);
 
-  // Edit modal / bottom sheet
-  const [isOpenEditModal, setIsOpenEditModal] = useState(false);
+  // Delete confirmation modal state
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+
+  // States for toggling subtask from context
+  const { action: toggleSubtaskAction } = useToggleSubtask();
+
+  // State for edit modal from context
+  const {
+    isModalOpen: isEditModalOpen,
+    onModalOpenChange: onEditModalOpenChange,
+  } = useUpdateSubtask();
 
   function handleAction(key: Key) {
     if (isGuest) {
@@ -88,9 +71,9 @@ export function SubtaskActionMenuTrigger({
     if (key === "delete") {
       setIsDeleteModalOpen(true);
     } else if (key === "edit") {
-      setIsOpenEditModal(true);
+      onEditModalOpenChange(true);
     } else if (key === "toggle") {
-      startToggleTransition(() =>
+      startTransition(() =>
         toggleSubtaskAction({ id: subtaskId, isDone: !isDone }),
       );
     }
@@ -137,13 +120,11 @@ export function SubtaskActionMenuTrigger({
       </ItemBaseActionMenuTrigger>
 
       <EditSubtaskModal
-        isOpen={isOpenEditModal}
+        isOpen={isEditModalOpen}
         taskId={taskId}
         subtaskId={subtaskId}
         subtaskText={subtaskText}
-        onOpenChange={setIsOpenEditModal}
-        updateSubtask={updateSubtask}
-        mutate={mutate}
+        onOpenChange={onEditModalOpenChange}
       />
 
       <DeleteSubtaskModal
@@ -151,8 +132,6 @@ export function SubtaskActionMenuTrigger({
         onOpenChange={setIsDeleteModalOpen}
         subtaskId={subtaskId}
         subtaskText={subtaskText}
-        deleteSubtask={deleteSubtask}
-        mutate={mutate}
       />
 
       <GuestModeModal

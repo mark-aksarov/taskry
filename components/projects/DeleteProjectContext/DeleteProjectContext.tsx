@@ -3,27 +3,33 @@
 import {
   ActionFn,
   ActionState,
-  DeleteProjectsPayload,
+  DeleteProjectPayload,
 } from "@/lib/actions/types";
 
 import {
-  useDeleteEntityState,
   DeleteEntityContextType,
-} from "@/lib/hooks/useDeleteEntityState";
+  useDeleteEntityContextValue,
+} from "@/lib/hooks/useDeleteEntityContextValue";
 
 import { useContext, createContext } from "react";
+import { useToastOnActionError } from "@/lib/hooks/useToastOnActionError";
 
 const DeleteProjectContext =
-  createContext<DeleteEntityContextType<DeleteProjectsPayload> | null>(null);
+  createContext<DeleteEntityContextType<DeleteProjectPayload> | null>(null);
+
+interface DeleteProjectProviderProps {
+  deleteProject: ActionFn<ActionState, DeleteProjectPayload>;
+  children: React.ReactNode;
+}
 
 export function DeleteProjectProvider({
   deleteProject,
   children,
-}: {
-  deleteProject: ActionFn<ActionState, DeleteProjectsPayload>;
-  children: React.ReactNode;
-}) {
-  const contextValue = useDeleteEntityState(deleteProject);
+}: DeleteProjectProviderProps) {
+  const contextValue = useDeleteEntityContextValue(deleteProject);
+
+  const { state } = contextValue;
+  useToastOnActionError(state);
 
   return (
     <DeleteProjectContext.Provider value={contextValue}>

@@ -4,10 +4,10 @@ import { CustomerList } from "./CustomerList";
 import { CustomerGrid } from "./CustomerGrid";
 import { CustomerItem } from "./CustomerItem";
 import { CustomerDetailContainer } from "./CustomerDetailContainer";
+import { deleteCustomer } from "@/lib/actions/customer/deleteCustomer";
 import { updateCustomer } from "@/lib/actions/customer/updateCustomer";
 import { CustomerListItemDTO } from "@/lib/data/customer/customer.dto";
 import { EditCustomerFormContainer } from "./EditCustomerFormContainer";
-import { deleteCustomers } from "@/lib/actions/customer/deleteCustomers";
 import { EntityContainerPresentation } from "../common/EntityContainerPresentation";
 
 export interface CustomersContainerProps {
@@ -36,7 +36,7 @@ export async function CustomersContainer({
           publicLink={customer.publicLink}
           company={customer.company}
           updateCustomer={updateCustomer}
-          deleteCustomer={deleteCustomers}
+          deleteCustomer={deleteCustomer}
           editCustomerFormContainer={
             <EditCustomerFormContainer customerId={customer.id} />
           }

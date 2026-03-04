@@ -5,24 +5,21 @@ import {
   FormBaseBody,
   FormBaseFooter,
   FormBaseSubmitButton,
-  useFormBaseActionState,
 } from "@/components/common/FormBase";
 
 import { DateValue } from "react-aria";
+import { startTransition } from "react";
 import { useTranslations } from "next-intl";
+import { useUpdateTask } from "../UpdateTaskContext";
 import { TaskStatus } from "@/generated/prisma/enums";
 import { TaskStatusSelect } from "../TaskStatusSelect";
 import { TaskProjectSelect } from "../TaskProjectSelect";
 import { TaskCategorySelect } from "../TaskCategorySelect";
 import { TaskAssigneeSelect } from "../TaskAssigneeSelect";
 import { TaskTitleTextField } from "../TaskTitleTextField";
-import { ActionFn, ActionState } from "@/lib/actions/types";
 import { TaskDeadlineDatePicker } from "../TaskDeadlineDatePicker";
-import { handleActionSubmit } from "@/lib/utils/handleActionSubmit";
 import { FormErrorBanner } from "@/components/common/FormErrorBanner";
 import { TaskDescriptionTextField } from "../TaskDescriptionTextField";
-import { useUpdateTaskTransition } from "../UpdateTaskTransitionContext";
-import { useUpdateEntityActionState } from "@/lib/hooks/useUpdateEntityActionState";
 
 interface EditTaskFormProps {
   taskId: number;
@@ -36,8 +33,6 @@ interface EditTaskFormProps {
   taskCategorySelectItems: { id: number; name: string }[];
   taskProjectSelectItems: { id: number; title: string }[];
   taskAssigneeSelectItems: { id: string; fullName: string }[];
-  updateTask: ActionFn<ActionState, FormData>;
-  mutate: () => void;
 }
 
 export function EditTaskForm({
@@ -52,18 +47,10 @@ export function EditTaskForm({
   taskCategorySelectItems,
   taskProjectSelectItems,
   taskAssigneeSelectItems,
-  updateTask,
-  mutate,
 }: EditTaskFormProps) {
   const t = useTranslations("tasks.EditTaskForm");
 
-  const { startTransition } = useUpdateTaskTransition();
-
-  const [state, action, isPending] = useUpdateEntityActionState({
-    updateEntity: updateTask,
-    onSuccess: mutate,
-    successMessage: t("successMessage"),
-  });
+  const { state, isPending, action } = useUpdateTask();
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();

@@ -4,8 +4,9 @@ import { hasOwnerRole } from "@/lib/utils/hasOwnerRole";
 import { hasGuestRole } from "@/lib/utils/hasGuestRole";
 import { CustomerDetailPage } from "./CustomerDetailPage";
 import { getCustomerSummary } from "@/lib/data/customer/customer.dal";
+import { deleteCustomer } from "@/lib/actions/customer/deleteCustomer";
+import { updateCustomer } from "@/lib/actions/customer/updateCustomer";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
-import { deleteCustomers } from "@/lib/actions/customer/deleteCustomers";
 import { CurrentUserProvider } from "@/components/common/CurrentUserContext";
 import { CustomerDetailActions } from "@/components/customer/CustomerDetailActions";
 import { UpdateCustomerProvider } from "@/components/customer/UpdateCustomerContext";
@@ -13,7 +14,6 @@ import { CustomerHeaderContainer } from "@/components/customer/CustomerHeaderCon
 import { defaultAppHeaderSlots } from "@/components/layout/AppHeader/defaultAppHeaderSlots";
 import { EditCustomerFormContainer } from "@/components/customer/EditCustomerFormContainer";
 import { CustomerDetailAltContainer } from "@/components/customer/CustomerDetailAltContainer";
-import { updateCustomer } from "@/lib/actions/customer/updateCustomer";
 
 export default async function AppCustomerDetailPage({
   params,
@@ -56,7 +56,7 @@ export default async function AppCustomerDetailPage({
             <CustomerDetailActions
               customerId={id}
               customerFullName={customerSummary.fullName}
-              deleteCustomer={deleteCustomers}
+              deleteCustomer={deleteCustomer}
               editCustomerFormContainer={
                 <EditCustomerFormContainer customerId={id} />
               }

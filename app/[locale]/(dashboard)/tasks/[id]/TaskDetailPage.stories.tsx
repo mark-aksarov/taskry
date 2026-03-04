@@ -74,7 +74,6 @@ export const WithoutOptionalTaskData = {
         project={task.project}
         deadline={task.deadline}
         status={task.status}
-        createSubtask={() => ({ status: "success" })}
       />
     ),
     taskHeaderContainer: <TaskDetailHeader taskTitle={task.title} />,

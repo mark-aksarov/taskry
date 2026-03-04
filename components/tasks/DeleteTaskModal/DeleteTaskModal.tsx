@@ -1,44 +1,40 @@
 "use client";
 
-import { useTranslations } from "next-intl";
-import { ModalProps } from "@/components/ui/Modal";
+import { startTransition } from "react";
+import { useDeleteTask } from "../DeleteTaskContext";
 import { useSelectedTasks } from "../SelectedTasksContext";
 import { BaseDeleteTaskModal } from "./BaseDeleteTaskModal";
-import { useDeleteTaskTransition } from "../DeleteTaskTransitionContext";
-import { useDeleteEntityActionState } from "@/lib/hooks/useDeleteEntityActionState";
-import { ActionFn, ActionState, DeleteTasksPayload } from "@/lib/actions/types";
 
-interface DeleteTaskModalProps extends ModalProps {
+interface DeleteTaskModalProps {
   taskId: number;
   taskTitle: string;
-  deleteTask: ActionFn<ActionState, DeleteTasksPayload>;
+  isOpen: boolean;
+  onOpenChange: (isOpen: boolean) => void;
 }
 
 export function DeleteTaskModal({
   taskId,
   taskTitle,
-  deleteTask,
   isOpen,
   onOpenChange,
 }: DeleteTaskModalProps) {
-  const t = useTranslations("tasks.DeleteTaskModal");
-
-  const { startTransition } = useDeleteTaskTransition();
-
-  const [, action] = useDeleteEntityActionState({
-    deleteEntity: deleteTask,
-    successMessage: t("successMessage"),
-  });
+  const { action } = useDeleteTask();
 
   const { remove: removeSelected } = useSelectedTasks();
 
   function handleDelete() {
-    //Remove the task from the selection to prevent access to it
+    const payload = {
+      id: taskId,
+      shouldRedirect: false,
+    };
+
+    //Remove the entity from the selection to prevent access to it
     removeSelected(taskId);
 
     //close modal before deleting
-    onOpenChange?.(false);
-    startTransition(() => action({ ids: [taskId], shouldRedirect: false }));
+    onOpenChange(false);
+
+    startTransition(() => action(payload));
   }
 
   return (

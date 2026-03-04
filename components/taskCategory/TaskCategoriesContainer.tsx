@@ -1,8 +1,8 @@
 import { TaskCategoryList } from "./TaskCategoryList";
 import { TaskCategoryListItem } from "./TaskCategoryListItem";
 import { updateTaskCategory } from "@/lib/actions/taskCategory/updateTaskCategory";
+import { deleteTaskCategory } from "@/lib/actions/taskCategory/deleteTaskCategory";
 import { getTaskCategorySummaries } from "@/lib/data/taskCategory/taskCategory.dal";
-import { deleteTaskCategories } from "@/lib/actions/taskCategory/deleteTaskCategories";
 
 export async function TaskCategoriesContainer() {
   const taskCategories = await getTaskCategorySummaries();
@@ -15,7 +15,7 @@ export async function TaskCategoriesContainer() {
           id={taskCategory.id}
           name={taskCategory.name}
           updateTaskCategory={updateTaskCategory}
-          deleteTaskCategory={deleteTaskCategories}
+          deleteTaskCategory={deleteTaskCategory}
         />
       ))}
     </TaskCategoryList>

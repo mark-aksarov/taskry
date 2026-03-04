@@ -1,3 +1,5 @@
+"use client";
+
 import {
   FormBaseModal,
   FormBaseModalDialog,
@@ -5,22 +7,24 @@ import {
 } from "@/components/common/FormBaseModal";
 
 import { useTranslations } from "next-intl";
-import { ModalProps } from "@/components/ui/Modal";
 import { DialogHeader } from "@/components/ui/Dialog";
+import { useUpdateTask } from "../UpdateTaskContext";
 
-interface EditTaskModalProps
-  extends Pick<ModalProps, "isOpen" | "onOpenChange"> {
+interface EditTaskModalProps {
   editTaskFormContainer: React.ReactNode;
 }
 
-export function EditTaskModal({
-  editTaskFormContainer,
-  ...props
-}: EditTaskModalProps) {
+export function EditTaskModal({ editTaskFormContainer }: EditTaskModalProps) {
   const t = useTranslations("tasks.EditTaskModal");
 
+  const { isModalOpen, onModalOpenChange } = useUpdateTask();
+
   return (
-    <FormBaseModal data-test="edit-task-modal" {...props}>
+    <FormBaseModal
+      data-test="edit-task-modal"
+      isOpen={isModalOpen}
+      onOpenChange={onModalOpenChange}
+    >
       <FormBaseModalDialog>
         <DialogHeader>{t("title")}</DialogHeader>
         <FormBaseModalDialogBody>

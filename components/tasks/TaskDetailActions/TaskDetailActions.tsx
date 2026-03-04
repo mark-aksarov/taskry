@@ -2,52 +2,55 @@
 
 import { useTranslations } from "next-intl";
 import { Pencil, Trash } from "lucide-react";
-import { EditTaskModal } from "../EditTaskModal";
-import { startTransition, useState } from "react";
+import { useUpdateTask } from "../UpdateTaskContext";
 import { TaskCommentsModal } from "../TaskCommentsModal";
 import { BaseDeleteTaskModal } from "../DeleteTaskModal";
+import { startTransition, useActionState, useState } from "react";
 import { GuestModeModal } from "@/components/common/GuestModeModal";
 import { NavigationButton } from "@/components/common/NavigationButton";
 import { useCurrentUser } from "@/components/common/CurrentUserContext";
-import { ActionFn, ActionState, DeleteTasksPayload } from "@/lib/actions/types";
-import { useDeleteEntityPageActionState } from "@/lib/hooks/useDeleteEntityPageActionState";
+import { ActionFn, ActionState, DeleteTaskPayload } from "@/lib/actions/types";
 import { DetailActionsCommentsModalTrigger } from "@/components/common/DetailActionsCommentsModalTrigger";
-import { useUpdateTaskTransition } from "../UpdateTaskTransitionContext";
+
+const initialDeleteState: ActionState = {
+  status: null,
+};
 
 interface TaskDetailActionsProps {
   taskId: number;
   taskTitle: string;
   taskCommentsContainer: React.ReactNode;
-  editTaskFormContainer: React.ReactNode;
   sendComment: ActionFn<ActionState, FormData>;
   updateComment: ActionFn<ActionState, FormData>;
-  deleteTask: ActionFn<ActionState, DeleteTasksPayload>;
+  deleteTask: ActionFn<ActionState, DeleteTaskPayload>;
 }
 
 export function TaskDetailActions({
   taskId,
   taskTitle,
   taskCommentsContainer,
-  editTaskFormContainer,
   sendComment,
   updateComment,
   deleteTask,
 }: TaskDetailActionsProps) {
   const t = useTranslations("tasks.TaskDetailActions");
 
-  // Deleting the task
-  const [, action, isDeletePending] = useDeleteEntityPageActionState({
-    deleteEntity: deleteTask,
-  });
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-
-  // Guest mode
+  // If the user is a guest, show the guest mode modal instead of allowing creation
   const { isGuest } = useCurrentUser();
   const [isGuestModeModalOpen, setIsGuestModeModalOpen] = useState(false);
 
-  // Editing the task
-  const { isPending: isUpdatePending } = useUpdateTaskTransition();
-  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  // Delete task: action state + form modal state
+  const [, deleteAction, isDeletePending] = useActionState(
+    deleteTask,
+    initialDeleteState,
+  );
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+
+  // Edit task: action state + form modal state
+  const {
+    isPending: isUpdatePending,
+    onModalOpenChange: onEditModalOpenChange,
+  } = useUpdateTask();
 
   function handleDeletePress() {
     if (isGuest) {
@@ -64,12 +67,14 @@ export function TaskDetailActions({
       return;
     }
 
-    setIsEditModalOpen(true);
+    onEditModalOpenChange(true);
   }
 
+  // Close modal and delete task
+  // We should redirect to the task list page after deletion
   function handleDelete() {
     setIsDeleteModalOpen(false);
-    startTransition(() => action({ ids: [taskId], shouldRedirect: true }));
+    startTransition(() => deleteAction({ id: taskId, shouldRedirect: true }));
   }
 
   return (
@@ -103,13 +108,6 @@ export function TaskDetailActions({
           label={t("comments")}
         />
       </div>
-
-      {/* Modal for editing task details */}
-      <EditTaskModal
-        isOpen={isEditModalOpen}
-        onOpenChange={setIsEditModalOpen}
-        editTaskFormContainer={editTaskFormContainer}
-      />
 
       {/* Modal for confirming task deletion */}
       <BaseDeleteTaskModal

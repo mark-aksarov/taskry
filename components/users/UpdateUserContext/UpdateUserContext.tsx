@@ -1,12 +1,15 @@
 "use client";
 
 import {
-  useUpdateEntityState,
   UpdateEntityContextType,
-} from "@/lib/hooks/useUpdateEntityState";
+  useUpdateEntityContextValue,
+} from "@/lib/hooks/useUpdateEntityContextValue";
 
-import { createContext, useContext } from "react";
+import { useContext, createContext } from "react";
 import { ActionFn, ActionState } from "@/lib/actions/types";
+import { useToastOnActionSuccess } from "@/lib/hooks/useToastOnActionSuccess";
+import { useCloseModalOnActionSuccess } from "@/lib/hooks/useCloseModalOnActionSuccess";
+import { useToastOnActionErrorWhenModalClosed } from "@/lib/hooks/useToastOnActionErrorWhenModalClosed";
 
 const UpdateUserContext = createContext<UpdateEntityContextType | null>(null);
 
@@ -19,7 +22,12 @@ export function UpdateUserProvider({
   updateUser,
   children,
 }: UpdateUserProviderProps) {
-  const contextValue = useUpdateEntityState(updateUser);
+  const contextValue = useUpdateEntityContextValue(updateUser);
+
+  const { state, isModalOpen, onModalOpenChange } = contextValue;
+  useToastOnActionSuccess(state);
+  useToastOnActionErrorWhenModalClosed(state, isModalOpen);
+  useCloseModalOnActionSuccess(state, onModalOpenChange);
 
   return (
     <UpdateUserContext.Provider value={contextValue}>

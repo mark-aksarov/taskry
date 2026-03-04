@@ -1,24 +1,27 @@
 "use client";
 
-import { TaskItemPendingOverlay } from "./TaskItem";
-import { DeleteTaskTransitionProvider } from "./DeleteTaskTransitionContext";
-import { UpdateTaskTransitionProvider } from "./UpdateTaskTransitionContext";
-import { TaskListItem, TaskListItemProps } from "./TaskListItem/TaskListItem";
-import { UpdateTaskStatusTransitionProvider } from "./UpdateTaskStatusTransitionContext";
+import { TaskListItem } from "./TaskListItem";
+import { DeleteTaskProvider } from "./DeleteTaskContext";
+import { UpdateTaskProvider } from "./UpdateTaskContext";
+import { TaskItemPendingOverlay, TaskItemProps } from "./TaskItem";
+import { UpdateTaskStatusProvider } from "./UpdateTaskStatusContext";
 
 // AssignedTaskListItem does not have access to SelectedTasksProvider and UpdateTaskStatusesProvider
-export const AssignedTaskListItem = (
-  props: Omit<TaskListItemProps, "showCheckbox">,
-) => {
+export const AssignedTaskListItem = ({
+  updateTask,
+  deleteTask,
+  updateTaskStatus,
+  ...props
+}: Omit<TaskItemProps, "showCheckbox" | "subtasksTotal" | "subtasksDone">) => {
   return (
-    <DeleteTaskTransitionProvider>
-      <UpdateTaskTransitionProvider>
-        <UpdateTaskStatusTransitionProvider>
+    <DeleteTaskProvider deleteTask={deleteTask}>
+      <UpdateTaskProvider updateTask={updateTask}>
+        <UpdateTaskStatusProvider updateTaskStatus={updateTaskStatus}>
           <TaskItemPendingOverlay taskId={props.id}>
             <TaskListItem {...props} />
           </TaskItemPendingOverlay>
-        </UpdateTaskStatusTransitionProvider>
-      </UpdateTaskTransitionProvider>
-    </DeleteTaskTransitionProvider>
+        </UpdateTaskStatusProvider>
+      </UpdateTaskProvider>
+    </DeleteTaskProvider>
   );
 };

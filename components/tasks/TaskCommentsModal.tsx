@@ -1,6 +1,9 @@
 import { useTranslations } from "next-intl";
 import { ActionFn, ActionState } from "@/lib/actions/types";
-import { EntityCommentsModal } from "@/components/comments/EntityCommentsModal";
+import { CommentFormProvider } from "../comments/CommentFormContext";
+import { SendCommentProvider } from "../comments/SendCommentContext";
+import { EntityCommentsModal } from "../comments/EntityCommentsModal";
+import { UpdateCommentProvider } from "../comments/UpdateCommentContext";
 
 interface TaskCommentsModalProps {
   taskId: number;
@@ -18,14 +21,19 @@ export function TaskCommentsModal({
   const t = useTranslations("tasks.TaskCommentsModal");
 
   return (
-    <EntityCommentsModal
+    <CommentFormProvider
       entityId={taskId}
       entityKey="taskId"
       mutateUrl={`/api/tasks/${taskId}/comments`}
-      title={t("title")}
-      commentsContainer={taskCommentsContainer}
-      sendComment={sendComment}
-      updateComment={updateComment}
-    />
+    >
+      <SendCommentProvider sendComment={sendComment}>
+        <UpdateCommentProvider updateComment={updateComment}>
+          <EntityCommentsModal
+            title={t("title")}
+            commentsContainer={taskCommentsContainer}
+          />
+        </UpdateCommentProvider>
+      </SendCommentProvider>
+    </CommentFormProvider>
   );
 }

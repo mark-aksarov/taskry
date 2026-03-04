@@ -4,10 +4,12 @@ import { TaskDetailPage } from "./TaskDetailPage";
 import { hasGuestRole } from "@/lib/utils/hasGuestRole";
 import { hasOwnerRole } from "@/lib/utils/hasOwnerRole";
 import { getTaskSummary } from "@/lib/data/task/task.dal";
-import { deleteTasks } from "@/lib/actions/task/deleteTasks";
+import { updateTask } from "@/lib/actions/task/updateTask";
+import { deleteTask } from "@/lib/actions/task/deleteTask";
 import { sendComment } from "@/lib/actions/comment/sendComment";
 import { updateComment } from "@/lib/actions/comment/updateComment";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
+import { UpdateTaskProvider } from "@/components/tasks/UpdateTaskContext";
 import { CurrentUserProvider } from "@/components/common/CurrentUserContext";
 import { TaskCommentsContainer } from "@/components/tasks/TaskCommentsContainer";
 import { EditTaskFormContainer } from "@/components/tasks/EditTaskFormContainer";
@@ -48,18 +50,20 @@ export default async function AppTaskDetailPage({
 
   return (
     <CurrentUserProvider value={currentUserContextValue}>
-      <TaskDetailPage
-        taskDetailContainer={<TaskDetailAltContainer taskId={id} />}
-        taskHeaderContainer={<TaskDetailHeaderContainer taskId={id} />}
-        editTaskFormContainer={<EditTaskFormContainer taskId={id} />}
-        taskId={id}
-        taskTitle={taskSummary.title}
-        deleteTask={deleteTasks}
-        taskCommentsContainer={<TaskCommentsContainer taskId={id} />}
-        sendComment={sendComment}
-        updateComment={updateComment}
-        appHeaderProps={defaultAppHeaderSlots}
-      />
+      <UpdateTaskProvider updateTask={updateTask}>
+        <TaskDetailPage
+          taskId={id}
+          taskTitle={taskSummary.title}
+          deleteTask={deleteTask}
+          sendComment={sendComment}
+          updateComment={updateComment}
+          taskDetailContainer={<TaskDetailAltContainer taskId={id} />}
+          taskHeaderContainer={<TaskDetailHeaderContainer taskId={id} />}
+          editTaskFormContainer={<EditTaskFormContainer taskId={id} />}
+          taskCommentsContainer={<TaskCommentsContainer taskId={id} />}
+          appHeaderProps={defaultAppHeaderSlots}
+        />
+      </UpdateTaskProvider>
     </CurrentUserProvider>
   );
 }

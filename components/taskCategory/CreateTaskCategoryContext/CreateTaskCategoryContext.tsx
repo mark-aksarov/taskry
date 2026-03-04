@@ -1,25 +1,35 @@
 "use client";
 
 import {
-  useCreateEntityState,
   CreateEntityContextType,
-} from "@/lib/hooks/useCreateEntityState";
+  useCreateEntityContextValue,
+} from "@/lib/hooks/useCreateEntityContextValue";
 
 import { useContext, createContext } from "react";
 import { ActionFn, ActionState } from "@/lib/actions/types";
+import { useToastOnActionSuccess } from "@/lib/hooks/useToastOnActionSuccess";
+import { useCloseModalOnActionSuccess } from "@/lib/hooks/useCloseModalOnActionSuccess";
+import { useToastOnActionErrorWhenModalClosed } from "@/lib/hooks/useToastOnActionErrorWhenModalClosed";
 
 const CreateTaskCategoryContext = createContext<CreateEntityContextType | null>(
   null,
 );
 
+interface CreateTaskCategoryProviderProps {
+  createTaskCategory: ActionFn<ActionState, FormData>;
+  children: React.ReactNode;
+}
+
 export function CreateTaskCategoryProvider({
   createTaskCategory,
   children,
-}: {
-  createTaskCategory: ActionFn<ActionState, FormData>;
-  children: React.ReactNode;
-}) {
-  const contextValue = useCreateEntityState(createTaskCategory);
+}: CreateTaskCategoryProviderProps) {
+  const contextValue = useCreateEntityContextValue(createTaskCategory);
+
+  const { isModalOpen, onModalOpenChange, state } = contextValue;
+  useToastOnActionSuccess(state);
+  useToastOnActionErrorWhenModalClosed(state, isModalOpen);
+  useCloseModalOnActionSuccess(state, onModalOpenChange);
 
   return (
     <CreateTaskCategoryContext.Provider value={contextValue}>

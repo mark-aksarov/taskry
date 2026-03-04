@@ -8,9 +8,9 @@ import {
   ConfirmModalConfirmButton,
 } from "@/components/common/ConfirmModal";
 
+import { startTransition } from "react";
 import { useTranslations } from "next-intl";
 import { DialogHeading } from "@/components/ui/Dialog";
-import { handleDeleteEntity } from "@/lib/utils/handleDeleteEntity";
 import { useDeleteTaskCategory } from "../DeleteTaskCategoryContext";
 import { useSelectedItems } from "@/components/common/SelectedItemsContext";
 
@@ -34,13 +34,13 @@ export function DeleteTaskCategoryModal({
   const { remove: removeSelected } = useSelectedItems();
 
   function handleDelete() {
-    handleDeleteEntity(
-      removeSelected,
-      action,
-      [taskCategoryId],
-      taskCategoryId,
-      onOpenChange,
-    );
+    //Remove the entity from the selection to prevent access to it
+    removeSelected(taskCategoryId);
+
+    //close modal before deleting
+    onOpenChange(false);
+
+    startTransition(() => action(taskCategoryId));
   }
 
   return (

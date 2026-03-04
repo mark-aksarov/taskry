@@ -35,7 +35,13 @@ export const Default = {
         positionName={mockedUserDetail.position?.name}
       />
     ),
-    navigationDesktop: <UserNavigationDesktop />,
+    navigationDesktop: (
+      <UserNavigationDesktop
+        showUserActions
+        userId="user-1"
+        userFullName="User 1"
+      />
+    ),
   },
 } satisfies Story;
 
@@ -43,7 +49,13 @@ export const Loading = {
   args: {
     profileDetail: <UserDetailSkeleton />,
     profileHeader: <DetailHeaderSkeleton />,
-    navigationDesktop: <UserNavigationDesktop />,
+    navigationDesktop: (
+      <UserNavigationDesktop
+        showUserActions
+        userId="user-1"
+        userFullName="User 1"
+      />
+    ),
   },
 } satisfies Story;
 
@@ -57,6 +69,12 @@ export const WithoutOptionalUserData = {
       />
     ),
     profileHeader: <UserDetailHeader fullName={mockedUserDetail.fullName} />,
-    navigationDesktop: <UserNavigationDesktop />,
+    navigationDesktop: (
+      <UserNavigationDesktop
+        showUserActions
+        userId="user-1"
+        userFullName="User 1"
+      />
+    ),
   },
 } satisfies Story;

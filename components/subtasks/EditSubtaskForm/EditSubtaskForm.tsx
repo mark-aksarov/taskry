@@ -7,42 +7,26 @@ import {
   FormBaseSubmitButton,
 } from "@/components/common/FormBase";
 
+import { startTransition } from "react";
 import { useTranslations } from "next-intl";
 import { SubtaskTextField } from "../SubtaskTextField";
-import { ActionFn, ActionState } from "@/lib/actions/types";
-import { handleActionSubmit } from "@/lib/utils/handleActionSubmit";
+import { useUpdateSubtask } from "../UpdateSubtaskContext";
 import { FormErrorBanner } from "@/components/common/FormErrorBanner";
-import { useUpdateSubtaskTransition } from "../UpdateSubtaskTransitionContext";
-import { useUpdateEntityActionState } from "@/lib/hooks/useUpdateEntityActionState";
-
-const initialState: ActionState = {
-  status: null,
-};
 
 interface EditSubtaskFormProps {
   subtaskId: number;
   taskId: number;
-  mutate?: () => void;
   textDefaultValue?: string;
-  updateSubtask: ActionFn<ActionState, FormData>;
 }
 
 export function EditSubtaskForm({
   subtaskId,
   taskId,
-  mutate,
   textDefaultValue,
-  updateSubtask,
 }: EditSubtaskFormProps) {
   const t = useTranslations("subtasks.EditSubtaskForm");
 
-  const { startTransition } = useUpdateSubtaskTransition();
-
-  const [state, action, isPending] = useUpdateEntityActionState({
-    updateEntity: updateSubtask,
-    onSuccess: mutate,
-    successMessage: t("successMessage"),
-  });
+  const { state, isPending, action } = useUpdateSubtask();
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();

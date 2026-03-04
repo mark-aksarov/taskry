@@ -60,7 +60,11 @@
     }
   },
   "TasksPage": {
-    "heading": "Задачи"
+    "heading": "Задачи",
+    "emptySection": {
+      "heading": "Нет задач",
+      "description": "Добавьте новую задачу, чтобы следить за работой"
+    }
   },
   "CustomersPage": {
     "heading": "Клиенты",
@@ -84,11 +88,6 @@
   },
   "TasksPageLoading": {
     "title": "Все задачи"
-  },
-  "TasksPageEmptyContainer": {
-    "heading": "Нет задач",
-    "description": "Добавьте новую задачу, чтобы следить за работой",
-    "addButtonLabel": "Новая задача"
   },
   "TaskDetailPage": {
     "heading": "Детали задачи"

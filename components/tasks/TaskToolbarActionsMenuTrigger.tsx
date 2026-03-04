@@ -1,13 +1,6 @@
 "use client";
 
-import {
-  ActionFn,
-  ActionState,
-  DeleteTasksPayload,
-  UpdateTaskStatusesPayload,
-} from "@/lib/actions/types";
-
-import { useState } from "react";
+import { startTransition, useState } from "react";
 import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
 import { DialogHeader } from "../ui/Dialog";
@@ -19,20 +12,11 @@ import { useCurrentUser } from "../common/CurrentUserContext";
 import { ToolbarActionsMenuTrigger } from "../common/Toolbar";
 import { Check, CircleEllipsis, Clock, Trash } from "lucide-react";
 import { useUpdateTaskStatuses } from "./UpdateTaskStatusesContext";
-import { useUpdateEntityStatusActionState } from "@/lib/hooks/useUpdateEntityStatusActionState";
 
-interface TaskToolbarActionsMenuTriggerProps {
-  deleteTasks: ActionFn<ActionState, DeleteTasksPayload>;
-  updateTaskStatuses: ActionFn<ActionState, UpdateTaskStatusesPayload>;
-}
-
-export const TaskToolbarActionsMenuTrigger = ({
-  deleteTasks,
-  updateTaskStatuses,
-}: TaskToolbarActionsMenuTriggerProps) => {
+export const TaskToolbarActionsMenuTrigger = () => {
   const t = useTranslations("tasks.TaskToolbarActionsMenuTrigger");
 
-  // Guest mode modal state
+  // Detect if the current user is a guest
   const { isGuest } = useCurrentUser();
   const [isGuestModeModalOpen, setIsGuestModeModalOpen] = useState(false);
 
@@ -40,18 +24,17 @@ export const TaskToolbarActionsMenuTrigger = ({
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
   // Action for updating task statuses
-  const [, updateTaskStatusAction] = useUpdateEntityStatusActionState({
-    updateEntityStatus: updateTaskStatuses,
-  });
-  const {
-    startTransition: startUpdateTaskStatusesTransition,
-    setTaskIds: setUpdateTaskStatusesIds,
-  } = useUpdateTaskStatuses();
+  const { action: updateTaskStatusesAction, setIds: setUpdateTaskStatusesIds } =
+    useUpdateTaskStatuses();
 
   // Selected with checkbox tasks
   const selected = useSelectedTasks();
 
-  // Menu actions: show guest modal, show delete modal, update task status
+  /**
+   * Handles menu actions for a selected tasks
+   * - If user is a guest, show guest modal
+   * - Otherwise, open delete confirmation modal based on action key or update task statuses
+   */
   const handleAction = (key: Key) => {
     if (isGuest) {
       setIsGuestModeModalOpen(true);
@@ -61,12 +44,14 @@ export const TaskToolbarActionsMenuTrigger = ({
     if (key === "delete") {
       setIsDeleteModalOpen(true);
     } else {
+      // I store the current ids separately so that checkbox changes
+      // during the update process don’t affect status tracking.
       setUpdateTaskStatusesIds(selected.ids);
 
-      startUpdateTaskStatusesTransition(() => {
+      startTransition(() => {
         const nextStatus = key as TaskStatus;
 
-        updateTaskStatusAction({
+        updateTaskStatusesAction({
           ids: selected.ids,
           nextStatus,
         });
@@ -109,8 +94,6 @@ export const TaskToolbarActionsMenuTrigger = ({
 
       {/* Modal for confirming task deletion */}
       <DeleteTasksModal
-        taskIds={selected.ids}
-        deleteTasks={deleteTasks}
         isOpen={isDeleteModalOpen}
         onOpenChange={setIsDeleteModalOpen}
       />

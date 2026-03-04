@@ -1,12 +1,15 @@
 "use client";
 
 import {
-  useUpdateEntityState,
   UpdateEntityContextType,
-} from "@/lib/hooks/useUpdateEntityState";
+  useUpdateEntityContextValue,
+} from "@/lib/hooks/useUpdateEntityContextValue";
 
 import { createContext, useContext } from "react";
 import { ActionFn, ActionState } from "@/lib/actions/types";
+import { useToastOnActionSuccess } from "@/lib/hooks/useToastOnActionSuccess";
+import { useCloseModalOnActionSuccess } from "@/lib/hooks/useCloseModalOnActionSuccess";
+import { useToastOnActionErrorWhenModalClosed } from "@/lib/hooks/useToastOnActionErrorWhenModalClosed";
 
 const UpdateTaskCategoryContext = createContext<UpdateEntityContextType | null>(
   null,
@@ -21,7 +24,12 @@ export function UpdateTaskCategoryProvider({
   updateTaskCategory,
   children,
 }: UpdateTaskCategoryProviderProps) {
-  const contextValue = useUpdateEntityState(updateTaskCategory);
+  const contextValue = useUpdateEntityContextValue(updateTaskCategory);
+
+  const { state, isModalOpen, onModalOpenChange } = contextValue;
+  useToastOnActionSuccess(state);
+  useToastOnActionErrorWhenModalClosed(state, isModalOpen);
+  useCloseModalOnActionSuccess(state, onModalOpenChange);
 
   return (
     <UpdateTaskCategoryContext.Provider value={contextValue}>

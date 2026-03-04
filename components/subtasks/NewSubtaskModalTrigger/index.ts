@@ -1,1 +1,0 @@
-export { NewSubtaskModalTrigger } from "./NewSubtaskModalTrigger";

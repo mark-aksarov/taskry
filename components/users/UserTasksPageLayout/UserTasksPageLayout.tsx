@@ -12,13 +12,6 @@ import {
   ToolbarMobileHeading,
 } from "@/components/common/Toolbar";
 
-import {
-  ActionFn,
-  ActionState,
-  DeleteTasksPayload,
-  UpdateTaskStatusesPayload,
-} from "@/lib/actions/types";
-
 import { useTranslations } from "next-intl";
 import { TaskSortField } from "@/lib/types";
 import { EditUserModal } from "../EditUserModal";
@@ -41,8 +34,6 @@ interface UserTasksPageLayoutProps {
   editUserFormContainer: React.ReactNode;
   newTaskFormContainer: React.ReactNode;
   userHeaderContainer: React.ReactNode;
-  deleteTasks: ActionFn<ActionState, DeleteTasksPayload>;
-  updateTaskStatuses: ActionFn<ActionState, UpdateTaskStatusesPayload>;
 }
 
 export function UserTasksPageLayout({
@@ -56,17 +47,8 @@ export function UserTasksPageLayout({
   editUserFormContainer,
   newTaskFormContainer,
   userHeaderContainer,
-  deleteTasks,
-  updateTaskStatuses,
 }: UserTasksPageLayoutProps) {
   const t = useTranslations("users.UserTasksPageLayout");
-
-  const taskToolbarActionsMenuTrigger = (
-    <TaskToolbarActionsMenuTrigger
-      deleteTasks={deleteTasks}
-      updateTaskStatuses={updateTaskStatuses}
-    />
-  );
 
   if (totalTasksCount === 0) {
     return (
@@ -90,7 +72,7 @@ export function UserTasksPageLayout({
                 <TaskToolbarSortingMenuTrigger
                   selectedSortField={selectedSortField}
                 />
-                {taskToolbarActionsMenuTrigger}
+                <TaskToolbarActionsMenuTrigger />
               </div>
             </DetailCardHeader>
             {userTasksContainer}
@@ -111,7 +93,7 @@ export function UserTasksPageLayout({
             <TaskToolbarSortingMenuTrigger
               selectedSortField={selectedSortField}
             />
-            {taskToolbarActionsMenuTrigger}
+            <TaskToolbarActionsMenuTrigger />
           </ToolbarMobileTop>
 
           <ToolbarMobileBottom>{navigationMobile}</ToolbarMobileBottom>

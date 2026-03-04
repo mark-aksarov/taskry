@@ -8,7 +8,6 @@ import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { usePathname, useRouter } from "next/navigation";
 import { PageDecorator } from "@/.storybook/PageDecorator";
 import { NewTaskForm } from "@/components/tasks/NewTaskForm";
-import { TasksPageEmptyContainer } from "./TasksPageEmptyContainer";
 import { TaskFiltersForm } from "@/components/tasks/TaskFiltersForm";
 import { TaskGridStory } from "@/components/tasks/TaskGrid/__stories__";
 import { TaskListStory } from "@/components/tasks/TaskList/__stories__";
@@ -48,6 +47,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
+    totalCount: 3,
     totalFilteredTasks: 3,
     selectedSortField: "title",
     tasksContainer: (
@@ -61,9 +61,6 @@ export const Default = {
     ),
     filtersFormContainer: <TaskFiltersForm {...taskFiltersFormArgs} />,
     newTaskFormContainer: <NewTaskForm {...newTaskFormArgs} />,
-    createTaskCategory: () => ({ status: "success" }),
-    deleteTasks: () => ({ status: "success" }),
-    updateTaskStatuses: () => ({ status: "success" }),
   },
 } satisfies Story;
 
@@ -73,11 +70,5 @@ export const Loading = {
 } satisfies Story;
 
 export const WithNoTasks = {
-  args: { ...Default.args },
-  render: () => (
-    <TasksPageEmptyContainer
-      newTaskFormContainer={<NewTaskForm {...newTaskFormArgs} />}
-      createTaskCategory={() => ({ status: "success" })}
-    />
-  ),
+  args: { ...Default.args, totalCount: 0 },
 } satisfies Story;

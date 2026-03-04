@@ -9,11 +9,11 @@ import {
 import { memo } from "react";
 import { Check } from "lucide-react";
 import { twMerge } from "tailwind-merge";
+import { DeleteSubtaskProvider } from "../DeleteSubtaskContext";
+import { UpdateSubtaskProvider } from "../UpdateSubtaskContext";
+import { ToggleSubtaskProvider } from "../ToggleSubtaskContext";
 import { SubtaskActionMenuTrigger } from "../SubtaskActionMenuTrigger";
 import { SubtaskListItemPendingOverlay } from "./SubtaskListItemPendingOverlay";
-import { DeleteSubtaskTransitionProvider } from "../DeleteSubtaskTransitionContext";
-import { UpdateSubtaskTransitionProvider } from "../UpdateSubtaskTransitionContext";
-import { ToggleSubtaskTransitionProvider } from "../ToggleSubtaskTransitionContext";
 
 interface SubtaskListItemProps {
   id: number;
@@ -23,20 +23,30 @@ interface SubtaskListItemProps {
   toggleSubtask: ActionFn<ActionState, ToggleSubtaskPayload>;
   updateSubtask: ActionFn<ActionState, FormData>;
   deleteSubtask: ActionFn<ActionState, number>;
-  mutate?: () => void;
 }
 
-export function SubtaskListItem(props: SubtaskListItemProps) {
+export function SubtaskListItem({
+  toggleSubtask,
+  updateSubtask,
+  deleteSubtask,
+  ...props
+}: SubtaskListItemProps) {
   return (
-    <DeleteSubtaskTransitionProvider>
-      <UpdateSubtaskTransitionProvider>
-        <ToggleSubtaskTransitionProvider>
+    <DeleteSubtaskProvider taskId={props.taskId} deleteSubtask={deleteSubtask}>
+      <UpdateSubtaskProvider
+        taskId={props.taskId}
+        updateSubtask={updateSubtask}
+      >
+        <ToggleSubtaskProvider
+          taskId={props.taskId}
+          toggleSubtask={toggleSubtask}
+        >
           <SubtaskListItemPendingOverlay>
             <SubtaskListItemInner {...props} />
           </SubtaskListItemPendingOverlay>
-        </ToggleSubtaskTransitionProvider>
-      </UpdateSubtaskTransitionProvider>
-    </DeleteSubtaskTransitionProvider>
+        </ToggleSubtaskProvider>
+      </UpdateSubtaskProvider>
+    </DeleteSubtaskProvider>
   );
 }
 
@@ -46,11 +56,10 @@ const SubtaskListItemInner = memo(
     text,
     isDone,
     taskId,
-    toggleSubtask,
-    updateSubtask,
-    deleteSubtask,
-    mutate,
-  }: SubtaskListItemProps) => {
+  }: Omit<
+    SubtaskListItemProps,
+    "toggleSubtask" | "updateSubtask" | "deleteSubtask"
+  >) => {
     return (
       <div className="flex items-start justify-between">
         <div className="flex items-start gap-2">
@@ -67,10 +76,6 @@ const SubtaskListItemInner = memo(
             subtaskId={id}
             isDone={isDone}
             subtaskText={text}
-            toggleSubtask={toggleSubtask}
-            updateSubtask={updateSubtask}
-            deleteSubtask={deleteSubtask}
-            mutate={mutate}
           />
         </div>
       </div>

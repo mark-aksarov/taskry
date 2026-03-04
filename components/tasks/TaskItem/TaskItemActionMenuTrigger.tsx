@@ -15,34 +15,22 @@ import {
   ItemBaseActionMenuDialogHeader,
 } from "@/components/common/ItemBase";
 
-import {
-  ActionFn,
-  ActionState,
-  DeleteTasksPayload,
-  UpdateTaskStatusesPayload,
-} from "@/lib/actions/types";
-
-import { useState } from "react";
 import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
-import { EditTaskModal } from "../EditTaskModal";
+import { startTransition, useState } from "react";
 import { DeleteTaskModal } from "../DeleteTaskModal";
+import { useUpdateTask } from "../UpdateTaskContext";
 import { TaskStatus } from "@/generated/prisma/enums";
-import { useCurrentUser } from "../../common/CurrentUserContext";
-import { GuestModeModal } from "@/components/common/GuestModeModal";
-import { useDeleteTaskTransition } from "../DeleteTaskTransitionContext";
-import { useUpdateTaskStatusTransition } from "../UpdateTaskStatusTransitionContext";
-import { useUpdateEntityStatusActionState } from "@/lib/hooks/useUpdateEntityStatusActionState";
 import { useTaskItemPending } from "./useTaskItemPending";
+import { useCurrentUser } from "../../common/CurrentUserContext";
+import { useUpdateTaskStatus } from "../UpdateTaskStatusContext";
+import { GuestModeModal } from "@/components/common/GuestModeModal";
 
 export type TaskItemActionMenuTriggerProps = {
   taskId: number;
   taskTitle: string;
   taskStatus: TaskStatus;
   className?: string;
-  editTaskFormContainer: React.ReactNode;
-  deleteTask: ActionFn<ActionState, DeleteTasksPayload>;
-  updateTaskStatus: ActionFn<ActionState, UpdateTaskStatusesPayload>;
 };
 
 export function TaskItemActionMenuTrigger({
@@ -50,32 +38,34 @@ export function TaskItemActionMenuTrigger({
   taskTitle,
   taskStatus,
   className,
-  editTaskFormContainer,
-  deleteTask,
-  updateTaskStatus,
 }: TaskItemActionMenuTriggerProps) {
   const t = useTranslations("tasks.TaskItemActionMenuTrigger");
 
-  // Deleting the task
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-
-  // Guest mode
+  // Detect if the current user is a guest
   const { isGuest } = useCurrentUser();
   const [isGuestModeModalOpen, setIsGuestModeModalOpen] = useState(false);
 
-  // Modal state for editing the task
-  const [isOpenEditModal, setIsOpenEditModal] = useState(false);
+  // Delete confirmation modal state
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
-  // updating task status
-  const [, updateTaskStatusAction] = useUpdateEntityStatusActionState({
-    updateEntityStatus: updateTaskStatus,
-  });
+  // State for edit modal from context
+  const { onModalOpenChange: onEditModalOpenChange } = useUpdateTask();
+
+  // State for update task status from context
   const {
     isPending: isUpdateTaskStatusPending,
-    startTransition: startUpdateTaskStatusTransition,
-  } = useUpdateTaskStatusTransition();
+    action: updateTaskStatusAction,
+  } = useUpdateTaskStatus();
 
-  // Handle menu actions
+  /**
+   * Handles menu actions for a task item:
+   * 1. If the user is a guest, show the guest mode modal.
+   * 2. If action is "details", do nothing.
+   * 3. If action is "edit", open the edit modal.
+   * 4. If action is "delete", open the delete confirmation modal.
+   * 5. Otherwise, treat the action as a task status update
+   *    and trigger the updateProjectStatusAction for this task.
+   */
   function handleAction(key: Key) {
     if (isGuest) {
       setIsGuestModeModalOpen(true);
@@ -89,19 +79,21 @@ export function TaskItemActionMenuTrigger({
     }
 
     if (action === "edit") {
-      setIsOpenEditModal(true);
+      onEditModalOpenChange(true);
     } else if (action === "delete") {
       setIsDeleteModalOpen(true);
     } else {
-      startUpdateTaskStatusTransition(() => {
+      startTransition(() => {
         updateTaskStatusAction({
-          ids: [taskId],
+          id: taskId,
           nextStatus: action as TaskStatus,
         });
       });
     }
   }
 
+  // Disable status-related menu items while a task update is in progress,
+  // otherwise disable only the current task status.
   const disabledKeys = isUpdateTaskStatusPending
     ? ["pending", "active", "completed"]
     : [taskStatus];
@@ -144,19 +136,11 @@ export function TaskItemActionMenuTrigger({
         </Item>
       </ItemBaseActionMenuTrigger>
 
-      {/* Modal for editing task details */}
-      <EditTaskModal
-        isOpen={isOpenEditModal}
-        onOpenChange={setIsOpenEditModal}
-        editTaskFormContainer={editTaskFormContainer}
-      />
-
       <DeleteTaskModal
         taskId={taskId}
         taskTitle={taskTitle}
         isOpen={isDeleteModalOpen}
         onOpenChange={setIsDeleteModalOpen}
-        deleteTask={deleteTask}
       />
 
       <GuestModeModal

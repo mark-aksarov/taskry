@@ -38,6 +38,7 @@ export const Default = {
         setTimeout(() => res({ status: "success" }), 500),
       );
     },
+    updateTask: () => ({ status: "success" }),
     deleteTask: () => ({ status: "success" }),
   },
 } satisfies Story;

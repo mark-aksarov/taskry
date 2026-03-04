@@ -3,7 +3,7 @@
 import {
   ActionFn,
   ActionState,
-  DeleteCustomersPayload,
+  DeleteCustomerPayload,
 } from "@/lib/actions/types";
 
 import { CustomerGridItem } from "../CustomerGridItem";
@@ -29,7 +29,7 @@ export interface CustomerItemProps {
   customerDetailContainer: React.ReactNode;
   editCustomerFormContainer: React.ReactNode;
   updateCustomer: ActionFn<ActionState, FormData>;
-  deleteCustomer: ActionFn<ActionState, DeleteCustomersPayload>;
+  deleteCustomer: ActionFn<ActionState, DeleteCustomerPayload>;
 }
 
 export function CustomerItem({

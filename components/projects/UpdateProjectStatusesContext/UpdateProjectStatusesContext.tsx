@@ -1,9 +1,9 @@
 "use client";
 
 import {
-  useUpdateEntityStatusesState,
   UpdateEntityStatusesContextType,
-} from "@/lib/hooks/useUpdateEntityStatusesState";
+  useUpdateEntityStatusesContextValue,
+} from "@/lib/hooks/useUpdateEntityStatusesContextValue";
 
 import {
   ActionFn,
@@ -25,7 +25,9 @@ export function UpdateProjectStatusesProvider({
   updateProjectStatuses,
   children,
 }: UpdateProjectStatusesProviderProps) {
-  const contextValue = useUpdateEntityStatusesState(updateProjectStatuses);
+  const contextValue = useUpdateEntityStatusesContextValue(
+    updateProjectStatuses,
+  );
 
   return (
     <UpdateProjectStatusesContext.Provider value={contextValue}>

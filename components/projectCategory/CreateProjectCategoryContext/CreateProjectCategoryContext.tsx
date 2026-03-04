@@ -1,24 +1,41 @@
 "use client";
 
 import {
-  useCreateEntityState,
-  CreateEntityContextType,
-} from "@/lib/hooks/useCreateEntityState";
+  useMemo,
+  useState,
+  useContext,
+  createContext,
+  useActionState,
+} from "react";
 
-import { useContext, createContext } from "react";
+import {
+  CreateEntityContextType,
+  useCreateEntityContextValue,
+} from "@/lib/hooks/useCreateEntityContextValue";
+
 import { ActionFn, ActionState } from "@/lib/actions/types";
+import { useToastOnActionSuccess } from "@/lib/hooks/useToastOnActionSuccess";
+import { useCloseModalOnActionSuccess } from "@/lib/hooks/useCloseModalOnActionSuccess";
+import { useToastOnActionErrorWhenModalClosed } from "@/lib/hooks/useToastOnActionErrorWhenModalClosed";
 
 const CreateProjectCategoryContext =
   createContext<CreateEntityContextType | null>(null);
 
+interface CreateProjectCategoryProviderProps {
+  createProjectCategory: ActionFn<ActionState, FormData>;
+  children: React.ReactNode;
+}
+
 export function CreateProjectCategoryProvider({
   createProjectCategory,
   children,
-}: {
-  createProjectCategory: ActionFn<ActionState, FormData>;
-  children: React.ReactNode;
-}) {
-  const contextValue = useCreateEntityState(createProjectCategory);
+}: CreateProjectCategoryProviderProps) {
+  const contextValue = useCreateEntityContextValue(createProjectCategory);
+
+  const { isModalOpen, onModalOpenChange, state } = contextValue;
+  useToastOnActionSuccess(state);
+  useToastOnActionErrorWhenModalClosed(state, isModalOpen);
+  useCloseModalOnActionSuccess(state, onModalOpenChange);
 
   return (
     <CreateProjectCategoryContext.Provider value={contextValue}>

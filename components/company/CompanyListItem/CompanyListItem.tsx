@@ -22,7 +22,7 @@ interface CompanyListItemProps {
   id: number;
   name: string;
   updateCompany: ActionFn<ActionState, FormData>;
-  deleteCompany: ActionFn<ActionState, number[]>;
+  deleteCompany: ActionFn<ActionState, number>;
 }
 
 export function CompanyListItem({

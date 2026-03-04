@@ -82,7 +82,7 @@ export default async function AppProfileTasksPage({
 
   return (
     <CurrentUserProvider value={currentUserContextValue}>
-      <UpdateTaskStatusesProvider>
+      <UpdateTaskStatusesProvider updateTaskStatuses={updateTaskStatuses}>
         <SelectedTasksProvider
           pageItems={tasks.map((task) => ({
             id: task.id,
@@ -90,7 +90,7 @@ export default async function AppProfileTasksPage({
           }))}
         >
           <PageTransitionProvider>
-            <DeleteTasksProvider>
+            <DeleteTasksProvider deleteTasks={deleteTasks}>
               <UpdateUserProvider updateUser={updateUser}>
                 <ChangePasswordProvider changePassword={changePassword}>
                   <DeleteUserProvider deleteUser={deleteUser}>
@@ -122,8 +122,6 @@ export default async function AppProfileTasksPage({
                         <UserHeaderContainer userId={userId} />
                       }
                       newTaskFormContainer={<NewTaskFormContainer />}
-                      deleteTasks={deleteTasks}
-                      updateTaskStatuses={updateTaskStatuses}
                     />
                   </DeleteUserProvider>
                 </ChangePasswordProvider>

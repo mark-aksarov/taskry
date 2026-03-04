@@ -14,6 +14,7 @@ import {
 import { memo } from "react";
 import Image from "next/image";
 import { TaskItemProps } from "../TaskItem";
+import { EditTaskModal } from "../EditTaskModal";
 import { TaskDetailModal } from "../TaskDetailModal";
 import { TaskCommentsModal } from "../TaskCommentsModal";
 import { TaskItemBaseBadge } from "../TaskItemBaseBadge";
@@ -28,7 +29,11 @@ import { TaskItemActionMenuTrigger } from "../TaskItem/TaskItemActionMenuTrigger
 
 export type TaskListItemProps = Omit<
   TaskItemProps,
-  "subtasksTotal" | "subtasksDone"
+  | "subtasksTotal"
+  | "subtasksDone"
+  | "updateTask"
+  | "deleteTask"
+  | "updateTaskStatus"
 >;
 
 export const TaskListItem = memo(
@@ -49,8 +54,6 @@ export const TaskListItem = memo(
     projectDetailContainer,
     sendComment,
     updateComment,
-    deleteTask,
-    updateTaskStatus,
   }: TaskListItemProps) => {
     const t = useTranslations("tasks.TaskListItem");
 
@@ -79,122 +82,128 @@ export const TaskListItem = memo(
     );
 
     return (
-      <TaskListItemLayout
-        id={id}
-        checkboxSlot={
-          showCheckbox && <TaskItemCheckbox id={id} status={status} />
-        }
-        mainSlot={
-          <>
-            <ListItemTitleDetailModalTrigger
-              modal={
-                <TaskDetailModal
-                  taskId={id}
-                  taskDetailContainer={taskDetailContainer}
-                />
-              }
-            >
-              {title}
-            </ListItemTitleDetailModalTrigger>
-
-            <ListItemText>{deadlineOn}</ListItemText>
-          </>
-        }
-        mainMobileSlot={
-          <>
-            <ListItemTitle>{title}</ListItemTitle>
-            <ListItemText>{deadlineOn}</ListItemText>
-          </>
-        }
-        assigneeImgSlot={
-          <>
-            {assignee ? (
-              <ItemBaseDetailModalTrigger
-                modal={
-                  <UserDetailModal
-                    userId={assignee.id}
-                    userDetailContainer={userDetailContainer}
-                  />
-                }
-              >
-                {assigneeImg}
-              </ItemBaseDetailModalTrigger>
-            ) : (
-              <UnknownUser className="h-9 w-9" />
-            )}
-          </>
-        }
-        assigneeSlot={
-          <>
-            {assignee ? (
+      <>
+        <TaskListItemLayout
+          id={id}
+          checkboxSlot={
+            showCheckbox && <TaskItemCheckbox id={id} status={status} />
+          }
+          mainSlot={
+            <>
               <ListItemTitleDetailModalTrigger
                 modal={
-                  <UserDetailModal
-                    userId={assignee.id}
-                    userDetailContainer={userDetailContainer}
+                  <TaskDetailModal
+                    taskId={id}
+                    taskDetailContainer={taskDetailContainer}
                   />
                 }
               >
-                {assignee.fullName}
+                {title}
               </ListItemTitleDetailModalTrigger>
-            ) : (
-              <ListItemTitle>{t("noAssignee")}</ListItemTitle>
-            )}
 
-            <ListItemText>{t("assignee")}</ListItemText>
-          </>
-        }
-        categorySlot={
-          <>
-            <ListItemTitle>
-              {category ? category.name : t("noCategory")}
-            </ListItemTitle>
-            <ListItemText>{t("category")}</ListItemText>
-          </>
-        }
-        projectSlot={
-          <>
-            <ListItemTitleDetailModalTrigger
+              <ListItemText>{deadlineOn}</ListItemText>
+            </>
+          }
+          mainMobileSlot={
+            <>
+              <ListItemTitle>{title}</ListItemTitle>
+              <ListItemText>{deadlineOn}</ListItemText>
+            </>
+          }
+          assigneeImgSlot={
+            <>
+              {assignee ? (
+                <ItemBaseDetailModalTrigger
+                  modal={
+                    <UserDetailModal
+                      userId={assignee.id}
+                      userDetailContainer={userDetailContainer}
+                    />
+                  }
+                >
+                  {assigneeImg}
+                </ItemBaseDetailModalTrigger>
+              ) : (
+                <UnknownUser className="h-9 w-9" />
+              )}
+            </>
+          }
+          assigneeSlot={
+            <>
+              {assignee ? (
+                <ListItemTitleDetailModalTrigger
+                  modal={
+                    <UserDetailModal
+                      userId={assignee.id}
+                      userDetailContainer={userDetailContainer}
+                    />
+                  }
+                >
+                  {assignee.fullName}
+                </ListItemTitleDetailModalTrigger>
+              ) : (
+                <ListItemTitle>{t("noAssignee")}</ListItemTitle>
+              )}
+
+              <ListItemText>{t("assignee")}</ListItemText>
+            </>
+          }
+          categorySlot={
+            <>
+              <ListItemTitle>
+                {category ? category.name : t("noCategory")}
+              </ListItemTitle>
+              <ListItemText>{t("category")}</ListItemText>
+            </>
+          }
+          projectSlot={
+            <>
+              <ListItemTitleDetailModalTrigger
+                modal={
+                  <ProjectDetailModal
+                    projectId={project.id}
+                    projectDetailContainer={projectDetailContainer}
+                  />
+                }
+              >
+                {project.title}
+              </ListItemTitleDetailModalTrigger>
+              <ListItemText>{t("project")}</ListItemText>
+            </>
+          }
+          statusSlot={
+            <TaskItemBaseBadge
+              taskId={id}
+              deadline={deadline}
+              status={status}
+            />
+          }
+          commentsModalTriggerSlot={
+            <ItemBaseCommentsModalTrigger
+              data-test={`task-${id}-comments-modal-trigger`}
+              commentsCount={commentsCount}
               modal={
-                <ProjectDetailModal
-                  projectId={project.id}
-                  projectDetailContainer={projectDetailContainer}
+                <TaskCommentsModal
+                  taskId={id}
+                  taskCommentsContainer={taskCommentsContainer}
+                  sendComment={sendComment}
+                  updateComment={updateComment}
                 />
               }
-            >
-              {project.title}
-            </ListItemTitleDetailModalTrigger>
-            <ListItemText>{t("project")}</ListItemText>
-          </>
-        }
-        statusSlot={
-          <TaskItemBaseBadge taskId={id} deadline={deadline} status={status} />
-        }
-        commentsModalTriggerSlot={
-          <ItemBaseCommentsModalTrigger
-            data-test={`task-${id}-comments-modal-trigger`}
-            commentsCount={commentsCount}
-            modal={
-              <TaskCommentsModal
-                taskId={id}
-                taskCommentsContainer={taskCommentsContainer}
-                sendComment={sendComment}
-                updateComment={updateComment}
-              />
-            }
-          />
-        }
-        menuTriggerSlot={
-          <TaskItemActionMenuTrigger
-            taskId={id}
-            taskTitle={title}
-            taskStatus={status}
-            editTaskFormContainer={editTaskFormContainer}
-            deleteTask={deleteTask}
-            updateTaskStatus={updateTaskStatus}
-          />
-        }
-      />
+            />
+          }
+          menuTriggerSlot={
+            <TaskItemActionMenuTrigger
+              taskId={id}
+              taskTitle={title}
+              taskStatus={status}
+            />
+          }
+        />
+
+        {/* Modal for editing task details */}
+        <EditTaskModal editTaskFormContainer={editTaskFormContainer} />
+      </>
     );
   },
 );

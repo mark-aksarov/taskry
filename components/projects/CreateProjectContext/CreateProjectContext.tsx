@@ -1,25 +1,35 @@
 "use client";
 
 import {
-  useCreateEntityState,
   CreateEntityContextType,
-} from "@/lib/hooks/useCreateEntityState";
+  useCreateEntityContextValue,
+} from "@/lib/hooks/useCreateEntityContextValue";
 
 import { useContext, createContext } from "react";
 import { ActionFn, ActionState } from "@/lib/actions/types";
+import { useToastOnActionSuccess } from "@/lib/hooks/useToastOnActionSuccess";
+import { useCloseModalOnActionSuccess } from "@/lib/hooks/useCloseModalOnActionSuccess";
+import { useToastOnActionErrorWhenModalClosed } from "@/lib/hooks/useToastOnActionErrorWhenModalClosed";
 
 const CreateProjectContext = createContext<CreateEntityContextType | null>(
   null,
 );
 
+interface CreateProjectProviderProps {
+  createProject: ActionFn<ActionState, FormData>;
+  children: React.ReactNode;
+}
+
 export function CreateProjectProvider({
   createProject,
   children,
-}: {
-  createProject: ActionFn<ActionState, FormData>;
-  children: React.ReactNode;
-}) {
-  const contextValue = useCreateEntityState(createProject);
+}: CreateProjectProviderProps) {
+  const contextValue = useCreateEntityContextValue(createProject);
+
+  const { state, isModalOpen, onModalOpenChange } = contextValue;
+  useToastOnActionSuccess(state);
+  useToastOnActionErrorWhenModalClosed(state, isModalOpen);
+  useCloseModalOnActionSuccess(state, onModalOpenChange);
 
   return (
     <CreateProjectContext.Provider value={contextValue}>

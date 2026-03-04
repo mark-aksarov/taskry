@@ -5,9 +5,9 @@ import { ProjectDetailPage } from "./ProjectDetailPage";
 import { hasOwnerRole } from "@/lib/utils/hasOwnerRole";
 import { sendComment } from "@/lib/actions/comment/sendComment";
 import { getProjectSummary } from "@/lib/data/project/project.dal";
+import { deleteProject } from "@/lib/actions/project/deleteProject";
 import { updateComment } from "@/lib/actions/comment/updateComment";
 import { updateProject } from "@/lib/actions/project/updateProject";
-import { deleteProjects } from "@/lib/actions/project/deleteProjects";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { CurrentUserProvider } from "@/components/common/CurrentUserContext";
 import { UpdateProjectProvider } from "@/components/projects/UpdateProjectContext";
@@ -56,7 +56,7 @@ export default async function AppProjectDetailPage({
           projectTitle={projectSummary.title}
           sendComment={sendComment}
           updateComment={updateComment}
-          deleteProject={deleteProjects}
+          deleteProject={deleteProject}
           projectDetailContainer={<ProjectDetailAltContainer projectId={id} />}
           projectHeaderContainer={
             <ProjectDetailHeaderContainer projectId={id} />

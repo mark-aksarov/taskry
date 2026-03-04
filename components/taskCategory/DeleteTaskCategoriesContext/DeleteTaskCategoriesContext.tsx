@@ -1,25 +1,31 @@
 "use client";
 
 import {
-  useDeleteEntitiesState,
   DeleteEntitiesContextType,
-} from "@/lib/hooks/useDeleteEntitiesState";
+  useDeleteEntitiesContextValue,
+} from "@/lib/hooks/useDeleteEntitiesContextValue";
 
 import { useContext, createContext } from "react";
 import { ActionFn, ActionState } from "@/lib/actions/types";
+import { useToastOnActionError } from "@/lib/hooks/useToastOnActionError";
 
-const DeleteTaskCategoriesContext = createContext<DeleteEntitiesContextType<
-  number[]
-> | null>(null);
+const DeleteTaskCategoriesContext =
+  createContext<DeleteEntitiesContextType | null>(null);
+
+interface DeleteTaskCategoriesProviderProps {
+  deleteTaskCategories: ActionFn<ActionState, number[]>;
+  children: React.ReactNode;
+}
 
 export function DeleteTaskCategoriesProvider({
   deleteTaskCategories,
   children,
-}: {
-  deleteTaskCategories: ActionFn<ActionState, number[]>;
-  children: React.ReactNode;
-}) {
-  const contextValue = useDeleteEntitiesState(deleteTaskCategories);
+}: DeleteTaskCategoriesProviderProps) {
+  const contextValue = useDeleteEntitiesContextValue(deleteTaskCategories);
+
+  const { state } = contextValue;
+  useToastOnActionError(state);
+
   return (
     <DeleteTaskCategoriesContext.Provider value={contextValue}>
       {children}

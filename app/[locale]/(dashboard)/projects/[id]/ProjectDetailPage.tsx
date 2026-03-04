@@ -11,7 +11,7 @@ import {
 import {
   ActionFn,
   ActionState,
-  DeleteProjectsPayload,
+  DeleteProjectPayload,
 } from "@/lib/actions/types";
 
 import { useTranslations } from "next-intl";
@@ -33,7 +33,7 @@ interface ProjectPageProps {
   appHeaderProps: AppHeaderContainerProps;
   sendComment: ActionFn<ActionState, FormData>;
   updateComment: ActionFn<ActionState, FormData>;
-  deleteProject: ActionFn<ActionState, DeleteProjectsPayload>;
+  deleteProject: ActionFn<ActionState, DeleteProjectPayload>;
 }
 
 export function ProjectDetailPage({

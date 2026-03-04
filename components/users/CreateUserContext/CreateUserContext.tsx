@@ -1,23 +1,33 @@
 "use client";
 
 import {
-  useCreateEntityState,
   CreateEntityContextType,
-} from "@/lib/hooks/useCreateEntityState";
+  useCreateEntityContextValue,
+} from "@/lib/hooks/useCreateEntityContextValue";
 
 import { useContext, createContext } from "react";
 import { ActionFn, ActionState } from "@/lib/actions/types";
+import { useToastOnActionSuccess } from "@/lib/hooks/useToastOnActionSuccess";
+import { useCloseModalOnActionSuccess } from "@/lib/hooks/useCloseModalOnActionSuccess";
+import { useToastOnActionErrorWhenModalClosed } from "@/lib/hooks/useToastOnActionErrorWhenModalClosed";
 
 const CreateUserContext = createContext<CreateEntityContextType | null>(null);
+
+interface CreateUserProviderProps {
+  createUser: ActionFn<ActionState, FormData>;
+  children: React.ReactNode;
+}
 
 export function CreateUserProvider({
   createUser,
   children,
-}: {
-  createUser: ActionFn<ActionState, FormData>;
-  children: React.ReactNode;
-}) {
-  const contextValue = useCreateEntityState(createUser);
+}: CreateUserProviderProps) {
+  const contextValue = useCreateEntityContextValue(createUser);
+
+  const { state, isModalOpen, onModalOpenChange } = contextValue;
+  useToastOnActionSuccess(state);
+  useToastOnActionErrorWhenModalClosed(state, isModalOpen);
+  useCloseModalOnActionSuccess(state, onModalOpenChange);
 
   return (
     <CreateUserContext.Provider value={contextValue}>

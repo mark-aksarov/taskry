@@ -58,7 +58,7 @@ export function ProjectItemActionMenuTrigger({
   } = useUpdateProjectStatus();
 
   /**
-   * Handles menu actions for a customer item:
+   * Handles menu actions for a project item:
    * 1. If the user is a guest, show the guest mode modal.
    * 2. If action is "details", do nothing.
    * 3. If action is "edit", open the edit modal.
@@ -85,7 +85,7 @@ export function ProjectItemActionMenuTrigger({
     } else {
       startTransition(() => {
         updateProjectStatusAction({
-          ids: [projectId],
+          id: projectId,
           nextStatus: action as ProjectStatus,
         });
       });

@@ -7,11 +7,12 @@ import {
 
 import { UserTaskList } from "./UserTaskList";
 import { UserTaskListItem } from "./UserTaskListItem";
+import { updateTask } from "@/lib/actions/task/updateTask";
 import { TaskListItemDTO } from "@/lib/data/task/task.dto";
-import { deleteTasks } from "@/lib/actions/task/deleteTasks";
+import { deleteTask } from "@/lib/actions/task/deleteTask";
 import { sendComment } from "@/lib/actions/comment/sendComment";
 import { updateComment } from "@/lib/actions/comment/updateComment";
-import { updateTaskStatuses } from "@/lib/actions/task/updateTaskStatuses";
+import { updateTaskStatus } from "@/lib/actions/task/updateTaskStatus";
 import { TaskDetailContainer } from "@/components/tasks/TaskDetailContainer";
 import { TaskCommentsContainer } from "@/components/tasks/TaskCommentsContainer";
 import { EditTaskFormContainer } from "@/components/tasks/EditTaskFormContainer";
@@ -40,14 +41,15 @@ export async function UserTasksContainer({
               title={task.title}
               deadline={task.deadline}
               status={task.status}
-              deleteTask={deleteTasks}
+              deleteTask={deleteTask}
               commentsCount={task.commentsCount}
               taskDetailContainer={<TaskDetailContainer taskId={task.id} />}
               taskCommentsContainer={<TaskCommentsContainer taskId={task.id} />}
               editTaskFormContainer={<EditTaskFormContainer taskId={task.id} />}
-              updateTaskStatus={updateTaskStatuses}
+              updateTaskStatus={updateTaskStatus}
               sendComment={sendComment}
               updateComment={updateComment}
+              updateTask={updateTask}
             />
           ))}
       </UserTaskList>

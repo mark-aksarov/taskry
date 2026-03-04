@@ -3,20 +3,20 @@
 import {
   ActionFn,
   ActionState,
-  DeleteTasksPayload,
-  UpdateTaskStatusesPayload,
+  DeleteTaskPayload,
+  UpdateTaskStatusPayload,
 } from "@/lib/actions/types";
 
 import { TaskListItem } from "../TaskListItem";
 import { TaskGridItem } from "../TaskGridItem";
 import { TaskStatus } from "@/generated/prisma/enums";
+import { DeleteTaskProvider } from "../DeleteTaskContext";
+import { UpdateTaskProvider } from "../UpdateTaskContext";
 import { useSelectedTasks } from "../SelectedTasksContext";
 import { useViewMode } from "@/components/common/ViewMode";
 import { TaskItemPendingOverlay } from "./TaskItemPendingOverlay";
 import { SelectableItem } from "@/components/common/SelectableItem";
-import { DeleteTaskTransitionProvider } from "../DeleteTaskTransitionContext";
-import { UpdateTaskTransitionProvider } from "../UpdateTaskTransitionContext";
-import { UpdateTaskStatusTransitionProvider } from "../UpdateTaskStatusTransitionContext";
+import { UpdateTaskStatusProvider } from "../UpdateTaskStatusContext";
 
 export interface TaskItemProps {
   id: number;
@@ -47,19 +47,25 @@ export interface TaskItemProps {
   projectDetailContainer: React.ReactNode;
   sendComment: ActionFn<ActionState, FormData>;
   updateComment: ActionFn<ActionState, FormData>;
-  updateTaskStatus: ActionFn<ActionState, UpdateTaskStatusesPayload>;
-  deleteTask: ActionFn<ActionState, DeleteTasksPayload>;
+  updateTask: ActionFn<ActionState, FormData>;
+  deleteTask: ActionFn<ActionState, DeleteTaskPayload>;
+  updateTaskStatus: ActionFn<ActionState, UpdateTaskStatusPayload>;
 }
 
 // We access batch update and delete state at this level
-export function TaskItem(props: TaskItemProps) {
+export function TaskItem({
+  updateTask,
+  deleteTask,
+  updateTaskStatus,
+  ...props
+}: TaskItemProps) {
   const selected = useSelectedTasks();
   const { viewMode } = useViewMode();
 
   return (
-    <DeleteTaskTransitionProvider>
-      <UpdateTaskTransitionProvider>
-        <UpdateTaskStatusTransitionProvider>
+    <DeleteTaskProvider deleteTask={deleteTask}>
+      <UpdateTaskProvider updateTask={updateTask}>
+        <UpdateTaskStatusProvider updateTaskStatus={updateTaskStatus}>
           <TaskItemPendingOverlay taskId={props.id}>
             <SelectableItem
               {...selected}
@@ -72,8 +78,8 @@ export function TaskItem(props: TaskItemProps) {
               )}
             </SelectableItem>
           </TaskItemPendingOverlay>
-        </UpdateTaskStatusTransitionProvider>
-      </UpdateTaskTransitionProvider>
-    </DeleteTaskTransitionProvider>
+        </UpdateTaskStatusProvider>
+      </UpdateTaskProvider>
+    </DeleteTaskProvider>
   );
 }

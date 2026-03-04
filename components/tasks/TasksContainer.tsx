@@ -4,13 +4,14 @@ import { TaskList } from "./TaskList";
 import { TaskGrid } from "./TaskGrid";
 import { TaskItem } from "./TaskItem";
 import { TaskListItemDTO } from "@/lib/data/task/task.dto";
-import { deleteTasks } from "@/lib/actions/task/deleteTasks";
+import { deleteTask } from "@/lib/actions/task/deleteTask";
+import { updateTask } from "@/lib/actions/task/updateTask";
 import { TaskDetailContainer } from "./TaskDetailContainer";
 import { sendComment } from "@/lib/actions/comment/sendComment";
 import { EditTaskFormContainer } from "./EditTaskFormContainer";
 import { TaskCommentsContainer } from "./TaskCommentsContainer";
 import { updateComment } from "@/lib/actions/comment/updateComment";
-import { updateTaskStatuses } from "@/lib/actions/task/updateTaskStatuses";
+import { updateTaskStatus } from "@/lib/actions/task/updateTaskStatus";
 import { UserDetailContainer } from "@/components/users/UserDetailContainer";
 import { ProjectDetailContainer } from "@/components/projects/ProjectDetailContainer";
 import { EntityContainerPresentation } from "@/components/common/EntityContainerPresentation";
@@ -44,12 +45,13 @@ export async function TasksContainer({
             commentsCount={task.commentsCount}
             subtasksTotal={task.subtasks.total}
             subtasksDone={task.subtasks.done}
-            sendComment={sendComment}
-            updateComment={updateComment}
-            deleteTask={deleteTasks}
             category={task.category}
             project={task.project}
-            updateTaskStatus={updateTaskStatuses}
+            sendComment={sendComment}
+            updateComment={updateComment}
+            updateTask={updateTask}
+            deleteTask={deleteTask}
+            updateTaskStatus={updateTaskStatus}
             taskDetailContainer={<TaskDetailContainer taskId={task.id} />}
             taskCommentsContainer={<TaskCommentsContainer taskId={task.id} />}
             projectDetailContainer={

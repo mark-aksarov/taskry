@@ -8,8 +8,9 @@ import {
 
 import { Suspense } from "react";
 import { AssignedTaskList } from "../AssignedTaskList";
+import { updateTask } from "@/lib/actions/task/updateTask";
 import { TaskListItemDTO } from "@/lib/data/task/task.dto";
-import { deleteTasks } from "@/lib/actions/task/deleteTasks";
+import { deleteTask } from "@/lib/actions/task/deleteTask";
 import { TaskDetailContainer } from "../TaskDetailContainer";
 import { AssignedTaskListItem } from "../AssignedTaskListItem";
 import { NewTaskFormContainer } from "../NewTaskFormContainer";
@@ -17,7 +18,7 @@ import { sendComment } from "@/lib/actions/comment/sendComment";
 import { EditTaskFormContainer } from "../EditTaskFormContainer";
 import { TaskCommentsContainer } from "../TaskCommentsContainer";
 import { updateComment } from "@/lib/actions/comment/updateComment";
-import { updateTaskStatuses } from "@/lib/actions/task/updateTaskStatuses";
+import { updateTaskStatus } from "@/lib/actions/task/updateTaskStatus";
 import { UserDetailContainer } from "@/components/users/UserDetailContainer";
 import { ProjectDetailContainer } from "@/components/projects/ProjectDetailContainer";
 
@@ -67,13 +68,9 @@ async function AssignedTasksContainerInner({
               project={task.project}
               status={task.status}
               assignee={task.assignee}
-              updateTaskStatus={updateTaskStatuses}
-              deleteTask={deleteTasks}
               taskDetailContainer={<TaskDetailContainer taskId={task.id} />}
               commentsCount={task.commentsCount}
               taskCommentsContainer={<TaskCommentsContainer taskId={task.id} />}
-              sendComment={sendComment}
-              updateComment={updateComment}
               userDetailContainer={
                 task.assignee && (
                   <UserDetailContainer userId={task.assignee.id} />
@@ -83,6 +80,11 @@ async function AssignedTasksContainerInner({
                 <ProjectDetailContainer projectId={task.project.id} />
               }
               editTaskFormContainer={<EditTaskFormContainer taskId={task.id} />}
+              sendComment={sendComment}
+              updateComment={updateComment}
+              updateTask={updateTask}
+              deleteTask={deleteTask}
+              updateTaskStatus={updateTaskStatus}
             />
           ))}
         </AssignedTaskList>

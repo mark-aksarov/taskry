@@ -3,24 +3,27 @@
 import {
   ActionFn,
   ActionState,
-  DeleteCustomersPayload,
+  DeleteCustomerPayload,
 } from "@/lib/actions/types";
 
 import { useTranslations } from "next-intl";
 import { Pencil, Trash } from "lucide-react";
-import { startTransition, useState } from "react";
 import { EditCustomerModal } from "../EditCustomerModal";
 import { useUpdateCustomer } from "../UpdateCustomerContext";
 import { BaseDeleteCustomerModal } from "../DeleteCustomerModal";
+import { startTransition, useActionState, useState } from "react";
 import { GuestModeModal } from "@/components/common/GuestModeModal";
 import { NavigationButton } from "@/components/common/NavigationButton";
 import { useCurrentUser } from "@/components/common/CurrentUserContext";
-import { useDeleteEntityState } from "@/lib/hooks/useDeleteEntityState";
+
+const initialDeleteState: ActionState = {
+  status: null,
+};
 
 interface CustomerDetailActionsProps {
   customerId: number;
   customerFullName: string;
-  deleteCustomer: ActionFn<ActionState, DeleteCustomersPayload>;
+  deleteCustomer: ActionFn<ActionState, DeleteCustomerPayload>;
   editCustomerFormContainer: React.ReactNode;
 }
 
@@ -37,11 +40,13 @@ export function CustomerDetailActions({
   const [isGuestModeModalOpen, setIsGuestModeModalOpen] = useState(false);
 
   // Delete customer: action state + form modal state
-  const { action, isPending: isDeletePending } =
-    useDeleteEntityState(deleteCustomer);
+  const [, deleteAction, isDeletePending] = useActionState(
+    deleteCustomer,
+    initialDeleteState,
+  );
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
-  // Edit customer: action state + form modal state
+  // Edit customer: action state + form modal state from context
   const {
     isPending: isUpdatePending,
     onModalOpenChange: onEditModalOpenChange,
@@ -69,7 +74,9 @@ export function CustomerDetailActions({
   // We should redirect to the customer list page after deletion
   function handleDelete() {
     setIsDeleteModalOpen(false);
-    startTransition(() => action({ ids: [customerId], shouldRedirect: true }));
+    startTransition(() =>
+      deleteAction({ id: customerId, shouldRedirect: true }),
+    );
   }
 
   return (

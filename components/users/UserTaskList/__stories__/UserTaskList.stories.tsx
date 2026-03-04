@@ -30,6 +30,7 @@ export const Default = {
         key={task.id}
         {...UserTaskListItemStory.args}
         {...task}
+        updateTask={() => ({ status: "success" })}
       />
     )),
   },

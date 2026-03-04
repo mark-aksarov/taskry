@@ -3,8 +3,11 @@ import { DashboardPage } from "./DashboardPage";
 import { getTaskList } from "@/lib/data/task/task.dal";
 import { hasGuestRole } from "@/lib/utils/hasGuestRole";
 import { hasOwnerRole } from "@/lib/utils/hasOwnerRole";
+import { deleteTasks } from "@/lib/actions/task/deleteTasks";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { pageSearchParam, pageSizeSearchParam } from "@/lib/schemas/base";
+import { updateTaskStatuses } from "@/lib/actions/task/updateTaskStatuses";
+import { DeleteTasksProvider } from "@/components/tasks/DeleteTasksContext";
 import { CurrentUserProvider } from "@/components/common/CurrentUserContext";
 import { SelectedTasksProvider } from "@/components/tasks/SelectedTasksContext";
 import { PageTransitionProvider } from "@/components/common/PageTransitionContext";
@@ -15,7 +18,6 @@ import { UpdateTaskStatusesProvider } from "@/components/tasks/UpdateTaskStatuse
 import { defaultAppHeaderSlots } from "@/components/layout/AppHeader/defaultAppHeaderSlots";
 import { TotalProjectsCardContainer } from "@/components/projects/TotalProjectsCardContainer";
 import { TotalCustomersCardContainer } from "@/components/customer/TotalCustomersCardContainer";
-import { DeleteTasksProvider } from "@/components/tasks/DeleteTasksContext";
 
 const searchParamsSchema = z.object({
   page: pageSearchParam,
@@ -53,13 +55,13 @@ export default async function AppDashboardPage({
   };
 
   return (
-    <UpdateTaskStatusesProvider>
+    <UpdateTaskStatusesProvider updateTaskStatuses={updateTaskStatuses}>
       <SelectedTasksProvider
         pageItems={tasks.map((t) => ({ id: t.id, status: t.status }))}
       >
         <PageTransitionProvider>
           <CurrentUserProvider value={currentUserContextValue}>
-            <DeleteTasksProvider>
+            <DeleteTasksProvider deleteTasks={deleteTasks}>
               <DashboardPage
                 totalProjectsCardContainer={<TotalProjectsCardContainer />}
                 totalTasksCardContainer={<TotalTasksCardContainer />}

@@ -3,8 +3,8 @@ import "server-only";
 import { PositionList } from "./PositionList";
 import { PositionListItem } from "./PositionListItem";
 import { updatePosition } from "@/lib/actions/position/updatePosition";
+import { deletePosition } from "@/lib/actions/position/deletePosition";
 import { getPositionSummaries } from "@/lib/data/position/position.dal";
-import { deletePositions } from "@/lib/actions/position/deletePositions";
 
 export async function PositionsContainer() {
   const positions = await getPositionSummaries();
@@ -17,7 +17,7 @@ export async function PositionsContainer() {
           id={position.id}
           name={position.name}
           updatePosition={updatePosition}
-          deletePosition={deletePositions}
+          deletePosition={deletePosition}
         />
       ))}
     </PositionList>
