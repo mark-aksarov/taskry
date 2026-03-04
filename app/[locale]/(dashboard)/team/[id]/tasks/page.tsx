@@ -27,6 +27,7 @@ import { EditUserFormContainer } from "@/components/users/EditUserFormContainer"
 import { ChangePasswordProvider } from "@/components/users/ChangePasswordContext";
 import { PageTransitionProvider } from "@/components/common/PageTransitionContext";
 import { UpdateTaskStatusesProvider } from "@/components/tasks/UpdateTaskStatusesContext";
+import { ProfileActions } from "@/components/users/ProfileActions";
 
 const searchParamsSchema = z.object({
   page: pageSearchParam,
@@ -101,9 +102,14 @@ export default async function AppProfileTasksPage({
                       backButton
                       navigationDesktop={
                         <UserNavigationDesktop
-                          showUserActions={showUserActions}
-                          userId={userId}
-                          userFullName={userSummary.fullName}
+                          userActions={
+                            showUserActions && (
+                              <ProfileActions
+                                userId={userId}
+                                userFullName={userSummary.fullName}
+                              />
+                            )
+                          }
                         />
                       }
                       navigationMobile={<UserNavigationMobile />}

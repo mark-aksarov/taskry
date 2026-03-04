@@ -22,6 +22,7 @@ import { UserTaskListStory } from "@/components/users/UserTaskList/__stories__";
 import { UserNavigationDesktop } from "@/components/users/UserNavigationDesktop";
 import { withSelectedTasksProvider } from "@/components/tasks/SelectedTasksContext/__stories__";
 import { withPageTransitionProvider } from "@/components/common/PageTransitionContext/__stories__";
+import { ProfileActions } from "@/components/users/ProfileActions";
 
 const meta = {
   title: "pages/TeamProfileTasksPage",
@@ -63,9 +64,7 @@ export const Default = {
     ),
     navigationDesktop: (
       <UserNavigationDesktop
-        showUserActions={true}
-        userId="user-1"
-        userFullName="User 1"
+        userActions={<ProfileActions userId="user-1" userFullName="User 1" />}
       />
     ),
     editUserFormContainer: <EditUserForm {...editUserFormArgs} />,

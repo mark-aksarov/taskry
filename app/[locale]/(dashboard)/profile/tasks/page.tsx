@@ -25,6 +25,7 @@ import { PageTransitionProvider } from "@/components/common/PageTransitionContex
 import { ProfileNavigationMobile } from "@/components/users/ProfileNavigationMobile";
 import { ProfileNavigationDesktop } from "@/components/users/ProfileNavigationDesktop";
 import { UpdateTaskStatusesProvider } from "@/components/tasks/UpdateTaskStatusesContext";
+import { ProfileActions } from "@/components/users/ProfileActions";
 
 const searchParamsSchema = z.object({
   page: pageSearchParam,
@@ -82,8 +83,12 @@ export default async function AppProfileTasksPage({
                       selectedSortField={sort}
                       navigationDesktop={
                         <ProfileNavigationDesktop
-                          userId={session.user.id}
-                          userFullName={session.user.name}
+                          profileActions={
+                            <ProfileActions
+                              userId={session.user.id}
+                              userFullName={session.user.name}
+                            />
+                          }
                         />
                       }
                       navigationMobile={<ProfileNavigationMobile />}

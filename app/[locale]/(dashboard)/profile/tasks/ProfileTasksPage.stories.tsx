@@ -11,6 +11,7 @@ import { PageDecorator } from "@/.storybook/PageDecorator";
 import { NewTaskForm } from "@/components/tasks/NewTaskForm";
 import { UserTaskList } from "@/components/users/UserTaskList";
 import { EditUserForm } from "@/components/users/EditUserForm";
+import { ProfileActions } from "@/components/users/ProfileActions";
 import { UserDetailHeader } from "@/components/users/UserDetailHeader";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { AppHeaderStory } from "@/components/layout/AppHeader/__stories__";
@@ -60,7 +61,11 @@ export const Default = {
       />
     ),
     navigationDesktop: (
-      <ProfileNavigationDesktop userId="user-1" userFullName="User 1" />
+      <ProfileNavigationDesktop
+        profileActions={
+          <ProfileActions userId="user-1" userFullName="User 1" />
+        }
+      />
     ),
     navigationMobile: <ProfileNavigationMobile />,
     editUserFormContainer: <EditUserForm {...editUserFormArgs} />,

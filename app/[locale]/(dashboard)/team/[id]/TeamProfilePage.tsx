@@ -43,9 +43,11 @@ export function TeamProfilePage({
           profileHeader={userHeaderContainer}
           navigationDesktop={
             <UserNavigationDesktop
-              showUserActions={showUserActions}
-              userId={userId}
-              userFullName={userFullName}
+              userActions={
+                showUserActions && (
+                  <ProfileActions userId={userId} userFullName={userFullName} />
+                )
+              }
             />
           }
         />

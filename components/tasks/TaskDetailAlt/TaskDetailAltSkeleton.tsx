@@ -21,9 +21,9 @@ export function TaskDetailAltSkeleton() {
       subtasksSlot={
         <DetailInfo className="border-none pb-0">
           <FieldSkeleton>
-            <Skeleton size="sm" className="w-[7rem]" />
-            <Skeleton size="sm" className="w-[7rem]" />
-            <Skeleton size="sm" className="w-[7rem]" />
+            <Skeleton size="sm" className="w-[12rem]" />
+            <Skeleton size="sm" className="w-[15rem]" />
+            <Skeleton size="sm" className="w-[13rem]" />
           </FieldSkeleton>
         </DetailInfo>
       }

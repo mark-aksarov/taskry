@@ -3,21 +3,16 @@
 import { useParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { usePathname } from "@/i18n/navigation";
-import { Separator } from "@/components/ui/Separator";
 import { CalendarCheck, Info } from "lucide-react";
+import { Separator } from "@/components/ui/Separator";
 import { NavigationButton } from "@/components/common/NavigationButton";
-import { ProfileActions } from "../ProfileActions";
 
 interface UserNavigationDesktopProps {
-  showUserActions: boolean;
-  userId: string;
-  userFullName: string;
+  userActions: React.ReactNode;
 }
 
 export function UserNavigationDesktop({
-  showUserActions,
-  userId,
-  userFullName,
+  userActions,
 }: UserNavigationDesktopProps) {
   const t = useTranslations("users.UserNavigationDesktop");
 
@@ -44,10 +39,10 @@ export function UserNavigationDesktop({
         label={t("assignedTasks")}
       />
 
-      {showUserActions && (
+      {userActions && (
         <>
           <Separator />
-          <ProfileActions userId={userId} userFullName={userFullName} />
+          {userActions}
         </>
       )}
     </nav>

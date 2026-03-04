@@ -1,48 +1,32 @@
 import {
   ToolbarMobileTop,
-  ToolbarMobileBottom,
   ToolbarMobileHeading,
+  ToolbarMobileBottom,
 } from "@/components/common/Toolbar";
 
 import { useTranslations } from "next-intl";
 import { Card } from "@/components/common/Card";
 import { PageGrid } from "@/components/common/PageGrid";
-import { EditUserModal } from "@/components/users/EditUserModal";
 import { PageContainer } from "@/components/common/PageContainer";
 import { UserDetailCard } from "@/components/users/UserDetailCard";
-import { ProfileActions } from "@/components/users/ProfileActions";
-import { ChangePasswordModal } from "@/components/users/ChangePasswordModal";
+import { UserDetailSkeleton } from "@/components/users/UserDetail";
+import { DetailHeaderSkeleton } from "@/components/common/DetailHeader";
+import { ProfileActionsSkeleton } from "@/components/users/ProfileActions";
 import { ProfileNavigationMobile } from "@/components/users/ProfileNavigationMobile";
 import { ProfileNavigationDesktop } from "@/components/users/ProfileNavigationDesktop";
 
-interface ProfilePageProps {
-  userId: string;
-  userFullName: string;
-  profileDetailContainer: React.ReactNode;
-  userHeaderContainer: React.ReactNode;
-  editUserFormContainer: React.ReactNode;
-}
-
-export function ProfilePage({
-  userId,
-  userFullName,
-  profileDetailContainer,
-  userHeaderContainer,
-  editUserFormContainer,
-}: ProfilePageProps) {
+export default function ProfileLoading() {
   const t = useTranslations("app.ProfilePage");
 
   return (
     <>
       <PageContainer>
         <UserDetailCard
-          profileDetail={profileDetailContainer}
-          profileHeader={userHeaderContainer}
+          profileDetail={<UserDetailSkeleton />}
+          profileHeader={<DetailHeaderSkeleton />}
           navigationDesktop={
             <ProfileNavigationDesktop
-              profileActions={
-                <ProfileActions userId={userId} userFullName={userFullName} />
-              }
+              profileActions={<ProfileActionsSkeleton />}
             />
           }
         />
@@ -56,16 +40,17 @@ export function ProfilePage({
             <ProfileNavigationMobile />
           </ToolbarMobileBottom>
 
-          <div className="flex flex-col">{userHeaderContainer}</div>
+          <div className="flex flex-col">
+            <DetailHeaderSkeleton />
+          </div>
           <Card className="flex flex-col p-1.5">
-            <ProfileActions userId={userId} userFullName={userFullName} />
+            <ProfileActionsSkeleton />
           </Card>
-          <Card className="flex flex-col">{profileDetailContainer}</Card>
+          <Card className="flex flex-col">
+            <UserDetailSkeleton />
+          </Card>
         </PageGrid>
       </PageContainer>
-
-      <ChangePasswordModal userId={userId} />
-      <EditUserModal editUserFormContainer={editUserFormContainer} />
     </>
   );
 }

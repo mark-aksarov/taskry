@@ -9,6 +9,7 @@ import { useParams, usePathname } from "next/navigation";
 import { UserNavigationDesktop } from "../UserNavigationDesktop";
 import { DetailHeaderSkeleton } from "@/components/common/DetailHeader";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { ProfileActions, ProfileActionsSkeleton } from "../ProfileActions";
 
 const meta = {
   title: "components/users/UserDetailCard",
@@ -37,9 +38,7 @@ export const Default = {
     ),
     navigationDesktop: (
       <UserNavigationDesktop
-        showUserActions
-        userId="user-1"
-        userFullName="User 1"
+        userActions={<ProfileActions userId="user-1" userFullName="User 1" />}
       />
     ),
   },
@@ -50,11 +49,7 @@ export const Loading = {
     profileDetail: <UserDetailSkeleton />,
     profileHeader: <DetailHeaderSkeleton />,
     navigationDesktop: (
-      <UserNavigationDesktop
-        showUserActions
-        userId="user-1"
-        userFullName="User 1"
-      />
+      <UserNavigationDesktop userActions={<ProfileActionsSkeleton />} />
     ),
   },
 } satisfies Story;
@@ -71,9 +66,7 @@ export const WithoutOptionalUserData = {
     profileHeader: <UserDetailHeader fullName={mockedUserDetail.fullName} />,
     navigationDesktop: (
       <UserNavigationDesktop
-        showUserActions
-        userId="user-1"
-        userFullName="User 1"
+        userActions={<ProfileActions userId="user-1" userFullName="User 1" />}
       />
     ),
   },
