@@ -47,13 +47,13 @@ export default function ProjectDetailLoading({
             </ToolbarMobileTop>
 
             <div className="flex flex-col">
-              <ProjectDetailAltSkeleton />
+              <DetailHeaderSkeleton />
             </div>
             <Card className="flex flex-col p-1.5">
-              <DetailHeaderSkeleton />
+              <ProjectDetailActionsSkeleton />
             </Card>
             <Card className="flex flex-col">
-              <ProjectDetailActionsSkeleton />
+              <ProjectDetailAltSkeleton />
             </Card>
           </PageGrid>
         </PageContainer>

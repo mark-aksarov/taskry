@@ -47,13 +47,13 @@ export default function TaskDetailLoading({
             </ToolbarMobileTop>
 
             <div className="flex flex-col">
-              <TaskDetailAltSkeleton />
+              <DetailHeaderSkeleton />
             </div>
             <Card className="flex flex-col p-1.5">
-              <DetailHeaderSkeleton />
+              <TaskDetailActionsSkeleton />
             </Card>
             <Card className="flex flex-col">
-              <TaskDetailActionsSkeleton />
+              <TaskDetailAltSkeleton />
             </Card>
           </PageGrid>
         </PageContainer>
