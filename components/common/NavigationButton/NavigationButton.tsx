@@ -1,11 +1,11 @@
 "use client";
 
-import Link from "next/link";
+import { Loader2 } from "lucide-react";
+import { Link } from "@/i18n/navigation";
 import { tv } from "tailwind-variants";
 import { Button } from "react-aria-components";
 import { focusRing } from "@/components/ui/styles";
 import { baseButtonStyles } from "@/components/ui/Button";
-import { Loader2 } from "lucide-react";
 
 export const styles = tv({
   extend: focusRing,
