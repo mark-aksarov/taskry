@@ -10,6 +10,7 @@ import { ActionFn, ActionState } from "@/lib/actions/types";
 import { useToastOnActionSuccess } from "@/lib/hooks/useToastOnActionSuccess";
 import { useCloseModalOnActionSuccess } from "@/lib/hooks/useCloseModalOnActionSuccess";
 import { useToastOnActionErrorWhenModalClosed } from "@/lib/hooks/useToastOnActionErrorWhenModalClosed";
+import { useRefreshTaskCategoriesOnActionSuccess } from "@/lib/hooks/useRefreshTaskCategoriesOnActionSuccess";
 
 const CreateTaskCategoryContext = createContext<CreateEntityContextType | null>(
   null,
@@ -30,6 +31,7 @@ export function CreateTaskCategoryProvider({
   useToastOnActionSuccess(state);
   useToastOnActionErrorWhenModalClosed(state, isModalOpen);
   useCloseModalOnActionSuccess(state, onModalOpenChange);
+  useRefreshTaskCategoriesOnActionSuccess(state);
 
   return (
     <CreateTaskCategoryContext.Provider value={contextValue}>

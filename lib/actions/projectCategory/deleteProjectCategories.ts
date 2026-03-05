@@ -23,7 +23,7 @@ export async function deleteProjectCategories(
     const parsedIds = projectCategoryIds.parse(ids);
 
     await deleteProjectCategoriesQuery(parsedIds);
-    revalidatePath("/project-categories");
+    revalidatePath("/");
 
     return {
       status: "success",

@@ -10,6 +10,7 @@ import { ActionFn, ActionState } from "@/lib/actions/types";
 import { useToastOnActionSuccess } from "@/lib/hooks/useToastOnActionSuccess";
 import { useCloseModalOnActionSuccess } from "@/lib/hooks/useCloseModalOnActionSuccess";
 import { useToastOnActionErrorWhenModalClosed } from "@/lib/hooks/useToastOnActionErrorWhenModalClosed";
+import { useRefreshCompaniesOnActionSuccess } from "@/lib/hooks/useRefreshCompaniesOnActionSuccess";
 
 const UpdateCompanyContext = createContext<UpdateEntityContextType | null>(
   null,
@@ -30,6 +31,7 @@ export function UpdateCompanyProvider({
   useToastOnActionSuccess(state);
   useToastOnActionErrorWhenModalClosed(state, isModalOpen);
   useCloseModalOnActionSuccess(state, onModalOpenChange);
+  useRefreshCompaniesOnActionSuccess(state);
 
   return (
     <UpdateCompanyContext.Provider value={contextValue}>

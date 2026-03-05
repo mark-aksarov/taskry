@@ -31,7 +31,7 @@ export async function updateProjectCategory(
     const parsedData = schema.parse(input);
 
     await updateProjectCategoryQuery(parsedData);
-    revalidatePath("/project-categories");
+    revalidatePath("/");
 
     return {
       status: "success",

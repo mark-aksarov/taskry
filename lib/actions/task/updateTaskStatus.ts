@@ -25,7 +25,7 @@ export async function updateTaskStatus(
   try {
     const parsedData = schema.parse(payload);
     await updateTaskStatusesQuery([parsedData.id], parsedData.nextStatus);
-    revalidatePath("/tasks");
+    revalidatePath("/");
 
     return {
       status: "success",

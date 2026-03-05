@@ -25,7 +25,7 @@ export async function createTaskCategory(
     });
 
     await createTaskCategoryQuery(parsedData);
-    revalidatePath("/task-categories");
+    revalidatePath("/");
 
     return {
       status: "success",

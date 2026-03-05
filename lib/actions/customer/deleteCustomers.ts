@@ -23,7 +23,7 @@ export async function deleteCustomers(
     const parsedIds = customerIds.parse(ids);
 
     await deleteCustomersQuery(parsedIds);
-    revalidatePath("/customers");
+    revalidatePath("/");
 
     return {
       status: "success",

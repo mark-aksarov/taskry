@@ -19,7 +19,7 @@ export async function GET(req: NextRequest) {
   }
 
   try {
-    // Fetch projects
+    // Fetch task categories
     const categories = await getTaskCategorySummaries();
     return NextResponse.json(categories);
   } catch (error) {

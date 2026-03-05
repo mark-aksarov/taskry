@@ -9,6 +9,7 @@ import { useContext, createContext } from "react";
 import { ActionFn, ActionState } from "@/lib/actions/types";
 import { useToastOnActionSuccess } from "@/lib/hooks/useToastOnActionSuccess";
 import { useCloseModalOnActionSuccess } from "@/lib/hooks/useCloseModalOnActionSuccess";
+import { useRefreshUsersOnActionSuccess } from "@/lib/hooks/useRefreshUsersOnActionSuccess";
 import { useToastOnActionErrorWhenModalClosed } from "@/lib/hooks/useToastOnActionErrorWhenModalClosed";
 
 const UpdateUserContext = createContext<UpdateEntityContextType | null>(null);
@@ -28,6 +29,7 @@ export function UpdateUserProvider({
   useToastOnActionSuccess(state);
   useToastOnActionErrorWhenModalClosed(state, isModalOpen);
   useCloseModalOnActionSuccess(state, onModalOpenChange);
+  useRefreshUsersOnActionSuccess(state);
 
   return (
     <UpdateUserContext.Provider value={contextValue}>

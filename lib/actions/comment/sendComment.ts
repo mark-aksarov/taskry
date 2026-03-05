@@ -30,14 +30,7 @@ export async function sendComment(
     const parsedData = schema.parse(input);
 
     await createComment(parsedData);
-
-    if (parsedData.projectId) {
-      revalidatePath("/projects");
-    }
-
-    if (parsedData.taskId) {
-      revalidatePath("/tasks");
-    }
+    revalidatePath("/");
 
     return {
       status: "success",

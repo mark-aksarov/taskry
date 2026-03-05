@@ -27,7 +27,7 @@ export async function createCompany(
     });
 
     await createCompanyQuery(parsedDate);
-    revalidatePath("/companies");
+    revalidatePath("/");
 
     return {
       status: "success",

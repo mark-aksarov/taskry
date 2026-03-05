@@ -15,7 +15,7 @@ export const AssignedTaskListItem = ({
 }: Omit<TaskItemProps, "showCheckbox" | "subtasksTotal" | "subtasksDone">) => {
   return (
     <DeleteTaskProvider deleteTask={deleteTask}>
-      <UpdateTaskProvider updateTask={updateTask}>
+      <UpdateTaskProvider taskId={props.id} updateTask={updateTask}>
         <UpdateTaskStatusProvider updateTaskStatus={updateTaskStatus}>
           <TaskItemPendingOverlay taskId={props.id}>
             <TaskListItem {...props} />

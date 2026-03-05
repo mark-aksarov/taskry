@@ -21,7 +21,7 @@ export async function deleteTask(
     const parsedId = taskId.parse(payload.id);
 
     await deleteTaskQuery([parsedId]);
-    revalidatePath("/tasks");
+    revalidatePath("/");
   } catch (error) {
     console.error("Server Action Error:", error);
 

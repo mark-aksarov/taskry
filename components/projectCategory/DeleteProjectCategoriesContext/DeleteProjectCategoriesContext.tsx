@@ -8,6 +8,7 @@ import {
 import { useContext, createContext } from "react";
 import { ActionFn, ActionState } from "@/lib/actions/types";
 import { useToastOnActionError } from "@/lib/hooks/useToastOnActionError";
+import { useRefreshProjectCategoriesOnActionSuccess } from "@/lib/hooks/useRefreshProjectCategoriesOnActionSuccess";
 
 const DeleteProjectCategoriesContext =
   createContext<DeleteEntitiesContextType | null>(null);
@@ -25,6 +26,7 @@ export function DeleteProjectCategoriesProvider({
 
   const { state } = contextValue;
   useToastOnActionError(state);
+  useRefreshProjectCategoriesOnActionSuccess(state);
 
   return (
     <DeleteProjectCategoriesContext.Provider value={contextValue}>

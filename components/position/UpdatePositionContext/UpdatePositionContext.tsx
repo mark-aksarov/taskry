@@ -10,6 +10,7 @@ import { ActionFn, ActionState } from "@/lib/actions/types";
 import { useToastOnActionSuccess } from "@/lib/hooks/useToastOnActionSuccess";
 import { useCloseModalOnActionSuccess } from "@/lib/hooks/useCloseModalOnActionSuccess";
 import { useToastOnActionErrorWhenModalClosed } from "@/lib/hooks/useToastOnActionErrorWhenModalClosed";
+import { useRefreshPositionsOnActionSuccess } from "@/lib/hooks/useRefreshPositionsOnActionSuccess";
 
 const UpdatePositionContext = createContext<UpdateEntityContextType | null>(
   null,
@@ -30,6 +31,7 @@ export function UpdatePositionProvider({
   useToastOnActionSuccess(state);
   useToastOnActionErrorWhenModalClosed(state, isModalOpen);
   useCloseModalOnActionSuccess(state, onModalOpenChange);
+  useRefreshPositionsOnActionSuccess(state);
 
   return (
     <UpdatePositionContext.Provider value={contextValue}>

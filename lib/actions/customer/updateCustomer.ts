@@ -42,7 +42,7 @@ export async function updateCustomer(
     const parsedData = schema.parse(input);
 
     await updateCustomerQuery(parsedData);
-    revalidatePath("/customers");
+    revalidatePath("/");
 
     return {
       status: "success",

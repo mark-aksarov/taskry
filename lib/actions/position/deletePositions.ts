@@ -22,8 +22,7 @@ export async function deletePositions(
   try {
     const parsedIds = positionIds.parse(ids);
     await deletePositionsQuery(parsedIds);
-
-    revalidatePath("/positions");
+    revalidatePath("/");
 
     return {
       status: "success",

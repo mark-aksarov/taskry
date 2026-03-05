@@ -25,7 +25,7 @@ export async function updateProjectStatus(
   try {
     const parsedData = schema.parse(payload);
     await updateProjectStatusesQuery(parsedData.ids, parsedData.nextStatus);
-    revalidatePath("/projects");
+    revalidatePath("/");
 
     return {
       status: "success",

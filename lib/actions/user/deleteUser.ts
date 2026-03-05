@@ -21,7 +21,7 @@ export async function deleteUser(
   try {
     const parsedId = userId.parse(payload.id);
     await deleteUserService(parsedId);
-    revalidatePath("/team");
+    revalidatePath("/");
   } catch (error) {
     console.error("Server Action Error:", error);
 

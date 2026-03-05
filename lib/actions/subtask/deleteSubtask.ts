@@ -20,7 +20,7 @@ export async function deleteSubtask(
     const parsedId = subtaskId.parse(id);
 
     const result = await deleteSubtaskQuery(parsedId);
-    revalidatePath(`/tasks/${result.taskId}`);
+    revalidatePath("/");
 
     return {
       status: "success",

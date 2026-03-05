@@ -25,7 +25,7 @@ export async function toggleSubtask(
   try {
     const parsedData = schema.parse(data);
     const result = await updateSubtaskQuery(parsedData);
-    revalidatePath(`/tasks/${result.taskId}`);
+    revalidatePath("/");
 
     return {
       status: "success",

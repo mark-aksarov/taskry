@@ -21,7 +21,7 @@ export async function deleteCustomer(
     const parsedId = customerId.parse(payload.id);
 
     await deleteCustomersQuery([parsedId]);
-    revalidatePath("/customers");
+    revalidatePath("/");
   } catch (error) {
     console.error("Server Action Error:", error);
 

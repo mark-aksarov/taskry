@@ -8,6 +8,7 @@ import {
 import { useContext, createContext } from "react";
 import { ActionFn, ActionState } from "@/lib/actions/types";
 import { useToastOnActionError } from "@/lib/hooks/useToastOnActionError";
+import { useRefreshCustomersOnActionSuccess } from "@/lib/hooks/useRefreshCustomersOnActionSuccess";
 
 const DeleteCustomersContext = createContext<DeleteEntitiesContextType | null>(
   null,
@@ -26,6 +27,7 @@ export function DeleteCustomersProvider({
 
   const { state } = contextValue;
   useToastOnActionError(state);
+  useRefreshCustomersOnActionSuccess(state);
 
   return (
     <DeleteCustomersContext.Provider value={contextValue}>

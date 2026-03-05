@@ -14,8 +14,22 @@ type TPayload = TId | { id: TId; shouldRedirect: boolean };
  */
 export function useDeleteEntityContextValue<T extends TPayload>(
   deleteFn: ActionFn<ActionState, T>,
+  onSuccess?: () => void,
 ) {
-  const [state, action, isPending] = useActionState(deleteFn, initialState);
+  const [state, action, isPending] = useActionState(
+    async (state: ActionState, payload: T) => {
+      const newState = await deleteFn(state, payload);
+
+      // "Escape hatch": call onSuccess here because the provider will unmount
+      // immediately after successful deletion, so side effects outside the reducerAction would fail
+      if (newState.status === "success") {
+        onSuccess?.();
+      }
+
+      return newState;
+    },
+    initialState,
+  );
 
   const contextValue = useMemo(
     () => ({ state, action, isPending }),

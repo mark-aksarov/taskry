@@ -27,7 +27,7 @@ export async function updateTaskCategory(
     const parsedData = schema.parse(input);
 
     await updateTaskCategoryQuery(parsedData);
-    revalidatePath("/task-categories");
+    revalidatePath("/");
 
     return {
       status: "success",

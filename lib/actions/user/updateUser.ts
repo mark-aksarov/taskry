@@ -44,7 +44,7 @@ export async function updateUser(
     const input = Object.fromEntries(formData.entries());
     const parsedData = schema.parse(input);
     await updateUserService(parsedData);
-    revalidatePath("/team");
+    revalidatePath("/");
 
     return {
       status: "success",

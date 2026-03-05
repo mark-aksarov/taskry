@@ -20,8 +20,7 @@ export async function deleteComment(
     const parsedId = commentId.parse(id);
     await deleteCommentQuery(parsedId);
 
-    revalidatePath("/projects");
-    revalidatePath("/tasks");
+    revalidatePath("/");
 
     return {
       status: "success",

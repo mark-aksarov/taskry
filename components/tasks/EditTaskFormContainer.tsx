@@ -1,7 +1,6 @@
 "use client";
 
 import useSWR from "swr";
-import { Suspense } from "react";
 import { EditTaskForm } from "./EditTaskForm";
 import { TaskFormSkeleton } from "./TaskFormSkeleton";
 import { CalendarDate } from "@internationalized/date";
@@ -14,37 +13,37 @@ interface EditTaskFormContainerProps {
   taskId: number;
 }
 
-export function EditTaskFormContainer(props: EditTaskFormContainerProps) {
-  return (
-    <Suspense fallback={<TaskFormSkeleton />}>
-      <EditTaskFormContainerInner {...props} />
-    </Suspense>
-  );
-}
-
-function EditTaskFormContainerInner({ taskId }: EditTaskFormContainerProps) {
+export function EditTaskFormContainer({ taskId }: EditTaskFormContainerProps) {
   const { data: categories } = useSWR<TaskCategorySummaryDTO[]>(
-    `/api/task-categories`,
-    { suspense: true },
-  );
-
-  const { data: projects } = useSWR<ProjectSummaryDTO[]>(`/api/projects`, {
-    suspense: true,
-  });
-
-  const { data: users } = useSWR<UserSummaryDTO[]>(`/api/users`, {
-    suspense: true,
-  });
-
-  const { data: task } = useSWR<TaskFormDataDTO>(
-    `/api/tasks/${taskId}?view=edit`,
+    "/api/task-categories",
     {
-      suspense: true,
+      revalidateIfStale: false, // don't revalidate on each mount
+      revalidateOnFocus: false,
     },
   );
 
-  if (!categories || !projects || !users || !task) {
-    throw new Error("Task not found");
+  const { data: projects } = useSWR<ProjectSummaryDTO[]>("/api/projects", {
+    revalidateIfStale: false, // don't revalidate on each mount
+    revalidateOnFocus: false,
+  });
+
+  const { data: users } = useSWR<UserSummaryDTO[]>("/api/users", {
+    revalidateIfStale: false, // don't revalidate on each mount
+    revalidateOnFocus: false,
+  });
+
+  // Current task data for editing (loaded each modal open)
+  const { data: task, isValidating: isValidatingTask } =
+    useSWR<TaskFormDataDTO | null>(`/api/tasks/${taskId}?view=edit`);
+
+  //Error handling for 404 (NotFound) error. https://swr.vercel.app/docs/error-handling
+
+  // Show skeleton while loading or revalidating
+  const showSkeleton =
+    !categories || !projects || !users || !task || isValidatingTask;
+
+  if (showSkeleton) {
+    return <TaskFormSkeleton />;
   }
 
   const d = new Date(task.deadline);

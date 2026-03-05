@@ -21,7 +21,7 @@ export async function deleteProject(
     const parsedId = projectId.parse(payload.id);
 
     await deleteProjectQuery([parsedId]);
-    revalidatePath("/projects");
+    revalidatePath("/");
   } catch (error) {
     console.error("Server Action Error:", error);
 

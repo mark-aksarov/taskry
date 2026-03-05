@@ -10,6 +10,7 @@ import { ActionFn, ActionState } from "@/lib/actions/types";
 import { useToastOnActionSuccess } from "@/lib/hooks/useToastOnActionSuccess";
 import { useCloseModalOnActionSuccess } from "@/lib/hooks/useCloseModalOnActionSuccess";
 import { useToastOnActionErrorWhenModalClosed } from "@/lib/hooks/useToastOnActionErrorWhenModalClosed";
+import { useRefreshProjectCategoriesOnActionSuccess } from "@/lib/hooks/useRefreshProjectCategoriesOnActionSuccess";
 
 const UpdateProjectCategoryContext =
   createContext<UpdateEntityContextType | null>(null);
@@ -29,6 +30,7 @@ export function UpdateProjectCategoryProvider({
   useToastOnActionSuccess(state);
   useToastOnActionErrorWhenModalClosed(state, isModalOpen);
   useCloseModalOnActionSuccess(state, onModalOpenChange);
+  useRefreshProjectCategoriesOnActionSuccess(state);
 
   return (
     <UpdateProjectCategoryContext.Provider value={contextValue}>

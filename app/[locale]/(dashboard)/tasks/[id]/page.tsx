@@ -50,7 +50,7 @@ export default async function AppTaskDetailPage({
 
   return (
     <CurrentUserProvider value={currentUserContextValue}>
-      <UpdateTaskProvider updateTask={updateTask}>
+      <UpdateTaskProvider taskId={id} updateTask={updateTask}>
         <TaskDetailPage
           taskId={id}
           taskTitle={taskSummary.title}

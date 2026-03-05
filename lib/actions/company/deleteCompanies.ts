@@ -22,8 +22,7 @@ export async function deleteCompanies(
   try {
     const parsedIds = companyIds.parse(ids);
     await deleteCompaniesQuery(parsedIds);
-
-    revalidatePath("/companies");
+    revalidatePath("/");
 
     return {
       status: "success",

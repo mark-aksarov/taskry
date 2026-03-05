@@ -6,7 +6,6 @@ import {
 } from "@/components/comments/CommentItem";
 
 import useSWR from "swr";
-import { Suspense } from "react";
 import { Repeat } from "../common/Repeat";
 import { CommentListItemDTO } from "@/lib/data/comment/comment.dto";
 import { deleteComment } from "@/lib/actions/comment/deleteComment";
@@ -16,35 +15,22 @@ interface ProjectCommentsContainerProps {
   projectId: number;
 }
 
-export function ProjectCommentsContainer(props: ProjectCommentsContainerProps) {
-  return (
-    <Suspense
-      fallback={
-        <Repeat items={10} renderItem={() => <CommentItemSkeleton />} />
-      }
-    >
-      <ProjectCommentsContainerInner {...props} />
-    </Suspense>
-  );
-}
-
-function ProjectCommentsContainerInner({
+export function ProjectCommentsContainer({
   projectId,
 }: ProjectCommentsContainerProps) {
-  const { data: comments, isLoading } = useSWR<CommentListItemDTO[]>(
+  const { data: comments } = useSWR<CommentListItemDTO[]>(
     `/api/projects/${projectId}/comments`,
-    {
-      suspense: true,
-    },
   );
 
+  //Error handling for 404 (NotFound) error. https://swr.vercel.app/docs/error-handling
+
   // Show skeleton while loading
-  if (isLoading) {
+  if (!comments) {
     return <Repeat items={10} renderItem={() => <CommentItemSkeleton />} />;
   }
 
   // Show empty section if no comments
-  if (!comments || comments.length === 0) {
+  if (comments.length === 0) {
     return <CommentsEmptySection />;
   }
 

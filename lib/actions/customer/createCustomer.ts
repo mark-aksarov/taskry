@@ -46,7 +46,7 @@ export async function createCustomer(
     const parsedData = schema.parse(input);
 
     await createCustomerQuery(parsedData);
-    revalidatePath("/customers");
+    revalidatePath("/");
 
     return {
       status: "success",

@@ -25,7 +25,7 @@ export async function createProjectCategory(
     });
 
     await createProjectCategoryQuery(parsedData);
-    revalidatePath("/project-categories");
+    revalidatePath("/");
 
     return {
       status: "success",

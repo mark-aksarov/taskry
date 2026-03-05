@@ -1,7 +1,6 @@
 "use client";
 
 import useSWR from "swr";
-import { Suspense } from "react";
 import { ProjectDetailDTO } from "@/lib/data/project/project.dto";
 import { ProjectDetail, ProjectDetailSkeleton } from "./ProjectDetail";
 
@@ -9,24 +8,20 @@ interface ProjectDetailContainerProps {
   projectId: number;
 }
 
-export function ProjectDetailContainer(props: ProjectDetailContainerProps) {
-  return (
-    <Suspense fallback={<ProjectDetailSkeleton />}>
-      <ProjectDetailContainerInner {...props} />
-    </Suspense>
-  );
-}
-
-function ProjectDetailContainerInner({
+export function ProjectDetailContainer({
   projectId,
 }: ProjectDetailContainerProps) {
-  const { data: project } = useSWR<ProjectDetailDTO>(
+  const { data: project, isValidating } = useSWR<ProjectDetailDTO>(
     `/api/projects/${projectId}`,
-    { suspense: true },
   );
 
-  if (!project) {
-    throw new Error("Project not found");
+  //Error handling for 404 (NotFound) error. https://swr.vercel.app/docs/error-handling
+
+  // Show skeleton while loading or revalidating (to avoid flickering from stale content)
+  const showSkeleton = !project || isValidating;
+
+  if (showSkeleton) {
+    return <ProjectDetailSkeleton />;
   }
 
   return (

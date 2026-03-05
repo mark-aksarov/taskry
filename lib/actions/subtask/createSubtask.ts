@@ -28,7 +28,7 @@ export async function createSubtask(
     const parsedData = schema.parse(input);
 
     await createSubtaskQuery(parsedData);
-    revalidatePath(`/tasks/${parsedData.taskId}`);
+    revalidatePath("/");
 
     return {
       status: "success",

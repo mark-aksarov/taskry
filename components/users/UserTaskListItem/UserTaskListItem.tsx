@@ -57,7 +57,7 @@ export const UserTaskListItem = ({
 
   return (
     <DeleteTaskProvider deleteTask={deleteTask}>
-      <UpdateTaskProvider updateTask={updateTask}>
+      <UpdateTaskProvider taskId={props.id} updateTask={updateTask}>
         <UpdateTaskStatusProvider updateTaskStatus={updateTaskStatus}>
           <TaskItemPendingOverlay taskId={props.id}>
             <SelectableItem

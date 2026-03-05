@@ -1,7 +1,6 @@
 "use client";
 
 import useSWR from "swr";
-import { Suspense } from "react";
 import { EditProjectForm } from "./EditProjectForm";
 import { CalendarDate } from "@internationalized/date";
 import { ProjectFormSkeleton } from "./ProjectFormSkeleton";
@@ -13,35 +12,34 @@ interface EditProjectFormContainerProps {
   projectId: number;
 }
 
-export function EditProjectFormContainer(props: EditProjectFormContainerProps) {
-  return (
-    <Suspense fallback={<ProjectFormSkeleton />}>
-      <EditProjectFormContainerInner {...props} />
-    </Suspense>
-  );
-}
-
-function EditProjectFormContainerInner({
+export function EditProjectFormContainer({
   projectId,
 }: EditProjectFormContainerProps) {
   const { data: categories } = useSWR<ProjectCategorySummaryDTO[]>(
     `/api/project-categories`,
-    { suspense: true },
-  );
-
-  const { data: customers } = useSWR<CustomerSummaryDTO[]>(`/api/customers`, {
-    suspense: true,
-  });
-
-  const { data: project } = useSWR<ProjectFormDataDTO>(
-    `/api/projects/${projectId}?view=edit`,
     {
-      suspense: true,
+      revalidateIfStale: false, // don't revalidate on each mount
+      revalidateOnFocus: false,
     },
   );
 
-  if (!categories || !customers || !project) {
-    throw new Error("Project not found");
+  const { data: customers } = useSWR<CustomerSummaryDTO[]>(`/api/customers`, {
+    revalidateIfStale: false, // don't revalidate on each mount
+    revalidateOnFocus: false,
+  });
+
+  // Current project data for editing (loaded each modal open)
+  const { data: project, isValidating: isValidatingProject } =
+    useSWR<ProjectFormDataDTO>(`/api/projects/${projectId}?view=edit`);
+
+  //Error handling for 404 (NotFound) error. https://swr.vercel.app/docs/error-handling
+
+  // Show skeleton while loading or revalidating
+  const showSkeleton =
+    !categories || !customers || !project || isValidatingProject;
+
+  if (showSkeleton) {
+    return <ProjectFormSkeleton />;
   }
 
   const d = new Date(project.deadline);

@@ -46,7 +46,7 @@ export async function createProject(
     const parsedData = schema.parse(input);
 
     await createProjectQuery(parsedData);
-    revalidatePath("/projects");
+    revalidatePath("/");
 
     return {
       status: "success",

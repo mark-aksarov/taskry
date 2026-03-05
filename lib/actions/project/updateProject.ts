@@ -42,7 +42,7 @@ export async function updateProject(
     const parsedData = schema.parse(input);
 
     await updateProjectQuery(parsedData);
-    revalidatePath("/projects");
+    revalidatePath("/");
 
     return {
       status: "success",

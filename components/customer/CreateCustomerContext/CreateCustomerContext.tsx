@@ -10,6 +10,7 @@ import { ActionFn, ActionState } from "@/lib/actions/types";
 import { useToastOnActionSuccess } from "@/lib/hooks/useToastOnActionSuccess";
 import { useCloseModalOnActionSuccess } from "@/lib/hooks/useCloseModalOnActionSuccess";
 import { useToastOnActionErrorWhenModalClosed } from "@/lib/hooks/useToastOnActionErrorWhenModalClosed";
+import { useRefreshCustomersOnActionSuccess } from "@/lib/hooks/useRefreshCustomersOnActionSuccess";
 
 const CreateCustomerContext = createContext<CreateEntityContextType | null>(
   null,
@@ -30,6 +31,7 @@ export function CreateCustomerProvider({
   useToastOnActionSuccess(state);
   useToastOnActionErrorWhenModalClosed(state, isModalOpen);
   useCloseModalOnActionSuccess(state, onModalOpenChange);
+  useRefreshCustomersOnActionSuccess(state);
 
   return (
     <CreateCustomerContext.Provider value={contextValue}>

@@ -27,7 +27,7 @@ export async function updatePosition(
     const data = schema.parse(input);
 
     await updatePositionQuery(data);
-    revalidatePath("/positions");
+    revalidatePath("/");
 
     return {
       status: "success",

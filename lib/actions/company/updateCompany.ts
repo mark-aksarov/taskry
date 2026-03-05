@@ -27,7 +27,7 @@ export async function updateCompany(
     const data = schema.parse(input);
 
     await updateCompanyQuery(data);
-    revalidatePath("/companies");
+    revalidatePath("/");
 
     return {
       status: "success",

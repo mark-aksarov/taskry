@@ -20,6 +20,7 @@ export async function GET(req: NextRequest) {
 
   try {
     // Fetch users
+    console.log("\x1b[34m%s\x1b[0m", "/api/users");
     const users = await getUserSummaries();
     return NextResponse.json(users);
   } catch (error) {

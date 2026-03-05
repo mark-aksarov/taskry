@@ -23,7 +23,7 @@ export async function deleteTaskCategories(
     const parsedIds = taskCategoryIds.parse(ids);
 
     await deleteTaskCategoriesQuery(parsedIds);
-    revalidatePath("/task-categories");
+    revalidatePath("/");
 
     return {
       status: "success",

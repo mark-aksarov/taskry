@@ -9,6 +9,7 @@ import { useContext, createContext } from "react";
 import { ActionFn, ActionState } from "@/lib/actions/types";
 import { useToastOnActionSuccess } from "@/lib/hooks/useToastOnActionSuccess";
 import { useCloseModalOnActionSuccess } from "@/lib/hooks/useCloseModalOnActionSuccess";
+import { useRefreshProjectsOnActionSuccess } from "@/lib/hooks/useRefreshProjectsOnActionSuccess";
 import { useToastOnActionErrorWhenModalClosed } from "@/lib/hooks/useToastOnActionErrorWhenModalClosed";
 
 const UpdateProjectContext = createContext<UpdateEntityContextType | null>(
@@ -30,6 +31,7 @@ export function UpdateProjectProvider({
   useToastOnActionSuccess(state);
   useToastOnActionErrorWhenModalClosed(state, isModalOpen);
   useCloseModalOnActionSuccess(state, onModalOpenChange);
+  useRefreshProjectsOnActionSuccess(state);
 
   return (
     <UpdateProjectContext.Provider value={contextValue}>

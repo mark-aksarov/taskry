@@ -1,7 +1,6 @@
 "use client";
 
 import useSWR from "swr";
-import { Suspense } from "react";
 import { CalendarDate } from "@internationalized/date";
 import { UserFormDataDTO } from "@/lib/data/user/user.dto";
 import { EditUserForm, EditUserFormSkeleton } from "./EditUserForm";
@@ -11,28 +10,23 @@ interface EditUserFormContainerProps {
   userId: string;
 }
 
-export function EditUserFormContainer(props: EditUserFormContainerProps) {
-  return (
-    <Suspense fallback={<EditUserFormSkeleton />}>
-      <EditUserFormContainerInner {...props} />
-    </Suspense>
-  );
-}
-
-function EditUserFormContainerInner({ userId }: EditUserFormContainerProps) {
+export function EditUserFormContainer({ userId }: EditUserFormContainerProps) {
   const { data: positions } = useSWR<PositionSummaryDTO[]>(`/api/positions`, {
-    suspense: true,
+    revalidateIfStale: false, // don't revalidate on each mount
+    revalidateOnFocus: false,
   });
 
-  const { data: user, mutate } = useSWR<UserFormDataDTO>(
-    `/api/users/${userId}?view=edit`,
-    {
-      suspense: true,
-    },
-  );
+  // Current user data for editing (loaded each modal open)
+  const { data: user, isValidating: isValidatingUser } =
+    useSWR<UserFormDataDTO>(`/api/users/${userId}?view=edit`);
 
-  if (!positions || !user) {
-    throw new Error("User not found");
+  //Error handling for 404 (NotFound) error. https://swr.vercel.app/docs/error-handling
+
+  // Show skeleton while loading or revalidating
+  const showSkeleton = !positions || !user || isValidatingUser;
+
+  if (showSkeleton) {
+    return <EditUserFormSkeleton />;
   }
 
   let dateValue;

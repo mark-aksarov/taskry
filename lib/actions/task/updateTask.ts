@@ -44,7 +44,7 @@ export async function updateTask(
     const parsedData = schema.parse(input);
 
     await updateTaskQuery(parsedData);
-    revalidatePath("/tasks");
+    revalidatePath("/");
 
     return {
       status: "success",

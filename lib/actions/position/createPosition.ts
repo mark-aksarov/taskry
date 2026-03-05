@@ -24,7 +24,7 @@ export async function createPosition(
   try {
     const data = schema.parse({ name: formData.get("name") });
     await createPositionQuery(data);
-    revalidatePath("/positions");
+    revalidatePath("/");
 
     return {
       status: "success",

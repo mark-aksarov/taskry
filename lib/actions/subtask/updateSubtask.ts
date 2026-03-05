@@ -26,7 +26,7 @@ export async function updateSubtask(
     const input = Object.fromEntries(formData.entries());
     const parsedData = schema.parse(input);
     const result = await updateSubtaskQuery(parsedData);
-    revalidatePath(`/tasks/${result.taskId}`);
+    revalidatePath("/");
 
     return {
       status: "success",

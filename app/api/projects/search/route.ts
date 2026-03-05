@@ -38,7 +38,8 @@ export async function GET(req: NextRequest) {
 
     const { page, pageSize, query } = parse.data;
 
-    // Fetch tasks
+    // Fetch projects
+
     const users = await searchProjects({ page, pageSize, query });
     return NextResponse.json(users);
   } catch (error) {

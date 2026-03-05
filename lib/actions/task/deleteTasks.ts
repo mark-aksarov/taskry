@@ -23,7 +23,7 @@ export async function deleteTasks(
     const parsedIds = taskIds.parse(ids);
 
     await deleteTaskQuery(parsedIds);
-    revalidatePath("/tasks");
+    revalidatePath("/");
 
     return {
       status: "success",

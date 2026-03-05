@@ -8,6 +8,7 @@ import {
 import { useContext, createContext } from "react";
 import { ActionFn, ActionState } from "@/lib/actions/types";
 import { useToastOnActionError } from "@/lib/hooks/useToastOnActionError";
+import { useRefreshTaskCategoriesOnActionSuccess } from "@/lib/hooks/useRefreshTaskCategoriesOnActionSuccess";
 
 const DeleteTaskCategoriesContext =
   createContext<DeleteEntitiesContextType | null>(null);
@@ -21,10 +22,12 @@ export function DeleteTaskCategoriesProvider({
   deleteTaskCategories,
   children,
 }: DeleteTaskCategoriesProviderProps) {
+  // Refresh users after successful deletion, since side effects outside the reducerAction may fail
   const contextValue = useDeleteEntitiesContextValue(deleteTaskCategories);
 
   const { state } = contextValue;
   useToastOnActionError(state);
+  useRefreshTaskCategoriesOnActionSuccess(state);
 
   return (
     <DeleteTaskCategoriesContext.Provider value={contextValue}>

@@ -41,7 +41,7 @@ export async function createTask(
     const input = Object.fromEntries(formData.entries());
     const parsedData = schema.parse(input);
     await createTaskQuery(parsedData);
-    revalidatePath("/tasks");
+    revalidatePath("/");
 
     return {
       status: "success",

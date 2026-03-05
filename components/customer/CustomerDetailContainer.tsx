@@ -1,7 +1,6 @@
 "use client";
 
 import useSWR from "swr";
-import { Suspense } from "react";
 import { DetailHeaderSkeleton } from "../common/DetailHeader";
 import { CustomerDetailHeader } from "./CustomerDetailHeader";
 import { CustomerDetailDTO } from "@/lib/data/customer/customer.dto";
@@ -12,31 +11,25 @@ interface CustomerDetailContainerProps {
   customerId: number;
 }
 
-export function CustomerDetailContainer(props: CustomerDetailContainerProps) {
-  return (
-    <Suspense
-      fallback={
-        <PersonDetailPresentation
-          personHeader={<DetailHeaderSkeleton />}
-          userDetail={<CustomerDetailSkeleton />}
-        />
-      }
-    >
-      <CustomerDetailContainerInner {...props} />
-    </Suspense>
-  );
-}
-
-function CustomerDetailContainerInner({
+export function CustomerDetailContainer({
   customerId,
 }: CustomerDetailContainerProps) {
-  const { data: customer } = useSWR<CustomerDetailDTO>(
+  const { data: customer, isValidating } = useSWR<CustomerDetailDTO>(
     `/api/customers/${customerId}`,
-    { suspense: true },
   );
 
-  if (!customer) {
-    throw new Error("Customer not found");
+  //Error handling for 404 (NotFound) error. https://swr.vercel.app/docs/error-handling
+
+  // Show skeleton while loading or revalidating (to avoid flickering from stale content)
+  const showSkeleton = !customer || isValidating;
+
+  if (showSkeleton) {
+    return (
+      <PersonDetailPresentation
+        personHeader={<DetailHeaderSkeleton />}
+        userDetail={<CustomerDetailSkeleton />}
+      />
+    );
   }
 
   return (
