@@ -20,12 +20,14 @@ import { FormErrorBanner } from "@/components/common/FormErrorBanner";
 import { TaskDescriptionTextField } from "../TaskDescriptionTextField";
 
 interface NewTaskFormProps {
+  forcedAssigneeId?: string;
   categorySelectItems: { id: number; name: string }[];
   projectSelectItems: { id: number; title: string }[];
   assigneeSelectItems: { id: string; fullName: string }[];
 }
 
 export function NewTaskForm({
+  forcedAssigneeId,
   categorySelectItems,
   projectSelectItems,
   assigneeSelectItems,
@@ -52,7 +54,10 @@ export function NewTaskForm({
         <TaskStatusSelect />
         <TaskCategorySelect items={categorySelectItems} />
         <TaskProjectSelect items={projectSelectItems} />
-        <TaskAssigneeSelect items={assigneeSelectItems} />
+        <TaskAssigneeSelect
+          forcedAssigneeId={forcedAssigneeId}
+          items={assigneeSelectItems}
+        />
         <FormErrorBanner status={state.status} isPending={isPending}>
           {state.message}
         </FormErrorBanner>

@@ -20,7 +20,6 @@ import {
 
 import {
   AssignedTasksSkeleton,
-  AssignedTasksEmptySection,
   AssignedTasksPresentation,
 } from "@/components/tasks/AssignedTasks";
 
@@ -30,11 +29,9 @@ import { DashboardPage } from "./DashboardPage";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { usePathname, useRouter } from "next/navigation";
 import { PageDecorator } from "@/.storybook/PageDecorator";
-import { NewTaskForm } from "@/components/tasks/NewTaskForm";
 import { AssignedTaskList } from "@/components/tasks/AssignedTaskList";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { AppHeaderStory } from "@/components/layout/AppHeader/__stories__";
-import { newTaskFormArgs } from "@/components/tasks/NewTaskForm/__stories__";
 import { AssignedTaskListItem } from "@/components/tasks/AssignedTaskListItem";
 import { TaskListItemStory } from "@/components/tasks/TaskListItem/__stories__";
 import { withPageTransitionProvider } from "@/components/common/PageTransitionContext/__stories__";
@@ -53,8 +50,9 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-const AssignedTasksContainer = () => (
+const AssignedTasksContainer = ({ totalCount }: { totalCount: number }) => (
   <AssignedTasksPresentation
+    totalCount={totalCount}
     page={1}
     pageSize={5}
     list={
@@ -82,7 +80,7 @@ export const Default = {
     totalTasksCardContainer: <TotalTasksCard totalTasks={500} />,
     totalUsersCardContainer: <TotalUsersCard totalUsers={15} />,
     totalCustomersCardContainer: <TotalCustomersCard totalCustomers={20} />,
-    assignedTasksContainer: <AssignedTasksContainer />,
+    assignedTasksContainer: <AssignedTasksContainer totalCount={5} />,
     appHeaderProps: AppHeaderStory.args,
   },
 } satisfies Story;
@@ -101,10 +99,6 @@ export const Loading = {
 export const WithNoTasks = {
   args: {
     ...Default.args,
-    assignedTasksContainer: (
-      <AssignedTasksEmptySection
-        newTaskFormContainer={<NewTaskForm {...newTaskFormArgs} />}
-      />
-    ),
+    assignedTasksContainer: <AssignedTasksContainer totalCount={0} />,
   },
 } satisfies Story;

@@ -7,9 +7,12 @@ import { hasOwnerRole } from "@/lib/utils/hasOwnerRole";
 import { getUserSummary } from "@/lib/data/user/user.dal";
 import { deleteUser } from "@/lib/actions/user/deleteUser";
 import { updateUser } from "@/lib/actions/user/updateUser";
+import { createTask } from "@/lib/actions/task/createTask";
 import { deleteTasks } from "@/lib/actions/task/deleteTasks";
+import { ProfileActions } from "@/components/users/ProfileActions";
 import { changePassword } from "@/lib/actions/user/changePassword";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
+import { CreateTaskProvider } from "@/components/tasks/CreateTaskContext";
 import { UpdateUserProvider } from "@/components/users/UpdateUserContext";
 import { pageSearchParam, pageSizeSearchParam } from "@/lib/schemas/base";
 import { DeleteUserProvider } from "@/components/users/DeleteUserContext";
@@ -27,7 +30,6 @@ import { EditUserFormContainer } from "@/components/users/EditUserFormContainer"
 import { ChangePasswordProvider } from "@/components/users/ChangePasswordContext";
 import { PageTransitionProvider } from "@/components/common/PageTransitionContext";
 import { UpdateTaskStatusesProvider } from "@/components/tasks/UpdateTaskStatusesContext";
-import { ProfileActions } from "@/components/users/ProfileActions";
 
 const searchParamsSchema = z.object({
   page: pageSearchParam,
@@ -95,40 +97,46 @@ export default async function AppProfileTasksPage({
               <UpdateUserProvider updateUser={updateUser}>
                 <ChangePasswordProvider changePassword={changePassword}>
                   <DeleteUserProvider deleteUser={deleteUser}>
-                    <UserTasksPageLayout
-                      userId={userId}
-                      totalTasksCount={totalTasksCount}
-                      selectedSortField={sort}
-                      backButton
-                      navigationDesktop={
-                        <UserNavigationDesktop
-                          userActions={
-                            showUserActions && (
-                              <ProfileActions
-                                userId={userId}
-                                userFullName={userSummary.fullName}
-                              />
-                            )
-                          }
-                        />
-                      }
-                      navigationMobile={<UserNavigationMobile />}
-                      userTasksContainer={
-                        <UserTasksContainer
-                          tasks={tasks}
-                          totalCount={totalTasksCount}
-                          page={page}
-                          pageSize={pageSize}
-                        />
-                      }
-                      editUserFormContainer={
-                        <EditUserFormContainer userId={userId} />
-                      }
-                      userHeaderContainer={
-                        <UserHeaderContainer userId={userId} />
-                      }
-                      newTaskFormContainer={<NewTaskFormContainer />}
-                    />
+                    <CreateTaskProvider createTask={createTask}>
+                      <UserTasksPageLayout
+                        userId={userId}
+                        totalTasksCount={totalTasksCount}
+                        selectedSortField={sort}
+                        backButton
+                        navigationDesktop={
+                          <UserNavigationDesktop
+                            userActions={
+                              showUserActions && (
+                                <ProfileActions
+                                  userId={userId}
+                                  userFullName={userSummary.fullName}
+                                />
+                              )
+                            }
+                          />
+                        }
+                        navigationMobile={<UserNavigationMobile />}
+                        userTasksContainer={
+                          <UserTasksContainer
+                            tasks={tasks}
+                            totalCount={totalTasksCount}
+                            page={page}
+                            pageSize={pageSize}
+                          />
+                        }
+                        editUserFormContainer={
+                          <EditUserFormContainer userId={userId} />
+                        }
+                        userHeaderContainer={
+                          <UserHeaderContainer userId={userId} />
+                        }
+                        newTaskFormContainer={
+                          <NewTaskFormContainer
+                            forcedAssigneeId={session.user.id}
+                          />
+                        }
+                      />
+                    </CreateTaskProvider>
                   </DeleteUserProvider>
                 </ChangePasswordProvider>
               </UpdateUserProvider>

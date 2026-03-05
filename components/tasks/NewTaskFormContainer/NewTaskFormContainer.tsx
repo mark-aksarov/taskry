@@ -7,21 +7,28 @@ import { getUserSummaries } from "@/lib/data/user/user.dal";
 import { getProjectSummaries } from "@/lib/data/project/project.dal";
 import { getTaskCategorySummaries } from "@/lib/data/taskCategory/taskCategory.dal";
 
-export function NewTaskFormContainer() {
+interface NewTaskFormContainerProps {
+  forcedAssigneeId?: string;
+}
+
+export function NewTaskFormContainer(props: NewTaskFormContainerProps) {
   return (
     <Suspense fallback={<TaskFormSkeleton />}>
-      <NewTaskFormContainerInner />
+      <NewTaskFormContainerInner {...props} />
     </Suspense>
   );
 }
 
-async function NewTaskFormContainerInner() {
+async function NewTaskFormContainerInner({
+  forcedAssigneeId,
+}: NewTaskFormContainerProps) {
   const categories = await getTaskCategorySummaries();
   const projects = await getProjectSummaries();
   const users = await getUserSummaries();
 
   return (
     <NewTaskForm
+      forcedAssigneeId={forcedAssigneeId}
       categorySelectItems={categories}
       projectSelectItems={projects}
       assigneeSelectItems={users}

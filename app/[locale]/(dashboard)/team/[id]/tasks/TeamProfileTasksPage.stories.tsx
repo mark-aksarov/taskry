@@ -78,10 +78,5 @@ export const Loading = {
 };
 
 export const WithNoTasks = {
-  render: () => (
-    <UserTasksPageEmptyLayout
-      {...Default.args}
-      newTaskFormContainer={<NewTaskForm {...newTaskFormArgs} />}
-    />
-  ),
+  render: () => <UserTasksPageEmptyLayout {...Default.args} />,
 };

@@ -19,7 +19,6 @@ import { PageContainer } from "@/components/common/PageContainer";
 import { UserTasksEmptySection } from "@/components/users/UserTasksEmptySection";
 
 interface UserTasksPageEmptyLayoutProps {
-  newTaskFormContainer: React.ReactNode;
   userHeaderContainer: React.ReactNode;
   navigationDesktop: React.ReactNode;
   navigationMobile: React.ReactNode;
@@ -27,7 +26,6 @@ interface UserTasksPageEmptyLayoutProps {
 }
 
 export function UserTasksPageEmptyLayout({
-  newTaskFormContainer,
   userHeaderContainer,
   navigationDesktop,
   navigationMobile,
@@ -44,9 +42,7 @@ export function UserTasksPageEmptyLayout({
               <DetailCardTitle>{t("title")}</DetailCardTitle>
             </DetailCardHeader>
 
-            <UserTasksEmptySection
-              newTaskFormContainer={newTaskFormContainer}
-            />
+            <UserTasksEmptySection />
           </DetailCardLeft>
 
           <DetailCardRight>
@@ -65,7 +61,7 @@ export function UserTasksPageEmptyLayout({
 
           <ToolbarMobileBottom>{navigationMobile}</ToolbarMobileBottom>
 
-          <UserTasksEmptySection newTaskFormContainer={newTaskFormContainer} />
+          <UserTasksEmptySection />
         </PageGrid>
       </PageContainer>
     </>

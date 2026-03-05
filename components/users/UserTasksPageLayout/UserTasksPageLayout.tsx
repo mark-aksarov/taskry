@@ -22,6 +22,7 @@ import { PageContainer } from "@/components/common/PageContainer";
 import { UserTasksPageEmptyLayout } from "./UserTasksPageEmptyLayout";
 import { TaskToolbarSortingMenuTrigger } from "@/components/tasks/TaskToolbarSortingMenuTrigger";
 import { TaskToolbarActionsMenuTrigger } from "@/components/tasks/TaskToolbarActionsMenuTrigger";
+import { NewTaskModal } from "@/components/tasks/NewTaskModal";
 
 interface UserTasksPageLayoutProps {
   totalTasksCount: number;
@@ -52,12 +53,15 @@ export function UserTasksPageLayout({
 
   if (totalTasksCount === 0) {
     return (
-      <UserTasksPageEmptyLayout
-        newTaskFormContainer={newTaskFormContainer}
-        userHeaderContainer={userHeaderContainer}
-        navigationDesktop={navigationDesktop}
-        navigationMobile={navigationMobile}
-      />
+      <>
+        <UserTasksPageEmptyLayout
+          userHeaderContainer={userHeaderContainer}
+          navigationDesktop={navigationDesktop}
+          navigationMobile={navigationMobile}
+        />
+
+        <NewTaskModal newTaskFormContainer={newTaskFormContainer} />
+      </>
     );
   }
 
@@ -102,6 +106,8 @@ export function UserTasksPageLayout({
       </PageContainer>
 
       <ChangePasswordModal userId={userId} />
+
+      <NewTaskModal newTaskFormContainer={newTaskFormContainer} />
       <EditUserModal editUserFormContainer={editUserFormContainer} />
     </>
   );

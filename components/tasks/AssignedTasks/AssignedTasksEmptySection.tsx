@@ -1,16 +1,12 @@
-import { AssignedTasksEmptyCard } from "./AssignedTasksEmptyCard";
 import { AssignedTasksSection } from "./AssignedTasksSection";
+import { AssignedTasksEmptyCard } from "./AssignedTasksEmptyCard";
 import { AssignedTasksSectionHeading } from "./AssignedTasksSectionHeading";
 
-export function AssignedTasksEmptySection({
-  newTaskFormContainer,
-}: {
-  newTaskFormContainer: React.ReactNode;
-}) {
+export function AssignedTasksEmptySection() {
   return (
     <AssignedTasksSection>
       <AssignedTasksSectionHeading />
-      <AssignedTasksEmptyCard newTaskFormContainer={newTaskFormContainer} />
+      <AssignedTasksEmptyCard />
     </AssignedTasksSection>
   );
 }

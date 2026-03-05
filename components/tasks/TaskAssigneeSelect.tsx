@@ -4,13 +4,17 @@ import { Item } from "react-stately";
 import { ResponsiveSelect } from "@/components/common/ResponsiveSelect";
 import { useTranslations } from "next-intl";
 
-export function TaskAssigneeSelect({
-  defaultSelectedKey,
-  items,
-}: {
+interface TaskAssigneeSelectProps {
+  forcedAssigneeId?: string;
   defaultSelectedKey?: string;
   items: { id: string; fullName: string }[];
-}) {
+}
+
+export function TaskAssigneeSelect({
+  forcedAssigneeId,
+  defaultSelectedKey,
+  items,
+}: TaskAssigneeSelectProps) {
   const t = useTranslations("tasks.TaskAssigneeSelect");
 
   const withNoAssigneeItems = [
@@ -22,10 +26,11 @@ export function TaskAssigneeSelect({
     <ResponsiveSelect
       data-test="task-assignee-select"
       name="assigneeId"
-      defaultSelectedKey={defaultSelectedKey || ""}
+      defaultSelectedKey={defaultSelectedKey || forcedAssigneeId || ""}
       label={t("label")}
       overlayClassName="w-[var(--trigger-width)]"
       items={withNoAssigneeItems}
+      className={forcedAssigneeId ? "hidden" : ""}
     >
       {(item: any) => <Item key={item.id}>{item.label}</Item>}
     </ResponsiveSelect>
