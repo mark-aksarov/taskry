@@ -47,6 +47,7 @@ export function TasksPage({
           heading={t("emptySection.heading")}
           description={t("emptySection.description")}
           toolbarCreateNewMenuTrigger={<TaskToolbarCreateNewMenuTrigger />}
+          toolbarManageMenuTrigger={<TaskToolbarManageMenuTrigger />}
         />
 
         <NewTaskModal newTaskFormContainer={newTaskFormContainer} />

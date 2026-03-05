@@ -48,6 +48,7 @@ export function CustomersPage({
           heading={t("emptySection.heading")}
           description={t("emptySection.description")}
           toolbarCreateNewMenuTrigger={<CustomerToolbarCreateNewMenuTrigger />}
+          toolbarManageMenuTrigger={<CustomerToolbarManageMenuTrigger />}
         />
         <NewCustomerModal newCustomerFormContainer={newCustomerFormContainer} />
         <NewCompanyModal />

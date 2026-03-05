@@ -47,6 +47,7 @@ export function ProjectsPage({
           heading={t("emptySection.heading")}
           description={t("emptySection.description")}
           toolbarCreateNewMenuTrigger={<ProjectToolbarCreateNewMenuTrigger />}
+          toolbarManageMenuTrigger={<ProjectToolbarManageMenuTrigger />}
         />
 
         <NewProjectModal newProjectFormContainer={newProjectFormContainer} />
