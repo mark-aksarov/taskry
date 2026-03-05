@@ -14,16 +14,14 @@ interface CustomerDetailContainerProps {
 export function CustomerDetailContainer({
   customerId,
 }: CustomerDetailContainerProps) {
-  const { data: customer, isValidating } = useSWR<CustomerDetailDTO>(
+  const { data: customer } = useSWR<CustomerDetailDTO>(
     `/api/customers/${customerId}`,
   );
 
   //Error handling for 404 (NotFound) error. https://swr.vercel.app/docs/error-handling
 
-  // Show skeleton while loading or revalidating (to avoid flickering from stale content)
-  const showSkeleton = !customer || isValidating;
-
-  if (showSkeleton) {
+  // Show skeleton while loading
+  if (!customer) {
     return (
       <PersonDetailPresentation
         personHeader={<DetailHeaderSkeleton />}

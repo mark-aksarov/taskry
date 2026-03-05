@@ -1,38 +1,30 @@
 "use client";
 
 import useSWR from "swr";
-import { Suspense } from "react";
 import { TaskDetailSkeleton } from "./TaskDetail";
 import { TaskDetail } from "./TaskDetail/TaskDetail";
 import { SubtaskList } from "../subtasks/SubtaskList";
 import { TaskDetailDTO } from "@/lib/data/task/task.dto";
 import { SubtaskListItem } from "../subtasks/SubtaskListItem";
+import { NewSubtaskModal } from "../subtasks/NewSubtaskModal";
 import { createSubtask } from "@/lib/actions/subtask/createSubtask";
 import { deleteSubtask } from "@/lib/actions/subtask/deleteSubtask";
 import { updateSubtask } from "@/lib/actions/subtask/updateSubtask";
 import { toggleSubtask } from "@/lib/actions/subtask/toggleSubtask";
 import { CreateSubtaskProvider } from "../subtasks/CreateSubtaskContext";
-import { NewSubtaskModal } from "../subtasks/NewSubtaskModal";
 
 interface TaskDetailContainerProps {
   taskId: number;
 }
 
-export function TaskDetailContainer(props: TaskDetailContainerProps) {
-  return (
-    <Suspense fallback={<TaskDetailSkeleton />}>
-      <TaskDetailContainerInner {...props} />
-    </Suspense>
-  );
-}
+export function TaskDetailContainer({ taskId }: TaskDetailContainerProps) {
+  const { data: task } = useSWR<TaskDetailDTO>(`/api/tasks/${taskId}`);
 
-function TaskDetailContainerInner({ taskId }: TaskDetailContainerProps) {
-  const { data: task } = useSWR<TaskDetailDTO>(`/api/tasks/${taskId}`, {
-    suspense: true,
-  });
+  //Error handling for 404 (NotFound) error. https://swr.vercel.app/docs/error-handling
 
+  // Show skeleton while loading
   if (!task) {
-    throw new Error("Task not found");
+    return <TaskDetailSkeleton />;
   }
 
   return (

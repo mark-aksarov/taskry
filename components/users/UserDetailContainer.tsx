@@ -1,41 +1,30 @@
 "use client";
 
 import useSWR from "swr";
-import { Suspense } from "react";
-import { useTranslations } from "next-intl";
 import { UserDetail } from "./UserDetail/UserDetail";
 import { UserDetailHeader } from "./UserDetailHeader";
 import { UserDetailDTO } from "@/lib/data/user/user.dto";
+import { DetailHeaderSkeleton } from "../common/DetailHeader";
 import { UserDetailSkeleton } from "./UserDetail/UserDetailSkeleton";
-import { DetailHeader, DetailHeaderSkeleton } from "../common/DetailHeader";
 import { PersonDetailPresentation } from "../common/PersonDetailPresentation";
 
 interface UserDetailContainerProps {
   userId: string;
 }
 
-export function UserDetailContainer(props: UserDetailContainerProps) {
-  return (
-    <Suspense
-      fallback={
-        <PersonDetailPresentation
-          personHeader={<DetailHeaderSkeleton />}
-          userDetail={<UserDetailSkeleton />}
-        />
-      }
-    >
-      <UserDetailContainerInner {...props} />
-    </Suspense>
-  );
-}
+export function UserDetailContainer({ userId }: UserDetailContainerProps) {
+  const { data: user } = useSWR<UserDetailDTO>(`/api/users/${userId}`);
 
-function UserDetailContainerInner({ userId }: UserDetailContainerProps) {
-  const { data: user } = useSWR<UserDetailDTO>(`/api/users/${userId}`, {
-    suspense: true,
-  });
+  //Error handling for 404 (NotFound) error. https://swr.vercel.app/docs/error-handling
 
+  // Show skeleton while loading
   if (!user) {
-    throw new Error("User not found");
+    return (
+      <PersonDetailPresentation
+        personHeader={<DetailHeaderSkeleton />}
+        userDetail={<UserDetailSkeleton />}
+      />
+    );
   }
 
   return (
