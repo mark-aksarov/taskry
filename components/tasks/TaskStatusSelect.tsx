@@ -19,7 +19,7 @@ export function TaskStatusSelect({
       data-test="task-status-select"
       name="status"
       label={t("label")}
-      defaultSelectedKey={defaultSelectedKey}
+      defaultSelectedKey={defaultSelectedKey || "active"}
       placeholder={t("placeholder")}
       isRequired
       errorMessage={t("validation.required")}

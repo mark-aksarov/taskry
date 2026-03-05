@@ -11,8 +11,8 @@ interface ProjectStatusSelectProps {
 export function ProjectStatusSelect({
   defaultSelectedKey,
 }: ProjectStatusSelectProps) {
-  const t = useTranslations("projects.ProjectStatusSelect");
   const tStatus = useTranslations("projects.ProjectStatus");
+  const t = useTranslations("projects.ProjectStatusSelect");
 
   return (
     <ResponsiveSelect
@@ -22,7 +22,7 @@ export function ProjectStatusSelect({
       placeholder={t("placeholder")}
       overlayClassName="w-[var(--trigger-width)]"
       isRequired
-      defaultSelectedKey={defaultSelectedKey}
+      defaultSelectedKey={defaultSelectedKey || "active"}
       errorMessage={t("validation.required")}
     >
       <Item key="pending">{tStatus("pending")}</Item>
