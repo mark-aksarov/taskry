@@ -1,21 +1,22 @@
 "use client";
 
 import { LogOut } from "lucide-react";
-import { useTranslations } from "next-intl";
 import { useRouter } from "@/i18n/navigation";
 import { authClient } from "@/lib/auth-client";
+import { useLocale, useTranslations } from "next-intl";
 import { NavigationButton } from "@/components/common/NavigationButton";
 
 export function AppNavigationLogoutButton() {
   const t = useTranslations("layout.AppNavigationLogoutButton");
 
   const router = useRouter();
+  const locale = useLocale();
 
   function logout() {
     authClient.signOut({
       fetchOptions: {
         onSuccess: () => {
-          router.push("/sign-in");
+          router.push("/sign-in", { locale });
         },
       },
     });
