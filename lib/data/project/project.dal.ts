@@ -17,6 +17,7 @@ import { ProjectFilters, ProjectSortField } from "@/lib/types";
 import { requireSession } from "../utils/requireSession";
 import { AccessDeniedError, NotFoundError } from "../utils/error";
 import { Prisma, TaskStatus, ProjectStatus } from "@/generated/prisma/client";
+import { PrismaClientKnownRequestError } from "@prisma/client/runtime/client";
 
 export const getProjectDetail = cache(
   async (id: number): Promise<ProjectDetailDTO | null> => {
@@ -472,22 +473,31 @@ export const updateProject = async (input: UpdateProjectInputDTO) => {
   }
 
   // Update project
-  const updatedProject = await prisma.project.update({
-    where: {
-      id: input.id,
-      workspaceId,
-    },
-    data: {
-      title: input.title,
-      description: input.description,
-      deadline: new Date(input.deadline),
-      customerId: input.customerId,
-      categoryId: input.categoryId,
-      status: input.status,
-    },
-  });
+  try {
+    const updatedProject = await prisma.project.update({
+      where: {
+        id: input.id,
+        workspaceId,
+      },
+      data: {
+        title: input.title,
+        description: input.description,
+        deadline: new Date(input.deadline),
+        customerId: input.customerId,
+        categoryId: input.categoryId,
+        status: input.status,
+      },
+    });
 
-  return updatedProject;
+    return updatedProject;
+  } catch (error) {
+    if (
+      error instanceof PrismaClientKnownRequestError &&
+      error.code === "P2025"
+    ) {
+      throw new NotFoundError("Project not found.", "projectNotFound");
+    }
+  }
 };
 
 export const updateProjectStatuses = async (
@@ -516,6 +526,7 @@ export const updateProjectStatuses = async (
   }
 
   // Update projects
+
   const updatedProjects = await prisma.project.updateManyAndReturn({
     where: {
       id: { in: ids },
@@ -575,7 +586,10 @@ async function validateProjectCategory(
   });
 
   if (!category) {
-    throw new NotFoundError("Project category not found");
+    throw new NotFoundError(
+      "Project category not found",
+      "projectCategoryNotFound",
+    );
   }
 
   if (category.workspaceId !== workspaceId) {
@@ -591,7 +605,7 @@ async function validateCustomer(workspaceId: number, customerId: number) {
   });
 
   if (!customer) {
-    throw new NotFoundError("Customer not found");
+    throw new NotFoundError("Customer not found", "customerNotFound");
   }
 
   if (customer.workspaceId !== workspaceId) {

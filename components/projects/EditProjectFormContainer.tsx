@@ -1,6 +1,8 @@
 "use client";
 
 import useSWR from "swr";
+import { notFound } from "next/navigation";
+import { usePathname } from "@/i18n/navigation";
 import { EditProjectForm } from "./EditProjectForm";
 import { CalendarDate } from "@internationalized/date";
 import { ProjectFormSkeleton } from "./ProjectFormSkeleton";
@@ -15,24 +17,38 @@ interface EditProjectFormContainerProps {
 export function EditProjectFormContainer({
   projectId,
 }: EditProjectFormContainerProps) {
+  const pathname = usePathname();
+
   const { data: categories } = useSWR<ProjectCategorySummaryDTO[]>(
     `/api/project-categories`,
     {
-      revalidateIfStale: false, // don't revalidate on each mount
       revalidateOnFocus: false,
     },
   );
 
   const { data: customers } = useSWR<CustomerSummaryDTO[]>(`/api/customers`, {
-    revalidateIfStale: false, // don't revalidate on each mount
     revalidateOnFocus: false,
   });
 
-  // Current project data for editing (loaded each modal open)
-  const { data: project, isValidating: isValidatingProject } =
-    useSWR<ProjectFormDataDTO>(`/api/projects/${projectId}?view=edit`);
+  const {
+    data: project,
+    isValidating: isValidatingProject,
+    error: projectError,
+  } = useSWR<ProjectFormDataDTO>(`/api/projects/${projectId}?view=edit`, {
+    revalidateOnFocus: false,
+  });
 
-  //Error handling for 404 (NotFound) error. https://swr.vercel.app/docs/error-handling
+  if (projectError) {
+    if (pathname === "/projects") {
+      if (projectError.status === 404) {
+        throw new Error(undefined, { cause: "notFound" });
+      }
+
+      throw new Error();
+    }
+
+    notFound();
+  }
 
   // Show skeleton while loading or revalidating
   const showSkeleton =

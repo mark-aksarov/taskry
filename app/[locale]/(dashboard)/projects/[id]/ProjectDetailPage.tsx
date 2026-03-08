@@ -8,20 +8,15 @@ import {
   AppHeaderContainerProps,
 } from "@/components/layout/AppHeader";
 
-import {
-  ActionFn,
-  ActionState,
-  DeleteProjectPayload,
-} from "@/lib/actions/types";
-
 import { useTranslations } from "next-intl";
 import { Card } from "@/components/common/Card";
 import { PageGrid } from "@/components/common/PageGrid";
 import { BackButton } from "@/components/common/BackButton";
+import { ActionFn, ActionState } from "@/lib/actions/types";
 import { PageContainer } from "@/components/common/PageContainer";
+import { EditProjectModal } from "@/components/projects/EditProjectModal";
 import { ProjectDetailCard } from "@/components/projects/ProjectDetailCard";
 import { ProjectDetailActions } from "@/components/projects/ProjectDetailActions";
-import { EditProjectModal } from "@/components/projects/EditProjectModal";
 
 interface ProjectPageProps {
   projectId: number;
@@ -33,7 +28,6 @@ interface ProjectPageProps {
   appHeaderProps: AppHeaderContainerProps;
   sendComment: ActionFn<ActionState, FormData>;
   updateComment: ActionFn<ActionState, FormData>;
-  deleteProject: ActionFn<ActionState, DeleteProjectPayload>;
 }
 
 export function ProjectDetailPage({
@@ -46,13 +40,11 @@ export function ProjectDetailPage({
   appHeaderProps,
   sendComment,
   updateComment,
-  deleteProject,
 }: ProjectPageProps) {
   const t = useTranslations("app.ProjectDetailPage");
 
   const projectDetailActions = (
     <ProjectDetailActions
-      deleteProject={deleteProject}
       projectId={projectId}
       projectTitle={projectTitle}
       sendComment={sendComment}

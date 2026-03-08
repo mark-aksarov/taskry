@@ -8,3 +8,6 @@ export const internalServerError = () =>
 
 export const badRequest = (error: string) =>
   NextResponse.json({ error }, { status: 400 });
+
+export const notFound = (error: string) =>
+  NextResponse.json({ error }, { status: 404 });

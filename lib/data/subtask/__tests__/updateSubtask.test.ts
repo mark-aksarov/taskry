@@ -107,13 +107,15 @@ describe("updateSubtask", () => {
     it("should succeed for owner", async () => {
       const { updateInput } = await setup("user-1", "owner");
       const result = await updateSubtask(updateInput);
-      expect(result.text).toBe(updateInput.text);
+      expect(result).toBeDefined();
+      expect(result!.text).toBe(updateInput.text);
     });
 
     it("should fail for user", async () => {
       const { updateInput } = await setup("user-2", "user");
       const result = await updateSubtask(updateInput);
-      expect(result.text).toBe(updateInput.text);
+      expect(result).toBeDefined();
+      expect(result!.text).toBe(updateInput.text);
     });
 
     it("should fail for guest", async () => {

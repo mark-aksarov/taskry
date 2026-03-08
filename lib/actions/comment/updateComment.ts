@@ -6,6 +6,7 @@ import { getTranslations } from "next-intl/server";
 import { commentId, commentContent } from "@/lib/schemas/comment";
 import { updateComment as updateCommentQuery } from "@/lib/data/comment/comment.dal";
 import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedirect";
+import { NotFoundError } from "@/lib/data/utils/error";
 
 const schema = z.object({
   id: commentId,
@@ -34,9 +35,17 @@ export async function updateComment(
   } catch (error) {
     console.error("Server Action Error:", error);
 
+    if (error instanceof NotFoundError) {
+      return {
+        status: "error",
+        errorCode: "notFound",
+        message: t("comment.common.error.notFound"),
+      };
+    }
+
     return {
       status: "error",
-      message: t("comment.update.error"),
+      message: t("comment.update.error.internalServerError"),
     };
   }
 }

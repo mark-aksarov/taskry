@@ -7,9 +7,9 @@ import {
 
 import { createContext, useContext } from "react";
 import { ActionFn, ActionState } from "@/lib/actions/types";
-import { useToastOnActionSuccess } from "@/lib/hooks/useToastOnActionSuccess";
+import { useShowToastOnActionSuccess } from "@/lib/hooks/useShowToastOnActionSuccess";
 import { useCloseModalOnActionSuccess } from "@/lib/hooks/useCloseModalOnActionSuccess";
-import { useToastOnActionErrorWhenModalClosed } from "@/lib/hooks/useToastOnActionErrorWhenModalClosed";
+import { useShowToastOnActionErrorWhenModalClosed } from "@/lib/hooks/useShowToastOnActionErrorWhenModalClosed";
 
 const ChangePasswordContext = createContext<UpdateEntityContextType | null>(
   null,
@@ -27,9 +27,10 @@ export function ChangePasswordProvider({
   const contextValue = useUpdateEntityContextValue(changePassword);
 
   const { state, isModalOpen, onModalOpenChange } = contextValue;
-  useToastOnActionSuccess(state);
-  useToastOnActionErrorWhenModalClosed(state, isModalOpen);
+
+  useShowToastOnActionSuccess(state);
   useCloseModalOnActionSuccess(state, onModalOpenChange);
+  useShowToastOnActionErrorWhenModalClosed(state, isModalOpen);
 
   return (
     <ChangePasswordContext.Provider value={contextValue}>
@@ -46,4 +47,7 @@ export function useChangePassword() {
     );
   }
   return context;
+}
+function addToastOnActionErrorNotFound(state: ActionState) {
+  throw new Error("Function not implemented.");
 }

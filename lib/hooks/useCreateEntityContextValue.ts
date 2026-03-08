@@ -1,3 +1,4 @@
+import { useRouter } from "@/i18n/navigation";
 import { useMemo, useState, useActionState } from "react";
 import { ActionContextType, ActionFn, ActionState } from "@/lib/actions/types";
 
@@ -14,8 +15,22 @@ export const initialState: ActionState = {
 export function useCreateEntityContextValue(
   createFn: ActionFn<ActionState, FormData>,
 ) {
+  const router = useRouter();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [state, action, isPending] = useActionState(createFn, initialState);
+
+  const [state, action, isPending] = useActionState(
+    async (state: ActionState, payload: FormData) => {
+      const newState = await createFn(state, payload);
+
+      if (newState.status === "success") {
+        // router.refresh is wrapped in startTransition internally
+        router.refresh();
+      }
+
+      return newState;
+    },
+    initialState,
+  );
 
   const contextValue = useMemo(
     () => ({

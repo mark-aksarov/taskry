@@ -1,15 +1,17 @@
 import "server-only";
 
+import {
+  PositionSummaryDTO,
+  CreatePositionInputDTO,
+  UpdatePositionInputDTO,
+} from "./position.dto";
+
 import { cache } from "react";
 import prisma from "@/lib/prisma";
 import { auth } from "@/lib/auth";
-import { AccessDeniedError } from "../utils/error";
 import { requireSession } from "../utils/requireSession";
-import {
-  CreatePositionInputDTO,
-  PositionSummaryDTO,
-  UpdatePositionInputDTO,
-} from "./position.dto";
+import { AccessDeniedError, NotFoundError } from "../utils/error";
+import { PrismaClientKnownRequestError } from "@prisma/client/runtime/client";
 
 export const getPositionCount = cache(async () => {
   // Authorization
@@ -95,17 +97,26 @@ export const updatePosition = async (input: UpdatePositionInputDTO) => {
   }
 
   // Update position
-  const updatedPosition = await prisma.position.update({
-    where: {
-      id: input.id,
-      workspaceId,
-    },
-    data: {
-      name: input.name,
-    },
-  });
+  try {
+    const updatedPosition = await prisma.position.update({
+      where: {
+        id: input.id,
+        workspaceId,
+      },
+      data: {
+        name: input.name,
+      },
+    });
 
-  return updatedPosition;
+    return updatedPosition;
+  } catch (error) {
+    if (
+      error instanceof PrismaClientKnownRequestError &&
+      error.code === "P2025"
+    ) {
+      throw new NotFoundError("Position not found.", "positionNotFound");
+    }
+  }
 };
 
 export const deletePositions = async (ids: number[]) => {

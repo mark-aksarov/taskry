@@ -1,13 +1,16 @@
 import { useEffect } from "react";
-import { ActionState } from "@/lib/actions/types";
+import { ActionState } from "../actions/types";
 import { useAddErrorToast } from "./useAddErrorToast";
 
-export function useToastOnActionErrorWhenModalClosed(
+export function useShowToastOnActionErrorWhenModalClosed(
   state: ActionState,
   isModalOpen: boolean,
 ) {
   const addErrorToast = useAddErrorToast();
 
+  /*
+   * Do not show error toast for the same state when the modal is open again
+   */
   useEffect(() => {
     if (state.status === "error" && state.message) {
       if (!isModalOpen) {
@@ -15,5 +18,5 @@ export function useToastOnActionErrorWhenModalClosed(
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [state]);
+  }, [state, addErrorToast]);
 }

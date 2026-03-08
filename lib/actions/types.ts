@@ -6,11 +6,18 @@ export type ActionFn<State, Payload> = Parameters<
 >[0];
 
 export type ActionStatus = "error" | "success" | null;
+export type ActionErrorCode = "badRequest" | "notFound" | "internalServerError";
 
 export type ActionState = {
   status: ActionStatus;
   errorCode?: string;
   message?: string;
+};
+
+export type DeleteCommentPayload = {
+  id: number;
+  taskId?: number;
+  projectId?: number;
 };
 
 export type DeleteProjectPayload = {

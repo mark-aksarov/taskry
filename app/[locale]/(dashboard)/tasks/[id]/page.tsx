@@ -10,6 +10,7 @@ import { sendComment } from "@/lib/actions/comment/sendComment";
 import { updateComment } from "@/lib/actions/comment/updateComment";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { UpdateTaskProvider } from "@/components/tasks/UpdateTaskContext";
+import { DeleteTaskProvider } from "@/components/tasks/DeleteTaskContext";
 import { CurrentUserProvider } from "@/components/common/CurrentUserContext";
 import { TaskCommentsContainer } from "@/components/tasks/TaskCommentsContainer";
 import { EditTaskFormContainer } from "@/components/tasks/EditTaskFormContainer";
@@ -50,19 +51,21 @@ export default async function AppTaskDetailPage({
 
   return (
     <CurrentUserProvider value={currentUserContextValue}>
-      <UpdateTaskProvider taskId={id} updateTask={updateTask}>
-        <TaskDetailPage
-          taskId={id}
-          taskTitle={taskSummary.title}
-          deleteTask={deleteTask}
-          sendComment={sendComment}
-          updateComment={updateComment}
-          taskDetailContainer={<TaskDetailAltContainer taskId={id} />}
-          taskHeaderContainer={<TaskDetailHeaderContainer taskId={id} />}
-          editTaskFormContainer={<EditTaskFormContainer taskId={id} />}
-          taskCommentsContainer={<TaskCommentsContainer taskId={id} />}
-          appHeaderProps={defaultAppHeaderSlots}
-        />
+      <UpdateTaskProvider updateTask={updateTask}>
+        <DeleteTaskProvider deleteTask={deleteTask}>
+          <TaskDetailPage
+            taskId={id}
+            taskTitle={taskSummary.title}
+            deleteTask={deleteTask}
+            sendComment={sendComment}
+            updateComment={updateComment}
+            taskDetailContainer={<TaskDetailAltContainer taskId={id} />}
+            taskHeaderContainer={<TaskDetailHeaderContainer taskId={id} />}
+            editTaskFormContainer={<EditTaskFormContainer taskId={id} />}
+            taskCommentsContainer={<TaskCommentsContainer taskId={id} />}
+            appHeaderProps={defaultAppHeaderSlots}
+          />
+        </DeleteTaskProvider>
       </UpdateTaskProvider>
     </CurrentUserProvider>
   );

@@ -9,8 +9,9 @@ import {
 import { cache } from "react";
 import prisma from "@/lib/prisma";
 import { auth } from "@/lib/auth";
-import { AccessDeniedError } from "../utils/error";
 import { requireSession } from "../utils/requireSession";
+import { AccessDeniedError, NotFoundError } from "../utils/error";
+import { PrismaClientKnownRequestError } from "@prisma/client/runtime/client";
 
 export const getTaskCategoryCount = cache(async () => {
   // Authorization
@@ -91,17 +92,29 @@ export const updateTaskCategory = async (input: UpdateTaskCategoryInputDTO) => {
   }
 
   // Update task category
-  const updatedTaskCategory = await prisma.taskCategory.update({
-    where: {
-      id: input.id,
-      workspaceId,
-    },
-    data: {
-      name: input.name,
-    },
-  });
+  try {
+    const updatedTaskCategory = await prisma.taskCategory.update({
+      where: {
+        id: input.id,
+        workspaceId,
+      },
+      data: {
+        name: input.name,
+      },
+    });
 
-  return updatedTaskCategory;
+    return updatedTaskCategory;
+  } catch (error) {
+    if (
+      error instanceof PrismaClientKnownRequestError &&
+      error.code === "P2025"
+    ) {
+      throw new NotFoundError(
+        "Task category not found.",
+        "taskCategoryNotFound",
+      );
+    }
+  }
 };
 
 export const deleteTaskCategories = async (ids: number[]) => {

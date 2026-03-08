@@ -1,0 +1,33 @@
+import {
+  PageStateContainer,
+  PageStateContainerProps,
+} from "./PageStateContainer";
+import { Button } from "../ui/Button";
+
+interface NotFoundPageContainerProps
+  extends Omit<PageStateContainerProps, "button"> {
+  linkLabel?: string;
+  linkHref?: string;
+}
+
+export default function NotFoundPageContainer({
+  linkLabel,
+  linkHref,
+  ...props
+}: NotFoundPageContainerProps) {
+  return (
+    <PageStateContainer
+      button={
+        <Button
+          as="a"
+          size="medium"
+          href={linkHref}
+          variant="outlined"
+          label={linkLabel}
+        />
+      }
+      emptySectionClassName="max-w-[600px]"
+      {...props}
+    />
+  );
+}

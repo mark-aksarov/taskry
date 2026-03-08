@@ -13,9 +13,17 @@ interface UserDetailContainerProps {
 }
 
 export function UserDetailContainer({ userId }: UserDetailContainerProps) {
-  const { data: user } = useSWR<UserDetailDTO>(`/api/users/${userId}`);
+  const { data: user, error } = useSWR<UserDetailDTO>(`/api/users/${userId}`, {
+    revalidateOnFocus: false,
+  });
 
-  //Error handling for 404 (NotFound) error. https://swr.vercel.app/docs/error-handling
+  if (error) {
+    if (error.status === 404) {
+      throw new Error(undefined, { cause: "notFound" });
+    }
+
+    throw new Error();
+  }
 
   // Show skeleton while loading
   if (!user) {

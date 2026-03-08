@@ -1,11 +1,18 @@
 "use client";
 
-import { useToastOnActionError } from "@/lib/hooks/useToastOnActionError";
-import { useContext, createContext, useActionState, useMemo } from "react";
+import {
+  useMemo,
+  useEffect,
+  useContext,
+  createContext,
+  useActionState,
+} from "react";
+
+import { useRouter } from "@/i18n/navigation";
+import { useCommentFormContext } from "../CommentFormContext";
+import { useRefreshComments } from "@/lib/swr/hooks/useRefreshComments";
 import { ActionContextType, ActionFn, ActionState } from "@/lib/actions/types";
-import { useRefreshCommentsOnActionSuccess } from "@/lib/hooks/useRefreshCommentsOnActionSuccess";
-import { useCommentFormResetOnActionSuccess } from "@/lib/hooks/useCommentFormResetOnActionSuccess";
-import { useClearEditCommentIdOnActionSuccess } from "@/lib/hooks/useClearEditCommentIdOnActionSuccess";
+import { useShowToastOnActionError } from "@/lib/hooks/useShowToastOnActionError";
 
 const initialState: ActionState = {
   status: null,
@@ -22,15 +29,36 @@ export function UpdateCommentProvider({
   updateComment,
   children,
 }: UpdateCommentProviderProps) {
+  const router = useRouter();
+
   const [state, action, isPending] = useActionState(
-    updateComment,
+    async (state: ActionState, payload: FormData) => {
+      const newState = await updateComment(state, payload);
+
+      if (newState.status === "success") {
+        // router.refresh is wrapped in startTransition internally
+        router.refresh();
+      }
+
+      return newState;
+    },
     initialState,
   );
 
-  useToastOnActionError(state);
-  useRefreshCommentsOnActionSuccess(state);
-  useCommentFormResetOnActionSuccess(state);
-  useClearEditCommentIdOnActionSuccess(state);
+  const refreshComments = useRefreshComments();
+  const { setCommentContent, setEditCommentId } = useCommentFormContext();
+
+  useEffect(() => {
+    refreshComments();
+  }, [state, refreshComments]);
+
+  // Reset comment form
+  useEffect(() => {
+    setCommentContent("");
+    setEditCommentId(undefined);
+  }, [state, setCommentContent, setEditCommentId]);
+
+  useShowToastOnActionError(state);
 
   const contextValue = useMemo(
     () => ({ state, action, isPending }),

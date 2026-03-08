@@ -5,10 +5,10 @@ import {
   useDeleteEntityContextValue,
 } from "@/lib/hooks/useDeleteEntityContextValue";
 
-import { useContext, createContext } from "react";
 import { ActionFn, ActionState } from "@/lib/actions/types";
-import { useToastOnActionError } from "@/lib/hooks/useToastOnActionError";
-import { useRefreshTaskDetailOnActionSuccess } from "@/lib/hooks/useRefreshTaskDetailOnActionSuccess";
+import { useContext, createContext, useEffect } from "react";
+import { useRefreshTaskDetail } from "@/lib/swr/hooks/useRefreshTaskDetail";
+import { useShowToastOnActionError } from "@/lib/hooks/useShowToastOnActionError";
 
 const DeleteSubtaskContext =
   createContext<DeleteEntityContextType<number> | null>(null);
@@ -24,11 +24,15 @@ export function DeleteSubtaskProvider({
   deleteSubtask,
   children,
 }: DeleteSubtaskProviderProps) {
+  const refreshTaskDetail = useRefreshTaskDetail(taskId);
   const contextValue = useDeleteEntityContextValue(deleteSubtask);
-
   const { state } = contextValue;
-  useToastOnActionError(state);
-  useRefreshTaskDetailOnActionSuccess(state, taskId);
+
+  useEffect(() => {
+    refreshTaskDetail();
+  }, [state, refreshTaskDetail]);
+
+  useShowToastOnActionError(state);
 
   return (
     <DeleteSubtaskContext.Provider value={contextValue}>

@@ -6,14 +6,10 @@ import { SWRProvider } from "./SWRProvider";
 import type { Metadata, Viewport } from "next";
 import { Nunito_Sans } from "next/font/google";
 import { ToastRegion } from "@/components/ui/Toast";
-import { getUserSummaries } from "@/lib/data/user/user.dal";
 import { I18nProvider } from "@/components/ui/I18nProvider";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { RouterProvider } from "@/components/ui/RouterProvider";
 import { ThemeProvider } from "@/components/layout/ThemeProvider";
-import { getProjectSummaries } from "@/lib/data/project/project.dal";
-import { getTaskCategorySummaries } from "@/lib/data/taskCategory/taskCategory.dal";
-import { getProjectCategorySummaries } from "@/lib/data/projectCategory/projectCategory.dal";
 
 const nunitoSans = Nunito_Sans({
   variable: "--font-nunito-sans",

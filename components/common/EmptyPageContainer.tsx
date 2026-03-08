@@ -22,7 +22,7 @@ export function EmptyPageContainer({
   toolbarManageMenuTrigger,
 }: EmptyPageContainerProps) {
   return (
-    <PageContainer fullscreen className="relative">
+    <PageContainer fullscreen headerOffset className="relative">
       <PageGrid className="flex-auto">
         <ToolbarDesktop>
           {toolbarManageMenuTrigger}

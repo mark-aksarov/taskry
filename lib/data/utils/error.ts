@@ -13,9 +13,12 @@ export class UnauthorizedError extends Error {
 }
 
 export class NotFoundError extends Error {
-  constructor(message?: string) {
+  code?: string;
+
+  constructor(message?: string, code?: string) {
     super(message || "Not found");
     this.name = "NotFoundError";
+    this.code = code;
   }
 }
 

@@ -2,7 +2,6 @@
 
 import z from "zod";
 import { ActionState } from "../types";
-import { revalidatePath } from "next/cache";
 import { getTranslations } from "next-intl/server";
 import { positionName } from "@/lib/schemas/position";
 import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedirect";
@@ -24,7 +23,6 @@ export async function createPosition(
   try {
     const data = schema.parse({ name: formData.get("name") });
     await createPositionQuery(data);
-    revalidatePath("/");
 
     return {
       status: "success",
@@ -35,7 +33,7 @@ export async function createPosition(
 
     return {
       status: "error",
-      message: t("position.create.error"),
+      message: t("position.create.error.internalServerError"),
     };
   }
 }

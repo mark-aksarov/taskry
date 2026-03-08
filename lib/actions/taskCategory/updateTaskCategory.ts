@@ -2,8 +2,8 @@
 
 import z from "zod";
 import { ActionState } from "../types";
-import { revalidatePath } from "next/cache";
 import { getTranslations } from "next-intl/server";
+import { NotFoundError } from "@/lib/data/utils/error";
 import { taskCategoryId, taskCategoryName } from "@/lib/schemas/taskCategory";
 import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedirect";
 import { updateTaskCategory as updateTaskCategoryQuery } from "@/lib/data/taskCategory/taskCategory.dal";
@@ -27,7 +27,6 @@ export async function updateTaskCategory(
     const parsedData = schema.parse(input);
 
     await updateTaskCategoryQuery(parsedData);
-    revalidatePath("/");
 
     return {
       status: "success",
@@ -36,9 +35,17 @@ export async function updateTaskCategory(
   } catch (error) {
     console.error("Server Action Error:", error);
 
+    if (error instanceof NotFoundError) {
+      return {
+        status: "error",
+        errorCode: "notFound",
+        message: t("taskCategory.common.error.notFound"),
+      };
+    }
+
     return {
       status: "error",
-      message: t("taskCategory.update.error"),
+      message: t("taskCategory.update.error.internalServerError"),
     };
   }
 }

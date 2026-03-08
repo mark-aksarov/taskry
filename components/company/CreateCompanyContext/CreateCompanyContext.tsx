@@ -7,10 +7,9 @@ import {
 
 import { useContext, createContext } from "react";
 import { ActionFn, ActionState } from "@/lib/actions/types";
-import { useToastOnActionSuccess } from "@/lib/hooks/useToastOnActionSuccess";
+import { useShowToastOnActionSuccess } from "@/lib/hooks/useShowToastOnActionSuccess";
 import { useCloseModalOnActionSuccess } from "@/lib/hooks/useCloseModalOnActionSuccess";
-import { useToastOnActionErrorWhenModalClosed } from "@/lib/hooks/useToastOnActionErrorWhenModalClosed";
-import { useRefreshCompaniesOnActionSuccess } from "@/lib/hooks/useRefreshCompaniesOnActionSuccess";
+import { useShowToastOnActionErrorWhenModalClosed } from "@/lib/hooks/useShowToastOnActionErrorWhenModalClosed";
 
 const CreateCompanyContext = createContext<CreateEntityContextType | null>(
   null,
@@ -28,10 +27,11 @@ export function CreateCompanyProvider({
   const contextValue = useCreateEntityContextValue(createCompany);
 
   const { state, isModalOpen, onModalOpenChange } = contextValue;
-  useToastOnActionSuccess(state);
-  useToastOnActionErrorWhenModalClosed(state, isModalOpen);
+
+  // wait for transition to finish
+  useShowToastOnActionSuccess(state);
   useCloseModalOnActionSuccess(state, onModalOpenChange);
-  useRefreshCompaniesOnActionSuccess(state);
+  useShowToastOnActionErrorWhenModalClosed(state, isModalOpen);
 
   return (
     <CreateCompanyContext.Provider value={contextValue}>

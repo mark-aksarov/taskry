@@ -2,6 +2,7 @@ import {
   badRequest,
   unauthorized,
   internalServerError,
+  notFound,
 } from "@/lib/utils/routeHandlerErrors";
 
 import z from "zod";
@@ -45,10 +46,19 @@ export async function GET(
 
     if (view === "edit") {
       const formData = await getTaskFormData(id);
+
+      if (!formData) {
+        return notFound("Task not found");
+      }
+
       return NextResponse.json(formData);
     }
 
     const task = await getTaskDetail(id);
+
+    if (!task) {
+      return notFound("Task not found");
+    }
 
     return NextResponse.json(task);
   } catch (error) {

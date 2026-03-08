@@ -7,8 +7,7 @@ import {
 
 import { useContext, createContext } from "react";
 import { ActionFn, ActionState } from "@/lib/actions/types";
-import { useToastOnActionError } from "@/lib/hooks/useToastOnActionError";
-import { useRefreshTaskCategories } from "@/lib/hooks/useRefreshTaskCategories";
+import { useShowToastOnActionError } from "@/lib/hooks/useShowToastOnActionError";
 
 const DeleteTaskCategoryContext =
   createContext<DeleteEntityContextType<number> | null>(null);
@@ -22,19 +21,12 @@ export function DeleteTaskCategoryProvider({
   deleteTaskCategory,
   children,
 }: DeleteTaskCategoryProviderProps) {
-  const refreshTaskCategories = useRefreshTaskCategories();
-
-  // Refresh inside reducerAction after successful deletion
-  const contextValue = useDeleteEntityContextValue(
-    deleteTaskCategory,
-    refreshTaskCategories,
-  );
+  const contextValue = useDeleteEntityContextValue(deleteTaskCategory);
 
   const { state } = contextValue;
-  useToastOnActionError(state);
 
-  // Can't call this hook here — provider unmounts after successful deletion
-  // useRefreshTaskCategoriesOnActionSuccess(state);
+  // wait for transition to finish
+  useShowToastOnActionError(state);
 
   return (
     <DeleteTaskCategoryContext.Provider value={contextValue}>

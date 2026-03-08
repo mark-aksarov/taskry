@@ -1,7 +1,6 @@
 "use server";
 
 import z from "zod";
-import { revalidatePath } from "next/cache";
 import { getTranslations } from "next-intl/server";
 import { projectId, projectStatus } from "@/lib/schemas/project";
 import { ActionState, UpdateProjectStatusesPayload } from "../types";
@@ -24,19 +23,19 @@ export async function updateProjectStatuses(
 
   try {
     const parsedData = schema.parse(payload);
+
     await updateProjectStatusesQuery(parsedData.ids, parsedData.nextStatus);
-    revalidatePath("/");
 
     return {
       status: "success",
-      message: t("project.updateStatus.success.many"),
+      message: t("project.updateStatuses.success"),
     };
   } catch (error) {
     console.error("Server Action Error:", error);
 
     return {
       status: "error",
-      message: t("project.updateStatus.error.many"),
+      message: t("project.updateStatuses.error.internalServerError"),
     };
   }
 }

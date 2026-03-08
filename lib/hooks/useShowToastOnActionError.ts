@@ -1,10 +1,11 @@
 import { useEffect } from "react";
-import { ActionState } from "@/lib/actions/types";
+import { ActionState } from "../actions/types";
 import { useAddErrorToast } from "./useAddErrorToast";
 
-export function useToastOnActionError(state: ActionState) {
+export function useShowToastOnActionError(state: ActionState) {
   const addErrorToast = useAddErrorToast();
 
+  // Show error toast when the status is error
   useEffect(() => {
     if (state.status === "error" && state.message) {
       addErrorToast(state.message);

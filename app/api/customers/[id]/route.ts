@@ -2,6 +2,7 @@ import {
   badRequest,
   unauthorized,
   internalServerError,
+  notFound,
 } from "@/lib/utils/routeHandlerErrors";
 
 import z from "zod";
@@ -43,11 +44,21 @@ export async function GET(
     const view = searchParams.get("view");
 
     if (view === "edit") {
-      const project = await getCustomerFormData(id);
-      return NextResponse.json(project);
+      const customer = await getCustomerFormData(id);
+
+      if (!customer) {
+        return notFound("Customer not found");
+      }
+
+      return NextResponse.json(customer);
     }
 
     const customer = await getCustomerDetail(id);
+
+    if (!customer) {
+      return notFound("Customer not found");
+    }
+
     return NextResponse.json(customer);
   } catch (error) {
     console.error("API Error:", error);

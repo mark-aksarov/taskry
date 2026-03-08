@@ -1,7 +1,6 @@
 "use server";
 
 import { ActionState } from "../types";
-import { revalidatePath } from "next/cache";
 import { subtaskId } from "@/lib/schemas/subtask";
 import { getTranslations } from "next-intl/server";
 import { deleteSubtask as deleteSubtaskQuery } from "@/lib/data/subtask/subtask.dal";
@@ -19,19 +18,18 @@ export async function deleteSubtask(
   try {
     const parsedId = subtaskId.parse(id);
 
-    const result = await deleteSubtaskQuery(parsedId);
-    revalidatePath("/");
+    await deleteSubtaskQuery(parsedId);
 
     return {
       status: "success",
-      message: t("subtask.delete.success.one"),
+      message: t("subtask.delete.success"),
     };
   } catch (error) {
     console.error("Server Action Error:", error);
 
     return {
       status: "error",
-      message: t("subtask.delete.error.one"),
+      message: t("subtask.delete.error.internalServerError"),
     };
   }
 }

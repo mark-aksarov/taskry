@@ -1,36 +1,25 @@
 "use client";
 
-import {
-  ActionFn,
-  ActionState,
-  DeleteCustomerPayload,
-} from "@/lib/actions/types";
-
 import { useTranslations } from "next-intl";
 import { Pencil, Trash } from "lucide-react";
+import { startTransition, useState } from "react";
 import { EditCustomerModal } from "../EditCustomerModal";
+import { useDeleteCustomer } from "../DeleteCustomerContext";
 import { useUpdateCustomer } from "../UpdateCustomerContext";
 import { BaseDeleteCustomerModal } from "../DeleteCustomerModal";
-import { startTransition, useActionState, useState } from "react";
 import { GuestModeModal } from "@/components/common/GuestModeModal";
 import { NavigationButton } from "@/components/common/NavigationButton";
 import { useCurrentUser } from "@/components/common/CurrentUserContext";
 
-const initialDeleteState: ActionState = {
-  status: null,
-};
-
 interface CustomerDetailActionsProps {
   customerId: number;
   customerFullName: string;
-  deleteCustomer: ActionFn<ActionState, DeleteCustomerPayload>;
   editCustomerFormContainer: React.ReactNode;
 }
 
 export function CustomerDetailActions({
   customerId,
   customerFullName,
-  deleteCustomer,
   editCustomerFormContainer,
 }: CustomerDetailActionsProps) {
   const t = useTranslations("customers.CustomerDetailActions");
@@ -40,10 +29,8 @@ export function CustomerDetailActions({
   const [isGuestModeModalOpen, setIsGuestModeModalOpen] = useState(false);
 
   // Delete customer: action state + form modal state
-  const [, deleteAction, isDeletePending] = useActionState(
-    deleteCustomer,
-    initialDeleteState,
-  );
+  const { isPending: isDeletePending, action: deleteAction } =
+    useDeleteCustomer();
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
   // Edit customer: action state + form modal state from context

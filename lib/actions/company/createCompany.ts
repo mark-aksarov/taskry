@@ -2,7 +2,6 @@
 
 import z from "zod";
 import { ActionState } from "../types";
-import { revalidatePath } from "next/cache";
 import { getTranslations } from "next-intl/server";
 import { companyName } from "@/lib/schemas/company";
 import { createCompany as createCompanyQuery } from "@/lib/data/company/company.dal";
@@ -27,7 +26,6 @@ export async function createCompany(
     });
 
     await createCompanyQuery(parsedDate);
-    revalidatePath("/");
 
     return {
       status: "success",
@@ -38,7 +36,7 @@ export async function createCompany(
 
     return {
       status: "error",
-      message: t("company.create.error"),
+      message: t("company.create.error.internalServerError"),
     };
   }
 }

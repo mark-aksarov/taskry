@@ -12,8 +12,7 @@ import {
 } from "@/lib/hooks/useDeleteEntityContextValue";
 
 import { useContext, createContext } from "react";
-import { useToastOnActionError } from "@/lib/hooks/useToastOnActionError";
-import { useRefreshProjects } from "@/lib/hooks/useRefreshProjects";
+import { useShowToastOnActionError } from "@/lib/hooks/useShowToastOnActionError";
 
 const DeleteProjectContext =
   createContext<DeleteEntityContextType<DeleteProjectPayload> | null>(null);
@@ -27,19 +26,12 @@ export function DeleteProjectProvider({
   deleteProject,
   children,
 }: DeleteProjectProviderProps) {
-  const refreshProjects = useRefreshProjects();
-
-  // Refresh inside reducerAction after successful deletion
-  const contextValue = useDeleteEntityContextValue(
-    deleteProject,
-    refreshProjects,
-  );
+  const contextValue = useDeleteEntityContextValue(deleteProject);
 
   const { state } = contextValue;
-  useToastOnActionError(state);
 
-  // Can't call this hook here — provider unmounts after successful deletion
-  // useRefreshProjectsOnActionSuccess(state);
+  // wait for transition to finish
+  useShowToastOnActionError(state);
 
   return (
     <DeleteProjectContext.Provider value={contextValue}>

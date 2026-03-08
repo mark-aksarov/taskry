@@ -37,20 +37,22 @@ export function EntityContainerPaginationInner({
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const { startPaginationTransition } = usePageTransition();
+  const { startPaginationTransition: startTransition } = usePageTransition();
   const [optimisticPage, setOptimisticPage] = useOptimistic(
     page,
     (_, newPage: number) => newPage,
   );
 
   function handleChange(targetPage: number) {
-    startPaginationTransition(() => {
+    startTransition(() => {
       setOptimisticPage(targetPage);
 
       const params = new URLSearchParams(searchParams.toString());
       params.set("page", targetPage.toString());
       params.set("pageSize", pageSize.toString());
 
+      //Внутренне router.push() уже обернут в startTransition, вложенные Transition не запрещены, поэтому вызываем это для текущего перехода и отслеживаем isPending
+      //https://github.com/vercel/next.js/blob/canary/packages/next/src/client/components/app-router-instance.ts#L467
       router.push(`${pathname}?${params.toString()}`, {
         locale,
         scroll: false,

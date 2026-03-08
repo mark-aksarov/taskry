@@ -7,8 +7,7 @@ import {
 
 import { useContext, createContext } from "react";
 import { ActionFn, ActionState } from "@/lib/actions/types";
-import { useToastOnActionError } from "@/lib/hooks/useToastOnActionError";
-import { useRefreshProjectCategories } from "@/lib/hooks/useRefreshProjectCategories";
+import { useShowToastOnActionError } from "@/lib/hooks/useShowToastOnActionError";
 
 const DeleteProjectCategoryContext =
   createContext<DeleteEntityContextType<number> | null>(null);
@@ -22,19 +21,12 @@ export function DeleteProjectCategoryProvider({
   deleteProjectCategory,
   children,
 }: DeleteProjectCategoryProviderProps) {
-  const refreshProjectCategories = useRefreshProjectCategories();
-
-  // Refresh inside reducerAction after successful deletion
-  const contextValue = useDeleteEntityContextValue(
-    deleteProjectCategory,
-    refreshProjectCategories,
-  );
+  const contextValue = useDeleteEntityContextValue(deleteProjectCategory);
 
   const { state } = contextValue;
-  useToastOnActionError(state);
 
-  // Can't call this hook here — provider unmounts after successful deletion
-  // useRefreshProjectCategoriesOnActionSuccess(state);
+  // wait for transition to finish
+  useShowToastOnActionError(state);
 
   return (
     <DeleteProjectCategoryContext.Provider value={contextValue}>

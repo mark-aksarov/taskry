@@ -7,8 +7,7 @@ import {
 
 import { useContext, createContext } from "react";
 import { ActionFn, ActionState } from "@/lib/actions/types";
-import { useToastOnActionError } from "@/lib/hooks/useToastOnActionError";
-import { useRefreshPositions } from "@/lib/hooks/useRefreshPositions";
+import { useShowToastOnActionError } from "@/lib/hooks/useShowToastOnActionError";
 
 const DeletePositionContext =
   createContext<DeleteEntityContextType<number> | null>(null);
@@ -22,19 +21,12 @@ export function DeletePositionProvider({
   deletePosition,
   children,
 }: DeletePositionProviderProps) {
-  const refreshPositions = useRefreshPositions();
-
-  // Refresh inside reducerAction after successful deletion
-  const contextValue = useDeleteEntityContextValue(
-    deletePosition,
-    refreshPositions,
-  );
+  const contextValue = useDeleteEntityContextValue(deletePosition);
 
   const { state } = contextValue;
-  useToastOnActionError(state);
 
-  // Can't call this hook here — provider unmounts after successful deletion
-  // useRefreshPositionsOnActionSuccess(state);
+  // wait for transition to finish
+  useShowToastOnActionError(state);
 
   return (
     <DeletePositionContext.Provider value={contextValue}>

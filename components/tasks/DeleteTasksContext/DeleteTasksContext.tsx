@@ -7,7 +7,7 @@ import {
 
 import { useContext, createContext } from "react";
 import { ActionFn, ActionState } from "@/lib/actions/types";
-import { useToastOnActionError } from "@/lib/hooks/useToastOnActionError";
+import { useShowToastOnActionError } from "@/lib/hooks/useShowToastOnActionError";
 
 const DeleteTasksContext = createContext<DeleteEntitiesContextType | null>(
   null,
@@ -25,7 +25,9 @@ export function DeleteTasksProvider({
   const contextValue = useDeleteEntitiesContextValue(deleteTasks);
 
   const { state } = contextValue;
-  useToastOnActionError(state);
+
+  // wait for transition to finish
+  useShowToastOnActionError(state);
 
   return (
     <DeleteTasksContext.Provider value={contextValue}>

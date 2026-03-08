@@ -1,7 +1,11 @@
-import { useState, useMemo } from "react";
-import { ActionFn, ActionState } from "@/lib/actions/types";
-import { useToastOnActionError } from "@/lib/hooks/useToastOnActionError";
 import { useActionState } from "react";
+import { useState, useMemo } from "react";
+import { useRouter } from "@/i18n/navigation";
+import { ActionFn, ActionState } from "@/lib/actions/types";
+
+export const initialState: ActionState = {
+  status: null,
+};
 
 /**
  * Shared hook for deleting multiple entities.
@@ -12,10 +16,23 @@ import { useActionState } from "react";
 export function useDeleteEntitiesContextValue(
   deleteFn: ActionFn<ActionState, number[]>,
 ) {
-  const [state, action, isPending] = useActionState(deleteFn, { status: null });
-  const [ids, setIds] = useState<number[]>([]);
+  const router = useRouter();
 
-  useToastOnActionError(state);
+  const [state, action, isPending] = useActionState(
+    async (state: ActionState, payload: number[]) => {
+      const newState = await deleteFn(state, payload);
+
+      if (newState.status === "success") {
+        // router.refresh is wrapped in startTransition internally
+        router.refresh();
+      }
+
+      return newState;
+    },
+    initialState,
+  );
+
+  const [ids, setIds] = useState<number[]>([]);
 
   const contextValue = useMemo(
     () => ({ state, action, isPending, ids, setIds }),

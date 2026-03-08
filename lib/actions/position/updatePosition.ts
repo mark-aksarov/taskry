@@ -2,8 +2,8 @@
 
 import z from "zod";
 import { ActionState } from "../types";
-import { revalidatePath } from "next/cache";
 import { getTranslations } from "next-intl/server";
+import { NotFoundError } from "@/lib/data/utils/error";
 import { positionId, positionName } from "@/lib/schemas/position";
 import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedirect";
 import { updatePosition as updatePositionQuery } from "@/lib/data/position/position.dal";
@@ -27,7 +27,6 @@ export async function updatePosition(
     const data = schema.parse(input);
 
     await updatePositionQuery(data);
-    revalidatePath("/");
 
     return {
       status: "success",
@@ -36,9 +35,17 @@ export async function updatePosition(
   } catch (error) {
     console.error("Server Action Error:", error);
 
+    if (error instanceof NotFoundError) {
+      return {
+        status: "error",
+        errorCode: "notFound",
+        message: t("position.common.error.notFound"),
+      };
+    }
+
     return {
       status: "error",
-      message: t("position.update.error"),
+      message: t("position.update.error.internalServerError"),
     };
   }
 }

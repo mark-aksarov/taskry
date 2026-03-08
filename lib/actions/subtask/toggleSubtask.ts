@@ -1,7 +1,6 @@
 "use server";
 
 import z from "zod";
-import { revalidatePath } from "next/cache";
 import { getTranslations } from "next-intl/server";
 import { ActionState, ToggleSubtaskPayload } from "../types";
 import { subtaskId, subtaskIsDone } from "@/lib/schemas/subtask";
@@ -24,19 +23,18 @@ export async function toggleSubtask(
 
   try {
     const parsedData = schema.parse(data);
-    const result = await updateSubtaskQuery(parsedData);
-    revalidatePath("/");
+    await updateSubtaskQuery(parsedData);
 
     return {
       status: "success",
-      message: t("subtask.updateStatus.error"),
+      message: t("subtask.updateStatus.success"),
     };
   } catch (error) {
     console.error("Server Action Error:", error);
 
     return {
       status: "error",
-      message: t("subtask.updateStatus.error"),
+      message: t("subtask.updateStatus.error.internalServerError"),
     };
   }
 }

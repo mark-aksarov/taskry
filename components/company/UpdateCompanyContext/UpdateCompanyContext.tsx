@@ -7,10 +7,8 @@ import {
 
 import { useContext, createContext } from "react";
 import { ActionFn, ActionState } from "@/lib/actions/types";
-import { useToastOnActionSuccess } from "@/lib/hooks/useToastOnActionSuccess";
+import { useShowToastOnActionSuccess } from "@/lib/hooks/useShowToastOnActionSuccess";
 import { useCloseModalOnActionSuccess } from "@/lib/hooks/useCloseModalOnActionSuccess";
-import { useToastOnActionErrorWhenModalClosed } from "@/lib/hooks/useToastOnActionErrorWhenModalClosed";
-import { useRefreshCompaniesOnActionSuccess } from "@/lib/hooks/useRefreshCompaniesOnActionSuccess";
 
 const UpdateCompanyContext = createContext<UpdateEntityContextType | null>(
   null,
@@ -27,11 +25,16 @@ export function UpdateCompanyProvider({
 }: UpdateCompanyProviderProps) {
   const contextValue = useUpdateEntityContextValue(updateCompany);
 
-  const { state, isModalOpen, onModalOpenChange } = contextValue;
-  useToastOnActionSuccess(state);
-  useToastOnActionErrorWhenModalClosed(state, isModalOpen);
+  const { state, onModalOpenChange } = contextValue;
+
+  // wait for transition to finish
+
+  if (state.status === "error" && state.errorCode === "notFound") {
+    throw new Error(state.message, { cause: state.errorCode });
+  }
+
+  useShowToastOnActionSuccess(state);
   useCloseModalOnActionSuccess(state, onModalOpenChange);
-  useRefreshCompaniesOnActionSuccess(state);
 
   return (
     <UpdateCompanyContext.Provider value={contextValue}>

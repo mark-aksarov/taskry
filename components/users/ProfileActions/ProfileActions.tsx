@@ -34,8 +34,10 @@ export function ProfileActions({ userId, userFullName }: ProfileActionsProps) {
     useChangePassword();
 
   // Edit user modal state
-  const { isPending: isUpdateUserPending } = useUpdateUser();
-  const { onModalOpenChange: onEditModalOpenChange } = useUpdateUser();
+  const {
+    isPending: isUpdateUserPending,
+    onModalOpenChange: onEditModalOpenChange,
+  } = useUpdateUser();
 
   function handlePasswordChangePress() {
     if (isGuest) {

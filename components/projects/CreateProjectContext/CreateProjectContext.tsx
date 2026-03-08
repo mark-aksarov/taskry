@@ -7,10 +7,9 @@ import {
 
 import { useContext, createContext } from "react";
 import { ActionFn, ActionState } from "@/lib/actions/types";
-import { useToastOnActionSuccess } from "@/lib/hooks/useToastOnActionSuccess";
+import { useShowToastOnActionSuccess } from "@/lib/hooks/useShowToastOnActionSuccess";
 import { useCloseModalOnActionSuccess } from "@/lib/hooks/useCloseModalOnActionSuccess";
-import { useRefreshProjectsOnActionSuccess } from "@/lib/hooks/useRefreshProjectsOnActionSuccess";
-import { useToastOnActionErrorWhenModalClosed } from "@/lib/hooks/useToastOnActionErrorWhenModalClosed";
+import { useShowToastOnActionErrorWhenModalClosed } from "@/lib/hooks/useShowToastOnActionErrorWhenModalClosed";
 
 const CreateProjectContext = createContext<CreateEntityContextType | null>(
   null,
@@ -28,10 +27,11 @@ export function CreateProjectProvider({
   const contextValue = useCreateEntityContextValue(createProject);
 
   const { state, isModalOpen, onModalOpenChange } = contextValue;
-  useToastOnActionSuccess(state);
-  useToastOnActionErrorWhenModalClosed(state, isModalOpen);
+
+  // wait for transition to finish
+  useShowToastOnActionSuccess(state);
   useCloseModalOnActionSuccess(state, onModalOpenChange);
-  useRefreshProjectsOnActionSuccess(state);
+  useShowToastOnActionErrorWhenModalClosed(state, isModalOpen);
 
   return (
     <CreateProjectContext.Provider value={contextValue}>

@@ -5,12 +5,11 @@ import {
   useUpdateEntityContextValue,
 } from "@/lib/hooks/useUpdateEntityContextValue";
 
-import { useState, useContext, createContext } from "react";
+import { useContext, createContext } from "react";
 import { ActionFn, ActionState } from "@/lib/actions/types";
-import { useToastOnActionSuccess } from "@/lib/hooks/useToastOnActionSuccess";
+import { useShowToastOnActionSuccess } from "@/lib/hooks/useShowToastOnActionSuccess";
 import { useCloseModalOnActionSuccess } from "@/lib/hooks/useCloseModalOnActionSuccess";
-import { useToastOnActionErrorWhenModalClosed } from "@/lib/hooks/useToastOnActionErrorWhenModalClosed";
-import { useRefreshPositionsOnActionSuccess } from "@/lib/hooks/useRefreshPositionsOnActionSuccess";
+import { useShowToastOnActionErrorWhenModalClosed } from "@/lib/hooks/useShowToastOnActionErrorWhenModalClosed";
 
 const UpdatePositionContext = createContext<UpdateEntityContextType | null>(
   null,
@@ -28,10 +27,16 @@ export function UpdatePositionProvider({
   const contextValue = useUpdateEntityContextValue(updatePosition);
 
   const { state, isModalOpen, onModalOpenChange } = contextValue;
-  useToastOnActionSuccess(state);
-  useToastOnActionErrorWhenModalClosed(state, isModalOpen);
+
+  // wait for transition to finish
+
+  if (state.status === "error" && state.errorCode === "notFound") {
+    throw new Error(state.message, { cause: state.errorCode });
+  }
+
+  useShowToastOnActionSuccess(state);
   useCloseModalOnActionSuccess(state, onModalOpenChange);
-  useRefreshPositionsOnActionSuccess(state);
+  useShowToastOnActionErrorWhenModalClosed(state, isModalOpen);
 
   return (
     <UpdatePositionContext.Provider value={contextValue}>

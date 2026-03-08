@@ -56,9 +56,15 @@ export function TasksPage({
     );
   }
 
+  const isFilteredEmpty = totalFilteredTasks === 0;
+
   return (
     <>
-      <PageContainer fullscreen={totalFilteredTasks === 0} className="relative">
+      <PageContainer
+        fullscreen={isFilteredEmpty}
+        headerOffset
+        className="relative"
+      >
         <PageGrid className="flex-auto">
           <ViewModeProvider>
             <ToolbarDesktop>
@@ -91,11 +97,7 @@ export function TasksPage({
               <TaskToolbarCreateNewMenuTrigger />
             </ToolbarMobileBottom>
 
-            {totalFilteredTasks === 0 ? (
-              <TasksFilteredEmptySection />
-            ) : (
-              tasksContainer
-            )}
+            {isFilteredEmpty ? <TasksFilteredEmptySection /> : tasksContainer}
           </ViewModeProvider>
         </PageGrid>
       </PageContainer>

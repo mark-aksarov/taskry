@@ -1,6 +1,5 @@
 "use server";
 
-import { revalidatePath } from "next/cache";
 import { redirect } from "@/i18n/navigation";
 import { customerId } from "@/lib/schemas/customer";
 import { getLocale, getTranslations } from "next-intl/server";
@@ -21,13 +20,12 @@ export async function deleteCustomer(
     const parsedId = customerId.parse(payload.id);
 
     await deleteCustomersQuery([parsedId]);
-    revalidatePath("/");
   } catch (error) {
     console.error("Server Action Error:", error);
 
     return {
       status: "error",
-      message: t("customer.delete.error.one"),
+      message: t("customer.delete.error.internalServerError"),
     };
   }
 
@@ -39,6 +37,6 @@ export async function deleteCustomer(
 
   return {
     status: "success",
-    message: t("customer.delete.success.one"),
+    message: t("customer.delete.success"),
   };
 }

@@ -1,7 +1,6 @@
 "use server";
 
 import { ActionState } from "../types";
-import { revalidatePath } from "next/cache";
 import { getTranslations } from "next-intl/server";
 import { taskCategoryId } from "@/lib/schemas/taskCategory";
 import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedirect";
@@ -20,18 +19,17 @@ export async function deleteTaskCategory(
     const parsedId = taskCategoryId.parse(id);
 
     await deleteTaskCategoriesQuery([parsedId]);
-    revalidatePath("/");
 
     return {
       status: "success",
-      message: t("taskCategory.delete.success.one"),
+      message: t("taskCategory.delete.success"),
     };
   } catch (error) {
     console.error("Server Action Error:", error);
 
     return {
       status: "error",
-      message: t("taskCategory.delete.error.one"),
+      message: t("taskCategory.delete.error.internalServerError"),
     };
   }
 }

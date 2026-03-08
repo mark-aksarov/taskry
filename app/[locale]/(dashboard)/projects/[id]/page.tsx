@@ -10,6 +10,7 @@ import { updateComment } from "@/lib/actions/comment/updateComment";
 import { updateProject } from "@/lib/actions/project/updateProject";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { CurrentUserProvider } from "@/components/common/CurrentUserContext";
+import { DeleteProjectProvider } from "@/components/projects/DeleteProjectContext";
 import { UpdateProjectProvider } from "@/components/projects/UpdateProjectContext";
 import { EditProjectFormContainer } from "@/components/projects/EditProjectFormContainer";
 import { ProjectCommentsContainer } from "@/components/projects/ProjectCommentsContainer";
@@ -51,20 +52,27 @@ export default async function AppProjectDetailPage({
   return (
     <CurrentUserProvider value={currentUserContextValue}>
       <UpdateProjectProvider updateProject={updateProject}>
-        <ProjectDetailPage
-          projectId={id}
-          projectTitle={projectSummary.title}
-          sendComment={sendComment}
-          updateComment={updateComment}
-          deleteProject={deleteProject}
-          projectDetailContainer={<ProjectDetailAltContainer projectId={id} />}
-          projectHeaderContainer={
-            <ProjectDetailHeaderContainer projectId={id} />
-          }
-          projectCommentsContainer={<ProjectCommentsContainer projectId={id} />}
-          editProjectFormContainer={<EditProjectFormContainer projectId={id} />}
-          appHeaderProps={defaultAppHeaderSlots}
-        />
+        <DeleteProjectProvider deleteProject={deleteProject}>
+          <ProjectDetailPage
+            projectId={id}
+            projectTitle={projectSummary.title}
+            sendComment={sendComment}
+            updateComment={updateComment}
+            projectDetailContainer={
+              <ProjectDetailAltContainer projectId={id} />
+            }
+            projectHeaderContainer={
+              <ProjectDetailHeaderContainer projectId={id} />
+            }
+            projectCommentsContainer={
+              <ProjectCommentsContainer projectId={id} />
+            }
+            editProjectFormContainer={
+              <EditProjectFormContainer projectId={id} />
+            }
+            appHeaderProps={defaultAppHeaderSlots}
+          />
+        </DeleteProjectProvider>
       </UpdateProjectProvider>
     </CurrentUserProvider>
   );

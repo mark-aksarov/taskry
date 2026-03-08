@@ -403,22 +403,26 @@ export const updateCustomer = async (input: UpdateCustomerInputDTO) => {
   }
 
   // Update customer
-  const updatedCustomer = await prisma.customer.update({
-    where: {
-      id: input.id,
-      workspaceId,
-    },
-    data: {
-      fullName: input.fullName,
-      bio: input.bio,
-      companyId: input.companyId,
-      email: input.email,
-      phoneNumber: input.phoneNumber,
-      publicLink: input.publicLink,
-    },
-  });
+  try {
+    const updatedCustomer = await prisma.customer.update({
+      where: {
+        id: input.id,
+        workspaceId,
+      },
+      data: {
+        fullName: input.fullName,
+        bio: input.bio,
+        companyId: input.companyId,
+        email: input.email,
+        phoneNumber: input.phoneNumber,
+        publicLink: input.publicLink,
+      },
+    });
 
-  return updatedCustomer;
+    return updatedCustomer;
+  } catch (error) {
+    throw new NotFoundError("Customer not found", "customerNotFound");
+  }
 };
 
 /**
@@ -433,7 +437,7 @@ async function validateCompany(workspaceId: number, companyId: number) {
   });
 
   if (!company) {
-    throw new NotFoundError("Company not found");
+    throw new NotFoundError("Company not found", "companyNotFound");
   }
 
   if (company.workspaceId !== workspaceId) {

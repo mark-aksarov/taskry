@@ -1,6 +1,5 @@
 "use server";
 
-import { revalidatePath } from "next/cache";
 import { redirect } from "@/i18n/navigation";
 import { projectId } from "@/lib/schemas/project";
 import { ActionState, DeleteProjectPayload } from "../types";
@@ -21,13 +20,12 @@ export async function deleteProject(
     const parsedId = projectId.parse(payload.id);
 
     await deleteProjectQuery([parsedId]);
-    revalidatePath("/");
   } catch (error) {
     console.error("Server Action Error:", error);
 
     return {
       status: "error",
-      message: t("project.delete.error.one"),
+      message: t("project.delete.error.internalServerError"),
     };
   }
 
@@ -39,6 +37,6 @@ export async function deleteProject(
 
   return {
     status: "success",
-    message: t("project.delete.success.one"),
+    message: t("project.delete.success"),
   };
 }

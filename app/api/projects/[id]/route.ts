@@ -1,4 +1,5 @@
 import {
+  notFound,
   badRequest,
   unauthorized,
   internalServerError,
@@ -7,10 +8,10 @@ import {
 import z from "zod";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
+import { projectId } from "@/lib/schemas/project";
 import { NextResponse, NextRequest } from "next/server";
 import { getProjectDetail } from "@/lib/data/project/project.dal";
 import { getProjectFormData } from "@/lib/data/project/project.dal";
-import { projectId } from "@/lib/schemas/project";
 
 export async function GET(
   req: NextRequest,
@@ -46,10 +47,20 @@ export async function GET(
 
     if (view === "edit") {
       const project = await getProjectFormData(id);
+
+      if (!project) {
+        return notFound("Project not found");
+      }
+
       return NextResponse.json(project);
     }
 
     const project = await getProjectDetail(id);
+
+    if (!project) {
+      return notFound("Project not found");
+    }
+
     return NextResponse.json(project);
   } catch (error) {
     console.error("API Error:", error);

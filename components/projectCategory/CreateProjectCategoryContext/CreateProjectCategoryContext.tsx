@@ -1,23 +1,15 @@
 "use client";
 
 import {
-  useMemo,
-  useState,
-  useContext,
-  createContext,
-  useActionState,
-} from "react";
-
-import {
   CreateEntityContextType,
   useCreateEntityContextValue,
 } from "@/lib/hooks/useCreateEntityContextValue";
 
+import { useContext, createContext } from "react";
 import { ActionFn, ActionState } from "@/lib/actions/types";
-import { useToastOnActionSuccess } from "@/lib/hooks/useToastOnActionSuccess";
+import { useShowToastOnActionSuccess } from "@/lib/hooks/useShowToastOnActionSuccess";
 import { useCloseModalOnActionSuccess } from "@/lib/hooks/useCloseModalOnActionSuccess";
-import { useToastOnActionErrorWhenModalClosed } from "@/lib/hooks/useToastOnActionErrorWhenModalClosed";
-import { useRefreshProjectCategoriesOnActionSuccess } from "@/lib/hooks/useRefreshProjectCategoriesOnActionSuccess";
+import { useShowToastOnActionErrorWhenModalClosed } from "@/lib/hooks/useShowToastOnActionErrorWhenModalClosed";
 
 const CreateProjectCategoryContext =
   createContext<CreateEntityContextType | null>(null);
@@ -34,10 +26,11 @@ export function CreateProjectCategoryProvider({
   const contextValue = useCreateEntityContextValue(createProjectCategory);
 
   const { isModalOpen, onModalOpenChange, state } = contextValue;
-  useToastOnActionSuccess(state);
-  useToastOnActionErrorWhenModalClosed(state, isModalOpen);
+
+  // wait for transition to finish
+  useShowToastOnActionSuccess(state);
   useCloseModalOnActionSuccess(state, onModalOpenChange);
-  useRefreshProjectCategoriesOnActionSuccess(state);
+  useShowToastOnActionErrorWhenModalClosed(state, isModalOpen);
 
   return (
     <CreateProjectCategoryContext.Provider value={contextValue}>

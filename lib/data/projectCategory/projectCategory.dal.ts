@@ -9,8 +9,9 @@ import {
 import { cache } from "react";
 import prisma from "@/lib/prisma";
 import { auth } from "@/lib/auth";
-import { AccessDeniedError } from "../utils/error";
 import { requireSession } from "../utils/requireSession";
+import { AccessDeniedError, NotFoundError } from "../utils/error";
+import { PrismaClientKnownRequestError } from "@prisma/client/runtime/client";
 
 export const getProjectCategoryCount = cache(async () => {
   // Authorization
@@ -103,17 +104,29 @@ export const updateProjectCategory = async (
   }
 
   // Update project category
-  const updatedProjectCategory = await prisma.projectCategory.update({
-    where: {
-      id: input.id,
-      workspaceId,
-    },
-    data: {
-      name: input.name,
-    },
-  });
+  try {
+    const updatedProjectCategory = await prisma.projectCategory.update({
+      where: {
+        id: input.id,
+        workspaceId,
+      },
+      data: {
+        name: input.name,
+      },
+    });
 
-  return updatedProjectCategory;
+    return updatedProjectCategory;
+  } catch (error) {
+    if (
+      error instanceof PrismaClientKnownRequestError &&
+      error.code === "P2025"
+    ) {
+      throw new NotFoundError(
+        "Project category not found.",
+        "projectCategoryNotFound",
+      );
+    }
+  }
 };
 
 export const deleteProjectCategories = async (ids: number[]) => {

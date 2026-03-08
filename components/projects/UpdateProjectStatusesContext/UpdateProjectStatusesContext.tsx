@@ -12,6 +12,7 @@ import {
 } from "@/lib/actions/types";
 
 import { useContext, createContext } from "react";
+import { useShowToastOnActionError } from "@/lib/hooks/useShowToastOnActionError";
 
 const UpdateProjectStatusesContext =
   createContext<UpdateEntityStatusesContextType | null>(null);
@@ -28,6 +29,11 @@ export function UpdateProjectStatusesProvider({
   const contextValue = useUpdateEntityStatusesContextValue(
     updateProjectStatuses,
   );
+
+  const { state } = contextValue;
+
+  // wait for transition to finish
+  useShowToastOnActionError(state);
 
   return (
     <UpdateProjectStatusesContext.Provider value={contextValue}>

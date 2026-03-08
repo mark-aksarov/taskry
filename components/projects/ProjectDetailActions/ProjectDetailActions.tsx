@@ -1,32 +1,23 @@
 "use client";
 
-import {
-  ActionFn,
-  ActionState,
-  DeleteProjectPayload,
-} from "@/lib/actions/types";
-
 import { useTranslations } from "next-intl";
 import { Pencil, Trash } from "lucide-react";
+import { startTransition, useState } from "react";
+import { useDeleteProject } from "../DeleteProjectContext";
 import { useUpdateProject } from "../UpdateProjectContext";
+import { ActionFn, ActionState } from "@/lib/actions/types";
 import { ProjectCommentsModal } from "../ProjectCommentsModal";
 import { BaseDeleteProjectModal } from "../DeleteProjectModal";
-import { startTransition, useActionState, useState } from "react";
 import { GuestModeModal } from "@/components/common/GuestModeModal";
 import { NavigationButton } from "@/components/common/NavigationButton";
 import { useCurrentUser } from "@/components/common/CurrentUserContext";
 import { DetailActionsCommentsModalTrigger } from "@/components/common/DetailActionsCommentsModalTrigger";
-
-const initialDeleteState: ActionState = {
-  status: null,
-};
 
 interface ProjectDetailActionsProps {
   projectId: number;
   projectTitle: string;
   sendComment: ActionFn<ActionState, FormData>;
   updateComment: ActionFn<ActionState, FormData>;
-  deleteProject: ActionFn<ActionState, DeleteProjectPayload>;
   projectCommentsContainer: React.ReactNode;
 }
 
@@ -35,7 +26,6 @@ export function ProjectDetailActions({
   projectTitle,
   sendComment,
   updateComment,
-  deleteProject,
   projectCommentsContainer,
 }: ProjectDetailActionsProps) {
   const t = useTranslations("projects.ProjectDetailActions");
@@ -45,10 +35,8 @@ export function ProjectDetailActions({
   const [isGuestModeModalOpen, setIsGuestModeModalOpen] = useState(false);
 
   // Delete project: action state + form modal state
-  const [, deleteAction, isDeletePending] = useActionState(
-    deleteProject,
-    initialDeleteState,
-  );
+  const { isPending: isDeletePending, action: deleteAction } =
+    useDeleteProject();
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
   // Edit project: action state + form modal state from context

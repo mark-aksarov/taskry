@@ -1,6 +1,8 @@
 "use client";
 
 import useSWR from "swr";
+import { notFound } from "next/navigation";
+import { usePathname } from "@/i18n/navigation";
 import { CalendarDate } from "@internationalized/date";
 import { UserFormDataDTO } from "@/lib/data/user/user.dto";
 import { EditUserForm, EditUserFormSkeleton } from "./EditUserForm";
@@ -11,16 +13,33 @@ interface EditUserFormContainerProps {
 }
 
 export function EditUserFormContainer({ userId }: EditUserFormContainerProps) {
+  const pathname = usePathname();
+
   const { data: positions } = useSWR<PositionSummaryDTO[]>(`/api/positions`, {
     revalidateIfStale: false, // don't revalidate on each mount
     revalidateOnFocus: false,
   });
 
   // Current user data for editing (loaded each modal open)
-  const { data: user, isValidating: isValidatingUser } =
-    useSWR<UserFormDataDTO>(`/api/users/${userId}?view=edit`);
+  const {
+    data: user,
+    isValidating: isValidatingUser,
+    error: userError,
+  } = useSWR<UserFormDataDTO>(`/api/users/${userId}?view=edit`, {
+    revalidateOnFocus: false,
+  });
 
-  //Error handling for 404 (NotFound) error. https://swr.vercel.app/docs/error-handling
+  if (userError) {
+    if (pathname === "/team") {
+      if (userError.status === 404) {
+        throw new Error(undefined, { cause: "notFound" });
+      }
+
+      throw new Error();
+    }
+
+    notFound();
+  }
 
   // Show skeleton while loading or revalidating
   const showSkeleton = !positions || !user || isValidatingUser;

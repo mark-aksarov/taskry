@@ -1,7 +1,6 @@
 "use server";
 
 import z from "zod";
-import { revalidatePath } from "next/cache";
 import { getTranslations } from "next-intl/server";
 import { taskId, taskStatus } from "@/lib/schemas/task";
 import { ActionState, UpdateTaskStatusPayload } from "../types";
@@ -24,19 +23,29 @@ export async function updateTaskStatus(
 
   try {
     const parsedData = schema.parse(payload);
-    await updateTaskStatusesQuery([parsedData.id], parsedData.nextStatus);
-    revalidatePath("/");
+    const result = await updateTaskStatusesQuery(
+      [parsedData.id],
+      parsedData.nextStatus,
+    );
+
+    if (!result.length) {
+      return {
+        status: "error",
+        errorCode: "notFound",
+        message: t("task.common.error.notFound"),
+      };
+    }
 
     return {
       status: "success",
-      message: t("task.updateStatus.success.one"),
+      message: t("task.updateStatus.success"),
     };
   } catch (error) {
     console.error("Server Action Error:", error);
 
     return {
       status: "error",
-      message: t("task.updateStatus.error.one"),
+      message: t("task.updateStatus.error.internalServerError"),
     };
   }
 }

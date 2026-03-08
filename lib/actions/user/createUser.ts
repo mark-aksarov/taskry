@@ -3,7 +3,6 @@
 import z from "zod";
 import { ActionState } from "../types";
 import { APIError } from "better-auth";
-import { revalidatePath } from "next/cache";
 import { getTranslations } from "next-intl/server";
 import { userEmail, userFullName, userPassword } from "@/lib/schemas/user";
 import { createUser as createUserService } from "@/lib/data/user/user.service";
@@ -28,7 +27,6 @@ export async function createUser(
     const input = Object.fromEntries(formData.entries());
     const parsedData = schema.parse(input);
     await createUserService(parsedData);
-    revalidatePath("/");
 
     return {
       status: "success",
@@ -46,7 +44,7 @@ export async function createUser(
 
     return {
       status: "error",
-      message: t("user.create.error"),
+      message: t("user.create.error.internalServerError"),
     };
   }
 }

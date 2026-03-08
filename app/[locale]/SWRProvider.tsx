@@ -1,6 +1,7 @@
 "use client";
 
 import { SWRConfig } from "swr";
+import { FetchError } from "@/lib/swr/types";
 
 export const SWRProvider = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -8,9 +9,11 @@ export const SWRProvider = ({ children }: { children: React.ReactNode }) => {
       value={{
         fetcher: async (resource, init) => {
           const res = await fetch(resource, init);
+
           if (!res.ok) {
-            throw new Error("An error occurred while fetching the data.");
+            throw new FetchError(res.status);
           }
+
           return res.json();
         },
       }}

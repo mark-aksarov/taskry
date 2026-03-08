@@ -9,9 +9,9 @@ import {
 
 import z from "zod";
 import { ActionState } from "../types";
-import { revalidatePath } from "next/cache";
 import { getTranslations } from "next-intl/server";
 import { customerId } from "@/lib/schemas/customer";
+import { NotFoundError } from "@/lib/data/utils/error";
 import { emptyStringToUndefined } from "@/lib/schemas/base";
 import { projectCategoryId } from "@/lib/schemas/projectCategory";
 import { createProject as createProjectQuery } from "@/lib/data/project/project.dal";
@@ -46,7 +46,6 @@ export async function createProject(
     const parsedData = schema.parse(input);
 
     await createProjectQuery(parsedData);
-    revalidatePath("/");
 
     return {
       status: "success",
@@ -55,9 +54,17 @@ export async function createProject(
   } catch (error) {
     console.error("Server Action Error:", error);
 
+    if (error instanceof NotFoundError) {
+      return {
+        status: "error",
+        errorCode: "badRequest",
+        message: t("project.common.error.relationNotFound"),
+      };
+    }
+
     return {
       status: "error",
-      message: t("project.create.error"),
+      message: t("project.create.error.internalServerError"),
     };
   }
 }

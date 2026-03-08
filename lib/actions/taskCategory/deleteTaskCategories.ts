@@ -2,7 +2,6 @@
 
 import z from "zod";
 import { ActionState } from "../types";
-import { revalidatePath } from "next/cache";
 import { getTranslations } from "next-intl/server";
 import { taskCategoryId } from "@/lib/schemas/taskCategory";
 import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedirect";
@@ -23,18 +22,17 @@ export async function deleteTaskCategories(
     const parsedIds = taskCategoryIds.parse(ids);
 
     await deleteTaskCategoriesQuery(parsedIds);
-    revalidatePath("/");
 
     return {
       status: "success",
-      message: t("taskCategory.delete.success.many"),
+      message: t("taskCategory.deleteMany.success"),
     };
   } catch (error) {
     console.error("Server Action Error:", error);
 
     return {
       status: "error",
-      message: t("taskCategory.delete.error.many"),
+      message: t("taskCategory.deleteMany.error.internalServerError"),
     };
   }
 }

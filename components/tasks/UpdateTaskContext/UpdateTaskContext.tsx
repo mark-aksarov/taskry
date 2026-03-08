@@ -5,40 +5,31 @@ import {
   useUpdateEntityContextValue,
 } from "@/lib/hooks/useUpdateEntityContextValue";
 
-import { useSWRConfig } from "swr";
+import { useContext, createContext } from "react";
 import { ActionFn, ActionState } from "@/lib/actions/types";
-import { useContext, createContext, useEffect } from "react";
-import { useToastOnActionSuccess } from "@/lib/hooks/useToastOnActionSuccess";
+import { useShowToastOnActionSuccess } from "@/lib/hooks/useShowToastOnActionSuccess";
 import { useCloseModalOnActionSuccess } from "@/lib/hooks/useCloseModalOnActionSuccess";
-import { useToastOnActionErrorWhenModalClosed } from "@/lib/hooks/useToastOnActionErrorWhenModalClosed";
+import { useShowToastOnActionErrorWhenModalClosed } from "@/lib/hooks/useShowToastOnActionErrorWhenModalClosed";
 
 const UpdateTaskContext = createContext<UpdateEntityContextType | null>(null);
 
 interface UpdateTaskProviderProps {
-  taskId: number;
   updateTask: ActionFn<ActionState, FormData>;
   children: React.ReactNode;
 }
 
 export function UpdateTaskProvider({
-  taskId,
   updateTask,
   children,
 }: UpdateTaskProviderProps) {
-  const { mutate } = useSWRConfig();
   const contextValue = useUpdateEntityContextValue(updateTask);
 
   const { state, isModalOpen, onModalOpenChange } = contextValue;
-  useToastOnActionSuccess(state);
-  useToastOnActionErrorWhenModalClosed(state, isModalOpen);
-  useCloseModalOnActionSuccess(state, onModalOpenChange);
 
-  // refetch task form data after successful update
-  useEffect(() => {
-    if (state.status === "success") {
-      mutate(`/api/tasks/${taskId}?view=edit`);
-    }
-  }, [taskId, mutate]);
+  // wait for transition to finish
+  useShowToastOnActionSuccess(state);
+  useCloseModalOnActionSuccess(state, onModalOpenChange);
+  useShowToastOnActionErrorWhenModalClosed(state, isModalOpen);
 
   return (
     <UpdateTaskContext.Provider value={contextValue}>

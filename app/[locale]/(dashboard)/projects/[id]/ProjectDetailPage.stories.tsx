@@ -41,7 +41,6 @@ export const Default = {
     projectTitle: project.title,
     sendComment: () => ({ status: "success" }),
     updateComment: () => ({ status: "success" }),
-    deleteProject: () => ({ status: "success" }),
     projectCommentsContainer: getCommentList(),
     projectDetailContainer: <ProjectDetailAlt {...project} />,
     projectHeaderContainer: (

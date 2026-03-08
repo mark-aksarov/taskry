@@ -15,6 +15,7 @@ import { TaskFilters, TaskSortField } from "@/lib/types";
 import { requireSession } from "../utils/requireSession";
 import { Prisma, TaskStatus } from "@/generated/prisma/client";
 import { AccessDeniedError, NotFoundError } from "../utils/error";
+import { PrismaClientKnownRequestError } from "@prisma/client/runtime/client";
 
 export const getTaskDetail = cache(
   async (id: number): Promise<TaskDetailDTO | null> => {
@@ -444,23 +445,32 @@ export const updateTask = async (input: UpdateTaskInputDTO) => {
   }
 
   // Update task
-  const updatedTask = await prisma.task.update({
-    where: {
-      id: input.id,
-      workspaceId,
-    },
-    data: {
-      title: input.title,
-      description: input.description,
-      deadline: new Date(input.deadline),
-      status: input.status,
-      projectId: input.projectId,
-      categoryId: input.categoryId,
-      assigneeId: input.assigneeId,
-    },
-  });
+  try {
+    const updatedTask = await prisma.task.update({
+      where: {
+        id: input.id,
+        workspaceId,
+      },
+      data: {
+        title: input.title,
+        description: input.description,
+        deadline: new Date(input.deadline),
+        status: input.status,
+        projectId: input.projectId,
+        categoryId: input.categoryId,
+        assigneeId: input.assigneeId,
+      },
+    });
 
-  return updatedTask;
+    return updatedTask;
+  } catch (error) {
+    if (
+      error instanceof PrismaClientKnownRequestError &&
+      error.code === "P2025"
+    ) {
+      throw new NotFoundError("Task not found.", "taskNotFound");
+    }
+  }
 };
 
 export const updateTaskStatuses = async (
@@ -552,7 +562,7 @@ async function validateTaskCategory(workspaceId: number, categoryId: number) {
   });
 
   if (!category) {
-    throw new NotFoundError("Task category not found");
+    throw new NotFoundError("Task category not found", "taskCategoryNotFound");
   }
 
   if (category.workspaceId !== workspaceId) {
@@ -568,7 +578,7 @@ async function validateProject(workspaceId: number, projectId: number) {
   });
 
   if (!project) {
-    throw new NotFoundError("Project not found");
+    throw new NotFoundError("Project not found", "projectNotFound");
   }
 
   if (project.workspaceId !== workspaceId) {
@@ -584,7 +594,7 @@ async function validateAssignee(workspaceId: number, assigneeId: string) {
   });
 
   if (!assignee) {
-    throw new NotFoundError("Assignee not found");
+    throw new NotFoundError("Assignee not found", "assigneeNotFound");
   }
 
   if (assignee.workspaceId !== workspaceId) {

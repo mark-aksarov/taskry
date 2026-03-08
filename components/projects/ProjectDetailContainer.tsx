@@ -11,11 +11,20 @@ interface ProjectDetailContainerProps {
 export function ProjectDetailContainer({
   projectId,
 }: ProjectDetailContainerProps) {
-  const { data: project } = useSWR<ProjectDetailDTO>(
+  const { data: project, error } = useSWR<ProjectDetailDTO>(
     `/api/projects/${projectId}`,
+    {
+      revalidateOnFocus: false,
+    },
   );
 
-  //Error handling for 404 (NotFound) error. https://swr.vercel.app/docs/error-handling
+  if (error) {
+    if (error.status === 404) {
+      throw new Error(undefined, { cause: "notFound" });
+    }
+
+    throw new Error();
+  }
 
   // Show skeleton while loading
   if (!project) {

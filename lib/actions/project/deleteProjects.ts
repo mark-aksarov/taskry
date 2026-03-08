@@ -2,7 +2,6 @@
 
 import z from "zod";
 import { ActionState } from "../types";
-import { revalidatePath } from "next/cache";
 import { projectId } from "@/lib/schemas/project";
 import { getTranslations } from "next-intl/server";
 import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedirect";
@@ -23,18 +22,17 @@ export async function deleteProjects(
     const parsedIds = projectIds.parse(ids);
 
     await deleteProjectQuery(parsedIds);
-    revalidatePath("/");
 
     return {
       status: "success",
-      message: t("project.delete.success.many"),
+      message: t("project.deleteMany.success"),
     };
   } catch (error) {
     console.error("Server Action Error:", error);
 
     return {
       status: "error",
-      message: t("project.delete.error.many"),
+      message: t("project.deleteMany.error.internalServerError"),
     };
   }
 }

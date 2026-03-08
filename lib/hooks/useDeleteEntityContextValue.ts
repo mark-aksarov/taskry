@@ -1,5 +1,6 @@
 import { useMemo } from "react";
 import { useActionState } from "react";
+import { useRouter } from "@/i18n/navigation";
 import { ActionContextType, ActionFn, ActionState } from "@/lib/actions/types";
 
 export const initialState: ActionState = {
@@ -14,16 +15,16 @@ type TPayload = TId | { id: TId; shouldRedirect: boolean };
  */
 export function useDeleteEntityContextValue<T extends TPayload>(
   deleteFn: ActionFn<ActionState, T>,
-  onSuccess?: () => void,
 ) {
+  const router = useRouter();
+
   const [state, action, isPending] = useActionState(
     async (state: ActionState, payload: T) => {
       const newState = await deleteFn(state, payload);
 
-      // "Escape hatch": call onSuccess here because the provider will unmount
-      // immediately after successful deletion, so side effects outside the reducerAction would fail
       if (newState.status === "success") {
-        onSuccess?.();
+        // router.refresh is wrapped in startTransition internally
+        router.refresh();
       }
 
       return newState;

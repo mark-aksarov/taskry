@@ -2,7 +2,6 @@
 
 import { APIError } from "better-auth";
 import { userId } from "@/lib/schemas/user";
-import { revalidatePath } from "next/cache";
 import { redirect } from "@/i18n/navigation";
 import { ActionState, DeleteUserPayload } from "../types";
 import { getLocale, getTranslations } from "next-intl/server";
@@ -21,7 +20,6 @@ export async function deleteUser(
   try {
     const parsedId = userId.parse(payload.id);
     await deleteUserService(parsedId);
-    revalidatePath("/");
   } catch (error) {
     console.error("Server Action Error:", error);
 
@@ -34,7 +32,7 @@ export async function deleteUser(
 
     return {
       status: "error",
-      message: t("user.delete.error"),
+      message: t("user.delete.error.internalServerError"),
     };
   }
 

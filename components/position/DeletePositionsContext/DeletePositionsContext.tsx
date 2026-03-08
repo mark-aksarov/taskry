@@ -7,8 +7,7 @@ import {
 
 import { useContext, createContext } from "react";
 import { ActionFn, ActionState } from "@/lib/actions/types";
-import { useToastOnActionError } from "@/lib/hooks/useToastOnActionError";
-import { useRefreshPositionsOnActionSuccess } from "@/lib/hooks/useRefreshPositionsOnActionSuccess";
+import { useShowToastOnActionError } from "@/lib/hooks/useShowToastOnActionError";
 
 const DeletePositionsContext = createContext<DeleteEntitiesContextType | null>(
   null,
@@ -26,8 +25,9 @@ export function DeletePositionsProvider({
   const contextValue = useDeleteEntitiesContextValue(deletePositions);
 
   const { state } = contextValue;
-  useToastOnActionError(state);
-  useRefreshPositionsOnActionSuccess(state);
+
+  // wait for transition to finish
+  useShowToastOnActionError(state);
 
   return (
     <DeletePositionsContext.Provider value={contextValue}>

@@ -14,11 +14,20 @@ interface CustomerDetailContainerProps {
 export function CustomerDetailContainer({
   customerId,
 }: CustomerDetailContainerProps) {
-  const { data: customer } = useSWR<CustomerDetailDTO>(
+  const { data: customer, error } = useSWR<CustomerDetailDTO>(
     `/api/customers/${customerId}`,
+    {
+      revalidateOnFocus: false,
+    },
   );
 
-  //Error handling for 404 (NotFound) error. https://swr.vercel.app/docs/error-handling
+  if (error) {
+    if (error.status === 404) {
+      throw new Error(undefined, { cause: "notFound" });
+    }
+
+    throw new Error();
+  }
 
   // Show skeleton while loading
   if (!customer) {

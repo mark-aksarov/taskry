@@ -64,7 +64,7 @@ export function TaskItem({
 
   return (
     <DeleteTaskProvider deleteTask={deleteTask}>
-      <UpdateTaskProvider taskId={props.id} updateTask={updateTask}>
+      <UpdateTaskProvider updateTask={updateTask}>
         <UpdateTaskStatusProvider updateTaskStatus={updateTaskStatus}>
           <TaskItemPendingOverlay taskId={props.id}>
             <SelectableItem

@@ -12,8 +12,7 @@ import {
 } from "@/lib/hooks/useDeleteEntityContextValue";
 
 import { useContext, createContext } from "react";
-import { useToastOnActionError } from "@/lib/hooks/useToastOnActionError";
-import { useRefreshCustomers } from "@/lib/hooks/useRefreshCustomers";
+import { useShowToastOnActionError } from "@/lib/hooks/useShowToastOnActionError";
 
 const DeleteCustomerContext =
   createContext<DeleteEntityContextType<DeleteCustomerPayload> | null>(null);
@@ -27,19 +26,12 @@ export function DeleteCustomerProvider({
   deleteCustomer,
   children,
 }: DeleteCustomerProviderProps) {
-  const refreshCustomers = useRefreshCustomers();
-
-  // Refresh inside reducerAction after successful deletion
-  const contextValue = useDeleteEntityContextValue(
-    deleteCustomer,
-    refreshCustomers,
-  );
+  const contextValue = useDeleteEntityContextValue(deleteCustomer);
 
   const { state } = contextValue;
-  useToastOnActionError(state);
 
-  // Can't call this hook here — provider unmounts after successful deletion
-  // useRefreshCustomersOnActionSuccess(state);
+  // wait for transition to finish
+  useShowToastOnActionError(state);
 
   return (
     <DeleteCustomerContext.Provider value={contextValue}>

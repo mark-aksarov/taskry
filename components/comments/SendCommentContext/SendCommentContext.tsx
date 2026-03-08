@@ -1,10 +1,18 @@
 "use client";
 
-import { useToastOnActionError } from "@/lib/hooks/useToastOnActionError";
-import { useContext, createContext, useActionState, useMemo } from "react";
+import {
+  useMemo,
+  useEffect,
+  useContext,
+  createContext,
+  useActionState,
+} from "react";
+
+import { useRouter } from "@/i18n/navigation";
+import { useCommentFormContext } from "../CommentFormContext";
+import { useRefreshComments } from "@/lib/swr/hooks/useRefreshComments";
 import { ActionContextType, ActionFn, ActionState } from "@/lib/actions/types";
-import { useRefreshCommentsOnActionSuccess } from "@/lib/hooks/useRefreshCommentsOnActionSuccess";
-import { useCommentFormResetOnActionSuccess } from "@/lib/hooks/useCommentFormResetOnActionSuccess";
+import { useShowToastOnActionError } from "@/lib/hooks/useShowToastOnActionError";
 
 const initialState: ActionState = {
   status: null,
@@ -21,11 +29,34 @@ export function SendCommentProvider({
   sendComment,
   children,
 }: SendCommentProviderProps) {
-  const [state, action, isPending] = useActionState(sendComment, initialState);
+  const router = useRouter();
 
-  useToastOnActionError(state);
-  useRefreshCommentsOnActionSuccess(state);
-  useCommentFormResetOnActionSuccess(state);
+  const refreshComments = useRefreshComments();
+  const { setCommentContent } = useCommentFormContext();
+
+  const [state, action, isPending] = useActionState(
+    async (state: ActionState, payload: FormData) => {
+      const newState = await sendComment(state, payload);
+
+      if (newState.status === "success") {
+        // router.refresh is wrapped in startTransition internally
+        router.refresh();
+      }
+
+      return newState;
+    },
+    initialState,
+  );
+
+  useEffect(() => {
+    refreshComments();
+  }, [state, refreshComments]);
+
+  useEffect(() => {
+    setCommentContent("");
+  }, [state, setCommentContent]);
+
+  useShowToastOnActionError(state);
 
   const contextValue = useMemo(
     () => ({ state, action, isPending }),

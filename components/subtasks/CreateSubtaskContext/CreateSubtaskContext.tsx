@@ -5,11 +5,11 @@ import {
   useCreateEntityContextValue,
 } from "@/lib/hooks/useCreateEntityContextValue";
 
-import { useContext, createContext } from "react";
 import { ActionFn, ActionState } from "@/lib/actions/types";
+import { useContext, createContext, useEffect } from "react";
+import { useRefreshTaskDetail } from "@/lib/swr/hooks/useRefreshTaskDetail";
 import { useCloseModalOnActionSuccess } from "@/lib/hooks/useCloseModalOnActionSuccess";
-import { useRefreshTaskDetailOnActionSuccess } from "@/lib/hooks/useRefreshTaskDetailOnActionSuccess";
-import { useToastOnActionErrorWhenModalClosed } from "@/lib/hooks/useToastOnActionErrorWhenModalClosed";
+import { useShowToastOnActionErrorWhenModalClosed } from "@/lib/hooks/useShowToastOnActionErrorWhenModalClosed";
 
 const CreateSubtaskContext = createContext<CreateEntityContextType | null>(
   null,
@@ -26,12 +26,17 @@ export function CreateSubtaskProvider({
   createSubtask,
   children,
 }: CreateSubtaskProviderProps) {
+  const refreshTaskDetail = useRefreshTaskDetail(taskId);
   const contextValue = useCreateEntityContextValue(createSubtask);
-
   const { state, isModalOpen, onModalOpenChange } = contextValue;
-  useToastOnActionErrorWhenModalClosed(state, isModalOpen);
+
   useCloseModalOnActionSuccess(state, onModalOpenChange);
-  useRefreshTaskDetailOnActionSuccess(state, taskId);
+
+  useEffect(() => {
+    refreshTaskDetail();
+  }, [state, refreshTaskDetail]);
+
+  useShowToastOnActionErrorWhenModalClosed(state, isModalOpen);
 
   return (
     <CreateSubtaskContext.Provider value={contextValue}>

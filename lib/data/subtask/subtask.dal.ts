@@ -1,8 +1,9 @@
 import { auth } from "@/lib/auth";
 import prisma from "@/lib/prisma";
-import { AccessDeniedError, NotFoundError } from "../utils/error";
 import { requireSession } from "../utils/requireSession";
+import { AccessDeniedError, NotFoundError } from "../utils/error";
 import { CreateSubtaskInputDTO, UpdateSubtaskInputDTO } from "./subtask.dto";
+import { PrismaClientKnownRequestError } from "@prisma/client/runtime/client";
 
 export const createSubtask = async (input: CreateSubtaskInputDTO) => {
   // Authorization
@@ -76,30 +77,38 @@ export const updateSubtask = async (input: UpdateSubtaskInputDTO) => {
   }
 
   // Update subtask
-  const updatedSubtask = await prisma.subtask.update({
-    where: {
-      id: input.id,
-      task: { workspaceId },
-    },
-    data: {
-      text: input.text,
-      isDone: input.isDone,
-    },
-    select: {
-      id: true,
-      text: true,
-      isDone: true,
-      taskId: true,
+  try {
+    const updatedSubtask = await prisma.subtask.update({
+      where: {
+        id: input.id,
+        task: { workspaceId },
+      },
+      data: {
+        text: input.text,
+        isDone: input.isDone,
+      },
+      select: {
+        id: true,
+        text: true,
+        isDone: true,
+        taskId: true,
 
-      task: {
-        select: {
-          title: true,
+        task: {
+          select: {
+            title: true,
+          },
         },
       },
-    },
-  });
-
-  return updatedSubtask;
+    });
+    return updatedSubtask;
+  } catch (error) {
+    if (
+      error instanceof PrismaClientKnownRequestError &&
+      error.code === "P2025"
+    ) {
+      throw new NotFoundError("Subtask not found", "subtaskNotFound");
+    }
+  }
 };
 
 export const deleteSubtask = async (id: number) => {

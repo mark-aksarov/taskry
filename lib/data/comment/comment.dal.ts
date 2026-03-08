@@ -30,6 +30,16 @@ export const getCommentList = cache(
       user: { id: userId, role, workspaceId },
     } = await requireSession();
 
+    // Validate task
+    if (taskId) {
+      await validateTask(workspaceId, taskId);
+    }
+
+    // Validate project
+    if (projectId) {
+      await validateProject(workspaceId, projectId);
+    }
+
     // Get comments
     const comments = await prisma.comment.findMany({
       orderBy: {
@@ -170,27 +180,31 @@ export const deleteComment = async (commentId: number) => {
   }
 
   // Delete comment
-  const deletedComment = await prisma.comment.delete({
-    where: {
-      ...(role === "user" ? { senderId } : {}),
-      workspaceId,
-      id: commentId,
-    },
-    select: {
-      id: true,
-      content: true,
-      taskId: true,
-      projectId: true,
-      project: {
-        select: { title: true },
+  try {
+    const deletedComment = await prisma.comment.delete({
+      where: {
+        ...(role === "user" ? { senderId } : {}),
+        workspaceId,
+        id: commentId,
       },
-      task: {
-        select: { title: true },
+      select: {
+        id: true,
+        content: true,
+        taskId: true,
+        projectId: true,
+        project: {
+          select: { title: true },
+        },
+        task: {
+          select: { title: true },
+        },
       },
-    },
-  });
+    });
 
-  return deletedComment;
+    return deletedComment;
+  } catch (error) {
+    throw new NotFoundError("Comment not found", "commentNotFound");
+  }
 };
 
 export const updateComment = async (input: UpdateCommentInputDTO) => {
@@ -216,26 +230,30 @@ export const updateComment = async (input: UpdateCommentInputDTO) => {
   }
 
   // Update comment
-  const comment = await prisma.comment.update({
-    where: {
-      workspaceId,
-      ...(role === "user" ? { senderId } : {}),
-      id: input.id,
-    },
-    data: {
-      content: input.content,
-    },
-    include: {
-      task: {
-        select: { title: true },
+  try {
+    const comment = await prisma.comment.update({
+      where: {
+        workspaceId,
+        ...(role === "user" ? { senderId } : {}),
+        id: input.id,
       },
-      project: {
-        select: { title: true },
+      data: {
+        content: input.content,
       },
-    },
-  });
+      include: {
+        task: {
+          select: { title: true },
+        },
+        project: {
+          select: { title: true },
+        },
+      },
+    });
 
-  return comment;
+    return comment;
+  } catch (error) {
+    throw new NotFoundError("Comment not found", "commentNotFound");
+  }
 };
 
 /**
@@ -252,7 +270,7 @@ async function validateTask(workspaceId: number, taskId: number) {
   });
 
   if (!task) {
-    throw new NotFoundError("Task not found");
+    throw new NotFoundError("Task not found", "taskNotFound");
   }
 
   if (task.workspaceId !== workspaceId) {
@@ -270,7 +288,7 @@ async function validateProject(workspaceId: number, projectId: number) {
   });
 
   if (!project) {
-    throw new NotFoundError("Project not found");
+    throw new NotFoundError("Project not found", "projectNotFound");
   }
 
   if (project.workspaceId !== workspaceId) {

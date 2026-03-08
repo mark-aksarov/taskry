@@ -4,15 +4,27 @@
     "emptySection": {
       "heading": "No project categories",
       "description": "Create your first category to get started."
+    },
+    "error": {
+      "common": {
+        "heading": "Project category error",
+        "description": "An error occurred while handling project category data. Please try again.",
+        "buttonLabel": "Back to project categories"
+      },
+      "notFound": {
+        "heading": "Project Category Not Found",
+        "description": "The project category does not exist. It may have been deleted by another user.",
+        "buttonLabel": "Back to project categories"
+      }
     }
   },
   "CustomerDetailPage": {
     "heading": "Customer detail"
   },
-  "DashboardErrorPage": {
+  "ErrorPage": {
     "heading": "Something went wrong",
     "description": "We encountered an unexpected error. Please try refreshing the page or contact support if the issue persists.",
-    "resetButtonLabel": "Try again"
+    "resetButtonLabel": "Refresh page"
   },
   "DashboardNotFoundPage": {
     "heading": "Page not found",
@@ -58,6 +70,18 @@
     "emptySection": {
       "heading": "No projects yet",
       "description": "Create a new project to keep track of your work"
+    },
+    "error": {
+      "common": {
+        "heading": "Project Error",
+        "description": "An error occurred while handling project data. Please try again.",
+        "buttonLabel": "Back to Projects"
+      },
+      "notFound": {
+        "heading": "Project Not Found",
+        "description": "The project does not exist. It may have been deleted by another user.",
+        "buttonLabel": "Back to Projects"
+      }
     }
   },
   "TasksPage": {
@@ -65,6 +89,18 @@
     "emptySection": {
       "heading": "No tasks yet",
       "description": "Create a new task to keep track of your work"
+    },
+    "error": {
+      "common": {
+        "heading": "Task error",
+        "description": "An error occurred while handling task data. Please try again.",
+        "buttonLabel": "Back to tasks"
+      },
+      "notFound": {
+        "heading": "Task not found",
+        "description": "The task does not exist. It may have been deleted by another user.",
+        "buttonLabel": "Back to tasks"
+      }
     }
   },
   "CustomersPage": {
@@ -72,6 +108,18 @@
     "emptySection": {
       "heading": "No Customers yet",
       "description": "Add a customer to get started and organize your projects"
+    },
+    "error": {
+      "common": {
+        "heading": "Customer error",
+        "description": "An error occurred while handling customer data. Please try again.",
+        "buttonLabel": "Back to customers"
+      },
+      "notFound": {
+        "heading": "Customer not found",
+        "description": "The customer does not exist. It may have been deleted by another user.",
+        "buttonLabel": "Back to customers"
+      }
     }
   },
   "CustomersPageLoading": {
@@ -91,7 +139,13 @@
     "title": "All Tasks"
   },
   "TaskDetailPage": {
-    "heading": "Task Details"
+    "heading": "Task Details",
+
+    "notFound": {
+      "heading": "Task not found",
+      "description": "The task does not exist or was deleted by another user.",
+      "toTasks": "Back to tasks"
+    }
   },
   "UsersPageLoading": {
     "title": "Team"
@@ -101,10 +155,27 @@
     "emptySection": {
       "heading": "No Users yet",
       "description": "Add a new user to start building your team"
+    },
+    "error": {
+      "common": {
+        "heading": "User error",
+        "description": "An error occurred while handling user data. Please try again.",
+        "buttonLabel": "Back to users"
+      },
+      "notFound": {
+        "heading": "User not found",
+        "description": "The user does not exist. It may have been deleted by another user.",
+        "buttonLabel": "Back to users"
+      }
     }
   },
   "TeamProfilePage": {
-    "heading": "User detail"
+    "heading": "User detail",
+    "notFound": {
+      "heading": "User not found",
+      "description": "The user does not exist or was deleted by another user.",
+      "toUsers": "Back to team"
+    }
   },
   "ProjectCategoriesPageLoading": {
     "title": "All Project Categories"
@@ -114,6 +185,18 @@
     "emptySection": {
       "heading": "No task categories yet",
       "description": "Create a new task category to better organize your tasks."
+    },
+    "error": {
+      "common": {
+        "heading": "Task Category Error",
+        "description": "An error occurred while handling task category data. Please try again.",
+        "buttonLabel": "Back to Task Categories"
+      },
+      "notFound": {
+        "heading": "Task Category Not Found",
+        "description": "The task category does not exist. It may have been deleted by another user.",
+        "buttonLabel": "Back to Task Categories"
+      }
     }
   },
   "TaskCategoriesPageLoading": {
@@ -124,6 +207,18 @@
     "emptySection": {
       "heading": "No companies yet",
       "description": "Add a company to get started and organize your projects"
+    },
+    "error": {
+      "common": {
+        "heading": "Companies error",
+        "description": "An error occurred while handling companies data. Please try again.",
+        "buttonLabel": "Back to companies"
+      },
+      "notFound": {
+        "heading": "Company not found",
+        "description": "This company does not exist. It may have been deleted by another user.",
+        "buttonLabel": "Back to companies"
+      }
     }
   },
   "CompaniesPageLoading": {
@@ -137,6 +232,18 @@
     "emptySection": {
       "heading": "No positions yet",
       "description": "Create a new position to better organize your work with users."
+    },
+    "error": {
+      "common": {
+        "heading": "Positions error",
+        "description": "An error occurred while handling positions data. Please try again.",
+        "buttonLabel": "Refresh positions"
+      },
+      "notFound": {
+        "heading": "Position not found",
+        "description": "This position does not exist. It may have been deleted by another user.",
+        "buttonLabel": "Refresh positions"
+      }
     }
   }
 }

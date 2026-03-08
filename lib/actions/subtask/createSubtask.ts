@@ -2,7 +2,6 @@
 
 import z from "zod";
 import { ActionState } from "../types";
-import { revalidatePath } from "next/cache";
 import { taskId } from "@/lib/schemas/task";
 import { getTranslations } from "next-intl/server";
 import { subtaskText } from "@/lib/schemas/subtask";
@@ -28,7 +27,6 @@ export async function createSubtask(
     const parsedData = schema.parse(input);
 
     await createSubtaskQuery(parsedData);
-    revalidatePath("/");
 
     return {
       status: "success",
@@ -39,7 +37,7 @@ export async function createSubtask(
 
     return {
       status: "error",
-      message: t("subtask.create.error"),
+      message: t("subtask.create.error.internalServerError"),
     };
   }
 }

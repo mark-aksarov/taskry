@@ -39,7 +39,6 @@ export function CustomersPage({
   filtersFormContainer,
 }: CustomersPageProps) {
   const t = useTranslations("app.CustomersPage");
-  const isFilteredEmpty = totalFilteredCustomers === 0;
 
   if (totalCount === 0) {
     return (
@@ -56,9 +55,11 @@ export function CustomersPage({
     );
   }
 
+  const isFilteredEmpty = totalFilteredCustomers === 0;
+
   return (
     <>
-      <PageContainer fullscreen={isFilteredEmpty} className="relative">
+      <PageContainer fullscreen className="relative">
         <PageGrid className="flex-auto">
           <ViewModeProvider>
             <ToolbarDesktop>

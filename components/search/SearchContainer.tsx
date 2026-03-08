@@ -29,6 +29,7 @@ export function SearchContainer<T extends { id: string | number }>({
 
   const { data } = useSWR<PaginatedResponse<T>>(
     `${endpoint}?page=${page}&pageSize=${pageSize}&query=${query}`,
+    { revalidateOnFocus: false },
   );
 
   const [totalCount, setTotalCount] = useState<number | null>(null);

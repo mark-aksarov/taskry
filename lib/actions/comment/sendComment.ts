@@ -2,13 +2,13 @@
 
 import z from "zod";
 import { ActionState } from "../types";
-import { revalidatePath } from "next/cache";
 import { taskId } from "@/lib/schemas/task";
 import { projectId } from "@/lib/schemas/project";
 import { getTranslations } from "next-intl/server";
 import { commentContent } from "@/lib/schemas/comment";
 import { createComment } from "@/lib/data/comment/comment.dal";
 import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedirect";
+import { NotFoundError } from "@/lib/data/utils/error";
 
 const schema = z.object({
   content: commentContent,
@@ -30,7 +30,6 @@ export async function sendComment(
     const parsedData = schema.parse(input);
 
     await createComment(parsedData);
-    revalidatePath("/");
 
     return {
       status: "success",
@@ -39,9 +38,17 @@ export async function sendComment(
   } catch (error) {
     console.error("Server Action Error:", error);
 
+    if (error instanceof NotFoundError) {
+      return {
+        status: "error",
+        errorCode: "notFound",
+        message: t("comment.common.error.notFound"),
+      };
+    }
+
     return {
       status: "error",
-      message: t("comment.create.error"),
+      message: t("comment.create.error.internalServerError"),
     };
   }
 }

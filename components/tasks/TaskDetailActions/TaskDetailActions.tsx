@@ -2,19 +2,16 @@
 
 import { useTranslations } from "next-intl";
 import { Pencil, Trash } from "lucide-react";
+import { startTransition, useState } from "react";
+import { useDeleteTask } from "../DeleteTaskContext";
 import { useUpdateTask } from "../UpdateTaskContext";
 import { TaskCommentsModal } from "../TaskCommentsModal";
 import { BaseDeleteTaskModal } from "../DeleteTaskModal";
-import { startTransition, useActionState, useState } from "react";
+import { ActionFn, ActionState } from "@/lib/actions/types";
 import { GuestModeModal } from "@/components/common/GuestModeModal";
 import { NavigationButton } from "@/components/common/NavigationButton";
 import { useCurrentUser } from "@/components/common/CurrentUserContext";
-import { ActionFn, ActionState, DeleteTaskPayload } from "@/lib/actions/types";
 import { DetailActionsCommentsModalTrigger } from "@/components/common/DetailActionsCommentsModalTrigger";
-
-const initialDeleteState: ActionState = {
-  status: null,
-};
 
 interface TaskDetailActionsProps {
   taskId: number;
@@ -22,7 +19,6 @@ interface TaskDetailActionsProps {
   taskCommentsContainer: React.ReactNode;
   sendComment: ActionFn<ActionState, FormData>;
   updateComment: ActionFn<ActionState, FormData>;
-  deleteTask: ActionFn<ActionState, DeleteTaskPayload>;
 }
 
 export function TaskDetailActions({
@@ -31,7 +27,6 @@ export function TaskDetailActions({
   taskCommentsContainer,
   sendComment,
   updateComment,
-  deleteTask,
 }: TaskDetailActionsProps) {
   const t = useTranslations("tasks.TaskDetailActions");
 
@@ -40,10 +35,7 @@ export function TaskDetailActions({
   const [isGuestModeModalOpen, setIsGuestModeModalOpen] = useState(false);
 
   // Delete task: action state + form modal state
-  const [, deleteAction, isDeletePending] = useActionState(
-    deleteTask,
-    initialDeleteState,
-  );
+  const { isPending: isDeletePending, action: deleteAction } = useDeleteTask();
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
   // Edit task: action state + form modal state

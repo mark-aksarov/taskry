@@ -5,12 +5,11 @@ import {
   useUpdateEntityContextValue,
 } from "@/lib/hooks/useUpdateEntityContextValue";
 
-import { createContext, useContext } from "react";
+import { useContext, createContext } from "react";
 import { ActionFn, ActionState } from "@/lib/actions/types";
-import { useToastOnActionSuccess } from "@/lib/hooks/useToastOnActionSuccess";
+import { useShowToastOnActionSuccess } from "@/lib/hooks/useShowToastOnActionSuccess";
 import { useCloseModalOnActionSuccess } from "@/lib/hooks/useCloseModalOnActionSuccess";
-import { useToastOnActionErrorWhenModalClosed } from "@/lib/hooks/useToastOnActionErrorWhenModalClosed";
-import { useRefreshTaskCategoriesOnActionSuccess } from "@/lib/hooks/useRefreshTaskCategoriesOnActionSuccess";
+import { useShowToastOnActionErrorWhenModalClosed } from "@/lib/hooks/useShowToastOnActionErrorWhenModalClosed";
 
 const UpdateTaskCategoryContext = createContext<UpdateEntityContextType | null>(
   null,
@@ -28,10 +27,16 @@ export function UpdateTaskCategoryProvider({
   const contextValue = useUpdateEntityContextValue(updateTaskCategory);
 
   const { state, isModalOpen, onModalOpenChange } = contextValue;
-  useToastOnActionSuccess(state);
-  useToastOnActionErrorWhenModalClosed(state, isModalOpen);
+
+  // wait for transition to finish
+
+  if (state.status === "error" && state.errorCode === "notFound") {
+    throw new Error(state.message, { cause: state.errorCode });
+  }
+
+  useShowToastOnActionSuccess(state);
   useCloseModalOnActionSuccess(state, onModalOpenChange);
-  useRefreshTaskCategoriesOnActionSuccess(state);
+  useShowToastOnActionErrorWhenModalClosed(state, isModalOpen);
 
   return (
     <UpdateTaskCategoryContext.Provider value={contextValue}>

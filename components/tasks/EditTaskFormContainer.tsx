@@ -1,7 +1,9 @@
 "use client";
 
 import useSWR from "swr";
+import { notFound } from "next/navigation";
 import { EditTaskForm } from "./EditTaskForm";
+import { usePathname } from "@/i18n/navigation";
 import { TaskFormSkeleton } from "./TaskFormSkeleton";
 import { CalendarDate } from "@internationalized/date";
 import { UserSummaryDTO } from "@/lib/data/user/user.dto";
@@ -14,29 +16,43 @@ interface EditTaskFormContainerProps {
 }
 
 export function EditTaskFormContainer({ taskId }: EditTaskFormContainerProps) {
+  const pathname = usePathname();
+
   const { data: categories } = useSWR<TaskCategorySummaryDTO[]>(
     "/api/task-categories",
     {
-      revalidateIfStale: false, // don't revalidate on each mount
       revalidateOnFocus: false,
     },
   );
 
   const { data: projects } = useSWR<ProjectSummaryDTO[]>("/api/projects", {
-    revalidateIfStale: false, // don't revalidate on each mount
     revalidateOnFocus: false,
   });
 
   const { data: users } = useSWR<UserSummaryDTO[]>("/api/users", {
-    revalidateIfStale: false, // don't revalidate on each mount
     revalidateOnFocus: false,
   });
 
   // Current task data for editing (loaded each modal open)
-  const { data: task, isValidating: isValidatingTask } =
-    useSWR<TaskFormDataDTO | null>(`/api/tasks/${taskId}?view=edit`);
+  const {
+    data: task,
+    isValidating: isValidatingTask,
+    error: taskError,
+  } = useSWR<TaskFormDataDTO | null>(`/api/tasks/${taskId}?view=edit`, {
+    revalidateOnFocus: false,
+  });
 
-  //Error handling for 404 (NotFound) error. https://swr.vercel.app/docs/error-handling
+  if (taskError) {
+    if (pathname === "/tasks") {
+      if (taskError.status === 404) {
+        throw new Error(undefined, { cause: "notFound" });
+      }
+
+      throw new Error();
+    }
+
+    notFound();
+  }
 
   // Show skeleton while loading or revalidating
   const showSkeleton =

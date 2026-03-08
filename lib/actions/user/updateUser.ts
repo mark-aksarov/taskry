@@ -13,12 +13,12 @@ import {
 import z from "zod";
 import { ActionState } from "../types";
 import { APIError } from "better-auth";
-import { revalidatePath } from "next/cache";
 import { getTranslations } from "next-intl/server";
 import { positionId } from "@/lib/schemas/position";
 import { emptyStringToNull } from "@/lib/schemas/base";
 import { updateUser as updateUserService } from "@/lib/data/user/user.service";
 import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedirect";
+import { NotFoundError } from "@/lib/data/utils/error";
 
 const schema = z.object({
   id: userId,
@@ -44,7 +44,6 @@ export async function updateUser(
     const input = Object.fromEntries(formData.entries());
     const parsedData = schema.parse(input);
     await updateUserService(parsedData);
-    revalidatePath("/");
 
     return {
       status: "success",
@@ -52,6 +51,22 @@ export async function updateUser(
     };
   } catch (error) {
     console.error("Server Action Error:", error);
+
+    if (error instanceof NotFoundError) {
+      if (error.code === "userNotFound") {
+        return {
+          status: "error",
+          errorCode: "notFound",
+          message: t("user.common.error.notFound"),
+        };
+      } else {
+        return {
+          status: "error",
+          errorCode: "badRequest",
+          message: t("user.common.error.relationNotFound"),
+        };
+      }
+    }
 
     if (error instanceof APIError) {
       return {
@@ -62,7 +77,7 @@ export async function updateUser(
 
     return {
       status: "error",
-      message: t("user.update.error"),
+      message: t("user.update.error.internalServerError"),
     };
   }
 }

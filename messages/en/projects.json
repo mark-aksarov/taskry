@@ -1,4 +1,7 @@
 {
+  "ProjectContainer": {
+    "notFound": "Project not found. It may have been deleted by another user."
+  },
   "ProjectsFilteredEmptySection": {
     "heading": "No projects found",
     "description": "No projects match the selected filters. Try changing or resetting the filters."

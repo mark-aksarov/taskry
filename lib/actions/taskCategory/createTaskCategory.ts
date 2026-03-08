@@ -2,7 +2,6 @@
 
 import z from "zod";
 import { ActionState } from "../types";
-import { revalidatePath } from "next/cache";
 import { getTranslations } from "next-intl/server";
 import { taskCategoryName } from "@/lib/schemas/taskCategory";
 import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedirect";
@@ -25,7 +24,6 @@ export async function createTaskCategory(
     });
 
     await createTaskCategoryQuery(parsedData);
-    revalidatePath("/");
 
     return {
       status: "success",
@@ -36,7 +34,7 @@ export async function createTaskCategory(
 
     return {
       status: "error",
-      message: t("taskCategory.create.error"),
+      message: t("taskCategory.create.error.internalServerError"),
     };
   }
 }

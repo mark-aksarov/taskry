@@ -1,17 +1,18 @@
 "use client";
 
 import {
-  UpdateEntityStatusesContextType,
-  useUpdateEntityStatusesContextValue,
-} from "@/lib/hooks/useUpdateEntityStatusesContextValue";
-
-import {
   ActionFn,
   ActionState,
   UpdateTaskStatusesPayload,
 } from "@/lib/actions/types";
 
+import {
+  UpdateEntityStatusesContextType,
+  useUpdateEntityStatusesContextValue,
+} from "@/lib/hooks/useUpdateEntityStatusesContextValue";
+
 import { useContext, createContext } from "react";
+import { useShowToastOnActionError } from "@/lib/hooks/useShowToastOnActionError";
 
 const UpdateTaskStatusesContext =
   createContext<UpdateEntityStatusesContextType | null>(null);
@@ -26,6 +27,11 @@ export function UpdateTaskStatusesProvider({
   children,
 }: UpdateTaskStatusesProviderProps) {
   const contextValue = useUpdateEntityStatusesContextValue(updateTaskStatuses);
+
+  const { state } = contextValue;
+
+  // wait for transition to finish
+  useShowToastOnActionError(state);
 
   return (
     <UpdateTaskStatusesContext.Provider value={contextValue}>

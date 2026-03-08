@@ -2,7 +2,6 @@
 
 import z from "zod";
 import { ActionState } from "../types";
-import { revalidatePath } from "next/cache";
 import { getTranslations } from "next-intl/server";
 import { projectCategoryName } from "@/lib/schemas/projectCategory";
 import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedirect";
@@ -25,7 +24,6 @@ export async function createProjectCategory(
     });
 
     await createProjectCategoryQuery(parsedData);
-    revalidatePath("/");
 
     return {
       status: "success",
@@ -36,7 +34,7 @@ export async function createProjectCategory(
 
     return {
       status: "error",
-      message: t("projectCategory.create.error"),
+      message: t("projectCategory.create.error.internalServerError"),
     };
   }
 }

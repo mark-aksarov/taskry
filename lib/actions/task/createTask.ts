@@ -9,10 +9,10 @@ import {
 
 import z from "zod";
 import { ActionState } from "../types";
-import { revalidatePath } from "next/cache";
 import { userId } from "@/lib/schemas/user";
 import { projectId } from "@/lib/schemas/project";
 import { getTranslations } from "next-intl/server";
+import { NotFoundError } from "@/lib/data/utils/error";
 import { emptyStringToUndefined } from "@/lib/schemas/base";
 import { taskCategoryId } from "@/lib/schemas/taskCategory";
 import { createTask as createTaskQuery } from "@/lib/data/task/task.dal";
@@ -41,7 +41,6 @@ export async function createTask(
     const input = Object.fromEntries(formData.entries());
     const parsedData = schema.parse(input);
     await createTaskQuery(parsedData);
-    revalidatePath("/");
 
     return {
       status: "success",
@@ -50,9 +49,17 @@ export async function createTask(
   } catch (error) {
     console.error("Server Action Error:", error);
 
+    if (error instanceof NotFoundError) {
+      return {
+        status: "error",
+        errorCode: "badRequest",
+        message: t("task.common.error.relationNotFound"),
+      };
+    }
+
     return {
       status: "error",
-      message: t("task.create.error"),
+      message: t("task.create.error.internalServerError"),
     };
   }
 }

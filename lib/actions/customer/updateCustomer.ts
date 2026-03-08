@@ -11,10 +11,10 @@ import {
 
 import z from "zod";
 import { ActionState } from "../types";
-import { revalidatePath } from "next/cache";
 import { companyId } from "@/lib/schemas/company";
 import { getTranslations } from "next-intl/server";
 import { emptyStringToNull } from "@/lib/schemas/base";
+import { NotFoundError } from "@/lib/data/utils/error";
 import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedirect";
 import { updateCustomer as updateCustomerQuery } from "@/lib/data/customer/customer.dal";
 
@@ -42,7 +42,6 @@ export async function updateCustomer(
     const parsedData = schema.parse(input);
 
     await updateCustomerQuery(parsedData);
-    revalidatePath("/");
 
     return {
       status: "success",
@@ -51,9 +50,25 @@ export async function updateCustomer(
   } catch (error) {
     console.error("Server Action Error:", error);
 
+    if (error instanceof NotFoundError) {
+      if (error.code === "customerNotFound") {
+        return {
+          status: "error",
+          errorCode: "notFound",
+          message: t("customer.common.error.notFound"),
+        };
+      } else {
+        return {
+          status: "error",
+          errorCode: "badRequest",
+          message: t("customer.common.error.relationNotFound"),
+        };
+      }
+    }
+
     return {
       status: "error",
-      message: t("customer.update.error"),
+      message: t("customer.update.error.internalServerError"),
     };
   }
 }

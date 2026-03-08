@@ -1,4 +1,7 @@
 {
+  "TaskContainer": {
+    "notFound": "Задача не найдена. Возможно, она была удалена другим пользователем."
+  },
   "EditTaskForm": {
     "submitButtonLabel": "Обновить задачу",
     "successMessage": "Задача успешно обновлена"

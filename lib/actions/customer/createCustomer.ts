@@ -10,9 +10,9 @@ import {
 
 import z from "zod";
 import { ActionState } from "../types";
-import { revalidatePath } from "next/cache";
 import { companyId } from "@/lib/schemas/company";
 import { getTranslations } from "next-intl/server";
+import { NotFoundError } from "@/lib/data/utils/error";
 import { emptyStringToUndefined } from "@/lib/schemas/base";
 import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedirect";
 import { createCustomer as createCustomerQuery } from "@/lib/data/customer/customer.dal";
@@ -46,7 +46,6 @@ export async function createCustomer(
     const parsedData = schema.parse(input);
 
     await createCustomerQuery(parsedData);
-    revalidatePath("/");
 
     return {
       status: "success",
@@ -55,9 +54,17 @@ export async function createCustomer(
   } catch (error) {
     console.error("Server Action Error:", error);
 
+    if (error instanceof NotFoundError) {
+      return {
+        status: "error",
+        errorCode: "badRequest",
+        message: t("customer.common.error.relationNotFound"),
+      };
+    }
+
     return {
       status: "error",
-      message: t("customer.create.error"),
+      message: t("customer.create.error.internalServerError"),
     };
   }
 }

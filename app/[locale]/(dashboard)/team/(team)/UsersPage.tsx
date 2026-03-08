@@ -34,9 +34,15 @@ export function UsersPage({
 }: UsersPageProps) {
   const t = useTranslations("app.UsersPage");
 
+  const isFilteredEmpty = totalFilteredUsers === 0;
+
   return (
     <>
-      <PageContainer fullscreen={totalFilteredUsers === 0} className="relative">
+      <PageContainer
+        fullscreen={isFilteredEmpty}
+        headerOffset
+        className="relative"
+      >
         <PageGrid className="flex-auto">
           <ViewModeProvider>
             <ToolbarDesktop>

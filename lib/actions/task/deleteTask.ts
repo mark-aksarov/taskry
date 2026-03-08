@@ -1,6 +1,5 @@
 "use server";
 
-import { revalidatePath } from "next/cache";
 import { taskId } from "@/lib/schemas/task";
 import { redirect } from "@/i18n/navigation";
 import { ActionState, DeleteTaskPayload } from "../types";
@@ -21,13 +20,12 @@ export async function deleteTask(
     const parsedId = taskId.parse(payload.id);
 
     await deleteTaskQuery([parsedId]);
-    revalidatePath("/");
   } catch (error) {
     console.error("Server Action Error:", error);
 
     return {
       status: "error",
-      message: t("task.delete.error.one"),
+      message: t("task.delete.error.internalServerError"),
     };
   }
 
@@ -39,6 +37,6 @@ export async function deleteTask(
 
   return {
     status: "success",
-    message: t("task.delete.success.one"),
+    message: t("task.delete.success"),
   };
 }

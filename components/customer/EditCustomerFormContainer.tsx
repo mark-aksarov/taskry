@@ -1,6 +1,8 @@
 "use client";
 
 import useSWR from "swr";
+import { notFound } from "next/navigation";
+import { usePathname } from "@/i18n/navigation";
 import { EditCustomerForm } from "./EditCustomerForm";
 import { CustomerFormSkeleton } from "./CustomerFormSkeleton";
 import { CompanySummaryDTO } from "@/lib/data/company/company.dto";
@@ -13,16 +15,31 @@ interface EditCustomerFormContainerProps {
 export function EditCustomerFormContainer({
   customerId,
 }: EditCustomerFormContainerProps) {
+  const pathname = usePathname();
+
   const { data: companies } = useSWR<CompanySummaryDTO[]>(`/api/companies`, {
-    revalidateIfStale: false, // don't revalidate on each mount
     revalidateOnFocus: false,
   });
 
-  // Current customer data for editing (loaded each modal open)
-  const { data: customer, isValidating: isValidatingCustomer } =
-    useSWR<CustomerFormDataDTO>(`/api/customers/${customerId}?view=edit`);
+  const {
+    data: customer,
+    error: customerError,
+    isValidating: isValidatingCustomer,
+  } = useSWR<CustomerFormDataDTO>(`/api/customers/${customerId}?view=edit`, {
+    revalidateOnFocus: false,
+  });
 
-  //Error handling for 404 (NotFound) error. https://swr.vercel.app/docs/error-handling
+  if (customerError) {
+    if (pathname === "/customers") {
+      if (customerError.status === 404) {
+        throw new Error(undefined, { cause: "notFound" });
+      }
+
+      throw new Error();
+    }
+
+    notFound();
+  }
 
   // Show skeleton while loading or revalidating
   const showSkeleton = !companies || !customer || isValidatingCustomer;

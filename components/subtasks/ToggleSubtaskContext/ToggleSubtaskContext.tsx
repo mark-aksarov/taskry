@@ -1,13 +1,22 @@
 "use client";
 
 import {
+  useMemo,
+  useEffect,
+  useContext,
+  createContext,
+  useActionState,
+} from "react";
+
+import {
   ActionFn,
   ActionState,
   ToggleSubtaskPayload,
 } from "@/lib/actions/types";
-import { useToastOnActionError } from "@/lib/hooks/useToastOnActionError";
-import { useRefreshTaskDetailOnActionSuccess } from "@/lib/hooks/useRefreshTaskDetailOnActionSuccess";
-import { createContext, useActionState, useContext, useMemo } from "react";
+
+import { useRouter } from "@/i18n/navigation";
+import { useRefreshTaskDetail } from "@/lib/swr/hooks/useRefreshTaskDetail";
+import { useShowToastOnActionError } from "@/lib/hooks/useShowToastOnActionError";
 
 export const initialState: ActionState = {
   status: null,
@@ -34,13 +43,28 @@ export function ToggleSubtaskProvider({
   toggleSubtask,
   children,
 }: ToggleSubtaskProviderProps) {
+  const router = useRouter();
+  const refreshTaskDetail = useRefreshTaskDetail(taskId);
+
   const [state, action, isPending] = useActionState(
-    toggleSubtask,
+    async (state: ActionState, payload: ToggleSubtaskPayload) => {
+      const newState = await toggleSubtask(state, payload);
+
+      if (newState.status === "success") {
+        // router.refresh is wrapped in startTransition internally
+        router.refresh();
+      }
+
+      return newState;
+    },
     initialState,
   );
 
-  useToastOnActionError(state);
-  useRefreshTaskDetailOnActionSuccess(state, taskId);
+  useEffect(() => {
+    refreshTaskDetail();
+  }, [state, refreshTaskDetail]);
+
+  useShowToastOnActionError(state);
 
   const contextValue = useMemo(
     () => ({ state, action, isPending }),

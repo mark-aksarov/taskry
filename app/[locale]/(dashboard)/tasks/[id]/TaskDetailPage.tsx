@@ -50,7 +50,6 @@ export function TaskDetailPage({
       taskId={taskId}
       taskTitle={taskTitle}
       taskCommentsContainer={taskCommentsContainer}
-      deleteTask={deleteTask}
       sendComment={sendComment}
       updateComment={updateComment}
     />

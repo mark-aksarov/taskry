@@ -18,9 +18,17 @@ interface TaskDetailContainerProps {
 }
 
 export function TaskDetailContainer({ taskId }: TaskDetailContainerProps) {
-  const { data: task } = useSWR<TaskDetailDTO>(`/api/tasks/${taskId}`);
+  const { data: task, error } = useSWR<TaskDetailDTO>(`/api/tasks/${taskId}`, {
+    revalidateOnFocus: false,
+  });
 
-  //Error handling for 404 (NotFound) error. https://swr.vercel.app/docs/error-handling
+  if (error) {
+    if (error.status === 404) {
+      throw new Error(undefined, { cause: "notFound" });
+    }
+
+    throw new Error();
+  }
 
   // Show skeleton while loading
   if (!task) {

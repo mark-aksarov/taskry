@@ -2,8 +2,8 @@
 
 import z from "zod";
 import { ActionState } from "../types";
-import { revalidatePath } from "next/cache";
 import { getTranslations } from "next-intl/server";
+import { NotFoundError } from "@/lib/data/utils/error";
 import { companyId, companyName } from "@/lib/schemas/company";
 import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedirect";
 import { updateCompany as updateCompanyQuery } from "@/lib/data/company/company.dal";
@@ -27,7 +27,6 @@ export async function updateCompany(
     const data = schema.parse(input);
 
     await updateCompanyQuery(data);
-    revalidatePath("/");
 
     return {
       status: "success",
@@ -36,9 +35,17 @@ export async function updateCompany(
   } catch (error) {
     console.error("Server Action Error:", error);
 
+    if (error instanceof NotFoundError) {
+      return {
+        status: "error",
+        errorCode: "notFound",
+        message: t("company.common.error.notFound"),
+      };
+    }
+
     return {
       status: "error",
-      message: t("company.update.error"),
+      message: t("company.update.error.internalServerError"),
     };
   }
 }

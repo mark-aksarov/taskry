@@ -56,10 +56,13 @@ export function ProjectsPage({
     );
   }
 
+  const isFilteredEmpty = totalFilteredProjects === 0;
+
   return (
     <>
       <PageContainer
-        fullscreen={totalFilteredProjects === 0}
+        fullscreen={isFilteredEmpty}
+        headerOffset
         className="relative"
       >
         <PageGrid className="flex-auto">
@@ -94,7 +97,7 @@ export function ProjectsPage({
               <ProjectToolbarCreateNewMenuTrigger />
             </ToolbarMobileBottom>
 
-            {totalFilteredProjects === 0 ? (
+            {isFilteredEmpty ? (
               <ProjectsFilteredEmptySection />
             ) : (
               projectsContainer

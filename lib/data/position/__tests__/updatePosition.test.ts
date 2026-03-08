@@ -93,13 +93,15 @@ describe("updatePosition", () => {
     it("should succeed for owner", async () => {
       const { updateInput } = await setup("user-1", "owner");
       const result = await updatePosition(updateInput);
-      expect(result.name).toBe(updateInput.name);
+      expect(result).toBeDefined();
+      expect(result!.name).toBe(updateInput.name);
     });
 
-    it("should fail for user", async () => {
+    it("should succeed for user", async () => {
       const { updateInput } = await setup("user-2", "user");
       const result = await updatePosition(updateInput);
-      expect(result.name).toBe(updateInput.name);
+      expect(result).toBeDefined();
+      expect(result!.name).toBe(updateInput.name);
     });
 
     it("should fail for guest", async () => {

@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect } from "react";
-import ErrorPageLayout from "@/components/layout/ErrorPageLayout";
+import { useTranslations } from "next-intl";
+import ErrorPageContainer from "@/components/layout/ErrorPageContainer";
 
 export default function Error({
   error,
@@ -10,9 +10,15 @@ export default function Error({
   error: Error & { digest?: string };
   reset: () => void;
 }) {
-  useEffect(() => {
-    console.error(error);
-  }, [error]);
+  const t = useTranslations("app.ErrorPage");
 
-  return <ErrorPageLayout reset={reset} />;
+  return (
+    <ErrorPageContainer
+      heading={t("heading")}
+      description={t("description")}
+      reset={reset}
+      resetButtonLabel={t("resetButtonLabel")}
+      emptySectionClassName="max-w-[500px]"
+    />
+  );
 }

@@ -6,6 +6,8 @@ import {
 } from "@/components/comments/CommentItem";
 
 import useSWR from "swr";
+import { notFound } from "next/navigation";
+import { usePathname } from "@/i18n/navigation";
 import { Repeat } from "@/components/common/Repeat";
 import { CommentListItemDTO } from "@/lib/data/comment/comment.dto";
 import { deleteComment } from "@/lib/actions/comment/deleteComment";
@@ -16,13 +18,29 @@ interface TaskCommentsContainerProps {
 }
 
 export function TaskCommentsContainer({ taskId }: TaskCommentsContainerProps) {
-  const { data: comments } = useSWR<CommentListItemDTO[]>(
+  const pathname = usePathname();
+
+  const { data: comments, error: commentsError } = useSWR<CommentListItemDTO[]>(
     `/api/tasks/${taskId}/comments`,
+    {
+      refreshInterval: 5000,
+      dedupingInterval: 2000,
+    },
   );
 
-  //Error handling for 404 (NotFound) error. https://swr.vercel.app/docs/error-handling
+  if (commentsError) {
+    if (pathname === "/tasks") {
+      if (commentsError.status === 404) {
+        throw new Error(undefined, { cause: "notFound" });
+      }
 
-  // Show skeleton while loading
+      throw new Error();
+    }
+
+    notFound();
+  }
+
+  // Show skeleton while loading or revalidating
   if (!comments) {
     return <Repeat items={10} renderItem={() => <CommentItemSkeleton />} />;
   }
