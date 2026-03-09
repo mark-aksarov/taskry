@@ -1,8 +1,8 @@
 "use client";
 
 import useSWR from "swr";
-import { notFound } from "next/navigation";
 import { usePathname } from "@/i18n/navigation";
+import { notFound, useParams } from "next/navigation";
 import { CalendarDate } from "@internationalized/date";
 import { UserFormDataDTO } from "@/lib/data/user/user.dto";
 import { EditUserForm, EditUserFormSkeleton } from "./EditUserForm";
@@ -14,6 +14,7 @@ interface EditUserFormContainerProps {
 
 export function EditUserFormContainer({ userId }: EditUserFormContainerProps) {
   const pathname = usePathname();
+  const params = useParams();
 
   const { data: positions } = useSWR<PositionSummaryDTO[]>(`/api/positions`, {
     revalidateIfStale: false, // don't revalidate on each mount
@@ -30,15 +31,18 @@ export function EditUserFormContainer({ userId }: EditUserFormContainerProps) {
   });
 
   if (userError) {
-    if (pathname === "/team") {
-      if (userError.status === 404) {
-        throw new Error(undefined, { cause: "notFound" });
+    if (userError.status === 404) {
+      if (
+        (pathname.startsWith("/team") && params.id) ||
+        pathname === "/profile"
+      ) {
+        notFound();
       }
 
-      throw new Error();
+      throw new Error(undefined, { cause: "userNotFound" });
     }
 
-    notFound();
+    throw new Error();
   }
 
   // Show skeleton while loading or revalidating

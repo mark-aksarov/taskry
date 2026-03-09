@@ -5,6 +5,8 @@ import {
   useUpdateEntityContextValue,
 } from "@/lib/hooks/useUpdateEntityContextValue";
 
+import { notFound } from "next/navigation";
+import { usePathname } from "@/i18n/navigation";
 import { useContext, createContext } from "react";
 import { ActionFn, ActionState } from "@/lib/actions/types";
 import { useShowToastOnActionSuccess } from "@/lib/hooks/useShowToastOnActionSuccess";
@@ -22,11 +24,22 @@ export function UpdateTaskProvider({
   updateTask,
   children,
 }: UpdateTaskProviderProps) {
+  const pathname = usePathname();
+
   const contextValue = useUpdateEntityContextValue(updateTask);
 
   const { state, isModalOpen, onModalOpenChange } = contextValue;
 
   // wait for transition to finish
+
+  if (state.status === "error" && state.errorCode === "notFound") {
+    if (pathname === "/tasks") {
+      throw new Error(state.message, { cause: "taskNotFound" });
+    }
+
+    notFound();
+  }
+
   useShowToastOnActionSuccess(state);
   useCloseModalOnActionSuccess(state, onModalOpenChange);
   useShowToastOnActionErrorWhenModalClosed(state, isModalOpen);

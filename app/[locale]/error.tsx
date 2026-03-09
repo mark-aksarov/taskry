@@ -17,7 +17,7 @@ export default function Error({
       heading={t("heading")}
       description={t("description")}
       reset={reset}
-      resetButtonLabel={t("resetButtonLabel")}
+      resetButtonLabel={t("buttonLabel")}
       emptySectionClassName="max-w-[500px]"
     />
   );

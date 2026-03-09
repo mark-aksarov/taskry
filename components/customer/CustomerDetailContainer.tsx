@@ -23,7 +23,7 @@ export function CustomerDetailContainer({
 
   if (error) {
     if (error.status === 404) {
-      throw new Error(undefined, { cause: "notFound" });
+      throw new Error(undefined, { cause: "customerNotFound" });
     }
 
     throw new Error();

@@ -24,7 +24,7 @@ export function TaskDetailContainer({ taskId }: TaskDetailContainerProps) {
 
   if (error) {
     if (error.status === 404) {
-      throw new Error(undefined, { cause: "notFound" });
+      throw new Error(undefined, { cause: "taskNotFound" });
     }
 
     throw new Error();

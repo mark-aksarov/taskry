@@ -7,8 +7,8 @@ import {
 
 import useSWR from "swr";
 import { Repeat } from "../common/Repeat";
-import { notFound } from "next/navigation";
 import { usePathname } from "@/i18n/navigation";
+import { notFound, useParams } from "next/navigation";
 import { CommentListItemDTO } from "@/lib/data/comment/comment.dto";
 import { deleteComment } from "@/lib/actions/comment/deleteComment";
 import { CommentsEmptySection } from "@/components/comments/CommentsEmptySection";
@@ -21,6 +21,7 @@ export function ProjectCommentsContainer({
   projectId,
 }: ProjectCommentsContainerProps) {
   const pathname = usePathname();
+  const params = useParams();
 
   const { data: comments, error: commentsError } = useSWR<CommentListItemDTO[]>(
     `/api/projects/${projectId}/comments`,
@@ -31,15 +32,15 @@ export function ProjectCommentsContainer({
   );
 
   if (commentsError) {
-    if (pathname === "/projects") {
-      if (commentsError.status === 404) {
-        throw new Error(undefined, { cause: "notFound" });
+    if (commentsError.status === 404) {
+      if (pathname.startsWith("/projects") && params.id) {
+        notFound();
       }
 
-      throw new Error();
+      throw new Error(undefined, { cause: "projectNotFound" });
     }
 
-    notFound();
+    throw new Error();
   }
 
   // Show skeleton while loading or revalidating

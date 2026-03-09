@@ -1,10 +1,10 @@
 "use client";
 
 import useSWR from "swr";
-import { notFound } from "next/navigation";
 import { EditTaskForm } from "./EditTaskForm";
 import { usePathname } from "@/i18n/navigation";
 import { TaskFormSkeleton } from "./TaskFormSkeleton";
+import { notFound, useParams } from "next/navigation";
 import { CalendarDate } from "@internationalized/date";
 import { UserSummaryDTO } from "@/lib/data/user/user.dto";
 import { TaskFormDataDTO } from "@/lib/data/task/task.dto";
@@ -17,6 +17,7 @@ interface EditTaskFormContainerProps {
 
 export function EditTaskFormContainer({ taskId }: EditTaskFormContainerProps) {
   const pathname = usePathname();
+  const params = useParams();
 
   const { data: categories } = useSWR<TaskCategorySummaryDTO[]>(
     "/api/task-categories",
@@ -43,15 +44,15 @@ export function EditTaskFormContainer({ taskId }: EditTaskFormContainerProps) {
   });
 
   if (taskError) {
-    if (pathname === "/tasks") {
-      if (taskError.status === 404) {
-        throw new Error(undefined, { cause: "notFound" });
+    if (taskError.status === 404) {
+      if (pathname.startsWith("/tasks") && params.id) {
+        notFound();
       }
 
-      throw new Error();
+      throw new Error(undefined, { cause: "taskNotFound" });
     }
 
-    notFound();
+    throw new Error();
   }
 
   // Show skeleton while loading or revalidating

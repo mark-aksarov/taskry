@@ -1,9 +1,9 @@
 "use client";
 
 import useSWR from "swr";
-import { notFound } from "next/navigation";
 import { usePathname } from "@/i18n/navigation";
 import { EditProjectForm } from "./EditProjectForm";
+import { notFound, useParams } from "next/navigation";
 import { CalendarDate } from "@internationalized/date";
 import { ProjectFormSkeleton } from "./ProjectFormSkeleton";
 import { ProjectFormDataDTO } from "@/lib/data/project/project.dto";
@@ -18,6 +18,7 @@ export function EditProjectFormContainer({
   projectId,
 }: EditProjectFormContainerProps) {
   const pathname = usePathname();
+  const params = useParams();
 
   const { data: categories } = useSWR<ProjectCategorySummaryDTO[]>(
     `/api/project-categories`,
@@ -39,15 +40,15 @@ export function EditProjectFormContainer({
   });
 
   if (projectError) {
-    if (pathname === "/projects") {
-      if (projectError.status === 404) {
-        throw new Error(undefined, { cause: "notFound" });
+    if (projectError.status === 404) {
+      if (pathname.startsWith("/projects") && params.id) {
+        notFound();
       }
 
-      throw new Error();
+      throw new Error(undefined, { cause: "projectNotFound" });
     }
 
-    notFound();
+    throw new Error();
   }
 
   // Show skeleton while loading or revalidating

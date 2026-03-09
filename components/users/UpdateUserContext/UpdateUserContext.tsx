@@ -5,7 +5,9 @@ import {
   useUpdateEntityContextValue,
 } from "@/lib/hooks/useUpdateEntityContextValue";
 
+import { usePathname } from "@/i18n/navigation";
 import { useContext, createContext } from "react";
+import { notFound, useParams } from "next/navigation";
 import { ActionFn, ActionState } from "@/lib/actions/types";
 import { useShowToastOnActionSuccess } from "@/lib/hooks/useShowToastOnActionSuccess";
 import { useCloseModalOnActionSuccess } from "@/lib/hooks/useCloseModalOnActionSuccess";
@@ -22,9 +24,23 @@ export function UpdateUserProvider({
   updateUser,
   children,
 }: UpdateUserProviderProps) {
+  const pathname = usePathname();
+  const params = useParams();
   const contextValue = useUpdateEntityContextValue(updateUser);
 
   const { state, isModalOpen, onModalOpenChange } = contextValue;
+
+  // wait for transition to finish
+
+  if (state.status === "error" && state.errorCode === "notFound") {
+    if (
+      (pathname.startsWith("/team") && params.id) ||
+      pathname.startsWith("/profile")
+    ) {
+      notFound();
+    }
+    throw new Error(state.message, { cause: "userNotFound" });
+  }
 
   useShowToastOnActionSuccess(state);
   useCloseModalOnActionSuccess(state, onModalOpenChange);

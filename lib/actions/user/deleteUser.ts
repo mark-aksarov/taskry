@@ -3,6 +3,7 @@
 import { APIError } from "better-auth";
 import { userId } from "@/lib/schemas/user";
 import { redirect } from "@/i18n/navigation";
+import { NotFoundError } from "@/lib/data/utils/error";
 import { ActionState, DeleteUserPayload } from "../types";
 import { getLocale, getTranslations } from "next-intl/server";
 import { deleteUser as deleteUserService } from "@/lib/data/user/user.service";
@@ -22,6 +23,14 @@ export async function deleteUser(
     await deleteUserService(parsedId);
   } catch (error) {
     console.error("Server Action Error:", error);
+
+    if (error instanceof NotFoundError) {
+      return {
+        status: "error",
+        errorCode: "notFound",
+        message: t("user.common.error.notFound"),
+      };
+    }
 
     if (error instanceof APIError) {
       return {

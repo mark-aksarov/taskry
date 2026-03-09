@@ -30,7 +30,7 @@ export function UpdateCompanyProvider({
   // wait for transition to finish
 
   if (state.status === "error" && state.errorCode === "notFound") {
-    throw new Error(state.message, { cause: state.errorCode });
+    throw new Error(state.message, { cause: "companyNotFound" });
   }
 
   useShowToastOnActionSuccess(state);

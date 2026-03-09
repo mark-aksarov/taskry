@@ -20,7 +20,7 @@ export function ProjectDetailContainer({
 
   if (error) {
     if (error.status === 404) {
-      throw new Error(undefined, { cause: "notFound" });
+      throw new Error(undefined, { cause: "projectNotFound" });
     }
 
     throw new Error();

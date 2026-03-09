@@ -37,7 +37,7 @@ export function UpdateProjectStatusProvider({
   // wait for transition to finish
   if (state.status === "error" && state.errorCode === "notFound") {
     if (pathname === "/projects") {
-      throw new Error(state.message, { cause: state.errorCode });
+      throw new Error(state.message, { cause: "projectNotFound" });
     }
 
     notFound();

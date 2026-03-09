@@ -36,7 +36,7 @@ export function UpdateCustomerProvider({
 
   if (state.status === "error" && state.errorCode === "notFound") {
     if (pathname === "/customers") {
-      throw new Error(state.message, { cause: state.errorCode });
+      throw new Error(state.message, { cause: "customerNotFound" });
     }
 
     notFound();

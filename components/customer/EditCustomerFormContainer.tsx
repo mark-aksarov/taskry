@@ -1,9 +1,9 @@
 "use client";
 
 import useSWR from "swr";
-import { notFound } from "next/navigation";
 import { usePathname } from "@/i18n/navigation";
 import { EditCustomerForm } from "./EditCustomerForm";
+import { notFound, useParams } from "next/navigation";
 import { CustomerFormSkeleton } from "./CustomerFormSkeleton";
 import { CompanySummaryDTO } from "@/lib/data/company/company.dto";
 import { CustomerFormDataDTO } from "@/lib/data/customer/customer.dto";
@@ -16,6 +16,7 @@ export function EditCustomerFormContainer({
   customerId,
 }: EditCustomerFormContainerProps) {
   const pathname = usePathname();
+  const params = useParams();
 
   const { data: companies } = useSWR<CompanySummaryDTO[]>(`/api/companies`, {
     revalidateOnFocus: false,
@@ -30,15 +31,15 @@ export function EditCustomerFormContainer({
   });
 
   if (customerError) {
-    if (pathname === "/customers") {
-      if (customerError.status === 404) {
-        throw new Error(undefined, { cause: "notFound" });
+    if (customerError.status === 404) {
+      if (pathname.startsWith("/customers") && params.id) {
+        notFound();
       }
 
-      throw new Error();
+      throw new Error(undefined, { cause: "customerNotFound" });
     }
 
-    notFound();
+    throw new Error();
   }
 
   // Show skeleton while loading or revalidating

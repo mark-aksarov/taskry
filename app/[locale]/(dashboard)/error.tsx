@@ -1,204 +1,65 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { usePathname } from "@/i18n/navigation";
 import ErrorPageContainer from "@/components/layout/ErrorPageContainer";
+
+const routeConfig: Record<string, string> = {
+  companyNotFound: "app.CompaniesPage",
+  customerNotFound: "app.CustomersPage",
+  positionNotFound: "app.PositionsPage",
+  taskCategoryNotFound: "app.TaskCategoriesPage",
+  projectCategoryNotFound: "app.ProjectCategoriesPage",
+  projectNotFound: "app.ProjectsPage",
+  taskNotFound: "app.TasksPage",
+  userNotFound: "app.UsersPage",
+};
 
 export default function Error({
   error,
   reset,
 }: {
-  error: Error & { digest?: string };
+  error: Error & { digest?: string; cause?: unknown };
   reset: () => void;
 }) {
-  const pathname = usePathname();
+  // Safely extract cause
+  const cause = typeof error.cause === "string" ? error.cause : undefined;
 
-  if (pathname === "/companies") {
-    const t = useTranslations("app.CompaniesPage");
+  // Map cause → translation namespace
+  const namespace = routeConfig[cause ?? ""] ?? "app.ErrorPage";
+  const t = useTranslations(namespace as any);
 
-    if (error.cause === "notFound") {
-      return (
-        <ErrorPageContainer
-          reset={reset}
-          heading={t("error.notFound.heading")}
-          description={t("error.notFound.description")}
-          resetButtonLabel={t("error.notFound.buttonLabel")}
-        />
-      );
-    }
+  // Detect any “not found” error
+  const isNotFound =
+    cause === "notFound" || (cause?.endsWith("NotFound") ?? false);
 
-    return (
-      <ErrorPageContainer
-        reset={reset}
-        heading={t("error.common.heading")}
-        description={t("error.common.description")}
-        resetButtonLabel={t("error.common.buttonLabel")}
-      />
-    );
-  } else if (pathname === "/customers") {
-    const t = useTranslations("app.CustomersPage");
+  // Generic fallback namespace
+  const isGeneric = namespace === "app.ErrorPage";
 
-    if (error.cause === "notFound") {
-      return (
-        <ErrorPageContainer
-          reset={reset}
-          heading={t("error.notFound.heading")}
-          description={t("error.notFound.description")}
-          resetButtonLabel={t("error.notFound.buttonLabel")}
-        />
-      );
-    }
+  // Translation keys
+  const headingKey = isGeneric
+    ? "heading"
+    : isNotFound
+      ? "error.notFound.heading"
+      : "error.common.heading";
 
-    return (
-      <ErrorPageContainer
-        reset={reset}
-        heading={t("error.common.heading")}
-        description={t("error.common.description")}
-        resetButtonLabel={t("error.common.buttonLabel")}
-      />
-    );
-  } else if (pathname === "/positions") {
-    const t = useTranslations("app.PositionsPage");
+  const descriptionKey = isGeneric
+    ? "description"
+    : isNotFound
+      ? "error.notFound.description"
+      : "error.common.description";
 
-    if (error.cause === "notFound") {
-      return (
-        <ErrorPageContainer
-          reset={reset}
-          heading={t("error.notFound.heading")}
-          description={t("error.notFound.description")}
-          resetButtonLabel={t("error.notFound.buttonLabel")}
-        />
-      );
-    }
-
-    return (
-      <ErrorPageContainer
-        reset={reset}
-        heading={t("error.common.heading")}
-        description={t("error.common.description")}
-        resetButtonLabel={t("error.common.buttonLabel")}
-      />
-    );
-  } else if (pathname === "/task-categories") {
-    const t = useTranslations("app.TaskCategoriesPage");
-
-    if (error.cause === "notFound") {
-      return (
-        <ErrorPageContainer
-          reset={reset}
-          heading={t("error.notFound.heading")}
-          description={t("error.notFound.description")}
-          resetButtonLabel={t("error.notFound.buttonLabel")}
-        />
-      );
-    }
-
-    return (
-      <ErrorPageContainer
-        reset={reset}
-        heading={t("error.common.heading")}
-        description={t("error.common.description")}
-        resetButtonLabel={t("error.common.buttonLabel")}
-      />
-    );
-  } else if (pathname === "/project-categories") {
-    const t = useTranslations("app.ProjectCategoriesPage");
-
-    if (error.cause === "notFound") {
-      return (
-        <ErrorPageContainer
-          reset={reset}
-          heading={t("error.notFound.heading")}
-          description={t("error.notFound.description")}
-          resetButtonLabel={t("error.notFound.buttonLabel")}
-        />
-      );
-    }
-
-    return (
-      <ErrorPageContainer
-        reset={reset}
-        heading={t("error.common.heading")}
-        description={t("error.common.description")}
-        resetButtonLabel={t("error.common.buttonLabel")}
-      />
-    );
-  } else if (pathname === "/projects") {
-    const t = useTranslations("app.ProjectsPage");
-
-    if (error.cause === "notFound") {
-      return (
-        <ErrorPageContainer
-          reset={reset}
-          heading={t("error.notFound.heading")}
-          description={t("error.notFound.description")}
-          resetButtonLabel={t("error.notFound.buttonLabel")}
-        />
-      );
-    }
-
-    return (
-      <ErrorPageContainer
-        reset={reset}
-        heading={t("error.common.heading")}
-        description={t("error.common.description")}
-        resetButtonLabel={t("error.common.buttonLabel")}
-      />
-    );
-  } else if (pathname === "/tasks") {
-    const t = useTranslations("app.TasksPage");
-
-    if (error.cause === "notFound") {
-      return (
-        <ErrorPageContainer
-          reset={reset}
-          heading={t("error.notFound.heading")}
-          description={t("error.notFound.description")}
-          resetButtonLabel={t("error.notFound.buttonLabel")}
-        />
-      );
-    }
-
-    return (
-      <ErrorPageContainer
-        reset={reset}
-        heading={t("error.common.heading")}
-        description={t("error.common.description")}
-        resetButtonLabel={t("error.common.buttonLabel")}
-      />
-    );
-  } else if (pathname === "/team") {
-    const t = useTranslations("app.TasksPage");
-
-    if (error.cause === "notFound") {
-      return (
-        <ErrorPageContainer
-          reset={reset}
-          heading={t("error.notFound.heading")}
-          description={t("error.notFound.description")}
-          resetButtonLabel={t("error.notFound.buttonLabel")}
-        />
-      );
-    }
-
-    return (
-      <ErrorPageContainer
-        reset={reset}
-        heading={t("error.common.heading")}
-        description={t("error.common.description")}
-        resetButtonLabel={t("error.common.buttonLabel")}
-      />
-    );
-  }
-
-  const t = useTranslations("app.ErrorPage");
+  const buttonKey = isGeneric
+    ? "buttonLabel"
+    : isNotFound
+      ? "error.notFound.buttonLabel"
+      : "error.common.buttonLabel";
 
   return (
     <ErrorPageContainer
       reset={reset}
-      heading={t("heading")}
-      description={t("description")}
-      resetButtonLabel={t("resetButtonLabel")}
+      heading={t(headingKey as never)}
+      description={t(descriptionKey as never)}
+      resetButtonLabel={t(buttonKey as never)}
     />
   );
 }

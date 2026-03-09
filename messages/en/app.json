@@ -9,12 +9,12 @@
       "common": {
         "heading": "Project category error",
         "description": "An error occurred while handling project category data. Please try again.",
-        "buttonLabel": "Back to project categories"
+        "buttonLabel": "Refresh page"
       },
       "notFound": {
         "heading": "Project Category Not Found",
         "description": "The project category does not exist. It may have been deleted by another user.",
-        "buttonLabel": "Back to project categories"
+        "buttonLabel": "Refresh page"
       }
     }
   },
@@ -24,9 +24,9 @@
   "ErrorPage": {
     "heading": "Something went wrong",
     "description": "We encountered an unexpected error. Please try refreshing the page or contact support if the issue persists.",
-    "resetButtonLabel": "Refresh page"
+    "buttonLabel": "Refresh page"
   },
-  "DashboardNotFoundPage": {
+  "NotFoundPage": {
     "heading": "Page not found",
     "description": "The page you are looking for doesn’t exist or has been moved. Please check the URL or return to the homepage.",
     "toHome": "To home"
@@ -75,12 +75,12 @@
       "common": {
         "heading": "Project Error",
         "description": "An error occurred while handling project data. Please try again.",
-        "buttonLabel": "Back to Projects"
+        "buttonLabel": "Refresh page"
       },
       "notFound": {
         "heading": "Project Not Found",
         "description": "The project does not exist. It may have been deleted by another user.",
-        "buttonLabel": "Back to Projects"
+        "buttonLabel": "Refresh page"
       }
     }
   },
@@ -94,12 +94,12 @@
       "common": {
         "heading": "Task error",
         "description": "An error occurred while handling task data. Please try again.",
-        "buttonLabel": "Back to tasks"
+        "buttonLabel": "Refresh page"
       },
       "notFound": {
         "heading": "Task not found",
         "description": "The task does not exist. It may have been deleted by another user.",
-        "buttonLabel": "Back to tasks"
+        "buttonLabel": "Refresh page"
       }
     }
   },
@@ -113,12 +113,12 @@
       "common": {
         "heading": "Customer error",
         "description": "An error occurred while handling customer data. Please try again.",
-        "buttonLabel": "Back to customers"
+        "buttonLabel": "Refresh page"
       },
       "notFound": {
         "heading": "Customer not found",
         "description": "The customer does not exist. It may have been deleted by another user.",
-        "buttonLabel": "Back to customers"
+        "buttonLabel": "Refresh page"
       }
     }
   },
@@ -139,13 +139,7 @@
     "title": "All Tasks"
   },
   "TaskDetailPage": {
-    "heading": "Task Details",
-
-    "notFound": {
-      "heading": "Task not found",
-      "description": "The task does not exist or was deleted by another user.",
-      "toTasks": "Back to tasks"
-    }
+    "heading": "Task Details"
   },
   "UsersPageLoading": {
     "title": "Team"
@@ -160,12 +154,12 @@
       "common": {
         "heading": "User error",
         "description": "An error occurred while handling user data. Please try again.",
-        "buttonLabel": "Back to users"
+        "buttonLabel": "Refresh page"
       },
       "notFound": {
         "heading": "User not found",
         "description": "The user does not exist. It may have been deleted by another user.",
-        "buttonLabel": "Back to users"
+        "buttonLabel": "Refresh page"
       }
     }
   },
@@ -174,7 +168,7 @@
     "notFound": {
       "heading": "User not found",
       "description": "The user does not exist or was deleted by another user.",
-      "toUsers": "Back to team"
+      "buttonLabel": "Refresh page"
     }
   },
   "ProjectCategoriesPageLoading": {
@@ -190,12 +184,12 @@
       "common": {
         "heading": "Task Category Error",
         "description": "An error occurred while handling task category data. Please try again.",
-        "buttonLabel": "Back to Task Categories"
+        "buttonLabel": "Обновить страницу"
       },
       "notFound": {
-        "heading": "Task Category Not Found",
+        "heading": "Task category not Found",
         "description": "The task category does not exist. It may have been deleted by another user.",
-        "buttonLabel": "Back to Task Categories"
+        "buttonLabel": "Обновить страницу"
       }
     }
   },
@@ -212,12 +206,12 @@
       "common": {
         "heading": "Companies error",
         "description": "An error occurred while handling companies data. Please try again.",
-        "buttonLabel": "Back to companies"
+        "buttonLabel": "Обновить страницу"
       },
       "notFound": {
         "heading": "Company not found",
         "description": "This company does not exist. It may have been deleted by another user.",
-        "buttonLabel": "Back to companies"
+        "buttonLabel": "Обновить страницу"
       }
     }
   },

@@ -7,60 +7,55 @@ import NotFoundPageContainer from "@/components/layout/NotFoundPageContainer";
 export default function NotFound() {
   const pathname = usePathname();
 
-  if (pathname.startsWith("/customers")) {
-    const t = useTranslations("app.CustomersPage");
+  const routeConfig = [
+    {
+      match: (p: string) => p.startsWith("/customers"),
+      namespace: "app.CustomersPage",
+      linkHref: "/customers",
+    },
+    {
+      match: (p: string) => p.startsWith("/projects"),
+      namespace: "app.ProjectsPage",
+      linkHref: "/projects",
+    },
+    {
+      match: (p: string) => p.startsWith("/tasks"),
+      namespace: "app.TasksPage",
+      linkHref: "/tasks",
+    },
+    {
+      match: (p: string) => p.startsWith("/team") || p.startsWith("/profile"),
+      namespace: "app.UsersPage",
+      linkHref: "/team",
+    },
+  ];
 
-    return (
-      <NotFoundPageContainer
-        heading={t("error.notFound.heading")}
-        description={t("error.notFound.description")}
-        linkHref="/customers"
-        linkLabel={t("error.notFound.buttonLabel")}
-      />
-    );
-  } else if (pathname.startsWith("/projects")) {
-    const t = useTranslations("app.ProjectsPage");
+  // Default values
+  let namespace = "app.NotFoundPage";
+  let linkHref = "/";
+  let headingKey = "heading";
+  let descriptionKey = "description";
+  let buttonKey = "toHome";
 
-    return (
-      <NotFoundPageContainer
-        heading={t("error.notFound.heading")}
-        description={t("error.notFound.description")}
-        linkHref="/projects"
-        linkLabel={t("error.notFound.buttonLabel")}
-      />
-    );
-  } else if (pathname.includes("tasks")) {
-    const t = useTranslations("app.TasksPage");
+  // Find matching config
+  const matched = routeConfig.find((cfg) => cfg.match(pathname));
 
-    return (
-      <NotFoundPageContainer
-        heading={t("error.notFound.heading")}
-        description={t("error.notFound.description")}
-        linkHref="/projects"
-        linkLabel={t("error.notFound.buttonLabel")}
-      />
-    );
-  } else if (pathname.startsWith("/team") || pathname.startsWith("/profile")) {
-    const t = useTranslations("app.UsersPage");
-
-    return (
-      <NotFoundPageContainer
-        heading={t("error.notFound.heading")}
-        description={t("error.notFound.description")}
-        linkHref="/projects"
-        linkLabel={t("error.notFound.buttonLabel")}
-      />
-    );
+  if (matched) {
+    namespace = matched.namespace;
+    linkHref = matched.linkHref;
+    headingKey = "error.notFound.heading";
+    descriptionKey = "error.notFound.description";
+    buttonKey = "error.notFound.buttonLabel";
   }
 
-  const t = useTranslations("app.DashboardNotFoundPage");
+  const t = useTranslations(namespace as any);
 
   return (
     <NotFoundPageContainer
-      heading={t("heading")}
-      description={t("description")}
-      linkHref="/"
-      linkLabel={t("toHome")}
+      heading={t(headingKey as never)}
+      description={t(descriptionKey as never)}
+      linkHref={linkHref}
+      linkLabel={t(buttonKey as never)}
     />
   );
 }

@@ -5,6 +5,7 @@ import {
   useUpdateEntityContextValue,
 } from "@/lib/hooks/useUpdateEntityContextValue";
 
+import { notFound } from "next/navigation";
 import { createContext, useContext } from "react";
 import { ActionFn, ActionState } from "@/lib/actions/types";
 import { useShowToastOnActionSuccess } from "@/lib/hooks/useShowToastOnActionSuccess";
@@ -27,6 +28,12 @@ export function ChangePasswordProvider({
   const contextValue = useUpdateEntityContextValue(changePassword);
 
   const { state, isModalOpen, onModalOpenChange } = contextValue;
+
+  // wait for transition to finish
+
+  if (state.status === "error" && state.errorCode === "notFound") {
+    notFound();
+  }
 
   useShowToastOnActionSuccess(state);
   useCloseModalOnActionSuccess(state, onModalOpenChange);

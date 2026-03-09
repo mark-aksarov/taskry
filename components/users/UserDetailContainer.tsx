@@ -19,7 +19,7 @@ export function UserDetailContainer({ userId }: UserDetailContainerProps) {
 
   if (error) {
     if (error.status === 404) {
-      throw new Error(undefined, { cause: "notFound" });
+      throw new Error(undefined, { cause: "userNotFound" });
     }
 
     throw new Error();

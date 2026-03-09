@@ -11,6 +11,8 @@ import {
   useUpdateEntityStatusContextValue,
 } from "@/lib/hooks/useUpdateEntityStatusContextValue";
 
+import { notFound } from "next/navigation";
+import { usePathname } from "@/i18n/navigation";
 import { useContext, createContext } from "react";
 import { useShowToastOnActionError } from "@/lib/hooks/useShowToastOnActionError";
 
@@ -26,11 +28,22 @@ export function UpdateTaskStatusProvider({
   updateTaskStatus,
   children,
 }: UpdateTaskStatusProviderProps) {
+  const pathname = usePathname();
+
   const contextValue = useUpdateEntityStatusContextValue(updateTaskStatus);
 
   const { state } = contextValue;
 
   // wait for transition to finish
+
+  if (state.status === "error" && state.errorCode === "notFound") {
+    if (pathname === "/tasks") {
+      throw new Error(state.message, { cause: "taskNotFound" });
+    }
+
+    notFound();
+  }
+
   useShowToastOnActionError(state);
 
   return (

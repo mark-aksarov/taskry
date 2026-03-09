@@ -60,7 +60,9 @@ export function UserTasksPageLayout({
           navigationMobile={navigationMobile}
         />
 
+        <ChangePasswordModal userId={userId} />
         <NewTaskModal newTaskFormContainer={newTaskFormContainer} />
+        <EditUserModal editUserFormContainer={editUserFormContainer} />
       </>
     );
   }
@@ -106,7 +108,6 @@ export function UserTasksPageLayout({
       </PageContainer>
 
       <ChangePasswordModal userId={userId} />
-
       <NewTaskModal newTaskFormContainer={newTaskFormContainer} />
       <EditUserModal editUserFormContainer={editUserFormContainer} />
     </>
