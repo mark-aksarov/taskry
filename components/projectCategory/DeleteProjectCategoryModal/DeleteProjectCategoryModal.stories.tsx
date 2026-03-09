@@ -5,12 +5,14 @@ import { withToastRegion } from "@/.storybook/withToastRegion";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { DeleteProjectCategoryModal } from "../DeleteProjectCategoryModal";
 import { withDeleteProjectCategoryProvider } from "../DeleteProjectCategoryContext/__stories__";
+import { withSelectedItemsProvider } from "@/components/common/SelectedItemsContext/__stories__";
 
 const meta = {
   title: "components/project-categories/DeleteProjectCategoryModal",
   component: DeleteProjectCategoryModal,
   decorators: [
     withDeleteProjectCategoryProvider,
+    withSelectedItemsProvider,
     withToastRegion,
     withThemedBackground,
   ],

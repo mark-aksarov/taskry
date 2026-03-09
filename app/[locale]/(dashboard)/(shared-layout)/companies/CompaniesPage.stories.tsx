@@ -7,16 +7,22 @@ import { PageDecorator } from "@/.storybook/PageDecorator";
 import { CompanyList } from "@/components/company/CompanyList";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { CompanyListStory } from "@/components/company/CompanyList/__stories__";
+import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 import { withSelectedItemsProvider } from "@/components/common/SelectedItemsContext/__stories__";
 import { withPageTransitionProvider } from "@/components/common/PageTransitionContext/__stories__";
+import { withDeleteCompaniesProvider } from "@/components/company/DeleteCompaniesContext/__stories__";
+import { withCreateCompanyProvider } from "@/components/company/CreateCompanyContext/__stories__";
 
 const meta = {
   title: "pages/CompaniesPage",
   component: CompaniesPage,
   parameters: { layout: "fullscreen" },
   decorators: [
+    withCreateCompanyProvider,
+    withDeleteCompaniesProvider,
     withPageTransitionProvider,
     withSelectedItemsProvider,
+    withCurrentUserProvider,
     PageDecorator,
     withThemedBackground,
   ],

@@ -7,12 +7,20 @@ import { CustomerDetailHeader } from "../CustomerDetailHeader";
 import { CustomerDetailActions } from "../CustomerDetailActions";
 import { DetailHeaderSkeleton } from "@/components/common/DetailHeader";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { withDeleteCustomerProvider } from "../DeleteCustomerContext/__stories__";
+import { withUpdateCustomerProvider } from "../UpdateCustomerContext/__stories__";
+import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 import { customerDetailActionsArgs } from "@/components/customer/CustomerDetailActions/__stories__";
 
 const meta = {
   title: "components/customers/CustomerDetailCard",
   component: CustomerDetailCard,
-  decorators: [withThemedBackground],
+  decorators: [
+    withThemedBackground,
+    withCurrentUserProvider,
+    withUpdateCustomerProvider,
+    withDeleteCustomerProvider,
+  ],
 } satisfies Meta<typeof CustomerDetailCard>;
 
 export default meta;

@@ -1,1 +1,1 @@
-export { withDeleteProjectProvider } from "./withDeleteProjectProvider";
+export { withUpdateProjectStatusProvider } from "./withUpdateProjectStatusProvider";

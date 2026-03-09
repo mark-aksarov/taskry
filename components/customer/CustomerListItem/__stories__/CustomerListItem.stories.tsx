@@ -5,12 +5,21 @@ import { mockedCustomerDetail } from "@/mocks/customers";
 import { EditCustomerForm } from "../../EditCustomerForm";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { editCustomerFormArgs } from "../../EditCustomerForm/__stories__";
+import { withCustomerItemProviders } from "../../CustomerItem/__stories__";
+import { withDeleteCustomersProvider } from "../../DeleteCustomersContext/__stories__";
+import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 import { withSelectedItemsProvider } from "@/components/common/SelectedItemsContext/__stories__";
 
 const meta = {
   title: "components/customers/CustomerListItem",
   component: CustomerListItem,
-  decorators: [withSelectedItemsProvider, withThemedBackground],
+  decorators: [
+    withCustomerItemProviders,
+    withDeleteCustomersProvider,
+    withSelectedItemsProvider,
+    withCurrentUserProvider,
+    withThemedBackground,
+  ],
 } satisfies Meta<typeof CustomerListItem>;
 
 export default meta;

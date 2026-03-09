@@ -1,27 +1,31 @@
-import { useState } from "react";
+import { useEffect } from "react";
 import { NewTaskForm } from "../NewTaskForm";
 import { NewTaskModal } from "./NewTaskModal";
 import { Button } from "@/components/ui/Button";
-import { DialogTrigger } from "react-aria-components";
+import { useCreateTask } from "../CreateTaskContext";
 import { TaskFormSkeleton } from "../TaskFormSkeleton";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { newTaskFormArgs } from "../NewTaskForm/__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { withCreateTaskProvider } from "../CreateTaskContext/__stories__";
 
 const meta = {
   title: "components/tasks/NewTaskModal",
   component: NewTaskModal,
   decorators: [
     (Story) => {
-      const [isOpen, setIsOpen] = useState(true);
+      const { onModalOpenChange } = useCreateTask();
+
+      useEffect(() => onModalOpenChange(true), [onModalOpenChange]);
 
       return (
-        <DialogTrigger isOpen={isOpen} onOpenChange={setIsOpen}>
-          <Button label="New task" />
+        <>
+          <Button label="New task" onClick={() => onModalOpenChange(true)} />
           <Story />
-        </DialogTrigger>
+        </>
       );
     },
+    withCreateTaskProvider,
     withThemedBackground,
   ],
 } satisfies Meta<typeof NewTaskModal>;

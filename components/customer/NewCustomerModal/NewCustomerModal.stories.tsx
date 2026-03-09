@@ -1,27 +1,34 @@
+import { useEffect } from "react";
 import { Button } from "@/components/ui/Button";
 import { NewCustomerForm } from "../NewCustomerForm";
-import { DialogTrigger } from "react-aria-components";
 import { NewCustomerModal } from "./NewCustomerModal";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { mockedCompanySummaries } from "@/mocks/companies";
+import { useCreateCustomer } from "../CreateCustomerContext";
 import { CustomerFormSkeleton } from "../CustomerFormSkeleton";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { useState } from "react";
+import { withCreateCustomerProvider } from "../CreateCustomerContext/__stories__";
 
 const meta = {
   title: "components/customers/NewCustomerModal",
   component: NewCustomerModal,
   decorators: [
     (Story) => {
-      const [isOpen, setIsOpen] = useState(true);
+      const { onModalOpenChange } = useCreateCustomer();
+
+      useEffect(() => onModalOpenChange(true), [onModalOpenChange]);
 
       return (
-        <DialogTrigger isOpen={isOpen} onOpenChange={setIsOpen}>
-          <Button label="New customer" />
+        <>
+          <Button
+            label="New customer"
+            onClick={() => onModalOpenChange(true)}
+          />
           <Story />
-        </DialogTrigger>
+        </>
       );
     },
+    withCreateCustomerProvider,
     withThemedBackground,
   ],
 } satisfies Meta<typeof NewCustomerModal>;

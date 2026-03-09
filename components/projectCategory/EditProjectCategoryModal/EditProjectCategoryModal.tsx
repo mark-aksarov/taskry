@@ -7,27 +7,26 @@ import {
 import { useTranslations } from "next-intl";
 import { DialogHeader } from "@/components/ui/Dialog";
 import { EditProjectCategoryForm } from "../EditProjectCategoryForm";
+import { useUpdateProjectCategory } from "../UpdateProjectCategoryContext";
 
 interface EditProjectCategoryModalProps {
   projectCategoryId: number;
   projectCategoryName: string;
-  isOpen: boolean;
-  onOpenChange: (open: boolean) => void;
 }
 
 export function EditProjectCategoryModal({
   projectCategoryId,
   projectCategoryName,
-  isOpen,
-  onOpenChange,
 }: EditProjectCategoryModalProps) {
   const t = useTranslations("projectCategories.EditProjectCategoryModal");
+
+  const { isModalOpen, onModalOpenChange } = useUpdateProjectCategory();
 
   return (
     <FormBaseModal
       className="md:w-[350px]"
-      isOpen={isOpen}
-      onOpenChange={onOpenChange}
+      isOpen={isModalOpen}
+      onOpenChange={onModalOpenChange}
     >
       <FormBaseModalDialog>
         <DialogHeader>{t("title")}</DialogHeader>

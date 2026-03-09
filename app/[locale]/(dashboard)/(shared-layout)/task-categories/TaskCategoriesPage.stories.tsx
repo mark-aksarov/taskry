@@ -6,23 +6,28 @@ import { TaskCategoriesPage } from "./TaskCategoriesPage";
 import { PageDecorator } from "@/.storybook/PageDecorator";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { TaskCategoryList } from "@/components/taskCategory/TaskCategoryList";
+import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 import { TaskCategoryListStory } from "@/components/taskCategory/TaskCategoryList/__stories__";
 import { withSelectedItemsProvider } from "@/components/common/SelectedItemsContext/__stories__";
 import { withPageTransitionProvider } from "@/components/common/PageTransitionContext/__stories__";
+import { withCreateTaskCategoryProvider } from "@/components/taskCategory/CreateTaskCategoryContext/__stories__";
+import { withDeleteTaskCategoriesProvider } from "@/components/taskCategory/DeleteTaskCategoriesContext/__stories__";
 
 const meta = {
   title: "pages/TaskCategoriesPage",
   component: TaskCategoriesPage,
   parameters: { layout: "fullscreen" },
   decorators: [
+    withCreateTaskCategoryProvider,
+    withDeleteTaskCategoriesProvider,
     withPageTransitionProvider,
     withSelectedItemsProvider,
+    withCurrentUserProvider,
     PageDecorator,
     withThemedBackground,
   ],
   beforeEach: () => {
     mocked(usePathname).mockReturnValue("/task-categories");
-    mocked(useRouter).mockReturnValue({ push: fn() } as any);
   },
 } satisfies Meta<typeof TaskCategoriesPage>;
 

@@ -4,30 +4,38 @@ import { fn, mocked } from "storybook/test";
 import { UserList } from "@/components/users/UserList";
 import { UserGrid } from "@/components/users/UserGrid";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname, useParams } from "next/navigation";
 import { PageDecorator } from "@/.storybook/PageDecorator";
 import { mockedPositionSummaries } from "@/mocks/positions";
 import { UserFiltersForm } from "@/components/users/UserFiltersForm";
 import { UserListStory } from "@/components/users/UserList/__stories__";
 import { UserGridStory } from "@/components/users/UserGrid/__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { withCreateUserProvider } from "@/components/users/CreateUserContext/__stories__";
+import { withUserFiltersProvider } from "@/components/users/UserFiltersContext/__stories__";
+import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 import { EntityContainerPresentation } from "@/components/common/EntityContainerPresentation";
 import { withSelectedTasksProvider } from "@/components/tasks/SelectedTasksContext/__stories__";
 import { withPageTransitionProvider } from "@/components/common/PageTransitionContext/__stories__";
+import { withCreatePositionProvider } from "@/components/position/CreatePositionContext/__stories__";
 
 const meta = {
   title: "pages/UsersPage",
   component: UsersPage,
   parameters: { layout: "fullscreen" },
   decorators: [
+    withUserFiltersProvider,
+    withCreateUserProvider,
+    withCreatePositionProvider,
     withPageTransitionProvider,
     withSelectedTasksProvider,
+    withCurrentUserProvider,
     PageDecorator,
     withThemedBackground,
   ],
   beforeEach: () => {
     mocked(usePathname).mockReturnValue("/team");
-    mocked(useRouter).mockReturnValue({ push: fn() } as any);
+    mocked(useParams).mockReturnValue({ push: fn() } as any);
   },
 } satisfies Meta<typeof UsersPage>;
 

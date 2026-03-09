@@ -7,6 +7,9 @@ import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { getSubtasksList } from "../../TaskDetail/__stories__";
 import { TaskDetail, TaskDetailSkeleton } from "../../TaskDetail";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
+import { withCreateSubtaskProvider } from "@/components/subtasks/CreateSubtaskContext/__stories__";
+import { NewSubtaskModal } from "@/components/subtasks/NewSubtaskModal";
 
 const meta = {
   title: "components/tasks/TaskDetailModal",
@@ -19,9 +22,13 @@ const meta = {
         <DialogTrigger isOpen={isOpen} onOpenChange={setIsOpen}>
           <Button label="Task detail" />
           <Story />
+
+          <NewSubtaskModal taskId={1} />
         </DialogTrigger>
       );
     },
+    withCreateSubtaskProvider,
+    withCurrentUserProvider,
     withThemedBackground,
   ],
 } satisfies Meta<typeof TaskDetailModal>;

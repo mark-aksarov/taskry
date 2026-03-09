@@ -1,0 +1,1 @@
+export { withChangePasswordProvider } from "./withChangePasswordProvider";

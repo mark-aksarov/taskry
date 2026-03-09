@@ -1,11 +1,12 @@
 import { SubtaskListItem } from "../SubtaskListItem";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 
 const meta = {
   title: "components/subtasks/SubtaskListItem",
   component: SubtaskListItem,
-  decorators: [withThemedBackground],
+  decorators: [withCurrentUserProvider, withThemedBackground],
   parameters: {
     backgroundVariant: "alt",
   },

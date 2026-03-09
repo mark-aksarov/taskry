@@ -4,12 +4,18 @@ import { mockedUserDetail } from "@/mocks/users";
 import { EditUserForm } from "../../EditUserForm";
 import type { Meta, StoryObj } from "@storybook/react";
 import { editUserFormArgs } from "../../EditUserForm/__stories__";
+import { withUserItemProviders } from "../../UserItem/__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 
 const meta = {
   title: "components/users/UserListItem",
   component: UserListItem,
-  decorators: [withThemedBackground],
+  decorators: [
+    withUserItemProviders,
+    withCurrentUserProvider,
+    withThemedBackground,
+  ],
 } satisfies Meta<typeof UserListItem>;
 
 export default meta;

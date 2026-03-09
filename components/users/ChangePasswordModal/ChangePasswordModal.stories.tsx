@@ -1,24 +1,31 @@
-import { useState } from "react";
 import { Button } from "@/components/ui/Button";
-import { DialogTrigger } from "react-aria-components";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { ChangePasswordModal } from "./ChangePasswordModal";
+import { useChangePassword } from "../ChangePasswordContext";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { withChangePasswordProvider } from "../ChangePasswordContext/__stories__";
+import { useEffect } from "react";
 
 const meta = {
   title: "components/users/ChangePasswordModal",
   component: ChangePasswordModal,
   decorators: [
     (Story) => {
-      const [isOpen, setIsOpen] = useState(true);
+      const { onModalOpenChange } = useChangePassword();
+
+      useEffect(() => onModalOpenChange(true), [onModalOpenChange]);
 
       return (
-        <DialogTrigger isOpen={isOpen} onOpenChange={setIsOpen}>
-          <Button label="Change password" />
+        <>
+          <Button
+            label="Change password"
+            onClick={() => onModalOpenChange(true)}
+          />
           <Story />
-        </DialogTrigger>
+        </>
       );
     },
+    withChangePasswordProvider,
     withThemedBackground,
   ],
 } satisfies Meta<typeof ChangePasswordModal>;

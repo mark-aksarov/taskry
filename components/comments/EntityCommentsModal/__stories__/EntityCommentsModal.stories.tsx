@@ -8,7 +8,10 @@ import { EntityCommentsModal } from "../EntityCommentsModal";
 import { getCommentList } from "../../CommentList/__stories__";
 import { CommentsEmptySection } from "../../CommentsEmptySection";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withCommentFormProvider } from "@/components/comments/CommentForm/__stories__/withCommentFormProvider";
+import { withSendCommentProvider } from "../../SendCommentContext/__stories__";
+import { withUpdateCommentProvider } from "../../UpdateCommentContext/__stories__";
+import { withCommentFormProvider } from "@/components/comments/CommentForm/__stories__";
+import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 
 const meta = {
   title: "components/comments/EntityCommentsModal",
@@ -24,6 +27,9 @@ const meta = {
         </DialogTrigger>
       );
     },
+    withCurrentUserProvider,
+    withUpdateCommentProvider,
+    withSendCommentProvider,
     withCommentFormProvider,
     withThemedBackground,
   ],

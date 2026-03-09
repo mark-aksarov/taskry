@@ -10,13 +10,8 @@ import {
 import { TaskListItem } from "../TaskListItem";
 import { TaskGridItem } from "../TaskGridItem";
 import { TaskStatus } from "@/generated/prisma/enums";
-import { DeleteTaskProvider } from "../DeleteTaskContext";
-import { UpdateTaskProvider } from "../UpdateTaskContext";
-import { useSelectedTasks } from "../SelectedTasksContext";
+import { TaskItemProviders } from "./TaskItemProviders";
 import { useViewMode } from "@/components/common/ViewMode";
-import { TaskItemPendingOverlay } from "./TaskItemPendingOverlay";
-import { SelectableItem } from "@/components/common/SelectableItem";
-import { UpdateTaskStatusProvider } from "../UpdateTaskStatusContext";
 
 export interface TaskItemProps {
   id: number;
@@ -59,27 +54,21 @@ export function TaskItem({
   updateTaskStatus,
   ...props
 }: TaskItemProps) {
-  const selected = useSelectedTasks();
   const { viewMode } = useViewMode();
 
   return (
-    <DeleteTaskProvider deleteTask={deleteTask}>
-      <UpdateTaskProvider updateTask={updateTask}>
-        <UpdateTaskStatusProvider updateTaskStatus={updateTaskStatus}>
-          <TaskItemPendingOverlay taskId={props.id}>
-            <SelectableItem
-              {...selected}
-              item={{ id: props.id, status: props.status }}
-            >
-              {viewMode === "grid" ? (
-                <TaskGridItem {...props} />
-              ) : (
-                <TaskListItem {...props} />
-              )}
-            </SelectableItem>
-          </TaskItemPendingOverlay>
-        </UpdateTaskStatusProvider>
-      </UpdateTaskProvider>
-    </DeleteTaskProvider>
+    <TaskItemProviders
+      taskId={props.id}
+      taskStatus={props.status}
+      deleteTask={deleteTask}
+      updateTask={updateTask}
+      updateTaskStatus={updateTaskStatus}
+    >
+      {viewMode === "grid" ? (
+        <TaskGridItem {...props} />
+      ) : (
+        <TaskListItem {...props} />
+      )}
+    </TaskItemProviders>
   );
 }

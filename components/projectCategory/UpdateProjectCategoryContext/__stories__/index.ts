@@ -1,0 +1,1 @@
+export { withUpdateProjectCategoryProvider } from "./withUpdateProjectCategoryProvider";

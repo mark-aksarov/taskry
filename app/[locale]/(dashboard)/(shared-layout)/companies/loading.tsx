@@ -38,7 +38,7 @@ export default function CompaniesPageLoading() {
         </ToolbarMobileBottom>
 
         <List>
-          <Repeat items={20} renderItem={CompanyListItemSkeleton} />
+          <Repeat items={10} renderItem={CompanyListItemSkeleton} />
         </List>
       </PageGrid>
     </PageContainer>

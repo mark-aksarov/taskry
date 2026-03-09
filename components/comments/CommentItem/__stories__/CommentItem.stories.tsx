@@ -1,12 +1,21 @@
 import { CommentItem } from "../CommentItem";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { withCommentFormProvider } from "../../CommentForm/__stories__/withCommentFormProvider";
+import { withCommentFormProvider } from "../../CommentForm/__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { withSendCommentProvider } from "../../SendCommentContext/__stories__";
+import { withUpdateCommentProvider } from "../../UpdateCommentContext/__stories__";
+import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 
 const meta = {
   title: "components/comments/CommentItem",
   component: CommentItem,
-  decorators: [withCommentFormProvider, withThemedBackground],
+  decorators: [
+    withCurrentUserProvider,
+    withUpdateCommentProvider,
+    withSendCommentProvider,
+    withCommentFormProvider,
+    withThemedBackground,
+  ],
   parameters: {
     backgroundVariant: "alt",
   },

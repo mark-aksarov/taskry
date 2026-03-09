@@ -4,7 +4,7 @@ import { fn, mocked } from "storybook/test";
 import { TaskList } from "@/components/tasks/TaskList";
 import { TaskGrid } from "@/components/tasks/TaskGrid";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { usePathname, useRouter } from "next/navigation";
+import { useParams, usePathname } from "next/navigation";
 import { PageDecorator } from "@/.storybook/PageDecorator";
 import { NewTaskForm } from "@/components/tasks/NewTaskForm";
 import { TaskFiltersForm } from "@/components/tasks/TaskFiltersForm";
@@ -13,25 +13,44 @@ import { TaskListStory } from "@/components/tasks/TaskList/__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { newTaskFormArgs } from "@/components/tasks/NewTaskForm/__stories__";
 import { taskFiltersFormArgs } from "@/components/tasks/TaskFiltersForm/__stories__";
+import { withCreateTaskProvider } from "@/components/tasks/CreateTaskContext/__stories__";
 import { withTaskFiltersProvider } from "@/components/tasks/TaskFiltersContext/__stories__";
+import { withDeleteTasksProvider } from "@/components/tasks/DeleteTasksContext/__stories__";
+import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 import { EntityContainerPresentation } from "@/components/common/EntityContainerPresentation";
 import { withSelectedTasksProvider } from "@/components/tasks/SelectedTasksContext/__stories__";
 import { withPageTransitionProvider } from "@/components/common/PageTransitionContext/__stories__";
+import { withCreateSubtaskProvider } from "@/components/subtasks/CreateSubtaskContext/__stories__";
+import { withUpdateTaskStatusesProvider } from "@/components/tasks/UpdateTaskStatusesContext/__stories__";
+import { withCreateTaskCategoryProvider } from "@/components/taskCategory/CreateTaskCategoryContext/__stories__";
+import { NewSubtaskModal } from "@/components/subtasks/NewSubtaskModal";
 
 const meta = {
   title: "pages/TasksPage",
   component: TasksPage,
   parameters: { layout: "fullscreen" },
   decorators: [
+    (Story) => (
+      <>
+        <Story />
+        <NewSubtaskModal taskId={1} />
+      </>
+    ),
+    withCreateSubtaskProvider,
+    withCreateTaskCategoryProvider,
+    withCreateTaskProvider,
+    withDeleteTasksProvider,
+    withUpdateTaskStatusesProvider,
     withTaskFiltersProvider,
     withPageTransitionProvider,
     withSelectedTasksProvider,
+    withCurrentUserProvider,
     PageDecorator,
     withThemedBackground,
   ],
   beforeEach: () => {
     mocked(usePathname).mockReturnValue("/tasks");
-    mocked(useRouter).mockReturnValue({ push: fn() } as any);
+    mocked(useParams).mockReturnValue({ push: fn() } as any);
   },
 } satisfies Meta<typeof TasksPage>;
 

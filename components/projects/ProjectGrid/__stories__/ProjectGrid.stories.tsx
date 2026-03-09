@@ -2,17 +2,24 @@ import { ProjectGrid } from "../ProjectGrid";
 import { mockedProjectList } from "@/mocks/projects";
 import { ProjectGridItem } from "../../ProjectGridItem";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { ProjectItemProviders } from "../../ProjectItem";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { ProjectGridItemStory } from "../../ProjectGridItem/__stories__";
 import { withViewModeProvider } from "@/components/common/ViewMode/__stories__";
+import { withDeleteProjectsProvider } from "../../DeleteProjectsContext/__stories__";
 import { withSelectedProjectsProvider } from "../../SelectedProjectsContext/__stories__";
+import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 import { withPageTransitionProvider } from "@/components/common/PageTransitionContext/__stories__";
+import { withUpdateProjectStatusesProvider } from "../../UpdateProjectStatusesContext/__stories__";
 
 const meta = {
   title: "components/projects/ProjectGrid",
   component: ProjectGrid,
   decorators: [
+    withDeleteProjectsProvider,
+    withUpdateProjectStatusesProvider,
     withViewModeProvider,
+    withCurrentUserProvider,
     withPageTransitionProvider,
     withSelectedProjectsProvider,
     withThemedBackground,
@@ -27,11 +34,20 @@ export const Default = {
     children: (
       <>
         {mockedProjectList.map((project) => (
-          <ProjectGridItem
+          <ProjectItemProviders
             key={project.id}
-            {...ProjectGridItemStory.args}
-            {...project}
-          />
+            projectId={project.id}
+            projectStatus={project.status}
+            updateProject={() => ({ status: "success" })}
+            deleteProject={() => ({ status: "success" })}
+            updateProjectStatus={() => ({ status: "success" })}
+          >
+            <ProjectGridItem
+              key={project.id}
+              {...ProjectGridItemStory.args}
+              {...project}
+            />
+          </ProjectItemProviders>
         ))}
       </>
     ),

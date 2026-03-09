@@ -1,27 +1,34 @@
-import { useState } from "react";
+import { useEffect } from "react";
 import { Button } from "@/components/ui/Button";
-import { DialogTrigger } from "react-aria-components";
 import { EditCustomerForm } from "../EditCustomerForm";
 import { EditCustomerModal } from "./EditCustomerModal";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { useUpdateCustomer } from "../UpdateCustomerContext";
 import { CustomerFormSkeleton } from "../CustomerFormSkeleton";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { editCustomerFormArgs } from "../EditCustomerForm/__stories__";
+import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { withUpdateCustomerProvider } from "../UpdateCustomerContext/__stories__";
 
 const meta = {
   title: "components/customers/EditCustomerModal",
   component: EditCustomerModal,
   decorators: [
     (Story) => {
-      const [isOpen, setIsOpen] = useState(true);
+      const { onModalOpenChange } = useUpdateCustomer();
+
+      useEffect(() => onModalOpenChange(true), [onModalOpenChange]);
 
       return (
-        <DialogTrigger isOpen={isOpen} onOpenChange={setIsOpen}>
-          <Button label="Edit customer" />
+        <>
+          <Button
+            label="Edit customer"
+            onClick={() => onModalOpenChange(true)}
+          />
           <Story />
-        </DialogTrigger>
+        </>
       );
     },
+    withUpdateCustomerProvider,
     withThemedBackground,
   ],
 } satisfies Meta<typeof EditCustomerModal>;

@@ -3,11 +3,17 @@ import { Button } from "@/components/ui/Button";
 import { Meta, StoryObj } from "@storybook/react";
 import { DeleteTaskModal } from "../DeleteTaskModal";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { withDeleteTaskProvider } from "../DeleteTaskContext/__stories__";
+import { withSelectedTasksProvider } from "../SelectedTasksContext/__stories__";
 
 const meta = {
   title: "components/tasks/DeleteTaskModal",
   component: DeleteTaskModal,
-  decorators: [withThemedBackground],
+  decorators: [
+    withDeleteTaskProvider,
+    withSelectedTasksProvider,
+    withThemedBackground,
+  ],
   render: (args) => {
     const [open, setOpen] = useState(true);
 

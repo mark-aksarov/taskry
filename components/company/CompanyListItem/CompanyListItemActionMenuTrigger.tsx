@@ -36,10 +36,7 @@ export function CompanyListItemActionMenuTrigger({
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
   // State for edit modal from context
-  const {
-    isModalOpen: isEditModalOpen,
-    onModalOpenChange: onEditModalOpenChange,
-  } = useUpdateCompany();
+  const { onModalOpenChange: onEditModalOpenChange } = useUpdateCompany();
 
   /**
    * Handles menu actions for a company item
@@ -85,12 +82,7 @@ export function CompanyListItemActionMenuTrigger({
       </ItemBaseActionMenuTrigger>
 
       {/* Modals for editing, deleting, and guest mode */}
-      <EditCompanyModal
-        isOpen={isEditModalOpen}
-        onOpenChange={onEditModalOpenChange}
-        companyId={companyId}
-        companyName={companyName}
-      />
+      <EditCompanyModal companyId={companyId} companyName={companyName} />
 
       <DeleteCompanyModal
         companyId={companyId}

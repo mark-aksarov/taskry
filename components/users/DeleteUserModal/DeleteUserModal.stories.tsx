@@ -3,11 +3,12 @@ import { Button } from "@/components/ui/Button";
 import { Meta, StoryObj } from "@storybook/react";
 import { DeleteUserModal } from "../DeleteUserModal";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { withDeleteUserProvider } from "../DeleteUserContext/__stories__";
 
 const meta = {
   title: "components/users/DeleteUserModal",
   component: DeleteUserModal,
-  decorators: [withThemedBackground],
+  decorators: [withDeleteUserProvider, withThemedBackground],
   render: (args) => {
     const [open, setOpen] = useState(true);
 

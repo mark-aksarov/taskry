@@ -1,24 +1,28 @@
-import { useState } from "react";
+import { useEffect } from "react";
 import { NewUserModal } from "./NewUserModal";
 import { Button } from "@/components/ui/Button";
-import { DialogTrigger } from "react-aria-components";
+import { useCreateUser } from "../CreateUserContext";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { withCreateUserProvider } from "../CreateUserContext/__stories__";
 
 const meta = {
   title: "components/users/NewUserModal",
   component: NewUserModal,
   decorators: [
     (Story) => {
-      const [isOpen, setIsOpen] = useState(true);
+      const { onModalOpenChange } = useCreateUser();
+
+      useEffect(() => onModalOpenChange(true), [onModalOpenChange]);
 
       return (
-        <DialogTrigger isOpen={isOpen} onOpenChange={setIsOpen}>
-          <Button label="New user" />
+        <>
+          <Button label="New user" onClick={() => onModalOpenChange(true)} />
           <Story />
-        </DialogTrigger>
+        </>
       );
     },
+    withCreateUserProvider,
     withThemedBackground,
   ],
 } satisfies Meta<typeof NewUserModal>;

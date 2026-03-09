@@ -4,11 +4,18 @@ import { Meta, StoryObj } from "@storybook/react";
 import { withToastRegion } from "@/.storybook/withToastRegion";
 import { DeleteTaskCategoryModal } from "../DeleteTaskCategoryModal";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { withDeleteTaskCategoryProvider } from "../DeleteTaskCategoryContext/__stories__";
+import { withSelectedItemsProvider } from "@/components/common/SelectedItemsContext/__stories__";
 
 const meta = {
   title: "components/task-categories/DeleteTaskCategoryModal",
   component: DeleteTaskCategoryModal,
-  decorators: [withToastRegion, withThemedBackground],
+  decorators: [
+    withDeleteTaskCategoryProvider,
+    withSelectedItemsProvider,
+    withToastRegion,
+    withThemedBackground,
+  ],
   render: (args) => {
     const [open, setOpen] = useState(true);
 

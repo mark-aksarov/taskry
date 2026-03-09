@@ -85,7 +85,10 @@ const preview: Preview = {
       get: () => "/",
     } as any);
 
-    mocked(useRouter).mockReturnValue({} as any);
+    mocked(useRouter).mockReturnValue({
+      push: () => {},
+      refresh: () => {},
+    } as any);
   },
 };
 

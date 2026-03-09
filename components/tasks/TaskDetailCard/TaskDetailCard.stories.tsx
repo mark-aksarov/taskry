@@ -1,18 +1,41 @@
+import { EditTaskForm } from "../EditTaskForm";
+import { EditTaskModal } from "../EditTaskModal";
 import { mockedTaskDetail } from "@/mocks/tasks";
 import { TaskDetailCard } from "./TaskDetailCard";
 import { TaskDetailHeader } from "../TaskDetailHeader";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { TaskDetailActions } from "../TaskDetailActions";
+import { editTaskFormArgs } from "../EditTaskForm/__stories__";
 import { taskDetailAltArgs } from "../TaskDetailAlt/__stories__";
+import { NewSubtaskModal } from "@/components/subtasks/NewSubtaskModal";
 import { DetailHeaderSkeleton } from "@/components/common/DetailHeader";
 import { TaskDetailAlt, TaskDetailAltSkeleton } from "../TaskDetailAlt";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { taskDetailActionsArgs } from "../TaskDetailActions/__stories__";
+import { withDeleteTaskProvider } from "../DeleteTaskContext/__stories__";
+import { withUpdateTaskProvider } from "../UpdateTaskContext/__stories__";
+import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
+import { withCreateSubtaskProvider } from "@/components/subtasks/CreateSubtaskContext/__stories__";
 
 const meta = {
   title: "components/tasks/TaskDetailCard",
   component: TaskDetailCard,
-  decorators: [withThemedBackground],
+  decorators: [
+    (Story) => (
+      <>
+        <Story />
+        <EditTaskModal
+          editTaskFormContainer={<EditTaskForm {...editTaskFormArgs} />}
+        />
+        <NewSubtaskModal taskId={task.id} />
+      </>
+    ),
+    withUpdateTaskProvider,
+    withDeleteTaskProvider,
+    withCreateSubtaskProvider,
+    withCurrentUserProvider,
+    withThemedBackground,
+  ],
 } satisfies Meta<typeof TaskDetailCard>;
 
 export default meta;

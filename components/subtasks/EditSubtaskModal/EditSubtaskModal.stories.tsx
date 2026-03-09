@@ -1,24 +1,31 @@
-import { useState } from "react";
+import { useEffect } from "react";
 import { Button } from "@/components/ui/Button";
 import { EditSubtaskModal } from "./EditSubtaskModal";
-import { DialogTrigger } from "react-aria-components";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { useUpdateSubtask } from "../UpdateSubtaskContext";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { withUpdateSubtaskProvider } from "../UpdateSubtaskContext/__stories__";
 
 const meta = {
   title: "components/subtasks/EditSubtaskModal",
   component: EditSubtaskModal,
   decorators: [
     (Story) => {
-      const [isOpen, setIsOpen] = useState(true);
+      const { onModalOpenChange } = useUpdateSubtask();
+
+      useEffect(() => onModalOpenChange(true), [onModalOpenChange]);
 
       return (
-        <DialogTrigger isOpen={isOpen} onOpenChange={setIsOpen}>
-          <Button label="Edit subtask" />
+        <>
+          <Button
+            label="Edit subtask"
+            onClick={() => onModalOpenChange(true)}
+          />
           <Story />
-        </DialogTrigger>
+        </>
       );
     },
+    withUpdateSubtaskProvider,
     withThemedBackground,
   ],
 } satisfies Meta<typeof EditSubtaskModal>;
@@ -31,7 +38,5 @@ export const Default = {
     subtaskId: 1,
     taskId: 1,
     subtaskText: "Subtask 1",
-    isOpen: true,
-    onOpenChange: () => {},
   },
 } satisfies Story;

@@ -1,27 +1,31 @@
-import { useState } from "react";
+import { useEffect } from "react";
 import { EditTaskForm } from "../EditTaskForm";
 import { EditTaskModal } from "./EditTaskModal";
 import { Button } from "@/components/ui/Button";
-import { DialogTrigger } from "react-aria-components";
+import { useUpdateTask } from "../UpdateTaskContext";
 import { TaskFormSkeleton } from "../TaskFormSkeleton";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { editTaskFormArgs } from "../EditTaskForm/__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { withUpdateTaskProvider } from "../UpdateTaskContext/__stories__";
 
 const meta = {
   title: "components/tasks/EditTaskModal",
   component: EditTaskModal,
   decorators: [
     (Story) => {
-      const [isOpen, setIsOpen] = useState(true);
+      const { onModalOpenChange } = useUpdateTask();
+
+      useEffect(() => onModalOpenChange(true), [onModalOpenChange]);
 
       return (
-        <DialogTrigger isOpen={isOpen} onOpenChange={setIsOpen}>
-          <Button label="Edit task" />
+        <>
+          <Button label="Edit task" onClick={() => onModalOpenChange(true)} />
           <Story />
-        </DialogTrigger>
+        </>
       );
     },
+    withUpdateTaskProvider,
     withThemedBackground,
   ],
 } satisfies Meta<typeof EditTaskModal>;

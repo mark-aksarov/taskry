@@ -38,10 +38,8 @@ export function ProjectCategoryListItemActionMenuTrigger({
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
   // State for edit modal from context
-  const {
-    isModalOpen: isEditModalOpen,
-    onModalOpenChange: onEditModalOpenChange,
-  } = useUpdateProjectCategory();
+  const { onModalOpenChange: onEditModalOpenChange } =
+    useUpdateProjectCategory();
 
   /**
    * Handles menu actions for a project category item
@@ -88,8 +86,6 @@ export function ProjectCategoryListItemActionMenuTrigger({
 
       {/* Modals for editing, deleting, and guest mode */}
       <EditProjectCategoryModal
-        isOpen={isEditModalOpen}
-        onOpenChange={onEditModalOpenChange}
         projectCategoryId={projectCategoryId}
         projectCategoryName={projectCategoryName}
       />

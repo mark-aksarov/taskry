@@ -36,10 +36,7 @@ export function PositionListItemActionMenuTrigger({
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
   // State for edit modal from context
-  const {
-    isModalOpen: isEditModalOpen,
-    onModalOpenChange: onEditModalOpenChange,
-  } = useUpdatePosition();
+  const { onModalOpenChange: onEditModalOpenChange } = useUpdatePosition();
 
   /**
    * Handles menu actions for a position item
@@ -85,12 +82,7 @@ export function PositionListItemActionMenuTrigger({
       </ItemBaseActionMenuTrigger>
 
       {/* Modals for editing, deleting, and guest mode */}
-      <EditPositionModal
-        isOpen={isEditModalOpen}
-        onOpenChange={onEditModalOpenChange}
-        positionId={positionId}
-        positionName={positionName}
-      />
+      <EditPositionModal positionId={positionId} positionName={positionName} />
 
       <DeletePositionModal
         isOpen={isDeleteModalOpen}

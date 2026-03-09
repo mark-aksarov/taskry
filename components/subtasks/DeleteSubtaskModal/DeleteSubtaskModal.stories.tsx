@@ -4,11 +4,16 @@ import { Meta, StoryObj } from "@storybook/react";
 import { DeleteSubtaskModal } from "../DeleteSubtaskModal";
 import { withToastRegion } from "@/.storybook/withToastRegion";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { withDeleteSubtaskProvider } from "../DeleteSubtaskContext/__stories__";
 
 const meta = {
   title: "components/subtasks/DeleteSubtaskModal",
   component: DeleteSubtaskModal,
-  decorators: [withToastRegion, withThemedBackground],
+  decorators: [
+    withDeleteSubtaskProvider,
+    withToastRegion,
+    withThemedBackground,
+  ],
   render: (args) => {
     const [open, setOpen] = useState(true);
 

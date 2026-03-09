@@ -19,11 +19,11 @@ export const mockedTaskDetail = {
   title: "Task 1",
   description: "Task description. General information goes here.",
   assignee: {
-    id: "1",
+    id: "user-1",
     fullName: "User 1",
     imageUrl: "/man.jpg",
   },
-  deadline: "2025-01-01",
+  deadline: "2027-01-01",
   status: TaskStatus.active,
   creator: {
     id: "2",
@@ -45,7 +45,7 @@ export const mockedTaskList = [
     id: 1,
     title: "Task 1",
     status: TaskStatus.pending,
-    deadline: "2025-01-01",
+    deadline: "2027-01-01",
     commentsCount: 10,
     assignee: {
       id: "user1",

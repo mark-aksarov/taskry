@@ -1,24 +1,28 @@
-import { useState } from "react";
+import { useEffect } from "react";
 import { Button } from "@/components/ui/Button";
 import { NewCompanyModal } from "./NewCompanyModal";
-import { DialogTrigger } from "react-aria-components";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { useCreateCompany } from "../CreateCompanyContext";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { withCreateCompanyProvider } from "../CreateCompanyContext/__stories__";
 
 const meta = {
   title: "components/companies/NewCompanyModal",
   component: NewCompanyModal,
   decorators: [
     (Story) => {
-      const [isOpen, setIsOpen] = useState(true);
+      const { onModalOpenChange } = useCreateCompany();
+
+      useEffect(() => onModalOpenChange(true), [onModalOpenChange]);
 
       return (
-        <DialogTrigger isOpen={isOpen} onOpenChange={setIsOpen}>
-          <Button label="New company" />
+        <>
+          <Button label="New company" onClick={() => onModalOpenChange(true)} />
           <Story />
-        </DialogTrigger>
+        </>
       );
     },
+    withCreateCompanyProvider,
     withThemedBackground,
   ],
 } satisfies Meta<typeof NewCompanyModal>;

@@ -15,12 +15,21 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { getCommentList } from "@/components/comments/CommentList/__stories__";
 import { ProjectDetailHeader } from "@/components/projects/ProjectDetailHeader";
 import { editProjectFormArgs } from "@/components/projects/EditProjectForm/__stories__";
+import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
+import { withDeleteProjectProvider } from "@/components/projects/DeleteProjectContext/__stories__";
+import { withUpdateProjectProvider } from "@/components/projects/UpdateProjectContext/__stories__";
 
 const meta = {
   title: "pages/ProjectDetailPage",
   component: ProjectDetailPage,
   parameters: { layout: "fullscreen" },
-  decorators: [PageDecorator, withThemedBackground],
+  decorators: [
+    withUpdateProjectProvider,
+    withDeleteProjectProvider,
+    withCurrentUserProvider,
+    PageDecorator,
+    withThemedBackground,
+  ],
   beforeEach: () => {
     mocked(usePathname).mockReturnValue("/projects/1");
     mocked(useParams).mockReturnValue({

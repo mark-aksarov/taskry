@@ -12,17 +12,34 @@ import { PageDecorator } from "@/.storybook/PageDecorator";
 import { EditTaskForm } from "@/components/tasks/EditTaskForm";
 import { TaskDetailHeader } from "@/components/tasks/TaskDetailHeader";
 import { DetailHeaderSkeleton } from "@/components/common/DetailHeader";
+import { NewSubtaskModal } from "@/components/subtasks/NewSubtaskModal";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { AppHeaderStory } from "@/components/layout/AppHeader/__stories__";
 import { getCommentList } from "@/components/comments/CommentList/__stories__";
 import { editTaskFormArgs } from "@/components/tasks/EditTaskForm/__stories__";
 import { taskDetailAltArgs } from "@/components/tasks/TaskDetailAlt/__stories__";
+import { withDeleteTaskProvider } from "@/components/tasks/DeleteTaskContext/__stories__";
+import { withUpdateTaskProvider } from "@/components/tasks/UpdateTaskContext/__stories__";
+import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
+import { withCreateSubtaskProvider } from "@/components/subtasks/CreateSubtaskContext/__stories__";
 
 const meta = {
   title: "pages/TaskDetailPage",
   component: TaskDetailPage,
   parameters: { layout: "fullscreen" },
-  decorators: [PageDecorator, withThemedBackground],
+  decorators: [
+    (Story) => (
+      <>
+        <Story />
+        <NewSubtaskModal taskId={1} />
+      </>
+    ),
+    withUpdateTaskProvider,
+    withDeleteTaskProvider,
+    withCreateSubtaskProvider,
+    withCurrentUserProvider,
+    PageDecorator,
+    withThemedBackground,
+  ],
   beforeEach: () => {
     mocked(usePathname).mockReturnValue("/tasks/1");
     mocked(useParams).mockReturnValue({
@@ -40,7 +57,6 @@ export const Default = {
   args: {
     taskId: task.id,
     taskTitle: task.title,
-    deleteTask: () => ({ status: "success" }),
     updateComment: () => ({ status: "success" }),
     sendComment: () => ({ status: "success" }),
     taskCommentsContainer: getCommentList(),
@@ -52,7 +68,6 @@ export const Default = {
       />
     ),
     editTaskFormContainer: <EditTaskForm {...editTaskFormArgs} />,
-    appHeaderProps: AppHeaderStory.args,
   },
 } satisfies Story;
 
@@ -61,7 +76,6 @@ export const Loading = {
     ...Default.args,
     taskDetailContainer: <TaskDetailAltSkeleton />,
     taskHeaderContainer: <DetailHeaderSkeleton />,
-    appHeaderProps: AppHeaderStory.args,
   },
 } satisfies Story;
 
@@ -77,6 +91,5 @@ export const WithoutOptionalTaskData = {
       />
     ),
     taskHeaderContainer: <TaskDetailHeader taskTitle={task.title} />,
-    appHeaderProps: AppHeaderStory.args,
   },
 } satisfies Story;

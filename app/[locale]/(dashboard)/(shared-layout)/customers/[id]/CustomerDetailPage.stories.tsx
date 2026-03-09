@@ -11,16 +11,24 @@ import { CustomerDetailPage } from "./CustomerDetailPage";
 import { PageDecorator } from "@/.storybook/PageDecorator";
 import { DetailHeaderSkeleton } from "@/components/common/DetailHeader";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { AppHeaderStory } from "@/components/layout/AppHeader/__stories__";
 import { CustomerDetailHeader } from "@/components/customer/CustomerDetailHeader";
 import { CustomerDetailActions } from "@/components/customer/CustomerDetailActions";
+import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 import { customerDetailActionsArgs } from "@/components/customer/CustomerDetailActions/__stories__";
+import { withDeleteCustomerProvider } from "@/components/customer/DeleteCustomerContext/__stories__";
+import { withUpdateCustomerProvider } from "@/components/customer/UpdateCustomerContext/__stories__";
 
 const meta = {
   title: "pages/CustomerDetailPage",
   component: CustomerDetailPage,
   parameters: { layout: "fullscreen" },
-  decorators: [PageDecorator, withThemedBackground],
+  decorators: [
+    withUpdateCustomerProvider,
+    withDeleteCustomerProvider,
+    withCurrentUserProvider,
+    PageDecorator,
+    withThemedBackground,
+  ],
   beforeEach: () => {
     mocked(usePathname).mockReturnValue("/customers/1");
     mocked(useParams).mockReturnValue({

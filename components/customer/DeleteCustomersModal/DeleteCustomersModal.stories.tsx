@@ -2,13 +2,20 @@ import React from "react";
 import { Button } from "@/components/ui/Button";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { DeleteCustomersModal } from "./DeleteCustomersModal";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withToastRegion } from "@/.storybook/withToastRegion";
+import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { withDeleteCustomersProvider } from "../DeleteCustomersContext/__stories__";
+import { withSelectedItemsProvider } from "@/components/common/SelectedItemsContext/__stories__";
 
 const meta = {
   title: "components/customers/DeleteCustomersModal",
   component: DeleteCustomersModal,
-  decorators: [withToastRegion, withThemedBackground],
+  decorators: [
+    withToastRegion,
+    withDeleteCustomersProvider,
+    withSelectedItemsProvider,
+    withThemedBackground,
+  ],
   render: (args) => {
     const [open, setOpen] = React.useState(true);
 

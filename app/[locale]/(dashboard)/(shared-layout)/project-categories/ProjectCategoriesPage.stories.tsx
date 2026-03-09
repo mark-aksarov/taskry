@@ -6,23 +6,28 @@ import { PageDecorator } from "@/.storybook/PageDecorator";
 import { ProjectCategoriesPage } from "./ProjectCategoriesPage";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { ProjectCategoryList } from "@/components/projectCategory/ProjectCategoryList";
+import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 import { withSelectedItemsProvider } from "@/components/common/SelectedItemsContext/__stories__";
 import { withPageTransitionProvider } from "@/components/common/PageTransitionContext/__stories__";
 import { ProjectCategoryListStory } from "@/components/projectCategory/ProjectCategoryList/__stories__";
+import { withCreateProjectCategoryProvider } from "@/components/projectCategory/CreateProjectCategoryContext/__stories__";
+import { withDeleteProjectCategoriesProvider } from "@/components/projectCategory/DeleteProjectCategoriesContext/__stories__";
 
 const meta = {
   title: "pages/ProjectCategoriesPage",
   component: ProjectCategoriesPage,
   parameters: { layout: "fullscreen" },
   decorators: [
+    withCreateProjectCategoryProvider,
+    withDeleteProjectCategoriesProvider,
     withPageTransitionProvider,
     withSelectedItemsProvider,
+    withCurrentUserProvider,
     PageDecorator,
     withThemedBackground,
   ],
   beforeEach: () => {
     mocked(usePathname).mockReturnValue("/project-categories");
-    mocked(useRouter).mockReturnValue({ push: fn() } as any);
   },
 } satisfies Meta<typeof ProjectCategoriesPage>;
 

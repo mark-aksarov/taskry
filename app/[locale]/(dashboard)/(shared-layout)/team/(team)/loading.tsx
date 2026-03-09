@@ -42,7 +42,7 @@ export default function AppUsersPageLoading() {
         </ToolbarMobileBottom>
 
         <List>
-          <Repeat items={20} renderItem={() => <UserListItemSkeleton />} />
+          <Repeat items={10} renderItem={() => <UserListItemSkeleton />} />
         </List>
       </PageGrid>
     </PageContainer>

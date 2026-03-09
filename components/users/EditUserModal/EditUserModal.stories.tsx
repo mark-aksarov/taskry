@@ -1,27 +1,31 @@
-import { useState } from "react";
+import { useEffect } from "react";
 import { EditUserForm } from "../EditUserForm";
 import { EditUserModal } from "./EditUserModal";
 import { Button } from "@/components/ui/Button";
-import { DialogTrigger } from "react-aria-components";
+import { useUpdateUser } from "../UpdateUserContext";
 import { EditUserFormSkeleton } from "../EditUserForm";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { editUserFormArgs } from "../EditUserForm/__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { withUpdateUserProvider } from "../UpdateUserContext/__stories__";
 
 const meta = {
   title: "components/users/EditUserModal",
   component: EditUserModal,
   decorators: [
     (Story) => {
-      const [isOpen, setIsOpen] = useState(true);
+      const { onModalOpenChange } = useUpdateUser();
+
+      useEffect(() => onModalOpenChange(true), [onModalOpenChange]);
 
       return (
-        <DialogTrigger isOpen={isOpen} onOpenChange={setIsOpen}>
-          <Button label="Edit user" />
+        <>
+          <Button label="Edit user" onClick={() => onModalOpenChange(true)} />
           <Story />
-        </DialogTrigger>
+        </>
       );
     },
+    withUpdateUserProvider,
     withThemedBackground,
   ],
 } satisfies Meta<typeof EditUserModal>;

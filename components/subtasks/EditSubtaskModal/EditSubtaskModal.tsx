@@ -7,30 +7,29 @@ import {
 import { useTranslations } from "next-intl";
 import { EditSubtaskForm } from "../EditSubtaskForm";
 import { DialogHeader } from "@/components/ui/Dialog";
+import { useUpdateSubtask } from "../UpdateSubtaskContext";
 
 interface EditSubtaskModalProps {
   subtaskId: number;
   taskId: number;
   subtaskText?: string;
-  isOpen: boolean;
-  onOpenChange: (open: boolean) => void;
 }
 
 export function EditSubtaskModal({
   subtaskId,
   taskId,
   subtaskText,
-  isOpen,
-  onOpenChange,
 }: EditSubtaskModalProps) {
   const t = useTranslations("subtasks.EditSubtaskModal");
+
+  const { isModalOpen, onModalOpenChange } = useUpdateSubtask();
 
   return (
     <FormBaseModal
       data-test="edit-subtask-modal"
       className="md:w-[350px]"
-      isOpen={isOpen}
-      onOpenChange={onOpenChange}
+      isOpen={isModalOpen}
+      onOpenChange={onModalOpenChange}
     >
       <FormBaseModalDialog>
         <DialogHeader>{t("heading")}</DialogHeader>

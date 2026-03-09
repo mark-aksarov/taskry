@@ -9,11 +9,7 @@ import {
 import { CustomerGridItem } from "../CustomerGridItem";
 import { CustomerListItem } from "../CustomerListItem";
 import { useViewMode } from "@/components/common/ViewMode";
-import { DeleteCustomerProvider } from "../DeleteCustomerContext";
-import { SelectableItem } from "@/components/common/SelectableItem";
-import { CustomerItemPendingOverlay } from "./CustomerItemPendingOverlay";
-import { useSelectedItems } from "@/components/common/SelectedItemsContext";
-import { UpdateCustomerProvider } from "../UpdateCustomerContext";
+import { CustomerItemProviders } from "./CustomerItemProviders";
 
 export interface CustomerItemProps {
   id: number;
@@ -37,23 +33,19 @@ export function CustomerItem({
   deleteCustomer,
   ...props
 }: CustomerItemProps) {
-  const selected = useSelectedItems();
-
   const { viewMode } = useViewMode();
 
   return (
-    <DeleteCustomerProvider deleteCustomer={deleteCustomer}>
-      <UpdateCustomerProvider updateCustomer={updateCustomer}>
-        <CustomerItemPendingOverlay customerId={props.id}>
-          <SelectableItem {...selected} item={{ id: props.id }}>
-            {viewMode === "grid" ? (
-              <CustomerGridItem {...props} />
-            ) : (
-              <CustomerListItem {...props} />
-            )}
-          </SelectableItem>
-        </CustomerItemPendingOverlay>
-      </UpdateCustomerProvider>
-    </DeleteCustomerProvider>
+    <CustomerItemProviders
+      customerId={props.id}
+      updateCustomer={updateCustomer}
+      deleteCustomer={deleteCustomer}
+    >
+      {viewMode === "grid" ? (
+        <CustomerGridItem {...props} />
+      ) : (
+        <CustomerListItem {...props} />
+      )}
+    </CustomerItemProviders>
   );
 }

@@ -1,4 +1,4 @@
-import { TaskStatus } from "@/generated/prisma/enums";
+import { mockedTaskList } from "@/mocks/tasks";
 import { UserTaskListItem } from "../UserTaskListItem";
 import type { Meta, StoryObj } from "@storybook/react";
 import { TaskDetail } from "@/components/tasks/TaskDetail";
@@ -7,12 +7,21 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { taskDetailArgs } from "@/components/tasks/TaskDetail/__stories__";
 import { editTaskFormArgs } from "@/components/tasks/EditTaskForm/__stories__";
 import { getCommentList } from "@/components/comments/CommentList/__stories__";
+import { withDeleteTasksProvider } from "@/components/tasks/DeleteTasksContext/__stories__";
+import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 import { withSelectedTasksProvider } from "@/components/tasks/SelectedTasksContext/__stories__";
+import { withUpdateTaskStatusesProvider } from "@/components/tasks/UpdateTaskStatusesContext/__stories__";
 
 const meta = {
   title: "components/users/UserTaskListItem",
   component: UserTaskListItem,
-  decorators: [withSelectedTasksProvider, withThemedBackground],
+  decorators: [
+    withUpdateTaskStatusesProvider,
+    withDeleteTasksProvider,
+    withSelectedTasksProvider,
+    withCurrentUserProvider,
+    withThemedBackground,
+  ],
   parameters: {
     backgroundVariant: "alt",
   },
@@ -21,13 +30,11 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
+const task = mockedTaskList[0];
+
 export const Default = {
   args: {
-    id: 1,
-    title: "Task 1",
-    deadline: "2025-09-30",
-    status: TaskStatus.pending,
-    commentsCount: 10,
+    ...task,
     taskDetailContainer: <TaskDetail {...taskDetailArgs} />,
     taskCommentsContainer: getCommentList(),
     editTaskFormContainer: <EditTaskForm {...editTaskFormArgs} />,

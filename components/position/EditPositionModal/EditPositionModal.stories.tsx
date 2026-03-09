@@ -1,24 +1,31 @@
-import { useState } from "react";
+import { useEffect } from "react";
 import { Button } from "@/components/ui/Button";
-import { DialogTrigger } from "react-aria-components";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { EditPositionModal } from "./EditPositionModal";
+import { useUpdatePosition } from "../UpdatePositionContext";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { withUpdatePositionProvider } from "../UpdatePositionContext/__stories__";
 
 const meta = {
   title: "components/positions/EditPositionModal",
   component: EditPositionModal,
   decorators: [
     (Story) => {
-      const [isOpen, setIsOpen] = useState(true);
+      const { onModalOpenChange } = useUpdatePosition();
+
+      useEffect(() => onModalOpenChange(true), [onModalOpenChange]);
 
       return (
-        <DialogTrigger isOpen={isOpen} onOpenChange={setIsOpen}>
-          <Button label="Edit position" />
+        <>
+          <Button
+            label="Edit position"
+            onClick={() => onModalOpenChange(true)}
+          />
           <Story />
-        </DialogTrigger>
+        </>
       );
     },
+    withUpdatePositionProvider,
     withThemedBackground,
   ],
 } satisfies Meta<typeof EditPositionModal>;
@@ -30,7 +37,5 @@ export const Default = {
   args: {
     positionId: 1,
     positionName: "Position 1",
-    isOpen: true,
-    onOpenChange: () => {},
   },
 } satisfies Story;

@@ -38,7 +38,7 @@ export default function AppTaskCategoriesPageLoading() {
         </ToolbarMobileBottom>
 
         <List>
-          <Repeat items={20} renderItem={TaskCategoryListItemSkeleton} />
+          <Repeat items={10} renderItem={TaskCategoryListItemSkeleton} />
         </List>
       </PageGrid>
     </PageContainer>

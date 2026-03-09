@@ -3,11 +3,24 @@ import { NewTaskForm } from "@/components/tasks/NewTaskForm";
 import { UserTasksEmptySection } from "./UserTasksEmptySection";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { newTaskFormArgs } from "@/components/tasks/NewTaskForm/__stories__";
+import { withCreateTaskProvider } from "@/components/tasks/CreateTaskContext/__stories__";
+import { NewTaskModal } from "@/components/tasks/NewTaskModal";
 
 const meta = {
   title: "components/users/UserTasksEmptySection",
   component: UserTasksEmptySection,
-  decorators: [withThemedBackground],
+  decorators: [
+    (Story) => (
+      <>
+        <Story />
+        <NewTaskModal
+          newTaskFormContainer={<NewTaskForm {...newTaskFormArgs} />}
+        />
+      </>
+    ),
+    withCreateTaskProvider,
+    withThemedBackground,
+  ],
   parameters: {
     backgroundVariant: "alt",
     layout: "centered",
@@ -18,7 +31,5 @@ export default meta;
 export type Story = StoryObj<typeof meta>;
 
 export const Default = {
-  args: {
-    newTaskFormContainer: <NewTaskForm {...newTaskFormArgs} />,
-  },
+  args: {},
 } satisfies Story;

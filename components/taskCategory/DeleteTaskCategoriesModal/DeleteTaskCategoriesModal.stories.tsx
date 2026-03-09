@@ -2,13 +2,20 @@ import React from "react";
 import { Button } from "@/components/ui/Button";
 import { Meta, StoryObj } from "@storybook/react";
 import { withToastRegion } from "@/.storybook/withToastRegion";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { DeleteTaskCategoriesModal } from "./DeleteTaskCategoriesModal";
+import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { withDeleteTaskCategoriesProvider } from "../DeleteTaskCategoriesContext/__stories__";
+import { withSelectedItemsProvider } from "@/components/common/SelectedItemsContext/__stories__";
 
 const meta = {
   title: "components/task-categories/DeleteTaskCategoriesModal",
   component: DeleteTaskCategoriesModal,
-  decorators: [withToastRegion, withThemedBackground],
+  decorators: [
+    withDeleteTaskCategoriesProvider,
+    withSelectedItemsProvider,
+    withToastRegion,
+    withThemedBackground,
+  ],
   render: (args) => {
     const [open, setOpen] = React.useState(true);
 

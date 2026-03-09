@@ -1,24 +1,31 @@
-import { useState } from "react";
+import { useEffect } from "react";
 import { Button } from "@/components/ui/Button";
 import { NewPositionModal } from "./NewPositionModal";
-import { DialogTrigger } from "react-aria-components";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { useCreatePosition } from "../CreatePositionContext";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { withCreatePositionProvider } from "../CreatePositionContext/__stories__";
 
 const meta = {
   title: "components/positions/NewPositionModal",
   component: NewPositionModal,
   decorators: [
     (Story) => {
-      const [isOpen, setIsOpen] = useState(true);
+      const { onModalOpenChange } = useCreatePosition();
+
+      useEffect(() => onModalOpenChange(true), [onModalOpenChange]);
 
       return (
-        <DialogTrigger isOpen={isOpen} onOpenChange={setIsOpen}>
-          <Button label="New Position" />
+        <>
+          <Button
+            label="New Position"
+            onClick={() => onModalOpenChange(true)}
+          />
           <Story />
-        </DialogTrigger>
+        </>
       );
     },
+    withCreatePositionProvider,
     withThemedBackground,
   ],
 } satisfies Meta<typeof NewPositionModal>;

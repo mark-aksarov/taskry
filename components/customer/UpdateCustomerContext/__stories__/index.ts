@@ -1,0 +1,1 @@
+export { withUpdateCustomerProvider } from "./withUpdateCustomerProvider";

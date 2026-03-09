@@ -44,7 +44,7 @@ export default function AppCustomersPageLoading() {
         </ToolbarMobileBottom>
 
         <List>
-          <Repeat items={20} renderItem={CustomerListItemSkeleton} />
+          <Repeat items={10} renderItem={CustomerListItemSkeleton} />
         </List>
       </PageGrid>
     </PageContainer>

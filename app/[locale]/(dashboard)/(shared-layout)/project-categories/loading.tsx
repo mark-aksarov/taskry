@@ -38,7 +38,7 @@ export default function AppProjectCategoriesPageLoading() {
         </ToolbarMobileBottom>
 
         <List>
-          <Repeat items={20} renderItem={ProjectCategoryListItemSkeleton} />
+          <Repeat items={107} renderItem={ProjectCategoryListItemSkeleton} />
         </List>
       </PageGrid>
     </PageContainer>

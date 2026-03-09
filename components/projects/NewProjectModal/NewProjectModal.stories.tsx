@@ -1,27 +1,31 @@
-import { useState } from "react";
+import { useEffect } from "react";
 import { Button } from "@/components/ui/Button";
 import { NewProjectForm } from "../NewProjectForm";
 import { NewProjectModal } from "./NewProjectModal";
-import { DialogTrigger } from "react-aria-components";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { useCreateProject } from "../CreateProjectContext";
 import { ProjectFormSkeleton } from "../ProjectFormSkeleton";
 import { newProjectFormArgs } from "../NewProjectForm/__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { withCreateProjectProvider } from "../CreateProjectContext/__stories__";
 
 const meta = {
   title: "components/projects/NewProjectModal",
   component: NewProjectModal,
   decorators: [
     (Story) => {
-      const [isOpen, setIsOpen] = useState(true);
+      const { onModalOpenChange } = useCreateProject();
+
+      useEffect(() => onModalOpenChange(true), [onModalOpenChange]);
 
       return (
-        <DialogTrigger isOpen={isOpen} onOpenChange={setIsOpen}>
-          <Button label="New project" />
+        <>
+          <Button label="New project" onClick={() => onModalOpenChange(true)} />
           <Story />
-        </DialogTrigger>
+        </>
       );
     },
+    withCreateProjectProvider,
     withThemedBackground,
   ],
 } satisfies Meta<typeof NewProjectModal>;

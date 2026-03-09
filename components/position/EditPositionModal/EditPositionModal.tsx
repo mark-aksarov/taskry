@@ -7,27 +7,26 @@ import {
 import { useTranslations } from "next-intl";
 import { DialogHeader } from "@/components/ui/Dialog";
 import { EditPositionForm } from "../EditPositionForm";
+import { useUpdatePosition } from "../UpdatePositionContext";
 
 interface EditPositionModalProps {
   positionId: number;
   positionName: string;
-  isOpen: boolean;
-  onOpenChange: (open: boolean) => void;
 }
 
 export function EditPositionModal({
   positionId,
   positionName,
-  isOpen,
-  onOpenChange,
 }: EditPositionModalProps) {
   const t = useTranslations("positions.EditPositionModal");
+
+  const { isModalOpen, onModalOpenChange } = useUpdatePosition();
 
   return (
     <FormBaseModal
       className="md:w-[350px]"
-      isOpen={isOpen}
-      onOpenChange={onOpenChange}
+      isOpen={isModalOpen}
+      onOpenChange={onModalOpenChange}
     >
       <FormBaseModalDialog>
         <DialogHeader>{t("title")}</DialogHeader>

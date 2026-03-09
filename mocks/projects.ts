@@ -29,7 +29,7 @@ export const mockedProjectDetail = {
     fullName: "User 1",
     imageUrl: "/man.jpg",
   },
-  deadline: "2025-01-01",
+  deadline: "2027-01-01",
   description: "Project description. General information goes here.",
   customer: {
     id: 2,
@@ -47,7 +47,7 @@ export const mockedProjectList = [
   {
     id: 1,
     title: "Project 1",
-    deadline: "2025-01-01",
+    deadline: "2027-01-01",
     creator: { id: "user1", fullName: "User 1", imageUrl: "/woman.jpg" },
     customer: { id: 1, fullName: "Customer 1", imageUrl: "/man.jpg" },
     category: { id: 1, name: "Category 1" },

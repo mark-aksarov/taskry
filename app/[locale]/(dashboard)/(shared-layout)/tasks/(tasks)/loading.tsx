@@ -45,7 +45,7 @@ export default function AppTasksPageLoading() {
 
         <List>
           <Repeat
-            items={20}
+            items={10}
             renderItem={() => <TaskListItemSkeleton showCheckbox />}
           />
         </List>

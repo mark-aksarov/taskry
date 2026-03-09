@@ -44,7 +44,7 @@ export default function AppProjectsPageLoading() {
         </ToolbarMobileBottom>
 
         <List>
-          <Repeat items={20} renderItem={() => <ProjectListItemSkeleton />} />
+          <Repeat items={10} renderItem={() => <ProjectListItemSkeleton />} />
         </List>
       </PageGrid>
     </PageContainer>

@@ -4,11 +4,18 @@ import { Meta, StoryObj } from "@storybook/react";
 import { DeletePositionModal } from "./DeletePositionModal";
 import { withToastRegion } from "@/.storybook/withToastRegion";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { withDeletePositionProvider } from "../DeletePositionContext/__stories__";
+import { withSelectedItemsProvider } from "@/components/common/SelectedItemsContext/__stories__";
 
 const meta = {
   title: "components/positions/DeletePositionModal",
   component: DeletePositionModal,
-  decorators: [withToastRegion, withThemedBackground],
+  decorators: [
+    withDeletePositionProvider,
+    withSelectedItemsProvider,
+    withToastRegion,
+    withThemedBackground,
+  ],
   render: (args) => {
     const [open, setOpen] = useState(true);
 

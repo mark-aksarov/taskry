@@ -3,12 +3,19 @@ import { Button } from "@/components/ui/Button";
 import { Meta, StoryObj } from "@storybook/react";
 import { DeleteCommentModal } from "../DeleteCommentModal";
 import { withToastRegion } from "@/.storybook/withToastRegion";
+import { withCommentFormProvider } from "../CommentForm/__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { withDeleteCommentProvider } from "../DeleteCommentContext/__stories__";
 
 const meta = {
   title: "components/comments/DeleteCommentModal",
   component: DeleteCommentModal,
-  decorators: [withToastRegion, withThemedBackground],
+  decorators: [
+    withToastRegion,
+    withDeleteCommentProvider,
+    withCommentFormProvider,
+    withThemedBackground,
+  ],
   render: (args) => {
     const [open, setOpen] = useState(true);
 

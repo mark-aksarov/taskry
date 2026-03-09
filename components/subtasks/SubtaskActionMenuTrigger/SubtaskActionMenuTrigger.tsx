@@ -57,10 +57,7 @@ export function SubtaskActionMenuTrigger({
   const { action: toggleSubtaskAction } = useToggleSubtask();
 
   // State for edit modal from context
-  const {
-    isModalOpen: isEditModalOpen,
-    onModalOpenChange: onEditModalOpenChange,
-  } = useUpdateSubtask();
+  const { onModalOpenChange: onEditModalOpenChange } = useUpdateSubtask();
 
   function handleAction(key: Key) {
     if (isGuest) {
@@ -120,11 +117,9 @@ export function SubtaskActionMenuTrigger({
       </ItemBaseActionMenuTrigger>
 
       <EditSubtaskModal
-        isOpen={isEditModalOpen}
         taskId={taskId}
         subtaskId={subtaskId}
         subtaskText={subtaskText}
-        onOpenChange={onEditModalOpenChange}
       />
 
       <DeleteSubtaskModal

@@ -8,15 +8,25 @@ import { EditUserForm } from "@/components/users/EditUserForm";
 import { UserDetailHeader } from "@/components/users/UserDetailHeader";
 import { DetailHeaderSkeleton } from "@/components/common/DetailHeader";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { AppHeaderStory } from "@/components/layout/AppHeader/__stories__";
 import { UserDetail, UserDetailSkeleton } from "@/components/users/UserDetail";
 import { editUserFormArgs } from "@/components/users/EditUserForm/__stories__";
+import { withUpdateUserProvider } from "@/components/users/UpdateUserContext/__stories__";
+import { withDeleteUserProvider } from "@/components/users/DeleteUserContext/__stories__";
+import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
+import { withChangePasswordProvider } from "@/components/users/ChangePasswordContext/__stories__";
 
 const meta = {
   title: "pages/TeamProfilePage",
   component: TeamProfilePage,
   parameters: { layout: "fullscreen" },
-  decorators: [PageDecorator, withThemedBackground],
+  decorators: [
+    withUpdateUserProvider,
+    withChangePasswordProvider,
+    withDeleteUserProvider,
+    withCurrentUserProvider,
+    PageDecorator,
+    withThemedBackground,
+  ],
   beforeEach: () => {
     mocked(usePathname).mockReturnValue(`/team/user-1`);
     mocked(useParams).mockReturnValue({

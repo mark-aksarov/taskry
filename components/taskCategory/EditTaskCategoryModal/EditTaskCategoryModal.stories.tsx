@@ -1,24 +1,31 @@
-import { useState } from "react";
+import { useEffect } from "react";
 import { Button } from "@/components/ui/Button";
-import { DialogTrigger } from "react-aria-components";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { EditTaskCategoryModal } from "./EditTaskCategoryModal";
+import { useUpdateTaskCategory } from "../UpdateTaskCategoryContext";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { withUpdateTaskCategoryProvider } from "../UpdateTaskCategoryContext/__stories__";
 
 const meta = {
   title: "components/task-categories/EditTaskCategoryModal",
   component: EditTaskCategoryModal,
   decorators: [
     (Story) => {
-      const [isOpen, setIsOpen] = useState(true);
+      const { onModalOpenChange } = useUpdateTaskCategory();
+
+      useEffect(() => onModalOpenChange(true), [onModalOpenChange]);
 
       return (
-        <DialogTrigger isOpen={isOpen} onOpenChange={setIsOpen}>
-          <Button label="Edit task category" />
+        <>
+          <Button
+            label="Edit task category"
+            onClick={() => onModalOpenChange(true)}
+          />
           <Story />
-        </DialogTrigger>
+        </>
       );
     },
+    withUpdateTaskCategoryProvider,
     withThemedBackground,
   ],
 } satisfies Meta<typeof EditTaskCategoryModal>;
@@ -30,7 +37,5 @@ export const Default = {
   args: {
     taskCategoryId: 1,
     taskCategoryName: "Task Category 1",
-    isOpen: true,
-    onOpenChange: () => {},
   },
 } satisfies Story;

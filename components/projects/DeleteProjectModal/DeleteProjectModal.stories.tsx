@@ -3,11 +3,17 @@ import { Button } from "@/components/ui/Button";
 import { Meta, StoryObj } from "@storybook/react";
 import { DeleteProjectModal } from "../DeleteProjectModal";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { withDeleteProjectProvider } from "../DeleteProjectContext/__stories__";
+import { withSelectedProjectsProvider } from "../SelectedProjectsContext/__stories__";
 
 const meta = {
   title: "components/projects/DeleteProjectModal",
   component: DeleteProjectModal,
-  decorators: [withThemedBackground],
+  decorators: [
+    withDeleteProjectProvider,
+    withSelectedProjectsProvider,
+    withThemedBackground,
+  ],
   render: (args) => {
     const [open, setOpen] = useState(true);
 

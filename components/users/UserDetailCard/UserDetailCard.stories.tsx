@@ -1,26 +1,48 @@
 import { mocked } from "storybook/test";
 import { UserDetail } from "../UserDetail";
+import { EditUserForm } from "../EditUserForm";
+import { EditUserModal } from "../EditUserModal";
 import { mockedUserDetail } from "@/mocks/users";
 import { UserDetailCard } from "./UserDetailCard";
 import { UserDetailSkeleton } from "../UserDetail";
 import { UserDetailHeader } from "../UserDetailHeader";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { useParams, usePathname } from "next/navigation";
+import { ChangePasswordModal } from "../ChangePasswordModal";
+import { editUserFormArgs } from "../EditUserForm/__stories__";
 import { UserNavigationDesktop } from "../UserNavigationDesktop";
 import { DetailHeaderSkeleton } from "@/components/common/DetailHeader";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { ProfileActions, ProfileActionsSkeleton } from "../ProfileActions";
+import { withDeleteUserProvider } from "../DeleteUserContext/__stories__";
+import { withUpdateUserProvider } from "../UpdateUserContext/__stories__";
+import { withChangePasswordProvider } from "../ChangePasswordContext/__stories__";
+import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 
 const meta = {
   title: "components/users/UserDetailCard",
   component: UserDetailCard,
   beforeEach: () => {
-    mocked(usePathname).mockReturnValue("/profile/info");
+    mocked(usePathname).mockReturnValue("/team/user-1");
     mocked(useParams).mockReturnValue({
       id: "user-1",
     });
   },
-  decorators: [withThemedBackground],
+  decorators: [
+    (Story) => (
+      <>
+        <Story /> <ChangePasswordModal userId="user-1" />{" "}
+        <EditUserModal
+          editUserFormContainer={<EditUserForm {...editUserFormArgs} />}
+        />
+      </>
+    ),
+    withUpdateUserProvider,
+    withChangePasswordProvider,
+    withDeleteUserProvider,
+    withCurrentUserProvider,
+    withThemedBackground,
+  ],
 } satisfies Meta<typeof UserDetailCard>;
 
 export default meta;

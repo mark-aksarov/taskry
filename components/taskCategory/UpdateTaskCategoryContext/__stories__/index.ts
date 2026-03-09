@@ -1,0 +1,1 @@
+export { withUpdateTaskCategoryProvider } from "./withUpdateTaskCategoryProvider";

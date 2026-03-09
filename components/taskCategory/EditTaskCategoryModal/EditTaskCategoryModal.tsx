@@ -7,27 +7,26 @@ import {
 import { useTranslations } from "next-intl";
 import { DialogHeader } from "@/components/ui/Dialog";
 import { EditTaskCategoryForm } from "../EditTaskCategoryForm";
+import { useUpdateTaskCategory } from "../UpdateTaskCategoryContext";
 
 interface EditTaskCategoryModalProps {
   taskCategoryId: number;
   taskCategoryName: string;
-  isOpen: boolean;
-  onOpenChange: (open: boolean) => void;
 }
 
 export function EditTaskCategoryModal({
   taskCategoryId,
   taskCategoryName,
-  isOpen,
-  onOpenChange,
 }: EditTaskCategoryModalProps) {
   const t = useTranslations("taskCategories.EditTaskCategoryModal");
+
+  const { isModalOpen, onModalOpenChange } = useUpdateTaskCategory();
 
   return (
     <FormBaseModal
       className="md:w-[350px]"
-      isOpen={isOpen}
-      onOpenChange={onOpenChange}
+      isOpen={isModalOpen}
+      onOpenChange={onModalOpenChange}
     >
       <FormBaseModalDialog>
         <DialogHeader>{t("title")}</DialogHeader>

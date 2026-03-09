@@ -8,14 +8,27 @@ import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { UserDetail } from "@/components/users/UserDetail";
 import { taskDetailArgs } from "../../TaskDetail/__stories__";
 import { editTaskFormArgs } from "../../EditTaskForm/__stories__";
+import { withTaskItemProviders } from "../../TaskItem/__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { getCommentList } from "@/components/comments/CommentList/__stories__";
+import { withDeleteTasksProvider } from "../../DeleteTasksContext/__stories__";
 import { withSelectedTasksProvider } from "../../SelectedTasksContext/__stories__";
+import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
+import { withUpdateTaskStatusesProvider } from "../../UpdateTaskStatusesContext/__stories__";
+import { withCreateSubtaskProvider } from "@/components/subtasks/CreateSubtaskContext/__stories__";
 
 const meta = {
   title: "components/tasks/TaskGridItem",
   component: TaskGridItem,
-  decorators: [withSelectedTasksProvider, withThemedBackground],
+  decorators: [
+    withCreateSubtaskProvider,
+    withTaskItemProviders,
+    withDeleteTasksProvider,
+    withUpdateTaskStatusesProvider,
+    withCurrentUserProvider,
+    withSelectedTasksProvider,
+    withThemedBackground,
+  ],
 } satisfies Meta<typeof TaskGridItem>;
 
 export default meta;

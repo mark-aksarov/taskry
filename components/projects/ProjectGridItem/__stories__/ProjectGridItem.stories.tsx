@@ -8,13 +8,24 @@ import { ProjectStatus } from "@/generated/prisma/enums";
 import { UserDetail } from "@/components/users/UserDetail";
 import { editProjectFormArgs } from "../../EditProjectForm/__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { withProjectItemProviders } from "../../ProjectItem/__stories__";
 import { getCommentList } from "@/components/comments/CommentList/__stories__";
+import { withDeleteProjectsProvider } from "../../DeleteProjectsContext/__stories__";
 import { withSelectedProjectsProvider } from "../../SelectedProjectsContext/__stories__";
+import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
+import { withUpdateProjectStatusesProvider } from "../../UpdateProjectStatusesContext/__stories__";
 
 const meta = {
   title: "components/projects/ProjectGridItem",
   component: ProjectGridItem,
-  decorators: [withSelectedProjectsProvider, withThemedBackground],
+  decorators: [
+    withProjectItemProviders,
+    withDeleteProjectsProvider,
+    withUpdateProjectStatusesProvider,
+    withCurrentUserProvider,
+    withSelectedProjectsProvider,
+    withThemedBackground,
+  ],
 } satisfies Meta<typeof ProjectGridItem>;
 
 export default meta;

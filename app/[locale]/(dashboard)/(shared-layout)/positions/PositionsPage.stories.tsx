@@ -1,28 +1,33 @@
-import { fn, mocked } from "storybook/test";
+import { mocked } from "storybook/test";
 import PositionsPageLoading from "./loading";
+import { usePathname } from "next/navigation";
 import { PositionsPage } from "./PositionsPage";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { usePathname, useRouter } from "next/navigation";
 import { PageDecorator } from "@/.storybook/PageDecorator";
 import { PositionList } from "@/components/position/PositionList";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { PositionListStory } from "@/components/position/PositionList/__stories__";
+import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 import { withSelectedItemsProvider } from "@/components/common/SelectedItemsContext/__stories__";
 import { withPageTransitionProvider } from "@/components/common/PageTransitionContext/__stories__";
+import { withCreatePositionProvider } from "@/components/position/CreatePositionContext/__stories__";
+import { withDeletePositionsProvider } from "@/components/position/DeletePositionsContext/__stories__";
 
 const meta = {
   title: "pages/PositionsPage",
   component: PositionsPage,
   parameters: { layout: "fullscreen" },
   decorators: [
+    withCreatePositionProvider,
+    withDeletePositionsProvider,
     withPageTransitionProvider,
     withSelectedItemsProvider,
+    withCurrentUserProvider,
     PageDecorator,
     withThemedBackground,
   ],
   beforeEach: () => {
     mocked(usePathname).mockReturnValue("/positions");
-    mocked(useRouter).mockReturnValue({ push: fn() } as any);
   },
 } satisfies Meta<typeof PositionsPage>;
 

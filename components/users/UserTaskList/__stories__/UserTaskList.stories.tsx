@@ -4,15 +4,21 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { UserTaskListItem } from "../../UserTaskListItem";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { UserTaskListItemStory } from "../../UserTaskListItem/__stories__";
+import { withDeleteTasksProvider } from "@/components/tasks/DeleteTasksContext/__stories__";
+import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 import { withSelectedTasksProvider } from "@/components/tasks/SelectedTasksContext/__stories__";
 import { withPageTransitionProvider } from "@/components/common/PageTransitionContext/__stories__";
+import { withUpdateTaskStatusesProvider } from "@/components/tasks/UpdateTaskStatusesContext/__stories__";
 
 const meta = {
   title: "components/users/UserTaskList",
   component: UserTaskList,
   decorators: [
-    withPageTransitionProvider,
+    withUpdateTaskStatusesProvider,
+    withDeleteTasksProvider,
     withSelectedTasksProvider,
+    withCurrentUserProvider,
+    withPageTransitionProvider,
     withThemedBackground,
   ],
   parameters: {

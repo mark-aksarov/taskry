@@ -1,18 +1,25 @@
 import { ProjectList } from "../ProjectList";
 import { mockedProjectList } from "@/mocks/projects";
-import { ProjectListItem } from "../../ProjectListItem";
 import type { Meta, StoryObj } from "@storybook/react";
+import { ProjectListItem } from "../../ProjectListItem";
+import { ProjectItemProviders } from "../../ProjectItem";
 import { ProjectListItemStory } from "../../ProjectListItem/__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withViewModeProvider } from "@/components/common/ViewMode/__stories__";
+import { withDeleteProjectsProvider } from "../../DeleteProjectsContext/__stories__";
 import { withSelectedProjectsProvider } from "../../SelectedProjectsContext/__stories__";
+import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 import { withPageTransitionProvider } from "@/components/common/PageTransitionContext/__stories__";
+import { withUpdateProjectStatusesProvider } from "../../UpdateProjectStatusesContext/__stories__";
 
 const meta = {
   title: "components/projects/ProjectList",
   component: ProjectList,
   decorators: [
+    withDeleteProjectsProvider,
+    withUpdateProjectStatusesProvider,
     withViewModeProvider,
+    withCurrentUserProvider,
     withPageTransitionProvider,
     withSelectedProjectsProvider,
     withThemedBackground,
@@ -25,11 +32,20 @@ type Story = StoryObj<typeof meta>;
 export const Default = {
   args: {
     children: mockedProjectList.map((project) => (
-      <ProjectListItem
+      <ProjectItemProviders
         key={project.id}
-        {...ProjectListItemStory.args}
-        {...project}
-      />
+        projectId={project.id}
+        projectStatus={project.status}
+        updateProject={() => ({ status: "success" })}
+        deleteProject={() => ({ status: "success" })}
+        updateProjectStatus={() => ({ status: "success" })}
+      >
+        <ProjectListItem
+          key={project.id}
+          {...ProjectListItemStory.args}
+          {...project}
+        />
+      </ProjectItemProviders>
     )),
   },
 } satisfies Story;

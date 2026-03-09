@@ -38,10 +38,7 @@ export function TaskCategoryListItemActionMenuTrigger({
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
   // State for edit modal from context
-  const {
-    isModalOpen: isEditModalOpen,
-    onModalOpenChange: onEditModalOpenChange,
-  } = useUpdateTaskCategory();
+  const { onModalOpenChange: onEditModalOpenChange } = useUpdateTaskCategory();
 
   /**
    * Handles menu actions for a task category item
@@ -88,8 +85,6 @@ export function TaskCategoryListItemActionMenuTrigger({
 
       {/* Modals for editing, deleting, and guest mode */}
       <EditTaskCategoryModal
-        isOpen={isEditModalOpen}
-        onOpenChange={onEditModalOpenChange}
         taskCategoryId={taskCategoryId}
         taskCategoryName={taskCategoryName}
       />

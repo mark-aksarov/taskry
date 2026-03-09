@@ -1,24 +1,31 @@
-import { useState } from "react";
+import { useEffect } from "react";
 import { Button } from "@/components/ui/Button";
-import { DialogTrigger } from "react-aria-components";
 import { EditCompanyModal } from "./EditCompanyModal";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { useUpdateCompany } from "../UpdateCompanyContext";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { withUpdateCompanyProvider } from "../UpdateCompanyContext/__stories__";
 
 const meta = {
   title: "components/companies/EditCompanyModal",
   component: EditCompanyModal,
   decorators: [
     (Story) => {
-      const [isOpen, setIsOpen] = useState(true);
+      const { onModalOpenChange } = useUpdateCompany();
+
+      useEffect(() => onModalOpenChange(true), [onModalOpenChange]);
 
       return (
-        <DialogTrigger isOpen={isOpen} onOpenChange={setIsOpen}>
-          <Button label="Edit company" />
+        <>
+          <Button
+            label="Edit company"
+            onClick={() => onModalOpenChange(true)}
+          />
           <Story />
-        </DialogTrigger>
+        </>
       );
     },
+    withUpdateCompanyProvider,
     withThemedBackground,
   ],
 } satisfies Meta<typeof EditCompanyModal>;
@@ -30,7 +37,5 @@ export const Default = {
   args: {
     companyId: 1,
     companyName: "Company 1",
-    isOpen: true,
-    onOpenChange: () => {},
   },
 } satisfies Story;

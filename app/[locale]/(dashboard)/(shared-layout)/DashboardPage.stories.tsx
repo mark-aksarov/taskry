@@ -23,27 +23,50 @@ import {
   AssignedTasksPresentation,
 } from "@/components/tasks/AssignedTasks";
 
-import { fn, mocked } from "storybook/test";
+import { mocked } from "storybook/test";
+import { usePathname } from "next/navigation";
 import { mockedTaskList } from "@/mocks/tasks";
 import { DashboardPage } from "./DashboardPage";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { usePathname, useRouter } from "next/navigation";
 import { PageDecorator } from "@/.storybook/PageDecorator";
+import { NewTaskForm } from "@/components/tasks/NewTaskForm";
+import { NewTaskModal } from "@/components/tasks/NewTaskModal";
 import { AssignedTaskList } from "@/components/tasks/AssignedTaskList";
+import { NewSubtaskModal } from "@/components/subtasks/NewSubtaskModal";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { AppHeaderStory } from "@/components/layout/AppHeader/__stories__";
+import { newTaskFormArgs } from "@/components/tasks/NewTaskForm/__stories__";
 import { AssignedTaskListItem } from "@/components/tasks/AssignedTaskListItem";
 import { TaskListItemStory } from "@/components/tasks/TaskListItem/__stories__";
+import { withCreateTaskProvider } from "@/components/tasks/CreateTaskContext/__stories__";
+import { withDeleteTasksProvider } from "@/components/tasks/DeleteTasksContext/__stories__";
+import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
+import { withSelectedTasksProvider } from "@/components/tasks/SelectedTasksContext/__stories__";
 import { withPageTransitionProvider } from "@/components/common/PageTransitionContext/__stories__";
+import { withCreateSubtaskProvider } from "@/components/subtasks/CreateSubtaskContext/__stories__";
+import { withUpdateTaskStatusesProvider } from "@/components/tasks/UpdateTaskStatusesContext/__stories__";
 
 const meta = {
   title: "pages/DashboardPage",
   component: DashboardPage,
   parameters: { layout: "fullscreen" },
-  decorators: [withPageTransitionProvider, PageDecorator, withThemedBackground],
+  decorators: [
+    (Story) => (
+      <>
+        <Story />
+        <NewSubtaskModal taskId={1} />
+      </>
+    ),
+    withCreateSubtaskProvider,
+    withUpdateTaskStatusesProvider,
+    withDeleteTasksProvider,
+    withCurrentUserProvider,
+    withSelectedTasksProvider,
+    withPageTransitionProvider,
+    PageDecorator,
+    withThemedBackground,
+  ],
   beforeEach: () => {
     mocked(usePathname).mockReturnValue("/");
-    mocked(useRouter).mockReturnValue({ push: fn() } as any);
   },
 } satisfies Meta<typeof DashboardPage>;
 
@@ -95,6 +118,17 @@ export const Loading = {
 } satisfies Story;
 
 export const WithNoTasks = {
+  decorators: [
+    (Story) => (
+      <>
+        <Story />
+        <NewTaskModal
+          newTaskFormContainer={<NewTaskForm {...newTaskFormArgs} />}
+        />
+      </>
+    ),
+    withCreateTaskProvider,
+  ],
   args: {
     ...Default.args,
     assignedTasksContainer: <AssignedTasksContainer totalCount={0} />,

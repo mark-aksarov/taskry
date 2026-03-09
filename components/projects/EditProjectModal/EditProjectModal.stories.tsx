@@ -1,27 +1,34 @@
-import { useState } from "react";
+import { useEffect } from "react";
 import { Button } from "@/components/ui/Button";
 import { EditProjectForm } from "../EditProjectForm";
 import { EditProjectModal } from "./EditProjectModal";
-import { DialogTrigger } from "react-aria-components";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { useUpdateProject } from "../UpdateProjectContext";
 import { ProjectFormSkeleton } from "../ProjectFormSkeleton";
 import { editProjectFormArgs } from "../EditProjectForm/__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { withUpdateProjectProvider } from "../UpdateProjectContext/__stories__";
 
 const meta = {
   title: "components/projects/EditProjectModal",
   component: EditProjectModal,
   decorators: [
     (Story) => {
-      const [isOpen, setIsOpen] = useState(true);
+      const { onModalOpenChange } = useUpdateProject();
+
+      useEffect(() => onModalOpenChange(true), [onModalOpenChange]);
 
       return (
-        <DialogTrigger isOpen={isOpen} onOpenChange={setIsOpen}>
-          <Button label="Edit project" />
+        <>
+          <Button
+            label="Edit project"
+            onClick={() => onModalOpenChange(true)}
+          />
           <Story />
-        </DialogTrigger>
+        </>
       );
     },
+    withUpdateProjectProvider,
     withThemedBackground,
   ],
 } satisfies Meta<typeof EditProjectModal>;

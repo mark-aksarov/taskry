@@ -1,0 +1,1 @@
+export { withDeleteProjectCategoriesProvider } from "./withDeleteProjectCategoriesProvider";

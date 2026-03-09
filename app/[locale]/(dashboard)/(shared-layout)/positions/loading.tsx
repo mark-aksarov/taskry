@@ -38,7 +38,7 @@ export default function AppPositionsPageLoading() {
         </ToolbarMobileBottom>
 
         <List>
-          <Repeat items={20} renderItem={PositionListItemSkeleton} />
+          <Repeat items={10} renderItem={PositionListItemSkeleton} />
         </List>
       </PageGrid>
     </PageContainer>

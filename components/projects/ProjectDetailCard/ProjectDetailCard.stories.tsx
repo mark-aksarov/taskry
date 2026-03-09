@@ -3,19 +3,40 @@ import {
   ProjectDetailAltSkeleton,
 } from "../ProjectDetailAlt";
 
+import { EditProjectForm } from "../EditProjectForm";
+import { EditProjectModal } from "../EditProjectModal";
 import { mockedProjectDetail } from "@/mocks/projects";
 import { ProjectDetailCard } from "./ProjectDetailCard";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { ProjectDetailHeader } from "../ProjectDetailHeader";
 import { ProjectDetailActions } from "../ProjectDetailActions";
+import { editProjectFormArgs } from "../EditProjectForm/__stories__";
 import { DetailHeaderSkeleton } from "@/components/common/DetailHeader";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { projectDetailActionsArgs } from "../ProjectDetailActions/__stories__";
+import { withUpdateProjectProvider } from "../UpdateProjectContext/__stories__";
+import { withDeleteProjectProvider } from "../DeleteProjectContext/__stories__";
+import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 
 const meta = {
   title: "components/projects/ProjectDetailCard",
   component: ProjectDetailCard,
-  decorators: [withThemedBackground],
+  decorators: [
+    (Story) => (
+      <>
+        <Story />
+        <EditProjectModal
+          editProjectFormContainer={
+            <EditProjectForm {...editProjectFormArgs} />
+          }
+        />
+      </>
+    ),
+    withUpdateProjectProvider,
+    withDeleteProjectProvider,
+    withCurrentUserProvider,
+    withThemedBackground,
+  ],
 } satisfies Meta<typeof ProjectDetailCard>;
 
 export default meta;

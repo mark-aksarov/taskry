@@ -10,12 +10,23 @@ import { DetailHeaderSkeleton } from "@/components/common/DetailHeader";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { UserDetail, UserDetailSkeleton } from "@/components/users/UserDetail";
 import { editUserFormArgs } from "@/components/users/EditUserForm/__stories__";
+import { withDeleteUserProvider } from "@/components/users/DeleteUserContext/__stories__";
+import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
+import { withChangePasswordProvider } from "@/components/users/ChangePasswordContext/__stories__";
+import { withUpdateUserProvider } from "@/components/users/UpdateUserContext/__stories__";
 
 const meta = {
   title: "pages/ProfilePage",
   component: ProfilePage,
   parameters: { layout: "fullscreen" },
-  decorators: [PageDecorator, withThemedBackground],
+  decorators: [
+    withUpdateUserProvider,
+    withChangePasswordProvider,
+    withDeleteUserProvider,
+    withCurrentUserProvider,
+    PageDecorator,
+    withThemedBackground,
+  ],
   beforeEach: () => {
     mocked(usePathname).mockReturnValue("/profile");
   },

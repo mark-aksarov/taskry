@@ -6,6 +6,9 @@ const meta = {
   title: "components/users/UserTaskListItemSkeleton",
   component: UserTaskListItemSkeleton,
   decorators: [withThemedBackground],
+  parameters: {
+    backgroundVariant: "alt",
+  },
 } satisfies Meta<typeof UserTaskListItemSkeleton>;
 
 export default meta;

@@ -3,7 +3,7 @@ import { SelectedItemsProvider } from "../SelectedItemsContext";
 
 export const withSelectedItemsProvider: Decorator = (Story) => {
   return (
-    <SelectedItemsProvider pageItems={[]}>
+    <SelectedItemsProvider pageItems={[{ id: 1 }, { id: 2 }, { id: 3 }]}>
       <Story />
     </SelectedItemsProvider>
   );

@@ -4,11 +4,18 @@ import { Meta, StoryObj } from "@storybook/react";
 import { withToastRegion } from "@/.storybook/withToastRegion";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { DeleteProjectCategoriesModal } from "./DeleteProjectCategoriesModal";
+import { withDeleteProjectCategoriesProvider } from "../DeleteProjectCategoriesContext/__stories__";
+import { withSelectedItemsProvider } from "@/components/common/SelectedItemsContext/__stories__";
 
 const meta = {
   title: "components/project-categories/DeleteProjectCategoriesModal",
   component: DeleteProjectCategoriesModal,
-  decorators: [withToastRegion, withThemedBackground],
+  decorators: [
+    withDeleteProjectCategoriesProvider,
+    withSelectedItemsProvider,
+    withToastRegion,
+    withThemedBackground,
+  ],
   render: (args) => {
     const [open, setOpen] = React.useState(true);
 

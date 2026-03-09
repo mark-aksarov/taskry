@@ -1,0 +1,1 @@
+export { withUpdateCompanyProvider } from "./withUpdateCompanyProvider";

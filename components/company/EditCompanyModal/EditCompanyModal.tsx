@@ -5,29 +5,28 @@ import {
 } from "@/components/common/FormBaseModal";
 
 import { useTranslations } from "next-intl";
-import { DialogHeader } from "@/components/ui/Dialog";
 import { EditCompanyForm } from "../EditCompanyForm";
+import { DialogHeader } from "@/components/ui/Dialog";
+import { useUpdateCompany } from "../UpdateCompanyContext";
 
 interface EditCompanyModalProps {
   companyId: number;
   companyName: string;
-  isOpen: boolean;
-  onOpenChange: (open: boolean) => void;
 }
 
 export function EditCompanyModal({
   companyId,
   companyName,
-  isOpen,
-  onOpenChange,
 }: EditCompanyModalProps) {
   const t = useTranslations("company.EditCompanyModal");
+
+  const { isModalOpen, onModalOpenChange } = useUpdateCompany();
 
   return (
     <FormBaseModal
       className="md:w-[350px]"
-      isOpen={isOpen}
-      onOpenChange={onOpenChange}
+      isOpen={isModalOpen}
+      onOpenChange={onModalOpenChange}
     >
       <FormBaseModalDialog>
         <DialogHeader>{t("title")}</DialogHeader>
