@@ -1,8 +1,6 @@
 import { notFound } from "next/navigation";
 import { taskId } from "@/lib/schemas/task";
 import { TaskDetailPage } from "./TaskDetailPage";
-import { hasGuestRole } from "@/lib/utils/hasGuestRole";
-import { hasOwnerRole } from "@/lib/utils/hasOwnerRole";
 import { getTaskSummary } from "@/lib/data/task/task.dal";
 import { updateTask } from "@/lib/actions/task/updateTask";
 import { deleteTask } from "@/lib/actions/task/deleteTask";
@@ -11,7 +9,6 @@ import { updateComment } from "@/lib/actions/comment/updateComment";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { UpdateTaskProvider } from "@/components/tasks/UpdateTaskContext";
 import { DeleteTaskProvider } from "@/components/tasks/DeleteTaskContext";
-import { CurrentUserProvider } from "@/components/common/CurrentUserContext";
 import { TaskCommentsContainer } from "@/components/tasks/TaskCommentsContainer";
 import { EditTaskFormContainer } from "@/components/tasks/EditTaskFormContainer";
 import { TaskDetailAltContainer } from "@/components/tasks/TaskDetailAltContainer";
@@ -22,7 +19,7 @@ export default async function AppTaskDetailPage({
 }: {
   params: Promise<{ id: string }>;
 }) {
-  const session = await requireProtectedPage();
+  await requireProtectedPage();
 
   // Validation
   const { id: rawTaskId } = await params;
@@ -40,30 +37,20 @@ export default async function AppTaskDetailPage({
     notFound();
   }
 
-  // This data is required to determine the user's role
-  // and render the UI accordingly on the client side.
-  const currentUserContextValue = {
-    isGuest: await hasGuestRole(),
-    isOwner: await hasOwnerRole(),
-    userId: session.user.id,
-  };
-
   return (
-    <CurrentUserProvider value={currentUserContextValue}>
-      <UpdateTaskProvider updateTask={updateTask}>
-        <DeleteTaskProvider deleteTask={deleteTask}>
-          <TaskDetailPage
-            taskId={id}
-            taskTitle={taskSummary.title}
-            sendComment={sendComment}
-            updateComment={updateComment}
-            taskDetailContainer={<TaskDetailAltContainer taskId={id} />}
-            taskHeaderContainer={<TaskDetailHeaderContainer taskId={id} />}
-            editTaskFormContainer={<EditTaskFormContainer taskId={id} />}
-            taskCommentsContainer={<TaskCommentsContainer taskId={id} />}
-          />
-        </DeleteTaskProvider>
-      </UpdateTaskProvider>
-    </CurrentUserProvider>
+    <UpdateTaskProvider updateTask={updateTask}>
+      <DeleteTaskProvider deleteTask={deleteTask}>
+        <TaskDetailPage
+          taskId={id}
+          taskTitle={taskSummary.title}
+          sendComment={sendComment}
+          updateComment={updateComment}
+          taskDetailContainer={<TaskDetailAltContainer taskId={id} />}
+          taskHeaderContainer={<TaskDetailHeaderContainer taskId={id} />}
+          editTaskFormContainer={<EditTaskFormContainer taskId={id} />}
+          taskCommentsContainer={<TaskCommentsContainer taskId={id} />}
+        />
+      </DeleteTaskProvider>
+    </UpdateTaskProvider>
   );
 }

@@ -12,8 +12,6 @@ import { userId } from "@/lib/schemas/user";
 import { taskSortFields } from "@/lib/types";
 import { taskStatus } from "@/lib/schemas/task";
 import { projectId } from "@/lib/schemas/project";
-import { hasOwnerRole } from "@/lib/utils/hasOwnerRole";
-import { hasGuestRole } from "@/lib/utils/hasGuestRole";
 import { createTask } from "@/lib/actions/task/createTask";
 import { taskCategoryId } from "@/lib/schemas/taskCategory";
 import { deleteTasks } from "@/lib/actions/task/deleteTasks";
@@ -23,7 +21,6 @@ import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { CreateTaskProvider } from "@/components/tasks/CreateTaskContext";
 import { updateTaskStatuses } from "@/lib/actions/task/updateTaskStatuses";
 import { DeleteTasksProvider } from "@/components/tasks/DeleteTasksContext";
-import { CurrentUserProvider } from "@/components/common/CurrentUserContext";
 import { NewTaskFormContainer } from "@/components/tasks/NewTaskFormContainer";
 import { SelectedTasksProvider } from "@/components/tasks/SelectedTasksContext";
 import { PageTransitionProvider } from "@/components/common/PageTransitionContext";
@@ -62,20 +59,12 @@ export default async function AppTasksPage({
 }: {
   searchParams: Promise<{ [key: string]: string | undefined }>;
 }) {
-  const session = await requireProtectedPage();
+  await requireProtectedPage();
 
   // Validation
   const rawParams = await searchParams;
   const validated = searchParamsSchema.parse(rawParams);
   const { page, pageSize, sort, ...filters } = validated;
-
-  // This data is required to determine the user's role
-  // and render the UI accordingly on the client side.
-  const currentUserContextValue = {
-    isGuest: await hasGuestRole(),
-    isOwner: await hasOwnerRole(),
-    userId: session.user.id,
-  };
 
   // Render the empty page if there are no tasks (without applying filters)
   const totalCount = await getTaskCount();
@@ -89,40 +78,36 @@ export default async function AppTasksPage({
   });
 
   return (
-    <CurrentUserProvider value={currentUserContextValue}>
-      <UpdateTaskStatusesProvider updateTaskStatuses={updateTaskStatuses}>
-        <SelectedTasksProvider
-          pageItems={tasks.map((t) => ({ id: t.id, status: t.status }))}
-        >
-          <PageTransitionProvider>
-            <DeleteTasksProvider deleteTasks={deleteTasks}>
-              <CreateTaskCategoryProvider
-                createTaskCategory={createTaskCategory}
-              >
-                <CreateTaskProvider createTask={createTask}>
-                  <TasksPage
-                    totalCount={totalCount}
-                    totalFilteredTasks={totalFilteredTasks}
-                    selectedSortField={sort}
-                    newTaskFormContainer={<NewTaskFormContainer />}
-                    filtersFormContainer={
-                      <TaskFiltersFormContainer filters={filters} />
-                    }
-                    tasksContainer={
-                      <TasksContainer
-                        tasks={tasks}
-                        totalCount={totalFilteredTasks}
-                        page={page}
-                        pageSize={pageSize}
-                      />
-                    }
-                  />
-                </CreateTaskProvider>
-              </CreateTaskCategoryProvider>
-            </DeleteTasksProvider>
-          </PageTransitionProvider>
-        </SelectedTasksProvider>
-      </UpdateTaskStatusesProvider>
-    </CurrentUserProvider>
+    <UpdateTaskStatusesProvider updateTaskStatuses={updateTaskStatuses}>
+      <SelectedTasksProvider
+        pageItems={tasks.map((t) => ({ id: t.id, status: t.status }))}
+      >
+        <PageTransitionProvider>
+          <DeleteTasksProvider deleteTasks={deleteTasks}>
+            <CreateTaskCategoryProvider createTaskCategory={createTaskCategory}>
+              <CreateTaskProvider createTask={createTask}>
+                <TasksPage
+                  totalCount={totalCount}
+                  totalFilteredTasks={totalFilteredTasks}
+                  selectedSortField={sort}
+                  newTaskFormContainer={<NewTaskFormContainer />}
+                  filtersFormContainer={
+                    <TaskFiltersFormContainer filters={filters} />
+                  }
+                  tasksContainer={
+                    <TasksContainer
+                      tasks={tasks}
+                      totalCount={totalFilteredTasks}
+                      page={page}
+                      pageSize={pageSize}
+                    />
+                  }
+                />
+              </CreateTaskProvider>
+            </CreateTaskCategoryProvider>
+          </DeleteTasksProvider>
+        </PageTransitionProvider>
+      </SelectedTasksProvider>
+    </UpdateTaskStatusesProvider>
   );
 }

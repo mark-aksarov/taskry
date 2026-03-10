@@ -1,15 +1,12 @@
 import { notFound } from "next/navigation";
 import { projectId } from "@/lib/schemas/project";
-import { hasGuestRole } from "@/lib/utils/hasGuestRole";
 import { ProjectDetailPage } from "./ProjectDetailPage";
-import { hasOwnerRole } from "@/lib/utils/hasOwnerRole";
 import { sendComment } from "@/lib/actions/comment/sendComment";
 import { getProjectSummary } from "@/lib/data/project/project.dal";
 import { deleteProject } from "@/lib/actions/project/deleteProject";
 import { updateComment } from "@/lib/actions/comment/updateComment";
 import { updateProject } from "@/lib/actions/project/updateProject";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
-import { CurrentUserProvider } from "@/components/common/CurrentUserContext";
 import { DeleteProjectProvider } from "@/components/projects/DeleteProjectContext";
 import { UpdateProjectProvider } from "@/components/projects/UpdateProjectContext";
 import { EditProjectFormContainer } from "@/components/projects/EditProjectFormContainer";
@@ -22,7 +19,7 @@ export default async function AppProjectDetailPage({
 }: {
   params: Promise<{ id: string }>;
 }) {
-  const session = await requireProtectedPage();
+  await requireProtectedPage();
 
   // Validation
   const { id: rawProjectId } = await params;
@@ -40,38 +37,22 @@ export default async function AppProjectDetailPage({
     notFound();
   }
 
-  // This data is required to determine the user's role
-  // and render the UI accordingly on the client side.
-  const currentUserContextValue = {
-    isGuest: await hasGuestRole(),
-    isOwner: await hasOwnerRole(),
-    userId: session.user.id,
-  };
-
   return (
-    <CurrentUserProvider value={currentUserContextValue}>
-      <UpdateProjectProvider updateProject={updateProject}>
-        <DeleteProjectProvider deleteProject={deleteProject}>
-          <ProjectDetailPage
-            projectId={id}
-            projectTitle={projectSummary.title}
-            sendComment={sendComment}
-            updateComment={updateComment}
-            projectDetailContainer={
-              <ProjectDetailAltContainer projectId={id} />
-            }
-            projectHeaderContainer={
-              <ProjectDetailHeaderContainer projectId={id} />
-            }
-            projectCommentsContainer={
-              <ProjectCommentsContainer projectId={id} />
-            }
-            editProjectFormContainer={
-              <EditProjectFormContainer projectId={id} />
-            }
-          />
-        </DeleteProjectProvider>
-      </UpdateProjectProvider>
-    </CurrentUserProvider>
+    <UpdateProjectProvider updateProject={updateProject}>
+      <DeleteProjectProvider deleteProject={deleteProject}>
+        <ProjectDetailPage
+          projectId={id}
+          projectTitle={projectSummary.title}
+          sendComment={sendComment}
+          updateComment={updateComment}
+          projectDetailContainer={<ProjectDetailAltContainer projectId={id} />}
+          projectHeaderContainer={
+            <ProjectDetailHeaderContainer projectId={id} />
+          }
+          projectCommentsContainer={<ProjectCommentsContainer projectId={id} />}
+          editProjectFormContainer={<EditProjectFormContainer projectId={id} />}
+        />
+      </DeleteProjectProvider>
+    </UpdateProjectProvider>
   );
 }

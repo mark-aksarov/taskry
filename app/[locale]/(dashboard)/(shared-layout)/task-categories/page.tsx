@@ -1,8 +1,5 @@
-import { hasGuestRole } from "@/lib/utils/hasGuestRole";
-import { hasOwnerRole } from "@/lib/utils/hasOwnerRole";
 import { TaskCategoriesPage } from "./TaskCategoriesPage";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
-import { CurrentUserProvider } from "@/components/common/CurrentUserContext";
 import { SelectedItemsProvider } from "@/components/common/SelectedItemsContext";
 import { createTaskCategory } from "@/lib/actions/taskCategory/createTaskCategory";
 import { PageTransitionProvider } from "@/components/common/PageTransitionContext";
@@ -14,36 +11,26 @@ import { DeleteTaskCategoriesProvider } from "@/components/taskCategory/DeleteTa
 
 export default async function AppTaskCategoriesPage() {
   // Authorization
-  const session = await requireProtectedPage();
-
-  // This data is required to determine the user's role
-  // and render the UI accordingly on the client side.
-  const currentUserContextValue = {
-    isGuest: await hasGuestRole(),
-    isOwner: await hasOwnerRole(),
-    userId: session.user.id,
-  };
+  await requireProtectedPage();
 
   const taskCategories = await getTaskCategorySummaries();
 
   return (
-    <CurrentUserProvider value={currentUserContextValue}>
-      <SelectedItemsProvider
-        pageItems={taskCategories.map((t) => ({ id: t.id }))}
-      >
-        <PageTransitionProvider>
-          <DeleteTaskCategoriesProvider
-            deleteTaskCategories={deleteTaskCategories}
-          >
-            <CreateTaskCategoryProvider createTaskCategory={createTaskCategory}>
-              <TaskCategoriesPage
-                totalCount={taskCategories.length}
-                taskCategoriesContainer={<TaskCategoriesContainer />}
-              />
-            </CreateTaskCategoryProvider>
-          </DeleteTaskCategoriesProvider>
-        </PageTransitionProvider>
-      </SelectedItemsProvider>
-    </CurrentUserProvider>
+    <SelectedItemsProvider
+      pageItems={taskCategories.map((t) => ({ id: t.id }))}
+    >
+      <PageTransitionProvider>
+        <DeleteTaskCategoriesProvider
+          deleteTaskCategories={deleteTaskCategories}
+        >
+          <CreateTaskCategoryProvider createTaskCategory={createTaskCategory}>
+            <TaskCategoriesPage
+              totalCount={taskCategories.length}
+              taskCategoriesContainer={<TaskCategoriesContainer />}
+            />
+          </CreateTaskCategoryProvider>
+        </DeleteTaskCategoriesProvider>
+      </PageTransitionProvider>
+    </SelectedItemsProvider>
   );
 }

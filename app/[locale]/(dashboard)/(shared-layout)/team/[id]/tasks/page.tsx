@@ -19,7 +19,6 @@ import { DeleteUserProvider } from "@/components/users/DeleteUserContext";
 import { UserTasksContainer } from "@/components/users/UserTasksContainer";
 import { updateTaskStatuses } from "@/lib/actions/task/updateTaskStatuses";
 import { DeleteTasksProvider } from "@/components/tasks/DeleteTasksContext";
-import { CurrentUserProvider } from "@/components/common/CurrentUserContext";
 import { UserTasksPageLayout } from "@/components/users/UserTasksPageLayout";
 import { UserHeaderContainer } from "@/components/users/UserHeaderContainer";
 import { NewTaskFormContainer } from "@/components/tasks/NewTaskFormContainer";
@@ -69,79 +68,68 @@ export default async function AppProfileTasksPage({
     },
   });
 
-  // This data is required to determine the user's role
-  // and render the UI accordingly on the client side.
+  // Show user actions if the user is the owner, guest, or the current user
   const isOwner = await hasOwnerRole();
   const isGuest = await hasGuestRole();
-
-  const currentUserContextValue = {
-    isGuest,
-    isOwner,
-    userId: session.user.id,
-  };
-
-  // Show user actions if the user is the owner, guest, or the current user
   const showUserActions = isOwner || isGuest || session.user.id === userId;
 
   return (
-    <CurrentUserProvider value={currentUserContextValue}>
-      <UpdateTaskStatusesProvider updateTaskStatuses={updateTaskStatuses}>
-        <SelectedTasksProvider
-          pageItems={tasks.map((task) => ({
-            id: task.id,
-            status: task.status,
-          }))}
-        >
-          <PageTransitionProvider>
-            <DeleteTasksProvider deleteTasks={deleteTasks}>
-              <UpdateUserProvider updateUser={updateUser}>
-                <ChangePasswordProvider changePassword={changePassword}>
-                  <DeleteUserProvider deleteUser={deleteUser}>
-                    <CreateTaskProvider createTask={createTask}>
-                      <UserTasksPageLayout
-                        userId={userId}
-                        totalTasksCount={totalTasksCount}
-                        selectedSortField={sort}
-                        backButton
-                        navigationDesktop={
-                          <UserNavigationDesktop
-                            userActions={
-                              showUserActions && (
-                                <ProfileActions
-                                  userId={userId}
-                                  userFullName={userSummary.fullName}
-                                />
-                              )
-                            }
-                          />
-                        }
-                        navigationMobile={<UserNavigationMobile />}
-                        userTasksContainer={
-                          <UserTasksContainer
-                            tasks={tasks}
-                            totalCount={totalTasksCount}
-                            page={page}
-                            pageSize={pageSize}
-                          />
-                        }
-                        editUserFormContainer={
-                          <EditUserFormContainer userId={userId} />
-                        }
-                        userHeaderContainer={
-                          <UserHeaderContainer userId={userId} />
-                        }
-                        newTaskFormContainer={
-                          <NewTaskFormContainer forcedAssigneeId={userId} />
-                        }
-                      />
-                    </CreateTaskProvider>
-                  </DeleteUserProvider>
-                </ChangePasswordProvider>
-              </UpdateUserProvider>
-            </DeleteTasksProvider>
-          </PageTransitionProvider>
-        </SelectedTasksProvider>
-      </UpdateTaskStatusesProvider>
-    </CurrentUserProvider>
+    <UpdateTaskStatusesProvider updateTaskStatuses={updateTaskStatuses}>
+      <SelectedTasksProvider
+        pageItems={tasks.map((task) => ({
+          id: task.id,
+          status: task.status,
+        }))}
+      >
+        <PageTransitionProvider>
+          <DeleteTasksProvider deleteTasks={deleteTasks}>
+            <UpdateUserProvider updateUser={updateUser}>
+              <ChangePasswordProvider changePassword={changePassword}>
+                <DeleteUserProvider deleteUser={deleteUser}>
+                  <CreateTaskProvider createTask={createTask}>
+                    <UserTasksPageLayout
+                      userId={userId}
+                      totalTasksCount={totalTasksCount}
+                      selectedSortField={sort}
+                      backButton
+                      navigationDesktop={
+                        <UserNavigationDesktop
+                          userActions={
+                            showUserActions && (
+                              <ProfileActions
+                                userId={userId}
+                                userFullName={userSummary.fullName}
+                              />
+                            )
+                          }
+                        />
+                      }
+                      navigationMobile={<UserNavigationMobile />}
+                      userTasksContainer={
+                        <UserTasksContainer
+                          tasks={tasks}
+                          totalCount={totalTasksCount}
+                          page={page}
+                          pageSize={pageSize}
+                        />
+                      }
+                      editUserFormContainer={
+                        <EditUserFormContainer userId={userId} />
+                      }
+                      userHeaderContainer={
+                        <UserHeaderContainer userId={userId} />
+                      }
+                      newTaskFormContainer={
+                        <NewTaskFormContainer forcedAssigneeId={userId} />
+                      }
+                    />
+                  </CreateTaskProvider>
+                </DeleteUserProvider>
+              </ChangePasswordProvider>
+            </UpdateUserProvider>
+          </DeleteTasksProvider>
+        </PageTransitionProvider>
+      </SelectedTasksProvider>
+    </UpdateTaskStatusesProvider>
   );
 }

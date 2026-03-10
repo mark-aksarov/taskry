@@ -15,13 +15,10 @@ import { z } from "zod";
 import { CustomersPage } from "./CustomersPage";
 import { customerSortFields } from "@/lib/types";
 import { companyId } from "@/lib/schemas/company";
-import { hasOwnerRole } from "@/lib/utils/hasOwnerRole";
-import { hasGuestRole } from "@/lib/utils/hasGuestRole";
 import { createCompany } from "@/lib/actions/company/createCompany";
 import { createCustomer } from "@/lib/actions/customer/createCustomer";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { deleteCustomers } from "@/lib/actions/customer/deleteCustomers";
-import { CurrentUserProvider } from "@/components/common/CurrentUserContext";
 import { CustomersContainer } from "@/components/customer/CustomersContainer";
 import { SelectedItemsProvider } from "@/components/common/SelectedItemsContext";
 import { CreateCompanyProvider } from "@/components/company/CreateCompanyContext";
@@ -52,20 +49,12 @@ export default async function AppCustomersPage({
   searchParams: Promise<{ [key: string]: string | undefined }>;
 }) {
   // Authorization
-  const session = await requireProtectedPage();
+  await requireProtectedPage();
 
   // Validation
   const rawParams = await searchParams;
   const { page, pageSize, sort, ...filters } =
     searchParamsSchema.parse(rawParams);
-
-  // This data is required to determine the user's role
-  // and render the UI accordingly on the client side.
-  const currentUserContextValue = {
-    isGuest: await hasGuestRole(),
-    isOwner: await hasOwnerRole(),
-    userId: session.user.id,
-  };
 
   // Render the empty page if there are no customers (without applying filters)
   const totalCount = await getCustomerCount();
@@ -80,34 +69,32 @@ export default async function AppCustomersPage({
     });
 
   return (
-    <CurrentUserProvider value={currentUserContextValue}>
-      <SelectedItemsProvider pageItems={customers.map((c) => ({ id: c.id }))}>
-        <PageTransitionProvider>
-          <DeleteCustomersProvider deleteCustomers={deleteCustomers}>
-            <CreateCompanyProvider createCompany={createCompany}>
-              <CreateCustomerProvider createCustomer={createCustomer}>
-                <CustomersPage
-                  totalCount={totalCount}
-                  totalFilteredCustomers={totalFilteredCustomers}
-                  selectedSortField={sort}
-                  filtersFormContainer={
-                    <CustomerFiltersFormContainer filters={filters} />
-                  }
-                  newCustomerFormContainer={<NewCustomerFormContainer />}
-                  customersContainer={
-                    <CustomersContainer
-                      customers={customers}
-                      totalCount={totalCount}
-                      page={page}
-                      pageSize={pageSize}
-                    />
-                  }
-                />
-              </CreateCustomerProvider>
-            </CreateCompanyProvider>
-          </DeleteCustomersProvider>
-        </PageTransitionProvider>
-      </SelectedItemsProvider>
-    </CurrentUserProvider>
+    <SelectedItemsProvider pageItems={customers.map((c) => ({ id: c.id }))}>
+      <PageTransitionProvider>
+        <DeleteCustomersProvider deleteCustomers={deleteCustomers}>
+          <CreateCompanyProvider createCompany={createCompany}>
+            <CreateCustomerProvider createCustomer={createCustomer}>
+              <CustomersPage
+                totalCount={totalCount}
+                totalFilteredCustomers={totalFilteredCustomers}
+                selectedSortField={sort}
+                filtersFormContainer={
+                  <CustomerFiltersFormContainer filters={filters} />
+                }
+                newCustomerFormContainer={<NewCustomerFormContainer />}
+                customersContainer={
+                  <CustomersContainer
+                    customers={customers}
+                    totalCount={totalCount}
+                    page={page}
+                    pageSize={pageSize}
+                  />
+                }
+              />
+            </CreateCustomerProvider>
+          </CreateCompanyProvider>
+        </DeleteCustomersProvider>
+      </PageTransitionProvider>
+    </SelectedItemsProvider>
   );
 }

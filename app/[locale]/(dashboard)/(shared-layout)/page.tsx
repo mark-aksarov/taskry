@@ -1,14 +1,11 @@
 import { z } from "zod";
 import { DashboardPage } from "./DashboardPage";
 import { getTaskList } from "@/lib/data/task/task.dal";
-import { hasGuestRole } from "@/lib/utils/hasGuestRole";
-import { hasOwnerRole } from "@/lib/utils/hasOwnerRole";
 import { deleteTasks } from "@/lib/actions/task/deleteTasks";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { pageSearchParam, pageSizeSearchParam } from "@/lib/schemas/base";
 import { updateTaskStatuses } from "@/lib/actions/task/updateTaskStatuses";
 import { DeleteTasksProvider } from "@/components/tasks/DeleteTasksContext";
-import { CurrentUserProvider } from "@/components/common/CurrentUserContext";
 import { SelectedTasksProvider } from "@/components/tasks/SelectedTasksContext";
 import { PageTransitionProvider } from "@/components/common/PageTransitionContext";
 import { AssignedTasksContainer } from "@/components/tasks/AssignedTasksContainer";
@@ -45,38 +42,28 @@ export default async function AppDashboardPage({
     },
   });
 
-  // This data is required to determine the user's role
-  // and render the UI accordingly on the client side.
-  const currentUserContextValue = {
-    isGuest: await hasGuestRole(),
-    isOwner: await hasOwnerRole(),
-    userId: session.user.id,
-  };
-
   return (
     <UpdateTaskStatusesProvider updateTaskStatuses={updateTaskStatuses}>
       <SelectedTasksProvider
         pageItems={tasks.map((t) => ({ id: t.id, status: t.status }))}
       >
         <PageTransitionProvider>
-          <CurrentUserProvider value={currentUserContextValue}>
-            <DeleteTasksProvider deleteTasks={deleteTasks}>
-              <DashboardPage
-                totalProjectsCardContainer={<TotalProjectsCardContainer />}
-                totalTasksCardContainer={<TotalTasksCardContainer />}
-                totalUsersCardContainer={<TotalUsersCardContainer />}
-                totalCustomersCardContainer={<TotalCustomersCardContainer />}
-                assignedTasksContainer={
-                  <AssignedTasksContainer
-                    tasks={tasks}
-                    totalCount={totalCount}
-                    page={page}
-                    pageSize={pageSize}
-                  />
-                }
-              />
-            </DeleteTasksProvider>
-          </CurrentUserProvider>
+          <DeleteTasksProvider deleteTasks={deleteTasks}>
+            <DashboardPage
+              totalProjectsCardContainer={<TotalProjectsCardContainer />}
+              totalTasksCardContainer={<TotalTasksCardContainer />}
+              totalUsersCardContainer={<TotalUsersCardContainer />}
+              totalCustomersCardContainer={<TotalCustomersCardContainer />}
+              assignedTasksContainer={
+                <AssignedTasksContainer
+                  tasks={tasks}
+                  totalCount={totalCount}
+                  page={page}
+                  pageSize={pageSize}
+                />
+              }
+            />
+          </DeleteTasksProvider>
         </PageTransitionProvider>
       </SelectedTasksProvider>
     </UpdateTaskStatusesProvider>

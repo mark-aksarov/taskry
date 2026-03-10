@@ -11,7 +11,6 @@ import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { DeleteUserProvider } from "@/components/users/DeleteUserContext";
 import { UpdateUserProvider } from "@/components/users/UpdateUserContext";
 import { UserHeaderContainer } from "@/components/users/UserHeaderContainer";
-import { CurrentUserProvider } from "@/components/common/CurrentUserContext";
 import { EditUserFormContainer } from "@/components/users/EditUserFormContainer";
 import { ProfileDetailContainer } from "@/components/users/ProfileDetailContainer";
 import { ChangePasswordProvider } from "@/components/users/ChangePasswordContext";
@@ -39,38 +38,25 @@ export default async function AppProfilePage({
     notFound();
   }
 
-  // This data is required to determine the user's role
-  // and render the UI accordingly on the client side.
+  // Show user actions if the user is the owner, guest, or the current user
   const isOwner = await hasOwnerRole();
   const isGuest = await hasGuestRole();
-
-  const currentUserContextValue = {
-    isGuest,
-    isOwner,
-    userId: session.user.id,
-  };
-
-  // Show user actions if the user is the owner, guest, or the current user
   const showUserActions = isOwner || isGuest || session.user.id === userId;
 
   return (
-    <CurrentUserProvider value={currentUserContextValue}>
-      <UpdateUserProvider updateUser={updateUser}>
-        <ChangePasswordProvider changePassword={changePassword}>
-          <DeleteUserProvider deleteUser={deleteUser}>
-            <TeamProfilePage
-              showUserActions={showUserActions}
-              userId={userId}
-              userFullName={userSummary.fullName}
-              profileDetailContainer={
-                <ProfileDetailContainer userId={userId} />
-              }
-              userHeaderContainer={<UserHeaderContainer userId={userId} />}
-              editUserFormContainer={<EditUserFormContainer userId={userId} />}
-            />
-          </DeleteUserProvider>
-        </ChangePasswordProvider>
-      </UpdateUserProvider>
-    </CurrentUserProvider>
+    <UpdateUserProvider updateUser={updateUser}>
+      <ChangePasswordProvider changePassword={changePassword}>
+        <DeleteUserProvider deleteUser={deleteUser}>
+          <TeamProfilePage
+            showUserActions={showUserActions}
+            userId={userId}
+            userFullName={userSummary.fullName}
+            profileDetailContainer={<ProfileDetailContainer userId={userId} />}
+            userHeaderContainer={<UserHeaderContainer userId={userId} />}
+            editUserFormContainer={<EditUserFormContainer userId={userId} />}
+          />
+        </DeleteUserProvider>
+      </ChangePasswordProvider>
+    </UpdateUserProvider>
   );
 }
