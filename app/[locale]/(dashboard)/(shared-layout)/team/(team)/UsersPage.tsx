@@ -38,12 +38,8 @@ export function UsersPage({
 
   return (
     <>
-      <PageContainer
-        fullscreen={isFilteredEmpty}
-        headerOffset
-        className="relative"
-      >
-        <PageGrid className="flex-auto">
+      <PageContainer fullscreen={isFilteredEmpty} headerOffset>
+        <PageGrid className="relative flex-auto">
           <ViewModeProvider>
             <ToolbarDesktop>
               <UserToolbarManageMenuTrigger />

@@ -10,9 +10,10 @@ import { PageGrid } from "@/components/common/PageGrid";
 import { BackButton } from "@/components/common/BackButton";
 import { ViewModeProvider } from "@/components/common/ViewMode";
 import { PageContainer } from "@/components/common/PageContainer";
+import { PageEmptySection } from "@/components/common/PageEmptySection";
 import { NewPositionModal } from "@/components/position/NewPositionModal";
-import { EmptyPageContainer } from "@/components/common/EmptyPageContainer";
 import { PositionToolbarActionsMenuTrigger } from "@/components/position/PositionToolbarActionsMenuTrigger";
+import { PositionsEmptySectionCreateButton } from "@/components/position/PositionsEmptySectionCreateButton";
 import { PositionToolbarCreateNewModalTrigger } from "@/components/position/PositionToolbarCreateNewModalTrigger";
 
 interface PositionsPageProps {
@@ -29,11 +30,21 @@ export function PositionsPage({
   if (totalCount === 0) {
     return (
       <>
-        <EmptyPageContainer
-          heading={t("emptySection.heading")}
-          description={t("emptySection.description")}
-          toolbarCreateNewMenuTrigger={<PositionToolbarCreateNewModalTrigger />}
-        />
+        <PageContainer fullscreen headerOffset>
+          <PageGrid className="relative flex-auto">
+            <ToolbarMobileTop>
+              <BackButton href="/customers" />
+              <ToolbarMobileHeading>{t("heading")}</ToolbarMobileHeading>
+            </ToolbarMobileTop>
+
+            <PageEmptySection
+              heading={t("emptySection.heading")}
+              description={t("emptySection.description")}
+              createButton={<PositionsEmptySectionCreateButton />}
+            />
+          </PageGrid>
+        </PageContainer>
+
         <NewPositionModal />
       </>
     );

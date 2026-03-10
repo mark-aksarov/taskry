@@ -1,4 +1,7 @@
 {
+  "CustomersEmptySectionCreateButton": {
+    "label": "Новый клиент"
+  },
   "CustomerContainer": {
     "notFound": "Клиент не найден. Возможно, он был удален другим пользователем."
   },

@@ -1,4 +1,7 @@
 {
+  "TaskCategoriesEmptySectionCreateButton": {
+    "label": "Новая категория задач"
+  },
   "NewTaskCategoryForm": {
     "submitButtonLabel": "Создать категорию",
     "successMessage": "Категория задач успешно создана"

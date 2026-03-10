@@ -11,7 +11,6 @@ export interface PageStateContainerProps {
   description: string;
   headerOffset?: boolean;
   button: React.ReactNode;
-  emptySectionClassName?: string;
 }
 
 export function PageStateContainer({
@@ -19,13 +18,14 @@ export function PageStateContainer({
   description,
   headerOffset,
   button,
-  emptySectionClassName,
 }: PageStateContainerProps) {
   return (
     <PageContainer fullscreen centered headerOffset={headerOffset}>
-      <EmptySection className={emptySectionClassName}>
+      <EmptySection>
         <EmptySectionHeading>{heading}</EmptySectionHeading>
-        <EmptySectionDescription>{description}</EmptySectionDescription>
+        <EmptySectionDescription className="max-w-[500px]">
+          {description}
+        </EmptySectionDescription>
         {button}
       </EmptySection>
     </PageContainer>

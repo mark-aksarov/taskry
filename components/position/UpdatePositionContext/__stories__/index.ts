@@ -1,0 +1,1 @@
+export { withUpdatePositionProvider } from "./withUpdatePositionProvider";

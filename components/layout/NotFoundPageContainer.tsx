@@ -26,7 +26,6 @@ export default function NotFoundPageContainer({
           label={linkLabel}
         />
       }
-      emptySectionClassName="max-w-[600px]"
       {...props}
     />
   );

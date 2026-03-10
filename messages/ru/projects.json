@@ -1,4 +1,7 @@
 {
+  "ProjectsEmptySectionCreateButton": {
+    "label": "Новый проект"
+  },
   "ProjectContainer": {
     "notFound": "Проект не найден. Возможно, он был удален другим пользователем."
   },

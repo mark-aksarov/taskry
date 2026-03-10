@@ -28,7 +28,6 @@ const meta = {
   ],
   beforeEach: () => {
     mocked(usePathname).mockReturnValue("/companies");
-    mocked(useRouter).mockReturnValue({ push: fn() } as any);
   },
 } satisfies Meta<typeof CompaniesPage>;
 

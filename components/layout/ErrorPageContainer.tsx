@@ -37,7 +37,6 @@ export default function ErrorPageContainer({
           }}
         />
       }
-      emptySectionClassName="max-w-[600px]"
       {...props}
     />
   );

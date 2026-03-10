@@ -1,4 +1,7 @@
 {
+  "TaskCategoriesEmptySectionCreateButton": {
+    "label": "New task category"
+  },
   "NewTaskCategoryForm": {
     "submitButtonLabel": "Create category",
     "successMessage": "Task category created successfully."

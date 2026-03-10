@@ -21,8 +21,8 @@
   "AssignedTasksSectionHeading": {
     "text": "Назначенные задачи"
   },
-  "AssignedTasksEmptyCard": {
-    "heading": "Задач пока нет",
+  "TasksEmptySection": {
+    "heading": "Нет задач",
     "description": "Создайте новую задачу, чтобы отслеживать свою работу",
     "button": "Новая задача"
   },

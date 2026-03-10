@@ -18,7 +18,6 @@ export default function Error({
       description={t("description")}
       reset={reset}
       resetButtonLabel={t("buttonLabel")}
-      emptySectionClassName="max-w-[500px]"
     />
   );
 }

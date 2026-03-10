@@ -4,8 +4,8 @@ import { useTranslations } from "next-intl";
 import { useCreateTask } from "../CreateTaskContext";
 import { EmptySectionButton } from "@/components/common/EmptySection";
 
-export function AssignedTasksSectionButton() {
-  const t = useTranslations("tasks.AssignedTasksEmptyCard");
+export function TasksEmptySectionCreateButton() {
+  const t = useTranslations("tasks.TasksEmptySection");
 
   const { onModalOpenChange } = useCreateTask();
 

@@ -58,6 +58,7 @@ export function UserTasksPageLayout({
           userHeaderContainer={userHeaderContainer}
           navigationDesktop={navigationDesktop}
           navigationMobile={navigationMobile}
+          backButton={backButton}
         />
 
         <ChangePasswordModal userId={userId} />

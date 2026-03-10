@@ -1,4 +1,7 @@
 {
+  "PositionsEmptySectionCreateButton": {
+    "label": "Новая должность"
+  },
   "NewPositionForm": {
     "submitButtonLabel": "Создать должность",
     "successMessage": "Должность успешно создана"

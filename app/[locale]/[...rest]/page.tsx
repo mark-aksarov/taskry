@@ -10,7 +10,6 @@ export default function NotFound() {
       description={t("description")}
       linkHref="/"
       linkLabel={t("toHome")}
-      emptySectionClassName="max-w-[500px]"
     />
   );
 }

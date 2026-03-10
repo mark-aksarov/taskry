@@ -21,10 +21,10 @@
   "AssignedTasksSectionHeading": {
     "text": "Assigned Tasks"
   },
-  "AssignedTasksEmptyCard": {
-    "heading": "No tasks yet",
+  "TasksEmptySection": {
+    "heading": "No tasks",
     "description": "Create a new task to keep track of your work",
-    "button": "New Task"
+    "button": "New task"
   },
   "TotalTasksCard": {
     "text": "Total Tasks"

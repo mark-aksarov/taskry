@@ -11,8 +11,9 @@ import { BackButton } from "@/components/common/BackButton";
 import { ViewModeProvider } from "@/components/common/ViewMode";
 import { PageContainer } from "@/components/common/PageContainer";
 import { NewCompanyModal } from "@/components/company/NewCompanyModal";
-import { EmptyPageContainer } from "@/components/common/EmptyPageContainer";
+import { PageEmptySection } from "@/components/common/PageEmptySection";
 import { CompanyToolbarActionsMenuTrigger } from "@/components/company/CompanyToolbarActionsMenuTrigger";
+import { CompaniesEmptySectionCreateButton } from "@/components/company/CompaniesEmptySectionCreateButton";
 import { CompanyToolbarCreateNewModalTrigger } from "@/components/company/CompanyToolbarCreateNewModalTrigger";
 
 interface CompaniesPageProps {
@@ -29,11 +30,21 @@ export function CompaniesPage({
   if (totalCount === 0) {
     return (
       <>
-        <EmptyPageContainer
-          heading={t("emptySection.heading")}
-          description={t("emptySection.description")}
-          toolbarCreateNewMenuTrigger={<CompanyToolbarCreateNewModalTrigger />}
-        />
+        <PageContainer fullscreen headerOffset>
+          <PageGrid className="relative flex-auto">
+            <ToolbarMobileTop>
+              <BackButton href="/customers" />
+              <ToolbarMobileHeading>{t("heading")}</ToolbarMobileHeading>
+            </ToolbarMobileTop>
+
+            <PageEmptySection
+              heading={t("emptySection.heading")}
+              description={t("emptySection.description")}
+              createButton={<CompaniesEmptySectionCreateButton />}
+            />
+          </PageGrid>
+        </PageContainer>
+
         <NewCompanyModal />
       </>
     );

@@ -186,11 +186,6 @@
     "noDeadline": "No deadline",
     "deadlineOn": "Deadline on {date}"
   },
-  "UserTasksEmptySection": {
-    "heading": "No assigned tasks yet",
-    "description": "Create a new task to keep track of your work",
-    "editButtonLabel": "New Task"
-  },
   "UserTasksPageEmptyLayout": {
     "title": "Tasks"
   },

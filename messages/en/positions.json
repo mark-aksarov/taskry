@@ -1,4 +1,7 @@
 {
+  "PositionsEmptySectionCreateButton": {
+    "label": "New position"
+  },
   "NewPositionForm": {
     "submitButtonLabel": "Create Position",
     "successMessage": "Position created successfully"

@@ -2,17 +2,17 @@
   "ProjectCategoriesPage": {
     "heading": "Project Categories",
     "emptySection": {
-      "heading": "No project categories",
+      "heading": "No categories",
       "description": "Create your first category to get started."
     },
     "error": {
       "common": {
-        "heading": "Project category error",
+        "heading": "Category error",
         "description": "An error occurred while handling project category data. Please try again.",
         "buttonLabel": "Refresh page"
       },
       "notFound": {
-        "heading": "Project Category Not Found",
+        "heading": "Category not found",
         "description": "The project category does not exist. It may have been deleted by another user.",
         "buttonLabel": "Refresh page"
       }
@@ -29,7 +29,7 @@
   "NotFoundPage": {
     "heading": "Page not found",
     "description": "The page you are looking for doesn’t exist or has been moved. Please check the URL or return to the homepage.",
-    "toHome": "To home"
+    "toHome": "Refresh page"
   },
   "CheckEmailPage": {
     "heading": "Check your email",
@@ -68,17 +68,17 @@
   "ProjectsPage": {
     "heading": "Projects",
     "emptySection": {
-      "heading": "No projects yet",
+      "heading": "No projects",
       "description": "Create a new project to keep track of your work"
     },
     "error": {
       "common": {
-        "heading": "Project Error",
+        "heading": "Project error",
         "description": "An error occurred while handling project data. Please try again.",
         "buttonLabel": "Refresh page"
       },
       "notFound": {
-        "heading": "Project Not Found",
+        "heading": "Project not found",
         "description": "The project does not exist. It may have been deleted by another user.",
         "buttonLabel": "Refresh page"
       }
@@ -87,7 +87,7 @@
   "TasksPage": {
     "heading": "Tasks",
     "emptySection": {
-      "heading": "No tasks yet",
+      "heading": "No tasks",
       "description": "Create a new task to keep track of your work"
     },
     "error": {
@@ -106,7 +106,7 @@
   "CustomersPage": {
     "heading": "Customers",
     "emptySection": {
-      "heading": "No Customers yet",
+      "heading": "No customers",
       "description": "Add a customer to get started and organize your projects"
     },
     "error": {
@@ -123,16 +123,16 @@
     }
   },
   "CustomersPageLoading": {
-    "title": "All Customers"
+    "title": "All customers"
   },
   "ProfilePage": {
-    "heading": "Profile Settings"
+    "heading": "Profile settings"
   },
   "ProjectsPageLoading": {
-    "title": "All Projects"
+    "title": "All projects"
   },
   "ProjectDetailPage": {
-    "heading": "Project Details",
+    "heading": "Project details",
     "successDeleteMessage": "Project deleted successfully"
   },
   "TasksPageLoading": {
@@ -147,7 +147,7 @@
   "UsersPage": {
     "heading": "Team",
     "emptySection": {
-      "heading": "No Users yet",
+      "heading": "No users",
       "description": "Add a new user to start building your team"
     },
     "error": {
@@ -171,47 +171,41 @@
       "buttonLabel": "Refresh page"
     }
   },
-  "ProjectCategoriesPageLoading": {
-    "title": "All Project Categories"
-  },
   "TaskCategoriesPage": {
-    "heading": "Task Categories",
+    "heading": "Task categories",
     "emptySection": {
-      "heading": "No task categories yet",
+      "heading": "No categories",
       "description": "Create a new task category to better organize your tasks."
     },
     "error": {
       "common": {
-        "heading": "Task Category Error",
+        "heading": "Category error",
         "description": "An error occurred while handling task category data. Please try again.",
-        "buttonLabel": "Обновить страницу"
+        "buttonLabel": "Refresh page"
       },
       "notFound": {
-        "heading": "Task category not Found",
+        "heading": "Category not found",
         "description": "The task category does not exist. It may have been deleted by another user.",
-        "buttonLabel": "Обновить страницу"
+        "buttonLabel": "Refresh page"
       }
     }
-  },
-  "TaskCategoriesPageLoading": {
-    "title": "All task Categories"
   },
   "CompaniesPage": {
     "heading": "Companies",
     "emptySection": {
-      "heading": "No companies yet",
+      "heading": "No companies",
       "description": "Add a company to get started and organize your projects"
     },
     "error": {
       "common": {
         "heading": "Companies error",
         "description": "An error occurred while handling companies data. Please try again.",
-        "buttonLabel": "Обновить страницу"
+        "buttonLabel": "Refresh page"
       },
       "notFound": {
         "heading": "Company not found",
         "description": "This company does not exist. It may have been deleted by another user.",
-        "buttonLabel": "Обновить страницу"
+        "buttonLabel": "Refresh page"
       }
     }
   },
@@ -224,19 +218,19 @@
   "PositionsPage": {
     "heading": "Positions",
     "emptySection": {
-      "heading": "No positions yet",
+      "heading": "No positions",
       "description": "Create a new position to better organize your work with users."
     },
     "error": {
       "common": {
         "heading": "Positions error",
         "description": "An error occurred while handling positions data. Please try again.",
-        "buttonLabel": "Refresh positions"
+        "buttonLabel": "Refresh page"
       },
       "notFound": {
         "heading": "Position not found",
         "description": "This position does not exist. It may have been deleted by another user.",
-        "buttonLabel": "Refresh positions"
+        "buttonLabel": "Refresh page"
       }
     }
   }

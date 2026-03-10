@@ -1,13 +1,32 @@
-import { EmptySection } from "./EmptySection";
+import {
+  EmptySection,
+  EmptySectionHeading,
+  EmptySectionDescription,
+} from "./EmptySection";
+
+import { AbsoluteCenter } from "./AbsoluteCenter";
 
 interface PageEmptySectionProps {
-  children: React.ReactNode;
+  heading: string;
+  description: string;
+  createButton: React.ReactNode;
 }
 
-export function PageEmptySection({ children }: PageEmptySectionProps) {
+export function PageEmptySection({
+  heading,
+  description,
+  createButton,
+}: PageEmptySectionProps) {
   return (
-    <EmptySection className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-      {children}
-    </EmptySection>
+    <AbsoluteCenter className="w-full">
+      <EmptySection>
+        <EmptySectionHeading>{heading}</EmptySectionHeading>
+        <EmptySectionDescription className="max-w-[500px]">
+          {description}
+        </EmptySectionDescription>
+
+        {createButton}
+      </EmptySection>
+    </AbsoluteCenter>
   );
 }

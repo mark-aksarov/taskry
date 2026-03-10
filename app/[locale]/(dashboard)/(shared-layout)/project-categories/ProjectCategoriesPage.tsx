@@ -10,9 +10,10 @@ import { PageGrid } from "@/components/common/PageGrid";
 import { BackButton } from "@/components/common/BackButton";
 import { ViewModeProvider } from "@/components/common/ViewMode";
 import { PageContainer } from "@/components/common/PageContainer";
-import { EmptyPageContainer } from "@/components/common/EmptyPageContainer";
+import { PageEmptySection } from "@/components/common/PageEmptySection";
 import { NewProjectCategoryModal } from "@/components/projectCategory/NewProjectCategoryModal";
 import { ProjectCategoryToolbarActionsMenuTrigger } from "@/components/projectCategory/ProjectCategoryToolbarActionsMenuTrigger";
+import { ProjectCategoriesEmptySectionCreateButton } from "@/components/projectCategory/ProjectCategoriesEmptySectionCreateButton";
 import { ProjectCategoryToolbarCreateNewModalTrigger } from "@/components/projectCategory/ProjectCategoryToolbarCreateNewModalTrigger";
 
 interface ProjectCategoriesPageProps {
@@ -29,13 +30,21 @@ export function ProjectCategoriesPage({
   if (totalCount === 0) {
     return (
       <>
-        <EmptyPageContainer
-          heading={t("emptySection.heading")}
-          description={t("emptySection.description")}
-          toolbarCreateNewMenuTrigger={
-            <ProjectCategoryToolbarCreateNewModalTrigger />
-          }
-        />
+        <PageContainer fullscreen headerOffset>
+          <PageGrid className="relative flex-auto">
+            <ToolbarMobileTop>
+              <BackButton href="/customers" />
+              <ToolbarMobileHeading>{t("heading")}</ToolbarMobileHeading>
+            </ToolbarMobileTop>
+
+            <PageEmptySection
+              heading={t("emptySection.heading")}
+              description={t("emptySection.description")}
+              createButton={<ProjectCategoriesEmptySectionCreateButton />}
+            />
+          </PageGrid>
+        </PageContainer>
+
         <NewProjectCategoryModal />
       </>
     );

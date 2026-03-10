@@ -1,4 +1,7 @@
 {
+  "ProjectCategoriesEmptySectionCreateButton": {
+    "label": "New project category"
+  },
   "NewProjectCategoryForm": {
     "submitButtonLabel": "Create category",
     "successMessage": "Project category created successfully."

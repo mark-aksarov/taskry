@@ -7,7 +7,9 @@ import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { useParams, usePathname } from "next/navigation";
 import { PageDecorator } from "@/.storybook/PageDecorator";
 import { NewTaskForm } from "@/components/tasks/NewTaskForm";
+import { NewTaskModal } from "@/components/tasks/NewTaskModal";
 import { TaskFiltersForm } from "@/components/tasks/TaskFiltersForm";
+import { NewSubtaskModal } from "@/components/subtasks/NewSubtaskModal";
 import { TaskGridStory } from "@/components/tasks/TaskGrid/__stories__";
 import { TaskListStory } from "@/components/tasks/TaskList/__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
@@ -23,7 +25,6 @@ import { withPageTransitionProvider } from "@/components/common/PageTransitionCo
 import { withCreateSubtaskProvider } from "@/components/subtasks/CreateSubtaskContext/__stories__";
 import { withUpdateTaskStatusesProvider } from "@/components/tasks/UpdateTaskStatusesContext/__stories__";
 import { withCreateTaskCategoryProvider } from "@/components/taskCategory/CreateTaskCategoryContext/__stories__";
-import { NewSubtaskModal } from "@/components/subtasks/NewSubtaskModal";
 
 const meta = {
   title: "pages/TasksPage",
@@ -83,4 +84,18 @@ export const Loading = {
 
 export const WithNoTasks = {
   args: { ...Default.args, totalCount: 0 },
+  decorators: [
+    (Story) => (
+      <>
+        <Story />
+        <NewTaskModal
+          newTaskFormContainer={<NewTaskForm {...newTaskFormArgs} />}
+        />
+      </>
+    ),
+  ],
+} satisfies Story;
+
+export const WithEmptyFilterResult = {
+  args: { ...Default.args, totalFilteredTasks: 0 },
 } satisfies Story;

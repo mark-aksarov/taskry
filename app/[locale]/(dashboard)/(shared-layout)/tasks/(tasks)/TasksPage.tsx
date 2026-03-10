@@ -11,8 +11,8 @@ import { PageGrid } from "@/components/common/PageGrid";
 import { NewTaskModal } from "@/components/tasks/NewTaskModal";
 import { ViewModeProvider } from "@/components/common/ViewMode";
 import { PageContainer } from "@/components/common/PageContainer";
+import { TasksEmptySection } from "@/components/tasks/TasksEmptySection";
 import { ViewModeToggleButtonGroup } from "@/components/common/ViewMode";
-import { EmptyPageContainer } from "@/components/common/EmptyPageContainer";
 import { NewTaskCategoryModal } from "@/components/taskCategory/NewTaskCategoryModal";
 import { TasksFilteredEmptySection } from "@/components/tasks/TasksFilteredEmptySection";
 import { TaskToolbarManageMenuTrigger } from "@/components/tasks/TaskToolbarManageMenuTrigger";
@@ -20,6 +20,7 @@ import { TaskToolbarSortingMenuTrigger } from "@/components/tasks/TaskToolbarSor
 import { TaskToolbarActionsMenuTrigger } from "@/components/tasks/TaskToolbarActionsMenuTrigger";
 import { TaskToolbarFiltersModalTrigger } from "@/components/tasks/TaskToolbarFiltersModalTrigger";
 import { TaskToolbarCreateNewMenuTrigger } from "@/components/tasks/TaskToolbarCreateNewMenuTrigger";
+import { AbsoluteCenter } from "@/components/common/AbsoluteCenter";
 
 interface TasksPageProps {
   totalCount: number;
@@ -42,17 +43,23 @@ export function TasksPage({
 
   if (totalCount === 0) {
     return (
-      <>
-        <EmptyPageContainer
-          heading={t("emptySection.heading")}
-          description={t("emptySection.description")}
-          toolbarCreateNewMenuTrigger={<TaskToolbarCreateNewMenuTrigger />}
-          toolbarManageMenuTrigger={<TaskToolbarManageMenuTrigger />}
-        />
+      <PageContainer fullscreen headerOffset>
+        <PageGrid className="relative flex-auto">
+          <ToolbarDesktop>
+            <TaskToolbarManageMenuTrigger />
+          </ToolbarDesktop>
+          <ToolbarMobileTop>
+            <ToolbarMobileHeading>{t("heading")}</ToolbarMobileHeading>
+            <div className="ml-auto">
+              <TaskToolbarManageMenuTrigger />
+            </div>
+          </ToolbarMobileTop>
 
-        <NewTaskModal newTaskFormContainer={newTaskFormContainer} />
-        <NewTaskCategoryModal />
-      </>
+          <AbsoluteCenter className="w-full">
+            <TasksEmptySection />
+          </AbsoluteCenter>
+        </PageGrid>
+      </PageContainer>
     );
   }
 
@@ -60,12 +67,8 @@ export function TasksPage({
 
   return (
     <>
-      <PageContainer
-        fullscreen={isFilteredEmpty}
-        headerOffset
-        className="relative"
-      >
-        <PageGrid className="flex-auto">
+      <PageContainer fullscreen={isFilteredEmpty} headerOffset>
+        <PageGrid className="relative flex-auto">
           <ViewModeProvider>
             <ToolbarDesktop>
               <TaskToolbarManageMenuTrigger />

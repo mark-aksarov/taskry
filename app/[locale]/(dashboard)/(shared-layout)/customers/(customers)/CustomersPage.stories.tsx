@@ -78,3 +78,7 @@ export const WithNoCustomers = {
     totalCount: 0,
   },
 } satisfies Story;
+
+export const WithEmptyFilterResult = {
+  args: { ...Default.args, totalFilteredCustomers: 0 },
+} satisfies Story;

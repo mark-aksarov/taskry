@@ -65,3 +65,7 @@ export const Loading = {
   args: { ...Default.args },
   render: () => <UsersPageLoading />,
 } satisfies Story;
+
+export const WithEmptyFilterResult = {
+  args: { ...Default.args, totalFilteredUsers: 0 },
+} satisfies Story;

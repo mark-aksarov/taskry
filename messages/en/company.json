@@ -1,4 +1,7 @@
 {
+  "CompaniesEmptySectionCreateButton": {
+    "label": "New company"
+  },
   "NewCompanyForm": {
     "submitButtonLabel": "Create company"
   },

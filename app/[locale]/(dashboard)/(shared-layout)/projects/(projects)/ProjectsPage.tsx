@@ -10,12 +10,14 @@ import { ProjectSortField } from "@/lib/types";
 import { PageGrid } from "@/components/common/PageGrid";
 import { ViewModeProvider } from "@/components/common/ViewMode";
 import { PageContainer } from "@/components/common/PageContainer";
+import { PageEmptySection } from "@/components/common/PageEmptySection";
 import { NewProjectModal } from "@/components/projects/NewProjectModal";
 import { ViewModeToggleButtonGroup } from "@/components/common/ViewMode";
-import { EmptyPageContainer } from "@/components/common/EmptyPageContainer";
+import { TaskToolbarManageMenuTrigger } from "@/components/tasks/TaskToolbarManageMenuTrigger";
 import { NewProjectCategoryModal } from "@/components/projectCategory/NewProjectCategoryModal";
 import { ProjectsFilteredEmptySection } from "@/components/projects/ProjectsFilteredEmptySection";
 import { ProjectToolbarManageMenuTrigger } from "@/components/projects/ProjectToolbarManageMenuTrigger";
+import { ProjectsEmptySectionCreateButton } from "@/components/projects/ProjectsEmptySectionCreateButton";
 import { ProjectToolbarActionsMenuTrigger } from "@/components/projects/ProjectToolbarActionsMenuTrigger";
 import { ProjectToolbarSortingMenuTrigger } from "@/components/projects/ProjectToolbarSortingMenuTrigger";
 import { ProjectToolbarFiltersModalTrigger } from "@/components/projects/ProjectToolbarFiltersModalTrigger";
@@ -42,17 +44,25 @@ export function ProjectsPage({
 
   if (totalCount === 0) {
     return (
-      <>
-        <EmptyPageContainer
-          heading={t("emptySection.heading")}
-          description={t("emptySection.description")}
-          toolbarCreateNewMenuTrigger={<ProjectToolbarCreateNewMenuTrigger />}
-          toolbarManageMenuTrigger={<ProjectToolbarManageMenuTrigger />}
-        />
+      <PageContainer fullscreen headerOffset>
+        <PageGrid className="relative flex-auto">
+          <ToolbarDesktop>
+            <TaskToolbarManageMenuTrigger />
+          </ToolbarDesktop>
+          <ToolbarMobileTop>
+            <ToolbarMobileHeading>{t("heading")}</ToolbarMobileHeading>
+            <div className="ml-auto">
+              <TaskToolbarManageMenuTrigger />
+            </div>
+          </ToolbarMobileTop>
 
-        <NewProjectModal newProjectFormContainer={newProjectFormContainer} />
-        <NewProjectCategoryModal />
-      </>
+          <PageEmptySection
+            heading={t("emptySection.heading")}
+            description={t("emptySection.description")}
+            createButton={<ProjectsEmptySectionCreateButton />}
+          />
+        </PageGrid>
+      </PageContainer>
     );
   }
 
@@ -60,12 +70,8 @@ export function ProjectsPage({
 
   return (
     <>
-      <PageContainer
-        fullscreen={isFilteredEmpty}
-        headerOffset
-        className="relative"
-      >
-        <PageGrid className="flex-auto">
+      <PageContainer fullscreen={isFilteredEmpty} headerOffset>
+        <PageGrid className="relative flex-auto">
           <ViewModeProvider>
             <ToolbarDesktop>
               <ProjectToolbarManageMenuTrigger />

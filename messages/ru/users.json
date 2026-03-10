@@ -186,11 +186,6 @@
     "noDeadline": "Без дедлайна",
     "deadlineOn": "Срок до {date}"
   },
-  "UserTasksEmptySection": {
-    "heading": "Пока нет назначенных задач",
-    "description": "Создайте новую задачу, чтобы отслеживать свою работу",
-    "editButtonLabel": "Новая задача"
-  },
   "UserTasksPageEmptyLayout": {
     "title": "Задачи"
   },
