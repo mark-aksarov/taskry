@@ -22,7 +22,7 @@ export function UserToolbarManageMenuTrigger() {
         </>
       )}
     >
-      <Item href="/positions">
+      <Item textValue={t("positions")} href="/positions">
         <Building2 size={16} strokeWidth={1.5} absoluteStrokeWidth />
         {t("positions")}
       </Item>

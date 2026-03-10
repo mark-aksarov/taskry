@@ -22,7 +22,7 @@ export function TaskToolbarManageMenuTrigger() {
         </>
       )}
     >
-      <Item href="/task-categories">
+      <Item textValue={t("categories")} href="/task-categories">
         <Blocks size={16} strokeWidth={1.5} absoluteStrokeWidth />
         {t("categories")}
       </Item>

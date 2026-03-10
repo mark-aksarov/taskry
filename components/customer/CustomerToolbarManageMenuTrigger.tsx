@@ -22,7 +22,7 @@ export function CustomerToolbarManageMenuTrigger() {
         </>
       )}
     >
-      <Item href="/companies">
+      <Item textValue={t("companies")} href="/companies">
         <Building2 size={16} strokeWidth={1.5} absoluteStrokeWidth />
         {t("companies")}
       </Item>
