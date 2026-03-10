@@ -26,7 +26,7 @@ export interface TaskItemProps {
     id: number;
     name: string;
   };
-  project: {
+  project?: {
     id: number;
     title: string;
   };

@@ -55,7 +55,9 @@ export async function TasksContainer({
             taskDetailContainer={<TaskDetailContainer taskId={task.id} />}
             taskCommentsContainer={<TaskCommentsContainer taskId={task.id} />}
             projectDetailContainer={
-              <ProjectDetailContainer projectId={task.project.id} />
+              task.project && (
+                <ProjectDetailContainer projectId={task.project.id} />
+              )
             }
             userDetailContainer={
               task.assignee && <UserDetailContainer userId={task.assignee.id} />

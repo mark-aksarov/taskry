@@ -106,7 +106,7 @@ export const getTaskDetail = cache(
           }
         : undefined,
       status: task.status,
-      project: task.project,
+      project: task.project ?? undefined,
       category: task.category ?? undefined,
       subtasks: task.subtasks,
       attachments: task.attachments,
@@ -153,7 +153,6 @@ export const getTaskFormData = cache(
       status: task.status,
       categoryId: task.categoryId ?? undefined,
       projectId: task.projectId ?? undefined,
-      projectStatus: task.project.status,
       assigneeId: task.assigneeId ?? undefined,
     };
   },
@@ -282,7 +281,7 @@ export const getTaskList = cache(
               imageUrl: task.assignee.imageUrl ?? undefined,
             }
           : undefined,
-        project: task.project,
+        project: task.project ?? undefined,
         category: task.category ?? undefined,
         commentsCount: task._count.comments,
         subtasks: {

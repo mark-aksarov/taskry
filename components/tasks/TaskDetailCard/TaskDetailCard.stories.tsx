@@ -71,7 +71,6 @@ export const WithoutOptionalTaskData = {
     taskDetailContainer: (
       <TaskDetailAlt
         id={task.id}
-        project={task.project}
         deadline={task.deadline}
         status={task.status}
       />

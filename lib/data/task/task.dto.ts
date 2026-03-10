@@ -11,8 +11,7 @@ export interface TaskFormDataDTO {
   description?: string;
   deadline: string;
   status: TaskStatus;
-  projectId: number;
-  projectStatus: ProjectStatus;
+  projectId?: number;
   categoryId?: number;
   assigneeId?: string;
 }
@@ -22,7 +21,7 @@ export interface CreateTaskInputDTO {
   description?: string;
   deadline: string;
   status: TaskStatus;
-  projectId: number;
+  projectId?: number;
   categoryId?: number;
   assigneeId?: string;
 }
@@ -33,7 +32,7 @@ export interface UpdateTaskInputDTO {
   description: string | null;
   deadline: string;
   status: TaskStatus;
-  projectId: number;
+  projectId: number | null;
   categoryId: number | null;
   assigneeId: string | null;
 }
@@ -55,7 +54,7 @@ export interface TaskDetailDTO {
     fullName: string;
     imageUrl?: string;
   };
-  project: {
+  project?: {
     id: number;
     title: string;
   };
@@ -92,7 +91,7 @@ export interface TaskListItemDTO {
     fullName: string;
     imageUrl?: string;
   };
-  project: {
+  project?: {
     id: number;
     title: string;
     status: ProjectStatus;

@@ -78,21 +78,12 @@ export const WithCheckbox = {
   },
 } satisfies Story;
 
-export const WithoutAssignee = {
+export const WithoutOptionalTaskData = {
   args: {
     ...Default.args,
     assignee: undefined,
-  },
-} satisfies Story;
-
-export const WithoutAssigneeImage = {
-  args: {
-    ...Default.args,
-    assignee: {
-      id: "user-1",
-      fullName: "User 1",
-      imageUrl: undefined,
-    },
+    project: undefined,
+    category: undefined,
   },
 } satisfies Story;
 

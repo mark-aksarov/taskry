@@ -65,7 +65,6 @@ export const WithoutOptionalTaskData = {
         title={task.title}
         status={task.status}
         deadline={task.deadline}
-        project={task.project}
       />
     ),
   },

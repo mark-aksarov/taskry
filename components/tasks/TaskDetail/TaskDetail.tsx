@@ -35,7 +35,7 @@ interface TaskDetailProps {
     name: string;
   };
   status: TaskStatus;
-  project: {
+  project?: {
     id: number;
     title: string;
   };
@@ -149,9 +149,13 @@ export function TaskDetail({
       projectTitleSlot={
         <DetailInfo>
           <DetailTitle>{t("project")}</DetailTitle>
-          <DetailLink href={`/projects/${project.id}`}>
-            <DetailText>{project.title}</DetailText>
-          </DetailLink>
+          {project ? (
+            <DetailLink href={`/projects/${project.id}`}>
+              <DetailText>{project.title}</DetailText>
+            </DetailLink>
+          ) : (
+            <DetailText>{t("noProject")}</DetailText>
+          )}
         </DetailInfo>
       }
       subtasksSlot={

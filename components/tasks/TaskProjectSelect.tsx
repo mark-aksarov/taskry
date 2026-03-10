@@ -13,17 +13,19 @@ export function TaskProjectSelect({
 }) {
   const t = useTranslations("tasks.TaskProjectSelect");
 
+  const withNoProjectItems = [
+    { id: "", label: t("noProject") },
+    ...items.map((item) => ({ id: item.id, label: item.title })),
+  ];
+
   return (
     <ResponsiveSelect
       data-test="task-project-select"
       name="projectId"
       label={t("label")}
-      defaultSelectedKey={defaultSelectedKey}
-      placeholder={t("placeholder")}
-      isRequired
-      errorMessage={t("validation.required")}
+      defaultSelectedKey={defaultSelectedKey || ""}
       overlayClassName="w-[var(--trigger-width)]"
-      items={items.map((item) => ({ id: item.id, label: item.title }))}
+      items={withNoProjectItems}
     >
       {(item: any) => <Item key={item.id}>{item.label}</Item>}
     </ResponsiveSelect>

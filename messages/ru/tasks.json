@@ -41,7 +41,8 @@
     "noAssignee": "Без исполнителя",
     "category": "Категория",
     "noCategory": "Без категории",
-    "project": "Проект"
+    "project": "Проект",
+    "noProject": "Без проекта"
   },
   "TaskToolbarSortingMenuTrigger": {
     "byTitle": "По названию",
@@ -157,10 +158,7 @@
   },
   "TaskProjectSelect": {
     "label": "Проект",
-    "placeholder": "Выберите проект",
-    "validation": {
-      "required": "Требуется проект"
-    }
+    "noProject": "Нет проекта"
   },
   "TaskAssigneeSelect": {
     "label": "Исполнитель",
@@ -175,6 +173,7 @@
     "noCreator": "Нет создателя",
     "category": "Категория",
     "project": "Проект",
+    "noProject": "Нет проекта",
     "attachments": "Вложения",
     "assignee": "Исполнитель",
     "noAssignee": "Нет исполнителя",

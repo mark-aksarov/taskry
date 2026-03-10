@@ -80,7 +80,9 @@ export function EditTaskFormContainer({ taskId }: EditTaskFormContainerProps) {
       taskCategorySelectDefaultValue={
         task.categoryId ? task.categoryId.toString() : ""
       }
-      taskProjectSelectDefaultValue={task.projectId.toString()}
+      taskProjectSelectDefaultValue={
+        task.projectId ? task.projectId.toString() : ""
+      }
       taskAssigneeSelectDefaultValue={
         task.assigneeId ? task.assigneeId.toString() : ""
       }

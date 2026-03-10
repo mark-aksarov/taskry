@@ -28,7 +28,7 @@ interface TaskDetailAltProps {
     id: number;
     name: string;
   };
-  project: {
+  project?: {
     id: number;
     title: string;
   };
@@ -107,9 +107,13 @@ export function TaskDetailAlt({
       projectTitleSlot={
         <DetailInfo>
           <DetailTitle>{t("project")}</DetailTitle>
-          <DetailLink href={`/projects/${project.id}`}>
-            <DetailText>{project.title}</DetailText>
-          </DetailLink>
+          {project ? (
+            <DetailLink href={`/projects/${project.id}`}>
+              <DetailText>{project.title}</DetailText>
+            </DetailLink>
+          ) : (
+            <DetailText>{t("noProject")}</DetailText>
+          )}
         </DetailInfo>
       }
       statusSlot={

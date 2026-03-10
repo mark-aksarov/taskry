@@ -158,16 +158,21 @@ export const TaskListItem = memo(
           }
           projectSlot={
             <>
-              <ListItemTitleDetailModalTrigger
-                modal={
-                  <ProjectDetailModal
-                    projectId={project.id}
-                    projectDetailContainer={projectDetailContainer}
-                  />
-                }
-              >
-                {project.title}
-              </ListItemTitleDetailModalTrigger>
+              {project ? (
+                <ListItemTitleDetailModalTrigger
+                  modal={
+                    <ProjectDetailModal
+                      projectId={project.id}
+                      projectDetailContainer={projectDetailContainer}
+                    />
+                  }
+                >
+                  {project.title}
+                </ListItemTitleDetailModalTrigger>
+              ) : (
+                <ListItemTitle>{t("noProject")}</ListItemTitle>
+              )}
+
               <ListItemText>{t("project")}</ListItemText>
             </>
           }

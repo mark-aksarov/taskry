@@ -81,7 +81,9 @@ async function AssignedTasksContainerInner({
                   )
                 }
                 projectDetailContainer={
-                  <ProjectDetailContainer projectId={task.project.id} />
+                  task.project && (
+                    <ProjectDetailContainer projectId={task.project.id} />
+                  )
                 }
                 editTaskFormContainer={
                   <EditTaskFormContainer taskId={task.id} />

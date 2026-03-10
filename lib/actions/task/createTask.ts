@@ -23,7 +23,7 @@ const schema = z.object({
   description: z.preprocess(emptyStringToUndefined, taskDescription.optional()),
   deadline: taskDeadline,
   status: taskStatus,
-  projectId,
+  projectId: z.preprocess(emptyStringToUndefined, projectId.optional()),
   categoryId: z.preprocess(emptyStringToUndefined, taskCategoryId.optional()),
   assigneeId: z.preprocess(emptyStringToUndefined, userId.optional()),
 });
