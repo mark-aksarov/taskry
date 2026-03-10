@@ -7,7 +7,7 @@ import { useOverlayTrigger } from "react-aria";
 import { Button } from "@/components/ui/Button";
 import { useOverlayTriggerState } from "react-stately";
 import { BottomSheet } from "@/components/ui/BottomSheet";
-import { Dialog, DialogBody } from "@/components/ui/Dialog";
+import { Dialog, DialogBody, DialogHeader } from "@/components/ui/Dialog";
 
 export function AppBottomSheetTrigger({
   appNavigation,
@@ -36,6 +36,7 @@ export function AppBottomSheetTrigger({
           aria-label={t("dialogAriaLabel")}
           className="max-h-[calc(100dvh-64px)]"
         >
+          <DialogHeader>Taskry</DialogHeader>
           <DialogBody className="px-3 py-4">{appNavigation}</DialogBody>
         </Dialog>
       </BottomSheet>
