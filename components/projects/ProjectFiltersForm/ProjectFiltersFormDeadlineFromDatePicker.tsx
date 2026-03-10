@@ -19,6 +19,7 @@ export function ProjectFiltersFormDeadlineFromDatePicker() {
   return (
     <ResponsiveDatePicker
       data-test="deadline-from-date-picker"
+      overlayClassName="w-[var(--trigger-width)]"
       label={t("label")}
       value={filters.deadlineFrom}
       onChange={(date) =>

@@ -17,6 +17,7 @@ export function TaskFiltersFormDeadlineToDatePicker() {
   return (
     <ResponsiveDatePicker
       data-test="deadline-to-date-picker"
+      overlayClassName="w-[var(--trigger-width)]"
       label={t("label")}
       value={filters.deadlineTo}
       onChange={(date) => dispatch({ type: "changeDeadlineTo", payload: date })}
