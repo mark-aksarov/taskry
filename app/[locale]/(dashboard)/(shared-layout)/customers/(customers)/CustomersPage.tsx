@@ -62,7 +62,6 @@ export function CustomersPage({
         </PageContainer>
 
         <NewCustomerModal newCustomerFormContainer={newCustomerFormContainer} />
-        <NewCompanyModal />
       </>
     );
   }

@@ -8,7 +8,9 @@ export function GridItemRow({
   children: React.ReactNode;
 }) {
   return (
-    <div className={twMerge("flex items-center justify-between", className)}>
+    <div
+      className={twMerge("flex items-center justify-between gap-2", className)}
+    >
       {children}
     </div>
   );

@@ -7,7 +7,6 @@ import { PageDecorator } from "@/.storybook/PageDecorator";
 import { ProjectList } from "@/components/projects/ProjectList";
 import { ProjectGrid } from "@/components/projects/ProjectGrid";
 import { NewProjectForm } from "@/components/projects/NewProjectForm";
-import { NewProjectModal } from "@/components/projects/NewProjectModal";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { ProjectFiltersForm } from "@/components/projects/ProjectFiltersForm";
 import { ProjectGridStory } from "@/components/projects/ProjectGrid/__stories__";
@@ -80,16 +79,6 @@ export const Loading = {
 
 export const WithNoProjects = {
   args: { ...Default.args, totalCount: 0 },
-  decorators: [
-    (Story) => (
-      <>
-        <Story />
-        <NewProjectModal
-          newProjectFormContainer={<NewProjectForm {...newProjectFormArgs} />}
-        />
-      </>
-    ),
-  ],
 } satisfies Story;
 
 export const WithEmptyFilterResult = {

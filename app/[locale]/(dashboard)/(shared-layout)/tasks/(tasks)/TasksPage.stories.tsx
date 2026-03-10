@@ -7,7 +7,6 @@ import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { useParams, usePathname } from "next/navigation";
 import { PageDecorator } from "@/.storybook/PageDecorator";
 import { NewTaskForm } from "@/components/tasks/NewTaskForm";
-import { NewTaskModal } from "@/components/tasks/NewTaskModal";
 import { TaskFiltersForm } from "@/components/tasks/TaskFiltersForm";
 import { NewSubtaskModal } from "@/components/subtasks/NewSubtaskModal";
 import { TaskGridStory } from "@/components/tasks/TaskGrid/__stories__";
@@ -86,16 +85,6 @@ export const Loading = {
 
 export const WithNoTasks = {
   args: { ...Default.args, totalCount: 0 },
-  decorators: [
-    (Story) => (
-      <>
-        <Story />
-        <NewTaskModal
-          newTaskFormContainer={<NewTaskForm {...newTaskFormArgs} />}
-        />
-      </>
-    ),
-  ],
 } satisfies Story;
 
 export const WithEmptyFilterResult = {

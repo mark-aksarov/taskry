@@ -44,25 +44,29 @@ export function ProjectsPage({
 
   if (totalCount === 0) {
     return (
-      <PageContainer fullscreen headerOffset>
-        <PageGrid className="relative flex-auto">
-          <ToolbarDesktop>
-            <TaskToolbarManageMenuTrigger />
-          </ToolbarDesktop>
-          <ToolbarMobileTop>
-            <ToolbarMobileHeading>{t("heading")}</ToolbarMobileHeading>
-            <div className="ml-auto">
+      <>
+        <PageContainer fullscreen headerOffset>
+          <PageGrid className="relative flex-auto">
+            <ToolbarDesktop>
               <TaskToolbarManageMenuTrigger />
-            </div>
-          </ToolbarMobileTop>
+            </ToolbarDesktop>
+            <ToolbarMobileTop>
+              <ToolbarMobileHeading>{t("heading")}</ToolbarMobileHeading>
+              <div className="ml-auto">
+                <TaskToolbarManageMenuTrigger />
+              </div>
+            </ToolbarMobileTop>
 
-          <PageEmptySection
-            heading={t("emptySection.heading")}
-            description={t("emptySection.description")}
-            createButton={<ProjectsEmptySectionCreateButton />}
-          />
-        </PageGrid>
-      </PageContainer>
+            <PageEmptySection
+              heading={t("emptySection.heading")}
+              description={t("emptySection.description")}
+              createButton={<ProjectsEmptySectionCreateButton />}
+            />
+          </PageGrid>
+        </PageContainer>
+
+        <NewProjectModal newProjectFormContainer={newProjectFormContainer} />
+      </>
     );
   }
 

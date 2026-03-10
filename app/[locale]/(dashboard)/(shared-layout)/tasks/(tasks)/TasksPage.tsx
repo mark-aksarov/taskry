@@ -43,23 +43,27 @@ export function TasksPage({
 
   if (totalCount === 0) {
     return (
-      <PageContainer fullscreen headerOffset>
-        <PageGrid className="relative flex-auto">
-          <ToolbarDesktop>
-            <TaskToolbarManageMenuTrigger />
-          </ToolbarDesktop>
-          <ToolbarMobileTop>
-            <ToolbarMobileHeading>{t("heading")}</ToolbarMobileHeading>
-            <div className="ml-auto">
+      <>
+        <PageContainer fullscreen headerOffset>
+          <PageGrid className="relative flex-auto">
+            <ToolbarDesktop>
               <TaskToolbarManageMenuTrigger />
-            </div>
-          </ToolbarMobileTop>
+            </ToolbarDesktop>
+            <ToolbarMobileTop>
+              <ToolbarMobileHeading>{t("heading")}</ToolbarMobileHeading>
+              <div className="ml-auto">
+                <TaskToolbarManageMenuTrigger />
+              </div>
+            </ToolbarMobileTop>
 
-          <AbsoluteCenter className="w-full">
-            <TasksEmptySection />
-          </AbsoluteCenter>
-        </PageGrid>
-      </PageContainer>
+            <AbsoluteCenter className="w-full">
+              <TasksEmptySection />
+            </AbsoluteCenter>
+          </PageGrid>
+        </PageContainer>
+
+        <NewTaskModal newTaskFormContainer={newTaskFormContainer} />
+      </>
     );
   }
 
