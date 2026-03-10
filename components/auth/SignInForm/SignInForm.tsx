@@ -14,13 +14,13 @@ const initialState: ActionState = {
 };
 
 interface SignInFormProps {
-  action: ActionFn<ActionState, FormData>;
+  signIn: ActionFn<ActionState, FormData>;
 }
 
-export function SignInForm({ action }: SignInFormProps) {
+export function SignInForm({ signIn }: SignInFormProps) {
   const t = useTranslations("auth.SignInForm");
 
-  const [state, formAction, isPending] = useActionState(action, initialState);
+  const [state, formAction, isPending] = useActionState(signIn, initialState);
 
   return (
     <AuthForm action={formAction}>

@@ -5,17 +5,15 @@ import { requireAuthPage } from "@/lib/utils/requireAuthPage";
 export default async function AppSignInPage({
   searchParams,
 }: {
-  searchParams: Promise<{ callbackUrl: string; status: string }>;
+  searchParams: Promise<{ status: string }>;
 }) {
   await requireAuthPage();
 
-  const { callbackUrl, status } = await searchParams;
-
-  const actionWithCallbackUrl = signIn.bind(null, callbackUrl);
+  const { status } = await searchParams;
 
   return (
     <SignInPage
-      action={actionWithCallbackUrl}
+      signIn={signIn}
       resetPasswordSuccess={status === "reset-password-success"}
     />
   );

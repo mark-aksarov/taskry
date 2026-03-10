@@ -16,7 +16,7 @@ export default async function AppResetPassword({
     notFound();
   }
 
-  const actionWithCallbackUrl = resetPassword.bind(null, token);
+  const resetPasswordWithToken = resetPassword.bind(null, token);
 
-  return <ResetPasswordPage action={actionWithCallbackUrl} />;
+  return <ResetPasswordPage resetPassword={resetPasswordWithToken} />;
 }

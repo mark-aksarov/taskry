@@ -15,6 +15,6 @@ export type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    action: () => ({ status: "success" }),
+    signIn: () => ({ status: "success" }),
   },
 } satisfies Story;

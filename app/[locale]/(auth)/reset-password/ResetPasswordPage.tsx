@@ -12,10 +12,10 @@ import { ResetPasswordForm } from "@/components/auth/ResetPasswordForm";
 import { AuthCardFooterSignInItem } from "@/components/auth/AuthCardFooterSignInItem";
 
 interface ResetPasswordPageProps {
-  action: ActionFn<ActionState, FormData>;
+  resetPassword: ActionFn<ActionState, FormData>;
 }
 
-export function ResetPasswordPage({ action }: ResetPasswordPageProps) {
+export function ResetPasswordPage({ resetPassword }: ResetPasswordPageProps) {
   const t = useTranslations("app.ResetPasswordPage");
 
   return (
@@ -25,7 +25,7 @@ export function ResetPasswordPage({ action }: ResetPasswordPageProps) {
         <AuthCardSubtitle>{t("subtitle")}</AuthCardSubtitle>
       </AuthCardHeader>
       <AuthCardBody>
-        <ResetPasswordForm action={action} />
+        <ResetPasswordForm resetPassword={resetPassword} />
       </AuthCardBody>
       <AuthCardFooter>
         <AuthCardFooterSignInItem />

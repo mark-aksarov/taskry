@@ -16,7 +16,6 @@ const schema = z.object({
 });
 
 export async function signIn(
-  callbackUrl: string,
   _prevState: ActionState,
   formData: FormData,
 ): Promise<ActionState> {
@@ -57,7 +56,7 @@ export async function signIn(
   }
 
   //we cannot call redirect in try/catch block
-  redirect({ href: callbackUrl || "/", locale });
+  redirect({ href: "/", locale });
 
   return {
     status: "success",

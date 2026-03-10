@@ -14,10 +14,10 @@ import { AuthCardFooterForgotPasswordItem } from "@/components/auth/AuthCardFoot
 
 interface SignInPageProps {
   resetPasswordSuccess?: boolean;
-  action: ActionFn<ActionState, FormData>;
+  signIn: ActionFn<ActionState, FormData>;
 }
 
-export function SignInPage({ resetPasswordSuccess, action }: SignInPageProps) {
+export function SignInPage({ resetPasswordSuccess, signIn }: SignInPageProps) {
   const t = useTranslations("app.SignInPage");
 
   return (
@@ -29,7 +29,7 @@ export function SignInPage({ resetPasswordSuccess, action }: SignInPageProps) {
         </AuthCardSubtitle>
       </AuthCardHeader>
       <AuthCardBody>
-        <SignInForm action={action} />
+        <SignInForm signIn={signIn} />
       </AuthCardBody>
       <AuthCardFooter>
         <AuthCardFooterSignUpItem />

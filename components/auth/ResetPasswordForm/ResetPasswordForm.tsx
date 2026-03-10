@@ -12,13 +12,16 @@ const initialState: ActionState = {
 };
 
 interface ResetPasswordFormProps {
-  action: ActionFn<ActionState, FormData>;
+  resetPassword: ActionFn<ActionState, FormData>;
 }
 
-export function ResetPasswordForm({ action }: ResetPasswordFormProps) {
+export function ResetPasswordForm({ resetPassword }: ResetPasswordFormProps) {
   const t = useTranslations("auth.ResetPasswordForm");
 
-  const [state, formAction, isPending] = useActionState(action, initialState);
+  const [state, formAction, isPending] = useActionState(
+    resetPassword,
+    initialState,
+  );
 
   return (
     <AuthForm action={formAction}>
