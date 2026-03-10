@@ -11,11 +11,11 @@ import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
 import { Info, Pencil, Trash } from "lucide-react";
 import { EditCustomerModal } from "../EditCustomerModal";
-import { GuestModeModal } from "../../common/GuestModeModal";
 import { DeleteCustomerModal } from "../DeleteCustomerModal";
+import { useUpdateCustomer } from "../UpdateCustomerContext";
 import { useCurrentUser } from "../../common/CurrentUserContext";
 import { useCustomerItemPending } from "./useCustomerItemPending";
-import { useUpdateCustomer } from "../UpdateCustomerContext";
+import { useGuestModeModal } from "@/components/common/GuestModeModal";
 
 export type CustomerItemActionMenuTriggerProps = {
   customerId: number;
@@ -34,7 +34,7 @@ export function CustomerItemActionMenuTrigger({
 
   // Detect if the current user is a guest
   const { isGuest } = useCurrentUser();
-  const [isGuestModeModalOpen, setIsGuestModeModalOpen] = useState(false);
+  const { onOpenChange: onGuestModeModalOpenChange } = useGuestModeModal();
 
   // Delete confirmation modal state
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
@@ -49,7 +49,7 @@ export function CustomerItemActionMenuTrigger({
    */
   function handleAction(key: Key) {
     if (isGuest) {
-      setIsGuestModeModalOpen(true);
+      onGuestModeModalOpenChange(true);
       return;
     }
 
@@ -98,11 +98,6 @@ export function CustomerItemActionMenuTrigger({
 
       <EditCustomerModal
         editCustomerFormContainer={editCustomerFormContainer}
-      />
-
-      <GuestModeModal
-        isOpen={isGuestModeModalOpen}
-        onOpenChange={setIsGuestModeModalOpen}
       />
 
       <DeleteCustomerModal

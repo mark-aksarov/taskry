@@ -5,14 +5,13 @@ import {
   ToolbarCreateNewMenuTrigger,
 } from "../common/Toolbar";
 
-import { useState } from "react";
 import { Key } from "react-aria";
 import { Item } from "react-stately";
 import { useTranslations } from "next-intl";
 import { useCreateUser } from "./CreateUserContext";
 import { DialogHeader } from "@/components/ui/Dialog";
 import { BriefcaseBusiness, Users } from "lucide-react";
-import { GuestModeModal } from "../common/GuestModeModal";
+import { useGuestModeModal } from "../common/GuestModeModal";
 import { useCurrentUser } from "../common/CurrentUserContext";
 import { useCreatePosition } from "../position/CreatePositionContext";
 
@@ -21,7 +20,7 @@ export function UserToolbarCreateNewMenuTrigger() {
 
   // If the user is a guest, show the guest mode modal instead of allowing creation
   const { isOwner, isGuest } = useCurrentUser();
-  const [isGuestModeModalOpen, setIsGuestModeModalOpen] = useState(false);
+  const { onOpenChange: onGuestModeModalOpenChange } = useGuestModeModal();
 
   // Create position: action state + form modal state
   const {
@@ -42,7 +41,7 @@ export function UserToolbarCreateNewMenuTrigger() {
    */
   function handleAction(key: Key) {
     if (isGuest) {
-      setIsGuestModeModalOpen(true);
+      onGuestModeModalOpenChange(true);
       return;
     }
 
@@ -85,11 +84,6 @@ export function UserToolbarCreateNewMenuTrigger() {
           {t("items.position")}
         </Item>
       </ToolbarCreateNewMenuTrigger>
-
-      <GuestModeModal
-        isOpen={isGuestModeModalOpen}
-        onOpenChange={setIsGuestModeModalOpen}
-      />
     </>
   );
 }

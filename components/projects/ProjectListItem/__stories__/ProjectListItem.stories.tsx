@@ -11,6 +11,7 @@ import { withProjectItemProviders } from "../../ProjectItem/__stories__";
 import { getCommentList } from "@/components/comments/CommentList/__stories__";
 import { withDeleteProjectsProvider } from "../../DeleteProjectsContext/__stories__";
 import { withSelectedProjectsProvider } from "../../SelectedProjectsContext/__stories__";
+import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 import { withUpdateProjectStatusesProvider } from "../../UpdateProjectStatusesContext/__stories__";
 
@@ -21,6 +22,7 @@ const meta = {
     withProjectItemProviders,
     withDeleteProjectsProvider,
     withUpdateProjectStatusesProvider,
+    withGuestModeModalProvider,
     withCurrentUserProvider,
     withSelectedProjectsProvider,
     withThemedBackground,
@@ -89,5 +91,12 @@ export const WithCompletedStatus = {
   args: {
     ...Default.args,
     status: "completed",
+  },
+} satisfies Story;
+
+export const GuestMode = {
+  ...Default,
+  parameters: {
+    isGuest: true,
   },
 } satisfies Story;

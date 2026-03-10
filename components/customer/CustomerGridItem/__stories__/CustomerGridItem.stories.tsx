@@ -7,6 +7,7 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { editCustomerFormArgs } from "../../EditCustomerForm/__stories__";
 import { withCustomerItemProviders } from "../../CustomerItem/__stories__";
 import { withDeleteCustomersProvider } from "../../DeleteCustomersContext/__stories__";
+import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 import { withSelectedItemsProvider } from "@/components/common/SelectedItemsContext/__stories__";
 
@@ -17,6 +18,7 @@ const meta = {
     withCustomerItemProviders,
     withDeleteCustomersProvider,
     withSelectedItemsProvider,
+    withGuestModeModalProvider,
     withCurrentUserProvider,
     withThemedBackground,
   ],
@@ -54,5 +56,12 @@ export const WithoutImagePhoneAndLink = {
     email: customer.email,
     customerDetailContainer: <CustomerDetail {...customer} />,
     editCustomerFormContainer: <EditCustomerForm {...editCustomerFormArgs} />,
+  },
+} satisfies Story;
+
+export const GuestMode = {
+  ...Default,
+  parameters: {
+    isGuest: true,
   },
 } satisfies Story;

@@ -16,6 +16,7 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { newTaskFormArgs } from "@/components/tasks/NewTaskForm/__stories__";
 import { taskFiltersFormArgs } from "@/components/tasks/TaskFiltersForm/__stories__";
 import { withCreateTaskProvider } from "@/components/tasks/CreateTaskContext/__stories__";
+import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
 import { withTaskFiltersProvider } from "@/components/tasks/TaskFiltersContext/__stories__";
 import { withDeleteTasksProvider } from "@/components/tasks/DeleteTasksContext/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
@@ -43,9 +44,10 @@ const meta = {
     withDeleteTasksProvider,
     withUpdateTaskStatusesProvider,
     withTaskFiltersProvider,
+    withGuestModeModalProvider,
+    withCurrentUserProvider,
     withPageTransitionProvider,
     withSelectedTasksProvider,
-    withCurrentUserProvider,
     PageDecorator,
     withThemedBackground,
   ],
@@ -98,4 +100,11 @@ export const WithNoTasks = {
 
 export const WithEmptyFilterResult = {
   args: { ...Default.args, totalFilteredTasks: 0 },
+} satisfies Story;
+
+export const GuestMode = {
+  ...Default,
+  parameters: {
+    isGuest: true,
+  },
 } satisfies Story;

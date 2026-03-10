@@ -2,11 +2,16 @@ import { SubtaskListItem } from "../SubtaskListItem";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
+import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
 
 const meta = {
   title: "components/subtasks/SubtaskListItem",
   component: SubtaskListItem,
-  decorators: [withCurrentUserProvider, withThemedBackground],
+  decorators: [
+    withGuestModeModalProvider,
+    withCurrentUserProvider,
+    withThemedBackground,
+  ],
   parameters: {
     backgroundVariant: "alt",
   },
@@ -31,5 +36,12 @@ export const IsDone = {
   args: {
     ...Default.args,
     isDone: true,
+  },
+} satisfies Story;
+
+export const GuestMode = {
+  ...Default,
+  parameters: {
+    isGuest: true,
   },
 } satisfies Story;

@@ -15,7 +15,7 @@ import { useUpdateComment } from "../UpdateCommentContext";
 import { DeleteCommentModal } from "../DeleteCommentModal";
 import { useCommentFormContext } from "../CommentFormContext";
 import { useCommentItemPending } from "./useCommentItemPending";
-import { GuestModeModal } from "@/components/common/GuestModeModal";
+import { useGuestModeModal } from "@/components/common/GuestModeModal";
 import { useCurrentUser } from "@/components/common/CurrentUserContext";
 
 export type CommentItemActionMenuTriggerProps = {
@@ -35,7 +35,7 @@ export function CommentItemActionMenuTrigger({
 
   // Detect if the current user is a guest
   const { isGuest } = useCurrentUser();
-  const [isGuestModeModalOpen, setIsGuestModeModalOpen] = useState(false);
+  const { onOpenChange: onGuestModeModalOpenChange } = useGuestModeModal();
 
   // Delete confirmation modal state
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
@@ -49,7 +49,7 @@ export function CommentItemActionMenuTrigger({
    */
   function handleAction(key: Key) {
     if (isGuest) {
-      setIsGuestModeModalOpen(true);
+      onGuestModeModalOpenChange(true);
       return;
     }
 
@@ -99,11 +99,6 @@ export function CommentItemActionMenuTrigger({
         commentId={commentId}
         isOpen={isDeleteModalOpen}
         onOpenChange={setIsDeleteModalOpen}
-      />
-
-      <GuestModeModal
-        isOpen={isGuestModeModalOpen}
-        onOpenChange={setIsGuestModeModalOpen}
       />
     </>
   );

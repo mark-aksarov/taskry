@@ -14,6 +14,7 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { taskDetailActionsArgs } from "../TaskDetailActions/__stories__";
 import { withDeleteTaskProvider } from "../DeleteTaskContext/__stories__";
 import { withUpdateTaskProvider } from "../UpdateTaskContext/__stories__";
+import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 import { withCreateSubtaskProvider } from "@/components/subtasks/CreateSubtaskContext/__stories__";
 
@@ -33,6 +34,7 @@ const meta = {
     withUpdateTaskProvider,
     withDeleteTaskProvider,
     withCreateSubtaskProvider,
+    withGuestModeModalProvider,
     withCurrentUserProvider,
     withThemedBackground,
   ],
@@ -76,5 +78,12 @@ export const WithoutOptionalTaskData = {
     ),
     taskDetailHeaderContainer: <TaskDetailHeader taskTitle={task.title} />,
     taskDetailActions: <TaskDetailActions {...taskDetailActionsArgs} />,
+  },
+} satisfies Story;
+
+export const GuestMode = {
+  ...Default,
+  parameters: {
+    isGuest: true,
   },
 } satisfies Story;

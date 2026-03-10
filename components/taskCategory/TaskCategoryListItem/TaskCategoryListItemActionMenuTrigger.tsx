@@ -12,9 +12,9 @@ import { useTranslations } from "next-intl";
 import { Pencil, Trash } from "lucide-react";
 import { useCurrentUser } from "../../common/CurrentUserContext";
 import { EditTaskCategoryModal } from "../EditTaskCategoryModal";
-import { GuestModeModal } from "@/components/common/GuestModeModal";
 import { DeleteTaskCategoryModal } from "../DeleteTaskCategoryModal";
 import { useUpdateTaskCategory } from "../UpdateTaskCategoryContext";
+import { useGuestModeModal } from "@/components/common/GuestModeModal";
 import { useTaskCategoryListItemPending } from "./useTaskCategoryListItemPending";
 
 export type TaskCategoryListItemActionMenuTriggerProps = {
@@ -32,7 +32,7 @@ export function TaskCategoryListItemActionMenuTrigger({
 
   // Detect if the current user is a guest
   const { isGuest } = useCurrentUser();
-  const [isGuestModeModalOpen, setIsGuestModeModalOpen] = useState(false);
+  const { onOpenChange: onGuestModeModalOpenChange } = useGuestModeModal();
 
   // Delete confirmation modal state
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
@@ -47,7 +47,7 @@ export function TaskCategoryListItemActionMenuTrigger({
    */
   const handleAction = (key: Key) => {
     if (isGuest) {
-      setIsGuestModeModalOpen(true);
+      onGuestModeModalOpenChange(true);
       return;
     }
 
@@ -94,11 +94,6 @@ export function TaskCategoryListItemActionMenuTrigger({
         onOpenChange={setIsDeleteModalOpen}
         taskCategoryId={taskCategoryId}
         taskCategoryName={taskCategoryName}
-      />
-
-      <GuestModeModal
-        isOpen={isGuestModeModalOpen}
-        onOpenChange={setIsGuestModeModalOpen}
       />
     </>
   );

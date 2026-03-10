@@ -1,11 +1,12 @@
-import { fn, mocked } from "storybook/test";
+import { mocked } from "storybook/test";
 import TasksPageLoading from "./loading";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { TaskCategoriesPage } from "./TaskCategoriesPage";
 import { PageDecorator } from "@/.storybook/PageDecorator";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { TaskCategoryList } from "@/components/taskCategory/TaskCategoryList";
+import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 import { TaskCategoryListStory } from "@/components/taskCategory/TaskCategoryList/__stories__";
 import { withSelectedItemsProvider } from "@/components/common/SelectedItemsContext/__stories__";
@@ -20,9 +21,10 @@ const meta = {
   decorators: [
     withCreateTaskCategoryProvider,
     withDeleteTaskCategoriesProvider,
+    withGuestModeModalProvider,
+    withCurrentUserProvider,
     withPageTransitionProvider,
     withSelectedItemsProvider,
-    withCurrentUserProvider,
     PageDecorator,
     withThemedBackground,
   ],
@@ -50,4 +52,11 @@ export const Loading = {
 
 export const WithNoTaskCategories = {
   args: { ...Default.args, totalCount: 0 },
+} satisfies Story;
+
+export const GuestMode = {
+  ...Default,
+  parameters: {
+    isGuest: true,
+  },
 } satisfies Story;

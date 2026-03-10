@@ -1,20 +1,20 @@
+"use client";
+
 import {
   ConfirmModal,
   ConfirmModalText,
   ConfirmModalActions,
   ConfirmModalCancelButton,
-} from "./ConfirmModal";
+} from "../ConfirmModal";
 
 import { useTranslations } from "next-intl";
-import { DialogHeading } from "../ui/Dialog";
+import { DialogHeading } from "../../ui/Dialog";
+import { useGuestModeModal } from "./GuestModeModalContext";
 
-interface GuestModeModalProps {
-  isOpen: boolean;
-  onOpenChange: (open: boolean) => void;
-}
-
-export function GuestModeModal({ isOpen, onOpenChange }: GuestModeModalProps) {
+export function GuestModeModal() {
   const t = useTranslations("common.GuestModeModal");
+
+  const { isOpen, onOpenChange } = useGuestModeModal();
 
   return (
     <ConfirmModal

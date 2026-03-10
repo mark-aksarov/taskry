@@ -1,1 +1,1 @@
-export { withUpdateStatusTaskProvider } from "./withUpdateStatusTaskProvider";
+export { withUpdateTaskStatusProvider } from "./withUpdateTaskStatusProvider";

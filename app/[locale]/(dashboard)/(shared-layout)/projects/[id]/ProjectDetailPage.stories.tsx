@@ -15,6 +15,7 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { getCommentList } from "@/components/comments/CommentList/__stories__";
 import { ProjectDetailHeader } from "@/components/projects/ProjectDetailHeader";
 import { editProjectFormArgs } from "@/components/projects/EditProjectForm/__stories__";
+import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 import { withDeleteProjectProvider } from "@/components/projects/DeleteProjectContext/__stories__";
 import { withUpdateProjectProvider } from "@/components/projects/UpdateProjectContext/__stories__";
@@ -26,6 +27,7 @@ const meta = {
   decorators: [
     withUpdateProjectProvider,
     withDeleteProjectProvider,
+    withGuestModeModalProvider,
     withCurrentUserProvider,
     PageDecorator,
     withThemedBackground,
@@ -82,5 +84,12 @@ export const WithoutSomeData = {
     projectHeaderContainer: (
       <ProjectDetailHeader projectTitle={project.title} />
     ),
+  },
+} satisfies Story;
+
+export const GuestMode = {
+  ...Default,
+  parameters: {
+    isGuest: true,
   },
 } satisfies Story;

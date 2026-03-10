@@ -8,7 +8,7 @@ import { useUpdateTask } from "../UpdateTaskContext";
 import { TaskCommentsModal } from "../TaskCommentsModal";
 import { BaseDeleteTaskModal } from "../DeleteTaskModal";
 import { ActionFn, ActionState } from "@/lib/actions/types";
-import { GuestModeModal } from "@/components/common/GuestModeModal";
+import { useGuestModeModal } from "@/components/common/GuestModeModal";
 import { NavigationButton } from "@/components/common/NavigationButton";
 import { useCurrentUser } from "@/components/common/CurrentUserContext";
 import { DetailActionsCommentsModalTrigger } from "@/components/common/DetailActionsCommentsModalTrigger";
@@ -32,7 +32,7 @@ export function TaskDetailActions({
 
   // If the user is a guest, show the guest mode modal instead of allowing creation
   const { isGuest } = useCurrentUser();
-  const [isGuestModeModalOpen, setIsGuestModeModalOpen] = useState(false);
+  const { onOpenChange: onGuestModeModalOpenChange } = useGuestModeModal();
 
   // Delete task: action state + form modal state
   const { isPending: isDeletePending, action: deleteAction } = useDeleteTask();
@@ -46,7 +46,7 @@ export function TaskDetailActions({
 
   function handleDeletePress() {
     if (isGuest) {
-      setIsGuestModeModalOpen(true);
+      onGuestModeModalOpenChange(true);
       return;
     }
 
@@ -55,7 +55,7 @@ export function TaskDetailActions({
 
   function handleEditPress() {
     if (isGuest) {
-      setIsGuestModeModalOpen(true);
+      onGuestModeModalOpenChange(true);
       return;
     }
 
@@ -107,11 +107,6 @@ export function TaskDetailActions({
         isOpen={isDeleteModalOpen}
         onOpenChange={setIsDeleteModalOpen}
         onDelete={handleDelete}
-      />
-
-      <GuestModeModal
-        isOpen={isGuestModeModalOpen}
-        onOpenChange={setIsGuestModeModalOpen}
       />
     </>
   );

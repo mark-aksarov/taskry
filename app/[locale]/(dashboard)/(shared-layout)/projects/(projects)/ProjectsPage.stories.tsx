@@ -13,6 +13,7 @@ import { ProjectFiltersForm } from "@/components/projects/ProjectFiltersForm";
 import { ProjectGridStory } from "@/components/projects/ProjectGrid/__stories__";
 import { ProjectListStory } from "@/components/projects/ProjectList/__stories__";
 import { newProjectFormArgs } from "@/components/projects/NewProjectForm/__stories__";
+import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 import { projectFiltersFormArgs } from "@/components/projects/ProjectFiltersForm/__stories__";
 import { EntityContainerPresentation } from "@/components/common/EntityContainerPresentation";
@@ -34,9 +35,10 @@ const meta = {
     withDeleteProjectsProvider,
     withUpdateProjectStatusesProvider,
     withProjectFiltersProvider,
+    withGuestModeModalProvider,
+    withCurrentUserProvider,
     withPageTransitionProvider,
     withSelectedProjectsProvider,
-    withCurrentUserProvider,
     PageDecorator,
     withThemedBackground,
   ],
@@ -92,4 +94,11 @@ export const WithNoProjects = {
 
 export const WithEmptyFilterResult = {
   args: { ...Default.args, totalFilteredProjects: 0 },
+} satisfies Story;
+
+export const GuestMode = {
+  ...Default,
+  parameters: {
+    isGuest: true,
+  },
 } satisfies Story;

@@ -24,7 +24,7 @@ import { TaskStatus } from "@/generated/prisma/enums";
 import { useTaskItemPending } from "./useTaskItemPending";
 import { useCurrentUser } from "../../common/CurrentUserContext";
 import { useUpdateTaskStatus } from "../UpdateTaskStatusContext";
-import { GuestModeModal } from "@/components/common/GuestModeModal";
+import { useGuestModeModal } from "@/components/common/GuestModeModal";
 
 export type TaskItemActionMenuTriggerProps = {
   taskId: number;
@@ -43,7 +43,7 @@ export function TaskItemActionMenuTrigger({
 
   // Detect if the current user is a guest
   const { isGuest } = useCurrentUser();
-  const [isGuestModeModalOpen, setIsGuestModeModalOpen] = useState(false);
+  const { onOpenChange: onGuestModeModalOpenChange } = useGuestModeModal();
 
   // Delete confirmation modal state
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
@@ -68,7 +68,7 @@ export function TaskItemActionMenuTrigger({
    */
   function handleAction(key: Key) {
     if (isGuest) {
-      setIsGuestModeModalOpen(true);
+      onGuestModeModalOpenChange(true);
       return;
     }
 
@@ -141,11 +141,6 @@ export function TaskItemActionMenuTrigger({
         taskTitle={taskTitle}
         isOpen={isDeleteModalOpen}
         onOpenChange={setIsDeleteModalOpen}
-      />
-
-      <GuestModeModal
-        isOpen={isGuestModeModalOpen}
-        onOpenChange={setIsGuestModeModalOpen}
       />
     </>
   );

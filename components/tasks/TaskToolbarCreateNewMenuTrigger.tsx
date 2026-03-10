@@ -6,13 +6,12 @@ import {
 } from "../common/Toolbar";
 
 import { Key } from "react-aria";
-import { useState } from "react";
 import { Item } from "react-stately";
 import { useTranslations } from "next-intl";
 import { useCreateTask } from "./CreateTaskContext";
 import { Blocks, CalendarCheck } from "lucide-react";
 import { DialogHeader } from "@/components/ui/Dialog";
-import { GuestModeModal } from "../common/GuestModeModal";
+import { useGuestModeModal } from "../common/GuestModeModal";
 import { useCurrentUser } from "../common/CurrentUserContext";
 import { useCreateTaskCategory } from "../taskCategory/CreateTaskCategoryContext";
 
@@ -21,7 +20,7 @@ export function TaskToolbarCreateNewMenuTrigger() {
 
   // If the user is a guest, show the guest mode modal instead of allowing creation
   const { isGuest } = useCurrentUser();
-  const [isGuestModeModalOpen, setIsGuestModeModalOpen] = useState(false);
+  const { onOpenChange: onGuestModeModalOpenChange } = useGuestModeModal();
 
   // Create task category: action state + form modal state
   const {
@@ -42,7 +41,7 @@ export function TaskToolbarCreateNewMenuTrigger() {
    */
   function handleAction(key: Key) {
     if (isGuest) {
-      setIsGuestModeModalOpen(true);
+      onGuestModeModalOpenChange(true);
       return;
     }
 
@@ -80,12 +79,6 @@ export function TaskToolbarCreateNewMenuTrigger() {
           {t("items.category")}
         </Item>
       </ToolbarCreateNewMenuTrigger>
-
-      {/* Guest mode modal */}
-      <GuestModeModal
-        isOpen={isGuestModeModalOpen}
-        onOpenChange={setIsGuestModeModalOpen}
-      />
     </>
   );
 }

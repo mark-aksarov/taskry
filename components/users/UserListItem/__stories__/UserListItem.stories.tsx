@@ -7,12 +7,14 @@ import { editUserFormArgs } from "../../EditUserForm/__stories__";
 import { withUserItemProviders } from "../../UserItem/__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
+import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
 
 const meta = {
   title: "components/users/UserListItem",
   component: UserListItem,
   decorators: [
     withUserItemProviders,
+    withGuestModeModalProvider,
     withCurrentUserProvider,
     withThemedBackground,
   ],
@@ -47,5 +49,12 @@ export const WithoutImagePositionPhoneAndLink = {
     position: undefined,
     phoneNumber: undefined,
     publicLink: undefined,
+  },
+} satisfies Story;
+
+export const GuestMode = {
+  ...Default,
+  parameters: {
+    isGuest: true,
   },
 } satisfies Story;

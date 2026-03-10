@@ -8,7 +8,7 @@ import { useUpdateProject } from "../UpdateProjectContext";
 import { ActionFn, ActionState } from "@/lib/actions/types";
 import { ProjectCommentsModal } from "../ProjectCommentsModal";
 import { BaseDeleteProjectModal } from "../DeleteProjectModal";
-import { GuestModeModal } from "@/components/common/GuestModeModal";
+import { useGuestModeModal } from "@/components/common/GuestModeModal";
 import { NavigationButton } from "@/components/common/NavigationButton";
 import { useCurrentUser } from "@/components/common/CurrentUserContext";
 import { DetailActionsCommentsModalTrigger } from "@/components/common/DetailActionsCommentsModalTrigger";
@@ -32,7 +32,7 @@ export function ProjectDetailActions({
 
   // If the user is a guest, show the guest mode modal instead of allowing creation
   const { isGuest } = useCurrentUser();
-  const [isGuestModeModalOpen, setIsGuestModeModalOpen] = useState(false);
+  const { onOpenChange: onGuestModeModalOpenChange } = useGuestModeModal();
 
   // Delete project: action state + form modal state
   const { isPending: isDeletePending, action: deleteAction } =
@@ -47,7 +47,7 @@ export function ProjectDetailActions({
 
   function handleDeletePress() {
     if (isGuest) {
-      setIsGuestModeModalOpen(true);
+      onGuestModeModalOpenChange(true);
       return;
     }
 
@@ -56,7 +56,7 @@ export function ProjectDetailActions({
 
   function handleEditPress() {
     if (isGuest) {
-      setIsGuestModeModalOpen(true);
+      onGuestModeModalOpenChange(true);
       return;
     }
 
@@ -110,11 +110,6 @@ export function ProjectDetailActions({
         projectTitle={projectTitle}
         isOpen={isDeleteModalOpen}
         onOpenChange={setIsDeleteModalOpen}
-      />
-
-      <GuestModeModal
-        isOpen={isGuestModeModalOpen}
-        onOpenChange={setIsGuestModeModalOpen}
       />
     </>
   );

@@ -14,7 +14,7 @@ import { EditPositionModal } from "../EditPositionModal";
 import { useUpdatePosition } from "../UpdatePositionContext";
 import { DeletePositionModal } from "../DeletePositionModal";
 import { useCurrentUser } from "../../common/CurrentUserContext";
-import { GuestModeModal } from "@/components/common/GuestModeModal";
+import { useGuestModeModal } from "@/components/common/GuestModeModal";
 import { usePositionListItemPending } from "./usePositionListItemPending";
 
 export type PositionListItemActionMenuTriggerProps = {
@@ -30,7 +30,7 @@ export function PositionListItemActionMenuTrigger({
 
   // Detect if the current user is a guest
   const { isGuest } = useCurrentUser();
-  const [isGuestModeModalOpen, setIsGuestModeModalOpen] = useState(false);
+  const { onOpenChange: onGuestModeModalOpenChange } = useGuestModeModal();
 
   // Delete confirmation modal state
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
@@ -45,7 +45,7 @@ export function PositionListItemActionMenuTrigger({
    */
   const handleAction = (key: Key) => {
     if (isGuest) {
-      setIsGuestModeModalOpen(true);
+      onGuestModeModalOpenChange(true);
       return;
     }
 
@@ -89,11 +89,6 @@ export function PositionListItemActionMenuTrigger({
         onOpenChange={setIsDeleteModalOpen}
         positionId={positionId}
         positionName={positionName}
-      />
-
-      <GuestModeModal
-        isOpen={isGuestModeModalOpen}
-        onOpenChange={setIsGuestModeModalOpen}
       />
     </>
   );

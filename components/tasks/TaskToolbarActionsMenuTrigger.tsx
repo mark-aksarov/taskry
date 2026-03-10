@@ -1,13 +1,13 @@
 "use client";
 
-import { startTransition, useState } from "react";
 import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
 import { DialogHeader } from "../ui/Dialog";
+import { startTransition, useState } from "react";
 import { TaskStatus } from "@/generated/prisma/enums";
 import { DeleteTasksModal } from "./DeleteTasksModal";
 import { useSelectedTasks } from "./SelectedTasksContext";
-import { GuestModeModal } from "../common/GuestModeModal";
+import { useGuestModeModal } from "../common/GuestModeModal";
 import { useCurrentUser } from "../common/CurrentUserContext";
 import { ToolbarActionsMenuTrigger } from "../common/Toolbar";
 import { Check, CircleEllipsis, Clock, Trash } from "lucide-react";
@@ -18,7 +18,7 @@ export const TaskToolbarActionsMenuTrigger = () => {
 
   // Detect if the current user is a guest
   const { isGuest } = useCurrentUser();
-  const [isGuestModeModalOpen, setIsGuestModeModalOpen] = useState(false);
+  const { onOpenChange: onGuestModeModalOpenChange } = useGuestModeModal();
 
   // Delete confirmation modal state
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
@@ -37,7 +37,7 @@ export const TaskToolbarActionsMenuTrigger = () => {
    */
   const handleAction = (key: Key) => {
     if (isGuest) {
-      setIsGuestModeModalOpen(true);
+      onGuestModeModalOpenChange(true);
       return;
     }
 
@@ -96,12 +96,6 @@ export const TaskToolbarActionsMenuTrigger = () => {
       <DeleteTasksModal
         isOpen={isDeleteModalOpen}
         onOpenChange={setIsDeleteModalOpen}
-      />
-
-      {/* Guest mode modal */}
-      <GuestModeModal
-        isOpen={isGuestModeModalOpen}
-        onOpenChange={setIsGuestModeModalOpen}
       />
     </>
   );

@@ -7,6 +7,7 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { CustomerGridItemStory } from "../../CustomerGridItem/__stories__";
 import { withViewModeProvider } from "@/components/common/ViewMode/__stories__";
 import { withDeleteCustomersProvider } from "../../DeleteCustomersContext/__stories__";
+import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 import { withSelectedItemsProvider } from "@/components/common/SelectedItemsContext/__stories__";
 import { withPageTransitionProvider } from "@/components/common/PageTransitionContext/__stories__";
@@ -15,10 +16,11 @@ const meta = {
   title: "components/customers/CustomerGrid",
   component: CustomerGrid,
   decorators: [
-    withViewModeProvider,
     withDeleteCustomersProvider,
     withSelectedItemsProvider,
+    withGuestModeModalProvider,
     withCurrentUserProvider,
+    withViewModeProvider,
     withPageTransitionProvider,
     withThemedBackground,
   ],
@@ -43,5 +45,12 @@ export const Default = {
         />
       </CustomerItemProviders>
     )),
+  },
+} satisfies Story;
+
+export const GuestMode = {
+  ...Default,
+  parameters: {
+    isGuest: true,
   },
 } satisfies Story;

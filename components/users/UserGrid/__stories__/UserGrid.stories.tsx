@@ -6,6 +6,7 @@ import { UserGridItemStory } from "../../UserGridItem/__stories__";
 import { UserItemProviders } from "../../UserItem/UserItemProviders";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withViewModeProvider } from "@/components/common/ViewMode/__stories__";
+import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 import { withPageTransitionProvider } from "@/components/common/PageTransitionContext/__stories__";
 
@@ -13,6 +14,7 @@ const meta = {
   title: "components/users/UserGrid",
   component: UserGrid,
   decorators: [
+    withGuestModeModalProvider,
     withCurrentUserProvider,
     withViewModeProvider,
     withPageTransitionProvider,
@@ -33,5 +35,12 @@ export const Default = {
         <UserGridItem key={user.id} {...UserGridItemStory.args} {...user} />
       </UserItemProviders>
     )),
+  },
+} satisfies Story;
+
+export const GuestMode = {
+  ...Default,
+  parameters: {
+    isGuest: true,
   },
 } satisfies Story;

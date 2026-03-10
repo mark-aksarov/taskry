@@ -4,16 +4,18 @@ import { withCommentFormProvider } from "../../CommentForm/__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withSendCommentProvider } from "../../SendCommentContext/__stories__";
 import { withUpdateCommentProvider } from "../../UpdateCommentContext/__stories__";
+import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 
 const meta = {
   title: "components/comments/CommentItem",
   component: CommentItem,
   decorators: [
-    withCurrentUserProvider,
     withUpdateCommentProvider,
     withSendCommentProvider,
     withCommentFormProvider,
+    withGuestModeModalProvider,
+    withCurrentUserProvider,
     withThemedBackground,
   ],
   parameters: {
@@ -46,7 +48,7 @@ export const WithoutSender = {
     ...Default.args,
     sender: undefined,
   },
-};
+} satisfies Story;
 
 export const WithoutSenderImage = {
   args: {
@@ -56,4 +58,11 @@ export const WithoutSenderImage = {
       imageUrl: undefined,
     },
   },
-};
+} satisfies Story;
+
+export const GuestMode = {
+  ...Default,
+  parameters: {
+    isGuest: true,
+  },
+} satisfies Story;

@@ -7,7 +7,7 @@ import { useDeleteUser } from "../DeleteUserContext";
 import { KeyRound, Pencil, Trash } from "lucide-react";
 import { BaseDeleteUserModal } from "../DeleteUserModal";
 import { useChangePassword } from "../ChangePasswordContext";
-import { GuestModeModal } from "@/components/common/GuestModeModal";
+import { useGuestModeModal } from "@/components/common/GuestModeModal";
 import { useCurrentUser } from "@/components/common/CurrentUserContext";
 import { NavigationButton } from "@/components/common/NavigationButton";
 
@@ -26,7 +26,7 @@ export function ProfileActions({ userId, userFullName }: ProfileActionsProps) {
 
   // Guest mode
   const { isGuest, isOwner, userId: currentUserId } = useCurrentUser();
-  const [isGuestModeModalOpen, setIsGuestModeModalOpen] = useState(false);
+  const { onOpenChange: onGuestModeModalOpenChange } = useGuestModeModal();
 
   // Change password action and modal states
   const { isPending: isChangePasswordPending } = useChangePassword();
@@ -41,7 +41,7 @@ export function ProfileActions({ userId, userFullName }: ProfileActionsProps) {
 
   function handlePasswordChangePress() {
     if (isGuest) {
-      setIsGuestModeModalOpen(true);
+      onGuestModeModalOpenChange(true);
       return;
     }
     onChangePasswordModalOpenChange(true);
@@ -49,7 +49,7 @@ export function ProfileActions({ userId, userFullName }: ProfileActionsProps) {
 
   function handleEditPress() {
     if (isGuest) {
-      setIsGuestModeModalOpen(true);
+      onGuestModeModalOpenChange(true);
       return;
     }
     onEditModalOpenChange(true);
@@ -57,7 +57,7 @@ export function ProfileActions({ userId, userFullName }: ProfileActionsProps) {
 
   function handleDeletePress() {
     if (isGuest) {
-      setIsGuestModeModalOpen(true);
+      onGuestModeModalOpenChange(true);
       return;
     }
     setIsDeleteModalOpen(true);
@@ -115,11 +115,6 @@ export function ProfileActions({ userId, userFullName }: ProfileActionsProps) {
           onDelete={handleDelete}
         />
       )}
-
-      <GuestModeModal
-        isOpen={isGuestModeModalOpen}
-        onOpenChange={setIsGuestModeModalOpen}
-      />
     </>
   );
 }

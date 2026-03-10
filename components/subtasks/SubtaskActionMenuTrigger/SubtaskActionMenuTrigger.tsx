@@ -15,7 +15,7 @@ import { EditSubtaskModal } from "../EditSubtaskModal";
 import { DeleteSubtaskModal } from "../DeleteSubtaskModal";
 import { useToggleSubtask } from "../ToggleSubtaskContext";
 import { useUpdateSubtask } from "../UpdateSubtaskContext";
-import { GuestModeModal } from "../../common/GuestModeModal";
+import { useGuestModeModal } from "../../common/GuestModeModal";
 import { CheckCheck, Loader2, Pencil, Trash } from "lucide-react";
 import { useCurrentUser } from "@/components/common/CurrentUserContext";
 import { useSubtaskListItemPending } from "../SubtaskListItem/useSubtaskListItemPending";
@@ -48,7 +48,7 @@ export function SubtaskActionMenuTrigger({
 
   // Detect if the current user is a guest
   const { isGuest } = useCurrentUser();
-  const [isGuestModeModalOpen, setIsGuestModeModalOpen] = useState(false);
+  const { onOpenChange: onGuestModeModalOpenChange } = useGuestModeModal();
 
   // Delete confirmation modal state
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
@@ -61,7 +61,7 @@ export function SubtaskActionMenuTrigger({
 
   function handleAction(key: Key) {
     if (isGuest) {
-      setIsGuestModeModalOpen(true);
+      onGuestModeModalOpenChange(true);
       return;
     }
 
@@ -127,11 +127,6 @@ export function SubtaskActionMenuTrigger({
         onOpenChange={setIsDeleteModalOpen}
         subtaskId={subtaskId}
         subtaskText={subtaskText}
-      />
-
-      <GuestModeModal
-        isOpen={isGuestModeModalOpen}
-        onOpenChange={setIsGuestModeModalOpen}
       />
     </>
   );

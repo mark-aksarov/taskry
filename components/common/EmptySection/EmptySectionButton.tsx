@@ -3,7 +3,9 @@
 import { tv } from "tailwind-variants";
 import { CirclePlus } from "lucide-react";
 import { linkStyles } from "@/components/ui/Link";
-import { Button, ButtonProps } from "react-aria-components";
+import { useGuestModeModal } from "../GuestModeModal";
+import { useCurrentUser } from "../CurrentUserContext";
+import { Button, ButtonProps, PressEvent } from "react-aria-components";
 
 interface EmptySectionButtonProps extends ButtonProps {
   children: React.ReactNode;
@@ -17,11 +19,25 @@ const styles = tv({
 
 export function EmptySectionButton({
   children,
+  onPress,
   ...props
 }: EmptySectionButtonProps) {
+  const { isGuest } = useCurrentUser();
+  const { onOpenChange } = useGuestModeModal();
+
+  function handlePress(e: PressEvent) {
+    if (isGuest) {
+      onOpenChange(true);
+      return;
+    }
+
+    onPress?.(e);
+  }
+
   return (
     <Button
       {...props}
+      onPress={handlePress}
       className={(renderProps) =>
         styles({ ...renderProps, variant: "primary" })
       }

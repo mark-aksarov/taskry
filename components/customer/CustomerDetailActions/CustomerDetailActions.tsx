@@ -7,7 +7,7 @@ import { EditCustomerModal } from "../EditCustomerModal";
 import { useDeleteCustomer } from "../DeleteCustomerContext";
 import { useUpdateCustomer } from "../UpdateCustomerContext";
 import { BaseDeleteCustomerModal } from "../DeleteCustomerModal";
-import { GuestModeModal } from "@/components/common/GuestModeModal";
+import { useGuestModeModal } from "@/components/common/GuestModeModal";
 import { NavigationButton } from "@/components/common/NavigationButton";
 import { useCurrentUser } from "@/components/common/CurrentUserContext";
 
@@ -26,7 +26,7 @@ export function CustomerDetailActions({
 
   // If the user is a guest, show the guest mode modal instead of allowing creation
   const { isGuest } = useCurrentUser();
-  const [isGuestModeModalOpen, setIsGuestModeModalOpen] = useState(false);
+  const { onOpenChange: onGuestModeModalOpenChange } = useGuestModeModal();
 
   // Delete customer: action state + form modal state
   const { isPending: isDeletePending, action: deleteAction } =
@@ -41,7 +41,7 @@ export function CustomerDetailActions({
 
   function handleDeletePress() {
     if (isGuest) {
-      setIsGuestModeModalOpen(true);
+      onGuestModeModalOpenChange(true);
       return;
     }
 
@@ -50,7 +50,7 @@ export function CustomerDetailActions({
 
   function handleEditPress() {
     if (isGuest) {
-      setIsGuestModeModalOpen(true);
+      onGuestModeModalOpenChange(true);
       return;
     }
 
@@ -101,11 +101,6 @@ export function CustomerDetailActions({
         isOpen={isDeleteModalOpen}
         onOpenChange={setIsDeleteModalOpen}
         onDelete={handleDelete}
-      />
-
-      <GuestModeModal
-        isOpen={isGuestModeModalOpen}
-        onOpenChange={setIsGuestModeModalOpen}
       />
     </>
   );

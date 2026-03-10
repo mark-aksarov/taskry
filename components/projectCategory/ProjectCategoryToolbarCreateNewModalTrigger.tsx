@@ -1,9 +1,8 @@
 "use client";
 
-import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { useCurrentUser } from "../common/CurrentUserContext";
-import { GuestModeModal } from "@/components/common/GuestModeModal";
+import { useGuestModeModal } from "@/components/common/GuestModeModal";
 import { ToolbarCreateNewModalTrigger } from "@/components/common/Toolbar";
 import { useCreateProjectCategory } from "./CreateProjectCategoryContext";
 
@@ -14,7 +13,7 @@ export function ProjectCategoryToolbarCreateNewModalTrigger() {
 
   // If the user is a guest, show the guest mode modal instead of allowing creation
   const { isGuest } = useCurrentUser();
-  const [isGuestModeModalOpen, setIsGuestModeModalOpen] = useState(false);
+  const { onOpenChange: onGuestModeModalOpenChange } = useGuestModeModal();
 
   // Create project category action and modal states
   const {
@@ -29,7 +28,7 @@ export function ProjectCategoryToolbarCreateNewModalTrigger() {
    */
   const handlePress = () => {
     if (isGuest) {
-      setIsGuestModeModalOpen(true);
+      onGuestModeModalOpenChange(true);
       return;
     }
 
@@ -37,19 +36,12 @@ export function ProjectCategoryToolbarCreateNewModalTrigger() {
   };
 
   return (
-    <>
-      <ToolbarCreateNewModalTrigger
-        data-test="project-category-toolbar-create-new-modal-trigger"
-        label={t("label")}
-        onPress={handlePress}
-        // Block creating another project category until the current request completes
-        isDisabled={isCreateProjectCategoryPending}
-      />
-
-      <GuestModeModal
-        isOpen={isGuestModeModalOpen}
-        onOpenChange={setIsGuestModeModalOpen}
-      />
-    </>
+    <ToolbarCreateNewModalTrigger
+      data-test="project-category-toolbar-create-new-modal-trigger"
+      label={t("label")}
+      onPress={handlePress}
+      // Block creating another project category until the current request completes
+      isDisabled={isCreateProjectCategoryPending}
+    />
   );
 }

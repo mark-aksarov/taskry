@@ -7,19 +7,23 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { taskDetailArgs } from "@/components/tasks/TaskDetail/__stories__";
 import { editTaskFormArgs } from "@/components/tasks/EditTaskForm/__stories__";
 import { getCommentList } from "@/components/comments/CommentList/__stories__";
+import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
 import { withDeleteTasksProvider } from "@/components/tasks/DeleteTasksContext/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 import { withSelectedTasksProvider } from "@/components/tasks/SelectedTasksContext/__stories__";
+import { withCreateSubtaskProvider } from "@/components/subtasks/CreateSubtaskContext/__stories__";
 import { withUpdateTaskStatusesProvider } from "@/components/tasks/UpdateTaskStatusesContext/__stories__";
 
 const meta = {
   title: "components/users/UserTaskListItem",
   component: UserTaskListItem,
   decorators: [
+    withCreateSubtaskProvider,
     withUpdateTaskStatusesProvider,
     withDeleteTasksProvider,
-    withSelectedTasksProvider,
+    withGuestModeModalProvider,
     withCurrentUserProvider,
+    withSelectedTasksProvider,
     withThemedBackground,
   ],
   parameters: {
@@ -68,5 +72,12 @@ export const WithCompletedStatus = {
   args: {
     ...Default.args,
     status: "completed",
+  },
+} satisfies Story;
+
+export const GuestMode = {
+  ...Default,
+  parameters: {
+    isGuest: true,
   },
 } satisfies Story;

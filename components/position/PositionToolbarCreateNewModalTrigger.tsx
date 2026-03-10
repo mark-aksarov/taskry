@@ -1,18 +1,17 @@
 "use client";
 
-import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { useCreatePosition } from "./CreatePositionContext";
-import { GuestModeModal } from "@/components/common/GuestModeModal";
-import { ToolbarCreateNewModalTrigger } from "@/components/common/Toolbar";
+import { useGuestModeModal } from "@/components/common/GuestModeModal";
 import { useCurrentUser } from "@/components/common/CurrentUserContext";
+import { ToolbarCreateNewModalTrigger } from "@/components/common/Toolbar";
 
 export function PositionToolbarCreateNewModalTrigger() {
   const t = useTranslations("positions.PositionToolbarCreateNewModalTrigger");
 
   // If the user is a guest, show the guest mode modal instead of allowing creation
   const { isGuest } = useCurrentUser();
-  const [isGuestModeModalOpen, setIsGuestModeModalOpen] = useState(false);
+  const { onOpenChange: onGuestModeModalOpenChange } = useGuestModeModal();
 
   // Create position action and modal states
   const {
@@ -27,7 +26,7 @@ export function PositionToolbarCreateNewModalTrigger() {
    */
   const handlePress = () => {
     if (isGuest) {
-      setIsGuestModeModalOpen(true);
+      onGuestModeModalOpenChange(true);
       return;
     }
 
@@ -35,19 +34,12 @@ export function PositionToolbarCreateNewModalTrigger() {
   };
 
   return (
-    <>
-      <ToolbarCreateNewModalTrigger
-        data-test="position-toolbar-create-new-modal-trigger"
-        label={t("label")}
-        onPress={handlePress}
-        // Block creating another position until the current request completes
-        isDisabled={isCreatePositionPending}
-      />
-
-      <GuestModeModal
-        isOpen={isGuestModeModalOpen}
-        onOpenChange={setIsGuestModeModalOpen}
-      />
-    </>
+    <ToolbarCreateNewModalTrigger
+      data-test="position-toolbar-create-new-modal-trigger"
+      label={t("label")}
+      onPress={handlePress}
+      // Block creating another position until the current request completes
+      isDisabled={isCreatePositionPending}
+    />
   );
 }

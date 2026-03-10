@@ -2,7 +2,7 @@ import { fn, mocked } from "storybook/test";
 import CustomersPageLoading from "./loading";
 import { CustomersPage } from "./CustomersPage";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { useParams, usePathname, useRouter } from "next/navigation";
+import { useParams, usePathname } from "next/navigation";
 import { PageDecorator } from "@/.storybook/PageDecorator";
 import { mockedCompanySummaries } from "@/mocks/companies";
 import { CustomerList } from "@/components/customer/CustomerList";
@@ -13,6 +13,7 @@ import { CustomerFiltersForm } from "@/components/customer/CustomerFiltersForm";
 import { CustomerGridStory } from "@/components/customer/CustomerGrid/__stories__";
 import { CustomerListStory } from "@/components/customer/CustomerList/__stories__";
 import { newCustomerFormArgs } from "@/components/customer/NewCustomerForm/__stories__";
+import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 import { EntityContainerPresentation } from "@/components/common/EntityContainerPresentation";
 import { withSelectedItemsProvider } from "@/components/common/SelectedItemsContext/__stories__";
@@ -31,9 +32,10 @@ const meta = {
     withCreateCompanyProvider,
     withCreateCustomerProvider,
     withDeleteCustomersProvider,
-    withPageTransitionProvider,
-    withSelectedItemsProvider,
+    withGuestModeModalProvider,
     withCurrentUserProvider,
+    withSelectedItemsProvider,
+    withPageTransitionProvider,
     PageDecorator,
     withThemedBackground,
   ],
@@ -81,4 +83,11 @@ export const WithNoCustomers = {
 
 export const WithEmptyFilterResult = {
   args: { ...Default.args, totalFilteredCustomers: 0 },
+} satisfies Story;
+
+export const GuestMode = {
+  ...Default,
+  parameters: {
+    isGuest: true,
+  },
 } satisfies Story;

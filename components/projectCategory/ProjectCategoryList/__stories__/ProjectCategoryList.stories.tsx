@@ -4,6 +4,7 @@ import { ProjectCategoryListItem } from "../../ProjectCategoryListItem";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { mockedProjectCategorySummaries } from "@/mocks/projectCategories";
 import { ProjectCategoryListItemStory } from "../../ProjectCategoryListItem/__stories__";
+import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 import { withSelectedItemsProvider } from "@/components/common/SelectedItemsContext/__stories__";
 import { withDeleteProjectCategoriesProvider } from "../../DeleteProjectCategoriesContext/__stories__";
@@ -13,6 +14,7 @@ const meta = {
   component: ProjectCategoryList,
   decorators: [
     withDeleteProjectCategoriesProvider,
+    withGuestModeModalProvider,
     withCurrentUserProvider,
     withSelectedItemsProvider,
     withThemedBackground,
@@ -31,5 +33,12 @@ export const Default = {
         {...projectCategory}
       />
     )),
+  },
+} satisfies Story;
+
+export const GuestMode = {
+  ...Default,
+  parameters: {
+    isGuest: true,
   },
 } satisfies Story;

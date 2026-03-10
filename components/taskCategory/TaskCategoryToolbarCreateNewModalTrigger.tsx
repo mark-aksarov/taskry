@@ -1,10 +1,9 @@
 "use client";
 
-import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { useCurrentUser } from "../common/CurrentUserContext";
 import { useCreateTaskCategory } from "./CreateTaskCategoryContext";
-import { GuestModeModal } from "@/components/common/GuestModeModal";
+import { useGuestModeModal } from "@/components/common/GuestModeModal";
 import { ToolbarCreateNewModalTrigger } from "@/components/common/Toolbar";
 
 export function TaskCategoryToolbarCreateNewModalTrigger() {
@@ -14,7 +13,7 @@ export function TaskCategoryToolbarCreateNewModalTrigger() {
 
   // If the user is a guest, show the guest mode modal instead of allowing creation
   const { isGuest } = useCurrentUser();
-  const [isGuestModeModalOpen, setIsGuestModeModalOpen] = useState(false);
+  const { onOpenChange: onGuestModeModalOpenChange } = useGuestModeModal();
 
   // Create task category action and modal states
   const {
@@ -29,7 +28,7 @@ export function TaskCategoryToolbarCreateNewModalTrigger() {
    */
   const handlePress = () => {
     if (isGuest) {
-      setIsGuestModeModalOpen(true);
+      onGuestModeModalOpenChange(true);
       return;
     }
 
@@ -37,19 +36,12 @@ export function TaskCategoryToolbarCreateNewModalTrigger() {
   };
 
   return (
-    <>
-      <ToolbarCreateNewModalTrigger
-        data-test="task-category-toolbar-create-new-modal-trigger"
-        label={t("label")}
-        onPress={handlePress}
-        // Block creating another task category until the current request completes
-        isDisabled={isCreateTaskCategoryPending}
-      />
-
-      <GuestModeModal
-        isOpen={isGuestModeModalOpen}
-        onOpenChange={setIsGuestModeModalOpen}
-      />
-    </>
+    <ToolbarCreateNewModalTrigger
+      data-test="task-category-toolbar-create-new-modal-trigger"
+      label={t("label")}
+      onPress={handlePress}
+      // Block creating another task category until the current request completes
+      isDisabled={isCreateTaskCategoryPending}
+    />
   );
 }

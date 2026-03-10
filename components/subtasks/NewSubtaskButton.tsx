@@ -4,8 +4,10 @@ import { Plus } from "lucide-react";
 import { tv } from "tailwind-variants";
 import { linkStyles } from "../ui/Link";
 import { useTranslations } from "next-intl";
-import { composeRenderProps, ButtonProps, Button } from "react-aria-components";
 import { useCreateSubtask } from "./CreateSubtaskContext";
+import { useGuestModeModal } from "../common/GuestModeModal";
+import { useCurrentUser } from "../common/CurrentUserContext";
+import { composeRenderProps, ButtonProps, Button } from "react-aria-components";
 
 const styles = tv({
   extend: linkStyles,
@@ -19,6 +21,17 @@ export function NewSubtasksButton({
   const t = useTranslations("subtasks.NewSubtasksButton");
 
   const { onModalOpenChange } = useCreateSubtask();
+  const { isGuest } = useCurrentUser();
+  const { onOpenChange: onGuestModeModalOpenChange } = useGuestModeModal();
+
+  function handlePress() {
+    if (isGuest) {
+      onGuestModeModalOpenChange(true);
+      return;
+    }
+
+    onModalOpenChange(true);
+  }
 
   return (
     <Button
@@ -26,7 +39,7 @@ export function NewSubtasksButton({
       className={composeRenderProps(className, (className, renderProps) =>
         styles({ ...renderProps, variant: "primary", className }),
       )}
-      onPress={() => onModalOpenChange(true)}
+      onPress={handlePress}
     >
       <Plus size={16} strokeWidth={1.5} absoluteStrokeWidth />
       {t("label")}

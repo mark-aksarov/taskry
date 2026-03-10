@@ -11,9 +11,10 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { UserDetail, UserDetailSkeleton } from "@/components/users/UserDetail";
 import { editUserFormArgs } from "@/components/users/EditUserForm/__stories__";
 import { withDeleteUserProvider } from "@/components/users/DeleteUserContext/__stories__";
+import { withUpdateUserProvider } from "@/components/users/UpdateUserContext/__stories__";
+import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 import { withChangePasswordProvider } from "@/components/users/ChangePasswordContext/__stories__";
-import { withUpdateUserProvider } from "@/components/users/UpdateUserContext/__stories__";
 
 const meta = {
   title: "pages/ProfilePage",
@@ -23,6 +24,7 @@ const meta = {
     withUpdateUserProvider,
     withChangePasswordProvider,
     withDeleteUserProvider,
+    withGuestModeModalProvider,
     withCurrentUserProvider,
     PageDecorator,
     withThemedBackground,
@@ -70,5 +72,12 @@ export const WithoutOptionalUserData = {
       />
     ),
     userHeaderContainer: <UserDetailHeader fullName="User 1" />,
+  },
+} satisfies Story;
+
+export const GuestMode = {
+  ...Default,
+  parameters: {
+    isGuest: true,
   },
 } satisfies Story;

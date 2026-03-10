@@ -13,6 +13,7 @@ import { Pencil, Trash } from "lucide-react";
 import { useCurrentUser } from "../../common/CurrentUserContext";
 import { GuestModeModal } from "@/components/common/GuestModeModal";
 import { EditProjectCategoryModal } from "../EditProjectCategoryModal";
+import { useGuestModeModal } from "@/components/common/GuestModeModal";
 import { DeleteProjectCategoryModal } from "../DeleteProjectCategoryModal";
 import { useUpdateProjectCategory } from "../UpdateProjectCategoryContext";
 import { useProjectCategoryListItemPending } from "./useProjectCategoryListItemPending";
@@ -32,7 +33,7 @@ export function ProjectCategoryListItemActionMenuTrigger({
 
   // Detect if the current user is a guest
   const { isGuest } = useCurrentUser();
-  const [isGuestModeModalOpen, setIsGuestModeModalOpen] = useState(false);
+  const { onOpenChange: onGuestModeModalOpenChange } = useGuestModeModal();
 
   // Delete confirmation modal state
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
@@ -48,7 +49,7 @@ export function ProjectCategoryListItemActionMenuTrigger({
    */
   const handleAction = (key: Key) => {
     if (isGuest) {
-      setIsGuestModeModalOpen(true);
+      onGuestModeModalOpenChange(true);
       return;
     }
 
@@ -95,11 +96,6 @@ export function ProjectCategoryListItemActionMenuTrigger({
         onOpenChange={setIsDeleteModalOpen}
         projectCategoryId={projectCategoryId}
         projectCategoryName={projectCategoryName}
-      />
-
-      <GuestModeModal
-        isOpen={isGuestModeModalOpen}
-        onOpenChange={setIsGuestModeModalOpen}
       />
     </>
   );

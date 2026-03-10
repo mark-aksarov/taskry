@@ -13,7 +13,7 @@ import { Pencil, Trash } from "lucide-react";
 import { EditCompanyModal } from "../EditCompanyModal";
 import { useUpdateCompany } from "../UpdateCompanyContext";
 import { useCurrentUser } from "../../common/CurrentUserContext";
-import { GuestModeModal } from "@/components/common/GuestModeModal";
+import { useGuestModeModal } from "@/components/common/GuestModeModal";
 import { useCompanyListItemPending } from "./useCompanyListItemPending";
 import { DeleteCompanyModal } from "@/components/company/DeleteCompanyModal";
 
@@ -30,7 +30,7 @@ export function CompanyListItemActionMenuTrigger({
 
   // Detect if the current user is a guest
   const { isGuest } = useCurrentUser();
-  const [isGuestModeModalOpen, setIsGuestModeModalOpen] = useState(false);
+  const { onOpenChange: onGuestModeModalOpenChange } = useGuestModeModal();
 
   // Delete confirmation modal state
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
@@ -45,7 +45,7 @@ export function CompanyListItemActionMenuTrigger({
    */
   const handleAction = (key: Key) => {
     if (isGuest) {
-      setIsGuestModeModalOpen(true);
+      onGuestModeModalOpenChange(true);
       return;
     }
 
@@ -89,11 +89,6 @@ export function CompanyListItemActionMenuTrigger({
         companyName={companyName}
         isOpen={isDeleteModalOpen}
         onOpenChange={setIsDeleteModalOpen}
-      />
-
-      <GuestModeModal
-        isOpen={isGuestModeModalOpen}
-        onOpenChange={setIsGuestModeModalOpen}
       />
     </>
   );

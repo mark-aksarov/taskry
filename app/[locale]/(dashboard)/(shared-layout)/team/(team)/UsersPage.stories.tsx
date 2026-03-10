@@ -12,6 +12,7 @@ import { UserListStory } from "@/components/users/UserList/__stories__";
 import { UserGridStory } from "@/components/users/UserGrid/__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withCreateUserProvider } from "@/components/users/CreateUserContext/__stories__";
+import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
 import { withUserFiltersProvider } from "@/components/users/UserFiltersContext/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 import { EntityContainerPresentation } from "@/components/common/EntityContainerPresentation";
@@ -27,9 +28,10 @@ const meta = {
     withUserFiltersProvider,
     withCreateUserProvider,
     withCreatePositionProvider,
+    withGuestModeModalProvider,
+    withCurrentUserProvider,
     withPageTransitionProvider,
     withSelectedTasksProvider,
-    withCurrentUserProvider,
     PageDecorator,
     withThemedBackground,
   ],
@@ -68,4 +70,11 @@ export const Loading = {
 
 export const WithEmptyFilterResult = {
   args: { ...Default.args, totalFilteredUsers: 0 },
+} satisfies Story;
+
+export const GuestMode = {
+  ...Default,
+  parameters: {
+    isGuest: true,
+  },
 } satisfies Story;

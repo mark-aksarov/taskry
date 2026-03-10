@@ -18,6 +18,7 @@ import { withDeleteUserProvider } from "../DeleteUserContext/__stories__";
 import { withUpdateUserProvider } from "../UpdateUserContext/__stories__";
 import { withChangePasswordProvider } from "../ChangePasswordContext/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
+import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
 
 const meta = {
   title: "components/users/UserDetailCard",
@@ -31,7 +32,8 @@ const meta = {
   decorators: [
     (Story) => (
       <>
-        <Story /> <ChangePasswordModal userId="user-1" />{" "}
+        <Story />
+        <ChangePasswordModal userId="user-1" />
         <EditUserModal
           editUserFormContainer={<EditUserForm {...editUserFormArgs} />}
         />
@@ -40,6 +42,7 @@ const meta = {
     withUpdateUserProvider,
     withChangePasswordProvider,
     withDeleteUserProvider,
+    withGuestModeModalProvider,
     withCurrentUserProvider,
     withThemedBackground,
   ],
@@ -91,5 +94,12 @@ export const WithoutOptionalUserData = {
         userActions={<ProfileActions userId="user-1" userFullName="User 1" />}
       />
     ),
+  },
+} satisfies Story;
+
+export const GuestMode = {
+  ...Default,
+  parameters: {
+    isGuest: true,
   },
 } satisfies Story;

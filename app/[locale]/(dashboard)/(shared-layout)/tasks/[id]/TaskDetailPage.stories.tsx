@@ -19,6 +19,7 @@ import { editTaskFormArgs } from "@/components/tasks/EditTaskForm/__stories__";
 import { taskDetailAltArgs } from "@/components/tasks/TaskDetailAlt/__stories__";
 import { withDeleteTaskProvider } from "@/components/tasks/DeleteTaskContext/__stories__";
 import { withUpdateTaskProvider } from "@/components/tasks/UpdateTaskContext/__stories__";
+import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 import { withCreateSubtaskProvider } from "@/components/subtasks/CreateSubtaskContext/__stories__";
 
@@ -36,6 +37,7 @@ const meta = {
     withUpdateTaskProvider,
     withDeleteTaskProvider,
     withCreateSubtaskProvider,
+    withGuestModeModalProvider,
     withCurrentUserProvider,
     PageDecorator,
     withThemedBackground,
@@ -91,5 +93,12 @@ export const WithoutOptionalTaskData = {
       />
     ),
     taskHeaderContainer: <TaskDetailHeader taskTitle={task.title} />,
+  },
+} satisfies Story;
+
+export const GuestMode = {
+  ...Default,
+  parameters: {
+    isGuest: true,
   },
 } satisfies Story;

@@ -6,10 +6,11 @@ import { DialogTrigger } from "react-aria-components";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { getSubtasksList } from "../../TaskDetail/__stories__";
 import { TaskDetail, TaskDetailSkeleton } from "../../TaskDetail";
+import { NewSubtaskModal } from "@/components/subtasks/NewSubtaskModal";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 import { withCreateSubtaskProvider } from "@/components/subtasks/CreateSubtaskContext/__stories__";
-import { NewSubtaskModal } from "@/components/subtasks/NewSubtaskModal";
 
 const meta = {
   title: "components/tasks/TaskDetailModal",
@@ -28,6 +29,7 @@ const meta = {
       );
     },
     withCreateSubtaskProvider,
+    withGuestModeModalProvider,
     withCurrentUserProvider,
     withThemedBackground,
   ],
@@ -67,4 +69,11 @@ export const WithoutOptionalTaskData = {
       />
     ),
   },
-};
+} satisfies Story;
+
+export const GuestMode = {
+  ...Default,
+  parameters: {
+    isGuest: true,
+  },
+} satisfies Story;

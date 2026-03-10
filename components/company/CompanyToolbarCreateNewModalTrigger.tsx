@@ -1,10 +1,9 @@
 "use client";
 
-import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { useCreateCompany } from "./CreateCompanyContext";
+import { useGuestModeModal } from "../common/GuestModeModal";
 import { useCurrentUser } from "../common/CurrentUserContext";
-import { GuestModeModal } from "@/components/common/GuestModeModal";
 import { ToolbarCreateNewModalTrigger } from "@/components/common/Toolbar";
 
 export function CompanyToolbarCreateNewModalTrigger() {
@@ -12,7 +11,7 @@ export function CompanyToolbarCreateNewModalTrigger() {
 
   // If the user is a guest, show the guest mode modal instead of allowing creation
   const { isGuest } = useCurrentUser();
-  const [isGuestModeModalOpen, setIsGuestModeModalOpen] = useState(false);
+  const { onOpenChange: onGuestModeModalOpenChange } = useGuestModeModal();
 
   // Create company action and modal states
   const {
@@ -27,7 +26,7 @@ export function CompanyToolbarCreateNewModalTrigger() {
    */
   const handlePress = () => {
     if (isGuest) {
-      setIsGuestModeModalOpen(true);
+      onGuestModeModalOpenChange(true);
       return;
     }
 
@@ -42,11 +41,6 @@ export function CompanyToolbarCreateNewModalTrigger() {
         onPress={handlePress}
         // Block creating another company until the current request completes
         isDisabled={isCreateCompanyPending}
-      />
-
-      <GuestModeModal
-        isOpen={isGuestModeModalOpen}
-        onOpenChange={setIsGuestModeModalOpen}
       />
     </>
   );

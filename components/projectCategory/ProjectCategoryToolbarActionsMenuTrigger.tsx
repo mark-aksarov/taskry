@@ -5,7 +5,7 @@ import { Trash } from "lucide-react";
 import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
 import { DialogHeader } from "../ui/Dialog";
-import { GuestModeModal } from "../common/GuestModeModal";
+import { useGuestModeModal } from "../common/GuestModeModal";
 import { ToolbarActionsMenuTrigger } from "../common/Toolbar";
 import { useCurrentUser } from "../common/CurrentUserContext";
 import { useSelectedItems } from "@/components/common/SelectedItemsContext";
@@ -18,7 +18,7 @@ export const ProjectCategoryToolbarActionsMenuTrigger = () => {
 
   // Guest mode
   const { isGuest } = useCurrentUser();
-  const [isGuestModeModalOpen, setIsGuestModeModalOpen] = useState(false);
+  const { onOpenChange: onGuestModeModalOpenChange } = useGuestModeModal();
 
   // Delete confirmation modal state
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
@@ -29,7 +29,7 @@ export const ProjectCategoryToolbarActionsMenuTrigger = () => {
   // Menu actions: show delete modal
   const handleAction = (key: Key) => {
     if (isGuest) {
-      setIsGuestModeModalOpen(true);
+      onGuestModeModalOpenChange(true);
       return;
     }
 
@@ -56,12 +56,6 @@ export const ProjectCategoryToolbarActionsMenuTrigger = () => {
       <DeleteProjectCategoriesModal
         isOpen={isDeleteModalOpen}
         onOpenChange={setIsDeleteModalOpen}
-      />
-
-      {/* Guest mode modal */}
-      <GuestModeModal
-        isOpen={isGuestModeModalOpen}
-        onOpenChange={setIsGuestModeModalOpen}
       />
     </>
   );

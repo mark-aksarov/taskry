@@ -14,7 +14,7 @@ import { Info, Pencil, Trash } from "lucide-react";
 import { DeleteUserModal } from "../DeleteUserModal";
 import { useUpdateUser } from "../UpdateUserContext";
 import { useUserItemPending } from "./useUserItemPending";
-import { GuestModeModal } from "@/components/common/GuestModeModal";
+import { useGuestModeModal } from "@/components/common/GuestModeModal";
 import { useCurrentUser } from "@/components/common/CurrentUserContext";
 
 interface UserItemActionMenuTriggerProps {
@@ -34,7 +34,7 @@ export function UserItemActionMenuTrigger({
 
   // Detect if the current user is a guest
   const { isGuest, userId: currentUserId } = useCurrentUser();
-  const [isGuestModeModalOpen, setIsGuestModeModalOpen] = useState(false);
+  const { onOpenChange: onGuestModeModalOpenChange } = useGuestModeModal();
 
   // Delete confirmation modal state
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
@@ -49,7 +49,7 @@ export function UserItemActionMenuTrigger({
    */
   function handleAction(key: Key) {
     if (isGuest) {
-      setIsGuestModeModalOpen(true);
+      onGuestModeModalOpenChange(true);
       return;
     }
 
@@ -104,11 +104,6 @@ export function UserItemActionMenuTrigger({
         userFullName={userFullName}
         isOpen={isDeleteModalOpen}
         onOpenChange={setIsDeleteModalOpen}
-      />
-
-      <GuestModeModal
-        isOpen={isGuestModeModalOpen}
-        onOpenChange={setIsGuestModeModalOpen}
       />
     </>
   );

@@ -5,14 +5,13 @@ import {
   ToolbarCreateNewMenuTrigger,
 } from "../common/Toolbar";
 
-import { useState } from "react";
 import { Key } from "react-aria";
 import { Item } from "react-stately";
 import { DialogHeader } from "../ui/Dialog";
 import { useTranslations } from "next-intl";
 import { Blocks, FolderClosed } from "lucide-react";
-import { GuestModeModal } from "../common/GuestModeModal";
 import { useCreateProject } from "./CreateProjectContext";
+import { useGuestModeModal } from "../common/GuestModeModal";
 import { useCurrentUser } from "../common/CurrentUserContext";
 import { useCreateProjectCategory } from "../projectCategory/CreateProjectCategoryContext";
 
@@ -21,7 +20,7 @@ export function ProjectToolbarCreateNewMenuTrigger() {
 
   // If the user is a guest, show the guest mode modal instead of allowing creation
   const { isGuest } = useCurrentUser();
-  const [isGuestModeModalOpen, setIsGuestModeModalOpen] = useState(false);
+  const { onOpenChange: onGuestModeModalOpenChange } = useGuestModeModal();
 
   // Create project category: action state + form modal state
   const {
@@ -42,7 +41,7 @@ export function ProjectToolbarCreateNewMenuTrigger() {
    */
   function handleAction(key: Key) {
     if (isGuest) {
-      setIsGuestModeModalOpen(true);
+      onGuestModeModalOpenChange(true);
       return;
     }
 
@@ -80,12 +79,6 @@ export function ProjectToolbarCreateNewMenuTrigger() {
           {t("items.category")}
         </Item>
       </ToolbarCreateNewMenuTrigger>
-
-      {/* Guest mode modal */}
-      <GuestModeModal
-        isOpen={isGuestModeModalOpen}
-        onOpenChange={setIsGuestModeModalOpen}
-      />
     </>
   );
 }

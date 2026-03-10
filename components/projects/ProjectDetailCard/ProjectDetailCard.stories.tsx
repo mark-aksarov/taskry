@@ -17,6 +17,7 @@ import { projectDetailActionsArgs } from "../ProjectDetailActions/__stories__";
 import { withUpdateProjectProvider } from "../UpdateProjectContext/__stories__";
 import { withDeleteProjectProvider } from "../DeleteProjectContext/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
+import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
 
 const meta = {
   title: "components/projects/ProjectDetailCard",
@@ -34,6 +35,7 @@ const meta = {
     ),
     withUpdateProjectProvider,
     withDeleteProjectProvider,
+    withGuestModeModalProvider,
     withCurrentUserProvider,
     withThemedBackground,
   ],
@@ -82,5 +84,12 @@ export const WithoutOptionalProjectData = {
     projectDetailActions: (
       <ProjectDetailActions {...projectDetailActionsArgs} />
     ),
+  },
+} satisfies Story;
+
+export const GuestMode = {
+  ...Default,
+  parameters: {
+    isGuest: true,
   },
 } satisfies Story;

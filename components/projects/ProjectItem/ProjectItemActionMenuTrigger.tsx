@@ -21,7 +21,7 @@ import { startTransition, useState } from "react";
 import { ProjectStatus } from "@/generated/prisma/enums";
 import { DeleteProjectModal } from "../DeleteProjectModal";
 import { useUpdateProject } from "../UpdateProjectContext";
-import { GuestModeModal } from "../../common/GuestModeModal";
+import { useGuestModeModal } from "../../common/GuestModeModal";
 import { useProjectItemPending } from "./useProjectItemPending";
 import { useUpdateProjectStatus } from "../UpdateProjectStatusContext";
 import { useCurrentUser } from "@/components/common/CurrentUserContext";
@@ -43,7 +43,7 @@ export function ProjectItemActionMenuTrigger({
 
   // Detect if the current user is a guest
   const { isGuest } = useCurrentUser();
-  const [isGuestModeModalOpen, setIsGuestModeModalOpen] = useState(false);
+  const { onOpenChange: onGuestModeModalOpenChange } = useGuestModeModal();
 
   // Delete confirmation modal state
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
@@ -68,7 +68,7 @@ export function ProjectItemActionMenuTrigger({
    */
   const handleAction = (key: Key) => {
     if (isGuest) {
-      setIsGuestModeModalOpen(true);
+      onGuestModeModalOpenChange(true);
       return;
     }
 
@@ -145,11 +145,6 @@ export function ProjectItemActionMenuTrigger({
         projectTitle={projectTitle}
         isOpen={isDeleteModalOpen}
         onOpenChange={setIsDeleteModalOpen}
-      />
-
-      <GuestModeModal
-        isOpen={isGuestModeModalOpen}
-        onOpenChange={setIsGuestModeModalOpen}
       />
     </>
   );

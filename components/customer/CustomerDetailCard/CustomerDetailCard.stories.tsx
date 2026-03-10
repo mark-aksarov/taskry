@@ -9,6 +9,7 @@ import { DetailHeaderSkeleton } from "@/components/common/DetailHeader";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withDeleteCustomerProvider } from "../DeleteCustomerContext/__stories__";
 import { withUpdateCustomerProvider } from "../UpdateCustomerContext/__stories__";
+import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 import { customerDetailActionsArgs } from "@/components/customer/CustomerDetailActions/__stories__";
 
@@ -16,10 +17,11 @@ const meta = {
   title: "components/customers/CustomerDetailCard",
   component: CustomerDetailCard,
   decorators: [
-    withThemedBackground,
-    withCurrentUserProvider,
     withUpdateCustomerProvider,
     withDeleteCustomerProvider,
+    withGuestModeModalProvider,
+    withCurrentUserProvider,
+    withThemedBackground,
   ],
 } satisfies Meta<typeof CustomerDetailCard>;
 
@@ -63,5 +65,12 @@ export const WithoutSomeData = {
     customerDetailActions: (
       <CustomerDetailActions {...customerDetailActionsArgs} />
     ),
+  },
+} satisfies Story;
+
+export const GuestMode = {
+  ...Default,
+  parameters: {
+    isGuest: true,
   },
 } satisfies Story;

@@ -5,14 +5,13 @@ import {
   ToolbarCreateNewModalTrigger,
 } from "../common/Toolbar";
 
-import { useState } from "react";
 import { Key } from "react-aria";
 import { Item } from "react-stately";
 import { useTranslations } from "next-intl";
 import { Building2, Contact } from "lucide-react";
 import { DialogHeader } from "@/components/ui/Dialog";
-import { GuestModeModal } from "../common/GuestModeModal";
 import { useCreateCustomer } from "./CreateCustomerContext";
+import { useGuestModeModal } from "../common/GuestModeModal";
 import { useCurrentUser } from "../common/CurrentUserContext";
 import { useCreateCompany } from "../company/CreateCompanyContext";
 
@@ -21,7 +20,7 @@ export function CustomerToolbarCreateNewMenuTrigger() {
 
   // If the user is a guest, show the guest mode modal instead of allowing creation
   const { isGuest } = useCurrentUser();
-  const [isGuestModeModalOpen, setIsGuestModeModalOpen] = useState(false);
+  const { onOpenChange: onGuestModeModalOpenChange } = useGuestModeModal();
 
   // Create company: action state + form modal state
   const {
@@ -42,7 +41,7 @@ export function CustomerToolbarCreateNewMenuTrigger() {
    */
   function handleAction(key: Key) {
     if (isGuest) {
-      setIsGuestModeModalOpen(true);
+      onGuestModeModalOpenChange(true);
       return;
     }
 
@@ -80,11 +79,6 @@ export function CustomerToolbarCreateNewMenuTrigger() {
           {t("items.company")}
         </Item>
       </ToolbarCreateNewMenuTrigger>
-
-      <GuestModeModal
-        isOpen={isGuestModeModalOpen}
-        onOpenChange={setIsGuestModeModalOpen}
-      />
     </>
   );
 }

@@ -6,6 +6,7 @@ import { PageDecorator } from "@/.storybook/PageDecorator";
 import { ProjectCategoriesPage } from "./ProjectCategoriesPage";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { ProjectCategoryList } from "@/components/projectCategory/ProjectCategoryList";
+import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 import { withSelectedItemsProvider } from "@/components/common/SelectedItemsContext/__stories__";
 import { withPageTransitionProvider } from "@/components/common/PageTransitionContext/__stories__";
@@ -20,9 +21,10 @@ const meta = {
   decorators: [
     withCreateProjectCategoryProvider,
     withDeleteProjectCategoriesProvider,
+    withGuestModeModalProvider,
+    withCurrentUserProvider,
     withPageTransitionProvider,
     withSelectedItemsProvider,
-    withCurrentUserProvider,
     PageDecorator,
     withThemedBackground,
   ],
@@ -50,4 +52,11 @@ export const Loading = {
 
 export const WithNoProjectCategories = {
   args: { ...Default.args, totalCount: 0 },
+} satisfies Story;
+
+export const GuestMode = {
+  ...Default,
+  parameters: {
+    isGuest: true,
+  },
 } satisfies Story;
