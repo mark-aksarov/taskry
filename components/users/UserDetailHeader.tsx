@@ -1,14 +1,16 @@
 import { useTranslations } from "next-intl";
 import { DetailHeader } from "@/components/common/DetailHeader";
-import { PersonDetailHeaderImage } from "../common/PersonDetailHeaderImage";
+import { UserDetailHeaderImage } from "./UserDetailHeaderImage";
 
 interface UserDetailHeaderProps {
+  userId: string;
   fullName: string;
   imageUrl?: string;
   positionName?: string;
 }
 
 export function UserDetailHeader({
+  userId,
   fullName,
   imageUrl,
   positionName,
@@ -18,7 +20,13 @@ export function UserDetailHeader({
   return (
     <DetailHeader
       title={fullName}
-      image={<PersonDetailHeaderImage alt={fullName} imageUrl={imageUrl} />}
+      image={
+        <UserDetailHeaderImage
+          alt={fullName}
+          userId={userId}
+          imageUrl={imageUrl}
+        />
+      }
       subtitle={positionName ? positionName : t("noPosition")}
     />
   );

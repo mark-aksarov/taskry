@@ -45,6 +45,7 @@ export const Default = {
     profileDetailContainer: <UserDetail {...mockedUserDetail} />,
     userHeaderContainer: (
       <UserDetailHeader
+        userId="user-1"
         fullName="User 1"
         imageUrl="/man.jpg"
         positionName="Position 1"
@@ -71,7 +72,7 @@ export const WithoutOptionalUserData = {
         email={mockedUserDetail.email}
       />
     ),
-    userHeaderContainer: <UserDetailHeader fullName="User 1" />,
+    userHeaderContainer: <UserDetailHeader userId="user-1" fullName="User 1" />,
   },
 } satisfies Story;
 

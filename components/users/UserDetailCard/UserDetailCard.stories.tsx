@@ -57,7 +57,8 @@ export const Default = {
     profileHeader: (
       <UserDetailHeader
         fullName={mockedUserDetail.fullName}
-        imageUrl="/man.jpg"
+        userId={mockedUserDetail.id}
+        imageUrl={mockedUserDetail.imageUrl}
         positionName={mockedUserDetail.position?.name}
       />
     ),
@@ -88,7 +89,12 @@ export const WithoutOptionalUserData = {
         email={mockedUserDetail.email}
       />
     ),
-    profileHeader: <UserDetailHeader fullName={mockedUserDetail.fullName} />,
+    profileHeader: (
+      <UserDetailHeader
+        userId={mockedUserDetail.id}
+        fullName={mockedUserDetail.fullName}
+      />
+    ),
     navigationDesktop: (
       <UserNavigationDesktop
         userActions={<ProfileActions userId="user-1" userFullName="User 1" />}

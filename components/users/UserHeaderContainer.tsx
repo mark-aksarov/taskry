@@ -27,6 +27,7 @@ async function UserHeaderContainerInner({ userId }: UserHeaderContainerProps) {
 
   return (
     <UserDetailHeader
+      userId={user.id}
       fullName={user.fullName}
       imageUrl={user.imageUrl}
       positionName={user.position?.name}

@@ -65,6 +65,7 @@ export const Default = {
     userTasksContainer: <UserTaskList {...UserTaskListStory.args} />,
     userHeaderContainer: (
       <UserDetailHeader
+        userId="user-1"
         fullName="User 1"
         positionName="Position 1"
         imageUrl="/man.jpg"

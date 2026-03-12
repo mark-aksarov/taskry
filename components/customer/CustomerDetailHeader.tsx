@@ -18,7 +18,13 @@ export function CustomerDetailHeader({
   return (
     <DetailHeader
       title={fullName}
-      image={<PersonDetailHeaderImage alt={fullName} imageUrl={imageUrl} />}
+      image={
+        <PersonDetailHeaderImage
+          alt={fullName}
+          imageUrl={imageUrl}
+          canEditImage
+        />
+      }
       subtitle={companyName ? companyName : t("noCompany")}
     />
   );

@@ -1,0 +1,1 @@
+export { UserDetailHeaderImage } from "./UserDetailHeaderImage";

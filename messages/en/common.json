@@ -1,4 +1,21 @@
 {
+  "UploadProfileImageDialog": {
+    "heading": "Upload image",
+    "text": "Upload the profile image. Allowed file types: JPG, PNG, WEBP. Maximum file size is 200 KB. Minimum image size is 300x300 px."
+  },
+  "ChangeProfileImageDialog": {
+    "heading": "Change image",
+    "save": "Save"
+  },
+  "PersonImageFileTrigger": {
+    "label": "Upload",
+    "error": {
+      "fileSize": "The file is too large. Maximum size is 200 KB.",
+      "imageSize": "The image is too small. Minimum size is 300x300 px.",
+      "aspectRatio": "The image should not be too wide or too tall.",
+      "unknown": "Unknown error loading image"
+    }
+  },
   "GuestModeModal": {
     "heading": "Guest Mode",
     "text": "<strong>Action is restricted in guest mode.</strong> An account is required to access all features. Please sign in or create a new account to remove guest mode restrictions.",

@@ -3,7 +3,7 @@
 import { twMerge } from "tailwind-merge";
 
 interface ErrorBannerTextProps {
-  ref: React.RefObject<HTMLDivElement | null>;
+  ref?: React.RefObject<HTMLDivElement | null>;
   className?: string;
   children: React.ReactNode;
 }

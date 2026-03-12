@@ -39,6 +39,7 @@ export function UserDetailContainer({ userId }: UserDetailContainerProps) {
     <PersonDetailPresentation
       personHeader={
         <UserDetailHeader
+          userId={user.id}
           fullName={user.fullName}
           imageUrl={user.imageUrl}
           positionName={user.position?.name}

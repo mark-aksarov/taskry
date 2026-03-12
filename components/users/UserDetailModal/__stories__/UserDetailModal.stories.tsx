@@ -41,7 +41,8 @@ export const Default = {
           <UserDetailHeader
             fullName={mockedUserDetail.fullName}
             positionName={mockedUserDetail.position?.name}
-            imageUrl="/man.jpg"
+            userId={mockedUserDetail.id}
+            imageUrl={mockedUserDetail.imageUrl}
           />
         }
         userDetail={<UserDetail {...mockedUserDetail} />}

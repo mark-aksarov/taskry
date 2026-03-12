@@ -1,0 +1,1 @@
+export { PersonImageModal } from "./PersonImageModal";

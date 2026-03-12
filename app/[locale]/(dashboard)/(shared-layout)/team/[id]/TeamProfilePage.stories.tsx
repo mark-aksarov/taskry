@@ -49,6 +49,7 @@ export const Default = {
     profileDetailContainer: <UserDetail {...mockedUserDetail} />,
     userHeaderContainer: (
       <UserDetailHeader
+        userId="user-1"
         fullName="User 1"
         positionName="Position 1"
         imageUrl="/man.jpg"
@@ -69,7 +70,7 @@ export const WithoutSomeData = {
   args: {
     ...Default.args,
     profileDetailContainer: <UserDetail {...mockedUserDetail} />,
-    userHeaderContainer: <UserDetailHeader fullName="User 1" />,
+    userHeaderContainer: <UserDetailHeader userId="user-1" fullName="User 1" />,
   },
 } satisfies Story;
 
