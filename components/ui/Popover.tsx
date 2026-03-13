@@ -11,6 +11,7 @@ import { twMerge } from "tailwind-merge";
 export type Placement =
   | "left top"
   | "left bottom"
+  | "bottom"
   | "bottom left"
   | "bottom right";
 

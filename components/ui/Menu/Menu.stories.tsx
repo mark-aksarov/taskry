@@ -71,8 +71,15 @@ export const LeftTopPlacement = {
   },
 } satisfies Story;
 
+export const BottomPlacement = {
+  ...MenuTemplate,
+  args: {
+    placement: "bottom",
+  },
+} satisfies Story;
+
 export const LeftBottomPlacement = {
-  ...LeftTopPlacement,
+  ...MenuTemplate,
   args: {
     placement: "left bottom",
   },
