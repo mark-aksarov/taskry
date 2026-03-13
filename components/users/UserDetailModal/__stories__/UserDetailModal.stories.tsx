@@ -10,6 +10,7 @@ import { DetailHeaderSkeleton } from "@/components/common/DetailHeader";
 import { UserDetailSkeleton } from "../../UserDetail/UserDetailSkeleton";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { PersonDetailPresentation } from "@/components/common/PersonDetailPresentation";
+import { PersonDetailHeaderImage } from "@/components/common/PersonDetailHeaderImage";
 
 const meta = {
   title: "components/users/UserDetailModal",
@@ -41,8 +42,12 @@ export const Default = {
           <UserDetailHeader
             fullName={mockedUserDetail.fullName}
             positionName={mockedUserDetail.position?.name}
-            userId={mockedUserDetail.id}
-            imageUrl={mockedUserDetail.imageUrl}
+            imageSlot={
+              <PersonDetailHeaderImage
+                alt={mockedUserDetail.fullName}
+                imageUrl={mockedUserDetail.imageUrl}
+              />
+            }
           />
         }
         userDetail={<UserDetail {...mockedUserDetail} />}

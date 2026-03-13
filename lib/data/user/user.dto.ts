@@ -78,6 +78,11 @@ export interface UpdateUserInputDTO {
   publicLink: string | null;
 }
 
+export interface UpdateUserImageUrlInputDTO {
+  id: string;
+  imageUrl: string | null;
+}
+
 export interface ChangePasswordInputDTO {
   id: string;
   newPassword: string;

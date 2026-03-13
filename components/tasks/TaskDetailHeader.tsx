@@ -16,7 +16,7 @@ export function TaskDetailHeader({
   return (
     <DetailHeader
       title={taskTitle}
-      image={<TaskDetailHeaderImage />}
+      imageSlot={<TaskDetailHeaderImage />}
       subtitle={categoryName ? categoryName : t("noCategory")}
     />
   );

@@ -4,6 +4,7 @@ import {
 } from "@/components/users/UserTasksPageLayout";
 
 import { mocked } from "storybook/test";
+import { mockedUserDetail } from "@/mocks/users";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { useParams, usePathname } from "next/navigation";
 import { PageDecorator } from "@/.storybook/PageDecorator";
@@ -15,7 +16,9 @@ import { UserDetailHeader } from "@/components/users/UserDetailHeader";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { newTaskFormArgs } from "@/components/tasks/NewTaskForm/__stories__";
 import { editUserFormArgs } from "@/components/users/EditUserForm/__stories__";
+import { UserImageMenuTrigger } from "@/components/users/UserImageMenuTrigger";
 import { UserTaskListStory } from "@/components/users/UserTaskList/__stories__";
+import { PersonDetailHeaderImage } from "@/components/common/PersonDetailHeaderImage";
 import { ProfileNavigationMobile } from "@/components/users/ProfileNavigationMobile";
 import { ProfileNavigationDesktop } from "@/components/users/ProfileNavigationDesktop";
 import { withDeleteUserProvider } from "@/components/users/DeleteUserContext/__stories__";
@@ -27,6 +30,7 @@ import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/
 import { withSelectedTasksProvider } from "@/components/tasks/SelectedTasksContext/__stories__";
 import { withChangePasswordProvider } from "@/components/users/ChangePasswordContext/__stories__";
 import { withPageTransitionProvider } from "@/components/common/PageTransitionContext/__stories__";
+import { withUpdateUserImageProvider } from "@/components/users/UpdateUserImageContext/__stories__";
 import { withUpdateTaskStatusesProvider } from "@/components/tasks/UpdateTaskStatusesContext/__stories__";
 
 const meta = {
@@ -34,6 +38,7 @@ const meta = {
   component: UserTasksPageLayout,
   parameters: { layout: "fullscreen" },
   decorators: [
+    withUpdateUserImageProvider,
     withCreateTaskProvider,
     withUpdateUserProvider,
     withChangePasswordProvider,
@@ -64,16 +69,25 @@ export const Default = {
     userTasksContainer: <UserTaskList {...UserTaskListStory.args} />,
     userHeaderContainer: (
       <UserDetailHeader
-        userId="user-1"
         fullName="User 1"
         positionName="Position 1"
-        imageUrl="/man.jpg"
+        imageSlot={
+          <UserImageMenuTrigger>
+            <PersonDetailHeaderImage
+              alt={mockedUserDetail.fullName}
+              imageUrl={mockedUserDetail.imageUrl}
+            />
+          </UserImageMenuTrigger>
+        }
       />
     ),
     navigationDesktop: (
       <ProfileNavigationDesktop
         profileActions={
-          <ProfileActions userId="user-1" userFullName="User 1" />
+          <ProfileActions
+            userId={mockedUserDetail.id}
+            userFullName={mockedUserDetail.fullName}
+          />
         }
       />
     ),

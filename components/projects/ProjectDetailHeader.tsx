@@ -16,7 +16,7 @@ export function ProjectDetailHeader({
   return (
     <DetailHeader
       title={projectTitle}
-      image={<ProjectDetailHeaderImage />}
+      imageSlot={<ProjectDetailHeaderImage />}
       subtitle={categoryName ? categoryName : t("noCategory")}
     />
   );

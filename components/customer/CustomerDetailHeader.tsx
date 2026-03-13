@@ -19,7 +19,7 @@ export function CustomerDetailHeader({
   return (
     <DetailHeader
       title={fullName}
-      image={imageSlot}
+      imageSlot={imageSlot}
       subtitle={companyName ? companyName : t("noCompany")}
     />
   );

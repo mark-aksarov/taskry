@@ -361,6 +361,12 @@
         "internalServerError": "A server error occurred. Failed to update user."
       }
     },
+    "updateImageUrl": {
+      "success": "User image updated successfully",
+      "error": {
+        "internalServerError": "A server error occurred. Failed to update user image."
+      }
+    },
     "delete": {
       "success": "User deleted successfully",
       "error": {

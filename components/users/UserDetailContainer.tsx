@@ -7,6 +7,7 @@ import { UserDetailDTO } from "@/lib/data/user/user.dto";
 import { DetailHeaderSkeleton } from "../common/DetailHeader";
 import { UserDetailSkeleton } from "./UserDetail/UserDetailSkeleton";
 import { PersonDetailPresentation } from "../common/PersonDetailPresentation";
+import { PersonDetailHeaderImage } from "../common/PersonDetailHeaderImage";
 
 interface UserDetailContainerProps {
   userId: string;
@@ -39,9 +40,13 @@ export function UserDetailContainer({ userId }: UserDetailContainerProps) {
     <PersonDetailPresentation
       personHeader={
         <UserDetailHeader
-          userId={user.id}
           fullName={user.fullName}
-          imageUrl={user.imageUrl}
+          imageSlot={
+            <PersonDetailHeaderImage
+              alt={user.fullName}
+              imageUrl={user.imageUrl}
+            />
+          }
           positionName={user.position?.name}
         />
       }

@@ -2,6 +2,7 @@ import {
   UpdateUserInputDTO,
   CreateUserInputDTO,
   ChangePasswordInputDTO,
+  UpdateUserImageUrlInputDTO,
 } from "./user.dto";
 
 import { auth } from "@/lib/auth";
@@ -90,6 +91,43 @@ export const updateUser = async (input: UpdateUserInputDTO) => {
         phoneNumber: input.phoneNumber,
         birthdate: input.birthdate ? new Date(input.birthdate) : null,
         publicLink: input.publicLink,
+      },
+    },
+    headers: await headers(),
+  });
+
+  return updatedUser;
+};
+
+export const updateUserImageUrl = async (input: UpdateUserImageUrlInputDTO) => {
+  // Authorization
+  const {
+    user: { id: userId, role, workspaceId },
+  } = await requireSession();
+
+  // Check permission
+  const permission = await auth.api.userHasPermission({
+    body: {
+      userId,
+      permission: {
+        user: ["update"],
+      },
+    },
+  });
+
+  if (!permission.success || (role === "user" && userId !== input.id)) {
+    throw new AccessDeniedError("You do not have permission to update user.");
+  }
+
+  // Validate updated user. Since we use the better-auth API, we must check workspace here.
+  await validateUser(workspaceId, input.id);
+
+  // Use better auth admin api to update user
+  const updatedUser = await auth.api.adminUpdateUser({
+    body: {
+      userId: input.id,
+      data: {
+        imageUrl: input.imageUrl,
       },
     },
     headers: await headers(),

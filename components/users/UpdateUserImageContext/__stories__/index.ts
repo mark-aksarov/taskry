@@ -1,0 +1,1 @@
+export { withUpdateUserImageProvider } from "./withUpdateUserImageProvider";

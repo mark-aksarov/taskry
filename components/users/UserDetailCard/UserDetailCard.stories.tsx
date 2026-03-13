@@ -10,6 +10,7 @@ import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { useParams, usePathname } from "next/navigation";
 import { ChangePasswordModal } from "../ChangePasswordModal";
 import { editUserFormArgs } from "../EditUserForm/__stories__";
+import { UserImageMenuTrigger } from "../UserImageMenuTrigger";
 import { UserNavigationDesktop } from "../UserNavigationDesktop";
 import { DetailHeaderSkeleton } from "@/components/common/DetailHeader";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
@@ -17,8 +18,10 @@ import { ProfileActions, ProfileActionsSkeleton } from "../ProfileActions";
 import { withDeleteUserProvider } from "../DeleteUserContext/__stories__";
 import { withUpdateUserProvider } from "../UpdateUserContext/__stories__";
 import { withChangePasswordProvider } from "../ChangePasswordContext/__stories__";
+import { PersonDetailHeaderImage } from "@/components/common/PersonDetailHeaderImage";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
+import { withUpdateUserImageProvider } from "../UpdateUserImageContext/__stories__";
 
 const meta = {
   title: "components/users/UserDetailCard",
@@ -39,6 +42,7 @@ const meta = {
         />
       </>
     ),
+    withUpdateUserImageProvider,
     withUpdateUserProvider,
     withChangePasswordProvider,
     withDeleteUserProvider,
@@ -57,14 +61,25 @@ export const Default = {
     profileHeader: (
       <UserDetailHeader
         fullName={mockedUserDetail.fullName}
-        userId={mockedUserDetail.id}
-        imageUrl={mockedUserDetail.imageUrl}
+        imageSlot={
+          <UserImageMenuTrigger>
+            <PersonDetailHeaderImage
+              alt={mockedUserDetail.fullName}
+              imageUrl={mockedUserDetail.imageUrl}
+            />
+          </UserImageMenuTrigger>
+        }
         positionName={mockedUserDetail.position?.name}
       />
     ),
     navigationDesktop: (
       <UserNavigationDesktop
-        userActions={<ProfileActions userId="user-1" userFullName="User 1" />}
+        userActions={
+          <ProfileActions
+            userId={mockedUserDetail.id}
+            userFullName={mockedUserDetail.fullName}
+          />
+        }
       />
     ),
   },
@@ -91,8 +106,12 @@ export const WithoutOptionalUserData = {
     ),
     profileHeader: (
       <UserDetailHeader
-        userId={mockedUserDetail.id}
         fullName={mockedUserDetail.fullName}
+        imageSlot={
+          <UserImageMenuTrigger>
+            <PersonDetailHeaderImage />
+          </UserImageMenuTrigger>
+        }
       />
     ),
     navigationDesktop: (

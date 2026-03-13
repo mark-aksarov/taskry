@@ -13,3 +13,4 @@ export const rememberMe = z.preprocess(
   (val) => (!val ? "false" : val),
   z.stringbool(),
 );
+export const userImageUrl = z.url();

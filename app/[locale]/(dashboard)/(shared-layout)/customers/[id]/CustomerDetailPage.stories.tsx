@@ -87,7 +87,7 @@ export const WithoutSomeData = {
         fullName="Customer 1"
         imageSlot={
           <CustomerImageMenuTrigger>
-            <PersonDetailHeaderImage alt={mockedCustomerDetail.fullName} />
+            <PersonDetailHeaderImage />
           </CustomerImageMenuTrigger>
         }
       />

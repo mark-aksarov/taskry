@@ -5,14 +5,18 @@ import { DetailHeaderLayout } from "./DetailHeaderLayout";
 
 export interface DetailHeaderProps {
   title: string;
-  image: React.ReactNode;
+  imageSlot: React.ReactNode;
   subtitle: string;
 }
 
-export function DetailHeader({ title, image, subtitle }: DetailHeaderProps) {
+export function DetailHeader({
+  title,
+  imageSlot,
+  subtitle,
+}: DetailHeaderProps) {
   return (
     <DetailHeaderLayout
-      imageSlot={image}
+      imageSlot={imageSlot}
       mainSlot={
         <DetailHeaderInfo>
           <DetailHeaderTitle>{title}</DetailHeaderTitle>

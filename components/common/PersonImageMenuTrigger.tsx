@@ -7,7 +7,9 @@ import { Camera, Trash } from "lucide-react";
 import { Button } from "react-aria-components";
 import { focusRing } from "@/components/ui/styles";
 import { ButtonProps } from "@/components/ui/Button";
+import { useGuestModeModal } from "./GuestModeModal";
 import { DialogHeader } from "@/components/ui/Dialog";
+import { useCurrentUser } from "./CurrentUserContext";
 import { ResponsiveMenuTrigger } from "./ResponsiveMenuTrigger";
 
 const styles = tv({
@@ -34,7 +36,15 @@ export function PersonImageMenuTrigger({
 }: PersonImageMenuTriggerProps) {
   const t = useTranslations("common.PersonImageMenuTrigger");
 
+  const { isGuest } = useCurrentUser();
+  const { onOpenChange } = useGuestModeModal();
+
   function handleAction(key: Key) {
+    if (isGuest) {
+      onOpenChange(true);
+      return;
+    }
+
     if (key === "delete") {
       onDelete();
     } else if (key === "update") {

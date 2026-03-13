@@ -1,18 +1,16 @@
+import React from "react";
 import { useTranslations } from "next-intl";
 import { DetailHeader } from "@/components/common/DetailHeader";
-import { UserDetailHeaderImage } from "./UserDetailHeaderImage";
 
 interface UserDetailHeaderProps {
-  userId: string;
   fullName: string;
-  imageUrl?: string;
+  imageSlot: React.ReactNode;
   positionName?: string;
 }
 
 export function UserDetailHeader({
-  userId,
   fullName,
-  imageUrl,
+  imageSlot,
   positionName,
 }: UserDetailHeaderProps) {
   const t = useTranslations("users.UserDetailHeader");
@@ -20,13 +18,7 @@ export function UserDetailHeader({
   return (
     <DetailHeader
       title={fullName}
-      image={
-        <UserDetailHeaderImage
-          alt={fullName}
-          userId={userId}
-          imageUrl={imageUrl}
-        />
-      }
+      imageSlot={imageSlot}
       subtitle={positionName ? positionName : t("noPosition")}
     />
   );
