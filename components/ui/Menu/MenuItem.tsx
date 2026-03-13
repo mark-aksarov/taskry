@@ -35,7 +35,7 @@ export const MenuItem = ({
     }),
   );
 
-  if (menuItemProps.href) {
+  if ((menuItemProps as any).href) {
     return (
       <a
         {...mergeProps(menuItemProps, hoverProps, props)}
