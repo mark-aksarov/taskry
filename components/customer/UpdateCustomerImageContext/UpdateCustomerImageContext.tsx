@@ -18,7 +18,7 @@ import { useShowToastOnActionSuccess } from "@/lib/hooks/useShowToastOnActionSuc
 import { useCloseModalOnActionSuccess } from "@/lib/hooks/useCloseModalOnActionSuccess";
 import { useShowToastOnActionErrorWhenModalClosed } from "@/lib/hooks/useShowToastOnActionErrorWhenModalClosed";
 
-const UpdateCustomerImageContext =
+export const UpdateCustomerImageContext =
   createContext<UpdatePersonImageContextType<number> | null>(null);
 
 interface UpdateCustomerImageProviderProps {

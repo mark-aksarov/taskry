@@ -5,18 +5,24 @@ import { CustomerDetailCard } from "./CustomerDetailCard";
 import { CustomerDetailSkeleton } from "../CustomerDetail";
 import { CustomerDetailHeader } from "../CustomerDetailHeader";
 import { CustomerDetailActions } from "../CustomerDetailActions";
+import { CustomerImageMenuTrigger } from "../CustomerImageMenuTrigger";
 import { DetailHeaderSkeleton } from "@/components/common/DetailHeader";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withDeleteCustomerProvider } from "../DeleteCustomerContext/__stories__";
 import { withUpdateCustomerProvider } from "../UpdateCustomerContext/__stories__";
+import { PersonDetailHeaderImage } from "@/components/common/PersonDetailHeaderImage";
+import { withUpdateCustomerImageProvider } from "../UpdateCustomerImageContext/__stories__";
 import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 import { customerDetailActionsArgs } from "@/components/customer/CustomerDetailActions/__stories__";
+
+const customer = mockedCustomerDetail;
 
 const meta = {
   title: "components/customers/CustomerDetailCard",
   component: CustomerDetailCard,
   decorators: [
+    withUpdateCustomerImageProvider,
     withUpdateCustomerProvider,
     withDeleteCustomerProvider,
     withGuestModeModalProvider,
@@ -28,15 +34,20 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-const customer = mockedCustomerDetail;
-
 export const Default = {
   args: {
     customerDetail: <CustomerDetail {...customer} />,
     customerHeader: (
       <CustomerDetailHeader
         fullName={customer.fullName}
-        imageUrl={customer.imageUrl}
+        imageSlot={
+          <CustomerImageMenuTrigger>
+            <PersonDetailHeaderImage
+              alt={customer.fullName}
+              imageUrl={customer.imageUrl}
+            />
+          </CustomerImageMenuTrigger>
+        }
         companyName={customer.company?.name}
       />
     ),
@@ -61,7 +72,16 @@ export const WithoutSomeData = {
     customerDetail: (
       <CustomerDetail fullName={customer.fullName} email={customer.email} />
     ),
-    customerHeader: <CustomerDetailHeader fullName={customer.fullName} />,
+    customerHeader: (
+      <CustomerDetailHeader
+        fullName={customer.fullName}
+        imageSlot={
+          <CustomerImageMenuTrigger>
+            <PersonDetailHeaderImage alt={customer.fullName} />
+          </CustomerImageMenuTrigger>
+        }
+      />
+    ),
     customerDetailActions: (
       <CustomerDetailActions {...customerDetailActionsArgs} />
     ),

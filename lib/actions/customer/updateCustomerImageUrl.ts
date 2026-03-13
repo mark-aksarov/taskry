@@ -22,8 +22,6 @@ export async function updateCustomerImageUrl(
 
   const t = await getTranslations("actions");
 
-  await new Promise((resolve) => setTimeout(resolve, 3000));
-
   try {
     const parsedData = schema.parse(payload);
 

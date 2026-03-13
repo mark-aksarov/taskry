@@ -10,6 +10,7 @@ import { DetailHeaderSkeleton } from "@/components/common/DetailHeader";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { CustomerDetailSkeleton } from "../../CustomerDetail/CustomerDetailSkeleton";
 import { PersonDetailPresentation } from "@/components/common/PersonDetailPresentation";
+import { PersonDetailHeaderImage } from "@/components/common/PersonDetailHeaderImage";
 
 const meta = {
   title: "components/customers/CustomerDetailModal",
@@ -45,7 +46,12 @@ export const Default = {
         personHeader={
           <CustomerDetailHeader
             fullName={customer.fullName}
-            imageUrl={customer.imageUrl}
+            imageSlot={
+              <PersonDetailHeaderImage
+                alt={customer.fullName}
+                imageUrl={customer.imageUrl}
+              />
+            }
             companyName={customer.company?.name}
           />
         }

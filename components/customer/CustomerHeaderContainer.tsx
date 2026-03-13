@@ -34,29 +34,24 @@ async function CustomerHeaderContainerInner({
   }
 
   return (
-    <UpdateCustomerImageProvider
-      createPresignedUrl={createPresignedUrl}
-      updateCustomerImageUrl={updateCustomerImageUrl}
-    >
-      <CustomerDetailHeader
-        fullName={customer.fullName}
-        imageSlot={
-          <UpdateCustomerImageProvider
-            createPresignedUrl={createPresignedUrl}
-            updateCustomerImageUrl={updateCustomerImageUrl}
-          >
-            <CustomerImageMenuTrigger>
-              <PersonDetailHeaderImage
-                alt={customer.fullName}
-                imageUrl={customer.imageUrl}
-              />
-            </CustomerImageMenuTrigger>
+    <CustomerDetailHeader
+      fullName={customer.fullName}
+      imageSlot={
+        <UpdateCustomerImageProvider
+          createPresignedUrl={createPresignedUrl}
+          updateCustomerImageUrl={updateCustomerImageUrl}
+        >
+          <CustomerImageMenuTrigger>
+            <PersonDetailHeaderImage
+              alt={customer.fullName}
+              imageUrl={customer.imageUrl}
+            />
+          </CustomerImageMenuTrigger>
 
-            <CustomerImageModal customerId={customerId} />
-          </UpdateCustomerImageProvider>
-        }
-        companyName={customer.company?.name}
-      />
-    </UpdateCustomerImageProvider>
+          <CustomerImageModal customerId={customerId} />
+        </UpdateCustomerImageProvider>
+      }
+      companyName={customer.company?.name}
+    />
   );
 }

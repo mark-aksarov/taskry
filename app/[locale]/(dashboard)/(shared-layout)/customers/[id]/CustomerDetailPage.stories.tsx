@@ -13,17 +13,21 @@ import { DetailHeaderSkeleton } from "@/components/common/DetailHeader";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { CustomerDetailHeader } from "@/components/customer/CustomerDetailHeader";
 import { CustomerDetailActions } from "@/components/customer/CustomerDetailActions";
+import { PersonDetailHeaderImage } from "@/components/common/PersonDetailHeaderImage";
+import { CustomerImageMenuTrigger } from "@/components/customer/CustomerImageMenuTrigger";
 import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 import { customerDetailActionsArgs } from "@/components/customer/CustomerDetailActions/__stories__";
 import { withDeleteCustomerProvider } from "@/components/customer/DeleteCustomerContext/__stories__";
 import { withUpdateCustomerProvider } from "@/components/customer/UpdateCustomerContext/__stories__";
+import { withUpdateCustomerImageProvider } from "@/components/customer/UpdateCustomerImageContext/__stories__";
 
 const meta = {
   title: "pages/CustomerDetailPage",
   component: CustomerDetailPage,
   parameters: { layout: "fullscreen" },
   decorators: [
+    withUpdateCustomerImageProvider,
     withUpdateCustomerProvider,
     withDeleteCustomerProvider,
     withGuestModeModalProvider,
@@ -48,7 +52,14 @@ export const Default = {
     customerHeaderContainer: (
       <CustomerDetailHeader
         fullName="Customer 1"
-        imageUrl="/man.jpg"
+        imageSlot={
+          <CustomerImageMenuTrigger>
+            <PersonDetailHeaderImage
+              alt={mockedCustomerDetail.fullName}
+              imageUrl={mockedCustomerDetail.imageUrl}
+            />
+          </CustomerImageMenuTrigger>
+        }
         companyName="Company 1"
       />
     ),
@@ -71,7 +82,16 @@ export const Loading = {
 export const WithoutSomeData = {
   args: {
     customerDetailContainer: <CustomerDetail {...mockedCustomerDetail} />,
-    customerHeaderContainer: <CustomerDetailHeader fullName="Customer 1" />,
+    customerHeaderContainer: (
+      <CustomerDetailHeader
+        fullName="Customer 1"
+        imageSlot={
+          <CustomerImageMenuTrigger>
+            <PersonDetailHeaderImage alt={mockedCustomerDetail.fullName} />
+          </CustomerImageMenuTrigger>
+        }
+      />
+    ),
     customerDetailActions: (
       <CustomerDetailActions {...customerDetailActionsArgs} />
     ),
