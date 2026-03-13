@@ -46,7 +46,11 @@ export function ProjectCommentsContainer({
 
   // Show skeleton while loading or revalidating
   if (!comments) {
-    return <Repeat items={10} renderItem={() => <CommentItemSkeleton />} />;
+    return (
+      <CommentList>
+        <Repeat items={10} renderItem={() => <CommentItemSkeleton />} />
+      </CommentList>
+    );
   }
 
   // Show empty section if no comments
