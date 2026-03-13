@@ -68,7 +68,7 @@ export function EditProjectFormContainer({
       categoryId={project.categoryId}
       customerId={project.customerId}
       projectCategorySelectItems={categories}
-      projectCustomerSelectItems={customers}
+      customerSelectItems={customers}
     />
   );
 }

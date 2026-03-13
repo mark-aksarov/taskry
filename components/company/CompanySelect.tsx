@@ -4,28 +4,30 @@ import { Item } from "react-stately";
 import { useTranslations } from "next-intl";
 import { ResponsiveSelect } from "@/components/common/ResponsiveSelect";
 
-export function TaskCategorySelect({
-  defaultSelectedKey,
-  items,
-}: {
+interface CompanySelectProps {
   defaultSelectedKey?: string;
   items: { id: number; name: string }[];
-}) {
-  const t = useTranslations("tasks.TaskCategorySelect");
+}
 
-  const withNoCategoryItems = [
-    { id: "", label: t("noTaskCategory") },
+export function CompanySelect({
+  defaultSelectedKey,
+  items,
+}: CompanySelectProps) {
+  const t = useTranslations("company.CompanySelect");
+
+  const withNoCompanyItems = [
+    { id: "", label: t("noCompany") },
     ...items.map((item) => ({ id: item.id, label: item.name })),
   ];
 
   return (
     <ResponsiveSelect
-      data-test="task-category-select"
-      name="categoryId"
       label={t("label")}
-      defaultSelectedKey={defaultSelectedKey || ""}
+      name="companyId"
+      data-test="customer-company-select"
       overlayClassName="w-[var(--trigger-width)]"
-      items={withNoCategoryItems}
+      defaultSelectedKey={defaultSelectedKey || ""}
+      items={withNoCompanyItems}
     >
       {(item: any) => <Item key={item.id}>{item.label}</Item>}
     </ResponsiveSelect>

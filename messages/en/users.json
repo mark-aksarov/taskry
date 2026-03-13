@@ -1,4 +1,8 @@
 {
+  "UserSelect": {
+    "label": "Assignee",
+    "noAssignee": "No assignee"
+  },
   "UserContainer": {
     "notFound": "User not found. It may have been deleted by another user."
   },
@@ -69,10 +73,6 @@
       "required": "Password is required",
       "tooShort": "The password is too short. It must contain at least {minLength} characters."
     }
-  },
-  "UserPositionSelect": {
-    "label": "Position",
-    "noPosition": "No position"
   },
   "TotalUsersCard": {
     "text": "Total Users"

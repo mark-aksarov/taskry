@@ -1,4 +1,8 @@
 {
+  "ProjectSelect": {
+    "label": "Project",
+    "noProject": "No project"
+  },
   "ProjectsEmptySectionCreateButton": {
     "label": "New project"
   },
@@ -77,14 +81,6 @@
     "validation": {
       "required": "Status is required"
     }
-  },
-  "ProjectCategorySelect": {
-    "label": "Category",
-    "noProjectCategory": "No project category"
-  },
-  "ProjectCustomerSelect": {
-    "label": "Customer",
-    "noCustomer": "No customer"
   },
   "ProjectFiltersFormNoActiveTasksSwitch": {
     "text": "Has not active tasks"

@@ -64,7 +64,7 @@ export const Default = {
           <EditCustomerForm
             {...mockedCustomerDetail}
             customerId={mockedCustomerDetail.id}
-            customerCompanySelectItems={mockedCompanySummaries}
+            companySelectItems={mockedCompanySummaries}
           />
         }
       />

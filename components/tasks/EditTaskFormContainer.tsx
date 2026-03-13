@@ -73,8 +73,8 @@ export function EditTaskFormContainer({ taskId }: EditTaskFormContainerProps) {
       projectId={task.projectId}
       assigneeId={task.assigneeId}
       taskCategorySelectItems={categories}
-      taskProjectSelectItems={projects}
-      taskAssigneeSelectItems={users}
+      projectSelectItems={projects}
+      assigneeSelectItems={users}
     />
   );
 }

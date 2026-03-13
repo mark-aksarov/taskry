@@ -13,12 +13,12 @@ import { CalendarDate } from "@internationalized/date";
 import { ProjectStatus } from "@/generated/prisma/enums";
 import { useUpdateProject } from "./UpdateProjectContext";
 import { ProjectStatusSelect } from "./ProjectStatusSelect";
-import { ProjectCategorySelect } from "./ProjectCategorySelect";
-import { ProjectCustomerSelect } from "./ProjectCustomerSelect";
 import { ProjectTitleTextField } from "./ProjectTitleTextField";
+import { CustomerSelect } from "@/components/customer/CustomerSelect";
 import { FormErrorBanner } from "@/components/common/FormErrorBanner";
 import { ProjectDeadlineDatePicker } from "./ProjectDeadlineDatePicker";
 import { ProjectDescriptionTextField } from "./ProjectDescriptionTextField";
+import { ProjectCategorySelect } from "../projectCategory/ProjectCategorySelect";
 
 interface EditProjectFormProps {
   projectId: number;
@@ -29,7 +29,7 @@ interface EditProjectFormProps {
   categoryId?: number;
   customerId?: number;
   projectCategorySelectItems: { id: number; name: string }[];
-  projectCustomerSelectItems: { id: number; fullName: string }[];
+  customerSelectItems: { id: number; fullName: string }[];
 }
 
 export function EditProjectForm({
@@ -41,7 +41,7 @@ export function EditProjectForm({
   categoryId,
   customerId,
   projectCategorySelectItems,
-  projectCustomerSelectItems,
+  customerSelectItems,
 }: EditProjectFormProps) {
   const t = useTranslations("projects.EditProjectForm");
 
@@ -75,9 +75,9 @@ export function EditProjectForm({
           defaultSelectedKey={categoryId?.toString()}
           items={projectCategorySelectItems}
         />
-        <ProjectCustomerSelect
+        <CustomerSelect
           defaultSelectedKey={customerId?.toString()}
-          items={projectCustomerSelectItems}
+          items={customerSelectItems}
         />
 
         <FormErrorBanner status={state.status} isPending={isPending}>

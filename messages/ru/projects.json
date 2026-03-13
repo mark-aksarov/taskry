@@ -1,4 +1,8 @@
 {
+  "ProjectSelect": {
+    "label": "Проект",
+    "noProject": "Нет проекта"
+  },
   "ProjectsEmptySectionCreateButton": {
     "label": "Новый проект"
   },
@@ -77,14 +81,6 @@
     "validation": {
       "required": "Требуется статус"
     }
-  },
-  "ProjectCategorySelect": {
-    "label": "Категория",
-    "noProjectCategory": "Нет категории"
-  },
-  "ProjectCustomerSelect": {
-    "label": "Клиент",
-    "noCustomer": "Нет клиента"
   },
   "ProjectFiltersFormNoActiveTasksSwitch": {
     "text": "Не имеет активных задач"

@@ -60,7 +60,7 @@ export const Default = {
     newProjectFormContainer: (
       <NewProjectForm
         projectCategorySelectItems={mockedProjectCategorySummaries}
-        projectCustomerSelectItems={mockedCustomerSummaries}
+        customerSelectItems={mockedCustomerSummaries}
       />
     ),
     projectFiltersFormContainer: (

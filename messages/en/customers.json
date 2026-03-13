@@ -1,4 +1,8 @@
 {
+  "CustomerSelect": {
+    "label": "Customer",
+    "noCustomer": "No customer"
+  },
   "CustomersEmptySectionCreateButton": {
     "label": "New customer"
   },
@@ -78,10 +82,6 @@
     "validation": {
       "format": "Please enter a valid URL, for example https://example.com"
     }
-  },
-  "CustomerCompanySelect": {
-    "label": "Company",
-    "noCompany": "No company"
   },
   "CustomerDetailModal": {
     "dialogHeading": "Customer Details",

@@ -9,9 +9,9 @@ import {
 
 import { startTransition } from "react";
 import { useTranslations } from "next-intl";
+import { CompanySelect } from "../company/CompanySelect";
 import { useUpdateCustomer } from "./UpdateCustomerContext";
 import { CustomerBioTextField } from "./CustomerBioTextField";
-import { CustomerCompanySelect } from "./CustomerCompanySelect";
 import { CustomerEmailTextField } from "./CustomerEmailTextField";
 import { FormErrorBanner } from "@/components/common/FormErrorBanner";
 import { CustomerFullNameTextField } from "./CustomerFullNameTextField";
@@ -26,7 +26,7 @@ interface EditCustomerFormProps {
   phoneNumber?: string;
   publicLink?: string;
   companyId?: number;
-  customerCompanySelectItems: { id: number; name: string }[];
+  companySelectItems: { id: number; name: string }[];
 }
 
 export function EditCustomerForm({
@@ -37,7 +37,7 @@ export function EditCustomerForm({
   phoneNumber,
   publicLink,
   companyId,
-  customerCompanySelectItems,
+  companySelectItems,
 }: EditCustomerFormProps) {
   const t = useTranslations("customers.EditCustomerForm");
 
@@ -62,9 +62,9 @@ export function EditCustomerForm({
         <CustomerEmailTextField defaultValue={email} />
         <CustomerPhoneNumberTextField defaultValue={phoneNumber} />
         <CustomerPublicLinkTextField defaultValue={publicLink} />
-        <CustomerCompanySelect
+        <CompanySelect
           defaultSelectedKey={companyId?.toString()}
-          items={customerCompanySelectItems}
+          items={companySelectItems}
         />
         <FormErrorBanner status={state.status} isPending={isPending}>
           {state.message}

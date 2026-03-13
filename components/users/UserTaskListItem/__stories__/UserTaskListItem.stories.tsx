@@ -55,8 +55,8 @@ export const Default = {
         {...mockedTaskDetail}
         taskId={mockedTaskDetail.id}
         taskCategorySelectItems={mockedTaskCategorySummaries}
-        taskProjectSelectItems={mockedProjectSummaries}
-        taskAssigneeSelectItems={mockedUserSummaries}
+        projectSelectItems={mockedProjectSummaries}
+        assigneeSelectItems={mockedUserSummaries}
       />
     ),
     sendComment: () => ({ status: "success" }),

@@ -11,7 +11,7 @@ import { startTransition } from "react";
 import { useTranslations } from "next-intl";
 import { useCreateCustomer } from "./CreateCustomerContext";
 import { CustomerBioTextField } from "./CustomerBioTextField";
-import { CustomerCompanySelect } from "./CustomerCompanySelect";
+import { CompanySelect } from "../company/CompanySelect";
 import { CustomerEmailTextField } from "./CustomerEmailTextField";
 import { FormErrorBanner } from "@/components/common/FormErrorBanner";
 import { CustomerFullNameTextField } from "./CustomerFullNameTextField";
@@ -44,7 +44,7 @@ export function NewCustomerForm({ companySelectItems }: NewCustomerFormProps) {
         <CustomerEmailTextField />
         <CustomerPhoneNumberTextField />
         <CustomerPublicLinkTextField />
-        <CustomerCompanySelect items={companySelectItems} />
+        <CompanySelect items={companySelectItems} />
         <FormErrorBanner status={state.status} isPending={isPending}>
           {state.message}
         </FormErrorBanner>

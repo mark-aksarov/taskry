@@ -4,28 +4,28 @@ import { Item } from "react-stately";
 import { useTranslations } from "next-intl";
 import { ResponsiveSelect } from "@/components/common/ResponsiveSelect";
 
-export function TaskProjectSelect({
+export function TaskCategorySelect({
   defaultSelectedKey,
   items,
 }: {
   defaultSelectedKey?: string;
-  items: { id: number; title: string }[];
+  items: { id: number; name: string }[];
 }) {
-  const t = useTranslations("tasks.TaskProjectSelect");
+  const t = useTranslations("taskCategories.TaskCategorySelect");
 
-  const withNoProjectItems = [
-    { id: "", label: t("noProject") },
-    ...items.map((item) => ({ id: item.id, label: item.title })),
+  const withNoCategoryItems = [
+    { id: "", label: t("noTaskCategory") },
+    ...items.map((item) => ({ id: item.id, label: item.name })),
   ];
 
   return (
     <ResponsiveSelect
-      data-test="task-project-select"
-      name="projectId"
+      data-test="task-category-select"
+      name="categoryId"
       label={t("label")}
       defaultSelectedKey={defaultSelectedKey || ""}
       overlayClassName="w-[var(--trigger-width)]"
-      items={withNoProjectItems}
+      items={withNoCategoryItems}
     >
       {(item: any) => <Item key={item.id}>{item.label}</Item>}
     </ResponsiveSelect>

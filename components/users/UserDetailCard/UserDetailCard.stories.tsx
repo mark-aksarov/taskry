@@ -40,7 +40,7 @@ const meta = {
             <EditUserForm
               {...mockedUserDetail}
               userId={mockedUserDetail.id}
-              userPositionSelectItems={mockedPositionSummaries}
+              positionSelectItems={mockedPositionSummaries}
             />
           }
         />

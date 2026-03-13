@@ -1,4 +1,8 @@
 {
+  "ProjectCategorySelect": {
+    "label": "Category",
+    "noProjectCategory": "No project category"
+  },
   "ProjectCategoriesEmptySectionCreateButton": {
     "label": "New project category"
   },

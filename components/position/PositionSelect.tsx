@@ -4,16 +4,16 @@ import { Item } from "react-stately";
 import { useTranslations } from "next-intl";
 import { ResponsiveSelect } from "@/components/common/ResponsiveSelect";
 
-interface UserPositionSelectProps {
+interface PositionSelectProps {
   defaultSelectedKey?: string;
   items: { id: number; name: string }[];
 }
 
-export function UserPositionSelect({
+export function PositionSelect({
   defaultSelectedKey,
   items,
-}: UserPositionSelectProps) {
-  const t = useTranslations("users.UserPositionSelect");
+}: PositionSelectProps) {
+  const t = useTranslations("positions.PositionSelect");
 
   const withNoPositionItems = [
     { id: "", label: t("noPosition") },

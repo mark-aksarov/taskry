@@ -152,18 +152,6 @@
       "required": "Требуется статус"
     }
   },
-  "TaskCategorySelect": {
-    "label": "Категория",
-    "noTaskCategory": "Нет категории"
-  },
-  "TaskProjectSelect": {
-    "label": "Проект",
-    "noProject": "Нет проекта"
-  },
-  "TaskAssigneeSelect": {
-    "label": "Исполнитель",
-    "noAssignee": "Нет исполнителя"
-  },
   "TaskDetail": {
     "noDeadline": "Без срока",
     "deadline": "Срок",

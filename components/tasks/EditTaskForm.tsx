@@ -13,9 +13,9 @@ import { useUpdateTask } from "./UpdateTaskContext";
 import { TaskStatus } from "@/generated/prisma/enums";
 import { CalendarDate } from "@internationalized/date";
 import { TaskStatusSelect } from "./TaskStatusSelect";
-import { TaskProjectSelect } from "./TaskProjectSelect";
-import { TaskCategorySelect } from "./TaskCategorySelect";
-import { TaskAssigneeSelect } from "./TaskAssigneeSelect";
+import { ProjectSelect } from "../projects/ProjectSelect";
+import { TaskCategorySelect } from "../taskCategory/TaskCategorySelect";
+import { UserSelect } from "../users/UserSelect";
 import { TaskTitleTextField } from "./TaskTitleTextField";
 import { TaskDeadlineDatePicker } from "./TaskDeadlineDatePicker";
 import { FormErrorBanner } from "@/components/common/FormErrorBanner";
@@ -31,8 +31,8 @@ interface EditTaskFormProps {
   projectId?: number;
   assigneeId?: string;
   taskCategorySelectItems: { id: number; name: string }[];
-  taskProjectSelectItems: { id: number; title: string }[];
-  taskAssigneeSelectItems: { id: string; fullName: string }[];
+  projectSelectItems: { id: number; title: string }[];
+  assigneeSelectItems: { id: string; fullName: string }[];
 }
 
 export function EditTaskForm({
@@ -45,8 +45,8 @@ export function EditTaskForm({
   projectId,
   assigneeId,
   taskCategorySelectItems,
-  taskProjectSelectItems,
-  taskAssigneeSelectItems,
+  projectSelectItems,
+  assigneeSelectItems,
 }: EditTaskFormProps) {
   const t = useTranslations("tasks.EditTaskForm");
 
@@ -80,13 +80,13 @@ export function EditTaskForm({
           defaultSelectedKey={categoryId?.toString()}
           items={taskCategorySelectItems}
         />
-        <TaskProjectSelect
+        <ProjectSelect
           defaultSelectedKey={projectId?.toString()}
-          items={taskProjectSelectItems}
+          items={projectSelectItems}
         />
-        <TaskAssigneeSelect
+        <UserSelect
           defaultSelectedKey={assigneeId?.toString()}
-          items={taskAssigneeSelectItems}
+          items={assigneeSelectItems}
         />
         <FormErrorBanner status={state.status} isPending={isPending}>
           {state.message}

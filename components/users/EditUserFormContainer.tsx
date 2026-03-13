@@ -61,7 +61,7 @@ export function EditUserFormContainer({ userId }: EditUserFormContainerProps) {
       publicLink={user.publicLink}
       address={user.address}
       positionId={user.positionId}
-      userPositionSelectItems={positions}
+      positionSelectItems={positions}
     />
   );
 }

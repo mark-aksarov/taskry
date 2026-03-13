@@ -35,7 +35,7 @@ const meta = {
               {...mockedProjectDetail}
               projectId={mockedProjectDetail.id}
               projectCategorySelectItems={mockedProjectCategorySummaries}
-              projectCustomerSelectItems={mockedCustomerSummaries}
+              customerSelectItems={mockedCustomerSummaries}
             />
           }
         />

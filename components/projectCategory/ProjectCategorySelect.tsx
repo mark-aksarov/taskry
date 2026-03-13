@@ -4,30 +4,30 @@ import { Item } from "react-stately";
 import { useTranslations } from "next-intl";
 import { ResponsiveSelect } from "@/components/common/ResponsiveSelect";
 
-interface CustomerCompanySelectProps {
+interface ProjectCategorySelectProps {
   defaultSelectedKey?: string;
   items: { id: number; name: string }[];
 }
 
-export function CustomerCompanySelect({
+export function ProjectCategorySelect({
   defaultSelectedKey,
   items,
-}: CustomerCompanySelectProps) {
-  const t = useTranslations("customers.CustomerCompanySelect");
+}: ProjectCategorySelectProps) {
+  const t = useTranslations("projectCategories.ProjectCategorySelect");
 
-  const withNoCompanyItems = [
-    { id: "", label: t("noCompany") },
+  const withNoCategoryItems = [
+    { id: "", label: t("noProjectCategory") },
     ...items.map((item) => ({ id: item.id, label: item.name })),
   ];
 
   return (
     <ResponsiveSelect
+      data-test="project-category-select"
       label={t("label")}
-      name="companyId"
-      data-test="customer-company-select"
+      name="categoryId"
       overlayClassName="w-[var(--trigger-width)]"
+      items={withNoCategoryItems}
       defaultSelectedKey={defaultSelectedKey || ""}
-      items={withNoCompanyItems}
     >
       {(item: any) => <Item key={item.id}>{item.label}</Item>}
     </ResponsiveSelect>

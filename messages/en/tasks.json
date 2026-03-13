@@ -152,18 +152,6 @@
       "required": "Status is required"
     }
   },
-  "TaskCategorySelect": {
-    "label": "Category",
-    "noTaskCategory": "No task category"
-  },
-  "TaskProjectSelect": {
-    "label": "Project",
-    "noProject": "No project"
-  },
-  "TaskAssigneeSelect": {
-    "label": "Assignee",
-    "noAssignee": "No assignee"
-  },
   "TaskDetail": {
     "noDeadline": "No deadline",
     "deadline": "Deadline",

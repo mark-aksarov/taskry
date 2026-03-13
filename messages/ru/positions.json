@@ -1,4 +1,8 @@
 {
+  "PositionSelect": {
+    "label": "Должность",
+    "noPosition": "Нет должности"
+  },
   "PositionsEmptySectionCreateButton": {
     "label": "Новая должность"
   },

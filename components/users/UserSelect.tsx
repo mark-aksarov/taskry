@@ -4,18 +4,18 @@ import { Item } from "react-stately";
 import { ResponsiveSelect } from "@/components/common/ResponsiveSelect";
 import { useTranslations } from "next-intl";
 
-interface TaskAssigneeSelectProps {
+interface UserSelectProps {
   forcedAssigneeId?: string;
   defaultSelectedKey?: string;
   items: { id: string; fullName: string }[];
 }
 
-export function TaskAssigneeSelect({
+export function UserSelect({
   forcedAssigneeId,
   defaultSelectedKey,
   items,
-}: TaskAssigneeSelectProps) {
-  const t = useTranslations("tasks.TaskAssigneeSelect");
+}: UserSelectProps) {
+  const t = useTranslations("users.UserSelect");
 
   const withNoAssigneeItems = [
     { id: "", label: t("noAssignee") },

@@ -11,9 +11,9 @@ import { startTransition } from "react";
 import { useTranslations } from "next-intl";
 import { useCreateTask } from "./CreateTaskContext";
 import { TaskStatusSelect } from "./TaskStatusSelect";
-import { TaskProjectSelect } from "./TaskProjectSelect";
-import { TaskAssigneeSelect } from "./TaskAssigneeSelect";
-import { TaskCategorySelect } from "./TaskCategorySelect";
+import { ProjectSelect } from "../projects/ProjectSelect";
+import { UserSelect } from "../users/UserSelect";
+import { TaskCategorySelect } from "../taskCategory/TaskCategorySelect";
 import { TaskTitleTextField } from "./TaskTitleTextField";
 import { TaskDeadlineDatePicker } from "./TaskDeadlineDatePicker";
 import { FormErrorBanner } from "@/components/common/FormErrorBanner";
@@ -53,8 +53,8 @@ export function NewTaskForm({
         <TaskDeadlineDatePicker />
         <TaskStatusSelect />
         <TaskCategorySelect items={categorySelectItems} />
-        <TaskProjectSelect items={projectSelectItems} />
-        <TaskAssigneeSelect
+        <ProjectSelect items={projectSelectItems} />
+        <UserSelect
           forcedAssigneeId={forcedAssigneeId}
           items={assigneeSelectItems}
         />

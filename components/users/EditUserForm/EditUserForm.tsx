@@ -12,7 +12,7 @@ import { useTranslations } from "next-intl";
 import { useUpdateUser } from "../UpdateUserContext";
 import { CalendarDate } from "@internationalized/date";
 import { UserBioTextField } from "../UserBioTextField";
-import { UserPositionSelect } from "../UserPositionSelect";
+import { PositionSelect } from "../../position/PositionSelect";
 import { UserAddressTextField } from "../UserAddressTextField";
 import { UserFullNameTextField } from "../UserFullNameTextField";
 import { UserBirthdateDatePicker } from "../UserBirthdateDatePicker";
@@ -29,7 +29,7 @@ export interface EditUserFormProps {
   publicLink?: string;
   address?: string;
   positionId?: number;
-  userPositionSelectItems: { id: number; name: string }[];
+  positionSelectItems: { id: number; name: string }[];
 }
 
 export function EditUserForm({
@@ -41,7 +41,7 @@ export function EditUserForm({
   publicLink,
   address,
   positionId,
-  userPositionSelectItems,
+  positionSelectItems,
 }: EditUserFormProps) {
   const t = useTranslations("users.EditUserForm");
 
@@ -76,9 +76,9 @@ export function EditUserForm({
         <UserPhoneNumberTextField defaultValue={phoneNumber} />
         <UserPublicLinkTextField defaultValue={publicLink} />
         <UserAddressTextField defaultValue={address} />
-        <UserPositionSelect
+        <PositionSelect
           defaultSelectedKey={positionId?.toString()}
-          items={userPositionSelectItems}
+          items={positionSelectItems}
         />
 
         <FormErrorBanner status={state.status} isPending={isPending}>

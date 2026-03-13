@@ -64,7 +64,7 @@ export const Default = {
         {...mockedProjectDetail}
         projectId={mockedProjectDetail.id}
         projectCategorySelectItems={mockedProjectCategorySummaries}
-        projectCustomerSelectItems={mockedCustomerSummaries}
+        customerSelectItems={mockedCustomerSummaries}
       />
     ),
   },

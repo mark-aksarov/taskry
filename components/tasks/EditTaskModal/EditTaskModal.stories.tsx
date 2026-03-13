@@ -43,8 +43,8 @@ export const Default = {
         {...mockedTask}
         taskId={mockedTask.id}
         taskCategorySelectItems={mockedTaskCategorySummaries}
-        taskProjectSelectItems={mockedProjectSummaries}
-        taskAssigneeSelectItems={mockedUserSummaries}
+        projectSelectItems={mockedProjectSummaries}
+        assigneeSelectItems={mockedUserSummaries}
       />
     ),
   },

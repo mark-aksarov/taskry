@@ -1,4 +1,8 @@
 {
+  "TaskCategorySelect": {
+    "label": "Категория",
+    "noTaskCategory": "Нет категории"
+  },
   "TaskCategoriesEmptySectionCreateButton": {
     "label": "Новая категория задач"
   },

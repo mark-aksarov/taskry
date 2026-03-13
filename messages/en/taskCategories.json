@@ -1,4 +1,8 @@
 {
+  "TaskCategorySelect": {
+    "label": "Category",
+    "noTaskCategory": "No task category"
+  },
   "TaskCategoriesEmptySectionCreateButton": {
     "label": "New task category"
   },

@@ -1,4 +1,8 @@
 {
+  "PositionSelect": {
+    "label": "Position",
+    "noPosition": "No position"
+  },
   "PositionsEmptySectionCreateButton": {
     "label": "New position"
   },

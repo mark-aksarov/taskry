@@ -58,7 +58,7 @@ export function EditCustomerFormContainer({
       phoneNumber={customer.phoneNumber}
       publicLink={customer.publicLink}
       companyId={customer?.companyId}
-      customerCompanySelectItems={companies}
+      companySelectItems={companies}
     />
   );
 }

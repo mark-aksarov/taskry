@@ -1,4 +1,8 @@
 {
+  "CustomerSelect": {
+    "label": "Клиент",
+    "noCustomer": "Нет клиента"
+  },
   "CustomersEmptySectionCreateButton": {
     "label": "Новый клиент"
   },
@@ -78,10 +82,6 @@
     "validation": {
       "format": "Введите корректный URL, например https://example.com"
     }
-  },
-  "CustomerCompanySelect": {
-    "label": "Компания",
-    "noCompany": "Нет компании"
   },
   "CustomerDetailModal": {
     "dialogHeading": "Детали клиента",

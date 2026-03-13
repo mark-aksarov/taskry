@@ -4,30 +4,30 @@ import { Item } from "react-stately";
 import { useTranslations } from "next-intl";
 import { ResponsiveSelect } from "@/components/common/ResponsiveSelect";
 
-interface ProjectCategorySelectProps {
+interface CustomerSelectProps {
   defaultSelectedKey?: string;
-  items: { id: number; name: string }[];
+  items: { id: number; fullName: string }[];
 }
 
-export function ProjectCategorySelect({
+export function CustomerSelect({
   defaultSelectedKey,
   items,
-}: ProjectCategorySelectProps) {
-  const t = useTranslations("projects.ProjectCategorySelect");
+}: CustomerSelectProps) {
+  const t = useTranslations("customers.CustomerSelect");
 
-  const withNoCategoryItems = [
-    { id: "", label: t("noProjectCategory") },
-    ...items.map((item) => ({ id: item.id, label: item.name })),
+  const withNoCustomerItems = [
+    { id: "", label: t("noCustomer") },
+    ...items.map((item) => ({ id: item.id, label: item.fullName })),
   ];
 
   return (
     <ResponsiveSelect
-      data-test="project-category-select"
+      data-test="project-customer-select"
       label={t("label")}
-      name="categoryId"
+      name="customerId"
       overlayClassName="w-[var(--trigger-width)]"
-      items={withNoCategoryItems}
       defaultSelectedKey={defaultSelectedKey || ""}
+      items={withNoCustomerItems}
     >
       {(item: any) => <Item key={item.id}>{item.label}</Item>}
     </ResponsiveSelect>

@@ -21,7 +21,7 @@ async function NewProjectFormContainerInner() {
   return (
     <NewProjectForm
       projectCategorySelectItems={categories}
-      projectCustomerSelectItems={customers}
+      customerSelectItems={customers}
     />
   );
 }

@@ -35,8 +35,8 @@ const meta = {
               {...mockedTaskDetail}
               taskId={mockedTaskDetail.id}
               taskCategorySelectItems={mockedTaskCategorySummaries}
-              taskProjectSelectItems={mockedProjectSummaries}
-              taskAssigneeSelectItems={mockedUserSummaries}
+              projectSelectItems={mockedProjectSummaries}
+              assigneeSelectItems={mockedUserSummaries}
             />
           }
         />

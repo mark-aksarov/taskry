@@ -12,20 +12,20 @@ import { useTranslations } from "next-intl";
 import { useCreateProject } from "./CreateProjectContext";
 import { ProjectStatusSelect } from "./ProjectStatusSelect";
 import { ProjectTitleTextField } from "./ProjectTitleTextField";
-import { ProjectCategorySelect } from "./ProjectCategorySelect";
-import { ProjectCustomerSelect } from "./ProjectCustomerSelect";
+import { CustomerSelect } from "@/components/customer/CustomerSelect";
 import { FormErrorBanner } from "@/components/common/FormErrorBanner";
 import { ProjectDeadlineDatePicker } from "./ProjectDeadlineDatePicker";
 import { ProjectDescriptionTextField } from "./ProjectDescriptionTextField";
+import { ProjectCategorySelect } from "../projectCategory/ProjectCategorySelect";
 
 interface NewProjectFormProps {
   projectCategorySelectItems: { id: number; name: string }[];
-  projectCustomerSelectItems: { id: number; fullName: string }[];
+  customerSelectItems: { id: number; fullName: string }[];
 }
 
 export function NewProjectForm({
   projectCategorySelectItems,
-  projectCustomerSelectItems,
+  customerSelectItems,
 }: NewProjectFormProps) {
   const t = useTranslations("projects.NewProjectForm");
 
@@ -48,7 +48,7 @@ export function NewProjectForm({
         <ProjectDeadlineDatePicker />
         <ProjectStatusSelect />
         <ProjectCategorySelect items={projectCategorySelectItems} />
-        <ProjectCustomerSelect items={projectCustomerSelectItems} />
+        <CustomerSelect items={customerSelectItems} />
         <FormErrorBanner status={state.status} isPending={isPending}>
           {state.message}
         </FormErrorBanner>

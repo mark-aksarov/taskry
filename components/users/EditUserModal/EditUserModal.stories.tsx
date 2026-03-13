@@ -40,7 +40,7 @@ export const Default = {
       <EditUserForm
         {...mockedUserDetail}
         userId={mockedUserDetail.id}
-        userPositionSelectItems={mockedPositionSummaries}
+        positionSelectItems={mockedPositionSummaries}
       />
     ),
   },

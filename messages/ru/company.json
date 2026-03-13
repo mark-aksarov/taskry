@@ -1,4 +1,8 @@
 {
+  "CompanySelect": {
+    "label": "Компания",
+    "noCompany": "Нет компании"
+  },
   "CompaniesEmptySectionCreateButton": {
     "label": "Новая компания"
   },
