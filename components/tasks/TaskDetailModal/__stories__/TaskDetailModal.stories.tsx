@@ -4,10 +4,11 @@ import { mockedTaskDetail } from "@/mocks/tasks";
 import { TaskDetailModal } from "../TaskDetailModal";
 import { DialogTrigger } from "react-aria-components";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { getSubtasksList } from "../../TaskDetail/__stories__";
+import { SubtaskList } from "@/components/subtasks/SubtaskList";
 import { TaskDetail, TaskDetailSkeleton } from "../../TaskDetail";
 import { NewSubtaskModal } from "@/components/subtasks/NewSubtaskModal";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { SubtaskListStory } from "@/components/subtasks/SubtaskList/__stories__";
 import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 import { withCreateSubtaskProvider } from "@/components/subtasks/CreateSubtaskContext/__stories__";
@@ -44,7 +45,10 @@ export const Default = {
   args: {
     taskId: 1,
     taskDetailContainer: (
-      <TaskDetail {...task} subtasksList={getSubtasksList()} />
+      <TaskDetail
+        {...task}
+        subtasksList={<SubtaskList {...SubtaskListStory.args} />}
+      />
     ),
   },
 } satisfies Story;

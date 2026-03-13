@@ -18,6 +18,7 @@ export interface UserItemProps {
   };
   editUserFormContainer: React.ReactNode;
   userDetailContainer: React.ReactNode;
+  userDetailHeaderContainer: React.ReactNode;
   updateUser: ActionFn<ActionState, FormData>;
   deleteUser: ActionFn<ActionState, DeleteUserPayload>;
 }

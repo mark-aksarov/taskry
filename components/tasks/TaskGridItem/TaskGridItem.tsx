@@ -54,6 +54,7 @@ export const TaskGridItem = memo(
     editTaskFormContainer,
     taskDetailContainer,
     userDetailContainer,
+    userDetailHeaderContainer,
     sendComment,
     updateComment,
   }: TaskGridItemProps) => {
@@ -128,6 +129,7 @@ export const TaskGridItem = memo(
                   modal={
                     <UserDetailModal
                       userId={assignee.id}
+                      userDetailHeaderContainer={userDetailHeaderContainer}
                       userDetailContainer={userDetailContainer}
                     />
                   }

@@ -22,8 +22,8 @@ export default function AppTeamProfileLoading() {
   return (
     <PageContainer>
       <UserDetailCard
-        profileDetail={<UserDetailSkeleton />}
-        profileHeader={<DetailHeaderSkeleton />}
+        userDetailContainer={<UserDetailSkeleton />}
+        userDetailHeaderContainer={<DetailHeaderSkeleton />}
         navigationDesktop={
           <UserNavigationDesktop userActions={<ProfileActionsSkeleton />} />
         }

@@ -4,23 +4,22 @@ import {
 } from "@/components/users/UserTasksPageLayout";
 
 import { mocked } from "storybook/test";
-import { mockedUserDetail } from "@/mocks/users";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { useParams, usePathname } from "next/navigation";
+import { mockedProjectSummaries } from "@/mocks/projects";
 import { PageDecorator } from "@/.storybook/PageDecorator";
+import { mockedPositionSummaries } from "@/mocks/positions";
 import { NewTaskForm } from "@/components/tasks/NewTaskForm";
 import { UserTaskList } from "@/components/users/UserTaskList";
 import { EditUserForm } from "@/components/users/EditUserForm";
 import { ProfileActions } from "@/components/users/ProfileActions";
+import { mockedTaskCategorySummaries } from "@/mocks/taskCategories";
+import { mockedUserDetail, mockedUserSummaries } from "@/mocks/users";
 import { UserDetailHeader } from "@/components/users/UserDetailHeader";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { newTaskFormArgs } from "@/components/tasks/NewTaskForm/__stories__";
 import { UserNavigationMobile } from "@/components/users/UserNavigationMobile";
-import { editUserFormArgs } from "@/components/users/EditUserForm/__stories__";
-import { UserImageMenuTrigger } from "@/components/users/UserImageMenuTrigger";
 import { UserTaskListStory } from "@/components/users/UserTaskList/__stories__";
 import { UserNavigationDesktop } from "@/components/users/UserNavigationDesktop";
-import { PersonDetailHeaderImage } from "@/components/common/PersonDetailHeaderImage";
 import { withCreateTaskProvider } from "@/components/tasks/CreateTaskContext/__stories__";
 import { withUpdateUserProvider } from "@/components/users/UpdateUserContext/__stories__";
 import { withDeleteUserProvider } from "@/components/users/DeleteUserContext/__stories__";
@@ -63,32 +62,46 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    userId: "user-1",
+    userId: mockedUserDetail.id,
     totalTasksCount: 3,
     selectedSortField: "title",
     backButton: true,
     userTasksContainer: <UserTaskList {...UserTaskListStory.args} />,
-    userHeaderContainer: (
+    userDetailHeaderContainer: (
       <UserDetailHeader
-        fullName="User 1"
-        positionName="Position 1"
-        imageSlot={
-          <UserImageMenuTrigger>
-            <PersonDetailHeaderImage
-              alt={mockedUserDetail.fullName}
-              imageUrl={mockedUserDetail.imageUrl}
-            />
-          </UserImageMenuTrigger>
-        }
+        userId={mockedUserDetail.id}
+        fullName={mockedUserDetail.fullName}
+        positionName={mockedUserDetail.position.name}
+        imageUrl={mockedUserDetail.imageUrl}
+        canUpdateImage={true}
+        createPresignedUrl={() => ({ status: "success" })}
+        updateUserImageUrl={() => ({ status: "success" })}
       />
     ),
     navigationDesktop: (
       <UserNavigationDesktop
-        userActions={<ProfileActions userId="user-1" userFullName="User 1" />}
+        userActions={
+          <ProfileActions
+            userId={mockedUserDetail.id}
+            userFullName={mockedUserDetail.fullName}
+          />
+        }
       />
     ),
-    editUserFormContainer: <EditUserForm {...editUserFormArgs} />,
-    newTaskFormContainer: <NewTaskForm {...newTaskFormArgs} />,
+    editUserFormContainer: (
+      <EditUserForm
+        {...mockedUserDetail}
+        userId={mockedUserDetail.id}
+        userPositionSelectItems={mockedPositionSummaries}
+      />
+    ),
+    newTaskFormContainer: (
+      <NewTaskForm
+        categorySelectItems={mockedTaskCategorySummaries}
+        projectSelectItems={mockedProjectSummaries}
+        assigneeSelectItems={mockedUserSummaries}
+      />
+    ),
     navigationMobile: <UserNavigationMobile />,
   },
 } satisfies Story;

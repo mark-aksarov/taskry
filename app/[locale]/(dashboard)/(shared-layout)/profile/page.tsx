@@ -5,10 +5,10 @@ import { changePassword } from "@/lib/actions/user/changePassword";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { DeleteUserProvider } from "@/components/users/DeleteUserContext";
 import { UpdateUserProvider } from "@/components/users/UpdateUserContext";
-import { UserHeaderContainer } from "@/components/users/UserHeaderContainer";
 import { EditUserFormContainer } from "@/components/users/EditUserFormContainer";
 import { ChangePasswordProvider } from "@/components/users/ChangePasswordContext";
-import { ProfileDetailContainer } from "@/components/users/ProfileDetailContainer";
+import { UserDetailAltContainer } from "@/components/users/UserDetailAltContainer";
+import { UserDetailHeaderContainer } from "@/components/users/UserDetailHeaderContainer";
 
 export default async function AppProfilePage() {
   const session = await requireProtectedPage();
@@ -24,8 +24,10 @@ export default async function AppProfilePage() {
             userId={userId}
             userFullName={userFullName}
             editUserFormContainer={<EditUserFormContainer userId={userId} />}
-            profileDetailContainer={<ProfileDetailContainer userId={userId} />}
-            userHeaderContainer={<UserHeaderContainer userId={userId} />}
+            userDetailContainer={<UserDetailAltContainer userId={userId} />}
+            userDetailHeaderContainer={
+              <UserDetailHeaderContainer userId={userId} />
+            }
           />
         </DeleteUserProvider>
       </ChangePasswordProvider>

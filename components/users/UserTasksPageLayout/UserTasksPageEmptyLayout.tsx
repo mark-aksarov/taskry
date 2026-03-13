@@ -20,14 +20,14 @@ import { AbsoluteCenter } from "@/components/common/AbsoluteCenter";
 import { TasksEmptySection } from "@/components/tasks/TasksEmptySection";
 
 interface UserTasksPageEmptyLayoutProps {
-  userHeaderContainer: React.ReactNode;
+  userDetailHeaderContainer: React.ReactNode;
   navigationDesktop: React.ReactNode;
   navigationMobile: React.ReactNode;
   backButton?: boolean;
 }
 
 export function UserTasksPageEmptyLayout({
-  userHeaderContainer,
+  userDetailHeaderContainer,
   navigationDesktop,
   navigationMobile,
   backButton,
@@ -49,7 +49,7 @@ export function UserTasksPageEmptyLayout({
           </DetailCardLeft>
 
           <DetailCardRight>
-            {userHeaderContainer}
+            {userDetailHeaderContainer}
             {navigationDesktop}
           </DetailCardRight>
         </DetailCard>

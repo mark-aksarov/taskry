@@ -8,20 +8,18 @@ import { UserDetailSkeleton } from "../UserDetail";
 import { UserDetailHeader } from "../UserDetailHeader";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { useParams, usePathname } from "next/navigation";
+import { mockedPositionSummaries } from "@/mocks/positions";
 import { ChangePasswordModal } from "../ChangePasswordModal";
-import { editUserFormArgs } from "../EditUserForm/__stories__";
-import { UserImageMenuTrigger } from "../UserImageMenuTrigger";
 import { UserNavigationDesktop } from "../UserNavigationDesktop";
 import { DetailHeaderSkeleton } from "@/components/common/DetailHeader";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { ProfileActions, ProfileActionsSkeleton } from "../ProfileActions";
 import { withDeleteUserProvider } from "../DeleteUserContext/__stories__";
 import { withUpdateUserProvider } from "../UpdateUserContext/__stories__";
+import { ProfileActions, ProfileActionsSkeleton } from "../ProfileActions";
 import { withChangePasswordProvider } from "../ChangePasswordContext/__stories__";
-import { PersonDetailHeaderImage } from "@/components/common/PersonDetailHeaderImage";
+import { withUpdateUserImageProvider } from "../UpdateUserImageContext/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
-import { withUpdateUserImageProvider } from "../UpdateUserImageContext/__stories__";
 
 const meta = {
   title: "components/users/UserDetailCard",
@@ -29,16 +27,22 @@ const meta = {
   beforeEach: () => {
     mocked(usePathname).mockReturnValue("/team/user-1");
     mocked(useParams).mockReturnValue({
-      id: "user-1",
+      id: mockedUserDetail.id,
     });
   },
   decorators: [
     (Story) => (
       <>
         <Story />
-        <ChangePasswordModal userId="user-1" />
+        <ChangePasswordModal userId={mockedUserDetail.id} />
         <EditUserModal
-          editUserFormContainer={<EditUserForm {...editUserFormArgs} />}
+          editUserFormContainer={
+            <EditUserForm
+              {...mockedUserDetail}
+              userId={mockedUserDetail.id}
+              userPositionSelectItems={mockedPositionSummaries}
+            />
+          }
         />
       </>
     ),
@@ -57,19 +61,16 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    profileDetail: <UserDetail {...mockedUserDetail} />,
-    profileHeader: (
+    userDetailContainer: <UserDetail {...mockedUserDetail} />,
+    userDetailHeaderContainer: (
       <UserDetailHeader
+        userId={mockedUserDetail.id}
         fullName={mockedUserDetail.fullName}
-        imageSlot={
-          <UserImageMenuTrigger>
-            <PersonDetailHeaderImage
-              alt={mockedUserDetail.fullName}
-              imageUrl={mockedUserDetail.imageUrl}
-            />
-          </UserImageMenuTrigger>
-        }
-        positionName={mockedUserDetail.position?.name}
+        positionName={mockedUserDetail.position.name}
+        imageUrl={mockedUserDetail.imageUrl}
+        canUpdateImage={true}
+        createPresignedUrl={() => ({ status: "success" })}
+        updateUserImageUrl={() => ({ status: "success" })}
       />
     ),
     navigationDesktop: (
@@ -87,8 +88,8 @@ export const Default = {
 
 export const Loading = {
   args: {
-    profileDetail: <UserDetailSkeleton />,
-    profileHeader: <DetailHeaderSkeleton />,
+    userDetailContainer: <UserDetailSkeleton />,
+    userDetailHeaderContainer: <DetailHeaderSkeleton />,
     navigationDesktop: (
       <UserNavigationDesktop userActions={<ProfileActionsSkeleton />} />
     ),
@@ -97,26 +98,26 @@ export const Loading = {
 
 export const WithoutOptionalUserData = {
   args: {
-    profileDetail: (
-      <UserDetail
-        id={mockedUserDetail.id}
-        fullName={mockedUserDetail.fullName}
-        email={mockedUserDetail.email}
-      />
-    ),
-    profileHeader: (
+    userDetailContainer: <UserDetail {...mockedUserDetail} />,
+    userDetailHeaderContainer: (
       <UserDetailHeader
+        canUpdateImage
+        userId={mockedUserDetail.id}
         fullName={mockedUserDetail.fullName}
-        imageSlot={
-          <UserImageMenuTrigger>
-            <PersonDetailHeaderImage />
-          </UserImageMenuTrigger>
-        }
+        imageUrl={mockedUserDetail.imageUrl}
+        positionName={mockedUserDetail.position.name}
+        createPresignedUrl={() => ({ status: "success" })}
+        updateUserImageUrl={() => ({ status: "success" })}
       />
     ),
     navigationDesktop: (
       <UserNavigationDesktop
-        userActions={<ProfileActions userId="user-1" userFullName="User 1" />}
+        userActions={
+          <ProfileActions
+            userId={mockedUserDetail.id}
+            userFullName={mockedUserDetail.fullName}
+          />
+        }
       />
     ),
   },

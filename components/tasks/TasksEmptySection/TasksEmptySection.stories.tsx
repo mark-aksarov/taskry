@@ -1,8 +1,10 @@
 import { NewTaskForm } from "../NewTaskForm";
 import { NewTaskModal } from "../NewTaskModal";
+import { mockedUserSummaries } from "@/mocks/users";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { TasksEmptySection } from "./TasksEmptySection";
-import { newTaskFormArgs } from "../NewTaskForm/__stories__";
+import { mockedProjectSummaries } from "@/mocks/projects";
+import { mockedTaskCategorySummaries } from "@/mocks/taskCategories";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withCreateTaskProvider } from "../CreateTaskContext/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
@@ -16,7 +18,14 @@ const meta = {
       <>
         <Story />
         <NewTaskModal
-          newTaskFormContainer={<NewTaskForm {...newTaskFormArgs} />}
+          newTaskFormContainer={
+            <NewTaskForm
+              forcedAssigneeId="user-3"
+              categorySelectItems={mockedTaskCategorySummaries}
+              projectSelectItems={mockedProjectSummaries}
+              assigneeSelectItems={mockedUserSummaries}
+            />
+          }
         />
       </>
     ),

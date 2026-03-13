@@ -2,10 +2,12 @@ import { useEffect } from "react";
 import { NewTaskForm } from "../NewTaskForm";
 import { NewTaskModal } from "./NewTaskModal";
 import { Button } from "@/components/ui/Button";
+import { mockedUserSummaries } from "@/mocks/users";
 import { useCreateTask } from "../CreateTaskContext";
 import { TaskFormSkeleton } from "../TaskFormSkeleton";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { newTaskFormArgs } from "../NewTaskForm/__stories__";
+import { mockedProjectSummaries } from "@/mocks/projects";
+import { mockedTaskCategorySummaries } from "@/mocks/taskCategories";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withCreateTaskProvider } from "../CreateTaskContext/__stories__";
 
@@ -35,7 +37,13 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    newTaskFormContainer: <NewTaskForm {...newTaskFormArgs} />,
+    newTaskFormContainer: (
+      <NewTaskForm
+        categorySelectItems={mockedTaskCategorySummaries}
+        projectSelectItems={mockedProjectSummaries}
+        assigneeSelectItems={mockedUserSummaries}
+      />
+    ),
   },
 } satisfies Story;
 

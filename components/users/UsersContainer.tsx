@@ -15,6 +15,7 @@ import { updateUser } from "@/lib/actions/user/updateUser";
 import { UserDetailContainer } from "./UserDetailContainer";
 import { ViewModeLayout } from "@/components/common/ViewMode";
 import { EditUserFormContainer } from "./EditUserFormContainer";
+import { UserDetailHeaderContainer } from "./UserDetailHeaderContainer";
 
 interface UsersContainerProps {
   page: number;
@@ -52,6 +53,9 @@ export async function UsersContainer({
           updateUser={updateUser}
           editUserFormContainer={<EditUserFormContainer userId={user.id} />}
           userDetailContainer={<UserDetailContainer userId={user.id} />}
+          userDetailHeaderContainer={
+            <UserDetailHeaderContainer userId={user.id} />
+          }
         />
       ))}
     </>

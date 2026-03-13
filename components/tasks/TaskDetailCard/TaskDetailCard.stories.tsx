@@ -2,18 +2,23 @@ import { EditTaskForm } from "../EditTaskForm";
 import { EditTaskModal } from "../EditTaskModal";
 import { mockedTaskDetail } from "@/mocks/tasks";
 import { TaskDetailCard } from "./TaskDetailCard";
+import { mockedUserSummaries } from "@/mocks/users";
 import { TaskDetailHeader } from "../TaskDetailHeader";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { TaskDetailActions } from "../TaskDetailActions";
-import { editTaskFormArgs } from "../EditTaskForm/__stories__";
+import { mockedProjectSummaries } from "@/mocks/projects";
+import { CommentList } from "@/components/comments/CommentList";
+import { SubtaskList } from "@/components/subtasks/SubtaskList";
 import { taskDetailAltArgs } from "../TaskDetailAlt/__stories__";
+import { mockedTaskCategorySummaries } from "@/mocks/taskCategories";
 import { NewSubtaskModal } from "@/components/subtasks/NewSubtaskModal";
 import { DetailHeaderSkeleton } from "@/components/common/DetailHeader";
 import { TaskDetailAlt, TaskDetailAltSkeleton } from "../TaskDetailAlt";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { taskDetailActionsArgs } from "../TaskDetailActions/__stories__";
 import { withDeleteTaskProvider } from "../DeleteTaskContext/__stories__";
 import { withUpdateTaskProvider } from "../UpdateTaskContext/__stories__";
+import { SubtaskListStory } from "@/components/subtasks/SubtaskList/__stories__";
+import { CommentListStory } from "@/components/comments/CommentList/__stories__";
 import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 import { withCreateSubtaskProvider } from "@/components/subtasks/CreateSubtaskContext/__stories__";
@@ -26,9 +31,17 @@ const meta = {
       <>
         <Story />
         <EditTaskModal
-          editTaskFormContainer={<EditTaskForm {...editTaskFormArgs} />}
+          editTaskFormContainer={
+            <EditTaskForm
+              {...mockedTaskDetail}
+              taskId={mockedTaskDetail.id}
+              taskCategorySelectItems={mockedTaskCategorySummaries}
+              taskProjectSelectItems={mockedProjectSummaries}
+              taskAssigneeSelectItems={mockedUserSummaries}
+            />
+          }
         />
-        <NewSubtaskModal taskId={task.id} />
+        <NewSubtaskModal taskId={mockedTaskDetail.id} />
       </>
     ),
     withUpdateTaskProvider,
@@ -43,18 +56,29 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-const task = mockedTaskDetail;
-
 export const Default = {
   args: {
-    taskDetailContainer: <TaskDetailAlt {...taskDetailAltArgs} />,
-    taskDetailHeaderContainer: (
-      <TaskDetailHeader
-        taskTitle={task.title}
-        categoryName={task.category?.name}
+    taskDetailContainer: (
+      <TaskDetailAlt
+        {...taskDetailAltArgs}
+        subtasksList={<SubtaskList {...SubtaskListStory.args} />}
       />
     ),
-    taskDetailActions: <TaskDetailActions {...taskDetailActionsArgs} />,
+    taskDetailHeaderContainer: (
+      <TaskDetailHeader
+        taskTitle={mockedTaskDetail.title}
+        categoryName={mockedTaskDetail.category?.name}
+      />
+    ),
+    taskDetailActions: (
+      <TaskDetailActions
+        taskId={mockedTaskDetail.id}
+        taskTitle={mockedTaskDetail.title}
+        taskCommentsContainer={<CommentList {...CommentListStory.args} />}
+        sendComment={() => ({ status: "success" })}
+        updateComment={() => ({ status: "success" })}
+      />
+    ),
   },
 } satisfies Story;
 
@@ -70,13 +94,23 @@ export const WithoutOptionalTaskData = {
   args: {
     taskDetailContainer: (
       <TaskDetailAlt
-        id={task.id}
-        deadline={task.deadline}
-        status={task.status}
+        id={mockedTaskDetail.id}
+        deadline={mockedTaskDetail.deadline}
+        status={mockedTaskDetail.status}
       />
     ),
-    taskDetailHeaderContainer: <TaskDetailHeader taskTitle={task.title} />,
-    taskDetailActions: <TaskDetailActions {...taskDetailActionsArgs} />,
+    taskDetailHeaderContainer: (
+      <TaskDetailHeader taskTitle={mockedTaskDetail.title} />
+    ),
+    taskDetailActions: (
+      <TaskDetailActions
+        taskId={mockedTaskDetail.id}
+        taskTitle={mockedTaskDetail.title}
+        sendComment={() => ({ status: "success" })}
+        updateComment={() => ({ status: "success" })}
+        taskCommentsContainer={<CommentList {...CommentListStory.args} />}
+      />
+    ),
   },
 } satisfies Story;
 

@@ -9,6 +9,7 @@ import useSWR from "swr";
 import { Repeat } from "../common/Repeat";
 import { usePathname } from "@/i18n/navigation";
 import { notFound, useParams } from "next/navigation";
+import { CommentList } from "../comments/CommentList";
 import { CommentListItemDTO } from "@/lib/data/comment/comment.dto";
 import { deleteComment } from "@/lib/actions/comment/deleteComment";
 import { CommentsEmptySection } from "@/components/comments/CommentsEmptySection";
@@ -54,7 +55,7 @@ export function ProjectCommentsContainer({
   }
 
   return (
-    <>
+    <CommentList>
       {comments.map((comment) => {
         return (
           <CommentItem
@@ -68,6 +69,6 @@ export function ProjectCommentsContainer({
           />
         );
       })}
-    </>
+    </CommentList>
   );
 }

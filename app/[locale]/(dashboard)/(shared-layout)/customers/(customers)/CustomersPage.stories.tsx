@@ -12,7 +12,6 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { CustomerFiltersForm } from "@/components/customer/CustomerFiltersForm";
 import { CustomerGridStory } from "@/components/customer/CustomerGrid/__stories__";
 import { CustomerListStory } from "@/components/customer/CustomerList/__stories__";
-import { newCustomerFormArgs } from "@/components/customer/NewCustomerForm/__stories__";
 import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 import { EntityContainerPresentation } from "@/components/common/EntityContainerPresentation";
@@ -53,7 +52,9 @@ export const Default = {
     totalCount: 10,
     totalFilteredCustomers: 10,
     selectedSortField: "fullName",
-    newCustomerFormContainer: <NewCustomerForm {...newCustomerFormArgs} />,
+    newCustomerFormContainer: (
+      <NewCustomerForm companySelectItems={mockedCompanySummaries} />
+    ),
     filtersFormContainer: (
       <CustomerFiltersForm companyCheckboxGroupItems={mockedCompanySummaries} />
     ),

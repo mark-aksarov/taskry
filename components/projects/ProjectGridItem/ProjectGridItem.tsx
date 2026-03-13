@@ -53,6 +53,7 @@ export const ProjectGridItem = memo(
     editProjectFormContainer,
     projectDetailContainer,
     userDetailContainer,
+    userDetailHeaderContainer,
     sendComment,
     updateComment,
   }: ProjectGridItemProps) => {
@@ -129,6 +130,7 @@ export const ProjectGridItem = memo(
                     <UserDetailModal
                       userId={creator.id}
                       userDetailContainer={userDetailContainer}
+                      userDetailHeaderContainer={userDetailHeaderContainer}
                     />
                   }
                 >

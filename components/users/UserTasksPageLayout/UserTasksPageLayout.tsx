@@ -18,11 +18,11 @@ import { EditUserModal } from "../EditUserModal";
 import { PageGrid } from "@/components/common/PageGrid";
 import { BackButton } from "@/components/common/BackButton";
 import { ChangePasswordModal } from "../ChangePasswordModal";
+import { NewTaskModal } from "@/components/tasks/NewTaskModal";
 import { PageContainer } from "@/components/common/PageContainer";
 import { UserTasksPageEmptyLayout } from "./UserTasksPageEmptyLayout";
 import { TaskToolbarSortingMenuTrigger } from "@/components/tasks/TaskToolbarSortingMenuTrigger";
 import { TaskToolbarActionsMenuTrigger } from "@/components/tasks/TaskToolbarActionsMenuTrigger";
-import { NewTaskModal } from "@/components/tasks/NewTaskModal";
 
 interface UserTasksPageLayoutProps {
   totalTasksCount: number;
@@ -34,7 +34,7 @@ interface UserTasksPageLayoutProps {
   userTasksContainer: React.ReactNode;
   editUserFormContainer: React.ReactNode;
   newTaskFormContainer: React.ReactNode;
-  userHeaderContainer: React.ReactNode;
+  userDetailHeaderContainer: React.ReactNode;
 }
 
 export function UserTasksPageLayout({
@@ -47,7 +47,7 @@ export function UserTasksPageLayout({
   userTasksContainer,
   editUserFormContainer,
   newTaskFormContainer,
-  userHeaderContainer,
+  userDetailHeaderContainer,
 }: UserTasksPageLayoutProps) {
   const t = useTranslations("users.UserTasksPageLayout");
 
@@ -55,7 +55,7 @@ export function UserTasksPageLayout({
     return (
       <>
         <UserTasksPageEmptyLayout
-          userHeaderContainer={userHeaderContainer}
+          userDetailHeaderContainer={userDetailHeaderContainer}
           navigationDesktop={navigationDesktop}
           navigationMobile={navigationMobile}
           backButton={backButton}
@@ -86,7 +86,7 @@ export function UserTasksPageLayout({
           </DetailCardLeft>
 
           <DetailCardRight>
-            {userHeaderContainer}
+            {userDetailHeaderContainer}
             {navigationDesktop}
           </DetailCardRight>
         </DetailCard>

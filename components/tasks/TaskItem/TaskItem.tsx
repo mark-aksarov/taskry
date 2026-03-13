@@ -39,6 +39,7 @@ export interface TaskItemProps {
   editTaskFormContainer: React.ReactNode;
   taskDetailContainer: React.ReactNode;
   userDetailContainer: React.ReactNode;
+  userDetailHeaderContainer: React.ReactNode;
   projectDetailContainer: React.ReactNode;
   sendComment: ActionFn<ActionState, FormData>;
   updateComment: ActionFn<ActionState, FormData>;

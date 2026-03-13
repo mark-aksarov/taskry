@@ -4,21 +4,20 @@ import {
 } from "@/components/users/UserTasksPageLayout";
 
 import { mocked } from "storybook/test";
-import { mockedUserDetail } from "@/mocks/users";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { useParams, usePathname } from "next/navigation";
+import { mockedProjectSummaries } from "@/mocks/projects";
 import { PageDecorator } from "@/.storybook/PageDecorator";
+import { mockedPositionSummaries } from "@/mocks/positions";
 import { NewTaskForm } from "@/components/tasks/NewTaskForm";
 import { UserTaskList } from "@/components/users/UserTaskList";
 import { EditUserForm } from "@/components/users/EditUserForm";
 import { ProfileActions } from "@/components/users/ProfileActions";
+import { mockedTaskCategorySummaries } from "@/mocks/taskCategories";
+import { mockedUserDetail, mockedUserSummaries } from "@/mocks/users";
 import { UserDetailHeader } from "@/components/users/UserDetailHeader";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { newTaskFormArgs } from "@/components/tasks/NewTaskForm/__stories__";
-import { editUserFormArgs } from "@/components/users/EditUserForm/__stories__";
-import { UserImageMenuTrigger } from "@/components/users/UserImageMenuTrigger";
 import { UserTaskListStory } from "@/components/users/UserTaskList/__stories__";
-import { PersonDetailHeaderImage } from "@/components/common/PersonDetailHeaderImage";
 import { ProfileNavigationMobile } from "@/components/users/ProfileNavigationMobile";
 import { ProfileNavigationDesktop } from "@/components/users/ProfileNavigationDesktop";
 import { withDeleteUserProvider } from "@/components/users/DeleteUserContext/__stories__";
@@ -54,7 +53,7 @@ const meta = {
   ],
   beforeEach: () => {
     mocked(usePathname).mockReturnValue("/profile/tasks");
-    mocked(useParams).mockReturnValue({ id: "user-1" });
+    mocked(useParams).mockReturnValue({ id: mockedUserDetail.id });
   },
 } satisfies Meta<typeof UserTasksPageLayout>;
 
@@ -63,22 +62,19 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    userId: "user-1",
+    userId: mockedUserDetail.id,
     totalTasksCount: 10,
     selectedSortField: "title",
     userTasksContainer: <UserTaskList {...UserTaskListStory.args} />,
-    userHeaderContainer: (
+    userDetailHeaderContainer: (
       <UserDetailHeader
-        fullName="User 1"
-        positionName="Position 1"
-        imageSlot={
-          <UserImageMenuTrigger>
-            <PersonDetailHeaderImage
-              alt={mockedUserDetail.fullName}
-              imageUrl={mockedUserDetail.imageUrl}
-            />
-          </UserImageMenuTrigger>
-        }
+        userId={mockedUserDetail.id}
+        fullName={mockedUserDetail.fullName}
+        positionName={mockedUserDetail.position.name}
+        imageUrl={mockedUserDetail.imageUrl}
+        canUpdateImage={true}
+        createPresignedUrl={() => ({ status: "success" })}
+        updateUserImageUrl={() => ({ status: "success" })}
       />
     ),
     navigationDesktop: (
@@ -92,8 +88,20 @@ export const Default = {
       />
     ),
     navigationMobile: <ProfileNavigationMobile />,
-    editUserFormContainer: <EditUserForm {...editUserFormArgs} />,
-    newTaskFormContainer: <NewTaskForm {...newTaskFormArgs} />,
+    editUserFormContainer: (
+      <EditUserForm
+        {...mockedUserDetail}
+        userId={mockedUserDetail.id}
+        userPositionSelectItems={mockedPositionSummaries}
+      />
+    ),
+    newTaskFormContainer: (
+      <NewTaskForm
+        categorySelectItems={mockedTaskCategorySummaries}
+        projectSelectItems={mockedProjectSummaries}
+        assigneeSelectItems={mockedUserSummaries}
+      />
+    ),
   },
 } satisfies Story;
 

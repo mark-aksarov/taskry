@@ -3,7 +3,8 @@ import { UserGridItem } from "../UserGridItem";
 import { mockedUserDetail } from "@/mocks/users";
 import { EditUserForm } from "../../EditUserForm";
 import type { Meta, StoryObj } from "@storybook/react";
-import { editUserFormArgs } from "../../EditUserForm/__stories__";
+import { UserDetailHeader } from "../../UserDetailHeader";
+import { mockedPositionSummaries } from "@/mocks/positions";
 import { withUserItemProviders } from "../../UserItem/__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
@@ -27,8 +28,25 @@ type Story = StoryObj<typeof meta>;
 export const Default = {
   args: {
     ...mockedUserDetail,
-    editUserFormContainer: <EditUserForm {...editUserFormArgs} />,
+    editUserFormContainer: (
+      <EditUserForm
+        {...mockedUserDetail}
+        userId={mockedUserDetail.id}
+        userPositionSelectItems={mockedPositionSummaries}
+      />
+    ),
     userDetailContainer: <UserDetail {...mockedUserDetail} />,
+    userDetailHeaderContainer: (
+      <UserDetailHeader
+        userId={mockedUserDetail.id}
+        fullName={mockedUserDetail.fullName}
+        positionName={mockedUserDetail.position.name}
+        imageUrl={mockedUserDetail.imageUrl}
+        canUpdateImage={true}
+        createPresignedUrl={() => ({ status: "success" })}
+        updateUserImageUrl={() => ({ status: "success" })}
+      />
+    ),
   },
 } satisfies Story;
 

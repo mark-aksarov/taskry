@@ -1,17 +1,22 @@
 import { TaskDetail } from "../../TaskDetail";
 import { TaskGridItem } from "../TaskGridItem";
 import { mockedTaskList } from "@/mocks/tasks";
-import { mockedUserDetail } from "@/mocks/users";
+import { mockedTaskDetail } from "@/mocks/tasks";
 import { EditTaskForm } from "../../EditTaskForm";
 import { TaskStatus } from "@/generated/prisma/enums";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { mockedProjectSummaries } from "@/mocks/projects";
 import { UserDetail } from "@/components/users/UserDetail";
-import { taskDetailArgs } from "../../TaskDetail/__stories__";
-import { editTaskFormArgs } from "../../EditTaskForm/__stories__";
+import { CommentList } from "@/components/comments/CommentList";
+import { SubtaskList } from "@/components/subtasks/SubtaskList";
 import { withTaskItemProviders } from "../../TaskItem/__stories__";
+import { mockedTaskCategorySummaries } from "@/mocks/taskCategories";
+import { mockedUserDetail, mockedUserSummaries } from "@/mocks/users";
+import { UserDetailHeader } from "@/components/users/UserDetailHeader";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { getCommentList } from "@/components/comments/CommentList/__stories__";
 import { withDeleteTasksProvider } from "../../DeleteTasksContext/__stories__";
+import { SubtaskListStory } from "@/components/subtasks/SubtaskList/__stories__";
+import { CommentListStory } from "@/components/comments/CommentList/__stories__";
 import { withSelectedTasksProvider } from "../../SelectedTasksContext/__stories__";
 import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
@@ -36,17 +41,41 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-const task = mockedTaskList[0];
+const mockedTask = mockedTaskList[0];
 
 export const Default = {
   args: {
-    ...task,
-    subtasksTotal: task.subtasks.total,
-    subtasksDone: task.subtasks.done,
-    taskCommentsContainer: getCommentList(),
-    editTaskFormContainer: <EditTaskForm {...editTaskFormArgs} />,
-    taskDetailContainer: <TaskDetail {...taskDetailArgs} />,
+    ...mockedTask,
+    subtasksTotal: mockedTask.subtasks.total,
+    subtasksDone: mockedTask.subtasks.done,
+    taskCommentsContainer: <CommentList {...CommentListStory.args} />,
+    editTaskFormContainer: (
+      <EditTaskForm
+        {...mockedTaskDetail}
+        taskId={mockedTaskDetail.id}
+        taskCategorySelectItems={mockedTaskCategorySummaries}
+        taskProjectSelectItems={mockedProjectSummaries}
+        taskAssigneeSelectItems={mockedUserSummaries}
+      />
+    ),
+    taskDetailContainer: (
+      <TaskDetail
+        {...mockedTaskDetail}
+        subtasksList={<SubtaskList {...SubtaskListStory.args} />}
+      />
+    ),
     userDetailContainer: <UserDetail {...mockedUserDetail} />,
+    userDetailHeaderContainer: (
+      <UserDetailHeader
+        userId={mockedUserDetail.id}
+        fullName={mockedUserDetail.fullName}
+        positionName={mockedUserDetail.position.name}
+        imageUrl={mockedUserDetail.imageUrl}
+        canUpdateImage={true}
+        createPresignedUrl={() => ({ status: "success" })}
+        updateUserImageUrl={() => ({ status: "success" })}
+      />
+    ),
     sendComment: () => ({ status: "success" }),
     updateComment: () => ({ status: "success" }),
   },

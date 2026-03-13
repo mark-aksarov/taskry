@@ -11,6 +11,7 @@ import { PageGrid } from "@/components/common/PageGrid";
 import { NewTaskModal } from "@/components/tasks/NewTaskModal";
 import { ViewModeProvider } from "@/components/common/ViewMode";
 import { PageContainer } from "@/components/common/PageContainer";
+import { AbsoluteCenter } from "@/components/common/AbsoluteCenter";
 import { TasksEmptySection } from "@/components/tasks/TasksEmptySection";
 import { ViewModeToggleButtonGroup } from "@/components/common/ViewMode";
 import { NewTaskCategoryModal } from "@/components/taskCategory/NewTaskCategoryModal";
@@ -20,7 +21,6 @@ import { TaskToolbarSortingMenuTrigger } from "@/components/tasks/TaskToolbarSor
 import { TaskToolbarActionsMenuTrigger } from "@/components/tasks/TaskToolbarActionsMenuTrigger";
 import { TaskToolbarFiltersModalTrigger } from "@/components/tasks/TaskToolbarFiltersModalTrigger";
 import { TaskToolbarCreateNewMenuTrigger } from "@/components/tasks/TaskToolbarCreateNewMenuTrigger";
-import { AbsoluteCenter } from "@/components/common/AbsoluteCenter";
 
 interface TasksPageProps {
   totalCount: number;

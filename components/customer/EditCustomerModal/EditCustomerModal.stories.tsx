@@ -3,9 +3,10 @@ import { Button } from "@/components/ui/Button";
 import { EditCustomerForm } from "../EditCustomerForm";
 import { EditCustomerModal } from "./EditCustomerModal";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { mockedCustomerDetail } from "@/mocks/customers";
+import { mockedCompanySummaries } from "@/mocks/companies";
 import { useUpdateCustomer } from "../UpdateCustomerContext";
 import { CustomerFormSkeleton } from "../CustomerFormSkeleton";
-import { editCustomerFormArgs } from "../EditCustomerForm/__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withUpdateCustomerProvider } from "../UpdateCustomerContext/__stories__";
 
@@ -38,7 +39,13 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    editCustomerFormContainer: <EditCustomerForm {...editCustomerFormArgs} />,
+    editCustomerFormContainer: (
+      <EditCustomerForm
+        {...mockedCustomerDetail}
+        customerId={mockedCustomerDetail.id}
+        customerCompanySelectItems={mockedCompanySummaries}
+      />
+    ),
   },
 } satisfies Story;
 

@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/Button";
+import { CommentList } from "../../CommentList";
 import { Meta, StoryObj } from "@storybook/react";
 import { Repeat } from "@/components/common/Repeat";
 import { DialogTrigger } from "react-aria-components";
 import { CommentItemSkeleton } from "../../CommentItem";
 import { EntityCommentsModal } from "../EntityCommentsModal";
-import { getCommentList } from "../../CommentList/__stories__";
+import { CommentListStory } from "../../CommentList/__stories__";
 import { CommentsEmptySection } from "../../CommentsEmptySection";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withSendCommentProvider } from "../../SendCommentContext/__stories__";
@@ -43,7 +44,7 @@ export type Story = StoryObj<typeof meta>;
 export const Default = {
   args: {
     title: "Entity Comments",
-    commentsContainer: getCommentList(),
+    commentsContainer: <CommentList {...CommentListStory.args} />,
   },
 } satisfies Story;
 
@@ -57,7 +58,11 @@ export const WithEmptySection = {
 export const WithSkeleton = {
   args: {
     ...Default.args,
-    commentsContainer: <Repeat items={10} renderItem={CommentItemSkeleton} />,
+    commentsContainer: (
+      <CommentList>
+        <Repeat items={10} renderItem={CommentItemSkeleton} />
+      </CommentList>
+    ),
   },
 } satisfies Story;
 

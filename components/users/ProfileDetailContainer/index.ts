@@ -1,1 +1,0 @@
-export { ProfileDetailContainer } from "./ProfileDetailContainer";

@@ -20,8 +20,8 @@ interface TeamProfilePageProps {
   showUserActions: boolean;
   userId: string;
   userFullName: string;
-  profileDetailContainer: React.ReactNode;
-  userHeaderContainer: React.ReactNode;
+  userDetailContainer: React.ReactNode;
+  userDetailHeaderContainer: React.ReactNode;
   editUserFormContainer: React.ReactNode;
 }
 
@@ -29,8 +29,8 @@ export function TeamProfilePage({
   showUserActions,
   userId,
   userFullName,
-  profileDetailContainer,
-  userHeaderContainer,
+  userDetailContainer,
+  userDetailHeaderContainer,
   editUserFormContainer,
 }: TeamProfilePageProps) {
   const t = useTranslations("app.TeamProfilePage");
@@ -39,8 +39,8 @@ export function TeamProfilePage({
     <>
       <PageContainer>
         <UserDetailCard
-          profileDetail={profileDetailContainer}
-          profileHeader={userHeaderContainer}
+          userDetailContainer={userDetailContainer}
+          userDetailHeaderContainer={userDetailHeaderContainer}
           navigationDesktop={
             <UserNavigationDesktop
               userActions={
@@ -62,13 +62,13 @@ export function TeamProfilePage({
             <UserNavigationMobile />
           </ToolbarMobileBottom>
 
-          <div className="flex flex-col">{userHeaderContainer}</div>
+          <div className="flex flex-col">{userDetailHeaderContainer}</div>
           {showUserActions && (
             <Card className="flex flex-col p-1.5">
               <ProfileActions userId={userId} userFullName={userFullName} />
             </Card>
           )}
-          <Card className="flex flex-col">{profileDetailContainer}</Card>
+          <Card className="flex flex-col">{userDetailContainer}</Card>
         </PageGrid>
       </PageContainer>
 

@@ -7,10 +7,10 @@ import {
   FormBaseSubmitButton,
 } from "@/components/common/FormBase";
 
-import { DateValue } from "react-aria";
 import { startTransition } from "react";
 import { useTranslations } from "next-intl";
 import { useUpdateUser } from "../UpdateUserContext";
+import { CalendarDate } from "@internationalized/date";
 import { UserBioTextField } from "../UserBioTextField";
 import { UserPositionSelect } from "../UserPositionSelect";
 import { UserAddressTextField } from "../UserAddressTextField";
@@ -20,27 +20,27 @@ import { UserPublicLinkTextField } from "../UserPublicLinkTextField";
 import { FormErrorBanner } from "@/components/common/FormErrorBanner";
 import { UserPhoneNumberTextField } from "../UserPhoneNumberTextField";
 
-interface EditUserFormProps {
+export interface EditUserFormProps {
   userId: string;
-  userFullNameDefaultValue?: string;
-  userBioDefaultValue?: string;
-  userBirthdateDefaultValue?: DateValue;
-  userPhoneNumberDefaultValue?: string;
-  userPublicLinkDefaultValue?: string;
-  userAddressDefaultValue?: string;
-  userPositionSelectDefaultValue?: string;
+  fullName?: string;
+  bio?: string;
+  birthdate?: string;
+  phoneNumber?: string;
+  publicLink?: string;
+  address?: string;
+  positionId?: number;
   userPositionSelectItems: { id: number; name: string }[];
 }
 
 export function EditUserForm({
   userId,
-  userFullNameDefaultValue,
-  userBioDefaultValue,
-  userBirthdateDefaultValue,
-  userPhoneNumberDefaultValue,
-  userPublicLinkDefaultValue,
-  userAddressDefaultValue,
-  userPositionSelectDefaultValue,
+  fullName,
+  bio,
+  birthdate,
+  phoneNumber,
+  publicLink,
+  address,
+  positionId,
   userPositionSelectItems,
 }: EditUserFormProps) {
   const t = useTranslations("users.EditUserForm");
@@ -56,18 +56,28 @@ export function EditUserForm({
     });
   }
 
+  let birthdateValue;
+  if (birthdate) {
+    const d = new Date(birthdate);
+    birthdateValue = new CalendarDate(
+      d.getFullYear(),
+      d.getMonth() + 1,
+      d.getDate(),
+    );
+  }
+
   return (
     <FormBase id="edit-user-form" onSubmit={handleSubmit}>
       <FormBaseBody>
         {userId && <input type="hidden" name="id" value={userId} />}
-        <UserFullNameTextField defaultValue={userFullNameDefaultValue} />
-        <UserBioTextField defaultValue={userBioDefaultValue} />
-        <UserBirthdateDatePicker defaultValue={userBirthdateDefaultValue} />
-        <UserPhoneNumberTextField defaultValue={userPhoneNumberDefaultValue} />
-        <UserPublicLinkTextField defaultValue={userPublicLinkDefaultValue} />
-        <UserAddressTextField defaultValue={userAddressDefaultValue} />
+        <UserFullNameTextField defaultValue={fullName} />
+        <UserBioTextField defaultValue={bio} />
+        <UserBirthdateDatePicker defaultValue={birthdateValue} />
+        <UserPhoneNumberTextField defaultValue={phoneNumber} />
+        <UserPublicLinkTextField defaultValue={publicLink} />
+        <UserAddressTextField defaultValue={address} />
         <UserPositionSelect
-          defaultSelectedKey={userPositionSelectDefaultValue}
+          defaultSelectedKey={positionId?.toString()}
           items={userPositionSelectItems}
         />
 

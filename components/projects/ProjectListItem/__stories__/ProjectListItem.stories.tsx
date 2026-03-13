@@ -1,14 +1,16 @@
-import { mockedUserDetail } from "@/mocks/users";
 import { ProjectDetail } from "../../ProjectDetail";
 import { ProjectListItem } from "../ProjectListItem";
 import { mockedProjectList } from "@/mocks/projects";
-import { EditProjectForm } from "../../EditProjectForm";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { UserDetail } from "@/components/users/UserDetail";
-import { editProjectFormArgs } from "../../EditProjectForm/__stories__";
+import { mockedPositionSummaries } from "@/mocks/positions";
+import { mockedUserDetail as mockedUser } from "@/mocks/users";
+import { EditUserForm } from "@/components/users/EditUserForm";
+import { CommentList } from "@/components/comments/CommentList";
+import { UserDetailHeader } from "@/components/users/UserDetailHeader";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withProjectItemProviders } from "../../ProjectItem/__stories__";
-import { getCommentList } from "@/components/comments/CommentList/__stories__";
+import { CommentListStory } from "@/components/comments/CommentList/__stories__";
 import { withDeleteProjectsProvider } from "../../DeleteProjectsContext/__stories__";
 import { withSelectedProjectsProvider } from "../../SelectedProjectsContext/__stories__";
 import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
@@ -32,15 +34,32 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-const project = mockedProjectList[0];
+const mockedProject = mockedProjectList[0];
 
 export const Default = {
   args: {
-    ...project,
-    projectCommentsContainer: getCommentList(),
-    editProjectFormContainer: <EditProjectForm {...editProjectFormArgs} />,
-    projectDetailContainer: <ProjectDetail {...project} />,
-    userDetailContainer: <UserDetail {...mockedUserDetail} />,
+    ...mockedProject,
+    projectCommentsContainer: <CommentList {...CommentListStory.args} />,
+    editProjectFormContainer: (
+      <EditUserForm
+        {...mockedUser}
+        userId={mockedUser.id}
+        userPositionSelectItems={mockedPositionSummaries}
+      />
+    ),
+    projectDetailContainer: <ProjectDetail {...mockedProject} />,
+    userDetailContainer: <UserDetail {...mockedUser} />,
+    userDetailHeaderContainer: (
+      <UserDetailHeader
+        userId={mockedUser.id}
+        fullName={mockedUser.fullName}
+        positionName={mockedUser.position.name}
+        imageUrl={mockedUser.imageUrl}
+        canUpdateImage={true}
+        createPresignedUrl={() => ({ status: "success" })}
+        updateUserImageUrl={() => ({ status: "success" })}
+      />
+    ),
     sendComment: () => ({ status: "success" }),
     updateComment: () => ({ status: "success" }),
   },

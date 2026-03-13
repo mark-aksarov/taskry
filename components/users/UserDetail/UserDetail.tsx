@@ -7,7 +7,7 @@ import {
 import { UserDetailLayout } from "./UserDetailLayout";
 import { useFormatter, useTranslations } from "next-intl";
 
-interface UserDetailProps {
+export interface UserDetailProps {
   id: string;
   fullName: string;
   bio?: string;

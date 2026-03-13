@@ -5,7 +5,6 @@ import { EditTaskForm } from "./EditTaskForm";
 import { usePathname } from "@/i18n/navigation";
 import { TaskFormSkeleton } from "./TaskFormSkeleton";
 import { notFound, useParams } from "next/navigation";
-import { CalendarDate } from "@internationalized/date";
 import { UserSummaryDTO } from "@/lib/data/user/user.dto";
 import { TaskFormDataDTO } from "@/lib/data/task/task.dto";
 import { ProjectSummaryDTO } from "@/lib/data/project/project.dto";
@@ -63,29 +62,16 @@ export function EditTaskFormContainer({ taskId }: EditTaskFormContainerProps) {
     return <TaskFormSkeleton />;
   }
 
-  const d = new Date(task.deadline);
-  const dateValue = new CalendarDate(
-    d.getFullYear(),
-    d.getMonth() + 1,
-    d.getDate(),
-  );
-
   return (
     <EditTaskForm
       taskId={taskId}
-      taskTitleDefaultValue={task.title}
-      taskDescriptionDefaultValue={task.description}
-      taskDeadlineDefaultValue={dateValue}
-      taskStatusSelectDefaultValue={task.status}
-      taskCategorySelectDefaultValue={
-        task.categoryId ? task.categoryId.toString() : ""
-      }
-      taskProjectSelectDefaultValue={
-        task.projectId ? task.projectId.toString() : ""
-      }
-      taskAssigneeSelectDefaultValue={
-        task.assigneeId ? task.assigneeId.toString() : ""
-      }
+      title={task.title}
+      description={task.description}
+      deadline={task.deadline}
+      status={task.status}
+      categoryId={task.categoryId}
+      projectId={task.projectId}
+      assigneeId={task.assigneeId}
       taskCategorySelectItems={categories}
       taskProjectSelectItems={projects}
       taskAssigneeSelectItems={users}

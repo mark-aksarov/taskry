@@ -44,6 +44,7 @@ export interface ProjectItemProps {
   projectCommentsContainer: React.ReactNode;
   projectDetailContainer: React.ReactNode;
   userDetailContainer?: React.ReactNode;
+  userDetailHeaderContainer?: React.ReactNode;
   sendComment: ActionFn<ActionState, FormData>;
   updateComment: ActionFn<ActionState, FormData>;
   updateProject: ActionFn<ActionState, FormData>;

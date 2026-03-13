@@ -2,10 +2,11 @@ import { useEffect } from "react";
 import { EditUserForm } from "../EditUserForm";
 import { EditUserModal } from "./EditUserModal";
 import { Button } from "@/components/ui/Button";
+import { mockedUserDetail } from "@/mocks/users";
 import { useUpdateUser } from "../UpdateUserContext";
 import { EditUserFormSkeleton } from "../EditUserForm";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { editUserFormArgs } from "../EditUserForm/__stories__";
+import { mockedPositionSummaries } from "@/mocks/positions";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withUpdateUserProvider } from "../UpdateUserContext/__stories__";
 
@@ -35,7 +36,13 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    editUserFormContainer: <EditUserForm {...editUserFormArgs} />,
+    editUserFormContainer: (
+      <EditUserForm
+        {...mockedUserDetail}
+        userId={mockedUserDetail.id}
+        userPositionSelectItems={mockedPositionSummaries}
+      />
+    ),
   },
 } satisfies Story;
 

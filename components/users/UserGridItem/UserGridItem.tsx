@@ -37,6 +37,7 @@ export const UserGridItem = memo(
     email,
     editUserFormContainer,
     userDetailContainer,
+    userDetailHeaderContainer,
   }: Omit<UserItemProps, "deleteUser" | "updateUser">) => {
     const t = useTranslations("users.UserGridItem");
 
@@ -51,7 +52,11 @@ export const UserGridItem = memo(
     );
 
     const userDetailModal = (
-      <UserDetailModal userId={id} userDetailContainer={userDetailContainer} />
+      <UserDetailModal
+        userId={id}
+        userDetailContainer={userDetailContainer}
+        userDetailHeaderContainer={userDetailHeaderContainer}
+      />
     );
 
     // We show the action menu only for owners and guests

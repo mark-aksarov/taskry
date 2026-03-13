@@ -10,10 +10,10 @@ import { changePassword } from "@/lib/actions/user/changePassword";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { DeleteUserProvider } from "@/components/users/DeleteUserContext";
 import { UpdateUserProvider } from "@/components/users/UpdateUserContext";
-import { UserHeaderContainer } from "@/components/users/UserHeaderContainer";
 import { EditUserFormContainer } from "@/components/users/EditUserFormContainer";
-import { ProfileDetailContainer } from "@/components/users/ProfileDetailContainer";
 import { ChangePasswordProvider } from "@/components/users/ChangePasswordContext";
+import { UserDetailAltContainer } from "@/components/users/UserDetailAltContainer";
+import { UserDetailHeaderContainer } from "@/components/users/UserDetailHeaderContainer";
 
 export default async function AppProfilePage({
   params,
@@ -51,8 +51,10 @@ export default async function AppProfilePage({
             showUserActions={showUserActions}
             userId={userId}
             userFullName={userSummary.fullName}
-            profileDetailContainer={<ProfileDetailContainer userId={userId} />}
-            userHeaderContainer={<UserHeaderContainer userId={userId} />}
+            userDetailContainer={<UserDetailAltContainer userId={userId} />}
+            userDetailHeaderContainer={
+              <UserDetailHeaderContainer userId={userId} />
+            }
             editUserFormContainer={<EditUserFormContainer userId={userId} />}
           />
         </DeleteUserProvider>

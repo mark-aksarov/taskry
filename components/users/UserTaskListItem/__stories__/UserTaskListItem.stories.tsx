@@ -1,12 +1,16 @@
-import { mockedTaskList } from "@/mocks/tasks";
+import { mockedUserSummaries } from "@/mocks/users";
 import { UserTaskListItem } from "../UserTaskListItem";
 import type { Meta, StoryObj } from "@storybook/react";
+import { mockedProjectSummaries } from "@/mocks/projects";
 import { TaskDetail } from "@/components/tasks/TaskDetail";
 import { EditTaskForm } from "@/components/tasks/EditTaskForm";
+import { CommentList } from "@/components/comments/CommentList";
+import { SubtaskList } from "@/components/subtasks/SubtaskList";
+import { mockedTaskDetail, mockedTaskList } from "@/mocks/tasks";
+import { mockedTaskCategorySummaries } from "@/mocks/taskCategories";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { taskDetailArgs } from "@/components/tasks/TaskDetail/__stories__";
-import { editTaskFormArgs } from "@/components/tasks/EditTaskForm/__stories__";
-import { getCommentList } from "@/components/comments/CommentList/__stories__";
+import { SubtaskListStory } from "@/components/subtasks/SubtaskList/__stories__";
+import { CommentListStory } from "@/components/comments/CommentList/__stories__";
 import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
 import { withDeleteTasksProvider } from "@/components/tasks/DeleteTasksContext/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
@@ -34,14 +38,27 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-const task = mockedTaskList[0];
+const mockedTask = mockedTaskList[0];
 
 export const Default = {
   args: {
-    ...task,
-    taskDetailContainer: <TaskDetail {...taskDetailArgs} />,
-    taskCommentsContainer: getCommentList(),
-    editTaskFormContainer: <EditTaskForm {...editTaskFormArgs} />,
+    ...mockedTask,
+    taskDetailContainer: (
+      <TaskDetail
+        {...mockedTaskDetail}
+        subtasksList={<SubtaskList {...SubtaskListStory.args} />}
+      />
+    ),
+    taskCommentsContainer: <CommentList {...CommentListStory.args} />,
+    editTaskFormContainer: (
+      <EditTaskForm
+        {...mockedTaskDetail}
+        taskId={mockedTaskDetail.id}
+        taskCategorySelectItems={mockedTaskCategorySummaries}
+        taskProjectSelectItems={mockedProjectSummaries}
+        taskAssigneeSelectItems={mockedUserSummaries}
+      />
+    ),
     sendComment: () => ({ status: "success" }),
     updateComment: () => ({ status: "success" }),
     updateTaskStatus: () => {

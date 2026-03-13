@@ -6,17 +6,21 @@ import {
 import { mocked } from "storybook/test";
 import { mockedTaskDetail } from "@/mocks/tasks";
 import { TaskDetailPage } from "./TaskDetailPage";
+import { mockedUserSummaries } from "@/mocks/users";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { useParams, usePathname } from "next/navigation";
+import { mockedProjectSummaries } from "@/mocks/projects";
 import { PageDecorator } from "@/.storybook/PageDecorator";
 import { EditTaskForm } from "@/components/tasks/EditTaskForm";
+import { CommentList } from "@/components/comments/CommentList";
+import { SubtaskList } from "@/components/subtasks/SubtaskList";
+import { mockedTaskCategorySummaries } from "@/mocks/taskCategories";
 import { TaskDetailHeader } from "@/components/tasks/TaskDetailHeader";
 import { DetailHeaderSkeleton } from "@/components/common/DetailHeader";
 import { NewSubtaskModal } from "@/components/subtasks/NewSubtaskModal";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { getCommentList } from "@/components/comments/CommentList/__stories__";
-import { editTaskFormArgs } from "@/components/tasks/EditTaskForm/__stories__";
-import { taskDetailAltArgs } from "@/components/tasks/TaskDetailAlt/__stories__";
+import { SubtaskListStory } from "@/components/subtasks/SubtaskList/__stories__";
+import { CommentListStory } from "@/components/comments/CommentList/__stories__";
 import { withDeleteTaskProvider } from "@/components/tasks/DeleteTaskContext/__stories__";
 import { withUpdateTaskProvider } from "@/components/tasks/UpdateTaskContext/__stories__";
 import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
@@ -45,7 +49,7 @@ const meta = {
   beforeEach: () => {
     mocked(usePathname).mockReturnValue("/tasks/1");
     mocked(useParams).mockReturnValue({
-      id: "1",
+      id: mockedTaskDetail.id.toString(),
     });
   },
 } satisfies Meta<typeof TaskDetailPage>;
@@ -53,23 +57,34 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-const task = mockedTaskDetail;
-
 export const Default = {
   args: {
-    taskId: task.id,
-    taskTitle: task.title,
+    taskId: mockedTaskDetail.id,
+    taskTitle: mockedTaskDetail.title,
     updateComment: () => ({ status: "success" }),
     sendComment: () => ({ status: "success" }),
-    taskCommentsContainer: getCommentList(),
-    taskDetailContainer: <TaskDetailAlt {...taskDetailAltArgs} />,
-    taskHeaderContainer: (
-      <TaskDetailHeader
-        taskTitle={task.title}
-        categoryName={task.category?.name}
+    taskCommentsContainer: <CommentList {...CommentListStory.args} />,
+    taskDetailContainer: (
+      <TaskDetailAlt
+        {...mockedTaskDetail}
+        subtasksList={<SubtaskList {...SubtaskListStory.args} />}
       />
     ),
-    editTaskFormContainer: <EditTaskForm {...editTaskFormArgs} />,
+    taskHeaderContainer: (
+      <TaskDetailHeader
+        taskTitle={mockedTaskDetail.title}
+        categoryName={mockedTaskDetail.category?.name}
+      />
+    ),
+    editTaskFormContainer: (
+      <EditTaskForm
+        {...mockedTaskDetail}
+        taskId={mockedTaskDetail.id}
+        taskCategorySelectItems={mockedTaskCategorySummaries}
+        taskProjectSelectItems={mockedProjectSummaries}
+        taskAssigneeSelectItems={mockedUserSummaries}
+      />
+    ),
   },
 } satisfies Story;
 
@@ -86,13 +101,15 @@ export const WithoutOptionalTaskData = {
     ...Default.args,
     taskDetailContainer: (
       <TaskDetailAlt
-        id={task.id}
-        project={task.project}
-        deadline={task.deadline}
-        status={task.status}
+        id={mockedTaskDetail.id}
+        project={mockedTaskDetail.project}
+        deadline={mockedTaskDetail.deadline}
+        status={mockedTaskDetail.status}
       />
     ),
-    taskHeaderContainer: <TaskDetailHeader taskTitle={task.title} />,
+    taskHeaderContainer: (
+      <TaskDetailHeader taskTitle={mockedTaskDetail.title} />
+    ),
   },
 } satisfies Story;
 

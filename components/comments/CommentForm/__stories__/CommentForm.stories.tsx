@@ -3,11 +3,19 @@ import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { withToastRegion } from "@/.storybook/withToastRegion";
 import { withCommentFormProvider } from "./withCommentFormProvider";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
+import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
 
 const meta = {
   title: "components/comments/CommentForm",
   component: CommentForm,
-  decorators: [withToastRegion, withCommentFormProvider, withThemedBackground],
+  decorators: [
+    withToastRegion,
+    withCommentFormProvider,
+    withGuestModeModalProvider,
+    withCurrentUserProvider,
+    withThemedBackground,
+  ],
 } satisfies Meta<typeof CommentForm>;
 
 export default meta;

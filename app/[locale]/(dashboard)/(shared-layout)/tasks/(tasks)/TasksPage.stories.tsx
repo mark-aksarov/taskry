@@ -1,19 +1,20 @@
 import { TasksPage } from "./TasksPage";
 import TasksPageLoading from "./loading";
-import { fn, mocked } from "storybook/test";
+import { mocked } from "storybook/test";
+import { useParams, usePathname } from "next/navigation";
+import { mockedUserSummaries } from "@/mocks/users";
 import { TaskList } from "@/components/tasks/TaskList";
 import { TaskGrid } from "@/components/tasks/TaskGrid";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { useParams, usePathname } from "next/navigation";
+import { mockedProjectSummaries } from "@/mocks/projects";
 import { PageDecorator } from "@/.storybook/PageDecorator";
 import { NewTaskForm } from "@/components/tasks/NewTaskForm";
+import { mockedTaskCategorySummaries } from "@/mocks/taskCategories";
 import { TaskFiltersForm } from "@/components/tasks/TaskFiltersForm";
 import { NewSubtaskModal } from "@/components/subtasks/NewSubtaskModal";
 import { TaskGridStory } from "@/components/tasks/TaskGrid/__stories__";
 import { TaskListStory } from "@/components/tasks/TaskList/__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { newTaskFormArgs } from "@/components/tasks/NewTaskForm/__stories__";
-import { taskFiltersFormArgs } from "@/components/tasks/TaskFiltersForm/__stories__";
 import { withCreateTaskProvider } from "@/components/tasks/CreateTaskContext/__stories__";
 import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
 import { withTaskFiltersProvider } from "@/components/tasks/TaskFiltersContext/__stories__";
@@ -52,7 +53,9 @@ const meta = {
   ],
   beforeEach: () => {
     mocked(usePathname).mockReturnValue("/tasks");
-    mocked(useParams).mockReturnValue({ push: fn() } as any);
+    mocked(useParams).mockReturnValue({
+      id: "user-1",
+    });
   },
 } satisfies Meta<typeof TasksPage>;
 
@@ -73,8 +76,20 @@ export const Default = {
         totalPages={3}
       />
     ),
-    filtersFormContainer: <TaskFiltersForm {...taskFiltersFormArgs} />,
-    newTaskFormContainer: <NewTaskForm {...newTaskFormArgs} />,
+    filtersFormContainer: (
+      <TaskFiltersForm
+        categoryCheckboxGroupItems={mockedTaskCategorySummaries}
+        projectCheckboxGroupItems={mockedProjectSummaries}
+        assigneeCheckboxGroupItems={mockedUserSummaries}
+      />
+    ),
+    newTaskFormContainer: (
+      <NewTaskForm
+        categorySelectItems={mockedTaskCategorySummaries}
+        projectSelectItems={mockedProjectSummaries}
+        assigneeSelectItems={mockedUserSummaries}
+      />
+    ),
   },
 } satisfies Story;
 

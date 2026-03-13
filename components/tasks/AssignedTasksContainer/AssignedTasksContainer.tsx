@@ -25,6 +25,7 @@ import { updateComment } from "@/lib/actions/comment/updateComment";
 import { updateTaskStatus } from "@/lib/actions/task/updateTaskStatus";
 import { UserDetailContainer } from "@/components/users/UserDetailContainer";
 import { ProjectDetailContainer } from "@/components/projects/ProjectDetailContainer";
+import { UserDetailHeaderContainer } from "@/components/users/UserDetailHeaderContainer";
 
 interface AssignedTasksContainerProps {
   tasks: TaskListItemDTO[];
@@ -78,6 +79,11 @@ async function AssignedTasksContainerInner({
                 userDetailContainer={
                   task.assignee && (
                     <UserDetailContainer userId={task.assignee.id} />
+                  )
+                }
+                userDetailHeaderContainer={
+                  task.assignee && (
+                    <UserDetailHeaderContainer userId={task.assignee.id} />
                   )
                 }
                 projectDetailContainer={

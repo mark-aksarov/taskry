@@ -52,12 +52,12 @@ export function EditCustomerFormContainer({
   return (
     <EditCustomerForm
       customerId={customerId}
-      customerFullNameDefaultValue={customer.fullName}
-      customerBioDefaultValue={customer.bio}
-      customerEmailDefaultValue={customer.email}
-      customerPhoneNumberDefaultValue={customer.phoneNumber}
-      customerPublicLinkDefaultValue={customer.publicLink}
-      customerCompanyDefaultValue={customer?.companyId?.toString()}
+      fullName={customer.fullName}
+      bio={customer.bio}
+      email={customer.email}
+      phoneNumber={customer.phoneNumber}
+      publicLink={customer.publicLink}
+      companyId={customer?.companyId}
       customerCompanySelectItems={companies}
     />
   );

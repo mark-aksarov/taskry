@@ -8,16 +8,18 @@ import { EditProjectModal } from "../EditProjectModal";
 import { mockedProjectDetail } from "@/mocks/projects";
 import { ProjectDetailCard } from "./ProjectDetailCard";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { mockedCustomerSummaries } from "@/mocks/customers";
 import { ProjectDetailHeader } from "../ProjectDetailHeader";
 import { ProjectDetailActions } from "../ProjectDetailActions";
-import { editProjectFormArgs } from "../EditProjectForm/__stories__";
 import { DetailHeaderSkeleton } from "@/components/common/DetailHeader";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { projectDetailActionsArgs } from "../ProjectDetailActions/__stories__";
+import { mockedProjectCategorySummaries } from "@/mocks/projectCategories";
 import { withUpdateProjectProvider } from "../UpdateProjectContext/__stories__";
 import { withDeleteProjectProvider } from "../DeleteProjectContext/__stories__";
-import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
+import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
+import { CommentList } from "@/components/comments/CommentList";
+import { CommentListStory } from "@/components/comments/CommentList/__stories__";
 
 const meta = {
   title: "components/projects/ProjectDetailCard",
@@ -26,9 +28,15 @@ const meta = {
     (Story) => (
       <>
         <Story />
+
         <EditProjectModal
           editProjectFormContainer={
-            <EditProjectForm {...editProjectFormArgs} />
+            <EditProjectForm
+              {...mockedProjectDetail}
+              projectId={mockedProjectDetail.id}
+              projectCategorySelectItems={mockedProjectCategorySummaries}
+              projectCustomerSelectItems={mockedCustomerSummaries}
+            />
           }
         />
       </>
@@ -44,19 +52,23 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-const project = mockedProjectDetail;
-
 export const Default = {
   args: {
-    projectDetailContainer: <ProjectDetailAlt {...project} />,
+    projectDetailContainer: <ProjectDetailAlt {...mockedProjectDetail} />,
     projectDetailHeaderContainer: (
       <ProjectDetailHeader
-        projectTitle={project.title}
-        categoryName={project.category.name}
+        projectTitle={mockedProjectDetail.title}
+        categoryName={mockedProjectDetail.category.name}
       />
     ),
     projectDetailActions: (
-      <ProjectDetailActions {...projectDetailActionsArgs} />
+      <ProjectDetailActions
+        projectId={mockedProjectDetail.id}
+        projectTitle={mockedProjectDetail.title}
+        sendComment={() => ({ status: "success" })}
+        updateComment={() => ({ status: "success" })}
+        projectCommentsContainer={<CommentList {...CommentListStory.args} />}
+      />
     ),
   },
 } satisfies Story;
@@ -73,17 +85,15 @@ export const WithoutOptionalProjectData = {
   args: {
     projectDetailContainer: (
       <ProjectDetailAlt
-        id={project.id}
-        status={project.status}
-        deadline={project.deadline}
+        id={mockedProjectDetail.id}
+        status={mockedProjectDetail.status}
+        deadline={mockedProjectDetail.deadline}
       />
     ),
     projectDetailHeaderContainer: (
-      <ProjectDetailHeader projectTitle={project.title} />
+      <ProjectDetailHeader projectTitle={mockedProjectDetail.title} />
     ),
-    projectDetailActions: (
-      <ProjectDetailActions {...projectDetailActionsArgs} />
-    ),
+    projectDetailActions: Default.args.projectDetailActions,
   },
 } satisfies Story;
 

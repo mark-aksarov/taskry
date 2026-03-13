@@ -4,9 +4,10 @@ import { NewProjectForm } from "../NewProjectForm";
 import { NewProjectModal } from "./NewProjectModal";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { useCreateProject } from "../CreateProjectContext";
+import { mockedCustomerSummaries } from "@/mocks/customers";
 import { ProjectFormSkeleton } from "../ProjectFormSkeleton";
-import { newProjectFormArgs } from "../NewProjectForm/__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { mockedProjectCategorySummaries } from "@/mocks/projectCategories";
 import { withCreateProjectProvider } from "../CreateProjectContext/__stories__";
 
 const meta = {
@@ -35,7 +36,12 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    newProjectFormContainer: <NewProjectForm {...newProjectFormArgs} />,
+    newProjectFormContainer: (
+      <NewProjectForm
+        projectCategorySelectItems={mockedProjectCategorySummaries}
+        projectCustomerSelectItems={mockedCustomerSummaries}
+      />
+    ),
   },
 } satisfies Story;
 

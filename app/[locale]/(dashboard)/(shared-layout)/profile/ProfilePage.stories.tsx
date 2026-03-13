@@ -4,14 +4,12 @@ import { usePathname } from "next/navigation";
 import { mockedUserDetail } from "@/mocks/users";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { PageDecorator } from "@/.storybook/PageDecorator";
+import { mockedPositionSummaries } from "@/mocks/positions";
 import { EditUserForm } from "@/components/users/EditUserForm";
 import { UserDetailHeader } from "@/components/users/UserDetailHeader";
 import { DetailHeaderSkeleton } from "@/components/common/DetailHeader";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { UserDetail, UserDetailSkeleton } from "@/components/users/UserDetail";
-import { UserImageMenuTrigger } from "@/components/users/UserImageMenuTrigger";
-import { editUserFormArgs } from "@/components/users/EditUserForm/__stories__";
-import { PersonDetailHeaderImage } from "@/components/common/PersonDetailHeaderImage";
 import { withDeleteUserProvider } from "@/components/users/DeleteUserContext/__stories__";
 import { withUpdateUserProvider } from "@/components/users/UpdateUserContext/__stories__";
 import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
@@ -45,20 +43,23 @@ export const Default = {
   args: {
     userId: mockedUserDetail.id,
     userFullName: mockedUserDetail.fullName,
-    editUserFormContainer: <EditUserForm {...editUserFormArgs} />,
-    profileDetailContainer: <UserDetail {...mockedUserDetail} />,
-    userHeaderContainer: (
+    editUserFormContainer: (
+      <EditUserForm
+        {...mockedUserDetail}
+        userId={mockedUserDetail.id}
+        userPositionSelectItems={mockedPositionSummaries}
+      />
+    ),
+    userDetailContainer: <UserDetail {...mockedUserDetail} />,
+    userDetailHeaderContainer: (
       <UserDetailHeader
+        userId={mockedUserDetail.id}
         fullName={mockedUserDetail.fullName}
-        imageSlot={
-          <UserImageMenuTrigger>
-            <PersonDetailHeaderImage
-              alt={mockedUserDetail.fullName}
-              imageUrl={mockedUserDetail.imageUrl}
-            />
-          </UserImageMenuTrigger>
-        }
-        positionName={mockedUserDetail.position?.name}
+        positionName={mockedUserDetail.position.name}
+        imageUrl={mockedUserDetail.imageUrl}
+        canUpdateImage={true}
+        createPresignedUrl={() => ({ status: "success" })}
+        updateUserImageUrl={() => ({ status: "success" })}
       />
     ),
   },
@@ -67,29 +68,28 @@ export const Default = {
 export const Loading = {
   args: {
     ...Default.args,
-    profileDetailContainer: <UserDetailSkeleton />,
-    userHeaderContainer: <DetailHeaderSkeleton />,
+    userDetailContainer: <UserDetailSkeleton />,
+    userDetailHeaderContainer: <DetailHeaderSkeleton />,
   },
 } satisfies Story;
 
 export const WithoutOptionalUserData = {
   args: {
     ...Default.args,
-    profileDetailContainer: (
+    userDetailContainer: (
       <UserDetail
         id={mockedUserDetail.id}
         fullName={mockedUserDetail.fullName}
         email={mockedUserDetail.email}
       />
     ),
-    userHeaderContainer: (
+    userDetailHeaderContainer: (
       <UserDetailHeader
-        fullName="User 1"
-        imageSlot={
-          <UserImageMenuTrigger>
-            <PersonDetailHeaderImage />
-          </UserImageMenuTrigger>
-        }
+        userId={mockedUserDetail.id}
+        fullName={mockedUserDetail.fullName}
+        canUpdateImage={true}
+        createPresignedUrl={() => ({ status: "success" })}
+        updateUserImageUrl={() => ({ status: "success" })}
       />
     ),
   },

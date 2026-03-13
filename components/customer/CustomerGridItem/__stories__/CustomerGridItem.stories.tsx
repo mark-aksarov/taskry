@@ -1,11 +1,11 @@
 import { CustomerDetail } from "../../CustomerDetail";
 import { CustomerGridItem } from "../CustomerGridItem";
 import type { Meta, StoryObj } from "@storybook/react";
-import { mockedCustomerDetail } from "@/mocks/customers";
 import { EditCustomerForm } from "../../EditCustomerForm";
+import { mockedCompanySummaries } from "@/mocks/companies";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { editCustomerFormArgs } from "../../EditCustomerForm/__stories__";
 import { withCustomerItemProviders } from "../../CustomerItem/__stories__";
+import { mockedCustomerDetail as mockedCustomer } from "@/mocks/customers";
 import { withDeleteCustomersProvider } from "../../DeleteCustomersContext/__stories__";
 import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
@@ -27,13 +27,17 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-const customer = mockedCustomerDetail;
-
 export const Default = {
   args: {
-    ...customer,
-    customerDetailContainer: <CustomerDetail {...customer} />,
-    editCustomerFormContainer: <EditCustomerForm {...editCustomerFormArgs} />,
+    ...mockedCustomer,
+    customerDetailContainer: <CustomerDetail {...mockedCustomer} />,
+    editCustomerFormContainer: (
+      <EditCustomerForm
+        {...mockedCustomer}
+        customerId={mockedCustomer.id}
+        customerCompanySelectItems={mockedCompanySummaries}
+      />
+    ),
   },
 } satisfies Story;
 
@@ -51,11 +55,11 @@ export const WithOverflowContent = {
 
 export const WithoutImagePhoneAndLink = {
   args: {
-    id: customer.id,
-    fullName: customer.fullName,
-    email: customer.email,
-    customerDetailContainer: <CustomerDetail {...customer} />,
-    editCustomerFormContainer: <EditCustomerForm {...editCustomerFormArgs} />,
+    id: mockedCustomer.id,
+    fullName: mockedCustomer.fullName,
+    email: mockedCustomer.email,
+    customerDetailContainer: Default.args.customerDetailContainer,
+    editCustomerFormContainer: Default.args.editCustomerFormContainer,
   },
 } satisfies Story;
 

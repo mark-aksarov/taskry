@@ -18,16 +18,16 @@ import { ProfileNavigationDesktop } from "@/components/users/ProfileNavigationDe
 interface ProfilePageProps {
   userId: string;
   userFullName: string;
-  profileDetailContainer: React.ReactNode;
-  userHeaderContainer: React.ReactNode;
+  userDetailContainer: React.ReactNode;
+  userDetailHeaderContainer: React.ReactNode;
   editUserFormContainer: React.ReactNode;
 }
 
 export function ProfilePage({
   userId,
   userFullName,
-  profileDetailContainer,
-  userHeaderContainer,
+  userDetailContainer,
+  userDetailHeaderContainer,
   editUserFormContainer,
 }: ProfilePageProps) {
   const t = useTranslations("app.ProfilePage");
@@ -36,8 +36,8 @@ export function ProfilePage({
     <>
       <PageContainer>
         <UserDetailCard
-          profileDetail={profileDetailContainer}
-          profileHeader={userHeaderContainer}
+          userDetailContainer={userDetailContainer}
+          userDetailHeaderContainer={userDetailHeaderContainer}
           navigationDesktop={
             <ProfileNavigationDesktop
               profileActions={
@@ -56,11 +56,11 @@ export function ProfilePage({
             <ProfileNavigationMobile />
           </ToolbarMobileBottom>
 
-          <div className="flex flex-col">{userHeaderContainer}</div>
+          <div className="flex flex-col">{userDetailHeaderContainer}</div>
           <Card className="flex flex-col p-1.5">
             <ProfileActions userId={userId} userFullName={userFullName} />
           </Card>
-          <Card className="flex flex-col">{profileDetailContainer}</Card>
+          <Card className="flex flex-col">{userDetailContainer}</Card>
         </PageGrid>
       </PageContainer>
 

@@ -15,6 +15,7 @@ import { updateTaskStatus } from "@/lib/actions/task/updateTaskStatus";
 import { UserDetailContainer } from "@/components/users/UserDetailContainer";
 import { ProjectDetailContainer } from "@/components/projects/ProjectDetailContainer";
 import { EntityContainerPresentation } from "@/components/common/EntityContainerPresentation";
+import { UserDetailHeaderContainer } from "../users/UserDetailHeaderContainer";
 
 interface TasksContainerProps {
   tasks: TaskListItemDTO[];
@@ -61,6 +62,11 @@ export async function TasksContainer({
             }
             userDetailContainer={
               task.assignee && <UserDetailContainer userId={task.assignee.id} />
+            }
+            userDetailHeaderContainer={
+              task.assignee && (
+                <UserDetailHeaderContainer userId={task.assignee.id} />
+              )
             }
             editTaskFormContainer={<EditTaskFormContainer taskId={task.id} />}
             showCheckbox

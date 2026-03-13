@@ -8,14 +8,14 @@ import {
 import { useTranslations } from "next-intl";
 
 interface UserDetailCardProps {
-  profileHeader: React.ReactNode;
-  profileDetail: React.ReactNode;
+  userDetailHeaderContainer: React.ReactNode;
+  userDetailContainer: React.ReactNode;
   navigationDesktop: React.ReactNode;
 }
 
 export function UserDetailCard({
-  profileHeader,
-  profileDetail,
+  userDetailHeaderContainer,
+  userDetailContainer,
   navigationDesktop,
 }: UserDetailCardProps) {
   const t = useTranslations("users.UserDetailCard");
@@ -26,11 +26,11 @@ export function UserDetailCard({
         <DetailCardHeader>
           <DetailCardTitle>{t("title")}</DetailCardTitle>
         </DetailCardHeader>
-        <div className="p-6">{profileDetail}</div>
+        <div className="p-6">{userDetailContainer}</div>
       </DetailCardLeft>
 
       <DetailCardRight>
-        {profileHeader}
+        {userDetailHeaderContainer}
         {navigationDesktop}
       </DetailCardRight>
     </DetailCard>

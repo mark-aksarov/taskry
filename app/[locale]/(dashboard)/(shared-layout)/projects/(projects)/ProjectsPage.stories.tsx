@@ -1,20 +1,21 @@
 import { fn, mocked } from "storybook/test";
 import ProjectsPageLoading from "./loading";
 import { ProjectsPage } from "./ProjectsPage";
+import { mockedUserSummaries } from "@/mocks/users";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { useParams, usePathname } from "next/navigation";
 import { PageDecorator } from "@/.storybook/PageDecorator";
+import { mockedCustomerSummaries } from "@/mocks/customers";
 import { ProjectList } from "@/components/projects/ProjectList";
 import { ProjectGrid } from "@/components/projects/ProjectGrid";
 import { NewProjectForm } from "@/components/projects/NewProjectForm";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { mockedProjectCategorySummaries } from "@/mocks/projectCategories";
 import { ProjectFiltersForm } from "@/components/projects/ProjectFiltersForm";
 import { ProjectGridStory } from "@/components/projects/ProjectGrid/__stories__";
 import { ProjectListStory } from "@/components/projects/ProjectList/__stories__";
-import { newProjectFormArgs } from "@/components/projects/NewProjectForm/__stories__";
 import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
-import { projectFiltersFormArgs } from "@/components/projects/ProjectFiltersForm/__stories__";
 import { EntityContainerPresentation } from "@/components/common/EntityContainerPresentation";
 import { withPageTransitionProvider } from "@/components/common/PageTransitionContext/__stories__";
 import { withCreateProjectProvider } from "@/components/projects/CreateProjectContext/__stories__";
@@ -56,9 +57,18 @@ export const Default = {
     totalFilteredProjects: 10,
     selectedSortField: "createdAt",
 
-    newProjectFormContainer: <NewProjectForm {...newProjectFormArgs} />,
+    newProjectFormContainer: (
+      <NewProjectForm
+        projectCategorySelectItems={mockedProjectCategorySummaries}
+        projectCustomerSelectItems={mockedCustomerSummaries}
+      />
+    ),
     projectFiltersFormContainer: (
-      <ProjectFiltersForm {...projectFiltersFormArgs} />
+      <ProjectFiltersForm
+        categoryCheckboxGroupItems={mockedProjectCategorySummaries}
+        userCheckboxGroupItems={mockedUserSummaries}
+        customerCheckboxGroupItems={mockedCustomerSummaries}
+      />
     ),
     projectsContainer: (
       <EntityContainerPresentation

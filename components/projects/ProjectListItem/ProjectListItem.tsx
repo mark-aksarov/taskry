@@ -49,6 +49,7 @@ export const ProjectListItem = memo(
     editProjectFormContainer,
     projectDetailContainer,
     userDetailContainer,
+    userDetailHeaderContainer,
     customerDetailContainer,
     projectCommentsContainer,
     sendComment,
@@ -84,6 +85,7 @@ export const ProjectListItem = memo(
       <UserDetailModal
         userId={creator.id}
         userDetailContainer={userDetailContainer}
+        userDetailHeaderContainer={userDetailHeaderContainer}
       />
     );
 

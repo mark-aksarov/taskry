@@ -9,8 +9,8 @@ import { UserDetailHeader } from "../../UserDetailHeader";
 import { DetailHeaderSkeleton } from "@/components/common/DetailHeader";
 import { UserDetailSkeleton } from "../../UserDetail/UserDetailSkeleton";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { PersonDetailPresentation } from "@/components/common/PersonDetailPresentation";
-import { PersonDetailHeaderImage } from "@/components/common/PersonDetailHeaderImage";
+import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
+import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
 
 const meta = {
   title: "components/users/UserDetailModal",
@@ -26,6 +26,8 @@ const meta = {
         </DialogTrigger>
       );
     },
+    withGuestModeModalProvider,
+    withCurrentUserProvider,
     withThemedBackground,
   ],
 } satisfies Meta<typeof UserDetailModal>;
@@ -36,34 +38,25 @@ type Story = StoryObj<typeof meta>;
 export const Default = {
   args: {
     userId: "user-1",
-    userDetailContainer: (
-      <PersonDetailPresentation
-        personHeader={
-          <UserDetailHeader
-            fullName={mockedUserDetail.fullName}
-            positionName={mockedUserDetail.position?.name}
-            imageSlot={
-              <PersonDetailHeaderImage
-                alt={mockedUserDetail.fullName}
-                imageUrl={mockedUserDetail.imageUrl}
-              />
-            }
-          />
-        }
-        userDetail={<UserDetail {...mockedUserDetail} />}
+    userDetailHeaderContainer: (
+      <UserDetailHeader
+        canUpdateImage
+        userId={mockedUserDetail.id}
+        fullName={mockedUserDetail.fullName}
+        imageUrl={mockedUserDetail.imageUrl}
+        positionName={mockedUserDetail.position.name}
+        createPresignedUrl={() => ({ status: "success" })}
+        updateUserImageUrl={() => ({ status: "success" })}
       />
     ),
+    userDetailContainer: <UserDetail {...mockedUserDetail} />,
   },
 } satisfies Story;
 
 export const WithSkeletonContent = {
   args: {
     userId: "user-1",
-    userDetailContainer: (
-      <PersonDetailPresentation
-        personHeader={<DetailHeaderSkeleton />}
-        userDetail={<UserDetailSkeleton />}
-      />
-    ),
+    userDetailHeaderContainer: <DetailHeaderSkeleton />,
+    userDetailContainer: <UserDetailSkeleton />,
   },
 } satisfies Story;

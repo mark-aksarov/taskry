@@ -51,6 +51,7 @@ export const TaskListItem = memo(
     editTaskFormContainer,
     taskDetailContainer,
     userDetailContainer,
+    userDetailHeaderContainer,
     projectDetailContainer,
     sendComment,
     updateComment,
@@ -117,6 +118,7 @@ export const TaskListItem = memo(
                   modal={
                     <UserDetailModal
                       userId={assignee.id}
+                      userDetailHeaderContainer={userDetailHeaderContainer}
                       userDetailContainer={userDetailContainer}
                     />
                   }
@@ -135,6 +137,7 @@ export const TaskListItem = memo(
                   modal={
                     <UserDetailModal
                       userId={assignee.id}
+                      userDetailHeaderContainer={userDetailHeaderContainer}
                       userDetailContainer={userDetailContainer}
                     />
                   }

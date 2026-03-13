@@ -2,12 +2,12 @@ import { useState } from "react";
 import { Button } from "@/components/ui/Button";
 import { DialogTrigger } from "react-aria-components";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { mockedCustomerDetail } from "@/mocks/customers";
 import { CustomerDetailModal } from "../CustomerDetailModal";
 import { CustomerDetailHeader } from "../../CustomerDetailHeader";
 import { CustomerDetail } from "../../CustomerDetail/CustomerDetail";
 import { DetailHeaderSkeleton } from "@/components/common/DetailHeader";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { mockedCustomerDetail as mockedCustomer } from "@/mocks/customers";
 import { CustomerDetailSkeleton } from "../../CustomerDetail/CustomerDetailSkeleton";
 import { PersonDetailPresentation } from "@/components/common/PersonDetailPresentation";
 import { PersonDetailHeaderImage } from "@/components/common/PersonDetailHeaderImage";
@@ -36,8 +36,6 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-const customer = mockedCustomerDetail;
-
 export const Default = {
   args: {
     customerId: 1,
@@ -45,17 +43,17 @@ export const Default = {
       <PersonDetailPresentation
         personHeader={
           <CustomerDetailHeader
-            fullName={customer.fullName}
+            fullName={mockedCustomer.fullName}
             imageSlot={
               <PersonDetailHeaderImage
-                alt={customer.fullName}
-                imageUrl={customer.imageUrl}
+                alt={mockedCustomer.fullName}
+                imageUrl={mockedCustomer.imageUrl}
               />
             }
-            companyName={customer.company?.name}
+            companyName={mockedCustomer.company?.name}
           />
         }
-        userDetail={<CustomerDetail {...customer} />}
+        userDetail={<CustomerDetail {...mockedCustomer} />}
       />
     ),
   },

@@ -27,14 +27,16 @@ import { mocked } from "storybook/test";
 import { usePathname } from "next/navigation";
 import { mockedTaskList } from "@/mocks/tasks";
 import { DashboardPage } from "./DashboardPage";
+import { mockedUserSummaries } from "@/mocks/users";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { mockedProjectSummaries } from "@/mocks/projects";
 import { PageDecorator } from "@/.storybook/PageDecorator";
 import { NewTaskForm } from "@/components/tasks/NewTaskForm";
 import { NewTaskModal } from "@/components/tasks/NewTaskModal";
+import { mockedTaskCategorySummaries } from "@/mocks/taskCategories";
 import { AssignedTaskList } from "@/components/tasks/AssignedTaskList";
 import { NewSubtaskModal } from "@/components/subtasks/NewSubtaskModal";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { newTaskFormArgs } from "@/components/tasks/NewTaskForm/__stories__";
 import { AssignedTaskListItem } from "@/components/tasks/AssignedTaskListItem";
 import { TaskListItemStory } from "@/components/tasks/TaskListItem/__stories__";
 import { withCreateTaskProvider } from "@/components/tasks/CreateTaskContext/__stories__";
@@ -125,7 +127,14 @@ export const WithNoTasks = {
       <>
         <Story />
         <NewTaskModal
-          newTaskFormContainer={<NewTaskForm {...newTaskFormArgs} />}
+          newTaskFormContainer={
+            <NewTaskForm
+              forcedAssigneeId={mockedUserSummaries[0].id}
+              categorySelectItems={mockedTaskCategorySummaries}
+              projectSelectItems={mockedProjectSummaries}
+              assigneeSelectItems={mockedUserSummaries}
+            />
+          }
         />
       </>
     ),

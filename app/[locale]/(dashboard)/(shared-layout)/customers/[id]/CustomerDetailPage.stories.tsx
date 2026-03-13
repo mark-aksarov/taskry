@@ -8,16 +8,17 @@ import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { useParams, usePathname } from "next/navigation";
 import { mockedCustomerDetail } from "@/mocks/customers";
 import { CustomerDetailPage } from "./CustomerDetailPage";
+import { mockedCompanySummaries } from "@/mocks/companies";
 import { PageDecorator } from "@/.storybook/PageDecorator";
 import { DetailHeaderSkeleton } from "@/components/common/DetailHeader";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { EditCustomerForm } from "@/components/customer/EditCustomerForm";
 import { CustomerDetailHeader } from "@/components/customer/CustomerDetailHeader";
 import { CustomerDetailActions } from "@/components/customer/CustomerDetailActions";
 import { PersonDetailHeaderImage } from "@/components/common/PersonDetailHeaderImage";
 import { CustomerImageMenuTrigger } from "@/components/customer/CustomerImageMenuTrigger";
 import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
-import { customerDetailActionsArgs } from "@/components/customer/CustomerDetailActions/__stories__";
 import { withDeleteCustomerProvider } from "@/components/customer/DeleteCustomerContext/__stories__";
 import { withUpdateCustomerProvider } from "@/components/customer/UpdateCustomerContext/__stories__";
 import { withUpdateCustomerImageProvider } from "@/components/customer/UpdateCustomerImageContext/__stories__";
@@ -51,7 +52,7 @@ export const Default = {
     customerDetailContainer: <CustomerDetail {...mockedCustomerDetail} />,
     customerHeaderContainer: (
       <CustomerDetailHeader
-        fullName="Customer 1"
+        fullName={mockedCustomerDetail.fullName}
         imageSlot={
           <CustomerImageMenuTrigger>
             <PersonDetailHeaderImage
@@ -64,7 +65,17 @@ export const Default = {
       />
     ),
     customerDetailActions: (
-      <CustomerDetailActions {...customerDetailActionsArgs} />
+      <CustomerDetailActions
+        customerId={mockedCustomerDetail.id}
+        customerFullName={mockedCustomerDetail.fullName}
+        editCustomerFormContainer={
+          <EditCustomerForm
+            {...mockedCustomerDetail}
+            customerId={mockedCustomerDetail.id}
+            customerCompanySelectItems={mockedCompanySummaries}
+          />
+        }
+      />
     ),
   },
 } satisfies Story;
@@ -73,9 +84,7 @@ export const Loading = {
   args: {
     customerDetailContainer: <CustomerDetailSkeleton />,
     customerHeaderContainer: <DetailHeaderSkeleton />,
-    customerDetailActions: (
-      <CustomerDetailActions {...customerDetailActionsArgs} />
-    ),
+    customerDetailActions: Default.args.customerDetailActions,
   },
 } satisfies Story;
 
@@ -84,7 +93,7 @@ export const WithoutSomeData = {
     customerDetailContainer: <CustomerDetail {...mockedCustomerDetail} />,
     customerHeaderContainer: (
       <CustomerDetailHeader
-        fullName="Customer 1"
+        fullName={mockedCustomerDetail.fullName}
         imageSlot={
           <CustomerImageMenuTrigger>
             <PersonDetailHeaderImage />
@@ -92,9 +101,7 @@ export const WithoutSomeData = {
         }
       />
     ),
-    customerDetailActions: (
-      <CustomerDetailActions {...customerDetailActionsArgs} />
-    ),
+    customerDetailActions: Default.args.customerDetailActions,
   },
 } satisfies Story;
 

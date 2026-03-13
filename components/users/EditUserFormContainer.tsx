@@ -3,7 +3,6 @@
 import useSWR from "swr";
 import { usePathname } from "@/i18n/navigation";
 import { notFound, useParams } from "next/navigation";
-import { CalendarDate } from "@internationalized/date";
 import { UserFormDataDTO } from "@/lib/data/user/user.dto";
 import { EditUserForm, EditUserFormSkeleton } from "./EditUserForm";
 import { PositionSummaryDTO } from "@/lib/data/position/position.dto";
@@ -52,26 +51,16 @@ export function EditUserFormContainer({ userId }: EditUserFormContainerProps) {
     return <EditUserFormSkeleton />;
   }
 
-  let dateValue;
-  if (user.birthdate) {
-    const d = new Date(user.birthdate);
-    dateValue = new CalendarDate(
-      d.getFullYear(),
-      d.getMonth() + 1,
-      d.getDate(),
-    );
-  }
-
   return (
     <EditUserForm
       userId={userId}
-      userFullNameDefaultValue={user.fullName}
-      userBioDefaultValue={user.bio}
-      userBirthdateDefaultValue={dateValue}
-      userPhoneNumberDefaultValue={user.phoneNumber}
-      userPublicLinkDefaultValue={user.publicLink}
-      userAddressDefaultValue={user.address}
-      userPositionSelectDefaultValue={user.positionId?.toString()}
+      fullName={user.fullName}
+      bio={user.bio}
+      birthdate={user.birthdate}
+      phoneNumber={user.phoneNumber}
+      publicLink={user.publicLink}
+      address={user.address}
+      positionId={user.positionId}
       userPositionSelectItems={positions}
     />
   );

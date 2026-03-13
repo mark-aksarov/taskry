@@ -20,7 +20,6 @@ import { UserTasksContainer } from "@/components/users/UserTasksContainer";
 import { updateTaskStatuses } from "@/lib/actions/task/updateTaskStatuses";
 import { DeleteTasksProvider } from "@/components/tasks/DeleteTasksContext";
 import { UserTasksPageLayout } from "@/components/users/UserTasksPageLayout";
-import { UserHeaderContainer } from "@/components/users/UserHeaderContainer";
 import { NewTaskFormContainer } from "@/components/tasks/NewTaskFormContainer";
 import { UserNavigationMobile } from "@/components/users/UserNavigationMobile";
 import { SelectedTasksProvider } from "@/components/tasks/SelectedTasksContext";
@@ -28,6 +27,7 @@ import { UserNavigationDesktop } from "@/components/users/UserNavigationDesktop"
 import { EditUserFormContainer } from "@/components/users/EditUserFormContainer";
 import { ChangePasswordProvider } from "@/components/users/ChangePasswordContext";
 import { PageTransitionProvider } from "@/components/common/PageTransitionContext";
+import { UserDetailHeaderContainer } from "@/components/users/UserDetailHeaderContainer";
 import { UpdateTaskStatusesProvider } from "@/components/tasks/UpdateTaskStatusesContext";
 
 const searchParamsSchema = z.object({
@@ -116,8 +116,8 @@ export default async function AppProfileTasksPage({
                       editUserFormContainer={
                         <EditUserFormContainer userId={userId} />
                       }
-                      userHeaderContainer={
-                        <UserHeaderContainer userId={userId} />
+                      userDetailHeaderContainer={
+                        <UserDetailHeaderContainer userId={userId} />
                       }
                       newTaskFormContainer={
                         <NewTaskFormContainer forcedAssigneeId={userId} />

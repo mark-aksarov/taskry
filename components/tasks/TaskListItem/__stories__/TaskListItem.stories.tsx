@@ -1,18 +1,21 @@
 import { TaskDetail } from "../../TaskDetail";
-import { mockedTaskList } from "@/mocks/tasks";
 import { TaskListItem } from "../TaskListItem";
-import { mockedUserDetail } from "@/mocks/users";
 import { EditTaskForm } from "../../EditTaskForm";
-import { mockedProjectDetail } from "@/mocks/projects";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { UserDetail } from "@/components/users/UserDetail";
-import { taskDetailArgs } from "../../TaskDetail/__stories__";
-import { editTaskFormArgs } from "../../EditTaskForm/__stories__";
+import { SubtaskList } from "@/components/subtasks/SubtaskList";
+import { CommentList } from "@/components/comments/CommentList";
+import { mockedTaskDetail, mockedTaskList } from "@/mocks/tasks";
 import { withTaskItemProviders } from "../../TaskItem/__stories__";
 import { ProjectDetail } from "@/components/projects/ProjectDetail";
+import { mockedTaskCategorySummaries } from "@/mocks/taskCategories";
+import { mockedUserDetail, mockedUserSummaries } from "@/mocks/users";
+import { UserDetailHeader } from "@/components/users/UserDetailHeader";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { getCommentList } from "@/components/comments/CommentList/__stories__";
 import { withDeleteTasksProvider } from "../../DeleteTasksContext/__stories__";
+import { mockedProjectDetail, mockedProjectSummaries } from "@/mocks/projects";
+import { SubtaskListStory } from "@/components/subtasks/SubtaskList/__stories__";
+import { CommentListStory } from "@/components/comments/CommentList/__stories__";
 import { withSelectedTasksProvider } from "../../SelectedTasksContext/__stories__";
 import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
@@ -42,11 +45,33 @@ const task = mockedTaskList[0];
 export const Default = {
   args: {
     ...task,
-    taskCommentsContainer: getCommentList(),
-    editTaskFormContainer: <EditTaskForm {...editTaskFormArgs} />,
+    taskCommentsContainer: <CommentList {...CommentListStory.args} />,
+    editTaskFormContainer: (
+      <EditTaskForm
+        {...mockedTaskDetail}
+        taskId={mockedTaskDetail.id}
+        taskCategorySelectItems={mockedTaskCategorySummaries}
+        taskProjectSelectItems={mockedProjectSummaries}
+        taskAssigneeSelectItems={mockedUserSummaries}
+      />
+    ),
     userDetailContainer: <UserDetail {...mockedUserDetail} />,
+    userDetailHeaderContainer: (
+      <UserDetailHeader
+        {...mockedUserDetail}
+        userId={mockedUserDetail.id}
+        canUpdateImage
+        createPresignedUrl={() => ({ status: "success" })}
+        updateUserImageUrl={() => ({ status: "success" })}
+      />
+    ),
     projectDetailContainer: <ProjectDetail {...mockedProjectDetail} />,
-    taskDetailContainer: <TaskDetail {...taskDetailArgs} />,
+    taskDetailContainer: (
+      <TaskDetail
+        {...mockedTaskDetail}
+        subtasksList={<SubtaskList {...SubtaskListStory.args} />}
+      />
+    ),
     sendComment: () => ({ status: "success" }),
     updateComment: () => ({ status: "success" }),
   },
