@@ -46,6 +46,7 @@ export function PersonImageMenuTrigger({
     <ResponsiveMenuTrigger
       onAction={handleAction}
       overlayClassName="md:min-w-[150px]"
+      placement="bottom"
       renderDialogHeader={() => <DialogHeader>{t("heading")}</DialogHeader>}
       renderButton={() => (
         <Button className={styles} {...props}>
