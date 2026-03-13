@@ -5,6 +5,11 @@
       "authError": "A server error occurred. Details: {message}"
     }
   },
+  "createPresignedUrl": {
+    "error": {
+      "internalServerError": "A server error occurred. Failed to create presigned URL."
+    }
+  },
   "forgetPassword": {
     "error": {
       "internalServerError": "A server error occurred. Failed to reset password."
@@ -135,6 +140,12 @@
       "success": "Customer updated successfully",
       "error": {
         "internalServerError": "A server error occurred. Failed to update customer."
+      }
+    },
+    "updateImageUrl": {
+      "success": "Customer image updated successfully",
+      "error": {
+        "internalServerError": "A server error occurred. Failed to update customer image."
       }
     },
     "delete": {

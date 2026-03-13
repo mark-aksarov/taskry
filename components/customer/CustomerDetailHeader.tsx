@@ -1,16 +1,17 @@
+"use client";
+
 import { useTranslations } from "next-intl";
 import { DetailHeader } from "@/components/common/DetailHeader";
-import { PersonDetailHeaderImage } from "../common/PersonDetailHeaderImage";
 
 interface CustomerDetailHeaderProps {
   fullName: string;
-  imageUrl?: string;
+  imageSlot: React.ReactNode;
   companyName?: string;
 }
 
 export function CustomerDetailHeader({
   fullName,
-  imageUrl,
+  imageSlot,
   companyName,
 }: CustomerDetailHeaderProps) {
   const t = useTranslations("customers.CustomerDetail");
@@ -18,13 +19,7 @@ export function CustomerDetailHeader({
   return (
     <DetailHeader
       title={fullName}
-      image={
-        <PersonDetailHeaderImage
-          alt={fullName}
-          imageUrl={imageUrl}
-          canEditImage
-        />
-      }
+      image={imageSlot}
       subtitle={companyName ? companyName : t("noCompany")}
     />
   );

@@ -9,12 +9,12 @@ import { useTranslations } from "next-intl";
 import { ErrorBanner } from "../ErrorBanner";
 import { PersonImageFileTrigger } from "../PersonImageFileTrigger";
 
-export function UploadProfileImageDialog({
+export function UploadPersonImageDialog({
   setImageFile,
 }: {
   setImageFile: (file: File) => void;
 }) {
-  const t = useTranslations("common.UploadProfileImageDialog");
+  const t = useTranslations("common.UploadPersonImageDialog");
   const [error, setError] = useState<string | null>(null);
 
   return (

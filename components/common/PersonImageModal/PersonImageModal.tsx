@@ -1,29 +1,33 @@
 "use client";
 
-import { useState } from "react";
 import { Modal } from "@/components/ui/Modal";
 import { useMediaQuery } from "react-responsive";
-import { ChangeProfileImageDialog } from "./ChangeProfileImageDialog";
-import { UploadProfileImageDialog } from "./UploadProfileImageDialog";
+import { UploadPersonImageDialog } from "./UploadPersonImageDialog";
 
-interface ChangePersonImageModalProps {
+interface PersonImageModalProps {
+  imageFile: File | null;
+  onImageFileChange: (file: File | null) => void;
   isOpen: boolean;
   onOpenChange: (isOpen: boolean) => void;
+  updatePersonImageDialog: React.ReactNode;
 }
 
 export function PersonImageModal({
+  imageFile,
+  onImageFileChange,
   isOpen,
   onOpenChange,
-}: ChangePersonImageModalProps) {
-  let [imageFile, setImageFile] = useState<File | null>(null);
+  updatePersonImageDialog,
+}: PersonImageModalProps) {
   const isMd = useMediaQuery({ query: "(max-width: 47.999rem)" });
 
   const handleOpenChange = (isOpen: boolean) => {
     if (!isOpen) {
       setTimeout(() => {
-        setImageFile(null);
+        onImageFileChange(null);
       }, 150);
     }
+
     onOpenChange(isOpen);
   };
 
@@ -41,12 +45,9 @@ export function PersonImageModal({
       onOpenChange={handleOpenChange}
     >
       {imageFile ? (
-        <ChangeProfileImageDialog
-          imageFile={imageFile}
-          setImageFile={setImageFile}
-        />
+        updatePersonImageDialog
       ) : (
-        <UploadProfileImageDialog setImageFile={setImageFile} />
+        <UploadPersonImageDialog setImageFile={onImageFileChange} />
       )}
     </Modal>
   );

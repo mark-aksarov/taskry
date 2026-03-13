@@ -18,7 +18,9 @@
   },
   "CustomerDetailActions": {
     "delete": "Удалить клиента",
-    "edit": "Редактировать клиента"
+    "edit": "Редактировать клиента",
+    "deleteImage": "Удалить изображение",
+    "updateImage": "Обновить изображение"
   },
   "CustomerToolbarSortingMenuTrigger": {
     "byFullName": "По полному имени",

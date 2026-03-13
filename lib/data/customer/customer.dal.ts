@@ -8,13 +8,14 @@ import {
   CustomerSummaryDTO,
   CustomerSearchDTO,
   CustomerListDTO,
+  UpdateCustomerImageUrlInputDTO,
 } from "./customer.dto";
 
 import { cache } from "react";
 import { auth } from "@/lib/auth";
 import prisma from "@/lib/prisma";
-import { CustomerFilters, CustomerSortField } from "@/lib/types";
 import { requireSession } from "../utils/requireSession";
+import { CustomerFilters, CustomerSortField } from "@/lib/types";
 import { AccessDeniedError, NotFoundError } from "../utils/error";
 import { Prisma, ProjectStatus } from "@/generated/prisma/client";
 
@@ -416,6 +417,48 @@ export const updateCustomer = async (input: UpdateCustomerInputDTO) => {
         email: input.email,
         phoneNumber: input.phoneNumber,
         publicLink: input.publicLink,
+      },
+    });
+
+    return updatedCustomer;
+  } catch (error) {
+    throw new NotFoundError("Customer not found", "customerNotFound");
+  }
+};
+
+export const updateCustomerImageUrl = async (
+  input: UpdateCustomerImageUrlInputDTO,
+) => {
+  // Authorization
+  const {
+    user: { id: userId, workspaceId },
+  } = await requireSession();
+
+  // ACL
+  const permission = await auth.api.userHasPermission({
+    body: {
+      userId: userId,
+      permission: {
+        customer: ["update"],
+      },
+    },
+  });
+
+  if (!permission.success) {
+    throw new AccessDeniedError(
+      "You do not have permission to update customers.",
+    );
+  }
+
+  // Update customer
+  try {
+    const updatedCustomer = await prisma.customer.update({
+      where: {
+        id: input.id,
+        workspaceId,
+      },
+      data: {
+        imageUrl: input.imageUrl,
       },
     });
 

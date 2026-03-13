@@ -18,7 +18,9 @@
   },
   "CustomerDetailActions": {
     "delete": "Delete customer",
-    "edit": "Edit customer"
+    "edit": "Edit customer",
+    "deleteImage": "Delete image",
+    "updateImage": "Update image"
   },
   "CustomerToolbarSortingMenuTrigger": {
     "byFullName": "By full name",

@@ -14,6 +14,15 @@ export type ActionState = {
   message?: string;
 };
 
+export type CreatePresignedUrlState = {
+  status: ActionStatus;
+  presignedPost?: {
+    url: string;
+    fields: Record<string, string>;
+  };
+  message?: string;
+};
+
 export type DeleteCommentPayload = {
   id: number;
   taskId?: number;
@@ -38,6 +47,16 @@ export type DeleteCustomerPayload = {
 export type DeleteUserPayload = {
   id: string;
   shouldRedirect: boolean;
+};
+
+export type UpdateUserImageUrlPayload = {
+  id: string;
+  imageUrl: string;
+};
+
+export type UpdateCustomerImageUrlPayload = {
+  id: number;
+  imageUrl: string;
 };
 
 export interface UpdateProjectStatusPayload {

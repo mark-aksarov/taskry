@@ -5,6 +5,11 @@
       "authError": "Произошла ошибка сервера. Подробности: {message}"
     }
   },
+  "createPresignedUrl": {
+    "error": {
+      "internalServerError": "Произошла ошибка сервера. Не удалось создать URL."
+    }
+  },
   "forgetPassword": {
     "error": {
       "internalServerError": "Произошла ошибка сервера. Не удалось сбросить пароль."
@@ -135,6 +140,12 @@
       "success": "Клиент успешно обновлён",
       "error": {
         "internalServerError": "Произошла ошибка сервера. Не удалось обновить клиента"
+      }
+    },
+    "updateImageUrl": {
+      "success": "Изображение клиента успешно обновлёно",
+      "error": {
+        "internalServerError": "Произошла ошибка сервера. Не удалось обновить изображение клиента"
       }
     },
     "delete": {

@@ -6,6 +6,7 @@ import { CustomerDetailHeader } from "./CustomerDetailHeader";
 import { CustomerDetailDTO } from "@/lib/data/customer/customer.dto";
 import { CustomerDetail, CustomerDetailSkeleton } from "./CustomerDetail";
 import { PersonDetailPresentation } from "../common/PersonDetailPresentation";
+import { PersonDetailHeaderImage } from "../common/PersonDetailHeaderImage";
 
 interface CustomerDetailContainerProps {
   customerId: number;
@@ -44,7 +45,12 @@ export function CustomerDetailContainer({
       personHeader={
         <CustomerDetailHeader
           fullName={customer.fullName}
-          imageUrl={customer.imageUrl}
+          imageSlot={
+            <PersonDetailHeaderImage
+              alt={customer.fullName}
+              imageUrl={customer.imageUrl}
+            />
+          }
           companyName={customer.company?.name}
         />
       }

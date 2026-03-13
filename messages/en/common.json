@@ -1,17 +1,25 @@
 {
-  "UploadProfileImageDialog": {
-    "heading": "Upload image",
-    "text": "Upload the profile image. Allowed file types: JPG, PNG, WEBP. Maximum file size is 200 KB. Minimum image size is 300x300 px."
+  "PersonImageMenuTrigger": {
+    "heading": "Profile image",
+    "items": {
+      "delete": "Delete",
+      "update": "Update"
+    }
   },
-  "ChangeProfileImageDialog": {
+  "UploadPersonImageDialog": {
+    "heading": "Upload image",
+    "text": "Upload the profile image. Allowed file types: JPG, PNG, WEBP. Maximum file size is 200 KB. Minimum image size is 300x300 pixels."
+  },
+  "UpdatePersonImageDialog": {
     "heading": "Change image",
-    "save": "Save"
+    "save": "Save",
+    "error": "An error occurred while uploading the image"
   },
   "PersonImageFileTrigger": {
     "label": "Upload",
     "error": {
       "fileSize": "The file is too large. Maximum size is 200 KB.",
-      "imageSize": "The image is too small. Minimum size is 300x300 px.",
+      "imageSize": "The image is too small. Minimum size is 300x300 pixels.",
       "aspectRatio": "The image should not be too wide or too tall.",
       "unknown": "Unknown error loading image"
     }

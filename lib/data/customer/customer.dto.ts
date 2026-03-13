@@ -33,6 +33,11 @@ export interface UpdateCustomerInputDTO {
   companyId: number | null;
 }
 
+export interface UpdateCustomerImageUrlInputDTO {
+  id: number;
+  imageUrl: string | null;
+}
+
 export type CustomerDetailDTO = {
   id: number;
   fullName: string;
