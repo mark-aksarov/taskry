@@ -44,8 +44,14 @@ export async function createPresignedUrl(
     const presignedPost = await createPresignedPost(s3Client, {
       Bucket: process.env.S3_BUCKET,
       Key: crypto.randomUUID(),
-      Conditions: [["content-length-range", 1, 200 * 1024]],
-      Expires: 3600,
+      Conditions: [
+        ["content-length-range", 1, 200 * 1024],
+        { "Content-Type": "image/*" },
+      ],
+      Fields: {
+        "Content-Type": "image/*",
+      },
+      Expires: 60,
     });
 
     return {
