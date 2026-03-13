@@ -6,6 +6,7 @@ import { UserListItemStory } from "../../UserListItem/__stories__";
 import { UserItemProviders } from "../../UserItem/UserItemProviders";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withViewModeProvider } from "@/components/common/ViewMode/__stories__";
+import { withUpdateUserImageProvider } from "../../UpdateUserImageContext/__stories__";
 import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 import { withPageTransitionProvider } from "@/components/common/PageTransitionContext/__stories__";
@@ -14,6 +15,7 @@ const meta = {
   title: "components/users/UserList",
   component: UserList,
   decorators: [
+    withUpdateUserImageProvider,
     withGuestModeModalProvider,
     withCurrentUserProvider,
     withViewModeProvider,

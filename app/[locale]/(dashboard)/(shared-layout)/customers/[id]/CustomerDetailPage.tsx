@@ -12,13 +12,13 @@ import { CustomerDetailCard } from "@/components/customer/CustomerDetailCard";
 
 interface CustomerDetailPageProps {
   customerDetailContainer: React.ReactNode;
-  customerHeaderContainer: React.ReactNode;
+  customerDetailHeaderContainer: React.ReactNode;
   customerDetailActions: React.ReactNode;
 }
 
 export function CustomerDetailPage({
   customerDetailContainer,
-  customerHeaderContainer,
+  customerDetailHeaderContainer,
   customerDetailActions,
 }: CustomerDetailPageProps) {
   const t = useTranslations("app.CustomerDetailPage");
@@ -26,8 +26,8 @@ export function CustomerDetailPage({
   return (
     <PageContainer>
       <CustomerDetailCard
-        customerDetail={customerDetailContainer}
-        customerHeader={customerHeaderContainer}
+        customerDetailContainer={customerDetailContainer}
+        customerDetailHeaderContainer={customerDetailHeaderContainer}
         customerDetailActions={customerDetailActions}
       />
 
@@ -37,7 +37,7 @@ export function CustomerDetailPage({
           <ToolbarMobileHeading>{t("heading")}</ToolbarMobileHeading>
         </ToolbarMobileTop>
 
-        <div className="flex flex-col">{customerHeaderContainer}</div>
+        <div className="flex flex-col">{customerDetailHeaderContainer}</div>
         <Card className="flex flex-col p-1.5">{customerDetailActions}</Card>
         <Card className="flex flex-col">{customerDetailContainer}</Card>
       </PageGrid>

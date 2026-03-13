@@ -38,6 +38,7 @@ export const CustomerGridItem = memo(
     imageUrl,
     company,
     customerDetailContainer,
+    customerDetailHeaderContainer,
     editCustomerFormContainer,
   }: Omit<CustomerItemProps, "deleteCustomer" | "updateCustomer">) => {
     const t = useTranslations("customers.CustomerGridItem");
@@ -54,6 +55,7 @@ export const CustomerGridItem = memo(
       <CustomerDetailModal
         customerId={id}
         customerDetailContainer={customerDetailContainer}
+        customerDetailHeaderContainer={customerDetailHeaderContainer}
       />
     );
 

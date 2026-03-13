@@ -27,8 +27,8 @@ import { UserNavigationDesktop } from "@/components/users/UserNavigationDesktop"
 import { EditUserFormContainer } from "@/components/users/EditUserFormContainer";
 import { ChangePasswordProvider } from "@/components/users/ChangePasswordContext";
 import { PageTransitionProvider } from "@/components/common/PageTransitionContext";
-import { UserDetailHeaderContainer } from "@/components/users/UserDetailHeaderContainer";
 import { UpdateTaskStatusesProvider } from "@/components/tasks/UpdateTaskStatusesContext";
+import { UserDetailHeaderAltContainer } from "@/components/users/UserDetailHeaderAltContainer";
 
 const searchParamsSchema = z.object({
   page: pageSearchParam,
@@ -117,7 +117,7 @@ export default async function AppProfileTasksPage({
                         <EditUserFormContainer userId={userId} />
                       }
                       userDetailHeaderContainer={
-                        <UserDetailHeaderContainer userId={userId} />
+                        <UserDetailHeaderAltContainer userId={userId} />
                       }
                       newTaskFormContainer={
                         <NewTaskFormContainer forcedAssigneeId={userId} />

@@ -58,11 +58,10 @@ export const Default = {
     userDetailContainer: <UserDetail {...mockedUserDetail} />,
     userDetailHeaderContainer: (
       <UserDetailHeader
-        {...mockedUserDetail}
-        userId={mockedUserDetail.id}
-        canUpdateImage
-        createPresignedUrl={() => ({ status: "success" })}
-        updateUserImageUrl={() => ({ status: "success" })}
+        fullName={mockedUserDetail.fullName}
+        imageUrl={mockedUserDetail.imageUrl}
+        positionName={mockedUserDetail.position.name}
+        canUpdateImage={false}
       />
     ),
     projectDetailContainer: <ProjectDetail {...mockedProjectDetail} />,

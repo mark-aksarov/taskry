@@ -13,9 +13,9 @@ import { TaskCommentsContainer } from "./TaskCommentsContainer";
 import { updateComment } from "@/lib/actions/comment/updateComment";
 import { updateTaskStatus } from "@/lib/actions/task/updateTaskStatus";
 import { UserDetailContainer } from "@/components/users/UserDetailContainer";
+import { UserDetailHeaderContainer } from "../users/UserDetailHeaderContainer";
 import { ProjectDetailContainer } from "@/components/projects/ProjectDetailContainer";
 import { EntityContainerPresentation } from "@/components/common/EntityContainerPresentation";
-import { UserDetailHeaderContainer } from "../users/UserDetailHeaderContainer";
 
 interface TasksContainerProps {
   tasks: TaskListItemDTO[];

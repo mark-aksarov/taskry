@@ -41,6 +41,7 @@ export interface ProjectItemProps {
   tasksCompleted: number;
   editProjectFormContainer: React.ReactNode;
   customerDetailContainer?: React.ReactNode;
+  customerDetailHeaderContainer?: React.ReactNode;
   projectCommentsContainer: React.ReactNode;
   projectDetailContainer: React.ReactNode;
   userDetailContainer?: React.ReactNode;

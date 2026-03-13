@@ -1,16 +1,17 @@
 "use client";
 
 import useSWR from "swr";
+import { DetailHeaderSkeleton } from "../common/DetailHeader";
+import { CustomerDetailHeader } from "./CustomerDetailHeader";
 import { CustomerDetailDTO } from "@/lib/data/customer/customer.dto";
-import { CustomerDetail, CustomerDetailSkeleton } from "./CustomerDetail";
 
-interface CustomerDetailContainerProps {
+interface CustomerDetailHeaderContainerProps {
   customerId: number;
 }
 
-export function CustomerDetailContainer({
+export function CustomerDetailHeaderContainer({
   customerId,
-}: CustomerDetailContainerProps) {
+}: CustomerDetailHeaderContainerProps) {
   const { data: customer, error } = useSWR<CustomerDetailDTO>(
     `/api/customers/${customerId}`,
     {
@@ -28,17 +29,15 @@ export function CustomerDetailContainer({
 
   // Show skeleton while loading
   if (!customer) {
-    return <CustomerDetailSkeleton />;
+    return <DetailHeaderSkeleton />;
   }
 
   return (
-    <CustomerDetail
+    <CustomerDetailHeader
+      canUpdateImage={false}
       fullName={customer.fullName}
-      bio={customer.bio}
-      email={customer.email}
-      phoneNumber={customer.phoneNumber}
-      publicLink={customer.publicLink}
-      company={customer.company}
+      imageUrl={customer.imageUrl}
+      companyName={customer.company?.name}
     />
   );
 }

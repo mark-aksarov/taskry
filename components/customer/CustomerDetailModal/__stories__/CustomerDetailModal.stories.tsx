@@ -2,15 +2,13 @@ import { useState } from "react";
 import { Button } from "@/components/ui/Button";
 import { DialogTrigger } from "react-aria-components";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { mockedCustomerDetail } from "@/mocks/customers";
 import { CustomerDetailModal } from "../CustomerDetailModal";
 import { CustomerDetailHeader } from "../../CustomerDetailHeader";
 import { CustomerDetail } from "../../CustomerDetail/CustomerDetail";
 import { DetailHeaderSkeleton } from "@/components/common/DetailHeader";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { mockedCustomerDetail as mockedCustomer } from "@/mocks/customers";
 import { CustomerDetailSkeleton } from "../../CustomerDetail/CustomerDetailSkeleton";
-import { PersonDetailPresentation } from "@/components/common/PersonDetailPresentation";
-import { PersonDetailHeaderImage } from "@/components/common/PersonDetailHeaderImage";
 
 const meta = {
   title: "components/customers/CustomerDetailModal",
@@ -39,21 +37,13 @@ type Story = StoryObj<typeof meta>;
 export const Default = {
   args: {
     customerId: 1,
-    customerDetailContainer: (
-      <PersonDetailPresentation
-        personHeader={
-          <CustomerDetailHeader
-            fullName={mockedCustomer.fullName}
-            imageSlot={
-              <PersonDetailHeaderImage
-                alt={mockedCustomer.fullName}
-                imageUrl={mockedCustomer.imageUrl}
-              />
-            }
-            companyName={mockedCustomer.company?.name}
-          />
-        }
-        userDetail={<CustomerDetail {...mockedCustomer} />}
+    customerDetailContainer: <CustomerDetail {...mockedCustomerDetail} />,
+    customerDetailHeaderContainer: (
+      <CustomerDetailHeader
+        canUpdateImage={false}
+        fullName={mockedCustomerDetail.fullName}
+        imageUrl={mockedCustomerDetail.imageUrl}
+        companyName={mockedCustomerDetail.company.name}
       />
     ),
   },
@@ -61,12 +51,8 @@ export const Default = {
 
 export const WithSkeletonContent = {
   args: {
-    customerId: 1,
-    customerDetailContainer: (
-      <PersonDetailPresentation
-        personHeader={<DetailHeaderSkeleton />}
-        userDetail={<CustomerDetailSkeleton />}
-      />
-    ),
+    customerId: mockedCustomerDetail.id,
+    customerDetailContainer: <CustomerDetailSkeleton />,
+    customerDetailHeaderContainer: <DetailHeaderSkeleton />,
   },
 } satisfies Story;

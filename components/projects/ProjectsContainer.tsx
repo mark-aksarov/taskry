@@ -13,8 +13,10 @@ import { deleteProject } from "@/lib/actions/project/deleteProject";
 import { EditProjectFormContainer } from "./EditProjectFormContainer";
 import { ProjectCommentsContainer } from "./ProjectCommentsContainer";
 import { CustomerDetailContainer } from "../customer/CustomerDetailContainer";
+import { UserDetailHeaderContainer } from "../users/UserDetailHeaderContainer";
 import { updateProjectStatus } from "@/lib/actions/project/updateProjectStatus";
 import { EntityContainerPresentation } from "../common/EntityContainerPresentation";
+import { CustomerDetailHeaderContainer } from "../customer/CustomerDetailHeaderContainer";
 
 interface ProjectsContainerProps {
   projects: ProjectListItemDTO[];
@@ -60,9 +62,21 @@ export async function ProjectsContainer({
                 <UserDetailContainer userId={project.creator.id} />
               )
             }
+            userDetailHeaderContainer={
+              project.creator && (
+                <UserDetailHeaderContainer userId={project.creator.id} />
+              )
+            }
             customerDetailContainer={
               project.customer && (
                 <CustomerDetailContainer customerId={project.customer.id} />
+              )
+            }
+            customerDetailHeaderContainer={
+              project.customer && (
+                <CustomerDetailHeaderContainer
+                  customerId={project.customer.id}
+                />
               )
             }
             sendComment={sendComment}

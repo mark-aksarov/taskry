@@ -3,6 +3,7 @@ import { CustomerGridItem } from "../CustomerGridItem";
 import type { Meta, StoryObj } from "@storybook/react";
 import { EditCustomerForm } from "../../EditCustomerForm";
 import { mockedCompanySummaries } from "@/mocks/companies";
+import { CustomerDetailHeader } from "../../CustomerDetailHeader";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withCustomerItemProviders } from "../../CustomerItem/__stories__";
 import { mockedCustomerDetail as mockedCustomer } from "@/mocks/customers";
@@ -31,6 +32,14 @@ export const Default = {
   args: {
     ...mockedCustomer,
     customerDetailContainer: <CustomerDetail {...mockedCustomer} />,
+    customerDetailHeaderContainer: (
+      <CustomerDetailHeader
+        canUpdateImage={false}
+        fullName={mockedCustomer.fullName}
+        imageUrl={mockedCustomer.imageUrl}
+        companyName={mockedCustomer.company.name}
+      />
+    ),
     editCustomerFormContainer: (
       <EditCustomerForm
         {...mockedCustomer}
@@ -59,6 +68,7 @@ export const WithoutImagePhoneAndLink = {
     fullName: mockedCustomer.fullName,
     email: mockedCustomer.email,
     customerDetailContainer: Default.args.customerDetailContainer,
+    customerDetailHeaderContainer: Default.args.customerDetailHeaderContainer,
     editCustomerFormContainer: Default.args.editCustomerFormContainer,
   },
 } satisfies Story;

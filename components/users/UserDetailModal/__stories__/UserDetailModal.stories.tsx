@@ -9,8 +9,9 @@ import { UserDetailHeader } from "../../UserDetailHeader";
 import { DetailHeaderSkeleton } from "@/components/common/DetailHeader";
 import { UserDetailSkeleton } from "../../UserDetail/UserDetailSkeleton";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
+import { withUpdateUserImageProvider } from "../../UpdateUserImageContext/__stories__";
 import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
+import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 
 const meta = {
   title: "components/users/UserDetailModal",
@@ -26,6 +27,7 @@ const meta = {
         </DialogTrigger>
       );
     },
+    withUpdateUserImageProvider,
     withGuestModeModalProvider,
     withCurrentUserProvider,
     withThemedBackground,
@@ -40,13 +42,10 @@ export const Default = {
     userId: "user-1",
     userDetailHeaderContainer: (
       <UserDetailHeader
-        canUpdateImage
-        userId={mockedUserDetail.id}
+        canUpdateImage={false}
         fullName={mockedUserDetail.fullName}
         imageUrl={mockedUserDetail.imageUrl}
         positionName={mockedUserDetail.position.name}
-        createPresignedUrl={() => ({ status: "success" })}
-        updateUserImageUrl={() => ({ status: "success" })}
       />
     ),
     userDetailContainer: <UserDetail {...mockedUserDetail} />,

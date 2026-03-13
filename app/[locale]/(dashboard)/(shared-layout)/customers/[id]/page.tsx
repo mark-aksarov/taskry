@@ -8,9 +8,9 @@ import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { CustomerDetailActions } from "@/components/customer/CustomerDetailActions";
 import { UpdateCustomerProvider } from "@/components/customer/UpdateCustomerContext";
 import { DeleteCustomerProvider } from "@/components/customer/DeleteCustomerContext";
-import { CustomerHeaderContainer } from "@/components/customer/CustomerHeaderContainer";
 import { EditCustomerFormContainer } from "@/components/customer/EditCustomerFormContainer";
 import { CustomerDetailAltContainer } from "@/components/customer/CustomerDetailAltContainer";
+import { CustomerDetailHeaderAltContainer } from "@/components/customer/CustomerDetailHeaderAltContainer";
 
 export default async function AppCustomerDetailPage({
   params,
@@ -38,7 +38,9 @@ export default async function AppCustomerDetailPage({
   return (
     <CustomerDetailPage
       customerDetailContainer={<CustomerDetailAltContainer customerId={id} />}
-      customerHeaderContainer={<CustomerHeaderContainer customerId={id} />}
+      customerDetailHeaderContainer={
+        <CustomerDetailHeaderAltContainer customerId={id} />
+      }
       customerDetailActions={
         <UpdateCustomerProvider updateCustomer={updateCustomer}>
           <DeleteCustomerProvider deleteCustomer={deleteCustomer}>

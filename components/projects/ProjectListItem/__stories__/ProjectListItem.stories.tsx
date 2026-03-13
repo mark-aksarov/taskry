@@ -1,16 +1,19 @@
+import { mockedUserDetail } from "@/mocks/users";
 import { ProjectDetail } from "../../ProjectDetail";
 import { ProjectListItem } from "../ProjectListItem";
 import { mockedProjectList } from "@/mocks/projects";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { mockedCustomerDetail } from "@/mocks/customers";
 import { UserDetail } from "@/components/users/UserDetail";
 import { mockedPositionSummaries } from "@/mocks/positions";
-import { mockedUserDetail as mockedUser } from "@/mocks/users";
 import { EditUserForm } from "@/components/users/EditUserForm";
 import { CommentList } from "@/components/comments/CommentList";
+import { CustomerDetail } from "@/components/customer/CustomerDetail";
 import { UserDetailHeader } from "@/components/users/UserDetailHeader";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withProjectItemProviders } from "../../ProjectItem/__stories__";
 import { CommentListStory } from "@/components/comments/CommentList/__stories__";
+import { CustomerDetailHeader } from "@/components/customer/CustomerDetailHeader";
 import { withDeleteProjectsProvider } from "../../DeleteProjectsContext/__stories__";
 import { withSelectedProjectsProvider } from "../../SelectedProjectsContext/__stories__";
 import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
@@ -42,22 +45,28 @@ export const Default = {
     projectCommentsContainer: <CommentList {...CommentListStory.args} />,
     editProjectFormContainer: (
       <EditUserForm
-        {...mockedUser}
-        userId={mockedUser.id}
+        {...mockedUserDetail}
+        userId={mockedUserDetail.id}
         userPositionSelectItems={mockedPositionSummaries}
       />
     ),
     projectDetailContainer: <ProjectDetail {...mockedProject} />,
-    userDetailContainer: <UserDetail {...mockedUser} />,
+    userDetailContainer: <UserDetail {...mockedUserDetail} />,
     userDetailHeaderContainer: (
       <UserDetailHeader
-        userId={mockedUser.id}
-        fullName={mockedUser.fullName}
-        positionName={mockedUser.position.name}
-        imageUrl={mockedUser.imageUrl}
-        canUpdateImage={true}
-        createPresignedUrl={() => ({ status: "success" })}
-        updateUserImageUrl={() => ({ status: "success" })}
+        fullName={mockedUserDetail.fullName}
+        positionName={mockedUserDetail.position.name}
+        imageUrl={mockedUserDetail.imageUrl}
+        canUpdateImage={false}
+      />
+    ),
+    customerDetailContainer: <CustomerDetail {...mockedCustomerDetail} />,
+    customerDetailHeaderContainer: (
+      <CustomerDetailHeader
+        canUpdateImage={false}
+        companyName={mockedCustomerDetail.company.name}
+        fullName={mockedCustomerDetail.fullName}
+        imageUrl={mockedCustomerDetail.imageUrl}
       />
     ),
     sendComment: () => ({ status: "success" }),

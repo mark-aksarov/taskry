@@ -8,6 +8,7 @@ import { deleteCustomer } from "@/lib/actions/customer/deleteCustomer";
 import { updateCustomer } from "@/lib/actions/customer/updateCustomer";
 import { CustomerListItemDTO } from "@/lib/data/customer/customer.dto";
 import { EditCustomerFormContainer } from "./EditCustomerFormContainer";
+import { CustomerDetailHeaderContainer } from "./CustomerDetailHeaderContainer";
 import { EntityContainerPresentation } from "../common/EntityContainerPresentation";
 
 export interface CustomersContainerProps {
@@ -42,6 +43,9 @@ export async function CustomersContainer({
           }
           customerDetailContainer={
             <CustomerDetailContainer customerId={customer.id} />
+          }
+          customerDetailHeaderContainer={
+            <CustomerDetailHeaderContainer customerId={customer.id} />
           }
         />
       ))}

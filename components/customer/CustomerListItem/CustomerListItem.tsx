@@ -31,6 +31,7 @@ export const CustomerListItem = memo(
     imageUrl,
     company,
     customerDetailContainer,
+    customerDetailHeaderContainer,
     editCustomerFormContainer,
   }: Omit<CustomerItemProps, "deleteCustomer" | "updateCustomer">) => {
     const t = useTranslations("customers.CustomerListItem");
@@ -47,6 +48,7 @@ export const CustomerListItem = memo(
       <CustomerDetailModal
         customerId={id}
         customerDetailContainer={customerDetailContainer}
+        customerDetailHeaderContainer={customerDetailHeaderContainer}
       />
     );
 

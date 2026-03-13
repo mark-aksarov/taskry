@@ -23,6 +23,7 @@ export interface CustomerItemProps {
     name: string;
   };
   customerDetailContainer: React.ReactNode;
+  customerDetailHeaderContainer: React.ReactNode;
   editCustomerFormContainer: React.ReactNode;
   updateCustomer: ActionFn<ActionState, FormData>;
   deleteCustomer: ActionFn<ActionState, DeleteCustomerPayload>;

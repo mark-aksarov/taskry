@@ -15,8 +15,6 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { EditCustomerForm } from "@/components/customer/EditCustomerForm";
 import { CustomerDetailHeader } from "@/components/customer/CustomerDetailHeader";
 import { CustomerDetailActions } from "@/components/customer/CustomerDetailActions";
-import { PersonDetailHeaderImage } from "@/components/common/PersonDetailHeaderImage";
-import { CustomerImageMenuTrigger } from "@/components/customer/CustomerImageMenuTrigger";
 import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 import { withDeleteCustomerProvider } from "@/components/customer/DeleteCustomerContext/__stories__";
@@ -50,18 +48,12 @@ type Story = StoryObj<typeof meta>;
 export const Default = {
   args: {
     customerDetailContainer: <CustomerDetail {...mockedCustomerDetail} />,
-    customerHeaderContainer: (
+    customerDetailHeaderContainer: (
       <CustomerDetailHeader
+        canUpdateImage={true}
         fullName={mockedCustomerDetail.fullName}
-        imageSlot={
-          <CustomerImageMenuTrigger>
-            <PersonDetailHeaderImage
-              alt={mockedCustomerDetail.fullName}
-              imageUrl={mockedCustomerDetail.imageUrl}
-            />
-          </CustomerImageMenuTrigger>
-        }
-        companyName="Company 1"
+        imageUrl={mockedCustomerDetail.imageUrl}
+        companyName={mockedCustomerDetail.company.name}
       />
     ),
     customerDetailActions: (
@@ -83,7 +75,7 @@ export const Default = {
 export const Loading = {
   args: {
     customerDetailContainer: <CustomerDetailSkeleton />,
-    customerHeaderContainer: <DetailHeaderSkeleton />,
+    customerDetailHeaderContainer: <DetailHeaderSkeleton />,
     customerDetailActions: Default.args.customerDetailActions,
   },
 } satisfies Story;
@@ -91,14 +83,10 @@ export const Loading = {
 export const WithoutSomeData = {
   args: {
     customerDetailContainer: <CustomerDetail {...mockedCustomerDetail} />,
-    customerHeaderContainer: (
+    customerDetailHeaderContainer: (
       <CustomerDetailHeader
+        canUpdateImage={true}
         fullName={mockedCustomerDetail.fullName}
-        imageSlot={
-          <CustomerImageMenuTrigger>
-            <PersonDetailHeaderImage />
-          </CustomerImageMenuTrigger>
-        }
       />
     ),
     customerDetailActions: Default.args.customerDetailActions,

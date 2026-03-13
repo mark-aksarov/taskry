@@ -51,6 +51,7 @@ export const ProjectListItem = memo(
     userDetailContainer,
     userDetailHeaderContainer,
     customerDetailContainer,
+    customerDetailHeaderContainer,
     projectCommentsContainer,
     sendComment,
     updateComment,
@@ -166,6 +167,9 @@ export const ProjectListItem = memo(
                     <CustomerDetailModal
                       customerId={customer.id}
                       customerDetailContainer={customerDetailContainer}
+                      customerDetailHeaderContainer={
+                        customerDetailHeaderContainer
+                      }
                     />
                   }
                 >

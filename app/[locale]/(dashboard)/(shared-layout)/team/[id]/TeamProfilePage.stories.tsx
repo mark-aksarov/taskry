@@ -57,12 +57,9 @@ export const Default = {
     userDetailContainer: <UserDetail {...mockedUserDetail} />,
     userDetailHeaderContainer: (
       <UserDetailHeader
-        userId={mockedUserDetail.id}
         fullName={mockedUserDetail.fullName}
         positionName={mockedUserDetail.position.name}
         imageUrl={mockedUserDetail.imageUrl}
-        createPresignedUrl={() => ({ status: "success" })}
-        updateUserImageUrl={() => ({ status: "success" })}
         canUpdateImage={true}
       />
     ),
@@ -83,10 +80,7 @@ export const WithoutSomeData = {
     userDetailContainer: <UserDetail {...mockedUserDetail} />,
     userDetailHeaderContainer: (
       <UserDetailHeader
-        userId={mockedUserDetail.id}
         fullName={mockedUserDetail.fullName}
-        createPresignedUrl={() => ({ status: "success" })}
-        updateUserImageUrl={() => ({ status: "success" })}
         canUpdateImage={true}
       />
     ),

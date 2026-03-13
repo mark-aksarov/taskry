@@ -18,11 +18,13 @@ import { withSelectedProjectsProvider } from "../../SelectedProjectsContext/__st
 import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 import { withUpdateProjectStatusesProvider } from "../../UpdateProjectStatusesContext/__stories__";
+import { withUpdateUserImageProvider } from "@/components/users/UpdateUserImageContext/__stories__";
 
 const meta = {
   title: "components/projects/ProjectGridItem",
   component: ProjectGridItem,
   decorators: [
+    withUpdateUserImageProvider,
     withProjectItemProviders,
     withDeleteProjectsProvider,
     withUpdateProjectStatusesProvider,
@@ -54,13 +56,10 @@ export const Default = {
     userDetailContainer: <UserDetail {...mockedUser} />,
     userDetailHeaderContainer: (
       <UserDetailHeader
-        userId={mockedUser.id}
         fullName={mockedUser.fullName}
         positionName={mockedUser.position.name}
         imageUrl={mockedUser.imageUrl}
-        createPresignedUrl={() => ({ status: "success" })}
-        updateUserImageUrl={() => ({ status: "success" })}
-        canUpdateImage
+        canUpdateImage={false}
       />
     ),
     sendComment: () => ({ status: "success" }),

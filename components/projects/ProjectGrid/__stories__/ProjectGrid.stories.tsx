@@ -12,11 +12,13 @@ import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/_
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 import { withPageTransitionProvider } from "@/components/common/PageTransitionContext/__stories__";
 import { withUpdateProjectStatusesProvider } from "../../UpdateProjectStatusesContext/__stories__";
+import { withUpdateUserImageProvider } from "@/components/users/UpdateUserImageContext/__stories__";
 
 const meta = {
   title: "components/projects/ProjectGrid",
   component: ProjectGrid,
   decorators: [
+    withUpdateUserImageProvider,
     withDeleteProjectsProvider,
     withUpdateProjectStatusesProvider,
     withViewModeProvider,

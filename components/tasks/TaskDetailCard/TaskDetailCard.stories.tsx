@@ -9,7 +9,6 @@ import { TaskDetailActions } from "../TaskDetailActions";
 import { mockedProjectSummaries } from "@/mocks/projects";
 import { CommentList } from "@/components/comments/CommentList";
 import { SubtaskList } from "@/components/subtasks/SubtaskList";
-import { taskDetailAltArgs } from "../TaskDetailAlt/__stories__";
 import { mockedTaskCategorySummaries } from "@/mocks/taskCategories";
 import { NewSubtaskModal } from "@/components/subtasks/NewSubtaskModal";
 import { DetailHeaderSkeleton } from "@/components/common/DetailHeader";
@@ -60,7 +59,7 @@ export const Default = {
   args: {
     taskDetailContainer: (
       <TaskDetailAlt
-        {...taskDetailAltArgs}
+        {...mockedTaskDetail}
         subtasksList={<SubtaskList {...SubtaskListStory.args} />}
       />
     ),

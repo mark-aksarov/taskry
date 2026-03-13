@@ -8,7 +8,7 @@ import { UpdateUserProvider } from "@/components/users/UpdateUserContext";
 import { EditUserFormContainer } from "@/components/users/EditUserFormContainer";
 import { ChangePasswordProvider } from "@/components/users/ChangePasswordContext";
 import { UserDetailAltContainer } from "@/components/users/UserDetailAltContainer";
-import { UserDetailHeaderContainer } from "@/components/users/UserDetailHeaderContainer";
+import { UserDetailHeaderAltContainer } from "@/components/users/UserDetailHeaderAltContainer";
 
 export default async function AppProfilePage() {
   const session = await requireProtectedPage();
@@ -26,7 +26,7 @@ export default async function AppProfilePage() {
             editUserFormContainer={<EditUserFormContainer userId={userId} />}
             userDetailContainer={<UserDetailAltContainer userId={userId} />}
             userDetailHeaderContainer={
-              <UserDetailHeaderContainer userId={userId} />
+              <UserDetailHeaderAltContainer userId={userId} />
             }
           />
         </DeleteUserProvider>

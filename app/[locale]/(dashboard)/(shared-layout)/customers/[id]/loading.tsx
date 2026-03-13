@@ -19,8 +19,8 @@ export default function AppCustomerDetailLoading() {
   return (
     <PageContainer>
       <CustomerDetailCard
-        customerDetail={<CustomerDetailSkeleton />}
-        customerHeader={<DetailHeaderSkeleton />}
+        customerDetailContainer={<CustomerDetailSkeleton />}
+        customerDetailHeaderContainer={<DetailHeaderSkeleton />}
         customerDetailActions={<CustomerDetailActionsSkeleton />}
       />
 

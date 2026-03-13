@@ -68,13 +68,10 @@ export const Default = {
     userTasksContainer: <UserTaskList {...UserTaskListStory.args} />,
     userDetailHeaderContainer: (
       <UserDetailHeader
-        userId={mockedUserDetail.id}
         fullName={mockedUserDetail.fullName}
         positionName={mockedUserDetail.position.name}
         imageUrl={mockedUserDetail.imageUrl}
         canUpdateImage={true}
-        createPresignedUrl={() => ({ status: "success" })}
-        updateUserImageUrl={() => ({ status: "success" })}
       />
     ),
     navigationDesktop: (

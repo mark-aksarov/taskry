@@ -6,17 +6,16 @@ import {
   DetailCardHeader,
 } from "@/components/common/DetailCard";
 import { useTranslations } from "next-intl";
-import { CustomerDetailActions } from "../CustomerDetailActions";
 
 interface CustomerDetailCardProps {
-  customerHeader: React.ReactNode;
-  customerDetail: React.ReactNode;
+  customerDetailHeaderContainer: React.ReactNode;
+  customerDetailContainer: React.ReactNode;
   customerDetailActions: React.ReactNode;
 }
 
 export function CustomerDetailCard({
-  customerHeader,
-  customerDetail,
+  customerDetailHeaderContainer,
+  customerDetailContainer,
   customerDetailActions,
 }: CustomerDetailCardProps) {
   const t = useTranslations("customers.CustomerDetailCard");
@@ -27,11 +26,11 @@ export function CustomerDetailCard({
         <DetailCardHeader>
           <DetailCardTitle>{t("title")}</DetailCardTitle>
         </DetailCardHeader>
-        <div className="p-6">{customerDetail}</div>
+        <div className="p-6">{customerDetailContainer}</div>
       </DetailCardLeft>
 
       <DetailCardRight>
-        {customerHeader}
+        {customerDetailHeaderContainer}
         {customerDetailActions}
       </DetailCardRight>
     </DetailCard>
