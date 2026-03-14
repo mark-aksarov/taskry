@@ -43,15 +43,15 @@ export type ButtonProps<T extends ElementType = "button"> = ButtonOwnProps<T> &
 
 export const baseButtonStyles = tv({
   extend: focusRing,
-  base: "inline-flex cursor-pointer items-center gap-x-1.5 rounded-lg font-bold",
+  base: "inline-flex cursor-pointer items-center gap-x-1.5 rounded-lg font-bold whitespace-nowrap",
   variants: {
     variant: {
       primary:
         "pressed:bg-blue-700 dark:pressed:bg-blue-800 hover:bg-blue-500 dark:hover:bg-blue-600",
       secondary:
-        "pressed:bg-blue-300 dark:pressed:bg-blue-400 hover:bg-blue-200 dark:hover:bg-blue-300",
+        "pressed:bg-gray-300 dark:pressed:bg-gray-600 hover:bg-gray-300 dark:hover:bg-gray-700",
       ghost:
-        "pressed:bg-gray-300 dark:pressed:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700",
+        "pressed:bg-gray-300 dark:pressed:bg-gray-600 hover:bg-gray-200 dark:hover:bg-gray-700",
       outlined:
         "pressed:bg-gray-300 dark:pressed:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700",
       contrast:
@@ -88,7 +88,7 @@ export const baseButtonStyles = tv({
     {
       variant: "secondary",
       isDisabled: false,
-      class: "bg-blue-50 text-blue-600 dark:bg-blue-200 dark:text-blue-800",
+      class: "bg-gray-200 text-black dark:bg-gray-800 dark:text-white",
     },
     {
       variant: "outlined",
