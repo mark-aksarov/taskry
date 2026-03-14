@@ -43,7 +43,6 @@ describe("deleteComment", () => {
 
   afterEach(async () => {
     await prisma.comment.deleteMany();
-    await prisma.attachment.deleteMany();
   });
 
   beforeEach(async () => {

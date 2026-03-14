@@ -1,6 +1,5 @@
 import {
   TaskListDTO,
-  TaskSearchDTO,
   TaskDetailDTO,
   TaskSummaryDTO,
   TaskFormDataDTO,
@@ -67,13 +66,6 @@ export const getTaskDetail = cache(
             imageUrl: true,
           },
         },
-        attachments: {
-          select: {
-            id: true,
-            fileUrl: true,
-            fileName: true,
-          },
-        },
         _count: {
           select: {
             comments: true,
@@ -109,7 +101,6 @@ export const getTaskDetail = cache(
       project: task.project ?? undefined,
       category: task.category ?? undefined,
       subtasks: task.subtasks,
-      attachments: task.attachments,
       commentsCount: task._count.comments,
     };
   },
@@ -288,55 +279,6 @@ export const getTaskList = cache(
           total: task._count.subtasks,
           done: task.subtasks.filter((s) => s.isDone).length,
         },
-      })),
-
-      totalCount,
-    };
-  },
-);
-
-export const searchTasks = cache(
-  async ({
-    query,
-    page,
-    pageSize,
-  }: {
-    query?: string;
-    page?: number;
-    pageSize?: number;
-  }): Promise<TaskSearchDTO> => {
-    // Authorization
-    const {
-      user: { workspaceId },
-    } = await requireSession();
-
-    // Get tasks
-    const where = {
-      workspaceId,
-      title: { contains: query, mode: "insensitive" as const },
-    };
-
-    const [items, totalCount] = await Promise.all([
-      prisma.task.findMany({
-        where,
-        orderBy: { createdAt: "desc" },
-        skip: page && pageSize ? (page - 1) * pageSize : undefined,
-        take: pageSize,
-        select: {
-          id: true,
-          title: true,
-          deadline: true,
-        },
-      }),
-      prisma.task.count({ where }),
-    ]);
-
-    //Map to DTO
-    return {
-      items: items.map((t) => ({
-        id: t.id,
-        title: t.title,
-        deadline: t.deadline.toISOString(),
       })),
 
       totalCount,
@@ -611,6 +553,9 @@ export function buildTaskWhereClause(
   return {
     workspaceId,
 
+    ...(filters.query && {
+      title: { contains: filters.query, mode: "insensitive" as const },
+    }),
     ...(filters.onlyMyTasks && { assigneeId: userId }),
     ...(filters.status?.length && { status: { in: filters.status } }),
     ...(filters.category?.length && { categoryId: { in: filters.category } }),

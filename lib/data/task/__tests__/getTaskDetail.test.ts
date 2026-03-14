@@ -38,25 +38,6 @@ describe("getTaskDetail", () => {
       tasks,
     });
 
-    await prisma.attachment.createMany({
-      data: [
-        {
-          id: 1,
-          taskId: 1,
-          fileName: "Attachment 1",
-          fileUrl: "https://example.com/attachment-1.jpg",
-          workspaceId: 1,
-        },
-        {
-          id: 2,
-          taskId: 1,
-          fileName: "Attachment 2",
-          fileUrl: "https://example.com/attachment-2.jpg",
-          workspaceId: 1,
-        },
-      ],
-    });
-
     await prisma.subtask.createMany({
       data: [
         {
@@ -96,7 +77,6 @@ describe("getTaskDetail", () => {
 
   afterAll(async () => {
     await prisma.task.deleteMany();
-    await prisma.attachment.deleteMany();
     await prisma.subtask.deleteMany();
     await prisma.comment.deleteMany();
   });
@@ -136,19 +116,6 @@ describe("getTaskDetail", () => {
           id: 2,
           text: "Subtask 2",
           isDone: true,
-        },
-      ]),
-
-      attachments: expect.arrayContaining([
-        {
-          id: 1,
-          fileUrl: "https://example.com/attachment-1.jpg",
-          fileName: "Attachment 1",
-        },
-        {
-          id: 2,
-          fileUrl: "https://example.com/attachment-2.jpg",
-          fileName: "Attachment 2",
         },
       ]),
 

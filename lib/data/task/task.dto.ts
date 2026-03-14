@@ -67,11 +67,6 @@ export interface TaskDetailDTO {
     text: string;
     isDone: boolean;
   }[];
-  attachments: {
-    id: number;
-    fileUrl: string;
-    fileName: string;
-  }[];
   commentsCount: number;
 }
 
@@ -105,15 +100,4 @@ export interface TaskListItemDTO {
     done: number;
   };
   commentsCount: number;
-}
-
-export interface TaskSearchDTO {
-  items: TaskSearchItemDTO[];
-  totalCount: number;
-}
-
-export interface TaskSearchItemDTO {
-  id: number;
-  title: string;
-  deadline: string;
 }

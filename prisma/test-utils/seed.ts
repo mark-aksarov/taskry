@@ -76,6 +76,13 @@ export async function seed(payload: E2ESeedPayload) {
     });
     await syncSequence("comment");
   }
+
+  if (payload.searchKeywords) {
+    await prisma.searchKeyword.createMany({
+      data: payload.searchKeywords,
+    });
+    await syncSequence("search_keywords");
+  }
 }
 
 async function syncSequence(tableName: string) {

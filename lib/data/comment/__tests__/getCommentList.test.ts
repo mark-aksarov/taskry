@@ -38,18 +38,6 @@ describe("getCommentList", () => {
       tasks,
       comments,
     });
-
-    await prisma.attachment.createMany({
-      data: [
-        {
-          id: 1,
-          fileUrl: "http://example.com/file1.png",
-          fileName: "file1.png",
-          commentId: 3,
-          workspaceId: 1,
-        },
-      ],
-    });
   });
 
   it("should return all comments for a task as a list of valid CommentListItemDTOs", async () => {
@@ -67,8 +55,6 @@ describe("getCommentList", () => {
         fullName: "User 1",
         imageUrl: "/man.jpg",
       },
-
-      attachments: [{ id: 1, fileUrl: "http://example.com/file1.png" }],
     });
   });
 

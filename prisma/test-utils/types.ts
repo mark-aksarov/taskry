@@ -12,4 +12,5 @@ export interface E2ESeedPayload {
   accounts?: Prisma.AccountCreateManyInput[];
   positions?: Prisma.PositionCreateManyInput[];
   comments?: Prisma.CommentCreateManyInput[];
+  searchKeywords?: Prisma.SearchKeywordCreateManyInput[];
 }

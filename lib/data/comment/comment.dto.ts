@@ -10,21 +10,12 @@ export interface CommentListItemDTO {
     fullName: string;
     imageUrl?: string;
   };
-
-  attachments: {
-    id: number;
-    fileUrl: string;
-  }[];
 }
 
 export interface CreateCommentInputDTO {
   content: string;
   taskId?: number;
   projectId?: number;
-  attachments?: {
-    fileUrl: string;
-    fileName: string;
-  }[];
 }
 
 export interface UpdateCommentInputDTO {

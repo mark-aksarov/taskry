@@ -55,18 +55,6 @@ describe("getTaskList", () => {
       ],
     });
 
-    await prisma.attachment.createMany({
-      data: [
-        {
-          id: 1,
-          taskId: 1,
-          fileName: "Attachment 1",
-          fileUrl: "https://example.com/attachment-1.jpg",
-          workspaceId: 1,
-        },
-      ],
-    });
-
     await prisma.subtask.createMany({
       data: [
         {
@@ -104,7 +92,6 @@ describe("getTaskList", () => {
     });
 
     await prisma.task.deleteMany();
-    await prisma.attachment.deleteMany();
     await prisma.subtask.deleteMany();
     await prisma.comment.deleteMany();
 
@@ -339,6 +326,55 @@ describe("getTaskList", () => {
   describe("filtering", () => {
     afterEach(async () => {
       await prisma.task.deleteMany();
+    });
+
+    it("should filter tasks by query", async () => {
+      await prisma.task.createMany({
+        data: [
+          {
+            id: 1,
+            title: "Task A",
+            deadline: new Date(),
+            projectId: 1,
+            categoryId: 1,
+            workspaceId: 1,
+            status: TaskStatus.active,
+            assigneeId: "user-3",
+          },
+          {
+            id: 2,
+            title: "Task AB",
+            deadline: new Date(),
+            projectId: 1,
+            categoryId: 1,
+            workspaceId: 1,
+            status: TaskStatus.active,
+            assigneeId: "user-3",
+          },
+          {
+            id: 3,
+            title: "Task B",
+            deadline: new Date(),
+            projectId: 1,
+            categoryId: 1,
+            workspaceId: 1,
+            status: TaskStatus.active,
+            assigneeId: "user-3",
+          },
+        ],
+      });
+
+      const result = await getTaskList({
+        page: 1,
+        pageSize: 10,
+        sort: "title",
+        filters: {
+          query: "AB",
+        },
+      });
+
+      expect(result.items).toHaveLength(1);
+      expect(result.items[0].title).toBe("Task AB");
     });
 
     it("should filter tasks by status", async () => {

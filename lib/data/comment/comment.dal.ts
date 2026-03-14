@@ -62,12 +62,6 @@ export const getCommentList = cache(
             imageUrl: true,
           },
         },
-        attachments: {
-          select: {
-            id: true,
-            fileUrl: true,
-          },
-        },
       },
     });
 
@@ -85,11 +79,6 @@ export const getCommentList = cache(
           fullName: c.sender.fullName,
           imageUrl: c.sender.imageUrl ?? undefined,
         },
-
-        attachments: c.attachments.map((a) => ({
-          id: a.id,
-          fileUrl: a.fileUrl,
-        })),
       };
     });
   },
@@ -142,15 +131,6 @@ export const createComment = async (input: CreateCommentInputDTO) => {
       projectId: input.projectId,
       senderId,
       workspaceId,
-      attachments: input.attachments
-        ? {
-            create: input.attachments.map((file) => ({
-              fileUrl: file.fileUrl,
-              fileName: file.fileName,
-              workspaceId,
-            })),
-          }
-        : undefined,
     },
   });
 

@@ -247,3 +247,116 @@ export const comments = [
     createdAt: new Date("2025-03-03"),
   },
 ];
+
+export const searchKeywords = [
+  {
+    id: 1,
+    word: "Keyword 1",
+  },
+  {
+    id: 2,
+    word: "Keyword 2",
+  },
+  {
+    id: 3,
+    word: "Keyword 3",
+  },
+  {
+    id: 4,
+    word: "Keyword 4",
+  },
+  {
+    id: 5,
+    word: "Keyword 5",
+  },
+  {
+    id: 6,
+    word: "Keyword 6",
+  },
+  {
+    id: 7,
+    word: "Keyword 7",
+  },
+  {
+    id: 8,
+    word: "Keyword 8",
+  },
+  {
+    id: 9,
+    word: "Keyword 9",
+  },
+  {
+    id: 10,
+    word: "Keyword 10",
+  },
+  {
+    id: 11,
+    word: "Keyword 11",
+  },
+  {
+    id: 12,
+    word: "Keyword 12",
+  },
+  {
+    id: 13,
+    word: "Keyword 13",
+  },
+  {
+    id: 14,
+    word: "Keyword 14",
+  },
+  {
+    id: 15,
+    word: "Keyword 15",
+  },
+  {
+    id: 16,
+    word: "Keyword 16",
+    usage: 1,
+  },
+  {
+    id: 17,
+    word: "Keyword 17",
+    usage: 1,
+  },
+  {
+    id: 18,
+    word: "Keyword 18",
+    usage: 1,
+  },
+  {
+    id: 19,
+    word: "Keyword 19",
+    usage: 1,
+  },
+  {
+    id: 20,
+    word: "Keyword 20",
+    usage: 1,
+  },
+  {
+    id: 21,
+    word: "Keyword 21",
+    usage: 1,
+  },
+  {
+    id: 22,
+    word: "Keyword 22",
+    usage: 1,
+  },
+  {
+    id: 23,
+    word: "Keyword 23",
+    usage: 1,
+  },
+  {
+    id: 24,
+    word: "Keyword 24",
+    usage: 1,
+  },
+  {
+    id: 25,
+    word: "Keyword 25",
+    usage: 1,
+  },
+];

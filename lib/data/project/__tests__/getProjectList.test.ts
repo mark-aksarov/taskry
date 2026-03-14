@@ -386,6 +386,53 @@ describe("getProjectList", () => {
       await prisma.project.deleteMany();
     });
 
+    it("should filter projects by query", async () => {
+      await prisma.project.createMany({
+        data: [
+          {
+            id: 1,
+            workspaceId: 1,
+            title: "Project A",
+            deadline: new Date("2025-03-01"),
+            creatorId: "user-1",
+            categoryId: 1,
+            customerId: 1,
+            status: ProjectStatus.completed,
+          },
+          {
+            id: 2,
+            workspaceId: 1,
+            title: "Project AB",
+            deadline: new Date("2025-05-15"),
+            creatorId: "user-1",
+            categoryId: 2,
+            customerId: 1,
+            status: ProjectStatus.active,
+          },
+          {
+            id: 3,
+            workspaceId: 1,
+            title: "Project B",
+            deadline: new Date("2025-05-15"),
+            creatorId: "user-1",
+            categoryId: 2,
+            customerId: 1,
+            status: ProjectStatus.active,
+          },
+        ],
+      });
+
+      const result = await getProjectList({
+        page: 1,
+        pageSize: 10,
+        sort: "title",
+        filters: { query: "AB" },
+      });
+
+      expect(result.items).toHaveLength(1);
+      expect(result.items[0].title).toBe("Project AB");
+    });
+
     it("should filter projects which have not active tasks", async () => {
       await prisma.project.createMany({
         data: [

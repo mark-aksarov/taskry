@@ -521,6 +521,9 @@ export function buildCustomerWhereClause(
 
   return {
     workspaceId,
+    ...(filters?.query && {
+      fullName: { contains: filters.query, mode: "insensitive" as const },
+    }),
     ...(filters?.company?.length && { companyId: { in: filters.company } }),
     ...(projectFilters.length > 0 && { OR: projectFilters }),
   };

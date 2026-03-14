@@ -46,7 +46,6 @@ describe("createComment", () => {
 
   beforeEach(async () => {
     await prisma.comment.deleteMany();
-    await prisma.attachment.deleteMany();
   });
 
   it("should successfully create a comment for a task", async () => {
@@ -54,20 +53,12 @@ describe("createComment", () => {
       id: 101,
       content: "Comment for Task 1",
       taskId: 1,
-      attachments: [
-        { fileUrl: "http://example.com/task.png", fileName: "task.png" },
-      ],
     };
 
     const result = await createComment(input);
-    const attachments = await prisma.attachment.findMany();
 
     expect(result).toBeDefined();
     expect(result!.content).toBe("Comment for Task 1");
-    expect(attachments[0]).toMatchObject({
-      fileName: "task.png",
-      workspaceId: 1,
-    });
   });
 
   it("should successfully create a comment for a project", async () => {
@@ -81,20 +72,6 @@ describe("createComment", () => {
 
     expect(result).toBeDefined();
     expect(result!.content).toBe("Comment for Project 1");
-  });
-
-  it("should successfully create a comment without attachments", async () => {
-    const input = {
-      id: 100,
-      content: "Comment 1",
-      taskId: 1,
-    };
-    const result = await createComment(input);
-    const attachmentsCount = await prisma.attachment.count();
-
-    expect(result).toBeDefined();
-    expect(result.content).toBe("Comment 1");
-    expect(attachmentsCount).toBe(0);
   });
 
   it("should throw Error when both taskId and projectId are provided", async () => {

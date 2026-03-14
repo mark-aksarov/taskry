@@ -227,6 +227,18 @@ describe("getUserList", () => {
       await prisma.user.deleteMany();
     });
 
+    it("should filter users by query", async () => {
+      const result = await getUserList({
+        page: 1,
+        pageSize: 10,
+        sort: "fullName",
+        filters: { query: "A" },
+      });
+
+      expect(result.items).toHaveLength(1);
+      expect(result.items[0].fullName).toBe("User A");
+    });
+
     it("should filter users who have active tasks", async () => {
       const result = await getUserList({
         page: 1,

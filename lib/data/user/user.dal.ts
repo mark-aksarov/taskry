@@ -315,6 +315,9 @@ export function buildUserWhereClause(
   return {
     workspaceId,
 
+    ...(filters?.query && {
+      fullName: { contains: filters.query, mode: "insensitive" as const },
+    }),
     ...(filters?.position?.length && { positionId: { in: filters.position } }),
     ...(taskFilters.length > 0 && { OR: taskFilters }),
   };

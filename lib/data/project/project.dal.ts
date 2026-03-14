@@ -7,7 +7,6 @@ import {
   UpdateProjectInputDTO,
   CreateProjectInputDTO,
   ProjectListDTO,
-  ProjectSearchDTO,
 } from "./project.dto";
 
 import { cache } from "react";
@@ -57,14 +56,6 @@ export const getProjectDetail = cache(
             name: true,
           },
         },
-
-        attachments: {
-          select: {
-            id: true,
-            fileUrl: true,
-            fileName: true,
-          },
-        },
       },
     });
 
@@ -95,7 +86,6 @@ export const getProjectDetail = cache(
           }
         : undefined,
       category: project.category ?? undefined,
-      attachments: project.attachments,
     };
   },
 );
@@ -189,55 +179,6 @@ export const getProjectSummaries = cache(
       id: p.id,
       title: p.title,
     }));
-  },
-);
-
-export const searchProjects = cache(
-  async ({
-    query,
-    page,
-    pageSize,
-  }: {
-    query?: string;
-    page?: number;
-    pageSize?: number;
-  }): Promise<ProjectSearchDTO> => {
-    // Authorization
-    const {
-      user: { workspaceId },
-    } = await requireSession();
-
-    // Get projects
-    const where = {
-      workspaceId,
-      title: { contains: query, mode: "insensitive" as const },
-    };
-
-    const [items, totalCount] = await Promise.all([
-      prisma.project.findMany({
-        where,
-        orderBy: { createdAt: "desc" },
-        skip: page && pageSize ? (page - 1) * pageSize : undefined,
-        take: pageSize,
-        select: {
-          id: true,
-          title: true,
-          deadline: true,
-        },
-      }),
-      prisma.project.count({ where }),
-    ]);
-
-    //Map to DTO
-    return {
-      items: items.map((p) => ({
-        id: p.id,
-        title: p.title,
-        deadline: p.deadline.toISOString(),
-      })),
-
-      totalCount,
-    };
   },
 );
 
@@ -622,6 +563,9 @@ export function buildProjectWhereClause(
   return {
     workspaceId,
 
+    ...(filters.query && {
+      title: { contains: filters.query, mode: "insensitive" as const },
+    }),
     ...(filters.noActiveTasks && {
       status: ProjectStatus.active,
       tasks: { none: { status: TaskStatus.active } },

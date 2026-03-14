@@ -29,6 +29,18 @@ model Workspace {
   @@map("workspace")
 }
 
+// SearchKeywords
+
+model SearchKeyword {
+  id        Int      @id @default(autoincrement())
+  word      String   @unique
+  usage     Int?     @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("search_keywords")
+}
+
 // Attachments
 
 model Attachment {

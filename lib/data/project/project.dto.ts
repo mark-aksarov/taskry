@@ -58,12 +58,6 @@ export interface ProjectDetailDTO {
     id: number;
     name: string;
   };
-
-  attachments: {
-    id: number;
-    fileName: string;
-    fileUrl: string;
-  }[];
 }
 
 export interface ProjectListDTO {
@@ -104,15 +98,4 @@ export interface ProjectListItemDTO {
     total: number;
     completed: number;
   };
-}
-
-export interface ProjectSearchDTO {
-  items: ProjectSearchItemDTO[];
-  totalCount: number;
-}
-
-export interface ProjectSearchItemDTO {
-  id: number;
-  title: string;
-  deadline: string;
 }

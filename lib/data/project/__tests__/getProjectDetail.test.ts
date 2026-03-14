@@ -35,25 +35,6 @@ describe("getProjectDetail", () => {
       projectCategories,
       projects,
     });
-
-    await prisma.attachment.createMany({
-      data: [
-        {
-          id: 1,
-          projectId: 1,
-          fileName: "Attachment 1",
-          fileUrl: "https://example.com/attachment-1.jpg",
-          workspaceId: 1,
-        },
-        {
-          id: 2,
-          projectId: 1,
-          fileName: "Attachment 2",
-          fileUrl: "https://example.com/attachment-2.jpg",
-          workspaceId: 1,
-        },
-      ],
-    });
   });
 
   it("should return a valid ProjectDetailDTO", async () => {
@@ -83,19 +64,6 @@ describe("getProjectDetail", () => {
         id: 1,
         name: "Project Category 1",
       },
-
-      attachments: [
-        {
-          id: 1,
-          fileName: "Attachment 1",
-          fileUrl: "https://example.com/attachment-1.jpg",
-        },
-        {
-          id: 2,
-          fileName: "Attachment 2",
-          fileUrl: "https://example.com/attachment-2.jpg",
-        },
-      ],
     });
   });
 

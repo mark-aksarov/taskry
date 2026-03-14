@@ -243,6 +243,18 @@ describe("getCustomerList", () => {
       await prisma.project.deleteMany();
     });
 
+    it("should filter customers by query", async () => {
+      const result = await getCustomerList({
+        page: 1,
+        pageSize: 10,
+        sort: "fullName",
+        filters: { query: "A" },
+      });
+
+      expect(result.items).toHaveLength(1);
+      expect(result.items[0].fullName).toBe("Customer A");
+    });
+
     it("should filter customers which have not active projects", async () => {
       const result = await getCustomerList({
         page: 1,
