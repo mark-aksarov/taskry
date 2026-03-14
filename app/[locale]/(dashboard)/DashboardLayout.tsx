@@ -29,7 +29,7 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
           </AppSidebarBody>
         </AppSidebar>
 
-        <div className="flex flex-auto flex-col">{children}</div>
+        <div className="flex flex-auto flex-col max-md:w-full">{children}</div>
       </div>
 
       <GuestModeModal />
