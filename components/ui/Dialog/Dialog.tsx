@@ -99,11 +99,13 @@ export const DialogFooter = ({
 interface DialogCloseButtonProps {
   iconSize?: number;
   onPress?: (e: PressEvent) => void;
+  className?: string;
 }
 
 export const DialogCloseButton = ({
   iconSize = 18,
   onPress,
+  className,
 }: DialogCloseButtonProps) => {
   const state = useContext(OverlayTriggerStateContext);
 
@@ -117,7 +119,7 @@ export const DialogCloseButton = ({
       variant="ghost"
       iconLeft={<X size={iconSize} strokeWidth={1.5} absoluteStrokeWidth />}
       onPress={handlePress}
-      className="-mr-2 rounded-full hover:bg-gray-100 active:bg-gray-200 dark:hover:bg-gray-600 dark:active:bg-gray-700"
+      className={twMerge("-mr-2 rounded-full", className)}
       aria-label="Close"
     />
   );

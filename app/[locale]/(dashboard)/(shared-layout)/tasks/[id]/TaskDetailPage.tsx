@@ -11,11 +11,13 @@ import { BackButton } from "@/components/common/BackButton";
 import { EditTaskModal } from "@/components/tasks/EditTaskModal";
 import { PageContainer } from "@/components/common/PageContainer";
 import { TaskDetailCard } from "@/components/tasks/TaskDetailCard";
+import { TaskSearchModal } from "@/components/tasks/TaskSearchModal";
 import { TaskDetailActions } from "@/components/tasks/TaskDetailActions";
 
 interface TaskDetailPageProps {
   taskId: number;
   taskTitle: string;
+  searchContainer: React.ReactNode;
   taskDetailContainer: React.ReactNode;
   taskHeaderContainer: React.ReactNode;
   editTaskFormContainer: React.ReactNode;
@@ -27,6 +29,7 @@ interface TaskDetailPageProps {
 export function TaskDetailPage({
   taskId,
   taskTitle,
+  searchContainer,
   taskDetailContainer,
   taskHeaderContainer,
   editTaskFormContainer,
@@ -67,6 +70,7 @@ export function TaskDetailPage({
         </PageGrid>
       </PageContainer>
 
+      <TaskSearchModal searchContainer={searchContainer} />
       <EditTaskModal editTaskFormContainer={editTaskFormContainer} />
     </>
   );

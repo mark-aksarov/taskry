@@ -10,9 +10,11 @@ import { mockedCustomerDetail } from "@/mocks/customers";
 import { CustomerDetailPage } from "./CustomerDetailPage";
 import { mockedCompanySummaries } from "@/mocks/companies";
 import { PageDecorator } from "@/.storybook/PageDecorator";
+import { SearchList } from "@/components/search/SearchList";
 import { DetailHeaderSkeleton } from "@/components/common/DetailHeader";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { EditCustomerForm } from "@/components/customer/EditCustomerForm";
+import { SearchListStory } from "@/components/search/SearchList/__stories__";
 import { CustomerDetailHeader } from "@/components/customer/CustomerDetailHeader";
 import { CustomerDetailActions } from "@/components/customer/CustomerDetailActions";
 import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
@@ -47,6 +49,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
+    searchContainer: <SearchList {...SearchListStory.args} />,
     customerDetailContainer: <CustomerDetail {...mockedCustomerDetail} />,
     customerDetailHeaderContainer: (
       <CustomerDetailHeader
@@ -74,6 +77,7 @@ export const Default = {
 
 export const Loading = {
   args: {
+    searchContainer: <SearchList {...SearchListStory.args} />,
     customerDetailContainer: <CustomerDetailSkeleton />,
     customerDetailHeaderContainer: <DetailHeaderSkeleton />,
     customerDetailActions: Default.args.customerDetailActions,
@@ -82,6 +86,7 @@ export const Loading = {
 
 export const WithoutSomeData = {
   args: {
+    searchContainer: <SearchList {...SearchListStory.args} />,
     customerDetailContainer: <CustomerDetail {...mockedCustomerDetail} />,
     customerDetailHeaderContainer: (
       <CustomerDetailHeader

@@ -31,12 +31,14 @@ import { mockedUserSummaries } from "@/mocks/users";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { mockedProjectSummaries } from "@/mocks/projects";
 import { PageDecorator } from "@/.storybook/PageDecorator";
+import { SearchList } from "@/components/search/SearchList";
 import { NewTaskForm } from "@/components/tasks/NewTaskForm";
 import { NewTaskModal } from "@/components/tasks/NewTaskModal";
 import { mockedTaskCategorySummaries } from "@/mocks/taskCategories";
 import { AssignedTaskList } from "@/components/tasks/AssignedTaskList";
 import { NewSubtaskModal } from "@/components/subtasks/NewSubtaskModal";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { SearchListStory } from "@/components/search/SearchList/__stories__";
 import { AssignedTaskListItem } from "@/components/tasks/AssignedTaskListItem";
 import { TaskListItemStory } from "@/components/tasks/TaskListItem/__stories__";
 import { withCreateTaskProvider } from "@/components/tasks/CreateTaskContext/__stories__";
@@ -103,6 +105,7 @@ const AssignedTasksContainer = ({ totalCount }: { totalCount: number }) => (
 
 export const Default = {
   args: {
+    searchContainer: <SearchList {...SearchListStory.args} />,
     totalProjectsCardContainer: <TotalProjectsCard totalProjects={50} />,
     totalTasksCardContainer: <TotalTasksCard totalTasks={500} />,
     totalUsersCardContainer: <TotalUsersCard totalUsers={15} />,
@@ -113,6 +116,7 @@ export const Default = {
 
 export const Loading = {
   args: {
+    searchContainer: <SearchList {...SearchListStory.args} />,
     totalProjectsCardContainer: <TotalProjectsCardSkeleton />,
     totalTasksCardContainer: <TotalTasksCardSkeleton />,
     totalUsersCardContainer: <TotalUsersCardSkeleton />,

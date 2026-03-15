@@ -5,10 +5,12 @@ import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { useParams, usePathname } from "next/navigation";
 import { PageDecorator } from "@/.storybook/PageDecorator";
 import { mockedCompanySummaries } from "@/mocks/companies";
+import { SearchList } from "@/components/search/SearchList";
 import { CustomerList } from "@/components/customer/CustomerList";
 import { CustomerGrid } from "@/components/customer/CustomerGrid";
 import { NewCustomerForm } from "@/components/customer/NewCustomerForm";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { SearchListStory } from "@/components/search/SearchList/__stories__";
 import { CustomerFiltersForm } from "@/components/customer/CustomerFiltersForm";
 import { CustomerGridStory } from "@/components/customer/CustomerGrid/__stories__";
 import { CustomerListStory } from "@/components/customer/CustomerList/__stories__";
@@ -52,6 +54,7 @@ export const Default = {
     totalCount: 10,
     totalFilteredCustomers: 10,
     selectedSortField: "fullName",
+    searchContainer: <SearchList {...SearchListStory.args} />,
     newCustomerFormContainer: (
       <NewCustomerForm companySelectItems={mockedCompanySummaries} />
     ),

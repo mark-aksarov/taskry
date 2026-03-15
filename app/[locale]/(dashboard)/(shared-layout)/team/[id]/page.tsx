@@ -10,6 +10,7 @@ import { changePassword } from "@/lib/actions/user/changePassword";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { DeleteUserProvider } from "@/components/users/DeleteUserContext";
 import { UpdateUserProvider } from "@/components/users/UpdateUserContext";
+import { LinkSearchContainer } from "@/components/common/LinkSearchContainer";
 import { EditUserFormContainer } from "@/components/users/EditUserFormContainer";
 import { ChangePasswordProvider } from "@/components/users/ChangePasswordContext";
 import { UserDetailAltContainer } from "@/components/users/UserDetailAltContainer";
@@ -51,6 +52,7 @@ export default async function AppProfilePage({
             showUserActions={showUserActions}
             userId={userId}
             userFullName={userSummary.fullName}
+            searchContainer={<LinkSearchContainer pathname="/tasks" />}
             userDetailContainer={<UserDetailAltContainer userId={userId} />}
             userDetailHeaderContainer={
               <UserDetailHeaderAltContainer userId={userId} />

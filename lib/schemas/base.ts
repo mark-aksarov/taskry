@@ -1,7 +1,7 @@
 import z from "zod";
 
+export const searchQueryParam = z.string().trim().max(255).optional();
 export const booleanSearchParam = z.stringbool().optional().catch(undefined);
-
 export const pageSearchParam = z.coerce.number().int().positive().catch(1);
 
 export const pageSizeSearchParam = z.coerce

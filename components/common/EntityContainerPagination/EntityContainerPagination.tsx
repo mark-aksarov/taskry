@@ -51,8 +51,6 @@ export function EntityContainerPaginationInner({
       params.set("page", targetPage.toString());
       params.set("pageSize", pageSize.toString());
 
-      //Внутренне router.push() уже обернут в startTransition, вложенные Transition не запрещены, поэтому вызываем это для текущего перехода и отслеживаем isPending
-      //https://github.com/vercel/next.js/blob/canary/packages/next/src/client/components/app-router-instance.ts#L467
       router.push(`${pathname}?${params.toString()}`, {
         locale,
         scroll: false,

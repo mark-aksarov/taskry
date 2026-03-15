@@ -1,10 +1,13 @@
 import prisma from "@/lib/prisma";
 import { SearchKeywordDTO } from "./searchKeyword.dto";
 
-export async function getSearchKeywords(
-  query: string,
+export async function getSearchKeywords({
+  query,
   limit = 10,
-): Promise<SearchKeywordDTO[]> {
+}: {
+  query?: string;
+  limit?: number;
+} = {}): Promise<SearchKeywordDTO[]> {
   const keywords = await prisma.searchKeyword.findMany({
     where: query
       ? {

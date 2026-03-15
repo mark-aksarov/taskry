@@ -9,6 +9,7 @@ import { EditUserFormContainer } from "@/components/users/EditUserFormContainer"
 import { ChangePasswordProvider } from "@/components/users/ChangePasswordContext";
 import { UserDetailAltContainer } from "@/components/users/UserDetailAltContainer";
 import { UserDetailHeaderAltContainer } from "@/components/users/UserDetailHeaderAltContainer";
+import { LinkSearchContainer } from "@/components/common/LinkSearchContainer";
 
 export default async function AppProfilePage() {
   const session = await requireProtectedPage();
@@ -23,6 +24,7 @@ export default async function AppProfilePage() {
           <ProfilePage
             userId={userId}
             userFullName={userFullName}
+            searchContainer={<LinkSearchContainer pathname="/tasks" />}
             editUserFormContainer={<EditUserFormContainer userId={userId} />}
             userDetailContainer={<UserDetailAltContainer userId={userId} />}
             userDetailHeaderContainer={

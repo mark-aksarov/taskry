@@ -1,1 +1,0 @@
-export { SearchEmptySection } from "./SearchEmptySection";

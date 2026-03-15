@@ -7,10 +7,12 @@ import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { usePathname, useParams } from "next/navigation";
 import { PageDecorator } from "@/.storybook/PageDecorator";
 import { mockedPositionSummaries } from "@/mocks/positions";
+import { SearchList } from "@/components/search/SearchList";
 import { UserFiltersForm } from "@/components/users/UserFiltersForm";
 import { UserListStory } from "@/components/users/UserList/__stories__";
 import { UserGridStory } from "@/components/users/UserGrid/__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { SearchListStory } from "@/components/search/SearchList/__stories__";
 import { withCreateUserProvider } from "@/components/users/CreateUserContext/__stories__";
 import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
 import { withUserFiltersProvider } from "@/components/users/UserFiltersContext/__stories__";
@@ -48,6 +50,7 @@ export const Default = {
   args: {
     totalFilteredUsers: 3,
     selectedSortField: "fullName",
+    searchContainer: <SearchList {...SearchListStory.args} />,
     filtersFormContainer: (
       <UserFiltersForm positionCheckboxGroupItems={mockedPositionSummaries} />
     ),

@@ -1,13 +1,17 @@
 "use client";
 
 import { tv } from "tailwind-variants";
-import { ChevronRight } from "lucide-react";
-import { Link } from "react-aria-components";
 import { itemStyles } from "@/components/ui/styles";
-import { ListItem, ListItemInfo } from "@/components/common/List";
+import { Button, Link } from "react-aria-components";
+import { SearchListItemContent } from "./SearchListItemContent";
+
+interface SearchListItemProps {
+  value: string;
+  onPress: (value: string) => void;
+}
 
 const styles = tv({
-  base: "w-full cursor-pointer outline-none",
+  base: "flex w-full cursor-pointer items-center justify-between gap-4 py-4 pr-4 pl-6 outline-none",
 
   variants: {
     isHovered: itemStyles.variants.isHovered,
@@ -19,35 +23,32 @@ const styles = tv({
   },
 });
 
-interface SearchListItemProps {
-  titleSlot: React.ReactNode;
-  textSlot: React.ReactNode;
-  href: string;
+export function SearchListItem({ onPress, value }: SearchListItemProps) {
+  return (
+    <Button onPress={() => onPress?.(value)} className={styles}>
+      <SearchListItemContent>{value}</SearchListItemContent>
+    </Button>
+  );
 }
 
-export function SearchListItem({
-  titleSlot,
-  textSlot,
-  href,
-}: SearchListItemProps) {
+interface SearchListItemLinkProps {
+  value: string;
+  pathname: string;
+  onPress?: (value: string) => void;
+}
+
+export function SearchListItemLink({
+  value,
+  onPress,
+  pathname,
+}: SearchListItemLinkProps) {
   return (
     <Link
-      data-test="search-list-item"
-      className={(renderProps) => styles({ ...renderProps })}
-      href={href}
+      href={`${pathname}?query=${value}`}
+      onPress={() => onPress?.(value)}
+      className={styles}
     >
-      <ListItem className="flex w-full items-center gap-4 rounded-none bg-inherit! pr-3 shadow-none">
-        <ListItemInfo>
-          {titleSlot}
-          {textSlot}
-        </ListItemInfo>
-        <ChevronRight
-          size={16}
-          strokeWidth={1.5}
-          absoluteStrokeWidth
-          className="text-black dark:text-white"
-        />
-      </ListItem>
+      <SearchListItemContent>{value}</SearchListItemContent>
     </Link>
   );
 }

@@ -7,9 +7,6 @@ import { ItemBaseDetailModalTriggerProps } from "../ItemBase";
 // Truncate (overflow-hidden + text-overflow) works only on block elements.
 // See: https://developer.mozilla.org/en-US/docs/Web/CSS/text-overflow#formal_definition
 
-// Components are direct children of a flex container and become blockified flex items.
-// See: https://www.w3.org/TR/css-flexbox-1/#flex-items
-
 export const titleStyles =
   "truncate max-w-full text-sm font-bold text-black dark:text-white";
 

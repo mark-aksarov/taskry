@@ -4,6 +4,7 @@ import {
   booleanSearchParam,
   searchParamToArray,
   pageSizeSearchParam,
+  searchQueryParam,
 } from "@/lib/schemas/base";
 
 import {
@@ -23,7 +24,6 @@ import { deleteProjects } from "@/lib/actions/project/deleteProjects";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { ProjectsContainer } from "@/components/projects/ProjectsContainer";
 import { CreateProjectProvider } from "@/components/projects/CreateProjectContext";
-import { PageTransitionProvider } from "@/components/common/PageTransitionContext";
 import { updateProjectStatuses } from "@/lib/actions/project/updateProjectStatuses";
 import { DeleteProjectsProvider } from "@/components/projects/DeleteProjectsContext";
 import { NewProjectFormContainer } from "@/components/projects/NewProjectFormContainer";
@@ -32,8 +32,10 @@ import { createProjectCategory } from "@/lib/actions/projectCategory/createProje
 import { ProjectFiltersFormContainer } from "@/components/projects/ProjectFiltersFormContainer";
 import { UpdateProjectStatusesProvider } from "@/components/projects/UpdateProjectStatusesContext";
 import { CreateProjectCategoryProvider } from "@/components/projectCategory/CreateProjectCategoryContext";
+import { ProjectRouterSearchContainer } from "@/components/projects/ProjectRouterSearchContainer";
 
 const searchParamsSchema = z.object({
+  query: searchQueryParam,
   page: pageSearchParam,
   pageSize: pageSizeSearchParam,
   deadlineFrom: dateSearchParam,
@@ -90,33 +92,32 @@ export default async function AppProjectsPage({
       <SelectedProjectsProvider
         pageItems={projects.map((p) => ({ id: p.id, status: p.status }))}
       >
-        <PageTransitionProvider>
-          <DeleteProjectsProvider deleteProjects={deleteProjects}>
-            <CreateProjectCategoryProvider
-              createProjectCategory={createProjectCategory}
-            >
-              <CreateProjectProvider createProject={createProject}>
-                <ProjectsPage
-                  totalCount={totalCount}
-                  newProjectFormContainer={<NewProjectFormContainer />}
-                  totalFilteredProjects={totalFilteredProjects}
-                  selectedSortField={sort}
-                  projectsContainer={
-                    <ProjectsContainer
-                      projects={projects}
-                      totalCount={totalFilteredProjects}
-                      page={page}
-                      pageSize={pageSize}
-                    />
-                  }
-                  projectFiltersFormContainer={
-                    <ProjectFiltersFormContainer filters={filters} />
-                  }
-                />
-              </CreateProjectProvider>
-            </CreateProjectCategoryProvider>
-          </DeleteProjectsProvider>
-        </PageTransitionProvider>
+        <DeleteProjectsProvider deleteProjects={deleteProjects}>
+          <CreateProjectCategoryProvider
+            createProjectCategory={createProjectCategory}
+          >
+            <CreateProjectProvider createProject={createProject}>
+              <ProjectsPage
+                totalCount={totalCount}
+                searchContainer={<ProjectRouterSearchContainer />}
+                newProjectFormContainer={<NewProjectFormContainer />}
+                totalFilteredProjects={totalFilteredProjects}
+                selectedSortField={sort}
+                projectsContainer={
+                  <ProjectsContainer
+                    projects={projects}
+                    totalCount={totalFilteredProjects}
+                    page={page}
+                    pageSize={pageSize}
+                  />
+                }
+                projectFiltersFormContainer={
+                  <ProjectFiltersFormContainer filters={filters} />
+                }
+              />
+            </CreateProjectProvider>
+          </CreateProjectCategoryProvider>
+        </DeleteProjectsProvider>
       </SelectedProjectsProvider>
     </UpdateProjectStatusesProvider>
   );

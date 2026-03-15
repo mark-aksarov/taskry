@@ -15,14 +15,17 @@ import { NewPositionModal } from "@/components/position/NewPositionModal";
 import { PositionToolbarActionsMenuTrigger } from "@/components/position/PositionToolbarActionsMenuTrigger";
 import { PositionsEmptySectionCreateButton } from "@/components/position/PositionsEmptySectionCreateButton";
 import { PositionToolbarCreateNewModalTrigger } from "@/components/position/PositionToolbarCreateNewModalTrigger";
+import { TaskSearchModal } from "@/components/tasks/TaskSearchModal";
 
 interface PositionsPageProps {
   totalCount: number;
+  searchContainer: React.ReactNode;
   positionsContainer: React.ReactNode;
 }
 
 export function PositionsPage({
   totalCount,
+  searchContainer,
   positionsContainer,
 }: PositionsPageProps) {
   const t = useTranslations("app.PositionsPage");
@@ -77,6 +80,7 @@ export function PositionsPage({
         </PageGrid>
       </PageContainer>
 
+      <TaskSearchModal searchContainer={searchContainer} />
       <NewPositionModal />
     </>
   );

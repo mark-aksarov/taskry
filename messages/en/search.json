@@ -8,18 +8,17 @@
     "projects": "Projects",
     "customers": "Customers"
   },
-  "SearchModalTriggerDesktop": {
-    "label": "Search"
-  },
-  "SearchModalTriggerMobile": {
-    "ariaLabel": "Search"
+  "SearchModalTrigger": {
+    "placeholder": "Search",
+    "clearButtonLabel": "Clear search"
   },
   "SearchEmptySection": {
     "heading": "No results found",
     "description": "We couldn't find what you’re looking for. Try a different keyword or check for typos."
   },
   "SearchModal": {
-    "dialogHeading": "Search result"
+    "dialogHeading": "Search",
+    "closeButtonLabel": "close"
   },
   "SearchField": {
     "ariaLabel": "Search",

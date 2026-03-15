@@ -1,35 +1,24 @@
-import {
-  TasksSearchPresentationStory,
-  ProjectsSearchPresentationStory,
-} from "../../SearchPresentation/__stories__";
-
-import { useState } from "react";
+import { useEffect } from "react";
+import { SearchBar } from "../../SearchBar";
 import { SearchModal } from "../SearchModal";
-import { fn } from "storybook/internal/test";
-import { SearchField } from "../../SearchField";
 import { Button } from "@/components/ui/Button";
-import { DialogTrigger } from "react-aria-components";
-import { SearchListSkeleton } from "../../SearchList";
+import { useSearchModal } from "../SearchModalContext";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { SearchPresentation } from "../../SearchPresentation";
-import { SearchPaginationSkeleton } from "../../SearchPagination";
-import { SearchEmptyPresentation } from "../../SearchEmptyPresentation";
+import { SearchModalDialog } from "../SearchModalDialog";
+import { SearchListStory } from "../../SearchList/__stories__";
+import { SearchModalDialogBody } from "../SearchModalDialogBody";
+import { SearchList, SearchListSkeleton } from "../../SearchList";
+import { withSearchBarProvider } from "../../SearchBar/__stories__";
+import { withSearchModalProvider } from "./withSearchModalProvider";
+import { SearchModalDialogHeader } from "../SearchModalDialogHeader";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {
   title: "components/search/SearchModal",
   component: SearchModal,
   decorators: [
-    (Story) => {
-      const [isOpen, setIsOpen] = useState(true);
-
-      return (
-        <DialogTrigger isOpen={isOpen} onOpenChange={setIsOpen}>
-          <Button label="Search" />
-          <Story />
-        </DialogTrigger>
-      );
-    },
+    withSearchModalProvider,
+    withSearchBarProvider,
     withThemedBackground,
   ],
 } satisfies Meta<typeof SearchModal>;
@@ -37,47 +26,39 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
+const Template: Story = {
+  render: ({ children }) => {
+    const { onOpenChange } = useSearchModal();
+
+    useEffect(() => onOpenChange(true), [onOpenChange]);
+
+    return (
+      <>
+        <Button label="Search modal" onClick={() => onOpenChange(true)} />
+        <SearchModal>
+          <SearchModalDialog>
+            <SearchModalDialogHeader>Search modal</SearchModalDialogHeader>
+            <SearchModalDialogBody>
+              <SearchBar />
+              {children}
+            </SearchModalDialogBody>
+          </SearchModalDialog>
+        </SearchModal>
+      </>
+    );
+  },
+  args: {
+    children: <SearchList {...SearchListStory.args} />,
+  },
+};
+
 export const Default = {
-  args: {
-    tasksSearchContainer: (
-      <SearchPresentation {...TasksSearchPresentationStory.args} />
-    ),
-    projectsSearchContainer: (
-      <SearchPresentation {...ProjectsSearchPresentationStory.args} />
-    ),
-  },
+  ...Template,
 } satisfies Story;
 
-export const WithEmptySection = {
+export const Skeleton = {
+  ...Template,
   args: {
-    tasksSearchContainer: (
-      <SearchEmptyPresentation
-        searchField={<SearchField value="" onChange={fn()} />}
-      />
-    ),
-    projectsSearchContainer: (
-      <SearchEmptyPresentation
-        searchField={<SearchField value="" onChange={fn()} />}
-      />
-    ),
-  },
-} satisfies Story;
-
-export const WithSkeletonContent = {
-  args: {
-    tasksSearchContainer: (
-      <SearchPresentation
-        {...TasksSearchPresentationStory.args}
-        searchResult={<SearchListSkeleton />}
-        searchPagination={<SearchPaginationSkeleton />}
-      />
-    ),
-    projectsSearchContainer: (
-      <SearchPresentation
-        {...ProjectsSearchPresentationStory.args}
-        searchResult={<SearchListSkeleton />}
-        searchPagination={<SearchPaginationSkeleton />}
-      />
-    ),
+    children: <SearchListSkeleton />,
   },
 } satisfies Story;

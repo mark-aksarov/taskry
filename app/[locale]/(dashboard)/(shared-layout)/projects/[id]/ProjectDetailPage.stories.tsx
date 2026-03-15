@@ -10,11 +10,13 @@ import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { useParams, usePathname } from "next/navigation";
 import { PageDecorator } from "@/.storybook/PageDecorator";
 import { mockedCustomerSummaries } from "@/mocks/customers";
+import { SearchList } from "@/components/search/SearchList";
 import { CommentList } from "@/components/comments/CommentList";
 import { EditProjectForm } from "@/components/projects/EditProjectForm";
 import { DetailHeaderSkeleton } from "@/components/common/DetailHeader";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { mockedProjectCategorySummaries } from "@/mocks/projectCategories";
+import { SearchListStory } from "@/components/search/SearchList/__stories__";
 import { ProjectDetailHeader } from "@/components/projects/ProjectDetailHeader";
 import { CommentListStory } from "@/components/comments/CommentList/__stories__";
 import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
@@ -51,6 +53,7 @@ export const Default = {
     projectTitle: mockedProjectDetail.title,
     sendComment: () => ({ status: "success" }),
     updateComment: () => ({ status: "success" }),
+    searchContainer: <SearchList {...SearchListStory.args} />,
     projectCommentsContainer: <CommentList {...CommentListStory.args} />,
     projectDetailContainer: <ProjectDetailAlt {...mockedProjectDetail} />,
     projectHeaderContainer: (

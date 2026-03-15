@@ -1,4 +1,7 @@
 {
+  "UserSearchModal": {
+    "heading": "Search users"
+  },
   "UserSelect": {
     "label": "Assignee",
     "noAssignee": "No assignee"

@@ -12,6 +12,7 @@ import { EditUserModal } from "@/components/users/EditUserModal";
 import { PageContainer } from "@/components/common/PageContainer";
 import { UserDetailCard } from "@/components/users/UserDetailCard";
 import { ProfileActions } from "@/components/users/ProfileActions";
+import { TaskSearchModal } from "@/components/tasks/TaskSearchModal";
 import { ChangePasswordModal } from "@/components/users/ChangePasswordModal";
 import { UserNavigationMobile } from "@/components/users/UserNavigationMobile";
 import { UserNavigationDesktop } from "@/components/users/UserNavigationDesktop";
@@ -20,6 +21,7 @@ interface TeamProfilePageProps {
   showUserActions: boolean;
   userId: string;
   userFullName: string;
+  searchContainer: React.ReactNode;
   userDetailContainer: React.ReactNode;
   userDetailHeaderContainer: React.ReactNode;
   editUserFormContainer: React.ReactNode;
@@ -29,6 +31,7 @@ export function TeamProfilePage({
   showUserActions,
   userId,
   userFullName,
+  searchContainer,
   userDetailContainer,
   userDetailHeaderContainer,
   editUserFormContainer,
@@ -72,6 +75,7 @@ export function TeamProfilePage({
         </PageGrid>
       </PageContainer>
 
+      <TaskSearchModal searchContainer={searchContainer} />
       <ChangePasswordModal userId={userId} />
       <EditUserModal editUserFormContainer={editUserFormContainer} />
     </>

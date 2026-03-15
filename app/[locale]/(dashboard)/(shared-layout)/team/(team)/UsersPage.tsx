@@ -11,6 +11,7 @@ import { PageGrid } from "@/components/common/PageGrid";
 import { NewUserModal } from "@/components/users/NewUserModal";
 import { ViewModeProvider } from "@/components/common/ViewMode";
 import { PageContainer } from "@/components/common/PageContainer";
+import { UserSearchModal } from "@/components/users/UserSearchModal";
 import { ViewModeToggleButtonGroup } from "@/components/common/ViewMode";
 import { NewPositionModal } from "@/components/position/NewPositionModal";
 import { UsersFilteredEmptySection } from "@/components/users/UsersFilteredEmptySection";
@@ -22,6 +23,7 @@ import { UserToolbarFiltersModalTrigger } from "@/components/users/UserToolbarFi
 interface UsersPageProps {
   totalFilteredUsers: number;
   selectedSortField: UserSortField;
+  searchContainer: React.ReactNode;
   usersContainer: React.ReactNode;
   filtersFormContainer: React.ReactNode;
 }
@@ -29,6 +31,7 @@ interface UsersPageProps {
 export function UsersPage({
   totalFilteredUsers,
   selectedSortField,
+  searchContainer,
   usersContainer,
   filtersFormContainer,
 }: UsersPageProps) {
@@ -78,6 +81,7 @@ export function UsersPage({
         </PageGrid>
       </PageContainer>
 
+      <UserSearchModal searchContainer={searchContainer} />
       <NewUserModal />
       <NewPositionModal />
     </>

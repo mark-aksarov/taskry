@@ -15,14 +15,17 @@ import { NewTaskCategoryModal } from "@/components/taskCategory/NewTaskCategoryM
 import { TaskCategoryToolbarActionsMenuTrigger } from "@/components/taskCategory/TaskCategoryToolbarActionsMenuTrigger";
 import { TaskCategoriesEmptySectionCreateButton } from "@/components/taskCategory/TaskCategoriesEmptySectionCreateButton";
 import { TaskCategoryToolbarCreateNewModalTrigger } from "@/components/taskCategory/TaskCategoryToolbarCreateNewModalTrigger";
+import { TaskSearchModal } from "@/components/tasks/TaskSearchModal";
 
 interface TaskCategoriesPageProps {
   totalCount: number;
+  searchContainer: React.ReactNode;
   taskCategoriesContainer: React.ReactNode;
 }
 
 export function TaskCategoriesPage({
   totalCount,
+  searchContainer,
   taskCategoriesContainer,
 }: TaskCategoriesPageProps) {
   const t = useTranslations("app.TaskCategoriesPage");
@@ -77,6 +80,7 @@ export function TaskCategoriesPage({
         </PageGrid>
       </PageContainer>
 
+      <TaskSearchModal searchContainer={searchContainer} />
       <NewTaskCategoryModal />
     </>
   );

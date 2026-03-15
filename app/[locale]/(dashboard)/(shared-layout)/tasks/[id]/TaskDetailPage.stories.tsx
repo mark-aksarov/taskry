@@ -11,6 +11,7 @@ import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { useParams, usePathname } from "next/navigation";
 import { mockedProjectSummaries } from "@/mocks/projects";
 import { PageDecorator } from "@/.storybook/PageDecorator";
+import { SearchList } from "@/components/search/SearchList";
 import { EditTaskForm } from "@/components/tasks/EditTaskForm";
 import { CommentList } from "@/components/comments/CommentList";
 import { SubtaskList } from "@/components/subtasks/SubtaskList";
@@ -19,6 +20,7 @@ import { TaskDetailHeader } from "@/components/tasks/TaskDetailHeader";
 import { DetailHeaderSkeleton } from "@/components/common/DetailHeader";
 import { NewSubtaskModal } from "@/components/subtasks/NewSubtaskModal";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { SearchListStory } from "@/components/search/SearchList/__stories__";
 import { SubtaskListStory } from "@/components/subtasks/SubtaskList/__stories__";
 import { CommentListStory } from "@/components/comments/CommentList/__stories__";
 import { withDeleteTaskProvider } from "@/components/tasks/DeleteTaskContext/__stories__";
@@ -63,6 +65,7 @@ export const Default = {
     taskTitle: mockedTaskDetail.title,
     updateComment: () => ({ status: "success" }),
     sendComment: () => ({ status: "success" }),
+    searchContainer: <SearchList {...SearchListStory.args} />,
     taskCommentsContainer: <CommentList {...CommentListStory.args} />,
     taskDetailContainer: (
       <TaskDetailAlt

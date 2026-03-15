@@ -4,8 +4,8 @@ import { getPositionSummaries } from "@/lib/data/position/position.dal";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { deletePositions } from "@/lib/actions/position/deletePositions";
 import { PositionsContainer } from "@/components/position/PositionsContainer";
+import { LinkSearchContainer } from "@/components/common/LinkSearchContainer";
 import { SelectedItemsProvider } from "@/components/common/SelectedItemsContext";
-import { PageTransitionProvider } from "@/components/common/PageTransitionContext";
 import { DeletePositionsProvider } from "@/components/position/DeletePositionsContext";
 import { CreatePositionProvider } from "@/components/position/CreatePositionContext";
 
@@ -17,16 +17,15 @@ export default async function AppPositionsPage() {
 
   return (
     <SelectedItemsProvider pageItems={positions.map((p) => ({ id: p.id }))}>
-      <PageTransitionProvider>
-        <DeletePositionsProvider deletePositions={deletePositions}>
-          <CreatePositionProvider createPosition={createPosition}>
-            <PositionsPage
-              totalCount={positions.length}
-              positionsContainer={<PositionsContainer />}
-            />
-          </CreatePositionProvider>
-        </DeletePositionsProvider>
-      </PageTransitionProvider>
+      <DeletePositionsProvider deletePositions={deletePositions}>
+        <CreatePositionProvider createPosition={createPosition}>
+          <PositionsPage
+            totalCount={positions.length}
+            searchContainer={<LinkSearchContainer pathname="/tasks" />}
+            positionsContainer={<PositionsContainer />}
+          />
+        </CreatePositionProvider>
+      </DeletePositionsProvider>
     </SelectedItemsProvider>
   );
 }

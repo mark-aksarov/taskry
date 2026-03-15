@@ -52,6 +52,10 @@ export function useFiltersFormHandleSubmit({
     const sort = searchParams.get("sort");
     if (sort) newSearchParams.set("sort", sort);
 
+    // preserve the "query" param when resetting filters
+    const query = searchParams.get("query");
+    if (query) newSearchParams.set("query", query);
+
     // reset pagination when applying new filters
     newSearchParams.delete("page");
 

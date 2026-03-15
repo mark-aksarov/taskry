@@ -15,14 +15,17 @@ import { PageEmptySection } from "@/components/common/PageEmptySection";
 import { CompanyToolbarActionsMenuTrigger } from "@/components/company/CompanyToolbarActionsMenuTrigger";
 import { CompaniesEmptySectionCreateButton } from "@/components/company/CompaniesEmptySectionCreateButton";
 import { CompanyToolbarCreateNewModalTrigger } from "@/components/company/CompanyToolbarCreateNewModalTrigger";
+import { TaskSearchModal } from "@/components/tasks/TaskSearchModal";
 
 interface CompaniesPageProps {
   totalCount: number;
+  searchContainer: React.ReactNode;
   companiesContainer: React.ReactNode;
 }
 
 export function CompaniesPage({
   totalCount,
+  searchContainer,
   companiesContainer,
 }: CompaniesPageProps) {
   const t = useTranslations("app.CompaniesPage");
@@ -77,6 +80,7 @@ export function CompaniesPage({
         </PageGrid>
       </PageContainer>
 
+      <TaskSearchModal searchContainer={searchContainer} />
       <NewCompanyModal />
     </>
   );

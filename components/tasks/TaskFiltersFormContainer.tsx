@@ -9,7 +9,7 @@ import { TaskFiltersForm, TaskFiltersFormSkeleton } from "./TaskFiltersForm";
 import { getTaskCategorySummaries } from "@/lib/data/taskCategory/taskCategory.dal";
 
 interface TaskFiltersFormContainerProps {
-  filters?: TaskFilters;
+  filters: TaskFilters;
 }
 
 export function TaskFiltersFormContainer(props: TaskFiltersFormContainerProps) {

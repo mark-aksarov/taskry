@@ -12,6 +12,7 @@ import { NewTaskModal } from "@/components/tasks/NewTaskModal";
 import { ViewModeProvider } from "@/components/common/ViewMode";
 import { PageContainer } from "@/components/common/PageContainer";
 import { AbsoluteCenter } from "@/components/common/AbsoluteCenter";
+import { TaskSearchModal } from "@/components/tasks/TaskSearchModal";
 import { TasksEmptySection } from "@/components/tasks/TasksEmptySection";
 import { ViewModeToggleButtonGroup } from "@/components/common/ViewMode";
 import { NewTaskCategoryModal } from "@/components/taskCategory/NewTaskCategoryModal";
@@ -27,6 +28,7 @@ interface TasksPageProps {
   selectedSortField: TaskSortField;
   totalFilteredTasks: number;
   tasksContainer: React.ReactNode;
+  searchContainer: React.ReactNode;
   filtersFormContainer: React.ReactNode;
   newTaskFormContainer: React.ReactNode;
 }
@@ -36,6 +38,7 @@ export function TasksPage({
   selectedSortField,
   totalFilteredTasks,
   tasksContainer,
+  searchContainer,
   filtersFormContainer,
   newTaskFormContainer,
 }: TasksPageProps) {
@@ -109,6 +112,7 @@ export function TasksPage({
         </PageGrid>
       </PageContainer>
 
+      <TaskSearchModal searchContainer={searchContainer} />
       <NewTaskModal newTaskFormContainer={newTaskFormContainer} />
       <NewTaskCategoryModal />
     </>

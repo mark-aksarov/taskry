@@ -8,18 +8,17 @@
     "projects": "Проекты",
     "customers": "Клиенты"
   },
-  "SearchModalTriggerDesktop": {
-    "label": "Поиск"
-  },
-  "SearchModalTriggerMobile": {
-    "ariaLabel": "Поиск"
+  "SearchModalTrigger": {
+    "placeholder": "Поиск",
+    "clearButtonLabel": "Очистить поиск"
   },
   "SearchEmptySection": {
     "heading": "Ничего не найдено",
     "description": "По вашему запросу нет результатов. Попробуйте изменить формулировку или проверить орфографию."
   },
   "SearchModal": {
-    "dialogHeading": "Результаты поиска"
+    "dialogHeading": "Поиск",
+    "closeButtonLabel": "Закрыть"
   },
   "SearchField": {
     "ariaLabel": "Поиск",

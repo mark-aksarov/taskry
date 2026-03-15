@@ -19,7 +19,7 @@ describe("getSearchKeywords", () => {
   });
 
   it("should return most popular search keywords", async () => {
-    const result = await getSearchKeywords("", 5);
+    const result = await getSearchKeywords({ limit: 5 });
 
     expect(result).toHaveLength(5);
     expect(result).toEqual(
@@ -44,7 +44,7 @@ describe("getSearchKeywords", () => {
   });
 
   it("should return filtered search keywords", async () => {
-    const result = await getSearchKeywords("KEYWORD 1", 7);
+    const result = await getSearchKeywords({ query: "KEYWORD 1", limit: 7 });
 
     expect(result).toHaveLength(7);
     expect(result).toEqual(

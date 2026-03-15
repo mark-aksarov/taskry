@@ -1,4 +1,7 @@
 {
+  "ProjectSearchModal": {
+    "heading": "Поиск проектов"
+  },
   "ProjectSelect": {
     "label": "Проект",
     "noProject": "Нет проекта"

@@ -14,10 +14,12 @@ import { ProfileActions } from "@/components/users/ProfileActions";
 import { ChangePasswordModal } from "@/components/users/ChangePasswordModal";
 import { ProfileNavigationMobile } from "@/components/users/ProfileNavigationMobile";
 import { ProfileNavigationDesktop } from "@/components/users/ProfileNavigationDesktop";
+import { TaskSearchModal } from "@/components/tasks/TaskSearchModal";
 
 interface ProfilePageProps {
   userId: string;
   userFullName: string;
+  searchContainer: React.ReactNode;
   userDetailContainer: React.ReactNode;
   userDetailHeaderContainer: React.ReactNode;
   editUserFormContainer: React.ReactNode;
@@ -26,6 +28,7 @@ interface ProfilePageProps {
 export function ProfilePage({
   userId,
   userFullName,
+  searchContainer,
   userDetailContainer,
   userDetailHeaderContainer,
   editUserFormContainer,
@@ -64,6 +67,7 @@ export function ProfilePage({
         </PageGrid>
       </PageContainer>
 
+      <TaskSearchModal searchContainer={searchContainer} />
       <ChangePasswordModal userId={userId} />
       <EditUserModal editUserFormContainer={editUserFormContainer} />
     </>

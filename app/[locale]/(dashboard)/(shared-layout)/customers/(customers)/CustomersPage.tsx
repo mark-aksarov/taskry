@@ -14,6 +14,7 @@ import { NewCompanyModal } from "@/components/company/NewCompanyModal";
 import { PageEmptySection } from "@/components/common/PageEmptySection";
 import { ViewModeToggleButtonGroup } from "@/components/common/ViewMode";
 import { NewCustomerModal } from "@/components/customer/NewCustomerModal";
+import { CustomerSearchModal } from "@/components/customer/CustomerSearchModal";
 import { CustomersFilteredEmptySection } from "@/components/customer/CustomersFilteredEmptySection";
 import { CustomerToolbarManageMenuTrigger } from "@/components/customer/CustomerToolbarManageMenuTrigger";
 import { CustomerToolbarSortingMenuTrigger } from "@/components/customer/CustomerToolbarSortingMenuTrigger";
@@ -26,6 +27,7 @@ interface CustomersPageProps {
   totalCount: number;
   totalFilteredCustomers: number;
   selectedSortField: CustomerSortField;
+  searchContainer: React.ReactNode;
   customersContainer: React.ReactNode;
   newCustomerFormContainer: React.ReactNode;
   filtersFormContainer: React.ReactNode;
@@ -35,6 +37,7 @@ export function CustomersPage({
   totalCount,
   totalFilteredCustomers,
   selectedSortField,
+  searchContainer,
   customersContainer,
   newCustomerFormContainer,
   filtersFormContainer,
@@ -112,6 +115,7 @@ export function CustomersPage({
         </PageGrid>
       </PageContainer>
 
+      <CustomerSearchModal searchContainer={searchContainer} />
       <NewCustomerModal newCustomerFormContainer={newCustomerFormContainer} />
       <NewCompanyModal />
     </>

@@ -5,6 +5,7 @@ import { getCustomerSummary } from "@/lib/data/customer/customer.dal";
 import { deleteCustomer } from "@/lib/actions/customer/deleteCustomer";
 import { updateCustomer } from "@/lib/actions/customer/updateCustomer";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
+import { LinkSearchContainer } from "@/components/common/LinkSearchContainer";
 import { CustomerDetailActions } from "@/components/customer/CustomerDetailActions";
 import { UpdateCustomerProvider } from "@/components/customer/UpdateCustomerContext";
 import { DeleteCustomerProvider } from "@/components/customer/DeleteCustomerContext";
@@ -37,6 +38,7 @@ export default async function AppCustomerDetailPage({
 
   return (
     <CustomerDetailPage
+      searchContainer={<LinkSearchContainer pathname="/tasks" />}
       customerDetailContainer={<CustomerDetailAltContainer customerId={id} />}
       customerDetailHeaderContainer={
         <CustomerDetailHeaderAltContainer customerId={id} />

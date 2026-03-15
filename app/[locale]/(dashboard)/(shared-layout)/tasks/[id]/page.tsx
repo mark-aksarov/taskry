@@ -9,6 +9,7 @@ import { updateComment } from "@/lib/actions/comment/updateComment";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { UpdateTaskProvider } from "@/components/tasks/UpdateTaskContext";
 import { DeleteTaskProvider } from "@/components/tasks/DeleteTaskContext";
+import { LinkSearchContainer } from "@/components/common/LinkSearchContainer";
 import { TaskCommentsContainer } from "@/components/tasks/TaskCommentsContainer";
 import { EditTaskFormContainer } from "@/components/tasks/EditTaskFormContainer";
 import { TaskDetailAltContainer } from "@/components/tasks/TaskDetailAltContainer";
@@ -45,6 +46,7 @@ export default async function AppTaskDetailPage({
           taskTitle={taskSummary.title}
           sendComment={sendComment}
           updateComment={updateComment}
+          searchContainer={<LinkSearchContainer pathname="/tasks" />}
           taskDetailContainer={<TaskDetailAltContainer taskId={id} />}
           taskHeaderContainer={<TaskDetailHeaderContainer taskId={id} />}
           editTaskFormContainer={<EditTaskFormContainer taskId={id} />}

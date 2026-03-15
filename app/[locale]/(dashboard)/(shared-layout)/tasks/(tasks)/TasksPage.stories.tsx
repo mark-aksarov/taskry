@@ -26,6 +26,8 @@ import { withPageTransitionProvider } from "@/components/common/PageTransitionCo
 import { withCreateSubtaskProvider } from "@/components/subtasks/CreateSubtaskContext/__stories__";
 import { withUpdateTaskStatusesProvider } from "@/components/tasks/UpdateTaskStatusesContext/__stories__";
 import { withCreateTaskCategoryProvider } from "@/components/taskCategory/CreateTaskCategoryContext/__stories__";
+import { SearchList } from "@/components/search/SearchList";
+import { SearchListStory } from "@/components/search/SearchList/__stories__";
 
 const meta = {
   title: "pages/TasksPage",
@@ -76,6 +78,7 @@ export const Default = {
         totalPages={3}
       />
     ),
+    searchContainer: <SearchList {...SearchListStory.args} />,
     filtersFormContainer: (
       <TaskFiltersForm
         categoryCheckboxGroupItems={mockedTaskCategorySummaries}

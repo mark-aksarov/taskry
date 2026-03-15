@@ -5,10 +5,12 @@ import { mockedUserDetail } from "@/mocks/users";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { PageDecorator } from "@/.storybook/PageDecorator";
 import { mockedPositionSummaries } from "@/mocks/positions";
+import { SearchList } from "@/components/search/SearchList";
 import { EditUserForm } from "@/components/users/EditUserForm";
 import { UserDetailHeader } from "@/components/users/UserDetailHeader";
 import { DetailHeaderSkeleton } from "@/components/common/DetailHeader";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { SearchListStory } from "@/components/search/SearchList/__stories__";
 import { UserDetail, UserDetailSkeleton } from "@/components/users/UserDetail";
 import { withDeleteUserProvider } from "@/components/users/DeleteUserContext/__stories__";
 import { withUpdateUserProvider } from "@/components/users/UpdateUserContext/__stories__";
@@ -50,6 +52,7 @@ export const Default = {
         positionSelectItems={mockedPositionSummaries}
       />
     ),
+    searchContainer: <SearchList {...SearchListStory.args} />,
     userDetailContainer: <UserDetail {...mockedUserDetail} />,
     userDetailHeaderContainer: (
       <UserDetailHeader

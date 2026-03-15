@@ -4,6 +4,7 @@ import {
   booleanSearchParam,
   pageSizeSearchParam,
   searchParamToArray,
+  searchQueryParam,
 } from "@/lib/schemas/base";
 
 import {
@@ -22,13 +23,14 @@ import { deleteCustomers } from "@/lib/actions/customer/deleteCustomers";
 import { CustomersContainer } from "@/components/customer/CustomersContainer";
 import { SelectedItemsProvider } from "@/components/common/SelectedItemsContext";
 import { CreateCompanyProvider } from "@/components/company/CreateCompanyContext";
-import { PageTransitionProvider } from "@/components/common/PageTransitionContext";
 import { CreateCustomerProvider } from "@/components/customer/CreateCustomerContext";
 import { DeleteCustomersProvider } from "@/components/customer/DeleteCustomersContext";
 import { NewCustomerFormContainer } from "@/components/customer/NewCustomerFormContainer";
 import { CustomerFiltersFormContainer } from "@/components/customer/CustomerFiltersFormContainer";
+import { CustomerRouterSearchContainer } from "@/components/customer/CustomerRouterSearchContainer";
 
 const searchParamsSchema = z.object({
+  query: searchQueryParam,
   page: pageSearchParam,
   pageSize: pageSizeSearchParam,
   deadlineFrom: dateSearchParam,
@@ -70,31 +72,30 @@ export default async function AppCustomersPage({
 
   return (
     <SelectedItemsProvider pageItems={customers.map((c) => ({ id: c.id }))}>
-      <PageTransitionProvider>
-        <DeleteCustomersProvider deleteCustomers={deleteCustomers}>
-          <CreateCompanyProvider createCompany={createCompany}>
-            <CreateCustomerProvider createCustomer={createCustomer}>
-              <CustomersPage
-                totalCount={totalCount}
-                totalFilteredCustomers={totalFilteredCustomers}
-                selectedSortField={sort}
-                filtersFormContainer={
-                  <CustomerFiltersFormContainer filters={filters} />
-                }
-                newCustomerFormContainer={<NewCustomerFormContainer />}
-                customersContainer={
-                  <CustomersContainer
-                    customers={customers}
-                    totalCount={totalCount}
-                    page={page}
-                    pageSize={pageSize}
-                  />
-                }
-              />
-            </CreateCustomerProvider>
-          </CreateCompanyProvider>
-        </DeleteCustomersProvider>
-      </PageTransitionProvider>
+      <DeleteCustomersProvider deleteCustomers={deleteCustomers}>
+        <CreateCompanyProvider createCompany={createCompany}>
+          <CreateCustomerProvider createCustomer={createCustomer}>
+            <CustomersPage
+              totalCount={totalCount}
+              totalFilteredCustomers={totalFilteredCustomers}
+              selectedSortField={sort}
+              searchContainer={<CustomerRouterSearchContainer />}
+              filtersFormContainer={
+                <CustomerFiltersFormContainer filters={filters} />
+              }
+              newCustomerFormContainer={<NewCustomerFormContainer />}
+              customersContainer={
+                <CustomersContainer
+                  customers={customers}
+                  totalCount={totalCount}
+                  page={page}
+                  pageSize={pageSize}
+                />
+              }
+            />
+          </CreateCustomerProvider>
+        </CreateCompanyProvider>
+      </DeleteCustomersProvider>
     </SelectedItemsProvider>
   );
 }

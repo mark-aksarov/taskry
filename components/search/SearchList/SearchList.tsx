@@ -15,7 +15,7 @@ export function SearchList({ children }: { children: React.ReactNode }) {
 export function SearchListSkeleton() {
   return (
     <List className="gap-0">
-      <Repeat items={10} renderItem={() => <SearchListItemSkeleton />} />
+      <Repeat items={5} renderItem={() => <SearchListItemSkeleton />} />
     </List>
   );
 }

@@ -8,22 +8,20 @@ import {
 import { tv } from "tailwind-variants";
 import { useTranslations } from "next-intl";
 import { useDebouncedCallback } from "use-debounce";
+import { useSearchBar } from "./SearchBar";
 
 const searchInputStyles = tv({
   extend: baseSearchInputStyles,
   base: "rounded-full bg-white py-3 dark:bg-gray-800",
 });
 
-export interface SearchFieldProps {
-  value: string;
-  onChange: (value: string) => void;
-}
-
-export const SearchField = ({ value, onChange }: SearchFieldProps) => {
+export const SearchField = () => {
   const t = useTranslations("search.SearchField");
 
+  const { value, updateValue } = useSearchBar();
+
   const debouncedSetQuery = useDebouncedCallback((value: string) => {
-    onChange(value);
+    updateValue(value);
   }, 500);
 
   return (
@@ -33,6 +31,7 @@ export const SearchField = ({ value, onChange }: SearchFieldProps) => {
       name="search"
       defaultValue={value}
       onChange={debouncedSetQuery}
+      className="flex-auto"
       inputClassName={searchInputStyles}
     />
   );

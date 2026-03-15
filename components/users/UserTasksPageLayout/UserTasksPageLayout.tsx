@@ -20,6 +20,7 @@ import { BackButton } from "@/components/common/BackButton";
 import { ChangePasswordModal } from "../ChangePasswordModal";
 import { NewTaskModal } from "@/components/tasks/NewTaskModal";
 import { PageContainer } from "@/components/common/PageContainer";
+import { TaskSearchModal } from "@/components/tasks/TaskSearchModal";
 import { UserTasksPageEmptyLayout } from "./UserTasksPageEmptyLayout";
 import { TaskToolbarSortingMenuTrigger } from "@/components/tasks/TaskToolbarSortingMenuTrigger";
 import { TaskToolbarActionsMenuTrigger } from "@/components/tasks/TaskToolbarActionsMenuTrigger";
@@ -29,6 +30,7 @@ interface UserTasksPageLayoutProps {
   userId: string;
   selectedSortField: TaskSortField;
   backButton?: boolean;
+  searchContainer: React.ReactNode;
   navigationDesktop: React.ReactNode;
   navigationMobile: React.ReactNode;
   userTasksContainer: React.ReactNode;
@@ -42,6 +44,7 @@ export function UserTasksPageLayout({
   userId,
   selectedSortField,
   backButton,
+  searchContainer,
   navigationDesktop,
   navigationMobile,
   userTasksContainer,
@@ -108,6 +111,7 @@ export function UserTasksPageLayout({
         </PageGrid>
       </PageContainer>
 
+      <TaskSearchModal searchContainer={searchContainer} />
       <ChangePasswordModal userId={userId} />
       <NewTaskModal newTaskFormContainer={newTaskFormContainer} />
       <EditUserModal editUserFormContainer={editUserFormContainer} />

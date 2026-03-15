@@ -1,4 +1,7 @@
 {
+  "CustomerSearchModal": {
+    "heading": "Поиск клиентов"
+  },
   "CustomerSelect": {
     "label": "Клиент",
     "noCustomer": "Нет клиента"

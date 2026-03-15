@@ -6,11 +6,13 @@ import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { useParams, usePathname } from "next/navigation";
 import { PageDecorator } from "@/.storybook/PageDecorator";
 import { mockedCustomerSummaries } from "@/mocks/customers";
+import { SearchList } from "@/components/search/SearchList";
 import { ProjectList } from "@/components/projects/ProjectList";
 import { ProjectGrid } from "@/components/projects/ProjectGrid";
 import { NewProjectForm } from "@/components/projects/NewProjectForm";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { mockedProjectCategorySummaries } from "@/mocks/projectCategories";
+import { SearchListStory } from "@/components/search/SearchList/__stories__";
 import { ProjectFiltersForm } from "@/components/projects/ProjectFiltersForm";
 import { ProjectGridStory } from "@/components/projects/ProjectGrid/__stories__";
 import { ProjectListStory } from "@/components/projects/ProjectList/__stories__";
@@ -57,6 +59,7 @@ export const Default = {
     totalFilteredProjects: 10,
     selectedSortField: "createdAt",
 
+    searchContainer: <SearchList {...SearchListStory.args} />,
     newProjectFormContainer: (
       <NewProjectForm
         projectCategorySelectItems={mockedProjectCategorySummaries}

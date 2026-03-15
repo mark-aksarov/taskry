@@ -4,6 +4,7 @@ import { PressEvent } from "react-aria";
 import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/Button";
 import { useSearchParams } from "next/navigation";
+import { useSearchBar } from "../search/SearchBar";
 import { usePathname, useRouter } from "@/i18n/navigation";
 import { usePageTransition } from "./PageTransitionContext";
 import { areSearchParamsEqual } from "@/lib/utils/areSearchParamsEqual";
@@ -14,6 +15,7 @@ export function FiltersResetButton() {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { startFilteringTransition } = usePageTransition();
+  const { updateValue: updateSearchBarValue } = useSearchBar();
 
   const handlePress = (e: PressEvent) => {
     const newSearchParams = new URLSearchParams();
@@ -21,6 +23,10 @@ export function FiltersResetButton() {
     // preserve the "sort" param when resetting filters
     const sort = searchParams.get("sort");
     if (sort) newSearchParams.set("sort", sort);
+
+    //Reset the search query when there are no results,
+    //because the current search query may lead to empty results.
+    updateSearchBarValue("");
 
     // if the new searchParams are the same as the current searchParams, do nothing
     if (

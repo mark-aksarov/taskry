@@ -7,6 +7,7 @@ import { deleteProject } from "@/lib/actions/project/deleteProject";
 import { updateComment } from "@/lib/actions/comment/updateComment";
 import { updateProject } from "@/lib/actions/project/updateProject";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
+import { LinkSearchContainer } from "@/components/common/LinkSearchContainer";
 import { DeleteProjectProvider } from "@/components/projects/DeleteProjectContext";
 import { UpdateProjectProvider } from "@/components/projects/UpdateProjectContext";
 import { EditProjectFormContainer } from "@/components/projects/EditProjectFormContainer";
@@ -45,6 +46,7 @@ export default async function AppProjectDetailPage({
           projectTitle={projectSummary.title}
           sendComment={sendComment}
           updateComment={updateComment}
+          searchContainer={<LinkSearchContainer pathname="/tasks" />}
           projectDetailContainer={<ProjectDetailAltContainer projectId={id} />}
           projectHeaderContainer={
             <ProjectDetailHeaderContainer projectId={id} />

@@ -4,6 +4,7 @@ import {
   booleanSearchParam,
   pageSizeSearchParam,
   searchParamToArray,
+  searchQueryParam,
 } from "@/lib/schemas/base";
 
 import { z } from "zod";
@@ -21,15 +22,16 @@ import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { CreateTaskProvider } from "@/components/tasks/CreateTaskContext";
 import { updateTaskStatuses } from "@/lib/actions/task/updateTaskStatuses";
 import { DeleteTasksProvider } from "@/components/tasks/DeleteTasksContext";
+import { TaskRouterSearchContainer } from "@/components/tasks/TaskRouterSearchContainer";
 import { NewTaskFormContainer } from "@/components/tasks/NewTaskFormContainer";
 import { SelectedTasksProvider } from "@/components/tasks/SelectedTasksContext";
-import { PageTransitionProvider } from "@/components/common/PageTransitionContext";
 import { createTaskCategory } from "@/lib/actions/taskCategory/createTaskCategory";
 import { TaskFiltersFormContainer } from "@/components/tasks/TaskFiltersFormContainer";
 import { UpdateTaskStatusesProvider } from "@/components/tasks/UpdateTaskStatusesContext";
 import { CreateTaskCategoryProvider } from "@/components/taskCategory/CreateTaskCategoryContext";
 
 const searchParamsSchema = z.object({
+  query: searchQueryParam,
   page: pageSearchParam,
   pageSize: pageSizeSearchParam,
   deadlineFrom: dateSearchParam,
@@ -82,31 +84,30 @@ export default async function AppTasksPage({
       <SelectedTasksProvider
         pageItems={tasks.map((t) => ({ id: t.id, status: t.status }))}
       >
-        <PageTransitionProvider>
-          <DeleteTasksProvider deleteTasks={deleteTasks}>
-            <CreateTaskCategoryProvider createTaskCategory={createTaskCategory}>
-              <CreateTaskProvider createTask={createTask}>
-                <TasksPage
-                  totalCount={totalCount}
-                  totalFilteredTasks={totalFilteredTasks}
-                  selectedSortField={sort}
-                  newTaskFormContainer={<NewTaskFormContainer />}
-                  filtersFormContainer={
-                    <TaskFiltersFormContainer filters={filters} />
-                  }
-                  tasksContainer={
-                    <TasksContainer
-                      tasks={tasks}
-                      totalCount={totalFilteredTasks}
-                      page={page}
-                      pageSize={pageSize}
-                    />
-                  }
-                />
-              </CreateTaskProvider>
-            </CreateTaskCategoryProvider>
-          </DeleteTasksProvider>
-        </PageTransitionProvider>
+        <DeleteTasksProvider deleteTasks={deleteTasks}>
+          <CreateTaskCategoryProvider createTaskCategory={createTaskCategory}>
+            <CreateTaskProvider createTask={createTask}>
+              <TasksPage
+                totalCount={totalCount}
+                totalFilteredTasks={totalFilteredTasks}
+                selectedSortField={sort}
+                newTaskFormContainer={<NewTaskFormContainer />}
+                filtersFormContainer={
+                  <TaskFiltersFormContainer filters={filters} />
+                }
+                searchContainer={<TaskRouterSearchContainer />}
+                tasksContainer={
+                  <TasksContainer
+                    tasks={tasks}
+                    totalCount={totalFilteredTasks}
+                    page={page}
+                    pageSize={pageSize}
+                  />
+                }
+              />
+            </CreateTaskProvider>
+          </CreateTaskCategoryProvider>
+        </DeleteTasksProvider>
       </SelectedTasksProvider>
     </UpdateTaskStatusesProvider>
   );

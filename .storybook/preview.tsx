@@ -82,7 +82,7 @@ const preview: Preview = {
 
   beforeEach: () => {
     mocked(useSearchParams).mockReturnValue({
-      get: () => "/",
+      get: () => "",
     } as any);
 
     mocked(useRouter).mockReturnValue({

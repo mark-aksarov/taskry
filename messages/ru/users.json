@@ -1,4 +1,7 @@
 {
+  "UserSearchModal": {
+    "heading": "Поиск пользователей"
+  },
   "UserSelect": {
     "label": "Исполнитель",
     "noAssignee": "Нет исполнителя"

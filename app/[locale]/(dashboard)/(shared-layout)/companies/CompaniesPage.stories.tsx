@@ -4,8 +4,10 @@ import { usePathname } from "next/navigation";
 import { CompaniesPage } from "./CompaniesPage";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { PageDecorator } from "@/.storybook/PageDecorator";
+import { SearchList } from "@/components/search/SearchList";
 import { CompanyList } from "@/components/company/CompanyList";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { SearchListStory } from "@/components/search/SearchList/__stories__";
 import { CompanyListStory } from "@/components/company/CompanyList/__stories__";
 import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
@@ -39,6 +41,7 @@ type Story = StoryObj<typeof meta>;
 export const Default = {
   args: {
     totalCount: 10,
+    searchContainer: <SearchList {...SearchListStory.args} />,
     companiesContainer: <CompanyList {...CompanyListStory.args} />,
   },
 } satisfies Story;

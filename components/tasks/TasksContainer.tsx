@@ -30,8 +30,6 @@ export async function TasksContainer({
   page,
   pageSize,
 }: TasksContainerProps) {
-  const getCommonProps = (task: TaskListItemDTO) => ({});
-
   const items = (
     <>
       {tasks.map((task) => {
@@ -70,7 +68,6 @@ export async function TasksContainer({
             }
             editTaskFormContainer={<EditTaskFormContainer taskId={task.id} />}
             showCheckbox
-            {...getCommonProps(task)}
           />
         );
       })}

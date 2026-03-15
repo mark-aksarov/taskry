@@ -3,17 +3,13 @@ import {
   ToolbarMobileHeading,
 } from "@/components/common/Toolbar";
 
-import {
-  AppHeader,
-  AppHeaderContainerProps,
-} from "@/components/layout/AppHeader";
-
 import { useTranslations } from "next-intl";
 import { Card } from "@/components/common/Card";
 import { PageGrid } from "@/components/common/PageGrid";
 import { BackButton } from "@/components/common/BackButton";
 import { ActionFn, ActionState } from "@/lib/actions/types";
 import { PageContainer } from "@/components/common/PageContainer";
+import { TaskSearchModal } from "@/components/tasks/TaskSearchModal";
 import { EditProjectModal } from "@/components/projects/EditProjectModal";
 import { ProjectDetailCard } from "@/components/projects/ProjectDetailCard";
 import { ProjectDetailActions } from "@/components/projects/ProjectDetailActions";
@@ -21,6 +17,7 @@ import { ProjectDetailActions } from "@/components/projects/ProjectDetailActions
 interface ProjectPageProps {
   projectId: number;
   projectTitle: string;
+  searchContainer: React.ReactNode;
   projectDetailContainer: React.ReactNode;
   projectHeaderContainer: React.ReactNode;
   projectCommentsContainer: React.ReactNode;
@@ -32,6 +29,7 @@ interface ProjectPageProps {
 export function ProjectDetailPage({
   projectId,
   projectTitle,
+  searchContainer,
   projectDetailContainer,
   projectHeaderContainer,
   projectCommentsContainer,
@@ -72,6 +70,7 @@ export function ProjectDetailPage({
         </PageGrid>
       </PageContainer>
 
+      <TaskSearchModal searchContainer={searchContainer} />
       <EditProjectModal editProjectFormContainer={editProjectFormContainer} />
     </>
   );

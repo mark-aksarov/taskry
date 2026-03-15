@@ -9,6 +9,7 @@ import { useParams, usePathname } from "next/navigation";
 import { mockedProjectSummaries } from "@/mocks/projects";
 import { PageDecorator } from "@/.storybook/PageDecorator";
 import { mockedPositionSummaries } from "@/mocks/positions";
+import { SearchList } from "@/components/search/SearchList";
 import { NewTaskForm } from "@/components/tasks/NewTaskForm";
 import { UserTaskList } from "@/components/users/UserTaskList";
 import { EditUserForm } from "@/components/users/EditUserForm";
@@ -17,6 +18,7 @@ import { mockedTaskCategorySummaries } from "@/mocks/taskCategories";
 import { mockedUserDetail, mockedUserSummaries } from "@/mocks/users";
 import { UserDetailHeader } from "@/components/users/UserDetailHeader";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { SearchListStory } from "@/components/search/SearchList/__stories__";
 import { UserTaskListStory } from "@/components/users/UserTaskList/__stories__";
 import { ProfileNavigationMobile } from "@/components/users/ProfileNavigationMobile";
 import { ProfileNavigationDesktop } from "@/components/users/ProfileNavigationDesktop";
@@ -65,6 +67,7 @@ export const Default = {
     userId: mockedUserDetail.id,
     totalTasksCount: 10,
     selectedSortField: "title",
+    searchContainer: <SearchList {...SearchListStory.args} />,
     userTasksContainer: <UserTaskList {...UserTaskListStory.args} />,
     userDetailHeaderContainer: (
       <UserDetailHeader

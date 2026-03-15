@@ -28,6 +28,7 @@ export function useSelectedItemsState<T extends SelectedItem = SelectedItem>(
 
   const clear = useCallback(() => setItems([]), []);
 
+  // Keep items in sync with pageItems
   useEffect(() => {
     setItems((prev) =>
       pageItems.filter((p) => prev.some((i) => i.id === p.id)),

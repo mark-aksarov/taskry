@@ -22,11 +22,13 @@ import { ProjectToolbarActionsMenuTrigger } from "@/components/projects/ProjectT
 import { ProjectToolbarSortingMenuTrigger } from "@/components/projects/ProjectToolbarSortingMenuTrigger";
 import { ProjectToolbarFiltersModalTrigger } from "@/components/projects/ProjectToolbarFiltersModalTrigger";
 import { ProjectToolbarCreateNewMenuTrigger } from "@/components/projects/ProjectToolbarCreateNewMenuTrigger";
+import { ProjectSearchModal } from "@/components/projects/ProjectSearchModal";
 
 interface ProjectsPageProps {
   totalCount: number;
   totalFilteredProjects: number;
   selectedSortField: ProjectSortField;
+  searchContainer: React.ReactNode;
   projectsContainer: React.ReactNode;
   newProjectFormContainer: React.ReactNode;
   projectFiltersFormContainer: React.ReactNode;
@@ -36,6 +38,7 @@ export function ProjectsPage({
   totalCount,
   totalFilteredProjects,
   selectedSortField,
+  searchContainer,
   projectsContainer,
   newProjectFormContainer,
   projectFiltersFormContainer,
@@ -116,6 +119,7 @@ export function ProjectsPage({
         </PageGrid>
       </PageContainer>
 
+      <ProjectSearchModal searchContainer={searchContainer} />
       <NewProjectModal newProjectFormContainer={newProjectFormContainer} />
       <NewProjectCategoryModal />
     </>

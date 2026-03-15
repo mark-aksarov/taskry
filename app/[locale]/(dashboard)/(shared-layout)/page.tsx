@@ -6,8 +6,8 @@ import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { pageSearchParam, pageSizeSearchParam } from "@/lib/schemas/base";
 import { updateTaskStatuses } from "@/lib/actions/task/updateTaskStatuses";
 import { DeleteTasksProvider } from "@/components/tasks/DeleteTasksContext";
+import { LinkSearchContainer } from "@/components/common/LinkSearchContainer";
 import { SelectedTasksProvider } from "@/components/tasks/SelectedTasksContext";
-import { PageTransitionProvider } from "@/components/common/PageTransitionContext";
 import { AssignedTasksContainer } from "@/components/tasks/AssignedTasksContainer";
 import { TotalTasksCardContainer } from "@/components/tasks/TotalTasksCardContainer";
 import { TotalUsersCardContainer } from "@/components/users/TotalUsersCardContainer";
@@ -47,24 +47,23 @@ export default async function AppDashboardPage({
       <SelectedTasksProvider
         pageItems={tasks.map((t) => ({ id: t.id, status: t.status }))}
       >
-        <PageTransitionProvider>
-          <DeleteTasksProvider deleteTasks={deleteTasks}>
-            <DashboardPage
-              totalProjectsCardContainer={<TotalProjectsCardContainer />}
-              totalTasksCardContainer={<TotalTasksCardContainer />}
-              totalUsersCardContainer={<TotalUsersCardContainer />}
-              totalCustomersCardContainer={<TotalCustomersCardContainer />}
-              assignedTasksContainer={
-                <AssignedTasksContainer
-                  tasks={tasks}
-                  totalCount={totalCount}
-                  page={page}
-                  pageSize={pageSize}
-                />
-              }
-            />
-          </DeleteTasksProvider>
-        </PageTransitionProvider>
+        <DeleteTasksProvider deleteTasks={deleteTasks}>
+          <DashboardPage
+            searchContainer={<LinkSearchContainer pathname="/tasks" />}
+            totalProjectsCardContainer={<TotalProjectsCardContainer />}
+            totalTasksCardContainer={<TotalTasksCardContainer />}
+            totalUsersCardContainer={<TotalUsersCardContainer />}
+            totalCustomersCardContainer={<TotalCustomersCardContainer />}
+            assignedTasksContainer={
+              <AssignedTasksContainer
+                tasks={tasks}
+                totalCount={totalCount}
+                page={page}
+                pageSize={pageSize}
+              />
+            }
+          />
+        </DeleteTasksProvider>
       </SelectedTasksProvider>
     </UpdateTaskStatusesProvider>
   );

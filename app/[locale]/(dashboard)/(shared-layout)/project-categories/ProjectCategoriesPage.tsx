@@ -10,6 +10,7 @@ import { PageGrid } from "@/components/common/PageGrid";
 import { BackButton } from "@/components/common/BackButton";
 import { ViewModeProvider } from "@/components/common/ViewMode";
 import { PageContainer } from "@/components/common/PageContainer";
+import { TaskSearchModal } from "@/components/tasks/TaskSearchModal";
 import { PageEmptySection } from "@/components/common/PageEmptySection";
 import { NewProjectCategoryModal } from "@/components/projectCategory/NewProjectCategoryModal";
 import { ProjectCategoryToolbarActionsMenuTrigger } from "@/components/projectCategory/ProjectCategoryToolbarActionsMenuTrigger";
@@ -18,11 +19,13 @@ import { ProjectCategoryToolbarCreateNewModalTrigger } from "@/components/projec
 
 interface ProjectCategoriesPageProps {
   totalCount: number;
+  searchContainer: React.ReactNode;
   projectCategoriesContainer: React.ReactNode;
 }
 
 export function ProjectCategoriesPage({
   totalCount,
+  searchContainer,
   projectCategoriesContainer,
 }: ProjectCategoriesPageProps) {
   const t = useTranslations("app.ProjectCategoriesPage");
@@ -77,6 +80,7 @@ export function ProjectCategoriesPage({
         </PageGrid>
       </PageContainer>
 
+      <TaskSearchModal searchContainer={searchContainer} />
       <NewProjectCategoryModal />
     </>
   );
