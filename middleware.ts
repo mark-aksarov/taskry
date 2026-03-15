@@ -1,7 +1,6 @@
-import { auth } from "./lib/auth";
-import { headers } from "next/headers";
 import createMiddleware from "next-intl/middleware";
 import { NextRequest, NextResponse } from "next/server";
+import { getSessionCookie } from "better-auth/cookies";
 
 const publicRoutes = [
   "/sign-in",
@@ -16,37 +15,30 @@ function isPublicRoute(pathname: string) {
   return publicRoutes.some((route) => pathname.endsWith(route));
 }
 
-export async function middleware(request: NextRequest) {
-  if (!isPublicRoute(request.nextUrl.pathname)) {
-    //https://better-auth.com/docs/integrations/next#for-nextjs-release-1520-and-above
-    const session = await auth.api.getSession({
-      headers: await headers(),
-    });
+const defaultLocale = "ru";
 
-    if (!session) {
+const handleI18nRouting = createMiddleware({
+  locales: ["en", "ru"],
+  defaultLocale,
+  localeDetection: false,
+});
+
+export async function middleware(request: NextRequest) {
+  // https://better-auth.com/docs/integrations/next#cookie-based-checks-recommended-for-all-versions
+  if (!isPublicRoute(request.nextUrl.pathname)) {
+    const sessionCookie = getSessionCookie(request);
+
+    if (!sessionCookie) {
       return NextResponse.redirect(new URL("/sign-in", request.url));
-    }
-    if (!session.user.emailVerified) {
-      return NextResponse.redirect(new URL("/verify-email", request.url));
     }
   }
 
-  const defaultLocale = "ru";
-
-  const handleI18nRouting = createMiddleware({
-    locales: ["en", "ru"],
-    defaultLocale,
-    localeDetection: false,
-  });
   const response = handleI18nRouting(request);
 
   return response;
 }
 
 export const config = {
-  //use the Node.js runtime in middleware for full session validation with database checks:
-  runtime: "nodejs",
-
   // Match all pathnames except for
   // - … if they start with `/api`, `/trpc`, `/_next` or `/_vercel`
   // - … the ones containing a dot (e.g. `favicon.ico`)
