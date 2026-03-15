@@ -1,10 +1,10 @@
 "use client";
 
 import { PressEvent } from "react-aria";
-import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/Button";
 import { useSearchParams } from "next/navigation";
 import { useSearchBar } from "../search/SearchBar";
+import { useLocale, useTranslations } from "next-intl";
 import { usePathname, useRouter } from "@/i18n/navigation";
 import { usePageTransition } from "./PageTransitionContext";
 import { areSearchParamsEqual } from "@/lib/utils/areSearchParamsEqual";
@@ -12,6 +12,7 @@ import { areSearchParamsEqual } from "@/lib/utils/areSearchParamsEqual";
 export function FiltersResetButton() {
   const t = useTranslations("common.FiltersResetButton");
   const router = useRouter();
+  const locale = useLocale();
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { startFilteringTransition } = usePageTransition();
@@ -41,7 +42,7 @@ export function FiltersResetButton() {
 
     // start the page transition and update the URL with the new searchParams
     startFilteringTransition(() => {
-      router.replace(`${pathname}?${newSearchParams.toString()}`);
+      router.replace(`${pathname}?${newSearchParams.toString()}`, { locale });
     });
   };
 

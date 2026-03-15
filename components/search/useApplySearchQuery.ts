@@ -18,11 +18,6 @@ export function useApplySearchQuery() {
   const pathname = usePathname();
 
   const applySearchQuery = (newQuery: string) => {
-    // if the search query is the same as the current search query, do nothing
-    if (searchParams.get("query") === newQuery) {
-      return;
-    }
-
     // clone the current searchParams
     const newSearchParams = new URLSearchParams(searchParams);
 
