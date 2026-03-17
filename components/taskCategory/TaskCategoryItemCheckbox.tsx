@@ -29,6 +29,7 @@ export function TaskCategoryItemCheckbox({
       aria-label="task category checkbox"
       isSelected={isSelected}
       onChange={handleChange}
+      className="max-md:hidden"
     />
   );
 }

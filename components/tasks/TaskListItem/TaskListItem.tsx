@@ -1,42 +1,80 @@
 "use client";
 
 import {
-  ItemBaseDetailModalTrigger,
-  ItemBaseCommentsModalTrigger,
-} from "@/components/common/ItemBase";
-
-import {
   ListItemText,
   ListItemTitle,
   ListItemTitleDetailModalTrigger,
 } from "@/components/common/List";
 
+import {
+  ItemBaseDetailModalTrigger,
+  ItemBaseCommentsModalTrigger,
+  ItemBaseUserImageContainer,
+  ItemBaseDeadline,
+} from "@/components/common/ItemBase";
+
 import { memo } from "react";
-import Image from "next/image";
-import { TaskItemProps } from "../TaskItem";
+import { useTranslations } from "next-intl";
 import { EditTaskModal } from "../EditTaskModal";
 import { TaskDetailModal } from "../TaskDetailModal";
 import { TaskCommentsModal } from "../TaskCommentsModal";
 import { TaskItemBaseBadge } from "../TaskItemBaseBadge";
 import { TaskListItemLayout } from "./TaskListItemLayout";
-import { useFormatter, useTranslations } from "next-intl";
-import { UnknownUser } from "@/components/common/UnknownUser";
+import { useSelectedTasks } from "../SelectedTasksContext";
 import { TaskItemCheckbox } from "../TaskItem/TaskItemCheckbox";
-import { ImageContainer } from "@/components/common/ImageContainer";
+import { TaskItemProviders, BaseTaskItemProps } from "../TaskItem";
+import { SelectableItem } from "@/components/common/SelectableItem";
 import { UserDetailModal } from "@/components/users/UserDetailModal";
 import { ProjectDetailModal } from "@/components/projects/ProjectDetailModal";
 import { TaskItemActionMenuTrigger } from "../TaskItem/TaskItemActionMenuTrigger";
 
-export type TaskListItemProps = Omit<
-  TaskItemProps,
-  | "subtasksTotal"
-  | "subtasksDone"
-  | "updateTask"
-  | "deleteTask"
-  | "updateTaskStatus"
+export interface Props extends BaseTaskItemProps {
+  category?: {
+    id: number;
+    name: string;
+  };
+  project?: {
+    id: number;
+    title: string;
+  };
+  taskDetailContainer: React.ReactNode;
+  userDetailContainer: React.ReactNode;
+  userDetailHeaderContainer: React.ReactNode;
+  projectDetailContainer: React.ReactNode;
+  showCheckbox?: boolean;
+}
+
+export function TaskListItem({
+  updateTask,
+  deleteTask,
+  updateTaskStatus,
+  ...props
+}: Props) {
+  const selected = useSelectedTasks();
+
+  return (
+    <TaskItemProviders
+      taskId={props.id}
+      deleteTask={deleteTask}
+      updateTask={updateTask}
+      updateTaskStatus={updateTaskStatus}
+    >
+      <SelectableItem
+        {...selected}
+        item={{ id: props.id, status: props.status }}
+      >
+        <TaskListItemInner {...props} />
+      </SelectableItem>
+    </TaskItemProviders>
+  );
+}
+
+export type InnerProps = Omit<
+  Props,
+  "updateTask" | "deleteTask" | "updateTaskStatus"
 >;
 
-export const TaskListItem = memo(
+export const TaskListItemInner = memo(
   ({
     id,
     title,
@@ -55,31 +93,16 @@ export const TaskListItem = memo(
     projectDetailContainer,
     sendComment,
     updateComment,
-  }: TaskListItemProps) => {
+  }: InnerProps) => {
     const t = useTranslations("tasks.TaskListItem");
 
-    // use useFormatter to format the date according to the user's locale
-    const format = useFormatter();
-
-    const deadlineOn = t("deadlineOn", {
-      date: format.dateTime(new Date(deadline), {
-        day: "2-digit",
-        month: "short",
-        year: "numeric",
-      }),
-    });
-
-    const assigneeImg = assignee?.imageUrl ? (
-      <ImageContainer className="h-9 w-9">
-        <Image
-          src={assignee.imageUrl}
-          alt={assignee.fullName}
-          width={36}
-          height={36}
-        />
-      </ImageContainer>
-    ) : (
-      <UnknownUser className="h-9 w-9" />
+    const assigneeImg = (
+      <ItemBaseUserImageContainer
+        user={assignee}
+        className="h-9 w-9"
+        width={36}
+        height={36}
+      />
     );
 
     return (
@@ -87,7 +110,9 @@ export const TaskListItem = memo(
         <TaskListItemLayout
           id={id}
           checkboxSlot={
-            showCheckbox && <TaskItemCheckbox id={id} status={status} />
+            showCheckbox ? (
+              <TaskItemCheckbox id={id} status={status} />
+            ) : undefined
           }
           mainSlot={
             <>
@@ -102,13 +127,9 @@ export const TaskListItem = memo(
                 {title}
               </ListItemTitleDetailModalTrigger>
 
-              <ListItemText>{deadlineOn}</ListItemText>
-            </>
-          }
-          mainMobileSlot={
-            <>
-              <ListItemTitle>{title}</ListItemTitle>
-              <ListItemText>{deadlineOn}</ListItemText>
+              <ListItemText>
+                <ItemBaseDeadline deadline={deadline} />
+              </ListItemText>
             </>
           }
           assigneeImgSlot={
@@ -126,7 +147,7 @@ export const TaskListItem = memo(
                   {assigneeImg}
                 </ItemBaseDetailModalTrigger>
               ) : (
-                <UnknownUser className="h-9 w-9" />
+                assigneeImg
               )}
             </>
           }

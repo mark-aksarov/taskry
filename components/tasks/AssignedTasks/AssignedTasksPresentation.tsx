@@ -10,7 +10,8 @@ interface AssignedTasksPresentationProps {
   totalCount: number;
   page: number;
   pageSize: number;
-  list: React.ReactNode;
+  listLarge: React.ReactNode;
+  gridMobile: React.ReactNode;
   totalPages: number;
 }
 
@@ -18,7 +19,8 @@ export function AssignedTasksPresentation({
   totalCount,
   page,
   pageSize,
-  list,
+  listLarge,
+  gridMobile,
   totalPages,
 }: AssignedTasksPresentationProps) {
   if (totalCount === 0) {
@@ -36,7 +38,8 @@ export function AssignedTasksPresentation({
     <EntityPaginationProvider>
       <AssignedTasksSection>
         <AssignedTasksSectionHeading />
-        {list}
+        <div className="max-md:hidden">{listLarge}</div>
+        <div className="md:hidden">{gridMobile}</div>
       </AssignedTasksSection>
 
       <EntityContainerPagination

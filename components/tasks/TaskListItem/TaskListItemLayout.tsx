@@ -1,11 +1,9 @@
 import { ListItem, ListItemInfo } from "@/components/common/List";
-import { twMerge } from "tailwind-merge";
 
 interface TaskListItemLayoutProps {
   id?: number;
   checkboxSlot?: React.ReactNode;
   mainSlot: React.ReactNode;
-  mainMobileSlot: React.ReactNode;
   assigneeImgSlot: React.ReactNode;
   assigneeSlot: React.ReactNode;
   categorySlot: React.ReactNode;
@@ -19,7 +17,6 @@ export const TaskListItemLayout = ({
   id,
   checkboxSlot,
   mainSlot,
-  mainMobileSlot,
   assigneeImgSlot,
   assigneeSlot,
   categorySlot,
@@ -30,7 +27,7 @@ export const TaskListItemLayout = ({
 }: TaskListItemLayoutProps) => {
   return (
     <ListItem data-test="task-list-item" data-id={id}>
-      <div className="flex w-full items-center gap-4 max-md:hidden">
+      <div className="flex w-full items-center gap-4">
         {checkboxSlot}
         <ListItemInfo>{mainSlot}</ListItemInfo>
         {assigneeImgSlot}
@@ -45,17 +42,6 @@ export const TaskListItemLayout = ({
             {commentsModalTriggerSlot}
             {menuTriggerSlot}
           </div>
-        </div>
-      </div>
-
-      <div className="flex flex-col gap-2 md:hidden">
-        <div className="flex w-full items-center gap-4">
-          {checkboxSlot}
-          <ListItemInfo>{mainMobileSlot}</ListItemInfo>
-          {menuTriggerSlot}
-        </div>
-        <div className={twMerge("h-[1.75rem]", checkboxSlot && "ml-9")}>
-          {statusSlot}
         </div>
       </div>
     </ListItem>

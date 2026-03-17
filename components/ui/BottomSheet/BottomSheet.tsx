@@ -58,7 +58,7 @@ const BottomSheetInner = ({
         <div
           data-testid="overlay"
           {...underlayProps}
-          className="fixed inset-0 z-3 bg-black/20 dark:bg-black/50"
+          className="fixed inset-0 z-4 bg-black/20 dark:bg-black/50"
         >
           <div
             {...modalProps}

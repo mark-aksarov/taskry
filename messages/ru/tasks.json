@@ -32,14 +32,10 @@
   "TotalTasksCard": {
     "text": "Всего задач"
   },
-  "TaskGridItem": {
-    "noDeadline": "Без срока",
-    "deadlineOn": "Срок до {date}",
-    "progressAriaLabel": "Прогресс задачи"
+  "TaskGridItemProgress": {
+    "ariaLabel": "Прогресс задачи"
   },
   "TaskListItem": {
-    "noDeadline": "Без срока",
-    "deadlineOn": "Срок до {date}",
     "assignee": "Исполнитель",
     "noAssignee": "Без исполнителя",
     "category": "Категория",
@@ -47,17 +43,17 @@
     "project": "Проект",
     "noProject": "Без проекта"
   },
-  "TaskToolbarSortingMenuTrigger": {
+  "TaskSortingMenuTrigger": {
     "byTitle": "По названию",
     "byDeadline": "По сроку",
     "byStatus": "По статусу",
     "byCategory": "По категории",
     "byCreatedAt": "По дате создания"
   },
-  "TaskToolbarFiltersModalTrigger": {
-    "title": "Фильтры задач"
+  "TaskFiltersModal": {
+    "heading": "Фильтры задач"
   },
-  "TaskToolbarActionsMenuTrigger": {
+  "TaskActionsMenuTrigger": {
     "dialogHeading": "Действия",
     "delete": "Удалить",
     "pending": "Отметить как «В ожидании»",
@@ -72,13 +68,18 @@
     "markActive": "Пометить как активную",
     "details": "Открыть детали"
   },
-  "TaskToolbarCreateNewMenuTrigger": {
+  "CreateTaskMenuTrigger": {
     "dialogHeading": "Создать новую",
-    "label": "Создать новую",
     "items": {
       "task": "Задачу",
       "category": "Категорию"
     }
+  },
+  "CreateTaskMenuTriggerMobile": {
+    "buttonAriaLabel": "Создать новую"
+  },
+  "CreateTaskMenuTriggerLarge": {
+    "buttonLabel": "Создать новую"
   },
   "DeleteTaskModal": {
     "heading": "Удалить задачу",
@@ -189,11 +190,38 @@
     "completed": "Завершена",
     "overdue": "Просрочена"
   },
-  "TaskToolbarManageMenuTrigger": {
+  "TaskManageMenuTrigger": {
     "categories": "Категории"
   },
   "TasksFilteredEmptySection": {
     "heading": "Задачи не найдены",
     "description": "По выбранным фильтрам задачи отсутствуют. Попробуйте изменить или сбросить фильтры"
+  },
+  "TaskStatusFiltersModal": {
+    "heading": "Фильтры статусов"
+  },
+  "TaskStatusFiltersModalTrigger": {
+    "buttonLabel": "Статус"
+  },
+  "TaskCategoryFiltersModalTrigger": {
+    "buttonLabel": "Категория"
+  },
+  "TaskCategoryFiltersModal": {
+    "heading": "Фильтры категорий"
+  },
+  "TaskResultsCount": {
+    "tasksFound": "{count, plural, one {Найдена # задача} few {Найдено # задачи} many {Найдено # задач} other {Найдено # задач}}"
+  },
+  "TaskProjectFiltersModalTrigger": {
+    "buttonLabel": "Проект"
+  },
+  "TaskProjectFiltersModal": {
+    "heading": "Фильтры проектов"
+  },
+  "TaskAssigneeFiltersModal": {
+    "heading": "Фильтры назначенных"
+  },
+  "TaskAssigneeFiltersModalTrigger": {
+    "buttonLabel": "Назначенный"
   }
 }

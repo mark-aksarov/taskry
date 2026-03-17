@@ -23,11 +23,11 @@
   "PositionListItem": {
     "name": "Name"
   },
-  "PositionToolbarActionsMenuTrigger": {
+  "PositionActionsMenuTrigger": {
     "dialogHeading": "Actions",
     "delete": "Delete"
   },
-  "PositionToolbarCreateNewModalTrigger": {
+  "CreatePositionModalTrigger": {
     "label": "Create new"
   },
   "PositionListItemActionMenuTrigger": {

@@ -15,7 +15,7 @@ export interface ToggleButtonGroupProps extends RACToggleButtonGroupProps {
 }
 
 const styles = tv({
-  base: "inline-flex gap-4",
+  base: "flex gap-4",
   variants: {
     direction: {
       horizontal: "flex-row",

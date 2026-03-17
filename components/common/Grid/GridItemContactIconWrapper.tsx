@@ -3,5 +3,5 @@ export function GridItemContactIconWrapper({
 }: {
   children: React.ReactNode;
 }) {
-  return <span className="text-gray-500 dark:text-gray-400">{children}</span>;
+  return <div className="text-gray-500 dark:text-gray-400">{children}</div>;
 }

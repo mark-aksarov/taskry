@@ -1,10 +1,10 @@
 "use client";
 
-import { TaskListItem } from "./TaskListItem";
+import { TaskItemPendingOverlay } from "./TaskItem";
 import { DeleteTaskProvider } from "./DeleteTaskContext";
 import { UpdateTaskProvider } from "./UpdateTaskContext";
-import { TaskItemPendingOverlay, TaskItemProps } from "./TaskItem";
 import { UpdateTaskStatusProvider } from "./UpdateTaskStatusContext";
+import { TaskListItemInner, TaskListItemProps } from "./TaskListItem";
 
 // AssignedTaskListItem does not have access to SelectedTasksProvider and UpdateTaskStatusesProvider
 export const AssignedTaskListItem = ({
@@ -12,13 +12,13 @@ export const AssignedTaskListItem = ({
   deleteTask,
   updateTaskStatus,
   ...props
-}: Omit<TaskItemProps, "showCheckbox" | "subtasksTotal" | "subtasksDone">) => {
+}: Omit<TaskListItemProps, "showCheckbox">) => {
   return (
     <DeleteTaskProvider deleteTask={deleteTask}>
       <UpdateTaskProvider updateTask={updateTask}>
         <UpdateTaskStatusProvider updateTaskStatus={updateTaskStatus}>
           <TaskItemPendingOverlay taskId={props.id}>
-            <TaskListItem {...props} />
+            <TaskListItemInner {...props} />
           </TaskItemPendingOverlay>
         </UpdateTaskStatusProvider>
       </UpdateTaskProvider>

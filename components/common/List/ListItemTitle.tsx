@@ -30,13 +30,10 @@ export function ListItemTitleLink({
   className,
   children,
 }: ListItemTitleLinkProps) {
-  // Link uses display: inline-flex by default.
-  // To make text truncation work, set display: inline-block.
+  // Link uses display: flex by default.
+  // To make text truncation work, set display: block.
   return (
-    <Link
-      className={twMerge(titleStyles, "inline-block", className)}
-      href={href}
-    >
+    <Link className={twMerge(titleStyles, "block", className)} href={href}>
       {children}
     </Link>
   );

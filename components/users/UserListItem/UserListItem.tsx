@@ -125,13 +125,13 @@ export const UserListItem = memo(
           </>
         }
         menuTriggerSlot={
-          showActionMenuTrigger && (
+          showActionMenuTrigger ? (
             <UserItemActionMenuTrigger
               editUserFormContainer={editUserFormContainer}
               userId={id}
               userFullName={fullName}
             />
-          )
+          ) : undefined
         }
       />
     );

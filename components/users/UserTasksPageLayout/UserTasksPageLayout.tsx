@@ -9,8 +9,8 @@ import {
 import {
   ToolbarMobileTop,
   ToolbarMobileBottom,
-  ToolbarMobileHeading,
-} from "@/components/common/Toolbar";
+  PageHeadingMobile,
+} from "@/components/common/ToolbarOld";
 
 import { useTranslations } from "next-intl";
 import { TaskSortField } from "@/lib/types";
@@ -22,8 +22,8 @@ import { NewTaskModal } from "@/components/tasks/NewTaskModal";
 import { PageContainer } from "@/components/common/PageContainer";
 import { TaskSearchModal } from "@/components/tasks/TaskSearchModal";
 import { UserTasksPageEmptyLayout } from "./UserTasksPageEmptyLayout";
-import { TaskToolbarSortingMenuTrigger } from "@/components/tasks/TaskToolbarSortingMenuTrigger";
-import { TaskToolbarActionsMenuTrigger } from "@/components/tasks/TaskToolbarActionsMenuTrigger";
+import { TaskToolbarSortingMenuTrigger } from "@/components/tasks/TaskSortingMenuTrigger";
+import { TaskToolbarActionsMenuTrigger } from "@/components/tasks/TaskActionsMenuTrigger";
 
 interface UserTasksPageLayoutProps {
   totalTasksCount: number;
@@ -99,7 +99,7 @@ export function UserTasksPageLayout({
         <PageGrid>
           <ToolbarMobileTop>
             {backButton && <BackButton href="/team" />}
-            <ToolbarMobileHeading>{t("title")}</ToolbarMobileHeading>
+            <PageHeadingMobile>{t("title")}</PageHeadingMobile>
             <TaskToolbarSortingMenuTrigger
               selectedSortField={selectedSortField}
             />

@@ -2,8 +2,7 @@
 
 import { Children } from "react";
 import { List } from "../common/List";
-import { Repeat } from "../common/Repeat";
-import { TaskListItemSkeleton } from "./TaskListItem";
+import { TaskListSkeleton } from "./TaskList";
 import { usePageTransition } from "../common/PageTransitionContext";
 
 export function AssignedTaskList({ children }: { children: React.ReactNode }) {
@@ -11,12 +10,7 @@ export function AssignedTaskList({ children }: { children: React.ReactNode }) {
 
   if (isPaginationPending) {
     return (
-      <List data-test="tasks-list">
-        <Repeat
-          items={Children.count(children)}
-          renderItem={() => <TaskListItemSkeleton showCheckbox={false} />}
-        />
-      </List>
+      <TaskListSkeleton items={Children.count(children)} showCheckbox={false} />
     );
   }
 

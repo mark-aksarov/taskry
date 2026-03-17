@@ -22,11 +22,11 @@
   "CompanyListItem": {
     "name": "Name"
   },
-  "CompanyToolbarActionsMenuTrigger": {
+  "CompanyActionsMenuTrigger": {
     "dialogHeading": "Actions",
     "delete": "Delete"
   },
-  "CompanyToolbarCreateNewModalTrigger": {
+  "CreateCompanyModalTrigger": {
     "label": "Create new"
   },
   "CompanyListItemActionMenuTrigger": {

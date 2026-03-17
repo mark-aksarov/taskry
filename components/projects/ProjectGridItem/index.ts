@@ -1,2 +1,4 @@
-export { ProjectGridItem } from "./ProjectGridItem";
-export { ProjectGridItemSkeleton } from "./ProjectGridItemSkeleton";
+export { ProjectGridItemLarge } from "./ProjectGridItemLarge";
+export { ProjectGridItemMobile } from "./ProjectGridItemMobile";
+export { ProjectGridItemLargeSkeleton } from "./ProjectGridItemSkeleton";
+export { ProjectGridItemMobileSkeleton } from "./ProjectGridItemSkeleton";

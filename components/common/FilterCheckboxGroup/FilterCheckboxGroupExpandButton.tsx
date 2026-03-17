@@ -38,12 +38,12 @@ export function FilterCheckboxGroupExpandButton({
             strokeWidth={1.5}
             className="shrink-0"
           />
-          <span className="shrink-0">
+          <div className="shrink-0">
             {t("more")} {hiddenSelectedItemNames.length}
-          </span>
-          <span className="inline-block truncate">
+          </div>
+          <div className="truncate">
             ({hiddenSelectedItemNames?.join(", ")})
-          </span>
+          </div>
         </>
       );
     } else {

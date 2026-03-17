@@ -56,7 +56,7 @@ export function Switch({ children, ...props }: SwitchProps) {
         <>
           {children}
           <div className={track(renderProps)}>
-            <span className={handle(renderProps)} />
+            <div className={handle(renderProps)} />
           </div>
         </>
       )}

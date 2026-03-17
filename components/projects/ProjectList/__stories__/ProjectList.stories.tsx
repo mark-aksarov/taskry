@@ -2,7 +2,6 @@ import { ProjectList } from "../ProjectList";
 import { mockedProjectList } from "@/mocks/projects";
 import type { Meta, StoryObj } from "@storybook/react";
 import { ProjectListItem } from "../../ProjectListItem";
-import { ProjectItemProviders } from "../../ProjectItem";
 import { ProjectListItemStory } from "../../ProjectListItem/__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withViewModeProvider } from "@/components/common/ViewMode/__stories__";
@@ -36,20 +35,11 @@ type Story = StoryObj<typeof meta>;
 export const Default = {
   args: {
     children: mockedProjectList.map((project) => (
-      <ProjectItemProviders
+      <ProjectListItem
         key={project.id}
-        projectId={project.id}
-        projectStatus={project.status}
-        updateProject={() => ({ status: "success" })}
-        deleteProject={() => ({ status: "success" })}
-        updateProjectStatus={() => ({ status: "success" })}
-      >
-        <ProjectListItem
-          key={project.id}
-          {...ProjectListItemStory.args}
-          {...project}
-        />
-      </ProjectItemProviders>
+        {...ProjectListItemStory.args}
+        {...project}
+      />
     )),
   },
 } satisfies Story;

@@ -1,7 +1,7 @@
 import {
   ToolbarMobileTop,
-  ToolbarMobileHeading,
-} from "@/components/common/Toolbar";
+  PageHeadingMobile,
+} from "@/components/common/ToolbarOld";
 
 import { useTranslations } from "next-intl";
 import { Card } from "@/components/common/Card";
@@ -27,7 +27,7 @@ export default function AppCustomerDetailLoading() {
       <PageGrid className="md:hidden">
         <ToolbarMobileTop>
           <BackButton href="/customers" />
-          <ToolbarMobileHeading>{t("heading")}</ToolbarMobileHeading>
+          <PageHeadingMobile>{t("heading")}</PageHeadingMobile>
         </ToolbarMobileTop>
 
         <div className="flex flex-col">

@@ -1,7 +1,7 @@
 import {
   ToolbarMobileTop,
-  ToolbarMobileHeading,
-} from "@/components/common/Toolbar";
+  PageHeadingMobile,
+} from "@/components/common/ToolbarOld";
 
 import { useTranslations } from "next-intl";
 import { PageGrid } from "@/components/common/PageGrid";
@@ -33,7 +33,7 @@ export function DashboardPage({
       <PageContainer>
         <PageGrid>
           <ToolbarMobileTop>
-            <ToolbarMobileHeading>{t("heading")}</ToolbarMobileHeading>
+            <PageHeadingMobile>{t("heading")}</PageHeadingMobile>
           </ToolbarMobileTop>
           <DashboardCardsGrid>
             {totalProjectsCardContainer}

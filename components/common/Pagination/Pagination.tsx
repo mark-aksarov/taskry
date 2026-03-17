@@ -107,7 +107,7 @@ export function Pagination({
   return (
     <div
       className={twMerge(
-        "inline-flex items-center",
+        "flex items-center",
         size === "small" && "gap-1.5",
         size === "large" && "gap-2",
         className,
@@ -123,7 +123,7 @@ export function Pagination({
               {typeof p === "number" ? (
                 renderButton("page", p)
               ) : (
-                <span aria-hidden>{p}</span>
+                <div aria-hidden>{p}</div>
               )}
             </Fragment>
           ))}

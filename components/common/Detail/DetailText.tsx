@@ -5,5 +5,5 @@ interface DetailTextProps {
 }
 
 export function DetailText({ children }: DetailTextProps) {
-  return <span className={styles}>{children}</span>;
+  return <div className={styles}>{children}</div>;
 }

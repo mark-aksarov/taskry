@@ -10,7 +10,7 @@ import {
 } from "@/components/common/List";
 
 import { UserTaskListItemLayout } from "./UserTaskListItemLayout";
-import { CheckboxSkeleton } from "@/components/common/CheckboxSkeleton";
+import { CheckboxSkeleton } from "@/components/ui/Skeleton/CheckboxSkeleton";
 
 export const UserTaskListItemSkeleton = () => {
   return (

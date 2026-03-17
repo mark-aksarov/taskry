@@ -27,6 +27,7 @@ export function CompanyListItemCheckbox({ id }: CompanyListItemCheckboxProps) {
       aria-label="company checkbox"
       isSelected={isSelected}
       onChange={handleChange}
+      className="max-md:hidden"
     />
   );
 }

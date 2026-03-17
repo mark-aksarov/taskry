@@ -1,20 +1,27 @@
 import { TasksPage } from "./TasksPage";
 import TasksPageLoading from "./loading";
 import { mocked } from "storybook/test";
-import { useParams, usePathname } from "next/navigation";
 import { mockedUserSummaries } from "@/mocks/users";
 import { TaskList } from "@/components/tasks/TaskList";
-import { TaskGrid } from "@/components/tasks/TaskGrid";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { useParams, usePathname } from "next/navigation";
 import { mockedProjectSummaries } from "@/mocks/projects";
 import { PageDecorator } from "@/.storybook/PageDecorator";
+import { TaskGridLarge } from "@/components/tasks/TaskGrid";
+import { SearchList } from "@/components/search/SearchList";
 import { NewTaskForm } from "@/components/tasks/NewTaskForm";
+import { TaskGridMobile } from "@/components/tasks/TaskGrid";
 import { mockedTaskCategorySummaries } from "@/mocks/taskCategories";
 import { TaskFiltersForm } from "@/components/tasks/TaskFiltersForm";
 import { NewSubtaskModal } from "@/components/subtasks/NewSubtaskModal";
-import { TaskGridStory } from "@/components/tasks/TaskGrid/__stories__";
 import { TaskListStory } from "@/components/tasks/TaskList/__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { SearchListStory } from "@/components/search/SearchList/__stories__";
+import { TaskGridLargeStory } from "@/components/tasks/TaskGrid/__stories__";
+import { TaskGridMobileStory } from "@/components/tasks/TaskGrid/__stories__";
+import { TaskProjectFiltersForm } from "@/components/tasks/TaskProjectFiltersForm";
+import { TaskAssigneeFiltersForm } from "@/components/tasks/TaskAssigneeFiltersForm";
+import { TaskCategoryFiltersForm } from "@/components/tasks/TaskCategoryFiltersForm";
 import { withCreateTaskProvider } from "@/components/tasks/CreateTaskContext/__stories__";
 import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
 import { withTaskFiltersProvider } from "@/components/tasks/TaskFiltersContext/__stories__";
@@ -26,8 +33,6 @@ import { withPageTransitionProvider } from "@/components/common/PageTransitionCo
 import { withCreateSubtaskProvider } from "@/components/subtasks/CreateSubtaskContext/__stories__";
 import { withUpdateTaskStatusesProvider } from "@/components/tasks/UpdateTaskStatusesContext/__stories__";
 import { withCreateTaskCategoryProvider } from "@/components/taskCategory/CreateTaskCategoryContext/__stories__";
-import { SearchList } from "@/components/search/SearchList";
-import { SearchListStory } from "@/components/search/SearchList/__stories__";
 
 const meta = {
   title: "pages/TasksPage",
@@ -73,8 +78,9 @@ export const Default = {
       <EntityContainerPresentation
         page={1}
         pageSize={3}
-        list={<TaskList {...TaskListStory.args} />}
-        grid={<TaskGrid {...TaskGridStory.args} />}
+        listLarge={<TaskList {...TaskListStory.args} />}
+        gridLarge={<TaskGridLarge {...TaskGridLargeStory.args} />}
+        gridMobile={<TaskGridMobile {...TaskGridMobileStory.args} />}
         totalPages={3}
       />
     ),
@@ -83,6 +89,21 @@ export const Default = {
       <TaskFiltersForm
         categoryCheckboxGroupItems={mockedTaskCategorySummaries}
         projectCheckboxGroupItems={mockedProjectSummaries}
+        assigneeCheckboxGroupItems={mockedUserSummaries}
+      />
+    ),
+    taskCategoryFiltersFormContainer: (
+      <TaskCategoryFiltersForm
+        categoryCheckboxGroupItems={mockedTaskCategorySummaries}
+      />
+    ),
+    projectFiltersFormContainer: (
+      <TaskProjectFiltersForm
+        projectCheckboxGroupItems={mockedProjectSummaries}
+      />
+    ),
+    assigneeFiltersFormContainer: (
+      <TaskAssigneeFiltersForm
         assigneeCheckboxGroupItems={mockedUserSummaries}
       />
     ),

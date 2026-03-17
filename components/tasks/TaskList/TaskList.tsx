@@ -2,8 +2,7 @@
 
 import { Children } from "react";
 import { List } from "@/components/common/List";
-import { Repeat } from "@/components/common/Repeat";
-import { TaskListItemSkeleton } from "../TaskListItem";
+import { TaskListSkeleton } from "./TaskListSkeleton";
 import { useEntityListPending } from "@/lib/hooks/useEntityListPending";
 
 interface TaskListProps {
@@ -15,12 +14,7 @@ export function TaskList({ children }: TaskListProps) {
 
   if (isPending) {
     return (
-      <List data-test="tasks-list">
-        <Repeat
-          items={Children.count(children)}
-          renderItem={() => <TaskListItemSkeleton showCheckbox={true} />}
-        />
-      </List>
+      <TaskListSkeleton items={Children.count(children)} showCheckbox={true} />
     );
   }
 

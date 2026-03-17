@@ -4,10 +4,8 @@ import {
   ItemBaseDetailModalTriggerProps,
 } from "../ItemBase";
 
-// These components are direct children of a flex container and become blockified flex items.
-
 export const titleStyles =
-  "truncate max-w-full text-sm font-bold text-black dark:text-white";
+  "truncate max-w-full md:text-sm max-md:text-base font-bold text-black dark:text-white";
 
 // Text only title
 interface GridItemTitleProps {

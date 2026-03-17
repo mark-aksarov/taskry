@@ -2,7 +2,7 @@ import { twMerge } from "tailwind-merge";
 
 export type BadgeColor = "blue" | "green" | "gray" | "orange" | "red";
 
-export interface BadgeProps extends React.ComponentPropsWithRef<"span"> {
+export interface BadgeProps extends React.ComponentPropsWithRef<"div"> {
   color?: BadgeColor;
 }
 
@@ -13,10 +13,10 @@ export const Badge = ({
   ...props
 }: BadgeProps) => {
   return (
-    <span
+    <div
       role="presentation"
       className={twMerge(
-        "inline-flex items-center justify-center gap-1 rounded-full px-5 py-1.5 text-center text-xs font-bold",
+        "flex items-center justify-center gap-1 rounded-full px-5 py-1.5 text-center text-xs font-bold",
         color === "blue" &&
           "bg-blue-100 text-blue-700 dark:bg-blue-800 dark:text-blue-300",
         color === "green" &&
@@ -32,6 +32,6 @@ export const Badge = ({
       {...props}
     >
       {children}
-    </span>
+    </div>
   );
 };

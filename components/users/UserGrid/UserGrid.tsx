@@ -2,14 +2,16 @@
 
 import { Children } from "react";
 import { Repeat } from "@/components/common/Repeat";
-import { Grid } from "@/components/common/Grid/Grid";
+//import { Grid } from "@/components/common/Grid/Grid";
 import { UserGridItemSkeleton } from "../UserGridItem";
 import { useEntityListPending } from "@/lib/hooks/useEntityListPending";
 
 export function UserGrid({ children }: { children: React.ReactNode }) {
   const isPending = useEntityListPending();
 
-  if (isPending) {
+  return null;
+
+  /* if (isPending) {
     return (
       <Grid data-test="users-grid">
         <Repeat
@@ -20,5 +22,5 @@ export function UserGrid({ children }: { children: React.ReactNode }) {
     );
   }
 
-  return <Grid data-test="users-grid">{children}</Grid>;
+  return <Grid data-test="users-grid">{children}</Grid>;*/
 }

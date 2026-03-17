@@ -8,8 +8,8 @@ export function CommentItemContent({
   children: React.ReactNode;
 }) {
   return (
-    <span className={twMerge("ml-12 flex flex-col gap-4", className)}>
+    <div className={twMerge("ml-12 flex flex-col gap-4", className)}>
       {children}
-    </span>
+    </div>
   );
 }

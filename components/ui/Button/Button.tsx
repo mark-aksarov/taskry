@@ -43,7 +43,7 @@ export type ButtonProps<T extends ElementType = "button"> = ButtonOwnProps<T> &
 
 export const baseButtonStyles = tv({
   extend: focusRing,
-  base: "inline-flex cursor-pointer items-center gap-x-1.5 rounded-lg font-bold whitespace-nowrap",
+  base: "flex cursor-pointer items-center gap-x-1.5 rounded-lg font-bold whitespace-nowrap",
   variants: {
     variant: {
       primary:

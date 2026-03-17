@@ -1,11 +1,7 @@
-import {
-  ToolbarMobileTop,
-  ToolbarMobileHeading,
-} from "@/components/common/Toolbar";
-
 import { useTranslations } from "next-intl";
 import { Card } from "@/components/common/Card";
 import { PageGrid } from "@/components/common/PageGrid";
+import { ToolbarMobile } from "@/components/common/Toolbar";
 import { ActionFn, ActionState } from "@/lib/actions/types";
 import { BackButton } from "@/components/common/BackButton";
 import { EditTaskModal } from "@/components/tasks/EditTaskModal";
@@ -13,6 +9,7 @@ import { PageContainer } from "@/components/common/PageContainer";
 import { TaskDetailCard } from "@/components/tasks/TaskDetailCard";
 import { TaskSearchModal } from "@/components/tasks/TaskSearchModal";
 import { TaskDetailActions } from "@/components/tasks/TaskDetailActions";
+import { PageHeadingMobile } from "@/components/common/PageHeadingMobile";
 
 interface TaskDetailPageProps {
   taskId: number;
@@ -59,10 +56,14 @@ export function TaskDetailPage({
         />
 
         <PageGrid className="md:hidden">
-          <ToolbarMobileTop>
-            <BackButton href="/tasks" />
-            <ToolbarMobileHeading>{t("heading")}</ToolbarMobileHeading>
-          </ToolbarMobileTop>
+          <ToolbarMobile
+            firstSlot={
+              <>
+                <BackButton href="/tasks" />
+                <PageHeadingMobile>{t("heading")}</PageHeadingMobile>
+              </>
+            }
+          />
 
           <div className="flex flex-col">{taskHeaderContainer}</div>
           <Card className="flex flex-col p-1.5">{taskDetailActions}</Card>

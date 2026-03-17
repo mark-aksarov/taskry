@@ -1,41 +1,90 @@
 "use client";
 
 import {
+  BaseProjectItemProps,
+  ProjectItemProviders,
+  ProjectItemActionMenuTrigger,
+} from "../ProjectItem";
+
+import {
   ListItemText,
   ListItemTitle,
   ListItemTitleDetailModalTrigger,
 } from "@/components/common/List";
 
 import {
+  ItemBaseDeadline,
+  ItemBaseUserImageContainer,
   ItemBaseDetailModalTrigger,
   ItemBaseCommentsModalTrigger,
 } from "@/components/common/ItemBase";
 
 import { memo } from "react";
-import Image from "next/image";
+import { useTranslations } from "next-intl";
 import { EditProjectModal } from "../EditProjectModal";
-import { useFormatter, useTranslations } from "next-intl";
 import { ProjectDetailModal } from "../ProjectDetailModal";
-import { UnknownUser } from "@/components/common/UnknownUser";
 import { ProjectCommentsModal } from "../ProjectCommentsModal";
 import { ProjectItemBaseBadge } from "../ProjectItemBaseBadge";
 import { ProjectListItemLayout } from "./ProjectListItemLayout";
-import { ImageContainer } from "@/components/common/ImageContainer";
+import { useSelectedProjects } from "../SelectedProjectsContext";
+import { SelectableItem } from "@/components/common/SelectableItem";
 import { UserDetailModal } from "@/components/users/UserDetailModal";
 import { ProjectItemCheckbox } from "../ProjectItem/ProjectItemCheckbox";
-import { ProjectItemActionMenuTrigger, ProjectItemProps } from "../ProjectItem";
 import { CustomerDetailModal } from "@/components/customer/CustomerDetailModal";
 
-export type ProjectListItemProps = Omit<
-  ProjectItemProps,
-  | "tasksTotal"
-  | "tasksCompleted"
-  | "updateProject"
-  | "deleteProject"
-  | "updateProjectStatus"
+export interface Props extends BaseProjectItemProps {
+  category?: {
+    id: number;
+    name: string;
+  };
+  customer?: {
+    id: number;
+    fullName: string;
+    imageUrl?: string;
+  };
+  company?: {
+    id: number;
+    name: string;
+  };
+  projectDetailContainer: React.ReactNode;
+  userDetailContainer: React.ReactNode;
+  userDetailHeaderContainer: React.ReactNode;
+  customerDetailContainer: React.ReactNode;
+  customerDetailHeaderContainer: React.ReactNode;
+  showCheckbox?: boolean;
+}
+
+export function ProjectListItem({
+  updateProject,
+  deleteProject,
+  updateProjectStatus,
+  ...props
+}: Props) {
+  const selected = useSelectedProjects();
+
+  return (
+    <ProjectItemProviders
+      projectId={props.id}
+      deleteProject={deleteProject}
+      updateProject={updateProject}
+      updateProjectStatus={updateProjectStatus}
+    >
+      <SelectableItem
+        {...selected}
+        item={{ id: props.id, status: props.status }}
+      >
+        <ProjectListItemInner {...props} />
+      </SelectableItem>
+    </ProjectItemProviders>
+  );
+}
+
+export type InnerProps = Omit<
+  Props,
+  "updateProject" | "deleteProject" | "updateProjectStatus"
 >;
 
-export const ProjectListItem = memo(
+export const ProjectListItemInner = memo(
   ({
     id,
     title,
@@ -55,40 +104,42 @@ export const ProjectListItem = memo(
     projectCommentsContainer,
     sendComment,
     updateComment,
-  }: ProjectListItemProps) => {
+  }: InnerProps) => {
     const t = useTranslations("projects.ProjectListItem");
 
-    // use useFormatter to format the date according to the user's locale
-    const format = useFormatter();
-
-    const deadlineOn = t("deadlineOn", {
-      date: format.dateTime(new Date(deadline), {
-        day: "2-digit",
-        month: "short",
-        year: "numeric",
-      }),
-    });
-
-    const creatorImg = creator?.imageUrl ? (
-      <ImageContainer className="h-9 w-9">
-        <Image
-          src={creator.imageUrl}
-          alt={creator.fullName}
-          width={36}
-          height={36}
-        />
-      </ImageContainer>
-    ) : (
-      <UnknownUser className="h-9 w-9" />
+    const creatorImg = (
+      <ItemBaseUserImageContainer
+        user={creator}
+        className="h-9 w-9"
+        width={36}
+        height={36}
+      />
     );
 
-    const userDetailModal = creator && (
+    const customerImg = (
+      <ItemBaseUserImageContainer
+        user={customer}
+        className="h-9 w-9"
+        width={36}
+        height={36}
+      />
+    );
+
+    const userDetailModal = creator ? (
       <UserDetailModal
         userId={creator.id}
         userDetailContainer={userDetailContainer}
         userDetailHeaderContainer={userDetailHeaderContainer}
       />
-    );
+    ) : undefined;
+
+    const customerDetailModal = customer ? (
+      <CustomerDetailModal
+        customerId={customer.id}
+        customerDetailContainer={customerDetailContainer}
+        customerDetailHeaderContainer={customerDetailHeaderContainer}
+      />
+    ) : undefined;
 
     return (
       <>
@@ -108,25 +159,19 @@ export const ProjectListItem = memo(
               >
                 {title}
               </ListItemTitleDetailModalTrigger>
-              <ListItemText>{deadlineOn}</ListItemText>
-            </>
-          }
-          mainMobileSlot={
-            <>
-              <ListItemTitle>{title}</ListItemTitle>
-              <ListItemText>{deadlineOn}</ListItemText>
+              <ListItemText>
+                <ItemBaseDeadline deadline={deadline} />
+              </ListItemText>
             </>
           }
           creatorImgSlot={
             <>
               {creator ? (
-                <>
-                  <ItemBaseDetailModalTrigger modal={userDetailModal}>
-                    {creatorImg}
-                  </ItemBaseDetailModalTrigger>
-                </>
+                <ItemBaseDetailModalTrigger modal={userDetailModal}>
+                  {creatorImg}
+                </ItemBaseDetailModalTrigger>
               ) : (
-                <UnknownUser className="h-9 w-9" />
+                creatorImg
               )}
             </>
           }
@@ -145,34 +190,19 @@ export const ProjectListItem = memo(
           }
           customerImgSlot={
             <>
-              {customer?.imageUrl ? (
-                <ImageContainer className="h-9 w-9">
-                  <Image
-                    src={customer.imageUrl}
-                    alt={customer.fullName}
-                    width={36}
-                    height={36}
-                  />
-                </ImageContainer>
+              {customer ? (
+                <ItemBaseDetailModalTrigger modal={customerDetailModal}>
+                  {customerImg}
+                </ItemBaseDetailModalTrigger>
               ) : (
-                <UnknownUser className="h-9 w-9" />
+                customerImg
               )}
             </>
           }
           customerSlot={
             <>
               {customer ? (
-                <ListItemTitleDetailModalTrigger
-                  modal={
-                    <CustomerDetailModal
-                      customerId={customer.id}
-                      customerDetailContainer={customerDetailContainer}
-                      customerDetailHeaderContainer={
-                        customerDetailHeaderContainer
-                      }
-                    />
-                  }
-                >
+                <ListItemTitleDetailModalTrigger modal={customerDetailModal}>
                   {customer.fullName}
                 </ListItemTitleDetailModalTrigger>
               ) : (

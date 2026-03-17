@@ -1,14 +1,18 @@
 import "server-only";
 
 import {
-  AssignedTasksSkeleton,
+  AssignedTasksSection,
   AssignedTasksPresentation,
+  AssignedTasksSectionHeading,
 } from "../AssignedTasks";
 
 import { Suspense } from "react";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
+import { TaskGridMobile } from "../TaskGrid";
+import { TaskListSkeleton } from "../TaskList";
 import { NewTaskModal } from "../NewTaskModal";
+import { TaskGridItemMobile } from "../TaskGridItem";
 import { AssignedTaskList } from "../AssignedTaskList";
 import { CreateTaskProvider } from "../CreateTaskContext";
 import { createTask } from "@/lib/actions/task/createTask";
@@ -36,7 +40,14 @@ interface AssignedTasksContainerProps {
 
 export function AssignedTasksContainer(props: AssignedTasksContainerProps) {
   return (
-    <Suspense fallback={<AssignedTasksSkeleton />}>
+    <Suspense
+      fallback={
+        <AssignedTasksSection>
+          <AssignedTasksSectionHeading />
+          <TaskListSkeleton items={10} showCheckbox={false} />
+        </AssignedTasksSection>
+      }
+    >
       <AssignedTasksContainerInner {...props} />
     </Suspense>
   );
@@ -52,6 +63,29 @@ async function AssignedTasksContainerInner({
     headers: await headers(),
   });
 
+  const getTaskCommonProps = (task: TaskListItemDTO) => ({
+    id: task.id,
+    title: task.title,
+    deadline: task.deadline,
+    assignee: task.assignee,
+    status: task.status,
+    commentsCount: task.commentsCount,
+    sendComment,
+    updateComment,
+    updateTask,
+    updateTaskStatus,
+    deleteTask,
+    taskDetailContainer: <TaskDetailContainer taskId={task.id} />,
+    taskCommentsContainer: <TaskCommentsContainer taskId={task.id} />,
+    userDetailContainer: task.assignee && (
+      <UserDetailContainer userId={task.assignee.id} />
+    ),
+    userDetailHeaderContainer: task.assignee && (
+      <UserDetailHeaderContainer userId={task.assignee.id} />
+    ),
+    editTaskFormContainer: <EditTaskFormContainer taskId={task.id} />,
+  });
+
   return (
     <CreateTaskProvider createTask={createTask}>
       <AssignedTasksPresentation
@@ -59,49 +93,34 @@ async function AssignedTasksContainerInner({
         page={page}
         pageSize={pageSize}
         totalPages={Math.ceil(totalCount / pageSize)}
-        list={
+        listLarge={
           <AssignedTaskList>
             {tasks.map((task) => (
               <AssignedTaskListItem
                 key={task.id}
-                id={task.id}
-                title={task.title}
-                deadline={task.deadline}
-                category={task.category}
+                {...getTaskCommonProps(task)}
                 project={task.project}
-                status={task.status}
-                assignee={task.assignee}
-                taskDetailContainer={<TaskDetailContainer taskId={task.id} />}
-                commentsCount={task.commentsCount}
-                taskCommentsContainer={
-                  <TaskCommentsContainer taskId={task.id} />
-                }
-                userDetailContainer={
-                  task.assignee && (
-                    <UserDetailContainer userId={task.assignee.id} />
-                  )
-                }
-                userDetailHeaderContainer={
-                  task.assignee && (
-                    <UserDetailHeaderContainer userId={task.assignee.id} />
-                  )
-                }
+                category={task.category}
                 projectDetailContainer={
                   task.project && (
                     <ProjectDetailContainer projectId={task.project.id} />
                   )
                 }
-                editTaskFormContainer={
-                  <EditTaskFormContainer taskId={task.id} />
-                }
-                sendComment={sendComment}
-                updateComment={updateComment}
-                updateTask={updateTask}
-                deleteTask={deleteTask}
-                updateTaskStatus={updateTaskStatus}
               />
             ))}
           </AssignedTaskList>
+        }
+        gridMobile={
+          <TaskGridMobile>
+            {tasks.map((task) => (
+              <TaskGridItemMobile
+                key={task.id}
+                {...getTaskCommonProps(task)}
+                subtasksTotal={task.subtasks.total}
+                subtasksDone={task.subtasks.done}
+              />
+            ))}
+          </TaskGridMobile>
         }
       />
 

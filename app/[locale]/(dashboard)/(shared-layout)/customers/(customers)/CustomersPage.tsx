@@ -1,9 +1,29 @@
 import {
-  ToolbarDesktop,
-  ToolbarMobileTop,
-  ToolbarMobileBottom,
-  ToolbarMobileHeading,
+  ToolbarLarge,
+  ToolbarMobile,
+  ToolbarSearchMobile,
+  ToolbarFiltersMobile,
 } from "@/components/common/Toolbar";
+
+import {
+  CustomerFiltersModalTriggerLarge,
+  CustomerFiltersModalTriggerMobile,
+} from "@/components/customer/CustomerFiltersModal";
+
+import {
+  CustomerManageMenuTriggerLarge,
+  CustomerManageMenuTriggerMobile,
+} from "@/components/customer/CustomerManageMenuTrigger";
+
+import {
+  CustomerSortingMenuTriggerLarge,
+  CustomerSortingMenuTriggerMobile,
+} from "@/components/customer/CustomerSortingMenuTrigger";
+
+import {
+  CreateCustomerMenuTriggerLarge,
+  CreateCustomerMenuTriggerMobile,
+} from "@/components/customer/CreateCustomerMenuTrigger";
 
 import { useTranslations } from "next-intl";
 import { CustomerSortField } from "@/lib/types";
@@ -14,14 +34,14 @@ import { NewCompanyModal } from "@/components/company/NewCompanyModal";
 import { PageEmptySection } from "@/components/common/PageEmptySection";
 import { ViewModeToggleButtonGroup } from "@/components/common/ViewMode";
 import { NewCustomerModal } from "@/components/customer/NewCustomerModal";
+import { PageHeadingMobile } from "@/components/common/PageHeadingMobile";
+import { SearchModalTrigger } from "@/components/search/SearchModalTrigger";
 import { CustomerSearchModal } from "@/components/customer/CustomerSearchModal";
+import { CustomerResultsCount } from "@/components/customer/CustomerResultsCount";
+import { CustomerActionsMenuTrigger } from "@/components/customer/CustomerActionsMenuTrigger";
 import { CustomersFilteredEmptySection } from "@/components/customer/CustomersFilteredEmptySection";
-import { CustomerToolbarManageMenuTrigger } from "@/components/customer/CustomerToolbarManageMenuTrigger";
-import { CustomerToolbarSortingMenuTrigger } from "@/components/customer/CustomerToolbarSortingMenuTrigger";
-import { CustomerToolbarActionsMenuTrigger } from "@/components/customer/CustomerToolbarActionsMenuTrigger";
 import { CustomersEmptySectionCreateButton } from "@/components/customer/CustomersEmptySectionCreateButton";
-import { CustomerToolbarFiltersModalTrigger } from "@/components/customer/CustomerToolbarFiltersModalTrigger";
-import { CustomerToolbarCreateNewMenuTrigger } from "@/components/customer/CustomerToolbarCreateNewMenuTrigger";
+import { CustomerCompanyFiltersModalTrigger } from "@/components/customer/CustomerCompanyFiltersModal";
 
 interface CustomersPageProps {
   totalCount: number;
@@ -31,6 +51,7 @@ interface CustomersPageProps {
   customersContainer: React.ReactNode;
   newCustomerFormContainer: React.ReactNode;
   filtersFormContainer: React.ReactNode;
+  companyFiltersFormContainer: React.ReactNode;
 }
 
 export function CustomersPage({
@@ -41,6 +62,7 @@ export function CustomersPage({
   customersContainer,
   newCustomerFormContainer,
   filtersFormContainer,
+  companyFiltersFormContainer,
 }: CustomersPageProps) {
   const t = useTranslations("app.CustomersPage");
 
@@ -49,12 +71,10 @@ export function CustomersPage({
       <>
         <PageContainer fullscreen headerOffset>
           <PageGrid className="relative flex-auto">
-            <ToolbarMobileTop>
-              <ToolbarMobileHeading>{t("heading")}</ToolbarMobileHeading>
-              <div className="ml-auto">
-                <CustomerToolbarManageMenuTrigger />
-              </div>
-            </ToolbarMobileTop>
+            <ToolbarMobile
+              firstSlot={<PageHeadingMobile>{t("heading")}</PageHeadingMobile>}
+              secondSlot={<CustomerManageMenuTriggerMobile />}
+            />
 
             <PageEmptySection
               heading={t("emptySection.heading")}
@@ -76,35 +96,62 @@ export function CustomersPage({
       <PageContainer fullscreen={isFilteredEmpty} headerOffset>
         <PageGrid className="relative flex-auto">
           <ViewModeProvider>
-            <ToolbarDesktop>
-              <CustomerToolbarManageMenuTrigger />
-              <CustomerToolbarSortingMenuTrigger
-                selectedSortField={selectedSortField}
-              />
-              <CustomerToolbarFiltersModalTrigger
+            <ToolbarLarge
+              firstSlot={
+                <>
+                  <CustomerManageMenuTriggerLarge />
+                  <CustomerSortingMenuTriggerLarge
+                    selectedSortField={selectedSortField}
+                  />
+                  <CustomerFiltersModalTriggerLarge
+                    filtersFormContainer={filtersFormContainer}
+                  />
+                  <CustomerActionsMenuTrigger />
+                </>
+              }
+              secondSlot={
+                <>
+                  <ViewModeToggleButtonGroup />
+                  <CreateCustomerMenuTriggerLarge />
+                </>
+              }
+            />
+
+            <ToolbarMobile
+              firstSlot={<PageHeadingMobile>{t("heading")}</PageHeadingMobile>}
+              secondSlot={
+                <>
+                  <CreateCustomerMenuTriggerMobile />
+                  <CustomerManageMenuTriggerMobile />
+                </>
+              }
+            />
+
+            <ToolbarSearchMobile>
+              <SearchModalTrigger />
+            </ToolbarSearchMobile>
+
+            <ToolbarFiltersMobile>
+              <CustomerFiltersModalTriggerMobile
                 filtersFormContainer={filtersFormContainer}
               />
-              <CustomerToolbarActionsMenuTrigger />
-              <ViewModeToggleButtonGroup className="ml-auto" />
-              <CustomerToolbarCreateNewMenuTrigger />
-            </ToolbarDesktop>
-
-            <ToolbarMobileTop>
-              <ToolbarMobileHeading>{t("heading")}</ToolbarMobileHeading>
-              <CustomerToolbarManageMenuTrigger />
-              <CustomerToolbarSortingMenuTrigger
-                selectedSortField={selectedSortField}
+              <CustomerCompanyFiltersModalTrigger
+                filtersFormContainer={companyFiltersFormContainer}
               />
-              <CustomerToolbarFiltersModalTrigger
-                filtersFormContainer={filtersFormContainer}
-              />
-              <CustomerToolbarActionsMenuTrigger />
-            </ToolbarMobileTop>
+            </ToolbarFiltersMobile>
 
-            <ToolbarMobileBottom>
-              <ViewModeToggleButtonGroup />
-              <CustomerToolbarCreateNewMenuTrigger />
-            </ToolbarMobileBottom>
+            {!isFilteredEmpty && (
+              <ToolbarMobile
+                firstSlot={
+                  <CustomerResultsCount count={totalFilteredCustomers} />
+                }
+                secondSlot={
+                  <CustomerSortingMenuTriggerMobile
+                    selectedSortField={selectedSortField}
+                  />
+                }
+              />
+            )}
 
             {isFilteredEmpty ? (
               <CustomersFilteredEmptySection />

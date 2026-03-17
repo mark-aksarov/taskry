@@ -10,21 +10,39 @@ import {
 } from "@/components/common/ItemBase";
 
 import { TaskGridItemLayout } from "./TaskGridItemLayout";
-import { CheckboxSkeleton } from "@/components/common/CheckboxSkeleton";
+import { CheckboxSkeleton } from "@/components/ui/Skeleton/CheckboxSkeleton";
 import { ImageContainerSkeleton } from "@/components/common/ImageContainer";
 
-export const TaskGridItemSkeleton = () => {
+interface TaskGridItemSkeletonProps {
+  showCheckbox?: boolean;
+  assigneeImageClassName?: string;
+}
+
+const TaskGridItemSkeleton = ({
+  showCheckbox,
+  assigneeImageClassName,
+}: TaskGridItemSkeletonProps) => {
   return (
     <TaskGridItemLayout
-      checkboxSlot={<CheckboxSkeleton />}
+      checkboxSlot={showCheckbox ? <CheckboxSkeleton /> : undefined}
       menuTriggerSlot={
         <ItemBaseActionMenuTriggerSkeleton className="-mr-2 ml-auto" />
       }
       titleSlot={<GridItemInfoSkeleton />}
-      assigneeImageSlot={<ImageContainerSkeleton className="h-9 w-9" />}
+      assigneeImageSlot={
+        <ImageContainerSkeleton className={assigneeImageClassName} />
+      }
       commentsSlot={<ItemBaseButtonSkeleton />}
       statusSlot={<ItemBaseBadgeSkeleton />}
       progressSlot={<GridItemProgressSkeleton />}
     />
   );
+};
+
+export const TaskGridItemLargeSkeleton = () => {
+  return <TaskGridItemSkeleton assigneeImageClassName="h-9 w-9" showCheckbox />;
+};
+
+export const TaskGridItemMobileSkeleton = () => {
+  return <TaskGridItemSkeleton assigneeImageClassName="h-11 w-11" />;
 };

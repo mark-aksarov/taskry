@@ -1,7 +1,6 @@
-export { ProjectItem } from "./ProjectItem";
-export { type ProjectItemProps } from "./ProjectItem";
+export { type BaseProjectItemProps } from "./types";
 export { ProjectItemCheckbox } from "./ProjectItemCheckbox";
+export { ProjectItemProviders } from "./ProjectItemProviders";
 export { useProjectItemPending } from "./useProjectItemPending";
 export { ProjectItemPendingOverlay } from "./ProjectItemPendingOverlay";
 export { ProjectItemActionMenuTrigger } from "./ProjectItemActionMenuTrigger";
-export { ProjectItemProviders } from "./ProjectItemProviders";

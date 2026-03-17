@@ -1,19 +1,12 @@
-import {
-  ToolbarDesktop,
-  ToolbarMobileTop,
-  ToolbarMobileBottom,
-  ToolbarMobileHeading,
-  ToolbarDesktopButtonSkeleton,
-  ToolbarMobileTopButtonSkeleton,
-  ToolbarMobileBottomButtonSkeleton,
-} from "@/components/common/Toolbar";
-
 import { useTranslations } from "next-intl";
 import { List } from "@/components/common/List";
 import { Repeat } from "@/components/common/Repeat";
 import { PageGrid } from "@/components/common/PageGrid";
+import { ButtonSkeleton } from "@/components/ui/Skeleton";
 import { BackButton } from "@/components/common/BackButton";
 import { PageContainer } from "@/components/common/PageContainer";
+import { ToolbarLarge, ToolbarMobile } from "@/components/common/Toolbar";
+import { PageHeadingMobile } from "@/components/common/PageHeadingMobile";
 import { ProjectCategoryListItemSkeleton } from "@/components/projectCategory/ProjectCategoryListItem";
 
 export default function AppProjectCategoriesPageLoading() {
@@ -22,23 +15,23 @@ export default function AppProjectCategoriesPageLoading() {
   return (
     <PageContainer>
       <PageGrid>
-        <ToolbarDesktop>
-          <ToolbarDesktopButtonSkeleton />
-          <ToolbarDesktopButtonSkeleton className="ml-auto" />
-        </ToolbarDesktop>
+        <ToolbarLarge
+          firstSlot={<ButtonSkeleton className="w-[5rem]" />}
+          secondSlot={<ButtonSkeleton className="w-[5rem]" />}
+        />
 
-        <ToolbarMobileTop>
-          <BackButton href="/projects" />
-          <ToolbarMobileHeading>{t("heading")}</ToolbarMobileHeading>
-          <ToolbarMobileTopButtonSkeleton />
-        </ToolbarMobileTop>
-
-        <ToolbarMobileBottom>
-          <ToolbarMobileBottomButtonSkeleton className="ml-auto" />
-        </ToolbarMobileBottom>
+        <ToolbarMobile
+          firstSlot={
+            <>
+              <BackButton href="/projects" />
+              <PageHeadingMobile>{t("heading")}</PageHeadingMobile>
+            </>
+          }
+          secondSlot={<ButtonSkeleton className="w-8" />}
+        />
 
         <List>
-          <Repeat items={107} renderItem={ProjectCategoryListItemSkeleton} />
+          <Repeat items={10} renderItem={ProjectCategoryListItemSkeleton} />
         </List>
       </PageGrid>
     </PageContainer>

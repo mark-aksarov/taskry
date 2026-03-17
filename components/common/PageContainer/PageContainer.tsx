@@ -15,12 +15,15 @@ export function PageContainer({
   headerOffset,
   children,
 }: PageContainerProps) {
+  // FIXME: Temporary hardcoded header height (73px / 83px, measured in browser).
   return (
     <div
       className={twMerge(
         "max-md:p-4 md:p-6",
-        fullscreen && headerOffset && "flex h-[calc(100dvh-5.0625rem)]",
-        fullscreen && !headerOffset && "flex h-screen",
+        fullscreen &&
+          headerOffset &&
+          "flex max-md:h-[calc(100dvh-73px)] md:h-[calc(100dvh-83px)]",
+        fullscreen && !headerOffset && "flex h-dvh",
         centered && "items-center justify-center",
         className,
       )}

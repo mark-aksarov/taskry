@@ -32,6 +32,7 @@ const preview: Preview = {
         <NextIntlClientProvider
           locale={globals.locale}
           messages={globals.locale === "en" ? en : ru}
+          timeZone="UTC"
         >
           <I18nProvider locale={globals.locale}>
             <Story />

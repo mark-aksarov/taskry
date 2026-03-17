@@ -3,6 +3,11 @@ import {
   ProjectDetailAltSkeleton,
 } from "../ProjectDetailAlt";
 
+import {
+  ProjectDetailActions,
+  ProjectDetailActionsSkeleton,
+} from "../ProjectDetailActions";
+
 import { EditProjectForm } from "../EditProjectForm";
 import { EditProjectModal } from "../EditProjectModal";
 import { mockedProjectDetail } from "@/mocks/projects";
@@ -10,16 +15,15 @@ import { ProjectDetailCard } from "./ProjectDetailCard";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { mockedCustomerSummaries } from "@/mocks/customers";
 import { ProjectDetailHeader } from "../ProjectDetailHeader";
-import { ProjectDetailActions } from "../ProjectDetailActions";
+import { CommentList } from "@/components/comments/CommentList";
 import { DetailHeaderSkeleton } from "@/components/common/DetailHeader";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { mockedProjectCategorySummaries } from "@/mocks/projectCategories";
 import { withUpdateProjectProvider } from "../UpdateProjectContext/__stories__";
 import { withDeleteProjectProvider } from "../DeleteProjectContext/__stories__";
+import { CommentListStory } from "@/components/comments/CommentList/__stories__";
 import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
-import { CommentList } from "@/components/comments/CommentList";
-import { CommentListStory } from "@/components/comments/CommentList/__stories__";
 
 const meta = {
   title: "components/projects/ProjectDetailCard",
@@ -78,6 +82,7 @@ export const Loading = {
     ...Default.args,
     projectDetailContainer: <ProjectDetailAltSkeleton />,
     projectDetailHeaderContainer: <DetailHeaderSkeleton />,
+    projectDetailActions: <ProjectDetailActionsSkeleton />,
   },
 } satisfies Story;
 

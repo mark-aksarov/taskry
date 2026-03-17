@@ -1,13 +1,10 @@
 import {
   FieldSkeleton,
   FieldGroupSkeleton,
-} from "@/components/common/FieldSkeleton";
+  ButtonSkeleton,
+} from "@/components/ui/Skeleton";
 
-import {
-  FormBaseBody,
-  FormBaseFooter,
-  FormBaseSubmitButtonSkeleton,
-} from "../common/FormBase";
+import { FormBaseBody, FormBaseFooter } from "../common/FormBase";
 
 export function ProjectFormSkeleton() {
   return (
@@ -38,7 +35,7 @@ export function ProjectFormSkeleton() {
         </FieldSkeleton>
       </FormBaseBody>
       <FormBaseFooter>
-        <FormBaseSubmitButtonSkeleton />
+        <ButtonSkeleton size="medium" />
       </FormBaseFooter>
     </div>
   );

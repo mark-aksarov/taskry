@@ -1,4 +1,13 @@
 {
+  "GridItemPhoneNumber": {
+    "noPhoneNumber": "No phone number"
+  },
+  "GridItemPublicLink": {
+    "noPublicLink": "No public link"
+  },
+  "ItemBaseDeadline": {
+    "deadlineOn": "Deadline on {date}"
+  },
   "PersonImageMenuTrigger": {
     "heading": "Profile image",
     "items": {
@@ -29,23 +38,20 @@
     "text": "<strong>Action is restricted in guest mode.</strong> An account is required to access all features. Please sign in or create a new account to remove guest mode restrictions.",
     "cancelButton": "Cancel"
   },
-  "ToolbarSortingMenuTrigger": {
+  "SortingMenuTrigger": {
     "dialogHeading": "Sorting"
   },
-  "ToolbarManageMenuTrigger": {
+  "ManageMenuTrigger": {
     "dialogHeading": "Manage"
   },
-  "ToolbarSortingButtonMobile": {
-    "ariaLabel": "Sort projects by"
+  "SortingButtonMobile": {
+    "ariaLabel": "Sort"
   },
-  "ToolbarSortingButtonDesktop": {
-    "label": "Sorting"
+  "SortingButtonLarge": {
+    "label": "Sort"
   },
-  "ToolbarFiltersButtonDesktop": {
+  "FilterButtonDesktop": {
     "label": "Filters"
-  },
-  "ToolbarFiltersButtonMobile": {
-    "ariaLabel": "Filter projects"
   },
   "FiltersFormSubmitButton": {
     "label": "Apply Filters"
@@ -53,11 +59,8 @@
   "FiltersResetButton": {
     "label": "Reset filters"
   },
-  "ToolbarActionsButtonDesktop": {
+  "ActionsButton": {
     "label": "Actions"
-  },
-  "ToolbarActionsButtonMobile": {
-    "ariaLabel": "Actions"
   },
   "ViewModeToggleButtonGroup": {
     "list": "List",
@@ -88,5 +91,14 @@
     "collapse": "Collapse",
     "expand": "Expand",
     "more": "More"
+  },
+  "FilterButtonMobile": {
+    "ariaLabel": "Open filters"
+  },
+  "ManageButtonMobile": {
+    "ariaLabel": "Manage"
+  },
+  "ManageButtonLarge": {
+    "label": "Manage"
   }
 }

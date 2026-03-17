@@ -4,11 +4,11 @@ interface DashboardCardValueProps {
 
 export const DashboardCardValue = ({ children }: DashboardCardValueProps) => {
   return (
-    <span
+    <div
       data-test="dashboard-card-value"
       className="text-xl font-extrabold text-black dark:text-white"
     >
       {children}
-    </span>
+    </div>
   );
 };

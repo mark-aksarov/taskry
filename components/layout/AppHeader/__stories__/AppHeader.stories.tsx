@@ -4,11 +4,19 @@ import { usePathname } from "next/navigation";
 import { ProfileLink } from "../../ProfileLink";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { withSearchBarProvider } from "@/components/search/SearchBar/__stories__";
+import { withPageTransitionProvider } from "@/components/common/PageTransitionContext/__stories__";
+import { withSearchModalProvider } from "@/components/search/SearchModal/__stories__";
 
 const meta = {
   title: "components/layout/AppHeader",
   component: AppHeader,
-  decorators: [withThemedBackground],
+  decorators: [
+    withSearchBarProvider,
+    withPageTransitionProvider,
+    withSearchModalProvider,
+    withThemedBackground,
+  ],
   beforeEach: () => {
     mocked(usePathname).mockReturnValue("/");
   },

@@ -18,7 +18,7 @@ export type LinkProps = {
 
 export const linkStyles = tv({
   extend: focusRing,
-  base: "not:focus-visible:outline-0 inline-flex cursor-pointer items-center gap-1 focus-visible:outline-2",
+  base: "not:focus-visible:outline-0 flex cursor-pointer items-center gap-1 focus-visible:outline-2",
 
   variants: {
     variant: {

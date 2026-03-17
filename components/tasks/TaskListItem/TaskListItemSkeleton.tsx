@@ -10,7 +10,7 @@ import {
 } from "@/components/common/List";
 
 import { TaskListItemLayout } from "./TaskListItemLayout";
-import { CheckboxSkeleton } from "@/components/common/CheckboxSkeleton";
+import { CheckboxSkeleton } from "@/components/ui/Skeleton/CheckboxSkeleton";
 import { ImageContainerSkeleton } from "@/components/common/ImageContainer";
 
 export const TaskListItemSkeleton = ({
@@ -20,14 +20,8 @@ export const TaskListItemSkeleton = ({
 }) => {
   return (
     <TaskListItemLayout
-      checkboxSlot={showCheckbox && <CheckboxSkeleton />}
+      checkboxSlot={showCheckbox ? <CheckboxSkeleton /> : undefined}
       mainSlot={
-        <>
-          <ListItemTitleSkeleton />
-          <ListItemTextSkeleton />
-        </>
-      }
-      mainMobileSlot={
         <>
           <ListItemTitleSkeleton />
           <ListItemTextSkeleton />

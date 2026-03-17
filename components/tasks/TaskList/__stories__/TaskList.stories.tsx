@@ -1,7 +1,6 @@
 import { TaskList } from "../TaskList";
 import { mockedTaskList } from "@/mocks/tasks";
 import { TaskListItem } from "../../TaskListItem";
-import { TaskItemProviders } from "../../TaskItem";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { TaskListItemStory } from "../../TaskListItem/__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
@@ -35,21 +34,12 @@ type Story = StoryObj<typeof meta>;
 export const Default = {
   args: {
     children: mockedTaskList.map((task) => (
-      <TaskItemProviders
+      <TaskListItem
         key={task.id}
-        taskId={task.id}
-        taskStatus={task.status}
-        deleteTask={() => ({ status: "success" })}
-        updateTaskStatus={() => ({ status: "success" })}
-        updateTask={() => ({ status: "success" })}
-      >
-        <TaskListItem
-          key={task.id}
-          {...TaskListItemStory.args}
-          {...task}
-          showCheckbox={true}
-        />
-      </TaskItemProviders>
+        {...TaskListItemStory.args}
+        {...task}
+        showCheckbox={true}
+      />
     )),
   },
 } satisfies Story;

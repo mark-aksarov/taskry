@@ -1,3 +1,8 @@
+import {
+  CustomerDetailActions,
+  CustomerDetailActionsSkeleton,
+} from "../CustomerDetailActions";
+
 import { CustomerDetail } from "../CustomerDetail";
 import { EditCustomerForm } from "../EditCustomerForm";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
@@ -6,7 +11,6 @@ import { CustomerDetailCard } from "./CustomerDetailCard";
 import { CustomerDetailSkeleton } from "../CustomerDetail";
 import { mockedCompanySummaries } from "@/mocks/companies";
 import { CustomerDetailHeader } from "../CustomerDetailHeader";
-import { CustomerDetailActions } from "../CustomerDetailActions";
 import { DetailHeaderSkeleton } from "@/components/common/DetailHeader";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withDeleteCustomerProvider } from "../DeleteCustomerContext/__stories__";
@@ -63,6 +67,7 @@ export const Loading = {
     ...Default.args,
     customerDetailContainer: <CustomerDetailSkeleton />,
     customerDetailHeaderContainer: <DetailHeaderSkeleton />,
+    customerDetailActions: <CustomerDetailActionsSkeleton />,
   },
 } satisfies Story;
 

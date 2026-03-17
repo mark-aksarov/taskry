@@ -30,7 +30,7 @@ export const Default = {
     layout: "fullscreen",
   },
   args: {
-    className: "h-screen",
+    className: "h-dvh",
     children: (
       <>
         <AppSidebarHeader>

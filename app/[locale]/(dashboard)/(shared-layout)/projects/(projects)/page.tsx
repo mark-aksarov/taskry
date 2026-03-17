@@ -30,9 +30,11 @@ import { NewProjectFormContainer } from "@/components/projects/NewProjectFormCon
 import { SelectedProjectsProvider } from "@/components/projects/SelectedProjectsContext";
 import { createProjectCategory } from "@/lib/actions/projectCategory/createProjectCategory";
 import { ProjectFiltersFormContainer } from "@/components/projects/ProjectFiltersFormContainer";
+import { ProjectRouterSearchContainer } from "@/components/projects/ProjectRouterSearchContainer";
 import { UpdateProjectStatusesProvider } from "@/components/projects/UpdateProjectStatusesContext";
 import { CreateProjectCategoryProvider } from "@/components/projectCategory/CreateProjectCategoryContext";
-import { ProjectRouterSearchContainer } from "@/components/projects/ProjectRouterSearchContainer";
+import { ProjectCategoryFiltersFormContainer } from "@/components/projects/ProjectCategoryFiltersFormContainer";
+import { ProjectCreatorFiltersFormContainer } from "@/components/projects/ProjectCreatorFiltersFormContainer";
 
 const searchParamsSchema = z.object({
   query: searchQueryParam,
@@ -113,6 +115,15 @@ export default async function AppProjectsPage({
                 }
                 projectFiltersFormContainer={
                   <ProjectFiltersFormContainer filters={filters} />
+                }
+                projectCategoryFiltersFormContainer={
+                  <ProjectCategoryFiltersFormContainer />
+                }
+                creatorFiltersFormContainer={
+                  <ProjectCreatorFiltersFormContainer />
+                }
+                customerFiltersFormContainer={
+                  <ProjectCreatorFiltersFormContainer />
                 }
               />
             </CreateProjectProvider>

@@ -86,13 +86,13 @@ export const Select = <T extends object = any>({
       ref={props.ref}
       className={fieldStyles({ className })}
     >
-      <span
+      <div
         data-testid="select-label"
         {...labelProps}
         className={fieldLabelStyles()}
       >
         {props.label}
-      </span>
+      </div>
       <HiddenSelect {...hiddenSelectProps} />
       <SelectButton
         {...triggerProps}
@@ -104,11 +104,11 @@ export const Select = <T extends object = any>({
         validation={validation}
       />
       {validation.isInvalid && props.errorMessage && (
-        <span className={fieldErrorStyles()}>
+        <div className={fieldErrorStyles()}>
           {typeof props.errorMessage === "function"
             ? props.errorMessage(validation)
             : props.errorMessage}
-        </span>
+        </div>
       )}
       {overlayType === "bottomsheet" ? (
         <BottomSheet

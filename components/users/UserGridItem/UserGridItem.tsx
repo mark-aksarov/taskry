@@ -65,14 +65,14 @@ export const UserGridItem = memo(
     return (
       <UserGridItemLayout
         actionMenuSlot={
-          showActionMenuTrigger && (
+          showActionMenuTrigger ? (
             <UserItemActionMenuTrigger
               editUserFormContainer={editUserFormContainer}
               userId={id}
               userFullName={fullName}
               className="-mr-2"
             />
-          )
+          ) : undefined
         }
         imageSlot={
           <>

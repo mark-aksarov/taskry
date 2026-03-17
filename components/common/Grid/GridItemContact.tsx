@@ -1,6 +1,6 @@
 import { Link } from "@/components/ui/Link";
 
-const styles = "max-w-full inline-flex items-center gap-2.5";
+const styles = "max-w-full flex items-center gap-2.5";
 
 // Text only
 interface GridItemContactProps {

@@ -9,8 +9,6 @@ interface CustomerListItemLayoutProps {
   publicLinkSlot: React.ReactNode;
   companySlot: React.ReactNode;
   menuTriggerSlot: React.ReactNode;
-  imgMobileSlot: React.ReactNode;
-  mainMobileSlot: React.ReactNode;
 }
 
 export const CustomerListItemLayout = ({
@@ -22,22 +20,17 @@ export const CustomerListItemLayout = ({
   publicLinkSlot,
   companySlot,
   menuTriggerSlot,
-  imgMobileSlot,
-  mainMobileSlot,
 }: CustomerListItemLayoutProps) => {
   return (
     <ListItem
-      data-test="user-list-item"
+      data-test="customer-list-item"
       data-id={id}
       className="flex w-full items-center gap-4"
     >
       {checkboxSlot}
       {imgSlot}
-      {imgMobileSlot}
 
-      <ListItemInfo className="max-md:hidden">{mainSlot}</ListItemInfo>
-      <ListItemInfo className="md:hidden">{mainMobileSlot}</ListItemInfo>
-
+      <ListItemInfo>{mainSlot}</ListItemInfo>
       <ListItemInfo className="@max-lg:hidden">{phoneNumberSlot}</ListItemInfo>
       <ListItemInfo className="@max-2xl:hidden">{publicLinkSlot}</ListItemInfo>
       <ListItemInfo className="@max-4xl:hidden">{companySlot}</ListItemInfo>

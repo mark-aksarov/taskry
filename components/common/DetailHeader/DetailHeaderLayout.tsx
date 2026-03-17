@@ -10,7 +10,7 @@ export function DetailHeaderLayout({
   mainSlot,
 }: DetailHeaderLayoutProps) {
   return (
-    <div className="inline-flex flex-col items-center gap-4">
+    <div className="flex flex-col items-center gap-4">
       {imageSlot}
       {mainSlot}
     </div>

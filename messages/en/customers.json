@@ -29,7 +29,7 @@
     "deleteImage": "Delete image",
     "updateImage": "Update image"
   },
-  "CustomerToolbarSortingMenuTrigger": {
+  "CustomerSortingMenuTrigger": {
     "byFullName": "By full name",
     "byCompany": "By company"
   },
@@ -90,6 +90,12 @@
     "dialogHeading": "Customer Details",
     "openInFullPage": "Open in Full Page"
   },
+  "CustomerCompanyFiltersModal": {
+    "heading": "Company filters"
+  },
+  "CustomerCompanyFiltersModalTrigger": {
+    "buttonLabel": "Company"
+  },
   "CustomerFiltersFormNoActiveProjectsSwitch": {
     "text": "Has no active projects"
   },
@@ -122,8 +128,6 @@
     "successMessage": "Customers deleted successfully"
   },
   "CustomerGridItem": {
-    "noPhoneNumber": "No phone number",
-    "noPublicLink": "No public link",
     "noCompany": "No company"
   },
   "CustomerListItem": {
@@ -135,14 +139,17 @@
     "noCompany": "No company",
     "company": "Company"
   },
-  "CustomerToolbarFiltersModalTrigger": {
-    "title": "Customer Filters"
+  "CustomerResultsCount": {
+    "customersFound": "{count, plural, one {# customer found} other {# customers found}}"
   },
-  "CustomerToolbarActionsMenuTrigger": {
+  "CustomerFiltersModal": {
+    "heading": "Customer Filters"
+  },
+  "CustomerActionsMenuTrigger": {
     "dialogHeading": "Actions",
     "delete": "Delete"
   },
-  "CustomerToolbarCreateNewMenuTrigger": {
+  "CreateCustomerMenuTrigger": {
     "dialogHeading": "Create New",
     "label": "Create New",
     "items": {
@@ -153,5 +160,8 @@
   "CustomersFilteredEmptySection": {
     "heading": "No customers found",
     "description": "No customers match the selected filters. Try changing or resetting the filters."
+  },
+  "CustomerManageMenuTrigger": {
+    "companies": "Companies"
   }
 }

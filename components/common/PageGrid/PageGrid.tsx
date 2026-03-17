@@ -8,7 +8,13 @@ interface PageGridProps {
 
 export function PageGrid({ className, children }: PageGridProps) {
   return (
-    <div className={twMerge("flex flex-col max-md:gap-4 md:gap-6", className)}>
+    /* flex items have min-width:auto in row; min-w-0 prevents filters overflow */
+    <div
+      className={twMerge(
+        "flex min-w-0 flex-col max-md:gap-4 md:gap-6",
+        className,
+      )}
+    >
       {children}
     </div>
   );

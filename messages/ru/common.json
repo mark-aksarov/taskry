@@ -1,4 +1,13 @@
 {
+  "GridItemPhoneNumber": {
+    "noPhoneNumber": "Нет номера телефона"
+  },
+  "GridItemPublicLink": {
+    "noPublicLink": "Нет публичной ссылки"
+  },
+  "ItemBaseDeadline": {
+    "deadlineOn": "Срок до {date}"
+  },
   "PersonImageMenuTrigger": {
     "heading": "Изображение профиля",
     "items": {
@@ -29,23 +38,20 @@
     "text": "<strong>Действие ограничено в гостевом режиме.</strong> Для доступа ко всем функциям требуется аккаунт. Пожалуйста, войдите в систему или создайте новый аккаунт, чтобы снять ограничения гостевого режима.",
     "cancelButton": "Отмена"
   },
-  "ToolbarSortingMenuTrigger": {
+  "SortingMenuTrigger": {
     "dialogHeading": "Сортировка"
   },
-  "ToolbarManageMenuTrigger": {
+  "ManageMenuTrigger": {
     "dialogHeading": "Управление"
   },
-  "ToolbarSortingButtonMobile": {
-    "ariaLabel": "Сортировать проекты по"
+  "SortingButtonMobile": {
+    "ariaLabel": "Сортировка"
   },
-  "ToolbarSortingButtonDesktop": {
+  "SortingButtonLarge": {
     "label": "Сортировка"
   },
-  "ToolbarFiltersButtonDesktop": {
+  "FilterButtonDesktop": {
     "label": "Фильтры"
-  },
-  "ToolbarFiltersButtonMobile": {
-    "ariaLabel": "Фильтровать проекты"
   },
   "FiltersFormSubmitButton": {
     "label": "Применить фильтры"
@@ -53,11 +59,8 @@
   "FiltersResetButton": {
     "label": "Сбросить фильтры"
   },
-  "ToolbarActionsButtonDesktop": {
+  "ActionsButton": {
     "label": "Действия"
-  },
-  "ToolbarActionsButtonMobile": {
-    "ariaLabel": "Действия"
   },
   "ViewModeToggleButtonGroup": {
     "list": "Список",
@@ -88,5 +91,14 @@
     "collapse": "Свернуть",
     "expand": "Развернуть",
     "more": "Еще"
+  },
+  "FilterButtonMobile": {
+    "ariaLabel": "Открыть фильтры"
+  },
+  "ManageButtonMobile": {
+    "ariaLabel": "Управление"
+  },
+  "ManageButtonLarge": {
+    "label": "Управление"
   }
 }

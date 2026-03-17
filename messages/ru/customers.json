@@ -29,7 +29,7 @@
     "deleteImage": "Удалить изображение",
     "updateImage": "Обновить изображение"
   },
-  "CustomerToolbarSortingMenuTrigger": {
+  "CustomerSortingMenuTrigger": {
     "byFullName": "По полному имени",
     "byCompany": "По компании"
   },
@@ -90,6 +90,12 @@
     "dialogHeading": "Детали клиента",
     "openInFullPage": "Открыть в полном окне"
   },
+  "CustomerCompanyFiltersModal": {
+    "heading": "Фильтры компании"
+  },
+  "CustomerCompanyFiltersModalTrigger": {
+    "buttonLabel": "Компания"
+  },
   "CustomerFiltersFormNoActiveProjectsSwitch": {
     "text": "Не имеет активных проектов"
   },
@@ -122,8 +128,6 @@
     "successMessage": "Клиенты успешно удалены"
   },
   "CustomerGridItem": {
-    "noPhoneNumber": "Нет номера телефона",
-    "noPublicLink": "Нет публичной ссылки",
     "noCompany": "Нет компании"
   },
   "CustomerListItem": {
@@ -136,14 +140,17 @@
     "noCompany": "Нет компании",
     "successDeleteMessage": "Клиент успешно удален"
   },
-  "CustomerToolbarFiltersModalTrigger": {
-    "title": "Фильтры клиентов"
+  "CustomerResultsCount": {
+    "customersFound": "{count, plural, one {Найден # клиент} few {Найдено # клиента} many {Найдено # клиентов} other {Найдено # клиентов}}"
   },
-  "CustomerToolbarActionsMenuTrigger": {
+  "CustomerFiltersModal": {
+    "heading": "Фильтры клиентов"
+  },
+  "CustomerActionsMenuTrigger": {
     "dialogHeading": "Действия",
     "delete": "Удалить"
   },
-  "CustomerToolbarCreateNewMenuTrigger": {
+  "CreateCustomerMenuTrigger": {
     "dialogHeading": "Создать нового",
     "label": "Создать нового",
     "items": {
@@ -154,5 +161,8 @@
   "CustomersFilteredEmptySection": {
     "heading": "Клиенты не найдены",
     "description": "По выбранным фильтрам клиенты отсутствуют. Попробуйте изменить или сбросить фильтры"
+  },
+  "CustomerManageMenuTrigger": {
+    "companies": "Компании"
   }
 }

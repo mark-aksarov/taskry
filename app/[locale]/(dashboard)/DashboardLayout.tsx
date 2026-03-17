@@ -20,7 +20,7 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
   return (
     <GuestModeModalProvider>
       <div className="flex">
-        <AppSidebar className="sticky top-0 z-2 h-screen flex-none shadow-lg max-xl:hidden">
+        <AppSidebar className="sticky top-0 z-3 h-dvh flex-none shadow-lg max-xl:hidden">
           <AppSidebarHeader>
             <AppSidebarHeading />
           </AppSidebarHeader>
@@ -29,9 +29,9 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
           </AppSidebarBody>
         </AppSidebar>
 
-        <div className="flex flex-auto flex-col max-md:w-full">{children}</div>
+        {/* flex items have min-width:auto in row; min-w-0 prevents filters overflow */}
+        <div className="flex min-w-0 flex-auto flex-col">{children}</div>
       </div>
-
       <GuestModeModal />
     </GuestModeModalProvider>
   );

@@ -1,5 +1,6 @@
 export { ItemBaseBadge } from "./ItemBaseBadge";
 export { ItemBaseButton } from "./ItemBaseButton";
+export { ItemBaseDeadline } from "./ItemBaseDeadline";
 export { type ItemBaseButtonProps } from "./ItemBaseButton";
 export { ItemBaseBadgeSkeleton } from "./ItemBaseBadgeSkeleton";
 export { ItemBasePendingOverlay } from "./ItemBasePendingOverlay";
@@ -7,6 +8,7 @@ export { ItemBaseButtonSkeleton } from "./ItemBaseButtonSkeleton";
 export { ItemBaseActionMenuButton } from "./ItemBaseActionMenuButton";
 export { ItemBaseActionMenuTrigger } from "./ItemBaseActionMenuTrigger";
 export { ItemBaseDetailModalTrigger } from "./ItemBaseDetailModalTrigger";
+export { ItemBaseUserImageContainer } from "./ItemBaseUserImageContainer";
 export { ItemBaseCommentsModalTrigger } from "./ItemBaseCommentsModalTrigger";
 export { ItemBaseActionMenuDialogHeader } from "./ItemBaseActionMenuDialogHeader";
 export { type ItemBaseDetailModalTriggerProps } from "./ItemBaseDetailModalTrigger";

@@ -3,7 +3,7 @@
 import {
   ToolbarCreateNewModalTrigger,
   ToolbarCreateNewMenuTrigger,
-} from "../common/Toolbar";
+} from "../common/ToolbarOld";
 
 import { Key } from "react-aria";
 import { Item } from "react-stately";

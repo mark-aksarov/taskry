@@ -1,21 +1,20 @@
 import {
-  ToolbarDesktop,
-  ToolbarMobileTop,
-  ToolbarMobileBottom,
-  ToolbarMobileHeading,
-} from "@/components/common/Toolbar";
+  CreateCompanyModalTriggerLarge,
+  CreateCompanyModalTriggerMobile,
+} from "@/components/company/CreateCompanyModalTrigger";
 
 import { useTranslations } from "next-intl";
 import { PageGrid } from "@/components/common/PageGrid";
 import { BackButton } from "@/components/common/BackButton";
 import { ViewModeProvider } from "@/components/common/ViewMode";
 import { PageContainer } from "@/components/common/PageContainer";
+import { TaskSearchModal } from "@/components/tasks/TaskSearchModal";
 import { NewCompanyModal } from "@/components/company/NewCompanyModal";
 import { PageEmptySection } from "@/components/common/PageEmptySection";
-import { CompanyToolbarActionsMenuTrigger } from "@/components/company/CompanyToolbarActionsMenuTrigger";
+import { PageHeadingMobile } from "@/components/common/PageHeadingMobile";
+import { ToolbarLarge, ToolbarMobile } from "@/components/common/Toolbar";
+import { CompanyActionsMenuTrigger } from "@/components/company/CompanyActionsMenuTrigger";
 import { CompaniesEmptySectionCreateButton } from "@/components/company/CompaniesEmptySectionCreateButton";
-import { CompanyToolbarCreateNewModalTrigger } from "@/components/company/CompanyToolbarCreateNewModalTrigger";
-import { TaskSearchModal } from "@/components/tasks/TaskSearchModal";
 
 interface CompaniesPageProps {
   totalCount: number;
@@ -35,10 +34,14 @@ export function CompaniesPage({
       <>
         <PageContainer fullscreen headerOffset>
           <PageGrid className="relative flex-auto">
-            <ToolbarMobileTop>
-              <BackButton href="/customers" />
-              <ToolbarMobileHeading>{t("heading")}</ToolbarMobileHeading>
-            </ToolbarMobileTop>
+            <ToolbarMobile
+              firstSlot={
+                <>
+                  <BackButton href="/customers" />
+                  <PageHeadingMobile>{t("heading")}</PageHeadingMobile>
+                </>
+              }
+            />
 
             <PageEmptySection
               heading={t("emptySection.heading")}
@@ -58,23 +61,20 @@ export function CompaniesPage({
       <PageContainer>
         <PageGrid>
           <ViewModeProvider>
-            <ToolbarDesktop>
-              <CompanyToolbarActionsMenuTrigger />
-              <CompanyToolbarCreateNewModalTrigger />
-            </ToolbarDesktop>
+            <ToolbarLarge
+              firstSlot={<CompanyActionsMenuTrigger />}
+              secondSlot={<CreateCompanyModalTriggerLarge />}
+            />
 
-            <ToolbarMobileTop>
-              <BackButton href="/customers" />
-              <ToolbarMobileHeading>{t("heading")}</ToolbarMobileHeading>
-              <CompanyToolbarActionsMenuTrigger />
-            </ToolbarMobileTop>
-
-            <ToolbarMobileBottom>
-              <div className="ml-auto">
-                <CompanyToolbarCreateNewModalTrigger />
-              </div>
-            </ToolbarMobileBottom>
-
+            <ToolbarMobile
+              firstSlot={
+                <>
+                  <BackButton href="/customers" />
+                  <PageHeadingMobile>{t("heading")}</PageHeadingMobile>
+                </>
+              }
+              secondSlot={<CreateCompanyModalTriggerMobile />}
+            />
             {companiesContainer}
           </ViewModeProvider>
         </PageGrid>

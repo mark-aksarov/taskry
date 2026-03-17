@@ -88,9 +88,9 @@ export const CalendarGrid = ({ state, ...props }: CalendarGridProps) => {
         <tr>
           {weekDays.map((day, index) => (
             <th className="text-center" key={index}>
-              <span className="inline-flex h-8 w-8 items-center justify-center text-sm font-bold">
+              <div className="flex h-8 w-8 items-center justify-center text-sm font-bold">
                 {day}
-              </span>
+              </div>
             </th>
           ))}
         </tr>
@@ -134,7 +134,7 @@ type CalendarCellProps = AriaCalendarCellProps & {
 
 const calendarCell = tv({
   extend: focusRing,
-  base: "inline-flex h-8 w-8 cursor-default items-center justify-center rounded-lg text-sm font-normal",
+  base: "flex h-8 w-8 cursor-default items-center justify-center rounded-lg text-sm font-normal",
   variants: {
     isSelected: {
       true: "bg-blue-700 text-white dark:bg-blue-800",

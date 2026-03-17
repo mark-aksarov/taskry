@@ -1,11 +1,9 @@
 import { ListItem, ListItemInfo } from "@/components/common/List";
-import { twMerge } from "tailwind-merge";
 
 export interface ProjectListItemLayoutProps {
   id?: number;
   checkboxSlot: React.ReactNode;
   mainSlot: React.ReactNode;
-  mainMobileSlot: React.ReactNode;
   categorySlot: React.ReactNode;
   creatorImgSlot: React.ReactNode;
   creatorSlot: React.ReactNode;
@@ -21,7 +19,6 @@ export const ProjectListItemLayout = ({
   id,
   checkboxSlot,
   mainSlot,
-  mainMobileSlot,
   creatorImgSlot,
   creatorSlot,
   customerImgSlot,
@@ -34,7 +31,7 @@ export const ProjectListItemLayout = ({
 }: ProjectListItemLayoutProps) => {
   return (
     <ListItem data-test="project-list-item" data-id={id}>
-      <div className="flex w-full items-center gap-4 max-md:hidden">
+      <div className="flex w-full items-center gap-4">
         {checkboxSlot}
         <ListItemInfo>{mainSlot}</ListItemInfo>
         {creatorImgSlot}
@@ -52,15 +49,6 @@ export const ProjectListItemLayout = ({
             {menuTriggerSlot}
           </div>
         </div>
-      </div>
-
-      <div className="flex flex-col gap-2 md:hidden">
-        <div className="flex w-full items-center gap-4">
-          {checkboxSlot}
-          <ListItemInfo>{mainMobileSlot}</ListItemInfo>
-          {menuTriggerSlot}
-        </div>
-        <div className={twMerge("ml-9 h-[1.75rem]")}>{statusSlot}</div>
       </div>
     </ListItem>
   );

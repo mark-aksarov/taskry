@@ -35,7 +35,7 @@
   "TotalProjectsCard": {
     "text": "Всего проектов"
   },
-  "ProjectToolbarSortingMenuTrigger": {
+  "ProjectSortingMenuTrigger": {
     "byTitle": "По названию",
     "byDeadline": "По сроку",
     "byStatus": "По статусу",
@@ -48,17 +48,17 @@
   "EditProjectModal": {
     "title": "Изменить проект"
   },
-  "ProjectToolbarFiltersModalTrigger": {
+  "ProjectFiltersModal": {
     "title": "Фильтры проектов"
   },
-  "ProjectToolbarActionsMenuTrigger": {
+  "ProjectActionsMenuTrigger": {
     "dialogHeading": "Действия",
     "delete": "Удалить",
     "pending": "Отметить как «В ожидании»",
     "active": "Отметить как «Активно»",
     "completed": "Отметить как «Завершено»"
   },
-  "ProjectToolbarManageMenuTrigger": {
+  "ProjectManageMenuTrigger": {
     "categories": "Категории"
   },
   "ProjectTitleTextField": {
@@ -106,7 +106,7 @@
   "ProjectFiltersFormUserCheckboxGroup": {
     "label": "Создатель"
   },
-  "ProjectToolbarCreateNewMenuTrigger": {
+  "CreateProjectMenuTrigger": {
     "dialogHeading": "Создать новый",
     "label": "Создать новый",
     "items": {
@@ -114,9 +114,7 @@
       "category": "Категорию"
     }
   },
-  "ProjectGridItem": {
-    "noDeadline": "Без срока",
-    "deadlineOn": "Срок до {date}",
+  "ProjectGridItemProgress": {
     "progressAriaLabel": "Прогресс проекта"
   },
   "ProjectListItem": {
@@ -179,6 +177,33 @@
   "ProjectDetailHeader": {
     "noCategory": "Нет категории"
   },
+  "ProjectStatusFiltersModal": {
+    "heading": "Фильтры статусов"
+  },
+  "ProjectStatusFiltersModalTrigger": {
+    "buttonLabel": "Статус"
+  },
+  "ProjectCategoryFiltersModal": {
+    "heading": "Фильтры категорий"
+  },
+  "ProjectCategoryFiltersModalTrigger": {
+    "buttonLabel": "Категория"
+  },
+  "ProjectCreatorFiltersModal": {
+    "heading": "Фильтры создателей"
+  },
+  "ProjectCreatorFiltersModalTrigger": {
+    "buttonLabel": "Создатель"
+  },
+  "ProjectCustomerFiltersModal": {
+    "heading": "Фильтры клиентов"
+  },
+  "ProjectCustomerFiltersModalTrigger": {
+    "buttonLabel": "Клиент"
+  },
+  "ProjectResultsCount": {
+    "projectsFound": "{count, plural, one {Найден # проект} few {Найдено # проекта} many {Найдено # проектов} other {Найдено # проектов}}"
+  },
   "ProjectDetailStatusMenuTrigger": {
     "dialogHeading": "Статус проекта",
     "items": {
@@ -190,8 +215,5 @@
   "ProjectDetailModal": {
     "dialogHeading": "Детали проекта",
     "openInFullPage": "Открыть в полном окне"
-  },
-  "CustomerToolbarManageMenuTrigger": {
-    "companies": "Компании"
   }
 }

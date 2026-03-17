@@ -9,6 +9,9 @@ const meta = {
   parameters: {
     backgroundVariant: "alt",
   },
+  args: {
+    className: "w-[5rem]",
+  },
 } satisfies Meta<typeof Badge>;
 
 export default meta;

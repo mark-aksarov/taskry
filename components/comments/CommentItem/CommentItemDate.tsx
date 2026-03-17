@@ -6,5 +6,5 @@ interface CommentItemDateProps {
 }
 
 export function CommentItemDate({ children }: CommentItemDateProps) {
-  return <span className={styles}>{children}</span>;
+  return <div className={styles}>{children}</div>;
 }

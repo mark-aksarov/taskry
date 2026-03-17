@@ -6,7 +6,6 @@ import { UserDetail } from "@/components/users/UserDetail";
 import { SubtaskList } from "@/components/subtasks/SubtaskList";
 import { CommentList } from "@/components/comments/CommentList";
 import { mockedTaskDetail, mockedTaskList } from "@/mocks/tasks";
-import { withTaskItemProviders } from "../../TaskItem/__stories__";
 import { ProjectDetail } from "@/components/projects/ProjectDetail";
 import { mockedTaskCategorySummaries } from "@/mocks/taskCategories";
 import { mockedUserDetail, mockedUserSummaries } from "@/mocks/users";
@@ -27,7 +26,6 @@ const meta = {
   component: TaskListItem,
   decorators: [
     withCreateSubtaskProvider,
-    withTaskItemProviders,
     withDeleteTasksProvider,
     withUpdateTaskStatusesProvider,
     withGuestModeModalProvider,
@@ -73,6 +71,9 @@ export const Default = {
     ),
     sendComment: () => ({ status: "success" }),
     updateComment: () => ({ status: "success" }),
+    updateTask: () => ({ status: "success" }),
+    deleteTask: () => ({ status: "success" }),
+    updateTaskStatus: () => ({ status: "success" }),
   },
 } satisfies Story;
 

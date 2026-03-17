@@ -23,11 +23,11 @@
   "TaskCategoryListItem": {
     "name": "Название"
   },
-  "TaskCategoryToolbarActionsMenuTrigger": {
+  "TaskCategoryActionsMenuTrigger": {
     "dialogHeading": "Действия",
     "delete": "Удалить"
   },
-  "TaskCategoryToolbarCreateNewModalTrigger": {
+  "CreateTaskCategoryModalTrigger": {
     "label": "Создать новую"
   },
   "TaskCategoryListItemActionMenuTrigger": {

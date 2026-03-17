@@ -1,3 +1,8 @@
+import {
+  TaskDetailActions,
+  TaskDetailActionsSkeleton,
+} from "../TaskDetailActions";
+
 import { EditTaskForm } from "../EditTaskForm";
 import { EditTaskModal } from "../EditTaskModal";
 import { mockedTaskDetail } from "@/mocks/tasks";
@@ -5,7 +10,6 @@ import { TaskDetailCard } from "./TaskDetailCard";
 import { mockedUserSummaries } from "@/mocks/users";
 import { TaskDetailHeader } from "../TaskDetailHeader";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { TaskDetailActions } from "../TaskDetailActions";
 import { mockedProjectSummaries } from "@/mocks/projects";
 import { CommentList } from "@/components/comments/CommentList";
 import { SubtaskList } from "@/components/subtasks/SubtaskList";
@@ -86,6 +90,7 @@ export const Loading = {
     ...Default.args,
     taskDetailContainer: <TaskDetailAltSkeleton />,
     taskDetailHeaderContainer: <DetailHeaderSkeleton />,
+    taskDetailActions: <TaskDetailActionsSkeleton />,
   },
 } satisfies Story;
 

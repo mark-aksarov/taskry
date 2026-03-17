@@ -27,6 +27,7 @@ export function PositionItemCheckbox({ id }: PositionItemCheckboxProps) {
       aria-label="position checkbox"
       isSelected={isSelected}
       onChange={handleChange}
+      className="max-md:hidden"
     />
   );
 }

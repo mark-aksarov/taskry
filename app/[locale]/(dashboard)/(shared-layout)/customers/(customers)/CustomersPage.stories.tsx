@@ -7,15 +7,18 @@ import { PageDecorator } from "@/.storybook/PageDecorator";
 import { mockedCompanySummaries } from "@/mocks/companies";
 import { SearchList } from "@/components/search/SearchList";
 import { CustomerList } from "@/components/customer/CustomerList";
-import { CustomerGrid } from "@/components/customer/CustomerGrid";
+import { CustomerGridLarge } from "@/components/customer/CustomerGrid";
 import { NewCustomerForm } from "@/components/customer/NewCustomerForm";
+import { CustomerGridMobile } from "@/components/customer/CustomerGrid";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { SearchListStory } from "@/components/search/SearchList/__stories__";
 import { CustomerFiltersForm } from "@/components/customer/CustomerFiltersForm";
-import { CustomerGridStory } from "@/components/customer/CustomerGrid/__stories__";
 import { CustomerListStory } from "@/components/customer/CustomerList/__stories__";
+import { CustomerGridLargeStory } from "@/components/customer/CustomerGrid/__stories__";
+import { CustomerGridMobileStory } from "@/components/customer/CustomerGrid/__stories__";
 import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
+import { CustomerCompanyFiltersForm } from "@/components/customer/CustomerCompanyFiltersForm";
 import { EntityContainerPresentation } from "@/components/common/EntityContainerPresentation";
 import { withSelectedItemsProvider } from "@/components/common/SelectedItemsContext/__stories__";
 import { withCreateCompanyProvider } from "@/components/company/CreateCompanyContext/__stories__";
@@ -61,12 +64,18 @@ export const Default = {
     filtersFormContainer: (
       <CustomerFiltersForm companyCheckboxGroupItems={mockedCompanySummaries} />
     ),
+    companyFiltersFormContainer: (
+      <CustomerCompanyFiltersForm
+        companyCheckboxGroupItems={mockedCompanySummaries}
+      />
+    ),
     customersContainer: (
       <EntityContainerPresentation
         page={1}
         pageSize={3}
-        list={<CustomerList {...CustomerListStory.args} />}
-        grid={<CustomerGrid {...CustomerGridStory.args} />}
+        listLarge={<CustomerList {...CustomerListStory.args} />}
+        gridLarge={<CustomerGridLarge {...CustomerGridLargeStory.args} />}
+        gridMobile={<CustomerGridMobile {...CustomerGridMobileStory.args} />}
         totalPages={3}
       />
     ),

@@ -1,21 +1,20 @@
 import {
-  ToolbarDesktop,
-  ToolbarMobileTop,
-  ToolbarMobileBottom,
-  ToolbarMobileHeading,
-} from "@/components/common/Toolbar";
+  CreatePositionModalTriggerLarge,
+  CreatePositionModalTriggerMobile,
+} from "@/components/position/CreatePositionModalTrigger";
 
 import { useTranslations } from "next-intl";
 import { PageGrid } from "@/components/common/PageGrid";
 import { BackButton } from "@/components/common/BackButton";
 import { ViewModeProvider } from "@/components/common/ViewMode";
 import { PageContainer } from "@/components/common/PageContainer";
-import { PageEmptySection } from "@/components/common/PageEmptySection";
-import { NewPositionModal } from "@/components/position/NewPositionModal";
-import { PositionToolbarActionsMenuTrigger } from "@/components/position/PositionToolbarActionsMenuTrigger";
-import { PositionsEmptySectionCreateButton } from "@/components/position/PositionsEmptySectionCreateButton";
-import { PositionToolbarCreateNewModalTrigger } from "@/components/position/PositionToolbarCreateNewModalTrigger";
 import { TaskSearchModal } from "@/components/tasks/TaskSearchModal";
+import { PageEmptySection } from "@/components/common/PageEmptySection";
+import { ToolbarLarge, ToolbarMobile } from "@/components/common/Toolbar";
+import { NewPositionModal } from "@/components/position/NewPositionModal";
+import { PageHeadingMobile } from "@/components/common/PageHeadingMobile";
+import { PositionActionsMenuTrigger } from "@/components/position/PositionActionsMenuTrigger";
+import { PositionsEmptySectionCreateButton } from "@/components/position/PositionsEmptySectionCreateButton";
 
 interface PositionsPageProps {
   totalCount: number;
@@ -35,10 +34,14 @@ export function PositionsPage({
       <>
         <PageContainer fullscreen headerOffset>
           <PageGrid className="relative flex-auto">
-            <ToolbarMobileTop>
-              <BackButton href="/customers" />
-              <ToolbarMobileHeading>{t("heading")}</ToolbarMobileHeading>
-            </ToolbarMobileTop>
+            <ToolbarMobile
+              firstSlot={
+                <>
+                  <BackButton href="/team" />
+                  <PageHeadingMobile>{t("heading")}</PageHeadingMobile>
+                </>
+              }
+            />
 
             <PageEmptySection
               heading={t("emptySection.heading")}
@@ -58,22 +61,20 @@ export function PositionsPage({
       <PageContainer>
         <PageGrid>
           <ViewModeProvider>
-            <ToolbarDesktop>
-              <PositionToolbarActionsMenuTrigger />
-              <PositionToolbarCreateNewModalTrigger />
-            </ToolbarDesktop>
+            <ToolbarLarge
+              firstSlot={<PositionActionsMenuTrigger />}
+              secondSlot={<CreatePositionModalTriggerLarge />}
+            />
 
-            <ToolbarMobileTop>
-              <BackButton href="/team" />
-              <ToolbarMobileHeading>{t("heading")}</ToolbarMobileHeading>
-              <PositionToolbarActionsMenuTrigger />
-            </ToolbarMobileTop>
-
-            <ToolbarMobileBottom>
-              <div className="ml-auto">
-                <PositionToolbarCreateNewModalTrigger />
-              </div>
-            </ToolbarMobileBottom>
+            <ToolbarMobile
+              firstSlot={
+                <>
+                  <BackButton href="/team" />
+                  <PageHeadingMobile>{t("heading")}</PageHeadingMobile>
+                </>
+              }
+              secondSlot={<CreatePositionModalTriggerMobile />}
+            />
 
             {positionsContainer}
           </ViewModeProvider>

@@ -1,1 +1,0 @@
-export { withCustomerItemProviders } from "./withCustomerItemProviders";

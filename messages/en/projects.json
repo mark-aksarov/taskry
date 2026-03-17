@@ -35,7 +35,7 @@
   "TotalProjectsCard": {
     "text": "Total Projects"
   },
-  "ProjectToolbarSortingMenuTrigger": {
+  "ProjectSortingMenuTrigger": {
     "byTitle": "By Title",
     "byDeadline": "By Deadline",
     "byStatus": "By Status",
@@ -48,17 +48,17 @@
   "EditProjectModal": {
     "title": "Edit Project"
   },
-  "ProjectToolbarFiltersModalTrigger": {
+  "ProjectFiltersModal": {
     "title": "Project Filters"
   },
-  "ProjectToolbarActionsMenuTrigger": {
+  "ProjectActionsMenuTrigger": {
     "dialogHeading": "Actions",
     "delete": "Delete",
     "pending": "Mark as Pending",
     "active": "Mark as Active",
     "completed": "Mark as Completed"
   },
-  "ProjectToolbarManageMenuTrigger": {
+  "ProjectManageMenuTrigger": {
     "categories": "Categories"
   },
   "ProjectTitleTextField": {
@@ -106,7 +106,7 @@
   "ProjectFiltersFormUserCheckboxGroup": {
     "label": "Creator"
   },
-  "ProjectToolbarCreateNewMenuTrigger": {
+  "CreateProjectMenuTrigger": {
     "dialogHeading": "Create New",
     "label": "Create New",
     "items": {
@@ -114,9 +114,7 @@
       "category": "Category"
     }
   },
-  "ProjectGridItem": {
-    "noDeadline": "No deadline",
-    "deadlineOn": "Deadline on {date}",
+  "ProjectGridItemProgress": {
     "progressAriaLabel": "project progress"
   },
   "ProjectListItem": {
@@ -179,6 +177,33 @@
   "ProjectDetailHeader": {
     "noCategory": "No category"
   },
+  "ProjectStatusFiltersModal": {
+    "heading": "Status filters"
+  },
+  "ProjectStatusFiltersModalTrigger": {
+    "buttonLabel": "Status"
+  },
+  "ProjectCategoryFiltersModal": {
+    "heading": "Category filters"
+  },
+  "ProjectCategoryFiltersModalTrigger": {
+    "buttonLabel": "Category"
+  },
+  "ProjectCreatorFiltersModal": {
+    "heading": "Creator filters"
+  },
+  "ProjectCreatorFiltersModalTrigger": {
+    "buttonLabel": "Creator"
+  },
+  "ProjectCustomerFiltersModal": {
+    "heading": "Customer filters"
+  },
+  "ProjectCustomerFiltersModalTrigger": {
+    "buttonLabel": "Customer"
+  },
+  "ProjectResultsCount": {
+    "projectsFound": "{count, plural, one {# project found} other {# projects found}}"
+  },
   "ProjectDetailStatusMenuTrigger": {
     "dialogHeading": "Project Status",
     "items": {
@@ -190,8 +215,5 @@
   "ProjectDetailModal": {
     "dialogHeading": "Project Details",
     "openInFullPage": "Open in Full Page"
-  },
-  "CustomerToolbarManageMenuTrigger": {
-    "companies": "Companies"
   }
 }

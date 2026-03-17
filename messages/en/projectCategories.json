@@ -27,10 +27,10 @@
     "edit": "Edit",
     "delete": "Delete"
   },
-  "ProjectCategoryToolbarCreateNewModalTrigger": {
+  "CreateProjectCategoryModalTrigger": {
     "label": "Create New"
   },
-  "ProjectCategoryToolbarActionsMenuTrigger": {
+  "ProjectCategoryActionsMenuTrigger": {
     "dialogHeading": "Actions",
     "delete": "Delete"
   },

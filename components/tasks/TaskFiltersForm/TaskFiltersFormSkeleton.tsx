@@ -1,18 +1,13 @@
 import {
   FieldSkeleton,
   FieldGroupSkeleton,
-} from "@/components/common/FieldSkeleton";
-
-import {
-  FormBaseBody,
-  FormBaseFooter,
-  FormBaseSubmitButtonSkeleton,
-} from "@/components/common/FormBase";
+  ButtonSkeleton,
+} from "@/components/ui/Skeleton";
 
 import { Skeleton } from "@/components/ui/Skeleton";
 import { Separator } from "@/components/ui/Separator";
-import { SwitchSkeleton } from "@/components/common/SwitchSkeleton";
-import { CheckboxSkeleton } from "@/components/common/CheckboxSkeleton";
+import { SwitchSkeleton } from "@/components/ui/Skeleton/SwitchSkeleton";
+import { FormBaseBody, FormBaseFooter } from "@/components/common/FormBase";
 
 export function TaskFiltersFormSkeleton() {
   return (
@@ -58,7 +53,7 @@ export function TaskFiltersFormSkeleton() {
         </FieldSkeleton>
       </FormBaseBody>
       <FormBaseFooter>
-        <FormBaseSubmitButtonSkeleton />
+        <ButtonSkeleton size="medium" />
       </FormBaseFooter>
     </div>
   );

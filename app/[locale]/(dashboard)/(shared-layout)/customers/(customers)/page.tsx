@@ -28,6 +28,7 @@ import { DeleteCustomersProvider } from "@/components/customer/DeleteCustomersCo
 import { NewCustomerFormContainer } from "@/components/customer/NewCustomerFormContainer";
 import { CustomerFiltersFormContainer } from "@/components/customer/CustomerFiltersFormContainer";
 import { CustomerRouterSearchContainer } from "@/components/customer/CustomerRouterSearchContainer";
+import { CustomerCompanyFiltersFormContainer } from "@/components/customer/CustomerCompanyFiltersFormContainer";
 
 const searchParamsSchema = z.object({
   query: searchQueryParam,
@@ -82,6 +83,9 @@ export default async function AppCustomersPage({
               searchContainer={<CustomerRouterSearchContainer />}
               filtersFormContainer={
                 <CustomerFiltersFormContainer filters={filters} />
+              }
+              companyFiltersFormContainer={
+                <CustomerCompanyFiltersFormContainer />
               }
               newCustomerFormContainer={<NewCustomerFormContainer />}
               customersContainer={

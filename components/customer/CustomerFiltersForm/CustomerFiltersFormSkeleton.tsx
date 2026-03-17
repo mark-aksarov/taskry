@@ -1,13 +1,8 @@
-import {
-  FormBaseBody,
-  FormBaseFooter,
-  FormBaseSubmitButtonSkeleton,
-} from "@/components/common/FormBase";
-import { Skeleton } from "@/components/ui/Skeleton";
 import { Separator } from "@/components/ui/Separator";
-import { FieldSkeleton } from "@/components/common/FieldSkeleton";
-import { SwitchSkeleton } from "@/components/common/SwitchSkeleton";
-import { CheckboxSkeleton } from "@/components/common/CheckboxSkeleton";
+import { FieldSkeleton } from "@/components/ui/Skeleton";
+import { ButtonSkeleton, Skeleton } from "@/components/ui/Skeleton";
+import { SwitchSkeleton } from "@/components/ui/Skeleton/SwitchSkeleton";
+import { FormBaseBody, FormBaseFooter } from "@/components/common/FormBase";
 
 export function CustomerFiltersFormSkeleton() {
   return (
@@ -29,7 +24,7 @@ export function CustomerFiltersFormSkeleton() {
         </FieldSkeleton>
       </FormBaseBody>
       <FormBaseFooter>
-        <FormBaseSubmitButtonSkeleton />
+        <ButtonSkeleton size="medium" />
       </FormBaseFooter>
     </div>
   );

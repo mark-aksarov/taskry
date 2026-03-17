@@ -1,8 +1,8 @@
 import {
   ToolbarMobileTop,
   ToolbarMobileBottom,
-  ToolbarMobileHeading,
-} from "@/components/common/Toolbar";
+  PageHeadingMobile,
+} from "@/components/common/ToolbarOld";
 
 import { useTranslations } from "next-intl";
 import { Card } from "@/components/common/Card";
@@ -47,9 +47,9 @@ export function TeamProfilePage({
           navigationDesktop={
             <UserNavigationDesktop
               userActions={
-                showUserActions && (
+                showUserActions ? (
                   <ProfileActions userId={userId} userFullName={userFullName} />
-                )
+                ) : undefined
               }
             />
           }
@@ -58,7 +58,7 @@ export function TeamProfilePage({
         <PageGrid className="md:hidden">
           <ToolbarMobileTop>
             <BackButton href="/team" />
-            <ToolbarMobileHeading>{t("heading")}</ToolbarMobileHeading>
+            <PageHeadingMobile>{t("heading")}</PageHeadingMobile>
           </ToolbarMobileTop>
 
           <ToolbarMobileBottom>

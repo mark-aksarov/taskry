@@ -48,7 +48,7 @@ export function TaskDetailContainer({ taskId }: TaskDetailContainerProps) {
         status={task.status}
         project={task.project}
         subtasksList={
-          task.subtasks.length !== 0 && (
+          task.subtasks.length ? (
             <SubtaskList>
               {task.subtasks.map((subtask) => (
                 <SubtaskListItem
@@ -63,7 +63,7 @@ export function TaskDetailContainer({ taskId }: TaskDetailContainerProps) {
                 />
               ))}
             </SubtaskList>
-          )
+          ) : undefined
         }
       />
 

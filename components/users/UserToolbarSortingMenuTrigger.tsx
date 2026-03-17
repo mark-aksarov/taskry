@@ -4,7 +4,7 @@ import {
   ToolbarSortingMenuTrigger,
   ToolbarSortingButtonMobile,
   ToolbarSortingButtonDesktop,
-} from "@/components/common/Toolbar";
+} from "@/components/common/ToolbarOld";
 
 import { Item } from "react-stately";
 import { UserSortField } from "@/lib/types";

@@ -1,6 +1,6 @@
 import { Skeleton } from "@/components/ui/Skeleton";
 import { TaskDetailLayout } from "./TaskDetailLayout";
-import { FieldSkeleton } from "@/components/common/FieldSkeleton";
+import { FieldSkeleton } from "@/components/ui/Skeleton";
 import { DetailInfo, DetailInfoSkeleton } from "@/components/common/Detail";
 
 export function TaskDetailSkeleton() {

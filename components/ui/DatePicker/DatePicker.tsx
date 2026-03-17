@@ -165,9 +165,9 @@ export const DatePicker = <T extends DateValue>({
         className={fieldStyles({ className })}
       >
         {props.label && (
-          <span {...labelProps} className={fieldLabelStyles()}>
+          <div {...labelProps} className={fieldLabelStyles()}>
             {props.label}
-          </span>
+          </div>
         )}
 
         <div
@@ -201,11 +201,11 @@ export const DatePicker = <T extends DateValue>({
         </div>
 
         {validation.isInvalid && props.errorMessage && (
-          <span className={fieldErrorStyles()}>
+          <div className={fieldErrorStyles()}>
             {typeof props.errorMessage === "function"
               ? props.errorMessage(validation)
               : props.errorMessage}
-          </span>
+          </div>
         )}
 
         {overlayType === "bottomsheet" ? (

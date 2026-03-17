@@ -5,7 +5,7 @@ import { Moon, Sun } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/Button";
-import { AppHeaderThemeToggleButtonSkeleton } from "./AppHeaderThemeToggleButtonSkeleton";
+import { ButtonSkeleton } from "@/components/ui/Skeleton";
 
 export interface AppHeaderThemeToggleButtonProps {
   className?: string;
@@ -23,7 +23,7 @@ export function AppHeaderThemeToggleButton({
   }, []);
 
   if (!mounted) {
-    return <AppHeaderThemeToggleButtonSkeleton />;
+    return <ButtonSkeleton ghost className="h-10 w-10" />;
   }
 
   if (theme === "dark") {

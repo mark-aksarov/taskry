@@ -1,16 +1,13 @@
-import {
-  ToolbarMobileTop,
-  ToolbarMobileHeading,
-} from "@/components/common/Toolbar";
-
 import { useTranslations } from "next-intl";
 import { Card } from "@/components/common/Card";
 import { PageGrid } from "@/components/common/PageGrid";
+import { ToolbarMobile } from "@/components/common/Toolbar";
 import { BackButton } from "@/components/common/BackButton";
 import { PageContainer } from "@/components/common/PageContainer";
 import { TaskDetailCard } from "@/components/tasks/TaskDetailCard";
 import { DetailHeaderSkeleton } from "@/components/common/DetailHeader";
 import { TaskDetailAltSkeleton } from "@/components/tasks/TaskDetailAlt";
+import { PageHeadingMobile } from "@/components/common/PageHeadingMobile";
 import { TaskDetailActionsSkeleton } from "@/components/tasks/TaskDetailActions";
 
 export default function AppTaskDetailLoading() {
@@ -25,10 +22,14 @@ export default function AppTaskDetailLoading() {
       />
 
       <PageGrid className="md:hidden">
-        <ToolbarMobileTop>
-          <BackButton href="/tasks" />
-          <ToolbarMobileHeading>{t("heading")}</ToolbarMobileHeading>
-        </ToolbarMobileTop>
+        <ToolbarMobile
+          firstSlot={
+            <>
+              <BackButton href="/tasks" />
+              <PageHeadingMobile>{t("heading")}</PageHeadingMobile>
+            </>
+          }
+        />
 
         <div className="flex flex-col">
           <DetailHeaderSkeleton />

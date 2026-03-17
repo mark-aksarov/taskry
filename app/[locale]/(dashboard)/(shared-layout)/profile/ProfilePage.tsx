@@ -1,8 +1,8 @@
 import {
   ToolbarMobileTop,
   ToolbarMobileBottom,
-  ToolbarMobileHeading,
-} from "@/components/common/Toolbar";
+  PageHeadingMobile,
+} from "@/components/common/ToolbarOld";
 
 import { useTranslations } from "next-intl";
 import { Card } from "@/components/common/Card";
@@ -52,7 +52,7 @@ export function ProfilePage({
 
         <PageGrid className="md:hidden">
           <ToolbarMobileTop>
-            <ToolbarMobileHeading>{t("heading")}</ToolbarMobileHeading>
+            <PageHeadingMobile>{t("heading")}</PageHeadingMobile>
           </ToolbarMobileTop>
 
           <ToolbarMobileBottom>

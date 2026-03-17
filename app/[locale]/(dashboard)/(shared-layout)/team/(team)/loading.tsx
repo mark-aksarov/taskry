@@ -2,11 +2,11 @@ import {
   ToolbarDesktop,
   ToolbarMobileTop,
   ToolbarMobileBottom,
-  ToolbarMobileHeading,
+  PageHeadingMobile,
   ToolbarDesktopButtonSkeleton,
   ToolbarMobileTopButtonSkeleton,
   ToolbarMobileBottomButtonSkeleton,
-} from "@/components/common/Toolbar";
+} from "@/components/common/ToolbarOld";
 
 import { useTranslations } from "next-intl";
 import { List } from "@/components/common/List";
@@ -30,7 +30,7 @@ export default function AppUsersPageLoading() {
         </ToolbarDesktop>
 
         <ToolbarMobileTop>
-          <ToolbarMobileHeading>{t("title")}</ToolbarMobileHeading>
+          <PageHeadingMobile>{t("title")}</PageHeadingMobile>
           <ToolbarMobileTopButtonSkeleton />
           <ToolbarMobileTopButtonSkeleton />
           <ToolbarMobileTopButtonSkeleton />

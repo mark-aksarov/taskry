@@ -2,8 +2,7 @@
 
 import { Children } from "react";
 import { List } from "@/components/common/List";
-import { Repeat } from "@/components/common/Repeat";
-import { CustomerListItemSkeleton } from "../CustomerListItem";
+import { CustomerListSkeleton } from "./CustomerListSkeleton";
 import { useEntityListPending } from "@/lib/hooks/useEntityListPending";
 
 export type CustomerListProps = {
@@ -14,14 +13,7 @@ export function CustomerList({ children }: CustomerListProps) {
   const isPending = useEntityListPending();
 
   if (isPending) {
-    return (
-      <List data-test="customers-list">
-        <Repeat
-          items={Children.count(children)}
-          renderItem={() => <CustomerListItemSkeleton />}
-        />
-      </List>
-    );
+    return <CustomerListSkeleton items={Children.count(children)} />;
   }
 
   return <List data-test="customers-list">{children}</List>;

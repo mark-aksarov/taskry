@@ -19,8 +19,9 @@ import {
 } from "@/components/customer/TotalCustomersCard";
 
 import {
-  AssignedTasksSkeleton,
   AssignedTasksPresentation,
+  AssignedTasksSection,
+  AssignedTasksSectionHeading,
 } from "@/components/tasks/AssignedTasks";
 
 import { mocked } from "storybook/test";
@@ -32,13 +33,16 @@ import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { mockedProjectSummaries } from "@/mocks/projects";
 import { PageDecorator } from "@/.storybook/PageDecorator";
 import { SearchList } from "@/components/search/SearchList";
+import { TaskGridMobile } from "@/components/tasks/TaskGrid";
 import { NewTaskForm } from "@/components/tasks/NewTaskForm";
 import { NewTaskModal } from "@/components/tasks/NewTaskModal";
+import { TaskListSkeleton } from "@/components/tasks/TaskList";
 import { mockedTaskCategorySummaries } from "@/mocks/taskCategories";
 import { AssignedTaskList } from "@/components/tasks/AssignedTaskList";
 import { NewSubtaskModal } from "@/components/subtasks/NewSubtaskModal";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { SearchListStory } from "@/components/search/SearchList/__stories__";
+import { TaskGridMobileStory } from "@/components/tasks/TaskGrid/__stories__";
 import { AssignedTaskListItem } from "@/components/tasks/AssignedTaskListItem";
 import { TaskListItemStory } from "@/components/tasks/TaskListItem/__stories__";
 import { withCreateTaskProvider } from "@/components/tasks/CreateTaskContext/__stories__";
@@ -84,7 +88,7 @@ const AssignedTasksContainer = ({ totalCount }: { totalCount: number }) => (
     totalCount={totalCount}
     page={1}
     pageSize={5}
-    list={
+    listLarge={
       <AssignedTaskList>
         {mockedTaskList.map((task) => (
           <AssignedTaskListItem
@@ -99,6 +103,7 @@ const AssignedTasksContainer = ({ totalCount }: { totalCount: number }) => (
         ))}
       </AssignedTaskList>
     }
+    gridMobile={<TaskGridMobile {...TaskGridMobileStory.args} />}
     totalPages={3}
   />
 );
@@ -121,7 +126,12 @@ export const Loading = {
     totalTasksCardContainer: <TotalTasksCardSkeleton />,
     totalUsersCardContainer: <TotalUsersCardSkeleton />,
     totalCustomersCardContainer: <TotalCustomersCardSkeleton />,
-    assignedTasksContainer: <AssignedTasksSkeleton />,
+    assignedTasksContainer: (
+      <AssignedTasksSection>
+        <AssignedTasksSectionHeading />
+        <TaskListSkeleton items={10} showCheckbox={false} />
+      </AssignedTasksSection>
+    ),
   },
 } satisfies Story;
 

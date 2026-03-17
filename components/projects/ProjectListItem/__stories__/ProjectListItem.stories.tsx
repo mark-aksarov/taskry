@@ -11,7 +11,6 @@ import { CommentList } from "@/components/comments/CommentList";
 import { CustomerDetail } from "@/components/customer/CustomerDetail";
 import { UserDetailHeader } from "@/components/users/UserDetailHeader";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withProjectItemProviders } from "../../ProjectItem/__stories__";
 import { CommentListStory } from "@/components/comments/CommentList/__stories__";
 import { CustomerDetailHeader } from "@/components/customer/CustomerDetailHeader";
 import { withDeleteProjectsProvider } from "../../DeleteProjectsContext/__stories__";
@@ -24,7 +23,6 @@ const meta = {
   title: "components/projects/ProjectListItem",
   component: ProjectListItem,
   decorators: [
-    withProjectItemProviders,
     withDeleteProjectsProvider,
     withUpdateProjectStatusesProvider,
     withGuestModeModalProvider,
@@ -71,6 +69,9 @@ export const Default = {
     ),
     sendComment: () => ({ status: "success" }),
     updateComment: () => ({ status: "success" }),
+    updateProject: () => ({ status: "success" }),
+    deleteProject: () => ({ status: "success" }),
+    updateProjectStatus: () => ({ status: "success" }),
   },
 } satisfies Story;
 

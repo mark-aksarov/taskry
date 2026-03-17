@@ -9,8 +9,8 @@ import {
 import { useTranslations } from "next-intl";
 import { DialogTrigger } from "react-aria-components";
 import { DialogHeader } from "@/components/ui/Dialog";
-import { ToolbarFiltersButtonMobile } from "@/components/common/Toolbar/ToolbarFiltersButtonMobile";
-import { ToolbarFiltersButtonDesktop } from "@/components/common/Toolbar/ToolbarFiltersButtonDesktop";
+import { ToolbarFiltersButtonMobile } from "@/components/common/ToolbarOld/ToolbarFiltersButtonMobile";
+import { ToolbarFiltersButtonDesktop } from "@/components/common/ToolbarOld/ToolbarFiltersButtonDesktop";
 
 export function UserToolbarFiltersModalTrigger({
   filtersFormContainer,

@@ -4,8 +4,8 @@ export function AuthCardFooterText({
   children: React.ReactNode;
 }) {
   return (
-    <span className="text-sm font-normal text-black dark:text-white">
+    <div className="text-sm font-normal text-black dark:text-white">
       {children}
-    </span>
+    </div>
   );
 }

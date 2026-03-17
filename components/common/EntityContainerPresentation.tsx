@@ -1,26 +1,35 @@
 "use client";
 
-import { ViewModeLayout } from "@/components/common/ViewMode";
-import { EntityContainerPagination } from "../common/EntityContainerPagination";
+import { useViewMode } from "@/components/common/ViewMode";
+import { EntityContainerPagination } from "./EntityContainerPagination";
 
 interface EntityContainerPresentationProps {
   page: number;
   pageSize: number;
-  list: React.ReactNode;
-  grid: React.ReactNode;
+  listLarge: React.ReactNode;
+  gridLarge: React.ReactNode;
+  gridMobile: React.ReactNode;
   totalPages: number;
 }
 
 export function EntityContainerPresentation({
   page,
   pageSize,
-  list,
-  grid,
+  listLarge,
+  gridLarge,
+  gridMobile,
   totalPages,
 }: EntityContainerPresentationProps) {
+  const { viewMode } = useViewMode();
+
   return (
     <>
-      <ViewModeLayout list={list} grid={grid} />
+      <div className="max-md:hidden">
+        {viewMode === "list" ? listLarge : gridLarge}
+      </div>
+
+      <div className="md:hidden">{gridMobile}</div>
+
       <EntityContainerPagination
         page={page}
         totalPages={totalPages}

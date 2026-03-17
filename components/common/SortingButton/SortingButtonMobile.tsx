@@ -1,0 +1,20 @@
+import { ArrowDownUp } from "lucide-react";
+import { useTranslations } from "next-intl";
+import { Button, ButtonProps } from "@/components/ui/Button";
+import { useSortingButtonDisabled } from "./useSortingButtonDisabled";
+
+export function SortingButtonMobile(props: ButtonProps) {
+  const t = useTranslations("common.SortingButtonMobile");
+
+  const isDisabled = useSortingButtonDisabled();
+
+  return (
+    <Button
+      isDisabled={isDisabled}
+      label={t("ariaLabel")}
+      variant="ghost"
+      iconLeft={<ArrowDownUp size={16} strokeWidth={1.5} absoluteStrokeWidth />}
+      {...props}
+    />
+  );
+}

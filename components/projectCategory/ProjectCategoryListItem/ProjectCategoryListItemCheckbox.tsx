@@ -29,6 +29,7 @@ export function ProjectCategoryListItemCheckbox({
       aria-label="project category checkbox"
       isSelected={isSelected}
       onChange={handleChange}
+      className="max-md:hidden"
     />
   );
 }

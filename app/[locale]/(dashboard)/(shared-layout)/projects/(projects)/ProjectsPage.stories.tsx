@@ -1,3 +1,13 @@
+import {
+  ProjectGridLarge,
+  ProjectGridMobile,
+} from "@/components/projects/ProjectGrid";
+
+import {
+  ProjectGridLargeStory,
+  ProjectGridMobileStory,
+} from "@/components/projects/ProjectGrid/__stories__";
+
 import { fn, mocked } from "storybook/test";
 import ProjectsPageLoading from "./loading";
 import { ProjectsPage } from "./ProjectsPage";
@@ -8,17 +18,18 @@ import { PageDecorator } from "@/.storybook/PageDecorator";
 import { mockedCustomerSummaries } from "@/mocks/customers";
 import { SearchList } from "@/components/search/SearchList";
 import { ProjectList } from "@/components/projects/ProjectList";
-import { ProjectGrid } from "@/components/projects/ProjectGrid";
 import { NewProjectForm } from "@/components/projects/NewProjectForm";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { mockedProjectCategorySummaries } from "@/mocks/projectCategories";
 import { SearchListStory } from "@/components/search/SearchList/__stories__";
 import { ProjectFiltersForm } from "@/components/projects/ProjectFiltersForm";
-import { ProjectGridStory } from "@/components/projects/ProjectGrid/__stories__";
 import { ProjectListStory } from "@/components/projects/ProjectList/__stories__";
+import { ProjectCreatorFiltersForm } from "@/components/projects/ProjectCreatorFiltersForm";
 import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
+import { ProjectCustomerFiltersForm } from "@/components/projects/ProjectCustomerFiltersForm";
 import { EntityContainerPresentation } from "@/components/common/EntityContainerPresentation";
+import { ProjectCategoryFiltersForm } from "@/components/projects/ProjectCategoryFiltersForm";
 import { withPageTransitionProvider } from "@/components/common/PageTransitionContext/__stories__";
 import { withCreateProjectProvider } from "@/components/projects/CreateProjectContext/__stories__";
 import { withProjectFiltersProvider } from "@/components/projects/ProjectFiltersContext/__stories__";
@@ -73,12 +84,28 @@ export const Default = {
         customerCheckboxGroupItems={mockedCustomerSummaries}
       />
     ),
+    projectCategoryFiltersFormContainer: (
+      <ProjectCategoryFiltersForm
+        categoryCheckboxGroupItems={mockedProjectCategorySummaries}
+      />
+    ),
+    creatorFiltersFormContainer: (
+      <ProjectCreatorFiltersForm
+        creatorCheckboxGroupItems={mockedUserSummaries}
+      />
+    ),
+    customerFiltersFormContainer: (
+      <ProjectCustomerFiltersForm
+        customerCheckboxGroupItems={mockedCustomerSummaries}
+      />
+    ),
     projectsContainer: (
       <EntityContainerPresentation
         page={1}
         pageSize={3}
-        list={<ProjectList {...ProjectListStory.args} />}
-        grid={<ProjectGrid {...ProjectGridStory.args} />}
+        listLarge={<ProjectList {...ProjectListStory.args} />}
+        gridLarge={<ProjectGridLarge {...ProjectGridLargeStory.args} />}
+        gridMobile={<ProjectGridMobile {...ProjectGridMobileStory.args} />}
         totalPages={3}
       />
     ),

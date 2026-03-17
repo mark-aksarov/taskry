@@ -1,9 +1,7 @@
 import {
-  ToolbarDesktop,
-  ToolbarMobileTop,
-  ToolbarMobileBottom,
-  ToolbarMobileHeading,
-} from "@/components/common/Toolbar";
+  CreateProjectCategoryModalTriggerLarge,
+  CreateProjectCategoryModalTriggerMobile,
+} from "@/components/projectCategory/CreateProjectCategoryModalTrigger";
 
 import { useTranslations } from "next-intl";
 import { PageGrid } from "@/components/common/PageGrid";
@@ -12,10 +10,11 @@ import { ViewModeProvider } from "@/components/common/ViewMode";
 import { PageContainer } from "@/components/common/PageContainer";
 import { TaskSearchModal } from "@/components/tasks/TaskSearchModal";
 import { PageEmptySection } from "@/components/common/PageEmptySection";
+import { ToolbarLarge, ToolbarMobile } from "@/components/common/Toolbar";
+import { PageHeadingMobile } from "@/components/common/PageHeadingMobile";
 import { NewProjectCategoryModal } from "@/components/projectCategory/NewProjectCategoryModal";
-import { ProjectCategoryToolbarActionsMenuTrigger } from "@/components/projectCategory/ProjectCategoryToolbarActionsMenuTrigger";
+import { ProjectCategoryActionsMenuTrigger } from "@/components/projectCategory/ProjectCategoryActionsMenuTrigger";
 import { ProjectCategoriesEmptySectionCreateButton } from "@/components/projectCategory/ProjectCategoriesEmptySectionCreateButton";
-import { ProjectCategoryToolbarCreateNewModalTrigger } from "@/components/projectCategory/ProjectCategoryToolbarCreateNewModalTrigger";
 
 interface ProjectCategoriesPageProps {
   totalCount: number;
@@ -35,10 +34,14 @@ export function ProjectCategoriesPage({
       <>
         <PageContainer fullscreen headerOffset>
           <PageGrid className="relative flex-auto">
-            <ToolbarMobileTop>
-              <BackButton href="/customers" />
-              <ToolbarMobileHeading>{t("heading")}</ToolbarMobileHeading>
-            </ToolbarMobileTop>
+            <ToolbarMobile
+              firstSlot={
+                <>
+                  <BackButton href="/projects" />
+                  <PageHeadingMobile>{t("heading")}</PageHeadingMobile>
+                </>
+              }
+            />
 
             <PageEmptySection
               heading={t("emptySection.heading")}
@@ -58,22 +61,20 @@ export function ProjectCategoriesPage({
       <PageContainer>
         <PageGrid>
           <ViewModeProvider>
-            <ToolbarDesktop>
-              <ProjectCategoryToolbarActionsMenuTrigger />
-              <ProjectCategoryToolbarCreateNewModalTrigger />
-            </ToolbarDesktop>
+            <ToolbarLarge
+              firstSlot={<ProjectCategoryActionsMenuTrigger />}
+              secondSlot={<CreateProjectCategoryModalTriggerLarge />}
+            />
 
-            <ToolbarMobileTop>
-              <BackButton href="/projects" />
-              <ToolbarMobileHeading>{t("heading")}</ToolbarMobileHeading>
-              <ProjectCategoryToolbarActionsMenuTrigger />
-            </ToolbarMobileTop>
-
-            <ToolbarMobileBottom>
-              <div className="ml-auto">
-                <ProjectCategoryToolbarCreateNewModalTrigger />
-              </div>
-            </ToolbarMobileBottom>
+            <ToolbarMobile
+              firstSlot={
+                <>
+                  <BackButton href="/projects" />
+                  <PageHeadingMobile>{t("heading")}</PageHeadingMobile>
+                </>
+              }
+              secondSlot={<CreateProjectCategoryModalTriggerMobile />}
+            />
 
             {projectCategoriesContainer}
           </ViewModeProvider>

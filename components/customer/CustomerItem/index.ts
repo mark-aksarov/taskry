@@ -1,5 +1,4 @@
-export { CustomerItem } from "./CustomerItem";
-export { type CustomerItemProps } from "./CustomerItem";
+export { type BaseCustomerItemProps } from "./types";
 export { CustomerItemCheckbox } from "./CustomerItemCheckbox";
 export { CustomerItemProviders } from "./CustomerItemProviders";
 export { CustomerItemPendingOverlay } from "./CustomerItemPendingOverlay";

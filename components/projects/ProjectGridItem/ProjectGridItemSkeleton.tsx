@@ -11,20 +11,40 @@ import {
 
 import { ProjectGridItemLayout } from "./ProjectGridItemLayout";
 import { ImageContainerSkeleton } from "@/components/common/ImageContainer";
-import { CheckboxSkeleton } from "@/components/common/CheckboxSkeleton";
+import { CheckboxSkeleton } from "@/components/ui/Skeleton/CheckboxSkeleton";
 
-export function ProjectGridItemSkeleton() {
+interface ProjectGridItemSkeletonProps {
+  showCheckbox?: boolean;
+  creatorImageClassName?: string;
+}
+
+function ProjectGridItemSkeleton({
+  showCheckbox,
+  creatorImageClassName,
+}: ProjectGridItemSkeletonProps) {
   return (
     <ProjectGridItemLayout
-      checkboxSlot={<CheckboxSkeleton />}
+      checkboxSlot={showCheckbox ? <CheckboxSkeleton /> : undefined}
       menuTriggerSlot={
         <ItemBaseActionMenuTriggerSkeleton className="-mr-2 ml-auto" />
       }
       mainSlot={<GridItemInfoSkeleton />}
-      creatorImageSlot={<ImageContainerSkeleton className="h-9 w-9" />}
+      creatorImageSlot={
+        <ImageContainerSkeleton className={creatorImageClassName} />
+      }
       commentsSlot={<ItemBaseButtonSkeleton />}
       statusSlot={<ItemBaseBadgeSkeleton />}
       progressSlot={<GridItemProgressSkeleton />}
     />
   );
 }
+
+export const ProjectGridItemLargeSkeleton = () => {
+  return (
+    <ProjectGridItemSkeleton creatorImageClassName="h-9 w-9" showCheckbox />
+  );
+};
+
+export const ProjectGridItemMobileSkeleton = () => {
+  return <ProjectGridItemSkeleton creatorImageClassName="h-11 w-11" />;
+};

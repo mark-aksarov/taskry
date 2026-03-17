@@ -5,5 +5,5 @@ interface DetailTitleProps {
 }
 
 export function DetailTitle({ children }: DetailTitleProps) {
-  return <span className={titleStyles}>{children}</span>;
+  return <div className={titleStyles}>{children}</div>;
 }

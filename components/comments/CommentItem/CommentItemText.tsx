@@ -8,14 +8,14 @@ interface CommentItemTextProps {
 
 export function CommentItemText({ className, children }: CommentItemTextProps) {
   return (
-    <span
+    <div
       className={twMerge(
         "text-sm font-normal text-black dark:text-white",
         className,
       )}
     >
       {children}
-    </span>
+    </div>
   );
 }
 

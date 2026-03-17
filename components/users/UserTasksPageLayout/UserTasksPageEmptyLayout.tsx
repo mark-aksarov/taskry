@@ -1,8 +1,8 @@
 import {
   ToolbarMobileTop,
   ToolbarMobileBottom,
-  ToolbarMobileHeading,
-} from "@/components/common/Toolbar";
+  PageHeadingMobile,
+} from "@/components/common/ToolbarOld";
 
 import {
   DetailCard,
@@ -59,7 +59,7 @@ export function UserTasksPageEmptyLayout({
         <PageGrid className="relative flex-auto">
           <ToolbarMobileTop>
             {backButton && <BackButton href="/team" />}
-            <ToolbarMobileHeading>{t("title")}</ToolbarMobileHeading>
+            <PageHeadingMobile>{t("title")}</PageHeadingMobile>
           </ToolbarMobileTop>
 
           <ToolbarMobileBottom>{navigationMobile}</ToolbarMobileBottom>

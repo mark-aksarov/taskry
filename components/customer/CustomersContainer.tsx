@@ -1,8 +1,15 @@
 import "server-only";
 
+import {
+  CustomerGridItemLarge,
+  CustomerGridItemMobile,
+} from "./CustomerGridItem";
+import { BaseCustomerItemProps } from "./CustomerItem";
+
 import { CustomerList } from "./CustomerList";
-import { CustomerGrid } from "./CustomerGrid";
-import { CustomerItem } from "./CustomerItem";
+import { CustomerGridLarge } from "./CustomerGrid";
+import { CustomerGridMobile } from "./CustomerGrid";
+import { CustomerListItem } from "./CustomerListItem";
 import { CustomerDetailContainer } from "./CustomerDetailContainer";
 import { deleteCustomer } from "@/lib/actions/customer/deleteCustomer";
 import { updateCustomer } from "@/lib/actions/customer/updateCustomer";
@@ -24,40 +31,68 @@ export async function CustomersContainer({
   page,
   pageSize,
 }: CustomersContainerProps) {
-  const items = (
-    <>
-      {customers.map((customer) => (
-        <CustomerItem
-          key={customer.id}
-          id={customer.id}
-          fullName={customer.fullName}
-          imageUrl={customer.imageUrl}
-          email={customer.email}
-          phoneNumber={customer.phoneNumber}
-          publicLink={customer.publicLink}
-          company={customer.company}
-          updateCustomer={updateCustomer}
-          deleteCustomer={deleteCustomer}
-          editCustomerFormContainer={
-            <EditCustomerFormContainer customerId={customer.id} />
-          }
-          customerDetailContainer={
-            <CustomerDetailContainer customerId={customer.id} />
-          }
-          customerDetailHeaderContainer={
-            <CustomerDetailHeaderContainer customerId={customer.id} />
-          }
-        />
-      ))}
-    </>
-  );
+  const getCommonProps = (
+    customer: CustomerListItemDTO,
+  ): BaseCustomerItemProps => ({
+    id: customer.id,
+    fullName: customer.fullName,
+    imageUrl: customer.imageUrl,
+    email: customer.email,
+    phoneNumber: customer.phoneNumber,
+    publicLink: customer.publicLink,
+    company: customer.company,
+    updateCustomer: updateCustomer,
+    deleteCustomer: deleteCustomer,
+    editCustomerFormContainer: (
+      <EditCustomerFormContainer customerId={customer.id} />
+    ),
+  });
+
+  const getContainerProps = (customer: CustomerListItemDTO) => ({
+    customerDetailContainer: (
+      <CustomerDetailContainer customerId={customer.id} />
+    ),
+    customerDetailHeaderContainer: (
+      <CustomerDetailHeaderContainer customerId={customer.id} />
+    ),
+  });
 
   return (
     <EntityContainerPresentation
       page={page}
       pageSize={pageSize}
-      list={<CustomerList>{items}</CustomerList>}
-      grid={<CustomerGrid>{items}</CustomerGrid>}
+      listLarge={
+        <CustomerList>
+          {customers.map((customer) => (
+            <CustomerListItem
+              key={customer.id}
+              {...getCommonProps(customer)}
+              {...getContainerProps(customer)}
+            />
+          ))}
+        </CustomerList>
+      }
+      gridLarge={
+        <CustomerGridLarge>
+          {customers.map((customer) => (
+            <CustomerGridItemLarge
+              key={customer.id}
+              {...getCommonProps(customer)}
+              {...getContainerProps(customer)}
+            />
+          ))}
+        </CustomerGridLarge>
+      }
+      gridMobile={
+        <CustomerGridMobile>
+          {customers.map((customer) => (
+            <CustomerGridItemMobile
+              key={customer.id}
+              {...getCommonProps(customer)}
+            />
+          ))}
+        </CustomerGridMobile>
+      }
       totalPages={Math.ceil(totalCount / pageSize)}
     />
   );

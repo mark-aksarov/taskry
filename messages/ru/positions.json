@@ -23,11 +23,11 @@
   "PositionListItem": {
     "name": "Название"
   },
-  "PositionToolbarActionsMenuTrigger": {
+  "PositionActionsMenuTrigger": {
     "dialogHeading": "Действия",
     "delete": "Удалить"
   },
-  "PositionToolbarCreateNewModalTrigger": {
+  "CreatePositionModalTrigger": {
     "label": "Создать новую"
   },
   "PositionListItemActionMenuTrigger": {

@@ -1,5 +1,4 @@
-export { TaskItem } from "./TaskItem";
-export { type TaskItemProps } from "./TaskItem";
+export { type BaseTaskItemProps } from "./types";
 export { TaskItemCheckbox } from "./TaskItemCheckbox";
 export { TaskItemProviders } from "./TaskItemProviders";
 export { useTaskItemPending } from "./useTaskItemPending";

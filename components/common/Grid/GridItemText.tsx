@@ -1,5 +1,3 @@
-// These components are direct children of a flex container and become blockified flex items.
-
 import { twMerge } from "tailwind-merge";
 
 const styles =

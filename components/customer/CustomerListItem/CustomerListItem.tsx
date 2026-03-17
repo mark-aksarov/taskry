@@ -7,21 +7,50 @@ import {
   ListItemTitleDetailModalTrigger,
 } from "@/components/common/List";
 
+import {
+  ItemBaseDetailModalTrigger,
+  ItemBaseUserImageContainer,
+} from "@/components/common/ItemBase";
+
 import { memo } from "react";
-import Image from "next/image";
 import { useTranslations } from "next-intl";
-import { Link } from "@/components/ui/Link";
-import { CustomerItemProps } from "../CustomerItem";
 import { CustomerDetailModal } from "../CustomerDetailModal";
-import { UnknownUser } from "@/components/common/UnknownUser";
 import { CustomerListItemLayout } from "./CustomerListItemLayout";
-import { ImageContainer } from "@/components/common/ImageContainer";
-import { ItemBaseDetailModalTrigger } from "@/components/common/ItemBase";
+import { SelectableItem } from "@/components/common/SelectableItem";
 import { ListItemTitleLink } from "@/components/common/List/ListItemTitle";
 import { CustomerItemCheckbox } from "../CustomerItem/CustomerItemCheckbox";
+import { useSelectedItems } from "@/components/common/SelectedItemsContext";
+import { BaseCustomerItemProps, CustomerItemProviders } from "../CustomerItem";
 import { CustomerItemActionMenuTrigger } from "../CustomerItem/CustomerItemActionMenuTrigger";
 
-export const CustomerListItem = memo(
+interface Props extends BaseCustomerItemProps {
+  customerDetailContainer: React.ReactNode;
+  customerDetailHeaderContainer: React.ReactNode;
+}
+
+export function CustomerListItem({
+  deleteCustomer,
+  updateCustomer,
+  ...props
+}: Props) {
+  const selected = useSelectedItems();
+
+  return (
+    <CustomerItemProviders
+      customerId={props.id}
+      deleteCustomer={deleteCustomer}
+      updateCustomer={updateCustomer}
+    >
+      <SelectableItem {...selected} item={{ id: props.id }}>
+        <CustomerListItemInner {...props} />
+      </SelectableItem>
+    </CustomerItemProviders>
+  );
+}
+
+type InnerProps = Omit<Props, "deleteCustomer" | "updateCustomer">;
+
+export const CustomerListItemInner = memo(
   ({
     id,
     fullName,
@@ -33,15 +62,16 @@ export const CustomerListItem = memo(
     customerDetailContainer,
     customerDetailHeaderContainer,
     editCustomerFormContainer,
-  }: Omit<CustomerItemProps, "deleteCustomer" | "updateCustomer">) => {
+  }: InnerProps) => {
     const t = useTranslations("customers.CustomerListItem");
 
-    const userImg = imageUrl ? (
-      <ImageContainer className="h-9 w-9">
-        <Image src={imageUrl} alt={fullName} width={36} height={36} />
-      </ImageContainer>
-    ) : (
-      <UnknownUser className="h-9 w-9" />
+    const customerImg = (
+      <ItemBaseUserImageContainer
+        user={{ fullName, imageUrl }}
+        width={36}
+        height={36}
+        className="h-9 w-9"
+      />
     );
 
     const customerDetailModal = (
@@ -59,15 +89,10 @@ export const CustomerListItem = memo(
         imgSlot={
           <ItemBaseDetailModalTrigger
             modal={customerDetailModal}
-            className="h-9 w-9 max-md:hidden"
+            className="h-9 w-9"
           >
-            {userImg}
+            {customerImg}
           </ItemBaseDetailModalTrigger>
-        }
-        imgMobileSlot={
-          <Link className="md:hidden" href={`/customers/${id}`}>
-            {userImg}
-          </Link>
         }
         mainSlot={
           <>
@@ -78,12 +103,6 @@ export const CustomerListItem = memo(
             <ListItemTextLink href={`mailto:${email}`}>
               {email}
             </ListItemTextLink>
-          </>
-        }
-        mainMobileSlot={
-          <>
-            <ListItemTitle>{fullName}</ListItemTitle>
-            <ListItemText>{email}</ListItemText>
           </>
         }
         phoneNumberSlot={

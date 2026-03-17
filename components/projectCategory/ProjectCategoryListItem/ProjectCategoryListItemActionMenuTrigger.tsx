@@ -11,7 +11,6 @@ import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
 import { Pencil, Trash } from "lucide-react";
 import { useCurrentUser } from "../../common/CurrentUserContext";
-import { GuestModeModal } from "@/components/common/GuestModeModal";
 import { EditProjectCategoryModal } from "../EditProjectCategoryModal";
 import { useGuestModeModal } from "@/components/common/GuestModeModal";
 import { DeleteProjectCategoryModal } from "../DeleteProjectCategoryModal";

@@ -2,8 +2,8 @@ import {
   ToolbarDesktop,
   ToolbarMobileTop,
   ToolbarMobileBottom,
-  ToolbarMobileHeading,
-} from "@/components/common/Toolbar";
+  PageHeadingMobile,
+} from "@/components/common/ToolbarOld";
 
 import { useTranslations } from "next-intl";
 import { UserSortField } from "@/lib/types";
@@ -57,7 +57,7 @@ export function UsersPage({
             </ToolbarDesktop>
 
             <ToolbarMobileTop>
-              <ToolbarMobileHeading>{t("heading")}</ToolbarMobileHeading>
+              <PageHeadingMobile>{t("heading")}</PageHeadingMobile>
               <UserToolbarManageMenuTrigger />
               <UserToolbarSortingMenuTrigger
                 selectedSortField={selectedSortField}

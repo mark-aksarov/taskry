@@ -27,10 +27,10 @@
     "edit": "Редактировать",
     "delete": "Удалить"
   },
-  "ProjectCategoryToolbarCreateNewModalTrigger": {
+  "CreateProjectCategoryModalTrigger": {
     "label": "Создать новую"
   },
-  "ProjectCategoryToolbarActionsMenuTrigger": {
+  "ProjectCategoryActionsMenuTrigger": {
     "dialogHeading": "Действия",
     "delete": "Удалить"
   },

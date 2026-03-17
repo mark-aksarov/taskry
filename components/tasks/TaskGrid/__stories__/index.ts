@@ -1,1 +1,2 @@
-export { Default as TaskGridStory } from "./TaskGrid.stories";
+export { Default as TaskGridLargeStory } from "./TaskGridLarge.stories";
+export { Default as TaskGridMobileStory } from "./TaskGridMobile.stories";

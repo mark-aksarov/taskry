@@ -1,19 +1,24 @@
 import {
-  ToolbarDesktop,
-  ToolbarMobileTop,
-  ToolbarMobileBottom,
-  ToolbarMobileHeading,
-  ToolbarDesktopButtonSkeleton,
-  ToolbarMobileTopButtonSkeleton,
-  ToolbarMobileBottomButtonSkeleton,
+  ToolbarLarge,
+  ToolbarMobile,
+  ToolbarSearchMobile,
+  ToolbarFiltersMobile,
 } from "@/components/common/Toolbar";
 
 import { useTranslations } from "next-intl";
 import { List } from "@/components/common/List";
+import { Skeleton } from "@/components/ui/Skeleton";
 import { Repeat } from "@/components/common/Repeat";
+import { GridMobile } from "@/components/common/Grid";
 import { PageGrid } from "@/components/common/PageGrid";
+import { ButtonSkeleton } from "@/components/ui/Skeleton";
 import { PageContainer } from "@/components/common/PageContainer";
 import { TaskListItemSkeleton } from "@/components/tasks/TaskListItem";
+import { PageHeadingMobile } from "@/components/common/PageHeadingMobile";
+import { TaskGridItemMobileSkeleton } from "@/components/tasks/TaskGridItem";
+import { SearchModalTriggerSkeleton } from "@/components/search/SearchModalTrigger";
+import { TaskListSkeleton } from "@/components/tasks/TaskList";
+import { TaskGridMobileSkeleton } from "@/components/tasks/TaskGrid";
 
 export default function AppTasksPageLoading() {
   const t = useTranslations("app.TasksPage");
@@ -21,34 +26,52 @@ export default function AppTasksPageLoading() {
   return (
     <PageContainer>
       <PageGrid>
-        <ToolbarDesktop>
-          <ToolbarDesktopButtonSkeleton />
-          <ToolbarDesktopButtonSkeleton />
-          <ToolbarDesktopButtonSkeleton />
-          <ToolbarDesktopButtonSkeleton />
-          <ToolbarDesktopButtonSkeleton className="ml-auto" />
-          <ToolbarDesktopButtonSkeleton />
-        </ToolbarDesktop>
+        <ToolbarLarge
+          firstSlot={
+            <>
+              <ButtonSkeleton className="w-[5rem]" />
+              <ButtonSkeleton className="w-[5rem]" />
+              <ButtonSkeleton className="w-[5rem]" />
+              <ButtonSkeleton className="w-[5rem]" />
+            </>
+          }
+          secondSlot={
+            <>
+              <ButtonSkeleton className="w-[5rem]" />
+              <ButtonSkeleton className="w-[5rem]" />
+            </>
+          }
+          twoRowsOnLg
+        />
 
-        <ToolbarMobileTop>
-          <ToolbarMobileHeading>{t("heading")}</ToolbarMobileHeading>
-          <ToolbarMobileTopButtonSkeleton />
-          <ToolbarMobileTopButtonSkeleton />
-          <ToolbarMobileTopButtonSkeleton />
-          <ToolbarMobileTopButtonSkeleton />
-        </ToolbarMobileTop>
+        <ToolbarMobile
+          firstSlot={<PageHeadingMobile>{t("heading")}</PageHeadingMobile>}
+          secondSlot={
+            <>
+              <ButtonSkeleton className="w-8" />
+              <ButtonSkeleton className="w-8" />
+            </>
+          }
+        />
 
-        <ToolbarMobileBottom>
-          <ToolbarMobileBottomButtonSkeleton />
-          <ToolbarMobileBottomButtonSkeleton className="ml-auto" />
-        </ToolbarMobileBottom>
+        <ToolbarSearchMobile>
+          <SearchModalTriggerSkeleton />
+        </ToolbarSearchMobile>
 
-        <List>
-          <Repeat
-            items={10}
-            renderItem={() => <TaskListItemSkeleton showCheckbox />}
-          />
-        </List>
+        <ToolbarFiltersMobile>
+          <ButtonSkeleton className="w-[5rem] rounded-full" />
+          <ButtonSkeleton className="w-[5rem] rounded-full" />
+          <ButtonSkeleton className="w-[5rem] rounded-full" />
+          <ButtonSkeleton className="w-[5rem] rounded-full" />
+        </ToolbarFiltersMobile>
+
+        <ToolbarMobile
+          firstSlot={<Skeleton size="sm" className="w-[5rem]" />}
+          secondSlot={<ButtonSkeleton ghost className="w-[7rem]" />}
+        />
+
+        <TaskListSkeleton className="max-md:hidden" items={10} />
+        <TaskGridMobileSkeleton className="md:hidden" items={10} />
       </PageGrid>
     </PageContainer>
   );

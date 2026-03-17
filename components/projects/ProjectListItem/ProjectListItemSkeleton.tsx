@@ -9,21 +9,15 @@ import {
   ListItemTitleSkeleton,
 } from "@/components/common/List";
 
-import { CheckboxSkeleton } from "@/components/common/CheckboxSkeleton";
-import { ImageContainerSkeleton } from "@/components/common/ImageContainer";
 import { ProjectListItemLayout } from "./ProjectListItemLayout";
+import { ImageContainerSkeleton } from "@/components/common/ImageContainer";
+import { CheckboxSkeleton } from "@/components/ui/Skeleton/CheckboxSkeleton";
 
 export const ProjectListItemSkeleton = () => {
   return (
     <ProjectListItemLayout
       checkboxSlot={<CheckboxSkeleton />}
       mainSlot={
-        <>
-          <ListItemTitleSkeleton />
-          <ListItemTextSkeleton />
-        </>
-      }
-      mainMobileSlot={
         <>
           <ListItemTitleSkeleton />
           <ListItemTextSkeleton />

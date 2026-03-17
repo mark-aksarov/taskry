@@ -11,8 +11,8 @@ import {
 import {
   ToolbarMobileTop,
   ToolbarMobileBottom,
-  ToolbarMobileHeading,
-} from "@/components/common/Toolbar";
+  PageHeadingMobile,
+} from "@/components/common/ToolbarOld";
 
 import { useTranslations } from "next-intl";
 import { Skeleton } from "@/components/ui/Skeleton";
@@ -68,7 +68,7 @@ export function UserTasksPageLoadingLayout({
         <PageGrid>
           <ToolbarMobileTop>
             {backButton && <BackButton href="/team" />}
-            <ToolbarMobileHeading>{t("title")}</ToolbarMobileHeading>
+            <PageHeadingMobile>{t("title")}</PageHeadingMobile>
             <Skeleton className="h-8 w-8 rounded-lg" />
             <Skeleton className="h-8 w-8 rounded-lg" />
           </ToolbarMobileTop>

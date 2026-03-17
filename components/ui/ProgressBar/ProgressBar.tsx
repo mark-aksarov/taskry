@@ -36,9 +36,7 @@ export const ProgressBar = ({
           {(label || showValueText) && (
             <div className="flex justify-between gap-2">
               {label && <Label className={textClasses}>{label}</Label>}
-              {showValueText && (
-                <span className={textClasses}>{valueText}</span>
-              )}
+              {showValueText && <div className={textClasses}>{valueText}</div>}
             </div>
           )}
           <div className="h-1.5 overflow-hidden rounded-full bg-gray-200 dark:bg-gray-700">
