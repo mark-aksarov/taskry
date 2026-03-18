@@ -120,11 +120,7 @@ export function UsersPage({
               />
             )}
 
-            {totalFilteredUsers === 0 ? (
-              <UsersFilteredEmptySection />
-            ) : (
-              usersContainer
-            )}
+            {isFilteredEmpty ? <UsersFilteredEmptySection /> : usersContainer}
           </ViewModeProvider>
         </PageGrid>
       </PageContainer>

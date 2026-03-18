@@ -4,10 +4,10 @@ import Image from "next/image";
 import { Languages } from "lucide-react";
 import { Item, Key } from "react-stately";
 import { MenuTrigger } from "@/components/ui/Menu";
-import { DialogHeader } from "@/components/ui/Dialog";
 import { useLocale, useTranslations } from "next-intl";
 import { usePathname, useRouter } from "@/i18n/navigation";
 import { NavigationButton } from "@/components/common/NavigationButton";
+import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
 
 export const AppNavigationLangMenuTrigger = () => {
   const t = useTranslations("layout.AppNavigationLangMenuTrigger");
@@ -27,7 +27,7 @@ export const AppNavigationLangMenuTrigger = () => {
       selectedKeys={[locale]}
       overlayType="bottomsheet"
       renderDialogHeader={() => (
-        <DialogHeader>{t("dialogHeading")}</DialogHeader>
+        <DialogHeaderWithClose>{t("dialogHeading")}</DialogHeaderWithClose>
       )}
       renderButton={() => (
         <NavigationButton

@@ -4,9 +4,9 @@ import {
 } from "@/components/common/FormBaseModal";
 
 import { useTranslations } from "next-intl";
-import { DialogHeader } from "@/components/ui/Dialog";
 import { TaskStatusFiltersForm } from "../TaskStatusFiltersForm";
 import { FilterModalDialog } from "@/components/common/FilterModalDialog";
+import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
 
 export function TaskStatusFiltersModal() {
   const t = useTranslations("tasks.TaskStatusFiltersModal");
@@ -14,7 +14,7 @@ export function TaskStatusFiltersModal() {
   return (
     <FormBaseModal data-test="task-status-filters-modal">
       <FilterModalDialog>
-        <DialogHeader>{t("heading")}</DialogHeader>
+        <DialogHeaderWithClose>{t("heading")}</DialogHeaderWithClose>
         <FormBaseModalDialogBody>
           <TaskStatusFiltersForm />
         </FormBaseModalDialogBody>

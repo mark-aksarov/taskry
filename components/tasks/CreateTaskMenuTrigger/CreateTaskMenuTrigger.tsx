@@ -5,10 +5,10 @@ import { Item } from "react-stately";
 import { useTranslations } from "next-intl";
 import { useCreateTask } from "../CreateTaskContext";
 import { Blocks, CalendarCheck } from "lucide-react";
-import { DialogHeader } from "@/components/ui/Dialog";
 import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 import { CreateNewMenuTrigger } from "@/components/common/CreateNewMenuTrigger";
 import { useCreateTaskCategory } from "../../taskCategory/CreateTaskCategoryContext";
+import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
 
 interface CreateTaskMenuTriggerProps {
   renderButton: () => React.ReactNode;
@@ -49,7 +49,7 @@ export function CreateTaskMenuTrigger({
       <CreateNewMenuTrigger
         onAction={handleAction}
         renderDialogHeader={() => (
-          <DialogHeader>{t("dialogHeading")}</DialogHeader>
+          <DialogHeaderWithClose>{t("dialogHeading")}</DialogHeaderWithClose>
         )}
         renderButton={renderButton}
       >

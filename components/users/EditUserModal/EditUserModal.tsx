@@ -7,8 +7,8 @@ import {
 } from "@/components/common/FormBaseModal";
 
 import { useTranslations } from "next-intl";
-import { DialogHeader } from "@/components/ui/Dialog";
 import { useUpdateUser } from "../UpdateUserContext";
+import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
 
 interface EditUserModalProps {
   editUserFormContainer: React.ReactNode;
@@ -26,7 +26,7 @@ export function EditUserModal({ editUserFormContainer }: EditUserModalProps) {
       onOpenChange={onModalOpenChange}
     >
       <FormBaseModalDialog>
-        <DialogHeader>{t("title")}</DialogHeader>
+        <DialogHeaderWithClose>{t("title")}</DialogHeaderWithClose>
         <FormBaseModalDialogBody>
           {editUserFormContainer}
         </FormBaseModalDialogBody>

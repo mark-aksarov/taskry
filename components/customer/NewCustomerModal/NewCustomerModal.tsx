@@ -7,8 +7,8 @@ import {
 } from "@/components/common/FormBaseModal";
 
 import { useTranslations } from "next-intl";
-import { DialogHeader } from "@/components/ui/Dialog";
 import { useCreateCustomer } from "../CreateCustomerContext";
+import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
 
 interface NewCustomerModalProps {
   newCustomerFormContainer: React.ReactNode;
@@ -28,7 +28,7 @@ export function NewCustomerModal({
       onOpenChange={onModalOpenChange}
     >
       <FormBaseModalDialog>
-        <DialogHeader>{t("title")}</DialogHeader>
+        <DialogHeaderWithClose>{t("title")}</DialogHeaderWithClose>
         <FormBaseModalDialogBody>
           {newCustomerFormContainer}
         </FormBaseModalDialogBody>

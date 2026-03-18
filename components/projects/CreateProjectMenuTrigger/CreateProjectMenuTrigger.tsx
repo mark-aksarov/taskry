@@ -4,10 +4,10 @@ import { Key } from "react-aria";
 import { Item } from "react-stately";
 import { useTranslations } from "next-intl";
 import { Blocks, FolderClosed } from "lucide-react";
-import { DialogHeader } from "@/components/ui/Dialog";
 import { useCreateProject } from "../CreateProjectContext";
 import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 import { CreateNewMenuTrigger } from "@/components/common/CreateNewMenuTrigger";
+import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
 import { useCreateProjectCategory } from "@/components/projectCategory/CreateProjectCategoryContext";
 
 interface CreateProjectMenuTriggerProps {
@@ -49,7 +49,7 @@ export function CreateProjectMenuTrigger({
       <CreateNewMenuTrigger
         onAction={handleAction}
         renderDialogHeader={() => (
-          <DialogHeader>{t("dialogHeading")}</DialogHeader>
+          <DialogHeaderWithClose>{t("dialogHeading")}</DialogHeaderWithClose>
         )}
         renderButton={renderButton}
       >

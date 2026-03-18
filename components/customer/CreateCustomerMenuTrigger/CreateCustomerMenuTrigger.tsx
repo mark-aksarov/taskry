@@ -4,11 +4,11 @@ import { Key } from "react-aria";
 import { Item } from "react-stately";
 import { useTranslations } from "next-intl";
 import { Building2, Contact } from "lucide-react";
-import { DialogHeader } from "@/components/ui/Dialog";
 import { useCreateCustomer } from "../CreateCustomerContext";
 import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 import { useCreateCompany } from "@/components/company/CreateCompanyContext";
 import { CreateNewMenuTrigger } from "@/components/common/CreateNewMenuTrigger";
+import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
 
 interface CreateCustomerMenuTriggerProps {
   renderButton: () => React.ReactNode;
@@ -48,7 +48,7 @@ export function CreateCustomerMenuTrigger({
       <CreateNewMenuTrigger
         onAction={handleAction}
         renderDialogHeader={() => (
-          <DialogHeader>{t("dialogHeading")}</DialogHeader>
+          <DialogHeaderWithClose>{t("dialogHeading")}</DialogHeaderWithClose>
         )}
         renderButton={renderButton}
       >

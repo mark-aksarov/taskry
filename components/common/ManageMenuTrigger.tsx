@@ -4,8 +4,9 @@ import {
   ResponsiveMenuTrigger,
   ResponsiveMenuTriggerProps,
 } from "./ResponsiveMenuTrigger";
-import { DialogHeader } from "../ui/Dialog";
+
 import { useTranslations } from "next-intl";
+import { DialogHeaderWithClose } from "./DialogHeaderWithClose";
 
 export function ManageMenuTrigger(props: ResponsiveMenuTriggerProps) {
   const t = useTranslations("common.ManageMenuTrigger");
@@ -15,7 +16,7 @@ export function ManageMenuTrigger(props: ResponsiveMenuTriggerProps) {
       overlayClassName="md:min-w-[150px]"
       placement="bottom left"
       renderDialogHeader={() => (
-        <DialogHeader>{t("dialogHeading")}</DialogHeader>
+        <DialogHeaderWithClose>{t("dialogHeading")}</DialogHeaderWithClose>
       )}
       {...props}
     />

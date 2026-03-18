@@ -7,9 +7,9 @@ import {
 } from "@/components/common/FormBaseModal";
 
 import { useTranslations } from "next-intl";
-import { DialogHeader } from "@/components/ui/Dialog";
 import { NewProjectCategoryForm } from "../NewProjectCategoryForm";
 import { useCreateProjectCategory } from "../CreateProjectCategoryContext";
+import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
 
 export function NewProjectCategoryModal() {
   const t = useTranslations("projectCategories.NewProjectCategoryModal");
@@ -23,7 +23,7 @@ export function NewProjectCategoryModal() {
       onOpenChange={onModalOpenChange}
     >
       <FormBaseModalDialog>
-        <DialogHeader>{t("title")}</DialogHeader>
+        <DialogHeaderWithClose>{t("title")}</DialogHeaderWithClose>
         <FormBaseModalDialogBody>
           <NewProjectCategoryForm />
         </FormBaseModalDialogBody>

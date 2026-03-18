@@ -7,8 +7,8 @@ import {
 } from "@/components/common/FormBaseModal";
 
 import { useTranslations } from "next-intl";
-import { DialogHeader } from "@/components/ui/Dialog";
 import { useUpdateTask } from "../UpdateTaskContext";
+import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
 
 interface EditTaskModalProps {
   editTaskFormContainer: React.ReactNode;
@@ -26,7 +26,7 @@ export function EditTaskModal({ editTaskFormContainer }: EditTaskModalProps) {
       onOpenChange={onModalOpenChange}
     >
       <FormBaseModalDialog>
-        <DialogHeader>{t("title")}</DialogHeader>
+        <DialogHeaderWithClose>{t("title")}</DialogHeaderWithClose>
         <FormBaseModalDialogBody>
           {editTaskFormContainer}
         </FormBaseModalDialogBody>

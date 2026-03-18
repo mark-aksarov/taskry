@@ -7,9 +7,9 @@ import {
 } from "@/components/common/FormBaseModal";
 
 import { useTranslations } from "next-intl";
-import { DialogHeader } from "@/components/ui/Dialog";
 import { NewPositionForm } from "../NewPositionForm";
 import { useCreatePosition } from "../CreatePositionContext";
+import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
 
 export function NewPositionModal() {
   const t = useTranslations("positions.NewPositionModal");
@@ -23,7 +23,7 @@ export function NewPositionModal() {
       onOpenChange={onModalOpenChange}
     >
       <FormBaseModalDialog>
-        <DialogHeader>{t("title")}</DialogHeader>
+        <DialogHeaderWithClose>{t("title")}</DialogHeaderWithClose>
         <FormBaseModalDialogBody>
           <NewPositionForm />
         </FormBaseModalDialogBody>

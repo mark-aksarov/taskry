@@ -1,11 +1,11 @@
 import { Button } from "../Button";
 import { fn } from "storybook/test";
 import { Item } from "react-stately";
-import { DialogHeader } from "../Dialog";
 import { MenuTrigger } from "./MenuTrigger";
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { Check, CircleEllipsis, Clock, Trash } from "lucide-react";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { DialogCloseButton, DialogHeader, DialogHeading } from "../Dialog";
 
 const meta: Meta<typeof MenuTrigger> = {
   title: "UI/Menu",
@@ -120,7 +120,12 @@ export const WithSheetAndHeader = {
   render: (args) => {
     return (
       <MenuTrigger
-        renderDialogHeader={() => <DialogHeader>Actions</DialogHeader>}
+        renderDialogHeader={() => (
+          <DialogHeader>
+            <DialogHeading>Actions</DialogHeading>
+            <DialogCloseButton />
+          </DialogHeader>
+        )}
         renderButton={() => <Button label="Actions" />}
         {...args}
       >

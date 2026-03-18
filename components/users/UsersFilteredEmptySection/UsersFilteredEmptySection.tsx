@@ -7,22 +7,29 @@ import {
 } from "@/components/common/EmptySection";
 
 import { useTranslations } from "next-intl";
-import { List } from "@/components/common/List";
-import { Repeat } from "@/components/common/Repeat";
-import { UserListItemSkeleton } from "../UserListItem";
+import { UserListSkeleton } from "../UserList";
+import { useViewMode } from "@/components/common/ViewMode";
 import { AbsoluteCenter } from "@/components/common/AbsoluteCenter";
 import { FiltersResetButton } from "@/components/common/FiltersResetButton";
+import { UserGridLargeSkeleton, UserGridMobileSkeleton } from "../UserGrid";
 import { usePageTransition } from "@/components/common/PageTransitionContext";
 
 export function UsersFilteredEmptySection() {
   const t = useTranslations("users.UsersFilteredEmptySection");
   const { isFilteringPending } = usePageTransition();
+  const { viewMode } = useViewMode();
 
   if (isFilteringPending) {
     return (
-      <List data-test="users-list">
-        <Repeat items={10} renderItem={() => <UserListItemSkeleton />} />
-      </List>
+      <>
+        {viewMode === "list" ? (
+          <UserListSkeleton className="max-md:hidden" items={10} />
+        ) : (
+          <UserGridLargeSkeleton className="max-md:hidden" items={10} />
+        )}
+
+        <UserGridMobileSkeleton className="md:hidden" items={10} />
+      </>
     );
   }
 

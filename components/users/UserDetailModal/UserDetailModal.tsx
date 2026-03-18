@@ -5,7 +5,8 @@ import {
 } from "@/components/common/DetailModal";
 
 import { useTranslations } from "next-intl";
-import { DialogBody, DialogFooter, DialogHeader } from "@/components/ui/Dialog";
+import { DialogBody, DialogFooter } from "@/components/ui/Dialog";
+import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
 
 interface UserDetailModalProps {
   userId: string;
@@ -23,7 +24,7 @@ export function UserDetailModal({
   return (
     <DetailModal>
       <DetailModalDialog>
-        <DialogHeader>{t("dialogHeading")}</DialogHeader>
+        <DialogHeaderWithClose>{t("dialogHeading")}</DialogHeaderWithClose>
         <DialogBody className="flex flex-col gap-6">
           {userDetailHeaderContainer}
           {userDetailContainer}

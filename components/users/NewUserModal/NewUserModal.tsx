@@ -8,8 +8,8 @@ import {
 
 import { useTranslations } from "next-intl";
 import { NewUserForm } from "../NewUserForm";
-import { DialogHeader } from "@/components/ui/Dialog";
 import { useCreateUser } from "../CreateUserContext";
+import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
 
 export function NewUserModal() {
   const t = useTranslations("users.NewUserModal");
@@ -23,7 +23,7 @@ export function NewUserModal() {
       onOpenChange={onModalOpenChange}
     >
       <FormBaseModalDialog>
-        <DialogHeader>{t("title")}</DialogHeader>
+        <DialogHeaderWithClose>{t("title")}</DialogHeaderWithClose>
         <FormBaseModalDialogBody>
           <NewUserForm />
         </FormBaseModalDialogBody>

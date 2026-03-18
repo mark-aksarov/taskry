@@ -6,8 +6,8 @@ import {
 
 import { useTranslations } from "next-intl";
 import { EditCompanyForm } from "../EditCompanyForm";
-import { DialogHeader } from "@/components/ui/Dialog";
 import { useUpdateCompany } from "../UpdateCompanyContext";
+import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
 
 interface EditCompanyModalProps {
   companyId: number;
@@ -29,7 +29,7 @@ export function EditCompanyModal({
       onOpenChange={onModalOpenChange}
     >
       <FormBaseModalDialog>
-        <DialogHeader>{t("title")}</DialogHeader>
+        <DialogHeaderWithClose>{t("title")}</DialogHeaderWithClose>
         <FormBaseModalDialogBody>
           <EditCompanyForm
             companyId={companyId}

@@ -6,6 +6,7 @@ import {
 import { useTranslations } from "next-intl";
 import { DialogHeader } from "@/components/ui/Dialog";
 import { FilterModalDialog } from "@/components/common/FilterModalDialog";
+import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
 
 interface TaskProjectFiltersModalProps {
   filtersFormContainer: React.ReactNode;
@@ -19,7 +20,7 @@ export function TaskProjectFiltersModal({
   return (
     <FormBaseModal data-test="task-project-filters-modal">
       <FilterModalDialog>
-        <DialogHeader>{t("heading")}</DialogHeader>
+        <DialogHeaderWithClose>{t("heading")}</DialogHeaderWithClose>
         <FormBaseModalDialogBody>
           {filtersFormContainer}
         </FormBaseModalDialogBody>

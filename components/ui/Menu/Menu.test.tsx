@@ -1,12 +1,12 @@
 import React from "react";
 import { Button } from "../Button";
 import { Item } from "react-stately";
-import { DialogHeader } from "../Dialog";
 import { User } from "@react-aria/test-utils";
 import { describe, expect, test, vi } from "vitest";
 import userEvent from "@testing-library/user-event";
 import { render, screen } from "@testing-library/react";
 import { MenuTrigger, MenuTriggerProps } from "./MenuTrigger";
+import { DialogCloseButton, DialogHeader, DialogHeading } from "../Dialog";
 
 const TestMenu = (props: Partial<MenuTriggerProps>) => (
   <MenuTrigger {...props}>
@@ -79,7 +79,12 @@ describe("Menu", () => {
     render(
       <TestMenu
         overlayType="bottomsheet"
-        renderDialogHeader={() => <DialogHeader>Header</DialogHeader>}
+        renderDialogHeader={() => (
+          <DialogHeader>
+            <DialogHeading>Header</DialogHeading>
+            <DialogCloseButton />
+          </DialogHeader>
+        )}
       />,
     );
 

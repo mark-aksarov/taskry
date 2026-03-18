@@ -6,8 +6,8 @@ import {
 } from "@/components/common/FormBaseModal";
 
 import { useTranslations } from "next-intl";
-import { DialogHeader } from "@/components/ui/Dialog";
 import { FilterModalDialog } from "@/components/common/FilterModalDialog";
+import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
 
 export function ProjectFiltersModal({
   filtersFormContainer,
@@ -19,7 +19,7 @@ export function ProjectFiltersModal({
   return (
     <FormBaseModal data-test="project-filters-modal">
       <FilterModalDialog>
-        <DialogHeader>{t("title")}</DialogHeader>
+        <DialogHeaderWithClose>{t("title")}</DialogHeaderWithClose>
         <FormBaseModalDialogBody>
           {filtersFormContainer}
         </FormBaseModalDialogBody>

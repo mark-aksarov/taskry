@@ -7,8 +7,8 @@ import {
 } from "@/components/common/FormBaseModal";
 
 import { useTranslations } from "next-intl";
-import { DialogHeader } from "@/components/ui/Dialog";
 import { useUpdateProject } from "../UpdateProjectContext";
+import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
 
 interface EditProjectModalProps {
   editProjectFormContainer: React.ReactNode;
@@ -28,7 +28,7 @@ export function EditProjectModal({
       onOpenChange={onModalOpenChange}
     >
       <FormBaseModalDialog>
-        <DialogHeader>{t("title")}</DialogHeader>
+        <DialogHeaderWithClose>{t("title")}</DialogHeaderWithClose>
         <FormBaseModalDialogBody>
           {editProjectFormContainer}
         </FormBaseModalDialogBody>

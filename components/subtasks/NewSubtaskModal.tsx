@@ -7,9 +7,9 @@ import {
 } from "../common/FormBaseModal";
 
 import { useTranslations } from "next-intl";
-import { DialogHeader } from "../ui/Dialog";
 import { NewSubtaskForm } from "./NewSubtaskForm";
 import { useCreateSubtask } from "./CreateSubtaskContext";
+import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
 
 interface EditSubtaskModalProps {
   taskId: number;
@@ -28,7 +28,7 @@ export function NewSubtaskModal({ taskId }: EditSubtaskModalProps) {
       onOpenChange={onModalOpenChange}
     >
       <FormBaseModalDialog>
-        <DialogHeader>{t("heading")}</DialogHeader>
+        <DialogHeaderWithClose>{t("heading")}</DialogHeaderWithClose>
         <FormBaseModalDialogBody>
           <NewSubtaskForm taskId={taskId} />
         </FormBaseModalDialogBody>

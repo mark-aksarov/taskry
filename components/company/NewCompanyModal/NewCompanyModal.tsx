@@ -8,8 +8,8 @@ import {
 
 import { useTranslations } from "next-intl";
 import { NewCompanyForm } from "../NewCompanyForm";
-import { DialogHeader } from "@/components/ui/Dialog";
 import { useCreateCompany } from "../CreateCompanyContext";
+import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
 
 export function NewCompanyModal() {
   const t = useTranslations("company.NewCompanyModal");
@@ -23,7 +23,7 @@ export function NewCompanyModal() {
       onOpenChange={onModalOpenChange}
     >
       <FormBaseModalDialog>
-        <DialogHeader>{t("title")}</DialogHeader>
+        <DialogHeaderWithClose>{t("title")}</DialogHeaderWithClose>
         <FormBaseModalDialogBody>
           <NewCompanyForm />
         </FormBaseModalDialogBody>

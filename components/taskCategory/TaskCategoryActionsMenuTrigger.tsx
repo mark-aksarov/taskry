@@ -4,12 +4,12 @@ import { useState } from "react";
 import { Trash } from "lucide-react";
 import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
-import { DialogHeader } from "../ui/Dialog";
 import { ActionsButton } from "../common/ActionsButton";
 import { ActionsMenuTrigger } from "../common/ActionsMenuTrigger";
 import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 import { DeleteTaskCategoriesModal } from "./DeleteTaskCategoriesModal";
 import { useSelectedItems } from "@/components/common/SelectedItemsContext";
+import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
 
 export const TaskCategoryActionsMenuTrigger = () => {
   const t = useTranslations("taskCategories.TaskCategoryActionsMenuTrigger");
@@ -37,7 +37,7 @@ export const TaskCategoryActionsMenuTrigger = () => {
       <ActionsMenuTrigger
         onAction={handleAction}
         renderDialogHeader={() => (
-          <DialogHeader>{t("dialogHeading")}</DialogHeader>
+          <DialogHeaderWithClose>{t("dialogHeading")}</DialogHeaderWithClose>
         )}
         renderButton={() => (
           <ActionsButton

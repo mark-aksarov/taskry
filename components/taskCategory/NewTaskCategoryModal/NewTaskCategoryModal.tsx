@@ -7,9 +7,9 @@ import {
 } from "@/components/common/FormBaseModal";
 
 import { useTranslations } from "next-intl";
-import { DialogHeader } from "@/components/ui/Dialog";
 import { NewTaskCategoryForm } from "../NewTaskCategoryForm";
 import { useCreateTaskCategory } from "../CreateTaskCategoryContext";
+import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
 
 export function NewTaskCategoryModal() {
   const t = useTranslations("taskCategories.NewTaskCategoryModal");
@@ -23,7 +23,7 @@ export function NewTaskCategoryModal() {
       onOpenChange={onModalOpenChange}
     >
       <FormBaseModalDialog>
-        <DialogHeader>{t("title")}</DialogHeader>
+        <DialogHeaderWithClose>{t("title")}</DialogHeaderWithClose>
         <FormBaseModalDialogBody>
           <NewTaskCategoryForm />
         </FormBaseModalDialogBody>

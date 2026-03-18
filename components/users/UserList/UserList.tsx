@@ -2,8 +2,7 @@
 
 import { Children } from "react";
 import { List } from "@/components/common/List";
-import { Repeat } from "@/components/common/Repeat";
-import { UserListItemSkeleton } from "../UserListItem";
+import { UserListSkeleton } from "./UserListSkeleton";
 import { useViewMode } from "@/components/common/ViewMode";
 import { usePageTransition } from "@/components/common/PageTransitionContext";
 
@@ -16,14 +15,7 @@ export function UserList({ children }: UserListProps) {
   const { isPending: isPageTransitionPending } = usePageTransition();
 
   if (isViewModePending || isPageTransitionPending) {
-    return (
-      <List data-test="users-list">
-        <Repeat
-          items={Children.count(children)}
-          renderItem={() => <UserListItemSkeleton />}
-        />
-      </List>
-    );
+    return <UserListSkeleton items={Children.count(children)} />;
   }
 
   return <List data-test="users-list">{children}</List>;

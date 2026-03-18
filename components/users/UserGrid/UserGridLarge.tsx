@@ -1,8 +1,9 @@
 "use client";
 
+import { Children } from "react";
 import { GridLarge } from "@/components/common/Grid";
 import { useViewMode } from "@/components/common/ViewMode";
-import { UserGridItemLargeSkeleton } from "../UserGridItem";
+import { UserGridLargeSkeleton } from "./UserGridLargeSkeleton";
 import { usePageTransition } from "@/components/common/PageTransitionContext";
 
 export function UserGridLarge({ children }: { children: React.ReactNode }) {
@@ -10,7 +11,7 @@ export function UserGridLarge({ children }: { children: React.ReactNode }) {
   const { isPending: isPageTransitionPending } = usePageTransition();
 
   if (isViewModePending || isPageTransitionPending) {
-    return <UserGridItemLargeSkeleton />;
+    return <UserGridLargeSkeleton items={Children.count(children)} />;
   }
 
   return <GridLarge data-test="user-grid-large">{children}</GridLarge>;

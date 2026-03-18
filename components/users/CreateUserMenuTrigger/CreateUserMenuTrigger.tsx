@@ -4,12 +4,12 @@ import { Key } from "react-aria";
 import { Item } from "react-stately";
 import { useTranslations } from "next-intl";
 import { useCreateUser } from "../CreateUserContext";
-import { DialogHeader } from "@/components/ui/Dialog";
 import { BriefcaseBusiness, Users } from "lucide-react";
 import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 import { useCurrentUser } from "@/components/common/CurrentUserContext";
 import { useCreatePosition } from "@/components/position/CreatePositionContext";
 import { CreateNewMenuTrigger } from "@/components/common/CreateNewMenuTrigger";
+import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
 
 interface CreateUserMenuTriggerProps {
   renderButton: () => React.ReactNode;
@@ -54,7 +54,7 @@ export function CreateUserMenuTrigger({
       <CreateNewMenuTrigger
         onAction={handleAction}
         renderDialogHeader={() => (
-          <DialogHeader>{t("dialogHeading")}</DialogHeader>
+          <DialogHeaderWithClose>{t("dialogHeading")}</DialogHeaderWithClose>
         )}
         renderButton={renderButton}
       >

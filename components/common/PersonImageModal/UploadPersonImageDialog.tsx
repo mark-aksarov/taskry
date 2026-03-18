@@ -1,13 +1,9 @@
-import {
-  Dialog,
-  DialogBody,
-  DialogFooter,
-  DialogHeader,
-} from "@/components/ui/Dialog";
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { ErrorBanner } from "../ErrorBanner";
+import { DialogHeaderWithClose } from "../DialogHeaderWithClose";
 import { PersonImageFileTrigger } from "../PersonImageFileTrigger";
+import { Dialog, DialogBody, DialogFooter } from "@/components/ui/Dialog";
 
 export function UploadPersonImageDialog({
   setImageFile,
@@ -19,7 +15,7 @@ export function UploadPersonImageDialog({
 
   return (
     <Dialog>
-      <DialogHeader>{t("heading")}</DialogHeader>
+      <DialogHeaderWithClose>{t("heading")}</DialogHeaderWithClose>
       <DialogBody className="flex flex-col items-center gap-4">
         <div className="text-center text-sm text-black dark:text-white">
           {t("text")}

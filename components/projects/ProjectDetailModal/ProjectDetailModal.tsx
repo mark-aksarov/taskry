@@ -5,7 +5,8 @@ import {
 } from "@/components/common/DetailModal";
 
 import { useTranslations } from "next-intl";
-import { DialogBody, DialogFooter, DialogHeader } from "@/components/ui/Dialog";
+import { DialogBody, DialogFooter } from "@/components/ui/Dialog";
+import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
 
 interface ProjectDetailModalProps {
   projectId: number;
@@ -21,7 +22,7 @@ export function ProjectDetailModal({
   return (
     <DetailModal data-test="project-detail-modal">
       <DetailModalDialog>
-        <DialogHeader>{t("dialogHeading")}</DialogHeader>
+        <DialogHeaderWithClose>{t("dialogHeading")}</DialogHeaderWithClose>
         <DialogBody>{projectDetailContainer}</DialogBody>
         <DialogFooter>
           <DetailModalLink

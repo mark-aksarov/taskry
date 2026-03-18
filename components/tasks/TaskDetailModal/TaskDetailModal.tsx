@@ -5,7 +5,8 @@ import {
 } from "@/components/common/DetailModal";
 
 import { useTranslations } from "next-intl";
-import { DialogBody, DialogFooter, DialogHeader } from "@/components/ui/Dialog";
+import { DialogBody, DialogFooter } from "@/components/ui/Dialog";
+import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
 
 interface TaskDetailModalProps {
   taskId: number;
@@ -21,7 +22,7 @@ export function TaskDetailModal({
   return (
     <DetailModal data-test="task-detail-modal">
       <DetailModalDialog>
-        <DialogHeader>{t("dialogHeading")}</DialogHeader>
+        <DialogHeaderWithClose>{t("dialogHeading")}</DialogHeaderWithClose>
         <DialogBody>{taskDetailContainer}</DialogBody>
         <DialogFooter>
           <DetailModalLink

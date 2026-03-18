@@ -1,7 +1,11 @@
+import {
+  DialogHeader,
+  DialogHeading,
+  DialogCloseButton,
+} from "@/components/ui/Dialog";
 import { ChevronLeft } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/Button";
-import { DialogHeader } from "@/components/ui/Dialog";
 
 interface UpdatePersonImageDialogHeaderProps {
   setImageFile: (file: File | null) => void;
@@ -22,8 +26,9 @@ export function UpdatePersonImageDialogHeader({
             <ChevronLeft size={16} absoluteStrokeWidth strokeWidth={1.5} />
           }
         />
-        {t("heading")}
+        <DialogHeading>{t("heading")}</DialogHeading>
       </div>
+      <DialogCloseButton />
     </DialogHeader>
   );
 }

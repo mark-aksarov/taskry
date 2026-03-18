@@ -2,7 +2,6 @@
 
 import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
-import { DialogHeader } from "../ui/Dialog";
 import { startTransition, useState } from "react";
 import { TaskStatus } from "@/generated/prisma/enums";
 import { DeleteTasksModal } from "./DeleteTasksModal";
@@ -12,6 +11,7 @@ import { ActionsMenuTrigger } from "../common/ActionsMenuTrigger";
 import { Check, CircleEllipsis, Clock, Trash } from "lucide-react";
 import { useUpdateTaskStatuses } from "./UpdateTaskStatusesContext";
 import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
+import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
 
 interface TaskActionsMenuTriggerProps {
   // Extra flag to hide the label on User/Profile Tasks pages
@@ -73,7 +73,7 @@ export const TaskActionsMenuTrigger = ({
         onAction={handleAction}
         disabledKeys={disabledKeys}
         renderDialogHeader={() => (
-          <DialogHeader>{t("dialogHeading")}</DialogHeader>
+          <DialogHeaderWithClose>{t("dialogHeading")}</DialogHeaderWithClose>
         )}
         renderButton={() => (
           <ActionsButton

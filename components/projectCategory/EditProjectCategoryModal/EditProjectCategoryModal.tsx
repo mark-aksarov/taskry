@@ -5,9 +5,9 @@ import {
 } from "@/components/common/FormBaseModal";
 
 import { useTranslations } from "next-intl";
-import { DialogHeader } from "@/components/ui/Dialog";
 import { EditProjectCategoryForm } from "../EditProjectCategoryForm";
 import { useUpdateProjectCategory } from "../UpdateProjectCategoryContext";
+import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
 
 interface EditProjectCategoryModalProps {
   projectCategoryId: number;
@@ -29,7 +29,7 @@ export function EditProjectCategoryModal({
       onOpenChange={onModalOpenChange}
     >
       <FormBaseModalDialog>
-        <DialogHeader>{t("title")}</DialogHeader>
+        <DialogHeaderWithClose>{t("title")}</DialogHeaderWithClose>
         <FormBaseModalDialogBody>
           <EditProjectCategoryForm
             projectCategoryId={projectCategoryId}

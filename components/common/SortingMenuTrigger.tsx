@@ -2,12 +2,12 @@
 
 import { Key } from "react-aria";
 import { useSearchParams } from "next/navigation";
-import { DialogHeader } from "@/components/ui/Dialog";
 import { useLocale, useTranslations } from "next-intl";
 import { MenuTriggerProps } from "@/components/ui/Menu";
 import { usePathname, useRouter } from "@/i18n/navigation";
 import { usePageTransition } from "./PageTransitionContext";
 import { ResponsiveMenuTrigger } from "./ResponsiveMenuTrigger";
+import { DialogHeaderWithClose } from "./DialogHeaderWithClose";
 import { areSearchParamsEqual } from "@/lib/utils/areSearchParamsEqual";
 
 interface SortingMenuTriggerProps<T extends object = any>
@@ -55,7 +55,7 @@ export function SortingMenuTrigger<T extends object = any>({
       onAction={handleAction}
       selectionMode="single"
       renderDialogHeader={() => (
-        <DialogHeader>{t("dialogHeading")}</DialogHeader>
+        <DialogHeaderWithClose>{t("dialogHeading")}</DialogHeaderWithClose>
       )}
       {...props}
     />

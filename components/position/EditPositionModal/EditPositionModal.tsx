@@ -5,9 +5,9 @@ import {
 } from "@/components/common/FormBaseModal";
 
 import { useTranslations } from "next-intl";
-import { DialogHeader } from "@/components/ui/Dialog";
 import { EditPositionForm } from "../EditPositionForm";
 import { useUpdatePosition } from "../UpdatePositionContext";
+import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
 
 interface EditPositionModalProps {
   positionId: number;
@@ -29,7 +29,7 @@ export function EditPositionModal({
       onOpenChange={onModalOpenChange}
     >
       <FormBaseModalDialog>
-        <DialogHeader>{t("title")}</DialogHeader>
+        <DialogHeaderWithClose>{t("title")}</DialogHeaderWithClose>
         <FormBaseModalDialogBody>
           <EditPositionForm
             positionId={positionId}

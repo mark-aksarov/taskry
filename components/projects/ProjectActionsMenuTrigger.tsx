@@ -2,7 +2,6 @@
 
 import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
-import { DialogHeader } from "../ui/Dialog";
 import { startTransition, useState } from "react";
 import { ActionsButton } from "../common/ActionsButton";
 import { ProjectStatus } from "@/generated/prisma/enums";
@@ -10,8 +9,9 @@ import { DeleteProjectsModal } from "./DeleteProjectsModal";
 import { useSelectedProjects } from "./SelectedProjectsContext";
 import { ActionsMenuTrigger } from "../common/ActionsMenuTrigger";
 import { Check, CircleEllipsis, Clock, Trash } from "lucide-react";
-import { useUpdateProjectStatuses } from "./UpdateProjectStatusesContext";
 import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
+import { DialogHeaderWithClose } from "../common/DialogHeaderWithClose";
+import { useUpdateProjectStatuses } from "./UpdateProjectStatusesContext";
 
 export const ProjectActionsMenuTrigger = () => {
   const t = useTranslations("projects.ProjectActionsMenuTrigger");
@@ -68,7 +68,7 @@ export const ProjectActionsMenuTrigger = () => {
         onAction={handleAction}
         disabledKeys={disabledKeys}
         renderDialogHeader={() => (
-          <DialogHeader>{t("dialogHeading")}</DialogHeader>
+          <DialogHeaderWithClose>{t("dialogHeading")}</DialogHeaderWithClose>
         )}
         renderButton={() => (
           <ActionsButton

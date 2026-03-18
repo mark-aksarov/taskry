@@ -37,8 +37,7 @@ export const DialogHeader = ({
 
   return (
     <div className={classes} {...props}>
-      <DialogHeading>{children}</DialogHeading>
-      <DialogCloseButton />
+      {children}
     </div>
   );
 };

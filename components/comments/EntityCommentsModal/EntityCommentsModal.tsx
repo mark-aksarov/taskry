@@ -7,11 +7,11 @@ import {
   CommentsModalDialogFooter,
 } from "@/components/comments/CommentsModal";
 
-import { DialogHeader } from "@/components/ui/Dialog";
 import { useSendComment } from "../SendCommentContext";
 import { useUpdateComment } from "../UpdateCommentContext";
 import { useCommentFormContext } from "../CommentFormContext";
 import { CommentForm } from "@/components/comments/CommentForm";
+import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
 
 interface EntityCommentsModalProps {
   title: string;
@@ -32,7 +32,7 @@ export function EntityCommentsModal({
   return (
     <CommentsModal>
       <CommentsModalDialog>
-        <DialogHeader>{title}</DialogHeader>
+        <DialogHeaderWithClose>{title}</DialogHeaderWithClose>
         <CommentsModalDialogBody>{commentsContainer}</CommentsModalDialogBody>
         <CommentsModalDialogFooter>
           {editCommentId ? (

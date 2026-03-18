@@ -8,6 +8,7 @@ import {
 import { useTranslations } from "next-intl";
 import { DialogHeader } from "@/components/ui/Dialog";
 import { FilterModalDialog } from "@/components/common/FilterModalDialog";
+import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
 
 export function UserFiltersModal({
   filtersFormContainer,
@@ -19,7 +20,7 @@ export function UserFiltersModal({
   return (
     <FormBaseModal data-test="user-filters-modal">
       <FilterModalDialog>
-        <DialogHeader>{t("heading")}</DialogHeader>
+        <DialogHeaderWithClose>{t("heading")}</DialogHeaderWithClose>
         <FormBaseModalDialogBody>
           {filtersFormContainer}
         </FormBaseModalDialogBody>

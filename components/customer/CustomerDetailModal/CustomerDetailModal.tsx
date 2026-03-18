@@ -5,7 +5,8 @@ import {
 
 import { useTranslations } from "next-intl";
 import { DetailModalLink } from "@/components/common/DetailModal";
-import { DialogBody, DialogFooter, DialogHeader } from "@/components/ui/Dialog";
+import { DialogBody, DialogFooter } from "@/components/ui/Dialog";
+import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
 
 interface CustomerDetailModalProps {
   customerId: number;
@@ -23,7 +24,7 @@ export function CustomerDetailModal({
   return (
     <DetailModal>
       <DetailModalDialog>
-        <DialogHeader>{t("dialogHeading")}</DialogHeader>
+        <DialogHeaderWithClose>{t("dialogHeading")}</DialogHeaderWithClose>
         <DialogBody className="flex flex-col gap-6">
           {customerDetailHeaderContainer}
           {customerDetailContainer}

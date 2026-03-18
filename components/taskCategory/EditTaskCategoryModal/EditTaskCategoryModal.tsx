@@ -5,9 +5,9 @@ import {
 } from "@/components/common/FormBaseModal";
 
 import { useTranslations } from "next-intl";
-import { DialogHeader } from "@/components/ui/Dialog";
 import { EditTaskCategoryForm } from "../EditTaskCategoryForm";
 import { useUpdateTaskCategory } from "../UpdateTaskCategoryContext";
+import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
 
 interface EditTaskCategoryModalProps {
   taskCategoryId: number;
@@ -29,7 +29,7 @@ export function EditTaskCategoryModal({
       onOpenChange={onModalOpenChange}
     >
       <FormBaseModalDialog>
-        <DialogHeader>{t("title")}</DialogHeader>
+        <DialogHeaderWithClose>{t("title")}</DialogHeaderWithClose>
         <FormBaseModalDialogBody>
           <EditTaskCategoryForm
             taskCategoryId={taskCategoryId}

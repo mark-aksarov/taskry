@@ -7,8 +7,8 @@ import {
 } from "@/components/common/FormBaseModal";
 
 import { useTranslations } from "next-intl";
-import { DialogHeader } from "@/components/ui/Dialog";
 import { useCreateTask } from "../CreateTaskContext";
+import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
 
 interface NewTaskModalProps {
   newTaskFormContainer: React.ReactNode;
@@ -26,7 +26,7 @@ export function NewTaskModal({ newTaskFormContainer }: NewTaskModalProps) {
       onOpenChange={onModalOpenChange}
     >
       <FormBaseModalDialog>
-        <DialogHeader>{t("title")}</DialogHeader>
+        <DialogHeaderWithClose>{t("title")}</DialogHeaderWithClose>
         <FormBaseModalDialogBody>
           {newTaskFormContainer}
         </FormBaseModalDialogBody>

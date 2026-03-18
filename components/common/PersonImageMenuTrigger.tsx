@@ -7,8 +7,8 @@ import { Camera, Trash } from "lucide-react";
 import { Button } from "react-aria-components";
 import { focusRing } from "@/components/ui/styles";
 import { ButtonProps } from "@/components/ui/Button";
-import { DialogHeader } from "@/components/ui/Dialog";
 import { ResponsiveMenuTrigger } from "./ResponsiveMenuTrigger";
+import { DialogHeaderWithClose } from "./DialogHeaderWithClose";
 import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 
 const styles = tv({
@@ -53,7 +53,9 @@ export function PersonImageMenuTrigger({
       onAction={handleAction}
       overlayClassName="md:min-w-[150px]"
       placement="bottom"
-      renderDialogHeader={() => <DialogHeader>{t("heading")}</DialogHeader>}
+      renderDialogHeader={() => (
+        <DialogHeaderWithClose>{t("heading")}</DialogHeaderWithClose>
+      )}
       renderButton={() => (
         <Button className={styles} {...props}>
           {children}
